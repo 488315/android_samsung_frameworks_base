@@ -10,7 +10,6 @@ import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import kotlin.ULong;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ReusableGraphicsLayerScope implements GraphicsLayerScope {
     public long ambientShadowColor;
@@ -75,10 +74,10 @@ public final class ReusableGraphicsLayerScope implements GraphicsLayerScope {
     }
 
     /* renamed from: setAmbientShadowColor-8_81llA, reason: not valid java name */
-    public final void m493setAmbientShadowColor8_81llA(long j) {
+    public final void m495setAmbientShadowColor8_81llA(long j) {
         long j2 = this.ambientShadowColor;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3427equalsimpl0(j2, j)) {
+        if (ULong.m3447equalsimpl0(j2, j)) {
             return;
         }
         this.mutatedFields |= 64;
@@ -93,7 +92,7 @@ public final class ReusableGraphicsLayerScope implements GraphicsLayerScope {
     }
 
     /* renamed from: setCompositingStrategy-aDBOjCE, reason: not valid java name */
-    public final void m494setCompositingStrategyaDBOjCE(int i) {
+    public final void m496setCompositingStrategyaDBOjCE(int i) {
         int i2 = this.compositingStrategy;
         CompositingStrategy.Companion companion = CompositingStrategy.Companion;
         if (i2 == i) {
@@ -152,10 +151,10 @@ public final class ReusableGraphicsLayerScope implements GraphicsLayerScope {
     }
 
     /* renamed from: setSpotShadowColor-8_81llA, reason: not valid java name */
-    public final void m495setSpotShadowColor8_81llA(long j) {
+    public final void m497setSpotShadowColor8_81llA(long j) {
         long j2 = this.spotShadowColor;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3427equalsimpl0(j2, j)) {
+        if (ULong.m3447equalsimpl0(j2, j)) {
             return;
         }
         this.mutatedFields |= 128;
@@ -163,8 +162,8 @@ public final class ReusableGraphicsLayerScope implements GraphicsLayerScope {
     }
 
     /* renamed from: setTransformOrigin-__ExYCQ, reason: not valid java name */
-    public final void m496setTransformOrigin__ExYCQ(long j) {
-        if (TransformOrigin.m502equalsimpl0(this.transformOrigin, j)) {
+    public final void m498setTransformOrigin__ExYCQ(long j) {
+        if (TransformOrigin.m504equalsimpl0(this.transformOrigin, j)) {
             return;
         }
         this.mutatedFields |= 4096;

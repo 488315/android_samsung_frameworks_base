@@ -79,9 +79,9 @@ public interface IAppIntegrityManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAppIntegrityManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAppIntegrityManager)) {
-                return (IAppIntegrityManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAppIntegrityManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAppIntegrityManager)) {
+                return (IAppIntegrityManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -120,11 +120,11 @@ public interface IAppIntegrityManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 ParceledListSlice<Rule> parceledListSlice = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
                 IntentSender intentSender = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
                 parcel.enforceNoDataAvail();
-                updateRuleSet(readString, parceledListSlice, intentSender);
+                updateRuleSet(string, parceledListSlice, intentSender);
                 parcel2.writeNoException();
             } else if (i == 2) {
                 String currentRuleSetVersion = getCurrentRuleSetVersion();
@@ -166,78 +166,78 @@ public interface IAppIntegrityManager extends IInterface {
 
             @Override // android.content.integrity.IAppIntegrityManager
             public void updateRuleSet(String str, ParceledListSlice<Rule> parceledListSlice, IntentSender intentSender) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    obtain.writeTypedObject(intentSender, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.integrity.IAppIntegrityManager
             public String getCurrentRuleSetVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.integrity.IAppIntegrityManager
             public String getCurrentRuleSetProvider() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.integrity.IAppIntegrityManager
             public ParceledListSlice<Rule> getCurrentRules() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.integrity.IAppIntegrityManager
             public List<String> getWhitelistedRuleProviders() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

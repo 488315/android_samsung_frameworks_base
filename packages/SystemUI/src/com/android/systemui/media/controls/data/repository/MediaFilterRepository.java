@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaFilterRepository {
     public final StateFlowImpl _allUserEntries;
@@ -36,12 +35,12 @@ public final class MediaFilterRepository {
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.media.controls.data.repository.MediaFilterRepository$special$$inlined$thenByDescending$7, java.util.Comparator] */
     public MediaFilterRepository(SystemClock systemClock) {
         this.systemClock = systemClock;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(new LinkedHashMap());
-        this._selectedUserEntries = MutableStateFlow;
-        this.selectedUserEntries = FlowKt.asStateFlow(MutableStateFlow);
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(new LinkedHashMap());
-        this._allUserEntries = MutableStateFlow2;
-        this.allUserEntries = FlowKt.asStateFlow(MutableStateFlow2);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(new LinkedHashMap());
+        this._selectedUserEntries = stateFlowImplMutableStateFlow;
+        this.selectedUserEntries = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(new LinkedHashMap());
+        this._allUserEntries = stateFlowImplMutableStateFlow2;
+        this.allUserEntries = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
         final Comparator comparator = new Comparator() { // from class: com.android.systemui.media.controls.data.repository.MediaFilterRepository$special$$inlined$compareByDescending$1
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
@@ -49,53 +48,53 @@ public final class MediaFilterRepository {
                 Boolean bool = mediaSortKeyModel.isPlaying;
                 Boolean bool2 = Boolean.TRUE;
                 boolean z = false;
-                Boolean valueOf = Boolean.valueOf(Intrinsics.areEqual(bool, bool2) && mediaSortKeyModel.playbackLocation == 0);
+                Boolean boolValueOf = Boolean.valueOf(Intrinsics.areEqual(bool, bool2) && mediaSortKeyModel.playbackLocation == 0);
                 MediaSortKeyModel mediaSortKeyModel2 = (MediaSortKeyModel) obj;
                 if (Intrinsics.areEqual(mediaSortKeyModel2.isPlaying, bool2) && mediaSortKeyModel2.playbackLocation == 0) {
                     z = true;
                 }
-                return ComparisonsKt__ComparisonsKt.compareValues(valueOf, Boolean.valueOf(z));
+                return ComparisonsKt__ComparisonsKt.compareValues(boolValueOf, Boolean.valueOf(z));
             }
         };
         final Comparator comparator2 = new Comparator() { // from class: com.android.systemui.media.controls.data.repository.MediaFilterRepository$special$$inlined$thenByDescending$1
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare = comparator.compare(obj, obj2);
-                if (compare != 0) {
-                    return compare;
+                int iCompare = comparator.compare(obj, obj2);
+                if (iCompare != 0) {
+                    return iCompare;
                 }
                 MediaSortKeyModel mediaSortKeyModel = (MediaSortKeyModel) obj2;
                 Boolean bool = mediaSortKeyModel.isPlaying;
                 Boolean bool2 = Boolean.TRUE;
                 boolean z = false;
-                Boolean valueOf = Boolean.valueOf(Intrinsics.areEqual(bool, bool2) && mediaSortKeyModel.playbackLocation == 1);
+                Boolean boolValueOf = Boolean.valueOf(Intrinsics.areEqual(bool, bool2) && mediaSortKeyModel.playbackLocation == 1);
                 MediaSortKeyModel mediaSortKeyModel2 = (MediaSortKeyModel) obj;
                 if (Intrinsics.areEqual(mediaSortKeyModel2.isPlaying, bool2) && mediaSortKeyModel2.playbackLocation == 1) {
                     z = true;
                 }
-                return ComparisonsKt__ComparisonsKt.compareValues(valueOf, Boolean.valueOf(z));
+                return ComparisonsKt__ComparisonsKt.compareValues(boolValueOf, Boolean.valueOf(z));
             }
         };
         final Comparator comparator3 = new Comparator() { // from class: com.android.systemui.media.controls.data.repository.MediaFilterRepository$special$$inlined$thenByDescending$2
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare = comparator2.compare(obj, obj2);
-                return compare != 0 ? compare : ComparisonsKt__ComparisonsKt.compareValues(Boolean.valueOf(((MediaSortKeyModel) obj2).active), Boolean.valueOf(((MediaSortKeyModel) obj).active));
+                int iCompare = comparator2.compare(obj, obj2);
+                return iCompare != 0 ? iCompare : ComparisonsKt__ComparisonsKt.compareValues(Boolean.valueOf(((MediaSortKeyModel) obj2).active), Boolean.valueOf(((MediaSortKeyModel) obj).active));
             }
         };
         final Comparator comparator4 = new Comparator() { // from class: com.android.systemui.media.controls.data.repository.MediaFilterRepository$special$$inlined$thenByDescending$3
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare = comparator3.compare(obj, obj2);
-                return compare != 0 ? compare : ComparisonsKt__ComparisonsKt.compareValues(Boolean.valueOf(!((MediaSortKeyModel) obj2).isResume), Boolean.valueOf(!((MediaSortKeyModel) obj).isResume));
+                int iCompare = comparator3.compare(obj, obj2);
+                return iCompare != 0 ? iCompare : ComparisonsKt__ComparisonsKt.compareValues(Boolean.valueOf(!((MediaSortKeyModel) obj2).isResume), Boolean.valueOf(!((MediaSortKeyModel) obj).isResume));
             }
         };
         final Comparator comparator5 = new Comparator() { // from class: com.android.systemui.media.controls.data.repository.MediaFilterRepository$special$$inlined$thenByDescending$4
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare = comparator4.compare(obj, obj2);
-                if (compare != 0) {
-                    return compare;
+                int iCompare = comparator4.compare(obj, obj2);
+                if (iCompare != 0) {
+                    return iCompare;
                 }
                 return ComparisonsKt__ComparisonsKt.compareValues(Boolean.valueOf(((MediaSortKeyModel) obj2).playbackLocation != 2), Boolean.valueOf(((MediaSortKeyModel) obj).playbackLocation != 2));
             }
@@ -103,28 +102,28 @@ public final class MediaFilterRepository {
         final Comparator comparator6 = new Comparator() { // from class: com.android.systemui.media.controls.data.repository.MediaFilterRepository$special$$inlined$thenByDescending$5
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare = comparator5.compare(obj, obj2);
-                return compare != 0 ? compare : ComparisonsKt__ComparisonsKt.compareValues(Long.valueOf(((MediaSortKeyModel) obj2).lastActive), Long.valueOf(((MediaSortKeyModel) obj).lastActive));
+                int iCompare = comparator5.compare(obj, obj2);
+                return iCompare != 0 ? iCompare : ComparisonsKt__ComparisonsKt.compareValues(Long.valueOf(((MediaSortKeyModel) obj2).lastActive), Long.valueOf(((MediaSortKeyModel) obj).lastActive));
             }
         };
         final Comparator comparator7 = new Comparator() { // from class: com.android.systemui.media.controls.data.repository.MediaFilterRepository$special$$inlined$thenByDescending$6
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare = comparator6.compare(obj, obj2);
-                return compare != 0 ? compare : ComparisonsKt__ComparisonsKt.compareValues(Long.valueOf(((MediaSortKeyModel) obj2).updateTime), Long.valueOf(((MediaSortKeyModel) obj).updateTime));
+                int iCompare = comparator6.compare(obj, obj2);
+                return iCompare != 0 ? iCompare : ComparisonsKt__ComparisonsKt.compareValues(Long.valueOf(((MediaSortKeyModel) obj2).updateTime), Long.valueOf(((MediaSortKeyModel) obj).updateTime));
             }
         };
         ?? r0 = new Comparator() { // from class: com.android.systemui.media.controls.data.repository.MediaFilterRepository$special$$inlined$thenByDescending$7
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare = comparator7.compare(obj, obj2);
-                return compare != 0 ? compare : ComparisonsKt__ComparisonsKt.compareValues(((MediaSortKeyModel) obj2).notificationKey, ((MediaSortKeyModel) obj).notificationKey);
+                int iCompare = comparator7.compare(obj, obj2);
+                return iCompare != 0 ? iCompare : ComparisonsKt__ComparisonsKt.compareValues(((MediaSortKeyModel) obj2).notificationKey, ((MediaSortKeyModel) obj).notificationKey);
             }
         };
         this.comparator = r0;
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(new ArrayList());
-        this._currentMedia = MutableStateFlow3;
-        this.currentMedia = FlowKt.asStateFlow(MutableStateFlow3);
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(new ArrayList());
+        this._currentMedia = stateFlowImplMutableStateFlow3;
+        this.currentMedia = FlowKt.asStateFlow(stateFlowImplMutableStateFlow3);
         this.sortedMedia = new TreeMap((Comparator) r0);
     }
 
@@ -197,9 +196,9 @@ public final class MediaFilterRepository {
     public final boolean addSelectedUserMediaEntry(MediaData mediaData) {
         StateFlowImpl stateFlowImpl = this._selectedUserEntries;
         LinkedHashMap linkedHashMap = new LinkedHashMap((Map) stateFlowImpl.getValue());
-        boolean containsKey = ((Map) stateFlowImpl.getValue()).containsKey(mediaData.instanceId);
+        boolean zContainsKey = ((Map) stateFlowImpl.getValue()).containsKey(mediaData.instanceId);
         linkedHashMap.put(mediaData.instanceId, mediaData);
         stateFlowImpl.updateState(null, linkedHashMap);
-        return containsKey;
+        return zContainsKey;
     }
 }

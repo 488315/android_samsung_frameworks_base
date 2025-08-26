@@ -12,7 +12,6 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RecentTaskViewHolder extends RecyclerView.ViewHolder implements ConfigurationController.ConfigurationListener, TaskPreviewSizeProvider.TaskPreviewSizeListener {
     public final BadgedAppIconLoader iconLoader;
@@ -25,7 +24,6 @@ public final class RecentTaskViewHolder extends RecyclerView.ViewHolder implemen
     public final RecentTaskThumbnailLoader thumbnailLoader;
     public final MediaProjectionTaskView thumbnailView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         RecentTaskViewHolder create(ViewGroup viewGroup);
     }

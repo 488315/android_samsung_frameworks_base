@@ -35,6 +35,7 @@ import com.android.systemui.retail.data.repository.RetailModeRepository;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.user.data.repository.UserRepository;
+import com.android.systemui.user.data.repository.UserRepositoryImpl;
 import com.android.systemui.util.DeviceType;
 import dagger.Lazy;
 import java.io.PrintWriter;
@@ -45,16 +46,24 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import kotlin.ResultKt;
+import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 import kotlin.collections.EmptySet;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
@@ -63,7 +72,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SubscreenTilesInteractorImpl implements CurrentTilesInteractor {
     public static final boolean DEBUG;
@@ -95,7 +103,6 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
     public final UserRepository userRepository;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -105,10 +112,8 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TileOrNotInstalled {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class NotInstalled implements TileOrNotInstalled {
             public static final NotInstalled INSTANCE = new NotInstalled();
 
@@ -116,7 +121,6 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Tile implements TileOrNotInstalled {
             public final QSTile tile;
 
@@ -125,7 +129,7 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
             }
 
             /* renamed from: box-impl, reason: not valid java name */
-            public static final /* synthetic */ Tile m2895boximpl(QSTile qSTile) {
+            public static final /* synthetic */ Tile m2912boximpl(QSTile qSTile) {
                 return new Tile(qSTile);
             }
 
@@ -143,6 +147,272 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
             public final String toString() {
                 return "Tile(tile=" + this.tile + ")";
             }
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$addTile$1, reason: invalid class name and case insensitive filesystem */
+    final class C09991 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $position;
+        final /* synthetic */ TileSpec $spec;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C09991(TileSpec tileSpec, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$spec = tileSpec;
+            this.$position = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SubscreenTilesInteractorImpl.this.new C09991(this.$spec, this.$position, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C09991) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Code restructure failed: missing block: B:14:0x0049, code lost:
+        
+            if (r1.addTile(r6, r3, r4, r5) == r0) goto L15;
+         */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final ReadonlyStateFlow readonlyStateFlow = SubscreenTilesInteractorImpl.this.currentTiles;
+                Flow flow = new Flow() { // from class: com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$addTile$1$invokeSuspend$$inlined$filter$1
+
+                    /* renamed from: com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$addTile$1$invokeSuspend$$inlined$filter$1$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                        /* renamed from: com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$addTile$1$invokeSuspend$$inlined$filter$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            Object L$1;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector) {
+                            this.$this_unsafeFlow = flowCollector;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                if (!((List) obj).isEmpty()) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (FlowKt.first(flow, this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i != 1) {
+                if (i != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            ResultKt.throwOnFailure(obj);
+            SubscreenTilesInteractorImpl subscreenTilesInteractorImpl = SubscreenTilesInteractorImpl.this;
+            TileSpecRepository tileSpecRepository = subscreenTilesInteractorImpl.tileSpecRepository;
+            int i2 = ((UserRepositoryImpl) subscreenTilesInteractorImpl.userRepository).getSelectedUserInfo().id;
+            TileSpec tileSpec = this.$spec;
+            int i3 = this.$position;
+            this.label = 2;
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$removeTiles$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Collection<TileSpec> $specs;
+        final /* synthetic */ int $user;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        /* JADX WARN: Multi-variable type inference failed */
+        public AnonymousClass2(int i, Collection<? extends TileSpec> collection, Continuation continuation) {
+            super(2, continuation);
+            this.$user = i;
+            this.$specs = collection;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SubscreenTilesInteractorImpl.this.new AnonymousClass2(this.$user, this.$specs, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                TileSpecRepository tileSpecRepository = SubscreenTilesInteractorImpl.this.tileSpecRepository;
+                int i2 = this.$user;
+                Collection<TileSpec> collection = this.$specs;
+                this.label = 1;
+                if (tileSpecRepository.removeTiles(i2, collection, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$resetTiles$1, reason: invalid class name and case insensitive filesystem */
+    final class C10001 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C10001(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SubscreenTilesInteractorImpl.this.new C10001(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C10001) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                SubscreenTilesInteractorImpl subscreenTilesInteractorImpl = SubscreenTilesInteractorImpl.this;
+                TileSpecRepository tileSpecRepository = subscreenTilesInteractorImpl.tileSpecRepository;
+                int iIntValue = ((Number) subscreenTilesInteractorImpl.currentUser.getValue()).intValue();
+                this.label = 1;
+                if (tileSpecRepository.resetToDefault(iIntValue, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$setTiles$2, reason: invalid class name and case insensitive filesystem */
+    final class C10012 extends SuspendLambda implements Function2 {
+        final /* synthetic */ List<TileSpec> $specs;
+        final /* synthetic */ int $user;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        /* JADX WARN: Multi-variable type inference failed */
+        public C10012(int i, List<? extends TileSpec> list, Continuation continuation) {
+            super(2, continuation);
+            this.$user = i;
+            this.$specs = list;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SubscreenTilesInteractorImpl.this.new C10012(this.$user, this.$specs, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C10012) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                TileSpecRepository tileSpecRepository = SubscreenTilesInteractorImpl.this.tileSpecRepository;
+                int i2 = this.$user;
+                List<TileSpec> list = this.$specs;
+                this.label = 1;
+                if (tileSpecRepository.setTiles(i2, list, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -169,21 +439,21 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
         this.tileFeatureChecker = tileFeatureChecker;
         this.fotaUpdateInteractor = fotaUpdateInteractor;
         EmptyList emptyList = EmptyList.INSTANCE;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(emptyList);
-        this._currentSpecsAndTiles = MutableStateFlow;
-        this.currentTiles = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(emptyList);
+        this._currentSpecsAndTiles = stateFlowImplMutableStateFlow;
+        this.currentTiles = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
         this.specsToTiles = new LinkedHashMap();
         UserTrackerImpl userTrackerImpl = (UserTrackerImpl) userTracker;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(Integer.valueOf(userTrackerImpl.getUserId()));
-        this.currentUser = MutableStateFlow2;
-        this.userId = FlowKt.asStateFlow(MutableStateFlow2);
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(userTrackerImpl.getUserContext());
-        this._userContext = MutableStateFlow3;
-        this.userContext = FlowKt.asStateFlow(MutableStateFlow3);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(Integer.valueOf(userTrackerImpl.getUserId()));
+        this.currentUser = stateFlowImplMutableStateFlow2;
+        this.userId = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(userTrackerImpl.getUserContext());
+        this._userContext = stateFlowImplMutableStateFlow3;
+        this.userContext = FlowKt.asStateFlow(stateFlowImplMutableStateFlow3);
         this.tileUsingBySubScreen = "Subscreen";
         this.tilesUpdatedFlow = SharedFlowKt.MutableSharedFlow$default(0, 0, null, 7);
         this.currentBarTileList = StateFlowKt.MutableStateFlow(emptyList);
-        this.userAndTiles = FlowKt.flowOn(com.android.systemui.util.kotlin.FlowKt.pairwiseBy(FlowKt.distinctUntilChanged(FlowKt.transformLatest(MutableStateFlow2, new SubscreenTilesInteractorImpl$special$$inlined$flatMapLatest$1(null, this))), new UserTilesAndComponents(-1, emptyList, EmptySet.INSTANCE, null, 8, null), new SubscreenTilesInteractorImpl$userAndTiles$2(null)), coroutineDispatcher2);
+        this.userAndTiles = FlowKt.flowOn(com.android.systemui.util.kotlin.FlowKt.pairwiseBy(FlowKt.distinctUntilChanged(FlowKt.transformLatest(stateFlowImplMutableStateFlow2, new SubscreenTilesInteractorImpl$special$$inlined$flatMapLatest$1(null, this))), new UserTilesAndComponents(-1, emptyList, EmptySet.INSTANCE, null, 8, null), new SubscreenTilesInteractorImpl$userAndTiles$2(null)), coroutineDispatcher2);
         if (!Process.myUserHandle().equals(UserHandle.SYSTEM)) {
             Log.e("SubscreenTilesInteractor", "SubscreenTilesInteractor not initialized for non-primary user, just return");
             return;
@@ -206,95 +476,65 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0057  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005d  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x003c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$createTile(com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl r5, com.android.systemui.qs.pipeline.shared.TileSpec r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r5.getClass()
-            boolean r0 = r7 instanceof com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$createTile$1
-            if (r0 == 0) goto L16
-            r0 = r7
-            com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$createTile$1 r0 = (com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$createTile$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$createTile$1 r0 = new com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$createTile$1
-            r0.<init>(r5, r7)
-        L1b:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            r4 = 0
-            if (r2 == 0) goto L3c
-            if (r2 != r3) goto L34
-            java.lang.Object r5 = r0.L$1
-            r6 = r5
-            com.android.systemui.qs.pipeline.shared.TileSpec r6 = (com.android.systemui.qs.pipeline.shared.TileSpec) r6
-            java.lang.Object r5 = r0.L$0
-            com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl r5 = (com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl) r5
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L53
-        L34:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L3c:
-            kotlin.ResultKt.throwOnFailure(r7)
-            com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$createTile$tile$1 r7 = new com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$createTile$tile$1
-            r7.<init>(r5, r6, r4)
-            r0.L$0 = r5
-            r0.L$1 = r6
-            r0.label = r3
-            kotlinx.coroutines.CoroutineDispatcher r2 = r5.mainDispatcher
-            java.lang.Object r7 = kotlinx.coroutines.BuildersKt.withContext(r2, r7, r0)
-            if (r7 != r1) goto L53
-            return r1
-        L53:
-            com.android.systemui.plugins.qs.QSTile r7 = (com.android.systemui.plugins.qs.QSTile) r7
-            if (r7 != 0) goto L5d
-            com.android.systemui.qs.pipeline.shared.logging.QSPipelineLogger r5 = r5.logger
-            r5.logTileNotFoundInFactory(r6)
-            return r4
-        L5d:
-            boolean r0 = r7.isAvailable()
-            if (r0 != 0) goto L7a
-            com.android.systemui.qs.pipeline.shared.logging.QSPipelineLogger r0 = r5.logger
-            com.android.systemui.qs.pipeline.shared.logging.QSPipelineLogger$TileDestroyedReason r1 = com.android.systemui.qs.pipeline.shared.logging.QSPipelineLogger.TileDestroyedReason.NEW_TILE_NOT_AVAILABLE
-            r0.logTileDestroyed(r6, r1)
-            boolean r0 = com.android.systemui.ScRune.QUICK_MANAGE_MULTI_QSHOST
-            if (r0 == 0) goto L76
-            com.android.systemui.qs.SecQSTileInstanceManager r7 = r5.tileInstanceManager
-            java.lang.String r5 = r5.tileUsingBySubScreen
-            r7.releaseTileUsing(r5, r6)
-            return r4
-        L76:
-            r7.destroy()
-            return r4
-        L7a:
-            com.android.systemui.qs.pipeline.shared.logging.QSPipelineLogger r5 = r5.logger
-            r5.logTileCreated(r6)
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl.access$createTile(com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl, com.android.systemui.qs.pipeline.shared.TileSpec, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$createTile(SubscreenTilesInteractorImpl subscreenTilesInteractorImpl, TileSpec tileSpec, ContinuationImpl continuationImpl) throws Throwable {
+        SubscreenTilesInteractorImpl$createTile$1 subscreenTilesInteractorImpl$createTile$1;
+        subscreenTilesInteractorImpl.getClass();
+        if (continuationImpl instanceof SubscreenTilesInteractorImpl$createTile$1) {
+            subscreenTilesInteractorImpl$createTile$1 = (SubscreenTilesInteractorImpl$createTile$1) continuationImpl;
+            int i = subscreenTilesInteractorImpl$createTile$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                subscreenTilesInteractorImpl$createTile$1.label = i - Integer.MIN_VALUE;
+            } else {
+                subscreenTilesInteractorImpl$createTile$1 = new SubscreenTilesInteractorImpl$createTile$1(subscreenTilesInteractorImpl, continuationImpl);
+            }
+        }
+        Object objWithContext = subscreenTilesInteractorImpl$createTile$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = subscreenTilesInteractorImpl$createTile$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objWithContext);
+            SubscreenTilesInteractorImpl$createTile$tile$1 subscreenTilesInteractorImpl$createTile$tile$1 = new SubscreenTilesInteractorImpl$createTile$tile$1(subscreenTilesInteractorImpl, tileSpec, null);
+            subscreenTilesInteractorImpl$createTile$1.L$0 = subscreenTilesInteractorImpl;
+            subscreenTilesInteractorImpl$createTile$1.L$1 = tileSpec;
+            subscreenTilesInteractorImpl$createTile$1.label = 1;
+            objWithContext = BuildersKt.withContext(subscreenTilesInteractorImpl.mainDispatcher, subscreenTilesInteractorImpl$createTile$tile$1, subscreenTilesInteractorImpl$createTile$1);
+            if (objWithContext == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            tileSpec = (TileSpec) subscreenTilesInteractorImpl$createTile$1.L$1;
+            subscreenTilesInteractorImpl = (SubscreenTilesInteractorImpl) subscreenTilesInteractorImpl$createTile$1.L$0;
+            ResultKt.throwOnFailure(objWithContext);
+        }
+        QSTile qSTile = (QSTile) objWithContext;
+        if (qSTile == null) {
+            subscreenTilesInteractorImpl.logger.logTileNotFoundInFactory(tileSpec);
+            return null;
+        }
+        if (qSTile.isAvailable()) {
+            subscreenTilesInteractorImpl.logger.logTileCreated(tileSpec);
+            return qSTile;
+        }
+        subscreenTilesInteractorImpl.logger.logTileDestroyed(tileSpec, QSPipelineLogger.TileDestroyedReason.NEW_TILE_NOT_AVAILABLE);
+        if (ScRune.QUICK_MANAGE_MULTI_QSHOST) {
+            subscreenTilesInteractorImpl.tileInstanceManager.releaseTileUsing(subscreenTilesInteractorImpl.tileUsingBySubScreen, tileSpec);
+            return null;
+        }
+        qSTile.destroy();
+        return null;
     }
 
     @Override // com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractor
     public final void addTile(TileSpec tileSpec, int i) {
         if (ScRune.QUICK_MANAGE_SUBSCREEN_TILE_LIST) {
-            BuildersKt.launch$default(this.scope, this.backgroundDispatcher, null, new SubscreenTilesInteractorImpl$addTile$1(this, tileSpec, i, null), 2);
+            BuildersKt.launch$default(this.scope, this.backgroundDispatcher, null, new C09991(tileSpec, i, null), 2);
         }
     }
 
@@ -412,12 +652,12 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
     public final void removeTiles(Collection collection) {
         if (ScRune.QUICK_MANAGE_SUBSCREEN_TILE_LIST) {
             Set set = CollectionsKt___CollectionsKt.toSet(getCurrentTilesSpecs());
-            int intValue = ((Number) this.currentUser.getValue()).intValue();
+            int iIntValue = ((Number) this.currentUser.getValue()).intValue();
             Set set2 = set;
             Collection collection2 = collection;
-            Set intersect = CollectionsKt___CollectionsKt.intersect(set2, collection2);
+            Set setIntersect = CollectionsKt___CollectionsKt.intersect(set2, collection2);
             ArrayList arrayList = new ArrayList();
-            for (Object obj : intersect) {
+            for (Object obj : setIntersect) {
                 if (obj instanceof TileSpec.CustomTileSpec) {
                     arrayList.add(obj);
                 }
@@ -427,9 +667,9 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
             while (i < size) {
                 Object obj2 = arrayList.get(i);
                 i++;
-                QSTile requestTileUsing = this.tileInstanceManager.requestTileUsing(this.tileUsingBySubScreen, (TileSpec.CustomTileSpec) obj2);
-                if (requestTileUsing instanceof CustomTile) {
-                    TileLifecycleManager tileLifecycleManager = ((CustomTile) requestTileUsing).mServiceManager.mStateManager;
+                QSTile qSTileRequestTileUsing = this.tileInstanceManager.requestTileUsing(this.tileUsingBySubScreen, (TileSpec.CustomTileSpec) obj2);
+                if (qSTileRequestTileUsing instanceof CustomTile) {
+                    TileLifecycleManager tileLifecycleManager = ((CustomTile) qSTileRequestTileUsing).mServiceManager.mStateManager;
                     tileLifecycleManager.onStopListening();
                     tileLifecycleManager.onTileRemoved();
                     tileLifecycleManager.mExecutor.execute(new TileLifecycleManager$$ExternalSyntheticLambda0(tileLifecycleManager, 3));
@@ -438,14 +678,14 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
             if (CollectionsKt___CollectionsKt.intersect(set2, collection2).isEmpty()) {
                 return;
             }
-            BuildersKt.launch$default(this.scope, null, null, new SubscreenTilesInteractorImpl$removeTiles$2(this, intValue, collection, null), 3);
+            BuildersKt.launch$default(this.scope, null, null, new AnonymousClass2(iIntValue, collection, null), 3);
         }
     }
 
     @Override // com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractor
     public final void resetTiles() {
         if (ScRune.QUICK_MANAGE_SUBSCREEN_TILE_LIST) {
-            BuildersKt.launch$default(this.scope, null, null, new SubscreenTilesInteractorImpl$resetTiles$1(this, null), 3);
+            BuildersKt.launch$default(this.scope, null, null, new C10001(null), 3);
         }
     }
 
@@ -453,13 +693,13 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
     public final void setTiles(List list) {
         if (ScRune.QUICK_MANAGE_SUBSCREEN_TILE_LIST) {
             List currentTilesSpecs = getCurrentTilesSpecs();
-            int intValue = ((Number) this.currentUser.getValue()).intValue();
+            int iIntValue = ((Number) this.currentUser.getValue()).intValue();
             if (currentTilesSpecs.equals(list)) {
                 return;
             }
-            List minus = CollectionsKt___CollectionsKt.minus((Iterable) currentTilesSpecs, (Iterable) list);
+            List listMinus = CollectionsKt___CollectionsKt.minus((Iterable) currentTilesSpecs, (Iterable) list);
             ArrayList arrayList = new ArrayList();
-            for (Object obj : minus) {
+            for (Object obj : listMinus) {
                 if (obj instanceof TileSpec.CustomTileSpec) {
                     arrayList.add(obj);
                 }
@@ -469,15 +709,15 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
             while (i < size) {
                 Object obj2 = arrayList.get(i);
                 i++;
-                QSTile requestTileUsing = this.tileInstanceManager.requestTileUsing(this.tileUsingBySubScreen, (TileSpec.CustomTileSpec) obj2);
-                if (requestTileUsing instanceof CustomTile) {
-                    TileLifecycleManager tileLifecycleManager = ((CustomTile) requestTileUsing).mServiceManager.mStateManager;
+                QSTile qSTileRequestTileUsing = this.tileInstanceManager.requestTileUsing(this.tileUsingBySubScreen, (TileSpec.CustomTileSpec) obj2);
+                if (qSTileRequestTileUsing instanceof CustomTile) {
+                    TileLifecycleManager tileLifecycleManager = ((CustomTile) qSTileRequestTileUsing).mServiceManager.mStateManager;
                     tileLifecycleManager.onStopListening();
                     tileLifecycleManager.onTileRemoved();
                     tileLifecycleManager.mExecutor.execute(new TileLifecycleManager$$ExternalSyntheticLambda0(tileLifecycleManager, 3));
                 }
             }
-            BuildersKt.launch$default(this.scope, null, null, new SubscreenTilesInteractorImpl$setTiles$2(this, intValue, list, null), 3);
+            BuildersKt.launch$default(this.scope, null, null, new C10012(iIntValue, list, null), 3);
         }
     }
 

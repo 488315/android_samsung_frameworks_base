@@ -2,6 +2,7 @@ package com.android.systemui.qs.bar;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
@@ -55,7 +56,6 @@ import dagger.Lazy;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, TileHostable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -84,7 +84,6 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
     public ToggleSeekBar mToggleSeekBar;
     public final TunerService mTunerService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.bar.BrightnessBar$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
@@ -146,12 +145,12 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
             public final void onRestore(String str) {
                 BrightnessBar brightnessBar = BrightnessBar.this;
                 brightnessBar.getClass();
-                String[] split = str.split("::");
-                if (split[0].equals("brightness_on_top")) {
-                    ?? r0 = Integer.parseInt(split[1]) == 1 ? 1 : 0;
-                    StringBuilder m = RowView$$ExternalSyntheticOutline0.m("isAllowedOnTop : ", "   Integer.parseInt(sp[1]) : ", r0);
-                    m.append(Integer.parseInt(split[1]));
-                    Log.d("BrightnessOnTop", m.toString());
+                String[] strArrSplit = str.split("::");
+                if (strArrSplit[0].equals("brightness_on_top")) {
+                    ?? r0 = Integer.parseInt(strArrSplit[1]) == 1 ? 1 : 0;
+                    StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("isAllowedOnTop : ", "   Integer.parseInt(sp[1]) : ", r0);
+                    sbM.append(Integer.parseInt(strArrSplit[1]));
+                    Log.d("BrightnessOnTop", sbM.toString());
                     if (brightnessBar.mIsAllowedOnTop != r0) {
                         brightnessBar.mIsAllowedOnTop = r0;
                         brightnessBar.mTunerService.setValue((int) r0, "brightness_on_top");
@@ -215,9 +214,9 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void inflateViews(ViewGroup viewGroup) {
         FrameLayout frameLayout;
-        BrightnessSliderController create = ((BrightnessSliderController.BrightnessSliderControllerFactory) this.mBrightnessSliderControllerFactory).create(this.mContext, viewGroup);
-        this.mBrightnessSliderController = create;
-        View rootView = create.getRootView();
+        BrightnessSliderController brightnessSliderControllerCreate = ((BrightnessSliderController.BrightnessSliderControllerFactory) this.mBrightnessSliderControllerFactory).create(this.mContext, viewGroup);
+        this.mBrightnessSliderController = brightnessSliderControllerCreate;
+        View rootView = brightnessSliderControllerCreate.getRootView();
         this.mBarRootView = rootView;
         this.mBrightnessBarContainer = (LinearLayout) rootView.findViewById(R.id.brightness_bar_container);
         this.mTileLayout = (LinearLayout) this.mBarRootView.findViewById(R.id.brightness_tile_layout);
@@ -230,10 +229,10 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
         BrightnessSliderController brightnessSliderController = this.mBrightnessSliderController;
         this.mSecBrightnessSliderController = brightnessSliderController.mSecBrightnessSliderController;
         BrightnessController.Factory factory = this.mBrightnessControllerFactory;
-        BrightnessController create2 = factory.create(brightnessSliderController);
-        this.mBrightnessController = create2;
-        BrightnessController.AnonymousClass2 anonymousClass2 = create2.mStartListeningRunnable;
-        Handler handler = create2.mBackgroundHandler;
+        BrightnessController brightnessControllerCreate = factory.create(brightnessSliderController);
+        this.mBrightnessController = brightnessControllerCreate;
+        BrightnessController.AnonymousClass2 anonymousClass2 = brightnessControllerCreate.mStartListeningRunnable;
+        Handler handler = brightnessControllerCreate.mBackgroundHandler;
         handler.removeCallbacks(anonymousClass2);
         handler.post(anonymousClass2);
         if (this.mListening) {
@@ -265,7 +264,7 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
             this.mToggleSeekBar.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.bar.BrightnessBar$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnTouchListener
                 public final boolean onTouch(View view, MotionEvent motionEvent) {
-                    BrightnessBar brightnessBar = BrightnessBar.this;
+                    BrightnessBar brightnessBar = this.f$0;
                     int i = BrightnessBar.$r8$clinit;
                     brightnessBar.getClass();
                     if (!((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isBrightnessBlocked()) {
@@ -287,8 +286,8 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
             });
             this.mBrightnessDetailIcon.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.bar.BrightnessBar$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnClickListener
-                public final void onClick(View view) {
-                    BrightnessBar brightnessBar = BrightnessBar.this;
+                public final void onClick(View view) throws Resources.NotFoundException {
+                    BrightnessBar brightnessBar = this.f$0;
                     int i = BrightnessBar.$r8$clinit;
                     brightnessBar.getClass();
                     view.setClickable(true);
@@ -300,23 +299,23 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
                 }
             });
             this.mBrightnessDetailIcon.setClickable(true);
-            boolean isEmergencyMode = this.mSettingsHelper.isEmergencyMode();
-            Log.d(this.TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("BrightnessDetail disabled = ", isEmergencyMode));
+            boolean zIsEmergencyMode = this.mSettingsHelper.isEmergencyMode();
+            Log.d(this.TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("BrightnessDetail disabled = ", zIsEmergencyMode));
             ImageView imageView2 = this.mBrightnessDetailIcon;
             if (imageView2 != null) {
-                imageView2.setVisibility(isEmergencyMode ? 8 : 0);
+                imageView2.setVisibility(zIsEmergencyMode ? 8 : 0);
             }
             SecBrightnessMirrorController secBrightnessMirrorController2 = this.mSecBrightnessMirrorController;
             if (secBrightnessMirrorController2 != null && (frameLayout = secBrightnessMirrorController2.brightnessMirror) != null) {
-                frameLayout.findViewById(R.id.brightness_detail_container).setVisibility(isEmergencyMode ? 8 : 0);
+                frameLayout.findViewById(R.id.brightness_detail_container).setVisibility(zIsEmergencyMode ? 8 : 0);
             }
         } else {
             this.mTileLayout.setVisibility(0);
             this.mBrightnessDetailIcon.setVisibility(8);
             this.mBrightnessBarContainer.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.bar.BrightnessBar$$ExternalSyntheticLambda4
                 @Override // android.view.View.OnLongClickListener
-                public final boolean onLongClick(View view) {
-                    BrightnessBar brightnessBar = BrightnessBar.this;
+                public final boolean onLongClick(View view) throws Resources.NotFoundException {
+                    BrightnessBar brightnessBar = this.f$0;
                     int i = BrightnessBar.$r8$clinit;
                     brightnessBar.getClass();
                     BrightnessDetail brightnessDetail = new BrightnessDetail(brightnessBar.mContext, brightnessBar.mQSDetailController, brightnessBar.mBrightnessControllerFactory);
@@ -346,30 +345,30 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
                 slider.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.settings.brightness.SecBrightnessSliderController$setLongPressHandler$1
                     @Override // android.view.View.OnTouchListener
                     public final boolean onTouch(final View view, MotionEvent motionEvent) {
-                        SecBrightnessSliderController secBrightnessSliderController2 = SecBrightnessSliderController.this;
+                        SecBrightnessSliderController secBrightnessSliderController2 = secBrightnessSliderController;
                         if (secBrightnessSliderController2.isSliderDisabled) {
                             Log.d(SecBrightnessSliderController.TAG, "Dark mode and brightness bar sliding happened simulteaneosuly: ");
                             return true;
                         }
-                        if (secBrightnessSliderController2.isSliderEnabled() || SecBrightnessSliderController.this.outdoormode) {
-                            SecBrightnessSliderController secBrightnessSliderController3 = SecBrightnessSliderController.this;
+                        if (secBrightnessSliderController2.isSliderEnabled() || secBrightnessSliderController.outdoormode) {
+                            SecBrightnessSliderController secBrightnessSliderController3 = secBrightnessSliderController;
                             SecBrightnessSliderView secBrightnessSliderView2 = secBrightnessSliderController3.view.mSecBrightnessSliderView;
                             if (secBrightnessSliderView2 != null && secBrightnessSliderView2.highBrightnessModeEnter && secBrightnessSliderController3.isAdaptiveBrightness && motionEvent.getAction() == 0) {
-                                SecBrightnessSliderController.this.showHighBrightnessModeToast();
+                                secBrightnessSliderController.showHighBrightnessModeToast();
                             }
-                            if (SecBrightnessSliderController.this.isSliderEnabled() && !((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isBrightnessBlocked()) {
+                            if (secBrightnessSliderController.isSliderEnabled() && !((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isBrightnessBlocked()) {
                                 if (motionEvent.getAction() == 0) {
-                                    SecBrightnessSliderController secBrightnessSliderController4 = SecBrightnessSliderController.this;
+                                    SecBrightnessSliderController secBrightnessSliderController4 = secBrightnessSliderController;
                                     secBrightnessSliderController4.isLongPressed = false;
                                     secBrightnessSliderController4.downPoint.set(motionEvent.getX(), motionEvent.getY());
                                     Handler handler3 = handler2;
                                     final ToggleSeekBar toggleSeekBar = slider;
-                                    final SecBrightnessSliderController secBrightnessSliderController5 = SecBrightnessSliderController.this;
+                                    final SecBrightnessSliderController secBrightnessSliderController5 = secBrightnessSliderController;
                                     final BrightnessDetail brightnessDetail2 = brightnessDetail;
                                     handler3.postDelayed(new Runnable() { // from class: com.android.systemui.settings.brightness.SecBrightnessSliderController$setLongPressHandler$1.1
                                         @Override // java.lang.Runnable
-                                        public final void run() {
-                                            ToggleSeekBar.this.performHapticFeedback(0);
+                                        public final void run() throws Resources.NotFoundException {
+                                            toggleSeekBar.performHapticFeedback(0);
                                             view.setPressed(false);
                                             secBrightnessSliderController5.isLongPressed = true;
                                             BrightnessDetail brightnessDetail3 = brightnessDetail2;
@@ -380,22 +379,22 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
                                     }, 500L);
                                     return false;
                                 }
-                                if (motionEvent.getAction() != 2 || SecBrightnessSliderController.this.isLongPressed) {
-                                    if (!SecBrightnessSliderController.this.isLongPressed) {
+                                if (motionEvent.getAction() != 2 || secBrightnessSliderController.isLongPressed) {
+                                    if (!secBrightnessSliderController.isLongPressed) {
                                         handler2.removeCallbacksAndMessages(null);
                                     }
-                                    return SecBrightnessSliderController.this.isLongPressed;
+                                    return secBrightnessSliderController.isLongPressed;
                                 }
-                                float hypot = (float) Math.hypot(motionEvent.getX() - SecBrightnessSliderController.this.downPoint.x, motionEvent.getY() - SecBrightnessSliderController.this.downPoint.y);
-                                SecBrightnessSliderController secBrightnessSliderController6 = SecBrightnessSliderController.this;
-                                if (hypot > secBrightnessSliderController6.touchSlop && !secBrightnessSliderController6.isLongPressed) {
+                                float fHypot = (float) Math.hypot(motionEvent.getX() - secBrightnessSliderController.downPoint.x, motionEvent.getY() - secBrightnessSliderController.downPoint.y);
+                                SecBrightnessSliderController secBrightnessSliderController6 = secBrightnessSliderController;
+                                if (fHypot > secBrightnessSliderController6.touchSlop && !secBrightnessSliderController6.isLongPressed) {
                                     handler2.removeCallbacksAndMessages(null);
-                                    SecBrightnessSliderController.this.getClass();
+                                    secBrightnessSliderController.getClass();
                                 }
                                 return false;
                             }
                         } else if (motionEvent.getAction() == 0) {
-                            SecBrightnessSliderController.this.showSliderDisabledToast();
+                            secBrightnessSliderController.showSliderDisabledToast();
                             return true;
                         }
                         return true;
@@ -410,11 +409,11 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void makeCloneBar() {
-        LayoutInflater from = LayoutInflater.from(this.mContext);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this.mContext);
         SecBrightnessSliderController.Companion.getClass();
-        View inflate = from.inflate(R.layout.sec_quick_settings_brightness_dialog, (ViewGroup) null);
-        this.mClonedBarView = inflate;
-        LinearLayout linearLayout = (LinearLayout) inflate.findViewById(R.id.brightness_bar_container);
+        View viewInflate = layoutInflaterFrom.inflate(R.layout.sec_quick_settings_brightness_dialog, (ViewGroup) null);
+        this.mClonedBarView = viewInflate;
+        LinearLayout linearLayout = (LinearLayout) viewInflate.findViewById(R.id.brightness_bar_container);
         LinearLayout linearLayout2 = (LinearLayout) this.mClonedBarView.findViewById(R.id.brightness_tile_layout);
         RelativeLayout relativeLayout = (RelativeLayout) this.mClonedBarView.findViewById(R.id.slider_container);
         linearLayout2.setVisibility(0);
@@ -448,9 +447,9 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
 
     @Override // com.android.systemui.tuner.TunerService.Tunable
     public final void onTuningChanged(String str, String str2) {
-        String m = AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("onTuningChanged() : key = ", str, ", newValue = ", str2);
+        String strM = AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("onTuningChanged() : key = ", str, ", newValue = ", str2);
         String str3 = this.TAG;
-        Log.d(str3, m);
+        Log.d(str3, strM);
         if ("brightness_on_top".equals(str)) {
             if (str2 == null) {
                 this.mIsAllowedOnTop = true;
@@ -473,7 +472,7 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.android.systemui.qs.bar.BrightnessBar$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
             public final void run() {
-                BrightnessBar.this.mSecBrightnessSliderController.isSliderDisabled = false;
+                this.f$0.mSecBrightnessSliderController.isSliderDisabled = false;
             }
         }, 200L);
         ImageView imageView = this.mBrightnessDetailIcon;
@@ -583,26 +582,26 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
         Context context = this.mContext;
         this.mResourcePicker.resourcePickHelper.getTargetPicker().getClass();
         SecQSPanelResourceCommon.Companion.getClass();
-        int dp = SecQSPanelResourceCommon.Companion.dp(R.dimen.brightness_slider_icon_size, context);
+        int iDp = SecQSPanelResourceCommon.Companion.dp(R.dimen.brightness_slider_icon_size, context);
         RelativeLayout relativeLayout = (RelativeLayout) this.mBarRootView.findViewById(R.id.brightness_detail_container);
         ImageView imageView = this.mBrightnessDetailIcon;
         if (imageView != null) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) imageView.getLayoutParams();
-            layoutParams.width = dp;
-            layoutParams.height = dp;
+            layoutParams.width = iDp;
+            layoutParams.height = iDp;
             this.mBrightnessDetailIcon.setLayoutParams(layoutParams);
         }
         if (relativeLayout != null) {
             RelativeLayout.LayoutParams layoutParams2 = (RelativeLayout.LayoutParams) relativeLayout.getLayoutParams();
-            layoutParams2.width = dp;
-            layoutParams2.height = dp;
+            layoutParams2.width = iDp;
+            layoutParams2.height = iDp;
             relativeLayout.setLayoutParams(layoutParams2);
         }
         LottieAnimationView lottieAnimationView = (LottieAnimationView) this.mBarRootView.findViewById(R.id.brightness_icon);
         if (lottieAnimationView != null) {
             RelativeLayout.LayoutParams layoutParams3 = (RelativeLayout.LayoutParams) lottieAnimationView.getLayoutParams();
-            layoutParams3.width = dp;
-            layoutParams3.height = dp;
+            layoutParams3.width = iDp;
+            layoutParams3.height = iDp;
             lottieAnimationView.setLayoutParams(layoutParams3);
         }
         SecBrightnessMirrorController secBrightnessMirrorController = this.mSecBrightnessMirrorController;
@@ -614,8 +613,8 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
             }
             if (imageView2 != null) {
                 ViewGroup.LayoutParams layoutParams4 = imageView2.getLayoutParams();
-                layoutParams4.width = dp;
-                layoutParams4.height = dp;
+                layoutParams4.width = iDp;
+                layoutParams4.height = iDp;
                 imageView2.setLayoutParams(layoutParams4);
             }
             FrameLayout frameLayout2 = this.mSecBrightnessMirrorController.brightnessMirror;
@@ -623,8 +622,8 @@ public class BrightnessBar extends BarItemImpl implements TunerService.Tunable, 
             RelativeLayout relativeLayout3 = relativeLayout2 != null ? relativeLayout2 : null;
             if (relativeLayout3 != null) {
                 ViewGroup.LayoutParams layoutParams5 = relativeLayout3.getLayoutParams();
-                layoutParams5.width = dp;
-                layoutParams5.height = dp;
+                layoutParams5.width = iDp;
+                layoutParams5.height = iDp;
                 relativeLayout3.setLayoutParams(layoutParams5);
             }
         }

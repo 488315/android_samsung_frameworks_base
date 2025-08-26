@@ -17,7 +17,6 @@ import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.flow.EmptyFlow;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PrimaryBouncerToDreamingTransitionViewModel implements PrimaryBouncerTransition {
     public final EmptyFlow notificationBlurRadius;
@@ -30,16 +29,16 @@ public final class PrimaryBouncerToDreamingTransitionViewModel implements Primar
         OverlayKey overlayKey = Overlays.Bouncer;
         KeyguardState keyguardState = KeyguardState.DREAMING;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.PRIMARY_BOUNCER, keyguardState, keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(j, new Edge.ContentToState(overlayKey, keyguardState)));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.PRIMARY_BOUNCER, keyguardState, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.ContentToState(overlayKey, keyguardState)));
         Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToDreamingTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                float floatValue = ((Float) obj).floatValue();
+            public final Object mo781invoke(Object obj) {
+                float fFloatValue = ((Float) obj).floatValue();
                 BlurConfig blurConfig2 = blurConfig;
                 float f = blurConfig2.maxBlurRadiusPx;
-                PrimaryBouncerToDreamingTransitionViewModel.this.getClass();
-                return Float.valueOf(MathUtils.lerp(f, blurConfig2.minBlurRadiusPx, floatValue));
+                this.f$0.getClass();
+                return Float.valueOf(MathUtils.lerp(f, blurConfig2.minBlurRadiusPx, fFloatValue));
             }
         };
         final int i = 0;
@@ -56,7 +55,7 @@ public final class PrimaryBouncerToDreamingTransitionViewModel implements Primar
             }
         };
         final int i2 = 1;
-        this.windowBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m, 0L, function1, 0L, function0, null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToDreamingTransitionViewModel$$ExternalSyntheticLambda1
+        this.windowBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, 0L, function1, 0L, function0, null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToDreamingTransitionViewModel$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 switch (i2) {

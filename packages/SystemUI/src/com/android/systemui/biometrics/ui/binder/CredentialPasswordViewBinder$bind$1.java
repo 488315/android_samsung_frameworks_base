@@ -1,15 +1,23 @@
 package com.android.systemui.biometrics.ui.binder;
 
+import android.os.UserHandle;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImeAwareEditText;
 import android.window.OnBackInvokedCallback;
 import android.window.OnBackInvokedDispatcher;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwnerKt;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.systemui.R;
 import com.android.systemui.biometrics.AuthContainerView;
 import com.android.systemui.biometrics.ui.CredentialPasswordView;
 import com.android.systemui.biometrics.ui.CredentialView;
+import com.android.systemui.biometrics.ui.viewmodel.BiometricPromptHeaderViewModelImpl;
+import com.android.systemui.biometrics.ui.viewmodel.CredentialHeaderViewModel;
 import com.android.systemui.biometrics.ui.viewmodel.CredentialViewModel;
+import com.android.systemui.biometrics.ui.viewmodel.CredentialViewModel$special$$inlined$map$1;
+import com.android.systemui.biometrics.ui.viewmodel.CredentialViewModel$special$$inlined$map$2;
 import kotlin.KotlinNothingValueException;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -23,10 +31,11 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlySharedFlow;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ CredentialView.Host $host;
@@ -40,7 +49,6 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
     Object L$1;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialPasswordViewBinder$bind$1$4, reason: invalid class name */
     final class AnonymousClass4 extends SuspendLambda implements Function2 {
         final /* synthetic */ CredentialView.Host $host;
@@ -52,7 +60,6 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialPasswordViewBinder$bind$1$4$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function2 {
             final /* synthetic */ CredentialView.Host $host;
@@ -122,7 +129,6 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialPasswordViewBinder$bind$1$4$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ OnBackInvokedCallback $onBackInvokedCallback;
@@ -199,15 +205,15 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(this.$viewModel, this.$imeManager, this.$view, this.$host, this.$passwordField, null), 7);
-            final OnBackInvokedDispatcher findOnBackInvokedDispatcher = this.$view.findOnBackInvokedDispatcher();
-            if (findOnBackInvokedDispatcher != null) {
-                StandaloneCoroutine launchTraced$default = CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(findOnBackInvokedDispatcher, this.$onBackInvokedCallback, null), 7);
+            final OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher = this.$view.findOnBackInvokedDispatcher();
+            if (onBackInvokedDispatcherFindOnBackInvokedDispatcher != null) {
+                StandaloneCoroutine standaloneCoroutineLaunchTraced$default = CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(onBackInvokedDispatcherFindOnBackInvokedDispatcher, this.$onBackInvokedCallback, null), 7);
                 final OnBackInvokedCallback onBackInvokedCallback = this.$onBackInvokedCallback;
-                launchTraced$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.biometrics.ui.binder.CredentialPasswordViewBinder$bind$1$4$$ExternalSyntheticLambda0
+                standaloneCoroutineLaunchTraced$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.biometrics.ui.binder.CredentialPasswordViewBinder$bind$1$4$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
-                        findOnBackInvokedDispatcher.unregisterOnBackInvokedCallback(onBackInvokedCallback);
+                    public final Object mo781invoke(Object obj2) {
+                        onBackInvokedDispatcherFindOnBackInvokedDispatcher.unregisterOnBackInvokedCallback(onBackInvokedCallback);
                         return Unit.INSTANCE;
                     }
                 });
@@ -235,28 +241,143 @@ public final class CredentialPasswordViewBinder$bind$1 extends SuspendLambda imp
         return credentialPasswordViewBinder$bind$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0108, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x0108, code lost:
     
         if (androidx.lifecycle.RepeatOnLifecycleKt.repeatOnLifecycle(r3, r14, r4, r13) != r0) goto L37;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x0054, code lost:
-    
-        if (r14 == r0) goto L36;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00ba  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00a8  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0084  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x00a8  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00ad  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x00ba  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r14) {
-        /*
-            Method dump skipped, instructions count: 270
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.ui.binder.CredentialPasswordViewBinder$bind$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        LifecycleOwner lifecycleOwner;
+        final CredentialHeaderViewModel credentialHeaderViewModel;
+        LifecycleOwner lifecycleOwner2;
+        Integer num;
+        final LifecycleOwner lifecycleOwner3;
+        Integer num2;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            lifecycleOwner = (LifecycleOwner) this.L$0;
+            FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = this.$viewModel.header;
+            this.L$0 = lifecycleOwner;
+            this.label = 1;
+            obj = FlowKt.first(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, this);
+            if (obj != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i == 1) {
+            lifecycleOwner = (LifecycleOwner) this.L$0;
+            ResultKt.throwOnFailure(obj);
+        } else {
+            if (i == 2) {
+                credentialHeaderViewModel = (CredentialHeaderViewModel) this.L$1;
+                lifecycleOwner2 = (LifecycleOwner) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                num = (Integer) obj;
+                if (num != null) {
+                    ImeAwareEditText imeAwareEditText = this.$passwordField;
+                    CredentialPasswordView credentialPasswordView = this.$view;
+                    imeAwareEditText.setContentDescription(credentialPasswordView.getContext().getString(num.intValue()));
+                }
+                CredentialViewModel$special$$inlined$map$1 credentialViewModel$special$$inlined$map$1 = this.$viewModel.inputFlags;
+                this.L$0 = lifecycleOwner2;
+                this.L$1 = credentialHeaderViewModel;
+                this.label = 3;
+                obj = FlowKt.firstOrNull(credentialViewModel$special$$inlined$map$1, this);
+                if (obj != coroutineSingletons) {
+                    lifecycleOwner3 = lifecycleOwner2;
+                    num2 = (Integer) obj;
+                    if (num2 != null) {
+                    }
+                    if (this.$requestFocusForInput) {
+                    }
+                    ImeAwareEditText imeAwareEditText2 = this.$passwordField;
+                    final CredentialViewModel credentialViewModel = this.$viewModel;
+                    imeAwareEditText2.setOnEditorActionListener(new OnImeSubmitListener(new Function1() { // from class: com.android.systemui.biometrics.ui.binder.CredentialPasswordViewBinder$bind$1$$ExternalSyntheticLambda0
+                        @Override // kotlin.jvm.functions.Function1
+                        /* renamed from: invoke */
+                        public final Object mo781invoke(Object obj2) {
+                            CoroutineTracingKt.launchTraced$default(LifecycleOwnerKt.getLifecycleScope(lifecycleOwner3), null, null, new CredentialPasswordViewBinder$bind$1$3$1(credentialViewModel, (CharSequence) obj2, credentialHeaderViewModel, null), 7);
+                            return Unit.INSTANCE;
+                        }
+                    }));
+                    this.$passwordField.setOnKeyListener(new OnBackButtonListener(this.$onBackInvokedCallback));
+                    this.$view.findViewById(R.id.pin_pad);
+                    Lifecycle.State state = Lifecycle.State.STARTED;
+                    AnonymousClass4 anonymousClass4 = new AnonymousClass4(this.$view, this.$viewModel, this.$imeManager, this.$host, this.$passwordField, this.$onBackInvokedCallback, null);
+                    this.L$0 = null;
+                    this.L$1 = null;
+                    this.label = 4;
+                }
+                return coroutineSingletons;
+            }
+            if (i != 3) {
+                if (i != 4) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            credentialHeaderViewModel = (CredentialHeaderViewModel) this.L$1;
+            lifecycleOwner3 = (LifecycleOwner) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            num2 = (Integer) obj;
+            if (num2 != null) {
+                this.$passwordField.setInputType(num2.intValue());
+            }
+            if (this.$requestFocusForInput) {
+                this.$passwordField.requestFocus();
+                this.$passwordField.scheduleShowSoftInput();
+            }
+            ImeAwareEditText imeAwareEditText22 = this.$passwordField;
+            final CredentialViewModel credentialViewModel2 = this.$viewModel;
+            imeAwareEditText22.setOnEditorActionListener(new OnImeSubmitListener(new Function1() { // from class: com.android.systemui.biometrics.ui.binder.CredentialPasswordViewBinder$bind$1$$ExternalSyntheticLambda0
+                @Override // kotlin.jvm.functions.Function1
+                /* renamed from: invoke */
+                public final Object mo781invoke(Object obj2) {
+                    CoroutineTracingKt.launchTraced$default(LifecycleOwnerKt.getLifecycleScope(lifecycleOwner3), null, null, new CredentialPasswordViewBinder$bind$1$3$1(credentialViewModel2, (CharSequence) obj2, credentialHeaderViewModel, null), 7);
+                    return Unit.INSTANCE;
+                }
+            }));
+            this.$passwordField.setOnKeyListener(new OnBackButtonListener(this.$onBackInvokedCallback));
+            this.$view.findViewById(R.id.pin_pad);
+            Lifecycle.State state2 = Lifecycle.State.STARTED;
+            AnonymousClass4 anonymousClass42 = new AnonymousClass4(this.$view, this.$viewModel, this.$imeManager, this.$host, this.$passwordField, this.$onBackInvokedCallback, null);
+            this.L$0 = null;
+            this.L$1 = null;
+            this.label = 4;
+        }
+        CredentialHeaderViewModel credentialHeaderViewModel2 = (CredentialHeaderViewModel) obj;
+        this.$passwordField.setTextOperationUser(UserHandle.of(((BiometricPromptHeaderViewModelImpl) credentialHeaderViewModel2).user.userIdForPasswordEntry));
+        CredentialViewModel$special$$inlined$map$2 credentialViewModel$special$$inlined$map$2 = this.$viewModel.inputBoxContentDescription;
+        this.L$0 = lifecycleOwner;
+        this.L$1 = credentialHeaderViewModel2;
+        this.label = 2;
+        Object objFirstOrNull = FlowKt.firstOrNull(credentialViewModel$special$$inlined$map$2, this);
+        if (objFirstOrNull != coroutineSingletons) {
+            LifecycleOwner lifecycleOwner4 = lifecycleOwner;
+            credentialHeaderViewModel = credentialHeaderViewModel2;
+            obj = objFirstOrNull;
+            lifecycleOwner2 = lifecycleOwner4;
+            num = (Integer) obj;
+            if (num != null) {
+            }
+            CredentialViewModel$special$$inlined$map$1 credentialViewModel$special$$inlined$map$12 = this.$viewModel.inputFlags;
+            this.L$0 = lifecycleOwner2;
+            this.L$1 = credentialHeaderViewModel;
+            this.label = 3;
+            obj = FlowKt.firstOrNull(credentialViewModel$special$$inlined$map$12, this);
+            if (obj != coroutineSingletons) {
+            }
+        }
+        return coroutineSingletons;
     }
 }

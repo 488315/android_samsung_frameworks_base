@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.drawscope.DrawScope;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class VNode {
     public Function1 invalidateListener;
@@ -22,7 +21,7 @@ public abstract class VNode {
     public final void invalidate() {
         Function1 invalidateListener$ui_release = getInvalidateListener$ui_release();
         if (invalidateListener$ui_release != null) {
-            invalidateListener$ui_release.mo779invoke(this);
+            invalidateListener$ui_release.mo781invoke(this);
         }
     }
 

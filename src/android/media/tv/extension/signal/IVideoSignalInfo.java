@@ -61,9 +61,9 @@ public interface IVideoSignalInfo extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.IVideoSignalInfo");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVideoSignalInfo)) {
-                return (IVideoSignalInfo) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.IVideoSignalInfo");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVideoSignalInfo)) {
+                return (IVideoSignalInfo) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,20 +96,20 @@ public interface IVideoSignalInfo extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                IVideoSignalInfoListener asInterface = IVideoSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                IVideoSignalInfoListener iVideoSignalInfoListenerAsInterface = IVideoSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addVideoSignalInfoListener(readString, asInterface);
+                addVideoSignalInfoListener(string, iVideoSignalInfoListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IVideoSignalInfoListener asInterface2 = IVideoSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                IVideoSignalInfoListener iVideoSignalInfoListenerAsInterface2 = IVideoSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeVideoSignalInfoListener(asInterface2);
+                removeVideoSignalInfoListener(iVideoSignalInfoListenerAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                Bundle videoSignalInfo = getVideoSignalInfo(readString2);
+                Bundle videoSignalInfo = getVideoSignalInfo(string2);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(videoSignalInfo, 1);
             } else {
@@ -136,48 +136,48 @@ public interface IVideoSignalInfo extends IInterface {
 
             @Override // android.media.tv.extension.signal.IVideoSignalInfo
             public void addVideoSignalInfoListener(String str, IVideoSignalInfoListener iVideoSignalInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IVideoSignalInfo");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iVideoSignalInfoListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IVideoSignalInfo");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iVideoSignalInfoListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.signal.IVideoSignalInfo
             public void removeVideoSignalInfoListener(IVideoSignalInfoListener iVideoSignalInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IVideoSignalInfo");
-                    obtain.writeStrongInterface(iVideoSignalInfoListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IVideoSignalInfo");
+                    parcelObtain.writeStrongInterface(iVideoSignalInfoListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.signal.IVideoSignalInfo
             public Bundle getVideoSignalInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IVideoSignalInfo");
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IVideoSignalInfo");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

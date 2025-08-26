@@ -21,19 +21,24 @@ import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.WindowlessWindowManager;
 import android.window.DesktopExperienceFlags;
+import android.window.DesktopModeFlags;
 import android.window.InputTransferToken;
 import android.window.SurfaceSyncGroup;
 import android.window.WindowContainerToken;
 import android.window.WindowContainerTransaction;
 import androidx.appcompat.widget.MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0;
+import com.android.systemui.R;
+import com.android.systemui.pluginlock.PluginLockInstancePolicy;
 import com.android.wm.shell.ShellTaskOrganizer;
 import com.android.wm.shell.common.DisplayController;
 import com.android.wm.shell.desktopmode.DesktopModeEventLogger;
 import com.android.wm.shell.desktopmode.EnterDesktopTaskTransitionHandler$$ExternalSyntheticLambda0;
+import com.android.wm.shell.splitscreen.SplitScreenController;
 import com.android.wm.shell.windowdecor.additionalviewcontainer.AdditionalViewHostViewContainer;
 import com.android.wm.shell.windowdecor.common.viewhost.WindowDecorViewHost;
 import com.android.wm.shell.windowdecor.common.viewhost.WindowDecorViewHostSupplier;
 import com.android.wm.shell.windowdecor.extension.InsetsStateKt;
+import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +46,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class WindowDecoration implements AutoCloseable {
     public Context mContext;
@@ -58,6 +62,7 @@ public abstract class WindowDecoration implements AutoCloseable {
     public int mLayoutResId;
     public final AnonymousClass1 mOnDisplaysChangedListener;
     public final Binder mOwner;
+    public SplitScreenController mSplitController;
     public final Supplier mSurfaceControlBuilderSupplier;
     public final Supplier mSurfaceControlTransactionSupplier;
     public final SurfaceControlViewHostFactory mSurfaceControlViewHostFactory;
@@ -73,7 +78,6 @@ public abstract class WindowDecoration implements AutoCloseable {
     public final WindowDecorViewHostSupplier mWindowDecorViewHostSupplier;
     public WindowDecorationInsets mWindowDecorationInsets;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RelayoutParams {
         public boolean mApplyStartTransactionOnDraw;
         public boolean mAsyncViewHost;
@@ -101,12 +105,10 @@ public abstract class WindowDecoration implements AutoCloseable {
         public int mShadowRadiusId = 0;
         public int mCornerRadiusId = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class OccludingCaptionElement {
             public Alignment mAlignment;
             public int mWidthResId;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             enum Alignment {
                 START,
                 END
@@ -145,7 +147,6 @@ public abstract class WindowDecoration implements AutoCloseable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RelayoutResult {
         public int mCaptionHeight;
         public int mCaptionTopPadding;
@@ -161,11 +162,9 @@ public abstract class WindowDecoration implements AutoCloseable {
         public int mWidth;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SurfaceControlViewHostFactory {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WindowDecorationInsets {
         public final Rect[] mBoundingRects;
         public final boolean mExcludedFromAppBounds;
@@ -230,7 +229,7 @@ public abstract class WindowDecoration implements AutoCloseable {
     }
 
     public WindowDecoration(Context context, Context context2, DisplayController displayController, ShellTaskOrganizer shellTaskOrganizer, ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, WindowDecorViewHostSupplier windowDecorViewHostSupplier) {
-        this(context, context2, displayController, shellTaskOrganizer, runningTaskInfo, surfaceControl, new DesktopModeWindowDecoration$$ExternalSyntheticLambda4(0), new EnterDesktopTaskTransitionHandler$$ExternalSyntheticLambda0(), new DesktopModeWindowDecoration$$ExternalSyntheticLambda4(1), new DesktopModeWindowDecoration$$ExternalSyntheticLambda4(2), new SurfaceControlViewHostFactory() { // from class: com.android.wm.shell.windowdecor.WindowDecoration.2
+        this(context, context2, displayController, shellTaskOrganizer, runningTaskInfo, surfaceControl, new DesktopModeWindowDecoration$$ExternalSyntheticLambda7(0), new EnterDesktopTaskTransitionHandler$$ExternalSyntheticLambda0(), new DesktopModeWindowDecoration$$ExternalSyntheticLambda7(1), new DesktopModeWindowDecoration$$ExternalSyntheticLambda7(2), new SurfaceControlViewHostFactory() { // from class: com.android.wm.shell.windowdecor.WindowDecoration.2
         }, windowDecorViewHostSupplier, new DesktopModeEventLogger());
     }
 
@@ -244,7 +243,7 @@ public abstract class WindowDecoration implements AutoCloseable {
     public final AdditionalViewHostViewContainer addWindow(final View view, SurfaceControl.Transaction transaction, SurfaceSyncGroup surfaceSyncGroup, int i, int i2, int i3, int i4, boolean z) {
         int i5;
         int i6;
-        SurfaceControl build = ((SurfaceControl.Builder) this.mSurfaceControlBuilderSupplier.get()).setName("Handle Menu of Task=" + this.mTaskInfo.taskId).setContainerLayer().setParent(this.mDecorationContainerSurface).setCallsite("WindowDecoration.addWindow").build();
+        SurfaceControl surfaceControlBuild = ((SurfaceControl.Builder) this.mSurfaceControlBuilderSupplier.get()).setName("Handle Menu of Task=" + this.mTaskInfo.taskId).setContainerLayer().setParent(this.mDecorationContainerSurface).setCallsite("WindowDecoration.addWindow").build();
         boolean z2 = CoreRune.MW_CAPTION_POPUP;
         if (z2) {
             i5 = i3;
@@ -252,13 +251,13 @@ public abstract class WindowDecoration implements AutoCloseable {
         } else {
             i5 = i3;
             i6 = i4;
-            transaction.setPosition(build, i, i2).setWindowCrop(build, i5, i6).show(build);
+            transaction.setPosition(surfaceControlBuild, i, i2).setWindowCrop(surfaceControlBuild, i5, i6).show(surfaceControlBuild);
         }
         final WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(i5, i6, 2, 262152, -2);
         layoutParams.setTitle("Additional window of Task=" + this.mTaskInfo.taskId);
         layoutParams.setTrustedOverlay();
         ActivityManager.RunningTaskInfo runningTaskInfo = this.mTaskInfo;
-        WindowlessWindowManager windowlessWindowManager = new WindowlessWindowManager(runningTaskInfo.configuration, build, (InputTransferToken) null, z2 ? runningTaskInfo.token : null);
+        WindowlessWindowManager windowlessWindowManager = new WindowlessWindowManager(runningTaskInfo.configuration, surfaceControlBuild, (InputTransferToken) null, z2 ? runningTaskInfo.token : null);
         SurfaceControlViewHostFactory surfaceControlViewHostFactory = this.mSurfaceControlViewHostFactory;
         Context context = this.mDecorWindowContext;
         Display display = this.mDisplay;
@@ -267,7 +266,7 @@ public abstract class WindowDecoration implements AutoCloseable {
         if (z2) {
             layoutParams.setSurfaceInsets(view, true, false);
             Rect rect = layoutParams.surfaceInsets;
-            transaction.setPosition(build, i - rect.left, i2 - rect.top).show(build);
+            transaction.setPosition(surfaceControlBuild, i - rect.left, i2 - rect.top).show(surfaceControlBuild);
             if (z) {
                 layoutParams.multiWindowFlags = 2;
             }
@@ -278,16 +277,16 @@ public abstract class WindowDecoration implements AutoCloseable {
                 surfaceControlViewHost.setView(view, layoutParams);
             }
         });
-        return new AdditionalViewHostViewContainer(build, surfaceControlViewHost, this.mSurfaceControlTransactionSupplier);
+        return new AdditionalViewHostViewContainer(surfaceControlBuild, surfaceControlViewHost, this.mSurfaceControlTransactionSupplier);
     }
 
     public final Rect calculateBoundingRectLocal(RelayoutParams.OccludingCaptionElement occludingCaptionElement, int i, Rect rect) {
         boolean z = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(this.mDecorWindowContext) == 1;
-        int ordinal = occludingCaptionElement.mAlignment.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = occludingCaptionElement.mAlignment.ordinal();
+        if (iOrdinal == 0) {
             return z ? new Rect(rect.width() - i, 0, rect.width(), rect.height()) : new Rect(0, 0, i, rect.height());
         }
-        if (ordinal == 1) {
+        if (iOrdinal == 1) {
             return z ? new Rect(0, 0, i, rect.height()) : new Rect(rect.width() - i, 0, rect.width(), rect.height());
         }
         throw new IllegalArgumentException("Unexpected alignment " + occludingCaptionElement.mAlignment);
@@ -298,6 +297,10 @@ public abstract class WindowDecoration implements AutoCloseable {
     }
 
     public int calculateCaptionPositionY() {
+        return 0;
+    }
+
+    public int calculateScreenBurnOffset(int i, int i2) {
         return 0;
     }
 
@@ -326,24 +329,255 @@ public abstract class WindowDecoration implements AutoCloseable {
 
     public abstract void relayout(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, Region region);
 
-    /* JADX WARN: Code restructure failed: missing block: B:74:0x0161, code lost:
-    
-        if (r13.windowConfiguration.getStagePosition() != r5.windowConfiguration.getStagePosition()) goto L86;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:162:0x0446  */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01bd  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x01ce  */
+    /* JADX WARN: Removed duplicated region for block: B:106:0x01cf  */
+    /* JADX WARN: Removed duplicated region for block: B:93:0x017b  */
+    /* JADX WARN: Type inference failed for: r11v16, types: [com.android.wm.shell.windowdecor.common.viewhost.WindowDecorViewHost] */
+    /* JADX WARN: Type inference failed for: r15v6 */
+    /* JADX WARN: Type inference failed for: r15v7, types: [android.graphics.Region] */
+    /* JADX WARN: Type inference failed for: r15v8 */
+    /* JADX WARN: Type inference failed for: r1v3, types: [com.android.wm.shell.windowdecor.common.viewhost.WindowDecorViewHost] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void relayout(com.android.wm.shell.windowdecor.WindowDecoration.RelayoutParams r19, android.view.SurfaceControl.Transaction r20, android.view.SurfaceControl.Transaction r21, android.window.WindowContainerTransaction r22, android.view.View r23, com.android.wm.shell.windowdecor.WindowDecoration.RelayoutResult r24) {
-        /*
-            Method dump skipped, instructions count: 1098
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.windowdecor.WindowDecoration.relayout(com.android.wm.shell.windowdecor.WindowDecoration$RelayoutParams, android.view.SurfaceControl$Transaction, android.view.SurfaceControl$Transaction, android.window.WindowContainerTransaction, android.view.View, com.android.wm.shell.windowdecor.WindowDecoration$RelayoutResult):void");
+    public final void relayout(RelayoutParams relayoutParams, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, WindowContainerTransaction windowContainerTransaction, View view, RelayoutResult relayoutResult) {
+        boolean z;
+        SurfaceControl.Transaction transaction3;
+        int iLoadDimensionPixelSize;
+        ?? r15;
+        Display display;
+        Configuration configuration;
+        Trace.beginSection("WindowDecoration#relayout");
+        relayoutResult.mWidth = 0;
+        relayoutResult.mHeight = 0;
+        relayoutResult.mCaptionHeight = 0;
+        relayoutResult.mCaptionWidth = 0;
+        relayoutResult.mCaptionX = 0;
+        relayoutResult.mCaptionY = 0;
+        relayoutResult.mCaptionTopPadding = 0;
+        relayoutResult.mCustomizableCaptionRegion.setEmpty();
+        relayoutResult.mRootView = null;
+        DesktopExperienceFlags desktopExperienceFlags = DesktopExperienceFlags.ENABLE_DYNAMIC_RADIUS_COMPUTATION_BUGFIX;
+        if (desktopExperienceFlags.isTrue()) {
+            relayoutResult.mCornerRadius = -1;
+            relayoutResult.mShadowRadius = -1;
+        }
+        boolean z2 = CoreRune.MW_CAPTION_HANDLE;
+        if (z2) {
+            relayoutResult.mCaptionTouchableHeight = 0;
+        }
+        ActivityManager.RunningTaskInfo runningTaskInfo = relayoutParams.mRunningTaskInfo;
+        if (runningTaskInfo != null) {
+            this.mTaskInfo = runningTaskInfo;
+        }
+        this.mHasGlobalFocus = relayoutParams.mHasGlobalFocus;
+        this.mExclusionRegion.set(relayoutParams.mDisplayExclusionRegion);
+        int i = this.mLayoutResId;
+        this.mLayoutResId = relayoutParams.mLayoutResId;
+        ActivityManager.RunningTaskInfo runningTaskInfo2 = this.mTaskInfo;
+        if (!runningTaskInfo2.isVisible && (!CoreRune.MW_CAPTION_BUG_FIX || !runningTaskInfo2.isVisibleRequested)) {
+            releaseViews(windowContainerTransaction);
+            if (relayoutParams.mSetTaskVisibilityPositionAndCrop) {
+                transaction2.hide(this.mTaskSurface);
+            }
+            Trace.endSection();
+            return;
+        }
+        Trace.beginSection("WindowDecoration#relayout-inflateIfNeeded");
+        if (view == null && relayoutParams.mLayoutResId == 0) {
+            throw new IllegalArgumentException("layoutResId and rootView can't both be invalid.");
+        }
+        relayoutResult.mRootView = view;
+        Configuration configuration2 = this.mWindowDecorConfig;
+        boolean z3 = (configuration2 == null || configuration2.fontScale == this.mTaskInfo.configuration.fontScale) ? false : true;
+        boolean z4 = (configuration2 == null || configuration2.getLocales().equals(this.mTaskInfo.getConfiguration().getLocales())) ? false : true;
+        Configuration configuration3 = this.mWindowDecorConfig;
+        int i2 = configuration3 != null ? configuration3.densityDpi : 0;
+        int i3 = configuration3 != null ? configuration3.uiMode & 48 : 0;
+        Configuration configuration4 = this.mWindowDecorConfig;
+        if (configuration4 == null) {
+            configuration4 = this.mTaskInfo.getConfiguration();
+        }
+        Configuration configuration5 = new Configuration(configuration4);
+        Configuration configuration6 = relayoutParams.mWindowDecorConfig;
+        if (configuration6 == null) {
+            configuration6 = this.mTaskInfo.getConfiguration();
+        }
+        this.mWindowDecorConfig = configuration6;
+        boolean z5 = CoreRune.MW_CAPTION;
+        if (z5 && this.mTaskInfo.getDisplayId() == 0 && MultiWindowUtils.hasCustomDensity() && (configuration = this.mWindowDecorConfig) != null) {
+            z = z4;
+            if (configuration.densityDpi != this.mContext.getResources().getConfiguration().densityDpi) {
+                this.mWindowDecorConfig.densityDpi = this.mContext.getResources().getConfiguration().densityDpi;
+            }
+        } else {
+            z = z4;
+        }
+        Configuration configuration7 = this.mWindowDecorConfig;
+        int i4 = configuration7.densityDpi;
+        int i5 = configuration7.uiMode & 48;
+        if (i2 != i4 || (display = this.mDisplay) == null || display.getDisplayId() != this.mTaskInfo.displayId || i != this.mLayoutResId || i3 != i5 || this.mDecorWindowContext == null || z3 || z) {
+            releaseViews(windowContainerTransaction);
+            Display display2 = this.mDisplayController.mDisplayManager.getDisplay(this.mTaskInfo.displayId);
+            this.mDisplay = display2;
+            if (display2 == null) {
+                if (CoreRune.MW_CAPTION_BUG_FIX) {
+                    this.mDisplayController.addDisplayWindowListener(this.mOnDisplaysChangedListener, this.mTaskInfo.displayId);
+                } else {
+                    this.mDisplayController.addDisplayWindowListener(this.mOnDisplaysChangedListener, -1);
+                }
+                transaction3 = null;
+                relayoutResult.mRootView = null;
+            } else {
+                transaction3 = null;
+                Context contextCreateConfigurationContext = this.mContext.createConfigurationContext(this.mWindowDecorConfig);
+                this.mDecorWindowContext = contextCreateConfigurationContext;
+                contextCreateConfigurationContext.setTheme(this.mContext.getThemeResId());
+                int i6 = relayoutParams.mLayoutResId;
+                if (i6 != 0) {
+                    relayoutResult.mRootView = inflateLayout(this.mDecorWindowContext, i6);
+                }
+                if (relayoutResult.mRootView == null) {
+                    relayoutResult.mRootView = inflateLayout(this.mDecorWindowContext, relayoutParams.mLayoutResId);
+                }
+            }
+        } else {
+            if (z5) {
+                Configuration configuration8 = this.mWindowDecorConfig;
+                if ((configuration5.diff(configuration8) & 4) == 0 && configuration5.windowConfiguration.getWindowingMode() == configuration8.windowConfiguration.getWindowingMode() && configuration5.windowConfiguration.getStagePosition() == configuration8.windowConfiguration.getStagePosition() && configuration5.getLayoutDirection() == configuration8.getLayoutDirection()) {
+                }
+                if (relayoutResult.mRootView == null) {
+                }
+            }
+            transaction3 = null;
+            if (relayoutResult.mRootView == null) {
+            }
+        }
+        Trace.endSection();
+        if (relayoutResult.mRootView == null) {
+            Trace.endSection();
+            return;
+        }
+        Trace.beginSection("WindowDecoration#relayout-updateCaptionVisibility");
+        View view2 = relayoutResult.mRootView;
+        this.mIsCaptionVisible = relayoutParams.mIsCaptionVisible;
+        if (!CoreRune.MW_CAPTION_HANDLE_ANIM && !DesktopModeFlags.ENABLE_DESKTOP_APP_HANDLE_ANIMATION.isTrue()) {
+            setCaptionVisibility(view2, this.mIsCaptionVisible);
+        }
+        Trace.endSection();
+        Rect bounds = this.mTaskInfo.getConfiguration().windowConfiguration.getBounds();
+        if (CoreRune.MW_SPLIT_SHELL_TRANSITION && this.mTaskInfo.isSplitScreen() && this.mSplitController != null && (bounds.width() == this.mTaskInfo.minWidth || bounds.height() == this.mTaskInfo.minHeight)) {
+            int stageType = this.mTaskInfo.getConfiguration().windowConfiguration.getStageType();
+            int i7 = stageType != 1 ? stageType != 2 ? stageType != 4 ? -1 : 5 : 1 : 0;
+            iLoadDimensionPixelSize = -1;
+            if (i7 != -1) {
+                bounds = this.mSplitController.getStageBounds(i7);
+            }
+        } else {
+            iLoadDimensionPixelSize = -1;
+        }
+        relayoutResult.mWidth = bounds.width();
+        relayoutResult.mHeight = bounds.height();
+        if (!CoreRune.MW_CAPTION_FREEFORM_STASH || !(this instanceof DesktopModeWindowDecoration) || !((DesktopModeWindowDecoration) this).mFreeformStashState.isStashed()) {
+            ((TaskFocusStateConsumer) relayoutResult.mRootView).setTaskFocusState(this.mHasGlobalFocus);
+        }
+        ((TaskFocusStateConsumer) relayoutResult.mRootView).setTaskFocusState(this.mHasGlobalFocus);
+        Resources resources = this.mDecorWindowContext.getResources();
+        relayoutResult.mCaptionHeight = loadDimensionPixelSize(resources, relayoutParams.mCaptionHeightId) + relayoutParams.mCaptionTopPadding;
+        int i8 = relayoutParams.mCaptionWidthId;
+        int iLoadDimensionPixelSize2 = i8 != 0 ? loadDimensionPixelSize(resources, i8) : bounds.width();
+        relayoutResult.mCaptionWidth = iLoadDimensionPixelSize2;
+        relayoutResult.mCaptionX = z2 ? calculateScreenBurnOffset(-3, 3) + calculateCaptionPositionX(relayoutResult.mWidth, iLoadDimensionPixelSize2) : (relayoutResult.mWidth - iLoadDimensionPixelSize2) / 2;
+        relayoutResult.mCaptionY = z2 ? calculateScreenBurnOffset(-5, 5) + calculateCaptionPositionY() : 0;
+        relayoutResult.mCaptionTopPadding = relayoutParams.mCaptionTopPadding;
+        if (desktopExperienceFlags.isTrue()) {
+            int i9 = relayoutParams.mCornerRadiusId;
+            relayoutResult.mCornerRadius = i9 == 0 ? iLoadDimensionPixelSize : loadDimensionPixelSize(resources, i9);
+            int i10 = relayoutParams.mShadowRadiusId;
+            if (i10 != 0) {
+                iLoadDimensionPixelSize = loadDimensionPixelSize(resources, i10);
+            }
+            relayoutResult.mShadowRadius = iLoadDimensionPixelSize;
+        }
+        if (z2) {
+            relayoutResult.mCaptionTouchableHeight = (this.mTaskInfo.isFreeform() && relayoutParams.mCaptionType == 0) ? loadDimensionPixelSize(resources, R.dimen.mw_handle_height) : relayoutResult.mCaptionHeight;
+        }
+        Trace.beginSection("relayout-createViewHostIfNeeded");
+        Context context = this.mDecorWindowContext;
+        Display display3 = this.mDisplay;
+        if (this.mViewHost == null) {
+            this.mViewHost = this.mWindowDecorViewHostSupplier.acquire(context, display3);
+        }
+        Trace.endSection();
+        Trace.beginSection("WindowDecoration#relayout-updateSurfacesAndInsets");
+        SurfaceControl surfaceControl = this.mViewHost.getSurfaceControl();
+        if (this.mDecorationContainerSurface == null) {
+            SurfaceControl surfaceControlBuild = ((SurfaceControl.Builder) this.mSurfaceControlBuilderSupplier.get()).setName("Decor container of Task=" + this.mTaskInfo.taskId).setContainerLayer().setParent(this.mTaskSurface).setCallsite("WindowDecoration.updateDecorationContainerSurface").build();
+            this.mDecorationContainerSurface = surfaceControlBuild;
+            transaction.setTrustedOverlay(surfaceControlBuild, true).setLayer(this.mDecorationContainerSurface, PluginLockInstancePolicy.DISABLED_BY_SUB_USER);
+        }
+        transaction.setWindowCrop(this.mDecorationContainerSurface, relayoutResult.mWidth, relayoutResult.mHeight).show(this.mDecorationContainerSurface);
+        updateCaptionContainerSurface(surfaceControl, transaction, relayoutResult);
+        updateCaptionInsets(relayoutParams, windowContainerTransaction, relayoutResult, bounds);
+        updateTaskSurface(relayoutParams, transaction, transaction2, relayoutResult);
+        Trace.endSection();
+        Trace.beginSection("WindowDecoration#relayout-updateViewHost");
+        View view3 = relayoutResult.mRootView;
+        view3.setPadding(view3.getPaddingLeft(), relayoutParams.mCaptionTopPadding, relayoutResult.mRootView.getPaddingRight(), relayoutResult.mRootView.getPaddingBottom());
+        int i11 = relayoutResult.mCaptionX;
+        int i12 = relayoutResult.mCaptionY;
+        Rect rect = new Rect(i11, i12, relayoutResult.mCaptionWidth + i11, relayoutResult.mCaptionHeight + i12);
+        if (relayoutParams.mLimitTouchRegionToSystemAreas) {
+            Point point = relayoutParams.mRunningTaskInfo.positionInParent;
+            Rect rect2 = new Rect(rect);
+            rect2.offsetTo(point.x, point.y);
+            int size = ((ArrayList) relayoutParams.mOccludingCaptionElements).size();
+            Region regionObtain = Region.obtain();
+            if (size == 0) {
+                regionObtain.set(rect2);
+            } else {
+                Resources resources2 = this.mDecorWindowContext.getResources();
+                for (int i13 = 0; i13 < size; i13++) {
+                    RelayoutParams.OccludingCaptionElement occludingCaptionElement = (RelayoutParams.OccludingCaptionElement) ((ArrayList) relayoutParams.mOccludingCaptionElements).get(i13);
+                    Rect rectCalculateBoundingRectLocal = calculateBoundingRectLocal(occludingCaptionElement, resources2.getDimensionPixelSize(occludingCaptionElement.mWidthResId), rect2);
+                    rectCalculateBoundingRectLocal.offset(rect2.left, rect2.top);
+                    regionObtain.union(rectCalculateBoundingRectLocal);
+                }
+            }
+            Region regionObtain2 = Region.obtain();
+            regionObtain2.set(rect2);
+            Region.Op op = Region.Op.DIFFERENCE;
+            regionObtain2.op(regionObtain, op);
+            regionObtain2.op(relayoutParams.mDisplayExclusionRegion, Region.Op.INTERSECT);
+            Region regionObtain3 = Region.obtain();
+            regionObtain3.set(rect2);
+            regionObtain3.op(regionObtain2, op);
+            regionObtain3.translate(-point.x, -point.y);
+            regionObtain.recycle();
+            regionObtain2.recycle();
+            r15 = regionObtain3;
+        } else {
+            r15 = transaction3;
+        }
+        Trace.beginSection("WindowDecoration#updateViewHierarchy");
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(relayoutResult.mCaptionWidth, CoreRune.MW_CAPTION_HANDLE ? relayoutResult.mCaptionTouchableHeight : relayoutResult.mCaptionHeight, 2, 8, -2);
+        layoutParams.setTitle("Caption of Task=" + this.mTaskInfo.taskId);
+        layoutParams.setTrustedOverlay();
+        if (CoreRune.MW_CAPTION_TOOLTIP) {
+            layoutParams.multiWindowFlags = 1;
+        }
+        layoutParams.inputFeatures = relayoutParams.mInputFeatures;
+        if (!relayoutParams.mAsyncViewHost) {
+            this.mViewHost.updateView(relayoutResult.mRootView, layoutParams, this.mTaskInfo.configuration, r15, relayoutParams.mApplyStartTransactionOnDraw ? transaction : transaction3);
+        } else {
+            if (relayoutParams.mApplyStartTransactionOnDraw) {
+                throw new IllegalArgumentException("Cannot use sync draw tx with async relayout");
+            }
+            this.mViewHost.updateViewAsync(relayoutResult.mRootView, layoutParams, this.mTaskInfo.configuration, r15);
+        }
+        Trace.endSection();
+        Trace.endSection();
+        Trace.endSection();
     }
 
     public void releaseViews(WindowContainerTransaction windowContainerTransaction) {
@@ -410,10 +644,10 @@ public abstract class WindowDecoration implements AutoCloseable {
             Rect[] rectArr2 = new Rect[size];
             for (int i = 0; i < size; i++) {
                 RelayoutParams.OccludingCaptionElement occludingCaptionElement = (RelayoutParams.OccludingCaptionElement) ((ArrayList) relayoutParams.mOccludingCaptionElements).get(i);
-                Rect calculateBoundingRectLocal = calculateBoundingRectLocal(occludingCaptionElement, resources.getDimensionPixelSize(occludingCaptionElement.mWidthResId), rect2);
-                rectArr2[i] = calculateBoundingRectLocal;
+                Rect rectCalculateBoundingRectLocal = calculateBoundingRectLocal(occludingCaptionElement, resources.getDimensionPixelSize(occludingCaptionElement.mWidthResId), rect2);
+                rectArr2[i] = rectCalculateBoundingRectLocal;
                 if ((relayoutParams.mInputFeatures & 4) != 0) {
-                    relayoutResult.mCustomizableCaptionRegion.op(calculateBoundingRectLocal, Region.Op.DIFFERENCE);
+                    relayoutResult.mCustomizableCaptionRegion.op(rectCalculateBoundingRectLocal, Region.Op.DIFFERENCE);
                 }
             }
             rectArr = rectArr2;

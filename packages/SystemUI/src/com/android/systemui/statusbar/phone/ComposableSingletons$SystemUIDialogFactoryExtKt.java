@@ -11,30 +11,33 @@ import androidx.compose.ui.unit.Dp;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ComposableSingletons$SystemUIDialogFactoryExtKt {
     public static final ComposableSingletons$SystemUIDialogFactoryExtKt INSTANCE = new ComposableSingletons$SystemUIDialogFactoryExtKt();
 
     /* renamed from: lambda-1, reason: not valid java name */
     public static final ComposableLambdaImpl f108lambda1 = new ComposableLambdaImpl(-1370905715, false, new Function2() { // from class: com.android.systemui.statusbar.phone.ComposableSingletons$SystemUIDialogFactoryExtKt$lambda-1$1
+        /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
         @Override // kotlin.jvm.functions.Function2
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final Object invoke(Object obj, Object obj2) {
             Composer composer = (Composer) obj;
             if ((((Number) obj2).intValue() & 3) == 2) {
                 ComposerImpl composerImpl = (ComposerImpl) composer;
                 if (composerImpl.getSkipping()) {
                     composerImpl.skipToGroupEnd();
-                    return Unit.INSTANCE;
+                } else {
+                    if (ComposerKt.isTraceInProgress()) {
+                        ComposerKt.traceEventStart("com.android.systemui.statusbar.phone.ComposableSingletons$SystemUIDialogFactoryExtKt.lambda-1.<anonymous> (SystemUIDialogFactoryExt.kt:297)");
+                    }
+                    Dp.Companion companion = Dp.Companion;
+                    BoxKt.Box(SizeKt.m141sizeVpY3zN4(Modifier.Companion, 32, 4), composer, 6);
+                    if (ComposerKt.isTraceInProgress()) {
+                        ComposerKt.traceEventEnd();
+                    }
                 }
-            }
-            if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventStart("com.android.systemui.statusbar.phone.ComposableSingletons$SystemUIDialogFactoryExtKt.lambda-1.<anonymous> (SystemUIDialogFactoryExt.kt:297)");
-            }
-            Dp.Companion companion = Dp.Companion;
-            BoxKt.Box(SizeKt.m140sizeVpY3zN4(Modifier.Companion, 32, 4), composer, 6);
-            if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventEnd();
             }
             return Unit.INSTANCE;
         }

@@ -1,37 +1,182 @@
 package androidx.compose.ui.graphics.vector;
 
+import androidx.compose.foundation.text.BasicTextKt$$ExternalSyntheticOutline0;
+import androidx.compose.runtime.ComposablesKt;
+import androidx.compose.runtime.Composer;
+import androidx.compose.runtime.ComposerImpl;
+import androidx.compose.runtime.ComposerKt;
+import androidx.compose.runtime.Composition;
+import androidx.compose.runtime.CompositionImpl;
+import androidx.compose.runtime.CompositionKt;
+import androidx.compose.runtime.DisposableEffectResult;
+import androidx.compose.runtime.EffectsKt;
+import androidx.compose.runtime.RecomposeScopeImpl;
+import androidx.compose.runtime.RecomposeScopeImplKt;
 import androidx.compose.runtime.SnapshotMutableStateImpl;
+import androidx.compose.runtime.internal.ComposableLambdaImpl;
+import androidx.compose.runtime.internal.ComposableLambdaKt;
 import androidx.compose.ui.geometry.Size;
+import androidx.compose.ui.graphics.BlendModeColorFilter;
+import androidx.compose.ui.graphics.Brush;
 import androidx.compose.ui.graphics.ColorFilter;
+import androidx.compose.ui.graphics.vector.VectorGroup;
+import androidx.compose.ui.graphics.vector.VectorProperty;
+import androidx.compose.ui.platform.CompositionLocalsKt;
+import androidx.compose.ui.unit.Density;
+import java.util.List;
+import java.util.Map;
+import kotlin.Unit;
+import kotlin.collections.MapsKt__MapsKt;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class VectorPainterKt {
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x025f  */
-    /* JADX WARN: Removed duplicated region for block: B:50:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x0256  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x004b  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x004b  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:57:0x0256  */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x025f  */
+    /* JADX WARN: Removed duplicated region for block: B:68:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final void RenderVectorGroup(final androidx.compose.ui.graphics.vector.VectorGroup r23, java.util.Map r24, androidx.compose.runtime.Composer r25, final int r26, final int r27) {
-        /*
-            Method dump skipped, instructions count: 617
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.VectorPainterKt.RenderVectorGroup(androidx.compose.ui.graphics.vector.VectorGroup, java.util.Map, androidx.compose.runtime.Composer, int, int):void");
+    public static final void RenderVectorGroup(final VectorGroup vectorGroup, Map map, Composer composer, final int i, final int i2) {
+        int i3;
+        final Map map2;
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup;
+        Map map3;
+        ComposerImpl composerImpl = (ComposerImpl) composer;
+        composerImpl.startRestartGroup(-446179233);
+        if ((i2 & 1) != 0) {
+            i3 = i | 6;
+        } else if ((i & 6) == 0) {
+            i3 = (composerImpl.changed(vectorGroup) ? 4 : 2) | i;
+        } else {
+            i3 = i;
+        }
+        int i4 = i2 & 2;
+        if (i4 == 0) {
+            if ((i & 48) == 0) {
+                map2 = map;
+                i3 |= composerImpl.changedInstance(map2) ? 32 : 16;
+            }
+            if (composerImpl.shouldExecute(i3 & 1, (i3 & 19) == 18)) {
+                composerImpl.skipToGroupEnd();
+            } else {
+                Map mapEmptyMap = i4 != 0 ? MapsKt__MapsKt.emptyMap() : map2;
+                if (ComposerKt.isTraceInProgress()) {
+                    ComposerKt.traceEventStart("androidx.compose.ui.graphics.vector.RenderVectorGroup (VectorPainter.kt:428)");
+                }
+                vectorGroup.getClass();
+                VectorGroup.AnonymousClass1 anonymousClass1 = new VectorGroup.AnonymousClass1(vectorGroup);
+                while (anonymousClass1.it.hasNext()) {
+                    final VectorNode vectorNode = (VectorNode) anonymousClass1.next();
+                    if (vectorNode instanceof VectorPath) {
+                        composerImpl.startReplaceGroup(-23302778);
+                        VectorPath vectorPath = (VectorPath) vectorNode;
+                        VectorConfig vectorConfig = (VectorConfig) mapEmptyMap.get(vectorPath.name);
+                        if (vectorConfig == null) {
+                            vectorConfig = new VectorConfig() { // from class: androidx.compose.ui.graphics.vector.VectorPainterKt$RenderVectorGroup$config$1
+                            };
+                        }
+                        ComposerImpl composerImpl2 = composerImpl;
+                        VectorComposeKt.m568Path9cdaXJ4((List) vectorConfig.getOrDefault(VectorProperty.PathData.INSTANCE, vectorPath.pathData), vectorPath.pathFillType, vectorPath.name, (Brush) vectorConfig.getOrDefault(VectorProperty.Fill.INSTANCE, vectorPath.fill), ((Number) vectorConfig.getOrDefault(VectorProperty.FillAlpha.INSTANCE, Float.valueOf(vectorPath.fillAlpha))).floatValue(), (Brush) vectorConfig.getOrDefault(VectorProperty.Stroke.INSTANCE, vectorPath.stroke), ((Number) vectorConfig.getOrDefault(VectorProperty.StrokeAlpha.INSTANCE, Float.valueOf(vectorPath.strokeAlpha))).floatValue(), ((Number) vectorConfig.getOrDefault(VectorProperty.StrokeLineWidth.INSTANCE, Float.valueOf(vectorPath.strokeLineWidth))).floatValue(), vectorPath.strokeLineCap, vectorPath.strokeLineJoin, vectorPath.strokeLineMiter, ((Number) vectorConfig.getOrDefault(VectorProperty.TrimPathStart.INSTANCE, Float.valueOf(vectorPath.trimPathStart))).floatValue(), ((Number) vectorConfig.getOrDefault(VectorProperty.TrimPathEnd.INSTANCE, Float.valueOf(vectorPath.trimPathEnd))).floatValue(), ((Number) vectorConfig.getOrDefault(VectorProperty.TrimPathOffset.INSTANCE, Float.valueOf(vectorPath.trimPathOffset))).floatValue(), composerImpl2, 0, 0, 0);
+                        composerImpl = composerImpl2;
+                        composerImpl.end(false);
+                        anonymousClass1 = anonymousClass1;
+                        mapEmptyMap = mapEmptyMap;
+                    } else {
+                        final Map map4 = mapEmptyMap;
+                        VectorGroup.AnonymousClass1 anonymousClass12 = anonymousClass1;
+                        if (vectorNode instanceof VectorGroup) {
+                            composerImpl.startReplaceGroup(-21889209);
+                            VectorGroup vectorGroup2 = (VectorGroup) vectorNode;
+                            VectorConfig vectorConfig2 = (VectorConfig) map4.get(vectorGroup2.name);
+                            if (vectorConfig2 == null) {
+                                vectorConfig2 = new VectorConfig() { // from class: androidx.compose.ui.graphics.vector.VectorPainterKt$RenderVectorGroup$config$2
+                                };
+                            }
+                            map3 = map4;
+                            VectorComposeKt.Group(vectorGroup2.name, ((Number) vectorConfig2.getOrDefault(VectorProperty.Rotation.INSTANCE, Float.valueOf(vectorGroup2.rotation))).floatValue(), ((Number) vectorConfig2.getOrDefault(VectorProperty.PivotX.INSTANCE, Float.valueOf(vectorGroup2.pivotX))).floatValue(), ((Number) vectorConfig2.getOrDefault(VectorProperty.PivotY.INSTANCE, Float.valueOf(vectorGroup2.pivotY))).floatValue(), ((Number) vectorConfig2.getOrDefault(VectorProperty.ScaleX.INSTANCE, Float.valueOf(vectorGroup2.scaleX))).floatValue(), ((Number) vectorConfig2.getOrDefault(VectorProperty.ScaleY.INSTANCE, Float.valueOf(vectorGroup2.scaleY))).floatValue(), ((Number) vectorConfig2.getOrDefault(VectorProperty.TranslateX.INSTANCE, Float.valueOf(vectorGroup2.translationX))).floatValue(), ((Number) vectorConfig2.getOrDefault(VectorProperty.TranslateY.INSTANCE, Float.valueOf(vectorGroup2.translationY))).floatValue(), (List) vectorConfig2.getOrDefault(VectorProperty.PathData.INSTANCE, vectorGroup2.clipPathData), ComposableLambdaKt.rememberComposableLambda(1450046638, new Function2() { // from class: androidx.compose.ui.graphics.vector.VectorPainterKt.RenderVectorGroup.1
+                                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                                /* JADX WARN: Multi-variable type inference failed */
+                                {
+                                    super(2);
+                                }
+
+                                @Override // kotlin.jvm.functions.Function2
+                                public final Object invoke(Object obj, Object obj2) {
+                                    Composer composer2 = (Composer) obj;
+                                    int iIntValue = ((Number) obj2).intValue();
+                                    ComposerImpl composerImpl3 = (ComposerImpl) composer2;
+                                    if (composerImpl3.shouldExecute(iIntValue & 1, (iIntValue & 3) != 2)) {
+                                        if (ComposerKt.isTraceInProgress()) {
+                                            ComposerKt.traceEventStart("androidx.compose.ui.graphics.vector.RenderVectorGroup.<anonymous> (VectorPainter.kt:468)");
+                                        }
+                                        VectorPainterKt.RenderVectorGroup((VectorGroup) vectorNode, map4, composerImpl3, 0, 0);
+                                        if (ComposerKt.isTraceInProgress()) {
+                                            ComposerKt.traceEventEnd();
+                                        }
+                                    } else {
+                                        composerImpl3.skipToGroupEnd();
+                                    }
+                                    return Unit.INSTANCE;
+                                }
+                            }, composerImpl), composerImpl, 805306368, 0);
+                            composerImpl.end(false);
+                        } else {
+                            map3 = map4;
+                            composerImpl.startReplaceGroup(-20884003);
+                            composerImpl.end(false);
+                        }
+                        mapEmptyMap = map3;
+                        anonymousClass1 = anonymousClass12;
+                    }
+                }
+                Map map5 = mapEmptyMap;
+                if (ComposerKt.isTraceInProgress()) {
+                    ComposerKt.traceEventEnd();
+                }
+                map2 = map5;
+            }
+            recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+            if (recomposeScopeImplEndRestartGroup == null) {
+                recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.ui.graphics.vector.VectorPainterKt.RenderVectorGroup.2
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    /* JADX WARN: Multi-variable type inference failed */
+                    {
+                        super(2);
+                    }
+
+                    @Override // kotlin.jvm.functions.Function2
+                    public final Object invoke(Object obj, Object obj2) {
+                        ((Number) obj2).intValue();
+                        VectorPainterKt.RenderVectorGroup(vectorGroup, map2, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1), i2);
+                        return Unit.INSTANCE;
+                    }
+                };
+                return;
+            }
+            return;
+        }
+        i3 |= 48;
+        map2 = map;
+        if (composerImpl.shouldExecute(i3 & 1, (i3 & 19) == 18)) {
+        }
+        recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup == null) {
+        }
     }
 
     /* renamed from: configureVectorPainter-T4PVSW8, reason: not valid java name */
-    public static final void m567configureVectorPainterT4PVSW8(VectorPainter vectorPainter, long j, long j2, String str, ColorFilter colorFilter, boolean z) {
-        ((SnapshotMutableStateImpl) vectorPainter.size$delegate).setValue(Size.m413boximpl(j));
+    public static final void m569configureVectorPainterT4PVSW8(VectorPainter vectorPainter, long j, long j2, String str, ColorFilter colorFilter, boolean z) {
+        ((SnapshotMutableStateImpl) vectorPainter.size$delegate).setValue(Size.m415boximpl(j));
         ((SnapshotMutableStateImpl) vectorPainter.autoMirror$delegate).setValue(Boolean.valueOf(z));
         VectorComponent vectorComponent = vectorPainter.vector;
         ((SnapshotMutableStateImpl) vectorComponent.intrinsicColorFilter$delegate).setValue(colorFilter);
-        ((SnapshotMutableStateImpl) vectorComponent.viewportSize$delegate).setValue(Size.m413boximpl(j2));
+        ((SnapshotMutableStateImpl) vectorComponent.viewportSize$delegate).setValue(Size.m415boximpl(j2));
         vectorComponent.name = str;
     }
 
@@ -45,7 +190,7 @@ public abstract class VectorPainterKt {
                 pathComponent.pathData = vectorPath.pathData;
                 pathComponent.isPathDirty = true;
                 pathComponent.invalidate();
-                pathComponent.renderPath.m444setFillTypeoQ8Xj4U(vectorPath.pathFillType);
+                pathComponent.renderPath.m446setFillTypeoQ8Xj4U(vectorPath.pathFillType);
                 pathComponent.invalidate();
                 pathComponent.invalidate();
                 pathComponent.fill = vectorPath.fill;
@@ -114,124 +259,173 @@ public abstract class VectorPainterKt {
     }
 
     /* renamed from: obtainViewportSize-Pq9zytI, reason: not valid java name */
-    public static final long m568obtainViewportSizePq9zytI(float f, float f2, long j) {
+    public static final long m570obtainViewportSizePq9zytI(float f, float f2, long j) {
         if (Float.isNaN(f)) {
             f = Float.intBitsToFloat((int) (j >> 32));
         }
         if (Float.isNaN(f2)) {
             f2 = Float.intBitsToFloat((int) (j & 4294967295L));
         }
-        long floatToRawIntBits = (Float.floatToRawIntBits(f2) & 4294967295L) | (Float.floatToRawIntBits(f) << 32);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(f2) & 4294967295L) | (Float.floatToRawIntBits(f) << 32);
         Size.Companion companion = Size.Companion;
-        return floatToRawIntBits;
+        return jFloatToRawIntBits;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0041, code lost:
-    
-        if (r2 == androidx.compose.runtime.Composer.Companion.Empty) goto L9;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0043  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final androidx.compose.ui.graphics.vector.VectorPainter rememberVectorPainter(androidx.compose.ui.graphics.vector.ImageVector r14, androidx.compose.runtime.Composer r15) {
-        /*
-            boolean r0 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r0 == 0) goto Lb
-            java.lang.String r0 = "androidx.compose.ui.graphics.vector.rememberVectorPainter (VectorPainter.kt:169)"
-            androidx.compose.runtime.ComposerKt.traceEventStart(r0)
-        Lb:
-            androidx.compose.runtime.StaticProvidableCompositionLocal r0 = androidx.compose.ui.platform.CompositionLocalsKt.LocalDensity
-            androidx.compose.runtime.ComposerImpl r15 = (androidx.compose.runtime.ComposerImpl) r15
-            java.lang.Object r0 = r15.consume(r0)
-            androidx.compose.ui.unit.Density r0 = (androidx.compose.ui.unit.Density) r0
-            int r1 = r14.genId
-            float r1 = (float) r1
-            float r2 = r0.getDensity()
-            int r1 = java.lang.Float.floatToRawIntBits(r1)
-            long r3 = (long) r1
-            int r1 = java.lang.Float.floatToRawIntBits(r2)
-            long r1 = (long) r1
-            r5 = 32
-            long r3 = r3 << r5
-            r6 = 4294967295(0xffffffff, double:2.1219957905E-314)
-            long r1 = r1 & r6
-            long r1 = r1 | r3
-            boolean r1 = r15.changed(r1)
-            java.lang.Object r2 = r15.rememberedValue()
-            if (r1 != 0) goto L43
-            androidx.compose.runtime.Composer$Companion r1 = androidx.compose.runtime.Composer.Companion
-            r1.getClass()
-            androidx.compose.runtime.Composer$Companion$Empty$1 r1 = androidx.compose.runtime.Composer.Companion.Empty
-            if (r2 != r1) goto L9c
-        L43:
-            androidx.compose.ui.graphics.vector.GroupComponent r1 = new androidx.compose.ui.graphics.vector.GroupComponent
-            r1.<init>()
-            androidx.compose.ui.graphics.vector.VectorGroup r2 = r14.root
-            createGroupComponent(r1, r2)
-            kotlin.Unit r2 = kotlin.Unit.INSTANCE
-            float r2 = r14.defaultWidth
-            float r2 = r0.mo57toPx0680j_4(r2)
-            float r3 = r14.defaultHeight
-            float r0 = r0.mo57toPx0680j_4(r3)
-            int r2 = java.lang.Float.floatToRawIntBits(r2)
-            long r2 = (long) r2
-            int r0 = java.lang.Float.floatToRawIntBits(r0)
-            long r8 = (long) r0
-            long r2 = r2 << r5
-            long r4 = r8 & r6
-            long r7 = r2 | r4
-            androidx.compose.ui.geometry.Size$Companion r0 = androidx.compose.ui.geometry.Size.Companion
-            float r0 = r14.viewportWidth
-            float r2 = r14.viewportHeight
-            long r9 = m568obtainViewportSizePq9zytI(r0, r2, r7)
-            androidx.compose.ui.graphics.vector.VectorPainter r6 = new androidx.compose.ui.graphics.vector.VectorPainter
-            r6.<init>(r1)
-            r0 = 16
-            long r2 = r14.tintColor
-            int r0 = (r2 > r0 ? 1 : (r2 == r0 ? 0 : -1))
-            r1 = 0
-            if (r0 == 0) goto L90
-            androidx.compose.ui.graphics.ColorFilter$Companion r0 = androidx.compose.ui.graphics.ColorFilter.Companion
-            r0.getClass()
-            androidx.compose.ui.graphics.BlendModeColorFilter r0 = new androidx.compose.ui.graphics.BlendModeColorFilter
-            int r4 = r14.tintBlendMode
-            r0.<init>(r2, r4, r1)
-            r12 = r0
-            goto L91
-        L90:
-            r12 = r1
-        L91:
-            java.lang.String r11 = r14.name
-            boolean r13 = r14.autoMirror
-            m567configureVectorPainterT4PVSW8(r6, r7, r9, r11, r12, r13)
-            r15.updateRememberedValue(r6)
-            r2 = r6
-        L9c:
-            androidx.compose.ui.graphics.vector.VectorPainter r2 = (androidx.compose.ui.graphics.vector.VectorPainter) r2
-            boolean r14 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r14 == 0) goto La7
-            androidx.compose.runtime.ComposerKt.traceEventEnd()
-        La7:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.VectorPainterKt.rememberVectorPainter(androidx.compose.ui.graphics.vector.ImageVector, androidx.compose.runtime.Composer):androidx.compose.ui.graphics.vector.VectorPainter");
+    public static final VectorPainter rememberVectorPainter(ImageVector imageVector, Composer composer) {
+        BlendModeColorFilter blendModeColorFilter;
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventStart("androidx.compose.ui.graphics.vector.rememberVectorPainter (VectorPainter.kt:169)");
+        }
+        ComposerImpl composerImpl = (ComposerImpl) composer;
+        Density density = (Density) composerImpl.consume(CompositionLocalsKt.LocalDensity);
+        float f = imageVector.genId;
+        float density2 = density.getDensity();
+        boolean zChanged = composerImpl.changed((Float.floatToRawIntBits(density2) & 4294967295L) | (Float.floatToRawIntBits(f) << 32));
+        Object objRememberedValue = composerImpl.rememberedValue();
+        if (!zChanged) {
+            Composer.Companion.getClass();
+            if (objRememberedValue == Composer.Companion.Empty) {
+                GroupComponent groupComponent = new GroupComponent();
+                createGroupComponent(groupComponent, imageVector.root);
+                Unit unit = Unit.INSTANCE;
+                float fMo58toPx0680j_4 = density.mo58toPx0680j_4(imageVector.defaultWidth);
+                float fMo58toPx0680j_42 = density.mo58toPx0680j_4(imageVector.defaultHeight);
+                long jFloatToRawIntBits = (Float.floatToRawIntBits(fMo58toPx0680j_4) << 32) | (Float.floatToRawIntBits(fMo58toPx0680j_42) & 4294967295L);
+                Size.Companion companion = Size.Companion;
+                long jM570obtainViewportSizePq9zytI = m570obtainViewportSizePq9zytI(imageVector.viewportWidth, imageVector.viewportHeight, jFloatToRawIntBits);
+                VectorPainter vectorPainter = new VectorPainter(groupComponent);
+                long j = imageVector.tintColor;
+                if (j != 16) {
+                    ColorFilter.Companion.getClass();
+                    blendModeColorFilter = new BlendModeColorFilter(j, imageVector.tintBlendMode, (DefaultConstructorMarker) null);
+                } else {
+                    blendModeColorFilter = null;
+                }
+                m569configureVectorPainterT4PVSW8(vectorPainter, jFloatToRawIntBits, jM570obtainViewportSizePq9zytI, imageVector.name, blendModeColorFilter, imageVector.autoMirror);
+                composerImpl.updateRememberedValue(vectorPainter);
+                objRememberedValue = vectorPainter;
+            }
+        }
+        VectorPainter vectorPainter2 = (VectorPainter) objRememberedValue;
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventEnd();
+        }
+        return vectorPainter2;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x005f, code lost:
-    
-        if (r9 == androidx.compose.runtime.Composer.Companion.Empty) goto L9;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0061  */
     /* renamed from: rememberVectorPainter-vIP8VLU, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final androidx.compose.ui.graphics.vector.VectorPainter m569rememberVectorPaintervIP8VLU(float r19, float r20, float r21, float r22, java.lang.String r23, long r24, int r26, final androidx.compose.runtime.internal.ComposableLambdaImpl r27, androidx.compose.runtime.Composer r28) {
-        /*
-            Method dump skipped, instructions count: 283
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.vector.VectorPainterKt.m569rememberVectorPaintervIP8VLU(float, float, float, float, java.lang.String, long, int, androidx.compose.runtime.internal.ComposableLambdaImpl, androidx.compose.runtime.Composer):androidx.compose.ui.graphics.vector.VectorPainter");
+    public static final VectorPainter m571rememberVectorPaintervIP8VLU(float f, float f2, float f3, float f4, String str, long j, int i, final ComposableLambdaImpl composableLambdaImpl, Composer composer) {
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventStart("androidx.compose.ui.graphics.vector.rememberVectorPainter (VectorPainter.kt:129)");
+        }
+        ComposerImpl composerImpl = (ComposerImpl) composer;
+        Density density = (Density) composerImpl.consume(CompositionLocalsKt.LocalDensity);
+        float fMo58toPx0680j_4 = density.mo58toPx0680j_4(f);
+        float fMo58toPx0680j_42 = density.mo58toPx0680j_4(f2);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(fMo58toPx0680j_4) << 32) | (Float.floatToRawIntBits(fMo58toPx0680j_42) & 4294967295L);
+        Size.Companion companion = Size.Companion;
+        final long jM570obtainViewportSizePq9zytI = m570obtainViewportSizePq9zytI(f3, f4, jFloatToRawIntBits);
+        boolean zChanged = composerImpl.changed(j) | composerImpl.changed(i);
+        Object objRememberedValue = composerImpl.rememberedValue();
+        Composer.Companion companion2 = Composer.Companion;
+        if (!zChanged) {
+            companion2.getClass();
+            if (objRememberedValue == Composer.Companion.Empty) {
+                if (j != 16) {
+                    ColorFilter.Companion.getClass();
+                    objRememberedValue = new BlendModeColorFilter(j, i, (DefaultConstructorMarker) null);
+                } else {
+                    objRememberedValue = null;
+                }
+                composerImpl.updateRememberedValue(objRememberedValue);
+            }
+        }
+        ColorFilter colorFilter = (ColorFilter) objRememberedValue;
+        Object objM = BasicTextKt$$ExternalSyntheticOutline0.m(composerImpl, -1837507429, companion2);
+        Object obj = Composer.Companion.Empty;
+        if (objM == obj) {
+            objM = new VectorPainter(null, 1, null);
+            composerImpl.updateRememberedValue(objM);
+        }
+        VectorPainter vectorPainter = (VectorPainter) objM;
+        m569configureVectorPainterT4PVSW8(vectorPainter, jFloatToRawIntBits, jM570obtainViewportSizePq9zytI, str, colorFilter, true);
+        ComposerImpl.CompositionContextImpl compositionContextImplRememberCompositionContext = ComposablesKt.rememberCompositionContext(composerImpl);
+        boolean zChanged2 = composerImpl.changed(f3) | composerImpl.changed(f4);
+        Object objRememberedValue2 = composerImpl.rememberedValue();
+        Object obj2 = objRememberedValue2;
+        if (zChanged2 || objRememberedValue2 == obj) {
+            Composition compositionImpl = vectorPainter.composition;
+            if (compositionImpl == null || compositionImpl.isDisposed()) {
+                VectorApplier vectorApplier = new VectorApplier(vectorPainter.vector.root);
+                Object obj3 = CompositionKt.PendingApplyNoModifications;
+                compositionImpl = new CompositionImpl(compositionContextImplRememberCompositionContext, vectorApplier, null, 4, null);
+            }
+            Composition composition = compositionImpl;
+            composition.setContent(new ComposableLambdaImpl(2008312779, true, new Function2() { // from class: androidx.compose.ui.graphics.vector.VectorPainterKt$rememberVectorPainter$2$composition$1$1
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                {
+                    super(2);
+                }
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj4, Object obj5) {
+                    Composer composer2 = (Composer) obj4;
+                    int iIntValue = ((Number) obj5).intValue();
+                    ComposerImpl composerImpl2 = (ComposerImpl) composer2;
+                    if (composerImpl2.shouldExecute(iIntValue & 1, (iIntValue & 3) != 2)) {
+                        if (ComposerKt.isTraceInProgress()) {
+                            ComposerKt.traceEventStart("androidx.compose.ui.graphics.vector.rememberVectorPainter.<anonymous>.<anonymous>.<anonymous> (VectorPainter.kt:154)");
+                        }
+                        composableLambdaImpl.invoke(Float.valueOf(Float.intBitsToFloat((int) (jM570obtainViewportSizePq9zytI >> 32))), Float.valueOf(Float.intBitsToFloat((int) (jM570obtainViewportSizePq9zytI & 4294967295L))), composerImpl2, 0);
+                        if (ComposerKt.isTraceInProgress()) {
+                            ComposerKt.traceEventEnd();
+                        }
+                    } else {
+                        composerImpl2.skipToGroupEnd();
+                    }
+                    return Unit.INSTANCE;
+                }
+            }));
+            composerImpl.updateRememberedValue(composition);
+            obj2 = composition;
+        }
+        final Composition composition2 = (Composition) obj2;
+        vectorPainter.composition = composition2;
+        boolean zChangedInstance = composerImpl.changedInstance(composition2);
+        Object objRememberedValue3 = composerImpl.rememberedValue();
+        if (zChangedInstance || objRememberedValue3 == obj) {
+            objRememberedValue3 = new Function1() { // from class: androidx.compose.ui.graphics.vector.VectorPainterKt$rememberVectorPainter$2$1$1
+                {
+                    super(1);
+                }
+
+                @Override // kotlin.jvm.functions.Function1
+                /* renamed from: invoke */
+                public final Object mo781invoke(Object obj4) {
+                    final Composition composition3 = composition2;
+                    return new DisposableEffectResult() { // from class: androidx.compose.ui.graphics.vector.VectorPainterKt$rememberVectorPainter$2$1$1$invoke$$inlined$onDispose$1
+                        @Override // androidx.compose.runtime.DisposableEffectResult
+                        public final void dispose() {
+                            composition3.dispose();
+                        }
+                    };
+                }
+            };
+            composerImpl.updateRememberedValue(objRememberedValue3);
+        }
+        EffectsKt.DisposableEffect(vectorPainter, (Function1) objRememberedValue3, composerImpl);
+        composerImpl.end(false);
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventEnd();
+        }
+        return vectorPainter;
     }
 }

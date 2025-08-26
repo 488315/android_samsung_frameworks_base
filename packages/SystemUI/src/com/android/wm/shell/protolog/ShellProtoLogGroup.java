@@ -3,7 +3,6 @@ package com.android.wm.shell.protolog;
 import com.android.internal.protolog.common.IProtoLogGroup;
 import java.util.UUID;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public enum ShellProtoLogGroup implements IProtoLogGroup {
     WM_SHELL(true, true, true, "WindowManagerShell"),
@@ -32,7 +31,6 @@ public enum ShellProtoLogGroup implements IProtoLogGroup {
     private volatile boolean mLogToProto;
     private final String mTag;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Consts {
         public static final int START_ID = (int) (UUID.nameUUIDFromBytes(ShellProtoLogGroup.class.getName().getBytes()).getMostSignificantBits() % 2147483647L);
 

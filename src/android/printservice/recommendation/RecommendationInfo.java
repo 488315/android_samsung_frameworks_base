@@ -49,9 +49,9 @@ public final class RecommendationInfo implements Parcelable {
     }
 
     private static ArrayList<InetAddress> readDiscoveredPrinters(Parcel parcel) {
-        int readInt = parcel.readInt();
-        ArrayList<InetAddress> arrayList = new ArrayList<>(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        ArrayList<InetAddress> arrayList = new ArrayList<>(i);
+        for (int i2 = 0; i2 < i; i2++) {
             try {
                 arrayList.add(InetAddress.getByAddress(parcel.readBlob()));
             } catch (UnknownHostException e) {

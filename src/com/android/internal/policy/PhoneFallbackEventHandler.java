@@ -35,6 +35,7 @@ import com.samsung.android.core.CoreSaConstant;
 import com.samsung.android.core.CoreSaLogger;
 import com.samsung.android.rune.InputRune;
 import com.samsung.android.view.SemWindowManager;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -98,7 +99,7 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    boolean onKeyDown(int i, KeyEvent keyEvent) {
+    boolean onKeyDown(int i, KeyEvent keyEvent) throws IOException {
         KeyEvent.DispatcherState keyDispatcherState = this.mView.getKeyDispatcherState();
         if (i != 24 && i != 25) {
             if (i != 126 && i != 127) {
@@ -178,11 +179,11 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                         break;
                     case 1008:
                         if (keyDispatcherState != null && keyEvent.getRepeatCount() <= 0 && !getKeyguardManager().isKeyguardLocked()) {
-                            Intent makeMainSelectorActivity = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_EMAIL);
-                            makeMainSelectorActivity.addFlags(268435456);
-                            makeMainSelectorActivity.addFlags(8388608);
+                            Intent intentMakeMainSelectorActivity = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_EMAIL);
+                            intentMakeMainSelectorActivity.addFlags(268435456);
+                            intentMakeMainSelectorActivity.addFlags(8388608);
                             try {
-                                this.mContext.startActivity(makeMainSelectorActivity);
+                                this.mContext.startActivity(intentMakeMainSelectorActivity);
                                 break;
                             } catch (ActivityNotFoundException e2) {
                                 Log.w(TAG, "No activity to launch email", e2);
@@ -209,13 +210,13 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                     case 1079:
                         if ((InputRune.PWM_ACTIVE_OR_XCOVER_KEY || InputRune.PWM_XCOVER_AND_TOP_KEY) && keyDispatcherState != null && !isFactoryMode() && isUserSetupComplete()) {
                             int repeatCount = keyEvent.getRepeatCount();
-                            boolean isLongPress = keyEvent.isLongPress();
-                            boolean isTracking = keyDispatcherState.isTracking(keyEvent);
+                            boolean zIsLongPress = keyEvent.isLongPress();
+                            boolean zIsTracking = keyDispatcherState.isTracking(keyEvent);
                             if (InputRune.SAFE_DEBUG) {
-                                Log.d(TAG, "onKeyDown, keycode=" + i + " repeatCount=" + repeatCount + " isLongPress=" + isLongPress + " isTracking=" + isTracking);
+                                Log.d(TAG, "onKeyDown, keycode=" + i + " repeatCount=" + repeatCount + " isLongPress=" + zIsLongPress + " isTracking=" + zIsTracking);
                             }
                             if (repeatCount != 0) {
-                                if (isLongPress && isTracking) {
+                                if (zIsLongPress && zIsTracking) {
                                     keyDispatcherState.performedLongPress(keyEvent);
                                     this.mView.performHapticFeedback(0);
                                     launchUserDefinedApp(1, i);
@@ -278,7 +279,7 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
         return getKeyguardManager().inKeyguardRestrictedInputMode() || dispatcherState == null;
     }
 
-    boolean onKeyUp(int i, KeyEvent keyEvent) {
+    boolean onKeyUp(int i, KeyEvent keyEvent) throws IOException {
         KeyEvent.DispatcherState keyDispatcherState = this.mView.getKeyDispatcherState();
         if (keyDispatcherState != null) {
             keyDispatcherState.handleUpEvent(keyEvent);
@@ -452,32 +453,32 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
         }
     }
 
-    private boolean launchUserDefinedApp(int i, int i2) {
-        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo;
+    private boolean launchUserDefinedApp(int i, int i2) throws IOException {
+        SemWindowManager.KeyCustomizationInfo lastKeyCustomizationInfo;
         Log.d(TAG, "xcover key press type=" + i);
         try {
             IWindowManager windowManagerService = WindowManagerGlobal.getWindowManagerService();
             if (i == 0) {
-                keyCustomizationInfo = windowManagerService.getLastKeyCustomizationInfo(3, i2);
+                lastKeyCustomizationInfo = windowManagerService.getLastKeyCustomizationInfo(3, i2);
             } else {
                 if (i != 1) {
                     return false;
                 }
-                keyCustomizationInfo = windowManagerService.getLastKeyCustomizationInfo(4, i2);
+                lastKeyCustomizationInfo = windowManagerService.getLastKeyCustomizationInfo(4, i2);
             }
         } catch (RemoteException e) {
             Log.d(TAG, "Can not read keyCustomizeEvent" + e);
-            keyCustomizationInfo = null;
+            lastKeyCustomizationInfo = null;
         }
-        if (keyCustomizationInfo == null || keyCustomizationInfo.intent == null) {
+        if (lastKeyCustomizationInfo == null || lastKeyCustomizationInfo.intent == null) {
             Log.d(TAG, "xcover/top key info is empty");
             return false;
         }
-        if (keyCustomizationInfo.action != 1) {
+        if (lastKeyCustomizationInfo.action != 1) {
             Log.d(TAG, "xcover/top key action of info is wrong");
             return false;
         }
-        ComponentName component = keyCustomizationInfo.intent.getComponent();
+        ComponentName component = lastKeyCustomizationInfo.intent.getComponent();
         if (component == null) {
             Log.d(TAG, "xcover/top key componentName is empty");
             return false;
@@ -528,8 +529,8 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
 
     private ApplicationInfo getApplicationInfo(Intent intent, String str) {
         PackageManager packageManager = this.mContext.getPackageManager();
-        ResolveInfo resolveActivity = packageManager.resolveActivity(intent, 0);
-        if (resolveActivity != null && resolveActivity.activityInfo != null) {
+        ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(intent, 0);
+        if (resolveInfoResolveActivity != null && resolveInfoResolveActivity.activityInfo != null) {
             return null;
         }
         Log.d(TAG, "Can not start activity because app is not added in reserveBatteryMode");
@@ -541,7 +542,7 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
         }
     }
 
-    private void startActivityForXCoverTopKey(Intent intent, int i) {
+    private void startActivityForXCoverTopKey(Intent intent, int i) throws IOException {
         Log.d(TAG, "startActivityForXCoverTopKey keyCode=" + i);
         if (getKeyguardManager().isKeyguardLocked()) {
             if (isXCoverKeyOnLockScreen(i)) {
@@ -583,9 +584,9 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
         if (TextUtils.isEmpty(eventId)) {
             return;
         }
-        HashMap hashMap = new HashMap();
-        hashMap.put(CoreSaLogger.DETAIL_KEY, str);
-        CoreSaLogger.logForBasic(eventId, (HashMap<String, String>) hashMap);
+        HashMap map = new HashMap();
+        map.put(CoreSaLogger.DETAIL_KEY, str);
+        CoreSaLogger.logForBasic(eventId, (HashMap<String, String>) map);
     }
 
     private String getEventId(int i, int i2) {

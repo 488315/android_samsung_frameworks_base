@@ -12,7 +12,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.statusbar.policy.BluetoothController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenBleController implements SubscreenQSControllerContract$Presenter {
     public static Context mContext;
@@ -40,7 +39,6 @@ public class SubscreenBleController implements SubscreenQSControllerContract$Pre
     };
     public final BluetoothController mBluetoothController = (BluetoothController) Dependency.sDependency.getDependencyInner(BluetoothController.class);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TileReceiver extends BroadcastReceiver {
         public TileReceiver() {
         }
@@ -72,21 +70,21 @@ public class SubscreenBleController implements SubscreenQSControllerContract$Pre
     }
 
     public final boolean isEnabled() {
-        boolean isBluetoothEnabled = this.mBluetoothController.isBluetoothEnabled();
-        EmergencyButtonController$$ExternalSyntheticOutline0.m("SBC isEnabled enabled: ", "SubscreenBleController", isBluetoothEnabled);
-        return isBluetoothEnabled;
+        boolean zIsBluetoothEnabled = this.mBluetoothController.isBluetoothEnabled();
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("SBC isEnabled enabled: ", "SubscreenBleController", zIsBluetoothEnabled);
+        return zIsBluetoothEnabled;
     }
 
     @Override // com.android.systemui.qp.SubscreenQSControllerContract$Presenter
     public final void registerReceiver(boolean z) {
-        IntentFilter m = AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0.m("BLUETOOTH_STATE_CHANGE");
+        IntentFilter intentFilterM = AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0.m("BLUETOOTH_STATE_CHANGE");
         if (z) {
             this.mBleViewReceiver = new TileReceiver();
         } else {
             this.mBleReceiver = new TileReceiver();
         }
         Log.d("SubscreenBleController", "SBC registerBleReceiver mBleViewReceiver: " + this.mBleViewReceiver + "mBleReceiver: " + this.mBleReceiver);
-        ((BroadcastDispatcher) Dependency.sDependency.getDependencyInner(BroadcastDispatcher.class)).registerReceiver(z ? this.mBleViewReceiver : this.mBleReceiver, m, null, UserHandle.ALL, 2, "com.samsung.systemui.permission.BLUETOOTH_STATE_CHANGE");
+        ((BroadcastDispatcher) Dependency.sDependency.getDependencyInner(BroadcastDispatcher.class)).registerReceiver(z ? this.mBleViewReceiver : this.mBleReceiver, intentFilterM, null, UserHandle.ALL, 2, "com.samsung.systemui.permission.BLUETOOTH_STATE_CHANGE");
         this.mBluetoothController.addCallback(this.mCallback);
     }
 

@@ -40,9 +40,9 @@ public interface ISatelliteGateway extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISatelliteGateway.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISatelliteGateway)) {
-                return (ISatelliteGateway) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISatelliteGateway.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISatelliteGateway)) {
+                return (ISatelliteGateway) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

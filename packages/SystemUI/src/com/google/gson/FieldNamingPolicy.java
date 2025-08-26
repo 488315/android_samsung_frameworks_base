@@ -3,7 +3,6 @@ package com.google.gson;
 import java.lang.reflect.Field;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public enum FieldNamingPolicy implements FieldNamingStrategy {
     IDENTITY { // from class: com.google.gson.FieldNamingPolicy.1
@@ -53,11 +52,11 @@ public enum FieldNamingPolicy implements FieldNamingStrategy {
         StringBuilder sb = new StringBuilder();
         int length = str.length();
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (Character.isUpperCase(charAt) && sb.length() != 0) {
+            char cCharAt = str.charAt(i);
+            if (Character.isUpperCase(cCharAt) && sb.length() != 0) {
                 sb.append(c);
             }
-            sb.append(charAt);
+            sb.append(cCharAt);
         }
         return sb.toString();
     }
@@ -69,11 +68,11 @@ public enum FieldNamingPolicy implements FieldNamingStrategy {
             if (i >= length) {
                 break;
             }
-            char charAt = str.charAt(i);
-            if (!Character.isLetter(charAt)) {
+            char cCharAt = str.charAt(i);
+            if (!Character.isLetter(cCharAt)) {
                 i++;
-            } else if (!Character.isUpperCase(charAt)) {
-                char upperCase = Character.toUpperCase(charAt);
+            } else if (!Character.isUpperCase(cCharAt)) {
+                char upperCase = Character.toUpperCase(cCharAt);
                 if (i == 0) {
                     return upperCase + str.substring(1);
                 }

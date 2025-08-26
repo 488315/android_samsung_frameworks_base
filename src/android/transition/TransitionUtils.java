@@ -62,18 +62,18 @@ public class TransitionUtils {
         viewGroup.transformMatrixToLocal(matrix);
         RectF rectF = new RectF(0.0f, 0.0f, view.getWidth(), view.getHeight());
         matrix.mapRect(rectF);
-        int round = Math.round(rectF.left);
-        int round2 = Math.round(rectF.top);
-        int round3 = Math.round(rectF.right);
-        int round4 = Math.round(rectF.bottom);
+        int iRound = Math.round(rectF.left);
+        int iRound2 = Math.round(rectF.top);
+        int iRound3 = Math.round(rectF.right);
+        int iRound4 = Math.round(rectF.bottom);
         ImageView imageView = new ImageView(view.getContext());
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Bitmap createViewBitmap = createViewBitmap(view, matrix, rectF, viewGroup);
-        if (createViewBitmap != null) {
-            imageView.setImageBitmap(createViewBitmap);
+        Bitmap bitmapCreateViewBitmap = createViewBitmap(view, matrix, rectF, viewGroup);
+        if (bitmapCreateViewBitmap != null) {
+            imageView.setImageBitmap(bitmapCreateViewBitmap);
         }
-        imageView.measure(View.MeasureSpec.makeMeasureSpec(round3 - round, 1073741824), View.MeasureSpec.makeMeasureSpec(round4 - round2, 1073741824));
-        imageView.layout(round, round2, round3, round4);
+        imageView.measure(View.MeasureSpec.makeMeasureSpec(iRound3 - iRound, 1073741824), View.MeasureSpec.makeMeasureSpec(iRound4 - iRound2, 1073741824));
+        imageView.layout(iRound, iRound2, iRound3, iRound4);
         return imageView;
     }
 
@@ -83,60 +83,60 @@ public class TransitionUtils {
         if (intrinsicWidth <= 0 || intrinsicHeight <= 0) {
             return null;
         }
-        float min = Math.min(1.0f, MAX_IMAGE_SIZE / (intrinsicWidth * intrinsicHeight));
-        if ((drawable instanceof BitmapDrawable) && min == 1.0f) {
+        float fMin = Math.min(1.0f, MAX_IMAGE_SIZE / (intrinsicWidth * intrinsicHeight));
+        if ((drawable instanceof BitmapDrawable) && fMin == 1.0f) {
             return ((BitmapDrawable) drawable).getBitmap();
         }
-        int i = (int) (intrinsicWidth * min);
-        int i2 = (int) (intrinsicHeight * min);
+        int i = (int) (intrinsicWidth * fMin);
+        int i2 = (int) (intrinsicHeight * fMin);
         Picture picture = new Picture();
-        Canvas beginRecording = picture.beginRecording(intrinsicWidth, intrinsicHeight);
+        Canvas canvasBeginRecording = picture.beginRecording(intrinsicWidth, intrinsicHeight);
         Rect bounds = drawable.getBounds();
         int i3 = bounds.left;
         int i4 = bounds.top;
         int i5 = bounds.right;
         int i6 = bounds.bottom;
         drawable.setBounds(0, 0, i, i2);
-        drawable.draw(beginRecording);
+        drawable.draw(canvasBeginRecording);
         drawable.setBounds(i3, i4, i5, i6);
         picture.endRecording();
         return Bitmap.createBitmap(picture);
     }
 
     public static Bitmap createViewBitmap(View view, Matrix matrix, RectF rectF, ViewGroup viewGroup) {
-        int i;
+        int iIndexOfChild;
         ViewGroup viewGroup2;
-        boolean isAttachedToWindow = view.isAttachedToWindow();
-        Bitmap bitmap = null;
-        if (isAttachedToWindow) {
-            i = 0;
+        boolean zIsAttachedToWindow = view.isAttachedToWindow();
+        Bitmap bitmapCreateBitmap = null;
+        if (zIsAttachedToWindow) {
+            iIndexOfChild = 0;
             viewGroup2 = null;
         } else {
             if (viewGroup == null || !viewGroup.isAttachedToWindow()) {
                 return null;
             }
             viewGroup2 = (ViewGroup) view.getParent();
-            i = viewGroup2.indexOfChild(view);
+            iIndexOfChild = viewGroup2.indexOfChild(view);
             viewGroup.getOverlay().add(view);
         }
-        int round = Math.round(rectF.width());
-        int round2 = Math.round(rectF.height());
-        if (round > 0 && round2 > 0) {
-            float min = Math.min(1.0f, MAX_IMAGE_SIZE / (round * round2));
+        int iRound = Math.round(rectF.width());
+        int iRound2 = Math.round(rectF.height());
+        if (iRound > 0 && iRound2 > 0) {
+            float fMin = Math.min(1.0f, MAX_IMAGE_SIZE / (iRound * iRound2));
             matrix.postTranslate(-rectF.left, -rectF.top);
-            matrix.postScale(min, min);
+            matrix.postScale(fMin, fMin);
             Picture picture = new Picture();
-            Canvas beginRecording = picture.beginRecording((int) (round * min), (int) (round2 * min));
-            beginRecording.concat(matrix);
-            view.draw(beginRecording);
+            Canvas canvasBeginRecording = picture.beginRecording((int) (iRound * fMin), (int) (iRound2 * fMin));
+            canvasBeginRecording.concat(matrix);
+            view.draw(canvasBeginRecording);
             picture.endRecording();
-            bitmap = Bitmap.createBitmap(picture);
+            bitmapCreateBitmap = Bitmap.createBitmap(picture);
         }
-        if (!isAttachedToWindow) {
+        if (!zIsAttachedToWindow) {
             viewGroup.getOverlay().remove(view);
-            viewGroup2.addView(view, i);
+            viewGroup2.addView(view, iIndexOfChild);
         }
-        return bitmap;
+        return bitmapCreateBitmap;
     }
 
     public static class MatrixEvaluator implements TypeEvaluator<Matrix> {

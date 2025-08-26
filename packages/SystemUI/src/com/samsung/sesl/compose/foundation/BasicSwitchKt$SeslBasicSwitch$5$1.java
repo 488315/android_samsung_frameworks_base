@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class BasicSwitchKt$SeslBasicSwitch$5$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ State<Function1> $animateFraction$delegate;
@@ -54,11 +53,11 @@ final class BasicSwitchKt$SeslBasicSwitch$5$1 extends SuspendLambda implements F
         if (((Boolean) this.$prevChecked$delegate.getValue()) != null) {
             HapticFeedback hapticFeedback = this.$hapticFeedback;
             SeslHapticFeedbackType.INSTANCE.getClass();
-            hapticFeedback.mo570performHapticFeedbackCdsT49E(SeslHapticFeedbackType.EffectSwitch);
+            hapticFeedback.mo572performHapticFeedbackCdsT49E(SeslHapticFeedbackType.EffectSwitch);
         }
         this.$prevChecked$delegate.setValue(Boolean.valueOf(this.$checked));
         this.$needUpdateFraction$delegate.setValue(Boolean.FALSE);
-        ((Function1) this.$animateFraction$delegate.getValue()).mo779invoke(new Float(this.$checked ? 1.0f : 0.0f));
+        ((Function1) this.$animateFraction$delegate.getValue()).mo781invoke(new Float(this.$checked ? 1.0f : 0.0f));
         return Unit.INSTANCE;
     }
 }

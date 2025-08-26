@@ -8,7 +8,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class AgeGroup implements Parcelable {
     private static final /* synthetic */ EnumEntries $ENTRIES;
@@ -22,7 +21,6 @@ public final class AgeGroup implements Parcelable {
     public static final AgeGroup ADULT_LEVEL_2 = new AgeGroup("ADULT_LEVEL_2", 3, 4);
     public static final AgeGroup ADULT_LEVEL_3 = new AgeGroup("ADULT_LEVEL_3", 4, 5);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -37,9 +35,9 @@ public final class AgeGroup implements Parcelable {
     }
 
     static {
-        AgeGroup[] $values = $values();
-        $VALUES = $values;
-        $ENTRIES = EnumEntriesKt.enumEntries($values);
+        AgeGroup[] ageGroupArr$values = $values();
+        $VALUES = ageGroupArr$values;
+        $ENTRIES = EnumEntriesKt.enumEntries(ageGroupArr$values);
         Companion = new Companion(null);
         CREATOR = new Parcelable.Creator() { // from class: com.samsung.android.sdk.moneta.basicdomain.entity.AgeGroup.Creator
             @Override // android.os.Parcelable.Creator

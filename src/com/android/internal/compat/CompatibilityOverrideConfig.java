@@ -33,9 +33,9 @@ public final class CompatibilityOverrideConfig implements Parcelable {
     }
 
     private CompatibilityOverrideConfig(Parcel parcel) {
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.overrides = new HashMap();
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             this.overrides.put(Long.valueOf(parcel.readLong()), PackageOverride.createFromParcel(parcel));
         }
     }

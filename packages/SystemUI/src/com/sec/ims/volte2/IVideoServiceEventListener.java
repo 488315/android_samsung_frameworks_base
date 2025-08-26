@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import com.sec.ims.volte2.IImsCallSession;
 import com.sec.ims.volte2.data.CallProfile;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IVideoServiceEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.volte2.IVideoServiceEventListener";
@@ -40,7 +39,6 @@ public interface IVideoServiceEventListener extends IInterface {
 
     void setVideoPause(int i, boolean z) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IVideoServiceEventListener {
         static final int TRANSACTION_changeCameraCapabilities = 10;
         static final int TRANSACTION_getSession = 1;
@@ -56,7 +54,6 @@ public interface IVideoServiceEventListener extends IInterface {
         static final int TRANSACTION_receiveSessionModifyResponse = 6;
         static final int TRANSACTION_setVideoPause = 9;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IVideoServiceEventListener {
             private IBinder mRemote;
 
@@ -71,18 +68,18 @@ public interface IVideoServiceEventListener extends IInterface {
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void changeCameraCapabilities(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -92,194 +89,194 @@ public interface IVideoServiceEventListener extends IInterface {
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public IImsCallSession getSession() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsCallSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsCallSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void onCameraState(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void onChangeCallDataUsage(int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void onChangePeerDimension(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void onEmojiState(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void onRecordState(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void onVideoOrientChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void onVideoQualityChanged(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void onVideoState(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void receiveSessionModifyRequest(int i, CallProfile callProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(callProfile, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(callProfile, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void receiveSessionModifyResponse(int i, int i2, CallProfile callProfile, CallProfile callProfile2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(callProfile, 0);
-                    obtain.writeTypedObject(callProfile2, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(callProfile, 0);
+                    parcelObtain.writeTypedObject(callProfile2, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVideoServiceEventListener
             public void setVideoPause(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -292,8 +289,8 @@ public interface IVideoServiceEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVideoServiceEventListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IVideoServiceEventListener)) ? new Proxy(iBinder) : (IVideoServiceEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVideoServiceEventListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IVideoServiceEventListener)) ? new Proxy(iBinder) : (IVideoServiceEventListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -312,91 +309,91 @@ public interface IVideoServiceEventListener extends IInterface {
                     parcel2.writeStrongInterface(session);
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCameraState(readInt, readInt2);
+                    onCameraState(i3, i4);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onVideoState(readInt3, readInt4);
+                    onVideoState(i5, i6);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onVideoQualityChanged(readInt5, readInt6);
+                    onVideoQualityChanged(i7, i8);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     CallProfile callProfile = (CallProfile) parcel.readTypedObject(CallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    receiveSessionModifyRequest(readInt7, callProfile);
+                    receiveSessionModifyRequest(i9, callProfile);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     Parcelable.Creator<CallProfile> creator = CallProfile.CREATOR;
                     CallProfile callProfile2 = (CallProfile) parcel.readTypedObject(creator);
                     CallProfile callProfile3 = (CallProfile) parcel.readTypedObject(creator);
                     parcel.enforceNoDataAvail();
-                    receiveSessionModifyResponse(readInt8, readInt9, callProfile2, callProfile3);
+                    receiveSessionModifyResponse(i10, i11, callProfile2, callProfile3);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onVideoOrientChanged(readInt10);
+                    onVideoOrientChanged(i12);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onChangePeerDimension(readInt11, readInt12, readInt13);
+                    onChangePeerDimension(i13, i14, i15);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    int readInt14 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i16 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setVideoPause(readInt14, readBoolean);
+                    setVideoPause(i16, z);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    changeCameraCapabilities(readInt15, readInt16, readInt17);
+                    changeCameraCapabilities(i17, i18, i19);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRecordState(readInt18, readInt19);
+                    onRecordState(i20, i21);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt20 = parcel.readInt();
-                    int readInt21 = parcel.readInt();
+                    int i22 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEmojiState(readInt20, readInt21);
+                    onEmojiState(i22, i23);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    int readInt22 = parcel.readInt();
-                    long readLong = parcel.readLong();
+                    int i24 = parcel.readInt();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onChangeCallDataUsage(readInt22, readLong);
+                    onChangeCallDataUsage(i24, j);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -410,7 +407,6 @@ public interface IVideoServiceEventListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IVideoServiceEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DerivedSnapshotState<T> extends StateObjectImpl implements DerivedState<T> {
     public final Function0 calculation;
@@ -28,7 +27,7 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
         this.policy = snapshotMutationPolicy;
     }
 
-    public final ResultRecord currentRecord(ResultRecord resultRecord, Snapshot snapshot, boolean z, Function0 function0) {
+    public final ResultRecord currentRecord(ResultRecord resultRecord, Snapshot snapshot, boolean z, Function0 function0) throws Throwable {
         SnapshotMutationPolicy snapshotMutationPolicy;
         boolean z2;
         int i;
@@ -37,9 +36,9 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
         int i2 = 0;
         if (resultRecord2.isValid(this, snapshot)) {
             if (z) {
-                MutableVector derivedStateObservers = SnapshotStateKt.derivedStateObservers();
-                Object[] objArr = derivedStateObservers.content;
-                int i3 = derivedStateObservers.size;
+                MutableVector mutableVectorDerivedStateObservers = SnapshotStateKt.derivedStateObservers();
+                Object[] objArr = mutableVectorDerivedStateObservers.content;
+                int i3 = mutableVectorDerivedStateObservers.size;
                 for (int i4 = 0; i4 < i3; i4++) {
                     ((DerivedStateObserver) objArr[i4]).start();
                 }
@@ -74,12 +73,12 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
                                             intRef.element = i5 + iArr[i10];
                                             Function1 readObserver = snapshot.getReadObserver();
                                             if (readObserver != null) {
-                                                readObserver.mo779invoke(stateObject);
+                                                readObserver.mo781invoke(stateObject);
                                             }
                                         } catch (Throwable th) {
                                             th = th;
-                                            Object[] objArr3 = derivedStateObservers.content;
-                                            int i11 = derivedStateObservers.size;
+                                            Object[] objArr3 = mutableVectorDerivedStateObservers.content;
+                                            int i11 = mutableVectorDerivedStateObservers.size;
                                             for (int i12 = 0; i12 < i11; i12++) {
                                                 ((DerivedStateObserver) objArr3[i12]).done();
                                             }
@@ -108,8 +107,8 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
                     }
                     intRef.element = i5;
                     Unit unit = Unit.INSTANCE;
-                    Object[] objArr4 = derivedStateObservers.content;
-                    int i13 = derivedStateObservers.size;
+                    Object[] objArr4 = mutableVectorDerivedStateObservers.content;
+                    int i13 = mutableVectorDerivedStateObservers.size;
                     for (int i14 = 0; i14 < i13; i14++) {
                         ((DerivedStateObserver) objArr4[i14]).done();
                     }
@@ -127,9 +126,9 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
             snapshotThreadLocal2.set(intRef2);
         }
         final int i15 = intRef2.element;
-        MutableVector derivedStateObservers2 = SnapshotStateKt.derivedStateObservers();
-        Object[] objArr5 = derivedStateObservers2.content;
-        int i16 = derivedStateObservers2.size;
+        MutableVector mutableVectorDerivedStateObservers2 = SnapshotStateKt.derivedStateObservers();
+        Object[] objArr5 = mutableVectorDerivedStateObservers2.content;
+        int i16 = mutableVectorDerivedStateObservers2.size;
         for (int i17 = 0; i17 < i16; i17++) {
             ((DerivedStateObserver) objArr5[i17]).start();
         }
@@ -147,7 +146,7 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     if (obj == this.this$0) {
                         throw new IllegalStateException("A derived state calculation cannot read itself");
                     }
@@ -155,17 +154,17 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
                         int i18 = intRef2.element;
                         MutableObjectIntMap mutableObjectIntMap3 = mutableObjectIntMap2;
                         int i19 = i18 - i15;
-                        int findKeyIndex = mutableObjectIntMap3.findKeyIndex(obj);
-                        mutableObjectIntMap3.set(Math.min(i19, findKeyIndex >= 0 ? mutableObjectIntMap3.values[findKeyIndex] : Integer.MAX_VALUE), obj);
+                        int iFindKeyIndex = mutableObjectIntMap3.findKeyIndex(obj);
+                        mutableObjectIntMap3.set(Math.min(i19, iFindKeyIndex >= 0 ? mutableObjectIntMap3.values[iFindKeyIndex] : Integer.MAX_VALUE), obj);
                     }
                     return Unit.INSTANCE;
                 }
             };
             companion.getClass();
-            Object observe = Snapshot.Companion.observe(function1, function0);
+            Object objObserve = Snapshot.Companion.observe(function1, function0);
             intRef2.element = i15;
-            Object[] objArr6 = derivedStateObservers2.content;
-            int i18 = derivedStateObservers2.size;
+            Object[] objArr6 = mutableVectorDerivedStateObservers2.content;
+            int i18 = mutableVectorDerivedStateObservers2.size;
             for (int i19 = 0; i19 < i18; i19++) {
                 ((DerivedStateObserver) objArr6[i19]).done();
             }
@@ -173,24 +172,24 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
             synchronized (obj) {
                 try {
                     Snapshot.Companion.getClass();
-                    Snapshot currentSnapshot = SnapshotKt.currentSnapshot();
+                    Snapshot snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
                     Object obj2 = resultRecord2.result;
                     ResultRecord.Companion.getClass();
-                    if (obj2 == ResultRecord.Unset || (snapshotMutationPolicy = this.policy) == null || !snapshotMutationPolicy.equivalent(observe, resultRecord2.result)) {
+                    if (obj2 == ResultRecord.Unset || (snapshotMutationPolicy = this.policy) == null || !snapshotMutationPolicy.equivalent(objObserve, resultRecord2.result)) {
                         ResultRecord resultRecord3 = this.first;
                         synchronized (obj) {
-                            StateRecord newOverwritableRecordLocked = SnapshotKt.newOverwritableRecordLocked(resultRecord3, this);
-                            newOverwritableRecordLocked.assign(resultRecord3);
-                            newOverwritableRecordLocked.snapshotId = currentSnapshot.getSnapshotId();
-                            resultRecord2 = (ResultRecord) newOverwritableRecordLocked;
+                            StateRecord stateRecordNewOverwritableRecordLocked = SnapshotKt.newOverwritableRecordLocked(resultRecord3, this);
+                            stateRecordNewOverwritableRecordLocked.assign(resultRecord3);
+                            stateRecordNewOverwritableRecordLocked.snapshotId = snapshotCurrentSnapshot.getSnapshotId();
+                            resultRecord2 = (ResultRecord) stateRecordNewOverwritableRecordLocked;
                             resultRecord2.dependencies = mutableObjectIntMap2;
-                            resultRecord2.resultHash = resultRecord2.readableHash(this, currentSnapshot);
-                            resultRecord2.result = observe;
+                            resultRecord2.resultHash = resultRecord2.readableHash(this, snapshotCurrentSnapshot);
+                            resultRecord2.result = objObserve;
                         }
                         return resultRecord2;
                     }
                     resultRecord2.dependencies = mutableObjectIntMap2;
-                    resultRecord2.resultHash = resultRecord2.readableHash(this, currentSnapshot);
+                    resultRecord2.resultHash = resultRecord2.readableHash(this, snapshotCurrentSnapshot);
                 } catch (Throwable th3) {
                     throw th3;
                 }
@@ -201,15 +200,15 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
             }
             SnapshotKt.currentSnapshot().notifyObjectsInitialized$runtime_release();
             synchronized (obj) {
-                Snapshot currentSnapshot2 = SnapshotKt.currentSnapshot();
-                resultRecord2.validSnapshotId = currentSnapshot2.getSnapshotId();
-                resultRecord2.validSnapshotWriteCount = currentSnapshot2.getWriteCount$runtime_release();
+                Snapshot snapshotCurrentSnapshot2 = SnapshotKt.currentSnapshot();
+                resultRecord2.validSnapshotId = snapshotCurrentSnapshot2.getSnapshotId();
+                resultRecord2.validSnapshotWriteCount = snapshotCurrentSnapshot2.getWriteCount$runtime_release();
                 Unit unit2 = Unit.INSTANCE;
                 return resultRecord2;
             }
         } catch (Throwable th4) {
-            Object[] objArr7 = derivedStateObservers2.content;
-            int i20 = derivedStateObservers2.size;
+            Object[] objArr7 = mutableVectorDerivedStateObservers2.content;
+            int i20 = mutableVectorDerivedStateObservers2.size;
             for (int i21 = 0; i21 < i20; i21++) {
                 ((DerivedStateObserver) objArr7[i21]).done();
             }
@@ -220,8 +219,8 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
     @Override // androidx.compose.runtime.DerivedState
     public final ResultRecord getCurrentRecord() {
         Snapshot.Companion.getClass();
-        Snapshot currentSnapshot = SnapshotKt.currentSnapshot();
-        return currentRecord((ResultRecord) SnapshotKt.current(this.first, currentSnapshot), currentSnapshot, false, this.calculation);
+        Snapshot snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+        return currentRecord((ResultRecord) SnapshotKt.current(this.first, snapshotCurrentSnapshot), snapshotCurrentSnapshot, false, this.calculation);
     }
 
     @Override // androidx.compose.runtime.snapshots.StateObject
@@ -239,10 +238,10 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
         Snapshot.Companion.getClass();
         Function1 readObserver = SnapshotKt.currentSnapshot().getReadObserver();
         if (readObserver != null) {
-            readObserver.mo779invoke(this);
+            readObserver.mo781invoke(this);
         }
-        Snapshot currentSnapshot = SnapshotKt.currentSnapshot();
-        return currentRecord((ResultRecord) SnapshotKt.current(this.first, currentSnapshot), currentSnapshot, true, this.calculation).result;
+        Snapshot snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+        return currentRecord((ResultRecord) SnapshotKt.current(this.first, snapshotCurrentSnapshot), snapshotCurrentSnapshot, true, this.calculation).result;
     }
 
     @Override // androidx.compose.runtime.snapshots.StateObject
@@ -260,7 +259,6 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
         return sb.toString();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ResultRecord<T> extends StateRecord {
         public static final Companion Companion = new Companion(null);
         public static final Object Unset = new Object();
@@ -270,7 +268,6 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
         public long validSnapshotId;
         public int validSnapshotWriteCount;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -299,6 +296,10 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
             return new ResultRecord(SnapshotKt.currentSnapshot().getSnapshotId());
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:12:0x001c  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final boolean isValid(DerivedState derivedState, Snapshot snapshot) {
             boolean z;
             boolean z2;
@@ -306,11 +307,8 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
             synchronized (obj) {
                 z = true;
                 if (this.validSnapshotId == snapshot.getSnapshotId()) {
-                    if (this.validSnapshotWriteCount == snapshot.getWriteCount$runtime_release()) {
-                        z2 = false;
-                    }
+                    z2 = this.validSnapshotWriteCount != snapshot.getWriteCount$runtime_release();
                 }
-                z2 = true;
             }
             if (this.result == Unset || (z2 && this.resultHash != readableHash(derivedState, snapshot))) {
                 z = false;
@@ -327,29 +325,29 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        public final int readableHash(DerivedState derivedState, Snapshot snapshot) {
+        public final int readableHash(DerivedState derivedState, Snapshot snapshot) throws Throwable {
             MutableObjectIntMap mutableObjectIntMap;
+            int iIdentityHashCode;
             int i;
             int i2;
             int i3;
             int i4;
             int i5;
-            int i6;
-            StateRecord current;
-            int i7 = 1;
+            StateRecord stateRecordCurrent;
+            int i6 = 1;
             synchronized (SnapshotKt.lock) {
                 mutableObjectIntMap = this.dependencies;
             }
             boolean z = false;
-            int i8 = 7;
+            int i7 = 7;
             if ((mutableObjectIntMap._size != 0) != true) {
                 return 7;
             }
-            MutableVector derivedStateObservers = SnapshotStateKt.derivedStateObservers();
-            Object[] objArr = derivedStateObservers.content;
-            int i9 = derivedStateObservers.size;
-            for (int i10 = 0; i10 < i9; i10++) {
-                ((DerivedStateObserver) objArr[i10]).start();
+            MutableVector mutableVectorDerivedStateObservers = SnapshotStateKt.derivedStateObservers();
+            Object[] objArr = mutableVectorDerivedStateObservers.content;
+            int i8 = mutableVectorDerivedStateObservers.size;
+            for (int i9 = 0; i9 < i8; i9++) {
+                ((DerivedStateObserver) objArr[i9]).start();
             }
             try {
                 Object[] objArr2 = mutableObjectIntMap.keys;
@@ -357,82 +355,82 @@ public final class DerivedSnapshotState<T> extends StateObjectImpl implements De
                 long[] jArr = mutableObjectIntMap.metadata;
                 int length = jArr.length - 2;
                 if (length >= 0) {
-                    int i11 = 0;
-                    i = 7;
+                    int i10 = 0;
+                    iIdentityHashCode = 7;
                     while (true) {
-                        long j = jArr[i11];
-                        if ((((~j) << i8) & j & (-9187201950435737472L)) != -9187201950435737472L) {
-                            int i12 = 8;
-                            int i13 = 8 - ((~(i11 - length)) >>> 31);
-                            int i14 = z ? 1 : 0;
-                            while (i14 < i13) {
+                        long j = jArr[i10];
+                        if ((((~j) << i7) & j & (-9187201950435737472L)) != -9187201950435737472L) {
+                            int i11 = 8;
+                            int i12 = 8 - ((~(i10 - length)) >>> 31);
+                            int i13 = z ? 1 : 0;
+                            while (i13 < i12) {
                                 if ((j & 255) < 128) {
-                                    int i15 = (i11 << 3) + i14;
-                                    i5 = i8;
-                                    i6 = i12;
-                                    StateObject stateObject = (StateObject) objArr2[i15];
-                                    if (iArr[i15] != i7) {
-                                        i4 = i7;
+                                    int i14 = (i10 << 3) + i13;
+                                    i4 = i7;
+                                    i5 = i11;
+                                    StateObject stateObject = (StateObject) objArr2[i14];
+                                    if (iArr[i14] != i6) {
+                                        i3 = i6;
                                     } else {
                                         if (stateObject instanceof DerivedSnapshotState) {
                                             DerivedSnapshotState derivedSnapshotState = (DerivedSnapshotState) stateObject;
-                                            i4 = i7;
+                                            i3 = i6;
                                             try {
-                                                current = derivedSnapshotState.currentRecord((ResultRecord) SnapshotKt.current(derivedSnapshotState.first, snapshot), snapshot, z, derivedSnapshotState.calculation);
+                                                stateRecordCurrent = derivedSnapshotState.currentRecord((ResultRecord) SnapshotKt.current(derivedSnapshotState.first, snapshot), snapshot, z, derivedSnapshotState.calculation);
                                             } catch (Throwable th) {
                                                 th = th;
-                                                Object[] objArr3 = derivedStateObservers.content;
-                                                int i16 = derivedStateObservers.size;
-                                                for (int i17 = 0; i17 < i16; i17++) {
-                                                    ((DerivedStateObserver) objArr3[i17]).done();
+                                                Object[] objArr3 = mutableVectorDerivedStateObservers.content;
+                                                int i15 = mutableVectorDerivedStateObservers.size;
+                                                for (int i16 = 0; i16 < i15; i16++) {
+                                                    ((DerivedStateObserver) objArr3[i16]).done();
                                                 }
                                                 throw th;
                                             }
                                         } else {
-                                            i4 = i7;
-                                            current = SnapshotKt.current(stateObject.getFirstStateRecord(), snapshot);
+                                            i3 = i6;
+                                            stateRecordCurrent = SnapshotKt.current(stateObject.getFirstStateRecord(), snapshot);
                                         }
-                                        i = (((i * 31) + System.identityHashCode(current)) * 31) + Long.hashCode(current.snapshotId);
+                                        iIdentityHashCode = (((iIdentityHashCode * 31) + System.identityHashCode(stateRecordCurrent)) * 31) + Long.hashCode(stateRecordCurrent.snapshotId);
                                     }
                                 } else {
+                                    i3 = i6;
                                     i4 = i7;
-                                    i5 = i8;
-                                    i6 = i12;
+                                    i5 = i11;
                                 }
-                                j >>= i6;
-                                i14++;
-                                i8 = i5;
-                                i12 = i6;
+                                j >>= i5;
+                                i13++;
                                 i7 = i4;
+                                i11 = i5;
+                                i6 = i3;
                                 z = false;
                             }
+                            i = i6;
                             i2 = i7;
-                            i3 = i8;
-                            if (i13 != i12) {
+                            if (i12 != i11) {
                                 break;
                             }
                         } else {
+                            i = i6;
                             i2 = i7;
-                            i3 = i8;
                         }
-                        if (i11 == length) {
-                            i8 = i;
+                        if (i10 == length) {
+                            i7 = iIdentityHashCode;
                             break;
                         }
-                        i11++;
-                        i8 = i3;
+                        i10++;
                         i7 = i2;
+                        i6 = i;
                         z = false;
                     }
                 }
-                i = i8;
+                iIdentityHashCode = i7;
                 Unit unit = Unit.INSTANCE;
-                Object[] objArr4 = derivedStateObservers.content;
-                int i18 = derivedStateObservers.size;
-                for (int i19 = 0; i19 < i18; i19++) {
-                    ((DerivedStateObserver) objArr4[i19]).done();
+                Object[] objArr4 = mutableVectorDerivedStateObservers.content;
+                int i17 = mutableVectorDerivedStateObservers.size;
+                for (int i18 = 0; i18 < i17; i18++) {
+                    ((DerivedStateObserver) objArr4[i18]).done();
                 }
-                return i;
+                return iIdentityHashCode;
             } catch (Throwable th2) {
                 th = th2;
             }

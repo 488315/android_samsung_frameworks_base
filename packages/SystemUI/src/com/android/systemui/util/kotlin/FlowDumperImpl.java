@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class FlowDumperImpl extends SimpleFlowDumper {
     public static final int $stable = 8;
@@ -25,9 +24,9 @@ public abstract class FlowDumperImpl extends SimpleFlowDumper {
         }
         synchronized (this.registered) {
             try {
-                boolean isNotEmpty = isNotEmpty();
-                if (this.registered.getAndSet(isNotEmpty) != isNotEmpty) {
-                    if (isNotEmpty) {
+                boolean zIsNotEmpty = isNotEmpty();
+                if (this.registered.getAndSet(zIsNotEmpty) != zIsNotEmpty) {
+                    if (zIsNotEmpty) {
                         this.dumpManager.registerCriticalDumpable(this.dumpManagerName, this);
                     } else {
                         this.dumpManager.unregisterDumpable(this.dumpManagerName);

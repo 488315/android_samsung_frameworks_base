@@ -11,7 +11,6 @@ import androidx.collection.SimpleArrayMap;
 import androidx.core.internal.view.SupportMenu;
 import androidx.core.internal.view.SupportMenuItem;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MenuWrapperICS extends BaseMenuWrapper implements Menu {
     public final SupportMenu mWrappedObject;
@@ -32,14 +31,14 @@ public class MenuWrapperICS extends BaseMenuWrapper implements Menu {
     @Override // android.view.Menu
     public final int addIntentOptions(int i, int i2, int i3, ComponentName componentName, Intent[] intentArr, Intent intent, int i4, MenuItem[] menuItemArr) {
         MenuItem[] menuItemArr2 = menuItemArr != null ? new MenuItem[menuItemArr.length] : null;
-        int addIntentOptions = this.mWrappedObject.addIntentOptions(i, i2, i3, componentName, intentArr, intent, i4, menuItemArr2);
+        int iAddIntentOptions = this.mWrappedObject.addIntentOptions(i, i2, i3, componentName, intentArr, intent, i4, menuItemArr2);
         if (menuItemArr2 != null) {
             int length = menuItemArr2.length;
             for (int i5 = 0; i5 < length; i5++) {
                 menuItemArr[i5] = getMenuItemWrapper(menuItemArr2[i5]);
             }
         }
-        return addIntentOptions;
+        return iAddIntentOptions;
     }
 
     @Override // android.view.Menu

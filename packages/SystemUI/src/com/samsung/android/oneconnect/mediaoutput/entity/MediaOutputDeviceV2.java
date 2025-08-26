@@ -7,7 +7,6 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import com.android.systemui.bixby2.controller.NotificationController$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MediaOutputDeviceV2 implements Parcelable {
     public static final Parcelable.Creator<MediaOutputDeviceV2> CREATOR = new Creator();
@@ -16,7 +15,6 @@ public final class MediaOutputDeviceV2 implements Parcelable {
     public final String deviceName;
     public final String deviceType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -53,11 +51,11 @@ public final class MediaOutputDeviceV2 implements Parcelable {
     }
 
     public final int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.deviceId.hashCode() * 31, 31, this.deviceName);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.deviceId.hashCode() * 31, 31, this.deviceName);
         String str = this.deviceType;
-        int hashCode = (m + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode = (iM + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.description;
-        return hashCode + (str2 != null ? str2.hashCode() : 0);
+        return iHashCode + (str2 != null ? str2.hashCode() : 0);
     }
 
     public final String toString() {

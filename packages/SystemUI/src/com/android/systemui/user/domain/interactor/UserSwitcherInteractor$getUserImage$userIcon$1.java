@@ -1,5 +1,6 @@
 package com.android.systemui.user.domain.interactor;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import com.android.systemui.R;
@@ -11,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class UserSwitcherInteractor$getUserImage$userIcon$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $userId;
@@ -36,7 +36,7 @@ final class UserSwitcherInteractor$getUserImage$userIcon$1 extends SuspendLambda
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Resources.NotFoundException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");

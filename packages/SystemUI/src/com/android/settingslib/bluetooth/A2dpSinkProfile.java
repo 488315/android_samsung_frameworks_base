@@ -12,7 +12,6 @@ import android.os.ParcelUuid;
 import android.util.Log;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class A2dpSinkProfile implements LocalBluetoothProfile {
     public static final ParcelUuid[] SRC_UUIDS = {BluetoothUuid.A2DP_SOURCE, BluetoothUuid.ADV_AUDIO_DIST};
@@ -21,7 +20,6 @@ public final class A2dpSinkProfile implements LocalBluetoothProfile {
     public final LocalBluetoothProfileManager mProfileManager;
     public BluetoothA2dpSink mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class A2dpSinkServiceListener implements BluetoothProfile.ServiceListener {
         public /* synthetic */ A2dpSinkServiceListener(A2dpSinkProfile a2dpSinkProfile, int i) {
             this();
@@ -34,15 +32,15 @@ public final class A2dpSinkProfile implements LocalBluetoothProfile {
             List connectedDevices = bluetoothA2dpSink.getConnectedDevices();
             while (!connectedDevices.isEmpty()) {
                 BluetoothDevice bluetoothDevice = (BluetoothDevice) connectedDevices.remove(0);
-                CachedBluetoothDevice findDevice = A2dpSinkProfile.this.mDeviceManager.findDevice(bluetoothDevice);
-                if (findDevice == null) {
+                CachedBluetoothDevice cachedBluetoothDeviceFindDevice = A2dpSinkProfile.this.mDeviceManager.findDevice(bluetoothDevice);
+                if (cachedBluetoothDeviceFindDevice == null) {
                     Log.w("A2dpSinkProfile", "A2dpSinkProfile found new device: " + bluetoothDevice);
                     A2dpSinkProfile a2dpSinkProfile = A2dpSinkProfile.this;
-                    findDevice = a2dpSinkProfile.mDeviceManager.addDevice(a2dpSinkProfile.mProfileManager, bluetoothDevice);
+                    cachedBluetoothDeviceFindDevice = a2dpSinkProfile.mDeviceManager.addDevice(a2dpSinkProfile.mProfileManager, bluetoothDevice);
                 }
-                if (findDevice != null) {
-                    findDevice.onProfileStateChanged(A2dpSinkProfile.this, 2);
-                    findDevice.refresh();
+                if (cachedBluetoothDeviceFindDevice != null) {
+                    cachedBluetoothDeviceFindDevice.onProfileStateChanged(A2dpSinkProfile.this, 2);
+                    cachedBluetoothDeviceFindDevice.refresh();
                 }
             }
             A2dpSinkProfile.this.mIsProfileReady = true;

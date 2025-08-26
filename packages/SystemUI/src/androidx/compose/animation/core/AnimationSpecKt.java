@@ -4,7 +4,6 @@ import androidx.compose.animation.core.KeyframesSpec;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AnimationSpecKt {
     /* renamed from: infiniteRepeatable-9IiC70o$default, reason: not valid java name */
@@ -21,7 +20,7 @@ public abstract class AnimationSpecKt {
 
     public static final KeyframesSpec keyframes(Function1 function1) {
         KeyframesSpec.KeyframesSpecConfig keyframesSpecConfig = new KeyframesSpec.KeyframesSpecConfig();
-        function1.mo779invoke(keyframesSpecConfig);
+        function1.mo781invoke(keyframesSpecConfig);
         return new KeyframesSpec(keyframesSpecConfig);
     }
 

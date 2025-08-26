@@ -2,6 +2,6 @@
 <LinearLayout android:theme="@style/FloatingOverlay" android:gravity="center" android:orientation="horizontal" android:background="@drawable/shelf_action_chip_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingVertical="@dimen/overlay_action_chip_padding_vertical"
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
-    <ImageView android:id="@id/overlay_action_chip_icon" android:layout_width="@dimen/overlay_action_chip_icon_size" android:layout_height="@dimen/overlay_action_chip_icon_size" android:tint="@android:color/resolver_profile_tab_selected_bg" android:tintMode="src_in" />
-    <TextView android:textSize="@dimen/overlay_action_chip_text_size" android:textColor="@android:color/resolver_profile_tab_selected_bg" android:id="@id/overlay_action_chip_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@android:string/emailTypeWork" />
+    <ImageView android:id="@id/overlay_action_chip_icon" android:layout_width="@dimen/overlay_action_chip_icon_size" android:layout_height="@dimen/overlay_action_chip_icon_size" android:tint="@android:color/material_deep_teal_500" android:tintMode="src_in" />
+    <TextView android:textSize="@dimen/overlay_action_chip_text_size" android:textColor="@android:color/material_deep_teal_500" android:id="@id/overlay_action_chip_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@android:string/duration_days_shortest_future" />
 </LinearLayout>

@@ -7,7 +7,6 @@ import com.sec.ims.settings.ImsProfile;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TelephonyIcons {
     public static final SignalIcon$MobileIconGroup CARRIER_MERGED_WIFI;
@@ -182,28 +181,28 @@ public class TelephonyIcons {
         SignalIcon$MobileIconGroup signalIcon$MobileIconGroup20 = new SignalIcon$MobileIconGroup("NotDefaultData", R.string.not_default_data_content_description, 0, null);
         NOT_DEFAULT_DATA = signalIcon$MobileIconGroup20;
         CARRIER_MERGED_WIFI = new SignalIcon$MobileIconGroup("CWF", R.string.data_connection_carrier_wifi, R.drawable.ic_carrier_wifi);
-        HashMap hashMap = new HashMap();
-        ICON_NAME_TO_ICON = hashMap;
-        hashMap.put("carrier_network_change", signalIcon$MobileIconGroup);
-        hashMap.put("3g", signalIcon$MobileIconGroup2);
-        hashMap.put("wfc", signalIcon$MobileIconGroup3);
-        hashMap.put("unknown", signalIcon$MobileIconGroup4);
-        hashMap.put("e", signalIcon$MobileIconGroup5);
-        hashMap.put("1x", signalIcon$MobileIconGroup6);
-        hashMap.put("g", signalIcon$MobileIconGroup7);
-        hashMap.put("h", signalIcon$MobileIconGroup8);
-        hashMap.put("h+", signalIcon$MobileIconGroup9);
-        hashMap.put("4g", signalIcon$MobileIconGroup10);
-        hashMap.put("4g+", signalIcon$MobileIconGroup11);
-        hashMap.put("4glte", signalIcon$MobileIconGroup14);
-        hashMap.put("4glte+", signalIcon$MobileIconGroup15);
-        hashMap.put("5ge", signalIcon$MobileIconGroup16);
-        hashMap.put("lte", signalIcon$MobileIconGroup12);
-        hashMap.put("lte+", signalIcon$MobileIconGroup13);
-        hashMap.put("5g", signalIcon$MobileIconGroup17);
-        hashMap.put("5g_plus", signalIcon$MobileIconGroup18);
-        hashMap.put("datadisable", signalIcon$MobileIconGroup19);
-        hashMap.put("notdefaultdata", signalIcon$MobileIconGroup20);
+        HashMap map = new HashMap();
+        ICON_NAME_TO_ICON = map;
+        map.put("carrier_network_change", signalIcon$MobileIconGroup);
+        map.put("3g", signalIcon$MobileIconGroup2);
+        map.put("wfc", signalIcon$MobileIconGroup3);
+        map.put("unknown", signalIcon$MobileIconGroup4);
+        map.put("e", signalIcon$MobileIconGroup5);
+        map.put("1x", signalIcon$MobileIconGroup6);
+        map.put("g", signalIcon$MobileIconGroup7);
+        map.put("h", signalIcon$MobileIconGroup8);
+        map.put("h+", signalIcon$MobileIconGroup9);
+        map.put("4g", signalIcon$MobileIconGroup10);
+        map.put("4g+", signalIcon$MobileIconGroup11);
+        map.put("4glte", signalIcon$MobileIconGroup14);
+        map.put("4glte+", signalIcon$MobileIconGroup15);
+        map.put("5ge", signalIcon$MobileIconGroup16);
+        map.put("lte", signalIcon$MobileIconGroup12);
+        map.put("lte+", signalIcon$MobileIconGroup13);
+        map.put("5g", signalIcon$MobileIconGroup17);
+        map.put("5g_plus", signalIcon$MobileIconGroup18);
+        map.put("datadisable", signalIcon$MobileIconGroup19);
+        map.put("notdefaultdata", signalIcon$MobileIconGroup20);
         MOBILE_CALL_STRENGTH_ICONS = new int[]{R.drawable.ic_mobile_call_strength_0, R.drawable.ic_mobile_call_strength_1, R.drawable.ic_mobile_call_strength_2, R.drawable.ic_mobile_call_strength_3, R.drawable.ic_mobile_call_strength_4};
     }
 }

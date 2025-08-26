@@ -8,7 +8,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ToggleTaskSizeInteraction {
     public final Rect animationStartBounds;
@@ -22,7 +21,6 @@ public final class ToggleTaskSizeInteraction {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AmbiguousSource {
         public static final /* synthetic */ AmbiguousSource[] $VALUES;
         public static final AmbiguousSource DOUBLE_TAP;
@@ -55,7 +53,6 @@ public final class ToggleTaskSizeInteraction {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Direction {
         public static final /* synthetic */ Direction[] $VALUES;
         public static final Direction MAXIMIZE;
@@ -85,7 +82,6 @@ public final class ToggleTaskSizeInteraction {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Source {
         public static final /* synthetic */ Source[] $VALUES;
         public static final Source DOUBLE_TAP_TO_MAXIMIZE;
@@ -131,7 +127,6 @@ public final class ToggleTaskSizeInteraction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -189,9 +184,9 @@ public final class ToggleTaskSizeInteraction {
     }
 
     public final int hashCode() {
-        int hashCode = (this.inputMethod.hashCode() + ((this.source.hashCode() + (this.direction.hashCode() * 31)) * 31)) * 31;
+        int iHashCode = (this.inputMethod.hashCode() + ((this.source.hashCode() + (this.direction.hashCode() * 31)) * 31)) * 31;
         Rect rect = this.animationStartBounds;
-        return hashCode + (rect == null ? 0 : rect.hashCode());
+        return iHashCode + (rect == null ? 0 : rect.hashCode());
     }
 
     public final String toString() {

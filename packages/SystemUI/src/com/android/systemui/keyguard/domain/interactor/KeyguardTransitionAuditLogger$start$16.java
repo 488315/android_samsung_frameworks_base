@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardTransitionAuditLogger$start$16 extends SuspendLambda implements Function2 {
     int label;
@@ -44,7 +43,7 @@ final class KeyguardTransitionAuditLogger$start$16 extends SuspendLambda impleme
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardTransitionAuditLogger$start$16.1
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    KeyguardTransitionAuditLogger.this.logger.log(KeyguardTransitionAuditLoggerKt.TAG, LogLevel.VERBOSE, "keyguardTranslationY", new Float(((Number) obj2).floatValue()));
+                    keyguardTransitionAuditLogger.logger.log(KeyguardTransitionAuditLoggerKt.TAG, LogLevel.VERBOSE, "keyguardTranslationY", new Float(((Number) obj2).floatValue()));
                     return Unit.INSTANCE;
                 }
             };

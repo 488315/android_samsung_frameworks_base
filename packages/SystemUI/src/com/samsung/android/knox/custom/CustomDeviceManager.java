@@ -14,9 +14,9 @@ import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.samsung.android.knox.dex.DexManager;
 import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import com.sec.ims.configuration.DATA;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CustomDeviceManager {
     public static final int ACCESSIBILITY_ALL = 31;
@@ -323,7 +323,6 @@ public class CustomDeviceManager {
     public ContentResolver mContentResolver = null;
     public IKnoxCustomManager mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum SdkVersion {
         SDK_VERSION_1,
         SDK_VERSION_2,
@@ -352,19 +351,19 @@ public class CustomDeviceManager {
         SDK_VERSION_3_12;
 
         public String getInternalSdkVersion() {
-            String str = toString();
-            String replace = str.startsWith("SDK_VERSION") ? str.substring(12).replace('_', '.') : PeripheralConstants.Result.NOT_AVAILABLE;
+            String string = toString();
+            String strReplace = string.startsWith("SDK_VERSION") ? string.substring(12).replace('_', '.') : PeripheralConstants.Result.NOT_AVAILABLE;
             int i = 0;
-            for (byte b : replace.getBytes()) {
+            for (byte b : strReplace.getBytes()) {
                 if (b == 46) {
                     i++;
                 }
             }
             while (i < 2) {
-                replace = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(replace, ".0");
+                strReplace = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strReplace, ".0");
                 i++;
             }
-            return replace;
+            return strReplace;
         }
     }
 
@@ -372,25 +371,21 @@ public class CustomDeviceManager {
     }
 
     public static synchronized CustomDeviceManager getInstance() {
-        CustomDeviceManager customDeviceManager;
-        synchronized (CustomDeviceManager.class) {
-            try {
-                if (sCustomDeviceManager == null) {
-                    sCustomDeviceManager = new CustomDeviceManager();
-                }
-                if (sContextInfo == null) {
-                    if (Process.myUserHandle().equals(UserHandle.SYSTEM)) {
-                        sContextInfo = new ContextInfo();
-                    } else {
-                        sContextInfo = new ContextInfo(Process.myUid(), true);
-                    }
-                }
-                customDeviceManager = sCustomDeviceManager;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sCustomDeviceManager == null) {
+                sCustomDeviceManager = new CustomDeviceManager();
             }
+            if (sContextInfo == null) {
+                if (Process.myUserHandle().equals(UserHandle.SYSTEM)) {
+                    sContextInfo = new ContextInfo();
+                } else {
+                    sContextInfo = new ContextInfo(Process.myUid(), true);
+                }
+            }
+        } catch (Throwable th) {
+            throw th;
         }
-        return customDeviceManager;
+        return sCustomDeviceManager;
     }
 
     public boolean checkEnterprisePermission(String str) {
@@ -409,16 +404,16 @@ public class CustomDeviceManager {
         return getSdkVersion().ordinal() < sdkVersion.ordinal();
     }
 
-    public final ContentResolver getContentResolver() {
+    public final ContentResolver getContentResolver() throws IllegalAccessException, NoSuchMethodException, ClassNotFoundException, SecurityException, IllegalArgumentException, InvocationTargetException {
         if (this.mContentResolver == null) {
             try {
                 Class<?> cls = Class.forName("android.app.ActivityThread");
                 Class[] clsArr = new Class[0];
-                Object invoke = cls.getMethod("currentActivityThread", null).invoke(null, null);
+                Object objInvoke = cls.getMethod("currentActivityThread", null).invoke(null, null);
                 Class[] clsArr2 = new Class[0];
                 Method method = cls.getMethod("getSystemContext", null);
                 if (method != null) {
-                    this.mContentResolver = ((Context) method.invoke(invoke, null)).getContentResolver();
+                    this.mContentResolver = ((Context) method.invoke(objInvoke, null)).getContentResolver();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -436,9 +431,9 @@ public class CustomDeviceManager {
         return ProKioskManager.getInstance();
     }
 
-    public SdkVersion getSdkVersion() {
-        int parseInt = Integer.parseInt(DATA.DM_FIELD_INDEX.TIMER_VZW);
-        return parseInt == 24 ? SdkVersion.SDK_VERSION_3_0 : parseInt == 25 ? SdkVersion.SDK_VERSION_3_1 : parseInt == 26 ? SdkVersion.SDK_VERSION_3_2 : parseInt == 27 ? SdkVersion.SDK_VERSION_3_2_1 : parseInt == 28 ? SdkVersion.SDK_VERSION_3_3 : parseInt == 29 ? SdkVersion.SDK_VERSION_3_4 : parseInt == 30 ? SdkVersion.SDK_VERSION_3_4_1 : parseInt == 31 ? SdkVersion.SDK_VERSION_3_5 : parseInt == 32 ? SdkVersion.SDK_VERSION_3_6 : parseInt == 33 ? SdkVersion.SDK_VERSION_3_7 : parseInt == 34 ? SdkVersion.SDK_VERSION_3_7_1 : parseInt == 35 ? SdkVersion.SDK_VERSION_3_8 : parseInt == 36 ? SdkVersion.SDK_VERSION_3_9 : parseInt == 37 ? SdkVersion.SDK_VERSION_3_10 : parseInt == 38 ? SdkVersion.SDK_VERSION_3_11 : parseInt >= 39 ? SdkVersion.SDK_VERSION_3_12 : SdkVersion.SDK_VERSION_1;
+    public SdkVersion getSdkVersion() throws NumberFormatException {
+        int i = Integer.parseInt(DATA.DM_FIELD_INDEX.TIMER_VZW);
+        return i == 24 ? SdkVersion.SDK_VERSION_3_0 : i == 25 ? SdkVersion.SDK_VERSION_3_1 : i == 26 ? SdkVersion.SDK_VERSION_3_2 : i == 27 ? SdkVersion.SDK_VERSION_3_2_1 : i == 28 ? SdkVersion.SDK_VERSION_3_3 : i == 29 ? SdkVersion.SDK_VERSION_3_4 : i == 30 ? SdkVersion.SDK_VERSION_3_4_1 : i == 31 ? SdkVersion.SDK_VERSION_3_5 : i == 32 ? SdkVersion.SDK_VERSION_3_6 : i == 33 ? SdkVersion.SDK_VERSION_3_7 : i == 34 ? SdkVersion.SDK_VERSION_3_7_1 : i == 35 ? SdkVersion.SDK_VERSION_3_8 : i == 36 ? SdkVersion.SDK_VERSION_3_9 : i == 37 ? SdkVersion.SDK_VERSION_3_10 : i == 38 ? SdkVersion.SDK_VERSION_3_11 : i >= 39 ? SdkVersion.SDK_VERSION_3_12 : SdkVersion.SDK_VERSION_1;
     }
 
     public String getSerialNumber() {
@@ -466,30 +461,26 @@ public class CustomDeviceManager {
     }
 
     public static synchronized CustomDeviceManager getInstance(Context context, int i) {
-        CustomDeviceManager customDeviceManager;
-        synchronized (CustomDeviceManager.class) {
-            try {
-                String packageName = context.getPackageName();
-                if (packageName != null && packageName.equals("com.samsung.android.knox.kpecore")) {
-                    if (sCustomDeviceManager == null) {
-                        sCustomDeviceManager = new CustomDeviceManager();
-                    }
-                    ContextInfo contextInfo = sContextInfo;
-                    if (contextInfo == null || i != contextInfo.mDALessCallerUid) {
-                        if (Process.myUserHandle().equals(UserHandle.SYSTEM)) {
-                            sContextInfo = new ContextInfo(Process.myUid(), false, i);
-                        } else {
-                            sContextInfo = new ContextInfo(Process.myUid(), true, i);
-                        }
-                    }
-                    customDeviceManager = sCustomDeviceManager;
-                } else {
-                    throw new SecurityException("Can only be called by com.samsung.android.knox.kpecore");
+        try {
+            String packageName = context.getPackageName();
+            if (packageName != null && packageName.equals("com.samsung.android.knox.kpecore")) {
+                if (sCustomDeviceManager == null) {
+                    sCustomDeviceManager = new CustomDeviceManager();
                 }
-            } catch (Throwable th) {
-                throw th;
+                ContextInfo contextInfo = sContextInfo;
+                if (contextInfo == null || i != contextInfo.mDALessCallerUid) {
+                    if (Process.myUserHandle().equals(UserHandle.SYSTEM)) {
+                        sContextInfo = new ContextInfo(Process.myUid(), false, i);
+                    } else {
+                        sContextInfo = new ContextInfo(Process.myUid(), true, i);
+                    }
+                }
+            } else {
+                throw new SecurityException("Can only be called by com.samsung.android.knox.kpecore");
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return customDeviceManager;
+        return sCustomDeviceManager;
     }
 }

@@ -20,7 +20,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ConnectivityRepositoryImpl$defaultNetworkCapabilities$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ConnectivityInputLogger $logger;
@@ -63,35 +62,35 @@ final class ConnectivityRepositoryImpl$defaultNetworkCapabilities$1 extends Susp
 
                 @Override // android.net.ConnectivityManager.NetworkCallback
                 public final void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
-                    ConnectivityInputLogger connectivityInputLogger2 = ConnectivityInputLogger.this;
+                    ConnectivityInputLogger connectivityInputLogger2 = connectivityInputLogger;
                     connectivityInputLogger2.getClass();
                     LoggerHelper.INSTANCE.getClass();
                     LogLevel logLevel = LogLevel.INFO;
                     LoggerHelper$$ExternalSyntheticLambda0 loggerHelper$$ExternalSyntheticLambda0 = new LoggerHelper$$ExternalSyntheticLambda0(0);
                     LogBuffer logBuffer = connectivityInputLogger2.buffer;
-                    LogMessage obtain = logBuffer.obtain("ConnectivityInputLogger", logLevel, loggerHelper$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                    LogMessage logMessageObtain = logBuffer.obtain("ConnectivityInputLogger", logLevel, loggerHelper$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                     logMessageImpl.bool1 = true;
                     logMessageImpl.int1 = network.getNetId();
                     logMessageImpl.str1 = networkCapabilities.toString();
-                    logBuffer.commit(obtain);
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(networkCapabilities);
+                    logBuffer.commit(logMessageObtain);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(networkCapabilities);
                 }
 
                 @Override // android.net.ConnectivityManager.NetworkCallback
                 public final void onLost(Network network) {
-                    ConnectivityInputLogger connectivityInputLogger2 = ConnectivityInputLogger.this;
+                    ConnectivityInputLogger connectivityInputLogger2 = connectivityInputLogger;
                     connectivityInputLogger2.getClass();
                     LoggerHelper.INSTANCE.getClass();
                     LogLevel logLevel = LogLevel.INFO;
                     LoggerHelper$$ExternalSyntheticLambda0 loggerHelper$$ExternalSyntheticLambda0 = new LoggerHelper$$ExternalSyntheticLambda0(1);
                     LogBuffer logBuffer = connectivityInputLogger2.buffer;
-                    LogMessage obtain = logBuffer.obtain("ConnectivityInputLogger", logLevel, loggerHelper$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                    LogMessage logMessageObtain = logBuffer.obtain("ConnectivityInputLogger", logLevel, loggerHelper$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                     logMessageImpl.int1 = network.getNetId();
                     logMessageImpl.bool1 = true;
-                    logBuffer.commit(obtain);
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(null);
+                    logBuffer.commit(logMessageObtain);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(null);
                 }
             };
             this.this$0.connectivityManager.registerDefaultNetworkCallback(networkCallback);

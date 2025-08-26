@@ -40,9 +40,9 @@ public interface IDexModeService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDexModeService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDexModeService)) {
-                return (IDexModeService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDexModeService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDexModeService)) {
+                return (IDexModeService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

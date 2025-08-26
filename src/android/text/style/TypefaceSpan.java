@@ -89,15 +89,15 @@ public class TypefaceSpan extends MetricAffectingSpan implements ParcelableSpan 
     private void applyFontFamily(Paint paint, String str) {
         Typeface typeface = paint.getTypeface();
         int style = typeface == null ? 0 : typeface.getStyle();
-        Typeface create = Typeface.create(str, style);
-        int i = style & (~create.getStyle());
+        Typeface typefaceCreate = Typeface.create(str, style);
+        int i = style & (~typefaceCreate.getStyle());
         if ((i & 1) != 0) {
             paint.setFakeBoldText(true);
         }
         if ((i & 2) != 0) {
             paint.setTextSkewX(-0.25f);
         }
-        paint.setTypeface(create);
+        paint.setTypeface(typefaceCreate);
     }
 
     public String toString() {

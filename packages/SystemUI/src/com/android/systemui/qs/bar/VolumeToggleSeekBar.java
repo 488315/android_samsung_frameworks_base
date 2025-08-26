@@ -18,13 +18,13 @@ import com.android.systemui.audio.soundcraft.interfaces.volume.VolumeManager;
 import com.android.systemui.audio.soundcraft.model.common.VolumeModel;
 import com.android.systemui.plugins.VolumeDialogController;
 import com.android.systemui.util.SystemUIAnalytics;
+import com.android.systemui.volume.util.SeekBarUtil;
 import com.android.systemui.volume.util.ViewVisibilityUtil;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class VolumeToggleSeekBar extends SeekBar {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,7 +44,6 @@ public final class VolumeToggleSeekBar extends SeekBar {
     public VolumeManager volumeManager;
     public VolumeSeekBar volumeSeekBar;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -54,78 +53,45 @@ public final class VolumeToggleSeekBar extends SeekBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VolumeSeekbarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public VolumeSeekbarChangeListener() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:27:0x0051  */
-        /* JADX WARN: Removed duplicated region for block: B:29:? A[RETURN, SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:26:0x003a  */
         @Override // android.widget.SeekBar.OnSeekBarChangeListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void onProgressChanged(android.widget.SeekBar r4, int r5, boolean r6) {
-            /*
-                r3 = this;
-                if (r6 != 0) goto L8
-                com.android.systemui.qs.bar.VolumeToggleSeekBar r6 = com.android.systemui.qs.bar.VolumeToggleSeekBar.this
-                boolean r6 = r6.isTracking
-                if (r6 == 0) goto L54
-            L8:
-                com.android.systemui.qs.bar.VolumeToggleSeekBar r6 = com.android.systemui.qs.bar.VolumeToggleSeekBar.this
-                boolean r6 = r6.isEnabled()
-                if (r6 == 0) goto L54
-                com.android.systemui.qs.bar.VolumeToggleSeekBar r6 = com.android.systemui.qs.bar.VolumeToggleSeekBar.this
-                com.android.systemui.qs.bar.VolumeSeekBar r0 = r6.volumeSeekBar
-                if (r0 == 0) goto L18
-                r0.progress = r5
-            L18:
-                com.android.systemui.audio.soundcraft.interfaces.volume.VolumeManager r0 = r6.volumeManager
-                r1 = 0
-                if (r0 != 0) goto L1f
-                r2 = r1
-                goto L20
-            L1f:
-                r2 = r0
-            L20:
-                boolean r2 = r2.remoteStreamEnabled
-                if (r2 == 0) goto L3a
-                if (r0 != 0) goto L28
-                r2 = r1
-                goto L29
-            L28:
-                r2 = r0
-            L29:
-                boolean r2 = r2.isRemoteStreamPlaying
-                if (r2 == 0) goto L3a
-                com.android.systemui.plugins.VolumeDialogController r6 = r6.volumeController
-                if (r6 == 0) goto L44
-                if (r0 != 0) goto L34
-                r0 = r1
-            L34:
-                int r0 = r0.remoteStream
-                r6.setStreamVolume(r0, r5)
-                goto L44
-            L3a:
-                com.android.systemui.plugins.VolumeDialogController r6 = r6.volumeController
-                if (r6 == 0) goto L44
-                int r0 = r5 * 10
-                r1 = 3
-                r6.setStreamVolume(r1, r0)
-            L44:
-                com.android.systemui.qs.bar.VolumeToggleSeekBar r6 = com.android.systemui.qs.bar.VolumeToggleSeekBar.this
-                int r6 = r6.stream
-                com.android.systemui.volume.util.SeekBarUtil.vibrateIfNeeded(r4, r6, r5)
-                com.android.systemui.qs.bar.VolumeToggleSeekBar r3 = com.android.systemui.qs.bar.VolumeToggleSeekBar.this
-                com.android.systemui.qs.bar.VolumeSeekBar r3 = r3.volumeSeekBar
-                if (r3 == 0) goto L54
-                r3.setProgressChanged(r5)
-            L54:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.bar.VolumeToggleSeekBar.VolumeSeekbarChangeListener.onProgressChanged(android.widget.SeekBar, int, boolean):void");
+        public final void onProgressChanged(SeekBar seekBar, int i, boolean z) {
+            if ((z || VolumeToggleSeekBar.this.isTracking) && VolumeToggleSeekBar.this.isEnabled()) {
+                VolumeToggleSeekBar volumeToggleSeekBar = VolumeToggleSeekBar.this;
+                VolumeSeekBar volumeSeekBar = volumeToggleSeekBar.volumeSeekBar;
+                if (volumeSeekBar != null) {
+                    volumeSeekBar.progress = i;
+                }
+                VolumeManager volumeManager = volumeToggleSeekBar.volumeManager;
+                if ((volumeManager == null ? null : volumeManager).remoteStreamEnabled) {
+                    if ((volumeManager == null ? null : volumeManager).isRemoteStreamPlaying) {
+                        VolumeDialogController volumeDialogController = volumeToggleSeekBar.volumeController;
+                        if (volumeDialogController != null) {
+                            if (volumeManager == null) {
+                                volumeManager = null;
+                            }
+                            volumeDialogController.setStreamVolume(volumeManager.remoteStream, i);
+                        }
+                    }
+                } else {
+                    VolumeDialogController volumeDialogController2 = volumeToggleSeekBar.volumeController;
+                    if (volumeDialogController2 != null) {
+                        volumeDialogController2.setStreamVolume(3, i * 10);
+                    }
+                }
+                SeekBarUtil.vibrateIfNeeded(seekBar, VolumeToggleSeekBar.this.stream, i);
+                VolumeSeekBar volumeSeekBar2 = VolumeToggleSeekBar.this.volumeSeekBar;
+                if (volumeSeekBar2 != null) {
+                    volumeSeekBar2.setProgressChanged(i);
+                }
+            }
         }
 
         @Override // android.widget.SeekBar.OnSeekBarChangeListener
@@ -176,25 +142,25 @@ public final class VolumeToggleSeekBar extends SeekBar {
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
                 int i = (int) f;
                 int i2 = VolumeToggleSeekBar.$r8$clinit;
-                VolumeToggleSeekBar.this.setProgress(i);
+                this.this$0.setProgress(i);
             }
         });
         this.progressBarSpring = springAnimation;
         this.recheckCallback = new Runnable() { // from class: com.android.systemui.qs.bar.VolumeToggleSeekBar$recheckCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                VolumeManager volumeManager = VolumeToggleSeekBar.this.volumeManager;
+                VolumeManager volumeManager = this.this$0.volumeManager;
                 (volumeManager == null ? null : volumeManager).isTracking = false;
                 if (volumeManager == null) {
                     volumeManager = null;
                 }
                 VolumeModel volumeModel = volumeManager.getVolumeModel();
-                VolumeToggleSeekBar volumeToggleSeekBar = VolumeToggleSeekBar.this;
+                VolumeToggleSeekBar volumeToggleSeekBar = this.this$0;
                 int i = volumeModel.volume;
                 volumeToggleSeekBar.springFinalPosition = i;
                 volumeToggleSeekBar.progressBarSpring.setStartValue(volumeToggleSeekBar.getProgress());
                 volumeToggleSeekBar.progressBarSpring.animateToFinalPosition(volumeToggleSeekBar.springFinalPosition);
-                VolumeSeekBar volumeSeekBar = VolumeToggleSeekBar.this.volumeSeekBar;
+                VolumeSeekBar volumeSeekBar = this.this$0.volumeSeekBar;
                 if (volumeSeekBar != null) {
                     volumeSeekBar.setProgressChanged(i);
                 }
@@ -212,7 +178,11 @@ public final class VolumeToggleSeekBar extends SeekBar {
         return true;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0086  */
     @Override // android.widget.AbsSeekBar, android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean onTouchEvent(MotionEvent motionEvent) {
         if (isEnabled()) {
             int action = motionEvent.getAction();
@@ -234,30 +204,31 @@ public final class VolumeToggleSeekBar extends SeekBar {
                 (this.isTabletModel ? Toast.makeText(getContext(), getContext().getString(R.string.volume_use_your_tablet_volume_smart_view, smartViewDeviceName), 0) : Toast.makeText(getContext(), getContext().getString(R.string.volume_use_your_phone_volume_smart_view, smartViewDeviceName), 0)).show();
                 return true;
             }
-            if (action != 1) {
-                if (action != 2) {
-                    if (action != 3) {
-                        return super.onTouchEvent(motionEvent);
-                    }
-                } else if (!this.isSmartViewPlaying) {
-                    float x = motionEvent.getX() - this.touchedX;
-                    if (this.isTracking || Math.abs(x) > this.scaledTouchSlop) {
-                        ViewParent parent = getParent();
-                        if (parent != null) {
-                            parent.requestDisallowInterceptTouchEvent(true);
-                        }
-                        this.isTracking = true;
-                        float width = x / ((getWidth() - getPaddingLeft()) - getPaddingRight());
-                        int max = getMax() - getMin();
-                        setProgress(Math.round(getResources().getConfiguration().getLayoutDirection() == 1 ? ((width * max) - this.currentProgress) * (-1) : (width * max) + this.currentProgress));
-                        return true;
-                    }
+            if (action == 1) {
+                if (!this.isSmartViewPlaying) {
+                    this.isTracking = false;
+                    this.seekbarChangeListener.onStopTrackingTouch(this);
+                    return true;
                 }
-            }
-            if (!this.isSmartViewPlaying) {
-                this.isTracking = false;
-                this.seekbarChangeListener.onStopTrackingTouch(this);
-                return true;
+            } else if (action != 2) {
+                if (action != 3) {
+                    return super.onTouchEvent(motionEvent);
+                }
+                if (!this.isSmartViewPlaying) {
+                }
+            } else if (!this.isSmartViewPlaying) {
+                float x = motionEvent.getX() - this.touchedX;
+                if (this.isTracking || Math.abs(x) > this.scaledTouchSlop) {
+                    ViewParent parent = getParent();
+                    if (parent != null) {
+                        parent.requestDisallowInterceptTouchEvent(true);
+                    }
+                    this.isTracking = true;
+                    float width = x / ((getWidth() - getPaddingLeft()) - getPaddingRight());
+                    int max = getMax() - getMin();
+                    setProgress(Math.round(getResources().getConfiguration().getLayoutDirection() == 1 ? ((width * max) - this.currentProgress) * (-1) : (width * max) + this.currentProgress));
+                    return true;
+                }
             }
         }
         return true;
@@ -300,25 +271,25 @@ public final class VolumeToggleSeekBar extends SeekBar {
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
                 int i = (int) f;
                 int i2 = VolumeToggleSeekBar.$r8$clinit;
-                VolumeToggleSeekBar.this.setProgress(i);
+                this.this$0.setProgress(i);
             }
         });
         this.progressBarSpring = springAnimation;
         this.recheckCallback = new Runnable() { // from class: com.android.systemui.qs.bar.VolumeToggleSeekBar$recheckCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                VolumeManager volumeManager = VolumeToggleSeekBar.this.volumeManager;
+                VolumeManager volumeManager = this.this$0.volumeManager;
                 (volumeManager == null ? null : volumeManager).isTracking = false;
                 if (volumeManager == null) {
                     volumeManager = null;
                 }
                 VolumeModel volumeModel = volumeManager.getVolumeModel();
-                VolumeToggleSeekBar volumeToggleSeekBar = VolumeToggleSeekBar.this;
+                VolumeToggleSeekBar volumeToggleSeekBar = this.this$0;
                 int i = volumeModel.volume;
                 volumeToggleSeekBar.springFinalPosition = i;
                 volumeToggleSeekBar.progressBarSpring.setStartValue(volumeToggleSeekBar.getProgress());
                 volumeToggleSeekBar.progressBarSpring.animateToFinalPosition(volumeToggleSeekBar.springFinalPosition);
-                VolumeSeekBar volumeSeekBar = VolumeToggleSeekBar.this.volumeSeekBar;
+                VolumeSeekBar volumeSeekBar = this.this$0.volumeSeekBar;
                 if (volumeSeekBar != null) {
                     volumeSeekBar.setProgressChanged(i);
                 }
@@ -345,25 +316,25 @@ public final class VolumeToggleSeekBar extends SeekBar {
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
                 int i2 = (int) f;
                 int i22 = VolumeToggleSeekBar.$r8$clinit;
-                VolumeToggleSeekBar.this.setProgress(i2);
+                this.this$0.setProgress(i2);
             }
         });
         this.progressBarSpring = springAnimation;
         this.recheckCallback = new Runnable() { // from class: com.android.systemui.qs.bar.VolumeToggleSeekBar$recheckCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                VolumeManager volumeManager = VolumeToggleSeekBar.this.volumeManager;
+                VolumeManager volumeManager = this.this$0.volumeManager;
                 (volumeManager == null ? null : volumeManager).isTracking = false;
                 if (volumeManager == null) {
                     volumeManager = null;
                 }
                 VolumeModel volumeModel = volumeManager.getVolumeModel();
-                VolumeToggleSeekBar volumeToggleSeekBar = VolumeToggleSeekBar.this;
+                VolumeToggleSeekBar volumeToggleSeekBar = this.this$0;
                 int i2 = volumeModel.volume;
                 volumeToggleSeekBar.springFinalPosition = i2;
                 volumeToggleSeekBar.progressBarSpring.setStartValue(volumeToggleSeekBar.getProgress());
                 volumeToggleSeekBar.progressBarSpring.animateToFinalPosition(volumeToggleSeekBar.springFinalPosition);
-                VolumeSeekBar volumeSeekBar = VolumeToggleSeekBar.this.volumeSeekBar;
+                VolumeSeekBar volumeSeekBar = this.this$0.volumeSeekBar;
                 if (volumeSeekBar != null) {
                     volumeSeekBar.setProgressChanged(i2);
                 }

@@ -51,16 +51,16 @@ public class ParentalControlsUtilsInternal {
             }
             keyguardDisabledFeatures = devicePolicyManager.getKeyguardDisabledFeatures(supervisionComponentName);
         }
-        boolean containsFlag = containsFlag(keyguardDisabledFeatures, 32);
-        boolean containsFlag2 = containsFlag(keyguardDisabledFeatures, 128);
-        boolean containsFlag3 = containsFlag(keyguardDisabledFeatures, 256);
-        if (containsFlag(i, 2) && containsFlag) {
+        boolean zContainsFlag = containsFlag(keyguardDisabledFeatures, 32);
+        boolean zContainsFlag2 = containsFlag(keyguardDisabledFeatures, 128);
+        boolean zContainsFlag3 = containsFlag(keyguardDisabledFeatures, 256);
+        if (containsFlag(i, 2) && zContainsFlag) {
             return true;
         }
-        if (containsFlag(i, 8) && containsFlag2) {
+        if (containsFlag(i, 8) && zContainsFlag2) {
             return true;
         }
-        return containsFlag(i, 4) && containsFlag3;
+        return containsFlag(i, 4) && zContainsFlag3;
     }
 
     @Deprecated

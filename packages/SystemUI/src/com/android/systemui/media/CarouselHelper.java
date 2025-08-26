@@ -1,6 +1,7 @@
 package com.android.systemui.media;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.viewpager.widget.ViewPager;
@@ -13,7 +14,6 @@ import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CarouselHelper {
     public final Supplier contextSupplier;
@@ -25,7 +25,6 @@ public final class CarouselHelper {
     public final MediaType type;
     public boolean userTouch;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,7 +38,7 @@ public final class CarouselHelper {
         new Companion(null);
     }
 
-    public CarouselHelper(View view, int i, Supplier<Context> supplier, BiFunction<Boolean, MediaType, Integer> biFunction, IntSupplier intSupplier, Function<MediaType, SecMediaPlayerData> function, MediaType mediaType, ViewPager viewPager) {
+    public CarouselHelper(View view, int i, Supplier<Context> supplier, BiFunction<Boolean, MediaType, Integer> biFunction, IntSupplier intSupplier, Function<MediaType, SecMediaPlayerData> function, MediaType mediaType, ViewPager viewPager) throws Resources.NotFoundException {
         this.contextSupplier = supplier;
         this.getNumberOfPlayersFunction = biFunction;
         this.isRTLSupplier = intSupplier;
@@ -48,7 +47,7 @@ public final class CarouselHelper {
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() { // from class: com.android.systemui.media.CarouselHelper$createOnPageChangeListener$1
             @Override // androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener, androidx.viewpager.widget.ViewPager.OnPageChangeListener
             public final void onPageScrollStateChanged(int i2) {
-                CarouselHelper carouselHelper = CarouselHelper.this;
+                CarouselHelper carouselHelper = this.this$0;
                 if (i2 == 0) {
                     carouselHelper.userTouch = false;
                 } else {
@@ -62,7 +61,7 @@ public final class CarouselHelper {
             @Override // androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener, androidx.viewpager.widget.ViewPager.OnPageChangeListener
             public final void onPageScrolled(float f, int i2) {
                 float f2 = i2 + f;
-                CarouselHelper carouselHelper = CarouselHelper.this;
+                CarouselHelper carouselHelper = this.this$0;
                 carouselHelper.pageIndicatorPosition = f2;
                 carouselHelper.indicator.setLocation(f2);
             }
@@ -70,7 +69,7 @@ public final class CarouselHelper {
             @Override // androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener, androidx.viewpager.widget.ViewPager.OnPageChangeListener
             public final void onPageSelected(int i2) {
                 ListPopupWindow$$ExternalSyntheticOutline0.m(i2, "onPageSelected position=", "CarouselHelper");
-                CarouselHelper carouselHelper = CarouselHelper.this;
+                CarouselHelper carouselHelper = this.this$0;
                 if (carouselHelper.userTouch) {
                     SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QPNE_SWIPE_MEDIA);
                 }

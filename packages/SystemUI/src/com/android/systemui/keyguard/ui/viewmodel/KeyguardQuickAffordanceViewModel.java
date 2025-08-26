@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardQuickAffordanceViewModel {
     public final boolean animateReveal;
@@ -23,7 +22,6 @@ public final class KeyguardQuickAffordanceViewModel {
     public final String slotId;
     public final boolean useLongPress;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnClickedParameters {
         public final String configKey;
         public final Expandable expandable;
@@ -47,9 +45,9 @@ public final class KeyguardQuickAffordanceViewModel {
         }
 
         public final int hashCode() {
-            int hashCode = this.configKey.hashCode() * 31;
+            int iHashCode = this.configKey.hashCode() * 31;
             Expandable expandable = this.expandable;
-            return this.slotId.hashCode() + ((hashCode + (expandable == null ? 0 : expandable.hashCode())) * 31);
+            return this.slotId.hashCode() + ((iHashCode + (expandable == null ? 0 : expandable.hashCode())) * 31);
         }
 
         public final String toString() {

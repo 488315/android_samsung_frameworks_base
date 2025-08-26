@@ -6,7 +6,6 @@ import com.android.systemui.media.mediaoutput.compose.Screen;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class SelectorScreenKt$SelectorScreen$1$1$1$1$3$1$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -19,15 +18,15 @@ public final /* synthetic */ class SelectorScreenKt$SelectorScreen$1$1$1$1$3$1$$
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         String str = (String) obj;
         switch (this.$r8$classId) {
             case 0:
-                this.f$0.mo779invoke(Screen.Phone.INSTANCE.createRoute(str));
+                this.f$0.mo781invoke(Screen.Phone.INSTANCE.createRoute(str));
                 break;
             default:
                 MoSaLogging.send$default(MoSaLogging.INSTANCE, SaEvent.ChooseADeviceAction.INSTANCE);
-                this.f$0.mo779invoke(Screen.TV.INSTANCE.createRoute(str));
+                this.f$0.mo781invoke(Screen.TV.INSTANCE.createRoute(str));
                 break;
         }
         return Unit.INSTANCE;

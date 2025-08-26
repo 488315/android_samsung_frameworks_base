@@ -70,9 +70,9 @@ public interface IWapPushManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWapPushManager)) {
-                return (IWapPushManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWapPushManager)) {
+                return (IWapPushManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,46 +108,46 @@ public interface IWapPushManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
                 parcel.enforceNoDataAvail();
-                int processMessage = processMessage(readString, readString2, intent);
+                int iProcessMessage = processMessage(string, string2, intent);
                 parcel2.writeNoException();
-                parcel2.writeInt(processMessage);
+                parcel2.writeInt(iProcessMessage);
             } else if (i == 2) {
-                String readString3 = parcel.readString();
-                String readString4 = parcel.readString();
-                String readString5 = parcel.readString();
-                String readString6 = parcel.readString();
-                int readInt = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
-                boolean readBoolean2 = parcel.readBoolean();
+                String string3 = parcel.readString();
+                String string4 = parcel.readString();
+                String string5 = parcel.readString();
+                String string6 = parcel.readString();
+                int i3 = parcel.readInt();
+                boolean z = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                boolean addPackage = addPackage(readString3, readString4, readString5, readString6, readInt, readBoolean, readBoolean2);
+                boolean zAddPackage = addPackage(string3, string4, string5, string6, i3, z, z2);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(addPackage);
+                parcel2.writeBoolean(zAddPackage);
             } else if (i == 3) {
-                String readString7 = parcel.readString();
-                String readString8 = parcel.readString();
-                String readString9 = parcel.readString();
-                String readString10 = parcel.readString();
-                int readInt2 = parcel.readInt();
-                boolean readBoolean3 = parcel.readBoolean();
-                boolean readBoolean4 = parcel.readBoolean();
+                String string7 = parcel.readString();
+                String string8 = parcel.readString();
+                String string9 = parcel.readString();
+                String string10 = parcel.readString();
+                int i4 = parcel.readInt();
+                boolean z3 = parcel.readBoolean();
+                boolean z4 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                boolean updatePackage = updatePackage(readString7, readString8, readString9, readString10, readInt2, readBoolean3, readBoolean4);
+                boolean zUpdatePackage = updatePackage(string7, string8, string9, string10, i4, z3, z4);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(updatePackage);
+                parcel2.writeBoolean(zUpdatePackage);
             } else if (i == 4) {
-                String readString11 = parcel.readString();
-                String readString12 = parcel.readString();
-                String readString13 = parcel.readString();
-                String readString14 = parcel.readString();
+                String string11 = parcel.readString();
+                String string12 = parcel.readString();
+                String string13 = parcel.readString();
+                String string14 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean deletePackage = deletePackage(readString11, readString12, readString13, readString14);
+                boolean zDeletePackage = deletePackage(string11, string12, string13, string14);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(deletePackage);
+                parcel2.writeBoolean(zDeletePackage);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -172,82 +172,82 @@ public interface IWapPushManager extends IInterface {
 
             @Override // com.android.internal.telephony.IWapPushManager
             public int processMessage(String str, String str2, Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IWapPushManager
             public boolean addPackage(String str, String str2, String str3, String str4, int i, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IWapPushManager
             public boolean updatePackage(String str, String str2, String str3, String str4, int i, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IWapPushManager
             public boolean deletePackage(String str, String str2, String str3, String str4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

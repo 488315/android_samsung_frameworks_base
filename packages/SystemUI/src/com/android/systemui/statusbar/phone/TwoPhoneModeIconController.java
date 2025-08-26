@@ -2,6 +2,8 @@ package com.android.systemui.statusbar.phone;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -29,9 +31,10 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.samsung.systemui.splugins.slimindicator.SPluginSlimIndicatorModel;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TwoPhoneModeIconController implements Dumpable {
     public final boolean TEST_DEBUG;
@@ -56,7 +59,6 @@ public final class TwoPhoneModeIconController implements Dumpable {
     public final UserTracker userTracker;
     public final TwoPhoneModeIconController$userTrackerCallback$1 userTrackerCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TwoPhoneModeState {
         public final boolean callEnabled;
         public final boolean msgEnabled;
@@ -111,17 +113,17 @@ public final class TwoPhoneModeIconController implements Dumpable {
         this.indicatorScaleGardener = indicatorScaleGardener;
         this.executor = delayableExecutor;
         this.userTracker = userTracker;
-        boolean isTestModeIndicatorGarden = DeviceState.isTestModeIndicatorGarden();
-        this.TEST_DEBUG = isTestModeIndicatorGarden;
-        this.state = new TwoPhoneModeState(isTestModeIndicatorGarden, isTestModeIndicatorGarden, isTestModeIndicatorGarden, isTestModeIndicatorGarden);
-        this.isBModeCreated = isTestModeIndicatorGarden;
-        this.isBModeUser = isTestModeIndicatorGarden;
-        this.isOwner = isTestModeIndicatorGarden;
+        boolean zIsTestModeIndicatorGarden = DeviceState.isTestModeIndicatorGarden();
+        this.TEST_DEBUG = zIsTestModeIndicatorGarden;
+        this.state = new TwoPhoneModeState(zIsTestModeIndicatorGarden, zIsTestModeIndicatorGarden, zIsTestModeIndicatorGarden, zIsTestModeIndicatorGarden);
+        this.isBModeCreated = zIsTestModeIndicatorGarden;
+        this.isBModeUser = zIsTestModeIndicatorGarden;
+        this.isOwner = zIsTestModeIndicatorGarden;
         this.currentUserId = ActivityManager.getCurrentUser();
         this.userTrackerCallback = new UserTracker.Callback() { // from class: com.android.systemui.statusbar.phone.TwoPhoneModeIconController$userTrackerCallback$1
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onUserChanged(int i, Context context2) {
-                final TwoPhoneModeIconController twoPhoneModeIconController = TwoPhoneModeIconController.this;
+                final TwoPhoneModeIconController twoPhoneModeIconController = this.this$0;
                 twoPhoneModeIconController.currentUserId = i;
                 Log.d("TwoPhoneModeIconController", "User switched to " + i);
                 twoPhoneModeIconController.updateTwoPhoneMode();
@@ -130,9 +132,9 @@ public final class TwoPhoneModeIconController implements Dumpable {
                         twoPhoneModeIconController.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.TwoPhoneModeIconController$showSwitchDoneToast$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                TwoPhoneModeIconController twoPhoneModeIconController2 = TwoPhoneModeIconController.this;
+                                TwoPhoneModeIconController twoPhoneModeIconController2 = twoPhoneModeIconController;
                                 String string = twoPhoneModeIconController2.context.getString(twoPhoneModeIconController2.isBModeUser ? R.string.switched_to_twophone_mode : R.string.switched_to_onephone_mode);
-                                Toast.makeText(TwoPhoneModeIconController.this.context, string, 1000).show();
+                                Toast.makeText(twoPhoneModeIconController.context, string, 1000).show();
                                 Log.d("TwoPhoneModeIconController", "Two phone mode switched toast " + string);
                             }
                         }, 5000L);
@@ -143,19 +145,19 @@ public final class TwoPhoneModeIconController implements Dumpable {
         this.settingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.phone.TwoPhoneModeIconController$settingsListener$1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                TwoPhoneModeIconController.this.updateTwoPhoneMode();
+                this.this$0.updateTwoPhoneMode();
             }
         };
         this.quickStarListener = new SlimIndicatorViewSubscriber() { // from class: com.android.systemui.statusbar.phone.TwoPhoneModeIconController$quickStarListener$1
             @Override // com.android.systemui.slimindicator.SlimIndicatorViewSubscriber
             public final void updateQuickStarStyle() {
-                TwoPhoneModeIconController.this.updateTwoPhoneMode();
+                this.this$0.updateTwoPhoneMode();
             }
         };
         this.configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.phone.TwoPhoneModeIconController$configurationListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onDensityOrFontScaleChanged() {
-                TwoPhoneModeIconController twoPhoneModeIconController = TwoPhoneModeIconController.this;
+            public final void onDensityOrFontScaleChanged() throws Resources.NotFoundException {
+                TwoPhoneModeIconController twoPhoneModeIconController = this.this$0;
                 float f = twoPhoneModeIconController.indicatorScaleGardener.getLatestScaleModel(twoPhoneModeIconController.context).ratio;
                 TwoPhoneModeIconView twoPhoneModeIconView = twoPhoneModeIconController.modeIconView;
                 if (twoPhoneModeIconView == null) {
@@ -173,7 +175,7 @@ public final class TwoPhoneModeIconController implements Dumpable {
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onDisplayDeviceTypeChanged() {
+            public final void onDisplayDeviceTypeChanged() throws Resources.NotFoundException {
                 if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD) {
                     onDensityOrFontScaleChanged();
                 }
@@ -241,19 +243,111 @@ public final class TwoPhoneModeIconController implements Dumpable {
         ((UserTrackerImpl) this.userTracker).removeCallback(this.userTrackerCallback);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0135  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x013c A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x013d  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0137  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x003f  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x005a  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x005f  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x0100  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateTwoPhoneMode() {
-        /*
-            Method dump skipped, instructions count: 357
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.TwoPhoneModeIconController.updateTwoPhoneMode():void");
+        int i;
+        boolean z;
+        int size;
+        int i2;
+        ArrayList arrayList = new ArrayList(this.userManager.getUsers());
+        boolean z2 = this.TEST_DEBUG;
+        if (!z2) {
+            if (arrayList.isEmpty()) {
+                z = false;
+                this.isBModeCreated = z;
+                ArrayList arrayList2 = new ArrayList();
+                size = arrayList.size();
+                i2 = 0;
+                while (i2 < size) {
+                    Object obj = arrayList.get(i2);
+                    i2++;
+                    if (((UserInfo) obj).id == this.currentUserId) {
+                        arrayList2.add(obj);
+                    }
+                }
+                UserInfo userInfo = (UserInfo) CollectionsKt___CollectionsKt.getOrNull(0, arrayList2);
+                this.isBModeUser = userInfo == null ? userInfo.isBMode() : false;
+            } else {
+                int size2 = arrayList.size();
+                int i3 = 0;
+                while (i3 < size2) {
+                    Object obj2 = arrayList.get(i3);
+                    i3++;
+                    if (((UserInfo) obj2).isBMode()) {
+                        z = true;
+                        break;
+                    }
+                }
+                z = false;
+                this.isBModeCreated = z;
+                ArrayList arrayList22 = new ArrayList();
+                size = arrayList.size();
+                i2 = 0;
+                while (i2 < size) {
+                }
+                UserInfo userInfo2 = (UserInfo) CollectionsKt___CollectionsKt.getOrNull(0, arrayList22);
+                this.isBModeUser = userInfo2 == null ? userInfo2.isBMode() : false;
+            }
+        }
+        this.isOwner = this.currentUserId == 0;
+        if (!z2) {
+            this.state = new TwoPhoneModeState(this.settingsHelper.hasTwoPhoneAccount(), this.settingsHelper.isTwoPhoneRegistered(), this.settingsHelper.isTwoPhoneCallEnabled(), this.settingsHelper.isTwoPhoneSMSEnabled());
+        }
+        if (this.isBModeCreated || this.context.getResources().getBoolean(android.R.bool.config_enable_emergency_call_while_sim_locked)) {
+            TwoPhoneModeState twoPhoneModeState = this.state;
+            if (twoPhoneModeState.userCreated) {
+                boolean z3 = this.isOwner;
+                boolean z4 = twoPhoneModeState.registered;
+                boolean z5 = twoPhoneModeState.msgEnabled;
+                boolean z6 = twoPhoneModeState.callEnabled;
+                if (z3) {
+                    if ((z6 || z5) && z4) {
+                        TwoPhoneModeIconView twoPhoneModeIconView = this.modeIconView;
+                        if (twoPhoneModeIconView == null) {
+                            twoPhoneModeIconView = null;
+                        }
+                        twoPhoneModeIconView.setContentDescription(this.context.getString(R.string.status_bar_one_phone_mode_tts));
+                        i = R.drawable.stat_sys_two_phone_p_mode;
+                    } else {
+                        i = 0;
+                    }
+                } else if (this.isBModeUser) {
+                    if ((z6 || z5) && z4) {
+                        TwoPhoneModeIconView twoPhoneModeIconView2 = this.modeIconView;
+                        if (twoPhoneModeIconView2 == null) {
+                            twoPhoneModeIconView2 = null;
+                        }
+                        twoPhoneModeIconView2.setContentDescription(this.context.getString(R.string.status_bar_two_phone_mode_tts));
+                        i = R.drawable.stat_sys_two_phone_b_mode;
+                    } else {
+                        TwoPhoneModeIconView twoPhoneModeIconView3 = this.modeIconView;
+                        if (twoPhoneModeIconView3 == null) {
+                            twoPhoneModeIconView3 = null;
+                        }
+                        twoPhoneModeIconView3.setContentDescription(this.context.getString(R.string.status_bar_two_phone_mode_blocked_tts));
+                        i = R.drawable.stat_sys_two_phone_b_mode_blocked;
+                    }
+                }
+            }
+        }
+        Log.d("TwoPhoneModeIconController", "updateTwoPhoneMode state=" + this.state + " current user(" + this.currentUserId + ") is BMode=" + this.isBModeUser + " -> icon=" + i);
+        boolean z7 = i != 0;
+        if (this.modeIconView == null) {
+            return;
+        }
+        boolean z8 = z7 && !((SlimIndicatorViewMediatorImpl) this.slimIndicatorViewMediator).isBlocked(SPluginSlimIndicatorModel.DB_KEY_TWO_PHONE_MODE_ICON);
+        TwoPhoneModeIconView twoPhoneModeIconView4 = this.modeIconView;
+        if (twoPhoneModeIconView4 == null) {
+            twoPhoneModeIconView4 = null;
+        }
+        twoPhoneModeIconView4.setImageResource(i);
+        TwoPhoneModeIconView twoPhoneModeIconView5 = this.modeIconView;
+        (twoPhoneModeIconView5 != null ? twoPhoneModeIconView5 : null).setVisibility(z8 ? 0 : 8);
     }
 }

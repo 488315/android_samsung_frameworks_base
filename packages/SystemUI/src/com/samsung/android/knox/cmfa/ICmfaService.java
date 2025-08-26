@@ -10,12 +10,10 @@ import com.samsung.android.knox.cmfa.IResultListener;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ICmfaService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.cmfa.ICmfaService";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ICmfaService {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -107,7 +105,6 @@ public interface ICmfaService extends IInterface {
 
     int unregisterListener(IEventListener iEventListener) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ICmfaService {
         public static final int TRANSACTION_check = 7;
         public static final int TRANSACTION_disable = 6;
@@ -122,7 +119,6 @@ public interface ICmfaService extends IInterface {
         public static final int TRANSACTION_stop = 9;
         public static final int TRANSACTION_unregisterListener = 11;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ICmfaService {
             public IBinder mRemote;
 
@@ -137,64 +133,64 @@ public interface ICmfaService extends IInterface {
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public int check(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public int disable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public int enable(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public List<AuthFactorType> getFactorsToSetup() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AuthFactorType.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AuthFactorType.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -204,128 +200,128 @@ public interface ICmfaService extends IInterface {
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public List<AuthActionType> getValidActions() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AuthActionType.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AuthActionType.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public boolean isEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public boolean isStarted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public int notifyTestFactorScoreChange(String str, long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public int registerListener(IEventListener iEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iEventListener);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iEventListener);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public int start(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public int stop(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.cmfa.ICmfaService
             public int unregisterListener(IEventListener iEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iEventListener);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICmfaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iEventListener);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -338,8 +334,8 @@ public interface ICmfaService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICmfaService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ICmfaService)) ? new Proxy(iBinder) : (ICmfaService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICmfaService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ICmfaService)) ? new Proxy(iBinder) : (ICmfaService) iInterfaceQueryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -392,14 +388,14 @@ public interface ICmfaService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean isEnabled = isEnabled();
+                    boolean zIsEnabled = isEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEnabled);
+                    parcel2.writeBoolean(zIsEnabled);
                     return true;
                 case 2:
-                    boolean isStarted = isStarted();
+                    boolean zIsStarted = isStarted();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStarted);
+                    parcel2.writeBoolean(zIsStarted);
                     return true;
                 case 3:
                     List<AuthFactorType> factorsToSetup = getFactorsToSetup();
@@ -412,61 +408,61 @@ public interface ICmfaService extends IInterface {
                     parcel2.writeTypedList(validActions, 1);
                     return true;
                 case 5:
-                    String readString = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int enable = enable(readString, readBoolean);
+                    int iEnable = enable(string, z);
                     parcel2.writeNoException();
-                    parcel2.writeInt(enable);
+                    parcel2.writeInt(iEnable);
                     return true;
                 case 6:
-                    int disable = disable();
+                    int iDisable = disable();
                     parcel2.writeNoException();
-                    parcel2.writeInt(disable);
+                    parcel2.writeInt(iDisable);
                     return true;
                 case 7:
-                    IResultListener asInterface = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int check = check(asInterface);
+                    int iCheck = check(iResultListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(check);
+                    parcel2.writeInt(iCheck);
                     return true;
                 case 8:
-                    IResultListener asInterface2 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface2 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int start = start(asInterface2);
+                    int iStart = start(iResultListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(start);
+                    parcel2.writeInt(iStart);
                     return true;
                 case 9:
-                    IResultListener asInterface3 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface3 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int stop = stop(asInterface3);
+                    int iStop = stop(iResultListenerAsInterface3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stop);
+                    parcel2.writeInt(iStop);
                     return true;
                 case 10:
-                    IEventListener asInterface4 = IEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IEventListener iEventListenerAsInterface = IEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int registerListener = registerListener(asInterface4);
+                    int iRegisterListener = registerListener(iEventListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(registerListener);
+                    parcel2.writeInt(iRegisterListener);
                     return true;
                 case 11:
-                    IEventListener asInterface5 = IEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IEventListener iEventListenerAsInterface2 = IEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int unregisterListener = unregisterListener(asInterface5);
+                    int iUnregisterListener = unregisterListener(iEventListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unregisterListener);
+                    parcel2.writeInt(iUnregisterListener);
                     return true;
                 case 12:
-                    String readString2 = parcel.readString();
-                    long readLong = parcel.readLong();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string2 = parcel.readString();
+                    long j = parcel.readLong();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int notifyTestFactorScoreChange = notifyTestFactorScoreChange(readString2, readLong, readBoolean2);
+                    int iNotifyTestFactorScoreChange = notifyTestFactorScoreChange(string2, j, z2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(notifyTestFactorScoreChange);
+                    parcel2.writeInt(iNotifyTestFactorScoreChange);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

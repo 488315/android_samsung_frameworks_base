@@ -5,7 +5,6 @@ import androidx.compose.foundation.lazy.grid.LazyGridItemInfo;
 import androidx.compose.foundation.lazy.grid.LazyGridMeasuredItem;
 import androidx.compose.ui.unit.IntOffset;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LazyGridSnapLayoutInfoProviderKt {
     public static final int offsetOnMainAxis(LazyGridItemInfo lazyGridItemInfo, Orientation orientation) {

@@ -6,11 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.NoWhenBranchMatchedException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class MeasureScopeWithLayoutNodeKt {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -42,13 +40,13 @@ public abstract class MeasureScopeWithLayoutNodeKt {
 
     public static final List getChildrenOfVirtualChildren(IntrinsicMeasureScope intrinsicMeasureScope) {
         LayoutNode layoutNode = ((MeasureScopeWithLayoutNode) intrinsicMeasureScope).getLayoutNode();
-        boolean isInLookaheadPass = isInLookaheadPass(layoutNode);
+        boolean zIsInLookaheadPass = isInLookaheadPass(layoutNode);
         List foldedChildren$ui_release = layoutNode.getFoldedChildren$ui_release();
         ArrayList arrayList = new ArrayList(foldedChildren$ui_release.size());
         int size = foldedChildren$ui_release.size();
         for (int i = 0; i < size; i++) {
             LayoutNode layoutNode2 = (LayoutNode) foldedChildren$ui_release.get(i);
-            arrayList.add(isInLookaheadPass ? layoutNode2.getChildLookaheadMeasurables$ui_release() : layoutNode2.getChildMeasurables$ui_release());
+            arrayList.add(zIsInLookaheadPass ? layoutNode2.getChildLookaheadMeasurables$ui_release() : layoutNode2.getChildMeasurables$ui_release());
         }
         return arrayList;
     }

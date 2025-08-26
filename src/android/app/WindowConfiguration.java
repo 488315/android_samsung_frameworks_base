@@ -59,7 +59,7 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     public static final int POP_OVER_OFF = 2;
     public static final int POP_OVER_ON = 1;
     public static final int POP_OVER_ON_WITHOUT_OUTLINE_EFFECT = 3;
-    private static final int POP_OVER_UNDEFINED = 0;
+    public static final int POP_OVER_UNDEFINED = 0;
     public static final int ROTATION_UNDEFINED = -1;
     static final int STAGE_CONFIG_POSITION_MASK = 120;
     static final int STAGE_CONFIG_TYPE_MASK = 7;
@@ -165,6 +165,10 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
 
     public void setPopOverState(int i) {
         this.mPopOverState = i;
+    }
+
+    public int getPopOverState() {
+        return this.mPopOverState;
     }
 
     public boolean isPopOver() {
@@ -484,12 +488,12 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     }
 
     private static void scaleBounds(float f, Rect rect) {
-        int width = rect.width();
-        int height = rect.height();
+        int iWidth = rect.width();
+        int iHeight = rect.height();
         rect.left = (int) ((rect.left * f) + 0.5f);
         rect.top = (int) ((rect.top * f) + 0.5f);
-        rect.right = rect.left + ((int) ((width * f) + 0.5f));
-        rect.bottom = rect.top + ((int) ((height * f) + 0.5f));
+        rect.right = rect.left + ((int) ((iWidth * f) + 0.5f));
+        rect.bottom = rect.top + ((int) ((iHeight * f) + 0.5f));
     }
 
     public int updateFrom(WindowConfiguration windowConfiguration) {
@@ -773,7 +777,7 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
         sb.append(this.mMaxBounds);
         sb.append(" mDisplayRotation=");
         int i = this.mRotation;
-        String str2 = KeyboardLayout.LAYOUT_TYPE_UNDEFINED;
+        String strRotationToString = KeyboardLayout.LAYOUT_TYPE_UNDEFINED;
         sb.append(i == -1 ? KeyboardLayout.LAYOUT_TYPE_UNDEFINED : Surface.rotationToString(this.mDisplayRotation));
         sb.append(" mWindowingMode=");
         sb.append(windowingModeToString(this.mWindowingMode));
@@ -784,9 +788,9 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
         sb.append(" mRotation=");
         int i2 = this.mRotation;
         if (i2 != -1) {
-            str2 = Surface.rotationToString(i2);
+            strRotationToString = Surface.rotationToString(i2);
         }
-        sb.append(str2);
+        sb.append(strRotationToString);
         sb.append(" mStageConfig=");
         sb.append(stageConfigToString(this.mStage));
         if (CoreRune.MW_EMBED_ACTIVITY_MODE) {
@@ -822,7 +826,7 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         Rect rect = this.mAppBounds;
         if (rect != null) {
             rect.dumpDebug(protoOutputStream, 1146756268033L);
@@ -831,11 +835,11 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
         protoOutputStream.write(1120986464259L, this.mActivityType);
         this.mBounds.dumpDebug(protoOutputStream, 1146756268036L);
         this.mMaxBounds.dumpDebug(protoOutputStream, 1146756268037L);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
-    public void readFromProto(ProtoInputStream protoInputStream, long j) throws IOException, WireTypeMismatchException {
-        long start = protoInputStream.start(j);
+    public void readFromProto(ProtoInputStream protoInputStream, long j) throws WireTypeMismatchException, IOException {
+        long jStart = protoInputStream.start(j);
         while (protoInputStream.nextField() != -1) {
             try {
                 int fieldNumber = protoInputStream.getFieldNumber();
@@ -853,7 +857,7 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
                     this.mMaxBounds.readFromProto(protoInputStream, 1146756268037L);
                 }
             } finally {
-                protoInputStream.end(start);
+                protoInputStream.end(jStart);
             }
         }
     }

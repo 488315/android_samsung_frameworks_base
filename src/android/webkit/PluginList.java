@@ -27,9 +27,9 @@ public class PluginList {
 
     @Deprecated
     public synchronized void removePlugin(Plugin plugin) {
-        int indexOf = this.mPlugins.indexOf(plugin);
-        if (indexOf != -1) {
-            this.mPlugins.remove(indexOf);
+        int iIndexOf = this.mPlugins.indexOf(plugin);
+        if (iIndexOf != -1) {
+            this.mPlugins.remove(iIndexOf);
         }
     }
 

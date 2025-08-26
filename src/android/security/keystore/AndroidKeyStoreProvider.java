@@ -25,7 +25,7 @@ public class AndroidKeyStoreProvider extends Provider {
     }
 
     @SystemApi
-    public static KeyStore getKeyStoreForUid(int i) throws KeyStoreException, NoSuchProviderException {
+    public static KeyStore getKeyStoreForUid(int i) throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException, NoSuchProviderException {
         AndroidKeyStoreLoadStoreParameter androidKeyStoreLoadStoreParameter = new AndroidKeyStoreLoadStoreParameter(KeyProperties.legacyUidToNamespace(i));
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         try {

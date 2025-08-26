@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.os.RemoteException;
 import com.android.settingslib.widget.CandidateInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DefaultAppInfo extends CandidateInfo {
     public final ComponentName componentName;
@@ -22,7 +21,7 @@ public class DefaultAppInfo extends CandidateInfo {
     }
 
     public CharSequence loadLabel() {
-        ComponentInfo componentInfo;
+        ComponentInfo activityInfo;
         int i = this.userId;
         if (this.componentName == null) {
             PackageItemInfo packageItemInfo = this.packageItemInfo;
@@ -33,17 +32,17 @@ public class DefaultAppInfo extends CandidateInfo {
         }
         try {
             try {
-                componentInfo = AppGlobals.getPackageManager().getActivityInfo(this.componentName, 0L, i);
-                if (componentInfo == null) {
-                    componentInfo = AppGlobals.getPackageManager().getServiceInfo(this.componentName, 0L, i);
+                activityInfo = AppGlobals.getPackageManager().getActivityInfo(this.componentName, 0L, i);
+                if (activityInfo == null) {
+                    activityInfo = AppGlobals.getPackageManager().getServiceInfo(this.componentName, 0L, i);
                 }
-            } catch (PackageManager.NameNotFoundException unused) {
-                return null;
+            } catch (RemoteException unused) {
+                activityInfo = null;
             }
-        } catch (RemoteException unused2) {
-            componentInfo = null;
+            return activityInfo != null ? activityInfo.loadLabel(this.mPm) : this.mPm.getApplicationInfoAsUser(this.componentName.getPackageName(), 0, i).loadLabel(this.mPm);
+        } catch (PackageManager.NameNotFoundException unused2) {
+            return null;
         }
-        return componentInfo != null ? componentInfo.loadLabel(this.mPm) : this.mPm.getApplicationInfoAsUser(this.componentName.getPackageName(), 0, i).loadLabel(this.mPm);
     }
 
     public DefaultAppInfo(Context context, PackageManager packageManager, int i, PackageItemInfo packageItemInfo) {

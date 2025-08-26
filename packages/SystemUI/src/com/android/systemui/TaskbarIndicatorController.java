@@ -8,22 +8,68 @@ import com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener$Stub$
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy;
 import java.util.ArrayList;
 import java.util.List;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TaskbarIndicatorController extends ITaskbarStatusIcon$Stub {
     public final String TAG = "TaskbarIndicatorController";
     public List mDesktopStatusBarIconCallback;
     public ITaskbarStatusIconListener$Stub$Proxy taskbarStatusIconListener;
 
+    /* renamed from: com.android.systemui.TaskbarIndicatorController$requestStatusIcons$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return TaskbarIndicatorController.this.new AnonymousClass1(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            List list = TaskbarIndicatorController.this.mDesktopStatusBarIconCallback;
+            if (list != null) {
+                ArrayList arrayList = (ArrayList) list;
+                int size = arrayList.size();
+                int i = 0;
+                while (i < size) {
+                    Object obj2 = arrayList.get(i);
+                    i++;
+                    ((StatusBarSignalPolicy.DesktopCallback) obj2).updateDesktopStatusBarIcons();
+                }
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     public final void requestStatusIcons() {
         DefaultScheduler defaultScheduler = Dispatchers.Default;
-        BuildersKt.launch$default(CoroutineScopeKt.CoroutineScope(MainDispatcherLoader.dispatcher), null, null, new TaskbarIndicatorController$requestStatusIcons$1(this, null), 3);
+        BuildersKt.launch$default(CoroutineScopeKt.CoroutineScope(MainDispatcherLoader.dispatcher), null, null, new AnonymousClass1(null), 3);
     }
 
     public final void setDesktopStatusBarIconCallback(StatusBarSignalPolicy.DesktopCallback desktopCallback) {
@@ -41,15 +87,15 @@ public final class TaskbarIndicatorController extends ITaskbarStatusIcon$Stub {
         try {
             ITaskbarStatusIconListener$Stub$Proxy iTaskbarStatusIconListener$Stub$Proxy = this.taskbarStatusIconListener;
             if (iTaskbarStatusIconListener$Stub$Proxy != null) {
-                Parcel obtain = Parcel.obtain(iTaskbarStatusIconListener$Stub$Proxy.mRemote);
+                Parcel parcelObtain = Parcel.obtain(iTaskbarStatusIconListener$Stub$Proxy.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener");
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    iTaskbarStatusIconListener$Stub$Proxy.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener");
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    iTaskbarStatusIconListener$Stub$Proxy.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         } catch (DeadObjectException unused) {

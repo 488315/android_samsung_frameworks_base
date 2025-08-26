@@ -148,9 +148,9 @@ public interface IWearableSensingService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWearableSensingService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWearableSensingService)) {
-                return (IWearableSensingService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWearableSensingService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWearableSensingService)) {
+                return (IWearableSensingService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -209,18 +209,18 @@ public interface IWearableSensingService extends IInterface {
             switch (i) {
                 case 1:
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    IWearableSensingCallback asInterface = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IWearableSensingCallback iWearableSensingCallbackAsInterface = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
                     RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    provideSecureConnection(parcelFileDescriptor, asInterface, remoteCallback);
+                    provideSecureConnection(parcelFileDescriptor, iWearableSensingCallbackAsInterface, remoteCallback);
                     return true;
                 case 2:
                     ParcelFileDescriptor parcelFileDescriptor2 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
-                    IWearableSensingCallback asInterface2 = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IWearableSensingCallback iWearableSensingCallbackAsInterface2 = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
                     RemoteCallback remoteCallback2 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    provideConcurrentSecureConnection(parcelFileDescriptor2, persistableBundle, asInterface2, remoteCallback2);
+                    provideConcurrentSecureConnection(parcelFileDescriptor2, persistableBundle, iWearableSensingCallbackAsInterface2, remoteCallback2);
                     return true;
                 case 3:
                     ParcelFileDescriptor parcelFileDescriptor3 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
@@ -231,10 +231,10 @@ public interface IWearableSensingService extends IInterface {
                     return true;
                 case 4:
                     ParcelFileDescriptor parcelFileDescriptor4 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    IWearableSensingCallback asInterface3 = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IWearableSensingCallback iWearableSensingCallbackAsInterface3 = IWearableSensingCallback.Stub.asInterface(parcel.readStrongBinder());
                     RemoteCallback remoteCallback4 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    provideDataStream(parcelFileDescriptor4, asInterface3, remoteCallback4);
+                    provideDataStream(parcelFileDescriptor4, iWearableSensingCallbackAsInterface3, remoteCallback4);
                     return true;
                 case 5:
                     PersistableBundle persistableBundle3 = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
@@ -244,21 +244,21 @@ public interface IWearableSensingService extends IInterface {
                     provideData(persistableBundle3, sharedMemory, remoteCallback5);
                     return true;
                 case 6:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     RemoteCallback remoteCallback6 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
-                    int readInt2 = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string = parcel.readString();
                     RemoteCallback remoteCallback7 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    registerDataRequestObserver(readInt, remoteCallback6, readInt2, readString, remoteCallback7);
+                    registerDataRequestObserver(i3, remoteCallback6, i4, string, remoteCallback7);
                     return true;
                 case 7:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    String string2 = parcel.readString();
                     RemoteCallback remoteCallback8 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    unregisterDataRequestObserver(readInt3, readInt4, readString2, remoteCallback8);
+                    unregisterDataRequestObserver(i5, i6, string2, remoteCallback8);
                     return true;
                 case 8:
                     RemoteCallback remoteCallback9 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
@@ -279,23 +279,23 @@ public interface IWearableSensingService extends IInterface {
                     return true;
                 case 12:
                     AmbientContextEventRequest ambientContextEventRequest = (AmbientContextEventRequest) parcel.readTypedObject(AmbientContextEventRequest.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     RemoteCallback remoteCallback12 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     RemoteCallback remoteCallback13 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startDetection(ambientContextEventRequest, readString3, remoteCallback12, remoteCallback13);
+                    startDetection(ambientContextEventRequest, string3, remoteCallback12, remoteCallback13);
                     return true;
                 case 13:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    stopDetection(readString4);
+                    stopDetection(string4);
                     return true;
                 case 14:
-                    int[] createIntArray = parcel.createIntArray();
-                    String readString5 = parcel.readString();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    String string5 = parcel.readString();
                     RemoteCallback remoteCallback14 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    queryServiceStatus(createIntArray, readString5, remoteCallback14);
+                    queryServiceStatus(iArrCreateIntArray, string5, remoteCallback14);
                     return true;
                 case 15:
                     killProcess();
@@ -323,202 +323,202 @@ public interface IWearableSensingService extends IInterface {
 
             @Override // android.service.wearable.IWearableSensingService
             public void provideSecureConnection(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback iWearableSensingCallback, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeStrongInterface(iWearableSensingCallback);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeStrongInterface(iWearableSensingCallback);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void provideConcurrentSecureConnection(ParcelFileDescriptor parcelFileDescriptor, PersistableBundle persistableBundle, IWearableSensingCallback iWearableSensingCallback, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeStrongInterface(iWearableSensingCallback);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeStrongInterface(iWearableSensingCallback);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void provideReadOnlyParcelFileDescriptor(ParcelFileDescriptor parcelFileDescriptor, PersistableBundle persistableBundle, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void provideDataStream(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback iWearableSensingCallback, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeStrongInterface(iWearableSensingCallback);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeStrongInterface(iWearableSensingCallback);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void provideData(PersistableBundle persistableBundle, SharedMemory sharedMemory, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeTypedObject(sharedMemory, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeTypedObject(sharedMemory, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void registerDataRequestObserver(int i, RemoteCallback remoteCallback, int i2, String str, RemoteCallback remoteCallback2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteCallback2, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteCallback2, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void unregisterDataRequestObserver(int i, int i2, String str, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void startHotwordRecognition(RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    obtain.writeTypedObject(remoteCallback2, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    parcelObtain.writeTypedObject(remoteCallback2, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void stopHotwordRecognition(RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void onValidatedByHotwordDetectionService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void stopActiveHotwordAudio() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void startDetection(AmbientContextEventRequest ambientContextEventRequest, String str, RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeTypedObject(ambientContextEventRequest, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    obtain.writeTypedObject(remoteCallback2, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(ambientContextEventRequest, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    parcelObtain.writeTypedObject(remoteCallback2, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void stopDetection(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void queryServiceStatus(int[] iArr, String str, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wearable.IWearableSensingService
             public void killProcess() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

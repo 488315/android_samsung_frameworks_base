@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EditUserPhotoController {
     public final Activity mActivity;
@@ -30,7 +29,7 @@ public class EditUserPhotoController {
     public Drawable mNewUserPhotoDrawable;
 
     /* renamed from: -$$Nest$monPhotoProcessed, reason: not valid java name */
-    public static void m976$$Nest$monPhotoProcessed(final EditUserPhotoController editUserPhotoController, Bitmap bitmap) {
+    public static void m978$$Nest$monPhotoProcessed(final EditUserPhotoController editUserPhotoController, Bitmap bitmap) {
         if (bitmap == null) {
             editUserPhotoController.getClass();
             return;
@@ -38,8 +37,8 @@ public class EditUserPhotoController {
         editUserPhotoController.mNewUserPhotoBitmap = bitmap;
         ((AbstractListeningExecutorService) editUserPhotoController.mExecutorService).submit(new Runnable() { // from class: com.android.settingslib.users.EditUserPhotoController$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
-            public final void run() {
-                EditUserPhotoController editUserPhotoController2 = EditUserPhotoController.this;
+            public final void run() throws IOException {
+                EditUserPhotoController editUserPhotoController2 = this.f$0;
                 File file = null;
                 if (editUserPhotoController2.mNewUserPhotoBitmap != null) {
                     try {
@@ -76,7 +75,7 @@ public class EditUserPhotoController {
         imageView.setOnClickListener(new View.OnClickListener(z) { // from class: com.android.settingslib.users.EditUserPhotoController$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                EditUserPhotoController editUserPhotoController = EditUserPhotoController.this;
+                EditUserPhotoController editUserPhotoController = this.f$0;
                 Intent intent = new Intent("com.android.avatarpicker.FULL_SCREEN_ACTIVITY");
                 intent.addCategory("android.intent.category.DEFAULT");
                 intent.setPackage(editUserPhotoController.mImageView.getContext().getApplicationContext().getPackageName());

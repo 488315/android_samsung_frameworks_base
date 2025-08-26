@@ -41,8 +41,8 @@ public class CompatSandbox {
     }
 
     public static void applyDisplaySandboxingIfNeeded(DisplayInfo displayInfo) {
-        ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-        Configuration configuration = currentActivityThread != null ? currentActivityThread.getConfiguration() : null;
+        ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+        Configuration configuration = activityThreadCurrentActivityThread != null ? activityThreadCurrentActivityThread.getConfiguration() : null;
         if (configuration == null || !hasCompatSandboxFlags(configuration, 2)) {
             return;
         }

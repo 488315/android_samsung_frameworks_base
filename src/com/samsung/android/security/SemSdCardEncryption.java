@@ -95,9 +95,9 @@ public class SemSdCardEncryption {
         this.m_InstDirEncSvc = null;
         this.mContext = context;
         this.mDew = new DirEncryptionWrapper(this.mContext);
-        IDirEncryptService asInterface = IDirEncryptService.Stub.asInterface(ServiceManager.getService(NAME));
-        this.m_InstDirEncSvc = asInterface;
-        if (asInterface == null) {
+        IDirEncryptService iDirEncryptServiceAsInterface = IDirEncryptService.Stub.asInterface(ServiceManager.getService(NAME));
+        this.m_InstDirEncSvc = iDirEncryptServiceAsInterface;
+        if (iDirEncryptServiceAsInterface == null) {
             Log.e(TAG, "Unable to get DirEncryptService instance.");
         }
         if (IS_SUPPORT_SDCARD_SLOT) {
@@ -220,22 +220,22 @@ public class SemSdCardEncryption {
 
     public int setStorageCardEncryptionPolicy(int i) {
         IDirEncryptService iDirEncryptService;
-        int i2 = 200;
+        int storageCardEncryptionPolicy = 200;
         if (!isEncryptionSupported() || (iDirEncryptService = this.m_InstDirEncSvc) == null) {
             return 200;
         }
         try {
-            i2 = iDirEncryptService.setStorageCardEncryptionPolicy(i, 4, 7);
+            storageCardEncryptionPolicy = iDirEncryptService.setStorageCardEncryptionPolicy(i, 4, 7);
         } catch (RemoteException unused) {
             Log.e(TAG, "Unable to communicate with DirEncryptService");
         }
-        Log.i(TAG, "setStorageCardEncryptionPolicy result : " + i2);
-        if (i2 == 8 || i2 == 10) {
+        Log.i(TAG, "setStorageCardEncryptionPolicy result : " + storageCardEncryptionPolicy);
+        if (storageCardEncryptionPolicy == 8 || storageCardEncryptionPolicy == 10) {
             Log.i(TAG, "result : POLICY_SAVED || POLICY_ALREADY_SET");
             unmountSDCardByAdmin();
         }
         setPolicyChanged(true);
-        return i2;
+        return storageCardEncryptionPolicy;
     }
 
     public int setAdminPolicy(boolean z, String str) {
@@ -244,22 +244,22 @@ public class SemSdCardEncryption {
 
     public int setSdCardEncryptionPolicy(int i, int i2, String str) {
         IDirEncryptService iDirEncryptService;
-        int i3 = 200;
+        int sdCardEncryptionPolicy = 200;
         if (!isEncryptionSupported() || (iDirEncryptService = this.m_InstDirEncSvc) == null) {
             return 200;
         }
         try {
-            i3 = iDirEncryptService.setSdCardEncryptionPolicy(i, i2, str);
+            sdCardEncryptionPolicy = iDirEncryptService.setSdCardEncryptionPolicy(i, i2, str);
         } catch (RemoteException unused) {
             Log.e(TAG, "Unable to communicate with DirEncryptService");
         }
-        Log.i(TAG, "setSdCardEncryptionPolicy result : " + i3);
-        if (i3 == 8 || i3 == 10) {
+        Log.i(TAG, "setSdCardEncryptionPolicy result : " + sdCardEncryptionPolicy);
+        if (sdCardEncryptionPolicy == 8 || sdCardEncryptionPolicy == 10) {
             Log.i(TAG, "result : POLICY_SAVED || POLICY_ALREADY_SET");
             unmountSDCardByAdmin();
         }
         setPolicyChanged(true);
-        return i3;
+        return sdCardEncryptionPolicy;
     }
 
     public boolean isStorageCardEncryptionPoliciesApplied() {

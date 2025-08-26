@@ -1,11 +1,14 @@
 package com.android.systemui.haptics.slider.compose.ui;
 
 import androidx.compose.foundation.gestures.Orientation;
+import androidx.compose.foundation.interaction.DragInteraction$Start;
+import androidx.compose.foundation.interaction.Interaction;
 import androidx.compose.foundation.interaction.InteractionSource;
 import androidx.compose.ui.geometry.Offset;
 import androidx.compose.ui.input.pointer.util.VelocityTracker;
 import androidx.compose.ui.unit.Velocity;
 import androidx.compose.ui.unit.VelocityKt;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.systemui.haptics.slider.SeekableSliderTrackerConfig;
 import com.android.systemui.haptics.slider.SliderDragVelocityProvider;
 import com.android.systemui.haptics.slider.SliderEvent;
@@ -18,12 +21,26 @@ import com.android.systemui.lifecycle.ExclusiveActivatable;
 import com.android.systemui.statusbar.VibratorHelper;
 import com.android.systemui.util.time.SystemClock;
 import com.google.android.msdl.domain.MSDLPlayer;
+import kotlin.KotlinNothingValueException;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.ranges.ClosedFloatRange;
 import kotlin.ranges.ClosedFloatingPointRange;
 import kotlin.ranges.RangesKt___RangesKt;
+import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
+import kotlinx.coroutines.DelayKt;
+import kotlinx.coroutines.ExceptionsKt;
+import kotlinx.coroutines.StandaloneCoroutine;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SliderHapticsViewModel extends ExclusiveActivatable {
     public final SliderHapticsViewModel$dragVelocityProvider$1 dragVelocityProvider;
@@ -39,12 +56,10 @@ public final class SliderHapticsViewModel extends ExclusiveActivatable {
     public SliderEventType currentSliderEventType = SliderEventType.NOTHING;
     public final VelocityTracker velocityTracker = new VelocityTracker();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         SliderHapticsViewModel create(InteractionSource interactionSource, ClosedFloatingPointRange closedFloatingPointRange, Orientation orientation, SliderHapticFeedbackConfig sliderHapticFeedbackConfig, SeekableSliderTrackerConfig seekableSliderTrackerConfig);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -85,6 +100,192 @@ public final class SliderHapticsViewModel extends ExclusiveActivatable {
         }
     }
 
+    /* renamed from: com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return SliderHapticsViewModel.this.onActivated(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$2$1, reason: invalid class name */
+        final class AnonymousClass1 extends SuspendLambda implements Function2 {
+            private /* synthetic */ Object L$0;
+            int label;
+            final /* synthetic */ SliderHapticsViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass1(SliderHapticsViewModel sliderHapticsViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = sliderHapticsViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                AnonymousClass1 anonymousClass1 = new AnonymousClass1(this.this$0, continuation);
+                anonymousClass1.L$0 = obj;
+                return anonymousClass1;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                try {
+                    if (i == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
+                        SliderHapticsViewModel sliderHapticsViewModel = this.this$0;
+                        sliderHapticsViewModel.sliderTracker = new SliderStateTracker(sliderHapticsViewModel.sliderHapticFeedbackProvider, sliderHapticsViewModel.sliderStateProducer, coroutineScope, sliderHapticsViewModel.sliderTrackerConfig);
+                        SliderStateTracker sliderStateTracker = this.this$0.sliderTracker;
+                        if (sliderStateTracker != null) {
+                            sliderStateTracker.startTracking();
+                        }
+                        this.label = 1;
+                        if (DelayKt.awaitCancellation(this) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj);
+                    }
+                    throw new KotlinNothingValueException();
+                } catch (Throwable th) {
+                    SliderStateTracker sliderStateTracker2 = this.this$0.sliderTracker;
+                    if (sliderStateTracker2 != null) {
+                        StandaloneCoroutine standaloneCoroutine = sliderStateTracker2.job;
+                        if (standaloneCoroutine != null) {
+                            standaloneCoroutine.cancel(ExceptionsKt.CancellationException("Stopped tracking slider state", null));
+                        }
+                        sliderStateTracker2.job = null;
+                        sliderStateTracker2.resetState();
+                    }
+                    SliderHapticsViewModel sliderHapticsViewModel2 = this.this$0;
+                    sliderHapticsViewModel2.sliderTracker = null;
+                    sliderHapticsViewModel2.velocityTracker.resetTracking();
+                    throw th;
+                }
+            }
+        }
+
+        /* renamed from: com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$2$2, reason: invalid class name and collision with other inner class name */
+        final class C02022 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ SliderHapticsViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C02022(SliderHapticsViewModel sliderHapticsViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = sliderHapticsViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new C02022(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C02022) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    SharedFlowImpl interactions = this.this$0.interactionSource.getInteractions();
+                    final SliderHapticsViewModel sliderHapticsViewModel = this.this$0;
+                    FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel.onActivated.2.2.1
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) {
+                            if (((Interaction) obj2) instanceof DragInteraction$Start) {
+                                SliderEventType sliderEventType = SliderEventType.STARTED_TRACKING_TOUCH;
+                                SliderHapticsViewModel sliderHapticsViewModel2 = sliderHapticsViewModel;
+                                sliderHapticsViewModel2.currentSliderEventType = sliderEventType;
+                                sliderHapticsViewModel2.sliderStateProducer.onStartTracking(true);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    };
+                    this.label = 1;
+                    interactions.getClass();
+                    if (SharedFlowImpl.collect$suspendImpl(interactions, flowCollector, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        public AnonymousClass2(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass2 anonymousClass2 = SliderHapticsViewModel.this.new AnonymousClass2(continuation);
+            anonymousClass2.L$0 = obj;
+            return anonymousClass2;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
+                SliderHapticsViewModel sliderHapticsViewModel = SliderHapticsViewModel.this;
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(sliderHapticsViewModel, null), 6);
+                sliderHapticsViewModel.getClass();
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C02022(SliderHapticsViewModel.this, null), 6);
+                this.label = 1;
+                if (DelayKt.awaitCancellation(this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            throw new KotlinNothingValueException();
+        }
+    }
+
     /* JADX WARN: Type inference failed for: r6v1, types: [com.android.systemui.haptics.slider.SliderDragVelocityProvider, com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$dragVelocityProvider$1] */
     public SliderHapticsViewModel(InteractionSource interactionSource, ClosedFloatingPointRange closedFloatingPointRange, Orientation orientation, SliderHapticFeedbackConfig sliderHapticFeedbackConfig, SeekableSliderTrackerConfig seekableSliderTrackerConfig, VibratorHelper vibratorHelper, MSDLPlayer mSDLPlayer, SystemClock systemClock) {
         this.interactionSource = interactionSource;
@@ -95,7 +296,6 @@ public final class SliderHapticsViewModel extends ExclusiveActivatable {
         this.maxVelocity = VelocityKt.Velocity(f, f);
         ?? r6 = new SliderDragVelocityProvider() { // from class: com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$dragVelocityProvider$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -115,18 +315,18 @@ public final class SliderHapticsViewModel extends ExclusiveActivatable {
 
             @Override // com.android.systemui.haptics.slider.SliderDragVelocityProvider
             public final float getTrackedVelocity() {
-                float m878getXimpl;
-                SliderHapticsViewModel sliderHapticsViewModel = SliderHapticsViewModel.this;
+                float fM880getXimpl;
+                SliderHapticsViewModel sliderHapticsViewModel = this.this$0;
                 int i = WhenMappings.$EnumSwitchMapping$0[sliderHapticsViewModel.orientation.ordinal()];
                 if (i == 1) {
-                    m878getXimpl = Velocity.m878getXimpl(sliderHapticsViewModel.velocityTracker.m600calculateVelocityAH228Gc(sliderHapticsViewModel.maxVelocity));
+                    fM880getXimpl = Velocity.m880getXimpl(sliderHapticsViewModel.velocityTracker.m602calculateVelocityAH228Gc(sliderHapticsViewModel.maxVelocity));
                 } else {
                     if (i != 2) {
                         throw new NoWhenBranchMatchedException();
                     }
-                    m878getXimpl = Velocity.m879getYimpl(sliderHapticsViewModel.velocityTracker.m600calculateVelocityAH228Gc(sliderHapticsViewModel.maxVelocity));
+                    fM880getXimpl = Velocity.m881getYimpl(sliderHapticsViewModel.velocityTracker.m602calculateVelocityAH228Gc(sliderHapticsViewModel.maxVelocity));
                 }
-                return Math.abs(m878getXimpl);
+                return Math.abs(fM880getXimpl);
             }
         };
         this.dragVelocityProvider = r6;
@@ -135,119 +335,99 @@ public final class SliderHapticsViewModel extends ExclusiveActivatable {
     }
 
     public final void addVelocityDataPoint(float f) {
-        long floatToRawIntBits;
-        float normalize = normalize(f);
-        long currentTimeMillis = System.currentTimeMillis();
+        long jFloatToRawIntBits;
+        float fNormalize = normalize(f);
+        long jCurrentTimeMillis = System.currentTimeMillis();
         int i = WhenMappings.$EnumSwitchMapping$1[this.orientation.ordinal()];
         if (i == 1) {
-            floatToRawIntBits = (Float.floatToRawIntBits(normalize - this.startingProgress) << 32) | (4294967295L & Float.floatToRawIntBits(0.0f));
+            jFloatToRawIntBits = (Float.floatToRawIntBits(fNormalize - this.startingProgress) << 32) | (4294967295L & Float.floatToRawIntBits(0.0f));
             Offset.Companion companion = Offset.Companion;
         } else {
             if (i != 2) {
                 throw new NoWhenBranchMatchedException();
             }
-            float f2 = normalize - this.startingProgress;
-            floatToRawIntBits = (Float.floatToRawIntBits(0.0f) << 32) | (4294967295L & Float.floatToRawIntBits(f2));
+            float f2 = fNormalize - this.startingProgress;
+            jFloatToRawIntBits = (Float.floatToRawIntBits(0.0f) << 32) | (4294967295L & Float.floatToRawIntBits(f2));
             Offset.Companion companion2 = Offset.Companion;
         }
-        this.velocityTracker.m599addPositionUv8p0NA(currentTimeMillis, floatToRawIntBits);
+        this.velocityTracker.m601addPositionUv8p0NA(jCurrentTimeMillis, jFloatToRawIntBits);
     }
 
     public final float normalize(float f) {
         ClosedFloatingPointRange closedFloatingPointRange = this.sliderRange;
-        float floatValue = f - Float.valueOf(((ClosedFloatRange) closedFloatingPointRange)._start).floatValue();
+        float fFloatValue = f - Float.valueOf(((ClosedFloatRange) closedFloatingPointRange)._start).floatValue();
         ClosedFloatRange closedFloatRange = (ClosedFloatRange) closedFloatingPointRange;
-        return RangesKt___RangesKt.coerceIn(floatValue / (closedFloatRange._endInclusive - closedFloatRange._start), 0.0f, 1.0f);
+        return RangesKt___RangesKt.coerceIn(fFloatValue / (closedFloatRange._endInclusive - closedFloatRange._start), 0.0f, 1.0f);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.ExclusiveActivatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onActivated(kotlin.coroutines.Continuation r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$1 r0 = (com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$1 r0 = new com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L41
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r5)
-            com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$2 r5 = new com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel$onActivated$2
-            r2 = 0
-            r5.<init>(r4, r2)
-            r0.label = r3
-            java.lang.Object r4 = kotlinx.coroutines.CoroutineScopeKt.coroutineScope(r5, r0)
-            if (r4 != r1) goto L41
-            return r1
-        L41:
-            kotlin.KotlinNothingValueException r4 = new kotlin.KotlinNothingValueException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel.onActivated(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onActivated(Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2(null);
+            anonymousClass1.label = 1;
+            if (CoroutineScopeKt.coroutineScope(anonymousClass2, anonymousClass1) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 
     public final void onValueChange(float f) {
-        float normalize = normalize(f);
+        float fNormalize = normalize(f);
         int i = WhenMappings.$EnumSwitchMapping$0[this.currentSliderEventType.ordinal()];
         SliderStateProducer sliderStateProducer = this.sliderStateProducer;
         if (i == 1) {
             this.currentSliderEventType = SliderEventType.STARTED_TRACKING_PROGRAM;
-            this.startingProgress = normalize;
+            this.startingProgress = fNormalize;
             sliderStateProducer.getClass();
-            sliderStateProducer._currentEvent.updateState(null, new SliderEvent(SliderEventType.NOTHING, normalize));
+            sliderStateProducer._currentEvent.updateState(null, new SliderEvent(SliderEventType.NOTHING, fNormalize));
             sliderStateProducer.onStartTracking(false);
             return;
         }
         if (i == 2) {
-            this.startingProgress = normalize;
+            this.startingProgress = fNormalize;
             this.currentSliderEventType = SliderEventType.PROGRESS_CHANGE_BY_USER;
-            sliderStateProducer.onProgressChanged(normalize, true);
+            sliderStateProducer.onProgressChanged(fNormalize, true);
             return;
         }
         if (i == 3) {
             addVelocityDataPoint(f);
             this.currentSliderEventType = SliderEventType.PROGRESS_CHANGE_BY_USER;
-            sliderStateProducer.onProgressChanged(normalize, true);
+            sliderStateProducer.onProgressChanged(fNormalize, true);
         } else if (i == 4) {
-            this.startingProgress = normalize;
+            this.startingProgress = fNormalize;
             this.currentSliderEventType = SliderEventType.PROGRESS_CHANGE_BY_PROGRAM;
-            sliderStateProducer.onProgressChanged(normalize, false);
+            sliderStateProducer.onProgressChanged(fNormalize, false);
         } else {
             if (i != 5) {
                 return;
             }
             addVelocityDataPoint(f);
             this.currentSliderEventType = SliderEventType.PROGRESS_CHANGE_BY_PROGRAM;
-            sliderStateProducer.onProgressChanged(normalize, false);
+            sliderStateProducer.onProgressChanged(fNormalize, false);
         }
     }
 

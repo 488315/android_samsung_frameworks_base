@@ -2,9 +2,9 @@ package gov.nist.javax.sip.parser;
 
 import gov.nist.javax.sip.header.MimeVersion;
 import gov.nist.javax.sip.header.SIPHeader;
+import java.text.ParseException;
 import javax.sip.InvalidArgumentException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MimeVersionParser extends HeaderParser {
     public MimeVersionParser(String str) {
@@ -12,7 +12,7 @@ public class MimeVersionParser extends HeaderParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws ParseException {
         MimeVersion mimeVersion = new MimeVersion();
         headerName(2060);
         mimeVersion.setHeaderName("MIME-Version");

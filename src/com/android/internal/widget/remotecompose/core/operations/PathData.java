@@ -111,13 +111,13 @@ public class PathData extends Operation implements VariableSupport, Serializable
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        float[] fArr = new float[readInt2];
-        for (int i = 0; i < readInt2; i++) {
-            fArr[i] = wireBuffer.readFloat();
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        float[] fArr = new float[i2];
+        for (int i3 = 0; i3 < i2; i3++) {
+            fArr[i3] = wireBuffer.readFloat();
         }
-        list.add(new PathData(readInt, fArr));
+        list.add(new PathData(i, fArr));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {
@@ -134,9 +134,9 @@ public class PathData extends Operation implements VariableSupport, Serializable
                 sb.append(" ");
             }
             if (Float.isNaN(fArr[i])) {
-                int idFromNan = Utils.idFromNan(fArr[i]);
-                if (idFromNan <= 16) {
-                    switch (idFromNan) {
+                int iIdFromNan = Utils.idFromNan(fArr[i]);
+                if (iIdFromNan <= 16) {
+                    switch (iIdFromNan) {
                         case 10:
                             sb.append(GnssSignalType.CODE_TYPE_M);
                             break;
@@ -159,11 +159,11 @@ public class PathData extends Operation implements VariableSupport, Serializable
                             sb.append(MediaMetrics.SEPARATOR);
                             break;
                         default:
-                            sb.append(NavigationBarInflaterView.SIZE_MOD_START + idFromNan + NavigationBarInflaterView.SIZE_MOD_END);
+                            sb.append(NavigationBarInflaterView.SIZE_MOD_START + iIdFromNan + NavigationBarInflaterView.SIZE_MOD_END);
                             break;
                     }
                 } else {
-                    sb.append(NavigationBarInflaterView.KEY_CODE_START + idFromNan + NavigationBarInflaterView.KEY_CODE_END);
+                    sb.append(NavigationBarInflaterView.KEY_CODE_START + iIdFromNan + NavigationBarInflaterView.KEY_CODE_END);
                 }
             } else {
                 sb.append(fArr[i]);

@@ -175,9 +175,9 @@ public class ColorDrawable extends Drawable {
     @Override // android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.ColorDrawable);
-        updateStateFromTypedArray(obtainAttributes);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.ColorDrawable);
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
         updateLocalState(resources);
     }
 
@@ -202,9 +202,9 @@ public class ColorDrawable extends Drawable {
             return;
         }
         if (colorState.mThemeAttrs != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(colorState.mThemeAttrs, R.styleable.ColorDrawable);
-            updateStateFromTypedArray(resolveAttributes);
-            resolveAttributes.recycle();
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(colorState.mThemeAttrs, R.styleable.ColorDrawable);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            typedArrayResolveAttributes.recycle();
         }
         if (colorState.mTint != null && colorState.mTint.canApplyTheme()) {
             colorState.mTint = colorState.mTint.obtainForTheme(theme);
@@ -252,6 +252,7 @@ public class ColorDrawable extends Drawable {
             return colorStateList != null && colorStateList.canApplyTheme();
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new ColorDrawable(this, null);

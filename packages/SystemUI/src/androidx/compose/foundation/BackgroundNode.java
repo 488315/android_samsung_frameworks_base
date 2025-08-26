@@ -28,7 +28,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BackgroundNode extends Modifier.Node implements DrawModifierNode, ObserverModifierNode {
     public float alpha;
@@ -54,16 +53,16 @@ final class BackgroundNode extends Modifier.Node implements DrawModifierNode, Ob
         if (this.shape == RectangleShapeKt.RectangleShape) {
             long j = this.color;
             Color.Companion.getClass();
-            if (!ULong.m3427equalsimpl0(j, Color.Unspecified)) {
-                DrawScope.m539drawRectnJ9OG0$default(layoutNodeDrawScope, this.color, 0L, 0L, 0.0f, null, null, 0, 126);
+            if (!ULong.m3447equalsimpl0(j, Color.Unspecified)) {
+                DrawScope.m541drawRectnJ9OG0$default(layoutNodeDrawScope, this.color, 0L, 0L, 0.0f, null, null, 0, 126);
             }
             Brush brush2 = this.brush;
             if (brush2 != null) {
-                DrawScope.m538drawRectAsUm42w$default(layoutNodeDrawScope, brush2, 0L, 0L, this.alpha, null, 0, 118);
+                DrawScope.m540drawRectAsUm42w$default(layoutNodeDrawScope, brush2, 0L, 0L, this.alpha, null, 0, 118);
             }
         } else {
             CanvasDrawScope canvasDrawScope = layoutNodeDrawScope.canvasDrawScope;
-            if (Size.m414equalsimpl0(canvasDrawScope.mo545getSizeNHjbRc(), this.lastSize) && layoutNodeDrawScope.getLayoutDirection() == this.lastLayoutDirection && Intrinsics.areEqual(this.lastShape, this.shape)) {
+            if (Size.m416equalsimpl0(canvasDrawScope.mo547getSizeNHjbRc(), this.lastSize) && layoutNodeDrawScope.getLayoutDirection() == this.lastLayoutDirection && Intrinsics.areEqual(this.lastShape, this.shape)) {
                 outline = this.lastOutline;
                 outline.getClass();
             } else {
@@ -75,8 +74,8 @@ final class BackgroundNode extends Modifier.Node implements DrawModifierNode, Ob
 
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        BackgroundNode backgroundNode = BackgroundNode.this;
-                        backgroundNode.tmpOutline = backgroundNode.shape.mo40createOutlinePq9zytI(((LayoutNodeDrawScope) layoutNodeDrawScope).canvasDrawScope.mo545getSizeNHjbRc(), ((LayoutNodeDrawScope) layoutNodeDrawScope).getLayoutDirection(), layoutNodeDrawScope);
+                        BackgroundNode backgroundNode = this.this$0;
+                        backgroundNode.tmpOutline = backgroundNode.shape.mo41createOutlinePq9zytI(((LayoutNodeDrawScope) layoutNodeDrawScope).canvasDrawScope.mo547getSizeNHjbRc(), ((LayoutNodeDrawScope) layoutNodeDrawScope).getLayoutDirection(), layoutNodeDrawScope);
                         return Unit.INSTANCE;
                     }
                 });
@@ -84,17 +83,17 @@ final class BackgroundNode extends Modifier.Node implements DrawModifierNode, Ob
                 this.tmpOutline = null;
             }
             this.lastOutline = outline;
-            this.lastSize = canvasDrawScope.mo545getSizeNHjbRc();
+            this.lastSize = canvasDrawScope.mo547getSizeNHjbRc();
             this.lastLayoutDirection = layoutNodeDrawScope.getLayoutDirection();
             this.lastShape = this.shape;
             outline.getClass();
             long j2 = this.color;
             Color.Companion.getClass();
-            if (ULong.m3427equalsimpl0(j2, Color.Unspecified)) {
+            if (ULong.m3447equalsimpl0(j2, Color.Unspecified)) {
                 outline2 = outline;
             } else {
                 outline2 = outline;
-                OutlineKt.m490drawOutlinewDX37Ww$default(layoutNodeDrawScope, outline2, this.color, 0.0f, null, 60);
+                OutlineKt.m492drawOutlinewDX37Ww$default(layoutNodeDrawScope, outline2, this.color, 0.0f, null, 60);
             }
             Brush brush3 = this.brush;
             if (brush3 != null) {
@@ -104,9 +103,9 @@ final class BackgroundNode extends Modifier.Node implements DrawModifierNode, Ob
                 int i = DrawScope.Companion.DefaultBlendMode;
                 if (outline2 instanceof Outline.Rectangle) {
                     Rect rect = ((Outline.Rectangle) outline2).rect;
-                    long floatToRawIntBits = Float.floatToRawIntBits(rect.left);
+                    long jFloatToRawIntBits = Float.floatToRawIntBits(rect.left);
                     Offset.Companion companion = Offset.Companion;
-                    layoutNodeDrawScope.m645drawRectAsUm42w(brush3, (4294967295L & Float.floatToRawIntBits(rect.top)) | (floatToRawIntBits << 32), OutlineKt.size(rect), f, fill, i);
+                    layoutNodeDrawScope.m647drawRectAsUm42w(brush3, (4294967295L & Float.floatToRawIntBits(rect.top)) | (jFloatToRawIntBits << 32), OutlineKt.size(rect), f, fill, i);
                 } else {
                     if (outline2 instanceof Outline.Rounded) {
                         Outline.Rounded rounded = (Outline.Rounded) outline2;
@@ -114,12 +113,12 @@ final class BackgroundNode extends Modifier.Node implements DrawModifierNode, Ob
                         path = rounded.roundRectPath;
                         if (path == null) {
                             RoundRect roundRect = rounded.roundRect;
-                            float intBitsToFloat = Float.intBitsToFloat((int) (roundRect.bottomLeftCornerRadius >> 32));
-                            long floatToRawIntBits2 = (Float.floatToRawIntBits(roundRect.left) << 32) | (Float.floatToRawIntBits(roundRect.top) & 4294967295L);
+                            float fIntBitsToFloat = Float.intBitsToFloat((int) (roundRect.bottomLeftCornerRadius >> 32));
+                            long jFloatToRawIntBits2 = (Float.floatToRawIntBits(roundRect.left) << 32) | (Float.floatToRawIntBits(roundRect.top) & 4294967295L);
                             Offset.Companion companion2 = Offset.Companion;
                             float width = roundRect.getWidth();
                             float height = roundRect.getHeight();
-                            layoutNodeDrawScope.mo524drawRoundRectZuiqVtQ(brush, floatToRawIntBits2, (Float.floatToRawIntBits(width) << 32) | (Float.floatToRawIntBits(height) & 4294967295L), (Float.floatToRawIntBits(intBitsToFloat) & 4294967295L) | (Float.floatToRawIntBits(intBitsToFloat) << 32), f, fill, i);
+                            layoutNodeDrawScope.mo526drawRoundRectZuiqVtQ(brush, jFloatToRawIntBits2, (Float.floatToRawIntBits(width) << 32) | (Float.floatToRawIntBits(height) & 4294967295L), (Float.floatToRawIntBits(fIntBitsToFloat) & 4294967295L) | (Float.floatToRawIntBits(fIntBitsToFloat) << 32), f, fill, i);
                         }
                     } else {
                         if (!(outline2 instanceof Outline.Generic)) {
@@ -129,7 +128,7 @@ final class BackgroundNode extends Modifier.Node implements DrawModifierNode, Ob
                         brush = brush3;
                         path = path2;
                     }
-                    layoutNodeDrawScope.mo521drawPathGBMwjPU(path, brush, f, fill, i);
+                    layoutNodeDrawScope.mo523drawPathGBMwjPU(path, brush, f, fill, i);
                 }
             }
         }

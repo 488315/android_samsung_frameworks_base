@@ -11,7 +11,6 @@ import com.android.systemui.R;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LeAudioProfile implements LocalBluetoothProfile {
     public final BluetoothAdapter mBluetoothAdapter;
@@ -20,7 +19,6 @@ public class LeAudioProfile implements LocalBluetoothProfile {
     public final LocalBluetoothProfileManager mProfileManager;
     public BluetoothLeAudio mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LeAudioServiceListener implements BluetoothProfile.ServiceListener {
         public /* synthetic */ LeAudioServiceListener(LeAudioProfile leAudioProfile, int i) {
             this();
@@ -33,14 +31,14 @@ public class LeAudioProfile implements LocalBluetoothProfile {
             LeAudioProfile.this.mService = bluetoothLeAudio;
             List<BluetoothDevice> connectedDevices = bluetoothLeAudio.getConnectedDevices();
             while (!connectedDevices.isEmpty()) {
-                BluetoothDevice remove = connectedDevices.remove(0);
-                CachedBluetoothDevice findDevice = LeAudioProfile.this.mDeviceManager.findDevice(remove);
-                if (findDevice == null) {
-                    Log.d("LeAudioProfile", "LeAudioProfile found new device: " + remove);
-                    findDevice = LeAudioProfile.this.mDeviceManager.addDevice(remove);
+                BluetoothDevice bluetoothDeviceRemove = connectedDevices.remove(0);
+                CachedBluetoothDevice cachedBluetoothDeviceFindDevice = LeAudioProfile.this.mDeviceManager.findDevice(bluetoothDeviceRemove);
+                if (cachedBluetoothDeviceFindDevice == null) {
+                    Log.d("LeAudioProfile", "LeAudioProfile found new device: " + bluetoothDeviceRemove);
+                    cachedBluetoothDeviceFindDevice = LeAudioProfile.this.mDeviceManager.addDevice(bluetoothDeviceRemove);
                 }
-                findDevice.onProfileStateChanged(LeAudioProfile.this, 2);
-                findDevice.refresh();
+                cachedBluetoothDeviceFindDevice.onProfileStateChanged(LeAudioProfile.this, 2);
+                cachedBluetoothDeviceFindDevice.refresh();
             }
             CachedBluetoothDeviceManager cachedBluetoothDeviceManager = LeAudioProfile.this.mDeviceManager;
             synchronized (cachedBluetoothDeviceManager) {

@@ -50,7 +50,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class CustomComposeView extends FrameLayout implements LifecycleOwner, SavedStateRegistryOwner, ViewModelStoreOwner, OnBackPressedDispatcherOwner, HasDefaultViewModelProviderFactory {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -62,7 +61,6 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
     public final SavedStateRegistryController savedStateRegistryController;
     public final ViewModelFactory viewModelProviderFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -88,71 +86,83 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
             composeView.setTag(R.id.view_tree_on_back_pressed_dispatcher_owner, customComposeView);
         }
         composeView.setContent(new ComposableLambdaImpl(5984946, true, new Function2() { // from class: com.android.systemui.media.CustomComposeView$contentView$2$1$1
+            /* JADX WARN: Removed duplicated region for block: B:8:0x001c  */
             @Override // kotlin.jvm.functions.Function2
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final Object invoke(Object obj, Object obj2) {
                 Composer composer = (Composer) obj;
                 if ((((Number) obj2).intValue() & 3) == 2) {
                     ComposerImpl composerImpl = (ComposerImpl) composer;
                     if (composerImpl.getSkipping()) {
                         composerImpl.skipToGroupEnd();
-                        return Unit.INSTANCE;
-                    }
-                }
-                if (ComposerKt.isTraceInProgress()) {
-                    ComposerKt.traceEventStart("com.android.systemui.media.CustomComposeView.contentView$delegate.<anonymous>.<anonymous>.<anonymous> (CustomComposeView.kt:71)");
-                }
-                final CustomComposeView customComposeView2 = CustomComposeView.this;
-                BoxWithConstraintsKt.BoxWithConstraints(null, null, false, ComposableLambdaKt.rememberComposableLambda(-1248983140, new Function3() { // from class: com.android.systemui.media.CustomComposeView$contentView$2$1$1.1
-                    @Override // kotlin.jvm.functions.Function3
-                    public final Object invoke(Object obj3, Object obj4, Object obj5) {
-                        BoxWithConstraintsScope boxWithConstraintsScope = (BoxWithConstraintsScope) obj3;
-                        Composer composer2 = (Composer) obj4;
-                        int intValue = ((Number) obj5).intValue();
-                        if ((intValue & 6) == 0) {
-                            intValue |= ((ComposerImpl) composer2).changed(boxWithConstraintsScope) ? 4 : 2;
-                        }
-                        if ((intValue & 19) == 18) {
-                            ComposerImpl composerImpl2 = (ComposerImpl) composer2;
-                            if (composerImpl2.getSkipping()) {
-                                composerImpl2.skipToGroupEnd();
-                                return Unit.INSTANCE;
-                            }
-                        }
+                    } else {
                         if (ComposerKt.isTraceInProgress()) {
-                            ComposerKt.traceEventStart("com.android.systemui.media.CustomComposeView.contentView$delegate.<anonymous>.<anonymous>.<anonymous>.<anonymous> (CustomComposeView.kt:72)");
+                            ComposerKt.traceEventStart("com.android.systemui.media.CustomComposeView.contentView$delegate.<anonymous>.<anonymous>.<anonymous> (CustomComposeView.kt:71)");
                         }
-                        ProvidedValue defaultProvidedValue$runtime_release = CompositionExtKt.LocalRootSize.defaultProvidedValue$runtime_release(DpSize.m842boximpl(DpKt.m838DpSizeYgX7TsA(boxWithConstraintsScope.mo101getMaxWidthD9Ej5fM(), boxWithConstraintsScope.mo100getMaxHeightD9Ej5fM())));
-                        StaticProvidableCompositionLocal staticProvidableCompositionLocal = CompositionExtKt.LocalViewModelProviderFactory;
-                        final CustomComposeView customComposeView3 = CustomComposeView.this;
-                        CompositionLocalKt.CompositionLocalProvider(new ProvidedValue[]{defaultProvidedValue$runtime_release, staticProvidableCompositionLocal.defaultProvidedValue$runtime_release(customComposeView3.viewModelProviderFactory)}, ComposableLambdaKt.rememberComposableLambda(2019392220, new Function2() { // from class: com.android.systemui.media.CustomComposeView.contentView.2.1.1.1.1
-                            @Override // kotlin.jvm.functions.Function2
-                            public final Object invoke(Object obj6, Object obj7) {
-                                Composer composer3 = (Composer) obj6;
-                                if ((((Number) obj7).intValue() & 3) == 2) {
-                                    ComposerImpl composerImpl3 = (ComposerImpl) composer3;
-                                    if (composerImpl3.getSkipping()) {
-                                        composerImpl3.skipToGroupEnd();
-                                        return Unit.INSTANCE;
+                        final CustomComposeView customComposeView2 = this.this$0;
+                        BoxWithConstraintsKt.BoxWithConstraints(null, null, false, ComposableLambdaKt.rememberComposableLambda(-1248983140, new Function3() { // from class: com.android.systemui.media.CustomComposeView$contentView$2$1$1.1
+                            /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
+                            @Override // kotlin.jvm.functions.Function3
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                            */
+                            public final Object invoke(Object obj3, Object obj4, Object obj5) {
+                                BoxWithConstraintsScope boxWithConstraintsScope = (BoxWithConstraintsScope) obj3;
+                                Composer composer2 = (Composer) obj4;
+                                int iIntValue = ((Number) obj5).intValue();
+                                if ((iIntValue & 6) == 0) {
+                                    iIntValue |= ((ComposerImpl) composer2).changed(boxWithConstraintsScope) ? 4 : 2;
+                                }
+                                if ((iIntValue & 19) == 18) {
+                                    ComposerImpl composerImpl2 = (ComposerImpl) composer2;
+                                    if (composerImpl2.getSkipping()) {
+                                        composerImpl2.skipToGroupEnd();
+                                    } else {
+                                        if (ComposerKt.isTraceInProgress()) {
+                                            ComposerKt.traceEventStart("com.android.systemui.media.CustomComposeView.contentView$delegate.<anonymous>.<anonymous>.<anonymous>.<anonymous> (CustomComposeView.kt:72)");
+                                        }
+                                        ProvidedValue providedValueDefaultProvidedValue$runtime_release = CompositionExtKt.LocalRootSize.defaultProvidedValue$runtime_release(DpSize.m844boximpl(DpKt.m840DpSizeYgX7TsA(boxWithConstraintsScope.mo102getMaxWidthD9Ej5fM(), boxWithConstraintsScope.mo101getMaxHeightD9Ej5fM())));
+                                        StaticProvidableCompositionLocal staticProvidableCompositionLocal = CompositionExtKt.LocalViewModelProviderFactory;
+                                        final CustomComposeView customComposeView3 = customComposeView2;
+                                        CompositionLocalKt.CompositionLocalProvider(new ProvidedValue[]{providedValueDefaultProvidedValue$runtime_release, staticProvidableCompositionLocal.defaultProvidedValue$runtime_release(customComposeView3.viewModelProviderFactory)}, ComposableLambdaKt.rememberComposableLambda(2019392220, new Function2() { // from class: com.android.systemui.media.CustomComposeView.contentView.2.1.1.1.1
+                                            /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
+                                            @Override // kotlin.jvm.functions.Function2
+                                            /*
+                                                Code decompiled incorrectly, please refer to instructions dump.
+                                            */
+                                            public final Object invoke(Object obj6, Object obj7) {
+                                                Composer composer3 = (Composer) obj6;
+                                                if ((((Number) obj7).intValue() & 3) == 2) {
+                                                    ComposerImpl composerImpl3 = (ComposerImpl) composer3;
+                                                    if (composerImpl3.getSkipping()) {
+                                                        composerImpl3.skipToGroupEnd();
+                                                    } else {
+                                                        if (ComposerKt.isTraceInProgress()) {
+                                                            ComposerKt.traceEventStart("com.android.systemui.media.CustomComposeView.contentView$delegate.<anonymous>.<anonymous>.<anonymous>.<anonymous>.<anonymous> (CustomComposeView.kt:76)");
+                                                        }
+                                                        customComposeView3.ContentView(composer3);
+                                                        if (ComposerKt.isTraceInProgress()) {
+                                                            ComposerKt.traceEventEnd();
+                                                        }
+                                                    }
+                                                }
+                                                return Unit.INSTANCE;
+                                            }
+                                        }, composer2), composer2, 56);
+                                        if (ComposerKt.isTraceInProgress()) {
+                                            ComposerKt.traceEventEnd();
+                                        }
                                     }
                                 }
-                                if (ComposerKt.isTraceInProgress()) {
-                                    ComposerKt.traceEventStart("com.android.systemui.media.CustomComposeView.contentView$delegate.<anonymous>.<anonymous>.<anonymous>.<anonymous>.<anonymous> (CustomComposeView.kt:76)");
-                                }
-                                CustomComposeView.this.ContentView(composer3);
-                                if (ComposerKt.isTraceInProgress()) {
-                                    ComposerKt.traceEventEnd();
-                                }
                                 return Unit.INSTANCE;
                             }
-                        }, composer2), composer2, 56);
+                        }, composer), composer, 3072, 7);
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
                         }
-                        return Unit.INSTANCE;
                     }
-                }, composer), composer, 3072, 7);
-                if (ComposerKt.isTraceInProgress()) {
-                    ComposerKt.traceEventEnd();
                 }
                 return Unit.INSTANCE;
             }
@@ -165,8 +175,8 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
     }
 
     public CustomComposeView(final Context context, final AttributeSet attributeSet, ViewModelFactory viewModelFactory) {
-        super(context, attributeSet);
         Object failure;
+        super(context, attributeSet);
         this.viewModelProviderFactory = viewModelFactory;
         final int i = 0;
         this.keyguardManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.CustomComposeView$$ExternalSyntheticLambda0
@@ -192,9 +202,9 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
                                 EmergencyButtonController$$ExternalSyntheticOutline0.m("onHasEnabledCallbacksChanged() - ", "CustomComposeView", ((Boolean) obj2).booleanValue());
                             }
                         });
-                        OnBackInvokedDispatcher findOnBackInvokedDispatcher = ((CustomComposeView) obj).getRootView().findOnBackInvokedDispatcher();
-                        if (findOnBackInvokedDispatcher != null) {
-                            onBackPressedDispatcher.setOnBackInvokedDispatcher(findOnBackInvokedDispatcher);
+                        OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher = ((CustomComposeView) obj).getRootView().findOnBackInvokedDispatcher();
+                        if (onBackInvokedDispatcherFindOnBackInvokedDispatcher != null) {
+                            onBackPressedDispatcher.setOnBackInvokedDispatcher(onBackInvokedDispatcherFindOnBackInvokedDispatcher);
                         }
                         return onBackPressedDispatcher;
                 }
@@ -208,7 +218,6 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
         });
         LifecycleEventObserver lifecycleEventObserver = new LifecycleEventObserver() { // from class: com.android.systemui.media.CustomComposeView$lifecycleObserver$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -233,7 +242,7 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
             @Override // androidx.lifecycle.LifecycleEventObserver
             public final void onStateChanged(LifecycleOwner lifecycleOwner, Lifecycle.Event event) {
                 int i2 = WhenMappings.$EnumSwitchMapping$0[event.ordinal()];
-                CustomComposeView customComposeView = CustomComposeView.this;
+                CustomComposeView customComposeView = this.this$0;
                 if (i2 == 1) {
                     customComposeView.removeView((ComposeView) customComposeView.contentView$delegate.getValue());
                     customComposeView.addView((ComposeView) customComposeView.contentView$delegate.getValue());
@@ -252,8 +261,8 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
         LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
         this.lifecycleRegistry = lifecycleRegistry;
         SavedStateRegistryController.Companion.getClass();
-        SavedStateRegistryController create = SavedStateRegistryController.Companion.create(this);
-        this.savedStateRegistryController = create;
+        SavedStateRegistryController savedStateRegistryControllerCreate = SavedStateRegistryController.Companion.create(this);
+        this.savedStateRegistryController = savedStateRegistryControllerCreate;
         this._viewModelStore$delegate = LazyKt__LazyJVMKt.lazy(new CustomComposeView$$ExternalSyntheticLambda2());
         final int i2 = 1;
         this.onBackPressedDispatcher$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.media.CustomComposeView$$ExternalSyntheticLambda0
@@ -279,9 +288,9 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
                                 EmergencyButtonController$$ExternalSyntheticOutline0.m("onHasEnabledCallbacksChanged() - ", "CustomComposeView", ((Boolean) obj2).booleanValue());
                             }
                         });
-                        OnBackInvokedDispatcher findOnBackInvokedDispatcher = ((CustomComposeView) obj).getRootView().findOnBackInvokedDispatcher();
-                        if (findOnBackInvokedDispatcher != null) {
-                            onBackPressedDispatcher.setOnBackInvokedDispatcher(findOnBackInvokedDispatcher);
+                        OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher = ((CustomComposeView) obj).getRootView().findOnBackInvokedDispatcher();
+                        if (onBackInvokedDispatcherFindOnBackInvokedDispatcher != null) {
+                            onBackPressedDispatcher.setOnBackInvokedDispatcher(onBackInvokedDispatcherFindOnBackInvokedDispatcher);
                         }
                         return onBackPressedDispatcher;
                 }
@@ -290,16 +299,16 @@ public abstract class CustomComposeView extends FrameLayout implements Lifecycle
         lifecycleRegistry.addObserver(lifecycleEventObserver);
         try {
             int i3 = Result.$r8$clinit;
-            create.performRestore(null);
+            savedStateRegistryControllerCreate.performRestore(null);
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
             failure = Unit.INSTANCE;
         } catch (Throwable th) {
             int i4 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            m3422exceptionOrNullimpl.printStackTrace();
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            thM3442exceptionOrNullimpl.printStackTrace();
         }
     }
 

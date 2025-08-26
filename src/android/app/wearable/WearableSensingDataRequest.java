@@ -57,12 +57,12 @@ public final class WearableSensingDataRequest implements Parcelable {
     }
 
     public int getDataSize() {
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            writeToParcel(obtain, describeContents());
-            return obtain.dataSize();
+            writeToParcel(parcelObtain, describeContents());
+            return parcelObtain.dataSize();
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 

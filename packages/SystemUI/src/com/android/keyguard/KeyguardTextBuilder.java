@@ -20,7 +20,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.samsung.android.knox.accounts.HostAuth;
 import com.samsung.android.knox.zt.config.securelog.SignalSeverity;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardTextBuilder {
     public static KeyguardTextBuilder sInstance;
@@ -38,7 +37,6 @@ public class KeyguardTextBuilder {
     public final SelectedUserInteractor mSelectedUserInteractor = (SelectedUserInteractor) Dependency.sDependency.getDependencyInner(SelectedUserInteractor.class);
     public final KnoxStateMonitor mKnoxStateMonitor = (KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardTextBuilder$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardConstants$KeyguardDismissActionType;
@@ -80,7 +78,6 @@ public class KeyguardTextBuilder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Biometric {
         Fingerprint("fingerprint"),
         Face("face"),
@@ -98,7 +95,6 @@ public class KeyguardTextBuilder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum BiometricSecurityLevel {
         Strong("strong"),
         Weak("weak"),
@@ -115,7 +111,6 @@ public class KeyguardTextBuilder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum DismissActionType {
         /* JADX INFO: Fake field, exist only in values array */
         Active(SystemUIAnalytics.QPBSE_KEY_ACTIVE),
@@ -136,7 +131,6 @@ public class KeyguardTextBuilder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum PromptReason {
         Restart("restart"),
         Timeout("timeout"),
@@ -155,7 +149,6 @@ public class KeyguardTextBuilder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Security {
         PIN("pin"),
         Pattern("pattern"),
@@ -197,16 +190,16 @@ public class KeyguardTextBuilder {
     }
 
     public final String getDefaultSecurityMessage(KeyguardSecurityModel.SecurityMode securityMode) {
-        String format;
+        String str;
         KnoxStateMonitor knoxStateMonitor = this.mKnoxStateMonitor;
         if (knoxStateMonitor != null) {
             KnoxStateMonitorImpl knoxStateMonitorImpl = (KnoxStateMonitorImpl) knoxStateMonitor;
             if (knoxStateMonitorImpl.isDeviceDisabledForMaxFailedAttempt()) {
                 EdmMonitor edmMonitor = knoxStateMonitorImpl.mEdmMonitor;
-                String str = edmMonitor == null ? null : edmMonitor.mPkgNameForMaxAttemptDisable;
+                String str2 = edmMonitor == null ? null : edmMonitor.mPkgNameForMaxAttemptDisable;
                 StringBuilder sb = new StringBuilder();
-                sb.append(this.mContext.getString(android.R.string.httpErrorProxyAuth));
-                sb.append(TextUtils.isEmpty(str) ? "" : ContentInViewNode$Request$$ExternalSyntheticOutline0.m("(", str, ")"));
+                sb.append(this.mContext.getString(android.R.string.httpErrorTimeout));
+                sb.append(TextUtils.isEmpty(str2) ? "" : ContentInViewNode$Request$$ExternalSyntheticOutline0.m("(", str2, ")"));
                 return sb.toString();
             }
         }
@@ -214,9 +207,9 @@ public class KeyguardTextBuilder {
         updateSecurityMode(securityMode);
         updateCurrentState(false);
         KeyguardUpdateMonitor keyguardUpdateMonitor = this.mKeyguardUpdateMonitor;
-        boolean is2StepVerification = keyguardUpdateMonitor.is2StepVerification();
-        String str2 = SignalSeverity.NONE;
-        if (is2StepVerification) {
+        boolean zIs2StepVerification = keyguardUpdateMonitor.is2StepVerification();
+        String str3 = SignalSeverity.NONE;
+        if (zIs2StepVerification) {
             if (keyguardUpdateMonitor.getUserUnlockedWithBiometric(selectedUserId)) {
                 this.mBiometricType = SignalSeverity.NONE;
             } else {
@@ -229,22 +222,22 @@ public class KeyguardTextBuilder {
             }
         }
         boolean z = this.mIsFace;
-        String str3 = this.mDeviceType;
+        String str4 = this.mDeviceType;
         if (z && (keyguardUpdateMonitor.isCameraDisabledByPolicy() || keyguardUpdateMonitor.isFaceDisabled(selectedUserId))) {
-            format = this.mIsFingerprint ? (DismissActionType.ShutDown.getType().equals(this.mDismissActionType) || DismissActionType.Reboot.getType().equals(this.mDismissActionType)) ? String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_active_instructions), str3, Biometric.Fingerprint.getType(), this.mSecurityType, this.mDismissActionType) : String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_reason_instructions), SignalSeverity.NONE, Biometric.FaceFingerprint.getType(), this.mSecurityType, PromptReason.ItPolicy.getType()) : (DismissActionType.ShutDown.getType().equals(this.mDismissActionType) || DismissActionType.Reboot.getType().equals(this.mDismissActionType)) ? String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_active_instructions), str3, SignalSeverity.NONE, this.mSecurityType, this.mDismissActionType) : String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_reason_instructions), SignalSeverity.NONE, this.mBiometricType, this.mSecurityType, PromptReason.DeviceAdmin.getType());
+            str = this.mIsFingerprint ? (DismissActionType.ShutDown.getType().equals(this.mDismissActionType) || DismissActionType.Reboot.getType().equals(this.mDismissActionType)) ? String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_active_instructions), str4, Biometric.Fingerprint.getType(), this.mSecurityType, this.mDismissActionType) : String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_reason_instructions), SignalSeverity.NONE, Biometric.FaceFingerprint.getType(), this.mSecurityType, PromptReason.ItPolicy.getType()) : (DismissActionType.ShutDown.getType().equals(this.mDismissActionType) || DismissActionType.Reboot.getType().equals(this.mDismissActionType)) ? String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_active_instructions), str4, SignalSeverity.NONE, this.mSecurityType, this.mDismissActionType) : String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_reason_instructions), SignalSeverity.NONE, this.mBiometricType, this.mSecurityType, PromptReason.DeviceAdmin.getType());
         } else if (DismissActionType.ShutDown.getType().equals(this.mDismissActionType) || DismissActionType.Reboot.getType().equals(this.mDismissActionType)) {
-            format = String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_active_instructions), str3, this.mBiometricType, this.mSecurityType, this.mDismissActionType);
+            str = String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_active_instructions), str4, this.mBiometricType, this.mSecurityType, this.mDismissActionType);
         } else {
             if (DismissActionType.FingerPrintError.getType().equals(this.mDismissActionType)) {
                 return this.mContext.getResources().getString(R.string.kg_finger_print_template_changed_error_message);
             }
             String type = (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY || !this.mIsFingerprint) ? SignalSeverity.NONE : Biometric.Fingerprint.getType();
             if (!keyguardUpdateMonitor.isForgotPasswordView()) {
-                str2 = type;
+                str3 = type;
             }
-            format = String.format(this.mContext.getResources().getString(R.string.kg_biometric_security_active_instructions), str2, this.mSecurityType, this.mDismissActionType);
+            str = String.format(this.mContext.getResources().getString(R.string.kg_biometric_security_active_instructions), str3, this.mSecurityType, this.mDismissActionType);
         }
-        int identifier = this.mContext.getResources().getIdentifier(format, "string", this.mContext.getPackageName());
+        int identifier = this.mContext.getResources().getIdentifier(str, "string", this.mContext.getPackageName());
         if (identifier != 0) {
             return getAddRemainingAttemptIndication(identifier);
         }
@@ -252,21 +245,62 @@ public class KeyguardTextBuilder {
         return "";
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00fe  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x00c9  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x00f9  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x00fe  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String getPromptSecurityMessage(com.android.keyguard.KeyguardSecurityModel.SecurityMode r5, int r6) {
-        /*
-            Method dump skipped, instructions count: 262
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardTextBuilder.getPromptSecurityMessage(com.android.keyguard.KeyguardSecurityModel$SecurityMode, int):java.lang.String");
+    public final String getPromptSecurityMessage(KeyguardSecurityModel.SecurityMode securityMode, int i) {
+        int identifier;
+        KnoxStateMonitor knoxStateMonitor = this.mKnoxStateMonitor;
+        if (knoxStateMonitor != null) {
+            KnoxStateMonitorImpl knoxStateMonitorImpl = (KnoxStateMonitorImpl) knoxStateMonitor;
+            if (knoxStateMonitorImpl.isDeviceDisabledForMaxFailedAttempt()) {
+                EdmMonitor edmMonitor = knoxStateMonitorImpl.mEdmMonitor;
+                String str = edmMonitor == null ? null : edmMonitor.mPkgNameForMaxAttemptDisable;
+                StringBuilder sb = new StringBuilder();
+                sb.append(this.mContext.getString(android.R.string.httpErrorTimeout));
+                sb.append(TextUtils.isEmpty(str) ? "" : ContentInViewNode$Request$$ExternalSyntheticOutline0.m("(", str, ")"));
+                return sb.toString();
+            }
+        }
+        updateSecurityMode(securityMode);
+        updateCurrentState(true);
+        String type = this.mBiometricType;
+        if (i == 1) {
+            this.mPromptReasonType = PromptReason.Restart.getType();
+        } else {
+            if (i != 2) {
+                if (i == 3) {
+                    this.mPromptReasonType = PromptReason.DeviceAdmin.getType();
+                } else if (i == 7) {
+                    this.mPromptReasonType = PromptReason.NonStrongBiometricTimeout.getType();
+                } else {
+                    if (i != 17) {
+                        return "";
+                    }
+                    this.mPromptReasonType = PromptReason.NonStrongBiometricTimeout.getType();
+                    if (this.mIsFingerprint) {
+                        type = Biometric.MultiBiometrics.getType();
+                    }
+                }
+                identifier = this.mContext.getResources().getIdentifier((!DismissActionType.ShutDown.getType().equals(this.mDismissActionType) || DismissActionType.Reboot.getType().equals(this.mDismissActionType)) ? String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_active_instructions), this.mDeviceType, SignalSeverity.NONE, this.mSecurityType, this.mDismissActionType) : String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_reason_instructions), SignalSeverity.NONE, type, this.mSecurityType, this.mPromptReasonType), "string", this.mContext.getPackageName());
+                if (identifier == 0) {
+                    return getAddRemainingAttemptIndication(identifier);
+                }
+                ListPopupWindow$$ExternalSyntheticOutline0.m(identifier, "Can't find prompt string id=", "KeyguardTextBuilder");
+                return "";
+            }
+            this.mPromptReasonType = PromptReason.Timeout.getType();
+        }
+        type = SignalSeverity.NONE;
+        identifier = this.mContext.getResources().getIdentifier((!DismissActionType.ShutDown.getType().equals(this.mDismissActionType) || DismissActionType.Reboot.getType().equals(this.mDismissActionType)) ? String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_active_instructions), this.mDeviceType, SignalSeverity.NONE, this.mSecurityType, this.mDismissActionType) : String.format(this.mContext.getResources().getString(R.string.kg_device_biometric_security_reason_instructions), SignalSeverity.NONE, type, this.mSecurityType, this.mPromptReasonType), "string", this.mContext.getPackageName());
+        if (identifier == 0) {
+        }
     }
 
-    public final String getStrongAuthTimeOutMessage(KeyguardSecurityModel.SecurityMode securityMode) {
+    public final String getStrongAuthTimeOutMessage(KeyguardSecurityModel.SecurityMode securityMode) throws Resources.NotFoundException {
         String type;
         Resources resources = this.mContext.getResources();
         updateSecurityMode(securityMode);

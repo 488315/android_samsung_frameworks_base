@@ -1,5 +1,6 @@
 package com.android.systemui.bouncer.domain.interactor;
 
+import android.R;
 import android.app.ActivityTaskManager;
 import android.content.Context;
 import android.telecom.TelecomManager;
@@ -7,16 +8,19 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.EmergencyAffordanceManager;
 import com.android.systemui.authentication.domain.interactor.AuthenticationInteractor;
 import com.android.systemui.bouncer.data.repository.EmergencyServicesRepository;
+import com.android.systemui.bouncer.shared.model.BouncerActionButtonModel;
 import com.android.systemui.doze.DozeLogger;
 import com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileConnectionsRepository;
 import com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl;
 import com.android.systemui.telephony.domain.interactor.TelephonyInteractor;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import dagger.Lazy;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
@@ -25,7 +29,6 @@ import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BouncerActionButtonInteractor {
     public final Flow actionButton;
@@ -64,7 +67,6 @@ public final class BouncerActionButtonInteractor {
             final ReadonlyStateFlow readonlyStateFlow = telephonyInteractor.isInCall;
             Flow flow = new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -91,70 +93,51 @@ public final class BouncerActionButtonInteractor {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
                     */
-                    public final java.lang.Object emit(java.lang.Object r4, kotlin.coroutines.Continuation r5) {
-                        /*
-                            r3 = this;
-                            boolean r4 = r5 instanceof com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                            if (r4 == 0) goto L13
-                            r4 = r5
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1 r4 = (com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r4
-                            int r0 = r4.label
-                            r1 = -2147483648(0xffffffff80000000, float:-0.0)
-                            r2 = r0 & r1
-                            if (r2 == 0) goto L13
-                            int r0 = r0 - r1
-                            r4.label = r0
-                            goto L18
-                        L13:
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1 r4 = new com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1
-                            r4.<init>(r5)
-                        L18:
-                            java.lang.Object r5 = r4.result
-                            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                            int r1 = r4.label
-                            r2 = 1
-                            if (r1 == 0) goto L2f
-                            if (r1 != r2) goto L27
-                            kotlin.ResultKt.throwOnFailure(r5)
-                            goto L3f
-                        L27:
-                            java.lang.IllegalStateException r3 = new java.lang.IllegalStateException
-                            java.lang.String r4 = "call to 'resume' before 'invoke' with coroutine"
-                            r3.<init>(r4)
-                            throw r3
-                        L2f:
-                            kotlin.ResultKt.throwOnFailure(r5)
-                            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                            r4.label = r2
-                            kotlinx.coroutines.flow.FlowCollector r3 = r3.$this_unsafeFlow
-                            java.lang.Object r3 = r3.emit(r5, r4)
-                            if (r3 != r0) goto L3f
-                            return r0
-                        L3f:
-                            kotlin.Unit r3 = kotlin.Unit.INSTANCE
-                            return r3
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                    public final Object emit(Object obj, Continuation continuation) {
+                        AnonymousClass1 anonymousClass1;
+                        if (continuation instanceof AnonymousClass1) {
+                            anonymousClass1 = (AnonymousClass1) continuation;
+                            int i = anonymousClass1.label;
+                            if ((i & Integer.MIN_VALUE) != 0) {
+                                anonymousClass1.label = i - Integer.MIN_VALUE;
+                            } else {
+                                anonymousClass1 = new AnonymousClass1(continuation);
+                            }
+                        }
+                        Object obj2 = anonymousClass1.result;
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i2 = anonymousClass1.label;
+                        if (i2 == 0) {
+                            ResultKt.throwOnFailure(obj2);
+                            Unit unit = Unit.INSTANCE;
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(unit, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        } else {
+                            if (i2 != 1) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                        }
+                        return Unit.INSTANCE;
                     }
                 }
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                    Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                    return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                    Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                    return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             };
-            final Flow isAnySimSecure = mobileConnectionsRepository.isAnySimSecure();
+            final Flow flowIsAnySimSecure = mobileConnectionsRepository.isAnySimSecure();
             Flow flow2 = new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -181,64 +164,51 @@ public final class BouncerActionButtonInteractor {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
+                    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
                     public final Object emit(Object obj, Continuation continuation) {
-                        /*
-                            this = this;
-                            boolean r4 = r5 instanceof com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                            if (r4 == 0) goto L13
-                            r4 = r5
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1 r4 = (com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r4
-                            int r0 = r4.label
-                            r1 = -2147483648(0xffffffff80000000, float:-0.0)
-                            r2 = r0 & r1
-                            if (r2 == 0) goto L13
-                            int r0 = r0 - r1
-                            r4.label = r0
-                            goto L18
-                        L13:
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1 r4 = new com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1
-                            r4.<init>(r5)
-                        L18:
-                            java.lang.Object r5 = r4.result
-                            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                            int r1 = r4.label
-                            r2 = 1
-                            if (r1 == 0) goto L2f
-                            if (r1 != r2) goto L27
-                            kotlin.ResultKt.throwOnFailure(r5)
-                            goto L3f
-                        L27:
-                            java.lang.IllegalStateException r3 = new java.lang.IllegalStateException
-                            java.lang.String r4 = "call to 'resume' before 'invoke' with coroutine"
-                            r3.<init>(r4)
-                            throw r3
-                        L2f:
-                            kotlin.ResultKt.throwOnFailure(r5)
-                            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                            r4.label = r2
-                            kotlinx.coroutines.flow.FlowCollector r3 = r3.$this_unsafeFlow
-                            java.lang.Object r3 = r3.emit(r5, r4)
-                            if (r3 != r0) goto L3f
-                            return r0
-                        L3f:
-                            kotlin.Unit r3 = kotlin.Unit.INSTANCE
-                            return r3
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                        AnonymousClass1 anonymousClass1;
+                        if (continuation instanceof AnonymousClass1) {
+                            anonymousClass1 = (AnonymousClass1) continuation;
+                            int i = anonymousClass1.label;
+                            if ((i & Integer.MIN_VALUE) != 0) {
+                                anonymousClass1.label = i - Integer.MIN_VALUE;
+                            } else {
+                                anonymousClass1 = new AnonymousClass1(continuation);
+                            }
+                        }
+                        Object obj2 = anonymousClass1.result;
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i2 = anonymousClass1.label;
+                        if (i2 == 0) {
+                            ResultKt.throwOnFailure(obj2);
+                            Unit unit = Unit.INSTANCE;
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(unit, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        } else {
+                            if (i2 != 1) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                        }
+                        return Unit.INSTANCE;
                     }
                 }
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                    Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                    return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                    Object objCollect = flowIsAnySimSecure.collect(new AnonymousClass2(flowCollector), continuation);
+                    return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             };
             final Flow flow3 = authenticationInteractor.authenticationMethod;
             Flow flow4 = new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -265,64 +235,51 @@ public final class BouncerActionButtonInteractor {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
+                    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
                     public final Object emit(Object obj, Continuation continuation) {
-                        /*
-                            this = this;
-                            boolean r4 = r5 instanceof com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                            if (r4 == 0) goto L13
-                            r4 = r5
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1 r4 = (com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r4
-                            int r0 = r4.label
-                            r1 = -2147483648(0xffffffff80000000, float:-0.0)
-                            r2 = r0 & r1
-                            if (r2 == 0) goto L13
-                            int r0 = r0 - r1
-                            r4.label = r0
-                            goto L18
-                        L13:
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1 r4 = new com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1
-                            r4.<init>(r5)
-                        L18:
-                            java.lang.Object r5 = r4.result
-                            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                            int r1 = r4.label
-                            r2 = 1
-                            if (r1 == 0) goto L2f
-                            if (r1 != r2) goto L27
-                            kotlin.ResultKt.throwOnFailure(r5)
-                            goto L3f
-                        L27:
-                            java.lang.IllegalStateException r3 = new java.lang.IllegalStateException
-                            java.lang.String r4 = "call to 'resume' before 'invoke' with coroutine"
-                            r3.<init>(r4)
-                            throw r3
-                        L2f:
-                            kotlin.ResultKt.throwOnFailure(r5)
-                            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                            r4.label = r2
-                            kotlinx.coroutines.flow.FlowCollector r3 = r3.$this_unsafeFlow
-                            java.lang.Object r3 = r3.emit(r5, r4)
-                            if (r3 != r0) goto L3f
-                            return r0
-                        L3f:
-                            kotlin.Unit r3 = kotlin.Unit.INSTANCE
-                            return r3
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                        AnonymousClass1 anonymousClass1;
+                        if (continuation instanceof AnonymousClass1) {
+                            anonymousClass1 = (AnonymousClass1) continuation;
+                            int i = anonymousClass1.label;
+                            if ((i & Integer.MIN_VALUE) != 0) {
+                                anonymousClass1.label = i - Integer.MIN_VALUE;
+                            } else {
+                                anonymousClass1 = new AnonymousClass1(continuation);
+                            }
+                        }
+                        Object obj2 = anonymousClass1.result;
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i2 = anonymousClass1.label;
+                        if (i2 == 0) {
+                            ResultKt.throwOnFailure(obj2);
+                            Unit unit = Unit.INSTANCE;
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(unit, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        } else {
+                            if (i2 != 1) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                        }
+                        return Unit.INSTANCE;
                     }
                 }
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                    Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                    return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                    Object objCollect = flow3.collect(new AnonymousClass2(flowCollector), continuation);
+                    return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             };
             final ReadonlyStateFlow readonlyStateFlow2 = emergencyServicesRepository.enableEmergencyCallWhileSimLocked;
-            final ChannelLimitedFlowMerge merge = FlowKt.merge(flow, flow2, flow4, new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2
+            final ChannelLimitedFlowMerge channelLimitedFlowMergeMerge = FlowKt.merge(flow, flow2, flow4, new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -349,63 +306,50 @@ public final class BouncerActionButtonInteractor {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
+                    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
                     public final Object emit(Object obj, Continuation continuation) {
-                        /*
-                            this = this;
-                            boolean r4 = r5 instanceof com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                            if (r4 == 0) goto L13
-                            r4 = r5
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1 r4 = (com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r4
-                            int r0 = r4.label
-                            r1 = -2147483648(0xffffffff80000000, float:-0.0)
-                            r2 = r0 & r1
-                            if (r2 == 0) goto L13
-                            int r0 = r0 - r1
-                            r4.label = r0
-                            goto L18
-                        L13:
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1 r4 = new com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2$2$1
-                            r4.<init>(r5)
-                        L18:
-                            java.lang.Object r5 = r4.result
-                            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                            int r1 = r4.label
-                            r2 = 1
-                            if (r1 == 0) goto L2f
-                            if (r1 != r2) goto L27
-                            kotlin.ResultKt.throwOnFailure(r5)
-                            goto L3f
-                        L27:
-                            java.lang.IllegalStateException r3 = new java.lang.IllegalStateException
-                            java.lang.String r4 = "call to 'resume' before 'invoke' with coroutine"
-                            r3.<init>(r4)
-                            throw r3
-                        L2f:
-                            kotlin.ResultKt.throwOnFailure(r5)
-                            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                            r4.label = r2
-                            kotlinx.coroutines.flow.FlowCollector r3 = r3.$this_unsafeFlow
-                            java.lang.Object r3 = r3.emit(r5, r4)
-                            if (r3 != r0) goto L3f
-                            return r0
-                        L3f:
-                            kotlin.Unit r3 = kotlin.Unit.INSTANCE
-                            return r3
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                        AnonymousClass1 anonymousClass1;
+                        if (continuation instanceof AnonymousClass1) {
+                            anonymousClass1 = (AnonymousClass1) continuation;
+                            int i = anonymousClass1.label;
+                            if ((i & Integer.MIN_VALUE) != 0) {
+                                anonymousClass1.label = i - Integer.MIN_VALUE;
+                            } else {
+                                anonymousClass1 = new AnonymousClass1(continuation);
+                            }
+                        }
+                        Object obj2 = anonymousClass1.result;
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i2 = anonymousClass1.label;
+                        if (i2 == 0) {
+                            ResultKt.throwOnFailure(obj2);
+                            Unit unit = Unit.INSTANCE;
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(unit, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        } else {
+                            if (i2 != 1) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                        }
+                        return Unit.INSTANCE;
                     }
                 }
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                    Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                    return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                    Object objCollect = readonlyStateFlow2.collect(new AnonymousClass2(flowCollector), continuation);
+                    return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             });
             flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$1
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$1$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -434,135 +378,81 @@ public final class BouncerActionButtonInteractor {
                         this.this$0 = bouncerActionButtonInteractor;
                     }
 
-                    /* JADX WARN: Code restructure failed: missing block: B:21:0x00a6, code lost:
-                    
-                        if (r6.emit(r7, r0) == r1) goto L32;
-                     */
-                    /* JADX WARN: Code restructure failed: missing block: B:22:0x00a8, code lost:
-                    
-                        return r1;
-                     */
-                    /* JADX WARN: Code restructure failed: missing block: B:31:0x0089, code lost:
+                    /* JADX WARN: Code restructure failed: missing block: B:24:0x0089, code lost:
                     
                         if (r8 == r1) goto L32;
                      */
-                    /* JADX WARN: Removed duplicated region for block: B:19:0x0094  */
-                    /* JADX WARN: Removed duplicated region for block: B:23:0x009d  */
-                    /* JADX WARN: Removed duplicated region for block: B:24:0x003c  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+                    /* JADX WARN: Code restructure failed: missing block: B:31:0x00a6, code lost:
+                    
+                        if (r6.emit(r7, r0) != r1) goto L33;
+                     */
+                    /* JADX WARN: Code restructure failed: missing block: B:32:0x00a8, code lost:
+                    
+                        return r1;
+                     */
+                    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
                     */
-                    public final java.lang.Object emit(java.lang.Object r7, kotlin.coroutines.Continuation r8) {
-                        /*
-                            r6 = this;
-                            boolean r0 = r8 instanceof com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                            if (r0 == 0) goto L13
-                            r0 = r8
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$1$2$1 r0 = (com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                            int r1 = r0.label
-                            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                            r3 = r1 & r2
-                            if (r3 == 0) goto L13
-                            int r1 = r1 - r2
-                            r0.label = r1
-                            goto L18
-                        L13:
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$1$2$1 r0 = new com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$1$2$1
-                            r0.<init>(r8)
-                        L18:
-                            java.lang.Object r8 = r0.result
-                            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                            int r2 = r0.label
-                            r3 = 2
-                            r4 = 1
-                            r5 = 0
-                            if (r2 == 0) goto L3c
-                            if (r2 == r4) goto L34
-                            if (r2 != r3) goto L2c
-                            kotlin.ResultKt.throwOnFailure(r8)
-                            goto La9
-                        L2c:
-                            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-                            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-                            r6.<init>(r7)
-                            throw r6
-                        L34:
-                            java.lang.Object r6 = r0.L$0
-                            kotlinx.coroutines.flow.FlowCollector r6 = (kotlinx.coroutines.flow.FlowCollector) r6
-                            kotlin.ResultKt.throwOnFailure(r8)
-                            goto L8c
-                        L3c:
-                            kotlin.ResultKt.throwOnFailure(r8)
-                            kotlin.Unit r7 = (kotlin.Unit) r7
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor r7 = r6.this$0
-                            com.android.systemui.telephony.domain.interactor.TelephonyInteractor r8 = r7.telephonyInteractor
-                            kotlinx.coroutines.flow.ReadonlyStateFlow r8 = r8.isInCall
-                            kotlinx.coroutines.flow.StateFlow r8 = r8.$$delegate_0
-                            java.lang.Object r8 = r8.getValue()
-                            java.lang.Boolean r8 = (java.lang.Boolean) r8
-                            boolean r8 = r8.booleanValue()
-                            kotlinx.coroutines.flow.FlowCollector r6 = r6.$this_unsafeFlow
-                            if (r8 == 0) goto L60
-                            com.android.systemui.bouncer.shared.model.BouncerActionButtonModel$ReturnToCallButtonModel r7 = new com.android.systemui.bouncer.shared.model.BouncerActionButtonModel$ReturnToCallButtonModel
-                            r8 = 17041319(0x10407a7, float:2.425006E-38)
-                            r7.<init>(r8)
-                            goto L9e
-                        L60:
-                            r0.L$0 = r6
-                            r0.label = r4
-                            com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileConnectionsRepository r8 = r7.mobileConnectionsRepository
-                            boolean r8 = r8.getIsAnySimSecure()
-                            if (r8 == 0) goto L7d
-                            com.android.systemui.bouncer.data.repository.EmergencyServicesRepository r7 = r7.repository
-                            kotlinx.coroutines.flow.ReadonlyStateFlow r7 = r7.enableEmergencyCallWhileSimLocked
-                            kotlinx.coroutines.flow.StateFlow r7 = r7.$$delegate_0
-                            java.lang.Object r7 = r7.getValue()
-                            java.lang.Boolean r7 = (java.lang.Boolean) r7
-                            r7.getClass()
-                        L7b:
-                            r8 = r7
-                            goto L89
-                        L7d:
-                            com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$isEmergencyCallButton$2 r8 = new com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$isEmergencyCallButton$2
-                            r8.<init>(r7, r5)
-                            kotlinx.coroutines.CoroutineDispatcher r7 = r7.backgroundDispatcher
-                            java.lang.Object r7 = kotlinx.coroutines.BuildersKt.withContext(r7, r8, r0)
-                            goto L7b
-                        L89:
-                            if (r8 != r1) goto L8c
-                            goto La8
-                        L8c:
-                            java.lang.Boolean r8 = (java.lang.Boolean) r8
-                            boolean r7 = r8.booleanValue()
-                            if (r7 == 0) goto L9d
-                            com.android.systemui.bouncer.shared.model.BouncerActionButtonModel$EmergencyButtonModel r7 = new com.android.systemui.bouncer.shared.model.BouncerActionButtonModel$EmergencyButtonModel
-                            r8 = 17041292(0x104078c, float:2.4249986E-38)
-                            r7.<init>(r8)
-                            goto L9e
-                        L9d:
-                            r7 = r5
-                        L9e:
-                            r0.L$0 = r5
-                            r0.label = r3
-                            java.lang.Object r6 = r6.emit(r7, r0)
-                            if (r6 != r1) goto La9
-                        La8:
-                            return r1
-                        La9:
-                            kotlin.Unit r6 = kotlin.Unit.INSTANCE
-                            return r6
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.domain.interactor.BouncerActionButtonInteractor$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                    public final Object emit(Object obj, Continuation continuation) throws Throwable {
+                        AnonymousClass1 anonymousClass1;
+                        FlowCollector flowCollector;
+                        Object objWithContext;
+                        Object returnToCallButtonModel;
+                        if (continuation instanceof AnonymousClass1) {
+                            anonymousClass1 = (AnonymousClass1) continuation;
+                            int i = anonymousClass1.label;
+                            if ((i & Integer.MIN_VALUE) != 0) {
+                                anonymousClass1.label = i - Integer.MIN_VALUE;
+                            } else {
+                                anonymousClass1 = new AnonymousClass1(continuation);
+                            }
+                        }
+                        Object obj2 = anonymousClass1.result;
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i2 = anonymousClass1.label;
+                        if (i2 == 0) {
+                            ResultKt.throwOnFailure(obj2);
+                            BouncerActionButtonInteractor bouncerActionButtonInteractor = this.this$0;
+                            boolean zBooleanValue = ((Boolean) bouncerActionButtonInteractor.telephonyInteractor.isInCall.$$delegate_0.getValue()).booleanValue();
+                            flowCollector = this.$this_unsafeFlow;
+                            if (zBooleanValue) {
+                                returnToCallButtonModel = new BouncerActionButtonModel.ReturnToCallButtonModel(R.string.permlab_callCompanionApp);
+                                anonymousClass1.L$0 = null;
+                                anonymousClass1.label = 2;
+                            } else {
+                                anonymousClass1.L$0 = flowCollector;
+                                anonymousClass1.label = 1;
+                                if (bouncerActionButtonInteractor.mobileConnectionsRepository.getIsAnySimSecure()) {
+                                    objWithContext = (Boolean) bouncerActionButtonInteractor.repository.enableEmergencyCallWhileSimLocked.$$delegate_0.getValue();
+                                    objWithContext.getClass();
+                                } else {
+                                    objWithContext = BuildersKt.withContext(bouncerActionButtonInteractor.backgroundDispatcher, new BouncerActionButtonInteractor$isEmergencyCallButton$2(bouncerActionButtonInteractor, null), anonymousClass1);
+                                }
+                                obj2 = objWithContext;
+                            }
+                        } else {
+                            if (i2 != 1) {
+                                if (i2 != 2) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                                return Unit.INSTANCE;
+                            }
+                            flowCollector = (FlowCollector) anonymousClass1.L$0;
+                            ResultKt.throwOnFailure(obj2);
+                        }
+                        returnToCallButtonModel = ((Boolean) obj2).booleanValue() ? new BouncerActionButtonModel.EmergencyButtonModel(R.string.permlab_accessNetworkConditions) : null;
+                        anonymousClass1.L$0 = null;
+                        anonymousClass1.label = 2;
                     }
                 }
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                    Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                    return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                    Object objCollect = channelLimitedFlowMergeMerge.collect(new AnonymousClass2(flowCollector, this), continuation);
+                    return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             });
         }

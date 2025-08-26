@@ -12,12 +12,10 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface CommunalWidgetContentModel extends Parcelable {
     public static final CREATOR CREATOR = CREATOR.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CREATOR implements Parcelable.Creator {
         public static final /* synthetic */ CREATOR $$INSTANCE = new CREATOR();
 
@@ -26,14 +24,14 @@ public interface CommunalWidgetContentModel extends Parcelable {
 
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == 0) {
+            int i = parcel.readInt();
+            if (i == 0) {
                 return new Available(parcel);
             }
-            if (readInt == 1) {
+            if (i == 1) {
                 return new Pending(parcel);
             }
-            throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(readInt, "Unknown type: "));
+            throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Unknown type: "));
         }
 
         @Override // android.os.Parcelable.Creator
@@ -44,7 +42,6 @@ public interface CommunalWidgetContentModel extends Parcelable {
 
     int getAppWidgetId();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Available implements CommunalWidgetContentModel {
         public static final CREATOR CREATOR = new CREATOR(null);
         public final int appWidgetId;
@@ -52,7 +49,6 @@ public interface CommunalWidgetContentModel extends Parcelable {
         public final int rank;
         public final int spanY;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class CREATOR implements Parcelable.Creator {
             public /* synthetic */ CREATOR(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -118,33 +114,17 @@ public interface CommunalWidgetContentModel extends Parcelable {
         }
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public Available(android.os.Parcel r4) {
-            /*
-                r3 = this;
-                int r0 = r4.readInt()
-                android.os.Parcelable$Creator r1 = android.appwidget.AppWidgetProviderInfo.CREATOR
-                java.lang.Object r1 = r4.readTypedObject(r1)
-                if (r1 == 0) goto L1a
-                android.appwidget.AppWidgetProviderInfo r1 = (android.appwidget.AppWidgetProviderInfo) r1
-                int r2 = r4.readInt()
-                int r4 = r4.readInt()
-                r3.<init>(r0, r1, r2, r4)
-                return
-            L1a:
-                java.lang.IllegalArgumentException r3 = new java.lang.IllegalArgumentException
-                java.lang.String r4 = "Required value was null."
-                r3.<init>(r4)
-                throw r3
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.communal.shared.model.CommunalWidgetContentModel.Available.<init>(android.os.Parcel):void");
+        public Available(Parcel parcel) {
+            int i = parcel.readInt();
+            Object typedObject = parcel.readTypedObject(AppWidgetProviderInfo.CREATOR);
+            if (typedObject != null) {
+                this(i, (AppWidgetProviderInfo) typedObject, parcel.readInt(), parcel.readInt());
+                return;
+            }
+            throw new IllegalArgumentException("Required value was null.");
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Pending implements CommunalWidgetContentModel {
         public static final CREATOR CREATOR = new CREATOR(null);
         public final int appWidgetId;
@@ -155,7 +135,6 @@ public interface CommunalWidgetContentModel extends Parcelable {
         public final int type;
         public final UserHandle user;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class CREATOR implements Parcelable.Creator {
             public /* synthetic */ CREATOR(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -207,9 +186,9 @@ public interface CommunalWidgetContentModel extends Parcelable {
         }
 
         public final int hashCode() {
-            int hashCode = (this.componentName.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.rank, Integer.hashCode(this.appWidgetId) * 31, 31)) * 31;
+            int iHashCode = (this.componentName.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.rank, Integer.hashCode(this.appWidgetId) * 31, 31)) * 31;
             Bitmap bitmap = this.icon;
-            return Integer.hashCode(this.spanY) + ((this.user.hashCode() + ((hashCode + (bitmap == null ? 0 : bitmap.hashCode())) * 31)) * 31);
+            return Integer.hashCode(this.spanY) + ((this.user.hashCode() + ((iHashCode + (bitmap == null ? 0 : bitmap.hashCode())) * 31)) * 31);
         }
 
         public final String toString() {
@@ -219,16 +198,16 @@ public interface CommunalWidgetContentModel extends Parcelable {
             Bitmap bitmap = this.icon;
             UserHandle userHandle = this.user;
             int i3 = this.spanY;
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Pending(appWidgetId=", ", rank=", ", componentName=");
-            m.append(componentName);
-            m.append(", icon=");
-            m.append(bitmap);
-            m.append(", user=");
-            m.append(userHandle);
-            m.append(", spanY=");
-            m.append(i3);
-            m.append(")");
-            return m.toString();
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Pending(appWidgetId=", ", rank=", ", componentName=");
+            sbM.append(componentName);
+            sbM.append(", icon=");
+            sbM.append(bitmap);
+            sbM.append(", user=");
+            sbM.append(userHandle);
+            sbM.append(", spanY=");
+            sbM.append(i3);
+            sbM.append(")");
+            return sbM.toString();
         }
 
         @Override // android.os.Parcelable
@@ -243,42 +222,21 @@ public interface CommunalWidgetContentModel extends Parcelable {
         }
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public Pending(android.os.Parcel r8) {
-            /*
-                r7 = this;
-                int r1 = r8.readInt()
-                int r2 = r8.readInt()
-                android.os.Parcelable$Creator r0 = android.content.ComponentName.CREATOR
-                java.lang.Object r0 = r8.readTypedObject(r0)
-                java.lang.String r3 = "Required value was null."
-                if (r0 == 0) goto L36
-                android.content.ComponentName r0 = (android.content.ComponentName) r0
-                android.os.Parcelable$Creator r4 = android.graphics.Bitmap.CREATOR
-                java.lang.Object r4 = r8.readTypedObject(r4)
-                android.graphics.Bitmap r4 = (android.graphics.Bitmap) r4
-                android.os.Parcelable$Creator r5 = android.os.UserHandle.CREATOR
-                java.lang.Object r5 = r8.readTypedObject(r5)
-                if (r5 == 0) goto L30
-                android.os.UserHandle r5 = (android.os.UserHandle) r5
-                int r6 = r8.readInt()
-                r3 = r0
-                r0 = r7
-                r0.<init>(r1, r2, r3, r4, r5, r6)
-                return
-            L30:
-                java.lang.IllegalArgumentException r7 = new java.lang.IllegalArgumentException
-                r7.<init>(r3)
-                throw r7
-            L36:
-                java.lang.IllegalArgumentException r7 = new java.lang.IllegalArgumentException
-                r7.<init>(r3)
-                throw r7
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.communal.shared.model.CommunalWidgetContentModel.Pending.<init>(android.os.Parcel):void");
+        public Pending(Parcel parcel) {
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            Object typedObject = parcel.readTypedObject(ComponentName.CREATOR);
+            if (typedObject != null) {
+                ComponentName componentName = (ComponentName) typedObject;
+                Bitmap bitmap = (Bitmap) parcel.readTypedObject(Bitmap.CREATOR);
+                Object typedObject2 = parcel.readTypedObject(UserHandle.CREATOR);
+                if (typedObject2 != null) {
+                    this(i, i2, componentName, bitmap, (UserHandle) typedObject2, parcel.readInt());
+                    return;
+                }
+                throw new IllegalArgumentException("Required value was null.");
+            }
+            throw new IllegalArgumentException("Required value was null.");
         }
     }
 }

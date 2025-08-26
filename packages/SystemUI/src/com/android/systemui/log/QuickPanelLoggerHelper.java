@@ -7,7 +7,6 @@ import com.android.systemui.statusbar.StatusBarState;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QuickPanelLoggerHelper {
     public final TouchLogger dispatchTouchEventLogger;
@@ -17,7 +16,6 @@ public final class QuickPanelLoggerHelper {
     public final TouchLogger onTouchEventLogger;
     public final PanelStateLogger panelStateLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -27,7 +25,6 @@ public final class QuickPanelLoggerHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FlingLogger {
         public final QuickPanelExternalLogger externalLogger;
         public final StringBuilder logBuilder = new StringBuilder();
@@ -37,7 +34,6 @@ public final class QuickPanelLoggerHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PanelStateLogger {
         public final QuickPanelExternalLogger externalLogger;
         public final StringBuilder logBuilder = new StringBuilder();
@@ -62,7 +58,6 @@ public final class QuickPanelLoggerHelper {
         this.panelStateLogger = new PanelStateLogger(quickPanelExternalLogger);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TouchLogger {
         public final QuickPanelExternalLogger externalLogger;
         public final String header;
@@ -83,13 +78,13 @@ public final class QuickPanelLoggerHelper {
             if (!Intrinsics.areEqual(str2, "onInterceptTouchEvent")) {
                 return MotionEvent.actionToString(motionEvent.getAction());
             }
-            String actionToString = MotionEvent.actionToString(motionEvent.getAction());
+            String strActionToString = MotionEvent.actionToString(motionEvent.getAction());
             if (motionEvent.getPointerCount() > 0) {
                 str = " | x:" + motionEvent.getX(0) + ", y:" + motionEvent.getY(0);
             } else {
                 str = "";
             }
-            return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(actionToString, str);
+            return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strActionToString, str);
         }
 
         public final void log(MotionEvent motionEvent, String str, String str2) {

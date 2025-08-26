@@ -46,9 +46,9 @@ public interface IRecordingConfigDispatcher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRecordingConfigDispatcher)) {
-                return (IRecordingConfigDispatcher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRecordingConfigDispatcher)) {
+                return (IRecordingConfigDispatcher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IRecordingConfigDispatcher extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(AudioRecordingConfiguration.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AudioRecordingConfiguration.CREATOR);
                 parcel.enforceNoDataAvail();
-                dispatchRecordingConfigChange(createTypedArrayList);
+                dispatchRecordingConfigChange(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,13 +101,13 @@ public interface IRecordingConfigDispatcher extends IInterface {
 
             @Override // android.media.IRecordingConfigDispatcher
             public void dispatchRecordingConfigChange(List<AudioRecordingConfiguration> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

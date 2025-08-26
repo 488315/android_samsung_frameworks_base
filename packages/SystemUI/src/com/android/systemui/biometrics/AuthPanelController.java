@@ -1,12 +1,13 @@
 package com.android.systemui.biometrics;
 
 import android.content.Context;
+import android.graphics.Insets;
+import android.graphics.Outline;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AuthPanelController extends ViewOutlineProvider {
     public int mContainerHeight;
@@ -46,94 +47,48 @@ public class AuthPanelController extends ViewOutlineProvider {
         return getLeftBound(1);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0065  */
     @Override // android.view.ViewOutlineProvider
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void getOutline(android.view.View r7, android.graphics.Outline r8) {
-        /*
-            r6 = this;
-            int r7 = r6.mPosition
-            int r1 = r6.getLeftBound(r7)
-            int r7 = r6.mPosition
-            boolean r0 = r6.mUseFullScreen
-            r2 = 2
-            r3 = 3
-            if (r0 != 0) goto L25
-            android.content.Context r0 = r6.mContext
-            android.graphics.Insets r0 = com.android.systemui.biometrics.Utils.getNavbarInsets(r0)
-            if (r7 != r3) goto L1d
-            int r7 = r6.mContentWidth
-            int r7 = r7 + r1
-            int r0 = r0.right
-        L1b:
-            int r7 = r7 - r0
-            goto L28
-        L1d:
-            if (r7 != r2) goto L25
-            int r7 = r6.mContentWidth
-            int r7 = r7 + r1
-            int r0 = r0.left
-            goto L1b
-        L25:
-            int r7 = r6.mContentWidth
-            int r7 = r7 + r1
-        L28:
-            int r0 = r6.mPosition
-            if (r0 == r2) goto L3c
-            if (r0 == r3) goto L3c
-            int r0 = r6.mContainerHeight
-            int r2 = r6.mContentHeight
-            int r0 = r0 - r2
-            int r2 = r6.mMargin
-            int r0 = r0 - r2
-            int r0 = java.lang.Math.max(r0, r2)
-        L3a:
-            r2 = r0
-            goto L49
-        L3c:
-            int r0 = r6.mContainerHeight
-            int r3 = r6.mContentHeight
-            int r0 = r0 - r3
-            int r0 = r0 / r2
-            int r2 = r6.mMargin
-            int r0 = java.lang.Math.max(r0, r2)
-            goto L3a
-        L49:
-            boolean r0 = r6.mUseFullScreen
-            if (r0 != 0) goto L65
-            android.content.Context r0 = r6.mContext
-            android.graphics.Insets r0 = com.android.systemui.biometrics.Utils.getNavbarInsets(r0)
-            int r3 = r6.mContentHeight
-            int r3 = r3 + r2
-            int r0 = r0.bottom
-            int r3 = r3 - r0
-            int r4 = r6.mContainerHeight
-            int r5 = r6.mMargin
-            int r4 = r4 - r5
-            int r4 = r4 - r0
-            int r0 = java.lang.Math.min(r3, r4)
-        L63:
-            r4 = r0
-            goto L72
-        L65:
-            int r0 = r6.mContentHeight
-            int r0 = r0 + r2
-            int r3 = r6.mContainerHeight
-            int r4 = r6.mMargin
-            int r3 = r3 - r4
-            int r0 = java.lang.Math.min(r0, r3)
-            goto L63
-        L72:
-            float r5 = r6.mCornerRadius
-            r3 = r7
-            r0 = r8
-            r0.setRoundRect(r1, r2, r3, r4, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.AuthPanelController.getOutline(android.view.View, android.graphics.Outline):void");
+    public final void getOutline(View view, Outline outline) {
+        int i;
+        int iMax;
+        int iMin;
+        int i2;
+        int i3;
+        int leftBound = getLeftBound(this.mPosition);
+        int i4 = this.mPosition;
+        if (this.mUseFullScreen) {
+            i = this.mContentWidth + leftBound;
+        } else {
+            Insets navbarInsets = Utils.getNavbarInsets(this.mContext);
+            if (i4 == 3) {
+                i2 = this.mContentWidth + leftBound;
+                i3 = navbarInsets.right;
+            } else {
+                if (i4 == 2) {
+                    i2 = this.mContentWidth + leftBound;
+                    i3 = navbarInsets.left;
+                }
+                i = this.mContentWidth + leftBound;
+            }
+            i = i2 - i3;
+        }
+        int i5 = this.mPosition;
+        if (i5 == 2 || i5 == 3) {
+            iMax = Math.max((this.mContainerHeight - this.mContentHeight) / 2, this.mMargin);
+        } else {
+            int i6 = this.mContainerHeight - this.mContentHeight;
+            int i7 = this.mMargin;
+            iMax = Math.max(i6 - i7, i7);
+        }
+        int i8 = iMax;
+        if (this.mUseFullScreen) {
+            iMin = Math.min(this.mContentHeight + i8, this.mContainerHeight - this.mMargin);
+        } else {
+            Insets navbarInsets2 = Utils.getNavbarInsets(this.mContext);
+            int i9 = this.mContentHeight + i8;
+            int i10 = navbarInsets2.bottom;
+            iMin = Math.min(i9 - i10, (this.mContainerHeight - this.mMargin) - i10);
+        }
+        outline.setRoundRect(leftBound, i8, i, iMin, this.mCornerRadius);
     }
 }

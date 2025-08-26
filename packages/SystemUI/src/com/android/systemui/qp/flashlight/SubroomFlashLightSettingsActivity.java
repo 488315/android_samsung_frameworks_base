@@ -3,6 +3,7 @@ package com.android.systemui.qp.flashlight;
 import android.R;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.devicestate.DeviceState;
 import android.hardware.devicestate.DeviceStateManager;
@@ -31,7 +32,6 @@ import com.android.systemui.statusbar.policy.FlashlightControllerImpl;
 import com.android.systemui.statusbar.policy.SecFlashlightControllerImpl;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubroomFlashLightSettingsActivity extends Activity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -66,7 +66,7 @@ public class SubroomFlashLightSettingsActivity extends Activity {
             }
             ActionBarContextView$$ExternalSyntheticOutline0.m(new StringBuilder("updateRoundedCorners ,flexmode:"), subroomFlashLightSettingsActivity.mIsFlexMode, "SubroomFlashLightSettingsActivity");
             if (subroomFlashLightSettingsActivity.mIsFlexMode) {
-                subroomFlashLightSettingsActivity.mSubRoomPresentationView.semSetRoundedCorners(3, subroomFlashLightSettingsActivity.mContext.getResources().getDimensionPixelSize(17105923));
+                subroomFlashLightSettingsActivity.mSubRoomPresentationView.semSetRoundedCorners(3, subroomFlashLightSettingsActivity.mContext.getResources().getDimensionPixelSize(17105924));
                 subroomFlashLightSettingsActivity.mSubRoomPresentationView.semSetRoundedCornerColor(3, subroomFlashLightSettingsActivity.mContext.getColor(R.color.black));
             } else {
                 subroomFlashLightSettingsActivity.mSubRoomPresentationView.semSetRoundedCorners(0);
@@ -77,7 +77,7 @@ public class SubroomFlashLightSettingsActivity extends Activity {
     public final SubroomFlashLightSettingsActivity$$ExternalSyntheticLambda0 mOnBackInvokedCallback = new OnBackInvokedCallback() { // from class: com.android.systemui.qp.flashlight.SubroomFlashLightSettingsActivity$$ExternalSyntheticLambda0
         @Override // android.window.OnBackInvokedCallback
         public final void onBackInvoked() {
-            SubroomFlashLightSettingsActivity subroomFlashLightSettingsActivity = SubroomFlashLightSettingsActivity.this;
+            SubroomFlashLightSettingsActivity subroomFlashLightSettingsActivity = this.f$0;
             int i = SubroomFlashLightSettingsActivity.$r8$clinit;
             subroomFlashLightSettingsActivity.onBackPressed();
         }
@@ -251,7 +251,7 @@ public class SubroomFlashLightSettingsActivity extends Activity {
     }
 
     @Override // android.app.Activity
-    public final void onStart() {
+    public final void onStart() throws Resources.NotFoundException {
         super.onStart();
         this.mActivityState = 1;
         RecyclerView$$ExternalSyntheticOutline0.m(this.mActivityState, "SubroomFlashLightSettingsActivity", new StringBuilder("onStart: "));
@@ -376,11 +376,11 @@ public class SubroomFlashLightSettingsActivity extends Activity {
             int i3 = this.mShowHelpViewTextPrefs.getInt("helpViewTextCount", 0);
             this.mHelpViewTextCounter = i3;
             if (i3 < 3) {
-                SharedPreferences.Editor edit = this.mShowHelpViewTextPrefs.edit();
+                SharedPreferences.Editor editorEdit = this.mShowHelpViewTextPrefs.edit();
                 int i4 = this.mHelpViewTextCounter + 1;
                 this.mHelpViewTextCounter = i4;
-                edit.putInt("helpViewTextCount", i4);
-                edit.commit();
+                editorEdit.putInt("helpViewTextCount", i4);
+                editorEdit.commit();
             }
         }
     }

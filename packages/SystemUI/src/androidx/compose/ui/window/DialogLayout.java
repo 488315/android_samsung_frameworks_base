@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.WeakHashMap;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DialogLayout extends AbstractComposeView implements OnApplyWindowInsetsListener {
     public final MutableState content$delegate;
@@ -41,12 +40,12 @@ final class DialogLayout extends AbstractComposeView implements OnApplyWindowIns
                 DialogLayout dialogLayout = DialogLayout.this;
                 if (!dialogLayout.decorFitsSystemWindows) {
                     View childAt = dialogLayout.getChildAt(0);
-                    int max = Math.max(0, childAt.getLeft());
-                    int max2 = Math.max(0, childAt.getTop());
-                    int max3 = Math.max(0, dialogLayout.getWidth() - childAt.getRight());
-                    int max4 = Math.max(0, dialogLayout.getHeight() - childAt.getBottom());
-                    if (max != 0 || max2 != 0 || max3 != 0 || max4 != 0) {
-                        return windowInsetsCompat.mImpl.inset(max, max2, max3, max4);
+                    int iMax = Math.max(0, childAt.getLeft());
+                    int iMax2 = Math.max(0, childAt.getTop());
+                    int iMax3 = Math.max(0, dialogLayout.getWidth() - childAt.getRight());
+                    int iMax4 = Math.max(0, dialogLayout.getHeight() - childAt.getBottom());
+                    if (iMax != 0 || iMax2 != 0 || iMax3 != 0 || iMax4 != 0) {
+                        return windowInsetsCompat.mImpl.inset(iMax, iMax2, iMax3, iMax4);
                     }
                 }
                 return windowInsetsCompat;
@@ -57,19 +56,19 @@ final class DialogLayout extends AbstractComposeView implements OnApplyWindowIns
                 DialogLayout dialogLayout = DialogLayout.this;
                 if (!dialogLayout.decorFitsSystemWindows) {
                     View childAt = dialogLayout.getChildAt(0);
-                    int max = Math.max(0, childAt.getLeft());
-                    int max2 = Math.max(0, childAt.getTop());
-                    int max3 = Math.max(0, dialogLayout.getWidth() - childAt.getRight());
-                    int max4 = Math.max(0, dialogLayout.getHeight() - childAt.getBottom());
-                    if (max != 0 || max2 != 0 || max3 != 0 || max4 != 0) {
-                        Insets of = Insets.of(max, max2, max3, max4);
+                    int iMax = Math.max(0, childAt.getLeft());
+                    int iMax2 = Math.max(0, childAt.getTop());
+                    int iMax3 = Math.max(0, dialogLayout.getWidth() - childAt.getRight());
+                    int iMax4 = Math.max(0, dialogLayout.getHeight() - childAt.getBottom());
+                    if (iMax != 0 || iMax2 != 0 || iMax3 != 0 || iMax4 != 0) {
+                        Insets insetsOf = Insets.of(iMax, iMax2, iMax3, iMax4);
                         boundsCompat.getClass();
-                        int i = of.left;
+                        int i = insetsOf.left;
                         Insets insets = boundsCompat.mLowerBound;
-                        int i2 = of.top;
-                        int i3 = of.right;
-                        int i4 = of.bottom;
-                        return new WindowInsetsAnimationCompat.BoundsCompat(WindowInsetsCompat.insetInsets(insets, i, i2, i3, i4), WindowInsetsCompat.insetInsets(boundsCompat.mUpperBound, of.left, i2, i3, i4));
+                        int i2 = insetsOf.top;
+                        int i3 = insetsOf.right;
+                        int i4 = insetsOf.bottom;
+                        return new WindowInsetsAnimationCompat.BoundsCompat(WindowInsetsCompat.insetInsets(insets, i, i2, i3, i4), WindowInsetsCompat.insetInsets(boundsCompat.mUpperBound, insetsOf.left, i2, i3, i4));
                     }
                 }
                 return boundsCompat;
@@ -155,12 +154,12 @@ final class DialogLayout extends AbstractComposeView implements OnApplyWindowIns
     public final WindowInsetsCompat onApplyWindowInsets(WindowInsetsCompat windowInsetsCompat, View view) {
         if (!this.decorFitsSystemWindows) {
             View childAt = getChildAt(0);
-            int max = Math.max(0, childAt.getLeft());
-            int max2 = Math.max(0, childAt.getTop());
-            int max3 = Math.max(0, getWidth() - childAt.getRight());
-            int max4 = Math.max(0, getHeight() - childAt.getBottom());
-            if (max != 0 || max2 != 0 || max3 != 0 || max4 != 0) {
-                return windowInsetsCompat.mImpl.inset(max, max2, max3, max4);
+            int iMax = Math.max(0, childAt.getLeft());
+            int iMax2 = Math.max(0, childAt.getTop());
+            int iMax3 = Math.max(0, getWidth() - childAt.getRight());
+            int iMax4 = Math.max(0, getHeight() - childAt.getBottom());
+            if (iMax != 0 || iMax2 != 0 || iMax3 != 0 || iMax4 != 0) {
+                return windowInsetsCompat.mImpl.inset(iMax, iMax2, iMax3, iMax4);
             }
         }
         return windowInsetsCompat;

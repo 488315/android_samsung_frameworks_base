@@ -58,9 +58,9 @@ public interface IUdfpsRefreshRateRequestCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUdfpsRefreshRateRequestCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUdfpsRefreshRateRequestCallback)) {
-                return (IUdfpsRefreshRateRequestCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUdfpsRefreshRateRequestCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUdfpsRefreshRateRequestCallback)) {
+                return (IUdfpsRefreshRateRequestCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -93,18 +93,18 @@ public interface IUdfpsRefreshRateRequestCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onRequestEnabled(readInt);
+                onRequestEnabled(i3);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onRequestDisabled(readInt2);
+                onRequestDisabled(i4);
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
+                int i5 = parcel.readInt();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onAuthenticationPossible(readInt3, readBoolean);
+                onAuthenticationPossible(i5, z);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -129,38 +129,38 @@ public interface IUdfpsRefreshRateRequestCallback extends IInterface {
 
             @Override // android.hardware.fingerprint.IUdfpsRefreshRateRequestCallback
             public void onRequestEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUdfpsRefreshRateRequestCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUdfpsRefreshRateRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IUdfpsRefreshRateRequestCallback
             public void onRequestDisabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUdfpsRefreshRateRequestCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUdfpsRefreshRateRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.fingerprint.IUdfpsRefreshRateRequestCallback
             public void onAuthenticationPossible(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUdfpsRefreshRateRequestCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUdfpsRefreshRateRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

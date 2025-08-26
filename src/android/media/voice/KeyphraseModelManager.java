@@ -32,10 +32,10 @@ public final class KeyphraseModelManager {
     public void updateKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel keyphraseSoundModel) {
         Objects.requireNonNull(keyphraseSoundModel);
         try {
-            int updateKeyphraseSoundModel = this.mVoiceInteractionManagerService.updateKeyphraseSoundModel(keyphraseSoundModel);
-            if (updateKeyphraseSoundModel == 0) {
+            int iUpdateKeyphraseSoundModel = this.mVoiceInteractionManagerService.updateKeyphraseSoundModel(keyphraseSoundModel);
+            if (iUpdateKeyphraseSoundModel == 0) {
             } else {
-                throw new ServiceSpecificException(updateKeyphraseSoundModel);
+                throw new ServiceSpecificException(iUpdateKeyphraseSoundModel);
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -45,10 +45,10 @@ public final class KeyphraseModelManager {
     public void deleteKeyphraseSoundModel(int i, Locale locale) {
         Objects.requireNonNull(locale);
         try {
-            int deleteKeyphraseSoundModel = this.mVoiceInteractionManagerService.deleteKeyphraseSoundModel(i, locale.toLanguageTag());
-            if (deleteKeyphraseSoundModel == 0) {
+            int iDeleteKeyphraseSoundModel = this.mVoiceInteractionManagerService.deleteKeyphraseSoundModel(i, locale.toLanguageTag());
+            if (iDeleteKeyphraseSoundModel == 0) {
             } else {
-                throw new ServiceSpecificException(deleteKeyphraseSoundModel);
+                throw new ServiceSpecificException(iDeleteKeyphraseSoundModel);
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();

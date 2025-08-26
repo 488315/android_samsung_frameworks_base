@@ -156,29 +156,29 @@ public final class PermissionGroupUsage implements Parcelable {
     }
 
     PermissionGroupUsage(Parcel parcel) {
-        int readInt = parcel.readInt();
-        boolean z = (readInt & 16) != 0;
-        boolean z2 = (readInt & 32) != 0;
-        String readString = parcel.readString();
-        int readInt2 = parcel.readInt();
-        long readLong = parcel.readLong();
-        String readString2 = parcel.readString();
-        CharSequence readCharSequence = (readInt & 64) == 0 ? null : parcel.readCharSequence();
-        CharSequence readCharSequence2 = (readInt & 128) == 0 ? null : parcel.readCharSequence();
-        CharSequence readCharSequence3 = (readInt & 256) == 0 ? null : parcel.readCharSequence();
-        String readString3 = parcel.readString();
-        this.mPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mUid = readInt2;
-        this.mLastAccessTimeMillis = readLong;
-        this.mPermissionGroupName = readString2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString2);
+        int i = parcel.readInt();
+        boolean z = (i & 16) != 0;
+        boolean z2 = (i & 32) != 0;
+        String string = parcel.readString();
+        int i2 = parcel.readInt();
+        long j = parcel.readLong();
+        String string2 = parcel.readString();
+        CharSequence charSequence = (i & 64) == 0 ? null : parcel.readCharSequence();
+        CharSequence charSequence2 = (i & 128) == 0 ? null : parcel.readCharSequence();
+        CharSequence charSequence3 = (i & 256) == 0 ? null : parcel.readCharSequence();
+        String string3 = parcel.readString();
+        this.mPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mUid = i2;
+        this.mLastAccessTimeMillis = j;
+        this.mPermissionGroupName = string2;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string2);
         this.mActive = z;
         this.mPhoneCall = z2;
-        this.mAttributionTag = readCharSequence;
-        this.mAttributionLabel = readCharSequence2;
-        this.mProxyLabel = readCharSequence3;
-        this.mPersistentDeviceId = readString3;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString3);
+        this.mAttributionTag = charSequence;
+        this.mAttributionLabel = charSequence2;
+        this.mProxyLabel = charSequence3;
+        this.mPersistentDeviceId = string3;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string3);
     }
 }

@@ -66,6 +66,10 @@ public abstract class TaskStackListener extends ITaskStackListener.Stub {
     }
 
     @Override // android.app.ITaskStackListener
+    public void onRecentTaskRemoved(int i) {
+    }
+
+    @Override // android.app.ITaskStackListener
     public void onRecentTaskRemovedForAddTask(int i) {
     }
 

@@ -6,7 +6,6 @@ import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SearchBarColors {
     public final long containerColor;
@@ -27,8 +26,8 @@ public final class SearchBarColors {
         SearchBarColors searchBarColors = (SearchBarColors) obj;
         long j = searchBarColors.containerColor;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3427equalsimpl0(this.containerColor, j)) {
-            return ULong.m3427equalsimpl0(this.dividerColor, searchBarColors.dividerColor) && Intrinsics.areEqual(this.inputFieldColors, searchBarColors.inputFieldColors);
+        if (ULong.m3447equalsimpl0(this.containerColor, j)) {
+            return ULong.m3447equalsimpl0(this.dividerColor, searchBarColors.dividerColor) && Intrinsics.areEqual(this.inputFieldColors, searchBarColors.inputFieldColors);
         }
         return false;
     }

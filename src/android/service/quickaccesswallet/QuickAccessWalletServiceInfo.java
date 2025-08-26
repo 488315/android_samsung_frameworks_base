@@ -44,11 +44,11 @@ class QuickAccessWalletServiceInfo {
     static QuickAccessWalletServiceInfo tryCreate(Context context) {
         String packageName;
         ServiceInfo walletServiceInfo;
-        int myUserId = UserHandle.myUserId();
+        int iMyUserId = UserHandle.myUserId();
         if (isWalletRoleAvailable(context)) {
             Pair<String, Integer> defaultWalletApp = getDefaultWalletApp(context);
             packageName = defaultWalletApp.first;
-            myUserId = defaultWalletApp.second.intValue();
+            iMyUserId = defaultWalletApp.second.intValue();
         } else {
             ComponentName defaultPaymentApp = getDefaultPaymentApp(context);
             if (defaultPaymentApp == null) {
@@ -56,41 +56,41 @@ class QuickAccessWalletServiceInfo {
             }
             packageName = defaultPaymentApp.getPackageName();
         }
-        if (packageName == null || myUserId < 0 || (walletServiceInfo = getWalletServiceInfo(context, packageName, myUserId)) == null) {
+        if (packageName == null || iMyUserId < 0 || (walletServiceInfo = getWalletServiceInfo(context, packageName, iMyUserId)) == null) {
             return null;
         }
         if (!Manifest.permission.BIND_QUICK_ACCESS_WALLET_SERVICE.equals(walletServiceInfo.permission)) {
             Log.w(TAG, String.format("%s.%s does not require permission %s", walletServiceInfo.packageName, walletServiceInfo.name, Manifest.permission.BIND_QUICK_ACCESS_WALLET_SERVICE));
             return null;
         }
-        return new QuickAccessWalletServiceInfo(walletServiceInfo, parseServiceMetadata(context, walletServiceInfo), new TileServiceMetadata(parseTileServiceMetadata(context, walletServiceInfo)), myUserId);
+        return new QuickAccessWalletServiceInfo(walletServiceInfo, parseServiceMetadata(context, walletServiceInfo), new TileServiceMetadata(parseTileServiceMetadata(context, walletServiceInfo)), iMyUserId);
     }
 
     private static Pair<String, Integer> getDefaultWalletApp(Context context) {
-        UserHandle of = UserHandle.of(UserHandle.myUserId());
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        UserHandle userHandleOf = UserHandle.of(UserHandle.myUserId());
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             RoleManager roleManager = (RoleManager) context.getSystemService(RoleManager.class);
             String str = null;
-            if (Flags.walletRoleCrossUserEnabled() && com.android.internal.hidden_from_bootclasspath.com.android.permission.flags.Flags.crossUserRoleEnabled() && context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL) == 0 && (of = roleManager.getActiveUserForRole("android.app.role.WALLET")) == null) {
+            if (Flags.walletRoleCrossUserEnabled() && com.android.internal.hidden_from_bootclasspath.com.android.permission.flags.Flags.crossUserRoleEnabled() && context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL) == 0 && (userHandleOf = roleManager.getActiveUserForRole("android.app.role.WALLET")) == null) {
                 return new Pair<>(null, Integer.valueOf(UserHandle.myUserId()));
             }
-            List roleHoldersAsUser = roleManager.getRoleHoldersAsUser("android.app.role.WALLET", of);
+            List roleHoldersAsUser = roleManager.getRoleHoldersAsUser("android.app.role.WALLET", userHandleOf);
             if (!roleHoldersAsUser.isEmpty()) {
                 str = (String) roleHoldersAsUser.get(0);
             }
-            return new Pair<>(str, Integer.valueOf(of.getIdentifier()));
+            return new Pair<>(str, Integer.valueOf(userHandleOf.getIdentifier()));
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
     private static boolean isWalletRoleAvailable(Context context) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             return ((RoleManager) context.getSystemService(RoleManager.class)).isRoleAvailable("android.app.role.WALLET");
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -105,11 +105,11 @@ class QuickAccessWalletServiceInfo {
     private static ServiceInfo getWalletServiceInfo(Context context, String str, int i) {
         Intent intent = new Intent(QuickAccessWalletService.SERVICE_INTERFACE);
         intent.setPackage(str);
-        List<ResolveInfo> queryIntentServicesAsUser = context.getPackageManager().queryIntentServicesAsUser(intent, 852096, i);
-        if (queryIntentServicesAsUser.isEmpty()) {
+        List<ResolveInfo> listQueryIntentServicesAsUser = context.getPackageManager().queryIntentServicesAsUser(intent, 852096, i);
+        if (listQueryIntentServicesAsUser.isEmpty()) {
             return null;
         }
-        return queryIntentServicesAsUser.get(0).serviceInfo;
+        return listQueryIntentServicesAsUser.get(0).serviceInfo;
     }
 
     private static class TileServiceMetadata {
@@ -155,27 +155,27 @@ class QuickAccessWalletServiceInfo {
     static ServiceMetadata parseServiceMetadata(Context context, ServiceInfo serviceInfo) {
         Resources resourcesForApplication;
         PackageManager packageManager = context.getPackageManager();
-        XmlResourceParser loadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, QuickAccessWalletService.SERVICE_META_DATA);
-        if (loadXmlMetaData == null) {
+        XmlResourceParser xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, QuickAccessWalletService.SERVICE_META_DATA);
+        if (xmlResourceParserLoadXmlMetaData == null) {
             return ServiceMetadata.empty();
         }
         try {
             resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
-            for (int i = 0; i != 1 && i != 2; i = loadXmlMetaData.next()) {
+            for (int next = 0; next != 1 && next != 2; next = xmlResourceParserLoadXmlMetaData.next()) {
             }
         } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
             Log.e(TAG, "Error parsing quickaccesswallet service meta-data", e);
         }
-        if (!TAG_WALLET_SERVICE.equals(loadXmlMetaData.getName())) {
+        if (!TAG_WALLET_SERVICE.equals(xmlResourceParserLoadXmlMetaData.getName())) {
             Log.e(TAG, "Meta-data does not start with quickaccesswallet-service tag");
             return ServiceMetadata.empty();
         }
-        TypedArray typedArray = null;
+        TypedArray typedArrayObtainAttributes = null;
         try {
-            typedArray = resourcesForApplication.obtainAttributes(Xml.asAttributeSet(loadXmlMetaData), R.styleable.QuickAccessWalletService);
-            ServiceMetadata serviceMetadata = new ServiceMetadata(typedArray.getString(0), typedArray.getString(1), typedArray.getText(2), typedArray.getText(3));
-            if (typedArray != null) {
-                typedArray.recycle();
+            typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData), R.styleable.QuickAccessWalletService);
+            ServiceMetadata serviceMetadata = new ServiceMetadata(typedArrayObtainAttributes.getString(0), typedArrayObtainAttributes.getString(1), typedArrayObtainAttributes.getText(2), typedArrayObtainAttributes.getText(3));
+            if (typedArrayObtainAttributes != null) {
+                typedArrayObtainAttributes.recycle();
             }
             return serviceMetadata;
         } finally {
@@ -199,8 +199,8 @@ class QuickAccessWalletServiceInfo {
     }
 
     Drawable getWalletLogo(Context context) {
-        Drawable loadLogo = this.mServiceInfo.loadLogo(context.getPackageManager());
-        return loadLogo != null ? loadLogo : this.mServiceInfo.loadIcon(context.getPackageManager());
+        Drawable drawableLoadLogo = this.mServiceInfo.loadLogo(context.getPackageManager());
+        return drawableLoadLogo != null ? drawableLoadLogo : this.mServiceInfo.loadIcon(context.getPackageManager());
     }
 
     Drawable getTileIcon() {

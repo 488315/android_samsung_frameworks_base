@@ -2,11 +2,11 @@ package com.android.systemui.classifier;
 
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
+import com.android.systemui.classifier.FalsingClassifier;
 import com.android.systemui.util.DeviceConfigProxy;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DistanceClassifier extends FalsingClassifier {
     public DistanceVectors mCachedDistance;
@@ -17,7 +17,6 @@ public class DistanceClassifier extends FalsingClassifier {
     public final float mVerticalFlingThresholdPx;
     public final float mVerticalSwipeThresholdPx;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DistanceVectors {
         public final float mDx;
         public final float mDy;
@@ -51,87 +50,41 @@ public class DistanceClassifier extends FalsingClassifier {
         this.mDistanceDirty = true;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0047, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x0047, code lost:
     
         if (java.lang.Math.abs(r1) >= r4.mHorizontalFlingThresholdPx) goto L26;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x0063, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:25:0x0054, code lost:
     
-        return falsed(0.5d, getReason$1());
+        if (java.lang.Math.abs(r0) >= r4.mVerticalFlingThresholdPx) goto L26;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x005a, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:27:0x005a, code lost:
     
         return com.android.systemui.classifier.FalsingClassifier.Result.passed(0.5d);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x0054, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:29:0x0063, code lost:
     
-        if (java.lang.Math.abs(r0) >= r4.mVerticalFlingThresholdPx) goto L26;
+        return falsed(0.5d, getReason$1());
      */
     @Override // com.android.systemui.classifier.FalsingClassifier
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.systemui.classifier.FalsingClassifier.Result calculateFalsingResult(int r5) {
-        /*
-            r4 = this;
-            r0 = 10
-            if (r5 == r0) goto L64
-            r0 = 18
-            if (r5 == r0) goto L64
-            r0 = 11
-            if (r5 == r0) goto L64
-            r0 = 12
-            if (r5 == r0) goto L64
-            r0 = 13
-            if (r5 == r0) goto L64
-            r0 = 15
-            if (r5 == r0) goto L64
-            r0 = 17
-            if (r5 == r0) goto L64
-            r0 = 19
-            if (r5 != r0) goto L21
-            goto L64
-        L21:
-            com.android.systemui.classifier.DistanceClassifier$DistanceVectors r5 = r4.getDistances()
-            float r0 = r5.mDx
-            float r1 = r5.mVx
-            float r2 = r4.mVelocityToDistanceMultiplier
-            float r1 = r1 * r2
-            float r1 = r1 + r0
-            float r0 = r5.mVy
-            float r0 = r0 * r2
-            float r5 = r5.mDy
-            float r0 = r0 + r5
-            com.android.systemui.classifier.FalsingDataProvider r5 = r4.mDataProvider
-            boolean r5 = r5.isHorizontal()
-            r2 = 4602678819172646912(0x3fe0000000000000, double:0.5)
-            if (r5 == 0) goto L4a
-            boolean r5 = com.android.systemui.classifier.BrightLineFalsingManager.DEBUG
-            float r5 = java.lang.Math.abs(r1)
-            float r0 = r4.mHorizontalFlingThresholdPx
-            int r5 = (r5 > r0 ? 1 : (r5 == r0 ? 0 : -1))
-            if (r5 < 0) goto L5b
-            goto L56
-        L4a:
-            boolean r5 = com.android.systemui.classifier.BrightLineFalsingManager.DEBUG
-            float r5 = java.lang.Math.abs(r0)
-            float r0 = r4.mVerticalFlingThresholdPx
-            int r5 = (r5 > r0 ? 1 : (r5 == r0 ? 0 : -1))
-            if (r5 < 0) goto L5b
-        L56:
-            com.android.systemui.classifier.FalsingClassifier$Result r4 = com.android.systemui.classifier.FalsingClassifier.Result.passed(r2)
-            return r4
-        L5b:
-            java.lang.String r5 = r4.getReason$1()
-            com.android.systemui.classifier.FalsingClassifier$Result r4 = r4.falsed(r2, r5)
-            return r4
-        L64:
-            r4 = 0
-            com.android.systemui.classifier.FalsingClassifier$Result r4 = com.android.systemui.classifier.FalsingClassifier.Result.passed(r4)
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.classifier.DistanceClassifier.calculateFalsingResult(int):com.android.systemui.classifier.FalsingClassifier$Result");
+    public final FalsingClassifier.Result calculateFalsingResult(int i) {
+        if (i == 10 || i == 18 || i == 11 || i == 12 || i == 13 || i == 15 || i == 17 || i == 19) {
+            return FalsingClassifier.Result.passed(0.0d);
+        }
+        DistanceVectors distances = getDistances();
+        float f = distances.mDx;
+        float f2 = distances.mVx;
+        float f3 = this.mVelocityToDistanceMultiplier;
+        float f4 = (f2 * f3) + f;
+        float f5 = (distances.mVy * f3) + distances.mDy;
+        if (this.mDataProvider.isHorizontal()) {
+            boolean z = BrightLineFalsingManager.DEBUG;
+        } else {
+            boolean z2 = BrightLineFalsingManager.DEBUG;
+        }
     }
 
     public final DistanceVectors getDistances() {
@@ -146,15 +99,15 @@ public class DistanceClassifier extends FalsingClassifier {
                 distanceVectors = new DistanceVectors(this, 0.0f, 0.0f, 0.0f, 0.0f);
                 distanceClassifier = this;
             } else {
-                VelocityTracker obtain = VelocityTracker.obtain();
+                VelocityTracker velocityTrackerObtain = VelocityTracker.obtain();
                 Iterator it = recentMotionEvents.iterator();
                 while (it.hasNext()) {
-                    obtain.addMovement((MotionEvent) it.next());
+                    velocityTrackerObtain.addMovement((MotionEvent) it.next());
                 }
-                obtain.computeCurrentVelocity(1);
-                float xVelocity = obtain.getXVelocity();
-                float yVelocity = obtain.getYVelocity();
-                obtain.recycle();
+                velocityTrackerObtain.computeCurrentVelocity(1);
+                float xVelocity = velocityTrackerObtain.getXVelocity();
+                float yVelocity = velocityTrackerObtain.getYVelocity();
+                velocityTrackerObtain.recycle();
                 falsingDataProvider.recalculateData();
                 float x = falsingDataProvider.mLastMotionEvent.getX();
                 falsingDataProvider.recalculateData();

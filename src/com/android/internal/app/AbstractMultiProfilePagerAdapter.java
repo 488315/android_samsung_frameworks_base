@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import com.android.internal.R;
-import com.android.internal.app.AbstractMultiProfilePagerAdapter;
 import com.android.internal.app.ResolverActivity;
 import com.android.internal.widget.PagerAdapter;
 import com.android.internal.widget.ViewPager;
@@ -226,9 +225,9 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
 
     boolean rebuildActiveTab(boolean z) {
         Trace.beginSection("MultiProfilePagerAdapter#rebuildActiveTab");
-        boolean rebuildTab = rebuildTab(getActiveListAdapter(), z);
+        boolean zRebuildTab = rebuildTab(getActiveListAdapter(), z);
         Trace.endSection();
-        return rebuildTab;
+        return zRebuildTab;
     }
 
     boolean rebuildInactiveTab(boolean z) {
@@ -237,9 +236,9 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
             Trace.endSection();
             return false;
         }
-        boolean rebuildTab = rebuildTab(getInactiveListAdapter(), z);
+        boolean zRebuildTab = rebuildTab(getInactiveListAdapter(), z);
         Trace.endSection();
-        return rebuildTab;
+        return zRebuildTab;
     }
 
     private int userHandleToPageIndex(UserHandle userHandle) {
@@ -268,7 +267,7 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
         showEmptyState(resolverListAdapter, emptyState, emptyState.getButtonClickListener() != null ? new View.OnClickListener() { // from class: com.android.internal.app.AbstractMultiProfilePagerAdapter$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                AbstractMultiProfilePagerAdapter.this.lambda$showEmptyResolverListEmptyState$1(emptyState, resolverListAdapter, view);
+                this.f$0.lambda$showEmptyResolverListEmptyState$1(emptyState, resolverListAdapter, view);
             }
         } : null);
     }
@@ -278,7 +277,7 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
         emptyState.getButtonClickListener().onClick(new EmptyState.TabControl() { // from class: com.android.internal.app.AbstractMultiProfilePagerAdapter$$ExternalSyntheticLambda1
             @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter.EmptyState.TabControl
             public final void showSpinner() {
-                AbstractMultiProfilePagerAdapter.this.lambda$showEmptyResolverListEmptyState$0(resolverListAdapter);
+                this.f$0.lambda$showEmptyResolverListEmptyState$0(resolverListAdapter);
             }
         });
     }
@@ -306,9 +305,7 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
             return list.stream().anyMatch(new Predicate() { // from class: com.android.internal.app.AbstractMultiProfilePagerAdapter$CrossProfileIntentsChecker$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean lambda$hasCrossProfileIntents$0;
-                    lambda$hasCrossProfileIntents$0 = AbstractMultiProfilePagerAdapter.CrossProfileIntentsChecker.this.lambda$hasCrossProfileIntents$0(i, i2, packageManager, (Intent) obj);
-                    return lambda$hasCrossProfileIntents$0;
+                    return this.f$0.lambda$hasCrossProfileIntents$0(i, i2, packageManager, (Intent) obj);
                 }
             });
         }
@@ -372,9 +369,9 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
         if (item.rootView.findViewById(R.id.sem_resolver_second_depth_recycler_view) != null) {
             item.rootView.findViewById(R.id.sem_resolver_second_depth_recycler_view).setVisibility(0);
         }
-        View findViewById = item.rootView.findViewById(R.id.resolver_empty_state);
-        if (findViewById != null) {
-            findViewById.setVisibility(8);
+        View viewFindViewById = item.rootView.findViewById(R.id.resolver_empty_state);
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility(8);
         }
     }
 

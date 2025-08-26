@@ -6,7 +6,6 @@ import com.android.keyguard.logging.CarrierTextManagerLogger$$ExternalSyntheticO
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClockMetadata {
     public static final int $stable = 0;
@@ -69,9 +68,9 @@ public final class ClockMetadata {
     }
 
     public int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(this.clockId.hashCode() * 31, 31, this.isDeprecated);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(this.clockId.hashCode() * 31, 31, this.isDeprecated);
         String str = this.replacementTarget;
-        return m + (str == null ? 0 : str.hashCode());
+        return iM + (str == null ? 0 : str.hashCode());
     }
 
     public final boolean isDeprecated() {

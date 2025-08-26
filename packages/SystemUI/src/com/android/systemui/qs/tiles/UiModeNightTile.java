@@ -52,7 +52,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class UiModeNightTile extends QSTileImpl implements ConfigurationController.ConfigurationListener, BatteryController.BatteryStateChangeCallback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -64,7 +63,6 @@ public class UiModeNightTile extends QSTileImpl implements ConfigurationControll
     public final UiModeManager mUiModeManager;
     public WindowManager mWindowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UiModeDetailAdapter implements DetailAdapter {
         public TextView mDetailSummary;
 
@@ -74,11 +72,11 @@ public class UiModeNightTile extends QSTileImpl implements ConfigurationControll
         @Override // com.android.systemui.plugins.qs.DetailAdapter
         public final View createDetailView(Context context, View view, ViewGroup viewGroup) {
             int i = UiModeNightTile.$r8$clinit;
-            View inflate = LayoutInflater.from(UiModeNightTile.this.mContext).inflate(R.layout.sec_qs_detail_text, viewGroup, false);
-            TextView textView = (TextView) inflate.findViewById(R.id.message);
+            View viewInflate = LayoutInflater.from(UiModeNightTile.this.mContext).inflate(R.layout.sec_qs_detail_text, viewGroup, false);
+            TextView textView = (TextView) viewInflate.findViewById(R.id.message);
             this.mDetailSummary = textView;
             textView.setText(getDetailSummary$1());
-            return inflate;
+            return viewInflate;
         }
 
         /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.qs.tiles.UiModeNightTile$$ExternalSyntheticLambda1] */
@@ -98,7 +96,7 @@ public class UiModeNightTile extends QSTileImpl implements ConfigurationControll
                 string = null;
             } else {
                 final Context context3 = uiModeNightTile.mContext;
-                final boolean is24HourFormat = DateFormat.is24HourFormat(context3);
+                final boolean zIs24HourFormat = DateFormat.is24HourFormat(context3);
                 ?? r3 = new Object() { // from class: com.android.systemui.qs.tiles.UiModeNightTile$$ExternalSyntheticLambda1
                     public final Object apply(Object obj) {
                         Context context4 = context3;
@@ -108,7 +106,7 @@ public class UiModeNightTile extends QSTileImpl implements ConfigurationControll
                         int minute = localTime.getMinute();
                         Calendar calendar = Calendar.getInstance();
                         calendar.clear();
-                        calendar.set(is24HourFormat ? 11 : 10, hour);
+                        calendar.set(zIs24HourFormat ? 11 : 10, hour);
                         calendar.set(12, minute);
                         return DateFormat.getTimeFormat(context4).format(new Date(calendar.getTimeInMillis()));
                     }
@@ -116,11 +114,11 @@ public class UiModeNightTile extends QSTileImpl implements ConfigurationControll
                 LocalTime customNightModeStart = uiModeNightTile.mUiModeManager.getCustomNightModeStart();
                 LocalTime customNightModeEnd = uiModeNightTile.mUiModeManager.getCustomNightModeEnd();
                 String str = (String) r3.apply(customNightModeStart);
-                String str2 = (String) r3.apply(customNightModeEnd);
+                String string3 = (String) r3.apply(customNightModeEnd);
                 if (customNightModeStart.toSecondOfDay() >= customNightModeEnd.toSecondOfDay()) {
-                    str2 = uiModeNightTile.mContext.getString(R.string.sec_dark_mode_off_time_next_day_summary_format, str2);
+                    string3 = uiModeNightTile.mContext.getString(R.string.sec_dark_mode_off_time_next_day_summary_format, string3);
                 }
-                string = uiModeNightTile.mContext.getString(R.string.sec_dark_mode_tile_when_to_turn_on_custom, str, str2);
+                string = uiModeNightTile.mContext.getString(R.string.sec_dark_mode_tile_when_to_turn_on_custom, str, string3);
             }
             return !TextUtils.isEmpty(string) ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string2, "\n\n", string) : string2;
         }
@@ -237,7 +235,7 @@ public class UiModeNightTile extends QSTileImpl implements ConfigurationControll
             this.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.qs.tiles.UiModeNightTile$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    UiModeNightTile uiModeNightTile = UiModeNightTile.this;
+                    UiModeNightTile uiModeNightTile = this.f$0;
                     int i2 = UiModeNightTile.$r8$clinit;
                     boolean z = !((QSTile.BooleanState) uiModeNightTile.mState).value;
                     Log.i(uiModeNightTile.TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("handleClick: ", z));
@@ -312,15 +310,15 @@ public class UiModeNightTile extends QSTileImpl implements ConfigurationControll
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
     public final void onConfigChanged(Configuration configuration) {
-        boolean isCurrentSnackbarLocked;
+        boolean zIsCurrentSnackbarLocked;
         Snackbar snackbar = this.mSnackbar;
         if (snackbar != null) {
             SnackbarManager snackbarManager = SnackbarManager.getInstance();
             BaseTransientBottomBar.AnonymousClass5 anonymousClass5 = snackbar.managerCallback;
             synchronized (snackbarManager.lock) {
-                isCurrentSnackbarLocked = snackbarManager.isCurrentSnackbarLocked(anonymousClass5);
+                zIsCurrentSnackbarLocked = snackbarManager.isCurrentSnackbarLocked(anonymousClass5);
             }
-            if (isCurrentSnackbarLocked) {
+            if (zIsCurrentSnackbarLocked) {
                 this.mSnackbar.dispatchDismiss(3);
             }
         }
@@ -362,27 +360,27 @@ public class UiModeNightTile extends QSTileImpl implements ConfigurationControll
             public final void run() {
                 UiModeNightTile uiModeNightTile = UiModeNightTile.this;
                 int i = UiModeNightTile.$r8$clinit;
-                Toast makeText = Toast.makeText(uiModeNightTile.mContext, string, 0);
-                if (makeText != null) {
-                    makeText.show();
+                Toast toastMakeText = Toast.makeText(uiModeNightTile.mContext, string, 0);
+                if (toastMakeText != null) {
+                    toastMakeText.show();
                 }
             }
         });
     }
 
     public final void showSnackbar() {
-        Snackbar makeInternal = Snackbar.makeInternal(new ContextThemeWrapper(this.mContext, 2132018763), this.mSnackbarContainer, this.mContext.getString(R.string.sec_dark_mode_you_can_change_this_in_power_saving), -2, 0);
-        this.mSnackbar = makeInternal;
-        makeInternal.setAction(this.mContext.getString(R.string.sec_dark_mode_go_to_settings), new View.OnClickListener() { // from class: com.android.systemui.qs.tiles.UiModeNightTile.2
+        Snackbar snackbarMakeInternal = Snackbar.makeInternal(new ContextThemeWrapper(this.mContext, 2132018763), this.mSnackbarContainer, this.mContext.getString(R.string.sec_dark_mode_you_can_change_this_in_power_saving), -2, 0);
+        this.mSnackbar = snackbarMakeInternal;
+        snackbarMakeInternal.setAction(this.mContext.getString(R.string.sec_dark_mode_go_to_settings), new View.OnClickListener() { // from class: com.android.systemui.qs.tiles.UiModeNightTile.2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                Uri parse = Uri.parse("content://" + ActivityManager.getCurrentUser() + "@com.samsung.android.sm.dcapi");
-                Bundle m = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("key_preference", "dark_mode");
+                Uri uri = Uri.parse("content://" + ActivityManager.getCurrentUser() + "@com.samsung.android.sm.dcapi");
+                Bundle bundleM = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("key_preference", "dark_mode");
                 UiModeNightTile uiModeNightTile = UiModeNightTile.this;
                 int i = UiModeNightTile.$r8$clinit;
-                Bundle call = uiModeNightTile.mContext.getContentResolver().call(parse, "psm_start_power_saving_activity", (String) null, m);
-                boolean z = call.getBoolean("result");
-                boolean z2 = call.getBoolean("changeable");
+                Bundle bundleCall = uiModeNightTile.mContext.getContentResolver().call(uri, "psm_start_power_saving_activity", (String) null, bundleM);
+                boolean z = bundleCall.getBoolean("result");
+                boolean z2 = bundleCall.getBoolean("changeable");
                 if (!z) {
                     Log.i(UiModeNightTile.this.TAG, "API call has failed");
                 }

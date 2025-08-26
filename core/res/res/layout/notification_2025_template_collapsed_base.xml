@@ -19,8 +19,8 @@
         </LinearLayout>
         <com.android.internal.widget.CachingIconView android:layout_gravity="end|center" android:id="@id/right_icon" android:background="@drawable/notification_large_icon_outline" android:layout_width="@dimen/notification_right_icon_size" android:layout_height="@dimen/notification_right_icon_size" android:scaleType="centerCrop" android:importantForAccessibility="no" android:layout_marginStart="@dimen/notification_2025_right_icon_content_margin" android:layout_marginVertical="@dimen/notification_2025_right_icon_vertical_margin" android:clipToOutline="true" android:maxDrawableWidth="@dimen/notification_right_icon_size" android:maxDrawableHeight="@dimen/notification_right_icon_size" />
         <FrameLayout android:id="@id/expand_button_touch_container" android:layout_width="wrap_content" android:layout_height="fill_parent" android:minWidth="@dimen/notification_2025_margin">
-            <include android:layout_gravity="end|center|top" android:layout_width="wrap_content" android:layout_height="wrap_content" layout="@layout/notification_2025_expand_button" />
+            <include android:layout_gravity="end|top" android:layout_width="wrap_content" android:layout_height="wrap_content" layout="@layout/notification_2025_expand_button" />
         </FrameLayout>
     </LinearLayout>
-    <include android:layout_gravity="end|center|top" android:id="@id/close_button" android:layout_width="@dimen/notification_close_button_size" android:layout_height="@dimen/notification_close_button_size" layout="@layout/notification_close_button" />
+    <include android:layout_gravity="end|top" android:id="@id/close_button" android:layout_width="@dimen/notification_close_button_size" android:layout_height="@dimen/notification_close_button_size" layout="@layout/notification_close_button" />
 </FrameLayout>

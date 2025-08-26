@@ -57,10 +57,10 @@ public class AESFastEngine implements BlockCipher {
     }
 
     private static int inv_mcol(int i) {
-        int shift = shift(i, 8) ^ i;
-        int FFmulX = i ^ FFmulX(shift);
-        int FFmulX2 = shift ^ FFmulX2(FFmulX);
-        return FFmulX ^ (FFmulX2 ^ shift(FFmulX2, 16));
+        int iShift = shift(i, 8) ^ i;
+        int iFFmulX = i ^ FFmulX(iShift);
+        int iFFmulX2 = iShift ^ FFmulX2(iFFmulX);
+        return iFFmulX ^ (iFFmulX2 ^ shift(iFFmulX2, 16));
     }
 
     private static int subWord(int i) {
@@ -84,121 +84,121 @@ public class AESFastEngine implements BlockCipher {
         char c = 3;
         if (i2 == 4) {
             i = 1;
-            int littleEndianToInt = Pack.littleEndianToInt(bArr, 0);
-            iArr[0][0] = littleEndianToInt;
-            int littleEndianToInt2 = Pack.littleEndianToInt(bArr, 4);
-            iArr[0][1] = littleEndianToInt2;
-            int littleEndianToInt3 = Pack.littleEndianToInt(bArr, 8);
-            iArr[0][2] = littleEndianToInt3;
-            int littleEndianToInt4 = Pack.littleEndianToInt(bArr, 12);
-            iArr[0][3] = littleEndianToInt4;
+            int iLittleEndianToInt = Pack.littleEndianToInt(bArr, 0);
+            iArr[0][0] = iLittleEndianToInt;
+            int iLittleEndianToInt2 = Pack.littleEndianToInt(bArr, 4);
+            iArr[0][1] = iLittleEndianToInt2;
+            int iLittleEndianToInt3 = Pack.littleEndianToInt(bArr, 8);
+            iArr[0][2] = iLittleEndianToInt3;
+            int iLittleEndianToInt4 = Pack.littleEndianToInt(bArr, 12);
+            iArr[0][3] = iLittleEndianToInt4;
             for (int i4 = 1; i4 <= 10; i4++) {
-                littleEndianToInt ^= subWord(shift(littleEndianToInt4, 8)) ^ rcon[i4 - 1];
+                iLittleEndianToInt ^= subWord(shift(iLittleEndianToInt4, 8)) ^ rcon[i4 - 1];
                 int[] iArr2 = iArr[i4];
-                iArr2[0] = littleEndianToInt;
-                littleEndianToInt2 ^= littleEndianToInt;
-                iArr2[1] = littleEndianToInt2;
-                littleEndianToInt3 ^= littleEndianToInt2;
-                iArr2[2] = littleEndianToInt3;
-                littleEndianToInt4 ^= littleEndianToInt3;
-                iArr2[3] = littleEndianToInt4;
+                iArr2[0] = iLittleEndianToInt;
+                iLittleEndianToInt2 ^= iLittleEndianToInt;
+                iArr2[1] = iLittleEndianToInt2;
+                iLittleEndianToInt3 ^= iLittleEndianToInt2;
+                iArr2[2] = iLittleEndianToInt3;
+                iLittleEndianToInt4 ^= iLittleEndianToInt3;
+                iArr2[3] = iLittleEndianToInt4;
             }
         } else if (i2 == 6) {
             i = 1;
-            int littleEndianToInt5 = Pack.littleEndianToInt(bArr, 0);
-            iArr[0][0] = littleEndianToInt5;
-            int littleEndianToInt6 = Pack.littleEndianToInt(bArr, 4);
-            iArr[0][1] = littleEndianToInt6;
-            int littleEndianToInt7 = Pack.littleEndianToInt(bArr, 8);
-            iArr[0][2] = littleEndianToInt7;
-            int littleEndianToInt8 = Pack.littleEndianToInt(bArr, 12);
-            iArr[0][3] = littleEndianToInt8;
-            int littleEndianToInt9 = Pack.littleEndianToInt(bArr, 16);
-            int littleEndianToInt10 = Pack.littleEndianToInt(bArr, 20);
+            int iLittleEndianToInt5 = Pack.littleEndianToInt(bArr, 0);
+            iArr[0][0] = iLittleEndianToInt5;
+            int iLittleEndianToInt6 = Pack.littleEndianToInt(bArr, 4);
+            iArr[0][1] = iLittleEndianToInt6;
+            int iLittleEndianToInt7 = Pack.littleEndianToInt(bArr, 8);
+            iArr[0][2] = iLittleEndianToInt7;
+            int iLittleEndianToInt8 = Pack.littleEndianToInt(bArr, 12);
+            iArr[0][3] = iLittleEndianToInt8;
+            int iLittleEndianToInt9 = Pack.littleEndianToInt(bArr, 16);
+            int iLittleEndianToInt10 = Pack.littleEndianToInt(bArr, 20);
             int i5 = 1;
             int i6 = 1;
             while (true) {
                 int[] iArr3 = iArr[i5];
-                iArr3[0] = littleEndianToInt9;
-                iArr3[1] = littleEndianToInt10;
-                int subWord = littleEndianToInt5 ^ (subWord(shift(littleEndianToInt10, 8)) ^ i6);
+                iArr3[0] = iLittleEndianToInt9;
+                iArr3[1] = iLittleEndianToInt10;
+                int iSubWord = iLittleEndianToInt5 ^ (subWord(shift(iLittleEndianToInt10, 8)) ^ i6);
                 int[] iArr4 = iArr[i5];
-                iArr4[2] = subWord;
-                int i7 = littleEndianToInt6 ^ subWord;
+                iArr4[2] = iSubWord;
+                int i7 = iLittleEndianToInt6 ^ iSubWord;
                 iArr4[3] = i7;
-                int i8 = littleEndianToInt7 ^ i7;
+                int i8 = iLittleEndianToInt7 ^ i7;
                 int[] iArr5 = iArr[i5 + 1];
                 iArr5[0] = i8;
-                int i9 = littleEndianToInt8 ^ i8;
+                int i9 = iLittleEndianToInt8 ^ i8;
                 iArr5[1] = i9;
-                int i10 = littleEndianToInt9 ^ i9;
+                int i10 = iLittleEndianToInt9 ^ i9;
                 iArr5[2] = i10;
-                int i11 = littleEndianToInt10 ^ i10;
+                int i11 = iLittleEndianToInt10 ^ i10;
                 iArr5[3] = i11;
-                int subWord2 = subWord(shift(i11, 8)) ^ (i6 << 1);
+                int iSubWord2 = subWord(shift(i11, 8)) ^ (i6 << 1);
                 i6 <<= 2;
-                littleEndianToInt5 = subWord ^ subWord2;
+                iLittleEndianToInt5 = iSubWord ^ iSubWord2;
                 int[] iArr6 = iArr[i5 + 2];
-                iArr6[0] = littleEndianToInt5;
-                littleEndianToInt6 = i7 ^ littleEndianToInt5;
-                iArr6[1] = littleEndianToInt6;
-                littleEndianToInt7 = i8 ^ littleEndianToInt6;
-                iArr6[2] = littleEndianToInt7;
-                littleEndianToInt8 = i9 ^ littleEndianToInt7;
-                iArr6[3] = littleEndianToInt8;
+                iArr6[0] = iLittleEndianToInt5;
+                iLittleEndianToInt6 = i7 ^ iLittleEndianToInt5;
+                iArr6[1] = iLittleEndianToInt6;
+                iLittleEndianToInt7 = i8 ^ iLittleEndianToInt6;
+                iArr6[2] = iLittleEndianToInt7;
+                iLittleEndianToInt8 = i9 ^ iLittleEndianToInt7;
+                iArr6[3] = iLittleEndianToInt8;
                 i5 += 3;
                 if (i5 >= 13) {
                     break;
                 }
-                littleEndianToInt9 = i10 ^ littleEndianToInt8;
-                littleEndianToInt10 = i11 ^ littleEndianToInt9;
+                iLittleEndianToInt9 = i10 ^ iLittleEndianToInt8;
+                iLittleEndianToInt10 = i11 ^ iLittleEndianToInt9;
             }
         } else if (i2 == 8) {
-            int littleEndianToInt11 = Pack.littleEndianToInt(bArr, 0);
-            iArr[0][0] = littleEndianToInt11;
-            int littleEndianToInt12 = Pack.littleEndianToInt(bArr, 4);
-            iArr[0][1] = littleEndianToInt12;
-            int littleEndianToInt13 = Pack.littleEndianToInt(bArr, 8);
-            iArr[0][2] = littleEndianToInt13;
-            int littleEndianToInt14 = Pack.littleEndianToInt(bArr, 12);
-            iArr[0][3] = littleEndianToInt14;
-            int littleEndianToInt15 = Pack.littleEndianToInt(bArr, 16);
-            iArr[1][0] = littleEndianToInt15;
-            int littleEndianToInt16 = Pack.littleEndianToInt(bArr, 20);
-            iArr[1][1] = littleEndianToInt16;
-            int littleEndianToInt17 = Pack.littleEndianToInt(bArr, 24);
-            iArr[1][2] = littleEndianToInt17;
-            int littleEndianToInt18 = Pack.littleEndianToInt(bArr, 28);
-            iArr[1][3] = littleEndianToInt18;
+            int iLittleEndianToInt11 = Pack.littleEndianToInt(bArr, 0);
+            iArr[0][0] = iLittleEndianToInt11;
+            int iLittleEndianToInt12 = Pack.littleEndianToInt(bArr, 4);
+            iArr[0][1] = iLittleEndianToInt12;
+            int iLittleEndianToInt13 = Pack.littleEndianToInt(bArr, 8);
+            iArr[0][2] = iLittleEndianToInt13;
+            int iLittleEndianToInt14 = Pack.littleEndianToInt(bArr, 12);
+            iArr[0][3] = iLittleEndianToInt14;
+            int iLittleEndianToInt15 = Pack.littleEndianToInt(bArr, 16);
+            iArr[1][0] = iLittleEndianToInt15;
+            int iLittleEndianToInt16 = Pack.littleEndianToInt(bArr, 20);
+            iArr[1][1] = iLittleEndianToInt16;
+            int iLittleEndianToInt17 = Pack.littleEndianToInt(bArr, 24);
+            iArr[1][2] = iLittleEndianToInt17;
+            int iLittleEndianToInt18 = Pack.littleEndianToInt(bArr, 28);
+            iArr[1][3] = iLittleEndianToInt18;
             int i12 = 1;
             int i13 = 2;
             while (true) {
-                int subWord3 = subWord(shift(littleEndianToInt18, 8)) ^ i12;
+                int iSubWord3 = subWord(shift(iLittleEndianToInt18, 8)) ^ i12;
                 i12 <<= i3;
-                littleEndianToInt11 ^= subWord3;
+                iLittleEndianToInt11 ^= iSubWord3;
                 int[] iArr7 = iArr[i13];
-                iArr7[0] = littleEndianToInt11;
-                littleEndianToInt12 ^= littleEndianToInt11;
-                iArr7[i3] = littleEndianToInt12;
-                littleEndianToInt13 ^= littleEndianToInt12;
-                iArr7[2] = littleEndianToInt13;
-                littleEndianToInt14 ^= littleEndianToInt13;
-                iArr7[c] = littleEndianToInt14;
+                iArr7[0] = iLittleEndianToInt11;
+                iLittleEndianToInt12 ^= iLittleEndianToInt11;
+                iArr7[i3] = iLittleEndianToInt12;
+                iLittleEndianToInt13 ^= iLittleEndianToInt12;
+                iArr7[2] = iLittleEndianToInt13;
+                iLittleEndianToInt14 ^= iLittleEndianToInt13;
+                iArr7[c] = iLittleEndianToInt14;
                 i = i3;
                 int i14 = i13 + 1;
                 char c2 = c;
                 if (i14 >= 15) {
                     break;
                 }
-                littleEndianToInt15 ^= subWord(littleEndianToInt14);
+                iLittleEndianToInt15 ^= subWord(iLittleEndianToInt14);
                 int[] iArr8 = iArr[i14];
-                iArr8[0] = littleEndianToInt15;
-                littleEndianToInt16 ^= littleEndianToInt15;
-                iArr8[i] = littleEndianToInt16;
-                littleEndianToInt17 ^= littleEndianToInt16;
-                iArr8[2] = littleEndianToInt17;
-                littleEndianToInt18 ^= littleEndianToInt17;
-                iArr8[c2] = littleEndianToInt18;
+                iArr8[0] = iLittleEndianToInt15;
+                iLittleEndianToInt16 ^= iLittleEndianToInt15;
+                iArr8[i] = iLittleEndianToInt16;
+                iLittleEndianToInt17 ^= iLittleEndianToInt16;
+                iArr8[2] = iLittleEndianToInt17;
+                iLittleEndianToInt18 ^= iLittleEndianToInt17;
+                iArr8[c2] = iLittleEndianToInt18;
                 i13 += 2;
                 i3 = i;
                 c = c2;
@@ -258,18 +258,18 @@ public class AESFastEngine implements BlockCipher {
     }
 
     private void encryptBlock(byte[] bArr, int i, byte[] bArr2, int i2, int[][] iArr) {
-        int littleEndianToInt = Pack.littleEndianToInt(bArr, i);
-        int littleEndianToInt2 = Pack.littleEndianToInt(bArr, i + 4);
-        int littleEndianToInt3 = Pack.littleEndianToInt(bArr, i + 8);
-        int littleEndianToInt4 = Pack.littleEndianToInt(bArr, i + 12);
+        int iLittleEndianToInt = Pack.littleEndianToInt(bArr, i);
+        int iLittleEndianToInt2 = Pack.littleEndianToInt(bArr, i + 4);
+        int iLittleEndianToInt3 = Pack.littleEndianToInt(bArr, i + 8);
+        int iLittleEndianToInt4 = Pack.littleEndianToInt(bArr, i + 12);
         char c = 0;
         int[] iArr2 = iArr[0];
-        int i3 = littleEndianToInt ^ iArr2[0];
+        int i3 = iLittleEndianToInt ^ iArr2[0];
         int i4 = 1;
-        int i5 = littleEndianToInt2 ^ iArr2[1];
+        int i5 = iLittleEndianToInt2 ^ iArr2[1];
         char c2 = 2;
-        int i6 = littleEndianToInt3 ^ iArr2[2];
-        int i7 = littleEndianToInt4 ^ iArr2[3];
+        int i6 = iLittleEndianToInt3 ^ iArr2[2];
+        int i7 = iLittleEndianToInt4 ^ iArr2[3];
         int i8 = 1;
         while (i8 < this.ROUNDS - i4) {
             int[] iArr3 = T;
@@ -320,20 +320,20 @@ public class AESFastEngine implements BlockCipher {
     }
 
     private void decryptBlock(byte[] bArr, int i, byte[] bArr2, int i2, int[][] iArr) {
-        int littleEndianToInt = Pack.littleEndianToInt(bArr, i);
-        int littleEndianToInt2 = Pack.littleEndianToInt(bArr, i + 4);
-        int littleEndianToInt3 = Pack.littleEndianToInt(bArr, i + 8);
-        int littleEndianToInt4 = Pack.littleEndianToInt(bArr, i + 12);
+        int iLittleEndianToInt = Pack.littleEndianToInt(bArr, i);
+        int iLittleEndianToInt2 = Pack.littleEndianToInt(bArr, i + 4);
+        int iLittleEndianToInt3 = Pack.littleEndianToInt(bArr, i + 8);
+        int iLittleEndianToInt4 = Pack.littleEndianToInt(bArr, i + 12);
         int i3 = this.ROUNDS;
         int[] iArr2 = iArr[i3];
         char c = 0;
-        int i4 = littleEndianToInt ^ iArr2[0];
+        int i4 = iLittleEndianToInt ^ iArr2[0];
         int i5 = 1;
-        int i6 = littleEndianToInt2 ^ iArr2[1];
+        int i6 = iLittleEndianToInt2 ^ iArr2[1];
         char c2 = 2;
-        int i7 = littleEndianToInt3 ^ iArr2[2];
+        int i7 = iLittleEndianToInt3 ^ iArr2[2];
         int i8 = i3 - 1;
-        int i9 = littleEndianToInt4 ^ iArr2[3];
+        int i9 = iLittleEndianToInt4 ^ iArr2[3];
         while (i8 > i5) {
             int[] iArr3 = Tinv;
             int i10 = ((iArr3[((i9 >>> 8) & 255) + 256] ^ iArr3[i4 & 255]) ^ iArr3[((i7 >>> 16) & 255) + 512]) ^ iArr3[((i6 >>> 24) & 255) + 768];

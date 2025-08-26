@@ -708,6 +708,8 @@
     <attr name="semSearchViewTextColor" format="color" />
     <attr name="semSeekBarActivatedColor" format="reference|color" />
     <attr name="semSeekBarNormalColor" format="reference|color" />
+    <attr name="semSuggestionBackgroundColor" format="reference|color" />
+    <attr name="semSuggestionTextColor" format="reference|color" />
     <attr name="semThumbActivatedColor" format="reference|color" />
     <attr name="semThumbDisabledColor" format="reference|color" />
     <attr name="semTipPopupBackgroundColor" format="reference|color" />

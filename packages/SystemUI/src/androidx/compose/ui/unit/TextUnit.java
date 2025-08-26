@@ -3,7 +3,6 @@ package androidx.compose.ui.unit;
 import androidx.compose.ui.unit.TextUnitType;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextUnit {
     public static final Companion Companion = new Companion(null);
@@ -11,7 +10,6 @@ public final class TextUnit {
     public static final long Unspecified;
     public final long packedValue;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -24,11 +22,11 @@ public final class TextUnit {
     static {
         TextUnitType.Companion companion = TextUnitType.Companion;
         companion.getClass();
-        TextUnitType m873boximpl = TextUnitType.m873boximpl(0L);
+        TextUnitType textUnitTypeM875boximpl = TextUnitType.m875boximpl(0L);
         companion.getClass();
-        TextUnitType m873boximpl2 = TextUnitType.m873boximpl(TextUnitType.Sp);
+        TextUnitType textUnitTypeM875boximpl2 = TextUnitType.m875boximpl(TextUnitType.Sp);
         companion.getClass();
-        TextUnitTypes = new TextUnitType[]{m873boximpl, m873boximpl2, TextUnitType.m873boximpl(TextUnitType.Em)};
+        TextUnitTypes = new TextUnitType[]{textUnitTypeM875boximpl, textUnitTypeM875boximpl2, TextUnitType.m875boximpl(TextUnitType.Em)};
         Unspecified = TextUnitKt.pack(Float.NaN, 0L);
     }
 
@@ -37,47 +35,47 @@ public final class TextUnit {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ TextUnit m865boximpl(long j) {
+    public static final /* synthetic */ TextUnit m867boximpl(long j) {
         return new TextUnit(j);
     }
 
     /* renamed from: equals-impl0, reason: not valid java name */
-    public static final boolean m866equalsimpl0(long j, long j2) {
+    public static final boolean m868equalsimpl0(long j, long j2) {
         return j == j2;
     }
 
     /* renamed from: getType-UIouoOA, reason: not valid java name */
-    public static final long m867getTypeUIouoOA(long j) {
+    public static final long m869getTypeUIouoOA(long j) {
         return TextUnitTypes[(int) ((j & 1095216660480L) >>> 32)].type;
     }
 
     /* renamed from: getValue-impl, reason: not valid java name */
-    public static final float m868getValueimpl(long j) {
+    public static final float m870getValueimpl(long j) {
         return Float.intBitsToFloat((int) (j & 4294967295L));
     }
 
     /* renamed from: isEm-impl, reason: not valid java name */
-    public static final boolean m869isEmimpl(long j) {
+    public static final boolean m871isEmimpl(long j) {
         return (j & 1095216660480L) == 8589934592L;
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m870toStringimpl(long j) {
-        long m867getTypeUIouoOA = m867getTypeUIouoOA(j);
+    public static String m872toStringimpl(long j) {
+        long jM869getTypeUIouoOA = m869getTypeUIouoOA(j);
         TextUnitType.Companion companion = TextUnitType.Companion;
         companion.getClass();
-        if (TextUnitType.m874equalsimpl0(m867getTypeUIouoOA, 0L)) {
+        if (TextUnitType.m876equalsimpl0(jM869getTypeUIouoOA, 0L)) {
             return "Unspecified";
         }
         companion.getClass();
-        if (TextUnitType.m874equalsimpl0(m867getTypeUIouoOA, TextUnitType.Sp)) {
-            return m868getValueimpl(j) + ".sp";
+        if (TextUnitType.m876equalsimpl0(jM869getTypeUIouoOA, TextUnitType.Sp)) {
+            return m870getValueimpl(j) + ".sp";
         }
         companion.getClass();
-        if (!TextUnitType.m874equalsimpl0(m867getTypeUIouoOA, TextUnitType.Em)) {
+        if (!TextUnitType.m876equalsimpl0(jM869getTypeUIouoOA, TextUnitType.Em)) {
             return "Invalid";
         }
-        return m868getValueimpl(j) + ".em";
+        return m870getValueimpl(j) + ".em";
     }
 
     public final boolean equals(Object obj) {
@@ -92,6 +90,6 @@ public final class TextUnit {
     }
 
     public final String toString() {
-        return m870toStringimpl(this.packedValue);
+        return m872toStringimpl(this.packedValue);
     }
 }

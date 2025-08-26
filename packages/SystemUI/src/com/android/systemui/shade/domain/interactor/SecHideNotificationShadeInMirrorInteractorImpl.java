@@ -10,7 +10,6 @@ import com.android.systemui.util.SettingsHelper;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecHideNotificationShadeInMirrorInteractorImpl implements SecHideNotificationShadeInMirrorInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -24,14 +23,13 @@ public final class SecHideNotificationShadeInMirrorInteractorImpl implements Sec
         public final void onChanged(Uri uri) {
             if (uri != null && uri.equals(Settings.Global.getUriFor(SettingsHelper.INDEX_SMART_VIEW_SHOW_NOTIFICATION_ON))) {
                 int i = SecHideNotificationShadeInMirrorInteractorImpl.$r8$clinit;
-                SecHideNotificationShadeInMirrorInteractorImpl secHideNotificationShadeInMirrorInteractorImpl = SecHideNotificationShadeInMirrorInteractorImpl.this;
+                SecHideNotificationShadeInMirrorInteractorImpl secHideNotificationShadeInMirrorInteractorImpl = this.this$0;
                 secHideNotificationShadeInMirrorInteractorImpl.getClass();
                 secHideNotificationShadeInMirrorInteractorImpl.mainHandler.post(new SecHideNotificationShadeInMirrorInteractorImpl$notify$1(secHideNotificationShadeInMirrorInteractorImpl));
             }
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

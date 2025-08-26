@@ -6,7 +6,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ActionButtonViewModel {
     public static final Companion Companion = new Companion(null);
@@ -17,7 +16,6 @@ public final class ActionButtonViewModel {
     public final boolean showDuringEntrance;
     public final boolean visible;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,9 +51,9 @@ public final class ActionButtonViewModel {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.id, this.appearance.hashCode() * 31, 31), 31, this.visible), 31, this.showDuringEntrance);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.id, this.appearance.hashCode() * 31, 31), 31, this.visible), 31, this.showDuringEntrance);
         Function0 function0 = this.onClicked;
-        return m + (function0 == null ? 0 : function0.hashCode());
+        return iM + (function0 == null ? 0 : function0.hashCode());
     }
 
     public final String toString() {

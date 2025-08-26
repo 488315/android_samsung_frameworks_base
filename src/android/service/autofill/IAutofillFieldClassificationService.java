@@ -51,9 +51,9 @@ public interface IAutofillFieldClassificationService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAutofillFieldClassificationService)) {
-                return (IAutofillFieldClassificationService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAutofillFieldClassificationService)) {
+                return (IAutofillFieldClassificationService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -81,16 +81,16 @@ public interface IAutofillFieldClassificationService extends IInterface {
             }
             if (i == 1) {
                 RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(AutofillValue.CREATOR);
-                String[] createStringArray = parcel.createStringArray();
-                String[] createStringArray2 = parcel.createStringArray();
-                String readString = parcel.readString();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AutofillValue.CREATOR);
+                String[] strArrCreateStringArray = parcel.createStringArray();
+                String[] strArrCreateStringArray2 = parcel.createStringArray();
+                String string = parcel.readString();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 ClassLoader classLoader = getClass().getClassLoader();
-                HashMap readHashMap = parcel.readHashMap(classLoader);
-                HashMap readHashMap2 = parcel.readHashMap(classLoader);
+                HashMap hashMap = parcel.readHashMap(classLoader);
+                HashMap hashMap2 = parcel.readHashMap(classLoader);
                 parcel.enforceNoDataAvail();
-                calculateScores(remoteCallback, createTypedArrayList, createStringArray, createStringArray2, readString, bundle, readHashMap, readHashMap2);
+                calculateScores(remoteCallback, arrayListCreateTypedArrayList, strArrCreateStringArray, strArrCreateStringArray2, string, bundle, hashMap, hashMap2);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -114,20 +114,20 @@ public interface IAutofillFieldClassificationService extends IInterface {
 
             @Override // android.service.autofill.IAutofillFieldClassificationService
             public void calculateScores(RemoteCallback remoteCallback, List<AutofillValue> list, String[] strArr, String[] strArr2, String str, Bundle bundle, Map map, Map map2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStringArray(strArr2);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeMap(map);
-                    obtain.writeMap(map2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStringArray(strArr2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeMap(map);
+                    parcelObtain.writeMap(map2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

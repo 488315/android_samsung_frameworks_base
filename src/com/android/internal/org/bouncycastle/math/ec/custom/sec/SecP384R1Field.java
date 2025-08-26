@@ -38,14 +38,14 @@ public class SecP384R1Field {
     }
 
     public static int[] fromBigInteger(BigInteger bigInteger) {
-        int[] fromBigInteger = Nat.fromBigInteger(384, bigInteger);
-        if (fromBigInteger[11] == -1) {
+        int[] iArrFromBigInteger = Nat.fromBigInteger(384, bigInteger);
+        if (iArrFromBigInteger[11] == -1) {
             int[] iArr = P;
-            if (Nat.gte(12, fromBigInteger, iArr)) {
-                Nat.subFrom(12, iArr, fromBigInteger);
+            if (Nat.gte(12, iArrFromBigInteger, iArr)) {
+                Nat.subFrom(12, iArr, iArrFromBigInteger);
             }
         }
-        return fromBigInteger;
+        return iArrFromBigInteger;
     }
 
     public static void half(int[] iArr, int[] iArr2) {
@@ -69,9 +69,9 @@ public class SecP384R1Field {
     }
 
     public static void multiply(int[] iArr, int[] iArr2, int[] iArr3) {
-        int[] create = Nat.create(24);
-        Nat384.mul(iArr, iArr2, create);
-        reduce(create, iArr3);
+        int[] iArrCreate = Nat.create(24);
+        Nat384.mul(iArr, iArr2, iArrCreate);
+        reduce(iArrCreate, iArr3);
     }
 
     public static void multiply(int[] iArr, int[] iArr2, int[] iArr3, int[] iArr4) {
@@ -175,9 +175,9 @@ public class SecP384R1Field {
     }
 
     public static void square(int[] iArr, int[] iArr2) {
-        int[] create = Nat.create(24);
-        Nat384.square(iArr, create);
-        reduce(create, iArr2);
+        int[] iArrCreate = Nat.create(24);
+        Nat384.square(iArr, iArrCreate);
+        reduce(iArrCreate, iArr2);
     }
 
     public static void square(int[] iArr, int[] iArr2, int[] iArr3) {
@@ -186,16 +186,16 @@ public class SecP384R1Field {
     }
 
     public static void squareN(int[] iArr, int i, int[] iArr2) {
-        int[] create = Nat.create(24);
-        Nat384.square(iArr, create);
-        reduce(create, iArr2);
+        int[] iArrCreate = Nat.create(24);
+        Nat384.square(iArr, iArrCreate);
+        reduce(iArrCreate, iArr2);
         while (true) {
             i--;
             if (i <= 0) {
                 return;
             }
-            Nat384.square(iArr2, create);
-            reduce(create, iArr2);
+            Nat384.square(iArr2, iArrCreate);
+            reduce(iArrCreate, iArr2);
         }
     }
 

@@ -13,14 +13,12 @@ import java.util.Comparator;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ExtensionControllerImpl implements ExtensionController {
     public final Context mDefaultContext;
     public final LeakDetector mLeakDetector;
     public final PluginManager mPluginManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ExtensionBuilder {
         public final ExtensionImpl mExtension;
 
@@ -31,7 +29,7 @@ public class ExtensionControllerImpl implements ExtensionController {
         public final ExtensionImpl build() {
             ExtensionImpl extensionImpl = this.mExtension;
             Collections.sort(extensionImpl.mProducers, Comparator.comparingInt(new ExtensionControllerImpl$ExtensionBuilder$$ExternalSyntheticLambda0()));
-            ExtensionImpl.m3085$$Nest$mnotifyChanged(extensionImpl);
+            ExtensionImpl.m3102$$Nest$mnotifyChanged(extensionImpl);
             return extensionImpl;
         }
 
@@ -46,14 +44,12 @@ public class ExtensionControllerImpl implements ExtensionController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ExtensionImpl implements ExtensionController.Extension {
         public final ArrayList mCallbacks;
         public Object mItem;
         public Context mPluginContext;
         public final ArrayList mProducers;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Default implements Item {
             public final Supplier mSupplier;
 
@@ -72,7 +68,6 @@ public class ExtensionControllerImpl implements ExtensionController {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class PluginItem implements Item, PluginListener {
             public Plugin mItem;
 
@@ -90,7 +85,7 @@ public class ExtensionControllerImpl implements ExtensionController {
                 ExtensionImpl extensionImpl = ExtensionImpl.this;
                 extensionImpl.mPluginContext = context;
                 this.mItem = plugin;
-                ExtensionImpl.m3085$$Nest$mnotifyChanged(extensionImpl);
+                ExtensionImpl.m3102$$Nest$mnotifyChanged(extensionImpl);
             }
 
             @Override // com.android.systemui.plugins.PluginListener
@@ -98,7 +93,7 @@ public class ExtensionControllerImpl implements ExtensionController {
                 ExtensionImpl extensionImpl = ExtensionImpl.this;
                 extensionImpl.mPluginContext = null;
                 this.mItem = null;
-                ExtensionImpl.m3085$$Nest$mnotifyChanged(extensionImpl);
+                ExtensionImpl.m3102$$Nest$mnotifyChanged(extensionImpl);
             }
 
             @Override // com.android.systemui.statusbar.policy.ExtensionControllerImpl.Item
@@ -108,7 +103,7 @@ public class ExtensionControllerImpl implements ExtensionController {
         }
 
         /* renamed from: -$$Nest$mnotifyChanged, reason: not valid java name */
-        public static void m3085$$Nest$mnotifyChanged(ExtensionImpl extensionImpl) {
+        public static void m3102$$Nest$mnotifyChanged(ExtensionImpl extensionImpl) {
             Object obj = extensionImpl.mItem;
             if (obj != null) {
                 ExtensionControllerImpl.this.mLeakDetector.trackGarbage(obj);
@@ -141,7 +136,6 @@ public class ExtensionControllerImpl implements ExtensionController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Item {
         Object get();
 

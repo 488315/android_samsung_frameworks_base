@@ -5,7 +5,6 @@ import kotlin.enums.EnumEntriesKt;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class PlaceType {
     private static final /* synthetic */ EnumEntries $ENTRIES;
@@ -20,9 +19,9 @@ public final class PlaceType {
     }
 
     static {
-        PlaceType[] $values = $values();
-        $VALUES = $values;
-        $ENTRIES = EnumEntriesKt.enumEntries($values);
+        PlaceType[] placeTypeArr$values = $values();
+        $VALUES = placeTypeArr$values;
+        $ENTRIES = EnumEntriesKt.enumEntries(placeTypeArr$values);
     }
 
     private PlaceType(String str, int i, int i2) {

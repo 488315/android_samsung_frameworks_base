@@ -9,6 +9,7 @@ import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillValue;
 import android.view.autofill.Helper;
 import android.widget.RemoteViews;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 
@@ -43,24 +44,24 @@ public final class DateTransformation extends InternalTransformation implements 
 
     @Override // android.service.autofill.InternalTransformation
     public void apply(ValueFinder valueFinder, RemoteViews remoteViews, int i) throws Exception {
-        AutofillValue findRawValueByAutofillId = valueFinder.findRawValueByAutofillId(this.mFieldId);
-        if (findRawValueByAutofillId == null) {
+        AutofillValue autofillValueFindRawValueByAutofillId = valueFinder.findRawValueByAutofillId(this.mFieldId);
+        if (autofillValueFindRawValueByAutofillId == null) {
             Log.w(TAG, "No value for id " + this.mFieldId);
             return;
         }
-        if (!findRawValueByAutofillId.isDate()) {
-            Log.w(TAG, "Value for " + this.mFieldId + " is not date: " + findRawValueByAutofillId);
+        if (!autofillValueFindRawValueByAutofillId.isDate()) {
+            Log.w(TAG, "Value for " + this.mFieldId + " is not date: " + autofillValueFindRawValueByAutofillId);
             return;
         }
         try {
-            Date date = new Date(findRawValueByAutofillId.getDateValue());
-            String format = this.mDateFormat.format(date);
+            Date date = new Date(autofillValueFindRawValueByAutofillId.getDateValue());
+            String str = this.mDateFormat.format(date);
             if (Helper.sDebug) {
-                Log.d(TAG, "Transformed " + date + " to " + format);
+                Log.d(TAG, "Transformed " + date + " to " + str);
             }
-            remoteViews.setCharSequence(i, "setText", format);
+            remoteViews.setCharSequence(i, "setText", str);
         } catch (Exception e) {
-            Log.w(TAG, "Could not apply " + this.mDateFormat + " to " + findRawValueByAutofillId + ": " + e);
+            Log.w(TAG, "Could not apply " + this.mDateFormat + " to " + autofillValueFindRawValueByAutofillId + ": " + e);
         }
     }
 
@@ -72,7 +73,7 @@ public final class DateTransformation extends InternalTransformation implements 
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeParcelable(this.mFieldId, i);
         parcel.writeSerializable(this.mDateFormat);
     }

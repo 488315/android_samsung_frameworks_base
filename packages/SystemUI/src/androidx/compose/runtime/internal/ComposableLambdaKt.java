@@ -11,7 +11,6 @@ import java.util.List;
 import kotlin.Function;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ComposableLambdaKt {
     public static final Object lambdaKey = null;
@@ -25,13 +24,13 @@ public abstract class ComposableLambdaKt {
             ComposerKt.traceEventStart("androidx.compose.runtime.internal.rememberComposableLambda (ComposableLambda.kt:1366)");
         }
         ComposerImpl composerImpl = (ComposerImpl) composer;
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
-        if (rememberedValue == Composer.Companion.Empty) {
-            rememberedValue = new ComposableLambdaImpl(i, true, function);
-            composerImpl.updateRememberedValue(rememberedValue);
+        if (objRememberedValue == Composer.Companion.Empty) {
+            objRememberedValue = new ComposableLambdaImpl(i, true, function);
+            composerImpl.updateRememberedValue(objRememberedValue);
         }
-        ComposableLambdaImpl composableLambdaImpl = (ComposableLambdaImpl) rememberedValue;
+        ComposableLambdaImpl composableLambdaImpl = (ComposableLambdaImpl) objRememberedValue;
         if (!Intrinsics.areEqual(composableLambdaImpl._block, function)) {
             boolean z = composableLambdaImpl._block == null;
             composableLambdaImpl._block = function;

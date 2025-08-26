@@ -6,7 +6,10 @@ import android.os.Process;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.text.TextUtils;
 import android.util.Log;
+import androidx.activity.result.ActivityResultRegistry$register$3$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardCarrierViewController$2$$ExternalSyntheticOutline0;
+import com.android.systemui.BasicRune;
 import com.android.systemui.bixby2.CommandActionResponse;
 import com.android.systemui.bixby2.actionresult.ActionResults;
 import com.android.systemui.bixby2.controller.AppController;
@@ -17,8 +20,11 @@ import com.google.gson.Gson;
 import com.samsung.android.sdk.command.Command;
 import com.samsung.android.sdk.command.action.CommandAction;
 import com.samsung.android.sdk.command.action.JSONStringAction;
+import com.samsung.android.sdk.command.provider.CommandProvider;
+import com.samsung.android.sdk.command.provider.ICommandActionCallback;
 import com.samsung.android.sdk.command.template.CommandTemplate;
 import com.samsung.android.sdk.command.template.UnformattedTemplate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -26,7 +32,6 @@ import java.util.stream.Collectors;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppControlActionInteractor implements ActionInteractor {
     private final String TAG = "AppControlActionInteractor";
@@ -35,7 +40,6 @@ public class AppControlActionInteractor implements ActionInteractor {
     private Gson mGson;
     private final MWBixbyController mMWBixbyController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Action {
         close_application,
         close_all_application,
@@ -74,7 +78,7 @@ public class AppControlActionInteractor implements ActionInteractor {
         this.mGson = new Gson();
     }
 
-    private String getJsonString(String str, String str2) {
+    private String getJsonString(String str, String str2) throws JSONException {
         JSONObject jSONObject = new JSONObject();
         try {
             jSONObject.put("result", str);
@@ -112,97 +116,95 @@ public class AppControlActionInteractor implements ActionInteractor {
         return str2.equals(str);
     }
 
-    private CommandTemplate loadStatefulMultiWindowCommand(String str, String str2) {
-        CommandActionResponse commandActionResponse;
+    private CommandTemplate loadStatefulMultiWindowCommand(String str, String str2) throws JSONException, NumberFormatException {
+        CommandActionResponse commandActionResponseCheckSupportMultiWindow;
         MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("loadStatefulMultiWindowCommand  actionName=", str, "AppControlActionInteractor");
         if (this.mMWBixbyController == null) {
             return null;
         }
         if (Action.check_splitstate.toString().equals(str)) {
-            commandActionResponse = this.mMWBixbyController.checkSplitState();
+            commandActionResponseCheckSupportMultiWindow = this.mMWBixbyController.checkSplitState();
         } else if (Action.get_packageinsplit.toString().equals(str) && !TextUtils.isEmpty(str2)) {
-            commandActionResponse = this.mMWBixbyController.getPackageNameInSplit(ParamsParser.getPackageInfoFromJson(str2));
+            commandActionResponseCheckSupportMultiWindow = this.mMWBixbyController.getPackageNameInSplit(ParamsParser.getPackageInfoFromJson(str2));
         } else if (Action.check_splittype.toString().equals(str)) {
-            commandActionResponse = this.mMWBixbyController.checkSupportMultiSplit();
+            commandActionResponseCheckSupportMultiWindow = this.mMWBixbyController.checkSupportMultiSplit();
         } else if (Action.check_launchervisible.toString().equals(str)) {
-            commandActionResponse = this.mMWBixbyController.checkTopFullscreenHomeOrRecents();
+            commandActionResponseCheckSupportMultiWindow = this.mMWBixbyController.checkTopFullscreenHomeOrRecents();
         } else if (!Action.app_resizable.toString().equals(str) || TextUtils.isEmpty(str2)) {
-            commandActionResponse = null;
+            commandActionResponseCheckSupportMultiWindow = null;
         } else {
-            commandActionResponse = this.mMWBixbyController.checkSupportMultiWindow(this.mContext, ParamsParser.getPackageInfoFromJson(str2));
+            commandActionResponseCheckSupportMultiWindow = this.mMWBixbyController.checkSupportMultiWindow(this.mContext, ParamsParser.getPackageInfoFromJson(str2));
         }
-        if (commandActionResponse == null) {
+        if (commandActionResponseCheckSupportMultiWindow == null) {
             return null;
         }
-        Log.d("AppControlActionInteractor", "responseMessage: " + commandActionResponse.responseMessage);
-        return new UnformattedTemplate(commandActionResponse.responseMessage);
+        Log.d("AppControlActionInteractor", "responseMessage: " + commandActionResponseCheckSupportMultiWindow.responseMessage);
+        return new UnformattedTemplate(commandActionResponseCheckSupportMultiWindow.responseMessage);
     }
 
     private boolean matchAction(final String str) {
         return Arrays.stream(Action.values()).map(new AppControlActionInteractor$$ExternalSyntheticLambda0()).anyMatch(new Predicate() { // from class: com.android.systemui.bixby2.interactor.AppControlActionInteractor$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$matchAction$0;
-                lambda$matchAction$0 = AppControlActionInteractor.lambda$matchAction$0(str, (String) obj);
-                return lambda$matchAction$0;
+                return AppControlActionInteractor.lambda$matchAction$0(str, (String) obj);
             }
         });
     }
 
-    private boolean performMultiWindowCommandAction(String str, String str2, CommandActionResponse commandActionResponse) {
-        String str3;
-        int i;
+    private boolean performMultiWindowCommandAction(String str, String str2, CommandActionResponse commandActionResponse) throws JSONException, NumberFormatException {
+        String strMaximizeApp;
+        int responseCode;
         if (this.mMWBixbyController == null) {
             return false;
         }
         PackageInfoBixby packageInfoFromJson = ParamsParser.getPackageInfoFromJson(str2);
         if (Action.start_multiwindow.toString().equals(str)) {
-            str3 = this.mMWBixbyController.startMultiWindow(this.mContext, packageInfoFromJson);
-            i = getResponseCode(str3);
+            strMaximizeApp = this.mMWBixbyController.startMultiWindow(this.mContext, packageInfoFromJson);
+            responseCode = getResponseCode(strMaximizeApp);
         } else if (Action.app_resizable.toString().equals(str)) {
-            CommandActionResponse checkSupportMultiWindow = this.mMWBixbyController.checkSupportMultiWindow(this.mContext, packageInfoFromJson);
-            str3 = checkSupportMultiWindow.responseMessage;
-            i = checkSupportMultiWindow.responseCode;
+            CommandActionResponse commandActionResponseCheckSupportMultiWindow = this.mMWBixbyController.checkSupportMultiWindow(this.mContext, packageInfoFromJson);
+            strMaximizeApp = commandActionResponseCheckSupportMultiWindow.responseMessage;
+            responseCode = commandActionResponseCheckSupportMultiWindow.responseCode;
         } else if (Action.startapp_splitposition.toString().equals(str)) {
-            str3 = this.mMWBixbyController.startAppSplitPosition(packageInfoFromJson);
-            i = getResponseCode(str3);
+            strMaximizeApp = this.mMWBixbyController.startAppSplitPosition(packageInfoFromJson);
+            responseCode = getResponseCode(strMaximizeApp);
         } else if (Action.exchange_position_splitscreen.toString().equals(str)) {
-            str3 = this.mMWBixbyController.exchangePositionOfSplitScreen(packageInfoFromJson);
-            i = getResponseCode(str3);
+            strMaximizeApp = this.mMWBixbyController.exchangePositionOfSplitScreen(packageInfoFromJson);
+            responseCode = getResponseCode(strMaximizeApp);
         } else if (Action.change_layout_splitscreen.toString().equals(str)) {
-            str3 = this.mMWBixbyController.changeLayoutOfSplitScreen(packageInfoFromJson);
-            i = getResponseCode(str3);
+            strMaximizeApp = this.mMWBixbyController.changeLayoutOfSplitScreen(packageInfoFromJson);
+            responseCode = getResponseCode(strMaximizeApp);
         } else if (Action.replaceapp_splitscreen.toString().equals(str)) {
-            str3 = this.mMWBixbyController.replaceAppOfSplitScreen(packageInfoFromJson);
-            i = getResponseCode(str3);
+            strMaximizeApp = this.mMWBixbyController.replaceAppOfSplitScreen(packageInfoFromJson);
+            responseCode = getResponseCode(strMaximizeApp);
         } else if (Action.maximize_app.toString().equals(str)) {
-            str3 = this.mMWBixbyController.maximizeApp(this.mContext, packageInfoFromJson);
-            i = getResponseCode(str3);
+            strMaximizeApp = this.mMWBixbyController.maximizeApp(this.mContext, packageInfoFromJson);
+            responseCode = getResponseCode(strMaximizeApp);
         } else if (Action.check_splittype.toString().equals(str)) {
-            CommandActionResponse checkSupportMultiSplit = this.mMWBixbyController.checkSupportMultiSplit();
-            str3 = checkSupportMultiSplit.responseMessage;
-            i = checkSupportMultiSplit.responseCode;
+            CommandActionResponse commandActionResponseCheckSupportMultiSplit = this.mMWBixbyController.checkSupportMultiSplit();
+            strMaximizeApp = commandActionResponseCheckSupportMultiSplit.responseMessage;
+            responseCode = commandActionResponseCheckSupportMultiSplit.responseCode;
         } else if (Action.check_splitstate.toString().equals(str)) {
-            CommandActionResponse checkSplitState = this.mMWBixbyController.checkSplitState();
-            str3 = checkSplitState.responseMessage;
-            i = checkSplitState.responseCode;
+            CommandActionResponse commandActionResponseCheckSplitState = this.mMWBixbyController.checkSplitState();
+            strMaximizeApp = commandActionResponseCheckSplitState.responseMessage;
+            responseCode = commandActionResponseCheckSplitState.responseCode;
         } else if (Action.check_launchervisible.toString().equals(str)) {
-            CommandActionResponse checkTopFullscreenHomeOrRecents = this.mMWBixbyController.checkTopFullscreenHomeOrRecents();
-            str3 = checkTopFullscreenHomeOrRecents.responseMessage;
-            i = checkTopFullscreenHomeOrRecents.responseCode;
+            CommandActionResponse commandActionResponseCheckTopFullscreenHomeOrRecents = this.mMWBixbyController.checkTopFullscreenHomeOrRecents();
+            strMaximizeApp = commandActionResponseCheckTopFullscreenHomeOrRecents.responseMessage;
+            responseCode = commandActionResponseCheckTopFullscreenHomeOrRecents.responseCode;
         } else if (Action.get_packageinsplit.toString().equals(str)) {
             CommandActionResponse packageNameInSplit = this.mMWBixbyController.getPackageNameInSplit(packageInfoFromJson);
-            str3 = packageNameInSplit.responseMessage;
-            i = packageNameInSplit.responseCode;
+            strMaximizeApp = packageNameInSplit.responseMessage;
+            responseCode = packageNameInSplit.responseCode;
         } else {
-            str3 = null;
-            i = 0;
+            strMaximizeApp = null;
+            responseCode = 0;
         }
-        if (i == 0) {
+        if (responseCode == 0) {
             return false;
         }
-        commandActionResponse.responseCode = i;
-        commandActionResponse.responseMessage = str3;
+        commandActionResponse.responseCode = responseCode;
+        commandActionResponse.responseMessage = strMaximizeApp;
         return true;
     }
 
@@ -212,7 +214,7 @@ public class AppControlActionInteractor implements ActionInteractor {
     }
 
     @Override // com.android.systemui.bixby2.interactor.ActionInteractor
-    public Command loadStatefulCommandInteractor(String str, Command command) {
+    public Command loadStatefulCommandInteractor(String str, Command command) throws JSONException, NumberFormatException {
         CommandTemplate unformattedTemplate;
         if (!matchAction(str)) {
             return null;
@@ -231,10 +233,7 @@ public class AppControlActionInteractor implements ActionInteractor {
                 Log.e("AppControlActionInteractor", "JSONException: " + e.toString());
             }
         } else {
-            if (isSimpleAction(str)) {
-                unformattedTemplate = CommandTemplate.NO_TEMPLATE;
-            }
-            unformattedTemplate = null;
+            unformattedTemplate = isSimpleAction(str) ? CommandTemplate.NO_TEMPLATE : null;
         }
         if (unformattedTemplate == null) {
             return null;
@@ -245,56 +244,139 @@ public class AppControlActionInteractor implements ActionInteractor {
         return statefulBuilder.build();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x00c9, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x00c9, code lost:
     
         if (r12.mAppController.removeSearchedTask(r12.mContext, r14) != false) goto L101;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x00f1, code lost:
-    
-        if (r12.mAppController.removeAllTasks(r12.mContext, true, null) != false) goto L101;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x00f5, code lost:
-    
-        r1 = 2;
-        r2 = com.android.systemui.bixby2.actionresult.ActionResults.RESULT_NO_APP_CLOSE;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x0132, code lost:
-    
-        if (r12.mAppController.removeAllTasks(r12.mContext, false, r14) != false) goto L101;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:59:0x0157, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:63:0x0157, code lost:
     
         if (r12.mAppController.removeAllTasks(r12.mContext) != false) goto L101;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:63:0x016f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:68:0x016f, code lost:
     
         if (r12.mAppController.removeFocusedTask(r12.mContext) != false) goto L101;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:67:0x0187, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:73:0x0187, code lost:
     
         if (r12.mAppController.openRecentsApp(r12.mContext) != false) goto L101;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:80:0x01ce, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:89:0x01ce, code lost:
     
         if (r12.mAppController.removeNavigationApp(r12.mContext, r14) != false) goto L101;
      */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x01fa  */
-    /* JADX WARN: Removed duplicated region for block: B:15:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0060  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x00e5  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00f5  */
     @Override // com.android.systemui.bixby2.interactor.ActionInteractor
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void performCommandActionInteractor(java.lang.String r13, com.samsung.android.sdk.command.action.CommandAction r14, com.samsung.android.sdk.command.provider.ICommandActionCallback r15) {
-        /*
-            Method dump skipped, instructions count: 519
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bixby2.interactor.AppControlActionInteractor.performCommandActionInteractor(java.lang.String, com.samsung.android.sdk.command.action.CommandAction, com.samsung.android.sdk.command.provider.ICommandActionCallback):void");
+    public void performCommandActionInteractor(String str, CommandAction commandAction, ICommandActionCallback iCommandActionCallback) {
+        String str2;
+        int i;
+        String str3;
+        int i2 = 1;
+        String json = "success";
+        CommandActionResponse commandActionResponse = new CommandActionResponse(1, "success");
+        if (matchAction(str)) {
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("perform in AppContorlActionInteractor  actionName = ", str, ", actionType = ");
+            sbM.append(commandAction.getActionType());
+            Log.d("AppControlActionInteractor", sbM.toString());
+            if (commandAction.getActionType() != 5) {
+                str3 = "invalid_action";
+                i = 2;
+                str2 = null;
+            } else {
+                StringBuilder sb = new StringBuilder("newJSONStringValue = ");
+                str2 = ((JSONStringAction) commandAction).mNewValue;
+                ExifInterface$$ExternalSyntheticOutline0.m(sb, str2, "AppControlActionInteractor");
+                i = 1;
+                str3 = "success";
+            }
+            if (Action.launch_application.toString().equals(str)) {
+                if (this.mAppController.checkInstalledApp(this.mContext, str2)) {
+                    if (this.mAppController.launchApplication(this.mContext, str2)) {
+                        if (BasicRune.VOLUME_SUB_DISPLAY_FULL_LAYOUT_VOLUME_DIALOG && this.mAppController.isFolderClosed()) {
+                            String packageNameFromPdss = this.mAppController.getPackageNameFromPdss(str2);
+                            boolean zCheckSettingsCoverLauncher = this.mAppController.checkSettingsCoverLauncher(this.mContext);
+                            boolean zCheckIncludeCoverLauncher = this.mAppController.checkIncludeCoverLauncher(packageNameFromPdss);
+                            boolean zCheckAvailableCoverLauncher = this.mAppController.checkAvailableCoverLauncher(packageNameFromPdss);
+                            if (!zCheckIncludeCoverLauncher) {
+                                json = ActionResults.RESULT_NOT_INCLUDE_COVERLAUNCHER;
+                            } else if (!zCheckSettingsCoverLauncher) {
+                                json = ActionResults.RESULT_SET_OFF_COVERLAUNCHER;
+                            } else if (!zCheckAvailableCoverLauncher) {
+                                json = ActionResults.RESULT_NOT_AVAILABLE_COVERLAUNCHER;
+                            }
+                        }
+                    }
+                    json = str3;
+                    i2 = 2;
+                } else {
+                    i2 = 2;
+                    json = ActionResults.RESULT_NOT_INSTALLED;
+                }
+            } else if (Action.close_application.toString().equals(str)) {
+                if (!this.mAppController.checkInstalledApp(this.mContext, str2)) {
+                }
+            } else if (Action.close_all_application_except_currentapp.toString().equals(str)) {
+                if (this.mAppController.isDexMode()) {
+                    i2 = 2;
+                    json = ActionResults.RESULT_DEX_MODE;
+                } else if (!this.mAppController.removeAllTasks(this.mContext, true, null)) {
+                    i2 = 2;
+                    json = ActionResults.RESULT_NO_APP_CLOSE;
+                }
+            } else if (Action.close_all_application_except_specificapp.toString().equals(str)) {
+                ArrayList<String> arrayList = new ArrayList<>();
+                if (this.mAppController.checkInstalledApp(this.mContext, str2)) {
+                    if (!this.mAppController.isDexMode()) {
+                        if (!this.mAppController.checkRunningInRecents(this.mContext, str2, arrayList)) {
+                            json = this.mGson.toJson(arrayList);
+                            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("notRunningPackageList = ", json, "AppControlActionInteractor");
+                            i2 = 2;
+                        } else if (!this.mAppController.removeAllTasks(this.mContext, false, str2)) {
+                        }
+                    }
+                }
+            } else {
+                if (!Action.close_all_application.toString().equals(str)) {
+                    if (!Action.close_foreground_application.toString().equals(str)) {
+                        if (!Action.open_recentsapp.toString().equals(str)) {
+                            if (Action.launch_mostrecent_application.toString().equals(str)) {
+                                if (!this.mAppController.isDexMode()) {
+                                    if (this.mAppController.startNavigationApp(this.mContext, str2, commandActionResponse)) {
+                                        i2 = commandActionResponse.responseCode;
+                                        json = commandActionResponse.responseMessage;
+                                    }
+                                    json = str3;
+                                }
+                            } else if (Action.close_multiple_application.toString().equals(str)) {
+                                if (this.mAppController.isDexMode()) {
+                                }
+                            } else if (Action.check_orientation.toString().equals(str)) {
+                                json = this.mAppController.checkOrientation() ? ActionResults.RESULT_ORIENTATION_PORTRAIT : ActionResults.RESULT_ORIENTATION_LANDSCAPE;
+                            } else if (performMultiWindowCommandAction(str, str2, commandActionResponse)) {
+                                i2 = commandActionResponse.responseCode;
+                                json = commandActionResponse.responseMessage;
+                            } else {
+                                json = str3;
+                                i2 = i;
+                            }
+                        }
+                    }
+                }
+                i2 = 2;
+            }
+            if (iCommandActionCallback != null) {
+                KeyguardCarrierViewController$2$$ExternalSyntheticOutline0.m(i2, "responseCode = ", ", responseMessage = ", json, "AppControlActionInteractor");
+                ((CommandProvider.AnonymousClass1) iCommandActionCallback).onActionFinished(i2, json);
+            }
+        }
     }
 
     @Override // com.android.systemui.bixby2.interactor.ActionInteractor
-    public Command loadStatefulCommandInteractor(String str, Command command, CommandAction commandAction) {
+    public Command loadStatefulCommandInteractor(String str, Command command, CommandAction commandAction) throws JSONException, NumberFormatException {
         String str2;
         CommandTemplate unformattedTemplate;
         String str3;
@@ -319,10 +401,7 @@ public class AppControlActionInteractor implements ActionInteractor {
                         Log.e("AppControlActionInteractor", "JSONException: " + e.toString());
                     }
                 } else {
-                    if (isSimpleAction(str)) {
-                        unformattedTemplate = CommandTemplate.NO_TEMPLATE;
-                    }
-                    unformattedTemplate = null;
+                    unformattedTemplate = isSimpleAction(str) ? CommandTemplate.NO_TEMPLATE : null;
                 }
                 if (unformattedTemplate == null) {
                     return null;
@@ -340,11 +419,11 @@ public class AppControlActionInteractor implements ActionInteractor {
                 str2 = ((JSONStringAction) commandAction).mNewValue;
                 ExifInterface$$ExternalSyntheticOutline0.m(sb, str2, "AppControlActionInteractor");
             }
-            CommandTemplate loadStatefulMultiWindowCommand = loadStatefulMultiWindowCommand(str, str2);
-            if (loadStatefulMultiWindowCommand != null) {
+            CommandTemplate commandTemplateLoadStatefulMultiWindowCommand = loadStatefulMultiWindowCommand(str, str2);
+            if (commandTemplateLoadStatefulMultiWindowCommand != null) {
                 Command.StatefulBuilder statefulBuilder2 = new Command.StatefulBuilder(command.mCommandId);
                 statefulBuilder2.mStatus = 1;
-                statefulBuilder2.mTemplate = loadStatefulMultiWindowCommand;
+                statefulBuilder2.mTemplate = commandTemplateLoadStatefulMultiWindowCommand;
                 return statefulBuilder2.build();
             }
         }

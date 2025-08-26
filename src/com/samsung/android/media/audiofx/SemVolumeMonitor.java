@@ -25,22 +25,22 @@ public class SemVolumeMonitor extends AudioEffect {
     }
 
     public byte[] getOneMinScoreStatus(int i, int i2) {
-        byte[] integerArrayToByteArray = integerArrayToByteArray(new Integer[]{1});
-        int max = Math.max(i, i2);
-        byte[] bArr = new byte[max];
-        Log.i(TAG, "getOneHourRms: call getParameter. bytes:" + max + "=max(" + i + "," + i2 + NavigationBarInflaterView.KEY_CODE_END);
-        getParameter(integerArrayToByteArray, bArr);
+        byte[] bArrIntegerArrayToByteArray = integerArrayToByteArray(new Integer[]{1});
+        int iMax = Math.max(i, i2);
+        byte[] bArr = new byte[iMax];
+        Log.i(TAG, "getOneHourRms: call getParameter. bytes:" + iMax + "=max(" + i + "," + i2 + NavigationBarInflaterView.KEY_CODE_END);
+        getParameter(bArrIntegerArrayToByteArray, bArr);
         Log.i(TAG, "getOneHourRms: getParameter done");
         return bArr;
     }
 
     public void setBluetoothVolume(int i) {
         Integer[] numArr = {Integer.valueOf(i)};
-        byte[] integerArrayToByteArray = integerArrayToByteArray(new Integer[]{2});
-        byte[] integerArrayToByteArray2 = integerArrayToByteArray(numArr);
+        byte[] bArrIntegerArrayToByteArray = integerArrayToByteArray(new Integer[]{2});
+        byte[] bArrIntegerArrayToByteArray2 = integerArrayToByteArray(numArr);
         Log.i(TAG, "setBluetoothVolume: call setParameter");
         try {
-            setParameter(integerArrayToByteArray, integerArrayToByteArray2);
+            setParameter(bArrIntegerArrayToByteArray, bArrIntegerArrayToByteArray2);
         } catch (IllegalStateException e) {
             Log.e(TAG, "setBluetoothVolume#setParameter", e);
         }
@@ -49,10 +49,10 @@ public class SemVolumeMonitor extends AudioEffect {
 
     public void onOff(boolean z) {
         Integer[] numArr = {Integer.valueOf(z ? 1 : 0)};
-        byte[] integerArrayToByteArray = integerArrayToByteArray(new Integer[]{3});
-        byte[] integerArrayToByteArray2 = integerArrayToByteArray(numArr);
+        byte[] bArrIntegerArrayToByteArray = integerArrayToByteArray(new Integer[]{3});
+        byte[] bArrIntegerArrayToByteArray2 = integerArrayToByteArray(numArr);
         Log.i(TAG, "onOff: call setParameter");
-        setParameter(integerArrayToByteArray, integerArrayToByteArray2);
+        setParameter(bArrIntegerArrayToByteArray, bArrIntegerArrayToByteArray2);
         Log.i(TAG, "onOff: setParameter done");
     }
 
@@ -65,12 +65,12 @@ public class SemVolumeMonitor extends AudioEffect {
     }
 
     private byte[] integerArrayToByteArray(Integer[] numArr) {
-        ByteBuffer allocate = ByteBuffer.allocate(numArr.length * 4);
-        allocate.order(ByteOrder.nativeOrder());
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(numArr.length * 4);
+        byteBufferAllocate.order(ByteOrder.nativeOrder());
         for (Integer num : numArr) {
-            allocate.putInt(num.intValue());
+            byteBufferAllocate.putInt(num.intValue());
         }
-        return allocate.array();
+        return byteBufferAllocate.array();
     }
 
     private void byteArrayToIntegerArray(byte[] bArr, Integer[] numArr) {

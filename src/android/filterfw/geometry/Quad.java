@@ -42,21 +42,21 @@ public class Quad {
     }
 
     public Rectangle boundingBox() {
-        List asList = Arrays.asList(Float.valueOf(this.p0.x), Float.valueOf(this.p1.x), Float.valueOf(this.p2.x), Float.valueOf(this.p3.x));
-        List asList2 = Arrays.asList(Float.valueOf(this.p0.y), Float.valueOf(this.p1.y), Float.valueOf(this.p2.y), Float.valueOf(this.p3.y));
-        float floatValue = ((Float) Collections.min(asList)).floatValue();
-        float floatValue2 = ((Float) Collections.min(asList2)).floatValue();
-        return new Rectangle(floatValue, floatValue2, ((Float) Collections.max(asList)).floatValue() - floatValue, ((Float) Collections.max(asList2)).floatValue() - floatValue2);
+        List listAsList = Arrays.asList(Float.valueOf(this.p0.x), Float.valueOf(this.p1.x), Float.valueOf(this.p2.x), Float.valueOf(this.p3.x));
+        List listAsList2 = Arrays.asList(Float.valueOf(this.p0.y), Float.valueOf(this.p1.y), Float.valueOf(this.p2.y), Float.valueOf(this.p3.y));
+        float fFloatValue = ((Float) Collections.min(listAsList)).floatValue();
+        float fFloatValue2 = ((Float) Collections.min(listAsList2)).floatValue();
+        return new Rectangle(fFloatValue, fFloatValue2, ((Float) Collections.max(listAsList)).floatValue() - fFloatValue, ((Float) Collections.max(listAsList2)).floatValue() - fFloatValue2);
     }
 
     public float getBoundingWidth() {
-        List asList = Arrays.asList(Float.valueOf(this.p0.x), Float.valueOf(this.p1.x), Float.valueOf(this.p2.x), Float.valueOf(this.p3.x));
-        return ((Float) Collections.max(asList)).floatValue() - ((Float) Collections.min(asList)).floatValue();
+        List listAsList = Arrays.asList(Float.valueOf(this.p0.x), Float.valueOf(this.p1.x), Float.valueOf(this.p2.x), Float.valueOf(this.p3.x));
+        return ((Float) Collections.max(listAsList)).floatValue() - ((Float) Collections.min(listAsList)).floatValue();
     }
 
     public float getBoundingHeight() {
-        List asList = Arrays.asList(Float.valueOf(this.p0.y), Float.valueOf(this.p1.y), Float.valueOf(this.p2.y), Float.valueOf(this.p3.y));
-        return ((Float) Collections.max(asList)).floatValue() - ((Float) Collections.min(asList)).floatValue();
+        List listAsList = Arrays.asList(Float.valueOf(this.p0.y), Float.valueOf(this.p1.y), Float.valueOf(this.p2.y), Float.valueOf(this.p3.y));
+        return ((Float) Collections.max(listAsList)).floatValue() - ((Float) Collections.min(listAsList)).floatValue();
     }
 
     public String toString() {

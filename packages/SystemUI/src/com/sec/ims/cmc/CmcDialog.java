@@ -2,9 +2,9 @@ package com.sec.ims.cmc;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.sec.ims.util.IMSLog;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CmcDialog implements Parcelable {
     public static final Parcelable.Creator<CmcDialog> CREATOR = new Parcelable.Creator<CmcDialog>() { // from class: com.sec.ims.cmc.CmcDialog.1
@@ -31,7 +31,6 @@ public class CmcDialog implements Parcelable {
     private String mPeerUri;
     private int mState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         private String mDialogId = "";
         private String mPeerUri = "";
@@ -154,9 +153,9 @@ public class CmcDialog implements Parcelable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder("CmcDialog [mDialogId=");
-        sb.append(this.mDialogId);
+        sb.append(IMSLog.checker(this.mDialogId));
         sb.append(", mPeerUri=");
-        sb.append(this.mPeerUri);
+        sb.append(IMSLog.checker(this.mPeerUri));
         sb.append(", mIsPullable=");
         sb.append(this.mIsPullable);
         sb.append(", mState=");
@@ -166,7 +165,7 @@ public class CmcDialog implements Parcelable {
         sb.append(", mIsHeld=");
         sb.append(this.mIsHeld);
         sb.append(", mCnapName=");
-        sb.append(this.mCnapName);
+        sb.append(IMSLog.checker(this.mCnapName));
         sb.append(", mCnapNamePresentation=");
         sb.append(this.mCnapNamePresentation);
         sb.append(", mNumberPresentation=");

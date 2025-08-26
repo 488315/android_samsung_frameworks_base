@@ -15,7 +15,6 @@ import com.android.systemui.util.DeviceState;
 import java.util.ArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SubscreenParentLayout extends FrameLayout {
     public final Context mContext;
@@ -106,7 +105,7 @@ public final class SubscreenParentLayout extends FrameLayout {
         this.mQSHostCallback = new QSHost.Callback() { // from class: com.android.systemui.qp.SubscreenParentLayout$mQSHostCallback$1
             @Override // com.android.systemui.qs.QSHost.Callback
             public final void onTilesChanged() {
-                SubscreenParentLayout subscreenParentLayout = SubscreenParentLayout.this;
+                SubscreenParentLayout subscreenParentLayout = this.this$0;
                 QSHost qSHost = subscreenParentLayout.qsHost;
                 int size = qSHost != null ? ((ArrayList) qSHost.getTiles()).size() : 9;
                 int i = size / 4;

@@ -15,6 +15,7 @@ import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import java.io.IOException;
 import java.security.AlgorithmParameters;
 import java.security.GeneralSecurityException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.Signature;
@@ -28,7 +29,7 @@ class X509SignatureUtil {
     X509SignatureUtil() {
     }
 
-    static void setSignatureParameters(Signature signature, ASN1Encodable aSN1Encodable) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    static void setSignatureParameters(Signature signature, ASN1Encodable aSN1Encodable) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, InvalidAlgorithmParameterException {
         if (aSN1Encodable == null || derNull.equals(aSN1Encodable)) {
             return;
         }

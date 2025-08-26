@@ -45,9 +45,9 @@ public interface ISpellCheckerServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISpellCheckerServiceCallback)) {
-                return (ISpellCheckerServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISpellCheckerServiceCallback)) {
+                return (ISpellCheckerServiceCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface ISpellCheckerServiceCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ISpellCheckerSession asInterface = ISpellCheckerSession.Stub.asInterface(parcel.readStrongBinder());
+                ISpellCheckerSession iSpellCheckerSessionAsInterface = ISpellCheckerSession.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onSessionCreated(asInterface);
+                onSessionCreated(iSpellCheckerSessionAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,13 +100,13 @@ public interface ISpellCheckerServiceCallback extends IInterface {
 
             @Override // com.android.internal.textservice.ISpellCheckerServiceCallback
             public void onSessionCreated(ISpellCheckerSession iSpellCheckerSession) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpellCheckerSession);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpellCheckerSession);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

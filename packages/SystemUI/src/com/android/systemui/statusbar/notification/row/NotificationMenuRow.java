@@ -36,7 +36,6 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnClickListener {
     public boolean mAnimating;
@@ -73,7 +72,6 @@ public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnCl
     public final ArrayList mLeftMenuItems = new ArrayList();
     public final ArrayList mRightMenuItems = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CheckForDrag implements Runnable {
         public /* synthetic */ CheckForDrag(NotificationMenuRow notificationMenuRow, int i) {
             this();
@@ -81,10 +79,10 @@ public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnCl
 
         @Override // java.lang.Runnable
         public final void run() {
-            float abs = Math.abs(NotificationMenuRow.this.mTranslation);
+            float fAbs = Math.abs(NotificationMenuRow.this.mTranslation);
             float spaceForMenu = NotificationMenuRow.this.getSpaceForMenu();
             float width = NotificationMenuRow.this.mParent.getWidth() * 0.4f;
-            if ((!NotificationMenuRow.this.isMenuVisible() || NotificationMenuRow.this.isMenuLocationChange()) && abs >= spaceForMenu * 0.4d && abs < width) {
+            if ((!NotificationMenuRow.this.isMenuVisible() || NotificationMenuRow.this.isMenuLocationChange()) && fAbs >= spaceForMenu * 0.4d && fAbs < width) {
                 NotificationMenuRow.this.fadeInMenu(width);
             }
         }
@@ -136,8 +134,8 @@ public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnCl
         this.mLeftMenuItems.clear();
         this.mRightMenuItems.clear();
         this.mParent.getClass();
-        boolean isEnableSnooze = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableSnooze();
-        if (isEnableSnooze) {
+        boolean zIsEnableSnooze = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableSnooze();
+        if (zIsEnableSnooze) {
             this.mSnoozeItem = SecGutInflater.createNotificationMenuItem(this.mContext, R.string.notification_menu_snooze_description, R.layout.sec_notification_snooze);
         }
         Context context = this.mContext;
@@ -146,7 +144,7 @@ public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnCl
         ((PeopleNotificationIdentifierImpl) this.mPeopleNotificationIdentifier).getPeopleNotificationType(this.mParent.getEntryLegacy());
         this.mParent.getEntryLegacy().getClass();
         this.mInfoItem = SecGutInflater.createNotificationMenuItem(this.mContext, R.string.notification_menu_gear_description, R.layout.sec_notification_app_info);
-        if (isEnableSnooze) {
+        if (zIsEnableSnooze) {
             this.mRightMenuItems.add(this.mSnoozeItem);
         }
         this.mRightMenuItems.add(this.mInfoItem);
@@ -178,14 +176,14 @@ public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnCl
         final float f2 = this.mTranslation;
         final boolean z = f2 > 0.0f;
         setMenuLocation();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mAlpha, 1.0f);
-        this.mFadeAnimator = ofFloat;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.NotificationMenuRow.1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mAlpha, 1.0f);
+        this.mFadeAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.NotificationMenuRow.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float abs = Math.abs(f2);
+                float fAbs = Math.abs(f2);
                 boolean z2 = z;
-                if ((!z2 || f2 > f) && (z2 || abs > f)) {
+                if ((!z2 || f2 > f) && (z2 || fAbs > f)) {
                     return;
                 }
                 NotificationMenuRow notificationMenuRow = NotificationMenuRow.this;
@@ -248,9 +246,9 @@ public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnCl
 
     @Override // com.android.systemui.plugins.statusbar.NotificationMenuRowPlugin
     public final int getMenuSnapTarget() {
-        boolean isMenuOnLeft = isMenuOnLeft();
+        boolean zIsMenuOnLeft = isMenuOnLeft();
         int spaceForMenu = getSpaceForMenu();
-        return isMenuOnLeft ? spaceForMenu : -spaceForMenu;
+        return zIsMenuOnLeft ? spaceForMenu : -spaceForMenu;
     }
 
     @Override // com.android.systemui.plugins.statusbar.NotificationMenuRowPlugin
@@ -429,8 +427,8 @@ public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnCl
             return;
         }
         float width = this.mParent.getWidth() * 0.3f;
-        float abs = Math.abs(f);
-        setMenuAlpha(abs != 0.0f ? abs <= width ? 1.0f : 1.0f - ((abs - width) / (this.mParent.getWidth() - width)) : 0.0f);
+        float fAbs = Math.abs(f);
+        setMenuAlpha(fAbs != 0.0f ? fAbs <= width ? 1.0f : 1.0f - ((fAbs - width) / (this.mParent.getWidth() - width)) : 0.0f);
     }
 
     @Override // com.android.systemui.plugins.statusbar.NotificationMenuRowPlugin
@@ -459,10 +457,11 @@ public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnCl
         this.mIsUserTouching = false;
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.plugins.statusbar.NotificationMenuRowPlugin
     public final void onTouchMove(float f) {
         CheckForDrag checkForDrag;
-        byte b = 0;
+        Object[] objArr = 0;
         this.mSnapping = false;
         if (!isTowardsMenu(f) && isMenuLocationChange()) {
             this.mMenuSnapped = false;
@@ -474,7 +473,7 @@ public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnCl
             }
         }
         if (this.mShouldShowMenu && !NotificationStackScrollLayout.isPinnedHeadsUp(getParent()) && !this.mParent.areGutsExposed() && !this.mParent.showingPulsing() && ((checkForDrag = this.mCheckForDrag) == null || !this.mHandler.hasCallbacks(checkForDrag))) {
-            CheckForDrag checkForDrag2 = new CheckForDrag(this, b == true ? 1 : 0);
+            CheckForDrag checkForDrag2 = new CheckForDrag(this, objArr == true ? 1 : 0);
             this.mCheckForDrag = checkForDrag2;
             this.mHandler.postDelayed(checkForDrag2, 60L);
         }
@@ -629,22 +628,21 @@ public class NotificationMenuRow implements NotificationMenuRowPlugin, View.OnCl
         int size = arrayList.size();
         for (int i = 0; i < size; i++) {
             NotificationMenuRowPlugin.MenuItem menuItem = (NotificationMenuRowPlugin.MenuItem) arrayList.get(i);
-            String format = String.format(resources.getString(R.string.notification_menu_accessibility), str, menuItem.getContentDescription());
+            String str2 = String.format(resources.getString(R.string.notification_menu_accessibility), str, menuItem.getContentDescription());
             View menuView = menuItem.getMenuView();
             if (menuView != null) {
-                menuView.setContentDescription(format);
+                menuView.setContentDescription(str2);
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NotificationMenuItem implements NotificationMenuRowPlugin.MenuItem, GutContentInitializer {
         public final String mContentDescription;
         public final GutContentInitializer mGutContentInitializer;
         public final NotificationGuts.GutsContent mGutsContent;
         public final View mMenuView;
 
-        public NotificationMenuItem(Context context, String str, NotificationGuts.GutsContent gutsContent, int i) {
+        public NotificationMenuItem(Context context, String str, NotificationGuts.GutsContent gutsContent, int i) throws Resources.NotFoundException {
             Resources resources = context.getResources();
             int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.notification_menu_icon_padding);
             int color = resources.getColor(R.color.notification_gear_color);

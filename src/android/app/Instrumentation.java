@@ -39,6 +39,7 @@ import com.android.internal.R;
 import com.android.internal.content.ReferrerIntent;
 import com.samsung.android.rune.CoreRune;
 import java.io.File;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -256,11 +257,11 @@ public class Instrumentation {
 
     private ActivityInfo resolveActivityInfoForCtsInSandbox(Intent intent) {
         adjustIntentForCtsInSdkSandboxInstrumentation(intent);
-        ActivityInfo resolveActivityInfo = intent.resolveActivityInfo(getTargetContext().getPackageManager(), 0);
-        if (resolveActivityInfo != null) {
-            resolveActivityInfo.processName = this.mThread.getProcessName();
+        ActivityInfo activityInfoResolveActivityInfo = intent.resolveActivityInfo(getTargetContext().getPackageManager(), 0);
+        if (activityInfoResolveActivityInfo != null) {
+            activityInfoResolveActivityInfo.processName = this.mThread.getProcessName();
         }
-        return resolveActivityInfo;
+        return activityInfoResolveActivityInfo;
     }
 
     public Activity startActivitySync(Intent intent) {
@@ -268,7 +269,7 @@ public class Instrumentation {
     }
 
     public Activity startActivitySync(Intent intent, Bundle bundle) {
-        ActivityInfo resolveActivityInfo;
+        ActivityInfo activityInfoResolveActivityInfo;
         Activity activity;
         if (DEBUG_START_ACTIVITY) {
             Log.d(TAG, "startActivity: intent=" + intent + " options=" + bundle, new Throwable());
@@ -277,18 +278,18 @@ public class Instrumentation {
         synchronized (this.mSync) {
             Intent intent2 = new Intent(intent);
             if (isSdkSandboxAllowedToStartActivities()) {
-                resolveActivityInfo = resolveActivityInfoForCtsInSandbox(intent2);
+                activityInfoResolveActivityInfo = resolveActivityInfoForCtsInSandbox(intent2);
             } else {
-                resolveActivityInfo = intent2.resolveActivityInfo(getTargetContext().getPackageManager(), 0);
+                activityInfoResolveActivityInfo = intent2.resolveActivityInfo(getTargetContext().getPackageManager(), 0);
             }
-            if (resolveActivityInfo == null) {
+            if (activityInfoResolveActivityInfo == null) {
                 throw new RuntimeException("Unable to resolve activity for: " + intent2);
             }
             String processName = this.mThread.getProcessName();
-            if (!resolveActivityInfo.processName.equals(processName)) {
-                throw new RuntimeException("Intent in process " + processName + " resolved to different process " + resolveActivityInfo.processName + ": " + intent2);
+            if (!activityInfoResolveActivityInfo.processName.equals(processName)) {
+                throw new RuntimeException("Intent in process " + processName + " resolved to different process " + activityInfoResolveActivityInfo.processName + ": " + intent2);
             }
-            intent2.setComponent(new ComponentName(resolveActivityInfo.applicationInfo.packageName, resolveActivityInfo.name));
+            intent2.setComponent(new ComponentName(activityInfoResolveActivityInfo.applicationInfo.packageName, activityInfoResolveActivityInfo.name));
             ActivityWaiter activityWaiter = new ActivityWaiter(intent2);
             if (this.mWaitingActivities == null) {
                 this.mWaitingActivities = new ArrayList();
@@ -482,19 +483,19 @@ public class Instrumentation {
     }
 
     public Activity waitForMonitor(ActivityMonitor activityMonitor) {
-        Activity waitForActivity = activityMonitor.waitForActivity();
+        Activity activityWaitForActivity = activityMonitor.waitForActivity();
         synchronized (this.mSync) {
             this.mActivityMonitors.remove(activityMonitor);
         }
-        return waitForActivity;
+        return activityWaitForActivity;
     }
 
     public Activity waitForMonitorWithTimeout(ActivityMonitor activityMonitor, long j) {
-        Activity waitForActivityWithTimeout = activityMonitor.waitForActivityWithTimeout(j);
+        Activity activityWaitForActivityWithTimeout = activityMonitor.waitForActivityWithTimeout(j);
         synchronized (this.mSync) {
             this.mActivityMonitors.remove(activityMonitor);
         }
-        return waitForActivityWithTimeout;
+        return activityWaitForActivityWithTimeout;
     }
 
     public void removeMonitor(ActivityMonitor activityMonitor) {
@@ -528,7 +529,7 @@ public class Instrumentation {
         return c1MenuRunnable.returnValue;
     }
 
-    public boolean invokeContextMenuAction(Activity activity, int i, int i2) {
+    public boolean invokeContextMenuAction(Activity activity, int i, int i2) throws InterruptedException {
         validateNotAppThread();
         sendKeySync(new KeyEvent(0, 23));
         waitForIdleSync();
@@ -660,13 +661,13 @@ public class Instrumentation {
         InputManagerGlobal.getInstance().injectInputEvent(motionEvent, 2);
     }
 
-    public Application newApplication(ClassLoader classLoader, String str, Context context) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-        Application instantiateApplication = getFactory(context.getPackageName()).instantiateApplication(classLoader, str);
-        instantiateApplication.attach(context);
-        return instantiateApplication;
+    public Application newApplication(ClassLoader classLoader, String str, Context context) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        Application applicationInstantiateApplication = getFactory(context.getPackageName()).instantiateApplication(classLoader, str);
+        applicationInstantiateApplication.attach(context);
+        return applicationInstantiateApplication;
     }
 
-    public static Application newApplication(Class<?> cls, Context context) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public static Application newApplication(Class<?> cls, Context context) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         Application application = (Application) cls.newInstance();
         application.attach(context);
         return application;
@@ -676,13 +677,13 @@ public class Instrumentation {
         application.onCreate();
     }
 
-    public Activity newActivity(Class<?> cls, Context context, IBinder iBinder, Application application, Intent intent, ActivityInfo activityInfo, CharSequence charSequence, Activity activity, String str, Object obj) throws InstantiationException, IllegalAccessException {
+    public Activity newActivity(Class<?> cls, Context context, IBinder iBinder, Application application, Intent intent, ActivityInfo activityInfo, CharSequence charSequence, Activity activity, String str, Object obj) throws IllegalAccessException, InstantiationException {
         Activity activity2 = (Activity) cls.newInstance();
         activity2.attach(context, null, this, iBinder, 0, application == null ? new Application() : application, intent, activityInfo, charSequence, activity, str, (Activity.NonConfigurationInstances) obj, new Configuration(), null, null, null, null, null, null, null);
         return activity2;
     }
 
-    public Activity newActivity(ClassLoader classLoader, String str, Intent intent) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public Activity newActivity(ClassLoader classLoader, String str, Intent intent) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         return getFactory((intent == null || intent.getComponent() == null) ? null : intent.getComponent().getPackageName()).instantiateActivity(classLoader, str, intent);
     }
 
@@ -696,11 +697,11 @@ public class Instrumentation {
             Log.e(TAG, "Uninitialized ActivityThread, likely app-created Instrumentation, disabling AppComponentFactory", new Throwable());
             return AppComponentFactory.DEFAULT;
         }
-        LoadedApk peekPackageInfo = activityThread.peekPackageInfo(str, true);
-        if (peekPackageInfo == null) {
-            peekPackageInfo = this.mThread.getSystemContext().mPackageInfo;
+        LoadedApk loadedApkPeekPackageInfo = activityThread.peekPackageInfo(str, true);
+        if (loadedApkPeekPackageInfo == null) {
+            loadedApkPeekPackageInfo = this.mThread.getSystemContext().mPackageInfo;
         }
-        return peekPackageInfo.getAppFactory();
+        return loadedApkPeekPackageInfo.getAppFactory();
     }
 
     private void notifyStartActivityResult(int i, Bundle bundle) {
@@ -940,7 +941,7 @@ public class Instrumentation {
 
     public ActivityResult execStartActivity(Context context, IBinder iBinder, IBinder iBinder2, Activity activity, Intent intent, int i, Bundle bundle) {
         Bundle bundle2;
-        ActivityResult activityResult;
+        ActivityResult activityResultOnStartActivity;
         if (DEBUG_START_ACTIVITY) {
             StringBuilder sb = new StringBuilder("startActivity: who=");
             sb.append(context);
@@ -959,9 +960,9 @@ public class Instrumentation {
         }
         Objects.requireNonNull(intent);
         IApplicationThread iApplicationThread = (IApplicationThread) iBinder;
-        Uri onProvideReferrer = activity != null ? activity.onProvideReferrer() : null;
-        if (onProvideReferrer != null) {
-            intent.putExtra(Intent.EXTRA_REFERRER, onProvideReferrer);
+        Uri uriOnProvideReferrer = activity != null ? activity.onProvideReferrer() : null;
+        if (uriOnProvideReferrer != null) {
+            intent.putExtra(Intent.EXTRA_REFERRER, uriOnProvideReferrer);
         }
         if (isSdkSandboxAllowedToStartActivities()) {
             adjustIntentForCtsInSdkSandboxInstrumentation(intent);
@@ -979,13 +980,13 @@ public class Instrumentation {
                         if (bundle2 == null) {
                             bundle2 = ActivityOptions.makeBasic().toBundle();
                         }
-                        activityResult = activityMonitor.onStartActivity(context, intent, bundle2);
+                        activityResultOnStartActivity = activityMonitor.onStartActivity(context, intent, bundle2);
                     } else {
-                        activityResult = null;
+                        activityResultOnStartActivity = null;
                     }
-                    if (activityResult != null) {
+                    if (activityResultOnStartActivity != null) {
                         activityMonitor.mHits++;
-                        return activityResult;
+                        return activityResultOnStartActivity;
                     }
                     if (activityMonitor.match(context, null, intent)) {
                         activityMonitor.mHits++;
@@ -1008,9 +1009,9 @@ public class Instrumentation {
             }
             intent.migrateExtraStreamToClipData(context);
             intent.prepareToLeaveProcess(context);
-            int startActivity = ActivityTaskManager.getService().startActivity(iApplicationThread, context.getOpPackageName(), context.getAttributionTag(), intent, intent.resolveTypeIfNeeded(context.getContentResolver()), iBinder2, activity != null ? activity.mEmbeddedID : null, i, 0, null, bundle3);
-            notifyStartActivityResult(startActivity, bundle3);
-            checkStartActivityResult(startActivity, intent);
+            int iStartActivity = ActivityTaskManager.getService().startActivity(iApplicationThread, context.getOpPackageName(), context.getAttributionTag(), intent, intent.resolveTypeIfNeeded(context.getContentResolver()), iBinder2, activity != null ? activity.mEmbeddedID : null, i, 0, null, bundle3);
+            notifyStartActivityResult(iStartActivity, bundle3);
+            checkStartActivityResult(iStartActivity, intent);
             return null;
         } catch (RemoteException e) {
             throw new RuntimeException("Failure from system", e);
@@ -1021,10 +1022,10 @@ public class Instrumentation {
         execStartActivitiesAsUser(context, iBinder, iBinder2, activity, intentArr, bundle, context.getUserId());
     }
 
-    public int execStartActivitiesAsUser(Context context, IBinder iBinder, IBinder iBinder2, Activity activity, Intent[] intentArr, Bundle bundle, int i) {
+    public int execStartActivitiesAsUser(Context context, IBinder iBinder, IBinder iBinder2, Activity activity, Intent[] intentArr, Bundle bundle, int i) throws IOException {
         Bundle bundle2;
         int i2;
-        ActivityResult activityResult;
+        ActivityResult activityResultOnStartActivity;
         if (DEBUG_START_ACTIVITY) {
             StringJoiner stringJoiner = new StringJoiner(", ");
             for (Intent intent : intentArr) {
@@ -1070,11 +1071,11 @@ public class Instrumentation {
                         if (bundle2 == null) {
                             bundle2 = ActivityOptions.makeBasic().toBundle();
                         }
-                        activityResult = activityMonitor.onStartActivity(context, intentArr[0], bundle2);
+                        activityResultOnStartActivity = activityMonitor.onStartActivity(context, intentArr[0], bundle2);
                     } else {
-                        activityResult = null;
+                        activityResultOnStartActivity = null;
                     }
-                    if (activityResult != null) {
+                    if (activityResultOnStartActivity != null) {
                         activityMonitor.mHits++;
                         return -96;
                     }
@@ -1107,10 +1108,10 @@ public class Instrumentation {
                 intentArr[i4].prepareToLeaveProcess(context);
                 strArr[i4] = intentArr[i4].resolveTypeIfNeeded(context.getContentResolver());
             }
-            int startActivities = ActivityTaskManager.getService().startActivities(iApplicationThread, context.getOpPackageName(), context.getAttributionTag(), intentArr, strArr, iBinder2, bundle3, i2);
-            notifyStartActivityResult(startActivities, bundle3);
-            checkStartActivityResult(startActivities, intentArr[0]);
-            return startActivities;
+            int iStartActivities = ActivityTaskManager.getService().startActivities(iApplicationThread, context.getOpPackageName(), context.getAttributionTag(), intentArr, strArr, iBinder2, bundle3, i2);
+            notifyStartActivityResult(iStartActivities, bundle3);
+            checkStartActivityResult(iStartActivities, intentArr[0]);
+            return iStartActivities;
         } catch (RemoteException e) {
             throw new RuntimeException("Failure from system", e);
         }
@@ -1119,7 +1120,7 @@ public class Instrumentation {
     public ActivityResult execStartActivity(Context context, IBinder iBinder, IBinder iBinder2, String str, Intent intent, int i, Bundle bundle) {
         String str2;
         Bundle bundle2;
-        ActivityResult activityResult;
+        ActivityResult activityResultOnStartActivity;
         if (DEBUG_START_ACTIVITY) {
             StringBuilder sb = new StringBuilder("startActivity: who=");
             sb.append(context);
@@ -1156,13 +1157,13 @@ public class Instrumentation {
                         if (bundle2 == null) {
                             bundle2 = ActivityOptions.makeBasic().toBundle();
                         }
-                        activityResult = activityMonitor.onStartActivity(context, intent, bundle2);
+                        activityResultOnStartActivity = activityMonitor.onStartActivity(context, intent, bundle2);
                     } else {
-                        activityResult = null;
+                        activityResultOnStartActivity = null;
                     }
-                    if (activityResult != null) {
+                    if (activityResultOnStartActivity != null) {
                         activityMonitor.mHits++;
-                        return activityResult;
+                        return activityResultOnStartActivity;
                     }
                     if (activityMonitor.match(context, null, intent)) {
                         activityMonitor.mHits++;
@@ -1179,9 +1180,9 @@ public class Instrumentation {
         try {
             intent.migrateExtraStreamToClipData(context);
             intent.prepareToLeaveProcess(context);
-            int startActivity = ActivityTaskManager.getService().startActivity(iApplicationThread, context.getOpPackageName(), context.getAttributionTag(), intent, intent.resolveTypeIfNeeded(context.getContentResolver()), iBinder2, str2, i, 0, null, bundle3);
-            notifyStartActivityResult(startActivity, bundle3);
-            checkStartActivityResult(startActivity, intent);
+            int iStartActivity = ActivityTaskManager.getService().startActivity(iApplicationThread, context.getOpPackageName(), context.getAttributionTag(), intent, intent.resolveTypeIfNeeded(context.getContentResolver()), iBinder2, str2, i, 0, null, bundle3);
+            notifyStartActivityResult(iStartActivity, bundle3);
+            checkStartActivityResult(iStartActivity, intent);
             return null;
         } catch (RemoteException e) {
             throw new RuntimeException("Failure from system", e);
@@ -1191,7 +1192,7 @@ public class Instrumentation {
     public ActivityResult execStartActivity(Context context, IBinder iBinder, IBinder iBinder2, String str, Intent intent, int i, Bundle bundle, UserHandle userHandle) {
         String str2;
         Bundle bundle2;
-        ActivityResult activityResult;
+        ActivityResult activityResultOnStartActivity;
         if (DEBUG_START_ACTIVITY) {
             StringBuilder sb = new StringBuilder("startActivity: who=");
             sb.append(context);
@@ -1230,13 +1231,13 @@ public class Instrumentation {
                         if (bundle2 == null) {
                             bundle2 = ActivityOptions.makeBasic().toBundle();
                         }
-                        activityResult = activityMonitor.onStartActivity(context, intent, bundle2);
+                        activityResultOnStartActivity = activityMonitor.onStartActivity(context, intent, bundle2);
                     } else {
-                        activityResult = null;
+                        activityResultOnStartActivity = null;
                     }
-                    if (activityResult != null) {
+                    if (activityResultOnStartActivity != null) {
                         activityMonitor.mHits++;
-                        return activityResult;
+                        return activityResultOnStartActivity;
                     }
                     if (activityMonitor.match(context, null, intent)) {
                         activityMonitor.mHits++;
@@ -1253,9 +1254,9 @@ public class Instrumentation {
         try {
             intent.migrateExtraStreamToClipData(context);
             intent.prepareToLeaveProcess(context);
-            int startActivityAsUser = ActivityTaskManager.getService().startActivityAsUser(iApplicationThread, context.getOpPackageName(), context.getAttributionTag(), intent, intent.resolveTypeIfNeeded(context.getContentResolver()), iBinder2, str2, i, 0, null, bundle3, userHandle.getIdentifier());
-            notifyStartActivityResult(startActivityAsUser, bundle3);
-            checkStartActivityResult(startActivityAsUser, intent);
+            int iStartActivityAsUser = ActivityTaskManager.getService().startActivityAsUser(iApplicationThread, context.getOpPackageName(), context.getAttributionTag(), intent, intent.resolveTypeIfNeeded(context.getContentResolver()), iBinder2, str2, i, 0, null, bundle3, userHandle.getIdentifier());
+            notifyStartActivityResult(iStartActivityAsUser, bundle3);
+            checkStartActivityResult(iStartActivityAsUser, intent);
             return null;
         } catch (RemoteException e) {
             throw new RuntimeException("Failure from system", e);
@@ -1266,7 +1267,7 @@ public class Instrumentation {
         Bundle bundle2;
         boolean z2;
         int i3;
-        ActivityResult activityResult;
+        ActivityResult activityResultOnStartActivity;
         if (DEBUG_START_ACTIVITY) {
             StringBuilder sb = new StringBuilder("startActivity: who=");
             sb.append(context);
@@ -1309,13 +1310,13 @@ public class Instrumentation {
                         if (bundle2 == null) {
                             bundle2 = ActivityOptions.makeBasic().toBundle();
                         }
-                        activityResult = activityMonitor.onStartActivity(context, intent, bundle2);
+                        activityResultOnStartActivity = activityMonitor.onStartActivity(context, intent, bundle2);
                     } else {
-                        activityResult = null;
+                        activityResultOnStartActivity = null;
                     }
-                    if (activityResult != null) {
+                    if (activityResultOnStartActivity != null) {
                         activityMonitor.mHits++;
-                        return activityResult;
+                        return activityResultOnStartActivity;
                     }
                     if (activityMonitor.match(context, null, intent)) {
                         activityMonitor.mHits++;
@@ -1338,9 +1339,9 @@ public class Instrumentation {
             }
             intent.migrateExtraStreamToClipData(context);
             intent.prepareToLeaveProcess(context);
-            int startActivityAsCaller = ActivityTaskManager.getService().startActivityAsCaller(iApplicationThread, context.getOpPackageName(), intent, intent.resolveTypeIfNeeded(context.getContentResolver()), iBinder2, activity != null ? activity.mEmbeddedID : null, i, 0, null, bundle3, z2, i3);
-            notifyStartActivityResult(startActivityAsCaller, bundle3);
-            checkStartActivityResult(startActivityAsCaller, intent);
+            int iStartActivityAsCaller = ActivityTaskManager.getService().startActivityAsCaller(iApplicationThread, context.getOpPackageName(), intent, intent.resolveTypeIfNeeded(context.getContentResolver()), iBinder2, activity != null ? activity.mEmbeddedID : null, i, 0, null, bundle3, z2, i3);
+            notifyStartActivityResult(iStartActivityAsCaller, bundle3);
+            checkStartActivityResult(iStartActivityAsCaller, intent);
             return null;
         } catch (RemoteException e) {
             throw new RuntimeException("Failure from system", e);
@@ -1348,7 +1349,7 @@ public class Instrumentation {
     }
 
     public void execStartActivityFromAppTask(Context context, IBinder iBinder, IAppTask iAppTask, Intent intent, Bundle bundle) {
-        ActivityResult activityResult;
+        ActivityResult activityResultOnStartActivity;
         if (DEBUG_START_ACTIVITY) {
             Log.d(TAG, "startActivity: who=" + context + " intent=" + intent + " options=" + bundle, new Throwable());
         }
@@ -1370,11 +1371,11 @@ public class Instrumentation {
                         if (bundle == null) {
                             bundle = ActivityOptions.makeBasic().toBundle();
                         }
-                        activityResult = activityMonitor.onStartActivity(context, intent, bundle);
+                        activityResultOnStartActivity = activityMonitor.onStartActivity(context, intent, bundle);
                     } else {
-                        activityResult = null;
+                        activityResultOnStartActivity = null;
                     }
-                    if (activityResult != null) {
+                    if (activityResultOnStartActivity != null) {
                         activityMonitor.mHits++;
                         return;
                     } else if (activityMonitor.match(context, null, intent)) {
@@ -1392,9 +1393,9 @@ public class Instrumentation {
         try {
             intent.migrateExtraStreamToClipData(context);
             intent.prepareToLeaveProcess(context);
-            int startActivity = iAppTask.startActivity(iApplicationThread.asBinder(), context.getOpPackageName(), context.getAttributionTag(), intent, intent.resolveTypeIfNeeded(context.getContentResolver()), bundle2);
-            notifyStartActivityResult(startActivity, bundle2);
-            checkStartActivityResult(startActivity, intent);
+            int iStartActivity = iAppTask.startActivity(iApplicationThread.asBinder(), context.getOpPackageName(), context.getAttributionTag(), intent, intent.resolveTypeIfNeeded(context.getContentResolver()), bundle2);
+            notifyStartActivityResult(iStartActivity, bundle2);
+            checkStartActivityResult(iStartActivity, intent);
         } catch (RemoteException e) {
             throw new RuntimeException("Failure from system", e);
         }
@@ -1491,12 +1492,12 @@ public class Instrumentation {
                 this.mUiAutomation.connect(i);
                 return this.mUiAutomation;
             }
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             try {
                 this.mUiAutomation.connectWithTimeout(i, 60000L);
                 return this.mUiAutomation;
             } catch (TimeoutException e) {
-                Log.e(TAG, "Unable to connect to UiAutomation. Waited for " + (SystemClock.uptimeMillis() - uptimeMillis) + " ms", e);
+                Log.e(TAG, "Unable to connect to UiAutomation. Waited for " + (SystemClock.uptimeMillis() - jUptimeMillis) + " ms", e);
                 this.mUiAutomation.destroy();
                 this.mUiAutomation = null;
             }

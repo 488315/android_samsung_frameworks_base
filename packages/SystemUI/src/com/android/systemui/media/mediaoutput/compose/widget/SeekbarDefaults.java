@@ -82,7 +82,6 @@ import kotlin.ranges.ClosedFloatRange;
 import kotlin.ranges.ClosedFloatingPointRange;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SeekbarDefaults {
     public static final SeekbarDefaults INSTANCE = new SeekbarDefaults();
@@ -153,18 +152,18 @@ public final class SeekbarDefaults {
                     i3 = -57345;
                     failure = new Result.Failure(th);
                 }
-                Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-                if (m3422exceptionOrNullimpl != null) {
-                    m3422exceptionOrNullimpl.printStackTrace();
+                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                if (thM3442exceptionOrNullimpl != null) {
+                    thM3442exceptionOrNullimpl.printStackTrace();
                 }
                 if (failure instanceof Result.Failure) {
                     failure = null;
                 }
-                ViewModelProvider.Factory factory = (ViewModelProvider.Factory) failure;
-                if (factory == null) {
-                    factory = ViewModelKt.createDaggerViewModelFactory(current);
+                ViewModelProvider.Factory factoryCreateDaggerViewModelFactory = (ViewModelProvider.Factory) failure;
+                if (factoryCreateDaggerViewModelFactory == null) {
+                    factoryCreateDaggerViewModelFactory = ViewModelKt.createDaggerViewModelFactory(current);
                 }
-                ViewModel viewModel = ViewModelKt.get(current, LabsViewModel.class, factory, defaultViewModelCreationExtras);
+                ViewModel viewModel = ViewModelKt.get(current, LabsViewModel.class, factoryCreateDaggerViewModelFactory, defaultViewModelCreationExtras);
                 composerImpl.end(false);
                 labsViewModel2 = (LabsViewModel) viewModel;
                 i4 = i5 & i3;
@@ -180,10 +179,10 @@ public final class SeekbarDefaults {
             boolean z2 = composerImpl.consume(CompositionLocalsKt.LocalLayoutDirection) == LayoutDirection.Rtl;
             Modifier.Companion companion = Modifier.Companion;
             Alignment.Companion.getClass();
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, companion);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, companion);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -196,76 +195,76 @@ public final class SeekbarDefaults {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
             composableLambdaImpl.invoke(function1, composerImpl, Integer.valueOf(((i4 >> 9) & 14) | ((i4 >> 12) & 112)));
             final boolean z3 = z2;
-            MutableState collectAsState = SnapshotStateKt.collectAsState(labsViewModel2.isSupportVolumeInteraction, Boolean.TRUE, null, composerImpl, 48, 2);
+            MutableState mutableStateCollectAsState = SnapshotStateKt.collectAsState(labsViewModel2.isSupportVolumeInteraction, Boolean.TRUE, null, composerImpl, 48, 2);
             final SliderState sliderState = (SliderState) mutableState.getValue();
-            if (sliderState == null || !((Boolean) collectAsState.getValue()).booleanValue()) {
+            if (sliderState == null || !((Boolean) mutableStateCollectAsState.getValue()).booleanValue()) {
                 sliderState = null;
             }
             composerImpl.startReplaceGroup(1936250156);
             if (sliderState != null) {
                 composerImpl.startReplaceGroup(1101423168);
-                Object rememberedValue = composerImpl.rememberedValue();
+                Object objRememberedValue = composerImpl.rememberedValue();
                 Composer.Companion.getClass();
                 Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-                if (rememberedValue == composer$Companion$Empty$1) {
-                    rememberedValue = SnapshotStateKt.mutableStateOf$default(Float.valueOf(1.0f));
-                    composerImpl.updateRememberedValue(rememberedValue);
+                if (objRememberedValue == composer$Companion$Empty$1) {
+                    objRememberedValue = SnapshotStateKt.mutableStateOf$default(Float.valueOf(1.0f));
+                    composerImpl.updateRememberedValue(objRememberedValue);
                 }
-                final MutableState mutableState4 = (MutableState) rememberedValue;
+                final MutableState mutableState4 = (MutableState) objRememberedValue;
                 composerImpl.end(false);
-                Modifier fillMaxSize = SizeKt.fillMaxSize(modifier, 1.0f);
+                Modifier modifierFillMaxSize = SizeKt.fillMaxSize(modifier, 1.0f);
                 composerImpl.startReplaceGroup(1101429232);
-                boolean changedInstance = composerImpl.changedInstance(sliderState);
-                Object rememberedValue2 = composerImpl.rememberedValue();
-                if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
-                    rememberedValue2 = new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$$ExternalSyntheticLambda2
+                boolean zChangedInstance = composerImpl.changedInstance(sliderState);
+                Object objRememberedValue2 = composerImpl.rememberedValue();
+                if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
+                    objRememberedValue2 = new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$$ExternalSyntheticLambda2
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             SeekbarDefaults seekbarDefaults = SeekbarDefaults.INSTANCE;
                             float f = (int) (((IntSize) obj).packedValue >> 32);
-                            ClosedFloatingPointRange closedFloatingPointRange = SliderState.this.valueRange;
+                            ClosedFloatingPointRange closedFloatingPointRange = sliderState.valueRange;
                             mutableState4.setValue(Float.valueOf(f / (((ClosedFloatRange) closedFloatingPointRange)._endInclusive - ((ClosedFloatRange) closedFloatingPointRange)._start)));
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue2);
+                    composerImpl.updateRememberedValue(objRememberedValue2);
                 }
                 composerImpl.end(false);
-                Modifier onSizeChanged = OnRemeasuredModifierKt.onSizeChanged(fillMaxSize, (Function1) rememberedValue2);
+                Modifier modifierOnSizeChanged = OnRemeasuredModifierKt.onSizeChanged(modifierFillMaxSize, (Function1) objRememberedValue2);
                 StaticProvidableCompositionLocal staticProvidableCompositionLocal = InteractiveComponentSizeKt.LocalMinimumInteractiveComponentSize;
-                Modifier focusable$default = FocusableKt.focusable$default(onSizeChanged.then(MinimumInteractiveModifier.INSTANCE), false, null, 2);
+                Modifier modifierFocusable$default = FocusableKt.focusable$default(modifierOnSizeChanged.then(MinimumInteractiveModifier.INSTANCE), false, null, 2);
                 Unit unit = Unit.INSTANCE;
                 composerImpl.startReplaceGroup(1101438313);
-                boolean changedInstance2 = composerImpl.changedInstance(sliderState) | ((i4 & 896) == 256) | composerImpl.changed(z3) | ((i4 & 7168) == 2048);
-                Object rememberedValue3 = composerImpl.rememberedValue();
-                if (changedInstance2 || rememberedValue3 == composer$Companion$Empty$1) {
+                boolean zChangedInstance2 = composerImpl.changedInstance(sliderState) | ((i4 & 896) == 256) | composerImpl.changed(z3) | ((i4 & 7168) == 2048);
+                Object objRememberedValue3 = composerImpl.rememberedValue();
+                if (zChangedInstance2 || objRememberedValue3 == composer$Companion$Empty$1) {
                     final SliderState sliderState2 = sliderState;
-                    rememberedValue3 = new PointerInputEventHandler() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$SliderContainer$1$2$2$1
+                    objRememberedValue3 = new PointerInputEventHandler() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$SliderContainer$1$2$2$1
                         @Override // androidx.compose.ui.input.pointer.PointerInputEventHandler
                         public final Object invoke(PointerInputScope pointerInputScope, Continuation continuation) {
                             final Ref$FloatRef ref$FloatRef = new Ref$FloatRef();
-                            ref$FloatRef.element = SliderState.this.getValue();
+                            ref$FloatRef.element = sliderState2.getValue();
                             final Ref$FloatRef ref$FloatRef2 = new Ref$FloatRef();
                             ref$FloatRef2.element = ref$FloatRef.element;
                             final Ref$FloatRef ref$FloatRef3 = new Ref$FloatRef();
-                            final SliderState sliderState3 = SliderState.this;
+                            final SliderState sliderState3 = sliderState2;
                             final MutableState mutableState5 = mutableState3;
                             Function1 function12 = new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$SliderContainer$1$2$2$1$$ExternalSyntheticLambda0
                                 @Override // kotlin.jvm.functions.Function1
                                 /* renamed from: invoke */
-                                public final Object mo779invoke(Object obj) {
-                                    Ref$FloatRef.this.element = Float.intBitsToFloat((int) (((Offset) obj).packedValue >> 32));
+                                public final Object mo781invoke(Object obj) {
+                                    ref$FloatRef3.element = Float.intBitsToFloat((int) (((Offset) obj).packedValue >> 32));
                                     ref$FloatRef.element = sliderState3.getValue();
                                     mutableState5.setValue(Boolean.TRUE);
                                     return Unit.INSTANCE;
@@ -320,11 +319,11 @@ public final class SeekbarDefaults {
                             final Function1 function13 = function1;
                             final MutableState mutableState6 = mutableState4;
                             final boolean z4 = z3;
-                            Object detectHorizontalDragGestures = DragGestureDetectorKt.detectHorizontalDragGestures(pointerInputScope, function12, function02, function03, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$SliderContainer$1$2$2$1$$ExternalSyntheticLambda3
+                            Object objDetectHorizontalDragGestures = DragGestureDetectorKt.detectHorizontalDragGestures(pointerInputScope, function12, function02, function03, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$SliderContainer$1$2$2$1$$ExternalSyntheticLambda3
                                 @Override // kotlin.jvm.functions.Function2
                                 public final Object invoke(Object obj, Object obj2) {
-                                    float intBitsToFloat;
-                                    float f;
+                                    float fIntBitsToFloat;
+                                    float fIntBitsToFloat2;
                                     PointerInputChange pointerInputChange = (PointerInputChange) obj;
                                     ((Float) obj2).getClass();
                                     pointerInputChange.consume();
@@ -332,32 +331,32 @@ public final class SeekbarDefaults {
                                     boolean z5 = z4;
                                     long j = pointerInputChange.position;
                                     if (z5) {
-                                        intBitsToFloat = ref$FloatRef4.element;
-                                        f = Float.intBitsToFloat((int) (j >> 32));
+                                        fIntBitsToFloat = ref$FloatRef4.element;
+                                        fIntBitsToFloat2 = Float.intBitsToFloat((int) (j >> 32));
                                     } else {
-                                        intBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
-                                        f = ref$FloatRef4.element;
+                                        fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
+                                        fIntBitsToFloat2 = ref$FloatRef4.element;
                                     }
-                                    float f2 = intBitsToFloat - f;
-                                    float f3 = ref$FloatRef.element;
+                                    float f = fIntBitsToFloat - fIntBitsToFloat2;
+                                    float f2 = ref$FloatRef.element;
                                     SeekbarDefaults seekbarDefaults = SeekbarDefaults.INSTANCE;
-                                    float floatValue = ((Number) RangesKt___RangesKt.coerceIn(Float.valueOf((f2 / ((Number) mutableState6.getValue()).floatValue()) + f3), sliderState3.valueRange)).floatValue();
+                                    float fFloatValue = ((Number) RangesKt___RangesKt.coerceIn(Float.valueOf((f / ((Number) mutableState6.getValue()).floatValue()) + f2), sliderState3.valueRange)).floatValue();
                                     Ref$FloatRef ref$FloatRef5 = ref$FloatRef2;
-                                    if (ref$FloatRef5.element != floatValue) {
-                                        ref$FloatRef5.element = floatValue;
-                                        function13.mo779invoke(Float.valueOf(floatValue));
+                                    if (ref$FloatRef5.element != fFloatValue) {
+                                        ref$FloatRef5.element = fFloatValue;
+                                        function13.mo781invoke(Float.valueOf(fFloatValue));
                                     }
                                     return Unit.INSTANCE;
                                 }
                             }, continuation);
-                            return detectHorizontalDragGestures == CoroutineSingletons.COROUTINE_SUSPENDED ? detectHorizontalDragGestures : Unit.INSTANCE;
+                            return objDetectHorizontalDragGestures == CoroutineSingletons.COROUTINE_SUSPENDED ? objDetectHorizontalDragGestures : Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue3);
+                    composerImpl.updateRememberedValue(objRememberedValue3);
                 }
                 z = false;
                 composerImpl.end(false);
-                BoxKt.Box(SuspendingPointerInputFilterKt.pointerInput(focusable$default, unit, (PointerInputEventHandler) rememberedValue3), composerImpl, 0);
+                BoxKt.Box(SuspendingPointerInputFilterKt.pointerInput(modifierFocusable$default, unit, (PointerInputEventHandler) objRememberedValue3), composerImpl, 0);
             } else {
                 z = false;
             }
@@ -366,16 +365,16 @@ public final class SeekbarDefaults {
             }
             labsViewModel3 = labsViewModel2;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$$ExternalSyntheticLambda3
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$$ExternalSyntheticLambda3
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     Composer composer2 = (Composer) obj;
                     ((Integer) obj2).getClass();
                     SeekbarDefaults seekbarDefaults = SeekbarDefaults.INSTANCE;
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    SeekbarDefaults.this.SliderContainer(mutableState, modifier, mutableState2, function1, labsViewModel3, composableLambdaImpl, composer2, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    this.f$0.SliderContainer(mutableState, modifier, mutableState2, function1, labsViewModel3, composableLambdaImpl, composer2, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -383,7 +382,7 @@ public final class SeekbarDefaults {
     }
 
     /* renamed from: Thumb-FJfuzF0, reason: not valid java name */
-    public final void m2619ThumbFJfuzF0(State state, Modifier modifier, final SliderColors sliderColors, boolean z, float f, Composer composer, final int i) {
+    public final void m2636ThumbFJfuzF0(State state, Modifier modifier, final SliderColors sliderColors, boolean z, float f, Composer composer, final int i) {
         final boolean z2;
         State state2;
         Modifier modifier2;
@@ -410,25 +409,25 @@ public final class SeekbarDefaults {
                 ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults.Thumb (Controllers.kt:234)");
             }
             composerImpl.startReplaceGroup(1752684879);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
-            if (rememberedValue == Composer.Companion.Empty) {
+            if (objRememberedValue == Composer.Companion.Empty) {
                 state2 = state;
                 composerImpl.updateRememberedValue(state2);
-                rememberedValue = state2;
+                objRememberedValue = state2;
             } else {
                 state2 = state;
             }
-            State state3 = (State) rememberedValue;
+            State state3 = (State) objRememberedValue;
             composerImpl.end(false);
             modifier2 = modifier;
             f2 = f;
-            Modifier m139size3ABfNKs = SizeKt.m139size3ABfNKs(modifier2, f2);
+            Modifier modifierM140size3ABfNKs = SizeKt.m140size3ABfNKs(modifier2, f2);
             Alignment.Companion.getClass();
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, m139size3ABfNKs);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierM140size3ABfNKs);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -441,13 +440,13 @@ public final class SeekbarDefaults {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
             AnimatedVisibilityKt.AnimatedVisibility(!((Boolean) state3.getValue()).booleanValue(), null, EnterExitTransitionKt.fadeIn$default(null, 3).plus(EnterExitTransitionKt.m5scaleInL8ZKhE$default(null, 0.0f, 7)), EnterExitTransitionKt.m6scaleOutL8ZKhE$default(null, 0.0f, 7).plus(EnterExitTransitionKt.fadeOut$default(null, 3)), null, ComposableLambdaKt.rememberComposableLambda(135604711, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$Thumb$1$1
                 @Override // kotlin.jvm.functions.Function3
@@ -457,15 +456,15 @@ public final class SeekbarDefaults {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults.Thumb.<anonymous>.<anonymous> (Controllers.kt:243)");
                     }
-                    Modifier fillMaxSize = SizeKt.fillMaxSize(Modifier.Companion, 1.0f);
+                    Modifier modifierFillMaxSize = SizeKt.fillMaxSize(Modifier.Companion, 1.0f);
                     float f3 = 2;
                     Dp.Companion companion = Dp.Companion;
-                    SliderColors sliderColors2 = SliderColors.this;
+                    SliderColors sliderColors2 = sliderColors;
                     long j = sliderColors2.activeTrackColor;
                     RoundedCornerShape roundedCornerShape = RoundedCornerShapeKt.CircleShape;
-                    Modifier clip = ClipKt.clip(PaddingKt.m124padding3ABfNKs(BorderKt.m28borderxT4_qwU(fillMaxSize, f3, j, roundedCornerShape), f3), roundedCornerShape);
+                    Modifier modifierClip = ClipKt.clip(PaddingKt.m125padding3ABfNKs(BorderKt.m28borderxT4_qwU(modifierFillMaxSize, f3, j, roundedCornerShape), f3), roundedCornerShape);
                     SeekbarDefaults.INSTANCE.getClass();
-                    SpacerKt.Spacer(composer2, BackgroundKt.m26backgroundbw27NRU(clip, z2 ? sliderColors2.thumbColor : sliderColors2.disabledThumbColor, RectangleShapeKt.RectangleShape));
+                    SpacerKt.Spacer(composer2, BackgroundKt.m26backgroundbw27NRU(modifierClip, z2 ? sliderColors2.thumbColor : sliderColors2.disabledThumbColor, RectangleShapeKt.RectangleShape));
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }
@@ -478,12 +477,12 @@ public final class SeekbarDefaults {
             }
             z3 = z2;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
             final State state4 = state2;
             final Modifier modifier3 = modifier2;
             final float f3 = f2;
-            endRestartGroup.block = new Function2(state4, modifier3, sliderColors, z3, f3, i) { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$$ExternalSyntheticLambda1
+            recomposeScopeImplEndRestartGroup.block = new Function2(state4, modifier3, sliderColors, z3, f3, i) { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$$ExternalSyntheticLambda1
                 public final /* synthetic */ State f$1;
                 public final /* synthetic */ Modifier f$2;
                 public final /* synthetic */ SliderColors f$3;
@@ -495,8 +494,8 @@ public final class SeekbarDefaults {
                     Composer composer2 = (Composer) obj;
                     ((Integer) obj2).getClass();
                     SeekbarDefaults seekbarDefaults = SeekbarDefaults.INSTANCE;
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(221239);
-                    SeekbarDefaults.this.m2619ThumbFJfuzF0(this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, composer2, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(221239);
+                    this.f$0.m2636ThumbFJfuzF0(this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, composer2, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -544,53 +543,53 @@ public final class SeekbarDefaults {
                 ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults.Track (Controllers.kt:262)");
             }
             composerImpl.startReplaceGroup(2020247279);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
-                rememberedValue = SnapshotStateKt.mutableStateOf$default(Float.valueOf(1.5f));
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == composer$Companion$Empty$1) {
+                objRememberedValue = SnapshotStateKt.mutableStateOf$default(Float.valueOf(1.5f));
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            MutableState mutableState = (MutableState) rememberedValue;
+            MutableState mutableState = (MutableState) objRememberedValue;
             composerImpl.end(false);
-            float floatValue = ((Number) mutableState.getValue()).floatValue();
+            float fFloatValue = ((Number) mutableState.getValue()).floatValue();
             Dp.Companion companion3 = Dp.Companion;
-            State m8animateDpAsStateAjpBEmI = AnimateAsStateKt.m8animateDpAsStateAjpBEmI(floatValue, null, "trackRound", composerImpl, 384, 10);
+            State stateM8animateDpAsStateAjpBEmI = AnimateAsStateKt.m8animateDpAsStateAjpBEmI(fFloatValue, null, "trackRound", composerImpl, 384, 10);
             composerImpl.startReplaceGroup(2020252461);
-            Object rememberedValue2 = composerImpl.rememberedValue();
-            if (rememberedValue2 == composer$Companion$Empty$1) {
-                rememberedValue2 = SnapshotStateKt.mutableStateOf$default(Float.valueOf(3.0f));
-                composerImpl.updateRememberedValue(rememberedValue2);
+            Object objRememberedValue2 = composerImpl.rememberedValue();
+            if (objRememberedValue2 == composer$Companion$Empty$1) {
+                objRememberedValue2 = SnapshotStateKt.mutableStateOf$default(Float.valueOf(3.0f));
+                composerImpl.updateRememberedValue(objRememberedValue2);
             }
-            MutableState mutableState2 = (MutableState) rememberedValue2;
+            MutableState mutableState2 = (MutableState) objRememberedValue2;
             composerImpl.end(false);
-            State m8animateDpAsStateAjpBEmI2 = AnimateAsStateKt.m8animateDpAsStateAjpBEmI(((Number) mutableState2.getValue()).floatValue(), null, "trackHeight", composerImpl, 384, 10);
+            State stateM8animateDpAsStateAjpBEmI2 = AnimateAsStateKt.m8animateDpAsStateAjpBEmI(((Number) mutableState2.getValue()).floatValue(), null, "trackHeight", composerImpl, 384, 10);
             composerImpl.startReplaceGroup(2020257668);
-            Object rememberedValue3 = composerImpl.rememberedValue();
-            if (rememberedValue3 == composer$Companion$Empty$1) {
+            Object objRememberedValue3 = composerImpl.rememberedValue();
+            if (objRememberedValue3 == composer$Companion$Empty$1) {
                 composerImpl.updateRememberedValue(state);
-                rememberedValue3 = state;
+                objRememberedValue3 = state;
             }
-            State state2 = (State) rememberedValue3;
+            State state2 = (State) objRememberedValue3;
             composerImpl.end(false);
             Boolean bool = (Boolean) state2.getValue();
             bool.getClass();
             composerImpl.startReplaceGroup(2020259640);
-            Object rememberedValue4 = composerImpl.rememberedValue();
-            if (rememberedValue4 == composer$Companion$Empty$1) {
-                rememberedValue4 = new SeekbarDefaults$Track$1$1(state2, mutableState2, mutableState, null);
-                composerImpl.updateRememberedValue(rememberedValue4);
+            Object objRememberedValue4 = composerImpl.rememberedValue();
+            if (objRememberedValue4 == composer$Companion$Empty$1) {
+                objRememberedValue4 = new SeekbarDefaults$Track$1$1(state2, mutableState2, mutableState, null);
+                composerImpl.updateRememberedValue(objRememberedValue4);
             }
             composerImpl.end(false);
-            EffectsKt.LaunchedEffect(composerImpl, bool, (Function2) rememberedValue4);
-            Modifier clip = ClipKt.clip(SizeKt.m130height3ABfNKs(SizeKt.fillMaxWidth(Modifier.Companion, 1.0f), ((Dp) m8animateDpAsStateAjpBEmI2.getValue()).value), RoundedCornerShapeKt.m186RoundedCornerShape0680j_4(((Dp) m8animateDpAsStateAjpBEmI.getValue()).value));
+            EffectsKt.LaunchedEffect(composerImpl, bool, (Function2) objRememberedValue4);
+            Modifier modifierClip = ClipKt.clip(SizeKt.m131height3ABfNKs(SizeKt.fillMaxWidth(Modifier.Companion, 1.0f), ((Dp) stateM8animateDpAsStateAjpBEmI2.getValue()).value), RoundedCornerShapeKt.m187RoundedCornerShape0680j_4(((Dp) stateM8animateDpAsStateAjpBEmI.getValue()).value));
             Arrangement.INSTANCE.getClass();
             Arrangement$Start$1 arrangement$Start$1 = Arrangement.Start;
             Alignment.Companion.getClass();
             RowMeasurePolicy rowMeasurePolicy = RowKt.rowMeasurePolicy(arrangement$Start$1, Alignment.Companion.Top, composerImpl, 0);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, clip);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierClip);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -603,13 +602,13 @@ public final class SeekbarDefaults {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, rowMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, rowMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             RowScopeInstance rowScopeInstance = RowScopeInstance.INSTANCE;
             float f = ((ClosedFloatRange) sliderState.valueRange)._endInclusive;
             ClosedFloatRange closedFloatRange = (ClosedFloatRange) sliderState.valueRange;
@@ -634,18 +633,18 @@ public final class SeekbarDefaults {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
             final SeekbarDefaults seekbarDefaults2 = seekbarDefaults;
             final Modifier.Companion companion4 = companion2;
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$$ExternalSyntheticLambda0
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SeekbarDefaults$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     Composer composer2 = (Composer) obj;
                     ((Integer) obj2).getClass();
                     SeekbarDefaults seekbarDefaults3 = SeekbarDefaults.INSTANCE;
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    SeekbarDefaults.this.Track(sliderState, state, companion4, sliderColors, composer2, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    this.f$0.Track(sliderState, state, companion4, sliderColors, composer2, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

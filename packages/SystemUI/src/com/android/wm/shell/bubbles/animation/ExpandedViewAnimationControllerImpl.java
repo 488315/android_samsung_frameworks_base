@@ -19,7 +19,6 @@ import com.android.wm.shell.bubbles.BubblePositioner;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.taskview.TaskView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ExpandedViewAnimationControllerImpl {
     public static final AnonymousClass1 COLLAPSE_HEIGHT_PROPERTY = new FloatPropertyCompat("CollapseSpring") { // from class: com.android.wm.shell.bubbles.animation.ExpandedViewAnimationControllerImpl.1
@@ -86,7 +85,7 @@ public class ExpandedViewAnimationControllerImpl {
             if (objectAnimator != null) {
                 objectAnimator.cancel();
             }
-            int i2 = 0;
+            int iMax = 0;
             if (z) {
                 BubbleExpandedView bubbleExpandedView = this.mExpandedView;
                 bubbleExpandedView.getClass();
@@ -98,7 +97,7 @@ public class ExpandedViewAnimationControllerImpl {
                 if (taskView != null) {
                     taskView.getBoundsOnScreen(rect);
                 }
-                int i3 = rect.bottom;
+                int i2 = rect.bottom;
                 BubblePositioner bubblePositioner = this.mPositioner;
                 boolean z2 = bubblePositioner.mImeVisible;
                 if (z2) {
@@ -106,11 +105,11 @@ public class ExpandedViewAnimationControllerImpl {
                 } else {
                     i = 0;
                 }
-                i2 = Math.max(i3 - i, 0);
+                iMax = Math.max(i2 - i, 0);
             }
-            ObjectAnimator ofInt = ObjectAnimator.ofInt(this.mExpandedView, BubbleExpandedView.BOTTOM_CLIP_PROPERTY, i2);
-            this.mBottomClipAnim = ofInt;
-            ofInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.bubbles.animation.ExpandedViewAnimationControllerImpl.3
+            ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(this.mExpandedView, BubbleExpandedView.BOTTOM_CLIP_PROPERTY, iMax);
+            this.mBottomClipAnim = objectAnimatorOfInt;
+            objectAnimatorOfInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.bubbles.animation.ExpandedViewAnimationControllerImpl.3
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     ExpandedViewAnimationControllerImpl.this.mBottomClipAnim = null;

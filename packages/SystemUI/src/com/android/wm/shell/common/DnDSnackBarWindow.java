@@ -8,7 +8,6 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DnDSnackBarWindow extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -30,9 +29,9 @@ public class DnDSnackBarWindow extends LinearLayout {
     public final void hide() {
         DnDSnackBarController dnDSnackBarController = this.mCallbacks;
         dnDSnackBarController.mWasShownSnackBar = true;
-        SharedPreferences.Editor edit = dnDSnackBarController.mSnackBarPref.edit();
-        edit.putBoolean("snack_bar_shown", dnDSnackBarController.mWasShownSnackBar);
-        edit.apply();
+        SharedPreferences.Editor editorEdit = dnDSnackBarController.mSnackBarPref.edit();
+        editorEdit.putBoolean("snack_bar_shown", dnDSnackBarController.mWasShownSnackBar);
+        editorEdit.apply();
         this.mWindowManager.removeViewImmediate(this);
     }
 

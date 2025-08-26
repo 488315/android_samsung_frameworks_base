@@ -27,33 +27,35 @@ public final class MetaDataUtil {
         return exifTags;
     }
 
-    public static ExifInterface copyExif(FileInputStream fileInputStream, RandomAccessFile randomAccessFile) {
+    public static ExifInterface copyExif(FileInputStream fileInputStream, RandomAccessFile randomAccessFile) throws IOException, NumberFormatException {
+        ExifInterface exifInterface;
+        ExifInterface exifInterface2;
         Log.d(TAG, "in: " + fileInputStream + ", out: " + randomAccessFile);
-        ExifInterface exifInterface = null;
+        ExifInterface exifInterface3 = null;
         try {
             fileInputStream.getChannel().position(0L);
             randomAccessFile.getChannel().position(0L);
-            ExifInterface exifInterface2 = new ExifInterface(fileInputStream.getFD());
-            ExifInterface exifInterface3 = new ExifInterface(randomAccessFile.getFD());
-            try {
-                for (String str : exifTags) {
-                    if (exifInterface2.hasAttribute(str)) {
-                        exifInterface3.setAttribute(str, exifInterface2.getAttribute(str));
-                    }
+            exifInterface = new ExifInterface(fileInputStream.getFD());
+            exifInterface2 = new ExifInterface(randomAccessFile.getFD());
+        } catch (IOException e) {
+            e = e;
+        }
+        try {
+            for (String str : exifTags) {
+                if (exifInterface.hasAttribute(str)) {
+                    exifInterface2.setAttribute(str, exifInterface.getAttribute(str));
                 }
-                return exifInterface3;
-            } catch (IOException e) {
-                e = e;
-                exifInterface = exifInterface3;
-                e.printStackTrace();
-                return exifInterface;
             }
+            return exifInterface2;
         } catch (IOException e2) {
             e = e2;
+            exifInterface3 = exifInterface2;
+            e.printStackTrace();
+            return exifInterface3;
         }
     }
 
-    public static ArrayList<ByteBuffer> getAppNMetadata(FileInputStream fileInputStream) {
+    public static ArrayList<ByteBuffer> getAppNMetadata(FileInputStream fileInputStream) throws IOException {
         Log.d(TAG, "getAppNMetadata E");
         ArrayList<ByteBuffer> arrayList = new ArrayList<>();
         byte[] bArr = new byte[1024];
@@ -77,13 +79,13 @@ public final class MetaDataUtil {
                     int i3 = iArr[1];
                     if (226 <= i3 && 239 >= i3) {
                         Log.d(str, "add APP" + (iArr[1] & 15) + " meta(" + i2 + ')');
-                        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(i2 + 2);
-                        allocateDirect.put((byte) iArr[0]);
-                        allocateDirect.put((byte) iArr[1]);
-                        allocateDirect.put(bArr, 0, 2);
-                        fileInputStream.getChannel().read(allocateDirect);
-                        allocateDirect.rewind();
-                        arrayList.add(allocateDirect);
+                        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(i2 + 2);
+                        byteBufferAllocateDirect.put((byte) iArr[0]);
+                        byteBufferAllocateDirect.put((byte) iArr[1]);
+                        byteBufferAllocateDirect.put(bArr, 0, 2);
+                        fileInputStream.getChannel().read(byteBufferAllocateDirect);
+                        byteBufferAllocateDirect.rewind();
+                        arrayList.add(byteBufferAllocateDirect);
                     } else {
                         if (i3 == 218) {
                             Log.d(str, "EOS reached");
@@ -100,27 +102,27 @@ public final class MetaDataUtil {
         return arrayList;
     }
 
-    public static void setAppNMetadata(ArrayList<ByteBuffer> arrayList, RandomAccessFile randomAccessFile) {
+    public static void setAppNMetadata(ArrayList<ByteBuffer> arrayList, RandomAccessFile randomAccessFile) throws IOException {
         Log.d(TAG, "setICCProfile E");
         try {
             FileChannel channel = randomAccessFile.getChannel();
-            ByteBuffer allocateDirect = ByteBuffer.allocateDirect(((int) channel.size()) + arrayList.stream().mapToInt(new ToIntFunction() { // from class: com.samsung.android.sume.core.MetaDataUtil$$ExternalSyntheticLambda0
+            ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(((int) channel.size()) + arrayList.stream().mapToInt(new ToIntFunction() { // from class: com.samsung.android.sume.core.MetaDataUtil$$ExternalSyntheticLambda0
                 @Override // java.util.function.ToIntFunction
                 public final int applyAsInt(Object obj) {
                     return ((ByteBuffer) obj).limit();
                 }
             }).sum());
-            allocateDirect.put((byte) -1);
-            allocateDirect.put((byte) -40);
+            byteBufferAllocateDirect.put((byte) -1);
+            byteBufferAllocateDirect.put((byte) -40);
             Iterator<ByteBuffer> it = arrayList.iterator();
             while (it.hasNext()) {
-                allocateDirect.put(it.next());
+                byteBufferAllocateDirect.put(it.next());
             }
             channel.position(2L);
-            channel.read(allocateDirect);
+            channel.read(byteBufferAllocateDirect);
             channel.position(0L);
-            allocateDirect.rewind();
-            channel.write(allocateDirect);
+            byteBufferAllocateDirect.rewind();
+            channel.write(byteBufferAllocateDirect);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -136,212 +138,214 @@ public final class MetaDataUtil {
     /* JADX WARN: Type inference failed for: r3v20 */
     /* JADX WARN: Type inference failed for: r3v3, types: [java.lang.CharSequence, java.lang.String] */
     /* JADX WARN: Type inference failed for: r3v6 */
-    public static boolean copyMetadata(String str, String str2) {
+    public static boolean copyMetadata(String str, String str2) throws Throwable {
+        FileInputStream fileInputStream;
         String str3 = TAG;
         Log.d(str3, "copyMetadata: src=" + str + ", dst=" + str2);
-        Pattern compile = Pattern.compile(".(jpg|jpeg)$");
+        Pattern patternCompile = Pattern.compile(".(jpg|jpeg)$");
         RandomAccessFile lowerCase = str.toLowerCase(Locale.getDefault());
-        if (!compile.matcher(lowerCase).find()) {
+        if (!patternCompile.matcher(lowerCase).find()) {
             Log.w(str3, "not supported file format: " + str);
             return false;
         }
-        FileInputStream fileInputStream = null;
+        FileInputStream fileInputStream2 = null;
         try {
             try {
                 try {
-                    FileInputStream fileInputStream2 = new FileInputStream(str);
+                    fileInputStream = new FileInputStream(str);
                     try {
                         lowerCase = new RandomAccessFile(str2, "rw");
-                        try {
-                            ArrayList<ByteBuffer> appNMetadata = getAppNMetadata(fileInputStream2);
-                            if (!appNMetadata.isEmpty()) {
-                                setAppNMetadata(appNMetadata, lowerCase);
-                            }
-                            try {
-                                fileInputStream2.close();
-                                lowerCase.close();
-                                return true;
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                                return true;
-                            }
-                        } catch (FileNotFoundException e2) {
-                            e = e2;
-                            fileInputStream = fileInputStream2;
-                            lowerCase = lowerCase;
-                            e.printStackTrace();
-                            if (fileInputStream != null) {
-                                fileInputStream.close();
-                            }
-                            if (lowerCase != 0) {
-                                lowerCase.close();
-                            }
-                            return false;
-                        } catch (IllegalArgumentException unused) {
-                            fileInputStream = fileInputStream2;
-                            lowerCase = lowerCase;
-                            Log.w(TAG, "src has invalid meta: " + str);
-                            if (fileInputStream != null) {
-                                fileInputStream.close();
-                            }
-                            if (lowerCase != 0) {
-                                lowerCase.close();
-                            }
-                            return false;
-                        } catch (Throwable th) {
-                            th = th;
-                            fileInputStream = fileInputStream2;
-                            if (fileInputStream != null) {
-                                try {
-                                    fileInputStream.close();
-                                } catch (IOException e3) {
-                                    e3.printStackTrace();
-                                    throw th;
-                                }
-                            }
-                            if (lowerCase != 0) {
-                                lowerCase.close();
-                            }
-                            throw th;
-                        }
-                    } catch (FileNotFoundException e4) {
-                        e = e4;
+                    } catch (FileNotFoundException e) {
+                        e = e;
                         lowerCase = 0;
-                    } catch (IllegalArgumentException unused2) {
+                    } catch (IllegalArgumentException unused) {
                         lowerCase = 0;
-                    } catch (Throwable th2) {
-                        th = th2;
+                    } catch (Throwable th) {
+                        th = th;
                         lowerCase = 0;
                     }
-                } catch (FileNotFoundException e5) {
-                    e = e5;
-                    lowerCase = 0;
-                } catch (IllegalArgumentException unused3) {
-                    lowerCase = 0;
-                } catch (Throwable th3) {
-                    th = th3;
-                    lowerCase = 0;
+                } catch (Throwable th2) {
+                    th = th2;
                 }
-            } catch (Throwable th4) {
-                th = th4;
+            } catch (FileNotFoundException e2) {
+                e = e2;
+                lowerCase = 0;
+            } catch (IllegalArgumentException unused2) {
+                lowerCase = 0;
+            } catch (Throwable th3) {
+                th = th3;
+                lowerCase = 0;
             }
-        } catch (IOException e6) {
-            e6.printStackTrace();
+        } catch (IOException e3) {
+            e3.printStackTrace();
+        }
+        try {
+            ArrayList<ByteBuffer> appNMetadata = getAppNMetadata(fileInputStream);
+            if (!appNMetadata.isEmpty()) {
+                setAppNMetadata(appNMetadata, lowerCase);
+            }
+            try {
+                fileInputStream.close();
+                lowerCase.close();
+                return true;
+            } catch (IOException e4) {
+                e4.printStackTrace();
+                return true;
+            }
+        } catch (FileNotFoundException e5) {
+            e = e5;
+            fileInputStream2 = fileInputStream;
+            lowerCase = lowerCase;
+            e.printStackTrace();
+            if (fileInputStream2 != null) {
+                fileInputStream2.close();
+            }
+            if (lowerCase != 0) {
+                lowerCase.close();
+            }
+            return false;
+        } catch (IllegalArgumentException unused3) {
+            fileInputStream2 = fileInputStream;
+            lowerCase = lowerCase;
+            Log.w(TAG, "src has invalid meta: " + str);
+            if (fileInputStream2 != null) {
+                fileInputStream2.close();
+            }
+            if (lowerCase != 0) {
+                lowerCase.close();
+            }
+            return false;
+        } catch (Throwable th4) {
+            th = th4;
+            fileInputStream2 = fileInputStream;
+            if (fileInputStream2 != null) {
+                try {
+                    fileInputStream2.close();
+                } catch (IOException e6) {
+                    e6.printStackTrace();
+                    throw th;
+                }
+            }
+            if (lowerCase != 0) {
+                lowerCase.close();
+            }
+            throw th;
         }
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:88:0x00ca -> B:39:0x00f6). Please report as a decompilation issue!!! */
-    public static boolean copyMetadataAndExif(String str, String str2, Consumer<ExifInterface> consumer) {
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:60:0x00ca -> B:83:0x00f6). Please report as a decompilation issue!!! */
+    public static boolean copyMetadataAndExif(String str, String str2, Consumer<ExifInterface> consumer) throws Throwable {
         RandomAccessFile randomAccessFile;
+        FileInputStream fileInputStream;
         String str3 = TAG;
         Log.d(str3, "copyMetadataAndExif: src=" + str + ", dst=" + str2);
         if (!Pattern.compile(".(jpg|jpeg)$").matcher(str.toLowerCase(Locale.getDefault())).find()) {
             Log.w(str3, "not supported file format: " + str);
             return false;
         }
-        FileInputStream fileInputStream = null;
+        FileInputStream fileInputStream2 = null;
         try {
             try {
                 try {
-                    FileInputStream fileInputStream2 = new FileInputStream(str);
+                    fileInputStream = new FileInputStream(str);
                     try {
                         randomAccessFile = new RandomAccessFile(str2, "rw");
-                        try {
-                            ArrayList<ByteBuffer> appNMetadata = getAppNMetadata(fileInputStream2);
-                            if (!appNMetadata.isEmpty()) {
-                                setAppNMetadata(appNMetadata, randomAccessFile);
-                            }
-                            ExifInterface copyExif = copyExif(fileInputStream2, randomAccessFile);
-                            Log.d(str3, "exif: " + copyExif);
-                            if (consumer != null) {
-                                consumer.accept(copyExif);
-                            }
-                            copyExif.saveAttributes();
-                            try {
-                                fileInputStream2.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                randomAccessFile.close();
-                                return true;
-                            } catch (IOException e2) {
-                                e2.printStackTrace();
-                                return true;
-                            }
-                        } catch (IOException e3) {
-                            e = e3;
-                            fileInputStream = fileInputStream2;
-                            e.printStackTrace();
-                            if (fileInputStream != null) {
-                                try {
-                                    fileInputStream.close();
-                                } catch (IOException e4) {
-                                    e4.printStackTrace();
-                                }
-                            }
-                            if (randomAccessFile != null) {
-                                randomAccessFile.close();
-                            }
-                            return false;
-                        } catch (IllegalArgumentException unused) {
-                            fileInputStream = fileInputStream2;
-                            Log.w(TAG, "src has invalid meta: " + str);
-                            if (fileInputStream != null) {
-                                try {
-                                    fileInputStream.close();
-                                } catch (IOException e5) {
-                                    e5.printStackTrace();
-                                }
-                            }
-                            if (randomAccessFile != null) {
-                                randomAccessFile.close();
-                            }
-                            return false;
-                        } catch (Throwable th) {
-                            th = th;
-                            fileInputStream = fileInputStream2;
-                            if (fileInputStream != null) {
-                                try {
-                                    fileInputStream.close();
-                                } catch (IOException e6) {
-                                    e6.printStackTrace();
-                                }
-                            }
-                            if (randomAccessFile == null) {
-                                throw th;
-                            }
-                            try {
-                                randomAccessFile.close();
-                                throw th;
-                            } catch (IOException e7) {
-                                e7.printStackTrace();
-                                throw th;
-                            }
-                        }
-                    } catch (IOException e8) {
-                        e = e8;
+                    } catch (IOException e) {
+                        e = e;
                         randomAccessFile = null;
-                    } catch (IllegalArgumentException unused2) {
+                    } catch (IllegalArgumentException unused) {
                         randomAccessFile = null;
-                    } catch (Throwable th2) {
-                        th = th2;
+                    } catch (Throwable th) {
+                        th = th;
                         randomAccessFile = null;
                     }
-                } catch (IOException e9) {
-                    e = e9;
-                    randomAccessFile = null;
-                } catch (IllegalArgumentException unused3) {
-                    randomAccessFile = null;
-                } catch (Throwable th3) {
-                    th = th3;
-                    randomAccessFile = null;
+                } catch (Throwable th2) {
+                    th = th2;
                 }
-            } catch (Throwable th4) {
-                th = th4;
+            } catch (IOException e2) {
+                e = e2;
+                randomAccessFile = null;
+            } catch (IllegalArgumentException unused2) {
+                randomAccessFile = null;
+            } catch (Throwable th3) {
+                th = th3;
+                randomAccessFile = null;
             }
-        } catch (IOException e10) {
-            e10.printStackTrace();
+        } catch (IOException e3) {
+            e3.printStackTrace();
+        }
+        try {
+            ArrayList<ByteBuffer> appNMetadata = getAppNMetadata(fileInputStream);
+            if (!appNMetadata.isEmpty()) {
+                setAppNMetadata(appNMetadata, randomAccessFile);
+            }
+            ExifInterface exifInterfaceCopyExif = copyExif(fileInputStream, randomAccessFile);
+            Log.d(str3, "exif: " + exifInterfaceCopyExif);
+            if (consumer != null) {
+                consumer.accept(exifInterfaceCopyExif);
+            }
+            exifInterfaceCopyExif.saveAttributes();
+            try {
+                fileInputStream.close();
+            } catch (IOException e4) {
+                e4.printStackTrace();
+            }
+            try {
+                randomAccessFile.close();
+                return true;
+            } catch (IOException e5) {
+                e5.printStackTrace();
+                return true;
+            }
+        } catch (IOException e6) {
+            e = e6;
+            fileInputStream2 = fileInputStream;
+            e.printStackTrace();
+            if (fileInputStream2 != null) {
+                try {
+                    fileInputStream2.close();
+                } catch (IOException e7) {
+                    e7.printStackTrace();
+                }
+            }
+            if (randomAccessFile != null) {
+                randomAccessFile.close();
+            }
+            return false;
+        } catch (IllegalArgumentException unused3) {
+            fileInputStream2 = fileInputStream;
+            Log.w(TAG, "src has invalid meta: " + str);
+            if (fileInputStream2 != null) {
+                try {
+                    fileInputStream2.close();
+                } catch (IOException e8) {
+                    e8.printStackTrace();
+                }
+            }
+            if (randomAccessFile != null) {
+                randomAccessFile.close();
+            }
+            return false;
+        } catch (Throwable th4) {
+            th = th4;
+            fileInputStream2 = fileInputStream;
+            if (fileInputStream2 != null) {
+                try {
+                    fileInputStream2.close();
+                } catch (IOException e9) {
+                    e9.printStackTrace();
+                }
+            }
+            if (randomAccessFile == null) {
+                throw th;
+            }
+            try {
+                randomAccessFile.close();
+                throw th;
+            } catch (IOException e10) {
+                e10.printStackTrace();
+                throw th;
+            }
         }
     }
 }

@@ -44,9 +44,9 @@ public interface IUdfpsOverlayControllerCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUdfpsOverlayControllerCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUdfpsOverlayControllerCallback)) {
-                return (IUdfpsOverlayControllerCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUdfpsOverlayControllerCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUdfpsOverlayControllerCallback)) {
+                return (IUdfpsOverlayControllerCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,12 +97,12 @@ public interface IUdfpsOverlayControllerCallback extends IInterface {
 
             @Override // android.hardware.fingerprint.IUdfpsOverlayControllerCallback
             public void onUserCanceled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUdfpsOverlayControllerCallback.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUdfpsOverlayControllerCallback.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

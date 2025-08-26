@@ -8,7 +8,6 @@ import android.view.RemoteAnimationTarget;
 import android.window.TaskSnapshot;
 import android.window.TransitionInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class IRecentsAnimationRunner$Stub$Proxy implements IRecentsAnimationRunner {
     public final IBinder mRemote;
@@ -23,31 +22,31 @@ public class IRecentsAnimationRunner$Stub$Proxy implements IRecentsAnimationRunn
     }
 
     public final void onAnimationCanceled(int[] iArr, TaskSnapshot[] taskSnapshotArr) {
-        Parcel obtain = Parcel.obtain(this.mRemote);
+        Parcel parcelObtain = Parcel.obtain(this.mRemote);
         try {
-            obtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentsAnimationRunner");
-            obtain.writeIntArray(iArr);
-            obtain.writeTypedArray(taskSnapshotArr, 0);
-            this.mRemote.transact(2, obtain, null, 1);
+            parcelObtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentsAnimationRunner");
+            parcelObtain.writeIntArray(iArr);
+            parcelObtain.writeTypedArray(taskSnapshotArr, 0);
+            this.mRemote.transact(2, parcelObtain, null, 1);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
     public final void onAnimationStart(IRecentsAnimationController iRecentsAnimationController, RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, Rect rect, Rect rect2, Bundle bundle, TransitionInfo transitionInfo) {
-        Parcel obtain = Parcel.obtain(this.mRemote);
+        Parcel parcelObtain = Parcel.obtain(this.mRemote);
         try {
-            obtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentsAnimationRunner");
-            obtain.writeStrongInterface(iRecentsAnimationController);
-            obtain.writeTypedArray(remoteAnimationTargetArr, 0);
-            obtain.writeTypedArray(remoteAnimationTargetArr2, 0);
-            obtain.writeTypedObject(rect, 0);
-            obtain.writeTypedObject(rect2, 0);
-            obtain.writeTypedObject(bundle, 0);
-            obtain.writeTypedObject(transitionInfo, 0);
-            this.mRemote.transact(3, obtain, null, 1);
+            parcelObtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentsAnimationRunner");
+            parcelObtain.writeStrongInterface(iRecentsAnimationController);
+            parcelObtain.writeTypedArray(remoteAnimationTargetArr, 0);
+            parcelObtain.writeTypedArray(remoteAnimationTargetArr2, 0);
+            parcelObtain.writeTypedObject(rect, 0);
+            parcelObtain.writeTypedObject(rect2, 0);
+            parcelObtain.writeTypedObject(bundle, 0);
+            parcelObtain.writeTypedObject(transitionInfo, 0);
+            this.mRemote.transact(3, parcelObtain, null, 1);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 }

@@ -31,8 +31,8 @@ public class GeomagneticField {
 
     public GeomagneticField(float f, float f2, float f3, long j) {
         int length = G_COEFF.length;
-        float min = Math.min(89.99999f, Math.max(-89.99999f, f));
-        computeGeocentricCoordinates(min, f2, f3);
+        float fMin = Math.min(89.99999f, Math.max(-89.99999f, f));
+        computeGeocentricCoordinates(fMin, f2, f3);
         LegendreTable legendreTable = new LegendreTable(length - 1, (float) (1.5707963267948966d - this.mGcLatitudeRad));
         int i = length + 2;
         float[] fArr = new float[i];
@@ -56,7 +56,7 @@ public class GeomagneticField {
             fArr2[i5] = (fArr2[i7] * fArr3[i6]) + (fArr3[i7] * fArr2[i6]);
             fArr3[i5] = (fArr3[i7] * fArr3[i6]) - (fArr2[i7] * fArr2[i6]);
         }
-        float cos = 1.0f / ((float) Math.cos(this.mGcLatitudeRad));
+        float fCos = 1.0f / ((float) Math.cos(this.mGcLatitudeRad));
         float f5 = (j - BASE_TIME) / 3.1536E10f;
         float f6 = 0.0f;
         float f7 = 0.0f;
@@ -69,7 +69,7 @@ public class GeomagneticField {
                 float f10 = fArr[i9] * ((fArr3[i8] * f8) + (fArr2[i8] * f9)) * legendreTable.mPDeriv[i3][i8];
                 float[][] fArr4 = SCHMIDT_QUASI_NORM_FACTORS;
                 f4 += f10 * fArr4[i3][i8];
-                f7 += fArr[i9] * i8 * ((fArr2[i8] * f8) - (fArr3[i8] * f9)) * legendreTable.mP[i3][i8] * fArr4[i3][i8] * cos;
+                f7 += fArr[i9] * i8 * ((fArr2[i8] * f8) - (fArr3[i8] * f9)) * legendreTable.mP[i3][i8] * fArr4[i3][i8] * fCos;
                 f6 -= ((((i3 + 1) * fArr[i9]) * ((f8 * fArr3[i8]) + (f9 * fArr2[i8]))) * legendreTable.mP[i3][i8]) * fArr4[i3][i8];
                 i8++;
                 length = length;
@@ -77,7 +77,7 @@ public class GeomagneticField {
             i3++;
             i2 = 0;
         }
-        double radians = Math.toRadians(min) - this.mGcLatitudeRad;
+        double radians = Math.toRadians(fMin) - this.mGcLatitudeRad;
         double d = f6;
         this.mX = (float) ((f4 * Math.cos(radians)) + (Math.sin(radians) * d));
         this.mY = f7;
@@ -117,12 +117,12 @@ public class GeomagneticField {
 
     private void computeGeocentricCoordinates(float f, float f2, float f3) {
         double radians = Math.toRadians(f);
-        float cos = (float) Math.cos(radians);
-        float sin = (float) Math.sin(radians);
-        float sqrt = ((float) Math.sqrt((cos * 4.0680636E7f * cos) + (sin * 4.04083E7f * sin))) * (f3 / 1000.0f);
-        this.mGcLatitudeRad = (float) Math.atan(((sin / cos) * (4.04083E7f + sqrt)) / (sqrt + 4.0680636E7f));
+        float fCos = (float) Math.cos(radians);
+        float fSin = (float) Math.sin(radians);
+        float fSqrt = ((float) Math.sqrt((fCos * 4.0680636E7f * fCos) + (fSin * 4.04083E7f * fSin))) * (f3 / 1000.0f);
+        this.mGcLatitudeRad = (float) Math.atan(((fSin / fCos) * (4.04083E7f + fSqrt)) / (fSqrt + 4.0680636E7f));
         this.mGcLongitudeRad = (float) Math.toRadians(f2);
-        this.mGcRadiusKm = (float) Math.sqrt((r12 * r12) + (r12 * 2.0f * ((float) Math.sqrt(r5))) + ((((1.6549141E15f * cos) * cos) + ((1.6328307E15f * sin) * sin)) / r3));
+        this.mGcRadiusKm = (float) Math.sqrt((r12 * r12) + (r12 * 2.0f * ((float) Math.sqrt(r5))) + ((((1.6549141E15f * fCos) * fCos) + ((1.6328307E15f * fSin) * fSin)) / r3));
     }
 
     private static class LegendreTable {
@@ -133,8 +133,8 @@ public class GeomagneticField {
         public LegendreTable(int i, float f) {
             int i2;
             double d = f;
-            float cos = (float) Math.cos(d);
-            float sin = (float) Math.sin(d);
+            float fCos = (float) Math.cos(d);
+            float fSin = (float) Math.sin(d);
             int i3 = i + 1;
             float[][] fArr = new float[i3][];
             this.mP = fArr;
@@ -154,17 +154,17 @@ public class GeomagneticField {
                         int i7 = i4 - 1;
                         float[] fArr5 = fArr3[i7];
                         int i8 = i6 - 1;
-                        fArr4[i6] = fArr5[i8] * sin;
+                        fArr4[i6] = fArr5[i8] * fSin;
                         float[][] fArr6 = this.mPDeriv;
-                        fArr6[i4][i6] = (fArr5[i8] * cos) + (fArr6[i7][i8] * sin);
+                        fArr6[i4][i6] = (fArr5[i8] * fCos) + (fArr6[i7][i8] * fSin);
                     } else if (i4 == 1 || i6 == i4 - 1) {
                         float[][] fArr7 = this.mP;
                         float[] fArr8 = fArr7[i4];
                         int i9 = i4 - 1;
                         float[] fArr9 = fArr7[i9];
-                        fArr8[i6] = fArr9[i6] * cos;
+                        fArr8[i6] = fArr9[i6] * fCos;
                         float[][] fArr10 = this.mPDeriv;
-                        fArr10[i4][i6] = ((-sin) * fArr9[i6]) + (fArr10[i9][i6] * cos);
+                        fArr10[i4][i6] = ((-fSin) * fArr9[i6]) + (fArr10[i9][i6] * fCos);
                     } else {
                         int i10 = i4 * 2;
                         float f2 = ((i2 * i2) - (i6 * i6)) / ((i10 - 1) * (i10 - 3));
@@ -172,9 +172,9 @@ public class GeomagneticField {
                         float[] fArr12 = fArr11[i4];
                         float[] fArr13 = fArr11[i2];
                         int i11 = i4 - 2;
-                        fArr12[i6] = (fArr13[i6] * cos) - (fArr11[i11][i6] * f2);
+                        fArr12[i6] = (fArr13[i6] * fCos) - (fArr11[i11][i6] * f2);
                         float[][] fArr14 = this.mPDeriv;
-                        fArr14[i4][i6] = (((-sin) * fArr13[i6]) + (fArr14[i2][i6] * cos)) - (f2 * fArr14[i11][i6]);
+                        fArr14[i4][i6] = (((-fSin) * fArr13[i6]) + (fArr14[i2][i6] * fCos)) - (f2 * fArr14[i11][i6]);
                     }
                 }
                 i4 = i5;

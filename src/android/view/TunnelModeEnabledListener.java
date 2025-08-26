@@ -58,7 +58,7 @@ public abstract class TunnelModeEnabledListener {
         tunnelModeEnabledListener.mExecutor.execute(new Runnable() { // from class: android.view.TunnelModeEnabledListener$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                TunnelModeEnabledListener.this.onTunnelModeEnabledChanged(z);
+                this.f$0.onTunnelModeEnabledChanged(z);
             }
         });
     }

@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Arrangement {
     public static final Arrangement$SpaceBetween$1 SpaceBetween;
@@ -91,7 +90,7 @@ public final class Arrangement {
 
         @Override // androidx.compose.foundation.layout.Arrangement.Horizontal, androidx.compose.foundation.layout.Arrangement.Vertical
         /* renamed from: getSpacing-D9Ej5fM, reason: not valid java name */
-        public final float mo94getSpacingD9Ej5fM() {
+        public final float mo95getSpacingD9Ej5fM() {
             return this.spacing;
         }
 
@@ -106,7 +105,6 @@ public final class Arrangement {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Absolute {
         public static final Absolute INSTANCE = new Absolute();
         public static final Arrangement$Absolute$Left$1 Left = new Horizontal() { // from class: androidx.compose.foundation.layout.Arrangement$Absolute$Left$1
@@ -186,23 +184,20 @@ public final class Arrangement {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Horizontal {
         void arrange(Density density, int i, int[] iArr, LayoutDirection layoutDirection, int[] iArr2);
 
         /* renamed from: getSpacing-D9Ej5fM */
-        default float mo94getSpacingD9Ej5fM() {
+        default float mo95getSpacingD9Ej5fM() {
             float f = 0;
             Dp.Companion companion = Dp.Companion;
             return f;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface HorizontalOrVertical extends Horizontal, Vertical {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SpacedAligned implements HorizontalOrVertical {
         public final Function2 alignment;
         public final boolean rtlMirror;
@@ -220,7 +215,7 @@ public final class Arrangement {
             if (iArr.length == 0) {
                 return;
             }
-            int mo51roundToPx0680j_4 = density.mo51roundToPx0680j_4(this.space);
+            int iMo52roundToPx0680j_4 = density.mo52roundToPx0680j_4(this.space);
             boolean z = this.rtlMirror && layoutDirection == LayoutDirection.Rtl;
             Arrangement arrangement = Arrangement.INSTANCE;
             if (z) {
@@ -229,12 +224,12 @@ public final class Arrangement {
                 i3 = 0;
                 while (-1 < length) {
                     int i4 = iArr[length];
-                    int min = Math.min(i2, i - i4);
-                    iArr2[length] = min;
-                    int min2 = Math.min(mo51roundToPx0680j_4, (i - min) - i4);
-                    int i5 = iArr2[length] + i4 + min2;
+                    int iMin = Math.min(i2, i - i4);
+                    iArr2[length] = iMin;
+                    int iMin2 = Math.min(iMo52roundToPx0680j_4, (i - iMin) - i4);
+                    int i5 = iArr2[length] + i4 + iMin2;
                     length--;
-                    i3 = min2;
+                    i3 = iMin2;
                     i2 = i5;
                 }
             } else {
@@ -245,12 +240,12 @@ public final class Arrangement {
                 int i7 = 0;
                 while (i6 < length2) {
                     int i8 = iArr[i6];
-                    int min3 = Math.min(i2, i - i8);
-                    iArr2[i7] = min3;
-                    int min4 = Math.min(mo51roundToPx0680j_4, (i - min3) - i8);
-                    int i9 = iArr2[i7] + i8 + min4;
+                    int iMin3 = Math.min(i2, i - i8);
+                    iArr2[i7] = iMin3;
+                    int iMin4 = Math.min(iMo52roundToPx0680j_4, (i - iMin3) - i8);
+                    int i9 = iArr2[i7] + i8 + iMin4;
                     i6++;
-                    i3 = min4;
+                    i3 = iMin4;
                     i2 = i9;
                     i7++;
                 }
@@ -260,10 +255,10 @@ public final class Arrangement {
             if (function2 == null || i10 >= i) {
                 return;
             }
-            int intValue = ((Number) function2.invoke(Integer.valueOf(i - i10), layoutDirection)).intValue();
+            int iIntValue = ((Number) function2.invoke(Integer.valueOf(i - i10), layoutDirection)).intValue();
             int length3 = iArr2.length;
             for (int i11 = 0; i11 < length3; i11++) {
-                iArr2[i11] = iArr2[i11] + intValue;
+                iArr2[i11] = iArr2[i11] + iIntValue;
             }
         }
 
@@ -275,20 +270,20 @@ public final class Arrangement {
                 return false;
             }
             SpacedAligned spacedAligned = (SpacedAligned) obj;
-            return Dp.m836equalsimpl0(this.space, spacedAligned.space) && this.rtlMirror == spacedAligned.rtlMirror && Intrinsics.areEqual(this.alignment, spacedAligned.alignment);
+            return Dp.m838equalsimpl0(this.space, spacedAligned.space) && this.rtlMirror == spacedAligned.rtlMirror && Intrinsics.areEqual(this.alignment, spacedAligned.alignment);
         }
 
         @Override // androidx.compose.foundation.layout.Arrangement.Horizontal, androidx.compose.foundation.layout.Arrangement.Vertical
         /* renamed from: getSpacing-D9Ej5fM */
-        public final float mo94getSpacingD9Ej5fM() {
+        public final float mo95getSpacingD9Ej5fM() {
             return this.spacing;
         }
 
         public final int hashCode() {
             Dp.Companion companion = Dp.Companion;
-            int m = TransitionData$$ExternalSyntheticOutline0.m(Float.hashCode(this.space) * 31, 31, this.rtlMirror);
+            int iM = TransitionData$$ExternalSyntheticOutline0.m(Float.hashCode(this.space) * 31, 31, this.rtlMirror);
             Function2 function2 = this.alignment;
-            return m + (function2 == null ? 0 : function2.hashCode());
+            return iM + (function2 == null ? 0 : function2.hashCode());
         }
 
         public final String toString() {
@@ -314,12 +309,11 @@ public final class Arrangement {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Vertical {
         void arrange(Density density, int i, int[] iArr, int[] iArr2);
 
         /* renamed from: getSpacing-D9Ej5fM */
-        default float mo94getSpacingD9Ej5fM() {
+        default float mo95getSpacingD9Ej5fM() {
             float f = 0;
             Dp.Companion companion = Dp.Companion;
             return f;
@@ -354,7 +348,7 @@ public final class Arrangement {
 
             @Override // androidx.compose.foundation.layout.Arrangement.Horizontal, androidx.compose.foundation.layout.Arrangement.Vertical
             /* renamed from: getSpacing-D9Ej5fM */
-            public final float mo94getSpacingD9Ej5fM() {
+            public final float mo95getSpacingD9Ej5fM() {
                 return this.spacing;
             }
 
@@ -389,7 +383,7 @@ public final class Arrangement {
 
             @Override // androidx.compose.foundation.layout.Arrangement.Horizontal, androidx.compose.foundation.layout.Arrangement.Vertical
             /* renamed from: getSpacing-D9Ej5fM */
-            public final float mo94getSpacingD9Ej5fM() {
+            public final float mo95getSpacingD9Ej5fM() {
                 return this.spacing;
             }
 
@@ -424,7 +418,7 @@ public final class Arrangement {
 
             @Override // androidx.compose.foundation.layout.Arrangement.Horizontal, androidx.compose.foundation.layout.Arrangement.Vertical
             /* renamed from: getSpacing-D9Ej5fM */
-            public final float mo94getSpacingD9Ej5fM() {
+            public final float mo95getSpacingD9Ej5fM() {
                 return this.spacing;
             }
 
@@ -445,14 +439,14 @@ public final class Arrangement {
 
     public static SpacedAligned aligned(final BiasAlignment.Horizontal horizontal) {
         Dp.Companion companion = Dp.Companion;
-        return new SpacedAligned(0, true, new Function2() { // from class: androidx.compose.foundation.layout.Arrangement$aligned$1
+        return new SpacedAligned(0, true, new Function2() { // from class: androidx.compose.foundation.layout.Arrangement.aligned.1
             {
                 super(2);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return Integer.valueOf(Alignment.Horizontal.this.align(0, ((Number) obj).intValue(), (LayoutDirection) obj2));
+                return Integer.valueOf(horizontal.align(0, ((Number) obj).intValue(), (LayoutDirection) obj2));
             }
         }, null);
     }
@@ -587,13 +581,13 @@ public final class Arrangement {
         for (int i4 : iArr) {
             i3 += i4;
         }
-        float max = (i - i3) / Math.max(iArr.length - 1, 1);
-        float f = (z && iArr.length == 1) ? max : 0.0f;
+        float fMax = (i - i3) / Math.max(iArr.length - 1, 1);
+        float f = (z && iArr.length == 1) ? fMax : 0.0f;
         if (z) {
             for (int length = iArr.length - 1; -1 < length; length--) {
                 int i5 = iArr[length];
                 iArr2[length] = Math.round(f);
-                f += i5 + max;
+                f += i5 + fMax;
             }
             return;
         }
@@ -602,7 +596,7 @@ public final class Arrangement {
         while (i2 < length2) {
             int i7 = iArr[i2];
             iArr2[i6] = Math.round(f);
-            f += i7 + max;
+            f += i7 + fMax;
             i2++;
             i6++;
         }
@@ -637,7 +631,7 @@ public final class Arrangement {
     }
 
     /* renamed from: spacedBy-0680j_4, reason: not valid java name */
-    public static SpacedAligned m91spacedBy0680j_4(float f) {
+    public static SpacedAligned m92spacedBy0680j_4(float f) {
         return new SpacedAligned(f, true, new Function2() { // from class: androidx.compose.foundation.layout.Arrangement$spacedBy$1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
@@ -648,7 +642,7 @@ public final class Arrangement {
     }
 
     /* renamed from: spacedBy-D5KLDUw, reason: not valid java name */
-    public static SpacedAligned m92spacedByD5KLDUw(float f, final BiasAlignment.Horizontal horizontal) {
+    public static SpacedAligned m93spacedByD5KLDUw(float f, final BiasAlignment.Horizontal horizontal) {
         return new SpacedAligned(f, true, new Function2() { // from class: androidx.compose.foundation.layout.Arrangement$spacedBy$2
             {
                 super(2);
@@ -656,13 +650,13 @@ public final class Arrangement {
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return Integer.valueOf(Alignment.Horizontal.this.align(0, ((Number) obj).intValue(), (LayoutDirection) obj2));
+                return Integer.valueOf(horizontal.align(0, ((Number) obj).intValue(), (LayoutDirection) obj2));
             }
         }, null);
     }
 
     /* renamed from: spacedBy-D5KLDUw, reason: not valid java name */
-    public static SpacedAligned m93spacedByD5KLDUw(float f, final BiasAlignment.Vertical vertical) {
+    public static SpacedAligned m94spacedByD5KLDUw(float f, final BiasAlignment.Vertical vertical) {
         return new SpacedAligned(f, false, new Function2() { // from class: androidx.compose.foundation.layout.Arrangement$spacedBy$3
             {
                 super(2);
@@ -670,7 +664,7 @@ public final class Arrangement {
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return Integer.valueOf(((BiasAlignment.Vertical) Alignment.Vertical.this).align(0, ((Number) obj).intValue()));
+                return Integer.valueOf(((BiasAlignment.Vertical) vertical).align(0, ((Number) obj).intValue()));
             }
         }, null);
     }

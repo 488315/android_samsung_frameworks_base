@@ -61,9 +61,9 @@ public interface IVideoTranscodingService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVideoTranscodingService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVideoTranscodingService)) {
-                return (IVideoTranscodingService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVideoTranscodingService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVideoTranscodingService)) {
+                return (IVideoTranscodingService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,21 +96,21 @@ public interface IVideoTranscodingService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                IVideoTranscodingServiceCallback asInterface = IVideoTranscodingServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                IVideoTranscodingServiceCallback iVideoTranscodingServiceCallbackAsInterface = IVideoTranscodingServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                String register = register(readInt, asInterface);
+                String strRegister = register(i3, iVideoTranscodingServiceCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeString(register);
+                parcel2.writeString(strRegister);
             } else if (i == 2) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                startTask(readString);
+                startTask(string);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                stopTask(readString2);
+                stopTask(string2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -136,48 +136,48 @@ public interface IVideoTranscodingService extends IInterface {
 
             @Override // com.samsung.android.media.codec.IVideoTranscodingService
             public String register(int i, IVideoTranscodingServiceCallback iVideoTranscodingServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoTranscodingService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iVideoTranscodingServiceCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IVideoTranscodingService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iVideoTranscodingServiceCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.codec.IVideoTranscodingService
             public void startTask(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoTranscodingService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoTranscodingService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.codec.IVideoTranscodingService
             public void stopTask(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVideoTranscodingService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVideoTranscodingService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

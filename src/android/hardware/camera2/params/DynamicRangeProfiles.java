@@ -51,12 +51,12 @@ public final class DynamicRangeProfiles {
                     }
                 }
                 this.mProfileMap.put(Long.valueOf(jArr[i]), hashSet);
-                HashMap<Long, Boolean> hashMap = this.mLookahedLatencyMap;
-                Long valueOf = Long.valueOf(jArr[i]);
+                HashMap<Long, Boolean> map = this.mLookahedLatencyMap;
+                Long lValueOf = Long.valueOf(jArr[i]);
                 if (jArr[i + 2] == 0) {
                     z = false;
                 }
-                hashMap.put(valueOf, Boolean.valueOf(z));
+                map.put(lValueOf, Boolean.valueOf(z));
                 i += 3;
             } else {
                 HashSet hashSet2 = new HashSet();

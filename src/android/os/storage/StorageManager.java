@@ -36,7 +36,6 @@ import android.os.UserHandle;
 import android.os.storage.IObbActionListener;
 import android.os.storage.IStorageEventListener;
 import android.os.storage.IStorageManager;
-import android.os.storage.StorageManager;
 import android.provider.DeviceConfig;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -286,12 +285,12 @@ public class StorageManager {
         PropertyInvalidatedCache.QueryHandler<VolumeListQuery, StorageVolume[]> queryHandler = new PropertyInvalidatedCache.QueryHandler<VolumeListQuery, StorageVolume[]>() { // from class: android.os.storage.StorageManager.1
             @Override // android.app.PropertyInvalidatedCache.QueryHandler
             public StorageVolume[] apply(VolumeListQuery volumeListQuery) {
-                IStorageManager asInterface = IStorageManager.Stub.asInterface(ServiceManager.getService(AudioParameter.VALUE_MOUNT));
-                if (asInterface == null) {
+                IStorageManager iStorageManagerAsInterface = IStorageManager.Stub.asInterface(ServiceManager.getService(AudioParameter.VALUE_MOUNT));
+                if (iStorageManagerAsInterface == null) {
                     return null;
                 }
                 try {
-                    return asInterface.getVolumeList(volumeListQuery.mUserId, volumeListQuery.mPackageName, volumeListQuery.mFlags);
+                    return iStorageManagerAsInterface.getVolumeList(volumeListQuery.mUserId, volumeListQuery.mPackageName, volumeListQuery.mFlags);
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
@@ -377,7 +376,7 @@ public class StorageManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onUsbMassStorageConnectionChanged$0(z);
+                    this.f$0.lambda$onUsbMassStorageConnectionChanged$0(z);
                 }
             });
         }
@@ -392,7 +391,7 @@ public class StorageManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onStorageStateChanged$1(str, str2, str3);
+                    this.f$0.lambda$onStorageStateChanged$1(str, str2, str3);
                 }
             });
         }
@@ -414,7 +413,7 @@ public class StorageManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onVolumeStateChanged$2(volumeInfo, i, i2);
+                    this.f$0.lambda$onVolumeStateChanged$2(volumeInfo, i, i2);
                 }
             });
         }
@@ -437,7 +436,7 @@ public class StorageManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onVolumeRecordChanged$3(volumeRecord);
+                    this.f$0.lambda$onVolumeRecordChanged$3(volumeRecord);
                 }
             });
         }
@@ -452,7 +451,7 @@ public class StorageManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onVolumeForgotten$4(str);
+                    this.f$0.lambda$onVolumeForgotten$4(str);
                 }
             });
         }
@@ -467,7 +466,7 @@ public class StorageManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onDiskScanned$5(diskInfo, i);
+                    this.f$0.lambda$onDiskScanned$5(diskInfo, i);
                 }
             });
         }
@@ -482,7 +481,7 @@ public class StorageManager {
             this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onDiskDestroyed$6(diskInfo);
+                    this.f$0.lambda$onDiskDestroyed$6(diskInfo);
                 }
             });
         }
@@ -631,29 +630,28 @@ public class StorageManager {
         }
     }
 
-    public boolean mountObb(String str, String str2, OnObbStateChangeListener onObbStateChangeListener) {
+    public boolean mountObb(String str, String str2, OnObbStateChangeListener onObbStateChangeListener) throws IOException {
         String str3;
-        String canonicalPath;
         Preconditions.checkNotNull(str, "rawPath cannot be null");
         Preconditions.checkArgument(str2 == null, "mounting encrypted OBBs is no longer supported");
         Preconditions.checkNotNull(onObbStateChangeListener, "listener cannot be null");
         try {
             try {
-                canonicalPath = new File(str).getCanonicalPath();
+                String canonicalPath = new File(str).getCanonicalPath();
                 str3 = str;
-            } catch (IOException e) {
-                e = e;
-                str3 = str;
+                try {
+                    this.mStorageManager.mountObb(str3, canonicalPath, this.mObbActionListener, this.mObbActionListener.addListener(onObbStateChangeListener), getObbInfo(canonicalPath));
+                    return true;
+                } catch (IOException e) {
+                    e = e;
+                    throw new IllegalArgumentException("Failed to resolve path: " + str3, e);
+                }
+            } catch (RemoteException e2) {
+                throw e2.rethrowFromSystemServer();
             }
-            try {
-                this.mStorageManager.mountObb(str3, canonicalPath, this.mObbActionListener, this.mObbActionListener.addListener(onObbStateChangeListener), getObbInfo(canonicalPath));
-                return true;
-            } catch (IOException e2) {
-                e = e2;
-                throw new IllegalArgumentException("Failed to resolve path: " + str3, e);
-            }
-        } catch (RemoteException e3) {
-            throw e3.rethrowFromSystemServer();
+        } catch (IOException e3) {
+            e = e3;
+            str3 = str;
         }
     }
 
@@ -755,9 +753,9 @@ public class StorageManager {
             return null;
         }
         String id = volumeInfo.getId();
-        int indexOf = id.indexOf(NavigationBarInflaterView.GRAVITY_SEPARATOR);
-        if (indexOf != -1) {
-            id = id.substring(0, indexOf);
+        int iIndexOf = id.indexOf(NavigationBarInflaterView.GRAVITY_SEPARATOR);
+        if (iIndexOf != -1) {
+            id = id.substring(0, iIndexOf);
         }
         return findVolumeById(id.replace(VolumeInfo.ID_EMULATED_INTERNAL, VolumeInfo.ID_PRIVATE_INTERNAL));
     }
@@ -805,9 +803,9 @@ public class StorageManager {
     }
 
     public File findPathForUuid(String str) throws FileNotFoundException {
-        VolumeInfo findVolumeByQualifiedUuid = findVolumeByQualifiedUuid(str);
-        if (findVolumeByQualifiedUuid != null) {
-            return findVolumeByQualifiedUuid.getPath();
+        VolumeInfo volumeInfoFindVolumeByQualifiedUuid = findVolumeByQualifiedUuid(str);
+        if (volumeInfoFindVolumeByQualifiedUuid != null) {
+            return volumeInfoFindVolumeByQualifiedUuid.getPath();
         }
         throw new FileNotFoundException("Failed to find a storage device for " + str);
     }
@@ -852,12 +850,12 @@ public class StorageManager {
     }
 
     public String getBestVolumeDescription(VolumeInfo volumeInfo) {
-        VolumeRecord findRecordByUuid;
+        VolumeRecord volumeRecordFindRecordByUuid;
         if (volumeInfo == null) {
             return null;
         }
-        if (!TextUtils.isEmpty(volumeInfo.fsUuid) && (findRecordByUuid = findRecordByUuid(volumeInfo.fsUuid)) != null && !TextUtils.isEmpty(findRecordByUuid.nickname)) {
-            return findRecordByUuid.nickname;
+        if (!TextUtils.isEmpty(volumeInfo.fsUuid) && (volumeRecordFindRecordByUuid = findRecordByUuid(volumeInfo.fsUuid)) != null && !TextUtils.isEmpty(volumeRecordFindRecordByUuid.nickname)) {
+            return volumeRecordFindRecordByUuid.nickname;
         }
         if (!TextUtils.isEmpty(volumeInfo.getDescription())) {
             return volumeInfo.getDescription();
@@ -1041,21 +1039,21 @@ public class StorageManager {
         return getStorageVolume(getVolumeList(), file);
     }
 
-    public StorageVolume getStorageVolume(Uri uri) {
+    public StorageVolume getStorageVolume(Uri uri) throws Throwable {
         String volumeName = MediaStore.getVolumeName(uri);
         if (Objects.equals(volumeName, "external")) {
-            Cursor query = this.mContext.getContentResolver().query(uri, new String[]{"volume_name"}, null, null);
+            Cursor cursorQuery = this.mContext.getContentResolver().query(uri, new String[]{"volume_name"}, null, null);
             try {
-                if (query.moveToFirst()) {
-                    volumeName = query.getString(0);
+                if (cursorQuery.moveToFirst()) {
+                    volumeName = cursorQuery.getString(0);
                 }
-                if (query != null) {
-                    query.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
             } catch (Throwable th) {
-                if (query != null) {
+                if (cursorQuery != null) {
                     try {
-                        query.close();
+                        cursorQuery.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -1064,15 +1062,15 @@ public class StorageManager {
             }
         }
         try {
-            String currentOpPackageName = ActivityThread.currentOpPackageName();
-            if (currentOpPackageName == null) {
+            String strCurrentOpPackageName = ActivityThread.currentOpPackageName();
+            if (strCurrentOpPackageName == null) {
                 String[] packagesForUid = ActivityThread.getPackageManager().getPackagesForUid(Process.myUid());
                 if (packagesForUid == null || packagesForUid.length <= 0) {
                     Log.d(TAG, "No proper package name to use");
                 }
-                currentOpPackageName = packagesForUid[0];
+                strCurrentOpPackageName = packagesForUid[0];
             }
-            int packageUid = ActivityThread.getPackageManager().getPackageUid(currentOpPackageName, 268435456L, this.mContext.getUserId());
+            int packageUid = ActivityThread.getPackageManager().getPackageUid(strCurrentOpPackageName, 268435456L, this.mContext.getUserId());
             volumeName.hashCode();
             if (volumeName.equals("external_primary")) {
                 return getPrimaryStorageVolume();
@@ -1090,7 +1088,7 @@ public class StorageManager {
                     }
                 }
             }
-            throw new IllegalStateException("Unknown volume for " + uri + " -> VOL_NAME[" + volumeName + "], UserId[" + this.mContext.getUserId() + "], PackageName[" + currentOpPackageName + "], CallerUID[" + packageUid + NavigationBarInflaterView.SIZE_MOD_END);
+            throw new IllegalStateException("Unknown volume for " + uri + " -> VOL_NAME[" + volumeName + "], UserId[" + this.mContext.getUserId() + "], PackageName[" + strCurrentOpPackageName + "], CallerUID[" + packageUid + NavigationBarInflaterView.SIZE_MOD_END);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1100,7 +1098,7 @@ public class StorageManager {
         return getStorageVolume(getVolumeList(i, 0), file);
     }
 
-    private static StorageVolume getStorageVolume(StorageVolume[] storageVolumeArr, File file) {
+    private static StorageVolume getStorageVolume(StorageVolume[] storageVolumeArr, File file) throws IOException {
         if (file == null) {
             return null;
         }
@@ -1184,16 +1182,16 @@ public class StorageManager {
 
     public static StorageVolume[] getVolumeList(int i, int i2) {
         try {
-            String currentOpPackageName = ActivityThread.currentOpPackageName();
-            if (currentOpPackageName == null) {
+            String strCurrentOpPackageName = ActivityThread.currentOpPackageName();
+            if (strCurrentOpPackageName == null) {
                 String[] packagesForUid = ActivityThread.getPackageManager().getPackagesForUid(Process.myUid());
                 if (packagesForUid != null && packagesForUid.length > 0) {
-                    currentOpPackageName = packagesForUid[0];
+                    strCurrentOpPackageName = packagesForUid[0];
                 }
                 Log.w(TAG, "Missing package names; no storage volumes available");
                 return new StorageVolume[0];
             }
-            return sVolumeListCache.query(new VolumeListQuery(i, currentOpPackageName, i2));
+            return sVolumeListCache.query(new VolumeListQuery(i, strCurrentOpPackageName, i2));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1312,7 +1310,7 @@ public class StorageManager {
             Slog.w(TAG, "Early during boot, assuming CE storage is locked");
             return false;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 return sStorageManager.isCeStorageUnlocked(i);
@@ -1320,7 +1318,7 @@ public class StorageManager {
                 throw e.rethrowAsRuntimeException();
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -1353,7 +1351,7 @@ public class StorageManager {
     private static boolean checkPermissionAndAppOp(Context context, boolean z, int i, int i2, String str, String str2, String str3, int i3, boolean z2) {
         String str4;
         int i4;
-        int checkOpNoThrow;
+        int iCheckOpNoThrow;
         if (context.checkPermission(str3, i, i2) != 0) {
             if (!z) {
                 return false;
@@ -1364,13 +1362,13 @@ public class StorageManager {
         if (z2) {
             str4 = str;
             i4 = i3;
-            checkOpNoThrow = appOpsManager.noteOpNoThrow(i4, i2, str4, str2, (String) null);
+            iCheckOpNoThrow = appOpsManager.noteOpNoThrow(i4, i2, str4, str2, (String) null);
         } else {
             str4 = str;
             i4 = i3;
             try {
                 appOpsManager.checkPackage(i2, str4);
-                checkOpNoThrow = appOpsManager.checkOpNoThrow(i4, i2, str4);
+                iCheckOpNoThrow = appOpsManager.checkOpNoThrow(i4, i2, str4);
             } catch (SecurityException e) {
                 if (z) {
                     throw e;
@@ -1378,16 +1376,16 @@ public class StorageManager {
                 return false;
             }
         }
-        if (checkOpNoThrow == 0) {
+        if (iCheckOpNoThrow == 0) {
             return true;
         }
-        if (checkOpNoThrow != 1 && checkOpNoThrow != 2 && checkOpNoThrow != 3) {
-            throw new IllegalStateException(AppOpsManager.opToName(i4) + " has unknown mode " + AppOpsManager.modeToName(checkOpNoThrow));
+        if (iCheckOpNoThrow != 1 && iCheckOpNoThrow != 2 && iCheckOpNoThrow != 3) {
+            throw new IllegalStateException(AppOpsManager.opToName(i4) + " has unknown mode " + AppOpsManager.modeToName(iCheckOpNoThrow));
         }
         if (!z) {
             return false;
         }
-        throw new SecurityException("Op " + AppOpsManager.opToName(i4) + " " + AppOpsManager.modeToName(checkOpNoThrow) + " for package " + str4);
+        throw new SecurityException("Op " + AppOpsManager.opToName(i4) + " " + AppOpsManager.modeToName(iCheckOpNoThrow) + " for package " + str4);
     }
 
     private boolean checkPermissionAndAppOp(boolean z, int i, int i2, String str, String str2, String str3, int i3) {
@@ -1395,20 +1393,20 @@ public class StorageManager {
     }
 
     private boolean noteAppOpAllowingLegacy(boolean z, int i, int i2, String str, String str2, int i3) {
-        int noteOpNoThrow = this.mAppOps.noteOpNoThrow(i3, i2, str, str2, (String) null);
-        if (noteOpNoThrow == 0) {
+        int iNoteOpNoThrow = this.mAppOps.noteOpNoThrow(i3, i2, str, str2, (String) null);
+        if (iNoteOpNoThrow == 0) {
             return true;
         }
-        if (noteOpNoThrow == 1 || noteOpNoThrow == 2 || noteOpNoThrow == 3) {
+        if (iNoteOpNoThrow == 1 || iNoteOpNoThrow == 2 || iNoteOpNoThrow == 3) {
             if (this.mAppOps.checkOpNoThrow(87, i2, str) == 0) {
                 return true;
             }
             if (!z) {
                 return false;
             }
-            throw new SecurityException("Op " + AppOpsManager.opToName(i3) + " " + AppOpsManager.modeToName(noteOpNoThrow) + " for package " + str);
+            throw new SecurityException("Op " + AppOpsManager.opToName(i3) + " " + AppOpsManager.modeToName(iNoteOpNoThrow) + " for package " + str);
         }
-        throw new IllegalStateException(AppOpsManager.opToName(i3) + " has unknown mode " + AppOpsManager.modeToName(noteOpNoThrow));
+        throw new IllegalStateException(AppOpsManager.opToName(i3) + " has unknown mode " + AppOpsManager.modeToName(iNoteOpNoThrow));
     }
 
     @Deprecated
@@ -1420,11 +1418,11 @@ public class StorageManager {
     }
 
     private boolean checkExternalStoragePermissionAndAppOp(boolean z, int i, int i2, String str, String str2, String str3, int i3) {
-        int noteOpNoThrow = this.mAppOps.noteOpNoThrow(92, i2, str, str2, (String) null);
-        if (noteOpNoThrow == 0) {
+        int iNoteOpNoThrow = this.mAppOps.noteOpNoThrow(92, i2, str, str2, (String) null);
+        if (iNoteOpNoThrow == 0) {
             return true;
         }
-        if (noteOpNoThrow == 3 && this.mContext.checkPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE, i, i2) == 0) {
+        if (iNoteOpNoThrow == 3 && this.mContext.checkPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE, i, i2) == 0) {
             return true;
         }
         return checkPermissionAndAppOp(z, i, i2, str, str2, str3, i3);
@@ -1432,18 +1430,18 @@ public class StorageManager {
 
     public ParcelFileDescriptor openProxyFileDescriptor(int i, ProxyFileDescriptorCallback proxyFileDescriptorCallback, Handler handler, ThreadFactory threadFactory) throws IOException {
         boolean z;
-        ParcelFileDescriptor openProxyFileDescriptor;
+        ParcelFileDescriptor parcelFileDescriptorOpenProxyFileDescriptor;
         Preconditions.checkNotNull(proxyFileDescriptorCallback);
         MetricsLogger.count(this.mContext, "storage_open_proxy_file_descriptor", 1);
         while (true) {
             try {
                 synchronized (this.mFuseAppLoopLock) {
                     if (this.mFuseAppLoop == null) {
-                        AppFuseMount mountProxyFileDescriptorBridge = this.mStorageManager.mountProxyFileDescriptorBridge();
-                        if (mountProxyFileDescriptorBridge == null) {
+                        AppFuseMount appFuseMountMountProxyFileDescriptorBridge = this.mStorageManager.mountProxyFileDescriptorBridge();
+                        if (appFuseMountMountProxyFileDescriptorBridge == null) {
                             throw new IOException("Failed to mount proxy bridge");
                         }
-                        this.mFuseAppLoop = new FuseAppLoop(mountProxyFileDescriptorBridge.mountPointId, mountProxyFileDescriptorBridge.fd, threadFactory);
+                        this.mFuseAppLoop = new FuseAppLoop(appFuseMountMountProxyFileDescriptorBridge.mountPointId, appFuseMountMountProxyFileDescriptorBridge.fd, threadFactory);
                         z = true;
                     } else {
                         z = false;
@@ -1452,10 +1450,10 @@ public class StorageManager {
                         handler = new Handler(Looper.getMainLooper());
                     }
                     try {
-                        int registerCallback = this.mFuseAppLoop.registerCallback(proxyFileDescriptorCallback, handler);
-                        openProxyFileDescriptor = this.mStorageManager.openProxyFileDescriptor(this.mFuseAppLoop.getMountPointId(), registerCallback, i);
-                        if (openProxyFileDescriptor == null) {
-                            this.mFuseAppLoop.unregisterCallback(registerCallback);
+                        int iRegisterCallback = this.mFuseAppLoop.registerCallback(proxyFileDescriptorCallback, handler);
+                        parcelFileDescriptorOpenProxyFileDescriptor = this.mStorageManager.openProxyFileDescriptor(this.mFuseAppLoop.getMountPointId(), iRegisterCallback, i);
+                        if (parcelFileDescriptorOpenProxyFileDescriptor == null) {
+                            this.mFuseAppLoop.unregisterCallback(iRegisterCallback);
                             throw new FuseUnavailableMountException(this.mFuseAppLoop.getMountPointId());
                         }
                     } catch (FuseUnavailableMountException e) {
@@ -1465,7 +1463,7 @@ public class StorageManager {
                         this.mFuseAppLoop = null;
                     }
                 }
-                return openProxyFileDescriptor;
+                return parcelFileDescriptorOpenProxyFileDescriptor;
             } catch (RemoteException e2) {
                 throw new IOException(e2);
             }
@@ -1490,7 +1488,7 @@ public class StorageManager {
         return mountPointId;
     }
 
-    public long getCacheQuotaBytes(UUID uuid) throws IOException {
+    public long getCacheQuotaBytes(UUID uuid) throws Throwable {
         try {
             return this.mStorageManager.getCacheQuotaBytes(convert(uuid), this.mContext.getApplicationInfo().uid);
         } catch (ParcelableException e) {
@@ -1501,7 +1499,7 @@ public class StorageManager {
         }
     }
 
-    public long getCacheSizeBytes(UUID uuid) throws IOException {
+    public long getCacheSizeBytes(UUID uuid) throws Throwable {
         try {
             return this.mStorageManager.getCacheSizeBytes(convert(uuid), this.mContext.getApplicationInfo().uid);
         } catch (ParcelableException e) {
@@ -1517,7 +1515,7 @@ public class StorageManager {
     }
 
     @SystemApi
-    public long getAllocatableBytes(UUID uuid, int i) throws IOException {
+    public long getAllocatableBytes(UUID uuid, int i) throws Throwable {
         try {
             return this.mStorageManager.getAllocatableBytes(convert(uuid), i, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
@@ -1528,12 +1526,12 @@ public class StorageManager {
         }
     }
 
-    public void allocateBytes(UUID uuid, long j) throws IOException {
+    public void allocateBytes(UUID uuid, long j) throws Throwable {
         allocateBytes(uuid, j, 0);
     }
 
     @SystemApi
-    public void allocateBytes(UUID uuid, long j, int i) throws IOException {
+    public void allocateBytes(UUID uuid, long j, int i) throws Throwable {
         try {
             this.mStorageManager.allocateBytes(convert(uuid), j, i, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
@@ -1552,12 +1550,12 @@ public class StorageManager {
         }
     }
 
-    public void allocateBytes(FileDescriptor fileDescriptor, long j) throws IOException {
+    public void allocateBytes(FileDescriptor fileDescriptor, long j) throws Throwable {
         allocateBytes(fileDescriptor, j, 0);
     }
 
     @SystemApi
-    public void allocateBytes(FileDescriptor fileDescriptor, long j, int i) throws IOException {
+    public void allocateBytes(FileDescriptor fileDescriptor, long j, int i) throws Throwable {
         File file = ParcelFileDescriptor.getFile(fileDescriptor);
         UUID uuidForPath = getUuidForPath(file);
         for (int i2 = 0; i2 < 3; i2++) {
@@ -1589,7 +1587,7 @@ public class StorageManager {
     }
 
     @SystemApi
-    public void updateExternalStorageFileQuotaType(File file, int i) throws IOException {
+    public void updateExternalStorageFileQuotaType(File file, int i) throws IOException, NumberFormatException {
         int identifier;
         long projectIdForUser;
         if (file.exists()) {
@@ -1639,7 +1637,7 @@ public class StorageManager {
         }
     }
 
-    private static void setCacheBehavior(File file, String str, boolean z) throws IOException {
+    private static void setCacheBehavior(File file, String str, boolean z) throws IOException, ErrnoException {
         if (!file.isDirectory()) {
             throw new IOException("Cache behavior can only be set on directories");
         }
@@ -1660,7 +1658,7 @@ public class StorageManager {
         }
     }
 
-    private static boolean isCacheBehavior(File file, String str) throws IOException {
+    private static boolean isCacheBehavior(File file, String str) throws IOException, ErrnoException {
         try {
             Os.getxattr(file.getAbsolutePath(), str);
             return true;
@@ -1672,7 +1670,7 @@ public class StorageManager {
         }
     }
 
-    public void setCacheBehaviorGroup(File file, boolean z) throws IOException {
+    public void setCacheBehaviorGroup(File file, boolean z) throws IOException, ErrnoException {
         setCacheBehavior(file, XATTR_CACHE_GROUP, z);
     }
 
@@ -1680,7 +1678,7 @@ public class StorageManager {
         return isCacheBehavior(file, XATTR_CACHE_GROUP);
     }
 
-    public void setCacheBehaviorTombstone(File file, boolean z) throws IOException {
+    public void setCacheBehaviorTombstone(File file, boolean z) throws IOException, ErrnoException {
         setCacheBehavior(file, XATTR_CACHE_TOMBSTONE, z);
     }
 
@@ -1718,9 +1716,9 @@ public class StorageManager {
         if (UUID_SYSTEM_.equals(uuid)) {
             return "system";
         }
-        String uuid2 = uuid.toString();
-        if (uuid2.startsWith(FAT_UUID_PREFIX)) {
-            String upperCase = uuid2.substring(28).toUpperCase(Locale.US);
+        String string = uuid.toString();
+        if (string.startsWith(FAT_UUID_PREFIX)) {
+            String upperCase = string.substring(28).toUpperCase(Locale.US);
             return upperCase.substring(0, 4) + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + upperCase.substring(4);
         }
         return uuid.toString();
@@ -1861,7 +1859,7 @@ public class StorageManager {
         }
     }
 
-    private boolean isValidPath(String str) {
+    private boolean isValidPath(String str) throws IOException {
         try {
             String canonicalPath = new File(str).getCanonicalPath();
             if (canonicalPath == null) {
@@ -1926,17 +1924,17 @@ public class StorageManager {
     }
 
     private String getPackageNameByContext() {
-        String str;
+        String packageName;
         try {
-            str = this.mContext.getPackageName();
+            packageName = this.mContext.getPackageName();
         } catch (Exception e) {
             e.printStackTrace();
-            str = null;
+            packageName = null;
         }
         StringBuilder sb = new StringBuilder("getPackageNameByContext : Package name : ");
-        sb.append(str == null ? "NULL" : str);
+        sb.append(packageName == null ? "NULL" : packageName);
         Log.d(TAG, sb.toString());
-        return str;
+        return packageName;
     }
 
     public void semManageExternalStorage(String str, int i) {

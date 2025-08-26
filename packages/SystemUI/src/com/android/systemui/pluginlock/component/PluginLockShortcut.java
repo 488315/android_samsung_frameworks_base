@@ -15,7 +15,6 @@ import com.android.systemui.pluginlock.PluginLockMediator;
 import com.android.systemui.pluginlock.model.DynamicLockData;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockShortcut extends AbstractPluginLockItem {
     private static final String KEY_SHORTCUT_ENABLED = "lockscreen_show_shortcut";
@@ -35,7 +34,7 @@ public class PluginLockShortcut extends AbstractPluginLockItem {
         this.mCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.pluginlock.component.PluginLockShortcut$$ExternalSyntheticLambda0
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                PluginLockShortcut.this.lambda$new$0(uri);
+                this.f$0.lambda$new$0(uri);
             }
         };
         this.mMediator = pluginLockMediator;
@@ -129,12 +128,12 @@ public class PluginLockShortcut extends AbstractPluginLockItem {
             Log.w(TAG, "updateLockStarStoredData, uri is null or shortcut isn't enabled");
             return;
         }
-        Bundle m = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("action", UPDATE_LOCKSTAR_DATA);
-        Bundle m2 = KeyguardSecPatternView$$ExternalSyntheticOutline0.m(UPDATE_LOCKSTAR_DATA_ITEM, KEY_SHORTCUT_VISIBILITY);
-        m2.putInt(KEY_SHORTCUT_VISIBILITY, getSettingsInt("lockscreen_show_shortcut", 1));
-        m.putBundle("extras", m2);
-        Log.d(TAG, "updateLockStarStoredData() bundle" + m.toString());
-        this.mMediator.onEventReceived(m);
+        Bundle bundleM = KeyguardSecPatternView$$ExternalSyntheticOutline0.m("action", UPDATE_LOCKSTAR_DATA);
+        Bundle bundleM2 = KeyguardSecPatternView$$ExternalSyntheticOutline0.m(UPDATE_LOCKSTAR_DATA_ITEM, KEY_SHORTCUT_VISIBILITY);
+        bundleM2.putInt(KEY_SHORTCUT_VISIBILITY, getSettingsInt("lockscreen_show_shortcut", 1));
+        bundleM.putBundle("extras", bundleM2);
+        Log.d(TAG, "updateLockStarStoredData() bundle" + bundleM.toString());
+        this.mMediator.onEventReceived(bundleM);
     }
 
     @Override // com.android.systemui.pluginlock.component.AbstractPluginLockItem
@@ -206,13 +205,13 @@ public class PluginLockShortcut extends AbstractPluginLockItem {
             return;
         }
         unregisterCallback();
-        int intValue = dynamicLockData2.getShortcutData().getVisibility().intValue();
-        ListPopupWindow$$ExternalSyntheticOutline0.m(intValue, "update() visibility: ", TAG);
-        if (intValue == -1) {
+        int iIntValue = dynamicLockData2.getShortcutData().getVisibility().intValue();
+        ListPopupWindow$$ExternalSyntheticOutline0.m(iIntValue, "update() visibility: ", TAG);
+        if (iIntValue == -1) {
             setShortcutVisibility(getShortcutBackup());
             setShortcutBackup(-1);
         } else {
-            int i = intValue == 0 ? 1 : 0;
+            int i = iIntValue == 0 ? 1 : 0;
             setShortcutVisibility(i);
             registerCallback(i);
         }

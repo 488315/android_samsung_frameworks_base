@@ -132,9 +132,9 @@ public final class AudioRecordingConfiguration implements Parcelable {
             }
             AudioPatch audioPatch = (AudioPatch) arrayList.get(i);
             if (audioPatch.id() == this.mPatchHandle) {
-                AudioPortConfig[] sources = audioPatch.sources();
-                if (sources != null && sources.length > 0) {
-                    return AudioManager.getDeviceForPortId(sources[0].port().id(), 1);
+                AudioPortConfig[] audioPortConfigArrSources = audioPatch.sources();
+                if (audioPortConfigArrSources != null && audioPortConfigArrSources.length > 0) {
+                    return AudioManager.getDeviceForPortId(audioPortConfigArrSources[0].port().id(), 1);
                 }
             } else {
                 i++;

@@ -37,13 +37,13 @@ public final class SehEncodedUssd {
 
     public static final ArrayList<SehEncodedUssd> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SehEncodedUssd> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SehEncodedUssd sehEncodedUssd = new SehEncodedUssd();
-            sehEncodedUssd.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+            sehEncodedUssd.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
             arrayList.add(sehEncodedUssd);
         }
         return arrayList;
@@ -51,10 +51,10 @@ public final class SehEncodedUssd {
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         int int32 = hwBlob.getInt32(8 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j, true);
         this.encodedUssd.clear();
         for (int i = 0; i < int32; i++) {
-            this.encodedUssd.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i)));
+            this.encodedUssd.add(Byte.valueOf(embeddedBuffer.getInt8(i)));
         }
         this.ussdLength = hwBlob.getInt32(16 + j);
         this.dcsCode = hwBlob.getInt32(20 + j);

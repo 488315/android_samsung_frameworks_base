@@ -16,7 +16,6 @@ import com.android.systemui.statusbar.notification.collection.render.NodeControl
 import com.android.systemui.statusbar.notification.row.NotificationGutsManager;
 import java.util.Collection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class FavoriteNotifCoordnator extends Invalidator implements Coordinator {
@@ -49,12 +48,12 @@ public final class FavoriteNotifCoordnator extends Invalidator implements Coordi
 
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
             public NotifComparator getComparator() {
-                return FavoriteNotifCoordnator.this.getTimeSortCoordnator().getTimeComparator();
+                return this.this$0.getTimeSortCoordnator().getTimeComparator();
             }
 
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
             public NodeController getHeaderNodeController() {
-                return FavoriteNotifCoordnator.this.getFavoriteHeaderController();
+                return this.this$0.getFavoriteHeaderController();
             }
 
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner

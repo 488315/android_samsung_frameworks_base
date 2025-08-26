@@ -44,9 +44,9 @@ public interface IBackAnimationFinishedCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBackAnimationFinishedCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBackAnimationFinishedCallback)) {
-                return (IBackAnimationFinishedCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBackAnimationFinishedCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBackAnimationFinishedCallback)) {
+                return (IBackAnimationFinishedCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IBackAnimationFinishedCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onAnimationFinished(readBoolean);
+                onAnimationFinished(z);
                 parcel2.writeNoException();
                 return true;
             }
@@ -100,16 +100,16 @@ public interface IBackAnimationFinishedCallback extends IInterface {
 
             @Override // android.window.IBackAnimationFinishedCallback
             public void onAnimationFinished(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBackAnimationFinishedCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IBackAnimationFinishedCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

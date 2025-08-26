@@ -534,12 +534,12 @@ public final class PerfettoTrackEventExtra {
         this.mFieldStringCache = new Pool<>(5);
         this.mFieldNestedCache = new Pool<>(5);
         this.mBuilderCache = new Pool<>(5);
-        long native_init = native_init();
-        this.mPtr = native_init;
+        long jNative_init = native_init();
+        this.mPtr = jNative_init;
         if (RavenwoodEnvironment.getInstance().isRunningOnRavenwood()) {
             return;
         }
-        sRegistry.registerNativeAllocation(this, native_init);
+        sRegistry.registerNativeAllocation(this, jNative_init);
     }
 
     public long getPtr() {
@@ -623,10 +623,10 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_process_terminating_flow(long j, long j2);
 
         Flow() {
-            long native_init = native_init();
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
-            sRegistry.registerNativeAllocation(this, native_init);
+            long jNative_init = native_init();
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         public void setProcessFlow(long j) {
@@ -659,11 +659,11 @@ public final class PerfettoTrackEventExtra {
         private static native long native_init(long j, String str, long j2);
 
         NamedTrack(String str, long j) {
-            long native_init = native_init(PerfettoTrackEventExtra.sNamedTrackId.incrementAndGet(), str, j);
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
+            long jNative_init = native_init(PerfettoTrackEventExtra.sNamedTrackId.incrementAndGet(), str, j);
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
             this.mName = str;
-            sRegistry.registerNativeAllocation(this, native_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -692,11 +692,11 @@ public final class PerfettoTrackEventExtra {
         private static native long native_init(String str, long j);
 
         CounterTrack(String str, long j) {
-            long native_init = native_init(str, j);
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
+            long jNative_init = native_init(str, j);
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
             this.mName = str;
-            sRegistry.registerNativeAllocation(this, native_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -727,10 +727,10 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_value(long j, long j2);
 
         CounterInt64() {
-            long native_init = native_init();
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
-            sRegistry.registerNativeAllocation(this, native_init);
+            long jNative_init = native_init();
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -761,10 +761,10 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_value(long j, double d);
 
         CounterDouble() {
-            long native_init = native_init();
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
-            sRegistry.registerNativeAllocation(this, native_init);
+            long jNative_init = native_init();
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -796,11 +796,11 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_value(long j, long j2);
 
         ArgInt64(String str) {
-            long native_init = native_init(str);
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
+            long jNative_init = native_init(str);
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
             this.mName = str;
-            sRegistry.registerNativeAllocation(this, native_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -836,11 +836,11 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_value(long j, boolean z);
 
         ArgBool(String str) {
-            long native_init = native_init(str);
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
+            long jNative_init = native_init(str);
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
             this.mName = str;
-            sRegistry.registerNativeAllocation(this, native_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -876,11 +876,11 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_value(long j, double d);
 
         ArgDouble(String str) {
-            long native_init = native_init(str);
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
+            long jNative_init = native_init(str);
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
             this.mName = str;
-            sRegistry.registerNativeAllocation(this, native_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -916,11 +916,11 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_value(long j, String str);
 
         ArgString(String str) {
-            long native_init = native_init(str);
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
+            long jNative_init = native_init(str);
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
             this.mName = str;
-            sRegistry.registerNativeAllocation(this, native_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -958,10 +958,10 @@ public final class PerfettoTrackEventExtra {
         private static native long native_init();
 
         Proto() {
-            long native_init = native_init();
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
-            sRegistry.registerNativeAllocation(this, native_init);
+            long jNative_init = native_init();
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -998,10 +998,10 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_value(long j, long j2, long j3);
 
         FieldInt64() {
-            long native_init = native_init();
-            this.mPtr = native_init;
-            this.mFieldPtr = native_get_extra_ptr(native_init);
-            sRegistry.registerNativeAllocation(this, native_init);
+            long jNative_init = native_init();
+            this.mPtr = jNative_init;
+            this.mFieldPtr = native_get_extra_ptr(jNative_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -1033,10 +1033,10 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_value(long j, long j2, double d);
 
         FieldDouble() {
-            long native_init = native_init();
-            this.mPtr = native_init;
-            this.mFieldPtr = native_get_extra_ptr(native_init);
-            sRegistry.registerNativeAllocation(this, native_init);
+            long jNative_init = native_init();
+            this.mPtr = jNative_init;
+            this.mFieldPtr = native_get_extra_ptr(jNative_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -1068,10 +1068,10 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_value(long j, long j2, String str);
 
         FieldString() {
-            long native_init = native_init();
-            this.mPtr = native_init;
-            this.mFieldPtr = native_get_extra_ptr(native_init);
-            sRegistry.registerNativeAllocation(this, native_init);
+            long jNative_init = native_init();
+            this.mPtr = jNative_init;
+            this.mFieldPtr = native_get_extra_ptr(jNative_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer
@@ -1106,10 +1106,10 @@ public final class PerfettoTrackEventExtra {
         private static native void native_set_id(long j, long j2);
 
         FieldNested() {
-            long native_init = native_init();
-            this.mPtr = native_init;
-            this.mFieldPtr = native_get_extra_ptr(native_init);
-            sRegistry.registerNativeAllocation(this, native_init);
+            long jNative_init = native_init();
+            this.mPtr = jNative_init;
+            this.mFieldPtr = native_get_extra_ptr(jNative_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         @Override // android.os.PerfettoTrackEventExtra.PerfettoPointer

@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class IndexBasedArrayIterator implements Iterator, KMappedMarker {
     public boolean canRemove;
@@ -27,10 +26,10 @@ public abstract class IndexBasedArrayIterator implements Iterator, KMappedMarker
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        Object elementAt = elementAt(this.index);
+        Object objElementAt = elementAt(this.index);
         this.index++;
         this.canRemove = true;
-        return elementAt;
+        return objElementAt;
     }
 
     @Override // java.util.Iterator

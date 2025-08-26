@@ -51,9 +51,9 @@ public interface IPowerStatsService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPowerStatsService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPowerStatsService)) {
-                return (IPowerStatsService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPowerStatsService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPowerStatsService)) {
+                return (IPowerStatsService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,10 +87,10 @@ public interface IPowerStatsService extends IInterface {
                 parcel.enforceNoDataAvail();
                 getSupportedPowerMonitors(resultReceiver);
             } else if (i == 2) {
-                int[] createIntArray = parcel.createIntArray();
+                int[] iArrCreateIntArray = parcel.createIntArray();
                 ResultReceiver resultReceiver2 = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                 parcel.enforceNoDataAvail();
-                getPowerMonitorReadings(createIntArray, resultReceiver2);
+                getPowerMonitorReadings(iArrCreateIntArray, resultReceiver2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,26 +115,26 @@ public interface IPowerStatsService extends IInterface {
 
             @Override // android.os.IPowerStatsService
             public void getSupportedPowerMonitors(ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPowerStatsService.DESCRIPTOR);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPowerStatsService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IPowerStatsService
             public void getPowerMonitorReadings(int[] iArr, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPowerStatsService.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPowerStatsService.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

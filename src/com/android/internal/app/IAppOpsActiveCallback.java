@@ -44,9 +44,9 @@ public interface IAppOpsActiveCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAppOpsActiveCallback)) {
-                return (IAppOpsActiveCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAppOpsActiveCallback)) {
+                return (IAppOpsActiveCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,16 +73,16 @@ public interface IAppOpsActiveCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                int readInt3 = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                int i5 = parcel.readInt();
+                boolean z = parcel.readBoolean();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                opActiveChanged(readInt, readInt2, readString, readString2, readInt3, readBoolean, readInt4, readInt5);
+                opActiveChanged(i3, i4, string, string2, i5, z, i6, i7);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -106,20 +106,20 @@ public interface IAppOpsActiveCallback extends IInterface {
 
             @Override // com.android.internal.app.IAppOpsActiveCallback
             public void opActiveChanged(int i, int i2, String str, String str2, int i3, boolean z, int i4, int i5) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

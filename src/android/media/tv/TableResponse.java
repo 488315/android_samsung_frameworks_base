@@ -102,13 +102,13 @@ public final class TableResponse extends BroadcastInfoResponse implements Parcel
 
     TableResponse(Parcel parcel) {
         super(2, parcel);
-        String readString = parcel.readString();
-        this.mTableUri = readString == null ? null : Uri.parse(readString);
+        String string = parcel.readString();
+        this.mTableUri = string == null ? null : Uri.parse(string);
         this.mVersion = parcel.readInt();
         this.mSize = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (readInt >= 0) {
-            byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        if (i >= 0) {
+            byte[] bArr = new byte[i];
             this.mTableByteArray = bArr;
             parcel.readByteArray(bArr);
         } else {

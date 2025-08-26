@@ -3,7 +3,6 @@ package com.android.systemui.statusbar;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class KeyguardSecIndicationController$$ExternalSyntheticLambda0 implements Action, Consumer {
     public final /* synthetic */ KeyguardSecIndicationController f$0;

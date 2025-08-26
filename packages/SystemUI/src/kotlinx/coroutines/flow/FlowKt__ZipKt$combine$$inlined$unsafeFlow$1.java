@@ -6,7 +6,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 implements Flow {
     public final /* synthetic */ Flow $flow$inlined;
@@ -21,7 +20,7 @@ public final class FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 implements Flow {
 
     @Override // kotlinx.coroutines.flow.Flow
     public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-        Object combineInternal = CombineKt.combineInternal(new Flow[]{this.$this_combine$inlined, this.$flow$inlined}, FlowKt__ZipKt$nullArrayFactory$1.INSTANCE, new FlowKt__ZipKt$combine$1$1(this.$transform$inlined, null), flowCollector, continuation);
-        return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+        Object objCombineInternal = CombineKt.combineInternal(new Flow[]{this.$this_combine$inlined, this.$flow$inlined}, FlowKt__ZipKt$nullArrayFactory$1.INSTANCE, new FlowKt__ZipKt$combine$1$1(this.$transform$inlined, null), flowCollector, continuation);
+        return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
     }
 }

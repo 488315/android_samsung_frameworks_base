@@ -33,34 +33,34 @@ public final class IkeIdentificationUtils {
 
     public static PersistableBundle toPersistableBundle(IkeIdentification ikeIdentification) {
         if (ikeIdentification instanceof IkeDerAsn1DnIdentification) {
-            PersistableBundle createPersistableBundle = createPersistableBundle(1);
-            createPersistableBundle.putPersistableBundle(DER_ASN1_DN_KEY, PersistableBundleUtils.fromByteArray(((IkeDerAsn1DnIdentification) ikeIdentification).derAsn1Dn.getEncoded()));
-            return createPersistableBundle;
+            PersistableBundle persistableBundleCreatePersistableBundle = createPersistableBundle(1);
+            persistableBundleCreatePersistableBundle.putPersistableBundle(DER_ASN1_DN_KEY, PersistableBundleUtils.fromByteArray(((IkeDerAsn1DnIdentification) ikeIdentification).derAsn1Dn.getEncoded()));
+            return persistableBundleCreatePersistableBundle;
         }
         if (ikeIdentification instanceof IkeFqdnIdentification) {
-            PersistableBundle createPersistableBundle2 = createPersistableBundle(2);
-            createPersistableBundle2.putString(FQDN_KEY, ((IkeFqdnIdentification) ikeIdentification).fqdn);
-            return createPersistableBundle2;
+            PersistableBundle persistableBundleCreatePersistableBundle2 = createPersistableBundle(2);
+            persistableBundleCreatePersistableBundle2.putString(FQDN_KEY, ((IkeFqdnIdentification) ikeIdentification).fqdn);
+            return persistableBundleCreatePersistableBundle2;
         }
         if (ikeIdentification instanceof IkeIpv4AddrIdentification) {
-            PersistableBundle createPersistableBundle3 = createPersistableBundle(3);
-            createPersistableBundle3.putString(IP4_ADDRESS_KEY, ((IkeIpv4AddrIdentification) ikeIdentification).ipv4Address.getHostAddress());
-            return createPersistableBundle3;
+            PersistableBundle persistableBundleCreatePersistableBundle3 = createPersistableBundle(3);
+            persistableBundleCreatePersistableBundle3.putString(IP4_ADDRESS_KEY, ((IkeIpv4AddrIdentification) ikeIdentification).ipv4Address.getHostAddress());
+            return persistableBundleCreatePersistableBundle3;
         }
         if (ikeIdentification instanceof IkeIpv6AddrIdentification) {
-            PersistableBundle createPersistableBundle4 = createPersistableBundle(4);
-            createPersistableBundle4.putString(IP6_ADDRESS_KEY, ((IkeIpv6AddrIdentification) ikeIdentification).ipv6Address.getHostAddress());
-            return createPersistableBundle4;
+            PersistableBundle persistableBundleCreatePersistableBundle4 = createPersistableBundle(4);
+            persistableBundleCreatePersistableBundle4.putString(IP6_ADDRESS_KEY, ((IkeIpv6AddrIdentification) ikeIdentification).ipv6Address.getHostAddress());
+            return persistableBundleCreatePersistableBundle4;
         }
         if (ikeIdentification instanceof IkeKeyIdIdentification) {
-            PersistableBundle createPersistableBundle5 = createPersistableBundle(5);
-            createPersistableBundle5.putPersistableBundle(KEY_ID_KEY, PersistableBundleUtils.fromByteArray(((IkeKeyIdIdentification) ikeIdentification).keyId));
-            return createPersistableBundle5;
+            PersistableBundle persistableBundleCreatePersistableBundle5 = createPersistableBundle(5);
+            persistableBundleCreatePersistableBundle5.putPersistableBundle(KEY_ID_KEY, PersistableBundleUtils.fromByteArray(((IkeKeyIdIdentification) ikeIdentification).keyId));
+            return persistableBundleCreatePersistableBundle5;
         }
         if (ikeIdentification instanceof IkeRfc822AddrIdentification) {
-            PersistableBundle createPersistableBundle6 = createPersistableBundle(6);
-            createPersistableBundle6.putString(RFC822_ADDRESS_KEY, ((IkeRfc822AddrIdentification) ikeIdentification).rfc822Name);
-            return createPersistableBundle6;
+            PersistableBundle persistableBundleCreatePersistableBundle6 = createPersistableBundle(6);
+            persistableBundleCreatePersistableBundle6.putString(RFC822_ADDRESS_KEY, ((IkeRfc822AddrIdentification) ikeIdentification).rfc822Name);
+            return persistableBundleCreatePersistableBundle6;
         }
         throw new IllegalStateException("Unrecognized IkeIdentification subclass");
     }

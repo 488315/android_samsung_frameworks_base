@@ -81,9 +81,9 @@ public interface ISViewCoverBaseService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISViewCoverBaseService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISViewCoverBaseService)) {
-                return (ISViewCoverBaseService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISViewCoverBaseService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISViewCoverBaseService)) {
+                return (ISViewCoverBaseService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -137,16 +137,16 @@ public interface ISViewCoverBaseService extends IInterface {
                     updateCoverState(coverState);
                     return true;
                 case 5:
-                    boolean isCoverViewShowing = isCoverViewShowing();
+                    boolean zIsCoverViewShowing = isCoverViewShowing();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCoverViewShowing);
+                    parcel2.writeBoolean(zIsCoverViewShowing);
                     return true;
                 case 6:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int onCoverAppCovered = onCoverAppCovered(readBoolean);
+                    int iOnCoverAppCovered = onCoverAppCovered(z);
                     parcel2.writeNoException();
-                    parcel2.writeInt(onCoverAppCovered);
+                    parcel2.writeInt(iOnCoverAppCovered);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -171,77 +171,77 @@ public interface ISViewCoverBaseService extends IInterface {
 
             @Override // com.samsung.android.cover.ISViewCoverBaseService
             public void onSystemReady() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.cover.ISViewCoverBaseService
             public void onSViewCoverShow() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.cover.ISViewCoverBaseService
             public void onSViewCoverHide() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.cover.ISViewCoverBaseService
             public void updateCoverState(CoverState coverState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
-                    obtain.writeTypedObject(coverState, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(coverState, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.cover.ISViewCoverBaseService
             public boolean isCoverViewShowing() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.cover.ISViewCoverBaseService
             public int onCoverAppCovered(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISViewCoverBaseService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

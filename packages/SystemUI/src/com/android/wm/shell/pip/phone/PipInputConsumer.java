@@ -14,7 +14,6 @@ import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.pip.phone.PipInputConsumer.InputEventReceiver;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipInputConsumer {
     public InputEventReceiver mInputEventReceiver;
@@ -25,7 +24,6 @@ public class PipInputConsumer {
     public final IBinder mToken = new Binder();
     public final IWindowManager mWindowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InputEventReceiver extends BatchedInputEventReceiver {
         public InputEventReceiver(InputChannel inputChannel, Looper looper, Choreographer choreographer) {
             super(inputChannel, looper, choreographer);
@@ -65,7 +63,7 @@ public class PipInputConsumer {
         this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.pip.phone.PipInputConsumer$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                PipInputConsumer pipInputConsumer = PipInputConsumer.this;
+                PipInputConsumer pipInputConsumer = this.f$0;
                 InputChannel inputChannel2 = inputChannel;
                 pipInputConsumer.getClass();
                 pipInputConsumer.mInputEventReceiver = pipInputConsumer.new InputEventReceiver(inputChannel2, Looper.myLooper(), Choreographer.getInstance());

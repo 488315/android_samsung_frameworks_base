@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.Color;
 import androidx.compose.ui.graphics.ColorKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class TextSelectionColorsKt {
     public static final TextSelectionColors DefaultTextSelectionColors;
@@ -18,9 +17,7 @@ public abstract class TextSelectionColorsKt {
     });
 
     static {
-        long Color;
-        long Color2 = ColorKt.Color(4282550004L);
-        Color = ColorKt.Color(Color.m461getRedimpl(Color2), Color.m460getGreenimpl(Color2), Color.m458getBlueimpl(Color2), 0.4f, Color.m459getColorSpaceimpl(Color2));
-        DefaultTextSelectionColors = new TextSelectionColors(Color2, Color, null);
+        long jColor = ColorKt.Color(4282550004L);
+        DefaultTextSelectionColors = new TextSelectionColors(jColor, ColorKt.Color(Color.m463getRedimpl(jColor), Color.m462getGreenimpl(jColor), Color.m460getBlueimpl(jColor), 0.4f, Color.m461getColorSpaceimpl(jColor)), null);
     }
 }

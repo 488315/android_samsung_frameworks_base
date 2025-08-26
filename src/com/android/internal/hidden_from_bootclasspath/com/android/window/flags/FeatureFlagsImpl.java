@@ -958,11 +958,6 @@ public final class FeatureFlagsImpl implements FeatureFlags {
     }
 
     @Override // com.android.internal.hidden_from_bootclasspath.com.android.window.flags.FeatureFlags
-    public boolean keepAppWindowHideWhileLocked() {
-        return true;
-    }
-
-    @Override // com.android.internal.hidden_from_bootclasspath.com.android.window.flags.FeatureFlags
     public boolean keyboardShortcutsToSwitchDesks() {
         return false;
     }

@@ -4,7 +4,6 @@ import com.google.ux.material.libmonet.hct.Hct;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TonalPalette {
     public final Map cache = new HashMap();
@@ -12,7 +11,6 @@ public final class TonalPalette {
     public final double hue;
     public final Hct keyColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeyColor {
         public final Map chromaCache = new HashMap();
         public final double hue;
@@ -42,13 +40,13 @@ public final class TonalPalette {
     }
 
     public static TonalPalette fromHueAndChroma(double d, double d2) {
-        Hct from;
+        Hct hctFrom;
         KeyColor keyColor = new KeyColor(d, d2);
         int i = 100;
         int i2 = 0;
         while (true) {
             if (i2 >= i) {
-                from = Hct.from(keyColor.hue, keyColor.requestedChroma, i2);
+                hctFrom = Hct.from(keyColor.hue, keyColor.requestedChroma, i2);
                 break;
             }
             int i3 = (i2 + i) / 2;
@@ -59,7 +57,7 @@ public final class TonalPalette {
                     i = i3;
                 } else {
                     if (i2 == i3) {
-                        from = Hct.from(keyColor.hue, keyColor.requestedChroma, i2);
+                        hctFrom = Hct.from(keyColor.hue, keyColor.requestedChroma, i2);
                         break;
                     }
                     i2 = i3;
@@ -70,6 +68,6 @@ public final class TonalPalette {
                 i = i3;
             }
         }
-        return new TonalPalette(d, d2, from);
+        return new TonalPalette(d, d2, hctFrom);
     }
 }

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OneHandedTimeoutHandler {
     public final ShellExecutor mMainExecutor;
@@ -15,7 +14,7 @@ public class OneHandedTimeoutHandler {
     public final OneHandedTimeoutHandler$$ExternalSyntheticLambda0 mTimeoutRunnable = new Runnable() { // from class: com.android.wm.shell.onehanded.OneHandedTimeoutHandler$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
         public final void run() {
-            OneHandedTimeoutHandler oneHandedTimeoutHandler = OneHandedTimeoutHandler.this;
+            OneHandedTimeoutHandler oneHandedTimeoutHandler = this.f$0;
             for (int size = ((ArrayList) oneHandedTimeoutHandler.mListeners).size() - 1; size >= 0; size--) {
                 ((OneHandedController$$ExternalSyntheticLambda10) ((ArrayList) oneHandedTimeoutHandler.mListeners).get(size)).f$0.stopOneHanded(6);
             }

@@ -40,13 +40,13 @@ public class ViewSwitcher extends ViewAnimator {
     }
 
     private View obtainView() {
-        View makeView = this.mFactory.makeView();
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) makeView.getLayoutParams();
+        View viewMakeView = this.mFactory.makeView();
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) viewMakeView.getLayoutParams();
         if (layoutParams == null) {
             layoutParams = new FrameLayout.LayoutParams(-1, -2);
         }
-        addView(makeView, layoutParams);
-        return makeView;
+        addView(viewMakeView, layoutParams);
+        return viewMakeView;
     }
 
     public void setFactory(ViewFactory viewFactory) {

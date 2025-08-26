@@ -6,18 +6,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IAuthenticationStatus extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.net.vpn.serviceprovider.tethering.IAuthenticationStatus";
 
     void getStatus(int i) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IAuthenticationStatus {
         public static final int TRANSACTION_getStatus = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IAuthenticationStatus {
             public IBinder mRemote;
 
@@ -36,13 +33,13 @@ public interface IAuthenticationStatus extends IInterface {
 
             @Override // com.samsung.android.knox.net.vpn.serviceprovider.tethering.IAuthenticationStatus
             public void getStatus(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAuthenticationStatus.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAuthenticationStatus.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -55,8 +52,8 @@ public interface IAuthenticationStatus extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAuthenticationStatus.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IAuthenticationStatus)) ? new Proxy(iBinder) : (IAuthenticationStatus) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAuthenticationStatus.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IAuthenticationStatus)) ? new Proxy(iBinder) : (IAuthenticationStatus) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -71,9 +68,9 @@ public interface IAuthenticationStatus extends IInterface {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            int readInt = parcel.readInt();
+            int i3 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            getStatus(readInt);
+            getStatus(i3);
             return true;
         }
 
@@ -83,7 +80,6 @@ public interface IAuthenticationStatus extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IAuthenticationStatus {
         @Override // android.os.IInterface
         public IBinder asBinder() {

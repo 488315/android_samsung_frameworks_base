@@ -24,7 +24,6 @@ import java.io.PrintWriter;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DisplayCutoutBaseView extends View implements RegionInterceptingFrameLayout.RegionInterceptableView {
     public static final Companion Companion = new Companion(null);
@@ -51,7 +50,6 @@ public class DisplayCutoutBaseView extends View implements RegionInterceptingFra
     public boolean shouldDrawCutout;
     public boolean showProtection;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -102,17 +100,17 @@ public class DisplayCutoutBaseView extends View implements RegionInterceptingFra
     }
 
     public void dump(PrintWriter printWriter) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.increaseIndent();
-        asIndenting.println("DisplayCutoutBaseView:");
-        asIndenting.increaseIndent();
-        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("shouldDrawCutout=", this.shouldDrawCutout, asIndenting);
-        asIndenting.println("cutout=" + this.displayInfo.displayCutout);
-        asIndenting.println("cameraProtectionProgress=" + this.cameraProtectionProgress);
-        asIndenting.println("protectionRect=" + this.protectionRect);
-        asIndenting.println("protectionRectOrig=" + this.protectionRectOrig);
-        asIndenting.decreaseIndent();
-        asIndenting.decreaseIndent();
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.increaseIndent();
+        indentingPrintWriterAsIndenting.println("DisplayCutoutBaseView:");
+        indentingPrintWriterAsIndenting.increaseIndent();
+        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("shouldDrawCutout=", this.shouldDrawCutout, indentingPrintWriterAsIndenting);
+        indentingPrintWriterAsIndenting.println("cutout=" + this.displayInfo.displayCutout);
+        indentingPrintWriterAsIndenting.println("cameraProtectionProgress=" + this.cameraProtectionProgress);
+        indentingPrintWriterAsIndenting.println("protectionRect=" + this.protectionRect);
+        indentingPrintWriterAsIndenting.println("protectionRectOrig=" + this.protectionRectOrig);
+        indentingPrintWriterAsIndenting.decreaseIndent();
+        indentingPrintWriterAsIndenting.decreaseIndent();
     }
 
     public void enableShowProtection(boolean z) {

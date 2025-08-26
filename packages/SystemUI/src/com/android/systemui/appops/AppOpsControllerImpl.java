@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsController, AppOpsManager.OnOpActiveChangedListener, AppOpsManager.OnOpNotedInternalListener, IndividualSensorPrivacyController.Callback, Dumpable {
     public static final int[] OPS;
@@ -53,7 +52,6 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
     public final SparseArray mRecordingsByUid = new SparseArray();
     public final AnonymousClass1 mAudioRecordingCallback = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.appops.AppOpsControllerImpl$1, reason: invalid class name */
     public class AnonymousClass1 extends AudioManager.AudioRecordingCallback {
         public AnonymousClass1() {
@@ -82,7 +80,6 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -95,20 +92,20 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
         int[] iArr2 = {26, 101};
         OPS_CAMERA = iArr2;
         int[][] iArr3 = {iArr, iArr2, new int[]{1, 0, 42}, new int[]{24}};
-        int i = 0;
-        for (int i2 = 0; i2 < 4; i2++) {
-            int[] iArr4 = iArr3[i2];
+        int length = 0;
+        for (int i = 0; i < 4; i++) {
+            int[] iArr4 = iArr3[i];
             if (iArr4 != null && iArr4.length != 0) {
-                i += iArr4.length;
+                length += iArr4.length;
             }
         }
-        int[] iArr5 = new int[i];
-        int i3 = 0;
-        for (int i4 = 0; i4 < 4; i4++) {
-            int[] iArr6 = iArr3[i4];
+        int[] iArr5 = new int[length];
+        int length2 = 0;
+        for (int i2 = 0; i2 < 4; i2++) {
+            int[] iArr6 = iArr3[i2];
             if (iArr6 != null && iArr6.length != 0) {
-                System.arraycopy(iArr6, 0, iArr5, i3, iArr6.length);
-                i3 += iArr6.length;
+                System.arraycopy(iArr6, 0, iArr5, length2, iArr6.length);
+                length2 += iArr6.length;
             }
         }
         OPS = iArr5;
@@ -164,9 +161,9 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "AppOpsController state:", "  Listening: ");
-        m.append(this.mListening);
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "AppOpsController state:", "  Listening: ");
+        sbM.append(this.mListening);
+        printWriter.println(sbM.toString());
         printWriter.println("  Active Items:");
         for (int i = 0; i < ((ArrayList) this.mActiveItems).size(); i++) {
             AppOpItem appOpItem = (AppOpItem) ((ArrayList) this.mActiveItems).get(i);
@@ -330,7 +327,7 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
         this.mBGHandler.post(new Runnable() { // from class: com.android.systemui.appops.AppOpsControllerImpl$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                AppOpsControllerImpl appOpsControllerImpl = AppOpsControllerImpl.this;
+                AppOpsControllerImpl appOpsControllerImpl = this.f$0;
                 int i2 = i;
                 boolean z2 = z;
                 if (i2 == 2) {
@@ -360,7 +357,7 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
         this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.appops.AppOpsControllerImpl$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                final AppOpsManager.OnOpNotedListener onOpNotedListener = AppOpsControllerImpl.this;
+                final AppOpsManager.OnOpNotedListener onOpNotedListener = this.f$0;
                 if (!z) {
                     onOpNotedListener.mAppOps.stopWatchingActive(onOpNotedListener);
                     onOpNotedListener.mAppOps.stopWatchingNoted(onOpNotedListener);
@@ -404,7 +401,7 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
                 onOpNotedListener.mBGHandler.post(new Runnable() { // from class: com.android.systemui.appops.AppOpsControllerImpl$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AppOpsControllerImpl appOpsControllerImpl = AppOpsControllerImpl.this;
+                        AppOpsControllerImpl appOpsControllerImpl = onOpNotedListener;
                         appOpsControllerImpl.mAudioRecordingCallback.onRecordingConfigChanged(appOpsControllerImpl.mAudioManager.getActiveRecordingConfigurations());
                     }
                 });
@@ -416,7 +413,7 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
     public final void updateSensorDisabledStatus() {
         boolean z;
         boolean z2;
-        boolean z3;
+        boolean zIsAllRecordingPausedLocked;
         AppOpsControllerImpl appOpsControllerImpl;
         synchronized (this.mActiveItems) {
             try {
@@ -441,7 +438,7 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
                         }
                     }
                     if (z2) {
-                        z3 = this.isAllRecordingPausedLocked(appOpItem.mUid);
+                        zIsAllRecordingPausedLocked = this.isAllRecordingPausedLocked(appOpItem.mUid);
                     } else {
                         int i4 = appOpItem.mCode;
                         int i5 = 0;
@@ -455,12 +452,12 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
                                 i5++;
                             }
                         }
-                        z3 = z ? this.mCameraDisabled : false;
+                        zIsAllRecordingPausedLocked = z ? this.mCameraDisabled : false;
                     }
-                    if (appOpItem.mIsDisabled != z3) {
-                        appOpItem.mIsDisabled = z3;
+                    if (appOpItem.mIsDisabled != zIsAllRecordingPausedLocked) {
+                        appOpItem.mIsDisabled = zIsAllRecordingPausedLocked;
                         appOpsControllerImpl = this;
-                        this.mBGHandler.post(new AppOpsControllerImpl$$ExternalSyntheticLambda0(appOpsControllerImpl, appOpItem.mCode, appOpItem.mUid, appOpItem.mPackageName, !z3, appOpItem.mAttributionTag));
+                        this.mBGHandler.post(new AppOpsControllerImpl$$ExternalSyntheticLambda0(appOpsControllerImpl, appOpItem.mCode, appOpItem.mUid, appOpItem.mPackageName, !zIsAllRecordingPausedLocked, appOpItem.mAttributionTag));
                     } else {
                         appOpsControllerImpl = this;
                     }
@@ -482,17 +479,17 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
         boolean z3;
         boolean z4;
         boolean z5;
-        int strOpToOp = AppOpsManager.strOpToOp(str);
+        int iStrOpToOp = AppOpsManager.strOpToOp(str);
         if (z && i4 != -1 && i3 != 0 && (i3 & 1) == 0 && (i3 & 8) == 0) {
             return;
         }
         synchronized (this.mActiveItems) {
             try {
-                AppOpItem appOpItemLocked = getAppOpItemLocked(str2, strOpToOp, i, this.mActiveItems);
+                AppOpItem appOpItemLocked = getAppOpItemLocked(str2, iStrOpToOp, i, this.mActiveItems);
                 if (appOpItemLocked == null && z) {
                     str4 = str3;
-                    AppOpItem appOpItem = new AppOpItem(strOpToOp, i, str2, this.mClock.elapsedRealtime(), str4);
-                    i6 = strOpToOp;
+                    AppOpItem appOpItem = new AppOpItem(iStrOpToOp, i, str2, this.mClock.elapsedRealtime(), str4);
+                    i6 = iStrOpToOp;
                     i5 = i;
                     str5 = str2;
                     int i7 = 0;
@@ -535,7 +532,7 @@ public class AppOpsControllerImpl extends BroadcastReceiver implements AppOpsCon
                     str4 = str3;
                     str5 = str2;
                     i5 = i;
-                    i6 = strOpToOp;
+                    i6 = iStrOpToOp;
                     if (appOpItemLocked == null || z) {
                         z2 = false;
                     } else {

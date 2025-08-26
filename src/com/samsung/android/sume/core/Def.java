@@ -103,9 +103,8 @@ public class Def {
         }).map(new Function() { // from class: com.samsung.android.sume.core.Def$$ExternalSyntheticLambda3
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String replaceAll;
-                replaceAll = (r0 + ((String) obj)).replaceAll(ShaderAssembler.NEWLINE, ShaderAssembler.NEWLINE + str + r0);
-                return replaceAll;
+                String str2 = str;
+                return (str2 + ((String) obj)).replaceAll(ShaderAssembler.NEWLINE, ShaderAssembler.NEWLINE + str2 + str2);
             }
         }).collect(Collectors.joining(ShaderAssembler.NEWLINE));
     }
@@ -118,47 +117,46 @@ public class Def {
         return "@[" + mediaFilter.getDescriptor().getFilterId() + "]@" + exc.getMessage();
     }
 
-    public static long getFileSize(FileDescriptor fileDescriptor) {
-        FileInputStream fileInputStream;
-        FileInputStream fileInputStream2 = null;
+    public static long getFileSize(FileDescriptor fileDescriptor) throws Throwable {
+        FileInputStream fileInputStream = null;
         try {
-            fileInputStream = new FileInputStream(fileDescriptor);
-        } catch (IOException unused) {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            long size = fileInputStream.getChannel().size();
+            FileInputStream fileInputStream2 = new FileInputStream(fileDescriptor);
             try {
-                fileInputStream.close();
-                return size;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return size;
-            }
-        } catch (IOException unused2) {
-            fileInputStream2 = fileInputStream;
-            if (fileInputStream2 == null) {
-                return -1L;
-            }
-            try {
-                fileInputStream2.close();
-                return -1L;
-            } catch (IOException e2) {
-                e2.printStackTrace();
-                return -1L;
-            }
-        } catch (Throwable th2) {
-            th = th2;
-            fileInputStream2 = fileInputStream;
-            if (fileInputStream2 != null) {
+                long size = fileInputStream2.getChannel().size();
                 try {
                     fileInputStream2.close();
-                } catch (IOException e3) {
-                    e3.printStackTrace();
+                    return size;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return size;
                 }
+            } catch (IOException unused) {
+                fileInputStream = fileInputStream2;
+                if (fileInputStream == null) {
+                    return -1L;
+                }
+                try {
+                    fileInputStream.close();
+                    return -1L;
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                    return -1L;
+                }
+            } catch (Throwable th) {
+                th = th;
+                fileInputStream = fileInputStream2;
+                if (fileInputStream != null) {
+                    try {
+                        fileInputStream.close();
+                    } catch (IOException e3) {
+                        e3.printStackTrace();
+                    }
+                }
+                throw th;
             }
-            throw th;
+        } catch (IOException unused2) {
+        } catch (Throwable th2) {
+            th = th2;
         }
     }
 }

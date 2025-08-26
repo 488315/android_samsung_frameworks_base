@@ -41,25 +41,9 @@ public final class ApkChecksum implements Parcelable {
         return 0;
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public ApkChecksum(java.lang.String r2, int r3, byte[] r4) {
-        /*
-            r1 = this;
-            android.content.pm.Checksum r0 = new android.content.pm.Checksum
-            r0.<init>(r3, r4)
-            r3 = 0
-            r4 = r3
-            java.lang.String r4 = (java.lang.String) r4
-            r4 = r3
-            byte[] r4 = (byte[]) r4
-            r1.<init>(r2, r0, r3, r3)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.pm.ApkChecksum.<init>(java.lang.String, int, byte[]):void");
+    public ApkChecksum(String str, int i, byte[] bArr) {
+        Checksum checksum = new Checksum(i, bArr);
+        this(str, checksum, null, null);
     }
 
     public ApkChecksum(String str, int i, byte[] bArr, String str2, Certificate certificate) throws CertificateEncodingException {
@@ -131,15 +115,15 @@ public final class ApkChecksum implements Parcelable {
     }
 
     ApkChecksum(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        String readString = (readByte & 1) == 0 ? null : parcel.readString();
+        byte b = parcel.readByte();
+        String string = (b & 1) == 0 ? null : parcel.readString();
         Checksum checksum = (Checksum) parcel.readTypedObject(Checksum.CREATOR);
-        String readString2 = (readByte & 4) == 0 ? null : parcel.readString();
-        byte[] createByteArray = (readByte & 8) == 0 ? null : parcel.createByteArray();
-        this.mSplitName = readString;
+        String string2 = (b & 4) == 0 ? null : parcel.readString();
+        byte[] bArrCreateByteArray = (b & 8) == 0 ? null : parcel.createByteArray();
+        this.mSplitName = string;
         this.mChecksum = checksum;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) checksum);
-        this.mInstallerPackageName = readString2;
-        this.mInstallerCertificate = createByteArray;
+        this.mInstallerPackageName = string2;
+        this.mInstallerCertificate = bArrCreateByteArray;
     }
 }

@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FadeThroughDrawable extends Drawable {
     public final float[] alphas;
@@ -14,9 +13,9 @@ public class FadeThroughDrawable extends Drawable {
 
     public FadeThroughDrawable(Drawable drawable, Drawable drawable2) {
         this.fadeOutDrawable = drawable.getConstantState().newDrawable().mutate();
-        Drawable mutate = drawable2.getConstantState().newDrawable().mutate();
-        this.fadeInDrawable = mutate;
-        mutate.setAlpha(0);
+        Drawable drawableMutate = drawable2.getConstantState().newDrawable().mutate();
+        this.fadeInDrawable = drawableMutate;
+        drawableMutate.setAlpha(0);
         this.alphas = new float[2];
     }
 

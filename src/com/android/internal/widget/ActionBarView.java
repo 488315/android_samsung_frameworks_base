@@ -4,6 +4,7 @@ import android.animation.LayoutTransition;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
@@ -12,6 +13,7 @@ import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.CollapsibleActionView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -104,7 +106,7 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         return false;
     }
 
-    public ActionBarView(Context context, AttributeSet attributeSet) {
+    public ActionBarView(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mDisplayOptions = -1;
         this.mDefaultUpDescription = R.string.action_bar_up_description;
@@ -128,18 +130,18 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         };
         this.mUpClickListener = onClickListener2;
         setBackgroundResource(0);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ActionBar, 16843470, 0);
-        this.mNavigationMode = obtainStyledAttributes.getInt(7, 0);
-        this.mTitle = obtainStyledAttributes.getText(5);
-        this.mSubtitle = obtainStyledAttributes.getText(9);
-        this.mLogo = obtainStyledAttributes.getDrawable(6);
-        this.mIcon = obtainStyledAttributes.getDrawable(0);
-        LayoutInflater from = LayoutInflater.from(context);
-        int resourceId = obtainStyledAttributes.getResourceId(16, R.layout.action_bar_home);
-        ViewGroup viewGroup = (ViewGroup) from.inflate(R.layout.action_bar_up_container, (ViewGroup) this, false);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ActionBar, 16843470, 0);
+        this.mNavigationMode = typedArrayObtainStyledAttributes.getInt(7, 0);
+        this.mTitle = typedArrayObtainStyledAttributes.getText(5);
+        this.mSubtitle = typedArrayObtainStyledAttributes.getText(9);
+        this.mLogo = typedArrayObtainStyledAttributes.getDrawable(6);
+        this.mIcon = typedArrayObtainStyledAttributes.getDrawable(0);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(context);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(16, R.layout.action_bar_home);
+        ViewGroup viewGroup = (ViewGroup) layoutInflaterFrom.inflate(R.layout.action_bar_up_container, (ViewGroup) this, false);
         this.mUpGoerFive = viewGroup;
-        this.mHomeLayout = (HomeView) from.inflate(resourceId, viewGroup, false);
-        HomeView homeView = (HomeView) from.inflate(resourceId, this.mUpGoerFive, false);
+        this.mHomeLayout = (HomeView) layoutInflaterFrom.inflate(resourceId, viewGroup, false);
+        HomeView homeView = (HomeView) layoutInflaterFrom.inflate(resourceId, this.mUpGoerFive, false);
         this.mExpandedHomeLayout = homeView;
         homeView.setShowUp(true);
         this.mExpandedHomeLayout.setOnClickListener(onClickListener);
@@ -150,21 +152,21 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         }
         this.mExpandedHomeLayout.setEnabled(true);
         this.mExpandedHomeLayout.setFocusable(true);
-        this.mTitleStyleRes = obtainStyledAttributes.getResourceId(11, 0);
-        this.mSubtitleStyleRes = obtainStyledAttributes.getResourceId(12, 0);
-        this.mProgressStyle = obtainStyledAttributes.getResourceId(1, 0);
-        this.mIndeterminateProgressStyle = obtainStyledAttributes.getResourceId(14, 0);
-        this.mProgressBarPadding = obtainStyledAttributes.getDimensionPixelOffset(15, 0);
-        this.mItemPadding = obtainStyledAttributes.getDimensionPixelOffset(17, 0);
-        setDisplayOptions(obtainStyledAttributes.getInt(8, 0));
-        int resourceId2 = obtainStyledAttributes.getResourceId(10, 0);
+        this.mTitleStyleRes = typedArrayObtainStyledAttributes.getResourceId(11, 0);
+        this.mSubtitleStyleRes = typedArrayObtainStyledAttributes.getResourceId(12, 0);
+        this.mProgressStyle = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+        this.mIndeterminateProgressStyle = typedArrayObtainStyledAttributes.getResourceId(14, 0);
+        this.mProgressBarPadding = typedArrayObtainStyledAttributes.getDimensionPixelOffset(15, 0);
+        this.mItemPadding = typedArrayObtainStyledAttributes.getDimensionPixelOffset(17, 0);
+        setDisplayOptions(typedArrayObtainStyledAttributes.getInt(8, 0));
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(10, 0);
         if (resourceId2 != 0) {
-            this.mCustomNavView = from.inflate(resourceId2, (ViewGroup) this, false);
+            this.mCustomNavView = layoutInflaterFrom.inflate(resourceId2, (ViewGroup) this, false);
             this.mNavigationMode = 0;
             setDisplayOptions(this.mDisplayOptions | 16);
         }
-        this.mContentHeight = obtainStyledAttributes.getLayoutDimension(4, 0);
-        obtainStyledAttributes.recycle();
+        this.mContentHeight = typedArrayObtainStyledAttributes.getLayoutDimension(4, 0);
+        typedArrayObtainStyledAttributes.recycle();
         this.mLogoNavItem = new ActionMenuItem(context, 0, 16908332, 0, 0, this.mTitle);
         this.mUpGoerFive.setOnClickListener(onClickListener2);
         this.mUpGoerFive.setClickable(true);
@@ -175,7 +177,7 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.AbsActionBarView, android.view.View
-    protected void onConfigurationChanged(Configuration configuration) {
+    protected void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         this.mTitleView = null;
         this.mSubtitleView = null;
@@ -310,7 +312,7 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setMenu(Menu menu, MenuPresenter.Callback callback) {
+    public void setMenu(Menu menu, MenuPresenter.Callback callback) throws Resources.NotFoundException {
         ActionMenuView actionMenuView;
         ViewGroup viewGroup;
         MenuBuilder menuBuilder = this.mOptionsMenu;
@@ -364,7 +366,7 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         this.mMenuView = actionMenuView;
     }
 
-    private void configPresenters(MenuBuilder menuBuilder) {
+    private void configPresenters(MenuBuilder menuBuilder) throws Resources.NotFoundException {
         if (menuBuilder != null) {
             menuBuilder.addMenuPresenter(this.mActionMenuPresenter, this.mPopupContext);
             menuBuilder.addMenuPresenter(this.mExpandedMenuPresenter, this.mPopupContext);
@@ -483,28 +485,28 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         }
     }
 
-    private CharSequence buildHomeContentDescription() {
-        CharSequence charSequence = this.mHomeDescription;
-        if (charSequence == null) {
+    private CharSequence buildHomeContentDescription() throws Resources.NotFoundException {
+        CharSequence text = this.mHomeDescription;
+        if (text == null) {
             if ((this.mDisplayOptions & 4) != 0) {
-                charSequence = this.mContext.getResources().getText(this.mDefaultUpDescription);
+                text = this.mContext.getResources().getText(this.mDefaultUpDescription);
             } else {
-                charSequence = this.mContext.getResources().getText(R.string.action_bar_home_description);
+                text = this.mContext.getResources().getText(R.string.action_bar_home_description);
             }
         }
         CharSequence title = getTitle();
         CharSequence subtitle = getSubtitle();
         if (TextUtils.isEmpty(title)) {
-            return charSequence;
+            return text;
         }
         if (!TextUtils.isEmpty(subtitle)) {
-            return getResources().getString(R.string.action_bar_home_subtitle_description_format, title, subtitle, charSequence);
+            return getResources().getString(R.string.action_bar_home_subtitle_description_format, title, subtitle, text);
         }
-        return getResources().getString(R.string.action_bar_home_description_format, title, charSequence);
+        return getResources().getString(R.string.action_bar_home_description_format, title, text);
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setDisplayOptions(int i) {
+    public void setDisplayOptions(int i) throws Resources.NotFoundException {
         View view;
         int i2 = this.mDisplayOptions;
         int i3 = i2 != -1 ? i ^ i2 : -1;
@@ -706,7 +708,7 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void initTitle() {
+    public void initTitle() throws Resources.NotFoundException {
         if (this.mTitleLayout == null) {
             LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.action_bar_title_item, (ViewGroup) this, false);
             this.mTitleLayout = linearLayout;
@@ -763,52 +765,318 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:115:0x0254  */
-    /* JADX WARN: Removed duplicated region for block: B:118:0x0260  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x027e  */
-    /* JADX WARN: Removed duplicated region for block: B:139:0x0277  */
-    /* JADX WARN: Removed duplicated region for block: B:147:0x023c  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x01b5  */
+    /* JADX WARN: Removed duplicated region for block: B:84:0x019f  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onMeasure(int r19, int r20) {
-        /*
-            Method dump skipped, instructions count: 746
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.ActionBarView.onMeasure(int, int):void");
+    protected void onMeasure(int i, int i2) {
+        int iMakeMeasureSpec;
+        int i3;
+        int iMax;
+        int measuredWidth;
+        int i4;
+        int i5;
+        int i6;
+        int i7;
+        int childCount = getChildCount();
+        if (this.mIsCollapsible) {
+            int i8 = 0;
+            for (int i9 = 0; i9 < childCount; i9++) {
+                View childAt = getChildAt(i9);
+                if (childAt.getVisibility() != 8 && ((childAt != this.mMenuView || this.mMenuView.getChildCount() != 0) && childAt != this.mUpGoerFive)) {
+                    i8++;
+                }
+            }
+            int childCount2 = this.mUpGoerFive.getChildCount();
+            for (int i10 = 0; i10 < childCount2; i10++) {
+                if (this.mUpGoerFive.getChildAt(i10).getVisibility() != 8) {
+                    i8++;
+                }
+            }
+            if (i8 == 0) {
+                setMeasuredDimension(0, 0);
+                return;
+            }
+        }
+        if (View.MeasureSpec.getMode(i) != 1073741824) {
+            throw new IllegalStateException(getClass().getSimpleName() + " can only be used with android:layout_width=\"match_parent\" (or fill_parent)");
+        }
+        if (View.MeasureSpec.getMode(i2) != Integer.MIN_VALUE) {
+            throw new IllegalStateException(getClass().getSimpleName() + " can only be used with android:layout_height=\"wrap_content\"");
+        }
+        int size = View.MeasureSpec.getSize(i);
+        int size2 = this.mContentHeight >= 0 ? this.mContentHeight : View.MeasureSpec.getSize(i2);
+        int paddingTop = getPaddingTop() + getPaddingBottom();
+        int paddingLeft = getPaddingLeft();
+        int paddingRight = getPaddingRight();
+        int iMin = size2 - paddingTop;
+        int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(iMin, Integer.MIN_VALUE);
+        int iMakeMeasureSpec3 = View.MeasureSpec.makeMeasureSpec(iMin, 1073741824);
+        int measuredWidth2 = (size - paddingLeft) - paddingRight;
+        int iMax2 = measuredWidth2 / 2;
+        LinearLayout linearLayout = this.mTitleLayout;
+        boolean z = (linearLayout == null || linearLayout.getVisibility() == 8 || (this.mDisplayOptions & 8) == 0) ? false : true;
+        HomeView homeView = this.mExpandedActionView != null ? this.mExpandedHomeLayout : this.mHomeLayout;
+        ViewGroup.LayoutParams layoutParams = homeView.getLayoutParams();
+        if (layoutParams.width < 0) {
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(measuredWidth2, Integer.MIN_VALUE);
+        } else {
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(layoutParams.width, 1073741824);
+        }
+        homeView.measure(iMakeMeasureSpec, iMakeMeasureSpec3);
+        if ((homeView.getVisibility() == 8 || homeView.getParent() != this.mUpGoerFive) && !z) {
+            i3 = 0;
+            iMax = iMax2;
+            measuredWidth = 0;
+        } else {
+            measuredWidth = homeView.getMeasuredWidth();
+            int startOffset = homeView.getStartOffset() + measuredWidth;
+            i3 = 0;
+            measuredWidth2 = Math.max(0, measuredWidth2 - startOffset);
+            iMax = Math.max(0, measuredWidth2 - startOffset);
+        }
+        if (this.mMenuView != null && this.mMenuView.getParent() == this) {
+            measuredWidth2 = measureChildView(this.mMenuView, measuredWidth2, iMakeMeasureSpec3, i3);
+            iMax2 = Math.max(i3, iMax2 - this.mMenuView.getMeasuredWidth());
+        }
+        ProgressBar progressBar = this.mIndeterminateProgressView;
+        if (progressBar != null && progressBar.getVisibility() != 8) {
+            measuredWidth2 = measureChildView(this.mIndeterminateProgressView, measuredWidth2, iMakeMeasureSpec2, i3);
+            iMax2 = Math.max(i3, iMax2 - this.mIndeterminateProgressView.getMeasuredWidth());
+        }
+        if (this.mExpandedActionView == null) {
+            int i11 = this.mNavigationMode;
+            if (i11 == 1) {
+                if (this.mListNavLayout != null) {
+                    int i12 = this.mItemPadding;
+                    if (z) {
+                        i12 *= 2;
+                    }
+                    int iMax3 = Math.max(0, measuredWidth2 - i12);
+                    int iMax4 = Math.max(0, iMax - i12);
+                    this.mListNavLayout.measure(View.MeasureSpec.makeMeasureSpec(iMax3, Integer.MIN_VALUE), View.MeasureSpec.makeMeasureSpec(iMin, 1073741824));
+                    int measuredWidth3 = this.mListNavLayout.getMeasuredWidth();
+                    measuredWidth2 = Math.max(0, iMax3 - measuredWidth3);
+                    iMax = Math.max(0, iMax4 - measuredWidth3);
+                }
+            } else if (i11 == 2 && this.mTabScrollView != null) {
+                int i13 = this.mItemPadding;
+                if (z) {
+                    i13 *= 2;
+                }
+                int iMax5 = Math.max(0, measuredWidth2 - i13);
+                int iMax6 = Math.max(0, iMax - i13);
+                this.mTabScrollView.measure(View.MeasureSpec.makeMeasureSpec(iMax5, Integer.MIN_VALUE), View.MeasureSpec.makeMeasureSpec(iMin, 1073741824));
+                int measuredWidth4 = this.mTabScrollView.getMeasuredWidth();
+                measuredWidth2 = Math.max(0, iMax5 - measuredWidth4);
+                iMax = Math.max(0, iMax6 - measuredWidth4);
+            }
+        }
+        View view = this.mExpandedActionView;
+        if (view == null && ((this.mDisplayOptions & 16) == 0 || (view = this.mCustomNavView) == null)) {
+            view = null;
+        }
+        if (view != null) {
+            ViewGroup.LayoutParams layoutParamsGenerateLayoutParams = generateLayoutParams(view.getLayoutParams());
+            ActionBar.LayoutParams layoutParams2 = layoutParamsGenerateLayoutParams instanceof ActionBar.LayoutParams ? (ActionBar.LayoutParams) layoutParamsGenerateLayoutParams : null;
+            if (layoutParams2 != null) {
+                int i14 = layoutParams2.leftMargin + layoutParams2.rightMargin;
+                i6 = layoutParams2.bottomMargin + layoutParams2.topMargin;
+                i7 = i14;
+            } else {
+                i6 = 0;
+                i7 = 0;
+            }
+            i4 = measuredWidth;
+            int i15 = (this.mContentHeight > 0 && layoutParamsGenerateLayoutParams.height != -2) ? 1073741824 : Integer.MIN_VALUE;
+            if (layoutParamsGenerateLayoutParams.height >= 0) {
+                iMin = Math.min(layoutParamsGenerateLayoutParams.height, iMin);
+            }
+            int iMax7 = Math.max(0, iMin - i6);
+            int i16 = layoutParamsGenerateLayoutParams.width != -2 ? 1073741824 : Integer.MIN_VALUE;
+            i5 = paddingTop;
+            int iMax8 = Math.max(0, (layoutParamsGenerateLayoutParams.width >= 0 ? Math.min(layoutParamsGenerateLayoutParams.width, measuredWidth2) : measuredWidth2) - i7);
+            if (((layoutParams2 != null ? layoutParams2.gravity : DEFAULT_CUSTOM_GRAVITY) & 7) == 1 && layoutParamsGenerateLayoutParams.width == -1) {
+                iMax8 = Math.min(iMax, iMax2) * 2;
+            }
+            view.measure(View.MeasureSpec.makeMeasureSpec(iMax8, i16), View.MeasureSpec.makeMeasureSpec(iMax7, i15));
+            measuredWidth2 -= i7 + view.getMeasuredWidth();
+        } else {
+            i4 = measuredWidth;
+            i5 = paddingTop;
+        }
+        int i17 = 0;
+        measureChildView(this.mUpGoerFive, measuredWidth2 + i4, View.MeasureSpec.makeMeasureSpec(this.mContentHeight, 1073741824), 0);
+        LinearLayout linearLayout2 = this.mTitleLayout;
+        if (linearLayout2 != null) {
+            Math.max(0, iMax - linearLayout2.getMeasuredWidth());
+        }
+        if (this.mContentHeight <= 0) {
+            for (int i18 = 0; i18 < childCount; i18++) {
+                int measuredHeight = getChildAt(i18).getMeasuredHeight() + i5;
+                if (measuredHeight > i17) {
+                    i17 = measuredHeight;
+                }
+            }
+            setMeasuredDimension(size, i17);
+        } else {
+            setMeasuredDimension(size, size2);
+        }
+        ActionBarContextView actionBarContextView = this.mContextView;
+        if (actionBarContextView != null) {
+            actionBarContextView.setContentHeight(getMeasuredHeight());
+        }
+        ProgressBar progressBar2 = this.mProgressView;
+        if (progressBar2 == null || progressBar2.getVisibility() == 8) {
+            return;
+        }
+        this.mProgressView.measure(View.MeasureSpec.makeMeasureSpec(size - (this.mProgressBarPadding * 2), 1073741824), View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), Integer.MIN_VALUE));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:101:0x0167, code lost:
-    
-        if (r11 < r2) goto L93;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:105:0x0170, code lost:
-    
-        if (r4 > r2) goto L91;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x01ec  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00d3  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00f1  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x010e  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x011b  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x01f2  */
-    /* JADX WARN: Removed duplicated region for block: B:91:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:91:0x0165  */
+    /* JADX WARN: Removed duplicated region for block: B:93:0x0169  */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onLayout(boolean r17, int r18, int r19, int r20, int r21) {
-        /*
-            Method dump skipped, instructions count: 523
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.ActionBarView.onLayout(boolean, int, int, int, int):void");
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
+        int i5;
+        boolean z2;
+        int next;
+        int i6;
+        int i7;
+        int paddingBottom;
+        int upWidth;
+        int paddingTop = ((i4 - i2) - getPaddingTop()) - getPaddingBottom();
+        if (paddingTop <= 0) {
+            return;
+        }
+        boolean zIsLayoutRtl = isLayoutRtl();
+        int i8 = zIsLayoutRtl ? 1 : -1;
+        int paddingLeft = zIsLayoutRtl ? getPaddingLeft() : (i3 - i) - getPaddingRight();
+        int paddingRight = zIsLayoutRtl ? (i3 - i) - getPaddingRight() : getPaddingLeft();
+        int paddingTop2 = getPaddingTop();
+        HomeView homeView = this.mExpandedActionView != null ? this.mExpandedHomeLayout : this.mHomeLayout;
+        LinearLayout linearLayout = this.mTitleLayout;
+        boolean z3 = (linearLayout == null || linearLayout.getVisibility() == 8 || (this.mDisplayOptions & 8) == 0) ? false : true;
+        if (homeView.getParent() != this.mUpGoerFive) {
+            i5 = 0;
+        } else {
+            if (homeView.getVisibility() != 8) {
+                upWidth = homeView.getStartOffset();
+            } else {
+                if (z3) {
+                    upWidth = homeView.getUpWidth();
+                }
+                i5 = 0;
+            }
+            i5 = upWidth;
+        }
+        int next2 = next(paddingRight + positionChild(this.mUpGoerFive, next(paddingRight, i5, zIsLayoutRtl), paddingTop2, paddingTop, zIsLayoutRtl), i5, zIsLayoutRtl);
+        if (this.mExpandedActionView != null) {
+            z2 = zIsLayoutRtl;
+            next = next2;
+        } else {
+            int i9 = this.mNavigationMode;
+            if (i9 == 1) {
+                if (this.mListNavLayout != null) {
+                    if (z3) {
+                        next2 = next(next2, this.mItemPadding, zIsLayoutRtl);
+                    }
+                    int i10 = next2;
+                    z2 = zIsLayoutRtl;
+                    next2 = next(i10 + positionChild(this.mListNavLayout, i10, paddingTop2, paddingTop, zIsLayoutRtl), this.mItemPadding, z2);
+                }
+                next = next2;
+            } else if (i9 == 2 && this.mTabScrollView != null) {
+                if (z3) {
+                    next2 = next(next2, this.mItemPadding, zIsLayoutRtl);
+                }
+                int i11 = next2;
+                next = next(i11 + positionChild(this.mTabScrollView, i11, paddingTop2, paddingTop, zIsLayoutRtl), this.mItemPadding, zIsLayoutRtl);
+                z2 = zIsLayoutRtl;
+            }
+            z2 = zIsLayoutRtl;
+            next = next2;
+        }
+        if (this.mMenuView != null && this.mMenuView.getParent() == this) {
+            positionChild(this.mMenuView, paddingLeft, paddingTop2, paddingTop, !z2);
+            paddingLeft += this.mMenuView.getMeasuredWidth() * i8;
+        }
+        int marginEnd = paddingLeft;
+        ProgressBar progressBar = this.mIndeterminateProgressView;
+        if (progressBar != null && progressBar.getVisibility() != 8) {
+            positionChild(this.mIndeterminateProgressView, marginEnd, paddingTop2, paddingTop, !z2);
+            marginEnd += this.mIndeterminateProgressView.getMeasuredWidth() * i8;
+        }
+        View view = this.mExpandedActionView;
+        if (view == null && ((this.mDisplayOptions & 16) == 0 || (view = this.mCustomNavView) == null)) {
+            view = null;
+        }
+        if (view != null) {
+            int layoutDirection = getLayoutDirection();
+            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+            ActionBar.LayoutParams layoutParams2 = layoutParams instanceof ActionBar.LayoutParams ? (ActionBar.LayoutParams) layoutParams : null;
+            int i12 = layoutParams2 != null ? layoutParams2.gravity : DEFAULT_CUSTOM_GRAVITY;
+            int measuredWidth = view.getMeasuredWidth();
+            if (layoutParams2 != null) {
+                next = next(next, layoutParams2.getMarginStart(), z2);
+                marginEnd += i8 * layoutParams2.getMarginEnd();
+                i7 = layoutParams2.topMargin;
+                i6 = layoutParams2.bottomMargin;
+            } else {
+                i6 = 0;
+                i7 = 0;
+            }
+            int i13 = 8388615 & i12;
+            if (i13 == 1) {
+                int i14 = ((this.mRight - this.mLeft) - measuredWidth) / 2;
+                if (!z2) {
+                    int i15 = i14 + measuredWidth;
+                    if (i14 >= next) {
+                        if (i15 > marginEnd) {
+                        }
+                    }
+                } else if (i14 + measuredWidth > next) {
+                    i13 = 5;
+                } else if (i14 < marginEnd) {
+                    i13 = 3;
+                }
+            } else if (i12 == 0) {
+                i13 = Gravity.START;
+            }
+            int absoluteGravity = Gravity.getAbsoluteGravity(i13, layoutDirection);
+            if (absoluteGravity == 1) {
+                marginEnd = ((this.mRight - this.mLeft) - measuredWidth) / 2;
+            } else if (absoluteGravity != 3) {
+                marginEnd = absoluteGravity != 5 ? 0 : z2 ? next - measuredWidth : marginEnd - measuredWidth;
+            } else if (!z2) {
+                marginEnd = next;
+            }
+            int i16 = i12 & 112;
+            if (i12 == 0) {
+                i16 = 16;
+            }
+            if (i16 == 16) {
+                paddingBottom = ((((this.mBottom - this.mTop) - getPaddingBottom()) - getPaddingTop()) - view.getMeasuredHeight()) / 2;
+            } else if (i16 == 48) {
+                paddingBottom = getPaddingTop() + i7;
+            } else {
+                paddingBottom = i16 != 80 ? 0 : ((getHeight() - getPaddingBottom()) - view.getMeasuredHeight()) - i6;
+            }
+            int measuredWidth2 = view.getMeasuredWidth();
+            view.layout(marginEnd, paddingBottom, marginEnd + measuredWidth2, view.getMeasuredHeight() + paddingBottom);
+            next(next, measuredWidth2, z2);
+        }
+        ProgressBar progressBar2 = this.mProgressView;
+        if (progressBar2 != null) {
+            progressBar2.bringToFront();
+            int measuredHeight = this.mProgressView.getMeasuredHeight() / 2;
+            ProgressBar progressBar3 = this.mProgressView;
+            int i17 = this.mProgressBarPadding;
+            progressBar3.layout(i17, -measuredHeight, progressBar3.getMeasuredWidth() + i17, measuredHeight);
+        }
     }
 
     @Override // android.view.ViewGroup
@@ -835,11 +1103,11 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
     @Override // android.view.View
     public void onRestoreInstanceState(Parcelable parcelable) {
         MenuBuilder menuBuilder;
-        MenuItem findItem;
+        MenuItem menuItemFindItem;
         SavedState savedState = (SavedState) parcelable;
         super.onRestoreInstanceState(savedState.getSuperState());
-        if (savedState.expandedMenuItemId != 0 && this.mExpandedMenuPresenter != null && (menuBuilder = this.mOptionsMenu) != null && (findItem = menuBuilder.findItem(savedState.expandedMenuItemId)) != null) {
-            findItem.expandActionView();
+        if (savedState.expandedMenuItemId != 0 && this.mExpandedMenuPresenter != null && (menuBuilder = this.mOptionsMenu) != null && (menuItemFindItem = menuBuilder.findItem(savedState.expandedMenuItemId)) != null) {
+            menuItemFindItem.expandActionView();
         }
         if (savedState.isOverflowOpen) {
             postShowOverflowMenu();
@@ -1051,31 +1319,31 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
             int measuredWidth = this.mUpView.getMeasuredWidth();
             this.mUpWidth = measuredWidth;
             this.mStartOffset = measuredWidth + i3;
-            int i4 = this.mUpView.getVisibility() == 8 ? 0 : this.mStartOffset;
+            int iMin = this.mUpView.getVisibility() == 8 ? 0 : this.mStartOffset;
             int measuredHeight = layoutParams.topMargin + this.mUpView.getMeasuredHeight() + layoutParams.bottomMargin;
             if (this.mIconView.getVisibility() != 8) {
-                measureChildWithMargins(this.mIconView, i, i4, i2, 0);
+                measureChildWithMargins(this.mIconView, i, iMin, i2, 0);
                 FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) this.mIconView.getLayoutParams();
-                i4 += layoutParams2.leftMargin + this.mIconView.getMeasuredWidth() + layoutParams2.rightMargin;
+                iMin += layoutParams2.leftMargin + this.mIconView.getMeasuredWidth() + layoutParams2.rightMargin;
                 measuredHeight = Math.max(measuredHeight, layoutParams2.topMargin + this.mIconView.getMeasuredHeight() + layoutParams2.bottomMargin);
             } else if (i3 < 0) {
-                i4 -= i3;
+                iMin -= i3;
             }
             int mode = View.MeasureSpec.getMode(i);
             int mode2 = View.MeasureSpec.getMode(i2);
             int size = View.MeasureSpec.getSize(i);
             int size2 = View.MeasureSpec.getSize(i2);
             if (mode == Integer.MIN_VALUE) {
-                i4 = Math.min(i4, size);
+                iMin = Math.min(iMin, size);
             } else if (mode == 1073741824) {
-                i4 = size;
+                iMin = size;
             }
             if (mode2 == Integer.MIN_VALUE) {
                 measuredHeight = Math.min(measuredHeight, size2);
             } else if (mode2 == 1073741824) {
                 measuredHeight = size2;
             }
-            setMeasuredDimension(i4, measuredHeight);
+            setMeasuredDimension(iMin, measuredHeight);
         }
 
         @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
@@ -1083,7 +1351,7 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
             int i5;
             int i6;
             int i7 = (i4 - i2) / 2;
-            boolean isLayoutRtl = isLayoutRtl();
+            boolean zIsLayoutRtl = isLayoutRtl();
             int width = getWidth();
             int i8 = 0;
             if (this.mUpView.getVisibility() != 8) {
@@ -1093,7 +1361,7 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
                 int i9 = layoutParams.leftMargin + measuredWidth + layoutParams.rightMargin;
                 int i10 = i7 - (measuredHeight / 2);
                 int i11 = measuredHeight + i10;
-                if (isLayoutRtl) {
+                if (zIsLayoutRtl) {
                     i8 = width - measuredWidth;
                     i3 -= i9;
                     measuredWidth = width;
@@ -1107,17 +1375,17 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
             int measuredHeight2 = this.mIconView.getMeasuredHeight();
             int measuredWidth2 = this.mIconView.getMeasuredWidth();
             int i12 = (i3 - i) / 2;
-            int max = Math.max(layoutParams2.topMargin, i7 - (measuredHeight2 / 2));
-            int i13 = measuredHeight2 + max;
-            int max2 = Math.max(layoutParams2.getMarginStart(), i12 - (measuredWidth2 / 2));
-            if (isLayoutRtl) {
-                i6 = (width - i8) - max2;
+            int iMax = Math.max(layoutParams2.topMargin, i7 - (measuredHeight2 / 2));
+            int i13 = measuredHeight2 + iMax;
+            int iMax2 = Math.max(layoutParams2.getMarginStart(), i12 - (measuredWidth2 / 2));
+            if (zIsLayoutRtl) {
+                i6 = (width - i8) - iMax2;
                 i5 = i6 - measuredWidth2;
             } else {
-                i5 = i8 + max2;
+                i5 = i8 + iMax2;
                 i6 = i5 + measuredWidth2;
             }
-            this.mIconView.layout(i5, max, i6, i13);
+            this.mIconView.layout(i5, iMax, i6, i13);
         }
     }
 
@@ -1176,7 +1444,7 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         }
 
         @Override // com.android.internal.view.menu.MenuPresenter
-        public void updateMenuView(boolean z) {
+        public void updateMenuView(boolean z) throws Resources.NotFoundException {
             if (this.mCurrentExpandedItem != null) {
                 MenuBuilder menuBuilder = this.mMenu;
                 if (menuBuilder != null) {
@@ -1227,7 +1495,7 @@ public class ActionBarView extends AbsActionBarView implements DecorToolbar {
         }
 
         @Override // com.android.internal.view.menu.MenuPresenter
-        public boolean collapseItemActionView(MenuBuilder menuBuilder, MenuItemImpl menuItemImpl) {
+        public boolean collapseItemActionView(MenuBuilder menuBuilder, MenuItemImpl menuItemImpl) throws Resources.NotFoundException {
             if (ActionBarView.this.mExpandedActionView instanceof CollapsibleActionView) {
                 ((CollapsibleActionView) ActionBarView.this.mExpandedActionView).onActionViewCollapsed();
             }

@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ListFieldSchema {
     public static final ListFieldSchemaFull FULL_INSTANCE;
     public static final ListFieldSchemaLite LITE_INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ListFieldSchemaFull extends ListFieldSchema {
         public static final Class UNMODIFIABLE_LIST_CLASS = Collections.unmodifiableList(Collections.EMPTY_LIST).getClass();
 
@@ -21,10 +19,10 @@ public abstract class ListFieldSchema {
 
         @Override // com.google.protobuf.ListFieldSchema
         public final void makeImmutableListAt(long j, Object obj) {
-            Object unmodifiableList;
+            Object objUnmodifiableList;
             List list = (List) UnsafeUtil.getObject(j, obj);
             if (list instanceof LazyStringList) {
-                unmodifiableList = ((LazyStringList) list).getUnmodifiableView();
+                objUnmodifiableList = ((LazyStringList) list).getUnmodifiableView();
             } else {
                 if (UNMODIFIABLE_LIST_CLASS.isAssignableFrom(list.getClass())) {
                     return;
@@ -37,22 +35,22 @@ public abstract class ListFieldSchema {
                     }
                     return;
                 }
-                unmodifiableList = Collections.unmodifiableList(list);
+                objUnmodifiableList = Collections.unmodifiableList(list);
             }
-            UnsafeUtil.putObject(j, obj, unmodifiableList);
+            UnsafeUtil.putObject(j, obj, objUnmodifiableList);
         }
 
         @Override // com.google.protobuf.ListFieldSchema
         public final void mergeListsAt(long j, Object obj, Object obj2) {
             List list = (List) UnsafeUtil.getObject(j, obj2);
-            List mutableListAt = mutableListAt(list.size(), j, obj);
-            int size = mutableListAt.size();
+            List listMutableListAt = mutableListAt(list.size(), j, obj);
+            int size = listMutableListAt.size();
             int size2 = list.size();
             if (size > 0 && size2 > 0) {
-                mutableListAt.addAll(list);
+                listMutableListAt.addAll(list);
             }
             if (size > 0) {
-                list = mutableListAt;
+                list = listMutableListAt;
             }
             UnsafeUtil.putObject(j, obj, list);
         }
@@ -84,16 +82,15 @@ public abstract class ListFieldSchema {
             if ((list instanceof PrimitiveNonBoxingCollection) && (list instanceof Internal.ProtobufList)) {
                 Internal.ProtobufList protobufList = (Internal.ProtobufList) list;
                 if (!((AbstractProtobufList) protobufList).isMutable) {
-                    Internal.ProtobufList mutableCopyWithCapacity = protobufList.mutableCopyWithCapacity(list.size() + i);
-                    UnsafeUtil.putObject(j, obj, mutableCopyWithCapacity);
-                    return mutableCopyWithCapacity;
+                    Internal.ProtobufList protobufListMutableCopyWithCapacity = protobufList.mutableCopyWithCapacity(list.size() + i);
+                    UnsafeUtil.putObject(j, obj, protobufListMutableCopyWithCapacity);
+                    return protobufListMutableCopyWithCapacity;
                 }
             }
             return list;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ListFieldSchemaLite extends ListFieldSchema {
         private ListFieldSchemaLite() {
             super();
@@ -106,20 +103,20 @@ public abstract class ListFieldSchema {
 
         @Override // com.google.protobuf.ListFieldSchema
         public final void mergeListsAt(long j, Object obj, Object obj2) {
-            Internal.ProtobufList protobufList = (Internal.ProtobufList) UnsafeUtil.getObject(j, obj);
-            Internal.ProtobufList protobufList2 = (Internal.ProtobufList) UnsafeUtil.getObject(j, obj2);
-            int size = protobufList.size();
-            int size2 = protobufList2.size();
+            Internal.ProtobufList protobufListMutableCopyWithCapacity = (Internal.ProtobufList) UnsafeUtil.getObject(j, obj);
+            Internal.ProtobufList protobufList = (Internal.ProtobufList) UnsafeUtil.getObject(j, obj2);
+            int size = protobufListMutableCopyWithCapacity.size();
+            int size2 = protobufList.size();
             if (size > 0 && size2 > 0) {
-                if (!((AbstractProtobufList) protobufList).isMutable) {
-                    protobufList = protobufList.mutableCopyWithCapacity(size2 + size);
+                if (!((AbstractProtobufList) protobufListMutableCopyWithCapacity).isMutable) {
+                    protobufListMutableCopyWithCapacity = protobufListMutableCopyWithCapacity.mutableCopyWithCapacity(size2 + size);
                 }
-                protobufList.addAll(protobufList2);
+                protobufListMutableCopyWithCapacity.addAll(protobufList);
             }
             if (size > 0) {
-                protobufList2 = protobufList;
+                protobufList = protobufListMutableCopyWithCapacity;
             }
-            UnsafeUtil.putObject(j, obj, protobufList2);
+            UnsafeUtil.putObject(j, obj, protobufList);
         }
 
         @Override // com.google.protobuf.ListFieldSchema
@@ -129,9 +126,9 @@ public abstract class ListFieldSchema {
                 return protobufList;
             }
             int size = protobufList.size();
-            Internal.ProtobufList mutableCopyWithCapacity = protobufList.mutableCopyWithCapacity(size == 0 ? 10 : size * 2);
-            UnsafeUtil.putObject(j, obj, mutableCopyWithCapacity);
-            return mutableCopyWithCapacity;
+            Internal.ProtobufList protobufListMutableCopyWithCapacity = protobufList.mutableCopyWithCapacity(size == 0 ? 10 : size * 2);
+            UnsafeUtil.putObject(j, obj, protobufListMutableCopyWithCapacity);
+            return protobufListMutableCopyWithCapacity;
         }
     }
 

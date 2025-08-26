@@ -5,7 +5,6 @@ import com.samsung.android.globalactions.presentation.view.ViewAnimationState;
 import com.samsung.android.globalactions.presentation.view.ViewStateController;
 import com.samsung.android.globalactions.util.LogWrapper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class CoverViewAnimatorFSM {
     public final GlobalActionsAnimator mAnimator;
@@ -13,7 +12,6 @@ public class CoverViewAnimatorFSM {
     public State mState;
     public final ViewStateController mViewStateController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Event {
         SHOW,
         HIDE,
@@ -25,7 +23,6 @@ public class CoverViewAnimatorFSM {
         COVER_TOAST
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum State {
         IDLE,
         MAIN,
@@ -44,8 +41,8 @@ public class CoverViewAnimatorFSM {
         if (this.mViewStateController.getState() != ViewAnimationState.IDLE) {
             return;
         }
-        int ordinal = this.mState.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = this.mState.ordinal();
+        if (iOrdinal == 0) {
             if (event == Event.SHOW) {
                 this.mAnimator.startShowAnimation();
                 setState(State.MAIN);
@@ -53,8 +50,8 @@ public class CoverViewAnimatorFSM {
             }
             return;
         }
-        if (ordinal != 1) {
-            if (ordinal != 2) {
+        if (iOrdinal != 1) {
+            if (iOrdinal != 2) {
                 return;
             }
             if (event == Event.HIDE_CONFIRM) {

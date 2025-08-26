@@ -10,13 +10,13 @@ public class BrightnessUtils {
     private static final float R = 0.5f;
 
     public static final float convertGammaToLinear(float f) {
-        float exp;
+        float fExp;
         if (f <= 0.5f) {
-            exp = MathUtils.sq(f / 0.5f);
+            fExp = MathUtils.sq(f / 0.5f);
         } else {
-            exp = MathUtils.exp((f - C) / A) + B;
+            fExp = MathUtils.exp((f - C) / A) + B;
         }
-        return MathUtils.constrain(exp, 0.0f, 12.0f) / 12.0f;
+        return MathUtils.constrain(fExp, 0.0f, 12.0f) / 12.0f;
     }
 
     public static final float convertLinearToGamma(float f) {

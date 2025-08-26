@@ -4,7 +4,6 @@ import android.animation.ValueAnimator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TransitionInfo {
     public final ValueAnimator animator;
@@ -33,9 +32,9 @@ public final class TransitionInfo {
     }
 
     public final int hashCode() {
-        int hashCode = (this.to.hashCode() + ((this.from.hashCode() + (this.ownerName.hashCode() * 31)) * 31)) * 31;
+        int iHashCode = (this.to.hashCode() + ((this.from.hashCode() + (this.ownerName.hashCode() * 31)) * 31)) * 31;
         ValueAnimator valueAnimator = this.animator;
-        return this.modeOnCanceled.hashCode() + ((hashCode + (valueAnimator == null ? 0 : valueAnimator.hashCode())) * 31);
+        return this.modeOnCanceled.hashCode() + ((iHashCode + (valueAnimator == null ? 0 : valueAnimator.hashCode())) * 31);
     }
 
     public final String toString() {

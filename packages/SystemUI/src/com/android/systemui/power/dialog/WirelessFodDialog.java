@@ -6,7 +6,6 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.systemui.R;
 import com.android.systemui.power.SecBatterySnapshot;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class WirelessFodDialog extends PowerUiDialog {
     public WirelessFodDialog(Context context) {
@@ -27,9 +26,9 @@ public class WirelessFodDialog extends PowerUiDialog {
         alertParams.mMessage = this.mContext.getString(R.string.battery_wireless_charger_fod_text);
         alertParams.mNegativeButtonText = this.mContext.getString(R.string.dialog_button_text_ok);
         alertParams.mNegativeButtonListener = null;
-        AlertDialog create = builder.create();
-        create.getWindow().setType(2009);
-        return create;
+        AlertDialog alertDialogCreate = builder.create();
+        alertDialogCreate.getWindow().setType(2009);
+        return alertDialogCreate;
     }
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog

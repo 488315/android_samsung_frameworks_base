@@ -3,6 +3,7 @@ package com.android.systemui.qs.buttons;
 import android.R;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -14,14 +15,15 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.motion.widget.MotionLayout$$ExternalSyntheticOutline0;
 import com.android.keyguard.CarrierTextManager$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.settingslib.Utils;
+import com.android.settingslib.applications.InterestingConfigChanges;
 import com.android.settingslib.drawable.UserIconDrawable;
 import com.android.systemui.Dependency;
 import com.android.systemui.Operator;
@@ -51,14 +53,15 @@ import com.android.systemui.user.domain.interactor.UserSwitcherInteractor;
 import com.android.systemui.util.DesktopManager;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
+import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.util.ViewUtil;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.knox.SemPersonaManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsContainer.CloseTooltipWindow {
-    public static final /* synthetic */ int $r8$clinit = 0;
+    public static final InterestingConfigChanges configChanges = new InterestingConfigChanges(268435456);
     public boolean isExpandedOnLockScreen;
     public final CommandQueue mCommandQueue;
     public final Context mContext;
@@ -73,11 +76,11 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
     public final QSMumButton$$ExternalSyntheticLambda0 mPanelTransitionStateListener;
     public final SecQSPanelResourcePicker mResourcePicker;
     public final StatusBarStateController mStatusBarStateController;
-    public final QSTooltipWindow mTipWindow;
+    public QSTooltipWindow mTipWindow;
     public final int mToolTipString;
     public final UserSwitcherInteractor mUserSwitcherInteractor;
+    public final SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MumAndDexHelper implements UserInfoController.OnUserInfoChangedListener, DesktopManager.Callback {
         public AnonymousClass1 mBaseUserAdapter;
         public final UserManager mUserManager;
@@ -85,7 +88,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
         private final SettingsHelper.OnChangedCallback mSettingCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.qs.buttons.QSMumButton$MumAndDexHelper$$ExternalSyntheticLambda0
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                QSMumButton.MumAndDexHelper mumAndDexHelper = QSMumButton.MumAndDexHelper.this;
+                QSMumButton.MumAndDexHelper mumAndDexHelper = this.f$0;
                 Log.d("QSMumButton", "MumAndDexHelper receive SettingsHelper callback !");
                 QSMumButton.this.post(new QSMumButton$$ExternalSyntheticLambda1(mumAndDexHelper, 0));
             }
@@ -97,7 +100,6 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
         public final UserInfoController mUserInfoController = (UserInfoController) Dependency.sDependency.getDependencyInner(UserInfoController.class);
         public final UserSwitcherController mUserSwitcherController = (UserSwitcherController) Dependency.sDependency.getDependencyInner(UserSwitcherController.class);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.buttons.QSMumButton$MumAndDexHelper$1, reason: invalid class name */
         public class AnonymousClass1 extends BaseUserSwitcherAdapter {
             public AnonymousClass1(UserSwitcherController userSwitcherController) {
@@ -159,12 +161,12 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
 
         public final boolean isMumDeactivated() {
             boolean z = Operator.QUICK_IS_LDU_BRANDING;
-            boolean isShopDemo = DeviceState.isShopDemo(QSMumButton.this.mContext);
-            boolean z2 = z || isShopDemo;
-            StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("isMumDeactivated: !result[", "] isLduBranding[", "] isShopDemo[", z2, z);
-            m.append(isShopDemo);
-            m.append("]");
-            Log.d("QSMumButton", m.toString());
+            boolean zIsShopDemo = DeviceState.isShopDemo(QSMumButton.this.mContext);
+            boolean z2 = z || zIsShopDemo;
+            StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("isMumDeactivated: !result[", "] isLduBranding[", "] isShopDemo[", z2, z);
+            sbM.append(zIsShopDemo);
+            sbM.append("]");
+            Log.d("QSMumButton", sbM.toString());
             return z2;
         }
 
@@ -178,7 +180,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
                 qSMumButton.mMainHandler.post(new Runnable() { // from class: com.android.systemui.qs.buttons.QSMumButton$MumAndDexHelper$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        QSMumButton.MumAndDexHelper mumAndDexHelper = QSMumButton.MumAndDexHelper.this;
+                        QSMumButton.MumAndDexHelper mumAndDexHelper = this.f$0;
                         mumAndDexHelper.updateDesktopModeState(semDesktopModeState);
                         mumAndDexHelper.updateMumSwitchVisibility();
                     }
@@ -211,7 +213,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
         }
 
         public final void updateMumSwitchVisibility() {
-            int i;
+            int count;
             boolean z;
             CustomSdkMonitor customSdkMonitor;
             QSMumButton qSMumButton = QSMumButton.this;
@@ -223,44 +225,44 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
                 boolean z3 = QpRune.QUICK_MUM_TWO_PHONE && UserManager.supportsMultipleUsers() && this.mSettingsHelper.isTwoPhoneRegistered() && this.mSettingsHelper.hasTwoPhoneAccount();
                 AnonymousClass1 anonymousClass1 = this.mBaseUserAdapter;
                 if (anonymousClass1 != null) {
-                    i = anonymousClass1.getCount();
-                    z = i != 0;
+                    count = anonymousClass1.getCount();
+                    z = count != 0;
                 } else {
-                    i = 0;
+                    count = 0;
                     z = false;
                 }
                 boolean z4 = Prefs.getBoolean(qSMumButton.getContext(), "HasSeenMultiUser", false);
-                boolean isUserSwitcherSettingOn = this.mSettingsHelper.isUserSwitcherSettingOn();
-                boolean z5 = z3 || (z && z4 && isUserSwitcherSettingOn);
-                boolean hasUserRestriction = this.mUserManager.hasUserRestriction("no_user_switch");
-                boolean isEmergencyMode = this.mSettingsHelper.isEmergencyMode();
-                boolean isDesktopMode = DeviceState.isDesktopMode(qSMumButton.mContext);
+                boolean zIsUserSwitcherSettingOn = this.mSettingsHelper.isUserSwitcherSettingOn();
+                boolean z5 = z3 || (z && z4 && zIsUserSwitcherSettingOn);
+                boolean zHasUserRestriction = this.mUserManager.hasUserRestriction("no_user_switch");
+                boolean zIsEmergencyMode = this.mSettingsHelper.isEmergencyMode();
+                boolean zIsDesktopMode = DeviceState.isDesktopMode(qSMumButton.mContext);
                 DesktopManager desktopManager = this.mDesktopManager;
                 boolean z6 = desktopManager != null && desktopManager.isDesktopMode();
                 KnoxStateMonitor knoxStateMonitor = this.mKnoxStateMonitor;
                 boolean z7 = (knoxStateMonitor == null || (customSdkMonitor = ((KnoxStateMonitorImpl) knoxStateMonitor).mCustomSdkMonitor) == null || !customSdkMonitor.mKnoxCustomQuickPanelButtonUsers) ? false : true;
-                boolean isKioskModeEnabled = SemPersonaManager.isKioskModeEnabled(qSMumButton.mContext);
-                z2 = (!z5 || this.mIsDexEnablingOrEnabled || isEmergencyMode || isDesktopMode || z6 || !z7 || isKioskModeEnabled || (!qSMumButton.mExpanded && (!qSMumButton.mPanelSplitEnabled || !qSMumButton.isExpandedOnLockScreen)) || hasUserRestriction) ? false : true;
-                StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("needToBeVisible() result: ", " [MumSetting: ", " = (TwoPhoneSetting: ", z2, z5);
-                m.append(z3);
-                m.append(" || (somethingInDetail(");
-                m.append(i);
-                m.append("): ");
-                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, z, " && Pref: ", z4, " && Settings: ");
-                m.append(isUserSwitcherSettingOn);
-                m.append(")), !DEX-(DeviceState: ");
-                m.append(!isDesktopMode);
-                m.append(", !DesktopManager: ");
-                m.append(!z6);
-                m.append(", !mIsDexEnablingOrEnabled: ");
-                m.append(!this.mIsDexEnablingOrEnabled);
-                m.append(") Panel-mExpanded: ");
-                m.append(qSMumButton.mExpanded);
-                m.append(", !isEmergencyMode: ");
-                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, !isEmergencyMode, ", isUserEnabled: ", z7, ", !isKioskModeEnabled: ");
-                m.append(!isKioskModeEnabled);
-                m.append(", !isDisallowUserSwitch = ");
-                ActionBarContextView$$ExternalSyntheticOutline0.m(m, !hasUserRestriction, "QSMumButton");
+                boolean zIsKioskModeEnabled = SemPersonaManager.isKioskModeEnabled(qSMumButton.mContext);
+                z2 = (!z5 || this.mIsDexEnablingOrEnabled || zIsEmergencyMode || zIsDesktopMode || z6 || !z7 || zIsKioskModeEnabled || (!qSMumButton.mExpanded && (!qSMumButton.mPanelSplitEnabled || !qSMumButton.isExpandedOnLockScreen)) || zHasUserRestriction) ? false : true;
+                StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("needToBeVisible() result: ", " [MumSetting: ", " = (TwoPhoneSetting: ", z2, z5);
+                sbM.append(z3);
+                sbM.append(" || (somethingInDetail(");
+                sbM.append(count);
+                sbM.append("): ");
+                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z, " && Pref: ", z4, " && Settings: ");
+                sbM.append(zIsUserSwitcherSettingOn);
+                sbM.append(")), !DEX-(DeviceState: ");
+                sbM.append(!zIsDesktopMode);
+                sbM.append(", !DesktopManager: ");
+                sbM.append(!z6);
+                sbM.append(", !mIsDexEnablingOrEnabled: ");
+                sbM.append(!this.mIsDexEnablingOrEnabled);
+                sbM.append(") Panel-mExpanded: ");
+                sbM.append(qSMumButton.mExpanded);
+                sbM.append(", !isEmergencyMode: ");
+                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, !zIsEmergencyMode, ", isUserEnabled: ", z7, ", !isKioskModeEnabled: ");
+                sbM.append(!zIsKioskModeEnabled);
+                sbM.append(", !isDisallowUserSwitch = ");
+                ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, !zHasUserRestriction, "QSMumButton");
             }
             qSMumButton.setVisibility(z2 ? 0 : 8);
             qSMumButton.mMultiUserSwitch.setVisibility(z2 ? 0 : 8);
@@ -269,26 +271,33 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
         }
     }
 
-    /* JADX WARN: Type inference failed for: r3v4, types: [com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda0] */
+    /* JADX WARN: Type inference failed for: r3v7, types: [com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda0] */
     public QSMumButton(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mMainHandler = null;
         this.mPanelSplitEnabled = SecPanelSplitHelper.isEnabled();
         this.isExpandedOnLockScreen = false;
+        this.secQsUiDisplayModeInteractor = (SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class);
         this.mPanelTransitionStateListener = new PanelTransitionStateListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda0
             @Override // com.android.systemui.shade.PanelTransitionStateListener
             public final void onPanelTransitionStateChanged(PanelTransitionStateChangeEvent panelTransitionStateChangeEvent) {
                 StatusBarStateController statusBarStateController;
-                int i = QSMumButton.$r8$clinit;
-                QSMumButton qSMumButton = QSMumButton.this;
+                InterestingConfigChanges interestingConfigChanges = QSMumButton.configChanges;
+                QSMumButton qSMumButton = this.f$0;
                 boolean z = panelTransitionStateChangeEvent.enabled;
                 qSMumButton.mPanelSplitEnabled = z;
                 if (qSMumButton.mPanelSplitHelper == null || (statusBarStateController = qSMumButton.mStatusBarStateController) == null || !z || qSMumButton.isExpandedOnLockScreen || statusBarStateController.getState() != 1) {
                     return;
                 }
-                if (qSMumButton.mPanelSplitHelper.stateOnDown == (!r3.isReversed())) {
-                    SecPanelSplitHelper secPanelSplitHelper = qSMumButton.mPanelSplitHelper;
-                    if (secPanelSplitHelper.stateToChange == secPanelSplitHelper.isReversed()) {
+                SecPanelSplitHelper secPanelSplitHelper = qSMumButton.mPanelSplitHelper;
+                int i = 0;
+                if (secPanelSplitHelper.stateOnDown == ((!secPanelSplitHelper.isReversed() || qSMumButton.secQsUiDisplayModeInteractor.isTablet()) ? 1 : 0)) {
+                    SecPanelSplitHelper secPanelSplitHelper2 = qSMumButton.mPanelSplitHelper;
+                    int i2 = secPanelSplitHelper2.stateToChange;
+                    if (secPanelSplitHelper2.isReversed() && !qSMumButton.secQsUiDisplayModeInteractor.isTablet()) {
+                        i = 1;
+                    }
+                    if (i2 == i) {
                         qSMumButton.isExpandedOnLockScreen = true;
                         qSMumButton.mMumAndDexHelper.updateMumSwitchVisibility();
                     }
@@ -296,6 +305,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
             }
         };
         this.mContext = context;
+        configChanges.applyNewConfig(context.getResources());
         this.mCommandQueue = (CommandQueue) Dependency.sDependency.getDependencyInner(CommandQueue.class);
         this.mMumAndDexHelper = new MumAndDexHelper();
         this.mResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
@@ -318,11 +328,18 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
         if (mumAndDexHelper != null) {
             mumAndDexHelper.init();
         }
+        if (DeviceState.isTablet()) {
+            return;
+        }
+        this.mMultiUserAvatar.setLayoutParams(new FrameLayout.LayoutParams(this.mContext.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.sec_qs_two_phone_mode_icon_width), this.mContext.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.sec_qs_two_phone_mode_icon_height)));
     }
 
     @Override // android.view.View
     public final void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
+        if (configChanges.applyNewConfig(this.mContext.getResources())) {
+            this.mTipWindow = QSTooltipWindow.getInstance(this.mContext);
+        }
         updateTouchTargetArea$1();
     }
 
@@ -347,25 +364,29 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
         findViewById(com.android.systemui.R.id.mum_button_container).setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda2
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                return QSMumButton.this.mMultiUserSwitch.onTouchEvent(motionEvent);
+                return this.f$0.mMultiUserSwitch.onTouchEvent(motionEvent);
             }
         });
         this.mMultiUserSwitch.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda3
             @Override // android.view.View.OnLongClickListener
-            public final boolean onLongClick(View view) {
-                QSMumButton qSMumButton = QSMumButton.this;
+            public final boolean onLongClick(View view) throws Resources.NotFoundException {
+                QSMumButton qSMumButton = this.f$0;
                 if (qSMumButton.mTipWindow.isTooltipShown()) {
                     return true;
                 }
                 qSMumButton.mTipWindow.showToolTip(view, qSMumButton.mToolTipString);
-                ((QSButtonsContainer) qSMumButton.getParent()).mCloseTooltipWindow = qSMumButton;
+                QSButtonsContainer qSButtonsContainer = (QSButtonsContainer) ViewUtil.findParentOfType(qSMumButton, QSButtonsContainer.class);
+                if (qSButtonsContainer == null) {
+                    return true;
+                }
+                qSButtonsContainer.mCloseTooltipWindow = qSMumButton;
                 return true;
             }
         });
         this.mMultiUserSwitch.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda4
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSMumButton qSMumButton = QSMumButton.this;
+                QSMumButton qSMumButton = this.f$0;
                 qSMumButton.mCommandQueue.animateCollapsePanels();
                 UserSwitcherInteractor userSwitcherInteractor = qSMumButton.mUserSwitcherInteractor;
                 Expandable.Companion.getClass();
@@ -389,7 +410,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
     }
 
     public final void updateTouchTargetArea$1() {
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) getLayoutParams();
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) getLayoutParams();
         SecQSPanelResourcePicker secQSPanelResourcePicker = this.mResourcePicker;
         layoutParams.width = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getButtonsWidth(this.mContext);
         layoutParams.height = this.mContext.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.sec_qs_buttons_container_height);

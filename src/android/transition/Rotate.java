@@ -25,12 +25,12 @@ public class Rotate extends Transition {
             return null;
         }
         View view = transitionValues2.view;
-        float floatValue = ((Float) transitionValues.values.get(PROPNAME_ROTATION)).floatValue();
-        float floatValue2 = ((Float) transitionValues2.values.get(PROPNAME_ROTATION)).floatValue();
-        if (floatValue == floatValue2) {
+        float fFloatValue = ((Float) transitionValues.values.get(PROPNAME_ROTATION)).floatValue();
+        float fFloatValue2 = ((Float) transitionValues2.values.get(PROPNAME_ROTATION)).floatValue();
+        if (fFloatValue == fFloatValue2) {
             return null;
         }
-        view.setRotation(floatValue);
-        return ObjectAnimator.ofFloat(view, View.ROTATION, floatValue, floatValue2);
+        view.setRotation(fFloatValue);
+        return ObjectAnimator.ofFloat(view, View.ROTATION, fFloatValue, fFloatValue2);
     }
 }

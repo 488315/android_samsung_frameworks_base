@@ -4,7 +4,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MessageViewModel {
     public final boolean isUpdateAnimated;
@@ -29,9 +28,9 @@ public final class MessageViewModel {
     }
 
     public final int hashCode() {
-        int hashCode = this.text.hashCode() * 31;
+        int iHashCode = this.text.hashCode() * 31;
         String str = this.secondaryText;
-        return Boolean.hashCode(this.isUpdateAnimated) + ((hashCode + (str == null ? 0 : str.hashCode())) * 31);
+        return Boolean.hashCode(this.isUpdateAnimated) + ((iHashCode + (str == null ? 0 : str.hashCode())) * 31);
     }
 
     public final String toString() {

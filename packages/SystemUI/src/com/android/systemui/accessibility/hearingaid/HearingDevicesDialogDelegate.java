@@ -37,7 +37,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingDevicesDialogDelegate implements SystemUIDialog.Delegate, HearingDevicesListAdapter.HearingDeviceItemCallback, BluetoothCallback {
     static final String ACTION_BLUETOOTH_DEVICE_DETAILS = "com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS";
@@ -69,7 +68,6 @@ public class HearingDevicesDialogDelegate implements SystemUIDialog.Delegate, He
     public final AnonymousClass1 mPresetCallback = new AnonymousClass1();
     public final List mHearingDeviceItemFactoryList = List.of(new ActiveHearingDeviceItemFactory(), new AvailableHearingDeviceItemFactory(), new ConnectedHearingDeviceItemFactory(), new SavedHearingDeviceItemFactory());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$1, reason: invalid class name */
     public class AnonymousClass1 implements HearingDevicesPresetsController.PresetCallback {
         public AnonymousClass1() {
@@ -82,7 +80,6 @@ public class HearingDevicesDialogDelegate implements SystemUIDialog.Delegate, He
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$6, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass6 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$bluetooth$qsdialog$DeviceItemType;
@@ -109,7 +106,6 @@ public class HearingDevicesDialogDelegate implements SystemUIDialog.Delegate, He
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         HearingDevicesDialogDelegate create(boolean z, int i);
     }
@@ -142,7 +138,7 @@ public class HearingDevicesDialogDelegate implements SystemUIDialog.Delegate, He
         systemUIDialog.setNegativeButton(R.string.hearing_devices_settings_button, new DialogInterface.OnClickListener() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                HearingDevicesDialogDelegate hearingDevicesDialogDelegate = HearingDevicesDialogDelegate.this;
+                HearingDevicesDialogDelegate hearingDevicesDialogDelegate = this.f$0;
                 SystemUIDialog systemUIDialog2 = systemUIDialog;
                 String str = HearingDevicesDialogDelegate.ACTION_BLUETOOTH_DEVICE_DETAILS;
                 hearingDevicesDialogDelegate.getClass();
@@ -159,13 +155,13 @@ public class HearingDevicesDialogDelegate implements SystemUIDialog.Delegate, He
     @Override // com.android.systemui.statusbar.phone.SystemUIDialog.Delegate
     public final SystemUIDialog createDialog() {
         SystemUIDialog.Factory factory = this.mSystemUIDialogFactory;
-        SystemUIDialog create = factory.create(this, factory.mContext);
+        SystemUIDialog systemUIDialogCreate = factory.create(this, factory.mContext);
         SystemUIDialog systemUIDialog = this.mDialog;
         if (systemUIDialog != null) {
             systemUIDialog.dismiss();
         }
-        this.mDialog = create;
-        return create;
+        this.mDialog = systemUIDialogCreate;
+        return systemUIDialogCreate;
     }
 
     public final List getHearingDeviceItemList() {
@@ -173,7 +169,7 @@ public class HearingDevicesDialogDelegate implements SystemUIDialog.Delegate, He
         return (localBluetoothManager == null || !localBluetoothManager.mLocalAdapter.mAdapter.isEnabled()) ? Collections.EMPTY_LIST : (List) localBluetoothManager.mCachedDeviceManager.getCachedDevicesCopy().stream().map(new Function() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$$ExternalSyntheticLambda7
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                HearingDevicesDialogDelegate hearingDevicesDialogDelegate = HearingDevicesDialogDelegate.this;
+                HearingDevicesDialogDelegate hearingDevicesDialogDelegate = this.f$0;
                 CachedBluetoothDevice cachedBluetoothDevice = (CachedBluetoothDevice) obj;
                 Context context = hearingDevicesDialogDelegate.mDialog.getContext();
                 if (cachedBluetoothDevice == null) {
@@ -212,9 +208,9 @@ public class HearingDevicesDialogDelegate implements SystemUIDialog.Delegate, He
         if (this.mLocalBluetoothManager == null) {
             return;
         }
-        View findViewById = systemUIDialog.findViewById(android.R.id.custom);
-        if (findViewById != null && findViewById.getParent() != null) {
-            ((View) findViewById.getParent()).setPadding(0, 0, 0, 0);
+        View viewFindViewById = systemUIDialog.findViewById(android.R.id.custom);
+        if (viewFindViewById != null && viewFindViewById.getParent() != null) {
+            ((View) viewFindViewById.getParent()).setPadding(0, 0, 0, 0);
         }
         this.mUiEventLogger.log(HearingDevicesUiEvent.HEARING_DEVICES_DIALOG_SHOW, this.mLaunchSourceId, null);
         this.mBgExecutor.execute(new HearingDevicesDialogDelegate$$ExternalSyntheticLambda3(this, systemUIDialog, 2));

@@ -28,8 +28,8 @@ public class VendorUtils {
         ComponentName componentName = new ComponentName(str, MbmsDownloadReceiver.class.getCanonicalName());
         Intent intent = new Intent();
         intent.setComponent(componentName);
-        List<ResolveInfo> queryBroadcastReceivers = context.getPackageManager().queryBroadcastReceivers(intent, 0);
-        if (queryBroadcastReceivers == null || queryBroadcastReceivers.size() <= 0) {
+        List<ResolveInfo> listQueryBroadcastReceivers = context.getPackageManager().queryBroadcastReceivers(intent, 0);
+        if (listQueryBroadcastReceivers == null || listQueryBroadcastReceivers.size() <= 0) {
             return null;
         }
         return componentName;

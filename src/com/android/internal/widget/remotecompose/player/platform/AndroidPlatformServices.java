@@ -93,63 +93,79 @@ public class AndroidPlatformServices implements Platform {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0065 A[LOOP:2: B:21:0x0063->B:22:0x0065, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0076 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x001a A[SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private float[] androidPathToFloatArray(Path path) {
+        int length;
         int i;
+        int i2;
         PathIterator pathIterator = path.getPathIterator();
-        int i2 = 0;
+        int i3 = 0;
         while (pathIterator.hasNext()) {
             pathIterator.next();
-            i2++;
+            i3++;
         }
         path.getPathIterator();
-        float[] fArr = new float[i2 * 10];
-        int i3 = 0;
+        float[] fArr = new float[i3 * 10];
+        int i4 = 0;
         while (pathIterator.hasNext()) {
             PathIterator.Segment next = pathIterator.next();
             switch (next.getVerb()) {
                 case 0:
-                    i = i3 + 1;
-                    fArr[i3] = PathData.MOVE_NAN;
+                    i2 = i4 + 1;
+                    fArr[i4] = PathData.MOVE_NAN;
                     break;
                 case 1:
-                    i = i3 + 1;
-                    fArr[i3] = PathData.LINE_NAN;
+                    i2 = i4 + 1;
+                    fArr[i4] = PathData.LINE_NAN;
                     break;
                 case 2:
-                    i = i3 + 1;
-                    fArr[i3] = PathData.QUADRATIC_NAN;
+                    i2 = i4 + 1;
+                    fArr[i4] = PathData.QUADRATIC_NAN;
                     break;
                 case 3:
-                    i = i3 + 1;
-                    fArr[i3] = PathData.CONIC_NAN;
+                    i2 = i4 + 1;
+                    fArr[i4] = PathData.CONIC_NAN;
                     break;
                 case 4:
-                    i = i3 + 1;
-                    fArr[i3] = PathData.CUBIC_NAN;
+                    i2 = i4 + 1;
+                    fArr[i4] = PathData.CUBIC_NAN;
                     break;
                 case 5:
-                    i = i3 + 1;
-                    fArr[i3] = PathData.CLOSE_NAN;
+                    i2 = i4 + 1;
+                    fArr[i4] = PathData.CLOSE_NAN;
                     break;
                 case 6:
-                    i = i3 + 1;
-                    fArr[i3] = PathData.DONE_NAN;
+                    i2 = i4 + 1;
+                    fArr[i4] = PathData.DONE_NAN;
                     break;
+                default:
+                    float[] points = next.getPoints();
+                    length = points.length;
+                    i = 0;
+                    while (i < length) {
+                        fArr[i4] = points[i];
+                        i++;
+                        i4++;
+                    }
+                    if (next.getVerb() != 3) {
+                        fArr[i4] = next.getConicWeight();
+                        i4++;
+                    }
             }
-            i3 = i;
-            float[] points = next.getPoints();
-            int length = points.length;
-            int i4 = 0;
-            while (i4 < length) {
-                fArr[i3] = points[i4];
-                i4++;
-                i3++;
+            i4 = i2;
+            float[] points2 = next.getPoints();
+            length = points2.length;
+            i = 0;
+            while (i < length) {
             }
-            if (next.getVerb() == 3) {
-                fArr[i3] = next.getConicWeight();
-                i3++;
+            if (next.getVerb() != 3) {
             }
         }
-        return Arrays.copyOf(fArr, i3);
+        return Arrays.copyOf(fArr, i4);
     }
 }

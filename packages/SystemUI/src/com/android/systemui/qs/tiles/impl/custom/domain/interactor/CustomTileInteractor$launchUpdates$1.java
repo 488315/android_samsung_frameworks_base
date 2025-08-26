@@ -1,5 +1,6 @@
 package com.android.systemui.qs.tiles.impl.custom.domain.interactor;
 
+import android.graphics.drawable.Icon;
 import android.os.UserHandle;
 import android.service.quicksettings.Tile;
 import com.android.systemui.qs.tiles.impl.custom.data.model.CustomTileDefaults;
@@ -7,17 +8,21 @@ import com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileDefau
 import com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileDefaultsRepositoryImpl;
 import com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileDefaultsRepositoryImpl$defaults$$inlined$filter$1;
 import com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileDefaultsRepositoryImpl$defaults$$inlined$map$1;
+import com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepository;
+import com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl;
+import com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl$$ExternalSyntheticLambda1;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CustomTileInteractor$launchUpdates$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ UserHandle $user;
@@ -25,7 +30,6 @@ final class CustomTileInteractor$launchUpdates$1 extends SuspendLambda implement
     int label;
     final /* synthetic */ CustomTileInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileInteractor$launchUpdates$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ UserHandle $user;
@@ -54,92 +58,61 @@ final class CustomTileInteractor$launchUpdates$1 extends SuspendLambda implement
             return ((AnonymousClass1) create((Tile) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:15:0x006d, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:18:0x006d, code lost:
         
             if (r7 == r0) goto L19;
          */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object invokeSuspend(java.lang.Object r8) {
-            /*
-                r7 = this;
-                kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                int r1 = r7.label
-                r2 = 2
-                r3 = 1
-                if (r1 == 0) goto L28
-                if (r1 == r3) goto L18
-                if (r1 != r2) goto L10
-                kotlin.ResultKt.throwOnFailure(r8)
-                goto L70
-            L10:
-                java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-                java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-                r7.<init>(r8)
-                throw r7
-            L18:
-                java.lang.Object r1 = r7.L$2
-                android.service.quicksettings.Tile r1 = (android.service.quicksettings.Tile) r1
-                java.lang.Object r3 = r7.L$1
-                android.os.UserHandle r3 = (android.os.UserHandle) r3
-                java.lang.Object r4 = r7.L$0
-                com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepository r4 = (com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepository) r4
-                kotlin.ResultKt.throwOnFailure(r8)
-                goto L4b
-            L28:
-                kotlin.ResultKt.throwOnFailure(r8)
-                java.lang.Object r8 = r7.L$0
-                r1 = r8
-                android.service.quicksettings.Tile r1 = (android.service.quicksettings.Tile) r1
-                com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileInteractor r8 = r7.this$0
-                com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepository r4 = r8.customTileRepository
-                android.os.UserHandle r8 = r7.$user
-                r7.L$0 = r4
-                r7.L$1 = r8
-                r7.L$2 = r1
-                r7.label = r3
-                r3 = r4
-                com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl r3 = (com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl) r3
-                java.lang.Object r3 = r3.isTileActive(r7)
-                if (r3 != r0) goto L48
-                goto L6f
-            L48:
-                r6 = r3
-                r3 = r8
-                r8 = r6
-            L4b:
-                java.lang.Boolean r8 = (java.lang.Boolean) r8
-                boolean r8 = r8.booleanValue()
-                r5 = 0
-                r7.L$0 = r5
-                r7.L$1 = r5
-                r7.L$2 = r5
-                r7.label = r2
-                com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl r4 = (com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl) r4
-                r4.getClass()
-                com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl$$ExternalSyntheticLambda1 r2 = new com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl$$ExternalSyntheticLambda1
-                r2.<init>(r1)
-                java.lang.Object r7 = r4.updateTile(r3, r8, r2, r7)
-                if (r7 != r0) goto L6b
-                goto L6d
-            L6b:
-                kotlin.Unit r7 = kotlin.Unit.INSTANCE
-            L6d:
-                if (r7 != r0) goto L70
-            L6f:
-                return r0
-            L70:
-                kotlin.Unit r7 = kotlin.Unit.INSTANCE
-                return r7
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileInteractor$launchUpdates$1.AnonymousClass1.invokeSuspend(java.lang.Object):java.lang.Object");
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            Tile tile;
+            CustomTileRepository customTileRepository;
+            UserHandle userHandle;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                tile = (Tile) this.L$0;
+                customTileRepository = this.this$0.customTileRepository;
+                UserHandle userHandle2 = this.$user;
+                this.L$0 = customTileRepository;
+                this.L$1 = userHandle2;
+                this.L$2 = tile;
+                this.label = 1;
+                Object objIsTileActive = ((CustomTileRepositoryImpl) customTileRepository).isTileActive(this);
+                if (objIsTileActive != coroutineSingletons) {
+                    userHandle = userHandle2;
+                    obj = objIsTileActive;
+                }
+                return coroutineSingletons;
+            }
+            if (i != 1) {
+                if (i != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            tile = (Tile) this.L$2;
+            userHandle = (UserHandle) this.L$1;
+            customTileRepository = (CustomTileRepository) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+            this.L$0 = null;
+            this.L$1 = null;
+            this.L$2 = null;
+            this.label = 2;
+            CustomTileRepositoryImpl customTileRepositoryImpl = (CustomTileRepositoryImpl) customTileRepository;
+            customTileRepositoryImpl.getClass();
+            Object objUpdateTile = customTileRepositoryImpl.updateTile(userHandle, zBooleanValue, new CustomTileRepositoryImpl$$ExternalSyntheticLambda1(tile), this);
+            if (objUpdateTile != coroutineSingletons) {
+                objUpdateTile = Unit.INSTANCE;
+            }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileInteractor$launchUpdates$1$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         final /* synthetic */ UserHandle $user;
@@ -168,94 +141,93 @@ final class CustomTileInteractor$launchUpdates$1 extends SuspendLambda implement
             return ((AnonymousClass2) create((CustomTileDefaults) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:17:0x0076, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:21:0x0076, code lost:
         
             if (r7 == r0) goto L22;
          */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object invokeSuspend(java.lang.Object r8) {
-            /*
-                r7 = this;
-                kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                int r1 = r7.label
-                r2 = 2
-                r3 = 1
-                if (r1 == 0) goto L28
-                if (r1 == r3) goto L18
-                if (r1 != r2) goto L10
-                kotlin.ResultKt.throwOnFailure(r8)
-                goto L79
-            L10:
-                java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-                java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-                r7.<init>(r8)
-                throw r7
-            L18:
-                java.lang.Object r1 = r7.L$2
-                com.android.systemui.qs.tiles.impl.custom.data.model.CustomTileDefaults r1 = (com.android.systemui.qs.tiles.impl.custom.data.model.CustomTileDefaults) r1
-                java.lang.Object r3 = r7.L$1
-                android.os.UserHandle r3 = (android.os.UserHandle) r3
-                java.lang.Object r4 = r7.L$0
-                com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepository r4 = (com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepository) r4
-                kotlin.ResultKt.throwOnFailure(r8)
-                goto L4b
-            L28:
-                kotlin.ResultKt.throwOnFailure(r8)
-                java.lang.Object r8 = r7.L$0
-                r1 = r8
-                com.android.systemui.qs.tiles.impl.custom.data.model.CustomTileDefaults r1 = (com.android.systemui.qs.tiles.impl.custom.data.model.CustomTileDefaults) r1
-                com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileInteractor r8 = r7.this$0
-                com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepository r4 = r8.customTileRepository
-                android.os.UserHandle r8 = r7.$user
-                r7.L$0 = r4
-                r7.L$1 = r8
-                r7.L$2 = r1
-                r7.label = r3
-                r3 = r4
-                com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl r3 = (com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl) r3
-                java.lang.Object r3 = r3.isTileActive(r7)
-                if (r3 != r0) goto L48
-                goto L78
-            L48:
-                r6 = r3
-                r3 = r8
-                r8 = r6
-            L4b:
-                java.lang.Boolean r8 = (java.lang.Boolean) r8
-                boolean r8 = r8.booleanValue()
-                r5 = 0
-                r7.L$0 = r5
-                r7.L$1 = r5
-                r7.L$2 = r5
-                r7.label = r2
-                com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl r4 = (com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl) r4
-                r4.getClass()
-                boolean r2 = r1 instanceof com.android.systemui.qs.tiles.impl.custom.data.model.CustomTileDefaults.Result
-                if (r2 == 0) goto L74
-                com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl$$ExternalSyntheticLambda0 r2 = new com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl$$ExternalSyntheticLambda0
-                com.android.systemui.qs.tiles.impl.custom.data.model.CustomTileDefaults$Result r1 = (com.android.systemui.qs.tiles.impl.custom.data.model.CustomTileDefaults.Result) r1
-                r2.<init>()
-                java.lang.Object r7 = r4.updateTile(r3, r8, r2, r7)
-                if (r7 != r0) goto L71
-                goto L76
-            L71:
-                kotlin.Unit r7 = kotlin.Unit.INSTANCE
-                goto L76
-            L74:
-                kotlin.Unit r7 = kotlin.Unit.INSTANCE
-            L76:
-                if (r7 != r0) goto L79
-            L78:
-                return r0
-            L79:
-                kotlin.Unit r7 = kotlin.Unit.INSTANCE
-                return r7
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileInteractor$launchUpdates$1.AnonymousClass2.invokeSuspend(java.lang.Object):java.lang.Object");
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            CustomTileDefaults customTileDefaults;
+            CustomTileRepository customTileRepository;
+            UserHandle userHandle;
+            Object objUpdateTile;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                customTileDefaults = (CustomTileDefaults) this.L$0;
+                customTileRepository = this.this$0.customTileRepository;
+                UserHandle userHandle2 = this.$user;
+                this.L$0 = customTileRepository;
+                this.L$1 = userHandle2;
+                this.L$2 = customTileDefaults;
+                this.label = 1;
+                Object objIsTileActive = ((CustomTileRepositoryImpl) customTileRepository).isTileActive(this);
+                if (objIsTileActive != coroutineSingletons) {
+                    userHandle = userHandle2;
+                    obj = objIsTileActive;
+                }
+                return coroutineSingletons;
+            }
+            if (i != 1) {
+                if (i != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            customTileDefaults = (CustomTileDefaults) this.L$2;
+            userHandle = (UserHandle) this.L$1;
+            customTileRepository = (CustomTileRepository) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+            this.L$0 = null;
+            this.L$1 = null;
+            this.L$2 = null;
+            this.label = 2;
+            final CustomTileRepositoryImpl customTileRepositoryImpl = (CustomTileRepositoryImpl) customTileRepository;
+            customTileRepositoryImpl.getClass();
+            if (customTileDefaults instanceof CustomTileDefaults.Result) {
+                final CustomTileDefaults.Result result = (CustomTileDefaults.Result) customTileDefaults;
+                objUpdateTile = customTileRepositoryImpl.updateTile(userHandle, zBooleanValue, new Function1() { // from class: com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl$$ExternalSyntheticLambda0
+                    /* JADX WARN: Removed duplicated region for block: B:6:0x0016  */
+                    @Override // kotlin.jvm.functions.Function1
+                    /* renamed from: invoke */
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
+                    public final Object mo781invoke(Object obj2) {
+                        Tile tile = (Tile) obj2;
+                        int i2 = CustomTileRepositoryImpl.$r8$clinit;
+                        Icon icon = tile.getIcon();
+                        CustomTileDefaults.Result result2 = result;
+                        boolean z = true;
+                        if (icon != null) {
+                            Icon icon2 = tile.getIcon();
+                            Icon icon3 = result2.icon;
+                            if (icon3 != null) {
+                                boolean zAreEqual = icon2 == icon3 ? true : (icon2.getType() == 2 && icon3.getType() == 2 && icon2.getResId() == icon3.getResId()) ? Intrinsics.areEqual(icon2.getResPackage(), icon3.getResPackage()) : false;
+                                if (!zAreEqual) {
+                                    z = false;
+                                }
+                            }
+                        }
+                        if (z) {
+                            tile.setIcon(result2.icon);
+                        }
+                        tile.setDefaultLabel(result2.label);
+                        return Unit.INSTANCE;
+                    }
+                }, this);
+                if (objUpdateTile != coroutineSingletons) {
+                    objUpdateTile = Unit.INSTANCE;
+                }
+            } else {
+                objUpdateTile = Unit.INSTANCE;
+            }
         }
     }
 

@@ -40,54 +40,20 @@ public final class BulkCursorToCursorAdaptor extends AbstractWindowedCursor {
         return this.mCount;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0037 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0038 A[RETURN] */
     @Override // android.database.AbstractCursor, android.database.CrossProcessCursor
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public boolean onMove(int r3, int r4) {
-        /*
-            r2 = this;
-            r2.throwIfCursorIsClosed()
-            r3 = 0
-            android.database.CursorWindow r0 = r2.mWindow     // Catch: android.os.RemoteException -> L3a
-            if (r0 == 0) goto L2a
-            android.database.CursorWindow r0 = r2.mWindow     // Catch: android.os.RemoteException -> L3a
-            int r0 = r0.getStartPosition()     // Catch: android.os.RemoteException -> L3a
-            if (r4 < r0) goto L2a
-            android.database.CursorWindow r0 = r2.mWindow     // Catch: android.os.RemoteException -> L3a
-            int r0 = r0.getStartPosition()     // Catch: android.os.RemoteException -> L3a
-            android.database.CursorWindow r1 = r2.mWindow     // Catch: android.os.RemoteException -> L3a
-            int r1 = r1.getNumRows()     // Catch: android.os.RemoteException -> L3a
-            int r0 = r0 + r1
-            if (r4 < r0) goto L20
-            goto L2a
-        L20:
-            boolean r0 = r2.mWantsAllOnMoveCalls     // Catch: android.os.RemoteException -> L3a
-            if (r0 == 0) goto L33
-            android.database.IBulkCursor r0 = r2.mBulkCursor     // Catch: android.os.RemoteException -> L3a
-            r0.onMove(r4)     // Catch: android.os.RemoteException -> L3a
-            goto L33
-        L2a:
-            android.database.IBulkCursor r0 = r2.mBulkCursor     // Catch: android.os.RemoteException -> L3a
-            android.database.CursorWindow r4 = r0.getWindow(r4)     // Catch: android.os.RemoteException -> L3a
-            r2.setWindow(r4)     // Catch: android.os.RemoteException -> L3a
-        L33:
-            android.database.CursorWindow r2 = r2.mWindow
-            if (r2 != 0) goto L38
-            return r3
-        L38:
-            r2 = 1
-            return r2
-        L3a:
-            java.lang.String r2 = "BulkCursor"
-            java.lang.String r4 = "Unable to get window because the remote process is dead"
-            android.util.Log.e(r2, r4)
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.database.BulkCursorToCursorAdaptor.onMove(int, int):boolean");
+    public boolean onMove(int i, int i2) {
+        throwIfCursorIsClosed();
+        try {
+            if (this.mWindow == null || i2 < this.mWindow.getStartPosition() || i2 >= this.mWindow.getStartPosition() + this.mWindow.getNumRows()) {
+                setWindow(this.mBulkCursor.getWindow(i2));
+            } else if (this.mWantsAllOnMoveCalls) {
+                this.mBulkCursor.onMove(i2);
+            }
+            return this.mWindow != null;
+        } catch (RemoteException unused) {
+            Log.e(TAG, "Unable to get window because the remote process is dead");
+            return false;
+        }
     }
 
     @Override // android.database.AbstractCursor, android.database.Cursor
@@ -122,9 +88,9 @@ public final class BulkCursorToCursorAdaptor extends AbstractWindowedCursor {
     public boolean requery() {
         throwIfCursorIsClosed();
         try {
-            int requery = this.mBulkCursor.requery(getObserver());
-            this.mCount = requery;
-            if (requery != -1) {
+            int iRequery = this.mBulkCursor.requery(getObserver());
+            this.mCount = iRequery;
+            if (iRequery != -1) {
                 this.mPos = -1;
                 closeWindow();
                 super.requery();

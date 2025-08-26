@@ -13,7 +13,6 @@ import com.android.wm.shell.sysui.ShellInit;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DisplayChangeController {
     public final ShellExecutor mMainExecutor;
@@ -21,7 +20,6 @@ public class DisplayChangeController {
     public final CopyOnWriteArrayList mDisplayChangeListener = new CopyOnWriteArrayList();
     public final DisplayChangeWindowControllerImpl mControllerImpl = new DisplayChangeWindowControllerImpl(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisplayChangeWindowControllerImpl extends IDisplayChangeWindowController.Stub {
         public /* synthetic */ DisplayChangeWindowControllerImpl(DisplayChangeController displayChangeController, int i) {
             this();
@@ -34,7 +32,7 @@ public class DisplayChangeController {
             DisplayChangeController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.common.DisplayChangeController$DisplayChangeWindowControllerImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DisplayChangeController.DisplayChangeWindowControllerImpl displayChangeWindowControllerImpl = DisplayChangeController.DisplayChangeWindowControllerImpl.this;
+                    DisplayChangeController.DisplayChangeWindowControllerImpl displayChangeWindowControllerImpl = this.f$0;
                     int i4 = i;
                     int i5 = i2;
                     int i6 = i3;
@@ -70,7 +68,6 @@ public class DisplayChangeController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnDisplayChangingListener {
         void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, WindowContainerTransaction windowContainerTransaction);
     }
@@ -81,7 +78,7 @@ public class DisplayChangeController {
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.common.DisplayChangeController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                DisplayChangeController displayChangeController = DisplayChangeController.this;
+                DisplayChangeController displayChangeController = this.f$0;
                 try {
                     displayChangeController.mWmService.setDisplayChangeWindowController(displayChangeController.mControllerImpl);
                 } catch (RemoteException unused) {

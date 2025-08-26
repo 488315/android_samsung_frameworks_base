@@ -15,7 +15,7 @@ class SignatureUpdatingOutputStream extends OutputStream {
     }
 
     @Override // java.io.OutputStream
-    public void write(byte[] bArr, int i, int i2) throws IOException {
+    public void write(byte[] bArr, int i, int i2) throws SignatureException, IOException {
         try {
             this.sig.update(bArr, i, i2);
         } catch (SignatureException e) {
@@ -24,7 +24,7 @@ class SignatureUpdatingOutputStream extends OutputStream {
     }
 
     @Override // java.io.OutputStream
-    public void write(byte[] bArr) throws IOException {
+    public void write(byte[] bArr) throws SignatureException, IOException {
         try {
             this.sig.update(bArr);
         } catch (SignatureException e) {
@@ -33,7 +33,7 @@ class SignatureUpdatingOutputStream extends OutputStream {
     }
 
     @Override // java.io.OutputStream
-    public void write(int i) throws IOException {
+    public void write(int i) throws SignatureException, IOException {
         try {
             this.sig.update((byte) i);
         } catch (SignatureException e) {

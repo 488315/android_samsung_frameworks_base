@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import com.android.systemui.animation.view.LaunchableLinearLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingCallBackgroundContainer extends LaunchableLinearLayout {
     public OngoingCallController$$ExternalSyntheticLambda0 maxHeightFetcher;
@@ -21,9 +20,9 @@ public final class OngoingCallBackgroundContainer extends LaunchableLinearLayout
         Integer num = ongoingCallController$$ExternalSyntheticLambda0 != null ? (Integer) ongoingCallController$$ExternalSyntheticLambda0.invoke() : null;
         if (num != null) {
             measuredHeight = getMeasuredHeight();
-            int intValue = num.intValue() - 1;
-            if (measuredHeight > intValue) {
-                measuredHeight = intValue;
+            int iIntValue = num.intValue() - 1;
+            if (measuredHeight > iIntValue) {
+                measuredHeight = iIntValue;
             }
         } else {
             measuredHeight = getMeasuredHeight();

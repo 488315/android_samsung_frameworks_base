@@ -3,15 +3,12 @@ package com.android.systemui.qs.ui.adapter;
 import com.android.compose.modifiers.AnimatedBackgroundKt$$ExternalSyntheticLambda0;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface QSSceneAdapter {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface State {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class CLOSED implements State {
             public static final CLOSED INSTANCE = new CLOSED();
             public static final QSSceneAdapter$State$CLOSED$$ExternalSyntheticLambda0 expansion = new QSSceneAdapter$State$CLOSED$$ExternalSyntheticLambda0(0);
@@ -48,7 +45,6 @@ public interface QSSceneAdapter {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
             public static final Expanding QQS = null;
@@ -63,7 +59,6 @@ public interface QSSceneAdapter {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Expanding implements State {
             public final Function0 expansion;
             public final AnimatedBackgroundKt$$ExternalSyntheticLambda0 squishiness = new AnimatedBackgroundKt$$ExternalSyntheticLambda0();

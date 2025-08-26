@@ -12,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScrollableNode$drag$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function2 $forEachDelta;
@@ -56,18 +55,18 @@ final class ScrollableNode$drag$2$1 extends SuspendLambda implements Function2 {
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
-                    NestedScrollScope nestedScrollScope2 = NestedScrollScope.this;
-                    long m394copydBAh8RU$default = Offset.m394copydBAh8RU$default(((DragEvent.DragDelta) obj2).delta, 0.0f, scrollingLogic.orientation == Orientation.Horizontal ? 1 : 2);
+                public final Object mo781invoke(Object obj2) {
+                    NestedScrollScope nestedScrollScope2 = nestedScrollScope;
+                    long jM396copydBAh8RU$default = Offset.m396copydBAh8RU$default(((DragEvent.DragDelta) obj2).delta, 0.0f, scrollingLogic.orientation == Orientation.Horizontal ? 1 : 2);
                     NestedScrollSource.Companion.getClass();
                     int i2 = NestedScrollSource.UserInput;
                     ScrollingLogic scrollingLogic2 = ((ScrollingLogic$nestedScrollScope$1) nestedScrollScope2).this$0;
                     scrollingLogic2.latestScrollSource = i2;
                     OverscrollEffect overscrollEffect = scrollingLogic2.overscrollEffect;
                     if (overscrollEffect == null || !(scrollingLogic2.scrollableState.getCanScrollForward() || scrollingLogic2.scrollableState.getCanScrollBackward())) {
-                        ScrollingLogic.m80access$performScroll3eAAhYA(scrollingLogic2, scrollingLogic2.outerStateScope, m394copydBAh8RU$default, i2);
+                        ScrollingLogic.m81access$performScroll3eAAhYA(scrollingLogic2, scrollingLogic2.outerStateScope, jM396copydBAh8RU$default, i2);
                     } else {
-                        overscrollEffect.mo20applyToScrollRhakbz0(scrollingLogic2.latestScrollSource, m394copydBAh8RU$default, scrollingLogic2.performScrollForOverscroll);
+                        overscrollEffect.mo20applyToScrollRhakbz0(scrollingLogic2.latestScrollSource, jM396copydBAh8RU$default, scrollingLogic2.performScrollForOverscroll);
                     }
                     return Unit.INSTANCE;
                 }

@@ -61,9 +61,9 @@ public interface IDataServiceSignalInfo extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.teletext.IDataServiceSignalInfo");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDataServiceSignalInfo)) {
-                return (IDataServiceSignalInfo) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.teletext.IDataServiceSignalInfo");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDataServiceSignalInfo)) {
+                return (IDataServiceSignalInfo) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,22 +96,22 @@ public interface IDataServiceSignalInfo extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                Bundle dataServiceSignalInfo = getDataServiceSignalInfo(readString);
+                Bundle dataServiceSignalInfo = getDataServiceSignalInfo(string);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(dataServiceSignalInfo, 1);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                IDataServiceSignalInfoListener asInterface = IDataServiceSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                String string2 = parcel.readString();
+                IDataServiceSignalInfoListener iDataServiceSignalInfoListenerAsInterface = IDataServiceSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addDataServiceSignalInfoListener(readString2, asInterface);
+                addDataServiceSignalInfoListener(string2, iDataServiceSignalInfoListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                String readString3 = parcel.readString();
-                IDataServiceSignalInfoListener asInterface2 = IDataServiceSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                String string3 = parcel.readString();
+                IDataServiceSignalInfoListener iDataServiceSignalInfoListenerAsInterface2 = IDataServiceSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeDataServiceSignalInfoListener(readString3, asInterface2);
+                removeDataServiceSignalInfoListener(string3, iDataServiceSignalInfoListenerAsInterface2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -137,49 +137,49 @@ public interface IDataServiceSignalInfo extends IInterface {
 
             @Override // android.media.tv.extension.teletext.IDataServiceSignalInfo
             public Bundle getDataServiceSignalInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.IDataServiceSignalInfo");
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.IDataServiceSignalInfo");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.teletext.IDataServiceSignalInfo
             public void addDataServiceSignalInfoListener(String str, IDataServiceSignalInfoListener iDataServiceSignalInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.IDataServiceSignalInfo");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iDataServiceSignalInfoListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.IDataServiceSignalInfo");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iDataServiceSignalInfoListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.teletext.IDataServiceSignalInfo
             public void removeDataServiceSignalInfoListener(String str, IDataServiceSignalInfoListener iDataServiceSignalInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.IDataServiceSignalInfo");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iDataServiceSignalInfoListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.IDataServiceSignalInfo");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iDataServiceSignalInfoListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

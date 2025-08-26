@@ -7,7 +7,6 @@ import com.android.systemui.bouncer.ui.helper.BouncerHapticPlayer;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardPermanentViewController extends KeyguardInputViewController {
     public KeyguardPermanentViewController(KeyguardPermanentView keyguardPermanentView, KeyguardSecurityModel.SecurityMode securityMode, KeyguardSecurityCallback keyguardSecurityCallback, EmergencyButtonController emergencyButtonController, KeyguardMessageAreaController.Factory factory, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, BouncerHapticPlayer bouncerHapticPlayer) {

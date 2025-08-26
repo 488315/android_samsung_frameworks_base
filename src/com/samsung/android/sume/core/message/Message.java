@@ -137,9 +137,9 @@ public class Message {
         this.data = new HashMap();
         Bundle data = message.getData();
         data.setClassLoader(GenericMediaBuffer.class.getClassLoader());
-        HashMap hashMap = (HashMap) data.getSerializable("data");
-        if (hashMap != null) {
-            this.data = hashMap;
+        HashMap map = (HashMap) data.getSerializable("data");
+        if (map != null) {
+            this.data = map;
         }
         Exception exc = (Exception) data.getSerializable("exception");
         if (exc != null) {
@@ -203,22 +203,22 @@ public class Message {
     }
 
     private boolean isValidCode(int i, int i2) {
-        final int typeOf = typeOf(i2);
+        final int iTypeOf = typeOf(i2);
         if (i == 990) {
             return Stream.of((Object[]) new Integer[]{990, 994, 995, 993}).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda4
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    return Message.lambda$isValidCode$1(typeOf, (Integer) obj);
+                    return Message.lambda$isValidCode$1(iTypeOf, (Integer) obj);
                 }
             });
         }
         if (i != 992) {
-            return i == typeOf;
+            return i == iTypeOf;
         }
         return Stream.of((Object[]) new Integer[]{992, 990, 991, 993, 995}).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda3
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return Message.lambda$isValidCode$0(typeOf, (Integer) obj);
+                return Message.lambda$isValidCode$0(iTypeOf, (Integer) obj);
             }
         });
     }
@@ -247,13 +247,13 @@ public class Message {
         return Arrays.stream(strArr).allMatch(new Predicate() { // from class: com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return Message.this.m9588xc0a52838((String) obj);
+                return this.f$0.m9601xc0a52838((String) obj);
             }
         });
     }
 
     /* renamed from: lambda$containsAll$2$com-samsung-android-sume-core-message-Message, reason: not valid java name */
-    /* synthetic */ boolean m9588xc0a52838(String str) {
+    /* synthetic */ boolean m9601xc0a52838(String str) {
         return this.data.containsKey(str);
     }
 
@@ -261,13 +261,13 @@ public class Message {
         return Arrays.stream(strArr).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return Message.this.m9589x136f6cc4((String) obj);
+                return this.f$0.m9602x136f6cc4((String) obj);
             }
         });
     }
 
     /* renamed from: lambda$containsAny$3$com-samsung-android-sume-core-message-Message, reason: not valid java name */
-    /* synthetic */ boolean m9589x136f6cc4(String str) {
+    /* synthetic */ boolean m9602x136f6cc4(String str) {
         return this.data.containsKey(str);
     }
 
@@ -322,7 +322,7 @@ public class Message {
             messagePublisher.getChannels(this.code).forEach(new Consumer() { // from class: com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    Message.this.m9590lambda$post$4$comsamsungandroidsumecoremessageMessage((MessageChannel) obj);
+                    this.f$0.m9603lambda$post$4$comsamsungandroidsumecoremessageMessage((MessageChannel) obj);
                 }
             });
         }
@@ -330,7 +330,7 @@ public class Message {
     }
 
     /* renamed from: lambda$post$4$com-samsung-android-sume-core-message-Message, reason: not valid java name */
-    /* synthetic */ void m9590lambda$post$4$comsamsungandroidsumecoremessageMessage(MessageChannel messageChannel) {
+    /* synthetic */ void m9603lambda$post$4$comsamsungandroidsumecoremessageMessage(MessageChannel messageChannel) {
         Log.d(TAG, "post: " + this.code + " to channel[" + messageChannel.getId() + "]: " + messageChannel);
         messageChannel.send(this);
     }
@@ -366,11 +366,11 @@ public class Message {
     }
 
     public boolean isErrorThen(Consumer<Integer> consumer) {
-        boolean isError = isError();
-        if (isError) {
+        boolean zIsError = isError();
+        if (zIsError) {
             consumer.accept(Integer.valueOf(this.code));
         }
-        return isError;
+        return zIsError;
     }
 
     public boolean isWarn() {

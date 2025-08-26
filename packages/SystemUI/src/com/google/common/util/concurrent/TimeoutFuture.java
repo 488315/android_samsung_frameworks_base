@@ -6,13 +6,11 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TimeoutFuture extends FluentFuture.TrustedFuture {
     public ListenableFuture delegateRef;
     public ScheduledFuture timer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Fire implements Runnable {
         public TimeoutFuture timeoutFutureRef;
 
@@ -38,9 +36,9 @@ public final class TimeoutFuture extends FluentFuture.TrustedFuture {
                 String str = "Timed out";
                 if (scheduledFuture != null) {
                     try {
-                        long abs = Math.abs(scheduledFuture.getDelay(TimeUnit.MILLISECONDS));
-                        if (abs > 10) {
-                            str = "Timed out (timeout delayed by " + abs + " ms after scheduled time)";
+                        long jAbs = Math.abs(scheduledFuture.getDelay(TimeUnit.MILLISECONDS));
+                        if (jAbs > 10) {
+                            str = "Timed out (timeout delayed by " + jAbs + " ms after scheduled time)";
                         }
                     } catch (Throwable th) {
                         timeoutFuture.setException(new TimeoutFutureException(str));
@@ -54,7 +52,6 @@ public final class TimeoutFuture extends FluentFuture.TrustedFuture {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class TimeoutFutureException extends TimeoutException {
         @Override // java.lang.Throwable
         public final synchronized Throwable fillInStackTrace() {

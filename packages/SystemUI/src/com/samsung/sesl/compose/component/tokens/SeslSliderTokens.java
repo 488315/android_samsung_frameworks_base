@@ -8,7 +8,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslSliderTokens {
     public static final Companion Companion = new Companion(null);
@@ -25,7 +24,6 @@ public final class SeslSliderTokens {
     public final long overlapInactiveColor;
     public final long thumbFillColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,7 +33,6 @@ public final class SeslSliderTokens {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -86,29 +83,18 @@ public final class SeslSliderTokens {
     }
 
     static {
-        long Color;
-        long Color2;
-        long Color3;
-        long Color4;
-        long Color5;
-        long Color6;
         SeslPaletteTokens.INSTANCE.getClass();
         long j = SeslPaletteTokens.GRAYSCALE_L1;
         long j2 = SeslPaletteTokens.Primary_Blue;
         long j3 = SeslPaletteTokens.GRAYSCALE_L7;
         long j4 = SeslPaletteTokens.GRAYSCALE_L8;
-        Color = ColorKt.Color(Color.m461getRedimpl(j4), Color.m460getGreenimpl(j4), Color.m458getBlueimpl(j4), 0.45f, Color.m459getColorSpaceimpl(j4));
+        long jColor = ColorKt.Color(Color.m463getRedimpl(j4), Color.m462getGreenimpl(j4), Color.m460getBlueimpl(j4), 0.45f, Color.m461getColorSpaceimpl(j4));
         long j5 = SeslPaletteTokens.Functional_Orange_Light;
-        Color2 = ColorKt.Color(Color.m461getRedimpl(j4), Color.m460getGreenimpl(j4), Color.m458getBlueimpl(j4), 0.45f, Color.m459getColorSpaceimpl(j4));
-        Color3 = ColorKt.Color(Color.m461getRedimpl(j4), Color.m460getGreenimpl(j4), Color.m458getBlueimpl(j4), 0.4f, Color.m459getColorSpaceimpl(j4));
+        long jColor2 = ColorKt.Color(Color.m463getRedimpl(j4), Color.m462getGreenimpl(j4), Color.m460getBlueimpl(j4), 0.45f, Color.m461getColorSpaceimpl(j4));
+        long jColor3 = ColorKt.Color(Color.m463getRedimpl(j4), Color.m462getGreenimpl(j4), Color.m460getBlueimpl(j4), 0.4f, Color.m461getColorSpaceimpl(j4));
         long j6 = SeslPaletteTokens.GRAYSCALE_D9;
-        lightSliderTokens = new SeslSliderTokens(j, j2, j3, j2, Color, j5, Color2, Color3, j6, j6, null);
-        long j7 = SeslPaletteTokens.GRAYSCALE_D7;
-        Color4 = ColorKt.Color(Color.m461getRedimpl(j4), Color.m460getGreenimpl(j4), Color.m458getBlueimpl(j4), 0.4f, Color.m459getColorSpaceimpl(j4));
-        long j8 = SeslPaletteTokens.Functional_Orange_Dark;
-        Color5 = ColorKt.Color(Color.m461getRedimpl(j4), Color.m460getGreenimpl(j4), Color.m458getBlueimpl(j4), 0.4f, Color.m459getColorSpaceimpl(j4));
-        Color6 = ColorKt.Color(Color.m461getRedimpl(j4), Color.m460getGreenimpl(j4), Color.m458getBlueimpl(j4), 0.4f, Color.m459getColorSpaceimpl(j4));
-        darkSliderTokens = new SeslSliderTokens(j, j2, j7, j2, Color4, j8, Color5, Color6, j6, j6, null);
+        lightSliderTokens = new SeslSliderTokens(j, j2, j3, j2, jColor, j5, jColor2, jColor3, j6, j6, null);
+        darkSliderTokens = new SeslSliderTokens(j, j2, SeslPaletteTokens.GRAYSCALE_D7, j2, ColorKt.Color(Color.m463getRedimpl(j4), Color.m462getGreenimpl(j4), Color.m460getBlueimpl(j4), 0.4f, Color.m461getColorSpaceimpl(j4)), SeslPaletteTokens.Functional_Orange_Dark, ColorKt.Color(Color.m463getRedimpl(j4), Color.m462getGreenimpl(j4), Color.m460getBlueimpl(j4), 0.4f, Color.m461getColorSpaceimpl(j4)), ColorKt.Color(Color.m463getRedimpl(j4), Color.m462getGreenimpl(j4), Color.m460getBlueimpl(j4), 0.4f, Color.m461getColorSpaceimpl(j4)), j6, j6, null);
     }
 
     public /* synthetic */ SeslSliderTokens(long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9, long j10, DefaultConstructorMarker defaultConstructorMarker) {
@@ -125,7 +111,7 @@ public final class SeslSliderTokens {
         SeslSliderTokens seslSliderTokens = (SeslSliderTokens) obj;
         long j = seslSliderTokens.thumbFillColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.thumbFillColor, j) && ULong.m3427equalsimpl0(this.activateThumbStrokeColor, seslSliderTokens.activateThumbStrokeColor) && ULong.m3427equalsimpl0(this.inactiveThumbStrokeColor, seslSliderTokens.inactiveThumbStrokeColor) && ULong.m3427equalsimpl0(this.activateTrackColor, seslSliderTokens.activateTrackColor) && ULong.m3427equalsimpl0(this.inactivateTrackColor, seslSliderTokens.inactivateTrackColor) && ULong.m3427equalsimpl0(this.overlapActivateColor, seslSliderTokens.overlapActivateColor) && ULong.m3427equalsimpl0(this.overlapInactiveColor, seslSliderTokens.overlapInactiveColor) && ULong.m3427equalsimpl0(this.levelTrackColor, seslSliderTokens.levelTrackColor) && ULong.m3427equalsimpl0(this.activateTickColor, seslSliderTokens.activateTickColor) && ULong.m3427equalsimpl0(this.inactiveTickColor, seslSliderTokens.inactiveTickColor);
+        return ULong.m3447equalsimpl0(this.thumbFillColor, j) && ULong.m3447equalsimpl0(this.activateThumbStrokeColor, seslSliderTokens.activateThumbStrokeColor) && ULong.m3447equalsimpl0(this.inactiveThumbStrokeColor, seslSliderTokens.inactiveThumbStrokeColor) && ULong.m3447equalsimpl0(this.activateTrackColor, seslSliderTokens.activateTrackColor) && ULong.m3447equalsimpl0(this.inactivateTrackColor, seslSliderTokens.inactivateTrackColor) && ULong.m3447equalsimpl0(this.overlapActivateColor, seslSliderTokens.overlapActivateColor) && ULong.m3447equalsimpl0(this.overlapInactiveColor, seslSliderTokens.overlapInactiveColor) && ULong.m3447equalsimpl0(this.levelTrackColor, seslSliderTokens.levelTrackColor) && ULong.m3447equalsimpl0(this.activateTickColor, seslSliderTokens.activateTickColor) && ULong.m3447equalsimpl0(this.inactiveTickColor, seslSliderTokens.inactiveTickColor);
     }
 
     public final int hashCode() {
@@ -135,21 +121,21 @@ public final class SeslSliderTokens {
     }
 
     public final String toString() {
-        String m462toStringimpl = Color.m462toStringimpl(this.thumbFillColor);
-        String m462toStringimpl2 = Color.m462toStringimpl(this.activateThumbStrokeColor);
-        String m462toStringimpl3 = Color.m462toStringimpl(this.inactiveThumbStrokeColor);
-        String m462toStringimpl4 = Color.m462toStringimpl(this.activateTrackColor);
-        String m462toStringimpl5 = Color.m462toStringimpl(this.inactivateTrackColor);
-        String m462toStringimpl6 = Color.m462toStringimpl(this.overlapActivateColor);
-        String m462toStringimpl7 = Color.m462toStringimpl(this.overlapInactiveColor);
-        String m462toStringimpl8 = Color.m462toStringimpl(this.levelTrackColor);
-        String m462toStringimpl9 = Color.m462toStringimpl(this.activateTickColor);
-        String m462toStringimpl10 = Color.m462toStringimpl(this.inactiveTickColor);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslSliderTokens(thumbFillColor=", m462toStringimpl, ", activateThumbStrokeColor=", m462toStringimpl2, ", inactiveThumbStrokeColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl3, ", activateTrackColor=", m462toStringimpl4, ", inactivateTrackColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl5, ", overlapActivateColor=", m462toStringimpl6, ", overlapInactiveColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl7, ", levelTrackColor=", m462toStringimpl8, ", activateTickColor=");
-        return NotificationController$$ExternalSyntheticOutline0.m(m, m462toStringimpl9, ", inactiveTickColor=", m462toStringimpl10, ")");
+        String strM464toStringimpl = Color.m464toStringimpl(this.thumbFillColor);
+        String strM464toStringimpl2 = Color.m464toStringimpl(this.activateThumbStrokeColor);
+        String strM464toStringimpl3 = Color.m464toStringimpl(this.inactiveThumbStrokeColor);
+        String strM464toStringimpl4 = Color.m464toStringimpl(this.activateTrackColor);
+        String strM464toStringimpl5 = Color.m464toStringimpl(this.inactivateTrackColor);
+        String strM464toStringimpl6 = Color.m464toStringimpl(this.overlapActivateColor);
+        String strM464toStringimpl7 = Color.m464toStringimpl(this.overlapInactiveColor);
+        String strM464toStringimpl8 = Color.m464toStringimpl(this.levelTrackColor);
+        String strM464toStringimpl9 = Color.m464toStringimpl(this.activateTickColor);
+        String strM464toStringimpl10 = Color.m464toStringimpl(this.inactiveTickColor);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslSliderTokens(thumbFillColor=", strM464toStringimpl, ", activateThumbStrokeColor=", strM464toStringimpl2, ", inactiveThumbStrokeColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl3, ", activateTrackColor=", strM464toStringimpl4, ", inactivateTrackColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl5, ", overlapActivateColor=", strM464toStringimpl6, ", overlapInactiveColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl7, ", levelTrackColor=", strM464toStringimpl8, ", activateTickColor=");
+        return NotificationController$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl9, ", inactiveTickColor=", strM464toStringimpl10, ")");
     }
 
     private SeslSliderTokens(long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9, long j10) {

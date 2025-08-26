@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import com.android.systemui.R;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class AbsEdgeLightingMaskView extends DrawEdgeLayout {
     public final String TAG;
@@ -44,10 +43,10 @@ public abstract class AbsEdgeLightingMaskView extends DrawEdgeLayout {
     }
 
     public static void changeRingImageAlpha(View view, float f, long j) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "alpha", f);
-        ofFloat.setStartDelay(0L);
-        ofFloat.setDuration(j);
-        ofFloat.start();
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "alpha", f);
+        objectAnimatorOfFloat.setStartDelay(0L);
+        objectAnimatorOfFloat.setDuration(j);
+        objectAnimatorOfFloat.start();
     }
 
     public final void expandViewSize(ImageView imageView) {
@@ -113,22 +112,22 @@ public abstract class AbsEdgeLightingMaskView extends DrawEdgeLayout {
         this.mMainLayer.setAlpha(0.0f);
         this.mTopLayer.setRotation(0.0f);
         this.mBottomLayer.setRotation(0.0f);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mMainLayer, "alpha", this.mStrokeAlpha);
-        ofFloat.setDuration(300L);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mTopLayer, "rotation", 0.0f, 360.0f);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(this.mBottomLayer, "rotation", 0.0f, 360.0f);
-        ofFloat2.setDuration(j);
-        ofFloat3.setDuration(j);
-        ofFloat2.setRepeatCount(-1);
-        ofFloat2.setRepeatMode(1);
-        ofFloat3.setRepeatCount(-1);
-        ofFloat3.setRepeatMode(1);
-        ofFloat3.setStartDelay(500L);
-        ofFloat2.setInterpolator(new PathInterpolator(0.0f, 0.0f, 1.0f, 1.0f));
-        ofFloat3.setInterpolator(new PathInterpolator(0.0f, 0.0f, 1.0f, 1.0f));
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mMainLayer, "alpha", this.mStrokeAlpha);
+        objectAnimatorOfFloat.setDuration(300L);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mTopLayer, "rotation", 0.0f, 360.0f);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(this.mBottomLayer, "rotation", 0.0f, 360.0f);
+        objectAnimatorOfFloat2.setDuration(j);
+        objectAnimatorOfFloat3.setDuration(j);
+        objectAnimatorOfFloat2.setRepeatCount(-1);
+        objectAnimatorOfFloat2.setRepeatMode(1);
+        objectAnimatorOfFloat3.setRepeatCount(-1);
+        objectAnimatorOfFloat3.setRepeatMode(1);
+        objectAnimatorOfFloat3.setStartDelay(500L);
+        objectAnimatorOfFloat2.setInterpolator(new PathInterpolator(0.0f, 0.0f, 1.0f, 1.0f));
+        objectAnimatorOfFloat3.setInterpolator(new PathInterpolator(0.0f, 0.0f, 1.0f, 1.0f));
         AnimatorSet animatorSet2 = new AnimatorSet();
         this.mAnimationSet = animatorSet2;
-        animatorSet2.playTogether(ofFloat2, ofFloat3, ofFloat);
+        animatorSet2.playTogether(objectAnimatorOfFloat2, objectAnimatorOfFloat3, objectAnimatorOfFloat);
         this.mAnimationSet.start();
     }
 

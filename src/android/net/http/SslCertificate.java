@@ -63,14 +63,14 @@ public class SslCertificate {
             return null;
         }
         byte[] byteArray = bundle.getByteArray(X509_CERTIFICATE);
-        if (byteArray != null) {
+        if (byteArray == null) {
+            x509Certificate = null;
+        } else {
             try {
                 x509Certificate = (X509Certificate) CertificateFactory.getInstance("X.509").generateCertificate(new ByteArrayInputStream(byteArray));
             } catch (CertificateException unused) {
             }
-            return new SslCertificate(bundle.getString(ISSUED_TO), bundle.getString(ISSUED_BY), parseDate(bundle.getString(VALID_NOT_BEFORE)), parseDate(bundle.getString(VALID_NOT_AFTER)), x509Certificate);
         }
-        x509Certificate = null;
         return new SslCertificate(bundle.getString(ISSUED_TO), bundle.getString(ISSUED_BY), parseDate(bundle.getString(VALID_NOT_BEFORE)), parseDate(bundle.getString(VALID_NOT_AFTER)), x509Certificate);
     }
 
@@ -238,25 +238,25 @@ public class SslCertificate {
     }
 
     public View inflateCertificateView(Context context) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.ssl_certificate, (ViewGroup) null);
+        View viewInflate = LayoutInflater.from(context).inflate(R.layout.ssl_certificate, (ViewGroup) null);
         DName issuedTo = getIssuedTo();
         if (issuedTo != null) {
-            ((TextView) inflate.findViewById(R.id.to_common)).lambda$setTextAsync$0(issuedTo.getCName());
-            ((TextView) inflate.findViewById(R.id.to_org)).lambda$setTextAsync$0(issuedTo.getOName());
-            ((TextView) inflate.findViewById(R.id.to_org_unit)).lambda$setTextAsync$0(issuedTo.getUName());
+            ((TextView) viewInflate.findViewById(R.id.to_common)).lambda$setTextAsync$0(issuedTo.getCName());
+            ((TextView) viewInflate.findViewById(R.id.to_org)).lambda$setTextAsync$0(issuedTo.getOName());
+            ((TextView) viewInflate.findViewById(R.id.to_org_unit)).lambda$setTextAsync$0(issuedTo.getUName());
         }
-        ((TextView) inflate.findViewById(R.id.serial_number)).lambda$setTextAsync$0(getSerialNumber(this.mX509Certificate));
+        ((TextView) viewInflate.findViewById(R.id.serial_number)).lambda$setTextAsync$0(getSerialNumber(this.mX509Certificate));
         DName issuedBy = getIssuedBy();
         if (issuedBy != null) {
-            ((TextView) inflate.findViewById(R.id.by_common)).lambda$setTextAsync$0(issuedBy.getCName());
-            ((TextView) inflate.findViewById(R.id.by_org)).lambda$setTextAsync$0(issuedBy.getOName());
-            ((TextView) inflate.findViewById(R.id.by_org_unit)).lambda$setTextAsync$0(issuedBy.getUName());
+            ((TextView) viewInflate.findViewById(R.id.by_common)).lambda$setTextAsync$0(issuedBy.getCName());
+            ((TextView) viewInflate.findViewById(R.id.by_org)).lambda$setTextAsync$0(issuedBy.getOName());
+            ((TextView) viewInflate.findViewById(R.id.by_org_unit)).lambda$setTextAsync$0(issuedBy.getUName());
         }
-        ((TextView) inflate.findViewById(R.id.issued_on)).lambda$setTextAsync$0(formatCertificateDate(context, getValidNotBeforeDate()));
-        ((TextView) inflate.findViewById(R.id.expires_on)).lambda$setTextAsync$0(formatCertificateDate(context, getValidNotAfterDate()));
-        ((TextView) inflate.findViewById(R.id.sha256_fingerprint)).lambda$setTextAsync$0(getDigest(this.mX509Certificate, "SHA256"));
-        ((TextView) inflate.findViewById(R.id.sha1_fingerprint)).lambda$setTextAsync$0(getDigest(this.mX509Certificate, "SHA1"));
-        return inflate;
+        ((TextView) viewInflate.findViewById(R.id.issued_on)).lambda$setTextAsync$0(formatCertificateDate(context, getValidNotBeforeDate()));
+        ((TextView) viewInflate.findViewById(R.id.expires_on)).lambda$setTextAsync$0(formatCertificateDate(context, getValidNotAfterDate()));
+        ((TextView) viewInflate.findViewById(R.id.sha256_fingerprint)).lambda$setTextAsync$0(getDigest(this.mX509Certificate, "SHA256"));
+        ((TextView) viewInflate.findViewById(R.id.sha1_fingerprint)).lambda$setTextAsync$0(getDigest(this.mX509Certificate, "SHA1"));
+        return viewInflate;
     }
 
     private String formatCertificateDate(Context context, Date date) {

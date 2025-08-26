@@ -15,7 +15,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatViewInflater {
     public final Object[] mConstructorArgs = new Object[2];
@@ -24,7 +23,6 @@ public class AppCompatViewInflater {
     public static final String[] sClassPrefixList = {"android.widget.", "android.view.", "android.webkit."};
     public static final SimpleArrayMap sConstructorMap = new SimpleArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DeclaredOnClickListener implements View.OnClickListener {
         public final View mHostView;
         public final String mMethodName;
@@ -37,7 +35,7 @@ public class AppCompatViewInflater {
         }
 
         @Override // android.view.View.OnClickListener
-        public final void onClick(View view) {
+        public final void onClick(View view) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             String str;
             Method method;
             if (this.mResolvedMethod == null) {
@@ -90,21 +88,21 @@ public class AppCompatViewInflater {
         return new AppCompatTextView(context, attributeSet);
     }
 
-    public final View createViewByPrefix(Context context, String str, String str2) {
-        String concat;
+    public final View createViewByPrefix(Context context, String str, String str2) throws NoSuchMethodException, SecurityException {
+        String strConcat;
         SimpleArrayMap simpleArrayMap = sConstructorMap;
         Constructor constructor = (Constructor) simpleArrayMap.get(str);
         if (constructor == null) {
             if (str2 != null) {
                 try {
-                    concat = str2.concat(str);
+                    strConcat = str2.concat(str);
                 } catch (Exception unused) {
                     return null;
                 }
             } else {
-                concat = str;
+                strConcat = str;
             }
-            constructor = Class.forName(concat, false, context.getClassLoader()).asSubclass(View.class).getConstructor(sConstructorSignature);
+            constructor = Class.forName(strConcat, false, context.getClassLoader()).asSubclass(View.class).getConstructor(sConstructorSignature);
             simpleArrayMap.put(str, constructor);
         }
         constructor.setAccessible(true);

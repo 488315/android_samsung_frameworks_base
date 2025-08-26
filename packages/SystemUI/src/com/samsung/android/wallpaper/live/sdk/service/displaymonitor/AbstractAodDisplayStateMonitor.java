@@ -15,7 +15,6 @@ import com.samsung.android.wallpaper.live.sdk.utils.SdkCommonUtils;
 import com.samsung.android.wallpaper.live.sdk.utils.SdkLog;
 import com.samsung.android.wallpaper.live.sdk.utils.SdkReflectUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractAodDisplayStateMonitor extends DisplayStateMonitor {
     public final AnonymousClass1 mObserver;
@@ -65,9 +64,9 @@ public abstract class AbstractAodDisplayStateMonitor extends DisplayStateMonitor
     public final boolean isShowingAod() {
         Context context = this.mContext;
         int focusedUserId = SdkCommonUtils.getFocusedUserId(context);
-        int semGetMyUserId = UserHandle.semGetMyUserId();
-        SdkLog.v("SdkCommonUtils", "isShowingAod : " + focusedUserId + ", " + semGetMyUserId);
-        if (focusedUserId != semGetMyUserId) {
+        int iSemGetMyUserId = UserHandle.semGetMyUserId();
+        SdkLog.v("SdkCommonUtils", "isShowingAod : " + focusedUserId + ", " + iSemGetMyUserId);
+        if (focusedUserId != iSemGetMyUserId) {
             if (Settings.System.semGetIntForUser(context.getContentResolver(), SettingsHelper.INDEX_AOD_SHOW_STATE, 0, -2) != 0) {
                 return true;
             }
@@ -83,9 +82,9 @@ public abstract class AbstractAodDisplayStateMonitor extends DisplayStateMonitor
     public final void start(LiveWallpaperService.BaseEngine.AnonymousClass1 anonymousClass1) {
         super.start(anonymousClass1);
         int focusedUserId = SdkCommonUtils.getFocusedUserId(this.mContext);
-        int semGetMyUserId = UserHandle.semGetMyUserId();
-        SdkLog.i("AbstractAodDisplayStateMonitor", "start : " + focusedUserId + ", " + semGetMyUserId);
-        if (focusedUserId != semGetMyUserId) {
+        int iSemGetMyUserId = UserHandle.semGetMyUserId();
+        SdkLog.i("AbstractAodDisplayStateMonitor", "start : " + focusedUserId + ", " + iSemGetMyUserId);
+        if (focusedUserId != iSemGetMyUserId) {
             SdkReflectUtils.invoke(this.mContext.getContentResolver(), SdkReflectUtils.getMethod(ContentResolver.class, "registerContentObserverAsUser", Uri.class, Boolean.TYPE, ContentObserver.class, UserHandle.class), Settings.System.getUriFor(SettingsHelper.INDEX_AOD_SHOW_STATE), Boolean.FALSE, this.mObserver, UserHandle.semOf(-2));
         } else {
             this.mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(SettingsHelper.INDEX_AOD_SHOW_STATE), false, this.mObserver);

@@ -18,7 +18,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PrivacyDotWindowController {
     public final int displayId;
@@ -29,7 +28,6 @@ public final class PrivacyDotWindowController {
     public final Executor uiExecutor;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,7 +37,6 @@ public final class PrivacyDotWindowController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         PrivacyDotWindowController create(int i, PrivacyDotViewController privacyDotViewController, WindowManager windowManager, LayoutInflater layoutInflater);
     }

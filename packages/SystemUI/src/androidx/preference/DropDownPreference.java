@@ -10,7 +10,6 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.SeslArrayAdapter;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DropDownPreference extends ListPreference {
     public final SeslArrayAdapter mAdapter;
@@ -32,7 +31,7 @@ public class DropDownPreference extends ListPreference {
 
     @Override // androidx.preference.Preference
     public void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) {
-        int i;
+        int length;
         AppCompatSpinner appCompatSpinner = (AppCompatSpinner) preferenceViewHolder.itemView.findViewById(R.id.spinner);
         this.mSpinner = appCompatSpinner;
         appCompatSpinner.setSoundEffectsEnabled(false);
@@ -43,18 +42,20 @@ public class DropDownPreference extends ListPreference {
         AppCompatSpinner appCompatSpinner2 = this.mSpinner;
         String str = this.mValue;
         CharSequence[] charSequenceArr = this.mEntryValues;
-        if (str != null && charSequenceArr != null) {
-            i = charSequenceArr.length - 1;
-            while (i >= 0) {
-                if (TextUtils.equals(charSequenceArr[i].toString(), str)) {
+        if (str == null || charSequenceArr == null) {
+            length = -1;
+        } else {
+            length = charSequenceArr.length - 1;
+            while (length >= 0) {
+                if (TextUtils.equals(charSequenceArr[length].toString(), str)) {
                     break;
                 } else {
-                    i--;
+                    length--;
                 }
             }
+            length = -1;
         }
-        i = -1;
-        appCompatSpinner2.setSelection(i);
+        appCompatSpinner2.setSelection(length);
         super.onBindViewHolder(preferenceViewHolder);
     }
 
@@ -94,11 +95,11 @@ public class DropDownPreference extends ListPreference {
             @Override // android.widget.AdapterView.OnItemSelectedListener
             public final void onItemSelected(AdapterView adapterView, View view, int i3, long j) {
                 if (i3 >= 0) {
-                    String charSequence = DropDownPreference.this.mEntryValues[i3].toString();
-                    if (charSequence.equals(DropDownPreference.this.mValue) || !DropDownPreference.this.callChangeListener(charSequence)) {
+                    String string = DropDownPreference.this.mEntryValues[i3].toString();
+                    if (string.equals(DropDownPreference.this.mValue) || !DropDownPreference.this.callChangeListener(string)) {
                         return;
                     }
-                    DropDownPreference.this.setValue(charSequence);
+                    DropDownPreference.this.setValue(string);
                 }
             }
 

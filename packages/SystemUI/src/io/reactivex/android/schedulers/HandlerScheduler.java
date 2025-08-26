@@ -9,13 +9,11 @@ import io.reactivex.internal.functions.ObjectHelper;
 import io.reactivex.plugins.RxJavaPlugins;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class HandlerScheduler extends Scheduler {
     public final boolean async;
     public final Handler handler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HandlerWorker extends Scheduler.Worker {
         public final boolean async;
         public volatile boolean disposed;
@@ -42,12 +40,12 @@ public final class HandlerScheduler extends Scheduler {
             }
             int i = ObjectHelper.$r8$clinit;
             ScheduledRunnable scheduledRunnable = new ScheduledRunnable(this.handler, runnable);
-            Message obtain = Message.obtain(this.handler, scheduledRunnable);
-            obtain.obj = this;
+            Message messageObtain = Message.obtain(this.handler, scheduledRunnable);
+            messageObtain.obj = this;
             if (this.async) {
-                obtain.setAsynchronous(true);
+                messageObtain.setAsynchronous(true);
             }
-            this.handler.sendMessageDelayed(obtain, timeUnit.toMillis(j));
+            this.handler.sendMessageDelayed(messageObtain, timeUnit.toMillis(j));
             if (!this.disposed) {
                 return scheduledRunnable;
             }
@@ -56,7 +54,6 @@ public final class HandlerScheduler extends Scheduler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScheduledRunnable implements Runnable, Disposable {
         public final Runnable delegate;
         public final Handler handler;
@@ -99,11 +96,11 @@ public final class HandlerScheduler extends Scheduler {
         int i = ObjectHelper.$r8$clinit;
         Handler handler = this.handler;
         ScheduledRunnable scheduledRunnable = new ScheduledRunnable(handler, runnable);
-        Message obtain = Message.obtain(handler, scheduledRunnable);
+        Message messageObtain = Message.obtain(handler, scheduledRunnable);
         if (this.async) {
-            obtain.setAsynchronous(true);
+            messageObtain.setAsynchronous(true);
         }
-        handler.sendMessageDelayed(obtain, timeUnit.toMillis(j));
+        handler.sendMessageDelayed(messageObtain, timeUnit.toMillis(j));
         return scheduledRunnable;
     }
 }

@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import kotlin.collections.AbstractMutableMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PersistentHashMapBuilder<K, V> extends AbstractMutableMap implements PersistentMap.Builder<K, V> {
     public PersistentHashMap map;
@@ -71,19 +70,19 @@ public class PersistentHashMapBuilder<K, V> extends AbstractMutableMap implement
 
     @Override // java.util.AbstractMap, java.util.Map
     public final void putAll(Map map) {
-        PersistentHashMap persistentHashMap = map instanceof PersistentHashMap ? (PersistentHashMap) map : null;
-        if (persistentHashMap == null) {
+        PersistentHashMap persistentHashMapBuild = map instanceof PersistentHashMap ? (PersistentHashMap) map : null;
+        if (persistentHashMapBuild == null) {
             PersistentHashMapBuilder persistentHashMapBuilder = map instanceof PersistentHashMapBuilder ? (PersistentHashMapBuilder) map : null;
-            persistentHashMap = persistentHashMapBuilder != null ? persistentHashMapBuilder.build() : null;
+            persistentHashMapBuild = persistentHashMapBuilder != null ? persistentHashMapBuilder.build() : null;
         }
-        if (persistentHashMap == null) {
+        if (persistentHashMapBuild == null) {
             super.putAll(map);
             return;
         }
         DeltaCounter deltaCounter = new DeltaCounter(0, 1, null);
         int i = this.size;
-        this.node = this.node.mutablePutAll(persistentHashMap.node, 0, deltaCounter, this);
-        int i2 = (persistentHashMap.size + i) - deltaCounter.count;
+        this.node = this.node.mutablePutAll(persistentHashMapBuild.node, 0, deltaCounter, this);
+        int i2 = (persistentHashMapBuild.size + i) - deltaCounter.count;
         if (i != i2) {
             setSize(i2);
         }
@@ -92,12 +91,12 @@ public class PersistentHashMapBuilder<K, V> extends AbstractMutableMap implement
     @Override // java.util.Map
     public final boolean remove(Object obj, Object obj2) {
         int size = getSize();
-        TrieNode mutableRemove = this.node.mutableRemove(obj != null ? obj.hashCode() : 0, obj, obj2, 0, this);
-        if (mutableRemove == null) {
+        TrieNode trieNodeMutableRemove = this.node.mutableRemove(obj != null ? obj.hashCode() : 0, obj, obj2, 0, this);
+        if (trieNodeMutableRemove == null) {
             TrieNode.Companion.getClass();
-            mutableRemove = TrieNode.EMPTY;
+            trieNodeMutableRemove = TrieNode.EMPTY;
         }
-        this.node = mutableRemove;
+        this.node = trieNodeMutableRemove;
         return size != getSize();
     }
 
@@ -121,12 +120,12 @@ public class PersistentHashMapBuilder<K, V> extends AbstractMutableMap implement
     @Override // java.util.AbstractMap, java.util.Map
     public Object remove(Object obj) {
         this.operationResult = null;
-        TrieNode mutableRemove = this.node.mutableRemove(obj != null ? obj.hashCode() : 0, obj, 0, this);
-        if (mutableRemove == null) {
+        TrieNode trieNodeMutableRemove = this.node.mutableRemove(obj != null ? obj.hashCode() : 0, obj, 0, this);
+        if (trieNodeMutableRemove == null) {
             TrieNode.Companion.getClass();
-            mutableRemove = TrieNode.EMPTY;
+            trieNodeMutableRemove = TrieNode.EMPTY;
         }
-        this.node = mutableRemove;
+        this.node = trieNodeMutableRemove;
         return this.operationResult;
     }
 }

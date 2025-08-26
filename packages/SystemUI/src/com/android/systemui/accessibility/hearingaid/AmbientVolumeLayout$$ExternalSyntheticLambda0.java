@@ -7,7 +7,6 @@ import com.android.settingslib.bluetooth.AmbientVolumeUiController$$ExternalSynt
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.HashBiMap.View.AnonymousClass1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class AmbientVolumeLayout$$ExternalSyntheticLambda0 {
     public final /* synthetic */ AmbientVolumeLayout f$0;
@@ -25,14 +24,14 @@ public final /* synthetic */ class AmbientVolumeLayout$$ExternalSyntheticLambda0
             }
             final AmbientVolumeUiController ambientVolumeUiController = ambientVolumeLayout.mListener;
             if (ambientVolumeUiController != null) {
-                final int intValue = num.intValue();
-                SuggestionsAdapter$$ExternalSyntheticOutline0.m(intValue, i, "onSliderValueChange: side=", ", value=", "AmbientVolumeUiController");
-                ambientVolumeUiController.setVolumeIfValid(intValue, i);
+                final int iIntValue = num.intValue();
+                SuggestionsAdapter$$ExternalSyntheticOutline0.m(iIntValue, i, "onSliderValueChange: side=", ", value=", "AmbientVolumeUiController");
+                ambientVolumeUiController.setVolumeIfValid(iIntValue, i);
                 Runnable runnable = new Runnable() { // from class: com.android.settingslib.bluetooth.AmbientVolumeUiController$$ExternalSyntheticLambda12
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AmbientVolumeUiController ambientVolumeUiController2 = AmbientVolumeUiController.this;
-                        int i2 = intValue;
+                        AmbientVolumeUiController ambientVolumeUiController2 = ambientVolumeUiController;
+                        int i2 = iIntValue;
                         int i3 = i;
                         HashBiMap hashBiMap = ambientVolumeUiController2.mSideToDeviceMap;
                         if (i2 == 999) {

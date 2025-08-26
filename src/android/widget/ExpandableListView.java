@@ -14,6 +14,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.AdapterView;
 import android.widget.ExpandableListConnector;
 import com.android.internal.R;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
@@ -126,29 +127,29 @@ public class ExpandableListView extends ListView {
     }
 
     public ExpandableListView(Context context, AttributeSet attributeSet, int i, int i2) {
-        super(context, attributeSet, i, i2);
         Drawable drawable;
+        super(context, attributeSet, i, i2);
         this.mIndicatorRect = new Rect();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ExpandableListView, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.ExpandableListView, attributeSet, obtainStyledAttributes, i, i2);
-        this.mGroupIndicator = obtainStyledAttributes.getDrawable(0);
-        this.mChildIndicator = obtainStyledAttributes.getDrawable(1);
-        this.mIndicatorLeft = obtainStyledAttributes.getDimensionPixelSize(2, 0);
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(3, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ExpandableListView, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.ExpandableListView, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        this.mGroupIndicator = typedArrayObtainStyledAttributes.getDrawable(0);
+        this.mChildIndicator = typedArrayObtainStyledAttributes.getDrawable(1);
+        this.mIndicatorLeft = typedArrayObtainStyledAttributes.getDimensionPixelSize(2, 0);
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(3, 0);
         this.mIndicatorRight = dimensionPixelSize;
         if (dimensionPixelSize == 0 && (drawable = this.mGroupIndicator) != null) {
             this.mIndicatorRight = this.mIndicatorLeft + drawable.getIntrinsicWidth();
         }
-        this.mChildIndicatorLeft = obtainStyledAttributes.getDimensionPixelSize(4, -1);
-        this.mChildIndicatorRight = obtainStyledAttributes.getDimensionPixelSize(5, -1);
-        this.mChildDivider = obtainStyledAttributes.getDrawable(6);
+        this.mChildIndicatorLeft = typedArrayObtainStyledAttributes.getDimensionPixelSize(4, -1);
+        this.mChildIndicatorRight = typedArrayObtainStyledAttributes.getDimensionPixelSize(5, -1);
+        this.mChildDivider = typedArrayObtainStyledAttributes.getDrawable(6);
         if (!isRtlCompatibilityMode()) {
-            this.mIndicatorStart = obtainStyledAttributes.getDimensionPixelSize(7, -2);
-            this.mIndicatorEnd = obtainStyledAttributes.getDimensionPixelSize(8, -2);
-            this.mChildIndicatorStart = obtainStyledAttributes.getDimensionPixelSize(9, -1);
-            this.mChildIndicatorEnd = obtainStyledAttributes.getDimensionPixelSize(10, -1);
+            this.mIndicatorStart = typedArrayObtainStyledAttributes.getDimensionPixelSize(7, -2);
+            this.mIndicatorEnd = typedArrayObtainStyledAttributes.getDimensionPixelSize(8, -2);
+            this.mChildIndicatorStart = typedArrayObtainStyledAttributes.getDimensionPixelSize(9, -1);
+            this.mChildIndicatorEnd = typedArrayObtainStyledAttributes.getDimensionPixelSize(10, -1);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     private boolean isRtlCompatibilityMode() {
@@ -215,71 +216,77 @@ public class ExpandableListView extends ListView {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0061  */
     @Override // android.widget.ListView, android.widget.AbsListView, android.view.ViewGroup, android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     protected void dispatchDraw(Canvas canvas) {
-        int i;
+        int iSave;
         boolean z;
         super.dispatchDraw(canvas);
         if (this.mChildIndicator == null && this.mGroupIndicator == null) {
             return;
         }
-        int i2 = 0;
+        int i = 0;
         boolean z2 = true;
         boolean z3 = (this.mGroupFlags & 34) == 34;
         if (z3) {
-            i = canvas.save();
-            int i3 = this.mScrollX;
-            int i4 = this.mScrollY;
-            canvas.clipRect(this.mPaddingLeft + i3, this.mPaddingTop + i4, ((i3 + this.mRight) - this.mLeft) - this.mPaddingRight, ((i4 + this.mBottom) - this.mTop) - this.mPaddingBottom);
+            iSave = canvas.save();
+            int i2 = this.mScrollX;
+            int i3 = this.mScrollY;
+            canvas.clipRect(this.mPaddingLeft + i2, this.mPaddingTop + i3, ((i2 + this.mRight) - this.mLeft) - this.mPaddingRight, ((i3 + this.mBottom) - this.mTop) - this.mPaddingBottom);
         } else {
-            i = 0;
+            iSave = 0;
         }
         int headerViewsCount = getHeaderViewsCount();
         int footerViewsCount = ((this.mItemCount - getFooterViewsCount()) - headerViewsCount) - 1;
-        int i5 = this.mBottom;
+        int i4 = this.mBottom;
         Rect rect = this.mIndicatorRect;
         int childCount = getChildCount();
-        int i6 = this.mFirstPosition - headerViewsCount;
-        int i7 = -4;
-        while (i2 < childCount) {
-            if (i6 >= 0) {
-                if (i6 > footerViewsCount) {
+        int i5 = this.mFirstPosition - headerViewsCount;
+        int i6 = -4;
+        while (i < childCount) {
+            if (i5 >= 0) {
+                if (i5 > footerViewsCount) {
                     break;
                 }
-                View childAt = getChildAt(i2);
+                View childAt = getChildAt(i);
                 int top = childAt.getTop();
                 int bottom = childAt.getBottom();
-                if (bottom >= 0 && top <= i5) {
-                    ExpandableListConnector.PositionMetadata unflattenedPos = this.mConnector.getUnflattenedPos(i6);
-                    boolean isLayoutRtl = isLayoutRtl();
+                if (bottom < 0 || top > i4) {
+                    z = z2;
+                } else {
+                    ExpandableListConnector.PositionMetadata unflattenedPos = this.mConnector.getUnflattenedPos(i5);
+                    boolean zIsLayoutRtl = isLayoutRtl();
                     int width = getWidth();
-                    if (unflattenedPos.position.type != i7) {
+                    if (unflattenedPos.position.type != i6) {
                         if (unflattenedPos.position.type == 1) {
-                            int i8 = this.mChildIndicatorLeft;
+                            int i7 = this.mChildIndicatorLeft;
+                            if (i7 == -1) {
+                                i7 = this.mIndicatorLeft;
+                            }
+                            rect.left = i7;
+                            int i8 = this.mChildIndicatorRight;
                             if (i8 == -1) {
-                                i8 = this.mIndicatorLeft;
+                                i8 = this.mIndicatorRight;
                             }
-                            rect.left = i8;
-                            int i9 = this.mChildIndicatorRight;
-                            if (i9 == -1) {
-                                i9 = this.mIndicatorRight;
-                            }
-                            rect.right = i9;
+                            rect.right = i8;
                         } else {
                             rect.left = this.mIndicatorLeft;
                             rect.right = this.mIndicatorRight;
                         }
-                        if (isLayoutRtl) {
-                            int i10 = rect.left;
+                        if (zIsLayoutRtl) {
+                            int i9 = rect.left;
                             rect.left = width - rect.right;
-                            rect.right = width - i10;
+                            rect.right = width - i9;
                             rect.left -= this.mPaddingRight;
                             rect.right -= this.mPaddingRight;
                         } else {
                             rect.left += this.mPaddingLeft;
                             rect.right += this.mPaddingLeft;
                         }
-                        i7 = unflattenedPos.position.type;
+                        i6 = unflattenedPos.position.type;
                     }
                     z = true;
                     if (rect.left != rect.right) {
@@ -297,18 +304,14 @@ public class ExpandableListView extends ListView {
                         }
                     }
                     unflattenedPos.recycle();
-                    i2++;
-                    i6++;
-                    z2 = z;
                 }
             }
-            z = z2;
-            i2++;
-            i6++;
+            i++;
+            i5++;
             z2 = z;
         }
         if (z3) {
-            canvas.restoreToCount(i);
+            canvas.restoreToCount(iSave);
         }
     }
 
@@ -401,11 +404,11 @@ public class ExpandableListView extends ListView {
         if (isHeaderOrFooterPosition(i)) {
             return super.performItemClick(view, i, j);
         }
-        boolean handleItemClick = handleItemClick(view, getFlatPositionForConnector(i), j);
+        boolean zHandleItemClick = handleItemClick(view, getFlatPositionForConnector(i), j);
         if (view != null) {
             view.sendAccessibilityEvent(1);
         }
-        return handleItemClick;
+        return zHandleItemClick;
     }
 
     boolean handleItemClick(View view, int i, long j) {
@@ -456,10 +459,10 @@ public class ExpandableListView extends ListView {
     }
 
     public boolean expandGroup(int i, boolean z) {
-        ExpandableListPosition obtain = ExpandableListPosition.obtain(2, i, -1, -1);
-        ExpandableListConnector.PositionMetadata flattenedPos = this.mConnector.getFlattenedPos(obtain);
-        obtain.recycle();
-        boolean expandGroup = this.mConnector.expandGroup(flattenedPos);
+        ExpandableListPosition expandableListPositionObtain = ExpandableListPosition.obtain(2, i, -1, -1);
+        ExpandableListConnector.PositionMetadata flattenedPos = this.mConnector.getFlattenedPos(expandableListPositionObtain);
+        expandableListPositionObtain.recycle();
+        boolean zExpandGroup = this.mConnector.expandGroup(flattenedPos);
         OnGroupExpandListener onGroupExpandListener = this.mOnGroupExpandListener;
         if (onGroupExpandListener != null) {
             onGroupExpandListener.onGroupExpand(i);
@@ -469,16 +472,16 @@ public class ExpandableListView extends ListView {
             smoothScrollToPosition(this.mAdapter.getChildrenCount(i) + headerViewsCount, headerViewsCount);
         }
         flattenedPos.recycle();
-        return expandGroup;
+        return zExpandGroup;
     }
 
     public boolean collapseGroup(int i) {
-        boolean collapseGroup = this.mConnector.collapseGroup(i);
+        boolean zCollapseGroup = this.mConnector.collapseGroup(i);
         OnGroupCollapseListener onGroupCollapseListener = this.mOnGroupCollapseListener;
         if (onGroupCollapseListener != null) {
             onGroupCollapseListener.onGroupCollapse(i);
         }
-        return collapseGroup;
+        return zCollapseGroup;
     }
 
     public void setOnGroupCollapseListener(OnGroupCollapseListener onGroupCollapseListener) {
@@ -508,9 +511,9 @@ public class ExpandableListView extends ListView {
     }
 
     public int getFlatListPosition(long j) {
-        ExpandableListPosition obtainPosition = ExpandableListPosition.obtainPosition(j);
-        ExpandableListConnector.PositionMetadata flattenedPos = this.mConnector.getFlattenedPos(obtainPosition);
-        obtainPosition.recycle();
+        ExpandableListPosition expandableListPositionObtainPosition = ExpandableListPosition.obtainPosition(j);
+        ExpandableListConnector.PositionMetadata flattenedPos = this.mConnector.getFlattenedPos(expandableListPositionObtainPosition);
+        expandableListPositionObtainPosition.recycle();
         int i = flattenedPos.position.flatListPos;
         flattenedPos.recycle();
         return getAbsoluteFlatPosition(i);
@@ -533,28 +536,28 @@ public class ExpandableListView extends ListView {
     }
 
     public void setSelectedGroup(int i) {
-        ExpandableListPosition obtainGroupPosition = ExpandableListPosition.obtainGroupPosition(i);
-        ExpandableListConnector.PositionMetadata flattenedPos = this.mConnector.getFlattenedPos(obtainGroupPosition);
-        obtainGroupPosition.recycle();
+        ExpandableListPosition expandableListPositionObtainGroupPosition = ExpandableListPosition.obtainGroupPosition(i);
+        ExpandableListConnector.PositionMetadata flattenedPos = this.mConnector.getFlattenedPos(expandableListPositionObtainGroupPosition);
+        expandableListPositionObtainGroupPosition.recycle();
         super.setSelection(getAbsoluteFlatPosition(flattenedPos.position.flatListPos));
         flattenedPos.recycle();
     }
 
     public boolean setSelectedChild(int i, int i2, boolean z) {
-        ExpandableListPosition obtainChildPosition = ExpandableListPosition.obtainChildPosition(i, i2);
-        ExpandableListConnector.PositionMetadata flattenedPos = this.mConnector.getFlattenedPos(obtainChildPosition);
+        ExpandableListPosition expandableListPositionObtainChildPosition = ExpandableListPosition.obtainChildPosition(i, i2);
+        ExpandableListConnector.PositionMetadata flattenedPos = this.mConnector.getFlattenedPos(expandableListPositionObtainChildPosition);
         if (flattenedPos == null) {
             if (!z) {
                 return false;
             }
             expandGroup(i);
-            flattenedPos = this.mConnector.getFlattenedPos(obtainChildPosition);
+            flattenedPos = this.mConnector.getFlattenedPos(expandableListPositionObtainChildPosition);
             if (flattenedPos == null) {
                 throw new IllegalStateException("Could not find child");
             }
         }
         super.setSelection(getAbsoluteFlatPosition(flattenedPos.position.flatListPos));
-        obtainChildPosition.recycle();
+        expandableListPositionObtainChildPosition.recycle();
         flattenedPos.recycle();
         return true;
     }
@@ -668,7 +671,7 @@ public class ExpandableListView extends ListView {
             this.expandedGroupMetadataList = arrayList;
         }
 
-        private SavedState(Parcel parcel) {
+        private SavedState(Parcel parcel) throws ClassNotFoundException, IOException {
             super(parcel);
             ArrayList<ExpandableListConnector.GroupMetadata> arrayList = new ArrayList<>();
             this.expandedGroupMetadataList = arrayList;
@@ -684,9 +687,9 @@ public class ExpandableListView extends ListView {
 
     @Override // android.widget.AbsListView, android.view.View
     public Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         ExpandableListConnector expandableListConnector = this.mConnector;
-        return new SavedState(onSaveInstanceState, expandableListConnector != null ? expandableListConnector.getExpandedGroupMetadataList() : null);
+        return new SavedState(parcelableOnSaveInstanceState, expandableListConnector != null ? expandableListConnector.getExpandedGroupMetadataList() : null);
     }
 
     @Override // android.widget.AbsListView, android.view.View

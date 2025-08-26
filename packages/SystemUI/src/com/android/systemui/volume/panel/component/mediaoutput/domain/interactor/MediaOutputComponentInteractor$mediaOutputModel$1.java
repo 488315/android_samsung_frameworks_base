@@ -3,6 +3,7 @@ package com.android.systemui.volume.panel.component.mediaoutput.domain.interacto
 import android.content.Context;
 import com.android.systemui.volume.domain.model.AudioOutputDevice;
 import com.android.systemui.volume.panel.component.mediaoutput.domain.model.MediaOutputComponentModel;
+import com.android.systemui.volume.panel.component.mediaoutput.shared.model.SessionWithPlaybackState;
 import com.android.systemui.volume.panel.shared.model.ResultKt$filterData$$inlined$map$1;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -15,7 +16,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MediaOutputComponentInteractor$mediaOutputModel$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -32,11 +32,11 @@ final class MediaOutputComponentInteractor$mediaOutputModel$1 extends SuspendLam
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
         MediaOutputComponentInteractor$mediaOutputModel$1 mediaOutputComponentInteractor$mediaOutputModel$1 = new MediaOutputComponentInteractor$mediaOutputModel$1(this.this$0, (Continuation) obj4);
-        mediaOutputComponentInteractor$mediaOutputModel$1.Z$0 = booleanValue;
-        mediaOutputComponentInteractor$mediaOutputModel$1.Z$1 = booleanValue2;
+        mediaOutputComponentInteractor$mediaOutputModel$1.Z$0 = zBooleanValue;
+        mediaOutputComponentInteractor$mediaOutputModel$1.Z$1 = zBooleanValue2;
         mediaOutputComponentInteractor$mediaOutputModel$1.L$0 = (AudioOutputDevice) obj3;
         return mediaOutputComponentInteractor$mediaOutputModel$1.invokeSuspend(Unit.INSTANCE);
     }
@@ -55,10 +55,9 @@ final class MediaOutputComponentInteractor$mediaOutputModel$1 extends SuspendLam
             Context context = this.this$0.context;
             return new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(new MediaOutputComponentModel.Calling(audioOutputDevice, z, false));
         }
-        final ResultKt$filterData$$inlined$map$1 filterData = com.android.systemui.volume.panel.shared.model.ResultKt.filterData(this.this$0.sessionWithPlaybackState);
+        final ResultKt$filterData$$inlined$map$1 resultKt$filterData$$inlined$map$1FilterData = com.android.systemui.volume.panel.shared.model.ResultKt.filterData(this.this$0.sessionWithPlaybackState);
         return new Flow() { // from class: com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaOutputComponentInteractor$mediaOutputModel$1$invokeSuspend$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaOutputComponentInteractor$mediaOutputModel$1$invokeSuspend$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ AudioOutputDevice $currentAudioDevice$inlined;
@@ -89,93 +88,60 @@ final class MediaOutputComponentInteractor$mediaOutputModel$1 extends SuspendLam
                     this.$isInAudioSharing$inlined = z;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r12, kotlin.coroutines.Continuation r13) {
-                    /*
-                        r11 = this;
-                        boolean r0 = r13 instanceof com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaOutputComponentInteractor$mediaOutputModel$1$invokeSuspend$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r13
-                        com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaOutputComponentInteractor$mediaOutputModel$1$invokeSuspend$$inlined$map$1$2$1 r0 = (com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaOutputComponentInteractor$mediaOutputModel$1$invokeSuspend$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaOutputComponentInteractor$mediaOutputModel$1$invokeSuspend$$inlined$map$1$2$1 r0 = new com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaOutputComponentInteractor$mediaOutputModel$1$invokeSuspend$$inlined$map$1$2$1
-                        r0.<init>(r13)
-                    L18:
-                        java.lang.Object r13 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r13)
-                        goto L6a
-                    L27:
-                        java.lang.IllegalStateException r11 = new java.lang.IllegalStateException
-                        java.lang.String r12 = "call to 'resume' before 'invoke' with coroutine"
-                        r11.<init>(r12)
-                        throw r11
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r13)
-                        com.android.systemui.volume.panel.component.mediaoutput.shared.model.SessionWithPlaybackState r12 = (com.android.systemui.volume.panel.component.mediaoutput.shared.model.SessionWithPlaybackState) r12
-                        r13 = 0
-                        if (r12 != 0) goto L48
-                        com.android.systemui.volume.panel.component.mediaoutput.domain.model.MediaOutputComponentModel$Idle r12 = new com.android.systemui.volume.panel.component.mediaoutput.domain.model.MediaOutputComponentModel$Idle
-                        com.android.systemui.volume.domain.model.AudioOutputDevice r2 = r11.$currentAudioDevice$inlined
-                        boolean r4 = r11.$isInAudioSharing$inlined
-                        if (r4 != 0) goto L44
-                        boolean r5 = r2 instanceof com.android.systemui.volume.domain.model.AudioOutputDevice.Unknown
-                        if (r5 != 0) goto L44
-                        r13 = r3
-                    L44:
-                        r12.<init>(r2, r4, r13)
-                        goto L5f
-                    L48:
-                        com.android.systemui.volume.panel.component.mediaoutput.domain.model.MediaOutputComponentModel$MediaSession r5 = new com.android.systemui.volume.panel.component.mediaoutput.domain.model.MediaOutputComponentModel$MediaSession
-                        com.android.systemui.volume.domain.model.AudioOutputDevice r8 = r11.$currentAudioDevice$inlined
-                        boolean r9 = r11.$isInAudioSharing$inlined
-                        if (r9 != 0) goto L56
-                        boolean r2 = r8 instanceof com.android.systemui.volume.domain.model.AudioOutputDevice.Unknown
-                        if (r2 != 0) goto L56
-                        r10 = r3
-                        goto L57
-                    L56:
-                        r10 = r13
-                    L57:
-                        com.android.systemui.volume.panel.component.mediaoutput.shared.model.MediaDeviceSession r6 = r12.session
-                        boolean r7 = r12.isPlaybackActive
-                        r5.<init>(r6, r7, r8, r9, r10)
-                        r12 = r5
-                    L5f:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r11 = r11.$this_unsafeFlow
-                        java.lang.Object r11 = r11.emit(r12, r0)
-                        if (r11 != r1) goto L6a
-                        return r1
-                    L6a:
-                        kotlin.Unit r11 = kotlin.Unit.INSTANCE
-                        return r11
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.panel.component.mediaoutput.domain.interactor.MediaOutputComponentInteractor$mediaOutputModel$1$invokeSuspend$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    Object mediaSession;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        SessionWithPlaybackState sessionWithPlaybackState = (SessionWithPlaybackState) obj;
+                        boolean z = false;
+                        if (sessionWithPlaybackState == null) {
+                            AudioOutputDevice audioOutputDevice = this.$currentAudioDevice$inlined;
+                            boolean z2 = this.$isInAudioSharing$inlined;
+                            if (!z2 && !(audioOutputDevice instanceof AudioOutputDevice.Unknown)) {
+                                z = true;
+                            }
+                            mediaSession = new MediaOutputComponentModel.Idle(audioOutputDevice, z2, z);
+                        } else {
+                            AudioOutputDevice audioOutputDevice2 = this.$currentAudioDevice$inlined;
+                            boolean z3 = this.$isInAudioSharing$inlined;
+                            mediaSession = new MediaOutputComponentModel.MediaSession(sessionWithPlaybackState.session, sessionWithPlaybackState.isPlaybackActive, audioOutputDevice2, z3, (z3 || (audioOutputDevice2 instanceof AudioOutputDevice.Unknown)) ? false : true);
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(mediaSession, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, audioOutputDevice, z), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = resultKt$filterData$$inlined$map$1FilterData.collect(new AnonymousClass2(flowCollector, audioOutputDevice, z), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
     }

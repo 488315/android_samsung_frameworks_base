@@ -76,9 +76,9 @@ public class BluetoothBatteryStats implements Parcelable {
     }
 
     protected BluetoothBatteryStats(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mUidStats = new ArrayList(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        this.mUidStats = new ArrayList(i);
+        for (int i2 = 0; i2 < i; i2++) {
             this.mUidStats.add(new UidStats(parcel));
         }
     }

@@ -81,7 +81,7 @@ final class SerializedBasicEnvelopeEffect implements SerializedComposedEffect.Se
         Parser() {
         }
 
-        static SerializedBasicEnvelopeEffect parseNext(TypedXmlPullParser typedXmlPullParser, int i) throws XmlParserException, IOException {
+        static SerializedBasicEnvelopeEffect parseNext(TypedXmlPullParser typedXmlPullParser, int i) throws IOException, XmlParserException {
             XmlValidator.checkStartTag(typedXmlPullParser, XmlConstants.TAG_BASIC_ENVELOPE_EFFECT);
             XmlValidator.checkTagHasNoUnexpectedAttributes(typedXmlPullParser, XmlConstants.ATTRIBUTE_INITIAL_SHARPNESS);
             Builder builder = new Builder();

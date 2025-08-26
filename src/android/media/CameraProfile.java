@@ -39,25 +39,25 @@ public class CameraProfile {
         if (i2 < 0 || i2 > 2) {
             throw new IllegalArgumentException("Unsupported quality level: " + i2);
         }
-        HashMap<Integer, int[]> hashMap = sCache;
-        synchronized (hashMap) {
-            int[] iArr = hashMap.get(Integer.valueOf(i));
-            if (iArr == null) {
-                iArr = getImageEncodingQualityLevels(i);
-                hashMap.put(Integer.valueOf(i), iArr);
+        HashMap<Integer, int[]> map = sCache;
+        synchronized (map) {
+            int[] imageEncodingQualityLevels = map.get(Integer.valueOf(i));
+            if (imageEncodingQualityLevels == null) {
+                imageEncodingQualityLevels = getImageEncodingQualityLevels(i);
+                map.put(Integer.valueOf(i), imageEncodingQualityLevels);
             }
-            i3 = iArr[i2];
+            i3 = imageEncodingQualityLevels[i2];
         }
         return i3;
     }
 
     private static int[] getImageEncodingQualityLevels(int i) {
-        int native_get_num_image_encoding_quality_levels = native_get_num_image_encoding_quality_levels(i);
-        if (native_get_num_image_encoding_quality_levels != 3) {
-            throw new RuntimeException("Unexpected Jpeg encoding quality levels " + native_get_num_image_encoding_quality_levels);
+        int iNative_get_num_image_encoding_quality_levels = native_get_num_image_encoding_quality_levels(i);
+        if (iNative_get_num_image_encoding_quality_levels != 3) {
+            throw new RuntimeException("Unexpected Jpeg encoding quality levels " + iNative_get_num_image_encoding_quality_levels);
         }
-        int[] iArr = new int[native_get_num_image_encoding_quality_levels];
-        for (int i2 = 0; i2 < native_get_num_image_encoding_quality_levels; i2++) {
+        int[] iArr = new int[iNative_get_num_image_encoding_quality_levels];
+        for (int i2 = 0; i2 < iNative_get_num_image_encoding_quality_levels; i2++) {
             iArr[i2] = native_get_image_encoding_quality_level(i, i2);
         }
         Arrays.sort(iArr);

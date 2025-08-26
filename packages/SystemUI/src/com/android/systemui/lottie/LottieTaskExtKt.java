@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class LottieTaskExtKt {
     public static final Object await(final LottieTask lottieTask, Continuation continuation) {
@@ -22,7 +21,7 @@ public abstract class LottieTaskExtKt {
             @Override // com.airbnb.lottie.LottieListener
             public final void onResult(Object obj) {
                 LottieComposition lottieComposition = (LottieComposition) obj;
-                CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                 if (cancellableContinuation.isCancelled$1() || cancellableContinuation.isCompleted()) {
                     return;
                 }
@@ -34,7 +33,7 @@ public abstract class LottieTaskExtKt {
             @Override // com.airbnb.lottie.LottieListener
             public final void onResult(Object obj) {
                 Throwable th = (Throwable) obj;
-                CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                 if (cancellableContinuation.isCancelled$1() || cancellableContinuation.isCompleted()) {
                     return;
                 }
@@ -48,8 +47,8 @@ public abstract class LottieTaskExtKt {
         cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: com.android.systemui.lottie.LottieTaskExtKt$await$2$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                LottieTask lottieTask2 = LottieTask.this;
+            public final Object mo781invoke(Object obj) {
+                LottieTask lottieTask2 = lottieTask;
                 LottieListener lottieListener3 = lottieListener;
                 synchronized (lottieTask2) {
                     lottieTask2.successListeners.remove(lottieListener3);

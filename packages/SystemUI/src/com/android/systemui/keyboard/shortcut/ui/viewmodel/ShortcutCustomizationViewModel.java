@@ -3,19 +3,33 @@ package com.android.systemui.keyboard.shortcut.ui.viewmodel;
 import android.content.Context;
 import android.view.KeyEvent;
 import androidx.compose.ui.input.key.Key;
+import com.android.systemui.R;
 import com.android.systemui.keyboard.shared.model.ShortcutCustomizationRequestResult;
+import com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys;
 import com.android.systemui.keyboard.shortcut.domain.interactor.ShortcutCustomizationInteractor;
+import com.android.systemui.keyboard.shortcut.extensions.ShortcutKeyExtensionsKt;
+import com.android.systemui.keyboard.shortcut.shared.model.ShortcutKey;
 import com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState;
 import com.android.systemui.lifecycle.ExclusiveActivatable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import kotlin.KotlinNothingValueException;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ShortcutCustomizationViewModel extends ExclusiveActivatable {
     public static final List SUPPORTED_MODIFIERS;
@@ -25,7 +39,6 @@ public final class ShortcutCustomizationViewModel extends ExclusiveActivatable {
     public final ShortcutCustomizationInteractor shortcutCustomizationInteractor;
     public final ReadonlyStateFlow shortcutCustomizationUiState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,12 +48,10 @@ public final class ShortcutCustomizationViewModel extends ExclusiveActivatable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         ShortcutCustomizationViewModel create();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -62,419 +73,435 @@ public final class ShortcutCustomizationViewModel extends ExclusiveActivatable {
         }
     }
 
+    /* renamed from: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$deleteShortcutCurrentlyBeingCustomized$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ShortcutCustomizationViewModel.this.deleteShortcutCurrentlyBeingCustomized(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onActivated$1, reason: invalid class name and case insensitive filesystem */
+    final class C08891 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C08891(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ShortcutCustomizationViewModel.this.onActivated(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onActivated$2, reason: invalid class name */
+    public final class AnonymousClass2 implements FlowCollector {
+        public AnonymousClass2() {
+        }
+
+        /* JADX WARN: Multi-variable type inference failed */
+        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+        /* JADX WARN: Type inference failed for: r9v6, types: [java.util.List] */
+        @Override // kotlinx.coroutines.flow.FlowCollector
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object emit(List list, Continuation continuation) throws Throwable {
+            ShortcutCustomizationViewModel$onActivated$2$emit$1 shortcutCustomizationViewModel$onActivated$2$emit$1;
+            ArrayList arrayList;
+            Object value;
+            Object objCopy$default;
+            if (continuation instanceof ShortcutCustomizationViewModel$onActivated$2$emit$1) {
+                shortcutCustomizationViewModel$onActivated$2$emit$1 = (ShortcutCustomizationViewModel$onActivated$2$emit$1) continuation;
+                int i = shortcutCustomizationViewModel$onActivated$2$emit$1.label;
+                if ((i & Integer.MIN_VALUE) != 0) {
+                    shortcutCustomizationViewModel$onActivated$2$emit$1.label = i - Integer.MIN_VALUE;
+                } else {
+                    shortcutCustomizationViewModel$onActivated$2$emit$1 = new ShortcutCustomizationViewModel$onActivated$2$emit$1(this, continuation);
+                }
+            }
+            Object objAccess$getErrorMessageForPressedKeys = shortcutCustomizationViewModel$onActivated$2$emit$1.result;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i2 = shortcutCustomizationViewModel$onActivated$2$emit$1.label;
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(objAccess$getErrorMessageForPressedKeys);
+                List list2 = ShortcutCustomizationViewModel.SUPPORTED_MODIFIERS;
+                ShortcutCustomizationViewModel shortcutCustomizationViewModel = ShortcutCustomizationViewModel.this;
+                shortcutCustomizationViewModel.getClass();
+                arrayList = new ArrayList();
+                for (Object obj : list) {
+                    shortcutCustomizationViewModel.shortcutCustomizationInteractor.getClass();
+                    ShortcutHelperKeys.INSTANCE.getClass();
+                    if (!Intrinsics.areEqual((ShortcutKey) obj, new ShortcutKey.Icon.ResIdIcon(ShortcutHelperKeys.metaModifierIconResId))) {
+                        arrayList.add(obj);
+                    }
+                }
+                shortcutCustomizationViewModel$onActivated$2$emit$1.L$0 = this;
+                shortcutCustomizationViewModel$onActivated$2$emit$1.L$1 = arrayList;
+                shortcutCustomizationViewModel$onActivated$2$emit$1.label = 1;
+                objAccess$getErrorMessageForPressedKeys = ShortcutCustomizationViewModel.access$getErrorMessageForPressedKeys(shortcutCustomizationViewModel, arrayList, shortcutCustomizationViewModel$onActivated$2$emit$1);
+                if (objAccess$getErrorMessageForPressedKeys == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ?? r9 = (List) shortcutCustomizationViewModel$onActivated$2$emit$1.L$1;
+                AnonymousClass2 anonymousClass2 = (AnonymousClass2) shortcutCustomizationViewModel$onActivated$2$emit$1.L$0;
+                ResultKt.throwOnFailure(objAccess$getErrorMessageForPressedKeys);
+                arrayList = r9;
+                this = anonymousClass2;
+            }
+            String str = (String) objAccess$getErrorMessageForPressedKeys;
+            ShortcutCustomizationViewModel shortcutCustomizationViewModel2 = ShortcutCustomizationViewModel.this;
+            StateFlowImpl stateFlowImpl = shortcutCustomizationViewModel2._shortcutCustomizationUiState;
+            do {
+                value = stateFlowImpl.getValue();
+                objCopy$default = (ShortcutCustomizationUiState) value;
+                if (objCopy$default instanceof ShortcutCustomizationUiState.AddShortcutDialog) {
+                    ShortcutCustomizationUiState.AddShortcutDialog addShortcutDialog = (ShortcutCustomizationUiState.AddShortcutDialog) objCopy$default;
+                    String string = shortcutCustomizationViewModel2.context.getString(R.string.shortcut_helper_key_combinations_and_conjunction);
+                    StringBuilder sb = new StringBuilder();
+                    Iterator it = arrayList.iterator();
+                    while (it.hasNext()) {
+                        String contentDescription = ShortcutKeyExtensionsKt.toContentDescription((ShortcutKey) it.next(), shortcutCustomizationViewModel2.context);
+                        if (contentDescription != null) {
+                            if (sb.length() > 0) {
+                                sb.append(", " + string + " ");
+                            }
+                            sb.append(contentDescription);
+                        }
+                    }
+                    objCopy$default = ShortcutCustomizationUiState.AddShortcutDialog.copy$default(addShortcutDialog, str, arrayList, sb.toString(), 5);
+                }
+            } while (!stateFlowImpl.compareAndSet(value, objCopy$default));
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onSetShortcut$1, reason: invalid class name and case insensitive filesystem */
+    final class C08901 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C08901(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ShortcutCustomizationViewModel.this.onSetShortcut(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$resetAllCustomShortcuts$1, reason: invalid class name and case insensitive filesystem */
+    final class C08911 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C08911(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ShortcutCustomizationViewModel.this.resetAllCustomShortcuts(this);
+        }
+    }
+
     static {
         new Companion(null);
         Key.Companion companion = Key.Companion;
         companion.getClass();
-        Key m575boximpl = Key.m575boximpl(Key.MetaLeft);
+        Key keyM577boximpl = Key.m577boximpl(Key.MetaLeft);
         companion.getClass();
-        Key m575boximpl2 = Key.m575boximpl(Key.MetaRight);
+        Key keyM577boximpl2 = Key.m577boximpl(Key.MetaRight);
         companion.getClass();
-        Key m575boximpl3 = Key.m575boximpl(Key.CtrlRight);
+        Key keyM577boximpl3 = Key.m577boximpl(Key.CtrlRight);
         companion.getClass();
-        Key m575boximpl4 = Key.m575boximpl(Key.CtrlLeft);
+        Key keyM577boximpl4 = Key.m577boximpl(Key.CtrlLeft);
         companion.getClass();
-        Key m575boximpl5 = Key.m575boximpl(Key.AltLeft);
+        Key keyM577boximpl5 = Key.m577boximpl(Key.AltLeft);
         companion.getClass();
-        Key m575boximpl6 = Key.m575boximpl(Key.AltRight);
+        Key keyM577boximpl6 = Key.m577boximpl(Key.AltRight);
         companion.getClass();
-        Key m575boximpl7 = Key.m575boximpl(Key.ShiftLeft);
+        Key keyM577boximpl7 = Key.m577boximpl(Key.ShiftLeft);
         companion.getClass();
-        Key m575boximpl8 = Key.m575boximpl(Key.ShiftRight);
+        Key keyM577boximpl8 = Key.m577boximpl(Key.ShiftRight);
         companion.getClass();
-        Key m575boximpl9 = Key.m575boximpl(Key.Function);
+        Key keyM577boximpl9 = Key.m577boximpl(Key.Function);
         companion.getClass();
-        SUPPORTED_MODIFIERS = Arrays.asList(m575boximpl, m575boximpl2, m575boximpl3, m575boximpl4, m575boximpl5, m575boximpl6, m575boximpl7, m575boximpl8, m575boximpl9, Key.m575boximpl(Key.Symbol));
+        SUPPORTED_MODIFIERS = Arrays.asList(keyM577boximpl, keyM577boximpl2, keyM577boximpl3, keyM577boximpl4, keyM577boximpl5, keyM577boximpl6, keyM577boximpl7, keyM577boximpl8, keyM577boximpl9, Key.m577boximpl(Key.Symbol));
     }
 
     public ShortcutCustomizationViewModel(Context context, ShortcutCustomizationInteractor shortcutCustomizationInteractor) {
         this.context = context;
         this.shortcutCustomizationInteractor = shortcutCustomizationInteractor;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(ShortcutCustomizationUiState.Inactive.INSTANCE);
-        this._shortcutCustomizationUiState = MutableStateFlow;
-        this.shortcutCustomizationUiState = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(ShortcutCustomizationUiState.Inactive.INSTANCE);
+        this._shortcutCustomizationUiState = stateFlowImplMutableStateFlow;
+        this.shortcutCustomizationUiState = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x005e A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0061  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$getErrorMessageForPressedKeys(com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel r5, java.util.List r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r5.getClass()
-            boolean r0 = r7 instanceof com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$getErrorMessageForPressedKeys$1
-            if (r0 == 0) goto L16
-            r0 = r7
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$getErrorMessageForPressedKeys$1 r0 = (com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$getErrorMessageForPressedKeys$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$getErrorMessageForPressedKeys$1 r0 = new com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$getErrorMessageForPressedKeys$1
-            r0.<init>(r5, r7)
-        L1b:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L38
-            if (r2 != r3) goto L30
-            boolean r5 = r0.Z$0
-            java.lang.Object r6 = r0.L$0
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel r6 = (com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel) r6
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L55
-        L30:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L38:
-            kotlin.ResultKt.throwOnFailure(r7)
-            java.util.ArrayList r6 = (java.util.ArrayList) r6
-            boolean r6 = r6.isEmpty()
-            r0.L$0 = r5
-            r0.Z$0 = r6
-            r0.label = r3
-            com.android.systemui.keyboard.shortcut.domain.interactor.ShortcutCustomizationInteractor r7 = r5.shortcutCustomizationInteractor
-            com.android.systemui.keyboard.shortcut.data.repository.CustomShortcutCategoriesRepository r7 = r7.customShortcutRepository
-            java.lang.Object r7 = r7.isSelectedKeyCombinationAvailable(r0)
-            if (r7 != r1) goto L52
-            return r1
-        L52:
-            r4 = r6
-            r6 = r5
-            r5 = r4
-        L55:
-            java.lang.Boolean r7 = (java.lang.Boolean) r7
-            boolean r7 = r7.booleanValue()
-            r5 = r5 | r7
-            if (r5 == 0) goto L61
-            java.lang.String r5 = ""
-            return r5
-        L61:
-            android.content.Context r5 = r6.context
-            r6 = 2131956735(0x7f1313ff, float:1.9550034E38)
-            java.lang.String r5 = r5.getString(r6)
-            r5.getClass()
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel.access$getErrorMessageForPressedKeys(com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel, java.util.List, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$getErrorMessageForPressedKeys(ShortcutCustomizationViewModel shortcutCustomizationViewModel, List list, ContinuationImpl continuationImpl) throws Throwable {
+        ShortcutCustomizationViewModel$getErrorMessageForPressedKeys$1 shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1;
+        ShortcutCustomizationViewModel shortcutCustomizationViewModel2;
+        boolean z;
+        shortcutCustomizationViewModel.getClass();
+        if (continuationImpl instanceof ShortcutCustomizationViewModel$getErrorMessageForPressedKeys$1) {
+            shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1 = (ShortcutCustomizationViewModel$getErrorMessageForPressedKeys$1) continuationImpl;
+            int i = shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1.label = i - Integer.MIN_VALUE;
+            } else {
+                shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1 = new ShortcutCustomizationViewModel$getErrorMessageForPressedKeys$1(shortcutCustomizationViewModel, continuationImpl);
+            }
+        }
+        Object objIsSelectedKeyCombinationAvailable = shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objIsSelectedKeyCombinationAvailable);
+            boolean zIsEmpty = ((ArrayList) list).isEmpty();
+            shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1.L$0 = shortcutCustomizationViewModel;
+            shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1.Z$0 = zIsEmpty;
+            shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1.label = 1;
+            objIsSelectedKeyCombinationAvailable = shortcutCustomizationViewModel.shortcutCustomizationInteractor.customShortcutRepository.isSelectedKeyCombinationAvailable(shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1);
+            if (objIsSelectedKeyCombinationAvailable == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+            shortcutCustomizationViewModel2 = shortcutCustomizationViewModel;
+            z = zIsEmpty;
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            z = shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1.Z$0;
+            shortcutCustomizationViewModel2 = (ShortcutCustomizationViewModel) shortcutCustomizationViewModel$getErrorMessageForPressedKeys$1.L$0;
+            ResultKt.throwOnFailure(objIsSelectedKeyCombinationAvailable);
+        }
+        if (z || ((Boolean) objIsSelectedKeyCombinationAvailable).booleanValue()) {
+            return "";
+        }
+        String string = shortcutCustomizationViewModel2.context.getString(R.string.shortcut_customizer_key_combination_in_use_error_message);
+        string.getClass();
+        return string;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object deleteShortcutCurrentlyBeingCustomized(kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$deleteShortcutCurrentlyBeingCustomized$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$deleteShortcutCurrentlyBeingCustomized$1 r0 = (com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$deleteShortcutCurrentlyBeingCustomized$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$deleteShortcutCurrentlyBeingCustomized$1 r0 = new com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$deleteShortcutCurrentlyBeingCustomized$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r5 = r0.L$0
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel r5 = (com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel) r5
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L45
-        L2b:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L33:
-            kotlin.ResultKt.throwOnFailure(r6)
-            r0.L$0 = r5
-            r0.label = r3
-            com.android.systemui.keyboard.shortcut.domain.interactor.ShortcutCustomizationInteractor r6 = r5.shortcutCustomizationInteractor
-            com.android.systemui.keyboard.shortcut.data.repository.CustomShortcutCategoriesRepository r6 = r6.customShortcutRepository
-            java.lang.Object r6 = r6.deleteShortcutCurrentlyBeingCustomized(r0)
-            if (r6 != r1) goto L45
-            return r1
-        L45:
-            com.android.systemui.keyboard.shared.model.ShortcutCustomizationRequestResult r6 = (com.android.systemui.keyboard.shared.model.ShortcutCustomizationRequestResult) r6
-            kotlinx.coroutines.flow.StateFlowImpl r5 = r5._shortcutCustomizationUiState
-        L49:
-            java.lang.Object r0 = r5.getValue()
-            r1 = r0
-            com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState r1 = (com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState) r1
-            int[] r2 = com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel.WhenMappings.$EnumSwitchMapping$0
-            int r4 = r6.ordinal()
-            r2 = r2[r4]
-            if (r2 != r3) goto L5c
-            com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState$Inactive r1 = com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState.Inactive.INSTANCE
-        L5c:
-            boolean r0 = r5.compareAndSet(r0, r1)
-            if (r0 == 0) goto L49
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel.deleteShortcutCurrentlyBeingCustomized(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object deleteShortcutCurrentlyBeingCustomized(ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        Object value;
+        Object obj;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object objDeleteShortcutCurrentlyBeingCustomized = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objDeleteShortcutCurrentlyBeingCustomized);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.label = 1;
+            objDeleteShortcutCurrentlyBeingCustomized = this.shortcutCustomizationInteractor.customShortcutRepository.deleteShortcutCurrentlyBeingCustomized(anonymousClass1);
+            if (objDeleteShortcutCurrentlyBeingCustomized == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (ShortcutCustomizationViewModel) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(objDeleteShortcutCurrentlyBeingCustomized);
+        }
+        ShortcutCustomizationRequestResult shortcutCustomizationRequestResult = (ShortcutCustomizationRequestResult) objDeleteShortcutCurrentlyBeingCustomized;
+        StateFlowImpl stateFlowImpl = this._shortcutCustomizationUiState;
+        do {
+            value = stateFlowImpl.getValue();
+            obj = (ShortcutCustomizationUiState) value;
+            if (WhenMappings.$EnumSwitchMapping$0[shortcutCustomizationRequestResult.ordinal()] == 1) {
+                obj = ShortcutCustomizationUiState.Inactive.INSTANCE;
+            }
+        } while (!stateFlowImpl.compareAndSet(value, obj));
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.ExclusiveActivatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onActivated(kotlin.coroutines.Continuation r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onActivated$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onActivated$1 r0 = (com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onActivated$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onActivated$1 r0 = new com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onActivated$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L46
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r5)
-            com.android.systemui.keyboard.shortcut.domain.interactor.ShortcutCustomizationInteractor r5 = r4.shortcutCustomizationInteractor
-            kotlinx.coroutines.flow.ReadonlyStateFlow r5 = r5.pressedKeys
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onActivated$2 r2 = new com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onActivated$2
-            r2.<init>(r4)
-            r0.label = r3
-            kotlinx.coroutines.flow.StateFlow r4 = r5.$$delegate_0
-            java.lang.Object r4 = r4.collect(r2, r0)
-            if (r4 != r1) goto L46
-            return r1
-        L46:
-            kotlin.KotlinNothingValueException r4 = new kotlin.KotlinNothingValueException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel.onActivated(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onActivated(Continuation continuation) {
+        C08891 c08891;
+        if (continuation instanceof C08891) {
+            c08891 = (C08891) continuation;
+            int i = c08891.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c08891.label = i - Integer.MIN_VALUE;
+            } else {
+                c08891 = new C08891(continuation);
+            }
+        }
+        Object obj = c08891.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c08891.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            ReadonlyStateFlow readonlyStateFlow = this.shortcutCustomizationInteractor.pressedKeys;
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2();
+            c08891.label = 1;
+            if (readonlyStateFlow.$$delegate_0.collect(anonymousClass2, c08891) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onSetShortcut(kotlin.coroutines.jvm.internal.ContinuationImpl r9) {
-        /*
-            r8 = this;
-            boolean r0 = r9 instanceof com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onSetShortcut$1
-            if (r0 == 0) goto L13
-            r0 = r9
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onSetShortcut$1 r0 = (com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onSetShortcut$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onSetShortcut$1 r0 = new com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$onSetShortcut$1
-            r0.<init>(r8, r9)
-        L18:
-            java.lang.Object r9 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r8 = r0.L$0
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel r8 = (com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel) r8
-            kotlin.ResultKt.throwOnFailure(r9)
-            goto L45
-        L2b:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-            r8.<init>(r9)
-            throw r8
-        L33:
-            kotlin.ResultKt.throwOnFailure(r9)
-            r0.L$0 = r8
-            r0.label = r3
-            com.android.systemui.keyboard.shortcut.domain.interactor.ShortcutCustomizationInteractor r9 = r8.shortcutCustomizationInteractor
-            com.android.systemui.keyboard.shortcut.data.repository.CustomShortcutCategoriesRepository r9 = r9.customShortcutRepository
-            java.lang.Object r9 = r9.confirmAndSetShortcutCurrentlyBeingCustomized(r0)
-            if (r9 != r1) goto L45
-            return r1
-        L45:
-            com.android.systemui.keyboard.shared.model.ShortcutCustomizationRequestResult r9 = (com.android.systemui.keyboard.shared.model.ShortcutCustomizationRequestResult) r9
-            kotlinx.coroutines.flow.StateFlowImpl r0 = r8._shortcutCustomizationUiState
-        L49:
-            java.lang.Object r1 = r0.getValue()
-            r2 = r1
-            com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState r2 = (com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState) r2
-            int[] r4 = com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel.WhenMappings.$EnumSwitchMapping$0
-            int r5 = r9.ordinal()
-            r4 = r4[r5]
-            if (r4 == r3) goto L9b
-            r5 = 2
-            r6 = 29
-            r7 = 0
-            if (r4 == r5) goto L82
-            r5 = 3
-            if (r4 != r5) goto L7c
-            android.content.Context r4 = r8.context
-            r5 = 2131956734(0x7f1313fe, float:1.9550032E38)
-            java.lang.String r4 = r4.getString(r5)
-            boolean r5 = r2 instanceof com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState.AddShortcutDialog
-            if (r5 == 0) goto L74
-            r5 = r2
-            com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState$AddShortcutDialog r5 = (com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState.AddShortcutDialog) r5
-            goto L75
-        L74:
-            r5 = r7
-        L75:
-            if (r5 == 0) goto L9d
-            com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState$AddShortcutDialog r2 = com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState.AddShortcutDialog.copy$default(r5, r4, r7, r7, r6)
-            goto L9d
-        L7c:
-            kotlin.NoWhenBranchMatchedException r8 = new kotlin.NoWhenBranchMatchedException
-            r8.<init>()
-            throw r8
-        L82:
-            android.content.Context r4 = r8.context
-            r5 = 2131956735(0x7f1313ff, float:1.9550034E38)
-            java.lang.String r4 = r4.getString(r5)
-            boolean r5 = r2 instanceof com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState.AddShortcutDialog
-            if (r5 == 0) goto L93
-            r5 = r2
-            com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState$AddShortcutDialog r5 = (com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState.AddShortcutDialog) r5
-            goto L94
-        L93:
-            r5 = r7
-        L94:
-            if (r5 == 0) goto L9d
-            com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState$AddShortcutDialog r2 = com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState.AddShortcutDialog.copy$default(r5, r4, r7, r7, r6)
-            goto L9d
-        L9b:
-            com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState$Inactive r2 = com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState.Inactive.INSTANCE
-        L9d:
-            boolean r1 = r0.compareAndSet(r1, r2)
-            if (r1 == 0) goto L49
-            kotlin.Unit r8 = kotlin.Unit.INSTANCE
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel.onSetShortcut(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object onSetShortcut(ContinuationImpl continuationImpl) {
+        C08901 c08901;
+        Object value;
+        Object objCopy$default;
+        if (continuationImpl instanceof C08901) {
+            c08901 = (C08901) continuationImpl;
+            int i = c08901.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c08901.label = i - Integer.MIN_VALUE;
+            } else {
+                c08901 = new C08901(continuationImpl);
+            }
+        }
+        Object objConfirmAndSetShortcutCurrentlyBeingCustomized = c08901.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c08901.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objConfirmAndSetShortcutCurrentlyBeingCustomized);
+            c08901.L$0 = this;
+            c08901.label = 1;
+            objConfirmAndSetShortcutCurrentlyBeingCustomized = this.shortcutCustomizationInteractor.customShortcutRepository.confirmAndSetShortcutCurrentlyBeingCustomized(c08901);
+            if (objConfirmAndSetShortcutCurrentlyBeingCustomized == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (ShortcutCustomizationViewModel) c08901.L$0;
+            ResultKt.throwOnFailure(objConfirmAndSetShortcutCurrentlyBeingCustomized);
+        }
+        ShortcutCustomizationRequestResult shortcutCustomizationRequestResult = (ShortcutCustomizationRequestResult) objConfirmAndSetShortcutCurrentlyBeingCustomized;
+        StateFlowImpl stateFlowImpl = this._shortcutCustomizationUiState;
+        do {
+            value = stateFlowImpl.getValue();
+            objCopy$default = (ShortcutCustomizationUiState) value;
+            int i3 = WhenMappings.$EnumSwitchMapping$0[shortcutCustomizationRequestResult.ordinal()];
+            if (i3 == 1) {
+                objCopy$default = ShortcutCustomizationUiState.Inactive.INSTANCE;
+            } else if (i3 == 2) {
+                String string = this.context.getString(R.string.shortcut_customizer_key_combination_in_use_error_message);
+                ShortcutCustomizationUiState.AddShortcutDialog addShortcutDialog = objCopy$default instanceof ShortcutCustomizationUiState.AddShortcutDialog ? (ShortcutCustomizationUiState.AddShortcutDialog) objCopy$default : null;
+                if (addShortcutDialog != null) {
+                    objCopy$default = ShortcutCustomizationUiState.AddShortcutDialog.copy$default(addShortcutDialog, string, null, null, 29);
+                }
+            } else {
+                if (i3 != 3) {
+                    throw new NoWhenBranchMatchedException();
+                }
+                String string2 = this.context.getString(R.string.shortcut_customizer_generic_error_message);
+                ShortcutCustomizationUiState.AddShortcutDialog addShortcutDialog2 = objCopy$default instanceof ShortcutCustomizationUiState.AddShortcutDialog ? (ShortcutCustomizationUiState.AddShortcutDialog) objCopy$default : null;
+                if (addShortcutDialog2 != null) {
+                    objCopy$default = ShortcutCustomizationUiState.AddShortcutDialog.copy$default(addShortcutDialog2, string2, null, null, 29);
+                }
+            }
+        } while (!stateFlowImpl.compareAndSet(value, objCopy$default));
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object resetAllCustomShortcuts(kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$resetAllCustomShortcuts$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$resetAllCustomShortcuts$1 r0 = (com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$resetAllCustomShortcuts$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$resetAllCustomShortcuts$1 r0 = new com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel$resetAllCustomShortcuts$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r5 = r0.L$0
-            com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel r5 = (com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel) r5
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L45
-        L2b:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L33:
-            kotlin.ResultKt.throwOnFailure(r6)
-            r0.L$0 = r5
-            r0.label = r3
-            com.android.systemui.keyboard.shortcut.domain.interactor.ShortcutCustomizationInteractor r6 = r5.shortcutCustomizationInteractor
-            com.android.systemui.keyboard.shortcut.data.repository.CustomShortcutCategoriesRepository r6 = r6.customShortcutRepository
-            java.lang.Object r6 = r6.resetAllCustomShortcuts(r0)
-            if (r6 != r1) goto L45
-            return r1
-        L45:
-            com.android.systemui.keyboard.shared.model.ShortcutCustomizationRequestResult r6 = (com.android.systemui.keyboard.shared.model.ShortcutCustomizationRequestResult) r6
-            kotlinx.coroutines.flow.StateFlowImpl r5 = r5._shortcutCustomizationUiState
-        L49:
-            java.lang.Object r0 = r5.getValue()
-            r1 = r0
-            com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState r1 = (com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState) r1
-            int[] r2 = com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel.WhenMappings.$EnumSwitchMapping$0
-            int r4 = r6.ordinal()
-            r2 = r2[r4]
-            if (r2 != r3) goto L5c
-            com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState$Inactive r1 = com.android.systemui.keyboard.shortcut.ui.model.ShortcutCustomizationUiState.Inactive.INSTANCE
-        L5c:
-            boolean r0 = r5.compareAndSet(r0, r1)
-            if (r0 == 0) goto L49
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel.resetAllCustomShortcuts(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object resetAllCustomShortcuts(ContinuationImpl continuationImpl) {
+        C08911 c08911;
+        Object value;
+        Object obj;
+        if (continuationImpl instanceof C08911) {
+            c08911 = (C08911) continuationImpl;
+            int i = c08911.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c08911.label = i - Integer.MIN_VALUE;
+            } else {
+                c08911 = new C08911(continuationImpl);
+            }
+        }
+        Object objResetAllCustomShortcuts = c08911.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c08911.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objResetAllCustomShortcuts);
+            c08911.L$0 = this;
+            c08911.label = 1;
+            objResetAllCustomShortcuts = this.shortcutCustomizationInteractor.customShortcutRepository.resetAllCustomShortcuts(c08911);
+            if (objResetAllCustomShortcuts == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (ShortcutCustomizationViewModel) c08911.L$0;
+            ResultKt.throwOnFailure(objResetAllCustomShortcuts);
+        }
+        ShortcutCustomizationRequestResult shortcutCustomizationRequestResult = (ShortcutCustomizationRequestResult) objResetAllCustomShortcuts;
+        StateFlowImpl stateFlowImpl = this._shortcutCustomizationUiState;
+        do {
+            value = stateFlowImpl.getValue();
+            obj = (ShortcutCustomizationUiState) value;
+            if (WhenMappings.$EnumSwitchMapping$0[shortcutCustomizationRequestResult.ordinal()] == 1) {
+                obj = ShortcutCustomizationUiState.Inactive.INSTANCE;
+            }
+        } while (!stateFlowImpl.compareAndSet(value, obj));
+        return Unit.INSTANCE;
     }
 }

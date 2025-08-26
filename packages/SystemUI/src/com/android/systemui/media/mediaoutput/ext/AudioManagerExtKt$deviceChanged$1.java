@@ -15,7 +15,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class AudioManagerExtKt$deviceChanged$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ AudioManager $this_deviceChanged;
@@ -52,13 +51,13 @@ final class AudioManagerExtKt$deviceChanged$1 extends SuspendLambda implements F
             final ?? r1 = new AudioDeviceCallback() { // from class: com.android.systemui.media.mediaoutput.ext.AudioManagerExtKt$deviceChanged$1$callback$1
                 @Override // android.media.AudioDeviceCallback
                 public final void onAudioDevicesAdded(AudioDeviceInfo[] audioDeviceInfoArr) {
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     BuildersKt.launch$default(producerScope2, null, null, new AudioManagerExtKt$deviceChanged$1$callback$1$onAudioDevicesAdded$1(producerScope2, null), 3);
                 }
 
                 @Override // android.media.AudioDeviceCallback
                 public final void onAudioDevicesRemoved(AudioDeviceInfo[] audioDeviceInfoArr) {
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     BuildersKt.launch$default(producerScope2, null, null, new AudioManagerExtKt$deviceChanged$1$callback$1$onAudioDevicesRemoved$1(producerScope2, null), 3);
                 }
             };

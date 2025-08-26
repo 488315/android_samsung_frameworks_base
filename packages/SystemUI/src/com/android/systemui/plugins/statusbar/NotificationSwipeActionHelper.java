@@ -8,7 +8,6 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import com.android.systemui.plugins.annotations.DependsOn;
 import com.android.systemui.plugins.annotations.ProvidesInterface;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(version = 1)
 @DependsOn(target = SnoozeOption.class)
 /* loaded from: classes2.dex */
@@ -16,7 +15,6 @@ public interface NotificationSwipeActionHelper {
     public static final String ACTION = "com.android.systemui.action.PLUGIN_NOTIFICATION_SWIPE_ACTION";
     public static final int VERSION = 1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @ProvidesInterface(version = 2)
     public interface SnoozeOption {
         public static final int VERSION = 2;

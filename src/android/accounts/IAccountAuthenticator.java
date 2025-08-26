@@ -150,9 +150,9 @@ public interface IAccountAuthenticator extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAccountAuthenticator)) {
-                return (IAccountAuthenticator) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAccountAuthenticator)) {
+                return (IAccountAuthenticator) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -208,105 +208,105 @@ public interface IAccountAuthenticator extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IAccountAuthenticatorResponse asInterface = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    String[] createStringArray = parcel.createStringArray();
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addAccount(asInterface, readString, readString2, createStringArray, bundle);
+                    addAccount(iAccountAuthenticatorResponseAsInterface, string, string2, strArrCreateStringArray, bundle);
                     return true;
                 case 2:
-                    IAccountAuthenticatorResponse asInterface2 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface2 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account = (Account) parcel.readTypedObject(Account.CREATOR);
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    confirmCredentials(asInterface2, account, bundle2);
+                    confirmCredentials(iAccountAuthenticatorResponseAsInterface2, account, bundle2);
                     return true;
                 case 3:
-                    IAccountAuthenticatorResponse asInterface3 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface3 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account2 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getAuthToken(asInterface3, account2, readString3, bundle3);
+                    getAuthToken(iAccountAuthenticatorResponseAsInterface3, account2, string3, bundle3);
                     return true;
                 case 4:
-                    IAccountAuthenticatorResponse asInterface4 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString4 = parcel.readString();
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface4 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    getAuthTokenLabel(asInterface4, readString4);
+                    getAuthTokenLabel(iAccountAuthenticatorResponseAsInterface4, string4);
                     return true;
                 case 5:
-                    IAccountAuthenticatorResponse asInterface5 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface5 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account3 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateCredentials(asInterface5, account3, readString5, bundle4);
+                    updateCredentials(iAccountAuthenticatorResponseAsInterface5, account3, string5, bundle4);
                     return true;
                 case 6:
-                    IAccountAuthenticatorResponse asInterface6 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString6 = parcel.readString();
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface6 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    editProperties(asInterface6, readString6);
+                    editProperties(iAccountAuthenticatorResponseAsInterface6, string6);
                     return true;
                 case 7:
-                    IAccountAuthenticatorResponse asInterface7 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface7 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account4 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String[] createStringArray2 = parcel.createStringArray();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    hasFeatures(asInterface7, account4, createStringArray2);
+                    hasFeatures(iAccountAuthenticatorResponseAsInterface7, account4, strArrCreateStringArray2);
                     return true;
                 case 8:
-                    IAccountAuthenticatorResponse asInterface8 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface8 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account5 = (Account) parcel.readTypedObject(Account.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getAccountRemovalAllowed(asInterface8, account5);
+                    getAccountRemovalAllowed(iAccountAuthenticatorResponseAsInterface8, account5);
                     return true;
                 case 9:
-                    IAccountAuthenticatorResponse asInterface9 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface9 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account6 = (Account) parcel.readTypedObject(Account.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getAccountCredentialsForCloning(asInterface9, account6);
+                    getAccountCredentialsForCloning(iAccountAuthenticatorResponseAsInterface9, account6);
                     return true;
                 case 10:
-                    IAccountAuthenticatorResponse asInterface10 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface10 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account7 = (Account) parcel.readTypedObject(Account.CREATOR);
                     Bundle bundle5 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addAccountFromCredentials(asInterface10, account7, bundle5);
+                    addAccountFromCredentials(iAccountAuthenticatorResponseAsInterface10, account7, bundle5);
                     return true;
                 case 11:
-                    IAccountAuthenticatorResponse asInterface11 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    String[] createStringArray3 = parcel.createStringArray();
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface11 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
                     Bundle bundle6 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startAddAccountSession(asInterface11, readString7, readString8, createStringArray3, bundle6);
+                    startAddAccountSession(iAccountAuthenticatorResponseAsInterface11, string7, string8, strArrCreateStringArray3, bundle6);
                     return true;
                 case 12:
-                    IAccountAuthenticatorResponse asInterface12 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface12 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account8 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     Bundle bundle7 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startUpdateCredentialsSession(asInterface12, account8, readString9, bundle7);
+                    startUpdateCredentialsSession(iAccountAuthenticatorResponseAsInterface12, account8, string9, bundle7);
                     return true;
                 case 13:
-                    IAccountAuthenticatorResponse asInterface13 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
-                    String readString10 = parcel.readString();
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface13 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    String string10 = parcel.readString();
                     Bundle bundle8 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    finishSession(asInterface13, readString10, bundle8);
+                    finishSession(iAccountAuthenticatorResponseAsInterface13, string10, bundle8);
                     return true;
                 case 14:
-                    IAccountAuthenticatorResponse asInterface14 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IAccountAuthenticatorResponse iAccountAuthenticatorResponseAsInterface14 = IAccountAuthenticatorResponse.Stub.asInterface(parcel.readStrongBinder());
                     Account account9 = (Account) parcel.readTypedObject(Account.CREATOR);
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    isCredentialsUpdateSuggested(asInterface14, account9, readString11);
+                    isCredentialsUpdateSuggested(iAccountAuthenticatorResponseAsInterface14, account9, string11);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -331,200 +331,200 @@ public interface IAccountAuthenticator extends IInterface {
 
             @Override // android.accounts.IAccountAuthenticator
             public void addAccount(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, String str2, String[] strArr, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void confirmCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void getAuthToken(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void getAuthTokenLabel(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void updateCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void editProperties(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void hasFeatures(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void getAccountRemovalAllowed(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeTypedObject(account, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void getAccountCredentialsForCloning(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeTypedObject(account, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void addAccountFromCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void startAddAccountSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, String str2, String[] strArr, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void startUpdateCredentialsSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void finishSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accounts.IAccountAuthenticator
             public void isCredentialsUpdateSuggested(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccountAuthenticatorResponse);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccountAuthenticatorResponse);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

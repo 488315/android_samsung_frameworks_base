@@ -105,28 +105,24 @@ public class SemBatteryUtils {
     }
 
     private static synchronized ICustomFrequencyManager getService(Context context) {
-        ICustomFrequencyManager iCustomFrequencyManager;
         IBinder service;
-        synchronized (SemBatteryUtils.class) {
-            if (mService == null && (service = ServiceManager.getService(Context.CFMS_SERVICE)) != null) {
-                mService = ICustomFrequencyManager.Stub.asInterface(service);
-            }
-            iCustomFrequencyManager = mService;
+        if (mService == null && (service = ServiceManager.getService(Context.CFMS_SERVICE)) != null) {
+            mService = ICustomFrequencyManager.Stub.asInterface(service);
         }
-        return iCustomFrequencyManager;
+        return mService;
     }
 
     public static int getBatteryRemainingUsageTime(Context context, int i) {
-        ISamsungDeviceHealthManager asInterface;
+        ISamsungDeviceHealthManager iSamsungDeviceHealthManagerAsInterface;
         if (context == null || i < 0) {
             return -2;
         }
         IBinder service = ServiceManager.getService("sdhms");
-        if (service == null || (asInterface = ISamsungDeviceHealthManager.Stub.asInterface(service)) == null) {
+        if (service == null || (iSamsungDeviceHealthManagerAsInterface = ISamsungDeviceHealthManager.Stub.asInterface(service)) == null) {
             return 0;
         }
         try {
-            return asInterface.getRemainingUsageTime(i);
+            return iSamsungDeviceHealthManagerAsInterface.getRemainingUsageTime(i);
         } catch (RemoteException e) {
             e.printStackTrace();
             return 0;
@@ -134,16 +130,16 @@ public class SemBatteryUtils {
     }
 
     public static int getBatteryRemainingUsageTime(Context context, int i, int i2) {
-        ISamsungDeviceHealthManager asInterface;
+        ISamsungDeviceHealthManager iSamsungDeviceHealthManagerAsInterface;
         if (context == null || i < 0) {
             return -2;
         }
         IBinder service = ServiceManager.getService("sdhms");
-        if (service == null || (asInterface = ISamsungDeviceHealthManager.Stub.asInterface(service)) == null) {
+        if (service == null || (iSamsungDeviceHealthManagerAsInterface = ISamsungDeviceHealthManager.Stub.asInterface(service)) == null) {
             return 0;
         }
         try {
-            return asInterface.getRemainingUsageTimeWithSettings(i, i2);
+            return iSamsungDeviceHealthManagerAsInterface.getRemainingUsageTimeWithSettings(i, i2);
         } catch (RemoteException e) {
             e.printStackTrace();
             return 0;

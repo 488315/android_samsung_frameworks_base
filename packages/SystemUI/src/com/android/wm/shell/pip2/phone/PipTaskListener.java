@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipTaskListener implements ShellTaskOrganizer.TaskListener, PipTransitionState.PipTransitionStateChangedListener {
     static final String ANIMATING_ASPECT_RATIO_CHANGE = "animating_aspect_ratio_change";
@@ -37,7 +36,6 @@ public class PipTaskListener implements ShellTaskOrganizer.TaskListener, PipTran
     public boolean mWaitingForAspectRatioChange = false;
     public final List mPipParamsChangedListeners = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     interface PipResizeAnimatorSupplier {
         PipResizeAnimator get(Context context, SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Rect rect, Rect rect2, Rect rect3, int i);
     }
@@ -57,7 +55,7 @@ public class PipTaskListener implements ShellTaskOrganizer.TaskListener, PipTran
         PipBoundsState.OnPipComponentChangedListener onPipComponentChangedListener = new PipBoundsState.OnPipComponentChangedListener() { // from class: com.android.wm.shell.pip2.phone.PipTaskListener$$ExternalSyntheticLambda4
             @Override // com.android.wm.shell.common.pip.PipBoundsState.OnPipComponentChangedListener
             public final void onPipComponentChanged() {
-                PipTaskListener.this.mPictureInPictureParams = new PictureInPictureParams.Builder().build();
+                this.f$0.mPictureInPictureParams = new PictureInPictureParams.Builder().build();
             }
         };
         if (((ArrayList) pipBoundsState.mOnPipComponentChangedListeners).contains(onPipComponentChangedListener)) {
@@ -116,7 +114,7 @@ public class PipTaskListener implements ShellTaskOrganizer.TaskListener, PipTran
                 pipTransitionState.mOnIdlePipTransitionStateRunnable = new Runnable() { // from class: com.android.wm.shell.pip2.phone.PipTaskListener$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PipTaskListener pipTaskListener = PipTaskListener.this;
+                        PipTaskListener pipTaskListener = this.f$0;
                         float f2 = aspectRatioFloat;
                         PipBoundsState pipBoundsState = pipTaskListener.mPipBoundsState;
                         pipBoundsState.setAspectRatio(f2);

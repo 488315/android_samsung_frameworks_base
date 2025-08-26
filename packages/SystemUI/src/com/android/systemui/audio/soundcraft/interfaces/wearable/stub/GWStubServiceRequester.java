@@ -10,7 +10,6 @@ import kotlin.Result;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class GWStubServiceRequester {
     public final Context context;
@@ -20,15 +19,15 @@ public abstract class GWStubServiceRequester {
         public final void onBindingDied(ComponentName componentName) {
             super.onBindingDied(componentName);
             Log.d("SoundCraft.wearable.GWStubServiceRequester", "onBindingDied");
-            GWStubServiceRequester.this.messenger = null;
+            this.this$0.messenger = null;
         }
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             Log.d("SoundCraft.wearable.GWStubServiceRequester", "onServiceConnected");
-            GWStubServiceRequester.this.messenger = new Messenger(iBinder);
-            GWStubServiceRequester.this.execute();
-            GWStubServiceRequester gWStubServiceRequester = GWStubServiceRequester.this;
+            this.this$0.messenger = new Messenger(iBinder);
+            this.this$0.execute();
+            GWStubServiceRequester gWStubServiceRequester = this.this$0;
             try {
                 int i = Result.$r8$clinit;
                 gWStubServiceRequester.context.unbindService(this);
@@ -42,11 +41,10 @@ public abstract class GWStubServiceRequester {
         @Override // android.content.ServiceConnection
         public final void onServiceDisconnected(ComponentName componentName) {
             Log.d("SoundCraft.wearable.GWStubServiceRequester", "onServiceDisconnected");
-            GWStubServiceRequester.this.messenger = null;
+            this.this$0.messenger = null;
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

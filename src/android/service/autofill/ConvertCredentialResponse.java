@@ -62,11 +62,11 @@ public final class ConvertCredentialResponse implements Parcelable {
     }
 
     ConvertCredentialResponse(Parcel parcel) {
-        byte readByte = parcel.readByte();
+        byte b = parcel.readByte();
         Dataset dataset = (Dataset) parcel.readTypedObject(Dataset.CREATOR);
-        Bundle readBundle = (readByte & 2) == 0 ? null : parcel.readBundle();
+        Bundle bundle = (b & 2) == 0 ? null : parcel.readBundle();
         this.mDataset = dataset;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) dataset);
-        this.mClientState = readBundle;
+        this.mClientState = bundle;
     }
 }

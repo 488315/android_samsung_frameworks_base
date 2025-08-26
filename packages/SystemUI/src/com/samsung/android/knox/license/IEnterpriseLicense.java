@@ -11,7 +11,6 @@ import com.samsung.android.knox.license.ILicenseResultCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IEnterpriseLicense extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.license.IEnterpriseLicense";
@@ -74,7 +73,6 @@ public interface IEnterpriseLicense extends IInterface {
 
     void updateAdminPermissions() throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IEnterpriseLicense {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -221,7 +219,6 @@ public interface IEnterpriseLicense extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IEnterpriseLicense {
         static final int TRANSACTION_activateKnoxLicense = 19;
         static final int TRANSACTION_activateLicense = 10;
@@ -253,7 +250,6 @@ public interface IEnterpriseLicense extends IInterface {
         static final int TRANSACTION_resetLicenseByAdmin = 15;
         static final int TRANSACTION_updateAdminPermissions = 29;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IEnterpriseLicense {
             private IBinder mRemote;
 
@@ -263,35 +259,35 @@ public interface IEnterpriseLicense extends IInterface {
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public void activateKnoxLicense(String str, String str2, ILicenseResultCallback iLicenseResultCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iLicenseResultCallback);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iLicenseResultCallback);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public void activateLicense(String str, String str2, ILicenseResultCallback iLicenseResultCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iLicenseResultCallback);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iLicenseResultCallback);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -302,193 +298,193 @@ public interface IEnterpriseLicense extends IInterface {
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public void deActivateKnoxLicense(String str, String str2, ILicenseResultCallback iLicenseResultCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iLicenseResultCallback);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iLicenseResultCallback);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean deleteAllApiCallData() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean deleteApiCallData(String str, String str2, Error error) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(error, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(error, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean deleteApiCallDataByAdmin(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean deleteLicense(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean deleteLicenseByAdmin(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public List<ActivationInfo> getAllLicenseActivationsInfos() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ActivationInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ActivationInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public LicenseInfo[] getAllLicenseInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LicenseInfo[]) obtain2.createTypedArray(LicenseInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LicenseInfo[]) parcelObtain2.createTypedArray(LicenseInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public Bundle getApiCallData(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public Bundle getApiCallDataByAdmin(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public List<String> getELMPermissions(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public String getInstanceId(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -498,265 +494,265 @@ public interface IEnterpriseLicense extends IInterface {
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public ActivationInfo getLicenseActivationInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ActivationInfo) obtain2.readTypedObject(ActivationInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ActivationInfo) parcelObtain2.readTypedObject(ActivationInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public LicenseInfo getLicenseInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LicenseInfo) obtain2.readTypedObject(LicenseInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LicenseInfo) parcelObtain2.readTypedObject(LicenseInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public LicenseInfo getLicenseInfoByAdmin(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LicenseInfo) obtain2.readTypedObject(LicenseInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LicenseInfo) parcelObtain2.readTypedObject(LicenseInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public RightsObject getRightsObject(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (RightsObject) obtain2.readTypedObject(RightsObject.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (RightsObject) parcelObtain2.readTypedObject(RightsObject.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public RightsObject getRightsObjectByAdmin(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (RightsObject) obtain2.readTypedObject(RightsObject.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (RightsObject) parcelObtain2.readTypedObject(RightsObject.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean isEulaBypassAllowed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean isServiceAvailable(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public void log(ContextInfo contextInfo, String str, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public void notifyKlmObservers(String str, LicenseResult licenseResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(licenseResult, 0);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(licenseResult, 0);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean processKnoxLicenseResponse(String str, String str2, String str3, List<String> list, String str4, Error error, int i, String str5, RightsObject rightsObject) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeStringList(list);
-                    obtain.writeString(str4);
-                    obtain.writeTypedObject(error, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str5);
-                    obtain.writeTypedObject(rightsObject, 0);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeTypedObject(error, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeTypedObject(rightsObject, 0);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean processLicenseActivationResponse(String str, String str2, String str3, List<String> list, String str4, String str5, RightsObject rightsObject, Error error, String str6, String str7) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeStringList(list);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    obtain.writeTypedObject(rightsObject, 0);
-                    obtain.writeTypedObject(error, 0);
-                    obtain.writeString(str6);
-                    obtain.writeString(str7);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeTypedObject(rightsObject, 0);
+                    parcelObtain.writeTypedObject(error, 0);
+                    parcelObtain.writeString(str6);
+                    parcelObtain.writeString(str7);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean processLicenseValidationResult(String str, RightsObject rightsObject, Error error, String str2, String str3, String str4, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(rightsObject, 0);
-                    obtain.writeTypedObject(error, 0);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(rightsObject, 0);
+                    parcelObtain.writeTypedObject(error, 0);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean resetLicense(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public boolean resetLicenseByAdmin(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.license.IEnterpriseLicense
             public void updateAdminPermissions() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEnterpriseLicense.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -769,8 +765,8 @@ public interface IEnterpriseLicense extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEnterpriseLicense.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IEnterpriseLicense)) ? new Proxy(iBinder) : (IEnterpriseLicense) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEnterpriseLicense.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IEnterpriseLicense)) ? new Proxy(iBinder) : (IEnterpriseLicense) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -784,46 +780,46 @@ public interface IEnterpriseLicense extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    RightsObject rightsObject = getRightsObject(readString);
+                    RightsObject rightsObject = getRightsObject(string);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(rightsObject, 1);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    RightsObject rightsObjectByAdmin = getRightsObjectByAdmin(readString2);
+                    RightsObject rightsObjectByAdmin = getRightsObjectByAdmin(string2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(rightsObjectByAdmin, 1);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle apiCallData = getApiCallData(readString3);
+                    Bundle apiCallData = getApiCallData(string3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(apiCallData, 1);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
                     Error error = (Error) parcel.readTypedObject(Error.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean deleteApiCallData = deleteApiCallData(readString4, readString5, error);
+                    boolean zDeleteApiCallData = deleteApiCallData(string4, string5, error);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteApiCallData);
+                    parcel2.writeBoolean(zDeleteApiCallData);
                     return true;
                 case 5:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean deleteApiCallDataByAdmin = deleteApiCallDataByAdmin(readString6);
+                    boolean zDeleteApiCallDataByAdmin = deleteApiCallDataByAdmin(string6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteApiCallDataByAdmin);
+                    parcel2.writeBoolean(zDeleteApiCallDataByAdmin);
                     return true;
                 case 6:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle apiCallDataByAdmin = getApiCallDataByAdmin(readString7);
+                    Bundle apiCallDataByAdmin = getApiCallDataByAdmin(string7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(apiCallDataByAdmin, 1);
                     return true;
@@ -833,162 +829,162 @@ public interface IEnterpriseLicense extends IInterface {
                     parcel2.writeTypedArray(allLicenseInfo, 1);
                     return true;
                 case 8:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    LicenseInfo licenseInfo = getLicenseInfo(readString8);
+                    LicenseInfo licenseInfo = getLicenseInfo(string8);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(licenseInfo, 1);
                     return true;
                 case 9:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    LicenseInfo licenseInfoByAdmin = getLicenseInfoByAdmin(readString9);
+                    LicenseInfo licenseInfoByAdmin = getLicenseInfoByAdmin(string9);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(licenseInfoByAdmin, 1);
                     return true;
                 case 10:
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
-                    ILicenseResultCallback asInterface = ILicenseResultCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
+                    ILicenseResultCallback iLicenseResultCallbackAsInterface = ILicenseResultCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    activateLicense(readString10, readString11, asInterface);
+                    activateLicense(string10, string11, iLicenseResultCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
                     RightsObject rightsObject2 = (RightsObject) parcel.readTypedObject(RightsObject.CREATOR);
                     Error error2 = (Error) parcel.readTypedObject(Error.CREATOR);
-                    String readString17 = parcel.readString();
-                    String readString18 = parcel.readString();
+                    String string17 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean processLicenseActivationResponse = processLicenseActivationResponse(readString12, readString13, readString14, createStringArrayList, readString15, readString16, rightsObject2, error2, readString17, readString18);
+                    boolean zProcessLicenseActivationResponse = processLicenseActivationResponse(string12, string13, string14, arrayListCreateStringArrayList, string15, string16, rightsObject2, error2, string17, string18);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(processLicenseActivationResponse);
+                    parcel2.writeBoolean(zProcessLicenseActivationResponse);
                     return true;
                 case 12:
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     RightsObject rightsObject3 = (RightsObject) parcel.readTypedObject(RightsObject.CREATOR);
                     Error error3 = (Error) parcel.readTypedObject(Error.CREATOR);
-                    String readString20 = parcel.readString();
-                    String readString21 = parcel.readString();
-                    String readString22 = parcel.readString();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    String string20 = parcel.readString();
+                    String string21 = parcel.readString();
+                    String string22 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean processLicenseValidationResult = processLicenseValidationResult(readString19, rightsObject3, error3, readString20, readString21, readString22, createStringArrayList2);
+                    boolean zProcessLicenseValidationResult = processLicenseValidationResult(string19, rightsObject3, error3, string20, string21, string22, arrayListCreateStringArrayList2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(processLicenseValidationResult);
+                    parcel2.writeBoolean(zProcessLicenseValidationResult);
                     return true;
                 case 13:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString23 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string23 = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    log(contextInfo, readString23, readBoolean, readBoolean2);
+                    log(contextInfo, string23, z, z2);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    String readString24 = parcel.readString();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean resetLicense = resetLicense(readString24);
+                    boolean zResetLicense = resetLicense(string24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(resetLicense);
+                    parcel2.writeBoolean(zResetLicense);
                     return true;
                 case 15:
-                    String readString25 = parcel.readString();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean resetLicenseByAdmin = resetLicenseByAdmin(readString25);
+                    boolean zResetLicenseByAdmin = resetLicenseByAdmin(string25);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(resetLicenseByAdmin);
+                    parcel2.writeBoolean(zResetLicenseByAdmin);
                     return true;
                 case 16:
-                    String readString26 = parcel.readString();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean deleteLicense = deleteLicense(readString26);
+                    boolean zDeleteLicense = deleteLicense(string26);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteLicense);
+                    parcel2.writeBoolean(zDeleteLicense);
                     return true;
                 case 17:
-                    String readString27 = parcel.readString();
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean deleteLicenseByAdmin = deleteLicenseByAdmin(readString27);
+                    boolean zDeleteLicenseByAdmin = deleteLicenseByAdmin(string27);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteLicenseByAdmin);
+                    parcel2.writeBoolean(zDeleteLicenseByAdmin);
                     return true;
                 case 18:
-                    String readString28 = parcel.readString();
-                    String readString29 = parcel.readString();
-                    String readString30 = parcel.readString();
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
-                    String readString31 = parcel.readString();
+                    String string28 = parcel.readString();
+                    String string29 = parcel.readString();
+                    String string30 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
+                    String string31 = parcel.readString();
                     Error error4 = (Error) parcel.readTypedObject(Error.CREATOR);
-                    int readInt = parcel.readInt();
-                    String readString32 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string32 = parcel.readString();
                     RightsObject rightsObject4 = (RightsObject) parcel.readTypedObject(RightsObject.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean processKnoxLicenseResponse = processKnoxLicenseResponse(readString28, readString29, readString30, createStringArrayList3, readString31, error4, readInt, readString32, rightsObject4);
+                    boolean zProcessKnoxLicenseResponse = processKnoxLicenseResponse(string28, string29, string30, arrayListCreateStringArrayList3, string31, error4, i3, string32, rightsObject4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(processKnoxLicenseResponse);
+                    parcel2.writeBoolean(zProcessKnoxLicenseResponse);
                     return true;
                 case 19:
-                    String readString33 = parcel.readString();
-                    String readString34 = parcel.readString();
-                    ILicenseResultCallback asInterface2 = ILicenseResultCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string33 = parcel.readString();
+                    String string34 = parcel.readString();
+                    ILicenseResultCallback iLicenseResultCallbackAsInterface2 = ILicenseResultCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    activateKnoxLicense(readString33, readString34, asInterface2);
+                    activateKnoxLicense(string33, string34, iLicenseResultCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    String readString35 = parcel.readString();
-                    String readString36 = parcel.readString();
-                    ILicenseResultCallback asInterface3 = ILicenseResultCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string35 = parcel.readString();
+                    String string36 = parcel.readString();
+                    ILicenseResultCallback iLicenseResultCallbackAsInterface3 = ILicenseResultCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    deActivateKnoxLicense(readString35, readString36, asInterface3);
+                    deActivateKnoxLicense(string35, string36, iLicenseResultCallbackAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    String readString37 = parcel.readString();
+                    String string37 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> eLMPermissions = getELMPermissions(readString37);
+                    List<String> eLMPermissions = getELMPermissions(string37);
                     parcel2.writeNoException();
                     parcel2.writeStringList(eLMPermissions);
                     return true;
                 case 22:
-                    String readString38 = parcel.readString();
+                    String string38 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String instanceId = getInstanceId(readString38);
+                    String instanceId = getInstanceId(string38);
                     parcel2.writeNoException();
                     parcel2.writeString(instanceId);
                     return true;
                 case 23:
-                    boolean deleteAllApiCallData = deleteAllApiCallData();
+                    boolean zDeleteAllApiCallData = deleteAllApiCallData();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteAllApiCallData);
+                    parcel2.writeBoolean(zDeleteAllApiCallData);
                     return true;
                 case 24:
-                    String readString39 = parcel.readString();
-                    String readString40 = parcel.readString();
+                    String string39 = parcel.readString();
+                    String string40 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isServiceAvailable = isServiceAvailable(readString39, readString40);
+                    boolean zIsServiceAvailable = isServiceAvailable(string39, string40);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isServiceAvailable);
+                    parcel2.writeBoolean(zIsServiceAvailable);
                     return true;
                 case 25:
-                    String readString41 = parcel.readString();
+                    String string41 = parcel.readString();
                     LicenseResult licenseResult = (LicenseResult) parcel.readTypedObject(LicenseResult.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyKlmObservers(readString41, licenseResult);
+                    notifyKlmObservers(string41, licenseResult);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    String readString42 = parcel.readString();
+                    String string42 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ActivationInfo licenseActivationInfo = getLicenseActivationInfo(readString42);
+                    ActivationInfo licenseActivationInfo = getLicenseActivationInfo(string42);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(licenseActivationInfo, 1);
                     return true;
@@ -998,11 +994,11 @@ public interface IEnterpriseLicense extends IInterface {
                     parcel2.writeTypedList(allLicenseActivationsInfos, 1);
                     return true;
                 case 28:
-                    String readString43 = parcel.readString();
+                    String string43 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isEulaBypassAllowed = isEulaBypassAllowed(readString43);
+                    boolean zIsEulaBypassAllowed = isEulaBypassAllowed(string43);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEulaBypassAllowed);
+                    parcel2.writeBoolean(zIsEulaBypassAllowed);
                     return true;
                 case 29:
                     updateAdminPermissions();

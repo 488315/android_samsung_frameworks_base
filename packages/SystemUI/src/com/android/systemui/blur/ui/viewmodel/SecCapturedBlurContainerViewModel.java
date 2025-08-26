@@ -12,15 +12,14 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecCapturedBlurContainerViewModel {
+    public final ReadonlyStateFlow bouncerShowing;
     public final ReadonlyStateFlow fullScreenBlurShowing;
     public final ChannelFlowTransformLatest requestCaptureBlur;
     public final SecCapturedBlurInteractor secCapturedBlurInteractor;
     public final ReadonlyStateFlow shouldBeGone;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -30,7 +29,6 @@ public final class SecCapturedBlurContainerViewModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         SecCapturedBlurContainerViewModel create();
     }
@@ -41,9 +39,11 @@ public final class SecCapturedBlurContainerViewModel {
 
     public SecCapturedBlurContainerViewModel(CoroutineScope coroutineScope, SecCapturedBlurInteractor secCapturedBlurInteractor, SecPanelBackgroundCommonInteractor secPanelBackgroundCommonInteractor, SecBlurSettingsInteractor secBlurSettingsInteractor, PowerInteractor powerInteractor, PrimaryBouncerInteractor primaryBouncerInteractor) {
         this.secCapturedBlurInteractor = secCapturedBlurInteractor;
-        ReadonlyStateFlow readonlyStateFlow = secCapturedBlurInteractor.fullScreenBlurShowing;
-        this.fullScreenBlurShowing = readonlyStateFlow;
-        this.requestCaptureBlur = FlowKt.transformLatest(secCapturedBlurInteractor.requestCaptureBlur, new SecCapturedBlurContainerViewModel$requestCaptureBlur$1(powerInteractor, primaryBouncerInteractor, null));
-        this.shouldBeGone = FlowKt.stateIn(FlowKt.combine(primaryBouncerInteractor.isShowing, readonlyStateFlow, secPanelBackgroundCommonInteractor.maxAlpha, secBlurSettingsInteractor.blurReduced, new SecCapturedBlurContainerViewModel$shouldBeGone$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Boolean.TRUE);
+        ReadonlyStateFlow readonlyStateFlow = primaryBouncerInteractor.isShowing;
+        this.bouncerShowing = readonlyStateFlow;
+        ReadonlyStateFlow readonlyStateFlow2 = secCapturedBlurInteractor.fullScreenBlurShowing;
+        this.fullScreenBlurShowing = readonlyStateFlow2;
+        this.requestCaptureBlur = FlowKt.transformLatest(secCapturedBlurInteractor.requestCaptureBlur, new SecCapturedBlurContainerViewModel$requestCaptureBlur$1(powerInteractor, this, null));
+        this.shouldBeGone = FlowKt.stateIn(FlowKt.combine(readonlyStateFlow, readonlyStateFlow2, secPanelBackgroundCommonInteractor.maxAlpha, secBlurSettingsInteractor.blurReduced, new SecCapturedBlurContainerViewModel$shouldBeGone$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Boolean.TRUE);
     }
 }

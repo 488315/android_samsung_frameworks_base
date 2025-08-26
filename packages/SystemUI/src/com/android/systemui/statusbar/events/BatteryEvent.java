@@ -6,7 +6,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.android.systemui.R;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BatteryEvent implements StatusEvent {
     public final int batteryLevel;
@@ -16,11 +15,12 @@ public final class BatteryEvent implements StatusEvent {
     public BatteryEvent(int i, final int i2) {
         this.batteryLevel = i;
         this.viewCreator = new Function1() { // from class: com.android.systemui.statusbar.events.BatteryEvent$$ExternalSyntheticLambda0
+            /* JADX WARN: Multi-variable type inference failed */
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 SamsungBatteryStatusChip samsungBatteryStatusChip = new SamsungBatteryStatusChip((Context) obj, null, 2, 0 == true ? 1 : 0);
-                int i3 = BatteryEvent.this.batteryLevel;
+                int i3 = this.f$0.batteryLevel;
                 samsungBatteryStatusChip.batteryLevelText.level = i3;
                 samsungBatteryStatusChip.batteryLevelProgress.setLayoutParams(new FrameLayout.LayoutParams((samsungBatteryStatusChip.getResources().getDimensionPixelSize(R.dimen.status_bar_battery_chip_width) * i3) / 100, -1));
                 samsungBatteryStatusChip.batteryLevelProgressBg.setLayoutParams(new FrameLayout.LayoutParams((samsungBatteryStatusChip.getResources().getDimensionPixelSize(R.dimen.status_bar_battery_chip_width) * i3) / 100, -1));

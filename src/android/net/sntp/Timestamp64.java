@@ -24,18 +24,18 @@ public final class Timestamp64 {
         return new Timestamp64(j, i);
     }
 
-    public static Timestamp64 fromString(String str) {
+    public static Timestamp64 fromString(String str) throws NumberFormatException {
         if (str.length() != 17 || str.charAt(8) != '.') {
             throw new IllegalArgumentException(str);
         }
-        String substring = str.substring(0, 8);
-        String substring2 = str.substring(9);
-        long parseLong = Long.parseLong(substring, 16);
-        long parseLong2 = Long.parseLong(substring2, 16);
-        if (parseLong2 < 0 || parseLong2 > 4294967295L) {
-            throw new IllegalArgumentException("Invalid fractionBits:" + substring2);
+        String strSubstring = str.substring(0, 8);
+        String strSubstring2 = str.substring(9);
+        long j = Long.parseLong(strSubstring, 16);
+        long j2 = Long.parseLong(strSubstring2, 16);
+        if (j2 < 0 || j2 > 4294967295L) {
+            throw new IllegalArgumentException("Invalid fractionBits:" + strSubstring2);
         }
-        return new Timestamp64(parseLong, (int) parseLong2);
+        return new Timestamp64(j, (int) j2);
     }
 
     public static Timestamp64 fromInstant(Instant instant) {

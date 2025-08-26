@@ -165,7 +165,7 @@ class YearPickerView extends ListView {
         }
 
         @Override // android.widget.Adapter
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
             TextView textView;
             boolean z = view == null;
             if (z) {

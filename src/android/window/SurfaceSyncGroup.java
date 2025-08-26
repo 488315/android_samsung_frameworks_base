@@ -113,7 +113,7 @@ public final class SurfaceSyncGroup {
         this.mTransactionReadyConsumer = new Consumer() { // from class: android.window.SurfaceSyncGroup$$ExternalSyntheticLambda4
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                SurfaceSyncGroup.this.lambda$new$1(consumer, (SurfaceControl.Transaction) obj);
+                this.f$0.lambda$new$1(consumer, (SurfaceControl.Transaction) obj);
             }
         };
         if (Trace.isTagEnabled(8L)) {
@@ -140,7 +140,8 @@ public final class SurfaceSyncGroup {
         this.mSyncCompleteCallbacks.forEach(new Consumer() { // from class: android.window.SurfaceSyncGroup$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((Executor) r1.first).execute((Runnable) ((Pair) obj).second);
+                Pair pair = (Pair) obj;
+                ((Executor) pair.first).execute((Runnable) pair.second);
             }
         });
     }
@@ -179,10 +180,10 @@ public final class SurfaceSyncGroup {
         consumer.accept(new SurfaceViewFrameCallback() { // from class: android.window.SurfaceSyncGroup$$ExternalSyntheticLambda0
             @Override // android.window.SurfaceSyncGroup.SurfaceViewFrameCallback
             public final void onFrameStarted() {
-                SurfaceView.this.syncNextFrame(new Consumer() { // from class: android.window.SurfaceSyncGroup$$ExternalSyntheticLambda6
+                surfaceView.syncNextFrame(new Consumer() { // from class: android.window.SurfaceSyncGroup$$ExternalSyntheticLambda6
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        SurfaceSyncGroup.lambda$add$3(SurfaceSyncGroup.this, (SurfaceControl.Transaction) obj);
+                        SurfaceSyncGroup.lambda$add$3(surfaceSyncGroup, (SurfaceControl.Transaction) obj);
                     }
                 });
             }
@@ -237,11 +238,11 @@ public final class SurfaceSyncGroup {
                 runnable.run();
             }
             if (isLocalBinder(iSurfaceSyncGroup.asBinder())) {
-                boolean addLocalSync = addLocalSync(iSurfaceSyncGroup, z);
+                boolean zAddLocalSync = addLocalSync(iSurfaceSyncGroup, z);
                 if (Trace.isTagEnabled(8L)) {
                     Trace.asyncTraceForTrackEnd(8L, this.mTrackName, hashCode());
                 }
-                return addLocalSync;
+                return zAddLocalSync;
             }
             synchronized (this.mLock) {
                 if (!this.mHasWMSync) {
@@ -332,11 +333,11 @@ public final class SurfaceSyncGroup {
         if (Trace.isTagEnabled(8L)) {
             Trace.asyncTraceForTrackBegin(8L, this.mTrackName, "addLocalSync=" + surfaceSyncGroup.mName, hashCode());
         }
-        ITransactionReadyCallback createTransactionReadyCallback = createTransactionReadyCallback(z);
-        if (createTransactionReadyCallback == null) {
+        ITransactionReadyCallback iTransactionReadyCallbackCreateTransactionReadyCallback = createTransactionReadyCallback(z);
+        if (iTransactionReadyCallbackCreateTransactionReadyCallback == null) {
             return false;
         }
-        surfaceSyncGroup.setTransactionCallbackFromParent(this.mISurfaceSyncGroup, createTransactionReadyCallback);
+        surfaceSyncGroup.setTransactionCallbackFromParent(this.mISurfaceSyncGroup, iTransactionReadyCallbackCreateTransactionReadyCallback);
         if (!Trace.isTagEnabled(8L)) {
             return true;
         }
@@ -368,7 +369,7 @@ public final class SurfaceSyncGroup {
                 this.mTransactionReadyConsumer = new Consumer() { // from class: android.window.SurfaceSyncGroup$$ExternalSyntheticLambda5
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        SurfaceSyncGroup.this.lambda$setTransactionCallbackFromParent$5(iTransactionReadyCallback, consumer, (SurfaceControl.Transaction) obj);
+                        this.f$0.lambda$setTransactionCallbackFromParent$5(iTransactionReadyCallback, consumer, (SurfaceControl.Transaction) obj);
                     }
                 };
                 runnable = this.mAddedToSyncListener;
@@ -445,7 +446,11 @@ public final class SurfaceSyncGroup {
 
     public ITransactionReadyCallback createTransactionReadyCallback(final boolean z) {
         ITransactionReadyCallback.Stub stub = new ITransactionReadyCallback.Stub() { // from class: android.window.SurfaceSyncGroup.2
+            /* JADX WARN: Removed duplicated region for block: B:11:0x003d A[Catch: all -> 0x005d, TryCatch #0 {, blocks: (B:5:0x000b, B:7:0x001a, B:8:0x0023, B:9:0x002c, B:11:0x003d, B:12:0x0056, B:13:0x005b), top: B:18:0x000b }] */
             @Override // android.window.ITransactionReadyCallback
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public void onTransactionReady(SurfaceControl.Transaction transaction) {
                 synchronized (SurfaceSyncGroup.this.mLock) {
                     if (transaction != null) {
@@ -454,12 +459,17 @@ public final class SurfaceSyncGroup {
                             transaction.merge(SurfaceSyncGroup.this.mTransaction);
                         }
                         SurfaceSyncGroup.this.mTransaction.merge(transaction);
+                        SurfaceSyncGroup.this.mPendingSyncs.remove(this);
+                        if (Trace.isTagEnabled(8L)) {
+                            Trace.instantForTrack(8L, SurfaceSyncGroup.this.mTrackName, "onTransactionReady callback=" + hashCode());
+                        }
+                        SurfaceSyncGroup.this.checkIfSyncIsComplete();
+                    } else {
+                        SurfaceSyncGroup.this.mPendingSyncs.remove(this);
+                        if (Trace.isTagEnabled(8L)) {
+                        }
+                        SurfaceSyncGroup.this.checkIfSyncIsComplete();
                     }
-                    SurfaceSyncGroup.this.mPendingSyncs.remove(this);
-                    if (Trace.isTagEnabled(8L)) {
-                        Trace.instantForTrack(8L, SurfaceSyncGroup.this.mTrackName, "onTransactionReady callback=" + hashCode());
-                    }
-                    SurfaceSyncGroup.this.checkIfSyncIsComplete();
                 }
             }
         };
@@ -486,11 +496,11 @@ public final class SurfaceSyncGroup {
             if (Trace.isTagEnabled(8L)) {
                 Trace.asyncTraceForTrackBegin(8L, SurfaceSyncGroup.this.mTrackName, "onAddedToSyncGroup token=" + iBinder.hashCode(), hashCode());
             }
-            boolean addSyncToWm = SurfaceSyncGroup.this.addSyncToWm(iBinder, z, null);
+            boolean zAddSyncToWm = SurfaceSyncGroup.this.addSyncToWm(iBinder, z, null);
             if (Trace.isTagEnabled(8L)) {
                 Trace.asyncTraceForTrackEnd(8L, SurfaceSyncGroup.this.mTrackName, hashCode());
             }
-            return addSyncToWm;
+            return zAddSyncToWm;
         }
 
         @Override // android.window.ISurfaceSyncGroup
@@ -535,7 +545,7 @@ public final class SurfaceSyncGroup {
                 this.mHandler.postDelayed(new Runnable() { // from class: android.window.SurfaceSyncGroup$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SurfaceSyncGroup.this.lambda$addTimeout$6();
+                        this.f$0.lambda$addTimeout$6();
                     }
                 }, this, TRANSACTION_READY_TIMEOUT);
             }

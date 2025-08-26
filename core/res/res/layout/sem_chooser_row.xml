@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:gravity="start|center|top" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content"
+<LinearLayout android:gravity="start|top" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout android:gravity="center" android:layout_gravity="center" android:id="@id/sem_chooser_row_share_live_default" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
     <ProgressBar android:gravity="center" android:layout_gravity="center" android:id="@id/sem_chooser_row_progressbar" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:indeterminate="true" />

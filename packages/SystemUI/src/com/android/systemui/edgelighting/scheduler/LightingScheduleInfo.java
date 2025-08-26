@@ -12,7 +12,6 @@ import com.samsung.android.knox.ucm.plugin.agent.UcmAgentProviderImpl;
 import com.sec.ims.settings.ImsProfile;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LightingScheduleInfo {
     public static final boolean DEBUG = Debug.semIsProductDev();
@@ -26,7 +25,6 @@ public class LightingScheduleInfo {
     public int mDuration = ImsProfile.DEFAULT_DEREG_TIMEOUT;
     public boolean mIsDirty = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ChainItemBodySubText extends NotiTextChain {
         public ChainItemBodySubText(LightingScheduleInfo lightingScheduleInfo) {
             super(lightingScheduleInfo);
@@ -38,7 +36,6 @@ public class LightingScheduleInfo {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ChainItemBodyText extends NotiTextChain {
         public ChainItemBodyText(LightingScheduleInfo lightingScheduleInfo) {
             super(lightingScheduleInfo);
@@ -50,7 +47,6 @@ public class LightingScheduleInfo {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ChainItemTicker extends NotiTextChain {
         public ChainItemTicker(LightingScheduleInfo lightingScheduleInfo) {
             super(lightingScheduleInfo);
@@ -62,7 +58,6 @@ public class LightingScheduleInfo {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ChainItemTitle extends NotiTextChain {
         public ChainItemTitle(LightingScheduleInfo lightingScheduleInfo) {
             super(lightingScheduleInfo);
@@ -74,12 +69,10 @@ public class LightingScheduleInfo {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LightingLogicPolicy {
         public boolean isNeedToKeepWhenLcdOff = false;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class NotiTextChain {
         public boolean mIsTextDirty;
         public NotiTextChain mNext;
@@ -253,8 +246,8 @@ public class LightingScheduleInfo {
                     Slog.i("LightingScheduleInfo", " mergeTextChainItem :" + notiTextChain.getExtraKey() + " this : " + extraText2.hashCode() + " = isDirty : " + notiTextChain.mIsTextDirty);
                 }
             }
-            boolean equals = extraText != null ? extraText.equals(extraText2) : false;
-            if ((z2 || !z) && !equals) {
+            boolean zEquals = extraText != null ? extraText.equals(extraText2) : false;
+            if ((z2 || !z) && !zEquals) {
                 return;
             }
             String extraKey2 = notiTextChain.getExtraKey();

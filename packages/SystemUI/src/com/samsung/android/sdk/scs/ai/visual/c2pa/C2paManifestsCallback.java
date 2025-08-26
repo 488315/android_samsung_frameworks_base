@@ -10,13 +10,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class C2paManifestsCallback extends IC2paManifestsCallback.Stub {
     public abstract /* synthetic */ void onError(String str) throws RemoteException;
 
     @Override // com.samsung.android.visual.ai.sdkcommon.IC2paManifestsCallback
-    public void onPfdCreation(ParcelFileDescriptor parcelFileDescriptor, boolean z) throws RemoteException {
+    public void onPfdCreation(ParcelFileDescriptor parcelFileDescriptor, boolean z) throws IOException, RemoteException {
         try {
             try {
                 try {
@@ -43,15 +42,15 @@ public abstract class C2paManifestsCallback extends IC2paManifestsCallback.Stub 
                         }
                         throw th;
                     }
-                } catch (Exception unused) {
+                } catch (IOException | SecurityException e) {
+                    Log.e("C2paClient", "Error while closing pfd");
                     onError(C2paError.PFD_READ_ERROR.getErrString());
-                    Log.e("C2paClient", "Error while reading c2pa manifest from pfd");
-                    parcelFileDescriptor.close();
+                    e.printStackTrace();
                 }
-            } catch (IOException | SecurityException e) {
-                Log.e("C2paClient", "Error while closing pfd");
+            } catch (Exception unused) {
                 onError(C2paError.PFD_READ_ERROR.getErrString());
-                e.printStackTrace();
+                Log.e("C2paClient", "Error while reading c2pa manifest from pfd");
+                parcelFileDescriptor.close();
             }
         } catch (Throwable th3) {
             try {

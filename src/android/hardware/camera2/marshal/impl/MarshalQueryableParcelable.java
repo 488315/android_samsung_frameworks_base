@@ -36,43 +36,43 @@ public class MarshalQueryableParcelable<T extends Parcelable> implements Marshal
 
         @Override // android.hardware.camera2.marshal.Marshaler
         public void marshal(T t, ByteBuffer byteBuffer) {
-            Parcel obtain = Parcel.obtain();
+            Parcel parcelObtain = Parcel.obtain();
             try {
-                t.writeToParcel(obtain, 0);
-                if (obtain.hasFileDescriptors()) {
+                t.writeToParcel(parcelObtain, 0);
+                if (parcelObtain.hasFileDescriptors()) {
                     throw new UnsupportedOperationException("Parcelable " + t + " must not have file descriptors");
                 }
-                int position = byteBuffer.position();
-                obtain.marshall(byteBuffer);
-                if (byteBuffer.position() != position) {
+                int iPosition = byteBuffer.position();
+                parcelObtain.marshall(byteBuffer);
+                if (byteBuffer.position() != iPosition) {
                     return;
                 }
                 throw new AssertionError("No data marshaled for " + t);
             } finally {
-                obtain.recycle();
+                parcelObtain.recycle();
             }
         }
 
         @Override // android.hardware.camera2.marshal.Marshaler
         public T unmarshal(ByteBuffer byteBuffer) {
             byteBuffer.mark();
-            Parcel obtain = Parcel.obtain();
+            Parcel parcelObtain = Parcel.obtain();
             try {
-                int remaining = byteBuffer.remaining();
-                byte[] bArr = new byte[remaining];
+                int iRemaining = byteBuffer.remaining();
+                byte[] bArr = new byte[iRemaining];
                 byteBuffer.get(bArr);
-                obtain.unmarshall(bArr, 0, remaining);
-                obtain.setDataPosition(0);
-                T createFromParcel = this.mCreator.createFromParcel(obtain);
-                int dataPosition = obtain.dataPosition();
-                if (dataPosition == 0) {
-                    throw new AssertionError("No data marshaled for " + createFromParcel);
+                parcelObtain.unmarshall(bArr, 0, iRemaining);
+                parcelObtain.setDataPosition(0);
+                T tCreateFromParcel = this.mCreator.createFromParcel(parcelObtain);
+                int iDataPosition = parcelObtain.dataPosition();
+                if (iDataPosition == 0) {
+                    throw new AssertionError("No data marshaled for " + tCreateFromParcel);
                 }
                 byteBuffer.reset();
-                byteBuffer.position(byteBuffer.position() + dataPosition);
-                return this.mClass.cast(createFromParcel);
+                byteBuffer.position(byteBuffer.position() + iDataPosition);
+                return this.mClass.cast(tCreateFromParcel);
             } finally {
-                obtain.recycle();
+                parcelObtain.recycle();
             }
         }
 
@@ -83,12 +83,12 @@ public class MarshalQueryableParcelable<T extends Parcelable> implements Marshal
 
         @Override // android.hardware.camera2.marshal.Marshaler
         public int calculateMarshalSize(T t) {
-            Parcel obtain = Parcel.obtain();
+            Parcel parcelObtain = Parcel.obtain();
             try {
-                t.writeToParcel(obtain, 0);
-                return obtain.marshall().length;
+                t.writeToParcel(parcelObtain, 0);
+                return parcelObtain.marshall().length;
             } finally {
-                obtain.recycle();
+                parcelObtain.recycle();
             }
         }
     }

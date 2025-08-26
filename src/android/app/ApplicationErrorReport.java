@@ -66,28 +66,28 @@ public class ApplicationErrorReport implements Parcelable {
     }
 
     public static ComponentName getErrorReportReceiver(Context context, String str, int i) {
-        String str2;
+        String installerPackageName;
         ComponentName errorReportReceiver;
         ComponentName errorReportReceiver2;
         ComponentName errorReportReceiver3;
         int i2 = Settings.Global.getInt(context.getContentResolver(), Settings.Global.SEND_ACTION_APP_ERROR, 0);
-        boolean isSamsungPackage = isSamsungPackage(str);
-        if (i2 == 0 && !isSamsungPackage) {
+        boolean zIsSamsungPackage = isSamsungPackage(str);
+        if (i2 == 0 && !zIsSamsungPackage) {
             return null;
         }
         PackageManager packageManager = context.getPackageManager();
         try {
-            str2 = packageManager.getInstallerPackageName(str);
+            installerPackageName = packageManager.getInstallerPackageName(str);
         } catch (IllegalArgumentException unused) {
-            str2 = null;
+            installerPackageName = null;
         }
-        if (isSamsungPackage && !PLAY_STORE_ERROR_RECEIVER_PACKAGE_NAME.equals(str2) && Settings.Global.getInt(context.getContentResolver(), "device_provisioned", 0) != 0 && (errorReportReceiver3 = getErrorReportReceiver(packageManager, str, SAMSUNG_MEMBERS_ERROR_RECEIVER_PACKAGE_NAME)) != null) {
+        if (zIsSamsungPackage && !PLAY_STORE_ERROR_RECEIVER_PACKAGE_NAME.equals(installerPackageName) && Settings.Global.getInt(context.getContentResolver(), "device_provisioned", 0) != 0 && (errorReportReceiver3 = getErrorReportReceiver(packageManager, str, SAMSUNG_MEMBERS_ERROR_RECEIVER_PACKAGE_NAME)) != null) {
             return errorReportReceiver3;
         }
         if (i2 == 0) {
             return null;
         }
-        return (str2 == null || (errorReportReceiver2 = getErrorReportReceiver(packageManager, str, str2)) == null) ? ((i & 1) == 0 || (errorReportReceiver = getErrorReportReceiver(packageManager, str, SystemProperties.get(SYSTEM_APPS_ERROR_RECEIVER_PROPERTY))) == null) ? getErrorReportReceiver(packageManager, str, SystemProperties.get(DEFAULT_ERROR_RECEIVER_PROPERTY)) : errorReportReceiver : errorReportReceiver2;
+        return (installerPackageName == null || (errorReportReceiver2 = getErrorReportReceiver(packageManager, str, installerPackageName)) == null) ? ((i & 1) == 0 || (errorReportReceiver = getErrorReportReceiver(packageManager, str, SystemProperties.get(SYSTEM_APPS_ERROR_RECEIVER_PROPERTY))) == null) ? getErrorReportReceiver(packageManager, str, SystemProperties.get(DEFAULT_ERROR_RECEIVER_PROPERTY)) : errorReportReceiver : errorReportReceiver2;
     }
 
     static ComponentName getErrorReportReceiver(PackageManager packageManager, String str, String str2) {
@@ -96,9 +96,9 @@ public class ApplicationErrorReport implements Parcelable {
         }
         Intent intent = new Intent(Intent.ACTION_APP_ERROR);
         intent.setPackage(str2);
-        ResolveInfo resolveActivity = packageManager.resolveActivity(intent, 0);
-        if (resolveActivity != null && resolveActivity.activityInfo != null) {
-            return new ComponentName(str2, resolveActivity.activityInfo.name);
+        ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(intent, 0);
+        if (resolveInfoResolveActivity != null && resolveInfoResolveActivity.activityInfo != null) {
+            return new ComponentName(str2, resolveInfoResolveActivity.activityInfo.name);
         }
         return null;
     }

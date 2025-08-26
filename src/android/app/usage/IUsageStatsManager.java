@@ -376,9 +376,9 @@ public interface IUsageStatsManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUsageStatsManager)) {
-                return (IUsageStatsManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUsageStatsManager)) {
+                return (IUsageStatsManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -492,267 +492,267 @@ public interface IUsageStatsManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    long readLong2 = parcel.readLong();
-                    String readString = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    long j = parcel.readLong();
+                    long j2 = parcel.readLong();
+                    String string = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice queryUsageStats = queryUsageStats(readInt, readLong, readLong2, readString, readInt2);
+                    ParceledListSlice parceledListSliceQueryUsageStats = queryUsageStats(i3, j, j2, string, i4);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryUsageStats, 1);
+                    parcel2.writeTypedObject(parceledListSliceQueryUsageStats, 1);
                     return true;
                 case 2:
-                    int readInt3 = parcel.readInt();
-                    long readLong3 = parcel.readLong();
-                    long readLong4 = parcel.readLong();
-                    String readString2 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    long j3 = parcel.readLong();
+                    long j4 = parcel.readLong();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice queryConfigurationStats = queryConfigurationStats(readInt3, readLong3, readLong4, readString2);
+                    ParceledListSlice parceledListSliceQueryConfigurationStats = queryConfigurationStats(i5, j3, j4, string2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryConfigurationStats, 1);
+                    parcel2.writeTypedObject(parceledListSliceQueryConfigurationStats, 1);
                     return true;
                 case 3:
-                    int readInt4 = parcel.readInt();
-                    long readLong5 = parcel.readLong();
-                    long readLong6 = parcel.readLong();
-                    String readString3 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    long j5 = parcel.readLong();
+                    long j6 = parcel.readLong();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice queryEventStats = queryEventStats(readInt4, readLong5, readLong6, readString3);
+                    ParceledListSlice parceledListSliceQueryEventStats = queryEventStats(i6, j5, j6, string3);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryEventStats, 1);
+                    parcel2.writeTypedObject(parceledListSliceQueryEventStats, 1);
                     return true;
                 case 4:
-                    long readLong7 = parcel.readLong();
-                    long readLong8 = parcel.readLong();
-                    String readString4 = parcel.readString();
+                    long j7 = parcel.readLong();
+                    long j8 = parcel.readLong();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    UsageEvents queryEvents = queryEvents(readLong7, readLong8, readString4);
+                    UsageEvents usageEventsQueryEvents = queryEvents(j7, j8, string4);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryEvents, 1);
+                    parcel2.writeTypedObject(usageEventsQueryEvents, 1);
                     return true;
                 case 5:
-                    long readLong9 = parcel.readLong();
-                    long readLong10 = parcel.readLong();
-                    String readString5 = parcel.readString();
+                    long j9 = parcel.readLong();
+                    long j10 = parcel.readLong();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    UsageEvents queryEventsForPackage = queryEventsForPackage(readLong9, readLong10, readString5);
+                    UsageEvents usageEventsQueryEventsForPackage = queryEventsForPackage(j9, j10, string5);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryEventsForPackage, 1);
+                    parcel2.writeTypedObject(usageEventsQueryEventsForPackage, 1);
                     return true;
                 case 6:
-                    long readLong11 = parcel.readLong();
-                    long readLong12 = parcel.readLong();
-                    int readInt5 = parcel.readInt();
-                    String readString6 = parcel.readString();
+                    long j11 = parcel.readLong();
+                    long j12 = parcel.readLong();
+                    int i7 = parcel.readInt();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    UsageEvents queryEventsForUser = queryEventsForUser(readLong11, readLong12, readInt5, readString6);
+                    UsageEvents usageEventsQueryEventsForUser = queryEventsForUser(j11, j12, i7, string6);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryEventsForUser, 1);
+                    parcel2.writeTypedObject(usageEventsQueryEventsForUser, 1);
                     return true;
                 case 7:
-                    long readLong13 = parcel.readLong();
-                    long readLong14 = parcel.readLong();
-                    int readInt6 = parcel.readInt();
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
+                    long j13 = parcel.readLong();
+                    long j14 = parcel.readLong();
+                    int i8 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    UsageEvents queryEventsForPackageForUser = queryEventsForPackageForUser(readLong13, readLong14, readInt6, readString7, readString8);
+                    UsageEvents usageEventsQueryEventsForPackageForUser = queryEventsForPackageForUser(j13, j14, i8, string7, string8);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryEventsForPackageForUser, 1);
+                    parcel2.writeTypedObject(usageEventsQueryEventsForPackageForUser, 1);
                     return true;
                 case 8:
                     UsageEventsQuery usageEventsQuery = (UsageEventsQuery) parcel.readTypedObject(UsageEventsQuery.CREATOR);
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    UsageEvents queryEventsWithFilter = queryEventsWithFilter(usageEventsQuery, readString9);
+                    UsageEvents usageEventsQueryEventsWithFilter = queryEventsWithFilter(usageEventsQuery, string9);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryEventsWithFilter, 1);
+                    parcel2.writeTypedObject(usageEventsQueryEventsWithFilter, 1);
                     return true;
                 case 9:
-                    String readString10 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt7 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAppInactive(readString10, readBoolean, readInt7);
+                    setAppInactive(string10, z, i9);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    boolean isAppStandbyEnabled = isAppStandbyEnabled();
+                    boolean zIsAppStandbyEnabled = isAppStandbyEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAppStandbyEnabled);
+                    parcel2.writeBoolean(zIsAppStandbyEnabled);
                     return true;
                 case 11:
-                    String readString11 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    String readString12 = parcel.readString();
+                    String string11 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isAppInactive = isAppInactive(readString11, readInt8, readString12);
+                    boolean zIsAppInactive = isAppInactive(string11, i10, string12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAppInactive);
+                    parcel2.writeBoolean(zIsAppInactive);
                     return true;
                 case 12:
                     onCarrierPrivilegedAppsChanged();
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    String readString13 = parcel.readString();
-                    int readInt9 = parcel.readInt();
-                    String readString14 = parcel.readString();
-                    String[] createStringArray = parcel.createStringArray();
-                    String readString15 = parcel.readString();
+                    String string13 = parcel.readString();
+                    int i11 = parcel.readInt();
+                    String string14 = parcel.readString();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    reportChooserSelection(readString13, readInt9, readString14, createStringArray, readString15);
+                    reportChooserSelection(string13, i11, string14, strArrCreateStringArray, string15);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int appStandbyBucket = getAppStandbyBucket(readString16, readString17, readInt10);
+                    int appStandbyBucket = getAppStandbyBucket(string16, string17, i12);
                     parcel2.writeNoException();
                     parcel2.writeInt(appStandbyBucket);
                     return true;
                 case 15:
-                    String readString18 = parcel.readString();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAppStandbyBucket(readString18, readInt11, readInt12);
+                    setAppStandbyBucket(string18, i13, i14);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    String readString19 = parcel.readString();
-                    int readInt13 = parcel.readInt();
+                    String string19 = parcel.readString();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice appStandbyBuckets = getAppStandbyBuckets(readString19, readInt13);
+                    ParceledListSlice appStandbyBuckets = getAppStandbyBuckets(string19, i15);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(appStandbyBuckets, 1);
                     return true;
                 case 17:
                     ParceledListSlice parceledListSlice = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAppStandbyBuckets(parceledListSlice, readInt14);
+                    setAppStandbyBuckets(parceledListSlice, i16);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    String readString20 = parcel.readString();
-                    String readString21 = parcel.readString();
-                    int readInt15 = parcel.readInt();
+                    String string20 = parcel.readString();
+                    String string21 = parcel.readString();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int appMinStandbyBucket = getAppMinStandbyBucket(readString20, readString21, readInt15);
+                    int appMinStandbyBucket = getAppMinStandbyBucket(string20, string21, i17);
                     parcel2.writeNoException();
                     parcel2.writeInt(appMinStandbyBucket);
                     return true;
                 case 19:
-                    String readString22 = parcel.readString();
-                    long readLong15 = parcel.readLong();
-                    int readInt16 = parcel.readInt();
+                    String string22 = parcel.readString();
+                    long j15 = parcel.readLong();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setEstimatedLaunchTime(readString22, readLong15, readInt16);
+                    setEstimatedLaunchTime(string22, j15, i18);
                     parcel2.writeNoException();
                     return true;
                 case 20:
                     ParceledListSlice parceledListSlice2 = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setEstimatedLaunchTimes(parceledListSlice2, readInt17);
+                    setEstimatedLaunchTimes(parceledListSlice2, i19);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    int readInt18 = parcel.readInt();
-                    String[] createStringArray2 = parcel.createStringArray();
-                    long readLong16 = parcel.readLong();
+                    int i20 = parcel.readInt();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
+                    long j16 = parcel.readLong();
                     PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    String readString23 = parcel.readString();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    registerAppUsageObserver(readInt18, createStringArray2, readLong16, pendingIntent, readString23);
+                    registerAppUsageObserver(i20, strArrCreateStringArray2, j16, pendingIntent, string23);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt19 = parcel.readInt();
-                    String readString24 = parcel.readString();
+                    int i21 = parcel.readInt();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unregisterAppUsageObserver(readInt19, readString24);
+                    unregisterAppUsageObserver(i21, string24);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    int readInt20 = parcel.readInt();
-                    String[] createStringArray3 = parcel.createStringArray();
-                    long readLong17 = parcel.readLong();
-                    long readLong18 = parcel.readLong();
+                    int i22 = parcel.readInt();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
+                    long j17 = parcel.readLong();
+                    long j18 = parcel.readLong();
                     PendingIntent pendingIntent2 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     PendingIntent pendingIntent3 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    String readString25 = parcel.readString();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    registerUsageSessionObserver(readInt20, createStringArray3, readLong17, readLong18, pendingIntent2, pendingIntent3, readString25);
+                    registerUsageSessionObserver(i22, strArrCreateStringArray3, j17, j18, pendingIntent2, pendingIntent3, string25);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    int readInt21 = parcel.readInt();
-                    String readString26 = parcel.readString();
+                    int i23 = parcel.readInt();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unregisterUsageSessionObserver(readInt21, readString26);
+                    unregisterUsageSessionObserver(i23, string26);
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    int readInt22 = parcel.readInt();
-                    String[] createStringArray4 = parcel.createStringArray();
-                    long readLong19 = parcel.readLong();
-                    long readLong20 = parcel.readLong();
+                    int i24 = parcel.readInt();
+                    String[] strArrCreateStringArray4 = parcel.createStringArray();
+                    long j19 = parcel.readLong();
+                    long j20 = parcel.readLong();
                     PendingIntent pendingIntent4 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    String readString27 = parcel.readString();
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    registerAppUsageLimitObserver(readInt22, createStringArray4, readLong19, readLong20, pendingIntent4, readString27);
+                    registerAppUsageLimitObserver(i24, strArrCreateStringArray4, j19, j20, pendingIntent4, string27);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    int readInt23 = parcel.readInt();
-                    String readString28 = parcel.readString();
+                    int i25 = parcel.readInt();
+                    String string28 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unregisterAppUsageLimitObserver(readInt23, readString28);
+                    unregisterAppUsageLimitObserver(i25, string28);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    String readString29 = parcel.readString();
-                    String readString30 = parcel.readString();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    String string29 = parcel.readString();
+                    String string30 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    reportUsageStart(readStrongBinder, readString29, readString30);
+                    reportUsageStart(strongBinder, string29, string30);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    String readString31 = parcel.readString();
-                    long readLong21 = parcel.readLong();
-                    String readString32 = parcel.readString();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    String string31 = parcel.readString();
+                    long j21 = parcel.readLong();
+                    String string32 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    reportPastUsageStart(readStrongBinder2, readString31, readLong21, readString32);
+                    reportPastUsageStart(strongBinder2, string31, j21, string32);
                     parcel2.writeNoException();
                     return true;
                 case 29:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    String readString33 = parcel.readString();
-                    String readString34 = parcel.readString();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
+                    String string33 = parcel.readString();
+                    String string34 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    reportUsageStop(readStrongBinder3, readString33, readString34);
+                    reportUsageStop(strongBinder3, string33, string34);
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    String readString35 = parcel.readString();
-                    int readInt24 = parcel.readInt();
+                    String string35 = parcel.readString();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportUserInteraction(readString35, readInt24);
+                    reportUserInteraction(string35, i26);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    String readString36 = parcel.readString();
-                    int readInt25 = parcel.readInt();
+                    String string36 = parcel.readString();
+                    int i27 = parcel.readInt();
                     PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    reportUserInteractionWithBundle(readString36, readInt25, persistableBundle);
+                    reportUserInteractionWithBundle(string36, i27, persistableBundle);
                     parcel2.writeNoException();
                     return true;
                 case 32:
@@ -765,71 +765,71 @@ public interface IUsageStatsManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    String readString37 = parcel.readString();
-                    String readString38 = parcel.readString();
+                    String string37 = parcel.readString();
+                    String string38 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long lastTimeAnyComponentUsed = getLastTimeAnyComponentUsed(readString37, readString38);
+                    long lastTimeAnyComponentUsed = getLastTimeAnyComponentUsed(string37, string38);
                     parcel2.writeNoException();
                     parcel2.writeLong(lastTimeAnyComponentUsed);
                     return true;
                 case 35:
-                    String readString39 = parcel.readString();
-                    long readLong22 = parcel.readLong();
-                    String readString40 = parcel.readString();
-                    int readInt26 = parcel.readInt();
+                    String string39 = parcel.readString();
+                    long j22 = parcel.readLong();
+                    String string40 = parcel.readString();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    BroadcastResponseStatsList queryBroadcastResponseStats = queryBroadcastResponseStats(readString39, readLong22, readString40, readInt26);
+                    BroadcastResponseStatsList broadcastResponseStatsListQueryBroadcastResponseStats = queryBroadcastResponseStats(string39, j22, string40, i28);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryBroadcastResponseStats, 1);
+                    parcel2.writeTypedObject(broadcastResponseStatsListQueryBroadcastResponseStats, 1);
                     return true;
                 case 36:
-                    String readString41 = parcel.readString();
-                    long readLong23 = parcel.readLong();
-                    String readString42 = parcel.readString();
-                    int readInt27 = parcel.readInt();
+                    String string41 = parcel.readString();
+                    long j23 = parcel.readLong();
+                    String string42 = parcel.readString();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearBroadcastResponseStats(readString41, readLong23, readString42, readInt27);
+                    clearBroadcastResponseStats(string41, j23, string42, i29);
                     parcel2.writeNoException();
                     return true;
                 case 37:
-                    String readString43 = parcel.readString();
-                    int readInt28 = parcel.readInt();
+                    String string43 = parcel.readString();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearBroadcastEvents(readString43, readInt28);
+                    clearBroadcastEvents(string43, i30);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    String readString44 = parcel.readString();
-                    int readInt29 = parcel.readInt();
+                    String string44 = parcel.readString();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPackageExemptedFromBroadcastResponseStats = isPackageExemptedFromBroadcastResponseStats(readString44, readInt29);
+                    boolean zIsPackageExemptedFromBroadcastResponseStats = isPackageExemptedFromBroadcastResponseStats(string44, i31);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPackageExemptedFromBroadcastResponseStats);
+                    parcel2.writeBoolean(zIsPackageExemptedFromBroadcastResponseStats);
                     return true;
                 case 39:
-                    String readString45 = parcel.readString();
+                    String string45 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String appStandbyConstant = getAppStandbyConstant(readString45);
+                    String appStandbyConstant = getAppStandbyConstant(string45);
                     parcel2.writeNoException();
                     parcel2.writeString(appStandbyConstant);
                     return true;
                 case 40:
-                    IUsageStatsWatcher asInterface = IUsageStatsWatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IUsageStatsWatcher iUsageStatsWatcherAsInterface = IUsageStatsWatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerUsageStatsWatcher(asInterface);
+                    registerUsageStatsWatcher(iUsageStatsWatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    IUsageStatsWatcher asInterface2 = IUsageStatsWatcher.Stub.asInterface(parcel.readStrongBinder());
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(ComponentName.CREATOR);
+                    IUsageStatsWatcher iUsageStatsWatcherAsInterface2 = IUsageStatsWatcher.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    registerUsageStatsWatcherWithComponent(asInterface2, createTypedArrayList);
+                    registerUsageStatsWatcherWithComponent(iUsageStatsWatcherAsInterface2, arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    IUsageStatsWatcher asInterface3 = IUsageStatsWatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IUsageStatsWatcher iUsageStatsWatcherAsInterface3 = IUsageStatsWatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterUsageStatsWatcher(asInterface3);
+                    unregisterUsageStatsWatcher(iUsageStatsWatcherAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 43:
@@ -859,738 +859,738 @@ public interface IUsageStatsManager extends IInterface {
 
             @Override // android.app.usage.IUsageStatsManager
             public ParceledListSlice queryUsageStats(int i, long j, long j2, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public ParceledListSlice queryConfigurationStats(int i, long j, long j2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public ParceledListSlice queryEventStats(int i, long j, long j2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public UsageEvents queryEvents(long j, long j2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UsageEvents) obtain2.readTypedObject(UsageEvents.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UsageEvents) parcelObtain2.readTypedObject(UsageEvents.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public UsageEvents queryEventsForPackage(long j, long j2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UsageEvents) obtain2.readTypedObject(UsageEvents.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UsageEvents) parcelObtain2.readTypedObject(UsageEvents.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public UsageEvents queryEventsForUser(long j, long j2, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UsageEvents) obtain2.readTypedObject(UsageEvents.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UsageEvents) parcelObtain2.readTypedObject(UsageEvents.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public UsageEvents queryEventsForPackageForUser(long j, long j2, int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UsageEvents) obtain2.readTypedObject(UsageEvents.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UsageEvents) parcelObtain2.readTypedObject(UsageEvents.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public UsageEvents queryEventsWithFilter(UsageEventsQuery usageEventsQuery, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(usageEventsQuery, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (UsageEvents) obtain2.readTypedObject(UsageEvents.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(usageEventsQuery, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (UsageEvents) parcelObtain2.readTypedObject(UsageEvents.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void setAppInactive(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public boolean isAppStandbyEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public boolean isAppInactive(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void onCarrierPrivilegedAppsChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void reportChooserSelection(String str, int i, String str2, String[] strArr, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public int getAppStandbyBucket(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void setAppStandbyBucket(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public ParceledListSlice getAppStandbyBuckets(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void setAppStandbyBuckets(ParceledListSlice parceledListSlice, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public int getAppMinStandbyBucket(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void setEstimatedLaunchTime(String str, long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void setEstimatedLaunchTimes(ParceledListSlice parceledListSlice, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void registerAppUsageObserver(int i, String[] strArr, long j, PendingIntent pendingIntent, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void unregisterAppUsageObserver(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void registerUsageSessionObserver(int i, String[] strArr, long j, long j2, PendingIntent pendingIntent, PendingIntent pendingIntent2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeTypedObject(pendingIntent2, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeTypedObject(pendingIntent2, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void unregisterUsageSessionObserver(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void registerAppUsageLimitObserver(int i, String[] strArr, long j, long j2, PendingIntent pendingIntent, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void unregisterAppUsageLimitObserver(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void reportUsageStart(IBinder iBinder, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void reportPastUsageStart(IBinder iBinder, String str, long j, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void reportUsageStop(IBinder iBinder, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void reportUserInteraction(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void reportUserInteractionWithBundle(String str, int i, PersistableBundle persistableBundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public int getUsageSource() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void forceUsageSourceSettingRead() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public long getLastTimeAnyComponentUsed(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public BroadcastResponseStatsList queryBroadcastResponseStats(String str, long j, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (BroadcastResponseStatsList) obtain2.readTypedObject(BroadcastResponseStatsList.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (BroadcastResponseStatsList) parcelObtain2.readTypedObject(BroadcastResponseStatsList.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void clearBroadcastResponseStats(String str, long j, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void clearBroadcastEvents(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public boolean isPackageExemptedFromBroadcastResponseStats(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public String getAppStandbyConstant(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void registerUsageStatsWatcher(IUsageStatsWatcher iUsageStatsWatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iUsageStatsWatcher);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUsageStatsWatcher);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void registerUsageStatsWatcherWithComponent(IUsageStatsWatcher iUsageStatsWatcher, List<ComponentName> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iUsageStatsWatcher);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUsageStatsWatcher);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void unregisterUsageStatsWatcher(IUsageStatsWatcher iUsageStatsWatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iUsageStatsWatcher);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUsageStatsWatcher);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IUsageStatsManager
             public void deleteUsageStats() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

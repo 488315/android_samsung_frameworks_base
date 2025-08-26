@@ -4,14 +4,12 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InputMethodModel {
     public final String imeId;
     public final List subtypes;
     public final int userId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Subtype {
         public final boolean isAuxiliary;
         public final int subtypeId;

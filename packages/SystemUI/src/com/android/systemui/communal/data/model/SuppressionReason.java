@@ -3,11 +3,9 @@ package com.android.systemui.communal.data.model;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface SuppressionReason {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReasonDevicePolicy implements SuppressionReason {
         public static final ReasonDevicePolicy INSTANCE = new ReasonDevicePolicy();
         public static final int suppressedFeatures = 7;
@@ -33,7 +31,6 @@ public interface SuppressionReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReasonFlagDisabled implements SuppressionReason {
         public static final ReasonFlagDisabled INSTANCE = new ReasonFlagDisabled();
         public static final int suppressedFeatures = 7;
@@ -59,7 +56,6 @@ public interface SuppressionReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReasonSecondaryUser implements SuppressionReason {
         public static final ReasonSecondaryUser INSTANCE = new ReasonSecondaryUser();
         public static final int suppressedFeatures = 7;
@@ -85,7 +81,6 @@ public interface SuppressionReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReasonSettingDisabled implements SuppressionReason {
         public static final ReasonSettingDisabled INSTANCE = new ReasonSettingDisabled();
         public static final int suppressedFeatures = 7;
@@ -111,7 +106,6 @@ public interface SuppressionReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReasonUnknown implements SuppressionReason {
         public final int suppressedFeatures;
 
@@ -148,7 +142,6 @@ public interface SuppressionReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReasonUserLocked implements SuppressionReason {
         public static final ReasonUserLocked INSTANCE = new ReasonUserLocked();
         public static final int suppressedFeatures = 7;
@@ -174,7 +167,6 @@ public interface SuppressionReason {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReasonWhenToAutoShow implements SuppressionReason {
         public final int suppressedFeatures;
 

@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.android.systemui.R;
 import com.android.wm.shell.common.HandlerExecutor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UserAspectRatioSettingsLayout extends LinearLayout {
     public static final Interpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
@@ -61,15 +60,15 @@ public class UserAspectRatioSettingsLayout extends LinearLayout {
         imageButton.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.wm.shell.compatui.UserAspectRatioSettingsLayout$$ExternalSyntheticLambda1
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
-                UserAspectRatioSettingsWindowManager userAspectRatioSettingsWindowManager = UserAspectRatioSettingsLayout.this.mWindowManager;
+                UserAspectRatioSettingsWindowManager userAspectRatioSettingsWindowManager = this.f$0.mWindowManager;
                 UserAspectRatioSettingsLayout userAspectRatioSettingsLayout = userAspectRatioSettingsWindowManager.mLayout;
                 if (userAspectRatioSettingsLayout == null) {
                     return true;
                 }
                 userAspectRatioSettingsLayout.setViewVisibility(R.id.user_aspect_ratio_settings_hint, true);
-                long intValue = ((Integer) userAspectRatioSettingsWindowManager.mDisappearTimeSupplier.apply(4)).intValue();
-                userAspectRatioSettingsWindowManager.mNextButtonHideTimeMs = SystemClock.uptimeMillis() + intValue;
-                ((HandlerExecutor) userAspectRatioSettingsWindowManager.mShellExecutor).executeDelayed(new UserAspectRatioSettingsWindowManager$$ExternalSyntheticLambda0(userAspectRatioSettingsWindowManager, 1), intValue);
+                long jIntValue = ((Integer) userAspectRatioSettingsWindowManager.mDisappearTimeSupplier.apply(4)).intValue();
+                userAspectRatioSettingsWindowManager.mNextButtonHideTimeMs = SystemClock.uptimeMillis() + jIntValue;
+                ((HandlerExecutor) userAspectRatioSettingsWindowManager.mShellExecutor).executeDelayed(new UserAspectRatioSettingsWindowManager$$ExternalSyntheticLambda0(userAspectRatioSettingsWindowManager, 1), jIntValue);
                 return true;
             }
         });
@@ -115,42 +114,42 @@ public class UserAspectRatioSettingsLayout extends LinearLayout {
     }
 
     public final void setViewVisibility(int i, boolean z) {
-        final View findViewById = findViewById(i);
-        if (findViewById.getVisibility() == (z ? 0 : 8)) {
+        final View viewFindViewById = findViewById(i);
+        if (viewFindViewById.getVisibility() == (z ? 0 : 8)) {
             return;
         }
         if (!z) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(findViewById, "alpha", 1.0f, 0.0f);
-            ofFloat.setDuration(167L);
-            ofFloat.setInterpolator(LINEAR_INTERPOLATOR);
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.compatui.UserAspectRatioSettingsLayout.2
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(viewFindViewById, "alpha", 1.0f, 0.0f);
+            objectAnimatorOfFloat.setDuration(167L);
+            objectAnimatorOfFloat.setInterpolator(LINEAR_INTERPOLATOR);
+            objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.compatui.UserAspectRatioSettingsLayout.2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    findViewById.setVisibility(8);
+                    viewFindViewById.setVisibility(8);
                     UserAspectRatioSettingsLayout.this.mWindowManager.release();
                 }
             });
-            ofFloat.start();
+            objectAnimatorOfFloat.start();
             return;
         }
         AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(findViewById, "alpha", 0.0f, 1.0f);
-        ofFloat2.setDuration(167L);
-        ofFloat2.setInterpolator(LINEAR_INTERPOLATOR);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(findViewById, "scaleY", 0.8f, 1.0f);
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(findViewById, "scaleX", 0.8f, 1.0f);
-        ofFloat4.setDuration(300L);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(viewFindViewById, "alpha", 0.0f, 1.0f);
+        objectAnimatorOfFloat2.setDuration(167L);
+        objectAnimatorOfFloat2.setInterpolator(LINEAR_INTERPOLATOR);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(viewFindViewById, "scaleY", 0.8f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(viewFindViewById, "scaleX", 0.8f, 1.0f);
+        objectAnimatorOfFloat4.setDuration(300L);
         Interpolator interpolator = PATH_INTERPOLATOR;
-        ofFloat4.setInterpolator(interpolator);
-        ofFloat3.setDuration(300L);
-        ofFloat3.setInterpolator(interpolator);
+        objectAnimatorOfFloat4.setInterpolator(interpolator);
+        objectAnimatorOfFloat3.setDuration(300L);
+        objectAnimatorOfFloat3.setInterpolator(interpolator);
         animatorSet.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.wm.shell.compatui.UserAspectRatioSettingsLayout.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator) {
-                findViewById.setVisibility(0);
+                viewFindViewById.setVisibility(0);
             }
         });
-        animatorSet.playTogether(ofFloat2, ofFloat3, ofFloat4);
+        animatorSet.playTogether(objectAnimatorOfFloat2, objectAnimatorOfFloat3, objectAnimatorOfFloat4);
         animatorSet.start();
     }
 

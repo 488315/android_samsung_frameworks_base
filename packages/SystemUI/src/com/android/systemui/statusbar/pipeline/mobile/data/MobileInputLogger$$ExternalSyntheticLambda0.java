@@ -11,14 +11,13 @@ import com.android.keyguard.logging.BiometricMessageDeferralLogger$$ExternalSynt
 import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class MobileInputLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -31,9 +30,9 @@ public final /* synthetic */ class MobileInputLogger$$ExternalSyntheticLambda0 i
                 int int1 = logMessage.getInt1();
                 String str1 = logMessage.getStr1();
                 boolean bool1 = logMessage.getBool1();
-                StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int1, "onDisplayInfoChanged: subId=", " displayInfo=", str1, " isRoaming=");
-                m.append(bool1);
-                return m.toString();
+                StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int1, "onDisplayInfoChanged: subId=", " displayInfo=", str1, " isRoaming=");
+                sbM.append(bool1);
+                return sbM.toString();
             case 4:
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("defaultMobileIconGroup: ", logMessage.getStr1());
             case 5:
@@ -68,9 +67,9 @@ public final /* synthetic */ class MobileInputLogger$$ExternalSyntheticLambda0 i
                 int int12 = logMessage.getInt1();
                 String str12 = logMessage.getStr1();
                 String str2 = logMessage.getStr2();
-                StringBuilder m2 = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int12, "OnSemSatelliteServiceStateChanged: subId=", " radioState=", str12, " regiState=");
-                m2.append(str2);
-                return m2.toString();
+                StringBuilder sbM2 = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int12, "OnSemSatelliteServiceStateChanged: subId=", " radioState=", str12, " regiState=");
+                sbM2.append(str2);
+                return sbM2.toString();
             case 20:
                 return ListImplementation$$ExternalSyntheticOutline0.m(logMessage.getInt1(), logMessage.getInt2(), "onCallStateChanged: subId=", " callState=");
             case 21:
@@ -81,14 +80,14 @@ public final /* synthetic */ class MobileInputLogger$$ExternalSyntheticLambda0 i
                 boolean bool4 = logMessage.getBool4();
                 String str13 = logMessage.getStr1();
                 int int2 = logMessage.getInt2();
-                StringBuilder m3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("onServiceStateChanged: subId=", int13, " connected=", bool12, " emergencyOnly=");
-                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m3, bool2, " roaming=", bool3, " isNTN=");
-                m3.append(bool4);
-                m3.append(" operator=");
-                m3.append(str13);
-                m3.append(" voiceNetworkType=");
-                m3.append(int2);
-                return m3.toString();
+                StringBuilder sbM3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("onServiceStateChanged: subId=", int13, " connected=", bool12, " emergencyOnly=");
+                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM3, bool2, " roaming=", bool3, " isNTN=");
+                sbM3.append(bool4);
+                sbM3.append(" operator=");
+                sbM3.append(str13);
+                sbM3.append(" voiceNetworkType=");
+                sbM3.append(int2);
+                return sbM3.toString();
             case 22:
                 return "onCarrierNetworkChange: subId=" + logMessage.getInt1() + " active=" + logMessage.getBool1();
             case 23:
@@ -101,16 +100,16 @@ public final /* synthetic */ class MobileInputLogger$$ExternalSyntheticLambda0 i
                 int int14 = logMessage.getInt1();
                 int int22 = logMessage.getInt2();
                 String str14 = logMessage.getStr1();
-                StringBuilder m4 = MutableObjectList$$ExternalSyntheticOutline0.m(int14, int22, "onDataConnectionStateChanged: subId=", " dataState=", " networkType=");
-                m4.append(str14);
-                return m4.toString();
+                StringBuilder sbM4 = MutableObjectList$$ExternalSyntheticOutline0.m(int14, int22, "onDataConnectionStateChanged: subId=", " dataState=", " networkType=");
+                sbM4.append(str14);
+                return sbM4.toString();
             case 27:
                 int int15 = logMessage.getInt1();
                 String str15 = logMessage.getStr1();
                 int int23 = logMessage.getInt2();
-                StringBuilder m5 = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int15, "onSignalStrengthsChanged: subId=", " strengths=", str15, " primaryLevel=");
-                m5.append(int23);
-                return m5.toString();
+                StringBuilder sbM5 = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int15, "onSignalStrengthsChanged: subId=", " strengths=", str15, " primaryLevel=");
+                sbM5.append(int23);
+                return sbM5.toString();
             default:
                 return "Intent received: com.samsung.intent.action.OMC_CHANGED";
         }

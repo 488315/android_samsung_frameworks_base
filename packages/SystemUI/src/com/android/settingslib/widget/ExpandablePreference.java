@@ -13,14 +13,12 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.ranges.IntProgressionIterator;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ExpandablePreference extends PreferenceGroup {
     public ImageView expandIcon;
     public boolean isDirty;
     public boolean isExpanded;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -52,7 +50,7 @@ public final class ExpandablePreference extends PreferenceGroup {
         preferenceViewHolder.mDividerAllowedBelow = false;
         this.expandIcon = (ImageView) preferenceViewHolder.findViewById(R.id.expand_icon);
         updateExpandedState();
-        preferenceViewHolder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.widget.ExpandablePreference$onBindViewHolder$1
+        preferenceViewHolder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.widget.ExpandablePreference.onBindViewHolder.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 ExpandablePreference expandablePreference = ExpandablePreference.this;

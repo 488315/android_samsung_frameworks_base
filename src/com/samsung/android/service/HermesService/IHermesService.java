@@ -165,9 +165,9 @@ public interface IHermesService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IHermesService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IHermesService)) {
-                return (IHermesService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IHermesService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IHermesService)) {
+                return (IHermesService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -227,94 +227,94 @@ public interface IHermesService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    byte[] hermesSelftest = hermesSelftest();
+                    byte[] bArrHermesSelftest = hermesSelftest();
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(hermesSelftest);
+                    parcel2.writeByteArray(bArrHermesSelftest);
                     return true;
                 case 2:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    byte[] hermesSelftest2 = hermesSelftest2(readString);
+                    byte[] bArrHermesSelftest2 = hermesSelftest2(string);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(hermesSelftest2);
+                    parcel2.writeByteArray(bArrHermesSelftest2);
                     return true;
                 case 3:
-                    int hermesProvisioning = hermesProvisioning();
+                    int iHermesProvisioning = hermesProvisioning();
                     parcel2.writeNoException();
-                    parcel2.writeInt(hermesProvisioning);
+                    parcel2.writeInt(iHermesProvisioning);
                     return true;
                 case 4:
-                    int hermesVerifyProvisioning = hermesVerifyProvisioning();
+                    int iHermesVerifyProvisioning = hermesVerifyProvisioning();
                     parcel2.writeNoException();
-                    parcel2.writeInt(hermesVerifyProvisioning);
+                    parcel2.writeInt(iHermesVerifyProvisioning);
                     return true;
                 case 5:
-                    byte[] hermesGetSecureHWInfo = hermesGetSecureHWInfo();
+                    byte[] bArrHermesGetSecureHWInfo = hermesGetSecureHWInfo();
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(hermesGetSecureHWInfo);
+                    parcel2.writeByteArray(bArrHermesGetSecureHWInfo);
                     return true;
                 case 6:
-                    int hermesTerminateService = hermesTerminateService();
+                    int iHermesTerminateService = hermesTerminateService();
                     parcel2.writeNoException();
-                    parcel2.writeInt(hermesTerminateService);
+                    parcel2.writeInt(iHermesTerminateService);
                     return true;
                 case 7:
-                    byte[] hermesUpdateCryptoFW = hermesUpdateCryptoFW();
+                    byte[] bArrHermesUpdateCryptoFW = hermesUpdateCryptoFW();
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(hermesUpdateCryptoFW);
+                    parcel2.writeByteArray(bArrHermesUpdateCryptoFW);
                     return true;
                 case 8:
-                    byte[] hermesUpdateApplet = hermesUpdateApplet();
+                    byte[] bArrHermesUpdateApplet = hermesUpdateApplet();
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(hermesUpdateApplet);
+                    parcel2.writeByteArray(bArrHermesUpdateApplet);
                     return true;
                 case 9:
-                    int hermesSecureHwPowerOn = hermesSecureHwPowerOn();
+                    int iHermesSecureHwPowerOn = hermesSecureHwPowerOn();
                     parcel2.writeNoException();
-                    parcel2.writeInt(hermesSecureHwPowerOn);
+                    parcel2.writeInt(iHermesSecureHwPowerOn);
                     return true;
                 case 10:
-                    int hermesSecureHwPowerOff = hermesSecureHwPowerOff();
+                    int iHermesSecureHwPowerOff = hermesSecureHwPowerOff();
                     parcel2.writeNoException();
-                    parcel2.writeInt(hermesSecureHwPowerOff);
+                    parcel2.writeInt(iHermesSecureHwPowerOff);
                     return true;
                 case 11:
-                    byte[] createByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] hermesSendApdu = hermesSendApdu(createByteArray);
+                    byte[] bArrHermesSendApdu = hermesSendApdu(bArrCreateByteArray);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(hermesSendApdu);
+                    parcel2.writeByteArray(bArrHermesSendApdu);
                     return true;
                 case 12:
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] hermesCosPatchTest = hermesCosPatchTest(createByteArray2);
+                    byte[] bArrHermesCosPatchTest = hermesCosPatchTest(bArrCreateByteArray2);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(hermesCosPatchTest);
+                    parcel2.writeByteArray(bArrHermesCosPatchTest);
                     return true;
                 case 13:
-                    byte[] hermesGetSeId = hermesGetSeId();
+                    byte[] bArrHermesGetSeId = hermesGetSeId();
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(hermesGetSeId);
+                    parcel2.writeByteArray(bArrHermesGetSeId);
                     return true;
                 case 14:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    byte[] hermesCosUnitTest = hermesCosUnitTest(readString2);
+                    byte[] bArrHermesCosUnitTest = hermesCosUnitTest(string2);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(hermesCosUnitTest);
+                    parcel2.writeByteArray(bArrHermesCosUnitTest);
                     return true;
                 case 15:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int failureCount = getFailureCount(readInt);
+                    int failureCount = getFailureCount(i3);
                     parcel2.writeNoException();
                     parcel2.writeInt(failureCount);
                     return true;
                 case 16:
-                    byte[] hermesGetAppletVersion = hermesGetAppletVersion();
+                    byte[] bArrHermesGetAppletVersion = hermesGetAppletVersion();
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(hermesGetAppletVersion);
+                    parcel2.writeByteArray(bArrHermesGetAppletVersion);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -339,246 +339,246 @@ public interface IHermesService extends IInterface {
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public byte[] hermesSelftest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public byte[] hermesSelftest2(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public int hermesProvisioning() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public int hermesVerifyProvisioning() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public byte[] hermesGetSecureHWInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public int hermesTerminateService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public byte[] hermesUpdateCryptoFW() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public byte[] hermesUpdateApplet() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public int hermesSecureHwPowerOn() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public int hermesSecureHwPowerOff() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public byte[] hermesSendApdu(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public byte[] hermesCosPatchTest(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public byte[] hermesGetSeId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public byte[] hermesCosUnitTest(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public int getFailureCount(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.HermesService.IHermesService
             public byte[] hermesGetAppletVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IHermesService.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

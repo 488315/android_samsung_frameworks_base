@@ -1,6 +1,7 @@
 package com.android.systemui.qs;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.AttributeSet;
@@ -19,13 +20,14 @@ import com.android.systemui.shade.LargeScreenHeaderHelper;
 import com.android.systemui.shade.SecPanelSplitHelper;
 import com.android.systemui.shade.ShadeHeaderController;
 import com.android.systemui.shade.TouchLogger;
+import com.android.systemui.shade.data.repository.ShadeRepository;
+import com.android.systemui.shade.data.repository.ShadeRepositoryImpl;
 import com.android.systemui.util.LargeScreenUtils;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import com.android.systemui.util.ViewUtil;
 import java.io.PrintWriter;
 import kotlin.Lazy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSContainerImpl extends FrameLayout implements Dumpable {
     public boolean mClippingEnabled;
@@ -59,84 +61,48 @@ public class QSContainerImpl extends FrameLayout implements Dumpable {
         this.mSecQSContainerImpl = new SecQSContainerImpl(path);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x004a  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0047  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x004a  */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void dispatchDraw(android.graphics.Canvas r7) {
-        /*
-            r6 = this;
-            com.android.systemui.qs.SecQSContainerImpl r0 = r6.mSecQSContainerImpl
-            r1 = 0
-            if (r0 == 0) goto L57
-            float r2 = r6.mQsExpansion
-            int r2 = (r2 > r1 ? 1 : (r2 == r1 ? 0 : -1))
-            if (r2 != 0) goto Ld
-            r2 = 1
-            goto Le
-        Ld:
-            r2 = 0
-        Le:
-            float r3 = r6.getTranslationY()
-            android.graphics.Path r4 = r0.fancyClippingPath
-            boolean r4 = r4.isEmpty()
-            if (r4 != 0) goto L47
-            boolean r5 = r0.keyguardShowing
-            if (r5 != 0) goto L47
-            if (r2 == 0) goto L47
-            kotlin.Lazy r2 = r0.shadeRepository$delegate
-            java.lang.Object r2 = r2.getValue()
-            com.android.systemui.shade.data.repository.ShadeRepository r2 = (com.android.systemui.shade.data.repository.ShadeRepository) r2
-            com.android.systemui.shade.data.repository.ShadeRepositoryImpl r2 = (com.android.systemui.shade.data.repository.ShadeRepositoryImpl) r2
-            kotlinx.coroutines.flow.ReadonlyStateFlow r2 = r2.legacyExpandImmediate
-            kotlinx.coroutines.flow.StateFlow r2 = r2.$$delegate_0
-            java.lang.Object r2 = r2.getValue()
-            java.lang.Boolean r2 = (java.lang.Boolean) r2
-            boolean r2 = r2.booleanValue()
-            if (r2 != 0) goto L47
-            com.android.systemui.shade.SecPanelSplitHelper$Companion r2 = com.android.systemui.shade.SecPanelSplitHelper.Companion
-            r2.getClass()
-            boolean r2 = com.android.systemui.shade.SecPanelSplitHelper.isEnabled
-            if (r2 != 0) goto L47
-            if (r4 != 0) goto L47
-            r2 = r7
-            goto L48
-        L47:
-            r2 = 0
-        L48:
-            if (r2 == 0) goto L73
-            float r4 = -r3
-            r2.translate(r1, r4)
-            android.graphics.Path r0 = r0.fancyClippingPath
-            r2.clipPath(r0)
-            r2.translate(r1, r3)
-            goto L73
-        L57:
-            android.graphics.Path r0 = r6.mFancyClippingPath
-            boolean r0 = r0.isEmpty()
-            if (r0 != 0) goto L73
-            float r0 = r6.getTranslationY()
-            float r0 = -r0
-            r7.translate(r1, r0)
-            android.graphics.Path r0 = r6.mFancyClippingPath
-            r7.clipOutPath(r0)
-            float r0 = r6.getTranslationY()
-            r7.translate(r1, r0)
-        L73:
-            super.dispatchDraw(r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.QSContainerImpl.dispatchDraw(android.graphics.Canvas):void");
+    public final void dispatchDraw(Canvas canvas) {
+        Canvas canvas2;
+        SecQSContainerImpl secQSContainerImpl = this.mSecQSContainerImpl;
+        if (secQSContainerImpl != null) {
+            boolean z = this.mQsExpansion == 0.0f;
+            float translationY = getTranslationY();
+            boolean zIsEmpty = secQSContainerImpl.fancyClippingPath.isEmpty();
+            if (zIsEmpty || secQSContainerImpl.keyguardShowing || !z || ((Boolean) ((ShadeRepositoryImpl) ((ShadeRepository) secQSContainerImpl.shadeRepository$delegate.getValue())).legacyExpandImmediate.$$delegate_0.getValue()).booleanValue()) {
+                canvas2 = null;
+                if (canvas2 != null) {
+                    canvas2.translate(0.0f, -translationY);
+                    canvas2.clipPath(secQSContainerImpl.fancyClippingPath);
+                    canvas2.translate(0.0f, translationY);
+                }
+            } else {
+                SecPanelSplitHelper.Companion.getClass();
+                if (!SecPanelSplitHelper.isEnabled && !zIsEmpty) {
+                    canvas2 = canvas;
+                }
+                if (canvas2 != null) {
+                }
+            }
+        } else if (!this.mFancyClippingPath.isEmpty()) {
+            canvas.translate(0.0f, -getTranslationY());
+            canvas.clipOutPath(this.mFancyClippingPath);
+            canvas.translate(0.0f, getTranslationY());
+        }
+        super.dispatchDraw(canvas);
     }
 
     @Override // android.view.ViewGroup, android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         TouchLogger.Companion.getClass();
-        TouchLogger.Companion.logDispatchTouch(motionEvent, QS.TAG, dispatchTouchEvent);
-        return dispatchTouchEvent;
+        TouchLogger.Companion.logDispatchTouch(motionEvent, QS.TAG, zDispatchTouchEvent);
+        return zDispatchTouchEvent;
     }
 
     @Override // com.android.systemui.Dumpable

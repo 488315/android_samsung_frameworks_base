@@ -125,15 +125,15 @@ public class UniImgp {
         }
 
         public Option setPluginOrder(ImgpPlugin.Type... typeArr) {
-            Map hashMap = contains(2002) ? (Map) get(2002) : new HashMap();
-            hashMap.put(ImgpType.ANY, Arrays.asList(typeArr));
-            return (Option) set(2002, hashMap);
+            Map map = contains(2002) ? (Map) get(2002) : new HashMap();
+            map.put(ImgpType.ANY, Arrays.asList(typeArr));
+            return (Option) set(2002, map);
         }
 
         public Option setPluginOrder(ImgpType imgpType, ImgpPlugin.Type... typeArr) {
-            Map hashMap = contains(2002) ? (Map) get(2002) : new HashMap();
-            hashMap.put(imgpType, Arrays.asList(typeArr));
-            return (Option) set(2002, hashMap);
+            Map map = contains(2002) ? (Map) get(2002) : new HashMap();
+            map.put(imgpType, Arrays.asList(typeArr));
+            return (Option) set(2002, map);
         }
 
         public Map<ImgpType, List<ImgpPlugin.Type>> getPluginOrderMap() {

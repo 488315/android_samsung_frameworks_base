@@ -11,7 +11,6 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import com.android.systemui.R;
 import com.google.android.material.animation.AnimationUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialBottomContainerBackHelper extends MaterialBackAnimationHelper {
     public final float maxScaleXDistance;
@@ -47,18 +46,18 @@ public class MaterialBottomContainerBackHelper extends MaterialBackAnimationHelp
         }
         float f2 = this.maxScaleXDistance / width;
         float f3 = this.maxScaleYDistance / height;
-        float lerp = 1.0f - AnimationUtils.lerp(0.0f, f2, interpolation);
-        float lerp2 = 1.0f - AnimationUtils.lerp(0.0f, f3, interpolation);
-        this.view.setScaleX(lerp);
+        float fLerp = 1.0f - AnimationUtils.lerp(0.0f, f2, interpolation);
+        float fLerp2 = 1.0f - AnimationUtils.lerp(0.0f, f3, interpolation);
+        this.view.setScaleX(fLerp);
         this.view.setPivotY(height);
-        this.view.setScaleY(lerp2);
+        this.view.setScaleY(fLerp2);
         View view = this.view;
         if (view instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) view;
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
                 View childAt = viewGroup.getChildAt(i);
                 childAt.setPivotY(-childAt.getTop());
-                childAt.setScaleY(lerp2 != 0.0f ? lerp / lerp2 : 1.0f);
+                childAt.setScaleY(fLerp2 != 0.0f ? fLerp / fLerp2 : 1.0f);
             }
         }
     }

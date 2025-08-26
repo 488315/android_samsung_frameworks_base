@@ -13,7 +13,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SemBlurCompat {
     public static final SemBlurCompat INSTANCE = new SemBlurCompat();
@@ -22,24 +21,24 @@ public final class SemBlurCompat {
     }
 
     public static final boolean setBlurEffectPreset(View view, int i, Integer num, Float f) {
-        Constructor<?> constructor;
+        Constructor<?> declaredConstructor;
         Context context = view.getContext();
         INSTANCE.getClass();
         if (!(Settings.System.getString(context.getContentResolver(), SettingsHelper.INDEX_CURRENT_SEC_ACTIVE_THEMEPACKAGE) != null)) {
             Method declaredMethod = SeslBaseReflector.getDeclaredMethod(SeslSettingsReflector$SeslSystemReflector.mClass, "hidden_SEM_ACCESSIBILITY_REDUCE_TRANSPARENCY", new Class[0]);
-            Object obj = null;
-            Object invoke = declaredMethod != null ? SeslBaseReflector.invoke(null, declaredMethod, new Object[0]) : null;
-            String str = invoke instanceof String ? (String) invoke : "not_supported";
+            Object objNewInstance = null;
+            Object objInvoke = declaredMethod != null ? SeslBaseReflector.invoke(null, declaredMethod, new Object[0]) : null;
+            String str = objInvoke instanceof String ? (String) objInvoke : "not_supported";
             if (Intrinsics.areEqual(str, "not_supported") || Settings.System.getInt(context.getContentResolver(), str, 0) != 1) {
                 try {
-                    constructor = Class.forName("android.view.SemBlurInfo$Builder").getDeclaredConstructor(Integer.TYPE);
+                    declaredConstructor = Class.forName("android.view.SemBlurInfo$Builder").getDeclaredConstructor(Integer.TYPE);
                 } catch (ClassNotFoundException | NoSuchMethodException e) {
                     Log.e("SeslBaseReflector", "failed to get reflection - " + e);
-                    constructor = null;
+                    declaredConstructor = null;
                 }
-                if (constructor != null) {
+                if (declaredConstructor != null) {
                     try {
-                        obj = constructor.newInstance(0);
+                        objNewInstance = declaredConstructor.newInstance(0);
                     } catch (IllegalAccessException e2) {
                         Log.e("SeslSemBlurInfoRftr", "semCreateBlurBuilder IllegalAccessException", e2);
                     } catch (InstantiationException e3) {
@@ -48,36 +47,36 @@ public final class SemBlurCompat {
                         Log.e("SeslSemBlurInfoRftr", "semCreateBlurBuilder InvocationTargetException", e4);
                     }
                 }
-                if (obj != null) {
+                if (objNewInstance != null) {
                     Class cls = Integer.TYPE;
                     Method declaredMethod2 = SeslBaseReflector.getDeclaredMethod("android.view.SemBlurInfo$Builder", "setColorCurvePreset", cls);
                     if (declaredMethod2 != null) {
                         declaredMethod2.setAccessible(true);
-                        SeslBaseReflector.invoke(obj, declaredMethod2, Integer.valueOf(i));
+                        SeslBaseReflector.invoke(objNewInstance, declaredMethod2, Integer.valueOf(i));
                     }
                     if (num != null) {
-                        int intValue = num.intValue();
+                        int iIntValue = num.intValue();
                         Method declaredMethod3 = SeslBaseReflector.getDeclaredMethod("android.view.SemBlurInfo$Builder", "hidden_setBackgroundColor", cls);
                         if (declaredMethod3 != null) {
                             declaredMethod3.setAccessible(true);
-                            SeslBaseReflector.invoke(obj, declaredMethod3, Integer.valueOf(intValue));
+                            SeslBaseReflector.invoke(objNewInstance, declaredMethod3, Integer.valueOf(iIntValue));
                         }
                     }
-                    float floatValue = f.floatValue();
+                    float fFloatValue = f.floatValue();
                     Method declaredMethod4 = SeslBaseReflector.getDeclaredMethod("android.view.SemBlurInfo$Builder", "hidden_setBackgroundCornerRadius", Float.TYPE);
                     if (declaredMethod4 != null) {
                         declaredMethod4.setAccessible(true);
-                        SeslBaseReflector.invoke(obj, declaredMethod4, Float.valueOf(floatValue));
+                        SeslBaseReflector.invoke(objNewInstance, declaredMethod4, Float.valueOf(fFloatValue));
                     }
                     Method declaredMethod5 = SeslBaseReflector.getDeclaredMethod("android.view.SemBlurInfo$Builder", "hidden_build", new Class[0]);
                     if (declaredMethod5 != null) {
                         declaredMethod5.setAccessible(true);
-                        Object invoke2 = SeslBaseReflector.invoke(obj, declaredMethod5, new Object[0]);
+                        Object objInvoke2 = SeslBaseReflector.invoke(objNewInstance, declaredMethod5, new Object[0]);
                         Class cls2 = SeslViewReflector.mClass;
                         try {
                             Method declaredMethod6 = SeslBaseReflector.getDeclaredMethod(SeslViewReflector.mClass, "hidden_semSetBlurInfo", Class.forName("android.view.SemBlurInfo"));
                             if (declaredMethod6 != null) {
-                                SeslBaseReflector.invoke(view, declaredMethod6, invoke2);
+                                SeslBaseReflector.invoke(view, declaredMethod6, objInvoke2);
                             }
                         } catch (ClassNotFoundException e5) {
                             Log.e("SeslViewReflector", "semSetBlurInfo ClassNotFoundException", e5);

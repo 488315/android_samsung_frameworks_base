@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class HingeSensorAngleProvider implements HingeAngleProvider {
     public final Handler listenerHandler;
@@ -35,7 +34,7 @@ public final class HingeSensorAngleProvider implements HingeAngleProvider {
 
     @Override // com.android.systemui.unfold.updates.hinge.HingeAngleProvider
     public final void start() {
-        this.singleThreadBgExecutor.execute(new Runnable() { // from class: com.android.systemui.unfold.updates.hinge.HingeSensorAngleProvider$start$1
+        this.singleThreadBgExecutor.execute(new Runnable() { // from class: com.android.systemui.unfold.updates.hinge.HingeSensorAngleProvider.start.1
             @Override // java.lang.Runnable
             public final void run() {
                 if (HingeSensorAngleProvider.this.started) {
@@ -53,7 +52,7 @@ public final class HingeSensorAngleProvider implements HingeAngleProvider {
 
     @Override // com.android.systemui.unfold.updates.hinge.HingeAngleProvider
     public final void stop() {
-        this.singleThreadBgExecutor.execute(new Runnable() { // from class: com.android.systemui.unfold.updates.hinge.HingeSensorAngleProvider$stop$1
+        this.singleThreadBgExecutor.execute(new Runnable() { // from class: com.android.systemui.unfold.updates.hinge.HingeSensorAngleProvider.stop.1
             @Override // java.lang.Runnable
             public final void run() {
                 HingeSensorAngleProvider hingeSensorAngleProvider = HingeSensorAngleProvider.this;
@@ -65,7 +64,6 @@ public final class HingeSensorAngleProvider implements HingeAngleProvider {
         });
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HingeAngleSensorListener implements SensorEventListener {
         public HingeAngleSensorListener() {
         }

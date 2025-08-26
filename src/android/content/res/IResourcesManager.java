@@ -47,9 +47,9 @@ public interface IResourcesManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IResourcesManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IResourcesManager)) {
-                return (IResourcesManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IResourcesManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IResourcesManager)) {
+                return (IResourcesManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,13 +76,13 @@ public interface IResourcesManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                 RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                boolean dumpResources = dumpResources(readString, parcelFileDescriptor, remoteCallback);
+                boolean zDumpResources = dumpResources(string, parcelFileDescriptor, remoteCallback);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(dumpResources);
+                parcel2.writeBoolean(zDumpResources);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -106,19 +106,19 @@ public interface IResourcesManager extends IInterface {
 
             @Override // android.content.res.IResourcesManager
             public boolean dumpResources(String str, ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourcesManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IResourcesManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

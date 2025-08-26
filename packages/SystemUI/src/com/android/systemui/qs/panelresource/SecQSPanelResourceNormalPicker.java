@@ -1,6 +1,7 @@
 package com.android.systemui.qs.panelresource;
 
 import android.content.Context;
+import android.content.res.Resources;
 import com.android.keyguard.SecurityUtils$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.QpRune;
@@ -14,7 +15,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsJVMKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecQSPanelResourceNormalPicker {
     public final SecQSPanelResourceCommon common;
@@ -25,7 +25,6 @@ public class SecQSPanelResourceNormalPicker {
     public SecQSPanelController qsPanelController;
     public float qsTransitionX;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,7 +42,7 @@ public class SecQSPanelResourceNormalPicker {
         this.common = secQSPanelResourceCommon;
     }
 
-    public static String getFilteredTiles(Context context, String str) {
+    public static String getFilteredTiles(Context context, String str) throws Resources.NotFoundException {
         if (!QpRune.QUICK_TILE_HIDE_FROM_BAR || ((TunerService) Dependency.sDependency.getDependencyInner(TunerService.class)).getValue(0, "hide_smart_view_large_tile_on_panel") != 1) {
             return str;
         }
@@ -72,7 +71,7 @@ public class SecQSPanelResourceNormalPicker {
 
     public int getBrightnessTileLayoutBetweenMargin(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.sec_brightness_tile_between_margin, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.sec_brightness_tile_between_margin, context) * DeviceState.getDisplayWidth(context));
     }
 
     public int getButtonsWidth(Context context) {
@@ -85,7 +84,7 @@ public class SecQSPanelResourceNormalPicker {
         if (SecQSPanelResourceCommon.Companion.isLandscape(context)) {
             return 0;
         }
-        return (int) SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.sec_date_button_container_padding_ratio, DeviceState.getDisplayWidth(context));
+        return context.getResources().getDimensionPixelSize(R.dimen.sec_style_qs_header_status_bar_side_padding);
     }
 
     public int getDateButtonContainerTopMargin(Context context) {
@@ -102,8 +101,9 @@ public class SecQSPanelResourceNormalPicker {
         return SecQSPanelResourceCommon.Companion.dp(R.dimen.qs_detail_content_minheight, context);
     }
 
-    public int getDetailExtendedContainerTopMargin(Context context) {
-        return 0;
+    public int getDetailHeaderHeight(Context context) {
+        SecQSPanelResourceCommon.Companion.getClass();
+        return SecQSPanelResourceCommon.Companion.dp(R.dimen.sec_qs_detail_header_height, context);
     }
 
     public int getDetailSidePadding(Context context) {
@@ -134,16 +134,18 @@ public class SecQSPanelResourceNormalPicker {
     }
 
     public int getNotificationSidePadding(Context context, boolean z) {
-        float m;
+        Number numberValueOf;
         SecQSPanelResourceCommon.Companion.getClass();
         int displayWidth = DeviceState.getDisplayWidth(context);
         if (SecQSPanelResourceCommon.Companion.isLandscape(context)) {
             float f = displayWidth;
-            m = (SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_panel_width_landscape_ratio, f) - (context.getResources().getFloat(R.dimen.qqs_panel_width_landscape_ratio) * f)) / 2.0f;
+            numberValueOf = Float.valueOf((SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_panel_width_landscape_ratio, f) - (context.getResources().getFloat(R.dimen.qqs_panel_width_landscape_ratio) * f)) / 2.0f);
+        } else if (z) {
+            numberValueOf = Float.valueOf(context.getResources().getFloat(R.dimen.notification_side_padding_portrait_ratio) * displayWidth);
         } else {
-            m = z ? SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.notification_side_padding_portrait_ratio, displayWidth) : SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_clock_side_padding_fold_sub, displayWidth) - context.getResources().getDimensionPixelSize(R.dimen.sec_style_qs_header_clock_buttons_start_padding);
+            numberValueOf = Integer.valueOf(context.getResources().getDimensionPixelSize(R.dimen.sec_style_qs_header_status_bar_side_padding));
         }
-        return (int) m;
+        return numberValueOf.intValue();
     }
 
     public int getPanelHeight(Context context) {
@@ -160,9 +162,9 @@ public class SecQSPanelResourceNormalPicker {
 
     public int getPanelStartEndPadding(int i, Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        int dp = SecQSPanelResourceCommon.Companion.dp(R.dimen.sec_qs_side_padding, context);
+        int iDp = SecQSPanelResourceCommon.Companion.dp(R.dimen.sec_qs_side_padding, context);
         if (i == 1) {
-            return dp;
+            return iDp;
         }
         return 0;
     }
@@ -182,16 +184,16 @@ public class SecQSPanelResourceNormalPicker {
     }
 
     public int getQQSPanelSidePadding(Context context) {
-        Number number;
+        Number numberValueOf;
         SecQSPanelResourceCommon.Companion.getClass();
         int displayWidth = DeviceState.getDisplayWidth(context);
         if (SecQSPanelResourceCommon.Companion.isLandscape(context)) {
             float f = displayWidth;
-            number = Float.valueOf((SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_panel_width_landscape_ratio, f) - (context.getResources().getFloat(R.dimen.qqs_panel_width_landscape_ratio) * f)) / 2.0f);
+            numberValueOf = Float.valueOf((SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_panel_width_landscape_ratio, f) - (context.getResources().getFloat(R.dimen.qqs_panel_width_landscape_ratio) * f)) / 2.0f);
         } else {
-            number = 0;
+            numberValueOf = 0;
         }
-        return number.intValue();
+        return numberValueOf.intValue();
     }
 
     public int getQQSPanelStartEndPadding(int i, Context context) {
@@ -200,41 +202,31 @@ public class SecQSPanelResourceNormalPicker {
 
     public int getQSGuideContainerMargin(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.qs_guide_dialog_container_margin, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_container_margin, context) * DeviceState.getDisplayWidth(context));
     }
 
     public int getQSGuideImageHeight(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.qs_guide_dialog_image_height_ratio, context) * DeviceState.getDisplayHeight(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_image_height_ratio, context) * DeviceState.getDisplayHeight(context));
     }
 
     public int getQSGuideImageWidth(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.qs_guide_dialog_image_width_ratio, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_image_width_ratio, context) * DeviceState.getDisplayWidth(context));
     }
 
-    public int getQSGuideWidth(Context context, boolean z) {
+    public int getQSGuideWidth(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.qs_guide_dialog_width_ratio, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_width_ratio, context) * DeviceState.getDisplayWidth(context));
     }
 
     public int getQsTileColumn(Context context) {
         if (this.common.isEmergencyMode) {
             SecQSPanelResourceCommon.Companion.getClass();
-            return Math.max(1, SecQSPanelResourceCommon.Companion.m2887int(R.integer.sec_quick_settings_num_columns_power_saving, context));
+            return Math.max(1, SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_settings_num_columns_power_saving, context));
         }
         SecQSPanelResourceCommon.Companion.getClass();
-        return SecQSPanelResourceCommon.Companion.m2887int(R.integer.sec_quick_settings_num_columns, context);
-    }
-
-    public int getQsTileMinNum(Context context) {
-        SecQSPanelResourceCommon.Companion.getClass();
-        return SecQSPanelResourceCommon.Companion.m2887int(R.integer.quick_qs_tile_min_num, context);
-    }
-
-    public int getQuickQsTileNum(Context context) {
-        SecQSPanelResourceCommon.Companion.getClass();
-        return SecQSPanelResourceCommon.Companion.m2887int(R.integer.sec_quick_qs_panel_max_columns, context);
+        return SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_settings_num_columns, context);
     }
 
     public int getQuickSettingExtraSidePadding(Context context) {
@@ -280,13 +272,13 @@ public class SecQSPanelResourceNormalPicker {
 
     public int getTileExpandedWidth(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        int dp = SecQSPanelResourceCommon.Companion.dp(R.dimen.tile_expanded_width, context);
-        int m = (int) SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_tile_expanded_width_ratio, getTileChunkWidth(context));
-        if (dp < m) {
-            dp = m;
+        int iDp = SecQSPanelResourceCommon.Companion.dp(R.dimen.tile_expanded_width, context);
+        int iM = (int) SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_tile_expanded_width_ratio, getTileChunkWidth(context));
+        if (iDp < iM) {
+            iDp = iM;
         }
         SecQSPanelResourceCommon secQSPanelResourceCommon = this.common;
-        return ((SettingsHelper) secQSPanelResourceCommon.settingsHelper$delegate.getValue()).isQSButtonGridPopupEnabled() ? (int) (dp * secQSPanelResourceCommon.tileExpandedWidthRatio) : dp;
+        return ((SettingsHelper) secQSPanelResourceCommon.settingsHelper$delegate.getValue()).isQSButtonGridPopupEnabled() ? (int) (iDp * secQSPanelResourceCommon.tileExpandedWidthRatio) : iDp;
     }
 
     public int getTileLabelStartMargin(Context context) {
@@ -304,14 +296,14 @@ public class SecQSPanelResourceNormalPicker {
     }
 
     public int getTopBarTileNum(int i, Context context) {
-        String string;
+        String strString;
         if (i == 1) {
             SecQSPanelResourceCommon.Companion.getClass();
-            string = SecQSPanelResourceCommon.Companion.string(R.string.sec_top_bar_tiles_default, context);
+            strString = SecQSPanelResourceCommon.Companion.string(R.string.sec_top_bar_tiles_default, context);
         } else {
             SecQSPanelResourceCommon.Companion.getClass();
-            string = SecQSPanelResourceCommon.Companion.string(R.string.sec_top_bar_tiles_default_land, context);
+            strString = SecQSPanelResourceCommon.Companion.string(R.string.sec_top_bar_tiles_default_land, context);
         }
-        return StringsKt__StringsKt.split$default(string, new String[]{","}, 0, 6).size();
+        return StringsKt__StringsKt.split$default(strString, new String[]{","}, 0, 6).size();
     }
 }

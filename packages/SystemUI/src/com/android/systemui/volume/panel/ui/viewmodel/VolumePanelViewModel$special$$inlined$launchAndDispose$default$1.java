@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DisposableHandle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumePanelViewModel$special$$inlined$launchAndDispose$default$1 extends SuspendLambda implements Function2 {
     int label;
@@ -44,7 +43,7 @@ public final class VolumePanelViewModel$special$$inlined$launchAndDispose$defaul
             DisposableHandle disposableHandle = new DisposableHandle() { // from class: com.android.systemui.volume.panel.ui.viewmodel.VolumePanelViewModel$1$1
                 @Override // kotlinx.coroutines.DisposableHandle
                 public final void dispose() {
-                    VolumePanelViewModel.this.dumpManager.unregisterDumpable("VolumePanelViewModel");
+                    volumePanelViewModel2.dumpManager.unregisterDumpable("VolumePanelViewModel");
                 }
             };
             this.label = 1;

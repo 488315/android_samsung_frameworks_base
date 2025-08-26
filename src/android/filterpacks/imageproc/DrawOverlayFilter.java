@@ -26,9 +26,9 @@ public class DrawOverlayFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void setupPorts() {
-        MutableFrameFormat create = ImageFormat.create(3, 3);
-        addMaskedInputPort(Slice.SUBTYPE_SOURCE, create);
-        addMaskedInputPort("overlay", create);
+        MutableFrameFormat mutableFrameFormatCreate = ImageFormat.create(3, 3);
+        addMaskedInputPort(Slice.SUBTYPE_SOURCE, mutableFrameFormatCreate);
+        addMaskedInputPort("overlay", mutableFrameFormatCreate);
         addMaskedInputPort("box", ObjectFormat.fromClass(Quad.class, 1));
         addOutputBasedOnInput("image", Slice.SUBTYPE_SOURCE);
     }
@@ -40,13 +40,13 @@ public class DrawOverlayFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput(Slice.SUBTYPE_SOURCE);
-        Frame pullInput2 = pullInput("overlay");
+        Frame framePullInput = pullInput(Slice.SUBTYPE_SOURCE);
+        Frame framePullInput2 = pullInput("overlay");
         this.mProgram.setTargetRegion(((Quad) pullInput("box").getObjectValue()).translated(1.0f, 1.0f).scaled(2.0f));
-        Frame newFrame = filterContext.getFrameManager().newFrame(pullInput.getFormat());
-        newFrame.setDataFromFrame(pullInput);
-        this.mProgram.process(pullInput2, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(framePullInput.getFormat());
+        frameNewFrame.setDataFromFrame(framePullInput);
+        this.mProgram.process(framePullInput2, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 }

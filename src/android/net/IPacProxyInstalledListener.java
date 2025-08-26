@@ -44,9 +44,9 @@ public interface IPacProxyInstalledListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPacProxyInstalledListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPacProxyInstalledListener)) {
-                return (IPacProxyInstalledListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPacProxyInstalledListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPacProxyInstalledListener)) {
+                return (IPacProxyInstalledListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,14 +100,14 @@ public interface IPacProxyInstalledListener extends IInterface {
 
             @Override // android.net.IPacProxyInstalledListener
             public void onPacProxyInstalled(Network network, ProxyInfo proxyInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPacProxyInstalledListener.DESCRIPTOR);
-                    obtain.writeTypedObject(network, 0);
-                    obtain.writeTypedObject(proxyInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPacProxyInstalledListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(network, 0);
+                    parcelObtain.writeTypedObject(proxyInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

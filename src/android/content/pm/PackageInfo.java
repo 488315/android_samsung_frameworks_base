@@ -127,7 +127,7 @@ public class PackageInfo implements Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        boolean allowSquashing = parcel.allowSquashing();
+        boolean zAllowSquashing = parcel.allowSquashing();
         parcel.writeString8(this.packageName);
         parcel.writeString8Array(this.splitNames);
         parcel.writeInt(this.versionCode);
@@ -186,7 +186,7 @@ public class PackageInfo implements Parcelable {
         } else {
             parcel.writeInt(0);
         }
-        parcel.restoreAllowSquashing(allowSquashing);
+        parcel.restoreAllowSquashing(zAllowSquashing);
     }
 
     private PackageInfo(Parcel parcel) {

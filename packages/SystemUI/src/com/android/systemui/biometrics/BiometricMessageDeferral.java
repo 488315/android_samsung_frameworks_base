@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BiometricMessageDeferral implements Dumpable {
     public final Map acquiredInfoToHelpString;
@@ -68,16 +67,16 @@ public class BiometricMessageDeferral implements Dumpable {
         if (this.messagesToDefer.isEmpty()) {
             return;
         }
-        boolean contains = this.acquiredInfoToIgnore.contains(Integer.valueOf(i));
+        boolean zContains = this.acquiredInfoToIgnore.contains(Integer.valueOf(i));
         BiometricMessageDeferralLogger biometricMessageDeferralLogger = this.logBuffer;
-        if (contains) {
+        if (zContains) {
             biometricMessageDeferralLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             BiometricMessageDeferralLogger$$ExternalSyntheticLambda1 biometricMessageDeferralLogger$$ExternalSyntheticLambda1 = new BiometricMessageDeferralLogger$$ExternalSyntheticLambda1(1);
             LogBuffer logBuffer = biometricMessageDeferralLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain(biometricMessageDeferralLogger.tag, logLevel, biometricMessageDeferralLogger$$ExternalSyntheticLambda1, null);
-            ((LogMessageImpl) obtain).int1 = i;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain(biometricMessageDeferralLogger.tag, logLevel, biometricMessageDeferralLogger$$ExternalSyntheticLambda1, null);
+            ((LogMessageImpl) logMessageObtain).int1 = i;
+            logBuffer.commit(logMessageObtain);
             return;
         }
         this.totalFrames++;
@@ -92,17 +91,17 @@ public class BiometricMessageDeferral implements Dumpable {
             Objects.toString(helpFaceAuthenticationStatus);
         }
         int i2 = this.totalFrames;
-        String valueOf = String.valueOf((faceHelpMessageDebouncer == null || (messageToShow = faceHelpMessageDebouncer.getMessageToShow(((SystemClock) lazy.get()).elapsedRealtime())) == null) ? null : Integer.valueOf(messageToShow.msgId));
+        String strValueOf = String.valueOf((faceHelpMessageDebouncer == null || (messageToShow = faceHelpMessageDebouncer.getMessageToShow(((SystemClock) lazy.get()).elapsedRealtime())) == null) ? null : Integer.valueOf(messageToShow.msgId));
         biometricMessageDeferralLogger.getClass();
         LogLevel logLevel2 = LogLevel.DEBUG;
         BiometricMessageDeferralLogger$$ExternalSyntheticLambda1 biometricMessageDeferralLogger$$ExternalSyntheticLambda12 = new BiometricMessageDeferralLogger$$ExternalSyntheticLambda1(0);
         LogBuffer logBuffer2 = biometricMessageDeferralLogger.logBuffer;
-        LogMessage obtain2 = logBuffer2.obtain(biometricMessageDeferralLogger.tag, logLevel2, biometricMessageDeferralLogger$$ExternalSyntheticLambda12, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain2;
+        LogMessage logMessageObtain2 = logBuffer2.obtain(biometricMessageDeferralLogger.tag, logLevel2, biometricMessageDeferralLogger$$ExternalSyntheticLambda12, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain2;
         logMessageImpl.int1 = i;
         logMessageImpl.int2 = i2;
-        logMessageImpl.str1 = valueOf;
-        logBuffer2.commit(obtain2);
+        logMessageImpl.str1 = strValueOf;
+        logBuffer2.commit(logMessageObtain2);
     }
 
     public final void reset$1() {
@@ -124,11 +123,11 @@ public class BiometricMessageDeferral implements Dumpable {
             BiometricMessageDeferralLogger$$ExternalSyntheticLambda1 biometricMessageDeferralLogger$$ExternalSyntheticLambda1 = new BiometricMessageDeferralLogger$$ExternalSyntheticLambda1(2);
             String str2 = biometricMessageDeferralLogger.tag;
             LogBuffer logBuffer = biometricMessageDeferralLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain(str2, logLevel, biometricMessageDeferralLogger$$ExternalSyntheticLambda1, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain(str2, logLevel, biometricMessageDeferralLogger$$ExternalSyntheticLambda1, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.int1 = i;
             logMessageImpl.str1 = str;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             ((HashMap) this.acquiredInfoToHelpString).put(Integer.valueOf(i), str);
         }
     }

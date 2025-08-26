@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 import com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticOutline0;
 import com.android.wm.shell.desktopmode.DesktopTasksController$onDragPositioningEnd$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DragHintToFullscreenManager extends FrameLayout {
     public boolean mAddWindowRequested;
@@ -56,7 +55,7 @@ public class DragHintToFullscreenManager extends FrameLayout {
             public final /* synthetic */ Runnable val$animationEndCallback;
 
             public AnonymousClass2(Runnable desktopTasksController$onDragPositioningEnd$12) {
-                r2 = desktopTasksController$onDragPositioningEnd$12;
+                runnable = desktopTasksController$onDragPositioningEnd$12;
             }
 
             @Override // android.view.animation.Animation.AnimationListener
@@ -64,7 +63,7 @@ public class DragHintToFullscreenManager extends FrameLayout {
                 int i = DragHintToFullscreen.$r8$clinit;
                 Log.i("DragHintToFullscreen", "hide-Run callback");
                 DragHintToFullscreen.this.setVisibility(4);
-                Runnable runnable = r2;
+                Runnable runnable = runnable;
                 if (runnable != null) {
                     runnable.run();
                 }

@@ -1,15 +1,20 @@
 package com.android.systemui.globalactions.presentation.features;
 
+import android.R;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.SystemProperties;
+import com.android.systemui.BasicRune;
+import com.android.systemui.LsRune;
+import com.android.systemui.util.DeviceType;
+import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.globalactions.presentation.features.Features;
 import com.samsung.android.globalactions.util.LogWrapper;
 import com.samsung.android.globalactions.util.SettingsWrapper;
 import com.samsung.android.globalactions.util.SystemPropertiesWrapper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class GlobalActionFeatures implements Features {
     public static final String VALUE_SUB_DISPLAY_POLICY;
@@ -29,23 +34,58 @@ public class GlobalActionFeatures implements Features {
         this.mLogWrapper = logWrapper;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x00a3, code lost:
-    
-        if (r0.charAt(10) != '9') goto L61;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x011b, code lost:
-    
-        if (com.android.systemui.globalactions.presentation.features.GlobalActionFeatures.VALUE_SUB_DISPLAY_POLICY.contains("LARGESCREEN") == false) goto L36;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00ae  */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x0126  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean isEnabled(java.lang.String r7) {
-        /*
-            Method dump skipped, instructions count: 348
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.globalactions.presentation.features.GlobalActionFeatures.isEnabled(java.lang.String):boolean");
+    public final boolean isEnabled(String str) throws Resources.NotFoundException {
+        boolean zContains;
+        if (str.equals("SF_EFFECT")) {
+            zContains = BasicRune.GLOBALACTIONS_BLUR;
+        } else if (str.equals("CAPTURED_BLUR")) {
+            zContains = BasicRune.GLOBALACTIONS_CAPTURED_BLUR;
+        } else if (str.equals("NAV_BAR")) {
+            zContains = this.mContext.getResources().getBoolean(R.bool.config_swipeDisambiguation);
+        } else if (str.equals("SAFETY_CARE")) {
+            zContains = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE");
+        } else if (str.equals("SCOVER")) {
+            zContains = DeviceType.isCoverSupported();
+        } else if (str.equals("DATA_MODE")) {
+            zContains = this.mSystemPropertiesWrapper.isDataModeSupportedSalesCode();
+        } else if (str.equals("DEMO_MODE")) {
+            if (!SemCscFeature.getInstance().getBoolean("CscFeature_Common_EnableLiveDemo") && !this.mSettingsWrapper.isShopDemo()) {
+                boolean z = BasicRune.BASIC_FOLDABLE_TYPE_FOLD;
+                String str2 = SystemProperties.get("ril.product_code", "");
+                if (str2.length() < 11 || (str2.charAt(10) != '8' && str2.charAt(10) != '9')) {
+                    zContains = false;
+                }
+            }
+            zContains = true;
+        } else if (!str.equals("LOCK_DOWN_MODE")) {
+            if (str.equals("FORCE_RESTART_MESSAGE")) {
+                zContains = this.mSystemPropertiesWrapper.isForceRestartMessageSupportedSalesCode();
+            } else if (str.equals("FINGERPRINT_IN_DISPLAY")) {
+                zContains = LsRune.SECURITY_FINGERPRINT_IN_DISPLAY;
+            } else if (str.equals("SUPPORT_SIDE_KEY")) {
+                zContains = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_SETTINGS_SUPPORT_FUNCTION_KEY_MENU");
+            } else if (str.equals("POWER_OFF_LOCK")) {
+                zContains = this.mSystemPropertiesWrapper.isBrazilianCountryISO();
+            } else if (str.equals("FRONT_LARGE_COVER_DISPLAY")) {
+                zContains = VALUE_SUB_DISPLAY_POLICY.contains("LARGESCREEN");
+            } else if (!str.equals("FRONT_COVER_DISPLAY")) {
+                if (!str.equals("DESKTOP_MODE")) {
+                    if (!str.equals("KNOX_SDK") && !str.equals("KNOX_CONTAINER") && !str.equals("KNOX_DEVICE_MANAGER")) {
+                        str.equals("RESERVE_BATTERY_MODE");
+                    }
+                    zContains = true;
+                }
+                zContains = false;
+            } else if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_FOLDABLE_TYPE_FLIP") && !VALUE_SUB_DISPLAY_POLICY.contains("LARGESCREEN")) {
+                zContains = true;
+            }
+        }
+        this.mLogWrapper.i("GlobalActionFeatures", FakeFeatures$$ExternalSyntheticOutline0.m("[", str, "] ", zContains));
+        return zContains;
     }
 }

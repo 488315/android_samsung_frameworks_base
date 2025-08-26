@@ -5,7 +5,6 @@ import android.graphics.ColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplashscreenIconDrawableFactory$AdaptiveForegroundDrawable extends SplashscreenIconDrawableFactory$MaskBackgroundDrawable {
     public final Drawable mForegroundDrawable;
@@ -31,12 +30,12 @@ public class SplashscreenIconDrawableFactory$AdaptiveForegroundDrawable extends 
     @Override // com.android.wm.shell.startingsurface.SplashscreenIconDrawableFactory$MaskBackgroundDrawable
     public final void updateLayerBounds(Rect rect) {
         super.updateLayerBounds(rect);
-        int width = rect.width() / 2;
-        int height = rect.height() / 2;
-        int width2 = (int) (rect.width() / 1.3333334f);
-        int height2 = (int) (rect.height() / 1.3333334f);
+        int iWidth = rect.width() / 2;
+        int iHeight = rect.height() / 2;
+        int iWidth2 = (int) (rect.width() / 1.3333334f);
+        int iHeight2 = (int) (rect.height() / 1.3333334f);
         Rect rect2 = this.mTmpOutRect;
-        rect2.set(width - width2, height - height2, width + width2, height + height2);
+        rect2.set(iWidth - iWidth2, iHeight - iHeight2, iWidth + iWidth2, iHeight + iHeight2);
         Drawable drawable = this.mForegroundDrawable;
         if (drawable != null) {
             drawable.setBounds(rect2);

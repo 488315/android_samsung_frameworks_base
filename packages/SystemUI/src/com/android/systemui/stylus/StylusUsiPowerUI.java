@@ -20,7 +20,6 @@ import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StylusUsiPowerUI {
     public static final int USI_NOTIFICATION_ID;
@@ -39,17 +38,17 @@ public final class StylusUsiPowerUI {
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action != null) {
-                int hashCode = action.hashCode();
-                if (hashCode != -263791366) {
-                    if (hashCode == 710718844 && action.equals("StylusUsiPowerUI.dismiss")) {
+                int iHashCode = action.hashCode();
+                if (iHashCode != -263791366) {
+                    if (iHashCode == 710718844 && action.equals("StylusUsiPowerUI.dismiss")) {
                         DebugLogger debugLogger = DebugLogger.INSTANCE;
                         boolean z = Build.IS_DEBUGGABLE;
                         Reflection.getOrCreateKotlinClass(StylusUsiPowerUI$receiver$1.class).getSimpleName();
-                        StylusUsiPowerUI stylusUsiPowerUI = StylusUsiPowerUI.this;
+                        StylusUsiPowerUI stylusUsiPowerUI = this.this$0;
                         StylusUiEvent stylusUiEvent = StylusUiEvent.STYLUS_LOW_BATTERY_NOTIFICATION_DISMISSED;
                         int i = StylusUsiPowerUI.USI_NOTIFICATION_ID;
                         stylusUsiPowerUI.logUiEvent(stylusUiEvent);
-                        StylusUsiPowerUI stylusUsiPowerUI2 = StylusUsiPowerUI.this;
+                        StylusUsiPowerUI stylusUsiPowerUI2 = this.this$0;
                         stylusUsiPowerUI2.getClass();
                         stylusUsiPowerUI2.handler.post(new StylusUsiPowerUI$updateSuppression$1(stylusUsiPowerUI2, true));
                         return;
@@ -60,18 +59,18 @@ public final class StylusUsiPowerUI {
                     DebugLogger debugLogger2 = DebugLogger.INSTANCE;
                     boolean z2 = Build.IS_DEBUGGABLE;
                     Reflection.getOrCreateKotlinClass(StylusUsiPowerUI$receiver$1.class).getSimpleName();
-                    StylusUsiPowerUI stylusUsiPowerUI3 = StylusUsiPowerUI.this;
+                    StylusUsiPowerUI stylusUsiPowerUI3 = this.this$0;
                     StylusUiEvent stylusUiEvent2 = StylusUiEvent.STYLUS_LOW_BATTERY_NOTIFICATION_CLICKED;
                     int i2 = StylusUsiPowerUI.USI_NOTIFICATION_ID;
                     stylusUsiPowerUI3.logUiEvent(stylusUiEvent2);
-                    StylusUsiPowerUI stylusUsiPowerUI4 = StylusUsiPowerUI.this;
+                    StylusUsiPowerUI stylusUsiPowerUI4 = this.this$0;
                     stylusUsiPowerUI4.getClass();
                     stylusUsiPowerUI4.handler.post(new StylusUsiPowerUI$updateSuppression$1(stylusUsiPowerUI4, true));
-                    if (StylusUsiPowerUI.this.inputDeviceId == null) {
+                    if (this.this$0.inputDeviceId == null) {
                         return;
                     }
                     Bundle bundle = new Bundle();
-                    Integer num = StylusUsiPowerUI.this.inputDeviceId;
+                    Integer num = this.this$0.inputDeviceId;
                     num.getClass();
                     bundle.putInt("device_input_id", num.intValue());
                     try {
@@ -85,7 +84,6 @@ public final class StylusUsiPowerUI {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -126,12 +124,12 @@ public final class StylusUsiPowerUI {
     }
 
     public final InstanceId getInstanceId() {
-        InstanceId instanceId = this.instanceId;
-        if (instanceId == null) {
-            if (instanceId == null) {
-                instanceId = this.instanceIdSequence.newInstanceId();
+        InstanceId instanceIdNewInstanceId = this.instanceId;
+        if (instanceIdNewInstanceId == null) {
+            if (instanceIdNewInstanceId == null) {
+                instanceIdNewInstanceId = this.instanceIdSequence.newInstanceId();
             }
-            this.instanceId = instanceId;
+            this.instanceId = instanceIdNewInstanceId;
         }
         return this.instanceId;
     }

@@ -5,7 +5,6 @@ import dagger.internal.Provider;
 import dagger.internal.Providers;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class GlobalConcurrencyModule_ProvideMainExecutorFactory implements Provider {
     private final Provider contextProvider;
@@ -19,9 +18,9 @@ public final class GlobalConcurrencyModule_ProvideMainExecutorFactory implements
     }
 
     public static Executor provideMainExecutor(Context context) {
-        Executor provideMainExecutor = GlobalConcurrencyModule.provideMainExecutor(context);
-        provideMainExecutor.getClass();
-        return provideMainExecutor;
+        Executor executorProvideMainExecutor = GlobalConcurrencyModule.provideMainExecutor(context);
+        executorProvideMainExecutor.getClass();
+        return executorProvideMainExecutor;
     }
 
     public static GlobalConcurrencyModule_ProvideMainExecutorFactory create(Provider provider) {

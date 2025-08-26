@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.ViewController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardMessageAreaController extends ViewController {
     public final ConfigurationController mConfigurationController;
@@ -19,7 +18,6 @@ public class KeyguardMessageAreaController extends ViewController {
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     public Pair mMessageBiometricSource;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final ConfigurationController mConfigurationController;
         public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
@@ -87,7 +85,7 @@ public class KeyguardMessageAreaController extends ViewController {
         KeyguardMessageArea keyguardMessageArea = (KeyguardMessageArea) this.mView;
         if (keyguardMessageArea.mIsVisible != z) {
             keyguardMessageArea.mIsVisible = z;
-            keyguardMessageArea.update$8();
+            keyguardMessageArea.update$1$1();
         }
     }
 
@@ -100,10 +98,10 @@ public class KeyguardMessageAreaController extends ViewController {
     }
 
     public final void setMessage(CharSequence charSequence, boolean z) {
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         Pair pair = this.mMessageBiometricSource;
-        if (pair == null || BiometricSourceType.FACE != null || pair.first != BiometricSourceType.FINGERPRINT || uptimeMillis - ((Long) pair.second).longValue() >= 3500) {
-            this.mMessageBiometricSource = new Pair(null, Long.valueOf(uptimeMillis));
+        if (pair == null || BiometricSourceType.FACE != null || pair.first != BiometricSourceType.FINGERPRINT || jUptimeMillis - ((Long) pair.second).longValue() >= 3500) {
+            this.mMessageBiometricSource = new Pair(null, Long.valueOf(jUptimeMillis));
             ((KeyguardMessageArea) this.mView).getClass();
             ((KeyguardMessageArea) this.mView).setMessage(charSequence, z);
         } else {

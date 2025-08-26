@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class OnBackPressedCallback {
     public final CopyOnWriteArrayList cancellables = new CopyOnWriteArrayList();

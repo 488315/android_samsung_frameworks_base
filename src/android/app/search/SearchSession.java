@@ -3,7 +3,6 @@ package android.app.search;
 import android.annotation.SystemApi;
 import android.app.search.ISearchCallback;
 import android.app.search.ISearchUiManager;
-import android.app.search.SearchSession;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.os.Binder;
@@ -42,13 +41,13 @@ public final class SearchSession implements AutoCloseable {
         Binder binder = new Binder();
         this.mToken = binder;
         this.mRegisteredCallbacks = new ArrayMap<>();
-        ISearchUiManager asInterface = ISearchUiManager.Stub.asInterface(ServiceManager.getService(Context.SEARCH_UI_SERVICE));
-        this.mInterface = asInterface;
+        ISearchUiManager iSearchUiManagerAsInterface = ISearchUiManager.Stub.asInterface(ServiceManager.getService(Context.SEARCH_UI_SERVICE));
+        this.mInterface = iSearchUiManagerAsInterface;
         SearchSessionId searchSessionId = new SearchSessionId(context.getPackageName() + ":" + UUID.randomUUID().toString(), context.getUserId());
         this.mSessionId = searchSessionId;
         searchContext.setPackageName(context.getPackageName());
         try {
-            asInterface.createSearchSession(searchContext, searchSessionId, binder);
+            iSearchUiManagerAsInterface.createSearchSession(searchContext, searchSessionId, binder);
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to search session", e);
             e.rethrowFromSystemServer();
@@ -93,7 +92,7 @@ public final class SearchSession implements AutoCloseable {
                 CallbackWrapper callbackWrapper = new CallbackWrapper(executor, new Consumer() { // from class: android.app.search.SearchSession$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        SearchSession.Callback.this.onTargetsAvailable((List) obj);
+                        callback.onTargetsAvailable((List) obj);
                     }
                 });
                 this.mInterface.registerEmptyQueryResultUpdateCallback(this.mSessionId, callbackWrapper);
@@ -176,7 +175,7 @@ public final class SearchSession implements AutoCloseable {
         @Override // android.app.search.ISearchCallback
         public void onResult(ParceledListSlice parceledListSlice) {
             Bundle extras;
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 final List list = parceledListSlice.getList();
                 if (list.size() > 0 && (extras = ((SearchTarget) list.get(0)).getExtras()) != null) {
@@ -185,11 +184,11 @@ public final class SearchSession implements AutoCloseable {
                 this.mExecutor.execute(new Runnable() { // from class: android.app.search.SearchSession$CallbackWrapper$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SearchSession.CallbackWrapper.this.lambda$onResult$0(list);
+                        this.f$0.lambda$onResult$0(list);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

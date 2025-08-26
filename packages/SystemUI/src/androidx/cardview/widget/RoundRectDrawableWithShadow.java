@@ -14,7 +14,6 @@ import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RoundRectDrawableWithShadow extends Drawable {
     public static final double COS_45 = Math.cos(Math.toRadians(45.0d));
@@ -35,7 +34,7 @@ public class RoundRectDrawableWithShadow extends Drawable {
     public final float mShadowSize;
     public final int mShadowStartColor;
 
-    public RoundRectDrawableWithShadow(Resources resources, ColorStateList colorStateList, float f, float f2, float f3) {
+    public RoundRectDrawableWithShadow(Resources resources, ColorStateList colorStateList, float f, float f2, float f3) throws Resources.NotFoundException {
         this.mDirty = true;
         this.mPrintedShadowClipWarning = false;
         this.mShadowStartColor = resources.getColor(R.color.cardview_shadow_start_color);
@@ -146,22 +145,22 @@ public class RoundRectDrawableWithShadow extends Drawable {
         float f18 = f17 * 2.0f;
         boolean z = this.mCardBounds.width() - f18 > 0.0f;
         boolean z2 = this.mCardBounds.height() - f18 > 0.0f;
-        int save = canvas.save();
+        int iSave = canvas.save();
         RectF rectF3 = this.mCardBounds;
         canvas.translate(rectF3.left + f17, rectF3.top + f17);
         canvas.drawPath(this.mCornerShadowPath, this.mCornerShadowPaint);
         if (z) {
             f = f16;
             f2 = 2.0f;
-            i = save;
+            i = iSave;
             canvas.drawRect(0.0f, f, this.mCardBounds.width() - f18, -this.mCornerRadius, this.mEdgeShadowPaint);
         } else {
             f = f16;
             f2 = 2.0f;
-            i = save;
+            i = iSave;
         }
         canvas.restoreToCount(i);
-        int save2 = canvas.save();
+        int iSave2 = canvas.save();
         RectF rectF4 = this.mCardBounds;
         canvas.translate(rectF4.right - f17, rectF4.bottom - f17);
         canvas.rotate(180.0f);
@@ -169,8 +168,8 @@ public class RoundRectDrawableWithShadow extends Drawable {
         if (z) {
             canvas.drawRect(0.0f, f, this.mCardBounds.width() - f18, this.mShadowSize + (-this.mCornerRadius), this.mEdgeShadowPaint);
         }
-        canvas.restoreToCount(save2);
-        int save3 = canvas.save();
+        canvas.restoreToCount(iSave2);
+        int iSave3 = canvas.save();
         RectF rectF5 = this.mCardBounds;
         canvas.translate(rectF5.left + f17, rectF5.bottom - f17);
         canvas.rotate(270.0f);
@@ -178,8 +177,8 @@ public class RoundRectDrawableWithShadow extends Drawable {
         if (z2) {
             canvas.drawRect(0.0f, f, this.mCardBounds.height() - f18, -this.mCornerRadius, this.mEdgeShadowPaint);
         }
-        canvas.restoreToCount(save3);
-        int save4 = canvas.save();
+        canvas.restoreToCount(iSave3);
+        int iSave4 = canvas.save();
         RectF rectF6 = this.mCardBounds;
         canvas.translate(rectF6.right - f17, rectF6.top + f17);
         canvas.rotate(90.0f);
@@ -187,7 +186,7 @@ public class RoundRectDrawableWithShadow extends Drawable {
         if (z2) {
             canvas.drawRect(0.0f, f, this.mCardBounds.height() - f18, -this.mCornerRadius, this.mEdgeShadowPaint);
         }
-        canvas.restoreToCount(save4);
+        canvas.restoreToCount(iSave4);
         canvas.translate(0.0f, (-this.mRawShadowSize) / f2);
         throw null;
     }
@@ -199,9 +198,9 @@ public class RoundRectDrawableWithShadow extends Drawable {
 
     @Override // android.graphics.drawable.Drawable
     public final boolean getPadding(Rect rect) {
-        int ceil = (int) Math.ceil(calculateVerticalPadding(this.mRawMaxShadowSize, this.mCornerRadius, this.mAddPaddingForCorners));
-        int ceil2 = (int) Math.ceil(calculateHorizontalPadding(this.mRawMaxShadowSize, this.mCornerRadius, this.mAddPaddingForCorners));
-        rect.set(ceil2, ceil, ceil2, ceil);
+        int iCeil = (int) Math.ceil(calculateVerticalPadding(this.mRawMaxShadowSize, this.mCornerRadius, this.mAddPaddingForCorners));
+        int iCeil2 = (int) Math.ceil(calculateHorizontalPadding(this.mRawMaxShadowSize, this.mCornerRadius, this.mAddPaddingForCorners));
+        rect.set(iCeil2, iCeil, iCeil2, iCeil);
         return true;
     }
 

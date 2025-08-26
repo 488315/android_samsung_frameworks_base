@@ -83,46 +83,46 @@ public abstract class SprObjectBase implements Cloneable {
 
     public int getSPRSize() {
         Iterator<SprAttributeBase> it = this.mAttributeList.iterator();
-        int i = 4;
+        int sPRSize = 4;
         while (it.hasNext()) {
-            i += it.next().getSPRSize() + 5;
+            sPRSize += it.next().getSPRSize() + 5;
         }
-        return i;
+        return sPRSize;
     }
 
     private void loadAttributeFromSPR(SprInputStream sprInputStream) throws IOException {
         this.mAttributeList.clear();
-        int readInt = sprInputStream.readInt();
-        for (int i = 0; i < readInt; i++) {
-            byte readByte = sprInputStream.readByte();
-            int readInt2 = (sprInputStream.mMajorVersion < 12336 || sprInputStream.mMinorVersion < 12338) ? 0 : sprInputStream.readInt();
-            if (readByte != 0) {
-                if (readByte == 1) {
+        int i = sprInputStream.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            byte b = sprInputStream.readByte();
+            int i3 = (sprInputStream.mMajorVersion < 12336 || sprInputStream.mMinorVersion < 12338) ? 0 : sprInputStream.readInt();
+            if (b != 0) {
+                if (b == 1) {
                     this.mAttributeList.add(new SprAttributeClip(sprInputStream));
-                } else if (readByte == 3) {
+                } else if (b == 3) {
                     this.mAttributeList.add(new SprAttributeClipPath(sprInputStream));
-                } else if (readByte == 32) {
+                } else if (b == 32) {
                     this.mAttributeList.add(new SprAttributeFill(sprInputStream));
-                } else if (readByte == 35) {
+                } else if (b == 35) {
                     this.mAttributeList.add(new SprAttributeStroke(sprInputStream));
-                } else if (readByte == 64) {
+                } else if (b == 64) {
                     this.mAttributeList.add(new SprAttributeMatrix(sprInputStream));
-                } else if (readByte == 97) {
+                } else if (b == 97) {
                     this.mAttributeList.add(new SprAttributeAnimatorSet(sprInputStream));
                     sprInputStream.mAnimationObject.add(this);
-                } else if (readByte == 112) {
+                } else if (b == 112) {
                     this.mAttributeList.add(new SprAttributeShadow(sprInputStream));
-                } else if (readByte == 37) {
+                } else if (b == 37) {
                     this.mAttributeList.add(new SprAttributeStrokeLinecap(sprInputStream));
-                } else if (readByte == 38) {
+                } else if (b == 38) {
                     this.mAttributeList.add(new SprAttributeStrokeLinejoin(sprInputStream));
-                } else if (readByte == 40) {
+                } else if (b == 40) {
                     this.mAttributeList.add(new SprAttributeStrokeWidth(sprInputStream));
-                } else if (readByte == 41) {
+                } else if (b == 41) {
                     this.mAttributeList.add(new SprAttributeStrokeMiterlimit(sprInputStream));
                 } else {
-                    Log.e(TAG, "Unknown attribute id:" + ((int) readByte));
-                    sprInputStream.skip((long) readInt2);
+                    Log.e(TAG, "Unknown attribute id:" + ((int) b));
+                    sprInputStream.skip((long) i3);
                 }
             }
         }
@@ -285,18 +285,18 @@ public abstract class SprObjectBase implements Cloneable {
             return;
         }
         if (this.isVisibleFill) {
-            float f = sprAttributeShadow.radius;
+            float strokeWidth = sprAttributeShadow.radius;
             if (this.isVisibleStroke) {
-                f += this.strokePaint.getStrokeWidth();
+                strokeWidth += this.strokePaint.getStrokeWidth();
             }
-            if (f > 0.5f) {
-                f = (f - 0.5f) / 0.57735f;
+            if (strokeWidth > 0.5f) {
+                strokeWidth = (strokeWidth - 0.5f) / 0.57735f;
             }
-            this.fillPaint.setShadowLayer(f, this.shadow.dx, this.shadow.dy, this.shadow.shadowColor);
+            this.fillPaint.setShadowLayer(strokeWidth, this.shadow.dx, this.shadow.dy, this.shadow.shadowColor);
             return;
         }
         if (this.isVisibleStroke) {
-            float f2 = sprAttributeShadow.radius;
+            float f = sprAttributeShadow.radius;
             this.strokePaint.setShadowLayer(this.shadow.radius, this.shadow.dx, this.shadow.dy, this.shadow.shadowColor);
         }
     }
@@ -311,12 +311,12 @@ public abstract class SprObjectBase implements Cloneable {
 
     @Override // 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SprObjectBase mo9224clone() throws CloneNotSupportedException {
+    public SprObjectBase mo9236clone() throws CloneNotSupportedException {
         SprObjectBase sprObjectBase = (SprObjectBase) super.clone();
         sprObjectBase.mAttributeList = new ArrayList<>();
         Iterator<SprAttributeBase> it = this.mAttributeList.iterator();
         while (it.hasNext()) {
-            sprObjectBase.mAttributeList.add(it.next().mo9221clone());
+            sprObjectBase.mAttributeList.add(it.next().mo9233clone());
         }
         if (this.strokePaint != null) {
             sprObjectBase.strokePaint = new Paint(this.strokePaint);

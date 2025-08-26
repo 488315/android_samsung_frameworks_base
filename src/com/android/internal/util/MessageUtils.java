@@ -20,7 +20,7 @@ public class MessageUtils {
         }
     }
 
-    public static SparseArray<String> findMessageNames(Class[] clsArr, String[] strArr) {
+    public static SparseArray<String> findMessageNames(Class[] clsArr, String[] strArr) throws IllegalAccessException, IllegalArgumentException {
         SparseArray<String> sparseArray = new SparseArray<>();
         for (Class cls : clsArr) {
             try {

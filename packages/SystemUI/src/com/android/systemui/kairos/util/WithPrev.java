@@ -2,7 +2,6 @@ package com.android.systemui.kairos.util;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class WithPrev {
     public final Object newValue;
@@ -26,9 +25,9 @@ public final class WithPrev {
 
     public final int hashCode() {
         Object obj = this.previousValue;
-        int hashCode = (obj == null ? 0 : obj.hashCode()) * 31;
+        int iHashCode = (obj == null ? 0 : obj.hashCode()) * 31;
         Object obj2 = this.newValue;
-        return hashCode + (obj2 != null ? obj2.hashCode() : 0);
+        return iHashCode + (obj2 != null ? obj2.hashCode() : 0);
     }
 
     public final String toString() {

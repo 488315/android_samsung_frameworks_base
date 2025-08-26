@@ -9,7 +9,6 @@ import androidx.compose.runtime.RecomposeScopeImplKt;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BackHandler_androidKt {
     public static final void PredictiveBackHandler(final boolean z, final Function2 function2, Composer composer, final int i, final int i2) {
@@ -43,9 +42,9 @@ public abstract class BackHandler_androidKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.material3.internal.BackHandler_androidKt$PredictiveBackHandler$1
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.material3.internal.BackHandler_androidKt.PredictiveBackHandler.1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);

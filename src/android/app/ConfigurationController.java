@@ -94,12 +94,12 @@ class ConfigurationController {
 
     void handleConfigurationChanged(Configuration configuration, CompatibilityInfo compatibilityInfo) {
         ClientTransactionListenerController clientTransactionListenerController = ClientTransactionListenerController.getInstance();
-        Application currentApplication = ActivityThread.currentApplication();
-        clientTransactionListenerController.onContextConfigurationPreChanged(currentApplication);
+        Application applicationCurrentApplication = ActivityThread.currentApplication();
+        clientTransactionListenerController.onContextConfigurationPreChanged(applicationCurrentApplication);
         try {
             handleConfigurationChangedInner(configuration, compatibilityInfo);
         } finally {
-            clientTransactionListenerController.onContextConfigurationPostChanged(currentApplication);
+            clientTransactionListenerController.onContextConfigurationPostChanged(applicationCurrentApplication);
         }
     }
 
@@ -129,23 +129,23 @@ class ConfigurationController {
                 this.mConfiguration = new Configuration();
             }
             if (this.mConfiguration.isOtherSeqNewer(configuration) || compatibilityInfo != null) {
-                int updateFrom = this.mConfiguration.updateFrom(configuration);
-                Configuration applyCompatConfiguration = applyCompatConfiguration();
-                HardwareRenderer.sendDeviceConfigurationForDebugging(applyCompatConfiguration);
-                if ((theme.getChangingConfigurations() & updateFrom) != 0) {
+                int iUpdateFrom = this.mConfiguration.updateFrom(configuration);
+                Configuration configurationApplyCompatConfiguration = applyCompatConfiguration();
+                HardwareRenderer.sendDeviceConfigurationForDebugging(configurationApplyCompatConfiguration);
+                if ((theme.getChangingConfigurations() & iUpdateFrom) != 0) {
                     theme.rebase();
                 }
-                if (theme2 != null && (theme2.getChangingConfigurations() & updateFrom) != 0) {
+                if (theme2 != null && (theme2.getChangingConfigurations() & iUpdateFrom) != 0) {
                     theme2.rebase();
                 }
-                ArrayList<ComponentCallbacks2> collectComponentCallbacks = this.mActivityThread.collectComponentCallbacks(false);
-                ConfigurationHelper.freeTextLayoutCachesIfNeeded(updateFrom);
-                if (collectComponentCallbacks != null) {
-                    int size = collectComponentCallbacks.size();
+                ArrayList<ComponentCallbacks2> arrayListCollectComponentCallbacks = this.mActivityThread.collectComponentCallbacks(false);
+                ConfigurationHelper.freeTextLayoutCachesIfNeeded(iUpdateFrom);
+                if (arrayListCollectComponentCallbacks != null) {
+                    int size = arrayListCollectComponentCallbacks.size();
                     for (int i = 0; i < size; i++) {
-                        ComponentCallbacks2 componentCallbacks2 = collectComponentCallbacks.get(i);
+                        ComponentCallbacks2 componentCallbacks2 = arrayListCollectComponentCallbacks.get(i);
                         if (!z) {
-                            performConfigurationChanged(componentCallbacks2, applyCompatConfiguration);
+                            performConfigurationChanged(componentCallbacks2, configurationApplyCompatConfiguration);
                         }
                     }
                 }

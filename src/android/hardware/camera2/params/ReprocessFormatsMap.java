@@ -15,10 +15,10 @@ public final class ReprocessFormatsMap {
         int i = 0;
         int i2 = 0;
         while (i < iArr.length) {
-            int checkArgumentFormatInternal = StreamConfigurationMap.checkArgumentFormatInternal(iArr[i]);
+            int iCheckArgumentFormatInternal = StreamConfigurationMap.checkArgumentFormatInternal(iArr[i]);
             int i3 = i + 1;
             if (length - 1 < 1) {
-                throw new IllegalArgumentException(String.format("Input %x had no output format length listed", Integer.valueOf(checkArgumentFormatInternal)));
+                throw new IllegalArgumentException(String.format("Input %x had no output format length listed", Integer.valueOf(iCheckArgumentFormatInternal)));
             }
             int i4 = iArr[i3];
             length -= 2;
@@ -28,7 +28,7 @@ public final class ReprocessFormatsMap {
             }
             if (i4 > 0) {
                 if (length < i4) {
-                    throw new IllegalArgumentException(String.format("Input %x had too few output formats listed (actual: %d, expected: %d)", Integer.valueOf(checkArgumentFormatInternal), Integer.valueOf(length), Integer.valueOf(i4)));
+                    throw new IllegalArgumentException(String.format("Input %x had too few output formats listed (actual: %d, expected: %d)", Integer.valueOf(iCheckArgumentFormatInternal), Integer.valueOf(length), Integer.valueOf(i4)));
                 }
                 i += i4;
                 length -= i4;

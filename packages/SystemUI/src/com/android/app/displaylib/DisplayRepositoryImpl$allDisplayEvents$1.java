@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DisplayRepositoryImpl$allDisplayEvents$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Handler $backgroundHandler;
@@ -52,17 +51,17 @@ final class DisplayRepositoryImpl$allDisplayEvents$1 extends SuspendLambda imple
             ?? r1 = new DisplayManager.DisplayListener() { // from class: com.android.app.displaylib.DisplayRepositoryImpl$allDisplayEvents$1$callback$1
                 @Override // android.hardware.display.DisplayManager.DisplayListener
                 public final void onDisplayAdded(int i2) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new DisplayEvent.Added(i2));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new DisplayEvent.Added(i2));
                 }
 
                 @Override // android.hardware.display.DisplayManager.DisplayListener
                 public final void onDisplayChanged(int i2) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new DisplayEvent.Changed(i2));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new DisplayEvent.Changed(i2));
                 }
 
                 @Override // android.hardware.display.DisplayManager.DisplayListener
                 public final void onDisplayRemoved(int i2) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new DisplayEvent.Removed(i2));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new DisplayEvent.Removed(i2));
                 }
             };
             this.this$0.displayManager.registerDisplayListener(r1, this.$backgroundHandler, 7L);

@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.SpreadBuilder;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DesktopUserRepositories$sanitizeUsers$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ List<Integer> $usersToDelete;
@@ -49,9 +48,9 @@ final class DesktopUserRepositories$sanitizeUsers$2 extends SuspendLambda implem
                 DesktopPersistentRepository desktopPersistentRepository = this.this$0.persistentRepository;
                 List<Integer> list = this.$usersToDelete;
                 this.label = 1;
-                Object removeUsers = desktopPersistentRepository.removeUsers(list, this);
-                this = removeUsers;
-                if (removeUsers == coroutineSingletons) {
+                Object objRemoveUsers = desktopPersistentRepository.removeUsers(list, this);
+                this = objRemoveUsers;
+                if (objRemoveUsers == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -67,8 +66,8 @@ final class DesktopUserRepositories$sanitizeUsers$2 extends SuspendLambda implem
             int i2 = DesktopUserRepositories.$r8$clinit;
             desktopUserRepositories.getClass();
             ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-            SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopUserRepositories", objArr);
-            ProtoLog.e(shellProtoLogGroup, "%s: An exception occurred while updating the persistent repository \n%s", m.list.toArray(new Object[m.list.size()]));
+            SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopUserRepositories", objArr);
+            ProtoLog.e(shellProtoLogGroup, "%s: An exception occurred while updating the persistent repository \n%s", spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
         }
         return Unit.INSTANCE;
     }

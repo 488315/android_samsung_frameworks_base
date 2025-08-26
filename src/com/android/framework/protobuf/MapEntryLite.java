@@ -114,45 +114,45 @@ public class MapEntryLite<K, V> {
     }
 
     static <K, V> Map.Entry<K, V> parseEntry(CodedInputStream codedInputStream, Metadata<K, V> metadata, ExtensionRegistryLite extensionRegistryLite) throws IOException {
-        Object obj = metadata.defaultKey;
-        Object obj2 = metadata.defaultValue;
+        Object field = metadata.defaultKey;
+        Object field2 = metadata.defaultValue;
         while (true) {
-            int readTag = codedInputStream.readTag();
-            if (readTag == 0) {
+            int tag = codedInputStream.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == WireFormat.makeTag(1, metadata.keyType.getWireType())) {
-                obj = parseField(codedInputStream, extensionRegistryLite, metadata.keyType, obj);
-            } else if (readTag == WireFormat.makeTag(2, metadata.valueType.getWireType())) {
-                obj2 = parseField(codedInputStream, extensionRegistryLite, metadata.valueType, obj2);
-            } else if (!codedInputStream.skipField(readTag)) {
+            if (tag == WireFormat.makeTag(1, metadata.keyType.getWireType())) {
+                field = parseField(codedInputStream, extensionRegistryLite, metadata.keyType, field);
+            } else if (tag == WireFormat.makeTag(2, metadata.valueType.getWireType())) {
+                field2 = parseField(codedInputStream, extensionRegistryLite, metadata.valueType, field2);
+            } else if (!codedInputStream.skipField(tag)) {
                 break;
             }
         }
-        return new AbstractMap.SimpleImmutableEntry(obj, obj2);
+        return new AbstractMap.SimpleImmutableEntry(field, field2);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     public void parseInto(MapFieldLite<K, V> mapFieldLite, CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite) throws IOException {
-        int pushLimit = codedInputStream.pushLimit(codedInputStream.readRawVarint32());
-        Object obj = this.metadata.defaultKey;
-        Object obj2 = this.metadata.defaultValue;
+        int iPushLimit = codedInputStream.pushLimit(codedInputStream.readRawVarint32());
+        Object field = this.metadata.defaultKey;
+        Object field2 = this.metadata.defaultValue;
         while (true) {
-            int readTag = codedInputStream.readTag();
-            if (readTag == 0) {
+            int tag = codedInputStream.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == WireFormat.makeTag(1, this.metadata.keyType.getWireType())) {
-                obj = parseField(codedInputStream, extensionRegistryLite, this.metadata.keyType, obj);
-            } else if (readTag == WireFormat.makeTag(2, this.metadata.valueType.getWireType())) {
-                obj2 = parseField(codedInputStream, extensionRegistryLite, this.metadata.valueType, obj2);
-            } else if (!codedInputStream.skipField(readTag)) {
+            if (tag == WireFormat.makeTag(1, this.metadata.keyType.getWireType())) {
+                field = parseField(codedInputStream, extensionRegistryLite, this.metadata.keyType, field);
+            } else if (tag == WireFormat.makeTag(2, this.metadata.valueType.getWireType())) {
+                field2 = parseField(codedInputStream, extensionRegistryLite, this.metadata.valueType, field2);
+            } else if (!codedInputStream.skipField(tag)) {
                 break;
             }
         }
         codedInputStream.checkLastTagWas(0);
-        codedInputStream.popLimit(pushLimit);
-        mapFieldLite.put(obj, obj2);
+        codedInputStream.popLimit(iPushLimit);
+        mapFieldLite.put(field, field2);
     }
 
     Metadata<K, V> getMetadata() {

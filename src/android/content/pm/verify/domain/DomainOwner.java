@@ -78,9 +78,9 @@ public final class DomainOwner implements Parcelable {
 
     DomainOwner(Parcel parcel) {
         boolean z = (parcel.readByte() & 2) != 0;
-        String readString = parcel.readString();
-        this.mPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
+        String string = parcel.readString();
+        this.mPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
         this.mOverrideable = z;
     }
 }

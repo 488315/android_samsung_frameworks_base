@@ -54,7 +54,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BouncerSwipeTouchHandler implements TouchHandler {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -86,11 +85,10 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
     public final Lazy windowRootView$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            return (WindowRootView) ((Provider) BouncerSwipeTouchHandler.this.windowRootViewProvider.get()).get();
+            return (WindowRootView) ((Provider) this.f$0.windowRootViewProvider.get()).get();
         }
     });
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -120,7 +118,7 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler.1.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        BouncerSwipeTouchHandler.this.onGlanceableTouchAvailable(((Boolean) obj2).booleanValue());
+                        bouncerSwipeTouchHandler.onGlanceableTouchAvailable(((Boolean) obj2).booleanValue());
                         return Unit.INSTANCE;
                     }
                 };
@@ -138,7 +136,6 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -150,7 +147,6 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DreamEvent implements UiEventLogger.UiEventEnum {
         public static final /* synthetic */ DreamEvent[] $VALUES;
         public static final DreamEvent DREAM_BOUNCER_FULLY_VISIBLE;
@@ -184,11 +180,9 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ValueAnimatorCreator {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface VelocityTrackerFactory {
     }
 
@@ -217,41 +211,41 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
             public final boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float f3, float f4) {
                 ScrimController scrimController;
-                boolean z = ((WindowRootView) BouncerSwipeTouchHandler.this.windowRootView$delegate.getValue()).getResources().getConfiguration().orientation == 2;
-                BouncerSwipeTouchHandler bouncerSwipeTouchHandler = BouncerSwipeTouchHandler.this;
+                boolean z = ((WindowRootView) this.this$0.windowRootView$delegate.getValue()).getResources().getConfiguration().orientation == 2;
+                BouncerSwipeTouchHandler bouncerSwipeTouchHandler = this.this$0;
                 if (bouncerSwipeTouchHandler.capture == null) {
-                    bouncerSwipeTouchHandler.capture = Boolean.valueOf(Math.abs((double) f4) > Math.abs((double) f3) && f4 > 0.0f && BouncerSwipeTouchHandler.this.touchAvailable);
-                    if (Intrinsics.areEqual(BouncerSwipeTouchHandler.this.capture, Boolean.TRUE)) {
-                        BouncerSwipeTouchHandler bouncerSwipeTouchHandler2 = BouncerSwipeTouchHandler.this;
+                    bouncerSwipeTouchHandler.capture = Boolean.valueOf(Math.abs((double) f4) > Math.abs((double) f3) && f4 > 0.0f && this.this$0.touchAvailable);
+                    if (Intrinsics.areEqual(this.this$0.capture, Boolean.TRUE)) {
+                        BouncerSwipeTouchHandler bouncerSwipeTouchHandler2 = this.this$0;
                         bouncerSwipeTouchHandler2.expanded = false;
                         if ((bouncerSwipeTouchHandler2.isKeyguardScreenRotationAllowed || !z) && (scrimController = bouncerSwipeTouchHandler2.currentScrimController) != null) {
                             scrimController.show$2();
                         }
                     }
                 }
-                if (!Intrinsics.areEqual(BouncerSwipeTouchHandler.this.capture, Boolean.TRUE)) {
+                if (!Intrinsics.areEqual(this.this$0.capture, Boolean.TRUE)) {
                     return false;
                 }
-                if (BouncerSwipeTouchHandler.this.centralSurfaces.isPresent() && motionEvent != null) {
-                    final BouncerSwipeTouchHandler bouncerSwipeTouchHandler3 = BouncerSwipeTouchHandler.this;
+                if (this.this$0.centralSurfaces.isPresent() && motionEvent != null) {
+                    final BouncerSwipeTouchHandler bouncerSwipeTouchHandler3 = this.this$0;
                     CommunalSettingsInteractor communalSettingsInteractor2 = communalSettingsInteractor;
                     if (motionEvent.getY() >= motionEvent2.getY()) {
                         if (motionEvent.getY() > motionEvent2.getY() && ((Boolean) bouncerSwipeTouchHandler3.keyguardInteractor.isKeyguardDismissible.getValue()).booleanValue()) {
                             bouncerSwipeTouchHandler3.activityStarter.executeRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$onGestureListener$1$onScroll$2$1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    ((CentralSurfacesImpl) ((CentralSurfaces) BouncerSwipeTouchHandler.this.centralSurfaces.get())).awakenDreams();
+                                    ((CentralSurfacesImpl) ((CentralSurfaces) bouncerSwipeTouchHandler3.centralSurfaces.get())).awakenDreams();
                                 }
                             }, null, true, true, false);
                             return true;
                         }
                         if (bouncerSwipeTouchHandler3.touchSession != null) {
-                            double abs = Math.abs(motionEvent.getY() - motionEvent2.getY());
+                            double dAbs = Math.abs(motionEvent.getY() - motionEvent2.getY());
                             bouncerSwipeTouchHandler3.touchSession.getClass();
-                            float height = (float) (abs / ((TouchMonitor.TouchSessionImpl) r12).mBounds.height());
+                            float fHeight = (float) (dAbs / ((TouchMonitor.TouchSessionImpl) r12).mBounds.height());
                             communalSettingsInteractor2.isV2FlagEnabled();
                             if (bouncerSwipeTouchHandler3.touchSession != null) {
-                                float f5 = 1 - height;
+                                float f5 = 1 - fHeight;
                                 bouncerSwipeTouchHandler3.currentExpansion = f5;
                                 ShadeExpansionChangeEvent shadeExpansionChangeEvent = new ShadeExpansionChangeEvent(f5, bouncerSwipeTouchHandler3.expanded, true);
                                 ScrimController scrimController2 = bouncerSwipeTouchHandler3.currentScrimController;
@@ -270,18 +264,18 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
 
     @Override // com.android.systemui.ambient.touch.TouchHandler
     public final void getTouchInitiationRegion(Rect rect, Region region, Rect rect2) {
-        int width = rect.width();
-        int height = rect.height();
-        float f = height;
+        int iWidth = rect.width();
+        int iHeight = rect.height();
+        float f = iHeight;
         float f2 = 1;
-        int round = Math.round((f2 - this.minBouncerZoneScreenPercentage) * f);
-        Rect rect3 = new Rect(0, Math.round((f2 - this.bouncerZoneScreenPercentage) * f), width, height);
+        int iRound = Math.round((f2 - this.minBouncerZoneScreenPercentage) * f);
+        Rect rect3 = new Rect(0, Math.round((f2 - this.bouncerZoneScreenPercentage) * f), iWidth, iHeight);
         region.op(rect, Region.Op.UNION);
         if (rect2 != null) {
             region.op(rect2, Region.Op.DIFFERENCE);
         }
         if (rect2 != null) {
-            rect3.top = (int) Math.max(rect3.top, (int) Math.min(Math.max(0.0d, rect2.bottom), round));
+            rect3.top = (int) Math.max(rect3.top, (int) Math.min(Math.max(0.0d, rect2.bottom), iRound));
         }
         region.union(rect3);
     }
@@ -293,11 +287,11 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
     @Override // com.android.systemui.ambient.touch.TouchHandler
     public final void onSessionStart(TouchHandler.TouchSession touchSession) {
         ((BouncerSwipeModule$$ExternalSyntheticLambda0) this.velocityTrackerFactory).getClass();
-        VelocityTracker obtain = VelocityTracker.obtain();
-        this.velocityTracker = obtain;
+        VelocityTracker velocityTrackerObtain = VelocityTracker.obtain();
+        this.velocityTracker = velocityTrackerObtain;
         this.touchSession = touchSession;
-        if (obtain != null) {
-            obtain.clear();
+        if (velocityTrackerObtain != null) {
+            velocityTrackerObtain.clear();
         }
         ScrimManager scrimManager = this.scrimManager;
         scrimManager.mExecutor.execute(new ScrimManager$$ExternalSyntheticLambda1(scrimManager, this.scrimManagerCallback, 0));
@@ -306,7 +300,7 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
         ShadeRepositoryImpl shadeRepositoryImpl = (ShadeRepositoryImpl) this.shadeRepository;
         shadeRepositoryImpl._legacyShadeTracking.updateState(null, Boolean.TRUE);
         TouchMonitor.TouchSessionImpl touchSessionImpl = (TouchMonitor.TouchSessionImpl) touchSession;
-        touchSessionImpl.mCallbacks.add(new TouchHandler.TouchSession.Callback() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$onSessionStart$2
+        touchSessionImpl.mCallbacks.add(new TouchHandler.TouchSession.Callback() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler.onSessionStart.2
             @Override // com.android.systemui.ambient.touch.TouchHandler.TouchSession.Callback
             public final void onRemoved() {
                 BouncerSwipeTouchHandler bouncerSwipeTouchHandler = BouncerSwipeTouchHandler.this;
@@ -324,7 +318,7 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
             }
         });
         touchSessionImpl.mGestureListeners.add(this.onGestureListener);
-        touchSessionImpl.mEventListeners.add(new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$onSessionStart$3
+        touchSessionImpl.mEventListeners.add(new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler.onSessionStart.3
             @Override // com.android.systemui.shared.system.InputChannelCompat$InputEventListener
             public final void onInputEvent(InputEvent inputEvent) {
                 TouchHandler.TouchSession touchSession2;
@@ -367,24 +361,24 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
                 bouncerSwipeTouchHandler.expanded = !z;
                 float f = !z ? 0.0f : 1.0f;
                 if (f == 0.0f) {
-                    bouncerSwipeTouchHandler.uiEventLogger.log(BouncerSwipeTouchHandler.DreamEvent.DREAM_SWIPED);
+                    bouncerSwipeTouchHandler.uiEventLogger.log(DreamEvent.DREAM_SWIPED);
                 }
                 if (!bouncerSwipeTouchHandler.centralSurfaces.isPresent() || ((Boolean) bouncerSwipeTouchHandler.keyguardInteractor.isKeyguardDismissible.getValue()).booleanValue() || (touchSession2 = bouncerSwipeTouchHandler.touchSession) == null) {
                     return;
                 }
-                float height = ((TouchMonitor.TouchSessionImpl) touchSession2).mBounds.height();
+                float fHeight = ((TouchMonitor.TouchSessionImpl) touchSession2).mBounds.height();
                 float f2 = bouncerSwipeTouchHandler.currentExpansion;
-                float f3 = height * f2;
-                float f4 = height * f;
+                float f3 = fHeight * f2;
+                float f4 = fHeight * f;
                 ((BouncerSwipeModule$$ExternalSyntheticLambda0) bouncerSwipeTouchHandler.valueAnimatorCreator).getClass();
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(f2, f);
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$createExpansionAnimator$1
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f2, f);
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$createExpansionAnimator$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                        float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                        BouncerSwipeTouchHandler bouncerSwipeTouchHandler2 = BouncerSwipeTouchHandler.this;
-                        bouncerSwipeTouchHandler2.currentExpansion = floatValue;
-                        ShadeExpansionChangeEvent shadeExpansionChangeEvent = new ShadeExpansionChangeEvent(floatValue, bouncerSwipeTouchHandler2.expanded, true);
+                        float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                        BouncerSwipeTouchHandler bouncerSwipeTouchHandler2 = bouncerSwipeTouchHandler;
+                        bouncerSwipeTouchHandler2.currentExpansion = fFloatValue;
+                        ShadeExpansionChangeEvent shadeExpansionChangeEvent = new ShadeExpansionChangeEvent(fFloatValue, bouncerSwipeTouchHandler2.expanded, true);
                         ScrimController scrimController = bouncerSwipeTouchHandler2.currentScrimController;
                         if (scrimController != null) {
                             scrimController.expand(shadeExpansionChangeEvent);
@@ -392,19 +386,19 @@ public final class BouncerSwipeTouchHandler implements TouchHandler {
                     }
                 });
                 if (f == 0.0f) {
-                    ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$createExpansionAnimator$2
+                    valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.ambient.touch.BouncerSwipeTouchHandler$createExpansionAnimator$2
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationEnd(Animator animator) {
-                            BouncerSwipeTouchHandler.this.uiEventLogger.log(BouncerSwipeTouchHandler.DreamEvent.DREAM_BOUNCER_FULLY_VISIBLE);
+                            bouncerSwipeTouchHandler.uiEventLogger.log(BouncerSwipeTouchHandler.DreamEvent.DREAM_BOUNCER_FULLY_VISIBLE);
                         }
                     });
                 }
                 if (f == 1.0f) {
-                    valueAnimator = ofFloat;
-                    bouncerSwipeTouchHandler.flingAnimationUtilsClosing.apply(valueAnimator, f3, f4, yVelocity, height);
+                    valueAnimator = valueAnimatorOfFloat;
+                    bouncerSwipeTouchHandler.flingAnimationUtilsClosing.apply(valueAnimator, f3, f4, yVelocity, fHeight);
                 } else {
-                    valueAnimator = ofFloat;
-                    bouncerSwipeTouchHandler.flingAnimationUtils.apply(valueAnimator, f3, f4, yVelocity, height);
+                    valueAnimator = valueAnimatorOfFloat;
+                    bouncerSwipeTouchHandler.flingAnimationUtils.apply(valueAnimator, f3, f4, yVelocity, fHeight);
                 }
                 valueAnimator.start();
             }

@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DisconnectedDeviceController$Companion$connectedDeviceChanges$1$updateDevices$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ProducerScope $$this$callbackFlow;
@@ -45,9 +44,9 @@ final class DisconnectedDeviceController$Companion$connectedDeviceChanges$1$upda
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             SendChannel sendChannel = this.$$this$callbackFlow;
-            List sorted = CollectionsKt___CollectionsKt.sorted(this.$this_connectedDeviceChanges.mCachedDeviceManager.getCachedDevicesCopy());
+            List listSorted = CollectionsKt___CollectionsKt.sorted(this.$this_connectedDeviceChanges.mCachedDeviceManager.getCachedDevicesCopy());
             this.label = 1;
-            if (((ChannelCoroutine) sendChannel)._channel.send(sorted, this) == coroutineSingletons) {
+            if (((ChannelCoroutine) sendChannel)._channel.send(listSorted, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

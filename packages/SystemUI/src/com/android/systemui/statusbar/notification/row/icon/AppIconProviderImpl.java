@@ -22,14 +22,12 @@ import kotlin.collections.CollectionsKt__MutableCollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AppIconProviderImpl implements AppIconProvider, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final NotifCollectionCache cache;
     public final Context sysuiContext;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,7 +37,6 @@ public final class AppIconProviderImpl implements AppIconProvider, Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotificationIcons extends BaseIconFactory {
         public NotificationIcons(Context context, int i, int i2) {
             super(context, i, i2);
@@ -58,24 +55,24 @@ public final class AppIconProviderImpl implements AppIconProvider, Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        PrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.println("cache information:");
-        asIndenting.increaseIndent();
+        PrintWriter printWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        printWriterAsIndenting.println("cache information:");
+        printWriterAsIndenting.increaseIndent();
         try {
-            this.cache.dump(asIndenting, strArr);
-            asIndenting.decreaseIndent();
+            this.cache.dump(printWriterAsIndenting, strArr);
+            printWriterAsIndenting.decreaseIndent();
             getIconFactory();
-            asIndenting.println("icon factory information:");
-            asIndenting.increaseIndent();
+            printWriterAsIndenting.println("icon factory information:");
+            printWriterAsIndenting.increaseIndent();
         } finally {
-            asIndenting.decreaseIndent();
+            printWriterAsIndenting.decreaseIndent();
         }
     }
 
     public final NotificationIcons getIconFactory() {
-        boolean isLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
+        boolean zIsLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
         Resources resources = this.sysuiContext.getResources();
-        return new NotificationIcons(this.sysuiContext, resources.getConfiguration().densityDpi, resources.getDimensionPixelSize(isLowRamDeviceStatic ? 17105816 : 17105815));
+        return new NotificationIcons(this.sysuiContext, resources.getConfiguration().densityDpi, resources.getDimensionPixelSize(zIsLowRamDeviceStatic ? 17105817 : 17105816));
     }
 
     @Override // com.android.systemui.statusbar.notification.row.icon.AppIconProvider
@@ -83,18 +80,18 @@ public final class AppIconProviderImpl implements AppIconProvider, Dumpable {
         return (Drawable) this.cache.getOrFetch(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, z ? "|WORK" : ""), new Function1() { // from class: com.android.systemui.statusbar.notification.row.icon.AppIconProviderImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context2 = context;
                 int i = AppIconProviderImpl.$r8$clinit;
-                AppIconProviderImpl appIconProviderImpl = AppIconProviderImpl.this;
+                AppIconProviderImpl appIconProviderImpl = this.f$0;
                 appIconProviderImpl.getClass();
                 PackageManager packageManager = context2.getPackageManager();
-                Drawable loadUnbadgedIcon = packageManager.getApplicationInfo(str, 0).loadUnbadgedIcon(packageManager);
+                Drawable drawableLoadUnbadgedIcon = packageManager.getApplicationInfo(str, 0).loadUnbadgedIcon(packageManager);
                 BaseIconFactory.IconOptions iconOptions = new BaseIconFactory.IconOptions();
                 iconOptions.mUserIconInfo = new UserIconInfo(UserHandle.of(context2.getUserId()), z ? 1 : 0);
                 iconOptions.mGenerationMode = 3;
                 iconOptions.mExtractedColor = -16776961;
-                return appIconProviderImpl.getIconFactory().createBadgedIconBitmap(loadUnbadgedIcon, iconOptions).newIcon$1(0, appIconProviderImpl.sysuiContext);
+                return appIconProviderImpl.getIconFactory().createBadgedIconBitmap(drawableLoadUnbadgedIcon, iconOptions).newIcon$1(0, appIconProviderImpl.sysuiContext);
             }
         });
     }

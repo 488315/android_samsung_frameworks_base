@@ -3,7 +3,6 @@ package com.android.systemui;
 import android.view.DisplayCutout;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SysUICutoutInformation {
     public final CameraProtectionInfo cameraProtection;
@@ -26,9 +25,9 @@ public final class SysUICutoutInformation {
     }
 
     public final int hashCode() {
-        int hashCode = this.cutout.hashCode() * 31;
+        int iHashCode = this.cutout.hashCode() * 31;
         CameraProtectionInfo cameraProtectionInfo = this.cameraProtection;
-        return hashCode + (cameraProtectionInfo == null ? 0 : cameraProtectionInfo.hashCode());
+        return iHashCode + (cameraProtectionInfo == null ? 0 : cameraProtectionInfo.hashCode());
     }
 
     public final String toString() {

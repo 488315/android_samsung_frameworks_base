@@ -317,9 +317,9 @@ public interface IImsCallSessionListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsCallSessionListener)) {
-                return (IImsCallSessionListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsCallSessionListener)) {
+                return (IImsCallSessionListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -425,245 +425,245 @@ public interface IImsCallSessionListener extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IImsCallSession asInterface = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsStreamMediaProfile imsStreamMediaProfile = (ImsStreamMediaProfile) parcel.readTypedObject(ImsStreamMediaProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionProgressing(asInterface, imsStreamMediaProfile);
+                    callSessionProgressing(iImsCallSessionAsInterface, imsStreamMediaProfile);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    IImsCallSession asInterface2 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface2 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionStarted(asInterface2, imsCallProfile);
+                    callSessionStarted(iImsCallSessionAsInterface2, imsCallProfile);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    IImsCallSession asInterface3 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface3 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsReasonInfo imsReasonInfo = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionStartFailed(asInterface3, imsReasonInfo);
+                    callSessionStartFailed(iImsCallSessionAsInterface3, imsReasonInfo);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    IImsCallSession asInterface4 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface4 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsReasonInfo imsReasonInfo2 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionTerminated(asInterface4, imsReasonInfo2);
+                    callSessionTerminated(iImsCallSessionAsInterface4, imsReasonInfo2);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    IImsCallSession asInterface5 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface5 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile2 = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionHeld(asInterface5, imsCallProfile2);
+                    callSessionHeld(iImsCallSessionAsInterface5, imsCallProfile2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    IImsCallSession asInterface6 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface6 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsReasonInfo imsReasonInfo3 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionHoldFailed(asInterface6, imsReasonInfo3);
+                    callSessionHoldFailed(iImsCallSessionAsInterface6, imsReasonInfo3);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    IImsCallSession asInterface7 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface7 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile3 = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionHoldReceived(asInterface7, imsCallProfile3);
+                    callSessionHoldReceived(iImsCallSessionAsInterface7, imsCallProfile3);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IImsCallSession asInterface8 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface8 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile4 = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionResumed(asInterface8, imsCallProfile4);
+                    callSessionResumed(iImsCallSessionAsInterface8, imsCallProfile4);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    IImsCallSession asInterface9 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface9 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsReasonInfo imsReasonInfo4 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionResumeFailed(asInterface9, imsReasonInfo4);
+                    callSessionResumeFailed(iImsCallSessionAsInterface9, imsReasonInfo4);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    IImsCallSession asInterface10 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface10 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile5 = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionResumeReceived(asInterface10, imsCallProfile5);
+                    callSessionResumeReceived(iImsCallSessionAsInterface10, imsCallProfile5);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    IImsCallSession asInterface11 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
-                    IImsCallSession asInterface12 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface11 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface12 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile6 = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionMergeStarted(asInterface11, asInterface12, imsCallProfile6);
+                    callSessionMergeStarted(iImsCallSessionAsInterface11, iImsCallSessionAsInterface12, imsCallProfile6);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    IImsCallSession asInterface13 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface13 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    callSessionMergeComplete(asInterface13);
+                    callSessionMergeComplete(iImsCallSessionAsInterface13);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    IImsCallSession asInterface14 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface14 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsReasonInfo imsReasonInfo5 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionMergeFailed(asInterface14, imsReasonInfo5);
+                    callSessionMergeFailed(iImsCallSessionAsInterface14, imsReasonInfo5);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    IImsCallSession asInterface15 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface15 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile7 = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionUpdated(asInterface15, imsCallProfile7);
+                    callSessionUpdated(iImsCallSessionAsInterface15, imsCallProfile7);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    IImsCallSession asInterface16 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface16 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsReasonInfo imsReasonInfo6 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionUpdateFailed(asInterface16, imsReasonInfo6);
+                    callSessionUpdateFailed(iImsCallSessionAsInterface16, imsReasonInfo6);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    IImsCallSession asInterface17 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface17 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile8 = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionUpdateReceived(asInterface17, imsCallProfile8);
+                    callSessionUpdateReceived(iImsCallSessionAsInterface17, imsCallProfile8);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    IImsCallSession asInterface18 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
-                    IImsCallSession asInterface19 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface18 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface19 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile9 = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionConferenceExtended(asInterface18, asInterface19, imsCallProfile9);
+                    callSessionConferenceExtended(iImsCallSessionAsInterface18, iImsCallSessionAsInterface19, imsCallProfile9);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    IImsCallSession asInterface20 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface20 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsReasonInfo imsReasonInfo7 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionConferenceExtendFailed(asInterface20, imsReasonInfo7);
+                    callSessionConferenceExtendFailed(iImsCallSessionAsInterface20, imsReasonInfo7);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    IImsCallSession asInterface21 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
-                    IImsCallSession asInterface22 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface21 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface22 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile10 = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionConferenceExtendReceived(asInterface21, asInterface22, imsCallProfile10);
+                    callSessionConferenceExtendReceived(iImsCallSessionAsInterface21, iImsCallSessionAsInterface22, imsCallProfile10);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    IImsCallSession asInterface23 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface23 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    callSessionInviteParticipantsRequestDelivered(asInterface23);
+                    callSessionInviteParticipantsRequestDelivered(iImsCallSessionAsInterface23);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    IImsCallSession asInterface24 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface24 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsReasonInfo imsReasonInfo8 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionInviteParticipantsRequestFailed(asInterface24, imsReasonInfo8);
+                    callSessionInviteParticipantsRequestFailed(iImsCallSessionAsInterface24, imsReasonInfo8);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    IImsCallSession asInterface25 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface25 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    callSessionRemoveParticipantsRequestDelivered(asInterface25);
+                    callSessionRemoveParticipantsRequestDelivered(iImsCallSessionAsInterface25);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    IImsCallSession asInterface26 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface26 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsReasonInfo imsReasonInfo9 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionRemoveParticipantsRequestFailed(asInterface26, imsReasonInfo9);
+                    callSessionRemoveParticipantsRequestFailed(iImsCallSessionAsInterface26, imsReasonInfo9);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    IImsCallSession asInterface27 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface27 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsConferenceState imsConferenceState = (ImsConferenceState) parcel.readTypedObject(ImsConferenceState.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionConferenceStateUpdated(asInterface27, imsConferenceState);
+                    callSessionConferenceStateUpdated(iImsCallSessionAsInterface27, imsConferenceState);
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    IImsCallSession asInterface28 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
+                    IImsCallSession iImsCallSessionAsInterface28 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    callSessionUssdMessageReceived(asInterface28, readInt, readString);
+                    callSessionUssdMessageReceived(iImsCallSessionAsInterface28, i3, string);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    IImsCallSession asInterface29 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    IImsCallSession iImsCallSessionAsInterface29 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     ImsReasonInfo imsReasonInfo10 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionHandover(asInterface29, readInt2, readInt3, imsReasonInfo10);
+                    callSessionHandover(iImsCallSessionAsInterface29, i4, i5, imsReasonInfo10);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    IImsCallSession asInterface30 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    IImsCallSession iImsCallSessionAsInterface30 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     ImsReasonInfo imsReasonInfo11 = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionHandoverFailed(asInterface30, readInt4, readInt5, imsReasonInfo11);
+                    callSessionHandoverFailed(iImsCallSessionAsInterface30, i6, i7, imsReasonInfo11);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    IImsCallSession asInterface31 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    IImsCallSession iImsCallSessionAsInterface31 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    callSessionMayHandover(asInterface31, readInt6, readInt7);
+                    callSessionMayHandover(iImsCallSessionAsInterface31, i8, i9);
                     parcel2.writeNoException();
                     return true;
                 case 29:
-                    IImsCallSession asInterface32 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt8 = parcel.readInt();
+                    IImsCallSession iImsCallSessionAsInterface32 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    callSessionTtyModeReceived(asInterface32, readInt8);
+                    callSessionTtyModeReceived(iImsCallSessionAsInterface32, i10);
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    IImsCallSession asInterface33 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean = parcel.readBoolean();
+                    IImsCallSession iImsCallSessionAsInterface33 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    callSessionMultipartyStateChanged(asInterface33, readBoolean);
+                    callSessionMultipartyStateChanged(iImsCallSessionAsInterface33, z);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    IImsCallSession asInterface34 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface34 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsSuppServiceNotification imsSuppServiceNotification = (ImsSuppServiceNotification) parcel.readTypedObject(ImsSuppServiceNotification.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionSuppServiceReceived(asInterface34, imsSuppServiceNotification);
+                    callSessionSuppServiceReceived(iImsCallSessionAsInterface34, imsSuppServiceNotification);
                     parcel2.writeNoException();
                     return true;
                 case 32:
-                    IImsCallSession asInterface35 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallSession iImsCallSessionAsInterface35 = IImsCallSession.Stub.asInterface(parcel.readStrongBinder());
                     ImsCallProfile imsCallProfile11 = (ImsCallProfile) parcel.readTypedObject(ImsCallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callSessionRttModifyRequestReceived(asInterface35, imsCallProfile11);
+                    callSessionRttModifyRequestReceived(iImsCallSessionAsInterface35, imsCallProfile11);
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    callSessionRttModifyResponseReceived(readInt9);
+                    callSessionRttModifyResponseReceived(i11);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    callSessionRttMessageReceived(readString2);
+                    callSessionRttMessageReceived(string2);
                     parcel2.writeNoException();
                     return true;
                 case 35:
@@ -689,11 +689,11 @@ public interface IImsCallSessionListener extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    callSessionSendAnbrQuery(readInt10, readInt11, readInt12);
+                    callSessionSendAnbrQuery(i12, i13, i14);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -719,625 +719,625 @@ public interface IImsCallSessionListener extends IInterface {
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionProgressing(IImsCallSession iImsCallSession, ImsStreamMediaProfile imsStreamMediaProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsStreamMediaProfile, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsStreamMediaProfile, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionStarted(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionStartFailed(IImsCallSession iImsCallSession, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionTerminated(IImsCallSession iImsCallSession, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionHeld(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionHoldFailed(IImsCallSession iImsCallSession, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionHoldReceived(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionResumed(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionResumeFailed(IImsCallSession iImsCallSession, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionResumeReceived(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionMergeStarted(IImsCallSession iImsCallSession, IImsCallSession iImsCallSession2, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeStrongInterface(iImsCallSession2);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeStrongInterface(iImsCallSession2);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionMergeComplete(IImsCallSession iImsCallSession) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionMergeFailed(IImsCallSession iImsCallSession, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionUpdated(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionUpdateFailed(IImsCallSession iImsCallSession, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionUpdateReceived(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionConferenceExtended(IImsCallSession iImsCallSession, IImsCallSession iImsCallSession2, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeStrongInterface(iImsCallSession2);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeStrongInterface(iImsCallSession2);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionConferenceExtendFailed(IImsCallSession iImsCallSession, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionConferenceExtendReceived(IImsCallSession iImsCallSession, IImsCallSession iImsCallSession2, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeStrongInterface(iImsCallSession2);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeStrongInterface(iImsCallSession2);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionInviteParticipantsRequestDelivered(IImsCallSession iImsCallSession) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionInviteParticipantsRequestFailed(IImsCallSession iImsCallSession, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionRemoveParticipantsRequestDelivered(IImsCallSession iImsCallSession) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionRemoveParticipantsRequestFailed(IImsCallSession iImsCallSession, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionConferenceStateUpdated(IImsCallSession iImsCallSession, ImsConferenceState imsConferenceState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsConferenceState, 0);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsConferenceState, 0);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionUssdMessageReceived(IImsCallSession iImsCallSession, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionHandover(IImsCallSession iImsCallSession, int i, int i2, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionHandoverFailed(IImsCallSession iImsCallSession, int i, int i2, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionMayHandover(IImsCallSession iImsCallSession, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionTtyModeReceived(IImsCallSession iImsCallSession, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionMultipartyStateChanged(IImsCallSession iImsCallSession, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionSuppServiceReceived(IImsCallSession iImsCallSession, ImsSuppServiceNotification imsSuppServiceNotification) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsSuppServiceNotification, 0);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsSuppServiceNotification, 0);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionRttModifyRequestReceived(IImsCallSession iImsCallSession, ImsCallProfile imsCallProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallSession);
-                    obtain.writeTypedObject(imsCallProfile, 0);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallSession);
+                    parcelObtain.writeTypedObject(imsCallProfile, 0);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionRttModifyResponseReceived(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionRttMessageReceived(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionRttAudioIndicatorChanged(ImsStreamMediaProfile imsStreamMediaProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(imsStreamMediaProfile, 0);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsStreamMediaProfile, 0);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionTransferred() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionTransferFailed(ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callQualityChanged(CallQuality callQuality) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(callQuality, 0);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(callQuality, 0);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsCallSessionListener
             public void callSessionSendAnbrQuery(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -1,13 +1,17 @@
 package androidx.compose.ui.input.pointer;
 
 import androidx.compose.ui.input.pointer.SuspendingPointerInputModifierNodeImpl;
+import kotlin.Result;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SuspendingPointerInputModifierNodeImpl$PointerEventHandlerCoroutine$withTimeout$job$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ long $timeMillis;
@@ -31,73 +35,38 @@ final class SuspendingPointerInputModifierNodeImpl$PointerEventHandlerCoroutine$
         return ((SuspendingPointerInputModifierNodeImpl$PointerEventHandlerCoroutine$withTimeout$job$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0033, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:14:0x0033, code lost:
     
         if (kotlinx.coroutines.DelayKt.delay(8, r8) == r0) goto L15;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x0035, code lost:
-    
-        return r0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x002a, code lost:
-    
-        if (kotlinx.coroutines.DelayKt.delay(r6, r8) == r0) goto L15;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r9) {
-        /*
-            r8 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r8.label
-            r2 = 8
-            r4 = 2
-            r5 = 1
-            if (r1 == 0) goto L1e
-            if (r1 == r5) goto L1a
-            if (r1 != r4) goto L12
-            kotlin.ResultKt.throwOnFailure(r9)
-            goto L36
-        L12:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-            r8.<init>(r9)
-            throw r8
-        L1a:
-            kotlin.ResultKt.throwOnFailure(r9)
-            goto L2d
-        L1e:
-            kotlin.ResultKt.throwOnFailure(r9)
-            long r6 = r8.$timeMillis
-            long r6 = r6 - r2
-            r8.label = r5
-            java.lang.Object r9 = kotlinx.coroutines.DelayKt.delay(r6, r8)
-            if (r9 != r0) goto L2d
-            goto L35
-        L2d:
-            r8.label = r4
-            java.lang.Object r9 = kotlinx.coroutines.DelayKt.delay(r2, r8)
-            if (r9 != r0) goto L36
-        L35:
-            return r0
-        L36:
-            androidx.compose.ui.input.pointer.SuspendingPointerInputModifierNodeImpl$PointerEventHandlerCoroutine<java.lang.Object> r9 = r8.this$0
-            kotlinx.coroutines.CancellableContinuationImpl r9 = r9.pointerAwaiter
-            if (r9 == 0) goto L4d
-            int r0 = kotlin.Result.$r8$clinit
-            androidx.compose.ui.input.pointer.PointerEventTimeoutCancellationException r0 = new androidx.compose.ui.input.pointer.PointerEventTimeoutCancellationException
-            long r1 = r8.$timeMillis
-            r0.<init>(r1)
-            kotlin.Result$Failure r8 = new kotlin.Result$Failure
-            r8.<init>(r0)
-            r9.resumeWith(r8)
-        L4d:
-            kotlin.Unit r8 = kotlin.Unit.INSTANCE
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.input.pointer.SuspendingPointerInputModifierNodeImpl$PointerEventHandlerCoroutine$withTimeout$job$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            long j = this.$timeMillis - 8;
+            this.label = 1;
+            if (DelayKt.delay(j, this) != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            CancellableContinuationImpl cancellableContinuationImpl = this.this$0.pointerAwaiter;
+            if (cancellableContinuationImpl != null) {
+                int i2 = Result.$r8$clinit;
+                cancellableContinuationImpl.resumeWith(new Result.Failure(new PointerEventTimeoutCancellationException(this.$timeMillis)));
+            }
+            return Unit.INSTANCE;
+        }
+        ResultKt.throwOnFailure(obj);
+        this.label = 2;
     }
 }

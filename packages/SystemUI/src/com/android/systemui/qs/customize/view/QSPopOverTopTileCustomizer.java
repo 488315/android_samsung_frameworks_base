@@ -1,6 +1,7 @@
 package com.android.systemui.qs.customize.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -9,14 +10,12 @@ import android.widget.TextView;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
-import com.android.systemui.util.DeviceState;
 import kotlin.Pair;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSPopOverTopTileCustomizer extends QSPopOverTileCustomizerBase {
-    public QSPopOverTopTileCustomizer(Context context, int i) {
-        super(context, i);
+    public QSPopOverTopTileCustomizer(Context context, int i, int i2) throws Resources.NotFoundException {
+        super(context, i, i2);
         this.mIsTopEdit = true;
         int qsTileMinNum = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getQsTileMinNum(getContext());
         this.mActiveRows = 1;
@@ -29,13 +28,13 @@ public final class QSPopOverTopTileCustomizer extends QSPopOverTileCustomizerBas
             textView.setText(textView.getResources().getQuantityString(R.plurals.sec_qs_add_minimum, qsTileMinNum, Integer.valueOf(qsTileMinNum)));
             textView.setVisibility(0);
         }
-        View findViewById = findViewById(R.id.qs_edit_summary_container);
-        if (findViewById != null) {
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) findViewById.getLayoutParams();
-            int i2 = this.editSummaryTextTopBottomMargin;
-            layoutParams.topMargin = i2;
-            layoutParams.bottomMargin = i2;
-            findViewById.setLayoutParams(layoutParams);
+        View viewFindViewById = findViewById(R.id.qs_edit_summary_container);
+        if (viewFindViewById != null) {
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) viewFindViewById.getLayoutParams();
+            int i3 = this.editSummaryTextTopBottomMargin;
+            layoutParams.topMargin = i3;
+            layoutParams.bottomMargin = i3;
+            viewFindViewById.setLayoutParams(layoutParams);
         }
         int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.qs_edit_panel_active_parent_padding);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.qs_active_page_parent);
@@ -52,23 +51,25 @@ public final class QSPopOverTopTileCustomizer extends QSPopOverTileCustomizerBas
             layoutParams3.height = this.availableTextHeight;
             textView2.setLayoutParams(layoutParams3);
         }
-        View findViewById2 = findViewById(R.id.qs_customizer_active_pager);
-        if (findViewById2 != null) {
-            findViewById2.setHorizontalFadingEdgeEnabled(false);
+        View viewFindViewById2 = findViewById(R.id.qs_customizer_active_pager);
+        if (viewFindViewById2 != null) {
+            viewFindViewById2.setHorizontalFadingEdgeEnabled(false);
         }
-        if (findViewById(R.id.scroll_top_area) != null) {
-            setVisibility(8);
+        View viewFindViewById3 = findViewById(R.id.scroll_top_area);
+        if (viewFindViewById3 != null) {
+            viewFindViewById3.setVisibility(8);
         }
-        if (findViewById(R.id.scroll_bottom_area) != null) {
-            setVisibility(8);
+        View viewFindViewById4 = findViewById(R.id.scroll_bottom_area);
+        if (viewFindViewById4 != null) {
+            viewFindViewById4.setVisibility(8);
         }
     }
 
     @Override // com.android.systemui.qs.customize.view.QSPopOverTileCustomizerBase
     public final Pair calculateActiveAvailableHeight() {
-        int displayHeight = DeviceState.getDisplayHeight(this.mContext) - (this.mCutoutTopMargin + this.navBarHeight);
+        int displayableHeight = getDisplayableHeight();
         int i = this.requiredActiveHeight;
-        return new Pair(Integer.valueOf(i), Integer.valueOf(this.isAvailableTextVisible ? Math.max(Math.min(this.requiredAvailableHeight, Math.min((int) (displayHeight * this.maximumAvailableAreaRatio), displayHeight - ((this.topSummaryAndButtonsHeight + i) + this.gapBetweenArea))), this.minimumAvailableAreaHeight) : this.minimumAvailableAreaHeight));
+        return new Pair(Integer.valueOf(i), Integer.valueOf(this.isAvailableTextVisible ? Math.max(Math.min(this.requiredAvailableHeight, Math.min((int) (displayableHeight * this.maximumAvailableAreaRatio), displayableHeight - ((this.topSummaryAndButtonsHeight + i) + this.gapBetweenArea))), this.minimumAvailableAreaHeight) : this.minimumAvailableAreaHeight));
     }
 
     @Override // com.android.systemui.qs.customize.view.QSPopOverTileCustomizerBase
@@ -77,7 +78,7 @@ public final class QSPopOverTopTileCustomizer extends QSPopOverTileCustomizerBas
     }
 
     @Override // com.android.systemui.qs.customize.view.QSPopOverTileCustomizerBase
-    public final void initResources() {
+    public final void initResources() throws Resources.NotFoundException {
         super.initResources();
         this.maximumAvailableAreaRatio = getResources().getFloat(R.dimen.qs_available_area_top_tile_edit_max_ratio);
         this.requiredAvailableTileRowNum = 4;
@@ -87,8 +88,8 @@ public final class QSPopOverTopTileCustomizer extends QSPopOverTileCustomizerBas
         this.tileLabelHeight = dimensionPixelSize;
         this.cellHeight = this.tileIconHeight + dimensionPixelSize;
         this.topSummaryAndButtonsHeight = getResources().getDimensionPixelSize(R.dimen.qs_pop_over_tile_top_edit_buttons_area_height);
-        this.requiredAvailableHeight = ((this.tileIconHeight + this.tileLabelHeight) * this.requiredAvailableTileRowNum) + getResources().getDimensionPixelSize(R.dimen.qs_edit_available_area_indicator_bottom) + getResources().getDimensionPixelSize(R.dimen.qs_edit_available_text_height);
-        this.gapBetweenArea = getResources().getDimensionPixelSize(R.dimen.qs_pop_over_layout_edit_buttons_top_margin);
+        this.requiredAvailableHeight = ((this.tileIconHeight + this.tileLabelHeight) * this.requiredAvailableTileRowNum) + getResources().getDimensionPixelSize(R.dimen.qs_pop_over_edit_available_area_indicator_bottom) + getResources().getDimensionPixelSize(R.dimen.qs_edit_available_text_height);
+        this.gapBetweenArea = getResources().getDimensionPixelSize(R.dimen.qs_pop_over_top_tile_edit_gap_between_areas);
         this.requiredActiveHeight = this.tileIconHeight;
         int dimensionPixelSize2 = getResources().getDimensionPixelSize(R.dimen.qs_pop_over_top_tile_edit_available_text_height);
         this.availableTextHeight = dimensionPixelSize2;
@@ -99,13 +100,13 @@ public final class QSPopOverTopTileCustomizer extends QSPopOverTileCustomizerBas
     @Override // com.android.systemui.qs.customize.view.QSPopOverTileCustomizerBase
     public final void setActiveAreaScrollHeight() {
         ViewGroup.LayoutParams layoutParams;
-        View findViewById = findViewById(R.id.qs_active_page_parent);
-        int i = (findViewById == null || (layoutParams = findViewById.getLayoutParams()) == null) ? this.cellHeight : layoutParams.height;
-        View findViewById2 = findViewById(R.id.qs_active_page_content);
-        if (findViewById2 != null) {
-            LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) findViewById2.getLayoutParams();
+        View viewFindViewById = findViewById(R.id.qs_active_page_parent);
+        int i = (viewFindViewById == null || (layoutParams = viewFindViewById.getLayoutParams()) == null) ? this.cellHeight : layoutParams.height;
+        View viewFindViewById2 = findViewById(R.id.qs_active_page_content);
+        if (viewFindViewById2 != null) {
+            LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) viewFindViewById2.getLayoutParams();
             layoutParams2.height = i;
-            findViewById2.setLayoutParams(layoutParams2);
+            viewFindViewById2.setLayoutParams(layoutParams2);
         }
     }
 }

@@ -52,14 +52,14 @@ class HdrRenderState implements Consumer<Display> {
         boolean z = this.mUpdateHdrSdrRatioInfo;
         this.mUpdateHdrSdrRatioInfo = false;
         this.mRenderHdrSdrRatio = this.mTargetHdrSdrRatio;
-        float max = Math.max(Math.min(32L, j - this.mLastUpdateMillis), 8L) * 0.01f;
+        float fMax = Math.max(Math.min(32L, j - this.mLastUpdateMillis), 8L) * 0.01f;
         this.mLastUpdateMillis = j;
         if (z && FLAG_ANIMATE_ENABLED) {
             if (isHdrEnabled()) {
                 float f = this.mTargetHdrSdrRatio;
                 float f2 = this.mPreviousRenderRatio;
-                if (f - f2 > max) {
-                    this.mRenderHdrSdrRatio = f2 + max;
+                if (f - f2 > fMax) {
+                    this.mRenderHdrSdrRatio = f2 + fMax;
                     this.mUpdateHdrSdrRatioInfo = true;
                     this.mViewRoot.invalidate();
                 }
@@ -67,9 +67,9 @@ class HdrRenderState implements Consumer<Display> {
                 float f3 = this.mTargetDesiredHdrSdrRatio;
                 float f4 = this.mDesiredHdrSdrRatio;
                 if (f3 < f4) {
-                    float max2 = Math.max(f3, f4 - max);
-                    this.mDesiredHdrSdrRatio = max2;
-                    if (max2 != this.mTargetDesiredHdrSdrRatio) {
+                    float fMax2 = Math.max(f3, f4 - fMax);
+                    this.mDesiredHdrSdrRatio = fMax2;
+                    if (fMax2 != this.mTargetDesiredHdrSdrRatio) {
                         this.mUpdateHdrSdrRatioInfo = true;
                         this.mViewRoot.invalidate();
                         return z;

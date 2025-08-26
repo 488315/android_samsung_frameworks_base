@@ -106,7 +106,7 @@ public class BCDSAPrivateKey implements DSAPrivateKey, PKCS12BagAttributeCarrier
         return this.attrCarrier.getBagAttributeKeys();
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         this.dsaSpec = new DSAParameterSpec((BigInteger) objectInputStream.readObject(), (BigInteger) objectInputStream.readObject(), (BigInteger) objectInputStream.readObject());
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
@@ -121,10 +121,10 @@ public class BCDSAPrivateKey implements DSAPrivateKey, PKCS12BagAttributeCarrier
 
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("DSA Private Key [");
-        String lineSeparator = Strings.lineSeparator();
-        BigInteger modPow = getParams().getG().modPow(this.x, getParams().getP());
-        stringBuffer.append(DSAUtil.generateKeyFingerprint(modPow, getParams())).append(NavigationBarInflaterView.SIZE_MOD_END).append(lineSeparator);
-        stringBuffer.append("            Y: ").append(modPow.toString(16)).append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        BigInteger bigIntegerModPow = getParams().getG().modPow(this.x, getParams().getP());
+        stringBuffer.append(DSAUtil.generateKeyFingerprint(bigIntegerModPow, getParams())).append(NavigationBarInflaterView.SIZE_MOD_END).append(strLineSeparator);
+        stringBuffer.append("            Y: ").append(bigIntegerModPow.toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 }

@@ -104,12 +104,12 @@ public final class StatusHints implements Parcelable {
     }
 
     public static int getUserIdFromAuthority(String str, int i) {
-        int lastIndexOf;
-        if (str == null || (lastIndexOf = str.lastIndexOf(64)) == -1) {
+        int iLastIndexOf;
+        if (str == null || (iLastIndexOf = str.lastIndexOf(64)) == -1) {
             return i;
         }
         try {
-            return Integer.parseInt(str.substring(0, lastIndexOf));
+            return Integer.parseInt(str.substring(0, iLastIndexOf));
         } catch (NumberFormatException e) {
             android.util.Log.w(TAG, "Error parsing userId." + e);
             return -10000;

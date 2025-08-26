@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class RearDisplayDialogController implements CoreStartable, ConfigurationController.ConfigurationListener, CommandQueue.Callbacks {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,7 +37,6 @@ public class RearDisplayDialogController implements CoreStartable, Configuration
     public boolean mServiceNotified = false;
     public final DeviceStateManagerCallback mDeviceStateManagerCallback = new DeviceStateManagerCallback(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DeviceStateManagerCallback implements DeviceStateManager.DeviceStateCallback {
         public /* synthetic */ DeviceStateManagerCallback(RearDisplayDialogController rearDisplayDialogController, int i) {
             this();
@@ -77,10 +75,10 @@ public class RearDisplayDialogController implements CoreStartable, Configuration
     }
 
     public final View createDialogView(Context context) {
-        LayoutInflater cloneInContext = this.mLayoutInflater.cloneInContext(context);
-        View inflate = this.mStartedFolded ? cloneInContext.inflate(R.layout.activity_rear_display_education, (ViewGroup) null) : cloneInContext.inflate(R.layout.activity_rear_display_education_opened, (ViewGroup) null);
-        ((LottieAnimationView) inflate.findViewById(R.id.rear_display_folded_animation)).setRepeatCount(-1);
-        return inflate;
+        LayoutInflater layoutInflaterCloneInContext = this.mLayoutInflater.cloneInContext(context);
+        View viewInflate = this.mStartedFolded ? layoutInflaterCloneInContext.inflate(R.layout.activity_rear_display_education, (ViewGroup) null) : layoutInflaterCloneInContext.inflate(R.layout.activity_rear_display_education_opened, (ViewGroup) null);
+        ((LottieAnimationView) viewInflate.findViewById(R.id.rear_display_folded_animation)).setRepeatCount(-1);
+        return viewInflate;
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
@@ -89,9 +87,9 @@ public class RearDisplayDialogController implements CoreStartable, Configuration
         if (systemUIDialog == null || !systemUIDialog.isShowing() || this.mDialogViewContainer == null) {
             return;
         }
-        View createDialogView = createDialogView(this.mRearDisplayEducationDialog.getContext());
+        View viewCreateDialogView = createDialogView(this.mRearDisplayEducationDialog.getContext());
         this.mDialogViewContainer.removeAllViews();
-        this.mDialogViewContainer.addView(createDialogView);
+        this.mDialogViewContainer.addView(viewCreateDialogView);
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
@@ -127,12 +125,12 @@ public class RearDisplayDialogController implements CoreStartable, Configuration
         deviceStateManagerGlobal.registerDeviceStateCallback(this.mDeviceStateManagerCallback, this.mExecutor);
         this.mServiceNotified = false;
         Context context = this.mRearDisplayEducationDialog.getContext();
-        View createDialogView = createDialogView(context);
+        View viewCreateDialogView = createDialogView(context);
         LinearLayout linearLayout = new LinearLayout(context);
         this.mDialogViewContainer = linearLayout;
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(-2, -2));
         this.mDialogViewContainer.setOrientation(1);
-        this.mDialogViewContainer.addView(createDialogView);
+        this.mDialogViewContainer.addView(viewCreateDialogView);
         this.mRearDisplayEducationDialog.setView(this.mDialogViewContainer);
         if (!this.mStartedFolded) {
             final int i4 = 0;
@@ -187,7 +185,7 @@ public class RearDisplayDialogController implements CoreStartable, Configuration
         this.mRearDisplayEducationDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.reardisplay.RearDisplayDialogController$$ExternalSyntheticLambda2
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                RearDisplayDialogController rearDisplayDialogController = RearDisplayDialogController.this;
+                RearDisplayDialogController rearDisplayDialogController = this.f$0;
                 if (rearDisplayDialogController.mServiceNotified) {
                     return;
                 }

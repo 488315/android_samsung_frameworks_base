@@ -328,10 +328,10 @@ public class ZenModeDiff {
             if (zenRule == null && zenRule2 == null) {
                 return;
             }
-            boolean isActive = zenRule != null ? zenRule.isActive() : false;
-            boolean isActive2 = zenRule2 != null ? zenRule2.isActive() : false;
-            if (isActive != isActive2) {
-                this.mActiveDiff = new FieldDiff<>(Boolean.valueOf(isActive), Boolean.valueOf(isActive2));
+            boolean zIsActive = zenRule != null ? zenRule.isActive() : false;
+            boolean zIsActive2 = zenRule2 != null ? zenRule2.isActive() : false;
+            if (zIsActive != zIsActive2) {
+                this.mActiveDiff = new FieldDiff<>(Boolean.valueOf(zIsActive), Boolean.valueOf(zIsActive2));
             }
             if (hasExistenceChange()) {
                 return;

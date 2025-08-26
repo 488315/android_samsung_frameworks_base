@@ -15,7 +15,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class CommunalHubKt$CommunalHub$6$8$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -32,17 +31,17 @@ public final /* synthetic */ class CommunalHubKt$CommunalHub$6$8$$ExternalSynthe
 
     @Override // kotlin.jvm.functions.Function0
     public final Object invoke() {
-        Integer num;
+        Integer numValueOf;
         switch (this.$r8$classId) {
             case 0:
                 final SheetState sheetState = (SheetState) this.f$1;
-                StandaloneCoroutine launch$default = BuildersKt.launch$default((CoroutineScope) this.f$0, null, null, new CommunalHubKt$CommunalHub$6$8$1$1$1(sheetState, null), 3);
+                StandaloneCoroutine standaloneCoroutineLaunch$default = BuildersKt.launch$default((CoroutineScope) this.f$0, null, null, new CommunalHubKt$CommunalHub$6$8$1$1$1(sheetState, null), 3);
                 final BaseCommunalViewModel baseCommunalViewModel = (BaseCommunalViewModel) this.f$2;
-                launch$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$6$8$$ExternalSyntheticLambda1
+                standaloneCoroutineLaunch$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$CommunalHub$6$8$$ExternalSyntheticLambda1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
-                        if (!SheetState.this.isVisible()) {
+                    public final Object mo781invoke(Object obj) {
+                        if (!sheetState.isVisible()) {
                             ((CommunalEditModeViewModel) baseCommunalViewModel).communalInteractor.setDisclaimerDismissed();
                         }
                         return Unit.INSTANCE;
@@ -65,12 +64,12 @@ public final /* synthetic */ class CommunalHubKt$CommunalHub$6$8$$ExternalSynthe
                             i++;
                         }
                     }
-                    num = Integer.valueOf(i);
+                    numValueOf = Integer.valueOf(i);
                 } else {
-                    num = null;
+                    numValueOf = null;
                 }
-                if (num != null) {
-                    contentListState.onRemove(num.intValue());
+                if (numValueOf != null) {
+                    contentListState.onRemove(numValueOf.intValue());
                     ContentListState.onSaveList$default(contentListState);
                     ((BaseCommunalViewModel) this.f$2).setSelectedKey(null);
                 }

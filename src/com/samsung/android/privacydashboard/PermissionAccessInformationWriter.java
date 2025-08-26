@@ -16,7 +16,7 @@ public class PermissionAccessInformationWriter {
     private static final Uri PROVIDER_URI = Uri.parse("content://com.samsung.android.privacydashboard.provider/permissionAccessInformations");
 
     public void write(Context context, Iterator<PermissionAccessInformation> it) {
-        long clearCallingIdentity;
+        long jClearCallingIdentity;
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
         UserManager userManager = (UserManager) context.getSystemService("user");
@@ -40,14 +40,14 @@ public class PermissionAccessInformationWriter {
         if (arrayList.size() > 0) {
             ContentValues[] contentValuesArr = new ContentValues[arrayList.size()];
             arrayList.toArray(contentValuesArr);
-            clearCallingIdentity = Binder.clearCallingIdentity();
+            jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
                     context.getContentResolver().bulkInsert(PROVIDER_URI, contentValuesArr);
-                } finally {
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } finally {
             }
         }
         if (arrayList2.size() > 0) {
@@ -55,7 +55,7 @@ public class PermissionAccessInformationWriter {
                 if (semUserInfo.getUserHandle().semGetIdentifier() != 0 && !userManager.isManagedProfile(semUserInfo.getUserHandle().semGetIdentifier()) && !userManager.isPrivateProfile()) {
                     ContentValues[] contentValuesArr2 = new ContentValues[arrayList2.size()];
                     arrayList2.toArray(contentValuesArr2);
-                    clearCallingIdentity = Binder.clearCallingIdentity();
+                    jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         try {
                             context.getContentResolver().bulkInsert(ContentProvider.maybeAddUserId(PROVIDER_URI, semUserInfo.getUserHandle().semGetIdentifier()), contentValuesArr2);

@@ -121,8 +121,8 @@ public class ECUtil {
         }
         if (publicKey instanceof java.security.interfaces.ECPublicKey) {
             java.security.interfaces.ECPublicKey eCPublicKey2 = (java.security.interfaces.ECPublicKey) publicKey;
-            ECParameterSpec convertSpec = EC5Util.convertSpec(eCPublicKey2.getParams());
-            return new ECPublicKeyParameters(EC5Util.convertPoint(eCPublicKey2.getParams(), eCPublicKey2.getW()), new ECDomainParameters(convertSpec.getCurve(), convertSpec.getG(), convertSpec.getN(), convertSpec.getH(), convertSpec.getSeed()));
+            ECParameterSpec eCParameterSpecConvertSpec = EC5Util.convertSpec(eCPublicKey2.getParams());
+            return new ECPublicKeyParameters(EC5Util.convertPoint(eCPublicKey2.getParams(), eCPublicKey2.getW()), new ECDomainParameters(eCParameterSpecConvertSpec.getCurve(), eCParameterSpecConvertSpec.getG(), eCParameterSpecConvertSpec.getN(), eCParameterSpecConvertSpec.getH(), eCParameterSpecConvertSpec.getSeed()));
         }
         try {
             byte[] encoded = publicKey.getEncoded();
@@ -153,8 +153,8 @@ public class ECUtil {
         }
         if (privateKey instanceof java.security.interfaces.ECPrivateKey) {
             java.security.interfaces.ECPrivateKey eCPrivateKey2 = (java.security.interfaces.ECPrivateKey) privateKey;
-            ECParameterSpec convertSpec = EC5Util.convertSpec(eCPrivateKey2.getParams());
-            return new ECPrivateKeyParameters(eCPrivateKey2.getS(), new ECDomainParameters(convertSpec.getCurve(), convertSpec.getG(), convertSpec.getN(), convertSpec.getH(), convertSpec.getSeed()));
+            ECParameterSpec eCParameterSpecConvertSpec = EC5Util.convertSpec(eCPrivateKey2.getParams());
+            return new ECPrivateKeyParameters(eCPrivateKey2.getS(), new ECDomainParameters(eCParameterSpecConvertSpec.getCurve(), eCParameterSpecConvertSpec.getG(), eCParameterSpecConvertSpec.getN(), eCParameterSpecConvertSpec.getH(), eCParameterSpecConvertSpec.getSeed()));
         }
         try {
             byte[] encoded = privateKey.getEncoded();
@@ -189,9 +189,9 @@ public class ECUtil {
         if (str == null || str.length() < 1) {
             return null;
         }
-        int indexOf = str.indexOf(32);
-        if (indexOf > 0) {
-            str = str.substring(indexOf + 1);
+        int iIndexOf = str.indexOf(32);
+        if (iIndexOf > 0) {
+            str = str.substring(iIndexOf + 1);
         }
         ASN1ObjectIdentifier oid = getOID(str);
         return oid != null ? oid : ECNamedCurveTable.getOID(str);
@@ -225,22 +225,22 @@ public class ECUtil {
 
     public static String privateKeyToString(String str, BigInteger bigInteger, ECParameterSpec eCParameterSpec) {
         StringBuffer stringBuffer = new StringBuffer();
-        String lineSeparator = Strings.lineSeparator();
-        ECPoint normalize = new FixedPointCombMultiplier().multiply(eCParameterSpec.getG(), bigInteger).normalize();
+        String strLineSeparator = Strings.lineSeparator();
+        ECPoint eCPointNormalize = new FixedPointCombMultiplier().multiply(eCParameterSpec.getG(), bigInteger).normalize();
         stringBuffer.append(str);
-        stringBuffer.append(" Private Key [").append(generateKeyFingerprint(normalize, eCParameterSpec)).append(NavigationBarInflaterView.SIZE_MOD_END).append(lineSeparator);
-        stringBuffer.append("            X: ").append(normalize.getAffineXCoord().toBigInteger().toString(16)).append(lineSeparator);
-        stringBuffer.append("            Y: ").append(normalize.getAffineYCoord().toBigInteger().toString(16)).append(lineSeparator);
+        stringBuffer.append(" Private Key [").append(generateKeyFingerprint(eCPointNormalize, eCParameterSpec)).append(NavigationBarInflaterView.SIZE_MOD_END).append(strLineSeparator);
+        stringBuffer.append("            X: ").append(eCPointNormalize.getAffineXCoord().toBigInteger().toString(16)).append(strLineSeparator);
+        stringBuffer.append("            Y: ").append(eCPointNormalize.getAffineYCoord().toBigInteger().toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 
     public static String publicKeyToString(String str, ECPoint eCPoint, ECParameterSpec eCParameterSpec) {
         StringBuffer stringBuffer = new StringBuffer();
-        String lineSeparator = Strings.lineSeparator();
+        String strLineSeparator = Strings.lineSeparator();
         stringBuffer.append(str);
-        stringBuffer.append(" Public Key [").append(generateKeyFingerprint(eCPoint, eCParameterSpec)).append(NavigationBarInflaterView.SIZE_MOD_END).append(lineSeparator);
-        stringBuffer.append("            X: ").append(eCPoint.getAffineXCoord().toBigInteger().toString(16)).append(lineSeparator);
-        stringBuffer.append("            Y: ").append(eCPoint.getAffineYCoord().toBigInteger().toString(16)).append(lineSeparator);
+        stringBuffer.append(" Public Key [").append(generateKeyFingerprint(eCPoint, eCParameterSpec)).append(NavigationBarInflaterView.SIZE_MOD_END).append(strLineSeparator);
+        stringBuffer.append("            X: ").append(eCPoint.getAffineXCoord().toBigInteger().toString(16)).append(strLineSeparator);
+        stringBuffer.append("            Y: ").append(eCPoint.getAffineYCoord().toBigInteger().toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 
@@ -268,8 +268,8 @@ public class ECUtil {
     }
 
     private static ASN1ObjectIdentifier getOID(String str) {
-        char charAt = str.charAt(0);
-        if (charAt < '0' || charAt > '2') {
+        char cCharAt = str.charAt(0);
+        if (cCharAt < '0' || cCharAt > '2') {
             return null;
         }
         try {

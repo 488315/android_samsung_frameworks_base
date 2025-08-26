@@ -85,11 +85,11 @@ public final class Pools {
 
         @Override // android.util.Pools.SimplePool, android.util.Pools.Pool
         public boolean release(T t) {
-            boolean release;
+            boolean zRelease;
             synchronized (this.mLock) {
-                release = super.release(t);
+                zRelease = super.release(t);
             }
-            return release;
+            return zRelease;
         }
     }
 }

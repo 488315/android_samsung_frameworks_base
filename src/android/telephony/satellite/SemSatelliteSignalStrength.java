@@ -100,80 +100,45 @@ public final class SemSatelliteSignalStrength implements Parcelable {
         this.mSsSinr = semSatelliteSignalStrength.mSsSinr;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0034  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x002a  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public void updateLevel() {
-        /*
-            r9 = this;
-            int r0 = r9.mRssi
-            r1 = -51
-            r2 = 4
-            r3 = 1
-            r4 = 2
-            r5 = 3
-            r6 = 0
-            if (r0 > r1) goto L2a
-            r1 = -126(0xffffffffffffff82, float:NaN)
-            if (r0 >= r1) goto L10
-            goto L2a
-        L10:
-            int[] r1 = android.telephony.satellite.SemSatelliteSignalStrength.sRssiThresholds
-            r7 = r1[r5]
-            if (r0 < r7) goto L18
-            r0 = r2
-            goto L2b
-        L18:
-            r7 = r1[r4]
-            if (r0 < r7) goto L1e
-            r0 = r5
-            goto L2b
-        L1e:
-            r7 = r1[r3]
-            if (r0 < r7) goto L24
-            r0 = r4
-            goto L2b
-        L24:
-            r1 = r1[r6]
-            if (r0 < r1) goto L2a
-            r0 = r3
-            goto L2b
-        L2a:
-            r0 = r6
-        L2b:
-            int r1 = r9.mSnr
-            r7 = 2147483647(0x7fffffff, float:NaN)
-            if (r1 != r7) goto L34
-        L32:
-            r2 = r6
-            goto L4c
-        L34:
-            int[] r7 = android.telephony.satellite.SemSatelliteSignalStrength.sSnrThresholds
-            r8 = r7[r5]
-            if (r1 < r8) goto L3b
-            goto L4c
-        L3b:
-            r2 = r7[r4]
-            if (r1 < r2) goto L41
-            r2 = r5
-            goto L4c
-        L41:
-            r2 = r7[r3]
-            if (r1 < r2) goto L47
-            r2 = r4
-            goto L4c
-        L47:
-            r2 = r7[r6]
-            if (r1 < r2) goto L32
-            r2 = r3
-        L4c:
-            int r0 = java.lang.Math.max(r0, r2)
-            r9.mLevel = r0
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.satellite.SemSatelliteSignalStrength.updateLevel():void");
+        int i;
+        int i2 = this.mRssi;
+        int i3 = 4;
+        if (i2 > -51 || i2 < -126) {
+            i = 0;
+        } else {
+            int[] iArr = sRssiThresholds;
+            if (i2 >= iArr[3]) {
+                i = 4;
+            } else if (i2 >= iArr[2]) {
+                i = 3;
+            } else if (i2 >= iArr[1]) {
+                i = 2;
+            } else if (i2 >= iArr[0]) {
+                i = 1;
+            }
+        }
+        int i4 = this.mSnr;
+        if (i4 == Integer.MAX_VALUE) {
+            i3 = 0;
+        } else {
+            int[] iArr2 = sSnrThresholds;
+            if (i4 < iArr2[3]) {
+                if (i4 >= iArr2[2]) {
+                    i3 = 3;
+                } else if (i4 >= iArr2[1]) {
+                    i3 = 2;
+                } else if (i4 >= iArr2[0]) {
+                    i3 = 1;
+                }
+            }
+        }
+        this.mLevel = Math.max(i, i3);
     }
 
     public int getRssi() {

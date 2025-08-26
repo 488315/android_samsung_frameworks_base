@@ -1,15 +1,12 @@
 package com.sec.ims.gls;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface GlsIntent {
     public static final String CATEGORY_ACTION = "com.samsung.rcs.framework.geolocationshare.category.ACTION";
     public static final String CATEGORY_NOTIFICATION = "com.samsung.rcs.framework.geolocationshare.category.NOTIFICATION";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Actions {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface RequestIntents {
             public static final String CREATE_SHARE_LOCATION_INCALL = "com.samsung.rcs.framework.geolocationshare.action.CREATE_SHARE_LOCATION_INCALL";
             public static final String CREATE_SHARE_LOCATION_INCALL_GC = "com.samsung.rcs.framework.geolocationshare.action.CREATE_SHARE_LOCATION_INCALL_GC";
@@ -19,7 +16,6 @@ public interface GlsIntent {
             public static final String START_SHARE_LOCATION_INCALL = "com.samsung.rcs.framework.geolocationshare.action.START_SHARE_LOCATION_INCALL";
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface ResponseIntents {
             public static final String ACCEPT_LOCATION_SHARE_INCALL_RESPONSE = "com.samsung.rcs.framework.geolocationshare.action.ACCEPT_LOCATION_SHARE_INCALL_RESPONSE";
             public static final String CANCEL_LOCATION_SHARE_INCALL_RESPONSE = "com.samsung.rcs.framework.geolocationshare.action.CANCEL_LOCATION_SHARE_INCALL_RESPONSE";
@@ -36,7 +32,6 @@ public interface GlsIntent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Extras {
         public static final String EXTRA_CHAT_ID = "chat_id";
         public static final String EXTRA_CONTACT_URI = "contactUri";

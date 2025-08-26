@@ -2,6 +2,7 @@ package androidx.compose.foundation.lazy.grid;
 
 import androidx.compose.foundation.MutatePriority;
 import androidx.compose.foundation.gestures.Orientation;
+import androidx.compose.foundation.gestures.ScrollScope;
 import androidx.compose.foundation.gestures.ScrollableState;
 import androidx.compose.foundation.gestures.ScrollableStateKt;
 import androidx.compose.foundation.gestures.snapping.LazyGridSnapLayoutInfoProviderKt;
@@ -17,6 +18,7 @@ import androidx.compose.foundation.lazy.layout.LazyLayoutScrollDeltaBetweenPasse
 import androidx.compose.foundation.lazy.layout.NestedPrefetchScope;
 import androidx.compose.foundation.lazy.layout.ObservableScopeInvalidator;
 import androidx.compose.runtime.MutableState;
+import androidx.compose.runtime.SnapshotMutableIntStateImpl;
 import androidx.compose.runtime.SnapshotMutableStateImpl;
 import androidx.compose.runtime.SnapshotStateKt;
 import androidx.compose.runtime.collection.MutableVector;
@@ -30,17 +32,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyGridState implements ScrollableState {
     public static final Companion Companion = new Companion(null);
@@ -53,7 +56,7 @@ public final class LazyGridState implements ScrollableState {
     }, new Function1() { // from class: androidx.compose.foundation.lazy.grid.LazyGridState$Companion$Saver$2
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             List list = (List) obj;
             return new LazyGridState(((Number) list.get(0)).intValue(), ((Number) list.get(1)).intValue());
         }
@@ -81,7 +84,6 @@ public final class LazyGridState implements ScrollableState {
     public float scrollToBeConsumed;
     public final ScrollableState scrollableState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -91,30 +93,173 @@ public final class LazyGridState implements ScrollableState {
         }
     }
 
+    /* renamed from: androidx.compose.foundation.lazy.grid.LazyGridState$scroll$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return LazyGridState.this.scroll(null, null, this);
+        }
+    }
+
+    /* renamed from: androidx.compose.foundation.lazy.grid.LazyGridState$scrollToItem$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $index;
+        final /* synthetic */ int $scrollOffset;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(int i, int i2, Continuation continuation) {
+            super(2, continuation);
+            this.$index = i;
+            this.$scrollOffset = i2;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return LazyGridState.this.new AnonymousClass2(this.$index, this.$scrollOffset, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((ScrollScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            LazyGridState.this.snapToItemIndexInternal$foundation_release(this.$index, this.$scrollOffset);
+            return Unit.INSTANCE;
+        }
+    }
+
     public LazyGridState() {
         this(0, 0, null, 7, null);
     }
 
     public static Object animateScrollToItem$default(LazyGridState lazyGridState, int i, Continuation continuation) {
         lazyGridState.getClass();
-        Object scroll = lazyGridState.scroll(MutatePriority.Default, new LazyGridState$animateScrollToItem$2(lazyGridState, i, 0, null), continuation);
-        return scroll == CoroutineSingletons.COROUTINE_SUSPENDED ? scroll : Unit.INSTANCE;
+        Object objScroll = lazyGridState.scroll(MutatePriority.Default, new LazyGridState$animateScrollToItem$2(lazyGridState, i, 0, null), continuation);
+        return objScroll == CoroutineSingletons.COROUTINE_SUSPENDED ? objScroll : Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x00ac  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x00b0  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0079  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0084  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x008c  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x00b3  */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x00bb  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void applyMeasureResult$foundation_release(androidx.compose.foundation.lazy.grid.LazyGridMeasureResult r9, boolean r10, boolean r11) {
-        /*
-            Method dump skipped, instructions count: 294
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.lazy.grid.LazyGridState.applyMeasureResult$foundation_release(androidx.compose.foundation.lazy.grid.LazyGridMeasureResult, boolean, boolean):void");
+    public final void applyMeasureResult$foundation_release(LazyGridMeasureResult lazyGridMeasureResult, boolean z, boolean z2) {
+        Object obj;
+        int i;
+        LazyGridMeasuredItem[] lazyGridMeasuredItemArr;
+        int i2;
+        LazyGridMeasuredItem[] lazyGridMeasuredItemArr2;
+        if (!z && this.hasLookaheadOccurred) {
+            this.approachLayoutInfo = lazyGridMeasureResult;
+            return;
+        }
+        if (z) {
+            this.hasLookaheadOccurred = true;
+        }
+        this.scrollToBeConsumed -= lazyGridMeasureResult.consumedScroll;
+        ((SnapshotMutableStateImpl) this.layoutInfoState).setValue(lazyGridMeasureResult);
+        LazyGridMeasuredLine lazyGridMeasuredLine = lazyGridMeasureResult.firstVisibleLine;
+        int i3 = lazyGridMeasuredLine != null ? lazyGridMeasuredLine.index : 0;
+        int i4 = lazyGridMeasureResult.firstVisibleLineScrollOffset;
+        ((SnapshotMutableStateImpl) this.canScrollBackward$delegate).setValue(Boolean.valueOf((i3 == 0 && i4 == 0) ? false : true));
+        ((SnapshotMutableStateImpl) this.canScrollForward$delegate).setValue(Boolean.valueOf(lazyGridMeasureResult.canScrollForward));
+        LazyGridScrollPosition lazyGridScrollPosition = this.scrollPosition;
+        if (z2) {
+            lazyGridScrollPosition.getClass();
+            if (i4 < 0.0f) {
+                InlineClassHelperKt.throwIllegalStateException("scrollOffset should be non-negative");
+            }
+            ((SnapshotMutableIntStateImpl) lazyGridScrollPosition.scrollOffset$delegate).setIntValue(i4);
+        } else {
+            lazyGridScrollPosition.getClass();
+            if (lazyGridMeasuredLine == null || (lazyGridMeasuredItemArr2 = lazyGridMeasuredLine.items) == null) {
+                obj = null;
+                lazyGridScrollPosition.lastKnownFirstItemKey = obj;
+                if (!lazyGridScrollPosition.hadFirstNotEmptyLayout || lazyGridMeasureResult.totalItemsCount > 0) {
+                    lazyGridScrollPosition.hadFirstNotEmptyLayout = true;
+                    if (i4 < 0.0f) {
+                        InlineClassHelperKt.throwIllegalStateException("scrollOffset should be non-negative (" + i4 + ')');
+                    }
+                    if (lazyGridMeasuredLine != null || (lazyGridMeasuredItemArr = lazyGridMeasuredLine.items) == null) {
+                        i = 0;
+                        lazyGridScrollPosition.update(i, i4);
+                    } else {
+                        LazyGridMeasuredItem lazyGridMeasuredItem = lazyGridMeasuredItemArr.length != 0 ? lazyGridMeasuredItemArr[0] : null;
+                        if (lazyGridMeasuredItem != null) {
+                            i = lazyGridMeasuredItem.index;
+                        }
+                        lazyGridScrollPosition.update(i, i4);
+                    }
+                }
+                if (this.prefetchingEnabled) {
+                    DefaultLazyGridPrefetchStrategy defaultLazyGridPrefetchStrategy = (DefaultLazyGridPrefetchStrategy) this.prefetchStrategy;
+                    if (defaultLazyGridPrefetchStrategy.lineToPrefetch != -1 && !lazyGridMeasureResult.visibleItemsInfo.isEmpty()) {
+                        boolean z3 = defaultLazyGridPrefetchStrategy.wasScrollingForward;
+                        Orientation orientation = lazyGridMeasureResult.orientation;
+                        if (z3) {
+                            LazyGridMeasuredItem lazyGridMeasuredItem2 = (LazyGridMeasuredItem) ((LazyGridItemInfo) CollectionsKt___CollectionsKt.last(lazyGridMeasureResult.visibleItemsInfo));
+                            i2 = (orientation == Orientation.Vertical ? lazyGridMeasuredItem2.row : lazyGridMeasuredItem2.column) + 1;
+                        } else {
+                            LazyGridMeasuredItem lazyGridMeasuredItem3 = (LazyGridMeasuredItem) ((LazyGridItemInfo) CollectionsKt___CollectionsKt.first(lazyGridMeasureResult.visibleItemsInfo));
+                            i2 = (orientation == Orientation.Vertical ? lazyGridMeasuredItem3.row : lazyGridMeasuredItem3.column) - 1;
+                        }
+                        if (defaultLazyGridPrefetchStrategy.lineToPrefetch != i2) {
+                            defaultLazyGridPrefetchStrategy.lineToPrefetch = -1;
+                            MutableVector mutableVector = defaultLazyGridPrefetchStrategy.currentLinePrefetchHandles;
+                            Object[] objArr = mutableVector.content;
+                            int i5 = mutableVector.size;
+                            for (int i6 = 0; i6 < i5; i6++) {
+                                ((LazyLayoutPrefetchState.PrefetchHandle) objArr[i6]).cancel();
+                            }
+                            mutableVector.clear();
+                        }
+                    }
+                }
+            } else {
+                LazyGridMeasuredItem lazyGridMeasuredItem4 = lazyGridMeasuredItemArr2.length == 0 ? null : lazyGridMeasuredItemArr2[0];
+                if (lazyGridMeasuredItem4 != null) {
+                    obj = lazyGridMeasuredItem4.key;
+                }
+                lazyGridScrollPosition.lastKnownFirstItemKey = obj;
+                if (!lazyGridScrollPosition.hadFirstNotEmptyLayout) {
+                    lazyGridScrollPosition.hadFirstNotEmptyLayout = true;
+                    if (i4 < 0.0f) {
+                    }
+                    if (lazyGridMeasuredLine != null) {
+                        i = 0;
+                        lazyGridScrollPosition.update(i, i4);
+                        if (this.prefetchingEnabled) {
+                        }
+                    }
+                }
+            }
+        }
+        if (z) {
+            this._lazyLayoutScrollDeltaBetweenPasses.updateScrollDeltaForApproach$foundation_release(lazyGridMeasureResult.scrollBackAmount, lazyGridMeasureResult.density, lazyGridMeasureResult.coroutineScope);
+        }
     }
 
     @Override // androidx.compose.foundation.gestures.ScrollableState
@@ -187,26 +332,26 @@ public final class LazyGridState implements ScrollableState {
                 companion.getClass();
                 Snapshot currentThreadSnapshot = Snapshot.Companion.getCurrentThreadSnapshot();
                 Function1 readObserver = currentThreadSnapshot != null ? currentThreadSnapshot.getReadObserver() : null;
-                Snapshot makeCurrentNonObservable = Snapshot.Companion.makeCurrentNonObservable(currentThreadSnapshot);
+                Snapshot snapshotMakeCurrentNonObservable = Snapshot.Companion.makeCurrentNonObservable(currentThreadSnapshot);
                 try {
                     LazyGridMeasureResult lazyGridMeasureResult2 = lazyGridState.hasLookaheadOccurred ? lazyGridState.approachLayoutInfo : (LazyGridMeasureResult) ((SnapshotMutableStateImpl) lazyGridState.layoutInfoState).getValue();
                     if (lazyGridMeasureResult2 != null) {
-                        List list = (List) lazyGridMeasureResult2.prefetchInfoRetriever.mo779invoke(Integer.valueOf(i));
+                        List list = (List) lazyGridMeasureResult2.prefetchInfoRetriever.mo781invoke(Integer.valueOf(i));
                         int size = list.size();
                         int i6 = 0;
                         while (i6 < size) {
                             Pair pair = (Pair) list.get(i6);
-                            arrayList.add(lazyGridState.prefetchState.m170schedulePrefetchVKLhPVY(((Number) pair.getFirst()).intValue(), ((Constraints) pair.getSecond()).value, null));
+                            arrayList.add(lazyGridState.prefetchState.m171schedulePrefetchVKLhPVY(((Number) pair.getFirst()).intValue(), ((Constraints) pair.getSecond()).value, null));
                             i6++;
                             size = size;
                             z = z;
                         }
                         Unit unit = Unit.INSTANCE;
                     }
-                    Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, makeCurrentNonObservable, readObserver);
+                    Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, snapshotMakeCurrentNonObservable, readObserver);
                     mutableVector.addAll(mutableVector.size, (List) arrayList);
                 } catch (Throwable th) {
-                    Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, makeCurrentNonObservable, readObserver);
+                    Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, snapshotMakeCurrentNonObservable, readObserver);
                     throw th;
                 }
             }
@@ -232,100 +377,60 @@ public final class LazyGridState implements ScrollableState {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0067, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0067, code lost:
     
-        if (r5.scroll(r6, r7, r0) != r1) goto L22;
+        if (r5.scroll(r6, r7, r0) == r1) goto L21;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0069, code lost:
-    
-        return r1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0055, code lost:
-    
-        if (r5.awaitLayoutModifier.waitForFirstLayout(r0) == r1) goto L21;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0044  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // androidx.compose.foundation.gestures.ScrollableState
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object scroll(androidx.compose.foundation.MutatePriority r6, kotlin.jvm.functions.Function2 r7, kotlin.coroutines.Continuation r8) {
-        /*
-            r5 = this;
-            boolean r0 = r8 instanceof androidx.compose.foundation.lazy.grid.LazyGridState$scroll$1
-            if (r0 == 0) goto L13
-            r0 = r8
-            androidx.compose.foundation.lazy.grid.LazyGridState$scroll$1 r0 = (androidx.compose.foundation.lazy.grid.LazyGridState$scroll$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.foundation.lazy.grid.LazyGridState$scroll$1 r0 = new androidx.compose.foundation.lazy.grid.LazyGridState$scroll$1
-            r0.<init>(r5, r8)
-        L18:
-            java.lang.Object r8 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L44
-            if (r2 == r4) goto L32
-            if (r2 != r3) goto L2a
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L6a
-        L2a:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L32:
-            java.lang.Object r5 = r0.L$2
-            r7 = r5
-            kotlin.jvm.functions.Function2 r7 = (kotlin.jvm.functions.Function2) r7
-            java.lang.Object r5 = r0.L$1
-            r6 = r5
-            androidx.compose.foundation.MutatePriority r6 = (androidx.compose.foundation.MutatePriority) r6
-            java.lang.Object r5 = r0.L$0
-            androidx.compose.foundation.lazy.grid.LazyGridState r5 = (androidx.compose.foundation.lazy.grid.LazyGridState) r5
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L58
-        L44:
-            kotlin.ResultKt.throwOnFailure(r8)
-            r0.L$0 = r5
-            r0.L$1 = r6
-            r0.L$2 = r7
-            r0.label = r4
-            androidx.compose.foundation.lazy.layout.AwaitFirstLayoutModifier r8 = r5.awaitLayoutModifier
-            java.lang.Object r8 = r8.waitForFirstLayout(r0)
-            if (r8 != r1) goto L58
-            goto L69
-        L58:
-            androidx.compose.foundation.gestures.ScrollableState r5 = r5.scrollableState
-            r8 = 0
-            r0.L$0 = r8
-            r0.L$1 = r8
-            r0.L$2 = r8
-            r0.label = r3
-            java.lang.Object r5 = r5.scroll(r6, r7, r0)
-            if (r5 != r1) goto L6a
-        L69:
-            return r1
-        L6a:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.lazy.grid.LazyGridState.scroll(androidx.compose.foundation.MutatePriority, kotlin.jvm.functions.Function2, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object scroll(MutatePriority mutatePriority, Function2 function2, Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.L$1 = mutatePriority;
+            anonymousClass1.L$2 = function2;
+            anonymousClass1.label = 1;
+            if (this.awaitLayoutModifier.waitForFirstLayout(anonymousClass1) != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        function2 = (Function2) anonymousClass1.L$2;
+        mutatePriority = (MutatePriority) anonymousClass1.L$1;
+        this = (LazyGridState) anonymousClass1.L$0;
+        ResultKt.throwOnFailure(obj);
+        ScrollableState scrollableState = this.scrollableState;
+        anonymousClass1.L$0 = null;
+        anonymousClass1.L$1 = null;
+        anonymousClass1.L$2 = null;
+        anonymousClass1.label = 2;
     }
 
     public final Object scrollToItem(int i, int i2, SuspendLambda suspendLambda) {
-        Object scroll = scroll(MutatePriority.Default, new LazyGridState$scrollToItem$2(this, i, i2, null), suspendLambda);
-        return scroll == CoroutineSingletons.COROUTINE_SUSPENDED ? scroll : Unit.INSTANCE;
+        Object objScroll = scroll(MutatePriority.Default, new AnonymousClass2(i, i2, null), suspendLambda);
+        return objScroll == CoroutineSingletons.COROUTINE_SUSPENDED ? objScroll : Unit.INSTANCE;
     }
 
     public final void snapToItemIndexInternal$foundation_release(int i, int i2) {
@@ -354,8 +459,6 @@ public final class LazyGridState implements ScrollableState {
 
     /* JADX WARN: Type inference failed for: r3v7, types: [androidx.compose.foundation.lazy.grid.LazyGridState$remeasurementModifier$1] */
     public LazyGridState(final int i, int i2, LazyGridPrefetchStrategy lazyGridPrefetchStrategy) {
-        MutableState mutableStateOf;
-        MutableState mutableStateOf2;
         this.prefetchStrategy = lazyGridPrefetchStrategy;
         this.scrollPosition = new LazyGridScrollPosition(i, i2);
         this.layoutInfoState = SnapshotStateKt.mutableStateOf(LazyGridStateKt.EmptyLazyGridLayoutInfo, SnapshotStateKt.neverEqualPolicy());
@@ -367,11 +470,11 @@ public final class LazyGridState implements ScrollableState {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LazyGridMeasureResult lazyGridMeasureResult;
-                float floatValue = ((Number) obj).floatValue();
-                LazyGridState lazyGridState = LazyGridState.this;
-                float f = -floatValue;
+                float fFloatValue = ((Number) obj).floatValue();
+                LazyGridState lazyGridState = this.this$0;
+                float f = -fFloatValue;
                 if ((f >= 0.0f || lazyGridState.getCanScrollForward()) && (f <= 0.0f || lazyGridState.getCanScrollBackward())) {
                     if (Math.abs(lazyGridState.scrollToBeConsumed) > 0.5f) {
                         InlineClassHelperKt.throwIllegalStateException("entered drag with non-zero pending scroll");
@@ -380,20 +483,20 @@ public final class LazyGridState implements ScrollableState {
                     lazyGridState.scrollToBeConsumed = f2;
                     if (Math.abs(f2) > 0.5f) {
                         float f3 = lazyGridState.scrollToBeConsumed;
-                        int roundToInt = MathKt__MathJVMKt.roundToInt(f3);
-                        LazyGridMeasureResult copyWithScrollDeltaWithoutRemeasure = ((LazyGridMeasureResult) ((SnapshotMutableStateImpl) lazyGridState.layoutInfoState).getValue()).copyWithScrollDeltaWithoutRemeasure(roundToInt, !lazyGridState.hasLookaheadOccurred);
-                        if (copyWithScrollDeltaWithoutRemeasure != null && (lazyGridMeasureResult = lazyGridState.approachLayoutInfo) != null) {
-                            LazyGridMeasureResult copyWithScrollDeltaWithoutRemeasure2 = lazyGridMeasureResult.copyWithScrollDeltaWithoutRemeasure(roundToInt, true);
-                            if (copyWithScrollDeltaWithoutRemeasure2 != null) {
-                                lazyGridState.approachLayoutInfo = copyWithScrollDeltaWithoutRemeasure2;
+                        int iRoundToInt = MathKt__MathJVMKt.roundToInt(f3);
+                        LazyGridMeasureResult lazyGridMeasureResultCopyWithScrollDeltaWithoutRemeasure = ((LazyGridMeasureResult) ((SnapshotMutableStateImpl) lazyGridState.layoutInfoState).getValue()).copyWithScrollDeltaWithoutRemeasure(iRoundToInt, !lazyGridState.hasLookaheadOccurred);
+                        if (lazyGridMeasureResultCopyWithScrollDeltaWithoutRemeasure != null && (lazyGridMeasureResult = lazyGridState.approachLayoutInfo) != null) {
+                            LazyGridMeasureResult lazyGridMeasureResultCopyWithScrollDeltaWithoutRemeasure2 = lazyGridMeasureResult.copyWithScrollDeltaWithoutRemeasure(iRoundToInt, true);
+                            if (lazyGridMeasureResultCopyWithScrollDeltaWithoutRemeasure2 != null) {
+                                lazyGridState.approachLayoutInfo = lazyGridMeasureResultCopyWithScrollDeltaWithoutRemeasure2;
                             } else {
-                                copyWithScrollDeltaWithoutRemeasure = null;
+                                lazyGridMeasureResultCopyWithScrollDeltaWithoutRemeasure = null;
                             }
                         }
-                        if (copyWithScrollDeltaWithoutRemeasure != null) {
-                            lazyGridState.applyMeasureResult$foundation_release(copyWithScrollDeltaWithoutRemeasure, lazyGridState.hasLookaheadOccurred, true);
-                            ObservableScopeInvalidator.m173invalidateScopeimpl(lazyGridState.placementScopeInvalidator);
-                            lazyGridState.notifyPrefetchOnScroll(f3 - lazyGridState.scrollToBeConsumed, copyWithScrollDeltaWithoutRemeasure);
+                        if (lazyGridMeasureResultCopyWithScrollDeltaWithoutRemeasure != null) {
+                            lazyGridState.applyMeasureResult$foundation_release(lazyGridMeasureResultCopyWithScrollDeltaWithoutRemeasure, lazyGridState.hasLookaheadOccurred, true);
+                            ObservableScopeInvalidator.m174invalidateScopeimpl(lazyGridState.placementScopeInvalidator);
+                            lazyGridState.notifyPrefetchOnScroll(f3 - lazyGridState.scrollToBeConsumed, lazyGridMeasureResultCopyWithScrollDeltaWithoutRemeasure);
                         } else {
                             LayoutNode layoutNode = lazyGridState.remeasurement;
                             if (layoutNode != null) {
@@ -416,7 +519,7 @@ public final class LazyGridState implements ScrollableState {
         this.remeasurementModifier = new RemeasurementModifier() { // from class: androidx.compose.foundation.lazy.grid.LazyGridState$remeasurementModifier$1
             @Override // androidx.compose.ui.layout.RemeasurementModifier
             public final void onRemeasurementAvailable(LayoutNode layoutNode) {
-                LazyGridState.this.remeasurement = layoutNode;
+                this.this$0.remeasurement = layoutNode;
             }
         };
         this.awaitLayoutModifier = new AwaitFirstLayoutModifier();
@@ -431,9 +534,9 @@ public final class LazyGridState implements ScrollableState {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NestedPrefetchScope nestedPrefetchScope = (NestedPrefetchScope) obj;
-                LazyGridPrefetchStrategy lazyGridPrefetchStrategy2 = LazyGridState.this.prefetchStrategy;
+                LazyGridPrefetchStrategy lazyGridPrefetchStrategy2 = this.this$0.prefetchStrategy;
                 int i3 = i;
                 Snapshot.Companion.getClass();
                 Snapshot currentThreadSnapshot = Snapshot.Companion.getCurrentThreadSnapshot();
@@ -447,10 +550,8 @@ public final class LazyGridState implements ScrollableState {
         });
         this.prefetchScope = new LazyGridState$prefetchScope$1(this);
         this.pinnedItems = new LazyLayoutPinnedItemList();
-        mutableStateOf = SnapshotStateKt.mutableStateOf(Unit.INSTANCE, SnapshotStateKt.neverEqualPolicy());
-        this.placementScopeInvalidator = mutableStateOf;
-        mutableStateOf2 = SnapshotStateKt.mutableStateOf(Unit.INSTANCE, SnapshotStateKt.neverEqualPolicy());
-        this.measurementScopeInvalidator = mutableStateOf2;
+        this.placementScopeInvalidator = SnapshotStateKt.mutableStateOf(Unit.INSTANCE, SnapshotStateKt.neverEqualPolicy());
+        this.measurementScopeInvalidator = SnapshotStateKt.mutableStateOf(Unit.INSTANCE, SnapshotStateKt.neverEqualPolicy());
         Boolean bool = Boolean.FALSE;
         this.canScrollForward$delegate = SnapshotStateKt.mutableStateOf$default(bool);
         this.canScrollBackward$delegate = SnapshotStateKt.mutableStateOf$default(bool);

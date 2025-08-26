@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertController$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ReedSolomonEncoder {
     public final List cachedGenerators;
@@ -30,7 +29,7 @@ public final class ReedSolomonEncoder {
         int i2 = 1;
         GenericGF genericGF = this.field;
         if (i >= size) {
-            GenericGFPoly genericGFPoly2 = (GenericGFPoly) AlertController$$ExternalSyntheticOutline0.m((ArrayList) this.cachedGenerators, 1);
+            GenericGFPoly genericGFPoly2 = (GenericGFPoly) AlertController$$ExternalSyntheticOutline0.m(1, (ArrayList) this.cachedGenerators);
             int size2 = ((ArrayList) this.cachedGenerators).size();
             while (size2 <= i) {
                 GenericGFPoly genericGFPoly3 = new GenericGFPoly(genericGF, new int[]{i2, genericGF.expTable[(size2 - 1) + genericGF.generatorBase]});
@@ -67,10 +66,10 @@ public final class ReedSolomonEncoder {
         GenericGFPoly genericGFPoly4 = (GenericGFPoly) ((ArrayList) this.cachedGenerators).get(i);
         int[] iArr5 = new int[length];
         System.arraycopy(iArr, 0, iArr5, 0, length);
-        GenericGFPoly multiplyByMonomial = new GenericGFPoly(genericGF, iArr5).multiplyByMonomial(i, 1);
-        multiplyByMonomial.getClass();
+        GenericGFPoly genericGFPolyMultiplyByMonomial = new GenericGFPoly(genericGF, iArr5).multiplyByMonomial(i, 1);
+        genericGFPolyMultiplyByMonomial.getClass();
         GenericGF genericGF3 = genericGFPoly4.field;
-        GenericGF genericGF4 = multiplyByMonomial.field;
+        GenericGF genericGF4 = genericGFPolyMultiplyByMonomial.field;
         if (!genericGF4.equals(genericGF3)) {
             throw new IllegalArgumentException("GenericGFPolys do not have same GenericGF field");
         }
@@ -83,26 +82,26 @@ public final class ReedSolomonEncoder {
         }
         int i7 = genericGF4.expTable[(genericGF4.size - genericGF4.logTable[r4]) - 1];
         GenericGFPoly genericGFPoly5 = genericGF4.zero;
-        GenericGFPoly genericGFPoly6 = genericGFPoly5;
-        while (multiplyByMonomial.getDegree() >= genericGFPoly4.getDegree() && !multiplyByMonomial.isZero()) {
-            int degree2 = multiplyByMonomial.getDegree() - genericGFPoly4.getDegree();
-            int degree3 = multiplyByMonomial.getDegree();
-            int multiply = genericGF4.multiply(multiplyByMonomial.coefficients[(r11.length - 1) - degree3], i7);
-            GenericGFPoly multiplyByMonomial2 = genericGFPoly4.multiplyByMonomial(degree2, multiply);
+        GenericGFPoly genericGFPolyAddOrSubtract = genericGFPoly5;
+        while (genericGFPolyMultiplyByMonomial.getDegree() >= genericGFPoly4.getDegree() && !genericGFPolyMultiplyByMonomial.isZero()) {
+            int degree2 = genericGFPolyMultiplyByMonomial.getDegree() - genericGFPoly4.getDegree();
+            int degree3 = genericGFPolyMultiplyByMonomial.getDegree();
+            int iMultiply = genericGF4.multiply(genericGFPolyMultiplyByMonomial.coefficients[(r11.length - 1) - degree3], i7);
+            GenericGFPoly genericGFPolyMultiplyByMonomial2 = genericGFPoly4.multiplyByMonomial(degree2, iMultiply);
             if (degree2 < 0) {
                 throw new IllegalArgumentException();
             }
-            if (multiply == 0) {
+            if (iMultiply == 0) {
                 genericGFPoly = genericGFPoly5;
             } else {
                 int[] iArr6 = new int[degree2 + 1];
-                iArr6[0] = multiply;
+                iArr6[0] = iMultiply;
                 genericGFPoly = new GenericGFPoly(genericGF4, iArr6);
             }
-            genericGFPoly6 = genericGFPoly6.addOrSubtract(genericGFPoly);
-            multiplyByMonomial = multiplyByMonomial.addOrSubtract(multiplyByMonomial2);
+            genericGFPolyAddOrSubtract = genericGFPolyAddOrSubtract.addOrSubtract(genericGFPoly);
+            genericGFPolyMultiplyByMonomial = genericGFPolyMultiplyByMonomial.addOrSubtract(genericGFPolyMultiplyByMonomial2);
         }
-        int[] iArr7 = new GenericGFPoly[]{genericGFPoly6, multiplyByMonomial}[1].coefficients;
+        int[] iArr7 = new GenericGFPoly[]{genericGFPolyAddOrSubtract, genericGFPolyMultiplyByMonomial}[1].coefficients;
         int length4 = i - iArr7.length;
         for (int i8 = 0; i8 < length4; i8++) {
             iArr[length + i8] = 0;

@@ -181,9 +181,9 @@ public interface IDynamicSystemService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDynamicSystemService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDynamicSystemService)) {
-                return (IDynamicSystemService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDynamicSystemService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDynamicSystemService)) {
+                return (IDynamicSystemService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -243,30 +243,30 @@ public interface IDynamicSystemService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean startInstallation = startInstallation(readString);
+                    boolean zStartInstallation = startInstallation(string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(startInstallation);
+                    parcel2.writeBoolean(zStartInstallation);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    long readLong = parcel.readLong();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string2 = parcel.readString();
+                    long j = parcel.readLong();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int createPartition = createPartition(readString2, readLong, readBoolean);
+                    int iCreatePartition = createPartition(string2, j, z);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createPartition);
+                    parcel2.writeInt(iCreatePartition);
                     return true;
                 case 3:
-                    boolean closePartition = closePartition();
+                    boolean zClosePartition = closePartition();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(closePartition);
+                    parcel2.writeBoolean(zClosePartition);
                     return true;
                 case 4:
-                    boolean finishInstallation = finishInstallation();
+                    boolean zFinishInstallation = finishInstallation();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(finishInstallation);
+                    parcel2.writeBoolean(zFinishInstallation);
                     return true;
                 case 5:
                     GsiProgress installationProgress = getInstallationProgress();
@@ -274,52 +274,52 @@ public interface IDynamicSystemService extends IInterface {
                     parcel2.writeTypedObject(installationProgress, 1);
                     return true;
                 case 6:
-                    boolean abort = abort();
+                    boolean zAbort = abort();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(abort);
+                    parcel2.writeBoolean(zAbort);
                     return true;
                 case 7:
-                    boolean isInUse = isInUse();
+                    boolean zIsInUse = isInUse();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isInUse);
+                    parcel2.writeBoolean(zIsInUse);
                     return true;
                 case 8:
-                    boolean isInstalled = isInstalled();
+                    boolean zIsInstalled = isInstalled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isInstalled);
+                    parcel2.writeBoolean(zIsInstalled);
                     return true;
                 case 9:
-                    boolean isEnabled = isEnabled();
+                    boolean zIsEnabled = isEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEnabled);
+                    parcel2.writeBoolean(zIsEnabled);
                     return true;
                 case 10:
-                    boolean remove = remove();
+                    boolean zRemove = remove();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(remove);
+                    parcel2.writeBoolean(zRemove);
                     return true;
                 case 11:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean enable = setEnable(readBoolean2, readBoolean3);
+                    boolean enable = setEnable(z2, z3);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(enable);
                     return true;
                 case 12:
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    long readLong2 = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean ashmem = setAshmem(parcelFileDescriptor, readLong2);
+                    boolean ashmem = setAshmem(parcelFileDescriptor, j2);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(ashmem);
                     return true;
                 case 13:
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean submitFromAshmem = submitFromAshmem(readLong3);
+                    boolean zSubmitFromAshmem = submitFromAshmem(j3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(submitFromAshmem);
+                    parcel2.writeBoolean(zSubmitFromAshmem);
                     return true;
                 case 14:
                     AvbPublicKey avbPublicKey = new AvbPublicKey();
@@ -330,9 +330,9 @@ public interface IDynamicSystemService extends IInterface {
                     parcel2.writeTypedObject(avbPublicKey, 1);
                     return true;
                 case 15:
-                    long suggestScratchSize = suggestScratchSize();
+                    long jSuggestScratchSize = suggestScratchSize();
                     parcel2.writeNoException();
-                    parcel2.writeLong(suggestScratchSize);
+                    parcel2.writeLong(jSuggestScratchSize);
                     return true;
                 case 16:
                     String activeDsuSlot = getActiveDsuSlot();
@@ -362,254 +362,254 @@ public interface IDynamicSystemService extends IInterface {
 
             @Override // android.os.image.IDynamicSystemService
             public boolean startInstallation(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public int createPartition(String str, long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean closePartition() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean finishInstallation() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public GsiProgress getInstallationProgress() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (GsiProgress) obtain2.readTypedObject(GsiProgress.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (GsiProgress) parcelObtain2.readTypedObject(GsiProgress.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean abort() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean isInUse() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean isInstalled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean isEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean remove() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean setEnable(boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean setAshmem(ParcelFileDescriptor parcelFileDescriptor, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean submitFromAshmem(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public boolean getAvbPublicKey(AvbPublicKey avbPublicKey) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    boolean readBoolean = obtain2.readBoolean();
-                    if (obtain2.readInt() != 0) {
-                        avbPublicKey.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    boolean z = parcelObtain2.readBoolean();
+                    if (parcelObtain2.readInt() != 0) {
+                        avbPublicKey.readFromParcel(parcelObtain2);
                     }
-                    return readBoolean;
+                    return z;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public long suggestScratchSize() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.image.IDynamicSystemService
             public String getActiveDsuSlot() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDynamicSystemService.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

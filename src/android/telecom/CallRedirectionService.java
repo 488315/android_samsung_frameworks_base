@@ -91,12 +91,12 @@ public abstract class CallRedirectionService extends Service {
 
         @Override // com.android.internal.telecom.ICallRedirectionService
         public void placeCall(ICallRedirectionAdapter iCallRedirectionAdapter, Uri uri, PhoneAccountHandle phoneAccountHandle, boolean z) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = iCallRedirectionAdapter;
-            obtain.arg2 = uri;
-            obtain.arg3 = phoneAccountHandle;
-            obtain.arg4 = Boolean.valueOf(z);
-            CallRedirectionService.this.mHandler.obtainMessage(1, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = iCallRedirectionAdapter;
+            someArgsObtain.arg2 = uri;
+            someArgsObtain.arg3 = phoneAccountHandle;
+            someArgsObtain.arg4 = Boolean.valueOf(z);
+            CallRedirectionService.this.mHandler.obtainMessage(1, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.ICallRedirectionService

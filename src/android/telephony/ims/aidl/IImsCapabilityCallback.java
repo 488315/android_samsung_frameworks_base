@@ -58,9 +58,9 @@ public interface IImsCapabilityCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsCapabilityCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsCapabilityCallback)) {
-                return (IImsCapabilityCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsCapabilityCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsCapabilityCallback)) {
+                return (IImsCapabilityCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -93,21 +93,21 @@ public interface IImsCapabilityCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onQueryCapabilityConfiguration(readInt, readInt2, readBoolean);
+                onQueryCapabilityConfiguration(i3, i4, z);
             } else if (i == 2) {
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onChangeCapabilityConfigurationError(readInt3, readInt4, readInt5);
+                onChangeCapabilityConfigurationError(i5, i6, i7);
             } else if (i == 3) {
-                int readInt6 = parcel.readInt();
+                int i8 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCapabilitiesStatusChanged(readInt6);
+                onCapabilitiesStatusChanged(i8);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -132,41 +132,41 @@ public interface IImsCapabilityCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.IImsCapabilityCallback
             public void onQueryCapabilityConfiguration(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsCapabilityCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsCapabilityCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsCapabilityCallback
             public void onChangeCapabilityConfigurationError(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsCapabilityCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsCapabilityCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IImsCapabilityCallback
             public void onCapabilitiesStatusChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsCapabilityCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsCapabilityCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

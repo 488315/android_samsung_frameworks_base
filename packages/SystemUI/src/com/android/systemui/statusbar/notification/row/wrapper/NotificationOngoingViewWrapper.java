@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
 import com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityData;
 import com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityDataHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationOngoingViewWrapper extends NotificationHeaderViewWrapper {
     public View mActionIconButtonContainer;
@@ -49,9 +48,9 @@ public class NotificationOngoingViewWrapper extends NotificationHeaderViewWrappe
         for (int i = 0; i < arraySet.size(); i++) {
             View view = (View) arraySet.valueAt(i);
             if (!arraySet2.contains(view)) {
-                TransformState createFrom = TransformState.createFrom(view, viewTransformationHelper);
-                createFrom.setVisible(true, true);
-                createFrom.recycle();
+                TransformState transformStateCreateFrom = TransformState.createFrom(view, viewTransformationHelper);
+                transformStateCreateFrom.setVisible(true, true);
+                transformStateCreateFrom.recycle();
             }
         }
     }

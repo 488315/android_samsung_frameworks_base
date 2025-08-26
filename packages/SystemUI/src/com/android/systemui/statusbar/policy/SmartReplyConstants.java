@@ -10,7 +10,6 @@ import com.android.systemui.R;
 import com.android.systemui.util.DeviceConfigProxy;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SmartReplyConstants {
     public final boolean mDefaultEditChoicesBeforeSending;
@@ -61,7 +60,7 @@ public final class SmartReplyConstants {
         deviceConfigProxy.addOnPropertiesChangedListener("systemui", new Executor() { // from class: com.android.systemui.statusbar.policy.SmartReplyConstants$$ExternalSyntheticLambda0
             @Override // java.util.concurrent.Executor
             public final void execute(Runnable runnable) {
-                SmartReplyConstants.this.mMainExecutor.execute(runnable);
+                this.f$0.mMainExecutor.execute(runnable);
             }
         }, r0);
         updateConstants();

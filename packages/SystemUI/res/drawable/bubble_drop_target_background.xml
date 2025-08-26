@@ -5,6 +5,6 @@
     <shape android:shape="rectangle">
         <corners android:radius="@dimen/bubble_bar_expanded_view_drop_target_corner" />
         <solid android:color="@color/bubble_drop_target_background_color" />
-        <stroke android:width="1.0dip" android:color="@android:color/secondary_text_default_material_dark" />
+        <stroke android:width="1.0dip" android:color="@android:color/notification_close_button_state_tint" />
     </shape>
 </inset>

@@ -21,7 +21,6 @@ import com.samsung.android.knox.restriction.IRestrictionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ContainerConfigurationPolicy {
     public static final int ERROR_INTERNAL_ERROR = -2;
@@ -50,33 +49,25 @@ public class ContainerConfigurationPolicy {
     }
 
     public static synchronized IKnoxContainerManager getMUMContainerService() {
-        IKnoxContainerManager iKnoxContainerManager;
-        synchronized (ContainerConfigurationPolicy.class) {
-            try {
-                if (mMUMContainerService == null) {
-                    mMUMContainerService = IKnoxContainerManager.Stub.asInterface(ServiceManager.getService("mum_container_policy"));
-                }
-                iKnoxContainerManager = mMUMContainerService;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (mMUMContainerService == null) {
+                mMUMContainerService = IKnoxContainerManager.Stub.asInterface(ServiceManager.getService("mum_container_policy"));
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return iKnoxContainerManager;
+        return mMUMContainerService;
     }
 
     public static synchronized IRestrictionPolicy getRestrictionService() {
-        IRestrictionPolicy iRestrictionPolicy;
-        synchronized (ContainerConfigurationPolicy.class) {
-            try {
-                if (gRestrictionService == null) {
-                    gRestrictionService = IRestrictionPolicy.Stub.asInterface(ServiceManager.getService("restriction_policy"));
-                }
-                iRestrictionPolicy = gRestrictionService;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (gRestrictionService == null) {
+                gRestrictionService = IRestrictionPolicy.Stub.asInterface(ServiceManager.getService("restriction_policy"));
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return iRestrictionPolicy;
+        return gRestrictionService;
     }
 
     public void addCrossProfileIntentFilter(ComponentName componentName, IntentFilter intentFilter, int i) {
@@ -144,7 +135,7 @@ public class ContainerConfigurationPolicy {
             Log.e(TAG, "KnoxMumContainer PolicyService is not yet ready!!!");
             return false;
         }
-        String str2 = "";
+        String strJoin = "";
         if (signatureArr != null) {
             try {
                 if (signatureArr.length > 0) {
@@ -152,14 +143,14 @@ public class ContainerConfigurationPolicy {
                     for (int i = 0; i < signatureArr.length; i++) {
                         strArr[i] = signatureArr[i].toCharsString();
                     }
-                    str2 = TextUtils.join(",", strArr);
+                    strJoin = TextUtils.join(",", strArr);
                 }
             } catch (RemoteException e) {
                 Log.w(TAG, "Failed at ContainerConfigurationPolicy API addPackageToExternalStorageWhiteList", e);
                 return false;
             }
         }
-        return mUMContainerService.addPackageToExternalStorageWhiteList(this.mContextInfo, new AppIdentity(str, str2)) == 0;
+        return mUMContainerService.addPackageToExternalStorageWhiteList(this.mContextInfo, new AppIdentity(str, strJoin)) == 0;
     }
 
     public boolean addPackageToInstallWhiteList(String str) {
@@ -404,7 +395,7 @@ public class ContainerConfigurationPolicy {
     }
 
     public void enforceMultifactorAuthentication(boolean z) {
-        boolean z2;
+        boolean zEnforceMultifactorAuthentication;
         EnterpriseLicenseManager.log(this.mContextInfo, "ContainerConfigurationPolicy.enforceMultifactorAuthentication");
         IKnoxContainerManager mUMContainerService = getMUMContainerService();
         if (mUMContainerService == null) {
@@ -412,12 +403,12 @@ public class ContainerConfigurationPolicy {
             return;
         }
         try {
-            z2 = mUMContainerService.enforceMultifactorAuthentication(this.mContextInfo, z);
+            zEnforceMultifactorAuthentication = mUMContainerService.enforceMultifactorAuthentication(this.mContextInfo, z);
         } catch (RemoteException e) {
             Log.w(TAG, "Failed at KnoxContainerManager API unlock ", e);
-            z2 = false;
+            zEnforceMultifactorAuthentication = false;
         }
-        EmergencyButtonController$$ExternalSyntheticOutline0.m("enforceMultifactorAuthentication result = ", TAG, z2);
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("enforceMultifactorAuthentication result = ", TAG, zEnforceMultifactorAuthentication);
     }
 
     public final IApplicationPolicy getAppService() {
@@ -853,7 +844,7 @@ public class ContainerConfigurationPolicy {
     }
 
     public boolean resetContainerPassword() {
-        int i;
+        int iForceResetPassword;
         EnterpriseLicenseManager.log(this.mContextInfo, "ContainerConfigurationPolicy.resetPassword");
         IKnoxContainerManager mUMContainerService = getMUMContainerService();
         if (mUMContainerService == null) {
@@ -861,12 +852,12 @@ public class ContainerConfigurationPolicy {
             return false;
         }
         try {
-            i = mUMContainerService.forceResetPassword(this.mContextInfo, null, 0);
+            iForceResetPassword = mUMContainerService.forceResetPassword(this.mContextInfo, null, 0);
         } catch (RemoteException e) {
             Log.w(TAG, "Failed talking with ContainerConfigurationPolicy ", e);
-            i = -2;
+            iForceResetPassword = -2;
         }
-        return i >= 0;
+        return iForceResetPassword >= 0;
     }
 
     public boolean setContactsSharingEnabled(boolean z) {

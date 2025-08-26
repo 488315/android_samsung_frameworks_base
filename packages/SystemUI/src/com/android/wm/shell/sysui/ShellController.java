@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.graphics.Rect;
+import android.hardware.HardwareBufferInfoRegistry;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.view.InsetsSource;
@@ -17,6 +18,7 @@ import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.sysui.ShellCommandHandler;
 import com.android.wm.shell.sysui.ShellController;
+import com.samsung.android.rune.CoreRune;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -27,7 +29,6 @@ import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ShellController {
     public final Context mContext;
@@ -53,15 +54,15 @@ public class ShellController {
                 return;
             }
             int i = InsetsSource.ID_IME;
-            InsetsSource peekSource = insetsState2.peekSource(i);
+            InsetsSource insetsSourcePeekSource = insetsState2.peekSource(i);
             boolean z = false;
-            boolean z2 = peekSource != null && peekSource.isVisible();
-            Rect frame = z2 ? peekSource.getFrame() : null;
-            InsetsSource peekSource2 = insetsState.peekSource(i);
-            if (peekSource2 != null && peekSource2.isVisible()) {
+            boolean z2 = insetsSourcePeekSource != null && insetsSourcePeekSource.isVisible();
+            Rect frame = z2 ? insetsSourcePeekSource.getFrame() : null;
+            InsetsSource insetsSourcePeekSource2 = insetsState.peekSource(i);
+            if (insetsSourcePeekSource2 != null && insetsSourcePeekSource2.isVisible()) {
                 z = true;
             }
-            Rect frame2 = z ? peekSource2.getFrame() : null;
+            Rect frame2 = z ? insetsSourcePeekSource2.getFrame() : null;
             ShellController shellController = ShellController.this;
             if (z2 != z) {
                 shellController.onImeVisibilityChanged(z);
@@ -75,7 +76,7 @@ public class ShellController {
     public final AnonymousClass2 mDumpCommandHandler = new ShellCommandHandler.ShellCommandActionHandler() { // from class: com.android.wm.shell.sysui.ShellController.2
         @Override // com.android.wm.shell.sysui.ShellCommandHandler.ShellCommandActionHandler
         public final boolean onShellCommand(PrintWriter printWriter, String[] strArr) {
-            ShellController.m3264$$Nest$mhandleDump(ShellController.this, printWriter);
+            ShellController.m3282$$Nest$mhandleDump(ShellController.this, printWriter);
             return true;
         }
 
@@ -85,7 +86,6 @@ public class ShellController {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ShellInterfaceImpl implements ShellInterface {
         public /* synthetic */ ShellInterfaceImpl(ShellController shellController, int i) {
             this();
@@ -114,16 +114,22 @@ public class ShellController {
             try {
                 final boolean[] zArr = new boolean[1];
                 ShellController.this.mMainExecutor.executeBlocking(new Runnable() { // from class: com.android.wm.shell.sysui.ShellController$ShellInterfaceImpl$$ExternalSyntheticLambda1
+                    /* JADX WARN: Removed duplicated region for block: B:4:0x0014  */
                     @Override // java.lang.Runnable
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
                     public final void run() {
                         boolean z;
-                        ShellController.ShellInterfaceImpl shellInterfaceImpl = ShellController.ShellInterfaceImpl.this;
+                        ShellController.ShellInterfaceImpl shellInterfaceImpl = this.f$0;
                         boolean[] zArr2 = zArr;
                         String[] strArr2 = strArr;
                         PrintWriter printWriter2 = printWriter;
                         ShellCommandHandler shellCommandHandler = ShellController.this.mShellCommandHandler;
                         shellCommandHandler.getClass();
-                        if (strArr2.length >= 2) {
+                        if (strArr2.length < 2) {
+                            z = false;
+                        } else {
                             z = true;
                             String str = strArr2[1];
                             if (str.toLowerCase().equals("help")) {
@@ -137,9 +143,7 @@ public class ShellController {
                             } else if (shellCommandHandler.mCommands.containsKey(str)) {
                                 ((ShellCommandHandler.ShellCommandActionHandler) shellCommandHandler.mCommands.get(strArr2[1])).onShellCommand(printWriter2, (String[]) Arrays.copyOfRange(strArr2, 2, strArr2.length));
                             }
-                            zArr2[0] = z;
                         }
-                        z = false;
                         zArr2[0] = z;
                     }
                 });
@@ -147,6 +151,17 @@ public class ShellController {
             } catch (InterruptedException e) {
                 throw new RuntimeException("Failed to handle Shell command in 2s", e);
             }
+        }
+
+        @Override // com.android.wm.shell.sysui.ShellInterface
+        public final void onBeforeUserSwitching(final int i) {
+            ShellController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.sysui.ShellController$ShellInterfaceImpl$$ExternalSyntheticLambda9
+                @Override // java.lang.Runnable
+                public final void run() {
+                    ShellController.ShellInterfaceImpl shellInterfaceImpl = this.f$0;
+                    ShellController.this.onBeforeUserSwitching(i);
+                }
+            });
         }
 
         @Override // com.android.wm.shell.sysui.ShellInterface
@@ -170,7 +185,7 @@ public class ShellController {
             ShellController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.sysui.ShellController$ShellInterfaceImpl$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ShellController.ShellInterfaceImpl shellInterfaceImpl = ShellController.ShellInterfaceImpl.this;
+                    ShellController.ShellInterfaceImpl shellInterfaceImpl = this.f$0;
                     ShellController.this.onKeyguardVisibilityChanged(z, z2, z3);
                 }
             });
@@ -181,7 +196,7 @@ public class ShellController {
             ShellController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.sysui.ShellController$ShellInterfaceImpl$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ShellController.ShellInterfaceImpl shellInterfaceImpl = ShellController.ShellInterfaceImpl.this;
+                    ShellController.ShellInterfaceImpl shellInterfaceImpl = this.f$0;
                     ShellController.this.onUserChanged(i, context);
                 }
             });
@@ -197,7 +212,7 @@ public class ShellController {
     }
 
     /* renamed from: -$$Nest$mhandleDump, reason: not valid java name */
-    public static void m3264$$Nest$mhandleDump(ShellController shellController, PrintWriter printWriter) {
+    public static void m3282$$Nest$mhandleDump(ShellController shellController, PrintWriter printWriter) {
         ShellCommandHandler shellCommandHandler = shellController.mShellCommandHandler;
         Iterator it = shellCommandHandler.mDumpables.keySet().iterator();
         while (it.hasNext()) {
@@ -205,6 +220,10 @@ public class ShellController {
             printWriter.println();
         }
         SurfaceControlRegistry.dump(100, false, printWriter);
+        HardwareBufferInfoRegistry.getInstance().dump(printWriter);
+        if (CoreRune.FW_DETECT_HARDWARE_BUFFER_LEAKS) {
+            HardwareBufferInfoRegistry.getInstance().dumpHeapIfNeeded();
+        }
     }
 
     /* JADX WARN: Type inference failed for: r0v7, types: [com.android.wm.shell.sysui.ShellController$1] */
@@ -256,6 +275,13 @@ public class ShellController {
         }
     }
 
+    public void onBeforeUserSwitching(int i) {
+        Iterator it = this.mUserChangeListeners.iterator();
+        while (it.hasNext()) {
+            ((UserChangeListener) it.next()).onBeforeUserSwitching(i);
+        }
+    }
+
     public void onConfigurationChanged(Configuration configuration) {
         Configuration configuration2 = this.mLastConfiguration;
         if (configuration2 == null) {
@@ -266,17 +292,17 @@ public class ShellController {
             }
             return;
         }
-        int diff = configuration.diff(configuration2);
+        int iDiff = configuration.diff(configuration2);
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_SYSUI_EVENTS_enabled[1]) {
             ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_SYSUI_EVENTS, 5422673531719793357L, 0, String.valueOf(configuration));
         }
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_SYSUI_EVENTS_enabled[1]) {
-            ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_SYSUI_EVENTS, -308891106308048671L, 0, String.valueOf(Configuration.configurationDiffToString(diff)));
+            ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_SYSUI_EVENTS, -308891106308048671L, 0, String.valueOf(Configuration.configurationDiffToString(iDiff)));
         }
-        boolean z = ((1073741824 & diff) == 0 && (diff & 4096) == 0) ? false : true;
-        boolean z2 = ((Integer.MIN_VALUE & diff) == 0 && (diff & 512) == 0) ? false : true;
-        if ((diff & 4) == 0) {
-            int i = diff & 8192;
+        boolean z = ((1073741824 & iDiff) == 0 && (iDiff & 4096) == 0) ? false : true;
+        boolean z2 = ((Integer.MIN_VALUE & iDiff) == 0 && (iDiff & 512) == 0) ? false : true;
+        if ((iDiff & 4) == 0) {
+            int i = iDiff & 8192;
         }
         this.mLastConfiguration.updateFrom(configuration);
         Iterator it = this.mConfigChangeListeners.iterator();
@@ -299,7 +325,7 @@ public class ShellController {
         this.mDisplayImeChangeListeners.forEach(new BiConsumer() { // from class: com.android.wm.shell.sysui.ShellController$$ExternalSyntheticLambda1
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                ShellController shellController = ShellController.this;
+                ShellController shellController = this.f$0;
                 Rect rect2 = rect;
                 if (obj != null) {
                     throw new ClassCastException();
@@ -316,7 +342,7 @@ public class ShellController {
         this.mDisplayImeChangeListeners.forEach(new BiConsumer() { // from class: com.android.wm.shell.sysui.ShellController$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                ShellController shellController = ShellController.this;
+                ShellController shellController = this.f$0;
                 boolean z2 = z;
                 if (obj != null) {
                     throw new ClassCastException();

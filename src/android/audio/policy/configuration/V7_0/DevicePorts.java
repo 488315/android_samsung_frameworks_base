@@ -120,7 +120,7 @@ public class DevicePorts {
             this.encodedFormats = list;
         }
 
-        static DevicePort read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static DevicePort read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
             int next;
             DevicePort devicePort = new DevicePort();
             String attributeValue = xmlPullParser.getAttributeValue(null, "tagName");
@@ -182,7 +182,7 @@ public class DevicePorts {
         return this.devicePort;
     }
 
-    static DevicePorts read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static DevicePorts read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         int next;
         DevicePorts devicePorts = new DevicePorts();
         xmlPullParser.getDepth();

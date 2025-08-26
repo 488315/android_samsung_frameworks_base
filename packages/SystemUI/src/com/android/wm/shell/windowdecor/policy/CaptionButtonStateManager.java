@@ -17,11 +17,11 @@ import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.windowdecor.CaptionGlobalState;
 import com.android.wm.shell.windowdecor.widget.CaptionButton;
 import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
+import com.samsung.android.multiwindow.MultiWindowCoreState;
 import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CaptionButtonStateManager {
     public CaptionButton mCloseButton;
@@ -32,11 +32,12 @@ public class CaptionButtonStateManager {
     public boolean mIsNightMode;
     public final boolean mIsPopupView;
     public final boolean mIsSplitStashed;
-    public CaptionButton mMinimizeButton;
     public CaptionButton mSplitButton;
     public ActivityManager.RunningTaskInfo mTaskInfo;
     public CaptionButton mToggleFreeformButton;
+    public CaptionButton mToggleImmersiveButton;
     public boolean mIsTopDownSplit = true;
+    public boolean mIsFreeformMaximized = false;
     public boolean mInFullImmersiveState = false;
 
     public CaptionButtonStateManager(ActivityManager.RunningTaskInfo runningTaskInfo, Context context, DisplayController displayController, boolean z, boolean z2) {
@@ -66,7 +67,7 @@ public class CaptionButtonStateManager {
         return this.mContext.getResources().getColorStateList(z ? R.color.mw_caption_button_icon_color_dark : R.color.mw_caption_button_icon_color_light, null);
     }
 
-    public final RippleDrawable getRippleDrawable(Context context, View view) {
+    public final RippleDrawable getRippleDrawable(Context context, View view) throws Resources.NotFoundException {
         RippleDrawable rippleDrawable = (RippleDrawable) context.getDrawable(R.drawable.mw_caption_button_ripple);
         if (rippleDrawable != null) {
             Resources resources = context.getResources();
@@ -86,16 +87,16 @@ public class CaptionButtonStateManager {
         return rippleDrawable;
     }
 
-    public final ColorStateList getThemeColorStateList(boolean z) {
-        Context context;
+    public final ColorStateList getThemeColorStateList(boolean z) throws Resources.NotFoundException {
+        Context contextCreateConfigurationContext;
         if (this.mIsNightMode != this.mContext.getResources().getConfiguration().isNightModeActive()) {
             Configuration configuration = new Configuration(this.mContext.getResources().getConfiguration());
             configuration.uiMode = ((this.mIsNightMode ? 32 : 16) & 48) | (configuration.uiMode & (-49));
-            context = this.mContext.createConfigurationContext(configuration);
+            contextCreateConfigurationContext = this.mContext.createConfigurationContext(configuration);
         } else {
-            context = null;
+            contextCreateConfigurationContext = null;
         }
-        ColorStateList colorStateList = (context == null ? this.mContext.getResources() : context.getResources()).getColorStateList(17171431, null);
+        ColorStateList colorStateList = (contextCreateConfigurationContext == null ? this.mContext.getResources() : contextCreateConfigurationContext.getResources()).getColorStateList(17171431, null);
         if (z) {
             return colorStateList;
         }
@@ -114,9 +115,9 @@ public class CaptionButtonStateManager {
 
     public void setupCaptionButtonState(Context context, ViewGroup viewGroup, View.OnTouchListener onTouchListener, View.OnClickListener onClickListener) {
         this.mToggleFreeformButton = (CaptionButton) viewGroup.findViewById(R.id.toggle_freeform_window);
-        this.mMinimizeButton = (CaptionButton) viewGroup.findViewById(R.id.minimize_window);
         this.mSplitButton = (CaptionButton) viewGroup.findViewById(R.id.split_window);
         this.mFreeformButton = (CaptionButton) viewGroup.findViewById(R.id.freeform_window);
+        this.mToggleImmersiveButton = (CaptionButton) viewGroup.findViewById(R.id.toggle_immersive_window);
         CaptionButton captionButton = (CaptionButton) viewGroup.findViewById(R.id.close_window);
         this.mCloseButton = captionButton;
         if (captionButton != null) {
@@ -135,19 +136,6 @@ public class CaptionButtonStateManager {
         }
     }
 
-    public final void setupFreeformButtonState(ActivityManager.RunningTaskInfo runningTaskInfo) {
-        if (this.mFreeformButton == null) {
-            return;
-        }
-        boolean z = true;
-        if (!runningTaskInfo.supportsMultiWindow && runningTaskInfo.getWindowingMode() == 1) {
-            z = false;
-        }
-        if (this.mFreeformButton.isEnabled() != z) {
-            this.mFreeformButton.setEnabled(z);
-        }
-    }
-
     public final void setupSplitButtonImage(ActivityManager.RunningTaskInfo runningTaskInfo) {
         if (this.mSplitButton == null) {
             return;
@@ -160,7 +148,7 @@ public class CaptionButtonStateManager {
             this.mIsTopDownSplit = z2;
             this.mSplitButton.setImageDrawable(this.mContext.getDrawable(z2 ? R.drawable.mw_caption_button_split_top_bottom : R.drawable.mw_caption_button_split_left_right));
         }
-        boolean z3 = MultiWindowUtils.isSplitEnabled(MultiWindowManager.getInstance().getMultiSplitFlags()) && runningTaskInfo.resizeMode != 10 && runningTaskInfo.supportsMultiWindow && !this.mIsSplitStashed;
+        boolean z3 = MultiWindowUtils.isSplitEnabled(MultiWindowManager.getInstance().getMultiSplitFlags()) && runningTaskInfo.resizeMode != 10 && runningTaskInfo.supportsMultiWindow && MultiWindowCoreState.MW_ENABLED && !this.mIsSplitStashed;
         if (this.mSplitButton.isEnabled() != z3) {
             this.mSplitButton.setEnabled(z3);
         }

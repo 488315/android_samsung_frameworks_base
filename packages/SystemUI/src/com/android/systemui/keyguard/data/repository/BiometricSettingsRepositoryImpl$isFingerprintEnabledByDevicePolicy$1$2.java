@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class BiometricSettingsRepositoryImpl$isFingerprintEnabledByDevicePolicy$1$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ DevicePolicyManager $devicePolicyManager;
@@ -43,9 +42,9 @@ final class BiometricSettingsRepositoryImpl$isFingerprintEnabledByDevicePolicy$1
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            Boolean valueOf = Boolean.valueOf(BiometricSettingsRepositoryKt.isNotActive(this.$devicePolicyManager, this.$userId, 32));
+            Boolean boolValueOf = Boolean.valueOf(BiometricSettingsRepositoryKt.isNotActive(this.$devicePolicyManager, this.$userId, 32));
             this.label = 1;
-            if (flowCollector.emit(valueOf, this) == coroutineSingletons) {
+            if (flowCollector.emit(boolValueOf, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

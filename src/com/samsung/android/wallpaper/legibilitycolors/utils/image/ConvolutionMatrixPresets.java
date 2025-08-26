@@ -16,7 +16,7 @@ public class ConvolutionMatrixPresets {
         }
         int i2 = i / 2;
         double[][] dArr2 = new double[i][];
-        double sqrt = Math.sqrt(i2 * i2 * 2);
+        double dSqrt = Math.sqrt(i2 * i2 * 2);
         double d = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         double d2 = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         for (int i3 = 0; i3 < i; i3++) {
@@ -25,27 +25,27 @@ public class ConvolutionMatrixPresets {
             int i4 = 0;
             while (i4 < i) {
                 double d4 = i4 - i2;
-                double sqrt2 = Math.sqrt((d4 * d4) + (d3 * d3)) / sqrt;
-                double d5 = sqrt;
+                double dSqrt2 = Math.sqrt((d4 * d4) + (d3 * d3)) / dSqrt;
+                double d5 = dSqrt;
                 double d6 = 1.4f;
-                double sin = Math.sin((sqrt2 + (0.5d / d6)) * 3.141592653589793d * d6);
-                dArr2[i3][i4] = sin;
-                if (sin < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
-                    d2 += sin;
+                double dSin = Math.sin((dSqrt2 + (0.5d / d6)) * 3.141592653589793d * d6);
+                dArr2[i3][i4] = dSin;
+                if (dSin < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+                    d2 += dSin;
                 } else {
-                    d += sin;
+                    d += dSin;
                 }
                 i4++;
-                sqrt = d5;
+                dSqrt = d5;
             }
         }
-        double abs = Math.abs(d / d2);
+        double dAbs = Math.abs(d / d2);
         for (int i5 = 0; i5 < i; i5++) {
             double[] dArr3 = dArr2[i5];
             for (int i6 = 0; i6 < i; i6++) {
                 double d7 = dArr3[i6];
                 if (d7 < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
-                    dArr3[i6] = d7 * abs;
+                    dArr3[i6] = d7 * dAbs;
                 }
                 dArr3[i6] = dArr3[i6] / d;
             }

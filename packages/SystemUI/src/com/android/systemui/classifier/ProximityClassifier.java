@@ -1,10 +1,11 @@
 package com.android.systemui.classifier;
 
 import android.view.MotionEvent;
+import com.android.systemui.classifier.DistanceClassifier;
+import com.android.systemui.classifier.FalsingClassifier;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.util.DeviceConfigProxy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ProximityClassifier extends FalsingClassifier {
     public final DistanceClassifier mDistanceClassifier;
@@ -21,100 +22,35 @@ public class ProximityClassifier extends FalsingClassifier {
         this.mPercentCoveredThreshold = deviceConfigProxy.getFloat("systemui", "brightline_falsing_proximity_percent_covered_threshold", 0.1f);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x003d, code lost:
-    
-        if (java.lang.Math.abs(r3.mDx) >= r6.mHorizontalSwipeThresholdPx) goto L21;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0058, code lost:
-    
-        r6 = r6.falsed(0.5d, r6.getReason$1());
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0053, code lost:
-    
-        r6 = com.android.systemui.classifier.FalsingClassifier.Result.passed(0.5d);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x0051, code lost:
-    
-        if (java.lang.Math.abs(r3.mDy) >= r6.mVerticalSwipeThresholdPx) goto L21;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0058  */
     @Override // com.android.systemui.classifier.FalsingClassifier
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.systemui.classifier.FalsingClassifier.Result calculateFalsingResult(int r6) {
-        /*
-            r5 = this;
-            if (r6 == 0) goto L8d
-            r0 = 10
-            if (r6 == r0) goto L8d
-            r0 = 12
-            if (r6 == r0) goto L8d
-            r0 = 15
-            if (r6 == r0) goto L8d
-            r0 = 18
-            if (r6 != r0) goto L14
-            goto L8d
-        L14:
-            float r6 = r5.mPercentNear
-            float r0 = r5.mPercentCoveredThreshold
-            int r6 = (r6 > r0 ? 1 : (r6 == r0 ? 0 : -1))
-            r1 = 4602678819172646912(0x3fe0000000000000, double:0.5)
-            if (r6 <= 0) goto L88
-            com.android.systemui.classifier.DistanceClassifier r6 = r5.mDistanceClassifier
-            com.android.systemui.classifier.DistanceClassifier$DistanceVectors r3 = r6.getDistances()
-            com.android.systemui.classifier.FalsingDataProvider r4 = r6.mDataProvider
-            boolean r4 = r4.isHorizontal()
-            if (r4 == 0) goto L40
-            float r4 = r3.mDx
-            java.lang.Math.abs(r4)
-            boolean r4 = com.android.systemui.classifier.BrightLineFalsingManager.DEBUG
-            float r3 = r3.mDx
-            float r3 = java.lang.Math.abs(r3)
-            float r4 = r6.mHorizontalSwipeThresholdPx
-            int r3 = (r3 > r4 ? 1 : (r3 == r4 ? 0 : -1))
-            if (r3 < 0) goto L58
-            goto L53
-        L40:
-            float r4 = r3.mDy
-            java.lang.Math.abs(r4)
-            boolean r4 = com.android.systemui.classifier.BrightLineFalsingManager.DEBUG
-            float r3 = r3.mDy
-            float r3 = java.lang.Math.abs(r3)
-            float r4 = r6.mVerticalSwipeThresholdPx
-            int r3 = (r3 > r4 ? 1 : (r3 == r4 ? 0 : -1))
-            if (r3 < 0) goto L58
-        L53:
-            com.android.systemui.classifier.FalsingClassifier$Result r6 = com.android.systemui.classifier.FalsingClassifier.Result.passed(r1)
-            goto L60
-        L58:
-            java.lang.String r3 = r6.getReason$1()
-            com.android.systemui.classifier.FalsingClassifier$Result r6 = r6.falsed(r1, r3)
-        L60:
-            boolean r3 = r6.mFalsed
-            if (r3 == 0) goto L83
-            float r3 = r5.mPercentNear
-            java.lang.Float r3 = java.lang.Float.valueOf(r3)
-            java.lang.Float r0 = java.lang.Float.valueOf(r0)
-            java.lang.String r6 = r6.getReason()
-            java.lang.Object[] r6 = new java.lang.Object[]{r3, r0, r6}
-            r0 = 0
-            java.lang.String r3 = "{percentInProximity=%f, threshold=%f, distanceClassifier=%s}"
-            java.lang.String r6 = java.lang.String.format(r0, r3, r6)
-            com.android.systemui.classifier.FalsingClassifier$Result r5 = r5.falsed(r1, r6)
-            return r5
-        L83:
-            com.android.systemui.classifier.FalsingClassifier$Result r5 = com.android.systemui.classifier.FalsingClassifier.Result.passed(r1)
-            return r5
-        L88:
-            com.android.systemui.classifier.FalsingClassifier$Result r5 = com.android.systemui.classifier.FalsingClassifier.Result.passed(r1)
-            return r5
-        L8d:
-            r5 = 0
-            com.android.systemui.classifier.FalsingClassifier$Result r5 = com.android.systemui.classifier.FalsingClassifier.Result.passed(r5)
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.classifier.ProximityClassifier.calculateFalsingResult(int):com.android.systemui.classifier.FalsingClassifier$Result");
+    public final FalsingClassifier.Result calculateFalsingResult(int i) {
+        FalsingClassifier.Result resultPassed;
+        if (i == 0 || i == 10 || i == 12 || i == 15 || i == 18) {
+            return FalsingClassifier.Result.passed(0.0d);
+        }
+        float f = this.mPercentNear;
+        float f2 = this.mPercentCoveredThreshold;
+        if (f <= f2) {
+            return FalsingClassifier.Result.passed(0.5d);
+        }
+        DistanceClassifier distanceClassifier = this.mDistanceClassifier;
+        DistanceClassifier.DistanceVectors distances = distanceClassifier.getDistances();
+        if (distanceClassifier.mDataProvider.isHorizontal()) {
+            Math.abs(distances.mDx);
+            boolean z = BrightLineFalsingManager.DEBUG;
+            resultPassed = Math.abs(distances.mDx) >= distanceClassifier.mHorizontalSwipeThresholdPx ? FalsingClassifier.Result.passed(0.5d) : distanceClassifier.falsed(0.5d, distanceClassifier.getReason$1());
+        } else {
+            Math.abs(distances.mDy);
+            boolean z2 = BrightLineFalsingManager.DEBUG;
+            if (Math.abs(distances.mDy) >= distanceClassifier.mVerticalSwipeThresholdPx) {
+            }
+        }
+        return resultPassed.mFalsed ? falsed(0.5d, String.format(null, "{percentInProximity=%f, threshold=%f, distanceClassifier=%s}", Float.valueOf(this.mPercentNear), Float.valueOf(f2), resultPassed.getReason())) : FalsingClassifier.Result.passed(0.5d);
     }
 
     @Override // com.android.systemui.classifier.FalsingClassifier

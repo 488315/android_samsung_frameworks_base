@@ -17,7 +17,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DisplayMetricsRepository$displayMetrics$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ConfigurationController $configurationController;
@@ -64,7 +63,7 @@ final class DisplayMetricsRepository$displayMetrics$1 extends SuspendLambda impl
                     if (display != null) {
                         display.getMetrics(displayMetrics);
                     }
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(displayMetrics);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(displayMetrics);
                 }
             };
             ((ConfigurationControllerImpl) this.$configurationController).addCallback(r1);
@@ -72,7 +71,7 @@ final class DisplayMetricsRepository$displayMetrics$1 extends SuspendLambda impl
             Function0 function0 = new Function0() { // from class: com.android.systemui.display.data.repository.DisplayMetricsRepository$displayMetrics$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((ConfigurationControllerImpl) ConfigurationController.this).removeCallback(r1);
+                    ((ConfigurationControllerImpl) configurationController).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

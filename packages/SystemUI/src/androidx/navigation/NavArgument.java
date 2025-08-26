@@ -2,7 +2,6 @@ package androidx.navigation;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NavArgument {
     public final Object defaultValue;
@@ -11,7 +10,6 @@ public final class NavArgument {
     public final boolean isNullable;
     public final NavType type;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public boolean isNullable;
         public NavType type;
@@ -54,9 +52,9 @@ public final class NavArgument {
     }
 
     public final int hashCode() {
-        int hashCode = ((((this.type.hashCode() * 31) + (this.isNullable ? 1 : 0)) * 31) + (this.isDefaultValuePresent ? 1 : 0)) * 31;
+        int iHashCode = ((((this.type.hashCode() * 31) + (this.isNullable ? 1 : 0)) * 31) + (this.isDefaultValuePresent ? 1 : 0)) * 31;
         Object obj = this.defaultValue;
-        return hashCode + (obj != null ? obj.hashCode() : 0);
+        return iHashCode + (obj != null ? obj.hashCode() : 0);
     }
 
     public final String toString() {

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NavUtils {
     private NavUtils() {
@@ -37,7 +36,7 @@ public final class NavUtils {
         }
     }
 
-    public static String getParentActivityName(Context context, ComponentName componentName) {
+    public static String getParentActivityName(Context context, ComponentName componentName) throws PackageManager.NameNotFoundException {
         String string;
         ActivityInfo activityInfo = context.getPackageManager().getActivityInfo(componentName, 269222528);
         String str = activityInfo.parentActivityName;
@@ -54,7 +53,7 @@ public final class NavUtils {
         return context.getPackageName() + string;
     }
 
-    public static Intent getParentActivityIntent(Context context, ComponentName componentName) {
+    public static Intent getParentActivityIntent(Context context, ComponentName componentName) throws PackageManager.NameNotFoundException {
         String parentActivityName = getParentActivityName(context, componentName);
         if (parentActivityName == null) {
             return null;

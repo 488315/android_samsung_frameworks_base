@@ -117,9 +117,9 @@ public interface IPerfSDKService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPerfSDKService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPerfSDKService)) {
-                return (IPerfSDKService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPerfSDKService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPerfSDKService)) {
+                return (IPerfSDKService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -167,11 +167,11 @@ public interface IPerfSDKService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int initPerfSDK = initPerfSDK(readString);
+                    int iInitPerfSDK = initPerfSDK(string);
                     parcel2.writeNoException();
-                    parcel2.writeInt(initPerfSDK);
+                    parcel2.writeInt(iInitPerfSDK);
                     return true;
                 case 2:
                     String allowedPkgName = getAllowedPkgName();
@@ -204,23 +204,23 @@ public interface IPerfSDKService extends IInterface {
                     parcel2.writeString(changedForegroundPackagename);
                     return true;
                 case 8:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int sessionKey = setSessionKey(readString2);
+                    int sessionKey = setSessionKey(string2);
                     parcel2.writeNoException();
                     parcel2.writeInt(sessionKey);
                     return true;
                 case 9:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int removeSessionKey = removeSessionKey(readString3);
+                    int iRemoveSessionKey = removeSessionKey(string3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeSessionKey);
+                    parcel2.writeInt(iRemoveSessionKey);
                     return true;
                 case 10:
-                    int connectionRequest = connectionRequest();
+                    int iConnectionRequest = connectionRequest();
                     parcel2.writeNoException();
-                    parcel2.writeInt(connectionRequest);
+                    parcel2.writeInt(iConnectionRequest);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -245,154 +245,154 @@ public interface IPerfSDKService extends IInterface {
 
             @Override // com.samsung.android.perfsdkservice.IPerfSDKService
             public int initPerfSDK(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.perfsdkservice.IPerfSDKService
             public String getAllowedPkgName() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.perfsdkservice.IPerfSDKService
             public int[] getHighBoostingLevel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.perfsdkservice.IPerfSDKService
             public int[] getLowBoostingLevel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.perfsdkservice.IPerfSDKService
             public int[] getThermalTable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.perfsdkservice.IPerfSDKService
             public String getForegroundPackagename() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.perfsdkservice.IPerfSDKService
             public String getChangedForegroundPackagename() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.perfsdkservice.IPerfSDKService
             public int setSessionKey(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.perfsdkservice.IPerfSDKService
             public int removeSessionKey(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.perfsdkservice.IPerfSDKService
             public int connectionRequest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPerfSDKService.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -51,10 +51,10 @@ public class KeystoreArguments implements Parcelable {
     }
 
     private void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.args = new byte[readInt][];
-        for (int i = 0; i < readInt; i++) {
-            this.args[i] = parcel.createByteArray();
+        int i = parcel.readInt();
+        this.args = new byte[i][];
+        for (int i2 = 0; i2 < i; i2++) {
+            this.args[i2] = parcel.createByteArray();
         }
     }
 }

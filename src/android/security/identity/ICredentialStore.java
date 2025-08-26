@@ -85,9 +85,9 @@ public interface ICredentialStore extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICredentialStore.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICredentialStore)) {
-                return (ICredentialStore) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICredentialStore.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICredentialStore)) {
+                return (ICredentialStore) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -127,25 +127,25 @@ public interface ICredentialStore extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(securityHardwareInfo, 1);
             } else if (i == 2) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                IWritableCredential createCredential = createCredential(readString, readString2);
+                IWritableCredential iWritableCredentialCreateCredential = createCredential(string, string2);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(createCredential);
+                parcel2.writeStrongInterface(iWritableCredentialCreateCredential);
             } else if (i == 3) {
-                String readString3 = parcel.readString();
-                int readInt = parcel.readInt();
+                String string3 = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                ICredential credentialByName = getCredentialByName(readString3, readInt);
+                ICredential credentialByName = getCredentialByName(string3, i3);
                 parcel2.writeNoException();
                 parcel2.writeStrongInterface(credentialByName);
             } else if (i == 4) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                ISession createPresentationSession = createPresentationSession(readInt2);
+                ISession iSessionCreatePresentationSession = createPresentationSession(i4);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(createPresentationSession);
+                parcel2.writeStrongInterface(iSessionCreatePresentationSession);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -170,66 +170,66 @@ public interface ICredentialStore extends IInterface {
 
             @Override // android.security.identity.ICredentialStore
             public SecurityHardwareInfoParcel getSecurityHardwareInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialStore.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SecurityHardwareInfoParcel) obtain2.readTypedObject(SecurityHardwareInfoParcel.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICredentialStore.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SecurityHardwareInfoParcel) parcelObtain2.readTypedObject(SecurityHardwareInfoParcel.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredentialStore
             public IWritableCredential createCredential(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialStore.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IWritableCredential.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICredentialStore.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IWritableCredential.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredentialStore
             public ICredential getCredentialByName(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialStore.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICredential.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICredentialStore.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICredential.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.ICredentialStore
             public ISession createPresentationSession(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialStore.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ISession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICredentialStore.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ISession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

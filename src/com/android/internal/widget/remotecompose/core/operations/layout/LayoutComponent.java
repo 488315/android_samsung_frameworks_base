@@ -375,9 +375,9 @@ public class LayoutComponent extends Component {
 
     public float computeModifierDefinedWidth(RemoteContext remoteContext) {
         Iterator<ModifierOperation> it = this.mComponentModifiers.getList().iterator();
-        float f = 0.0f;
-        float f2 = 0.0f;
-        float f3 = 0.0f;
+        float value = 0.0f;
+        float left = 0.0f;
+        float right = 0.0f;
         while (true) {
             if (!it.hasNext()) {
                 break;
@@ -390,39 +390,39 @@ public class LayoutComponent extends Component {
             if (next instanceof WidthModifierOperation) {
                 WidthModifierOperation widthModifierOperation = (WidthModifierOperation) next;
                 if (widthModifierOperation.getType() == DimensionModifierOperation.Type.EXACT || widthModifierOperation.getType() == DimensionModifierOperation.Type.EXACT_DP) {
-                    f = widthModifierOperation.getValue();
+                    value = widthModifierOperation.getValue();
                 }
             } else if (next instanceof PaddingModifierOperation) {
                 PaddingModifierOperation paddingModifierOperation = (PaddingModifierOperation) next;
-                f2 += paddingModifierOperation.getLeft();
-                f3 += paddingModifierOperation.getRight();
+                left += paddingModifierOperation.getLeft();
+                right += paddingModifierOperation.getRight();
             }
         }
-        return f2 + f + f3;
+        return left + value + right;
     }
 
     public float computeModifierDefinedPaddingWidth(float[] fArr) {
         Iterator<ModifierOperation> it = this.mComponentModifiers.getList().iterator();
-        float f = 0.0f;
-        float f2 = 0.0f;
+        float left = 0.0f;
+        float right = 0.0f;
         while (it.hasNext()) {
             ModifierOperation next = it.next();
             if (next instanceof PaddingModifierOperation) {
                 PaddingModifierOperation paddingModifierOperation = (PaddingModifierOperation) next;
-                f += paddingModifierOperation.getLeft();
-                f2 += paddingModifierOperation.getRight();
+                left += paddingModifierOperation.getLeft();
+                right += paddingModifierOperation.getRight();
             }
         }
-        fArr[0] = f;
-        fArr[1] = f2;
-        return f + f2;
+        fArr[0] = left;
+        fArr[1] = right;
+        return left + right;
     }
 
     public float computeModifierDefinedHeight(RemoteContext remoteContext) {
         Iterator<ModifierOperation> it = this.mComponentModifiers.getList().iterator();
-        float f = 0.0f;
-        float f2 = 0.0f;
-        float f3 = 0.0f;
+        float value = 0.0f;
+        float top = 0.0f;
+        float bottom = 0.0f;
         while (true) {
             if (!it.hasNext()) {
                 break;
@@ -435,32 +435,32 @@ public class LayoutComponent extends Component {
             if (next instanceof HeightModifierOperation) {
                 HeightModifierOperation heightModifierOperation = (HeightModifierOperation) next;
                 if (heightModifierOperation.getType() == DimensionModifierOperation.Type.EXACT || heightModifierOperation.getType() == DimensionModifierOperation.Type.EXACT_DP) {
-                    f = heightModifierOperation.getValue();
+                    value = heightModifierOperation.getValue();
                 }
             } else if (next instanceof PaddingModifierOperation) {
                 PaddingModifierOperation paddingModifierOperation = (PaddingModifierOperation) next;
-                f2 += paddingModifierOperation.getTop();
-                f3 += paddingModifierOperation.getBottom();
+                top += paddingModifierOperation.getTop();
+                bottom += paddingModifierOperation.getBottom();
             }
         }
-        return f2 + f + f3;
+        return top + value + bottom;
     }
 
     public float computeModifierDefinedPaddingHeight(float[] fArr) {
         Iterator<ModifierOperation> it = this.mComponentModifiers.getList().iterator();
-        float f = 0.0f;
-        float f2 = 0.0f;
+        float top = 0.0f;
+        float bottom = 0.0f;
         while (it.hasNext()) {
             ModifierOperation next = it.next();
             if (next instanceof PaddingModifierOperation) {
                 PaddingModifierOperation paddingModifierOperation = (PaddingModifierOperation) next;
-                f += paddingModifierOperation.getTop();
-                f2 += paddingModifierOperation.getBottom();
+                top += paddingModifierOperation.getTop();
+                bottom += paddingModifierOperation.getBottom();
             }
         }
-        fArr[0] = f;
-        fArr[1] = f2;
-        return f + f2;
+        fArr[0] = top;
+        fArr[1] = bottom;
+        return top + bottom;
     }
 
     public ComponentModifiers getComponentModifiers() {

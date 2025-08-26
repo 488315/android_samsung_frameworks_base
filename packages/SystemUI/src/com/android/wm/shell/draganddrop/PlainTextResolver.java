@@ -9,7 +9,6 @@ import com.android.wm.shell.draganddrop.AppResultFactory;
 import com.android.wm.shell.draganddrop.ExecutableAppHolder;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PlainTextResolver extends BaseResolver {
     public PlainTextResolver(Context context, ExecutableAppHolder.MultiInstanceBlockList multiInstanceBlockList) {
@@ -25,19 +24,19 @@ public class PlainTextResolver extends BaseResolver {
         if (text == null) {
             return Optional.empty();
         }
-        String replaceAll = text.toString().replaceAll("\u0000", "");
-        if (TextUtils.isEmpty(replaceAll)) {
+        String strReplaceAll = text.toString().replaceAll("\u0000", "");
+        if (TextUtils.isEmpty(strReplaceAll)) {
             return Optional.empty();
         }
         Intent intent = new Intent();
         Intent type = intent.setAction("android.intent.action.SEND").setType("text/plain");
-        if (!TextUtils.isEmpty(replaceAll) && replaceAll.length() >= 100000) {
-            Slog.d(this.TAG, "Truncating oversized query (" + replaceAll.length() + ").");
-            replaceAll = replaceAll.toString().substring(0, 100000) + "…";
+        if (!TextUtils.isEmpty(strReplaceAll) && strReplaceAll.length() >= 100000) {
+            Slog.d(this.TAG, "Truncating oversized query (" + strReplaceAll.length() + ").");
+            strReplaceAll = strReplaceAll.toString().substring(0, 100000) + "…";
         }
-        type.putExtra("android.intent.extra.TEXT", (CharSequence) replaceAll);
-        String calculateContentType = BaseResolver.calculateContentType(intent);
+        type.putExtra("android.intent.extra.TEXT", (CharSequence) strReplaceAll);
+        String strCalculateContentType = BaseResolver.calculateContentType(intent);
         resolveActivities(intent, clipData.getCallingUserId(), this.mTempList, resultExtra);
-        return this.mTempList.isEmpty() ? Optional.empty() : Optional.of(new SingleIntentAppResult(intent, this.mTempList, this.mMultiInstanceBlockList, this.mMultiInstanceAllowList, calculateContentType));
+        return this.mTempList.isEmpty() ? Optional.empty() : Optional.of(new SingleIntentAppResult(intent, this.mTempList, this.mMultiInstanceBlockList, this.mMultiInstanceAllowList, strCalculateContentType));
     }
 }

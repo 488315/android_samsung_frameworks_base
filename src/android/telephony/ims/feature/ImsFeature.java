@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.IInterface;
 import android.os.RemoteException;
 import android.telephony.ims.aidl.IImsCapabilityCallback;
-import android.telephony.ims.feature.ImsFeature;
 import android.util.Log;
 import com.android.ims.internal.IImsFeatureStatusCallback;
 import com.android.internal.telephony.util.RemoteCallbackListExt;
@@ -230,10 +229,10 @@ public abstract class ImsFeature {
     }
 
     final void queryCapabilityConfigurationInternal(int i, int i2, IImsCapabilityCallback iImsCapabilityCallback) {
-        boolean queryCapabilityConfiguration = queryCapabilityConfiguration(i, i2);
+        boolean zQueryCapabilityConfiguration = queryCapabilityConfiguration(i, i2);
         if (iImsCapabilityCallback != null) {
             try {
-                iImsCapabilityCallback.onQueryCapabilityConfiguration(i, i2, queryCapabilityConfiguration);
+                iImsCapabilityCallback.onQueryCapabilityConfiguration(i, i2, zQueryCapabilityConfiguration);
             } catch (RemoteException unused) {
                 Log.e(LOG_TAG, "queryCapabilityConfigurationInternal called on dead binder!");
             }
@@ -241,11 +240,11 @@ public abstract class ImsFeature {
     }
 
     public Capabilities queryCapabilityStatus() {
-        Capabilities copy;
+        Capabilities capabilitiesCopy;
         synchronized (this.mLock) {
-            copy = this.mCapabilityStatus.copy();
+            capabilitiesCopy = this.mCapabilityStatus.copy();
         }
-        return copy;
+        return capabilitiesCopy;
     }
 
     public final void requestChangeEnabledCapabilities(CapabilityChangeRequest capabilityChangeRequest, IImsCapabilityCallback iImsCapabilityCallback) {
@@ -264,7 +263,7 @@ public abstract class ImsFeature {
             this.mCapabilityCallbacks.broadcastAction(new Consumer() { // from class: android.telephony.ims.feature.ImsFeature$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ImsFeature.lambda$notifyCapabilitiesStatusChanged$1(ImsFeature.Capabilities.this, (IImsCapabilityCallback) obj);
+                    ImsFeature.lambda$notifyCapabilitiesStatusChanged$1(capabilities, (IImsCapabilityCallback) obj);
                 }
             });
         }

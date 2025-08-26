@@ -11,13 +11,16 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.kotlin.JavaAdapter;
 import java.util.function.Consumer;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeviceInactiveCondition extends Condition {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -32,6 +35,37 @@ public final class DeviceInactiveCondition extends Condition {
     public final KeyguardUpdateMonitor keyguardUpdateMonitor;
     public final WakefulnessLifecycle wakefulnessLifecycle;
     public final DeviceInactiveCondition$wakefulnessObserver$1 wakefulnessObserver;
+
+    /* renamed from: com.android.systemui.communal.DeviceInactiveCondition$start$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass2(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return DeviceInactiveCondition.this.new AnonymousClass2(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            DeviceInactiveCondition deviceInactiveCondition = DeviceInactiveCondition.this;
+            deviceInactiveCondition.keyguardUpdateMonitor.registerCallback(deviceInactiveCondition.keyguardUpdateCallback);
+            return Unit.INSTANCE;
+        }
+    }
 
     /* JADX WARN: Type inference failed for: r6v1, types: [com.android.systemui.communal.DeviceInactiveCondition$keyguardStateCallback$1] */
     /* JADX WARN: Type inference failed for: r6v2, types: [com.android.systemui.communal.DeviceInactiveCondition$wakefulnessObserver$1] */
@@ -48,21 +82,21 @@ public final class DeviceInactiveCondition extends Condition {
             @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
             public final void onKeyguardShowingChanged() {
                 int i = DeviceInactiveCondition.$r8$clinit;
-                DeviceInactiveCondition.this.updateState();
+                this.this$0.updateState();
             }
         };
         this.wakefulnessObserver = new WakefulnessLifecycle.Observer() { // from class: com.android.systemui.communal.DeviceInactiveCondition$wakefulnessObserver$1
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
             public final void onStartedGoingToSleep() {
                 int i = DeviceInactiveCondition.$r8$clinit;
-                DeviceInactiveCondition.this.updateState();
+                this.this$0.updateState();
             }
         };
         this.keyguardUpdateCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.communal.DeviceInactiveCondition$keyguardUpdateCallback$1
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onDreamingStateChanged(boolean z) {
                 int i = DeviceInactiveCondition.$r8$clinit;
-                DeviceInactiveCondition.this.updateState();
+                this.this$0.updateState();
             }
         };
     }
@@ -76,9 +110,9 @@ public final class DeviceInactiveCondition extends Condition {
     public final Object start(Continuation continuation) {
         updateState();
         ((KeyguardStateControllerImpl) this.keyguardStateController).addCallback(this.keyguardStateCallback);
-        BuildersKt.launch$default(this.applicationScope, null, null, new DeviceInactiveCondition$start$2(this, null), 3);
+        BuildersKt.launch$default(this.applicationScope, null, null, new AnonymousClass2(null), 3);
         this.wakefulnessLifecycle.addObserver(this.wakefulnessObserver);
-        this.anyDozeListenerJob = this.javaAdapter.alwaysCollectFlow(this.keyguardInteractor.dozeTransitionModel, new Consumer() { // from class: com.android.systemui.communal.DeviceInactiveCondition$start$3
+        this.anyDozeListenerJob = this.javaAdapter.alwaysCollectFlow(this.keyguardInteractor.dozeTransitionModel, new Consumer() { // from class: com.android.systemui.communal.DeviceInactiveCondition.start.3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 DeviceInactiveCondition deviceInactiveCondition = DeviceInactiveCondition.this;

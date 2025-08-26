@@ -19,11 +19,11 @@ public class MarshalRegistry {
     }
 
     public static <T> Marshaler<T> getMarshaler(TypeReference<T> typeReference, int i) {
-        Marshaler<T> marshaler;
+        Marshaler<T> marshalerCreateMarshaler;
         synchronized (sMarshalLock) {
             MarshalToken<?> marshalToken = new MarshalToken<>(typeReference, i);
-            marshaler = (Marshaler) sMarshalerMap.get(marshalToken);
-            if (marshaler == null) {
+            marshalerCreateMarshaler = (Marshaler) sMarshalerMap.get(marshalToken);
+            if (marshalerCreateMarshaler == null) {
                 List<MarshalQueryable<?>> list = sRegisteredMarshalQueryables;
                 if (list.size() == 0) {
                     throw new AssertionError("No available query marshalers registered");
@@ -35,17 +35,17 @@ public class MarshalRegistry {
                     }
                     MarshalQueryable<?> next = it.next();
                     if (next.isTypeMappingSupported(typeReference, i)) {
-                        marshaler = next.createMarshaler(typeReference, i);
+                        marshalerCreateMarshaler = next.createMarshaler(typeReference, i);
                         break;
                     }
                 }
-                if (marshaler == null) {
+                if (marshalerCreateMarshaler == null) {
                     throw new UnsupportedOperationException("Could not find marshaler that matches the requested combination of type reference " + typeReference + " and native type " + MarshalHelpers.toStringNativeType(i));
                 }
-                sMarshalerMap.put(marshalToken, marshaler);
+                sMarshalerMap.put(marshalToken, marshalerCreateMarshaler);
             }
         }
-        return marshaler;
+        return marshalerCreateMarshaler;
     }
 
     private static class MarshalToken<T> {

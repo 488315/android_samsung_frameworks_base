@@ -36,13 +36,13 @@ import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt$sortedWith$1;
 import kotlin.text.StringsKt___StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DumpHandler {
     public static final Companion Companion = new Companion(null);
@@ -50,7 +50,6 @@ public final class DumpHandler {
     public final DumpManager dumpManager;
     public final LogBufferEulogizer logBufferEulogizer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,19 +58,19 @@ public final class DumpHandler {
         public static final DumpsysEntry access$findBestTargetMatch(Companion companion, Collection collection, String str) {
             Object next;
             companion.getClass();
-            FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(collection), new DumpHandler$Companion$$ExternalSyntheticLambda0(str, 1)));
-            if (filteringSequence$iterator$1.hasNext()) {
-                next = filteringSequence$iterator$1.next();
-                if (filteringSequence$iterator$1.hasNext()) {
+            FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(collection), new DumpHandler$Companion$$ExternalSyntheticLambda0(str, 1)).new AnonymousClass1();
+            if (anonymousClass1.hasNext()) {
+                next = anonymousClass1.next();
+                if (anonymousClass1.hasNext()) {
                     int length = ((DumpsysEntry) next).getName().length();
                     do {
-                        Object next2 = filteringSequence$iterator$1.next();
+                        Object next2 = anonymousClass1.next();
                         int length2 = ((DumpsysEntry) next2).getName().length();
                         if (length > length2) {
                             next = next2;
                             length = length2;
                         }
-                    } while (filteringSequence$iterator$1.hasNext());
+                    } while (anonymousClass1.hasNext());
                 }
             } else {
                 next = null;
@@ -94,27 +93,41 @@ public final class DumpHandler {
             return false;
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:10:0x002c A[Catch: all -> 0x003a, TRY_LEAVE, TryCatch #0 {, blocks: (B:7:0x0019, B:8:0x0024, B:10:0x002c), top: B:19:0x0019 }] */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public static void dumpBuffer(DumpsysEntry.LogBufferEntry logBufferEntry, PrintWriter printWriter, int i) {
+            int size;
             Trace.beginSection(StringsKt___StringsKt.take(127, logBufferEntry.name));
             preamble(printWriter, logBufferEntry);
-            long currentTimeMillis = System.currentTimeMillis();
+            long jCurrentTimeMillis = System.currentTimeMillis();
             LogBuffer logBuffer = logBufferEntry.buffer;
             synchronized (logBuffer) {
-                int size = logBuffer.buffer.getSize();
-                for (int max = i > 0 ? Math.max(0, logBuffer.buffer.getSize() - i) : 0; max < size; max++) {
-                    ((LogMessageImpl) logBuffer.buffer.get(max)).dump(printWriter);
+                int iMax = 0;
+                if (i <= 0) {
+                    size = logBuffer.buffer.getSize();
+                    while (iMax < size) {
+                        ((LogMessageImpl) logBuffer.buffer.get(iMax)).dump(printWriter);
+                        iMax++;
+                    }
+                } else {
+                    iMax = Math.max(0, logBuffer.buffer.getSize() - i);
+                    size = logBuffer.buffer.getSize();
+                    while (iMax < size) {
+                    }
                 }
             }
-            footer(printWriter, logBufferEntry, System.currentTimeMillis() - currentTimeMillis);
+            footer(printWriter, logBufferEntry, System.currentTimeMillis() - jCurrentTimeMillis);
             Trace.endSection();
         }
 
         public static void dumpDumpable(DumpsysEntry.DumpableEntry dumpableEntry, PrintWriter printWriter, String[] strArr) {
             Trace.beginSection(StringsKt___StringsKt.take(127, dumpableEntry.name));
             preamble(printWriter, dumpableEntry);
-            long currentTimeMillis = System.currentTimeMillis();
+            long jCurrentTimeMillis = System.currentTimeMillis();
             dumpableEntry.dumpable.dump(printWriter, strArr);
-            footer(printWriter, dumpableEntry, System.currentTimeMillis() - currentTimeMillis);
+            footer(printWriter, dumpableEntry, System.currentTimeMillis() - jCurrentTimeMillis);
             Trace.endSection();
         }
 
@@ -139,9 +152,9 @@ public final class DumpHandler {
         public static void dumpTableBuffer(DumpsysEntry.TableLogBufferEntry tableLogBufferEntry, PrintWriter printWriter, String[] strArr) {
             Trace.beginSection(StringsKt___StringsKt.take(127, tableLogBufferEntry.name));
             preamble(printWriter, tableLogBufferEntry);
-            long currentTimeMillis = System.currentTimeMillis();
+            long jCurrentTimeMillis = System.currentTimeMillis();
             tableLogBufferEntry.table.dump(printWriter, strArr);
-            footer(printWriter, tableLogBufferEntry, System.currentTimeMillis() - currentTimeMillis);
+            footer(printWriter, tableLogBufferEntry, System.currentTimeMillis() - jCurrentTimeMillis);
             Trace.endSection();
         }
 
@@ -205,7 +218,7 @@ public final class DumpHandler {
         }
     }
 
-    public static ParsedArgs parseArgs(String[] strArr) {
+    public static ParsedArgs parseArgs(String[] strArr) throws ArgParseException {
         List mutableList = ArraysKt___ArraysKt.toMutableList(strArr);
         ParsedArgs parsedArgs = new ParsedArgs(strArr, mutableList);
         ArrayList arrayList = (ArrayList) mutableList;
@@ -286,46 +299,44 @@ public final class DumpHandler {
         return parsedArgs;
     }
 
-    public static Object readArgument(Iterator it, String str, Function1 function1) {
+    public static Object readArgument(Iterator it, String str, Function1 function1) throws ArgParseException {
         if (!it.hasNext()) {
             throw new ArgParseException("Missing argument for ".concat(str));
         }
         String str2 = (String) it.next();
         try {
-            Object mo779invoke = function1.mo779invoke(str2);
+            Object objMo781invoke = function1.mo781invoke(str2);
             it.remove();
-            return mo779invoke;
+            return objMo781invoke;
         } catch (Exception unused) {
             throw new ArgParseException(AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("Invalid argument '", str2, "' for flag ", str));
         }
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
-    java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
-    	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.restoreSwitchOverString(SwitchOverStringVisitor.java:109)
-    	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.visitRegion(SwitchOverStringVisitor.java:66)
-    	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
-    	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:49:0x016a  */
     /* JADX WARN: Type inference failed for: r0v13, types: [java.util.ArrayList] */
     /* JADX WARN: Type inference failed for: r0v14 */
     /* JADX WARN: Type inference failed for: r0v18, types: [java.util.List] */
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) throws Exception {
         ?? arrayList;
         Object next;
         Object next2;
         Trace.beginSection("DumpManager#dump()");
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         try {
-            ParsedArgs parseArgs = parseArgs(strArr);
+            ParsedArgs args = parseArgs(strArr);
             printWriter.print("Dump starting: ");
             printWriter.println(DumpHandlerKt.DATE_FORMAT.format(Long.valueOf(System.currentTimeMillis())));
-            if (Intrinsics.areEqual(parseArgs.dumpPriority, "CRITICAL")) {
-                dumpCritical(printWriter, parseArgs);
-            } else if (!Intrinsics.areEqual(parseArgs.dumpPriority, "NORMAL") || parseArgs.proto) {
-                String str = parseArgs.command;
+            if (Intrinsics.areEqual(args.dumpPriority, "CRITICAL")) {
+                dumpCritical(printWriter, args);
+            } else if (!Intrinsics.areEqual(args.dumpPriority, "NORMAL") || args.proto) {
+                String str = args.command;
                 DumpManager dumpManager = this.dumpManager;
                 if (str != null) {
                     switch (str.hashCode()) {
@@ -333,31 +344,149 @@ public final class DumpHandler {
                             if (str.equals("config")) {
                                 this.config.dump(printWriter, new String[0]);
                                 break;
+                            } else if (!args.proto) {
+                                List list = args.nonFlagArgs;
+                                if (list.isEmpty()) {
+                                    if (args.listOnly) {
+                                        Collection dumpables = dumpManager.getDumpables();
+                                        Collection logBuffers = dumpManager.getLogBuffers();
+                                        Collection tableLogBuffers = dumpManager.getTableLogBuffers();
+                                        printWriter.println("Dumpables:");
+                                        listTargetNames(dumpables, printWriter);
+                                        printWriter.println();
+                                        printWriter.println("Buffers:");
+                                        listTargetNames(logBuffers, printWriter);
+                                        printWriter.println();
+                                        printWriter.println("TableBuffers:");
+                                        listTargetNames(tableLogBuffers, printWriter);
+                                        break;
+                                    } else {
+                                        printWriter.println("Nothing to dump :(");
+                                        break;
+                                    }
+                                } else {
+                                    Collection dumpables2 = dumpManager.getDumpables();
+                                    Collection logBuffers2 = dumpManager.getLogBuffers();
+                                    Collection tableLogBuffers2 = dumpManager.getTableLogBuffers();
+                                    if (args.matchAll) {
+                                        arrayList = SequencesKt___SequencesKt.toList(new SequencesKt___SequencesKt$sortedWith$1(new SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1(new DumpHandler$findAllMatchesInCollection$1(dumpables2, logBuffers2, tableLogBuffers2, list, null)), new Comparator() { // from class: com.android.systemui.dump.DumpHandler$findAllMatchesInCollection$$inlined$sortedBy$1
+                                            @Override // java.util.Comparator
+                                            public final int compare(Object obj, Object obj2) {
+                                                return ComparisonsKt__ComparisonsKt.compareValues(((DumpsysEntry) obj).getName(), ((DumpsysEntry) obj2).getName());
+                                            }
+                                        }));
+                                    } else {
+                                        arrayList = new ArrayList();
+                                        Iterator it = list.iterator();
+                                        while (it.hasNext()) {
+                                            Iterator it2 = new SequencesKt___SequencesKt$sortedWith$1(new SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1(new DumpHandler$findTargetInCollection$1(dumpables2, (String) it.next(), logBuffers2, tableLogBuffers2, null)), new Comparator() { // from class: com.android.systemui.dump.DumpHandler$findTargetInCollection$$inlined$sortedBy$1
+                                                @Override // java.util.Comparator
+                                                public final int compare(Object obj, Object obj2) {
+                                                    return ComparisonsKt__ComparisonsKt.compareValues(((DumpsysEntry) obj).getName(), ((DumpsysEntry) obj2).getName());
+                                                }
+                                            }).iterator();
+                                            if (it2.hasNext()) {
+                                                next = it2.next();
+                                                if (it2.hasNext()) {
+                                                    int length = ((DumpsysEntry) next).getName().length();
+                                                    do {
+                                                        Object next3 = it2.next();
+                                                        int length2 = ((DumpsysEntry) next3).getName().length();
+                                                        if (length > length2) {
+                                                            next = next3;
+                                                            length = length2;
+                                                        }
+                                                    } while (it2.hasNext());
+                                                }
+                                            } else {
+                                                next = null;
+                                            }
+                                            DumpsysEntry dumpsysEntry = (DumpsysEntry) next;
+                                            if (dumpsysEntry != null) {
+                                                arrayList.add(dumpsysEntry);
+                                            }
+                                        }
+                                    }
+                                    Iterator it3 = ((Iterable) arrayList).iterator();
+                                    while (it3.hasNext()) {
+                                        dump((DumpsysEntry) it3.next(), printWriter, args);
+                                    }
+                                    break;
+                                }
+                            } else {
+                                List<String> list2 = args.nonFlagArgs;
+                                SystemUIProtoDump systemUIProtoDump = new SystemUIProtoDump();
+                                Collection dumpables3 = dumpManager.getDumpables();
+                                if (list2.isEmpty()) {
+                                    Iterator it4 = dumpables3.iterator();
+                                    while (it4.hasNext()) {
+                                        Dumpable dumpable = ((DumpsysEntry.DumpableEntry) it4.next()).dumpable;
+                                        ProtoDumpable protoDumpable = dumpable instanceof ProtoDumpable ? (ProtoDumpable) dumpable : null;
+                                        if (protoDumpable != null) {
+                                            protoDumpable.dumpProto(systemUIProtoDump);
+                                        }
+                                    }
+                                } else {
+                                    for (String str2 : list2) {
+                                        Companion.getClass();
+                                        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(dumpables3), new DumpHandler$Companion$$ExternalSyntheticLambda0(str2, 0)), new DumpHandler$$ExternalSyntheticLambda0(2)).new AnonymousClass1();
+                                        if (anonymousClass1.hasNext()) {
+                                            next2 = anonymousClass1.next();
+                                            if (anonymousClass1.hasNext()) {
+                                                int length3 = ((DumpsysEntry.DumpableEntry) next2).name.length();
+                                                do {
+                                                    Object next4 = anonymousClass1.next();
+                                                    int length4 = ((DumpsysEntry.DumpableEntry) next4).name.length();
+                                                    if (length3 > length4) {
+                                                        next2 = next4;
+                                                        length3 = length4;
+                                                    }
+                                                } while (anonymousClass1.hasNext());
+                                            }
+                                        } else {
+                                            next2 = null;
+                                        }
+                                        DumpsysEntry.DumpableEntry dumpableEntry = (DumpsysEntry.DumpableEntry) next2;
+                                        Dumpable dumpable2 = dumpableEntry != null ? dumpableEntry.dumpable : null;
+                                        ProtoDumpable protoDumpable2 = dumpable2 instanceof ProtoDumpable ? (ProtoDumpable) dumpable2 : null;
+                                        if (protoDumpable2 != null) {
+                                            protoDumpable2.dumpProto(systemUIProtoDump);
+                                        }
+                                    }
+                                }
+                                BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(fileDescriptor));
+                                try {
+                                    bufferedOutputStream.write(MessageNano.toByteArray(systemUIProtoDump));
+                                    bufferedOutputStream.flush();
+                                    Unit unit = Unit.INSTANCE;
+                                    bufferedOutputStream.close();
+                                    break;
+                                } finally {
+                                }
                             }
-                            break;
                         case -1353714459:
                             if (str.equals("dumpables")) {
-                                listOrDumpEntries(dumpManager.getDumpables(), printWriter, parseArgs);
+                                listOrDumpEntries(dumpManager.getDumpables(), printWriter, args);
                                 break;
                             }
                             break;
                         case -1045369428:
                             if (str.equals("bugreport-normal")) {
-                                dumpNormal(printWriter, parseArgs);
+                                dumpNormal(printWriter, args);
                                 break;
                             }
                             break;
                         case -881377691:
                             if (str.equals("tables")) {
-                                listOrDumpEntries(dumpManager.getTableLogBuffers(), printWriter, parseArgs);
+                                listOrDumpEntries(dumpManager.getTableLogBuffers(), printWriter, args);
                                 break;
                             }
                             break;
                         case 96673:
                             if (str.equals(SystemUIAnalytics.QPNE_VID_COVER_ALL)) {
-                                listOrDumpEntries(dumpManager.getDumpables(), printWriter, parseArgs);
-                                listOrDumpEntries(dumpManager.getLogBuffers(), printWriter, parseArgs);
-                                listOrDumpEntries(dumpManager.getTableLogBuffers(), printWriter, parseArgs);
+                                listOrDumpEntries(dumpManager.getDumpables(), printWriter, args);
+                                listOrDumpEntries(dumpManager.getLogBuffers(), printWriter, args);
+                                listOrDumpEntries(dumpManager.getTableLogBuffers(), printWriter, args);
                                 break;
                             }
                             break;
@@ -394,137 +523,23 @@ public final class DumpHandler {
                             break;
                         case 227996723:
                             if (str.equals("buffers")) {
-                                listOrDumpEntries(dumpManager.getLogBuffers(), printWriter, parseArgs);
+                                listOrDumpEntries(dumpManager.getLogBuffers(), printWriter, args);
                                 break;
                             }
                             break;
                         case 842828580:
                             if (str.equals("bugreport-critical")) {
-                                dumpCritical(printWriter, parseArgs);
+                                dumpCritical(printWriter, args);
                                 break;
                             }
                             break;
                     }
                 }
-                if (parseArgs.proto) {
-                    List<String> list = parseArgs.nonFlagArgs;
-                    SystemUIProtoDump systemUIProtoDump = new SystemUIProtoDump();
-                    Collection dumpables = dumpManager.getDumpables();
-                    if (list.isEmpty()) {
-                        Iterator it = dumpables.iterator();
-                        while (it.hasNext()) {
-                            Dumpable dumpable = ((DumpsysEntry.DumpableEntry) it.next()).dumpable;
-                            ProtoDumpable protoDumpable = dumpable instanceof ProtoDumpable ? (ProtoDumpable) dumpable : null;
-                            if (protoDumpable != null) {
-                                protoDumpable.dumpProto(systemUIProtoDump);
-                            }
-                        }
-                    } else {
-                        for (String str2 : list) {
-                            Companion.getClass();
-                            FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(dumpables), new DumpHandler$Companion$$ExternalSyntheticLambda0(str2, 0)), new DumpHandler$$ExternalSyntheticLambda0(2)));
-                            if (filteringSequence$iterator$1.hasNext()) {
-                                next2 = filteringSequence$iterator$1.next();
-                                if (filteringSequence$iterator$1.hasNext()) {
-                                    int length = ((DumpsysEntry.DumpableEntry) next2).name.length();
-                                    do {
-                                        Object next3 = filteringSequence$iterator$1.next();
-                                        int length2 = ((DumpsysEntry.DumpableEntry) next3).name.length();
-                                        if (length > length2) {
-                                            next2 = next3;
-                                            length = length2;
-                                        }
-                                    } while (filteringSequence$iterator$1.hasNext());
-                                }
-                            } else {
-                                next2 = null;
-                            }
-                            DumpsysEntry.DumpableEntry dumpableEntry = (DumpsysEntry.DumpableEntry) next2;
-                            Dumpable dumpable2 = dumpableEntry != null ? dumpableEntry.dumpable : null;
-                            ProtoDumpable protoDumpable2 = dumpable2 instanceof ProtoDumpable ? (ProtoDumpable) dumpable2 : null;
-                            if (protoDumpable2 != null) {
-                                protoDumpable2.dumpProto(systemUIProtoDump);
-                            }
-                        }
-                    }
-                    BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(fileDescriptor));
-                    try {
-                        bufferedOutputStream.write(MessageNano.toByteArray(systemUIProtoDump));
-                        bufferedOutputStream.flush();
-                        Unit unit = Unit.INSTANCE;
-                        bufferedOutputStream.close();
-                    } finally {
-                    }
-                } else {
-                    List list2 = parseArgs.nonFlagArgs;
-                    if (!list2.isEmpty()) {
-                        Collection dumpables2 = dumpManager.getDumpables();
-                        Collection logBuffers = dumpManager.getLogBuffers();
-                        Collection tableLogBuffers = dumpManager.getTableLogBuffers();
-                        if (parseArgs.matchAll) {
-                            arrayList = SequencesKt___SequencesKt.toList(new SequencesKt___SequencesKt$sortedWith$1(new SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1(new DumpHandler$findAllMatchesInCollection$1(dumpables2, logBuffers, tableLogBuffers, list2, null)), new Comparator() { // from class: com.android.systemui.dump.DumpHandler$findAllMatchesInCollection$$inlined$sortedBy$1
-                                @Override // java.util.Comparator
-                                public final int compare(Object obj, Object obj2) {
-                                    return ComparisonsKt__ComparisonsKt.compareValues(((DumpsysEntry) obj).getName(), ((DumpsysEntry) obj2).getName());
-                                }
-                            }));
-                        } else {
-                            arrayList = new ArrayList();
-                            Iterator it2 = list2.iterator();
-                            while (it2.hasNext()) {
-                                Iterator it3 = new SequencesKt___SequencesKt$sortedWith$1(new SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1(new DumpHandler$findTargetInCollection$1(dumpables2, (String) it2.next(), logBuffers, tableLogBuffers, null)), new Comparator() { // from class: com.android.systemui.dump.DumpHandler$findTargetInCollection$$inlined$sortedBy$1
-                                    @Override // java.util.Comparator
-                                    public final int compare(Object obj, Object obj2) {
-                                        return ComparisonsKt__ComparisonsKt.compareValues(((DumpsysEntry) obj).getName(), ((DumpsysEntry) obj2).getName());
-                                    }
-                                }).iterator();
-                                if (it3.hasNext()) {
-                                    next = it3.next();
-                                    if (it3.hasNext()) {
-                                        int length3 = ((DumpsysEntry) next).getName().length();
-                                        do {
-                                            Object next4 = it3.next();
-                                            int length4 = ((DumpsysEntry) next4).getName().length();
-                                            if (length3 > length4) {
-                                                next = next4;
-                                                length3 = length4;
-                                            }
-                                        } while (it3.hasNext());
-                                    }
-                                } else {
-                                    next = null;
-                                }
-                                DumpsysEntry dumpsysEntry = (DumpsysEntry) next;
-                                if (dumpsysEntry != null) {
-                                    arrayList.add(dumpsysEntry);
-                                }
-                            }
-                        }
-                        Iterator it4 = ((Iterable) arrayList).iterator();
-                        while (it4.hasNext()) {
-                            dump((DumpsysEntry) it4.next(), printWriter, parseArgs);
-                        }
-                    } else if (parseArgs.listOnly) {
-                        Collection dumpables3 = dumpManager.getDumpables();
-                        Collection logBuffers2 = dumpManager.getLogBuffers();
-                        Collection tableLogBuffers2 = dumpManager.getTableLogBuffers();
-                        printWriter.println("Dumpables:");
-                        listTargetNames(dumpables3, printWriter);
-                        printWriter.println();
-                        printWriter.println("Buffers:");
-                        listTargetNames(logBuffers2, printWriter);
-                        printWriter.println();
-                        printWriter.println("TableBuffers:");
-                        listTargetNames(tableLogBuffers2, printWriter);
-                    } else {
-                        printWriter.println("Nothing to dump :(");
-                    }
-                }
             } else {
-                dumpNormal(printWriter, parseArgs);
+                dumpNormal(printWriter, args);
             }
             printWriter.println();
-            printWriter.println("Dump took " + (SystemClock.uptimeMillis() - uptimeMillis) + "ms");
+            printWriter.println("Dump took " + (SystemClock.uptimeMillis() - jUptimeMillis) + "ms");
             Trace.endSection();
         } catch (ArgParseException e) {
             printWriter.println(e.getMessage());
@@ -540,16 +555,16 @@ public final class DumpHandler {
         }
     }
 
-    public final void dumpNormal(final PrintWriter printWriter, ParsedArgs parsedArgs) {
+    public final void dumpNormal(final PrintWriter printWriter, ParsedArgs parsedArgs) throws Exception {
         String[] strArr;
         Companion companion;
         DumpManager dumpManager = this.dumpManager;
         Iterator it = dumpManager.getDumpables().iterator();
         while (true) {
-            boolean hasNext = it.hasNext();
+            boolean zHasNext = it.hasNext();
             strArr = parsedArgs.rawArgs;
             companion = Companion;
-            if (!hasNext) {
+            if (!zHasNext) {
                 break;
             }
             DumpsysEntry.DumpableEntry dumpableEntry = (DumpsysEntry.DumpableEntry) it.next();
@@ -575,7 +590,7 @@ public final class DumpHandler {
                 Log.i("BufferEulogizer", "Not eulogizing buffers; they are " + TimeUnit.HOURS.convert(millisSinceLastWrite, TimeUnit.MILLISECONDS) + " hours old");
                 return;
             }
-            Stream<String> lines = logBufferEulogizer.files.lines(logBufferEulogizer.logPath);
+            Stream<String> streamLines = logBufferEulogizer.files.lines(logBufferEulogizer.logPath);
             try {
                 printWriter.println();
                 printWriter.println();
@@ -583,19 +598,19 @@ public final class DumpHandler {
                 final Function1 function1 = new Function1() { // from class: com.android.systemui.dump.LogBufferEulogizer$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         printWriter.println((String) obj);
                         return Unit.INSTANCE;
                     }
                 };
-                lines.forEach(new Consumer() { // from class: com.android.systemui.dump.LogBufferEulogizerKt$sam$java_util_function_Consumer$0
+                streamLines.forEach(new Consumer() { // from class: com.android.systemui.dump.LogBufferEulogizerKt$sam$java_util_function_Consumer$0
                     @Override // java.util.function.Consumer
                     public final /* synthetic */ void accept(Object obj) {
-                        Function1.this.mo779invoke(obj);
+                        function1.mo781invoke(obj);
                     }
                 });
                 Unit unit = Unit.INSTANCE;
-                lines.close();
+                streamLines.close();
             } finally {
             }
         } catch (IOException unused) {

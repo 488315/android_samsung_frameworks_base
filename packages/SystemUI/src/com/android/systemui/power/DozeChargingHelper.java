@@ -14,7 +14,6 @@ import com.samsung.android.hardware.display.IRefreshRateToken;
 import dagger.Lazy;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DozeChargingHelper {
     public IDisplayManager displayManager;
@@ -26,7 +25,6 @@ public final class DozeChargingHelper {
     public final IBinder displayStateLock = new Binder();
     public final IBinder passiveModeLock = new Binder();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,18 +53,18 @@ public final class DozeChargingHelper {
             synchronized (this) {
                 try {
                     PowerManager powerManager = this.powerManager;
-                    PowerManager.WakeLock newWakeLock = powerManager != null ? powerManager.newWakeLock(128, "PowerUI") : null;
-                    this.dozeChargingDrawWakelock = newWakeLock;
-                    if (newWakeLock != null) {
-                        newWakeLock.acquire(4000L);
+                    PowerManager.WakeLock wakeLockNewWakeLock = powerManager != null ? powerManager.newWakeLock(128, "PowerUI") : null;
+                    this.dozeChargingDrawWakelock = wakeLockNewWakeLock;
+                    if (wakeLockNewWakeLock != null) {
+                        wakeLockNewWakeLock.acquire(4000L);
                     }
                 } finally {
                 }
             }
-            IDisplayManager asInterface = IDisplayManager.Stub.asInterface(ServiceManager.getService("display"));
-            this.displayManager = asInterface;
+            IDisplayManager iDisplayManagerAsInterface = IDisplayManager.Stub.asInterface(ServiceManager.getService("display"));
+            this.displayManager = iDisplayManagerAsInterface;
             try {
-                Slog.i("PowerUI.DozeChargingHelper", "setDisplayLimit(Display.STATE_ON), " + asInterface);
+                Slog.i("PowerUI.DozeChargingHelper", "setDisplayLimit(Display.STATE_ON), " + iDisplayManagerAsInterface);
                 IDisplayManager iDisplayManager = this.displayManager;
                 if (iDisplayManager != null) {
                     iDisplayManager.setDisplayStateOverride(this.displayStateLock, 2, 4500);
@@ -100,10 +98,10 @@ public final class DozeChargingHelper {
         Slog.d("PowerUI.DozeChargingHelper", "restoreDisplayStateWhenDozeCharging : " + this.isDozeChargingWorking);
         if (this.isDozeChargingWorking) {
             Slog.i("PowerUI.DozeChargingHelper", "isDozeChargingWorking is true -> so call chargingAnimStarted(false)");
-            IDisplayManager asInterface = IDisplayManager.Stub.asInterface(ServiceManager.getService("display"));
-            this.displayManager = asInterface;
+            IDisplayManager iDisplayManagerAsInterface = IDisplayManager.Stub.asInterface(ServiceManager.getService("display"));
+            this.displayManager = iDisplayManagerAsInterface;
             try {
-                Slog.i("PowerUI.DozeChargingHelper", "releaseDisplayStateLimit(Display.STATE_UNKNOWN), " + asInterface);
+                Slog.i("PowerUI.DozeChargingHelper", "releaseDisplayStateLimit(Display.STATE_UNKNOWN), " + iDisplayManagerAsInterface);
                 IDisplayManager iDisplayManager = this.displayManager;
                 if (iDisplayManager != null) {
                     iDisplayManager.setDisplayStateOverride(this.displayStateLock, 0, -1);

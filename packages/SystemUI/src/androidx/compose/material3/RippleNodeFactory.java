@@ -12,7 +12,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RippleNodeFactory implements IndicationNodeFactory {
     public final boolean bounded;
@@ -31,8 +30,8 @@ public final class RippleNodeFactory implements IndicationNodeFactory {
             colorProducer = new ColorProducer() { // from class: androidx.compose.material3.RippleNodeFactory$create$colorProducer$1
                 @Override // androidx.compose.ui.graphics.ColorProducer
                 /* renamed from: invoke-0d7_KjU */
-                public final long mo261invoke0d7_KjU() {
-                    return RippleNodeFactory.this.color;
+                public final long mo262invoke0d7_KjU() {
+                    return this.this$0.color;
                 }
             };
         }
@@ -48,24 +47,24 @@ public final class RippleNodeFactory implements IndicationNodeFactory {
             return false;
         }
         RippleNodeFactory rippleNodeFactory = (RippleNodeFactory) obj;
-        if (this.bounded != rippleNodeFactory.bounded || !Dp.m836equalsimpl0(this.radius, rippleNodeFactory.radius) || !Intrinsics.areEqual(this.colorProducer, rippleNodeFactory.colorProducer)) {
+        if (this.bounded != rippleNodeFactory.bounded || !Dp.m838equalsimpl0(this.radius, rippleNodeFactory.radius) || !Intrinsics.areEqual(this.colorProducer, rippleNodeFactory.colorProducer)) {
             return false;
         }
         long j = rippleNodeFactory.color;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.color, j);
+        return ULong.m3447equalsimpl0(this.color, j);
     }
 
     @Override // androidx.compose.foundation.IndicationNodeFactory
     public final int hashCode() {
-        int hashCode = Boolean.hashCode(this.bounded) * 31;
+        int iHashCode = Boolean.hashCode(this.bounded) * 31;
         Dp.Companion companion = Dp.Companion;
-        int m = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.radius, hashCode, 31);
+        int iM = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.radius, iHashCode, 31);
         ColorProducer colorProducer = this.colorProducer;
-        int hashCode2 = colorProducer != null ? colorProducer.hashCode() : 0;
+        int iHashCode2 = colorProducer != null ? colorProducer.hashCode() : 0;
         Color.Companion companion2 = Color.Companion;
         int i = ULong.$r8$clinit;
-        return Long.hashCode(this.color) + ((m + hashCode2) * 31);
+        return Long.hashCode(this.color) + ((iM + iHashCode2) * 31);
     }
 
     public /* synthetic */ RippleNodeFactory(boolean z, float f, ColorProducer colorProducer, DefaultConstructorMarker defaultConstructorMarker) {

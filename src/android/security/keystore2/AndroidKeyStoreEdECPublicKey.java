@@ -22,11 +22,11 @@ public class AndroidKeyStoreEdECPublicKey extends AndroidKeyStorePublicKey imple
     public AndroidKeyStoreEdECPublicKey(KeyDescriptor keyDescriptor, KeyMetadata keyMetadata, String str, KeyStoreSecurityLevel keyStoreSecurityLevel, byte[] bArr) {
         super(keyDescriptor, keyMetadata, bArr, str, keyStoreSecurityLevel);
         this.mEncodedKey = bArr;
-        int matchesPreamble = matchesPreamble(DER_KEY_PREFIX, bArr);
-        if (matchesPreamble == 0) {
+        int iMatchesPreamble = matchesPreamble(DER_KEY_PREFIX, bArr);
+        if (iMatchesPreamble == 0) {
             throw new IllegalArgumentException("Key size is not correct size");
         }
-        this.mPoint = pointFromKeyByteArray(Arrays.copyOfRange(bArr, matchesPreamble, bArr.length));
+        this.mPoint = pointFromKeyByteArray(Arrays.copyOfRange(bArr, iMatchesPreamble, bArr.length));
     }
 
     @Override // android.security.keystore2.AndroidKeyStorePublicKey

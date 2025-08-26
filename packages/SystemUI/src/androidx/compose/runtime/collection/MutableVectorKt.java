@@ -3,7 +3,6 @@ package androidx.compose.runtime.collection;
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class MutableVectorKt {
     public static final void checkIndex(int i, List list) {

@@ -66,7 +66,6 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class CoverScreenManager implements PluginListener, ScreenLifecycle.Observer, WakefulnessLifecycle.Observer, Dumpable {
     public CoverHomeActivity mActivity;
@@ -116,10 +115,10 @@ public class CoverScreenManager implements PluginListener, ScreenLifecycle.Obser
 
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
         public final void onUserSwitchComplete(int i) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onUserSwitchComplete() ", ", mCoverState = ");
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onUserSwitchComplete() ", ", mCoverState = ");
             CoverScreenManager coverScreenManager = CoverScreenManager.this;
-            m.append(coverScreenManager.mCoverState);
-            Log.d("CoverScreenManager", m.toString());
+            sbM.append(coverScreenManager.mCoverState);
+            Log.d("CoverScreenManager", sbM.toString());
             CoverState coverState = coverScreenManager.mCoverState;
             if (coverState == null || !coverState.getAttachState()) {
                 return;
@@ -176,7 +175,6 @@ public class CoverScreenManager implements PluginListener, ScreenLifecycle.Obser
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisplayWindowListenerImpl extends IDisplayWindowListener.Stub {
         public /* synthetic */ DisplayWindowListenerImpl(CoverScreenManager coverScreenManager, int i) {
             this();
@@ -234,7 +232,7 @@ public class CoverScreenManager implements PluginListener, ScreenLifecycle.Obser
         javaAdapter.alwaysCollectFlow(keyguardInteractor.dozeTimeTick, new Consumer() { // from class: com.android.systemui.cover.CoverScreenManager$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                CoverScreenManager coverScreenManager = CoverScreenManager.this;
+                CoverScreenManager coverScreenManager = this.f$0;
                 Long l = (Long) obj;
                 if (coverScreenManager.mCoverPlugin == null) {
                     Log.w("CoverScreenManager", "dozeTimeTick() no plugin");
@@ -267,13 +265,13 @@ public class CoverScreenManager implements PluginListener, ScreenLifecycle.Obser
         }
         sb.append(coverState);
         printWriter.println(sb.toString());
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mIsPluginConnected = "), this.mIsPluginListenerAdded, printWriter, "  mCoverPlugin = ");
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mIsPluginConnected = "), this.mIsPluginListenerAdded, printWriter, "  mCoverPlugin = ");
         Object obj = this.mCoverPlugin;
         if (obj == null) {
             obj = "null";
         }
-        m.append(obj);
-        printWriter.println(m.toString());
+        sbM.append(obj);
+        printWriter.println(sbM.toString());
         StringBuilder sb2 = new StringBuilder("  mVirtualDisplay = ");
         Object obj2 = this.mVirtualDisplay;
         if (obj2 == null) {
@@ -560,18 +558,18 @@ public class CoverScreenManager implements PluginListener, ScreenLifecycle.Obser
         }
         Log.d("CoverScreenManager", "startCover:");
         CoverWindowDelegate coverWindowDelegate = this.mCoverWindowDelegate;
-        CoverWindowDelegate.ViewCoverDecorView attach = coverWindowDelegate.attach();
-        if (attach != null && (windowInsetsController = attach.getWindowInsetsController()) != null) {
-            int navigationBars = WindowInsets.Type.navigationBars();
+        CoverWindowDelegate.ViewCoverDecorView viewCoverDecorViewAttach = coverWindowDelegate.attach();
+        if (viewCoverDecorViewAttach != null && (windowInsetsController = viewCoverDecorViewAttach.getWindowInsetsController()) != null) {
+            int iNavigationBars = WindowInsets.Type.navigationBars();
             if (this.mCoverState.getType() == 16) {
-                navigationBars |= WindowInsets.Type.statusBars();
+                iNavigationBars |= WindowInsets.Type.statusBars();
             }
-            Log.d("CoverScreenManager", "startCover() hide systemBars - " + navigationBars);
-            windowInsetsController.hide(navigationBars);
+            Log.d("CoverScreenManager", "startCover() hide systemBars - " + iNavigationBars);
+            windowInsetsController.hide(iNavigationBars);
         }
         PluginCover pluginCover = this.mCoverPlugin;
         if (pluginCover instanceof PluginViewCover) {
-            pluginCover.onCoverAttached(attach, this.mCoverState);
+            pluginCover.onCoverAttached(viewCoverDecorViewAttach, this.mCoverState);
         } else if (pluginCover instanceof PluginDisplayCover) {
             Window window = this.mActivity.getWindow();
             this.mPluginContext.getResources().getConfiguration().updateFrom(window.getDecorView().getResources().getConfiguration());
@@ -595,11 +593,11 @@ public class CoverScreenManager implements PluginListener, ScreenLifecycle.Obser
         intent.setAction("android.intent.action.MAIN");
         intent.addCategory("android.intent.category.SECONDARY_HOME");
         intent.setClassName("com.android.systemui", "com.android.systemui.cover.CoverHomeActivity");
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setLaunchDisplayId(display.getDisplayId());
-        makeBasic.setForceLaunchWindowingMode(1);
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setLaunchDisplayId(display.getDisplayId());
+        activityOptionsMakeBasic.setForceLaunchWindowingMode(1);
         try {
-            this.mContext.startActivity(intent, makeBasic.toBundle());
+            this.mContext.startActivity(intent, activityOptionsMakeBasic.toBundle());
         } catch (ActivityNotFoundException e) {
             Log.w("CoverScreenManager", "startCoverHomeActivity() " + e);
         }

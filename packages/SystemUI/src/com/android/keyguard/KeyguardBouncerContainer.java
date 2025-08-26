@@ -18,7 +18,6 @@ import com.android.systemui.keyevent.domain.interactor.SysUIKeyEventHandler;
 import com.android.systemui.keyguard.KeyguardSysDumpTrigger;
 import com.android.systemui.util.SafeUIState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardBouncerContainer extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -70,13 +69,13 @@ public class KeyguardBouncerContainer extends FrameLayout {
                                     keyguardSysDumpTrigger2.cancelIssueReportExecToken = keyguardSysDumpTrigger2.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSysDumpTrigger$startIssueReport$1
                                         @Override // java.lang.Runnable
                                         public final void run() {
-                                            KeyguardSysDumpTrigger keyguardSysDumpTrigger3 = KeyguardSysDumpTrigger.this;
+                                            KeyguardSysDumpTrigger keyguardSysDumpTrigger3 = keyguardSysDumpTrigger2;
                                             int i3 = i2;
-                                            long j2 = j;
-                                            if (j2 <= 0) {
-                                                j2 = System.currentTimeMillis();
+                                            long jCurrentTimeMillis = j;
+                                            if (jCurrentTimeMillis <= 0) {
+                                                jCurrentTimeMillis = System.currentTimeMillis();
                                             }
-                                            keyguardSysDumpTrigger3.sendIssueReportIntent(i3, j2);
+                                            keyguardSysDumpTrigger3.sendIssueReportIntent(i3, jCurrentTimeMillis);
                                         }
                                     }, 500L);
                                     Log.d("KeyguardSysDumpTrigger", "startIssueReport 500");

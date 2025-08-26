@@ -108,8 +108,8 @@ public final class IkeSessionParamsUtils {
         } catch (Exception unused) {
             arrayList2.clear();
             for (Integer num : IKE_OPTIONS) {
-                int intValue = num.intValue();
-                if (isIkeOptionValid(intValue) && ikeSessionParams.hasIkeOption(intValue)) {
+                int iIntValue = num.intValue();
+                if (isIkeOptionValid(iIntValue) && ikeSessionParams.hasIkeOption(iIntValue)) {
                     arrayList2.add(num);
                 }
             }
@@ -117,9 +117,7 @@ public final class IkeSessionParamsUtils {
         persistableBundle.putIntArray(IKE_OPTIONS_KEY, arrayList2.stream().mapToInt(new ToIntFunction() { // from class: android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda4
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intValue2;
-                intValue2 = ((Integer) obj).intValue();
-                return intValue2;
+                return ((Integer) obj).intValue();
             }
         }).toArray());
         return persistableBundle;
@@ -176,9 +174,9 @@ public final class IkeSessionParamsUtils {
         }
         Iterator<Integer> it2 = IKE_OPTIONS.iterator();
         while (it2.hasNext()) {
-            int intValue = it2.next().intValue();
-            if (isIkeOptionValid(intValue)) {
-                builder.removeIkeOption(intValue);
+            int iIntValue = it2.next().intValue();
+            if (isIkeOptionValid(iIntValue)) {
+                builder.removeIkeOption(iIntValue);
             }
         }
         for (int i2 : persistableBundle.getIntArray(IKE_OPTIONS_KEY)) {
@@ -323,7 +321,7 @@ public final class IkeSessionParamsUtils {
             Objects.requireNonNull(persistableBundle2, "remoteAuthBundle was null");
             PersistableBundle persistableBundle3 = persistableBundle.getPersistableBundle(END_CERT_KEY);
             Objects.requireNonNull(persistableBundle3, "End cert was null");
-            X509Certificate certificateFromByteArray = CertUtils.certificateFromByteArray(PersistableBundleUtils.toByteArray(persistableBundle3));
+            X509Certificate x509CertificateCertificateFromByteArray = CertUtils.certificateFromByteArray(PersistableBundleUtils.toByteArray(persistableBundle3));
             PersistableBundle persistableBundle4 = persistableBundle.getPersistableBundle(INTERMEDIATE_CERTS_KEY);
             Objects.requireNonNull(persistableBundle4, "Intermediate certs was null");
             List list = PersistableBundleUtils.toList(persistableBundle4, new PersistableBundleUtils.Deserializer() { // from class: android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$IkeAuthDigitalSignConfigUtils$$ExternalSyntheticLambda0
@@ -339,9 +337,9 @@ public final class IkeSessionParamsUtils {
             }
             PersistableBundle persistableBundle5 = persistableBundle.getPersistableBundle(PRIVATE_KEY_KEY);
             Objects.requireNonNull(persistableBundle5, "PrivateKey bundle was null");
-            RSAPrivateKey privateKeyFromByteArray = CertUtils.privateKeyFromByteArray(PersistableBundleUtils.toByteArray(persistableBundle5));
+            RSAPrivateKey rSAPrivateKeyPrivateKeyFromByteArray = CertUtils.privateKeyFromByteArray(PersistableBundleUtils.toByteArray(persistableBundle5));
             PersistableBundle persistableBundle6 = persistableBundle2.getPersistableBundle(TRUST_CERT_KEY);
-            builder.setAuthDigitalSignature(persistableBundle6 != null ? CertUtils.certificateFromByteArray(PersistableBundleUtils.toByteArray(persistableBundle6)) : null, certificateFromByteArray, arrayList, privateKeyFromByteArray);
+            builder.setAuthDigitalSignature(persistableBundle6 != null ? CertUtils.certificateFromByteArray(PersistableBundleUtils.toByteArray(persistableBundle6)) : null, x509CertificateCertificateFromByteArray, arrayList, rSAPrivateKeyPrivateKeyFromByteArray);
         }
     }
 
@@ -359,9 +357,9 @@ public final class IkeSessionParamsUtils {
         public static void setBuilderByReadingPersistableBundle(PersistableBundle persistableBundle, PersistableBundle persistableBundle2, IkeSessionParams.Builder builder) {
             PersistableBundle persistableBundle3 = persistableBundle.getPersistableBundle(EAP_CONFIG_KEY);
             Objects.requireNonNull(persistableBundle3, "EAP Config was null");
-            EapSessionConfig fromPersistableBundle = EapSessionConfigUtils.fromPersistableBundle(persistableBundle3);
+            EapSessionConfig eapSessionConfigFromPersistableBundle = EapSessionConfigUtils.fromPersistableBundle(persistableBundle3);
             PersistableBundle persistableBundle4 = persistableBundle2.getPersistableBundle("TRUST_CERT_KEY");
-            builder.setAuthEap(persistableBundle4 != null ? CertUtils.certificateFromByteArray(PersistableBundleUtils.toByteArray(persistableBundle4)) : null, fromPersistableBundle);
+            builder.setAuthEap(persistableBundle4 != null ? CertUtils.certificateFromByteArray(PersistableBundleUtils.toByteArray(persistableBundle4)) : null, eapSessionConfigFromPersistableBundle);
         }
     }
 

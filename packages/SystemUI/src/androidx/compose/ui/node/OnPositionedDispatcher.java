@@ -7,16 +7,13 @@ import java.util.Comparator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class OnPositionedDispatcher {
     public LayoutNode[] cachedNodes;
     public final MutableVector layoutNodes = new MutableVector(new LayoutNode[16], 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class DepthComparator implements Comparator<LayoutNode> {
             public static final DepthComparator INSTANCE = new DepthComparator();
 
@@ -27,8 +24,8 @@ public final class OnPositionedDispatcher {
             public final int compare(LayoutNode layoutNode, LayoutNode layoutNode2) {
                 LayoutNode layoutNode3 = layoutNode;
                 LayoutNode layoutNode4 = layoutNode2;
-                int compare = Intrinsics.compare(layoutNode4.depth, layoutNode3.depth);
-                return compare != 0 ? compare : Intrinsics.compare(layoutNode3.hashCode(), layoutNode4.hashCode());
+                int iCompare = Intrinsics.compare(layoutNode4.depth, layoutNode3.depth);
+                return iCompare != 0 ? iCompare : Intrinsics.compare(layoutNode3.hashCode(), layoutNode4.hashCode());
             }
         }
 
@@ -73,42 +70,42 @@ public final class OnPositionedDispatcher {
             if ((node.aggregateChildKindSet & 256) != 0) {
                 while (node != null) {
                     if ((node.kindSet & 256) != 0) {
-                        DelegatingNode delegatingNode = node;
-                        ?? r5 = 0;
-                        while (delegatingNode != 0) {
-                            if (delegatingNode instanceof GlobalPositionAwareModifierNode) {
-                                GlobalPositionAwareModifierNode globalPositionAwareModifierNode = (GlobalPositionAwareModifierNode) delegatingNode;
-                                globalPositionAwareModifierNode.onGloballyPositioned(DelegatableNodeKt.m632requireCoordinator64DMado(globalPositionAwareModifierNode, 256));
-                            } else if ((delegatingNode.kindSet & 256) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                Modifier.Node node2 = delegatingNode.delegate;
+                        DelegatingNode delegatingNodeAccess$pop = node;
+                        ?? mutableVector = 0;
+                        while (delegatingNodeAccess$pop != 0) {
+                            if (delegatingNodeAccess$pop instanceof GlobalPositionAwareModifierNode) {
+                                GlobalPositionAwareModifierNode globalPositionAwareModifierNode = (GlobalPositionAwareModifierNode) delegatingNodeAccess$pop;
+                                globalPositionAwareModifierNode.onGloballyPositioned(DelegatableNodeKt.m634requireCoordinator64DMado(globalPositionAwareModifierNode, 256));
+                            } else if ((delegatingNodeAccess$pop.kindSet & 256) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                Modifier.Node node2 = delegatingNodeAccess$pop.delegate;
                                 int i = 0;
-                                delegatingNode = delegatingNode;
-                                r5 = r5;
+                                delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                mutableVector = mutableVector;
                                 while (node2 != null) {
                                     if ((node2.kindSet & 256) != 0) {
                                         i++;
-                                        r5 = r5;
+                                        mutableVector = mutableVector;
                                         if (i == 1) {
-                                            delegatingNode = node2;
+                                            delegatingNodeAccess$pop = node2;
                                         } else {
-                                            if (r5 == 0) {
-                                                r5 = new MutableVector(new Modifier.Node[16], 0);
+                                            if (mutableVector == 0) {
+                                                mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (delegatingNode != 0) {
-                                                r5.add(delegatingNode);
-                                                delegatingNode = 0;
+                                            if (delegatingNodeAccess$pop != 0) {
+                                                mutableVector.add(delegatingNodeAccess$pop);
+                                                delegatingNodeAccess$pop = 0;
                                             }
-                                            r5.add(node2);
+                                            mutableVector.add(node2);
                                         }
                                     }
                                     node2 = node2.child;
-                                    delegatingNode = delegatingNode;
-                                    r5 = r5;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector = mutableVector;
                                 }
                                 if (i == 1) {
                                 }
                             }
-                            delegatingNode = DelegatableNodeKt.access$pop(r5);
+                            delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                         }
                     }
                     if ((node.aggregateChildKindSet & 256) == 0) {
@@ -120,9 +117,9 @@ public final class OnPositionedDispatcher {
             }
         }
         layoutNode.needsOnPositionedDispatch = false;
-        MutableVector mutableVector = layoutNode.get_children$ui_release();
-        Object[] objArr = mutableVector.content;
-        int i2 = mutableVector.size;
+        MutableVector mutableVector2 = layoutNode.get_children$ui_release();
+        Object[] objArr = mutableVector2.content;
+        int i2 = mutableVector2.size;
         for (int i3 = 0; i3 < i2; i3++) {
             dispatchHierarchy((LayoutNode) objArr[i3]);
         }

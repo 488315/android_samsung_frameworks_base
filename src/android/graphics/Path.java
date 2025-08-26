@@ -121,15 +121,15 @@ public class Path {
     }
 
     public Path() {
-        long nInit = nInit();
-        this.mNativePath = nInit;
-        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, nInit);
+        long jNInit = nInit();
+        this.mNativePath = jNInit;
+        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, jNInit);
     }
 
     public Path(Path path) {
-        long nInit = nInit(path != null ? path.mNativePath : 0L);
-        this.mNativePath = nInit;
-        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, nInit);
+        long jNInit = nInit(path != null ? path.mNativePath : 0L);
+        this.mNativePath = jNInit;
+        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, jNInit);
     }
 
     public void reset() {

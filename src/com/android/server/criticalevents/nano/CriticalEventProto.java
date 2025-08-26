@@ -63,20 +63,20 @@ public final class CriticalEventProto extends MessageNano {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             int i = this.uid;
-            return i != 0 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(1, i) : computeSerializedSize;
+            return i != 0 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(1, i) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public ExcessiveBinderCalls mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag != 8) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                if (tag != 8) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
@@ -120,13 +120,13 @@ public final class CriticalEventProto extends MessageNano {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public InstallPackages mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
-            int readTag;
+            int tag;
             do {
-                readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-            } while (WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag));
+            } while (WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag));
             return this;
         }
 
@@ -164,13 +164,13 @@ public final class CriticalEventProto extends MessageNano {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public SystemServerStarted mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
-            int readTag;
+            int tag;
             do {
-                readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-            } while (WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag));
+            } while (WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag));
             return this;
         }
 
@@ -223,24 +223,24 @@ public final class CriticalEventProto extends MessageNano {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.subject.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.subject);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.subject);
             }
-            return !this.uuid.equals("") ? computeSerializedSize + CodedOutputByteBufferNano.computeStringSize(2, this.uuid) : computeSerializedSize;
+            return !this.uuid.equals("") ? iComputeSerializedSize + CodedOutputByteBufferNano.computeStringSize(2, this.uuid) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public Watchdog mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     this.subject = codedInputByteBufferNano.readString();
-                } else if (readTag != 18) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 18) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
@@ -294,19 +294,19 @@ public final class CriticalEventProto extends MessageNano {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
-            return !this.subject.equals("") ? computeSerializedSize + CodedOutputByteBufferNano.computeStringSize(1, this.subject) : computeSerializedSize;
+            int iComputeSerializedSize = super.computeSerializedSize();
+            return !this.subject.equals("") ? iComputeSerializedSize + CodedOutputByteBufferNano.computeStringSize(1, this.subject) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public HalfWatchdog mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag != 10) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                if (tag != 10) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
@@ -383,48 +383,48 @@ public final class CriticalEventProto extends MessageNano {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.subject.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.subject);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.subject);
             }
             if (!this.process.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(2, this.process);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(2, this.process);
             }
             int i = this.pid;
             if (i != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i);
             }
             int i2 = this.uid;
             if (i2 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(4, i2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(4, i2);
             }
             int i3 = this.processClass;
-            return i3 != 0 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(5, i3) : computeSerializedSize;
+            return i3 != 0 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(5, i3) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public AppNotResponding mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     this.subject = codedInputByteBufferNano.readString();
-                } else if (readTag == 18) {
+                } else if (tag == 18) {
                     this.process = codedInputByteBufferNano.readString();
-                } else if (readTag == 24) {
+                } else if (tag == 24) {
                     this.pid = codedInputByteBufferNano.readInt32();
-                } else if (readTag == 32) {
+                } else if (tag == 32) {
                     this.uid = codedInputByteBufferNano.readInt32();
-                } else if (readTag != 40) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 40) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
-                    int readInt32 = codedInputByteBufferNano.readInt32();
-                    if (readInt32 == 0 || readInt32 == 1 || readInt32 == 2 || readInt32 == 3) {
-                        this.processClass = readInt32;
+                    int int32 = codedInputByteBufferNano.readInt32();
+                    if (int32 == 0 || int32 == 1 || int32 == 2 || int32 == 3) {
+                        this.processClass = int32;
                     }
                 }
             }
@@ -498,48 +498,48 @@ public final class CriticalEventProto extends MessageNano {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.exceptionClass.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.exceptionClass);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.exceptionClass);
             }
             if (!this.process.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(2, this.process);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(2, this.process);
             }
             int i = this.pid;
             if (i != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i);
             }
             int i2 = this.uid;
             if (i2 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(4, i2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(4, i2);
             }
             int i3 = this.processClass;
-            return i3 != 0 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(5, i3) : computeSerializedSize;
+            return i3 != 0 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(5, i3) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public JavaCrash mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     this.exceptionClass = codedInputByteBufferNano.readString();
-                } else if (readTag == 18) {
+                } else if (tag == 18) {
                     this.process = codedInputByteBufferNano.readString();
-                } else if (readTag == 24) {
+                } else if (tag == 24) {
                     this.pid = codedInputByteBufferNano.readInt32();
-                } else if (readTag == 32) {
+                } else if (tag == 32) {
                     this.uid = codedInputByteBufferNano.readInt32();
-                } else if (readTag != 40) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 40) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
-                    int readInt32 = codedInputByteBufferNano.readInt32();
-                    if (readInt32 == 0 || readInt32 == 1 || readInt32 == 2 || readInt32 == 3) {
-                        this.processClass = readInt32;
+                    int int32 = codedInputByteBufferNano.readInt32();
+                    if (int32 == 0 || int32 == 1 || int32 == 2 || int32 == 3) {
+                        this.processClass = int32;
                     }
                 }
             }
@@ -608,43 +608,43 @@ public final class CriticalEventProto extends MessageNano {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.process.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.process);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.process);
             }
             int i = this.pid;
             if (i != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(2, i);
             }
             int i2 = this.uid;
             if (i2 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(3, i2);
             }
             int i3 = this.processClass;
-            return i3 != 0 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(4, i3) : computeSerializedSize;
+            return i3 != 0 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt32Size(4, i3) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public NativeCrash mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     this.process = codedInputByteBufferNano.readString();
-                } else if (readTag == 16) {
+                } else if (tag == 16) {
                     this.pid = codedInputByteBufferNano.readInt32();
-                } else if (readTag == 24) {
+                } else if (tag == 24) {
                     this.uid = codedInputByteBufferNano.readInt32();
-                } else if (readTag != 32) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 32) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
-                    int readInt32 = codedInputByteBufferNano.readInt32();
-                    if (readInt32 == 0 || readInt32 == 1 || readInt32 == 2 || readInt32 == 3) {
-                        this.processClass = readInt32;
+                    int int32 = codedInputByteBufferNano.readInt32();
+                    if (int32 == 0 || int32 == 1 || int32 == 2 || int32 == 3) {
+                        this.processClass = int32;
                     }
                 }
             }
@@ -871,88 +871,88 @@ public final class CriticalEventProto extends MessageNano {
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     protected int computeSerializedSize() {
-        int computeSerializedSize = super.computeSerializedSize();
+        int iComputeSerializedSize = super.computeSerializedSize();
         long j = this.timestampMs;
         if (j != 0) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(1, j);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(1, j);
         }
         if (this.eventCase_ == 2) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(2, (MessageNano) this.event_);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(2, (MessageNano) this.event_);
         }
         if (this.eventCase_ == 3) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(3, (MessageNano) this.event_);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(3, (MessageNano) this.event_);
         }
         if (this.eventCase_ == 4) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(4, (MessageNano) this.event_);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(4, (MessageNano) this.event_);
         }
         if (this.eventCase_ == 5) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(5, (MessageNano) this.event_);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(5, (MessageNano) this.event_);
         }
         if (this.eventCase_ == 6) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(6, (MessageNano) this.event_);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(6, (MessageNano) this.event_);
         }
         if (this.eventCase_ == 7) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(7, (MessageNano) this.event_);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(7, (MessageNano) this.event_);
         }
         if (this.eventCase_ == 8) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(8, (MessageNano) this.event_);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(8, (MessageNano) this.event_);
         }
-        return this.eventCase_ == 9 ? computeSerializedSize + CodedOutputByteBufferNano.computeMessageSize(9, (MessageNano) this.event_) : computeSerializedSize;
+        return this.eventCase_ == 9 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeMessageSize(9, (MessageNano) this.event_) : iComputeSerializedSize;
     }
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     public CriticalEventProto mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == 8) {
+            if (tag == 8) {
                 this.timestampMs = codedInputByteBufferNano.readInt64();
-            } else if (readTag == 18) {
+            } else if (tag == 18) {
                 if (this.eventCase_ != 2) {
                     this.event_ = new Watchdog();
                 }
                 codedInputByteBufferNano.readMessage((MessageNano) this.event_);
                 this.eventCase_ = 2;
-            } else if (readTag == 26) {
+            } else if (tag == 26) {
                 if (this.eventCase_ != 3) {
                     this.event_ = new HalfWatchdog();
                 }
                 codedInputByteBufferNano.readMessage((MessageNano) this.event_);
                 this.eventCase_ = 3;
-            } else if (readTag == 34) {
+            } else if (tag == 34) {
                 if (this.eventCase_ != 4) {
                     this.event_ = new AppNotResponding();
                 }
                 codedInputByteBufferNano.readMessage((MessageNano) this.event_);
                 this.eventCase_ = 4;
-            } else if (readTag == 42) {
+            } else if (tag == 42) {
                 if (this.eventCase_ != 5) {
                     this.event_ = new JavaCrash();
                 }
                 codedInputByteBufferNano.readMessage((MessageNano) this.event_);
                 this.eventCase_ = 5;
-            } else if (readTag == 50) {
+            } else if (tag == 50) {
                 if (this.eventCase_ != 6) {
                     this.event_ = new NativeCrash();
                 }
                 codedInputByteBufferNano.readMessage((MessageNano) this.event_);
                 this.eventCase_ = 6;
-            } else if (readTag == 58) {
+            } else if (tag == 58) {
                 if (this.eventCase_ != 7) {
                     this.event_ = new SystemServerStarted();
                 }
                 codedInputByteBufferNano.readMessage((MessageNano) this.event_);
                 this.eventCase_ = 7;
-            } else if (readTag == 66) {
+            } else if (tag == 66) {
                 if (this.eventCase_ != 8) {
                     this.event_ = new InstallPackages();
                 }
                 codedInputByteBufferNano.readMessage((MessageNano) this.event_);
                 this.eventCase_ = 8;
-            } else if (readTag != 74) {
-                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+            } else if (tag != 74) {
+                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                     break;
                 }
             } else {

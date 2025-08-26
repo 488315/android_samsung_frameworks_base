@@ -7,8 +7,10 @@ import androidx.appcompat.util.SeslRoundedCorner$SeslRoundedChunkingDrawable$$Ex
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.systemui.Prefs;
+import com.android.systemui.R;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
+import com.android.systemui.qs.panelresource.SecQSPanelResourceCommon;
 import com.android.systemui.qs.pipeline.dagger.QSType;
 import com.android.systemui.qs.pipeline.data.repository.TileVisibilityRepository;
 import com.android.systemui.qs.pipeline.data.repository.TileVisibilityRepositoryImpl;
@@ -32,7 +34,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.ChannelAsFlow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileVisibilityInteractorImpl implements TileVisibilityInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,7 +45,6 @@ public final class TileVisibilityInteractorImpl implements TileVisibilityInterac
     public final SecQSPanelResourcePicker resourcePicker;
     public final TileVisibilityRepository tileVisibilityRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.pipeline.data.domain.interactor.TileVisibilityInteractorImpl$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -76,16 +76,16 @@ public final class TileVisibilityInteractorImpl implements TileVisibilityInterac
                     public final Object emit(Object obj2, Continuation continuation) {
                         Intent intent = (Intent) obj2;
                         int i2 = TileVisibilityInteractorImpl.$r8$clinit;
-                        TileVisibilityInteractorImpl tileVisibilityInteractorImpl2 = TileVisibilityInteractorImpl.this;
+                        TileVisibilityInteractorImpl tileVisibilityInteractorImpl2 = tileVisibilityInteractorImpl;
                         tileVisibilityInteractorImpl2.getClass();
                         String stringExtra = intent.getStringExtra("operation");
                         String stringExtra2 = intent.getStringExtra("componentName");
                         String stringExtra3 = intent.getStringExtra("packageName");
                         String stringExtra4 = intent.getStringExtra("tileName");
                         int intExtra = intent.getIntExtra("index", -1);
-                        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("TileVisibilityUpdate : [", stringExtra, "] ", stringExtra4, ":");
-                        MoveResult$$ExternalSyntheticOutline0.m(m, stringExtra3, ", ", stringExtra2, ", ");
-                        RecyclerView$$ExternalSyntheticOutline0.m(intExtra, "TileVisibilityInteractor", m);
+                        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("TileVisibilityUpdate : [", stringExtra, "] ", stringExtra4, ":");
+                        MoveResult$$ExternalSyntheticOutline0.m(sbM, stringExtra3, ", ", stringExtra2, ", ");
+                        RecyclerView$$ExternalSyntheticOutline0.m(intExtra, "TileVisibilityInteractor", sbM);
                         if (stringExtra3 != null && stringExtra2 != null && stringExtra4 != null) {
                             ComponentName componentName = new ComponentName(stringExtra3, stringExtra2);
                             if ("add".equals(stringExtra)) {
@@ -95,27 +95,30 @@ public final class TileVisibilityInteractorImpl implements TileVisibilityInterac
                                 List defaultTiles2 = currentTilesInteractor2.getDefaultTiles();
                                 List list = (List) ((RemovedTilesInteractorImpl) tileVisibilityInteractorImpl2.removedTilesInteractor).removedTiles.$$delegate_0.getValue();
                                 TileSpec.Companion.getClass();
-                                TileSpec.CustomTileSpec create = TileSpec.Companion.create(componentName);
-                                boolean contains = list.contains(create);
+                                TileSpec.CustomTileSpec customTileSpecCreate = TileSpec.Companion.create(componentName);
+                                boolean zContains = list.contains(customTileSpecCreate);
                                 QSPipelineLogger qSPipelineLogger = tileVisibilityInteractorImpl2.logger;
-                                if (!contains && ((ArrayList) defaultTiles).contains(create)) {
+                                if (!zContains && ((ArrayList) defaultTiles).contains(customTileSpecCreate)) {
                                     int tileIndex = tileVisibilityInteractorImpl2.getTileIndex("QsWifiCallingTileIndex", intExtra, componentName, stringExtra4, defaultTiles);
-                                    currentTilesInteractor.addTile(create, tileIndex);
-                                    qSPipelineLogger.logTileVisibilityUpdated(true, create, tileIndex, QSType.QS);
+                                    currentTilesInteractor.addTile(customTileSpecCreate, tileIndex);
+                                    qSPipelineLogger.logTileVisibilityUpdated(true, customTileSpecCreate, tileIndex, QSType.QS);
                                 }
                                 boolean z = Prefs.getBoolean(tileVisibilityInteractorImpl2.context, "QQsHasEditedQuickTileList", false);
                                 int i3 = Prefs.getInt(tileVisibilityInteractorImpl2.context, "QQsWifiCallingTileIndex", -1);
-                                int quickQsTileNum = tileVisibilityInteractorImpl2.resourcePicker.resourcePickHelper.getTargetPicker().getQuickQsTileNum(tileVisibilityInteractorImpl2.context);
+                                Context context = tileVisibilityInteractorImpl2.context;
+                                tileVisibilityInteractorImpl2.resourcePicker.resourcePickHelper.getTargetPicker().getClass();
+                                SecQSPanelResourceCommon.Companion.getClass();
+                                int iM2904int = SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_qs_panel_max_columns, context);
                                 int tileIndex2 = tileVisibilityInteractorImpl2.getTileIndex("QQsWifiCallingTileIndex", intExtra, componentName, stringExtra4, defaultTiles2);
                                 if ("WifiCalling".equals(stringExtra4)) {
                                     if (z || i3 != -1) {
-                                        if (i3 != -1 && ((List) currentTilesInteractor2.getCurrentTiles().getValue()).size() < quickQsTileNum) {
-                                            currentTilesInteractor2.addTile(create, tileIndex2);
+                                        if (i3 != -1 && ((List) currentTilesInteractor2.getCurrentTiles().getValue()).size() < iM2904int) {
+                                            currentTilesInteractor2.addTile(customTileSpecCreate, tileIndex2);
                                         }
-                                    } else if (tileIndex2 != -1 && tileIndex2 < quickQsTileNum) {
-                                        currentTilesInteractor2.addTile(create, tileIndex2);
+                                    } else if (tileIndex2 != -1 && tileIndex2 < iM2904int) {
+                                        currentTilesInteractor2.addTile(customTileSpecCreate, tileIndex2);
                                     }
-                                    qSPipelineLogger.logTileVisibilityUpdated(true, create, tileIndex2, QSType.QQS);
+                                    qSPipelineLogger.logTileVisibilityUpdated(true, customTileSpecCreate, tileIndex2, QSType.QQS);
                                 }
                             } else if ("remove".equals(stringExtra)) {
                                 tileVisibilityInteractorImpl2.removeByIntent(tileVisibilityInteractorImpl2.qsTilesInteractor, "QsHasEditedQuickTileList", "QsWifiCallingTileIndex", componentName, stringExtra4);
@@ -139,7 +142,6 @@ public final class TileVisibilityInteractorImpl implements TileVisibilityInterac
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -173,25 +175,25 @@ public final class TileVisibilityInteractorImpl implements TileVisibilityInterac
             }
         }
         TileSpec.Companion.getClass();
-        int indexOf = list.indexOf(TileSpec.Companion.create(componentName));
-        return indexOf != -1 ? indexOf : i;
+        int iIndexOf = list.indexOf(TileSpec.Companion.create(componentName));
+        return iIndexOf != -1 ? iIndexOf : i;
     }
 
     public final void removeByIntent(CurrentTilesInteractor currentTilesInteractor, String str, String str2, ComponentName componentName, String str3) {
-        int indexOf;
+        int iIndexOf;
         TileSpec.Companion.getClass();
-        TileSpec.CustomTileSpec create = TileSpec.Companion.create(componentName);
+        TileSpec.CustomTileSpec customTileSpecCreate = TileSpec.Companion.create(componentName);
         List currentTilesSpecs = currentTilesInteractor.getCurrentTilesSpecs();
-        if ("WifiCalling".equals(str3) && Prefs.getBoolean(this.context, str, false) && (indexOf = ((ArrayList) currentTilesSpecs).indexOf(create)) != -1) {
-            Prefs.putInt(this.context, str2, indexOf);
+        if ("WifiCalling".equals(str3) && Prefs.getBoolean(this.context, str, false) && (iIndexOf = ((ArrayList) currentTilesSpecs).indexOf(customTileSpecCreate)) != -1) {
+            Prefs.putInt(this.context, str2, iIndexOf);
         }
-        boolean equals = currentTilesInteractor.equals(this.qsTilesInteractor);
+        boolean zEquals = currentTilesInteractor.equals(this.qsTilesInteractor);
         QSPipelineLogger qSPipelineLogger = this.logger;
-        if (equals) {
-            qSPipelineLogger.logTileVisibilityUpdated(false, create, ((ArrayList) currentTilesSpecs).indexOf(create), QSType.QS);
+        if (zEquals) {
+            qSPipelineLogger.logTileVisibilityUpdated(false, customTileSpecCreate, ((ArrayList) currentTilesSpecs).indexOf(customTileSpecCreate), QSType.QS);
         } else if (currentTilesInteractor.equals(this.qqsTilesInteractor)) {
-            qSPipelineLogger.logTileVisibilityUpdated(false, create, ((ArrayList) currentTilesSpecs).indexOf(create), QSType.QQS);
+            qSPipelineLogger.logTileVisibilityUpdated(false, customTileSpecCreate, ((ArrayList) currentTilesSpecs).indexOf(customTileSpecCreate), QSType.QQS);
         }
-        currentTilesInteractor.removeTiles(Collections.singletonList(create));
+        currentTilesInteractor.removeTiles(Collections.singletonList(customTileSpecCreate));
     }
 }

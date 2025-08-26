@@ -16,7 +16,6 @@ import androidx.savedstate.SavedStateRegistryOwner;
 import androidx.savedstate.ViewTreeSavedStateRegistryOwner;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ComponentDialog extends Dialog implements LifecycleOwner, OnBackPressedDispatcherOwner, SavedStateRegistryOwner {
     public LifecycleRegistry _lifecycleRegistry;
@@ -86,9 +85,9 @@ public class ComponentDialog extends Dialog implements LifecycleOwner, OnBackPre
 
     @Override // android.app.Dialog
     public final Bundle onSaveInstanceState() {
-        Bundle onSaveInstanceState = super.onSaveInstanceState();
-        this.savedStateRegistryController.performSave(onSaveInstanceState);
-        return onSaveInstanceState;
+        Bundle bundleOnSaveInstanceState = super.onSaveInstanceState();
+        this.savedStateRegistryController.performSave(bundleOnSaveInstanceState);
+        return bundleOnSaveInstanceState;
     }
 
     @Override // android.app.Dialog

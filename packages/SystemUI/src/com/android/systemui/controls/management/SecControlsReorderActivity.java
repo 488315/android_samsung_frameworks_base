@@ -2,6 +2,7 @@ package com.android.systemui.controls.management;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -31,7 +32,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecControlsReorderActivity extends BaseActivity {
     public final AUIFacade auiFacade;
@@ -44,7 +44,6 @@ public final class SecControlsReorderActivity extends BaseActivity {
     public SecStructureAdapter structureAdapter;
     public ReorderStructureModel structureModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -117,17 +116,17 @@ public final class SecControlsReorderActivity extends BaseActivity {
     }
 
     @Override // com.android.systemui.controls.BaseActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
-    public final void onCreate(Bundle bundle) {
-        ArrayList<CharSequence> arrayList;
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
+        ArrayList<CharSequence> charSequenceArrayList;
         super.onCreate(bundle);
         if (((ComponentName) getIntent().getParcelableExtra("android.intent.extra.COMPONENT_NAME")) == null) {
             finish();
         }
-        ArrayList arrayList2 = (ArrayList) getIntent().getSerializableExtra("extra_structure_lists");
-        if (arrayList2 == null) {
-            arrayList2 = new ArrayList();
+        ArrayList arrayList = (ArrayList) getIntent().getSerializableExtra("extra_structure_lists");
+        if (arrayList == null) {
+            arrayList = new ArrayList();
         }
-        this.list = arrayList2;
+        this.list = arrayList;
         setContentView(R.layout.activity_controls_favoriting);
         setSupportActionBar((Toolbar) requireViewById(R.id.toolbar));
         ActionBar supportActionBar = getSupportActionBar();
@@ -144,16 +143,16 @@ public final class SecControlsReorderActivity extends BaseActivity {
         layoutUtil.setLayoutWeightWidthPercentBasic(layoutUtil.getWidthPercentBasic(f), frameLayout);
         this.controlsListLayout = (LinearLayout) requireViewById(R.id.controls_list_layout);
         this.noItemsLayout = (LinearLayout) requireViewById(R.id.no_items_layout);
+        ArrayList arrayList2 = this.list;
+        if (arrayList2 == null) {
+            arrayList2 = null;
+        }
+        Objects.toString(arrayList2);
         ArrayList arrayList3 = this.list;
         if (arrayList3 == null) {
             arrayList3 = null;
         }
-        Objects.toString(arrayList3);
-        ArrayList arrayList4 = this.list;
-        if (arrayList4 == null) {
-            arrayList4 = null;
-        }
-        if (arrayList4.isEmpty()) {
+        if (arrayList3.isEmpty()) {
             LinearLayout linearLayout = this.controlsListLayout;
             if (linearLayout == null) {
                 linearLayout = null;
@@ -179,10 +178,10 @@ public final class SecControlsReorderActivity extends BaseActivity {
         ViewStub viewStub = (ViewStub) requireViewById(R.id.stub);
         viewStub.setLayoutResource(R.layout.controls_structure_page);
         viewStub.inflate();
-        if ((bundle == null || (arrayList = bundle.getCharSequenceArrayList("current_structure_list")) == null) && (arrayList = this.list) == null) {
-            arrayList = null;
+        if ((bundle == null || (charSequenceArrayList = bundle.getCharSequenceArrayList("current_structure_list")) == null) && (charSequenceArrayList = this.list) == null) {
+            charSequenceArrayList = null;
         }
-        this.structureModel = new ReorderStructureModel(arrayList);
+        this.structureModel = new ReorderStructureModel(charSequenceArrayList);
         this.structureAdapter = new SecStructureAdapter(this.layoutUtil, this.controlsUtil, this.auiFacade, ((UserTrackerImpl) this.userTracker).getUserId(), null, 16, null);
         RecyclerView recyclerView = (RecyclerView) requireViewById(R.id.listAll);
         SecStructureAdapter secStructureAdapter = this.structureAdapter;

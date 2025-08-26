@@ -13,7 +13,6 @@ import com.android.systemui.util.service.Observer;
 import com.android.systemui.util.time.SystemClock;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PersistentConnectionManager<T> implements Dumpable {
     private static final String TAG = "PersistentConnManager";
@@ -40,7 +39,7 @@ public class PersistentConnectionManager<T> implements Dumpable {
     private final Observer.Callback mObserverCallback = new Observer.Callback() { // from class: com.android.systemui.util.service.PersistentConnectionManager$$ExternalSyntheticLambda0
         @Override // com.android.systemui.util.service.Observer.Callback
         public final void onSourceChanged() {
-            PersistentConnectionManager.this.lambda$new$0();
+            this.f$0.lambda$new$0();
         }
     };
     private final ObservableServiceConnection.Callback<T> mConnectionCallback = (ObservableServiceConnection.Callback<T>) new ObservableServiceConnection.Callback<Object>() { // from class: com.android.systemui.util.service.PersistentConnectionManager.2
@@ -60,13 +59,13 @@ public class PersistentConnectionManager<T> implements Dumpable {
                 Log.e(PersistentConnectionManager.TAG, "onDisconnected called with invalid connection start time: " + this.mStartTime);
                 return;
             }
-            float currentTimeMillis = PersistentConnectionManager.this.mSystemClock.currentTimeMillis() - this.mStartTime;
+            float fCurrentTimeMillis = PersistentConnectionManager.this.mSystemClock.currentTimeMillis() - this.mStartTime;
             this.mStartTime = -1L;
-            if (currentTimeMillis <= PersistentConnectionManager.this.mMinConnectionDuration) {
+            if (fCurrentTimeMillis <= PersistentConnectionManager.this.mMinConnectionDuration) {
                 PersistentConnectionManager.this.scheduleConnectionAttempt();
                 return;
             }
-            Log.i(PersistentConnectionManager.TAG, "immediately reconnecting since service was connected for " + currentTimeMillis + "ms which is longer than the min duration of " + PersistentConnectionManager.this.mMinConnectionDuration + "ms");
+            Log.i(PersistentConnectionManager.TAG, "immediately reconnecting since service was connected for " + fCurrentTimeMillis + "ms which is longer than the min duration of " + PersistentConnectionManager.this.mMinConnectionDuration + "ms");
             PersistentConnectionManager.this.initiateConnectionAttempt("ConnectionReasonMinDurationMet");
         }
     };
@@ -77,9 +76,9 @@ public class PersistentConnectionManager<T> implements Dumpable {
         this.mConnection = observableServiceConnection;
         this.mObserver = observer;
         this.mDumpManager = dumpManager;
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("PersistentConnManager#", str);
-        this.mDumpsysName = m;
-        this.mConnectionReasonLogger = new TraceStateLogger(m);
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("PersistentConnManager#", str);
+        this.mDumpsysName = strM;
+        this.mConnectionReasonLogger = new TraceStateLogger(strM);
         this.mMaxReconnectAttempts = i;
         this.mBaseReconnectDelayMs = i2;
         this.mMinConnectionDuration = i3;
@@ -109,9 +108,9 @@ public class PersistentConnectionManager<T> implements Dumpable {
             Log.d(TAG, "exceeded max connection attempts.");
             return;
         }
-        long scalb = (long) Math.scalb(this.mBaseReconnectDelayMs, i);
-        Log.d(TAG, "scheduling connection attempt in " + scalb + "milliseconds");
-        this.mCurrentReconnectCancelable = this.mBgExecutor.executeDelayed(this.mConnectRunnable, scalb);
+        long jScalb = (long) Math.scalb(this.mBaseReconnectDelayMs, i);
+        Log.d(TAG, "scheduling connection attempt in " + jScalb + "milliseconds");
+        this.mCurrentReconnectCancelable = this.mBgExecutor.executeDelayed(this.mConnectRunnable, jScalb);
         this.mReconnectAttempts = this.mReconnectAttempts + 1;
     }
 

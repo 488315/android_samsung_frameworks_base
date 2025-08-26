@@ -2,7 +2,6 @@ package com.android.systemui.pluginlock.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class IndicationData {
 
@@ -12,7 +11,6 @@ public class IndicationData {
     @SerializedName("lock_icon")
     private LockIconData mLockIconData;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HelpTextData {
 
         @SerializedName("visibility")
@@ -79,12 +77,11 @@ public class IndicationData {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public HelpTextData m2657clone() throws CloneNotSupportedException {
+        public HelpTextData m2675clone() throws CloneNotSupportedException {
             return (HelpTextData) super.clone();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LockIconData {
 
         @SerializedName("visibility")
@@ -115,7 +112,7 @@ public class IndicationData {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public LockIconData m2658clone() throws CloneNotSupportedException {
+        public LockIconData m2676clone() throws CloneNotSupportedException {
             return (LockIconData) super.clone();
         }
     }

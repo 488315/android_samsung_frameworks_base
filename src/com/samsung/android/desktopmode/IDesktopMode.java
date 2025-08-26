@@ -150,9 +150,9 @@ public interface IDesktopMode extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDesktopMode.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDesktopMode)) {
-                return (IDesktopMode) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDesktopMode.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDesktopMode)) {
+                return (IDesktopMode) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -208,14 +208,14 @@ public interface IDesktopMode extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean isDesktopDockConnected = isDesktopDockConnected();
+                    boolean zIsDesktopDockConnected = isDesktopDockConnected();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDesktopDockConnected);
+                    parcel2.writeBoolean(zIsDesktopDockConnected);
                     return true;
                 case 2:
-                    boolean isDesktopMode = isDesktopMode();
+                    boolean zIsDesktopMode = isDesktopMode();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDesktopMode);
+                    parcel2.writeBoolean(zIsDesktopMode);
                     return true;
                 case 3:
                     SemDesktopModeState desktopModeState = getDesktopModeState();
@@ -223,49 +223,49 @@ public interface IDesktopMode extends IInterface {
                     parcel2.writeTypedObject(desktopModeState, 1);
                     return true;
                 case 4:
-                    IDesktopModeListener asInterface = IDesktopModeListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
+                    IDesktopModeListener iDesktopModeListenerAsInterface = IDesktopModeListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean registerDesktopModeListener = registerDesktopModeListener(asInterface, readString);
+                    boolean zRegisterDesktopModeListener = registerDesktopModeListener(iDesktopModeListenerAsInterface, string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerDesktopModeListener);
+                    parcel2.writeBoolean(zRegisterDesktopModeListener);
                     return true;
                 case 5:
-                    IDesktopModeBlocker asInterface2 = IDesktopModeBlocker.Stub.asInterface(parcel.readStrongBinder());
-                    String readString2 = parcel.readString();
+                    IDesktopModeBlocker iDesktopModeBlockerAsInterface = IDesktopModeBlocker.Stub.asInterface(parcel.readStrongBinder());
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean registerBlocker = registerBlocker(asInterface2, readString2);
+                    boolean zRegisterBlocker = registerBlocker(iDesktopModeBlockerAsInterface, string2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerBlocker);
+                    parcel2.writeBoolean(zRegisterBlocker);
                     return true;
                 case 6:
-                    IDesktopModeListener asInterface3 = IDesktopModeListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDesktopModeListener iDesktopModeListenerAsInterface2 = IDesktopModeListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterDesktopModeListener = unregisterDesktopModeListener(asInterface3);
+                    boolean zUnregisterDesktopModeListener = unregisterDesktopModeListener(iDesktopModeListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterDesktopModeListener);
+                    parcel2.writeBoolean(zUnregisterDesktopModeListener);
                     return true;
                 case 7:
-                    IDesktopModeBlocker asInterface4 = IDesktopModeBlocker.Stub.asInterface(parcel.readStrongBinder());
+                    IDesktopModeBlocker iDesktopModeBlockerAsInterface2 = IDesktopModeBlocker.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterBlocker = unregisterBlocker(asInterface4);
+                    boolean zUnregisterBlocker = unregisterBlocker(iDesktopModeBlockerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterBlocker);
+                    parcel2.writeBoolean(zUnregisterBlocker);
                     return true;
                 case 8:
-                    boolean isDeviceConnected = isDeviceConnected();
+                    boolean zIsDeviceConnected = isDeviceConnected();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeviceConnected);
+                    parcel2.writeBoolean(zIsDeviceConnected);
                     return true;
                 case 9:
-                    boolean isAllowed = isAllowed();
+                    boolean zIsAllowed = isAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAllowed);
+                    parcel2.writeBoolean(zIsAllowed);
                     return true;
                 case 10:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    scheduleUpdateDesktopMode(readBoolean);
+                    scheduleUpdateDesktopMode(z);
                     parcel2.writeNoException();
                     return true;
                 case 11:
@@ -274,23 +274,23 @@ public interface IDesktopMode extends IInterface {
                     parcel2.writeTypedObject(desktopModeKillPolicy, 1);
                     return true;
                 case 12:
-                    IDesktopModeLauncher asInterface5 = IDesktopModeLauncher.Stub.asInterface(parcel.readStrongBinder());
+                    IDesktopModeLauncher iDesktopModeLauncherAsInterface = IDesktopModeLauncher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerDesktopLauncher(asInterface5);
+                    registerDesktopLauncher(iDesktopModeLauncherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 13:
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle sendMessage = sendMessage(bundle);
+                    Bundle bundleSendMessage = sendMessage(bundle);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(sendMessage, 1);
+                    parcel2.writeTypedObject(bundleSendMessage, 1);
                     return true;
                 case 14:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    String readString3 = parcel.readString();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onSecuredAppLaunched(readStrongBinder, readString3);
+                    onSecuredAppLaunched(strongBinder, string3);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -316,219 +316,219 @@ public interface IDesktopMode extends IInterface {
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public boolean isDesktopDockConnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public boolean isDesktopMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public SemDesktopModeState getDesktopModeState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemDesktopModeState) obtain2.readTypedObject(SemDesktopModeState.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemDesktopModeState) parcelObtain2.readTypedObject(SemDesktopModeState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public boolean registerDesktopModeListener(IDesktopModeListener iDesktopModeListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDesktopModeListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDesktopModeListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public boolean registerBlocker(IDesktopModeBlocker iDesktopModeBlocker, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDesktopModeBlocker);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDesktopModeBlocker);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public boolean unregisterDesktopModeListener(IDesktopModeListener iDesktopModeListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDesktopModeListener);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDesktopModeListener);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public boolean unregisterBlocker(IDesktopModeBlocker iDesktopModeBlocker) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDesktopModeBlocker);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDesktopModeBlocker);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public boolean isDeviceConnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public boolean isAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public void scheduleUpdateDesktopMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public Bundle getDesktopModeKillPolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public void registerDesktopLauncher(IDesktopModeLauncher iDesktopModeLauncher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDesktopModeLauncher);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDesktopModeLauncher);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public Bundle sendMessage(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopMode
             public void onSecuredAppLaunched(IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDesktopMode.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

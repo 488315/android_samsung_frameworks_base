@@ -24,7 +24,6 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.concurrent.Callable;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PrePackagedCopyOpenHelper implements SupportSQLiteOpenHelper, DelegatingOpenHelper {
     public final Context context;
@@ -51,27 +50,27 @@ public final class PrePackagedCopyOpenHelper implements SupportSQLiteOpenHelper,
         this.verified = false;
     }
 
-    public final void copyDatabaseFile(File file, boolean z) {
-        ReadableByteChannel newChannel;
+    public final void copyDatabaseFile(File file, boolean z) throws IOException {
+        ReadableByteChannel readableByteChannelNewChannel;
         if (this.copyFromAssetPath != null) {
-            newChannel = Channels.newChannel(this.context.getAssets().open(this.copyFromAssetPath));
+            readableByteChannelNewChannel = Channels.newChannel(this.context.getAssets().open(this.copyFromAssetPath));
         } else if (this.copyFromFile != null) {
-            newChannel = new FileInputStream(this.copyFromFile).getChannel();
+            readableByteChannelNewChannel = new FileInputStream(this.copyFromFile).getChannel();
         } else {
             Callable callable = this.copyFromInputStream;
             if (callable == null) {
                 throw new IllegalStateException("copyFromAssetPath, copyFromFile and copyFromInputStream are all null!");
             }
             try {
-                newChannel = Channels.newChannel((InputStream) callable.call());
+                readableByteChannelNewChannel = Channels.newChannel((InputStream) callable.call());
             } catch (Exception e) {
                 throw new IOException("inputStreamCallable exception on call", e);
             }
         }
-        ReadableByteChannel readableByteChannel = newChannel;
-        File createTempFile = File.createTempFile("room-copy-helper", LSOUtils.TEMP_DIR, this.context.getCacheDir());
-        createTempFile.deleteOnExit();
-        FileChannel channel = new FileOutputStream(createTempFile).getChannel();
+        ReadableByteChannel readableByteChannel = readableByteChannelNewChannel;
+        File fileCreateTempFile = File.createTempFile("room-copy-helper", LSOUtils.TEMP_DIR, this.context.getCacheDir());
+        fileCreateTempFile.deleteOnExit();
+        FileChannel channel = new FileOutputStream(fileCreateTempFile).getChannel();
         channel.getClass();
         try {
             channel.transferFrom(readableByteChannel, 0L, Long.MAX_VALUE);
@@ -89,18 +88,18 @@ public final class PrePackagedCopyOpenHelper implements SupportSQLiteOpenHelper,
             }
             if (databaseConfiguration.prepackagedDatabaseCallback != null) {
                 try {
-                    final int readVersion = DBUtil.readVersion(createTempFile);
+                    final int version = DBUtil.readVersion(fileCreateTempFile);
                     FrameworkSQLiteOpenHelperFactory frameworkSQLiteOpenHelperFactory = new FrameworkSQLiteOpenHelperFactory();
                     SupportSQLiteOpenHelper.Configuration.Companion companion = SupportSQLiteOpenHelper.Configuration.Companion;
                     Context context = this.context;
                     companion.getClass();
                     SupportSQLiteOpenHelper.Configuration.Builder builder = new SupportSQLiteOpenHelper.Configuration.Builder(context);
-                    builder.name = createTempFile.getAbsolutePath();
-                    final int i = readVersion >= 1 ? readVersion : 1;
+                    builder.name = fileCreateTempFile.getAbsolutePath();
+                    final int i = version >= 1 ? version : 1;
                     SupportSQLiteOpenHelper.Callback callback = new SupportSQLiteOpenHelper.Callback(i) { // from class: androidx.room.support.PrePackagedCopyOpenHelper$createFrameworkOpenHelper$configuration$1
                         @Override // androidx.sqlite.db.SupportSQLiteOpenHelper.Callback
                         public final void onOpen(FrameworkSQLiteDatabase frameworkSQLiteDatabase) {
-                            int i2 = readVersion;
+                            int i2 = version;
                             if (i2 < 1) {
                                 frameworkSQLiteDatabase.delegate.setVersion(i2);
                             }
@@ -115,12 +114,12 @@ public final class PrePackagedCopyOpenHelper implements SupportSQLiteOpenHelper,
                         }
                     };
                     builder.callback = callback;
-                    SupportSQLiteOpenHelper create = frameworkSQLiteOpenHelperFactory.create(new SupportSQLiteOpenHelper.Configuration(builder.context, builder.name, callback, false, false));
+                    SupportSQLiteOpenHelper supportSQLiteOpenHelperCreate = frameworkSQLiteOpenHelperFactory.create(new SupportSQLiteOpenHelper.Configuration(builder.context, builder.name, callback, false, false));
                     try {
                         if (z) {
-                            ((FrameworkSQLiteOpenHelper) create).getWritableDatabase();
+                            ((FrameworkSQLiteOpenHelper) supportSQLiteOpenHelperCreate).getWritableDatabase();
                         } else {
-                            ((FrameworkSQLiteOpenHelper.OpenHelper) ((FrameworkSQLiteOpenHelper) create).lazyDelegate.getValue()).getSupportDatabase(false);
+                            ((FrameworkSQLiteOpenHelper.OpenHelper) ((FrameworkSQLiteOpenHelper) supportSQLiteOpenHelperCreate).lazyDelegate.getValue()).getSupportDatabase(false);
                         }
                         DatabaseConfiguration databaseConfiguration3 = this.databaseConfiguration;
                         if (databaseConfiguration3 != null) {
@@ -128,17 +127,17 @@ public final class PrePackagedCopyOpenHelper implements SupportSQLiteOpenHelper,
                         }
                         databaseConfiguration2.prepackagedDatabaseCallback.getClass();
                         Unit unit = Unit.INSTANCE;
-                        ((FrameworkSQLiteOpenHelper) create).close();
+                        ((FrameworkSQLiteOpenHelper) supportSQLiteOpenHelperCreate).close();
                     } finally {
                     }
                 } catch (IOException e2) {
                     throw new RuntimeException("Malformed database file, unable to read version.", e2);
                 }
             }
-            if (createTempFile.renameTo(file)) {
+            if (fileCreateTempFile.renameTo(file)) {
                 return;
             }
-            throw new IOException("Failed to move intermediate file (" + createTempFile.getAbsolutePath() + ") to destination (" + file.getAbsolutePath() + ").");
+            throw new IOException("Failed to move intermediate file (" + fileCreateTempFile.getAbsolutePath() + ") to destination (" + file.getAbsolutePath() + ").");
         } catch (Throwable th) {
             readableByteChannel.close();
             channel.close();
@@ -174,15 +173,15 @@ public final class PrePackagedCopyOpenHelper implements SupportSQLiteOpenHelper,
                 processLock.lock(processLock.processLock);
                 if (databasePath.exists()) {
                     try {
-                        int readVersion = DBUtil.readVersion(databasePath);
+                        int version = DBUtil.readVersion(databasePath);
                         int i = this.databaseVersion;
-                        if (readVersion != i) {
+                        if (version != i) {
                             DatabaseConfiguration databaseConfiguration3 = this.databaseConfiguration;
                             if (databaseConfiguration3 != null) {
                                 databaseConfiguration2 = databaseConfiguration3;
                             }
                             databaseConfiguration2.getClass();
-                            if (!MigrationUtil.isMigrationRequired(databaseConfiguration2, readVersion, i)) {
+                            if (!MigrationUtil.isMigrationRequired(databaseConfiguration2, version, i)) {
                                 if (this.context.deleteDatabase(databaseName)) {
                                     try {
                                         copyDatabaseFile(databasePath, true);
@@ -198,18 +197,17 @@ public final class PrePackagedCopyOpenHelper implements SupportSQLiteOpenHelper,
                     } catch (IOException e2) {
                         Log.w("ROOM", "Unable to read database version.", e2);
                     }
-                    this.verified = true;
                 } else {
                     try {
                         copyDatabaseFile(databasePath, true);
-                        this.verified = true;
                     } catch (IOException e3) {
                         throw new RuntimeException("Unable to copy database file.", e3);
                     }
                 }
+                this.verified = true;
             } finally {
+                processLock.unlock();
             }
-            processLock.unlock();
         }
         return this.delegate.getWritableDatabase();
     }

@@ -24,7 +24,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class SeslInteractionAwareModifierNode$collectInteractionEvents$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ InteractionSource $interactionSource;
@@ -61,7 +60,7 @@ final class SeslInteractionAwareModifierNode$collectInteractionEvents$1 extends 
                 public final Object emit(Object obj2, Continuation continuation) {
                     Interaction interaction = (Interaction) obj2;
                     boolean z = interaction instanceof SeslTouchInteraction$Press;
-                    SeslInteractionAwareModifierNode seslInteractionAwareModifierNode2 = SeslInteractionAwareModifierNode.this;
+                    SeslInteractionAwareModifierNode seslInteractionAwareModifierNode2 = seslInteractionAwareModifierNode;
                     if (z) {
                         ((ArrayList) seslInteractionAwareModifierNode2.touchInteraction).add(interaction);
                     } else if (interaction instanceof PressInteraction$Press) {
@@ -72,6 +71,8 @@ final class SeslInteractionAwareModifierNode$collectInteractionEvents$1 extends 
                         ((ArrayList) seslInteractionAwareModifierNode2.hoverInteraction).add(interaction);
                     } else if (interaction instanceof FocusInteraction$Focus) {
                         ((ArrayList) seslInteractionAwareModifierNode2.focusInteraction).add(interaction);
+                    } else if (interaction instanceof SeslTouchInteraction$Move) {
+                        ((ArrayList) seslInteractionAwareModifierNode2.touchInteraction).remove(((SeslTouchInteraction$Move) interaction).press);
                     } else if (interaction instanceof SeslTouchInteraction$Release) {
                         ((ArrayList) seslInteractionAwareModifierNode2.touchInteraction).remove(((SeslTouchInteraction$Release) interaction).press);
                     } else if (interaction instanceof PressInteraction$Cancel) {
@@ -90,7 +91,7 @@ final class SeslInteractionAwareModifierNode$collectInteractionEvents$1 extends 
                     SeslInteractionState seslInteractionState = new SeslInteractionState((!((ArrayList) seslInteractionAwareModifierNode2.pressInteraction).isEmpty()) | (!((ArrayList) seslInteractionAwareModifierNode2.touchInteraction).isEmpty()), !((ArrayList) seslInteractionAwareModifierNode2.focusInteraction).isEmpty(), !((ArrayList) seslInteractionAwareModifierNode2.hoverInteraction).isEmpty(), !((ArrayList) seslInteractionAwareModifierNode2.dragInteraction).isEmpty());
                     if (!Intrinsics.areEqual(seslInteractionAwareModifierNode2.previous, seslInteractionState)) {
                         seslInteractionAwareModifierNode2.previous = seslInteractionState;
-                        seslInteractionAwareModifierNode2.onState.mo779invoke(seslInteractionState);
+                        seslInteractionAwareModifierNode2.onState.mo781invoke(seslInteractionState);
                     }
                     return Unit.INSTANCE;
                 }

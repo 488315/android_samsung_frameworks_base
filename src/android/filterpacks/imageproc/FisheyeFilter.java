@@ -57,18 +57,18 @@ public class FisheyeFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
         if (this.mProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
         }
         if (format.getWidth() != this.mWidth || format.getHeight() != this.mHeight) {
             updateFrameSize(format.getWidth(), format.getHeight());
         }
-        this.mProgram.process(pullInput, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        this.mProgram.process(framePullInput, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 
     @Override // android.filterfw.core.Filter
@@ -98,12 +98,12 @@ public class FisheyeFilter extends Filter {
         float f = (this.mScale * 2.0f) + 0.75f;
         float f2 = fArr[0];
         float f3 = fArr[1];
-        float sqrt = (float) Math.sqrt(((f2 * f2) + (f3 * f3)) * 0.25f);
-        float f4 = 1.15f * sqrt;
-        float atan = sqrt / (1.5707964f - ((float) Math.atan((f / sqrt) * ((float) Math.sqrt(r4 - r2)))));
+        float fSqrt = (float) Math.sqrt(((f2 * f2) + (f3 * f3)) * 0.25f);
+        float f4 = 1.15f * fSqrt;
+        float fAtan = fSqrt / (1.5707964f - ((float) Math.atan((f / fSqrt) * ((float) Math.sqrt(r4 - r2)))));
         this.mProgram.setHostValue("scale", fArr);
         this.mProgram.setHostValue("radius2", Float.valueOf(f4 * f4));
-        this.mProgram.setHostValue("factor", Float.valueOf(atan));
+        this.mProgram.setHostValue("factor", Float.valueOf(fAtan));
         this.mProgram.setHostValue("alpha", Float.valueOf(f));
     }
 }

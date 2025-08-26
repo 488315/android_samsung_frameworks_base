@@ -117,9 +117,9 @@ public interface ISemExecuteManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemExecuteManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemExecuteManager)) {
-                return (ISemExecuteManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemExecuteManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemExecuteManager)) {
+                return (ISemExecuteManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -170,81 +170,81 @@ public interface ISemExecuteManager extends IInterface {
                     parcel2.writeTypedList(executableInfos, 1);
                     return true;
                 case 2:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    SemExecutableInfo executableInfo = getExecutableInfo(readString);
+                    SemExecutableInfo executableInfo = getExecutableInfo(string);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(executableInfo, 1);
                     return true;
                 case 3:
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParcelFileDescriptor shortcutIconFd = getShortcutIconFd(readString2, readString3, readString4, readString5, readInt);
+                    ParcelFileDescriptor shortcutIconFd = getShortcutIconFd(string2, string3, string4, string5, i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(shortcutIconFd, 1);
                     return true;
                 case 4:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasShortcutHostPermission = hasShortcutHostPermission(readString6);
+                    boolean zHasShortcutHostPermission = hasShortcutHostPermission(string6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasShortcutHostPermission);
+                    parcel2.writeBoolean(zHasShortcutHostPermission);
                     return true;
                 case 5:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    long readLong = parcel.readLong();
-                    String readString9 = parcel.readString();
-                    ArrayList readArrayList = parcel.readArrayList(getClass().getClassLoader());
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    long j = parcel.readLong();
+                    String string9 = parcel.readString();
+                    ArrayList arrayList = parcel.readArrayList(getClass().getClassLoader());
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice shortcuts = getShortcuts(readString7, readString8, readLong, readString9, readArrayList, componentName, readInt2, userHandle);
+                    ParceledListSlice shortcuts = getShortcuts(string7, string8, j, string9, arrayList, componentName, i4, userHandle);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(shortcuts, 1);
                     return true;
                 case 6:
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
                     Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean startShortcut = startShortcut(readString10, readString11, readString12, readString13, rect, bundle, readInt3);
+                    boolean zStartShortcut = startShortcut(string10, string11, string12, string13, rect, bundle, i5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(startShortcut);
+                    parcel2.writeBoolean(zStartShortcut);
                     return true;
                 case 7:
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
+                    int i6 = parcel.readInt();
                     UserHandle userHandle2 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ApplicationInfo applicationInfo = getApplicationInfo(readString14, readString15, readInt4, userHandle2);
+                    ApplicationInfo applicationInfo = getApplicationInfo(string14, string15, i6, userHandle2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(applicationInfo, 1);
                     return true;
                 case 8:
-                    String readString16 = parcel.readString();
+                    String string16 = parcel.readString();
                     PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     UserHandle userHandle3 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    registerChangedCallback(readString16, pendingIntent, userHandle3);
+                    registerChangedCallback(string16, pendingIntent, userHandle3);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String readString17 = parcel.readString();
+                    String string17 = parcel.readString();
                     PendingIntent pendingIntent2 = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     UserHandle userHandle4 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    unRegisterChangedCallback(readString17, pendingIntent2, userHandle4);
+                    unRegisterChangedCallback(string17, pendingIntent2, userHandle4);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -270,166 +270,166 @@ public interface ISemExecuteManager extends IInterface {
 
             @Override // com.samsung.android.app.ISemExecuteManager
             public List<SemExecutableInfo> getExecutableInfos() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SemExecutableInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SemExecutableInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
             public SemExecutableInfo getExecutableInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemExecutableInfo) obtain2.readTypedObject(SemExecutableInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemExecutableInfo) parcelObtain2.readTypedObject(SemExecutableInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
             public ParcelFileDescriptor getShortcutIconFd(String str, String str2, String str3, String str4, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
             public boolean hasShortcutHostPermission(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
             public ParceledListSlice getShortcuts(String str, String str2, long j, String str3, List list, ComponentName componentName, int i, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeLong(j);
-                    obtain.writeString(str3);
-                    obtain.writeList(list);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeList(list);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
             public boolean startShortcut(String str, String str2, String str3, String str4, Rect rect, Bundle bundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
             public ApplicationInfo getApplicationInfo(String str, String str2, int i, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ApplicationInfo) obtain2.readTypedObject(ApplicationInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ApplicationInfo) parcelObtain2.readTypedObject(ApplicationInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
             public void registerChangedCallback(String str, PendingIntent pendingIntent, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.ISemExecuteManager
             public void unRegisterChangedCallback(String str, PendingIntent pendingIntent, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemExecuteManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -8,7 +8,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class BatteryRepository$batteryState$2 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -34,6 +33,6 @@ final class BatteryRepository$batteryState$2 extends SuspendLambda implements Fu
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
         }
         ResultKt.throwOnFailure(obj);
-        return ((Function1) this.L$1).mo779invoke((BatteryCallbackState) this.L$0);
+        return ((Function1) this.L$1).mo781invoke((BatteryCallbackState) this.L$0);
     }
 }

@@ -35,9 +35,9 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
         private HashMap<String, ImageViewer.ImageViewerState> mStateMap;
 
         {
-            HashMap<String, ImageViewer.ImageViewerState> hashMap = new HashMap<>();
-            this.mStateMap = hashMap;
-            hashMap.put(AllShareEvent.EVENT_RENDERER_STATE_BUFFERING, ImageViewer.ImageViewerState.BUFFERING);
+            HashMap<String, ImageViewer.ImageViewerState> map = new HashMap<>();
+            this.mStateMap = map;
+            map.put(AllShareEvent.EVENT_RENDERER_STATE_BUFFERING, ImageViewer.ImageViewerState.BUFFERING);
             this.mStateMap.put(AllShareEvent.EVENT_RENDERER_STATE_NOMEDIA, ImageViewer.ImageViewerState.STOPPED);
             this.mStateMap.put(AllShareEvent.EVENT_RENDERER_STATE_PAUSED, ImageViewer.ImageViewerState.SHOWING);
             this.mStateMap.put(AllShareEvent.EVENT_RENDERER_STATE_STOPPED, ImageViewer.ImageViewerState.STOPPED);
@@ -51,7 +51,7 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
                 ERROR error = ERROR.FAIL;
                 Bundle bundle = cVMessage.getBundle();
                 ImageViewer.ImageViewerState imageViewerState = this.mStateMap.get(cVMessage.getActionID());
-                ERROR stringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
+                ERROR errorStringToEnum = ERROR.stringToEnum(bundle.getString("BUNDLE_ENUM_ERROR"));
                 if (imageViewerState == null) {
                     imageViewerState = ImageViewer.ImageViewerState.UNKNOWN;
                 }
@@ -89,7 +89,7 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
                     DLog.d_api(ImageViewerImpl.TAG_CLASS, "do not notify CONTENT_CHANGED event, currentTrackUri is null");
                     return;
                 }
-                notifyEvent(imageViewerState, stringToEnum);
+                notifyEvent(imageViewerState, errorStringToEnum);
             } catch (Error e) {
                 DLog.w_api(ImageViewerImpl.TAG_CLASS, "mEventHandler.handleEventMessage Error", e);
             } catch (Exception unused) {
@@ -137,27 +137,27 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
                 DLog.w_api(ImageViewerImpl.TAG_CLASS, "handleResponseMessage : actionID == null || resBundle == null");
                 return;
             }
-            ERROR error = ERROR.FAIL;
+            ERROR errorStringToEnum = ERROR.FAIL;
             String string = bundle.getString("BUNDLE_ENUM_ERROR");
             if (string != null) {
-                error = ERROR.stringToEnum(string);
+                errorStringToEnum = ERROR.stringToEnum(string);
             }
-            ContentInfo build = new ContentInfo.Builder().setStartingPosition(bundle.getLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION)).build();
-            Item fromBundle = ItemCreator.fromBundle((Bundle) bundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM));
+            ContentInfo contentInfoBuild = new ContentInfo.Builder().setStartingPosition(bundle.getLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION)).build();
+            Item itemFromBundle = ItemCreator.fromBundle((Bundle) bundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM));
             if (actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_LOCAL_CONTENT) || actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_LOCAL_CONTENT_URI) || actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_URI) || actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW)) {
-                if (error.equals(ERROR.SUCCESS)) {
+                if (errorStringToEnum.equals(ERROR.SUCCESS)) {
                     ImageViewerImpl.this.mContentChangedNotified = false;
-                } else if (fromBundle != 0) {
+                } else if (itemFromBundle != 0) {
                     if (actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_URI) || actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW)) {
-                        removeUri(fromBundle.getURI().toString());
+                        removeUri(itemFromBundle.getURI().toString());
                     } else if (actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_LOCAL_CONTENT)) {
                         Bundle bundle2 = new Bundle();
-                        if (fromBundle instanceof IBundleHolder) {
-                            bundle2 = ((IBundleHolder) fromBundle).getBundle();
+                        if (itemFromBundle instanceof IBundleHolder) {
+                            bundle2 = ((IBundleHolder) itemFromBundle).getBundle();
                         }
                         removeUri(bundle2.getString(AllShareKey.BUNDLE_STRING_FILEPATH));
                     } else if (actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_LOCAL_CONTENT_URI)) {
-                        removeUri(ImageViewerImpl.this.parseUriFilePath(fromBundle.getURI()));
+                        removeUri(ImageViewerImpl.this.parseUriFilePath(itemFromBundle.getURI()));
                     }
                 }
             }
@@ -166,18 +166,18 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
                 return;
             }
             if (actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW) || actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_LOCAL_CONTENT) || actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_LOCAL_CONTENT_URI) || actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_URI)) {
-                if (fromBundle == 0) {
-                    ImageViewerImpl.this.mResponseListener.onShowResponseReceived(fromBundle, build, ERROR.ITEM_NOT_EXIST);
+                if (itemFromBundle == 0) {
+                    ImageViewerImpl.this.mResponseListener.onShowResponseReceived(itemFromBundle, contentInfoBuild, ERROR.ITEM_NOT_EXIST);
                     return;
                 } else {
-                    ImageViewerImpl.this.mResponseListener.onShowResponseReceived(fromBundle, build, error);
+                    ImageViewerImpl.this.mResponseListener.onShowResponseReceived(itemFromBundle, contentInfoBuild, errorStringToEnum);
                     return;
                 }
             }
             if (actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_STOP)) {
-                ImageViewerImpl.this.mResponseListener.onStopResponseReceived(error);
+                ImageViewerImpl.this.mResponseListener.onStopResponseReceived(errorStringToEnum);
             } else if (actionID.equals(AllShareAction.ACTION_IMAGE_VIEWER_REQUEST_GET_VIEWER_STATE)) {
-                ImageViewerImpl.this.mResponseListener.onGetStateResponseReceived(ImageViewer.ImageViewerState.stringToEnum(bundle.getString(AllShareKey.BUNDLE_STRING_IMAGE_VIEWEW_STATE)), error);
+                ImageViewerImpl.this.mResponseListener.onGetStateResponseReceived(ImageViewer.ImageViewerState.stringToEnum(bundle.getString(AllShareKey.BUNDLE_STRING_IMAGE_VIEWEW_STATE)), errorStringToEnum);
             }
         }
 
@@ -265,7 +265,7 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.samsung.android.allshare.media.ImageViewer
     public void show(Item item, ContentInfo contentInfo) {
-        String str;
+        String string;
         DLog.i_api(TAG_CLASS, "show() is called");
         if (!ServiceConnectionChecker.isAllShareServiceConnected(this.mAllShareConnector)) {
             DLog.w_api(TAG_CLASS, "show : SERVICE_NOT_CONNECTED");
@@ -283,10 +283,10 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
         }
         this.mContentChangedNotified = false;
         boolean z = item instanceof IBundleHolder;
-        if (!z || (str = ((IBundleHolder) item).getBundle().getString(AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY)) == null) {
-            str = "LOCAL_CONTENT";
+        if (!z || (string = ((IBundleHolder) item).getBundle().getString(AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY)) == null) {
+            string = "LOCAL_CONTENT";
         }
-        if (str.equals("WEB_CONTENT")) {
+        if (string.equals("WEB_CONTENT")) {
             ArrayList<String> arrayList = new ArrayList<>();
             Uri thumbnail = item.getThumbnail();
             if (thumbnail != null) {
@@ -300,7 +300,7 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
             showWebContent(item, contentInfo);
             return;
         }
-        if (str.equals("LOCAL_CONTENT")) {
+        if (string.equals("LOCAL_CONTENT")) {
             Uri uri2 = item.getURI();
             if (uri2 == null) {
                 DLog.w_api(TAG_CLASS, "show : uri == null");
@@ -314,9 +314,9 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
             String scheme = uri2.getScheme();
             DLog.d_api(TAG_CLASS, "show : scheme = " + scheme);
             if (scheme.contains("content")) {
-                String parseUriFilePath = parseUriFilePath(item.getURI());
+                String uriFilePath = parseUriFilePath(item.getURI());
                 ArrayList<String> arrayList2 = new ArrayList<>();
-                arrayList2.add(parseUriFilePath);
+                arrayList2.add(uriFilePath);
                 this.mPlayingContentUris.add(arrayList2);
                 showLocalContentContentScheme(item, contentInfo);
                 return;
@@ -326,8 +326,8 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
                 if (z) {
                     bundle = ((IBundleHolder) item).getBundle();
                 }
-                String string = bundle.getString(AllShareKey.BUNDLE_STRING_FILEPATH);
-                if (!Item.LocalContentBuilder.checkFilePathValid(string)) {
+                String string2 = bundle.getString(AllShareKey.BUNDLE_STRING_FILEPATH);
+                if (!Item.LocalContentBuilder.checkFilePathValid(string2)) {
                     DLog.w_api(TAG_CLASS, "show : filePath is not valid");
                     ImageViewer.IImageViewerResponseListener iImageViewerResponseListener3 = this.mResponseListener;
                     if (iImageViewerResponseListener3 != null) {
@@ -336,7 +336,7 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
                     }
                 }
                 ArrayList<String> arrayList3 = new ArrayList<>();
-                arrayList3.add(string);
+                arrayList3.add(string2);
                 this.mPlayingContentUris.add(arrayList3);
                 showLocalContentFileScheme(item, contentInfo);
                 return;
@@ -355,13 +355,13 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
     public String parseUriFilePath(Uri uri) {
         Context context;
         ContentResolver contentResolver;
-        Cursor query;
-        if (uri == null || (context = ServiceConnector.getContext()) == null || (contentResolver = context.getContentResolver()) == null || (query = contentResolver.query(uri, null, null, null, null)) == null) {
+        Cursor cursorQuery;
+        if (uri == null || (context = ServiceConnector.getContext()) == null || (contentResolver = context.getContentResolver()) == null || (cursorQuery = contentResolver.query(uri, null, null, null, null)) == null) {
             return null;
         }
-        query.moveToFirst();
-        String string = query.getString(1);
-        query.close();
+        cursorQuery.moveToFirst();
+        String string = cursorQuery.getString(1);
+        cursorQuery.close();
         return string;
     }
 
@@ -415,20 +415,20 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
             this.mResponseListener.onShowResponseReceived(item, contentInfo, ERROR.SERVICE_NOT_CONNECTED);
             return;
         }
-        Cursor query = contentResolver.query(uri, null, null, null, null);
-        if (query == null) {
+        Cursor cursorQuery = contentResolver.query(uri, null, null, null, null);
+        if (cursorQuery == null) {
             DLog.w_api(TAG_CLASS, "showLocalContentContentScheme Fail :  INVALID_ARGUMENT (cur == null) ");
             this.mResponseListener.onShowResponseReceived(item, contentInfo, ERROR.INVALID_ARGUMENT);
             return;
         }
-        query.moveToNext();
-        if (query.getColumnIndex("_data") < 0) {
+        cursorQuery.moveToNext();
+        if (cursorQuery.getColumnIndex("_data") < 0) {
             DLog.w_api(TAG_CLASS, "showLocalContentContentScheme Fail :  INVALID_ARGUMENT(idx < 0)");
             this.mResponseListener.onShowResponseReceived(item, contentInfo, ERROR.INVALID_ARGUMENT);
-            query.close();
+            cursorQuery.close();
             return;
         }
-        query.close();
+        cursorQuery.close();
         CVMessage cVMessage = new CVMessage();
         cVMessage.setActionID(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_LOCAL_CONTENT_URI);
         Bundle bundle = new Bundle();
@@ -465,8 +465,8 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
 
     /* JADX WARN: Multi-variable type inference failed */
     private void showLocalContentFileScheme(Item item, ContentInfo contentInfo) {
-        String str;
-        String str2;
+        String string;
+        String string2;
         DLog.v_api(TAG_CLASS, "showLocalContentFileScheme()");
         if (!ServiceConnectionChecker.isAllShareServiceConnected(this.mAllShareConnector)) {
             DLog.w_api(TAG_CLASS, "showLocalContentFileScheme : SERVICE_NOT_CONNECTED");
@@ -475,19 +475,19 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
         }
         boolean z = item instanceof IBundleHolder;
         if (!z) {
-            str = "";
-            str2 = "";
+            string = "";
+            string2 = "";
         } else {
             Bundle bundle = ((IBundleHolder) item).getBundle();
-            str = bundle.getString(AllShareKey.BUNDLE_STRING_FILEPATH);
-            str2 = bundle.getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
+            string = bundle.getString(AllShareKey.BUNDLE_STRING_FILEPATH);
+            string2 = bundle.getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
         }
         CVMessage cVMessage = new CVMessage();
         cVMessage.setActionID(AllShareAction.ACTION_IMAGE_VIEWER_SHOW_LOCAL_CONTENT);
         Bundle bundle2 = new Bundle();
         bundle2.putString("BUNDLE_STRING_ID", getID());
-        bundle2.putString(AllShareKey.BUNDLE_STRING_FILEPATH, str);
-        bundle2.putString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE, str2);
+        bundle2.putString(AllShareKey.BUNDLE_STRING_FILEPATH, string);
+        bundle2.putString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE, string2);
         bundle2.putString(AllShareKey.BUNDLE_STRING_TITLE, item.getTitle());
         if (z) {
             bundle2.putParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM, ((IBundleHolder) item).getBundle());
@@ -495,7 +495,7 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
         bundle2.putLong(AllShareKey.BUNDLE_LONG_CONTENT_INFO_STARTINGPOSITION, contentInfo != null ? contentInfo.getStartingPosition() : 0L);
         cVMessage.setBundle(bundle2);
         this.mAllShareConnector.requestCVMAsync(cVMessage, this.mResponseHandler);
-        DLog.i_api(TAG_CLASS, "showLocalContentFileScheme : [" + str2 + NavigationBarInflaterView.SIZE_MOD_END + item.getTitle() + NavigationBarInflaterView.KEY_CODE_START + str + ") to " + getName() + NavigationBarInflaterView.KEY_CODE_START + getIPAddress() + NavigationBarInflaterView.KEY_CODE_END);
+        DLog.i_api(TAG_CLASS, "showLocalContentFileScheme : [" + string2 + NavigationBarInflaterView.SIZE_MOD_END + item.getTitle() + NavigationBarInflaterView.KEY_CODE_START + string + ") to " + getName() + NavigationBarInflaterView.KEY_CODE_START + getIPAddress() + NavigationBarInflaterView.KEY_CODE_END);
     }
 
     @Override // com.samsung.android.allshare.media.ImageViewer
@@ -532,11 +532,11 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
         CVMessage cVMessage = new CVMessage();
         cVMessage.setActionID(AllShareAction.ACTION_IMAGE_VIEWER_GET_VIEWER_STATE_SYNC);
         cVMessage.setBundle(bundle);
-        CVMessage requestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
-        if (requestCVMSync == null) {
+        CVMessage cVMessageRequestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
+        if (cVMessageRequestCVMSync == null) {
             return ImageViewer.ImageViewerState.UNKNOWN;
         }
-        Bundle bundle3 = requestCVMSync.getBundle();
+        Bundle bundle3 = cVMessageRequestCVMSync.getBundle();
         if (bundle3 == null) {
             return ImageViewer.ImageViewerState.UNKNOWN;
         }
@@ -679,8 +679,8 @@ final class ImageViewerImpl extends ImageViewer implements IBundleHolder, IHandl
         Bundle bundle2 = new Bundle();
         bundle2.putString("BUNDLE_STRING_ID", getID());
         cVMessage.setBundle(bundle2);
-        CVMessage requestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
-        if (requestCVMSync == null || (bundle = requestCVMSync.getBundle()) == null) {
+        CVMessage cVMessageRequestCVMSync = this.mAllShareConnector.requestCVMSync(cVMessage);
+        if (cVMessageRequestCVMSync == null || (bundle = cVMessageRequestCVMSync.getBundle()) == null) {
             return false;
         }
         String string = bundle.getString("BUNDLE_ENUM_ERROR");

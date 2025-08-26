@@ -28,7 +28,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FlashlightControllerImpl implements FlashlightController {
     public final Calendar mCalendar;
@@ -55,9 +54,9 @@ public class FlashlightControllerImpl implements FlashlightController {
                 if (TextUtils.equals(str, (CharSequence) FlashlightControllerImpl.this.mCameraId.get())) {
                     SecFlashlightControllerImpl secFlashlightControllerImpl = FlashlightControllerImpl.this.mSecFlashlightController;
                     if (secFlashlightControllerImpl != null) {
-                        boolean isFlashlightBlinking = secFlashlightControllerImpl.isFlashlightBlinking();
-                        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onTorchModeChanged enabled: ", " isFlashlightBlinking: ", "FlashlightController", z, isFlashlightBlinking);
-                        if (isFlashlightBlinking) {
+                        boolean zIsFlashlightBlinking = secFlashlightControllerImpl.isFlashlightBlinking();
+                        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onTorchModeChanged enabled: ", " isFlashlightBlinking: ", "FlashlightController", z, zIsFlashlightBlinking);
+                        if (zIsFlashlightBlinking) {
                             return;
                         }
                         SecFlashlightControllerImpl secFlashlightControllerImpl2 = FlashlightControllerImpl.this.mSecFlashlightController;
@@ -266,7 +265,7 @@ public class FlashlightControllerImpl implements FlashlightController {
             this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.policy.FlashlightControllerImpl$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FlashlightControllerImpl flashlightControllerImpl = FlashlightControllerImpl.this;
+                    FlashlightControllerImpl flashlightControllerImpl = this.f$0;
                     boolean z2 = z;
                     if (flashlightControllerImpl.mCameraId.get() == null) {
                         return;

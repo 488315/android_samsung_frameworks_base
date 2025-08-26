@@ -46,53 +46,33 @@ public final class BigIntegers {
         return bArr;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x0012, code lost:
-    
-        if (r3.length != 1) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0015  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void asUnsignedByteArray(java.math.BigInteger r3, byte[] r4, int r5, int r6) {
-        /*
-            byte[] r3 = r3.toByteArray()
-            int r0 = r3.length
-            r1 = 0
-            if (r0 != r6) goto Lc
-            java.lang.System.arraycopy(r3, r1, r4, r5, r6)
-            return
-        Lc:
-            r0 = r3[r1]
-            if (r0 != 0) goto L15
-            int r0 = r3.length
-            r2 = 1
-            if (r0 == r2) goto L15
-            goto L16
-        L15:
-            r2 = r1
-        L16:
-            int r0 = r3.length
-            int r0 = r0 - r2
-            if (r0 > r6) goto L23
-            int r6 = r6 - r0
-            int r6 = r6 + r5
-            com.android.internal.org.bouncycastle.util.Arrays.fill(r4, r5, r6, r1)
-            java.lang.System.arraycopy(r3, r2, r4, r6, r0)
-            return
-        L23:
-            java.lang.IllegalArgumentException r3 = new java.lang.IllegalArgumentException
-            java.lang.String r4 = "standard length exceeded for value"
-            r3.<init>(r4)
-            throw r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.util.BigIntegers.asUnsignedByteArray(java.math.BigInteger, byte[], int, int):void");
+    public static void asUnsignedByteArray(BigInteger bigInteger, byte[] bArr, int i, int i2) {
+        int i3;
+        byte[] byteArray = bigInteger.toByteArray();
+        if (byteArray.length == i2) {
+            System.arraycopy(byteArray, 0, bArr, i, i2);
+            return;
+        }
+        if (byteArray[0] == 0) {
+            i3 = byteArray.length == 1 ? 0 : 1;
+        }
+        int length = byteArray.length - i3;
+        if (length > i2) {
+            throw new IllegalArgumentException("standard length exceeded for value");
+        }
+        int i4 = (i2 - length) + i;
+        Arrays.fill(bArr, i, i4, (byte) 0);
+        System.arraycopy(byteArray, i3, bArr, i4, length);
     }
 
     public static BigInteger createRandomInRange(BigInteger bigInteger, BigInteger bigInteger2, SecureRandom secureRandom) {
-        int compareTo = bigInteger.compareTo(bigInteger2);
-        if (compareTo >= 0) {
-            if (compareTo <= 0) {
+        int iCompareTo = bigInteger.compareTo(bigInteger2);
+        if (iCompareTo >= 0) {
+            if (iCompareTo <= 0) {
                 return bigInteger;
             }
             throw new IllegalArgumentException("'min' may not be greater than 'max'");
@@ -101,9 +81,9 @@ public final class BigIntegers {
             return createRandomInRange(ZERO, bigInteger2.subtract(bigInteger), secureRandom).add(bigInteger);
         }
         for (int i = 0; i < 1000; i++) {
-            BigInteger createRandomBigInteger = createRandomBigInteger(bigInteger2.bitLength(), secureRandom);
-            if (createRandomBigInteger.compareTo(bigInteger) >= 0 && createRandomBigInteger.compareTo(bigInteger2) <= 0) {
-                return createRandomBigInteger;
+            BigInteger bigIntegerCreateRandomBigInteger = createRandomBigInteger(bigInteger2.bitLength(), secureRandom);
+            if (bigIntegerCreateRandomBigInteger.compareTo(bigInteger) >= 0 && bigIntegerCreateRandomBigInteger.compareTo(bigInteger2) <= 0) {
+                return bigIntegerCreateRandomBigInteger;
             }
         }
         return createRandomBigInteger(bigInteger2.subtract(bigInteger).bitLength() - 1, secureRandom).add(bigInteger);
@@ -160,15 +140,15 @@ public final class BigIntegers {
         if (bigInteger2.signum() < 0 || bigInteger2.compareTo(bigInteger) >= 0) {
             bigInteger2 = bigInteger2.mod(bigInteger);
         }
-        int bitLength = bigInteger.bitLength();
-        int[] fromBigInteger = Nat.fromBigInteger(bitLength, bigInteger);
-        int[] fromBigInteger2 = Nat.fromBigInteger(bitLength, bigInteger2);
-        int length = fromBigInteger.length;
-        int[] create = Nat.create(length);
-        if (Mod.modOddInverse(fromBigInteger, fromBigInteger2, create) == 0) {
+        int iBitLength = bigInteger.bitLength();
+        int[] iArrFromBigInteger = Nat.fromBigInteger(iBitLength, bigInteger);
+        int[] iArrFromBigInteger2 = Nat.fromBigInteger(iBitLength, bigInteger2);
+        int length = iArrFromBigInteger.length;
+        int[] iArrCreate = Nat.create(length);
+        if (Mod.modOddInverse(iArrFromBigInteger, iArrFromBigInteger2, iArrCreate) == 0) {
             throw new ArithmeticException("BigInteger not invertible.");
         }
-        return Nat.toBigInteger(length, create);
+        return Nat.toBigInteger(length, iArrCreate);
     }
 
     public static BigInteger modOddInverseVar(BigInteger bigInteger, BigInteger bigInteger2) {
@@ -188,15 +168,15 @@ public final class BigIntegers {
         if (bigInteger2.equals(bigInteger3)) {
             return bigInteger3;
         }
-        int bitLength = bigInteger.bitLength();
-        int[] fromBigInteger = Nat.fromBigInteger(bitLength, bigInteger);
-        int[] fromBigInteger2 = Nat.fromBigInteger(bitLength, bigInteger2);
-        int length = fromBigInteger.length;
-        int[] create = Nat.create(length);
-        if (!Mod.modOddInverseVar(fromBigInteger, fromBigInteger2, create)) {
+        int iBitLength = bigInteger.bitLength();
+        int[] iArrFromBigInteger = Nat.fromBigInteger(iBitLength, bigInteger);
+        int[] iArrFromBigInteger2 = Nat.fromBigInteger(iBitLength, bigInteger2);
+        int length = iArrFromBigInteger.length;
+        int[] iArrCreate = Nat.create(length);
+        if (!Mod.modOddInverseVar(iArrFromBigInteger, iArrFromBigInteger2, iArrCreate)) {
             throw new ArithmeticException("BigInteger not invertible.");
         }
-        return Nat.toBigInteger(length, create);
+        return Nat.toBigInteger(length, iArrCreate);
     }
 
     public static int getUnsignedByteLength(BigInteger bigInteger) {
@@ -210,7 +190,7 @@ public final class BigIntegers {
         return new BigInteger(1, createRandom(i, secureRandom));
     }
 
-    public static BigInteger createRandomPrime(int i, int i2, SecureRandom secureRandom) {
+    public static BigInteger createRandomPrime(int i, int i2, SecureRandom secureRandom) throws IllegalArgumentException {
         BigInteger bigInteger;
         if (i < 2) {
             throw new IllegalArgumentException("bitLength < 2");
@@ -219,11 +199,11 @@ public final class BigIntegers {
             return secureRandom.nextInt() < 0 ? TWO : THREE;
         }
         do {
-            byte[] createRandom = createRandom(i, secureRandom);
-            createRandom[0] = (byte) (((byte) (1 << (7 - ((createRandom.length * 8) - i)))) | createRandom[0]);
-            int length = createRandom.length - 1;
-            createRandom[length] = (byte) (createRandom[length] | 1);
-            bigInteger = new BigInteger(1, createRandom);
+            byte[] bArrCreateRandom = createRandom(i, secureRandom);
+            bArrCreateRandom[0] = (byte) (((byte) (1 << (7 - ((bArrCreateRandom.length * 8) - i)))) | bArrCreateRandom[0]);
+            int length = bArrCreateRandom.length - 1;
+            bArrCreateRandom[length] = (byte) (bArrCreateRandom[length] | 1);
+            bigInteger = new BigInteger(1, bArrCreateRandom);
             if (i > MAX_SMALL) {
                 while (!bigInteger.gcd(SMALL_PRIMES_PRODUCT).equals(ONE)) {
                     bigInteger = bigInteger.add(TWO);

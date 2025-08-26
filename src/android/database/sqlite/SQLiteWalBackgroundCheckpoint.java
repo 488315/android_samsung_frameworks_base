@@ -15,9 +15,9 @@ public final class SQLiteWalBackgroundCheckpoint {
     private long mLastCheckpointTime = -1;
 
     public void tryBackgroundCheckpoint(SQLiteDatabase sQLiteDatabase, File file) {
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         long j = this.mLastCheckpointTime;
-        if ((j <= 0 || currentTimeMillis - j >= LsConstants.SKT_LOCKOUT_ATTEMPT_DEFAULT_TIMEOUT) && file.length() > HUGE_WAL_SIZE_THRESHOLD && this.mIsCheckpointRunning.compareAndSet(false, true)) {
+        if ((j <= 0 || jCurrentTimeMillis - j >= LsConstants.SKT_LOCKOUT_ATTEMPT_DEFAULT_TIMEOUT) && file.length() > HUGE_WAL_SIZE_THRESHOLD && this.mIsCheckpointRunning.compareAndSet(false, true)) {
             try {
                 new WalCheckpointExecutor(sQLiteDatabase).start();
             } catch (Exception unused) {

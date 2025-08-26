@@ -45,9 +45,9 @@ public interface IRemoteProvisioning extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteProvisioning.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteProvisioning)) {
-                return (IRemoteProvisioning) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteProvisioning.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteProvisioning)) {
+                return (IRemoteProvisioning) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IRemoteProvisioning extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                IGetRegistrationCallback asInterface = IGetRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                IGetRegistrationCallback iGetRegistrationCallbackAsInterface = IGetRegistrationCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getRegistration(readString, asInterface);
+                getRegistration(string, iGetRegistrationCallbackAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IRemoteProvisioning extends IInterface {
 
             @Override // android.security.rkp.IRemoteProvisioning
             public void getRegistration(String str, IGetRegistrationCallback iGetRegistrationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteProvisioning.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iGetRegistrationCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteProvisioning.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iGetRegistrationCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Insets;
 import android.net.Uri;
 import android.os.Bundle;
@@ -117,7 +118,7 @@ public class UnknownSourceAppBlockActivity extends Activity {
     }
 
     @Override // android.app.Activity, android.content.ComponentCallbacks
-    public void onConfigurationChanged(Configuration configuration) {
+    public void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         setContentView();
         if (configuration.uiMode != this.mUiMode) {

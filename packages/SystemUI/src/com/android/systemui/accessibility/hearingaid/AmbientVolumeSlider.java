@@ -10,7 +10,6 @@ import com.google.android.material.slider.Slider;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AmbientVolumeSlider extends LinearLayout {
     public final List mChangeListeners;
@@ -58,13 +57,13 @@ public class AmbientVolumeSlider extends LinearLayout {
                 AmbientVolumeSlider ambientVolumeSlider = AmbientVolumeSlider.this;
                 int i3 = 0;
                 ambientVolumeSlider.mTrackingTouch = false;
-                int round = Math.round(((Slider) baseSlider).getValue());
+                int iRound = Math.round(((Slider) baseSlider).getValue());
                 ArrayList arrayList = (ArrayList) ambientVolumeSlider.mChangeListeners;
                 int size = arrayList.size();
                 while (i3 < size) {
                     Object obj = arrayList.get(i3);
                     i3++;
-                    ((AmbientVolumeLayout$$ExternalSyntheticLambda0) obj).onValueChange(ambientVolumeSlider, round);
+                    ((AmbientVolumeLayout$$ExternalSyntheticLambda0) obj).onValueChange(ambientVolumeSlider, iRound);
                 }
             }
         };
@@ -77,14 +76,14 @@ public class AmbientVolumeSlider extends LinearLayout {
                     if (ambientVolumeSlider.mTrackingTouch) {
                         return;
                     }
-                    int round = Math.round(f);
+                    int iRound = Math.round(f);
                     ArrayList arrayList = (ArrayList) ambientVolumeSlider.mChangeListeners;
                     int size = arrayList.size();
                     int i3 = 0;
                     while (i3 < size) {
                         Object obj = arrayList.get(i3);
                         i3++;
-                        ((AmbientVolumeLayout$$ExternalSyntheticLambda0) obj).onValueChange(ambientVolumeSlider, round);
+                        ((AmbientVolumeLayout$$ExternalSyntheticLambda0) obj).onValueChange(ambientVolumeSlider, iRound);
                     }
                 }
             }

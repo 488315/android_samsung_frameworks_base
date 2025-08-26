@@ -8,7 +8,6 @@ import com.samsung.android.sesl.transparentvideo.renderer.gl.utils.GLBuffer;
 import java.nio.IntBuffer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Attribute implements IGLObject {
     public final GLBuffer buffer;
@@ -18,7 +17,6 @@ public final class Attribute implements IGLObject {
     public final DataType type;
     public int vboId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -28,7 +26,6 @@ public final class Attribute implements IGLObject {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -70,19 +67,19 @@ public final class Attribute implements IGLObject {
         Program program = this.program;
         int i = program.id;
         String str = this.name;
-        int glGetAttribLocation = GLES30.glGetAttribLocation(i, str);
-        this.location = glGetAttribLocation;
-        if (glGetAttribLocation == -1) {
+        int iGlGetAttribLocation = GLES30.glGetAttribLocation(i, str);
+        this.location = iGlGetAttribLocation;
+        if (iGlGetAttribLocation == -1) {
             Debugger.Companion companion = Debugger.Companion;
             String str2 = "Attribute:" + str + " doesn't exist in current program" + program.id;
             companion.getClass();
             Log.d("Attribute", str2);
             return;
         }
-        IntBuffer allocate = IntBuffer.allocate(1);
-        GLES30.glGenBuffers(1, allocate);
-        this.vboId = allocate.get(0);
-        allocate.rewind();
+        IntBuffer intBufferAllocate = IntBuffer.allocate(1);
+        GLES30.glGenBuffers(1, intBufferAllocate);
+        this.vboId = intBufferAllocate.get(0);
+        intBufferAllocate.rewind();
         GLES30.glBindBuffer(34962, this.vboId);
         GLBuffer gLBuffer = this.buffer;
         GLES30.glBufferData(34962, gLBuffer.dataBuffer.capacity() * 4, gLBuffer.dataBuffer, 35044);
@@ -94,9 +91,9 @@ public final class Attribute implements IGLObject {
 
     @Override // com.samsung.android.sesl.transparentvideo.renderer.gl.IGLObject
     public final void dispose() {
-        IntBuffer allocate = IntBuffer.allocate(1);
-        allocate.put(this.vboId);
-        allocate.rewind();
-        GLES30.glDeleteBuffers(1, allocate);
+        IntBuffer intBufferAllocate = IntBuffer.allocate(1);
+        intBufferAllocate.put(this.vboId);
+        intBufferAllocate.rewind();
+        GLES30.glDeleteBuffers(1, intBufferAllocate);
     }
 }

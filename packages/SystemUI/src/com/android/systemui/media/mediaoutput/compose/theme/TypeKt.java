@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.TextUnitKt;
 import androidx.compose.ui.unit.TextUnitType;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class TypeKt {
     public static final TextStyle DescriptionTextStyle(Composer composer) {
@@ -38,18 +37,17 @@ public abstract class TypeKt {
         }
         TextStyle.Companion companion = TextStyle.Companion;
         TextStyle secRegular = getSecRegular();
-        long mediaPrimaryColor = ColorKt.mediaPrimaryColor(composerImpl);
+        long jMediaPrimaryColor = ColorKt.mediaPrimaryColor(composerImpl);
         TextUnitType.Companion.getClass();
-        TextStyle m754copyp1EtxEg$default = TextStyle.m754copyp1EtxEg$default(secRegular, mediaPrimaryColor, TextUnitKt.pack(14.0f, TextUnitType.Sp), null, null, 0L, 0, 0L, null, null, 0, 16777212);
+        TextStyle textStyleM756copyp1EtxEg$default = TextStyle.m756copyp1EtxEg$default(secRegular, jMediaPrimaryColor, TextUnitKt.pack(14.0f, TextUnitType.Sp), null, null, 0L, 0, 0L, null, null, 0, 16777212);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return m754copyp1EtxEg$default;
+        return textStyleM756copyp1EtxEg$default;
     }
 
     public static final TextStyle MediaCardContentArtist(Composer composer) {
-        long Color;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(-996128775);
         if (ComposerKt.isTraceInProgress()) {
@@ -57,14 +55,15 @@ public abstract class TypeKt {
         }
         TextStyle.Companion companion = TextStyle.Companion;
         TextStyle secRegular = getSecRegular();
-        Color = androidx.compose.ui.graphics.ColorKt.Color(Color.m461getRedimpl(r3), Color.m460getGreenimpl(r3), Color.m458getBlueimpl(r3), 0.7f, Color.m459getColorSpaceimpl(ColorKt.mediaPrimaryColor(composerImpl)));
+        long jMediaPrimaryColor = ColorKt.mediaPrimaryColor(composerImpl);
+        long jColor = androidx.compose.ui.graphics.ColorKt.Color(Color.m463getRedimpl(jMediaPrimaryColor), Color.m462getGreenimpl(jMediaPrimaryColor), Color.m460getBlueimpl(jMediaPrimaryColor), 0.7f, Color.m461getColorSpaceimpl(jMediaPrimaryColor));
         TextUnitType.Companion.getClass();
-        TextStyle m754copyp1EtxEg$default = TextStyle.m754copyp1EtxEg$default(secRegular, Color, TextUnitKt.pack(13.0f, TextUnitType.Sp), null, null, 0L, 0, 0L, null, null, 0, 16777212);
+        TextStyle textStyleM756copyp1EtxEg$default = TextStyle.m756copyp1EtxEg$default(secRegular, jColor, TextUnitKt.pack(13.0f, TextUnitType.Sp), null, null, 0L, 0, 0L, null, null, 0, 16777212);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return m754copyp1EtxEg$default;
+        return textStyleM756copyp1EtxEg$default;
     }
 
     public static final TextStyle MediaCardContentTitle(Composer composer) {
@@ -75,18 +74,17 @@ public abstract class TypeKt {
         }
         TextStyle.Companion companion = TextStyle.Companion;
         TextStyle secSemiBold = getSecSemiBold();
-        long mediaPrimaryColor = ColorKt.mediaPrimaryColor(composerImpl);
+        long jMediaPrimaryColor = ColorKt.mediaPrimaryColor(composerImpl);
         TextUnitType.Companion.getClass();
-        TextStyle m754copyp1EtxEg$default = TextStyle.m754copyp1EtxEg$default(secSemiBold, mediaPrimaryColor, TextUnitKt.pack(14.0f, TextUnitType.Sp), null, null, 0L, 0, 0L, null, null, 0, 16777212);
+        TextStyle textStyleM756copyp1EtxEg$default = TextStyle.m756copyp1EtxEg$default(secSemiBold, jMediaPrimaryColor, TextUnitKt.pack(14.0f, TextUnitType.Sp), null, null, 0L, 0, 0L, null, null, 0, 16777212);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return m754copyp1EtxEg$default;
+        return textStyleM756copyp1EtxEg$default;
     }
 
     public static final TextStyle MediaCardProgressTime(Composer composer) {
-        long Color;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(-1953791629);
         if (ComposerKt.isTraceInProgress()) {
@@ -94,14 +92,15 @@ public abstract class TypeKt {
         }
         TextStyle.Companion companion = TextStyle.Companion;
         TextStyle secRegular = getSecRegular();
-        Color = androidx.compose.ui.graphics.ColorKt.Color(Color.m461getRedimpl(r3), Color.m460getGreenimpl(r3), Color.m458getBlueimpl(r3), 0.8f, Color.m459getColorSpaceimpl(androidx.compose.ui.graphics.ColorKt.Color(16448255)));
+        long jColor = androidx.compose.ui.graphics.ColorKt.Color(16448255);
+        long jColor2 = androidx.compose.ui.graphics.ColorKt.Color(Color.m463getRedimpl(jColor), Color.m462getGreenimpl(jColor), Color.m460getBlueimpl(jColor), 0.8f, Color.m461getColorSpaceimpl(jColor));
         TextUnitType.Companion.getClass();
-        TextStyle m754copyp1EtxEg$default = TextStyle.m754copyp1EtxEg$default(secRegular, Color, TextUnitKt.pack(9.0f, TextUnitType.Sp), null, null, 0L, 0, 0L, null, null, 0, 16777212);
+        TextStyle textStyleM756copyp1EtxEg$default = TextStyle.m756copyp1EtxEg$default(secRegular, jColor2, TextUnitKt.pack(9.0f, TextUnitType.Sp), null, null, 0L, 0, 0L, null, null, 0, 16777212);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return m754copyp1EtxEg$default;
+        return textStyleM756copyp1EtxEg$default;
     }
 
     public static final TextStyle TitleTextStyle(Composer composer) {
@@ -112,19 +111,19 @@ public abstract class TypeKt {
         }
         TextStyle.Companion companion = TextStyle.Companion;
         TextStyle secBold = getSecBold();
-        long mediaPrimaryColor = ColorKt.mediaPrimaryColor(composerImpl);
+        long jMediaPrimaryColor = ColorKt.mediaPrimaryColor(composerImpl);
         TextUnitType.Companion.getClass();
-        TextStyle m754copyp1EtxEg$default = TextStyle.m754copyp1EtxEg$default(secBold, mediaPrimaryColor, TextUnitKt.pack(21.0f, TextUnitType.Sp), null, null, 0L, 0, 0L, null, null, 0, 16777212);
+        TextStyle textStyleM756copyp1EtxEg$default = TextStyle.m756copyp1EtxEg$default(secBold, jMediaPrimaryColor, TextUnitKt.pack(21.0f, TextUnitType.Sp), null, null, 0L, 0, 0L, null, null, 0, 16777212);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return m754copyp1EtxEg$default;
+        return textStyleM756copyp1EtxEg$default;
     }
 
     public static final FontListFontFamily getSec() {
-        DeviceFontFamilyName.m759constructorimpl("sec");
-        return FontFamilyKt.FontFamily(DeviceFontFamilyNameFontKt.m761Fontvxs03AY$default("sec", null, 14));
+        DeviceFontFamilyName.m761constructorimpl("sec");
+        return FontFamilyKt.FontFamily(DeviceFontFamilyNameFontKt.m763Fontvxs03AY$default("sec", null, 14));
     }
 
     public static final TextStyle getSecBold() {

@@ -2,19 +2,19 @@ package com.android.systemui.edgelighting.reflection;
 
 import android.util.Slog;
 import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyntheticOutline0;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class AbstractBaseReflection {
     public Class mBaseClass;
     public final ArrayList mNameList;
     public final ArrayList mReflectionList;
 
-    public AbstractBaseReflection() {
+    public AbstractBaseReflection() throws ClassNotFoundException {
         this.mBaseClass = null;
         this.mNameList = new ArrayList();
         this.mReflectionList = new ArrayList();
@@ -30,18 +30,71 @@ public abstract class AbstractBaseReflection {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00a9 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x009f  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x009f  */
+    /* JADX WARN: Removed duplicated region for block: B:57:0x00a9 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object createInstance(java.lang.Class[] r9, java.lang.Object... r10) {
-        /*
-            Method dump skipped, instructions count: 276
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.edgelighting.reflection.AbstractBaseReflection.createInstance(java.lang.Class[], java.lang.Object[]):java.lang.Object");
+    public final Object createInstance(Class[] clsArr, Object... objArr) throws NoSuchMethodException, SecurityException {
+        Constructor declaredConstructor;
+        String baseClassName = getBaseClassName();
+        if (clsArr == null) {
+            baseClassName = baseClassName.concat("_EMPTY");
+        } else {
+            for (Class cls : clsArr) {
+                try {
+                    baseClassName = baseClassName + cls.getName();
+                } catch (NullPointerException e) {
+                    System.err.println(getBaseClassName() + " getUniqueConstructorName " + e);
+                }
+            }
+        }
+        Object reflectionInstance = getReflectionInstance(baseClassName);
+        if (reflectionInstance != null) {
+            declaredConstructor = (Constructor) reflectionInstance;
+        } else if (this.mBaseClass == null || baseClassName == null || baseClassName.isEmpty()) {
+            declaredConstructor = null;
+        } else {
+            if (clsArr == null) {
+                clsArr = new Class[0];
+            }
+            try {
+                declaredConstructor = this.mBaseClass.getConstructor(clsArr);
+            } catch (NoSuchMethodException unused) {
+                declaredConstructor = null;
+            }
+            try {
+                addReflectionInstance(declaredConstructor, baseClassName);
+            } catch (NoSuchMethodException unused2) {
+                try {
+                    declaredConstructor = this.mBaseClass.getDeclaredConstructor(clsArr);
+                    declaredConstructor.setAccessible(true);
+                    addReflectionInstance(declaredConstructor, baseClassName);
+                } catch (NoSuchMethodException e2) {
+                    System.err.println(getBaseClassName() + " No method " + e2);
+                }
+                if (declaredConstructor != null) {
+                }
+            }
+        }
+        if (declaredConstructor != null) {
+            Slog.i(getBaseClassName(), "Cannot invoke there's no constructor.");
+            return null;
+        }
+        try {
+            declaredConstructor.setAccessible(true);
+            return declaredConstructor.newInstance(objArr);
+        } catch (IllegalAccessException e3) {
+            System.err.println(this.getBaseClassName() + " IllegalAccessException encountered invoking constructor " + e3);
+            return null;
+        } catch (InstantiationException e4) {
+            e4.printStackTrace();
+            System.err.println(this.getBaseClassName() + " InstantiationException encountered invoking constructor " + e4);
+            return null;
+        } catch (InvocationTargetException e5) {
+            System.err.println(this.getBaseClassName() + " InvocationTargetException encountered invoking constructor " + e5);
+            return null;
+        }
     }
 
     public abstract String getBaseClassName();
@@ -79,53 +132,52 @@ public abstract class AbstractBaseReflection {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final Object invokeNormalMethod(Object obj, String str, Class[] clsArr, Object... objArr) {
-        String sb;
-        Method method;
+    public final Object invokeNormalMethod(Object obj, String str, Class[] clsArr, Object... objArr) throws NoSuchMethodException, SecurityException {
+        String string;
+        Method declaredMethod;
         if (obj == null || str.isEmpty()) {
             Slog.i(getBaseClassName(), "Cannot invoke ".concat(str));
             return null;
         }
         if (clsArr == null) {
-            sb = str;
+            string = str;
         } else {
-            StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
+            StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
             for (Class cls : clsArr) {
                 if (cls != null) {
-                    m.append(cls.getName());
+                    sbM.append(cls.getName());
                 }
             }
-            sb = m.toString();
+            string = sbM.toString();
         }
-        Object reflectionInstance = getReflectionInstance(sb);
+        Object reflectionInstance = getReflectionInstance(string);
         if (reflectionInstance != null) {
-            method = (Method) reflectionInstance;
+            declaredMethod = (Method) reflectionInstance;
+        } else if (this.mBaseClass == null || str.isEmpty()) {
+            declaredMethod = null;
         } else {
-            if (this.mBaseClass != null && !str.isEmpty()) {
-                if (clsArr == null) {
-                    clsArr = new Class[0];
-                }
+            if (clsArr == null) {
+                clsArr = new Class[0];
+            }
+            try {
                 try {
-                    try {
-                        method = this.mBaseClass.getMethod(str, clsArr);
-                        addReflectionInstance(method, sb);
-                    } catch (NoSuchMethodException unused) {
-                        method = this.mBaseClass.getDeclaredMethod(str, clsArr);
-                        method.setAccessible(true);
-                        addReflectionInstance(method, sb);
-                    }
+                    declaredMethod = this.mBaseClass.getMethod(str, clsArr);
+                    addReflectionInstance(declaredMethod, string);
                 } catch (NoSuchMethodException e) {
                     System.err.println(getBaseClassName() + " No method " + e);
                 }
+            } catch (NoSuchMethodException unused) {
+                declaredMethod = this.mBaseClass.getDeclaredMethod(str, clsArr);
+                declaredMethod.setAccessible(true);
+                addReflectionInstance(declaredMethod, string);
             }
-            method = null;
         }
-        if (method == null) {
+        if (declaredMethod == null) {
             Slog.i(getBaseClassName(), "Cannot invoke there's no method reflection : ".concat(str));
             return null;
         }
         try {
-            return method.invoke(obj, objArr);
+            return declaredMethod.invoke(obj, objArr);
         } catch (IllegalAccessException e2) {
             System.err.println(this.getBaseClassName() + " IllegalAccessException encountered invoking " + str + e2);
             return null;
@@ -136,7 +188,7 @@ public abstract class AbstractBaseReflection {
         }
     }
 
-    public final void loadReflection(String str) {
+    public final void loadReflection(String str) throws ClassNotFoundException {
         Class<?> cls;
         try {
             cls = Class.forName(str);
@@ -150,7 +202,7 @@ public abstract class AbstractBaseReflection {
         }
     }
 
-    public AbstractBaseReflection(String str) {
+    public AbstractBaseReflection(String str) throws ClassNotFoundException {
         this.mBaseClass = null;
         this.mNameList = new ArrayList();
         this.mReflectionList = new ArrayList();

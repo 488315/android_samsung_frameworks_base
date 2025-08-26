@@ -13,7 +13,6 @@ import com.google.android.setupcompat.util.Logger;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CustomEvent implements Parcelable {
     public static final Parcelable.Creator<CustomEvent> CREATOR = new Parcelable.Creator() { // from class: com.google.android.setupcompat.logging.CustomEvent.1

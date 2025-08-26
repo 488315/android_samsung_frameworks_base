@@ -1,64 +1,49 @@
 package com.android.wm.shell.desktopmode;
 
-import android.app.ActivityManager;
 import android.os.IBinder;
-import android.window.WindowContainerTransaction;
 import com.android.wm.shell.desktopmode.DesktopModeEventLogger;
 import com.android.wm.shell.desktopmode.DesktopTasksController;
 import com.android.wm.shell.desktopmode.DesktopTasksLimiter;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DesktopTasksController$$ExternalSyntheticLambda7 implements Function1 {
-    public final /* synthetic */ int $r8$classId = 0;
-    public final /* synthetic */ Object f$0;
-    public final /* synthetic */ ActivityManager.RunningTaskInfo f$1;
+    public final /* synthetic */ int $r8$classId;
+    public final /* synthetic */ IBinder f$0;
+    public final /* synthetic */ int f$1;
     public final /* synthetic */ int f$2;
-    public final /* synthetic */ Object f$3;
+    public final /* synthetic */ Enum f$3;
 
-    public /* synthetic */ DesktopTasksController$$ExternalSyntheticLambda7(IBinder iBinder, ActivityManager.RunningTaskInfo runningTaskInfo, int i, DesktopModeEventLogger.Companion.MinimizeReason minimizeReason) {
+    public /* synthetic */ DesktopTasksController$$ExternalSyntheticLambda7(IBinder iBinder, int i, int i2, Enum r4, int i3) {
+        this.$r8$classId = i3;
         this.f$0 = iBinder;
-        this.f$1 = runningTaskInfo;
-        this.f$2 = i;
-        this.f$3 = minimizeReason;
+        this.f$1 = i;
+        this.f$2 = i2;
+        this.f$3 = r4;
     }
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
-        Object obj2 = this.f$0;
-        Object obj3 = this.f$3;
+    public final Object mo781invoke(Object obj) {
+        Enum r0 = this.f$3;
         switch (this.$r8$classId) {
             case 0:
-                IBinder iBinder = (IBinder) obj2;
-                ActivityManager.RunningTaskInfo runningTaskInfo = this.f$1;
+                IBinder iBinder = this.f$0;
                 DesktopTasksLimiter desktopTasksLimiter = (DesktopTasksLimiter) obj;
                 DesktopTasksController.Companion companion = DesktopTasksController.Companion;
-                int i = runningTaskInfo != null ? runningTaskInfo.displayId : 0;
                 desktopTasksLimiter.getClass();
-                desktopTasksLimiter.minimizeTransitionObserver.pendingTransitionTokensAndTasks.put(iBinder, new DesktopTasksLimiter.TaskDetails(i, this.f$2, null, null, (DesktopModeEventLogger.Companion.MinimizeReason) obj3, null, 36, null));
+                desktopTasksLimiter.minimizeTransitionObserver.pendingUnminimizeTransitionTokensAndTasks.put(iBinder, new DesktopTasksLimiter.TaskDetails(this.f$1, this.f$2, null, null, null, (DesktopModeEventLogger.Companion.UnminimizeReason) r0, 28, null));
                 break;
             default:
-                ActivityManager.RunningTaskInfo runningTaskInfo2 = this.f$1;
-                IBinder iBinder2 = (IBinder) obj;
+                IBinder iBinder2 = this.f$0;
+                DesktopTasksLimiter desktopTasksLimiter2 = (DesktopTasksLimiter) obj;
                 DesktopTasksController.Companion companion2 = DesktopTasksController.Companion;
-                DesktopTasksController desktopTasksController = (DesktopTasksController) obj2;
-                Integer addAndGetMinimizeChanges = desktopTasksController.addAndGetMinimizeChanges(this.f$2, (WindowContainerTransaction) obj3, Integer.valueOf(runningTaskInfo2.taskId), false);
-                if (addAndGetMinimizeChanges != null) {
-                    desktopTasksController.addPendingMinimizeTransition(iBinder2, addAndGetMinimizeChanges.intValue(), DesktopModeEventLogger.Companion.MinimizeReason.TASK_LIMIT);
-                }
-                desktopTasksController.addPendingAppLaunchTransition(iBinder2, runningTaskInfo2.taskId, addAndGetMinimizeChanges);
+                iBinder2.getClass();
+                desktopTasksLimiter2.getClass();
+                desktopTasksLimiter2.minimizeTransitionObserver.pendingTransitionTokensAndTasks.put(iBinder2, new DesktopTasksLimiter.TaskDetails(this.f$1, this.f$2, null, null, (DesktopModeEventLogger.Companion.MinimizeReason) r0, null, 36, null));
                 break;
         }
         return Unit.INSTANCE;
-    }
-
-    public /* synthetic */ DesktopTasksController$$ExternalSyntheticLambda7(DesktopTasksController desktopTasksController, int i, WindowContainerTransaction windowContainerTransaction, ActivityManager.RunningTaskInfo runningTaskInfo) {
-        this.f$0 = desktopTasksController;
-        this.f$2 = i;
-        this.f$3 = windowContainerTransaction;
-        this.f$1 = runningTaskInfo;
     }
 }

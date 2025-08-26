@@ -73,9 +73,9 @@ public interface INetworkService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INetworkService)) {
-                return (INetworkService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INetworkService)) {
+                return (INetworkService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -114,29 +114,29 @@ public interface INetworkService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                createNetworkServiceProvider(readInt);
+                createNetworkServiceProvider(i3);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                removeNetworkServiceProvider(readInt2);
+                removeNetworkServiceProvider(i4);
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
-                INetworkServiceCallback asInterface = INetworkServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
+                INetworkServiceCallback iNetworkServiceCallbackAsInterface = INetworkServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                requestNetworkRegistrationInfo(readInt3, readInt4, asInterface);
+                requestNetworkRegistrationInfo(i5, i6, iNetworkServiceCallbackAsInterface);
             } else if (i == 4) {
-                int readInt5 = parcel.readInt();
-                INetworkServiceCallback asInterface2 = INetworkServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i7 = parcel.readInt();
+                INetworkServiceCallback iNetworkServiceCallbackAsInterface2 = INetworkServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerForNetworkRegistrationInfoChanged(readInt5, asInterface2);
+                registerForNetworkRegistrationInfoChanged(i7, iNetworkServiceCallbackAsInterface2);
             } else if (i == 5) {
-                int readInt6 = parcel.readInt();
-                INetworkServiceCallback asInterface3 = INetworkServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i8 = parcel.readInt();
+                INetworkServiceCallback iNetworkServiceCallbackAsInterface3 = INetworkServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                unregisterForNetworkRegistrationInfoChanged(readInt6, asInterface3);
+                unregisterForNetworkRegistrationInfoChanged(i8, iNetworkServiceCallbackAsInterface3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -161,65 +161,65 @@ public interface INetworkService extends IInterface {
 
             @Override // android.telephony.INetworkService
             public void createNetworkServiceProvider(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.INetworkService
             public void removeNetworkServiceProvider(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.INetworkService
             public void requestNetworkRegistrationInfo(int i, int i2, INetworkServiceCallback iNetworkServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iNetworkServiceCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iNetworkServiceCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.INetworkService
             public void registerForNetworkRegistrationInfoChanged(int i, INetworkServiceCallback iNetworkServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iNetworkServiceCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iNetworkServiceCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.INetworkService
             public void unregisterForNetworkRegistrationInfoChanged(int i, INetworkServiceCallback iNetworkServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iNetworkServiceCallback);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iNetworkServiceCallback);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

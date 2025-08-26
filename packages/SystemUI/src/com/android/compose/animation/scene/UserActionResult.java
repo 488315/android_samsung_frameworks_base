@@ -7,14 +7,12 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class UserActionResult {
     public static final Companion Companion = new Companion(null);
     public final boolean requiresFullDistanceSwipe;
     public final TransitionKey transitionKey;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ChangeScene extends UserActionResult {
         public final boolean requiresFullDistanceSwipe;
         public final SceneKey toScene;
@@ -46,9 +44,9 @@ public abstract class UserActionResult {
         }
 
         public final int hashCode() {
-            int hashCode = this.toScene.identity.hashCode() * 31;
+            int iHashCode = this.toScene.identity.hashCode() * 31;
             TransitionKey transitionKey = this.transitionKey;
-            return Boolean.hashCode(this.requiresFullDistanceSwipe) + ((hashCode + (transitionKey == null ? 0 : transitionKey.identity.hashCode())) * 31);
+            return Boolean.hashCode(this.requiresFullDistanceSwipe) + ((iHashCode + (transitionKey == null ? 0 : transitionKey.identity.hashCode())) * 31);
         }
 
         public final String toString() {
@@ -68,7 +66,6 @@ public abstract class UserActionResult {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -86,7 +83,6 @@ public abstract class UserActionResult {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HideOverlay extends UserActionResult {
         public final OverlayKey overlay;
         public final boolean requiresFullDistanceSwipe;
@@ -118,9 +114,9 @@ public abstract class UserActionResult {
         }
 
         public final int hashCode() {
-            int hashCode = this.overlay.identity.hashCode() * 31;
+            int iHashCode = this.overlay.identity.hashCode() * 31;
             TransitionKey transitionKey = this.transitionKey;
-            return Boolean.hashCode(this.requiresFullDistanceSwipe) + ((hashCode + (transitionKey == null ? 0 : transitionKey.identity.hashCode())) * 31);
+            return Boolean.hashCode(this.requiresFullDistanceSwipe) + ((iHashCode + (transitionKey == null ? 0 : transitionKey.identity.hashCode())) * 31);
         }
 
         public final String toString() {
@@ -140,7 +136,6 @@ public abstract class UserActionResult {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReplaceByOverlay extends UserActionResult {
         public final OverlayKey overlay;
         public final boolean requiresFullDistanceSwipe;
@@ -172,9 +167,9 @@ public abstract class UserActionResult {
         }
 
         public final int hashCode() {
-            int hashCode = this.overlay.identity.hashCode() * 31;
+            int iHashCode = this.overlay.identity.hashCode() * 31;
             TransitionKey transitionKey = this.transitionKey;
-            return Boolean.hashCode(this.requiresFullDistanceSwipe) + ((hashCode + (transitionKey == null ? 0 : transitionKey.identity.hashCode())) * 31);
+            return Boolean.hashCode(this.requiresFullDistanceSwipe) + ((iHashCode + (transitionKey == null ? 0 : transitionKey.identity.hashCode())) * 31);
         }
 
         public final String toString() {
@@ -206,17 +201,14 @@ public abstract class UserActionResult {
         return this.transitionKey;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowOverlay extends UserActionResult {
         public final HideCurrentOverlays hideCurrentOverlays;
         public final OverlayKey overlay;
         public final boolean requiresFullDistanceSwipe;
         public final TransitionKey transitionKey;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class HideCurrentOverlays {
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class All extends HideCurrentOverlays {
                 public static final All INSTANCE = new All();
 
@@ -225,7 +217,6 @@ public abstract class UserActionResult {
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class None extends HideCurrentOverlays {
                 public static final None INSTANCE = new None();
 
@@ -234,7 +225,6 @@ public abstract class UserActionResult {
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class Some extends HideCurrentOverlays {
                 public final Set overlays;
 
@@ -282,9 +272,9 @@ public abstract class UserActionResult {
         }
 
         public final int hashCode() {
-            int hashCode = this.overlay.identity.hashCode() * 31;
+            int iHashCode = this.overlay.identity.hashCode() * 31;
             TransitionKey transitionKey = this.transitionKey;
-            return this.hideCurrentOverlays.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((hashCode + (transitionKey == null ? 0 : transitionKey.identity.hashCode())) * 31, 31, this.requiresFullDistanceSwipe);
+            return this.hideCurrentOverlays.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (transitionKey == null ? 0 : transitionKey.identity.hashCode())) * 31, 31, this.requiresFullDistanceSwipe);
         }
 
         public final String toString() {

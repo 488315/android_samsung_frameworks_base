@@ -2,19 +2,33 @@ package com.samsung.android.sdk.bixby2.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import androidx.appcompat.app.AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecPatternView$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0;
+import com.samsung.android.sdk.bixby2.AppMetaInfo;
+import com.samsung.android.sdk.bixby2.Sbixby;
 import com.samsung.android.sdk.bixby2.action.ActionHandler;
+import com.samsung.android.sdk.bixby2.receiver.ApplicationTriggerReceiver;
+import com.samsung.android.sdk.bixby2.state.StateHandler;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CapsuleProvider extends ContentProvider {
     public final Object sActionExecutionLock = new Object();
@@ -26,7 +40,6 @@ public class CapsuleProvider extends ContentProvider {
     public static boolean mWaitForHandler = false;
     public static final Object sWaitLock = new Object();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CapsuleResponseCallback {
         public CapsuleResponseCallback(CapsuleProvider capsuleProvider) {
             new Bundle();
@@ -63,19 +76,221 @@ public class CapsuleProvider extends ContentProvider {
         return bundle;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:73:0x01ff  */
-    /* JADX WARN: Removed duplicated region for block: B:75:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:172:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:74:0x0167  */
+    /* JADX WARN: Removed duplicated region for block: B:79:0x017d  */
+    /* JADX WARN: Removed duplicated region for block: B:98:0x01ff  */
     @Override // android.content.ContentProvider
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.os.Bundle call(final java.lang.String r9, java.lang.String r10, android.os.Bundle r11) {
-        /*
-            Method dump skipped, instructions count: 746
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.sdk.bixby2.provider.CapsuleProvider.call(java.lang.String, java.lang.String, android.os.Bundle):android.os.Bundle");
+    public final Bundle call(final String str, String str2, Bundle bundle) throws Throwable {
+        Bundle bundleUpdateStatus;
+        AppMetaInfo defaultAppMetaInfo;
+        String string;
+        Bundle bundle2;
+        Log.i("CapsuleProvider_1.0.24", "call()");
+        if (bundle != null) {
+            bundle.toString();
+        }
+        if (mIsUserBuild) {
+            int callingUid = Binder.getCallingUid();
+            PackageManager packageManager = getContext().getPackageManager();
+            String[] packagesForUid = packageManager.getPackagesForUid(callingUid);
+            if (packagesForUid != null) {
+                int length = packagesForUid.length;
+                int i = 0;
+                while (i < length) {
+                    String str3 = packagesForUid[i];
+                    if ("com.samsung.android.bixby.agent".equals(str3) || "com.samsung.android.app.routines".equals(str3)) {
+                        try {
+                            Signature[] signatureArr = packageManager.getPackageInfo(str3, 64).signatures;
+                            if (signatureArr != null && signatureArr.length > 0 && (mBixbyAgentSignature.equals(signatureArr[0]) || mBixbyAgentSignatureForIOT.equals(signatureArr[0]))) {
+                            }
+                            bundle2 = bundle;
+                        } catch (PackageManager.NameNotFoundException e) {
+                            bundle2 = bundle;
+                            e.printStackTrace();
+                        }
+                    } else {
+                        bundle2 = bundle;
+                    }
+                    i++;
+                    bundle = bundle2;
+                }
+                Log.e("CapsuleProvider_1.0.24", "Not allowed to access capsule provider. package (s): " + Arrays.toString(packagesForUid));
+            } else {
+                Log.e("CapsuleProvider_1.0.24", "packages is null");
+            }
+            throw new SecurityException("not allowed to access capsule provider.");
+        }
+        if (TextUtils.isEmpty(str)) {
+            throw new IllegalArgumentException("method is null or empty. pass valid action name.");
+        }
+        if (!mIsAppInitialized && getContext() != null) {
+            ApplicationTriggerReceiver applicationTriggerReceiver = new ApplicationTriggerReceiver();
+            IntentFilter intentFilterM = AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0.m("com.samsung.android.sdk.bixby2.ACTION_APPLICATION_TRIGGER");
+            if (getContext().getApplicationInfo().targetSdkVersion >= 34) {
+                getContext().registerReceiver(applicationTriggerReceiver, intentFilterM, 4);
+            } else {
+                getContext().registerReceiver(applicationTriggerReceiver, intentFilterM);
+            }
+            Log.i("CapsuleProvider_1.0.24", "ApplicationTriggerReceiver registered");
+            Intent intent = new Intent();
+            intent.setAction("com.samsung.android.sdk.bixby2.ACTION_APPLICATION_TRIGGER");
+            intent.addFlags(268435456);
+            getContext().sendBroadcast(intent);
+        }
+        Object obj = sWaitLock;
+        synchronized (obj) {
+            if (!mIsAppInitialized) {
+                try {
+                    obj.wait(5000L);
+                } catch (InterruptedException e2) {
+                    Log.e("CapsuleProvider_1.0.24", "interrupted exception");
+                    e2.printStackTrace();
+                }
+            }
+        }
+        if (!mIsAppInitialized) {
+            Log.e("CapsuleProvider_1.0.24", "App initialization error.");
+            return updateStatus(-1, "Initialization Failure..");
+        }
+        if (!str.equals("getAppContext")) {
+            if (bundle == null) {
+                throw new IllegalArgumentException("action params are EMPTY.");
+            }
+            synchronized (this) {
+                try {
+                    try {
+                        Log.i("CapsuleProvider_1.0.24", "executeAction()");
+                        final ActionHandler actionHandler = getActionHandler(str);
+                        if (actionHandler == null) {
+                            Log.e("CapsuleProvider_1.0.24", "Handler not found!!..");
+                            bundleUpdateStatus = updateStatus(-2, "Action handler not found");
+                        } else if (bundle.containsKey("actionType")) {
+                            final CapsuleResponseCallback capsuleResponseCallback = new CapsuleResponseCallback(this);
+                            final Bundle bundle3 = bundle;
+                            try {
+                                Thread thread = new Thread(new Runnable() { // from class: com.samsung.android.sdk.bixby2.provider.CapsuleProvider.2
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        ActionHandler actionHandler2 = actionHandler;
+                                        CapsuleProvider.this.getContext();
+                                        actionHandler2.executeAction();
+                                    }
+                                });
+                                thread.start();
+                                synchronized (this.sActionExecutionLock) {
+                                    this.sActionExecutionLock.wait(30000L);
+                                    Log.e("CapsuleProvider_1.0.24", "timeout occurred..");
+                                    thread.interrupt();
+                                }
+                                bundleUpdateStatus = updateStatus(-1, "action execution timed out");
+                            } catch (Exception e3) {
+                                e = e3;
+                                this = this;
+                                Exception exc = e;
+                                Log.e("CapsuleProvider_1.0.24", "Unable to execute action." + exc.toString());
+                                exc.printStackTrace();
+                                bundleUpdateStatus = updateStatus(-1, exc.toString());
+                                return bundleUpdateStatus;
+                            } catch (Throwable th) {
+                                th = th;
+                                this = this;
+                                Throwable th2 = th;
+                                throw th2;
+                            }
+                        } else {
+                            Log.e("CapsuleProvider_1.0.24", "params missing");
+                            bundleUpdateStatus = updateStatus(-1, "params missing..");
+                        }
+                    } catch (Exception e4) {
+                        e = e4;
+                    }
+                } catch (Throwable th3) {
+                    th = th3;
+                }
+            }
+            return bundleUpdateStatus;
+        }
+        Sbixby.getInstance();
+        StateHandler stateHandler = StateHandler.getInstance();
+        Context context = getContext();
+        StateHandler.Callback callback = stateHandler.mCallback;
+        if (callback == null) {
+            Log.e("StateHandler", "StateHandler.Callback instance is null");
+        } else {
+            String strOnAppStateRequested = callback.onAppStateRequested();
+            if (TextUtils.isEmpty(strOnAppStateRequested)) {
+                Log.e("StateHandler", "state info is empty.");
+            } else {
+                String strOnCapsuleIdRequested = stateHandler.mCallback.onCapsuleIdRequested();
+                Sbixby.getInstance().getClass();
+                Map map = Sbixby.appMetaInfoMap;
+                if (TextUtils.isEmpty(strOnCapsuleIdRequested)) {
+                    Log.e("StateHandler", "capsuleId is empty");
+                    if (map != null) {
+                        HashMap map2 = (HashMap) map;
+                        if (map2.size() == 0) {
+                            defaultAppMetaInfo = StateHandler.getDefaultAppMetaInfo(context);
+                        } else if (map2.size() == 1) {
+                            Log.i("StateHandler", "Map for App Meta Info. has only one");
+                            defaultAppMetaInfo = (AppMetaInfo) ((Map.Entry) map2.entrySet().iterator().next()).getValue();
+                        } else {
+                            Log.e("StateHandler", "No Capsule Id and multiple App Meta Info. Can't pick one");
+                        }
+                    }
+                    if (string == null) {
+                        return KeyguardSecPatternView$$ExternalSyntheticOutline0.m("appContext", string);
+                    }
+                    return null;
+                }
+                if (map != null) {
+                    HashMap map3 = (HashMap) map;
+                    if (map3.containsKey(strOnCapsuleIdRequested)) {
+                        defaultAppMetaInfo = (AppMetaInfo) map3.get(strOnCapsuleIdRequested);
+                    } else {
+                        Log.e("StateHandler", "Map for App Meta Info. is empty");
+                        AppMetaInfo defaultAppMetaInfo2 = StateHandler.getDefaultAppMetaInfo(context);
+                        if (defaultAppMetaInfo2 != null) {
+                            defaultAppMetaInfo2.capsuleId = strOnCapsuleIdRequested;
+                        }
+                        defaultAppMetaInfo = defaultAppMetaInfo2;
+                    }
+                }
+                if (string == null) {
+                }
+                if (defaultAppMetaInfo == null) {
+                    Log.e("StateHandler", "App Meta Info. is null");
+                } else {
+                    try {
+                        JSONObject jSONObject = new JSONObject(strOnAppStateRequested);
+                        jSONObject.put("capsuleId", defaultAppMetaInfo.capsuleId);
+                        jSONObject.put("appId", context.getPackageName());
+                        jSONObject.put("appVersionCode", defaultAppMetaInfo.appVersionCode);
+                        List<String> usedPermissionsWhenAppStateRequested = stateHandler.mCallback.getUsedPermissionsWhenAppStateRequested();
+                        Log.i("StateHandler", "getUsedPermissionsWhenAppStateRequested() = " + usedPermissionsWhenAppStateRequested);
+                        if (usedPermissionsWhenAppStateRequested != null && !usedPermissionsWhenAppStateRequested.isEmpty()) {
+                            List clientDeniedPermissions = StateHandler.getClientDeniedPermissions(usedPermissionsWhenAppStateRequested, context, bundle);
+                            Log.i("StateHandler", "deniedPermissionsInClient = " + clientDeniedPermissions);
+                            if (clientDeniedPermissions != null) {
+                                StateHandler.adjustConceptsDueToPermissions(clientDeniedPermissions, jSONObject);
+                            }
+                        }
+                        jSONObject.toString();
+                        string = jSONObject.toString();
+                    } catch (Exception e5) {
+                        KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e5, new StringBuilder("getAppState exception "), "StateHandler");
+                    }
+                    if (string == null) {
+                    }
+                }
+            }
+        }
+        string = null;
+        if (string == null) {
+        }
     }
 
     @Override // android.content.ContentProvider

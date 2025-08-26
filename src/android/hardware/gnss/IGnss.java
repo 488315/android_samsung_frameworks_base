@@ -297,9 +297,9 @@ public interface IGnss extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGnss)) {
-                return (IGnss) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGnss)) {
+                return (IGnss) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -397,9 +397,9 @@ public interface IGnss extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IGnssCallback asInterface = IGnssCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IGnssCallback iGnssCallbackAsInterface = IGnssCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setCallback(asInterface);
+                    setCallback(iGnssCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
@@ -470,11 +470,11 @@ public interface IGnss extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    long readLong = parcel.readLong();
-                    long readLong2 = parcel.readLong();
-                    int readInt = parcel.readInt();
+                    long j = parcel.readLong();
+                    long j2 = parcel.readLong();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    injectTime(readLong, readLong2, readInt);
+                    injectTime(j, j2, i3);
                     parcel2.writeNoException();
                     return true;
                 case 17:
@@ -490,9 +490,9 @@ public interface IGnss extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    deleteAidingData(readInt2);
+                    deleteAidingData(i4);
                     parcel2.writeNoException();
                     return true;
                 case 20:
@@ -552,454 +552,454 @@ public interface IGnss extends IInterface {
 
             @Override // android.hardware.gnss.IGnss
             public void setCallback(IGnssCallback iGnssCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iGnssCallback);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iGnssCallback);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setCallback is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method close is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IGnssPsds getExtensionPsds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionPsds is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IGnssPsds.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IGnssPsds.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IGnssConfiguration getExtensionGnssConfiguration() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionGnssConfiguration is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IGnssConfiguration.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IGnssConfiguration.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IGnssMeasurementInterface getExtensionGnssMeasurement() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionGnssMeasurement is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IGnssMeasurementInterface.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IGnssMeasurementInterface.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IGnssPowerIndication getExtensionGnssPowerIndication() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(6, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionGnssPowerIndication is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IGnssPowerIndication.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IGnssPowerIndication.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IGnssBatching getExtensionGnssBatching() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(7, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(7, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionGnssBatching is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IGnssBatching.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IGnssBatching.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IGnssGeofence getExtensionGnssGeofence() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(8, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(8, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionGnssGeofence is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IGnssGeofence.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IGnssGeofence.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IGnssNavigationMessageInterface getExtensionGnssNavigationMessage() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(9, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(9, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionGnssNavigationMessage is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IGnssNavigationMessageInterface.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IGnssNavigationMessageInterface.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IAGnss getExtensionAGnss() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(10, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(10, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionAGnss is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IAGnss.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IAGnss.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IAGnssRil getExtensionAGnssRil() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(11, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(11, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionAGnssRil is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IAGnssRil.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IAGnssRil.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IGnssDebug getExtensionGnssDebug() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(12, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(12, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionGnssDebug is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IGnssDebug.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IGnssDebug.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IGnssVisibilityControl getExtensionGnssVisibilityControl() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(13, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(13, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionGnssVisibilityControl is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IGnssVisibilityControl.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IGnssVisibilityControl.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void start() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(14, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(14, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method start is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void stop() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(15, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(15, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method stop is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void injectTime(long j, long j2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(16, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(16, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method injectTime is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void injectLocation(GnssLocation gnssLocation) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(gnssLocation, 0);
-                    if (!this.mRemote.transact(17, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(gnssLocation, 0);
+                    if (!this.mRemote.transact(17, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method injectLocation is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void injectBestLocation(GnssLocation gnssLocation) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(gnssLocation, 0);
-                    if (!this.mRemote.transact(18, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(gnssLocation, 0);
+                    if (!this.mRemote.transact(18, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method injectBestLocation is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void deleteAidingData(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(19, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(19, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method deleteAidingData is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void setPositionMode(PositionModeOptions positionModeOptions) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(positionModeOptions, 0);
-                    if (!this.mRemote.transact(20, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(positionModeOptions, 0);
+                    if (!this.mRemote.transact(20, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setPositionMode is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IGnssAntennaInfo getExtensionGnssAntennaInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(21, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(21, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionGnssAntennaInfo is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IGnssAntennaInfo.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IGnssAntennaInfo.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public IMeasurementCorrectionsInterface getExtensionMeasurementCorrections() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(22, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(22, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getExtensionMeasurementCorrections is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IMeasurementCorrectionsInterface.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IMeasurementCorrectionsInterface.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void startSvStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(23, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(23, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method startSvStatus is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void stopSvStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(24, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(24, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method stopSvStatus is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void startNmea() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(25, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(25, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method startNmea is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public void stopNmea() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(26, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(26, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method stopNmea is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnss
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -1008,18 +1008,18 @@ public interface IGnss extends IInterface {
             @Override // android.hardware.gnss.IGnss
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }
@@ -1063,7 +1063,7 @@ public interface IGnss extends IInterface {
 
         @Override // android.os.Parcelable
         public final void writeToParcel(Parcel parcel, int i) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
             parcel.writeInt(this.mode);
             parcel.writeInt(this.recurrence);
@@ -1071,58 +1071,58 @@ public interface IGnss extends IInterface {
             parcel.writeInt(this.preferredAccuracyMeters);
             parcel.writeInt(this.preferredTimeMs);
             parcel.writeBoolean(this.lowPowerMode);
-            int dataPosition2 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition2 - dataPosition);
-            parcel.setDataPosition(dataPosition2);
+            int iDataPosition2 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition2 - iDataPosition);
+            parcel.setDataPosition(iDataPosition2);
         }
 
         public final void readFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
             try {
-                if (readInt < 4) {
+                if (i < 4) {
                     throw new BadParcelableException("Parcelable too small");
                 }
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.mode = parcel.readInt();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.recurrence = parcel.readInt();
-                        if (parcel.dataPosition() - dataPosition < readInt) {
+                        if (parcel.dataPosition() - iDataPosition < i) {
                             this.minIntervalMs = parcel.readInt();
-                            if (parcel.dataPosition() - dataPosition < readInt) {
+                            if (parcel.dataPosition() - iDataPosition < i) {
                                 this.preferredAccuracyMeters = parcel.readInt();
-                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                if (parcel.dataPosition() - iDataPosition < i) {
                                     this.preferredTimeMs = parcel.readInt();
-                                    if (parcel.dataPosition() - dataPosition < readInt) {
+                                    if (parcel.dataPosition() - iDataPosition < i) {
                                         this.lowPowerMode = parcel.readBoolean();
-                                        if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                        if (iDataPosition > Integer.MAX_VALUE - i) {
                                             throw new BadParcelableException("Overflow in the size of parcelable");
                                         }
-                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                         throw new BadParcelableException("Overflow in the size of parcelable");
                                     }
-                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                 }
-                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                 throw new BadParcelableException("Overflow in the size of parcelable");
                             }
-                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }

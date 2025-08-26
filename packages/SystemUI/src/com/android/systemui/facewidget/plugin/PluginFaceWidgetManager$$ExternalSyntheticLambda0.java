@@ -4,7 +4,6 @@ import android.util.Log;
 import com.android.systemui.plugins.keyguardstatusview.PluginKeyguardStatusView;
 import com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutModel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class PluginFaceWidgetManager$$ExternalSyntheticLambda0 {
     public final /* synthetic */ PluginFaceWidgetManager f$0;

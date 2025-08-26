@@ -1,9 +1,13 @@
 package com.android.systemui.navigationbar.views;
 
+import android.app.ActivityTaskManager;
+import android.app.IActivityTaskManager;
 import android.app.StatusBarManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Insets;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -12,15 +16,21 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
+import android.os.Trace;
 import android.provider.DeviceConfig;
+import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.MathUtils;
 import android.view.Display;
+import android.view.DisplayCutout;
+import android.view.InsetsFrameProvider;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewTreeObserver;
 import android.view.WindowInsets;
 import android.view.WindowManager;
@@ -28,6 +38,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.InputMethodManager;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
+import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.statusbar.LetterboxDetails;
@@ -53,6 +64,7 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.model.SysUiState;
 import com.android.systemui.model.SysUiStateImpl;
+import com.android.systemui.navigationbar.BasicRuneWrapper;
 import com.android.systemui.navigationbar.NavBarHelper;
 import com.android.systemui.navigationbar.NavigationModeController;
 import com.android.systemui.navigationbar.gestural.BackAnimationPilferPointerCallbackManager;
@@ -63,6 +75,7 @@ import com.android.systemui.navigationbar.store.EventTypeFactory;
 import com.android.systemui.navigationbar.store.NavBarStateManager;
 import com.android.systemui.navigationbar.store.NavBarStateManagerImpl;
 import com.android.systemui.navigationbar.store.NavBarStore;
+import com.android.systemui.navigationbar.store.NavBarStoreAction;
 import com.android.systemui.navigationbar.store.NavBarStoreImpl;
 import com.android.systemui.navigationbar.util.NavigationModeUtil;
 import com.android.systemui.navigationbar.util.OneHandModeUtil;
@@ -93,7 +106,9 @@ import com.android.systemui.shared.recents.utilities.Utilities;
 import com.android.systemui.shared.rotation.FloatingRotationButton;
 import com.android.systemui.shared.rotation.FloatingRotationButtonPositionCalculator;
 import com.android.systemui.shared.rotation.RotationButtonController;
+import com.android.systemui.shared.rotation.RotationButtonController$$ExternalSyntheticLambda0;
 import com.android.systemui.shared.rotation.RotationPolicyUtil;
+import com.android.systemui.shared.rotation.RotationUtil;
 import com.android.systemui.shared.statusbar.phone.BarTransitions;
 import com.android.systemui.shared.system.QuickStepContract;
 import com.android.systemui.shared.system.SysUiStatsLog;
@@ -123,6 +138,7 @@ import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.Utils;
 import com.android.systemui.util.ViewController;
+import com.android.systemui.util.wakelock.WakeLock;
 import com.android.wm.shell.back.BackAnimationController;
 import com.android.wm.shell.back.BackAnimationController$1$$ExternalSyntheticLambda0;
 import com.android.wm.shell.pip.Pip;
@@ -134,6 +150,7 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -141,7 +158,6 @@ import java.util.Optional;
 import java.util.concurrent.Executor;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NavigationBar extends ViewController implements CommandQueue.Callbacks {
     public final AccessibilityManager mAccessibilityManager;
@@ -247,7 +263,6 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
     public final AnonymousClass7 mWakefulnessObserver;
     public final WindowManager mWindowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.navigationbar.views.NavigationBar$13, reason: invalid class name */
     public class AnonymousClass13 implements Gefingerpoken {
         public boolean mDeadZoneConsuming;
@@ -287,7 +302,6 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.navigationbar.views.NavigationBar$6, reason: invalid class name */
     public class AnonymousClass6 {
         public boolean mHasBlurs;
@@ -296,7 +310,6 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum NavBarActionEvent implements UiEventLogger.UiEventEnum {
         NAVBAR_ASSIST_LONGPRESS(550);
 
@@ -312,14 +325,14 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
     }
 
     /* renamed from: $r8$lambda$HCBlCcLTUzLXTlWADh-tZKsEEs4, reason: not valid java name */
-    public static void m2625$r8$lambda$HCBlCcLTUzLXTlWADhtZKsEEs4(NavigationBar navigationBar) {
+    public static void m2643$r8$lambda$HCBlCcLTUzLXTlWADhtZKsEEs4(NavigationBar navigationBar) {
         NavigationBarView navigationBarView = (NavigationBarView) navigationBar.mView;
         navigationBarView.mLayoutTransitionsEnabled = true;
         navigationBarView.updateLayoutTransitionsEnabled();
     }
 
     /* renamed from: $r8$lambda$PHzUD06Qyv-u_i_ArfJRIF89Blg, reason: not valid java name */
-    public static void m2626$r8$lambda$PHzUD06Qyvu_i_ArfJRIF89Blg(NavigationBar navigationBar) {
+    public static void m2644$r8$lambda$PHzUD06Qyvu_i_ArfJRIF89Blg(NavigationBar navigationBar) {
         if (navigationBar.onHomeLongClick(((NavigationBarView) navigationBar.mView).getHomeButton().mCurrentView) && navigationBar.mHomeButtonLongPressHapticEnabled) {
             ((NavigationBarView) navigationBar.mView).getHomeButton().mCurrentView.performHapticFeedback(0, 1);
         }
@@ -345,7 +358,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
     }
 
     /* renamed from: -$$Nest$mcalculateSamplingRect, reason: not valid java name */
-    public static Rect m2627$$Nest$mcalculateSamplingRect(NavigationBar navigationBar) {
+    public static Rect m2645$$Nest$mcalculateSamplingRect(NavigationBar navigationBar) throws Resources.NotFoundException {
         int i;
         int i2;
         int i3;
@@ -408,7 +421,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
                 int i12 = iArr2[0] - i4;
                 int i13 = point2.y;
                 NavigationBarView navigationBarView = (NavigationBarView) navigationBar.mView;
-                navigationBar.mSamplingBounds.set(new Rect(i12, i13 - (navigationBarView.mIsVertical ? navigationBarView.getResources().getDimensionPixelSize(android.R.dimen.select_dialog_padding_start_material) : navigationBarView.getResources().getDimensionPixelSize(android.R.dimen.seekbar_track_progress_height_material)), view2.getWidth() + iArr2[0] + i4, point2.y));
+                navigationBar.mSamplingBounds.set(new Rect(i12, i13 - (navigationBarView.mIsVertical ? navigationBarView.getResources().getDimensionPixelSize(android.R.dimen.slice_icon_size) : navigationBarView.getResources().getDimensionPixelSize(android.R.dimen.select_dialog_drawable_padding_start_material)), view2.getWidth() + iArr2[0] + i4, point2.y));
             }
         }
         return navigationBar.mSamplingBounds;
@@ -589,13 +602,13 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
                 floatingRotationButton.mIsTaskbarVisible = z;
                 floatingRotationButton.mIsTaskbarStashed = z2;
                 if (floatingRotationButton.mIsShowing) {
-                    FloatingRotationButtonPositionCalculator.Position calculatePosition = floatingRotationButton.mPositionCalculator.calculatePosition(floatingRotationButton.mDisplayRotation, z, z2);
+                    FloatingRotationButtonPositionCalculator.Position positionCalculatePosition = floatingRotationButton.mPositionCalculator.calculatePosition(floatingRotationButton.mDisplayRotation, z, z2);
                     FloatingRotationButtonPositionCalculator.Position position = floatingRotationButton.mPosition;
-                    if (calculatePosition.translationX == position.translationX && calculatePosition.translationY == position.translationY) {
+                    if (positionCalculatePosition.translationX == position.translationX && positionCalculatePosition.translationY == position.translationY) {
                         return;
                     }
-                    floatingRotationButton.updateTranslation(calculatePosition, true);
-                    floatingRotationButton.mPosition = calculatePosition;
+                    floatingRotationButton.updateTranslation(positionCalculatePosition, true);
+                    floatingRotationButton.mPosition = positionCalculatePosition;
                 }
             }
 
@@ -612,9 +625,9 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             @Override // com.android.systemui.recents.LauncherProxyService.LauncherProxyListener
             public final void setOverrideHomeButtonLongPress(float f, boolean z, long j) {
                 Log.d("NavigationBar", "setOverrideHomeButtonLongPress receives: " + j + ";" + f + ";" + z);
-                Optional filter = Optional.of(Long.valueOf(j)).filter(new NavigationBar$$ExternalSyntheticLambda3(1));
+                Optional optionalFilter = Optional.of(Long.valueOf(j)).filter(new NavigationBar$$ExternalSyntheticLambda3(1));
                 NavigationBar navigationBar = NavigationBar.this;
-                navigationBar.mOverrideHomeButtonLongPressDurationMs = filter;
+                navigationBar.mOverrideHomeButtonLongPressDurationMs = optionalFilter;
                 navigationBar.mOverrideHomeButtonLongPressSlopMultiplier = Optional.of(Float.valueOf(f)).filter(new NavigationBar$$ExternalSyntheticLambda3(2));
                 navigationBar.mHomeButtonLongPressHapticEnabled = z;
                 navigationBar.mOverrideHomeButtonLongPressDurationMs.ifPresent(new NavigationBar$$ExternalSyntheticLambda5(2));
@@ -695,7 +708,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         };
         ?? r8 = new NavigationModeController.ModeChangedListener() { // from class: com.android.systemui.navigationbar.views.NavigationBar.12
             @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
-            public final void onNavigationModeChanged(int i) {
+            public final void onNavigationModeChanged(int i) throws Resources.NotFoundException {
                 NavigationBar navigationBar = NavigationBar.this;
                 boolean z = navigationBar.mNavBarMode != i;
                 navigationBar.mNavBarMode = i;
@@ -705,9 +718,9 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
                     NavBarStates navBarStates = ((NavBarStateManagerImpl) navigationBar.mNavBarStateManager).states;
                     navBarStore.handleEvent(navigationBar, new EventTypeFactory.EventType.OnNavBarConfigChanged(navBarStates.canMove, navBarStates.supportPhoneLayoutProvider, navBarStates.imeDownButtonForAllRotation, i), navigationBar.mDisplayId);
                 }
-                boolean isGesturalMode = QuickStepContract.isGesturalMode(i);
+                boolean zIsGesturalMode = QuickStepContract.isGesturalMode(i);
                 NavigationBarTransitions navigationBarTransitions2 = navigationBar.mNavigationBarTransitions;
-                if (!isGesturalMode && navigationBarTransitions2 != null) {
+                if (!zIsGesturalMode && navigationBarTransitions2 != null) {
                     BarTransitions.BarBackgroundDrawable barBackgroundDrawable = navigationBarTransitions2.mBarBackground;
                     barBackgroundDrawable.mOverrideAlpha = 1.0f;
                     barBackgroundDrawable.invalidateSelf();
@@ -795,7 +808,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         this.mNavColorSampleMargin = getResources().getDimensionPixelSize(R.dimen.navigation_handle_sample_horizontal_margin);
         this.mOnComputeInternalInsetsListener = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.systemui.navigationbar.views.NavigationBar$$ExternalSyntheticLambda17
             public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                NavigationBar.$r8$lambda$Wn0o0kPDQmSoM28iBhTM7ckQ3iw(NavigationBar.this, internalInsetsInfo);
+                NavigationBar.$r8$lambda$Wn0o0kPDQmSoM28iBhTM7ckQ3iw(this.f$0, internalInsetsInfo);
             }
         };
         this.mRegionSamplingHelper = new RegionSamplingHelper(this.mView, new RegionSamplingHelper.SamplingCallback() { // from class: com.android.systemui.navigationbar.views.NavigationBar.10
@@ -803,7 +816,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             public final Rect getSampledRegion() {
                 NavigationBar navigationBar = NavigationBar.this;
                 Rect rect = navigationBar.mOrientedHandleSamplingRegion;
-                return rect != null ? rect : NavigationBar.m2627$$Nest$mcalculateSamplingRect(navigationBar);
+                return rect != null ? rect : NavigationBar.m2645$$Nest$mcalculateSamplingRect(navigationBar);
             }
 
             @Override // com.android.wm.shell.shared.handles.RegionSamplingHelper.SamplingCallback
@@ -861,9 +874,9 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             return;
         }
         if (z2) {
-            HashMap hashMap = (HashMap) map;
-            if (hashMap.containsKey(view)) {
-                region.op((Rect) hashMap.get(view), Region.Op.UNION);
+            HashMap map2 = (HashMap) map;
+            if (map2.containsKey(view)) {
+                region.op((Rect) map2.get(view), Region.Op.UNION);
                 return;
             }
         }
@@ -883,121 +896,69 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         this.mNavigationBarTransitions.transitionTo(this.mTransitionMode, (BasicRune.NAVBAR_ENABLED || !((Boolean) ((Optional) this.mCentralSurfacesOptionalLazy.get()).map(new NavigationBar$$ExternalSyntheticLambda28()).orElse(Boolean.FALSE)).booleanValue() || this.mNavigationBarWindowState == 2) ? false : true);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x00bc, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x00bc, code lost:
     
         r5 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x00c0, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:37:0x00c0, code lost:
     
         throw r5;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void destroyView() {
-        /*
-            r5 = this;
-            com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler r0 = r5.mEdgeBackGestureHandler
-            java.lang.String r1 = "NavigationBar#destroyView"
-            android.os.Trace.beginSection(r1)
-            r1 = 0
-            r5.setAutoHideController(r1)     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.statusbar.CommandQueue r2 = r5.mCommandQueue     // Catch: java.lang.Throwable -> Lbc
-            r2.removeCallback(r5)     // Catch: java.lang.Throwable -> Lbc
-            java.lang.String r2 = "NavigationBar#removeViewImmediate"
-            android.os.Trace.beginSection(r2)     // Catch: java.lang.Throwable -> Lbc
-            android.view.WindowManager r2 = r5.mWindowManager     // Catch: java.lang.IllegalArgumentException -> L26 java.lang.Throwable -> Lb7
-            T extends android.view.View r3 = r5.mView     // Catch: java.lang.IllegalArgumentException -> L26 java.lang.Throwable -> Lb7
-            com.android.systemui.navigationbar.views.NavigationBarView r3 = (com.android.systemui.navigationbar.views.NavigationBarView) r3     // Catch: java.lang.IllegalArgumentException -> L26 java.lang.Throwable -> Lb7
-            android.view.View r3 = r3.getRootView()     // Catch: java.lang.IllegalArgumentException -> L26 java.lang.Throwable -> Lb7
-            r2.removeViewImmediate(r3)     // Catch: java.lang.IllegalArgumentException -> L26 java.lang.Throwable -> Lb7
-        L22:
-            android.os.Trace.endSection()     // Catch: java.lang.Throwable -> Lbc
-            goto L2f
-        L26:
-            r2 = move-exception
-            java.lang.String r3 = "NavigationBar"
-            java.lang.String r4 = "Failed to removed view from WindowManager. The View wasn't attached."
-            android.util.Log.e(r3, r4, r2)     // Catch: java.lang.Throwable -> Lb7
-            goto L22
-        L2f:
-            com.android.systemui.navigationbar.NavigationModeController r2 = r5.mNavigationModeController     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.navigationbar.views.NavigationBar$12 r3 = r5.mModeChangedListener     // Catch: java.lang.Throwable -> Lbc
-            r2.removeListener(r3)     // Catch: java.lang.Throwable -> Lbc
-            r0.mStateChangeCallback = r1     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.navigationbar.NavBarHelper r2 = r5.mNavBarHelper     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.navigationbar.views.NavigationBar$2 r3 = r5.mNavbarTaskbarStateUpdater     // Catch: java.lang.Throwable -> Lbc
-            r2.removeNavTaskStateUpdater(r3)     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.statusbar.NotificationShadeDepthController r2 = r5.mNotificationShadeDepthController     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.navigationbar.views.NavigationBar$6 r3 = r5.mDepthListener     // Catch: java.lang.Throwable -> Lbc
-            java.util.List r2 = r2.listeners     // Catch: java.lang.Throwable -> Lbc
-            java.util.ArrayList r2 = (java.util.ArrayList) r2     // Catch: java.lang.Throwable -> Lbc
-            r2.remove(r3)     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.util.DeviceConfigProxy r2 = r5.mDeviceConfigProxy     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.navigationbar.views.NavigationBar$5 r3 = r5.mOnPropertiesChangedListener     // Catch: java.lang.Throwable -> Lbc
-            r2.removeOnPropertiesChangedListener(r3)     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.shared.system.TaskStackChangeListeners r2 = r5.mTaskStackChangeListeners     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.navigationbar.views.NavigationBar$8 r3 = r5.mTaskStackListener     // Catch: java.lang.Throwable -> Lbc
-            r2.unregisterTaskStackListener(r3)     // Catch: java.lang.Throwable -> Lbc
-            boolean r2 = com.android.systemui.BasicRune.NAVBAR_SUPPORT_COVER_DISPLAY     // Catch: java.lang.Throwable -> Lbc
-            if (r2 == 0) goto L85
-            int r2 = r5.mDisplayId     // Catch: java.lang.Throwable -> Lbc
-            r3 = 1
-            if (r2 != r3) goto L85
-            com.android.systemui.statusbar.phone.LightBarController r2 = r5.mMainLightBarController     // Catch: java.lang.Throwable -> Lbc
-            if (r2 == 0) goto L6c
-            com.android.systemui.statusbar.phone.LightBarControllerImpl r2 = (com.android.systemui.statusbar.phone.LightBarControllerImpl) r2     // Catch: java.lang.Throwable -> Lbc
-            r2.stop()     // Catch: java.lang.Throwable -> Lbc
-            r5.mMainLightBarController = r1     // Catch: java.lang.Throwable -> Lbc
-        L6c:
-            com.android.systemui.statusbar.phone.LightBarController r2 = r5.mLightBarController     // Catch: java.lang.Throwable -> Lbc
-            if (r2 == 0) goto L75
-            com.android.systemui.statusbar.phone.LightBarControllerImpl r2 = (com.android.systemui.statusbar.phone.LightBarControllerImpl) r2     // Catch: java.lang.Throwable -> Lbc
-            r2.stop()     // Catch: java.lang.Throwable -> Lbc
-        L75:
-            r0.onNavBarDetached()     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.statusbar.phone.AutoHideControllerImpl r0 = r5.mMainAutoHideController     // Catch: java.lang.Throwable -> Lbc
-            if (r0 == 0) goto L85
-            com.android.systemui.statusbar.phone.AutoHideControllerImpl$$ExternalSyntheticLambda0 r2 = r0.mAutoHide     // Catch: java.lang.Throwable -> Lbc
-            android.os.Handler r0 = r0.mHandler     // Catch: java.lang.Throwable -> Lbc
-            r0.removeCallbacks(r2)     // Catch: java.lang.Throwable -> Lbc
-            r5.mMainAutoHideController = r1     // Catch: java.lang.Throwable -> Lbc
-        L85:
-            boolean r0 = com.android.systemui.BasicRune.NAVBAR_ENABLED     // Catch: java.lang.Throwable -> Lbc
-            if (r0 == 0) goto Lb3
-            r5.setLightBarController(r1)     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.navigationbar.store.NavBarStore r0 = r5.mNavBarStore     // Catch: java.lang.Throwable -> Lbc
-            int r2 = r5.mDisplayId     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.navigationbar.store.NavBarStoreImpl r0 = (com.android.systemui.navigationbar.store.NavBarStoreImpl) r0     // Catch: java.lang.Throwable -> Lbc
-            if (r2 == 0) goto La7
-            java.lang.Integer r3 = java.lang.Integer.valueOf(r2)     // Catch: java.lang.Throwable -> Lbc
-            java.util.HashMap r4 = r0.navDependencies     // Catch: java.lang.Throwable -> Lbc
-            r4.put(r3, r1)     // Catch: java.lang.Throwable -> Lbc
-            java.lang.Integer r2 = java.lang.Integer.valueOf(r2)     // Catch: java.lang.Throwable -> Lbc
-            java.util.HashMap r0 = r0.navStateManager     // Catch: java.lang.Throwable -> Lbc
-            r0.put(r2, r1)     // Catch: java.lang.Throwable -> Lbc
-            goto Laa
-        La7:
-            r0.getClass()     // Catch: java.lang.Throwable -> Lbc
-        Laa:
-            com.android.systemui.statusbar.policy.KeyguardStateController r0 = r5.mKeyguardStateController     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.navigationbar.views.NavigationBar$9 r5 = r5.mKeyguardStateControllerCallback     // Catch: java.lang.Throwable -> Lbc
-            com.android.systemui.statusbar.policy.KeyguardStateControllerImpl r0 = (com.android.systemui.statusbar.policy.KeyguardStateControllerImpl) r0     // Catch: java.lang.Throwable -> Lbc
-            r0.removeCallback(r5)     // Catch: java.lang.Throwable -> Lbc
-        Lb3:
-            android.os.Trace.endSection()
-            return
-        Lb7:
-            r5 = move-exception
-            android.os.Trace.endSection()     // Catch: java.lang.Throwable -> Lbc
-            throw r5     // Catch: java.lang.Throwable -> Lbc
-        Lbc:
-            r5 = move-exception
-            android.os.Trace.endSection()
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.views.NavigationBar.destroyView():void");
+        EdgeBackGestureHandler edgeBackGestureHandler = this.mEdgeBackGestureHandler;
+        Trace.beginSection("NavigationBar#destroyView");
+        try {
+            setAutoHideController(null);
+            this.mCommandQueue.removeCallback((CommandQueue.Callbacks) this);
+            Trace.beginSection("NavigationBar#removeViewImmediate");
+            try {
+                this.mWindowManager.removeViewImmediate(((NavigationBarView) this.mView).getRootView());
+            } catch (IllegalArgumentException e) {
+                Log.e("NavigationBar", "Failed to removed view from WindowManager. The View wasn't attached.", e);
+            }
+            Trace.endSection();
+            this.mNavigationModeController.removeListener(this.mModeChangedListener);
+            edgeBackGestureHandler.mStateChangeCallback = null;
+            this.mNavBarHelper.removeNavTaskStateUpdater(this.mNavbarTaskbarStateUpdater);
+            NotificationShadeDepthController notificationShadeDepthController = this.mNotificationShadeDepthController;
+            ((ArrayList) notificationShadeDepthController.listeners).remove(this.mDepthListener);
+            this.mDeviceConfigProxy.removeOnPropertiesChangedListener(this.mOnPropertiesChangedListener);
+            this.mTaskStackChangeListeners.unregisterTaskStackListener(this.mTaskStackListener);
+            if (BasicRune.NAVBAR_SUPPORT_COVER_DISPLAY && this.mDisplayId == 1) {
+                LightBarController lightBarController = this.mMainLightBarController;
+                if (lightBarController != null) {
+                    ((LightBarControllerImpl) lightBarController).stop();
+                    this.mMainLightBarController = null;
+                }
+                LightBarController lightBarController2 = this.mLightBarController;
+                if (lightBarController2 != null) {
+                    ((LightBarControllerImpl) lightBarController2).stop();
+                }
+                edgeBackGestureHandler.onNavBarDetached();
+                AutoHideControllerImpl autoHideControllerImpl = this.mMainAutoHideController;
+                if (autoHideControllerImpl != null) {
+                    autoHideControllerImpl.mHandler.removeCallbacks(autoHideControllerImpl.mAutoHide);
+                    this.mMainAutoHideController = null;
+                }
+            }
+            if (BasicRune.NAVBAR_ENABLED) {
+                setLightBarController(null);
+                NavBarStore navBarStore = this.mNavBarStore;
+                int i = this.mDisplayId;
+                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) navBarStore;
+                if (i != 0) {
+                    navBarStoreImpl.navDependencies.put(Integer.valueOf(i), null);
+                    navBarStoreImpl.navStateManager.put(Integer.valueOf(i), null);
+                } else {
+                    navBarStoreImpl.getClass();
+                }
+                ((KeyguardStateControllerImpl) this.mKeyguardStateController).removeCallback(this.mKeyguardStateControllerCallback);
+            }
+        } finally {
+        }
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
@@ -1037,17 +998,17 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         this.mHandler.postDelayed(this.mEnableLayoutTransitions, j + 448);
     }
 
-    public final void dump(PrintWriter printWriter) {
-        String str;
+    public final void dump(PrintWriter printWriter) throws Resources.NotFoundException {
+        String resourceName;
         printWriter.println("NavigationBar (displayId=" + this.mDisplayId + "):");
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mStartingQuickSwitchRotation="), this.mStartingQuickSwitchRotation, printWriter, "  mCurrentRotation="), this.mCurrentRotation, printWriter, "  mHomeButtonLongPressDurationMs=");
-        m.append(this.mHomeButtonLongPressDurationMs);
-        printWriter.println(m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mStartingQuickSwitchRotation="), this.mStartingQuickSwitchRotation, printWriter, "  mCurrentRotation="), this.mCurrentRotation, printWriter, "  mHomeButtonLongPressDurationMs=");
+        sbM.append(this.mHomeButtonLongPressDurationMs);
+        printWriter.println(sbM.toString());
         printWriter.println("  mOverrideHomeButtonLongPressDurationMs=" + this.mOverrideHomeButtonLongPressDurationMs);
         printWriter.println("  mOverrideHomeButtonLongPressSlopMultiplier=" + this.mOverrideHomeButtonLongPressSlopMultiplier);
-        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mLongPressHomeEnabled="), this.mLongPressHomeEnabled, printWriter, "  mNavigationBarWindowState=");
-        m2.append(StatusBarManager.windowStateToString(this.mNavigationBarWindowState));
-        printWriter.println(m2.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mLongPressHomeEnabled="), this.mLongPressHomeEnabled, printWriter, "  mNavigationBarWindowState=");
+        sbM2.append(StatusBarManager.windowStateToString(this.mNavigationBarWindowState));
+        printWriter.println(sbM2.toString());
         printWriter.println("  mNavbarFlags=" + StatusBarManager.navbarFlagsToString(this.mNavbarFlags));
         printWriter.println("  mTransitionMode=".concat(BarTransitions.modeToString(this.mTransitionMode)));
         KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mTransientShown="), this.mTransientShown, printWriter, "  mTransientShownFromGestureOnSystemBar="), this.mTransientShownFromGestureOnSystemBar, printWriter, "  mScreenPinningActive="), this.mScreenPinningActive, printWriter);
@@ -1070,14 +1031,14 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         int id = navigationBarView.mCurrentView.getId();
         if (id != 0) {
             try {
-                str = navigationBarView.getContext().getResources().getResourceName(id);
+                resourceName = navigationBarView.getContext().getResources().getResourceName(id);
             } catch (Resources.NotFoundException unused) {
-                str = "(unknown)";
+                resourceName = "(unknown)";
             }
         } else {
-            str = "(null)";
+            resourceName = "(null)";
         }
-        printWriter.println(String.format("      mCurrentView: id=%s (%dx%d) %s %f", str, Integer.valueOf(navigationBarView.mCurrentView.getWidth()), Integer.valueOf(navigationBarView.mCurrentView.getHeight()), NavigationBarView.visibilityToString(navigationBarView.mCurrentView.getVisibility()), Float.valueOf(navigationBarView.mCurrentView.getAlpha())));
+        printWriter.println(String.format("      mCurrentView: id=%s (%dx%d) %s %f", resourceName, Integer.valueOf(navigationBarView.mCurrentView.getWidth()), Integer.valueOf(navigationBarView.mCurrentView.getHeight()), NavigationBarView.visibilityToString(navigationBarView.mCurrentView.getVisibility()), Float.valueOf(navigationBarView.mCurrentView.getAlpha())));
         printWriter.println(String.format("      disabled=0x%08x vertical=%s darkIntensity=%.2f", Integer.valueOf(navigationBarView.mDisabledFlags), navigationBarView.mIsVertical ? "true" : "false", Float.valueOf(navigationBarView.mBarTransitions.mLightTransitionsController.mDarkIntensity)));
         printWriter.println("    mScreenOn: " + navigationBarView.mScreenOn);
         NavigationBarView.dumpButton(printWriter, "back", navigationBarView.getBackButton());
@@ -1102,31 +1063,31 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         printWriter.println("NavigationBarTransitions:");
         printWriter.println("  mMode: " + navigationBarTransitions.mMode);
         printWriter.println("  mAlwaysOpaque: false");
-        StringBuilder m3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mAllowAutoDimWallpaperNotVisible: "), navigationBarTransitions.mAllowAutoDimWallpaperNotVisible, printWriter, "  mWallpaperVisible: "), navigationBarTransitions.mWallpaperVisible, printWriter, "  mLightsOut: "), navigationBarTransitions.mLightsOut, printWriter, "  mAutoDim: "), navigationBarTransitions.mAutoDim, printWriter, "  bg overrideAlpha: "), navigationBarTransitions.mBarBackground.mOverrideAlpha, printWriter, "  bg color: "), navigationBarTransitions.mBarBackground.mColor, printWriter, "  bg frame: ");
-        m3.append(navigationBarTransitions.mBarBackground.mFrame);
-        printWriter.println(m3.toString());
+        StringBuilder sbM3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mAllowAutoDimWallpaperNotVisible: "), navigationBarTransitions.mAllowAutoDimWallpaperNotVisible, printWriter, "  mWallpaperVisible: "), navigationBarTransitions.mWallpaperVisible, printWriter, "  mLightsOut: "), navigationBarTransitions.mLightsOut, printWriter, "  mAutoDim: "), navigationBarTransitions.mAutoDim, printWriter, "  bg overrideAlpha: "), navigationBarTransitions.mBarBackground.mOverrideAlpha, printWriter, "  bg color: "), navigationBarTransitions.mBarBackground.mColor, printWriter, "  bg frame: ");
+        sbM3.append(navigationBarTransitions.mBarBackground.mFrame);
+        printWriter.println(sbM3.toString());
         ContextualButtonGroup contextualButtonGroup = navigationBarView.mContextualButtonGroup;
         View view = contextualButtonGroup.mCurrentView;
-        StringBuilder m4 = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "ContextualButtonGroup", "  getVisibleContextButton(): ");
-        m4.append(contextualButtonGroup.getVisibleContextButton());
-        printWriter.println(m4.toString());
-        StringBuilder m5 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  isVisible(): "), contextualButtonGroup.getVisibility() == 0, printWriter, "  attached(): ");
-        m5.append(view != null && view.isAttachedToWindow());
-        printWriter.println(m5.toString());
+        StringBuilder sbM4 = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "ContextualButtonGroup", "  getVisibleContextButton(): ");
+        sbM4.append(contextualButtonGroup.getVisibleContextButton());
+        printWriter.println(sbM4.toString());
+        StringBuilder sbM5 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  isVisible(): "), contextualButtonGroup.getVisibility() == 0, printWriter, "  attached(): ");
+        sbM5.append(view != null && view.isAttachedToWindow());
+        printWriter.println(sbM5.toString());
         printWriter.println("  mButtonData [ ");
         for (int size = ((ArrayList) contextualButtonGroup.mButtonData).size() - 1; size >= 0; size--) {
             ContextualButtonGroup.ButtonData buttonData = (ContextualButtonGroup.ButtonData) ((ArrayList) contextualButtonGroup.mButtonData).get(size);
             View view2 = buttonData.button.mCurrentView;
-            StringBuilder m6 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size, "    ", ": markedVisible=");
-            m6.append(buttonData.markedVisible);
-            m6.append(" visible=");
+            StringBuilder sbM6 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size, "    ", ": markedVisible=");
+            sbM6.append(buttonData.markedVisible);
+            sbM6.append(" visible=");
             ContextualButton contextualButton = buttonData.button;
-            m6.append(contextualButton.getVisibility());
-            m6.append(" attached=");
-            m6.append(view2 != null && view2.isAttachedToWindow());
-            m6.append(" alpha=");
-            m6.append(contextualButton.getAlpha());
-            printWriter.println(m6.toString());
+            sbM6.append(contextualButton.getVisibility());
+            sbM6.append(" attached=");
+            sbM6.append(view2 != null && view2.isAttachedToWindow());
+            sbM6.append(" alpha=");
+            sbM6.append(contextualButton.getAlpha());
+            printWriter.println(sbM6.toString());
         }
         printWriter.println("  ]");
         navigationBarView.mEdgeBackGestureHandler.dump(printWriter);
@@ -1137,27 +1098,27 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         StringBuilder sb2 = new StringBuilder("\tsampleView isScValid: ");
         sb2.append(regionSamplingHelper.mSampledView.isAttachedToWindow() ? Boolean.valueOf(regionSamplingHelper.mSampledView.getViewRootImpl().getSurfaceControl().isValid()) : "notAttached");
         printWriter.println(sb2.toString());
-        StringBuilder m7 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("\tmSamplingEnabled: "), regionSamplingHelper.mSamplingEnabled, printWriter, "\tmSamplingListenerRegistered: "), regionSamplingHelper.mSamplingListenerRegistered, printWriter, "\tmSamplingRequestBounds: ");
-        m7.append(regionSamplingHelper.mSamplingRequestBounds);
-        printWriter.println(m7.toString());
+        StringBuilder sbM7 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("\tmSamplingEnabled: "), regionSamplingHelper.mSamplingEnabled, printWriter, "\tmSamplingListenerRegistered: "), regionSamplingHelper.mSamplingListenerRegistered, printWriter, "\tmSamplingRequestBounds: ");
+        sbM7.append(regionSamplingHelper.mSamplingRequestBounds);
+        printWriter.println(sbM7.toString());
         printWriter.println("\tmRegisteredSamplingBounds: " + regionSamplingHelper.mRegisteredSamplingBounds);
-        StringBuilder m8 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("\tmLastMedianLuma: "), regionSamplingHelper.mLastMedianLuma, printWriter, "\tmCurrentMedianLuma: "), regionSamplingHelper.mCurrentMedianLuma, printWriter, "\tmWindowVisible: "), regionSamplingHelper.mWindowVisible, printWriter, "\tmWindowHasBlurs: "), regionSamplingHelper.mWindowHasBlurs, printWriter, "\tmWaitingOnDraw: "), regionSamplingHelper.mWaitingOnDraw, printWriter, "\tmRegisteredStopLayer: ");
-        m8.append(regionSamplingHelper.mRegisteredStopLayer);
-        printWriter.println(m8.toString());
+        StringBuilder sbM8 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("\tmLastMedianLuma: "), regionSamplingHelper.mLastMedianLuma, printWriter, "\tmCurrentMedianLuma: "), regionSamplingHelper.mCurrentMedianLuma, printWriter, "\tmWindowVisible: "), regionSamplingHelper.mWindowVisible, printWriter, "\tmWindowHasBlurs: "), regionSamplingHelper.mWindowHasBlurs, printWriter, "\tmWaitingOnDraw: "), regionSamplingHelper.mWaitingOnDraw, printWriter, "\tmRegisteredStopLayer: ");
+        sbM8.append(regionSamplingHelper.mRegisteredStopLayer);
+        printWriter.println(sbM8.toString());
         printWriter.println("\tmWrappedStopLayer: " + regionSamplingHelper.mWrappedStopLayer);
         KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("\tmIsDestroyed: "), regionSamplingHelper.mIsDestroyed, printWriter);
         AutoHideControllerImpl autoHideControllerImpl = this.mAutoHideController;
         if (autoHideControllerImpl != null) {
-            StringBuilder m9 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "AutoHideController:", "\tmAutoHideSuspended="), autoHideControllerImpl.mAutoHideSuspended, printWriter, "\tisAnyTransientBarShown=");
-            m9.append(autoHideControllerImpl.isAnyTransientBarShown());
-            printWriter.println(m9.toString());
+            StringBuilder sbM9 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "AutoHideController:", "\tmAutoHideSuspended="), autoHideControllerImpl.mAutoHideSuspended, printWriter, "\tisAnyTransientBarShown=");
+            sbM9.append(autoHideControllerImpl.isAnyTransientBarShown());
+            printWriter.println(sbM9.toString());
             printWriter.println("\thasPendingAutoHide=" + autoHideControllerImpl.mHandler.hasCallbacks(autoHideControllerImpl.mAutoHide));
             printWriter.println("\tgetAutoHideTimeout=" + autoHideControllerImpl.mAccessibilityManager.getRecommendedTimeoutMillis(2250, 4));
             printWriter.println("\tgetUserAutoHideTimeout=" + autoHideControllerImpl.mAccessibilityManager.getRecommendedTimeoutMillis(350, 4));
         }
     }
 
-    public final WindowManager.LayoutParams getBarLayoutParams(int i) {
+    public final WindowManager.LayoutParams getBarLayoutParams(int i) throws Resources.NotFoundException {
         WindowManager.LayoutParams barLayoutParamsForRotation = getBarLayoutParamsForRotation(i);
         barLayoutParamsForRotation.paramsForRotation = new WindowManager.LayoutParams[4];
         for (int i2 = 0; i2 <= 3; i2++) {
@@ -1166,23 +1127,177 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         return barLayoutParamsForRotation;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00ee  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x02d0  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x02ee  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x02da  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x01fd  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0097  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x003d  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00b6  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00ee  */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x01fd  */
+    /* JADX WARN: Removed duplicated region for block: B:82:0x02d0  */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x02da  */
+    /* JADX WARN: Removed duplicated region for block: B:90:0x02fb  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.view.WindowManager.LayoutParams getBarLayoutParamsForRotation(int r26) {
-        /*
-            Method dump skipped, instructions count: 803
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.views.NavigationBar.getBarLayoutParamsForRotation(int):android.view.WindowManager$LayoutParams");
+    public final WindowManager.LayoutParams getBarLayoutParamsForRotation(int i) throws Resources.NotFoundException {
+        boolean z;
+        int i2;
+        int dimensionPixelSize;
+        int dimensionPixelSize2;
+        int i3;
+        int i4;
+        boolean z2;
+        char c;
+        char c2;
+        int i5;
+        int dimensionPixelSize3;
+        WindowManager.LayoutParams layoutParams;
+        NavBarStoreAction.NavBarLayoutInfo navBarLayoutInfo;
+        Context contextCreateCurrentUserContext = ((UserTrackerImpl) this.mUserContextProvider).createCurrentUserContext(this.mContext);
+        WindowManager windowManager = this.mWindowManager;
+        if (windowManager == null || windowManager.getCurrentWindowMetrics() == null) {
+            z = true;
+        } else {
+            Rect bounds = this.mWindowManager.getCurrentWindowMetrics().getBounds();
+            if (bounds.width() == bounds.height() || !contextCreateCurrentUserContext.getResources().getBoolean(android.R.bool.config_safe_media_volume_enabled)) {
+                z = false;
+            }
+        }
+        boolean z3 = BasicRune.NAVBAR_ENABLED;
+        NavBarStore navBarStore = this.mNavBarStore;
+        if (!z3 || (navBarLayoutInfo = (NavBarStoreAction.NavBarLayoutInfo) ((NavBarStoreImpl) navBarStore).handleEvent(this, new EventTypeFactory.EventType.GetBarLayoutParams(i), this.mContext.getDisplayId(), null)) == null) {
+            i2 = 80;
+            dimensionPixelSize = -1;
+            dimensionPixelSize2 = -1;
+            i3 = -1;
+            i4 = -1;
+            z2 = false;
+        } else {
+            dimensionPixelSize = navBarLayoutInfo.height;
+            dimensionPixelSize2 = navBarLayoutInfo.insetHeight;
+            i3 = navBarLayoutInfo.insetWidth;
+            i4 = navBarLayoutInfo.width;
+            i2 = navBarLayoutInfo.gravity;
+            z2 = true;
+        }
+        if (z3 && z2) {
+            c = 2;
+        } else {
+            if (z) {
+                if (i == -1 || i == 0) {
+                    c = 2;
+                    dimensionPixelSize = contextCreateCurrentUserContext.getResources().getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_right_edge_size);
+                    dimensionPixelSize2 = contextCreateCurrentUserContext.getResources().getDimensionPixelSize(android.R.dimen.select_dialog_drawable_padding_start_material);
+                } else if (i == 1) {
+                    c2 = 2;
+                    i5 = dimensionPixelSize;
+                    dimensionPixelSize3 = contextCreateCurrentUserContext.getResources().getDimensionPixelSize(android.R.dimen.snooze_and_bubble_gone_padding_end);
+                    i2 = 5;
+                } else if (i != 2) {
+                    char c3 = 2;
+                    c = c3;
+                    if (i == 3) {
+                        i5 = dimensionPixelSize;
+                        dimensionPixelSize3 = contextCreateCurrentUserContext.getResources().getDimensionPixelSize(android.R.dimen.snooze_and_bubble_gone_padding_end);
+                        i2 = 3;
+                        c2 = c3;
+                    }
+                }
+                layoutParams = new WindowManager.LayoutParams(dimensionPixelSize3, i5, 2019, 537133096, -3);
+                layoutParams.gravity = i2;
+                EdgeBackGestureHandler edgeBackGestureHandler = this.mEdgeBackGestureHandler;
+                if (z3) {
+                    InsetsFrameProvider insetsFrameProvider = new InsetsFrameProvider(this.mInsetsSourceOwner, 0, WindowInsets.Type.navigationBars());
+                    if (dimensionPixelSize2 != -1 && !edgeBackGestureHandler.mIsButtonForcedVisible) {
+                        insetsFrameProvider.setInsetsSize(Insets.of(0, 0, 0, dimensionPixelSize2));
+                    }
+                    insetsFrameProvider.setFlags(!contextCreateCurrentUserContext.getResources().getBoolean(android.R.bool.config_searchAllEntrypointsEnabledDefault) ? 1 : 0, 1);
+                    InsetsFrameProvider insetsFrameProvider2 = new InsetsFrameProvider(this.mInsetsSourceOwner, 0, WindowInsets.Type.tappableElement());
+                    if (contextCreateCurrentUserContext.getResources().getBoolean(android.R.bool.config_sendAudioBecomingNoisy)) {
+                        insetsFrameProvider2.setInsetsSize(Insets.NONE);
+                    }
+                    int dimensionPixelSize4 = contextCreateCurrentUserContext.getResources().getDimensionPixelSize(android.R.dimen.seekbar_track_background_height_material);
+                    boolean zIsHandlingGestures = edgeBackGestureHandler.isHandlingGestures();
+                    InsetsFrameProvider insetsFrameProvider3 = new InsetsFrameProvider(this.mInsetsSourceOwner, 0, WindowInsets.Type.mandatorySystemGestures());
+                    if (zIsHandlingGestures) {
+                        insetsFrameProvider3.setInsetsSize(Insets.of(0, 0, 0, dimensionPixelSize4));
+                    }
+                    int i6 = zIsHandlingGestures ? edgeBackGestureHandler.mEdgeWidthLeft : 0;
+                    int i7 = zIsHandlingGestures ? edgeBackGestureHandler.mEdgeWidthRight : 0;
+                    InsetsFrameProvider[] insetsFrameProviderArr = new InsetsFrameProvider[5];
+                    insetsFrameProviderArr[0] = insetsFrameProvider;
+                    insetsFrameProviderArr[1] = insetsFrameProvider2;
+                    insetsFrameProviderArr[c2] = insetsFrameProvider3;
+                    insetsFrameProviderArr[3] = new InsetsFrameProvider(this.mInsetsSourceOwner, 0, WindowInsets.Type.systemGestures()).setSource(0).setInsetsSize(Insets.of(i6, 0, 0, 0)).setMinimalInsetsSizeInDisplayCutoutSafe(Insets.of(i6, 0, 0, 0));
+                    insetsFrameProviderArr[4] = new InsetsFrameProvider(this.mInsetsSourceOwner, 1, WindowInsets.Type.systemGestures()).setSource(0).setInsetsSize(Insets.of(0, 0, i7, 0)).setMinimalInsetsSizeInDisplayCutoutSafe(Insets.of(0, 0, i7, 0));
+                    layoutParams.providedInsets = insetsFrameProviderArr;
+                } else {
+                    NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) navBarStore;
+                    InsetsFrameProvider insetsSizeOverrides = new InsetsFrameProvider(this.mInsetsSourceOwner, 0, WindowInsets.Type.navigationBars()).setInsetsSizeOverrides(new InsetsFrameProvider.InsetsSizeOverride[]{new InsetsFrameProvider.InsetsSizeOverride(2011, (Insets) navBarStoreImpl.handleEvent(this, new EventTypeFactory.EventType.GetImeInsets(dimensionPixelSize2, i3, i, z), this.mDisplayId, null))});
+                    insetsSizeOverrides.setInsetsSize((Insets) navBarStoreImpl.handleEvent(this, new EventTypeFactory.EventType.GetNavBarInsets(dimensionPixelSize2, i3, i), this.mDisplayId, null));
+                    insetsSizeOverrides.setFlags(!contextCreateCurrentUserContext.getResources().getBoolean(android.R.bool.config_searchAllEntrypointsEnabledDefault) ? 1 : 0, 1);
+                    InsetsFrameProvider insetsFrameProvider4 = new InsetsFrameProvider(this.mInsetsSourceOwner, 0, WindowInsets.Type.tappableElement());
+                    if (contextCreateCurrentUserContext.getResources().getBoolean(android.R.bool.config_sendAudioBecomingNoisy)) {
+                        insetsFrameProvider4.setInsetsSize(Insets.NONE);
+                    }
+                    InsetsFrameProvider insetsFrameProvider5 = new InsetsFrameProvider(this.mInsetsSourceOwner, 0, WindowInsets.Type.mandatorySystemGestures());
+                    insetsFrameProvider5.setInsetsSize((Insets) navBarStoreImpl.handleEvent(this, new EventTypeFactory.EventType.GetMandatoryInsets(i, z), this.mDisplayId, null));
+                    edgeBackGestureHandler.updateCurrentUserResources();
+                    Context context = this.mContext;
+                    NavigationModeUtil navigationModeUtil = NavigationModeUtil.INSTANCE;
+                    int i8 = Settings.Global.getInt(context.getContentResolver(), SettingsHelper.INDEX_NAVIGATION_BAR_GESTURE_WHILE_HIDDEN, 0);
+                    int i9 = Settings.Global.getInt(context.getContentResolver(), "navigation_bar_gesture_detail_type", 1);
+                    boolean z4 = (i8 == 0 || i9 == 0 || i9 != 1) ? false : true;
+                    int i10 = z4 ? edgeBackGestureHandler.mEdgeWidthLeft : 0;
+                    int i11 = z4 ? edgeBackGestureHandler.mEdgeWidthRight : 0;
+                    InsetsFrameProvider[] insetsFrameProviderArr2 = new InsetsFrameProvider[5];
+                    insetsFrameProviderArr2[0] = insetsSizeOverrides;
+                    insetsFrameProviderArr2[1] = insetsFrameProvider4;
+                    insetsFrameProviderArr2[c2] = insetsFrameProvider5;
+                    insetsFrameProviderArr2[3] = new InsetsFrameProvider(this.mInsetsSourceOwner, 0, WindowInsets.Type.systemGestures()).setSource(0).setInsetsSize(Insets.of(i10, 0, 0, 0)).setMinimalInsetsSizeInDisplayCutoutSafe(Insets.of(i10, 0, 0, 0));
+                    insetsFrameProviderArr2[4] = new InsetsFrameProvider(this.mInsetsSourceOwner, 1, WindowInsets.Type.systemGestures()).setSource(0).setInsetsSize(Insets.of(0, 0, i11, 0)).setMinimalInsetsSizeInDisplayCutoutSafe(Insets.of(0, 0, i11, 0));
+                    layoutParams.providedInsets = insetsFrameProviderArr2;
+                }
+                layoutParams.token = new Binder();
+                if (z3) {
+                    layoutParams.accessibilityTitle = contextCreateCurrentUserContext.getString(R.string.nav_bar);
+                } else {
+                    layoutParams.accessibilityTitle = contextCreateCurrentUserContext.getString(R.string.samsung_nav_bar);
+                }
+                layoutParams.privateFlags |= 16777216;
+                if (BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN || !((NavBarStateManagerImpl) this.mNavBarStateManager).supportLargeCoverScreenNavBar()) {
+                    layoutParams.privateFlags |= 4096;
+                }
+                layoutParams.layoutInDisplayCutoutMode = 3;
+                layoutParams.windowAnimations = 0;
+                layoutParams.setTitle("NavigationBar" + contextCreateCurrentUserContext.getDisplayId());
+                layoutParams.setFitInsetsTypes(0);
+                layoutParams.setTrustedOverlay();
+                return layoutParams;
+            }
+            dimensionPixelSize = contextCreateCurrentUserContext.getResources().getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_right_edge_size);
+            dimensionPixelSize2 = contextCreateCurrentUserContext.getResources().getDimensionPixelSize(android.R.dimen.select_dialog_drawable_padding_start_material);
+            c = 2;
+        }
+        i5 = dimensionPixelSize;
+        dimensionPixelSize3 = i4;
+        c2 = c;
+        layoutParams = new WindowManager.LayoutParams(dimensionPixelSize3, i5, 2019, 537133096, -3);
+        layoutParams.gravity = i2;
+        EdgeBackGestureHandler edgeBackGestureHandler2 = this.mEdgeBackGestureHandler;
+        if (z3) {
+        }
+        layoutParams.token = new Binder();
+        if (z3) {
+        }
+        layoutParams.privateFlags |= 16777216;
+        if (BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN) {
+            layoutParams.privateFlags |= 4096;
+        }
+        layoutParams.layoutInDisplayCutoutMode = 3;
+        layoutParams.windowAnimations = 0;
+        layoutParams.setTitle("NavigationBar" + contextCreateCurrentUserContext.getDisplayId());
+        layoutParams.setFitInsetsTypes(0);
+        layoutParams.setTrustedOverlay();
+        return layoutParams;
     }
 
     public final Region getButtonLocations(boolean z, boolean z2) {
@@ -1193,20 +1308,20 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         NavigationBarView navigationBarView = (NavigationBarView) this.mView;
         NearestTouchFrame nearestTouchFrame = (NearestTouchFrame) (navigationBarView.mIsVertical ? navigationBarView.mNavigationInflaterView.mVertical : navigationBarView.mNavigationInflaterView.mHorizontal).findViewById(R.id.nav_buttons);
         nearestTouchFrame.getClass();
-        HashMap hashMap = new HashMap(((HashMap) nearestTouchFrame.mTouchableRegions).size());
+        HashMap map = new HashMap(((HashMap) nearestTouchFrame.mTouchableRegions).size());
         nearestTouchFrame.getLocationOnScreen(nearestTouchFrame.mTmpInt);
         for (Map.Entry entry : ((HashMap) nearestTouchFrame.mTouchableRegions).entrySet()) {
             View view = (View) entry.getKey();
             Rect rect = new Rect((Rect) entry.getValue());
             int[] iArr = nearestTouchFrame.mTmpInt;
             rect.offset(iArr[0], iArr[1]);
-            hashMap.put(view, rect);
+            map.put(view, rect);
         }
-        updateButtonLocation(region, hashMap, ((NavigationBarView) this.mView).getBackButton(), z, z2);
-        updateButtonLocation(region, hashMap, ((NavigationBarView) this.mView).getHomeButton(), z, z2);
-        updateButtonLocation(region, hashMap, ((NavigationBarView) this.mView).getRecentsButton(), z, z2);
-        updateButtonLocation(region, hashMap, (ButtonDispatcher) ((NavigationBarView) this.mView).mButtonDispatchers.get(R.id.ime_switcher), z, z2);
-        updateButtonLocation(region, hashMap, ((NavigationBarView) this.mView).getAccessibilityButton(), z, z2);
+        updateButtonLocation(region, map, ((NavigationBarView) this.mView).getBackButton(), z, z2);
+        updateButtonLocation(region, map, ((NavigationBarView) this.mView).getHomeButton(), z, z2);
+        updateButtonLocation(region, map, ((NavigationBarView) this.mView).getRecentsButton(), z, z2);
+        updateButtonLocation(region, map, (ButtonDispatcher) ((NavigationBarView) this.mView).mButtonDispatchers.get(R.id.ime_switcher), z, z2);
+        updateButtonLocation(region, map, ((NavigationBarView) this.mView).getAccessibilityButton(), z, z2);
         FloatingRotationButton floatingRotationButton = ((NavigationBarView) this.mView).mFloatingRotationButton;
         if (floatingRotationButton.mIsShowing) {
             updateButtonLocation(region, floatingRotationButton.mKeyButtonView, z);
@@ -1234,14 +1349,14 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         }
         boolean z = this.mTransientShown;
         this.mEdgeBackGestureHandler.mIsNavBarShownTransiently = z;
-        int transitionMode = NavBarHelper.transitionMode(this.mAppearance, z);
-        if (!updateTransitionMode(transitionMode) || (lightBarController = this.mLightBarController) == null) {
+        int iTransitionMode = NavBarHelper.transitionMode(this.mAppearance, z);
+        if (!updateTransitionMode(iTransitionMode) || (lightBarController = this.mLightBarController) == null) {
             return;
         }
         LightBarControllerImpl lightBarControllerImpl = (LightBarControllerImpl) lightBarController;
-        lightBarControllerImpl.mHasLightNavigationBar = LightBarControllerImpl.isLight(lightBarControllerImpl.mAppearance, transitionMode, 16);
+        lightBarControllerImpl.mHasLightNavigationBar = LightBarControllerImpl.isLight(lightBarControllerImpl.mAppearance, iTransitionMode, 16);
         if (BasicRune.NAVBAR_AOSP_BUG_FIX) {
-            lightBarControllerImpl.mNavigationBarMode = transitionMode;
+            lightBarControllerImpl.mNavigationBarMode = iTransitionMode;
             lightBarControllerImpl.reevaluate();
         }
     }
@@ -1274,14 +1389,14 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         this.mOrientationHandleGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.navigationbar.views.NavigationBar$$ExternalSyntheticLambda20
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                NavigationBar navigationBar = NavigationBar.this;
+                NavigationBar navigationBar = this.f$0;
                 if (navigationBar.mStartingQuickSwitchRotation == -1) {
                     return;
                 }
-                RectF computeHomeHandleBounds = navigationBar.mOrientationHandle.computeHomeHandleBounds();
-                navigationBar.mOrientationHandle.mapRectFromViewToScreenCoords(computeHomeHandleBounds, true);
+                RectF rectFComputeHomeHandleBounds = navigationBar.mOrientationHandle.computeHomeHandleBounds();
+                navigationBar.mOrientationHandle.mapRectFromViewToScreenCoords(rectFComputeHomeHandleBounds, true);
                 Rect rect = new Rect();
-                computeHomeHandleBounds.roundOut(rect);
+                rectFComputeHomeHandleBounds.roundOut(rect);
                 navigationBar.mOrientedHandleSamplingRegion = rect;
                 navigationBar.mRegionSamplingHelper.updateSamplingRect();
             }
@@ -1306,7 +1421,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         Function1 function1 = new Function1() { // from class: com.android.systemui.navigationbar.views.buttons.NavbarOrientationTrackingLogger$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LogMessage logMessage = (LogMessage) obj;
                 String str1 = logMessage.getStr1();
                 boolean bool1 = logMessage.getBool1();
@@ -1314,7 +1429,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
                 boolean bool3 = logMessage.getBool3();
                 int int1 = logMessage.getInt1();
                 int int2 = logMessage.getInt2();
-                NavbarOrientationTrackingLogger.this.getClass();
+                navbarOrientationTrackingLogger.getClass();
                 int i3 = int2 - int1;
                 if (i3 < 0) {
                     i3 += 4;
@@ -1322,25 +1437,25 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
                 String str2 = i3 != 1 ? i3 != 2 ? i3 != 3 ? "0" : "270" : "180" : DATA.DM_FIELD_INDEX.DM_POLLING_PERIOD;
                 int int12 = logMessage.getInt1();
                 int int22 = logMessage.getInt2();
-                StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("Caller Method: ", str1, "\n\tNavbar Visible: ", "\n\tImmersive Mode: ", bool1);
-                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, bool2, "\n\tSecondary Handle Visible: ", bool3, "\n\tDelta Rotation: ");
-                m.append(str2);
-                m.append("\n\tStarting QuickSwitch Rotation: ");
-                m.append(int12);
-                m.append("\n\tCurrent Rotation: ");
-                return ReorderTile$$ExternalSyntheticOutline0.m(int22, "\n", m);
+                StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("Caller Method: ", str1, "\n\tNavbar Visible: ", "\n\tImmersive Mode: ", bool1);
+                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, bool2, "\n\tSecondary Handle Visible: ", bool3, "\n\tDelta Rotation: ");
+                sbM.append(str2);
+                sbM.append("\n\tStarting QuickSwitch Rotation: ");
+                sbM.append(int12);
+                sbM.append("\n\tCurrent Rotation: ");
+                return ReorderTile$$ExternalSyntheticOutline0.m(int22, "\n", sbM);
             }
         };
         LogBuffer logBuffer = navbarOrientationTrackingLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NavbarOrientationTracking", logLevel, function1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("NavbarOrientationTracking", logLevel, function1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.bool1 = z2;
         logMessageImpl.bool2 = z3;
         logMessageImpl.bool3 = z;
         logMessageImpl.int1 = i2;
         logMessageImpl.int2 = i;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void notifyNavigationBarScreenOn() {
@@ -1353,7 +1468,13 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             return;
         }
         this.mLogWrapper.dp("NavigationBar", KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("notifyRequestedGameToolsWin visible : ", z));
-        this.mAutoHideController.notifyRequestedGameToolsWin(z);
+        AutoHideControllerImpl autoHideControllerImpl = this.mAutoHideController;
+        autoHideControllerImpl.mGameToolsShown = z;
+        if (z) {
+            autoHideControllerImpl.suspendAutoHide();
+        } else {
+            autoHideControllerImpl.resumeSuspendedAutoHideImmediately();
+        }
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
@@ -1367,13 +1488,13 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             this.mLogWrapper.dp("NavigationBar", String.format("notifySamsungPayInfo displayId : %d, visible: %s", Integer.valueOf(i), Boolean.valueOf(z)));
             this.mDisplayTracker.getClass();
             if (i == 0) {
-                int width = rect.width();
+                int iWidth = rect.width();
                 LauncherProxyService launcherProxyService = this.mLauncherProxyService;
                 launcherProxyService.getClass();
                 try {
                     ILauncherProxy iLauncherProxy = launcherProxyService.mLauncherProxy;
                     if (iLauncherProxy != null) {
-                        ((ILauncherProxy.Stub.Proxy) iLauncherProxy).notifyPayInfo(width, z);
+                        ((ILauncherProxy.Stub.Proxy) iLauncherProxy).notifyPayInfo(iWidth, z);
                     }
                 } catch (RemoteException e) {
                     Log.e("LauncherProxyService", "Failed to notify pay info.", e);
@@ -1416,7 +1537,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
     }
 
     /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.navigationbar.views.NavigationBar$$ExternalSyntheticLambda4] */
-    public boolean onHomeLongClick(View view) {
+    public boolean onHomeLongClick(View view) throws PackageManager.NameNotFoundException {
         if (((NavigationBarView) this.mView).getRecentsButton().getVisibility() != 0 && this.mScreenPinningActive) {
             return onLongPressNavigationButtons(view, R.id.home);
         }
@@ -1431,8 +1552,8 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         if (((AssistManager) lazy.get()).shouldOverrideAssist(5) && (view instanceof KeyButtonView)) {
             ((KeyButtonView) view).mRipple.mOnInvisibleRunnable = new Runnable() { // from class: com.android.systemui.navigationbar.views.NavigationBar$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
-                public final void run() {
-                    NavigationBar navigationBar = NavigationBar.this;
+                public final void run() throws PackageManager.NameNotFoundException {
+                    NavigationBar navigationBar = this.f$0;
                     ((AssistManager) navigationBar.mAssistManagerLazy.get()).startAssist(bundle);
                 }
             };
@@ -1450,14 +1571,60 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onHomeTouch(android.view.View r7, android.view.MotionEvent r8) {
-        /*
-            Method dump skipped, instructions count: 299
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.views.NavigationBar.onHomeTouch(android.view.View, android.view.MotionEvent):boolean");
+    public boolean onHomeTouch(View view, MotionEvent motionEvent) {
+        if (this.mHomeBlockedThisTouch && motionEvent.getActionMasked() != 0) {
+            return true;
+        }
+        Optional optional = (Optional) this.mCentralSurfacesOptionalLazy.get();
+        int action = motionEvent.getAction();
+        NavigationBar$$ExternalSyntheticLambda0 navigationBar$$ExternalSyntheticLambda0 = this.mOnVariableDurationHomeLongClick;
+        Handler handler = this.mHandler;
+        if (action != 0) {
+            if (action != 1) {
+                if (action == 2) {
+                    if (handler.hasCallbacks(navigationBar$$ExternalSyntheticLambda0)) {
+                        float fFloatValue = ((Float) this.mOverrideHomeButtonLongPressSlopMultiplier.orElse(Float.valueOf(1.0f))).floatValue() * 3.0f * ViewConfiguration.get(this.mContext).getScaledTouchSlop();
+                        float x = motionEvent.getX() - this.mCurrentDownEvent.getX();
+                        float y = motionEvent.getY() - this.mCurrentDownEvent.getY();
+                        if ((y * y) + (x * x) > fFloatValue * fFloatValue) {
+                            Log.i("NavigationBar", "Touch slop passed. Abort.");
+                            ((NavigationBarView) this.mView).abortCurrentGesture();
+                            handler.removeCallbacks(navigationBar$$ExternalSyntheticLambda0);
+                            return false;
+                        }
+                    }
+                }
+            }
+            handler.removeCallbacks(navigationBar$$ExternalSyntheticLambda0);
+            optional.ifPresent(new NavigationBar$$ExternalSyntheticLambda5(0));
+            return false;
+        }
+        MotionEvent motionEvent2 = this.mCurrentDownEvent;
+        if (motionEvent2 != null) {
+            motionEvent2.recycle();
+        }
+        this.mCurrentDownEvent = MotionEvent.obtain(motionEvent);
+        this.mHomeBlockedThisTouch = false;
+        if (this.mTelecomManagerOptional.isPresent() && ((TelecomManager) this.mTelecomManagerOptional.get()).isRinging() && ((KeyguardStateControllerImpl) this.mKeyguardStateController).mShowing) {
+            Log.i("NavigationBar", "Ignoring HOME; there's a ringing incoming call. No heads up");
+            this.mHomeBlockedThisTouch = true;
+            return true;
+        }
+        if (this.mLongPressHomeEnabled) {
+            if (this.mOverrideHomeButtonLongPressDurationMs.isPresent()) {
+                Log.d("NavigationBar", "ACTION_DOWN Launcher override duration: " + this.mOverrideHomeButtonLongPressDurationMs.get());
+                handler.postDelayed(navigationBar$$ExternalSyntheticLambda0, ((Long) this.mOverrideHomeButtonLongPressDurationMs.get()).longValue());
+                return false;
+            }
+            if (this.mOverrideHomeButtonLongPressSlopMultiplier.isPresent()) {
+                Log.d("NavigationBar", "ACTION_DOWN default duration: " + ViewConfiguration.getLongPressTimeout());
+                handler.postDelayed(navigationBar$$ExternalSyntheticLambda0, (long) ViewConfiguration.getLongPressTimeout());
+                return false;
+            }
+            this.mHomeButtonLongPressDurationMs.ifPresent(new NavigationBar$$ExternalSyntheticLambda1(this, 1));
+        }
+        return false;
     }
 
     public void onImeSwitcherClick(View view) {
@@ -1476,7 +1643,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onInit() {
+    public final void onInit() throws Resources.NotFoundException {
         NavBarHelper.CurrentSysuiState currentSysuiState;
         NavigationBarView navigationBarView = (NavigationBarView) this.mView;
         NavigationBarTransitions navigationBarTransitions = this.mNavigationBarTransitions;
@@ -1571,109 +1738,69 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x008e A[Catch: RemoteException -> 0x0033, TRY_ENTER, TryCatch #0 {RemoteException -> 0x0033, blocks: (B:3:0x0001, B:11:0x0028, B:12:0x002f, B:24:0x008e, B:44:0x009a, B:34:0x006b, B:8:0x001a, B:15:0x0036, B:18:0x003e, B:19:0x0051, B:22:0x005c, B:27:0x0049, B:29:0x005f, B:35:0x0073, B:39:0x007c), top: B:2:0x0001, inners: #1 }] */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x005b  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x008e A[Catch: RemoteException -> 0x0033, TRY_ENTER, TryCatch #0 {RemoteException -> 0x0033, blocks: (B:3:0x0001, B:10:0x0028, B:11:0x002f, B:42:0x008e, B:44:0x009a, B:32:0x006b, B:7:0x001a, B:15:0x0036, B:18:0x003e, B:22:0x0051, B:26:0x005c, B:21:0x0049, B:27:0x005f, B:34:0x0073, B:38:0x007c), top: B:47:0x0001, inners: #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onLongPressNavigationButtons(android.view.View r12, int r13) {
-        /*
-            r11 = this;
-            r0 = 0
-            android.app.IActivityTaskManager r1 = android.app.ActivityTaskManager.getService()     // Catch: android.os.RemoteException -> L33
-            android.view.accessibility.AccessibilityManager r2 = r11.mAccessibilityManager     // Catch: android.os.RemoteException -> L33
-            boolean r2 = r2.isTouchExplorationEnabled()     // Catch: android.os.RemoteException -> L33
-            boolean r3 = r1.isInLockTaskMode()     // Catch: android.os.RemoteException -> L33
-            r4 = 2131362143(0x7f0a015f, float:1.8344058E38)
-            r5 = 2131364418(0x7f0a0a42, float:1.8348673E38)
-            r6 = 1
-            if (r3 == 0) goto L5f
-            if (r2 != 0) goto L5f
-            long r2 = java.lang.System.currentTimeMillis()     // Catch: java.lang.Throwable -> L47
-            long r7 = r11.mLastLockToAppLongPress     // Catch: java.lang.Throwable -> L47
-            long r7 = r2 - r7
-            r9 = 200(0xc8, double:9.9E-322)
-            int r7 = (r7 > r9 ? 1 : (r7 == r9 ? 0 : -1))
-            if (r7 >= 0) goto L36
-            r1.stopSystemLockTaskMode()     // Catch: android.os.RemoteException -> L33
-            T extends android.view.View r11 = r11.mView     // Catch: android.os.RemoteException -> L33
-            com.android.systemui.navigationbar.views.NavigationBarView r11 = (com.android.systemui.navigationbar.views.NavigationBarView) r11     // Catch: android.os.RemoteException -> L33
-        L2f:
-            r11.updateNavButtonIcons()     // Catch: android.os.RemoteException -> L33
-            return r6
-        L33:
-            r11 = move-exception
-            goto L9b
-        L36:
-            int r1 = r12.getId()     // Catch: java.lang.Throwable -> L47
-            if (r1 != r4) goto L5b
-            if (r13 != r5) goto L49
-            T extends android.view.View r13 = r11.mView     // Catch: java.lang.Throwable -> L47
-            com.android.systemui.navigationbar.views.NavigationBarView r13 = (com.android.systemui.navigationbar.views.NavigationBarView) r13     // Catch: java.lang.Throwable -> L47
-            com.android.systemui.navigationbar.views.buttons.ButtonDispatcher r13 = r13.getRecentsButton()     // Catch: java.lang.Throwable -> L47
-            goto L51
-        L47:
-            r11 = move-exception
-            goto L9a
-        L49:
-            T extends android.view.View r13 = r11.mView     // Catch: java.lang.Throwable -> L47
-            com.android.systemui.navigationbar.views.NavigationBarView r13 = (com.android.systemui.navigationbar.views.NavigationBarView) r13     // Catch: java.lang.Throwable -> L47
-            com.android.systemui.navigationbar.views.buttons.ButtonDispatcher r13 = r13.getHomeButton()     // Catch: java.lang.Throwable -> L47
-        L51:
-            android.view.View r13 = r13.mCurrentView     // Catch: java.lang.Throwable -> L47
-            boolean r13 = r13.isPressed()     // Catch: java.lang.Throwable -> L47
-            if (r13 != 0) goto L5b
-            r13 = r6
-            goto L5c
-        L5b:
-            r13 = r0
-        L5c:
-            r11.mLastLockToAppLongPress = r2     // Catch: java.lang.Throwable -> L47
-            goto L8c
-        L5f:
-            int r7 = r12.getId()     // Catch: java.lang.Throwable -> L47
-            if (r7 != r4) goto L67
-            r13 = r6
-            goto L8c
-        L67:
-            if (r2 == 0) goto L73
-            if (r3 == 0) goto L73
-            r1.stopSystemLockTaskMode()     // Catch: android.os.RemoteException -> L33
-            T extends android.view.View r11 = r11.mView     // Catch: android.os.RemoteException -> L33
-            com.android.systemui.navigationbar.views.NavigationBarView r11 = (com.android.systemui.navigationbar.views.NavigationBarView) r11     // Catch: android.os.RemoteException -> L33
-            goto L2f
-        L73:
-            int r1 = r12.getId()     // Catch: java.lang.Throwable -> L47
-            if (r1 != r13) goto L8b
-            if (r13 != r5) goto L7c
-            goto La2
-        L7c:
-            T extends android.view.View r12 = r11.mView     // Catch: java.lang.Throwable -> L47
-            com.android.systemui.navigationbar.views.NavigationBarView r12 = (com.android.systemui.navigationbar.views.NavigationBarView) r12     // Catch: java.lang.Throwable -> L47
-            com.android.systemui.navigationbar.views.buttons.ButtonDispatcher r12 = r12.getHomeButton()     // Catch: java.lang.Throwable -> L47
-            android.view.View r12 = r12.mCurrentView     // Catch: java.lang.Throwable -> L47
-            boolean r11 = r11.onHomeLongClick(r12)     // Catch: java.lang.Throwable -> L47
-            return r11
-        L8b:
-            r13 = r0
-        L8c:
-            if (r13 == 0) goto La2
-            com.android.systemui.navigationbar.views.buttons.KeyButtonView r12 = (com.android.systemui.navigationbar.views.buttons.KeyButtonView) r12     // Catch: android.os.RemoteException -> L33
-            r11 = 128(0x80, float:1.8E-43)
-            r12.sendEvent(r0, r11)     // Catch: android.os.RemoteException -> L33
-            r11 = 2
-            r12.sendAccessibilityEvent(r11)     // Catch: android.os.RemoteException -> L33
-            return r6
-        L9a:
-            throw r11     // Catch: android.os.RemoteException -> L33
-        L9b:
-            java.lang.String r12 = "NavigationBar"
-            java.lang.String r13 = "Unable to reach activity manager"
-            android.util.Log.d(r12, r13, r11)
-        La2:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.views.NavigationBar.onLongPressNavigationButtons(android.view.View, int):boolean");
+    public final boolean onLongPressNavigationButtons(View view, int i) {
+        boolean z;
+        NavigationBarView navigationBarView;
+        try {
+            IActivityTaskManager service = ActivityTaskManager.getService();
+            boolean zIsTouchExplorationEnabled = this.mAccessibilityManager.isTouchExplorationEnabled();
+            boolean zIsInLockTaskMode = service.isInLockTaskMode();
+            try {
+                if (!zIsInLockTaskMode || zIsTouchExplorationEnabled) {
+                    if (view.getId() == R.id.back) {
+                        z = true;
+                    } else {
+                        if (zIsTouchExplorationEnabled && zIsInLockTaskMode) {
+                            service.stopSystemLockTaskMode();
+                            navigationBarView = (NavigationBarView) this.mView;
+                            navigationBarView.updateNavButtonIcons();
+                            return true;
+                        }
+                        if (view.getId() != i) {
+                            z = false;
+                        } else if (i != R.id.recent_apps) {
+                            return onHomeLongClick(((NavigationBarView) this.mView).getHomeButton().mCurrentView);
+                        }
+                    }
+                    if (z) {
+                        KeyButtonView keyButtonView = (KeyButtonView) view;
+                        keyButtonView.sendEvent(0, 128);
+                        keyButtonView.sendAccessibilityEvent(2);
+                        return true;
+                    }
+                } else {
+                    long jCurrentTimeMillis = System.currentTimeMillis();
+                    if (jCurrentTimeMillis - this.mLastLockToAppLongPress < 200) {
+                        service.stopSystemLockTaskMode();
+                        navigationBarView = (NavigationBarView) this.mView;
+                        navigationBarView.updateNavButtonIcons();
+                        return true;
+                    }
+                    if (view.getId() != R.id.back) {
+                        z = false;
+                        this.mLastLockToAppLongPress = jCurrentTimeMillis;
+                        if (z) {
+                        }
+                    } else {
+                        if (!(i == R.id.recent_apps ? ((NavigationBarView) this.mView).getRecentsButton() : ((NavigationBarView) this.mView).getHomeButton()).mCurrentView.isPressed()) {
+                            z = true;
+                        }
+                        this.mLastLockToAppLongPress = jCurrentTimeMillis;
+                        if (z) {
+                        }
+                    }
+                }
+            } finally {
+            }
+        } catch (RemoteException e) {
+            Log.d("NavigationBar", "Unable to reach activity manager", e);
+        }
+        return false;
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
@@ -1686,47 +1813,190 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         rotationButtonController.setRotateSuggestionButtonState(false, true);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:109:0x01cd, code lost:
-    
-        if (r19 != 2) goto L128;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:114:0x01d8, code lost:
-    
-        if (r19 != 3) goto L128;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:117:0x01df, code lost:
-    
-        if (r19 != 3) goto L128;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:120:0x01e6, code lost:
-    
-        if (r19 != 3) goto L128;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:105:0x020d  */
-    /* JADX WARN: Removed duplicated region for block: B:106:0x0210  */
-    /* JADX WARN: Removed duplicated region for block: B:91:0x01ed A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:128:0x01c7  */
+    /* JADX WARN: Removed duplicated region for block: B:133:0x01d0  */
+    /* JADX WARN: Removed duplicated region for block: B:134:0x01d2  */
+    /* JADX WARN: Removed duplicated region for block: B:149:0x01ed A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:163:0x020b  */
+    /* JADX WARN: Removed duplicated region for block: B:164:0x020d  */
+    /* JADX WARN: Removed duplicated region for block: B:165:0x0210  */
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onRotationProposal(int r19, boolean r20) {
-        /*
-            Method dump skipped, instructions count: 580
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.views.NavigationBar.onRotationProposal(int, boolean):void");
+    public final void onRotationProposal(int i, boolean z) {
+        if (((NavigationBarView) this.mView).isAttachedToWindow()) {
+            int i2 = 0;
+            if (BasicRune.NAVBAR_POLICY_VISIBILITY && ((NavBarStateManagerImpl) this.mNavBarStateManager).isTaskBarEnabled(false)) {
+                return;
+            }
+            int i3 = this.mDisabledFlags2;
+            boolean z2 = RotationButtonController.OEM_DISALLOW_ROTATION_IN_SUW;
+            boolean z3 = (i3 & 16) != 0;
+            RotationButtonController rotationButtonController = ((NavigationBarView) this.mView).mRotationButtonController;
+            if (BasicRune.NAVBAR_ADDITIONAL_LOG) {
+                StringBuilder sb = new StringBuilder("onRotationProposal proposedRotation=");
+                sb.append(Surface.rotationToString(i));
+                sb.append(", isValid=");
+                sb.append(z);
+                sb.append(", mNavBarWindowState=");
+                sb.append(StatusBarManager.windowStateToString(this.mNavigationBarWindowState));
+                sb.append(", rotateSuggestionsDisabled=");
+                sb.append(z3);
+                sb.append(", isRotateButtonVisible=");
+                ActionBarContextView$$ExternalSyntheticOutline0.m(sb, rotationButtonController.mRotationButton.mIsShowing, "NavigationBar");
+            }
+            if (z3) {
+                return;
+            }
+            if (BasicRune.NAVBAR_ENABLED && ((NavBarStateManagerImpl) this.mNavBarStateManager).rotateDisabledByPolicy()) {
+                Log.d("NavigationBar", "rotation button disabled by policy");
+                return;
+            }
+            if (Settings.Secure.getInt(rotationButtonController.mContext.getContentResolver(), SettingsHelper.INDEX_USER_SETUP_COMPLETE, 0) == 0 && (BasicRuneWrapper.NAVBAR_ENABLED || RotationButtonController.OEM_DISALLOW_ROTATION_IN_SUW)) {
+                return;
+            }
+            int iIntValue = ((Integer) rotationButtonController.mWindowRotationProvider.get()).intValue();
+            FloatingRotationButton floatingRotationButton = rotationButtonController.mRotationButton;
+            if (floatingRotationButton.mKeyButtonView != null) {
+                if (!rotationButtonController.mHomeRotationEnabled && rotationButtonController.mIsRecentsAnimationRunning) {
+                    if (BasicRuneWrapper.NAVBAR_ENABLED) {
+                        Log.d("RotationButtonController", "onRotationProposal home rotation disabled");
+                        return;
+                    }
+                    return;
+                }
+                boolean z4 = BasicRuneWrapper.NAVBAR_ENABLED;
+                if (z4 && i == -1) {
+                    rotationButtonController.mLastUnknownRotationProposedTick = System.currentTimeMillis();
+                    rotationButtonController.setRotateSuggestionButtonState(false);
+                    Log.d("RotationButtonController", "onRotationProposal unknown rotation");
+                    return;
+                }
+                if (!z) {
+                    rotationButtonController.setRotateSuggestionButtonState(false);
+                    if (BasicRuneWrapper.NAVBAR_ENABLED) {
+                        Log.d("RotationButtonController", "onRotationProposal invalid");
+                        return;
+                    }
+                    return;
+                }
+                Handler handler = rotationButtonController.mMainThreadHandler;
+                RotationButtonController$$ExternalSyntheticLambda0 rotationButtonController$$ExternalSyntheticLambda0 = rotationButtonController.mCancelPendingRotationProposal;
+                if (i == iIntValue) {
+                    if (z4) {
+                        rotationButtonController.mLastUnknownRotationProposedTick = 0L;
+                        if (rotationButtonController.mPendingRotationSuggestion && !floatingRotationButton.mIsShowing) {
+                            rotationButtonController.mPendingRotationSuggestion = false;
+                            handler.removeCallbacks(rotationButtonController$$ExternalSyntheticLambda0);
+                        }
+                        Log.d("RotationButtonController", "onRotationProposal rotation not changed");
+                    }
+                    handler.removeCallbacks(rotationButtonController.mRemoveRotationProposal);
+                    rotationButtonController.setRotateSuggestionButtonState(false);
+                    return;
+                }
+                long jCurrentTimeMillis = System.currentTimeMillis();
+                if (BasicRuneWrapper.NAVBAR_ENABLED) {
+                    long j = rotationButtonController.mLastUnknownRotationProposedTick;
+                    if (j != 0 && j + 1000 <= jCurrentTimeMillis) {
+                        Log.d("RotationButtonController", "onRotationProposal rotation time over");
+                        rotationButtonController.mLastUnknownRotationProposedTick = 0L;
+                        return;
+                    }
+                }
+                Log.i("RotationButtonController", "onRotationProposal(rotation=" + i + ")");
+                rotationButtonController.mLastRotationSuggestion = i;
+                boolean z5 = !(iIntValue == 0 && i == 1) && ((iIntValue == 0 && i == 2) || ((iIntValue == 0 && i == 3) || ((iIntValue == 1 && i == 0) || (!(iIntValue == 1 && i == 2) && ((iIntValue == 1 && i == 3) || ((iIntValue == 2 && i == 0) || ((iIntValue == 2 && i == 1) || (!(iIntValue == 2 && i == 3) && (!(iIntValue == 3 && i == 0) && ((iIntValue == 3 && i == 1) || (iIntValue == 3 && i == 2)))))))))));
+                if (iIntValue == 0 || iIntValue == 2) {
+                    rotationButtonController.mIconResId = z5 ? rotationButtonController.mIconCcwStart0ResId : rotationButtonController.mIconCwStart0ResId;
+                } else {
+                    rotationButtonController.mIconResId = z5 ? rotationButtonController.mIconCcwStart90ResId : rotationButtonController.mIconCwStart90ResId;
+                }
+                if (BasicRuneWrapper.NAVBAR_ENABLED) {
+                    rotationButtonController.mIconResId = rotationButtonController.mSamsungRotateButtonResId;
+                    RotationUtil.Companion.getClass();
+                    boolean z6 = RotationUtil.ccwCheckArray[iIntValue][i];
+                    int i4 = 83;
+                    if (iIntValue == 0) {
+                        if (i != 1) {
+                            if (i != 2) {
+                                if (i != 3) {
+                                }
+                            }
+                            i4 = 51;
+                        }
+                        RotationUtil.floatingButtonPosition = i4;
+                        if (iIntValue != 0) {
+                        }
+                    } else if (iIntValue == 1) {
+                        if (i != 0) {
+                            if (i != 2) {
+                                if (i != 3) {
+                                }
+                            }
+                        }
+                        RotationUtil.floatingButtonPosition = i4;
+                        if (iIntValue != 0) {
+                        }
+                    } else if (iIntValue == 2) {
+                        if (i == 0) {
+                            i4 = 51;
+                        } else if (i != 1) {
+                            if (i != 3) {
+                            }
+                        }
+                        RotationUtil.floatingButtonPosition = i4;
+                        if (iIntValue != 0) {
+                            if (!z6) {
+                            }
+                            rotationButtonController.mStyleRes = i2;
+                        }
+                    } else if (iIntValue == 3) {
+                        if (i != 0) {
+                            if (i != 1) {
+                                i4 = i != 2 ? 85 : 53;
+                            }
+                            i4 = 51;
+                        }
+                        RotationUtil.floatingButtonPosition = i4;
+                        if (iIntValue != 0 || iIntValue == 2) {
+                            i2 = !z6 ? rotationButtonController.mSamsungIconCCWStart90ResId : rotationButtonController.mSamsungIconCWStart90ResId;
+                        } else if (i == 0 || i == 2) {
+                            i2 = z6 ? rotationButtonController.mSamsungIconCCWStart0ResId : rotationButtonController.mSamsungIconCWStart0ResId;
+                        } else if (iIntValue == 1 && i == 3) {
+                            i2 = rotationButtonController.mSamsungIconCWStart180ResId;
+                        } else if (iIntValue == 3 && i == 1) {
+                            i2 = rotationButtonController.mSamsungIconCCWStart180ResId;
+                        }
+                        rotationButtonController.mStyleRes = i2;
+                    }
+                }
+                rotationButtonController.mRotationButton.updateIcon(rotationButtonController.mLightIconColor, rotationButtonController.mDarkIconColor);
+                if (rotationButtonController.canShowRotationButton()) {
+                    rotationButtonController.showAndLogRotationSuggestion();
+                    return;
+                }
+                if (BasicRuneWrapper.NAVBAR_ENABLED && rotationButtonController.mKeyguardManager.semIsKeyguardShowingAndNotOccluded()) {
+                    Log.d("RotationButtonController", "Drop rotation suggestion proposal while keyguard is showing");
+                    return;
+                }
+                rotationButtonController.mPendingRotationSuggestion = true;
+                handler.removeCallbacks(rotationButtonController$$ExternalSyntheticLambda0);
+                handler.postDelayed(rotationButtonController$$ExternalSyntheticLambda0, WakeLock.DEFAULT_MAX_TIMEOUT);
+            }
+        }
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
     public final void onSystemBarAttributesChanged(int i, int i2, AppearanceRegion[] appearanceRegionArr, boolean z, int i3, int i4, String str, LetterboxDetails[] letterboxDetailsArr) {
-        boolean z2;
+        boolean zUpdateTransitionMode;
         if (i != this.mDisplayId) {
             return;
         }
         if (this.mAppearance != i2) {
-            boolean z3 = BasicRune.NAVBAR_ADDITIONAL_LOG;
-            if (z3 && z3) {
+            boolean z2 = BasicRune.NAVBAR_ADDITIONAL_LOG;
+            if (z2 && z2) {
                 StringBuilder sb = new StringBuilder("onSystemBarAttributesChanged() -");
                 sb.append("  displayId:" + i);
                 sb.append(", appearance:" + i2);
@@ -1747,14 +2017,14 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
                 Log.d("NavigationBar", sb.toString());
             }
             this.mAppearance = i2;
-            z2 = updateTransitionMode(NavBarHelper.transitionMode(i2, this.mTransientShown));
+            zUpdateTransitionMode = updateTransitionMode(NavBarHelper.transitionMode(i2, this.mTransientShown));
         } else {
-            z2 = false;
+            zUpdateTransitionMode = false;
         }
-        boolean z4 = z2;
+        boolean z3 = zUpdateTransitionMode;
         LightBarController lightBarController = this.mLightBarController;
         if (lightBarController != null) {
-            ((LightBarControllerImpl) lightBarController).onNavigationBarAppearanceChanged(i2, this.mTransitionMode, z4, z, str);
+            ((LightBarControllerImpl) lightBarController).onNavigationBarAppearanceChanged(i2, this.mTransitionMode, z3, z, str);
         }
         if (this.mBehavior != i3) {
             this.mBehavior = i3;
@@ -1772,17 +2042,17 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onViewAttached() {
-        LightBarController create;
+    public final void onViewAttached() throws Resources.NotFoundException {
+        LightBarController lightBarControllerCreate;
         AutoHideControllerImpl autoHideControllerImpl;
         int i = 1;
         int i2 = 0;
         Display display = ((NavigationBarView) this.mView).getDisplay();
         ((NavigationBarView) this.mView).mRecentsOptional = this.mRecentsOptional;
         Lazy lazy = this.mCentralSurfacesOptionalLazy;
-        boolean isPresent = ((Optional) lazy.get()).isPresent();
+        boolean zIsPresent = ((Optional) lazy.get()).isPresent();
         ShadeViewController shadeViewController = this.mShadeViewController;
-        if (isPresent) {
+        if (zIsPresent) {
             NavigationBarView navigationBarView = (NavigationBarView) this.mView;
             navigationBarView.getClass();
             navigationBarView.mPanelExpansionInteractor = this.mPanelExpansionInteractor;
@@ -1857,9 +2127,9 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         updateSystemUiStateFlags();
         if (this.mIsOnDefaultDisplay) {
             RotationButtonController rotationButtonController3 = ((NavigationBarView) this.mView).mRotationButtonController;
-            Boolean isRotationLocked = RotationPolicyUtil.isRotationLocked(this.mContext);
-            if (display != null && isRotationLocked.booleanValue() && !DeviceType.isTablet() && !BasicRune.BASIC_FOLDABLE_TYPE_FOLD) {
-                RotationPolicy.setRotationLockAtAngle(rotationButtonController3.mContext, isRotationLocked.booleanValue(), display.getRotation(), "NavigationBar#onViewAttached");
+            Boolean boolIsRotationLocked = RotationPolicyUtil.isRotationLocked(this.mContext);
+            if (display != null && boolIsRotationLocked.booleanValue() && !DeviceType.isTablet() && !BasicRune.BASIC_FOLDABLE_TYPE_FOLD) {
+                RotationPolicy.setRotationLockAtAngle(rotationButtonController3.mContext, boolIsRotationLocked.booleanValue(), display.getRotation(), "NavigationBar#onViewAttached");
             }
         } else {
             this.mDisabledFlags2 |= 16;
@@ -1875,15 +2145,15 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         }
         initSecondaryHomeHandleForRotation();
         if (this.mIsOnDefaultDisplay) {
-            create = this.mMainLightBarController;
+            lightBarControllerCreate = this.mMainLightBarController;
         } else {
             Context context = this.mContext;
             LightBarControllerImpl.LegacyFactory legacyFactory = (LightBarControllerImpl.LegacyFactory) this.mLightBarControllerFactory;
             legacyFactory.getClass();
-            create = legacyFactory.mFactory.create(context.getDisplayId(), legacyFactory.mApplicationScope, (DarkIconDispatcher) ((DarkIconDispatcherStoreImpl) legacyFactory.mDarkIconDispatcherStore).getDefaultDisplay(), (StatusBarModePerDisplayRepository) legacyFactory.mStatusBarModeRepositoryStore.getDefaultDisplay());
-            create.start();
+            lightBarControllerCreate = legacyFactory.mFactory.create(context.getDisplayId(), legacyFactory.mApplicationScope, (DarkIconDispatcher) ((DarkIconDispatcherStoreImpl) legacyFactory.mDarkIconDispatcherStore).getDefaultDisplay(), (StatusBarModePerDisplayRepository) legacyFactory.mStatusBarModeRepositoryStore.getDefaultDisplay());
+            lightBarControllerCreate.start();
         }
-        setLightBarController(create);
+        setLightBarController(lightBarControllerCreate);
         int i5 = StatusBarConnectedDisplays.$r8$clinit;
         if (this.mIsOnDefaultDisplay) {
             autoHideControllerImpl = this.mMainAutoHideController;
@@ -1893,8 +2163,8 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             autoHideControllerImpl = new AutoHideControllerImpl(context2, factory.mHandler, factory.mIWindowManager);
         }
         setAutoHideController(autoHideControllerImpl);
-        int transitionMode = NavBarHelper.transitionMode(this.mAppearance, this.mTransientShown);
-        this.mTransitionMode = transitionMode;
+        int iTransitionMode = NavBarHelper.transitionMode(this.mAppearance, this.mTransientShown);
+        this.mTransitionMode = iTransitionMode;
         checkNavBarModes();
         AutoHideControllerImpl autoHideControllerImpl2 = this.mAutoHideController;
         if (autoHideControllerImpl2 != null) {
@@ -1902,7 +2172,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         }
         LightBarController lightBarController = this.mLightBarController;
         if (lightBarController != null) {
-            ((LightBarControllerImpl) lightBarController).onNavigationBarAppearanceChanged(this.mAppearance, transitionMode, true, false, "restoreAppearanceAndTransientState");
+            ((LightBarControllerImpl) lightBarController).onNavigationBarAppearanceChanged(this.mAppearance, iTransitionMode, true, false, "restoreAppearanceAndTransientState");
         }
         if (BasicRune.NAVBAR_ENABLED) {
             ((NavBarStoreImpl) this.mNavBarStore).handleEvent(this, new EventTypeFactory.EventType.OnNavBarTransitionModeChanged(this.mTransitionMode));
@@ -1972,19 +2242,80 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         ((LightBarControllerImpl) lightBarController).mObserver.mList.remove(((NavigationBarView) this.mView).mBarTransitions.mLightTransitionsController);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00b8  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00a3  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0054  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x007d  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0088  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void orientSecondaryHomeHandle() {
-        /*
-            Method dump skipped, instructions count: 242
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.views.NavigationBar.orientSecondaryHomeHandle():void");
+        int iWidth;
+        int height;
+        if (this.mNavBarMode != 2 || this.mOrientationHandle == null) {
+            return;
+        }
+        int i = this.mStartingQuickSwitchRotation;
+        if (i == -1) {
+            resetSecondaryHandle();
+            return;
+        }
+        int i2 = i - this.mCurrentRotation;
+        if (i2 < 0) {
+            i2 += 4;
+        }
+        if (i == -1 || i2 == -1) {
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "secondary nav delta rotation: ", " current: ");
+            sbM.append(this.mCurrentRotation);
+            sbM.append(" starting: ");
+            RecyclerView$$ExternalSyntheticOutline0.m(this.mStartingQuickSwitchRotation, "NavigationBar", sbM);
+        }
+        Rect bounds = this.mWindowManager.getCurrentWindowMetrics().getBounds();
+        this.mOrientationHandle.mDeltaRotation = i2;
+        int i3 = 3;
+        if (i2 == 0) {
+            if (!this.mShowOrientedHandleForImmersiveMode) {
+                resetSecondaryHandle();
+                return;
+            } else {
+                iWidth = bounds.width();
+                height = ((NavigationBarView) this.mView).getHeight();
+            }
+        } else if (i2 == 1) {
+            height = bounds.height();
+            if (BasicRune.NAVBAR_GESTURE) {
+                DisplayCutout displayCutout = this.mIndicatorGardenPresenter.inputProperties.displayCutout;
+                if (displayCutout != null) {
+                    Iterator<Rect> it = displayCutout.getBoundingRects().iterator();
+                    int iHeight = it.hasNext() ? it.next().height() : 0;
+                    height -= iHeight;
+                }
+            }
+            iWidth = ((NavigationBarView) this.mView).getHeight();
+        } else if (i2 != 2) {
+            if (i2 != 3) {
+                height = 0;
+                iWidth = 0;
+            }
+        }
+        WindowManager.LayoutParams layoutParams = this.mOrientationParams;
+        if (i2 == 0) {
+            i3 = 80;
+        } else if (i2 != 1) {
+            i3 = 5;
+        }
+        layoutParams.gravity = i3;
+        layoutParams.height = height;
+        layoutParams.width = iWidth;
+        this.mWindowManager.updateViewLayout(this.mOrientationHandle, layoutParams);
+        if (BasicRune.NAVBAR_GESTURE) {
+            Rect rect = new Rect();
+            ((NavigationBarView) this.mView).getHomeHandle().mCurrentView.getHitRect(rect);
+            this.mOrientationHandle.mHomeHandleRect.set(rect);
+            this.mOrientationHandle.setImageDrawable(((NavigationBarView) this.mView).getSecondaryHomeHandleDrawable(i2));
+        }
+        ((NavigationBarView) this.mView).setVisibility(8);
+        this.mOrientationHandle.setVisibility(0);
+        logNavbarOrientation("orientSecondaryHomeHandle");
     }
 
     public final void prepareNavigationBarView() {
@@ -2000,10 +2331,10 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
 
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                int i2;
-                int i3 = i;
+                int displayId;
+                int i2 = i;
                 NavigationBar navigationBar = this.f$0;
-                switch (i3) {
+                switch (i2) {
                     case 0:
                         NavBarButtonClickLogger navBarButtonClickLogger = navigationBar.mNavBarButtonClickLogger;
                         navBarButtonClickLogger.getClass();
@@ -2027,12 +2358,12 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
                         Display display = view.getDisplay();
                         AccessibilityManager accessibilityManager = navigationBar.mAccessibilityManager;
                         if (display != null) {
-                            i2 = display.getDisplayId();
+                            displayId = display.getDisplayId();
                         } else {
                             navigationBar.mDisplayTracker.getClass();
-                            i2 = 0;
+                            displayId = 0;
                         }
-                        accessibilityManager.notifyAccessibilityButtonClicked(i2);
+                        accessibilityManager.notifyAccessibilityButtonClicked(displayId);
                         break;
                     default:
                         navigationBar.onImeSwitcherClick(view);
@@ -2073,10 +2404,10 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
 
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                int i22;
-                int i32 = i4;
+                int displayId;
+                int i22 = i4;
                 NavigationBar navigationBar = this.f$0;
-                switch (i32) {
+                switch (i22) {
                     case 0:
                         NavBarButtonClickLogger navBarButtonClickLogger2 = navigationBar.mNavBarButtonClickLogger;
                         navBarButtonClickLogger2.getClass();
@@ -2100,12 +2431,12 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
                         Display display = view.getDisplay();
                         AccessibilityManager accessibilityManager = navigationBar.mAccessibilityManager;
                         if (display != null) {
-                            i22 = display.getDisplayId();
+                            displayId = display.getDisplayId();
                         } else {
                             navigationBar.mDisplayTracker.getClass();
-                            i22 = 0;
+                            displayId = 0;
                         }
-                        accessibilityManager.notifyAccessibilityButtonClicked(i22);
+                        accessibilityManager.notifyAccessibilityButtonClicked(displayId);
                         break;
                     default:
                         navigationBar.onImeSwitcherClick(view);
@@ -2126,10 +2457,10 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
 
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                int i22;
-                int i32 = i5;
+                int displayId;
+                int i22 = i5;
                 NavigationBar navigationBar = this.f$0;
-                switch (i32) {
+                switch (i22) {
                     case 0:
                         NavBarButtonClickLogger navBarButtonClickLogger2 = navigationBar.mNavBarButtonClickLogger;
                         navBarButtonClickLogger2.getClass();
@@ -2153,12 +2484,12 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
                         Display display = view.getDisplay();
                         AccessibilityManager accessibilityManager = navigationBar.mAccessibilityManager;
                         if (display != null) {
-                            i22 = display.getDisplayId();
+                            displayId = display.getDisplayId();
                         } else {
                             navigationBar.mDisplayTracker.getClass();
-                            i22 = 0;
+                            displayId = 0;
                         }
-                        accessibilityManager.notifyAccessibilityButtonClicked(i22);
+                        accessibilityManager.notifyAccessibilityButtonClicked(displayId);
                         break;
                     default:
                         navigationBar.onImeSwitcherClick(view);
@@ -2168,15 +2499,13 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         });
         updateScreenPinningGestures();
         if (BasicRune.NAVBAR_ENABLED) {
-            backButton.setLongClickable(false);
             backButton.setOnClickListener(null);
             recentsButton.setOnClickListener(null);
             recentsButton.setOnTouchListener(null);
-            recentsButton.setOnLongClickListener(new NavigationBar$$ExternalSyntheticLambda6(this, 4));
             backButton.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.systemui.navigationbar.views.NavigationBar$$ExternalSyntheticLambda22
                 @Override // android.view.View.OnHoverListener
                 public final boolean onHover(View view, MotionEvent motionEvent) {
-                    NavigationBar.this.getClass();
+                    this.f$0.getClass();
                     if (motionEvent.getAction() != 9 && motionEvent.getAction() != 10) {
                         return false;
                     }
@@ -2187,7 +2516,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             recentsButton.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.systemui.navigationbar.views.NavigationBar$$ExternalSyntheticLambda22
                 @Override // android.view.View.OnHoverListener
                 public final boolean onHover(View view, MotionEvent motionEvent) {
-                    NavigationBar.this.getClass();
+                    this.f$0.getClass();
                     if (motionEvent.getAction() != 9 && motionEvent.getAction() != 10) {
                         return false;
                     }
@@ -2198,7 +2527,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             homeButton.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.systemui.navigationbar.views.NavigationBar$$ExternalSyntheticLambda22
                 @Override // android.view.View.OnHoverListener
                 public final boolean onHover(View view, MotionEvent motionEvent) {
-                    NavigationBar.this.getClass();
+                    this.f$0.getClass();
                     if (motionEvent.getAction() != 9 && motionEvent.getAction() != 10) {
                         return false;
                     }
@@ -2209,7 +2538,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             buttonDispatcher.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.systemui.navigationbar.views.NavigationBar$$ExternalSyntheticLambda22
                 @Override // android.view.View.OnHoverListener
                 public final boolean onHover(View view, MotionEvent motionEvent) {
-                    NavigationBar.this.getClass();
+                    this.f$0.getClass();
                     if (motionEvent.getAction() != 9 && motionEvent.getAction() != 10) {
                         return false;
                     }
@@ -2220,7 +2549,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             accessibilityButton.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.systemui.navigationbar.views.NavigationBar$$ExternalSyntheticLambda22
                 @Override // android.view.View.OnHoverListener
                 public final boolean onHover(View view, MotionEvent motionEvent) {
-                    NavigationBar.this.getClass();
+                    this.f$0.getClass();
                     if (motionEvent.getAction() != 9 && motionEvent.getAction() != 10) {
                         return false;
                     }
@@ -2298,43 +2627,43 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             return;
         }
         NavBarHelper navBarHelper = this.mNavBarHelper;
-        boolean isImeVisible = navBarHelper.isImeVisible(i2);
+        boolean zIsImeVisible = navBarHelper.isImeVisible(i2);
         boolean z2 = BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN;
         if (z2 && ((NavBarStateManagerImpl) this.mNavBarStateManager).supportLargeCoverScreenNavBar()) {
-            isImeVisible |= this.mWindowManager.getCurrentWindowMetrics().getWindowInsets().isVisible(WindowInsets.Type.ime());
+            zIsImeVisible |= this.mWindowManager.getCurrentWindowMetrics().getWindowInsets().isVisible(WindowInsets.Type.ime());
         }
-        int updateNavbarFlagsFromIme = Utilities.updateNavbarFlagsFromIme(this.mNavbarFlags, i3, isImeVisible, z);
+        int iUpdateNavbarFlagsFromIme = Utilities.updateNavbarFlagsFromIme(this.mNavbarFlags, i3, zIsImeVisible, z);
         if (BasicRune.NAVBAR_ADDITIONAL_LOG) {
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "setImeWindowStatus displayId=", " vis=", " backDisposition=");
-            m.append(i3);
-            m.append(" showImeSwitcher=");
-            m.append(z);
-            m.append(" isImeVisible=");
-            ActionBarContextView$$ExternalSyntheticOutline0.m(m, isImeVisible, "NavigationBar");
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "setImeWindowStatus displayId=", " vis=", " backDisposition=");
+            sbM.append(i3);
+            sbM.append(" showImeSwitcher=");
+            sbM.append(z);
+            sbM.append(" isImeVisible=");
+            ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, zIsImeVisible, "NavigationBar");
         }
-        if (updateNavbarFlagsFromIme == this.mNavbarFlags) {
+        if (iUpdateNavbarFlagsFromIme == this.mNavbarFlags) {
             return;
         }
         boolean z3 = BasicRune.NAVBAR_ENABLED;
         NavBarStore navBarStore = this.mNavBarStore;
         if (z3) {
-            ((NavBarStoreImpl) navBarStore).handleEvent(this, new EventTypeFactory.EventType.OnNavBarIconHintChanged(updateNavbarFlagsFromIme));
-            navBarHelper.mLastIMEhints = updateNavbarFlagsFromIme;
+            navBarStore.handleEvent(this, new EventTypeFactory.EventType.OnNavBarIconHintChanged(iUpdateNavbarFlagsFromIme), this.mDisplayId);
+            navBarHelper.mLastIMEhints = iUpdateNavbarFlagsFromIme;
         }
-        if (updateNavbarFlagsFromIme != this.mNavbarFlags) {
+        if (iUpdateNavbarFlagsFromIme != this.mNavbarFlags) {
             if (z3 || !Utilities.isLargeScreen(this.mContext)) {
-                boolean z4 = (updateNavbarFlagsFromIme & 1) != 0;
+                boolean z4 = (iUpdateNavbarFlagsFromIme & 1) != 0;
                 if (z4 != ((this.mNavbarFlags & 1) != 0)) {
                     ((NavigationBarView) this.mView).onBackDismissImeChanged(z4);
                 }
-                this.mImeVisible = (updateNavbarFlagsFromIme & 2) != 0;
+                this.mImeVisible = (iUpdateNavbarFlagsFromIme & 2) != 0;
                 NavigationBarView navigationBarView = (NavigationBarView) this.mView;
-                if (updateNavbarFlagsFromIme != navigationBarView.mNavbarFlags) {
-                    navigationBarView.mNavbarFlags = updateNavbarFlagsFromIme;
+                if (iUpdateNavbarFlagsFromIme != navigationBarView.mNavbarFlags) {
+                    navigationBarView.mNavbarFlags = iUpdateNavbarFlagsFromIme;
                     navigationBarView.updateNavButtonIcons();
                 }
             }
-            this.mNavbarFlags = updateNavbarFlagsFromIme;
+            this.mNavbarFlags = iUpdateNavbarFlagsFromIme;
         }
         if (this.mIsOnDefaultDisplay) {
             ((Optional) this.mCentralSurfacesOptionalLazy.get()).ifPresent(new NavigationBar$$ExternalSyntheticLambda5(1));
@@ -2343,7 +2672,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         }
         updateSystemUiStateFlags();
         if (z2 && ((NavBarStateManagerImpl) this.mNavBarStateManager).supportLargeCoverScreenNavBar()) {
-            navBarStore.handleEvent(this, new EventTypeFactory.EventType.OnNavBarLargeCoverScreenVisibilityChanged(isImeVisible, ((NavBarStateManagerImpl) this.mNavBarStateManager).isLargeCoverTaskEnabled()), this.mDisplayId);
+            navBarStore.handleEvent(this, new EventTypeFactory.EventType.OnNavBarLargeCoverScreenVisibilityChanged(zIsImeVisible, ((NavBarStateManagerImpl) this.mNavBarStateManager).isLargeCoverTaskEnabled()), this.mDisplayId);
         }
     }
 
@@ -2368,7 +2697,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         }
     }
 
-    public final void setNavBarMode(int i) {
+    public final void setNavBarMode(int i) throws Resources.NotFoundException {
         NavigationBarView navigationBarView = (NavigationBarView) this.mView;
         boolean z = this.mNavigationModeController.mCurrentUserContext.getResources().getBoolean(android.R.bool.config_maskMainBuiltInDisplayCutout);
         navigationBarView.mNavBarMode = i;
@@ -2377,9 +2706,9 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         navigationBarView.mEdgeBackGestureHandler.onNavigationModeChanged(i);
         navigationBarView.mRotationButtonController.mNavBarMode = navigationBarView.mNavBarMode;
         navigationBarView.updateRotationButton();
-        boolean isGesturalMode = QuickStepContract.isGesturalMode(i);
+        boolean zIsGesturalMode = QuickStepContract.isGesturalMode(i);
         RegionSamplingHelper regionSamplingHelper = this.mRegionSamplingHelper;
-        if (isGesturalMode) {
+        if (zIsGesturalMode) {
             regionSamplingHelper.start(this.mSamplingBounds);
         } else {
             regionSamplingHelper.stop();
@@ -2458,8 +2787,8 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
         if (!BasicRune.NAVBAR_ENABLED || BasicRune.NAVBAR_PREDICTIVE_BACK_THREE_BUTTON) {
             ButtonDispatcher backButton = ((NavigationBarView) this.mView).getBackButton();
             ButtonDispatcher recentsButton = ((NavigationBarView) this.mView).getRecentsButton();
-            boolean isAccessControlEnabled = this.mSettingsHelper.isAccessControlEnabled();
-            if (this.mScreenPinningActive && (z = BasicRune.NAVBAR_PREDICTIVE_BACK_THREE_BUTTON) && !isAccessControlEnabled) {
+            boolean zIsAccessControlEnabled = this.mSettingsHelper.isAccessControlEnabled();
+            if (this.mScreenPinningActive && (z = BasicRune.NAVBAR_PREDICTIVE_BACK_THREE_BUTTON) && !zIsAccessControlEnabled) {
                 backButton.setOnLongClickListener((((NavigationBarView) this.mView).getRecentsButton().getVisibility() == 0 || z) ? new NavigationBar$$ExternalSyntheticLambda6(this, 0) : new NavigationBar$$ExternalSyntheticLambda6(this, 3));
                 recentsButton.setOnLongClickListener(new NavigationBar$$ExternalSyntheticLambda6(this, 0));
             } else {

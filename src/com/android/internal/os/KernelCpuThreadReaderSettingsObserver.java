@@ -36,9 +36,9 @@ public class KernelCpuThreadReaderSettingsObserver extends ContentObserver {
     private KernelCpuThreadReaderSettingsObserver(Context context) {
         super(BackgroundThread.getHandler());
         this.mContext = context;
-        KernelCpuThreadReader create = KernelCpuThreadReader.create(8, UidPredicate.fromString(COLLECTED_UIDS_DEFAULT));
-        this.mKernelCpuThreadReader = create;
-        this.mKernelCpuThreadReaderDiff = create == null ? null : new KernelCpuThreadReaderDiff(create, 10000);
+        KernelCpuThreadReader kernelCpuThreadReaderCreate = KernelCpuThreadReader.create(8, UidPredicate.fromString(COLLECTED_UIDS_DEFAULT));
+        this.mKernelCpuThreadReader = kernelCpuThreadReaderCreate;
+        this.mKernelCpuThreadReaderDiff = kernelCpuThreadReaderCreate == null ? null : new KernelCpuThreadReaderDiff(kernelCpuThreadReaderCreate, 10000);
     }
 
     @Override // android.database.ContentObserver
@@ -54,9 +54,9 @@ public class KernelCpuThreadReaderSettingsObserver extends ContentObserver {
         try {
             keyValueListParser.setString(Settings.Global.getString(this.mContext.getContentResolver(), Settings.Global.KERNEL_CPU_THREAD_READER));
             try {
-                UidPredicate fromString = UidPredicate.fromString(keyValueListParser.getString(COLLECTED_UIDS_SETTINGS_KEY, COLLECTED_UIDS_DEFAULT));
+                UidPredicate uidPredicateFromString = UidPredicate.fromString(keyValueListParser.getString(COLLECTED_UIDS_SETTINGS_KEY, COLLECTED_UIDS_DEFAULT));
                 this.mKernelCpuThreadReader.setNumBuckets(keyValueListParser.getInt(NUM_BUCKETS_SETTINGS_KEY, 8));
-                this.mKernelCpuThreadReader.setUidPredicate(fromString);
+                this.mKernelCpuThreadReader.setUidPredicate(uidPredicateFromString);
                 this.mKernelCpuThreadReaderDiff.setMinimumTotalCpuUsageMillis(keyValueListParser.getInt(MINIMUM_TOTAL_CPU_USAGE_MILLIS_SETTINGS_KEY, 10000));
             } catch (NumberFormatException e) {
                 Slog.w(TAG, "Failed to get UID predicate", e);

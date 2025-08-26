@@ -90,11 +90,11 @@ public class SELinux {
     }
 
     public static boolean reloadSeappContexts() {
-        boolean native_reloadSeappContexts;
+        boolean zNative_reloadSeappContexts;
         synchronized (lock) {
-            native_reloadSeappContexts = native_reloadSeappContexts();
+            zNative_reloadSeappContexts = native_reloadSeappContexts();
         }
-        return native_reloadSeappContexts;
+        return zNative_reloadSeappContexts;
     }
 
     public static boolean restorecon_with_category(String str, int i) {

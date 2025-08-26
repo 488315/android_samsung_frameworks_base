@@ -1,37 +1,55 @@
 package com.android.systemui.people;
 
+import android.app.PendingIntent;
 import android.app.people.ConversationStatus;
 import android.app.people.PeopleSpaceTile;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.text.StaticLayout;
 import android.text.TextUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.Pair;
+import android.util.Size;
 import android.util.SizeF;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable21;
+import androidx.core.math.MathUtils;
+import androidx.slice.widget.ActionRow$$ExternalSyntheticOutline0;
+import com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0;
 import com.android.launcher3.icons.FastBitmapDrawable;
 import com.android.settingslib.Utils;
 import com.android.systemui.R;
 import com.android.systemui.people.PeopleStoryIconFactory;
+import com.android.systemui.people.widget.LaunchConversationActivity;
 import com.android.systemui.people.widget.PeopleTileKey;
+import java.io.IOException;
 import java.text.NumberFormat;
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PeopleTileViewHelper {
     public final int mAppWidgetId;
@@ -51,7 +69,6 @@ public class PeopleTileViewHelper {
     public static final Pattern ANY_DOUBLE_MARK_PATTERN = Pattern.compile("[!?][!?]+");
     public static final Pattern MIXED_MARK_PATTERN = Pattern.compile("![?].*|.*[?]!");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RemoteViewsAndSizes {
         public final int mAvatarSize;
         public final RemoteViews mRemoteViews;
@@ -106,9 +123,9 @@ public class PeopleTileViewHelper {
     public static Bitmap getPersonIconBitmap(Context context, int i, boolean z, Icon icon, String str, int i2, boolean z2, boolean z3) {
         Drawable defaultActivityIcon;
         if (icon == null) {
-            Drawable mutate = context.getDrawable(R.drawable.ic_avatar_with_badge).mutate();
-            mutate.setColorFilter(FastBitmapDrawable.getDisabledColorFilter(1.0f));
-            return PeopleSpaceUtils.convertDrawableToBitmap(mutate);
+            Drawable drawableMutate = context.getDrawable(R.drawable.ic_avatar_with_badge).mutate();
+            drawableMutate.setColorFilter(FastBitmapDrawable.getDisabledColorFilter(1.0f));
+            return PeopleSpaceUtils.convertDrawableToBitmap(drawableMutate);
         }
         PeopleStoryIconFactory peopleStoryIconFactory = new PeopleStoryIconFactory(context, context.getPackageManager(), IconDrawableFactory.newInstance(context, false), i);
         RoundedBitmapDrawable21 roundedBitmapDrawable21 = new RoundedBitmapDrawable21(context.getResources(), icon.getBitmap());
@@ -169,28 +186,103 @@ public class PeopleTileViewHelper {
         remoteViews.setViewVisibility(R.id.punctuations, 0);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00e4  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0131  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00e8  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x00e4  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x00e8  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x012f  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0131  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.systemui.people.PeopleTileViewHelper.RemoteViewsAndSizes createDndRemoteViews() {
-        /*
-            Method dump skipped, instructions count: 356
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.people.PeopleTileViewHelper.createDndRemoteViews():com.android.systemui.people.PeopleTileViewHelper$RemoteViewsAndSizes");
+    public final RemoteViewsAndSizes createDndRemoteViews() {
+        int i;
+        StaticLayout staticLayoutBuild;
+        int height;
+        String packageName = this.mContext.getPackageName();
+        int i2 = this.mLayoutSize;
+        RemoteViews remoteViews = new RemoteViews(packageName, i2 != 1 ? i2 != 2 ? getLayoutSmallByHeight() : R.layout.people_tile_with_suppression_detail_content_vertical : R.layout.people_tile_with_suppression_detail_content_horizontal);
+        int sizeInDp = getSizeInDp(R.dimen.avatar_size_for_medium_empty);
+        int sizeInDp2 = getSizeInDp(R.dimen.max_people_avatar_size);
+        String string = this.mContext.getString(R.string.paused_by_dnd);
+        remoteViews.setTextViewText(R.id.text_content, string);
+        int i3 = i2 == 2 ? R.dimen.content_text_size_for_large : R.dimen.content_text_size_for_medium;
+        remoteViews.setTextViewTextSize(R.id.text_content, 0, this.mContext.getResources().getDimension(i3));
+        int lineHeightFromResource = getLineHeightFromResource(i3);
+        int i4 = this.mHeight;
+        if (i2 == 1) {
+            remoteViews.setInt(R.id.text_content, "setMaxLines", (i4 - 16) / lineHeightFromResource);
+        } else {
+            float f = this.mDensity;
+            int i5 = (int) (16 * f);
+            int i6 = (int) (14 * f);
+            int sizeInDp3 = getSizeInDp(i2 == 0 ? R.dimen.regular_predefined_icon : R.dimen.largest_predefined_icon);
+            int i7 = (i4 - 32) - sizeInDp3;
+            int sizeInDp4 = getSizeInDp(R.dimen.padding_between_suppressed_layout_items);
+            int i8 = this.mWidth;
+            int i9 = i8 - 32;
+            int i10 = sizeInDp4 * 2;
+            int i11 = (i7 - sizeInDp) - i10;
+            try {
+                i = lineHeightFromResource;
+            } catch (Exception e) {
+                e = e;
+                i = lineHeightFromResource;
+            }
+            try {
+                TextView textView = new TextView(this.mContext);
+                textView.setTextSize(0, this.mContext.getResources().getDimension(i3));
+                textView.setTextAppearance(android.R.style.TextAppearance.DeviceDefault);
+                staticLayoutBuild = StaticLayout.Builder.obtain(string, 0, string.length(), textView.getPaint(), (int) (i9 * f)).setBreakStrategy(0).build();
+            } catch (Exception e2) {
+                e = e2;
+                EmergencyButton$$ExternalSyntheticOutline0.m("Could not create static layout: ", e, "PeopleTileView");
+                staticLayoutBuild = null;
+                if (staticLayoutBuild != null) {
+                }
+                if (height <= i11) {
+                    if (i2 != 0) {
+                    }
+                    sizeInDp = getMaxAvatarSize(remoteViews);
+                    remoteViews.setViewVisibility(R.id.messages_count, 8);
+                    remoteViews.setViewVisibility(R.id.name, 8);
+                    remoteViews.setContentDescription(R.id.predefined_icon, string);
+                    remoteViews.setViewVisibility(R.id.predefined_icon, 0);
+                    remoteViews.setImageViewResource(R.id.predefined_icon, R.drawable.ic_qs_dnd_on);
+                }
+                return new RemoteViewsAndSizes(remoteViews, sizeInDp);
+            }
+            height = staticLayoutBuild != null ? Integer.MAX_VALUE : (int) (staticLayoutBuild.getHeight() / f);
+            if (height <= i11 || i2 != 2) {
+                if (i2 != 0) {
+                    remoteViews = new RemoteViews(this.mContext.getPackageName(), R.layout.people_tile_small);
+                }
+                sizeInDp = getMaxAvatarSize(remoteViews);
+                remoteViews.setViewVisibility(R.id.messages_count, 8);
+                remoteViews.setViewVisibility(R.id.name, 8);
+                remoteViews.setContentDescription(R.id.predefined_icon, string);
+            } else {
+                remoteViews.setViewVisibility(R.id.text_content, 0);
+                remoteViews.setInt(R.id.text_content, "setMaxLines", i11 / i);
+                remoteViews.setContentDescription(R.id.predefined_icon, null);
+                sizeInDp = MathUtils.clamp(Math.min(i8 - 32, (i7 - height) - i10), (int) (10.0f * f), sizeInDp2);
+                remoteViews.setViewPadding(android.R.id.background, i5, i6, i5, i5);
+                remoteViews = remoteViews;
+                float f2 = sizeInDp3;
+                remoteViews.setViewLayoutWidth(R.id.predefined_icon, f2, 1);
+                remoteViews.setViewLayoutHeight(R.id.predefined_icon, f2, 1);
+            }
+            remoteViews.setViewVisibility(R.id.predefined_icon, 0);
+            remoteViews.setImageViewResource(R.id.predefined_icon, R.drawable.ic_qs_dnd_on);
+        }
+        return new RemoteViewsAndSizes(remoteViews, sizeInDp);
     }
 
-    public final RemoteViews createStatusRemoteViews(ConversationStatus conversationStatus) {
+    public final RemoteViews createStatusRemoteViews(ConversationStatus conversationStatus) throws Resources.NotFoundException {
         int i;
         int i2 = this.mLayoutSize;
         RemoteViews remoteViews = new RemoteViews(this.mContext.getPackageName(), i2 != 1 ? i2 != 2 ? getLayoutSmallByHeight() : R.layout.people_tile_large_with_status_content : R.layout.people_tile_medium_with_content);
         setViewForContentLayout(remoteViews);
         CharSequence description = conversationStatus.getDescription();
-        CharSequence charSequence = "";
+        CharSequence string = "";
         if (TextUtils.isEmpty(description)) {
             switch (conversationStatus.getActivity()) {
                 case 1:
@@ -280,49 +372,49 @@ public class PeopleTileViewHelper {
         if (TextUtils.isEmpty(conversationStatus.getDescription())) {
             switch (conversationStatus.getActivity()) {
                 case 1:
-                    charSequence = this.mContext.getString(R.string.birthday_status_content_description, userName);
+                    string = this.mContext.getString(R.string.birthday_status_content_description, userName);
                     break;
                 case 2:
-                    charSequence = this.mContext.getString(R.string.anniversary_status_content_description, userName);
+                    string = this.mContext.getString(R.string.anniversary_status_content_description, userName);
                     break;
                 case 3:
-                    charSequence = this.mContext.getString(R.string.new_story_status_content_description, userName);
+                    string = this.mContext.getString(R.string.new_story_status_content_description, userName);
                     break;
                 case 4:
-                    charSequence = this.mContext.getString(R.string.audio_status);
+                    string = this.mContext.getString(R.string.audio_status);
                     break;
                 case 5:
-                    charSequence = this.mContext.getString(R.string.video_status);
+                    string = this.mContext.getString(R.string.video_status);
                     break;
                 case 6:
-                    charSequence = this.mContext.getString(R.string.game_status);
+                    string = this.mContext.getString(R.string.game_status);
                     break;
                 case 7:
-                    charSequence = this.mContext.getString(R.string.location_status_content_description, userName);
+                    string = this.mContext.getString(R.string.location_status_content_description, userName);
                     break;
                 case 8:
-                    charSequence = this.mContext.getString(R.string.upcoming_birthday_status_content_description, userName);
+                    string = this.mContext.getString(R.string.upcoming_birthday_status_content_description, userName);
                     break;
             }
         } else {
-            charSequence = conversationStatus.getDescription();
+            string = conversationStatus.getDescription();
         }
-        String string = this.mContext.getString(R.string.new_status_content_description, this.mTile.getUserName(), charSequence);
+        String string2 = this.mContext.getString(R.string.new_status_content_description, this.mTile.getUserName(), string);
         if (i2 == 0) {
-            remoteViews.setContentDescription(R.id.predefined_icon, string);
+            remoteViews.setContentDescription(R.id.predefined_icon, string2);
             return remoteViews;
         }
         if (i2 != 1) {
             if (i2 != 2) {
                 return remoteViews;
             }
-            remoteViews.setContentDescription(R.id.text_content, string);
+            remoteViews.setContentDescription(R.id.text_content, string2);
             return remoteViews;
         }
         if (icon != null) {
             i3 = R.id.name;
         }
-        remoteViews.setContentDescription(i3, string);
+        remoteViews.setContentDescription(i3, string2);
         return remoteViews;
     }
 
@@ -331,10 +423,10 @@ public class PeopleTileViewHelper {
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
         while (matcher.find()) {
-            int start = matcher.start();
-            int end = matcher.end();
-            arrayList.add(new Pair(Integer.valueOf(start), Integer.valueOf(end)));
-            arrayList2.add(charSequence.subSequence(start, end));
+            int iStart = matcher.start();
+            int iEnd = matcher.end();
+            arrayList.add(new Pair(Integer.valueOf(iStart), Integer.valueOf(iEnd)));
+            arrayList2.add(charSequence.subSequence(iStart, iEnd));
         }
         if (arrayList.size() < 2) {
             return null;
@@ -416,42 +508,305 @@ public class PeopleTileViewHelper {
         return (int) (context.getResources().getDimension(i) / this.mDensity);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:0|1|(3:193|(1:199)(1:197)|198)(2:7|(1:9)(2:61|(7:63|(2:(1:66)(1:76)|67)(1:77)|68|(1:70)(1:75)|71|(1:73)|74)(2:78|(17:80|(1:(1:83)(1:138))(1:139)|84|(4:86|87|88|89)(9:121|(1:123)(1:137)|124|(1:126)(1:136)|127|(1:129)(1:135)|130|(1:132)(1:134)|133)|90|(6:(4:93|(1:95)(1:100)|(1:97)(1:99)|98)|101|(1:103)(3:108|(1:110)|111)|104|105|(1:107))|112|(1:114)(1:117)|115|116|11|12|13|(12:31|(2:33|(9:35|36|(1:38)(1:55)|(1:40)(1:54)|(1:42)(1:53)|43|(1:52)(1:47)|48|(1:50)(1:51)))(1:57)|56|36|(0)(0)|(0)(0)|(0)(0)|43|(1:45)|52|48|(0)(0))(1:15)|16|(4:20|21|(1:23)|24)|29)(5:140|(1:142)(1:192)|143|(1:145)(2:188|(1:190)(1:191))|(1:147)(2:148|(1:150)(11:151|(1:(1:154)(1:186))(1:187)|155|(1:157)|158|(1:160)|161|(1:163)(2:171|(4:173|(1:175)(2:176|(1:178)(2:179|(1:181)(2:182|(1:184)(1:185))))|165|(1:167)(2:168|(1:170))))|164|165|(0)(0)))))))|10|11|12|13|(0)(0)|16|(5:18|20|21|(0)|24)|29) */
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x0477, code lost:
+    /* JADX WARN: Can't wrap try/catch for region: R(11:0|2|(3:145|(1:150)(1:149)|151)(2:9|(1:11)(2:13|(7:15|(2:(1:18)(1:20)|19)(1:21)|22|(1:24)(1:25)|26|(1:28)|29)(2:30|(17:32|(1:(1:35)(1:36))(1:37)|38|(4:40|203|41|45)(9:46|(1:48)(1:49)|50|(1:52)(1:53)|54|(1:56)(1:57)|58|(1:60)(1:61)|62)|63|(6:(4:66|(1:68)(1:69)|(1:71)(1:72)|73)|74|(1:76)(3:78|(1:80)|81)|77|82|(1:84))|85|(1:87)(1:89)|88|90|152|205|153|(9:156|(10:158|(1:160)|165|(1:167)(1:168)|(1:170)(1:171)|(1:173)(1:174)|175|(1:180)(1:179)|181|(1:183)(1:184))(1:163)|164|165|(0)(0)|(0)(0)|(0)(0)|175|(4:177|180|181|(0)(0))(0))(1:155)|187|(4:201|192|(1:194)|197)|200)(5:91|(1:93)(1:94)|95|(1:97)(2:98|(1:100)(1:101))|(1:103)(2:104|(1:106)(11:107|(1:(1:110)(1:111))(1:112)|113|(1:115)|116|(1:118)|119|(1:121)(4:123|(0)(2:126|(1:128)(2:129|(1:131)(2:132|(1:134)(2:135|(1:137)(1:138)))))|139|(1:141)(2:142|(1:144)))|122|139|(0)(0)))))))|12|152|205|153|(0)(0)|187|(5:189|201|192|(0)|197)|200) */
+    /* JADX WARN: Code restructure failed: missing block: B:161:0x0477, code lost:
     
         r0 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:60:0x0512, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:186:0x0512, code lost:
     
         com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0.m("Failed to set common fields: ", r0, "PeopleTileView");
      */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0439  */
-    /* JADX WARN: Removed duplicated region for block: B:167:0x03d4  */
-    /* JADX WARN: Removed duplicated region for block: B:168:0x03dd  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0551 A[Catch: Exception -> 0x055b, TryCatch #0 {Exception -> 0x055b, blocks: (B:21:0x0524, B:23:0x0551, B:24:0x055d), top: B:20:0x0524 }] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x043b A[Catch: Exception -> 0x0477, TryCatch #2 {Exception -> 0x0477, blocks: (B:13:0x0435, B:31:0x043b, B:33:0x0444, B:35:0x045a, B:36:0x048b, B:43:0x04a2, B:45:0x04b2, B:48:0x04ca, B:50:0x04f6, B:51:0x050d, B:56:0x047b), top: B:12:0x0435 }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0495  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x049a  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x049f  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x04f6 A[Catch: Exception -> 0x0477, TryCatch #2 {Exception -> 0x0477, blocks: (B:13:0x0435, B:31:0x043b, B:33:0x0444, B:35:0x045a, B:36:0x048b, B:43:0x04a2, B:45:0x04b2, B:48:0x04ca, B:50:0x04f6, B:51:0x050d, B:56:0x047b), top: B:12:0x0435 }] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x050d A[Catch: Exception -> 0x0477, TRY_LEAVE, TryCatch #2 {Exception -> 0x0477, blocks: (B:13:0x0435, B:31:0x043b, B:33:0x0444, B:35:0x045a, B:36:0x048b, B:43:0x04a2, B:45:0x04b2, B:48:0x04ca, B:50:0x04f6, B:51:0x050d, B:56:0x047b), top: B:12:0x0435 }] */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x04a1  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x049c  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0497  */
+    /* JADX WARN: Removed duplicated region for block: B:141:0x03d4  */
+    /* JADX WARN: Removed duplicated region for block: B:142:0x03dd  */
+    /* JADX WARN: Removed duplicated region for block: B:155:0x0439  */
+    /* JADX WARN: Removed duplicated region for block: B:156:0x043b A[Catch: Exception -> 0x0477, TryCatch #2 {Exception -> 0x0477, blocks: (B:153:0x0435, B:156:0x043b, B:158:0x0444, B:160:0x045a, B:165:0x048b, B:175:0x04a2, B:177:0x04b2, B:181:0x04ca, B:183:0x04f6, B:184:0x050d, B:164:0x047b), top: B:205:0x0435 }] */
+    /* JADX WARN: Removed duplicated region for block: B:167:0x0495  */
+    /* JADX WARN: Removed duplicated region for block: B:168:0x0497  */
+    /* JADX WARN: Removed duplicated region for block: B:170:0x049a  */
+    /* JADX WARN: Removed duplicated region for block: B:171:0x049c  */
+    /* JADX WARN: Removed duplicated region for block: B:173:0x049f  */
+    /* JADX WARN: Removed duplicated region for block: B:174:0x04a1  */
+    /* JADX WARN: Removed duplicated region for block: B:180:0x04c8  */
+    /* JADX WARN: Removed duplicated region for block: B:183:0x04f6 A[Catch: Exception -> 0x0477, TryCatch #2 {Exception -> 0x0477, blocks: (B:153:0x0435, B:156:0x043b, B:158:0x0444, B:160:0x045a, B:165:0x048b, B:175:0x04a2, B:177:0x04b2, B:181:0x04ca, B:183:0x04f6, B:184:0x050d, B:164:0x047b), top: B:205:0x0435 }] */
+    /* JADX WARN: Removed duplicated region for block: B:184:0x050d A[Catch: Exception -> 0x0477, TRY_LEAVE, TryCatch #2 {Exception -> 0x0477, blocks: (B:153:0x0435, B:156:0x043b, B:158:0x0444, B:160:0x045a, B:165:0x048b, B:175:0x04a2, B:177:0x04b2, B:181:0x04ca, B:183:0x04f6, B:184:0x050d, B:164:0x047b), top: B:205:0x0435 }] */
+    /* JADX WARN: Removed duplicated region for block: B:194:0x0551 A[Catch: Exception -> 0x055b, TryCatch #0 {Exception -> 0x055b, blocks: (B:192:0x0524, B:194:0x0551, B:197:0x055d), top: B:201:0x0524 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.widget.RemoteViews getViews() {
-        /*
-            Method dump skipped, instructions count: 1395
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.people.PeopleTileViewHelper.getViews():android.widget.RemoteViews");
+    public RemoteViews getViews() throws Resources.NotFoundException {
+        RemoteViews remoteViews;
+        RemoteViews remoteViews2;
+        PeopleTileKey peopleTileKey;
+        PeopleSpaceTile peopleSpaceTile;
+        PeopleSpaceTile peopleSpaceTile2;
+        int i;
+        int dimensionPixelSize;
+        boolean z;
+        String string;
+        RemoteViews remoteViews3;
+        String string2;
+        int layoutSmallByHeight;
+        int i2 = this.mLayoutSize;
+        PeopleSpaceTile peopleSpaceTile3 = this.mTile;
+        if (peopleSpaceTile3 == null || peopleSpaceTile3.isPackageSuspended() || this.mTile.isUserQuieted()) {
+            PeopleSpaceTile peopleSpaceTile4 = this.mTile;
+            remoteViews = (peopleSpaceTile4 == null || !peopleSpaceTile4.isUserQuieted()) ? new RemoteViews(this.mContext.getPackageName(), R.layout.people_tile_suppressed_layout) : new RemoteViews(this.mContext.getPackageName(), R.layout.people_tile_work_profile_quiet_layout);
+            Drawable drawableMutate = this.mContext.getDrawable(R.drawable.ic_conversation_icon).mutate();
+            drawableMutate.setColorFilter(FastBitmapDrawable.getDisabledColorFilter(1.0f));
+            remoteViews.setImageViewBitmap(R.id.icon, PeopleSpaceUtils.convertDrawableToBitmap(drawableMutate));
+        } else if (isDndBlockingTileData(this.mTile)) {
+            remoteViews = createDndRemoteViews().mRemoteViews;
+        } else if (Objects.equals(this.mTile.getNotificationCategory(), "missed_call")) {
+            String packageName = this.mContext.getPackageName();
+            if (i2 != 1) {
+                layoutSmallByHeight = i2 != 2 ? getLayoutSmallByHeight() : R.layout.people_tile_large_with_status_content;
+            } else {
+                layoutSmallByHeight = R.layout.people_tile_medium_with_content;
+            }
+            remoteViews = new RemoteViews(packageName, layoutSmallByHeight);
+            setViewForContentLayout(remoteViews);
+            setPredefinedIconVisible(remoteViews);
+            remoteViews.setViewVisibility(R.id.text_content, 0);
+            remoteViews.setViewVisibility(R.id.messages_count, 8);
+            setMaxLines(remoteViews, false);
+            CharSequence notificationContent = this.mTile.getNotificationContent();
+            remoteViews.setTextViewText(R.id.text_content, notificationContent);
+            remoteViews.setContentDescription(i2 == 0 ? R.id.predefined_icon : R.id.text_content, this.mContext.getString(R.string.new_notification_text_content_description, this.mTile.getUserName(), notificationContent));
+            remoteViews.setColorAttr(R.id.text_content, "setTextColor", android.R.attr.colorError);
+            remoteViews.setColorAttr(R.id.predefined_icon, "setColorFilter", android.R.attr.colorError);
+            remoteViews.setImageViewResource(R.id.predefined_icon, R.drawable.ic_phone_missed);
+            if (i2 == 2) {
+                remoteViews.setInt(R.id.content, "setGravity", 80);
+                remoteViews.setViewLayoutHeightDimen(R.id.predefined_icon, R.dimen.larger_predefined_icon);
+                remoteViews.setViewLayoutWidthDimen(R.id.predefined_icon, R.dimen.larger_predefined_icon);
+            }
+            setAvailabilityDotPadding(remoteViews, R.dimen.availability_dot_notification_padding);
+        } else {
+            if (this.mTile.getNotificationKey() != null) {
+                RemoteViews remoteViews4 = new RemoteViews(this.mContext.getPackageName(), i2 != 1 ? i2 != 2 ? getLayoutSmallByHeight() : R.layout.people_tile_large_with_notification_content : R.layout.people_tile_medium_with_content);
+                setViewForContentLayout(remoteViews4);
+                CharSequence notificationSender = this.mTile.getNotificationSender();
+                Uri notificationDataUri = this.mTile.getNotificationDataUri();
+                if (notificationDataUri != null) {
+                    String string3 = this.mContext.getString(R.string.new_notification_image_content_description, this.mTile.getUserName());
+                    remoteViews4.setContentDescription(R.id.image, string3);
+                    remoteViews4.setViewVisibility(R.id.image, 0);
+                    remoteViews4.setViewVisibility(R.id.text_content, 8);
+                    try {
+                        remoteViews4.setImageViewBitmap(R.id.image, PeopleSpaceUtils.convertDrawableToBitmap(ImageDecoder.decodeDrawable(ImageDecoder.createSource(this.mContext.getContentResolver(), notificationDataUri), new ImageDecoder.OnHeaderDecodedListener() { // from class: com.android.systemui.people.PeopleTileViewHelper$$ExternalSyntheticLambda4
+                            @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
+                            public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
+                                PeopleTileViewHelper peopleTileViewHelper = this.f$0;
+                                int iMax = Math.max((int) ActionRow$$ExternalSyntheticOutline0.m(peopleTileViewHelper.mContext, 1, peopleTileViewHelper.mWidth), (int) ActionRow$$ExternalSyntheticOutline0.m(peopleTileViewHelper.mContext, 1, peopleTileViewHelper.mHeight));
+                                int iMin = (int) (Math.min(r9, r6) * 1.5d);
+                                if (iMin < iMax) {
+                                    iMax = iMin;
+                                }
+                                Size size = imageInfo.getSize();
+                                imageDecoder.setTargetSampleSize(Math.max(1, Integer.highestOneBit((int) Math.floor(Math.max(size.getHeight(), size.getWidth()) > iMax ? (r6 * 1.0f) / iMax : 1.0d))));
+                            }
+                        })));
+                    } catch (IOException | SecurityException e) {
+                        EmergencyButton$$ExternalSyntheticOutline0.m("Could not decode image: ", e, "PeopleTileView");
+                        remoteViews4.setTextViewText(R.id.text_content, string3);
+                        remoteViews4.setViewVisibility(R.id.text_content, 0);
+                        remoteViews4.setViewVisibility(R.id.image, 8);
+                    }
+                    remoteViews3 = remoteViews4;
+                } else {
+                    setMaxLines(remoteViews4, !TextUtils.isEmpty(notificationSender));
+                    CharSequence notificationContent2 = this.mTile.getNotificationContent();
+                    remoteViews4.setContentDescription(i2 == 0 ? R.id.predefined_icon : R.id.text_content, this.mContext.getString(R.string.new_notification_text_content_description, notificationSender != null ? notificationSender : this.mTile.getUserName(), notificationContent2));
+                    CharSequence doubleEmoji = getDoubleEmoji(notificationContent2);
+                    if (TextUtils.isEmpty(doubleEmoji)) {
+                        CharSequence doublePunctuation = getDoublePunctuation(notificationContent2);
+                        setEmojiBackground(remoteViews4, null);
+                        setPunctuationBackground(remoteViews4, doublePunctuation);
+                    } else {
+                        setEmojiBackground(remoteViews4, doubleEmoji);
+                        setPunctuationBackground(remoteViews4, null);
+                    }
+                    remoteViews4.setColorAttr(R.id.text_content, "setTextColor", android.R.attr.textColorPrimary);
+                    remoteViews4.setTextViewText(R.id.text_content, this.mTile.getNotificationContent());
+                    if (i2 == 2) {
+                        remoteViews4.setViewPadding(R.id.name, 0, 0, 0, this.mContext.getResources().getDimensionPixelSize(R.dimen.above_notification_text_padding));
+                        remoteViews3 = remoteViews4;
+                    } else {
+                        remoteViews3 = remoteViews4;
+                    }
+                    remoteViews3.setViewVisibility(R.id.image, 8);
+                    remoteViews3.setImageViewResource(R.id.predefined_icon, R.drawable.ic_message);
+                }
+                if (this.mTile.getMessagesCount() > 1) {
+                    if (i2 == 1) {
+                        int dimensionPixelSize2 = this.mContext.getResources().getDimensionPixelSize(R.dimen.before_messages_count_padding);
+                        boolean z2 = this.mIsLeftToRight;
+                        remoteViews3.setViewPadding(R.id.name, z2 ? 0 : dimensionPixelSize2, 0, z2 ? dimensionPixelSize2 : 0, 0);
+                    }
+                    remoteViews3.setViewVisibility(R.id.messages_count, 0);
+                    int messagesCount = this.mTile.getMessagesCount();
+                    if (messagesCount >= 6) {
+                        string2 = this.mContext.getResources().getString(R.string.messages_count_overflow_indicator, 6);
+                    } else {
+                        Locale locale = this.mContext.getResources().getConfiguration().getLocales().get(0);
+                        if (!locale.equals(this.mLocale)) {
+                            this.mLocale = locale;
+                            this.mIntegerFormat = NumberFormat.getIntegerInstance(locale);
+                        }
+                        string2 = this.mIntegerFormat.format(messagesCount);
+                    }
+                    remoteViews3.setTextViewText(R.id.messages_count, string2);
+                    if (i2 == 0) {
+                        remoteViews3.setViewVisibility(R.id.predefined_icon, 8);
+                    }
+                }
+                if (TextUtils.isEmpty(notificationSender)) {
+                    remoteViews3.setViewVisibility(R.id.subtext, 8);
+                } else {
+                    remoteViews3.setViewVisibility(R.id.subtext, 0);
+                    remoteViews3.setTextViewText(R.id.subtext, notificationSender);
+                }
+                setAvailabilityDotPadding(remoteViews3, R.dimen.availability_dot_notification_padding);
+                remoteViews2 = remoteViews3;
+                int maxAvatarSize = getMaxAvatarSize(remoteViews2);
+                peopleSpaceTile2 = this.mTile;
+                if (peopleSpaceTile2 != null) {
+                    if (peopleSpaceTile2.getStatuses() != null) {
+                        i = 0;
+                        if (this.mTile.getStatuses().stream().anyMatch(new PeopleTileViewHelper$$ExternalSyntheticLambda0(0))) {
+                            remoteViews2.setViewVisibility(R.id.availability, 0);
+                            dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.availability_dot_shown_padding);
+                            remoteViews2.setContentDescription(R.id.availability, this.mContext.getString(R.string.person_available));
+                        }
+                        int i3 = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) != 0 ? 1 : i;
+                        remoteViews2.setViewPadding(R.id.padding_before_availability, i3 == 0 ? dimensionPixelSize : i, 0, i3 == 0 ? i : dimensionPixelSize, 0);
+                        PeopleSpaceTile peopleSpaceTile5 = this.mTile;
+                        z = (peopleSpaceTile5.getStatuses() == null && peopleSpaceTile5.getStatuses().stream().anyMatch(new PeopleTileViewHelper$$ExternalSyntheticLambda0(2))) ? 1 : i;
+                        Context context = this.mContext;
+                        PeopleSpaceTile peopleSpaceTile6 = this.mTile;
+                        Icon userIcon = peopleSpaceTile6.getUserIcon();
+                        String packageName2 = peopleSpaceTile6.getPackageName();
+                        PeopleTileKey peopleTileKey2 = PeopleSpaceUtils.EMPTY_KEY;
+                        remoteViews2.setImageViewBitmap(R.id.person_icon, getPersonIconBitmap(context, maxAvatarSize, z, userIcon, packageName2, peopleSpaceTile6.getUserHandle().getIdentifier(), peopleSpaceTile6.isImportantConversation(), isDndBlockingTileData(peopleSpaceTile6)));
+                        if (z == 0) {
+                            remoteViews2.setContentDescription(R.id.person_icon, this.mContext.getString(R.string.new_story_status_content_description, this.mTile.getUserName()));
+                        } else {
+                            remoteViews2.setContentDescription(R.id.person_icon, null);
+                        }
+                    } else {
+                        i = 0;
+                    }
+                    remoteViews2.setViewVisibility(R.id.availability, 8);
+                    dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.availability_dot_missing_padding);
+                    if (TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) != 0) {
+                    }
+                    remoteViews2.setViewPadding(R.id.padding_before_availability, i3 == 0 ? dimensionPixelSize : i, 0, i3 == 0 ? i : dimensionPixelSize, 0);
+                    PeopleSpaceTile peopleSpaceTile52 = this.mTile;
+                    if (peopleSpaceTile52.getStatuses() == null) {
+                        Context context2 = this.mContext;
+                        PeopleSpaceTile peopleSpaceTile62 = this.mTile;
+                        Icon userIcon2 = peopleSpaceTile62.getUserIcon();
+                        String packageName22 = peopleSpaceTile62.getPackageName();
+                        PeopleTileKey peopleTileKey22 = PeopleSpaceUtils.EMPTY_KEY;
+                        remoteViews2.setImageViewBitmap(R.id.person_icon, getPersonIconBitmap(context2, maxAvatarSize, z, userIcon2, packageName22, peopleSpaceTile62.getUserHandle().getIdentifier(), peopleSpaceTile62.isImportantConversation(), isDndBlockingTileData(peopleSpaceTile62)));
+                        if (z == 0) {
+                        }
+                    }
+                }
+                peopleTileKey = this.mKey;
+                if (PeopleTileKey.isValid(peopleTileKey) && this.mTile != null) {
+                    try {
+                        Intent intent = new Intent(this.mContext, (Class<?>) LaunchConversationActivity.class);
+                        intent.addFlags(1350598656);
+                        intent.putExtra("extra_tile_id", peopleTileKey.mShortcutId);
+                        intent.putExtra("extra_package_name", peopleTileKey.mPackageName);
+                        intent.putExtra("extra_user_handle", new UserHandle(peopleTileKey.mUserId));
+                        peopleSpaceTile = this.mTile;
+                        if (peopleSpaceTile != null) {
+                            intent.putExtra("extra_notification_key", peopleSpaceTile.getNotificationKey());
+                        }
+                        remoteViews2.setOnClickPendingIntent(android.R.id.background, PendingIntent.getActivity(this.mContext, this.mAppWidgetId, intent, 167772160));
+                    } catch (Exception e2) {
+                        EmergencyButton$$ExternalSyntheticOutline0.m("Failed to add launch intents: ", e2, "PeopleTileView");
+                    }
+                }
+                return remoteViews2;
+            }
+            List listAsList = this.mTile.getStatuses() == null ? Arrays.asList(new ConversationStatus[0]) : (List) this.mTile.getStatuses().stream().filter(new Predicate() { // from class: com.android.systemui.people.PeopleTileViewHelper$$ExternalSyntheticLambda2
+                @Override // java.util.function.Predicate
+                public final boolean test(Object obj) {
+                    PeopleTileViewHelper peopleTileViewHelper = this.f$0;
+                    ConversationStatus conversationStatus = (ConversationStatus) obj;
+                    Pattern pattern = PeopleTileViewHelper.DOUBLE_EXCLAMATION_PATTERN;
+                    peopleTileViewHelper.getClass();
+                    int activity = conversationStatus.getActivity();
+                    return activity == 1 || activity == 2 || !TextUtils.isEmpty(conversationStatus.getDescription()) || conversationStatus.getIcon() != null;
+                }
+            }).collect(Collectors.toList());
+            Optional optionalFindFirst = listAsList.stream().filter(new PeopleTileViewHelper$$ExternalSyntheticLambda0(1)).findFirst();
+            ConversationStatus conversationStatusBuild = optionalFindFirst.isPresent() ? (ConversationStatus) optionalFindFirst.get() : !TextUtils.isEmpty(this.mTile.getBirthdayText()) ? new ConversationStatus.Builder(this.mTile.getId(), 1).build() : null;
+            if (conversationStatusBuild != null) {
+                remoteViews = createStatusRemoteViews(conversationStatusBuild);
+            } else if (listAsList.isEmpty()) {
+                remoteViews = new RemoteViews(this.mContext.getPackageName(), i2 != 1 ? i2 != 2 ? getLayoutSmallByHeight() : R.layout.people_tile_large_empty : R.layout.people_tile_medium_empty);
+                remoteViews.setInt(R.id.name, "setMaxLines", 1);
+                if (i2 == 0) {
+                    remoteViews.setViewVisibility(R.id.name, 0);
+                    remoteViews.setViewVisibility(R.id.predefined_icon, 8);
+                    remoteViews.setViewVisibility(R.id.messages_count, 8);
+                }
+                if (this.mTile.getUserName() != null) {
+                    remoteViews.setTextViewText(R.id.name, this.mTile.getUserName());
+                }
+                Context context3 = this.mContext;
+                long lastInteractionTimestamp = this.mTile.getLastInteractionTimestamp();
+                if (lastInteractionTimestamp == 0) {
+                    Log.e("PeopleTileView", "Could not get valid last interaction");
+                } else {
+                    Duration durationOfMillis = Duration.ofMillis(System.currentTimeMillis() - lastInteractionTimestamp);
+                    if (durationOfMillis.toDays() > 1) {
+                        string = durationOfMillis.toDays() < 7 ? context3.getString(R.string.days_timestamp, Long.valueOf(durationOfMillis.toDays())) : durationOfMillis.toDays() == 7 ? context3.getString(R.string.one_week_timestamp) : durationOfMillis.toDays() < 14 ? context3.getString(R.string.over_one_week_timestamp) : durationOfMillis.toDays() == 14 ? context3.getString(R.string.two_weeks_timestamp) : context3.getString(R.string.over_two_weeks_timestamp);
+                    }
+                    if (string == null) {
+                        remoteViews.setViewVisibility(R.id.last_interaction, 0);
+                        remoteViews.setTextViewText(R.id.last_interaction, string);
+                    } else {
+                        remoteViews.setViewVisibility(R.id.last_interaction, 8);
+                        if (i2 == 1) {
+                            remoteViews.setInt(R.id.name, "setMaxLines", 3);
+                        }
+                    }
+                }
+                string = null;
+                if (string == null) {
+                }
+            } else {
+                remoteViews = createStatusRemoteViews((ConversationStatus) listAsList.stream().max(Comparator.comparing(new PeopleTileViewHelper$$ExternalSyntheticLambda3())).get());
+            }
+        }
+        remoteViews2 = remoteViews;
+        int maxAvatarSize2 = getMaxAvatarSize(remoteViews2);
+        peopleSpaceTile2 = this.mTile;
+        if (peopleSpaceTile2 != null) {
+        }
+        peopleTileKey = this.mKey;
+        if (PeopleTileKey.isValid(peopleTileKey)) {
+            Intent intent2 = new Intent(this.mContext, (Class<?>) LaunchConversationActivity.class);
+            intent2.addFlags(1350598656);
+            intent2.putExtra("extra_tile_id", peopleTileKey.mShortcutId);
+            intent2.putExtra("extra_package_name", peopleTileKey.mPackageName);
+            intent2.putExtra("extra_user_handle", new UserHandle(peopleTileKey.mUserId));
+            peopleSpaceTile = this.mTile;
+            if (peopleSpaceTile != null) {
+            }
+            remoteViews2.setOnClickPendingIntent(android.R.id.background, PendingIntent.getActivity(this.mContext, this.mAppWidgetId, intent2, 167772160));
+        }
+        return remoteViews2;
     }
 
-    public final void setAvailabilityDotPadding(RemoteViews remoteViews, int i) {
+    public final void setAvailabilityDotPadding(RemoteViews remoteViews, int i) throws Resources.NotFoundException {
         int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(i);
         int dimensionPixelSize2 = this.mContext.getResources().getDimensionPixelSize(R.dimen.medium_content_padding_above_name);
         boolean z = this.mIsLeftToRight;
@@ -461,9 +816,9 @@ public class PeopleTileViewHelper {
     public final void setMaxLines(RemoteViews remoteViews, boolean z) {
         int lineHeightFromResource;
         int i;
-        int i2;
-        int i3 = this.mLayoutSize;
-        if (i3 == 2) {
+        int sizeInDp;
+        int i2 = this.mLayoutSize;
+        if (i2 == 2) {
             lineHeightFromResource = getLineHeightFromResource(R.dimen.name_text_size_for_large_content);
             i = R.dimen.content_text_size_for_large;
         } else {
@@ -471,22 +826,22 @@ public class PeopleTileViewHelper {
             i = R.dimen.content_text_size_for_medium;
         }
         boolean z2 = remoteViews.getLayoutId() == R.layout.people_tile_large_with_status_content;
-        int i4 = this.mHeight;
-        if (i3 == 1) {
-            i2 = i4 - ((this.mMediumVerticalPadding * 2) + (lineHeightFromResource + 12));
-        } else if (i3 != 2) {
-            i2 = -1;
+        int i3 = this.mHeight;
+        if (i2 == 1) {
+            sizeInDp = i3 - ((this.mMediumVerticalPadding * 2) + (lineHeightFromResource + 12));
+        } else if (i2 != 2) {
+            sizeInDp = -1;
         } else {
-            i2 = i4 - ((getSizeInDp(R.dimen.max_people_avatar_size_for_large_content) + lineHeightFromResource) + (z2 ? 76 : 62));
+            sizeInDp = i3 - ((getSizeInDp(R.dimen.max_people_avatar_size_for_large_content) + lineHeightFromResource) + (z2 ? 76 : 62));
         }
-        int max = Math.max(2, Math.floorDiv(i2, getLineHeightFromResource(i)));
+        int iMax = Math.max(2, Math.floorDiv(sizeInDp, getLineHeightFromResource(i)));
         if (z) {
-            max--;
+            iMax--;
         }
-        remoteViews.setInt(R.id.text_content, "setMaxLines", max);
+        remoteViews.setInt(R.id.text_content, "setMaxLines", iMax);
     }
 
-    public final void setPredefinedIconVisible(RemoteViews remoteViews) {
+    public final void setPredefinedIconVisible(RemoteViews remoteViews) throws Resources.NotFoundException {
         remoteViews.setViewVisibility(R.id.predefined_icon, 0);
         if (this.mLayoutSize == 1) {
             int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.before_predefined_icon_padding);
@@ -524,9 +879,9 @@ public class PeopleTileViewHelper {
         }
         if (i == 1) {
             float f = this.mDensity;
-            int floor = (int) Math.floor(16.0f * f);
-            int floor2 = (int) Math.floor(this.mMediumVerticalPadding * f);
-            remoteViews.setViewPadding(R.id.content, floor, floor2, floor, floor2);
+            int iFloor = (int) Math.floor(16.0f * f);
+            int iFloor2 = (int) Math.floor(this.mMediumVerticalPadding * f);
+            remoteViews.setViewPadding(R.id.content, iFloor, iFloor2, iFloor, iFloor2);
             remoteViews.setViewPadding(R.id.name, 0, 0, 0, 0);
             if (this.mHeight > ((int) (this.mContext.getResources().getDimension(R.dimen.medium_height_for_max_name_text_size) / f))) {
                 remoteViews.setTextViewTextSize(R.id.name, 0, (int) this.mContext.getResources().getDimension(R.dimen.max_name_text_size_for_medium));

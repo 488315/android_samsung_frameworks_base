@@ -62,15 +62,15 @@ public class ImageAttribute extends PaintOperation {
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        short readShort = (short) wireBuffer.readShort();
-        int readShort2 = (short) wireBuffer.readShort();
-        int[] iArr = new int[readShort2];
-        for (int i = 0; i < readShort2; i++) {
-            iArr[i] = wireBuffer.readInt();
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        short s = (short) wireBuffer.readShort();
+        int i3 = (short) wireBuffer.readShort();
+        int[] iArr = new int[i3];
+        for (int i4 = 0; i4 < i3; i4++) {
+            iArr[i4] = wireBuffer.readInt();
         }
-        list.add(new ImageAttribute(readInt, readInt2, readShort, iArr));
+        list.add(new ImageAttribute(i, i2, s, iArr));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

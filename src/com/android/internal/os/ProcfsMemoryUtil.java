@@ -94,9 +94,9 @@ public final class ProcfsMemoryUtil {
             if (i < 0) {
                 break;
             }
-            String readCmdlineFromProcfs = readCmdlineFromProcfs(i);
-            if (!readCmdlineFromProcfs.isEmpty()) {
-                sparseArray.append(i, readCmdlineFromProcfs);
+            String cmdlineFromProcfs = readCmdlineFromProcfs(i);
+            if (!cmdlineFromProcfs.isEmpty()) {
+                sparseArray.append(i, cmdlineFromProcfs);
             }
         }
         return sparseArray;

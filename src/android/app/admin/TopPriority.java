@@ -35,8 +35,8 @@ public final class TopPriority<V> extends ResolutionMechanism<V> {
 
     private TopPriority(Parcel parcel) {
         this.mHighestToLowestPriorityAuthorities = new ArrayList();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             this.mHighestToLowestPriorityAuthorities.add((Authority) parcel.readParcelable(Authority.class.getClassLoader()));
         }
     }

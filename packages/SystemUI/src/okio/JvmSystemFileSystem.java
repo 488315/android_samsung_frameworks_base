@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.RandomAccessFile;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class JvmSystemFileSystem extends FileSystem {
     @Override // okio.FileSystem
-    public void atomicMove(Path path, Path path2) {
+    public void atomicMove(Path path, Path path2) throws IOException {
         if (path.toFile().renameTo(path2.toFile())) {
             return;
         }
@@ -18,18 +17,18 @@ public class JvmSystemFileSystem extends FileSystem {
     }
 
     @Override // okio.FileSystem
-    public final void createDirectory(Path path) {
+    public final void createDirectory(Path path) throws IOException {
         if (path.toFile().mkdir()) {
             return;
         }
-        FileMetadata metadataOrNull = metadataOrNull(path);
-        if (metadataOrNull == null || !metadataOrNull.isDirectory) {
+        FileMetadata fileMetadataMetadataOrNull = metadataOrNull(path);
+        if (fileMetadataMetadataOrNull == null || !fileMetadataMetadataOrNull.isDirectory) {
             throw new IOException("failed to create directory: " + path);
         }
     }
 
     @Override // okio.FileSystem
-    public final void delete(Path path) {
+    public final void delete(Path path) throws IOException {
         if (Thread.interrupted()) {
             throw new InterruptedIOException("interrupted");
         }
@@ -43,12 +42,12 @@ public class JvmSystemFileSystem extends FileSystem {
     @Override // okio.FileSystem
     public FileMetadata metadataOrNull(Path path) {
         File file = path.toFile();
-        boolean isFile = file.isFile();
-        boolean isDirectory = file.isDirectory();
-        long lastModified = file.lastModified();
+        boolean zIsFile = file.isFile();
+        boolean zIsDirectory = file.isDirectory();
+        long jLastModified = file.lastModified();
         long length = file.length();
-        if (isFile || isDirectory || lastModified != 0 || length != 0 || file.exists()) {
-            return new FileMetadata(isFile, isDirectory, null, Long.valueOf(length), null, Long.valueOf(lastModified), null, null, 128, null);
+        if (zIsFile || zIsDirectory || jLastModified != 0 || length != 0 || file.exists()) {
+            return new FileMetadata(zIsFile, zIsDirectory, null, Long.valueOf(length), null, Long.valueOf(jLastModified), null, null, 128, null);
         }
         return null;
     }

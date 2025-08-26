@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PerDisplayInstanceRepositoryImpl implements PerDisplayRepository {
     public final ReadonlyStateFlow allowedDisplays;
@@ -37,7 +36,6 @@ public final class PerDisplayInstanceRepositoryImpl implements PerDisplayReposit
     public final PerDisplayInstanceProvider instanceProvider;
     public final ConcurrentHashMap perDisplayInstances;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.app.displaylib.PerDisplayInstanceRepositoryImpl$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -67,11 +65,11 @@ public final class PerDisplayInstanceRepositoryImpl implements PerDisplayReposit
                 PerDisplayRepoDumpHelper perDisplayRepoDumpHelper = (PerDisplayRepoDumpHelper) perDisplayInstanceRepositoryImpl.initCallback;
                 perDisplayRepoDumpHelper.getClass();
                 perDisplayRepoDumpHelper.dumpManager.registerNormalDumpable("PerDisplayRepository-" + perDisplayInstanceRepositoryImpl.debugName, new DumpableFromToString(perDisplayInstanceRepositoryImpl));
-                Object collectLatest = FlowKt.collectLatest(perDisplayInstanceRepositoryImpl.allowedDisplays, new PerDisplayInstanceRepositoryImpl$start$2(perDisplayInstanceRepositoryImpl, null), this);
-                if (collectLatest != obj2) {
-                    collectLatest = Unit.INSTANCE;
+                Object objCollectLatest = FlowKt.collectLatest(perDisplayInstanceRepositoryImpl.allowedDisplays, new PerDisplayInstanceRepositoryImpl$start$2(perDisplayInstanceRepositoryImpl, null), this);
+                if (objCollectLatest != obj2) {
+                    objCollectLatest = Unit.INSTANCE;
                 }
-                if (collectLatest == obj2) {
+                if (objCollectLatest == obj2) {
                     return obj2;
                 }
             } else {
@@ -84,7 +82,6 @@ public final class PerDisplayInstanceRepositoryImpl implements PerDisplayReposit
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -94,7 +91,6 @@ public final class PerDisplayInstanceRepositoryImpl implements PerDisplayReposit
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         PerDisplayInstanceRepositoryImpl create(String str, PerDisplayInstanceProvider perDisplayInstanceProvider, DisplayInstanceLifecycleManager displayInstanceLifecycleManager);
     }
@@ -126,36 +122,36 @@ public final class PerDisplayInstanceRepositoryImpl implements PerDisplayReposit
             return null;
         }
         ConcurrentHashMap concurrentHashMap = this.perDisplayInstances;
-        Integer valueOf = Integer.valueOf(i);
+        Integer numValueOf = Integer.valueOf(i);
         final Function1 function1 = new Function1() { // from class: com.android.app.displaylib.PerDisplayInstanceRepositoryImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Integer num = (Integer) obj;
-                PerDisplayInstanceRepositoryImpl perDisplayInstanceRepositoryImpl = PerDisplayInstanceRepositoryImpl.this;
+                PerDisplayInstanceRepositoryImpl perDisplayInstanceRepositoryImpl = this.f$0;
                 Log.d("PerDisplayInstanceRepo", "<" + perDisplayInstanceRepositoryImpl.debugName + "> creating instance for displayId=" + num + ", as it wasn't available.");
-                boolean isEnabled = Trace.isEnabled();
+                boolean zIsEnabled = Trace.isEnabled();
                 String str2 = perDisplayInstanceRepositoryImpl.debugName;
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.beginSlice("creating instance of " + str2 + " for displayId=" + num);
                 }
                 try {
-                    Object createInstance = perDisplayInstanceRepositoryImpl.instanceProvider.createInstance(num.intValue());
-                    if (createInstance == null) {
+                    Object objCreateInstance = perDisplayInstanceRepositoryImpl.instanceProvider.createInstance(num.intValue());
+                    if (objCreateInstance == null) {
                         Log.e("PerDisplayInstanceRepo", "<" + str2 + "> returning null because createInstance(" + num + ") returned null.");
                     }
-                    return createInstance;
+                    return objCreateInstance;
                 } finally {
-                    if (isEnabled) {
+                    if (zIsEnabled) {
                         TraceUtilsKt.endSlice();
                     }
                 }
             }
         };
-        return concurrentHashMap.computeIfAbsent(valueOf, new Function() { // from class: com.android.app.displaylib.PerDisplayInstanceRepositoryImpl$sam$java_util_function_Function$0
+        return concurrentHashMap.computeIfAbsent(numValueOf, new Function() { // from class: com.android.app.displaylib.PerDisplayInstanceRepositoryImpl$sam$java_util_function_Function$0
             @Override // java.util.function.Function
             public final /* synthetic */ Object apply(Object obj) {
-                return Function1.this.mo779invoke(obj);
+                return function1.mo781invoke(obj);
             }
         });
     }

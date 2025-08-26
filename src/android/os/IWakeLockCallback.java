@@ -38,9 +38,9 @@ public interface IWakeLockCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWakeLockCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWakeLockCallback)) {
-                return (IWakeLockCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWakeLockCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWakeLockCallback)) {
+                return (IWakeLockCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -67,9 +67,9 @@ public interface IWakeLockCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onStateChanged(readBoolean);
+                onStateChanged(z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -93,13 +93,13 @@ public interface IWakeLockCallback extends IInterface {
 
             @Override // android.os.IWakeLockCallback
             public void onStateChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWakeLockCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWakeLockCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

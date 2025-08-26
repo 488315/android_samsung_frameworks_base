@@ -60,9 +60,9 @@ public interface IVbiRatingInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.rating.IVbiRatingInterface");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVbiRatingInterface)) {
-                return (IVbiRatingInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.rating.IVbiRatingInterface");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVbiRatingInterface)) {
+                return (IVbiRatingInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -95,21 +95,21 @@ public interface IVbiRatingInterface extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                String vbiRating = getVbiRating(readString);
+                String vbiRating = getVbiRating(string);
                 parcel2.writeNoException();
                 parcel2.writeString(vbiRating);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                IVbiRatingListener asInterface = IVbiRatingListener.Stub.asInterface(parcel.readStrongBinder());
+                String string2 = parcel.readString();
+                IVbiRatingListener iVbiRatingListenerAsInterface = IVbiRatingListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addVbiRatingListener(readString2, asInterface);
+                addVbiRatingListener(string2, iVbiRatingListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                IVbiRatingListener asInterface2 = IVbiRatingListener.Stub.asInterface(parcel.readStrongBinder());
+                IVbiRatingListener iVbiRatingListenerAsInterface2 = IVbiRatingListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeVbiRatingListener(asInterface2);
+                removeVbiRatingListener(iVbiRatingListenerAsInterface2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -135,48 +135,48 @@ public interface IVbiRatingInterface extends IInterface {
 
             @Override // android.media.tv.extension.rating.IVbiRatingInterface
             public String getVbiRating(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.rating.IVbiRatingInterface");
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.rating.IVbiRatingInterface");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.rating.IVbiRatingInterface
             public void addVbiRatingListener(String str, IVbiRatingListener iVbiRatingListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.rating.IVbiRatingInterface");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iVbiRatingListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.rating.IVbiRatingInterface");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iVbiRatingListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.rating.IVbiRatingInterface
             public void removeVbiRatingListener(IVbiRatingListener iVbiRatingListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.rating.IVbiRatingInterface");
-                    obtain.writeStrongInterface(iVbiRatingListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.rating.IVbiRatingInterface");
+                    parcelObtain.writeStrongInterface(iVbiRatingListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

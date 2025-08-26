@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.WindowManagerGlobal;
 import com.android.systemui.shared.rotation.RotationButtonController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class RotationButtonController$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -57,12 +56,12 @@ public final /* synthetic */ class RotationButtonController$$ExternalSyntheticLa
                 final RotationButtonController rotationButtonController2 = (RotationButtonController) obj;
                 boolean z4 = RotationButtonController.OEM_DISALLOW_ROTATION_IN_SUW;
                 rotationButtonController2.getClass();
-                final Intent registerReceiver = rotationButtonController2.mContext.registerReceiver(rotationButtonController2.mDockedReceiver, new IntentFilter("android.intent.action.DOCK_EVENT"));
+                final Intent intentRegisterReceiver = rotationButtonController2.mContext.registerReceiver(rotationButtonController2.mDockedReceiver, new IntentFilter("android.intent.action.DOCK_EVENT"));
                 rotationButtonController2.mContext.getMainExecutor().execute(new Runnable() { // from class: com.android.systemui.shared.rotation.RotationButtonController$$ExternalSyntheticLambda6
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RotationButtonController rotationButtonController3 = RotationButtonController.this;
-                        Intent intent = registerReceiver;
+                        RotationButtonController rotationButtonController3 = rotationButtonController2;
+                        Intent intent = intentRegisterReceiver;
                         boolean z5 = RotationButtonController.OEM_DISALLOW_ROTATION_IN_SUW;
                         rotationButtonController3.getClass();
                         if (intent == null) {

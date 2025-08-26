@@ -159,7 +159,7 @@ public class ApexInfo {
         this.partition = str;
     }
 
-    static ApexInfo read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static ApexInfo read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         ApexInfo apexInfo = new ApexInfo();
         String attributeValue = xmlPullParser.getAttributeValue(null, "moduleName");
         if (attributeValue != null) {

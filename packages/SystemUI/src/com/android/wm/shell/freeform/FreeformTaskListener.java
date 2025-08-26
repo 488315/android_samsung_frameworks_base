@@ -28,9 +28,10 @@ import com.android.wm.shell.common.DisplayImeController;
 import com.android.wm.shell.common.LaunchAdjacentController;
 import com.android.wm.shell.desktopmode.DesktopModeLoggerTransitionObserver;
 import com.android.wm.shell.desktopmode.DesktopRepository;
-import com.android.wm.shell.desktopmode.DesktopRepository$$ExternalSyntheticLambda4;
+import com.android.wm.shell.desktopmode.DesktopRepository$$ExternalSyntheticLambda5;
 import com.android.wm.shell.desktopmode.DesktopTasksController;
 import com.android.wm.shell.desktopmode.DesktopUserRepositories;
+import com.android.wm.shell.desktopmode.multidesks.RootTaskDesksOrganizer;
 import com.android.wm.shell.freeform.FreeformTaskListener;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.desktopmode.DesktopState;
@@ -38,7 +39,7 @@ import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.sysui.ShellInit;
 import com.android.wm.shell.windowdecor.DesktopModeWindowDecorViewModel;
 import com.android.wm.shell.windowdecor.DesktopModeWindowDecoration;
-import com.android.wm.shell.windowdecor.DesktopModeWindowDecoration$$ExternalSyntheticLambda1;
+import com.android.wm.shell.windowdecor.DesktopModeWindowDecoration$$ExternalSyntheticLambda2;
 import com.android.wm.shell.windowdecor.FreeformOutline;
 import com.android.wm.shell.windowdecor.WindowDecorViewModel;
 import com.android.wm.shell.windowdecor.WindowDecoration;
@@ -51,7 +52,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, ShellTaskOrganizer.FocusListener {
     public int mCaptionType;
@@ -71,7 +71,6 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
     public final SparseArray mTasks = new SparseArray();
     public final ArrayList mExcludeImeInsetsTarget = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ImePositionProcessor implements DisplayImeController.ImePositionProcessor {
         public final DesktopModeWindowDecorViewModel mDecorViewModel;
         public final int mDisplayId;
@@ -167,10 +166,10 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
                     int i6 = freeformAdjustImeController.mLastYOffset;
                     float f2 = i6;
                     int i7 = freeformAdjustImeController.mTargetYOffset;
-                    int m$1 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(i7, f2, f, f2);
-                    if (i6 != i7 && m$1 != freeformAdjustImeController.mYOffsetForIme) {
-                        freeformAdjustImeController.mYOffsetForIme = m$1;
-                        freeformAdjustImeController.imePositionChanged(m$1, transaction);
+                    int iM$1 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(i7, f2, f, f2);
+                    if (i6 != i7 && iM$1 != freeformAdjustImeController.mYOffsetForIme) {
+                        freeformAdjustImeController.mYOffsetForIme = iM$1;
+                        freeformAdjustImeController.imePositionChanged(iM$1, transaction);
                     }
                 }
                 if (desktopModeWindowDecoration != null) {
@@ -178,12 +177,12 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
                     int i8 = freeformAdjustImeController2.mLastYOffset;
                     float f3 = i8;
                     int i9 = freeformAdjustImeController2.mTargetYOffset;
-                    int m$12 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(i9, f3, f, f3);
-                    if (i8 == i9 || m$12 == freeformAdjustImeController2.mYOffsetForIme) {
+                    int iM$12 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(i9, f3, f, f3);
+                    if (i8 == i9 || iM$12 == freeformAdjustImeController2.mYOffsetForIme) {
                         return;
                     }
-                    freeformAdjustImeController2.mYOffsetForIme = m$12;
-                    freeformAdjustImeController2.imePositionChanged(m$12, transaction);
+                    freeformAdjustImeController2.mYOffsetForIme = iM$12;
+                    freeformAdjustImeController2.imePositionChanged(iM$12, transaction);
                 }
             }
         }
@@ -255,7 +254,6 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class State {
         public SurfaceControl mLeash;
         public ActivityManager.RunningTaskInfo mTaskInfo;
@@ -283,10 +281,10 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
             shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.freeform.FreeformTaskListener$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FreeformTaskListener freeformTaskListener = FreeformTaskListener.this;
-                    boolean inDesktopWindowing = MultiWindowManager.getInstance().inDesktopWindowing();
+                    FreeformTaskListener freeformTaskListener = this.f$0;
+                    boolean zInDesktopWindowing = MultiWindowManager.getInstance().inDesktopWindowing();
                     DesktopStateImpl.Companion.getClass();
-                    DesktopStateImpl.Companion.setInDesktopWindowing(inDesktopWindowing);
+                    DesktopStateImpl.Companion.setInDesktopWindowing(zInDesktopWindowing);
                     ShellTaskOrganizer shellTaskOrganizer2 = freeformTaskListener.mShellTaskOrganizer;
                     shellTaskOrganizer2.addListenerForType(freeformTaskListener, -5);
                     freeformTaskListener.mDesktopState.getClass();
@@ -314,10 +312,10 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
             this.mImePositionProcessor = imePositionProcessor;
             displayImeController.addPositionProcessor(imePositionProcessor);
         }
-        ShellTaskOrganizer.MultiWindowCoreStateChangeListener multiWindowCoreStateChangeListener = new ShellTaskOrganizer.MultiWindowCoreStateChangeListener() { // from class: com.android.wm.shell.freeform.FreeformTaskListener$$ExternalSyntheticLambda1
+        shellTaskOrganizer.registerMultiWindowCoreStateListener(new ShellTaskOrganizer.MultiWindowCoreStateChangeListener() { // from class: com.android.wm.shell.freeform.FreeformTaskListener$$ExternalSyntheticLambda1
             @Override // com.android.wm.shell.ShellTaskOrganizer.MultiWindowCoreStateChangeListener
             public final boolean onMultiWindowCoreStateChanged(int i2) {
-                FreeformTaskListener freeformTaskListener = FreeformTaskListener.this;
+                FreeformTaskListener freeformTaskListener = this.f$0;
                 int size = freeformTaskListener.mTasks.size();
                 if (size < 1 || (i2 & 1) == 0 || MultiWindowCoreState.MW_ENABLED) {
                     return false;
@@ -326,8 +324,8 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
                 for (int i3 = size - 1; i3 >= 0; i3--) {
                     FreeformTaskListener.State state = (FreeformTaskListener.State) freeformTaskListener.mTasks.valueAt(i3);
                     int displayId = state.mTaskInfo.getDisplayId();
-                    boolean isNewDexMode = state.mTaskInfo.configuration.isNewDexMode();
-                    if (displayId == 0 && !isNewDexMode) {
+                    boolean zIsNewDexMode = state.mTaskInfo.configuration.isNewDexMode();
+                    if (displayId == 0 && !zIsNewDexMode) {
                         windowContainerTransaction.setWindowingMode(state.mTaskInfo.token, 1);
                         windowContainerTransaction.setBounds(state.mTaskInfo.token, (Rect) null);
                     }
@@ -338,9 +336,7 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
                 }
                 return true;
             }
-        };
-        shellTaskOrganizer.mMultiWindowCoreStateChangeListeners.remove(multiWindowCoreStateChangeListener);
-        shellTaskOrganizer.mMultiWindowCoreStateChangeListeners.add(multiWindowCoreStateChangeListener);
+        });
     }
 
     @Override // com.android.wm.shell.ShellTaskOrganizer.TaskListener
@@ -350,9 +346,9 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
 
     @Override // com.android.wm.shell.ShellTaskOrganizer.TaskListener
     public final void dump$2(PrintWriter printWriter, String str) {
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
         printWriter.println(str + this);
-        printWriter.println(m + this.mTasks.size() + " tasks");
+        printWriter.println(strM + this.mTasks.size() + " tasks");
     }
 
     public final SurfaceControl findTaskSurface(int i) {
@@ -444,7 +440,7 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
         if (!DesktopModeFlags.ENABLE_WINDOWING_TRANSITION_HANDLERS_OBSERVERS.isTrue() && ((DesktopStateImpl) this.mDesktopState).canEnterDesktopMode && this.mDesktopUserRepositories.isPresent()) {
             DesktopRepository profile = ((DesktopUserRepositories) this.mDesktopUserRepositories.get()).getProfile(runningTaskInfo.userId);
             if (!DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_BACK_NAVIGATION.isTrue() || !profile.isMinimizedTask(runningTaskInfo.taskId)) {
-                profile.desktopData.forAllDesks(new DesktopRepository$$ExternalSyntheticLambda4(runningTaskInfo.taskId, profile));
+                profile.desktopData.forAllDesks(new DesktopRepository$$ExternalSyntheticLambda5(runningTaskInfo.taskId, profile));
                 profile.removeTask(runningTaskInfo.displayId, runningTaskInfo.taskId);
             }
         }
@@ -505,11 +501,11 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
                         }
                         desktopModeWindowDecoration.setCaptionVisibility(desktopModeWindowDecoration.mResult.mRootView, false);
                         if (desktopModeWindowDecoration.mFreeformOutline != null) {
-                            int loadDimensionPixelSize = WindowDecoration.loadDimensionPixelSize(desktopModeWindowDecoration.mContext.getResources(), i3 == 0 ? R.dimen.mw_handle_freeform_inset : SystemBarUtils.getDesktopViewAppHeaderHeightId());
+                            int iLoadDimensionPixelSize = WindowDecoration.loadDimensionPixelSize(desktopModeWindowDecoration.mContext.getResources(), i3 == 0 ? R.dimen.mw_handle_freeform_inset : SystemBarUtils.getDesktopViewAppHeaderHeightId());
                             WindowContainerTransaction windowContainerTransaction2 = new WindowContainerTransaction();
                             Rect bounds = desktopModeWindowDecoration.mTaskInfo.configuration.windowConfiguration.getBounds();
                             WindowDecoration.RelayoutResult relayoutResult = desktopModeWindowDecoration.mResult;
-                            relayoutResult.mCaptionHeight = loadDimensionPixelSize;
+                            relayoutResult.mCaptionHeight = iLoadDimensionPixelSize;
                             if (i3 == 0) {
                                 WindowDecoration.RelayoutParams relayoutParams2 = desktopModeWindowDecoration.mRelayoutParams;
                                 relayoutParams2.mInsetSourceFlags = (relayoutParams2.mInsetSourceFlags & (-33)) | 64;
@@ -518,18 +514,18 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
                                 relayoutParams3.mInsetSourceFlags = (relayoutParams3.mInsetSourceFlags & (-65)) | 32;
                             }
                             desktopModeWindowDecoration.updateCaptionInsets(desktopModeWindowDecoration.mRelayoutParams, windowContainerTransaction2, relayoutResult, bounds);
-                            desktopModeWindowDecoration.mBgExecutor.execute(new DesktopModeWindowDecoration$$ExternalSyntheticLambda1(desktopModeWindowDecoration, windowContainerTransaction2, i2));
+                            desktopModeWindowDecoration.mBgExecutor.execute(new DesktopModeWindowDecoration$$ExternalSyntheticLambda2(desktopModeWindowDecoration, windowContainerTransaction2, i2));
                             final FreeformOutline freeformOutline = desktopModeWindowDecoration.mFreeformOutline;
-                            float f = loadDimensionPixelSize;
+                            float f = iLoadDimensionPixelSize;
                             final ActivityManager.RunningTaskInfo runningTaskInfo2 = desktopModeWindowDecoration.mTaskInfo;
                             final boolean z = desktopModeWindowDecoration.mHasGlobalFocus;
                             final Region region = desktopModeWindowDecoration.mExclusionRegion;
                             final OutlineView outlineView = freeformOutline.getOutlineView();
                             if (outlineView != null) {
-                                ValueAnimator ofFloat = ValueAnimator.ofFloat(outlineView.mCaptionHeight, f);
-                                ofFloat.setInterpolator(InterpolatorUtils.ONE_EASING);
-                                ofFloat.setDuration(400L);
-                                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(freeformOutline, outlineView) { // from class: com.android.wm.shell.windowdecor.FreeformOutline.1
+                                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(outlineView.mCaptionHeight, f);
+                                valueAnimatorOfFloat.setInterpolator(InterpolatorUtils.ONE_EASING);
+                                valueAnimatorOfFloat.setDuration(400L);
+                                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(freeformOutline, outlineView) { // from class: com.android.wm.shell.windowdecor.FreeformOutline.1
                                     public final /* synthetic */ OutlineView val$outlineView;
 
                                     {
@@ -545,13 +541,13 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
                                         }
                                     }
                                 });
-                                ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.FreeformOutline.2
+                                valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.FreeformOutline.2
                                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                                     public final void onAnimationEnd(Animator animator) {
                                         FreeformOutline.this.mDecoration.relayout(runningTaskInfo2, z, region);
                                     }
                                 });
-                                ofFloat.start();
+                                valueAnimatorOfFloat.start();
                             }
                         }
                     }
@@ -568,6 +564,11 @@ public class FreeformTaskListener implements ShellTaskOrganizer.TaskListener, Sh
 
     public final void updateFocusedTaskInfo(ActivityManager.RunningTaskInfo runningTaskInfo) {
         ActivityManager.RunningTaskInfo runningTaskInfo2;
+        if (runningTaskInfo != null && this.mDesktopTasksController.isPresent()) {
+            if (((RootTaskDesksOrganizer) ((DesktopTasksController) this.mDesktopTasksController.get()).desksOrganizer).deskRootsByDeskId.contains(runningTaskInfo.taskId)) {
+                return;
+            }
+        }
         if ((runningTaskInfo != null || this.mFocusedTaskInfo != null) && (runningTaskInfo == null || (runningTaskInfo2 = this.mFocusedTaskInfo) == null || runningTaskInfo.taskId != runningTaskInfo2.taskId)) {
             this.mPrevFocusedTaskInfo = this.mFocusedTaskInfo;
         }

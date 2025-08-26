@@ -2,21 +2,21 @@
 <resources>
     <style name="TextAppearance.AuthNonBioCredential.Description" parent="@style/TextAppearance.AuthNonBioCredential">
         <item name="android:textSize">18.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:layout_marginTop">16.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.AuthNonBioCredential.Subtitle" parent="@style/TextAppearance.AuthNonBioCredential">
         <item name="android:textSize">18.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:layout_marginTop">16.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.AuthNonBioCredential.Title" parent="@style/TextAppearance.AuthNonBioCredential">
         <item name="android:textSize">36.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:focusable">true</item>
         <item name="android:layout_marginTop">16.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
 </resources>

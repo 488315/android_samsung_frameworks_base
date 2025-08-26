@@ -22,7 +22,7 @@ public final class WifiKeystore {
 
     @SystemApi
     public static boolean put(String str, byte[] bArr) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 Log.i(TAG, "put blob. alias=" + str + ", primaryDb=" + sPrimaryDbName);
@@ -30,21 +30,21 @@ public final class WifiKeystore {
                     return WifiBlobStore.getInstance().put(str, bArr);
                 }
                 WifiBlobStore.getLegacyKeystore().put(str, 1010, bArr);
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 return true;
             } catch (Exception e) {
                 Log.e(TAG, "Failed to put blob.", e);
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 return false;
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
     @SystemApi
     public static byte[] get(String str) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 try {
@@ -55,108 +55,79 @@ public final class WifiKeystore {
                     }
                     Log.i(TAG, "Searching for blob in Legacy Keystore");
                     return WifiBlobStore.getLegacyKeystore().get(str, 1010);
-                } catch (ServiceSpecificException e) {
-                    if (e.errorCode != 7) {
-                        Log.e(TAG, "Failed to get blob.", e);
-                    }
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to get blob.", e);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                     return new byte[0];
                 }
-            } catch (Exception e2) {
-                Log.e(TAG, "Failed to get blob.", e2);
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+            } catch (ServiceSpecificException e2) {
+                if (e2.errorCode != 7) {
+                    Log.e(TAG, "Failed to get blob.", e2);
+                }
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 return new byte[0];
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0071 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:15:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
-    @android.annotation.SystemApi
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0071 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:33:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
+    @SystemApi
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean remove(java.lang.String r9) {
-        /*
-            java.lang.String r0 = "Failed to remove blob."
-            java.lang.String r1 = "WifiKeystore"
-            java.lang.String r2 = "remove blob. alias="
-            long r3 = android.os.Binder.clearCallingIdentity()
-            r5 = 1
-            r6 = 0
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L40 java.lang.Exception -> L42 android.os.ServiceSpecificException -> L48
-            r7.<init>(r2)     // Catch: java.lang.Throwable -> L40 java.lang.Exception -> L42 android.os.ServiceSpecificException -> L48
-            r7.append(r9)     // Catch: java.lang.Throwable -> L40 java.lang.Exception -> L42 android.os.ServiceSpecificException -> L48
-            java.lang.String r2 = ", primaryDb="
-            r7.append(r2)     // Catch: java.lang.Throwable -> L40 java.lang.Exception -> L42 android.os.ServiceSpecificException -> L48
-            java.lang.String r2 = android.net.wifi.WifiKeystore.sPrimaryDbName     // Catch: java.lang.Throwable -> L40 java.lang.Exception -> L42 android.os.ServiceSpecificException -> L48
-            r7.append(r2)     // Catch: java.lang.Throwable -> L40 java.lang.Exception -> L42 android.os.ServiceSpecificException -> L48
-            java.lang.String r2 = r7.toString()     // Catch: java.lang.Throwable -> L40 java.lang.Exception -> L42 android.os.ServiceSpecificException -> L48
-            android.util.Log.i(r1, r2)     // Catch: java.lang.Throwable -> L40 java.lang.Exception -> L42 android.os.ServiceSpecificException -> L48
-            android.net.wifi.WifiBlobStore r2 = android.net.wifi.WifiBlobStore.getInstance()     // Catch: java.lang.Throwable -> L40 java.lang.Exception -> L42 android.os.ServiceSpecificException -> L48
-            boolean r2 = r2.remove(r9)     // Catch: java.lang.Throwable -> L40 java.lang.Exception -> L42 android.os.ServiceSpecificException -> L48
-            android.security.legacykeystore.ILegacyKeystore r7 = android.net.wifi.WifiBlobStore.getLegacyKeystore()     // Catch: java.lang.Exception -> L3c android.os.ServiceSpecificException -> L3e java.lang.Throwable -> L40
-            r8 = 1010(0x3f2, float:1.415E-42)
-            r7.remove(r9, r8)     // Catch: java.lang.Exception -> L3c android.os.ServiceSpecificException -> L3e java.lang.Throwable -> L40
-            android.os.Binder.restoreCallingIdentity(r3)
-            r9 = r5
-            goto L56
-        L3c:
-            r9 = move-exception
-            goto L44
-        L3e:
-            r9 = move-exception
-            goto L4a
-        L40:
-            r9 = move-exception
-            goto L76
-        L42:
-            r9 = move-exception
-            r2 = r6
-        L44:
-            android.util.Log.e(r1, r0, r9)     // Catch: java.lang.Throwable -> L40
-            goto L52
-        L48:
-            r9 = move-exception
-            r2 = r6
-        L4a:
-            int r7 = r9.errorCode     // Catch: java.lang.Throwable -> L40
-            r8 = 7
-            if (r7 == r8) goto L52
-            android.util.Log.e(r1, r0, r9)     // Catch: java.lang.Throwable -> L40
-        L52:
-            android.os.Binder.restoreCallingIdentity(r3)
-            r9 = r6
-        L56:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r3 = "Removal status: wifiBlobStore="
-            r0.<init>(r3)
-            r0.append(r2)
-            java.lang.String r3 = ", legacyKeystore="
-            r0.append(r3)
-            r0.append(r9)
-            java.lang.String r0 = r0.toString()
-            android.util.Log.i(r1, r0)
-            if (r2 != 0) goto L75
-            if (r9 == 0) goto L74
-            goto L75
-        L74:
-            r5 = r6
-        L75:
-            return r5
-        L76:
-            android.os.Binder.restoreCallingIdentity(r3)
-            throw r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.net.wifi.WifiKeystore.remove(java.lang.String):boolean");
+    public static boolean remove(String str) {
+        boolean zRemove;
+        boolean z;
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
+        try {
+            try {
+                Log.i(TAG, "remove blob. alias=" + str + ", primaryDb=" + sPrimaryDbName);
+                zRemove = WifiBlobStore.getInstance().remove(str);
+            } catch (Throwable th) {
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
+                throw th;
+            }
+        } catch (ServiceSpecificException e) {
+            e = e;
+            zRemove = false;
+        } catch (Exception e2) {
+            e = e2;
+            zRemove = false;
+        }
+        try {
+            WifiBlobStore.getLegacyKeystore().remove(str, 1010);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
+            z = true;
+        } catch (ServiceSpecificException e3) {
+            e = e3;
+            if (e.errorCode != 7) {
+                Log.e(TAG, "Failed to remove blob.", e);
+            }
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
+            z = false;
+            Log.i(TAG, "Removal status: wifiBlobStore=" + zRemove + ", legacyKeystore=" + z);
+            return !zRemove ? true : true;
+        } catch (Exception e4) {
+            e = e4;
+            Log.e(TAG, "Failed to remove blob.", e);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
+            z = false;
+            Log.i(TAG, "Removal status: wifiBlobStore=" + zRemove + ", legacyKeystore=" + z);
+            if (!zRemove) {
+            }
+        }
+        Log.i(TAG, "Removal status: wifiBlobStore=" + zRemove + ", legacyKeystore=" + z);
+        if (!zRemove && !z) {
+            return false;
+        }
     }
 
     @SystemApi
     public static String[] list(String str) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 String[] list = WifiBlobStore.getInstance().list(str);
@@ -170,11 +141,11 @@ public final class WifiKeystore {
                 return (String[]) hashSet.toArray(new String[hashSet.size()]);
             } catch (Exception e) {
                 Log.e(TAG, "Failed to list blobs.", e);
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 return new String[0];
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 }

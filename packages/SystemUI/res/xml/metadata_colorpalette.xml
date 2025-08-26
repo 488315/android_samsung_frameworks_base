@@ -18,8 +18,8 @@
         <Property DefaultValue="#664e6ec4" DestAttribName="qs_edit_panel_tile_icon_background_color" POption="AlwaysOverriden" UID="4-13-2" ValueRef="4-2-4" ValueType="TextColor" />
         <Property DefaultValue="#1a000000" DestAttribName="notification_panel_theme_ripple_color" UID="4-16" ValueRef="1-52-2" ValueType="BgColor" />
         <Property DestAttribName="qs_detail_item_device_icon_tint_color" UID="4-21-13" ValueRef="1-32-5" ValueType="TintColor" />
-        <Property DefaultValue="#ff387aff" DestAttribName="sec_wifi_icon_blue_color" UID="4-21-17" ValueRef="1-1-1" ValueType="TintColor" />
-        <Property DefaultValue="#fffcfcff" DestAttribName="sec_wifi_icon_gray_color" UID="4-21-18" ValueRef="1-18-1" ValueType="TintColor" />
+        <Property DefaultValue="#ff387aff" DestAttribName="sec_wifi_icon_blue_color" UID="4-21-17" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property DefaultValue="#fffcfcff" DestAttribName="sec_wifi_icon_gray_color" UID="4-21-18" ValueRef="1-1-4" ValueType="TintColor" />
         <Property DefaultValue="#ff252525" DestAttribName="open_theme_notification_title_text_color" POption="AlwaysOverriden" UID="4-22-1" ValueType="TextColor" />
         <Property DefaultValue="#cc252525" DestAttribName="open_theme_notification_content_text_color" Opacity="80" UID="4-22-2" ValueRef="4-22-1" ValueType="TextColor" />
         <Property DefaultValue="#ff888fa2" DestAttribName="open_theme_noti_header_color" UID="4-22-20" ValueType="TintColor" />

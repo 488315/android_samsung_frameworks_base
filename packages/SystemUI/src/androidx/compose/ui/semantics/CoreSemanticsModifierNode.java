@@ -4,7 +4,6 @@ import androidx.compose.ui.Modifier;
 import androidx.compose.ui.node.SemanticsModifierNode;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CoreSemanticsModifierNode extends Modifier.Node implements SemanticsModifierNode {
     public final boolean isClearingSemantics;
@@ -19,7 +18,7 @@ public final class CoreSemanticsModifierNode extends Modifier.Node implements Se
 
     @Override // androidx.compose.ui.node.SemanticsModifierNode
     public final void applySemantics(SemanticsPropertyReceiver semanticsPropertyReceiver) {
-        this.properties.mo779invoke(semanticsPropertyReceiver);
+        this.properties.mo781invoke(semanticsPropertyReceiver);
     }
 
     @Override // androidx.compose.ui.node.SemanticsModifierNode

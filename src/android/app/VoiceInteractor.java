@@ -557,56 +557,56 @@ public final class VoiceInteractor {
                 SomeArgs someArgs = (SomeArgs) message.obj;
                 switch (message.what) {
                     case 1:
-                        Request pullRequest = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, true);
-                        if (pullRequest != null) {
-                            ((ConfirmationRequest) pullRequest).onConfirmationResult(message.arg1 != 0, (Bundle) someArgs.arg2);
-                            pullRequest.clear();
+                        Request requestPullRequest = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, true);
+                        if (requestPullRequest != null) {
+                            ((ConfirmationRequest) requestPullRequest).onConfirmationResult(message.arg1 != 0, (Bundle) someArgs.arg2);
+                            requestPullRequest.clear();
                             break;
                         }
                         break;
                     case 2:
                         boolean z = message.arg1 != 0;
-                        Request pullRequest2 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, z);
-                        if (pullRequest2 != null) {
-                            ((PickOptionRequest) pullRequest2).onPickOptionResult(z, (PickOptionRequest.Option[]) someArgs.arg2, (Bundle) someArgs.arg3);
+                        Request requestPullRequest2 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, z);
+                        if (requestPullRequest2 != null) {
+                            ((PickOptionRequest) requestPullRequest2).onPickOptionResult(z, (PickOptionRequest.Option[]) someArgs.arg2, (Bundle) someArgs.arg3);
                             if (z) {
-                                pullRequest2.clear();
+                                requestPullRequest2.clear();
                                 break;
                             }
                         }
                         break;
                     case 3:
-                        Request pullRequest3 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, true);
-                        if (pullRequest3 != null) {
-                            ((CompleteVoiceRequest) pullRequest3).onCompleteResult((Bundle) someArgs.arg2);
-                            pullRequest3.clear();
+                        Request requestPullRequest3 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, true);
+                        if (requestPullRequest3 != null) {
+                            ((CompleteVoiceRequest) requestPullRequest3).onCompleteResult((Bundle) someArgs.arg2);
+                            requestPullRequest3.clear();
                             break;
                         }
                         break;
                     case 4:
-                        Request pullRequest4 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, true);
-                        if (pullRequest4 != null) {
-                            ((AbortVoiceRequest) pullRequest4).onAbortResult((Bundle) someArgs.arg2);
-                            pullRequest4.clear();
+                        Request requestPullRequest4 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, true);
+                        if (requestPullRequest4 != null) {
+                            ((AbortVoiceRequest) requestPullRequest4).onAbortResult((Bundle) someArgs.arg2);
+                            requestPullRequest4.clear();
                             break;
                         }
                         break;
                     case 5:
                         boolean z2 = message.arg1 != 0;
-                        Request pullRequest5 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, z2);
-                        if (pullRequest5 != null) {
-                            ((CommandRequest) pullRequest5).onCommandResult(message.arg1 != 0, (Bundle) someArgs.arg2);
+                        Request requestPullRequest5 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, z2);
+                        if (requestPullRequest5 != null) {
+                            ((CommandRequest) requestPullRequest5).onCommandResult(message.arg1 != 0, (Bundle) someArgs.arg2);
                             if (z2) {
-                                pullRequest5.clear();
+                                requestPullRequest5.clear();
                                 break;
                             }
                         }
                         break;
                     case 6:
-                        Request pullRequest6 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, true);
-                        if (pullRequest6 != null) {
-                            pullRequest6.onCancel();
-                            pullRequest6.clear();
+                        Request requestPullRequest6 = VoiceInteractor.this.pullRequest((IVoiceInteractorRequest) someArgs.arg1, true);
+                        if (requestPullRequest6 != null) {
+                            requestPullRequest6.onCancel();
+                            requestPullRequest6.clear();
                             break;
                         }
                         break;
@@ -692,10 +692,10 @@ public final class VoiceInteractor {
         }
         this.mContext = activity;
         this.mActivity = activity;
-        ArrayList<Request> makeRequestList = makeRequestList();
-        if (makeRequestList != null) {
-            for (int i = 0; i < makeRequestList.size(); i++) {
-                Request request = makeRequestList.get(i);
+        ArrayList<Request> arrayListMakeRequestList = makeRequestList();
+        if (arrayListMakeRequestList != null) {
+            for (int i = 0; i < arrayListMakeRequestList.size(); i++) {
+                Request request = arrayListMakeRequestList.get(i);
                 request.mContext = activity;
                 request.mActivity = activity;
                 request.onAttached(activity);
@@ -708,20 +708,20 @@ public final class VoiceInteractor {
     }
 
     void detachActivity() {
-        ArrayList<Request> makeRequestList = makeRequestList();
-        if (makeRequestList != null) {
-            for (int i = 0; i < makeRequestList.size(); i++) {
-                Request request = makeRequestList.get(i);
+        ArrayList<Request> arrayListMakeRequestList = makeRequestList();
+        if (arrayListMakeRequestList != null) {
+            for (int i = 0; i < arrayListMakeRequestList.size(); i++) {
+                Request request = arrayListMakeRequestList.get(i);
                 request.onDetached();
                 request.mActivity = null;
                 request.mContext = null;
             }
         }
         if (!this.mRetaining) {
-            ArrayList<Request> makeRequestList2 = makeRequestList();
-            if (makeRequestList2 != null) {
-                for (int i2 = 0; i2 < makeRequestList2.size(); i2++) {
-                    makeRequestList2.get(i2).cancel();
+            ArrayList<Request> arrayListMakeRequestList2 = makeRequestList();
+            if (arrayListMakeRequestList2 != null) {
+                for (int i2 = 0; i2 < arrayListMakeRequestList2.size(); i2++) {
+                    arrayListMakeRequestList2.get(i2).cancel();
                 }
             }
             this.mActiveRequests.clear();
@@ -732,9 +732,9 @@ public final class VoiceInteractor {
 
     void destroy() {
         for (int size = this.mActiveRequests.size() - 1; size >= 0; size--) {
-            Request valueAt = this.mActiveRequests.valueAt(size);
+            Request requestValueAt = this.mActiveRequests.valueAt(size);
             this.mActiveRequests.removeAt(size);
-            valueAt.cancel();
+            requestValueAt.cancel();
         }
         for (int size2 = this.mOnDestroyCallbacks.size() - 1; size2 >= 0; size2--) {
             this.mOnDestroyCallbacks.valueAt(size2).execute(this.mOnDestroyCallbacks.keyAt(size2));
@@ -760,13 +760,13 @@ public final class VoiceInteractor {
             if (request.mRequestInterface != null) {
                 throw new IllegalStateException("Given " + request + " is already active");
             }
-            IVoiceInteractorRequest submit = request.submit(this.mInteractor, this.mContext.getOpPackageName(), this.mCallback);
-            request.mRequestInterface = submit;
+            IVoiceInteractorRequest iVoiceInteractorRequestSubmit = request.submit(this.mInteractor, this.mContext.getOpPackageName(), this.mCallback);
+            request.mRequestInterface = iVoiceInteractorRequestSubmit;
             request.mContext = this.mContext;
             request.mActivity = this.mActivity;
             request.mName = str;
             synchronized (this.mActiveRequests) {
-                this.mActiveRequests.put(submit.asBinder(), request);
+                this.mActiveRequests.put(iVoiceInteractorRequestSubmit.asBinder(), request);
             }
             return true;
         } catch (RemoteException e) {
@@ -802,9 +802,9 @@ public final class VoiceInteractor {
         synchronized (this.mActiveRequests) {
             int size = this.mActiveRequests.size();
             while (i < size) {
-                Request valueAt = this.mActiveRequests.valueAt(i);
-                i = (str != valueAt.getName() && (str == null || !str.equals(valueAt.getName()))) ? i + 1 : 0;
-                return valueAt;
+                Request requestValueAt = this.mActiveRequests.valueAt(i);
+                i = (str != requestValueAt.getName() && (str == null || !str.equals(requestValueAt.getName()))) ? i + 1 : 0;
+                return requestValueAt;
             }
             return null;
         }
@@ -859,17 +859,17 @@ public final class VoiceInteractor {
     }
 
     public String getPackageName() {
-        String str;
+        String voiceInteractorPackageName;
         if (this.mActivity == null || this.mInteractor == null) {
-            str = null;
+            voiceInteractorPackageName = null;
         } else {
             try {
-                str = ActivityTaskManager.getService().getVoiceInteractorPackageName(this.mInteractor.asBinder());
+                voiceInteractorPackageName = ActivityTaskManager.getService().getVoiceInteractorPackageName(this.mInteractor.asBinder());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        return str == null ? "" : str;
+        return voiceInteractorPackageName == null ? "" : voiceInteractorPackageName;
     }
 
     void dump(String str, FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
@@ -878,13 +878,13 @@ public final class VoiceInteractor {
             printWriter.print(str);
             printWriter.println("Active voice requests:");
             for (int i = 0; i < this.mActiveRequests.size(); i++) {
-                Request valueAt = this.mActiveRequests.valueAt(i);
+                Request requestValueAt = this.mActiveRequests.valueAt(i);
                 printWriter.print(str);
                 printWriter.print("  #");
                 printWriter.print(i);
                 printWriter.print(": ");
-                printWriter.println(valueAt);
-                valueAt.dump(str2, fileDescriptor, printWriter, strArr);
+                printWriter.println(requestValueAt);
+                requestValueAt.dump(str2, fileDescriptor, printWriter, strArr);
             }
         }
         printWriter.print(str);

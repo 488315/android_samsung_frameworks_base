@@ -14,7 +14,6 @@ import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SecCoverBlurController implements ConfigurationController.ConfigurationListener, SettingsHelper.OnChangedCallback {
     public final QSColorCurve mColorCurve;

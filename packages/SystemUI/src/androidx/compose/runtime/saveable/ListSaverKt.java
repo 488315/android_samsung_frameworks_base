@@ -6,11 +6,10 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ListSaverKt {
     public static final SaverKt$Saver$1 listSaver(final Function2 function2, Function1 function1) {
-        Function2 function22 = new Function2() { // from class: androidx.compose.runtime.saveable.ListSaverKt$listSaver$1
+        Function2 function22 = new Function2() { // from class: androidx.compose.runtime.saveable.ListSaverKt.listSaver.1
             {
                 super(2);
             }
@@ -19,7 +18,7 @@ public abstract class ListSaverKt {
             public final Object invoke(Object obj, Object obj2) {
                 SaveableStateRegistry saveableStateRegistry;
                 SaverScope saverScope = (SaverScope) obj;
-                List list = (List) Function2.this.invoke(saverScope, obj2);
+                List list = (List) function2.invoke(saverScope, obj2);
                 List list2 = list;
                 int size = list2.size();
                 for (int i = 0; i < size; i++) {

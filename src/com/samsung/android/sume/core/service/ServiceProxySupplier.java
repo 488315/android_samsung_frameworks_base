@@ -24,13 +24,13 @@ public class ServiceProxySupplier implements Supplier<ServiceProxy> {
         this.supplier = new Supplier() { // from class: com.samsung.android.sume.core.service.ServiceProxySupplier$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                return ServiceProxySupplier.this.m9613x1848a78a(cls, context);
+                return this.f$0.m9626x1848a78a(cls, context);
             }
         };
     }
 
     /* renamed from: lambda$new$0$com-samsung-android-sume-core-service-ServiceProxySupplier, reason: not valid java name */
-    /* synthetic */ ServiceProxy m9613x1848a78a(Class cls, Context context) {
+    /* synthetic */ ServiceProxy m9626x1848a78a(Class cls, Context context) {
         if (LocalService.class.isAssignableFrom(cls)) {
             return new LocalServiceProxy(context, cls, this.options);
         }
@@ -47,13 +47,13 @@ public class ServiceProxySupplier implements Supplier<ServiceProxy> {
         this.supplier = new Supplier() { // from class: com.samsung.android.sume.core.service.ServiceProxySupplier$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                return ServiceProxySupplier.this.m9614x1e4c72e9(context, str, str2);
+                return this.f$0.m9627x1e4c72e9(context, str, str2);
             }
         };
     }
 
     /* renamed from: lambda$new$1$com-samsung-android-sume-core-service-ServiceProxySupplier, reason: not valid java name */
-    /* synthetic */ ServiceProxy m9614x1e4c72e9(Context context, String str, String str2) {
+    /* synthetic */ ServiceProxy m9627x1e4c72e9(Context context, String str, String str2) {
         return new RemoteServiceProxy(context, str, str2, this.options);
     }
 
@@ -140,10 +140,10 @@ public class ServiceProxySupplier implements Supplier<ServiceProxy> {
         @Override // com.samsung.android.sume.core.functional.PlaceHolder
         public ServiceProxySupplier reset() {
             Def.require((this.packageName == null || this.serviceName == null) ? false : true);
-            ServiceProxySupplier of = ServiceProxy.of(this.context, this.packageName, this.serviceName);
-            of.options.putAll(this.options);
+            ServiceProxySupplier serviceProxySupplierOf = ServiceProxy.of(this.context, this.packageName, this.serviceName);
+            serviceProxySupplierOf.options.putAll(this.options);
             this.context = null;
-            return of;
+            return serviceProxySupplierOf;
         }
     }
 }

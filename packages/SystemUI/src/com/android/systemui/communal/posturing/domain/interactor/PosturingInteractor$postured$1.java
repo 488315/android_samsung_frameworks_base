@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class PosturingInteractor$postured$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -35,7 +34,7 @@ final class PosturingInteractor$postured$1 extends SuspendLambda implements Func
         }
         ResultKt.throwOnFailure(obj);
         PosturedState posturedState = (PosturedState) this.L$0;
-        Boolean asBoolean = PosturingInteractorKt.asBoolean((PosturedState) this.L$1);
-        return Boolean.valueOf((asBoolean == null && (asBoolean = PosturingInteractorKt.asBoolean(posturedState)) == null) ? false : asBoolean.booleanValue());
+        Boolean boolAsBoolean = PosturingInteractorKt.asBoolean((PosturedState) this.L$1);
+        return Boolean.valueOf((boolAsBoolean == null && (boolAsBoolean = PosturingInteractorKt.asBoolean(posturedState)) == null) ? false : boolAsBoolean.booleanValue());
     }
 }

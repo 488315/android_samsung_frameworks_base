@@ -34,20 +34,20 @@ public final class DrawableInflater {
         return inflateFromXmlForDensity(str, xmlPullParser, attributeSet, 0, theme);
     }
 
-    Drawable inflateFromXmlForDensity(String str, XmlPullParser xmlPullParser, AttributeSet attributeSet, int i, Resources.Theme theme) throws XmlPullParserException, IOException {
+    Drawable inflateFromXmlForDensity(String str, XmlPullParser xmlPullParser, AttributeSet attributeSet, int i, Resources.Theme theme) throws Throwable {
         if (str.equals("drawable") && (str = attributeSet.getAttributeValue(null, "class")) == null) {
             throw new InflateException("<drawable> tag must specify class attribute");
         }
-        Drawable inflateSpr = inflateSpr(str, xmlPullParser, attributeSet);
-        if (inflateSpr == null) {
-            inflateSpr = inflateFromTag(str);
+        Drawable drawableInflateSpr = inflateSpr(str, xmlPullParser, attributeSet);
+        if (drawableInflateSpr == null) {
+            drawableInflateSpr = inflateFromTag(str);
         }
-        if (inflateSpr == null) {
-            inflateSpr = inflateFromClass(str);
+        if (drawableInflateSpr == null) {
+            drawableInflateSpr = inflateFromClass(str);
         }
-        inflateSpr.setSrcDensityOverride(i);
-        inflateSpr.inflate(this.mRes, xmlPullParser, attributeSet, theme);
-        return inflateSpr;
+        drawableInflateSpr.setSrcDensityOverride(i);
+        drawableInflateSpr.inflate(this.mRes, xmlPullParser, attributeSet, theme);
+        return drawableInflateSpr;
     }
 
     private Drawable inflateFromTag(String str) {
@@ -101,13 +101,13 @@ public final class DrawableInflater {
     private Drawable inflateFromClass(String str) {
         Constructor<? extends Drawable> constructor;
         try {
-            HashMap<String, Constructor<? extends Drawable>> hashMap = CONSTRUCTOR_MAP;
-            synchronized (hashMap) {
-                constructor = hashMap.get(str);
+            HashMap<String, Constructor<? extends Drawable>> map = CONSTRUCTOR_MAP;
+            synchronized (map) {
+                constructor = map.get(str);
                 if (constructor == null) {
                     Class[] clsArr = new Class[0];
                     constructor = this.mClassLoader.loadClass(str).asSubclass(Drawable.class).getConstructor(null);
-                    hashMap.put(str, constructor);
+                    map.put(str, constructor);
                 }
             }
             return constructor.newInstance(null);
@@ -130,40 +130,39 @@ public final class DrawableInflater {
         }
     }
 
-    private Drawable inflateSpr(String str, XmlPullParser xmlPullParser, AttributeSet attributeSet) throws XmlPullParserException, IOException {
+    private Drawable inflateSpr(String str, XmlPullParser xmlPullParser, AttributeSet attributeSet) throws Throwable {
         int attributeResourceValue;
-        InputStream openRawResource;
         InputStream inputStream = null;
         if (!"bitmap".equalsIgnoreCase(str) || (attributeResourceValue = attributeSet.getAttributeResourceValue("http://schemas.android.com/apk/res/android", "src", 0)) == 0) {
             return null;
         }
         byte[] bArr = new byte[3];
         try {
-            openRawResource = this.mRes.openRawResource(attributeResourceValue);
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            openRawResource.read(bArr, 0, 3);
-            if (openRawResource != null) {
-                openRawResource.close();
-            }
-            if (bArr[0] != 83 || bArr[1] != 80 || bArr[2] != 82) {
-                return null;
-            }
+            InputStream inputStreamOpenRawResource = this.mRes.openRawResource(attributeResourceValue);
             try {
-                return (Drawable) Class.forName("com.samsung.android.graphics.spr.SemPathRenderingDrawable").newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new XmlPullParserException(xmlPullParser.getPositionDescription() + ": unable to load spr." + str);
+                inputStreamOpenRawResource.read(bArr, 0, 3);
+                if (inputStreamOpenRawResource != null) {
+                    inputStreamOpenRawResource.close();
+                }
+                if (bArr[0] != 83 || bArr[1] != 80 || bArr[2] != 82) {
+                    return null;
+                }
+                try {
+                    return (Drawable) Class.forName("com.samsung.android.graphics.spr.SemPathRenderingDrawable").newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new XmlPullParserException(xmlPullParser.getPositionDescription() + ": unable to load spr." + str);
+                }
+            } catch (Throwable th) {
+                th = th;
+                inputStream = inputStreamOpenRawResource;
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                throw th;
             }
         } catch (Throwable th2) {
             th = th2;
-            inputStream = openRawResource;
-            if (inputStream != null) {
-                inputStream.close();
-            }
-            throw th;
         }
     }
 }

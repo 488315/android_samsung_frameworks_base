@@ -89,16 +89,16 @@ public class RC4Engine implements StreamCipher {
         for (int i = 0; i < 256; i++) {
             this.engineState[i] = (byte) i;
         }
+        int length = 0;
         int i2 = 0;
-        int i3 = 0;
-        for (int i4 = 0; i4 < 256; i4++) {
-            int i5 = bArr[i2] & 255;
+        for (int i3 = 0; i3 < 256; i3++) {
+            int i4 = bArr[length] & 255;
             byte[] bArr2 = this.engineState;
-            byte b = bArr2[i4];
-            i3 = (i5 + b + i3) & 255;
-            bArr2[i4] = bArr2[i3];
-            bArr2[i3] = b;
-            i2 = (i2 + 1) % bArr.length;
+            byte b = bArr2[i3];
+            i2 = (i4 + b + i2) & 255;
+            bArr2[i3] = bArr2[i2];
+            bArr2[i2] = b;
+            length = (length + 1) % bArr.length;
         }
     }
 }

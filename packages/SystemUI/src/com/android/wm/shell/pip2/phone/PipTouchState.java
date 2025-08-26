@@ -9,7 +9,6 @@ import com.android.wm.shell.common.HandlerExecutor;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipTouchState {
     public static final long DOUBLE_TAP_TIMEOUT = ViewConfiguration.getDoubleTapTimeout();
@@ -97,26 +96,26 @@ public class PipTouchState {
             if (actionMasked == 2) {
                 if (this.mIsUserInteracting) {
                     addMovementToVelocityTracker(motionEvent);
-                    int findPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
-                    if (findPointerIndex == -1) {
+                    int iFindPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
+                    if (iFindPointerIndex == -1) {
                         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[4]) {
                             ProtoLogImpl_1771455215.e(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, -5050839515702609964L, 4, "PipTouchState", Long.valueOf(this.mActivePointerId));
                             return;
                         }
                         return;
                     }
-                    float rawX = motionEvent.getRawX(findPointerIndex);
-                    float rawY = motionEvent.getRawY(findPointerIndex);
+                    float rawX = motionEvent.getRawX(iFindPointerIndex);
+                    float rawY = motionEvent.getRawY(iFindPointerIndex);
                     PointF pointF = this.mLastDelta;
                     PointF pointF2 = this.mLastTouch;
                     pointF.set(rawX - pointF2.x, rawY - pointF2.y);
                     PointF pointF3 = this.mDownDelta;
                     PointF pointF4 = this.mDownTouch;
                     pointF3.set(rawX - pointF4.x, rawY - pointF4.y);
-                    byte b = this.mDownDelta.length() > ((float) this.mViewConfig.getScaledTouchSlop());
+                    Object[] objArr = this.mDownDelta.length() > ((float) this.mViewConfig.getScaledTouchSlop());
                     if (this.mIsDragging) {
                         this.mStartedDragging = false;
-                    } else if (b != false) {
+                    } else if (objArr != false) {
                         this.mIsDragging = true;
                         this.mStartedDragging = true;
                     }
@@ -154,8 +153,8 @@ public class PipTouchState {
             addMovementToVelocityTracker(motionEvent);
             this.mVelocityTracker.computeCurrentVelocity(1000, this.mViewConfig.getScaledMaximumFlingVelocity());
             this.mVelocity.set(this.mVelocityTracker.getXVelocity(), this.mVelocityTracker.getYVelocity());
-            int findPointerIndex2 = motionEvent.findPointerIndex(this.mActivePointerId);
-            if (findPointerIndex2 == -1) {
+            int iFindPointerIndex2 = motionEvent.findPointerIndex(this.mActivePointerId);
+            if (iFindPointerIndex2 == -1) {
                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[4]) {
                     ProtoLogImpl_1771455215.e(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 3776750517946036956L, 4, "PipTouchState", Long.valueOf(this.mActivePointerId));
                     return;
@@ -163,7 +162,7 @@ public class PipTouchState {
                 return;
             }
             this.mUpTouchTime = motionEvent.getEventTime();
-            this.mLastTouch.set(motionEvent.getRawX(findPointerIndex2), motionEvent.getRawY(findPointerIndex2));
+            this.mLastTouch.set(motionEvent.getRawX(iFindPointerIndex2), motionEvent.getRawY(iFindPointerIndex2));
             boolean z2 = this.mIsDragging;
             this.mPreviouslyDragging = z2;
             if (!this.mIsDoubleTap && !z2 && this.mUpTouchTime - this.mDownTouchTime < DOUBLE_TAP_TIMEOUT) {

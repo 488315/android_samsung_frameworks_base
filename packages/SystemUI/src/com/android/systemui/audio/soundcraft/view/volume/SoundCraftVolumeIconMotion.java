@@ -24,7 +24,6 @@ import com.android.systemui.volume.util.ViewVisibilityUtil;
 import java.util.ArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftVolumeIconMotion {
     public static final PathInterpolator ALPHA_INTERPOLATOR;
@@ -35,7 +34,6 @@ public final class SoundCraftVolumeIconMotion {
     public final Handler handler = new Handler(Looper.getMainLooper());
     public ValueAnimator shockValueAnimator = new ValueAnimator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -63,7 +61,7 @@ public final class SoundCraftVolumeIconMotion {
         this.shockValueAnimator = duration;
         duration.setInterpolator(ALPHA_INTERPOLATOR);
         this.shockValueAnimator.start();
-        this.shockValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeIconMotion$startIconTintColor$1
+        this.shockValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeIconMotion.startIconTintColor.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 ArrayList arrayList2 = arrayList;
@@ -132,20 +130,20 @@ public final class SoundCraftVolumeIconMotion {
         int dimenInt = ContextUtils.getDimenInt(R.dimen.sound_craft_volume_media_icon_note_mid_x, this.context);
         int dimenInt2 = ContextUtils.getDimenInt(R.dimen.sound_craft_volume_media_icon_wave_s, this.context);
         int dimenInt3 = ContextUtils.getDimenInt(R.dimen.sound_craft_volume_media_icon_wave_l, this.context);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.1f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.5f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.1f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(z ? 0L : 100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenInt2);
-        ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimenInt3);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(view2, "x", view2.getX(), dimenInt2);
+        ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(view3, "x", view3.getX(), dimenInt3);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat3);
-        animatorSet2.playTogether(ofFloat4);
-        animatorSet2.playTogether(ofFloat5);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat4);
+        animatorSet2.playTogether(objectAnimatorOfFloat5);
         animatorSet2.setDuration(z ? 0L : 200L);
         animatorSet2.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         AnimatorSet animatorSet3 = new AnimatorSet();
@@ -169,7 +167,7 @@ public final class SoundCraftVolumeIconMotion {
         animatorSet3.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeIconMotion$startMidAnimation$2$3
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator2) {
-                SoundCraftVolumeIconMotion soundCraftVolumeIconMotion = SoundCraftVolumeIconMotion.this;
+                SoundCraftVolumeIconMotion soundCraftVolumeIconMotion = this.this$0;
                 Runnable runnable2 = soundCraftVolumeIconMotion.iconRunnable;
                 if (runnable2 != null) {
                     soundCraftVolumeIconMotion.handler.postDelayed(runnable2, 200L);
@@ -196,25 +194,25 @@ public final class SoundCraftVolumeIconMotion {
             view3.setVisibility(0);
         }
         int dimenInt = ContextUtils.getDimenInt(R.dimen.sound_craft_volume_media_icon_note_min_x, this.context);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(z ? 0L : 100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimenInt);
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
         animatorSet2.setDuration(z ? 0L : 200L);
         animatorSet2.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
         Runnable runnable = this.iconRunnable;
         if (runnable != null) {
             this.handler.removeCallbacks(runnable);
         }
-        this.iconRunnable = new Runnable() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeIconMotion$startMinAnimation$3
+        this.iconRunnable = new Runnable() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeIconMotion.startMinAnimation.3
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 int i3 = i2;
                 if (i3 == 2 || i3 == 3) {
                     this.startMidAnimation(i, i3, view, view2, view3, view4, view5, view6, false);
@@ -229,7 +227,7 @@ public final class SoundCraftVolumeIconMotion {
         animatorSet3.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftVolumeIconMotion$startMinAnimation$4$1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator2) {
-                SoundCraftVolumeIconMotion soundCraftVolumeIconMotion = SoundCraftVolumeIconMotion.this;
+                SoundCraftVolumeIconMotion soundCraftVolumeIconMotion = this.this$0;
                 Runnable runnable2 = soundCraftVolumeIconMotion.iconRunnable;
                 if (runnable2 != null) {
                     soundCraftVolumeIconMotion.handler.postDelayed(runnable2, 200L);
@@ -240,7 +238,7 @@ public final class SoundCraftVolumeIconMotion {
         this.lastAnimator = animatorSet3;
     }
 
-    public final void startMuteAnimation(View view, View view2, View view3, View view4, View view5, final View view6, boolean z) {
+    public final void startMuteAnimation(View view, View view2, View view3, View view4, View view5, final View view6, boolean z) throws Resources.NotFoundException {
         ViewVisibilityUtil.INSTANCE.getClass();
         view5.setVisibility(0);
         view.setVisibility(4);
@@ -251,23 +249,23 @@ public final class SoundCraftVolumeIconMotion {
             view3.setVisibility(0);
         }
         int dimensionPixelSize = this.resources.getDimensionPixelSize(R.dimen.volume_media_icon_note_min_x);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, "alpha", view2.getAlpha(), 0.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view3, "alpha", view3.getAlpha(), 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat);
-        animatorSet.playTogether(ofFloat2);
+        animatorSet.playTogether(objectAnimatorOfFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2);
         animatorSet.setDuration(z ? 0L : 100L);
         animatorSet.setInterpolator(new LinearInterpolator());
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimensionPixelSize);
-        ofFloat3.setDuration(z ? 0L : 200L);
-        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.22f, 0.25f, 0.0f, 1.0f, ofFloat3);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "x", view.getX(), dimensionPixelSize);
+        objectAnimatorOfFloat3.setDuration(z ? 0L : 200L);
+        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.22f, 0.25f, 0.0f, 1.0f, objectAnimatorOfFloat3);
         Runnable runnable = this.iconRunnable;
         if (runnable != null) {
             this.handler.removeCallbacks(runnable);
         }
         AnimatorSet animatorSet2 = new AnimatorSet();
         animatorSet2.playTogether(animatorSet);
-        animatorSet2.playTogether(ofFloat3);
+        animatorSet2.playTogether(objectAnimatorOfFloat3);
         animatorSet2.start();
         this.lastAnimator = animatorSet2;
         if (z) {

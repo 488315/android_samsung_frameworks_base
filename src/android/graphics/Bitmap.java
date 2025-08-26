@@ -58,14 +58,14 @@ public final class Bitmap implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public Bitmap createFromParcel(Parcel parcel) {
-            Bitmap nativeCreateFromParcel = Bitmap.nativeCreateFromParcel(parcel);
-            if (nativeCreateFromParcel == null) {
+            Bitmap bitmapNativeCreateFromParcel = Bitmap.nativeCreateFromParcel(parcel);
+            if (bitmapNativeCreateFromParcel == null) {
                 throw new RuntimeException("Failed to unparcel Bitmap");
             }
             if (parcel.readBoolean()) {
-                nativeCreateFromParcel.setGainmap((Gainmap) parcel.readTypedObject(Gainmap.CREATOR));
+                bitmapNativeCreateFromParcel.setGainmap((Gainmap) parcel.readTypedObject(Gainmap.CREATOR));
             }
-            return nativeCreateFromParcel;
+            return bitmapNativeCreateFromParcel;
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -189,18 +189,18 @@ public final class Bitmap implements Parcelable {
     }
 
     private static NativeAllocationRegistry getRegistry(boolean z, long j) {
-        long nativeGetNativeFinalizer = nativeGetNativeFinalizer();
+        long jNativeGetNativeFinalizer = nativeGetNativeFinalizer();
         if (Flags.nativeMetrics()) {
             if (z) {
-                return NativeAllocationRegistry.createMalloced(Bitmap.class, nativeGetNativeFinalizer, j);
+                return NativeAllocationRegistry.createMalloced(Bitmap.class, jNativeGetNativeFinalizer, j);
             }
-            return NativeAllocationRegistry.createNonmalloced(Bitmap.class, nativeGetNativeFinalizer, j);
+            return NativeAllocationRegistry.createNonmalloced(Bitmap.class, jNativeGetNativeFinalizer, j);
         }
         ClassLoader classLoader = Bitmap.class.getClassLoader();
         if (z) {
-            return NativeAllocationRegistry.createMalloced(classLoader, nativeGetNativeFinalizer, j);
+            return NativeAllocationRegistry.createMalloced(classLoader, jNativeGetNativeFinalizer, j);
         }
-        return NativeAllocationRegistry.createNonmalloced(classLoader, nativeGetNativeFinalizer, j);
+        return NativeAllocationRegistry.createNonmalloced(classLoader, jNativeGetNativeFinalizer, j);
     }
 
     Bitmap(long j, int i, int i2, int i3, boolean z, byte[] bArr, NinePatch.InsetStruct insetStruct) {
@@ -348,7 +348,7 @@ public final class Bitmap implements Parcelable {
     	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
     	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
     	at jadx.core.utils.InsnRemover.lambda$unbindInsns$1(InsnRemover.java:99)
-    	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+    	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
     	at jadx.core.utils.InsnRemover.unbindInsns(InsnRemover.java:98)
     	at jadx.core.utils.InsnRemover.removeAllAndUnbind(InsnRemover.java:252)
     	at jadx.core.dex.visitors.EnumVisitor.convertToEnum(EnumVisitor.java:180)
@@ -390,7 +390,7 @@ public final class Bitmap implements Parcelable {
     public void copyPixelsToBuffer(Buffer buffer) {
         char c;
         checkHardware("unable to copyPixelsToBuffer, pixel access is not supported on Config#HARDWARE bitmaps");
-        int remaining = buffer.remaining();
+        int iRemaining = buffer.remaining();
         if (buffer instanceof ByteBuffer) {
             c = 0;
         } else if (buffer instanceof ShortBuffer) {
@@ -401,7 +401,7 @@ public final class Bitmap implements Parcelable {
             }
             c = 2;
         }
-        long j = remaining << c;
+        long j = iRemaining << c;
         long byteCount = getByteCount();
         if (j < byteCount) {
             throw new RuntimeException("Buffer not large enough for pixels");
@@ -414,7 +414,7 @@ public final class Bitmap implements Parcelable {
         char c;
         checkRecycled("copyPixelsFromBuffer called on recycled bitmap");
         checkHardware("unable to copyPixelsFromBuffer, Config#HARDWARE bitmaps are immutable");
-        int remaining = buffer.remaining();
+        int iRemaining = buffer.remaining();
         if (buffer instanceof ByteBuffer) {
             c = 0;
         } else if (buffer instanceof ShortBuffer) {
@@ -425,7 +425,7 @@ public final class Bitmap implements Parcelable {
             }
             c = 2;
         }
-        long j = remaining << c;
+        long j = iRemaining << c;
         long byteCount = getByteCount();
         if (j < byteCount) {
             throw new RuntimeException("Buffer not large enough for pixels");
@@ -446,35 +446,35 @@ public final class Bitmap implements Parcelable {
             throw new IllegalArgumentException("Hardware bitmaps are always immutable");
         }
         noteHardwareBitmapSlowCall();
-        Bitmap nativeCopy = nativeCopy(this.mNativePtr, config.nativeInt, z);
-        if (nativeCopy != null) {
-            nativeCopy.setPremultiplied(this.mRequestPremultiplied);
-            nativeCopy.mDensity = this.mDensity;
+        Bitmap bitmapNativeCopy = nativeCopy(this.mNativePtr, config.nativeInt, z);
+        if (bitmapNativeCopy != null) {
+            bitmapNativeCopy.setPremultiplied(this.mRequestPremultiplied);
+            bitmapNativeCopy.mDensity = this.mDensity;
         }
-        return nativeCopy;
+        return bitmapNativeCopy;
     }
 
     public Bitmap createAshmemBitmap() {
         checkRecycled("Can't copy a recycled bitmap");
         noteHardwareBitmapSlowCall();
-        Bitmap nativeCopyAshmem = nativeCopyAshmem(this.mNativePtr);
-        if (nativeCopyAshmem != null) {
-            nativeCopyAshmem.setPremultiplied(this.mRequestPremultiplied);
-            nativeCopyAshmem.mDensity = this.mDensity;
+        Bitmap bitmapNativeCopyAshmem = nativeCopyAshmem(this.mNativePtr);
+        if (bitmapNativeCopyAshmem != null) {
+            bitmapNativeCopyAshmem.setPremultiplied(this.mRequestPremultiplied);
+            bitmapNativeCopyAshmem.mDensity = this.mDensity;
             if (hasGainmap()) {
-                nativeCopyAshmem.setGainmap(getGainmap().asShared());
+                bitmapNativeCopyAshmem.setGainmap(getGainmap().asShared());
             }
         }
-        return nativeCopyAshmem;
+        return bitmapNativeCopyAshmem;
     }
 
     public Bitmap asShared() {
         if (nativeIsBackedByAshmem(this.mNativePtr) && nativeIsImmutable(this.mNativePtr) && (!hasGainmap() || getGainmap().asShared() == getGainmap())) {
             return this;
         }
-        Bitmap createAshmemBitmap = createAshmemBitmap();
-        if (createAshmemBitmap != null) {
-            return createAshmemBitmap;
+        Bitmap bitmapCreateAshmemBitmap = createAshmemBitmap();
+        if (bitmapCreateAshmemBitmap != null) {
+            return bitmapCreateAshmemBitmap;
         }
         throw new RuntimeException("Failed to create shared Bitmap!");
     }
@@ -503,11 +503,11 @@ public final class Bitmap implements Parcelable {
         if (colorSpace == null) {
             colorSpace = ColorSpace.get(ColorSpace.Named.SRGB);
         }
-        Bitmap nativeWrapHardwareBufferBitmap = nativeWrapHardwareBufferBitmap(hardwareBuffer, colorSpace.getNativeInstance());
-        if (nativeWrapHardwareBufferBitmap != null) {
-            nativeWrapHardwareBufferBitmap.mHardwareBuffer = new WeakReference<>(hardwareBuffer);
+        Bitmap bitmapNativeWrapHardwareBufferBitmap = nativeWrapHardwareBufferBitmap(hardwareBuffer, colorSpace.getNativeInstance());
+        if (bitmapNativeWrapHardwareBufferBitmap != null) {
+            bitmapNativeWrapHardwareBufferBitmap.mHardwareBuffer = new WeakReference<>(hardwareBuffer);
         }
-        return nativeWrapHardwareBufferBitmap;
+        return bitmapNativeWrapHardwareBufferBitmap;
     }
 
     public static Bitmap createScaledBitmap(Bitmap bitmap, int i, int i2, boolean z) {
@@ -529,112 +529,112 @@ public final class Bitmap implements Parcelable {
     }
 
     public static Bitmap createBitmap(Bitmap bitmap, int i, int i2, int i3, int i4, Matrix matrix, boolean z) {
-        Bitmap createBitmap;
+        Bitmap bitmapCreateBitmap;
         int i5;
         int i6;
         Paint paint;
-        Bitmap transformGainmap;
-        Bitmap bitmap2 = bitmap;
+        Bitmap bitmapTransformGainmap;
+        Bitmap bitmapNativeCopyPreserveInternalConfig = bitmap;
         checkXYSign(i, i2);
         checkWidthHeight(i3, i4);
         int i7 = i + i3;
-        if (i7 > bitmap2.getWidth()) {
+        if (i7 > bitmapNativeCopyPreserveInternalConfig.getWidth()) {
             throw new IllegalArgumentException("x + width must be <= bitmap.width()");
         }
         int i8 = i2 + i4;
-        if (i8 > bitmap2.getHeight()) {
+        if (i8 > bitmapNativeCopyPreserveInternalConfig.getHeight()) {
             throw new IllegalArgumentException("y + height must be <= bitmap.height()");
         }
-        if (bitmap2.isRecycled()) {
+        if (bitmapNativeCopyPreserveInternalConfig.isRecycled()) {
             throw new IllegalArgumentException("cannot use a recycled source in createBitmap");
         }
-        if (!bitmap2.isMutable() && i == 0 && i2 == 0 && i3 == bitmap2.getWidth() && i4 == bitmap2.getHeight() && (matrix == null || matrix.isIdentity())) {
-            return bitmap2;
+        if (!bitmapNativeCopyPreserveInternalConfig.isMutable() && i == 0 && i2 == 0 && i3 == bitmapNativeCopyPreserveInternalConfig.getWidth() && i4 == bitmapNativeCopyPreserveInternalConfig.getHeight() && (matrix == null || matrix.isIdentity())) {
+            return bitmapNativeCopyPreserveInternalConfig;
         }
-        boolean z2 = bitmap2.getConfig() == Config.HARDWARE;
+        boolean z2 = bitmapNativeCopyPreserveInternalConfig.getConfig() == Config.HARDWARE;
         if (z2) {
-            bitmap2.noteHardwareBitmapSlowCall();
-            bitmap2 = nativeCopyPreserveInternalConfig(bitmap2.mNativePtr);
+            bitmapNativeCopyPreserveInternalConfig.noteHardwareBitmapSlowCall();
+            bitmapNativeCopyPreserveInternalConfig = nativeCopyPreserveInternalConfig(bitmapNativeCopyPreserveInternalConfig.mNativePtr);
         }
-        Bitmap bitmap3 = bitmap2;
+        Bitmap bitmap2 = bitmapNativeCopyPreserveInternalConfig;
         Rect rect = new Rect(i, i2, i7, i8);
         RectF rectF = new RectF(0.0f, 0.0f, i3, i4);
         RectF rectF2 = new RectF();
         Config config = Config.ARGB_8888;
-        Config config2 = bitmap3.getConfig();
+        Config config2 = bitmap2.getConfig();
         if (config2 != null) {
-            int ordinal = config2.ordinal();
-            if (ordinal == 0) {
+            int iOrdinal = config2.ordinal();
+            if (iOrdinal == 0) {
                 config = Config.ALPHA_8;
-            } else if (ordinal == 1) {
+            } else if (iOrdinal == 1) {
                 config = Config.RGB_565;
-            } else if (ordinal == 4) {
+            } else if (iOrdinal == 4) {
                 config = Config.RGBA_F16;
             } else {
                 config = Config.ARGB_8888;
             }
         }
-        ColorSpace colorSpace = bitmap3.getColorSpace();
+        ColorSpace colorSpace = bitmap2.getColorSpace();
         if (matrix == null || matrix.isIdentity()) {
-            createBitmap = createBitmap((DisplayMetrics) null, i3, i4, config, bitmap3.hasAlpha(), colorSpace);
+            bitmapCreateBitmap = createBitmap((DisplayMetrics) null, i3, i4, config, bitmap2.hasAlpha(), colorSpace);
             i5 = i3;
             i6 = i4;
             paint = null;
         } else {
-            boolean rectStaysRect = matrix.rectStaysRect();
+            boolean zRectStaysRect = matrix.rectStaysRect();
             matrix.mapRect(rectF2, rectF);
-            int round = Math.round(rectF2.width());
-            int round2 = Math.round(rectF2.height());
-            if (!rectStaysRect && config != Config.ARGB_8888 && config != Config.RGBA_F16) {
+            int iRound = Math.round(rectF2.width());
+            int iRound2 = Math.round(rectF2.height());
+            if (!zRectStaysRect && config != Config.ARGB_8888 && config != Config.RGBA_F16) {
                 config = Config.ARGB_8888;
                 if (colorSpace == null) {
                     colorSpace = ColorSpace.get(ColorSpace.Named.SRGB);
                 }
             }
-            createBitmap = createBitmap((DisplayMetrics) null, round, round2, config, !rectStaysRect || bitmap3.hasAlpha(), colorSpace);
+            bitmapCreateBitmap = createBitmap((DisplayMetrics) null, iRound, iRound2, config, !zRectStaysRect || bitmap2.hasAlpha(), colorSpace);
             Paint paint2 = new Paint();
             paint2.setFilterBitmap(z);
-            if (!rectStaysRect) {
+            if (!zRectStaysRect) {
                 paint2.setAntiAlias(true);
             }
             paint = paint2;
-            i5 = round;
-            i6 = round2;
+            i5 = iRound;
+            i6 = iRound2;
         }
-        Bitmap bitmap4 = createBitmap;
-        bitmap4.mDensity = bitmap3.mDensity;
-        bitmap4.setHasAlpha(bitmap3.hasAlpha());
-        bitmap4.setPremultiplied(bitmap3.mRequestPremultiplied);
-        Canvas canvas = new Canvas(bitmap4);
+        Bitmap bitmap3 = bitmapCreateBitmap;
+        bitmap3.mDensity = bitmap2.mDensity;
+        bitmap3.setHasAlpha(bitmap2.hasAlpha());
+        bitmap3.setPremultiplied(bitmap2.mRequestPremultiplied);
+        Canvas canvas = new Canvas(bitmap3);
         canvas.translate(-rectF2.left, -rectF2.top);
         canvas.concat(matrix);
-        canvas.drawBitmap(bitmap3, rect, rectF, paint);
+        canvas.drawBitmap(bitmap2, rect, rectF, paint);
         canvas.setBitmap(null);
-        if (bitmap3.hasGainmap() && (transformGainmap = transformGainmap(bitmap3, matrix, i5, i6, paint, rect, rectF, rectF2)) != null) {
-            bitmap4.setGainmap(new Gainmap(bitmap3.getGainmap(), transformGainmap));
+        if (bitmap2.hasGainmap() && (bitmapTransformGainmap = transformGainmap(bitmap2, matrix, i5, i6, paint, rect, rectF, rectF2)) != null) {
+            bitmap3.setGainmap(new Gainmap(bitmap2.getGainmap(), bitmapTransformGainmap));
         }
-        return z2 ? bitmap4.copy(Config.HARDWARE, false) : bitmap4;
+        return z2 ? bitmap3.copy(Config.HARDWARE, false) : bitmap3;
     }
 
     private static Bitmap transformGainmap(Bitmap bitmap, Matrix matrix, int i, int i2, Paint paint, Rect rect, RectF rectF, RectF rectF2) {
         Bitmap gainmapContents = bitmap.getGainmap().getGainmapContents();
         float width = gainmapContents.getWidth() / bitmap.getWidth();
         float height = gainmapContents.getHeight() / bitmap.getHeight();
-        int round = Math.round(i * width);
-        int round2 = Math.round(i2 * height);
-        if (round == 0 || round2 == 0) {
+        int iRound = Math.round(i * width);
+        int iRound2 = Math.round(i2 * height);
+        if (iRound == 0 || iRound2 == 0) {
             return null;
         }
         Rect rect2 = new Rect((int) (rect.left * width), (int) (rect.top * height), (int) (rect.right * width), (int) (rect.bottom * height));
-        Bitmap nativeCreate = nativeCreate(null, 0, round, round, round2, gainmapContents.getConfig().nativeInt, true, 0L);
-        nativeCreate.eraseColor(0);
-        Canvas canvas = new Canvas(nativeCreate);
+        Bitmap bitmapNativeCreate = nativeCreate(null, 0, iRound, iRound, iRound2, gainmapContents.getConfig().nativeInt, true, 0L);
+        bitmapNativeCreate.eraseColor(0);
+        Canvas canvas = new Canvas(bitmapNativeCreate);
         canvas.scale(width, height);
         canvas.translate(-rectF2.left, -rectF2.top);
         canvas.concat(matrix);
         canvas.drawBitmap(gainmapContents, rect2, rectF, paint);
         canvas.setBitmap(null);
-        return nativeCreate;
+        return bitmapNativeCreate;
     }
 
     public static Bitmap createBitmap(int i, int i2, Config config) {
@@ -667,15 +667,15 @@ public final class Bitmap implements Parcelable {
         if (colorSpace == null && config != Config.ALPHA_8) {
             throw new IllegalArgumentException("can't create bitmap without a color space");
         }
-        Bitmap nativeCreate = nativeCreate(null, 0, i, i, i2, config.nativeInt, true, colorSpace == null ? 0L : colorSpace.getNativeInstance());
+        Bitmap bitmapNativeCreate = nativeCreate(null, 0, i, i, i2, config.nativeInt, true, colorSpace == null ? 0L : colorSpace.getNativeInstance());
         if (displayMetrics != null) {
-            nativeCreate.mDensity = displayMetrics.densityDpi;
+            bitmapNativeCreate.mDensity = displayMetrics.densityDpi;
         }
-        nativeCreate.setHasAlpha(z);
+        bitmapNativeCreate.setHasAlpha(z);
         if ((config == Config.ARGB_8888 || config == Config.RGBA_F16) && !z) {
-            nativeErase(nativeCreate.mNativePtr, -16777216);
+            nativeErase(bitmapNativeCreate.mNativePtr, -16777216);
         }
-        return nativeCreate;
+        return bitmapNativeCreate;
     }
 
     public static Bitmap createBitmap(int[] iArr, int i, int i2, int i3, int i4, Config config) {
@@ -695,11 +695,11 @@ public final class Bitmap implements Parcelable {
         if (i3 <= 0 || i4 <= 0) {
             throw new IllegalArgumentException("width and height must be > 0");
         }
-        Bitmap nativeCreate = nativeCreate(iArr, i, i2, i3, i4, config.nativeInt, false, ColorSpace.get(ColorSpace.Named.SRGB).getNativeInstance());
+        Bitmap bitmapNativeCreate = nativeCreate(iArr, i, i2, i3, i4, config.nativeInt, false, ColorSpace.get(ColorSpace.Named.SRGB).getNativeInstance());
         if (displayMetrics != null) {
-            nativeCreate.mDensity = displayMetrics.densityDpi;
+            bitmapNativeCreate.mDensity = displayMetrics.densityDpi;
         }
-        return nativeCreate;
+        return bitmapNativeCreate;
     }
 
     public static Bitmap createBitmap(int[] iArr, int i, int i2, Config config) {
@@ -726,28 +726,28 @@ public final class Bitmap implements Parcelable {
             StrictMode.noteSlowCall("GPU readback");
         }
         if (config == Config.HARDWARE || picture.requiresHardwareAcceleration()) {
-            RenderNode create = RenderNode.create("BitmapTemporary", null);
-            create.setLeftTopRightBottom(0, 0, i, i2);
-            create.setClipToBounds(false);
-            create.setForceDarkAllowed(false);
-            RecordingCanvas beginRecording = create.beginRecording(i, i2);
+            RenderNode renderNodeCreate = RenderNode.create("BitmapTemporary", null);
+            renderNodeCreate.setLeftTopRightBottom(0, 0, i, i2);
+            renderNodeCreate.setClipToBounds(false);
+            renderNodeCreate.setForceDarkAllowed(false);
+            RecordingCanvas recordingCanvasBeginRecording = renderNodeCreate.beginRecording(i, i2);
             if (picture.getWidth() != i || picture.getHeight() != i2) {
-                beginRecording.scale(i / picture.getWidth(), i2 / picture.getHeight());
+                recordingCanvasBeginRecording.scale(i / picture.getWidth(), i2 / picture.getHeight());
             }
-            beginRecording.drawPicture(picture);
-            create.endRecording();
-            Bitmap createHardwareBitmap = ThreadedRenderer.createHardwareBitmap(create, i, i2);
-            return config != Config.HARDWARE ? createHardwareBitmap.copy(config, false) : createHardwareBitmap;
+            recordingCanvasBeginRecording.drawPicture(picture);
+            renderNodeCreate.endRecording();
+            Bitmap bitmapCreateHardwareBitmap = ThreadedRenderer.createHardwareBitmap(renderNodeCreate, i, i2);
+            return config != Config.HARDWARE ? bitmapCreateHardwareBitmap.copy(config, false) : bitmapCreateHardwareBitmap;
         }
-        Bitmap createBitmap = createBitmap(i, i2, config);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = createBitmap(i, i2, config);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         if (picture.getWidth() != i || picture.getHeight() != i2) {
             canvas.scale(i / picture.getWidth(), i2 / picture.getHeight());
         }
         canvas.drawPicture(picture);
         canvas.setBitmap(null);
-        createBitmap.setImmutable();
-        return createBitmap;
+        bitmapCreateBitmap.setImmutable();
+        return bitmapCreateBitmap;
     }
 
     public byte[] getNinePatchChunk() {
@@ -851,26 +851,26 @@ public final class Bitmap implements Parcelable {
     }
 
     public boolean compress(CompressFormat compressFormat, int i, OutputStream outputStream) {
-        String str;
+        String nameForUid;
         checkRecycled("Can't compress a recycled bitmap");
         outputStream.getClass();
         if (i < 0 || i > 100) {
             throw new IllegalArgumentException("quality must be 0..100");
         }
         try {
-            str = IPackageManager.Stub.asInterface(ServiceManager.getService("package")).getNameForUid(Process.myUid());
+            nameForUid = IPackageManager.Stub.asInterface(ServiceManager.getService("package")).getNameForUid(Process.myUid());
         } catch (RemoteException e) {
             e.printStackTrace();
-            str = "";
+            nameForUid = "";
         }
-        if (str != null && str.contains("com.tencent.mm") && i <= 70) {
+        if (nameForUid != null && nameForUid.contains("com.tencent.mm") && i <= 70) {
             i = 85;
         }
         StrictMode.noteSlowCall("Compression of a bitmap is slow");
         Trace.traceBegin(8192L, "Bitmap.compress");
-        boolean nativeCompress = nativeCompress(this.mNativePtr, compressFormat.nativeInt, i, outputStream, new byte[4096]);
+        boolean zNativeCompress = nativeCompress(this.mNativePtr, compressFormat.nativeInt, i, outputStream, new byte[4096]);
         Trace.traceEnd(8192L);
-        return nativeCompress;
+        return zNativeCompress;
     }
 
     public final boolean isMutable() {
@@ -1085,8 +1085,8 @@ public final class Bitmap implements Parcelable {
         if (colorSpace == null || colorSpace.equals(ColorSpace.get(ColorSpace.Named.SRGB))) {
             return Color.valueOf(nativeGetPixel(this.mNativePtr, i, i2));
         }
-        long nativeGetColor = nativeGetColor(this.mNativePtr, i, i2);
-        return Color.valueOf(clamp(Half.toFloat((short) (nativeGetColor & 65535)), colorSpace, 0), clamp(Half.toFloat((short) ((nativeGetColor >> 16) & 65535)), colorSpace, 1), clamp(Half.toFloat((short) ((nativeGetColor >> 32) & 65535)), colorSpace, 2), Half.toFloat((short) ((nativeGetColor >> 48) & 65535)), colorSpace);
+        long jNativeGetColor = nativeGetColor(this.mNativePtr, i, i2);
+        return Color.valueOf(clamp(Half.toFloat((short) (jNativeGetColor & 65535)), colorSpace, 0), clamp(Half.toFloat((short) ((jNativeGetColor >> 16) & 65535)), colorSpace, 1), clamp(Half.toFloat((short) ((jNativeGetColor >> 32) & 65535)), colorSpace, 2), Half.toFloat((short) ((jNativeGetColor >> 48) & 65535)), colorSpace);
     }
 
     public void getPixels(int[] iArr, int i, int i2, int i3, int i4, int i5, int i6) {
@@ -1177,12 +1177,12 @@ public final class Bitmap implements Parcelable {
         checkRecycled("Can't extractAlpha on a recycled bitmap");
         long nativeInstance = paint != null ? paint.getNativeInstance() : 0L;
         noteHardwareBitmapSlowCall();
-        Bitmap nativeExtractAlpha = nativeExtractAlpha(this.mNativePtr, nativeInstance, iArr);
-        if (nativeExtractAlpha == null) {
+        Bitmap bitmapNativeExtractAlpha = nativeExtractAlpha(this.mNativePtr, nativeInstance, iArr);
+        if (bitmapNativeExtractAlpha == null) {
             throw new RuntimeException("Failed to extractAlpha on Bitmap");
         }
-        nativeExtractAlpha.mDensity = this.mDensity;
-        return nativeExtractAlpha;
+        bitmapNativeExtractAlpha.mDensity = this.mDensity;
+        return bitmapNativeExtractAlpha;
     }
 
     public boolean sameAs(Bitmap bitmap) {
@@ -1212,9 +1212,9 @@ public final class Bitmap implements Parcelable {
         if (hardwareBuffer != null && !hardwareBuffer.isClosed()) {
             return hardwareBuffer;
         }
-        HardwareBuffer nativeGetHardwareBuffer = nativeGetHardwareBuffer(this.mNativePtr);
-        this.mHardwareBuffer = new WeakReference<>(nativeGetHardwareBuffer);
-        return nativeGetHardwareBuffer;
+        HardwareBuffer hardwareBufferNativeGetHardwareBuffer = nativeGetHardwareBuffer(this.mNativePtr);
+        this.mHardwareBuffer = new WeakReference<>(hardwareBufferNativeGetHardwareBuffer);
+        return hardwareBufferNativeGetHardwareBuffer;
     }
 
     public void semSetTag(Object obj) {

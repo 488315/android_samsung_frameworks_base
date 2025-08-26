@@ -2,7 +2,6 @@ package androidx.datastore.preferences.protobuf;
 
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class UnknownFieldSetLite {
     public static final UnknownFieldSetLite DEFAULT_INSTANCE = new UnknownFieldSetLite(0, new int[0], new Object[0], false);
@@ -18,11 +17,11 @@ public final class UnknownFieldSetLite {
 
     public static UnknownFieldSetLite mutableCopyOf(UnknownFieldSetLite unknownFieldSetLite, UnknownFieldSetLite unknownFieldSetLite2) {
         int i = unknownFieldSetLite.count + unknownFieldSetLite2.count;
-        int[] copyOf = Arrays.copyOf(unknownFieldSetLite.tags, i);
-        System.arraycopy(unknownFieldSetLite2.tags, 0, copyOf, unknownFieldSetLite.count, unknownFieldSetLite2.count);
-        Object[] copyOf2 = Arrays.copyOf(unknownFieldSetLite.objects, i);
-        System.arraycopy(unknownFieldSetLite2.objects, 0, copyOf2, unknownFieldSetLite.count, unknownFieldSetLite2.count);
-        return new UnknownFieldSetLite(i, copyOf, copyOf2, true);
+        int[] iArrCopyOf = Arrays.copyOf(unknownFieldSetLite.tags, i);
+        System.arraycopy(unknownFieldSetLite2.tags, 0, iArrCopyOf, unknownFieldSetLite.count, unknownFieldSetLite2.count);
+        Object[] objArrCopyOf = Arrays.copyOf(unknownFieldSetLite.objects, i);
+        System.arraycopy(unknownFieldSetLite2.objects, 0, objArrCopyOf, unknownFieldSetLite.count, unknownFieldSetLite2.count);
+        return new UnknownFieldSetLite(i, iArrCopyOf, objArrCopyOf, true);
     }
 
     public static UnknownFieldSetLite newInstance() {
@@ -79,9 +78,9 @@ public final class UnknownFieldSetLite {
     }
 
     public final int getSerializedSize() {
-        int computeTagSize;
-        int computeUInt64SizeNoTag;
-        int computeTagSize2;
+        int iComputeTagSize;
+        int iComputeUInt64SizeNoTag;
+        int iComputeTagSize2;
         int i = this.memoizedSerializedSize;
         if (i != -1) {
             return i;
@@ -94,26 +93,26 @@ public final class UnknownFieldSetLite {
             if (i6 != 0) {
                 if (i6 == 1) {
                     ((Long) this.objects[i3]).getClass();
-                    computeTagSize2 = CodedOutputStream.computeTagSize(i5) + 8;
+                    iComputeTagSize2 = CodedOutputStream.computeTagSize(i5) + 8;
                 } else if (i6 == 2) {
-                    computeTagSize2 = CodedOutputStream.computeBytesSize(i5, (ByteString) this.objects[i3]);
+                    iComputeTagSize2 = CodedOutputStream.computeBytesSize(i5, (ByteString) this.objects[i3]);
                 } else if (i6 == 3) {
-                    computeTagSize = CodedOutputStream.computeTagSize(i5) * 2;
-                    computeUInt64SizeNoTag = ((UnknownFieldSetLite) this.objects[i3]).getSerializedSize();
+                    iComputeTagSize = CodedOutputStream.computeTagSize(i5) * 2;
+                    iComputeUInt64SizeNoTag = ((UnknownFieldSetLite) this.objects[i3]).getSerializedSize();
                 } else {
                     if (i6 != 5) {
                         throw new IllegalStateException(InvalidProtocolBufferException.invalidWireType());
                     }
                     ((Integer) this.objects[i3]).getClass();
-                    computeTagSize2 = CodedOutputStream.computeTagSize(i5) + 4;
+                    iComputeTagSize2 = CodedOutputStream.computeTagSize(i5) + 4;
                 }
-                i2 = computeTagSize2 + i2;
+                i2 = iComputeTagSize2 + i2;
             } else {
-                long longValue = ((Long) this.objects[i3]).longValue();
-                computeTagSize = CodedOutputStream.computeTagSize(i5);
-                computeUInt64SizeNoTag = CodedOutputStream.computeUInt64SizeNoTag(longValue);
+                long jLongValue = ((Long) this.objects[i3]).longValue();
+                iComputeTagSize = CodedOutputStream.computeTagSize(i5);
+                iComputeUInt64SizeNoTag = CodedOutputStream.computeUInt64SizeNoTag(jLongValue);
             }
-            i2 = computeUInt64SizeNoTag + computeTagSize + i2;
+            i2 = iComputeUInt64SizeNoTag + iComputeTagSize + i2;
         }
         this.memoizedSerializedSize = i2;
         return i2;
@@ -123,18 +122,18 @@ public final class UnknownFieldSetLite {
         int i = this.count;
         int i2 = (527 + i) * 31;
         int[] iArr = this.tags;
+        int iHashCode = 17;
         int i3 = 17;
-        int i4 = 17;
-        for (int i5 = 0; i5 < i; i5++) {
-            i4 = (i4 * 31) + iArr[i5];
+        for (int i4 = 0; i4 < i; i4++) {
+            i3 = (i3 * 31) + iArr[i4];
         }
-        int i6 = (i2 + i4) * 31;
+        int i5 = (i2 + i3) * 31;
         Object[] objArr = this.objects;
-        int i7 = this.count;
-        for (int i8 = 0; i8 < i7; i8++) {
-            i3 = (i3 * 31) + objArr[i8].hashCode();
+        int i6 = this.count;
+        for (int i7 = 0; i7 < i6; i7++) {
+            iHashCode = (iHashCode * 31) + objArr[i7].hashCode();
         }
-        return i6 + i3;
+        return i5 + iHashCode;
     }
 
     public final void storeField(int i, Object obj) {

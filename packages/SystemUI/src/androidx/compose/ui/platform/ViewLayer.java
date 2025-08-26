@@ -30,7 +30,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ViewLayer extends View implements OwnedLayer {
     public static boolean hasRetrievedMethod;
@@ -69,7 +68,6 @@ public final class ViewLayer extends View implements OwnedLayer {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -187,8 +185,8 @@ public final class ViewLayer extends View implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: getUnderlyingMatrix-sQKQjiQ */
-    public final float[] mo682getUnderlyingMatrixsQKQjiQ() {
-        return this.matrixCache.m706calculateMatrixGrdbGEg(this);
+    public final float[] mo684getUnderlyingMatrixsQKQjiQ() {
+        return this.matrixCache.m708calculateMatrixGrdbGEg(this);
     }
 
     @Override // android.view.View
@@ -208,23 +206,23 @@ public final class ViewLayer extends View implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: inverseTransform-58bKbWc */
-    public final void mo683inverseTransform58bKbWc(float[] fArr) {
-        float[] m705calculateInverseMatrixbWbORWo = this.matrixCache.m705calculateInverseMatrixbWbORWo(this);
-        if (m705calculateInverseMatrixbWbORWo != null) {
-            androidx.compose.ui.graphics.Matrix.m487timesAssign58bKbWc(fArr, m705calculateInverseMatrixbWbORWo);
+    public final void mo685inverseTransform58bKbWc(float[] fArr) {
+        float[] fArrM707calculateInverseMatrixbWbORWo = this.matrixCache.m707calculateInverseMatrixbWbORWo(this);
+        if (fArrM707calculateInverseMatrixbWbORWo != null) {
+            androidx.compose.ui.graphics.Matrix.m489timesAssign58bKbWc(fArr, fArrM707calculateInverseMatrixbWbORWo);
         }
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: isInLayer-k-4lQ0M */
-    public final boolean mo684isInLayerk4lQ0M(long j) {
-        float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (4294967295L & j));
+    public final boolean mo686isInLayerk4lQ0M(long j) {
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (4294967295L & j));
         if (this.clipToBounds) {
-            return 0.0f <= intBitsToFloat && intBitsToFloat < ((float) getWidth()) && 0.0f <= intBitsToFloat2 && intBitsToFloat2 < ((float) getHeight());
+            return 0.0f <= fIntBitsToFloat && fIntBitsToFloat < ((float) getWidth()) && 0.0f <= fIntBitsToFloat2 && fIntBitsToFloat2 < ((float) getHeight());
         }
         if (getClipToOutline()) {
-            return this.outlineResolver.m707isInOutlinek4lQ0M(j);
+            return this.outlineResolver.m709isInOutlinek4lQ0M(j);
         }
         return true;
     }
@@ -233,20 +231,20 @@ public final class ViewLayer extends View implements OwnedLayer {
     public final void mapBounds(MutableRect mutableRect, boolean z) {
         if (!z) {
             LayerMatrixCache layerMatrixCache = this.matrixCache;
-            float[] m706calculateMatrixGrdbGEg = layerMatrixCache.m706calculateMatrixGrdbGEg(this);
+            float[] fArrM708calculateMatrixGrdbGEg = layerMatrixCache.m708calculateMatrixGrdbGEg(this);
             if (layerMatrixCache.isIdentity) {
                 return;
             }
-            androidx.compose.ui.graphics.Matrix.m483mapimpl(m706calculateMatrixGrdbGEg, mutableRect);
+            androidx.compose.ui.graphics.Matrix.m485mapimpl(fArrM708calculateMatrixGrdbGEg, mutableRect);
             return;
         }
         LayerMatrixCache layerMatrixCache2 = this.matrixCache;
-        float[] m705calculateInverseMatrixbWbORWo = layerMatrixCache2.m705calculateInverseMatrixbWbORWo(this);
-        if (m705calculateInverseMatrixbWbORWo != null) {
+        float[] fArrM707calculateInverseMatrixbWbORWo = layerMatrixCache2.m707calculateInverseMatrixbWbORWo(this);
+        if (fArrM707calculateInverseMatrixbWbORWo != null) {
             if (layerMatrixCache2.isIdentity) {
                 return;
             }
-            androidx.compose.ui.graphics.Matrix.m483mapimpl(m705calculateInverseMatrixbWbORWo, mutableRect);
+            androidx.compose.ui.graphics.Matrix.m485mapimpl(fArrM707calculateInverseMatrixbWbORWo, mutableRect);
         } else {
             mutableRect.left = 0.0f;
             mutableRect.top = 0.0f;
@@ -257,22 +255,22 @@ public final class ViewLayer extends View implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: mapOffset-8S9VItk */
-    public final long mo685mapOffset8S9VItk(long j, boolean z) {
+    public final long mo687mapOffset8S9VItk(long j, boolean z) {
         if (z) {
             LayerMatrixCache layerMatrixCache = this.matrixCache;
-            float[] m705calculateInverseMatrixbWbORWo = layerMatrixCache.m705calculateInverseMatrixbWbORWo(this);
-            if (m705calculateInverseMatrixbWbORWo == null) {
+            float[] fArrM707calculateInverseMatrixbWbORWo = layerMatrixCache.m707calculateInverseMatrixbWbORWo(this);
+            if (fArrM707calculateInverseMatrixbWbORWo == null) {
                 Offset.Companion.getClass();
                 return Offset.Infinite;
             }
             if (!layerMatrixCache.isIdentity) {
-                return androidx.compose.ui.graphics.Matrix.m482mapMKHz9U(j, m705calculateInverseMatrixbWbORWo);
+                return androidx.compose.ui.graphics.Matrix.m484mapMKHz9U(j, fArrM707calculateInverseMatrixbWbORWo);
             }
         } else {
             LayerMatrixCache layerMatrixCache2 = this.matrixCache;
-            float[] m706calculateMatrixGrdbGEg = layerMatrixCache2.m706calculateMatrixGrdbGEg(this);
+            float[] fArrM708calculateMatrixGrdbGEg = layerMatrixCache2.m708calculateMatrixGrdbGEg(this);
             if (!layerMatrixCache2.isIdentity) {
-                return androidx.compose.ui.graphics.Matrix.m482mapMKHz9U(j, m706calculateMatrixGrdbGEg);
+                return androidx.compose.ui.graphics.Matrix.m484mapMKHz9U(j, fArrM708calculateMatrixGrdbGEg);
             }
         }
         return j;
@@ -280,7 +278,7 @@ public final class ViewLayer extends View implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: move--gyyYBs */
-    public final void mo686movegyyYBs(long j) {
+    public final void mo688movegyyYBs(long j) {
         IntOffset.Companion companion = IntOffset.Companion;
         int i = (int) (j >> 32);
         if (i != getLeft()) {
@@ -313,14 +311,14 @@ public final class ViewLayer extends View implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: resize-ozmzZPI */
-    public final void mo687resizeozmzZPI(long j) {
+    public final void mo689resizeozmzZPI(long j) {
         int i = (int) (j >> 32);
         int i2 = (int) (j & 4294967295L);
         if (i == getWidth() && i2 == getHeight()) {
             return;
         }
-        setPivotX(TransformOrigin.m503getPivotFractionXimpl(this.mTransformOrigin) * i);
-        setPivotY(TransformOrigin.m504getPivotFractionYimpl(this.mTransformOrigin) * i2);
+        setPivotX(TransformOrigin.m505getPivotFractionXimpl(this.mTransformOrigin) * i);
+        setPivotY(TransformOrigin.m506getPivotFractionYimpl(this.mTransformOrigin) * i2);
         setOutlineProvider(this.outlineResolver.getAndroidOutline() != null ? OutlineProvider : null);
         layout(getLeft(), getTop(), getLeft() + i, getTop() + i2);
         resetClipBounds();
@@ -335,8 +333,8 @@ public final class ViewLayer extends View implements OwnedLayer {
         layerMatrixCache.isInverseDirty = false;
         layerMatrixCache.isIdentity = true;
         layerMatrixCache.isInverseValid = true;
-        androidx.compose.ui.graphics.Matrix.m484resetimpl(layerMatrixCache.matrixCache);
-        androidx.compose.ui.graphics.Matrix.m484resetimpl(layerMatrixCache.inverseMatrixCache);
+        androidx.compose.ui.graphics.Matrix.m486resetimpl(layerMatrixCache.matrixCache);
+        androidx.compose.ui.graphics.Matrix.m486resetimpl(layerMatrixCache.inverseMatrixCache);
         this.clipToBounds = false;
         this.drawnWithZ = false;
         TransformOrigin.Companion.getClass();
@@ -355,8 +353,8 @@ public final class ViewLayer extends View implements OwnedLayer {
 
     @Override // androidx.compose.ui.node.OwnedLayer
     /* renamed from: transform-58bKbWc */
-    public final void mo688transform58bKbWc(float[] fArr) {
-        androidx.compose.ui.graphics.Matrix.m487timesAssign58bKbWc(fArr, this.matrixCache.m706calculateMatrixGrdbGEg(this));
+    public final void mo690transform58bKbWc(float[] fArr) {
+        androidx.compose.ui.graphics.Matrix.m489timesAssign58bKbWc(fArr, this.matrixCache.m708calculateMatrixGrdbGEg(this));
     }
 
     @Override // androidx.compose.ui.node.OwnedLayer
@@ -377,8 +375,8 @@ public final class ViewLayer extends View implements OwnedLayer {
         if ((i2 & 4096) != 0) {
             long j = reusableGraphicsLayerScope.transformOrigin;
             this.mTransformOrigin = j;
-            setPivotX(TransformOrigin.m503getPivotFractionXimpl(j) * getWidth());
-            setPivotY(TransformOrigin.m504getPivotFractionYimpl(this.mTransformOrigin) * getHeight());
+            setPivotX(TransformOrigin.m505getPivotFractionXimpl(j) * getWidth());
+            setPivotY(TransformOrigin.m506getPivotFractionYimpl(this.mTransformOrigin) * getHeight());
         }
         if ((i2 & 1) != 0) {
             setScaleX(reusableGraphicsLayerScope.scaleX);
@@ -419,14 +417,14 @@ public final class ViewLayer extends View implements OwnedLayer {
             resetClipBounds();
             setClipToOutline(z4);
         }
-        boolean m708updateS_szKao = this.outlineResolver.m708updateS_szKao(reusableGraphicsLayerScope.outline, reusableGraphicsLayerScope.alpha, z4, reusableGraphicsLayerScope.shadowElevation, reusableGraphicsLayerScope.size);
+        boolean zM710updateS_szKao = this.outlineResolver.m710updateS_szKao(reusableGraphicsLayerScope.outline, reusableGraphicsLayerScope.alpha, z4, reusableGraphicsLayerScope.shadowElevation, reusableGraphicsLayerScope.size);
         OutlineResolver outlineResolver = this.outlineResolver;
         Paint paint = null;
         if (outlineResolver.cacheIsDirty) {
             setOutlineProvider(outlineResolver.getAndroidOutline() != null ? OutlineProvider : null);
         }
         boolean z5 = getManualClipPath() != null;
-        if (z2 != z5 || (z5 && m708updateS_szKao)) {
+        if (z2 != z5 || (z5 && zM710updateS_szKao)) {
             invalidate();
         }
         if (!this.drawnWithZ && getElevation() > 0.0f && (function0 = this.invalidateParentLayer) != null) {
@@ -437,15 +435,15 @@ public final class ViewLayer extends View implements OwnedLayer {
         }
         if ((i2 & 64) != 0) {
             ViewLayerVerificationHelper28 viewLayerVerificationHelper28 = ViewLayerVerificationHelper28.INSTANCE;
-            int m467toArgb8_81llA = ColorKt.m467toArgb8_81llA(reusableGraphicsLayerScope.ambientShadowColor);
+            int iM469toArgb8_81llA = ColorKt.m469toArgb8_81llA(reusableGraphicsLayerScope.ambientShadowColor);
             viewLayerVerificationHelper28.getClass();
-            setOutlineAmbientShadowColor(m467toArgb8_81llA);
+            setOutlineAmbientShadowColor(iM469toArgb8_81llA);
         }
         if ((i2 & 128) != 0) {
             ViewLayerVerificationHelper28 viewLayerVerificationHelper282 = ViewLayerVerificationHelper28.INSTANCE;
-            int m467toArgb8_81llA2 = ColorKt.m467toArgb8_81llA(reusableGraphicsLayerScope.spotShadowColor);
+            int iM469toArgb8_81llA2 = ColorKt.m469toArgb8_81llA(reusableGraphicsLayerScope.spotShadowColor);
             viewLayerVerificationHelper282.getClass();
-            setOutlineSpotShadowColor(m467toArgb8_81llA2);
+            setOutlineSpotShadowColor(iM469toArgb8_81llA2);
         }
         if ((131072 & i2) != 0) {
             ViewLayerVerificationHelper31 viewLayerVerificationHelper31 = ViewLayerVerificationHelper31.INSTANCE;
@@ -470,7 +468,7 @@ public final class ViewLayer extends View implements OwnedLayer {
                         this.layerPaint = androidPaint;
                     }
                     androidPaint.setColorFilter(reusableGraphicsLayerScope.colorFilter);
-                    androidPaint.m437setBlendModes9anfk8(reusableGraphicsLayerScope.blendMode);
+                    androidPaint.m439setBlendModes9anfk8(reusableGraphicsLayerScope.blendMode);
                     paint = androidPaint.internalPaint;
                 }
                 setLayerType(2, paint);

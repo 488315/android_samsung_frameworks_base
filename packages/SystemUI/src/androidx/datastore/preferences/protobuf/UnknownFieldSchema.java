@@ -1,6 +1,5 @@
 package androidx.datastore.preferences.protobuf;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class UnknownFieldSchema {
     public abstract void addFixed32(int i, int i2, Object obj);
@@ -25,7 +24,7 @@ public abstract class UnknownFieldSchema {
 
     public abstract UnknownFieldSetLite merge(Object obj, Object obj2);
 
-    public final boolean mergeOneFieldFrom(int i, CodedInputStreamReader codedInputStreamReader, Object obj) {
+    public final boolean mergeOneFieldFrom(int i, CodedInputStreamReader codedInputStreamReader, Object obj) throws InvalidProtocolBufferException {
         int i2 = codedInputStreamReader.tag;
         int i3 = i2 >>> 3;
         int i4 = i2 & 7;
@@ -55,18 +54,18 @@ public abstract class UnknownFieldSchema {
             addFixed32(i3, codedInputStream.readFixed32(), obj);
             return true;
         }
-        UnknownFieldSetLite newBuilder = newBuilder();
+        UnknownFieldSetLite unknownFieldSetLiteNewBuilder = newBuilder();
         int i5 = (i3 << 3) | 4;
         int i6 = i + 1;
         if (i6 >= 100) {
             throw new InvalidProtocolBufferException("Protocol message had too many levels of nesting.  May be malicious.  Use setRecursionLimit() to increase the recursion depth limit.");
         }
-        while (codedInputStreamReader.getFieldNumber() != Integer.MAX_VALUE && mergeOneFieldFrom(i6, codedInputStreamReader, newBuilder)) {
+        while (codedInputStreamReader.getFieldNumber() != Integer.MAX_VALUE && mergeOneFieldFrom(i6, codedInputStreamReader, unknownFieldSetLiteNewBuilder)) {
         }
         if (i5 != codedInputStreamReader.tag) {
             throw new InvalidProtocolBufferException("Protocol message end-group tag did not match expected tag.");
         }
-        addGroup(i3, obj, toImmutable(newBuilder));
+        addGroup(i3, obj, toImmutable(unknownFieldSetLiteNewBuilder));
         return true;
     }
 

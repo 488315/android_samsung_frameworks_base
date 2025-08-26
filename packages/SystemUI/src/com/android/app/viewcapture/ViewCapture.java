@@ -30,7 +30,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ViewCapture {
     public static final long MAGIC_NUMBER_FOR_WINSCOPE = (ExportedData.MagicNumber.MAGIC_NUMBER_H.getNumber() << 32) | ExportedData.MagicNumber.MAGIC_NUMBER_L.getNumber();
@@ -42,7 +41,6 @@ public abstract class ViewCapture {
     public final boolean mIsEnabled = true;
     public boolean mIsStarted = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ViewIdProvider {
         public final SparseArray mNames = new SparseArray();
         public final Resources mRes;
@@ -52,7 +50,6 @@ public abstract class ViewCapture {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewPropertyRef implements Runnable {
         public float alpha;
         public int bottom;
@@ -86,14 +83,14 @@ public abstract class ViewCapture {
             }
         }
 
-        public final ViewPropertyRef toProto(ViewIdProvider viewIdProvider, ArrayList arrayList, ViewNode.Builder builder) {
-            int indexOf = arrayList.indexOf(this.clazz);
-            if (indexOf < 0) {
-                indexOf = arrayList.size();
+        public final ViewPropertyRef toProto(ViewIdProvider viewIdProvider, ArrayList arrayList, ViewNode.Builder builder) throws Resources.NotFoundException {
+            int iIndexOf = arrayList.indexOf(this.clazz);
+            if (iIndexOf < 0) {
+                iIndexOf = arrayList.size();
                 arrayList.add(this.clazz);
             }
             builder.copyOnWrite();
-            ViewNode.access$100((ViewNode) builder.instance, indexOf);
+            ViewNode.access$100((ViewNode) builder.instance, iIndexOf);
             int i = this.hashCode;
             builder.copyOnWrite();
             ViewNode.access$300((ViewNode) builder.instance, i);
@@ -157,14 +154,14 @@ public abstract class ViewCapture {
             ViewNode.access$4200((ViewNode) builder.instance, f6);
             builder.copyOnWrite();
             ViewNode.access$3800((ViewNode) builder.instance);
-            ViewPropertyRef viewPropertyRef = this.next;
-            for (int i10 = 0; i10 < this.childCount && viewPropertyRef != null; i10++) {
-                ViewNode.Builder newBuilder = ViewNode.newBuilder();
-                viewPropertyRef = viewPropertyRef.toProto(viewIdProvider, arrayList, newBuilder);
+            ViewPropertyRef proto = this.next;
+            for (int i10 = 0; i10 < this.childCount && proto != null; i10++) {
+                ViewNode.Builder builderNewBuilder = ViewNode.newBuilder();
+                proto = proto.toProto(viewIdProvider, arrayList, builderNewBuilder);
                 builder.copyOnWrite();
-                ViewNode.access$600((ViewNode) builder.instance, (ViewNode) newBuilder.build());
+                ViewNode.access$600((ViewNode) builder.instance, (ViewNode) builderNewBuilder.build());
             }
-            return viewPropertyRef;
+            return proto;
         }
 
         public final void transferFrom(View view) {
@@ -226,31 +223,31 @@ public abstract class ViewCapture {
         }
     }
 
-    public ExportedData getExportedData(Context context) throws InterruptedException, ExecutionException {
+    public ExportedData getExportedData(Context context) throws ExecutionException, InterruptedException {
         ArrayList arrayList = new ArrayList();
-        ExportedData.Builder newBuilder = ExportedData.newBuilder();
-        newBuilder.copyOnWrite();
-        ExportedData.access$100((ExportedData) newBuilder.instance, MAGIC_NUMBER_FOR_WINSCOPE);
+        ExportedData.Builder builderNewBuilder = ExportedData.newBuilder();
+        builderNewBuilder.copyOnWrite();
+        ExportedData.access$100((ExportedData) builderNewBuilder.instance, MAGIC_NUMBER_FOR_WINSCOPE);
         String packageName = context.getPackageName();
-        newBuilder.copyOnWrite();
-        ExportedData.access$900((ExportedData) newBuilder.instance, packageName);
+        builderNewBuilder.copyOnWrite();
+        ExportedData.access$900((ExportedData) builderNewBuilder.instance, packageName);
         Iterable iterable = (Iterable) getWindowData(context, arrayList, new ViewCapture$$ExternalSyntheticLambda0()).get();
-        newBuilder.copyOnWrite();
-        ExportedData.access$600((ExportedData) newBuilder.instance, iterable);
+        builderNewBuilder.copyOnWrite();
+        ExportedData.access$600((ExportedData) builderNewBuilder.instance, iterable);
         List list = (List) arrayList.stream().map(new ViewCapture$$ExternalSyntheticLambda6()).collect(Collectors.toList());
-        newBuilder.copyOnWrite();
-        ExportedData.access$1400((ExportedData) newBuilder.instance, list);
+        builderNewBuilder.copyOnWrite();
+        ExportedData.access$1400((ExportedData) builderNewBuilder.instance, list);
         long nanos = TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis()) - SystemClock.elapsedRealtimeNanos();
-        newBuilder.copyOnWrite();
-        ExportedData.access$1700((ExportedData) newBuilder.instance, nanos);
-        return (ExportedData) newBuilder.build();
+        builderNewBuilder.copyOnWrite();
+        ExportedData.access$1700((ExportedData) builderNewBuilder.instance, nanos);
+        return (ExportedData) builderNewBuilder.build();
     }
 
     public final CompletableFuture getWindowData(Context context, ArrayList arrayList, final Predicate predicate) {
         return CompletableFuture.supplyAsync(new Supplier() { // from class: com.android.app.viewcapture.ViewCapture$$ExternalSyntheticLambda7
             @Override // java.util.function.Supplier
             public final Object get() {
-                ViewCapture viewCapture = ViewCapture.this;
+                ViewCapture viewCapture = this.f$0;
                 return (List) viewCapture.mListeners.stream().filter(predicate).collect(Collectors.toList());
             }
         }, MAIN_EXECUTOR).thenApplyAsync((Function) new ViewCapture$$ExternalSyntheticLambda8(new ViewIdProvider(context.getResources()), arrayList, 0), this.mBgExecutor);
@@ -271,7 +268,7 @@ public abstract class ViewCapture {
         view.getContext().registerComponentCallbacks(windowListener);
         return new SafeCloseable() { // from class: com.android.app.viewcapture.ViewCapture$$ExternalSyntheticLambda2
             public final void close() {
-                ViewCapture viewCapture2 = ViewCapture.this;
+                ViewCapture viewCapture2 = this.f$0;
                 ViewCapture.WindowListener windowListener2 = windowListener;
                 LooperExecutor looperExecutor = ViewCapture.MAIN_EXECUTOR;
                 viewCapture2.getClass();
@@ -306,7 +303,6 @@ public abstract class ViewCapture {
         });
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WindowListener implements ViewTreeObserver.OnDrawListener, ComponentCallbacks2 {
         public final ViewCapture$WindowListener$$ExternalSyntheticLambda0 mCaptureCallback;
         public long[] mFrameTimesNanosBg;

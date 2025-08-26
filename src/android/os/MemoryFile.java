@@ -20,9 +20,9 @@ public class MemoryFile {
 
     public MemoryFile(String str, int i) throws IOException {
         try {
-            SharedMemory create = SharedMemory.create(str, i);
-            this.mSharedMemory = create;
-            this.mMapping = create.mapReadWrite();
+            SharedMemory sharedMemoryCreate = SharedMemory.create(str, i);
+            this.mSharedMemory = sharedMemoryCreate;
+            this.mMapping = sharedMemoryCreate.mapReadWrite();
         } catch (ErrnoException e) {
             e.rethrowAsIOException();
         }
@@ -166,15 +166,15 @@ public class MemoryFile {
             if (i < 0 || i2 < 0 || i + i2 > bArr.length) {
                 throw new IndexOutOfBoundsException();
             }
-            int min = Math.min(i2, available());
-            if (min < 1) {
+            int iMin = Math.min(i2, available());
+            if (iMin < 1) {
                 return -1;
             }
-            int readBytes = MemoryFile.this.readBytes(bArr, this.mOffset, i, min);
-            if (readBytes > 0) {
-                this.mOffset += readBytes;
+            int bytes = MemoryFile.this.readBytes(bArr, this.mOffset, i, iMin);
+            if (bytes > 0) {
+                this.mOffset += bytes;
             }
-            return readBytes;
+            return bytes;
         }
 
         @Override // java.io.InputStream

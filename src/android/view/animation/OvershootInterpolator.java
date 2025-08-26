@@ -27,15 +27,15 @@ public class OvershootInterpolator extends BaseInterpolator implements NativeInt
     }
 
     public OvershootInterpolator(Resources resources, Resources.Theme theme, AttributeSet attributeSet) {
-        TypedArray obtainAttributes;
+        TypedArray typedArrayObtainAttributes;
         if (theme != null) {
-            obtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.OvershootInterpolator, 0, 0);
+            typedArrayObtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.OvershootInterpolator, 0, 0);
         } else {
-            obtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.OvershootInterpolator);
+            typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.OvershootInterpolator);
         }
-        this.mTension = obtainAttributes.getFloat(0, 2.0f);
-        setChangingConfiguration(obtainAttributes.getChangingConfigurations());
-        obtainAttributes.recycle();
+        this.mTension = typedArrayObtainAttributes.getFloat(0, 2.0f);
+        setChangingConfiguration(typedArrayObtainAttributes.getChangingConfigurations());
+        typedArrayObtainAttributes.recycle();
     }
 
     @Override // android.animation.TimeInterpolator

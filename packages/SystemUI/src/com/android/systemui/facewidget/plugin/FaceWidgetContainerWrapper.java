@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.IntConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FaceWidgetContainerWrapper implements Dumpable {
     public View mClockContainer;
@@ -77,7 +76,7 @@ public class FaceWidgetContainerWrapper implements Dumpable {
     }
 
     public final void setKeyguardStatusViewVisibility(int i, int i2, boolean z, boolean z2) {
-        Object obj;
+        Object next;
         View view = this.mFaceWidgetContainer;
         if (view == null || view.animate() == null) {
             return;
@@ -92,7 +91,7 @@ public class FaceWidgetContainerWrapper implements Dumpable {
             final IntConsumer intConsumer = new IntConsumer() { // from class: com.android.systemui.facewidget.plugin.FaceWidgetContainerWrapper$$ExternalSyntheticLambda0
                 @Override // java.util.function.IntConsumer
                 public final void accept(int i3) {
-                    FaceWidgetContainerWrapper faceWidgetContainerWrapper = FaceWidgetContainerWrapper.this;
+                    FaceWidgetContainerWrapper faceWidgetContainerWrapper = this.f$0;
                     faceWidgetContainerWrapper.getClass();
                     try {
                         PluginKeyguardStatusView pluginKeyguardStatusView = faceWidgetContainerWrapper.mPluginKeyguardStatusView;
@@ -126,13 +125,13 @@ public class FaceWidgetContainerWrapper implements Dumpable {
                     @Override // java.lang.Runnable
                     public final void run() {
                         DcmMascotViewContainer dcmMascotViewContainer2;
-                        KeyguardSecVisibilityHelper.this.isVisibilityAnimating = false;
+                        keyguardSecVisibilityHelper.isVisibilityAnimating = false;
                         view3.setVisibility(8);
                         IntConsumer intConsumer2 = intConsumer;
                         if (intConsumer2 != null) {
                             intConsumer2.accept(8);
                         }
-                        if (!CscRune.KEYGUARD_DCM_LIVE_UX || (dcmMascotViewContainer2 = KeyguardSecVisibilityHelper.this.mMascotViewContainer) == null) {
+                        if (!CscRune.KEYGUARD_DCM_LIVE_UX || (dcmMascotViewContainer2 = keyguardSecVisibilityHelper.mMascotViewContainer) == null) {
                             return;
                         }
                         dcmMascotViewContainer2.getClass();
@@ -153,18 +152,18 @@ public class FaceWidgetContainerWrapper implements Dumpable {
                 intConsumer.accept(8);
             } else if (z) {
                 keyguardSecVisibilityHelper.isVisibilityAnimating = true;
-                ViewPropertyAnimator withEndAction = view3.animate().alpha(0.0f).translationYBy((-view3.getHeight()) * 0.05f).setInterpolator(Interpolators.FAST_OUT_LINEAR_IN).withEndAction(new Runnable() { // from class: com.android.keyguard.KeyguardSecVisibilityHelper$setViewVisibility$animator$1
+                ViewPropertyAnimator viewPropertyAnimatorWithEndAction = view3.animate().alpha(0.0f).translationYBy((-view3.getHeight()) * 0.05f).setInterpolator(Interpolators.FAST_OUT_LINEAR_IN).withEndAction(new Runnable() { // from class: com.android.keyguard.KeyguardSecVisibilityHelper$setViewVisibility$animator$1
                     @Override // java.lang.Runnable
                     public final void run() {
                         DcmMascotViewContainer dcmMascotViewContainer2;
-                        KeyguardSecVisibilityHelper.this.isVisibilityAnimating = false;
+                        keyguardSecVisibilityHelper.isVisibilityAnimating = false;
                         view3.setVisibility(4);
                         view3.setTranslationY(0.0f);
                         IntConsumer intConsumer2 = intConsumer;
                         if (intConsumer2 != null) {
                             intConsumer2.accept(4);
                         }
-                        if (!CscRune.KEYGUARD_DCM_LIVE_UX || (dcmMascotViewContainer2 = KeyguardSecVisibilityHelper.this.mMascotViewContainer) == null) {
+                        if (!CscRune.KEYGUARD_DCM_LIVE_UX || (dcmMascotViewContainer2 = keyguardSecVisibilityHelper.mMascotViewContainer) == null) {
                             return;
                         }
                         dcmMascotViewContainer2.getClass();
@@ -181,13 +180,17 @@ public class FaceWidgetContainerWrapper implements Dumpable {
                     AnimatableProperty.AnonymousClass7 anonymousClass7 = AnimatableProperty.Y;
                     PropertyAnimator.cancelAnimation(view3, anonymousClass7);
                     PropertyAnimator.setProperty(view3, anonymousClass7, y, animationProperties, true);
-                    withEndAction.setDuration(j).setStartDelay(j2);
+                    viewPropertyAnimatorWithEndAction.setDuration(j).setStartDelay(j2);
                 }
-                withEndAction.start();
+                viewPropertyAnimatorWithEndAction.start();
             } else if (!keyguardSecVisibilityHelper.mLastOccludedState || z4) {
                 ScreenOffAnimationController screenOffAnimationController = keyguardSecVisibilityHelper.mScreenOffAnimationController;
                 List list = screenOffAnimationController.animations;
-                if (!(list instanceof Collection) || !list.isEmpty()) {
+                if ((list instanceof Collection) && list.isEmpty()) {
+                    view3.setVisibility(0);
+                    view3.setAlpha(1.0f);
+                    intConsumer.accept(0);
+                } else {
                     Iterator it = list.iterator();
                     while (it.hasNext()) {
                         if (((ScreenOffAnimation) it.next()).shouldAnimateInKeyguard()) {
@@ -196,11 +199,11 @@ public class FaceWidgetContainerWrapper implements Dumpable {
                             Iterator it2 = screenOffAnimationController.animations.iterator();
                             while (true) {
                                 if (!it2.hasNext()) {
-                                    obj = null;
+                                    next = null;
                                     break;
                                 }
-                                obj = it2.next();
-                                ScreenOffAnimation screenOffAnimation = (ScreenOffAnimation) obj;
+                                next = it2.next();
+                                ScreenOffAnimation screenOffAnimation = (ScreenOffAnimation) next;
                                 if (screenOffAnimation.shouldAnimateInKeyguard()) {
                                     screenOffAnimation.animateInKeyguard(view4, keyguardSecVisibilityHelper.mSetVisibleEndRunnable);
                                     break;
@@ -208,10 +211,10 @@ public class FaceWidgetContainerWrapper implements Dumpable {
                             }
                         }
                     }
+                    view3.setVisibility(0);
+                    view3.setAlpha(1.0f);
+                    intConsumer.accept(0);
                 }
-                view3.setVisibility(0);
-                view3.setAlpha(1.0f);
-                intConsumer.accept(0);
             } else if (z3) {
                 view3.setVisibility(8);
                 intConsumer.accept(8);

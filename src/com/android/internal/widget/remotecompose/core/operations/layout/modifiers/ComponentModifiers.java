@@ -74,8 +74,8 @@ public class ComponentModifiers extends PaintOperation implements DecoratorCompo
     @Override // com.android.internal.widget.remotecompose.core.PaintOperation
     public void paint(PaintContext paintContext) {
         Iterator<ModifierOperation> it = this.mList.iterator();
-        float f = 0.0f;
-        float f2 = 0.0f;
+        float left = 0.0f;
+        float top = 0.0f;
         while (it.hasNext()) {
             ModifierOperation next = it.next();
             if (next.isDirty() && (next instanceof VariableSupport)) {
@@ -85,38 +85,38 @@ public class ComponentModifiers extends PaintOperation implements DecoratorCompo
             if (next instanceof PaddingModifierOperation) {
                 PaddingModifierOperation paddingModifierOperation = (PaddingModifierOperation) next;
                 paintContext.translate(paddingModifierOperation.getLeft(), paddingModifierOperation.getTop());
-                f += paddingModifierOperation.getLeft();
-                f2 += paddingModifierOperation.getTop();
+                left += paddingModifierOperation.getLeft();
+                top += paddingModifierOperation.getTop();
             }
             if (!(next instanceof MatrixSave) && !(next instanceof MatrixRestore)) {
                 if (next instanceof ClickModifierOperation) {
-                    paintContext.translate(-f, -f2);
+                    paintContext.translate(-left, -top);
                     ((ClickModifierOperation) next).paint(paintContext);
-                    paintContext.translate(f, f2);
+                    paintContext.translate(left, top);
                 } else if (next instanceof PaintOperation) {
                     ((PaintOperation) next).paint(paintContext);
                 }
             }
         }
-        paintContext.translate(-f, -f2);
+        paintContext.translate(-left, -top);
     }
 
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.DecoratorComponent
     public void layout(RemoteContext remoteContext, Component component, float f, float f2) {
         Iterator<ModifierOperation> it = this.mList.iterator();
-        float f3 = f;
-        float f4 = f2;
+        float left = f;
+        float top = f2;
         while (it.hasNext()) {
             ModifierOperation next = it.next();
             if (next instanceof PaddingModifierOperation) {
                 PaddingModifierOperation paddingModifierOperation = (PaddingModifierOperation) next;
-                f3 -= paddingModifierOperation.getLeft() + paddingModifierOperation.getRight();
-                f4 -= paddingModifierOperation.getTop() + paddingModifierOperation.getBottom();
+                left -= paddingModifierOperation.getLeft() + paddingModifierOperation.getRight();
+                top -= paddingModifierOperation.getTop() + paddingModifierOperation.getBottom();
             }
             if (next instanceof ClickModifierOperation) {
                 ((DecoratorComponent) next).layout(remoteContext, component, f, f2);
             } else if (next instanceof DecoratorComponent) {
-                ((DecoratorComponent) next).layout(remoteContext, component, f3, f4);
+                ((DecoratorComponent) next).layout(remoteContext, component, left, top);
             }
         }
     }

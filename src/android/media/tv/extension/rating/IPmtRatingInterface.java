@@ -60,9 +60,9 @@ public interface IPmtRatingInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.rating.IPmtRatingInterface");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPmtRatingInterface)) {
-                return (IPmtRatingInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.rating.IPmtRatingInterface");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPmtRatingInterface)) {
+                return (IPmtRatingInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -95,21 +95,21 @@ public interface IPmtRatingInterface extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                String pmtRating = getPmtRating(readString);
+                String pmtRating = getPmtRating(string);
                 parcel2.writeNoException();
                 parcel2.writeString(pmtRating);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                IPmtRatingListener asInterface = IPmtRatingListener.Stub.asInterface(parcel.readStrongBinder());
+                String string2 = parcel.readString();
+                IPmtRatingListener iPmtRatingListenerAsInterface = IPmtRatingListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addPmtRatingListener(readString2, asInterface);
+                addPmtRatingListener(string2, iPmtRatingListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                IPmtRatingListener asInterface2 = IPmtRatingListener.Stub.asInterface(parcel.readStrongBinder());
+                IPmtRatingListener iPmtRatingListenerAsInterface2 = IPmtRatingListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removePmtRatingListener(asInterface2);
+                removePmtRatingListener(iPmtRatingListenerAsInterface2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -135,48 +135,48 @@ public interface IPmtRatingInterface extends IInterface {
 
             @Override // android.media.tv.extension.rating.IPmtRatingInterface
             public String getPmtRating(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.rating.IPmtRatingInterface");
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.rating.IPmtRatingInterface");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.rating.IPmtRatingInterface
             public void addPmtRatingListener(String str, IPmtRatingListener iPmtRatingListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.rating.IPmtRatingInterface");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iPmtRatingListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.rating.IPmtRatingInterface");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iPmtRatingListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.rating.IPmtRatingInterface
             public void removePmtRatingListener(IPmtRatingListener iPmtRatingListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.rating.IPmtRatingInterface");
-                    obtain.writeStrongInterface(iPmtRatingListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.rating.IPmtRatingInterface");
+                    parcelObtain.writeStrongInterface(iPmtRatingListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

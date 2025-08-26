@@ -29,30 +29,30 @@ public class ShaderData extends Operation implements VariableSupport, Serializab
         return 45;
     }
 
-    public ShaderData(int i, int i2, HashMap<String, float[]> hashMap, HashMap<String, int[]> hashMap2, HashMap<String, Integer> hashMap3) {
+    public ShaderData(int i, int i2, HashMap<String, float[]> map, HashMap<String, int[]> map2, HashMap<String, Integer> map3) {
         this.mUniformRawFloatMap = null;
         this.mUniformFloatMap = null;
         this.mUniformBitmapMap = null;
         this.mShaderID = i;
         this.mShaderTextId = i2;
-        if (hashMap != null) {
+        if (map != null) {
             this.mUniformFloatMap = new HashMap<>();
             this.mUniformRawFloatMap = new HashMap<>();
-            for (String str : hashMap.keySet()) {
-                this.mUniformRawFloatMap.put(str, hashMap.get(str));
-                this.mUniformFloatMap.put(str, hashMap.get(str));
+            for (String str : map.keySet()) {
+                this.mUniformRawFloatMap.put(str, map.get(str));
+                this.mUniformFloatMap.put(str, map.get(str));
             }
         }
-        if (hashMap2 != null) {
+        if (map2 != null) {
             this.mUniformIntMap = new HashMap<>();
-            for (String str2 : hashMap2.keySet()) {
-                this.mUniformIntMap.put(str2, hashMap2.get(str2));
+            for (String str2 : map2.keySet()) {
+                this.mUniformIntMap.put(str2, map2.get(str2));
             }
         }
-        if (hashMap3 != null) {
+        if (map3 != null) {
             this.mUniformBitmapMap = new HashMap<>();
-            for (String str3 : hashMap3.keySet()) {
-                this.mUniformBitmapMap.put(str3, hashMap3.get(str3));
+            for (String str3 : map3.keySet()) {
+                this.mUniformBitmapMap.put(str3, map3.get(str3));
             }
         }
     }
@@ -62,34 +62,34 @@ public class ShaderData extends Operation implements VariableSupport, Serializab
     }
 
     public String[] getUniformFloatNames() {
-        HashMap<String, float[]> hashMap = this.mUniformFloatMap;
-        return hashMap == null ? new String[0] : (String[]) hashMap.keySet().toArray(new String[0]);
+        HashMap<String, float[]> map = this.mUniformFloatMap;
+        return map == null ? new String[0] : (String[]) map.keySet().toArray(new String[0]);
     }
 
     public float[] getUniformFloats(String str) {
-        HashMap<String, float[]> hashMap = this.mUniformFloatMap;
-        return hashMap != null ? hashMap.get(str) : new float[0];
+        HashMap<String, float[]> map = this.mUniformFloatMap;
+        return map != null ? map.get(str) : new float[0];
     }
 
     public String[] getUniformIntegerNames() {
-        HashMap<String, int[]> hashMap = this.mUniformIntMap;
-        return hashMap == null ? new String[0] : (String[]) hashMap.keySet().toArray(new String[0]);
+        HashMap<String, int[]> map = this.mUniformIntMap;
+        return map == null ? new String[0] : (String[]) map.keySet().toArray(new String[0]);
     }
 
     public int[] getUniformInts(String str) {
-        HashMap<String, int[]> hashMap = this.mUniformIntMap;
-        return hashMap != null ? hashMap.get(str) : new int[0];
+        HashMap<String, int[]> map = this.mUniformIntMap;
+        return map != null ? map.get(str) : new int[0];
     }
 
     public String[] getUniformBitmapNames() {
-        HashMap<String, Integer> hashMap = this.mUniformBitmapMap;
-        return hashMap == null ? new String[0] : (String[]) hashMap.keySet().toArray(new String[0]);
+        HashMap<String, Integer> map = this.mUniformBitmapMap;
+        return map == null ? new String[0] : (String[]) map.keySet().toArray(new String[0]);
     }
 
     public int getUniformBitmapId(String str) {
-        HashMap<String, Integer> hashMap = this.mUniformBitmapMap;
-        if (hashMap != null) {
-            return hashMap.get(str).intValue();
+        HashMap<String, Integer> map = this.mUniformBitmapMap;
+        if (map != null) {
+            return map.get(str).intValue();
         }
         return -1;
     }
@@ -105,26 +105,26 @@ public class ShaderData extends Operation implements VariableSupport, Serializab
 
     @Override // com.android.internal.widget.remotecompose.core.VariableSupport
     public void updateVariables(RemoteContext remoteContext) {
-        HashMap<String, float[]> hashMap = this.mUniformRawFloatMap;
-        if (hashMap == null) {
+        HashMap<String, float[]> map = this.mUniformRawFloatMap;
+        if (map == null) {
             return;
         }
-        for (String str : hashMap.keySet()) {
+        for (String str : map.keySet()) {
             float[] fArr = this.mUniformRawFloatMap.get(str);
-            float[] fArr2 = null;
+            float[] fArrCopyOf = null;
             for (int i = 0; i < fArr.length; i++) {
                 if (Float.isNaN(fArr[i])) {
-                    if (fArr2 == null) {
-                        fArr2 = Arrays.copyOf(fArr, fArr.length);
+                    if (fArrCopyOf == null) {
+                        fArrCopyOf = Arrays.copyOf(fArr, fArr.length);
                     }
-                    fArr2[i] = remoteContext.getFloat(Utils.idFromNan(fArr[i]));
+                    fArrCopyOf[i] = remoteContext.getFloat(Utils.idFromNan(fArr[i]));
                 }
             }
-            HashMap<String, float[]> hashMap2 = this.mUniformFloatMap;
-            if (fArr2 != null) {
-                fArr = fArr2;
+            HashMap<String, float[]> map2 = this.mUniformFloatMap;
+            if (fArrCopyOf != null) {
+                fArr = fArrCopyOf;
             }
-            hashMap2.put(str, fArr);
+            map2.put(str, fArr);
         }
     }
 
@@ -147,18 +147,18 @@ public class ShaderData extends Operation implements VariableSupport, Serializab
         return CLASS_NAME;
     }
 
-    public static void apply(WireBuffer wireBuffer, int i, int i2, HashMap<String, float[]> hashMap, HashMap<String, int[]> hashMap2, HashMap<String, Integer> hashMap3) {
+    public static void apply(WireBuffer wireBuffer, int i, int i2, HashMap<String, float[]> map, HashMap<String, int[]> map2, HashMap<String, Integer> map3) {
         wireBuffer.start(45);
         wireBuffer.writeInt(i);
         wireBuffer.writeInt(i2);
-        int size = hashMap == null ? 0 : hashMap.size();
-        int size2 = hashMap2 == null ? 0 : hashMap2.size();
-        int size3 = hashMap3 == null ? 0 : hashMap3.size();
+        int size = map == null ? 0 : map.size();
+        int size2 = map2 == null ? 0 : map2.size();
+        int size3 = map3 == null ? 0 : map3.size();
         wireBuffer.writeInt((size2 << 8) | size | (size3 << 16));
         if (size > 0) {
-            for (String str : hashMap.keySet()) {
+            for (String str : map.keySet()) {
                 wireBuffer.writeUTF8(str);
-                float[] fArr = hashMap.get(str);
+                float[] fArr = map.get(str);
                 wireBuffer.writeInt(fArr.length);
                 for (float f : fArr) {
                     wireBuffer.writeFloat(f);
@@ -166,9 +166,9 @@ public class ShaderData extends Operation implements VariableSupport, Serializab
             }
         }
         if (size2 > 0) {
-            for (String str2 : hashMap2.keySet()) {
+            for (String str2 : map2.keySet()) {
                 wireBuffer.writeUTF8(str2);
-                int[] iArr = hashMap2.get(str2);
+                int[] iArr = map2.get(str2);
                 wireBuffer.writeInt(iArr.length);
                 for (int i3 : iArr) {
                     wireBuffer.writeInt(i3);
@@ -176,59 +176,59 @@ public class ShaderData extends Operation implements VariableSupport, Serializab
             }
         }
         if (size3 > 0) {
-            for (String str3 : hashMap3.keySet()) {
+            for (String str3 : map3.keySet()) {
                 wireBuffer.writeUTF8(str3);
-                wireBuffer.writeInt(hashMap3.get(str3).intValue());
+                wireBuffer.writeInt(map3.get(str3).intValue());
             }
         }
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        HashMap hashMap;
-        HashMap hashMap2;
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        int readInt3 = wireBuffer.readInt();
-        int i = readInt3 & 255;
-        HashMap hashMap3 = null;
-        if (i > 0) {
-            HashMap hashMap4 = new HashMap();
-            for (int i2 = 0; i2 < i; i2++) {
-                String readUTF8 = wireBuffer.readUTF8();
-                int readInt4 = wireBuffer.readInt();
-                float[] fArr = new float[readInt4];
-                for (int i3 = 0; i3 < readInt4; i3++) {
-                    fArr[i3] = wireBuffer.readFloat();
-                }
-                hashMap4.put(readUTF8, fArr);
-            }
-            hashMap = hashMap4;
-        } else {
-            hashMap = null;
-        }
-        int i4 = (readInt3 >> 8) & 255;
+        HashMap map;
+        HashMap map2;
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        int i3 = wireBuffer.readInt();
+        int i4 = i3 & 255;
+        HashMap map3 = null;
         if (i4 > 0) {
-            hashMap2 = new HashMap();
+            HashMap map4 = new HashMap();
             for (int i5 = 0; i5 < i4; i5++) {
-                String readUTF82 = wireBuffer.readUTF8();
-                int readInt5 = wireBuffer.readInt();
-                int[] iArr = new int[readInt5];
-                for (int i6 = 0; i6 < readInt5; i6++) {
-                    iArr[i6] = wireBuffer.readInt();
+                String utf8 = wireBuffer.readUTF8();
+                int i6 = wireBuffer.readInt();
+                float[] fArr = new float[i6];
+                for (int i7 = 0; i7 < i6; i7++) {
+                    fArr[i7] = wireBuffer.readFloat();
                 }
-                hashMap2.put(readUTF82, iArr);
+                map4.put(utf8, fArr);
+            }
+            map = map4;
+        } else {
+            map = null;
+        }
+        int i8 = (i3 >> 8) & 255;
+        if (i8 > 0) {
+            map2 = new HashMap();
+            for (int i9 = 0; i9 < i8; i9++) {
+                String utf82 = wireBuffer.readUTF8();
+                int i10 = wireBuffer.readInt();
+                int[] iArr = new int[i10];
+                for (int i11 = 0; i11 < i10; i11++) {
+                    iArr[i11] = wireBuffer.readInt();
+                }
+                map2.put(utf82, iArr);
             }
         } else {
-            hashMap2 = null;
+            map2 = null;
         }
-        int i7 = (readInt3 >> 16) & 255;
-        if (i7 > 0) {
-            hashMap3 = new HashMap();
-            for (int i8 = 0; i8 < i7; i8++) {
-                hashMap3.put(wireBuffer.readUTF8(), Integer.valueOf(wireBuffer.readInt()));
+        int i12 = (i3 >> 16) & 255;
+        if (i12 > 0) {
+            map3 = new HashMap();
+            for (int i13 = 0; i13 < i12; i13++) {
+                map3.put(wireBuffer.readUTF8(), Integer.valueOf(wireBuffer.readInt()));
             }
         }
-        list.add(new ShaderData(readInt, readInt2, hashMap, hashMap2, hashMap3));
+        list.add(new ShaderData(i, i2, map, map2, map3));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

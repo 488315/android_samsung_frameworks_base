@@ -21,7 +21,6 @@ import com.android.systemui.wallpaper.utils.WhichChecker;
 import com.samsung.android.nexus.video.BuildConfig;
 import com.samsung.android.wallpaper.live.sdk.data.DisplayState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WallpaperAnimator {
     public float mCurrentScale;
@@ -64,6 +63,11 @@ public class WallpaperAnimator {
         Log.d(this.TAG, "changeToUpScaleImmediately");
         release();
         onTransitionScaleChanged(1.025f);
+    }
+
+    public final boolean isPlaying() {
+        ValueAnimator valueAnimator = this.mValueAnimator;
+        return valueAnimator != null && valueAnimator.isRunning();
     }
 
     public final void onDisplayStateChanged(DisplayState displayState, int i, boolean z, boolean z2, boolean z3) {
@@ -129,27 +133,35 @@ public class WallpaperAnimator {
     }
 
     public final void onEngineVisibilityChanged(int i, boolean z, boolean z2, boolean z3) {
-        StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("onEngineVisibilityChanged: visible = ", i, ", which = ", z, ", isFullAodShown = ");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, z2, ", isMultipack = ", z3, ", mKeyguardState = ");
-        m.append(this.mKeyguardState);
-        Log.d(this.TAG, m.toString());
+        StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("onEngineVisibilityChanged: visible = ", i, ", which = ", z, ", isFullAodShown = ");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z2, ", isMultipack = ", z3, ", mKeyguardState = ");
+        sbM.append(this.mKeyguardState);
+        String string = sbM.toString();
+        String str = this.TAG;
+        Log.d(str, string);
         if (WhichChecker.isSystemAndLock(i)) {
-            if (this.mKeyguardState) {
-                if (z2) {
-                    if (z) {
-                        return;
-                    }
-                    changeToUpScaleImmediately();
-                    return;
-                } else if (z) {
-                    playDownScale();
-                    return;
-                } else {
-                    changeToUpScaleImmediately();
+            if (!this.mKeyguardState) {
+                if (isPlaying()) {
                     return;
                 }
+                Log.d(str, "changeToDownScaleImmediately");
+                release();
+                onTransitionScaleChanged(1.0f);
+                return;
             }
-            return;
+            if (z2) {
+                if (z) {
+                    return;
+                }
+                changeToUpScaleImmediately();
+                return;
+            } else if (z) {
+                playDownScale();
+                return;
+            } else {
+                changeToUpScaleImmediately();
+                return;
+            }
         }
         if (!z3) {
             if (z2) {
@@ -197,28 +209,24 @@ public class WallpaperAnimator {
     public final void playDownScale() {
         Log.d(this.TAG, "playDownScale");
         cancelReservedDownScaleAnimation();
-        ValueAnimator valueAnimator = this.mValueAnimator;
-        startAnimation((valueAnimator == null || !valueAnimator.isRunning()) ? 1.025f : this.mCurrentScale, 1.0f);
+        startAnimation(isPlaying() ? this.mCurrentScale : 1.025f, 1.0f);
     }
 
     public final void playUpScale() {
         Log.d(this.TAG, "playUpScale");
         cancelReservedDownScaleAnimation();
-        ValueAnimator valueAnimator = this.mValueAnimator;
-        startAnimation((valueAnimator == null || !valueAnimator.isRunning()) ? 1.0f : this.mCurrentScale, 1.025f);
+        startAnimation(isPlaying() ? this.mCurrentScale : 1.0f, 1.025f);
     }
 
     public final void release() {
         Log.i(this.TAG, BuildConfig.BUILD_TYPE);
         cancelReservedDownScaleAnimation();
-        ValueAnimator valueAnimator = this.mValueAnimator;
-        if (valueAnimator == null || !valueAnimator.isRunning()) {
-            return;
+        if (isPlaying()) {
+            this.mValueAnimator.removeAllUpdateListeners();
+            this.mValueAnimator.removeAllListeners();
+            this.mValueAnimator.end();
+            this.mValueAnimator = null;
         }
-        this.mValueAnimator.removeAllUpdateListeners();
-        this.mValueAnimator.removeAllListeners();
-        this.mValueAnimator.end();
-        this.mValueAnimator = null;
     }
 
     public final void reserveDownScaleAnimation() {
@@ -228,9 +236,9 @@ public class WallpaperAnimator {
     }
 
     public final void scaleSurface(Rect rect) {
-        boolean isEmpty = rect.isEmpty();
+        boolean zIsEmpty = rect.isEmpty();
         String str = this.TAG;
-        if (isEmpty) {
+        if (zIsEmpty) {
             Log.w(str, "scaleSurface: visibleRect = " + rect);
             return;
         }
@@ -253,9 +261,9 @@ public class WallpaperAnimator {
     public final void startAnimation(float f, float f2) {
         Log.d(this.TAG, "startAnimation: " + f + " -> " + f2);
         release();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
-        this.mValueAnimator = ofFloat;
-        ofFloat.setDuration(600L);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+        this.mValueAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setDuration(600L);
         this.mValueAnimator.setInterpolator(new PathInterpolator(0.17f, 0.17f, 0.4f, 1.0f));
         this.mValueAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.wallpaper.engines.WallpaperAnimator.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -266,13 +274,13 @@ public class WallpaperAnimator {
         this.mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.wallpaper.engines.WallpaperAnimator$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                WallpaperAnimator wallpaperAnimator = WallpaperAnimator.this;
+                WallpaperAnimator wallpaperAnimator = this.f$0;
                 wallpaperAnimator.getClass();
-                long elapsedRealtime = SystemClock.elapsedRealtime();
-                if (elapsedRealtime - wallpaperAnimator.mLastDrawingTime < 12) {
+                long jElapsedRealtime = SystemClock.elapsedRealtime();
+                if (jElapsedRealtime - wallpaperAnimator.mLastDrawingTime < 12) {
                     return;
                 }
-                wallpaperAnimator.mLastDrawingTime = elapsedRealtime;
+                wallpaperAnimator.mLastDrawingTime = jElapsedRealtime;
                 wallpaperAnimator.onTransitionScaleChanged(((Float) valueAnimator.getAnimatedValue()).floatValue());
             }
         });

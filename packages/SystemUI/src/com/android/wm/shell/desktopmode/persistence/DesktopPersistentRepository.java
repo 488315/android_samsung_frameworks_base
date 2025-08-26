@@ -1,6 +1,8 @@
 package com.android.wm.shell.desktopmode.persistence;
 
 import android.content.Context;
+import android.util.ArraySet;
+import android.util.Log;
 import androidx.datastore.DataStoreFile;
 import androidx.datastore.core.CorruptionException;
 import androidx.datastore.core.DataStore;
@@ -9,26 +11,40 @@ import androidx.datastore.core.Serializer;
 import androidx.datastore.core.UncloseableOutputStream;
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler;
 import com.android.framework.protobuf.InvalidProtocolBufferException;
+import com.android.wm.shell.desktopmode.persistence.Desktop;
+import com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepositories;
 import com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository;
+import com.android.wm.shell.desktopmode.persistence.DesktopRepositoryState;
 import com.android.wm.shell.desktopmode.persistence.DesktopTask;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.MapsKt__MapsJVMKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopPersistentRepository {
     public static final Companion Companion = new Companion(null);
     public final DataStore dataStore;
     public final FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1 dataStoreFlow;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class DesktopPersistentRepositoriesSerializer implements Serializer {
             public static final DesktopPersistentRepositoriesSerializer INSTANCE = new DesktopPersistentRepositoriesSerializer();
             public static final DesktopPersistentRepositories defaultValue = DesktopPersistentRepositories.getDefaultInstance();
@@ -42,7 +58,7 @@ public final class DesktopPersistentRepository {
             }
 
             @Override // androidx.datastore.core.Serializer
-            public final Object readFrom(InputStream inputStream) {
+            public final Object readFrom(InputStream inputStream) throws CorruptionException {
                 try {
                     return DesktopPersistentRepositories.parseFrom(inputStream);
                 } catch (InvalidProtocolBufferException e) {
@@ -51,7 +67,7 @@ public final class DesktopPersistentRepository {
             }
 
             @Override // androidx.datastore.core.Serializer
-            public final Unit writeTo(Object obj, UncloseableOutputStream uncloseableOutputStream) {
+            public final Unit writeTo(Object obj, UncloseableOutputStream uncloseableOutputStream) throws IOException {
                 ((DesktopPersistentRepositories) obj).writeTo(uncloseableOutputStream);
                 return Unit.INSTANCE;
             }
@@ -62,17 +78,354 @@ public final class DesktopPersistentRepository {
         }
 
         public static DesktopTask createDesktopTask(int i, DesktopTaskState desktopTaskState, DesktopTaskTilingState desktopTaskTilingState) {
-            DesktopTask.Builder newBuilder = DesktopTask.newBuilder();
-            newBuilder.copyOnWrite();
-            DesktopTask.m3246$$Nest$msetTaskId((DesktopTask) newBuilder.instance, i);
-            newBuilder.copyOnWrite();
-            DesktopTask.m3244$$Nest$msetDesktopTaskState((DesktopTask) newBuilder.instance, desktopTaskState);
-            newBuilder.copyOnWrite();
-            DesktopTask.m3245$$Nest$msetDesktopTaskTilingState((DesktopTask) newBuilder.instance, desktopTaskTilingState);
-            return (DesktopTask) newBuilder.build();
+            DesktopTask.Builder builderNewBuilder = DesktopTask.newBuilder();
+            builderNewBuilder.copyOnWrite();
+            DesktopTask.m3263$$Nest$msetTaskId((DesktopTask) builderNewBuilder.instance, i);
+            builderNewBuilder.copyOnWrite();
+            DesktopTask.m3261$$Nest$msetDesktopTaskState((DesktopTask) builderNewBuilder.instance, desktopTaskState);
+            builderNewBuilder.copyOnWrite();
+            DesktopTask.m3262$$Nest$msetDesktopTaskTilingState((DesktopTask) builderNewBuilder.instance, desktopTaskTilingState);
+            return (DesktopTask) builderNewBuilder.build();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$addOrUpdateDesktop$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return DesktopPersistentRepository.this.addOrUpdateDesktop(0, 0, null, null, null, null, null, 0, 0, this);
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$addOrUpdateDesktop$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $desktopId;
+        final /* synthetic */ int $displayId;
+        final /* synthetic */ ArrayList<Integer> $freeformTasksInZOrder;
+        final /* synthetic */ Integer $leftTiledTask;
+        final /* synthetic */ ArraySet<Integer> $minimizedTasks;
+        final /* synthetic */ Integer $rightTiledTask;
+        final /* synthetic */ int $usedDesk;
+        final /* synthetic */ int $userId;
+        final /* synthetic */ ArraySet<Integer> $visibleTasks;
+        /* synthetic */ Object L$0;
+        int label;
+        final /* synthetic */ DesktopPersistentRepository this$0;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(int i, DesktopPersistentRepository desktopPersistentRepository, int i2, ArraySet<Integer> arraySet, ArraySet<Integer> arraySet2, ArrayList<Integer> arrayList, Integer num, Integer num2, int i3, int i4, Continuation continuation) {
+            super(2, continuation);
+            this.$userId = i;
+            this.this$0 = desktopPersistentRepository;
+            this.$desktopId = i2;
+            this.$visibleTasks = arraySet;
+            this.$minimizedTasks = arraySet2;
+            this.$freeformTasksInZOrder = arrayList;
+            this.$leftTiledTask = num;
+            this.$rightTiledTask = num2;
+            this.$displayId = i3;
+            this.$usedDesk = i4;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2(this.$userId, this.this$0, this.$desktopId, this.$visibleTasks, this.$minimizedTasks, this.$freeformTasksInZOrder, this.$leftTiledTask, this.$rightTiledTask, this.$displayId, this.$usedDesk, continuation);
+            anonymousClass2.L$0 = obj;
+            return anonymousClass2;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((DesktopPersistentRepositories) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            DesktopPersistentRepositories desktopPersistentRepositories = (DesktopPersistentRepositories) this.L$0;
+            DesktopRepositoryState desktopRepoByUserOrDefault = desktopPersistentRepositories.getDesktopRepoByUserOrDefault(this.$userId, DesktopRepositoryState.getDefaultInstance());
+            Companion companion = DesktopPersistentRepository.Companion;
+            DesktopPersistentRepository desktopPersistentRepository = this.this$0;
+            desktopRepoByUserOrDefault.getClass();
+            int i = this.$desktopId;
+            desktopPersistentRepository.getClass();
+            Desktop.Builder builderNewBuilder = Desktop.newBuilder();
+            builderNewBuilder.copyOnWrite();
+            Desktop.m3253$$Nest$msetDesktopId(i, (Desktop) builderNewBuilder.instance);
+            builderNewBuilder.copyOnWrite();
+            int i2 = 0;
+            Desktop.m3254$$Nest$msetDisplayId(0, (Desktop) builderNewBuilder.instance);
+            Desktop.Builder builder = (Desktop.Builder) desktopRepoByUserOrDefault.getDesktopOrDefault(i, (Desktop) builderNewBuilder.build()).toBuilder();
+            ArraySet<Integer> arraySet = this.$visibleTasks;
+            ArraySet<Integer> arraySet2 = this.$minimizedTasks;
+            ArrayList<Integer> arrayList = this.$freeformTasksInZOrder;
+            Integer num = this.$leftTiledTask;
+            Integer num2 = this.$rightTiledTask;
+            companion.getClass();
+            builder.copyOnWrite();
+            Desktop.m3252$$Nest$mgetMutableTasksByTaskIdMap((Desktop) builder.instance).clear();
+            if (arrayList.size() > arraySet2.size() + arraySet.size() && arraySet.isEmpty()) {
+                ArrayList arrayList2 = new ArrayList();
+                int size = arrayList.size();
+                while (i2 < size) {
+                    Integer num3 = arrayList.get(i2);
+                    i2++;
+                    if (!arraySet2.contains(Integer.valueOf(num3.intValue()))) {
+                        arrayList2.add(num3);
+                    }
+                }
+                arraySet.addAll(arrayList2);
+            }
+            int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(arraySet, 10));
+            if (iMapCapacity < 16) {
+                iMapCapacity = 16;
+            }
+            LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
+            Iterator<Integer> it = arraySet.iterator();
+            while (it.hasNext()) {
+                Integer next = it.next();
+                Integer num4 = next;
+                Companion companion2 = DesktopPersistentRepository.Companion;
+                num4.getClass();
+                int iIntValue = num4.intValue();
+                DesktopTaskState desktopTaskState = DesktopTaskState.VISIBLE;
+                int iIntValue2 = num4.intValue();
+                companion2.getClass();
+                linkedHashMap.put(next, Companion.createDesktopTask(iIntValue, desktopTaskState, (num != null && iIntValue2 == num.intValue()) ? DesktopTaskTilingState.LEFT : (num2 != null && iIntValue2 == num2.intValue()) ? DesktopTaskTilingState.RIGHT : DesktopTaskTilingState.NONE));
+            }
+            builder.copyOnWrite();
+            Desktop.m3252$$Nest$mgetMutableTasksByTaskIdMap((Desktop) builder.instance).putAll(linkedHashMap);
+            int iMapCapacity2 = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(arraySet2, 10));
+            LinkedHashMap linkedHashMap2 = new LinkedHashMap(iMapCapacity2 >= 16 ? iMapCapacity2 : 16);
+            Iterator<Integer> it2 = arraySet2.iterator();
+            while (it2.hasNext()) {
+                Integer next2 = it2.next();
+                Integer num5 = next2;
+                Companion companion3 = DesktopPersistentRepository.Companion;
+                num5.getClass();
+                int iIntValue3 = num5.intValue();
+                DesktopTaskState desktopTaskState2 = DesktopTaskState.MINIMIZED;
+                DesktopTaskTilingState desktopTaskTilingState = DesktopTaskTilingState.NONE;
+                companion3.getClass();
+                linkedHashMap2.put(next2, Companion.createDesktopTask(iIntValue3, desktopTaskState2, desktopTaskTilingState));
+            }
+            builder.copyOnWrite();
+            Desktop.m3252$$Nest$mgetMutableTasksByTaskIdMap((Desktop) builder.instance).putAll(linkedHashMap2);
+            ArrayList<Integer> arrayList3 = this.$freeformTasksInZOrder;
+            builder.copyOnWrite();
+            Desktop.m3251$$Nest$mclearZOrderedTasks((Desktop) builder.instance);
+            builder.copyOnWrite();
+            Desktop.m3250$$Nest$maddAllZOrderedTasks((Desktop) builder.instance, arrayList3);
+            int i3 = this.$displayId;
+            builder.copyOnWrite();
+            Desktop.m3254$$Nest$msetDisplayId(i3, (Desktop) builder.instance);
+            int i4 = this.$usedDesk;
+            builder.copyOnWrite();
+            Desktop.m3255$$Nest$msetUsed(i4, (Desktop) builder.instance);
+            DesktopPersistentRepositories.Builder builder2 = (DesktopPersistentRepositories.Builder) desktopPersistentRepositories.toBuilder();
+            int i5 = this.$userId;
+            DesktopRepositoryState.Builder builder3 = (DesktopRepositoryState.Builder) desktopRepoByUserOrDefault.toBuilder();
+            int i6 = this.$desktopId;
+            Desktop desktop = (Desktop) builder.build();
+            builder3.copyOnWrite();
+            DesktopRepositoryState.m3259$$Nest$mgetMutableDesktopMap((DesktopRepositoryState) builder3.instance).put(Integer.valueOf(i6), desktop);
+            DesktopRepositoryState desktopRepositoryState = (DesktopRepositoryState) builder3.build();
+            builder2.copyOnWrite();
+            DesktopPersistentRepositories.m3257$$Nest$mgetMutableDesktopRepoByUserMap((DesktopPersistentRepositories) builder2.instance).put(Integer.valueOf(i5), desktopRepositoryState);
+            return builder2.build();
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getDesktopRepositoryState$1, reason: invalid class name and case insensitive filesystem */
+    final class C12081 extends ContinuationImpl {
+        int I$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C12081(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return DesktopPersistentRepository.this.getDesktopRepositoryState(0, this);
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getUserDesktopRepositoryMap$1, reason: invalid class name and case insensitive filesystem */
+    final class C12091 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C12091(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return DesktopPersistentRepository.this.getUserDesktopRepositoryMap(this);
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$readDesktop$1, reason: invalid class name and case insensitive filesystem */
+    final class C12101 extends ContinuationImpl {
+        int I$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C12101(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return DesktopPersistentRepository.this.readDesktop(0, 0, this);
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeDesktop$1, reason: invalid class name and case insensitive filesystem */
+    final class C12111 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C12111(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return DesktopPersistentRepository.this.removeDesktop(0, 0, this);
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeDesktop$2, reason: invalid class name and case insensitive filesystem */
+    final class C12122 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $desktopId;
+        final /* synthetic */ int $userId;
+        /* synthetic */ Object L$0;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C12122(int i, int i2, Continuation continuation) {
+            super(2, continuation);
+            this.$userId = i;
+            this.$desktopId = i2;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            C12122 c12122 = new C12122(this.$userId, this.$desktopId, continuation);
+            c12122.L$0 = obj;
+            return c12122;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C12122) create((DesktopPersistentRepositories) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            DesktopPersistentRepositories desktopPersistentRepositories = (DesktopPersistentRepositories) this.L$0;
+            DesktopRepositoryState desktopRepoByUserOrDefault = desktopPersistentRepositories.getDesktopRepoByUserOrDefault(this.$userId, DesktopRepositoryState.getDefaultInstance());
+            DesktopPersistentRepositories.Builder builder = (DesktopPersistentRepositories.Builder) desktopPersistentRepositories.toBuilder();
+            int i = this.$userId;
+            DesktopRepositoryState.Builder builder2 = (DesktopRepositoryState.Builder) desktopRepoByUserOrDefault.toBuilder();
+            int i2 = this.$desktopId;
+            builder2.copyOnWrite();
+            DesktopRepositoryState.m3259$$Nest$mgetMutableDesktopMap((DesktopRepositoryState) builder2.instance).remove(Integer.valueOf(i2));
+            DesktopRepositoryState desktopRepositoryState = (DesktopRepositoryState) builder2.build();
+            builder.copyOnWrite();
+            DesktopPersistentRepositories.m3257$$Nest$mgetMutableDesktopRepoByUserMap((DesktopPersistentRepositories) builder.instance).put(Integer.valueOf(i), desktopRepositoryState);
+            return builder.build();
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeUsers$1, reason: invalid class name and case insensitive filesystem */
+    final class C12131 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C12131(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return DesktopPersistentRepository.this.removeUsers(null, this);
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeUsers$2, reason: invalid class name and case insensitive filesystem */
+    final class C12142 extends SuspendLambda implements Function2 {
+        final /* synthetic */ List<Integer> $uids;
+        /* synthetic */ Object L$0;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C12142(List<Integer> list, Continuation continuation) {
+            super(2, continuation);
+            this.$uids = list;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            C12142 c12142 = new C12142(this.$uids, continuation);
+            c12142.L$0 = obj;
+            return c12142;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C12142) create((DesktopPersistentRepositories) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            DesktopPersistentRepositories.Builder builder = (DesktopPersistentRepositories.Builder) ((DesktopPersistentRepositories) this.L$0).toBuilder();
+            Iterator<T> it = this.$uids.iterator();
+            while (it.hasNext()) {
+                int iIntValue = ((Number) it.next()).intValue();
+                builder.copyOnWrite();
+                DesktopPersistentRepositories.m3257$$Nest$mgetMutableDesktopRepoByUserMap((DesktopPersistentRepositories) builder.instance).remove(Integer.valueOf(iIntValue));
+            }
+            return builder.build();
         }
     }
 
@@ -81,410 +434,249 @@ public final class DesktopPersistentRepository {
         this.dataStoreFlow = new FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1(dataStore.getData(), new DesktopPersistentRepository$dataStoreFlow$1(null));
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:0|1|(2:3|(8:5|6|7|8|(1:(1:11)(2:17|18))(3:19|20|(1:22))|12|13|14))|25|6|7|8|(0)(0)|12|13|14) */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x005b, code lost:
-    
-        r0 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x005c, code lost:
-    
-        android.util.Log.e("DesktopPersistenceRepo", "Error in updating desktop mode related data, data is stored in a file named desktop_persistent_repositories.pb", r0);
-     */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0027  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0035  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0018  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object addOrUpdateDesktop(int r17, int r18, android.util.ArraySet r19, android.util.ArraySet r20, java.util.ArrayList r21, java.lang.Integer r22, java.lang.Integer r23, int r24, int r25, kotlin.coroutines.jvm.internal.ContinuationImpl r26) {
-        /*
-            r16 = this;
-            r2 = r16
-            r0 = r26
-            boolean r1 = r0 instanceof com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$addOrUpdateDesktop$1
-            if (r1 == 0) goto L18
-            r1 = r0
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$addOrUpdateDesktop$1 r1 = (com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$addOrUpdateDesktop$1) r1
-            int r3 = r1.label
-            r4 = -2147483648(0xffffffff80000000, float:-0.0)
-            r5 = r3 & r4
-            if (r5 == 0) goto L18
-            int r3 = r3 - r4
-            r1.label = r3
-        L16:
-            r12 = r1
-            goto L1e
-        L18:
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$addOrUpdateDesktop$1 r1 = new com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$addOrUpdateDesktop$1
-            r1.<init>(r2, r0)
-            goto L16
-        L1e:
-            java.lang.Object r0 = r12.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r13 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r12.label
-            r14 = 1
-            if (r1 == 0) goto L35
-            if (r1 != r14) goto L2d
-            kotlin.ResultKt.throwOnFailure(r0)     // Catch: java.lang.Exception -> L5b
-            goto L63
-        L2d:
-            java.lang.IllegalStateException r0 = new java.lang.IllegalStateException
-            java.lang.String r1 = "call to 'resume' before 'invoke' with coroutine"
-            r0.<init>(r1)
-            throw r0
-        L35:
-            kotlin.ResultKt.throwOnFailure(r0)
-            androidx.datastore.core.DataStore r15 = r2.dataStore     // Catch: java.lang.Exception -> L5b
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$addOrUpdateDesktop$2 r0 = new com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$addOrUpdateDesktop$2     // Catch: java.lang.Exception -> L5b
-            r11 = 0
-            r1 = r17
-            r3 = r18
-            r4 = r19
-            r5 = r20
-            r6 = r21
-            r7 = r22
-            r8 = r23
-            r9 = r24
-            r10 = r25
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11)     // Catch: java.lang.Exception -> L5b
-            r12.label = r14     // Catch: java.lang.Exception -> L5b
-            java.lang.Object r0 = r15.updateData(r0, r12)     // Catch: java.lang.Exception -> L5b
-            if (r0 != r13) goto L63
-            return r13
-        L5b:
-            r0 = move-exception
-            java.lang.String r1 = "DesktopPersistenceRepo"
-            java.lang.String r2 = "Error in updating desktop mode related data, data is stored in a file named desktop_persistent_repositories.pb"
-            android.util.Log.e(r1, r2, r0)
-        L63:
-            kotlin.Unit r0 = kotlin.Unit.INSTANCE
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository.addOrUpdateDesktop(int, int, android.util.ArraySet, android.util.ArraySet, java.util.ArrayList, java.lang.Integer, java.lang.Integer, int, int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object addOrUpdateDesktop(int i, int i2, ArraySet arraySet, ArraySet arraySet2, ArrayList arrayList, Integer num, Integer num2, int i3, int i4, ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i5 = anonymousClass1.label;
+            if ((i5 & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i5 - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        AnonymousClass1 anonymousClass12 = anonymousClass1;
+        Object obj = anonymousClass12.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i6 = anonymousClass12.label;
+        try {
+            if (i6 == 0) {
+                ResultKt.throwOnFailure(obj);
+                DataStore dataStore = this.dataStore;
+                AnonymousClass2 anonymousClass2 = new AnonymousClass2(i, this, i2, arraySet, arraySet2, arrayList, num, num2, i3, i4, null);
+                anonymousClass12.label = 1;
+                if (dataStore.updateData(anonymousClass2, anonymousClass12) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i6 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+        } catch (Exception e) {
+            Log.e("DesktopPersistenceRepo", "Error in updating desktop mode related data, data is stored in a file named desktop_persistent_repositories.pb", e);
+        }
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0031  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object getDesktopRepositoryState(int r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getDesktopRepositoryState$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getDesktopRepositoryState$1 r0 = (com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getDesktopRepositoryState$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getDesktopRepositoryState$1 r0 = new com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getDesktopRepositoryState$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L31
-            if (r2 != r3) goto L29
-            int r5 = r0.I$0
-            kotlin.ResultKt.throwOnFailure(r6)     // Catch: java.lang.Exception -> L53
-            goto L41
-        L29:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L31:
-            kotlin.ResultKt.throwOnFailure(r6)
-            kotlinx.coroutines.flow.FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1 r4 = r4.dataStoreFlow     // Catch: java.lang.Exception -> L53
-            r0.I$0 = r5     // Catch: java.lang.Exception -> L53
-            r0.label = r3     // Catch: java.lang.Exception -> L53
-            java.lang.Object r6 = kotlinx.coroutines.flow.FlowKt.first(r4, r0)     // Catch: java.lang.Exception -> L53
-            if (r6 != r1) goto L41
-            return r1
-        L41:
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepositories r6 = (com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepositories) r6     // Catch: java.lang.Exception -> L53
-            java.util.Map r4 = r6.getDesktopRepoByUserMap()     // Catch: java.lang.Exception -> L53
-            java.lang.Integer r6 = new java.lang.Integer     // Catch: java.lang.Exception -> L53
-            r6.<init>(r5)     // Catch: java.lang.Exception -> L53
-            java.lang.Object r4 = r4.get(r6)     // Catch: java.lang.Exception -> L53
-            com.android.wm.shell.desktopmode.persistence.DesktopRepositoryState r4 = (com.android.wm.shell.desktopmode.persistence.DesktopRepositoryState) r4     // Catch: java.lang.Exception -> L53
-            return r4
-        L53:
-            r4 = move-exception
-            java.lang.String r5 = "DesktopPersistenceRepo"
-            java.lang.String r6 = "Unable to read from datastore"
-            android.util.Log.e(r5, r6, r4)
-            r4 = 0
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository.getDesktopRepositoryState(int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object getDesktopRepositoryState(int i, ContinuationImpl continuationImpl) {
+        C12081 c12081;
+        if (continuationImpl instanceof C12081) {
+            c12081 = (C12081) continuationImpl;
+            int i2 = c12081.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                c12081.label = i2 - Integer.MIN_VALUE;
+            } else {
+                c12081 = new C12081(continuationImpl);
+            }
+        }
+        Object objFirst = c12081.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = c12081.label;
+        try {
+            if (i3 == 0) {
+                ResultKt.throwOnFailure(objFirst);
+                FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1 flowKt__ErrorsKt$catch$$inlined$unsafeFlow$1 = this.dataStoreFlow;
+                c12081.I$0 = i;
+                c12081.label = 1;
+                objFirst = FlowKt.first(flowKt__ErrorsKt$catch$$inlined$unsafeFlow$1, c12081);
+                if (objFirst == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i3 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                i = c12081.I$0;
+                ResultKt.throwOnFailure(objFirst);
+            }
+            return (DesktopRepositoryState) ((DesktopPersistentRepositories) objFirst).getDesktopRepoByUserMap().get(new Integer(i));
+        } catch (Exception e) {
+            Log.e("DesktopPersistenceRepo", "Unable to read from datastore", e);
+            return null;
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object getUserDesktopRepositoryMap(kotlin.coroutines.jvm.internal.ContinuationImpl r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getUserDesktopRepositoryMap$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getUserDesktopRepositoryMap$1 r0 = (com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getUserDesktopRepositoryMap$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getUserDesktopRepositoryMap$1 r0 = new com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$getUserDesktopRepositoryMap$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 != r3) goto L27
-            kotlin.ResultKt.throwOnFailure(r5)     // Catch: java.lang.Exception -> L44
-            goto L3d
-        L27:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r5)
-            kotlinx.coroutines.flow.FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1 r4 = r4.dataStoreFlow     // Catch: java.lang.Exception -> L44
-            r0.label = r3     // Catch: java.lang.Exception -> L44
-            java.lang.Object r5 = kotlinx.coroutines.flow.FlowKt.first(r4, r0)     // Catch: java.lang.Exception -> L44
-            if (r5 != r1) goto L3d
-            return r1
-        L3d:
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepositories r5 = (com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepositories) r5     // Catch: java.lang.Exception -> L44
-            java.util.Map r4 = r5.getDesktopRepoByUserMap()     // Catch: java.lang.Exception -> L44
-            return r4
-        L44:
-            r4 = move-exception
-            java.lang.String r5 = "DesktopPersistenceRepo"
-            java.lang.String r0 = "Unable to read from datastore"
-            android.util.Log.e(r5, r0, r4)
-            r4 = 0
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository.getUserDesktopRepositoryMap(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object getUserDesktopRepositoryMap(ContinuationImpl continuationImpl) {
+        C12091 c12091;
+        if (continuationImpl instanceof C12091) {
+            c12091 = (C12091) continuationImpl;
+            int i = c12091.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c12091.label = i - Integer.MIN_VALUE;
+            } else {
+                c12091 = new C12091(continuationImpl);
+            }
+        }
+        Object objFirst = c12091.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c12091.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(objFirst);
+                FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1 flowKt__ErrorsKt$catch$$inlined$unsafeFlow$1 = this.dataStoreFlow;
+                c12091.label = 1;
+                objFirst = FlowKt.first(flowKt__ErrorsKt$catch$$inlined$unsafeFlow$1, c12091);
+                if (objFirst == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(objFirst);
+            }
+            return ((DesktopPersistentRepositories) objFirst).getDesktopRepoByUserMap();
+        } catch (Exception e) {
+            Log.e("DesktopPersistenceRepo", "Unable to read from datastore", e);
+            return null;
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0043 A[Catch: Exception -> 0x0048, TRY_LEAVE, TryCatch #0 {Exception -> 0x0048, blocks: (B:11:0x0025, B:12:0x003f, B:14:0x0043, B:22:0x0034), top: B:7:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0031  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object readDesktop(int r5, int r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r4 = this;
-            boolean r0 = r7 instanceof com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$readDesktop$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$readDesktop$1 r0 = (com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$readDesktop$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$readDesktop$1 r0 = new com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$readDesktop$1
-            r0.<init>(r4, r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L31
-            if (r2 != r3) goto L29
-            int r6 = r0.I$0
-            kotlin.ResultKt.throwOnFailure(r7)     // Catch: java.lang.Exception -> L48
-            goto L3f
-        L29:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L31:
-            kotlin.ResultKt.throwOnFailure(r7)
-            r0.I$0 = r6     // Catch: java.lang.Exception -> L48
-            r0.label = r3     // Catch: java.lang.Exception -> L48
-            java.lang.Object r7 = r4.getDesktopRepositoryState(r5, r0)     // Catch: java.lang.Exception -> L48
-            if (r7 != r1) goto L3f
-            return r1
-        L3f:
-            com.android.wm.shell.desktopmode.persistence.DesktopRepositoryState r7 = (com.android.wm.shell.desktopmode.persistence.DesktopRepositoryState) r7     // Catch: java.lang.Exception -> L48
-            if (r7 == 0) goto L50
-            com.android.wm.shell.desktopmode.persistence.Desktop r4 = r7.getDesktopOrThrow(r6)     // Catch: java.lang.Exception -> L48
-            return r4
-        L48:
-            r4 = move-exception
-            java.lang.String r5 = "DesktopPersistenceRepo"
-            java.lang.String r6 = "Unable to get desktop info from persistent repository"
-            android.util.Log.e(r5, r6, r4)
-        L50:
-            r4 = 0
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository.readDesktop(int, int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object readDesktop(int i, int i2, ContinuationImpl continuationImpl) {
+        C12101 c12101;
+        if (continuationImpl instanceof C12101) {
+            c12101 = (C12101) continuationImpl;
+            int i3 = c12101.label;
+            if ((i3 & Integer.MIN_VALUE) != 0) {
+                c12101.label = i3 - Integer.MIN_VALUE;
+            } else {
+                c12101 = new C12101(continuationImpl);
+            }
+        }
+        Object desktopRepositoryState = c12101.result;
+        Object obj = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i4 = c12101.label;
+        try {
+            if (i4 == 0) {
+                ResultKt.throwOnFailure(desktopRepositoryState);
+                c12101.I$0 = i2;
+                c12101.label = 1;
+                desktopRepositoryState = getDesktopRepositoryState(i, c12101);
+                if (desktopRepositoryState == obj) {
+                    return obj;
+                }
+            } else {
+                if (i4 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                i2 = c12101.I$0;
+                ResultKt.throwOnFailure(desktopRepositoryState);
+            }
+            DesktopRepositoryState desktopRepositoryState2 = (DesktopRepositoryState) desktopRepositoryState;
+            if (desktopRepositoryState2 != null) {
+                return desktopRepositoryState2.getDesktopOrThrow(i2);
+            }
+            return null;
+        } catch (Exception e) {
+            Log.e("DesktopPersistenceRepo", "Unable to get desktop info from persistent repository", e);
+            return null;
+        }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(10:0|1|(2:3|(7:5|6|7|(1:(1:10)(2:16|17))(3:18|19|(1:21))|11|12|13))|24|6|7|(0)(0)|11|12|13) */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x0043, code lost:
-    
-        r4 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x0044, code lost:
-    
-        android.util.Log.e("DesktopPersistenceRepo", "Error in removing desktop related data, data is stored in a file named desktop_persistent_repositories.pb", r4);
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object removeDesktop(int r5, int r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r4 = this;
-            boolean r0 = r7 instanceof com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeDesktop$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeDesktop$1 r0 = (com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeDesktop$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeDesktop$1 r0 = new com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeDesktop$1
-            r0.<init>(r4, r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 != r3) goto L27
-            kotlin.ResultKt.throwOnFailure(r7)     // Catch: java.lang.Throwable -> L43
-            goto L4b
-        L27:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r7)
-            androidx.datastore.core.DataStore r4 = r4.dataStore     // Catch: java.lang.Throwable -> L43
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeDesktop$2 r7 = new com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeDesktop$2     // Catch: java.lang.Throwable -> L43
-            r2 = 0
-            r7.<init>(r5, r6, r2)     // Catch: java.lang.Throwable -> L43
-            r0.label = r3     // Catch: java.lang.Throwable -> L43
-            java.lang.Object r4 = r4.updateData(r7, r0)     // Catch: java.lang.Throwable -> L43
-            if (r4 != r1) goto L4b
-            return r1
-        L43:
-            r4 = move-exception
-            java.lang.String r5 = "DesktopPersistenceRepo"
-            java.lang.String r6 = "Error in removing desktop related data, data is stored in a file named desktop_persistent_repositories.pb"
-            android.util.Log.e(r5, r6, r4)
-        L4b:
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository.removeDesktop(int, int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object removeDesktop(int i, int i2, ContinuationImpl continuationImpl) {
+        C12111 c12111;
+        if (continuationImpl instanceof C12111) {
+            c12111 = (C12111) continuationImpl;
+            int i3 = c12111.label;
+            if ((i3 & Integer.MIN_VALUE) != 0) {
+                c12111.label = i3 - Integer.MIN_VALUE;
+            } else {
+                c12111 = new C12111(continuationImpl);
+            }
+        }
+        Object obj = c12111.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i4 = c12111.label;
+        try {
+            if (i4 == 0) {
+                ResultKt.throwOnFailure(obj);
+                DataStore dataStore = this.dataStore;
+                C12122 c12122 = new C12122(i, i2, null);
+                c12111.label = 1;
+                if (dataStore.updateData(c12122, c12111) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i4 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+        } catch (Throwable th) {
+            Log.e("DesktopPersistenceRepo", "Error in removing desktop related data, data is stored in a file named desktop_persistent_repositories.pb", th);
+        }
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(10:0|1|(2:3|(7:5|6|7|(1:(1:10)(2:16|17))(3:18|19|(1:21))|11|12|13))|24|6|7|(0)(0)|11|12|13) */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x0043, code lost:
-    
-        r4 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x0044, code lost:
-    
-        android.util.Log.e("DesktopPersistenceRepo", "Error in removing user related data, data is stored in a file named desktop_persistent_repositories.pb", r4);
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object removeUsers(java.util.List r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeUsers$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeUsers$1 r0 = (com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeUsers$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeUsers$1 r0 = new com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeUsers$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 != r3) goto L27
-            kotlin.ResultKt.throwOnFailure(r6)     // Catch: java.lang.Exception -> L43
-            goto L4b
-        L27:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r6)
-            androidx.datastore.core.DataStore r4 = r4.dataStore     // Catch: java.lang.Exception -> L43
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeUsers$2 r6 = new com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository$removeUsers$2     // Catch: java.lang.Exception -> L43
-            r2 = 0
-            r6.<init>(r5, r2)     // Catch: java.lang.Exception -> L43
-            r0.label = r3     // Catch: java.lang.Exception -> L43
-            java.lang.Object r4 = r4.updateData(r6, r0)     // Catch: java.lang.Exception -> L43
-            if (r4 != r1) goto L4b
-            return r1
-        L43:
-            r4 = move-exception
-            java.lang.String r5 = "DesktopPersistenceRepo"
-            java.lang.String r6 = "Error in removing user related data, data is stored in a file named desktop_persistent_repositories.pb"
-            android.util.Log.e(r5, r6, r4)
-        L4b:
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository.removeUsers(java.util.List, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object removeUsers(List list, ContinuationImpl continuationImpl) {
+        C12131 c12131;
+        if (continuationImpl instanceof C12131) {
+            c12131 = (C12131) continuationImpl;
+            int i = c12131.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c12131.label = i - Integer.MIN_VALUE;
+            } else {
+                c12131 = new C12131(continuationImpl);
+            }
+        }
+        Object obj = c12131.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c12131.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj);
+                DataStore dataStore = this.dataStore;
+                C12142 c12142 = new C12142(list, null);
+                c12131.label = 1;
+                if (dataStore.updateData(c12142, c12131) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+        } catch (Exception e) {
+            Log.e("DesktopPersistenceRepo", "Error in removing user related data, data is stored in a file named desktop_persistent_repositories.pb", e);
+        }
+        return Unit.INSTANCE;
     }
 
     public DesktopPersistentRepository(final Context context, CoroutineScope coroutineScope) {

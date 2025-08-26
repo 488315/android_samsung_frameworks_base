@@ -40,63 +40,63 @@ public class RedactingCursor extends CrossProcessCursorWrapper {
 
     @Override // android.database.CursorWrapper, android.database.Cursor
     public double getDouble(int i) {
-        int indexOfKey = this.mRedactions.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            return ((Double) this.mRedactions.valueAt(indexOfKey)).doubleValue();
+        int iIndexOfKey = this.mRedactions.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            return ((Double) this.mRedactions.valueAt(iIndexOfKey)).doubleValue();
         }
         return super.getDouble(i);
     }
 
     @Override // android.database.CursorWrapper, android.database.Cursor
     public float getFloat(int i) {
-        int indexOfKey = this.mRedactions.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            return ((Float) this.mRedactions.valueAt(indexOfKey)).floatValue();
+        int iIndexOfKey = this.mRedactions.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            return ((Float) this.mRedactions.valueAt(iIndexOfKey)).floatValue();
         }
         return super.getFloat(i);
     }
 
     @Override // android.database.CursorWrapper, android.database.Cursor
     public int getInt(int i) {
-        int indexOfKey = this.mRedactions.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            return ((Integer) this.mRedactions.valueAt(indexOfKey)).intValue();
+        int iIndexOfKey = this.mRedactions.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            return ((Integer) this.mRedactions.valueAt(iIndexOfKey)).intValue();
         }
         return super.getInt(i);
     }
 
     @Override // android.database.CursorWrapper, android.database.Cursor
     public long getLong(int i) {
-        int indexOfKey = this.mRedactions.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            return ((Long) this.mRedactions.valueAt(indexOfKey)).longValue();
+        int iIndexOfKey = this.mRedactions.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            return ((Long) this.mRedactions.valueAt(iIndexOfKey)).longValue();
         }
         return super.getLong(i);
     }
 
     @Override // android.database.CursorWrapper, android.database.Cursor
     public short getShort(int i) {
-        int indexOfKey = this.mRedactions.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            return ((Short) this.mRedactions.valueAt(indexOfKey)).shortValue();
+        int iIndexOfKey = this.mRedactions.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            return ((Short) this.mRedactions.valueAt(iIndexOfKey)).shortValue();
         }
         return super.getShort(i);
     }
 
     @Override // android.database.CursorWrapper, android.database.Cursor
     public String getString(int i) {
-        int indexOfKey = this.mRedactions.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            return (String) this.mRedactions.valueAt(indexOfKey);
+        int iIndexOfKey = this.mRedactions.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            return (String) this.mRedactions.valueAt(iIndexOfKey);
         }
         return super.getString(i);
     }
 
     @Override // android.database.CursorWrapper, android.database.Cursor
     public void copyStringToBuffer(int i, CharArrayBuffer charArrayBuffer) {
-        int indexOfKey = this.mRedactions.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            charArrayBuffer.data = ((String) this.mRedactions.valueAt(indexOfKey)).toCharArray();
+        int iIndexOfKey = this.mRedactions.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            charArrayBuffer.data = ((String) this.mRedactions.valueAt(iIndexOfKey)).toCharArray();
             charArrayBuffer.sizeCopied = charArrayBuffer.data.length;
         } else {
             super.copyStringToBuffer(i, charArrayBuffer);
@@ -105,27 +105,27 @@ public class RedactingCursor extends CrossProcessCursorWrapper {
 
     @Override // android.database.CursorWrapper, android.database.Cursor
     public byte[] getBlob(int i) {
-        int indexOfKey = this.mRedactions.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            return (byte[]) this.mRedactions.valueAt(indexOfKey);
+        int iIndexOfKey = this.mRedactions.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            return (byte[]) this.mRedactions.valueAt(iIndexOfKey);
         }
         return super.getBlob(i);
     }
 
     @Override // android.database.CursorWrapper, android.database.Cursor
     public int getType(int i) {
-        int indexOfKey = this.mRedactions.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            return DatabaseUtils.getTypeOfObject(this.mRedactions.valueAt(indexOfKey));
+        int iIndexOfKey = this.mRedactions.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            return DatabaseUtils.getTypeOfObject(this.mRedactions.valueAt(iIndexOfKey));
         }
         return super.getType(i);
     }
 
     @Override // android.database.CursorWrapper, android.database.Cursor
     public boolean isNull(int i) {
-        int indexOfKey = this.mRedactions.indexOfKey(i);
-        if (indexOfKey >= 0) {
-            return this.mRedactions.valueAt(indexOfKey) == null;
+        int iIndexOfKey = this.mRedactions.indexOfKey(i);
+        if (iIndexOfKey >= 0) {
+            return this.mRedactions.valueAt(iIndexOfKey) == null;
         }
         return super.isNull(i);
     }

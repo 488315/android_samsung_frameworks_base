@@ -30,7 +30,6 @@ import com.android.systemui.util.ViewController;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSCustomizerController extends ViewController {
     public final ConfigurationController mConfigurationController;
@@ -82,7 +81,7 @@ public class QSCustomizerController extends ViewController {
         };
         this.mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.qs.customize.QSCustomizerController.3
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onConfigChanged(Configuration configuration) {
+            public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
                 QSCustomizerController qSCustomizerController = QSCustomizerController.this;
                 ((QSCustomizer) ((ViewController) qSCustomizerController).mView).updateNavBackDrop(configuration, qSCustomizerController.mLightBarController);
                 QSCustomizer qSCustomizer2 = (QSCustomizer) ((ViewController) qSCustomizerController).mView;
@@ -165,7 +164,7 @@ public class QSCustomizerController extends ViewController {
         this.mToolbar.setNavigationOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.customize.QSCustomizerController$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSCustomizerController.this.hide(true);
+                this.f$0.hide(true);
             }
         });
     }

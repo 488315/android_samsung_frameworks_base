@@ -27,18 +27,18 @@ public class ChildZygoteProcess extends ZygoteProcess {
         if (this.mDead.get()) {
             return true;
         }
-        StrictMode.ThreadPolicy allowThreadDiskReads = StrictMode.allowThreadDiskReads();
+        StrictMode.ThreadPolicy threadPolicyAllowThreadDiskReads = StrictMode.allowThreadDiskReads();
         try {
             if (Os.stat("/proc/" + this.mPid).st_uid == this.mUid) {
-                StrictMode.setThreadPolicy(allowThreadDiskReads);
+                StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
                 return false;
             }
         } catch (ErrnoException unused) {
         } catch (Throwable th) {
-            StrictMode.setThreadPolicy(allowThreadDiskReads);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
             throw th;
         }
-        StrictMode.setThreadPolicy(allowThreadDiskReads);
+        StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
         this.mDead.set(true);
         return true;
     }

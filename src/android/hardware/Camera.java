@@ -4,6 +4,7 @@ import android.app.ActivityThread;
 import android.companion.virtual.VirtualDeviceManager;
 import android.content.AttributionSource;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
@@ -211,17 +212,17 @@ public class Camera {
     }
 
     public static int getNumberOfCameras(Context context) {
-        AttributionSource.ScopedParcelState asScopedParcelState = context.getAttributionSource().asScopedParcelState();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = context.getAttributionSource().asScopedParcelState();
         try {
-            int _getNumberOfCameras = _getNumberOfCameras(asScopedParcelState.getParcel(), getDevicePolicyFromContext(context));
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            int i_getNumberOfCameras = _getNumberOfCameras(scopedParcelStateAsScopedParcelState.getParcel(), getDevicePolicyFromContext(context));
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
-            return _getNumberOfCameras;
+            return i_getNumberOfCameras;
         } catch (Throwable th) {
-            if (asScopedParcelState != null) {
+            if (scopedParcelStateAsScopedParcelState != null) {
                 try {
-                    asScopedParcelState.close();
+                    scopedParcelStateAsScopedParcelState.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -236,11 +237,11 @@ public class Camera {
     }
 
     public static void getCameraInfo(int i, Context context, int i2, CameraInfo cameraInfo) {
-        AttributionSource.ScopedParcelState asScopedParcelState = context.getAttributionSource().asScopedParcelState();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = context.getAttributionSource().asScopedParcelState();
         try {
-            _getCameraInfo(i, i2, asScopedParcelState.getParcel(), getDevicePolicyFromContext(context), cameraInfo);
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            _getCameraInfo(i, i2, scopedParcelStateAsScopedParcelState.getParcel(), getDevicePolicyFromContext(context), cameraInfo);
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
             try {
                 if (IAudioService.Stub.asInterface(ServiceManager.getService("audio")).isCameraSoundForced()) {
@@ -250,9 +251,9 @@ public class Camera {
                 Log.e("Camera", "Audio service is unavailable for queries");
             }
         } catch (Throwable th) {
-            if (asScopedParcelState != null) {
+            if (scopedParcelStateAsScopedParcelState != null) {
                 try {
-                    asScopedParcelState.close();
+                    scopedParcelStateAsScopedParcelState.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -297,7 +298,7 @@ public class Camera {
         return open(i);
     }
 
-    private int cameraInit(int i, Context context, int i2) {
+    private int cameraInit(int i, Context context, int i2) throws Resources.NotFoundException {
         this.mShutterCallback = null;
         this.mRawImageCallback = null;
         this.mJpegCallback = null;
@@ -305,9 +306,9 @@ public class Camera {
         this.mPostviewCallback = null;
         this.mUsingPreviewAllocation = false;
         this.mZoomListener = null;
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null) {
-            this.mEventHandler = new EventHandler(this, myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null) {
+            this.mEventHandler = new EventHandler(this, looperMyLooper);
         } else {
             Looper mainLooper = Looper.getMainLooper();
             if (mainLooper != null) {
@@ -316,19 +317,19 @@ public class Camera {
                 this.mEventHandler = null;
             }
         }
-        boolean shouldForceSlowJpegMode = shouldForceSlowJpegMode();
-        AttributionSource.ScopedParcelState asScopedParcelState = context.getAttributionSource().asScopedParcelState();
+        boolean zShouldForceSlowJpegMode = shouldForceSlowJpegMode();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = context.getAttributionSource().asScopedParcelState();
         try {
-            int native_setup = native_setup(new WeakReference(this), i, i2, shouldForceSlowJpegMode, asScopedParcelState.getParcel(), getDevicePolicyFromContext(context));
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            int iNative_setup = native_setup(new WeakReference(this), i, i2, zShouldForceSlowJpegMode, scopedParcelStateAsScopedParcelState.getParcel(), getDevicePolicyFromContext(context));
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
-            return native_setup;
+            return iNative_setup;
         } finally {
         }
     }
 
-    private boolean shouldForceSlowJpegMode() {
+    private boolean shouldForceSlowJpegMode() throws Resources.NotFoundException {
         Context applicationContext = ActivityThread.currentApplication().getApplicationContext();
         String[] stringArray = applicationContext.getResources().getStringArray(R.array.config_forceSlowJpegModeList);
         String packageName = applicationContext.getPackageName();
@@ -340,14 +341,14 @@ public class Camera {
         return false;
     }
 
-    Camera(int i, Context context, int i2) {
+    Camera(int i, Context context, int i2) throws Resources.NotFoundException {
         Objects.requireNonNull(context);
-        int cameraInit = cameraInit(i, context, i2);
-        if (checkInitErrors(cameraInit)) {
-            if (cameraInit == (-OsConstants.EACCES)) {
+        int iCameraInit = cameraInit(i, context, i2);
+        if (checkInitErrors(iCameraInit)) {
+            if (iCameraInit == (-OsConstants.EACCES)) {
                 throw new RuntimeException("Fail to connect to camera service");
             }
-            if (cameraInit == (-OsConstants.ENODEV)) {
+            if (iCameraInit == (-OsConstants.ENODEV)) {
                 throw new RuntimeException("Camera initialization failed");
             }
             throw new RuntimeException("Unknown camera error");
@@ -612,27 +613,27 @@ public class Camera {
     }
 
     public final boolean enableShutterSound(boolean z) {
-        boolean _enableShutterSound;
-        boolean z2 = true;
+        boolean z_enableShutterSound;
+        boolean zIsCameraSoundForced = true;
         try {
-            z2 = true ^ IAudioService.Stub.asInterface(ServiceManager.getService("audio")).isCameraSoundForced();
+            zIsCameraSoundForced = true ^ IAudioService.Stub.asInterface(ServiceManager.getService("audio")).isCameraSoundForced();
         } catch (RemoteException unused) {
             Log.e("Camera", "Audio service is unavailable for queries");
         }
-        if (!z && !z2) {
+        if (!z && !zIsCameraSoundForced) {
             return false;
         }
         synchronized (this.mShutterSoundLock) {
             this.mShutterSoundEnabledFromApp = z;
-            _enableShutterSound = _enableShutterSound(z);
+            z_enableShutterSound = _enableShutterSound(z);
             if (z && !this.mHasAppOpsPlayAudio) {
                 Log.i("Camera", "Shutter sound is not allowed by AppOpsManager");
-                if (z2) {
+                if (zIsCameraSoundForced) {
                     _enableShutterSound(false);
                 }
             }
         }
-        return _enableShutterSound;
+        return z_enableShutterSound;
     }
 
     public final boolean disableShutterSound() {
@@ -969,9 +970,9 @@ public class Camera {
             TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(';');
             simpleStringSplitter.setString(str);
             for (String str2 : simpleStringSplitter) {
-                int indexOf = str2.indexOf(61);
-                if (indexOf != -1) {
-                    this.mMap.put(str2.substring(0, indexOf), str2.substring(indexOf + 1));
+                int iIndexOf = str2.indexOf(61);
+                if (iIndexOf != -1) {
+                    this.mMap.put(str2.substring(0, iIndexOf), str2.substring(iIndexOf + 1));
                 }
             }
         }
@@ -1116,11 +1117,11 @@ public class Camera {
         }
 
         public void setPreviewFormat(int i) {
-            String cameraFormatForPixelFormat = cameraFormatForPixelFormat(i);
-            if (cameraFormatForPixelFormat == null) {
+            String strCameraFormatForPixelFormat = cameraFormatForPixelFormat(i);
+            if (strCameraFormatForPixelFormat == null) {
                 throw new IllegalArgumentException("Invalid pixel_format=" + i);
             }
-            set(KEY_PREVIEW_FORMAT, cameraFormatForPixelFormat);
+            set(KEY_PREVIEW_FORMAT, strCameraFormatForPixelFormat);
         }
 
         public int getPreviewFormat() {
@@ -1132,9 +1133,9 @@ public class Camera {
             ArrayList arrayList = new ArrayList();
             Iterator<String> it = split(str).iterator();
             while (it.hasNext()) {
-                int pixelFormatForCameraFormat = pixelFormatForCameraFormat(it.next());
-                if (pixelFormatForCameraFormat != 0) {
-                    arrayList.add(Integer.valueOf(pixelFormatForCameraFormat));
+                int iPixelFormatForCameraFormat = pixelFormatForCameraFormat(it.next());
+                if (iPixelFormatForCameraFormat != 0) {
+                    arrayList.add(Integer.valueOf(iPixelFormatForCameraFormat));
                 }
             }
             return arrayList;
@@ -1153,11 +1154,11 @@ public class Camera {
         }
 
         public void setPictureFormat(int i) {
-            String cameraFormatForPixelFormat = cameraFormatForPixelFormat(i);
-            if (cameraFormatForPixelFormat == null) {
+            String strCameraFormatForPixelFormat = cameraFormatForPixelFormat(i);
+            if (strCameraFormatForPixelFormat == null) {
                 throw new IllegalArgumentException("Invalid pixel_format=" + i);
             }
-            set(KEY_PICTURE_FORMAT, cameraFormatForPixelFormat);
+            set(KEY_PICTURE_FORMAT, strCameraFormatForPixelFormat);
         }
 
         public int getPictureFormat() {
@@ -1169,9 +1170,9 @@ public class Camera {
             ArrayList arrayList = new ArrayList();
             Iterator<String> it = split(str).iterator();
             while (it.hasNext()) {
-                int pixelFormatForCameraFormat = pixelFormatForCameraFormat(it.next());
-                if (pixelFormatForCameraFormat != 0) {
-                    arrayList.add(Integer.valueOf(pixelFormatForCameraFormat));
+                int iPixelFormatForCameraFormat = pixelFormatForCameraFormat(it.next());
+                if (iPixelFormatForCameraFormat != 0) {
+                    arrayList.add(Integer.valueOf(iPixelFormatForCameraFormat));
                 }
             }
             return arrayList;
@@ -1552,9 +1553,9 @@ public class Camera {
             ArrayList<Size> arrayList = new ArrayList<>();
             Iterator<String> it = simpleStringSplitter.iterator();
             while (it.hasNext()) {
-                Size strToSize = strToSize(it.next());
-                if (strToSize != null) {
-                    arrayList.add(strToSize);
+                Size sizeStrToSize = strToSize(it.next());
+                if (sizeStrToSize != null) {
+                    arrayList.add(sizeStrToSize);
                 }
             }
             if (arrayList.size() == 0) {
@@ -1567,16 +1568,16 @@ public class Camera {
             if (str == null) {
                 return null;
             }
-            int indexOf = str.indexOf(120);
-            if (indexOf != -1) {
-                return new Size(Camera.this, Integer.parseInt(str.substring(0, indexOf)), Integer.parseInt(str.substring(indexOf + 1)));
+            int iIndexOf = str.indexOf(120);
+            if (iIndexOf != -1) {
+                return new Size(Camera.this, Integer.parseInt(str.substring(0, iIndexOf)), Integer.parseInt(str.substring(iIndexOf + 1)));
             }
             Log.e("Camera", "Invalid size parameter string=" + str);
             return null;
         }
 
         private ArrayList<int[]> splitRange(String str) {
-            int indexOf;
+            int iIndexOf;
             if (str == null || str.charAt(0) != '(' || str.charAt(str.length() - 1) != ')') {
                 Log.e("Camera", "Invalid range list string=" + str);
                 return null;
@@ -1585,14 +1586,14 @@ public class Camera {
             int i = 1;
             do {
                 int[] iArr = new int[2];
-                indexOf = str.indexOf("),(", i);
-                if (indexOf == -1) {
-                    indexOf = str.length() - 1;
+                iIndexOf = str.indexOf("),(", i);
+                if (iIndexOf == -1) {
+                    iIndexOf = str.length() - 1;
                 }
-                splitInt(str.substring(i, indexOf), iArr);
+                splitInt(str.substring(i, iIndexOf), iArr);
                 arrayList.add(iArr);
-                i = indexOf + 3;
-            } while (indexOf != str.length() - 1);
+                i = iIndexOf + 3;
+            } while (iIndexOf != str.length() - 1);
             if (arrayList.size() == 0) {
                 return null;
             }
@@ -1600,7 +1601,7 @@ public class Camera {
         }
 
         private ArrayList<Area> splitArea(String str) {
-            int indexOf;
+            int iIndexOf;
             if (str == null || str.charAt(0) != '(' || str.charAt(str.length() - 1) != ')') {
                 Log.e("Camera", "Invalid area string=" + str);
                 return null;
@@ -1609,14 +1610,14 @@ public class Camera {
             int[] iArr = new int[5];
             int i = 1;
             do {
-                indexOf = str.indexOf("),(", i);
-                if (indexOf == -1) {
-                    indexOf = str.length() - 1;
+                iIndexOf = str.indexOf("),(", i);
+                if (iIndexOf == -1) {
+                    iIndexOf = str.length() - 1;
                 }
-                splitInt(str.substring(i, indexOf), iArr);
+                splitInt(str.substring(i, iIndexOf), iArr);
                 arrayList.add(new Area(new Rect(iArr[0], iArr[1], iArr[2], iArr[3]), iArr[4]));
-                i = indexOf + 3;
-            } while (indexOf != str.length() - 1);
+                i = iIndexOf + 3;
+            } while (iIndexOf != str.length() - 1);
             if (arrayList.size() == 0) {
                 return null;
             }

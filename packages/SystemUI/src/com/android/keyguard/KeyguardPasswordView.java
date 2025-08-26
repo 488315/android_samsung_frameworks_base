@@ -25,7 +25,6 @@ import com.android.internal.widget.TextViewInputDisabler;
 import com.android.keyguard.KeyguardPasswordView;
 import com.android.systemui.DejankUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardPasswordView extends KeyguardSecAbsKeyInputView {
     public static final int[] DISABLE_STATE_SET = {-16842910};
@@ -168,7 +167,6 @@ public class KeyguardPasswordView extends KeyguardSecAbsKeyInputView {
         };
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardPasswordView$2, reason: invalid class name */
     public class AnonymousClass2 implements WindowInsetsAnimationControlListener {
         public final /* synthetic */ Runnable val$finishRunnable;
@@ -190,35 +188,34 @@ public class KeyguardPasswordView extends KeyguardSecAbsKeyInputView {
 
         @Override // android.view.WindowInsetsAnimationControlListener
         public final void onReady(final WindowInsetsAnimationController windowInsetsAnimationController, int i) {
-            final ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardPasswordView$2$$ExternalSyntheticLambda0
+            final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardPasswordView$2$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    KeyguardPasswordView.AnonymousClass2 anonymousClass2 = KeyguardPasswordView.AnonymousClass2.this;
+                    KeyguardPasswordView.AnonymousClass2 anonymousClass2 = this.f$0;
                     WindowInsetsAnimationController windowInsetsAnimationController2 = windowInsetsAnimationController;
-                    ValueAnimator valueAnimator2 = ofFloat;
+                    ValueAnimator valueAnimator2 = valueAnimatorOfFloat;
                     anonymousClass2.getClass();
                     if (windowInsetsAnimationController2.isCancelled()) {
                         return;
                     }
-                    float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                    float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                     float animatedFraction = valueAnimator2.getAnimatedFraction();
-                    Insets add = Insets.add(windowInsetsAnimationController2.getShownStateInsets(), Insets.of(0, 0, 0, (int) (((-r2.bottom) / 4) * animatedFraction)));
+                    Insets insetsAdd = Insets.add(windowInsetsAnimationController2.getShownStateInsets(), Insets.of(0, 0, 0, (int) (((-r2.bottom) / 4) * animatedFraction)));
                     KeyguardSecurityContainer$$ExternalSyntheticLambda2 keyguardSecurityContainer$$ExternalSyntheticLambda2 = KeyguardPasswordView.this.mDisappearAnimationListener;
                     if (keyguardSecurityContainer$$ExternalSyntheticLambda2 != null) {
                         keyguardSecurityContainer$$ExternalSyntheticLambda2.f$0.setTranslationY(-r3);
                     }
-                    windowInsetsAnimationController2.setInsetsAndAlpha(add, floatValue, animatedFraction);
-                    KeyguardPasswordView.this.setAlpha(floatValue);
+                    windowInsetsAnimationController2.setInsetsAndAlpha(insetsAdd, fFloatValue, animatedFraction);
+                    KeyguardPasswordView.this.setAlpha(fFloatValue);
                 }
             });
-            ofFloat.addListener(new AnonymousClass1(windowInsetsAnimationController));
-            ofFloat.setDuration(100L);
-            ofFloat.setInterpolator(Interpolators.FAST_OUT_LINEAR_IN);
-            ofFloat.start();
+            valueAnimatorOfFloat.addListener(new AnonymousClass1(windowInsetsAnimationController));
+            valueAnimatorOfFloat.setDuration(100L);
+            valueAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_LINEAR_IN);
+            valueAnimatorOfFloat.start();
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.keyguard.KeyguardPasswordView$2$1, reason: invalid class name */
         public class AnonymousClass1 extends AnimatorListenerAdapter {
             public static final /* synthetic */ int $r8$clinit = 0;
@@ -235,7 +232,7 @@ public class KeyguardPasswordView extends KeyguardSecAbsKeyInputView {
                 DejankUtils.postAfterTraversal(new Runnable() { // from class: com.android.keyguard.KeyguardPasswordView$2$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardPasswordView.AnonymousClass2.AnonymousClass1 anonymousClass1 = KeyguardPasswordView.AnonymousClass2.AnonymousClass1.this;
+                        KeyguardPasswordView.AnonymousClass2.AnonymousClass1 anonymousClass1 = this.f$0;
                         WindowInsetsAnimationController windowInsetsAnimationController2 = windowInsetsAnimationController;
                         Runnable runnable2 = runnable;
                         int i = KeyguardPasswordView.AnonymousClass2.AnonymousClass1.$r8$clinit;

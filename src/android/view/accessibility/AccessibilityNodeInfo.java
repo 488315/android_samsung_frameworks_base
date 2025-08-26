@@ -29,6 +29,7 @@ import com.android.internal.R;
 import com.android.internal.util.BitUtils;
 import com.android.internal.util.CollectionUtils;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.Duration;
@@ -392,12 +393,12 @@ public class AccessibilityNodeInfo implements Parcelable {
     }
 
     public boolean refresh(Bundle bundle, boolean z) {
-        AccessibilityNodeInfo findAccessibilityNodeInfoByAccessibilityId;
+        AccessibilityNodeInfo accessibilityNodeInfoFindAccessibilityNodeInfoByAccessibilityId;
         enforceSealed();
-        if (!canPerformRequestOverConnection(this.mConnectionId, this.mWindowId, this.mSourceNodeId) || (findAccessibilityNodeInfoByAccessibilityId = AccessibilityInteractionClient.getInstance().findAccessibilityNodeInfoByAccessibilityId(this.mConnectionId, this.mWindowId, this.mSourceNodeId, z, 0, bundle)) == null) {
+        if (!canPerformRequestOverConnection(this.mConnectionId, this.mWindowId, this.mSourceNodeId) || (accessibilityNodeInfoFindAccessibilityNodeInfoByAccessibilityId = AccessibilityInteractionClient.getInstance().findAccessibilityNodeInfoByAccessibilityId(this.mConnectionId, this.mWindowId, this.mSourceNodeId, z, 0, bundle)) == null) {
             return false;
         }
-        init(findAccessibilityNodeInfoByAccessibilityId);
+        init(accessibilityNodeInfoFindAccessibilityNodeInfoByAccessibilityId);
         return true;
     }
 
@@ -486,12 +487,12 @@ public class AccessibilityNodeInfo implements Parcelable {
         if (this.mChildNodeIds == null || (iBinder2 = this.mLeashedChild) == null || !iBinder2.equals(iBinder)) {
             return false;
         }
-        int indexOf = this.mChildNodeIds.indexOf(LEASHED_NODE_ID);
+        int iIndexOf = this.mChildNodeIds.indexOf(LEASHED_NODE_ID);
         this.mLeashedChild = null;
-        if (indexOf < 0) {
+        if (iIndexOf < 0) {
             return false;
         }
-        this.mChildNodeIds.remove(indexOf);
+        this.mChildNodeIds.remove(iIndexOf);
         return true;
     }
 
@@ -504,11 +505,11 @@ public class AccessibilityNodeInfo implements Parcelable {
         if (this.mChildNodeIds == null) {
             this.mChildNodeIds = new LongArray();
         }
-        long makeNodeId = makeNodeId(view != null ? view.getAccessibilityViewId() : Integer.MAX_VALUE, i);
-        if (makeNodeId == this.mSourceNodeId) {
+        long jMakeNodeId = makeNodeId(view != null ? view.getAccessibilityViewId() : Integer.MAX_VALUE, i);
+        if (jMakeNodeId == this.mSourceNodeId) {
             Log.e(TAG, "Rejecting attempt to make a View its own child");
-        } else if (!z || this.mChildNodeIds.indexOf(makeNodeId) < 0) {
-            this.mChildNodeIds.add(makeNodeId);
+        } else if (!z || this.mChildNodeIds.indexOf(jMakeNodeId) < 0) {
+            this.mChildNodeIds.add(jMakeNodeId);
         }
     }
 
@@ -518,11 +519,11 @@ public class AccessibilityNodeInfo implements Parcelable {
         if (longArray == null) {
             return false;
         }
-        int indexOf = longArray.indexOf(makeNodeId(view != null ? view.getAccessibilityViewId() : Integer.MAX_VALUE, i));
-        if (indexOf < 0) {
+        int iIndexOf = longArray.indexOf(makeNodeId(view != null ? view.getAccessibilityViewId() : Integer.MAX_VALUE, i));
+        if (iIndexOf < 0) {
             return false;
         }
-        longArray.remove(indexOf);
+        longArray.remove(iIndexOf);
         return true;
     }
 
@@ -1300,9 +1301,9 @@ public class AccessibilityNodeInfo implements Parcelable {
         if (this.mLabeledByIds == null) {
             this.mLabeledByIds = new LongArray();
         }
-        long makeNodeId = makeNodeId(view.getAccessibilityViewId(), i);
-        this.mLabeledById = makeNodeId;
-        this.mLabeledByIds.add(makeNodeId);
+        long jMakeNodeId = makeNodeId(view.getAccessibilityViewId(), i);
+        this.mLabeledById = jMakeNodeId;
+        this.mLabeledByIds.add(jMakeNodeId);
     }
 
     public List<AccessibilityNodeInfo> getLabeledByList() {
@@ -1326,15 +1327,15 @@ public class AccessibilityNodeInfo implements Parcelable {
         if (longArray == null) {
             return false;
         }
-        long makeNodeId = makeNodeId(view != null ? view.getAccessibilityViewId() : Integer.MAX_VALUE, i);
-        if (this.mLabeledById == makeNodeId) {
+        long jMakeNodeId = makeNodeId(view != null ? view.getAccessibilityViewId() : Integer.MAX_VALUE, i);
+        if (this.mLabeledById == jMakeNodeId) {
             this.mLabeledById = UNDEFINED_NODE_ID;
         }
-        int indexOf = longArray.indexOf(makeNodeId);
-        if (indexOf < 0) {
+        int iIndexOf = longArray.indexOf(jMakeNodeId);
+        if (iIndexOf < 0) {
             return false;
         }
-        longArray.remove(indexOf);
+        longArray.remove(iIndexOf);
         return true;
     }
 
@@ -1588,181 +1589,181 @@ public class AccessibilityNodeInfo implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         writeToParcelNoRecycle(parcel, i);
     }
 
-    public void writeToParcelNoRecycle(Parcel parcel, int i) {
-        boolean isSealed = isSealed();
+    public void writeToParcelNoRecycle(Parcel parcel, int i) throws IOException {
+        boolean zIsSealed = isSealed();
         AccessibilityNodeInfo accessibilityNodeInfo = DEFAULT;
-        long bitAt = isSealed != accessibilityNodeInfo.isSealed() ? BitUtils.bitAt(0) : 0L;
+        long jBitAt = zIsSealed != accessibilityNodeInfo.isSealed() ? BitUtils.bitAt(0) : 0L;
         if (this.mSourceNodeId != accessibilityNodeInfo.mSourceNodeId) {
-            bitAt |= BitUtils.bitAt(1);
+            jBitAt |= BitUtils.bitAt(1);
         }
         if (this.mWindowId != accessibilityNodeInfo.mWindowId) {
-            bitAt |= BitUtils.bitAt(2);
+            jBitAt |= BitUtils.bitAt(2);
         }
         if (this.mParentNodeId != accessibilityNodeInfo.mParentNodeId) {
-            bitAt |= BitUtils.bitAt(3);
+            jBitAt |= BitUtils.bitAt(3);
         }
         if (this.mLabelForId != accessibilityNodeInfo.mLabelForId) {
-            bitAt |= BitUtils.bitAt(4);
+            jBitAt |= BitUtils.bitAt(4);
         }
         if (this.mLabeledById != accessibilityNodeInfo.mLabeledById) {
-            bitAt |= BitUtils.bitAt(5);
+            jBitAt |= BitUtils.bitAt(5);
         }
         if (!LongArray.elementsEqual(this.mLabeledByIds, accessibilityNodeInfo.mLabeledByIds)) {
-            bitAt |= BitUtils.bitAt(6);
+            jBitAt |= BitUtils.bitAt(6);
         }
         if (this.mTraversalBefore != accessibilityNodeInfo.mTraversalBefore) {
-            bitAt |= BitUtils.bitAt(7);
+            jBitAt |= BitUtils.bitAt(7);
         }
         if (this.mTraversalAfter != accessibilityNodeInfo.mTraversalAfter) {
-            bitAt |= BitUtils.bitAt(8);
+            jBitAt |= BitUtils.bitAt(8);
         }
         if (this.mMinDurationBetweenContentChanges != accessibilityNodeInfo.mMinDurationBetweenContentChanges) {
-            bitAt |= BitUtils.bitAt(9);
+            jBitAt |= BitUtils.bitAt(9);
         }
         if (this.mConnectionId != accessibilityNodeInfo.mConnectionId) {
-            bitAt |= BitUtils.bitAt(10);
+            jBitAt |= BitUtils.bitAt(10);
         }
         if (!LongArray.elementsEqual(this.mChildNodeIds, accessibilityNodeInfo.mChildNodeIds)) {
-            bitAt |= BitUtils.bitAt(11);
+            jBitAt |= BitUtils.bitAt(11);
         }
         if (!Objects.equals(this.mBoundsInParent, accessibilityNodeInfo.mBoundsInParent)) {
-            bitAt |= BitUtils.bitAt(12);
+            jBitAt |= BitUtils.bitAt(12);
         }
         if (!Objects.equals(this.mBoundsInScreen, accessibilityNodeInfo.mBoundsInScreen)) {
-            bitAt |= BitUtils.bitAt(13);
+            jBitAt |= BitUtils.bitAt(13);
         }
         if (!Objects.equals(this.mBoundsInWindow, accessibilityNodeInfo.mBoundsInWindow)) {
-            bitAt |= BitUtils.bitAt(14);
+            jBitAt |= BitUtils.bitAt(14);
         }
         if (!Objects.equals(this.mActions, accessibilityNodeInfo.mActions)) {
-            bitAt |= BitUtils.bitAt(15);
+            jBitAt |= BitUtils.bitAt(15);
         }
         if (this.mMaxTextLength != accessibilityNodeInfo.mMaxTextLength) {
-            bitAt |= BitUtils.bitAt(16);
+            jBitAt |= BitUtils.bitAt(16);
         }
         if (this.mMovementGranularities != accessibilityNodeInfo.mMovementGranularities) {
-            bitAt |= BitUtils.bitAt(17);
+            jBitAt |= BitUtils.bitAt(17);
         }
         if (this.mBooleanProperties != accessibilityNodeInfo.mBooleanProperties) {
-            bitAt |= BitUtils.bitAt(18);
+            jBitAt |= BitUtils.bitAt(18);
         }
         if (!Objects.equals(this.mPackageName, accessibilityNodeInfo.mPackageName)) {
-            bitAt |= BitUtils.bitAt(19);
+            jBitAt |= BitUtils.bitAt(19);
         }
         if (!Objects.equals(this.mClassName, accessibilityNodeInfo.mClassName)) {
-            bitAt |= BitUtils.bitAt(20);
+            jBitAt |= BitUtils.bitAt(20);
         }
         if (!Objects.equals(this.mText, accessibilityNodeInfo.mText)) {
-            bitAt |= BitUtils.bitAt(21);
+            jBitAt |= BitUtils.bitAt(21);
         }
         if (!Objects.equals(this.mHintText, accessibilityNodeInfo.mHintText)) {
-            bitAt |= BitUtils.bitAt(22);
+            jBitAt |= BitUtils.bitAt(22);
         }
         if (!Objects.equals(this.mError, accessibilityNodeInfo.mError)) {
-            bitAt |= BitUtils.bitAt(23);
+            jBitAt |= BitUtils.bitAt(23);
         }
         if (!Objects.equals(this.mStateDescription, accessibilityNodeInfo.mStateDescription)) {
-            bitAt |= BitUtils.bitAt(24);
+            jBitAt |= BitUtils.bitAt(24);
         }
         if (!Objects.equals(this.mContentDescription, accessibilityNodeInfo.mContentDescription)) {
-            bitAt |= BitUtils.bitAt(25);
+            jBitAt |= BitUtils.bitAt(25);
         }
         if (!Objects.equals(this.mSupplementalDescription, accessibilityNodeInfo.mSupplementalDescription)) {
-            bitAt |= BitUtils.bitAt(26);
+            jBitAt |= BitUtils.bitAt(26);
         }
         if (!Objects.equals(this.mPaneTitle, accessibilityNodeInfo.mPaneTitle)) {
-            bitAt |= BitUtils.bitAt(27);
+            jBitAt |= BitUtils.bitAt(27);
         }
         if (!Objects.equals(this.mTooltipText, accessibilityNodeInfo.mTooltipText)) {
-            bitAt |= BitUtils.bitAt(28);
+            jBitAt |= BitUtils.bitAt(28);
         }
         if (!Objects.equals(this.mContainerTitle, accessibilityNodeInfo.mContainerTitle)) {
-            bitAt |= BitUtils.bitAt(29);
+            jBitAt |= BitUtils.bitAt(29);
         }
         if (!Objects.equals(this.mViewIdResourceName, accessibilityNodeInfo.mViewIdResourceName)) {
-            bitAt |= BitUtils.bitAt(30);
+            jBitAt |= BitUtils.bitAt(30);
         }
         if (!Objects.equals(this.mUniqueId, accessibilityNodeInfo.mUniqueId)) {
-            bitAt |= BitUtils.bitAt(31);
+            jBitAt |= BitUtils.bitAt(31);
         }
         if (this.mTextSelectionStart != accessibilityNodeInfo.mTextSelectionStart) {
-            bitAt |= BitUtils.bitAt(32);
+            jBitAt |= BitUtils.bitAt(32);
         }
         if (this.mTextSelectionEnd != accessibilityNodeInfo.mTextSelectionEnd) {
-            bitAt |= BitUtils.bitAt(33);
+            jBitAt |= BitUtils.bitAt(33);
         }
         if (this.mInputType != accessibilityNodeInfo.mInputType) {
-            bitAt |= BitUtils.bitAt(34);
+            jBitAt |= BitUtils.bitAt(34);
         }
         if (this.mLiveRegion != accessibilityNodeInfo.mLiveRegion) {
-            bitAt |= BitUtils.bitAt(35);
+            jBitAt |= BitUtils.bitAt(35);
         }
         if (this.mDrawingOrderInParent != accessibilityNodeInfo.mDrawingOrderInParent) {
-            bitAt |= BitUtils.bitAt(36);
+            jBitAt |= BitUtils.bitAt(36);
         }
         if (!Objects.equals(this.mExtraDataKeys, accessibilityNodeInfo.mExtraDataKeys)) {
-            bitAt |= BitUtils.bitAt(37);
+            jBitAt |= BitUtils.bitAt(37);
         }
         if (!Objects.equals(this.mExtras, accessibilityNodeInfo.mExtras)) {
-            bitAt |= BitUtils.bitAt(38);
+            jBitAt |= BitUtils.bitAt(38);
         }
         if (!Objects.equals(this.mRangeInfo, accessibilityNodeInfo.mRangeInfo)) {
-            bitAt |= BitUtils.bitAt(39);
+            jBitAt |= BitUtils.bitAt(39);
         }
         if (!Objects.equals(this.mCollectionInfo, accessibilityNodeInfo.mCollectionInfo)) {
-            bitAt |= BitUtils.bitAt(40);
+            jBitAt |= BitUtils.bitAt(40);
         }
         if (!Objects.equals(this.mCollectionItemInfo, accessibilityNodeInfo.mCollectionItemInfo)) {
-            bitAt |= BitUtils.bitAt(41);
+            jBitAt |= BitUtils.bitAt(41);
         }
         if (!Objects.equals(this.mTouchDelegateInfo, accessibilityNodeInfo.mTouchDelegateInfo)) {
-            bitAt |= BitUtils.bitAt(42);
+            jBitAt |= BitUtils.bitAt(42);
         }
         if (!Objects.equals(this.mExtraRenderingInfo, accessibilityNodeInfo.mExtraRenderingInfo)) {
-            bitAt |= BitUtils.bitAt(43);
+            jBitAt |= BitUtils.bitAt(43);
         }
         if (this.mLeashedChild != accessibilityNodeInfo.mLeashedChild) {
-            bitAt |= BitUtils.bitAt(44);
+            jBitAt |= BitUtils.bitAt(44);
         }
         if (this.mLeashedParent != accessibilityNodeInfo.mLeashedParent) {
-            bitAt |= BitUtils.bitAt(45);
+            jBitAt |= BitUtils.bitAt(45);
         }
         if (this.mLeashedParentNodeId != accessibilityNodeInfo.mLeashedParentNodeId) {
-            bitAt |= BitUtils.bitAt(46);
+            jBitAt |= BitUtils.bitAt(46);
         }
         if (!Objects.equals(this.mSelection, accessibilityNodeInfo.mSelection)) {
-            bitAt |= BitUtils.bitAt(47);
+            jBitAt |= BitUtils.bitAt(47);
         }
         if (this.mChecked != accessibilityNodeInfo.mChecked) {
-            bitAt |= BitUtils.bitAt(48);
+            jBitAt |= BitUtils.bitAt(48);
         }
         if (this.mExpandedState != accessibilityNodeInfo.mExpandedState) {
-            bitAt |= BitUtils.bitAt(49);
+            jBitAt |= BitUtils.bitAt(49);
         }
-        parcel.writeLong(bitAt);
-        if (BitUtils.isBitSet(bitAt, 0)) {
+        parcel.writeLong(jBitAt);
+        if (BitUtils.isBitSet(jBitAt, 0)) {
             parcel.writeInt(isSealed() ? 1 : 0);
         }
-        if (BitUtils.isBitSet(bitAt, 1)) {
+        if (BitUtils.isBitSet(jBitAt, 1)) {
             parcel.writeLong(this.mSourceNodeId);
         }
-        if (BitUtils.isBitSet(bitAt, 2)) {
+        if (BitUtils.isBitSet(jBitAt, 2)) {
             parcel.writeInt(this.mWindowId);
         }
-        if (BitUtils.isBitSet(bitAt, 3)) {
+        if (BitUtils.isBitSet(jBitAt, 3)) {
             parcel.writeLong(this.mParentNodeId);
         }
-        if (BitUtils.isBitSet(bitAt, 4)) {
+        if (BitUtils.isBitSet(jBitAt, 4)) {
             parcel.writeLong(this.mLabelForId);
         }
-        if (BitUtils.isBitSet(bitAt, 5)) {
+        if (BitUtils.isBitSet(jBitAt, 5)) {
             parcel.writeLong(this.mLabeledById);
         }
-        if (BitUtils.isBitSet(bitAt, 6)) {
+        if (BitUtils.isBitSet(jBitAt, 6)) {
             LongArray longArray = this.mLabeledByIds;
             if (longArray == null) {
                 parcel.writeInt(0);
@@ -1774,19 +1775,19 @@ public class AccessibilityNodeInfo implements Parcelable {
                 }
             }
         }
-        if (BitUtils.isBitSet(bitAt, 7)) {
+        if (BitUtils.isBitSet(jBitAt, 7)) {
             parcel.writeLong(this.mTraversalBefore);
         }
-        if (BitUtils.isBitSet(bitAt, 8)) {
+        if (BitUtils.isBitSet(jBitAt, 8)) {
             parcel.writeLong(this.mTraversalAfter);
         }
-        if (BitUtils.isBitSet(bitAt, 9)) {
+        if (BitUtils.isBitSet(jBitAt, 9)) {
             parcel.writeLong(this.mMinDurationBetweenContentChanges);
         }
-        if (BitUtils.isBitSet(bitAt, 10)) {
+        if (BitUtils.isBitSet(jBitAt, 10)) {
             parcel.writeInt(this.mConnectionId);
         }
-        if (BitUtils.isBitSet(bitAt, 11)) {
+        if (BitUtils.isBitSet(jBitAt, 11)) {
             LongArray longArray2 = this.mChildNodeIds;
             if (longArray2 == null) {
                 parcel.writeInt(0);
@@ -1798,25 +1799,25 @@ public class AccessibilityNodeInfo implements Parcelable {
                 }
             }
         }
-        if (BitUtils.isBitSet(bitAt, 12)) {
+        if (BitUtils.isBitSet(jBitAt, 12)) {
             parcel.writeInt(this.mBoundsInParent.top);
             parcel.writeInt(this.mBoundsInParent.bottom);
             parcel.writeInt(this.mBoundsInParent.left);
             parcel.writeInt(this.mBoundsInParent.right);
         }
-        if (BitUtils.isBitSet(bitAt, 13)) {
+        if (BitUtils.isBitSet(jBitAt, 13)) {
             parcel.writeInt(this.mBoundsInScreen.top);
             parcel.writeInt(this.mBoundsInScreen.bottom);
             parcel.writeInt(this.mBoundsInScreen.left);
             parcel.writeInt(this.mBoundsInScreen.right);
         }
-        if (BitUtils.isBitSet(bitAt, 14)) {
+        if (BitUtils.isBitSet(jBitAt, 14)) {
             parcel.writeInt(this.mBoundsInWindow.top);
             parcel.writeInt(this.mBoundsInWindow.bottom);
             parcel.writeInt(this.mBoundsInWindow.left);
             parcel.writeInt(this.mBoundsInWindow.right);
         }
-        if (BitUtils.isBitSet(bitAt, 15)) {
+        if (BitUtils.isBitSet(jBitAt, 15)) {
             ArrayList<AccessibilityAction> arrayList = this.mActions;
             if (arrayList != null && !arrayList.isEmpty()) {
                 int size3 = this.mActions.size();
@@ -1843,82 +1844,82 @@ public class AccessibilityNodeInfo implements Parcelable {
                 parcel.writeInt(0);
             }
         }
-        if (BitUtils.isBitSet(bitAt, 16)) {
+        if (BitUtils.isBitSet(jBitAt, 16)) {
             parcel.writeInt(this.mMaxTextLength);
         }
-        if (BitUtils.isBitSet(bitAt, 17)) {
+        if (BitUtils.isBitSet(jBitAt, 17)) {
             parcel.writeInt(this.mMovementGranularities);
         }
-        if (BitUtils.isBitSet(bitAt, 18)) {
+        if (BitUtils.isBitSet(jBitAt, 18)) {
             parcel.writeInt(this.mBooleanProperties);
         }
-        if (BitUtils.isBitSet(bitAt, 19)) {
+        if (BitUtils.isBitSet(jBitAt, 19)) {
             parcel.writeCharSequence(this.mPackageName);
         }
-        if (BitUtils.isBitSet(bitAt, 20)) {
+        if (BitUtils.isBitSet(jBitAt, 20)) {
             parcel.writeCharSequence(this.mClassName);
         }
-        if (BitUtils.isBitSet(bitAt, 21)) {
+        if (BitUtils.isBitSet(jBitAt, 21)) {
             parcel.writeCharSequence(this.mText);
         }
-        if (BitUtils.isBitSet(bitAt, 22)) {
+        if (BitUtils.isBitSet(jBitAt, 22)) {
             parcel.writeCharSequence(this.mHintText);
         }
-        if (BitUtils.isBitSet(bitAt, 23)) {
+        if (BitUtils.isBitSet(jBitAt, 23)) {
             parcel.writeCharSequence(this.mError);
         }
-        if (BitUtils.isBitSet(bitAt, 24)) {
+        if (BitUtils.isBitSet(jBitAt, 24)) {
             parcel.writeCharSequence(this.mStateDescription);
         }
-        if (BitUtils.isBitSet(bitAt, 25)) {
+        if (BitUtils.isBitSet(jBitAt, 25)) {
             parcel.writeCharSequence(this.mContentDescription);
         }
-        if (BitUtils.isBitSet(bitAt, 26)) {
+        if (BitUtils.isBitSet(jBitAt, 26)) {
             parcel.writeCharSequence(this.mSupplementalDescription);
         }
-        if (BitUtils.isBitSet(bitAt, 27)) {
+        if (BitUtils.isBitSet(jBitAt, 27)) {
             parcel.writeCharSequence(this.mPaneTitle);
         }
-        if (BitUtils.isBitSet(bitAt, 28)) {
+        if (BitUtils.isBitSet(jBitAt, 28)) {
             parcel.writeCharSequence(this.mTooltipText);
         }
-        if (BitUtils.isBitSet(bitAt, 29)) {
+        if (BitUtils.isBitSet(jBitAt, 29)) {
             parcel.writeCharSequence(this.mContainerTitle);
         }
-        if (BitUtils.isBitSet(bitAt, 30)) {
+        if (BitUtils.isBitSet(jBitAt, 30)) {
             parcel.writeString(this.mViewIdResourceName);
         }
-        if (BitUtils.isBitSet(bitAt, 31)) {
+        if (BitUtils.isBitSet(jBitAt, 31)) {
             parcel.writeString(this.mUniqueId);
         }
-        if (BitUtils.isBitSet(bitAt, 32)) {
+        if (BitUtils.isBitSet(jBitAt, 32)) {
             parcel.writeInt(this.mTextSelectionStart);
         }
-        if (BitUtils.isBitSet(bitAt, 33)) {
+        if (BitUtils.isBitSet(jBitAt, 33)) {
             parcel.writeInt(this.mTextSelectionEnd);
         }
-        if (BitUtils.isBitSet(bitAt, 34)) {
+        if (BitUtils.isBitSet(jBitAt, 34)) {
             parcel.writeInt(this.mInputType);
         }
-        if (BitUtils.isBitSet(bitAt, 35)) {
+        if (BitUtils.isBitSet(jBitAt, 35)) {
             parcel.writeInt(this.mLiveRegion);
         }
-        if (BitUtils.isBitSet(bitAt, 36)) {
+        if (BitUtils.isBitSet(jBitAt, 36)) {
             parcel.writeInt(this.mDrawingOrderInParent);
         }
-        if (BitUtils.isBitSet(bitAt, 37)) {
+        if (BitUtils.isBitSet(jBitAt, 37)) {
             parcel.writeStringList(this.mExtraDataKeys);
         }
-        if (BitUtils.isBitSet(bitAt, 38)) {
+        if (BitUtils.isBitSet(jBitAt, 38)) {
             parcel.writeBundle(this.mExtras);
         }
-        if (BitUtils.isBitSet(bitAt, 39)) {
+        if (BitUtils.isBitSet(jBitAt, 39)) {
             parcel.writeInt(this.mRangeInfo.getType());
             parcel.writeFloat(this.mRangeInfo.getMin());
             parcel.writeFloat(this.mRangeInfo.getMax());
             parcel.writeFloat(this.mRangeInfo.getCurrent());
         }
-        if (BitUtils.isBitSet(bitAt, 40)) {
+        if (BitUtils.isBitSet(jBitAt, 40)) {
             parcel.writeInt(this.mCollectionInfo.getRowCount());
             parcel.writeInt(this.mCollectionInfo.getColumnCount());
             parcel.writeInt(this.mCollectionInfo.isHierarchical() ? 1 : 0);
@@ -1926,7 +1927,7 @@ public class AccessibilityNodeInfo implements Parcelable {
             parcel.writeInt(this.mCollectionInfo.getItemCount());
             parcel.writeInt(this.mCollectionInfo.getImportantForAccessibilityItemCount());
         }
-        if (BitUtils.isBitSet(bitAt, 41)) {
+        if (BitUtils.isBitSet(jBitAt, 41)) {
             parcel.writeString(this.mCollectionItemInfo.getRowTitle());
             parcel.writeInt(this.mCollectionItemInfo.getRowIndex());
             parcel.writeInt(this.mCollectionItemInfo.getRowSpan());
@@ -1936,30 +1937,30 @@ public class AccessibilityNodeInfo implements Parcelable {
             parcel.writeInt(this.mCollectionItemInfo.isHeading() ? 1 : 0);
             parcel.writeInt(this.mCollectionItemInfo.isSelected() ? 1 : 0);
         }
-        if (BitUtils.isBitSet(bitAt, 42)) {
+        if (BitUtils.isBitSet(jBitAt, 42)) {
             this.mTouchDelegateInfo.writeToParcel(parcel, i);
         }
-        if (BitUtils.isBitSet(bitAt, 43)) {
+        if (BitUtils.isBitSet(jBitAt, 43)) {
             parcel.writeValue(this.mExtraRenderingInfo.getLayoutSize());
             parcel.writeFloat(this.mExtraRenderingInfo.getTextSizeInPx());
             parcel.writeInt(this.mExtraRenderingInfo.getTextSizeUnit());
         }
-        if (BitUtils.isBitSet(bitAt, 44)) {
+        if (BitUtils.isBitSet(jBitAt, 44)) {
             parcel.writeStrongBinder(this.mLeashedChild);
         }
-        if (BitUtils.isBitSet(bitAt, 45)) {
+        if (BitUtils.isBitSet(jBitAt, 45)) {
             parcel.writeStrongBinder(this.mLeashedParent);
         }
-        if (BitUtils.isBitSet(bitAt, 46)) {
+        if (BitUtils.isBitSet(jBitAt, 46)) {
             parcel.writeLong(this.mLeashedParentNodeId);
         }
-        if (BitUtils.isBitSet(bitAt, 47)) {
+        if (BitUtils.isBitSet(jBitAt, 47)) {
             this.mSelection.writeToParcel(parcel, i);
         }
-        if (BitUtils.isBitSet(bitAt, 48)) {
+        if (BitUtils.isBitSet(jBitAt, 48)) {
             parcel.writeInt(this.mChecked);
         }
-        if (BitUtils.isBitSet(bitAt, 49)) {
+        if (BitUtils.isBitSet(jBitAt, 49)) {
             parcel.writeInt(this.mExpandedState);
         }
     }
@@ -2017,7 +2018,7 @@ public class AccessibilityNodeInfo implements Parcelable {
         if (longArray2 != null && longArray2.size() > 0) {
             LongArray longArray3 = this.mChildNodeIds;
             if (longArray3 == null) {
-                this.mChildNodeIds = longArray2.m5506clone();
+                this.mChildNodeIds = longArray2.m5513clone();
             } else {
                 longArray3.addAll(longArray2);
             }
@@ -2057,196 +2058,197 @@ public class AccessibilityNodeInfo implements Parcelable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
+    /* JADX WARN: Multi-variable type inference failed */
     public void initFromParcel(Parcel parcel) {
         boolean z;
         CollectionInfo collectionInfo;
         CollectionItemInfo collectionItemInfo;
-        long readLong = parcel.readLong();
-        if (BitUtils.isBitSet(readLong, 0)) {
+        long j = parcel.readLong();
+        if (BitUtils.isBitSet(j, 0)) {
             z = parcel.readInt() == 1;
         } else {
             z = DEFAULT.mSealed;
         }
-        if (BitUtils.isBitSet(readLong, 1)) {
+        if (BitUtils.isBitSet(j, 1)) {
             this.mSourceNodeId = parcel.readLong();
         }
-        if (BitUtils.isBitSet(readLong, 2)) {
+        if (BitUtils.isBitSet(j, 2)) {
             this.mWindowId = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 3)) {
+        if (BitUtils.isBitSet(j, 3)) {
             this.mParentNodeId = parcel.readLong();
         }
-        if (BitUtils.isBitSet(readLong, 4)) {
+        if (BitUtils.isBitSet(j, 4)) {
             this.mLabelForId = parcel.readLong();
         }
-        if (BitUtils.isBitSet(readLong, 5)) {
+        if (BitUtils.isBitSet(j, 5)) {
             this.mLabeledById = parcel.readLong();
         }
         ExtraRenderingInfo extraRenderingInfo = null;
-        byte b = 0;
-        if (BitUtils.isBitSet(readLong, 6)) {
-            int readInt = parcel.readInt();
-            if (readInt <= 0) {
+        Object[] objArr = 0;
+        if (BitUtils.isBitSet(j, 6)) {
+            int i = parcel.readInt();
+            if (i <= 0) {
                 this.mLabeledByIds = null;
             } else {
-                this.mLabeledByIds = new LongArray(readInt);
-                for (int i = 0; i < readInt; i++) {
+                this.mLabeledByIds = new LongArray(i);
+                for (int i2 = 0; i2 < i; i2++) {
                     this.mLabeledByIds.add(parcel.readLong());
                 }
             }
         }
-        if (BitUtils.isBitSet(readLong, 7)) {
+        if (BitUtils.isBitSet(j, 7)) {
             this.mTraversalBefore = parcel.readLong();
         }
-        if (BitUtils.isBitSet(readLong, 8)) {
+        if (BitUtils.isBitSet(j, 8)) {
             this.mTraversalAfter = parcel.readLong();
         }
-        if (BitUtils.isBitSet(readLong, 9)) {
+        if (BitUtils.isBitSet(j, 9)) {
             this.mMinDurationBetweenContentChanges = parcel.readLong();
         }
-        if (BitUtils.isBitSet(readLong, 10)) {
+        if (BitUtils.isBitSet(j, 10)) {
             this.mConnectionId = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 11)) {
-            int readInt2 = parcel.readInt();
-            if (readInt2 <= 0) {
+        if (BitUtils.isBitSet(j, 11)) {
+            int i3 = parcel.readInt();
+            if (i3 <= 0) {
                 this.mChildNodeIds = null;
             } else {
-                this.mChildNodeIds = new LongArray(readInt2);
-                for (int i2 = 0; i2 < readInt2; i2++) {
+                this.mChildNodeIds = new LongArray(i3);
+                for (int i4 = 0; i4 < i3; i4++) {
                     this.mChildNodeIds.add(parcel.readLong());
                 }
             }
         }
-        if (BitUtils.isBitSet(readLong, 12)) {
+        if (BitUtils.isBitSet(j, 12)) {
             this.mBoundsInParent.top = parcel.readInt();
             this.mBoundsInParent.bottom = parcel.readInt();
             this.mBoundsInParent.left = parcel.readInt();
             this.mBoundsInParent.right = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 13)) {
+        if (BitUtils.isBitSet(j, 13)) {
             this.mBoundsInScreen.top = parcel.readInt();
             this.mBoundsInScreen.bottom = parcel.readInt();
             this.mBoundsInScreen.left = parcel.readInt();
             this.mBoundsInScreen.right = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 14)) {
+        if (BitUtils.isBitSet(j, 14)) {
             this.mBoundsInWindow.top = parcel.readInt();
             this.mBoundsInWindow.bottom = parcel.readInt();
             this.mBoundsInWindow.left = parcel.readInt();
             this.mBoundsInWindow.right = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 15)) {
+        if (BitUtils.isBitSet(j, 15)) {
             addStandardActions(parcel.readLong());
-            int readInt3 = parcel.readInt();
-            for (int i3 = 0; i3 < readInt3; i3++) {
+            int i5 = parcel.readInt();
+            for (int i6 = 0; i6 < i5; i6++) {
                 addActionUnchecked(AccessibilityAction.CREATOR.createFromParcel(parcel));
             }
         }
-        if (BitUtils.isBitSet(readLong, 16)) {
+        if (BitUtils.isBitSet(j, 16)) {
             this.mMaxTextLength = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 17)) {
+        if (BitUtils.isBitSet(j, 17)) {
             this.mMovementGranularities = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 18)) {
+        if (BitUtils.isBitSet(j, 18)) {
             this.mBooleanProperties = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 19)) {
+        if (BitUtils.isBitSet(j, 19)) {
             this.mPackageName = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 20)) {
+        if (BitUtils.isBitSet(j, 20)) {
             this.mClassName = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 21)) {
+        if (BitUtils.isBitSet(j, 21)) {
             this.mText = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 22)) {
+        if (BitUtils.isBitSet(j, 22)) {
             this.mHintText = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 23)) {
+        if (BitUtils.isBitSet(j, 23)) {
             this.mError = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 24)) {
+        if (BitUtils.isBitSet(j, 24)) {
             this.mStateDescription = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 25)) {
+        if (BitUtils.isBitSet(j, 25)) {
             this.mContentDescription = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 26)) {
+        if (BitUtils.isBitSet(j, 26)) {
             this.mSupplementalDescription = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 27)) {
+        if (BitUtils.isBitSet(j, 27)) {
             this.mPaneTitle = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 28)) {
+        if (BitUtils.isBitSet(j, 28)) {
             this.mTooltipText = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 29)) {
+        if (BitUtils.isBitSet(j, 29)) {
             this.mContainerTitle = parcel.readCharSequence();
         }
-        if (BitUtils.isBitSet(readLong, 30)) {
+        if (BitUtils.isBitSet(j, 30)) {
             this.mViewIdResourceName = parcel.readString();
         }
-        if (BitUtils.isBitSet(readLong, 31)) {
+        if (BitUtils.isBitSet(j, 31)) {
             this.mUniqueId = parcel.readString();
         }
-        if (BitUtils.isBitSet(readLong, 32)) {
+        if (BitUtils.isBitSet(j, 32)) {
             this.mTextSelectionStart = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 33)) {
+        if (BitUtils.isBitSet(j, 33)) {
             this.mTextSelectionEnd = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 34)) {
+        if (BitUtils.isBitSet(j, 34)) {
             this.mInputType = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 35)) {
+        if (BitUtils.isBitSet(j, 35)) {
             this.mLiveRegion = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 36)) {
+        if (BitUtils.isBitSet(j, 36)) {
             this.mDrawingOrderInParent = parcel.readInt();
         }
-        this.mExtraDataKeys = BitUtils.isBitSet(readLong, 37) ? parcel.createStringArrayList() : null;
-        this.mExtras = BitUtils.isBitSet(readLong, 38) ? parcel.readBundle() : null;
-        this.mRangeInfo = BitUtils.isBitSet(readLong, 39) ? new RangeInfo(parcel.readInt(), parcel.readFloat(), parcel.readFloat(), parcel.readFloat()) : null;
-        if (BitUtils.isBitSet(readLong, 40)) {
+        this.mExtraDataKeys = BitUtils.isBitSet(j, 37) ? parcel.createStringArrayList() : null;
+        this.mExtras = BitUtils.isBitSet(j, 38) ? parcel.readBundle() : null;
+        this.mRangeInfo = BitUtils.isBitSet(j, 39) ? new RangeInfo(parcel.readInt(), parcel.readFloat(), parcel.readFloat(), parcel.readFloat()) : null;
+        if (BitUtils.isBitSet(j, 40)) {
             collectionInfo = new CollectionInfo(parcel.readInt(), parcel.readInt(), parcel.readInt() == 1, parcel.readInt(), parcel.readInt(), parcel.readInt());
         } else {
             collectionInfo = null;
         }
         this.mCollectionInfo = collectionInfo;
-        if (BitUtils.isBitSet(readLong, 41)) {
+        if (BitUtils.isBitSet(j, 41)) {
             collectionItemInfo = new CollectionItemInfo(parcel.readString(), parcel.readInt(), parcel.readInt(), parcel.readString(), parcel.readInt(), parcel.readInt(), parcel.readInt() == 1, parcel.readInt() == 1);
         } else {
             collectionItemInfo = null;
         }
         this.mCollectionItemInfo = collectionItemInfo;
-        if (BitUtils.isBitSet(readLong, 42)) {
+        if (BitUtils.isBitSet(j, 42)) {
             this.mTouchDelegateInfo = TouchDelegateInfo.CREATOR.createFromParcel(parcel);
         }
-        if (BitUtils.isBitSet(readLong, 43)) {
+        if (BitUtils.isBitSet(j, 43)) {
             ExtraRenderingInfo extraRenderingInfo2 = new ExtraRenderingInfo(extraRenderingInfo);
             this.mExtraRenderingInfo = extraRenderingInfo2;
             extraRenderingInfo2.mLayoutSize = (Size) parcel.readValue(null);
             this.mExtraRenderingInfo.mTextSizeInPx = parcel.readFloat();
             this.mExtraRenderingInfo.mTextSizeUnit = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 44)) {
+        if (BitUtils.isBitSet(j, 44)) {
             this.mLeashedChild = parcel.readStrongBinder();
         }
-        if (BitUtils.isBitSet(readLong, 45)) {
+        if (BitUtils.isBitSet(j, 45)) {
             this.mLeashedParent = parcel.readStrongBinder();
         }
-        if (BitUtils.isBitSet(readLong, 46)) {
+        if (BitUtils.isBitSet(j, 46)) {
             this.mLeashedParentNodeId = parcel.readLong();
         }
-        if (BitUtils.isBitSet(readLong, 47)) {
+        if (BitUtils.isBitSet(j, 47)) {
             this.mSelection = Selection.CREATOR.createFromParcel(parcel);
         }
-        if (BitUtils.isBitSet(readLong, 48)) {
+        if (BitUtils.isBitSet(j, 48)) {
             this.mChecked = parcel.readInt();
         }
-        if (BitUtils.isBitSet(readLong, 49)) {
+        if (BitUtils.isBitSet(j, 49)) {
             this.mExpandedState = parcel.readInt();
         }
         this.mSealed = z;
@@ -2263,9 +2265,9 @@ public class AccessibilityNodeInfo implements Parcelable {
     private static AccessibilityAction getActionSingleton(int i) {
         int size = AccessibilityAction.sStandardActions.size();
         for (int i2 = 0; i2 < size; i2++) {
-            AccessibilityAction valueAt = AccessibilityAction.sStandardActions.valueAt(i2);
-            if (i == valueAt.getId()) {
-                return valueAt;
+            AccessibilityAction accessibilityActionValueAt = AccessibilityAction.sStandardActions.valueAt(i2);
+            if (i == accessibilityActionValueAt.getId()) {
+                return accessibilityActionValueAt;
             }
         }
         return null;
@@ -2274,9 +2276,9 @@ public class AccessibilityNodeInfo implements Parcelable {
     private static AccessibilityAction getActionSingletonBySerializationFlag(long j) {
         int size = AccessibilityAction.sStandardActions.size();
         for (int i = 0; i < size; i++) {
-            AccessibilityAction valueAt = AccessibilityAction.sStandardActions.valueAt(i);
-            if (j == valueAt.mSerializationFlag) {
-                return valueAt;
+            AccessibilityAction accessibilityActionValueAt = AccessibilityAction.sStandardActions.valueAt(i);
+            if (j == accessibilityActionValueAt.mSerializationFlag) {
+                return accessibilityActionValueAt;
             }
         }
         return null;
@@ -2284,9 +2286,9 @@ public class AccessibilityNodeInfo implements Parcelable {
 
     private void addStandardActions(long j) {
         while (j > 0) {
-            long numberOfTrailingZeros = 1 << Long.numberOfTrailingZeros(j);
-            j &= ~numberOfTrailingZeros;
-            addAction(getActionSingletonBySerializationFlag(numberOfTrailingZeros));
+            long jNumberOfTrailingZeros = 1 << Long.numberOfTrailingZeros(j);
+            j &= ~jNumberOfTrailingZeros;
+            addAction(getActionSingletonBySerializationFlag(jNumberOfTrailingZeros));
         }
     }
 
@@ -2461,9 +2463,9 @@ public class AccessibilityNodeInfo implements Parcelable {
             int i = this.mMovementGranularities;
             sb.append("; MovementGranularities: [");
             while (i != 0) {
-                int numberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
-                i &= ~numberOfTrailingZeros;
-                sb.append(getMovementGranularitySymbolicName(numberOfTrailingZeros));
+                int iNumberOfTrailingZeros = 1 << Integer.numberOfTrailingZeros(i);
+                i &= ~iNumberOfTrailingZeros;
+                sb.append(getMovementGranularitySymbolicName(iNumberOfTrailingZeros));
                 if (i != 0) {
                     sb.append(", ");
                 }
@@ -3233,12 +3235,12 @@ public class AccessibilityNodeInfo implements Parcelable {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public TouchDelegateInfo createFromParcel(Parcel parcel) {
-                int readInt = parcel.readInt();
-                if (readInt == 0) {
+                int i = parcel.readInt();
+                if (i == 0) {
                     return null;
                 }
-                ArrayMap arrayMap = new ArrayMap(readInt);
-                for (int i = 0; i < readInt; i++) {
+                ArrayMap arrayMap = new ArrayMap(i);
+                for (int i2 = 0; i2 < i; i2++) {
                     arrayMap.put(Region.CREATOR.createFromParcel(parcel), Long.valueOf(parcel.readLong()));
                 }
                 return new TouchDelegateInfo(arrayMap, false);
@@ -3309,10 +3311,10 @@ public class AccessibilityNodeInfo implements Parcelable {
         public void writeToParcel(Parcel parcel, int i) {
             parcel.writeInt(this.mTargetMap.size());
             for (int i2 = 0; i2 < this.mTargetMap.size(); i2++) {
-                Region keyAt = this.mTargetMap.keyAt(i2);
-                Long valueAt = this.mTargetMap.valueAt(i2);
-                keyAt.writeToParcel(parcel, i);
-                parcel.writeLong(valueAt.longValue());
+                Region regionKeyAt = this.mTargetMap.keyAt(i2);
+                Long lValueAt = this.mTargetMap.valueAt(i2);
+                regionKeyAt.writeToParcel(parcel, i);
+                parcel.writeLong(lValueAt.longValue());
             }
         }
     }

@@ -47,9 +47,9 @@ public interface IAuditLogEventsCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAuditLogEventsCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAuditLogEventsCallback)) {
-                return (IAuditLogEventsCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAuditLogEventsCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAuditLogEventsCallback)) {
+                return (IAuditLogEventsCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,9 +76,9 @@ public interface IAuditLogEventsCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SecurityLog.SecurityEvent.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SecurityLog.SecurityEvent.CREATOR);
                 parcel.enforceNoDataAvail();
-                onNewAuditLogEvents(createTypedArrayList);
+                onNewAuditLogEvents(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,13 +102,13 @@ public interface IAuditLogEventsCallback extends IInterface {
 
             @Override // android.app.admin.IAuditLogEventsCallback
             public void onNewAuditLogEvents(List<SecurityLog.SecurityEvent> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAuditLogEventsCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAuditLogEventsCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

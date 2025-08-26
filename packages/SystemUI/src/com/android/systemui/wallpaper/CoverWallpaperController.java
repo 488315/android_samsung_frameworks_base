@@ -38,7 +38,6 @@ import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CoverWallpaperController extends IWallpaperManagerCallback.Stub implements CoverWallpaper, PluginWallpaperCallback {
     public static CoverWallpaperController sInstance;
@@ -202,15 +201,15 @@ public class CoverWallpaperController extends IWallpaperManagerCallback.Stub imp
             return false;
         }
         boolean z = this.mPluginWallpaperManager.getHomeCurrentScreen() == 1;
-        boolean isHomeWallpaperRequired = this.mPluginWallpaperManager.isHomeWallpaperRequired(1);
-        boolean isFbeAvailable = isFbeAvailable();
-        boolean z2 = isHomeWallpaperRequired || isFbeAvailable;
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("isCoverWallpaperRequired: ", ", [homeWallpaperReq:", ", isFbeAvailable:", z2, isHomeWallpaperRequired);
-        m.append(isFbeAvailable);
-        m.append(", isSubScreen:");
-        m.append(z);
-        m.append("]");
-        Log.d("CoverWallpaperController", m.toString());
+        boolean zIsHomeWallpaperRequired = this.mPluginWallpaperManager.isHomeWallpaperRequired(1);
+        boolean zIsFbeAvailable = isFbeAvailable();
+        boolean z2 = zIsHomeWallpaperRequired || zIsFbeAvailable;
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("isCoverWallpaperRequired: ", ", [homeWallpaperReq:", ", isFbeAvailable:", z2, zIsHomeWallpaperRequired);
+        sbM.append(zIsFbeAvailable);
+        sbM.append(", isSubScreen:");
+        sbM.append(z);
+        sbM.append("]");
+        Log.d("CoverWallpaperController", sbM.toString());
         return z2;
     }
 
@@ -219,8 +218,8 @@ public class CoverWallpaperController extends IWallpaperManagerCallback.Stub imp
     }
 
     @Override // com.android.systemui.pluginlock.component.PluginWallpaperCallback
-    public final void onDataCleared() {
-        String group;
+    public final void onDataCleared() throws NumberFormatException {
+        String strGroup;
         int coverWhich = getCoverWhich();
         if ((coverWhich & 60) != 0 && this.mWallpaperManager.semGetWallpaperType(coverWhich) == 3) {
             if (this.mMultiPackDispatcher == null) {
@@ -231,17 +230,17 @@ public class CoverWallpaperController extends IWallpaperManagerCallback.Stub imp
                 multiPackDispatcher.getClass();
                 SparseIntArray sparseIntArray = new SparseIntArray();
                 try {
-                    Uri semGetUri = WallpaperManager.getInstance(multiPackDispatcher.mContext).semGetUri(coverWhich);
-                    File[] listFiles = new File("/data/overlays/homewallpaper/" + (semGetUri.getHost() + semGetUri.getPath())).listFiles();
-                    if (listFiles != null && listFiles.length > 0) {
-                        for (File file : listFiles) {
+                    Uri uriSemGetUri = WallpaperManager.getInstance(multiPackDispatcher.mContext).semGetUri(coverWhich);
+                    File[] fileArrListFiles = new File("/data/overlays/homewallpaper/" + (uriSemGetUri.getHost() + uriSemGetUri.getPath())).listFiles();
+                    if (fileArrListFiles != null && fileArrListFiles.length > 0) {
+                        for (File file : fileArrListFiles) {
                             String name = file.getName();
                             if (Pattern.matches("wallpaper_[\\d][.][\\w]+", name)) {
                                 Matcher matcher = Pattern.compile("wallpaper_[\\d][.]").matcher(name);
-                                if (matcher.find() && (group = matcher.group(0)) != null) {
-                                    int parseInt = Integer.parseInt(group.replaceAll("[^0-9]", ""));
+                                if (matcher.find() && (strGroup = matcher.group(0)) != null) {
+                                    int i = Integer.parseInt(strGroup.replaceAll("[^0-9]", ""));
                                     boolean z = (coverWhich & 48) != 0;
-                                    sparseIntArray.append(parseInt, Pattern.matches("^\\S+.(?i)(gif)$", name) ? z ? 22 : 12 : Pattern.matches("^\\S+.(?i)(jpg|jpeg|png)$", name) ? z ? 21 : 11 : z ? 23 : 13);
+                                    sparseIntArray.append(i, Pattern.matches("^\\S+.(?i)(gif)$", name) ? z ? 22 : 12 : Pattern.matches("^\\S+.(?i)(jpg|jpeg|png)$", name) ? z ? 21 : 11 : z ? 23 : 13);
                                 }
                             }
                         }
@@ -273,11 +272,10 @@ public class CoverWallpaperController extends IWallpaperManagerCallback.Stub imp
                 pluginSubScreen.onSemWallpaperChanged(null);
             }
         }
-        if (!WhichChecker.isWatchFace(i2) || i == 3) {
-            return;
+        if ((WhichChecker.isWatchFace(i2) || WhichChecker.isVirtualDisplay(i2)) && i != 3 && isCoverWallpaperRequired()) {
+            this.mWallpaperConsumer = null;
+            this.mPluginWallpaperManager.onHomeWallpaperChanged(1);
         }
-        this.mWallpaperConsumer = null;
-        this.mPluginWallpaperManager.onHomeWallpaperChanged(1);
     }
 
     @Override // com.android.systemui.pluginlock.component.PluginWallpaperCallback

@@ -87,9 +87,9 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
         }
         drawableWrapperState.setDensity(i);
         drawableWrapperState.mSrcDensityOverride = this.mSrcDensityOverride;
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.DrawableWrapper);
-        updateStateFromTypedArray(obtainAttributes);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.DrawableWrapper);
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
         inflateChildDrawable(resources, xmlPullParser, attributeSet, theme);
     }
 
@@ -110,9 +110,9 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
         }
         drawableWrapperState.setDensity(i);
         if (drawableWrapperState.mThemeAttrs != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(drawableWrapperState.mThemeAttrs, R.styleable.DrawableWrapper);
-            updateStateFromTypedArray(resolveAttributes);
-            resolveAttributes.recycle();
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(drawableWrapperState.mThemeAttrs, R.styleable.DrawableWrapper);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            typedArrayResolveAttributes.recycle();
         }
     }
 
@@ -402,17 +402,17 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
 
     private void inflateChildDrawable(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
         int depth = xmlPullParser.getDepth();
-        Drawable drawable = null;
+        Drawable drawableCreateFromXmlInnerForDensity = null;
         while (true) {
             int next = xmlPullParser.next();
             if (next == 1 || (next == 3 && xmlPullParser.getDepth() <= depth)) {
                 break;
             } else if (next == 2) {
-                drawable = Drawable.createFromXmlInnerForDensity(resources, xmlPullParser, attributeSet, this.mState.mSrcDensityOverride, theme);
+                drawableCreateFromXmlInnerForDensity = Drawable.createFromXmlInnerForDensity(resources, xmlPullParser, attributeSet, this.mState.mSrcDensityOverride, theme);
             }
         }
-        if (drawable != null) {
-            setDrawable(drawable);
+        if (drawableCreateFromXmlInnerForDensity != null) {
+            setDrawable(drawableCreateFromXmlInnerForDensity);
         }
     }
 

@@ -58,9 +58,9 @@ public interface IAudioManagerNative extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAudioManagerNative.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAudioManagerNative)) {
-                return (IAudioManagerNative) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAudioManagerNative.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAudioManagerNative)) {
+                return (IAudioManagerNative) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,19 +75,19 @@ public interface IAudioManagerNative extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                byte readByte = parcel.readByte();
-                boolean readBoolean = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                byte b = parcel.readByte();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                playbackHardeningEvent(readInt, readByte, readBoolean);
+                playbackHardeningEvent(i3, b, z);
             } else if (i == 2) {
                 permissionUpdateBarrier();
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                portMuteEvent(readInt2, readInt3);
+                portMuteEvent(i4, i5);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -112,42 +112,42 @@ public interface IAudioManagerNative extends IInterface {
 
             @Override // android.media.IAudioManagerNative
             public void playbackHardeningEvent(int i, byte b, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioManagerNative.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByte(b);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioManagerNative.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioManagerNative
             public void permissionUpdateBarrier() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAudioManagerNative.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAudioManagerNative.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioManagerNative
             public void portMuteEvent(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioManagerNative.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioManagerNative.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

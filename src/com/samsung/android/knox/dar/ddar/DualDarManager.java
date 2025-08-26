@@ -48,8 +48,8 @@ public final class DualDarManager {
             Log.e(TAG, "enableOnDeviceOwner - Already enabled");
             return false;
         }
-        Bundle processCommand = processCommand("ON_DEVICE_OWNER_PROVISIONING", bundle);
-        if (processCommand != null && processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        Bundle bundleProcessCommand = processCommand("ON_DEVICE_OWNER_PROVISIONING", bundle);
+        if (bundleProcessCommand != null && bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             z = true;
         }
         Log.d(TAG, "enableOnDeviceOwner - result : " + z);
@@ -74,8 +74,8 @@ public final class DualDarManager {
         if (!isOnDeviceOwner(i)) {
             return false;
         }
-        Bundle processCommand = processCommand("IS_INNER_LAYER_UNLOCKED", null);
-        if (processCommand != null && processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+        Bundle bundleProcessCommand = processCommand("IS_INNER_LAYER_UNLOCKED", null);
+        if (bundleProcessCommand != null && bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
             z = true;
         }
         Log.d(TAG, "isInnerLayerUnlocked - userId : " + i + ", ret : " + z);
@@ -125,9 +125,9 @@ public final class DualDarManager {
 
     public void ensureDataUnlockedIfRequired() {
         if (isOnDeviceOwnerEnabled()) {
-            Bundle processCommand = processCommand("ENSURE_DATA_UNLOCKED", null);
+            Bundle bundleProcessCommand = processCommand("ENSURE_DATA_UNLOCKED", null);
             boolean z = false;
-            if (processCommand != null && processCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
+            if (bundleProcessCommand != null && bundleProcessCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE, false)) {
                 z = true;
             }
             Log.d(TAG, "ensureDataUnlockedIfRequired - response : " + z);

@@ -10,7 +10,6 @@ import com.android.wm.shell.common.pip.PipDesktopState;
 import com.android.wm.shell.splitscreen.SplitScreenController;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class PipScheduler$$ExternalSyntheticLambda4 implements Runnable {
     public final /* synthetic */ PipScheduler f$0;
@@ -50,7 +49,7 @@ public final /* synthetic */ class PipScheduler$$ExternalSyntheticLambda4 implem
             pipScheduler.mSplitScreenControllerOptional.ifPresent(new Consumer() { // from class: com.android.wm.shell.pip2.phone.PipScheduler$$ExternalSyntheticLambda5
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    PipScheduler pipScheduler2 = PipScheduler.this;
+                    PipScheduler pipScheduler2 = pipScheduler;
                     WindowContainerTransaction windowContainerTransaction3 = windowContainerTransaction2;
                     SplitScreenController splitScreenController = (SplitScreenController) obj;
                     if (splitScreenController.isTaskInSplitScreen$1(pipScheduler2.mPipTransitionState.mPipTaskInfo.lastParentTaskIdBeforePip)) {
@@ -58,11 +57,11 @@ public final /* synthetic */ class PipScheduler$$ExternalSyntheticLambda4 implem
                     }
                 }
             });
-            boolean isEmpty = windowContainerTransaction2.isEmpty();
+            boolean zIsEmpty = windowContainerTransaction2.isEmpty();
             windowContainerTransaction2.merge(windowContainerTransaction, true);
             PipTransition pipTransition = pipScheduler.mPipTransitionController;
             pipTransition.mPipTransitionState.setState(7, null);
-            pipTransition.mExitViaExpandTransition = pipTransition.mTransitions.startTransition(!isEmpty ? 1002 : 1001, windowContainerTransaction2, pipTransition);
+            pipTransition.mExitViaExpandTransition = pipTransition.mTransitions.startTransition(!zIsEmpty ? 1002 : 1001, windowContainerTransaction2, pipTransition);
         }
     }
 }

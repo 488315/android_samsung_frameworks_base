@@ -1,6 +1,7 @@
 package com.android.wm.shell.pip.phone;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Debug;
 import android.os.SemSystemProperties;
@@ -33,7 +34,6 @@ import com.samsung.android.multiwindow.MultiWindowUtils;
 import java.util.HashMap;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingContentCoordinator.FloatingContent {
     public final PhysicsAnimator.SpringConfig mCatchUpSpringConfig;
@@ -99,7 +99,7 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
             @Override // com.android.wm.shell.shared.animation.PhysicsAnimator.UpdateListener
             public final void onAnimationUpdateForProperty(Object obj) {
                 Rect rect = (Rect) obj;
-                PipMotionHelper pipMotionHelper = PipMotionHelper.this;
+                PipMotionHelper pipMotionHelper = this.f$0;
                 PipBoundsState pipBoundsState2 = pipMotionHelper.mPipBoundsState;
                 if (pipBoundsState2.mMotionBoundsState.isInMotion()) {
                     pipMotionHelper.setStashDimOverlayAlpha(rect);
@@ -111,49 +111,48 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
         this.mSizeSpecSource = (PhoneSizeSpecSource) sizeSpecSource;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0062  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void adjustPipBoundsForEdge(Rect rect) {
-        int percentToPixel;
+        int iPercentToPixel;
         PipEdgePanelSupport pipEdgePanelSupport = this.mEdgePanelSupport;
         if (Settings.Secure.getIntForUser(pipEdgePanelSupport.mContext.getContentResolver(), "edge_enable", 1, -2) == 1) {
             PipBoundsState pipBoundsState = this.mPipBoundsState;
-            int height = pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().height();
+            int iHeight = pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().height();
             PipDisplayLayoutState pipDisplayLayoutState = pipBoundsState.mPipDisplayLayoutState;
-            int width = pipDisplayLayoutState.getDisplayBounds().width();
+            int iWidth = pipDisplayLayoutState.getDisplayBounds().width();
             int i = Settings.System.getInt(pipEdgePanelSupport.mContext.getContentResolver(), "active_edge_area", 1);
             int edgeHandlePixelSize = pipEdgePanelSupport.getEdgeHandlePixelSize();
             if (this.mContext.getResources().getConfiguration().orientation == 2) {
                 MultiWindowUtils.isInSubDisplay(pipEdgePanelSupport.mContext);
                 String str = SemSystemProperties.get("ro.build.characteristics");
                 if (str == null || !str.contains("tablet")) {
-                    percentToPixel = 0;
-                    int i2 = edgeHandlePixelSize + percentToPixel;
-                    if ((i == 1 || rect.left <= pipBoundsState.mMovementBounds.centerX()) && (i != 0 || rect.left > pipBoundsState.mMovementBounds.centerX())) {
-                        return;
-                    }
-                    if ((i == 1 ? new Rect(rect.left, rect.top, width, rect.bottom) : new Rect(0, rect.top, rect.right, rect.bottom)).intersect(i == 1 ? new Rect(width - 1, percentToPixel, width, i2) : new Rect(0, percentToPixel, 1, i2))) {
-                        int i3 = pipBoundsState.mPipEdgeMargin;
-                        if (((i2 / 2) + percentToPixel >= (rect.bottom / 2) + rect.top || rect.height() + i2 + i3 >= height) && (percentToPixel - rect.height()) - i3 >= pipDisplayLayoutState.getDisplayLayout().mStableInsets.top) {
-                            int i4 = percentToPixel - i3;
-                            rect.set(rect.left, i4 - rect.height(), rect.right, i4);
-                            return;
-                        } else {
-                            int i5 = i2 + i3;
-                            rect.set(rect.left, i5, rect.right, rect.height() + i5);
-                            return;
-                        }
-                    }
-                    return;
+                    iPercentToPixel = 0;
+                } else {
+                    int edgeHandlePixelSize2 = (int) ((pipEdgePanelSupport.getEdgeHandlePixelSize() / 2.0f) + 0.5f);
+                    iPercentToPixel = (pipEdgePanelSupport.percentToPixel(Settings.System.getFloat(pipEdgePanelSupport.mContext.getContentResolver(), "edge_handler_position_percent", 0.0f)) - edgeHandlePixelSize2) + pipEdgePanelSupport.getUpperMostPosition();
+                    StringBuffer stringBuffer = new StringBuffer("getEdgeHandleMarginOnTop retY=");
+                    stringBuffer.append(iPercentToPixel);
+                    stringBuffer.append(" halfHandleSize=");
+                    stringBuffer.append(edgeHandlePixelSize2);
+                    Log.d("EdgePanelSupport", stringBuffer.toString());
                 }
             }
-            int edgeHandlePixelSize2 = (int) ((pipEdgePanelSupport.getEdgeHandlePixelSize() / 2.0f) + 0.5f);
-            percentToPixel = (pipEdgePanelSupport.percentToPixel(Settings.System.getFloat(pipEdgePanelSupport.mContext.getContentResolver(), "edge_handler_position_percent", 0.0f)) - edgeHandlePixelSize2) + pipEdgePanelSupport.getUpperMostPosition();
-            StringBuffer stringBuffer = new StringBuffer("getEdgeHandleMarginOnTop retY=");
-            stringBuffer.append(percentToPixel);
-            stringBuffer.append(" halfHandleSize=");
-            stringBuffer.append(edgeHandlePixelSize2);
-            Log.d("EdgePanelSupport", stringBuffer.toString());
-            int i22 = edgeHandlePixelSize + percentToPixel;
-            if (i == 1) {
+            int i2 = edgeHandlePixelSize + iPercentToPixel;
+            if ((i != 1 || rect.left <= pipBoundsState.mMovementBounds.centerX()) && (i != 0 || rect.left > pipBoundsState.mMovementBounds.centerX())) {
+                return;
+            }
+            if ((i == 1 ? new Rect(rect.left, rect.top, iWidth, rect.bottom) : new Rect(0, rect.top, rect.right, rect.bottom)).intersect(i == 1 ? new Rect(iWidth - 1, iPercentToPixel, iWidth, i2) : new Rect(0, iPercentToPixel, 1, i2))) {
+                int i3 = pipBoundsState.mPipEdgeMargin;
+                if (((i2 / 2) + iPercentToPixel >= (rect.bottom / 2) + rect.top || rect.height() + i2 + i3 >= iHeight) && (iPercentToPixel - rect.height()) - i3 >= pipDisplayLayoutState.getDisplayLayout().mStableInsets.top) {
+                    int i4 = iPercentToPixel - i3;
+                    rect.set(rect.left, i4 - rect.height(), rect.right, i4);
+                } else {
+                    int i5 = i2 + i3;
+                    rect.set(rect.left, i5, rect.right, rect.height() + i5);
+                }
             }
         }
     }
@@ -196,9 +195,9 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
 
     public final void expandLeavePip$1(boolean z, boolean z2) {
         int i = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("[PipMotionHelper] exitPip: skipAnimation=", " callers=\n", z);
-        m.append(Debug.getCallers(5, "    "));
-        Log.d("PipTaskOrganizer", m.toString());
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("[PipMotionHelper] exitPip: skipAnimation=", " callers=\n", z);
+        sbM.append(Debug.getCallers(5, "    "));
+        Log.d("PipTaskOrganizer", sbM.toString());
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
             ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, -3479890097261691899L, 0, "PipMotionHelper", String.valueOf(z), String.valueOf(Debug.getCallers(5, "    ")));
         }
@@ -313,23 +312,23 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
         float f5 = f;
         PhysicsAnimator physicsAnimator = this.mTemporaryBoundsPhysicsAnimator;
         FloatProperties$Companion$RECT_WIDTH$1 floatProperties$Companion$RECT_WIDTH$1 = FloatProperties.RECT_WIDTH;
-        float width = pipBoundsState.getBounds().width();
+        float fWidth = pipBoundsState.getBounds().width();
         PhysicsAnimator.SpringConfig springConfig = this.mSpringConfig;
-        physicsAnimator.spring(floatProperties$Companion$RECT_WIDTH$1, width, 0.0f, springConfig);
+        physicsAnimator.spring(floatProperties$Companion$RECT_WIDTH$1, fWidth, 0.0f, springConfig);
         physicsAnimator.spring(FloatProperties.RECT_HEIGHT, pipBoundsState.getBounds().height(), 0.0f, springConfig);
         physicsAnimator.flingThenSpring(FloatProperties.RECT_X, f5, z ? this.mStashConfigX : this.mFlingConfigX, this.mSpringConfig, true);
         physicsAnimator.flingThenSpring(FloatProperties.RECT_Y, f3, this.mFlingConfigY, this.mSpringConfig, false);
         PipDisplayLayoutState pipDisplayLayoutState = pipBoundsState.mPipDisplayLayoutState;
         Rect rect3 = pipDisplayLayoutState.getDisplayLayout().mStableInsets;
-        float width2 = z ? (pipBoundsState.mStashOffset - pipBoundsState.getBounds().width()) + rect3.left : pipBoundsState.mMovementBounds.left;
+        float fWidth2 = z ? (pipBoundsState.mStashOffset - pipBoundsState.getBounds().width()) + rect3.left : pipBoundsState.mMovementBounds.left;
         float f6 = z ? (pipDisplayLayoutState.getDisplayBounds().right - pipBoundsState.mStashOffset) - rect3.right : pipBoundsState.mMovementBounds.right;
         if (f5 >= 0.0f) {
-            width2 = f6;
+            fWidth2 = f6;
         }
-        startBoundsAnimator$1(width2, PhysicsAnimator.estimateFlingEndValue(r3.mBoundsInMotion.top, f3, this.mFlingConfigY), runnable);
+        startBoundsAnimator$1(fWidth2, PhysicsAnimator.estimateFlingEndValue(r3.mBoundsInMotion.top, f3, this.mFlingConfigY), runnable);
     }
 
-    public final void resizeAndAnimatePipUnchecked$1(Rect rect) {
+    public final void resizeAndAnimatePipUnchecked$1(Rect rect) throws Resources.NotFoundException {
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
             ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 7199987104712044997L, 0, "PipMotionHelper", String.valueOf(rect), String.valueOf(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend), String.valueOf(Debug.getCallers(5, "    ")));
         }
@@ -339,17 +338,17 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
 
     public final void setStashDimOverlayAlpha(Rect rect) {
         PipBoundsState pipBoundsState = this.mPipBoundsState;
-        boolean contains = pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().contains(rect);
+        boolean zContains = pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().contains(rect);
         PipTaskOrganizer pipTaskOrganizer = this.mPipTaskOrganizer;
-        if (contains) {
+        if (zContains) {
             pipTaskOrganizer.clearStashDimOverlay();
             return;
         }
-        int width = (rect.width() / 2) - pipBoundsState.mStashOffset;
+        int iWidth = (rect.width() / 2) - pipBoundsState.mStashOffset;
         if (rect.right - pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().right >= rect.width() / 2) {
-            pipTaskOrganizer.setStashDimOverlayAlpha(((rect.centerX() - pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().right) * 0.65f) / width);
+            pipTaskOrganizer.setStashDimOverlayAlpha(((rect.centerX() - pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().right) * 0.65f) / iWidth);
         } else if (pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().left - rect.left >= rect.width() / 2) {
-            pipTaskOrganizer.setStashDimOverlayAlpha(((pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().left - rect.centerX()) * 0.65f) / width);
+            pipTaskOrganizer.setStashDimOverlayAlpha(((pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().left - rect.centerX()) * 0.65f) / iWidth);
         }
     }
 
@@ -371,13 +370,13 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
                 physicsAnimator.withEndActions(new Runnable() { // from class: com.android.wm.shell.pip.phone.PipMotionHelper$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PipMotionHelper pipMotionHelper = PipMotionHelper.this;
+                        PipMotionHelper pipMotionHelper = this.f$0;
                         pipMotionHelper.getClass();
                         PipBoundsState pipBoundsState2 = pipMotionHelper.mPipBoundsState;
-                        boolean isEmpty = pipBoundsState2.mMotionBoundsState.mBoundsInMotion.isEmpty();
+                        boolean zIsEmpty = pipBoundsState2.mMotionBoundsState.mBoundsInMotion.isEmpty();
                         PipBoundsState.MotionBoundsState motionBoundsState = pipBoundsState2.mMotionBoundsState;
                         PipTaskOrganizer pipTaskOrganizer = pipMotionHelper.mPipTaskOrganizer;
-                        if (isEmpty) {
+                        if (zIsEmpty) {
                             int i3 = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
                             Log.w("PipTaskOrganizer", "onBoundsPhysicsAnimationEnd PIP empty, setDefaultBounds");
                             motionBoundsState.setBoundsInMotion(pipTaskOrganizer.mPipBoundsAlgorithm.getDefaultBounds());
@@ -400,13 +399,13 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
                 physicsAnimator2.withEndActions(new Runnable() { // from class: com.android.wm.shell.pip.phone.PipMotionHelper$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PipMotionHelper pipMotionHelper = PipMotionHelper.this;
+                        PipMotionHelper pipMotionHelper = this.f$0;
                         pipMotionHelper.getClass();
                         PipBoundsState pipBoundsState2 = pipMotionHelper.mPipBoundsState;
-                        boolean isEmpty = pipBoundsState2.mMotionBoundsState.mBoundsInMotion.isEmpty();
+                        boolean zIsEmpty = pipBoundsState2.mMotionBoundsState.mBoundsInMotion.isEmpty();
                         PipBoundsState.MotionBoundsState motionBoundsState = pipBoundsState2.mMotionBoundsState;
                         PipTaskOrganizer pipTaskOrganizer = pipMotionHelper.mPipTaskOrganizer;
-                        if (isEmpty) {
+                        if (zIsEmpty) {
                             int i3 = PipTaskOrganizer.EXTRA_CONTENT_OVERLAY_FADE_OUT_DELAY_MS;
                             Log.w("PipTaskOrganizer", "onBoundsPhysicsAnimationEnd PIP empty, setDefaultBounds");
                             motionBoundsState.setBoundsInMotion(pipTaskOrganizer.mPipBoundsAlgorithm.getDefaultBounds());

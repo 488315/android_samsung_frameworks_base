@@ -3,13 +3,12 @@ package androidx.compose.runtime;
 import androidx.collection.MutableIntList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PrioritySet {
     public final MutableIntList list;
 
     /* renamed from: add-impl, reason: not valid java name */
-    public static final void m333addimpl(MutableIntList mutableIntList, int i) {
+    public static final void m334addimpl(MutableIntList mutableIntList, int i) {
         if (mutableIntList._size == 0 || !(mutableIntList.get(0) == i || mutableIntList.get(mutableIntList._size - 1) == i)) {
             int i2 = mutableIntList._size;
             mutableIntList.add(i);
@@ -27,7 +26,7 @@ public final class PrioritySet {
     }
 
     /* renamed from: takeMax-impl, reason: not valid java name */
-    public static final int m334takeMaximpl(MutableIntList mutableIntList) {
+    public static final int m335takeMaximpl(MutableIntList mutableIntList) {
         int i;
         int i2 = mutableIntList._size;
         int i3 = mutableIntList.get(0);

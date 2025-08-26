@@ -315,9 +315,9 @@ public interface ICustomFrequencyManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICustomFrequencyManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICustomFrequencyManager)) {
-                return (ICustomFrequencyManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICustomFrequencyManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICustomFrequencyManager)) {
+                return (ICustomFrequencyManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -435,61 +435,61 @@ public interface ICustomFrequencyManager extends IInterface {
                 return true;
             }
             if (i == 48) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                sendCommandToSSRM(readString, readString2);
+                sendCommandToSSRM(string, string2);
             } else if (i == 64) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int batteryRemainingUsageTime = getBatteryRemainingUsageTime(readInt);
+                int batteryRemainingUsageTime = getBatteryRemainingUsageTime(i3);
                 parcel2.writeNoException();
                 parcel2.writeInt(batteryRemainingUsageTime);
             } else if (i == 92) {
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                requestGpis(readInt2, readInt3, readInt4);
+                requestGpis(i4, i5, i6);
             } else if (i == 50) {
-                int readInt5 = parcel.readInt();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int ssrmStatus = getSsrmStatus(readInt5);
+                int ssrmStatus = getSsrmStatus(i7);
                 parcel2.writeNoException();
                 parcel2.writeInt(ssrmStatus);
             } else if (i != 51) {
                 switch (i) {
                     case 13:
-                        String readString3 = parcel.readString();
+                        String string3 = parcel.readString();
                         parcel.enforceNoDataAvail();
-                        requestMpParameterUpdate(readString3);
+                        requestMpParameterUpdate(string3);
                         parcel2.writeNoException();
                         break;
                     case 14:
-                        int readInt6 = parcel.readInt();
-                        int readInt7 = parcel.readInt();
+                        int i8 = parcel.readInt();
+                        int i9 = parcel.readInt();
                         parcel.enforceNoDataAvail();
-                        requestCPUUpdate(readInt6, readInt7);
+                        requestCPUUpdate(i8, i9);
                         parcel2.writeNoException();
                         break;
                     case 15:
-                        int readInt8 = parcel.readInt();
+                        int i10 = parcel.readInt();
                         parcel.enforceNoDataAvail();
-                        mpdUpdate(readInt8);
+                        mpdUpdate(i10);
                         parcel2.writeNoException();
                         break;
                     default:
                         switch (i) {
                             case 73:
-                                boolean readBoolean = parcel.readBoolean();
+                                boolean z = parcel.readBoolean();
                                 parcel.enforceNoDataAvail();
-                                setGamePowerSaving(readBoolean);
+                                setGamePowerSaving(z);
                                 parcel2.writeNoException();
                                 break;
                             case 74:
-                                int readInt9 = parcel.readInt();
+                                int i11 = parcel.readInt();
                                 parcel.enforceNoDataAvail();
-                                setGameFps(readInt9);
+                                setGameFps(i11);
                                 parcel2.writeNoException();
                                 break;
                             case 75:
@@ -498,17 +498,17 @@ public interface ICustomFrequencyManager extends IInterface {
                                 parcel2.writeInt(gameThrottlingLevel);
                                 break;
                             case 76:
-                                boolean readBoolean2 = parcel.readBoolean();
+                                boolean z2 = parcel.readBoolean();
                                 parcel.enforceNoDataAvail();
-                                setGameTurboMode(readBoolean2);
+                                setGameTurboMode(z2);
                                 parcel2.writeNoException();
                                 break;
                             case 77:
-                                String readString4 = parcel.readString();
-                                String readString5 = parcel.readString();
-                                String readString6 = parcel.readString();
+                                String string4 = parcel.readString();
+                                String string5 = parcel.readString();
+                                String string6 = parcel.readString();
                                 parcel.enforceNoDataAvail();
-                                setGameTouchParam(readString4, readString5, readString6);
+                                setGameTouchParam(string4, string5, string6);
                                 parcel2.writeNoException();
                                 break;
                             case 78:
@@ -518,130 +518,130 @@ public interface ICustomFrequencyManager extends IInterface {
                             default:
                                 switch (i) {
                                     case 82:
-                                        int[] createIntArray = parcel.createIntArray();
+                                        int[] iArrCreateIntArray = parcel.createIntArray();
                                         parcel.enforceNoDataAvail();
-                                        CpuTrackerInfo processCpuUsage = getProcessCpuUsage(createIntArray);
+                                        CpuTrackerInfo processCpuUsage = getProcessCpuUsage(iArrCreateIntArray);
                                         parcel2.writeNoException();
                                         parcel2.writeTypedObject(processCpuUsage, 1);
                                         break;
                                     case 83:
-                                        String readString7 = parcel.readString();
-                                        char readInt10 = (char) parcel.readInt();
+                                        String string7 = parcel.readString();
+                                        char c = (char) parcel.readInt();
                                         parcel.enforceNoDataAvail();
-                                        String readFile = readFile(readString7, readInt10);
+                                        String file = readFile(string7, c);
                                         parcel2.writeNoException();
-                                        parcel2.writeString(readFile);
+                                        parcel2.writeString(file);
                                         break;
                                     case 84:
-                                        int readInt11 = parcel.readInt();
+                                        int i12 = parcel.readInt();
                                         parcel.enforceNoDataAvail();
-                                        int addDvfsLockAllowedUid = addDvfsLockAllowedUid(readInt11);
+                                        int iAddDvfsLockAllowedUid = addDvfsLockAllowedUid(i12);
                                         parcel2.writeNoException();
-                                        parcel2.writeInt(addDvfsLockAllowedUid);
+                                        parcel2.writeInt(iAddDvfsLockAllowedUid);
                                         break;
                                     case 85:
-                                        int readInt12 = parcel.readInt();
+                                        int i13 = parcel.readInt();
                                         parcel.enforceNoDataAvail();
-                                        boolean removeDvfsLockAllowedUid = removeDvfsLockAllowedUid(readInt12);
+                                        boolean zRemoveDvfsLockAllowedUid = removeDvfsLockAllowedUid(i13);
                                         parcel2.writeNoException();
-                                        parcel2.writeBoolean(removeDvfsLockAllowedUid);
+                                        parcel2.writeBoolean(zRemoveDvfsLockAllowedUid);
                                         break;
                                     default:
                                         switch (i) {
                                             case 87:
-                                                int readInt13 = parcel.readInt();
-                                                int readInt14 = parcel.readInt();
-                                                int readInt15 = parcel.readInt();
+                                                int i14 = parcel.readInt();
+                                                int i15 = parcel.readInt();
+                                                int i16 = parcel.readInt();
                                                 parcel.enforceNoDataAvail();
-                                                sendDrawingTid(readInt13, readInt14, readInt15);
+                                                sendDrawingTid(i14, i15, i16);
                                                 break;
                                             case 88:
-                                                int readInt16 = parcel.readInt();
-                                                int readInt17 = parcel.readInt();
-                                                boolean readBoolean3 = parcel.readBoolean();
-                                                String readString8 = parcel.readString();
+                                                int i17 = parcel.readInt();
+                                                int i18 = parcel.readInt();
+                                                boolean z3 = parcel.readBoolean();
+                                                String string8 = parcel.readString();
                                                 parcel.enforceNoDataAvail();
-                                                int requestFreezeSlowdown = requestFreezeSlowdown(readInt16, readInt17, readBoolean3, readString8);
+                                                int iRequestFreezeSlowdown = requestFreezeSlowdown(i17, i18, z3, string8);
                                                 parcel2.writeNoException();
-                                                parcel2.writeInt(requestFreezeSlowdown);
+                                                parcel2.writeInt(iRequestFreezeSlowdown);
                                                 break;
                                             case 89:
-                                                int readInt18 = parcel.readInt();
+                                                int i19 = parcel.readInt();
                                                 parcel.enforceNoDataAvail();
-                                                setFrozenTime(readInt18);
+                                                setFrozenTime(i19);
                                                 parcel2.writeNoException();
                                                 break;
                                             case 90:
-                                                int readInt19 = parcel.readInt();
+                                                int i20 = parcel.readInt();
                                                 parcel.enforceNoDataAvail();
-                                                updateUsingCgroupVersion(readInt19);
+                                                updateUsingCgroupVersion(i20);
                                                 parcel2.writeNoException();
                                                 break;
                                             default:
                                                 switch (i) {
                                                     case 101:
-                                                        int readInt20 = parcel.readInt();
-                                                        int readInt21 = parcel.readInt();
-                                                        String readString9 = parcel.readString();
-                                                        int readInt22 = parcel.readInt();
-                                                        int[] createIntArray2 = parcel.createIntArray();
+                                                        int i21 = parcel.readInt();
+                                                        int i22 = parcel.readInt();
+                                                        String string9 = parcel.readString();
+                                                        int i23 = parcel.readInt();
+                                                        int[] iArrCreateIntArray2 = parcel.createIntArray();
                                                         parcel.enforceNoDataAvail();
-                                                        acquire(readInt20, readInt21, readString9, readInt22, createIntArray2);
+                                                        acquire(i21, i22, string9, i23, iArrCreateIntArray2);
                                                         break;
                                                     case 102:
-                                                        int readInt23 = parcel.readInt();
-                                                        int readInt24 = parcel.readInt();
+                                                        int i24 = parcel.readInt();
+                                                        int i25 = parcel.readInt();
                                                         parcel.enforceNoDataAvail();
-                                                        release(readInt23, readInt24);
+                                                        release(i24, i25);
                                                         break;
                                                     case 103:
-                                                        int readInt25 = parcel.readInt();
-                                                        int readInt26 = parcel.readInt();
+                                                        int i26 = parcel.readInt();
+                                                        int i27 = parcel.readInt();
                                                         parcel.enforceNoDataAvail();
-                                                        int[] supportedFrequency = getSupportedFrequency(readInt25, readInt26);
+                                                        int[] supportedFrequency = getSupportedFrequency(i26, i27);
                                                         parcel2.writeNoException();
                                                         parcel2.writeIntArray(supportedFrequency);
                                                         break;
                                                     case 104:
-                                                        int readInt27 = parcel.readInt();
+                                                        int i28 = parcel.readInt();
                                                         parcel.enforceNoDataAvail();
-                                                        boolean checkHintExist = checkHintExist(readInt27);
+                                                        boolean zCheckHintExist = checkHintExist(i28);
                                                         parcel2.writeNoException();
-                                                        parcel2.writeBoolean(checkHintExist);
+                                                        parcel2.writeBoolean(zCheckHintExist);
                                                         break;
                                                     case 105:
-                                                        int readInt28 = parcel.readInt();
+                                                        int i29 = parcel.readInt();
                                                         parcel.enforceNoDataAvail();
-                                                        boolean checkResourceExist = checkResourceExist(readInt28);
+                                                        boolean zCheckResourceExist = checkResourceExist(i29);
                                                         parcel2.writeNoException();
-                                                        parcel2.writeBoolean(checkResourceExist);
+                                                        parcel2.writeBoolean(zCheckResourceExist);
                                                         break;
                                                     case 106:
-                                                        int readInt29 = parcel.readInt();
-                                                        String readString10 = parcel.readString();
+                                                        int i30 = parcel.readInt();
+                                                        String string10 = parcel.readString();
                                                         parcel.enforceNoDataAvail();
-                                                        writeSysfs(readInt29, readString10);
+                                                        writeSysfs(i30, string10);
                                                         break;
                                                     case 107:
-                                                        int readInt30 = parcel.readInt();
+                                                        int i31 = parcel.readInt();
                                                         parcel.enforceNoDataAvail();
-                                                        String readSysfs = readSysfs(readInt30);
+                                                        String sysfs = readSysfs(i31);
                                                         parcel2.writeNoException();
-                                                        parcel2.writeString(readSysfs);
+                                                        parcel2.writeString(sysfs);
                                                         break;
                                                     case 108:
-                                                        int readInt31 = parcel.readInt();
+                                                        int i32 = parcel.readInt();
                                                         parcel.enforceNoDataAvail();
-                                                        boolean checkSysfsIdExist = checkSysfsIdExist(readInt31);
+                                                        boolean zCheckSysfsIdExist = checkSysfsIdExist(i32);
                                                         parcel2.writeNoException();
-                                                        parcel2.writeBoolean(checkSysfsIdExist);
+                                                        parcel2.writeBoolean(zCheckSysfsIdExist);
                                                         break;
                                                     case 109:
-                                                        String readString11 = parcel.readString();
-                                                        int readInt32 = parcel.readInt();
-                                                        int readInt33 = parcel.readInt();
+                                                        String string11 = parcel.readString();
+                                                        int i33 = parcel.readInt();
+                                                        int i34 = parcel.readInt();
                                                         parcel.enforceNoDataAvail();
-                                                        restrictApp(readString11, readInt32, readInt33);
+                                                        restrictApp(string11, i33, i34);
                                                         parcel2.writeNoException();
                                                         break;
                                                     case 110:
@@ -649,15 +649,15 @@ public interface ICustomFrequencyManager extends IInterface {
                                                         parcel2.writeNoException();
                                                         break;
                                                     case 111:
-                                                        boolean readBoolean4 = parcel.readBoolean();
+                                                        boolean z4 = parcel.readBoolean();
                                                         parcel.enforceNoDataAvail();
-                                                        setGpisHint(readBoolean4);
+                                                        setGpisHint(z4);
                                                         parcel2.writeNoException();
                                                         break;
                                                     case 112:
-                                                        boolean readBoolean5 = parcel.readBoolean();
+                                                        boolean z5 = parcel.readBoolean();
                                                         parcel.enforceNoDataAvail();
-                                                        enableInteractionHint(readBoolean5);
+                                                        enableInteractionHint(z5);
                                                         parcel2.writeNoException();
                                                         break;
                                                     case 113:
@@ -666,18 +666,18 @@ public interface ICustomFrequencyManager extends IInterface {
                                                         parcel2.writeStringList(preloadList);
                                                         break;
                                                     case 114:
-                                                        int readInt34 = parcel.readInt();
-                                                        int readInt35 = parcel.readInt();
-                                                        int readInt36 = parcel.readInt();
+                                                        int i35 = parcel.readInt();
+                                                        int i36 = parcel.readInt();
+                                                        int i37 = parcel.readInt();
                                                         parcel.enforceNoDataAvail();
-                                                        sendTid(readInt34, readInt35, readInt36);
+                                                        sendTid(i35, i36, i37);
                                                         break;
                                                     case 115:
-                                                        int readInt37 = parcel.readInt();
+                                                        int i38 = parcel.readInt();
                                                         parcel.enforceNoDataAvail();
-                                                        boolean isGameByGraphic = isGameByGraphic(readInt37);
+                                                        boolean zIsGameByGraphic = isGameByGraphic(i38);
                                                         parcel2.writeNoException();
-                                                        parcel2.writeBoolean(isGameByGraphic);
+                                                        parcel2.writeBoolean(zIsGameByGraphic);
                                                         break;
                                                     default:
                                                         return super.onTransact(i, parcel, parcel2, i2);
@@ -687,13 +687,13 @@ public interface ICustomFrequencyManager extends IInterface {
                         }
                 }
             } else {
-                String readString12 = parcel.readString();
-                int readInt38 = parcel.readInt();
-                int readInt39 = parcel.readInt();
+                String string12 = parcel.readString();
+                int i39 = parcel.readInt();
+                int i40 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                float[] supportVRTemperaturesInformation = supportVRTemperaturesInformation(readString12, readInt38, readInt39);
+                float[] fArrSupportVRTemperaturesInformation = supportVRTemperaturesInformation(string12, i39, i40);
                 parcel2.writeNoException();
-                parcel2.writeFloatArray(supportVRTemperaturesInformation);
+                parcel2.writeFloatArray(fArrSupportVRTemperaturesInformation);
             }
             return true;
         }
@@ -716,572 +716,572 @@ public interface ICustomFrequencyManager extends IInterface {
 
             @Override // android.os.ICustomFrequencyManager
             public void requestMpParameterUpdate(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void requestCPUUpdate(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void mpdUpdate(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void sendCommandToSSRM(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(48, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(48, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public int getSsrmStatus(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public float[] supportVRTemperaturesInformation(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createFloatArray();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createFloatArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public int getBatteryRemainingUsageTime(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void setGamePowerSaving(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void setGameFps(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public int getGameThrottlingLevel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    this.mRemote.transact(75, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void setGameTurboMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(76, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(76, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void setGameTouchParam(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void unsetGameTouchParam() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    this.mRemote.transact(78, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    this.mRemote.transact(78, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public CpuTrackerInfo getProcessCpuUsage(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(82, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CpuTrackerInfo) obtain2.readTypedObject(CpuTrackerInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(82, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CpuTrackerInfo) parcelObtain2.readTypedObject(CpuTrackerInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public String readFile(String str, char c) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(c);
-                    this.mRemote.transact(83, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(c);
+                    this.mRemote.transact(83, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public int addDvfsLockAllowedUid(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(84, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(84, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public boolean removeDvfsLockAllowedUid(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(85, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(85, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void sendDrawingTid(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(87, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(87, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public int requestFreezeSlowdown(int i, int i2, boolean z, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    this.mRemote.transact(88, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(88, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void setFrozenTime(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(89, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(89, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void updateUsingCgroupVersion(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(90, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(90, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void requestGpis(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(92, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(92, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void acquire(int i, int i2, String str, int i3, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeInt(i3);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(101, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(101, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void release(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(102, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(102, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public int[] getSupportedFrequency(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(103, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(103, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public boolean checkHintExist(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(104, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(104, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public boolean checkResourceExist(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(105, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(105, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void writeSysfs(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(106, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(106, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public String readSysfs(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(107, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(107, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public boolean checkSysfsIdExist(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(108, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(108, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void restrictApp(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(109, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(109, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void disableGpisHint() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    this.mRemote.transact(110, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    this.mRemote.transact(110, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void setGpisHint(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(111, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(111, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void enableInteractionHint(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(112, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(112, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public List<String> getPreloadList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    this.mRemote.transact(113, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    this.mRemote.transact(113, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public void sendTid(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(114, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(114, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.ICustomFrequencyManager
             public boolean isGameByGraphic(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(115, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(115, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

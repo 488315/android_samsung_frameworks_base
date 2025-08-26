@@ -1,6 +1,7 @@
 package android.preference;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -20,12 +21,12 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 
     public SeekBarPreference(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ProgressBar, i, i2);
-        setMax(obtainStyledAttributes.getInt(2, this.mMax));
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.SeekBarPreference, i, i2);
-        int resourceId = obtainStyledAttributes2.getResourceId(0, R.layout.preference_widget_seekbar);
-        obtainStyledAttributes2.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ProgressBar, i, i2);
+        setMax(typedArrayObtainStyledAttributes.getInt(2, this.mMax));
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.SeekBarPreference, i, i2);
+        int resourceId = typedArrayObtainStyledAttributes2.getResourceId(0, R.layout.preference_widget_seekbar);
+        typedArrayObtainStyledAttributes2.recycle();
         setLayoutResource(resourceId);
     }
 
@@ -42,7 +43,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     }
 
     @Override // android.preference.Preference
-    protected void onBindView(View view) {
+    protected void onBindView(View view) throws Resources.NotFoundException {
         super.onBindView(view);
         SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekbar);
         seekBar.setOnSeekBarChangeListener(this);
@@ -53,13 +54,13 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 
     @Override // android.preference.Preference
     protected void onSetInitialValue(boolean z, Object obj) {
-        int intValue;
+        int iIntValue;
         if (z) {
-            intValue = getPersistedInt(this.mProgress);
+            iIntValue = getPersistedInt(this.mProgress);
         } else {
-            intValue = ((Integer) obj).intValue();
+            iIntValue = ((Integer) obj).intValue();
         }
-        setProgress(intValue);
+        setProgress(iIntValue);
     }
 
     @Override // android.preference.Preference
@@ -142,11 +143,11 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 
     @Override // android.preference.Preference
     protected Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         if (isPersistent()) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         savedState.progress = this.mProgress;
         savedState.max = this.mMax;
         return savedState;

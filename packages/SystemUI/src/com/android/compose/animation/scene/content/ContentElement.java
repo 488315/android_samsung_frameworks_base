@@ -10,7 +10,6 @@ import com.android.compose.ui.graphics.ContainerNode;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ContentElement extends ModifierNodeElement<ContentNode> {
     public final Content content;
@@ -62,12 +61,12 @@ final class ContentElement extends ModifierNodeElement<ContentNode> {
             Content content3 = contentNode.content;
             Element.Companion.getClass();
             long j = Element.SizeUnspecified;
-            ((SnapshotMutableStateImpl) content3.targetSize$delegate).setValue(IntSize.m859boximpl(j));
+            ((SnapshotMutableStateImpl) content3.targetSize$delegate).setValue(IntSize.m861boximpl(j));
             contentNode.content = content2;
         }
-        boolean areEqual = Intrinsics.areEqual(content2, contentNode.content);
+        boolean zAreEqual = Intrinsics.areEqual(content2, contentNode.content);
         boolean z = this.isElevationPossible;
-        if (!areEqual || z != contentNode.isElevationPossible) {
+        if (!zAreEqual || z != contentNode.isElevationPossible) {
             contentNode.isElevationPossible = z;
             ContainerNode containerNode2 = contentNode.containerDelegate;
             if (containerNode2 != null) {

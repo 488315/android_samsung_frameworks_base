@@ -25,7 +25,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TrackMeasurePolicy implements MeasurePolicy, SliderIconsState {
     public final float gapSize;
@@ -40,74 +39,72 @@ public final class TrackMeasurePolicy implements MeasurePolicy, SliderIconsState
 
     public final boolean isActiveTrackStartIconVisible() {
         Map map = this.isVisible;
-        Contents contents = Contents.Active.TrackStartIcon.INSTANCE;
+        Contents mirrored = Contents.Active.TrackStartIcon.INSTANCE;
         if (this.shouldMirrorIcons) {
-            contents = contents.getMirrored();
+            mirrored = mirrored.getMirrored();
         }
-        return ((Boolean) ((MutableState) MapsKt__MapsKt.getValue(contents, map)).getValue()).booleanValue();
+        return ((Boolean) ((MutableState) MapsKt__MapsKt.getValue(mirrored, map)).getValue()).booleanValue();
     }
 
     @Override // androidx.compose.ui.layout.MeasurePolicy
     /* renamed from: measure-3p2s80s */
     public final MeasureResult mo3measure3p2s80s(final MeasureScope measureScope, List list, long j) {
-        MeasureResult layout$1;
         int size = list.size();
         for (int i = 0; i < size; i++) {
             Measurable measurable = (Measurable) list.get(i);
             Object layoutId = LayoutIdKt.getLayoutId(measurable);
             Contents.Track track = Contents.Track.INSTANCE;
             if (Intrinsics.areEqual(layoutId, track)) {
-                final Placeable mo608measureBRTryo0 = measurable.mo608measureBRTryo0(j);
-                int min = Math.min(mo608measureBRTryo0.width, mo608measureBRTryo0.height);
-                long m814copyZbe2FdA$default = Constraints.m814copyZbe2FdA$default(j, 0, min, 0, min, 5);
+                final Placeable placeableMo610measureBRTryo0 = measurable.mo610measureBRTryo0(j);
+                int iMin = Math.min(placeableMo610measureBRTryo0.width, placeableMo610measureBRTryo0.height);
+                long jM816copyZbe2FdA$default = Constraints.m816copyZbe2FdA$default(j, 0, iMin, 0, iMin, 5);
                 MapBuilder mapBuilder = new MapBuilder();
-                mapBuilder.put(track, mo608measureBRTryo0);
+                mapBuilder.put(track, placeableMo610measureBRTryo0);
                 Iterator it = list.iterator();
                 while (it.hasNext()) {
                     Measurable measurable2 = (Measurable) it.next();
                     if (!Intrinsics.areEqual(LayoutIdKt.getLayoutId(measurable2), Contents.Track.INSTANCE)) {
-                        Contents contents = (Contents) LayoutIdKt.getLayoutId(measurable2);
+                        Contents mirrored = (Contents) LayoutIdKt.getLayoutId(measurable2);
                         if (this.shouldMirrorIcons) {
-                            contents = contents.getMirrored();
+                            mirrored = mirrored.getMirrored();
                         }
-                        mapBuilder.put(contents, measurable2.mo608measureBRTryo0(m814copyZbe2FdA$default));
+                        mapBuilder.put(mirrored, measurable2.mo610measureBRTryo0(jM816copyZbe2FdA$default));
                     }
                 }
-                final MapBuilder build = mapBuilder.build();
-                layout$1 = measureScope.layout$1(mo608measureBRTryo0.width, mo608measureBRTryo0.height, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.systemui.volume.dialog.sliders.ui.compose.TrackMeasurePolicy$$ExternalSyntheticLambda0
+                final MapBuilder mapBuilderBuild = mapBuilder.build();
+                return measureScope.layout$1(placeableMo610measureBRTryo0.width, placeableMo610measureBRTryo0.height, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.systemui.volume.dialog.sliders.ui.compose.TrackMeasurePolicy$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         Placeable.PlacementScope placementScope = (Placeable.PlacementScope) obj;
                         TrackMeasurePolicy trackMeasurePolicy = this;
-                        int mo51roundToPx0680j_4 = MeasureScope.this.mo51roundToPx0680j_4(trackMeasurePolicy.gapSize);
+                        int iMo52roundToPx0680j_4 = measureScope.mo52roundToPx0680j_4(trackMeasurePolicy.gapSize);
                         boolean z = trackMeasurePolicy.shouldMirrorIcons;
                         SliderState sliderState = trackMeasurePolicy.sliderState;
                         float coercedValueAsFraction = z ? 1 - sliderState.getCoercedValueAsFraction() : sliderState.getCoercedValueAsFraction();
-                        MapBuilder mapBuilder2 = build;
+                        MapBuilder mapBuilder2 = mapBuilderBuild;
                         Iterator it2 = ((MapBuilderKeys) mapBuilder2.keySet()).iterator();
                         while (it2.hasNext()) {
-                            Contents contents2 = (Contents) it2.next();
-                            Placeable placeable = (Placeable) MapsKt__MapsKt.getValue(contents2, mapBuilder2);
-                            Placeable placeable2 = mo608measureBRTryo0;
+                            Contents contents = (Contents) it2.next();
+                            Placeable placeable = (Placeable) MapsKt__MapsKt.getValue(contents, mapBuilder2);
+                            Placeable placeable2 = placeableMo610measureBRTryo0;
                             boolean z2 = trackMeasurePolicy.isVertical;
                             if (z2) {
-                                placementScope.place(placeable, 0, contents2.calculatePosition(coercedValueAsFraction, placeable.height, placeable2.height, mo51roundToPx0680j_4), 0.0f);
+                                placementScope.place(placeable, 0, contents.calculatePosition(coercedValueAsFraction, placeable.height, placeable2.height, iMo52roundToPx0680j_4), 0.0f);
                             } else {
-                                placementScope.place(placeable, contents2.calculatePosition(coercedValueAsFraction, placeable.width, placeable2.width, mo51roundToPx0680j_4), 0, 0.0f);
+                                placementScope.place(placeable, contents.calculatePosition(coercedValueAsFraction, placeable.width, placeable2.width, iMo52roundToPx0680j_4), 0, 0.0f);
                             }
-                            if (!Intrinsics.areEqual(contents2, Contents.Track.INSTANCE)) {
-                                MutableState mutableState = (MutableState) MapsKt__MapsKt.getValue(contents2, trackMeasurePolicy.isVisible);
-                                boolean isVisible = contents2.isVisible(coercedValueAsFraction, z2 ? placeable.height : placeable.width, z2 ? placeable2.height : placeable2.width, mo51roundToPx0680j_4);
-                                if (((Boolean) mutableState.getValue()).booleanValue() != isVisible) {
-                                    mutableState.setValue(Boolean.valueOf(isVisible));
+                            if (!Intrinsics.areEqual(contents, Contents.Track.INSTANCE)) {
+                                MutableState mutableState = (MutableState) MapsKt__MapsKt.getValue(contents, trackMeasurePolicy.isVisible);
+                                boolean zIsVisible = contents.isVisible(coercedValueAsFraction, z2 ? placeable.height : placeable.width, z2 ? placeable2.height : placeable2.width, iMo52roundToPx0680j_4);
+                                if (((Boolean) mutableState.getValue()).booleanValue() != zIsVisible) {
+                                    mutableState.setValue(Boolean.valueOf(zIsVisible));
                                 }
                             }
                         }
                         return Unit.INSTANCE;
                     }
                 });
-                return layout$1;
             }
         }
         ListUtilsKt.throwNoSuchElementException("Collection contains no element matching the predicate.");

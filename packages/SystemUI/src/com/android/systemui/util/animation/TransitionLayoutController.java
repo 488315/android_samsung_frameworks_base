@@ -5,7 +5,6 @@ import android.util.MathUtils;
 import com.android.app.animation.Interpolators;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TransitionLayoutController {
     public static final int $stable = 8;
@@ -20,15 +19,15 @@ public class TransitionLayoutController {
     private TransitionViewState state = new TransitionViewState();
 
     public TransitionLayoutController() {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.animator = ofFloat;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.util.animation.TransitionLayoutController$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.animator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.util.animation.TransitionLayoutController$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                TransitionLayoutController.this.updateStateFromAnimation();
+                this.this$0.updateStateFromAnimation();
             }
         });
-        ofFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
     }
 
     private final void applyStateToLayout(TransitionViewState transitionViewState) {
@@ -98,16 +97,16 @@ public class TransitionLayoutController {
     }
 
     public final TransitionViewState getGoneState(TransitionViewState transitionViewState, DisappearParameters disappearParameters, float f, TransitionViewState transitionViewState2) {
-        float constrain = MathUtils.constrain(MathUtils.map(disappearParameters.getDisappearStart(), disappearParameters.getDisappearEnd(), 0.0f, 1.0f, f), 0.0f, 1.0f);
-        TransitionViewState copy = transitionViewState.copy(transitionViewState2);
-        copy.setWidth((int) MathUtils.lerp(transitionViewState.getWidth(), transitionViewState.getWidth() * disappearParameters.getDisappearSize().x, constrain));
-        copy.setHeight((int) MathUtils.lerp(transitionViewState.getHeight(), transitionViewState.getHeight() * disappearParameters.getDisappearSize().y, constrain));
-        copy.getTranslation().x = (transitionViewState.getWidth() - copy.getWidth()) * disappearParameters.getGonePivot().x;
-        copy.getTranslation().y = (transitionViewState.getHeight() - copy.getHeight()) * disappearParameters.getGonePivot().y;
-        copy.getContentTranslation().x = (disappearParameters.getContentTranslationFraction().x - 1.0f) * copy.getTranslation().x;
-        copy.getContentTranslation().y = (disappearParameters.getContentTranslationFraction().y - 1.0f) * copy.getTranslation().y;
-        copy.setAlpha(MathUtils.constrain(MathUtils.map(disappearParameters.getFadeStartPosition(), 1.0f, 1.0f, 0.0f, constrain), 0.0f, 1.0f));
-        return copy;
+        float fConstrain = MathUtils.constrain(MathUtils.map(disappearParameters.getDisappearStart(), disappearParameters.getDisappearEnd(), 0.0f, 1.0f, f), 0.0f, 1.0f);
+        TransitionViewState transitionViewStateCopy = transitionViewState.copy(transitionViewState2);
+        transitionViewStateCopy.setWidth((int) MathUtils.lerp(transitionViewState.getWidth(), transitionViewState.getWidth() * disappearParameters.getDisappearSize().x, fConstrain));
+        transitionViewStateCopy.setHeight((int) MathUtils.lerp(transitionViewState.getHeight(), transitionViewState.getHeight() * disappearParameters.getDisappearSize().y, fConstrain));
+        transitionViewStateCopy.getTranslation().x = (transitionViewState.getWidth() - transitionViewStateCopy.getWidth()) * disappearParameters.getGonePivot().x;
+        transitionViewStateCopy.getTranslation().y = (transitionViewState.getHeight() - transitionViewStateCopy.getHeight()) * disappearParameters.getGonePivot().y;
+        transitionViewStateCopy.getContentTranslation().x = (disappearParameters.getContentTranslationFraction().x - 1.0f) * transitionViewStateCopy.getTranslation().x;
+        transitionViewStateCopy.getContentTranslation().y = (disappearParameters.getContentTranslationFraction().y - 1.0f) * transitionViewStateCopy.getTranslation().y;
+        transitionViewStateCopy.setAlpha(MathUtils.constrain(MathUtils.map(disappearParameters.getFadeStartPosition(), 1.0f, 1.0f, 0.0f, fConstrain), 0.0f, 1.0f));
+        return transitionViewStateCopy;
     }
 
     public final TransitionViewState getInterpolatedState(TransitionViewState transitionViewState, TransitionViewState transitionViewState2, float f, TransitionViewState transitionViewState3) {
@@ -116,13 +115,13 @@ public class TransitionLayoutController {
         int i;
         int measureWidth;
         int measureHeight;
-        float lerp;
-        float lerp2;
-        float lerp3;
+        float fLerp;
+        float fLerp2;
+        float fLerp3;
         float f2;
-        float f3;
+        float map;
         boolean z;
-        float f4;
+        float f3;
         TransitionLayoutController transitionLayoutController = this;
         TransitionViewState transitionViewState4 = transitionViewState3 == null ? new TransitionViewState() : transitionViewState3;
         TransitionLayout transitionLayout2 = transitionLayoutController.transitionLayout;
@@ -143,28 +142,28 @@ public class TransitionLayoutController {
                 i = childCount;
             } else {
                 if (widgetState3.getGone() != widgetState.getGone()) {
-                    lerp = 1.0f;
+                    fLerp = 1.0f;
                     if (widgetState3.getGone()) {
                         measureWidth = widgetState.getMeasureWidth();
                         measureHeight = widgetState.getMeasureHeight();
                         if (transitionLayoutController.isGutsAnimation) {
-                            f3 = MathUtils.map(0.286f, 1.0f, 0.0f, 1.0f, f);
+                            map = MathUtils.map(0.286f, 1.0f, 0.0f, 1.0f, f);
                             z = f < 0.286f;
-                            lerp2 = widgetState3.getX();
-                            lerp3 = widgetState3.getY();
+                            fLerp2 = widgetState3.getX();
+                            fLerp3 = widgetState3.getY();
                             transitionLayout = transitionLayout2;
                             i = childCount;
-                            f4 = 1.0f;
+                            f3 = 1.0f;
                         } else {
-                            f3 = MathUtils.map(0.8f, 1.0f, 0.0f, 1.0f, f);
+                            map = MathUtils.map(0.8f, 1.0f, 0.0f, 1.0f, f);
                             z = f < 0.8f;
                             float scale = widgetState.getScale();
-                            lerp = MathUtils.lerp(scale * 0.8f, scale, f);
+                            fLerp = MathUtils.lerp(scale * 0.8f, scale, f);
                             transitionLayout = transitionLayout2;
-                            lerp2 = MathUtils.lerp(widgetState3.getX() - (measureWidth / 2.0f), widgetState.getX(), f);
+                            fLerp2 = MathUtils.lerp(widgetState3.getX() - (measureWidth / 2.0f), widgetState.getX(), f);
                             i = childCount;
-                            lerp3 = MathUtils.lerp(widgetState3.getY() - (measureHeight / 2.0f), widgetState.getY(), f);
-                            f4 = 1.0f;
+                            fLerp3 = MathUtils.lerp(widgetState3.getY() - (measureHeight / 2.0f), widgetState.getY(), f);
+                            f3 = 1.0f;
                         }
                     } else {
                         transitionLayout = transitionLayout2;
@@ -172,45 +171,45 @@ public class TransitionLayoutController {
                         measureWidth = widgetState3.getMeasureWidth();
                         measureHeight = widgetState3.getMeasureHeight();
                         if (transitionLayoutController.isGutsAnimation) {
-                            float map = MathUtils.map(0.0f, 0.355f, 0.0f, 1.0f, f);
+                            float map2 = MathUtils.map(0.0f, 0.355f, 0.0f, 1.0f, f);
                             z = f > 0.355f;
-                            lerp2 = widgetState.getX();
-                            lerp3 = widgetState.getY();
-                            f4 = 0.0f;
-                            f3 = map;
-                            lerp = 1.0f;
+                            fLerp2 = widgetState.getX();
+                            fLerp3 = widgetState.getY();
+                            f3 = 0.0f;
+                            map = map2;
+                            fLerp = 1.0f;
                         } else {
-                            float map2 = MathUtils.map(0.0f, 0.19999999f, 0.0f, 1.0f, f);
+                            float map3 = MathUtils.map(0.0f, 0.19999999f, 0.0f, 1.0f, f);
                             z = f > 0.19999999f;
                             float scale2 = widgetState3.getScale();
-                            lerp = MathUtils.lerp(scale2, scale2 * 0.8f, f);
-                            f4 = 0.0f;
-                            lerp2 = MathUtils.lerp(widgetState3.getX(), widgetState.getX() - (measureWidth / 2.0f), f);
-                            lerp3 = MathUtils.lerp(widgetState3.getY(), widgetState.getY() - (measureHeight / 2.0f), f);
-                            f3 = map2;
+                            fLerp = MathUtils.lerp(scale2, scale2 * 0.8f, f);
+                            f3 = 0.0f;
+                            fLerp2 = MathUtils.lerp(widgetState3.getX(), widgetState.getX() - (measureWidth / 2.0f), f);
+                            fLerp3 = MathUtils.lerp(widgetState3.getY(), widgetState.getY() - (measureHeight / 2.0f), f);
+                            map = map3;
                         }
                     }
                     widgetState2.setGone(z);
-                    f2 = f4;
+                    f2 = f3;
                 } else {
                     transitionLayout = transitionLayout2;
                     i = childCount;
                     widgetState2.setGone(widgetState3.getGone());
                     measureWidth = widgetState.getMeasureWidth();
                     measureHeight = widgetState.getMeasureHeight();
-                    lerp = MathUtils.lerp(widgetState3.getScale(), widgetState.getScale(), f);
-                    lerp2 = MathUtils.lerp(widgetState3.getX(), widgetState.getX(), f);
-                    lerp3 = MathUtils.lerp(widgetState3.getY(), widgetState.getY(), f);
+                    fLerp = MathUtils.lerp(widgetState3.getScale(), widgetState.getScale(), f);
+                    fLerp2 = MathUtils.lerp(widgetState3.getX(), widgetState.getX(), f);
+                    fLerp3 = MathUtils.lerp(widgetState3.getY(), widgetState.getY(), f);
                     f2 = f;
-                    f3 = f2;
+                    map = f2;
                 }
-                float f5 = lerp3;
-                widgetState2.setX(lerp2);
-                widgetState2.setY(f5);
-                widgetState2.setAlpha(MathUtils.lerp(widgetState3.getAlpha(), widgetState.getAlpha(), f3));
+                float f4 = fLerp3;
+                widgetState2.setX(fLerp2);
+                widgetState2.setY(f4);
+                widgetState2.setAlpha(MathUtils.lerp(widgetState3.getAlpha(), widgetState.getAlpha(), map));
                 widgetState2.setWidth((int) MathUtils.lerp(widgetState3.getWidth(), widgetState.getWidth(), f2));
                 widgetState2.setHeight((int) MathUtils.lerp(widgetState3.getHeight(), widgetState.getHeight(), f2));
-                widgetState2.setScale(lerp);
+                widgetState2.setScale(fLerp);
                 widgetState2.setMeasureWidth(measureWidth);
                 widgetState2.setMeasureHeight(measureHeight);
                 transitionViewState4.getWidgetStates().put(Integer.valueOf(id), widgetState2);

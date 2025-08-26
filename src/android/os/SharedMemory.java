@@ -53,12 +53,12 @@ public final class SharedMemory implements Parcelable, Closeable {
             throw new IllegalArgumentException("Unable to create SharedMemory from closed FileDescriptor");
         }
         this.mFileDescriptor = fileDescriptor;
-        int nGetSize = nGetSize(fileDescriptor);
-        this.mSize = nGetSize;
-        if (nGetSize <= 0) {
+        int iNGetSize = nGetSize(fileDescriptor);
+        this.mSize = iNGetSize;
+        if (iNGetSize <= 0) {
             throw new IllegalArgumentException("FileDescriptor is not a valid ashmem fd");
         }
-        MemoryRegistration memoryRegistration = new MemoryRegistration(nGetSize);
+        MemoryRegistration memoryRegistration = new MemoryRegistration(iNGetSize);
         this.mMemoryRegistration = memoryRegistration;
         this.mCleaner = Cleaner.create(fileDescriptor, new Closer(fileDescriptor.getInt$(), memoryRegistration));
     }
@@ -127,8 +127,8 @@ public final class SharedMemory implements Parcelable, Closeable {
         if (i2 + i3 > this.mSize) {
             throw new IllegalArgumentException("offset + length must not exceed getSize()");
         }
-        long mmap = Os.mmap(0L, i3, i, OsConstants.MAP_SHARED, this.mFileDescriptor, i2);
-        return new DirectByteBuffer(i3, mmap, this.mFileDescriptor, new Unmapper(mmap, i3, this.mMemoryRegistration.acquire()), (OsConstants.PROT_WRITE & i) == 0);
+        long jMmap = Os.mmap(0L, i3, i, OsConstants.MAP_SHARED, this.mFileDescriptor, i2);
+        return new DirectByteBuffer(i3, jMmap, this.mFileDescriptor, new Unmapper(jMmap, i3, this.mMemoryRegistration.acquire()), (OsConstants.PROT_WRITE & i) == 0);
     }
 
     public static void unmap(ByteBuffer byteBuffer) {
@@ -169,7 +169,7 @@ public final class SharedMemory implements Parcelable, Closeable {
         }
 
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws ErrnoException {
             try {
                 FileDescriptor fileDescriptor = new FileDescriptor();
                 fileDescriptor.setInt$(this.mFd);
@@ -193,7 +193,7 @@ public final class SharedMemory implements Parcelable, Closeable {
         }
 
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws ErrnoException {
             try {
                 Os.munmap(this.mAddress, this.mSize);
             } catch (ErrnoException unused) {

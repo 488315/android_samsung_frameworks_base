@@ -19,11 +19,11 @@ public class GraphemeClusterSegmentFinder extends SegmentFinder {
         boolean[] zArr = new boolean[charSequence.length()];
         this.mIsGraphemeBreak = zArr;
         float[] rawArray = sTempAdvances.getRawArray();
-        char[] obtain = TemporaryBuffer.obtain(charSequence.length());
-        TextUtils.getChars(charSequence, 0, charSequence.length(), obtain, 0);
-        textPaint.getTextWidths(obtain, 0, charSequence.length(), rawArray);
-        GraphemeBreak.isGraphemeBreak(rawArray, obtain, 0, charSequence.length(), zArr);
-        TemporaryBuffer.recycle(obtain);
+        char[] cArrObtain = TemporaryBuffer.obtain(charSequence.length());
+        TextUtils.getChars(charSequence, 0, charSequence.length(), cArrObtain, 0);
+        textPaint.getTextWidths(cArrObtain, 0, charSequence.length(), rawArray);
+        GraphemeBreak.isGraphemeBreak(rawArray, cArrObtain, 0, charSequence.length(), zArr);
+        TemporaryBuffer.recycle(cArrObtain);
     }
 
     private int previousBoundary(int i) {
@@ -61,20 +61,20 @@ public class GraphemeClusterSegmentFinder extends SegmentFinder {
 
     @Override // android.text.SegmentFinder
     public int previousEndBoundary(int i) {
-        int previousBoundary;
-        if (i == 0 || (previousBoundary = previousBoundary(i)) == -1 || previousBoundary(previousBoundary) == -1) {
+        int iPreviousBoundary;
+        if (i == 0 || (iPreviousBoundary = previousBoundary(i)) == -1 || previousBoundary(iPreviousBoundary) == -1) {
             return -1;
         }
-        return previousBoundary;
+        return iPreviousBoundary;
     }
 
     @Override // android.text.SegmentFinder
     public int nextStartBoundary(int i) {
-        int nextBoundary;
-        if (i == this.mIsGraphemeBreak.length || (nextBoundary = nextBoundary(i)) == -1 || nextBoundary(nextBoundary) == -1) {
+        int iNextBoundary;
+        if (i == this.mIsGraphemeBreak.length || (iNextBoundary = nextBoundary(i)) == -1 || nextBoundary(iNextBoundary) == -1) {
             return -1;
         }
-        return nextBoundary;
+        return iNextBoundary;
     }
 
     @Override // android.text.SegmentFinder

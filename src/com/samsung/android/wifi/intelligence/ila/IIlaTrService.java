@@ -44,9 +44,9 @@ public interface IIlaTrService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIlaTrService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIlaTrService)) {
-                return (IIlaTrService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIlaTrService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIlaTrService)) {
+                return (IIlaTrService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IIlaTrService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                train(readString);
+                train(string);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface IIlaTrService extends IInterface {
 
             @Override // com.samsung.android.wifi.intelligence.ila.IIlaTrService
             public void train(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIlaTrService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIlaTrService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

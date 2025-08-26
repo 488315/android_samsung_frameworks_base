@@ -74,9 +74,9 @@ public final class AccessibilityUtils {
         simpleStringSplitter.setString(stringForUser);
         Iterator<String> it = simpleStringSplitter.iterator();
         while (it.hasNext()) {
-            ComponentName unflattenFromString = ComponentName.unflattenFromString(it.next());
-            if (unflattenFromString != null) {
-                hashSet.add(unflattenFromString);
+            ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(it.next());
+            if (componentNameUnflattenFromString != null) {
+                hashSet.add(componentNameUnflattenFromString);
             }
         }
         return hashSet;
@@ -155,25 +155,25 @@ public final class AccessibilityUtils {
 
     private static boolean parcelableSpansEquals(CharSequence charSequence, CharSequence charSequence2) {
         Spanned spanned;
-        Object[] objArr = EmptyArray.OBJECT;
-        Object[] objArr2 = EmptyArray.OBJECT;
+        Object[] spans = EmptyArray.OBJECT;
+        Object[] spans2 = EmptyArray.OBJECT;
         Spanned spanned2 = null;
         if (charSequence instanceof Spanned) {
             spanned = (Spanned) charSequence;
-            objArr = spanned.getSpans(0, spanned.length(), ParcelableSpan.class);
+            spans = spanned.getSpans(0, spanned.length(), ParcelableSpan.class);
         } else {
             spanned = null;
         }
         if (charSequence2 instanceof Spanned) {
             spanned2 = (Spanned) charSequence2;
-            objArr2 = spanned2.getSpans(0, spanned2.length(), ParcelableSpan.class);
+            spans2 = spanned2.getSpans(0, spanned2.length(), ParcelableSpan.class);
         }
-        if (objArr.length != objArr2.length) {
+        if (spans.length != spans2.length) {
             return false;
         }
-        for (int i = 0; i < objArr.length; i++) {
-            Object obj = objArr[i];
-            Object obj2 = objArr2[i];
+        for (int i = 0; i < spans.length; i++) {
+            Object obj = spans[i];
+            Object obj2 = spans2[i];
             if (obj.getClass() != obj2.getClass() || spanned.getSpanStart(obj) != spanned2.getSpanStart(obj2) || spanned.getSpanEnd(obj) != spanned2.getSpanEnd(obj2) || spanned.getSpanFlags(obj) != spanned2.getSpanFlags(obj2)) {
                 return false;
             }
@@ -182,15 +182,15 @@ public final class AccessibilityUtils {
     }
 
     public static ComponentName getAccessibilityMenuComponentToMigrate(PackageManager packageManager, int i) {
-        Set<ComponentName> findA11yMenuComponentNames = findA11yMenuComponentNames(packageManager, i);
-        Optional<ComponentName> findFirst = findA11yMenuComponentNames.stream().filter(new Predicate() { // from class: com.android.internal.accessibility.util.AccessibilityUtils$$ExternalSyntheticLambda0
+        Set<ComponentName> setFindA11yMenuComponentNames = findA11yMenuComponentNames(packageManager, i);
+        Optional<ComponentName> optionalFindFirst = setFindA11yMenuComponentNames.stream().filter(new Predicate() { // from class: com.android.internal.accessibility.util.AccessibilityUtils$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return AccessibilityUtils.lambda$getAccessibilityMenuComponentToMigrate$0((ComponentName) obj);
             }
         }).findFirst();
-        if (findA11yMenuComponentNames.size() == 2 && findA11yMenuComponentNames.contains(ACCESSIBILITY_MENU_IN_SYSTEM) && findFirst.isPresent()) {
-            return findFirst.get();
+        if (setFindA11yMenuComponentNames.size() == 2 && setFindA11yMenuComponentNames.contains(ACCESSIBILITY_MENU_IN_SYSTEM) && optionalFindFirst.isPresent()) {
+            return optionalFindFirst.get();
         }
         return null;
     }

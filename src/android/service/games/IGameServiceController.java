@@ -57,9 +57,9 @@ public interface IGameServiceController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGameServiceController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGameServiceController)) {
-                return (IGameServiceController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGameServiceController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGameServiceController)) {
+                return (IGameServiceController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,9 +86,9 @@ public interface IGameServiceController extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                createGameSession(readInt);
+                createGameSession(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -112,13 +112,13 @@ public interface IGameServiceController extends IInterface {
 
             @Override // android.service.games.IGameServiceController
             public void createGameSession(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGameServiceController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGameServiceController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

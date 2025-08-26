@@ -6,7 +6,6 @@ import kotlin.collections.EmptyList;
 import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VolumeState {
     public static final int $stable = 8;
@@ -16,7 +15,6 @@ public final class VolumeState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BooleanStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ BooleanStateKey[] $VALUES;
@@ -35,9 +33,9 @@ public final class VolumeState {
         }
 
         static {
-            BooleanStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            BooleanStateKey[] booleanStateKeyArr$values = $values();
+            $VALUES = booleanStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(booleanStateKeyArr$values);
         }
 
         private BooleanStateKey(String str, int i) {
@@ -58,7 +56,6 @@ public final class VolumeState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IntegerStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ IntegerStateKey[] $VALUES;
@@ -72,9 +69,9 @@ public final class VolumeState {
         }
 
         static {
-            IntegerStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            IntegerStateKey[] integerStateKeyArr$values = $values();
+            $VALUES = integerStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(integerStateKeyArr$values);
         }
 
         private IntegerStateKey(String str, int i) {
@@ -165,7 +162,6 @@ public final class VolumeState {
         return isEnabled(BooleanStateKey.REMOTE_MIC);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public static final int $stable = 8;
         private VolumeState volumeState;

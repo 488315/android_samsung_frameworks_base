@@ -84,11 +84,11 @@ public class SipDelegateManager {
 
     public boolean isSupported() throws ImsException {
         try {
-            IImsRcsController binder = this.mBinderCache.getBinder();
-            if (binder == null) {
+            IImsRcsController iImsRcsController = (IImsRcsController) this.mBinderCache.getBinder();
+            if (iImsRcsController == null) {
                 throw new ImsException("Telephony server is down", 1);
             }
-            return binder.isSipDelegateSupported(this.mSubId);
+            return iImsRcsController.isSipDelegateSupported(this.mSubId);
         } catch (RemoteException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -103,16 +103,16 @@ public class SipDelegateManager {
         Objects.requireNonNull(delegateConnectionMessageCallback, "The DelegateConnectionMessageCallback must not be null.");
         try {
             final SipDelegateConnectionAidlWrapper sipDelegateConnectionAidlWrapper = new SipDelegateConnectionAidlWrapper(executor, delegateConnectionStateCallback, delegateConnectionMessageCallback);
-            IImsRcsController listenOnBinder = this.mBinderCache.listenOnBinder(sipDelegateConnectionAidlWrapper, new Runnable() { // from class: android.telephony.ims.SipDelegateManager$$ExternalSyntheticLambda1
+            IImsRcsController iImsRcsController = (IImsRcsController) this.mBinderCache.listenOnBinder(sipDelegateConnectionAidlWrapper, new Runnable() { // from class: android.telephony.ims.SipDelegateManager$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SipDelegateConnectionAidlWrapper.this.binderDied();
+                    sipDelegateConnectionAidlWrapper.binderDied();
                 }
             });
-            if (listenOnBinder == null) {
+            if (iImsRcsController == null) {
                 throw new ImsException("Telephony server is down", 1);
             }
-            listenOnBinder.createSipDelegate(this.mSubId, delegateRequest, this.mContext.getOpPackageName(), sipDelegateConnectionAidlWrapper.getStateCallbackBinder(), sipDelegateConnectionAidlWrapper.getMessageCallbackBinder());
+            iImsRcsController.createSipDelegate(this.mSubId, delegateRequest, this.mContext.getOpPackageName(), sipDelegateConnectionAidlWrapper.getStateCallbackBinder(), sipDelegateConnectionAidlWrapper.getMessageCallbackBinder());
         } catch (RemoteException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -126,13 +126,13 @@ public class SipDelegateManager {
             SipDelegateConnectionAidlWrapper sipDelegateConnectionAidlWrapper = (SipDelegateConnectionAidlWrapper) sipDelegateConnection;
             try {
                 try {
-                    this.mBinderCache.removeRunnable(sipDelegateConnectionAidlWrapper).destroySipDelegate(this.mSubId, sipDelegateConnectionAidlWrapper.getSipDelegateBinder(), i);
+                    ((IImsRcsController) this.mBinderCache.removeRunnable(sipDelegateConnectionAidlWrapper)).destroySipDelegate(this.mSubId, sipDelegateConnectionAidlWrapper.getSipDelegateBinder(), i);
                     return;
                 } catch (RemoteException unused) {
+                    sipDelegateConnectionAidlWrapper.getStateCallbackBinder().onDestroyed(2);
                     return;
                 }
             } catch (RemoteException unused2) {
-                sipDelegateConnectionAidlWrapper.getStateCallbackBinder().onDestroyed(2);
                 return;
             }
         }
@@ -143,7 +143,7 @@ public class SipDelegateManager {
         Objects.requireNonNull(sipDelegateConnection, "SipDelegateConnection can not be null.");
         if (sipDelegateConnection instanceof SipDelegateConnectionAidlWrapper) {
             try {
-                this.mBinderCache.getBinder().triggerNetworkRegistration(this.mSubId, ((SipDelegateConnectionAidlWrapper) sipDelegateConnection).getSipDelegateBinder(), i, str);
+                ((IImsRcsController) this.mBinderCache.getBinder()).triggerNetworkRegistration(this.mSubId, ((SipDelegateConnectionAidlWrapper) sipDelegateConnection).getSipDelegateBinder(), i, str);
                 return;
             } catch (RemoteException unused) {
                 return;
@@ -158,12 +158,12 @@ public class SipDelegateManager {
         imsStateCallback.init(executor);
         BinderCacheManager<ITelephony> binderCacheManager = this.mTelephonyBinderCache;
         Objects.requireNonNull(imsStateCallback);
-        ITelephony listenOnBinder = binderCacheManager.listenOnBinder(imsStateCallback, new ImsMmTelManager$$ExternalSyntheticLambda3(imsStateCallback));
-        if (listenOnBinder == null) {
+        ITelephony iTelephony = (ITelephony) binderCacheManager.listenOnBinder(imsStateCallback, new ImsMmTelManager$$ExternalSyntheticLambda3(imsStateCallback));
+        if (iTelephony == null) {
             throw new ImsException("Telephony server is down", 1);
         }
         try {
-            listenOnBinder.registerImsStateCallback(this.mSubId, 2, imsStateCallback.getCallbackBinder(), this.mContext.getOpPackageName());
+            iTelephony.registerImsStateCallback(this.mSubId, 2, imsStateCallback.getCallbackBinder(), this.mContext.getOpPackageName());
         } catch (RemoteException | IllegalStateException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -173,10 +173,10 @@ public class SipDelegateManager {
 
     public void unregisterImsStateCallback(ImsStateCallback imsStateCallback) {
         Objects.requireNonNull(imsStateCallback, "Must include a non-null ImsStateCallback.");
-        ITelephony removeRunnable = this.mTelephonyBinderCache.removeRunnable(imsStateCallback);
-        if (removeRunnable != null) {
+        ITelephony iTelephony = (ITelephony) this.mTelephonyBinderCache.removeRunnable(imsStateCallback);
+        if (iTelephony != null) {
             try {
-                removeRunnable.unregisterImsStateCallback(imsStateCallback.getCallbackBinder());
+                iTelephony.unregisterImsStateCallback(imsStateCallback.getCallbackBinder());
             } catch (RemoteException unused) {
             }
         }
@@ -189,16 +189,16 @@ public class SipDelegateManager {
         try {
             BinderCacheManager<IImsRcsController> binderCacheManager = this.mBinderCache;
             Objects.requireNonNull(sipDialogStateCallback);
-            IImsRcsController listenOnBinder = binderCacheManager.listenOnBinder(sipDialogStateCallback, new Runnable() { // from class: android.telephony.ims.SipDelegateManager$$ExternalSyntheticLambda0
+            IImsRcsController iImsRcsController = (IImsRcsController) binderCacheManager.listenOnBinder(sipDialogStateCallback, new Runnable() { // from class: android.telephony.ims.SipDelegateManager$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SipDialogStateCallback.this.binderDied();
+                    sipDialogStateCallback.binderDied();
                 }
             });
-            if (listenOnBinder == null) {
+            if (iImsRcsController == null) {
                 throw new ImsException("Telephony server is down", 1);
             }
-            listenOnBinder.registerSipDialogStateCallback(this.mSubId, sipDialogStateCallback.getCallbackBinder());
+            iImsRcsController.registerSipDialogStateCallback(this.mSubId, sipDialogStateCallback.getCallbackBinder());
         } catch (RemoteException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -210,12 +210,12 @@ public class SipDelegateManager {
 
     public void unregisterSipDialogStateCallback(SipDialogStateCallback sipDialogStateCallback) throws ImsException {
         Objects.requireNonNull(sipDialogStateCallback, "Must include a non-null SipDialogStateCallback.");
-        IImsRcsController removeRunnable = this.mBinderCache.removeRunnable(sipDialogStateCallback);
+        IImsRcsController iImsRcsController = (IImsRcsController) this.mBinderCache.removeRunnable(sipDialogStateCallback);
         try {
-            if (removeRunnable == null) {
+            if (iImsRcsController == null) {
                 throw new ImsException("Telephony server is down", 1);
             }
-            removeRunnable.unregisterSipDialogStateCallback(this.mSubId, sipDialogStateCallback.getCallbackBinder());
+            iImsRcsController.unregisterSipDialogStateCallback(this.mSubId, sipDialogStateCallback.getCallbackBinder());
         } catch (RemoteException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {

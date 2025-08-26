@@ -154,15 +154,15 @@ public class EventManager {
                 return Collections.EMPTY_LIST;
             }
             ArrayList arrayList = new ArrayList();
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             synchronized (this.mEvents) {
                 for (Event event : this.mEvents) {
                     if (EventManager.this.requestResponsePairs.containsKey(event.eventId)) {
                         for (TimedEventPair timedEventPair : (List) EventManager.this.requestResponsePairs.get(event.eventId)) {
-                            hashMap.put(timedEventPair.mResponse, new PendingResponse(this, event.eventId, event.time, timedEventPair.mTimeoutMillis, timedEventPair.mName));
+                            map.put(timedEventPair.mResponse, new PendingResponse(this, event.eventId, event.time, timedEventPair.mTimeoutMillis, timedEventPair.mName));
                         }
                     }
-                    PendingResponse pendingResponse = (PendingResponse) hashMap.remove(event.eventId);
+                    PendingResponse pendingResponse = (PendingResponse) map.remove(event.eventId);
                     if (pendingResponse != null) {
                         long j = event.time - pendingResponse.requestEventTimeMillis;
                         if (j < pendingResponse.timeoutMillis) {
@@ -199,11 +199,11 @@ public class EventManager {
             }
             indentingPrintWriter.println("Timings (average for this call, milliseconds):");
             indentingPrintWriter.increaseIndent();
-            Map averageTimings = EventTiming.averageTimings(extractEventTimings());
-            ArrayList<String> arrayList = new ArrayList(averageTimings.keySet());
+            Map mapAverageTimings = EventTiming.averageTimings(extractEventTimings());
+            ArrayList<String> arrayList = new ArrayList(mapAverageTimings.keySet());
             Collections.sort(arrayList);
             for (String str : arrayList) {
-                indentingPrintWriter.printf("%s: %.2f\n", new Object[]{str, averageTimings.get(str)});
+                indentingPrintWriter.printf("%s: %.2f\n", new Object[]{str, mapAverageTimings.get(str)});
             }
             indentingPrintWriter.decreaseIndent();
             indentingPrintWriter.decreaseIndent();
@@ -272,9 +272,7 @@ public class EventManager {
         arrayList.sort(Comparator.comparingLong(new ToLongFunction() { // from class: android.telecom.Logging.EventManager$$ExternalSyntheticLambda0
             @Override // java.util.function.ToLongFunction
             public final long applyAsLong(Object obj) {
-                long j;
-                j = ((EventManager.Event) ((Pair) obj).second).time;
-                return j;
+                return ((EventManager.Event) ((Pair) obj).second).time;
             }
         }));
         indentingPrintWriter.increaseIndent();
@@ -297,17 +295,17 @@ public class EventManager {
         linkedBlockingQueue.forEach(new Consumer() { // from class: android.telecom.Logging.EventManager$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                EventManager.this.lambda$changeEventCacheSize$1((EventManager.EventRecord) obj);
+                this.f$0.lambda$changeEventCacheSize$1((EventManager.EventRecord) obj);
             }
         });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$changeEventCacheSize$1(EventRecord eventRecord) {
-        EventRecord poll;
+        EventRecord eventRecordPoll;
         Loggable recordEntry = eventRecord.getRecordEntry();
-        if (this.mEventRecords.remainingCapacity() == 0 && (poll = this.mEventRecords.poll()) != null) {
-            this.mCallEventRecordMap.remove(poll.getRecordEntry());
+        if (this.mEventRecords.remainingCapacity() == 0 && (eventRecordPoll = this.mEventRecords.poll()) != null) {
+            this.mCallEventRecordMap.remove(eventRecordPoll.getRecordEntry());
         }
         this.mEventRecords.add(eventRecord);
         this.mCallEventRecordMap.put(recordEntry, eventRecord);
@@ -330,10 +328,10 @@ public class EventManager {
     }
 
     private void addEventRecord(EventRecord eventRecord) {
-        EventRecord poll;
+        EventRecord eventRecordPoll;
         Loggable recordEntry = eventRecord.getRecordEntry();
-        if (this.mEventRecords.remainingCapacity() == 0 && (poll = this.mEventRecords.poll()) != null) {
-            this.mCallEventRecordMap.remove(poll.getRecordEntry());
+        if (this.mEventRecords.remainingCapacity() == 0 && (eventRecordPoll = this.mEventRecords.poll()) != null) {
+            this.mCallEventRecordMap.remove(eventRecordPoll.getRecordEntry());
         }
         try {
             this.mEventRecords.add(eventRecord);

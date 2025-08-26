@@ -6,7 +6,6 @@ import com.android.systemui.dump.DumpManager;
 import dagger.Lazy;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Dependency {
     public static Dependency sDependency;
@@ -119,6 +118,7 @@ public class Dependency {
     public Lazy mSecStatusBarWindowViewTouchedInteractor;
     public Lazy mSelectedUserInteractor;
     public Lazy mSensitiveNotificationProtectionController;
+    public Lazy mSensorPrivacyManager;
     public Lazy mSettingsHelper;
     public Lazy mShadeController;
     public Lazy mShadeHeaderController;
@@ -164,7 +164,6 @@ public class Dependency {
     public final ArrayMap mDependencies = new ArrayMap();
     public final ArrayMap mProviders = new ArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DependencyKey {
         public final String mDisplayName;
 
@@ -179,12 +178,12 @@ public class Dependency {
 
     public static void destroy(Class cls, Consumer consumer) {
         Dependency dependency = sDependency;
-        Object remove = dependency.mDependencies.remove(cls);
-        if (remove instanceof Dumpable) {
-            dependency.mDumpManager.unregisterDumpable(remove.getClass().getName());
+        Object objRemove = dependency.mDependencies.remove(cls);
+        if (objRemove instanceof Dumpable) {
+            dependency.mDumpManager.unregisterDumpable(objRemove.getClass().getName());
         }
-        if (remove != null) {
-            consumer.accept(remove);
+        if (objRemove != null) {
+            consumer.accept(objRemove);
         }
     }
 
@@ -202,12 +201,12 @@ public class Dependency {
     }
 
     public final synchronized Object getDependencyInner(Object obj) {
-        Object obj2;
-        obj2 = this.mDependencies.get(obj);
-        if (obj2 == null) {
-            obj2 = createDependency(obj);
-            this.mDependencies.put(obj, obj2);
+        Object objCreateDependency;
+        objCreateDependency = this.mDependencies.get(obj);
+        if (objCreateDependency == null) {
+            objCreateDependency = createDependency(obj);
+            this.mDependencies.put(obj, objCreateDependency);
         }
-        return obj2;
+        return objCreateDependency;
     }
 }

@@ -183,11 +183,11 @@ public class DrawBitmapScaled extends PaintOperation implements VariableSupport,
         this.mScaling.setup(this.mOutSrcLeft, this.mOutSrcTop, this.mOutSrcRight, this.mOutSrcBottom, this.mOutDstLeft, this.mOutDstTop, this.mOutDstRight, this.mOutDstBottom, this.mScaleType, this.mOutScaleFactor);
         paintContext.save();
         paintContext.clipRect(this.mOutDstLeft, this.mOutDstTop, this.mOutDstRight, this.mOutDstBottom);
-        int i = this.mImageId;
+        int integer = this.mImageId;
         if ((this.mMode & 1) != 0) {
-            i = paintContext.getContext().getInteger(i);
+            integer = paintContext.getContext().getInteger(integer);
         }
-        paintContext.drawBitmap(i, (int) this.mOutSrcLeft, (int) this.mOutSrcTop, (int) this.mOutSrcRight, (int) this.mOutSrcBottom, (int) this.mScaling.mFinalDstLeft, (int) this.mScaling.mFinalDstTop, (int) this.mScaling.mFinalDstRight, (int) this.mScaling.mFinalDstBottom, this.mContentDescId);
+        paintContext.drawBitmap(integer, (int) this.mOutSrcLeft, (int) this.mOutSrcTop, (int) this.mOutSrcRight, (int) this.mOutSrcBottom, (int) this.mScaling.mFinalDstLeft, (int) this.mScaling.mFinalDstTop, (int) this.mScaling.mFinalDstRight, (int) this.mScaling.mFinalDstBottom, this.mContentDescId);
         paintContext.restore();
     }
 

@@ -34,12 +34,12 @@ public final class DeviceStateSensorOrientationMap {
         }
     }
 
-    private DeviceStateSensorOrientationMap(ArrayList<Long> arrayList, HashMap<Long, Integer> hashMap) {
+    private DeviceStateSensorOrientationMap(ArrayList<Long> arrayList, HashMap<Long, Integer> map) {
         this.mElements = new long[arrayList.size()];
         for (int i = 0; i < arrayList.size(); i++) {
             this.mElements[i] = arrayList.get(i).longValue();
         }
-        this.mDeviceStateOrientationMap = hashMap;
+        this.mDeviceStateOrientationMap = map;
     }
 
     public int getSensorOrientation(long j) {

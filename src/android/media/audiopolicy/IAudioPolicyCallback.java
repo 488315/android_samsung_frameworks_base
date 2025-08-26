@@ -7,7 +7,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* loaded from: classes.dex */
+/* loaded from: classes3.dex */
 public interface IAudioPolicyCallback extends IInterface {
 
     public static class Default implements IAudioPolicyCallback {
@@ -87,9 +87,9 @@ public interface IAudioPolicyCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAudioPolicyCallback)) {
-                return (IAudioPolicyCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAudioPolicyCallback)) {
+                return (IAudioPolicyCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -132,21 +132,21 @@ public interface IAudioPolicyCallback extends IInterface {
             switch (i) {
                 case 1:
                     AudioFocusInfo audioFocusInfo = (AudioFocusInfo) parcel.readTypedObject(AudioFocusInfo.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyAudioFocusGrant(audioFocusInfo, readInt);
+                    notifyAudioFocusGrant(audioFocusInfo, i3);
                     return true;
                 case 2:
                     AudioFocusInfo audioFocusInfo2 = (AudioFocusInfo) parcel.readTypedObject(AudioFocusInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyAudioFocusLoss(audioFocusInfo2, readBoolean);
+                    notifyAudioFocusLoss(audioFocusInfo2, z);
                     return true;
                 case 3:
                     AudioFocusInfo audioFocusInfo3 = (AudioFocusInfo) parcel.readTypedObject(AudioFocusInfo.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyAudioFocusRequest(audioFocusInfo3, readInt2);
+                    notifyAudioFocusRequest(audioFocusInfo3, i4);
                     return true;
                 case 4:
                     AudioFocusInfo audioFocusInfo4 = (AudioFocusInfo) parcel.readTypedObject(AudioFocusInfo.CREATOR);
@@ -154,15 +154,15 @@ public interface IAudioPolicyCallback extends IInterface {
                     notifyAudioFocusAbandon(audioFocusInfo4);
                     return true;
                 case 5:
-                    String readString = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyMixStateUpdate(readString, readInt3);
+                    notifyMixStateUpdate(string, i5);
                     return true;
                 case 6:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyVolumeAdjust(readInt4);
+                    notifyVolumeAdjust(i6);
                     return true;
                 case 7:
                     notifyUnregistration();
@@ -190,88 +190,88 @@ public interface IAudioPolicyCallback extends IInterface {
 
             @Override // android.media.audiopolicy.IAudioPolicyCallback
             public void notifyAudioFocusGrant(AudioFocusInfo audioFocusInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioFocusInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioFocusInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.audiopolicy.IAudioPolicyCallback
             public void notifyAudioFocusLoss(AudioFocusInfo audioFocusInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioFocusInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioFocusInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.audiopolicy.IAudioPolicyCallback
             public void notifyAudioFocusRequest(AudioFocusInfo audioFocusInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioFocusInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioFocusInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.audiopolicy.IAudioPolicyCallback
             public void notifyAudioFocusAbandon(AudioFocusInfo audioFocusInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioFocusInfo, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioFocusInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.audiopolicy.IAudioPolicyCallback
             public void notifyMixStateUpdate(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.audiopolicy.IAudioPolicyCallback
             public void notifyVolumeAdjust(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.audiopolicy.IAudioPolicyCallback
             public void notifyUnregistration() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

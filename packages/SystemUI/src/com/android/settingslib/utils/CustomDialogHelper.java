@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
+import android.view.SemBlurInfo;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,7 +16,6 @@ import android.widget.TextView;
 import androidx.appcompat.widget.DialogTitle;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CustomDialogHelper {
     public final Button mBackButton;
@@ -36,23 +36,24 @@ public class CustomDialogHelper {
 
     public CustomDialogHelper(Context context) {
         this.mContext = context;
-        View inflate = LayoutInflater.from(context).inflate(R.layout.sec_alert_dialog, (ViewGroup) null);
-        this.mDialogContent = inflate;
-        this.mDialogIcon = (ImageView) inflate.findViewById(R.id.dialog_with_icon_icon);
-        this.mDialogTitle = (DialogTitle) inflate.findViewById(R.id.dialog_with_icon_title);
-        this.mDialogMessage = (TextView) inflate.findViewById(R.id.dialog_with_icon_message);
-        this.mCustomLayout = (FrameLayout) inflate.findViewById(R.id.custom_layout);
-        this.mPositiveButton = (Button) inflate.findViewById(R.id.button_ok);
-        this.mNegativeButton = (Button) inflate.findViewById(R.id.button_cancel);
-        this.mBackButton = (Button) inflate.findViewById(R.id.button_back);
-        this.mCustomPanel = (FrameLayout) inflate.findViewById(R.id.customPanel);
-        this.mContentPanel = (FrameLayout) inflate.findViewById(R.id.contentPanel);
-        this.mTitleTemplete = (LinearLayout) inflate.findViewById(R.id.title_template);
-        this.mDivider1 = inflate.findViewById(R.id.sem_divider1);
-        this.mDivider2 = inflate.findViewById(R.id.sem_divider2);
-        AlertDialog create = new AlertDialog.Builder(context).setView(inflate).setCancelable(true).create();
-        this.mDialog = create;
-        create.getWindow().setSoftInputMode(4);
+        View viewInflate = LayoutInflater.from(context).inflate(R.layout.sec_alert_dialog, (ViewGroup) null);
+        this.mDialogContent = viewInflate;
+        this.mDialogIcon = (ImageView) viewInflate.findViewById(R.id.dialog_with_icon_icon);
+        this.mDialogTitle = (DialogTitle) viewInflate.findViewById(R.id.dialog_with_icon_title);
+        this.mDialogMessage = (TextView) viewInflate.findViewById(R.id.dialog_with_icon_message);
+        this.mCustomLayout = (FrameLayout) viewInflate.findViewById(R.id.custom_layout);
+        this.mPositiveButton = (Button) viewInflate.findViewById(R.id.button_ok);
+        this.mNegativeButton = (Button) viewInflate.findViewById(R.id.button_cancel);
+        this.mBackButton = (Button) viewInflate.findViewById(R.id.button_back);
+        this.mCustomPanel = (FrameLayout) viewInflate.findViewById(R.id.customPanel);
+        this.mContentPanel = (FrameLayout) viewInflate.findViewById(R.id.contentPanel);
+        this.mTitleTemplete = (LinearLayout) viewInflate.findViewById(R.id.title_template);
+        this.mDivider1 = viewInflate.findViewById(R.id.sem_divider1);
+        this.mDivider2 = viewInflate.findViewById(R.id.sem_divider2);
+        AlertDialog alertDialogCreate = new AlertDialog.Builder(context).setView(viewInflate).setCancelable(true).create();
+        this.mDialog = alertDialogCreate;
+        alertDialogCreate.getWindow().setSoftInputMode(4);
+        ((LinearLayout) viewInflate.findViewById(R.id.parentPanel)).semSetBlurInfo(new SemBlurInfo.Builder(0).setColorCurvePreset((context.getResources().getConfiguration().uiMode & 48) == 32 ? 130 : 115).setBackgroundCornerRadius(context.getResources().getDimensionPixelSize(R.dimen.sec_dialog_corner_radius) * 1.0f).build());
     }
 
     public final void checkMaxFontScale(TextView textView, int i) {
@@ -62,7 +63,7 @@ public class CustomDialogHelper {
         }
     }
 
-    public final void setButton(int i, int i2, View.OnClickListener onClickListener) {
+    public final void setButton(int i, int i2, View.OnClickListener onClickListener) throws Resources.NotFoundException {
         int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.sec_dialog_button_text_size);
         if (i == 4) {
             this.mBackButton.setText(i2);
@@ -145,37 +146,37 @@ public class CustomDialogHelper {
         }
     }
 
-    public final void setupDialogPaddings() {
-        View findViewById = this.mDialogContent.findViewById(R.id.parentPanel);
-        View findViewById2 = this.mDialogContent.findViewById(R.id.title_template);
-        View findViewById3 = this.mDialogContent.findViewById(R.id.scrollView);
-        View findViewById4 = this.mDialogContent.findViewById(R.id.topPanel);
-        View findViewById5 = this.mDialogContent.findViewById(R.id.buttonBarLayout);
-        View findViewById6 = this.mDialogContent.findViewById(R.id.customPanel);
-        View findViewById7 = this.mDialogContent.findViewById(R.id.contentPanel);
-        boolean z = (findViewById6 == null || findViewById6.getVisibility() == 8) ? false : true;
-        boolean z2 = (findViewById4 == null || findViewById4.getVisibility() == 8) ? false : true;
-        boolean z3 = (findViewById7 == null || findViewById7.getVisibility() == 8) ? false : true;
+    public final void setupDialogPaddings() throws Resources.NotFoundException {
+        View viewFindViewById = this.mDialogContent.findViewById(R.id.parentPanel);
+        View viewFindViewById2 = this.mDialogContent.findViewById(R.id.title_template);
+        View viewFindViewById3 = this.mDialogContent.findViewById(R.id.scrollView);
+        View viewFindViewById4 = this.mDialogContent.findViewById(R.id.topPanel);
+        View viewFindViewById5 = this.mDialogContent.findViewById(R.id.buttonBarLayout);
+        View viewFindViewById6 = this.mDialogContent.findViewById(R.id.customPanel);
+        View viewFindViewById7 = this.mDialogContent.findViewById(R.id.contentPanel);
+        boolean z = (viewFindViewById6 == null || viewFindViewById6.getVisibility() == 8) ? false : true;
+        boolean z2 = (viewFindViewById4 == null || viewFindViewById4.getVisibility() == 8) ? false : true;
+        boolean z3 = (viewFindViewById7 == null || viewFindViewById7.getVisibility() == 8) ? false : true;
         Resources resources = this.mContext.getResources();
         if (!z || z2 || z3) {
-            findViewById.setPadding(0, resources.getDimensionPixelSize(R.dimen.sec_dialog_title_padding_top), 0, 0);
+            viewFindViewById.setPadding(0, resources.getDimensionPixelSize(R.dimen.sec_dialog_title_padding_top), 0, 0);
         } else {
-            findViewById.setPadding(0, 0, 0, 0);
+            viewFindViewById.setPadding(0, 0, 0, 0);
         }
-        if (findViewById2 != null) {
+        if (viewFindViewById2 != null) {
             int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.sec_dialog_padding_horizontal);
             if (z && z2 && !z3) {
-                findViewById2.setPadding(dimensionPixelSize, 0, dimensionPixelSize, 0);
+                viewFindViewById2.setPadding(dimensionPixelSize, 0, dimensionPixelSize, 0);
             } else {
-                findViewById2.setPadding(dimensionPixelSize, 0, dimensionPixelSize, resources.getDimensionPixelSize(R.dimen.sec_dialog_title_padding_bottom));
+                viewFindViewById2.setPadding(dimensionPixelSize, 0, dimensionPixelSize, resources.getDimensionPixelSize(R.dimen.sec_dialog_title_padding_bottom));
             }
         }
-        if (findViewById3 != null) {
-            findViewById3.setPadding(resources.getDimensionPixelSize(R.dimen.sec_dialog_body_text_scroll_padding_start), 0, resources.getDimensionPixelSize(R.dimen.sec_dialog_body_text_scroll_padding_end), resources.getDimensionPixelSize(R.dimen.sec_dialog_body_text_padding_bottom));
+        if (viewFindViewById3 != null) {
+            viewFindViewById3.setPadding(resources.getDimensionPixelSize(R.dimen.sec_dialog_body_text_scroll_padding_start), 0, resources.getDimensionPixelSize(R.dimen.sec_dialog_body_text_scroll_padding_end), resources.getDimensionPixelSize(R.dimen.sec_dialog_body_text_padding_bottom));
         }
-        if (findViewById5 != null) {
+        if (viewFindViewById5 != null) {
             int dimensionPixelSize2 = resources.getDimensionPixelSize(R.dimen.sec_dialog_button_bar_padding_horizontal);
-            findViewById5.setPadding(dimensionPixelSize2, 0, dimensionPixelSize2, resources.getDimensionPixelSize(R.dimen.sec_dialog_button_bar_padding_bottom));
+            viewFindViewById5.setPadding(dimensionPixelSize2, 0, dimensionPixelSize2, resources.getDimensionPixelSize(R.dimen.sec_dialog_button_bar_padding_bottom));
         }
     }
 }

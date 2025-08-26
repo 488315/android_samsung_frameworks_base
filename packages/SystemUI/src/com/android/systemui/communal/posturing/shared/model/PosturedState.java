@@ -2,11 +2,9 @@ package com.android.systemui.communal.posturing.shared.model;
 
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface PosturedState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotPostured implements PosturedState {
         public static final NotPostured INSTANCE = new NotPostured();
 
@@ -26,7 +24,6 @@ public interface PosturedState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Postured implements PosturedState {
         public static final Postured INSTANCE = new Postured();
 
@@ -46,7 +43,6 @@ public interface PosturedState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Unknown implements PosturedState {
         public static final Unknown INSTANCE = new Unknown();
 

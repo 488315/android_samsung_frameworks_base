@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DisplayRepositoryImpl$mapElementsLazily$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ Function1 $createValue;
@@ -48,17 +47,17 @@ final class DisplayRepositoryImpl$mapElementsLazily$1 extends SuspendLambda impl
         if (Intrinsics.areEqual(set, displayRepositoryImpl$mapElementsLazily$State.previousSet)) {
             return displayRepositoryImpl$mapElementsLazily$State;
         }
-        Set minus = SetsKt___SetsKt.minus(displayRepositoryImpl$mapElementsLazily$State.previousSet, (Iterable) set);
-        Set minus2 = SetsKt___SetsKt.minus(set, (Iterable) displayRepositoryImpl$mapElementsLazily$State.previousSet);
+        Set setMinus = SetsKt___SetsKt.minus(displayRepositoryImpl$mapElementsLazily$State.previousSet, (Iterable) set);
+        Set setMinus2 = SetsKt___SetsKt.minus(set, (Iterable) displayRepositoryImpl$mapElementsLazily$State.previousSet);
         LinkedHashMap linkedHashMap = new LinkedHashMap(displayRepositoryImpl$mapElementsLazily$State.valueMap);
         Function1 function1 = this.$createValue;
-        for (Object obj2 : minus2) {
-            Object mo779invoke = function1.mo779invoke(obj2);
-            if (mo779invoke != null) {
-                linkedHashMap.put(obj2, mo779invoke);
+        for (Object obj2 : setMinus2) {
+            Object objMo781invoke = function1.mo781invoke(obj2);
+            if (objMo781invoke != null) {
+                linkedHashMap.put(obj2, objMo781invoke);
             }
         }
-        Iterator it = minus.iterator();
+        Iterator it = setMinus.iterator();
         while (it.hasNext()) {
             linkedHashMap.remove(it.next());
         }

@@ -423,7 +423,7 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
         if (i == this.mCurIndex) {
             return false;
         }
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         if (this.mDrawableContainerState.mExitFadeDuration > 0) {
             Drawable drawable = this.mLastDrawable;
             if (drawable != null) {
@@ -433,7 +433,7 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
             if (drawable2 != null) {
                 this.mLastDrawable = drawable2;
                 this.mLastIndex = this.mCurIndex;
-                this.mExitAnimationEnd = this.mDrawableContainerState.mExitFadeDuration + uptimeMillis;
+                this.mExitAnimationEnd = this.mDrawableContainerState.mExitFadeDuration + jUptimeMillis;
             } else {
                 this.mLastDrawable = null;
                 this.mLastIndex = -1;
@@ -451,7 +451,7 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
             this.mCurIndex = i;
             if (child != null) {
                 if (this.mDrawableContainerState.mEnterFadeDuration > 0) {
-                    this.mEnterAnimationEnd = uptimeMillis + this.mDrawableContainerState.mEnterFadeDuration;
+                    this.mEnterAnimationEnd = jUptimeMillis + this.mDrawableContainerState.mEnterFadeDuration;
                 }
                 initializeDrawableForDisplay(child);
             }
@@ -513,96 +513,66 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x006d A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:23:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0068  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x003f  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0068  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x006d A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:26:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    void animate(boolean r14) {
-        /*
-            r13 = this;
-            r0 = 1
-            r13.mHasAlpha = r0
-            long r1 = android.os.SystemClock.uptimeMillis()
-            android.graphics.drawable.Drawable r3 = r13.mCurrDrawable
-            r4 = 255(0xff, double:1.26E-321)
-            r6 = 0
-            r8 = 0
-            if (r3 == 0) goto L38
-            long r9 = r13.mEnterAnimationEnd
-            int r11 = (r9 > r6 ? 1 : (r9 == r6 ? 0 : -1))
-            if (r11 == 0) goto L3a
-            int r11 = (r9 > r1 ? 1 : (r9 == r1 ? 0 : -1))
-            if (r11 > 0) goto L22
-            int r9 = r13.mAlpha
-            r3.setAlpha(r9)
-            r13.mEnterAnimationEnd = r6
-            goto L3a
-        L22:
-            long r9 = r9 - r1
-            long r9 = r9 * r4
-            int r3 = (int) r9
-            android.graphics.drawable.DrawableContainer$DrawableContainerState r9 = r13.mDrawableContainerState
-            int r9 = r9.mEnterFadeDuration
-            int r3 = r3 / r9
-            android.graphics.drawable.Drawable r9 = r13.mCurrDrawable
-            int r3 = 255 - r3
-            int r10 = r13.mAlpha
-            int r3 = r3 * r10
-            int r3 = r3 / 255
-            r9.setAlpha(r3)
-            r3 = r0
-            goto L3b
-        L38:
-            r13.mEnterAnimationEnd = r6
-        L3a:
-            r3 = r8
-        L3b:
-            android.graphics.drawable.Drawable r9 = r13.mLastDrawable
-            if (r9 == 0) goto L68
-            long r10 = r13.mExitAnimationEnd
-            int r12 = (r10 > r6 ? 1 : (r10 == r6 ? 0 : -1))
-            if (r12 == 0) goto L6a
-            int r12 = (r10 > r1 ? 1 : (r10 == r1 ? 0 : -1))
-            if (r12 > 0) goto L55
-            r9.setVisible(r8, r8)
-            r0 = 0
-            r13.mLastDrawable = r0
-            r0 = -1
-            r13.mLastIndex = r0
-            r13.mExitAnimationEnd = r6
-            goto L6a
-        L55:
-            long r10 = r10 - r1
-            long r10 = r10 * r4
-            int r3 = (int) r10
-            android.graphics.drawable.DrawableContainer$DrawableContainerState r4 = r13.mDrawableContainerState
-            int r4 = r4.mExitFadeDuration
-            int r3 = r3 / r4
-            android.graphics.drawable.Drawable r4 = r13.mLastDrawable
-            int r5 = r13.mAlpha
-            int r3 = r3 * r5
-            int r3 = r3 / 255
-            r4.setAlpha(r3)
-            goto L6b
-        L68:
-            r13.mExitAnimationEnd = r6
-        L6a:
-            r0 = r3
-        L6b:
-            if (r14 == 0) goto L77
-            if (r0 == 0) goto L77
-            java.lang.Runnable r14 = r13.mAnimationRunnable
-            r3 = 16
-            long r1 = r1 + r3
-            r13.scheduleSelf(r14, r1)
-        L77:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.drawable.DrawableContainer.animate(boolean):void");
+    void animate(boolean z) {
+        boolean z2;
+        Drawable drawable;
+        boolean z3 = true;
+        this.mHasAlpha = true;
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        Drawable drawable2 = this.mCurrDrawable;
+        if (drawable2 != null) {
+            long j = this.mEnterAnimationEnd;
+            if (j != 0) {
+                if (j <= jUptimeMillis) {
+                    drawable2.setAlpha(this.mAlpha);
+                    this.mEnterAnimationEnd = 0L;
+                } else {
+                    this.mCurrDrawable.setAlpha(((255 - (((int) ((j - jUptimeMillis) * 255)) / this.mDrawableContainerState.mEnterFadeDuration)) * this.mAlpha) / 255);
+                    z2 = true;
+                }
+            }
+            drawable = this.mLastDrawable;
+            if (drawable == null) {
+                long j2 = this.mExitAnimationEnd;
+                if (j2 != 0) {
+                    if (j2 <= jUptimeMillis) {
+                        drawable.setVisible(false, false);
+                        this.mLastDrawable = null;
+                        this.mLastIndex = -1;
+                        this.mExitAnimationEnd = 0L;
+                    } else {
+                        this.mLastDrawable.setAlpha(((((int) ((j2 - jUptimeMillis) * 255)) / this.mDrawableContainerState.mExitFadeDuration) * this.mAlpha) / 255);
+                    }
+                }
+                if (z && z3) {
+                    scheduleSelf(this.mAnimationRunnable, jUptimeMillis + 16);
+                    return;
+                }
+                return;
+            }
+            this.mExitAnimationEnd = 0L;
+            z3 = z2;
+            if (z) {
+                return;
+            } else {
+                return;
+            }
+        }
+        this.mEnterAnimationEnd = 0L;
+        z2 = false;
+        drawable = this.mLastDrawable;
+        if (drawable == null) {
+        }
+        z3 = z2;
+        if (z) {
+        }
     }
 
     @Override // android.graphics.drawable.Drawable
@@ -636,9 +606,9 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
     @Override // android.graphics.drawable.Drawable
     public Drawable mutate() {
         if (!this.mMutated && super.mutate() == this) {
-            DrawableContainerState cloneConstantState = cloneConstantState();
-            cloneConstantState.mutate();
-            setConstantState(cloneConstantState);
+            DrawableContainerState drawableContainerStateCloneConstantState = cloneConstantState();
+            drawableContainerStateCloneConstantState.mutate();
+            setConstantState(drawableContainerStateCloneConstantState);
             this.mMutated = true;
         }
         return this;
@@ -707,8 +677,8 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
                 resources2 = drawableContainerState != null ? drawableContainerState.mSourceRes : null;
             }
             this.mSourceRes = resources2;
-            int resolveDensity = Drawable.resolveDensity(resources, drawableContainerState != null ? drawableContainerState.mDensity : 0);
-            this.mDensity = resolveDensity;
+            int iResolveDensity = Drawable.resolveDensity(resources, drawableContainerState != null ? drawableContainerState.mDensity : 0);
+            this.mDensity = iResolveDensity;
             if (drawableContainerState != null) {
                 this.mChangingConfigurations = drawableContainerState.mChangingConfigurations;
                 this.mChildrenChangingConfigurations = drawableContainerState.mChildrenChangingConfigurations;
@@ -728,7 +698,7 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
                 this.mBlendMode = drawableContainerState.mBlendMode;
                 this.mHasTintList = drawableContainerState.mHasTintList;
                 this.mHasTintMode = drawableContainerState.mHasTintMode;
-                if (drawableContainerState.mDensity == resolveDensity) {
+                if (drawableContainerState.mDensity == iResolveDensity) {
                     if (drawableContainerState.mCheckedPadding) {
                         this.mConstantPadding = new Rect(drawableContainerState.mConstantPadding);
                         this.mCheckedPadding = true;
@@ -754,7 +724,7 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
                 this.mNumChildren = drawableContainerState.mNumChildren;
                 SparseArray<Drawable.ConstantState> sparseArray = drawableContainerState.mDrawableFutures;
                 if (sparseArray != null) {
-                    this.mDrawableFutures = sparseArray.m5529clone();
+                    this.mDrawableFutures = sparseArray.m5536clone();
                 } else {
                     this.mDrawableFutures = new SparseArray<>(this.mNumChildren);
                 }
@@ -822,9 +792,9 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
 
         private Drawable prepareDrawable(Drawable drawable) {
             drawable.setLayoutDirection(this.mLayoutDirection);
-            Drawable mutate = drawable.mutate();
-            mutate.setCallback(this.mOwner);
-            return mutate;
+            Drawable drawableMutate = drawable.mutate();
+            drawableMutate.setCallback(this.mOwner);
+            return drawableMutate;
         }
 
         public final int getChildCount() {
@@ -837,22 +807,22 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
         }
 
         public final Drawable getChild(int i) {
-            int indexOfKey;
+            int iIndexOfKey;
             Drawable drawable = this.mDrawables[i];
             if (drawable != null) {
                 return drawable;
             }
             SparseArray<Drawable.ConstantState> sparseArray = this.mDrawableFutures;
-            if (sparseArray == null || (indexOfKey = sparseArray.indexOfKey(i)) < 0) {
+            if (sparseArray == null || (iIndexOfKey = sparseArray.indexOfKey(i)) < 0) {
                 return null;
             }
-            Drawable prepareDrawable = prepareDrawable(this.mDrawableFutures.valueAt(indexOfKey).newDrawable(this.mSourceRes));
-            this.mDrawables[i] = prepareDrawable;
-            this.mDrawableFutures.removeAt(indexOfKey);
+            Drawable drawablePrepareDrawable = prepareDrawable(this.mDrawableFutures.valueAt(iIndexOfKey).newDrawable(this.mSourceRes));
+            this.mDrawables[i] = drawablePrepareDrawable;
+            this.mDrawableFutures.removeAt(iIndexOfKey);
             if (this.mDrawableFutures.size() == 0) {
                 this.mDrawableFutures = null;
             }
-            return prepareDrawable;
+            return drawablePrepareDrawable;
         }
 
         final boolean setLayoutDirection(int i, int i2) {
@@ -875,10 +845,10 @@ public class DrawableContainer extends Drawable implements Drawable.Callback {
         final void updateDensity(Resources resources) {
             if (resources != null) {
                 this.mSourceRes = resources;
-                int resolveDensity = Drawable.resolveDensity(resources, this.mDensity);
+                int iResolveDensity = Drawable.resolveDensity(resources, this.mDensity);
                 int i = this.mDensity;
-                this.mDensity = resolveDensity;
-                if (i != resolveDensity) {
+                this.mDensity = iResolveDensity;
+                if (i != iResolveDensity) {
                     this.mCheckedConstantSize = false;
                     this.mCheckedPadding = false;
                 }

@@ -37,7 +37,6 @@ import kotlin.jvm.internal.Ref$IntRef;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.jvm.internal.SpreadBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopMixedTransitionHandler implements MixedTransitionHandler, FreeformTaskTransitionStarter {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -49,7 +48,6 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
     public final RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer;
     public final Transitions transitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,10 +57,8 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class PendingMixedTransition {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Close extends PendingMixedTransition {
             public final IBinder transition;
 
@@ -92,7 +88,6 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Launch extends PendingMixedTransition {
             public final Integer exitingImmersiveTask;
             public final Integer launchingTask;
@@ -124,13 +119,13 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
             }
 
             public final int hashCode() {
-                int hashCode = this.transition.hashCode() * 31;
+                int iHashCode = this.transition.hashCode() * 31;
                 Integer num = this.launchingTask;
-                int hashCode2 = (hashCode + (num == null ? 0 : num.hashCode())) * 31;
+                int iHashCode2 = (iHashCode + (num == null ? 0 : num.hashCode())) * 31;
                 Integer num2 = this.minimizingTask;
-                int hashCode3 = (hashCode2 + (num2 == null ? 0 : num2.hashCode())) * 31;
+                int iHashCode3 = (iHashCode2 + (num2 == null ? 0 : num2.hashCode())) * 31;
                 Integer num3 = this.exitingImmersiveTask;
-                return hashCode3 + (num3 != null ? num3.hashCode() : 0);
+                return iHashCode3 + (num3 != null ? num3.hashCode() : 0);
             }
 
             public final String toString() {
@@ -138,7 +133,6 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Minimize extends PendingMixedTransition {
             public final boolean isLastTask;
             public final int minimizingTask;
@@ -182,7 +176,6 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class MinimizeAll extends PendingMixedTransition {
             public final int displayId;
             public final IBinder transition;
@@ -255,7 +248,7 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
         return desktopMixedTransitionHandler.transitions.dispatchTransition(iBinder, transitionInfo, transaction, transaction2, new Transitions.TransitionFinishCallback() { // from class: com.android.wm.shell.desktopmode.DesktopMixedTransitionHandler$dispatchToLeftoverHandler$1
             @Override // com.android.wm.shell.transition.Transitions.TransitionFinishCallback
             public final void onTransitionFinished(WindowContainerTransaction windowContainerTransaction) {
-                Function0 function02 = Function0.this;
+                Function0 function02 = function0;
                 if (function02 != null) {
                     function02.invoke();
                 }
@@ -265,15 +258,15 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
     }
 
     public static TransitionInfo.Change findLaunchChange(TransitionInfo transitionInfo) {
-        Object obj;
+        Object next;
         Iterator it = transitionInfo.getChanges().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            TransitionInfo.Change change = (TransitionInfo.Change) obj;
+            next = it.next();
+            TransitionInfo.Change change = (TransitionInfo.Change) next;
             if (change.getMode() == 1 && change.getTaskInfo() != null) {
                 ActivityManager.RunningTaskInfo taskInfo = change.getTaskInfo();
                 taskInfo.getClass();
@@ -282,38 +275,38 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
                 }
             }
         }
-        return (TransitionInfo.Change) obj;
+        return (TransitionInfo.Change) next;
     }
 
     public static TransitionInfo.Change findTaskChange(TransitionInfo transitionInfo, int i) {
-        Object obj;
+        Object next;
         Iterator it = transitionInfo.getChanges().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            ActivityManager.RunningTaskInfo taskInfo = ((TransitionInfo.Change) obj).getTaskInfo();
+            next = it.next();
+            ActivityManager.RunningTaskInfo taskInfo = ((TransitionInfo.Change) next).getTaskInfo();
             if (taskInfo != null && taskInfo.taskId == i) {
                 break;
             }
         }
-        return (TransitionInfo.Change) obj;
+        return (TransitionInfo.Change) next;
     }
 
     public static void logV$6(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String concat = "%s: ".concat(str);
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopMixedTransitionHandler", objArr);
-        ProtoLog.v(shellProtoLogGroup, concat, m.list.toArray(new Object[m.list.size()]));
+        String strConcat = "%s: ".concat(str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopMixedTransitionHandler", objArr);
+        ProtoLog.v(shellProtoLogGroup, strConcat, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public static void logW$3(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String concat = "%s: ".concat(str);
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopMixedTransitionHandler", objArr);
-        ProtoLog.w(shellProtoLogGroup, concat, m.list.toArray(new Object[m.list.size()]));
+        String strConcat = "%s: ".concat(str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopMixedTransitionHandler", objArr);
+        ProtoLog.w(shellProtoLogGroup, strConcat, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public static WindowContainerTransaction merge(WindowContainerTransaction windowContainerTransaction, WindowContainerTransaction windowContainerTransaction2) {
@@ -330,7 +323,7 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
         CollectionsKt__MutableCollectionsKt.removeAll(this.pendingMixedTransitions, new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopMixedTransitionHandler$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 IBinder iBinder2 = iBinder;
                 int i = DesktopMixedTransitionHandler.$r8$clinit;
                 return Boolean.valueOf(Intrinsics.areEqual(((DesktopMixedTransitionHandler.PendingMixedTransition) obj).getTransition(), iBinder2));
@@ -340,9 +333,9 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     public final boolean startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, final Transitions.TransitionFinishCallback transitionFinishCallback) {
+        Object objValueOf;
         Object obj;
-        Object obj2;
-        TransitionInfo.Change findLaunchChange;
+        TransitionInfo.Change changeFindLaunchChange;
         ActivityManager.RunningTaskInfo taskInfo;
         ActivityManager.RunningTaskInfo taskInfo2;
         ActivityManager.RunningTaskInfo taskInfo3;
@@ -350,18 +343,18 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
         int size = arrayList.size();
         int i = 0;
         while (true) {
-            obj = null;
+            objValueOf = null;
             if (i >= size) {
-                obj2 = null;
+                obj = null;
                 break;
             }
-            obj2 = arrayList.get(i);
+            obj = arrayList.get(i);
             i++;
-            if (Intrinsics.areEqual(((PendingMixedTransition) obj2).getTransition(), iBinder)) {
+            if (Intrinsics.areEqual(((PendingMixedTransition) obj).getTransition(), iBinder)) {
                 break;
             }
         }
-        PendingMixedTransition pendingMixedTransition = (PendingMixedTransition) obj2;
+        PendingMixedTransition pendingMixedTransition = (PendingMixedTransition) obj;
         if (pendingMixedTransition == null) {
             logV$6("No pending desktop transition", new Object[0]);
             return false;
@@ -380,14 +373,14 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
                     if (change.getMode() == 2 && !change.hasFlags(2) && ((taskInfo3 = change.getTaskInfo()) == null || taskInfo3.taskId != -1)) {
                         ActivityManager.RunningTaskInfo taskInfo4 = change.getTaskInfo();
                         if (taskInfo4 != null && taskInfo4.getWindowingMode() == 5) {
-                            obj = next;
+                            objValueOf = next;
                             break;
                         }
                     }
                 }
-                obj = (TransitionInfo.Change) obj;
+                objValueOf = (TransitionInfo.Change) objValueOf;
             }
-            if (obj == null) {
+            if (objValueOf == null) {
                 logW$3("Should have closing desktop task", new Object[0]);
                 return false;
             }
@@ -426,20 +419,20 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
         }
         PendingMixedTransition.Launch launch = (PendingMixedTransition.Launch) pendingMixedTransition;
         Integer num = launch.exitingImmersiveTask;
-        TransitionInfo.Change findTaskChange = num != null ? findTaskChange(transitionInfo, num.intValue()) : null;
+        TransitionInfo.Change changeFindTaskChange = num != null ? findTaskChange(transitionInfo, num.intValue()) : null;
         Integer num2 = launch.minimizingTask;
-        TransitionInfo.Change findTaskChange2 = num2 != null ? findTaskChange(transitionInfo, num2.intValue()) : null;
+        TransitionInfo.Change changeFindTaskChange2 = num2 != null ? findTaskChange(transitionInfo, num2.intValue()) : null;
         Integer num3 = launch.launchingTask;
         if (num3 != null) {
-            findLaunchChange = findTaskChange(transitionInfo, num3.intValue());
-            if (DesktopModeFlags.ENABLE_DESKTOP_OPENING_DEEPLINK_MINIMIZE_ANIMATION_BUGFIX.isTrue() && findLaunchChange == null) {
-                findLaunchChange = findLaunchChange(transitionInfo);
+            changeFindLaunchChange = findTaskChange(transitionInfo, num3.intValue());
+            if (DesktopModeFlags.ENABLE_DESKTOP_OPENING_DEEPLINK_MINIMIZE_ANIMATION_BUGFIX.isTrue() && changeFindLaunchChange == null) {
+                changeFindLaunchChange = findLaunchChange(transitionInfo);
             }
         } else {
-            findLaunchChange = findLaunchChange(transitionInfo);
+            changeFindLaunchChange = findLaunchChange(transitionInfo);
         }
-        if (findLaunchChange == null) {
-            if (findTaskChange != null) {
+        if (changeFindLaunchChange == null) {
+            if (changeFindTaskChange != null) {
                 throw new IllegalStateException("Check failed.");
             }
             logV$6("No launch Change, returning", new Object[0]);
@@ -453,60 +446,60 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
             /* JADX WARN: Type inference failed for: r5v1, types: [T, android.window.WindowContainerTransaction] */
             @Override // com.android.wm.shell.transition.Transitions.TransitionFinishCallback
             public final void onTransitionFinished(WindowContainerTransaction windowContainerTransaction) {
-                Ref$IntRef ref$IntRef2 = Ref$IntRef.this;
+                Ref$IntRef ref$IntRef2 = ref$IntRef;
                 ref$IntRef2.element--;
                 Ref$ObjectRef ref$ObjectRef2 = ref$ObjectRef;
                 WindowContainerTransaction windowContainerTransaction2 = (WindowContainerTransaction) ref$ObjectRef2.element;
                 int i2 = DesktopMixedTransitionHandler.$r8$clinit;
                 this.getClass();
-                ?? merge = DesktopMixedTransitionHandler.merge(windowContainerTransaction2, windowContainerTransaction);
-                ref$ObjectRef2.element = merge;
+                ?? Merge = DesktopMixedTransitionHandler.merge(windowContainerTransaction2, windowContainerTransaction);
+                ref$ObjectRef2.element = Merge;
                 if (ref$IntRef2.element > 0) {
                     return;
                 }
-                transitionFinishCallback.onTransitionFinished(merge);
+                transitionFinishCallback.onTransitionFinished(Merge);
             }
         };
-        ActivityManager.RunningTaskInfo taskInfo6 = findLaunchChange.getTaskInfo();
+        ActivityManager.RunningTaskInfo taskInfo6 = changeFindLaunchChange.getTaskInfo();
         taskInfo6.getClass();
-        Integer valueOf = Integer.valueOf(taskInfo6.taskId);
-        Integer valueOf2 = (findTaskChange2 == null || (taskInfo2 = findTaskChange2.getTaskInfo()) == null) ? null : Integer.valueOf(taskInfo2.taskId);
-        if (findTaskChange != null && (taskInfo = findTaskChange.getTaskInfo()) != null) {
-            obj = Integer.valueOf(taskInfo.taskId);
+        Integer numValueOf = Integer.valueOf(taskInfo6.taskId);
+        Integer numValueOf2 = (changeFindTaskChange2 == null || (taskInfo2 = changeFindTaskChange2.getTaskInfo()) == null) ? null : Integer.valueOf(taskInfo2.taskId);
+        if (changeFindTaskChange != null && (taskInfo = changeFindTaskChange.getTaskInfo()) != null) {
+            objValueOf = Integer.valueOf(taskInfo.taskId);
         }
-        logV$6("Animating mixed launch transition task#%d, minimizingTask#%s immersiveExitTask#%s", valueOf, valueOf2, obj);
-        if (DesktopModeFlags.ENABLE_DESKTOP_APP_LAUNCH_TRANSITIONS_BUGFIX.isTrue() && findTaskChange2 != null) {
+        logV$6("Animating mixed launch transition task#%d, minimizingTask#%s immersiveExitTask#%s", numValueOf, numValueOf2, objValueOf);
+        if (DesktopModeFlags.ENABLE_DESKTOP_APP_LAUNCH_TRANSITIONS_BUGFIX.isTrue() && changeFindTaskChange2 != null) {
             if (!TransitionUtil.isOpeningMode(transitionInfo.getType())) {
                 throw new IllegalArgumentException("Failed requirement.");
             }
-            if (findTaskChange2.getTaskInfo() == null) {
+            if (changeFindTaskChange2.getTaskInfo() == null) {
                 throw new IllegalArgumentException("Failed requirement.");
             }
-            ActivityManager.RunningTaskInfo taskInfo7 = findTaskChange2.getTaskInfo();
+            ActivityManager.RunningTaskInfo taskInfo7 = changeFindTaskChange2.getTaskInfo();
             taskInfo7.getClass();
-            if (!taskInfo7.isFreeform()) {
+            if (!taskInfo7.isFreeform() && taskInfo7.getWindowingMode() != 1) {
                 throw new IllegalArgumentException("Failed requirement.");
             }
             logV$6("Reparenting minimizing task#%d", Integer.valueOf(taskInfo7.taskId));
-            this.rootTaskDisplayAreaOrganizer.reparentToDisplayArea(taskInfo7.displayId, transaction, findTaskChange2.getLeash());
+            this.rootTaskDisplayAreaOrganizer.reparentToDisplayArea(taskInfo7.displayId, transaction, changeFindTaskChange2.getLeash());
         }
-        if (findTaskChange == null) {
+        if (changeFindTaskChange == null) {
             ref$IntRef.element = 1;
             return dispatchToLeftoverHandler$default(this, iBinder, transitionInfo, transaction, transaction2, transitionFinishCallback2);
         }
         ref$IntRef.element = 2;
-        transitionInfo.getChanges().remove(findTaskChange);
-        this.desktopImmersiveController.animateResizeChange(findTaskChange, transaction, transaction2, transitionFinishCallback2);
+        transitionInfo.getChanges().remove(changeFindTaskChange);
+        this.desktopImmersiveController.animateResizeChange(changeFindTaskChange, transaction, transaction2, transitionFinishCallback2);
         return dispatchToLeftoverHandler$default(this, iBinder, transitionInfo, transaction, transaction2, transitionFinishCallback2);
     }
 
     @Override // com.android.wm.shell.freeform.FreeformTaskTransitionStarter
     public final IBinder startMinimizeAllTransition(WindowContainerTransaction windowContainerTransaction, int i) {
-        IBinder startTransition = this.transitions.startTransition(1020, windowContainerTransaction, this);
+        IBinder iBinderStartTransition = this.transitions.startTransition(1020, windowContainerTransaction, this);
         List list = this.pendingMixedTransitions;
-        startTransition.getClass();
-        ((ArrayList) list).add(new PendingMixedTransition.MinimizeAll(startTransition, i));
-        return startTransition;
+        iBinderStartTransition.getClass();
+        ((ArrayList) list).add(new PendingMixedTransition.MinimizeAll(iBinderStartTransition, i));
+        return iBinderStartTransition;
     }
 
     @Override // com.android.wm.shell.freeform.FreeformTaskTransitionStarter
@@ -514,11 +507,11 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
         if (!DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_EXIT_BY_MINIMIZE_TRANSITION_BUGFIX.isTrue()) {
             return this.freeformTaskTransitionHandler.startMinimizedModeTransition(i, windowContainerTransaction, z);
         }
-        IBinder startTransition = this.transitions.startTransition(1020, windowContainerTransaction, this);
+        IBinder iBinderStartTransition = this.transitions.startTransition(1020, windowContainerTransaction, this);
         List list = this.pendingMixedTransitions;
-        startTransition.getClass();
-        ((ArrayList) list).add(new PendingMixedTransition.Minimize(startTransition, i, z));
-        return startTransition;
+        iBinderStartTransition.getClass();
+        ((ArrayList) list).add(new PendingMixedTransition.Minimize(iBinderStartTransition, i, z));
+        return iBinderStartTransition;
     }
 
     @Override // com.android.wm.shell.freeform.FreeformTaskTransitionStarter
@@ -531,11 +524,11 @@ public final class DesktopMixedTransitionHandler implements MixedTransitionHandl
         if (!DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_EXIT_TRANSITIONS_BUGFIX.isTrue()) {
             return this.freeformTaskTransitionHandler.startRemoveTransition(windowContainerTransaction);
         }
-        IBinder startTransition = this.transitions.startTransition(2, windowContainerTransaction, this);
+        IBinder iBinderStartTransition = this.transitions.startTransition(2, windowContainerTransaction, this);
         List list = this.pendingMixedTransitions;
-        startTransition.getClass();
-        ((ArrayList) list).add(new PendingMixedTransition.Close(startTransition));
-        return startTransition;
+        iBinderStartTransition.getClass();
+        ((ArrayList) list).add(new PendingMixedTransition.Close(iBinderStartTransition));
+        return iBinderStartTransition;
     }
 
     @Override // com.android.wm.shell.freeform.FreeformTaskTransitionStarter

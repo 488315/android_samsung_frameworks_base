@@ -5,7 +5,6 @@ import androidx.compose.ui.geometry.Offset;
 import androidx.compose.ui.geometry.Size;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Rect {
     public static final Companion Companion = new Companion(null);
@@ -15,7 +14,6 @@ public final class Rect {
     public final float right;
     public final float top;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -50,10 +48,10 @@ public final class Rect {
     }
 
     /* renamed from: contains-k-4lQ0M, reason: not valid java name */
-    public final boolean m405containsk4lQ0M(long j) {
-        float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L));
-        return (intBitsToFloat >= this.left) & (intBitsToFloat < this.right) & (intBitsToFloat2 >= this.top) & (intBitsToFloat2 < this.bottom);
+    public final boolean m407containsk4lQ0M(long j) {
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L));
+        return (fIntBitsToFloat >= this.left) & (fIntBitsToFloat < this.right) & (fIntBitsToFloat2 >= this.top) & (fIntBitsToFloat2 < this.bottom);
     }
 
     public final boolean equals(Object obj) {
@@ -68,38 +66,38 @@ public final class Rect {
     }
 
     /* renamed from: getBottomRight-F1C5BW0, reason: not valid java name */
-    public final long m406getBottomRightF1C5BW0() {
-        long floatToRawIntBits = (Float.floatToRawIntBits(this.right) << 32) | (Float.floatToRawIntBits(this.bottom) & 4294967295L);
+    public final long m408getBottomRightF1C5BW0() {
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(this.right) << 32) | (Float.floatToRawIntBits(this.bottom) & 4294967295L);
         Offset.Companion companion = Offset.Companion;
-        return floatToRawIntBits;
+        return jFloatToRawIntBits;
     }
 
     /* renamed from: getCenter-F1C5BW0, reason: not valid java name */
-    public final long m407getCenterF1C5BW0() {
+    public final long m409getCenterF1C5BW0() {
         float f = this.right;
         float f2 = this.left;
         float f3 = ((f - f2) / 2.0f) + f2;
         float f4 = this.bottom;
         float f5 = this.top;
-        long floatToRawIntBits = (Float.floatToRawIntBits(((f4 - f5) / 2.0f) + f5) & 4294967295L) | (Float.floatToRawIntBits(f3) << 32);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(((f4 - f5) / 2.0f) + f5) & 4294967295L) | (Float.floatToRawIntBits(f3) << 32);
         Offset.Companion companion = Offset.Companion;
-        return floatToRawIntBits;
+        return jFloatToRawIntBits;
     }
 
     /* renamed from: getSize-NH-jbRc, reason: not valid java name */
-    public final long m408getSizeNHjbRc() {
+    public final long m410getSizeNHjbRc() {
         float f = this.right - this.left;
         float f2 = this.bottom - this.top;
-        long floatToRawIntBits = (Float.floatToRawIntBits(f2) & 4294967295L) | (Float.floatToRawIntBits(f) << 32);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(f2) & 4294967295L) | (Float.floatToRawIntBits(f) << 32);
         Size.Companion companion = Size.Companion;
-        return floatToRawIntBits;
+        return jFloatToRawIntBits;
     }
 
     /* renamed from: getTopLeft-F1C5BW0, reason: not valid java name */
-    public final long m409getTopLeftF1C5BW0() {
-        long floatToRawIntBits = (Float.floatToRawIntBits(this.left) << 32) | (Float.floatToRawIntBits(this.top) & 4294967295L);
+    public final long m411getTopLeftF1C5BW0() {
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(this.left) << 32) | (Float.floatToRawIntBits(this.top) & 4294967295L);
         Offset.Companion companion = Offset.Companion;
-        return floatToRawIntBits;
+        return jFloatToRawIntBits;
     }
 
     public final int hashCode() {
@@ -131,7 +129,7 @@ public final class Rect {
     }
 
     /* renamed from: translate-k-4lQ0M, reason: not valid java name */
-    public final Rect m410translatek4lQ0M(long j) {
+    public final Rect m412translatek4lQ0M(long j) {
         int i = (int) (j >> 32);
         int i2 = (int) (j & 4294967295L);
         return new Rect(Float.intBitsToFloat(i) + this.left, Float.intBitsToFloat(i2) + this.top, Float.intBitsToFloat(i) + this.right, Float.intBitsToFloat(i2) + this.bottom);

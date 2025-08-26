@@ -6,7 +6,6 @@ import androidx.compose.runtime.SnapshotMutableStateImpl;
 import androidx.compose.runtime.SnapshotStateKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnimationScope<T, V extends AnimationVector> {
     public long finishedTimeNanos = Long.MIN_VALUE;
@@ -36,6 +35,6 @@ public final class AnimationScope<T, V extends AnimationVector> {
     }
 
     public final Object getVelocity() {
-        return ((TwoWayConverterImpl) this.typeConverter).convertFromVector.mo779invoke(this.velocityVector);
+        return ((TwoWayConverterImpl) this.typeConverter).convertFromVector.mo781invoke(this.velocityVector);
     }
 }

@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.android.internal.widget.remotecompose.core.CoreDocument;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.player.RemoteComposeDocument;
-import com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas;
 import java.util.Set;
 
 /* loaded from: classes6.dex */
@@ -179,9 +178,9 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
         if (num == null || num.intValue() <= 0) {
             return;
         }
-        float intValue = num.intValue();
-        this.mMaxFrameRate = intValue;
-        this.mMaxFrameDelay = (long) (1000.0f / intValue);
+        float fIntValue = num.intValue();
+        this.mMaxFrameRate = fIntValue;
+        this.mMaxFrameDelay = (long) (1000.0f / fIntValue);
     }
 
     @Override // android.view.View.OnAttachStateChangeListener
@@ -208,17 +207,17 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
             removeAllViews();
             for (final CoreDocument.ClickAreaRepresentation clickAreaRepresentation : clickAreas) {
                 View clickAreaView = new ClickAreaView(getContext(), this.mDebug == 1, clickAreaRepresentation.getId(), clickAreaRepresentation.getContentDescription(), clickAreaRepresentation.getMetadata());
-                int width = (int) clickAreaRepresentation.width();
-                int height = (int) clickAreaRepresentation.height();
-                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
-                layoutParams.width = width;
-                layoutParams.height = height;
+                int iWidth = (int) clickAreaRepresentation.width();
+                int iHeight = (int) clickAreaRepresentation.height();
+                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(iWidth, iHeight);
+                layoutParams.width = iWidth;
+                layoutParams.height = iHeight;
                 layoutParams.leftMargin = (int) clickAreaRepresentation.getLeft();
                 layoutParams.topMargin = (int) clickAreaRepresentation.getTop();
                 clickAreaView.setOnClickListener(new View.OnClickListener() { // from class: com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas$$ExternalSyntheticLambda1
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
-                        RemoteComposeCanvas.this.lambda$updateClickAreas$0(clickAreaRepresentation, view);
+                        this.f$0.lambda$updateClickAreas$0(clickAreaRepresentation, view);
                     }
                 });
                 addView(clickAreaView, layoutParams);
@@ -392,7 +391,7 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
         remoteComposeDocument.getDocument().addIdActionListener(new CoreDocument.IdActionCallback() { // from class: com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas$$ExternalSyntheticLambda0
             @Override // com.android.internal.widget.remotecompose.core.CoreDocument.IdActionCallback
             public final void onAction(int i, String str) {
-                RemoteComposeCanvas.ClickCallbacks.this.click(i, str);
+                clickCallbacks.click(i, str);
             }
         });
     }
@@ -505,10 +504,10 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
         }
         int width = getWidth();
         int height = getHeight();
-        int measureDimension = measureDimension(i, this.mDocument.getWidth());
-        int measureDimension2 = measureDimension(i2, this.mDocument.getHeight());
-        setMeasuredDimension(measureDimension, measureDimension2);
-        if (width == measureDimension && height == measureDimension2) {
+        int iMeasureDimension = measureDimension(i, this.mDocument.getWidth());
+        int iMeasureDimension2 = measureDimension(i2, this.mDocument.getHeight());
+        setMeasuredDimension(iMeasureDimension, iMeasureDimension2);
+        if (width == iMeasureDimension && height == iMeasureDimension2) {
             return;
         }
         this.mDocument.getDocument().invalidateMeasure();
@@ -540,12 +539,12 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
             return;
         }
         try {
-            long nanoTime = this.mEvalTime ? System.nanoTime() : 0L;
-            float nanoTime2 = (System.nanoTime() - this.mStart) * 1.0E-9f;
-            this.mARContext.setAnimationTime(nanoTime2);
-            this.mARContext.loadFloat(30, nanoTime2);
-            this.mARContext.loadFloat(31, nanoTime2 - this.mLastAnimationTime);
-            this.mLastAnimationTime = nanoTime2;
+            long jNanoTime = this.mEvalTime ? System.nanoTime() : 0L;
+            float fNanoTime = (System.nanoTime() - this.mStart) * 1.0E-9f;
+            this.mARContext.setAnimationTime(fNanoTime);
+            this.mARContext.loadFloat(30, fNanoTime);
+            this.mARContext.loadFloat(31, fNanoTime - this.mLastAnimationTime);
+            this.mLastAnimationTime = fNanoTime;
             this.mARContext.setAnimationEnabled(true);
             this.mARContext.currentTime = System.currentTimeMillis();
             this.mARContext.setDebug(this.mDebug);
@@ -562,16 +561,16 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
                     this.mTime = System.nanoTime();
                 }
             }
-            int needsRepaint = this.mDocument.needsRepaint();
-            if (needsRepaint > 0) {
+            int iNeedsRepaint = this.mDocument.needsRepaint();
+            if (iNeedsRepaint > 0) {
                 if (this.mMaxFrameRate >= 60.0f) {
-                    this.mLastFrameDelay = needsRepaint;
+                    this.mLastFrameDelay = iNeedsRepaint;
                 } else {
-                    this.mLastFrameDelay = Math.max(this.mMaxFrameDelay, needsRepaint);
+                    this.mLastFrameDelay = Math.max(this.mMaxFrameDelay, iNeedsRepaint);
                 }
                 if (this.mChoreographer != null) {
                     if (this.mDebug == 1) {
-                        System.err.println("RC : POST CHOREOGRAPHER WITH " + this.mLastFrameDelay + " (nextFrame was " + needsRepaint + ", max delay " + this.mMaxFrameDelay + ",  max framerate is " + this.mMaxFrameRate + NavigationBarInflaterView.KEY_CODE_END);
+                        System.err.println("RC : POST CHOREOGRAPHER WITH " + this.mLastFrameDelay + " (nextFrame was " + iNeedsRepaint + ", max delay " + this.mMaxFrameDelay + ",  max framerate is " + this.mMaxFrameRate + NavigationBarInflaterView.KEY_CODE_END);
                     }
                     this.mChoreographer.postFrameCallbackDelayed(this.mFrameCallback, this.mLastFrameDelay);
                 }
@@ -585,7 +584,7 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
                 }
             }
             if (this.mEvalTime) {
-                this.mDuration += System.nanoTime() - nanoTime;
+                this.mDuration += System.nanoTime() - jNanoTime;
                 this.mCount++;
             }
         } catch (Exception unused) {
@@ -594,8 +593,8 @@ public class RemoteComposeCanvas extends FrameLayout implements View.OnAttachSta
             invalidate();
         }
         if (this.mDebug == 1) {
-            long currentTimeMillis = System.currentTimeMillis() - this.mLastFrameCall;
-            System.err.println("RC : Delay since last frame " + currentTimeMillis + " ms (" + (1000.0f / currentTimeMillis) + " fps)");
+            long jCurrentTimeMillis = System.currentTimeMillis() - this.mLastFrameCall;
+            System.err.println("RC : Delay since last frame " + jCurrentTimeMillis + " ms (" + (1000.0f / jCurrentTimeMillis) + " fps)");
             this.mLastFrameCall = System.currentTimeMillis();
         }
     }

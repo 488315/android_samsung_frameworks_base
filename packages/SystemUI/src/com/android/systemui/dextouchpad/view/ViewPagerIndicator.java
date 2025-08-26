@@ -13,7 +13,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.systemui.dextouchpad.util.Utils;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPageChangeListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,11 +34,11 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
         this.mSelectedPosition = 0;
         this.mLastReportedPosition = 0;
         if (attributeSet != null) {
-            TypedArray obtainAttributes = getResources().obtainAttributes(attributeSet, R$styleable.ViewPagerIndicator);
-            this.mDefaultDrawable = obtainAttributes.getDrawable(0);
-            this.mSelectedDrawable = obtainAttributes.getDrawable(2);
-            this.mMargin = obtainAttributes.getDimensionPixelSize(1, 0);
-            obtainAttributes.recycle();
+            TypedArray typedArrayObtainAttributes = getResources().obtainAttributes(attributeSet, R$styleable.ViewPagerIndicator);
+            this.mDefaultDrawable = typedArrayObtainAttributes.getDrawable(0);
+            this.mSelectedDrawable = typedArrayObtainAttributes.getDrawable(2);
+            this.mMargin = typedArrayObtainAttributes.getDimensionPixelSize(1, 0);
+            typedArrayObtainAttributes.recycle();
         }
     }
 
@@ -74,7 +73,7 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
             imageView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.dextouchpad.view.ViewPagerIndicator$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    ViewPager viewPager2 = ViewPager.this;
+                    ViewPager viewPager2 = viewPager;
                     int i3 = i;
                     int i4 = ViewPagerIndicator.$r8$clinit;
                     viewPager2.setCurrentItem(i3);

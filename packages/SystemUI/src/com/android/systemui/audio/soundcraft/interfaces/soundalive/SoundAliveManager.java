@@ -7,14 +7,12 @@ import android.util.Log;
 import kotlin.Result;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundAliveManager {
     public static final String TAG;
     public final Context context;
     public final Uri uri = Uri.parse("content://com.sec.android.app.soundalive.compatibility.SAContentProvider");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -24,7 +22,6 @@ public final class SoundAliveManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -80,7 +77,7 @@ public final class SoundAliveManager {
             int i3 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        if (Result.m3422exceptionOrNullimpl(failure) != null) {
+        if (Result.m3442exceptionOrNullimpl(failure) != null) {
             Log.e(str2, "Exception occurs, can't execute requested insert");
         }
     }

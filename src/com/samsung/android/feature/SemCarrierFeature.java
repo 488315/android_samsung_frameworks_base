@@ -16,6 +16,7 @@ public class SemCarrierFeature {
     private Map<Integer, Integer> mFeatureVersion;
     private Map<Integer, Map<String, String>> mLastFeatureList;
     private Map<Integer, String> mLastFeaturePath;
+    private Map<Integer, String> mOmcVersion;
     private Map<Integer, Map<String, String>> mSpecificFeatureList;
     static final boolean DEBUG = isDebugEnabled();
     static final boolean TEST = isTestEnabled();
@@ -46,6 +47,7 @@ public class SemCarrierFeature {
         this.mFeaturePath = new LinkedHashMap();
         this.mLastFeaturePath = new LinkedHashMap();
         this.mFeatureVersion = new LinkedHashMap();
+        this.mOmcVersion = new LinkedHashMap();
         this.mCanonicalId = new LinkedHashMap();
         this.mDefaultFeatureList = new LinkedHashMap();
         this.mSpecificFeatureList = new LinkedHashMap();
@@ -54,6 +56,7 @@ public class SemCarrierFeature {
             this.mFeaturePath.put(Integer.valueOf(i), FeatureUtil.getSystemFeaturePath(i, false));
             this.mLastFeaturePath.put(Integer.valueOf(i), FeatureUtil.getSystemFeaturePath(i, true));
             this.mFeatureVersion.put(Integer.valueOf(i), Integer.valueOf(FeatureUtil.getLastFeatureVersion(i)));
+            this.mOmcVersion.put(Integer.valueOf(i), FeatureUtil.getOmcVersion());
             loadDefaultFeatures(i);
             loadSpecificFeatures(i);
             loadLastFeatures(i);
@@ -80,6 +83,7 @@ public class SemCarrierFeature {
             String systemFeaturePath = FeatureUtil.getSystemFeaturePath(i, false);
             String systemFeaturePath2 = FeatureUtil.getSystemFeaturePath(i, true);
             int lastFeatureVersion = FeatureUtil.getLastFeatureVersion(i);
+            String omcVersion = FeatureUtil.getOmcVersion();
             String str2 = LOG_TAG;
             Log.d(str2, "[get] CarrierFeature is changed : [" + i + "] " + this.mFeatureVersion.get(Integer.valueOf(i)) + " / " + this.mCanonicalId.get(Integer.valueOf(i)) + " -> " + lastFeatureVersion + " / " + FeatureUtil.getLastCanonicalID(i));
             StringBuilder sb = new StringBuilder("[get] last path : ");
@@ -95,6 +99,7 @@ public class SemCarrierFeature {
             this.mFeaturePath.put(Integer.valueOf(i), systemFeaturePath);
             this.mLastFeaturePath.put(Integer.valueOf(i), systemFeaturePath2);
             this.mFeatureVersion.put(Integer.valueOf(i), Integer.valueOf(lastFeatureVersion));
+            this.mOmcVersion.put(Integer.valueOf(i), omcVersion);
             loadDefaultFeatures(i);
             loadSpecificFeatures(i);
             loadLastFeatures(i);
@@ -114,7 +119,7 @@ public class SemCarrierFeature {
     }
 
     private boolean isCurrentFileChanged(int i) {
-        return isFeaturePathChanged(i) || isFeatureVersionChanged(i);
+        return isFeaturePathChanged(i) || isFeatureVersionChanged(i) || isOmcVersionChanged(i);
     }
 
     private boolean isLastFileChanged(int i) {
@@ -135,6 +140,10 @@ public class SemCarrierFeature {
 
     private boolean isFeatureVersionChanged(int i) {
         return this.mFeatureVersion.get(Integer.valueOf(i)).intValue() != FeatureUtil.getLastFeatureVersion(i);
+    }
+
+    private boolean isOmcVersionChanged(int i) {
+        return !TextUtils.equals(this.mOmcVersion.get(Integer.valueOf(i)), FeatureUtil.getOmcVersion());
     }
 
     private void loadDefaultFeatures(int i) {
@@ -211,10 +220,10 @@ public class SemCarrierFeature {
             if (str2 == null) {
                 return null;
             }
-            String[] split = str2.split(",");
-            boolean[] zArr = new boolean[split.length];
-            for (int i2 = 0; i2 < split.length; i2++) {
-                zArr[i2] = Boolean.parseBoolean(split[i2].trim());
+            String[] strArrSplit = str2.split(",");
+            boolean[] zArr = new boolean[strArrSplit.length];
+            for (int i2 = 0; i2 < strArrSplit.length; i2++) {
+                zArr[i2] = Boolean.parseBoolean(strArrSplit[i2].trim());
             }
             return zArr;
         } catch (Exception e) {
@@ -253,10 +262,10 @@ public class SemCarrierFeature {
             if (str2 == null) {
                 return null;
             }
-            String[] split = str2.split(",");
-            int[] iArr = new int[split.length];
-            for (int i2 = 0; i2 < split.length; i2++) {
-                iArr[i2] = Integer.parseInt(split[i2].trim());
+            String[] strArrSplit = str2.split(",");
+            int[] iArr = new int[strArrSplit.length];
+            for (int i2 = 0; i2 < strArrSplit.length; i2++) {
+                iArr[i2] = Integer.parseInt(strArrSplit[i2].trim());
             }
             return iArr;
         } catch (Exception e) {
@@ -295,10 +304,10 @@ public class SemCarrierFeature {
             if (str2 == null) {
                 return null;
             }
-            String[] split = str2.split(",");
-            long[] jArr = new long[split.length];
-            for (int i2 = 0; i2 < split.length; i2++) {
-                jArr[i2] = Long.parseLong(split[i2].trim());
+            String[] strArrSplit = str2.split(",");
+            long[] jArr = new long[strArrSplit.length];
+            for (int i2 = 0; i2 < strArrSplit.length; i2++) {
+                jArr[i2] = Long.parseLong(strArrSplit[i2].trim());
             }
             return jArr;
         } catch (Exception e) {
@@ -337,10 +346,10 @@ public class SemCarrierFeature {
             if (str2 == null) {
                 return null;
             }
-            String[] split = str2.split(",");
-            double[] dArr = new double[split.length];
-            for (int i2 = 0; i2 < split.length; i2++) {
-                dArr[i2] = Double.parseDouble(split[i2].trim());
+            String[] strArrSplit = str2.split(",");
+            double[] dArr = new double[strArrSplit.length];
+            for (int i2 = 0; i2 < strArrSplit.length; i2++) {
+                dArr[i2] = Double.parseDouble(strArrSplit[i2].trim());
             }
             return dArr;
         } catch (Exception e) {

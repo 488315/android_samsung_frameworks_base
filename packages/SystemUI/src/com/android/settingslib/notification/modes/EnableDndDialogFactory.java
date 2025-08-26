@@ -34,7 +34,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EnableDndDialogFactory {
     protected static final int COUNTDOWN_ALARM_CONDITION_INDEX = 2;
@@ -59,7 +58,6 @@ public class EnableDndDialogFactory {
     public RadioGroup mZenRadioGroup;
     protected LinearLayout mZenRadioGroupContent;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConditionTag {
         public Condition condition;
         public TextView line1;
@@ -69,7 +67,7 @@ public class EnableDndDialogFactory {
     }
 
     /* renamed from: -$$Nest$monClickTimeButton, reason: not valid java name */
-    public static void m975$$Nest$monClickTimeButton(EnableDndDialogFactory enableDndDialogFactory, View view, ConditionTag conditionTag, boolean z, int i) {
+    public static void m977$$Nest$monClickTimeButton(EnableDndDialogFactory enableDndDialogFactory, View view, ConditionTag conditionTag, boolean z, int i) {
         Condition timeCondition;
         enableDndDialogFactory.mMetricsLogger.logOnClickTimeButton(z);
         int[] iArr = MINUTE_BUCKETS;
@@ -78,13 +76,13 @@ public class EnableDndDialogFactory {
         if (i2 == -1) {
             Condition condition = conditionTag.condition;
             timeCondition = null;
-            long tryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(condition != null ? condition.id : null);
-            long currentTimeMillis = System.currentTimeMillis();
+            long jTryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(condition != null ? condition.id : null);
+            long jCurrentTimeMillis = System.currentTimeMillis();
             for (int i3 = 0; i3 < length; i3++) {
                 int i4 = z ? i3 : (length - 1) - i3;
                 int i5 = iArr[i4];
-                long j = currentTimeMillis + (VolumePanelState.DIALOG_TIMEOUT_SET_SAFE_MEDIA_VOLUME_MILLIS * i5);
-                if ((z && j > tryParseCountdownConditionId) || (!z && j < tryParseCountdownConditionId)) {
+                long j = jCurrentTimeMillis + (VolumePanelState.DIALOG_TIMEOUT_SET_SAFE_MEDIA_VOLUME_MILLIS * i5);
+                if ((z && j > jTryParseCountdownConditionId) || (!z && j < jTryParseCountdownConditionId)) {
                     enableDndDialogFactory.mBucketIndex = i4;
                     timeCondition = ZenModeConfig.toTimeCondition(enableDndDialogFactory.mContext, j, i5, ActivityManager.getCurrentUser(), false);
                     break;
@@ -96,14 +94,14 @@ public class EnableDndDialogFactory {
                 timeCondition = ZenModeConfig.toTimeCondition(enableDndDialogFactory.mContext, iArr[i6], ActivityManager.getCurrentUser());
             }
         } else {
-            int max = Math.max(0, Math.min(length - 1, i2 + (z ? 1 : -1)));
-            enableDndDialogFactory.mBucketIndex = max;
-            timeCondition = ZenModeConfig.toTimeCondition(enableDndDialogFactory.mContext, iArr[max], ActivityManager.getCurrentUser());
+            int iMax = Math.max(0, Math.min(length - 1, i2 + (z ? 1 : -1)));
+            enableDndDialogFactory.mBucketIndex = iMax;
+            timeCondition = ZenModeConfig.toTimeCondition(enableDndDialogFactory.mContext, iArr[iMax], ActivityManager.getCurrentUser());
         }
         enableDndDialogFactory.bind(timeCondition, view, i);
-        String computeAlarmWarningText = enableDndDialogFactory.computeAlarmWarningText(conditionTag.condition);
-        enableDndDialogFactory.mZenAlarmWarning.setText(computeAlarmWarningText);
-        enableDndDialogFactory.mZenAlarmWarning.setVisibility(computeAlarmWarningText == null ? 8 : 0);
+        String strComputeAlarmWarningText = enableDndDialogFactory.computeAlarmWarningText(conditionTag.condition);
+        enableDndDialogFactory.mZenAlarmWarning.setText(strComputeAlarmWarningText);
+        enableDndDialogFactory.mZenAlarmWarning.setVisibility(strComputeAlarmWarningText == null ? 8 : 0);
         conditionTag.rb.setChecked(true);
     }
 
@@ -147,11 +145,11 @@ public class EnableDndDialogFactory {
                     }
                     EnableDndDialogFactory.this.mMetricsLogger.logOnConditionSelected();
                     EnableDndDialogFactory enableDndDialogFactory = EnableDndDialogFactory.this;
-                    String computeAlarmWarningText = enableDndDialogFactory.computeAlarmWarningText(conditionTag.condition);
-                    enableDndDialogFactory.mZenAlarmWarning.setText(computeAlarmWarningText);
-                    enableDndDialogFactory.mZenAlarmWarning.setVisibility(computeAlarmWarningText == null ? 8 : 0);
+                    String strComputeAlarmWarningText = enableDndDialogFactory.computeAlarmWarningText(conditionTag.condition);
+                    enableDndDialogFactory.mZenAlarmWarning.setText(strComputeAlarmWarningText);
+                    enableDndDialogFactory.mZenAlarmWarning.setVisibility(strComputeAlarmWarningText == null ? 8 : 0);
                 }
-                conditionTag.line1.setStateDescription(z3 ? compoundButton.getContext().getString(17042934) : null);
+                conditionTag.line1.setStateDescription(z3 ? compoundButton.getContext().getString(17042938) : null);
             }
         });
         if (conditionTag.lines == null) {
@@ -180,11 +178,11 @@ public class EnableDndDialogFactory {
                 conditionTag.rb.setChecked(true);
             }
         });
-        long tryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(uri);
+        long jTryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(uri);
         ImageView imageView = (ImageView) view.findViewById(R.id.button1);
         ImageView imageView2 = (ImageView) view.findViewById(R.id.button2);
-        View findViewById = view.findViewById(com.android.systemui.R.id.divider_view);
-        if (i != 1 || tryParseCountdownConditionId <= 0) {
+        View viewFindViewById = view.findViewById(com.android.systemui.R.id.divider_view);
+        if (i != 1 || jTryParseCountdownConditionId <= 0) {
             if (imageView != null) {
                 ((ViewGroup) view).removeView(imageView);
             }
@@ -195,24 +193,24 @@ public class EnableDndDialogFactory {
             imageView.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.notification.modes.EnableDndDialogFactory.4
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view2) {
-                    EnableDndDialogFactory.m975$$Nest$monClickTimeButton(EnableDndDialogFactory.this, view, conditionTag, false, i);
+                    EnableDndDialogFactory.m977$$Nest$monClickTimeButton(EnableDndDialogFactory.this, view, conditionTag, false, i);
                     conditionTag.lines.setAccessibilityLiveRegion(1);
                 }
             });
             imageView2.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.notification.modes.EnableDndDialogFactory.5
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view2) {
-                    EnableDndDialogFactory.m975$$Nest$monClickTimeButton(EnableDndDialogFactory.this, view, conditionTag, true, i);
+                    EnableDndDialogFactory.m977$$Nest$monClickTimeButton(EnableDndDialogFactory.this, view, conditionTag, true, i);
                     conditionTag.lines.setAccessibilityLiveRegion(1);
                 }
             });
-            findViewById.setVisibility(0);
+            viewFindViewById.setVisibility(0);
             int i2 = this.mBucketIndex;
             if (i2 > -1) {
                 imageView.setEnabled(i2 > 0);
                 imageView2.setEnabled(this.mBucketIndex < MINUTE_BUCKETS.length - 1);
             } else {
-                imageView.setEnabled(tryParseCountdownConditionId - System.currentTimeMillis() > ((long) (MIN_BUCKET_MINUTES * VolumePanelState.DIALOG_TIMEOUT_SET_SAFE_MEDIA_VOLUME_MILLIS)));
+                imageView.setEnabled(jTryParseCountdownConditionId - System.currentTimeMillis() > ((long) (MIN_BUCKET_MINUTES * VolumePanelState.DIALOG_TIMEOUT_SET_SAFE_MEDIA_VOLUME_MILLIS)));
                 imageView2.setEnabled(!Objects.equals(condition.summary, ZenModeConfig.toTimeCondition(this.mContext, MAX_BUCKET_MINUTES, ActivityManager.getCurrentUser()).summary));
             }
             imageView.setAlpha(imageView.isEnabled() ? 1.0f : 0.5f);
@@ -267,22 +265,22 @@ public class EnableDndDialogFactory {
         if ((this.mNotificationManager.getNotificationPolicy().priorityCategories & 32) != 0) {
             return null;
         }
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         AlarmManager.AlarmClockInfo nextAlarmClock = this.mAlarmManager.getNextAlarmClock(this.mUserId);
         long triggerTime = nextAlarmClock != null ? nextAlarmClock.getTriggerTime() : 0L;
-        if (triggerTime < currentTimeMillis) {
+        if (triggerTime < jCurrentTimeMillis) {
             return null;
         }
         if (condition == null || isForever(condition)) {
             i = com.android.systemui.R.string.zen_alarm_warning_indef;
         } else {
-            long tryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(condition.id);
-            i = (tryParseCountdownConditionId <= currentTimeMillis || triggerTime >= tryParseCountdownConditionId) ? 0 : com.android.systemui.R.string.zen_alarm_warning;
+            long jTryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(condition.id);
+            i = (jTryParseCountdownConditionId <= jCurrentTimeMillis || triggerTime >= jTryParseCountdownConditionId) ? 0 : com.android.systemui.R.string.zen_alarm_warning;
         }
         if (i == 0) {
             return null;
         }
-        return this.mContext.getResources().getString(i, getTime(triggerTime, currentTimeMillis));
+        return this.mContext.getResources().getString(i, getTime(triggerTime, jCurrentTimeMillis));
     }
 
     public final AlertDialog createDialog() {
@@ -327,18 +325,18 @@ public class EnableDndDialogFactory {
         if (this.mLayoutInflater == null) {
             this.mLayoutInflater = new PhoneWindow(this.mContext).getLayoutInflater();
         }
-        View inflate = this.mLayoutInflater.inflate(com.android.systemui.R.layout.zen_mode_turn_on_dialog_container, (ViewGroup) null);
-        ScrollView scrollView = (ScrollView) inflate.findViewById(com.android.systemui.R.id.container);
+        View viewInflate = this.mLayoutInflater.inflate(com.android.systemui.R.layout.zen_mode_turn_on_dialog_container, (ViewGroup) null);
+        ScrollView scrollView = (ScrollView) viewInflate.findViewById(com.android.systemui.R.id.container);
         this.mZenRadioGroup = (RadioGroup) scrollView.findViewById(com.android.systemui.R.id.zen_radio_buttons);
         this.mZenRadioGroupContent = (LinearLayout) scrollView.findViewById(com.android.systemui.R.id.zen_radio_buttons_content);
         this.mZenAlarmWarning = (TextView) scrollView.findViewById(com.android.systemui.R.id.zen_alarm_warning);
         for (int i = 0; i < 3; i++) {
-            View inflate2 = this.mLayoutInflater.inflate(com.android.systemui.R.layout.zen_mode_radio_button, (ViewGroup) this.mZenRadioGroup, false);
-            this.mZenRadioGroup.addView(inflate2);
-            inflate2.setId(i);
-            View inflate3 = this.mLayoutInflater.inflate(com.android.systemui.R.layout.zen_mode_condition, (ViewGroup) this.mZenRadioGroupContent, false);
-            inflate3.setId(i + 3);
-            this.mZenRadioGroupContent.addView(inflate3);
+            View viewInflate2 = this.mLayoutInflater.inflate(com.android.systemui.R.layout.zen_mode_radio_button, (ViewGroup) this.mZenRadioGroup, false);
+            this.mZenRadioGroup.addView(viewInflate2);
+            viewInflate2.setId(i);
+            View viewInflate3 = this.mLayoutInflater.inflate(com.android.systemui.R.layout.zen_mode_condition, (ViewGroup) this.mZenRadioGroupContent, false);
+            viewInflate3.setId(i + 3);
+            this.mZenRadioGroupContent.addView(viewInflate3);
         }
         int childCount = this.mZenRadioGroupContent.getChildCount();
         for (int i2 = 0; i2 < childCount; i2++) {
@@ -346,10 +344,10 @@ public class EnableDndDialogFactory {
         }
         this.mZenAlarmWarning.setVisibility(8);
         bindConditions(forever());
-        positiveButton.setView(inflate);
-        AlertDialog create = positiveButton.create();
-        create.semSetBackgroundBlurEnabled(true);
-        return create;
+        positiveButton.setView(viewInflate);
+        AlertDialog alertDialogCreate = positiveButton.create();
+        alertDialogCreate.semSetBackgroundBlurEnabled(true);
+        return alertDialogCreate;
     }
 
     public final Condition forever() {
@@ -362,8 +360,8 @@ public class EnableDndDialogFactory {
 
     public String getTime(long j, long j2) {
         boolean z = j - j2 < 86400000;
-        boolean is24HourFormat = DateFormat.is24HourFormat(this.mContext, ActivityManager.getCurrentUser());
-        return this.mContext.getResources().getString(z ? com.android.systemui.R.string.alarm_template : com.android.systemui.R.string.alarm_template_far, DateFormat.format(DateFormat.getBestDateTimePattern(Locale.getDefault(), z ? is24HourFormat ? "Hm" : "hma" : is24HourFormat ? "EEEHm" : "EEEhma"), j));
+        boolean zIs24HourFormat = DateFormat.is24HourFormat(this.mContext, ActivityManager.getCurrentUser());
+        return this.mContext.getResources().getString(z ? com.android.systemui.R.string.alarm_template : com.android.systemui.R.string.alarm_template_far, DateFormat.format(DateFormat.getBestDateTimePattern(Locale.getDefault(), z ? zIs24HourFormat ? "Hm" : "hma" : zIs24HourFormat ? "EEEHm" : "EEEhma"), j));
     }
 
     public Condition getTimeUntilNextAlarmCondition() {

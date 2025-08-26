@@ -15,14 +15,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SpanManager {
     public final LayoutUtil layoutUtil;
     public final Map spanInfos = new LinkedHashMap();
     public int maxSpan = 1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -64,9 +62,9 @@ public final class SpanManager {
                 spanInfo.numberPerLine = layoutUtil.getAvailableSpanCount((int) (size.getWidth() * layoutUtil.getWidthPercentBasic(layoutUtil.context.getResources().getFloat(R.integer.control_basic_width_percentage))), i3);
             }
         }
-        Collection values = ((LinkedHashMap) this.spanInfos).values();
+        Collection collectionValues = ((LinkedHashMap) this.spanInfos).values();
         ArrayList arrayList = new ArrayList();
-        for (Object obj : values) {
+        for (Object obj : collectionValues) {
             if (((SpanInfo) obj).numberPerLine > 0) {
                 arrayList.add(obj);
             }

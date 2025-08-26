@@ -18,7 +18,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Animatable<Offset, AnimationVector2D> $animatable;
@@ -53,7 +52,7 @@ final class SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1 extends S
             ResultKt.throwOnFailure(obj);
             final CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
             final State<Offset> state = this.$targetValue$delegate;
-            SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: androidx.compose.foundation.text.selection.SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1.1
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: androidx.compose.foundation.text.selection.SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1.1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(0);
@@ -63,13 +62,12 @@ final class SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1 extends S
                 public final Object invoke() {
                     State<Offset> state2 = state;
                     AnimationVector2D animationVector2D = SelectionMagnifierKt.UnspecifiedAnimationVector2D;
-                    return Offset.m393boximpl(((Offset) state2.getValue()).packedValue);
+                    return Offset.m395boximpl(((Offset) state2.getValue()).packedValue);
                 }
             });
             final Animatable<Offset, AnimationVector2D> animatable = this.$animatable;
             FlowCollector flowCollector = new FlowCollector() { // from class: androidx.compose.foundation.text.selection.SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1.2
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: androidx.compose.foundation.text.selection.SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1$2$1, reason: invalid class name */
                 final class AnonymousClass1 extends SuspendLambda implements Function2 {
                     final /* synthetic */ Animatable<Offset, AnimationVector2D> $animatable;
@@ -100,10 +98,10 @@ final class SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1 extends S
                         if (i == 0) {
                             ResultKt.throwOnFailure(obj);
                             Animatable<Offset, AnimationVector2D> animatable = this.$animatable;
-                            Offset m393boximpl = Offset.m393boximpl(this.$targetValue);
+                            Offset offsetM395boximpl = Offset.m395boximpl(this.$targetValue);
                             SpringSpec springSpec = SelectionMagnifierKt.MagnifierSpringSpec;
                             this.label = 1;
-                            if (Animatable.animateTo$default(animatable, m393boximpl, springSpec, null, null, this, 12) == coroutineSingletons) {
+                            if (Animatable.animateTo$default(animatable, offsetM395boximpl, springSpec, null, null, this, 12) == coroutineSingletons) {
                                 return coroutineSingletons;
                             }
                         } else {
@@ -121,15 +119,15 @@ final class SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1 extends S
                     long j = ((Offset) obj2).packedValue;
                     Animatable animatable2 = animatable;
                     if ((((Offset) animatable2.internalState.getValue()).packedValue & 9223372034707292159L) == 9205357640488583168L || (j & 9223372034707292159L) == 9205357640488583168L || Float.intBitsToFloat((int) (((Offset) animatable2.internalState.getValue()).packedValue & 4294967295L)) == Float.intBitsToFloat((int) (j & 4294967295L))) {
-                        Object snapTo = animatable2.snapTo(Offset.m393boximpl(j), continuation);
-                        return snapTo == CoroutineSingletons.COROUTINE_SUSPENDED ? snapTo : Unit.INSTANCE;
+                        Object objSnapTo = animatable2.snapTo(Offset.m395boximpl(j), continuation);
+                        return objSnapTo == CoroutineSingletons.COROUTINE_SUSPENDED ? objSnapTo : Unit.INSTANCE;
                     }
                     BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass1(animatable2, j, null), 3);
                     return Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (snapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
+            if (safeFlowSnapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

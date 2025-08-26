@@ -69,7 +69,7 @@
                 </FrameLayout>
             </LinearLayout>
             <LinearLayout android:orientation="vertical" android:id="@id/wifi_scan_notify_layout" android:paddingBottom="4.0dip" android:focusable="false" android:visibility="gone" android:clickable="false" android:layout_height="wrap_content" style="@style/InternetDialog.Network">
-                <LinearLayout android:gravity="start|center|top" android:orientation="horizontal" android:paddingTop="16.0dip" android:paddingBottom="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="56.0dip" android:paddingEnd="12.0dip">
+                <LinearLayout android:gravity="start|top" android:orientation="horizontal" android:paddingTop="16.0dip" android:paddingBottom="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="56.0dip" android:paddingEnd="12.0dip">
                     <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_info_outline" android:tint="?android:textColorTertiary" />
                 </LinearLayout>
                 <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">

@@ -57,7 +57,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubblesManager {
     public final IStatusBarService mBarService;
@@ -85,7 +84,6 @@ public class BubblesManager {
     public boolean mIsScreenUnlocked = true;
     public final HashMap mShouldBubbleUpEntry = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wmshell.BubblesManager$5, reason: invalid class name */
     public class AnonymousClass5 {
         public final /* synthetic */ SysUiState val$sysUiState;
@@ -97,7 +95,6 @@ public class BubblesManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface NotifCallback {
         void invalidateNotifications(String str);
 
@@ -156,9 +153,9 @@ public class BubblesManager {
             public final void onEntryAdded(NotificationEntry notificationEntry) {
                 BubblesManager bubblesManager = BubblesManager.this;
                 if (bubblesManager.shouldBubbleUp(notificationEntry) && notificationEntry.isBubble()) {
-                    BubbleEntry notifToBubbleEntry = bubblesManager.notifToBubbleEntry(notificationEntry);
+                    BubbleEntry bubbleEntryNotifToBubbleEntry = bubblesManager.notifToBubbleEntry(notificationEntry);
                     BubbleController.BubblesImpl bubblesImpl = (BubbleController.BubblesImpl) bubblesManager.mBubbles;
-                    BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda4(bubblesImpl, notifToBubbleEntry, 2));
+                    BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda4(bubblesImpl, bubbleEntryNotifToBubbleEntry, 2));
                 }
             }
 
@@ -166,33 +163,33 @@ public class BubblesManager {
             public final void onEntryRemoved(NotificationEntry notificationEntry, int i) {
                 if (i == 8 || i == 9 || i == 7 || i == 5) {
                     BubblesManager bubblesManager = BubblesManager.this;
-                    BubbleEntry notifToBubbleEntry = bubblesManager.notifToBubbleEntry(notificationEntry);
+                    BubbleEntry bubbleEntryNotifToBubbleEntry = bubblesManager.notifToBubbleEntry(notificationEntry);
                     BubbleController.BubblesImpl bubblesImpl = (BubbleController.BubblesImpl) bubblesManager.mBubbles;
-                    BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda4(bubblesImpl, notifToBubbleEntry, 0));
+                    BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda4(bubblesImpl, bubbleEntryNotifToBubbleEntry, 0));
                 }
             }
 
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
             public final void onEntryUpdated(NotificationEntry notificationEntry, UpdateSource updateSource) {
                 BubblesManager bubblesManager = BubblesManager.this;
-                boolean shouldBubbleUp = bubblesManager.shouldBubbleUp(notificationEntry);
+                boolean zShouldBubbleUp = bubblesManager.shouldBubbleUp(notificationEntry);
                 String str = notificationEntry.mKey;
                 boolean z = bubblesManager.mIsScreenUnlocked;
                 if (z) {
-                    bubblesManager.mShouldBubbleUpEntry.put(str, Boolean.valueOf(shouldBubbleUp));
+                    bubblesManager.mShouldBubbleUpEntry.put(str, Boolean.valueOf(zShouldBubbleUp));
                 } else if (!z && bubblesManager.mShouldBubbleUpEntry.containsKey(str)) {
-                    shouldBubbleUp = true;
+                    zShouldBubbleUp = true;
                 }
-                Log.d("Bubbles", "onEntryUpdated : shouldBubbleUp=" + shouldBubbleUp + " ,key=" + str);
+                Log.d("Bubbles", "onEntryUpdated : shouldBubbleUp=" + zShouldBubbleUp + " ,key=" + str);
                 final boolean z2 = updateSource != UpdateSource.SystemUi;
-                final BubbleEntry notifToBubbleEntry = bubblesManager.notifToBubbleEntry(notificationEntry);
-                final boolean shouldBubbleUp2 = bubblesManager.shouldBubbleUp(notificationEntry);
+                final BubbleEntry bubbleEntryNotifToBubbleEntry = bubblesManager.notifToBubbleEntry(notificationEntry);
+                final boolean zShouldBubbleUp2 = bubblesManager.shouldBubbleUp(notificationEntry);
                 final BubbleController.BubblesImpl bubblesImpl = (BubbleController.BubblesImpl) bubblesManager.mBubbles;
                 BubbleController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleController$BubblesImpl$$ExternalSyntheticLambda17
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BubbleController.BubblesImpl bubblesImpl2 = BubbleController.BubblesImpl.this;
-                        BubbleController.this.onEntryUpdated(notifToBubbleEntry, shouldBubbleUp2, z2);
+                        BubbleController.BubblesImpl bubblesImpl2 = bubblesImpl;
+                        BubbleController.this.onEntryUpdated(bubbleEntryNotifToBubbleEntry, zShouldBubbleUp2, z2);
                     }
                 });
             }
@@ -205,7 +202,7 @@ public class BubblesManager {
                     BubbleController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleController$BubblesImpl$$ExternalSyntheticLambda7
                         @Override // java.lang.Runnable
                         public final void run() {
-                            BubbleController.BubblesImpl bubblesImpl2 = BubbleController.BubblesImpl.this;
+                            BubbleController.BubblesImpl bubblesImpl2 = bubblesImpl;
                             BubbleController.this.onNotificationChannelModified(str, userHandle, notificationChannel, i);
                         }
                     });
@@ -217,21 +214,21 @@ public class BubblesManager {
                 BubblesManager bubblesManager = BubblesManager.this;
                 bubblesManager.getClass();
                 String[] orderedKeys = rankingMap.getOrderedKeys();
-                HashMap hashMap = new HashMap();
+                HashMap map = new HashMap();
                 for (String str : orderedKeys) {
                     NotificationEntry entry = ((NotifPipeline) bubblesManager.mCommonNotifCollection).mNotifCollection.getEntry(str);
-                    BubbleEntry notifToBubbleEntry = entry != null ? bubblesManager.notifToBubbleEntry(entry) : null;
-                    boolean shouldBubbleUp = entry != null ? bubblesManager.shouldBubbleUp(entry) : false;
+                    BubbleEntry bubbleEntryNotifToBubbleEntry = entry != null ? bubblesManager.notifToBubbleEntry(entry) : null;
+                    boolean zShouldBubbleUp = entry != null ? bubblesManager.shouldBubbleUp(entry) : false;
                     boolean z = bubblesManager.mIsScreenUnlocked;
                     if (z) {
-                        bubblesManager.mShouldBubbleUpEntry.put(str, Boolean.valueOf(shouldBubbleUp));
+                        bubblesManager.mShouldBubbleUpEntry.put(str, Boolean.valueOf(zShouldBubbleUp));
                     } else if (!z && bubblesManager.mShouldBubbleUpEntry.containsKey(str)) {
-                        shouldBubbleUp = true;
+                        zShouldBubbleUp = true;
                     }
-                    hashMap.put(str, new Pair(notifToBubbleEntry, Boolean.valueOf(shouldBubbleUp)));
+                    map.put(str, new Pair(bubbleEntryNotifToBubbleEntry, Boolean.valueOf(zShouldBubbleUp)));
                 }
                 BubbleController.BubblesImpl bubblesImpl = (BubbleController.BubblesImpl) bubblesManager.mBubbles;
-                BubbleController.this.mMainExecutor.execute(new BubbleController$$ExternalSyntheticLambda13(bubblesImpl, rankingMap, 1, hashMap));
+                BubbleController.this.mMainExecutor.execute(new BubbleController$$ExternalSyntheticLambda13(bubblesImpl, rankingMap, 1, map));
             }
         });
         ((KeyguardStateControllerImpl) keyguardStateController).addCallback(new KeyguardStateController.Callback() { // from class: com.android.systemui.wmshell.BubblesManager.1
@@ -279,7 +276,7 @@ public class BubblesManager {
         StatusBarWindowCallback statusBarWindowCallback = new StatusBarWindowCallback() { // from class: com.android.systemui.wmshell.BubblesManager$$ExternalSyntheticLambda0
             @Override // com.android.systemui.statusbar.phone.StatusBarWindowCallback
             public final void onStateChanged(boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, boolean z8) {
-                BubblesManager bubblesManager = BubblesManager.this;
+                BubblesManager bubblesManager = this.f$0;
                 if (z6 != bubblesManager.mPanelExpanded) {
                     bubblesManager.mPanelExpanded = z6;
                     BubbleController.BubblesImpl bubblesImpl = (BubbleController.BubblesImpl) bubblesManager.mBubbles;

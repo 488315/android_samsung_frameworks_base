@@ -116,9 +116,9 @@ public interface ISoundDose extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISoundDose.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISoundDose)) {
-                return (ISoundDose) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISoundDose.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISoundDose)) {
+                return (ISoundDose) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -134,26 +134,26 @@ public interface ISoundDose extends IInterface {
             }
             switch (i) {
                 case 1:
-                    float readFloat = parcel.readFloat();
+                    float f = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setOutputRs2UpperBound(readFloat);
+                    setOutputRs2UpperBound(f);
                     return true;
                 case 2:
-                    float readFloat2 = parcel.readFloat();
+                    float f2 = parcel.readFloat();
                     SoundDoseRecord[] soundDoseRecordArr = (SoundDoseRecord[]) parcel.createTypedArray(SoundDoseRecord.CREATOR);
                     parcel.enforceNoDataAvail();
-                    resetCsd(readFloat2, soundDoseRecordArr);
+                    resetCsd(f2, soundDoseRecordArr);
                     return true;
                 case 3:
-                    float readFloat3 = parcel.readFloat();
-                    int readInt = parcel.readInt();
+                    float f3 = parcel.readFloat();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateAttenuation(readFloat3, readInt);
+                    updateAttenuation(f3, i3);
                     return true;
                 case 4:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCsdEnabled(readBoolean);
+                    setCsdEnabled(z);
                     return true;
                 case 5:
                     AudioDeviceCategory[] audioDeviceCategoryArr = (AudioDeviceCategory[]) parcel.createTypedArray(AudioDeviceCategory.CREATOR);
@@ -176,19 +176,19 @@ public interface ISoundDose extends IInterface {
                     parcel2.writeFloat(csd);
                     return true;
                 case 9:
-                    boolean isSoundDoseHalSupported = isSoundDoseHalSupported();
+                    boolean zIsSoundDoseHalSupported = isSoundDoseHalSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSoundDoseHalSupported);
+                    parcel2.writeBoolean(zIsSoundDoseHalSupported);
                     return true;
                 case 10:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    forceUseFrameworkMel(readBoolean2);
+                    forceUseFrameworkMel(z2);
                     return true;
                 case 11:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    forceComputeCsdOnAllDevices(readBoolean3);
+                    forceComputeCsdOnAllDevices(z3);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -213,144 +213,144 @@ public interface ISoundDose extends IInterface {
 
             @Override // android.media.ISoundDose
             public void setOutputRs2UpperBound(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISoundDose
             public void resetCsd(float f, SoundDoseRecord[] soundDoseRecordArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    obtain.writeTypedArray(soundDoseRecordArr, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeTypedArray(soundDoseRecordArr, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISoundDose
             public void updateAttenuation(float f, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISoundDose
             public void setCsdEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISoundDose
             public void initCachedAudioDeviceCategories(AudioDeviceCategory[] audioDeviceCategoryArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    obtain.writeTypedArray(audioDeviceCategoryArr, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(audioDeviceCategoryArr, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISoundDose
             public void setAudioDeviceCategory(AudioDeviceCategory audioDeviceCategory) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceCategory, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceCategory, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISoundDose
             public float getOutputRs2UpperBound() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISoundDose
             public float getCsd() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISoundDose
             public boolean isSoundDoseHalSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISoundDose
             public void forceUseFrameworkMel(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.ISoundDose
             public void forceComputeCsdOnAllDevices(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundDose.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -383,48 +383,48 @@ public interface ISoundDose extends IInterface {
 
         @Override // android.os.Parcelable
         public final void writeToParcel(Parcel parcel, int i) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
             parcel.writeString(this.address);
             parcel.writeInt(this.internalAudioType);
             parcel.writeBoolean(this.csdCompatible);
-            int dataPosition2 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition2 - dataPosition);
-            parcel.setDataPosition(dataPosition2);
+            int iDataPosition2 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition2 - iDataPosition);
+            parcel.setDataPosition(iDataPosition2);
         }
 
         public final void readFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
             try {
-                if (readInt < 4) {
+                if (i < 4) {
                     throw new BadParcelableException("Parcelable too small");
                 }
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.address = parcel.readString();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.internalAudioType = parcel.readInt();
-                        if (parcel.dataPosition() - dataPosition < readInt) {
+                        if (parcel.dataPosition() - iDataPosition < i) {
                             this.csdCompatible = parcel.readBoolean();
-                            if (dataPosition > Integer.MAX_VALUE - readInt) {
+                            if (iDataPosition > Integer.MAX_VALUE - i) {
                                 throw new BadParcelableException("Overflow in the size of parcelable");
                             }
-                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }

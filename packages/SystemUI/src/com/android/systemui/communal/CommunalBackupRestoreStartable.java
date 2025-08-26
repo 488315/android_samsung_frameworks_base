@@ -21,7 +21,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalBackupRestoreStartable extends BroadcastReceiver implements CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -33,7 +32,6 @@ public final class CommunalBackupRestoreStartable extends BroadcastReceiver impl
     public boolean userSetupComplete;
     public final CommunalBackupRestoreStartable$userSetupObserver$1 userSetupObserver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -72,9 +70,9 @@ public final class CommunalBackupRestoreStartable extends BroadcastReceiver impl
         if (this.userSetupComplete != z) {
             this.userSetupComplete = z;
             Logger logger = this.logger;
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new CommunalBackupRestoreStartable$$ExternalSyntheticLambda0(1), null);
-            obtain.setBool1(this.userSetupComplete);
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new CommunalBackupRestoreStartable$$ExternalSyntheticLambda0(1), null);
+            logMessageObtain.setBool1(this.userSetupComplete);
+            logger.getBuffer().commit(logMessageObtain);
         }
         if (!this.userSetupComplete || this.oldToNewWidgetIdMap.isEmpty()) {
             return;
@@ -101,9 +99,9 @@ public final class CommunalBackupRestoreStartable extends BroadcastReceiver impl
             this.oldToNewWidgetIdMap = MapsKt__MapsKt.toMap(ArraysKt___ArraysKt.zip(intArrayExtra, intArrayExtra2));
             Logger logger = this.logger;
             CommunalBackupRestoreStartable$$ExternalSyntheticLambda0 communalBackupRestoreStartable$$ExternalSyntheticLambda0 = new CommunalBackupRestoreStartable$$ExternalSyntheticLambda0(0);
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, communalBackupRestoreStartable$$ExternalSyntheticLambda0, null);
-            obtain.setStr1(this.oldToNewWidgetIdMap.toString());
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, communalBackupRestoreStartable$$ExternalSyntheticLambda0, null);
+            logMessageObtain.setStr1(this.oldToNewWidgetIdMap.toString());
+            logger.getBuffer().commit(logMessageObtain);
             maybeRestoreWidgets();
             if (this.userSetupComplete) {
                 return;

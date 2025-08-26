@@ -29,14 +29,13 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class StateScopeImpl implements EvalScope, StateScope {
     public final Lazy endSignalLazy;
     public final Lazy endSignalOnce$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.kairos.internal.StateScopeImpl$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            StateScopeImpl stateScopeImpl = StateScopeImpl.this;
+            StateScopeImpl stateScopeImpl = this.f$0;
             Events endSignal = stateScopeImpl.getEndSignal();
             if (endSignal == EventsKt.emptyEvents) {
                 return endSignal;
@@ -71,17 +70,17 @@ public final class StateScopeImpl implements EvalScope, StateScope {
     /* JADX WARN: Type inference failed for: r2v1, types: [T, com.android.systemui.kairos.State, com.android.systemui.kairos.StateInit] */
     public final State foldState(Events events, Object obj, final Function3 function3) {
         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
-        ?? holdState = holdState(EventsKt.map(events, new Function2() { // from class: com.android.systemui.kairos.StateScope$DefaultImpls$$ExternalSyntheticLambda1
+        ?? HoldState = holdState(EventsKt.map(events, new Function2() { // from class: com.android.systemui.kairos.StateScope$DefaultImpls$$ExternalSyntheticLambda1
             /* JADX WARN: Multi-variable type inference failed */
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj2, Object obj3) {
                 TransactionScope transactionScope = (TransactionScope) obj2;
                 T t = ref$ObjectRef.element;
-                return Function3.this.invoke(transactionScope, obj3, transactionScope.sample(t == 0 ? null : (State) t));
+                return function3.invoke(transactionScope, obj3, transactionScope.sample(t == 0 ? null : (State) t));
             }
         }), obj);
-        ref$ObjectRef.element = holdState;
-        return holdState;
+        ref$ObjectRef.element = HoldState;
+        return HoldState;
     }
 
     public final IncrementalInit foldStateMapIncrementally(final Events events, DeferredValue deferredValue) {
@@ -91,35 +90,35 @@ public final class StateScopeImpl implements EvalScope, StateScope {
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
                 ((Number) obj3).intValue();
-                Pair access$applyPatchCalm = IncrementalImplKt.access$applyPatchCalm((Map) StateSource.this.getCurrentWithEpoch((EvalScope) obj).component1(), (Map) obj2);
-                if (access$applyPatchCalm == null) {
+                Pair pairAccess$applyPatchCalm = IncrementalImplKt.access$applyPatchCalm((Map) stateSource.getCurrentWithEpoch((EvalScope) obj).component1(), (Map) obj2);
+                if (pairAccess$applyPatchCalm == null) {
                     return Maybe.Absent.INSTANCE;
                 }
                 Maybe.Companion.getClass();
-                return Maybe.Present.m2573boximpl(access$applyPatchCalm);
+                return Maybe.Present.m2590boximpl(pairAccess$applyPatchCalm);
             }
         };
-        final PullNodesKt$cached$$inlined$EventsImplCheap$1 cached = PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.StateScopeImpl$foldStateMapIncrementally$$inlined$activatedIncremental$1
+        final PullNodesKt$cached$$inlined$EventsImplCheap$1 pullNodesKt$cached$$inlined$EventsImplCheap$1Cached = PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.StateScopeImpl$foldStateMapIncrementally$$inlined$activatedIncremental$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope2, Schedulable schedulable) {
-                ActivationResult activate = ((EventsImpl) EventsKt.getInit(events).connect(evalScope2)).activate(evalScope2, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = ((EventsImpl) EventsKt.getInit(events).connect(evalScope2)).activate(evalScope2, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, function3), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         });
         final FilterNodeKt$filterPresentImpl$1 filterNodeKt$filterPresentImpl$1 = FilterNodeKt$filterPresentImpl$1.INSTANCE;
         DemuxImpl DemuxImpl = DemuxKt.DemuxImpl(1, new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$activatedIncremental$$inlined$filterPresentImpl$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope2, Schedulable schedulable) {
-                ActivationResult activate = cached.activate(evalScope2, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = pullNodesKt$cached$$inlined$EventsImplCheap$1Cached.activate(evalScope2, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, filterNodeKt$filterPresentImpl$1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         }, new SingletonMapK.Factory());
         Unit unit = Unit.INSTANCE;
@@ -134,12 +133,12 @@ public final class StateScopeImpl implements EvalScope, StateScope {
         final EventsImpl eventsImpl = new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$activatedIncremental$$inlined$mapImpl$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope2, Schedulable schedulable) {
-                ActivationResult activate = demuxImpl$eventsForKey$$inlined$EventsImplCheap$1.activate(evalScope2, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = demuxImpl$eventsForKey$$inlined$EventsImplCheap$1.activate(evalScope2, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, incrementalImplKt$activatedIncremental$changes$2), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         };
         final IncrementalImplKt$activatedIncremental$patches$2 incrementalImplKt$activatedIncremental$patches$2 = new Function3() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$activatedIncremental$patches$2
@@ -152,12 +151,12 @@ public final class StateScopeImpl implements EvalScope, StateScope {
         EventsImpl eventsImpl2 = new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$activatedIncremental$$inlined$mapImpl$2
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope2, Schedulable schedulable) {
-                ActivationResult activate = demuxImpl$eventsForKey$$inlined$EventsImplCheap$1.activate(evalScope2, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = demuxImpl$eventsForKey$$inlined$EventsImplCheap$1.activate(evalScope2, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, incrementalImplKt$activatedIncremental$patches$2), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         };
         Output output = new Output(null, null, new Function2() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$activatedIncremental$$inlined$OneShot$1
@@ -165,10 +164,10 @@ public final class StateScopeImpl implements EvalScope, StateScope {
             public final Object invoke(Object obj, Object obj2) {
                 EvalScope evalScope2 = (EvalScope) obj;
                 StateSource stateSource2 = stateSource;
-                ActivationResult activate = EventsImpl.this.activate(evalScope2, new Schedulable.S(stateSource2));
-                if (activate != null) {
-                    stateSource2.upstreamConnection = activate.connection;
-                    if (activate.needsEval) {
+                ActivationResult activationResultActivate = eventsImpl.activate(evalScope2, new Schedulable.S(stateSource2));
+                if (activationResultActivate != null) {
+                    stateSource2.upstreamConnection = activationResultActivate.connection;
+                    if (activationResultActivate.needsEval) {
                         evalScope2.schedule(stateSource2);
                     }
                 }
@@ -238,12 +237,12 @@ public final class StateScopeImpl implements EvalScope, StateScope {
         DemuxImpl DemuxImpl = DemuxKt.DemuxImpl(1, new FilterNodeKt$filterImpl$$inlined$filterPresentImpl$1(FilterNodeKt$filterPresentImpl$1.INSTANCE, PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.StateScopeImpl$holdStateInternalDeferred$$inlined$activatedStateSource$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope2, Schedulable schedulable) {
-                ActivationResult activate = ((EventsImpl) EventsKt.getInit(events).connect(evalScope2)).activate(evalScope2, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = ((EventsImpl) EventsKt.getInit(events).connect(evalScope2)).activate(evalScope2, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, stateImplKt$activatedStateSource$$inlined$filterImpl$1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         })), new SingletonMapK.Factory());
         Unit unit = Unit.INSTANCE;

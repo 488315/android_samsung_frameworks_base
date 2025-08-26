@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class AccessibilityActionsViewModel$isOnKeyguard$2 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -21,9 +20,9 @@ final class AccessibilityActionsViewModel$isOnKeyguard$2 extends SuspendLambda i
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         AccessibilityActionsViewModel$isOnKeyguard$2 accessibilityActionsViewModel$isOnKeyguard$2 = new AccessibilityActionsViewModel$isOnKeyguard$2((Continuation) obj3);
-        accessibilityActionsViewModel$isOnKeyguard$2.Z$0 = booleanValue;
+        accessibilityActionsViewModel$isOnKeyguard$2.Z$0 = zBooleanValue;
         accessibilityActionsViewModel$isOnKeyguard$2.L$0 = (StatusBarState) obj2;
         return accessibilityActionsViewModel$isOnKeyguard$2.invokeSuspend(Unit.INSTANCE);
     }

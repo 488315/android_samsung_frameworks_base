@@ -45,9 +45,9 @@ public interface IProgramRatingInfoListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProgramRatingInfoListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProgramRatingInfoListener)) {
-                return (IProgramRatingInfoListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IProgramRatingInfoListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProgramRatingInfoListener)) {
+                return (IProgramRatingInfoListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IProgramRatingInfoListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onProgramInfoChanged(readString, bundle);
+                onProgramInfoChanged(string, bundle);
                 parcel2.writeNoException();
                 return true;
             }
@@ -102,17 +102,17 @@ public interface IProgramRatingInfoListener extends IInterface {
 
             @Override // android.media.tv.extension.rating.IProgramRatingInfoListener
             public void onProgramInfoChanged(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProgramRatingInfoListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IProgramRatingInfoListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

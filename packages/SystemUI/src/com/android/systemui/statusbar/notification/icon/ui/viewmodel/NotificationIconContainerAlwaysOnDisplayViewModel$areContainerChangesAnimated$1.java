@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationIconContainerAlwaysOnDisplayViewModel$areContainerChangesAnimated$1 extends SuspendLambda implements Function3 {
     /* synthetic */ boolean Z$0;
@@ -20,11 +19,11 @@ final class NotificationIconContainerAlwaysOnDisplayViewModel$areContainerChange
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
         NotificationIconContainerAlwaysOnDisplayViewModel$areContainerChangesAnimated$1 notificationIconContainerAlwaysOnDisplayViewModel$areContainerChangesAnimated$1 = new NotificationIconContainerAlwaysOnDisplayViewModel$areContainerChangesAnimated$1((Continuation) obj3);
-        notificationIconContainerAlwaysOnDisplayViewModel$areContainerChangesAnimated$1.Z$0 = booleanValue;
-        notificationIconContainerAlwaysOnDisplayViewModel$areContainerChangesAnimated$1.Z$1 = booleanValue2;
+        notificationIconContainerAlwaysOnDisplayViewModel$areContainerChangesAnimated$1.Z$0 = zBooleanValue;
+        notificationIconContainerAlwaysOnDisplayViewModel$areContainerChangesAnimated$1.Z$1 = zBooleanValue2;
         return notificationIconContainerAlwaysOnDisplayViewModel$areContainerChangesAnimated$1.invokeSuspend(Unit.INSTANCE);
     }
 

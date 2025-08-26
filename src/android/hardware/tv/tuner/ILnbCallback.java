@@ -65,9 +65,9 @@ public interface ILnbCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILnbCallback)) {
-                return (ILnbCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILnbCallback)) {
+                return (ILnbCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -93,13 +93,13 @@ public interface ILnbCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                onDiseqcMessage(createByteArray);
+                onDiseqcMessage(bArrCreateByteArray);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onEvent(readInt);
+                onEvent(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -126,47 +126,47 @@ public interface ILnbCallback extends IInterface {
 
             @Override // android.hardware.tv.tuner.ILnbCallback
             public void onDiseqcMessage(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    if (this.mRemote.transact(1, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    if (this.mRemote.transact(1, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method onDiseqcMessage is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ILnbCallback
             public void onEvent(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(2, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(2, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method onEvent is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.ILnbCallback
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -175,18 +175,18 @@ public interface ILnbCallback extends IInterface {
             @Override // android.hardware.tv.tuner.ILnbCallback
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

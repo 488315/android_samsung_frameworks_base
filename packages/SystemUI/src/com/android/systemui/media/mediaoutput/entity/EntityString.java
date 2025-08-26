@@ -1,16 +1,16 @@
 package com.android.systemui.media.mediaoutput.entity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import kotlin.Pair;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface EntityString {
     List getAttributes();
 
-    default String toLogText() {
+    default String toLogText() throws IOException {
         String simpleName = getClass().getSimpleName();
         List attributes = getAttributes();
         ArrayList arrayList = new ArrayList();

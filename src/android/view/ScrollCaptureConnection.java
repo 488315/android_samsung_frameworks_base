@@ -51,9 +51,9 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
 
     @Override // android.view.IScrollCaptureConnection
     public ICancellationSignal startCapture(Surface surface, IScrollCaptureCallbacks iScrollCaptureCallbacks) throws RemoteException {
-        int identityHashCode = System.identityHashCode(surface);
-        this.mTraceId = identityHashCode;
-        Trace.asyncTraceForTrackBegin(2L, TRACE_TRACK, "Session", identityHashCode);
+        int iIdentityHashCode = System.identityHashCode(surface);
+        this.mTraceId = iIdentityHashCode;
+        Trace.asyncTraceForTrackBegin(2L, TRACE_TRACK, "Session", iIdentityHashCode);
         Trace.asyncTraceForTrackBegin(2L, TRACE_TRACK, START_CAPTURE, this.mTraceId);
         this.mCloseGuard.open("ScrollCaptureConnection.close");
         if (!surface.isValid()) {
@@ -63,22 +63,22 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
         this.mRemote = iScrollCaptureCallbacks2;
         iScrollCaptureCallbacks2.asBinder().linkToDeath(this, 0);
         this.mConnected = true;
-        ICancellationSignal createTransport = CancellationSignal.createTransport();
-        this.mCancellation = CancellationSignal.fromTransport(createTransport);
+        ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
+        this.mCancellation = CancellationSignal.fromTransport(iCancellationSignalCreateTransport);
         this.mSession = new ScrollCaptureSession(surface, this.mScrollBounds, this.mPositionInWindow);
-        final Runnable create = SafeCallback.create(this.mCancellation, this.mUiThread, new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda5
+        final Runnable runnableCreate = SafeCallback.create(this.mCancellation, this.mUiThread, new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
             public final void run() {
-                ScrollCaptureConnection.this.onStartCaptureCompleted();
+                this.f$0.onStartCaptureCompleted();
             }
         });
         this.mUiThread.execute(new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                ScrollCaptureConnection.this.lambda$startCapture$0(create);
+                this.f$0.lambda$startCapture$0(runnableCreate);
             }
         });
-        return createTransport;
+        return iCancellationSignalCreateTransport;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -114,22 +114,22 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
         Trace.asyncTraceForTrackBegin(2L, TRACE_TRACK, REQUEST_IMAGE, this.mTraceId);
         checkActive();
         cancelPendingAction();
-        ICancellationSignal createTransport = CancellationSignal.createTransport();
-        CancellationSignal fromTransport = CancellationSignal.fromTransport(createTransport);
-        this.mCancellation = fromTransport;
-        final Consumer create = SafeCallback.create(fromTransport, this.mUiThread, new Consumer() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda3
+        ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
+        CancellationSignal cancellationSignalFromTransport = CancellationSignal.fromTransport(iCancellationSignalCreateTransport);
+        this.mCancellation = cancellationSignalFromTransport;
+        final Consumer consumerCreate = SafeCallback.create(cancellationSignalFromTransport, this.mUiThread, new Consumer() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ScrollCaptureConnection.this.onImageRequestCompleted((Rect) obj);
+                this.f$0.onImageRequestCompleted((Rect) obj);
             }
         });
         this.mUiThread.execute(new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                ScrollCaptureConnection.this.lambda$requestImage$1(rect, create);
+                this.f$0.lambda$requestImage$1(rect, consumerCreate);
             }
         });
-        return createTransport;
+        return iCancellationSignalCreateTransport;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -167,22 +167,22 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
         Trace.asyncTraceForTrackBegin(2L, TRACE_TRACK, END_CAPTURE, this.mTraceId);
         checkActive();
         cancelPendingAction();
-        ICancellationSignal createTransport = CancellationSignal.createTransport();
-        CancellationSignal fromTransport = CancellationSignal.fromTransport(createTransport);
-        this.mCancellation = fromTransport;
-        final Runnable create = SafeCallback.create(fromTransport, this.mUiThread, new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda1
+        ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
+        CancellationSignal cancellationSignalFromTransport = CancellationSignal.fromTransport(iCancellationSignalCreateTransport);
+        this.mCancellation = cancellationSignalFromTransport;
+        final Runnable runnableCreate = SafeCallback.create(cancellationSignalFromTransport, this.mUiThread, new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                ScrollCaptureConnection.this.onEndCaptureCompleted();
+                this.f$0.onEndCaptureCompleted();
             }
         });
         this.mUiThread.execute(new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                ScrollCaptureConnection.this.lambda$endCapture$2(create);
+                this.f$0.lambda$endCapture$2(runnableCreate);
             }
         });
-        return createTransport;
+        return iCancellationSignalCreateTransport;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -230,7 +230,7 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
             this.mUiThread.execute(new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ScrollCaptureConnection.lambda$close$4(ScrollCaptureCallback.this);
+                    ScrollCaptureConnection.lambda$close$4(scrollCaptureCallback);
                 }
             });
             this.mActive = false;

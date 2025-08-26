@@ -13,13 +13,12 @@ import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import kotlin.ULong;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ColorSchemeKt {
     public static final StaticProvidableCompositionLocal LocalColorScheme = new StaticProvidableCompositionLocal(new Function0() { // from class: androidx.compose.material3.ColorSchemeKt$LocalColorScheme$1
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            return ColorSchemeKt.m259lightColorSchemeCXl9yA$default(0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, -1, 15);
+            return ColorSchemeKt.m260lightColorSchemeCXl9yA$default(0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, -1, 15);
         }
     });
     public static final StaticProvidableCompositionLocal LocalTonalElevationEnabled = new StaticProvidableCompositionLocal(new Function0() { // from class: androidx.compose.material3.ColorSchemeKt$LocalTonalElevationEnabled$1
@@ -29,7 +28,6 @@ public abstract class ColorSchemeKt {
         }
     });
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -184,63 +182,48 @@ public abstract class ColorSchemeKt {
     }
 
     /* renamed from: contentColorFor-4WTKRHQ, reason: not valid java name */
-    public static final long m257contentColorFor4WTKRHQ(ColorScheme colorScheme, long j) {
+    public static final long m258contentColorFor4WTKRHQ(ColorScheme colorScheme, long j) {
         long j2 = colorScheme.primary;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3427equalsimpl0(j, j2)) {
+        if (ULong.m3447equalsimpl0(j, j2)) {
             return colorScheme.onPrimary;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.secondary)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.secondary)) {
             return colorScheme.onSecondary;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.tertiary)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.tertiary)) {
             return colorScheme.onTertiary;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.background)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.background)) {
             return colorScheme.onBackground;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.error)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.error)) {
             return colorScheme.onError;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.primaryContainer)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.primaryContainer)) {
             return colorScheme.onPrimaryContainer;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.secondaryContainer)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.secondaryContainer)) {
             return colorScheme.onSecondaryContainer;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.tertiaryContainer)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.tertiaryContainer)) {
             return colorScheme.onTertiaryContainer;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.errorContainer)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.errorContainer)) {
             return colorScheme.onErrorContainer;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.inverseSurface)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.inverseSurface)) {
             return colorScheme.inverseOnSurface;
         }
-        boolean m3427equalsimpl0 = ULong.m3427equalsimpl0(j, colorScheme.surface);
+        boolean zM3447equalsimpl0 = ULong.m3447equalsimpl0(j, colorScheme.surface);
         long j3 = colorScheme.onSurface;
-        if (m3427equalsimpl0) {
+        if (zM3447equalsimpl0) {
             return j3;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.surfaceVariant)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.surfaceVariant)) {
             return colorScheme.onSurfaceVariant;
         }
-        if (ULong.m3427equalsimpl0(j, colorScheme.surfaceBright)) {
-            return j3;
-        }
-        if (ULong.m3427equalsimpl0(j, colorScheme.surfaceContainer)) {
-            return j3;
-        }
-        if (ULong.m3427equalsimpl0(j, colorScheme.surfaceContainerHigh)) {
-            return j3;
-        }
-        if (ULong.m3427equalsimpl0(j, colorScheme.surfaceContainerHighest)) {
-            return j3;
-        }
-        if (ULong.m3427equalsimpl0(j, colorScheme.surfaceContainerLow)) {
-            return j3;
-        }
-        if (ULong.m3427equalsimpl0(j, colorScheme.surfaceContainerLowest)) {
+        if (ULong.m3447equalsimpl0(j, colorScheme.surfaceBright) || ULong.m3447equalsimpl0(j, colorScheme.surfaceContainer) || ULong.m3447equalsimpl0(j, colorScheme.surfaceContainerHigh) || ULong.m3447equalsimpl0(j, colorScheme.surfaceContainerHighest) || ULong.m3447equalsimpl0(j, colorScheme.surfaceContainerLow) || ULong.m3447equalsimpl0(j, colorScheme.surfaceContainerLowest)) {
             return j3;
         }
         Color.Companion.getClass();
@@ -248,22 +231,22 @@ public abstract class ColorSchemeKt {
     }
 
     /* renamed from: contentColorFor-ek8zF_U, reason: not valid java name */
-    public static final long m258contentColorForek8zF_U(long j, Composer composer) {
+    public static final long m259contentColorForek8zF_U(long j, Composer composer) {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.material3.contentColorFor (ColorScheme.kt:890)");
         }
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(-1680907984);
         MaterialTheme.INSTANCE.getClass();
-        long m257contentColorFor4WTKRHQ = m257contentColorFor4WTKRHQ(MaterialTheme.getColorScheme(composerImpl), j);
-        if (m257contentColorFor4WTKRHQ == 16) {
-            m257contentColorFor4WTKRHQ = ((Color) composerImpl.consume(ContentColorKt.LocalContentColor)).value;
+        long jM258contentColorFor4WTKRHQ = m258contentColorFor4WTKRHQ(MaterialTheme.getColorScheme(composerImpl), j);
+        if (jM258contentColorFor4WTKRHQ == 16) {
+            jM258contentColorFor4WTKRHQ = ((Color) composerImpl.consume(ContentColorKt.LocalContentColor)).value;
         }
         composerImpl.end(false);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return m257contentColorFor4WTKRHQ;
+        return jM258contentColorFor4WTKRHQ;
     }
 
     public static final long fromToken(ColorScheme colorScheme, ColorSchemeKeyTokens colorSchemeKeyTokens) {
@@ -351,15 +334,15 @@ public abstract class ColorSchemeKt {
             ComposerKt.traceEventStart("androidx.compose.material3.<get-value> (ColorScheme.kt:1025)");
         }
         MaterialTheme.INSTANCE.getClass();
-        long fromToken = fromToken(MaterialTheme.getColorScheme(composer), colorSchemeKeyTokens);
+        long jFromToken = fromToken(MaterialTheme.getColorScheme(composer), colorSchemeKeyTokens);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return fromToken;
+        return jFromToken;
     }
 
     /* renamed from: lightColorScheme-C-Xl9yA$default, reason: not valid java name */
-    public static ColorScheme m259lightColorSchemeCXl9yA$default(long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9, long j10, long j11, long j12, long j13, long j14, long j15, long j16, long j17, long j18, long j19, long j20, long j21, long j22, long j23, long j24, long j25, long j26, long j27, long j28, long j29, long j30, long j31, long j32, int i, int i2) {
+    public static ColorScheme m260lightColorSchemeCXl9yA$default(long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9, long j10, long j11, long j12, long j13, long j14, long j15, long j16, long j17, long j18, long j19, long j20, long j21, long j22, long j23, long j24, long j25, long j26, long j27, long j28, long j29, long j30, long j31, long j32, int i, int i2) {
         long j33;
         long j34;
         long j35;
@@ -591,14 +574,14 @@ public abstract class ColorSchemeKt {
     }
 
     /* renamed from: surfaceColorAtElevation-3ABfNKs, reason: not valid java name */
-    public static final long m260surfaceColorAtElevation3ABfNKs(ColorScheme colorScheme, float f) {
-        long Color;
-        boolean m836equalsimpl0 = Dp.m836equalsimpl0(f, 0);
+    public static final long m261surfaceColorAtElevation3ABfNKs(ColorScheme colorScheme, float f) {
+        boolean zM838equalsimpl0 = Dp.m838equalsimpl0(f, 0);
         long j = colorScheme.surface;
-        if (m836equalsimpl0) {
+        if (zM838equalsimpl0) {
             return j;
         }
-        Color = ColorKt.Color(Color.m461getRedimpl(r3), Color.m460getGreenimpl(r3), Color.m458getBlueimpl(r3), ((((float) Math.log(f + 1)) * 4.5f) + 2.0f) / 100.0f, Color.m459getColorSpaceimpl(colorScheme.surfaceTint));
-        return ColorKt.m464compositeOverOWjLjI(Color, j);
+        float fLog = ((((float) Math.log(f + 1)) * 4.5f) + 2.0f) / 100.0f;
+        long j2 = colorScheme.surfaceTint;
+        return ColorKt.m466compositeOverOWjLjI(ColorKt.Color(Color.m463getRedimpl(j2), Color.m462getGreenimpl(j2), Color.m460getBlueimpl(j2), fLog, Color.m461getColorSpaceimpl(j2)), j);
     }
 }

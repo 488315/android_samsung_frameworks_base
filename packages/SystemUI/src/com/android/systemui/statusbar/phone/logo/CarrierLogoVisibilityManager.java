@@ -11,7 +11,6 @@ import com.android.systemui.util.DeviceState;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CarrierLogoVisibilityManager {
     public final CarrierInfraMediator carrierInfraMediator;
@@ -26,6 +25,10 @@ public final class CarrierLogoVisibilityManager {
     public boolean quickStarEnabled = true;
     public ArrayList simTypes = new ArrayList();
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0049  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public CarrierLogoVisibilityManager(CarrierInfraMediator carrierInfraMediator, CarrierInfraMediator.Conditions conditions, SimCardInfoUtil simCardInfoUtil, TelephonyManager telephonyManager) {
         boolean z;
         this.carrierInfraMediator = carrierInfraMediator;
@@ -37,15 +40,9 @@ public final class CarrierLogoVisibilityManager {
             if (serviceState.getState() == 0) {
                 ServiceState serviceState2 = telephonyManager.getServiceState();
                 serviceState2.getClass();
-                if (!serviceState2.getRoaming()) {
-                    z = true;
-                    this.networkCondition = z;
-                    this.featureEnabled = carrierInfraMediator.isEnabled(conditions, this.defaultSubscriptionSlotId, new Object[0]);
-                    this.matchedSim = true;
-                }
+                z = !serviceState2.getRoaming();
             }
         }
-        z = false;
         this.networkCondition = z;
         this.featureEnabled = carrierInfraMediator.isEnabled(conditions, this.defaultSubscriptionSlotId, new Object[0]);
         this.matchedSim = true;

@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import com.android.systemui.util.DeviceType;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IndicatorGardenInputProperties {
     public final Context context;
@@ -62,11 +61,11 @@ public final class IndicatorGardenInputProperties {
     public final void updatePaddingValues() {
         this.defaultCenterPadding = (int) (getDimenSize(R.dimen.notification_icon_view_width) * 0.25f);
         this.defaultStartPadding = getDimenSize(R.dimen.status_bar_padding_start);
-        this.cornerPaddingC = getDimenSize(17106384);
-        this.cutoutInnerPaddingD = getDimenSize(17106373);
-        this.cutoutSidePaddingD = getDimenSize(17106374);
-        this.cutoutTopMarginB = getDimenSize(17106375);
-        this.cutoutBottomMarginGb = getDimenSize(17106372);
+        this.cornerPaddingC = getDimenSize(17106385);
+        this.cutoutInnerPaddingD = getDimenSize(17106374);
+        this.cutoutSidePaddingD = getDimenSize(17106375);
+        this.cutoutTopMarginB = getDimenSize(17106376);
+        this.cutoutBottomMarginGb = getDimenSize(17106373);
     }
 
     public final void updateWindowMetrics() {

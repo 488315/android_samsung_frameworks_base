@@ -8,7 +8,6 @@ import android.os.UserManager;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RestrictedLockUtils {
     public static Intent getShowAdminSupportDetailsIntent(EnforcedAdmin enforcedAdmin) {
@@ -25,20 +24,19 @@ public class RestrictedLockUtils {
 
     public static void sendShowAdminSupportDetailsIntent(Context context, EnforcedAdmin enforcedAdmin) {
         Intent showAdminSupportDetailsIntent = getShowAdminSupportDetailsIntent(enforcedAdmin);
-        int myUserId = UserHandle.myUserId();
+        int iMyUserId = UserHandle.myUserId();
         if (enforcedAdmin != null) {
             UserHandle userHandle = enforcedAdmin.user;
             if (userHandle != null) {
                 if (((UserManager) context.getSystemService(UserManager.class)).getUserProfiles().contains(UserHandle.of(userHandle.getIdentifier()))) {
-                    myUserId = enforcedAdmin.user.getIdentifier();
+                    iMyUserId = enforcedAdmin.user.getIdentifier();
                 }
             }
             showAdminSupportDetailsIntent.putExtra("android.app.extra.RESTRICTION", enforcedAdmin.enforcedRestriction);
         }
-        context.startActivityAsUser(showAdminSupportDetailsIntent, UserHandle.of(myUserId));
+        context.startActivityAsUser(showAdminSupportDetailsIntent, UserHandle.of(iMyUserId));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EnforcedAdmin {
         public final ComponentName component;
         public String enforcedRestriction;

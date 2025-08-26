@@ -377,13 +377,13 @@ public abstract class Nat {
     }
 
     public static boolean diff(int i, int[] iArr, int i2, int[] iArr2, int i3, int[] iArr3, int i4) {
-        boolean gte = gte(i, iArr, i2, iArr2, i3);
-        if (gte) {
+        boolean zGte = gte(i, iArr, i2, iArr2, i3);
+        if (zGte) {
             sub(i, iArr, i2, iArr2, i3, iArr3, i4);
-            return gte;
+            return zGte;
         }
         sub(i, iArr2, i3, iArr, i2, iArr3, i4);
-        return gte;
+        return zGte;
     }
 
     public static boolean eq(int i, int[] iArr, int[] iArr2) {
@@ -448,12 +448,12 @@ public abstract class Nat {
             throw new IllegalArgumentException();
         }
         int i2 = (i + 31) >> 5;
-        int[] create = create(i2);
+        int[] iArrCreate = create(i2);
         for (int i3 = 0; i3 < i2; i3++) {
-            create[i3] = bigInteger.intValue();
+            iArrCreate[i3] = bigInteger.intValue();
             bigInteger = bigInteger.shiftRight(32);
         }
-        return create;
+        return iArrCreate;
     }
 
     public static long[] fromBigInteger64(int i, BigInteger bigInteger) {
@@ -461,12 +461,12 @@ public abstract class Nat {
             throw new IllegalArgumentException();
         }
         int i2 = (i + 63) >> 6;
-        long[] create64 = create64(i2);
+        long[] jArrCreate64 = create64(i2);
         for (int i3 = 0; i3 < i2; i3++) {
-            create64[i3] = bigInteger.longValue();
+            jArrCreate64[i3] = bigInteger.longValue();
             bigInteger = bigInteger.shiftRight(64);
         }
-        return create64;
+        return jArrCreate64;
     }
 
     public static int getBit(int[] iArr, int i) {
@@ -634,9 +634,9 @@ public abstract class Nat {
         while (i2 < i) {
             int i3 = i;
             int[] iArr4 = iArr3;
-            long mulWordAddTo = j + (mulWordAddTo(i3, iArr[i2], r4, 0, iArr4, i2) & 4294967295L) + (iArr4[r10] & 4294967295L);
-            iArr4[i2 + i3] = (int) mulWordAddTo;
-            j = mulWordAddTo >>> 32;
+            long jMulWordAddTo = j + (mulWordAddTo(i3, iArr[i2], r4, 0, iArr4, i2) & 4294967295L) + (iArr4[r10] & 4294967295L);
+            iArr4[i2 + i3] = (int) jMulWordAddTo;
+            j = jMulWordAddTo >>> 32;
             i2++;
             i = i3;
             iArr2 = iArr2;
@@ -652,9 +652,9 @@ public abstract class Nat {
         while (i5 < i) {
             int i7 = i;
             int[] iArr4 = iArr3;
-            long mulWordAddTo = j + (mulWordAddTo(i7, iArr[i2 + i5], r5, r6, iArr4, i6) & 4294967295L) + (iArr4[r9] & 4294967295L);
-            iArr4[i6 + i7] = (int) mulWordAddTo;
-            j = mulWordAddTo >>> 32;
+            long jMulWordAddTo = j + (mulWordAddTo(i7, iArr[i2 + i5], r5, r6, iArr4, i6) & 4294967295L) + (iArr4[r9] & 4294967295L);
+            iArr4[i6 + i7] = (int) jMulWordAddTo;
+            j = jMulWordAddTo >>> 32;
             i6++;
             i5++;
             i = i7;
@@ -990,10 +990,10 @@ public abstract class Nat {
         long j3 = 0;
         int i8 = 2;
         for (i2 = 1; i2 < i; i2++) {
-            long squareWordAddTo = j3 + (squareWordAddTo(iArr, i2, iArr2) & 4294967295L) + (iArr2[i8] & 4294967295L);
+            long jSquareWordAddTo = j3 + (squareWordAddTo(iArr, i2, iArr2) & 4294967295L) + (iArr2[i8] & 4294967295L);
             int i9 = i8 + 1;
-            iArr2[i8] = (int) squareWordAddTo;
-            long j4 = (squareWordAddTo >>> 32) + (iArr2[i9] & 4294967295L);
+            iArr2[i8] = (int) jSquareWordAddTo;
+            long j4 = (jSquareWordAddTo >>> 32) + (iArr2[i9] & 4294967295L);
             i8 += 2;
             iArr2[i9] = (int) j4;
             j3 = j4 >>> 32;
@@ -1019,10 +1019,10 @@ public abstract class Nat {
         int i9 = i3 + 2;
         long j3 = 0;
         for (i4 = 1; i4 < i; i4++) {
-            long squareWordAddTo = j3 + (squareWordAddTo(iArr, i2, i4, iArr2, i3) & 4294967295L) + (iArr2[i9] & 4294967295L);
+            long jSquareWordAddTo = j3 + (squareWordAddTo(iArr, i2, i4, iArr2, i3) & 4294967295L) + (iArr2[i9] & 4294967295L);
             int i10 = i9 + 1;
-            iArr2[i9] = (int) squareWordAddTo;
-            long j4 = (squareWordAddTo >>> 32) + (iArr2[i10] & 4294967295L);
+            iArr2[i9] = (int) jSquareWordAddTo;
+            long j4 = (jSquareWordAddTo >>> 32) + (iArr2[i10] & 4294967295L);
             i9 += 2;
             iArr2[i10] = (int) j4;
             j3 = j4 >>> 32;

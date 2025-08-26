@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KnoxSDKStrategy implements ActionsCreationStrategy, InitializationStrategy, DefaultActionsCreationStrategy, OnKeyListenerStrategy {
     public final ConditionChecker mConditionChecker;
@@ -58,9 +57,9 @@ public class KnoxSDKStrategy implements ActionsCreationStrategy, InitializationS
             }
             int powerDialogItems4 = this.mProKioskManagerWrapper.mProKioskManager.getPowerDialogItems();
             if ((powerDialogItems4 | 256) == powerDialogItems4) {
-                ActionViewModel createActionViewModel = this.mViewModelFactory.createActionViewModel(samsungGlobalActions, "bug_report");
-                createActionViewModel.getActionInfo().setViewType(ViewType.BOTTOM_BTN_LIST_VIEW);
-                samsungGlobalActions.addAction(createActionViewModel);
+                ActionViewModel actionViewModelCreateActionViewModel = this.mViewModelFactory.createActionViewModel(samsungGlobalActions, "bug_report");
+                actionViewModelCreateActionViewModel.getActionInfo().setViewType(ViewType.BOTTOM_BTN_LIST_VIEW);
+                samsungGlobalActions.addAction(actionViewModelCreateActionViewModel);
             }
             if (this.mProKioskManagerWrapper.mProKioskManager.getPowerDialogOptionMode() == 2) {
                 this.mProKioskManagerWrapper.mProKioskOptionShown = true;
@@ -86,13 +85,13 @@ public class KnoxSDKStrategy implements ActionsCreationStrategy, InitializationS
                 Object obj = arrayList.get(i);
                 i++;
                 PowerItemWrapper powerItemWrapper = (PowerItemWrapper) obj;
-                ActionViewModel createActionViewModel2 = this.mViewModelFactory.createActionViewModel(samsungGlobalActions, "knox_custom");
-                createActionViewModel2.setIcon(powerItemWrapper.mPowerItem.getIcon());
+                ActionViewModel actionViewModelCreateActionViewModel2 = this.mViewModelFactory.createActionViewModel(samsungGlobalActions, "knox_custom");
+                actionViewModelCreateActionViewModel2.setIcon(powerItemWrapper.mPowerItem.getIcon());
                 PowerItem powerItem = powerItemWrapper.mPowerItem;
-                createActionViewModel2.setText(powerItem.getText());
-                createActionViewModel2.setIntent(powerItem.getIntent());
-                createActionViewModel2.setIntentAction(powerItem.getIntentAction());
-                samsungGlobalActions.addAction(createActionViewModel2);
+                actionViewModelCreateActionViewModel2.setText(powerItem.getText());
+                actionViewModelCreateActionViewModel2.setIntent(powerItem.getIntent());
+                actionViewModelCreateActionViewModel2.setIntentAction(powerItem.getIntentAction());
+                samsungGlobalActions.addAction(actionViewModelCreateActionViewModel2);
             }
         }
     }

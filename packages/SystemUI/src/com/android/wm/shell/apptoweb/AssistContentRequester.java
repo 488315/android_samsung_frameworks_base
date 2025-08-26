@@ -17,7 +17,6 @@ import java.util.WeakHashMap;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AssistContentRequester {
     public final String attributionTag;
@@ -27,11 +26,9 @@ public final class AssistContentRequester {
     public final IActivityTaskManager activityTaskManager = ActivityTaskManager.getService();
     public final Map pendingCallbacks = Collections.synchronizedMap(new WeakHashMap());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -52,7 +49,6 @@ public final class AssistContentRequester {
         this.packageName = context.getApplicationContext().getPackageName();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AssistDataReceiver extends IAssistDataReceiver.Stub {
         public final Object callbackKey;
         public final WeakReference parentRef;
@@ -80,7 +76,7 @@ public final class AssistContentRequester {
                 assistContentRequester.callBackExecutor.execute(new Runnable() { // from class: com.android.wm.shell.apptoweb.AssistContentRequester$AssistDataReceiver$onHandleAssistData$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AssistContentRequester.Callback callback2 = AssistContentRequester.Callback.this;
+                        AssistContentRequester.Callback callback2 = callback;
                         ((DesktopModeWindowDecoration$$ExternalSyntheticLambda25) callback2).f$0.onAssistContentReceived(assistContent);
                     }
                 });

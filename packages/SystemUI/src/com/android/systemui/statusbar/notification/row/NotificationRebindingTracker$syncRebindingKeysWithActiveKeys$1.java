@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationRebindingTracker$syncRebindingKeysWithActiveKeys$1 extends SuspendLambda implements Function2 {
     int label;
@@ -48,7 +47,7 @@ final class NotificationRebindingTracker$syncRebindingKeysWithActiveKeys$1 exten
                 public final Object emit(Object obj2, Continuation continuation) {
                     Object value;
                     Set set = (Set) obj2;
-                    StateFlowImpl stateFlowImpl = NotificationRebindingTracker.this.rebindingKeys;
+                    StateFlowImpl stateFlowImpl = notificationRebindingTracker.rebindingKeys;
                     do {
                         value = stateFlowImpl.getValue();
                     } while (!stateFlowImpl.compareAndSet(value, CollectionsKt___CollectionsKt.intersect((Set) value, set)));

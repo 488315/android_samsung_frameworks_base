@@ -10,6 +10,7 @@ import android.util.MathUtils;
 import android.util.SparseArray;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -97,7 +98,7 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
     }
 
     BaseBundle(BaseBundle baseBundle, boolean z) {
-        Parcel parcel = null;
+        Parcel parcelObtain = null;
         this.mMap = null;
         this.mParcelledData = null;
         this.mOwnsLazyValues = true;
@@ -124,18 +125,18 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
             }
             if (baseBundle.mParcelledData != null) {
                 if (baseBundle.isEmptyParcel()) {
-                    parcel = NoImagePreloadHolder.EMPTY_PARCEL;
+                    parcelObtain = NoImagePreloadHolder.EMPTY_PARCEL;
                     this.mParcelledByNative = false;
                 } else {
-                    parcel = Parcel.obtain();
-                    parcel.appendFrom(baseBundle.mParcelledData, 0, baseBundle.mParcelledData.dataSize());
-                    parcel.setDataPosition(0);
+                    parcelObtain = Parcel.obtain();
+                    parcelObtain.appendFrom(baseBundle.mParcelledData, 0, baseBundle.mParcelledData.dataSize());
+                    parcelObtain.setDataPosition(0);
                     this.mParcelledByNative = baseBundle.mParcelledByNative;
                 }
             } else {
                 this.mParcelledByNative = false;
             }
-            this.mParcelledData = parcel;
+            this.mParcelledData = parcelObtain;
             this.mHasIntent = baseBundle.mHasIntent;
         }
     }
@@ -204,9 +205,9 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
     }
 
     final <T> T getValue(String str, Class<T> cls, Class<?>... clsArr) {
-        int indexOfKey = this.mMap.indexOfKey(str);
-        if (indexOfKey >= 0) {
-            return (T) getValueAt(indexOfKey, cls, clsArr);
+        int iIndexOfKey = this.mMap.indexOfKey(str);
+        if (iIndexOfKey >= 0) {
+            return (T) getValueAt(iIndexOfKey, cls, clsArr);
         }
         return null;
     }
@@ -235,13 +236,13 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
     }
 
     private Object unwrapLazyValueFromMapLocked(int i, Class<?> cls, Class<?>... clsArr) {
-        Object valueAt = this.mMap.valueAt(i);
-        if (!(valueAt instanceof BiFunction)) {
-            return valueAt;
+        Object objValueAt = this.mMap.valueAt(i);
+        if (!(objValueAt instanceof BiFunction)) {
+            return objValueAt;
         }
         try {
-            Object apply = ((BiFunction) valueAt).apply(cls, clsArr);
-            this.mMap.setValueAt(i, apply);
+            Object objApply = ((BiFunction) objValueAt).apply(cls, clsArr);
+            this.mMap.setValueAt(i, objApply);
             int i2 = this.mLazyValues - 1;
             this.mLazyValues = i2;
             if (this.mOwnsLazyValues) {
@@ -252,7 +253,7 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
                     this.mWeakParcelledData = null;
                 }
             }
-            return apply;
+            return objApply;
         } catch (BadParcelableException e) {
             if (sShouldDefuse) {
                 Log.w(TAG, "Failed to parse item " + this.mMap.keyAt(i) + ", returning null.", e);
@@ -274,22 +275,22 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
             this.mParcelledData = null;
             return;
         }
-        int readInt = parcel.readInt();
-        if (readInt < 0) {
+        int i = parcel.readInt();
+        if (i < 0) {
             return;
         }
         ArrayMap<String, Object> arrayMap2 = this.mMap;
         if (arrayMap2 == null) {
-            arrayMap2 = new ArrayMap<>(readInt);
+            arrayMap2 = new ArrayMap<>(i);
         } else {
             arrayMap2.erase();
-            arrayMap2.ensureCapacity(readInt);
+            arrayMap2.ensureCapacity(i);
         }
         ArrayMap<String, Object> arrayMap3 = arrayMap2;
         int[] iArr = {0};
         try {
             try {
-                parcel.readArrayMap(arrayMap3, readInt, !z2, z, this, iArr);
+                parcel.readArrayMap(arrayMap3, i, !z2, z, this, iArr);
                 this.mWeakParcelledData = null;
                 if (z) {
                     if (iArr[0] == 0) {
@@ -1065,7 +1066,7 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
         }
     }
 
-    void writeToParcelInner(Parcel parcel, int i) {
+    void writeToParcelInner(Parcel parcel, int i) throws IOException {
         if (parcel.hasReadWriteHelper()) {
             unparcel(true);
         }
@@ -1076,13 +1077,13 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
                 if (this.mParcelledData == NoImagePreloadHolder.EMPTY_PARCEL) {
                     parcel.writeInt(0);
                 } else {
-                    int dataSize = this.mParcelledData.dataSize();
-                    parcel.writeInt(dataSize);
+                    int iDataSize = this.mParcelledData.dataSize();
+                    parcel.writeInt(iDataSize);
                     if (this.mParcelledByNative) {
                         i2 = BUNDLE_MAGIC_NATIVE;
                     }
                     parcel.writeInt(i2);
-                    parcel.appendFrom(this.mParcelledData, 0, dataSize);
+                    parcel.appendFrom(this.mParcelledData, 0, iDataSize);
                     parcel.writeBoolean(this.mHasIntent);
                 }
                 return;
@@ -1092,15 +1093,15 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
                 parcel.writeInt(0);
                 return;
             }
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(-1);
             parcel.writeInt(BUNDLE_MAGIC);
-            int dataPosition2 = parcel.dataPosition();
+            int iDataPosition2 = parcel.dataPosition();
             parcel.writeArrayMapInternal(arrayMap);
-            int dataPosition3 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition3 - dataPosition2);
-            parcel.setDataPosition(dataPosition3);
+            int iDataPosition3 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition3 - iDataPosition2);
+            parcel.setDataPosition(iDataPosition3);
             parcel.writeBoolean(this.mHasIntent);
         }
     }
@@ -1121,11 +1122,11 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
         if (i % 4 != 0) {
             throw new IllegalStateException("Bundle length is not aligned by 4: " + i);
         }
-        int readInt = parcel.readInt();
-        boolean z = readInt == BUNDLE_MAGIC;
-        boolean z2 = readInt == BUNDLE_MAGIC_NATIVE;
+        int i2 = parcel.readInt();
+        boolean z = i2 == BUNDLE_MAGIC;
+        boolean z2 = i2 == BUNDLE_MAGIC_NATIVE;
         if (!z && !z2) {
-            throw new IllegalStateException("Bad magic number for Bundle: 0x" + Integer.toHexString(readInt));
+            throw new IllegalStateException("Bad magic number for Bundle: 0x" + Integer.toHexString(i2));
         }
         if (parcel.hasReadWriteHelper()) {
             synchronized (this) {
@@ -1135,26 +1136,26 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
             this.mHasIntent = parcel.readBoolean();
             return;
         }
-        int dataPosition = parcel.dataPosition();
-        parcel.setDataPosition(MathUtils.addOrThrow(dataPosition, i));
-        Parcel obtain = Parcel.obtain();
-        obtain.setDataPosition(0);
-        obtain.appendFrom(parcel, dataPosition, i);
-        obtain.adoptClassCookies(parcel);
-        obtain.setDataPosition(0);
+        int iDataPosition = parcel.dataPosition();
+        parcel.setDataPosition(MathUtils.addOrThrow(iDataPosition, i));
+        Parcel parcelObtain = Parcel.obtain();
+        parcelObtain.setDataPosition(0);
+        parcelObtain.appendFrom(parcel, iDataPosition, i);
+        parcelObtain.adoptClassCookies(parcel);
+        parcelObtain.setDataPosition(0);
         this.mOwnsLazyValues = true;
         this.mParcelledByNative = z2;
-        this.mParcelledData = obtain;
+        this.mParcelledData = parcelObtain;
         this.mHasIntent = parcel.readBoolean();
     }
 
-    public static void dumpStats(IndentingPrintWriter indentingPrintWriter, String str, Object obj) {
-        Parcel obtain = Parcel.obtain();
-        obtain.writeValue(obj);
-        int dataPosition = obtain.dataPosition();
-        obtain.recycle();
-        if (dataPosition > 1024) {
-            indentingPrintWriter.println(str + " [size=" + dataPosition + NavigationBarInflaterView.SIZE_MOD_END);
+    public static void dumpStats(IndentingPrintWriter indentingPrintWriter, String str, Object obj) throws IOException {
+        Parcel parcelObtain = Parcel.obtain();
+        parcelObtain.writeValue(obj);
+        int iDataPosition = parcelObtain.dataPosition();
+        parcelObtain.recycle();
+        if (iDataPosition > 1024) {
+            indentingPrintWriter.println(str + " [size=" + iDataPosition + NavigationBarInflaterView.SIZE_MOD_END);
             if (obj instanceof BaseBundle) {
                 dumpStats(indentingPrintWriter, (BaseBundle) obj);
             } else if (obj instanceof SparseArray) {
@@ -1163,7 +1164,7 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
         }
     }
 
-    public static void dumpStats(IndentingPrintWriter indentingPrintWriter, SparseArray sparseArray) {
+    public static void dumpStats(IndentingPrintWriter indentingPrintWriter, SparseArray sparseArray) throws IOException {
         indentingPrintWriter.increaseIndent();
         if (sparseArray == null) {
             indentingPrintWriter.println("[null]");
@@ -1175,7 +1176,7 @@ public class BaseBundle implements Parcel.ClassLoaderProvider {
         indentingPrintWriter.decreaseIndent();
     }
 
-    public static void dumpStats(IndentingPrintWriter indentingPrintWriter, BaseBundle baseBundle) {
+    public static void dumpStats(IndentingPrintWriter indentingPrintWriter, BaseBundle baseBundle) throws IOException {
         indentingPrintWriter.increaseIndent();
         if (baseBundle == null) {
             indentingPrintWriter.println("[null]");

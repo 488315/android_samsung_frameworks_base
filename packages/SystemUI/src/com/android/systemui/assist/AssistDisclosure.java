@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -18,7 +19,6 @@ import com.android.app.animation.Interpolators;
 import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AssistDisclosure {
     public final Context mContext;
@@ -46,7 +46,6 @@ public class AssistDisclosure {
     public boolean mViewAdded;
     public final WindowManager mWm;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AssistDisclosureView extends View implements ValueAnimator.AnimatorUpdateListener {
         public int mAlpha;
         public final ValueAnimator mAlphaInAnimator;
@@ -59,7 +58,7 @@ public class AssistDisclosure {
         public final float mShadowThickness;
         public final float mThickness;
 
-        public AssistDisclosureView(Context context) {
+        public AssistDisclosureView(Context context) throws Resources.NotFoundException {
             super(context);
             this.mPath = new Path();
             this.mAlpha = 0;
@@ -118,7 +117,7 @@ public class AssistDisclosure {
             float dimension2 = getResources().getDimension(R.dimen.assist_disclosure_shadow_thickness);
             this.mShadowThickness = dimension2;
             if (z) {
-                int dimensionPixelSize = ((View) this).mContext.getResources().getDimensionPixelSize(17105918);
+                int dimensionPixelSize = ((View) this).mContext.getResources().getDimensionPixelSize(17105919);
                 this.mRadius = (dimensionPixelSize <= 0 && (dimensionPixelSize = ((View) this).mContext.getResources().getDimensionPixelSize(R.dimen.assist_disclosure_rounded)) <= 0) ? BasicRune.ASSIST_DISCLOSURE_CORNER_ROUND_SIZE * 6.0f * getResources().getDisplayMetrics().density : dimensionPixelSize;
                 this.mPaint.setDither(true);
                 this.mPaint.setStrokeWidth(dimension * 2.0f);

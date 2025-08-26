@@ -40,13 +40,13 @@ public final class EmergencyNumber {
 
     public static final ArrayList<EmergencyNumber> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<EmergencyNumber> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 80, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 80, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             EmergencyNumber emergencyNumber = new EmergencyNumber();
-            emergencyNumber.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 80);
+            emergencyNumber.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 80);
             arrayList.add(emergencyNumber);
         }
         return arrayList;
@@ -63,13 +63,13 @@ public final class EmergencyNumber {
         hwParcel.readEmbeddedBuffer(r4.getBytes().length + 1, hwBlob.handle(), j3, false);
         this.categories = hwBlob.getInt32(j + 48);
         int int32 = hwBlob.getInt32(j + 64);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 56, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 56, true);
         this.urns.clear();
         for (int i = 0; i < int32; i++) {
             new String();
             int i2 = i * 16;
-            String string = readEmbeddedBuffer.getString(i2);
-            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, readEmbeddedBuffer.handle(), i2, false);
+            String string = embeddedBuffer.getString(i2);
+            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, embeddedBuffer.handle(), i2, false);
             this.urns.add(string);
         }
         this.sources = hwBlob.getInt32(j + 72);

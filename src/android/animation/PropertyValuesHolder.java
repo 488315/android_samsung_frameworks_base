@@ -267,11 +267,11 @@ public class PropertyValuesHolder implements Cloneable {
 
     public void setObjectValues(Object... objArr) {
         this.mValueType = objArr[0].getClass();
-        KeyframeSet ofObject = KeyframeSet.ofObject(objArr);
-        this.mKeyframes = ofObject;
+        KeyframeSet keyframeSetOfObject = KeyframeSet.ofObject(objArr);
+        this.mKeyframes = keyframeSetOfObject;
         TypeEvaluator typeEvaluator = this.mEvaluator;
         if (typeEvaluator != null) {
-            ofObject.setEvaluator(typeEvaluator);
+            keyframeSetOfObject.setEvaluator(typeEvaluator);
         }
     }
 
@@ -280,7 +280,7 @@ public class PropertyValuesHolder implements Cloneable {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private Method getPropertyFunction(Class cls, String str, Class cls2) {
+    private Method getPropertyFunction(Class cls, String str, Class cls2) throws NoSuchMethodException, SecurityException {
         Class[] clsArr;
         String methodName = getMethodName(str, this.mPropertyName);
         Method method = null;
@@ -318,30 +318,30 @@ public class PropertyValuesHolder implements Cloneable {
         return method;
     }
 
-    private Method setupSetterOrGetter(Class cls, HashMap<Class, HashMap<String, Method>> hashMap, String str, Class cls2) {
-        Method method;
-        boolean z;
-        synchronized (hashMap) {
-            HashMap<String, Method> hashMap2 = hashMap.get(cls);
-            method = null;
-            if (hashMap2 != null) {
-                z = hashMap2.containsKey(this.mPropertyName);
-                if (z) {
-                    method = hashMap2.get(this.mPropertyName);
+    private Method setupSetterOrGetter(Class cls, HashMap<Class, HashMap<String, Method>> map, String str, Class cls2) {
+        Method propertyFunction;
+        boolean zContainsKey;
+        synchronized (map) {
+            HashMap<String, Method> map2 = map.get(cls);
+            propertyFunction = null;
+            if (map2 != null) {
+                zContainsKey = map2.containsKey(this.mPropertyName);
+                if (zContainsKey) {
+                    propertyFunction = map2.get(this.mPropertyName);
                 }
             } else {
-                z = false;
+                zContainsKey = false;
             }
-            if (!z) {
-                method = getPropertyFunction(cls, str, cls2);
-                if (hashMap2 == null) {
-                    hashMap2 = new HashMap<>();
-                    hashMap.put(cls, hashMap2);
+            if (!zContainsKey) {
+                propertyFunction = getPropertyFunction(cls, str, cls2);
+                if (map2 == null) {
+                    map2 = new HashMap<>();
+                    map.put(cls, map2);
                 }
-                hashMap2.put(this.mPropertyName, method);
+                map2.put(this.mPropertyName, propertyFunction);
             }
         }
-        return method;
+        return propertyFunction;
     }
 
     void setupSetter(Class cls) {
@@ -358,14 +358,14 @@ public class PropertyValuesHolder implements Cloneable {
             try {
                 List<Keyframe> keyframes = this.mKeyframes.getKeyframes();
                 int size = keyframes == null ? 0 : keyframes.size();
-                Object obj2 = null;
+                Object objConvertBack = null;
                 for (int i = 0; i < size; i++) {
                     Keyframe keyframe = keyframes.get(i);
                     if (!keyframe.hasValue() || keyframe.valueWasSetOnStart()) {
-                        if (obj2 == null) {
-                            obj2 = convertBack(this.mProperty.get(obj));
+                        if (objConvertBack == null) {
+                            objConvertBack = convertBack(this.mProperty.get(obj));
                         }
-                        keyframe.setValue(obj2);
+                        keyframe.setValue(objConvertBack);
                         keyframe.setValueWasSetOnStart(true);
                     }
                 }
@@ -642,7 +642,7 @@ public class PropertyValuesHolder implements Cloneable {
         }
 
         @Override // android.animation.PropertyValuesHolder
-        void setAnimatedValue(Object obj) {
+        void setAnimatedValue(Object obj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             IntProperty intProperty = this.mIntProperty;
             if (intProperty != null) {
                 intProperty.setValue(obj, this.mIntAnimatedValue);
@@ -671,32 +671,32 @@ public class PropertyValuesHolder implements Cloneable {
 
         @Override // android.animation.PropertyValuesHolder
         void setupSetter(Class cls) {
-            boolean z;
+            boolean zContainsKey;
             Long l;
             if (this.mProperty != null) {
                 return;
             }
-            HashMap<Class, HashMap<String, Long>> hashMap = sJNISetterPropertyMap;
-            synchronized (hashMap) {
-                HashMap<String, Long> hashMap2 = hashMap.get(cls);
-                if (hashMap2 != null) {
-                    z = hashMap2.containsKey(this.mPropertyName);
-                    if (z && (l = hashMap2.get(this.mPropertyName)) != null) {
+            HashMap<Class, HashMap<String, Long>> map = sJNISetterPropertyMap;
+            synchronized (map) {
+                HashMap<String, Long> map2 = map.get(cls);
+                if (map2 != null) {
+                    zContainsKey = map2.containsKey(this.mPropertyName);
+                    if (zContainsKey && (l = map2.get(this.mPropertyName)) != null) {
                         this.mJniSetter = l.longValue();
                     }
                 } else {
-                    z = false;
+                    zContainsKey = false;
                 }
-                if (!z) {
+                if (!zContainsKey) {
                     try {
                         this.mJniSetter = PropertyValuesHolder.nGetIntMethod(cls, getMethodName("set", this.mPropertyName));
                     } catch (NoSuchMethodError unused) {
                     }
-                    if (hashMap2 == null) {
-                        hashMap2 = new HashMap<>();
-                        sJNISetterPropertyMap.put(cls, hashMap2);
+                    if (map2 == null) {
+                        map2 = new HashMap<>();
+                        sJNISetterPropertyMap.put(cls, map2);
                     }
-                    hashMap2.put(this.mPropertyName, Long.valueOf(this.mJniSetter));
+                    map2.put(this.mPropertyName, Long.valueOf(this.mJniSetter));
                 }
             }
             if (this.mJniSetter == 0) {
@@ -776,7 +776,7 @@ public class PropertyValuesHolder implements Cloneable {
         }
 
         @Override // android.animation.PropertyValuesHolder
-        void setAnimatedValue(Object obj) {
+        void setAnimatedValue(Object obj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             FloatProperty floatProperty = this.mFloatProperty;
             if (floatProperty != null) {
                 floatProperty.setValue(obj, this.mFloatAnimatedValue);
@@ -805,32 +805,32 @@ public class PropertyValuesHolder implements Cloneable {
 
         @Override // android.animation.PropertyValuesHolder
         void setupSetter(Class cls) {
-            boolean z;
+            boolean zContainsKey;
             Long l;
             if (this.mProperty != null) {
                 return;
             }
-            HashMap<Class, HashMap<String, Long>> hashMap = sJNISetterPropertyMap;
-            synchronized (hashMap) {
-                HashMap<String, Long> hashMap2 = hashMap.get(cls);
-                if (hashMap2 != null) {
-                    z = hashMap2.containsKey(this.mPropertyName);
-                    if (z && (l = hashMap2.get(this.mPropertyName)) != null) {
+            HashMap<Class, HashMap<String, Long>> map = sJNISetterPropertyMap;
+            synchronized (map) {
+                HashMap<String, Long> map2 = map.get(cls);
+                if (map2 != null) {
+                    zContainsKey = map2.containsKey(this.mPropertyName);
+                    if (zContainsKey && (l = map2.get(this.mPropertyName)) != null) {
                         this.mJniSetter = l.longValue();
                     }
                 } else {
-                    z = false;
+                    zContainsKey = false;
                 }
-                if (!z) {
+                if (!zContainsKey) {
                     try {
                         this.mJniSetter = PropertyValuesHolder.nGetFloatMethod(cls, getMethodName("set", this.mPropertyName));
                     } catch (NoSuchMethodError unused) {
                     }
-                    if (hashMap2 == null) {
-                        hashMap2 = new HashMap<>();
-                        sJNISetterPropertyMap.put(cls, hashMap2);
+                    if (map2 == null) {
+                        map2 = new HashMap<>();
+                        sJNISetterPropertyMap.put(cls, map2);
                     }
-                    hashMap2.put(this.mPropertyName, Long.valueOf(this.mJniSetter));
+                    map2.put(this.mPropertyName, Long.valueOf(this.mJniSetter));
                 }
             }
             if (this.mJniSetter == 0) {
@@ -884,23 +884,23 @@ public class PropertyValuesHolder implements Cloneable {
 
         @Override // android.animation.PropertyValuesHolder
         void setupSetter(Class cls) {
-            boolean z;
+            boolean zContainsKey;
             Long l;
             if (this.mJniSetter != 0) {
                 return;
             }
-            HashMap<Class, HashMap<String, Long>> hashMap = sJNISetterPropertyMap;
-            synchronized (hashMap) {
-                HashMap<String, Long> hashMap2 = hashMap.get(cls);
-                if (hashMap2 != null) {
-                    z = hashMap2.containsKey(this.mPropertyName);
-                    if (z && (l = hashMap2.get(this.mPropertyName)) != null) {
+            HashMap<Class, HashMap<String, Long>> map = sJNISetterPropertyMap;
+            synchronized (map) {
+                HashMap<String, Long> map2 = map.get(cls);
+                if (map2 != null) {
+                    zContainsKey = map2.containsKey(this.mPropertyName);
+                    if (zContainsKey && (l = map2.get(this.mPropertyName)) != null) {
                         this.mJniSetter = l.longValue();
                     }
                 } else {
-                    z = false;
+                    zContainsKey = false;
                 }
-                if (!z) {
+                if (!zContainsKey) {
                     String methodName = getMethodName("set", this.mPropertyName);
                     calculateValue(0.0f);
                     int length = ((float[]) getAnimatedValue()).length;
@@ -908,15 +908,15 @@ public class PropertyValuesHolder implements Cloneable {
                         try {
                             this.mJniSetter = PropertyValuesHolder.nGetMultipleFloatMethod(cls, methodName, length);
                         } catch (NoSuchMethodError unused) {
-                            this.mJniSetter = PropertyValuesHolder.nGetMultipleFloatMethod(cls, this.mPropertyName, length);
                         }
                     } catch (NoSuchMethodError unused2) {
+                        this.mJniSetter = PropertyValuesHolder.nGetMultipleFloatMethod(cls, this.mPropertyName, length);
                     }
-                    if (hashMap2 == null) {
-                        hashMap2 = new HashMap<>();
-                        sJNISetterPropertyMap.put(cls, hashMap2);
+                    if (map2 == null) {
+                        map2 = new HashMap<>();
+                        sJNISetterPropertyMap.put(cls, map2);
                     }
-                    hashMap2.put(this.mPropertyName, Long.valueOf(this.mJniSetter));
+                    map2.put(this.mPropertyName, Long.valueOf(this.mJniSetter));
                 }
             }
         }
@@ -967,23 +967,23 @@ public class PropertyValuesHolder implements Cloneable {
 
         @Override // android.animation.PropertyValuesHolder
         void setupSetter(Class cls) {
-            boolean z;
+            boolean zContainsKey;
             Long l;
             if (this.mJniSetter != 0) {
                 return;
             }
-            HashMap<Class, HashMap<String, Long>> hashMap = sJNISetterPropertyMap;
-            synchronized (hashMap) {
-                HashMap<String, Long> hashMap2 = hashMap.get(cls);
-                if (hashMap2 != null) {
-                    z = hashMap2.containsKey(this.mPropertyName);
-                    if (z && (l = hashMap2.get(this.mPropertyName)) != null) {
+            HashMap<Class, HashMap<String, Long>> map = sJNISetterPropertyMap;
+            synchronized (map) {
+                HashMap<String, Long> map2 = map.get(cls);
+                if (map2 != null) {
+                    zContainsKey = map2.containsKey(this.mPropertyName);
+                    if (zContainsKey && (l = map2.get(this.mPropertyName)) != null) {
                         this.mJniSetter = l.longValue();
                     }
                 } else {
-                    z = false;
+                    zContainsKey = false;
                 }
-                if (!z) {
+                if (!zContainsKey) {
                     String methodName = getMethodName("set", this.mPropertyName);
                     calculateValue(0.0f);
                     int length = ((int[]) getAnimatedValue()).length;
@@ -991,15 +991,15 @@ public class PropertyValuesHolder implements Cloneable {
                         try {
                             this.mJniSetter = PropertyValuesHolder.nGetMultipleIntMethod(cls, methodName, length);
                         } catch (NoSuchMethodError unused) {
-                            this.mJniSetter = PropertyValuesHolder.nGetMultipleIntMethod(cls, this.mPropertyName, length);
                         }
                     } catch (NoSuchMethodError unused2) {
+                        this.mJniSetter = PropertyValuesHolder.nGetMultipleIntMethod(cls, this.mPropertyName, length);
                     }
-                    if (hashMap2 == null) {
-                        hashMap2 = new HashMap<>();
-                        sJNISetterPropertyMap.put(cls, hashMap2);
+                    if (map2 == null) {
+                        map2 = new HashMap<>();
+                        sJNISetterPropertyMap.put(cls, map2);
                     }
-                    hashMap2.put(this.mPropertyName, Long.valueOf(this.mJniSetter));
+                    map2.put(this.mPropertyName, Long.valueOf(this.mJniSetter));
                 }
             }
         }

@@ -38,7 +38,7 @@ public class FrontendInfo {
 
     @Deprecated
     public Range<Integer> getFrequencyRange() {
-        return new Range<>(Integer.valueOf((int) this.mFrequencyRange.getLower().longValue()), Integer.valueOf((int) this.mFrequencyRange.getUpper().longValue()));
+        return new Range<>(Integer.valueOf((int) ((Long) this.mFrequencyRange.getLower()).longValue()), Integer.valueOf((int) ((Long) this.mFrequencyRange.getUpper()).longValue()));
     }
 
     public Range<Long> getFrequencyRangeLong() {

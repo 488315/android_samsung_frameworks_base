@@ -39,7 +39,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$FloatRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FlexClockController implements ClockController {
     public static final List BASE_PRESETS;
@@ -52,7 +51,7 @@ public final class FlexClockController implements ClockController {
     public final Lazy config$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shared.clocks.FlexClockController$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            FlexClockController flexClockController = FlexClockController.this;
+            FlexClockController flexClockController = this.f$0;
             return new ClockConfig("DEFAULT", flexClockController.clockCtx.resources.getString(R$string.clock_default_name), flexClockController.clockCtx.resources.getString(R$string.clock_default_description), false, false, 24, null);
         }
     });
@@ -66,42 +65,42 @@ public final class FlexClockController implements ClockController {
 
         @Override // com.android.systemui.plugins.clocks.ClockEvents
         public final void onAlarmDataChanged(AlarmData alarmData) {
-            FlexClockController flexClockController = FlexClockController.this;
+            FlexClockController flexClockController = this.this$0;
             flexClockController.smallClock.events.onAlarmDataChanged(alarmData);
             flexClockController.largeClock.events.onAlarmDataChanged(alarmData);
         }
 
         @Override // com.android.systemui.plugins.clocks.ClockEvents
         public final void onLocaleChanged(Locale locale) {
-            FlexClockController flexClockController = FlexClockController.this;
+            FlexClockController flexClockController = this.this$0;
             flexClockController.smallClock.events.onLocaleChanged(locale);
             flexClockController.largeClock.events.onLocaleChanged(locale);
         }
 
         @Override // com.android.systemui.plugins.clocks.ClockEvents
         public final void onTimeFormatChanged(boolean z) {
-            FlexClockController flexClockController = FlexClockController.this;
+            FlexClockController flexClockController = this.this$0;
             flexClockController.smallClock.events.onTimeFormatChanged(z);
             flexClockController.largeClock.events.onTimeFormatChanged(z);
         }
 
         @Override // com.android.systemui.plugins.clocks.ClockEvents
         public final void onTimeZoneChanged(TimeZone timeZone) {
-            FlexClockController flexClockController = FlexClockController.this;
+            FlexClockController flexClockController = this.this$0;
             flexClockController.smallClock.events.onTimeZoneChanged(timeZone);
             flexClockController.largeClock.events.onTimeZoneChanged(timeZone);
         }
 
         @Override // com.android.systemui.plugins.clocks.ClockEvents
         public final void onWeatherDataChanged(WeatherData weatherData) {
-            FlexClockController flexClockController = FlexClockController.this;
+            FlexClockController flexClockController = this.this$0;
             flexClockController.smallClock.events.onWeatherDataChanged(weatherData);
             flexClockController.largeClock.events.onWeatherDataChanged(weatherData);
         }
 
         @Override // com.android.systemui.plugins.clocks.ClockEvents
         public final void onZenDataChanged(ZenData zenData) {
-            FlexClockController flexClockController = FlexClockController.this;
+            FlexClockController flexClockController = this.this$0;
             flexClockController.smallClock.events.onZenDataChanged(zenData);
             flexClockController.largeClock.events.onZenDataChanged(zenData);
         }
@@ -109,13 +108,12 @@ public final class FlexClockController implements ClockController {
         @Override // com.android.systemui.plugins.clocks.ClockEvents
         public final void setReactiveTouchInteractionEnabled(boolean z) {
             this.isReactiveTouchInteractionEnabled = z;
-            ((FlexClockView) FlexClockController.this.largeClock.layerController.getView()).isReactiveTouchInteractionEnabled = z;
+            ((FlexClockView) this.this$0.largeClock.layerController.getView()).isReactiveTouchInteractionEnabled = z;
         }
     };
     public final FlexClockFaceController largeClock;
     public final FlexClockFaceController smallClock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -141,7 +139,7 @@ public final class FlexClockController implements ClockController {
                 arrayList.add(((ClockAxisStyle) obj).copy(new Function1() { // from class: com.android.systemui.shared.clocks.FlexClockController$Companion$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         FontUtils fontUtils = FontUtils.INSTANCE;
                         GSFAxes.INSTANCE.getClass();
                         AxisDefinition axisDefinition = GSFAxes.ROUND;
@@ -166,9 +164,9 @@ public final class FlexClockController implements ClockController {
         FontUtils fontUtils = FontUtils.INSTANCE;
         AxisDefinition axisDefinition = GSFAxes.WEIGHT;
         AxisType axisType = AxisType.Float;
-        Float valueOf = Float.valueOf(400.0f);
+        Float fValueOf = Float.valueOf(400.0f);
         fontUtils.getClass();
-        ClockFontAxis clockAxis = FontUtils.toClockAxis(axisDefinition, axisType, valueOf, "Weight", "Glyph Weight");
+        ClockFontAxis clockAxis = FontUtils.toClockAxis(axisDefinition, axisType, fValueOf, "Weight", "Glyph Weight");
         GSFAxes.INSTANCE.getClass();
         ClockFontAxis clockAxis2 = FontUtils.toClockAxis(GSFAxes.WIDTH, axisType, Float.valueOf(80.0f), "Width", "Glyph Width");
         AxisDefinition axisDefinition2 = GSFAxes.ROUND;
@@ -187,12 +185,12 @@ public final class FlexClockController implements ClockController {
             arrayList.add(new ClockAxisStyle(new Function1() { // from class: com.android.systemui.shared.clocks.FlexClockController$$ExternalSyntheticLambda2
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     ClockAxisStyle clockAxisStyle = (ClockAxisStyle) obj;
                     FlexClockController.Companion companion = FlexClockController.Companion;
                     FontUtils fontUtils2 = FontUtils.INSTANCE;
                     AxisDefinition axisDefinition3 = GSFAxes.WEIGHT;
-                    float f = Ref$FloatRef.this.element;
+                    float f = ref$FloatRef.element;
                     fontUtils2.getClass();
                     clockAxisStyle.put(axisDefinition3.tag, f);
                     GSFAxes.INSTANCE.getClass();
@@ -246,18 +244,18 @@ public final class FlexClockController implements ClockController {
         flexClockFaceController.layerController.setOnViewBoundsChanged(new Function1() { // from class: com.android.systemui.shared.clocks.FlexClockController$initialize$1$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                long m2829unboximpl = ((VRectF) obj).m2829unboximpl();
-                ClockEventListener clockEventListener2 = ClockEventListener.this;
+            public final Object mo781invoke(Object obj) {
+                long jM2847unboximpl = ((VRectF) obj).m2847unboximpl();
+                ClockEventListener clockEventListener2 = clockEventListener;
                 if (clockEventListener2 != null) {
-                    clockEventListener2.mo945onBoundsChangedTTAm5xc(m2829unboximpl);
+                    clockEventListener2.mo947onBoundsChangedTTAm5xc(jM2847unboximpl);
                 }
                 return Unit.INSTANCE;
             }
         });
-        ThemeConfig copy$default = ThemeConfig.copy$default(flexClockFaceController.theme, z, null, 2, null);
+        ThemeConfig themeConfigCopy$default = ThemeConfig.copy$default(flexClockFaceController.theme, z, null, 2, null);
         FlexClockFaceController.FlexClockFaceEvents flexClockFaceEvents = flexClockFaceController.events;
-        flexClockFaceEvents.onThemeChanged(copy$default);
+        flexClockFaceEvents.onThemeChanged(themeConfigCopy$default);
         ClockContext clockContext = this.clockCtx;
         ClockAxisStyle axes = clockContext.settings.getAxes();
         FlexClockFaceController$animations$1 flexClockFaceController$animations$1 = flexClockFaceController.animations;
@@ -269,18 +267,18 @@ public final class FlexClockController implements ClockController {
         flexClockFaceController2.layerController.setOnViewBoundsChanged(new Function1() { // from class: com.android.systemui.shared.clocks.FlexClockController$initialize$2$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                long m2829unboximpl = ((VRectF) obj).m2829unboximpl();
-                ClockEventListener clockEventListener2 = ClockEventListener.this;
+            public final Object mo781invoke(Object obj) {
+                long jM2847unboximpl = ((VRectF) obj).m2847unboximpl();
+                ClockEventListener clockEventListener2 = clockEventListener;
                 if (clockEventListener2 != null) {
-                    clockEventListener2.mo945onBoundsChangedTTAm5xc(m2829unboximpl);
+                    clockEventListener2.mo947onBoundsChangedTTAm5xc(jM2847unboximpl);
                 }
                 return Unit.INSTANCE;
             }
         });
-        ThemeConfig copy$default2 = ThemeConfig.copy$default(flexClockFaceController2.theme, z, null, 2, null);
+        ThemeConfig themeConfigCopy$default2 = ThemeConfig.copy$default(flexClockFaceController2.theme, z, null, 2, null);
         FlexClockFaceController.FlexClockFaceEvents flexClockFaceEvents2 = flexClockFaceController2.events;
-        flexClockFaceEvents2.onThemeChanged(copy$default2);
+        flexClockFaceEvents2.onThemeChanged(themeConfigCopy$default2);
         ClockAxisStyle axes2 = clockContext.settings.getAxes();
         FlexClockFaceController$animations$1 flexClockFaceController$animations$12 = flexClockFaceController2.animations;
         flexClockFaceController$animations$12.onFontAxesChanged(axes2);

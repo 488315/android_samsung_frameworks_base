@@ -1,6 +1,7 @@
 package com.android.systemui.qs.bar;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings;
 import android.util.Log;
@@ -20,7 +21,6 @@ import java.util.Arrays;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MicMode implements VideoCallMicModeBar.VideoCallMicModeBarBase {
     public final SecQSDetailController detailController;
@@ -37,16 +37,14 @@ public final class MicMode implements VideoCallMicModeBar.VideoCallMicModeBarBas
     public final Uri[] settingsValueList = {Settings.System.getUriFor(SettingsHelper.INDEX_MIC_MODE_ENABLE), Settings.System.getUriFor(SettingsHelper.INDEX_MIC_MODE_EFFECT)};
     private final SettingsHelper.OnChangedCallback settingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.qs.bar.MicMode$settingsListener$1
         @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
-        public final void onChanged(Uri uri) {
-            SettingsHelper settingsHelper;
+        public final void onChanged(Uri uri) throws Resources.NotFoundException {
             if (uri == null) {
                 return;
             }
-            boolean equals = uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_MIC_MODE_ENABLE));
-            MicMode micMode = MicMode.this;
-            if (equals) {
-                settingsHelper = micMode.settingsHelper;
-                boolean micModeEnable = settingsHelper.getMicModeEnable();
+            boolean zEquals = uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_MIC_MODE_ENABLE));
+            MicMode micMode = this.this$0;
+            if (zEquals) {
+                boolean micModeEnable = micMode.settingsHelper.getMicModeEnable();
                 EmergencyButtonController$$ExternalSyntheticOutline0.m("onChanged() - mic_mode_enable : ", "MicMode", micModeEnable);
                 micMode.micModeEnable = micModeEnable;
                 if (!micModeEnable) {
@@ -61,7 +59,6 @@ public final class MicMode implements VideoCallMicModeBar.VideoCallMicModeBarBas
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -96,15 +93,15 @@ public final class MicMode implements VideoCallMicModeBar.VideoCallMicModeBarBas
 
     @Override // com.android.systemui.qs.bar.VideoCallMicModeBar.VideoCallMicModeBarBase
     public final void inflate(View view) {
-        View inflate = this.util.inflate(R.layout.sec_mic_mode_button, (ViewGroup) view, true);
-        if (inflate != null) {
-            this.micModeText = (TextView) inflate.findViewById(R.id.mic_mode_text);
-            this.micModeEffect = (TextView) inflate.findViewById(R.id.mic_mode_effect);
-            this.micModeContainer = (LinearLayout) inflate.findViewById(R.id.mic_mode_container);
+        View viewInflate = this.util.inflate(R.layout.sec_mic_mode_button, (ViewGroup) view, true);
+        if (viewInflate != null) {
+            this.micModeText = (TextView) viewInflate.findViewById(R.id.mic_mode_text);
+            this.micModeEffect = (TextView) viewInflate.findViewById(R.id.mic_mode_effect);
+            this.micModeContainer = (LinearLayout) viewInflate.findViewById(R.id.mic_mode_container);
         } else {
-            inflate = null;
+            viewInflate = null;
         }
-        this.micModeButton = inflate;
+        this.micModeButton = viewInflate;
     }
 
     @Override // com.android.systemui.qs.bar.VideoCallMicModeBar.VideoCallMicModeBarBase
@@ -125,13 +122,13 @@ public final class MicMode implements VideoCallMicModeBar.VideoCallMicModeBarBas
     public final void setClickListener(final Function1 function1) {
         View view = this.micModeButton;
         if (view != null) {
-            view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.bar.MicMode$setClickListener$1
+            view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.bar.MicMode.setClickListener.1
                 @Override // android.view.View.OnClickListener
-                public final void onClick(View view2) {
+                public final void onClick(View view2) throws Resources.NotFoundException {
                     Log.d("MicMode", "onClicked");
                     MicMode micMode = MicMode.this;
                     micMode.detailController.showTargetDetail(micMode.micModeDetailAdapter);
-                    function1.mo779invoke(SystemUIAnalytics.EID_MIC_MODE);
+                    function1.mo781invoke(SystemUIAnalytics.EID_MIC_MODE);
                 }
             });
         }
@@ -149,7 +146,7 @@ public final class MicMode implements VideoCallMicModeBar.VideoCallMicModeBarBas
     }
 
     @Override // com.android.systemui.qs.bar.VideoCallMicModeBar.VideoCallMicModeBarBase
-    public final void updateFontScale() {
+    public final void updateFontScale() throws Resources.NotFoundException {
         TextView textView = this.micModeText;
         this.util.getClass();
         FontSizeUtils.updateFontSize(textView, R.dimen.sec_style_qs_tile_text_size, 0.8f, 1.3f);

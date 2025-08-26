@@ -1,5 +1,7 @@
 package com.android.systemui.screenrecord;
 
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.display.DisplayManager;
 import android.os.Build;
@@ -25,7 +27,10 @@ import com.android.systemui.mediaprojection.permission.BaseMediaProjectionPermis
 import com.android.systemui.mediaprojection.permission.BaseMediaProjectionPermissionViewBinder$setStartButtonOnClickListener$1;
 import com.android.systemui.mediaprojection.permission.ScreenShareOption;
 import com.android.systemui.plugins.ActivityStarter;
+import com.android.systemui.screenrecord.RecordingController;
+import com.android.systemui.screenrecord.RecordingController.AnonymousClass3;
 import com.android.systemui.settings.UserContextProvider;
+import com.android.systemui.settings.UserTrackerImpl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +41,6 @@ import kotlin.collections.CollectionsKt__MutableCollectionsKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenRecordPermissionViewBinder extends BaseMediaProjectionPermissionViewBinder {
     public static final Companion Companion = new Companion(null);
@@ -54,7 +58,6 @@ public final class ScreenRecordPermissionViewBinder extends BaseMediaProjectionP
     public View tapsView;
     public final UserContextProvider userContextProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CaptureTargetResultReceiver extends ResultReceiver {
         public CaptureTargetResultReceiver() {
             super(new Handler(Looper.getMainLooper()));
@@ -71,12 +74,15 @@ public final class ScreenRecordPermissionViewBinder extends BaseMediaProjectionP
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:10:0x0026  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public static List createOptionList(DisplayManager displayManager) {
             Display[] displays = displayManager.getDisplays();
             ArrayList arrayList = new ArrayList();
@@ -84,13 +90,13 @@ public final class ScreenRecordPermissionViewBinder extends BaseMediaProjectionP
             for (Display display : displays) {
                 if (display.getDisplayId() != 0) {
                     if (ScreenRecordPermissionViewBinder.filterDeviceTypeFlag) {
-                        if (!ArraysKt___ArraysKt.contains(display.getType(), ScreenRecordPermissionViewBinder.RECORDABLE_DISPLAY_TYPES)) {
+                        if (ArraysKt___ArraysKt.contains(display.getType(), ScreenRecordPermissionViewBinder.RECORDABLE_DISPLAY_TYPES)) {
+                            arrayList.add(display);
                         }
                     }
-                    arrayList.add(display);
                 }
             }
-            List mutableListOf = CollectionsKt__CollectionsKt.mutableListOf(new ScreenShareOption(0, R.string.screenrecord_permission_dialog_option_text_single_app, R.string.screenrecord_permission_dialog_warning_single_app, R.string.media_projection_entry_generic_permission_dialog_continue_single_app, 0, null, null, 112, null), new ScreenShareOption(1, R.string.screenrecord_permission_dialog_option_text_entire_screen, R.string.screenrecord_permission_dialog_warning_entire_screen, R.string.screenrecord_permission_dialog_continue_entire_screen, 0, null, Build.MODEL, 32, null));
+            List listMutableListOf = CollectionsKt__CollectionsKt.mutableListOf(new ScreenShareOption(0, R.string.screenrecord_permission_dialog_option_text_single_app, R.string.screenrecord_permission_dialog_warning_single_app, R.string.media_projection_entry_generic_permission_dialog_continue_single_app, 0, null, null, 112, null), new ScreenShareOption(1, R.string.screenrecord_permission_dialog_option_text_entire_screen, R.string.screenrecord_permission_dialog_warning_entire_screen, R.string.screenrecord_permission_dialog_continue_entire_screen, 0, null, Build.MODEL, 32, null));
             if (!arrayList.isEmpty()) {
                 ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList, 10));
                 int size = arrayList.size();
@@ -100,16 +106,15 @@ public final class ScreenRecordPermissionViewBinder extends BaseMediaProjectionP
                     Display display2 = (Display) obj;
                     arrayList2.add(new ScreenShareOption(1, R.string.screenrecord_permission_dialog_option_text_entire_screen_for_display, R.string.media_projection_entry_app_permission_dialog_warning_entire_screen, R.string.media_projection_entry_app_permission_dialog_continue_entire_screen, display2.getDisplayId(), null, display2.getName(), 32, null));
                 }
-                CollectionsKt__MutableCollectionsKt.addAll(arrayList2, mutableListOf);
+                CollectionsKt__MutableCollectionsKt.addAll(arrayList2, listMutableListOf);
             }
-            return CollectionsKt___CollectionsKt.toList(mutableListOf);
+            return CollectionsKt___CollectionsKt.toList(listMutableListOf);
         }
 
         private Companion() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
     }
 
@@ -142,12 +147,12 @@ public final class ScreenRecordPermissionViewBinder extends BaseMediaProjectionP
         if (view4 == null) {
             view4 = null;
         }
-        View requireViewById = view4.requireViewById(R.id.show_taps);
-        this.tapsView = requireViewById;
-        if (requireViewById == null) {
-            requireViewById = null;
+        View viewRequireViewById = view4.requireViewById(R.id.show_taps);
+        this.tapsView = viewRequireViewById;
+        if (viewRequireViewById == null) {
+            viewRequireViewById = null;
         }
-        requireViewById.setVisibility(this.selectedScreenShareOption.mode == 0 ? 8 : 0);
+        viewRequireViewById.setVisibility(this.selectedScreenShareOption.mode == 0 ? 8 : 0);
         Switch r6 = this.audioSwitch;
         if (r6 == null) {
             r6 = null;
@@ -191,7 +196,7 @@ public final class ScreenRecordPermissionViewBinder extends BaseMediaProjectionP
         spinner2.setOnItemClickListenerInt(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.screenrecord.ScreenRecordPermissionViewBinder$initRecordOptionsView$3
             @Override // android.widget.AdapterView.OnItemClickListener
             public final void onItemClick(AdapterView adapterView, View view7, int i, long j) {
-                Switch r0 = ScreenRecordPermissionViewBinder.this.audioSwitch;
+                Switch r0 = this.this$0.audioSwitch;
                 if (r0 == null) {
                     r0 = null;
                 }
@@ -214,7 +219,7 @@ public final class ScreenRecordPermissionViewBinder extends BaseMediaProjectionP
             spinner4 = null;
         }
         spinner4.setLongClickable(false);
-        View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.screenrecord.ScreenRecordPermissionViewBinder$bind$1
+        View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.screenrecord.ScreenRecordPermissionViewBinder.bind.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view7) {
                 ScreenRecordPermissionViewBinder.this.startButtonOnClicked();
@@ -239,95 +244,45 @@ public final class ScreenRecordPermissionViewBinder extends BaseMediaProjectionP
         view2.setVisibility(this.selectedScreenShareOption.mode == 0 ? 8 : 0);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0022  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0029  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0036  */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x001d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void requestScreenCapture(com.android.systemui.mediaprojection.MediaProjectionCaptureTarget r11, int r12) {
-        /*
-            r10 = this;
-            com.android.systemui.settings.UserContextProvider r0 = r10.userContextProvider
-            com.android.systemui.settings.UserTrackerImpl r0 = (com.android.systemui.settings.UserTrackerImpl) r0
-            android.content.Context r0 = r0.getUserContext()
-            com.android.systemui.mediaprojection.permission.ScreenShareOption r1 = r10.selectedScreenShareOption
-            int r1 = r1.mode
-            r2 = 1
-            r3 = 0
-            if (r1 == 0) goto L1d
-            android.widget.Switch r1 = r10.tapsSwitch
-            if (r1 != 0) goto L15
-            r1 = r3
-        L15:
-            boolean r1 = r1.isChecked()
-            if (r1 == 0) goto L1d
-            r1 = r2
-            goto L1e
-        L1d:
-            r1 = 0
-        L1e:
-            android.widget.Switch r4 = r10.audioSwitch
-            if (r4 != 0) goto L23
-            r4 = r3
-        L23:
-            boolean r4 = r4.isChecked()
-            if (r4 == 0) goto L36
-            android.widget.Spinner r4 = r10.options
-            if (r4 != 0) goto L2e
-            goto L2f
-        L2e:
-            r3 = r4
-        L2f:
-            java.lang.Object r3 = r3.getSelectedItem()
-            com.android.systemui.screenrecord.ScreenRecordingAudioSource r3 = (com.android.systemui.screenrecord.ScreenRecordingAudioSource) r3
-            goto L38
-        L36:
-            com.android.systemui.screenrecord.ScreenRecordingAudioSource r3 = com.android.systemui.screenrecord.ScreenRecordingAudioSource.NONE
-        L38:
-            int r3 = r3.ordinal()
-            java.lang.String r4 = com.android.systemui.screenrecord.RecordingService.GROUP_KEY_SAVED
-            android.content.Intent r4 = new android.content.Intent
-            java.lang.Class<com.android.systemui.screenrecord.RecordingService> r5 = com.android.systemui.screenrecord.RecordingService.class
-            r4.<init>(r0, r5)
-            java.lang.String r5 = "com.android.systemui.screenrecord.START"
-            android.content.Intent r4 = r4.setAction(r5)
-            java.lang.String r5 = "extra_resultCode"
-            r6 = -1
-            android.content.Intent r4 = r4.putExtra(r5, r6)
-            java.lang.String r5 = "extra_useAudio"
-            android.content.Intent r3 = r4.putExtra(r5, r3)
-            java.lang.String r4 = "extra_showTaps"
-            android.content.Intent r1 = r3.putExtra(r4, r1)
-            java.lang.String r3 = "extra_captureTarget"
-            android.content.Intent r11 = r1.putExtra(r3, r11)
-            java.lang.String r1 = "extra_displayId"
-            android.content.Intent r11 = r11.putExtra(r1, r12)
-            r12 = 2
-            r1 = 201326592(0xc000000, float:9.8607613E-32)
-            android.app.PendingIntent r9 = android.app.PendingIntent.getForegroundService(r0, r12, r11, r1)
-            android.content.Intent r11 = new android.content.Intent
-            java.lang.Class<com.android.systemui.screenrecord.RecordingService> r3 = com.android.systemui.screenrecord.RecordingService.class
-            r11.<init>(r0, r3)
-            java.lang.String r3 = "com.android.systemui.screenrecord.STOP"
-            android.content.Intent r11 = r11.setAction(r3)
-            int r3 = r0.getUserId()
-            java.lang.String r4 = "android.intent.extra.user_handle"
-            android.content.Intent r11 = r11.putExtra(r4, r3)
-            android.app.PendingIntent r11 = android.app.PendingIntent.getService(r0, r12, r11, r1)
-            com.android.systemui.screenrecord.RecordingController r4 = r10.controller
-            r4.mIsStarting = r2
-            r4.mStopIntent = r11
-            com.android.systemui.screenrecord.RecordingController$3 r3 = new com.android.systemui.screenrecord.RecordingController$3
-            r7 = 1000(0x3e8, double:4.94E-321)
-            r5 = 3000(0xbb8, double:1.482E-320)
-            r3.<init>(r5, r7, r9)
-            r4.mCountDownTimer = r3
-            r3.start()
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.screenrecord.ScreenRecordPermissionViewBinder.requestScreenCapture(com.android.systemui.mediaprojection.MediaProjectionCaptureTarget, int):void");
+    public final void requestScreenCapture(MediaProjectionCaptureTarget mediaProjectionCaptureTarget, int i) {
+        boolean z;
+        ScreenRecordingAudioSource screenRecordingAudioSource;
+        Context userContext = ((UserTrackerImpl) this.userContextProvider).getUserContext();
+        if (this.selectedScreenShareOption.mode == 0) {
+            z = false;
+        } else {
+            Switch r1 = this.tapsSwitch;
+            if (r1 == null) {
+                r1 = null;
+            }
+            if (r1.isChecked()) {
+                z = true;
+            }
+        }
+        Switch r4 = this.audioSwitch;
+        if (r4 == null) {
+            r4 = null;
+        }
+        if (r4.isChecked()) {
+            Spinner spinner = this.options;
+            screenRecordingAudioSource = (ScreenRecordingAudioSource) (spinner != null ? spinner : null).getSelectedItem();
+        } else {
+            screenRecordingAudioSource = ScreenRecordingAudioSource.NONE;
+        }
+        int iOrdinal = screenRecordingAudioSource.ordinal();
+        String str = RecordingService.GROUP_KEY_SAVED;
+        PendingIntent foregroundService = PendingIntent.getForegroundService(userContext, 2, new Intent(userContext, (Class<?>) RecordingService.class).setAction("com.android.systemui.screenrecord.START").putExtra("extra_resultCode", -1).putExtra("extra_useAudio", iOrdinal).putExtra("extra_showTaps", z).putExtra("extra_captureTarget", mediaProjectionCaptureTarget).putExtra("extra_displayId", i), 201326592);
+        PendingIntent service = PendingIntent.getService(userContext, 2, new Intent(userContext, (Class<?>) RecordingService.class).setAction("com.android.systemui.screenrecord.STOP").putExtra("android.intent.extra.user_handle", userContext.getUserId()), 201326592);
+        RecordingController recordingController = this.controller;
+        recordingController.mIsStarting = true;
+        recordingController.mStopIntent = service;
+        RecordingController.AnonymousClass3 anonymousClass3 = recordingController.new AnonymousClass3(3000L, 1000L, foregroundService);
+        recordingController.mCountDownTimer = anonymousClass3;
+        anonymousClass3.start();
     }
 
     public final void startButtonOnClicked() {

@@ -24,7 +24,6 @@ import com.samsung.android.globalactions.util.ToastController;
 import java.util.HashMap;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class CoverSupportStrategy implements DefaultActionsCreationStrategy, InitializationStrategy, DisposingStrategy, WindowManagerFunctionStrategy, SecureConfirmStrategy, WindowDecorationStrategy {
     public final ConditionChecker mConditionChecker;
@@ -53,10 +52,10 @@ public class CoverSupportStrategy implements DefaultActionsCreationStrategy, Ini
             ConditionChecker conditionChecker = this.mConditionChecker;
             SystemUIConditions systemUIConditions = SystemUIConditions.IS_CLEAR_SIDE_VIEW_COVER_CLOSED;
             if (conditionChecker.isEnabled(systemUIConditions) || this.mConditionChecker.isEnabled(SystemUIConditions.IS_MINI_SVIEW_COVER_CLOSED)) {
-                this.mToastController.showToast(this.mResourceWrapper.getString(actionViewModel.getActionInfo().getName() == "power" ? R.string.mmiError : R.string.mobile_provisioning_apn), 1);
+                this.mToastController.showToast(this.mResourceWrapper.getString(actionViewModel.getActionInfo().getName() == "power" ? R.string.mmiErrorWhileRoaming : R.string.month_day_year), 1);
             }
             if (this.mConditionChecker.isEnabled(systemUIConditions)) {
-                this.mToastController.showToast(this.mResourceWrapper.getString(actionViewModel.getActionInfo().getName() == "power" ? R.string.minute : R.string.minute_picker_description), 1);
+                this.mToastController.showToast(this.mResourceWrapper.getString(actionViewModel.getActionInfo().getName() == "power" ? R.string.minutes : R.string.mismatchPin), 1);
             }
             if (this.mConditionChecker.isEnabled(SystemUIConditions.IS_CLEAR_COVER_CLOSED) || this.mConditionChecker.isEnabled(systemUIConditions) || this.mConditionChecker.isEnabled(SystemUIConditions.IS_MINI_SVIEW_COVER_CLOSED)) {
                 this.mCoverUtilWrapper.mActionBeforeSecureConfirm = new CoverSupportStrategy$$ExternalSyntheticLambda1(this, actionViewModel, str);
@@ -104,7 +103,7 @@ public class CoverSupportStrategy implements DefaultActionsCreationStrategy, Ini
         ((HashMap) coverUtilWrapper2.mListeners).put(ModuleType.GLOBALACTIONS, new BiConsumer() { // from class: com.android.systemui.globalactions.features.CoverSupportStrategy$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                CoverSupportStrategy.this.mGlobalActions.dismissDialog(false);
+                this.f$0.mGlobalActions.dismissDialog(false);
             }
         });
         this.mKeyGuardManagerWrapper.setRegisterState(false);

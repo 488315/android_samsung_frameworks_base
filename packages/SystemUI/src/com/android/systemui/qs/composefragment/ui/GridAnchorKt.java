@@ -12,7 +12,6 @@ import com.android.systemui.qs.shared.ui.ElementKeys;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class GridAnchorKt {
     public static final void GridAnchor(ContentScope contentScope, final Modifier.Companion companion, Composer composer, final int i) {
@@ -44,14 +43,14 @@ public abstract class GridAnchorKt {
             }
             companion = companion2;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.qs.composefragment.ui.GridAnchorKt$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.qs.composefragment.ui.GridAnchorKt$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    GridAnchorKt.GridAnchor(ContentScope.this, companion, (Composer) obj, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    GridAnchorKt.GridAnchor(contentScope2, companion, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

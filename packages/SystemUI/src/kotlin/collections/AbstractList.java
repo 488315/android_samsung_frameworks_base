@@ -12,12 +12,10 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractList extends AbstractCollection implements List {
     public static final Companion Companion = new Companion(null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -25,9 +23,9 @@ public abstract class AbstractList extends AbstractCollection implements List {
 
         public static void checkBoundsIndexes$kotlin_stdlib(int i, int i2, int i3) {
             if (i < 0 || i2 > i3) {
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "startIndex: ", ", endIndex: ", ", size: ");
-                m.append(i3);
-                throw new IndexOutOfBoundsException(m.toString());
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "startIndex: ", ", endIndex: ", ", size: ");
+                sbM.append(i3);
+                throw new IndexOutOfBoundsException(sbM.toString());
             }
             if (i > i2) {
                 throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "startIndex: ", " > endIndex: "));
@@ -48,9 +46,9 @@ public abstract class AbstractList extends AbstractCollection implements List {
 
         public static void checkRangeIndexes$kotlin_stdlib(int i, int i2, int i3) {
             if (i < 0 || i2 > i3) {
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "fromIndex: ", ", toIndex: ", ", size: ");
-                m.append(i3);
-                throw new IndexOutOfBoundsException(m.toString());
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "fromIndex: ", ", toIndex: ", ", size: ");
+                sbM.append(i3);
+                throw new IndexOutOfBoundsException(sbM.toString());
             }
             if (i > i2) {
                 throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "fromIndex: ", " > toIndex: "));
@@ -69,7 +67,6 @@ public abstract class AbstractList extends AbstractCollection implements List {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IteratorImpl implements Iterator, KMappedMarker {
         public int index;
 
@@ -98,7 +95,6 @@ public abstract class AbstractList extends AbstractCollection implements List {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ListIteratorImpl extends IteratorImpl implements ListIterator {
         public ListIteratorImpl(int i) {
             super();
@@ -146,7 +142,6 @@ public abstract class AbstractList extends AbstractCollection implements List {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SubList extends AbstractList implements RandomAccess {
         public final int _size;
         public final int fromIndex;
@@ -213,12 +208,12 @@ public abstract class AbstractList extends AbstractCollection implements List {
     public final int hashCode() {
         Companion.getClass();
         Iterator<E> it = iterator();
-        int i = 1;
+        int iHashCode = 1;
         while (it.hasNext()) {
             Object next = it.next();
-            i = (i * 31) + (next != null ? next.hashCode() : 0);
+            iHashCode = (iHashCode * 31) + (next != null ? next.hashCode() : 0);
         }
-        return i;
+        return iHashCode;
     }
 
     public int indexOf(Object obj) {

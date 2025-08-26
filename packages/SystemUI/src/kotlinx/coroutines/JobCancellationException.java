@@ -3,7 +3,6 @@ package kotlinx.coroutines;
 import java.util.concurrent.CancellationException;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class JobCancellationException extends CancellationException {
     public final transient Job _job;
@@ -47,23 +46,23 @@ public final class JobCancellationException extends CancellationException {
     public final int hashCode() {
         String message = getMessage();
         message.getClass();
-        int hashCode = message.hashCode() * 31;
+        int iHashCode = message.hashCode() * 31;
         Object obj = this._job;
         if (obj == null) {
             obj = NonCancellable.INSTANCE;
         }
-        int hashCode2 = (hashCode + (obj != null ? obj.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (obj != null ? obj.hashCode() : 0)) * 31;
         Throwable cause = getCause();
-        return hashCode2 + (cause != null ? cause.hashCode() : 0);
+        return iHashCode2 + (cause != null ? cause.hashCode() : 0);
     }
 
     @Override // java.lang.Throwable
     public final String toString() {
-        String cancellationException = super.toString();
+        String string = super.toString();
         Object obj = this._job;
         if (obj == null) {
             obj = NonCancellable.INSTANCE;
         }
-        return cancellationException + "; job=" + obj;
+        return string + "; job=" + obj;
     }
 }

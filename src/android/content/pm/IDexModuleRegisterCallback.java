@@ -44,9 +44,9 @@ public interface IDexModuleRegisterCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDexModuleRegisterCallback)) {
-                return (IDexModuleRegisterCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDexModuleRegisterCallback)) {
+                return (IDexModuleRegisterCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,11 +73,11 @@ public interface IDexModuleRegisterCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                boolean readBoolean = parcel.readBoolean();
-                String readString2 = parcel.readString();
+                String string = parcel.readString();
+                boolean z = parcel.readBoolean();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onDexModuleRegistered(readString, readBoolean, readString2);
+                onDexModuleRegistered(string, z, string2);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,15 +101,15 @@ public interface IDexModuleRegisterCallback extends IInterface {
 
             @Override // android.content.pm.IDexModuleRegisterCallback
             public void onDexModuleRegistered(String str, boolean z, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

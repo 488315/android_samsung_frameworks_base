@@ -7,7 +7,6 @@ import com.android.systemui.highlight.database.table.InteractionHistoryTable;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class InteractionDatabase extends HighlightDbHelper {
     public InteractionDatabase(Context context) {
@@ -18,8 +17,8 @@ public class InteractionDatabase extends HighlightDbHelper {
 
     @Override // com.android.systemui.highlight.database.HighlightDbHelper
     public final void init(Map map) {
-        HashMap hashMap = (HashMap) map;
-        hashMap.put("user_interaction_history", InteractionHistoryTable.COLUMNS);
-        hashMap.put("user_interaction_time", InteractionAverageTimeTable.COLUMNS);
+        HashMap map2 = (HashMap) map;
+        map2.put("user_interaction_history", InteractionHistoryTable.COLUMNS);
+        map2.put("user_interaction_time", InteractionAverageTimeTable.COLUMNS);
     }
 }

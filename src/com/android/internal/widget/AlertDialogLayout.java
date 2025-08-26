@@ -1,7 +1,10 @@
 package com.android.internal.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -34,16 +37,16 @@ public class AlertDialogLayout extends LinearLayout {
     }
 
     private boolean tryOnMeasure(int i, int i2) {
-        int i3;
-        int i4;
-        int i5;
-        int i6;
+        int iCombineMeasuredStates;
+        int iResolveMinimumHeight;
+        int measuredHeight;
+        int measuredHeight2;
         int childCount = getChildCount();
         View view = null;
         View view2 = null;
         View view3 = null;
-        for (int i7 = 0; i7 < childCount; i7++) {
-            View childAt = getChildAt(i7);
+        for (int i3 = 0; i3 < childCount; i3++) {
+            View childAt = getChildAt(i3);
             if (childAt.getVisibility() != 8) {
                 switch (childAt.getId()) {
                     case R.id.buttonPanel /* 16908897 */:
@@ -56,7 +59,7 @@ public class AlertDialogLayout extends LinearLayout {
                         }
                         view3 = childAt;
                         break;
-                    case R.id.topPanel /* 16909992 */:
+                    case R.id.topPanel /* 16909993 */:
                         view = childAt;
                         break;
                     default:
@@ -71,53 +74,53 @@ public class AlertDialogLayout extends LinearLayout {
         if (view != null) {
             view.measure(i, 0);
             paddingTop += view.getMeasuredHeight();
-            i3 = combineMeasuredStates(0, view.getMeasuredState());
+            iCombineMeasuredStates = combineMeasuredStates(0, view.getMeasuredState());
         } else {
-            i3 = 0;
+            iCombineMeasuredStates = 0;
         }
         if (view2 != null) {
             view2.measure(i, 0);
-            i4 = resolveMinimumHeight(view2);
-            i5 = view2.getMeasuredHeight() - i4;
-            paddingTop += i4;
-            i3 = combineMeasuredStates(i3, view2.getMeasuredState());
+            iResolveMinimumHeight = resolveMinimumHeight(view2);
+            measuredHeight = view2.getMeasuredHeight() - iResolveMinimumHeight;
+            paddingTop += iResolveMinimumHeight;
+            iCombineMeasuredStates = combineMeasuredStates(iCombineMeasuredStates, view2.getMeasuredState());
         } else {
-            i4 = 0;
-            i5 = 0;
+            iResolveMinimumHeight = 0;
+            measuredHeight = 0;
         }
         if (view3 != null) {
             view3.measure(i, mode == 0 ? 0 : View.MeasureSpec.makeMeasureSpec(Math.max(0, size - paddingTop), mode));
-            i6 = view3.getMeasuredHeight();
-            paddingTop += i6;
-            i3 = combineMeasuredStates(i3, view3.getMeasuredState());
+            measuredHeight2 = view3.getMeasuredHeight();
+            paddingTop += measuredHeight2;
+            iCombineMeasuredStates = combineMeasuredStates(iCombineMeasuredStates, view3.getMeasuredState());
         } else {
-            i6 = 0;
+            measuredHeight2 = 0;
         }
-        int i8 = size - paddingTop;
+        int i4 = size - paddingTop;
         if (view2 != null) {
-            int i9 = paddingTop - i4;
-            int min = Math.min(i8, i5);
-            if (min > 0) {
-                i8 -= min;
-                i4 += min;
+            int i5 = paddingTop - iResolveMinimumHeight;
+            int iMin = Math.min(i4, measuredHeight);
+            if (iMin > 0) {
+                i4 -= iMin;
+                iResolveMinimumHeight += iMin;
             }
-            view2.measure(i, View.MeasureSpec.makeMeasureSpec(i4, 1073741824));
-            paddingTop = i9 + view2.getMeasuredHeight();
-            i3 = combineMeasuredStates(i3, view2.getMeasuredState());
+            view2.measure(i, View.MeasureSpec.makeMeasureSpec(iResolveMinimumHeight, 1073741824));
+            paddingTop = i5 + view2.getMeasuredHeight();
+            iCombineMeasuredStates = combineMeasuredStates(iCombineMeasuredStates, view2.getMeasuredState());
         }
-        if (view3 != null && i8 > 0) {
-            view3.measure(i, View.MeasureSpec.makeMeasureSpec(i6 + i8, mode));
-            paddingTop = (paddingTop - i6) + view3.getMeasuredHeight();
-            i3 = combineMeasuredStates(i3, view3.getMeasuredState());
+        if (view3 != null && i4 > 0) {
+            view3.measure(i, View.MeasureSpec.makeMeasureSpec(measuredHeight2 + i4, mode));
+            paddingTop = (paddingTop - measuredHeight2) + view3.getMeasuredHeight();
+            iCombineMeasuredStates = combineMeasuredStates(iCombineMeasuredStates, view3.getMeasuredState());
         }
-        int i10 = 0;
-        for (int i11 = 0; i11 < childCount; i11++) {
-            View childAt2 = getChildAt(i11);
+        int iMax = 0;
+        for (int i6 = 0; i6 < childCount; i6++) {
+            View childAt2 = getChildAt(i6);
             if (childAt2.getVisibility() != 8) {
-                i10 = Math.max(i10, childAt2.getMeasuredWidth());
+                iMax = Math.max(iMax, childAt2.getMeasuredWidth());
             }
         }
-        setMeasuredDimension(resolveSizeAndState(i10 + getPaddingLeft() + getPaddingRight(), i, i3), resolveSizeAndState(paddingTop, i2, 0));
+        setMeasuredDimension(resolveSizeAndState(iMax + getPaddingLeft() + getPaddingRight(), i, iCombineMeasuredStates), resolveSizeAndState(paddingTop, i2, 0));
         if (mode2 == 1073741824) {
             return true;
         }
@@ -125,10 +128,14 @@ public class AlertDialogLayout extends LinearLayout {
         return true;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0036  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void forceUniformWidth(int i, int i2) {
         AlertDialogLayout alertDialogLayout;
         int i3;
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824);
         int i4 = 0;
         while (i4 < i) {
             View childAt = this.getChildAt(i4);
@@ -139,15 +146,13 @@ public class AlertDialogLayout extends LinearLayout {
                     layoutParams.height = childAt.getMeasuredHeight();
                     alertDialogLayout = this;
                     i3 = i2;
-                    alertDialogLayout.measureChildWithMargins(childAt, makeMeasureSpec, 0, i3, 0);
+                    alertDialogLayout.measureChildWithMargins(childAt, iMakeMeasureSpec, 0, i3, 0);
                     layoutParams.height = i5;
-                    i4++;
-                    this = alertDialogLayout;
-                    i2 = i3;
+                } else {
+                    alertDialogLayout = this;
+                    i3 = i2;
                 }
             }
-            alertDialogLayout = this;
-            i3 = i2;
             i4++;
             this = alertDialogLayout;
             i2 = i3;
@@ -168,121 +173,81 @@ public class AlertDialogLayout extends LinearLayout {
         return 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0093  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0093  */
     @Override // android.widget.LinearLayout, android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onLayout(boolean r11, int r12, int r13, int r14, int r15) {
-        /*
-            r10 = this;
-            int r11 = r10.mPaddingLeft
-            int r14 = r14 - r12
-            int r12 = r10.mPaddingRight
-            int r12 = r14 - r12
-            int r14 = r14 - r11
-            int r0 = r10.mPaddingRight
-            int r14 = r14 - r0
-            int r0 = r10.getMeasuredHeight()
-            int r1 = r10.getChildCount()
-            int r2 = r10.getGravity()
-            r3 = r2 & 112(0x70, float:1.57E-43)
-            r4 = 8388615(0x800007, float:1.1754953E-38)
-            r2 = r2 & r4
-            r4 = 16
-            if (r3 == r4) goto L2f
-            r4 = 80
-            if (r3 == r4) goto L28
-            int r13 = r10.mPaddingTop
-            goto L37
-        L28:
-            int r3 = r10.mPaddingTop
-            int r3 = r3 + r15
-            int r3 = r3 - r13
-            int r13 = r3 - r0
-            goto L37
-        L2f:
-            int r3 = r10.mPaddingTop
-            int r15 = r15 - r13
-            int r15 = r15 - r0
-            int r15 = r15 / 2
-            int r13 = r3 + r15
-        L37:
-            android.graphics.drawable.Drawable r15 = r10.getDividerDrawable()
-            r0 = 0
-            if (r15 != 0) goto L40
-            r15 = r0
-            goto L44
-        L40:
-            int r15 = r15.getIntrinsicHeight()
-        L44:
-            if (r0 >= r1) goto La7
-            android.view.View r4 = r10.getChildAt(r0)
-            if (r4 == 0) goto La2
-            int r3 = r4.getVisibility()
-            r5 = 8
-            if (r3 == r5) goto La2
-            int r7 = r4.getMeasuredWidth()
-            int r8 = r4.getMeasuredHeight()
-            android.view.ViewGroup$LayoutParams r3 = r4.getLayoutParams()
-            r9 = r3
-            android.widget.LinearLayout$LayoutParams r9 = (android.widget.LinearLayout.LayoutParams) r9
-            int r3 = r9.gravity
-            if (r3 >= 0) goto L68
-            r3 = r2
-        L68:
-            int r5 = r10.getLayoutDirection()
-            int r3 = android.view.Gravity.getAbsoluteGravity(r3, r5)
-            r3 = r3 & 7
-            r5 = 1
-            if (r3 == r5) goto L81
-            r5 = 5
-            if (r3 == r5) goto L7c
-            int r3 = r9.leftMargin
-            int r3 = r3 + r11
-            goto L8c
-        L7c:
-            int r3 = r12 - r7
-            int r5 = r9.rightMargin
-            goto L8b
-        L81:
-            int r3 = r14 - r7
-            int r3 = r3 / 2
-            int r3 = r3 + r11
-            int r5 = r9.leftMargin
-            int r3 = r3 + r5
-            int r5 = r9.rightMargin
-        L8b:
-            int r3 = r3 - r5
-        L8c:
-            r5 = r3
-            boolean r3 = r10.hasDividerBeforeChildAt(r0)
-            if (r3 == 0) goto L94
-            int r13 = r13 + r15
-        L94:
-            int r3 = r9.topMargin
-            int r6 = r13 + r3
-            r3 = r10
-            r3.setChildFrame(r4, r5, r6, r7, r8)
-            int r10 = r9.bottomMargin
-            int r8 = r8 + r10
-            int r6 = r6 + r8
-            r13 = r6
-            goto La3
-        La2:
-            r3 = r10
-        La3:
-            int r0 = r0 + 1
-            r10 = r3
-            goto L44
-        La7:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.AlertDialogLayout.onLayout(boolean, int, int, int, int):void");
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
+        int i5;
+        AlertDialogLayout alertDialogLayout;
+        int i6;
+        int i7;
+        int i8;
+        int i9 = this.mPaddingLeft;
+        int i10 = i3 - i;
+        int i11 = i10 - this.mPaddingRight;
+        int i12 = (i10 - i9) - this.mPaddingRight;
+        int measuredHeight = getMeasuredHeight();
+        int childCount = getChildCount();
+        int gravity = getGravity();
+        int i13 = gravity & 112;
+        int i14 = gravity & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK;
+        if (i13 == 16) {
+            i5 = this.mPaddingTop + (((i4 - i2) - measuredHeight) / 2);
+        } else if (i13 == 80) {
+            i5 = ((this.mPaddingTop + i4) - i2) - measuredHeight;
+        } else {
+            i5 = this.mPaddingTop;
+        }
+        Drawable dividerDrawable = getDividerDrawable();
+        int i15 = 0;
+        int intrinsicHeight = dividerDrawable == null ? 0 : dividerDrawable.getIntrinsicHeight();
+        while (i15 < childCount) {
+            View childAt = this.getChildAt(i15);
+            if (childAt == null || childAt.getVisibility() == 8) {
+                alertDialogLayout = this;
+            } else {
+                int measuredWidth = childAt.getMeasuredWidth();
+                int measuredHeight2 = childAt.getMeasuredHeight();
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) childAt.getLayoutParams();
+                int i16 = layoutParams.gravity;
+                if (i16 < 0) {
+                    i16 = i14;
+                }
+                int absoluteGravity = Gravity.getAbsoluteGravity(i16, this.getLayoutDirection()) & 7;
+                if (absoluteGravity == 1) {
+                    i6 = ((i12 - measuredWidth) / 2) + i9 + layoutParams.leftMargin;
+                    i7 = layoutParams.rightMargin;
+                } else if (absoluteGravity == 5) {
+                    i6 = i11 - measuredWidth;
+                    i7 = layoutParams.rightMargin;
+                } else {
+                    i8 = layoutParams.leftMargin + i9;
+                    int i17 = i8;
+                    if (this.hasDividerBeforeChildAt(i15)) {
+                        i5 += intrinsicHeight;
+                    }
+                    int i18 = i5 + layoutParams.topMargin;
+                    alertDialogLayout = this;
+                    alertDialogLayout.setChildFrame(childAt, i17, i18, measuredWidth, measuredHeight2);
+                    i5 = i18 + measuredHeight2 + layoutParams.bottomMargin;
+                }
+                i8 = i6 - i7;
+                int i172 = i8;
+                if (this.hasDividerBeforeChildAt(i15)) {
+                }
+                int i182 = i5 + layoutParams.topMargin;
+                alertDialogLayout = this;
+                alertDialogLayout.setChildFrame(childAt, i172, i182, measuredWidth, measuredHeight2);
+                i5 = i182 + measuredHeight2 + layoutParams.bottomMargin;
+            }
+            i15++;
+            this = alertDialogLayout;
+        }
     }
 
-    private void setChildFrame(View view, int i, int i2, int i3, int i4) {
+    private void setChildFrame(View view, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         view.layout(i, i2, i3 + i, i4 + i2);
     }
 }

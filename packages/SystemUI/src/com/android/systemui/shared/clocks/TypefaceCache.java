@@ -18,12 +18,12 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 import kotlin.sequences.ConstrainedOnceSequence;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.GeneratorSequence;
 import kotlin.sequences.SequencesKt__SequencesKt$$ExternalSyntheticLambda1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TypefaceCache {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,7 +35,6 @@ public final class TypefaceCache {
     public int totalMisses;
     public final Function1 typefaceFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CacheKey {
         public final String fvar;
         public final String res;
@@ -57,9 +56,9 @@ public final class TypefaceCache {
         }
 
         public final int hashCode() {
-            int hashCode = this.res.hashCode() * 31;
+            int iHashCode = this.res.hashCode() * 31;
             String str = this.fvar;
-            return hashCode + (str == null ? 0 : str.hashCode());
+            return iHashCode + (str == null ? 0 : str.hashCode());
         }
 
         public final String toString() {
@@ -70,7 +69,6 @@ public final class TypefaceCache {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -80,7 +78,6 @@ public final class TypefaceCache {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WeakTypefaceRef extends WeakReference {
         public final CacheKey key;
 
@@ -108,25 +105,25 @@ public final class TypefaceCache {
         Function0 function0 = new Function0() { // from class: com.android.systemui.shared.clocks.TypefaceCache$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return TypefaceCache.this.queue.poll();
+                return this.f$0.queue.poll();
             }
         };
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(new ConstrainedOnceSequence(new GeneratorSequence(function0, new SequencesKt__SequencesKt$$ExternalSyntheticLambda1(function0))), new Function1() { // from class: com.android.systemui.shared.clocks.TypefaceCache$checkQueue$$inlined$filterIsInstance$1
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(new ConstrainedOnceSequence(new GeneratorSequence(function0, new SequencesKt__SequencesKt$$ExternalSyntheticLambda1(function0))), new Function1() { // from class: com.android.systemui.shared.clocks.TypefaceCache$checkQueue$$inlined$filterIsInstance$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return Boolean.valueOf(obj instanceof TypefaceCache.WeakTypefaceRef);
             }
-        }));
-        while (filteringSequence$iterator$1.hasNext()) {
-            WeakTypefaceRef weakTypefaceRef = (WeakTypefaceRef) filteringSequence$iterator$1.next();
+        }).new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            WeakTypefaceRef weakTypefaceRef = (WeakTypefaceRef) anonymousClass1.next();
             CacheKey cacheKey = weakTypefaceRef.key;
             this.totalEvictions++;
             Logger logger = this.logger;
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new TypefaceCache$$ExternalSyntheticLambda1(1), null);
-            obtain.setStr1(cacheKey.toString());
-            obtain.setInt1(this.totalEvictions);
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new TypefaceCache$$ExternalSyntheticLambda1(1), null);
+            logMessageObtain.setStr1(cacheKey.toString());
+            logMessageObtain.setInt1(this.totalEvictions);
+            logger.getBuffer().commit(logMessageObtain);
             this.cache.remove(weakTypefaceRef.key);
         }
     }
@@ -134,9 +131,9 @@ public final class TypefaceCache {
     public final void logMiss(CacheKey cacheKey) {
         this.totalMisses++;
         Logger logger = this.logger;
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, new TypefaceCache$$ExternalSyntheticLambda1(0), null);
-        obtain.setStr1(cacheKey.toString());
-        obtain.setInt1(this.totalMisses);
-        logger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, new TypefaceCache$$ExternalSyntheticLambda1(0), null);
+        logMessageObtain.setStr1(cacheKey.toString());
+        logMessageObtain.setInt1(this.totalMisses);
+        logger.getBuffer().commit(logMessageObtain);
     }
 }

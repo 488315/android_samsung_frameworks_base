@@ -70,9 +70,9 @@ public interface IContentCaptureServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContentCaptureServiceCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContentCaptureServiceCallback)) {
-                return (IContentCaptureServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContentCaptureServiceCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContentCaptureServiceCallback)) {
+                return (IContentCaptureServiceCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,25 +108,25 @@ public interface IContentCaptureServiceCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ComponentName.CREATOR);
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ComponentName.CREATOR);
                 parcel.enforceNoDataAvail();
-                setContentCaptureWhitelist(createStringArrayList, createTypedArrayList);
+                setContentCaptureWhitelist(arrayListCreateStringArrayList, arrayListCreateTypedArrayList);
             } else if (i == 2) {
-                String readString = parcel.readString();
-                ArrayList createTypedArrayList2 = parcel.createTypedArrayList(ContentCaptureCondition.CREATOR);
+                String string = parcel.readString();
+                ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(ContentCaptureCondition.CREATOR);
                 parcel.enforceNoDataAvail();
-                setContentCaptureConditions(readString, createTypedArrayList2);
+                setContentCaptureConditions(string, arrayListCreateTypedArrayList2);
             } else if (i == 3) {
                 disableSelf();
             } else if (i == 4) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                 FlushMetrics flushMetrics = (FlushMetrics) parcel.readTypedObject(FlushMetrics.CREATOR);
                 ContentCaptureOptions contentCaptureOptions = (ContentCaptureOptions) parcel.readTypedObject(ContentCaptureOptions.CREATOR);
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                writeSessionFlush(readInt, componentName, flushMetrics, contentCaptureOptions, readInt2);
+                writeSessionFlush(i3, componentName, flushMetrics, contentCaptureOptions, i4);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -151,54 +151,54 @@ public interface IContentCaptureServiceCallback extends IInterface {
 
             @Override // android.service.contentcapture.IContentCaptureServiceCallback
             public void setContentCaptureWhitelist(List<String> list, List<ComponentName> list2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeTypedList(list2, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeTypedList(list2, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IContentCaptureServiceCallback
             public void setContentCaptureConditions(String str, List<ContentCaptureCondition> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IContentCaptureServiceCallback
             public void disableSelf() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IContentCaptureServiceCallback
             public void writeSessionFlush(int i, ComponentName componentName, FlushMetrics flushMetrics, ContentCaptureOptions contentCaptureOptions, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(flushMetrics, 0);
-                    obtain.writeTypedObject(contentCaptureOptions, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(flushMetrics, 0);
+                    parcelObtain.writeTypedObject(contentCaptureOptions, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -60,9 +60,9 @@ public interface IMusicRecognitionManagerCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMusicRecognitionManagerCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMusicRecognitionManagerCallback)) {
-                return (IMusicRecognitionManagerCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMusicRecognitionManagerCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMusicRecognitionManagerCallback)) {
+                return (IMusicRecognitionManagerCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,9 +100,9 @@ public interface IMusicRecognitionManagerCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onRecognitionSucceeded(mediaMetadata, bundle);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onRecognitionFailed(readInt);
+                onRecognitionFailed(i3);
             } else if (i == 3) {
                 onAudioStreamClosed();
             } else {
@@ -129,37 +129,37 @@ public interface IMusicRecognitionManagerCallback extends IInterface {
 
             @Override // android.media.musicrecognition.IMusicRecognitionManagerCallback
             public void onRecognitionSucceeded(MediaMetadata mediaMetadata, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMusicRecognitionManagerCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(mediaMetadata, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMusicRecognitionManagerCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(mediaMetadata, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.musicrecognition.IMusicRecognitionManagerCallback
             public void onRecognitionFailed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMusicRecognitionManagerCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMusicRecognitionManagerCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.musicrecognition.IMusicRecognitionManagerCallback
             public void onAudioStreamClosed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMusicRecognitionManagerCallback.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMusicRecognitionManagerCallback.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

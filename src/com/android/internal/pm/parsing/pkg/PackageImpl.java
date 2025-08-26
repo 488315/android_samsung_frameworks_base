@@ -228,9 +228,7 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     private static final Comparator<ParsedMainComponent> ORDER_COMPARATOR = new Comparator() { // from class: com.android.internal.pm.parsing.pkg.PackageImpl$$ExternalSyntheticLambda0
         @Override // java.util.Comparator
         public final int compare(Object obj, Object obj2) {
-            int compare;
-            compare = Integer.compare(((ParsedMainComponent) obj2).getOrder(), ((ParsedMainComponent) obj).getOrder());
-            return compare;
+            return Integer.compare(((ParsedMainComponent) obj2).getOrder(), ((ParsedMainComponent) obj).getOrder());
         }
     };
     public static final Parcelling.BuiltIn.ForBoolean sForBoolean = (Parcelling.BuiltIn.ForBoolean) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForBoolean.class);
@@ -361,12 +359,12 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     private void addMimeGroupsFromComponent(ParsedComponent parsedComponent) {
         for (int size = parsedComponent.getIntents().size() - 1; size >= 0; size--) {
             IntentFilter intentFilter = parsedComponent.getIntents().get(size).getIntentFilter();
-            for (int countMimeGroups = intentFilter.countMimeGroups() - 1; countMimeGroups >= 0; countMimeGroups--) {
+            for (int iCountMimeGroups = intentFilter.countMimeGroups() - 1; iCountMimeGroups >= 0; iCountMimeGroups--) {
                 Set<String> set = this.mimeGroups;
                 if (set != null && set.size() > 500) {
                     throw new IllegalStateException("Max limit on number of MIME Groups reached");
                 }
-                this.mimeGroups = CollectionUtils.add(this.mimeGroups, intentFilter.getMimeGroup(countMimeGroups));
+                this.mimeGroups = CollectionUtils.add(this.mimeGroups, intentFilter.getMimeGroup(iCountMimeGroups));
             }
         }
     }
@@ -465,36 +463,36 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl addUsesLibrary(String str) {
-        String safeIntern = TextUtils.safeIntern(str);
-        if (!ArrayUtils.contains(this.usesLibraries, safeIntern)) {
-            this.usesLibraries = CollectionUtils.add(this.usesLibraries, safeIntern);
+        String strSafeIntern = TextUtils.safeIntern(str);
+        if (!ArrayUtils.contains(this.usesLibraries, strSafeIntern)) {
+            this.usesLibraries = CollectionUtils.add(this.usesLibraries, strSafeIntern);
         }
         return this;
     }
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public final PackageImpl addUsesNativeLibrary(String str) {
-        String safeIntern = TextUtils.safeIntern(str);
-        if (!ArrayUtils.contains(this.usesNativeLibraries, safeIntern)) {
-            this.usesNativeLibraries = CollectionUtils.add(this.usesNativeLibraries, safeIntern);
+        String strSafeIntern = TextUtils.safeIntern(str);
+        if (!ArrayUtils.contains(this.usesNativeLibraries, strSafeIntern)) {
+            this.usesNativeLibraries = CollectionUtils.add(this.usesNativeLibraries, strSafeIntern);
         }
         return this;
     }
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public PackageImpl addUsesOptionalLibrary(String str) {
-        String safeIntern = TextUtils.safeIntern(str);
-        if (!ArrayUtils.contains(this.usesOptionalLibraries, safeIntern)) {
-            this.usesOptionalLibraries = CollectionUtils.add(this.usesOptionalLibraries, safeIntern);
+        String strSafeIntern = TextUtils.safeIntern(str);
+        if (!ArrayUtils.contains(this.usesOptionalLibraries, strSafeIntern)) {
+            this.usesOptionalLibraries = CollectionUtils.add(this.usesOptionalLibraries, strSafeIntern);
         }
         return this;
     }
 
     @Override // com.android.internal.pm.pkg.parsing.ParsingPackage
     public final PackageImpl addUsesOptionalNativeLibrary(String str) {
-        String safeIntern = TextUtils.safeIntern(str);
-        if (!ArrayUtils.contains(this.usesOptionalNativeLibraries, safeIntern)) {
-            this.usesOptionalNativeLibraries = CollectionUtils.add(this.usesOptionalNativeLibraries, safeIntern);
+        String strSafeIntern = TextUtils.safeIntern(str);
+        if (!ArrayUtils.contains(this.usesOptionalNativeLibraries, strSafeIntern)) {
+            this.usesOptionalNativeLibraries = CollectionUtils.add(this.usesOptionalNativeLibraries, strSafeIntern);
         }
         return this;
     }
@@ -554,9 +552,9 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
             ArrayMap<String, String> appClassNamesByPackage = this.processes.get(str).getAppClassNamesByPackage();
             for (int i = 0; i < appClassNamesByPackage.size(); i++) {
                 if (this.packageName.equals(appClassNamesByPackage.keyAt(i))) {
-                    String valueAt = appClassNamesByPackage.valueAt(i);
-                    if (!TextUtils.isEmpty(valueAt)) {
-                        arrayMap.put(str, valueAt);
+                    String strValueAt = appClassNamesByPackage.valueAt(i);
+                    if (!TextUtils.isEmpty(strValueAt)) {
+                        arrayMap.put(str, strValueAt);
                     }
                 }
             }
@@ -576,15 +574,15 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
             }
             if (this.splitDependencies != null) {
                 for (int i2 = 0; i2 < this.splitDependencies.size(); i2++) {
-                    int keyAt = this.splitDependencies.keyAt(i2);
-                    int[] valueAt = this.splitDependencies.valueAt(i2);
+                    int iKeyAt = this.splitDependencies.keyAt(i2);
+                    int[] iArrValueAt = this.splitDependencies.valueAt(i2);
                     ArrayList arrayList2 = new ArrayList();
-                    for (int i3 : valueAt) {
+                    for (int i3 : iArrValueAt) {
                         if (i3 >= 0) {
                             arrayList2.add((AndroidPackageSplit) arrayList.get(i3));
                         }
                     }
-                    ((AndroidPackageSplitImpl) arrayList.get(keyAt)).fillDependencies(Collections.unmodifiableList(arrayList2));
+                    ((AndroidPackageSplitImpl) arrayList.get(iKeyAt)).fillDependencies(Collections.unmodifiableList(arrayList2));
                 }
             }
             this.mSplits = Collections.unmodifiableList(arrayList);
@@ -3058,20 +3056,20 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
         this.usesOptionalNativeLibraries = forInternedStringList.unparcel(parcel);
         this.usesStaticLibraries = forInternedStringList.unparcel(parcel);
         this.usesStaticLibrariesVersions = parcel.createLongArray();
-        int readInt = parcel.readInt();
-        if (readInt >= 0) {
-            this.usesStaticLibrariesCertDigests = new String[readInt][];
-            for (int i = 0; i < readInt; i++) {
-                this.usesStaticLibrariesCertDigests[i] = sForInternedStringArray.unparcel(parcel);
+        int i = parcel.readInt();
+        if (i >= 0) {
+            this.usesStaticLibrariesCertDigests = new String[i][];
+            for (int i2 = 0; i2 < i; i2++) {
+                this.usesStaticLibrariesCertDigests[i2] = sForInternedStringArray.unparcel(parcel);
             }
         }
         this.usesSdkLibraries = sForInternedStringList.unparcel(parcel);
         this.usesSdkLibrariesVersionsMajor = parcel.createLongArray();
-        int readInt2 = parcel.readInt();
-        if (readInt2 >= 0) {
-            this.usesSdkLibrariesCertDigests = new String[readInt2][];
-            for (int i2 = 0; i2 < readInt2; i2++) {
-                this.usesSdkLibrariesCertDigests[i2] = sForInternedStringArray.unparcel(parcel);
+        int i3 = parcel.readInt();
+        if (i3 >= 0) {
+            this.usesSdkLibrariesCertDigests = new String[i3][];
+            for (int i4 = 0; i4 < i3; i4++) {
+                this.usesSdkLibrariesCertDigests[i4] = sForInternedStringArray.unparcel(parcel);
             }
         }
         this.usesSdkLibrariesOptional = parcel.createBooleanArray();
@@ -3183,18 +3181,18 @@ public class PackageImpl implements ParsedPackage, AndroidPackageInternal, Andro
     private void readFeatureFlagState(Parcel parcel) {
         Boolean bool;
         for (String str : parcel.createStringArray()) {
-            int lastIndexOf = str.lastIndexOf(61);
-            if (lastIndexOf >= 0 && lastIndexOf == str.length() - 2) {
-                String substring = str.substring(0, lastIndexOf);
-                char charAt = str.charAt(lastIndexOf + 1);
-                if (charAt == '1') {
+            int iLastIndexOf = str.lastIndexOf(61);
+            if (iLastIndexOf >= 0 && iLastIndexOf == str.length() - 2) {
+                String strSubstring = str.substring(0, iLastIndexOf);
+                char cCharAt = str.charAt(iLastIndexOf + 1);
+                if (cCharAt == '1') {
                     bool = Boolean.TRUE;
-                } else if (charAt == '0') {
+                } else if (cCharAt == '0') {
                     bool = Boolean.FALSE;
-                } else if (charAt == '?') {
+                } else if (cCharAt == '?') {
                     bool = null;
                 }
-                this.mFeatureFlagState.put(substring, bool);
+                this.mFeatureFlagState.put(strSubstring, bool);
             }
         }
     }

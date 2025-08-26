@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 /* loaded from: classes5.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_ADD_SF_SKIPPED_FRAMES_TO_TRACE, Flags.FLAG_ADPF_FMQ_SF, Flags.FLAG_ADPF_GPU_SF, Flags.FLAG_ADPF_NATIVE_SESSION_MANAGER, Flags.FLAG_ALLOW_N_VSYNCS_IN_TARGETER, Flags.FLAG_ARR_SETFRAMERATE_API, Flags.FLAG_ARR_SETFRAMERATE_GTE_ENUM, Flags.FLAG_ARR_SURFACECONTROL_SETFRAMERATE_API, Flags.FLAG_BEGONE_BRIGHT_HLG, Flags.FLAG_CACHE_WHEN_SOURCE_CROP_LAYER_ONLY_MOVED, Flags.FLAG_CE_FENCE_PROMISE, Flags.FLAG_COMMIT_NOT_COMPOSITED, Flags.FLAG_CONNECTED_DISPLAY, Flags.FLAG_CONNECTED_DISPLAY_HDR, Flags.FLAG_CORRECT_DPI_WITH_DISPLAY_SIZE, Flags.FLAG_DEPRECATE_FRAME_TRACKER, Flags.FLAG_DEPRECATE_VSYNC_SF, Flags.FLAG_DETACHED_MIRROR, Flags.FLAG_DISABLE_SYNTHETIC_VSYNC_FOR_PERFORMANCE, Flags.FLAG_DISPLAY_CONFIG_ERROR_HAL, Flags.FLAG_DISPLAY_PROTECTED, Flags.FLAG_DONT_SKIP_ON_EARLY_RO, Flags.FLAG_ENABLE_FRO_DEPENDENT_FEATURES, Flags.FLAG_ENABLE_LAYER_COMMAND_BATCHING, Flags.FLAG_ENABLE_SMALL_AREA_DETECTION, Flags.FLAG_FILTER_FRAMES_BEFORE_TRACE_STARTS, Flags.FLAG_FLUSH_BUFFER_SLOTS_TO_UNCACHE, Flags.FLAG_FORCE_COMPILE_GRAPHITE_RENDERENGINE, Flags.FLAG_FP16_CLIENT_TARGET, Flags.FLAG_FRAME_RATE_CATEGORY_MRR, Flags.FLAG_GAME_DEFAULT_FRAME_RATE, Flags.FLAG_GRAPHITE_RENDERENGINE, Flags.FLAG_GRAPHITE_RENDERENGINE_PREVIEW_ROLLOUT, Flags.FLAG_HDCP_LEVEL_HAL, Flags.FLAG_HDCP_NEGOTIATION, Flags.FLAG_HOTPLUG2, Flags.FLAG_INCREASE_MISSED_FRAME_JANK_THRESHOLD, Flags.FLAG_LATCH_UNSIGNALED_WITH_AUTO_REFRESH_CHANGED, Flags.FLAG_LOCAL_TONEMAP_SCREENSHOTS, Flags.FLAG_MISC1, Flags.FLAG_MONITOR_BUFFER_FENCES, Flags.FLAG_MULTITHREADED_PRESENT, Flags.FLAG_NO_VSYNCS_ON_SCREEN_OFF, Flags.FLAG_OVERRIDE_TRUSTED_OVERLAY, Flags.FLAG_PROTECTED_IF_CLIENT, Flags.FLAG_REFRESH_RATE_OVERLAY_ON_EXTERNAL_DISPLAY, Flags.FLAG_REJECT_DUPE_LAYERSTACKS, Flags.FLAG_RENDERABLE_BUFFER_USAGE, Flags.FLAG_RESTORE_BLUR_STEP, Flags.FLAG_SCREENSHOT_FENCE_PRESERVATION, Flags.FLAG_SINGLE_HOP_SCREENSHOT, Flags.FLAG_SKIP_INVISIBLE_WINDOWS_IN_INPUT, Flags.FLAG_STABLE_EDID_IDS, Flags.FLAG_SYNCED_RESOLUTION_SWITCH, Flags.FLAG_TRUE_HDR_SCREENSHOTS, Flags.FLAG_USE_KNOWN_REFRESH_RATE_FOR_FPS_CONSISTENCY, Flags.FLAG_VIEW_SET_REQUESTED_FRAME_RATE_MRR, Flags.FLAG_VRR_BUGFIX_24Q4, Flags.FLAG_VRR_BUGFIX_DROPPED_FRAME, Flags.FLAG_VRR_CONFIG, Flags.FLAG_VSYNC_PREDICTOR_RECOVERY, Flags.FLAG_VULKAN_RENDERENGINE, Flags.FLAG_WINDOW_BLUR_KAWASE2, ""));
+    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_ADD_SF_SKIPPED_FRAMES_TO_TRACE, Flags.FLAG_ADPF_FMQ_SF, Flags.FLAG_ADPF_GPU_SF, Flags.FLAG_ADPF_NATIVE_SESSION_MANAGER, Flags.FLAG_ALLOW_N_VSYNCS_IN_TARGETER, Flags.FLAG_ARR_SETFRAMERATE_API, Flags.FLAG_ARR_SETFRAMERATE_GTE_ENUM, Flags.FLAG_ARR_SURFACECONTROL_SETFRAMERATE_API, Flags.FLAG_BEGONE_BRIGHT_HLG, Flags.FLAG_CACHE_WHEN_SOURCE_CROP_LAYER_ONLY_MOVED, Flags.FLAG_CE_FENCE_PROMISE, Flags.FLAG_COMMIT_NOT_COMPOSITED, Flags.FLAG_CONNECTED_DISPLAY, Flags.FLAG_CONNECTED_DISPLAY_HDR, Flags.FLAG_CORRECT_DPI_WITH_DISPLAY_SIZE, Flags.FLAG_DEPRECATE_FRAME_TRACKER, Flags.FLAG_DEPRECATE_VSYNC_SF, Flags.FLAG_DETACHED_MIRROR, Flags.FLAG_DISABLE_SYNTHETIC_VSYNC_FOR_PERFORMANCE, Flags.FLAG_DISPLAY_CONFIG_ERROR_HAL, Flags.FLAG_DISPLAY_PROTECTED, Flags.FLAG_DONT_SKIP_ON_EARLY_RO, Flags.FLAG_ENABLE_FRO_DEPENDENT_FEATURES, Flags.FLAG_ENABLE_LAYER_COMMAND_BATCHING, Flags.FLAG_ENABLE_SMALL_AREA_DETECTION, Flags.FLAG_FILTER_FRAMES_BEFORE_TRACE_STARTS, Flags.FLAG_FLUSH_BUFFER_SLOTS_TO_UNCACHE, Flags.FLAG_FORCE_COMPILE_GRAPHITE_RENDERENGINE, Flags.FLAG_FP16_CLIENT_TARGET, Flags.FLAG_FRAME_RATE_CATEGORY_MRR, Flags.FLAG_GAME_DEFAULT_FRAME_RATE, Flags.FLAG_GRAPHITE_RENDERENGINE, Flags.FLAG_GRAPHITE_RENDERENGINE_PREVIEW_ROLLOUT, Flags.FLAG_HDCP_LEVEL_HAL, Flags.FLAG_HDCP_NEGOTIATION, Flags.FLAG_HOTPLUG2, Flags.FLAG_INCREASE_MISSED_FRAME_JANK_THRESHOLD, Flags.FLAG_LATCH_UNSIGNALED_WITH_AUTO_REFRESH_CHANGED, Flags.FLAG_LOCAL_TONEMAP_SCREENSHOTS, Flags.FLAG_MISC1, Flags.FLAG_MONITOR_BUFFER_FENCES, Flags.FLAG_MULTITHREADED_PRESENT, Flags.FLAG_NO_VSYNCS_ON_SCREEN_OFF, Flags.FLAG_OVERRIDE_TRUSTED_OVERLAY, Flags.FLAG_PROTECTED_IF_CLIENT, Flags.FLAG_REFRESH_RATE_OVERLAY_ON_EXTERNAL_DISPLAY, Flags.FLAG_REJECT_DUPE_LAYERSTACKS, Flags.FLAG_RENDERABLE_BUFFER_USAGE, Flags.FLAG_RESTORE_BLUR_STEP, Flags.FLAG_SCREENSHOT_FENCE_PRESERVATION, Flags.FLAG_SINGLE_HOP_SCREENSHOT, Flags.FLAG_SKIP_INVISIBLE_WINDOWS_IN_INPUT, Flags.FLAG_STABLE_EDID_IDS, Flags.FLAG_STOP_LAYER, Flags.FLAG_SYNCED_RESOLUTION_SWITCH, Flags.FLAG_TRUE_HDR_SCREENSHOTS, Flags.FLAG_USE_KNOWN_REFRESH_RATE_FOR_FPS_CONSISTENCY, Flags.FLAG_VIEW_SET_REQUESTED_FRAME_RATE_MRR, Flags.FLAG_VRR_BUGFIX_24Q4, Flags.FLAG_VRR_BUGFIX_DROPPED_FRAME, Flags.FLAG_VRR_CONFIG, Flags.FLAG_VSYNC_PREDICTOR_RECOVERY, Flags.FLAG_VULKAN_RENDERENGINE, Flags.FLAG_WINDOW_BLUR_KAWASE2, ""));
 
     private boolean isOptimizationEnabled() {
         return false;
@@ -22,7 +22,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean addSfSkippedFramesToTrace() {
-        return getValue(Flags.FLAG_ADD_SF_SKIPPED_FRAMES_TO_TRACE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda62
+        return getValue(Flags.FLAG_ADD_SF_SKIPPED_FRAMES_TO_TRACE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda63
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).addSfSkippedFramesToTrace();
@@ -52,7 +52,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean adpfNativeSessionManager() {
-        return getValue(Flags.FLAG_ADPF_NATIVE_SESSION_MANAGER, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda59
+        return getValue(Flags.FLAG_ADPF_NATIVE_SESSION_MANAGER, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda60
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).adpfNativeSessionManager();
@@ -72,7 +72,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean arrSetframerateApi() {
-        return getValue(Flags.FLAG_ARR_SETFRAMERATE_API, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda56
+        return getValue(Flags.FLAG_ARR_SETFRAMERATE_API, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda57
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).arrSetframerateApi();
@@ -82,7 +82,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean arrSetframerateGteEnum() {
-        return getValue(Flags.FLAG_ARR_SETFRAMERATE_GTE_ENUM, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda52
+        return getValue(Flags.FLAG_ARR_SETFRAMERATE_GTE_ENUM, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda53
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).arrSetframerateGteEnum();
@@ -152,7 +152,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean connectedDisplayHdr() {
-        return getValue(Flags.FLAG_CONNECTED_DISPLAY_HDR, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda53
+        return getValue(Flags.FLAG_CONNECTED_DISPLAY_HDR, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda54
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).connectedDisplayHdr();
@@ -162,7 +162,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean correctDpiWithDisplaySize() {
-        return getValue(Flags.FLAG_CORRECT_DPI_WITH_DISPLAY_SIZE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda57
+        return getValue(Flags.FLAG_CORRECT_DPI_WITH_DISPLAY_SIZE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda58
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).correctDpiWithDisplaySize();
@@ -172,7 +172,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean deprecateFrameTracker() {
-        return getValue(Flags.FLAG_DEPRECATE_FRAME_TRACKER, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda49
+        return getValue(Flags.FLAG_DEPRECATE_FRAME_TRACKER, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda50
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).deprecateFrameTracker();
@@ -182,7 +182,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean deprecateVsyncSf() {
-        return getValue(Flags.FLAG_DEPRECATE_VSYNC_SF, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda48
+        return getValue(Flags.FLAG_DEPRECATE_VSYNC_SF, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda49
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).deprecateVsyncSf();
@@ -192,7 +192,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean detachedMirror() {
-        return getValue(Flags.FLAG_DETACHED_MIRROR, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda30
+        return getValue(Flags.FLAG_DETACHED_MIRROR, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda31
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).detachedMirror();
@@ -202,7 +202,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean disableSyntheticVsyncForPerformance() {
-        return getValue(Flags.FLAG_DISABLE_SYNTHETIC_VSYNC_FOR_PERFORMANCE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda61
+        return getValue(Flags.FLAG_DISABLE_SYNTHETIC_VSYNC_FOR_PERFORMANCE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda62
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).disableSyntheticVsyncForPerformance();
@@ -222,7 +222,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean displayProtected() {
-        return getValue(Flags.FLAG_DISPLAY_PROTECTED, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda60
+        return getValue(Flags.FLAG_DISPLAY_PROTECTED, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda61
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).displayProtected();
@@ -232,7 +232,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean dontSkipOnEarlyRo() {
-        return getValue(Flags.FLAG_DONT_SKIP_ON_EARLY_RO, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda44
+        return getValue(Flags.FLAG_DONT_SKIP_ON_EARLY_RO, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda45
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).dontSkipOnEarlyRo();
@@ -252,7 +252,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean enableLayerCommandBatching() {
-        return getValue(Flags.FLAG_ENABLE_LAYER_COMMAND_BATCHING, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda37
+        return getValue(Flags.FLAG_ENABLE_LAYER_COMMAND_BATCHING, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda38
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).enableLayerCommandBatching();
@@ -272,7 +272,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean filterFramesBeforeTraceStarts() {
-        return getValue(Flags.FLAG_FILTER_FRAMES_BEFORE_TRACE_STARTS, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda50
+        return getValue(Flags.FLAG_FILTER_FRAMES_BEFORE_TRACE_STARTS, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda51
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).filterFramesBeforeTraceStarts();
@@ -282,7 +282,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean flushBufferSlotsToUncache() {
-        return getValue(Flags.FLAG_FLUSH_BUFFER_SLOTS_TO_UNCACHE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda38
+        return getValue(Flags.FLAG_FLUSH_BUFFER_SLOTS_TO_UNCACHE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda39
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).flushBufferSlotsToUncache();
@@ -292,7 +292,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean forceCompileGraphiteRenderengine() {
-        return getValue(Flags.FLAG_FORCE_COMPILE_GRAPHITE_RENDERENGINE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda54
+        return getValue(Flags.FLAG_FORCE_COMPILE_GRAPHITE_RENDERENGINE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda55
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).forceCompileGraphiteRenderengine();
@@ -302,7 +302,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean fp16ClientTarget() {
-        return getValue(Flags.FLAG_FP16_CLIENT_TARGET, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda46
+        return getValue(Flags.FLAG_FP16_CLIENT_TARGET, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda47
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).fp16ClientTarget();
@@ -342,7 +342,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean graphiteRenderenginePreviewRollout() {
-        return getValue(Flags.FLAG_GRAPHITE_RENDERENGINE_PREVIEW_ROLLOUT, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda42
+        return getValue(Flags.FLAG_GRAPHITE_RENDERENGINE_PREVIEW_ROLLOUT, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda43
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).graphiteRenderenginePreviewRollout();
@@ -352,7 +352,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean hdcpLevelHal() {
-        return getValue(Flags.FLAG_HDCP_LEVEL_HAL, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda47
+        return getValue(Flags.FLAG_HDCP_LEVEL_HAL, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda48
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).hdcpLevelHal();
@@ -382,7 +382,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean increaseMissedFrameJankThreshold() {
-        return getValue(Flags.FLAG_INCREASE_MISSED_FRAME_JANK_THRESHOLD, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda39
+        return getValue(Flags.FLAG_INCREASE_MISSED_FRAME_JANK_THRESHOLD, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda40
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).increaseMissedFrameJankThreshold();
@@ -452,7 +452,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean overrideTrustedOverlay() {
-        return getValue(Flags.FLAG_OVERRIDE_TRUSTED_OVERLAY, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda43
+        return getValue(Flags.FLAG_OVERRIDE_TRUSTED_OVERLAY, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda44
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).overrideTrustedOverlay();
@@ -472,7 +472,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean refreshRateOverlayOnExternalDisplay() {
-        return getValue(Flags.FLAG_REFRESH_RATE_OVERLAY_ON_EXTERNAL_DISPLAY, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda55
+        return getValue(Flags.FLAG_REFRESH_RATE_OVERLAY_ON_EXTERNAL_DISPLAY, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda56
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).refreshRateOverlayOnExternalDisplay();
@@ -492,7 +492,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean renderableBufferUsage() {
-        return getValue(Flags.FLAG_RENDERABLE_BUFFER_USAGE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda45
+        return getValue(Flags.FLAG_RENDERABLE_BUFFER_USAGE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda46
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).renderableBufferUsage();
@@ -502,7 +502,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean restoreBlurStep() {
-        return getValue(Flags.FLAG_RESTORE_BLUR_STEP, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda40
+        return getValue(Flags.FLAG_RESTORE_BLUR_STEP, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda41
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).restoreBlurStep();
@@ -512,7 +512,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean screenshotFencePreservation() {
-        return getValue(Flags.FLAG_SCREENSHOT_FENCE_PRESERVATION, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda58
+        return getValue(Flags.FLAG_SCREENSHOT_FENCE_PRESERVATION, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda59
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).screenshotFencePreservation();
@@ -522,7 +522,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean singleHopScreenshot() {
-        return getValue(Flags.FLAG_SINGLE_HOP_SCREENSHOT, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda36
+        return getValue(Flags.FLAG_SINGLE_HOP_SCREENSHOT, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda37
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).singleHopScreenshot();
@@ -542,7 +542,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean stableEdidIds() {
-        return getValue(Flags.FLAG_STABLE_EDID_IDS, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda32
+        return getValue(Flags.FLAG_STABLE_EDID_IDS, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda33
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).stableEdidIds();
@@ -551,8 +551,18 @@ public class CustomFeatureFlags implements FeatureFlags {
     }
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
+    public boolean stopLayer() {
+        return getValue(Flags.FLAG_STOP_LAYER, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda30
+            @Override // java.util.function.Predicate
+            public final boolean test(Object obj) {
+                return ((FeatureFlags) obj).stopLayer();
+            }
+        });
+    }
+
+    @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean syncedResolutionSwitch() {
-        return getValue(Flags.FLAG_SYNCED_RESOLUTION_SWITCH, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda41
+        return getValue(Flags.FLAG_SYNCED_RESOLUTION_SWITCH, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda42
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).syncedResolutionSwitch();
@@ -592,7 +602,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean vrrBugfix24q4() {
-        return getValue(Flags.FLAG_VRR_BUGFIX_24Q4, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda51
+        return getValue(Flags.FLAG_VRR_BUGFIX_24Q4, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda52
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).vrrBugfix24q4();
@@ -602,7 +612,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean vrrBugfixDroppedFrame() {
-        return getValue(Flags.FLAG_VRR_BUGFIX_DROPPED_FRAME, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda31
+        return getValue(Flags.FLAG_VRR_BUGFIX_DROPPED_FRAME, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda32
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).vrrBugfixDroppedFrame();
@@ -622,7 +632,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean vsyncPredictorRecovery() {
-        return getValue(Flags.FLAG_VSYNC_PREDICTOR_RECOVERY, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda33
+        return getValue(Flags.FLAG_VSYNC_PREDICTOR_RECOVERY, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda34
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).vsyncPredictorRecovery();
@@ -632,7 +642,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean vulkanRenderengine() {
-        return getValue(Flags.FLAG_VULKAN_RENDERENGINE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda35
+        return getValue(Flags.FLAG_VULKAN_RENDERENGINE, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda36
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).vulkanRenderengine();
@@ -642,7 +652,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
     public boolean windowBlurKawase2() {
-        return getValue(Flags.FLAG_WINDOW_BLUR_KAWASE2, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda34
+        return getValue(Flags.FLAG_WINDOW_BLUR_KAWASE2, new Predicate() { // from class: com.android.graphics.surfaceflinger.flags.CustomFeatureFlags$$ExternalSyntheticLambda35
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).windowBlurKawase2();
@@ -659,6 +669,6 @@ public class CustomFeatureFlags implements FeatureFlags {
     }
 
     public List<String> getFlagNames() {
-        return Arrays.asList(Flags.FLAG_ADD_SF_SKIPPED_FRAMES_TO_TRACE, Flags.FLAG_ADPF_FMQ_SF, Flags.FLAG_ADPF_GPU_SF, Flags.FLAG_ADPF_NATIVE_SESSION_MANAGER, Flags.FLAG_ALLOW_N_VSYNCS_IN_TARGETER, Flags.FLAG_ARR_SETFRAMERATE_API, Flags.FLAG_ARR_SETFRAMERATE_GTE_ENUM, Flags.FLAG_ARR_SURFACECONTROL_SETFRAMERATE_API, Flags.FLAG_BEGONE_BRIGHT_HLG, Flags.FLAG_CACHE_WHEN_SOURCE_CROP_LAYER_ONLY_MOVED, Flags.FLAG_CE_FENCE_PROMISE, Flags.FLAG_COMMIT_NOT_COMPOSITED, Flags.FLAG_CONNECTED_DISPLAY, Flags.FLAG_CONNECTED_DISPLAY_HDR, Flags.FLAG_CORRECT_DPI_WITH_DISPLAY_SIZE, Flags.FLAG_DEPRECATE_FRAME_TRACKER, Flags.FLAG_DEPRECATE_VSYNC_SF, Flags.FLAG_DETACHED_MIRROR, Flags.FLAG_DISABLE_SYNTHETIC_VSYNC_FOR_PERFORMANCE, Flags.FLAG_DISPLAY_CONFIG_ERROR_HAL, Flags.FLAG_DISPLAY_PROTECTED, Flags.FLAG_DONT_SKIP_ON_EARLY_RO, Flags.FLAG_ENABLE_FRO_DEPENDENT_FEATURES, Flags.FLAG_ENABLE_LAYER_COMMAND_BATCHING, Flags.FLAG_ENABLE_SMALL_AREA_DETECTION, Flags.FLAG_FILTER_FRAMES_BEFORE_TRACE_STARTS, Flags.FLAG_FLUSH_BUFFER_SLOTS_TO_UNCACHE, Flags.FLAG_FORCE_COMPILE_GRAPHITE_RENDERENGINE, Flags.FLAG_FP16_CLIENT_TARGET, Flags.FLAG_FRAME_RATE_CATEGORY_MRR, Flags.FLAG_GAME_DEFAULT_FRAME_RATE, Flags.FLAG_GRAPHITE_RENDERENGINE, Flags.FLAG_GRAPHITE_RENDERENGINE_PREVIEW_ROLLOUT, Flags.FLAG_HDCP_LEVEL_HAL, Flags.FLAG_HDCP_NEGOTIATION, Flags.FLAG_HOTPLUG2, Flags.FLAG_INCREASE_MISSED_FRAME_JANK_THRESHOLD, Flags.FLAG_LATCH_UNSIGNALED_WITH_AUTO_REFRESH_CHANGED, Flags.FLAG_LOCAL_TONEMAP_SCREENSHOTS, Flags.FLAG_MISC1, Flags.FLAG_MONITOR_BUFFER_FENCES, Flags.FLAG_MULTITHREADED_PRESENT, Flags.FLAG_NO_VSYNCS_ON_SCREEN_OFF, Flags.FLAG_OVERRIDE_TRUSTED_OVERLAY, Flags.FLAG_PROTECTED_IF_CLIENT, Flags.FLAG_REFRESH_RATE_OVERLAY_ON_EXTERNAL_DISPLAY, Flags.FLAG_REJECT_DUPE_LAYERSTACKS, Flags.FLAG_RENDERABLE_BUFFER_USAGE, Flags.FLAG_RESTORE_BLUR_STEP, Flags.FLAG_SCREENSHOT_FENCE_PRESERVATION, Flags.FLAG_SINGLE_HOP_SCREENSHOT, Flags.FLAG_SKIP_INVISIBLE_WINDOWS_IN_INPUT, Flags.FLAG_STABLE_EDID_IDS, Flags.FLAG_SYNCED_RESOLUTION_SWITCH, Flags.FLAG_TRUE_HDR_SCREENSHOTS, Flags.FLAG_USE_KNOWN_REFRESH_RATE_FOR_FPS_CONSISTENCY, Flags.FLAG_VIEW_SET_REQUESTED_FRAME_RATE_MRR, Flags.FLAG_VRR_BUGFIX_24Q4, Flags.FLAG_VRR_BUGFIX_DROPPED_FRAME, Flags.FLAG_VRR_CONFIG, Flags.FLAG_VSYNC_PREDICTOR_RECOVERY, Flags.FLAG_VULKAN_RENDERENGINE, Flags.FLAG_WINDOW_BLUR_KAWASE2);
+        return Arrays.asList(Flags.FLAG_ADD_SF_SKIPPED_FRAMES_TO_TRACE, Flags.FLAG_ADPF_FMQ_SF, Flags.FLAG_ADPF_GPU_SF, Flags.FLAG_ADPF_NATIVE_SESSION_MANAGER, Flags.FLAG_ALLOW_N_VSYNCS_IN_TARGETER, Flags.FLAG_ARR_SETFRAMERATE_API, Flags.FLAG_ARR_SETFRAMERATE_GTE_ENUM, Flags.FLAG_ARR_SURFACECONTROL_SETFRAMERATE_API, Flags.FLAG_BEGONE_BRIGHT_HLG, Flags.FLAG_CACHE_WHEN_SOURCE_CROP_LAYER_ONLY_MOVED, Flags.FLAG_CE_FENCE_PROMISE, Flags.FLAG_COMMIT_NOT_COMPOSITED, Flags.FLAG_CONNECTED_DISPLAY, Flags.FLAG_CONNECTED_DISPLAY_HDR, Flags.FLAG_CORRECT_DPI_WITH_DISPLAY_SIZE, Flags.FLAG_DEPRECATE_FRAME_TRACKER, Flags.FLAG_DEPRECATE_VSYNC_SF, Flags.FLAG_DETACHED_MIRROR, Flags.FLAG_DISABLE_SYNTHETIC_VSYNC_FOR_PERFORMANCE, Flags.FLAG_DISPLAY_CONFIG_ERROR_HAL, Flags.FLAG_DISPLAY_PROTECTED, Flags.FLAG_DONT_SKIP_ON_EARLY_RO, Flags.FLAG_ENABLE_FRO_DEPENDENT_FEATURES, Flags.FLAG_ENABLE_LAYER_COMMAND_BATCHING, Flags.FLAG_ENABLE_SMALL_AREA_DETECTION, Flags.FLAG_FILTER_FRAMES_BEFORE_TRACE_STARTS, Flags.FLAG_FLUSH_BUFFER_SLOTS_TO_UNCACHE, Flags.FLAG_FORCE_COMPILE_GRAPHITE_RENDERENGINE, Flags.FLAG_FP16_CLIENT_TARGET, Flags.FLAG_FRAME_RATE_CATEGORY_MRR, Flags.FLAG_GAME_DEFAULT_FRAME_RATE, Flags.FLAG_GRAPHITE_RENDERENGINE, Flags.FLAG_GRAPHITE_RENDERENGINE_PREVIEW_ROLLOUT, Flags.FLAG_HDCP_LEVEL_HAL, Flags.FLAG_HDCP_NEGOTIATION, Flags.FLAG_HOTPLUG2, Flags.FLAG_INCREASE_MISSED_FRAME_JANK_THRESHOLD, Flags.FLAG_LATCH_UNSIGNALED_WITH_AUTO_REFRESH_CHANGED, Flags.FLAG_LOCAL_TONEMAP_SCREENSHOTS, Flags.FLAG_MISC1, Flags.FLAG_MONITOR_BUFFER_FENCES, Flags.FLAG_MULTITHREADED_PRESENT, Flags.FLAG_NO_VSYNCS_ON_SCREEN_OFF, Flags.FLAG_OVERRIDE_TRUSTED_OVERLAY, Flags.FLAG_PROTECTED_IF_CLIENT, Flags.FLAG_REFRESH_RATE_OVERLAY_ON_EXTERNAL_DISPLAY, Flags.FLAG_REJECT_DUPE_LAYERSTACKS, Flags.FLAG_RENDERABLE_BUFFER_USAGE, Flags.FLAG_RESTORE_BLUR_STEP, Flags.FLAG_SCREENSHOT_FENCE_PRESERVATION, Flags.FLAG_SINGLE_HOP_SCREENSHOT, Flags.FLAG_SKIP_INVISIBLE_WINDOWS_IN_INPUT, Flags.FLAG_STABLE_EDID_IDS, Flags.FLAG_STOP_LAYER, Flags.FLAG_SYNCED_RESOLUTION_SWITCH, Flags.FLAG_TRUE_HDR_SCREENSHOTS, Flags.FLAG_USE_KNOWN_REFRESH_RATE_FOR_FPS_CONSISTENCY, Flags.FLAG_VIEW_SET_REQUESTED_FRAME_RATE_MRR, Flags.FLAG_VRR_BUGFIX_24Q4, Flags.FLAG_VRR_BUGFIX_DROPPED_FRAME, Flags.FLAG_VRR_CONFIG, Flags.FLAG_VSYNC_PREDICTOR_RECOVERY, Flags.FLAG_VULKAN_RENDERENGINE, Flags.FLAG_WINDOW_BLUR_KAWASE2);
     }
 }

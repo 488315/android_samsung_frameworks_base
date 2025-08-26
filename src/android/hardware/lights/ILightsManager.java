@@ -88,9 +88,9 @@ public interface ILightsManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILightsManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILightsManager)) {
-                return (ILightsManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILightsManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILightsManager)) {
+                return (ILightsManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -133,28 +133,28 @@ public interface ILightsManager extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeTypedList(lights, 1);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                LightState lightState = getLightState(readInt);
+                LightState lightState = getLightState(i3);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(lightState, 1);
             } else if (i == 3) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                int readInt2 = parcel.readInt();
+                IBinder strongBinder = parcel.readStrongBinder();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                openSession(readStrongBinder, readInt2);
+                openSession(strongBinder, i4);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                IBinder readStrongBinder2 = parcel.readStrongBinder();
+                IBinder strongBinder2 = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                closeSession(readStrongBinder2);
+                closeSession(strongBinder2);
                 parcel2.writeNoException();
             } else if (i == 5) {
-                IBinder readStrongBinder3 = parcel.readStrongBinder();
-                int[] createIntArray = parcel.createIntArray();
+                IBinder strongBinder3 = parcel.readStrongBinder();
+                int[] iArrCreateIntArray = parcel.createIntArray();
                 LightState[] lightStateArr = (LightState[]) parcel.createTypedArray(LightState.CREATOR);
                 parcel.enforceNoDataAvail();
-                setLightStates(readStrongBinder3, createIntArray, lightStateArr);
+                setLightStates(strongBinder3, iArrCreateIntArray, lightStateArr);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -180,80 +180,80 @@ public interface ILightsManager extends IInterface {
 
             @Override // android.hardware.lights.ILightsManager
             public List<Light> getLights() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILightsManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(Light.CREATOR);
+                    parcelObtain.writeInterfaceToken(ILightsManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(Light.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.lights.ILightsManager
             public LightState getLightState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILightsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LightState) obtain2.readTypedObject(LightState.CREATOR);
+                    parcelObtain.writeInterfaceToken(ILightsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LightState) parcelObtain2.readTypedObject(LightState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.lights.ILightsManager
             public void openSession(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILightsManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILightsManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.lights.ILightsManager
             public void closeSession(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILightsManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILightsManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.lights.ILightsManager
             public void setLightStates(IBinder iBinder, int[] iArr, LightState[] lightStateArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILightsManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeTypedArray(lightStateArr, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILightsManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeTypedArray(lightStateArr, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

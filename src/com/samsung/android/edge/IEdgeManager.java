@@ -149,9 +149,9 @@ public interface IEdgeManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEdgeManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEdgeManager)) {
-                return (IEdgeManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEdgeManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEdgeManager)) {
+                return (IEdgeManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -209,61 +209,61 @@ public interface IEdgeManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i3 = parcel.readInt();
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    bindEdgeLightingService(readStrongBinder, readInt, componentName);
+                    bindEdgeLightingService(strongBinder, i3, componentName);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    String readString = parcel.readString();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unbindEdgeLightingService(readStrongBinder2, readString);
+                    unbindEdgeLightingService(strongBinder2, string);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString2 = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    String string2 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    updateEdgeLightingPackageList(readString2, createStringArrayList);
+                    updateEdgeLightingPackageList(string2, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     EdgeLightingPolicy edgeLightingPolicy = (EdgeLightingPolicy) parcel.readTypedObject(EdgeLightingPolicy.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateEdgeLightingPolicy(readString3, edgeLightingPolicy);
+                    updateEdgeLightingPolicy(string3, edgeLightingPolicy);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    registerEdgeLightingListener(readStrongBinder3, componentName2);
+                    registerEdgeLightingListener(strongBinder3, componentName2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    String readString4 = parcel.readString();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unregisterEdgeLightingListener(readStrongBinder4, readString4);
+                    unregisterEdgeLightingListener(strongBinder4, string4);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     SemEdgeLightingInfo semEdgeLightingInfo = (SemEdgeLightingInfo) parcel.readTypedObject(SemEdgeLightingInfo.CREATOR);
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    startEdgeLighting(readString5, semEdgeLightingInfo, readStrongBinder5);
+                    startEdgeLighting(string5, semEdgeLightingInfo, strongBinder5);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    String readString6 = parcel.readString();
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
+                    String string6 = parcel.readString();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    stopEdgeLighting(readString6, readStrongBinder6);
+                    stopEdgeLighting(string6, strongBinder6);
                     parcel2.writeNoException();
                     return true;
                 case 9:
@@ -272,54 +272,54 @@ public interface IEdgeManager extends IInterface {
                     parcel2.writeInt(edgeLightingState);
                     return true;
                 case 10:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isEdgeLightingNotificationAllowed = isEdgeLightingNotificationAllowed(readString7);
+                    boolean zIsEdgeLightingNotificationAllowed = isEdgeLightingNotificationAllowed(string7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEdgeLightingNotificationAllowed);
+                    parcel2.writeBoolean(zIsEdgeLightingNotificationAllowed);
                     return true;
                 case 11:
-                    int readInt2 = parcel.readInt();
-                    String readString8 = parcel.readString();
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
+                    int i4 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    disable(readInt2, readString8, readStrongBinder7);
+                    disable(i4, string8, strongBinder7);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    String readString9 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string9 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    disableEdgeLightingNotification(readString9, readBoolean);
+                    disableEdgeLightingNotification(string9, z);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    String readString10 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPackageEnabled = isPackageEnabled(readString10, readInt3);
+                    boolean zIsPackageEnabled = isPackageEnabled(string10, i5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPackageEnabled);
+                    parcel2.writeBoolean(zIsPackageEnabled);
                     return true;
                 case 14:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    String readString13 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    cancelNotification(readString11, readString12, readInt4, readInt5, readString13);
+                    cancelNotification(string11, string12, i6, i7, string13);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    cancelNotificationByGroupKey(readString14, readString15, readInt6, readInt7, readString16, readString17);
+                    cancelNotificationByGroupKey(string14, string15, i8, i9, string16, string17);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -345,251 +345,251 @@ public interface IEdgeManager extends IInterface {
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void bindEdgeLightingService(IBinder iBinder, int i, ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void unbindEdgeLightingService(IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void updateEdgeLightingPackageList(String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void updateEdgeLightingPolicy(String str, EdgeLightingPolicy edgeLightingPolicy) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(edgeLightingPolicy, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(edgeLightingPolicy, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void registerEdgeLightingListener(IBinder iBinder, ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void unregisterEdgeLightingListener(IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void startEdgeLighting(String str, SemEdgeLightingInfo semEdgeLightingInfo, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(semEdgeLightingInfo, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(semEdgeLightingInfo, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void stopEdgeLighting(String str, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public int getEdgeLightingState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public boolean isEdgeLightingNotificationAllowed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void disable(int i, String str, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void disableEdgeLightingNotification(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public boolean isPackageEnabled(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void cancelNotification(String str, String str2, int i, int i2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
             public void cancelNotificationByGroupKey(String str, String str2, int i, int i2, String str3, String str4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEdgeManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

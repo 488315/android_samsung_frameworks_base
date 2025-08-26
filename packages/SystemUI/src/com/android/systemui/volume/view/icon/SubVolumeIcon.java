@@ -9,7 +9,6 @@ import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubVolumeIcon extends VolumeIcon {
     public SubVolumeIcon(Context context, AttributeSet attributeSet) {
@@ -28,21 +27,21 @@ public final class SubVolumeIcon extends VolumeIcon {
 
     @Override // com.android.systemui.volume.view.icon.VolumeIcon
     public final View inflateIconView(boolean z) {
-        View inflate;
+        View viewInflate;
         if (!z) {
-            View inflate2 = LayoutInflater.from(getContext()).inflate(BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG ? R.layout.volume_sub_large_display_default_icon : R.layout.volume_sub_display_default_icon, (ViewGroup) null);
-            inflate2.getClass();
-            return inflate2;
+            View viewInflate2 = LayoutInflater.from(getContext()).inflate(BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG ? R.layout.volume_sub_large_display_default_icon : R.layout.volume_sub_display_default_icon, (ViewGroup) null);
+            viewInflate2.getClass();
+            return viewInflate2;
         }
         if (VolumeIcons.isForMediaIcon(this.stream)) {
-            inflate = LayoutInflater.from(getContext()).inflate(BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG ? R.layout.volume_sub_large_display_media_icon : R.layout.volume_sub_display_media_icon, (ViewGroup) null);
+            viewInflate = LayoutInflater.from(getContext()).inflate(BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG ? R.layout.volume_sub_large_display_media_icon : R.layout.volume_sub_display_media_icon, (ViewGroup) null);
         } else if (VolumePanelValues.isRing(this.stream)) {
-            inflate = LayoutInflater.from(getContext()).inflate(BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG ? R.layout.volume_sub_large_display_ringtone_icon : R.layout.volume_sub_display_ringtone_icon, (ViewGroup) null);
+            viewInflate = LayoutInflater.from(getContext()).inflate(BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG ? R.layout.volume_sub_large_display_ringtone_icon : R.layout.volume_sub_display_ringtone_icon, (ViewGroup) null);
         } else {
-            inflate = LayoutInflater.from(getContext()).inflate(BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG ? R.layout.volume_sub_large_display_animated_icon : R.layout.volume_sub_display_animated_icon, (ViewGroup) null);
+            viewInflate = LayoutInflater.from(getContext()).inflate(BasicRune.VOLUME_SUB_DISPLAY_WATCHFACE_VOLUME_DIALOG ? R.layout.volume_sub_large_display_animated_icon : R.layout.volume_sub_display_animated_icon, (ViewGroup) null);
         }
-        inflate.getClass();
-        return inflate;
+        viewInflate.getClass();
+        return viewInflate;
     }
 
     @Override // com.android.systemui.volume.view.icon.VolumeIcon

@@ -11,13 +11,11 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
-import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogPlugin$bindPlugin$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ VolumeDialogPluginViewModel $viewModel;
@@ -66,7 +64,7 @@ final class VolumeDialogPlugin$bindPlugin$1 extends SuspendLambda implements Fun
                 final ?? r2 = new SafetyWarningDialog(context, audioManager) { // from class: com.android.systemui.volume.dialog.VolumeDialogPlugin$showSafetyWarningVisibility$2$dialog$1
                     @Override // com.android.systemui.volume.SafetyWarningDialog
                     public final void cleanUp$1() {
-                        Function0.this.invoke();
+                        volumeDialogPlugin$bindPlugin$1$$ExternalSyntheticLambda0.invoke();
                         CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                         int i2 = Result.$r8$clinit;
                         cancellableContinuation.resumeWith(Unit.INSTANCE);
@@ -76,7 +74,7 @@ final class VolumeDialogPlugin$bindPlugin$1 extends SuspendLambda implements Fun
                 cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: com.android.systemui.volume.dialog.VolumeDialogPlugin$showSafetyWarningVisibility$2$1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         dismiss();
                         return Unit.INSTANCE;
                     }

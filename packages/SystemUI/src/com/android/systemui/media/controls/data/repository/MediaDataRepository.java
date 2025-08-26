@@ -12,16 +12,15 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaDataRepository implements Dumpable {
     public final StateFlowImpl _mediaEntries;
     public final ReadonlyStateFlow mediaEntries;
 
     public MediaDataRepository(DumpManager dumpManager) {
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(new LinkedHashMap());
-        this._mediaEntries = MutableStateFlow;
-        this.mediaEntries = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(new LinkedHashMap());
+        this._mediaEntries = stateFlowImplMutableStateFlow;
+        this.mediaEntries = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
         dumpManager.registerNormalDumpable("MediaDataRepository", this);
     }
 

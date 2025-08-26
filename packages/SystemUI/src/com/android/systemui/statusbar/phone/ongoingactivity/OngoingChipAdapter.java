@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.phone.ongoingactivity;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BlendMode;
 import android.graphics.Canvas;
@@ -44,7 +45,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingChipAdapter extends RecyclerView.Adapter {
     public final int availableSpace;
@@ -56,11 +56,13 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
     public final int infoTextTotalMargin;
     public boolean isKeyguardGoneNow;
     public final Context mContext;
+    public Integer mStatusBarState;
     public final int marqueeLimitedWidth;
     public Pair marqueePair;
     public MarqueeState marqueeState;
     public final int maxChipWidth;
     public final int maximumWidth;
+    public boolean needProcessOrientationChanged;
     public final NotificationIconAreaController notificationIconAreaController;
     public final int notificationIconWidth;
     public final int shadowWidth;
@@ -71,7 +73,6 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
     public final String TAG = "{OngoingChipAdapter}";
     public final int mMaxItemCount = 2;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ChipViewHolder extends RecyclerView.ViewHolder {
         public final String TAG;
         public final IndicatorScaleGardener indicatorScaleGardener;
@@ -83,35 +84,35 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
         public final ImageView mSmallIcon;
         public final int maximumWidth;
 
-        public ChipViewHolder(View view, IndicatorScaleGardener indicatorScaleGardener) {
+        public ChipViewHolder(View view, IndicatorScaleGardener indicatorScaleGardener) throws Resources.NotFoundException {
             super(view);
             this.indicatorScaleGardener = indicatorScaleGardener;
             this.TAG = "{OngoingChipViewHolder}";
             this.mRootLayout = view;
-            View findViewById = view.findViewById(R.id.capsule_item_top_layout);
-            findViewById.getClass();
-            this.mNotiParentLayout = (LinearLayout) findViewById;
-            View findViewById2 = view.findViewById(R.id.capsule_item_app_icon);
-            findViewById2.getClass();
-            ImageView imageView = (ImageView) findViewById2;
+            View viewFindViewById = view.findViewById(R.id.capsule_item_top_layout);
+            viewFindViewById.getClass();
+            this.mNotiParentLayout = (LinearLayout) viewFindViewById;
+            View viewFindViewById2 = view.findViewById(R.id.capsule_item_app_icon);
+            viewFindViewById2.getClass();
+            ImageView imageView = (ImageView) viewFindViewById2;
             this.mSmallIcon = imageView;
-            View findViewById3 = view.findViewById(R.id.capsule_item_noti_expanded_info);
-            findViewById3.getClass();
-            FrameLayout frameLayout = (FrameLayout) findViewById3;
+            View viewFindViewById3 = view.findViewById(R.id.capsule_item_noti_expanded_info);
+            viewFindViewById3.getClass();
+            FrameLayout frameLayout = (FrameLayout) viewFindViewById3;
             this.mExpandedInfo = frameLayout;
-            View findViewById4 = view.findViewById(R.id.capsule_remote_container);
-            findViewById4.getClass();
-            this.mRemoteContainer = (FrameLayout) findViewById4;
+            View viewFindViewById4 = view.findViewById(R.id.capsule_remote_container);
+            viewFindViewById4.getClass();
+            this.mRemoteContainer = (FrameLayout) viewFindViewById4;
             view.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_min_width);
             this.maximumWidth = view.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_max_width);
             this.infoTextExtra = view.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_info_text_space_extra);
             view.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_layer_offset);
             view.getResources().getDimensionPixelSize(R.dimen.notification_dnd_status_icon_size);
             float f = indicatorScaleGardener.getLatestScaleModel(view.getContext()).ratio;
-            int roundToInt = MathKt__MathJVMKt.roundToInt(view.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_size) * f);
+            int iRoundToInt = MathKt__MathJVMKt.roundToInt(view.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_size) * f);
             ViewGroup.LayoutParams layoutParams = imageView.getLayoutParams();
-            layoutParams.width = roundToInt;
-            layoutParams.height = roundToInt;
+            layoutParams.width = iRoundToInt;
+            layoutParams.height = iRoundToInt;
             ((LinearLayout.LayoutParams) frameLayout.getLayoutParams()).setMarginStart(MathKt__MathJVMKt.roundToInt(view.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_margin_between) * f));
             MathKt__MathJVMKt.roundToInt(view.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_min_width) * f);
             this.maximumWidth = MathKt__MathJVMKt.roundToInt(view.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_max_width) * f);
@@ -122,8 +123,8 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
 
         public final void setChipMode() {
             float f = this.indicatorScaleGardener.getLatestScaleModel(this.mRootLayout.getContext()).ratio;
-            int roundToInt = MathKt__MathJVMKt.roundToInt(this.mRootLayout.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_padding_side) * f);
-            this.mNotiParentLayout.setPadding(roundToInt, 0, roundToInt, 0);
+            int iRoundToInt = MathKt__MathJVMKt.roundToInt(this.mRootLayout.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_padding_side) * f);
+            this.mNotiParentLayout.setPadding(iRoundToInt, 0, iRoundToInt, 0);
             this.mNotiParentLayout.getLayoutParams().width = MathKt__MathJVMKt.roundToInt(this.mRootLayout.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_min_width) * f);
             this.mExpandedInfo.removeAllViews();
             this.mExpandedInfo.setVisibility(8);
@@ -132,7 +133,6 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class MarqueeState {
         public static final /* synthetic */ MarqueeState[] $VALUES;
         public static final MarqueeState INIT;
@@ -163,7 +163,6 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MarqueeTextView extends TextView {
         public OngoingChipAdapter$marqueeIfNeeded$1$1 mMarqueeEndListener;
 
@@ -172,30 +171,30 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
         }
 
         @Override // android.widget.TextView, android.view.View
-        public final void onDraw(Canvas canvas) {
+        public final void onDraw(Canvas canvas) throws IllegalAccessException, NoSuchFieldException, IllegalArgumentException {
             Field field;
             Object obj;
             OngoingChipAdapter$marqueeIfNeeded$1$1 ongoingChipAdapter$marqueeIfNeeded$1$1;
             super.onDraw(canvas);
-            Field field2 = null;
+            Field declaredField = null;
             try {
-                Field declaredField = TextView.class.getDeclaredField("mMarquee");
-                declaredField.setAccessible(true);
-                obj = declaredField.get(this);
+                Field declaredField2 = TextView.class.getDeclaredField("mMarquee");
+                declaredField2.setAccessible(true);
+                obj = declaredField2.get(this);
                 if (obj != null) {
                     try {
-                        field2 = obj.getClass().getDeclaredField("mStatus");
-                        if (field2 != null) {
-                            field2.setAccessible(true);
+                        declaredField = obj.getClass().getDeclaredField("mStatus");
+                        if (declaredField != null) {
+                            declaredField.setAccessible(true);
                         }
                     } catch (Exception e) {
                         e = e;
-                        field = field2;
-                        field2 = obj;
+                        field = declaredField;
+                        declaredField = obj;
                         Log.w("{OngoingChipAdapterMarqueeTextView}", "onDraw: ", e);
-                        Field field3 = field;
-                        obj = field2;
-                        field2 = field3;
+                        Field field2 = field;
+                        obj = declaredField;
+                        declaredField = field2;
                         if (obj != null) {
                             return;
                         } else {
@@ -207,11 +206,11 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
                 e = e2;
                 field = null;
             }
-            if (obj != null || field2 == null) {
+            if (obj != null || declaredField == null) {
                 return;
             }
             try {
-                if (field2.getInt(obj) != 0 || (ongoingChipAdapter$marqueeIfNeeded$1$1 = this.mMarqueeEndListener) == null) {
+                if (declaredField.getInt(obj) != 0 || (ongoingChipAdapter$marqueeIfNeeded$1$1 = this.mMarqueeEndListener) == null) {
                     return;
                 }
                 ongoingChipAdapter$marqueeIfNeeded$1$1.onMarqueeEnd();
@@ -237,7 +236,7 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public OngoingChipAdapter(Context context, IndicatorScaleGardener indicatorScaleGardener, NotificationIconAreaController notificationIconAreaController) {
+    public OngoingChipAdapter(Context context, IndicatorScaleGardener indicatorScaleGardener, NotificationIconAreaController notificationIconAreaController) throws Resources.NotFoundException {
         this.mContext = context;
         this.indicatorScaleGardener = indicatorScaleGardener;
         this.notificationIconAreaController = notificationIconAreaController;
@@ -257,6 +256,7 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
         context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_min_width);
         this.marqueeLimitedWidth = context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_marquee_available_width);
         this.marqueeState = MarqueeState.INIT;
+        this.mStatusBarState = 0;
         float f = indicatorScaleGardener.getLatestScaleModel(context).ratio;
         this.topHeight = MathKt__MathJVMKt.roundToInt(context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_top_height) * f);
         MathKt__MathJVMKt.roundToInt(context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_second_height) * f);
@@ -278,13 +278,13 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
 
     public final ColorStateList getChipBg(int i, int i2) {
         if (i == getItemCount() - 1) {
-            ColorStateList valueOf = ColorStateList.valueOf(i2);
-            valueOf.getClass();
-            return valueOf;
+            ColorStateList colorStateListValueOf = ColorStateList.valueOf(i2);
+            colorStateListValueOf.getClass();
+            return colorStateListValueOf;
         }
-        ColorStateList withAlpha = ColorStateList.valueOf(i2).withAlpha((Color.alpha(i2) * 40) / 100);
-        withAlpha.getClass();
-        return withAlpha;
+        ColorStateList colorStateListWithAlpha = ColorStateList.valueOf(i2).withAlpha((Color.alpha(i2) * 40) / 100);
+        colorStateListWithAlpha.getClass();
+        return colorStateListWithAlpha;
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
@@ -302,9 +302,9 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
         int i3 = i2 + i;
         int i4 = this.enableMaxWidth;
         boolean z = this.shouldShowChipOnly;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i4, i3, "hasAvailableSpaceToExpand - enableMax:", " totalWidth", " call:");
-        m.append(z);
-        Log.d(this.TAG, m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i4, i3, "hasAvailableSpaceToExpand - enableMax:", " totalWidth", " call:");
+        sbM.append(z);
+        Log.d(this.TAG, sbM.toString());
         return this.enableMaxWidth >= i3;
     }
 
@@ -341,9 +341,10 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
     public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         MarqueeTextView marqueeTextView;
         ChipViewHolder chipViewHolder = (ChipViewHolder) viewHolder;
-        String m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onBindViewHolder() notificationArrayList.position = ");
+        String strM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onBindViewHolder() notificationArrayList.position = ");
         String str = this.TAG;
-        Log.i(str, m);
+        Log.i(str, strM);
+        this.needProcessOrientationChanged = false;
         OngoingActivityDataHelper.INSTANCE.getClass();
         CopyOnWriteArrayList copyOnWriteArrayList = OngoingActivityDataHelper.mOngoingActivityLists;
         if (copyOnWriteArrayList.size() == 0) {
@@ -355,12 +356,12 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
         int mediaCardPrimaryInfoColor = OngoingMediaResourceUtils.getMediaCardUiType$default(OngoingMediaResourceUtils.INSTANCE, dataByIndex.mChipBackground).getMediaCardPrimaryInfoColor(this.mContext);
         RemoteViews remoteViews = dataByIndex.mExpandedChipView;
         if (remoteViews != null && i == itemCount) {
-            View apply = remoteViews.apply(this.mContext, null);
+            View viewApply = remoteViews.apply(this.mContext, null);
             float f = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
-            apply.setScaleX(f);
-            apply.setScaleY(f);
-            apply.measure(0, 0);
-            if (!hasAvailableSpaceToExpand(Math.min((this.customChipSidePadding * 2) + apply.getMeasuredWidth(), this.maxChipWidth))) {
+            viewApply.setScaleX(f);
+            viewApply.setScaleY(f);
+            viewApply.measure(0, 0);
+            if (!hasAvailableSpaceToExpand(Math.min((this.customChipSidePadding * 2) + viewApply.getMeasuredWidth(), this.maxChipWidth))) {
                 chipViewHolder.mRemoteContainer.removeAllViews();
                 chipViewHolder.mRemoteContainer.setVisibility(8);
                 chipViewHolder.mNotiParentLayout.setVisibility(0);
@@ -388,9 +389,9 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
             chipViewHolder.mNotiParentLayout.setVisibility(8);
             chipViewHolder.mRemoteContainer.setVisibility(0);
             chipViewHolder.mRemoteContainer.removeAllViews();
-            View findViewWithTag = apply.findViewWithTag("chip_sports_score");
-            if (findViewWithTag instanceof TextView) {
-                TextView textView = (TextView) findViewWithTag;
+            View viewFindViewWithTag = viewApply.findViewWithTag("chip_sports_score");
+            if (viewFindViewWithTag instanceof TextView) {
+                TextView textView = (TextView) viewFindViewWithTag;
                 textView.measure(0, 0);
                 if (MathKt__MathJVMKt.roundToInt(textView.getMeasuredWidth() * f) >= this.sportScoreMaxWidth) {
                     textView.setText("-");
@@ -398,12 +399,14 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
                 textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
                 textView.setHorizontalFadingEdgeEnabled(true);
                 textView.setTextColor(this.mContext.getColor(R.color.ongoing_activity_custom_chip_text_color));
-                this.marqueePair = new Pair(findViewWithTag, dataByIndex);
+                this.marqueePair = new Pair(viewFindViewWithTag, dataByIndex);
             }
-            chipViewHolder.mRemoteContainer.addView(apply);
+            chipViewHolder.mRemoteContainer.addView(viewApply);
             FrameLayout frameLayout = chipViewHolder.mRemoteContainer;
             int i3 = this.customChipSidePadding;
             frameLayout.setPadding(i3, 0, i3, 0);
+            viewApply.measure(0, 0);
+            chipViewHolder.mRemoteContainer.getLayoutParams().width = MathKt__MathJVMKt.roundToInt(((this.customChipSidePadding * 2) + viewApply.getMeasuredWidth()) * f);
             chipViewHolder.mRemoteContainer.getLayoutParams().height = this.topHeight;
             setChipBg(chipViewHolder.mRemoteContainer, i, getChipBg(i, dataByIndex.mChipBackground));
             return;
@@ -482,22 +485,22 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
             chipViewHolder.mNotiParentLayout.setPadding(MathKt__MathJVMKt.roundToInt(chipViewHolder.mRootLayout.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_start) * f2), 0, MathKt__MathJVMKt.roundToInt(chipViewHolder.mRootLayout.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_end) * f2), 0);
             chipViewHolder.mNotiParentLayout.getLayoutParams().width = -2;
             copyOnWriteArrayList.size();
-            int min = Math.min(i5 - chipViewHolder.infoTextExtra, chipViewHolder.maximumWidth);
+            int iMin = Math.min(i5 - chipViewHolder.infoTextExtra, chipViewHolder.maximumWidth);
             boolean z = marqueeTextView instanceof Chronometer;
             if (z) {
                 marqueeTextView.measure(0, 0);
                 Chronometer chronometer2 = (Chronometer) marqueeTextView;
-                Log.i(chipViewHolder.TAG, ListImplementation$$ExternalSyntheticOutline0.m(chronometer2.getMeasuredWidth(), min, "setExpandedChipMode for Chronometer width:", ", availableWidth:"));
-                chronometer2.setMaxWidth(min);
+                Log.i(chipViewHolder.TAG, ListImplementation$$ExternalSyntheticOutline0.m(chronometer2.getMeasuredWidth(), iMin, "setExpandedChipMode for Chronometer width:", ", availableWidth:"));
+                chronometer2.setMaxWidth(iMin);
                 chronometer2.setElegantTextHeight(false);
-                if (chronometer2.getMeasuredWidth() == 0 || chronometer2.getMeasuredWidth() > min) {
+                if (chronometer2.getMeasuredWidth() == 0 || chronometer2.getMeasuredWidth() > iMin) {
                     chipViewHolder.setChipMode();
                 } else {
                     chipViewHolder.mExpandedInfo.addView(marqueeTextView, -2, chronometer2.getMeasuredHeight());
                     chipViewHolder.mExpandedInfo.setVisibility(0);
                 }
             } else {
-                marqueeTextView.setMaxWidth(min);
+                marqueeTextView.setMaxWidth(iMin);
                 marqueeTextView.setElegantTextHeight(false);
                 chipViewHolder.mExpandedInfo.addView(marqueeTextView);
                 chipViewHolder.mExpandedInfo.setVisibility(0);
@@ -516,10 +519,10 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        LayoutInflater from = LayoutInflater.from(this.mContext);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this.mContext);
         this.viewGroup = viewGroup;
         Log.i(this.TAG, "onCreateViewHolder() ");
-        return new ChipViewHolder(from.inflate(R.layout.sec_ongoing_activity_chip_item, viewGroup, false), this.indicatorScaleGardener);
+        return new ChipViewHolder(layoutInflaterFrom.inflate(R.layout.sec_ongoing_activity_chip_item, viewGroup, false), this.indicatorScaleGardener);
     }
 
     public final void setChipBg(View view, int i, ColorStateList colorStateList) {
@@ -533,26 +536,26 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
             return;
         }
         float f = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
-        int roundToInt = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_layer_offset) * f);
-        int roundToInt2 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_min_width) * f);
+        int iRoundToInt = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_layer_offset) * f);
+        int iRoundToInt2 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_min_width) * f);
         int i2 = this.topHeight;
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
-        Bitmap createBitmap = Bitmap.createBitmap(roundToInt2, i2, config);
-        Canvas canvas = new Canvas(createBitmap);
-        Bitmap bitmap = DrawableKt.toBitmap(gradientDrawable, roundToInt2, i2, config);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(iRoundToInt2, i2, config);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
+        Bitmap bitmap = DrawableKt.toBitmap(gradientDrawable, iRoundToInt2, i2, config);
         Paint paint = new Paint(1);
         canvas.drawBitmap(bitmap, 0.0f, 0.0f, paint);
         paint.setColor(0);
         paint.setAntiAlias(true);
         paint.setBlendMode(BlendMode.CLEAR);
         boolean z = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(this.mContext) == 1;
-        float f2 = z ? roundToInt : 0.0f;
+        float f2 = z ? iRoundToInt : 0.0f;
         if (!z) {
-            roundToInt2 -= roundToInt;
+            iRoundToInt2 -= iRoundToInt;
         }
-        float f3 = roundToInt2;
+        float f3 = iRoundToInt2;
         float f4 = this.bgRadius;
         canvas.drawRoundRect(f2, 0.0f, f3, i2, f4, f4, paint);
-        view.setBackground(new BitmapDrawable(this.mContext.getResources(), createBitmap));
+        view.setBackground(new BitmapDrawable(this.mContext.getResources(), bitmapCreateBitmap));
     }
 }

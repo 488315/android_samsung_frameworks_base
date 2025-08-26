@@ -1,6 +1,7 @@
 package com.android.systemui.controls.util;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.service.controls.Control;
 import android.service.controls.templates.ControlTemplate;
 import android.service.controls.templates.RangeTemplate;
@@ -30,13 +31,11 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsUtil {
     public static final Companion Companion = new Companion(null);
     public final KeyguardStateController keyguardStateController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -73,12 +72,12 @@ public final class ControlsUtil {
                 sb.append("zone=" + ((Object) zone) + "|");
             }
             int status = control.getStatus();
-            Integer valueOf = Integer.valueOf(status);
+            Integer numValueOf = Integer.valueOf(status);
             if (status == 1) {
-                valueOf = null;
+                numValueOf = null;
             }
-            if (valueOf != null) {
-                sb.append("status=" + valueOf.intValue() + "|");
+            if (numValueOf != null) {
+                sb.append("status=" + numValueOf.intValue() + "|");
             }
             CharSequence statusText = control.getStatusText();
             statusText.getClass();
@@ -94,24 +93,24 @@ public final class ControlsUtil {
             if (control.getCustomIcon() != null) {
                 sb.append("CustomIcon|");
             }
-            boolean isAuthRequired = control.isAuthRequired();
-            Boolean valueOf2 = Boolean.valueOf(isAuthRequired);
-            if (isAuthRequired) {
-                valueOf2 = null;
+            boolean zIsAuthRequired = control.isAuthRequired();
+            Boolean boolValueOf = Boolean.valueOf(zIsAuthRequired);
+            if (zIsAuthRequired) {
+                boolValueOf = null;
             }
-            if (valueOf2 != null) {
-                ControlsUtil$Companion$$ExternalSyntheticOutline0.m("isAuthRequired=", valueOf2.booleanValue(), "|", sb);
+            if (boolValueOf != null) {
+                ControlsUtil$Companion$$ExternalSyntheticOutline0.m("isAuthRequired=", boolValueOf.booleanValue(), "|", sb);
             }
             getTemplateInformation(control.getControlTemplate(), sb);
             if (control.getCustomControl().getActionIcon() != null) {
                 sb.append("Action|");
             }
             boolean allowBasicActionWhenLocked = control.getCustomControl().getAllowBasicActionWhenLocked();
-            Boolean valueOf3 = Boolean.valueOf(allowBasicActionWhenLocked);
+            Boolean boolValueOf2 = Boolean.valueOf(allowBasicActionWhenLocked);
             if (!allowBasicActionWhenLocked) {
-                valueOf3 = null;
+                boolValueOf2 = null;
             }
-            if (valueOf3 != null) {
+            if (boolValueOf2 != null) {
                 sb.append("AllowLocked|");
             }
             String customIconAnimationJson = control.getCustomControl().getCustomIconAnimationJson();
@@ -122,28 +121,28 @@ public final class ControlsUtil {
             if (customIconAnimationJson != null) {
                 sb.append("JSON");
                 int customIconAnimationStartFrame = control.getCustomControl().getCustomIconAnimationStartFrame();
-                Integer valueOf4 = Integer.valueOf(customIconAnimationStartFrame);
+                Integer numValueOf2 = Integer.valueOf(customIconAnimationStartFrame);
                 if (customIconAnimationStartFrame <= -1) {
-                    valueOf4 = null;
+                    numValueOf2 = null;
                 }
-                if (valueOf4 != null) {
-                    sb.append(":SF[" + valueOf4.intValue() + "]");
+                if (numValueOf2 != null) {
+                    sb.append(":SF[" + numValueOf2.intValue() + "]");
                 }
                 int customIconAnimationEndFrame = control.getCustomControl().getCustomIconAnimationEndFrame();
-                Integer valueOf5 = Integer.valueOf(customIconAnimationEndFrame);
+                Integer numValueOf3 = Integer.valueOf(customIconAnimationEndFrame);
                 if (customIconAnimationEndFrame <= -1) {
-                    valueOf5 = null;
+                    numValueOf3 = null;
                 }
-                if (valueOf5 != null) {
-                    sb.append(":EF[" + valueOf5.intValue() + "]");
+                if (numValueOf3 != null) {
+                    sb.append(":EF[" + numValueOf3.intValue() + "]");
                 }
                 int customIconAnimationRepeatCount = control.getCustomControl().getCustomIconAnimationRepeatCount();
-                Integer valueOf6 = Integer.valueOf(customIconAnimationRepeatCount);
+                Integer numValueOf4 = Integer.valueOf(customIconAnimationRepeatCount);
                 if (customIconAnimationRepeatCount <= -1) {
-                    valueOf6 = null;
+                    numValueOf4 = null;
                 }
-                if (valueOf6 != null) {
-                    sb.append(":RC[" + valueOf6.intValue() + "]");
+                if (numValueOf4 != null) {
+                    sb.append(":RC[" + numValueOf4.intValue() + "]");
                 }
                 sb.append("|");
             }
@@ -151,49 +150,49 @@ public final class ControlsUtil {
                 sb.append("CustomStatusIcon|");
             }
             int layoutType = control.getCustomControl().getLayoutType();
-            Integer valueOf7 = Integer.valueOf(layoutType);
+            Integer numValueOf5 = Integer.valueOf(layoutType);
             if (layoutType != 1) {
-                valueOf7 = null;
+                numValueOf5 = null;
             }
-            if (valueOf7 != null) {
-                sb.append("LayoutType:" + valueOf7.intValue() + "|");
+            if (numValueOf5 != null) {
+                sb.append("LayoutType:" + numValueOf5.intValue() + "|");
             }
             int order = control.getCustomControl().getOrder();
-            Integer valueOf8 = Integer.valueOf(order);
+            Integer numValueOf6 = Integer.valueOf(order);
             if (order <= 0) {
-                valueOf8 = null;
+                numValueOf6 = null;
             }
-            if (valueOf8 != null) {
-                sb.append("Order:" + valueOf8.intValue() + "|");
+            if (numValueOf6 != null) {
+                sb.append("Order:" + numValueOf6.intValue() + "|");
             }
             boolean useCustomIconWithoutPadding = control.getCustomControl().getUseCustomIconWithoutPadding();
-            Boolean valueOf9 = Boolean.valueOf(useCustomIconWithoutPadding);
+            Boolean boolValueOf3 = Boolean.valueOf(useCustomIconWithoutPadding);
             if (!useCustomIconWithoutPadding) {
-                valueOf9 = null;
+                boolValueOf3 = null;
             }
-            if (valueOf9 != null) {
+            if (boolValueOf3 != null) {
                 sb.append("NoPadding|");
             }
             boolean useCustomIconWithoutShadowBg = control.getCustomControl().getUseCustomIconWithoutShadowBg();
-            Boolean valueOf10 = Boolean.valueOf(useCustomIconWithoutShadowBg);
+            Boolean boolValueOf4 = Boolean.valueOf(useCustomIconWithoutShadowBg);
             if (!useCustomIconWithoutShadowBg) {
-                valueOf10 = null;
+                boolValueOf4 = null;
             }
-            if (valueOf10 != null) {
+            if (boolValueOf4 != null) {
                 sb.append("NoShadowBg|");
             }
             boolean useFullScreenDetailDialog = control.getCustomControl().getUseFullScreenDetailDialog();
-            Boolean valueOf11 = Boolean.valueOf(useFullScreenDetailDialog);
+            Boolean boolValueOf5 = Boolean.valueOf(useFullScreenDetailDialog);
             if (!useFullScreenDetailDialog) {
-                valueOf11 = null;
+                boolValueOf5 = null;
             }
-            if (valueOf11 != null) {
+            if (boolValueOf5 != null) {
                 sb.append("FullScreen|");
             }
             int statusIconType = control.getCustomControl().getStatusIconType();
-            Integer valueOf12 = statusIconType != 0 ? Integer.valueOf(statusIconType) : null;
-            if (valueOf12 != null) {
-                sb.append("StatusIconType:" + valueOf12.intValue() + "|");
+            Integer numValueOf7 = statusIconType != 0 ? Integer.valueOf(statusIconType) : null;
+            if (numValueOf7 != null) {
+                sb.append("StatusIconType:" + numValueOf7.intValue() + "|");
             }
             if (control.getCustomControl().getStatusTextColor() != null) {
                 sb.append("StatusTextColor|");
@@ -250,10 +249,10 @@ public final class ControlsUtil {
             int currentMode = temperatureControlTemplate.getCurrentMode();
             int currentActiveMode = temperatureControlTemplate.getCurrentActiveMode();
             int modes = temperatureControlTemplate.getModes();
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(currentMode, currentActiveMode, "[TEMPERATURE],mode=", ",activeMode=", ",modes=");
-            m.append(modes);
-            m.append("|");
-            sb.append(m.toString());
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(currentMode, currentActiveMode, "[TEMPERATURE],mode=", ",activeMode=", ",modes=");
+            sbM.append(modes);
+            sbM.append("|");
+            sb.append(sbM.toString());
             Companion companion2 = ControlsUtil.Companion;
             ControlTemplate template = temperatureControlTemplate.getTemplate();
             companion2.getClass();
@@ -270,12 +269,12 @@ public final class ControlsUtil {
 
         public static void updateFontSize(TextView textView, int i, float f) {
             float f2 = textView.getResources().getConfiguration().fontScale;
-            Float valueOf = Float.valueOf(f2);
+            Float fValueOf = Float.valueOf(f2);
             if (f2 > f) {
-                valueOf = null;
+                fValueOf = null;
             }
-            if (valueOf != null) {
-                f = valueOf.floatValue();
+            if (fValueOf != null) {
+                f = fValueOf.floatValue();
             }
             textView.setTextSize(1, (textView.getResources().getDimensionPixelSize(i) / textView.getResources().getDisplayMetrics().scaledDensity) * f);
         }
@@ -294,31 +293,31 @@ public final class ControlsUtil {
     }
 
     public static List getListOfServices(Context context, List list) {
-        Object obj;
+        Object next;
         final Collator collator = Collator.getInstance(context.getResources().getConfiguration().getLocales().get(0));
         collator.getClass();
-        List sortedWith = CollectionsKt___CollectionsKt.sortedWith(list, new Comparator() { // from class: com.android.systemui.controls.util.ControlsUtil$getListOfServices$getLocaleComparator$$inlined$compareBy$1
+        List listSortedWith = CollectionsKt___CollectionsKt.sortedWith(list, new Comparator() { // from class: com.android.systemui.controls.util.ControlsUtil$getListOfServices$getLocaleComparator$$inlined$compareBy$1
             @Override // java.util.Comparator
-            public final int compare(Object obj2, Object obj3) {
-                return collator.compare(((ControlsServiceInfo) obj2).loadLabel(), ((ControlsServiceInfo) obj3).loadLabel());
+            public final int compare(Object obj, Object obj2) {
+                return collator.compare(((ControlsServiceInfo) obj).loadLabel(), ((ControlsServiceInfo) obj2).loadLabel());
             }
         });
-        Iterator it = sortedWith.iterator();
+        Iterator it = listSortedWith.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if ("com.samsung.android.oneconnect".equals(((ControlsServiceInfo) obj).componentName.getPackageName())) {
+            next = it.next();
+            if ("com.samsung.android.oneconnect".equals(((ControlsServiceInfo) next).componentName.getPackageName())) {
                 break;
             }
         }
-        ControlsServiceInfo controlsServiceInfo = (ControlsServiceInfo) obj;
+        ControlsServiceInfo controlsServiceInfo = (ControlsServiceInfo) next;
         if (controlsServiceInfo == null) {
-            return sortedWith;
+            return listSortedWith;
         }
-        ArrayList arrayList = new ArrayList(sortedWith);
+        ArrayList arrayList = new ArrayList(listSortedWith);
         arrayList.remove(controlsServiceInfo);
         arrayList.add(0, controlsServiceInfo);
         return arrayList;
@@ -328,7 +327,7 @@ public final class ControlsUtil {
         return context.getResources().getConfiguration().screenWidthDp == 320;
     }
 
-    public static LottieAnimationView updateLottieIcon(Context context, ImageView imageView, View view, LottieAnimationView lottieAnimationView, String str, String str2, int i, int i2, int i3) {
+    public static LottieAnimationView updateLottieIcon(Context context, ImageView imageView, View view, LottieAnimationView lottieAnimationView, String str, String str2, int i, int i2, int i3) throws Resources.NotFoundException {
         if (TextUtils.isEmpty(str) || TextUtils.isEmpty(str2)) {
             return lottieAnimationView;
         }

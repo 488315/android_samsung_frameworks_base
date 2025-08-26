@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -91,7 +92,7 @@ class FastScroller {
     private static final long TAP_TIMEOUT = ViewConfiguration.getTapTimeout();
     private static Property<View, Integer> LEFT = new IntProperty<View>("left") { // from class: android.widget.FastScroller.3
         @Override // android.util.IntProperty
-        public void setValue(View view, int i) {
+        public void setValue(View view, int i) throws Resources.NotFoundException {
             view.setLeft(i);
         }
 
@@ -102,7 +103,7 @@ class FastScroller {
     };
     private static Property<View, Integer> TOP = new IntProperty<View>(GenerateXML.TOP) { // from class: android.widget.FastScroller.4
         @Override // android.util.IntProperty
-        public void setValue(View view, int i) {
+        public void setValue(View view, int i) throws Resources.NotFoundException {
             view.setTop(i);
         }
 
@@ -113,7 +114,7 @@ class FastScroller {
     };
     private static Property<View, Integer> RIGHT = new IntProperty<View>("right") { // from class: android.widget.FastScroller.5
         @Override // android.util.IntProperty
-        public void setValue(View view, int i) {
+        public void setValue(View view, int i) throws Resources.NotFoundException {
             view.setRight(i);
         }
 
@@ -124,7 +125,7 @@ class FastScroller {
     };
     private static Property<View, Integer> BOTTOM = new IntProperty<View>(GenerateXML.BOTTOM) { // from class: android.widget.FastScroller.6
         @Override // android.util.IntProperty
-        public void setValue(View view, int i) {
+        public void setValue(View view, int i) throws Resources.NotFoundException {
             view.setBottom(i);
         }
 
@@ -172,10 +173,10 @@ class FastScroller {
         View view = new View(context);
         this.mPreviewImage = view;
         view.setAlpha(0.0f);
-        TextView createPreviewTextView = createPreviewTextView(context);
-        this.mPrimaryText = createPreviewTextView;
-        TextView createPreviewTextView2 = createPreviewTextView(context);
-        this.mSecondaryText = createPreviewTextView2;
+        TextView textViewCreatePreviewTextView = createPreviewTextView(context);
+        this.mPrimaryText = textViewCreatePreviewTextView;
+        TextView textViewCreatePreviewTextView2 = createPreviewTextView(context);
+        this.mSecondaryText = textViewCreatePreviewTextView2;
         this.mMinimumTouchTarget = absListView.getResources().getDimensionPixelSize(R.dimen.fast_scroller_minimum_touch_target);
         setStyle(i);
         ViewGroupOverlay overlay = absListView.getOverlay();
@@ -183,26 +184,26 @@ class FastScroller {
         overlay.add(imageView);
         overlay.add(imageView2);
         overlay.add(view);
-        overlay.add(createPreviewTextView);
-        overlay.add(createPreviewTextView2);
+        overlay.add(textViewCreatePreviewTextView);
+        overlay.add(textViewCreatePreviewTextView2);
         getSectionsFromIndexer();
         updateLongList(this.mOldChildCount, this.mOldItemCount);
         setScrollbarPosition(absListView.getVerticalScrollbarPosition());
         postAutoHide();
     }
 
-    private void updateAppearance() {
+    private void updateAppearance() throws Resources.NotFoundException {
         this.mTrackImage.lambda$setImageURIAsync$0(this.mTrackDrawable);
         Drawable drawable = this.mTrackDrawable;
-        int max = drawable != null ? Math.max(0, drawable.getIntrinsicWidth()) : 0;
+        int iMax = drawable != null ? Math.max(0, drawable.getIntrinsicWidth()) : 0;
         this.mThumbImage.lambda$setImageURIAsync$0(this.mThumbDrawable);
         this.mThumbImage.setMinimumWidth(this.mThumbMinWidth);
         this.mThumbImage.setMinimumHeight(this.mThumbMinHeight);
         Drawable drawable2 = this.mThumbDrawable;
         if (drawable2 != null) {
-            max = Math.max(max, drawable2.getIntrinsicWidth());
+            iMax = Math.max(iMax, drawable2.getIntrinsicWidth());
         }
-        this.mWidth = Math.max(max, this.mThumbMinWidth);
+        this.mWidth = Math.max(iMax, this.mThumbMinWidth);
         int i = this.mTextAppearance;
         if (i != 0) {
             this.mPrimaryText.setTextAppearance(i);
@@ -227,56 +228,56 @@ class FastScroller {
     }
 
     public void setStyle(int i) {
-        TypedArray obtainStyledAttributes = this.mList.getContext().obtainStyledAttributes(null, R.styleable.FastScroll, 16843767, i);
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        TypedArray typedArrayObtainStyledAttributes = this.mList.getContext().obtainStyledAttributes(null, R.styleable.FastScroll, 16843767, i);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i2 = 0; i2 < indexCount; i2++) {
-            int index = obtainStyledAttributes.getIndex(i2);
+            int index = typedArrayObtainStyledAttributes.getIndex(i2);
             switch (index) {
                 case 0:
-                    this.mTextAppearance = obtainStyledAttributes.getResourceId(index, 0);
+                    this.mTextAppearance = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                     break;
                 case 1:
-                    this.mTextSize = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mTextSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 2:
-                    this.mTextColor = obtainStyledAttributes.getColorStateList(index);
+                    this.mTextColor = typedArrayObtainStyledAttributes.getColorStateList(index);
                     break;
                 case 3:
-                    this.mPreviewPadding = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mPreviewPadding = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 4:
-                    this.mPreviewMinWidth = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mPreviewMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 5:
-                    this.mPreviewMinHeight = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mPreviewMinHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 6:
-                    this.mThumbPosition = obtainStyledAttributes.getInt(index, 0);
+                    this.mThumbPosition = typedArrayObtainStyledAttributes.getInt(index, 0);
                     break;
                 case 7:
-                    this.mPreviewResId[0] = obtainStyledAttributes.getResourceId(index, 0);
+                    this.mPreviewResId[0] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                     break;
                 case 8:
-                    this.mPreviewResId[1] = obtainStyledAttributes.getResourceId(index, 0);
+                    this.mPreviewResId[1] = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                     break;
                 case 9:
-                    this.mOverlayPosition = obtainStyledAttributes.getInt(index, 0);
+                    this.mOverlayPosition = typedArrayObtainStyledAttributes.getInt(index, 0);
                     break;
                 case 10:
-                    this.mThumbDrawable = obtainStyledAttributes.getDrawable(index);
+                    this.mThumbDrawable = typedArrayObtainStyledAttributes.getDrawable(index);
                     break;
                 case 11:
-                    this.mThumbMinHeight = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mThumbMinHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 12:
-                    this.mThumbMinWidth = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mThumbMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     break;
                 case 13:
-                    this.mTrackDrawable = obtainStyledAttributes.getDrawable(index);
+                    this.mTrackDrawable = typedArrayObtainStyledAttributes.getDrawable(index);
                     break;
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         updateAppearance();
     }
 
@@ -352,12 +353,12 @@ class FastScroller {
             ?? r0 = i == 1 ? 0 : 1;
             this.mLayoutFromRight = r0;
             this.mPreviewImage.setBackgroundResource(this.mPreviewResId[r0]);
-            int max = Math.max(0, (this.mPreviewMinWidth - this.mPreviewImage.getPaddingLeft()) - this.mPreviewImage.getPaddingRight());
-            this.mPrimaryText.setMinimumWidth(max);
-            this.mSecondaryText.setMinimumWidth(max);
-            int max2 = Math.max(0, (this.mPreviewMinHeight - this.mPreviewImage.getPaddingTop()) - this.mPreviewImage.getPaddingBottom());
-            this.mPrimaryText.setMinimumHeight(max2);
-            this.mSecondaryText.setMinimumHeight(max2);
+            int iMax = Math.max(0, (this.mPreviewMinWidth - this.mPreviewImage.getPaddingLeft()) - this.mPreviewImage.getPaddingRight());
+            this.mPrimaryText.setMinimumWidth(iMax);
+            this.mSecondaryText.setMinimumWidth(iMax);
+            int iMax2 = Math.max(0, (this.mPreviewMinHeight - this.mPreviewImage.getPaddingTop()) - this.mPreviewImage.getPaddingBottom());
+            this.mPrimaryText.setMinimumHeight(iMax2);
+            this.mSecondaryText.setMinimumHeight(iMax2);
             updateLayout();
         }
     }
@@ -426,7 +427,7 @@ class FastScroller {
         this.mUpdatingLayout = false;
     }
 
-    private void applyLayout(View view, Rect rect) {
+    private void applyLayout(View view, Rect rect) throws Resources.NotFoundException {
         view.layout(rect.left, rect.top, rect.right, rect.bottom);
         view.setPivotX(this.mLayoutFromRight ? rect.right - rect.left : 0.0f);
     }
@@ -449,7 +450,7 @@ class FastScroller {
         int i2;
         int i3;
         int right;
-        int i4;
+        int left;
         if (rect == null) {
             i3 = 0;
             i = 0;
@@ -460,26 +461,26 @@ class FastScroller {
             i3 = rect.right;
         }
         Rect rect3 = this.mContainerRect;
-        int width = rect3.width();
+        int iWidth = rect3.width();
         if (view2 != null) {
             if (this.mLayoutFromRight) {
-                width = view2.getLeft();
+                iWidth = view2.getLeft();
             } else {
-                width -= view2.getRight();
+                iWidth -= view2.getRight();
             }
         }
-        int max = Math.max(0, rect3.height());
-        int max2 = Math.max(0, (width - i) - i3);
-        view.measure(View.MeasureSpec.makeMeasureSpec(max2, Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(max, 0));
-        int min = Math.min(max2, view.getMeasuredWidth());
+        int iMax = Math.max(0, rect3.height());
+        int iMax2 = Math.max(0, (iWidth - i) - i3);
+        view.measure(View.MeasureSpec.makeMeasureSpec(iMax2, Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(iMax, 0));
+        int iMin = Math.min(iMax2, view.getMeasuredWidth());
         if (this.mLayoutFromRight) {
-            i4 = (view2 == null ? rect3.right : view2.getLeft()) - i3;
-            right = i4 - min;
+            left = (view2 == null ? rect3.right : view2.getLeft()) - i3;
+            right = left - iMin;
         } else {
             right = (view2 == null ? rect3.left : view2.getRight()) + i;
-            i4 = right + min;
+            left = right + iMin;
         }
-        rect2.set(right, i2, i4, view.getMeasuredHeight() + i2);
+        rect2.set(right, i2, left, view.getMeasuredHeight() + i2);
     }
 
     private void measureFloating(View view, Rect rect, Rect rect2) {
@@ -496,13 +497,13 @@ class FastScroller {
             i3 = rect.right;
         }
         Rect rect3 = this.mContainerRect;
-        int width = rect3.width();
-        view.measure(View.MeasureSpec.makeMeasureSpec(Math.max(0, (width - i) - i3), Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(Math.max(0, rect3.height()), 0));
-        int height = rect3.height();
+        int iWidth = rect3.width();
+        view.measure(View.MeasureSpec.makeMeasureSpec(Math.max(0, (iWidth - i) - i3), Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(Math.max(0, rect3.height()), 0));
+        int iHeight = rect3.height();
         int measuredWidth = view.getMeasuredWidth();
-        int i4 = (height / 10) + i2 + rect3.top;
+        int i4 = (iHeight / 10) + i2 + rect3.top;
         int measuredHeight = view.getMeasuredHeight() + i4;
-        int i5 = ((width - measuredWidth) / 2) + rect3.left;
+        int i5 = ((iWidth - measuredWidth) / 2) + rect3.left;
         rect2.set(i5, i4, measuredWidth + i5, measuredHeight);
     }
 
@@ -531,13 +532,13 @@ class FastScroller {
         }
     }
 
-    private void layoutThumb() {
+    private void layoutThumb() throws Resources.NotFoundException {
         Rect rect = this.mTempBounds;
         measureViewToSide(this.mThumbImage, null, null, rect);
         applyLayout(this.mThumbImage, rect);
     }
 
-    private void layoutTrack() {
+    private void layoutTrack() throws Resources.NotFoundException {
         int i;
         int i2;
         ImageView imageView = this.mTrackImage;
@@ -705,28 +706,124 @@ class FastScroller {
         this.mListAdapter = null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0066  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0062  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0066  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x0073  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x0086  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0097  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void scrollTo(float r14) {
-        /*
-            Method dump skipped, instructions count: 250
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.FastScroller.scrollTo(float):void");
+    private void scrollTo(float f) throws Resources.NotFoundException {
+        int i;
+        int i2;
+        float f2;
+        float f3;
+        AbsListView absListView;
+        this.mScrollCompleted = false;
+        int count = this.mList.getCount();
+        Object[] objArr = this.mSections;
+        int length = objArr == null ? 0 : objArr.length;
+        if (objArr != null && length > 1) {
+            float f4 = length;
+            int i3 = length - 1;
+            int iConstrain = MathUtils.constrain((int) (f * f4), 0, i3);
+            int positionForSection = this.mSectionIndexer.getPositionForSection(iConstrain);
+            int i4 = iConstrain + 1;
+            int positionForSection2 = iConstrain < i3 ? this.mSectionIndexer.getPositionForSection(i4) : count;
+            int i5 = iConstrain;
+            if (positionForSection2 == positionForSection) {
+                int positionForSection3 = positionForSection;
+                do {
+                    if (i5 <= 0) {
+                        i5 = iConstrain;
+                    } else {
+                        i5--;
+                        positionForSection3 = this.mSectionIndexer.getPositionForSection(i5);
+                        if (positionForSection3 != positionForSection) {
+                        }
+                    }
+                    positionForSection = positionForSection3;
+                    i = i5;
+                    break;
+                } while (i5 != 0);
+                i5 = iConstrain;
+                positionForSection = positionForSection3;
+                i = 0;
+                i2 = iConstrain + 2;
+                while (i2 < length && this.mSectionIndexer.getPositionForSection(i2) == positionForSection2) {
+                    i2++;
+                    i4++;
+                }
+                f2 = i5 / f4;
+                f3 = i4 / f4;
+                float f5 = count != 0 ? Float.MAX_VALUE : 0.125f / count;
+                if (i5 == iConstrain || f - f2 >= f5) {
+                    positionForSection += (int) (((positionForSection2 - positionForSection) * (f - f2)) / (f3 - f2));
+                }
+                int iConstrain2 = MathUtils.constrain(positionForSection, 0, count - 1);
+                absListView = this.mList;
+                if (!(absListView instanceof ExpandableListView)) {
+                    ExpandableListView expandableListView = (ExpandableListView) absListView;
+                    expandableListView.setSelectionFromTop(expandableListView.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(iConstrain2 + this.mHeaderCount)), 0);
+                } else if (absListView instanceof ListView) {
+                    ((ListView) absListView).setSelectionFromTop(iConstrain2 + this.mHeaderCount, 0);
+                } else {
+                    absListView.setSelection(iConstrain2 + this.mHeaderCount);
+                }
+            } else {
+                i = i5;
+                i2 = iConstrain + 2;
+                while (i2 < length) {
+                    i2++;
+                    i4++;
+                }
+                f2 = i5 / f4;
+                f3 = i4 / f4;
+                if (count != 0) {
+                }
+                if (i5 == iConstrain) {
+                    positionForSection += (int) (((positionForSection2 - positionForSection) * (f - f2)) / (f3 - f2));
+                    int iConstrain22 = MathUtils.constrain(positionForSection, 0, count - 1);
+                    absListView = this.mList;
+                    if (!(absListView instanceof ExpandableListView)) {
+                    }
+                }
+            }
+        } else {
+            int iConstrain3 = MathUtils.constrain((int) (f * count), 0, count - 1);
+            AbsListView absListView2 = this.mList;
+            if (absListView2 instanceof ExpandableListView) {
+                ExpandableListView expandableListView2 = (ExpandableListView) absListView2;
+                expandableListView2.setSelectionFromTop(expandableListView2.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(iConstrain3 + this.mHeaderCount)), 0);
+            } else if (absListView2 instanceof ListView) {
+                ((ListView) absListView2).setSelectionFromTop(iConstrain3 + this.mHeaderCount, 0);
+            } else {
+                absListView2.setSelection(iConstrain3 + this.mHeaderCount);
+            }
+            i = -1;
+        }
+        if (this.mCurrentSection != i) {
+            this.mCurrentSection = i;
+            boolean zTransitionPreviewLayout = transitionPreviewLayout(i);
+            boolean z = this.mShowingPreview;
+            if (!z && zTransitionPreviewLayout) {
+                transitionToDragging();
+            } else {
+                if (!z || zTransitionPreviewLayout) {
+                    return;
+                }
+                transitionToVisible();
+            }
+        }
     }
 
-    private boolean transitionPreviewLayout(int i) {
+    private boolean transitionPreviewLayout(int i) throws Resources.NotFoundException {
         TextView textView;
         TextView textView2;
         Object obj;
         Object[] objArr = this.mSections;
-        String obj2 = (objArr == null || i < 0 || i >= objArr.length || (obj = objArr[i]) == null) ? null : obj.toString();
+        String string = (objArr == null || i < 0 || i >= objArr.length || (obj = objArr[i]) == null) ? null : obj.toString();
         Rect rect = this.mTempBounds;
         View view = this.mPreviewImage;
         if (this.mShowingPrimary) {
@@ -736,7 +833,7 @@ class FastScroller {
             textView = this.mSecondaryText;
             textView2 = this.mPrimaryText;
         }
-        textView2.lambda$setTextAsync$0(obj2);
+        textView2.lambda$setTextAsync$0(string);
         measurePreview(textView2, rect);
         applyLayout(textView2, rect);
         AnimatorSet animatorSet = this.mPreviewAnimation;
@@ -750,26 +847,26 @@ class FastScroller {
         rect.top -= view.getPaddingTop();
         rect.right += view.getPaddingRight();
         rect.bottom += view.getPaddingBottom();
-        Animator animateBounds = animateBounds(view, rect);
-        animateBounds.setDuration(100L);
+        Animator animatorAnimateBounds = animateBounds(view, rect);
+        animatorAnimateBounds.setDuration(100L);
         AnimatorSet animatorSet2 = new AnimatorSet();
         this.mPreviewAnimation = animatorSet2;
-        AnimatorSet.Builder with = animatorSet2.play(duration2).with(duration);
-        with.with(animateBounds);
+        AnimatorSet.Builder builderWith = animatorSet2.play(duration2).with(duration);
+        builderWith.with(animatorAnimateBounds);
         int width = (view.getWidth() - view.getPaddingLeft()) - view.getPaddingRight();
         int width2 = textView2.getWidth();
         if (width2 > width) {
             textView2.setScaleX(width / width2);
-            with.with(animateScaleX(textView2, 1.0f).setDuration(100L));
+            builderWith.with(animateScaleX(textView2, 1.0f).setDuration(100L));
         } else {
             textView2.setScaleX(1.0f);
         }
         int width3 = textView.getWidth();
         if (width3 > width2) {
-            with.with(animateScaleX(textView, width2 / width3).setDuration(100L));
+            builderWith.with(animateScaleX(textView, width2 / width3).setDuration(100L));
         }
         this.mPreviewAnimation.start();
-        return !TextUtils.isEmpty(obj2);
+        return !TextUtils.isEmpty(string);
     }
 
     private void setThumbPos(float f) {
@@ -782,10 +879,10 @@ class FastScroller {
             f2 = i != 2 ? 0.0f : f2 - height;
         }
         Rect rect = this.mContainerRect;
-        float constrain = MathUtils.constrain(f2, rect.top + height, rect.bottom - height) - height;
-        view.setTranslationY(constrain);
-        this.mPrimaryText.setTranslationY(constrain);
-        this.mSecondaryText.setTranslationY(constrain);
+        float fConstrain = MathUtils.constrain(f2, rect.top + height, rect.bottom - height) - height;
+        view.setTranslationY(fConstrain);
+        this.mPrimaryText.setTranslationY(fConstrain);
+        this.mSecondaryText.setTranslationY(fConstrain);
     }
 
     private float getPosFromMotionEvent(float f) {
@@ -798,7 +895,7 @@ class FastScroller {
 
     private float getPosFromItemCount(int i, int i2, int i3) {
         Object[] objArr;
-        int i4;
+        int positionForSection;
         int height;
         int height2;
         int top;
@@ -815,25 +912,25 @@ class FastScroller {
             }
             return i / (i3 - i2);
         }
-        int i5 = this.mHeaderCount;
-        int i6 = i - i5;
-        if (i6 < 0) {
+        int i4 = this.mHeaderCount;
+        int i5 = i - i4;
+        if (i5 < 0) {
             return 0.0f;
         }
-        int i7 = i3 - i5;
+        int i6 = i3 - i4;
         View childAt = this.mList.getChildAt(0);
         float paddingTop = (childAt == null || childAt.getHeight() == 0) ? 0.0f : (this.mList.getPaddingTop() - childAt.getTop()) / childAt.getHeight();
-        int sectionForPosition = sectionIndexer.getSectionForPosition(i6);
-        int positionForSection = sectionIndexer.getPositionForSection(sectionForPosition);
+        int sectionForPosition = sectionIndexer.getSectionForPosition(i5);
+        int positionForSection2 = sectionIndexer.getPositionForSection(sectionForPosition);
         int length = this.mSections.length;
         if (sectionForPosition < length - 1) {
-            int i8 = sectionForPosition + 1;
-            i4 = (i8 < length ? sectionIndexer.getPositionForSection(i8) : i7 - 1) - positionForSection;
+            int i7 = sectionForPosition + 1;
+            positionForSection = (i7 < length ? sectionIndexer.getPositionForSection(i7) : i6 - 1) - positionForSection2;
         } else {
-            i4 = i7 - positionForSection;
+            positionForSection = i6 - positionForSection2;
         }
-        float f = (sectionForPosition + (i4 != 0 ? ((i6 + paddingTop) - positionForSection) / i4 : 0.0f)) / length;
-        if (i6 <= 0 || i6 + i2 != i7) {
+        float f = (sectionForPosition + (positionForSection != 0 ? ((i5 + paddingTop) - positionForSection2) / positionForSection : 0.0f)) / length;
+        if (i5 <= 0 || i5 + i2 != i6) {
             return f;
         }
         View childAt2 = this.mList.getChildAt(i2 - 1);
@@ -847,14 +944,14 @@ class FastScroller {
             height2 = this.mList.getHeight();
             top = childAt2.getTop();
         }
-        int i9 = height2 - top;
-        return (i9 <= 0 || height <= 0) ? f : f + ((1.0f - f) * (i9 / height));
+        int i8 = height2 - top;
+        return (i8 <= 0 || height <= 0) ? f : f + ((1.0f - f) * (i8 / height));
     }
 
-    private void cancelFling() {
-        MotionEvent obtain = MotionEvent.obtain(0L, 0L, 3, 0.0f, 0.0f, 0);
-        this.mList.onTouchEvent(obtain);
-        obtain.recycle();
+    private void cancelFling() throws Resources.NotFoundException {
+        MotionEvent motionEventObtain = MotionEvent.obtain(0L, 0L, 3, 0.0f, 0.0f, 0);
+        this.mList.onTouchEvent(motionEventObtain);
+        motionEventObtain.recycle();
     }
 
     private void cancelPendingDrag() {
@@ -865,7 +962,7 @@ class FastScroller {
         this.mPendingDrag = SystemClock.uptimeMillis() + TAP_TIMEOUT;
     }
 
-    private void beginDrag() {
+    private void beginDrag() throws Resources.NotFoundException {
         this.mPendingDrag = -1L;
         setState(2);
         if (this.mListAdapter == null && this.mList != null) {
@@ -879,72 +976,39 @@ class FastScroller {
         cancelFling();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0015, code lost:
-    
-        if (r0 != 3) goto L29;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x004b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onInterceptTouchEvent(android.view.MotionEvent r7) {
-        /*
-            r6 = this;
-            boolean r0 = r6.isEnabled()
-            r1 = 0
-            if (r0 != 0) goto L8
-            return r1
-        L8:
-            int r0 = r7.getActionMasked()
-            r2 = 1
-            if (r0 == 0) goto L4f
-            if (r0 == r2) goto L4b
-            r2 = 2
-            if (r0 == r2) goto L18
-            r7 = 3
-            if (r0 == r7) goto L4b
-            goto L6f
-        L18:
-            float r0 = r7.getX()
-            float r2 = r7.getY()
-            boolean r0 = r6.isPointInside(r0, r2)
-            if (r0 != 0) goto L2a
-            r6.cancelPendingDrag()
-            goto L6f
-        L2a:
-            long r2 = r6.mPendingDrag
-            r4 = 0
-            int r0 = (r2 > r4 ? 1 : (r2 == r4 ? 0 : -1))
-            if (r0 < 0) goto L6f
-            long r4 = android.os.SystemClock.uptimeMillis()
-            int r0 = (r2 > r4 ? 1 : (r2 == r4 ? 0 : -1))
-            if (r0 > 0) goto L6f
-            r6.beginDrag()
-            float r0 = r6.mInitialTouchY
-            float r0 = r6.getPosFromMotionEvent(r0)
-            r6.scrollTo(r0)
-            boolean r6 = r6.onTouchEvent(r7)
-            return r6
-        L4b:
-            r6.cancelPendingDrag()
-            goto L6f
-        L4f:
-            float r0 = r7.getX()
-            float r3 = r7.getY()
-            boolean r0 = r6.isPointInside(r0, r3)
-            if (r0 == 0) goto L6f
-            android.widget.AbsListView r0 = r6.mList
-            boolean r0 = r0.isInScrollingContainer()
-            if (r0 != 0) goto L66
-            return r2
-        L66:
-            float r7 = r7.getY()
-            r6.mInitialTouchY = r7
-            r6.startPendingDrag()
-        L6f:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.FastScroller.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onInterceptTouchEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
+        if (!isEnabled()) {
+            return false;
+        }
+        int actionMasked = motionEvent.getActionMasked();
+        if (actionMasked != 0) {
+            if (actionMasked == 1) {
+                cancelPendingDrag();
+            } else if (actionMasked != 2) {
+                if (actionMasked == 3) {
+                }
+            } else if (!isPointInside(motionEvent.getX(), motionEvent.getY())) {
+                cancelPendingDrag();
+            } else {
+                long j = this.mPendingDrag;
+                if (j >= 0 && j <= SystemClock.uptimeMillis()) {
+                    beginDrag();
+                    scrollTo(getPosFromMotionEvent(this.mInitialTouchY));
+                    return onTouchEvent(motionEvent);
+                }
+            }
+        } else if (isPointInside(motionEvent.getX(), motionEvent.getY())) {
+            if (!this.mList.isInScrollingContainer()) {
+                return true;
+            }
+            this.mInitialTouchY = motionEvent.getY();
+            startPendingDrag();
+        }
+        return false;
     }
 
     public boolean onInterceptHoverEvent(MotionEvent motionEvent) {
@@ -966,7 +1030,7 @@ class FastScroller {
         return null;
     }
 
-    public boolean onTouchEvent(MotionEvent motionEvent) {
+    public boolean onTouchEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
         if (!isEnabled()) {
             return false;
         }
@@ -1038,13 +1102,13 @@ class FastScroller {
 
     private static Animator groupAnimatorOfFloat(Property<View, Float> property, float f, View... viewArr) {
         AnimatorSet animatorSet = new AnimatorSet();
-        AnimatorSet.Builder builder = null;
+        AnimatorSet.Builder builderPlay = null;
         for (int length = viewArr.length - 1; length >= 0; length--) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(viewArr[length], property, f);
-            if (builder == null) {
-                builder = animatorSet.play(ofFloat);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(viewArr[length], property, f);
+            if (builderPlay == null) {
+                builderPlay = animatorSet.play(objectAnimatorOfFloat);
             } else {
-                builder.with(ofFloat);
+                builderPlay.with(objectAnimatorOfFloat);
             }
         }
         return animatorSet;

@@ -5,19 +5,16 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AuthenticationWipeModel {
     public final int failedAttempts;
     public final int remainingAttempts;
     public final WipeTarget wipeTarget;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class WipeTarget {
         public final int messageIdForAlmostWipe;
         public final int messageIdForWipe;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ManagedProfile extends WipeTarget {
             public static final ManagedProfile INSTANCE = new ManagedProfile();
 
@@ -38,7 +35,6 @@ public final class AuthenticationWipeModel {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class User extends WipeTarget {
             public static final User INSTANCE = new User();
 
@@ -59,7 +55,6 @@ public final class AuthenticationWipeModel {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class WholeDevice extends WipeTarget {
             public static final WholeDevice INSTANCE = new WholeDevice();
 

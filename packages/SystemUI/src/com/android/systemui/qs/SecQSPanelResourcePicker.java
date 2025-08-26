@@ -8,7 +8,6 @@ import com.android.systemui.qs.panelresource.SecQSPanelResourceCommon;
 import com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker;
 import com.android.systemui.qs.panelresource.SecQSPanelResourcePickHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecQSPanelResourcePicker {
     public final SecQSPanelResourcePickHelper resourcePickHelper = new SecQSPanelResourcePickHelper();
@@ -71,6 +70,10 @@ public final class SecQSPanelResourcePicker {
         return this.resourcePickHelper.getTargetPicker().getPanelWidth(context);
     }
 
+    public final int getPopOverMargin(Context context) {
+        return this.resourcePickHelper.getTargetPicker().getPopOverMargin(context);
+    }
+
     public final int getQQSPanelSidePadding(Context context) {
         return this.resourcePickHelper.getTargetPicker().getQQSPanelSidePadding(context);
     }
@@ -87,7 +90,9 @@ public final class SecQSPanelResourcePicker {
     }
 
     public final int getQsTileMinNum(Context context) {
-        return this.resourcePickHelper.getTargetPicker().getQsTileMinNum(context);
+        this.resourcePickHelper.getTargetPicker().getClass();
+        SecQSPanelResourceCommon.Companion.getClass();
+        return SecQSPanelResourceCommon.Companion.m2904int(R.integer.quick_qs_tile_min_num, context);
     }
 
     public final int getQuickQSCommonBottomMargin(Context context) {

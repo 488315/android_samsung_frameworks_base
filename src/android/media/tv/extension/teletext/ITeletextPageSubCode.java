@@ -100,9 +100,9 @@ public interface ITeletextPageSubCode extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.teletext.ITeletextPageSubCode");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITeletextPageSubCode)) {
-                return (ITeletextPageSubCode) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.teletext.ITeletextPageSubCode");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITeletextPageSubCode)) {
+                return (ITeletextPageSubCode) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -146,60 +146,60 @@ public interface ITeletextPageSubCode extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle teletextPageNumber = getTeletextPageNumber(readString);
+                    Bundle teletextPageNumber = getTeletextPageNumber(string);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(teletextPageNumber, 1);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setTeleltextPageNumber(readString2, readInt);
+                    setTeleltextPageNumber(string2, i3);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle teletextPageSubCode = getTeletextPageSubCode(readString3);
+                    Bundle teletextPageSubCode = getTeletextPageSubCode(string3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(teletextPageSubCode, 1);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setTeletextPageSubCode(readString4, readInt2);
+                    setTeletextPageSubCode(string4, i4);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle teletextHasTopInfo = getTeletextHasTopInfo(readString5);
+                    Bundle teletextHasTopInfo = getTeletextHasTopInfo(string5);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(teletextHasTopInfo, 1);
                     return true;
                 case 6:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle teletextTopBlockList = getTeletextTopBlockList(readString6);
+                    Bundle teletextTopBlockList = getTeletextTopBlockList(string6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(teletextTopBlockList, 1);
                     return true;
                 case 7:
-                    String readString7 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle teletextTopGroupList = getTeletextTopGroupList(readString7, readInt3);
+                    Bundle teletextTopGroupList = getTeletextTopGroupList(string7, i5);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(teletextTopGroupList, 1);
                     return true;
                 case 8:
-                    String readString8 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle teletextTopPageList = getTeletextTopPageList(readString8, readInt4);
+                    Bundle teletextTopPageList = getTeletextTopPageList(string8, i6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(teletextTopPageList, 1);
                     return true;
@@ -226,131 +226,131 @@ public interface ITeletextPageSubCode extends IInterface {
 
             @Override // android.media.tv.extension.teletext.ITeletextPageSubCode
             public Bundle getTeletextPageNumber(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.teletext.ITeletextPageSubCode
             public void setTeleltextPageNumber(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.teletext.ITeletextPageSubCode
             public Bundle getTeletextPageSubCode(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.teletext.ITeletextPageSubCode
             public void setTeletextPageSubCode(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.teletext.ITeletextPageSubCode
             public Bundle getTeletextHasTopInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.teletext.ITeletextPageSubCode
             public Bundle getTeletextTopBlockList(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.teletext.ITeletextPageSubCode
             public Bundle getTeletextTopGroupList(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.teletext.ITeletextPageSubCode
             public Bundle getTeletextTopPageList(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.teletext.ITeletextPageSubCode");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

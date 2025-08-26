@@ -1,6 +1,7 @@
 package com.android.systemui.accessibility;
 
 import android.R;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.util.SparseArray;
 import android.view.accessibility.IMagnificationConnection;
@@ -9,7 +10,6 @@ import android.view.accessibility.IRemoteMagnificationAnimationCallback;
 import com.android.systemui.accessibility.MagnificationImpl;
 import com.android.systemui.accessibility.WindowMagnificationAnimationController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MagnificationConnectionImpl extends IMagnificationConnection.Stub {
     public IMagnificationConnectionCallback mConnectionCallback;
@@ -24,8 +24,8 @@ public class MagnificationConnectionImpl extends IMagnificationConnection.Stub {
     public final void disableWindowMagnification(final int i, final IRemoteMagnificationAnimationCallback iRemoteMagnificationAnimationCallback) {
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.accessibility.MagnificationConnectionImpl$$ExternalSyntheticLambda8
             @Override // java.lang.Runnable
-            public final void run() {
-                MagnificationConnectionImpl magnificationConnectionImpl = MagnificationConnectionImpl.this;
+            public final void run() throws Resources.NotFoundException {
+                MagnificationConnectionImpl magnificationConnectionImpl = this.f$0;
                 int i2 = i;
                 IRemoteMagnificationAnimationCallback iRemoteMagnificationAnimationCallback2 = iRemoteMagnificationAnimationCallback;
                 WindowMagnificationController windowMagnificationController = (WindowMagnificationController) ((MagnificationImpl) magnificationConnectionImpl.mMagnification).mWindowMagnificationControllerSupplier.get(i2);
@@ -67,7 +67,7 @@ public class MagnificationConnectionImpl extends IMagnificationConnection.Stub {
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.accessibility.MagnificationConnectionImpl$$ExternalSyntheticLambda10
             @Override // java.lang.Runnable
             public final void run() {
-                MagnificationConnectionImpl magnificationConnectionImpl = MagnificationConnectionImpl.this;
+                MagnificationConnectionImpl magnificationConnectionImpl = this.f$0;
                 int i2 = i;
                 float f6 = f;
                 float f7 = f2;
@@ -87,7 +87,7 @@ public class MagnificationConnectionImpl extends IMagnificationConnection.Stub {
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.accessibility.MagnificationConnectionImpl$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                MagnificationConnectionImpl magnificationConnectionImpl = MagnificationConnectionImpl.this;
+                MagnificationConnectionImpl magnificationConnectionImpl = this.f$0;
                 int i2 = i;
                 float f3 = f;
                 float f4 = f2;
@@ -103,7 +103,7 @@ public class MagnificationConnectionImpl extends IMagnificationConnection.Stub {
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.accessibility.MagnificationConnectionImpl$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
             public final void run() {
-                MagnificationConnectionImpl magnificationConnectionImpl = MagnificationConnectionImpl.this;
+                MagnificationConnectionImpl magnificationConnectionImpl = this.f$0;
                 int i2 = i;
                 float f3 = f;
                 float f4 = f2;
@@ -136,7 +136,7 @@ public class MagnificationConnectionImpl extends IMagnificationConnection.Stub {
             @Override // java.lang.Runnable
             public final void run() {
                 WindowMagnificationSettings windowMagnificationSettings;
-                MagnificationConnectionImpl magnificationConnectionImpl = MagnificationConnectionImpl.this;
+                MagnificationConnectionImpl magnificationConnectionImpl = this.f$0;
                 int i3 = i;
                 int i4 = i2;
                 float f2 = f;
@@ -181,8 +181,8 @@ public class MagnificationConnectionImpl extends IMagnificationConnection.Stub {
     public final void setScaleForWindowMagnification(final int i, final float f) {
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.accessibility.MagnificationConnectionImpl$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
-            public final void run() {
-                MagnificationConnectionImpl magnificationConnectionImpl = MagnificationConnectionImpl.this;
+            public final void run() throws Resources.NotFoundException {
+                MagnificationConnectionImpl magnificationConnectionImpl = this.f$0;
                 int i2 = i;
                 float f2 = f;
                 WindowMagnificationController windowMagnificationController = (WindowMagnificationController) ((MagnificationImpl) magnificationConnectionImpl.mMagnification).mWindowMagnificationControllerSupplier.get(i2);
@@ -200,7 +200,7 @@ public class MagnificationConnectionImpl extends IMagnificationConnection.Stub {
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.accessibility.MagnificationConnectionImpl$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
             public final void run() {
-                MagnificationConnectionImpl magnificationConnectionImpl = MagnificationConnectionImpl.this;
+                MagnificationConnectionImpl magnificationConnectionImpl = this.f$0;
                 int i3 = i;
                 int i4 = i2;
                 MagnificationImpl.AnonymousClass1 anonymousClass1 = ((MagnificationImpl) magnificationConnectionImpl.mMagnification).mHandler;

@@ -1049,19 +1049,20 @@ public class Element extends BaseObj {
         if (dataType == DataType.UNSIGNED_16 && dataKind != DataKind.PIXEL_DEPTH) {
             throw new RSIllegalArgumentException("Bad kind and type combo");
         }
-        int ordinal = dataKind.ordinal();
+        int iOrdinal = dataKind.ordinal();
         int i2 = 2;
-        if (ordinal != 3) {
-            if (ordinal == 4) {
-                i = 3;
-            } else if (ordinal == 5) {
-                i = 4;
-            } else if (ordinal != 6) {
+        if (iOrdinal == 3) {
+            i = i2;
+        } else if (iOrdinal == 4) {
+            i = 3;
+        } else if (iOrdinal != 5) {
+            if (iOrdinal != 6) {
                 i2 = 1;
             }
-            return new Element(renderScript.nElementCreate(dataType.mID, dataKind.mID, true, i), renderScript, dataType, dataKind, true, i);
+            i = i2;
+        } else {
+            i = 4;
         }
-        i = i2;
         return new Element(renderScript.nElementCreate(dataType.mID, dataKind.mID, true, i), renderScript, dataType, dataKind, true, i);
     }
 

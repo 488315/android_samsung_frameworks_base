@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ICABService extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.scab.ICABService";
@@ -33,7 +32,6 @@ public interface ICABService extends IInterface {
 
     void uploadAddressBook(List<String> list) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ICABService {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -82,7 +80,6 @@ public interface ICABService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ICABService {
         static final int TRANSACTION_addBatchOfContacts = 5;
         static final int TRANSACTION_businessLineReadyForSync = 2;
@@ -95,7 +92,6 @@ public interface ICABService extends IInterface {
         static final int TRANSACTION_updateBatchOfContacts = 7;
         static final int TRANSACTION_uploadAddressBook = 4;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ICABService {
             private IBinder mRemote;
 
@@ -105,16 +101,16 @@ public interface ICABService extends IInterface {
 
             @Override // com.sec.ims.scab.ICABService
             public void addBatchOfContacts(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICABService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICABService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -125,60 +121,60 @@ public interface ICABService extends IInterface {
 
             @Override // com.sec.ims.scab.ICABService
             public void businessLineReadyForSync(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICABService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICABService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.scab.ICABService
             public void deleteBatchOfContacts(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICABService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICABService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.scab.ICABService
             public void disableService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICABService.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICABService.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.scab.ICABService
             public void enableService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICABService.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICABService.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -188,77 +184,77 @@ public interface ICABService extends IInterface {
 
             @Override // com.sec.ims.scab.ICABService
             public boolean isPendingUploadContactsExists() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICABService.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICABService.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.scab.ICABService
             public void onBufferDBReadResult(long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICABService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICABService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.scab.ICABService
             public void processUndownloadedBusinessContacts(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICABService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICABService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.scab.ICABService
             public void updateBatchOfContacts(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICABService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICABService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.scab.ICABService
             public void uploadAddressBook(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICABService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICABService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -271,8 +267,8 @@ public interface ICABService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICABService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ICABService)) ? new Proxy(iBinder) : (ICABService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICABService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ICABService)) ? new Proxy(iBinder) : (ICABService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -286,53 +282,53 @@ public interface ICABService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    long readLong = parcel.readLong();
-                    boolean readBoolean = parcel.readBoolean();
+                    long j = parcel.readLong();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onBufferDBReadResult(readLong, readBoolean);
+                    onBufferDBReadResult(j, z);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    businessLineReadyForSync(readString, readBoolean2);
+                    businessLineReadyForSync(string, z2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    processUndownloadedBusinessContacts(readString2);
+                    processUndownloadedBusinessContacts(string2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    uploadAddressBook(createStringArrayList);
+                    uploadAddressBook(arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    addBatchOfContacts(createStringArrayList2);
+                    addBatchOfContacts(arrayListCreateStringArrayList2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    deleteBatchOfContacts(createStringArrayList3);
+                    deleteBatchOfContacts(arrayListCreateStringArrayList3);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    ArrayList<String> createStringArrayList4 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList4 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    updateBatchOfContacts(createStringArrayList4);
+                    updateBatchOfContacts(arrayListCreateStringArrayList4);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    boolean isPendingUploadContactsExists = isPendingUploadContactsExists();
+                    boolean zIsPendingUploadContactsExists = isPendingUploadContactsExists();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPendingUploadContactsExists);
+                    parcel2.writeBoolean(zIsPendingUploadContactsExists);
                     return true;
                 case 9:
                     enableService();

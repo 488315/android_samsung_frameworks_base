@@ -1,6 +1,9 @@
 package com.android.systemui.qs.composefragment;
 
+import androidx.compose.runtime.SnapshotMutableFloatStateImpl;
 import com.android.compose.animation.scene.MutableSceneTransitionLayoutState;
+import com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl;
+import com.android.compose.animation.scene.SceneKey;
 import kotlin.Pair;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -10,13 +13,14 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.AdaptedFunctionReference;
+import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.Job;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class QSFragmentComposeKt$synchronizeQsState$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Flow $editMode;
@@ -25,7 +29,6 @@ final class QSFragmentComposeKt$synchronizeQsState$2 extends SuspendLambda imple
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.composefragment.QSFragmentComposeKt$synchronizeQsState$2$3, reason: invalid class name */
     final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
         public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -42,7 +45,6 @@ final class QSFragmentComposeKt$synchronizeQsState$2 extends SuspendLambda imple
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.composefragment.QSFragmentComposeKt$synchronizeQsState$2$4, reason: invalid class name */
     final class AnonymousClass4 extends SuspendLambda implements Function2 {
         final /* synthetic */ CoroutineScope $animationScope;
@@ -73,36 +75,99 @@ final class QSFragmentComposeKt$synchronizeQsState$2 extends SuspendLambda imple
             return ((AnonymousClass4) create((Pair) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:33:0x006b, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:19:0x006b, code lost:
         
             if (r4.join(r7) == r0) goto L32;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:34:0x006e, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:21:0x006e, code lost:
         
             r0 = r8;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:35:0x00a8, code lost:
-        
-            return r0;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:44:0x00a6, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:31:0x00a6, code lost:
         
             if (r4.join(r7) == r0) goto L32;
          */
+        /* JADX WARN: Code restructure failed: missing block: B:32:0x00a8, code lost:
+        
+            return r0;
+         */
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:11:0x00ab  */
+        /* JADX WARN: Removed duplicated region for block: B:23:0x0071  */
+        /* JADX WARN: Removed duplicated region for block: B:34:0x00ab  */
         /* JADX WARN: Type inference failed for: r0v9, types: [T, com.android.compose.animation.scene.content.state.TransitionState$Transition, com.android.systemui.qs.composefragment.ExpansionTransition] */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object invokeSuspend(java.lang.Object r8) {
-            /*
-                Method dump skipped, instructions count: 256
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.composefragment.QSFragmentComposeKt$synchronizeQsState$2.AnonymousClass4.invokeSuspend(java.lang.Object):java.lang.Object");
+        public final Object invokeSuspend(Object obj) {
+            boolean zBooleanValue;
+            float fFloatValue;
+            Pair targetScene$default;
+            float f;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                Pair pair = (Pair) this.L$0;
+                zBooleanValue = ((Boolean) pair.component1()).booleanValue();
+                fFloatValue = ((Number) pair.component2()).floatValue();
+                if (zBooleanValue) {
+                    SceneKey currentScene = ((MutableSceneTransitionLayoutStateImpl) this.$state).getCurrentScene();
+                    SceneKeys.INSTANCE.getClass();
+                    SceneKey sceneKey = SceneKeys.EditMode;
+                    if (!Intrinsics.areEqual(currentScene, sceneKey)) {
+                        Pair targetScene$default2 = MutableSceneTransitionLayoutState.setTargetScene$default(this.$state, sceneKey, this.$animationScope);
+                        if (targetScene$default2 != null && (r4 = (Job) targetScene$default2.getSecond()) != null) {
+                            this.Z$0 = zBooleanValue;
+                            this.F$0 = fFloatValue;
+                            this.label = 1;
+                        }
+                    } else if (!zBooleanValue) {
+                        SceneKey currentScene2 = ((MutableSceneTransitionLayoutStateImpl) this.$state).getCurrentScene();
+                        SceneKeys.INSTANCE.getClass();
+                        if (Intrinsics.areEqual(currentScene2, SceneKeys.EditMode) && (targetScene$default = MutableSceneTransitionLayoutState.setTargetScene$default(this.$state, SceneKeys.QuickSettings, this.$animationScope)) != null && (r4 = (Job) targetScene$default.getSecond()) != null) {
+                            this.Z$0 = zBooleanValue;
+                            this.F$0 = fFloatValue;
+                            this.label = 2;
+                        }
+                    }
+                }
+                if (!zBooleanValue) {
+                    if (fFloatValue == 0.0f) {
+                        MutableSceneTransitionLayoutState mutableSceneTransitionLayoutState = this.$state;
+                        Ref$ObjectRef<ExpansionTransition> ref$ObjectRef = this.$currentTransition;
+                        SceneKeys.INSTANCE.getClass();
+                        MutableSceneTransitionLayoutState.snapTo$default(mutableSceneTransitionLayoutState, SceneKeys.QuickQuickSettings, null, 2);
+                        ref$ObjectRef.element = null;
+                    } else if (fFloatValue == 1.0f) {
+                        MutableSceneTransitionLayoutState mutableSceneTransitionLayoutState2 = this.$state;
+                        Ref$ObjectRef<ExpansionTransition> ref$ObjectRef2 = this.$currentTransition;
+                        SceneKeys.INSTANCE.getClass();
+                        MutableSceneTransitionLayoutState.snapTo$default(mutableSceneTransitionLayoutState2, SceneKeys.QuickSettings, null, 2);
+                        ref$ObjectRef2.element = null;
+                    } else {
+                        ExpansionTransition expansionTransition = this.$currentTransition.element;
+                        if (expansionTransition != null) {
+                            ((SnapshotMutableFloatStateImpl) expansionTransition.progress$delegate).setFloatValue(fFloatValue);
+                            return Unit.INSTANCE;
+                        }
+                        ?? expansionTransition2 = new ExpansionTransition(fFloatValue);
+                        this.$currentTransition.element = expansionTransition2;
+                        ((MutableSceneTransitionLayoutStateImpl) this.$state).startTransitionImmediately(this.$animationScope, expansionTransition2, true);
+                    }
+                }
+                return Unit.INSTANCE;
+            }
+            if (i != 1 && i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            f = this.F$0;
+            zBooleanValue = this.Z$0;
+            ResultKt.throwOnFailure(obj);
+            fFloatValue = f;
+            if (!zBooleanValue) {
+            }
+            return Unit.INSTANCE;
         }
     }
 

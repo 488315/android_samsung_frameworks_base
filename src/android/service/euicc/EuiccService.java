@@ -7,7 +7,6 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.service.euicc.EuiccService;
 import android.service.euicc.IEuiccService;
 import android.telephony.euicc.DownloadableSubscription;
 import android.telephony.euicc.EuiccInfo;
@@ -122,30 +121,30 @@ public abstract class EuiccService extends Service {
 
     public abstract int onUpdateSubscriptionNickname(int i, String str, String str2);
 
-    public int encodeSmdxSubjectAndReasonCode(String str, String str2) {
+    public int encodeSmdxSubjectAndReasonCode(String str, String str2) throws NumberFormatException {
         if (TextUtils.isEmpty(str) || TextUtils.isEmpty(str2)) {
             throw new IllegalArgumentException("SubjectCode/ReasonCode is empty");
         }
-        String[] split = str.split("\\.");
-        String[] split2 = str2.split("\\.");
-        if (split.length > 3 || split2.length > 3) {
+        String[] strArrSplit = str.split("\\.");
+        String[] strArrSplit2 = str2.split("\\.");
+        if (strArrSplit.length > 3 || strArrSplit2.length > 3) {
             throw new UnsupportedOperationException("Only three nested layer is supported.");
         }
-        int length = 10 << ((3 - split.length) * 4);
-        for (String str3 : split) {
-            int parseInt = Integer.parseInt(str3);
-            if (parseInt > 15) {
+        int length = 10 << ((3 - strArrSplit.length) * 4);
+        for (String str3 : strArrSplit) {
+            int i = Integer.parseInt(str3);
+            if (i > 15) {
                 throw new UnsupportedOperationException("SubjectCode exceeds 15");
             }
-            length = (length << 4) + parseInt;
+            length = (length << 4) + i;
         }
-        int length2 = length << ((3 - split2.length) * 4);
-        for (String str4 : split2) {
-            int parseInt2 = Integer.parseInt(str4);
-            if (parseInt2 > 15) {
+        int length2 = length << ((3 - strArrSplit2.length) * 4);
+        for (String str4 : strArrSplit2) {
+            int i2 = Integer.parseInt(str4);
+            if (i2 > 15) {
                 throw new UnsupportedOperationException("ReasonCode exceeds 15");
             }
-            length2 = (length2 << 4) + parseInt2;
+            length2 = (length2 << 4) + i2;
         }
         return length2;
     }
@@ -226,15 +225,15 @@ public abstract class EuiccService extends Service {
             EuiccService.this.mExecutor.execute(new Runnable() { // from class: android.service.euicc.EuiccService.IEuiccServiceWrapper.1
                 @Override // java.lang.Runnable
                 public void run() {
-                    DownloadSubscriptionResult onDownloadSubscription;
+                    DownloadSubscriptionResult downloadSubscriptionResultOnDownloadSubscription;
                     try {
-                        onDownloadSubscription = EuiccService.this.onDownloadSubscription(i, i2, downloadableSubscription, z, z2, bundle);
+                        downloadSubscriptionResultOnDownloadSubscription = EuiccService.this.onDownloadSubscription(i, i2, downloadableSubscription, z, z2, bundle);
                     } catch (AbstractMethodError | UnsupportedOperationException e) {
                         Log.w(EuiccService.TAG, "The new onDownloadSubscription(int, int, DownloadableSubscription, boolean, boolean, Bundle) is not implemented. Fall back to the old one.", e);
-                        onDownloadSubscription = EuiccService.this.onDownloadSubscription(i, downloadableSubscription, z, z2, bundle);
+                        downloadSubscriptionResultOnDownloadSubscription = EuiccService.this.onDownloadSubscription(i, downloadableSubscription, z, z2, bundle);
                     }
                     try {
-                        iDownloadSubscriptionCallback.onComplete(onDownloadSubscription);
+                        iDownloadSubscriptionCallback.onComplete(downloadSubscriptionResultOnDownloadSubscription);
                     } catch (RemoteException unused) {
                     }
                 }
@@ -259,7 +258,7 @@ public abstract class EuiccService extends Service {
             EuiccService.this.mExecutor.execute(new Runnable() { // from class: android.service.euicc.EuiccService$IEuiccServiceWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    EuiccService.IEuiccServiceWrapper.this.lambda$getAvailableMemoryInBytes$0(i, iGetAvailableMemoryInBytesCallback);
+                    this.f$0.lambda$getAvailableMemoryInBytes$0(i, iGetAvailableMemoryInBytesCallback);
                 }
             });
         }
@@ -267,19 +266,19 @@ public abstract class EuiccService extends Service {
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$getAvailableMemoryInBytes$0(int i, IGetAvailableMemoryInBytesCallback iGetAvailableMemoryInBytesCallback) {
             String message;
-            long j;
+            long jOnGetAvailableMemoryInBytes;
             try {
-                j = EuiccService.this.onGetAvailableMemoryInBytes(i);
+                jOnGetAvailableMemoryInBytes = EuiccService.this.onGetAvailableMemoryInBytes(i);
                 message = "";
             } catch (UnsupportedOperationException e) {
                 message = e.getMessage();
-                j = -1;
+                jOnGetAvailableMemoryInBytes = -1;
             }
             try {
                 if (!message.isEmpty()) {
                     iGetAvailableMemoryInBytesCallback.onUnsupportedOperationException(message);
                 } else {
-                    iGetAvailableMemoryInBytesCallback.onSuccess(j);
+                    iGetAvailableMemoryInBytesCallback.onSuccess(jOnGetAvailableMemoryInBytes);
                 }
             } catch (RemoteException unused) {
             }
@@ -321,19 +320,19 @@ public abstract class EuiccService extends Service {
             EuiccService.this.mExecutor.execute(new Runnable() { // from class: android.service.euicc.EuiccService.IEuiccServiceWrapper.5
                 @Override // java.lang.Runnable
                 public void run() {
-                    GetDownloadableSubscriptionMetadataResult onGetDownloadableSubscriptionMetadata;
+                    GetDownloadableSubscriptionMetadataResult getDownloadableSubscriptionMetadataResultOnGetDownloadableSubscriptionMetadata;
                     if (z) {
                         try {
-                            onGetDownloadableSubscriptionMetadata = EuiccService.this.onGetDownloadableSubscriptionMetadata(i, i2, downloadableSubscription, z2);
+                            getDownloadableSubscriptionMetadataResultOnGetDownloadableSubscriptionMetadata = EuiccService.this.onGetDownloadableSubscriptionMetadata(i, i2, downloadableSubscription, z2);
                         } catch (AbstractMethodError | UnsupportedOperationException e) {
                             Log.w(EuiccService.TAG, "The new onGetDownloadableSubscriptionMetadata(int, int, DownloadableSubscription, boolean) is not implemented. Fall back to the old one.", e);
-                            onGetDownloadableSubscriptionMetadata = EuiccService.this.onGetDownloadableSubscriptionMetadata(i, downloadableSubscription, z2);
+                            getDownloadableSubscriptionMetadataResultOnGetDownloadableSubscriptionMetadata = EuiccService.this.onGetDownloadableSubscriptionMetadata(i, downloadableSubscription, z2);
                         }
                     } else {
-                        onGetDownloadableSubscriptionMetadata = EuiccService.this.onGetDownloadableSubscriptionMetadata(i, downloadableSubscription, z2);
+                        getDownloadableSubscriptionMetadataResultOnGetDownloadableSubscriptionMetadata = EuiccService.this.onGetDownloadableSubscriptionMetadata(i, downloadableSubscription, z2);
                     }
                     try {
-                        iGetDownloadableSubscriptionMetadataCallback.onComplete(onGetDownloadableSubscriptionMetadata);
+                        iGetDownloadableSubscriptionMetadataCallback.onComplete(getDownloadableSubscriptionMetadataResultOnGetDownloadableSubscriptionMetadata);
                     } catch (RemoteException unused) {
                     }
                 }
@@ -397,14 +396,14 @@ public abstract class EuiccService extends Service {
             EuiccService.this.mExecutor.execute(new Runnable() { // from class: android.service.euicc.EuiccService.IEuiccServiceWrapper.10
                 @Override // java.lang.Runnable
                 public void run() {
-                    int onSwitchToSubscription;
+                    int iOnSwitchToSubscription;
                     if (z2) {
-                        onSwitchToSubscription = EuiccService.this.onSwitchToSubscriptionWithPort(i, i2, str, z);
+                        iOnSwitchToSubscription = EuiccService.this.onSwitchToSubscriptionWithPort(i, i2, str, z);
                     } else {
-                        onSwitchToSubscription = EuiccService.this.onSwitchToSubscription(i, str, z);
+                        iOnSwitchToSubscription = EuiccService.this.onSwitchToSubscription(i, str, z);
                     }
                     try {
-                        iSwitchToSubscriptionCallback.onComplete(onSwitchToSubscription);
+                        iSwitchToSubscriptionCallback.onComplete(iOnSwitchToSubscription);
                     } catch (RemoteException unused) {
                     }
                 }

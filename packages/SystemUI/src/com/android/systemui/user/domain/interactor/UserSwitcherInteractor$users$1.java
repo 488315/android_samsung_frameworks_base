@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class UserSwitcherInteractor$users$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -35,7 +34,7 @@ final class UserSwitcherInteractor$users$1 extends SuspendLambda implements Func
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i != 0) {
@@ -55,7 +54,7 @@ final class UserSwitcherInteractor$users$1 extends SuspendLambda implements Func
         this.L$0 = null;
         this.L$1 = null;
         this.label = 1;
-        Object access$toUserModels = UserSwitcherInteractor.access$toUserModels(userSwitcherInteractor, list, i2, z, this);
-        return access$toUserModels == coroutineSingletons ? coroutineSingletons : access$toUserModels;
+        Object objAccess$toUserModels = UserSwitcherInteractor.access$toUserModels(userSwitcherInteractor, list, i2, z, this);
+        return objAccess$toUserModels == coroutineSingletons ? coroutineSingletons : objAccess$toUserModels;
     }
 }

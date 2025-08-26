@@ -51,9 +51,9 @@ public interface IGetValueCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGetValueCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGetValueCallback)) {
-                return (IGetValueCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGetValueCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGetValueCallback)) {
+                return (IGetValueCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -112,24 +112,24 @@ public interface IGetValueCallback extends IInterface {
 
             @Override // android.service.settings.preferences.IGetValueCallback
             public void onSuccess(GetValueResult getValueResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetValueCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(getValueResult, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetValueCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(getValueResult, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.settings.preferences.IGetValueCallback
             public void onFailure() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetValueCallback.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetValueCallback.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -14,7 +14,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardDeskTopStateMonitor {
     public final Lazy mFaceWidgetManagerLazy;
@@ -26,14 +25,14 @@ public class KeyguardDeskTopStateMonitor {
         JavaAdapterKt.collectFlow(coroutineScope, ((ConnectedDisplayInteractorImpl) connectedDisplayInteractor).isExternalDesktopWindowing, new Consumer() { // from class: com.android.keyguard.KeyguardDeskTopStateMonitor$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                KeyguardDeskTopStateMonitor keyguardDeskTopStateMonitor = KeyguardDeskTopStateMonitor.this;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
-                if (keyguardDeskTopStateMonitor.mIsExternalDesktopWindowing != booleanValue) {
+                KeyguardDeskTopStateMonitor keyguardDeskTopStateMonitor = this.f$0;
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
+                if (keyguardDeskTopStateMonitor.mIsExternalDesktopWindowing != zBooleanValue) {
                     PluginKeyguardStatusView pluginKeyguardStatusView = ((PluginFaceWidgetManager) keyguardDeskTopStateMonitor.mFaceWidgetManagerLazy.get()).mFaceWidgetPlugin;
                     if (pluginKeyguardStatusView != null) {
-                        pluginKeyguardStatusView.setIsExternalDesktopWindowing(booleanValue);
+                        pluginKeyguardStatusView.setIsExternalDesktopWindowing(zBooleanValue);
                     }
-                    keyguardDeskTopStateMonitor.mIsExternalDesktopWindowing = booleanValue;
+                    keyguardDeskTopStateMonitor.mIsExternalDesktopWindowing = zBooleanValue;
                 }
             }
         });

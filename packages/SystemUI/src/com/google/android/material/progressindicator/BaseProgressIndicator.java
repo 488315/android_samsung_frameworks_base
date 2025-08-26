@@ -19,7 +19,6 @@ import com.google.android.material.internal.ThemeEnforcement;
 import com.google.android.material.theme.overlay.MaterialThemeOverlay;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class BaseProgressIndicator extends ProgressBar {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,7 +34,6 @@ public abstract class BaseProgressIndicator extends ProgressBar {
     public final AnonymousClass3 switchIndeterminateModeCallback;
     public final int visibilityAfterHide;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.android.material.progressindicator.BaseProgressIndicator$3, reason: invalid class name */
     public class AnonymousClass3 extends Animatable2Compat.AnimationCallback {
         public AnonymousClass3() {
@@ -87,10 +85,10 @@ public abstract class BaseProgressIndicator extends ProgressBar {
         };
         Context context2 = getContext();
         this.spec = createSpec(context2, attributeSet);
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.BaseProgressIndicator, i, i2, new int[0]);
-        obtainStyledAttributes.getInt(6, -1);
-        this.minHideDelay = Math.min(obtainStyledAttributes.getInt(4, -1), 1000);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.BaseProgressIndicator, i, i2, new int[0]);
+        typedArrayObtainStyledAttributes.getInt(6, -1);
+        this.minHideDelay = Math.min(typedArrayObtainStyledAttributes.getInt(4, -1), 1000);
+        typedArrayObtainStyledAttributes.recycle();
         this.animatorDurationScaleProvider = new AnimatorDurationScaleProvider();
         this.isParentDoneInitializing = true;
     }
@@ -167,22 +165,15 @@ public abstract class BaseProgressIndicator extends ProgressBar {
     @Override // android.widget.ProgressBar, android.view.View
     public final synchronized void onDraw(Canvas canvas) {
         try {
-            int save = canvas.save();
-            if (getPaddingLeft() == 0) {
-                if (getPaddingTop() != 0) {
-                }
-                if (getPaddingRight() == 0 || getPaddingBottom() != 0) {
-                    canvas.clipRect(0, 0, getWidth() - (getPaddingLeft() + getPaddingRight()), getHeight() - (getPaddingTop() + getPaddingBottom()));
-                }
-                getCurrentDrawable().draw(canvas);
-                canvas.restoreToCount(save);
+            int iSave = canvas.save();
+            if (getPaddingLeft() != 0 || getPaddingTop() != 0) {
+                canvas.translate(getPaddingLeft(), getPaddingTop());
             }
-            canvas.translate(getPaddingLeft(), getPaddingTop());
-            if (getPaddingRight() == 0) {
+            if (getPaddingRight() != 0 || getPaddingBottom() != 0) {
+                canvas.clipRect(0, 0, getWidth() - (getPaddingLeft() + getPaddingRight()), getHeight() - (getPaddingTop() + getPaddingBottom()));
             }
-            canvas.clipRect(0, 0, getWidth() - (getPaddingLeft() + getPaddingRight()), getHeight() - (getPaddingTop() + getPaddingBottom()));
             getCurrentDrawable().draw(canvas);
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
         } catch (Throwable th) {
             throw th;
         }

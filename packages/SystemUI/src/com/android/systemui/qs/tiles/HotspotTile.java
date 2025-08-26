@@ -4,10 +4,18 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.hardware.display.DisplayManager;
+import android.hardware.display.SemWifiDisplayStatus;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.net.wifi.SoftApConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.net.wifi.aware.WifiAwareManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
@@ -30,6 +38,7 @@ import androidx.compose.animation.BoundsAnimationElement$$ExternalSyntheticOutli
 import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyntheticOutline0;
 import com.android.internal.logging.MetricsLogger;
 import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
+import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
 import com.android.systemui.CvOperator;
@@ -62,14 +71,17 @@ import com.android.systemui.statusbar.policy.HotspotController;
 import com.android.systemui.statusbar.policy.HotspotControllerImpl;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
-import com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback;
 import com.android.systemui.statusbar.policy.SatelliteModeObserverHelper;
+import com.android.systemui.statusbar.policy.SatelliteTrtListener;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.feature.SemCarrierFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
+import com.samsung.android.wifi.SemWifiApCust;
+import com.samsung.android.wifi.SemWifiApRestoreHelper;
 import com.samsung.android.wifi.SemWifiManager;
+import com.samsung.android.wifi.aware.SemWifiAwareManager;
 import com.sec.ims.extensions.WiFiManagerExt;
 import com.sec.ims.settings.ImsProfile;
 import com.sec.ims.volte2.data.VolteConstants;
@@ -78,7 +90,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class HotspotTile extends SQSTileImpl {
     public final WifiManager mAOSPWifiManager;
@@ -101,7 +112,6 @@ public class HotspotTile extends SQSTileImpl {
     public final QSTile.BooleanState mStateBeforeClick;
     public final WifiManager mWifiManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CallbackInfo {
         public boolean isDataSaverEnabled;
         public boolean isHotspotEnabled;
@@ -117,7 +127,6 @@ public class HotspotTile extends SQSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HotspotAndDataSaverCallbacks implements HotspotController.Callback, DataSaverController.Listener {
         public final CallbackInfo mCallbackInfo;
 
@@ -165,7 +174,7 @@ public class HotspotTile extends SQSTileImpl {
         }
 
         @Override // com.android.systemui.statusbar.policy.HotspotController.Callback
-        public final void onUpdateConnectedDevices() {
+        public final void onUpdateConnectedDevices() throws NumberFormatException {
             Log.d("HotspotTile", "onUpdateConnectedDevices =true");
             HotspotTile hotspotTile = HotspotTile.this;
             HotSpotDetailAdapter hotSpotDetailAdapter = hotspotTile.mDetailAdapter;
@@ -187,9 +196,9 @@ public class HotspotTile extends SQSTileImpl {
         HotspotAndDataSaverCallbacks hotspotAndDataSaverCallbacks = new HotspotAndDataSaverCallbacks(this, 0);
         this.mStateBeforeClick = new QSTile.BooleanState();
         this.mIsSatelliteModeOn = false;
-        this.mSatelliteModeCallback = new SatelliteModeObserver$SatelliteModeCallback() { // from class: com.android.systemui.qs.tiles.HotspotTile.1
-            @Override // com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback
-            public final void onSatelliteModeChanged(boolean z) {
+        this.mSatelliteModeCallback = new SatelliteTrtListener() { // from class: com.android.systemui.qs.tiles.HotspotTile.1
+            @Override // com.android.systemui.statusbar.policy.SatelliteTrtListener
+            public final void onSatelliteTrtChanged(boolean z) {
                 HotspotTile hotspotTile = HotspotTile.this;
                 hotspotTile.mIsSatelliteModeOn = z;
                 hotspotTile.refreshState(null);
@@ -279,7 +288,7 @@ public class HotspotTile extends SQSTileImpl {
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final void handleClick(final Expandable expandable) {
+    public final void handleClick(final Expandable expandable) throws InterruptedException, Resources.NotFoundException {
         Log.i("HotspotTile", "handleClick");
         boolean z = ((QSTile.BooleanState) this.mState).value;
         if (getSemWifiManager() == null) {
@@ -337,8 +346,8 @@ public class HotspotTile extends SQSTileImpl {
         if (z2 && keyguardUpdateMonitor.isSecure() && !keyguardUpdateMonitor.getUserCanSkipBouncer(KeyguardUpdateMonitor.getCurrentUser()) && this.mSettingsHelper.isLockFunctionsEnabled()) {
             this.mActivityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.HotspotTile$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
-                public final void run() {
-                    HotspotTile.this.handleClick(expandable);
+                public final void run() throws InterruptedException, Resources.NotFoundException {
+                    this.f$0.handleClick(expandable);
                 }
             });
             return;
@@ -431,15 +440,15 @@ public class HotspotTile extends SQSTileImpl {
     }
 
     public final boolean isWifiApBlocked() {
-        Cursor query = this.mContext.getContentResolver().query(Uri.parse("content://com.sec.knox.provider/RestrictionPolicy4"), null, "isWifiTetheringEnabled", null, null);
-        if (query == null) {
+        Cursor cursorQuery = this.mContext.getContentResolver().query(Uri.parse("content://com.sec.knox.provider/RestrictionPolicy4"), null, "isWifiTetheringEnabled", null, null);
+        if (cursorQuery == null) {
             return false;
         }
         try {
-            query.moveToFirst();
-            return query.getString(query.getColumnIndex("isWifiTetheringEnabled")).equals("false");
+            cursorQuery.moveToFirst();
+            return cursorQuery.getString(cursorQuery.getColumnIndex("isWifiTetheringEnabled")).equals("false");
         } finally {
-            query.close();
+            cursorQuery.close();
         }
     }
 
@@ -448,49 +457,261 @@ public class HotspotTile extends SQSTileImpl {
         return new QSTile.BooleanState();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0283, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:132:0x0283, code lost:
     
         if (r4 == false) goto L141;
      */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0294  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0247  */
+    /* JADX WARN: Removed duplicated region for block: B:106:0x0200  */
+    /* JADX WARN: Removed duplicated region for block: B:120:0x0247  */
+    /* JADX WARN: Removed duplicated region for block: B:135:0x0294  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0069  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00a5  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00ad  */
+    /* JADX WARN: Removed duplicated region for block: B:92:0x01c5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setHotspotEnabled(boolean r13) {
-        /*
-            Method dump skipped, instructions count: 826
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.HotspotTile.setHotspotEnabled(boolean):void");
+    public final void setHotspotEnabled(boolean z) throws InterruptedException, Resources.NotFoundException {
+        boolean z2;
+        boolean z3;
+        WifiAwareManager wifiAwareManager;
+        SemWifiAwareManager semWifiAwareManager;
+        boolean z4;
+        boolean z5;
+        boolean z6;
+        int frequency;
+        boolean z7;
+        if (z) {
+            int wifiState = this.mWifiManager.getWifiState();
+            SemWifiManager semWifiManager = (SemWifiManager) this.mContext.getSystemService(WiFiManagerExt.SEM_WIFI_SERVICE);
+            this.mSemWifiManager = semWifiManager;
+            if (semWifiManager == null) {
+                Log.e("HotspotTile", " checkWhetherWifiApWarningNeedToLaunch mSemWifiManager is null");
+            } else if (semWifiManager.isOverAllMhsDataLimitReached()) {
+                TelephonyManager telephonyManager = (TelephonyManager) this.mContext.getSystemService("phone");
+                ConnectivityManager connectivityManager = (ConnectivityManager) this.mContext.getSystemService("connectivity");
+                Network activeNetwork = connectivityManager.getActiveNetwork();
+                if (activeNetwork == null) {
+                    Log.i("HotspotTile", "ActiveNetwork is Null");
+                } else {
+                    NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
+                    if (networkCapabilities != null) {
+                        boolean zHasTransport = networkCapabilities.hasTransport(0);
+                        boolean zHasCapability = networkCapabilities.hasCapability(12);
+                        if (zHasTransport && zHasCapability) {
+                            z6 = true;
+                        }
+                        if (!z6) {
+                            WifiInfo connectionInfo = this.mAOSPWifiManager.getConnectionInfo();
+                            if (connectionInfo == null || connectionInfo.getNetworkId() == -1) {
+                                frequency = -1;
+                            } else {
+                                Log.d("HotspotTile", "Wifi Frequency is " + connectionInfo.getFrequency());
+                                frequency = connectionInfo.getFrequency();
+                            }
+                            if (frequency == -1 && telephonyManager != null && telephonyManager.isDataEnabled()) {
+                                Log.i("HotspotTile", "Wi-Fi is not connected and mobile data is enabled");
+                                z6 = true;
+                            }
+                        }
+                        if (!z6) {
+                            Log.i("HotspotTile", "Data limit is reached");
+                        } else if (SemWifiApRestoreHelper.isRestoreNetworkPasswordDialogToBeShowOnce(this.mContext)) {
+                            Log.i("HotspotTile", "RestoreNetworkPasswordDialog is required to show");
+                        } else {
+                            SemWifiDisplayStatus semWifiDisplayStatusSemGetWifiDisplayStatus = ((DisplayManager) this.mContext.getSystemService("display")).semGetWifiDisplayStatus();
+                            boolean zIsP2pConnected = this.mSemWifiManager.isP2pConnected();
+                            EmergencyButtonController$$ExternalSyntheticOutline0.m("isSmartViewEnabled:p2pstatus:", "HotspotTile", zIsP2pConnected);
+                            if (semWifiDisplayStatusSemGetWifiDisplayStatus != null && semWifiDisplayStatusSemGetWifiDisplayStatus.getActiveDisplayState() == 2 && semWifiDisplayStatusSemGetWifiDisplayStatus.getConnectedState() == 0 && zIsP2pConnected) {
+                                Log.d("HotspotTile", "isSmartViewEnabled:true");
+                                z2 = true;
+                            } else {
+                                Log.d("HotspotTile", "isSmartViewEnabled:false");
+                                z2 = false;
+                            }
+                            if (z2) {
+                                Log.i("HotspotTile", "smartView Enabled");
+                            } else {
+                                SemWifiDisplayStatus semWifiDisplayStatusSemGetWifiDisplayStatus2 = ((DisplayManager) this.mContext.getSystemService("display")).semGetWifiDisplayStatus();
+                                if (semWifiDisplayStatusSemGetWifiDisplayStatus2 != null && semWifiDisplayStatusSemGetWifiDisplayStatus2.getActiveDisplayState() == 2 && semWifiDisplayStatusSemGetWifiDisplayStatus2.getConnectedState() == 2) {
+                                    Log.d("HotspotTile", "isWirelessDexEnabled:true");
+                                    z3 = true;
+                                } else {
+                                    Log.d("HotspotTile", "isWirelessDexEnabled:false");
+                                    z3 = false;
+                                }
+                                if (z3) {
+                                    Log.i("HotspotTile", "WirelessDex Enabled");
+                                } else {
+                                    SemWifiAwareManager semWifiAwareManager2 = this.mContext.getPackageManager().hasSystemFeature("android.hardware.wifi.aware") ? (SemWifiAwareManager) this.mContext.getSystemService("sem_wifi_aware") : null;
+                                    boolean z8 = semWifiAwareManager2 != null && semWifiAwareManager2.isAwareSoftApConcurrencySupported();
+                                    AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("isNanSoftApConcurrencySupported: ", "HotspotTile", z8);
+                                    if (!z8) {
+                                        if (this.mContext.getPackageManager().hasSystemFeature("android.hardware.wifi.aware")) {
+                                            wifiAwareManager = (WifiAwareManager) this.mContext.getSystemService("wifiaware");
+                                            semWifiAwareManager = (SemWifiAwareManager) this.mContext.getSystemService("sem_wifi_aware");
+                                        } else {
+                                            wifiAwareManager = null;
+                                            semWifiAwareManager = null;
+                                        }
+                                        if (wifiAwareManager == null || semWifiAwareManager == null) {
+                                            z4 = false;
+                                        } else {
+                                            z4 = wifiAwareManager.isDeviceAttached() && semWifiAwareManager.isPreEnabled() != 1;
+                                            StringBuilder sb = new StringBuilder("WifiAware`s isDeviceAttached: ");
+                                            sb.append(wifiAwareManager.isDeviceAttached());
+                                            sb.append(", isPreEnabledResult: ");
+                                            sb.append(semWifiAwareManager.isPreEnabled() != 1);
+                                            sb.append(", isNanEnabled: ");
+                                            sb.append(z4);
+                                            Log.i("HotspotTile", sb.toString());
+                                        }
+                                        if (z4) {
+                                            Log.i("HotspotTile", "NAN Enabled");
+                                        }
+                                    } else if (this.mSemWifiManager.isP2pConnected()) {
+                                        Log.i("HotspotTile", "P2p Enabled");
+                                    } else if (wifiState == 1) {
+                                        if (this.mSemWifiManager.isWifiSharingSupported() && !this.mSemWifiManager.isWifiSharingLiteSupported() && Settings.Secure.getInt(this.mContext.getContentResolver(), "wifi_ap_wifi_sharing", 10) == 1 && Settings.Secure.getInt(this.mContext.getContentResolver(), "wifi_ap_first_time_wifi_sharing_dialog", 0) == 0 && (this.mWifiManager.getWifiState() == 2 || this.mWifiManager.getWifiState() == 3)) {
+                                            Log.i("HotspotTile", "Wi-Fi Sharing First dialog");
+                                        }
+                                    } else if (this.mSemWifiManager.isWifiSharingLiteSupported()) {
+                                        Log.i("HotspotTile", "WifiSharingLite model");
+                                    } else {
+                                        if (!(Settings.Secure.getInt(this.mContext.getContentResolver(), "wifi_ap_wifi_sharing", 0) == 1)) {
+                                            Log.i("HotspotTile", "Wifi is not disabled and wifisharing is not enabled");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        z5 = true;
+                        if (!z5) {
+                            if (CvRune.HOTSPOT_CHECK_MHSDBG && SystemProperties.get("vendor.wifiap.provisioning.disable").equals("1")) {
+                                Log.d("HotspotTile", "Skip isProvisioningCheck");
+                            } else if (SemWifiApCust.isProvisioningNeeded()) {
+                                String[] stringArray = this.mContext.getResources().getStringArray(17236267);
+                                Log.i("HotspotTile", "Calling UTP apk");
+                                if (stringArray.length == 2) {
+                                    z7 = true;
+                                }
+                            } else {
+                                Log.i("HotspotTile", " provisioning is not required for this operator");
+                            }
+                            z7 = false;
+                        }
+                        Log.d("HotspotTile", "enable hotspot for USA or SBM");
+                        if (this.mSemWifiManager.getWifiApWarningActivityRunningState() == 1) {
+                            Log.i("HotspotTile", "sending WIFIAP_WARNING_STOP_DIALOG ");
+                            Intent intent = new Intent();
+                            intent.setPackage(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG);
+                            intent.setAction("com.samsung.android.settings.wifi.mobileap.wifiapwarning.finish");
+                            this.mContext.sendBroadcast(intent);
+                            try {
+                                Thread.sleep(200L);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        Intent intent2 = new Intent();
+                        intent2.setClassName(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG, "com.samsung.android.settings.wifi.mobileap.WifiApWarning");
+                        intent2.setFlags(268435456);
+                        intent2.setAction("com.samsung.android.settings.wifi.mobileap.wifiapwarning");
+                        intent2.putExtra("wifiap_warning_dialog_type", 5);
+                        this.mContext.startActivity(intent2);
+                        Log.d("HotspotTile", "launchWifiApWarning start for USA or SBM");
+                        ((PanelInteractorImpl) this.mPanelInteractor).collapsePanels();
+                        return;
+                    }
+                    Log.i("HotspotTile", "networkCapabilities is Null");
+                }
+                z6 = false;
+                if (!z6) {
+                }
+                if (!z6) {
+                }
+                z5 = true;
+                if (!z5) {
+                }
+                Log.d("HotspotTile", "enable hotspot for USA or SBM");
+                if (this.mSemWifiManager.getWifiApWarningActivityRunningState() == 1) {
+                }
+                Intent intent22 = new Intent();
+                intent22.setClassName(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG, "com.samsung.android.settings.wifi.mobileap.WifiApWarning");
+                intent22.setFlags(268435456);
+                intent22.setAction("com.samsung.android.settings.wifi.mobileap.wifiapwarning");
+                intent22.putExtra("wifiap_warning_dialog_type", 5);
+                this.mContext.startActivity(intent22);
+                Log.d("HotspotTile", "launchWifiApWarning start for USA or SBM");
+                ((PanelInteractorImpl) this.mPanelInteractor).collapsePanels();
+                return;
+            }
+            z5 = false;
+            if (!z5) {
+            }
+            Log.d("HotspotTile", "enable hotspot for USA or SBM");
+            if (this.mSemWifiManager.getWifiApWarningActivityRunningState() == 1) {
+            }
+            Intent intent222 = new Intent();
+            intent222.setClassName(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG, "com.samsung.android.settings.wifi.mobileap.WifiApWarning");
+            intent222.setFlags(268435456);
+            intent222.setAction("com.samsung.android.settings.wifi.mobileap.wifiapwarning");
+            intent222.putExtra("wifiap_warning_dialog_type", 5);
+            this.mContext.startActivity(intent222);
+            Log.d("HotspotTile", "launchWifiApWarning start for USA or SBM");
+            ((PanelInteractorImpl) this.mPanelInteractor).collapsePanels();
+            return;
+        }
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("setHotspotEnabled -", "HotspotTile", z);
+        if (z && "LGT".equals(CvRune.HOTSPOT_CONFIG_OP_BRANDING)) {
+            SysUIToast.makeText(this.mContext, R.string.wifi_ap_warn_toast_lgt, 0).show();
+        }
+        fireToggleStateChanged(z);
+        HotspotControllerImpl hotspotControllerImpl = (HotspotControllerImpl) this.mHotspotController;
+        if (hotspotControllerImpl.mWaitingForTerminalState) {
+            if (HotspotControllerImpl.DEBUG) {
+                Log.i("HotspotController", "Ignoring setHotspotEnabled; waiting for terminal state.");
+            }
+        } else {
+            if (!z) {
+                SemWifiManager semWifiManager2 = hotspotControllerImpl.mSemWifiManager;
+                if (semWifiManager2 != null) {
+                    semWifiManager2.setWifiApEnabled((SoftApConfiguration) null, false);
+                    return;
+                }
+                return;
+            }
+            hotspotControllerImpl.mWaitingForTerminalState = true;
+            if (HotspotControllerImpl.DEBUG) {
+                Log.d("HotspotController", "Starting tethering");
+            }
+            Log.d("HotspotController", "Starting SemWifiManager tethering");
+            SemWifiManager semWifiManager3 = hotspotControllerImpl.mSemWifiManager;
+            if (semWifiManager3 != null) {
+                semWifiManager3.setWifiApEnabled((SoftApConfiguration) null, true);
+            }
+        }
     }
 
     public final void showDataSaverToast() {
         String string = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME");
         if (string == null || !"com.samsung.android.sm_cn".equals(string)) {
-            SysUIToast.makeText(this.mContext, android.R.string.satellite_notification_how_it_works, 0).show();
+            SysUIToast.makeText(this.mContext, android.R.string.satellite_notification_summary, 0).show();
             return;
         }
         SystemUIDialog systemUIDialog = this.mDataSaverDialog;
         if (systemUIDialog == null || !systemUIDialog.isShowing()) {
             SystemUIDialog systemUIDialog2 = new SystemUIDialog(this.mContext, R.style.Theme_SystemUI_Dialog_Alert);
             this.mDataSaverDialog = systemUIDialog2;
-            systemUIDialog2.setTitle(17043709);
-            this.mDataSaverDialog.setMessage(17043706);
-            this.mDataSaverDialog.setNegativeButton(17043708, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.HotspotTile.4
+            systemUIDialog2.setTitle(17043713);
+            this.mDataSaverDialog.setMessage(17043710);
+            this.mDataSaverDialog.setNegativeButton(17043712, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.HotspotTile.4
                 @Override // android.content.DialogInterface.OnClickListener
                 public final void onClick(DialogInterface dialogInterface, int i) {
-                    Intent intent = new Intent();
-                    intent.setClassName(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG, "com.android.settings.SubSettings");
-                    intent.putExtra(":settings:show_fragment", "com.samsung.android.settings.datausage.trafficmanager.ui.DataSaverSummaryCHN");
-                    intent.addFlags(268468224);
-                    HotspotTile.this.mContext.startActivity(intent);
+                    HotspotTile.this.mActivityStarter.postStartActivityDismissingKeyguard(new Intent("com.samsung.android.settings.DATA_SAVER_SETTINGS_CHN"), 0);
                 }
             });
-            this.mDataSaverDialog.setPositiveButton(17043707, null);
+            this.mDataSaverDialog.setPositiveButton(17043711, null);
             this.mDataSaverDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.qs.tiles.HotspotTile.5
                 @Override // android.content.DialogInterface.OnDismissListener
                 public final void onDismiss(DialogInterface dialogInterface) {
@@ -534,7 +755,6 @@ public class HotspotTile extends SQSTileImpl {
         showDetail$1(true);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HotSpotDetailAdapter implements DetailAdapter, QSDetailItems.Callback {
         public static final /* synthetic */ int $r8$clinit = 0;
         public int deviceCount = 0;
@@ -552,7 +772,7 @@ public class HotspotTile extends SQSTileImpl {
         }
 
         @Override // com.android.systemui.plugins.qs.DetailAdapter
-        public final View createDetailView(Context context, View view, ViewGroup viewGroup) {
+        public final View createDetailView(Context context, View view, ViewGroup viewGroup) throws NumberFormatException {
             StringBuilder sb = new StringBuilder("createDetailView convertView=");
             sb.append(view != null);
             sb.append(" mState.value ");
@@ -561,16 +781,16 @@ public class HotspotTile extends SQSTileImpl {
             if (this.mWifiManager == null) {
                 this.mWifiManager = (WifiManager) hotspotTile.mContext.getSystemService(ImsProfile.PDN_WIFI);
             }
-            View inflate = LayoutInflater.from(hotspotTile.mContext).inflate(R.layout.qs_detail_hotspot, viewGroup, false);
-            this.mApLayout = (LinearLayout) inflate.findViewById(R.id.ap_layout);
-            this.mPassWordLayout = (LinearLayout) inflate.findViewById(R.id.password_layout);
-            this.mMobileApName = (TextView) inflate.findViewById(R.id.ap_name);
-            this.mConnectedListContainer = inflate.findViewById(R.id.connected_list_container);
-            this.mPassword = (TextView) inflate.findViewById(R.id.ap_password);
-            ViewGroup viewGroup2 = (ViewGroup) inflate.findViewById(R.id.connected_devices);
-            QSDetailItems convertOrInflate = QSDetailItems.convertOrInflate(context, viewGroup2);
-            this.mItems = convertOrInflate;
-            convertOrInflate.setTagSuffix("HotSpot");
+            View viewInflate = LayoutInflater.from(hotspotTile.mContext).inflate(R.layout.qs_detail_hotspot, viewGroup, false);
+            this.mApLayout = (LinearLayout) viewInflate.findViewById(R.id.ap_layout);
+            this.mPassWordLayout = (LinearLayout) viewInflate.findViewById(R.id.password_layout);
+            this.mMobileApName = (TextView) viewInflate.findViewById(R.id.ap_name);
+            this.mConnectedListContainer = viewInflate.findViewById(R.id.connected_list_container);
+            this.mPassword = (TextView) viewInflate.findViewById(R.id.ap_password);
+            ViewGroup viewGroup2 = (ViewGroup) viewInflate.findViewById(R.id.connected_devices);
+            QSDetailItems qSDetailItemsConvertOrInflate = QSDetailItems.convertOrInflate(context, viewGroup2);
+            this.mItems = qSDetailItemsConvertOrInflate;
+            qSDetailItemsConvertOrInflate.setTagSuffix("HotSpot");
             this.mItems.setCallback(this);
             viewGroup2.addView(this.mItems);
             Log.d("HotspotTile", "updateHotSpotApInfo");
@@ -609,9 +829,9 @@ public class HotspotTile extends SQSTileImpl {
                         StringBuffer stringBuffer2 = new StringBuffer();
                         stringBuffer2.append("!@#$/^&*()".charAt(random3.nextInt(10)));
                         sb2.append(stringBuffer2.toString());
-                        String sb3 = sb2.toString();
-                        Settings.Secure.putString(hotspotTile.mContext.getContentResolver(), "wifi_ap_random_password", sb3);
-                        this.mPassword.setText(sb3);
+                        String string2 = sb2.toString();
+                        Settings.Secure.putString(hotspotTile.mContext.getContentResolver(), "wifi_ap_random_password", string2);
+                        this.mPassword.setText(string2);
                     } else {
                         this.mPassword.setText(Settings.Secure.getString(hotspotTile.mContext.getContentResolver(), "wifi_ap_random_password"));
                     }
@@ -623,7 +843,7 @@ public class HotspotTile extends SQSTileImpl {
                 this.mPassWordLayout.setContentDescription(hotspotTile.mContext.getResources().getString(R.string.mobile_hotspot_detail_password) + this.mPassWord);
             }
             updateConnectedDeviceList();
-            return inflate;
+            return viewInflate;
         }
 
         @Override // com.android.systemui.plugins.qs.DetailAdapter
@@ -713,7 +933,7 @@ public class HotspotTile extends SQSTileImpl {
             }
         }
 
-        public final void updateConnectedDeviceList() {
+        public final void updateConnectedDeviceList() throws NumberFormatException {
             HotspotTile hotspotTile = HotspotTile.this;
             if (hotspotTile.getSemWifiManager() == null) {
                 Log.e("HotspotTile", " updateConnectedDeviceList SemWifiManager is null");
@@ -730,25 +950,25 @@ public class HotspotTile extends SQSTileImpl {
                 QSDetailItems.Item[] itemArr = new QSDetailItems.Item[i];
                 if (i != 0) {
                     for (int i2 = 0; i2 < this.deviceCount; i2++) {
-                        String[] split = ((String) this.mConnectedDevices.get(i2)).split("\n");
-                        String str = split[2];
-                        long parseLong = Long.parseLong(split[3]);
-                        String format = DateFormat.getTimeFormat(hotspotTile.mContext).format(new Date(parseLong));
-                        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(DateFormat.format(DateFormat.getBestDateTimePattern(Locale.getDefault(), "MMM dd"), new Date(parseLong)).toString());
-                        m.append(hotspotTile.mContext.getString(R.string.comma));
-                        m.append(" ");
-                        m.append(format);
-                        String sb = m.toString();
+                        String[] strArrSplit = ((String) this.mConnectedDevices.get(i2)).split("\n");
+                        String string = strArrSplit[2];
+                        long j = Long.parseLong(strArrSplit[3]);
+                        String str = DateFormat.getTimeFormat(hotspotTile.mContext).format(new Date(j));
+                        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(DateFormat.format(DateFormat.getBestDateTimePattern(Locale.getDefault(), "MMM dd"), new Date(j)).toString());
+                        sbM.append(hotspotTile.mContext.getString(R.string.comma));
+                        sbM.append(" ");
+                        sbM.append(str);
+                        String string2 = sbM.toString();
                         QSDetailItems.Item item = new QSDetailItems.Item();
-                        if ("(null)".equals(str)) {
-                            str = hotspotTile.mContext.getString(R.string.mobile_hotspot_detail_connected_device);
+                        if ("(null)".equals(string)) {
+                            string = hotspotTile.mContext.getString(R.string.mobile_hotspot_detail_connected_device);
                         }
                         item.iconVisibility = false;
                         item.itemPaddingAboveBelow = hotspotTile.mContext.getResources().getDimensionPixelSize(R.dimen.wifi_ap_item_above_below_padding);
                         item.line1textSize = hotspotTile.mContext.getResources().getDimensionPixelSize(R.dimen.wifi_ap_item_title_text_size);
                         item.line2textSize = hotspotTile.mContext.getResources().getDimensionPixelSize(R.dimen.wifi_ap_item_summary_text_size);
-                        item.line1 = str;
-                        item.line2 = sb;
+                        item.line1 = string;
+                        item.line2 = string2;
                         item.isClickable = false;
                         itemArr[i2] = item;
                     }

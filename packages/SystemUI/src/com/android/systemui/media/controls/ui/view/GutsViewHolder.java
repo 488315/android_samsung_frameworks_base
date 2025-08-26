@@ -13,7 +13,6 @@ import java.util.Set;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GutsViewHolder {
     public static final Companion Companion = new Companion(null);
@@ -28,7 +27,6 @@ public final class GutsViewHolder {
     public final ImageButton settings;
     public Integer textColorFixed;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,9 +53,9 @@ public final class GutsViewHolder {
         }
         DynamicScheme dynamicScheme = colorScheme.mMaterialScheme;
         dynamicScheme.getClass();
-        ColorStateList valueOf = ColorStateList.valueOf(new MaterialDynamicColors().primaryFixed().getArgb(dynamicScheme));
-        this.dismissText.setBackgroundTintList(valueOf);
-        this.cancelText.setBackgroundTintList(valueOf);
+        ColorStateList colorStateListValueOf = ColorStateList.valueOf(new MaterialDynamicColors().primaryFixed().getArgb(dynamicScheme));
+        this.dismissText.setBackgroundTintList(colorStateListValueOf);
+        this.cancelText.setBackgroundTintList(colorStateListValueOf);
         DynamicScheme dynamicScheme2 = colorScheme.mMaterialScheme;
         dynamicScheme2.getClass();
         int argb = new MaterialDynamicColors().onPrimaryFixed().getArgb(dynamicScheme2);

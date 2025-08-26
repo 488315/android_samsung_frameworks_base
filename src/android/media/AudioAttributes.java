@@ -221,27 +221,27 @@ public final class AudioAttributes implements Parcelable {
                 return new AudioAttributes[i];
             }
         };
-        HashMap hashMap = new HashMap();
-        sXsdStringToUsage = hashMap;
-        hashMap.put(AudioUsage.AUDIO_USAGE_UNKNOWN.toString(), 0);
-        hashMap.put(AudioUsage.AUDIO_USAGE_UNKNOWN.toString(), 0);
-        hashMap.put(AudioUsage.AUDIO_USAGE_MEDIA.toString(), 1);
-        hashMap.put(AudioUsage.AUDIO_USAGE_VOICE_COMMUNICATION.toString(), 2);
-        hashMap.put(AudioUsage.AUDIO_USAGE_VOICE_COMMUNICATION_SIGNALLING.toString(), 3);
-        hashMap.put(AudioUsage.AUDIO_USAGE_ALARM.toString(), 4);
-        hashMap.put(AudioUsage.AUDIO_USAGE_NOTIFICATION.toString(), 5);
-        hashMap.put(AudioUsage.AUDIO_USAGE_NOTIFICATION_TELEPHONY_RINGTONE.toString(), 6);
-        hashMap.put(AudioUsage.AUDIO_USAGE_ASSISTANCE_ACCESSIBILITY.toString(), 11);
-        hashMap.put(AudioUsage.AUDIO_USAGE_ASSISTANCE_NAVIGATION_GUIDANCE.toString(), 12);
-        hashMap.put(AudioUsage.AUDIO_USAGE_ASSISTANCE_SONIFICATION.toString(), 13);
-        hashMap.put(AudioUsage.AUDIO_USAGE_GAME.toString(), 14);
-        hashMap.put(AudioUsage.AUDIO_USAGE_VIRTUAL_SOURCE.toString(), 15);
-        hashMap.put(AudioUsage.AUDIO_USAGE_ASSISTANT.toString(), 16);
-        hashMap.put(AudioUsage.AUDIO_USAGE_CALL_ASSISTANT.toString(), 17);
-        hashMap.put(AudioUsage.AUDIO_USAGE_EMERGENCY.toString(), 1000);
-        hashMap.put(AudioUsage.AUDIO_USAGE_SAFETY.toString(), 1001);
-        hashMap.put(AudioUsage.AUDIO_USAGE_VEHICLE_STATUS.toString(), 1002);
-        hashMap.put(AudioUsage.AUDIO_USAGE_ANNOUNCEMENT.toString(), 1003);
+        HashMap map = new HashMap();
+        sXsdStringToUsage = map;
+        map.put(AudioUsage.AUDIO_USAGE_UNKNOWN.toString(), 0);
+        map.put(AudioUsage.AUDIO_USAGE_UNKNOWN.toString(), 0);
+        map.put(AudioUsage.AUDIO_USAGE_MEDIA.toString(), 1);
+        map.put(AudioUsage.AUDIO_USAGE_VOICE_COMMUNICATION.toString(), 2);
+        map.put(AudioUsage.AUDIO_USAGE_VOICE_COMMUNICATION_SIGNALLING.toString(), 3);
+        map.put(AudioUsage.AUDIO_USAGE_ALARM.toString(), 4);
+        map.put(AudioUsage.AUDIO_USAGE_NOTIFICATION.toString(), 5);
+        map.put(AudioUsage.AUDIO_USAGE_NOTIFICATION_TELEPHONY_RINGTONE.toString(), 6);
+        map.put(AudioUsage.AUDIO_USAGE_ASSISTANCE_ACCESSIBILITY.toString(), 11);
+        map.put(AudioUsage.AUDIO_USAGE_ASSISTANCE_NAVIGATION_GUIDANCE.toString(), 12);
+        map.put(AudioUsage.AUDIO_USAGE_ASSISTANCE_SONIFICATION.toString(), 13);
+        map.put(AudioUsage.AUDIO_USAGE_GAME.toString(), 14);
+        map.put(AudioUsage.AUDIO_USAGE_VIRTUAL_SOURCE.toString(), 15);
+        map.put(AudioUsage.AUDIO_USAGE_ASSISTANT.toString(), 16);
+        map.put(AudioUsage.AUDIO_USAGE_CALL_ASSISTANT.toString(), 17);
+        map.put(AudioUsage.AUDIO_USAGE_EMERGENCY.toString(), 1000);
+        map.put(AudioUsage.AUDIO_USAGE_SAFETY.toString(), 1001);
+        map.put(AudioUsage.AUDIO_USAGE_VEHICLE_STATUS.toString(), 1002);
+        map.put(AudioUsage.AUDIO_USAGE_ANNOUNCEMENT.toString(), 1003);
     }
 
     public static int[] getSdkUsages() {
@@ -738,16 +738,16 @@ public final class AudioAttributes implements Parcelable {
             this.mFormattedTags = str;
             this.mTags.add(str);
         } else {
-            String[] readStringArray = parcel.readStringArray();
-            for (int length = readStringArray.length - 1; length >= 0; length--) {
-                this.mTags.add(readStringArray[length]);
+            String[] stringArray = parcel.readStringArray();
+            for (int length = stringArray.length - 1; length >= 0; length--) {
+                this.mTags.add(stringArray[length]);
             }
             this.mFormattedTags = TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, this.mTags);
         }
-        int readInt = parcel.readInt();
-        if (readInt == ATTR_PARCEL_IS_NULL_BUNDLE) {
+        int i = parcel.readInt();
+        if (i == ATTR_PARCEL_IS_NULL_BUNDLE) {
             this.mBundle = null;
-        } else if (readInt == 1980) {
+        } else if (i == 1980) {
             this.mBundle = new Bundle(parcel.readBundle());
         } else {
             Log.e(TAG, "Illegal value unmarshalling AudioAttributes, can't initialize bundle");
@@ -794,17 +794,17 @@ public final class AudioAttributes implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1159641169921L, this.mUsage);
         protoOutputStream.write(1159641169922L, this.mContentType);
         protoOutputStream.write(1120986464259L, this.mFlags);
         for (String str : this.mFormattedTags.split(NavigationBarInflaterView.GRAVITY_SEPARATOR)) {
-            String trim = str.trim();
-            if (trim != "") {
-                protoOutputStream.write(2237677961220L, trim);
+            String strTrim = str.trim();
+            if (strTrim != "") {
+                protoOutputStream.write(2237677961220L, strTrim);
             }
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public String usageToString() {
@@ -966,120 +966,70 @@ public final class AudioAttributes implements Parcelable {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0075 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0075 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static int toVolumeStreamType(boolean r7, android.media.AudioAttributes r8) {
-        /*
-            int r0 = r8.getFlags()
-            r1 = 1
-            r0 = r0 & r1
-            if (r0 != r1) goto Ld
-            if (r7 == 0) goto Lb
-            return r1
-        Lb:
-            r7 = 7
-            return r7
-        Ld:
-            int r0 = r8.getAllFlags()
-            r2 = 4
-            r0 = r0 & r2
-            r3 = 0
-            if (r0 != r2) goto L17
-            return r3
-        L17:
-            int r0 = r8.getAllFlags()
-            r4 = 8
-            r0 = r0 & r4
-            r5 = 3
-            if (r0 != r4) goto L27
-            if (r7 == 0) goto L24
-            return r5
-        L24:
-            r7 = 9
-            return r7
-        L27:
-            java.util.List r0 = android.media.audiopolicy.AudioProductStrategy.getAudioProductStrategies()
-            int r0 = r0.size()
-            if (r0 <= 0) goto L36
-            int r7 = android.media.audiopolicy.AudioProductStrategy.getLegacyStreamTypeForStrategyWithAudioAttributes(r8)
-            return r7
-        L36:
-            int r0 = r8.getUsage()
-            r6 = 16
-            if (r0 == r6) goto L77
-            r6 = 17
-            if (r0 == r6) goto L76
-            switch(r0) {
-                case 0: goto L75;
-                case 1: goto L77;
-                case 2: goto L76;
-                case 3: goto L71;
-                case 4: goto L70;
-                case 5: goto L6e;
-                case 6: goto L6c;
-                case 7: goto L6e;
-                case 8: goto L6e;
-                case 9: goto L6e;
-                case 10: goto L6e;
-                case 11: goto L69;
-                case 12: goto L77;
-                case 13: goto L68;
-                case 14: goto L77;
-                default: goto L45;
+    private static int toVolumeStreamType(boolean z, AudioAttributes audioAttributes) {
+        if ((audioAttributes.getFlags() & 1) == 1) {
+            return z ? 1 : 7;
+        }
+        if ((audioAttributes.getAllFlags() & 4) == 4) {
+            return 0;
+        }
+        if ((audioAttributes.getAllFlags() & 8) == 8) {
+            return z ? 3 : 9;
+        }
+        if (android.media.audiopolicy.AudioProductStrategy.getAudioProductStrategies().size() > 0) {
+            return android.media.audiopolicy.AudioProductStrategy.getLegacyStreamTypeForStrategyWithAudioAttributes(audioAttributes);
+        }
+        int usage = audioAttributes.getUsage();
+        if (usage != 16) {
+            if (usage != 17) {
+                switch (usage) {
+                    case 0:
+                        return 3;
+                    case 1:
+                    case 12:
+                    case 14:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        return z ? 0 : 8;
+                    case 4:
+                        return 4;
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                        return 5;
+                    case 6:
+                        return 2;
+                    case 11:
+                        return 10;
+                    case 13:
+                        return 1;
+                    default:
+                        switch (usage) {
+                            case 1000:
+                            case 1001:
+                            case 1002:
+                            case 1003:
+                            case 1004:
+                                break;
+                            default:
+                                if (!z) {
+                                    return 3;
+                                }
+                                throw new IllegalArgumentException("Unknown usage value " + audioAttributes.getUsage() + " in audio attributes");
+                        }
+                }
             }
-        L45:
-            switch(r0) {
-                case 1000: goto L75;
-                case 1001: goto L75;
-                case 1002: goto L75;
-                case 1003: goto L75;
-                case 1004: goto L75;
-                default: goto L48;
-            }
-        L48:
-            if (r7 != 0) goto L4b
-            return r5
-        L4b:
-            java.lang.IllegalArgumentException r7 = new java.lang.IllegalArgumentException
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "Unknown usage value "
-            r0.<init>(r1)
-            int r8 = r8.getUsage()
-            r0.append(r8)
-            java.lang.String r8 = " in audio attributes"
-            r0.append(r8)
-            java.lang.String r8 = r0.toString()
-            r7.<init>(r8)
-            throw r7
-        L68:
-            return r1
-        L69:
-            r7 = 10
-            return r7
-        L6c:
-            r7 = 2
-            return r7
-        L6e:
-            r7 = 5
-            return r7
-        L70:
-            return r2
-        L71:
-            if (r7 == 0) goto L74
-            return r3
-        L74:
-            return r4
-        L75:
-            return r5
-        L76:
-            return r3
-        L77:
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.AudioAttributes.toVolumeStreamType(boolean, android.media.AudioAttributes):int");
+            return 0;
+        }
+        return 3;
     }
 
     public static int capturePolicyToFlags(int i, int i2) {

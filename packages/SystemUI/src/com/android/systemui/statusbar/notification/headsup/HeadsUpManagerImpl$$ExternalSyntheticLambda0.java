@@ -19,7 +19,6 @@ import kotlin.collections.CollectionsKt__MutableCollectionsJVMKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId = 2;
@@ -37,7 +36,7 @@ public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda0 
     public final void run() {
         ExpandableNotificationRow expandableNotificationRow;
         ExpandableNotificationRow expandableNotificationRow2;
-        long elapsedRealtime;
+        long jElapsedRealtime;
         switch (this.$r8$classId) {
             case 0:
                 HeadsUpManagerImpl headsUpManagerImpl = (HeadsUpManagerImpl) this.f$0;
@@ -48,9 +47,9 @@ public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda0 
                 LogLevel logLevel = LogLevel.INFO;
                 HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(24);
                 LogBuffer logBuffer = headsUpManagerLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = NotificationUtils.logKey(str);
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = NotificationUtils.logKey(str);
+                logBuffer.commit(logMessageObtain);
                 headsUpManagerImpl.setEntryPinned(headsUpEntry, PinnedStatus.NotPinned, "unpinAll");
                 headsUpEntry.updateEntry("unpinAll", false, true);
                 NotificationEntry notificationEntry = headsUpEntry.mEntry;
@@ -69,7 +68,7 @@ public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda0 
                 switch (headsUpManagerImpl$HeadsUpEntry$$ExternalSyntheticLambda0.$r8$classId) {
                     case 0:
                         HeadsUpManagerImpl.HeadsUpEntry headsUpEntry3 = headsUpManagerImpl$HeadsUpEntry$$ExternalSyntheticLambda0.f$0;
-                        elapsedRealtime = headsUpEntry3.mEarliestRemovalTime - HeadsUpManagerImpl.this.mSystemClock.elapsedRealtime();
+                        jElapsedRealtime = headsUpEntry3.mEarliestRemovalTime - HeadsUpManagerImpl.this.mSystemClock.elapsedRealtime();
                         break;
                     default:
                         HeadsUpManagerImpl.HeadsUpEntry headsUpEntry4 = headsUpManagerImpl$HeadsUpEntry$$ExternalSyntheticLambda0.f$0;
@@ -84,12 +83,12 @@ public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda0 
                                 arrayList.add(headsUpEntry5);
                             }
                             CollectionsKt__MutableCollectionsJVMKt.sort(avalancheController.nextList);
-                            List plus = CollectionsKt___CollectionsKt.plus((Iterable) avalancheController.nextList, (Collection) arrayList);
+                            List listPlus = CollectionsKt___CollectionsKt.plus((Iterable) avalancheController.nextList, (Collection) arrayList);
                             String key = AvalancheController.getKey(headsUpEntry4);
-                            ArrayList arrayList2 = (ArrayList) plus;
-                            boolean isEmpty = arrayList2.isEmpty();
+                            ArrayList arrayList2 = (ArrayList) listPlus;
+                            boolean zIsEmpty = arrayList2.isEmpty();
                             HeadsUpManagerLogger headsUpManagerLogger2 = avalancheController.headsUpManagerLogger;
-                            if (isEmpty) {
+                            if (zIsEmpty) {
                                 headsUpManagerLogger2.logAvalancheDuration(key, remainingDuration$UpdatedDuration, "No avalanche HUNs, use default", "");
                             } else {
                                 Iterator it = arrayList2.iterator();
@@ -126,9 +125,9 @@ public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda0 
                         }
                         NotificationEntry notificationEntry2 = headsUpEntry4.mEntry;
                         long recommendedTimeoutMillis = headsUpEntry4.mPostTime + HeadsUpManagerImpl.this.mAccessibilityMgr.mAccessibilityManager.getRecommendedTimeoutMillis(notificationEntry2 == null ? false : notificationEntry2.isStickyAndNotDemoted() ? HeadsUpManagerImpl.this.mStickyForSomeTimeAutoDismissTime : remainingDuration$UpdatedDuration.duration, 7) + (headsUpEntry4.extended ? HeadsUpManagerImpl.this.mExtensionTime : 0);
-                        long elapsedRealtime2 = HeadsUpManagerImpl.this.mSystemClock.elapsedRealtime();
+                        long jElapsedRealtime2 = HeadsUpManagerImpl.this.mSystemClock.elapsedRealtime();
                         NotificationThrottleHun notificationThrottleHun = NotificationThrottleHun.INSTANCE;
-                        elapsedRealtime = Math.max(recommendedTimeoutMillis, headsUpEntry4.mEarliestRemovalTime) - elapsedRealtime2;
+                        jElapsedRealtime = Math.max(recommendedTimeoutMillis, headsUpEntry4.mEarliestRemovalTime) - jElapsedRealtime2;
                         break;
                 }
                 if (headsUpEntry2.mRemoveRunnable != null) {
@@ -138,7 +137,7 @@ public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda0 
                         runnable.run();
                         headsUpEntry2.mCancelRemoveRunnable = null;
                     }
-                    headsUpEntry2.mCancelRemoveRunnable = HeadsUpManagerImpl.this.mExecutor.executeDelayed(headsUpEntry2.mRemoveRunnable, elapsedRealtime);
+                    headsUpEntry2.mCancelRemoveRunnable = HeadsUpManagerImpl.this.mExecutor.executeDelayed(headsUpEntry2.mRemoveRunnable, jElapsedRealtime);
                     if (!z) {
                         HeadsUpManagerLogger headsUpManagerLogger3 = HeadsUpManagerImpl.this.mLogger;
                         NotificationEntry notificationEntry3 = headsUpEntry2.mEntry;
@@ -146,13 +145,13 @@ public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda0 
                         LogLevel logLevel2 = LogLevel.INFO;
                         HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda02 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(18);
                         LogBuffer logBuffer2 = headsUpManagerLogger3.buffer;
-                        LogMessage obtain2 = logBuffer2.obtain("HeadsUpManager", logLevel2, headsUpManagerLogger$$ExternalSyntheticLambda02, null);
+                        LogMessage logMessageObtain2 = logBuffer2.obtain("HeadsUpManager", logLevel2, headsUpManagerLogger$$ExternalSyntheticLambda02, null);
                         String logKey = NotificationUtilsKt.getLogKey(notificationEntry3);
-                        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain2;
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain2;
                         logMessageImpl.str1 = logKey;
-                        logMessageImpl.long1 = elapsedRealtime;
+                        logMessageImpl.long1 = jElapsedRealtime;
                         logMessageImpl.str2 = str2;
-                        logBuffer2.commit(obtain2);
+                        logBuffer2.commit(logMessageObtain2);
                         break;
                     } else {
                         HeadsUpManagerLogger headsUpManagerLogger4 = HeadsUpManagerImpl.this.mLogger;
@@ -161,13 +160,13 @@ public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda0 
                         LogLevel logLevel3 = LogLevel.INFO;
                         HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda03 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(15);
                         LogBuffer logBuffer3 = headsUpManagerLogger4.buffer;
-                        LogMessage obtain3 = logBuffer3.obtain("HeadsUpManager", logLevel3, headsUpManagerLogger$$ExternalSyntheticLambda03, null);
+                        LogMessage logMessageObtain3 = logBuffer3.obtain("HeadsUpManager", logLevel3, headsUpManagerLogger$$ExternalSyntheticLambda03, null);
                         String logKey2 = NotificationUtilsKt.getLogKey(notificationEntry4);
-                        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain3;
+                        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain3;
                         logMessageImpl2.str1 = logKey2;
-                        logMessageImpl2.long1 = elapsedRealtime;
+                        logMessageImpl2.long1 = jElapsedRealtime;
                         logMessageImpl2.str2 = str2;
-                        logBuffer3.commit(obtain3);
+                        logBuffer3.commit(logMessageObtain3);
                         break;
                     }
                 } else {

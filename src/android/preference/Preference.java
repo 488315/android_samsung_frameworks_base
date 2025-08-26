@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -136,66 +137,66 @@ public class Preference implements Comparable<Preference> {
         this.mCategoryBGColor = 0;
         this.mWhere = 0;
         this.mContext = context;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Preference, i, i2);
-        for (int indexCount = obtainStyledAttributes.getIndexCount() - 1; indexCount >= 0; indexCount--) {
-            int index = obtainStyledAttributes.getIndex(indexCount);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Preference, i, i2);
+        for (int indexCount = typedArrayObtainStyledAttributes.getIndexCount() - 1; indexCount >= 0; indexCount--) {
+            int index = typedArrayObtainStyledAttributes.getIndex(indexCount);
             switch (index) {
                 case 0:
-                    this.mIconResId = obtainStyledAttributes.getResourceId(index, 0);
+                    this.mIconResId = typedArrayObtainStyledAttributes.getResourceId(index, 0);
                     break;
                 case 1:
-                    this.mPersistent = obtainStyledAttributes.getBoolean(index, this.mPersistent);
+                    this.mPersistent = typedArrayObtainStyledAttributes.getBoolean(index, this.mPersistent);
                     break;
                 case 2:
-                    this.mEnabled = obtainStyledAttributes.getBoolean(index, true);
+                    this.mEnabled = typedArrayObtainStyledAttributes.getBoolean(index, true);
                     break;
                 case 3:
-                    this.mLayoutResId = obtainStyledAttributes.getResourceId(index, this.mLayoutResId);
+                    this.mLayoutResId = typedArrayObtainStyledAttributes.getResourceId(index, this.mLayoutResId);
                     break;
                 case 4:
-                    this.mTitleRes = obtainStyledAttributes.getResourceId(index, 0);
-                    this.mTitle = obtainStyledAttributes.getText(index);
+                    this.mTitleRes = typedArrayObtainStyledAttributes.getResourceId(index, 0);
+                    this.mTitle = typedArrayObtainStyledAttributes.getText(index);
                     break;
                 case 5:
-                    this.mSelectable = obtainStyledAttributes.getBoolean(index, true);
+                    this.mSelectable = typedArrayObtainStyledAttributes.getBoolean(index, true);
                     break;
                 case 6:
-                    this.mKey = obtainStyledAttributes.getString(index);
+                    this.mKey = typedArrayObtainStyledAttributes.getString(index);
                     break;
                 case 7:
-                    this.mSummary = obtainStyledAttributes.getText(index);
+                    this.mSummary = typedArrayObtainStyledAttributes.getText(index);
                     break;
                 case 8:
-                    this.mOrder = obtainStyledAttributes.getInt(index, this.mOrder);
+                    this.mOrder = typedArrayObtainStyledAttributes.getInt(index, this.mOrder);
                     break;
                 case 9:
-                    this.mWidgetLayoutResId = obtainStyledAttributes.getResourceId(index, this.mWidgetLayoutResId);
+                    this.mWidgetLayoutResId = typedArrayObtainStyledAttributes.getResourceId(index, this.mWidgetLayoutResId);
                     break;
                 case 10:
-                    this.mDependencyKey = obtainStyledAttributes.getString(index);
+                    this.mDependencyKey = typedArrayObtainStyledAttributes.getString(index);
                     break;
                 case 11:
-                    this.mDefaultValue = onGetDefaultValue(obtainStyledAttributes, index);
+                    this.mDefaultValue = onGetDefaultValue(typedArrayObtainStyledAttributes, index);
                     break;
                 case 12:
-                    this.mShouldDisableView = obtainStyledAttributes.getBoolean(index, this.mShouldDisableView);
+                    this.mShouldDisableView = typedArrayObtainStyledAttributes.getBoolean(index, this.mShouldDisableView);
                     break;
                 case 13:
-                    this.mFragment = obtainStyledAttributes.getString(index);
+                    this.mFragment = typedArrayObtainStyledAttributes.getString(index);
                     break;
                 case 14:
-                    this.mRecycleEnabled = obtainStyledAttributes.getBoolean(index, this.mRecycleEnabled);
+                    this.mRecycleEnabled = typedArrayObtainStyledAttributes.getBoolean(index, this.mRecycleEnabled);
                     break;
                 case 15:
-                    this.mSingleLineTitle = obtainStyledAttributes.getBoolean(index, this.mSingleLineTitle);
+                    this.mSingleLineTitle = typedArrayObtainStyledAttributes.getBoolean(index, this.mSingleLineTitle);
                     this.mHasSingleLineTitleAttr = true;
                     break;
                 case 16:
-                    this.mIconSpaceReserved = obtainStyledAttributes.getBoolean(index, this.mIconSpaceReserved);
+                    this.mIconSpaceReserved = typedArrayObtainStyledAttributes.getBoolean(index, this.mIconSpaceReserved);
                     break;
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, typedValue, true);
         this.mIsDeviceDefault = typedValue.data != 0;
@@ -296,7 +297,7 @@ public class Preference implements Comparable<Preference> {
         return this.mWidgetLayoutResId;
     }
 
-    public View getView(View view, ViewGroup viewGroup) {
+    public View getView(View view, ViewGroup viewGroup) throws Resources.NotFoundException {
         if (view == null) {
             view = onCreateView(viewGroup);
         }
@@ -307,22 +308,22 @@ public class Preference implements Comparable<Preference> {
         return view;
     }
 
-    protected View onCreateView(ViewGroup viewGroup) {
+    protected View onCreateView(ViewGroup viewGroup) throws Resources.NotFoundException {
         LayoutInflater layoutInflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View inflate = layoutInflater.inflate(this.mLayoutResId, viewGroup, false);
-        ViewGroup viewGroup2 = (ViewGroup) inflate.findViewById(16908312);
+        View viewInflate = layoutInflater.inflate(this.mLayoutResId, viewGroup, false);
+        ViewGroup viewGroup2 = (ViewGroup) viewInflate.findViewById(16908312);
         if (viewGroup2 != null) {
             int i = this.mWidgetLayoutResId;
             if (i != 0) {
                 layoutInflater.inflate(i, viewGroup2);
-                return inflate;
+                return viewInflate;
             }
             viewGroup2.setVisibility(8);
         }
-        return inflate;
+        return viewInflate;
     }
 
-    protected void onBindView(View view) {
+    protected void onBindView(View view) throws Resources.NotFoundException {
         TextView textView = (TextView) view.findViewById(16908310);
         if (this.mIsMetaDataInActivity) {
             if (!(this instanceof PreferenceCategory)) {
@@ -391,12 +392,12 @@ public class Preference implements Comparable<Preference> {
                 imageView.setVisibility(this.mIconSpaceReserved ? 4 : 8);
             }
         }
-        View findViewById = view.findViewById(16908350);
-        if (findViewById != null) {
+        View viewFindViewById = view.findViewById(16908350);
+        if (viewFindViewById != null) {
             if (this.mIcon != null) {
-                findViewById.setVisibility(0);
+                viewFindViewById.setVisibility(0);
             } else {
-                findViewById.setVisibility(this.mIconSpaceReserved ? 4 : 8);
+                viewFindViewById.setVisibility(this.mIconSpaceReserved ? 4 : 8);
             }
         }
         if (this.mShouldDisableView) {
@@ -404,7 +405,7 @@ public class Preference implements Comparable<Preference> {
         }
     }
 
-    private void setEnabledStateOnViews(View view, boolean z) {
+    private void setEnabledStateOnViews(View view, boolean z) throws Resources.NotFoundException {
         view.setEnabled(z);
         if (view instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) view;
@@ -711,21 +712,21 @@ public class Preference implements Comparable<Preference> {
         if (TextUtils.isEmpty(this.mDependencyKey)) {
             return;
         }
-        Preference findPreferenceInHierarchy = findPreferenceInHierarchy(this.mDependencyKey);
-        if (findPreferenceInHierarchy != null) {
-            findPreferenceInHierarchy.registerDependent(this);
+        Preference preferenceFindPreferenceInHierarchy = findPreferenceInHierarchy(this.mDependencyKey);
+        if (preferenceFindPreferenceInHierarchy != null) {
+            preferenceFindPreferenceInHierarchy.registerDependent(this);
             return;
         }
         throw new IllegalStateException("Dependency \"" + this.mDependencyKey + "\" not found for preference \"" + this.mKey + "\" (title: \"" + ((Object) this.mTitle) + "\"");
     }
 
     private void unregisterDependency() {
-        Preference findPreferenceInHierarchy;
+        Preference preferenceFindPreferenceInHierarchy;
         String str = this.mDependencyKey;
-        if (str == null || (findPreferenceInHierarchy = findPreferenceInHierarchy(str)) == null) {
+        if (str == null || (preferenceFindPreferenceInHierarchy = findPreferenceInHierarchy(str)) == null) {
             return;
         }
-        findPreferenceInHierarchy.unregisterDependent(this);
+        preferenceFindPreferenceInHierarchy.unregisterDependent(this);
     }
 
     protected Preference findPreferenceInHierarchy(String str) {
@@ -1033,12 +1034,12 @@ public class Preference implements Comparable<Preference> {
     void dispatchSaveInstanceState(Bundle bundle) {
         if (hasKey()) {
             this.mBaseMethodCalled = false;
-            Parcelable onSaveInstanceState = onSaveInstanceState();
+            Parcelable parcelableOnSaveInstanceState = onSaveInstanceState();
             if (!this.mBaseMethodCalled) {
                 throw new IllegalStateException("Derived class did not call super.onSaveInstanceState()");
             }
-            if (onSaveInstanceState != null) {
-                bundle.putParcelable(this.mKey, onSaveInstanceState);
+            if (parcelableOnSaveInstanceState != null) {
+                bundle.putParcelable(this.mKey, parcelableOnSaveInstanceState);
             }
         }
     }

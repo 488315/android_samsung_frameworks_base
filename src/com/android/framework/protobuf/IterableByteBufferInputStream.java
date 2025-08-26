@@ -80,9 +80,9 @@ class IterableByteBufferInputStream extends InputStream {
         if (this.currentIndex == this.dataSize) {
             return -1;
         }
-        int limit = this.currentByteBuffer.limit();
+        int iLimit = this.currentByteBuffer.limit();
         int i3 = this.currentByteBufferPos;
-        int i4 = limit - i3;
+        int i4 = iLimit - i3;
         if (i2 > i4) {
             i2 = i4;
         }
@@ -91,10 +91,10 @@ class IterableByteBufferInputStream extends InputStream {
             updateCurrentByteBufferPos(i2);
             return i2;
         }
-        int position = this.currentByteBuffer.position();
+        int iPosition = this.currentByteBuffer.position();
         this.currentByteBuffer.position(this.currentByteBufferPos);
         this.currentByteBuffer.get(bArr, i, i2);
-        this.currentByteBuffer.position(position);
+        this.currentByteBuffer.position(iPosition);
         updateCurrentByteBufferPos(i2);
         return i2;
     }

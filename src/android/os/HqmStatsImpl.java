@@ -92,29 +92,29 @@ public class HqmStatsImpl implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.mHWParamResultDataFromK.clear();
-        for (int i = 0; i < readInt; i++) {
-            String readString = parcel.readString();
+        for (int i2 = 0; i2 < i; i2++) {
+            String string = parcel.readString();
             HWParamResultData hWParamResultData = new HWParamResultData();
             hWParamResultData.readFromParcelLocked(parcel);
-            this.mHWParamResultDataFromK.put(readString, hWParamResultData);
+            this.mHWParamResultDataFromK.put(string, hWParamResultData);
         }
-        int readInt2 = parcel.readInt();
+        int i3 = parcel.readInt();
         this.mHWParamResultDataFromA.clear();
-        for (int i2 = 0; i2 < readInt2; i2++) {
-            String readString2 = parcel.readString();
+        for (int i4 = 0; i4 < i3; i4++) {
+            String string2 = parcel.readString();
             HWParamResultData hWParamResultData2 = new HWParamResultData();
             hWParamResultData2.readFromParcelLocked(parcel);
-            this.mHWParamResultDataFromA.put(readString2, hWParamResultData2);
+            this.mHWParamResultDataFromA.put(string2, hWParamResultData2);
         }
-        int readInt3 = parcel.readInt();
+        int i5 = parcel.readInt();
         this.mHWParamResultDataFromI.clear();
-        for (int i3 = 0; i3 < readInt3; i3++) {
-            String readString3 = parcel.readString();
+        for (int i6 = 0; i6 < i5; i6++) {
+            String string3 = parcel.readString();
             HWParamResultData hWParamResultData3 = new HWParamResultData();
             hWParamResultData3.readFromParcelLocked(parcel);
-            this.mHWParamResultDataFromI.put(readString3, hWParamResultData3);
+            this.mHWParamResultDataFromI.put(string3, hWParamResultData3);
         }
     }
 

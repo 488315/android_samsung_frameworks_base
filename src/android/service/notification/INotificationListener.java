@@ -242,9 +242,9 @@ public interface INotificationListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INotificationListener)) {
-                return (INotificationListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INotificationListener)) {
+                return (INotificationListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -333,10 +333,10 @@ public interface INotificationListener extends IInterface {
                     onListenerConnected(notificationRankingUpdate);
                     return true;
                 case 2:
-                    IStatusBarNotificationHolder asInterface = IStatusBarNotificationHolder.Stub.asInterface(parcel.readStrongBinder());
+                    IStatusBarNotificationHolder iStatusBarNotificationHolderAsInterface = IStatusBarNotificationHolder.Stub.asInterface(parcel.readStrongBinder());
                     NotificationRankingUpdate notificationRankingUpdate2 = (NotificationRankingUpdate) parcel.readTypedObject(NotificationRankingUpdate.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onNotificationPosted(asInterface, notificationRankingUpdate2);
+                    onNotificationPosted(iStatusBarNotificationHolderAsInterface, notificationRankingUpdate2);
                     return true;
                 case 3:
                     StatusBarNotification statusBarNotification = (StatusBarNotification) parcel.readTypedObject(StatusBarNotification.CREATOR);
@@ -345,25 +345,25 @@ public interface INotificationListener extends IInterface {
                     onNotificationPostedFull(statusBarNotification, notificationRankingUpdate3);
                     return true;
                 case 4:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onStatusBarIconsBehaviorChanged(readBoolean);
+                    onStatusBarIconsBehaviorChanged(z);
                     return true;
                 case 5:
-                    IStatusBarNotificationHolder asInterface2 = IStatusBarNotificationHolder.Stub.asInterface(parcel.readStrongBinder());
+                    IStatusBarNotificationHolder iStatusBarNotificationHolderAsInterface2 = IStatusBarNotificationHolder.Stub.asInterface(parcel.readStrongBinder());
                     NotificationRankingUpdate notificationRankingUpdate4 = (NotificationRankingUpdate) parcel.readTypedObject(NotificationRankingUpdate.CREATOR);
                     NotificationStats notificationStats = (NotificationStats) parcel.readTypedObject(NotificationStats.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNotificationRemoved(asInterface2, notificationRankingUpdate4, notificationStats, readInt);
+                    onNotificationRemoved(iStatusBarNotificationHolderAsInterface2, notificationRankingUpdate4, notificationStats, i3);
                     return true;
                 case 6:
                     StatusBarNotification statusBarNotification2 = (StatusBarNotification) parcel.readTypedObject(StatusBarNotification.CREATOR);
                     NotificationRankingUpdate notificationRankingUpdate5 = (NotificationRankingUpdate) parcel.readTypedObject(NotificationRankingUpdate.CREATOR);
                     NotificationStats notificationStats2 = (NotificationStats) parcel.readTypedObject(NotificationStats.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNotificationRemovedFull(statusBarNotification2, notificationRankingUpdate5, notificationStats2, readInt2);
+                    onNotificationRemovedFull(statusBarNotification2, notificationRankingUpdate5, notificationStats2, i4);
                     return true;
                 case 7:
                     NotificationRankingUpdate notificationRankingUpdate6 = (NotificationRankingUpdate) parcel.readTypedObject(NotificationRankingUpdate.CREATOR);
@@ -371,37 +371,37 @@ public interface INotificationListener extends IInterface {
                     onNotificationRankingUpdate(notificationRankingUpdate6);
                     return true;
                 case 8:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onListenerHintsChanged(readInt3);
+                    onListenerHintsChanged(i5);
                     return true;
                 case 9:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onInterruptionFilterChanged(readInt4);
+                    onInterruptionFilterChanged(i6);
                     return true;
                 case 10:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     NotificationChannel notificationChannel = (NotificationChannel) parcel.readTypedObject(NotificationChannel.CREATOR);
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNotificationChannelModification(readString, userHandle, notificationChannel, readInt5);
+                    onNotificationChannelModification(string, userHandle, notificationChannel, i7);
                     return true;
                 case 11:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     UserHandle userHandle2 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     NotificationChannelGroup notificationChannelGroup = (NotificationChannelGroup) parcel.readTypedObject(NotificationChannelGroup.CREATOR);
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNotificationChannelGroupModification(readString2, userHandle2, notificationChannelGroup, readInt6);
+                    onNotificationChannelGroupModification(string2, userHandle2, notificationChannelGroup, i8);
                     return true;
                 case 12:
-                    IStatusBarNotificationHolder asInterface3 = IStatusBarNotificationHolder.Stub.asInterface(parcel.readStrongBinder());
+                    IStatusBarNotificationHolder iStatusBarNotificationHolderAsInterface3 = IStatusBarNotificationHolder.Stub.asInterface(parcel.readStrongBinder());
                     NotificationChannel notificationChannel2 = (NotificationChannel) parcel.readTypedObject(NotificationChannel.CREATOR);
                     NotificationRankingUpdate notificationRankingUpdate7 = (NotificationRankingUpdate) parcel.readTypedObject(NotificationRankingUpdate.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onNotificationEnqueuedWithChannel(asInterface3, notificationChannel2, notificationRankingUpdate7);
+                    onNotificationEnqueuedWithChannel(iStatusBarNotificationHolderAsInterface3, notificationChannel2, notificationRankingUpdate7);
                     return true;
                 case 13:
                     StatusBarNotification statusBarNotification3 = (StatusBarNotification) parcel.readTypedObject(StatusBarNotification.CREATOR);
@@ -411,90 +411,90 @@ public interface INotificationListener extends IInterface {
                     onNotificationEnqueuedWithChannelFull(statusBarNotification3, notificationChannel3, notificationRankingUpdate8);
                     return true;
                 case 14:
-                    IStatusBarNotificationHolder asInterface4 = IStatusBarNotificationHolder.Stub.asInterface(parcel.readStrongBinder());
-                    String readString3 = parcel.readString();
+                    IStatusBarNotificationHolder iStatusBarNotificationHolderAsInterface4 = IStatusBarNotificationHolder.Stub.asInterface(parcel.readStrongBinder());
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onNotificationSnoozedUntilContext(asInterface4, readString3);
+                    onNotificationSnoozedUntilContext(iStatusBarNotificationHolderAsInterface4, string3);
                     return true;
                 case 15:
                     StatusBarNotification statusBarNotification4 = (StatusBarNotification) parcel.readTypedObject(StatusBarNotification.CREATOR);
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onNotificationSnoozedUntilContextFull(statusBarNotification4, readString4);
+                    onNotificationSnoozedUntilContextFull(statusBarNotification4, string4);
                     return true;
                 case 16:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    onNotificationsSeen(createStringArrayList);
+                    onNotificationsSeen(arrayListCreateStringArrayList);
                     return true;
                 case 17:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onPanelRevealed(readInt7);
+                    onPanelRevealed(i9);
                     return true;
                 case 18:
                     onPanelHidden();
                     return true;
                 case 19:
-                    String readString5 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string5 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onNotificationVisibilityChanged(readString5, readBoolean2);
+                    onNotificationVisibilityChanged(string5, z2);
                     return true;
                 case 20:
-                    String readString6 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    String string6 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onNotificationExpansionChanged(readString6, readBoolean3, readBoolean4);
+                    onNotificationExpansionChanged(string6, z3, z4);
                     return true;
                 case 21:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onNotificationDirectReply(readString7);
+                    onNotificationDirectReply(string7);
                     return true;
                 case 22:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onSuggestedReplySent(readString8, charSequence, readInt8);
+                    onSuggestedReplySent(string8, charSequence, i10);
                     return true;
                 case 23:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     Notification.Action action = (Notification.Action) parcel.readTypedObject(Notification.Action.CREATOR);
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onActionClicked(readString9, action, readInt9);
+                    onActionClicked(string9, action, i11);
                     return true;
                 case 24:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onNotificationClicked(readString10);
+                    onNotificationClicked(string10);
                     return true;
                 case 25:
                     onAllowedAdjustmentsChanged();
                     return true;
                 case 26:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     NotificationRankingUpdate notificationRankingUpdate9 = (NotificationRankingUpdate) parcel.readTypedObject(NotificationRankingUpdate.CREATOR);
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onNotificationFeedbackReceived(readString11, notificationRankingUpdate9, bundle);
+                    onNotificationFeedbackReceived(string11, notificationRankingUpdate9, bundle);
                     return true;
                 case 27:
-                    String readString12 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i12 = parcel.readInt();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onEdgeNotificationPosted(readString12, readInt10, bundle2);
+                    onEdgeNotificationPosted(string12, i12, bundle2);
                     return true;
                 case 28:
-                    String readString13 = parcel.readString();
-                    int readInt11 = parcel.readInt();
+                    String string13 = parcel.readString();
+                    int i13 = parcel.readInt();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onEdgeNotificationRemoved(readString13, readInt11, bundle3);
+                    onEdgeNotificationRemoved(string13, i13, bundle3);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -519,373 +519,373 @@ public interface INotificationListener extends IInterface {
 
             @Override // android.service.notification.INotificationListener
             public void onListenerConnected(NotificationRankingUpdate notificationRankingUpdate) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(notificationRankingUpdate, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(notificationRankingUpdate, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationPosted(IStatusBarNotificationHolder iStatusBarNotificationHolder, NotificationRankingUpdate notificationRankingUpdate) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStatusBarNotificationHolder);
-                    obtain.writeTypedObject(notificationRankingUpdate, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStatusBarNotificationHolder);
+                    parcelObtain.writeTypedObject(notificationRankingUpdate, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationPostedFull(StatusBarNotification statusBarNotification, NotificationRankingUpdate notificationRankingUpdate) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(statusBarNotification, 0);
-                    obtain.writeTypedObject(notificationRankingUpdate, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(statusBarNotification, 0);
+                    parcelObtain.writeTypedObject(notificationRankingUpdate, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onStatusBarIconsBehaviorChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationRemoved(IStatusBarNotificationHolder iStatusBarNotificationHolder, NotificationRankingUpdate notificationRankingUpdate, NotificationStats notificationStats, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStatusBarNotificationHolder);
-                    obtain.writeTypedObject(notificationRankingUpdate, 0);
-                    obtain.writeTypedObject(notificationStats, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStatusBarNotificationHolder);
+                    parcelObtain.writeTypedObject(notificationRankingUpdate, 0);
+                    parcelObtain.writeTypedObject(notificationStats, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationRemovedFull(StatusBarNotification statusBarNotification, NotificationRankingUpdate notificationRankingUpdate, NotificationStats notificationStats, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(statusBarNotification, 0);
-                    obtain.writeTypedObject(notificationRankingUpdate, 0);
-                    obtain.writeTypedObject(notificationStats, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(statusBarNotification, 0);
+                    parcelObtain.writeTypedObject(notificationRankingUpdate, 0);
+                    parcelObtain.writeTypedObject(notificationStats, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationRankingUpdate(NotificationRankingUpdate notificationRankingUpdate) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(notificationRankingUpdate, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(notificationRankingUpdate, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onListenerHintsChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onInterruptionFilterChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationChannelModification(String str, UserHandle userHandle, NotificationChannel notificationChannel, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeTypedObject(notificationChannel, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeTypedObject(notificationChannel, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationChannelGroupModification(String str, UserHandle userHandle, NotificationChannelGroup notificationChannelGroup, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeTypedObject(notificationChannelGroup, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeTypedObject(notificationChannelGroup, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationEnqueuedWithChannel(IStatusBarNotificationHolder iStatusBarNotificationHolder, NotificationChannel notificationChannel, NotificationRankingUpdate notificationRankingUpdate) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStatusBarNotificationHolder);
-                    obtain.writeTypedObject(notificationChannel, 0);
-                    obtain.writeTypedObject(notificationRankingUpdate, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStatusBarNotificationHolder);
+                    parcelObtain.writeTypedObject(notificationChannel, 0);
+                    parcelObtain.writeTypedObject(notificationRankingUpdate, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationEnqueuedWithChannelFull(StatusBarNotification statusBarNotification, NotificationChannel notificationChannel, NotificationRankingUpdate notificationRankingUpdate) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(statusBarNotification, 0);
-                    obtain.writeTypedObject(notificationChannel, 0);
-                    obtain.writeTypedObject(notificationRankingUpdate, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(statusBarNotification, 0);
+                    parcelObtain.writeTypedObject(notificationChannel, 0);
+                    parcelObtain.writeTypedObject(notificationRankingUpdate, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationSnoozedUntilContext(IStatusBarNotificationHolder iStatusBarNotificationHolder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStatusBarNotificationHolder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStatusBarNotificationHolder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationSnoozedUntilContextFull(StatusBarNotification statusBarNotification, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(statusBarNotification, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(statusBarNotification, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationsSeen(List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onPanelRevealed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onPanelHidden() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationVisibilityChanged(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationExpansionChanged(String str, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationDirectReply(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onSuggestedReplySent(String str, CharSequence charSequence, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onActionClicked(String str, Notification.Action action, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(action, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(action, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationClicked(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(24, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(24, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onAllowedAdjustmentsChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(25, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(25, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onNotificationFeedbackReceived(String str, NotificationRankingUpdate notificationRankingUpdate, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(notificationRankingUpdate, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(26, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(notificationRankingUpdate, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(26, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onEdgeNotificationPosted(String str, int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(27, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(27, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.notification.INotificationListener
             public void onEdgeNotificationRemoved(String str, int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(28, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(28, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

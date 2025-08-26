@@ -9,7 +9,6 @@ import com.samsung.android.knox.ContextInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IFirewall extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.net.firewall.IFirewall";
@@ -50,7 +49,6 @@ public interface IFirewall extends IInterface {
 
     boolean shouldBlockDownload(String str, String str2, int i) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IFirewall {
         public static final int TRANSACTION_addDomainFilterRules = 10;
         public static final int TRANSACTION_addRules = 1;
@@ -71,7 +69,6 @@ public interface IFirewall extends IInterface {
         public static final int TRANSACTION_removeRules = 2;
         public static final int TRANSACTION_shouldBlockDownload = 18;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IFirewall {
             public IBinder mRemote;
 
@@ -81,35 +78,35 @@ public interface IFirewall extends IInterface {
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public FirewallResponse[] addDomainFilterRules(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FirewallResponse[]) obtain2.createTypedArray(FirewallResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FirewallResponse[]) parcelObtain2.createTypedArray(FirewallResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public FirewallResponse[] addRules(ContextInfo contextInfo, FirewallRule[] firewallRuleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedArray(firewallRuleArr, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FirewallResponse[]) obtain2.createTypedArray(FirewallResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedArray(firewallRuleArr, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FirewallResponse[]) parcelObtain2.createTypedArray(FirewallResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -120,120 +117,120 @@ public interface IFirewall extends IInterface {
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public FirewallResponse[] clearAllDomainFilterRules(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FirewallResponse[]) obtain2.createTypedArray(FirewallResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FirewallResponse[]) parcelObtain2.createTypedArray(FirewallResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public FirewallResponse[] clearRules(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FirewallResponse[]) obtain2.createTypedArray(FirewallResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FirewallResponse[]) parcelObtain2.createTypedArray(FirewallResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public FirewallResponse enableDomainFilterOnIptables(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FirewallResponse) obtain2.readTypedObject(FirewallResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FirewallResponse) parcelObtain2.readTypedObject(FirewallResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public FirewallResponse enableDomainFilterReport(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FirewallResponse) obtain2.readTypedObject(FirewallResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FirewallResponse) parcelObtain2.readTypedObject(FirewallResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public FirewallResponse enableFirewall(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FirewallResponse) obtain2.readTypedObject(FirewallResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FirewallResponse) parcelObtain2.readTypedObject(FirewallResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public List<DomainFilterReport> getDomainFilterReport(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(DomainFilterReport.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(DomainFilterReport.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public List<DomainFilterRule> getDomainFilterRules(ContextInfo contextInfo, List<String> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(DomainFilterRule.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(DomainFilterRule.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -243,152 +240,152 @@ public interface IFirewall extends IInterface {
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public FirewallRule[] getRules(ContextInfo contextInfo, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FirewallRule[]) obtain2.createTypedArray(FirewallRule.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FirewallRule[]) parcelObtain2.createTypedArray(FirewallRule.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public boolean isDomainFilterOnIptablesEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public boolean isDomainFilterReportEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public boolean isFirewallEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public String[] listIptablesRules(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public void populateDomainFilterBrokenRules(ContextInfo contextInfo, List<DomainFilterRule> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public FirewallResponse[] removeDomainFilterRules(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FirewallResponse[]) obtain2.createTypedArray(FirewallResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FirewallResponse[]) parcelObtain2.createTypedArray(FirewallResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public FirewallResponse[] removeRules(ContextInfo contextInfo, FirewallRule[] firewallRuleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedArray(firewallRuleArr, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FirewallResponse[]) obtain2.createTypedArray(FirewallResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedArray(firewallRuleArr, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FirewallResponse[]) parcelObtain2.createTypedArray(FirewallResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.firewall.IFirewall
             public boolean shouldBlockDownload(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IFirewall.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -401,8 +398,8 @@ public interface IFirewall extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFirewall.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IFirewall)) ? new Proxy(iBinder) : (IFirewall) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFirewall.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IFirewall)) ? new Proxy(iBinder) : (IFirewall) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -419,143 +416,143 @@ public interface IFirewall extends IInterface {
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     FirewallRule[] firewallRuleArr = (FirewallRule[]) parcel.createTypedArray(FirewallRule.CREATOR);
                     parcel.enforceNoDataAvail();
-                    FirewallResponse[] addRules = addRules(contextInfo, firewallRuleArr);
+                    FirewallResponse[] firewallResponseArrAddRules = addRules(contextInfo, firewallRuleArr);
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(addRules, 1);
+                    parcel2.writeTypedArray(firewallResponseArrAddRules, 1);
                     return true;
                 case 2:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     FirewallRule[] firewallRuleArr2 = (FirewallRule[]) parcel.createTypedArray(FirewallRule.CREATOR);
                     parcel.enforceNoDataAvail();
-                    FirewallResponse[] removeRules = removeRules(contextInfo2, firewallRuleArr2);
+                    FirewallResponse[] firewallResponseArrRemoveRules = removeRules(contextInfo2, firewallRuleArr2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(removeRules, 1);
+                    parcel2.writeTypedArray(firewallResponseArrRemoveRules, 1);
                     return true;
                 case 3:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    FirewallRule[] rules = getRules(contextInfo3, readInt, readString);
+                    FirewallRule[] rules = getRules(contextInfo3, i3, string);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(rules, 1);
                     return true;
                 case 4:
                     ContextInfo contextInfo4 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    FirewallResponse[] clearRules = clearRules(contextInfo4, readInt2);
+                    FirewallResponse[] firewallResponseArrClearRules = clearRules(contextInfo4, i4);
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(clearRules, 1);
+                    parcel2.writeTypedArray(firewallResponseArrClearRules, 1);
                     return true;
                 case 5:
                     ContextInfo contextInfo5 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    FirewallResponse enableFirewall = enableFirewall(contextInfo5, readBoolean);
+                    FirewallResponse firewallResponseEnableFirewall = enableFirewall(contextInfo5, z);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(enableFirewall, 1);
+                    parcel2.writeTypedObject(firewallResponseEnableFirewall, 1);
                     return true;
                 case 6:
                     ContextInfo contextInfo6 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isFirewallEnabled = isFirewallEnabled(contextInfo6);
+                    boolean zIsFirewallEnabled = isFirewallEnabled(contextInfo6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFirewallEnabled);
+                    parcel2.writeBoolean(zIsFirewallEnabled);
                     return true;
                 case 7:
                     ContextInfo contextInfo7 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    String[] listIptablesRules = listIptablesRules(contextInfo7);
+                    String[] strArrListIptablesRules = listIptablesRules(contextInfo7);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(listIptablesRules);
+                    parcel2.writeStringArray(strArrListIptablesRules);
                     return true;
                 case 8:
                     ContextInfo contextInfo8 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(DomainFilterRule.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(DomainFilterRule.CREATOR);
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    populateDomainFilterBrokenRules(contextInfo8, createTypedArrayList, readInt3);
+                    populateDomainFilterBrokenRules(contextInfo8, arrayListCreateTypedArrayList, i5);
                     parcel2.writeNoException();
                     return true;
                 case 9:
                     ContextInfo contextInfo9 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    FirewallResponse[] clearAllDomainFilterRules = clearAllDomainFilterRules(contextInfo9);
+                    FirewallResponse[] firewallResponseArrClearAllDomainFilterRules = clearAllDomainFilterRules(contextInfo9);
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(clearAllDomainFilterRules, 1);
+                    parcel2.writeTypedArray(firewallResponseArrClearAllDomainFilterRules, 1);
                     return true;
                 case 10:
                     ContextInfo contextInfo10 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    FirewallResponse[] addDomainFilterRules = addDomainFilterRules(contextInfo10, readInt4);
+                    FirewallResponse[] firewallResponseArrAddDomainFilterRules = addDomainFilterRules(contextInfo10, i6);
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(addDomainFilterRules, 1);
+                    parcel2.writeTypedArray(firewallResponseArrAddDomainFilterRules, 1);
                     return true;
                 case 11:
                     ContextInfo contextInfo11 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    FirewallResponse[] removeDomainFilterRules = removeDomainFilterRules(contextInfo11, readInt5);
+                    FirewallResponse[] firewallResponseArrRemoveDomainFilterRules = removeDomainFilterRules(contextInfo11, i7);
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(removeDomainFilterRules, 1);
+                    parcel2.writeTypedArray(firewallResponseArrRemoveDomainFilterRules, 1);
                     return true;
                 case 12:
                     ContextInfo contextInfo12 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    int readInt6 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<DomainFilterRule> domainFilterRules = getDomainFilterRules(contextInfo12, createStringArrayList, readInt6);
+                    List<DomainFilterRule> domainFilterRules = getDomainFilterRules(contextInfo12, arrayListCreateStringArrayList, i8);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(domainFilterRules, 1);
                     return true;
                 case 13:
                     ContextInfo contextInfo13 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    FirewallResponse enableDomainFilterReport = enableDomainFilterReport(contextInfo13, readBoolean2);
+                    FirewallResponse firewallResponseEnableDomainFilterReport = enableDomainFilterReport(contextInfo13, z2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(enableDomainFilterReport, 1);
+                    parcel2.writeTypedObject(firewallResponseEnableDomainFilterReport, 1);
                     return true;
                 case 14:
                     ContextInfo contextInfo14 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isDomainFilterReportEnabled = isDomainFilterReportEnabled(contextInfo14);
+                    boolean zIsDomainFilterReportEnabled = isDomainFilterReportEnabled(contextInfo14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDomainFilterReportEnabled);
+                    parcel2.writeBoolean(zIsDomainFilterReportEnabled);
                     return true;
                 case 15:
                     ContextInfo contextInfo15 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    List<DomainFilterReport> domainFilterReport = getDomainFilterReport(contextInfo15, createStringArrayList2);
+                    List<DomainFilterReport> domainFilterReport = getDomainFilterReport(contextInfo15, arrayListCreateStringArrayList2);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(domainFilterReport, 1);
                     return true;
                 case 16:
                     ContextInfo contextInfo16 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    FirewallResponse enableDomainFilterOnIptables = enableDomainFilterOnIptables(contextInfo16, readBoolean3);
+                    FirewallResponse firewallResponseEnableDomainFilterOnIptables = enableDomainFilterOnIptables(contextInfo16, z3);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(enableDomainFilterOnIptables, 1);
+                    parcel2.writeTypedObject(firewallResponseEnableDomainFilterOnIptables, 1);
                     return true;
                 case 17:
                     ContextInfo contextInfo17 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isDomainFilterOnIptablesEnabled = isDomainFilterOnIptablesEnabled(contextInfo17);
+                    boolean zIsDomainFilterOnIptablesEnabled = isDomainFilterOnIptablesEnabled(contextInfo17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDomainFilterOnIptablesEnabled);
+                    parcel2.writeBoolean(zIsDomainFilterOnIptablesEnabled);
                     return true;
                 case 18:
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean shouldBlockDownload = shouldBlockDownload(readString2, readString3, readInt7);
+                    boolean zShouldBlockDownload = shouldBlockDownload(string2, string3, i9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shouldBlockDownload);
+                    parcel2.writeBoolean(zShouldBlockDownload);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -568,7 +565,6 @@ public interface IFirewall extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IFirewall {
         @Override // com.samsung.android.knox.net.firewall.IFirewall
         public FirewallResponse[] addDomainFilterRules(ContextInfo contextInfo, int i) throws RemoteException {

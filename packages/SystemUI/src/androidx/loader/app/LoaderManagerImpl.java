@@ -10,13 +10,11 @@ import androidx.lifecycle.ViewModelStore;
 import androidx.loader.content.Loader;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LoaderManagerImpl extends LoaderManager {
     public final LifecycleOwner mLifecycleOwner;
     public final LoaderViewModel mLoaderViewModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LoaderInfo extends MutableLiveData {
         public final Bundle mArgs;
         public final int mId;
@@ -76,7 +74,6 @@ public class LoaderManagerImpl extends LoaderManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LoaderViewModel extends ViewModel {
         public static final AnonymousClass1 FACTORY = new ViewModelProvider.Factory() { // from class: androidx.loader.app.LoaderManagerImpl.LoaderViewModel.1
             @Override // androidx.lifecycle.ViewModelProvider.Factory

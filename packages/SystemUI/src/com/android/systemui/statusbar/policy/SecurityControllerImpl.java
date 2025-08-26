@@ -18,10 +18,13 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.net.VpnManager;
 import android.os.Handler;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.security.KeyChain;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.util.Pair;
 import android.util.SparseArray;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
@@ -39,7 +42,6 @@ import java.util.concurrent.Executor;
 import javax.inject.Provider;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SecurityControllerImpl implements SecurityController {
     public static final boolean DEBUG = Log.isLoggable("SecurityController", 3);
@@ -62,7 +64,6 @@ public class SecurityControllerImpl implements SecurityController {
     public final SparseArray mNetworkProperties = new SparseArray();
     public final ArrayMap mHasCACerts = new ArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NetworkProperties {
         public String interfaceName;
         public boolean validated;
@@ -74,7 +75,7 @@ public class SecurityControllerImpl implements SecurityController {
     }
 
     /* renamed from: -$$Nest$mupdateState, reason: not valid java name */
-    public static void m3090$$Nest$mupdateState(SecurityControllerImpl securityControllerImpl) {
+    public static void m3107$$Nest$mupdateState(SecurityControllerImpl securityControllerImpl) {
         LegacyVpnInfo legacyVpnInfo;
         securityControllerImpl.getClass();
         SparseArray sparseArray = new SparseArray();
@@ -112,24 +113,24 @@ public class SecurityControllerImpl implements SecurityController {
                 if (SecurityControllerImpl.DEBUG) {
                     Log.d("SecurityController", "onAvailable " + network.getNetId());
                 }
-                SecurityControllerImpl.m3090$$Nest$mupdateState(SecurityControllerImpl.this);
+                SecurityControllerImpl.m3107$$Nest$mupdateState(SecurityControllerImpl.this);
                 SecurityControllerImpl.this.fireCallbacks();
             }
 
             @Override // android.net.ConnectivityManager.NetworkCallback
             public final void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
                 NetworkProperties networkProperties;
-                boolean hasCapability;
+                boolean zHasCapability;
                 if (SecurityControllerImpl.DEBUG) {
                     Log.d("SecurityController", "onCapabilitiesChanged " + network.getNetId());
                 }
                 synchronized (SecurityControllerImpl.this.mNetworkProperties) {
                     networkProperties = (NetworkProperties) SecurityControllerImpl.this.mNetworkProperties.get(network.getNetId());
                 }
-                if (networkProperties == null || networkProperties.validated == (hasCapability = networkCapabilities.hasCapability(16))) {
+                if (networkProperties == null || networkProperties.validated == (zHasCapability = networkCapabilities.hasCapability(16))) {
                     return;
                 }
-                networkProperties.validated = hasCapability;
+                networkProperties.validated = zHasCapability;
                 SecurityControllerImpl.this.fireCallbacks();
             }
 
@@ -165,7 +166,7 @@ public class SecurityControllerImpl implements SecurityController {
                 synchronized (SecurityControllerImpl.this.mNetworkProperties) {
                     SecurityControllerImpl.this.mNetworkProperties.delete(network.getNetId());
                 }
-                SecurityControllerImpl.m3090$$Nest$mupdateState(SecurityControllerImpl.this);
+                SecurityControllerImpl.m3107$$Nest$mupdateState(SecurityControllerImpl.this);
                 SecurityControllerImpl.this.fireCallbacks();
             }
         };
@@ -179,123 +180,94 @@ public class SecurityControllerImpl implements SecurityController {
                     final int sendingUserId = getSendingUserId();
                     securityControllerImpl.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.policy.SecurityControllerImpl$$ExternalSyntheticLambda0
                         /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Removed duplicated region for block: B:39:0x00ab  */
+                        /* JADX WARN: Removed duplicated region for block: B:35:0x00ab  */
                         /* JADX WARN: Type inference failed for: r1v7, types: [android.util.ArrayMap] */
                         /* JADX WARN: Type inference failed for: r2v6, types: [java.lang.Integer, java.lang.Object] */
                         @Override // java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final void run() {
-                            /*
-                                r9 = this;
-                                com.android.systemui.statusbar.policy.SecurityControllerImpl r0 = com.android.systemui.statusbar.policy.SecurityControllerImpl.this
-                                int r9 = r2
-                                boolean r1 = com.android.systemui.statusbar.policy.SecurityControllerImpl.DEBUG
-                                r0.getClass()
-                                java.lang.String r1 = "Refreshing CA Certs "
-                                boolean r2 = com.android.systemui.statusbar.policy.SecurityControllerImpl.DEBUG
-                                java.lang.String r3 = "SecurityController"
-                                r4 = 0
-                                android.content.Context r5 = r0.mContext     // Catch: java.lang.Throwable -> L71 java.lang.Throwable -> L73
-                                android.os.UserHandle r6 = android.os.UserHandle.of(r9)     // Catch: java.lang.Throwable -> L71 java.lang.Throwable -> L73
-                                android.security.KeyChain$KeyChainConnection r5 = android.security.KeyChain.bindAsUser(r5, r6)     // Catch: java.lang.Throwable -> L71 java.lang.Throwable -> L73
-                                android.security.IKeyChainService r6 = r5.getService()     // Catch: java.lang.Throwable -> L65
-                                android.content.pm.StringParceledListSlice r6 = r6.getUserCaAliases()     // Catch: java.lang.Throwable -> L65
-                                java.util.List r6 = r6.getList()     // Catch: java.lang.Throwable -> L65
-                                boolean r6 = r6.isEmpty()     // Catch: java.lang.Throwable -> L65
-                                r6 = r6 ^ 1
-                                android.util.Pair r7 = new android.util.Pair     // Catch: java.lang.Throwable -> L65
-                                java.lang.Integer r8 = java.lang.Integer.valueOf(r9)     // Catch: java.lang.Throwable -> L65
-                                java.lang.Boolean r6 = java.lang.Boolean.valueOf(r6)     // Catch: java.lang.Throwable -> L65
-                                r7.<init>(r8, r6)     // Catch: java.lang.Throwable -> L65
-                                r5.close()     // Catch: java.lang.Throwable -> L60 java.lang.Throwable -> L63
-                                if (r2 == 0) goto L4d
-                                java.lang.StringBuilder r9 = new java.lang.StringBuilder
-                                r9.<init>(r1)
-                                r9.append(r7)
-                                java.lang.String r9 = r9.toString()
-                                android.util.Log.d(r3, r9)
-                            L4d:
-                                java.lang.Object r9 = r7.second
-                                if (r9 == 0) goto La8
-                                android.util.ArrayMap r1 = r0.mHasCACerts
-                                java.lang.Object r2 = r7.first
-                                java.lang.Integer r2 = (java.lang.Integer) r2
-                                java.lang.Boolean r9 = (java.lang.Boolean) r9
-                                r1.put(r2, r9)
-                                r0.fireCallbacks()
-                                return
-                            L60:
-                                r9 = move-exception
-                                r4 = r7
-                                goto La9
-                            L63:
-                                r5 = move-exception
-                                goto L77
-                            L65:
-                                r6 = move-exception
-                                if (r5 == 0) goto L76
-                                r5.close()     // Catch: java.lang.Throwable -> L6c
-                                goto L76
-                            L6c:
-                                r5 = move-exception
-                                r6.addSuppressed(r5)     // Catch: java.lang.Throwable -> L71 java.lang.Throwable -> L73 java.lang.Throwable -> L73 java.lang.Throwable -> L73 java.lang.Throwable -> L73
-                                goto L76
-                            L71:
-                                r9 = move-exception
-                                goto La9
-                            L73:
-                                r5 = move-exception
-                                r7 = r4
-                                goto L77
-                            L76:
-                                throw r6     // Catch: java.lang.Throwable -> L71 java.lang.Throwable -> L73 java.lang.Throwable -> L73 java.lang.Throwable -> L73 java.lang.Throwable -> L73
-                            L77:
-                                java.lang.String r6 = "failed to get CA certs"
-                                android.util.Log.i(r3, r6, r5)     // Catch: java.lang.Throwable -> L60
-                                android.util.Pair r5 = new android.util.Pair     // Catch: java.lang.Throwable -> L60
-                                java.lang.Integer r9 = java.lang.Integer.valueOf(r9)     // Catch: java.lang.Throwable -> L60
-                                r5.<init>(r9, r4)     // Catch: java.lang.Throwable -> L60
-                                if (r2 == 0) goto L96
-                                java.lang.StringBuilder r9 = new java.lang.StringBuilder
-                                r9.<init>(r1)
-                                r9.append(r5)
-                                java.lang.String r9 = r9.toString()
-                                android.util.Log.d(r3, r9)
-                            L96:
-                                java.lang.Object r9 = r5.second
-                                if (r9 == 0) goto La8
-                                android.util.ArrayMap r1 = r0.mHasCACerts
-                                java.lang.Object r2 = r5.first
-                                java.lang.Integer r2 = (java.lang.Integer) r2
-                                java.lang.Boolean r9 = (java.lang.Boolean) r9
-                                r1.put(r2, r9)
-                                r0.fireCallbacks()
-                            La8:
-                                return
-                            La9:
-                                if (r2 == 0) goto Lba
-                                java.lang.StringBuilder r2 = new java.lang.StringBuilder
-                                r2.<init>(r1)
-                                r2.append(r4)
-                                java.lang.String r1 = r2.toString()
-                                android.util.Log.d(r3, r1)
-                            Lba:
-                                if (r4 == 0) goto Lce
-                                java.lang.Object r1 = r4.second
-                                if (r1 == 0) goto Lce
-                                android.util.ArrayMap r2 = r0.mHasCACerts
-                                java.lang.Object r3 = r4.first
-                                java.lang.Integer r3 = (java.lang.Integer) r3
-                                java.lang.Boolean r1 = (java.lang.Boolean) r1
-                                r2.put(r3, r1)
-                                r0.fireCallbacks()
-                            Lce:
-                                throw r9
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.policy.SecurityControllerImpl$$ExternalSyntheticLambda0.run():void");
+                        public final void run() throws Throwable {
+                            Pair pair;
+                            boolean z;
+                            String str;
+                            Object obj;
+                            SecurityControllerImpl securityControllerImpl2 = securityControllerImpl;
+                            int i = sendingUserId;
+                            boolean z2 = SecurityControllerImpl.DEBUG;
+                            securityControllerImpl2.getClass();
+                            String str2 = "Refreshing CA Certs ";
+                            boolean z3 = SecurityControllerImpl.DEBUG;
+                            Pair pair2 = null;
+                            try {
+                                try {
+                                    try {
+                                        KeyChain.KeyChainConnection keyChainConnectionBindAsUser = KeyChain.bindAsUser(securityControllerImpl2.mContext, UserHandle.of(i));
+                                        try {
+                                            pair = new Pair(Integer.valueOf(i), Boolean.valueOf(!keyChainConnectionBindAsUser.getService().getUserCaAliases().getList().isEmpty()));
+                                            try {
+                                                keyChainConnectionBindAsUser.close();
+                                                if (z3) {
+                                                    Log.d("SecurityController", "Refreshing CA Certs " + pair);
+                                                }
+                                                Object obj2 = pair.second;
+                                                str2 = str2;
+                                                z3 = z3;
+                                                if (obj2 != null) {
+                                                    securityControllerImpl2.mHasCACerts.put((Integer) pair.first, (Boolean) obj2);
+                                                    securityControllerImpl2.fireCallbacks();
+                                                }
+                                            } catch (RemoteException | AssertionError | IllegalStateException | InterruptedException e) {
+                                                e = e;
+                                                Log.i("SecurityController", "failed to get CA certs", e);
+                                                Pair pair3 = new Pair(Integer.valueOf(i), null);
+                                                if (z3) {
+                                                    Log.d("SecurityController", "Refreshing CA Certs " + pair3);
+                                                }
+                                                Object obj3 = pair3.second;
+                                                str2 = str2;
+                                                z3 = z3;
+                                                if (obj3 != null) {
+                                                    ?? r12 = securityControllerImpl2.mHasCACerts;
+                                                    ?? r2 = (Integer) pair3.first;
+                                                    r12.put(r2, (Boolean) obj3);
+                                                    securityControllerImpl2.fireCallbacks();
+                                                    str2 = r12;
+                                                    z3 = r2;
+                                                }
+                                            }
+                                        } finally {
+                                        }
+                                    } catch (Throwable th) {
+                                        th = th;
+                                        pair2 = pair;
+                                        str = str2;
+                                        z = z3;
+                                        if (z) {
+                                            Log.d("SecurityController", str + pair2);
+                                        }
+                                        if (pair2 != null && (obj = pair2.second) != null) {
+                                            securityControllerImpl2.mHasCACerts.put((Integer) pair2.first, (Boolean) obj);
+                                            securityControllerImpl2.fireCallbacks();
+                                        }
+                                        throw th;
+                                    }
+                                } catch (Throwable th2) {
+                                    th = th2;
+                                    str = str2;
+                                    z = z3;
+                                    if (z) {
+                                    }
+                                    if (pair2 != null) {
+                                        securityControllerImpl2.mHasCACerts.put((Integer) pair2.first, (Boolean) obj);
+                                        securityControllerImpl2.fireCallbacks();
+                                    }
+                                    throw th;
+                                }
+                            } catch (RemoteException | AssertionError | IllegalStateException | InterruptedException e2) {
+                                e = e2;
+                                pair = null;
+                            }
                         }
                     });
                 } else {
@@ -304,116 +276,95 @@ public class SecurityControllerImpl implements SecurityController {
                     }
                     final SecurityControllerImpl securityControllerImpl2 = SecurityControllerImpl.this;
                     securityControllerImpl2.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.policy.SecurityControllerImpl$$ExternalSyntheticLambda0
+                        /* JADX WARN: Multi-variable type inference failed */
+                        /* JADX WARN: Removed duplicated region for block: B:35:0x00ab  */
+                        /* JADX WARN: Type inference failed for: r1v7, types: [android.util.ArrayMap] */
+                        /* JADX WARN: Type inference failed for: r2v6, types: [java.lang.Integer, java.lang.Object] */
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            /*
-                                this = this;
-                                com.android.systemui.statusbar.policy.SecurityControllerImpl r0 = com.android.systemui.statusbar.policy.SecurityControllerImpl.this
-                                int r9 = r2
-                                boolean r1 = com.android.systemui.statusbar.policy.SecurityControllerImpl.DEBUG
-                                r0.getClass()
-                                java.lang.String r1 = "Refreshing CA Certs "
-                                boolean r2 = com.android.systemui.statusbar.policy.SecurityControllerImpl.DEBUG
-                                java.lang.String r3 = "SecurityController"
-                                r4 = 0
-                                android.content.Context r5 = r0.mContext     // Catch: java.lang.Throwable -> L71 java.lang.Throwable -> L73
-                                android.os.UserHandle r6 = android.os.UserHandle.of(r9)     // Catch: java.lang.Throwable -> L71 java.lang.Throwable -> L73
-                                android.security.KeyChain$KeyChainConnection r5 = android.security.KeyChain.bindAsUser(r5, r6)     // Catch: java.lang.Throwable -> L71 java.lang.Throwable -> L73
-                                android.security.IKeyChainService r6 = r5.getService()     // Catch: java.lang.Throwable -> L65
-                                android.content.pm.StringParceledListSlice r6 = r6.getUserCaAliases()     // Catch: java.lang.Throwable -> L65
-                                java.util.List r6 = r6.getList()     // Catch: java.lang.Throwable -> L65
-                                boolean r6 = r6.isEmpty()     // Catch: java.lang.Throwable -> L65
-                                r6 = r6 ^ 1
-                                android.util.Pair r7 = new android.util.Pair     // Catch: java.lang.Throwable -> L65
-                                java.lang.Integer r8 = java.lang.Integer.valueOf(r9)     // Catch: java.lang.Throwable -> L65
-                                java.lang.Boolean r6 = java.lang.Boolean.valueOf(r6)     // Catch: java.lang.Throwable -> L65
-                                r7.<init>(r8, r6)     // Catch: java.lang.Throwable -> L65
-                                r5.close()     // Catch: java.lang.Throwable -> L60 java.lang.Throwable -> L63
-                                if (r2 == 0) goto L4d
-                                java.lang.StringBuilder r9 = new java.lang.StringBuilder
-                                r9.<init>(r1)
-                                r9.append(r7)
-                                java.lang.String r9 = r9.toString()
-                                android.util.Log.d(r3, r9)
-                            L4d:
-                                java.lang.Object r9 = r7.second
-                                if (r9 == 0) goto La8
-                                android.util.ArrayMap r1 = r0.mHasCACerts
-                                java.lang.Object r2 = r7.first
-                                java.lang.Integer r2 = (java.lang.Integer) r2
-                                java.lang.Boolean r9 = (java.lang.Boolean) r9
-                                r1.put(r2, r9)
-                                r0.fireCallbacks()
-                                return
-                            L60:
-                                r9 = move-exception
-                                r4 = r7
-                                goto La9
-                            L63:
-                                r5 = move-exception
-                                goto L77
-                            L65:
-                                r6 = move-exception
-                                if (r5 == 0) goto L76
-                                r5.close()     // Catch: java.lang.Throwable -> L6c
-                                goto L76
-                            L6c:
-                                r5 = move-exception
-                                r6.addSuppressed(r5)     // Catch: java.lang.Throwable -> L71 java.lang.Throwable -> L73 java.lang.Throwable -> L73 java.lang.Throwable -> L73 java.lang.Throwable -> L73
-                                goto L76
-                            L71:
-                                r9 = move-exception
-                                goto La9
-                            L73:
-                                r5 = move-exception
-                                r7 = r4
-                                goto L77
-                            L76:
-                                throw r6     // Catch: java.lang.Throwable -> L71 java.lang.Throwable -> L73 java.lang.Throwable -> L73 java.lang.Throwable -> L73 java.lang.Throwable -> L73
-                            L77:
-                                java.lang.String r6 = "failed to get CA certs"
-                                android.util.Log.i(r3, r6, r5)     // Catch: java.lang.Throwable -> L60
-                                android.util.Pair r5 = new android.util.Pair     // Catch: java.lang.Throwable -> L60
-                                java.lang.Integer r9 = java.lang.Integer.valueOf(r9)     // Catch: java.lang.Throwable -> L60
-                                r5.<init>(r9, r4)     // Catch: java.lang.Throwable -> L60
-                                if (r2 == 0) goto L96
-                                java.lang.StringBuilder r9 = new java.lang.StringBuilder
-                                r9.<init>(r1)
-                                r9.append(r5)
-                                java.lang.String r9 = r9.toString()
-                                android.util.Log.d(r3, r9)
-                            L96:
-                                java.lang.Object r9 = r5.second
-                                if (r9 == 0) goto La8
-                                android.util.ArrayMap r1 = r0.mHasCACerts
-                                java.lang.Object r2 = r5.first
-                                java.lang.Integer r2 = (java.lang.Integer) r2
-                                java.lang.Boolean r9 = (java.lang.Boolean) r9
-                                r1.put(r2, r9)
-                                r0.fireCallbacks()
-                            La8:
-                                return
-                            La9:
-                                if (r2 == 0) goto Lba
-                                java.lang.StringBuilder r2 = new java.lang.StringBuilder
-                                r2.<init>(r1)
-                                r2.append(r4)
-                                java.lang.String r1 = r2.toString()
-                                android.util.Log.d(r3, r1)
-                            Lba:
-                                if (r4 == 0) goto Lce
-                                java.lang.Object r1 = r4.second
-                                if (r1 == 0) goto Lce
-                                android.util.ArrayMap r2 = r0.mHasCACerts
-                                java.lang.Object r3 = r4.first
-                                java.lang.Integer r3 = (java.lang.Integer) r3
-                                java.lang.Boolean r1 = (java.lang.Boolean) r1
-                                r2.put(r3, r1)
-                                r0.fireCallbacks()
-                            Lce:
-                                throw r9
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.policy.SecurityControllerImpl$$ExternalSyntheticLambda0.run():void");
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final void run() throws Throwable {
+                            Pair pair;
+                            boolean z;
+                            String str;
+                            Object obj;
+                            SecurityControllerImpl securityControllerImpl22 = securityControllerImpl2;
+                            int i = intExtra;
+                            boolean z2 = SecurityControllerImpl.DEBUG;
+                            securityControllerImpl22.getClass();
+                            String str2 = "Refreshing CA Certs ";
+                            boolean z3 = SecurityControllerImpl.DEBUG;
+                            Pair pair2 = null;
+                            try {
+                                try {
+                                    try {
+                                        KeyChain.KeyChainConnection keyChainConnectionBindAsUser = KeyChain.bindAsUser(securityControllerImpl22.mContext, UserHandle.of(i));
+                                        try {
+                                            pair = new Pair(Integer.valueOf(i), Boolean.valueOf(!keyChainConnectionBindAsUser.getService().getUserCaAliases().getList().isEmpty()));
+                                            try {
+                                                keyChainConnectionBindAsUser.close();
+                                                if (z3) {
+                                                    Log.d("SecurityController", "Refreshing CA Certs " + pair);
+                                                }
+                                                Object obj2 = pair.second;
+                                                str2 = str2;
+                                                z3 = z3;
+                                                if (obj2 != null) {
+                                                    securityControllerImpl22.mHasCACerts.put((Integer) pair.first, (Boolean) obj2);
+                                                    securityControllerImpl22.fireCallbacks();
+                                                }
+                                            } catch (RemoteException | AssertionError | IllegalStateException | InterruptedException e) {
+                                                e = e;
+                                                Log.i("SecurityController", "failed to get CA certs", e);
+                                                Pair pair3 = new Pair(Integer.valueOf(i), null);
+                                                if (z3) {
+                                                    Log.d("SecurityController", "Refreshing CA Certs " + pair3);
+                                                }
+                                                Object obj3 = pair3.second;
+                                                str2 = str2;
+                                                z3 = z3;
+                                                if (obj3 != null) {
+                                                    ?? r12 = securityControllerImpl22.mHasCACerts;
+                                                    ?? r2 = (Integer) pair3.first;
+                                                    r12.put(r2, (Boolean) obj3);
+                                                    securityControllerImpl22.fireCallbacks();
+                                                    str2 = r12;
+                                                    z3 = r2;
+                                                }
+                                            }
+                                        } finally {
+                                        }
+                                    } catch (Throwable th) {
+                                        th = th;
+                                        pair2 = pair;
+                                        str = str2;
+                                        z = z3;
+                                        if (z) {
+                                            Log.d("SecurityController", str + pair2);
+                                        }
+                                        if (pair2 != null && (obj = pair2.second) != null) {
+                                            securityControllerImpl22.mHasCACerts.put((Integer) pair2.first, (Boolean) obj);
+                                            securityControllerImpl22.fireCallbacks();
+                                        }
+                                        throw th;
+                                    }
+                                } catch (Throwable th2) {
+                                    th = th2;
+                                    str = str2;
+                                    z = z3;
+                                    if (z) {
+                                    }
+                                    if (pair2 != null) {
+                                        securityControllerImpl22.mHasCACerts.put((Integer) pair2.first, (Boolean) obj);
+                                        securityControllerImpl22.fireCallbacks();
+                                    }
+                                    throw th;
+                                }
+                            } catch (RemoteException | AssertionError | IllegalStateException | InterruptedException e2) {
+                                e = e2;
+                                pair = null;
+                            }
                         }
                     });
                 }
@@ -609,7 +560,7 @@ public class SecurityControllerImpl implements SecurityController {
         return vpnConfig != null && (str = vpnConfig.user) != null && str.equals("com.samsung.android.fast") && this.mContext.getPackageManager().checkSignatures("android", vpnConfig.user) == 0;
     }
 
-    public final boolean isVpnBranded() {
+    public final boolean isVpnBranded() throws PackageManager.NameNotFoundException {
         VpnConfig vpnConfig = (VpnConfig) this.mCurrentVpns.get(this.mVpnUserId);
         if (vpnConfig == null) {
             return false;

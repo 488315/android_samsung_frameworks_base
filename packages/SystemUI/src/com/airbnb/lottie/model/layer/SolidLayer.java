@@ -13,7 +13,6 @@ import com.airbnb.lottie.animation.LPaint;
 import com.airbnb.lottie.animation.keyframe.ValueCallbackKeyframeAnimation;
 import com.airbnb.lottie.value.LottieValueCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SolidLayer extends BaseLayer {
     public ValueCallbackKeyframeAnimation colorFilterAnimation;
@@ -51,18 +50,18 @@ public class SolidLayer extends BaseLayer {
     @Override // com.airbnb.lottie.model.layer.BaseLayer
     public final void drawLayer(Canvas canvas, Matrix matrix, int i) {
         Layer layer = this.layerModel;
-        int alpha = Color.alpha(layer.solidColor);
-        if (alpha == 0) {
+        int iAlpha = Color.alpha(layer.solidColor);
+        if (iAlpha == 0) {
             return;
         }
-        int intValue = (int) ((((alpha / 255.0f) * (this.transform.opacity == null ? 100 : ((Integer) r2.getValue()).intValue())) / 100.0f) * (i / 255.0f) * 255.0f);
+        int iIntValue = (int) ((((iAlpha / 255.0f) * (this.transform.opacity == null ? 100 : ((Integer) r2.getValue()).intValue())) / 100.0f) * (i / 255.0f) * 255.0f);
         LPaint lPaint = this.paint;
-        lPaint.setAlpha(intValue);
+        lPaint.setAlpha(iIntValue);
         ValueCallbackKeyframeAnimation valueCallbackKeyframeAnimation = this.colorFilterAnimation;
         if (valueCallbackKeyframeAnimation != null) {
             lPaint.setColorFilter((ColorFilter) valueCallbackKeyframeAnimation.getValue());
         }
-        if (intValue > 0) {
+        if (iIntValue > 0) {
             float[] fArr = this.points;
             fArr[0] = 0.0f;
             fArr[1] = 0.0f;

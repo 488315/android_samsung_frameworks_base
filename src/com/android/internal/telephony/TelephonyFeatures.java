@@ -79,11 +79,11 @@ public class TelephonyFeatures {
     static {
         String str = SystemProperties.get("ro.build.characteristics", "");
         DEVICE_TYPE = str;
-        boolean contains = str.contains(BnRConstants.DEVICETYPE_TABLET);
-        IS_TABLET = contains;
-        boolean contains2 = str.contains("watch");
-        IS_WATCH = contains2;
-        IS_PHONE = (contains || contains2) ? false : true;
+        boolean zContains = str.contains(BnRConstants.DEVICETYPE_TABLET);
+        IS_TABLET = zContains;
+        boolean zContains2 = str.contains("watch");
+        IS_WATCH = zContains2;
+        IS_PHONE = (zContains || zContains2) ? false : true;
         String str2 = SystemProperties.get("ro.boot.hardware", "");
         HARDWARE_TYPE = str2;
         IS_QCOM = str2.contains("qcom");
@@ -96,13 +96,13 @@ public class TelephonyFeatures {
     }
 
     private static void InitializeSimbasedType() {
-        String[] split = SystemProperties.get("ro.simbased.changetype", KeyProperties.DIGEST_NONE).split(",");
-        sSimbasedChangeType = split;
-        if (split == null || split.length < 2) {
+        String[] strArrSplit = SystemProperties.get("ro.simbased.changetype", KeyProperties.DIGEST_NONE).split(",");
+        sSimbasedChangeType = strArrSplit;
+        if (strArrSplit == null || strArrSplit.length < 2) {
             sSimbasedChangeType = new String[]{KeyProperties.DIGEST_NONE, "DISABLED"};
             return;
         }
-        split[0] = split[0].trim();
+        strArrSplit[0] = strArrSplit[0].trim();
         String[] strArr = sSimbasedChangeType;
         strArr[1] = strArr[1].trim();
     }
@@ -165,10 +165,10 @@ public class TelephonyFeatures {
                 break;
             case 8:
                 if (isMainOperatorSpecific(i, "VZW", "USC")) {
-                    boolean booleanValue = ((Boolean) getTelephonyProperty(i, SemTelephonyProps.sim_mobility(), false)).booleanValue();
+                    boolean zBooleanValue = ((Boolean) getTelephonyProperty(i, SemTelephonyProps.sim_mobility(), false)).booleanValue();
                     TelephonyManager.getDefault();
                     String simCountryIsoForPhone = TelephonyManager.getSimCountryIsoForPhone(i);
-                    if (booleanValue && !XmlTags.ATTR_USER_ID.equals(simCountryIsoForPhone) && !"pr".equals(simCountryIsoForPhone) && !"vi".equals(simCountryIsoForPhone)) {
+                    if (zBooleanValue && !XmlTags.ATTR_USER_ID.equals(simCountryIsoForPhone) && !"pr".equals(simCountryIsoForPhone) && !"vi".equals(simCountryIsoForPhone)) {
                         log("No ECBM (Reason: SimMobility)");
                         break;
                     }

@@ -89,7 +89,7 @@ public class NotificationVisibility implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public NotificationVisibility m8282clone() {
+    public NotificationVisibility m8293clone() {
         return obtain(this.key, this.rank, this.count, this.visible, this.location);
     }
 
@@ -134,20 +134,20 @@ public class NotificationVisibility implements Parcelable {
     }
 
     public static NotificationVisibility obtain(String str, int i, int i2, boolean z, NotificationLocation notificationLocation) {
-        NotificationVisibility obtain = obtain();
-        obtain.key = str;
-        obtain.rank = i;
-        obtain.count = i2;
-        obtain.visible = z;
-        obtain.location = notificationLocation;
-        return obtain;
+        NotificationVisibility notificationVisibilityObtain = obtain();
+        notificationVisibilityObtain.key = str;
+        notificationVisibilityObtain.rank = i;
+        notificationVisibilityObtain.count = i2;
+        notificationVisibilityObtain.visible = z;
+        notificationVisibilityObtain.location = notificationLocation;
+        return notificationVisibilityObtain;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public static NotificationVisibility obtain(Parcel parcel) {
-        NotificationVisibility obtain = obtain();
-        obtain.readFromParcel(parcel);
-        return obtain;
+        NotificationVisibility notificationVisibilityObtain = obtain();
+        notificationVisibilityObtain.readFromParcel(parcel);
+        return notificationVisibilityObtain;
     }
 
     private static NotificationVisibility obtain() {

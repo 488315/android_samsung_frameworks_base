@@ -14,13 +14,13 @@ public class SemEntityPatterns {
     public static final String DEFAULT_DATE_STRING_TYPE2 = "(((Jan|January|Mar|March|May|Jul|July|Aug|August|Oct|October|Dec|December)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])|((Apr|April|Jun|June|Sep|September|Nov|November)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])|((Feb|February)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]]))";
     public static final String DEFAULT_TIME_STRING = "(((0[1-9]|1[1-2])[[:space:]]?\\:[[:space:]]?[0-5][0-9][[:space:]]?(am|pm|AM|PM))|(([0-1][0-9]|2[0-3])[[:space:]]?\\:[[:space:]]?[0-5][0-9]))";
     private static final Pattern DOMAIN_NAME;
-    private static final String GOOD_GTLD_CHAR = "a-zA-Z -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff";
+    private static final String GOOD_GTLD_CHAR = "a-zA-Z -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff";
     private static final String GOOD_IRI_CHAR = "a-zA-Z0-9 -\ud7ff豈-﷏ﷰ-\uffef";
-    private static final String GOOD_IRI_HOST_CHAR = "a-zA-Z0-9 -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff";
-    private static final String GTLD = "[a-zA-Z -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]{2,63}";
-    private static final String HOST_NAME = "([a-zA-Z0-9 -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]([a-zA-Z0-9 -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff\\-]{0,61}[a-zA-Z0-9 -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]){0,1}\\.)+[a-zA-Z -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]{2,63}";
+    private static final String GOOD_IRI_HOST_CHAR = "a-zA-Z0-9 -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff";
+    private static final String GTLD = "[a-zA-Z -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]{2,63}";
+    private static final String HOST_NAME = "([a-zA-Z0-9 -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]([a-zA-Z0-9 -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff\\-]{0,61}[a-zA-Z0-9 -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]){0,1}\\.)+[a-zA-Z -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]{2,63}";
     private static final Pattern IP_ADDRESS;
-    private static final String IRI = "[a-zA-Z0-9 -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]([a-zA-Z0-9 -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff\\-]{0,61}[a-zA-Z0-9 -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]){0,1}";
+    private static final String IRI = "[a-zA-Z0-9 -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]([a-zA-Z0-9 -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff\\-]{0,61}[a-zA-Z0-9 -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]){0,1}";
     public static final String PREFIX_FOR_DATE_MILLIS = "((Date|date|날짜)[[[:space:]]\\:\\;\\-]+)";
     public static final String PREFIX_FOR_TIME_MILLIS = "((Time|time|시간)[[[:space:]]\\:\\;\\-]+)";
     public static final String SPILT_PATTERN_DATE_TYPE1 = "[[[:space:]]\\-\\/\\.년월일]+";
@@ -35,11 +35,11 @@ public class SemEntityPatterns {
     public static final Pattern EMAIL_ADDRESS_WEAK = Pattern.compile("([a-zA-Z0-9\\+\\.\\_\\%\\-\\+\u00ad]{1,256}[[:space:]]?\\@[[:space:]]?[a-zA-Z0-9][a-zA-Z0-9\\-\u00ad]{0,64}([[:space:]]?\\.[[:space:]]?[a-zA-Z0-9][a-zA-Z0-9\\-\u00ad]{0,25})+)");
 
     static {
-        Pattern compile = Pattern.compile("((25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9]))");
-        IP_ADDRESS = compile;
-        Pattern compile2 = Pattern.compile("(([a-zA-Z0-9 -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]([a-zA-Z0-9 -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff\\-]{0,61}[a-zA-Z0-9 -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]){0,1}\\.)+[a-zA-Z -⿿\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]{2,63}|" + compile + NavigationBarInflaterView.KEY_CODE_END);
-        DOMAIN_NAME = compile2;
-        URL = Pattern.compile("((?:(http|https|Http|Https|rtsp|Rtsp|ftp):\\/\\/(?:(?:[a-zA-Z0-9\\$\\-\\_\\.\\+\\!\\*\\'\\(\\)\\,\\;\\?\\&\\=]|(?:\\%[a-fA-F0-9]{2})){1,64}(?:\\:(?:[a-zA-Z0-9\\$\\-\\_\\.\\+\\!\\*\\'\\(\\)\\,\\;\\?\\&\\=]|(?:\\%[a-fA-F0-9]{2})){1,25})?\\@)?)?(?:" + compile2 + ")(?:\\:\\d{1,5})?)(\\/(?:(?:[a-zA-Z0-9 -\ud7ff豈-﷏ﷰ-\uffef\\;\\/\\?\\:\\@\\&\\=\\#\\~\\-\\.\\+\\!\\*\\'\\(\\)\\,\\_])|(?:\\%[a-fA-F0-9]{2}))*)?", 2);
+        Pattern patternCompile = Pattern.compile("((25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9]))");
+        IP_ADDRESS = patternCompile;
+        Pattern patternCompile2 = Pattern.compile("(([a-zA-Z0-9 -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]([a-zA-Z0-9 -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff\\-]{0,61}[a-zA-Z0-9 -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]){0,1}\\.)+[a-zA-Z -\u2fff\u3040-䷿龦-\ud7ff豈-﷏ﷰ-\ufeff]{2,63}|" + patternCompile + NavigationBarInflaterView.KEY_CODE_END);
+        DOMAIN_NAME = patternCompile2;
+        URL = Pattern.compile("((?:(http|https|Http|Https|rtsp|Rtsp|ftp):\\/\\/(?:(?:[a-zA-Z0-9\\$\\-\\_\\.\\+\\!\\*\\'\\(\\)\\,\\;\\?\\&\\=]|(?:\\%[a-fA-F0-9]{2})){1,64}(?:\\:(?:[a-zA-Z0-9\\$\\-\\_\\.\\+\\!\\*\\'\\(\\)\\,\\;\\?\\&\\=]|(?:\\%[a-fA-F0-9]{2})){1,25})?\\@)?)?(?:" + patternCompile2 + ")(?:\\:\\d{1,5})?)(\\/(?:(?:[a-zA-Z0-9 -\ud7ff豈-﷏ﷰ-\uffef\\;\\/\\?\\:\\@\\&\\=\\#\\~\\-\\.\\+\\!\\*\\'\\(\\)\\,\\_])|(?:\\%[a-fA-F0-9]{2}))*)?", 2);
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         globalDateMap = linkedHashMap;
         linkedHashMap.put("Jan", 1);

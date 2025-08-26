@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Firewall {
     public static final String ACTION_BLOCKED_DOMAIN = "com.samsung.android.knox.intent.action.BLOCKED_DOMAIN";
@@ -48,13 +47,11 @@ public class Firewall {
     public static String TAG = "FirewallSDK";
     public static final Random mRand = new Random();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum AddressType {
         IPV4,
         IPV6
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Direction {
         INPUT,
         OUTPUT,
@@ -62,21 +59,18 @@ public class Firewall {
         FORWARD
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum NetworkInterface {
         ALL_NETWORKS,
         WIFI_DATA_ONLY,
         MOBILE_DATA_ONLY
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum PortLocation {
         REMOTE,
         LOCAL,
         ALL
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Protocol {
         TCP,
         UDP,
@@ -185,7 +179,7 @@ public class Firewall {
     }
 
     public final FirewallResponse[] evaluateAndProcessRules(List<DomainFilterRule> list, int i) {
-        FirewallResponse[] removeDomainFilterRules;
+        FirewallResponse[] firewallResponseArrRemoveDomainFilterRules;
         if (getService() == null) {
             Log.e(TAG, "evaluateAndProcessRules() - Error in getService()");
             return null;
@@ -206,56 +200,56 @@ public class Firewall {
             try {
                 if (i != -1 || list != null) {
                     if (list != null && !list.isEmpty()) {
-                        int generateToken = generateToken();
-                        HashMap hashMap = new HashMap();
+                        int iGenerateToken = generateToken();
+                        HashMap map = new HashMap();
                         ArrayList arrayList2 = new ArrayList();
                         Iterator<DomainFilterRule> it = list.iterator();
                         while (it.hasNext()) {
-                            hashMap.putAll(pageableRule(it.next()));
+                            map.putAll(pageableRule(it.next()));
                         }
                         int i4 = 0;
-                        for (Map.Entry entry : hashMap.entrySet()) {
-                            int intValue = ((Integer) entry.getValue()).intValue();
-                            i4 += intValue;
+                        for (Map.Entry entry : map.entrySet()) {
+                            int iIntValue = ((Integer) entry.getValue()).intValue();
+                            i4 += iIntValue;
                             if (i4 <= MAX_LIST_SIZE_IN_BYTES) {
                                 arrayList2.add((DomainFilterRule) entry.getKey());
                             } else {
                                 Log.i(TAG, "evaluateAndProcessRules() SDK tokenValue: " + String.valueOf(((DomainFilterRule) arrayList2.get(0)).getIpcToken()));
-                                this.mService.populateDomainFilterBrokenRules(this.mContextInfo, arrayList2, generateToken);
+                                this.mService.populateDomainFilterBrokenRules(this.mContextInfo, arrayList2, iGenerateToken);
                                 Log.i(TAG, "populateDomainFilterBrokenRules - rulePageable = " + arrayList2);
                                 arrayList2.clear();
                                 arrayList2.add((DomainFilterRule) entry.getKey());
-                                i4 = intValue;
+                                i4 = iIntValue;
                             }
                         }
                         if (!arrayList2.isEmpty()) {
-                            this.mService.populateDomainFilterBrokenRules(this.mContextInfo, arrayList2, generateToken);
+                            this.mService.populateDomainFilterBrokenRules(this.mContextInfo, arrayList2, iGenerateToken);
                             Log.i(TAG, "populateDomainFilterBrokenRules() - rulePageable = " + arrayList2);
                         }
                         if (i == 1) {
                             Log.i(TAG, "populateDomainFilterBrokenRules() - Add Operation = " + i);
-                            removeDomainFilterRules = this.mService.addDomainFilterRules(this.mContextInfo, generateToken);
+                            firewallResponseArrRemoveDomainFilterRules = this.mService.addDomainFilterRules(this.mContextInfo, iGenerateToken);
                         } else {
                             if (i != -1) {
                                 Log.i(TAG, "populateDomainFilterBrokenRules() - Invalid Operation = " + i);
                                 return null;
                             }
                             Log.i(TAG, "populateDomainFilterBrokenRules() - Remove Operation = " + i);
-                            removeDomainFilterRules = this.mService.removeDomainFilterRules(this.mContextInfo, generateToken);
+                            firewallResponseArrRemoveDomainFilterRules = this.mService.removeDomainFilterRules(this.mContextInfo, iGenerateToken);
                         }
                     }
                     Log.i(TAG, "evaluateAndProcessRules() - No rule specified");
                     return new FirewallResponse[]{new FirewallResponse(FirewallResponse.Result.FAILED, FirewallResponse.ErrorCode.OPERATION_NOT_PERMITTED_ERROR, FirewallResponseMessages.NO_RULE_SPECIFIED)};
                 }
-                removeDomainFilterRules = this.mService.clearAllDomainFilterRules(this.mContextInfo);
-                if (removeDomainFilterRules != null && !arrayList.isEmpty()) {
-                    for (int i5 = 0; i5 < removeDomainFilterRules.length; i5++) {
+                firewallResponseArrRemoveDomainFilterRules = this.mService.clearAllDomainFilterRules(this.mContextInfo);
+                if (firewallResponseArrRemoveDomainFilterRules != null && !arrayList.isEmpty()) {
+                    for (int i5 = 0; i5 < firewallResponseArrRemoveDomainFilterRules.length; i5++) {
                         if (arrayList.contains(Integer.valueOf(i5))) {
-                            removeDomainFilterRules[i5] = new FirewallResponse(FirewallResponse.Result.FAILED, FirewallResponse.ErrorCode.OPERATION_NOT_PERMITTED_ERROR, FirewallResponseMessages.FAILED_DNS_MDM_VERSION);
+                            firewallResponseArrRemoveDomainFilterRules[i5] = new FirewallResponse(FirewallResponse.Result.FAILED, FirewallResponse.ErrorCode.OPERATION_NOT_PERMITTED_ERROR, FirewallResponseMessages.FAILED_DNS_MDM_VERSION);
                         }
                     }
                 }
-                return removeDomainFilterRules;
+                return firewallResponseArrRemoveDomainFilterRules;
             } catch (RemoteException unused) {
                 Log.e(TAG, "evaluateAndProcessRules() - RemoteException at evaluateAndProcessRules method");
             }
@@ -283,19 +277,19 @@ public class Firewall {
         ArrayList arrayList = null;
         if (getService() != null && KnoxInternalFeature.KNOX_CONFIG_MDM_VERSION >= 16) {
             try {
-                int generateToken = generateToken();
+                int iGenerateToken = generateToken();
                 ArrayList arrayList2 = new ArrayList();
                 do {
                     try {
-                        domainFilterRules = this.mService.getDomainFilterRules(this.mContextInfo, list, generateToken);
+                        domainFilterRules = this.mService.getDomainFilterRules(this.mContextInfo, list, iGenerateToken);
                         if (domainFilterRules != null && !domainFilterRules.isEmpty()) {
                             if (arrayList2.isEmpty()) {
                                 arrayList2.addAll(domainFilterRules);
                             } else {
                                 DomainFilterRule domainFilterRule = domainFilterRules.get(0);
-                                DomainFilterRule updateLastDomainRule = updateLastDomainRule(domainFilterRule, arrayList2);
-                                if (updateLastDomainRule != null) {
-                                    arrayList2.set(arrayList2.size() - 1, updateLastDomainRule);
+                                DomainFilterRule domainFilterRuleUpdateLastDomainRule = updateLastDomainRule(domainFilterRule, arrayList2);
+                                if (domainFilterRuleUpdateLastDomainRule != null) {
+                                    arrayList2.set(arrayList2.size() - 1, domainFilterRuleUpdateLastDomainRule);
                                 } else {
                                     arrayList2.add(domainFilterRule);
                                 }
@@ -401,13 +395,13 @@ public class Firewall {
     public final Map<DomainFilterRule, Integer> pageableRule(DomainFilterRule domainFilterRule) {
         int i;
         ArrayList arrayList;
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         boolean z = false;
         if (domainFilterRule.getAllowDomains() != null && domainFilterRule.getDenyDomains() != null && domainFilterRule.getAllowDomains().isEmpty() && domainFilterRule.getDenyDomains().isEmpty()) {
-            hashMap.put(new DomainFilterRule(domainFilterRule.getApplication(), domainFilterRule.getDenyDomains(), domainFilterRule.getAllowDomains(), domainFilterRule.getDns1(), domainFilterRule.getDns2()), 0);
-            return hashMap;
+            map.put(new DomainFilterRule(domainFilterRule.getApplication(), domainFilterRule.getDenyDomains(), domainFilterRule.getAllowDomains(), domainFilterRule.getDns1(), domainFilterRule.getDns2()), 0);
+            return map;
         }
-        int generateToken = generateToken();
+        int iGenerateToken = generateToken();
         ArrayList arrayList2 = new ArrayList();
         ArrayList arrayList3 = new ArrayList();
         AppIdentity application = domainFilterRule.getApplication();
@@ -425,9 +419,9 @@ public class Firewall {
         List<String> allowDomains = domainFilterRule.getAllowDomains();
         if ((allowDomains == null && denyDomains == null) || ((allowDomains == null && denyDomains.size() == 0) || (denyDomains == null && allowDomains.size() == 0))) {
             DomainFilterRule domainFilterRule2 = new DomainFilterRule(domainFilterRule.getApplication(), denyDomains, allowDomains, domainFilterRule.getDns1(), domainFilterRule.getDns2());
-            domainFilterRule2.setIpcToken(generateToken);
-            hashMap.put(domainFilterRule2, Integer.valueOf(i2));
-            return hashMap;
+            domainFilterRule2.setIpcToken(iGenerateToken);
+            map.put(domainFilterRule2, Integer.valueOf(i2));
+            return map;
         }
         if (denyDomains != null) {
             i = i2;
@@ -439,8 +433,8 @@ public class Firewall {
                     i = i3;
                 } else {
                     DomainFilterRule domainFilterRule3 = new DomainFilterRule(domainFilterRule.getApplication(), arrayList2, allowDomains != null ? arrayList3 : null, domainFilterRule.getDns1(), domainFilterRule.getDns2());
-                    domainFilterRule3.setIpcToken(generateToken);
-                    hashMap.put(domainFilterRule3, Integer.valueOf(i));
+                    domainFilterRule3.setIpcToken(iGenerateToken);
+                    map.put(domainFilterRule3, Integer.valueOf(i));
                     arrayList2.clear();
                     arrayList2.add(str);
                     i = i2 + length3;
@@ -462,8 +456,8 @@ public class Firewall {
                 } else {
                     DomainFilterRule domainFilterRule4 = new DomainFilterRule(domainFilterRule.getApplication(), denyDomains != null ? arrayList2 : null, arrayList3, domainFilterRule.getDns1(), domainFilterRule.getDns2());
                     arrayList = arrayList3;
-                    domainFilterRule4.setIpcToken(generateToken);
-                    hashMap.put(domainFilterRule4, Integer.valueOf(i4));
+                    domainFilterRule4.setIpcToken(iGenerateToken);
+                    map.put(domainFilterRule4, Integer.valueOf(i4));
                     arrayList2.clear();
                     arrayList.clear();
                     arrayList.add(str2);
@@ -476,14 +470,14 @@ public class Firewall {
         }
         ArrayList arrayList4 = arrayList3;
         if (arrayList4.isEmpty() && arrayList2.isEmpty()) {
-            return hashMap;
+            return map;
         }
         DomainFilterRule domainFilterRule5 = new DomainFilterRule(domainFilterRule.getApplication(), arrayList2, arrayList4, domainFilterRule.getDns1(), domainFilterRule.getDns2());
         if (z) {
-            domainFilterRule5.setIpcToken(generateToken);
+            domainFilterRule5.setIpcToken(iGenerateToken);
         }
-        hashMap.put(domainFilterRule5, Integer.valueOf(i));
-        return hashMap;
+        map.put(domainFilterRule5, Integer.valueOf(i));
+        return map;
     }
 
     public FirewallResponse[] removeDomainFilterRules(List<DomainFilterRule> list) {

@@ -11,7 +11,6 @@ import java.util.Set;
 import kotlin.Pair;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaDataCombineLatest implements MediaDataManager.Listener {
     public final Set listeners = new LinkedHashSet();
@@ -57,10 +56,10 @@ public final class MediaDataCombineLatest implements MediaDataManager.Listener {
         if (mediaData == null || mediaDeviceData == null) {
             return;
         }
-        MediaData copy$default = MediaData.copy$default(mediaData, null, null, null, null, null, mediaDeviceData, false, null, false, null, 0L, 0L, null, 0, 268427263);
+        MediaData mediaDataCopy$default = MediaData.copy$default(mediaData, null, null, null, null, null, mediaDeviceData, false, null, false, null, 0L, 0L, null, 0, 268427263);
         Iterator it = CollectionsKt___CollectionsKt.toSet(this.listeners).iterator();
         while (it.hasNext()) {
-            MediaDataManager.Listener.onMediaDataLoaded$default((MediaDataManager.Listener) it.next(), str3, str2, copy$default, false, 56);
+            MediaDataManager.Listener.onMediaDataLoaded$default((MediaDataManager.Listener) it.next(), str3, str2, mediaDataCopy$default, false, 56);
             str3 = str;
         }
     }

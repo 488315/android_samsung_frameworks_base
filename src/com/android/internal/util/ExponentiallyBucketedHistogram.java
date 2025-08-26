@@ -18,8 +18,8 @@ public class ExponentiallyBucketedHistogram {
             iArr[0] = iArr[0] + 1;
         } else {
             int[] iArr2 = this.mData;
-            int min = Math.min(iArr2.length - 1, 32 - Integer.numberOfLeadingZeros(i));
-            iArr2[min] = iArr2[min] + 1;
+            int iMin = Math.min(iArr2.length - 1, 32 - Integer.numberOfLeadingZeros(i));
+            iArr2[iMin] = iArr2[iMin] + 1;
         }
     }
 

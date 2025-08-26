@@ -16,12 +16,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VolumePanelReducer implements VolumePanelReducerBase {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.reducer.VolumePanelReducer$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$samsung$systemui$splugins$volume$VolumePanelAction$ActionType;
@@ -292,11 +291,11 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
                 List list5 = list3;
                 boolean z2 = z;
                 VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
-                boolean anyMatch = list4.stream().anyMatch(new VolumePanelReducer$$ExternalSyntheticLambda29(volumePanelRow, 1));
-                boolean anyMatch2 = list5.stream().anyMatch(new VolumePanelReducer$$ExternalSyntheticLambda29(volumePanelRow, 2));
+                boolean zAnyMatch = list4.stream().anyMatch(new VolumePanelReducer$$ExternalSyntheticLambda29(volumePanelRow, 1));
+                boolean zAnyMatch2 = list5.stream().anyMatch(new VolumePanelReducer$$ExternalSyntheticLambda29(volumePanelRow, 2));
                 VolumePanelRow.Builder streamType = new VolumePanelRow.Builder(volumePanelRow).setStreamType(volumePanelRow.getStreamType());
                 if (volumePanelRow.getStreamType() != 10) {
-                    z2 = (volumePanelRow.isImportant() || anyMatch) & (!anyMatch2);
+                    z2 = (volumePanelRow.isImportant() || zAnyMatch) & (!zAnyMatch2);
                 }
                 return streamType.isImportant(z2).isDynamic(volumePanelRow.isDynamic()).build();
             }
@@ -315,9 +314,9 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
     }
 
     public static VolumePanelState checkIfNeedToSetProgress(final VolumePanelState volumePanelState, int i, int i2, final long j) {
-        Optional findFirst = volumePanelState.getVolumeRowList().stream().filter(new VolumePanelReducer$$ExternalSyntheticLambda6(i, 2)).map(new VolumePanelReducer$$ExternalSyntheticLambda4(3)).findFirst();
+        Optional optionalFindFirst = volumePanelState.getVolumeRowList().stream().filter(new VolumePanelReducer$$ExternalSyntheticLambda6(i, 2)).map(new VolumePanelReducer$$ExternalSyntheticLambda4(3)).findFirst();
         Boolean bool = Boolean.FALSE;
-        if (((Boolean) findFirst.orElse(bool)).booleanValue()) {
+        if (((Boolean) optionalFindFirst.orElse(bool)).booleanValue()) {
             return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
         }
         if (((Boolean) volumePanelState.getVolumeRowList().stream().filter(new VolumePanelReducer$$ExternalSyntheticLambda6(i, 1)).map(new Function() { // from class: com.android.systemui.volume.reducer.VolumePanelReducer$$ExternalSyntheticLambda16
@@ -336,13 +335,13 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
                 VolumePanelState volumePanelState2 = volumePanelState;
                 VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
                 VolumePanelRow.Builder builder = new VolumePanelRow.Builder(volumePanelRow);
-                boolean isRemoteMic = volumePanelState2.isRemoteMic();
-                boolean isBtScoOn = volumePanelState2.isBtScoOn();
-                int i4 = 0;
+                boolean zIsRemoteMic = volumePanelState2.isRemoteMic();
+                boolean zIsBtScoOn = volumePanelState2.isBtScoOn();
+                int level = 0;
                 if (!volumePanelRow.isMuted() && (volumePanelRow.getStreamType() != 2 || (!VolumePanelValues.isVibrate(i3) && !VolumePanelValues.isSilent(i3)))) {
-                    i4 = (volumePanelRow.getStreamType() == 0 && isBtScoOn && !isRemoteMic) ? volumePanelRow.getLevel() + 1 : volumePanelRow.getLevel();
+                    level = (volumePanelRow.getStreamType() == 0 && zIsBtScoOn && !zIsRemoteMic) ? volumePanelRow.getLevel() + 1 : volumePanelRow.getLevel();
                 }
-                return builder.realLevel(i4).build();
+                return builder.realLevel(level).build();
             }
         }).collect(Collectors.toList())).stream().filter(new VolumePanelReducer$$ExternalSyntheticLambda6(i, 0)).map(new VolumePanelReducer$$ExternalSyntheticLambda5(i2, 3)).findFirst().orElse(bool)).booleanValue() ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_UPDATE_PROGRESS_BAR).stream(i).build();
     }
@@ -352,16 +351,7 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
     }
 
     public static boolean checkZenMuted(VolumeStreamState volumeStreamState, boolean z, boolean z2, boolean z3, boolean z4) {
-        if (checkStream(volumeStreamState, 3)) {
-            return z;
-        }
-        if (volumeStreamState.getStreamType() == 21) {
-            return z;
-        }
-        if (volumeStreamState.getStreamType() == 11) {
-            return z;
-        }
-        if (volumeStreamState.getStreamType() == 22) {
+        if (checkStream(volumeStreamState, 3) || volumeStreamState.getStreamType() == 21 || volumeStreamState.getStreamType() == 11 || volumeStreamState.getStreamType() == 22) {
             return z;
         }
         if (z4 && volumeStreamState.getStreamType() == 5) {
@@ -374,39 +364,36 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
     }
 
     public static int determineEarProtectLevel(VolumeStreamState volumeStreamState, VolumePanelAction volumePanelAction, VolumePanelState volumePanelState) {
-        boolean isSafeMediaDeviceOn = volumePanelAction.isSafeMediaDeviceOn();
-        boolean isSafeMediaPinDeviceOn = volumePanelAction.isSafeMediaPinDeviceOn();
-        boolean isMultiSoundBt = volumePanelAction.isMultiSoundBt();
-        if (!(checkStream(volumeStreamState, 3) && isSafeMediaDeviceOn) && ((volumeStreamState.getStreamType() != 22 || (!isMultiSoundBt ? isSafeMediaDeviceOn : isSafeMediaPinDeviceOn)) && !((volumeStreamState.getStreamType() == 21 && isSafeMediaPinDeviceOn) || volumeStreamState.getStreamType() == 23))) {
+        boolean zIsSafeMediaDeviceOn = volumePanelAction.isSafeMediaDeviceOn();
+        boolean zIsSafeMediaPinDeviceOn = volumePanelAction.isSafeMediaPinDeviceOn();
+        boolean zIsMultiSoundBt = volumePanelAction.isMultiSoundBt();
+        if (!(checkStream(volumeStreamState, 3) && zIsSafeMediaDeviceOn) && ((volumeStreamState.getStreamType() != 22 || (!zIsMultiSoundBt ? zIsSafeMediaDeviceOn : zIsSafeMediaPinDeviceOn)) && !((volumeStreamState.getStreamType() == 21 && zIsSafeMediaPinDeviceOn) || volumeStreamState.getStreamType() == 23))) {
             return -1;
         }
         return volumePanelState.getEarProtectLevel();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:63:0x00bc  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static boolean determineEnabled(VolumeStreamState volumeStreamState, VolumePanelAction volumePanelAction, VolumePanelState volumePanelState, boolean z) {
         boolean z2;
         VolumeState volumeState = volumePanelAction.getVolumeState();
-        boolean isVoiceCapable = volumePanelState.isVoiceCapable();
-        boolean z3 = !(isStreamVibrate(5, volumeStreamState, volumeState) || isStreamSilent(5, volumeStreamState, volumeState) || isStreamVibrate(1, volumeStreamState, volumeState) || isStreamSilent(1, volumeStreamState, volumeState) || (volumeStreamState.getStreamType() >= 100 && volumeStreamState.isDisabledFixedSession())) || (isVoiceCapable ? checkStream(volumeStreamState, 2) : checkStream(volumeStreamState, 5));
+        boolean zIsVoiceCapable = volumePanelState.isVoiceCapable();
+        boolean z3 = !(isStreamVibrate(5, volumeStreamState, volumeState) || isStreamSilent(5, volumeStreamState, volumeState) || isStreamVibrate(1, volumeStreamState, volumeState) || isStreamSilent(1, volumeStreamState, volumeState) || (volumeStreamState.getStreamType() >= 100 && volumeStreamState.isDisabledFixedSession())) || (zIsVoiceCapable ? checkStream(volumeStreamState, 2) : checkStream(volumeStreamState, 5));
         boolean z4 = volumeStreamState.getStreamType() == 6 && volumeState.isFixedScoVolume();
-        boolean z5 = z && checkZenMuted(volumeStreamState, volumeState.isDisallowMedia(), volumeState.isDisallowSystem(), volumeState.isDisallowRinger(), isVoiceCapable);
+        boolean zIsDisallowRinger = volumeState.isDisallowRinger();
+        boolean z5 = z && checkZenMuted(volumeStreamState, volumeState.isDisallowMedia(), volumeState.isDisallowSystem(), zIsDisallowRinger, zIsVoiceCapable);
         boolean z6 = volumeStreamState.getStreamType() == 3 || volumeStreamState.getStreamType() == 21;
-        boolean isZenNone = volumePanelAction.isZenNone();
-        boolean isAllSoundOff = volumePanelState.isAllSoundOff();
-        boolean z7 = z6 && (isZenNone || isAllSoundOff);
+        boolean zIsZenNone = volumePanelAction.isZenNone();
+        boolean zIsAllSoundOff = volumePanelState.isAllSoundOff();
+        boolean z7 = z6 && (zIsZenNone || zIsAllSoundOff);
         if (volumePanelState.isLeBroadcasting()) {
-            int broadcastMode = volumeState.getBroadcastMode();
-            if (checkStream(volumeStreamState, 5) || volumeStreamState.getStreamType() == 1 || ((volumeStreamState.getStreamType() == 3 || volumeStreamState.getStreamType() == 11) && broadcastMode == 2)) {
-                z2 = true;
-                boolean z8 = !isAllSoundOff || z7 || z4 || z5 || z2;
-                return ((z8 && volumeStreamState.getStreamType() == 20 && volumePanelAction.isSupportTvVolumeSync()) || !z3 || z8) ? false : true;
-            }
+            z2 = checkStream(volumeStreamState, 5) || volumeStreamState.getStreamType() == 1 || ((volumeStreamState.getStreamType() == 3 || volumeStreamState.getStreamType() == 11) && volumeState.getBroadcastMode() == 2);
         }
-        z2 = false;
-        if (isAllSoundOff) {
-        }
-        if (z8) {
-        }
+        boolean z8 = zIsAllSoundOff || z7 || z4 || z5 || z2;
+        return ((!z8 && volumeStreamState.getStreamType() == 20 && volumePanelAction.isSupportTvVolumeSync()) || !z3 || z8) ? false : true;
     }
 
     public static boolean determineIconClickable(int i, boolean z) {
@@ -515,7 +502,7 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
     }
 
     public static boolean determineVisibility(VolumePanelRow volumePanelRow, int i, boolean z, boolean z2, boolean z3) {
-        boolean isImportant = volumePanelRow.isImportant();
+        boolean zIsImportant = volumePanelRow.isImportant();
         boolean z4 = i == volumePanelRow.getStreamType();
         if (i == 23) {
             if (volumePanelRow.getStreamType() == 3) {
@@ -524,7 +511,7 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
                 z4 = false;
             }
         }
-        return (z && (isImportant || volumePanelRow.isActiveShow())) || z4 || (!z && z2 && (i == (z3 ? 21 : 3) || i == 22) && (volumePanelRow.getStreamType() == (z3 ? 21 : 3) || volumePanelRow.getStreamType() == 22) && isImportant);
+        return (z && (zIsImportant || volumePanelRow.isActiveShow())) || z4 || (!z && z2 && (i == (z3 ? 21 : 3) || i == 22) && (volumePanelRow.getStreamType() == (z3 ? 21 : 3) || volumePanelRow.getStreamType() == 22) && zIsImportant);
     }
 
     public static String getAppDevicePairName(String str, String str2) {
@@ -549,18 +536,18 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
         List list = (List) applyImportance(volumePanelState.getVolumeRowList(), volumePanelAction.getImportantStreamList(), volumePanelAction.getUnImportantStreamList(), z).stream().map(new Function() { // from class: com.android.systemui.volume.reducer.VolumePanelReducer$$ExternalSyntheticLambda24
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                VolumePanelState volumePanelState2 = VolumePanelState.this;
+                VolumePanelState volumePanelState2 = volumePanelState;
                 VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
                 return new VolumePanelRow.Builder(volumePanelRow).isVisible(VolumePanelReducer.determineVisibility(volumePanelRow, volumePanelState2.getActiveStream(), z2, volumePanelState2.isDualAudio(), volumePanelState2.isMultiSoundBt())).build();
             }
         }).collect(Collectors.toList());
         final int activeStream = volumePanelState.getActiveStream();
-        final boolean isMultiSoundBt = volumePanelState.isMultiSoundBt();
+        final boolean zIsMultiSoundBt = volumePanelState.isMultiSoundBt();
         return (List) list.stream().map(new Function() { // from class: com.android.systemui.volume.reducer.VolumePanelReducer$$ExternalSyntheticLambda23
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
-                return new VolumePanelRow.Builder(volumePanelRow).priority(VolumePanelReducer.determineRowPriority(volumePanelRow, activeStream, z2, isMultiSoundBt)).build();
+                return new VolumePanelRow.Builder(volumePanelRow).priority(VolumePanelReducer.determineRowPriority(volumePanelRow, activeStream, z2, zIsMultiSoundBt)).build();
             }
         }).collect(Collectors.toList());
     }
@@ -606,9 +593,9 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
     }
 
     public static List<VolumePanelRow> updateAccessibilityRowPriority(List<VolumePanelRow> list) {
-        List applyRowOrder = applyRowOrder(list);
-        List list2 = (List) applyRowOrder.stream().filter(new VolumePanelReducer$$ExternalSyntheticLambda3(2)).map(new VolumePanelReducer$$ExternalSyntheticLambda4(2)).collect(Collectors.toList());
-        return (List) applyRowOrder.stream().map(new VolumePanelReducer$$ExternalSyntheticLambda5(list2.size() >= 5 ? ((Integer) list2.get(4)).intValue() : ((Integer) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, list2)).intValue() + 1, 2)).collect(Collectors.toList());
+        List listApplyRowOrder = applyRowOrder(list);
+        List list2 = (List) listApplyRowOrder.stream().filter(new VolumePanelReducer$$ExternalSyntheticLambda3(2)).map(new VolumePanelReducer$$ExternalSyntheticLambda4(2)).collect(Collectors.toList());
+        return (List) listApplyRowOrder.stream().map(new VolumePanelReducer$$ExternalSyntheticLambda5(list2.size() >= 5 ? ((Integer) list2.get(4)).intValue() : ((Integer) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, list2)).intValue() + 1, 2)).collect(Collectors.toList());
     }
 
     public static int updateAudibleLevel(VolumePanelRow volumePanelRow, VolumeStreamState volumeStreamState) {
@@ -642,71 +629,50 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
                 if (volumeStreamState == null) {
                     return volumePanelRow;
                 }
-                VolumePanelRow.Builder levelMin = new VolumePanelRow.Builder(volumePanelRow).nameRes(volumeStreamState.getNameRes()).level(volumeStreamState.getLevel()).remoteLabel(VolumePanelReducer.determineRemoteLabel(volumePanelRow, volumeStreamState, volumePanelAction2)).isRoutedToBluetooth(volumeStreamState.isRoutedToBt()).isMuted(volumeStreamState.isMuted()).realLevel(VolumePanelReducer.determineRealVolumeLevel(volumeStreamState, volumePanelAction2, volumePanelState2.isAllSoundOff(), volumePanelState2.isBtScoOn())).isSliderEnabled(VolumePanelReducer.determineEnabled(volumeStreamState, volumePanelAction2, volumePanelState2, volumePanelAction2.isZenPriorityOnly())).levelMin(volumeStreamState.getMin());
-                boolean isBtScoOn = volumePanelState2.isBtScoOn();
+                VolumePanelRow.Builder builderLevelMin = new VolumePanelRow.Builder(volumePanelRow).nameRes(volumeStreamState.getNameRes()).level(volumeStreamState.getLevel()).remoteLabel(VolumePanelReducer.determineRemoteLabel(volumePanelRow, volumeStreamState, volumePanelAction2)).isRoutedToBluetooth(volumeStreamState.isRoutedToBt()).isMuted(volumeStreamState.isMuted()).realLevel(VolumePanelReducer.determineRealVolumeLevel(volumeStreamState, volumePanelAction2, volumePanelState2.isAllSoundOff(), volumePanelState2.isBtScoOn())).isSliderEnabled(VolumePanelReducer.determineEnabled(volumeStreamState, volumePanelAction2, volumePanelState2, volumePanelAction2.isZenPriorityOnly())).levelMin(volumeStreamState.getMin());
+                boolean zIsBtScoOn = volumePanelState2.isBtScoOn();
                 int streamType = volumeStreamState.getStreamType();
                 int integerValue = volumeStreamState.getIntegerValue(VolumeStreamState.IntegerStateKey.MAX);
                 VolumeState volumeState3 = volumePanelAction2.getVolumeState();
-                if (volumeState3 != null && streamType == 0 && isBtScoOn && !volumeState3.isRemoteMic()) {
+                if (volumeState3 != null && streamType == 0 && zIsBtScoOn && !volumeState3.isRemoteMic()) {
                     integerValue++;
                 }
-                VolumePanelRow.Builder isIconEnabled = levelMin.levelMax(integerValue).isVisible(VolumePanelReducer.determineVisibility(volumePanelRow, i2, volumePanelState2.isExpanded(), volumeState2.isDualAudio(), volumePanelAction2.isMultiSoundBt())).iconType(VolumePanelReducer.determineIconState(volumeStreamState, volumeState2)).audibleLevel(VolumePanelReducer.updateAudibleLevel(volumePanelRow, volumeStreamState)).earProtectionLevel(VolumePanelReducer.determineEarProtectLevel(volumeStreamState, volumePanelAction2, volumePanelState2)).priority(VolumePanelReducer.determineRowPriority(volumePanelRow, i2, volumePanelState2.isExpanded(), volumePanelAction2.isMultiSoundBt())).isIconClickable(VolumePanelReducer.determineIconClickable(volumeStreamState.getStreamType(), volumeState2.isRemoteMic())).isIconEnabled(VolumePanelReducer.determineIconEnabled(volumeStreamState.getStreamType(), volumePanelState2.isAllSoundOff()));
+                VolumePanelRow.Builder builderIsIconEnabled = builderLevelMin.levelMax(integerValue).isVisible(VolumePanelReducer.determineVisibility(volumePanelRow, i2, volumePanelState2.isExpanded(), volumeState2.isDualAudio(), volumePanelAction2.isMultiSoundBt())).iconType(VolumePanelReducer.determineIconState(volumeStreamState, volumeState2)).audibleLevel(VolumePanelReducer.updateAudibleLevel(volumePanelRow, volumeStreamState)).earProtectionLevel(VolumePanelReducer.determineEarProtectLevel(volumeStreamState, volumePanelAction2, volumePanelState2)).priority(VolumePanelReducer.determineRowPriority(volumePanelRow, i2, volumePanelState2.isExpanded(), volumePanelAction2.isMultiSoundBt())).isIconClickable(VolumePanelReducer.determineIconClickable(volumeStreamState.getStreamType(), volumeState2.isRemoteMic())).isIconEnabled(VolumePanelReducer.determineIconEnabled(volumeStreamState.getStreamType(), volumePanelState2.isAllSoundOff()));
                 String smartViewDeviceName = volumePanelAction2.getSmartViewDeviceName();
                 if (volumePanelRow.getStreamType() != 20) {
                     smartViewDeviceName = "";
                 }
-                return isIconEnabled.smartViewLabel(smartViewDeviceName).dualBtDeviceAddress(volumeStreamState.getDualBtDeviceAddress()).dualBtDeviceName(volumeStreamState.getDualBtDeviceName()).build();
+                return builderIsIconEnabled.smartViewLabel(smartViewDeviceName).dualBtDeviceAddress(volumeStreamState.getDualBtDeviceAddress()).dualBtDeviceName(volumeStreamState.getDualBtDeviceName()).build();
             }
         }).collect(Collectors.toList());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x003d A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x003d A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int getLastAudibleLevelOrMinLevel(com.samsung.systemui.splugins.volume.VolumePanelState r5, com.samsung.systemui.splugins.volume.VolumePanelRow r6) {
-        /*
-            r4 = this;
-            int r4 = r6.getStreamType()
-            int r0 = r6.getLevel()
-            int r1 = r6.getLevelMin()
-            int r6 = r6.getAudibleLevel()
-            boolean r2 = r5.isVoiceCapable()
-            r3 = 2
-            if (r2 == 0) goto L1a
-            if (r4 != r3) goto L37
-            goto L1d
-        L1a:
-            r2 = 5
-            if (r4 != r2) goto L37
-        L1d:
-            boolean r4 = r5.isAllSoundOff()
-            if (r4 != 0) goto L3f
-            int r4 = r5.getRingerModeInternal()
-            if (r4 != r3) goto L34
-            boolean r4 = r5.isHasVibrator()
-            if (r4 != 0) goto L3f
-            if (r0 != 0) goto L32
-            goto L3d
-        L32:
-            r4 = 0
-            return r4
-        L34:
-            if (r0 != 0) goto L3f
-            goto L3d
-        L37:
-            r5 = 20
-            if (r4 == r5) goto L3f
-            if (r0 != r1) goto L3e
-        L3d:
-            return r6
-        L3e:
-            return r1
-        L3f:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.reducer.VolumePanelReducer.getLastAudibleLevelOrMinLevel(com.samsung.systemui.splugins.volume.VolumePanelState, com.samsung.systemui.splugins.volume.VolumePanelRow):int");
+    public int getLastAudibleLevelOrMinLevel(VolumePanelState volumePanelState, VolumePanelRow volumePanelRow) {
+        int streamType = volumePanelRow.getStreamType();
+        int level = volumePanelRow.getLevel();
+        int levelMin = volumePanelRow.getLevelMin();
+        int audibleLevel = volumePanelRow.getAudibleLevel();
+        if (!volumePanelState.isVoiceCapable() ? streamType == 5 : streamType == 2) {
+            if (streamType != 20) {
+                return level == levelMin ? audibleLevel : levelMin;
+            }
+            return level;
+        }
+        if (!volumePanelState.isAllSoundOff()) {
+            if (volumePanelState.getRingerModeInternal() == 2) {
+                if (!volumePanelState.isHasVibrator()) {
+                    if (level != 0) {
+                        return 0;
+                    }
+                }
+            } else if (level == 0) {
+            }
+        }
+        return level;
     }
 
     public List<VolumePanelRow> mergeRemoteStream(List<VolumePanelRow> list, List<VolumeStreamState> list2) {
@@ -719,20 +685,305 @@ public class VolumePanelReducer implements VolumePanelReducerBase {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:189:0x0648, code lost:
-    
-        if (com.samsung.systemui.splugins.volume.VolumePanelValues.isSilent(r1) != false) goto L198;
-     */
+    /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:198:0x064a  */
     @Override // com.samsung.systemui.splugins.volume.VolumePanelReducerBase
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.systemui.splugins.volume.VolumePanelState reduce(com.samsung.systemui.splugins.volume.VolumePanelAction r19, final com.samsung.systemui.splugins.volume.VolumePanelState r20) {
-        /*
-            Method dump skipped, instructions count: 3002
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.reducer.VolumePanelReducer.reduce(com.samsung.systemui.splugins.volume.VolumePanelAction, com.samsung.systemui.splugins.volume.VolumePanelState):com.samsung.systemui.splugins.volume.VolumePanelState");
+    public final VolumePanelState reduce(VolumePanelAction volumePanelAction, final VolumePanelState volumePanelState) {
+        VolumeState volumeState;
+        boolean z;
+        VolumePanelState.Builder builder = new VolumePanelState.Builder(volumePanelState);
+        VolumePanelState.StateType stateType = VolumePanelState.StateType.STATE_IDLE;
+        VolumePanelState volumePanelStateBuild = builder.setStateType(stateType).build();
+        final boolean z2 = true;
+        int i = 0;
+        Object[] objArr = 0;
+        switch (AnonymousClass1.$SwitchMap$com$samsung$systemui$splugins$volume$VolumePanelAction$ActionType[volumePanelAction.getActionType().ordinal()]) {
+            case 1:
+                boolean zIsVoiceCapable = volumePanelAction.isVoiceCapable();
+                return new VolumePanelState.Builder(volumePanelState).setVolumeRowList(prepareVolumePanelRow(zIsVoiceCapable)).isVoiceCapable(zIsVoiceCapable).isHasVibrator(volumePanelAction.isHasVibrator()).isAllSoundOff(volumePanelAction.isAllSoundOff()).isSetupWizardComplete(volumePanelAction.isSetupWizardComplete()).build();
+            case 2:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(stateType).build();
+            case 3:
+                if (volumePanelState.isAnimating() || volumePanelState.isQpVolumeBarEnabled()) {
+                    return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+                }
+                if (volumePanelState.isShowing() || volumePanelState.isShowingSubDisplayVolumePanel()) {
+                    return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_RESCHEDULE_TIME_OUT).timeOut(calcTimeOut(volumePanelState, volumePanelAction.getTimeOutControls(), volumePanelAction.getTimeOutControlsText())).build();
+                }
+                int timeOutControls = volumePanelAction.getTimeOutControls();
+                int timeOutControlsText = volumePanelAction.getTimeOutControlsText();
+                List volumePanelRows = getVolumePanelRows(volumePanelState, volumePanelAction, volumePanelState.isShowA11yStream(), volumePanelState.isExpanded());
+                final String pinAppName = volumePanelAction.getPinAppName();
+                final String pinDeviceName = volumePanelAction.getPinDeviceName();
+                final String btCallDeviceName = volumePanelAction.getBtCallDeviceName();
+                final String audioSharingDeviceName = volumePanelAction.getAudioSharingDeviceName();
+                final boolean zIsRemoteMic = volumePanelState.isRemoteMic();
+                final boolean zIsMultiSoundBt = volumePanelState.isMultiSoundBt();
+                final boolean zIsDualAudio = volumePanelState.isDualAudio();
+                List list = (List) volumePanelRows.stream().map(new Function() { // from class: com.android.systemui.volume.reducer.VolumePanelReducer$$ExternalSyntheticLambda28
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        boolean z3 = zIsMultiSoundBt;
+                        boolean z4 = zIsDualAudio;
+                        String str = pinAppName;
+                        String dualBtDeviceName = pinDeviceName;
+                        boolean z5 = zIsRemoteMic;
+                        String str2 = btCallDeviceName;
+                        String str3 = audioSharingDeviceName;
+                        VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
+                        if (volumePanelRow.getStreamType() == 21) {
+                            boolean z6 = z3 && z4;
+                            VolumePanelRow.Builder builder2 = new VolumePanelRow.Builder(volumePanelRow);
+                            if (z6) {
+                                dualBtDeviceName = volumePanelRow.getDualBtDeviceName();
+                            }
+                            return builder2.remoteLabel(VolumePanelReducer.getAppDevicePairName(str, dualBtDeviceName)).build();
+                        }
+                        if ((volumePanelRow.getStreamType() == 6 && !z5) || volumePanelRow.getStreamType() == 0) {
+                            return new VolumePanelRow.Builder(volumePanelRow).remoteLabel(str2).build();
+                        }
+                        if (volumePanelRow.getStreamType() == 22) {
+                            return new VolumePanelRow.Builder(volumePanelRow).remoteLabel(z3 ? VolumePanelReducer.getAppDevicePairName(str, volumePanelRow.getDualBtDeviceName()) : volumePanelRow.getDualBtDeviceName()).build();
+                        }
+                        return volumePanelRow.getStreamType() == 23 ? new VolumePanelRow.Builder(volumePanelRow).remoteLabel(str3).build() : volumePanelRow;
+                    }
+                }).collect(Collectors.toList());
+                final boolean zIsSafeMediaDeviceOn = volumePanelAction.isSafeMediaDeviceOn();
+                final boolean zIsSafeMediaPinDeviceOn = volumePanelAction.isSafeMediaPinDeviceOn();
+                List<VolumePanelRow> listApplyActiveState = applyActiveState((List) list.stream().map(new Function() { // from class: com.android.systemui.volume.reducer.VolumePanelReducer$$ExternalSyntheticLambda32
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        boolean z3 = zIsSafeMediaDeviceOn;
+                        boolean z4 = zIsSafeMediaPinDeviceOn;
+                        VolumePanelState volumePanelState2 = volumePanelState;
+                        VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
+                        return ((volumePanelRow.getStreamType() == 3 && z3) || (volumePanelRow.getStreamType() == 21 && z4) || volumePanelRow.getStreamType() == 23 || (volumePanelRow.getStreamType() == 22 && (!volumePanelState2.isMultiSoundBt() ? !z3 : !z4))) ? new VolumePanelRow.Builder(volumePanelRow).earProtectionLevel(volumePanelState2.getEarProtectLevel()).build() : new VolumePanelRow.Builder(volumePanelRow).earProtectionLevel(-1).build();
+                    }
+                }).collect(Collectors.toList()), volumePanelState.getActiveStream());
+                boolean zIsFolded = volumePanelState.isFolded();
+                return new VolumePanelState.Builder(volumePanelState).setStateType(zIsFolded ? VolumePanelState.StateType.STATE_SHOW_SUB_DISPLAY_VOLUME_PANEL : VolumePanelState.StateType.STATE_SHOW).isShowing(true).timeOutControls(timeOutControls).timeOutControlsText(timeOutControlsText).timeOut(calcTimeOut(volumePanelState, timeOutControls, timeOutControlsText)).isMediaDefaultEnabled(volumePanelAction.isMediaDefault()).isLockscreen(volumePanelAction.isLockscreen()).cutoutHeight(volumePanelAction.getCutoutHeight()).setVolumeRowList(listApplyActiveState).pinDevice(volumePanelAction.getPinDevice()).isSafeMediaDeviceOn(zIsSafeMediaDeviceOn).isSafeMediaPinDeviceOn(zIsSafeMediaPinDeviceOn).isBtScoOn(volumePanelAction.isBtScoOn()).isShowing(!zIsFolded).isShowingSubDisplayVolumePanel(zIsFolded).build();
+            case 4:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).isAnimating(true).build();
+            case 5:
+                return (volumePanelState.isShowing() || volumePanelState.isShowingSubDisplayVolumePanel()) ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_DISMISS_VOLUME_PANEL).isWithAnimation(true).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+            case 6:
+                return (volumePanelState.isShowing() || volumePanelState.isShowingSubDisplayVolumePanel() || volumePanelState.isShowingVolumeLimiterDialog() || volumePanelState.isShowingVolumeSafetyWarningDialog() || volumePanelState.isShowingVolumeCsd100WarningDialog()) ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_DISMISS).isWithAnimation(false).isAnimating(false).isPendingState(false).isShowing(false).isShowingSubDisplayVolumePanel(false).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).isAnimating(false).isPendingState(false).isShowing(false).isShowingSubDisplayVolumePanel(false).build();
+            case 7:
+            case 8:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_DISMISS_VOLUME_PANEL).isWithAnimation(true).build();
+            case 9:
+            case 10:
+                return (volumePanelState.isShowing() || volumePanelState.isShowingSubDisplayVolumePanel() || volumePanelState.isShowingVolumeLimiterDialog()) ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_DISMISS).isWithAnimation(true).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+            case 11:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+            case 12:
+                int activeStream = volumePanelAction.getActiveStream();
+                if (activeStream == -1) {
+                    activeStream = volumePanelState.getActiveStream();
+                }
+                VolumeState volumeState2 = volumePanelAction.getVolumeState();
+                if (volumeState2 != null) {
+                    boolean zIsRemoteMic2 = volumeState2.isRemoteMic();
+                    boolean zIsShowA11yStream = volumePanelState.isShowA11yStream();
+                    boolean zIsZenEnabled = volumePanelAction.isZenEnabled();
+                    boolean zIsVoiceCapable2 = volumePanelAction.isVoiceCapable();
+                    long systemTimeNow = volumePanelAction.getSystemTimeNow();
+                    boolean zIsAodVolumePanel = volumeState2.isAodVolumePanel();
+                    boolean zIsLeBroadcasting = volumeState2.isLeBroadcasting();
+                    List<VolumePanelRow> volumeRowList = volumePanelState.getVolumeRowList();
+                    if (zIsVoiceCapable2) {
+                        z = true;
+                        volumeState = volumeState2;
+                        if (volumeRowList.stream().noneMatch(new VolumePanelReducer$$ExternalSyntheticLambda3(1))) {
+                            volumeRowList = prepareVolumePanelRow(true);
+                        }
+                    } else {
+                        volumeState = volumeState2;
+                        z = true;
+                    }
+                    VolumePanelState.Builder builderEarProtectLevel = new VolumePanelState.Builder(volumePanelState).activeStream(activeStream).setVolumeRowList(applyRowOrder(updateVolumeStates(applyImportance(mergeRemoteStream(volumeRowList, volumeState.getStreamStates()), volumePanelAction.getImportantStreamList(), volumePanelAction.getUnImportantStreamList(), zIsShowA11yStream), volumePanelAction, volumePanelState, activeStream))).isRemoteMic(zIsRemoteMic2).isZenMode(zIsZenEnabled).isLeBroadcasting(zIsLeBroadcasting).ringerModeInternal(volumeState.getRingerModeInternal()).systemTimeNow(systemTimeNow).isBtScoOn(volumePanelAction.isBtScoOn()).isVoiceCapable(zIsVoiceCapable2).isAodVolumePanel(zIsAodVolumePanel).isSafeMediaDeviceOn(volumePanelAction.isSafeMediaDeviceOn()).isSafeMediaPinDeviceOn(volumePanelAction.isSafeMediaPinDeviceOn()).earProtectLevel(volumePanelAction.getEarProtectLevel());
+                    builderEarProtectLevel.isDualAudio(volumeState.isDualAudio()).isMultiSoundBt(volumePanelAction.isMultiSoundBt());
+                    return volumePanelState.isAnimating() ? builderEarProtectLevel.setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).isPendingState(z).build() : builderEarProtectLevel.setStateType(VolumePanelState.StateType.STATE_UPDATE).build();
+                }
+                return volumePanelStateBuild;
+            case 13:
+                return volumePanelState.isAnimating() ? volumePanelState.isPendingState() ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_UPDATE).isPendingState(false).isAnimating(false).isConfigurationChanged(false).isOpenThemeChanged(false).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).isAnimating(false).isConfigurationChanged(false).isOpenThemeChanged(false).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+            case 14:
+            case 15:
+                if (volumePanelState.isAnimating()) {
+                    return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+                }
+                boolean zIsExpanded = volumePanelState.isExpanded();
+                boolean z3 = !zIsExpanded;
+                boolean zIsShowA11yStream2 = volumePanelState.isShowA11yStream();
+                List<VolumePanelRow> volumePanelRows2 = getVolumePanelRows(volumePanelState, volumePanelAction, zIsShowA11yStream2, z3);
+                if (!zIsExpanded && zIsShowA11yStream2 && volumePanelState.getActiveStream() != 10) {
+                    volumePanelRows2 = updateAccessibilityRowPriority(volumePanelRows2);
+                }
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_EXPAND_STATE_CHANGED).isExpanded(z3).setVolumeRowList(applyRowOrder(volumePanelRows2)).timeOut(calcTimeOut(volumePanelState, volumePanelState.getTimeOutControls(), volumePanelState.getTimeOutControlsText())).build();
+            case 16:
+                VolumePanelState.Builder stateType2 = new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_START_SLIDER_TRACKING);
+                List<VolumePanelRow> volumeRowList2 = volumePanelState.getVolumeRowList();
+                final int stream = volumePanelAction.getStream();
+                return stateType2.setVolumeRowList((List) volumeRowList2.stream().map(new Function() { // from class: com.android.systemui.volume.reducer.VolumePanelReducer$$ExternalSyntheticLambda27
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
+                        return volumePanelRow.getStreamType() == stream ? new VolumePanelRow.Builder(volumePanelRow).isTracking(z2).build() : new VolumePanelRow.Builder(volumePanelRow).build();
+                    }
+                }).collect(Collectors.toList())).isTracking(true).build();
+            case 17:
+                VolumePanelState.Builder builderStream = new VolumePanelState.Builder(volumePanelState).isTracking(false).setStateType(VolumePanelState.StateType.STATE_STOP_SLIDER_TRACKING).stream(volumePanelAction.getStream());
+                List<VolumePanelRow> volumeRowList3 = volumePanelState.getVolumeRowList();
+                final int stream2 = volumePanelAction.getStream();
+                Stream<VolumePanelRow> stream3 = volumeRowList3.stream();
+                final Object[] objArr2 = objArr == true ? 1 : 0;
+                return builderStream.setVolumeRowList((List) stream3.map(new Function() { // from class: com.android.systemui.volume.reducer.VolumePanelReducer$$ExternalSyntheticLambda27
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
+                        return volumePanelRow.getStreamType() == stream2 ? new VolumePanelRow.Builder(volumePanelRow).isTracking(objArr2).build() : new VolumePanelRow.Builder(volumePanelRow).build();
+                    }
+                }).collect(Collectors.toList())).build();
+            case 18:
+                final int stream4 = volumePanelAction.getStream();
+                final int progress = volumePanelAction.getProgress();
+                final long systemTimeNow2 = volumePanelAction.getSystemTimeNow();
+                return shouldSetStreamVolume(stream4, progress, volumePanelState) ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_SET_STREAM_VOLUME).stream(stream4).setVolumeRowList((List) volumePanelState.getVolumeRowList().stream().map(new Function() { // from class: com.android.systemui.volume.reducer.VolumePanelReducer$$ExternalSyntheticLambda22
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
+                        return volumePanelRow.getStreamType() == stream4 ? new VolumePanelRow.Builder(volumePanelRow).realLevel(VolumePanelReducer.getImpliedLevel(volumePanelRow.getStreamType(), volumePanelRow.getLevelMax(), progress)).userAttemptTime(systemTimeNow2).build() : new VolumePanelRow.Builder(volumePanelRow).build();
+                    }
+                }).collect(Collectors.toList())).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+            case 19:
+                final int stream5 = volumePanelAction.getStream();
+                if (stream5 == 20) {
+                    return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_SMART_VIEW_ICON_CLICKED).build();
+                }
+                VolumePanelState.Builder volumeRowList4 = new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_VOLUME_ICON_CLICKED).stream(stream5).setVolumeRowList((List) volumePanelState.getVolumeRowList().stream().map(new Function() { // from class: com.android.systemui.volume.reducer.VolumePanelReducer$$ExternalSyntheticLambda25
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        VolumePanelReducer volumePanelReducer = this.f$0;
+                        int i2 = stream5;
+                        VolumePanelState volumePanelState2 = volumePanelState;
+                        VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
+                        volumePanelReducer.getClass();
+                        return volumePanelRow.getStreamType() == i2 ? new VolumePanelRow.Builder(volumePanelRow).level(volumePanelReducer.getLastAudibleLevelOrMinLevel(volumePanelState2, volumePanelRow)).userAttemptTime(0L).build() : new VolumePanelRow.Builder(volumePanelRow).build();
+                    }
+                }).collect(Collectors.toList()));
+                if (!volumePanelState.isVoiceCapable() ? stream5 != 5 : stream5 != 2) {
+                    z2 = false;
+                }
+                int ringerModeInternal = volumePanelState.getRingerModeInternal();
+                boolean zIsHasVibrator = volumePanelState.isHasVibrator();
+                if (!z2) {
+                    i = ringerModeInternal;
+                } else if (volumePanelState.isAllSoundOff()) {
+                    if (VolumePanelValues.isSilent(ringerModeInternal)) {
+                        i = zIsHasVibrator;
+                    }
+                } else if (!VolumePanelValues.isNormal(ringerModeInternal)) {
+                    i = 2;
+                }
+                return volumeRowList4.ringerModeInternal(i).build();
+            case 20:
+                return (volumePanelState.isShowing() || volumePanelState.isShowingSubDisplayVolumePanel()) ? checkIfNeedToSetProgress(volumePanelState, volumePanelAction.getStream(), volumePanelAction.getProgress(), volumePanelAction.getSystemTimeNow()) : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+            case 21:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_TOUCH_PANEL).timeOut(calcTimeOut(volumePanelState, volumePanelState.getTimeOutControls(), volumePanelState.getTimeOutControlsText())).build();
+            case 22:
+            case 23:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).isAllSoundOff(volumePanelAction.isAllSoundOff()).build();
+            case 24:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).isSetupWizardComplete(volumePanelAction.isSetupWizardComplete()).build();
+            case 25:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).isShowA11yStream(volumePanelAction.isShowA11yStream()).build();
+            case 26:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_RESCHEDULE_TIME_OUT).timeOut(calcTimeOut(volumePanelState, volumePanelState.getTimeOutControls(), volumePanelState.getTimeOutControlsText())).build();
+            case 27:
+                int activeStream2 = volumePanelAction.getActiveStream();
+                if (!volumePanelState.isShowing() && !volumePanelState.isShowingSubDisplayVolumePanel()) {
+                    z2 = false;
+                }
+                boolean zIsFromKey = volumePanelAction.isFromKey();
+                if (BasicRune.VOLUME_HOME_IOT) {
+                    return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_PLAY_SOUND_ON).activeStream(activeStream2).volumeDirection(volumePanelAction.getVolumeDirection()).build();
+                }
+                return (activeStream2 == 20 || (!z2 && zIsFromKey) || volumePanelState.isZenMode()) ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_PLAY_SOUND_ON).activeStream(activeStream2).build();
+            case 28:
+                return volumePanelAction.isDensityOrFontChanged() ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_CONFIGURATION_CHANGED).isConfigurationChanged(true).build() : ((volumePanelState.isShowing() || volumePanelState.isShowingSubDisplayVolumePanel()) && volumePanelAction.isOrientationChanged()) ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_ORIENTATION_CHANGED).isWithAnimation(false).build() : volumePanelAction.isDisplayTypeChanged() ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_DISMISS).isWithAnimation(false).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+            case 29:
+                return (volumePanelState.isShowing() || volumePanelState.isShowingSubDisplayVolumePanel() || volumePanelState.isShowingVolumeLimiterDialog() || volumePanelState.isShowingVolumeSafetyWarningDialog() || volumePanelState.isShowingVolumeCsd100WarningDialog()) ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_COVER_STATE_CHANGED).isWithAnimation(false).isCoverClosed(volumePanelAction.isCoverClosed()).coverType(volumePanelAction.getCoverType()).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).isCoverClosed(volumePanelAction.isCoverClosed()).coverType(volumePanelAction.getCoverType()).build();
+            case 30:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_SMART_VIEW_SEEKBAR_TOUCHED).stream(volumePanelAction.getStream()).build();
+            case 31:
+                return volumePanelState.isShowingVolumeLimiterDialog() ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build() : isDisabledWarningDialog(volumePanelState.getCoverType(), volumePanelState.isCoverClosed()) ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_SHOW_VOLUME_LIMITER_DIALOG).isShowingVolumeLimiterDialog(true).build();
+            case 32:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_VOLUME_LIMITER_DIALOG_SETTINS_CLICKED).isWithAnimation(true).build();
+            case 33:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_VOLUME_LIMITER_DIALOG_CANCEL_CLICKED).build();
+            case 34:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_VOLUME_LIMITER_DIALOG_VOLUME_DOWN).build();
+            case 35:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).isShowingVolumeLimiterDialog(false).build();
+            case 36:
+            case 37:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_DISMISS_VOLUME_PANEL_COMPLETED).setVolumeRowList(resetActiveState(volumePanelState.getVolumeRowList())).isShowing(false).isShowingSubDisplayVolumePanel(false).isExpanded(false).isAnimating(false).isWithAnimation(false).isConfigurationChanged(false).build();
+            case 38:
+                return (volumePanelAction.getFlags() & 134217728) != 0 ? volumePanelState.isShowingVolumeSafetyWarningDialog() ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_VOLUME_SAFETY_WARNING_DIALOG_FLAG_DISMISS).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build() : isDisabledWarningDialog(volumePanelState.getCoverType(), volumePanelState.isCoverClosed()) ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build() : !volumePanelState.isShowingVolumeSafetyWarningDialog() ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_SHOW_VOLUME_SAFETY_WARNING_DIALOG).isShowingVolumeSafetyWarningDialog(true).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+            case 39:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_DISMISS_VOLUME_SAFETY_WARNING_DIALOG).isShowingVolumeSafetyWarningDialog(false).build();
+            case 40:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_VOLUME_SAFETY_WARNING_DIALOG_OK_CLICKED).build();
+            case 41:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_VOLUME_SAFETY_WARNING_DIALOG_CANCEL_CLICKED).build();
+            case 42:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_OPEN_THEME_CHANGED).isWithAnimation(true).isOpenThemeChanged(true).build();
+            case 43:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_SETTINGS_BUTTON_CLICKED).isWithAnimation(true).build();
+            case 44:
+                return new VolumePanelState.Builder(volumePanelState).stream(volumePanelAction.getStream()).setStateType(VolumePanelState.StateType.STATE_SEEKBAR_START_PROGRESS).build();
+            case 45:
+                return new VolumePanelState.Builder(volumePanelState).stream(volumePanelAction.getStream()).setStateType(VolumePanelState.StateType.STATE_SEEKBAR_TOUCH_DOWN).build();
+            case 46:
+                return new VolumePanelState.Builder(volumePanelState).stream(volumePanelAction.getStream()).setStateType(VolumePanelState.StateType.STATE_SEEKBAR_TOUCH_UP).build();
+            case 47:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_STATUS_MESSAGE_CLICKED).isWithAnimation(true).build();
+            case 48:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_STATUS_DO_NOT_DISTURB_MESSAGE_CLICKED).isWithAnimation(true).build();
+            case 49:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_STATUS_LE_BROADCASTING_MESSAGE_CLICKED).isWithAnimation(true).build();
+            case 50:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_FOLDER_STATE_CHANGED).isFolded(volumePanelAction.isFolded()).isAnimating(false).isPendingState(false).isShowing(false).isShowingSubDisplayVolumePanel(false).build();
+            case 51:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_ARROW_RIGHT_CLICKED).build();
+            case 52:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_ARROW_LEFT_CLICKED).build();
+            case 53:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_CAPTION_COMPONENT_CHANGED).isCaptionComponentEnabled(volumePanelAction.isCaptionComponentEnabled()).isCaptionEnabled(volumePanelAction.isCaptionEnabled()).build();
+            case 54:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_CAPTION_CHANGED).isCaptionEnabled(!volumePanelState.isCaptionEnabled()).build();
+            case 55:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_SET_VOLUME_STATE).stream(volumePanelAction.getStream()).iconTargetState(volumePanelAction.getIconTargetState()).iconCurrentState(volumePanelAction.getIconCurrentState()).build();
+            case 56:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_DUAL_PLAY_MODE_CHANGED).isWithAnimation(true).build();
+            case 57:
+                return (volumePanelAction.getFlags() & 134217728) != 0 ? volumePanelState.isShowingVolumeCsd100WarningDialog() ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_VOLUME_CSD_100_WARNING_DIALOG_FLAG_DISMISS).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build() : isDisabledWarningDialog(volumePanelState.getCoverType(), volumePanelState.isCoverClosed()) ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build() : !volumePanelState.isShowingVolumeCsd100WarningDialog() ? new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_SHOW_VOLUME_CSD_100_WARNING_DIALOG).isShowingVolumeCsd100WarningDialog(true).build() : new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+            case 58:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_DISMISS_VOLUME_CSD_100_WARNING_DIALOG).isShowingVolumeCsd100WarningDialog(false).build();
+            case 59:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_VOLUME_CSD_100_WARNING_DIALOG_OK_CLICKED).build();
+            case 60:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_KEY_EVENT).isKeyDown(volumePanelAction.isKeyDown()).isVibrating(volumePanelAction.isVibrating()).build();
+            case 61:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_VOLUME_CSD_100_WARNING_DIALOG_SET_SAFETY_VOLUME).build();
+            case 62:
+                return new VolumePanelState.Builder(volumePanelState).setStateType(VolumePanelState.StateType.STATE_NO_DISPATCH).build();
+            default:
+                return volumePanelStateBuild;
+        }
     }
 }

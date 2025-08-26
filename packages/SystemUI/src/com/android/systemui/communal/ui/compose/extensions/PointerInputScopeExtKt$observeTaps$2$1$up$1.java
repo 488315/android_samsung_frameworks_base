@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.RestrictedSuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class PointerInputScopeExtKt$observeTaps$2$1$up$1 extends RestrictedSuspendLambda implements Function2 {
     final /* synthetic */ PointerEventPass $pass;
@@ -50,7 +49,7 @@ final class PointerInputScopeExtKt$observeTaps$2$1$up$1 extends RestrictedSuspen
         AwaitPointerEventScope awaitPointerEventScope = (AwaitPointerEventScope) this.L$0;
         PointerEventPass pointerEventPass = this.$pass;
         this.label = 1;
-        Object waitForUpOrCancellation = TapGestureDetectorKt.waitForUpOrCancellation(awaitPointerEventScope, pointerEventPass, this);
-        return waitForUpOrCancellation == coroutineSingletons ? coroutineSingletons : waitForUpOrCancellation;
+        Object objWaitForUpOrCancellation = TapGestureDetectorKt.waitForUpOrCancellation(awaitPointerEventScope, pointerEventPass, this);
+        return objWaitForUpOrCancellation == coroutineSingletons ? coroutineSingletons : objWaitForUpOrCancellation;
     }
 }

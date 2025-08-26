@@ -4,7 +4,6 @@ import com.android.systemui.statusbar.CrossFadeHelper;
 import com.android.systemui.statusbar.TransformableView;
 import com.android.systemui.statusbar.ViewTransformationHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class CustomInterpolatorTransformation extends ViewTransformationHelper.CustomTransformation {
     public final int mViewType;

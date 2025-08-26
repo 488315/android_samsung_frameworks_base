@@ -1,5 +1,6 @@
 package com.android.systemui.navigationbar.bandaid.pack;
 
+import android.content.res.Resources;
 import com.android.systemui.BasicRune;
 import com.android.systemui.navigationbar.bandaid.Band;
 import com.android.systemui.navigationbar.bandaid.BandAid;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.function.Function;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ColorPack implements BandAidPack {
     public final List allBands;
@@ -34,30 +34,30 @@ public final class ColorPack implements BandAidPack {
         builder.moduleDependencies = Collections.singletonList(LightBarController.class);
         builder.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.ColorPack$band$1$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) NavBarStore.this;
+            public final Object apply(Object obj) throws Resources.NotFoundException {
+                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) navBarStore;
                 navBarStoreImpl.apply((Band.Kit) obj, new NavBarStoreAction.ReevaluateNavBar(null, 1, null));
                 return navBarStoreImpl;
             }
         };
-        Band.Builder m = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
-        m.runeDependency = z;
-        m.bandAidDependency = BandAid.COLOR_PACK_ON_UPDATE_REGION_SAMPLING_LISTENER;
-        m.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnUpdateRegionSamplingListener.class);
-        m.targetModules = Collections.singletonList(NavigationBar.class);
-        m.moduleDependencies = Collections.singletonList(LightBarController.class);
-        m.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.ColorPack$1$1
+        Band.Builder builderM = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
+        builderM.runeDependency = z;
+        builderM.bandAidDependency = BandAid.COLOR_PACK_ON_UPDATE_REGION_SAMPLING_LISTENER;
+        builderM.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnUpdateRegionSamplingListener.class);
+        builderM.targetModules = Collections.singletonList(NavigationBar.class);
+        builderM.moduleDependencies = Collections.singletonList(LightBarController.class);
+        builderM.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.ColorPack$1$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                NavBarStore navBarStore2 = NavBarStore.this;
+                NavBarStore navBarStore2 = navBarStore;
                 if (!((EventTypeFactory.EventType.OnUpdateRegionSamplingListener) kit.event).registered) {
                     ((NavBarStoreImpl) navBarStore2).apply(kit, new NavBarStoreAction.UpdateNavigationIcon(null, 1, null));
                 }
                 return Unit.INSTANCE;
             }
         };
-        arrayList.add(m.build());
+        arrayList.add(builderM.build());
     }
 
     @Override // com.android.systemui.navigationbar.bandaid.BandAidPack

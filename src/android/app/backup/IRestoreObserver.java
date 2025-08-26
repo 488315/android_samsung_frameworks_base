@@ -65,9 +65,9 @@ public interface IRestoreObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRestoreObserver)) {
-                return (IRestoreObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRestoreObserver)) {
+                return (IRestoreObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -107,18 +107,18 @@ public interface IRestoreObserver extends IInterface {
                 parcel.enforceNoDataAvail();
                 restoreSetsAvailable(restoreSetArr);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                restoreStarting(readInt);
+                restoreStarting(i3);
             } else if (i == 3) {
-                int readInt2 = parcel.readInt();
-                String readString = parcel.readString();
+                int i4 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onUpdate(readInt2, readString);
+                onUpdate(i4, string);
             } else if (i == 4) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                restoreFinished(readInt3);
+                restoreFinished(i5);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -143,50 +143,50 @@ public interface IRestoreObserver extends IInterface {
 
             @Override // android.app.backup.IRestoreObserver
             public void restoreSetsAvailable(RestoreSet[] restoreSetArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(restoreSetArr, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(restoreSetArr, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IRestoreObserver
             public void restoreStarting(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IRestoreObserver
             public void onUpdate(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.backup.IRestoreObserver
             public void restoreFinished(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

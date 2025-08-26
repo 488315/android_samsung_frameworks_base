@@ -1,6 +1,7 @@
 package com.android.systemui.screenshot.ui;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.graphics.Region;
@@ -20,7 +21,6 @@ import com.android.systemui.screenshot.ScreenshotShelfViewProxy$$ExternalSynthet
 import com.android.systemui.screenshot.ui.binder.ScreenshotShelfViewBinder$$ExternalSyntheticLambda0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenshotShelfView extends FrameLayout {
     public View actionsContainer;
@@ -35,7 +35,6 @@ public final class ScreenshotShelfView extends FrameLayout {
     public final Rect tmpRect;
     public ScreenshotShelfViewProxy$$ExternalSyntheticLambda1 userInteractionCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -85,7 +84,7 @@ public final class ScreenshotShelfView extends FrameLayout {
         if (view == null) {
             view = null;
         }
-        view.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotShelfView$onFinishInflate$1
+        view.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotShelfView.onFinishInflate.1
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view2, MotionEvent motionEvent) {
                 ScreenshotShelfViewProxy$$ExternalSyntheticLambda1 screenshotShelfViewProxy$$ExternalSyntheticLambda1 = ScreenshotShelfView.this.userInteractionCallback;
@@ -115,12 +114,12 @@ public final class ScreenshotShelfView extends FrameLayout {
             screenshotShelfViewProxy$$ExternalSyntheticLambda1.invoke();
         }
         if (motionEvent.getActionMasked() == 0 && (screenshotShelfViewBinder$$ExternalSyntheticLambda0 = this.onTouchInterceptListener) != null) {
-            screenshotShelfViewBinder$$ExternalSyntheticLambda0.mo779invoke(motionEvent);
+            screenshotShelfViewBinder$$ExternalSyntheticLambda0.mo781invoke(motionEvent);
         }
         return this.gestureDetector.onTouchEvent(motionEvent);
     }
 
-    public final void updateInsets(WindowInsets windowInsets) {
+    public final void updateInsets(WindowInsets windowInsets) throws Resources.NotFoundException {
         boolean z = ((FrameLayout) this).mContext.getResources().getConfiguration().orientation == 1;
         DisplayCutout displayCutout = windowInsets.getDisplayCutout();
         Insets insets = windowInsets.getInsets(WindowInsets.Type.navigationBars());
@@ -146,23 +145,27 @@ public final class ScreenshotShelfView extends FrameLayout {
         this.displayMetrics = context.getResources().getDisplayMetrics();
         this.tmpRect = new Rect();
         GestureDetector gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() { // from class: com.android.systemui.screenshot.ui.ScreenshotShelfView$gestureDetector$1
+            /* JADX WARN: Removed duplicated region for block: B:14:0x0033  */
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
                 boolean z;
-                ScreenshotShelfView screenshotShelfView = ScreenshotShelfView.this;
+                ScreenshotShelfView screenshotShelfView = this.this$0;
                 View view = screenshotShelfView.actionsContainer;
                 if (view == null) {
                     view = null;
                 }
                 view.getBoundsOnScreen(screenshotShelfView.tmpRect);
-                if (ScreenshotShelfView.this.tmpRect.contains((int) motionEvent2.getRawX(), (int) motionEvent2.getRawY())) {
-                    View view2 = ScreenshotShelfView.this.actionsContainer;
+                if (this.this$0.tmpRect.contains((int) motionEvent2.getRawX(), (int) motionEvent2.getRawY())) {
+                    View view2 = this.this$0.actionsContainer;
                     if ((view2 != null ? view2 : null).canScrollHorizontally((int) f)) {
                         z = true;
-                        return !z;
                     }
+                } else {
+                    z = false;
                 }
-                z = false;
                 return !z;
             }
         });
@@ -176,7 +179,7 @@ public final class ScreenshotShelfView extends FrameLayout {
                 }
                 ScreenshotShelfViewBinder$$ExternalSyntheticLambda0 screenshotShelfViewBinder$$ExternalSyntheticLambda0 = ScreenshotShelfView.this.onTouchInterceptListener;
                 if (screenshotShelfViewBinder$$ExternalSyntheticLambda0 != null) {
-                    return ((Boolean) screenshotShelfViewBinder$$ExternalSyntheticLambda0.mo779invoke(motionEvent)).booleanValue();
+                    return ((Boolean) screenshotShelfViewBinder$$ExternalSyntheticLambda0.mo781invoke(motionEvent)).booleanValue();
                 }
                 return false;
             }

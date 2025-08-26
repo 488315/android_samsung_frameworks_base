@@ -166,12 +166,12 @@ public abstract class AdvancedExtender {
                 return null;
             }
             CameraMetadataNative cameraMetadataNative = new CameraMetadataNative();
-            long longValue = AdvancedExtender.this.mMetadataVendorIdMap.containsKey(str) ? ((Long) AdvancedExtender.this.mMetadataVendorIdMap.get(str)).longValue() : Long.MAX_VALUE;
-            cameraMetadataNative.setVendorId(longValue);
+            long jLongValue = AdvancedExtender.this.mMetadataVendorIdMap.containsKey(str) ? ((Long) AdvancedExtender.this.mMetadataVendorIdMap.get(str)).longValue() : Long.MAX_VALUE;
+            cameraMetadataNative.setVendorId(jLongValue);
             int[] iArr = new int[availableCharacteristicsKeyValues.size()];
             int i = 0;
             for (Pair<CameraCharacteristics.Key, Object> pair : availableCharacteristicsKeyValues) {
-                iArr[i] = CameraMetadataNative.getTag(pair.first.getName(), longValue);
+                iArr[i] = CameraMetadataNative.getTag(pair.first.getName(), jLongValue);
                 cameraMetadataNative.set((CameraCharacteristics.Key<CameraCharacteristics.Key>) pair.first, (CameraCharacteristics.Key) pair.second);
                 i++;
             }

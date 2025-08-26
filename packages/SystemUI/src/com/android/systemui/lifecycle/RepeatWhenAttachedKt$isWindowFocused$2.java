@@ -11,7 +11,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class RepeatWhenAttachedKt$isWindowFocused$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ ViewTreeObserver $this_isWindowFocused;
@@ -46,7 +45,7 @@ final class RepeatWhenAttachedKt$isWindowFocused$2 extends SuspendLambda impleme
             ViewTreeObserver.OnWindowFocusChangeListener onWindowFocusChangeListener = new ViewTreeObserver.OnWindowFocusChangeListener() { // from class: com.android.systemui.lifecycle.RepeatWhenAttachedKt$isWindowFocused$2$listener$1
                 @Override // android.view.ViewTreeObserver.OnWindowFocusChangeListener
                 public final void onWindowFocusChanged(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             this.$this_isWindowFocused.addOnWindowFocusChangeListener(onWindowFocusChangeListener);

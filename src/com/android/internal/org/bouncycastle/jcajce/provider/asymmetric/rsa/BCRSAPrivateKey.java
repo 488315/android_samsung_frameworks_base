@@ -145,7 +145,7 @@ public class BCRSAPrivateKey implements RSAPrivateKey, PKCS12BagAttributeCarrier
         return this.attrCarrier.getBagAttributeKeys();
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         if (this.algorithmIdentifierEnc == null) {
             this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
@@ -161,9 +161,9 @@ public class BCRSAPrivateKey implements RSAPrivateKey, PKCS12BagAttributeCarrier
 
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("RSA Private Key [");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(RSAUtil.generateKeyFingerprint(getModulus())).append("],[]").append(lineSeparator);
-        stringBuffer.append("            modulus: ").append(getModulus().toString(16)).append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(RSAUtil.generateKeyFingerprint(getModulus())).append("],[]").append(strLineSeparator);
+        stringBuffer.append("            modulus: ").append(getModulus().toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 

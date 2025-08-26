@@ -13,14 +13,12 @@ import com.android.wm.shell.back.CrossActivityBackAnimation;
 import com.android.wm.shell.shared.animation.Interpolators;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DefaultCrossActivityBackAnimation extends CrossActivityBackAnimation {
     public final boolean allowEnteringYShift;
     public final float enteringStartOffset;
     public final Interpolator postCommitInterpolator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -64,14 +62,14 @@ public final class DefaultCrossActivityBackAnimation extends CrossActivityBackAn
     @Override // com.android.wm.shell.back.CrossActivityBackAnimation
     public final void onPostCommitProgress(float f) {
         super.onPostCommitProgress(f);
-        float max = Math.max(1.0f - (5 * f), 0.0f);
+        float fMax = Math.max(1.0f - (5 * f), 0.0f);
         float interpolation = ((PathInterpolator) this.postCommitInterpolator).getInterpolation(f);
         CrossActivityBackAnimationKt.setInterpolatedRectF(this.currentClosingRect, this.startClosingRect, this.targetClosingRect, interpolation);
         RemoteAnimationTarget remoteAnimationTarget = this.closingTarget;
         SurfaceControl surfaceControl = remoteAnimationTarget != null ? remoteAnimationTarget.leash : null;
         RectF rectF = this.currentClosingRect;
         CrossActivityBackAnimation.FlingMode flingMode = CrossActivityBackAnimation.FlingMode.FLING_BOUNCE;
-        CrossActivityBackAnimation.applyTransform$default(this, surfaceControl, rectF, max, null, flingMode, 8);
+        CrossActivityBackAnimation.applyTransform$default(this, surfaceControl, rectF, fMax, null, flingMode, 8);
         CrossActivityBackAnimationKt.setInterpolatedRectF(this.currentEnteringRect, this.startEnteringRect, this.targetEnteringRect, interpolation);
         RemoteAnimationTarget remoteAnimationTarget2 = this.enteringTarget;
         CrossActivityBackAnimation.applyTransform$default(this, remoteAnimationTarget2 != null ? remoteAnimationTarget2.leash : null, this.currentEnteringRect, 1.0f, null, flingMode, 8);

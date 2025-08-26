@@ -8,22 +8,20 @@ import java.util.ListIterator;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt$$ExternalSyntheticLambda1;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Navigator {
     public NavController.NavControllerNavigatorState _state;
     public boolean isAttached;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Extras {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Name {
         String value();
@@ -41,7 +39,7 @@ public abstract class Navigator {
 
     public void navigate(List list, final NavOptions navOptions) {
         final Extras extras = null;
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filterNot(new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new Function1() { // from class: androidx.navigation.Navigator$navigate$1
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filterNot(new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new Function1() { // from class: androidx.navigation.Navigator.navigate.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -49,7 +47,7 @@ public abstract class Navigator {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 NavBackStackEntry navBackStackEntry = (NavBackStackEntry) obj;
                 NavDestination navDestination = navBackStackEntry.destination;
                 if (navDestination == null) {
@@ -58,16 +56,16 @@ public abstract class Navigator {
                 if (navDestination != null) {
                     Navigator navigator = Navigator.this;
                     navBackStackEntry.getArguments();
-                    NavDestination navigate = navigator.navigate(navDestination);
-                    if (navigate != null) {
-                        return navigate.equals(navDestination) ? navBackStackEntry : Navigator.this.getState().createBackStackEntry(navigate, navigate.addInDefaultArgs(navBackStackEntry.getArguments()));
+                    NavDestination navDestinationNavigate = navigator.navigate(navDestination);
+                    if (navDestinationNavigate != null) {
+                        return navDestinationNavigate.equals(navDestination) ? navBackStackEntry : Navigator.this.getState().createBackStackEntry(navDestinationNavigate, navDestinationNavigate.addInDefaultArgs(navBackStackEntry.getArguments()));
                     }
                 }
                 return null;
             }
-        }), new SequencesKt___SequencesKt$$ExternalSyntheticLambda1()));
-        while (filteringSequence$iterator$1.hasNext()) {
-            getState().push((NavBackStackEntry) filteringSequence$iterator$1.next());
+        }), new SequencesKt___SequencesKt$$ExternalSyntheticLambda1()).new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            getState().push((NavBackStackEntry) anonymousClass1.next());
         }
     }
 

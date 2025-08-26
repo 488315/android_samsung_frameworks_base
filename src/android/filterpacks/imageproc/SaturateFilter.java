@@ -67,20 +67,20 @@ public class SaturateFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
         if (this.mBenProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
             initParameters();
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
         if (this.mScale > 0.0f) {
-            this.mHerfProgram.process(pullInput, newFrame);
+            this.mHerfProgram.process(framePullInput, frameNewFrame);
         } else {
-            this.mBenProgram.process(pullInput, newFrame);
+            this.mBenProgram.process(framePullInput, frameNewFrame);
         }
-        pushOutput("image", newFrame);
-        newFrame.release();
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 
     private void initParameters() {

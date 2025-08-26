@@ -1,15 +1,12 @@
 package com.android.systemui.util;
 
-import android.util.SparseArray;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import kotlin.jvm.internal.CollectionToArray;
 import kotlin.jvm.internal.markers.KMappedMarker;
-import kotlin.sequences.Sequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SparseArrayMapWrapper$entries$1 implements Set<Map.Entry<? extends Integer, Object>>, KMappedMarker {
     final /* synthetic */ SparseArrayMapWrapper<Object> this$0;
@@ -67,9 +64,7 @@ public final class SparseArrayMapWrapper$entries$1 implements Set<Map.Entry<? ex
 
     @Override // java.util.Set, java.util.Collection, java.lang.Iterable
     public Iterator<Map.Entry<Integer, Object>> iterator() {
-        Sequence sequence;
-        sequence = ((SparseArrayMapWrapper) this.this$0).entrySequence;
-        return sequence.iterator();
+        return ((SparseArrayMapWrapper) this.this$0).entrySequence.iterator();
     }
 
     @Override // java.util.Set, java.util.Collection
@@ -102,9 +97,7 @@ public final class SparseArrayMapWrapper$entries$1 implements Set<Map.Entry<? ex
     }
 
     public boolean contains(Map.Entry<Integer, Object> entry) {
-        SparseArray sparseArray;
-        sparseArray = ((SparseArrayMapWrapper) this.this$0).sparseArray;
-        Object obj = sparseArray.get(entry.getKey().intValue());
+        Object obj = ((SparseArrayMapWrapper) this.this$0).sparseArray.get(entry.getKey().intValue());
         return obj != null && obj.equals(entry.getValue());
     }
 

@@ -1,6 +1,5 @@
 package androidx.constraintlayout.core.motion.utils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LinearCurveFit extends CurveFit {
     public final boolean mExtrapolate = true;
@@ -97,65 +96,38 @@ public class LinearCurveFit extends CurveFit {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0017, code lost:
-    
-        if (r10 >= r4) goto L4;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x000f A[PHI: r4
+      0x000f: PHI (r4v6 double) = (r4v0 double), (r4v2 double) binds: [B:3:0x000d, B:6:0x0017] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // androidx.constraintlayout.core.motion.utils.CurveFit
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void getSlope(double r10, double[] r12) {
-        /*
-            r9 = this;
-            double[] r0 = r9.mT
-            int r1 = r0.length
-            double[][] r9 = r9.mY
-            r2 = 0
-            r3 = r9[r2]
-            int r3 = r3.length
-            r4 = r0[r2]
-            int r6 = (r10 > r4 ? 1 : (r10 == r4 ? 0 : -1))
-            if (r6 > 0) goto L11
-        Lf:
-            r10 = r4
-            goto L1a
-        L11:
-            int r4 = r1 + (-1)
-            r4 = r0[r4]
-            int r6 = (r10 > r4 ? 1 : (r10 == r4 ? 0 : -1))
-            if (r6 < 0) goto L1a
-            goto Lf
-        L1a:
-            r4 = r2
-        L1b:
-            int r5 = r1 + (-1)
-            if (r4 >= r5) goto L3d
-            int r5 = r4 + 1
-            r6 = r0[r5]
-            int r8 = (r10 > r6 ? 1 : (r10 == r6 ? 0 : -1))
-            if (r8 > 0) goto L3b
-            r10 = r0[r4]
-            double r6 = r6 - r10
-        L2a:
-            if (r2 >= r3) goto L3d
-            r10 = r9[r4]
-            r10 = r10[r2]
-            r0 = r9[r5]
-            r0 = r0[r2]
-            double r0 = r0 - r10
-            double r0 = r0 / r6
-            r12[r2] = r0
-            int r2 = r2 + 1
-            goto L2a
-        L3b:
-            r4 = r5
-            goto L1b
-        L3d:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.constraintlayout.core.motion.utils.LinearCurveFit.getSlope(double, double[]):void");
+    public final void getSlope(double d, double[] dArr) {
+        double[] dArr2 = this.mT;
+        int length = dArr2.length;
+        double[][] dArr3 = this.mY;
+        int length2 = dArr3[0].length;
+        double d2 = dArr2[0];
+        if (d <= d2) {
+            d = d2;
+        } else {
+            d2 = dArr2[length - 1];
+            if (d >= d2) {
+            }
+        }
+        int i = 0;
+        while (i < length - 1) {
+            int i2 = i + 1;
+            double d3 = dArr2[i2];
+            if (d <= d3) {
+                double d4 = d3 - dArr2[i];
+                for (int i3 = 0; i3 < length2; i3++) {
+                    dArr[i3] = (dArr3[i2][i3] - dArr3[i][i3]) / d4;
+                }
+                return;
+            }
+            i = i2;
+        }
     }
 
     @Override // androidx.constraintlayout.core.motion.utils.CurveFit
@@ -163,60 +135,35 @@ public class LinearCurveFit extends CurveFit {
         return this.mT;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x0012, code lost:
-    
-        if (r9 >= r3) goto L4;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x000a A[PHI: r3
+      0x000a: PHI (r3v6 double) = (r3v0 double), (r3v2 double) binds: [B:3:0x0008, B:6:0x0012] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // androidx.constraintlayout.core.motion.utils.CurveFit
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final double getSlope(double r9) {
-        /*
-            r8 = this;
-            double[] r0 = r8.mT
-            int r1 = r0.length
-            r2 = 0
-            r3 = r0[r2]
-            int r5 = (r9 > r3 ? 1 : (r9 == r3 ? 0 : -1))
-            if (r5 >= 0) goto Lc
-        La:
-            r9 = r3
-            goto L15
-        Lc:
-            int r3 = r1 + (-1)
-            r3 = r0[r3]
-            int r5 = (r9 > r3 ? 1 : (r9 == r3 ? 0 : -1))
-            if (r5 < 0) goto L15
-            goto La
-        L15:
-            r3 = r2
-        L16:
-            int r4 = r1 + (-1)
-            if (r3 >= r4) goto L34
-            int r4 = r3 + 1
-            r5 = r0[r4]
-            int r7 = (r9 > r5 ? 1 : (r9 == r5 ? 0 : -1))
-            if (r7 > 0) goto L32
-            r9 = r0[r3]
-            double r5 = r5 - r9
-            double[][] r8 = r8.mY
-            r9 = r8[r3]
-            r9 = r9[r2]
-            r8 = r8[r4]
-            r0 = r8[r2]
-            double r0 = r0 - r9
-            double r0 = r0 / r5
-            return r0
-        L32:
-            r3 = r4
-            goto L16
-        L34:
-            r8 = 0
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.constraintlayout.core.motion.utils.LinearCurveFit.getSlope(double):double");
+    public final double getSlope(double d) {
+        double[] dArr = this.mT;
+        int length = dArr.length;
+        double d2 = dArr[0];
+        if (d < d2) {
+            d = d2;
+        } else {
+            d2 = dArr[length - 1];
+            if (d >= d2) {
+            }
+        }
+        int i = 0;
+        while (i < length - 1) {
+            int i2 = i + 1;
+            double d3 = dArr[i2];
+            if (d <= d3) {
+                double d4 = d3 - dArr[i];
+                double[][] dArr2 = this.mY;
+                return (dArr2[i2][0] - dArr2[i][0]) / d4;
+            }
+            i = i2;
+        }
+        return 0.0d;
     }
 
     @Override // androidx.constraintlayout.core.motion.utils.CurveFit

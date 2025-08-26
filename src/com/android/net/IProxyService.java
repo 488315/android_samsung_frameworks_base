@@ -145,9 +145,9 @@ public interface IProxyService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("com.android.net.IProxyService");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProxyService)) {
-                return (IProxyService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.android.net.IProxyService");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProxyService)) {
+                return (IProxyService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -203,73 +203,73 @@ public interface IProxyService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String resolvePacFile = resolvePacFile(readString, readString2);
+                    String strResolvePacFile = resolvePacFile(string, string2);
                     parcel2.writeNoException();
-                    parcel2.writeString(resolvePacFile);
+                    parcel2.writeString(strResolvePacFile);
                     return true;
                 case 2:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setPacFile(readString3);
+                    setPacFile(string3);
                     return true;
                 case 3:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean startPacSystemForKnoxProfile = startPacSystemForKnoxProfile(readString4);
+                    boolean zStartPacSystemForKnoxProfile = startPacSystemForKnoxProfile(string4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(startPacSystemForKnoxProfile);
+                    parcel2.writeBoolean(zStartPacSystemForKnoxProfile);
                     return true;
                 case 4:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean stopPacSystemForKnoxProfile = stopPacSystemForKnoxProfile(readString5);
+                    boolean zStopPacSystemForKnoxProfile = stopPacSystemForKnoxProfile(string5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(stopPacSystemForKnoxProfile);
+                    parcel2.writeBoolean(zStopPacSystemForKnoxProfile);
                     return true;
                 case 5:
-                    String readString6 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    String readString9 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    String string9 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int startProxyServerForKnoxProfile = startProxyServerForKnoxProfile(readString6, readInt, readString7, readString8, readBoolean, readString9, readInt2);
+                    int iStartProxyServerForKnoxProfile = startProxyServerForKnoxProfile(string6, i3, string7, string8, z, string9, i4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startProxyServerForKnoxProfile);
+                    parcel2.writeInt(iStartProxyServerForKnoxProfile);
                     return true;
                 case 6:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    stopProxyServerForKnoxProfile(readString10);
+                    stopProxyServerForKnoxProfile(string10);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean pacFileForKnoxProfile = setPacFileForKnoxProfile(readString11, readString12);
+                    boolean pacFileForKnoxProfile = setPacFileForKnoxProfile(string11, string12);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(pacFileForKnoxProfile);
                     return true;
                 case 8:
-                    int readInt3 = parcel.readInt();
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean miscValueForPacProfile = setMiscValueForPacProfile(readInt3, readString13, readString14, readInt4);
+                    boolean miscValueForPacProfile = setMiscValueForPacProfile(i5, string13, string14, i6);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(miscValueForPacProfile);
                     return true;
                 case 9:
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int proxyPortForProfile = getProxyPortForProfile(readString15);
+                    int proxyPortForProfile = getProxyPortForProfile(string15);
                     parcel2.writeNoException();
                     parcel2.writeInt(proxyPortForProfile);
                     return true;
@@ -278,31 +278,31 @@ public interface IProxyService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    String readString16 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    resetInterface(readString16);
+                    resetInterface(string16);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    String readString17 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isProxyThreadRunning = isProxyThreadRunning(readString17);
+                    boolean zIsProxyThreadRunning = isProxyThreadRunning(string17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isProxyThreadRunning);
+                    parcel2.writeBoolean(zIsProxyThreadRunning);
                     return true;
                 case 13:
-                    String readString18 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String proxythreadStatus = getProxythreadStatus(readString18);
+                    String proxythreadStatus = getProxythreadStatus(string18);
                     parcel2.writeNoException();
                     parcel2.writeString(proxythreadStatus);
                     return true;
                 case 14:
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isProxyThreadAlive = isProxyThreadAlive(readString19);
+                    boolean zIsProxyThreadAlive = isProxyThreadAlive(string19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isProxyThreadAlive);
+                    parcel2.writeBoolean(zIsProxyThreadAlive);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -327,228 +327,228 @@ public interface IProxyService extends IInterface {
 
             @Override // com.android.net.IProxyService
             public String resolvePacFile(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public void setPacFile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public boolean startPacSystemForKnoxProfile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public boolean stopPacSystemForKnoxProfile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public int startProxyServerForKnoxProfile(String str, int i, String str2, String str3, boolean z, String str4, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str4);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public void stopProxyServerForKnoxProfile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public boolean setPacFileForKnoxProfile(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public boolean setMiscValueForPacProfile(int i, String str, String str2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public int getProxyPortForProfile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public void handleScreenunlock() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public void resetInterface(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public boolean isProxyThreadRunning(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public String getProxythreadStatus(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyService
             public boolean isProxyThreadAlive(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.net.IProxyService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken("com.android.net.IProxyService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

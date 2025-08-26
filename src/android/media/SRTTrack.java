@@ -39,13 +39,13 @@ class SRTTrack extends WebVttTrack {
             TextTrackCue textTrackCue = new TextTrackCue();
             textTrackCue.mStartTimeMs = subtitleData.getStartTimeUs() / 1000;
             textTrackCue.mEndTimeMs = (subtitleData.getStartTimeUs() + subtitleData.getDurationUs()) / 1000;
-            String[] split = new String(subtitleData.getData(), "UTF-8").split("\\r?\\n");
-            textTrackCue.mLines = new TextTrackCueSpan[split.length][];
-            int length = split.length;
+            String[] strArrSplit = new String(subtitleData.getData(), "UTF-8").split("\\r?\\n");
+            textTrackCue.mLines = new TextTrackCueSpan[strArrSplit.length][];
+            int length = strArrSplit.length;
             int i = 0;
             int i2 = 0;
             while (i < length) {
-                textTrackCue.mLines[i2] = new TextTrackCueSpan[]{new TextTrackCueSpan(split[i], -1L)};
+                textTrackCue.mLines[i2] = new TextTrackCueSpan[]{new TextTrackCueSpan(strArrSplit[i], -1L)};
                 i++;
                 i2++;
             }
@@ -56,23 +56,23 @@ class SRTTrack extends WebVttTrack {
     }
 
     @Override // android.media.WebVttTrack, android.media.SubtitleTrack
-    public void onData(byte[] bArr, boolean z, long j) {
-        String readLine;
+    public void onData(byte[] bArr, boolean z, long j) throws IOException {
+        String line;
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(bArr), "UTF-8"));
-            while (bufferedReader.readLine() != null && (readLine = bufferedReader.readLine()) != null) {
+            while (bufferedReader.readLine() != null && (line = bufferedReader.readLine()) != null) {
                 TextTrackCue textTrackCue = new TextTrackCue();
-                String[] split = readLine.split("-->");
-                textTrackCue.mStartTimeMs = parseMs(split[0]);
-                textTrackCue.mEndTimeMs = parseMs(split[1]);
+                String[] strArrSplit = line.split("-->");
+                textTrackCue.mStartTimeMs = parseMs(strArrSplit[0]);
+                textTrackCue.mEndTimeMs = parseMs(strArrSplit[1]);
                 textTrackCue.mRunID = j;
                 ArrayList<String> arrayList = new ArrayList();
                 while (true) {
-                    String readLine2 = bufferedReader.readLine();
-                    if (readLine2 == null || readLine2.trim().equals("")) {
+                    String line2 = bufferedReader.readLine();
+                    if (line2 == null || line2.trim().equals("")) {
                         break;
                     } else {
-                        arrayList.add(readLine2);
+                        arrayList.add(line2);
                     }
                 }
                 textTrackCue.mLines = new TextTrackCueSpan[arrayList.size()][];
@@ -106,25 +106,25 @@ class SRTTrack extends WebVttTrack {
         while (it.hasNext()) {
             SubtitleTrack.Cue next = it.next();
             TextTrackCue textTrackCue = (TextTrackCue) next;
-            Parcel obtain = Parcel.obtain();
-            obtain.writeInt(102);
-            obtain.writeInt(7);
-            obtain.writeInt((int) next.mStartTimeMs);
-            obtain.writeInt(16);
+            Parcel parcelObtain = Parcel.obtain();
+            parcelObtain.writeInt(102);
+            parcelObtain.writeInt(7);
+            parcelObtain.writeInt((int) next.mStartTimeMs);
+            parcelObtain.writeInt(16);
             StringBuilder sb = new StringBuilder();
             for (String str : textTrackCue.mStrings) {
                 sb.append(str);
                 sb.append('\n');
             }
             byte[] bytes = sb.toString().getBytes();
-            obtain.writeInt(bytes.length);
-            obtain.writeByteArray(bytes);
-            this.mEventHandler.sendMessage(this.mEventHandler.obtainMessage(99, 0, 0, obtain));
+            parcelObtain.writeInt(bytes.length);
+            parcelObtain.writeByteArray(bytes);
+            this.mEventHandler.sendMessage(this.mEventHandler.obtainMessage(99, 0, 0, parcelObtain));
         }
         vector.clear();
     }
 
-    private static long parseMs(String str) {
+    private static long parseMs(String str) throws NumberFormatException {
         return (Long.parseLong(str.split(":")[0].trim()) * 3600000) + (Long.parseLong(str.split(":")[1].trim()) * 60000) + (Long.parseLong(str.split(":")[2].split(",")[0].trim()) * 1000) + Long.parseLong(str.split(":")[2].split(",")[1].trim());
     }
 }

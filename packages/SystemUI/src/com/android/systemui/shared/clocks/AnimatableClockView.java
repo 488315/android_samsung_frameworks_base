@@ -36,7 +36,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.text.Regex;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AnimatableClockView extends TextView {
     public static final ClockLogger DEFAULT_LOGGER;
@@ -64,7 +63,6 @@ public final class AnimatableClockView extends TextView {
     public final Calendar time;
     public boolean translateForCenterAnimation;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -74,7 +72,6 @@ public final class AnimatableClockView extends TextView {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Patterns {
         public static final Patterns INSTANCE = new Patterns();
         public static String sCacheKey;
@@ -130,8 +127,8 @@ public final class AnimatableClockView extends TextView {
     }
 
     public final float getDigitFraction(float f, boolean z, int i) {
-        float floatValue = ((Number) (z ? isLayoutRtl() ? MOVE_LEFT_DELAYS : MOVE_RIGHT_DELAYS : isLayoutRtl() ? MOVE_RIGHT_DELAYS : MOVE_LEFT_DELAYS).get(i)).floatValue() * 0.033f;
-        return ((PathInterpolator) MOVE_INTERPOLATOR).getInterpolation(MathUtils.constrainedMap(0.0f, 1.0f, floatValue, 0.901f + floatValue, f));
+        float fFloatValue = ((Number) (z ? isLayoutRtl() ? MOVE_LEFT_DELAYS : MOVE_RIGHT_DELAYS : isLayoutRtl() ? MOVE_RIGHT_DELAYS : MOVE_LEFT_DELAYS).get(i)).floatValue() * 0.033f;
+        return ((PathInterpolator) MOVE_INTERPOLATOR).getInterpolation(MathUtils.constrainedMap(0.0f, 1.0f, fFloatValue, 0.901f + fFloatValue, f));
     }
 
     public final int getDozingWeight() {
@@ -161,7 +158,7 @@ public final class AnimatableClockView extends TextView {
     }
 
     @Override // android.widget.TextView, android.view.View
-    public final void onDraw(Canvas canvas) {
+    public final void onDraw(Canvas canvas) throws Throwable {
         canvas.save();
         if (this.translateForCenterAnimation) {
             canvas.translate(((View) getParent()).getMeasuredWidth() / 4.0f, 0.0f);
@@ -188,7 +185,7 @@ public final class AnimatableClockView extends TextView {
             TextAnimator textAnimator2 = (TextAnimator) this.textAnimatorFactory.invoke(getLayout(), new AnimatableClockView$onMeasure$2$1(this));
             AnimatableClockView$$ExternalSyntheticLambda6 animatableClockView$$ExternalSyntheticLambda6 = this.onTextAnimatorInitialized;
             if (animatableClockView$$ExternalSyntheticLambda6 != null) {
-                animatableClockView$$ExternalSyntheticLambda6.mo779invoke(textAnimator2);
+                animatableClockView$$ExternalSyntheticLambda6.mo781invoke(textAnimator2);
             }
             this.onTextAnimatorInitialized = null;
             this.textAnimator = textAnimator2;
@@ -219,9 +216,9 @@ public final class AnimatableClockView extends TextView {
     public final void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
         ClockLogger logger = getLogger();
         AnimatableClockView$$ExternalSyntheticLambda0 animatableClockView$$ExternalSyntheticLambda0 = new AnimatableClockView$$ExternalSyntheticLambda0(1);
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, animatableClockView$$ExternalSyntheticLambda0, null);
-        obtain.setStr1(String.valueOf(charSequence));
-        logger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, animatableClockView$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setStr1(String.valueOf(charSequence));
+        logger.getBuffer().commit(logMessageObtain);
         super.onTextChanged(charSequence, i, i2, i3);
     }
 
@@ -239,12 +236,12 @@ public final class AnimatableClockView extends TextView {
             String bestDateTimePattern = DateFormat.getBestDateTimePattern(locale, string);
             if (!StringsKt__StringsKt.contains(string, "a", false)) {
                 bestDateTimePattern.getClass();
-                String replace = new Regex("a").replace(bestDateTimePattern, "");
-                int length = replace.length() - 1;
+                String strReplace = new Regex("a").replace(bestDateTimePattern, "");
+                int length = strReplace.length() - 1;
                 int i = 0;
                 boolean z2 = false;
                 while (i <= length) {
-                    boolean z3 = Intrinsics.compare(replace.charAt(!z2 ? i : length), 32) <= 0;
+                    boolean z3 = Intrinsics.compare(strReplace.charAt(!z2 ? i : length), 32) <= 0;
                     if (z2) {
                         if (!z3) {
                             break;
@@ -257,7 +254,7 @@ public final class AnimatableClockView extends TextView {
                         z2 = true;
                     }
                 }
-                bestDateTimePattern = replace.subSequence(i, length + 1).toString();
+                bestDateTimePattern = strReplace.subSequence(i, length + 1).toString();
             }
             Patterns.sClockView12 = bestDateTimePattern;
             Patterns.sClockView24 = DateFormat.getBestDateTimePattern(locale, string2);
@@ -277,10 +274,10 @@ public final class AnimatableClockView extends TextView {
         }
         this.format = str;
         ClockLogger logger = getLogger();
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new AnimatableClockView$$ExternalSyntheticLambda0(0), null);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new AnimatableClockView$$ExternalSyntheticLambda0(0), null);
         CharSequence charSequence = this.format;
-        obtain.setStr1(charSequence != null ? charSequence.toString() : null);
-        logger.getBuffer().commit(obtain);
+        logMessageObtain.setStr1(charSequence != null ? charSequence.toString() : null);
+        logger.getBuffer().commit(logMessageObtain);
         if (z) {
             Patterns.INSTANCE.getClass();
             str2 = Patterns.sClockView24;
@@ -295,21 +292,21 @@ public final class AnimatableClockView extends TextView {
     public final void refreshTime() {
         this.time.setTimeInMillis(System.currentTimeMillis());
         setContentDescription(DateFormat.format(this.descFormat, this.time));
-        CharSequence format = DateFormat.format(this.format, this.time);
+        CharSequence charSequence = DateFormat.format(this.format, this.time);
         ClockLogger logger = getLogger();
         AnimatableClockView$$ExternalSyntheticLambda0 animatableClockView$$ExternalSyntheticLambda0 = new AnimatableClockView$$ExternalSyntheticLambda0(2);
         LogLevel logLevel = LogLevel.DEBUG;
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), logLevel, animatableClockView$$ExternalSyntheticLambda0, null);
-        obtain.setStr1(format != null ? format.toString() : null);
-        logger.getBuffer().commit(obtain);
-        if (TextUtils.equals(getText(), format)) {
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), logLevel, animatableClockView$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setStr1(charSequence != null ? charSequence.toString() : null);
+        logger.getBuffer().commit(logMessageObtain);
+        if (TextUtils.equals(getText(), charSequence)) {
             return;
         }
-        setText(format);
+        setText(charSequence);
         ClockLogger logger2 = getLogger();
-        LogMessage obtain2 = logger2.getBuffer().obtain(logger2.getTag(), logLevel, new AnimatableClockView$$ExternalSyntheticLambda0(3), null);
-        obtain2.setStr1(format != null ? format.toString() : null);
-        logger2.getBuffer().commit(obtain2);
+        LogMessage logMessageObtain2 = logger2.getBuffer().obtain(logger2.getTag(), logLevel, new AnimatableClockView$$ExternalSyntheticLambda0(3), null);
+        logMessageObtain2.setStr1(charSequence != null ? charSequence.toString() : null);
+        logger2.getBuffer().commit(logMessageObtain2);
         if (getLayout() != null) {
             TextAnimator textAnimator = this.textAnimator;
             if (textAnimator != null) {
@@ -366,16 +363,16 @@ public final class AnimatableClockView extends TextView {
         this.lastUnconstrainedTextSize = Float.MAX_VALUE;
         this.textAnimatorFactory = new AnimatableClockView$$ExternalSyntheticLambda2();
         this.isAnimationEnabled = true;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.AnimatableClockView, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.AnimatableClockView, i, i2);
         try {
-            this.dozingWeightInternal = obtainStyledAttributes.getInt(R$styleable.AnimatableClockView_dozeWeight, 100);
-            this.lockScreenWeightInternal = obtainStyledAttributes.getInt(R$styleable.AnimatableClockView_lockScreenWeight, 300);
-            this.chargeAnimationDelay = obtainStyledAttributes.getInt(R$styleable.AnimatableClockView_chargeAnimationDelay, 200);
-            obtainStyledAttributes.recycle();
-            obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TextView, i, i2);
+            this.dozingWeightInternal = typedArrayObtainStyledAttributes.getInt(R$styleable.AnimatableClockView_dozeWeight, 100);
+            this.lockScreenWeightInternal = typedArrayObtainStyledAttributes.getInt(R$styleable.AnimatableClockView_lockScreenWeight, 300);
+            this.chargeAnimationDelay = typedArrayObtainStyledAttributes.getInt(R$styleable.AnimatableClockView_chargeAnimationDelay, 200);
+            typedArrayObtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TextView, i, i2);
             try {
-                this.isSingleLineInternal = obtainStyledAttributes.getBoolean(32, false);
-                obtainStyledAttributes.recycle();
+                this.isSingleLineInternal = typedArrayObtainStyledAttributes.getBoolean(32, false);
+                typedArrayObtainStyledAttributes.recycle();
                 refreshFormat(DateFormat.is24HourFormat(getContext()));
                 this.glyphOffsets = CollectionsKt__CollectionsKt.mutableListOf(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(0.0f));
                 CollectionsKt__CollectionsKt.mutableListOf(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(0.0f));

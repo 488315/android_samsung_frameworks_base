@@ -18,7 +18,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.android.systemui.R;
 import com.android.systemui.screenshot.DraggableConstraintLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DraggableConstraintLayout extends ConstraintLayout implements ViewTreeObserver.OnComputeInternalInsetsListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -28,7 +27,6 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
     public final GestureDetector mSwipeDetector;
     public final SwipeDismissHandler mSwipeDismissHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SwipeDismissHandler implements View.OnTouchListener {
         public int mDirectionX;
         public ValueAnimator mDismissAnimation;
@@ -38,7 +36,6 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
         public float mStartX;
         public final DraggableConstraintLayout mView;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.screenshot.DraggableConstraintLayout$SwipeDismissHandler$1, reason: invalid class name */
         public class AnonymousClass1 extends AnimatorListenerAdapter {
             public boolean mCancelled;
@@ -62,7 +59,6 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class SwipeDismissGestureListener extends GestureDetector.SimpleOnGestureListener {
             public SwipeDismissGestureListener() {
             }
@@ -76,11 +72,11 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
                 if (valueAnimator != null && valueAnimator.isRunning()) {
                     return false;
                 }
-                ValueAnimator createSwipeDismissAnimation = SwipeDismissHandler.this.createSwipeDismissAnimation(f / 1000.0f);
-                DraggableConstraintLayout.this.mCallbacks.onSwipeDismissInitiated(createSwipeDismissAnimation);
+                ValueAnimator valueAnimatorCreateSwipeDismissAnimation = SwipeDismissHandler.this.createSwipeDismissAnimation(f / 1000.0f);
+                DraggableConstraintLayout.this.mCallbacks.onSwipeDismissInitiated(valueAnimatorCreateSwipeDismissAnimation);
                 SwipeDismissHandler swipeDismissHandler = SwipeDismissHandler.this;
-                swipeDismissHandler.mDismissAnimation = createSwipeDismissAnimation;
-                createSwipeDismissAnimation.addListener(swipeDismissHandler.new AnonymousClass1());
+                swipeDismissHandler.mDismissAnimation = valueAnimatorCreateSwipeDismissAnimation;
+                valueAnimatorCreateSwipeDismissAnimation.addListener(swipeDismissHandler.new AnonymousClass1());
                 swipeDismissHandler.mDismissAnimation.start();
                 return true;
             }
@@ -106,40 +102,40 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
         }
 
         public final ValueAnimator createSwipeDismissAnimation(float f) {
-            int i;
-            float min = Math.min(3.0f, Math.max(1.0f, f));
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            int right;
+            float fMin = Math.min(3.0f, Math.max(1.0f, f));
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
             final float translationX = this.mView.getTranslationX();
             int layoutDirection = this.mView.getContext().getResources().getConfiguration().getLayoutDirection();
             if (translationX > 0.0f || (translationX == 0.0f && layoutDirection == 1)) {
-                i = this.mDisplayMetrics.widthPixels;
+                right = this.mDisplayMetrics.widthPixels;
             } else {
                 DraggableConstraintLayout draggableConstraintLayout = DraggableConstraintLayout.this;
-                int i2 = DraggableConstraintLayout.$r8$clinit;
-                View findViewById = draggableConstraintLayout.findViewById(R.id.actions_container_background);
-                i = (findViewById == null ? 0 : findViewById.getRight()) * (-1);
+                int i = DraggableConstraintLayout.$r8$clinit;
+                View viewFindViewById = draggableConstraintLayout.findViewById(R.id.actions_container_background);
+                right = (viewFindViewById == null ? 0 : viewFindViewById.getRight()) * (-1);
             }
-            float f2 = i - translationX;
-            float min2 = Math.min(Math.abs(f2), FloatingWindowUtil.dpToPx(this.mDisplayMetrics, 400.0f));
-            final float copySign = Math.copySign(min2, f2);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.DraggableConstraintLayout$SwipeDismissHandler$$ExternalSyntheticLambda0
+            float f2 = right - translationX;
+            float fMin2 = Math.min(Math.abs(f2), FloatingWindowUtil.dpToPx(this.mDisplayMetrics, 400.0f));
+            final float fCopySign = Math.copySign(fMin2, f2);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.DraggableConstraintLayout$SwipeDismissHandler$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    DraggableConstraintLayout.SwipeDismissHandler swipeDismissHandler = DraggableConstraintLayout.SwipeDismissHandler.this;
+                    DraggableConstraintLayout.SwipeDismissHandler swipeDismissHandler = this.f$0;
                     float f3 = translationX;
-                    float f4 = copySign;
+                    float f4 = fCopySign;
                     swipeDismissHandler.getClass();
                     swipeDismissHandler.mView.setTranslationX(MathUtils.lerp(f3, f4 + f3, valueAnimator.getAnimatedFraction()));
                     swipeDismissHandler.mView.setAlpha(1.0f - valueAnimator.getAnimatedFraction());
                 }
             });
-            ofFloat.setDuration((long) Math.abs(min2 / min));
-            return ofFloat;
+            valueAnimatorOfFloat.setDuration((long) Math.abs(fMin2 / fMin));
+            return valueAnimatorOfFloat;
         }
 
         @Override // android.view.View.OnTouchListener
         public final boolean onTouch(View view, MotionEvent motionEvent) {
-            boolean onTouchEvent = this.mGestureDetector.onTouchEvent(motionEvent);
+            boolean zOnTouchEvent = this.mGestureDetector.onTouchEvent(motionEvent);
             DraggableConstraintLayout.this.mCallbacks.onInteraction();
             if (motionEvent.getActionMasked() == 0) {
                 float rawX = motionEvent.getRawX();
@@ -148,7 +144,7 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
                 return true;
             }
             if (motionEvent.getActionMasked() != 1) {
-                return onTouchEvent;
+                return zOnTouchEvent;
             }
             ValueAnimator valueAnimator = this.mDismissAnimation;
             if (valueAnimator != null && valueAnimator.isRunning()) {
@@ -156,24 +152,24 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
             }
             float translationX = this.mView.getTranslationX();
             if (this.mDirectionX * translationX <= 0.0f || Math.abs(translationX) < FloatingWindowUtil.dpToPx(this.mDisplayMetrics, 20.0f)) {
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
                 final float translationX2 = this.mView.getTranslationX();
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.DraggableConstraintLayout$SwipeDismissHandler$$ExternalSyntheticLambda1
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.screenshot.DraggableConstraintLayout$SwipeDismissHandler$$ExternalSyntheticLambda1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                        DraggableConstraintLayout.SwipeDismissHandler swipeDismissHandler = DraggableConstraintLayout.SwipeDismissHandler.this;
+                        DraggableConstraintLayout.SwipeDismissHandler swipeDismissHandler = this.f$0;
                         float f = translationX2;
                         swipeDismissHandler.getClass();
                         swipeDismissHandler.mView.setTranslationX(MathUtils.lerp(f, 0.0f, valueAnimator2.getAnimatedFraction()));
                     }
                 });
-                ofFloat.start();
+                valueAnimatorOfFloat.start();
                 return true;
             }
-            ValueAnimator createSwipeDismissAnimation = createSwipeDismissAnimation(FloatingWindowUtil.dpToPx(this.mDisplayMetrics, 1.0f));
-            DraggableConstraintLayout.this.mCallbacks.onSwipeDismissInitiated(createSwipeDismissAnimation);
-            this.mDismissAnimation = createSwipeDismissAnimation;
-            createSwipeDismissAnimation.addListener(new AnonymousClass1());
+            ValueAnimator valueAnimatorCreateSwipeDismissAnimation = createSwipeDismissAnimation(FloatingWindowUtil.dpToPx(this.mDisplayMetrics, 1.0f));
+            DraggableConstraintLayout.this.mCallbacks.onSwipeDismissInitiated(valueAnimatorCreateSwipeDismissAnimation);
+            this.mDismissAnimation = valueAnimatorCreateSwipeDismissAnimation;
+            valueAnimatorCreateSwipeDismissAnimation.addListener(new AnonymousClass1());
             this.mDismissAnimation.start();
             return true;
         }
@@ -256,7 +252,6 @@ public class DraggableConstraintLayout extends ConstraintLayout implements ViewT
         };
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SwipeDismissCallbacks {
         default void onSwipeDismissInitiated(Animator animator) {
         }

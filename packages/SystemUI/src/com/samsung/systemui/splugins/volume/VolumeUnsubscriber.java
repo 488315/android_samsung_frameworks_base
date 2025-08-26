@@ -9,7 +9,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VolumeUnsubscriber<T> implements VolumeDisposable {
     private static final String TAG = "VolumeUnsubscriber";
@@ -19,7 +18,6 @@ public final class VolumeUnsubscriber<T> implements VolumeDisposable {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,7 +44,7 @@ public final class VolumeUnsubscriber<T> implements VolumeDisposable {
     @Override // com.samsung.systemui.splugins.volume.VolumeDisposable
     public void dispose() {
         if (!Intrinsics.areEqual(Looper.myLooper(), Looper.getMainLooper())) {
-            getHandler().postAtFrontOfQueue(new Runnable(this) { // from class: com.samsung.systemui.splugins.volume.VolumeUnsubscriber$dispose$1
+            getHandler().postAtFrontOfQueue(new Runnable(this) { // from class: com.samsung.systemui.splugins.volume.VolumeUnsubscriber.dispose.1
                 final /* synthetic */ VolumeUnsubscriber<Object> this$0;
 
                 {
@@ -55,14 +53,8 @@ public final class VolumeUnsubscriber<T> implements VolumeDisposable {
 
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VolumeObserver volumeObserver;
-                    ArrayList arrayList;
-                    VolumeObserver volumeObserver2;
-                    volumeObserver = ((VolumeUnsubscriber) this.this$0).observer;
-                    Log.d("VolumeUnsubscriber", "dispose() : postAtFrontOfQueue, remove observer=" + volumeObserver);
-                    arrayList = ((VolumeUnsubscriber) this.this$0).observers;
-                    volumeObserver2 = ((VolumeUnsubscriber) this.this$0).observer;
-                    arrayList.remove(volumeObserver2);
+                    Log.d(VolumeUnsubscriber.TAG, "dispose() : postAtFrontOfQueue, remove observer=" + ((VolumeUnsubscriber) this.this$0).observer);
+                    ((VolumeUnsubscriber) this.this$0).observers.remove(((VolumeUnsubscriber) this.this$0).observer);
                 }
             });
             return;

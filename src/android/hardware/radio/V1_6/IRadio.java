@@ -140,9 +140,9 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IRadio)) {
-            return (IRadio) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IRadio)) {
+            return (IRadio) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -3309,13 +3309,13 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -3512,10 +3512,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 11:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt32 = hwParcel.readInt32();
+                    int int32 = hwParcel.readInt32();
                     Dial dial = new Dial();
                     dial.readFromParcel(hwParcel);
-                    dial(readInt32, dial);
+                    dial(int32, dial);
                     return;
                 case 12:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -3575,32 +3575,32 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 26:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt322 = hwParcel.readInt32();
+                    int int322 = hwParcel.readInt32();
                     GsmSmsMessage gsmSmsMessage = new GsmSmsMessage();
                     gsmSmsMessage.readFromParcel(hwParcel);
-                    sendSms(readInt322, gsmSmsMessage);
+                    sendSms(int322, gsmSmsMessage);
                     return;
                 case 27:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt323 = hwParcel.readInt32();
+                    int int323 = hwParcel.readInt32();
                     GsmSmsMessage gsmSmsMessage2 = new GsmSmsMessage();
                     gsmSmsMessage2.readFromParcel(hwParcel);
-                    sendSMSExpectMore(readInt323, gsmSmsMessage2);
+                    sendSMSExpectMore(int323, gsmSmsMessage2);
                     return;
                 case 28:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt324 = hwParcel.readInt32();
-                    int readInt325 = hwParcel.readInt32();
+                    int int324 = hwParcel.readInt32();
+                    int int325 = hwParcel.readInt32();
                     android.hardware.radio.V1_0.DataProfileInfo dataProfileInfo = new android.hardware.radio.V1_0.DataProfileInfo();
                     dataProfileInfo.readFromParcel(hwParcel);
-                    setupDataCall(readInt324, readInt325, dataProfileInfo, hwParcel.readBool(), hwParcel.readBool(), hwParcel.readBool());
+                    setupDataCall(int324, int325, dataProfileInfo, hwParcel.readBool(), hwParcel.readBool(), hwParcel.readBool());
                     return;
                 case 29:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt326 = hwParcel.readInt32();
+                    int int326 = hwParcel.readInt32();
                     IccIo iccIo = new IccIo();
                     iccIo.readFromParcel(hwParcel);
-                    iccIOForApp(readInt326, iccIo);
+                    iccIOForApp(int326, iccIo);
                     return;
                 case 30:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -3620,17 +3620,17 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 34:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt327 = hwParcel.readInt32();
+                    int int327 = hwParcel.readInt32();
                     CallForwardInfo callForwardInfo = new CallForwardInfo();
                     callForwardInfo.readFromParcel(hwParcel);
-                    getCallForwardStatus(readInt327, callForwardInfo);
+                    getCallForwardStatus(int327, callForwardInfo);
                     return;
                 case 35:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt328 = hwParcel.readInt32();
+                    int int328 = hwParcel.readInt32();
                     CallForwardInfo callForwardInfo2 = new CallForwardInfo();
                     callForwardInfo2.readFromParcel(hwParcel);
-                    setCallForward(readInt328, callForwardInfo2);
+                    setCallForward(int328, callForwardInfo2);
                     return;
                 case 36:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -3718,10 +3718,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 57:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt329 = hwParcel.readInt32();
+                    int int329 = hwParcel.readInt32();
                     SmsWriteArgs smsWriteArgs = new SmsWriteArgs();
                     smsWriteArgs.readFromParcel(hwParcel);
-                    writeSmsToSim(readInt329, smsWriteArgs);
+                    writeSmsToSim(int329, smsWriteArgs);
                     return;
                 case 58:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -3805,17 +3805,17 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 78:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3210 = hwParcel.readInt32();
+                    int int3210 = hwParcel.readInt32();
                     CdmaSmsMessage cdmaSmsMessage = new CdmaSmsMessage();
                     cdmaSmsMessage.readFromParcel(hwParcel);
-                    sendCdmaSms(readInt3210, cdmaSmsMessage);
+                    sendCdmaSms(int3210, cdmaSmsMessage);
                     return;
                 case 79:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3211 = hwParcel.readInt32();
+                    int int3211 = hwParcel.readInt32();
                     CdmaSmsAck cdmaSmsAck = new CdmaSmsAck();
                     cdmaSmsAck.readFromParcel(hwParcel);
-                    acknowledgeLastIncomingCdmaSms(readInt3211, cdmaSmsAck);
+                    acknowledgeLastIncomingCdmaSms(int3211, cdmaSmsAck);
                     return;
                 case 80:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -3847,10 +3847,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 87:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3212 = hwParcel.readInt32();
+                    int int3212 = hwParcel.readInt32();
                     CdmaSmsWriteArgs cdmaSmsWriteArgs = new CdmaSmsWriteArgs();
                     cdmaSmsWriteArgs.readFromParcel(hwParcel);
-                    writeSmsToRuim(readInt3212, cdmaSmsWriteArgs);
+                    writeSmsToRuim(int3212, cdmaSmsWriteArgs);
                     return;
                 case 88:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -3910,10 +3910,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 102:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3213 = hwParcel.readInt32();
+                    int int3213 = hwParcel.readInt32();
                     android.hardware.radio.V1_0.DataProfileInfo dataProfileInfo2 = new android.hardware.radio.V1_0.DataProfileInfo();
                     dataProfileInfo2.readFromParcel(hwParcel);
-                    setInitialAttachApn(readInt3213, dataProfileInfo2, hwParcel.readBool(), hwParcel.readBool());
+                    setInitialAttachApn(int3213, dataProfileInfo2, hwParcel.readBool(), hwParcel.readBool());
                     return;
                 case 103:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -3921,17 +3921,17 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 104:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3214 = hwParcel.readInt32();
+                    int int3214 = hwParcel.readInt32();
                     ImsSmsMessage imsSmsMessage = new ImsSmsMessage();
                     imsSmsMessage.readFromParcel(hwParcel);
-                    sendImsSms(readInt3214, imsSmsMessage);
+                    sendImsSms(int3214, imsSmsMessage);
                     return;
                 case 105:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3215 = hwParcel.readInt32();
+                    int int3215 = hwParcel.readInt32();
                     SimApdu simApdu = new SimApdu();
                     simApdu.readFromParcel(hwParcel);
-                    iccTransmitApduBasicChannel(readInt3215, simApdu);
+                    iccTransmitApduBasicChannel(int3215, simApdu);
                     return;
                 case 106:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -3943,10 +3943,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 108:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3216 = hwParcel.readInt32();
+                    int int3216 = hwParcel.readInt32();
                     SimApdu simApdu2 = new SimApdu();
                     simApdu2.readFromParcel(hwParcel);
-                    iccTransmitApduLogicalChannel(readInt3216, simApdu2);
+                    iccTransmitApduLogicalChannel(int3216, simApdu2);
                     return;
                 case 109:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -3954,10 +3954,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 110:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3217 = hwParcel.readInt32();
+                    int int3217 = hwParcel.readInt32();
                     NvWriteItem nvWriteItem = new NvWriteItem();
                     nvWriteItem.readFromParcel(hwParcel);
-                    nvWriteItem(readInt3217, nvWriteItem);
+                    nvWriteItem(int3217, nvWriteItem);
                     return;
                 case 111:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -3969,10 +3969,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 113:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3218 = hwParcel.readInt32();
+                    int int3218 = hwParcel.readInt32();
                     SelectUiccSub selectUiccSub = new SelectUiccSub();
                     selectUiccSub.readFromParcel(hwParcel);
-                    setUiccSubscription(readInt3218, selectUiccSub);
+                    setUiccSubscription(int3218, selectUiccSub);
                     return;
                 case 114:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -4000,10 +4000,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 120:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3219 = hwParcel.readInt32();
+                    int int3219 = hwParcel.readInt32();
                     RadioCapability radioCapability = new RadioCapability();
                     radioCapability.readFromParcel(hwParcel);
-                    setRadioCapability(readInt3219, radioCapability);
+                    setRadioCapability(int3219, radioCapability);
                     return;
                 case 121:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -4023,11 +4023,11 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 125:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    int readInt3220 = hwParcel.readInt32();
-                    boolean readBool = hwParcel.readBool();
+                    int int3220 = hwParcel.readInt32();
+                    boolean bool = hwParcel.readBool();
                     CarrierRestrictions carrierRestrictions = new CarrierRestrictions();
                     carrierRestrictions.readFromParcel(hwParcel);
-                    setAllowedCarriers(readInt3220, readBool, carrierRestrictions);
+                    setAllowedCarriers(int3220, bool, carrierRestrictions);
                     return;
                 case 126:
                     hwParcel.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
@@ -4051,10 +4051,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 131:
                     hwParcel.enforceInterface(android.hardware.radio.V1_1.IRadio.kInterfaceName);
-                    int readInt3221 = hwParcel.readInt32();
+                    int int3221 = hwParcel.readInt32();
                     android.hardware.radio.V1_1.ImsiEncryptionInfo imsiEncryptionInfo = new android.hardware.radio.V1_1.ImsiEncryptionInfo();
                     imsiEncryptionInfo.readFromParcel(hwParcel);
-                    setCarrierInfoForImsiEncryption(readInt3221, imsiEncryptionInfo);
+                    setCarrierInfoForImsiEncryption(int3221, imsiEncryptionInfo);
                     return;
                 case 132:
                     hwParcel.enforceInterface(android.hardware.radio.V1_1.IRadio.kInterfaceName);
@@ -4062,10 +4062,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 133:
                     hwParcel.enforceInterface(android.hardware.radio.V1_1.IRadio.kInterfaceName);
-                    int readInt3222 = hwParcel.readInt32();
+                    int int3222 = hwParcel.readInt32();
                     NetworkScanRequest networkScanRequest = new NetworkScanRequest();
                     networkScanRequest.readFromParcel(hwParcel);
-                    startNetworkScan(readInt3222, networkScanRequest);
+                    startNetworkScan(int3222, networkScanRequest);
                     return;
                 case 134:
                     hwParcel.enforceInterface(android.hardware.radio.V1_1.IRadio.kInterfaceName);
@@ -4073,10 +4073,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 135:
                     hwParcel.enforceInterface(android.hardware.radio.V1_1.IRadio.kInterfaceName);
-                    int readInt3223 = hwParcel.readInt32();
+                    int int3223 = hwParcel.readInt32();
                     KeepaliveRequest keepaliveRequest = new KeepaliveRequest();
                     keepaliveRequest.readFromParcel(hwParcel);
-                    startKeepalive(readInt3223, keepaliveRequest);
+                    startKeepalive(int3223, keepaliveRequest);
                     return;
                 case 136:
                     hwParcel.enforceInterface(android.hardware.radio.V1_1.IRadio.kInterfaceName);
@@ -4084,10 +4084,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 137:
                     hwParcel.enforceInterface(android.hardware.radio.V1_2.IRadio.kInterfaceName);
-                    int readInt3224 = hwParcel.readInt32();
+                    int int3224 = hwParcel.readInt32();
                     android.hardware.radio.V1_2.NetworkScanRequest networkScanRequest2 = new android.hardware.radio.V1_2.NetworkScanRequest();
                     networkScanRequest2.readFromParcel(hwParcel);
-                    startNetworkScan_1_2(readInt3224, networkScanRequest2);
+                    startNetworkScan_1_2(int3224, networkScanRequest2);
                     return;
                 case 138:
                     hwParcel.enforceInterface(android.hardware.radio.V1_2.IRadio.kInterfaceName);
@@ -4103,11 +4103,11 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 141:
                     hwParcel.enforceInterface(android.hardware.radio.V1_2.IRadio.kInterfaceName);
-                    int readInt3225 = hwParcel.readInt32();
-                    int readInt3226 = hwParcel.readInt32();
+                    int int3225 = hwParcel.readInt32();
+                    int int3226 = hwParcel.readInt32();
                     android.hardware.radio.V1_0.DataProfileInfo dataProfileInfo3 = new android.hardware.radio.V1_0.DataProfileInfo();
                     dataProfileInfo3.readFromParcel(hwParcel);
-                    setupDataCall_1_2(readInt3225, readInt3226, dataProfileInfo3, hwParcel.readBool(), hwParcel.readBool(), hwParcel.readBool(), hwParcel.readInt32(), hwParcel.readStringVector(), hwParcel.readStringVector());
+                    setupDataCall_1_2(int3225, int3226, dataProfileInfo3, hwParcel.readBool(), hwParcel.readBool(), hwParcel.readBool(), hwParcel.readInt32(), hwParcel.readStringVector(), hwParcel.readStringVector());
                     return;
                 case 142:
                     hwParcel.enforceInterface(android.hardware.radio.V1_2.IRadio.kInterfaceName);
@@ -4127,18 +4127,18 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 146:
                     hwParcel.enforceInterface(android.hardware.radio.V1_4.IRadio.kInterfaceName);
-                    int readInt3227 = hwParcel.readInt32();
-                    int readInt3228 = hwParcel.readInt32();
+                    int int3227 = hwParcel.readInt32();
+                    int int3228 = hwParcel.readInt32();
                     android.hardware.radio.V1_4.DataProfileInfo dataProfileInfo4 = new android.hardware.radio.V1_4.DataProfileInfo();
                     dataProfileInfo4.readFromParcel(hwParcel);
-                    setupDataCall_1_4(readInt3227, readInt3228, dataProfileInfo4, hwParcel.readBool(), hwParcel.readInt32(), hwParcel.readStringVector(), hwParcel.readStringVector());
+                    setupDataCall_1_4(int3227, int3228, dataProfileInfo4, hwParcel.readBool(), hwParcel.readInt32(), hwParcel.readStringVector(), hwParcel.readStringVector());
                     return;
                 case 147:
                     hwParcel.enforceInterface(android.hardware.radio.V1_4.IRadio.kInterfaceName);
-                    int readInt3229 = hwParcel.readInt32();
+                    int int3229 = hwParcel.readInt32();
                     android.hardware.radio.V1_4.DataProfileInfo dataProfileInfo5 = new android.hardware.radio.V1_4.DataProfileInfo();
                     dataProfileInfo5.readFromParcel(hwParcel);
-                    setInitialAttachApn_1_4(readInt3229, dataProfileInfo5);
+                    setInitialAttachApn_1_4(int3229, dataProfileInfo5);
                     return;
                 case 148:
                     hwParcel.enforceInterface(android.hardware.radio.V1_4.IRadio.kInterfaceName);
@@ -4146,17 +4146,17 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 149:
                     hwParcel.enforceInterface(android.hardware.radio.V1_4.IRadio.kInterfaceName);
-                    int readInt3230 = hwParcel.readInt32();
+                    int int3230 = hwParcel.readInt32();
                     Dial dial2 = new Dial();
                     dial2.readFromParcel(hwParcel);
-                    emergencyDial(readInt3230, dial2, hwParcel.readInt32(), hwParcel.readStringVector(), hwParcel.readInt32(), hwParcel.readBool(), hwParcel.readBool());
+                    emergencyDial(int3230, dial2, hwParcel.readInt32(), hwParcel.readStringVector(), hwParcel.readInt32(), hwParcel.readBool(), hwParcel.readBool());
                     return;
                 case 150:
                     hwParcel.enforceInterface(android.hardware.radio.V1_4.IRadio.kInterfaceName);
-                    int readInt3231 = hwParcel.readInt32();
+                    int int3231 = hwParcel.readInt32();
                     android.hardware.radio.V1_2.NetworkScanRequest networkScanRequest3 = new android.hardware.radio.V1_2.NetworkScanRequest();
                     networkScanRequest3.readFromParcel(hwParcel);
-                    startNetworkScan_1_4(readInt3231, networkScanRequest3);
+                    startNetworkScan_1_4(int3231, networkScanRequest3);
                     return;
                 case 151:
                     hwParcel.enforceInterface(android.hardware.radio.V1_4.IRadio.kInterfaceName);
@@ -4168,10 +4168,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 153:
                     hwParcel.enforceInterface(android.hardware.radio.V1_4.IRadio.kInterfaceName);
-                    int readInt3232 = hwParcel.readInt32();
+                    int int3232 = hwParcel.readInt32();
                     CarrierRestrictionsWithPriority carrierRestrictionsWithPriority = new CarrierRestrictionsWithPriority();
                     carrierRestrictionsWithPriority.readFromParcel(hwParcel);
-                    setAllowedCarriers_1_4(readInt3232, carrierRestrictionsWithPriority, hwParcel.readInt32());
+                    setAllowedCarriers_1_4(int3232, carrierRestrictionsWithPriority, hwParcel.readInt32());
                     return;
                 case 154:
                     hwParcel.enforceInterface(android.hardware.radio.V1_4.IRadio.kInterfaceName);
@@ -4183,10 +4183,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 156:
                     hwParcel.enforceInterface(android.hardware.radio.V1_5.IRadio.kInterfaceName);
-                    int readInt3233 = hwParcel.readInt32();
+                    int int3233 = hwParcel.readInt32();
                     SignalThresholdInfo signalThresholdInfo = new SignalThresholdInfo();
                     signalThresholdInfo.readFromParcel(hwParcel);
-                    setSignalStrengthReportingCriteria_1_5(readInt3233, signalThresholdInfo, hwParcel.readInt32());
+                    setSignalStrengthReportingCriteria_1_5(int3233, signalThresholdInfo, hwParcel.readInt32());
                     return;
                 case 157:
                     hwParcel.enforceInterface(android.hardware.radio.V1_5.IRadio.kInterfaceName);
@@ -4206,25 +4206,25 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 161:
                     hwParcel.enforceInterface(android.hardware.radio.V1_5.IRadio.kInterfaceName);
-                    int readInt3234 = hwParcel.readInt32();
+                    int int3234 = hwParcel.readInt32();
                     android.hardware.radio.V1_5.NetworkScanRequest networkScanRequest4 = new android.hardware.radio.V1_5.NetworkScanRequest();
                     networkScanRequest4.readFromParcel(hwParcel);
-                    startNetworkScan_1_5(readInt3234, networkScanRequest4);
+                    startNetworkScan_1_5(int3234, networkScanRequest4);
                     return;
                 case 162:
                     hwParcel.enforceInterface(android.hardware.radio.V1_5.IRadio.kInterfaceName);
-                    int readInt3235 = hwParcel.readInt32();
-                    int readInt3236 = hwParcel.readInt32();
+                    int int3235 = hwParcel.readInt32();
+                    int int3236 = hwParcel.readInt32();
                     DataProfileInfo dataProfileInfo6 = new DataProfileInfo();
                     dataProfileInfo6.readFromParcel(hwParcel);
-                    setupDataCall_1_5(readInt3235, readInt3236, dataProfileInfo6, hwParcel.readBool(), hwParcel.readInt32(), LinkAddress.readVectorFromParcel(hwParcel), hwParcel.readStringVector());
+                    setupDataCall_1_5(int3235, int3236, dataProfileInfo6, hwParcel.readBool(), hwParcel.readInt32(), LinkAddress.readVectorFromParcel(hwParcel), hwParcel.readStringVector());
                     return;
                 case 163:
                     hwParcel.enforceInterface(android.hardware.radio.V1_5.IRadio.kInterfaceName);
-                    int readInt3237 = hwParcel.readInt32();
+                    int int3237 = hwParcel.readInt32();
                     DataProfileInfo dataProfileInfo7 = new DataProfileInfo();
                     dataProfileInfo7.readFromParcel(hwParcel);
-                    setInitialAttachApn_1_5(readInt3237, dataProfileInfo7);
+                    setInitialAttachApn_1_5(int3237, dataProfileInfo7);
                     return;
                 case 164:
                     hwParcel.enforceInterface(android.hardware.radio.V1_5.IRadio.kInterfaceName);
@@ -4256,10 +4256,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 171:
                     hwParcel.enforceInterface(android.hardware.radio.V1_5.IRadio.kInterfaceName);
-                    int readInt3238 = hwParcel.readInt32();
+                    int int3238 = hwParcel.readInt32();
                     CdmaSmsMessage cdmaSmsMessage2 = new CdmaSmsMessage();
                     cdmaSmsMessage2.readFromParcel(hwParcel);
-                    sendCdmaSmsExpectMore(readInt3238, cdmaSmsMessage2);
+                    sendCdmaSmsExpectMore(int3238, cdmaSmsMessage2);
                     return;
                 case 172:
                     hwParcel.enforceInterface(android.hardware.radio.V1_5.IRadio.kInterfaceName);
@@ -4275,48 +4275,48 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 175:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3239 = hwParcel.readInt32();
-                    int readInt3240 = hwParcel.readInt32();
+                    int int3239 = hwParcel.readInt32();
+                    int int3240 = hwParcel.readInt32();
                     DataProfileInfo dataProfileInfo8 = new DataProfileInfo();
                     dataProfileInfo8.readFromParcel(hwParcel);
-                    boolean readBool2 = hwParcel.readBool();
-                    int readInt3241 = hwParcel.readInt32();
-                    ArrayList<LinkAddress> readVectorFromParcel = LinkAddress.readVectorFromParcel(hwParcel);
-                    ArrayList<String> readStringVector = hwParcel.readStringVector();
-                    int readInt3242 = hwParcel.readInt32();
+                    boolean bool2 = hwParcel.readBool();
+                    int int3241 = hwParcel.readInt32();
+                    ArrayList<LinkAddress> vectorFromParcel = LinkAddress.readVectorFromParcel(hwParcel);
+                    ArrayList<String> stringVector = hwParcel.readStringVector();
+                    int int3242 = hwParcel.readInt32();
                     OptionalSliceInfo optionalSliceInfo = new OptionalSliceInfo();
                     optionalSliceInfo.readFromParcel(hwParcel);
                     OptionalTrafficDescriptor optionalTrafficDescriptor = new OptionalTrafficDescriptor();
                     optionalTrafficDescriptor.readFromParcel(hwParcel);
-                    setupDataCall_1_6(readInt3239, readInt3240, dataProfileInfo8, readBool2, readInt3241, readVectorFromParcel, readStringVector, readInt3242, optionalSliceInfo, optionalTrafficDescriptor, hwParcel.readBool());
+                    setupDataCall_1_6(int3239, int3240, dataProfileInfo8, bool2, int3241, vectorFromParcel, stringVector, int3242, optionalSliceInfo, optionalTrafficDescriptor, hwParcel.readBool());
                     return;
                 case 176:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3243 = hwParcel.readInt32();
+                    int int3243 = hwParcel.readInt32();
                     GsmSmsMessage gsmSmsMessage3 = new GsmSmsMessage();
                     gsmSmsMessage3.readFromParcel(hwParcel);
-                    sendSms_1_6(readInt3243, gsmSmsMessage3);
+                    sendSms_1_6(int3243, gsmSmsMessage3);
                     return;
                 case 177:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3244 = hwParcel.readInt32();
+                    int int3244 = hwParcel.readInt32();
                     GsmSmsMessage gsmSmsMessage4 = new GsmSmsMessage();
                     gsmSmsMessage4.readFromParcel(hwParcel);
-                    sendSmsExpectMore_1_6(readInt3244, gsmSmsMessage4);
+                    sendSmsExpectMore_1_6(int3244, gsmSmsMessage4);
                     return;
                 case 178:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3245 = hwParcel.readInt32();
+                    int int3245 = hwParcel.readInt32();
                     CdmaSmsMessage cdmaSmsMessage3 = new CdmaSmsMessage();
                     cdmaSmsMessage3.readFromParcel(hwParcel);
-                    sendCdmaSms_1_6(readInt3245, cdmaSmsMessage3);
+                    sendCdmaSms_1_6(int3245, cdmaSmsMessage3);
                     return;
                 case 179:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3246 = hwParcel.readInt32();
+                    int int3246 = hwParcel.readInt32();
                     CdmaSmsMessage cdmaSmsMessage4 = new CdmaSmsMessage();
                     cdmaSmsMessage4.readFromParcel(hwParcel);
-                    sendCdmaSmsExpectMore_1_6(readInt3246, cdmaSmsMessage4);
+                    sendCdmaSmsExpectMore_1_6(int3246, cdmaSmsMessage4);
                     return;
                 case 180:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -4360,10 +4360,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 190:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3247 = hwParcel.readInt32();
+                    int int3247 = hwParcel.readInt32();
                     Dial dial3 = new Dial();
                     dial3.readFromParcel(hwParcel);
-                    emergencyDial_1_6(readInt3247, dial3, hwParcel.readInt32(), hwParcel.readStringVector(), hwParcel.readInt32(), hwParcel.readBool(), hwParcel.readBool());
+                    emergencyDial_1_6(int3247, dial3, hwParcel.readInt32(), hwParcel.readStringVector(), hwParcel.readInt32(), hwParcel.readBool(), hwParcel.readBool());
                     return;
                 case 191:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -4395,10 +4395,10 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 198:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3248 = hwParcel.readInt32();
+                    int int3248 = hwParcel.readInt32();
                     ImsiEncryptionInfo imsiEncryptionInfo2 = new ImsiEncryptionInfo();
                     imsiEncryptionInfo2.readFromParcel(hwParcel);
-                    setCarrierInfoForImsiEncryption_1_6(readInt3248, imsiEncryptionInfo2);
+                    setCarrierInfoForImsiEncryption_1_6(int3248, imsiEncryptionInfo2);
                     return;
                 case 199:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -4410,18 +4410,18 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                     return;
                 case 201:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3249 = hwParcel.readInt32();
+                    int int3249 = hwParcel.readInt32();
                     PhonebookRecordInfo phonebookRecordInfo = new PhonebookRecordInfo();
                     phonebookRecordInfo.readFromParcel(hwParcel);
-                    updateSimPhonebookRecords(readInt3249, phonebookRecordInfo);
+                    updateSimPhonebookRecords(int3249, phonebookRecordInfo);
                     return;
                 default:
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -4432,9 +4432,9 @@ public interface IRadio extends android.hardware.radio.V1_5.IRadio {
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

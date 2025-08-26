@@ -109,7 +109,7 @@ public class SSLCertificateSocketFactory extends SSLSocketFactory {
         throw new SSLPeerUnverifiedException("Cannot verify hostname: " + str);
     }
 
-    private SSLSocketFactory makeSocketFactory(KeyManager[] keyManagerArr, TrustManager[] trustManagerArr) {
+    private SSLSocketFactory makeSocketFactory(KeyManager[] keyManagerArr, TrustManager[] trustManagerArr) throws NoSuchAlgorithmException, KeyManagementException, NoSuchProviderException {
         try {
             SSLContext sSLContext = SSLContext.getInstance(org.apache.http.conn.ssl.SSLSocketFactory.TLS, "AndroidOpenSSL");
             sSLContext.init(keyManagerArr, trustManagerArr, null);
@@ -160,30 +160,30 @@ public class SSLCertificateSocketFactory extends SSLSocketFactory {
         if (bArr.length == 0) {
             throw new IllegalArgumentException("items.length == 0");
         }
-        int i = 0;
+        int length = 0;
         for (byte[] bArr2 : bArr) {
             if (bArr2.length == 0 || bArr2.length > 255) {
                 throw new IllegalArgumentException("s.length == 0 || s.length > 255: " + bArr2.length);
             }
-            i += bArr2.length + 1;
+            length += bArr2.length + 1;
         }
-        byte[] bArr3 = new byte[i];
-        int length = bArr.length;
+        byte[] bArr3 = new byte[length];
+        int length2 = bArr.length;
+        int i = 0;
         int i2 = 0;
-        int i3 = 0;
-        while (i2 < length) {
-            byte[] bArr4 = bArr[i2];
-            int i4 = i3 + 1;
-            bArr3[i3] = (byte) bArr4.length;
-            int length2 = bArr4.length;
-            int i5 = 0;
-            while (i5 < length2) {
-                bArr3[i4] = bArr4[i5];
-                i5++;
+        while (i < length2) {
+            byte[] bArr4 = bArr[i];
+            int i3 = i2 + 1;
+            bArr3[i2] = (byte) bArr4.length;
+            int length3 = bArr4.length;
+            int i4 = 0;
+            while (i4 < length3) {
+                bArr3[i3] = bArr4[i4];
                 i4++;
+                i3++;
             }
-            i2++;
-            i3 = i4;
+            i++;
+            i2 = i3;
         }
         return bArr3;
     }
@@ -227,71 +227,71 @@ public class SSLCertificateSocketFactory extends SSLSocketFactory {
 
     @Override // javax.net.ssl.SSLSocketFactory
     public Socket createSocket(Socket socket, String str, int i, boolean z) throws IOException {
-        OpenSSLSocketImpl createSocket = getDelegate().createSocket(socket, str, i, z);
-        createSocket.setNpnProtocols(this.mNpnProtocols);
-        createSocket.setAlpnProtocols(this.mAlpnProtocols);
-        createSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
-        createSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
+        OpenSSLSocketImpl openSSLSocketImplCreateSocket = getDelegate().createSocket(socket, str, i, z);
+        openSSLSocketImplCreateSocket.setNpnProtocols(this.mNpnProtocols);
+        openSSLSocketImplCreateSocket.setAlpnProtocols(this.mAlpnProtocols);
+        openSSLSocketImplCreateSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
+        openSSLSocketImplCreateSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
         if (this.mSecure) {
-            verifyHostname(createSocket, str);
+            verifyHostname(openSSLSocketImplCreateSocket, str);
         }
-        return createSocket;
+        return openSSLSocketImplCreateSocket;
     }
 
     @Override // javax.net.SocketFactory
     public Socket createSocket() throws IOException {
-        OpenSSLSocketImpl createSocket = getDelegate().createSocket();
-        createSocket.setNpnProtocols(this.mNpnProtocols);
-        createSocket.setAlpnProtocols(this.mAlpnProtocols);
-        createSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
-        createSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
-        return createSocket;
+        OpenSSLSocketImpl openSSLSocketImplCreateSocket = getDelegate().createSocket();
+        openSSLSocketImplCreateSocket.setNpnProtocols(this.mNpnProtocols);
+        openSSLSocketImplCreateSocket.setAlpnProtocols(this.mAlpnProtocols);
+        openSSLSocketImplCreateSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
+        openSSLSocketImplCreateSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
+        return openSSLSocketImplCreateSocket;
     }
 
     @Override // javax.net.SocketFactory
     public Socket createSocket(InetAddress inetAddress, int i, InetAddress inetAddress2, int i2) throws IOException {
-        OpenSSLSocketImpl createSocket = getDelegate().createSocket(inetAddress, i, inetAddress2, i2);
-        createSocket.setNpnProtocols(this.mNpnProtocols);
-        createSocket.setAlpnProtocols(this.mAlpnProtocols);
-        createSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
-        createSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
-        return createSocket;
+        OpenSSLSocketImpl openSSLSocketImplCreateSocket = getDelegate().createSocket(inetAddress, i, inetAddress2, i2);
+        openSSLSocketImplCreateSocket.setNpnProtocols(this.mNpnProtocols);
+        openSSLSocketImplCreateSocket.setAlpnProtocols(this.mAlpnProtocols);
+        openSSLSocketImplCreateSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
+        openSSLSocketImplCreateSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
+        return openSSLSocketImplCreateSocket;
     }
 
     @Override // javax.net.SocketFactory
     public Socket createSocket(InetAddress inetAddress, int i) throws IOException {
-        OpenSSLSocketImpl createSocket = getDelegate().createSocket(inetAddress, i);
-        createSocket.setNpnProtocols(this.mNpnProtocols);
-        createSocket.setAlpnProtocols(this.mAlpnProtocols);
-        createSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
-        createSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
-        return createSocket;
+        OpenSSLSocketImpl openSSLSocketImplCreateSocket = getDelegate().createSocket(inetAddress, i);
+        openSSLSocketImplCreateSocket.setNpnProtocols(this.mNpnProtocols);
+        openSSLSocketImplCreateSocket.setAlpnProtocols(this.mAlpnProtocols);
+        openSSLSocketImplCreateSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
+        openSSLSocketImplCreateSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
+        return openSSLSocketImplCreateSocket;
     }
 
     @Override // javax.net.SocketFactory
     public Socket createSocket(String str, int i, InetAddress inetAddress, int i2) throws IOException {
-        OpenSSLSocketImpl createSocket = getDelegate().createSocket(str, i, inetAddress, i2);
-        createSocket.setNpnProtocols(this.mNpnProtocols);
-        createSocket.setAlpnProtocols(this.mAlpnProtocols);
-        createSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
-        createSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
+        OpenSSLSocketImpl openSSLSocketImplCreateSocket = getDelegate().createSocket(str, i, inetAddress, i2);
+        openSSLSocketImplCreateSocket.setNpnProtocols(this.mNpnProtocols);
+        openSSLSocketImplCreateSocket.setAlpnProtocols(this.mAlpnProtocols);
+        openSSLSocketImplCreateSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
+        openSSLSocketImplCreateSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
         if (this.mSecure) {
-            verifyHostname(createSocket, str);
+            verifyHostname(openSSLSocketImplCreateSocket, str);
         }
-        return createSocket;
+        return openSSLSocketImplCreateSocket;
     }
 
     @Override // javax.net.SocketFactory
     public Socket createSocket(String str, int i) throws IOException {
-        OpenSSLSocketImpl createSocket = getDelegate().createSocket(str, i);
-        createSocket.setNpnProtocols(this.mNpnProtocols);
-        createSocket.setAlpnProtocols(this.mAlpnProtocols);
-        createSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
-        createSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
+        OpenSSLSocketImpl openSSLSocketImplCreateSocket = getDelegate().createSocket(str, i);
+        openSSLSocketImplCreateSocket.setNpnProtocols(this.mNpnProtocols);
+        openSSLSocketImplCreateSocket.setAlpnProtocols(this.mAlpnProtocols);
+        openSSLSocketImplCreateSocket.setHandshakeTimeout(this.mHandshakeTimeoutMillis);
+        openSSLSocketImplCreateSocket.setChannelIdPrivateKey(this.mChannelIdPrivateKey);
         if (this.mSecure) {
-            verifyHostname(createSocket, str);
+            verifyHostname(openSSLSocketImplCreateSocket, str);
         }
-        return createSocket;
+        return openSSLSocketImplCreateSocket;
     }
 
     @Override // javax.net.ssl.SSLSocketFactory

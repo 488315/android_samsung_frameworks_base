@@ -24,13 +24,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Navigator.Name("composable")
 /* loaded from: classes.dex */
 public final class ComposeNavigator extends Navigator {
     public final MutableState isPop = SnapshotStateKt.mutableStateOf$default(Boolean.FALSE);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -95,7 +93,6 @@ public final class ComposeNavigator extends Navigator {
         ((SnapshotMutableStateImpl) this.isPop).setValue(Boolean.TRUE);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Destination extends NavDestination {
         public final Function4 content;
 
@@ -114,11 +111,11 @@ public final class ComposeNavigator extends Navigator {
                 public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
                     NavBackStackEntry navBackStackEntry = (NavBackStackEntry) obj2;
                     Composer composer = (Composer) obj3;
-                    int intValue = ((Number) obj4).intValue();
+                    int iIntValue = ((Number) obj4).intValue();
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("androidx.navigation.compose.ComposeNavigator.Destination.<init>.<anonymous> (ComposeNavigator.kt:107)");
                     }
-                    Function3.this.invoke(navBackStackEntry, composer, Integer.valueOf((intValue >> 3) & 14));
+                    function3.invoke(navBackStackEntry, composer, Integer.valueOf((iIntValue >> 3) & 14));
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }

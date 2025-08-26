@@ -25,7 +25,6 @@ import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import com.samsung.android.knox.ucm.configurator.UniversalCredentialManager;
 import com.samsung.android.knox.zt.config.securelog.SignalSeverity;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipNaturalSwitchingHandler {
     public static final RectEvaluator RECT_EVALUATOR = new RectEvaluator(new Rect());
@@ -111,15 +110,15 @@ public class PipNaturalSwitchingHandler {
         final Rect rect3 = new Rect(rect);
         rect3.scale(0.96f);
         rect3.offsetTo(((rect.width() - rect3.width()) / 2) + rect.left, ((rect.height() - rect3.height()) / 2) + rect.top);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.mScaleDownAnimator = ofFloat;
-        ofFloat.setDuration(300L);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.mScaleDownAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setDuration(300L);
         this.mScaleDownAnimator.setInterpolator(new LinearInterpolator());
         final String hexString = Integer.toHexString(this.mScaleDownAnimator.hashCode());
         this.mScaleDownAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.pip.phone.PipNaturalSwitchingHandler$$ExternalSyntheticLambda2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                PipNaturalSwitchingHandler pipNaturalSwitchingHandler = PipNaturalSwitchingHandler.this;
+                PipNaturalSwitchingHandler pipNaturalSwitchingHandler = this.f$0;
                 Rect rect4 = rect2;
                 Rect rect5 = rect;
                 Rect rect6 = rect3;
@@ -154,7 +153,7 @@ public class PipNaturalSwitchingHandler {
             public final void onAnimationUpdateForProperty(Object obj) {
                 Rect rect4 = rect;
                 Rect rect5 = rect2;
-                PipNaturalSwitchingHandler pipNaturalSwitchingHandler = PipNaturalSwitchingHandler.this;
+                PipNaturalSwitchingHandler pipNaturalSwitchingHandler = this.f$0;
                 if (pipNaturalSwitchingHandler.mScaleUpPhysicsAnimator != null) {
                     pipNaturalSwitchingHandler.mPipTaskOrganizer.scheduleUserResizePip(rect4, rect5, 0.0f, null);
                 }

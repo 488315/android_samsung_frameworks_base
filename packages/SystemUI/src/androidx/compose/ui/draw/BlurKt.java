@@ -12,15 +12,14 @@ import androidx.compose.ui.unit.Dp;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BlurKt {
     /* renamed from: blur-F8QBwvs$default, reason: not valid java name */
-    public static Modifier m358blurF8QBwvs$default(Modifier modifier, final float f) {
+    public static Modifier m359blurF8QBwvs$default(Modifier modifier, final float f) {
         final boolean z;
         final int i;
         BlurredEdgeTreatment.Companion.getClass();
-        final Shape shape = BlurredEdgeTreatment.m359boximpl(BlurredEdgeTreatment.Rectangle).shape;
+        final Shape shape = BlurredEdgeTreatment.m360boximpl(BlurredEdgeTreatment.Rectangle).shape;
         if (shape != null) {
             TileMode.Companion.getClass();
             i = 0;
@@ -40,7 +39,7 @@ public abstract class BlurKt {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ReusableGraphicsLayerScope reusableGraphicsLayerScope = (ReusableGraphicsLayerScope) ((GraphicsLayerScope) obj);
                 float density = reusableGraphicsLayerScope.graphicsDensity.getDensity() * f;
                 float density2 = reusableGraphicsLayerScope.graphicsDensity.getDensity() * f;

@@ -45,9 +45,9 @@ public interface IAppTransitionAnimationSpecsFuture extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAppTransitionAnimationSpecsFuture)) {
-                return (IAppTransitionAnimationSpecsFuture) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAppTransitionAnimationSpecsFuture)) {
+                return (IAppTransitionAnimationSpecsFuture) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,16 +100,16 @@ public interface IAppTransitionAnimationSpecsFuture extends IInterface {
 
             @Override // android.view.IAppTransitionAnimationSpecsFuture
             public AppTransitionAnimationSpec[] get() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AppTransitionAnimationSpec[]) obtain2.createTypedArray(AppTransitionAnimationSpec.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AppTransitionAnimationSpec[]) parcelObtain2.createTypedArray(AppTransitionAnimationSpec.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -17,7 +17,6 @@ import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final /* synthetic */ class FocusableNode$focusTargetNode$1 extends FunctionReferenceImpl implements Function2 {
     public FocusableNode$focusTargetNode$1(Object obj) {
@@ -31,16 +30,16 @@ final /* synthetic */ class FocusableNode$focusTargetNode$1 extends FunctionRefe
     }
 
     public final void invoke(FocusState focusState, FocusState focusState2) {
-        boolean isFocused;
+        boolean zIsFocused;
         FocusedBoundsObserverNode focusedBoundsObserver;
         FocusableNode focusableNode = (FocusableNode) this.receiver;
         FocusableNode.TraverseKey traverseKey = FocusableNode.TraverseKey;
-        if (focusableNode.isAttached && (isFocused = ((FocusStateImpl) focusState2).isFocused()) != ((FocusStateImpl) focusState).isFocused()) {
+        if (focusableNode.isAttached && (zIsFocused = ((FocusStateImpl) focusState2).isFocused()) != ((FocusStateImpl) focusState).isFocused()) {
             Function1 function1 = focusableNode.onFocusChange;
             if (function1 != null) {
-                function1.mo779invoke(Boolean.valueOf(isFocused));
+                function1.mo781invoke(Boolean.valueOf(zIsFocused));
             }
-            if (isFocused) {
+            if (zIsFocused) {
                 BuildersKt.launch$default(focusableNode.getCoroutineScope(), null, null, new FocusableNode$onFocusStateChange$1(focusableNode, null), 3);
                 Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
                 ObserverModifierNodeKt.observeReads(focusableNode, new FocusableNode$retrievePinnableContainer$1(ref$ObjectRef, focusableNode));
@@ -64,7 +63,7 @@ final /* synthetic */ class FocusableNode$focusTargetNode$1 extends FunctionRefe
             SemanticsModifierNodeKt.invalidateSemantics(focusableNode);
             MutableInteractionSource mutableInteractionSource = focusableNode.interactionSource;
             if (mutableInteractionSource != null) {
-                if (!isFocused) {
+                if (!zIsFocused) {
                     FocusInteraction$Focus focusInteraction$Focus = focusableNode.focusedInteraction;
                     if (focusInteraction$Focus != null) {
                         focusableNode.emitWithFallback(mutableInteractionSource, new FocusInteraction$Unfocus(focusInteraction$Focus));

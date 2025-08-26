@@ -8,7 +8,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ChangeSceneSwipeTransition extends TransitionState.Transition.ChangeScene {
     public final SwipeAnimation gestureContext;
@@ -72,7 +71,7 @@ public final class ChangeSceneSwipeTransition extends TransitionState.Transition
 
     @Override // com.android.compose.animation.scene.content.state.TransitionState.Transition
     public final Object run(Continuation continuation) {
-        Object run = this.swipeAnimation.run((ContinuationImpl) continuation);
-        return run == CoroutineSingletons.COROUTINE_SUSPENDED ? run : Unit.INSTANCE;
+        Object objRun = this.swipeAnimation.run((ContinuationImpl) continuation);
+        return objRun == CoroutineSingletons.COROUTINE_SUSPENDED ? objRun : Unit.INSTANCE;
     }
 }

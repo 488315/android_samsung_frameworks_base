@@ -57,9 +57,9 @@ public class MetricsReader {
     }
 
     public void checkpoint() {
-        int currentTimeMillis = (int) (System.currentTimeMillis() % 2147483647L);
-        this.mCheckpointTag = currentTimeMillis;
-        this.mReader.writeCheckpoint(currentTimeMillis);
+        int iCurrentTimeMillis = (int) (System.currentTimeMillis() % 2147483647L);
+        this.mCheckpointTag = iCurrentTimeMillis;
+        this.mReader.writeCheckpoint(iCurrentTimeMillis);
         this.mPendingQueue.clear();
         this.mSeenQueue.clear();
     }
@@ -78,11 +78,11 @@ public class MetricsReader {
     }
 
     public LogMaker next() {
-        LogMaker poll = this.mPendingQueue.poll();
-        if (poll != null) {
-            this.mSeenQueue.offer(poll);
+        LogMaker logMakerPoll = this.mPendingQueue.poll();
+        if (logMakerPoll != null) {
+            this.mSeenQueue.offer(logMakerPoll);
         }
-        return poll;
+        return logMakerPoll;
     }
 
     public static class Event {

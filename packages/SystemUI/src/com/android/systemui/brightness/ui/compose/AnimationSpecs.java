@@ -3,7 +3,6 @@ package com.android.systemui.brightness.ui.compose;
 import androidx.compose.animation.core.AnimationSpecKt;
 import androidx.compose.animation.core.TweenSpec;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnimationSpecs {
     public static final AnimationSpecs INSTANCE = new AnimationSpecs();

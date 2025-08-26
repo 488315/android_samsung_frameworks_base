@@ -126,9 +126,9 @@ public interface IVaultKeeperService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVaultKeeperService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVaultKeeperService)) {
-                return (IVaultKeeperService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVaultKeeperService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVaultKeeperService)) {
+                return (IVaultKeeperService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -179,108 +179,108 @@ public interface IVaultKeeperService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isInitialized = isInitialized(readString);
+                    boolean zIsInitialized = isInitialized(string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isInitialized);
+                    parcel2.writeBoolean(zIsInitialized);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    byte[] createByteArray3 = parcel.createByteArray();
-                    byte[] createByteArray4 = parcel.createByteArray();
+                    String string2 = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int initialize = initialize(readString2, createByteArray, createByteArray2, createByteArray3, createByteArray4);
+                    int iInitialize = initialize(string2, bArrCreateByteArray, bArrCreateByteArray2, bArrCreateByteArray3, bArrCreateByteArray4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(initialize);
+                    parcel2.writeInt(iInitialize);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
-                    byte[] createByteArray5 = parcel.createByteArray();
-                    byte[] createByteArray6 = parcel.createByteArray();
-                    byte[] createByteArray7 = parcel.createByteArray();
+                    String string3 = parcel.readString();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray6 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray7 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int destroy = destroy(readString3, createByteArray5, createByteArray6, createByteArray7);
+                    int iDestroy = destroy(string3, bArrCreateByteArray5, bArrCreateByteArray6, bArrCreateByteArray7);
                     parcel2.writeNoException();
-                    parcel2.writeInt(destroy);
+                    parcel2.writeInt(iDestroy);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    if (readInt2 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt2);
+                    String string4 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    if (i4 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i4);
                     }
-                    iArr = readInt2 >= 0 ? new int[readInt2] : null;
+                    iArr = i4 >= 0 ? new int[i4] : null;
                     parcel.enforceNoDataAvail();
-                    byte[] read = read(readString4, readInt, iArr);
+                    byte[] bArr = read(string4, i3, iArr);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(read);
+                    parcel2.writeByteArray(bArr);
                     parcel2.writeIntArray(iArr);
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    byte[] createByteArray8 = parcel.createByteArray();
-                    byte[] createByteArray9 = parcel.createByteArray();
-                    byte[] createByteArray10 = parcel.createByteArray();
+                    String string5 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    byte[] bArrCreateByteArray8 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray9 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray10 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int write = write(readString5, readInt3, createByteArray8, createByteArray9, createByteArray10);
+                    int iWrite = write(string5, i5, bArrCreateByteArray8, bArrCreateByteArray9, bArrCreateByteArray10);
                     parcel2.writeNoException();
-                    parcel2.writeInt(write);
+                    parcel2.writeInt(iWrite);
                     return true;
                 case 6:
-                    String readString6 = parcel.readString();
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    if (readInt5 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt5);
+                    String string6 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    if (i7 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i7);
                     }
-                    iArr = readInt5 >= 0 ? new int[readInt5] : null;
+                    iArr = i7 >= 0 ? new int[i7] : null;
                     parcel.enforceNoDataAvail();
-                    byte[] sensitiveBox = sensitiveBox(readString6, readInt4, iArr);
+                    byte[] bArrSensitiveBox = sensitiveBox(string6, i6, iArr);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(sensitiveBox);
+                    parcel2.writeByteArray(bArrSensitiveBox);
                     parcel2.writeIntArray(iArr);
                     return true;
                 case 7:
-                    String readString7 = parcel.readString();
-                    byte[] createByteArray11 = parcel.createByteArray();
+                    String string7 = parcel.readString();
+                    byte[] bArrCreateByteArray11 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] encryptMessage = encryptMessage(readString7, createByteArray11);
+                    byte[] bArrEncryptMessage = encryptMessage(string7, bArrCreateByteArray11);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(encryptMessage);
+                    parcel2.writeByteArray(bArrEncryptMessage);
                     return true;
                 case 8:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean migrationStorage = migrationStorage(readString8);
+                    boolean zMigrationStorage = migrationStorage(string8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(migrationStorage);
+                    parcel2.writeBoolean(zMigrationStorage);
                     return true;
                 case 9:
-                    String readString9 = parcel.readString();
-                    byte[] createByteArray12 = parcel.createByteArray();
+                    String string9 = parcel.readString();
+                    byte[] bArrCreateByteArray12 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    boolean verifyCertificate = verifyCertificate(readString9, createByteArray12);
+                    boolean zVerifyCertificate = verifyCertificate(string9, bArrCreateByteArray12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(verifyCertificate);
+                    parcel2.writeBoolean(zVerifyCertificate);
                     return true;
                 case 10:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int checkDataWritable = checkDataWritable(readString10);
+                    int iCheckDataWritable = checkDataWritable(string10);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkDataWritable);
+                    parcel2.writeInt(iCheckDataWritable);
                     return true;
                 case 11:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int generateHotpCode = generateHotpCode(readString11);
+                    int iGenerateHotpCode = generateHotpCode(string11);
                     parcel2.writeNoException();
-                    parcel2.writeInt(generateHotpCode);
+                    parcel2.writeInt(iGenerateHotpCode);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -305,198 +305,198 @@ public interface IVaultKeeperService extends IInterface {
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public boolean isInitialized(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public int initialize(String str, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeByteArray(bArr3);
-                    obtain.writeByteArray(bArr4);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeByteArray(bArr3);
+                    parcelObtain.writeByteArray(bArr4);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public int destroy(String str, byte[] bArr, byte[] bArr2, byte[] bArr3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeByteArray(bArr3);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeByteArray(bArr3);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public byte[] read(String str, int i, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(iArr.length);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    byte[] createByteArray = obtain2.createByteArray();
-                    obtain2.readIntArray(iArr);
-                    return createByteArray;
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(iArr.length);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    byte[] bArrCreateByteArray = parcelObtain2.createByteArray();
+                    parcelObtain2.readIntArray(iArr);
+                    return bArrCreateByteArray;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public int write(String str, int i, byte[] bArr, byte[] bArr2, byte[] bArr3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeByteArray(bArr3);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeByteArray(bArr3);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public byte[] sensitiveBox(String str, int i, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(iArr.length);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    byte[] createByteArray = obtain2.createByteArray();
-                    obtain2.readIntArray(iArr);
-                    return createByteArray;
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(iArr.length);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    byte[] bArrCreateByteArray = parcelObtain2.createByteArray();
+                    parcelObtain2.readIntArray(iArr);
+                    return bArrCreateByteArray;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public byte[] encryptMessage(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public boolean migrationStorage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public boolean verifyCertificate(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public int checkDataWritable(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
             public int generateHotpCode(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVaultKeeperService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -15,7 +15,6 @@ import com.samsung.systemui.splugins.navigationbar.IconResource;
 import com.samsung.systemui.splugins.navigationbar.IconType;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavigationHintHandle extends FrameLayout implements ButtonInterface {
     public final float darkIntensity;
@@ -24,6 +23,7 @@ public final class NavigationHintHandle extends FrameLayout implements ButtonInt
     public final Context mContext;
     public GestureHintDrawable viDrawable;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public NavigationHintHandle(Context context) {
         this(context, null, 2, 0 == true ? 1 : 0);
     }

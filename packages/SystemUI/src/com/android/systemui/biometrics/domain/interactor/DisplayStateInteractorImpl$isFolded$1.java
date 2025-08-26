@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DisplayStateInteractorImpl$isFolded$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Executor $mainExecutor;
@@ -53,27 +52,27 @@ final class DisplayStateInteractorImpl$isFolded$1 extends SuspendLambda implemen
             final Function1 function1 = new Function1() { // from class: com.android.systemui.biometrics.domain.interactor.DisplayStateInteractorImpl$isFolded$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     Boolean bool = (Boolean) obj2;
-                    boolean booleanValue = bool.booleanValue();
+                    boolean zBooleanValue = bool.booleanValue();
                     ChannelExt.INSTANCE.getClass();
-                    ChannelExt.trySendWithFailureLogging(ProducerScope.this, bool, "DisplayStateInteractor", "Error sending fold state update to " + booleanValue);
+                    ChannelExt.trySendWithFailureLogging(producerScope, bool, "DisplayStateInteractor", "Error sending fold state update to " + zBooleanValue);
                     return Unit.INSTANCE;
                 }
             };
             final ?? r3 = new FoldProvider.FoldCallback() { // from class: com.android.systemui.biometrics.domain.interactor.DisplayStateInteractorImpl$isFolded$1$callback$1
                 @Override // com.android.systemui.unfold.updates.FoldProvider.FoldCallback
                 public final void onFoldUpdated(boolean z) {
-                    Function1.this.mo779invoke(Boolean.valueOf(z));
+                    function1.mo781invoke(Boolean.valueOf(z));
                 }
             };
-            function1.mo779invoke(Boolean.FALSE);
+            function1.mo781invoke(Boolean.FALSE);
             this.this$0.screenSizeFoldProvider.registerCallback(r3, this.$mainExecutor);
             final DisplayStateInteractorImpl displayStateInteractorImpl = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.biometrics.domain.interactor.DisplayStateInteractorImpl$isFolded$1$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    DisplayStateInteractorImpl.this.screenSizeFoldProvider.unregisterCallback(r3);
+                    displayStateInteractorImpl.screenSizeFoldProvider.unregisterCallback(r3);
                     return Unit.INSTANCE;
                 }
             };

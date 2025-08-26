@@ -19,6 +19,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.cert.X509CertificateHolder;
 import com.android.internal.org.bouncycastle.operator.ContentSigner;
 import com.android.internal.org.bouncycastle.operator.DigestCalculator;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -104,7 +105,7 @@ public class BasicOCSPRespBuilder {
         return this;
     }
 
-    public BasicOCSPResp build(ContentSigner contentSigner, X509CertificateHolder[] x509CertificateHolderArr, Date date) throws OCSPException {
+    public BasicOCSPResp build(ContentSigner contentSigner, X509CertificateHolder[] x509CertificateHolderArr, Date date) throws OCSPException, IOException {
         DERSequence dERSequence;
         Iterator it = this.list.iterator();
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector();

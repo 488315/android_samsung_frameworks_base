@@ -186,31 +186,31 @@ public final class CellIdentity implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        switch (readInt) {
+        int i = parcel.readInt();
+        switch (i) {
             case 0:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 1:
-                _set(readInt, (CellIdentityGsm) parcel.readTypedObject(CellIdentityGsm.CREATOR));
+                _set(i, (CellIdentityGsm) parcel.readTypedObject(CellIdentityGsm.CREATOR));
                 return;
             case 2:
-                _set(readInt, (CellIdentityWcdma) parcel.readTypedObject(CellIdentityWcdma.CREATOR));
+                _set(i, (CellIdentityWcdma) parcel.readTypedObject(CellIdentityWcdma.CREATOR));
                 return;
             case 3:
-                _set(readInt, (CellIdentityTdscdma) parcel.readTypedObject(CellIdentityTdscdma.CREATOR));
+                _set(i, (CellIdentityTdscdma) parcel.readTypedObject(CellIdentityTdscdma.CREATOR));
                 return;
             case 4:
-                _set(readInt, (CellIdentityCdma) parcel.readTypedObject(CellIdentityCdma.CREATOR));
+                _set(i, (CellIdentityCdma) parcel.readTypedObject(CellIdentityCdma.CREATOR));
                 return;
             case 5:
-                _set(readInt, (CellIdentityLte) parcel.readTypedObject(CellIdentityLte.CREATOR));
+                _set(i, (CellIdentityLte) parcel.readTypedObject(CellIdentityLte.CREATOR));
                 return;
             case 6:
-                _set(readInt, (CellIdentityNr) parcel.readTypedObject(CellIdentityNr.CREATOR));
+                _set(i, (CellIdentityNr) parcel.readTypedObject(CellIdentityNr.CREATOR));
                 return;
             default:
-                throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

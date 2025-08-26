@@ -9,7 +9,6 @@ import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.systemui.R;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EditTooltipView extends BaseTooltipView {
     public final Context mContext;

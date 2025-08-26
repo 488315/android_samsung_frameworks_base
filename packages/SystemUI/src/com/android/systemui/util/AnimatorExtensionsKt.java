@@ -4,7 +4,6 @@ import androidx.core.animation.Animator;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AnimatorExtensionsKt {
     public static final Animator.AnimatorListener addListener(Animator animator, Function1 function1, Function1 function12, Function1 function13, Function1 function14) {
@@ -15,52 +14,52 @@ public final class AnimatorExtensionsKt {
 
     public static /* synthetic */ Animator.AnimatorListener addListener$default(Animator animator, Function1 function1, Function1 function12, Function1 function13, Function1 function14, int i, Object obj) {
         if ((i & 1) != 0) {
-            function1 = new Function1() { // from class: com.android.systemui.util.AnimatorExtensionsKt$addListener$1
+            function1 = new Function1() { // from class: com.android.systemui.util.AnimatorExtensionsKt.addListener.1
                 public final void invoke(Animator animator2) {
                 }
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public /* bridge */ /* synthetic */ Object mo779invoke(Object obj2) {
+                public /* bridge */ /* synthetic */ Object mo781invoke(Object obj2) {
                     invoke((Animator) obj2);
                     return Unit.INSTANCE;
                 }
             };
         }
         if ((i & 2) != 0) {
-            function12 = new Function1() { // from class: com.android.systemui.util.AnimatorExtensionsKt$addListener$2
+            function12 = new Function1() { // from class: com.android.systemui.util.AnimatorExtensionsKt.addListener.2
                 public final void invoke(Animator animator2) {
                 }
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public /* bridge */ /* synthetic */ Object mo779invoke(Object obj2) {
+                public /* bridge */ /* synthetic */ Object mo781invoke(Object obj2) {
                     invoke((Animator) obj2);
                     return Unit.INSTANCE;
                 }
             };
         }
         if ((i & 4) != 0) {
-            function13 = new Function1() { // from class: com.android.systemui.util.AnimatorExtensionsKt$addListener$3
+            function13 = new Function1() { // from class: com.android.systemui.util.AnimatorExtensionsKt.addListener.3
                 public final void invoke(Animator animator2) {
                 }
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public /* bridge */ /* synthetic */ Object mo779invoke(Object obj2) {
+                public /* bridge */ /* synthetic */ Object mo781invoke(Object obj2) {
                     invoke((Animator) obj2);
                     return Unit.INSTANCE;
                 }
             };
         }
         if ((i & 8) != 0) {
-            function14 = new Function1() { // from class: com.android.systemui.util.AnimatorExtensionsKt$addListener$4
+            function14 = new Function1() { // from class: com.android.systemui.util.AnimatorExtensionsKt.addListener.4
                 public final void invoke(Animator animator2) {
                 }
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public /* bridge */ /* synthetic */ Object mo779invoke(Object obj2) {
+                public /* bridge */ /* synthetic */ Object mo781invoke(Object obj2) {
                     invoke((Animator) obj2);
                     return Unit.INSTANCE;
                 }
@@ -75,7 +74,7 @@ public final class AnimatorExtensionsKt {
         Animator.AnimatorListener animatorListener = new Animator.AnimatorListener() { // from class: com.android.systemui.util.AnimatorExtensionsKt$doOnCancel$$inlined$addListener$default$1
             @Override // androidx.core.animation.Animator.AnimatorListener
             public void onAnimationCancel(Animator animator2) {
-                Function1.this.mo779invoke(animator2);
+                function1.mo781invoke(animator2);
             }
 
             @Override // androidx.core.animation.Animator.AnimatorListener
@@ -108,7 +107,7 @@ public final class AnimatorExtensionsKt {
         Animator.AnimatorListener animatorListener = new Animator.AnimatorListener() { // from class: com.android.systemui.util.AnimatorExtensionsKt$doOnEnd$$inlined$addListener$default$1
             @Override // androidx.core.animation.Animator.AnimatorListener
             public void onAnimationEnd(Animator animator2) {
-                Function1.this.mo779invoke(animator2);
+                function1.mo781invoke(animator2);
             }
 
             @Override // androidx.core.animation.Animator.AnimatorListener
@@ -145,7 +144,7 @@ public final class AnimatorExtensionsKt {
 
             @Override // androidx.core.animation.Animator.AnimatorListener
             public void onAnimationRepeat(Animator animator2) {
-                Function1.this.mo779invoke(animator2);
+                function1.mo781invoke(animator2);
             }
 
             @Override // androidx.core.animation.Animator.AnimatorListener
@@ -178,7 +177,7 @@ public final class AnimatorExtensionsKt {
 
             @Override // androidx.core.animation.Animator.AnimatorListener
             public void onAnimationStart(Animator animator2) {
-                Function1.this.mo779invoke(animator2);
+                function1.mo781invoke(animator2);
             }
 
             @Override // androidx.core.animation.Animator.AnimatorListener

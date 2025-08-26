@@ -18,7 +18,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class AudioVolumeComponentViewModel$sliderViewModels$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -26,7 +25,6 @@ final class AudioVolumeComponentViewModel$sliderViewModels$1 extends SuspendLamb
     int label;
     final /* synthetic */ AudioVolumeComponentViewModel this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.panel.component.volume.ui.viewmodel.AudioVolumeComponentViewModel$sliderViewModels$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ FlowCollector $$this$transformLatest;
@@ -58,7 +56,7 @@ final class AudioVolumeComponentViewModel$sliderViewModels$1 extends SuspendLamb
 
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         public final Object invokeSuspend(Object obj) {
-            SliderViewModel create;
+            SliderViewModel sliderViewModelCreate;
             CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
             int i = this.label;
             if (i == 0) {
@@ -71,16 +69,16 @@ final class AudioVolumeComponentViewModel$sliderViewModels$1 extends SuspendLamb
                     if (sliderType instanceof SliderType.Stream) {
                         int i2 = ((SliderType.Stream) sliderType).stream;
                         audioVolumeComponentViewModel.getClass();
-                        create = audioVolumeComponentViewModel.streamSliderViewModelFactory.create(new AudioStreamSliderViewModel.FactoryAudioStreamWrapper(i2, null), coroutineScope);
+                        sliderViewModelCreate = audioVolumeComponentViewModel.streamSliderViewModelFactory.create(new AudioStreamSliderViewModel.FactoryAudioStreamWrapper(i2, null), coroutineScope);
                     } else if (sliderType instanceof SliderType.MediaDeviceCast) {
-                        create = audioVolumeComponentViewModel.castVolumeSliderViewModelFactory.create(((SliderType.MediaDeviceCast) sliderType).session, coroutineScope);
+                        sliderViewModelCreate = audioVolumeComponentViewModel.castVolumeSliderViewModelFactory.create(((SliderType.MediaDeviceCast) sliderType).session, coroutineScope);
                     } else {
                         if (!(sliderType instanceof SliderType.AudioSharingStream)) {
                             throw new NoWhenBranchMatchedException();
                         }
-                        create = audioVolumeComponentViewModel.audioSharingStreamSliderViewModelFactory.create(coroutineScope);
+                        sliderViewModelCreate = audioVolumeComponentViewModel.audioSharingStreamSliderViewModelFactory.create(coroutineScope);
                     }
-                    arrayList.add(create);
+                    arrayList.add(sliderViewModelCreate);
                 }
                 FlowCollector flowCollector = this.$$this$transformLatest;
                 this.label = 1;

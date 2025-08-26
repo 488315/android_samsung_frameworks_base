@@ -25,7 +25,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PrivacyItemController$updateListAndNotifyChanges$1 implements Runnable {
     public final /* synthetic */ DelayableExecutor $uiExecutor;
@@ -37,10 +36,15 @@ public final class PrivacyItemController$updateListAndNotifyChanges$1 implements
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:109:0x0172 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:67:0x016f  */
     /* JADX WARN: Type inference failed for: r1v14 */
     /* JADX WARN: Type inference failed for: r1v19 */
     /* JADX WARN: Type inference failed for: r1v6, types: [int] */
     @Override // java.lang.Runnable
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void run() {
         Object next;
         long j;
@@ -83,10 +87,9 @@ public final class PrivacyItemController$updateListAndNotifyChanges$1 implements
                                     }
                                 }
                             }
-                            if (!ArraysKt___ArraysKt.contains(appOpItem.mCode, AppOpsPrivacyItemMonitor.USER_INDEPENDENT_OPS)) {
-                                r1 = z3;
+                            if (ArraysKt___ArraysKt.contains(appOpItem.mCode, AppOpsPrivacyItemMonitor.USER_INDEPENDENT_OPS)) {
+                                arrayList3.add(obj);
                             }
-                            arrayList3.add(obj);
                             r1 = z3;
                         }
                         z = r1;
@@ -110,54 +113,58 @@ public final class PrivacyItemController$updateListAndNotifyChanges$1 implements
                 CollectionsKt__MutableCollectionsKt.addAll(CollectionsKt___CollectionsKt.distinct(arrayList), arrayList2);
                 z2 = z;
             }
-            List distinct = CollectionsKt___CollectionsKt.distinct(arrayList2);
+            List listDistinct = CollectionsKt___CollectionsKt.distinct(arrayList2);
             PrivacyLogger privacyLogger = privacyItemController.logger;
             privacyLogger.getClass();
             LogLevel logLevel = LogLevel.INFO;
             PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(11);
             LogBuffer logBuffer = privacyLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = PrivacyLogger.listToString(distinct);
-            logBuffer.commit(obtain);
-            long elapsedRealtime = privacyItemController.systemClock.elapsedRealtime() - 5000;
+            LogMessage logMessageObtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = PrivacyLogger.listToString(listDistinct);
+            logBuffer.commit(logMessageObtain);
+            long jElapsedRealtime = privacyItemController.systemClock.elapsedRealtime() - 5000;
             List privacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core = privacyItemController.getPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
             ArrayList arrayList5 = new ArrayList();
             for (Object obj3 : privacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core) {
                 PrivacyItem privacyItem = (PrivacyItem) obj3;
-                if (privacyItem.timeStampElapsed > elapsedRealtime) {
-                    List<PrivacyItem> list2 = distinct;
+                if (privacyItem.timeStampElapsed > jElapsedRealtime) {
+                    List<PrivacyItem> list2 = listDistinct;
                     boolean z4 = list2 instanceof Collection;
                     PrivacyType privacyType = privacyItem.privacyType;
-                    if (!z4 || !list2.isEmpty()) {
+                    if (z4 && list2.isEmpty()) {
+                        j = jElapsedRealtime;
+                        if (privacyType == PrivacyType.TYPE_LOCATION) {
+                        }
+                    } else {
                         for (PrivacyItem privacyItem2 : list2) {
                             if (privacyItem2.privacyType == privacyType && Intrinsics.areEqual(privacyItem2.application, privacyItem.application)) {
-                                j = elapsedRealtime;
+                                j = jElapsedRealtime;
                                 if (privacyItem2.timeStampElapsed == privacyItem.timeStampElapsed) {
                                     break;
                                 }
                             } else {
-                                j = elapsedRealtime;
+                                j = jElapsedRealtime;
                             }
-                            elapsedRealtime = j;
+                            jElapsedRealtime = j;
+                        }
+                        j = jElapsedRealtime;
+                        if (privacyType == PrivacyType.TYPE_LOCATION) {
+                            arrayList5.add(obj3);
                         }
                     }
-                    j = elapsedRealtime;
-                    if (privacyType != PrivacyType.TYPE_LOCATION) {
-                        arrayList5.add(obj3);
-                    }
                 } else {
-                    j = elapsedRealtime;
+                    j = jElapsedRealtime;
                 }
-                elapsedRealtime = j;
+                jElapsedRealtime = j;
             }
-            long j2 = elapsedRealtime;
+            long j2 = jElapsedRealtime;
             if (!arrayList5.isEmpty()) {
                 LogLevel logLevel2 = LogLevel.DEBUG;
                 PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda02 = new PrivacyLogger$$ExternalSyntheticLambda0(8);
                 LogBuffer logBuffer2 = privacyLogger.buffer;
-                LogMessage obtain2 = logBuffer2.obtain("PrivacyLog", logLevel2, privacyLogger$$ExternalSyntheticLambda02, null);
-                ((LogMessageImpl) obtain2).str1 = PrivacyLogger.listToString(arrayList5);
-                logBuffer2.commit(obtain2);
+                LogMessage logMessageObtain2 = logBuffer2.obtain("PrivacyLog", logLevel2, privacyLogger$$ExternalSyntheticLambda02, null);
+                ((LogMessageImpl) logMessageObtain2).str1 = PrivacyLogger.listToString(arrayList5);
+                logBuffer2.commit(logMessageObtain2);
                 Iterator it3 = arrayList5.iterator();
                 if (it3.hasNext()) {
                     next = it3.next();
@@ -180,13 +187,13 @@ public final class PrivacyItemController$updateListAndNotifyChanges$1 implements
                 LogLevel logLevel3 = LogLevel.INFO;
                 PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda03 = new PrivacyLogger$$ExternalSyntheticLambda0(7);
                 LogBuffer logBuffer3 = privacyLogger.buffer;
-                LogMessage obtain3 = logBuffer3.obtain("PrivacyLog", logLevel3, privacyLogger$$ExternalSyntheticLambda03, null);
-                ((LogMessageImpl) obtain3).str1 = PrivacyLoggerKt.DATE_FORMAT.format(Long.valueOf(System.currentTimeMillis() + j5));
-                logBuffer3.commit(obtain3);
+                LogMessage logMessageObtain3 = logBuffer3.obtain("PrivacyLog", logLevel3, privacyLogger$$ExternalSyntheticLambda03, null);
+                ((LogMessageImpl) logMessageObtain3).str1 = PrivacyLoggerKt.DATE_FORMAT.format(Long.valueOf(System.currentTimeMillis() + j5));
+                logBuffer3.commit(logMessageObtain3);
                 privacyItemController.holdingRunnableCanceler = privacyItemController.bgExecutor.executeDelayed(privacyItemController.updateListAndNotifyChanges, j5);
             }
             ArrayList arrayList6 = new ArrayList();
-            for (Object obj4 : distinct) {
+            for (Object obj4 : listDistinct) {
                 if (!((PrivacyItem) obj4).paused) {
                     arrayList6.add(obj4);
                 }

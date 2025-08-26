@@ -13,14 +13,12 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultiSurfaceLetterboxController implements LetterboxController {
     public static final String TAG;
     public final LetterboxSurfaceBuilder letterboxBuilder;
     public final Map letterboxMap = new LinkedHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,8 +44,8 @@ public final class MultiSurfaceLetterboxController implements LetterboxControlle
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 String str = MultiSurfaceLetterboxController.TAG;
-                MultiSurfaceLetterboxController$$ExternalSyntheticLambda2 multiSurfaceLetterboxController$$ExternalSyntheticLambda22 = MultiSurfaceLetterboxController$$ExternalSyntheticLambda2.this;
-                ((Map) obj2).put((LetterboxKey) obj, new LetterboxSurfaces((SurfaceControl) multiSurfaceLetterboxController$$ExternalSyntheticLambda22.mo779invoke(SystemUIAnalytics.DT_BOUNCER_POSITION_LEFT), (SurfaceControl) multiSurfaceLetterboxController$$ExternalSyntheticLambda22.mo779invoke("Top"), (SurfaceControl) multiSurfaceLetterboxController$$ExternalSyntheticLambda22.mo779invoke(SystemUIAnalytics.DT_BOUNCER_POSITION_RIGHT), (SurfaceControl) multiSurfaceLetterboxController$$ExternalSyntheticLambda22.mo779invoke("Bottom")));
+                MultiSurfaceLetterboxController$$ExternalSyntheticLambda2 multiSurfaceLetterboxController$$ExternalSyntheticLambda22 = multiSurfaceLetterboxController$$ExternalSyntheticLambda2;
+                ((Map) obj2).put((LetterboxKey) obj, new LetterboxSurfaces((SurfaceControl) multiSurfaceLetterboxController$$ExternalSyntheticLambda22.mo781invoke(SystemUIAnalytics.DT_BOUNCER_POSITION_LEFT), (SurfaceControl) multiSurfaceLetterboxController$$ExternalSyntheticLambda22.mo781invoke("Top"), (SurfaceControl) multiSurfaceLetterboxController$$ExternalSyntheticLambda22.mo781invoke(SystemUIAnalytics.DT_BOUNCER_POSITION_RIGHT), (SurfaceControl) multiSurfaceLetterboxController$$ExternalSyntheticLambda22.mo781invoke("Bottom")));
                 return Unit.INSTANCE;
             }
         }, 2);
@@ -58,13 +56,13 @@ public final class MultiSurfaceLetterboxController implements LetterboxControlle
         LetterboxUtils$Maps.runOnItem$default(LetterboxUtils$Maps.INSTANCE, this.letterboxMap, letterboxKey, new Function1() { // from class: com.android.wm.shell.compatui.letterbox.MultiSurfaceLetterboxController$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 SurfaceControl.Transaction transaction2 = transaction;
                 String str = MultiSurfaceLetterboxController.TAG;
                 Iterator it = ((LetterboxSurfaces) obj).iterator();
                 while (it.hasNext()) {
                     SurfaceControl surfaceControl = (SurfaceControl) it.next();
-                    MultiSurfaceLetterboxController.this.getClass();
+                    this.f$0.getClass();
                     if (surfaceControl != null) {
                         transaction2.remove(surfaceControl);
                     }
@@ -90,13 +88,13 @@ public final class MultiSurfaceLetterboxController implements LetterboxControlle
         LetterboxUtils$Maps.runOnItem$default(LetterboxUtils$Maps.INSTANCE, this.letterboxMap, letterboxKey, new Function1() { // from class: com.android.wm.shell.compatui.letterbox.MultiSurfaceLetterboxController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 SurfaceControl.Transaction transaction2 = transaction;
                 String str = MultiSurfaceLetterboxController.TAG;
                 Iterator it = ((LetterboxSurfaces) obj).iterator();
                 while (it.hasNext()) {
                     SurfaceControl surfaceControl = (SurfaceControl) it.next();
-                    MultiSurfaceLetterboxController.this.getClass();
+                    this.f$0.getClass();
                     if (surfaceControl != null) {
                         transaction2.setVisibility(surfaceControl, z);
                     }

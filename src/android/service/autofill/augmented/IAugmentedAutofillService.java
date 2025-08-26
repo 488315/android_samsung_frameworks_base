@@ -70,9 +70,9 @@ public interface IAugmentedAutofillService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAugmentedAutofillService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAugmentedAutofillService)) {
-                return (IAugmentedAutofillService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAugmentedAutofillService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAugmentedAutofillService)) {
+                return (IAugmentedAutofillService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,24 +108,24 @@ public interface IAugmentedAutofillService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
-                boolean readBoolean2 = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onConnected(readBoolean, readBoolean2);
+                onConnected(z, z2);
             } else if (i == 2) {
                 onDisconnected();
             } else if (i == 3) {
-                int readInt = parcel.readInt();
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                IBinder strongBinder = parcel.readStrongBinder();
+                int i4 = parcel.readInt();
                 ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                 AutofillId autofillId = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
                 AutofillValue autofillValue = (AutofillValue) parcel.readTypedObject(AutofillValue.CREATOR);
-                long readLong = parcel.readLong();
+                long j = parcel.readLong();
                 InlineSuggestionsRequest inlineSuggestionsRequest = (InlineSuggestionsRequest) parcel.readTypedObject(InlineSuggestionsRequest.CREATOR);
-                IFillCallback asInterface = IFillCallback.Stub.asInterface(parcel.readStrongBinder());
+                IFillCallback iFillCallbackAsInterface = IFillCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onFillRequest(readInt, readStrongBinder, readInt2, componentName, autofillId, autofillValue, readLong, inlineSuggestionsRequest, asInterface);
+                onFillRequest(i3, strongBinder, i4, componentName, autofillId, autofillValue, j, inlineSuggestionsRequest, iFillCallbackAsInterface);
             } else if (i == 4) {
                 onDestroyAllFillWindowsRequest();
             } else {
@@ -152,56 +152,56 @@ public interface IAugmentedAutofillService extends IInterface {
 
             @Override // android.service.autofill.augmented.IAugmentedAutofillService
             public void onConnected(boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAugmentedAutofillService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAugmentedAutofillService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.augmented.IAugmentedAutofillService
             public void onDisconnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAugmentedAutofillService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAugmentedAutofillService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.augmented.IAugmentedAutofillService
             public void onFillRequest(int i, IBinder iBinder, int i2, ComponentName componentName, AutofillId autofillId, AutofillValue autofillValue, long j, InlineSuggestionsRequest inlineSuggestionsRequest, IFillCallback iFillCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAugmentedAutofillService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(autofillId, 0);
-                    obtain.writeTypedObject(autofillValue, 0);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(inlineSuggestionsRequest, 0);
-                    obtain.writeStrongInterface(iFillCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAugmentedAutofillService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(autofillId, 0);
+                    parcelObtain.writeTypedObject(autofillValue, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(inlineSuggestionsRequest, 0);
+                    parcelObtain.writeStrongInterface(iFillCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.augmented.IAugmentedAutofillService
             public void onDestroyAllFillWindowsRequest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAugmentedAutofillService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAugmentedAutofillService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

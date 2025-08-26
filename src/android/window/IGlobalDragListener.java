@@ -54,9 +54,9 @@ public interface IGlobalDragListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGlobalDragListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGlobalDragListener)) {
-                return (IGlobalDragListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGlobalDragListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGlobalDragListener)) {
+                return (IGlobalDragListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -91,9 +91,9 @@ public interface IGlobalDragListener extends IInterface {
                 onCrossWindowDrop(runningTaskInfo);
             } else if (i == 2) {
                 DragEvent dragEvent = (DragEvent) parcel.readTypedObject(DragEvent.CREATOR);
-                IUnhandledDragCallback asInterface = IUnhandledDragCallback.Stub.asInterface(parcel.readStrongBinder());
+                IUnhandledDragCallback iUnhandledDragCallbackAsInterface = IUnhandledDragCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onUnhandledDrop(dragEvent, asInterface);
+                onUnhandledDrop(dragEvent, iUnhandledDragCallbackAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -118,26 +118,26 @@ public interface IGlobalDragListener extends IInterface {
 
             @Override // android.window.IGlobalDragListener
             public void onCrossWindowDrop(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGlobalDragListener.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGlobalDragListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IGlobalDragListener
             public void onUnhandledDrop(DragEvent dragEvent, IUnhandledDragCallback iUnhandledDragCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGlobalDragListener.DESCRIPTOR);
-                    obtain.writeTypedObject(dragEvent, 0);
-                    obtain.writeStrongInterface(iUnhandledDragCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGlobalDragListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(dragEvent, 0);
+                    parcelObtain.writeStrongInterface(iUnhandledDragCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

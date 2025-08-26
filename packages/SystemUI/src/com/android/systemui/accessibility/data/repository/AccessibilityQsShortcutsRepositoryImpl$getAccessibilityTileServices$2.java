@@ -1,13 +1,19 @@
 package com.android.systemui.accessibility.data.repository;
 
 import android.content.Context;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import java.util.Set;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.SetsKt___SetsKt;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.Deferred;
+import kotlinx.coroutines.DeferredCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AccessibilityQsShortcutsRepositoryImpl$getAccessibilityTileServices$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Context $context;
@@ -34,78 +40,45 @@ final class AccessibilityQsShortcutsRepositoryImpl$getAccessibilityTileServices$
         return ((AccessibilityQsShortcutsRepositoryImpl$getAccessibilityTileServices$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x0051, code lost:
-    
-        if (r12 == r0) goto L15;
-     */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final java.lang.Object invokeSuspend(java.lang.Object r12) {
-        /*
-            r11 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r11.label
-            r2 = 2
-            r3 = 1
-            if (r1 == 0) goto L24
-            if (r1 == r3) goto L1c
-            if (r1 != r2) goto L14
-            java.lang.Object r11 = r11.L$0
-            java.util.Set r11 = (java.util.Set) r11
-            kotlin.ResultKt.throwOnFailure(r12)
-            goto L64
-        L14:
-            java.lang.IllegalStateException r11 = new java.lang.IllegalStateException
-            java.lang.String r12 = "call to 'resume' before 'invoke' with coroutine"
-            r11.<init>(r12)
-            throw r11
-        L1c:
-            java.lang.Object r1 = r11.L$0
-            kotlinx.coroutines.Deferred r1 = (kotlinx.coroutines.Deferred) r1
-            kotlin.ResultKt.throwOnFailure(r12)
-            goto L54
-        L24:
-            kotlin.ResultKt.throwOnFailure(r12)
-            java.lang.Object r12 = r11.L$0
-            kotlinx.coroutines.CoroutineScope r12 = (kotlinx.coroutines.CoroutineScope) r12
-            com.android.systemui.accessibility.data.repository.AccessibilityQsShortcutsRepositoryImpl r1 = r11.this$0
-            kotlinx.coroutines.CoroutineDispatcher r4 = r1.backgroundDispatcher
-            com.android.systemui.accessibility.data.repository.AccessibilityQsShortcutsRepositoryImpl$getAccessibilityTileServices$2$a11yServiceTileServices$1 r5 = new com.android.systemui.accessibility.data.repository.AccessibilityQsShortcutsRepositoryImpl$getAccessibilityTileServices$2$a11yServiceTileServices$1
-            r6 = 0
-            r5.<init>(r1, r6)
-            r1 = 5
-            kotlinx.coroutines.DeferredCoroutine r4 = com.android.app.tracing.coroutines.CoroutineTracingKt.asyncTraced$default(r12, r4, r6, r5, r1)
-            com.android.systemui.accessibility.data.repository.AccessibilityQsShortcutsRepositoryImpl r5 = r11.this$0
-            kotlinx.coroutines.CoroutineDispatcher r7 = r5.backgroundDispatcher
-            com.android.systemui.accessibility.data.repository.AccessibilityQsShortcutsRepositoryImpl$getAccessibilityTileServices$2$a11yShortcutInfoTileServices$1 r8 = new com.android.systemui.accessibility.data.repository.AccessibilityQsShortcutsRepositoryImpl$getAccessibilityTileServices$2$a11yShortcutInfoTileServices$1
-            android.content.Context r9 = r11.$context
-            r8.<init>(r5, r9, r6)
-            kotlinx.coroutines.DeferredCoroutine r1 = com.android.app.tracing.coroutines.CoroutineTracingKt.asyncTraced$default(r12, r7, r6, r8, r1)
-            r11.L$0 = r1
-            r11.label = r3
-            java.lang.Object r12 = r4.awaitInternal(r11)
-            if (r12 != r0) goto L54
-            goto L60
-        L54:
-            java.util.Set r12 = (java.util.Set) r12
-            r11.L$0 = r12
-            r11.label = r2
-            java.lang.Object r11 = r1.await(r11)
-            if (r11 != r0) goto L61
-        L60:
-            return r0
-        L61:
-            r10 = r12
-            r12 = r11
-            r11 = r10
-        L64:
-            java.lang.Iterable r12 = (java.lang.Iterable) r12
-            java.util.Set r11 = kotlin.collections.SetsKt___SetsKt.plus(r11, r12)
-            return r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.data.repository.AccessibilityQsShortcutsRepositoryImpl$getAccessibilityTileServices$2.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        Deferred deferredAsyncTraced$default;
+        Set set;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
+            AccessibilityQsShortcutsRepositoryImpl accessibilityQsShortcutsRepositoryImpl = this.this$0;
+            DeferredCoroutine deferredCoroutineAsyncTraced$default = CoroutineTracingKt.asyncTraced$default(coroutineScope, accessibilityQsShortcutsRepositoryImpl.backgroundDispatcher, null, new AccessibilityQsShortcutsRepositoryImpl$getAccessibilityTileServices$2$a11yServiceTileServices$1(accessibilityQsShortcutsRepositoryImpl, null), 5);
+            AccessibilityQsShortcutsRepositoryImpl accessibilityQsShortcutsRepositoryImpl2 = this.this$0;
+            deferredAsyncTraced$default = CoroutineTracingKt.asyncTraced$default(coroutineScope, accessibilityQsShortcutsRepositoryImpl2.backgroundDispatcher, null, new AccessibilityQsShortcutsRepositoryImpl$getAccessibilityTileServices$2$a11yShortcutInfoTileServices$1(accessibilityQsShortcutsRepositoryImpl2, this.$context, null), 5);
+            this.L$0 = deferredAsyncTraced$default;
+            this.label = 1;
+            obj = deferredCoroutineAsyncTraced$default.awaitInternal(this);
+            if (obj != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            set = (Set) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            return SetsKt___SetsKt.plus(set, (Iterable) obj);
+        }
+        deferredAsyncTraced$default = (Deferred) this.L$0;
+        ResultKt.throwOnFailure(obj);
+        Set set2 = (Set) obj;
+        this.L$0 = set2;
+        this.label = 2;
+        Object objAwait = deferredAsyncTraced$default.await(this);
+        if (objAwait != coroutineSingletons) {
+            obj = objAwait;
+            set = set2;
+            return SetsKt___SetsKt.plus(set, (Iterable) obj);
+        }
+        return coroutineSingletons;
     }
 }

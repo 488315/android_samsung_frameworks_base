@@ -103,8 +103,8 @@ public final class Histogram {
         }
 
         private static int lower_bound(long[] jArr, long j) {
-            int binarySearch = Arrays.binarySearch(jArr, j);
-            return binarySearch < 0 ? Math.abs(binarySearch) - 2 : binarySearch;
+            int iBinarySearch = Arrays.binarySearch(jArr, j);
+            return iBinarySearch < 0 ? Math.abs(iBinarySearch) - 2 : iBinarySearch;
         }
 
         private static long[] initBins(int i, int i2, float f, float f2) {

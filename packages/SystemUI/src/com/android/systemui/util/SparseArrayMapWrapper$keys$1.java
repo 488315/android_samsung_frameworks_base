@@ -9,17 +9,14 @@ import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.sequences.Sequence;
 import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SparseArrayMapWrapper$keys$1 implements Set<Integer>, KMappedMarker {
     private final Sequence keySequence;
     final /* synthetic */ SparseArrayMapWrapper<Object> this$0;
 
     public SparseArrayMapWrapper$keys$1(SparseArrayMapWrapper<Object> sparseArrayMapWrapper) {
-        Sequence sequence;
         this.this$0 = sparseArrayMapWrapper;
-        sequence = ((SparseArrayMapWrapper) sparseArrayMapWrapper).entrySequence;
-        this.keySequence = new TransformingSequence(sequence, new SparseArrayMapWrapper$keys$1$$ExternalSyntheticLambda0(0));
+        this.keySequence = new TransformingSequence(((SparseArrayMapWrapper) sparseArrayMapWrapper).entrySequence, new SparseArrayMapWrapper$keys$1$$ExternalSyntheticLambda0(0));
     }
 
     /* JADX INFO: Access modifiers changed from: private */

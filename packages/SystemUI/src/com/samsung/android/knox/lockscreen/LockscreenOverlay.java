@@ -19,7 +19,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.InvalidParameterException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LockscreenOverlay {
     public static final int CUSTOM_LAYER = 2;
@@ -69,10 +68,10 @@ public class LockscreenOverlay {
     }
 
     public static LSOItemData createLSOItem_StyleEnterprise(Context context, String str, String str2, String str3, String str4) {
-        int rgb = Color.rgb(192, 199, 209);
-        String resourceString = LSOUtils.getResourceString(context, R.string.zen_mode_until_next_day);
-        String resourceString2 = LSOUtils.getResourceString(context, R.string.zen_upgrade_notification_content);
-        String resourceString3 = LSOUtils.getResourceString(context, R.string.zen_mode_until);
+        int iRgb = Color.rgb(192, 199, 209);
+        String resourceString = LSOUtils.getResourceString(context, R.string.zen_upgrade_notification_title);
+        String resourceString2 = LSOUtils.getResourceString(context, R.string.zen_upgrade_notification_visd_content);
+        String resourceString3 = LSOUtils.getResourceString(context, R.string.zen_upgrade_notification_content);
         LSOItemContainer lSOItemContainer = new LSOItemContainer();
         lSOItemContainer.addItem(new LSOItemSpace(-1, 0, 10.0f));
         LSOItemContainer lSOItemContainer2 = new LSOItemContainer();
@@ -96,7 +95,7 @@ public class LockscreenOverlay {
         lSOItemText3.setTextStyle(1);
         lSOItemText3.setGravity(17);
         lSOItemContainer3.addItem(lSOItemText3);
-        lSOItemContainer3.setBgColor(rgb);
+        lSOItemContainer3.setBgColor(iRgb);
         lSOItemContainer3.setDimension(-1, -2);
         lSOItemContainer2.addItem(lSOItemContainer3);
         lSOItemContainer2.setGravity(17);
@@ -135,7 +134,7 @@ public class LockscreenOverlay {
         lSOItemContainer6.addItem(lSOItemContainer7);
         lSOItemContainer5.addItem(lSOItemContainer6);
         lSOItemContainer5.setDimension(-1, -2);
-        lSOItemContainer5.setBgColor(rgb);
+        lSOItemContainer5.setBgColor(iRgb);
         lSOItemContainer5.setGravity(17);
         lSOItemContainer4.addItem(lSOItemContainer5);
         lSOItemContainer4.setGravity(48);
@@ -240,15 +239,15 @@ public class LockscreenOverlay {
     }
 
     public float getAlpha() {
-        Float valueOf = Float.valueOf(1.0f);
+        Float fValueOf = Float.valueOf(1.0f);
         LSOAttributeSet preferences = this.mLSO.getPreferences();
         if (preferences != null && preferences.containsKey(LSOAttrConst.ATTR_ALPHA)) {
-            valueOf = preferences.getAsFloat(LSOAttrConst.ATTR_ALPHA);
+            fValueOf = preferences.getAsFloat(LSOAttrConst.ATTR_ALPHA);
         }
-        if (valueOf == null) {
+        if (fValueOf == null) {
             return 1.0f;
         }
-        return valueOf.floatValue();
+        return fValueOf.floatValue();
     }
 
     public String getCurrentLockScreenString() {
@@ -332,7 +331,7 @@ public class LockscreenOverlay {
         return this.mLSO.setPreferences(preferences);
     }
 
-    public int setData(LSOItemData lSOItemData) {
+    public int setData(LSOItemData lSOItemData) throws IOException {
         if (lSOItemData != null) {
             lSOItemData.openFileDescriptor();
         }
@@ -349,9 +348,9 @@ public class LockscreenOverlay {
         if (str == null || str.length() == 0) {
             throw new InvalidParameterException("Emergency/Support phone cannot be null");
         }
-        LSOItemData createLSOItem_EmergencyPhone = createLSOItem_EmergencyPhone(this.mContext, str);
-        createLSOItem_EmergencyPhone.setId(str);
-        return setData(createLSOItem_EmergencyPhone, 3);
+        LSOItemData lSOItemDataCreateLSOItem_EmergencyPhone = createLSOItem_EmergencyPhone(this.mContext, str);
+        lSOItemDataCreateLSOItem_EmergencyPhone.setId(str);
+        return setData(lSOItemDataCreateLSOItem_EmergencyPhone, 3);
     }
 
     public int setEmergencyPhoneInfo(LSOEmergencyPhoneInfo lSOEmergencyPhoneInfo) {
@@ -367,34 +366,34 @@ public class LockscreenOverlay {
         }
         String str2 = lSOEmergencyPhoneInfo.icon;
         if (str2 != null) {
-            String copyFileToDataLocalDirectory = LSOUtils.copyFileToDataLocalDirectory(this.mContext, str2, "epw");
-            lSOEmergencyPhoneInfo.icon = copyFileToDataLocalDirectory;
-            if (copyFileToDataLocalDirectory == null) {
+            String strCopyFileToDataLocalDirectory = LSOUtils.copyFileToDataLocalDirectory(this.mContext, str2, "epw");
+            lSOEmergencyPhoneInfo.icon = strCopyFileToDataLocalDirectory;
+            if (strCopyFileToDataLocalDirectory == null) {
                 Log.e(TAG, "Failed to copy icon");
                 return -4;
             }
         }
-        LSOItemData createLSOItem_EmergencyPhone = createLSOItem_EmergencyPhone(this.mContext, lSOEmergencyPhoneInfo);
-        createLSOItem_EmergencyPhone.setId(lSOEmergencyPhoneInfo.phoneNumber);
-        return setData(createLSOItem_EmergencyPhone, 3);
+        LSOItemData lSOItemDataCreateLSOItem_EmergencyPhone = createLSOItem_EmergencyPhone(this.mContext, lSOEmergencyPhoneInfo);
+        lSOItemDataCreateLSOItem_EmergencyPhone.setId(lSOEmergencyPhoneInfo.phoneNumber);
+        return setData(lSOItemDataCreateLSOItem_EmergencyPhone, 3);
     }
 
-    public int setWallpaper(String str) {
+    public int setWallpaper(String str) throws IOException {
         EnterpriseLicenseManager.log(this.mContextInfo, "LockscreenOverlay.setWallpaper");
         if (str == null || str.length() == 0) {
             throw new InvalidParameterException("Wallpaper cannot be null");
         }
-        String copyFileToDataLocalDirectory = LSOUtils.copyFileToDataLocalDirectory(this.mContext, str, "wp");
-        if (copyFileToDataLocalDirectory == null) {
+        String strCopyFileToDataLocalDirectory = LSOUtils.copyFileToDataLocalDirectory(this.mContext, str, "wp");
+        if (strCopyFileToDataLocalDirectory == null) {
             Log.e(TAG, "Failed to copy wallaper");
             return -4;
         }
         try {
-            ParcelFileDescriptor open = ParcelFileDescriptor.open(new File(copyFileToDataLocalDirectory), 268435456);
-            int wallpaper = this.mLSO.setWallpaper(copyFileToDataLocalDirectory, open);
-            if (open != null) {
+            ParcelFileDescriptor parcelFileDescriptorOpen = ParcelFileDescriptor.open(new File(strCopyFileToDataLocalDirectory), 268435456);
+            int wallpaper = this.mLSO.setWallpaper(strCopyFileToDataLocalDirectory, parcelFileDescriptorOpen);
+            if (parcelFileDescriptorOpen != null) {
                 try {
-                    open.close();
+                    parcelFileDescriptorOpen.close();
                 } catch (IOException unused) {
                     Log.e(TAG, "Failed to close file descriptor");
                 }
@@ -411,7 +410,6 @@ public class LockscreenOverlay {
         return this.mLSO.getData(i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LSOEmergencyPhoneInfo {
         public int bottomPosition;
         public int gravity;
@@ -453,7 +451,6 @@ public class LockscreenOverlay {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LSOImage {
         public int bottomPosition;
         public String filePath;
@@ -488,7 +485,7 @@ public class LockscreenOverlay {
         }
     }
 
-    public int setData(LSOItemData lSOItemData, int i) {
+    public int setData(LSOItemData lSOItemData, int i) throws IOException {
         if (lSOItemData != null) {
             lSOItemData.openFileDescriptor();
         }
@@ -540,12 +537,12 @@ public class LockscreenOverlay {
                     if (i4 < lSOImageArr[i5].topPosition) {
                         lSOItemContainer.addItem(new LSOItemSpace(-1, 0, lSOImageArr[i5].topPosition - i4));
                     }
-                    String copyFileToDataLocalDirectory = LSOUtils.copyFileToDataLocalDirectory(this.mContext, lSOImageArr[i5].filePath, "lso" + i5);
-                    if (copyFileToDataLocalDirectory == null) {
+                    String strCopyFileToDataLocalDirectory = LSOUtils.copyFileToDataLocalDirectory(this.mContext, lSOImageArr[i5].filePath, "lso" + i5);
+                    if (strCopyFileToDataLocalDirectory == null) {
                         Log.e(TAG, "Failed to copy images");
                         return -4;
                     }
-                    LSOItemImage lSOItemImage = new LSOItemImage(copyFileToDataLocalDirectory);
+                    LSOItemImage lSOItemImage = new LSOItemImage(strCopyFileToDataLocalDirectory);
                     LSOImage lSOImage4 = lSOImageArr[i5];
                     lSOItemImage.setDimension(-1, 0, lSOImage4.bottomPosition - lSOImage4.topPosition);
                     lSOItemImage.setScaleType(lSOImageArr[i5].scaleType);

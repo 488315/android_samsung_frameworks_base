@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KnoxStatusBarControlRepositoryImpl implements KnoxStatusBarControlRepository {
     public final boolean enableLog = DeviceType.isEngOrUTBinary();
@@ -21,9 +20,9 @@ public final class KnoxStatusBarControlRepositoryImpl implements KnoxStatusBarCo
     public KnoxStatusBarControlRepositoryImpl(KnoxStateMonitor knoxStateMonitor, CoroutineScope coroutineScope) {
         this.knoxStateMonitor = knoxStateMonitor;
         KnoxStateMonitorImpl knoxStateMonitorImpl = (KnoxStateMonitorImpl) knoxStateMonitor;
-        boolean isStatusBarHidden = knoxStateMonitorImpl.isStatusBarHidden();
+        boolean zIsStatusBarHidden = knoxStateMonitorImpl.isStatusBarHidden();
         CustomSdkMonitor customSdkMonitor = knoxStateMonitorImpl.mCustomSdkMonitor;
-        KnoxStatusBarControlModel knoxStatusBarControlModel = new KnoxStatusBarControlModel(isStatusBarHidden, customSdkMonitor != null && customSdkMonitor.mStatusBarIconsState, customSdkMonitor == null ? null : customSdkMonitor.mStatusBarText, customSdkMonitor == null ? 0 : customSdkMonitor.mStatusBarTextStyle, customSdkMonitor == null ? 0 : customSdkMonitor.mStatusBarTextSize, customSdkMonitor != null ? customSdkMonitor.mStatusBarTextWidth : 0);
+        KnoxStatusBarControlModel knoxStatusBarControlModel = new KnoxStatusBarControlModel(zIsStatusBarHidden, customSdkMonitor != null && customSdkMonitor.mStatusBarIconsState, customSdkMonitor == null ? null : customSdkMonitor.mStatusBarText, customSdkMonitor == null ? 0 : customSdkMonitor.mStatusBarTextStyle, customSdkMonitor == null ? 0 : customSdkMonitor.mStatusBarTextSize, customSdkMonitor != null ? customSdkMonitor.mStatusBarTextWidth : 0);
         this.knoxStatusBarControlModel = knoxStatusBarControlModel;
         this.knoxStatusBarState = FlowKt.stateIn(FlowKt.callbackFlow(new KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), knoxStatusBarControlModel);
     }

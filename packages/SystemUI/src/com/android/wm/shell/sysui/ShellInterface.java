@@ -6,7 +6,6 @@ import android.os.Bundle;
 import java.io.PrintWriter;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface ShellInterface {
     default boolean handleCommand(PrintWriter printWriter, String[] strArr) {
@@ -17,6 +16,9 @@ public interface ShellInterface {
     }
 
     default void dump(PrintWriter printWriter) {
+    }
+
+    default void onBeforeUserSwitching(int i) {
     }
 
     default void onConfigurationChanged(Configuration configuration) {

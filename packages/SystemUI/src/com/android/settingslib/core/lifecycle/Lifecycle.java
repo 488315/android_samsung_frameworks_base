@@ -12,12 +12,10 @@ import com.android.settingslib.wifi.WifiTracker;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Lifecycle extends LifecycleRegistry {
     public final List mObservers;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.settingslib.core.lifecycle.Lifecycle$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$androidx$lifecycle$Lifecycle$Event;
@@ -56,7 +54,6 @@ public class Lifecycle extends LifecycleRegistry {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LifecycleProxy implements LifecycleObserver {
         public /* synthetic */ LifecycleProxy(Lifecycle lifecycle, int i) {
             this();

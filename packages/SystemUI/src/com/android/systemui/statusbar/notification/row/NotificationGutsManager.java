@@ -86,7 +86,6 @@ import java.util.Optional;
 import java.util.StringTokenizer;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationGutsManager implements NotifGutsViewManager, CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -140,11 +139,13 @@ public class NotificationGutsManager implements NotifGutsViewManager, CoreStarta
         public final void onChanged(Uri uri) {
             NotificationGutsManager notificationGutsManager = NotificationGutsManager.this;
             notificationGutsManager.mFavoriteSectionSettingsLists = Settings.Secure.getStringForUser(notificationGutsManager.mContext.getContentResolver(), SettingsHelper.INDEX_SECURE_NOTIFICATION_PANEL_SHOW_FAVORITE_APP_NOTIFICATIONS, ((NotificationLockscreenUserManagerImpl) notificationGutsManager.mLockscreenUserManager).mCurrentUserId);
-            notificationGutsManager.mInvalidateListener.onUpdateNotifStack();
+            FavoriteNotifCoordnator favoriteNotifCoordnator = notificationGutsManager.mInvalidateListener;
+            if (favoriteNotifCoordnator != null) {
+                favoriteNotifCoordnator.onUpdateNotifStack();
+            }
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.row.NotificationGutsManager$1, reason: invalid class name */
     public class AnonymousClass1 implements View.OnClickListener {
         public final /* synthetic */ StatusBarNotification val$sbn;
@@ -366,25 +367,25 @@ public class NotificationGutsManager implements NotifGutsViewManager, CoreStarta
             onClickListener = new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.PartialConversationInfo$$ExternalSyntheticLambda2
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    PartialConversationInfo partialConversationInfo2 = PartialConversationInfo.this;
+                    PartialConversationInfo partialConversationInfo2 = partialConversationInfo;
                     partialConversationInfo2.mOnSettingsClickListener.onClick(partialConversationInfo2.mNotificationChannel, i3);
                 }
             };
         }
-        View findViewById = partialConversationInfo.findViewById(R.id.info);
-        findViewById.setOnClickListener(onClickListener);
-        findViewById.setVisibility(findViewById.hasOnClickListeners() ? 0 : 8);
+        View viewFindViewById = partialConversationInfo.findViewById(R.id.info);
+        viewFindViewById.setOnClickListener(onClickListener);
+        viewFindViewById.setVisibility(viewFindViewById.hasOnClickListeners() ? 0 : 8);
         partialConversationInfo.findViewById(R.id.settings_link).setOnClickListener(onClickListener);
         ((TextView) partialConversationInfo.findViewById(R.id.non_configurable_text)).setText(partialConversationInfo.getResources().getString(R.string.no_shortcut, partialConversationInfo.mAppName));
-        View findViewById2 = partialConversationInfo.findViewById(R.id.turn_off_notifications);
-        findViewById2.setOnClickListener(new PartialConversationInfo$$ExternalSyntheticLambda0(partialConversationInfo, 1));
-        if (findViewById2.hasOnClickListeners() && !partialConversationInfo.mIsNonBlockable) {
+        View viewFindViewById2 = partialConversationInfo.findViewById(R.id.turn_off_notifications);
+        viewFindViewById2.setOnClickListener(new PartialConversationInfo$$ExternalSyntheticLambda0(partialConversationInfo, 1));
+        if (viewFindViewById2.hasOnClickListeners() && !partialConversationInfo.mIsNonBlockable) {
             i2 = 0;
         }
-        findViewById2.setVisibility(i2);
-        View findViewById3 = partialConversationInfo.findViewById(R.id.done);
-        findViewById3.setOnClickListener(partialConversationInfo.mOnDone);
-        findViewById3.setAccessibilityDelegate(partialConversationInfo.mGutsContainer.getAccessibilityDelegate());
+        viewFindViewById2.setVisibility(i2);
+        View viewFindViewById3 = partialConversationInfo.findViewById(R.id.done);
+        viewFindViewById3.setOnClickListener(partialConversationInfo.mOnDone);
+        viewFindViewById3.setAccessibilityDelegate(partialConversationInfo.mGutsContainer.getAccessibilityDelegate());
     }
 
     public final void initializeSnoozeView(ExpandableNotificationRow expandableNotificationRow, StatusBarNotification statusBarNotification, NotificationListenerService.Ranking ranking, NotificationSnooze notificationSnooze) {
@@ -395,8 +396,8 @@ public class NotificationGutsManager implements NotifGutsViewManager, CoreStarta
         if (snoozeCriteria != null) {
             notificationSnooze.mSnoozeOptions.clear();
             notificationSnooze.mSnoozeOptions = notificationSnooze.getDefaultSnoozeOptions();
-            int min = Math.min(1, snoozeCriteria.size());
-            for (int i = 0; i < min; i++) {
+            int iMin = Math.min(1, snoozeCriteria.size());
+            for (int i = 0; i < iMin; i++) {
                 SnoozeCriterion snoozeCriterion = (SnoozeCriterion) snoozeCriteria.get(i);
                 notificationSnooze.mSnoozeOptions.add(new NotificationSnooze.NotificationSnoozeOption(notificationSnooze, snoozeCriterion, 0, snoozeCriterion.getExplanation(), snoozeCriterion.getConfirmation(), new AccessibilityNodeInfo.AccessibilityAction(R.id.action_snooze_assistant_suggestion_1, snoozeCriterion.getExplanation())));
             }
@@ -494,18 +495,18 @@ public class NotificationGutsManager implements NotifGutsViewManager, CoreStarta
                             View view2 = (View) notificationGuts3.getParent();
                             if (view2 instanceof ExpandableNotificationRow) {
                                 ExpandableNotificationRow expandableNotificationRow3 = (ExpandableNotificationRow) view2;
-                                View contentView = expandableNotificationRow3.mIsSummaryWithChildren ? expandableNotificationRow3.getContentView() : expandableNotificationRow3.mEntry.isOngoingActivity() ? expandableNotificationRow3.getContentView().findViewById(R.id.ongoing_activity_expand_custom_content) : expandableNotificationRow3.getContentView().findViewById(16909884);
+                                View contentView = expandableNotificationRow3.mIsSummaryWithChildren ? expandableNotificationRow3.getContentView() : expandableNotificationRow3.mEntry.isOngoingActivity() ? expandableNotificationRow3.getContentView().findViewById(R.id.ongoing_activity_expand_custom_content) : expandableNotificationRow3.getContentView().findViewById(16909885);
                                 if (contentView != null) {
                                     contentView.setAlpha(0.0f);
                                 }
                             }
-                            float hypot = (float) Math.hypot(Math.max(notificationGuts3.getWidth() - i3, i3), Math.max(notificationGuts3.getHeight() - i4, i4));
+                            float fHypot = (float) Math.hypot(Math.max(notificationGuts3.getWidth() - i3, i3), Math.max(notificationGuts3.getHeight() - i4, i4));
                             notificationGuts3.setAlpha(1.0f);
-                            Animator createCircularReveal = ViewAnimationUtils.createCircularReveal(notificationGuts3, i3, i4, 0.0f, hypot);
-                            createCircularReveal.setDuration(360L);
-                            createCircularReveal.setInterpolator(Interpolators.LINEAR_OUT_SLOW_IN);
-                            createCircularReveal.addListener(new NotificationGuts.AnimateOpenListener(notificationGutsManager$$ExternalSyntheticLambda8));
-                            createCircularReveal.start();
+                            Animator animatorCreateCircularReveal = ViewAnimationUtils.createCircularReveal(notificationGuts3, i3, i4, 0.0f, fHypot);
+                            animatorCreateCircularReveal.setDuration(360L);
+                            animatorCreateCircularReveal.setInterpolator(Interpolators.LINEAR_OUT_SLOW_IN);
+                            animatorCreateCircularReveal.addListener(new NotificationGuts.AnimateOpenListener(notificationGutsManager$$ExternalSyntheticLambda8));
+                            animatorCreateCircularReveal.start();
                         } else {
                             Log.w("NotificationGuts", "Failed to animate guts open");
                         }
@@ -549,10 +550,10 @@ public class NotificationGutsManager implements NotifGutsViewManager, CoreStarta
         this.mJavaAdapter.alwaysCollectFlow(this.mWindowRootViewVisibilityInteractor.isLockscreenOrShadeVisible, new Consumer() { // from class: com.android.systemui.statusbar.notification.row.NotificationGutsManager$$ExternalSyntheticLambda11
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                NotificationGutsManager notificationGutsManager = NotificationGutsManager.this;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                NotificationGutsManager notificationGutsManager = this.f$0;
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 int i = NotificationGutsManager.$r8$clinit;
-                if (booleanValue) {
+                if (zBooleanValue) {
                     notificationGutsManager.getClass();
                 } else {
                     notificationGutsManager.closeAndSaveGuts(true, true, true, true);

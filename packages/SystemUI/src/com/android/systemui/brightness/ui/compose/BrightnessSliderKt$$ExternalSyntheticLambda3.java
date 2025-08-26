@@ -16,7 +16,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class BrightnessSliderKt$$ExternalSyntheticLambda3 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -36,7 +35,7 @@ public final /* synthetic */ class BrightnessSliderKt$$ExternalSyntheticLambda3 
             case 0:
                 PolicyRestriction policyRestriction = (PolicyRestriction) this.f$0;
                 if (policyRestriction instanceof PolicyRestriction.Restricted) {
-                    ((Function1) this.f$1).mo779invoke(policyRestriction);
+                    ((Function1) this.f$1).mo781invoke(policyRestriction);
                 }
                 break;
             default:
@@ -45,8 +44,8 @@ public final /* synthetic */ class BrightnessSliderKt$$ExternalSyntheticLambda3 
                 View view2 = brightnessWarningToast.toastView;
                 if ((view2 == null || !view2.isAttachedToWindow()) && ((view = brightnessWarningToast.toastView) == null || !view.isAttachedToWindow())) {
                     Resources resources = context.getResources();
-                    final SystemUIToast createToast = brightnessWarningToast.toastFactory.createToast(context, context, resources.getString(R.string.quick_settings_brightness_unable_adjust_msg), context.getPackageName(), context.getUserId(), resources.getConfiguration().orientation);
-                    brightnessWarningToast.toastView = createToast.mToastView;
+                    final SystemUIToast systemUIToastCreateToast = brightnessWarningToast.toastFactory.createToast(context, context, resources.getString(R.string.quick_settings_brightness_unable_adjust_msg), context.getPackageName(), context.getUserId(), resources.getConfiguration().orientation);
+                    brightnessWarningToast.toastView = systemUIToastCreateToast.mToastView;
                     WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
                     layoutParams.height = -2;
                     layoutParams.width = -2;
@@ -54,8 +53,8 @@ public final /* synthetic */ class BrightnessSliderKt$$ExternalSyntheticLambda3 
                     layoutParams.setTitle("Brightness warning toast");
                     layoutParams.type = 2017;
                     layoutParams.flags = 152;
-                    layoutParams.y = createToast.getYOffset().intValue();
-                    int absoluteGravity = Gravity.getAbsoluteGravity(createToast.getGravity().intValue(), resources.getConfiguration().getLayoutDirection());
+                    layoutParams.y = systemUIToastCreateToast.getYOffset().intValue();
+                    int absoluteGravity = Gravity.getAbsoluteGravity(systemUIToastCreateToast.getGravity().intValue(), resources.getConfiguration().getLayoutDirection());
                     layoutParams.gravity = absoluteGravity;
                     if ((absoluteGravity & 7) == 7) {
                         layoutParams.horizontalWeight = 1.0f;
@@ -64,7 +63,7 @@ public final /* synthetic */ class BrightnessSliderKt$$ExternalSyntheticLambda3 
                         layoutParams.verticalWeight = 1.0f;
                     }
                     brightnessWarningToast.windowManager.addView(brightnessWarningToast.toastView, layoutParams);
-                    Animator animator = createToast.mInAnimator;
+                    Animator animator = systemUIToastCreateToast.mInAnimator;
                     if (animator != null) {
                         animator.start();
                     }
@@ -73,19 +72,19 @@ public final /* synthetic */ class BrightnessSliderKt$$ExternalSyntheticLambda3 
                         view3.postDelayed(new Runnable() { // from class: com.android.systemui.settings.brightness.ui.BrightnessWarningToast$show$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                Animator animator2 = SystemUIToast.this.mOutAnimator;
+                                Animator animator2 = systemUIToastCreateToast.mOutAnimator;
                                 if (animator2 != null) {
                                     animator2.start();
                                     final BrightnessWarningToast brightnessWarningToast2 = brightnessWarningToast;
                                     animator2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.settings.brightness.ui.BrightnessWarningToast$show$1.1
                                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                                         public final void onAnimationEnd(Animator animator3) {
-                                            View view4 = BrightnessWarningToast.this.toastView;
+                                            View view4 = brightnessWarningToast2.toastView;
                                             if (view4 != null && view4.isAttachedToWindow()) {
-                                                BrightnessWarningToast brightnessWarningToast3 = BrightnessWarningToast.this;
+                                                BrightnessWarningToast brightnessWarningToast3 = brightnessWarningToast2;
                                                 brightnessWarningToast3.windowManager.removeViewImmediate(brightnessWarningToast3.toastView);
                                             }
-                                            BrightnessWarningToast.this.toastView = null;
+                                            brightnessWarningToast2.toastView = null;
                                         }
                                     });
                                 }

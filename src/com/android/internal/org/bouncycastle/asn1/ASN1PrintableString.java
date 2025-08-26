@@ -92,18 +92,18 @@ public abstract class ASN1PrintableString extends ASN1Primitive implements ASN1S
 
     public static boolean isPrintableString(String str) {
         for (int length = str.length() - 1; length >= 0; length--) {
-            char charAt = str.charAt(length);
-            if (charAt > 127) {
+            char cCharAt = str.charAt(length);
+            if (cCharAt > 127) {
                 return false;
             }
-            if (('a' > charAt || charAt > 'z') && (('A' > charAt || charAt > 'Z') && (('0' > charAt || charAt > '9') && charAt != ' ' && charAt != ':' && charAt != '=' && charAt != '?'))) {
-                switch (charAt) {
+            if (('a' > cCharAt || cCharAt > 'z') && (('A' > cCharAt || cCharAt > 'Z') && (('0' > cCharAt || cCharAt > '9') && cCharAt != ' ' && cCharAt != ':' && cCharAt != '=' && cCharAt != '?'))) {
+                switch (cCharAt) {
                     case '\'':
                     case '(':
                     case ')':
                         continue;
                     default:
-                        switch (charAt) {
+                        switch (cCharAt) {
                             case '+':
                             case ',':
                             case '-':

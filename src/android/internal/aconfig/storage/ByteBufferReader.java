@@ -32,12 +32,12 @@ public class ByteBufferReader {
     }
 
     public String readString() {
-        int readInt = readInt();
-        if (readInt > 1024) {
-            throw new AconfigStorageException("String length exceeds maximum allowed size (1024 bytes): " + readInt);
+        int i = readInt();
+        if (i > 1024) {
+            throw new AconfigStorageException("String length exceeds maximum allowed size (1024 bytes): " + i);
         }
-        byte[] bArr = new byte[readInt];
-        getArray(nextGetIndex(readInt), bArr, 0, readInt);
+        byte[] bArr = new byte[i];
+        getArray(nextGetIndex(i), bArr, 0, i);
         return new String(bArr, StandardCharsets.UTF_8);
     }
 

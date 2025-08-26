@@ -19,7 +19,6 @@ import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PolicyClient implements AsyncTaskClient {
     public final API api;
@@ -35,7 +34,7 @@ public class PolicyClient implements AsyncTaskClient {
         this.callback = callback;
     }
 
-    public final void cleanUp(BufferedReader bufferedReader) {
+    public final void cleanUp(BufferedReader bufferedReader) throws IOException {
         if (bufferedReader != null) {
             try {
                 bufferedReader.close();
@@ -50,10 +49,11 @@ public class PolicyClient implements AsyncTaskClient {
     }
 
     @Override // com.sec.android.diagmonagent.common.util.executor.AsyncTaskClient
-    public final int onFinish() {
+    public final int onFinish() throws Throwable {
         int i;
+        BufferedReader bufferedReader;
         Callback callback;
-        BufferedReader bufferedReader = null;
+        BufferedReader bufferedReader2 = null;
         try {
             try {
                 if (this.conn.getResponseCode() != 200) {
@@ -62,49 +62,49 @@ public class PolicyClient implements AsyncTaskClient {
                 } else {
                     i = 0;
                 }
-                BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(this.conn.getInputStream()));
-                try {
-                    String readLine = bufferedReader2.readLine();
-                    Debug.LogENG(readLine);
-                    JSONObject jSONObject = new JSONObject(readLine);
-                    int i2 = jSONObject.getInt("rc");
-                    if (i2 == 1000) {
-                        Debug.LogD("GetPolicyClient", "Get Policy Success");
-                        if (TextUtils.isEmpty(this.pref.getString("lgt", "")) && (callback = this.callback) != null && jSONObject.getString("lgt").equals("rtb")) {
-                            callback.onResult(Boolean.TRUE);
-                        }
-                        save(jSONObject);
-                    } else if (i2 == 1201) {
-                        Debug.LogD("GetPolicyClient", "Result code : 1201, quota should be changed to zero");
-                        this.pref.edit().putInt("oq-3g", 0).putInt("dq-3g", 0).putInt("oq-w", 0).putInt("dq-w", 0).putLong("policy_received_date", System.currentTimeMillis()).apply();
-                    } else {
-                        Debug.logwingE("Fail to get Policy; Invalid Message. Result code : " + i2);
-                        i = -61;
-                    }
-                    cleanUp(bufferedReader2);
-                } catch (Exception unused) {
-                    bufferedReader = bufferedReader2;
-                    Debug.LogE("Fail to get Policy");
-                    cleanUp(bufferedReader);
-                    i = -61;
-                    boolean isEmpty = TextUtils.isEmpty(this.pref.getString("dom", ""));
-                    if (i == -61) {
-                        this.pref.edit().putLong("policy_received_date", System.currentTimeMillis()).apply();
-                    }
-                    return i;
-                } catch (Throwable th) {
-                    th = th;
-                    bufferedReader = bufferedReader2;
-                    cleanUp(bufferedReader);
-                    throw th;
-                }
-            } catch (Throwable th2) {
-                th = th2;
+                bufferedReader = new BufferedReader(new InputStreamReader(this.conn.getInputStream()));
+            } catch (Exception unused) {
             }
-        } catch (Exception unused2) {
+        } catch (Throwable th) {
+            th = th;
         }
-        boolean isEmpty2 = TextUtils.isEmpty(this.pref.getString("dom", ""));
-        if (i == -61 && !isEmpty2) {
+        try {
+            String line = bufferedReader.readLine();
+            Debug.LogENG(line);
+            JSONObject jSONObject = new JSONObject(line);
+            int i2 = jSONObject.getInt("rc");
+            if (i2 == 1000) {
+                Debug.LogD("GetPolicyClient", "Get Policy Success");
+                if (TextUtils.isEmpty(this.pref.getString("lgt", "")) && (callback = this.callback) != null && jSONObject.getString("lgt").equals("rtb")) {
+                    callback.onResult(Boolean.TRUE);
+                }
+                save(jSONObject);
+            } else if (i2 == 1201) {
+                Debug.LogD("GetPolicyClient", "Result code : 1201, quota should be changed to zero");
+                this.pref.edit().putInt("oq-3g", 0).putInt("dq-3g", 0).putInt("oq-w", 0).putInt("dq-w", 0).putLong("policy_received_date", System.currentTimeMillis()).apply();
+            } else {
+                Debug.logwingE("Fail to get Policy; Invalid Message. Result code : " + i2);
+                i = -61;
+            }
+            cleanUp(bufferedReader);
+        } catch (Exception unused2) {
+            bufferedReader2 = bufferedReader;
+            Debug.LogE("Fail to get Policy");
+            cleanUp(bufferedReader2);
+            i = -61;
+            boolean zIsEmpty = TextUtils.isEmpty(this.pref.getString("dom", ""));
+            if (i == -61) {
+                this.pref.edit().putLong("policy_received_date", System.currentTimeMillis()).apply();
+            }
+            return i;
+        } catch (Throwable th2) {
+            th = th2;
+            bufferedReader2 = bufferedReader;
+            cleanUp(bufferedReader2);
+            throw th;
+        }
+        boolean zIsEmpty2 = TextUtils.isEmpty(this.pref.getString("dom", ""));
+        if (i == -61 && !zIsEmpty2) {
             this.pref.edit().putLong("policy_received_date", System.currentTimeMillis()).apply();
         }
         return i;
@@ -114,11 +114,11 @@ public class PolicyClient implements AsyncTaskClient {
     public final void run() {
         API api = this.api;
         try {
-            Uri.Builder buildUpon = Uri.parse(api.getUrl()).buildUpon();
+            Uri.Builder builderBuildUpon = Uri.parse(api.getUrl()).buildUpon();
             for (String str : this.qParams.keySet()) {
-                buildUpon.appendQueryParameter(str, (String) this.qParams.get(str));
+                builderBuildUpon.appendQueryParameter(str, (String) this.qParams.get(str));
             }
-            HttpsURLConnection httpsURLConnection = (HttpsURLConnection) new URL(buildUpon.build().toString()).openConnection();
+            HttpsURLConnection httpsURLConnection = (HttpsURLConnection) new URL(builderBuildUpon.build().toString()).openConnection();
             this.conn = httpsURLConnection;
             httpsURLConnection.setSSLSocketFactory(CertificateManager.Singleton.instance.sslContext.getSocketFactory());
             this.conn.setRequestMethod(api.getMethod());

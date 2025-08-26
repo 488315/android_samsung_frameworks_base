@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class GridContent extends SliceContent {
     public boolean mAllImages;
@@ -29,7 +28,6 @@ public class GridContent extends SliceContent {
     public final SliceItem mSeeMoreItem;
     public SliceItem mTitleItem;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CellContent {
         public final ArrayList mCellItems;
         public SliceItem mContentDescr;
@@ -44,7 +42,7 @@ public class GridContent extends SliceContent {
         public final SliceItem mToggleItem;
 
         public CellContent(SliceItem sliceItem) {
-            List list;
+            List listAsList;
             ArrayList arrayList = new ArrayList();
             this.mCellItems = arrayList;
             this.mImageMode = -1;
@@ -55,21 +53,21 @@ public class GridContent extends SliceContent {
                     arrayList.add(sliceItem);
                 }
             } else {
-                List asList = Arrays.asList(sliceItem.getSlice().mItems);
-                Iterator it = asList.iterator();
+                List listAsList2 = Arrays.asList(sliceItem.getSlice().mItems);
+                Iterator it = listAsList2.iterator();
                 while (true) {
                     if (!it.hasNext()) {
-                        list = null;
+                        listAsList = null;
                         break;
                     }
                     SliceItem sliceItem2 = (SliceItem) it.next();
                     if ("action".equals(sliceItem2.mFormat) || "slice".equals(sliceItem2.mFormat)) {
                         if (!"date_picker".equals(sliceItem2.mSubType) && !"time_picker".equals(sliceItem2.mSubType)) {
-                            list = Arrays.asList(sliceItem2.getSlice().mItems);
+                            listAsList = Arrays.asList(sliceItem2.getSlice().mItems);
                             if (new SliceActionImpl(sliceItem2).isToggle()) {
                                 this.mToggleItem = sliceItem2;
                             } else {
-                                this.mContentIntent = (SliceItem) asList.get(0);
+                                this.mContentIntent = (SliceItem) listAsList2.get(0);
                             }
                         }
                     }
@@ -79,9 +77,9 @@ public class GridContent extends SliceContent {
                 }
                 this.mTextCount = 0;
                 this.mImageCount = 0;
-                fillCellItems(asList);
-                if (this.mTextCount == 0 && this.mImageCount == 0 && list != null) {
-                    fillCellItems(list);
+                fillCellItems(listAsList2);
+                if (this.mTextCount == 0 && this.mImageCount == 0 && listAsList != null) {
+                    fillCellItems(listAsList);
                 }
             }
             if (this.mPicker != null || this.mCellItems.size() <= 0) {
@@ -120,24 +118,24 @@ public class GridContent extends SliceContent {
     }
 
     public GridContent(SliceItem sliceItem, int i) {
+        List listAsList;
         super(sliceItem, i);
-        List asList;
         this.mGridContent = new ArrayList();
         this.mLargestImageMode = 5;
         this.mFirstImage = null;
         this.mFirstImageSize = null;
-        SliceItem find = SliceQuery.find(sliceItem, (String) null, "see_more");
-        this.mSeeMoreItem = find;
-        if (find != null && "slice".equals(find.mFormat) && (asList = Arrays.asList(this.mSeeMoreItem.getSlice().mItems)) != null && asList.size() > 0) {
-            this.mSeeMoreItem = (SliceItem) asList.get(0);
+        SliceItem sliceItemFind = SliceQuery.find(sliceItem, (String) null, "see_more");
+        this.mSeeMoreItem = sliceItemFind;
+        if (sliceItemFind != null && "slice".equals(sliceItemFind.mFormat) && (listAsList = Arrays.asList(this.mSeeMoreItem.getSlice().mItems)) != null && listAsList.size() > 0) {
+            this.mSeeMoreItem = (SliceItem) listAsList.get(0);
         }
         this.mPrimaryAction = SliceQuery.find(sliceItem, "slice", new String[]{"shortcut", UniversalCredentialUtil.AGENT_TITLE}, new String[]{SystemUIAnalytics.QPNE_VID_ACTIONS});
         this.mAllImages = true;
         if ("slice".equals(sliceItem.mFormat)) {
-            List asList2 = Arrays.asList(sliceItem.getSlice().mItems);
+            List listAsList2 = Arrays.asList(sliceItem.getSlice().mItems);
             ArrayList arrayList = new ArrayList();
-            for (int i2 = 0; i2 < asList2.size(); i2++) {
-                SliceItem sliceItem2 = (SliceItem) asList2.get(i2);
+            for (int i2 = 0; i2 < listAsList2.size(); i2++) {
+                SliceItem sliceItem2 = (SliceItem) listAsList2.get(i2);
                 boolean z = SliceQuery.find(sliceItem2, (String) null, "see_more") != null || sliceItem2.hasAnyHints("shortcut", "see_more", "keywords", "ttl", "last_updated", "overlay");
                 if ("content_description".equals(sliceItem2.mSubType)) {
                     this.mContentDescr = sliceItem2;
@@ -163,8 +161,8 @@ public class GridContent extends SliceContent {
             return new Point(-1, -1);
         }
         if (this.mFirstImageSize == null) {
-            Drawable loadDrawable = iconCompat.loadDrawable(context);
-            this.mFirstImageSize = new Point(loadDrawable.getIntrinsicWidth(), loadDrawable.getIntrinsicHeight());
+            Drawable drawableLoadDrawable = iconCompat.loadDrawable(context);
+            this.mFirstImageSize = new Point(drawableLoadDrawable.getIntrinsicWidth(), drawableLoadDrawable.getIntrinsicHeight());
         }
         return this.mFirstImageSize;
     }

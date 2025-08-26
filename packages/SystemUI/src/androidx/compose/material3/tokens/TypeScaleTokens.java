@@ -5,7 +5,6 @@ import androidx.compose.ui.text.font.GenericFontFamily;
 import androidx.compose.ui.unit.TextUnit;
 import androidx.compose.ui.unit.TextUnitKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TypeScaleTokens {
     public static final GenericFontFamily BodyLargeEmphasizedFont;
@@ -191,8 +190,8 @@ public final class TypeScaleTokens {
         DisplayLargeLineHeight = TextUnitKt.getSp(64.0d);
         DisplayLargeSize = TextUnitKt.getSp(57);
         long sp = TextUnitKt.getSp(0.2d);
-        TextUnitKt.m871checkArithmeticR2X_6o(sp);
-        DisplayLargeTracking = TextUnitKt.pack(-TextUnit.m868getValueimpl(sp), sp & 1095216660480L);
+        TextUnitKt.m873checkArithmeticR2X_6o(sp);
+        DisplayLargeTracking = TextUnitKt.pack(-TextUnit.m870getValueimpl(sp), sp & 1095216660480L);
         typefaceTokens.getClass();
         DisplayLargeWeight = fontWeight;
         typefaceTokens.getClass();

@@ -7,7 +7,6 @@ import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MediaOutputDevice implements Parcelable {
     public static final Parcelable.Creator<MediaOutputDevice> CREATOR = new Creator();
@@ -15,7 +14,6 @@ public final class MediaOutputDevice implements Parcelable {
     public final String deviceName;
     public final String iconUrl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -51,9 +49,9 @@ public final class MediaOutputDevice implements Parcelable {
     }
 
     public final int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.deviceId.hashCode() * 31, 31, this.deviceName);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.deviceId.hashCode() * 31, 31, this.deviceName);
         String str = this.iconUrl;
-        return m + (str == null ? 0 : str.hashCode());
+        return iM + (str == null ? 0 : str.hashCode());
     }
 
     public final String toString() {

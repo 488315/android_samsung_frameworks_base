@@ -1,7 +1,6 @@
 package com.android.systemui.util.settings.repository;
 
 import android.content.pm.UserInfo;
-import com.android.systemui.util.settings.UserSettingsProxy;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -13,7 +12,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserAwareSettingsRepository$intSetting$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ int $defaultValue$inlined;
@@ -38,7 +36,6 @@ public final class UserAwareSettingsRepository$intSetting$$inlined$flatMapLatest
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow flow;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -49,12 +46,10 @@ public final class UserAwareSettingsRepository$intSetting$$inlined$flatMapLatest
             final String str = this.$name$inlined;
             int i2 = userInfo.id;
             final int i3 = this.$defaultValue$inlined;
-            flow = userAwareSettingsRepository.settingObserver(str, i2, new Function0() { // from class: com.android.systemui.util.settings.repository.UserAwareSettingsRepository$intSetting$1$1
+            Flow flow = userAwareSettingsRepository.settingObserver(str, i2, new Function0() { // from class: com.android.systemui.util.settings.repository.UserAwareSettingsRepository$intSetting$1$1
                 @Override // kotlin.jvm.functions.Function0
                 public final Integer invoke() {
-                    UserSettingsProxy userSettingsProxy;
-                    userSettingsProxy = UserAwareSettingsRepository.this.userSettings;
-                    return Integer.valueOf(userSettingsProxy.getIntForUser(str, i3, userInfo.id));
+                    return Integer.valueOf(userAwareSettingsRepository.userSettings.getIntForUser(str, i3, userInfo.id));
                 }
             });
             this.label = 1;

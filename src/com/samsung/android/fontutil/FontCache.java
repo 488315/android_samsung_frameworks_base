@@ -15,9 +15,9 @@ public class FontCache {
             return typeface;
         }
         try {
-            Typeface createFromAsset = Typeface.createFromAsset(assetManager, str);
-            hashtable.put(str, createFromAsset);
-            return createFromAsset;
+            Typeface typefaceCreateFromAsset = Typeface.createFromAsset(assetManager, str);
+            hashtable.put(str, typefaceCreateFromAsset);
+            return typefaceCreateFromAsset;
         } catch (Exception unused) {
             return null;
         }

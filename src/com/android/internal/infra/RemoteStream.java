@@ -42,9 +42,9 @@ public abstract class RemoteStream<RES, IOSTREAM extends Closeable> extends Andr
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] bArr = new byte[16384];
         while (true) {
-            int read = inputStream.read(bArr);
-            if (read != -1) {
-                byteArrayOutputStream.write(bArr, 0, read);
+            int i = inputStream.read(bArr);
+            if (i != -1) {
+                byteArrayOutputStream.write(bArr, 0, i);
             } else {
                 return byteArrayOutputStream.toByteArray();
             }
@@ -65,7 +65,7 @@ public abstract class RemoteStream<RES, IOSTREAM extends Closeable> extends Andr
         return sendBytes(throwingConsumer, new FunctionalUtils.ThrowingFunction() { // from class: com.android.internal.infra.RemoteStream$$ExternalSyntheticLambda2
             @Override // com.android.internal.util.FunctionalUtils.ThrowingFunction
             public final Object applyOrThrow(Object obj) {
-                return RemoteStream.lambda$sendBytes$0(FunctionalUtils.ThrowingConsumer.this, (OutputStream) obj);
+                return RemoteStream.lambda$sendBytes$0(throwingConsumer2, (OutputStream) obj);
             }
         });
     }
@@ -92,14 +92,14 @@ public abstract class RemoteStream<RES, IOSTREAM extends Closeable> extends Andr
     private RemoteStream(FunctionalUtils.ThrowingConsumer<ParcelFileDescriptor> throwingConsumer, FunctionalUtils.ThrowingFunction<IOSTREAM, RES> throwingFunction, Executor executor, boolean z) {
         this.mHandleStream = throwingFunction;
         try {
-            ParcelFileDescriptor[] createPipe = ParcelFileDescriptor.createPipe();
-            ParcelFileDescriptor parcelFileDescriptor = createPipe[z ? 1 : 0];
+            ParcelFileDescriptor[] parcelFileDescriptorArrCreatePipe = ParcelFileDescriptor.createPipe();
+            ParcelFileDescriptor parcelFileDescriptor = parcelFileDescriptorArrCreatePipe[z ? 1 : 0];
             try {
                 throwingConsumer.acceptOrThrow(parcelFileDescriptor);
                 if (parcelFileDescriptor != null) {
                     parcelFileDescriptor.close();
                 }
-                this.mLocalPipe = createPipe[!z ? 1 : 0];
+                this.mLocalPipe = parcelFileDescriptorArrCreatePipe[!z ? 1 : 0];
                 executor.execute(this);
                 orTimeout(30L, TimeUnit.SECONDS);
             } finally {
@@ -112,11 +112,11 @@ public abstract class RemoteStream<RES, IOSTREAM extends Closeable> extends Andr
     @Override // java.lang.Runnable
     public void run() {
         try {
-            IOSTREAM createStream = createStream(this.mLocalPipe);
+            Closeable closeableCreateStream = createStream(this.mLocalPipe);
             try {
-                complete(this.mHandleStream.applyOrThrow(createStream));
-                if (createStream != null) {
-                    createStream.close();
+                complete(this.mHandleStream.applyOrThrow(closeableCreateStream));
+                if (closeableCreateStream != null) {
+                    closeableCreateStream.close();
                 }
             } finally {
             }

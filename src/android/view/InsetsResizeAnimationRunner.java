@@ -123,9 +123,9 @@ public class InsetsResizeAnimationRunner implements InsetsAnimationControlRunner
         if (CoreRune.FW_MINIMIZED_IME_INSET_ANIM && (WindowInsets.Type.ime() & i) != 0 && (control = insetsController.getImeSourceConsumer().getControl()) != null) {
             this.mImeSourceControl = new InsetsSourceControl(control);
         }
-        Insets calculateInsets = insetsState.calculateInsets(rect, i, false);
-        Insets calculateInsets2 = insetsState2.calculateInsets(rect, i, false);
-        insetsAnimationControlCallbacks.startAnimation(this, this, i, windowInsetsAnimation, new WindowInsetsAnimation.Bounds(Insets.min(calculateInsets, calculateInsets2), Insets.max(calculateInsets, calculateInsets2)));
+        Insets insetsCalculateInsets = insetsState.calculateInsets(rect, i, false);
+        Insets insetsCalculateInsets2 = insetsState2.calculateInsets(rect, i, false);
+        insetsAnimationControlCallbacks.startAnimation(this, this, i, windowInsetsAnimation, new WindowInsetsAnimation.Bounds(Insets.min(insetsCalculateInsets, insetsCalculateInsets2), Insets.max(insetsCalculateInsets, insetsCalculateInsets2)));
     }
 
     @Override // android.view.InsetsAnimationControlRunner
@@ -170,13 +170,13 @@ public class InsetsResizeAnimationRunner implements InsetsAnimationControlRunner
         if (this.mCancelled) {
             return;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.mAnimator = ofFloat;
-        ofFloat.setDuration(this.mAnimation.getDurationMillis());
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.mAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setDuration(this.mAnimation.getDurationMillis());
         this.mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.view.InsetsResizeAnimationRunner$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                InsetsResizeAnimationRunner.this.lambda$onReady$0(valueAnimator);
+                this.f$0.lambda$onReady$0(valueAnimator);
             }
         });
         this.mAnimator.addListener(new AnimatorListenerAdapter() { // from class: android.view.InsetsResizeAnimationRunner.1
@@ -240,7 +240,7 @@ public class InsetsResizeAnimationRunner implements InsetsAnimationControlRunner
 
     @Override // android.view.InsetsAnimationControlRunner
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1133871366145L, this.mCancelled);
         protoOutputStream.write(1133871366146L, this.mFinished);
         protoOutputStream.write(1138166333443L, PerfettoProtoLogImpl.NULL_STRING);
@@ -249,7 +249,7 @@ public class InsetsResizeAnimationRunner implements InsetsAnimationControlRunner
         protoOutputStream.write(1133871366150L, true);
         protoOutputStream.write(1108101562375L, 1.0f);
         protoOutputStream.write(1108101562376L, 1.0f);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     @Override // android.view.WindowInsetsAnimationController

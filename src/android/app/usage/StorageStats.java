@@ -135,10 +135,10 @@ public final class StorageStats implements Parcelable {
             if (!Flags.getAppArtManagedBytes() || this.artStatsFetched) {
                 return;
             }
-            StorageStats queryArtManagedStats = IStorageStatsManager.Stub.asInterface(ServiceManager.getService(Context.STORAGE_STATS_SERVICE)).queryArtManagedStats(this.packageName, this.userHandle, this.uid);
-            this.dexoptBytes = queryArtManagedStats.dexoptBytes;
-            this.curProfBytes = queryArtManagedStats.curProfBytes;
-            this.refProfBytes = queryArtManagedStats.refProfBytes;
+            StorageStats storageStatsQueryArtManagedStats = IStorageStatsManager.Stub.asInterface(ServiceManager.getService(Context.STORAGE_STATS_SERVICE)).queryArtManagedStats(this.packageName, this.userHandle, this.uid);
+            this.dexoptBytes = storageStatsQueryArtManagedStats.dexoptBytes;
+            this.curProfBytes = storageStatsQueryArtManagedStats.curProfBytes;
+            this.refProfBytes = storageStatsQueryArtManagedStats.refProfBytes;
             this.artStatsFetched = true;
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to get art stats", e);

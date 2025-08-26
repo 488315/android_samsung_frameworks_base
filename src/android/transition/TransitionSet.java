@@ -40,9 +40,9 @@ public class TransitionSet extends Transition {
         this.mPlayTogether = true;
         this.mStarted = false;
         this.mChangeFlags = 0;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TransitionSet);
-        setOrdering(obtainStyledAttributes.getInt(0, 0));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TransitionSet);
+        setOrdering(typedArrayObtainStyledAttributes.getInt(0, 0));
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public TransitionSet setOrdering(int i) {
@@ -455,25 +455,25 @@ public class TransitionSet extends Transition {
 
     @Override // android.transition.Transition
     String toString(String str) {
-        String transition = super.toString(str);
+        String string = super.toString(str);
         for (int i = 0; i < this.mTransitions.size(); i++) {
             StringBuilder sb = new StringBuilder();
-            sb.append(transition);
+            sb.append(string);
             sb.append(ShaderAssembler.NEWLINE);
             sb.append(this.mTransitions.get(i).toString(str + "  "));
-            transition = sb.toString();
+            string = sb.toString();
         }
-        return transition;
+        return string;
     }
 
     @Override // android.transition.Transition
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public TransitionSet mo5495clone() {
-        TransitionSet transitionSet = (TransitionSet) super.mo5495clone();
+    public TransitionSet mo5502clone() {
+        TransitionSet transitionSet = (TransitionSet) super.mo5502clone();
         transitionSet.mTransitions = new ArrayList<>();
         int size = this.mTransitions.size();
         for (int i = 0; i < size; i++) {
-            transitionSet.addTransitionInternal(this.mTransitions.get(i).mo5495clone());
+            transitionSet.addTransitionInternal(this.mTransitions.get(i).mo5502clone());
         }
         return transitionSet;
     }

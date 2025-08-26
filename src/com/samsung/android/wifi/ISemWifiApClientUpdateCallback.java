@@ -44,9 +44,9 @@ public interface ISemWifiApClientUpdateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemWifiApClientUpdateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemWifiApClientUpdateCallback)) {
-                return (ISemWifiApClientUpdateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemWifiApClientUpdateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemWifiApClientUpdateCallback)) {
+                return (ISemWifiApClientUpdateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface ISemWifiApClientUpdateCallback extends IInterface {
 
             @Override // com.samsung.android.wifi.ISemWifiApClientUpdateCallback
             public void onClientUpdated(SemWifiApClientDetails semWifiApClientDetails) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemWifiApClientUpdateCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(semWifiApClientDetails, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemWifiApClientUpdateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(semWifiApClientDetails, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

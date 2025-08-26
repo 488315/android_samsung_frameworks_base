@@ -3,6 +3,7 @@ package com.android.systemui.statusbar.notification;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.hardware.display.DisplayManager;
@@ -47,7 +48,6 @@ import dagger.Lazy;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent {
     public View mClearCoverHeaderLayout;
@@ -64,7 +64,7 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
             public final void onUpdateCoverState(CoverState coverState) {
                 if (coverState != null) {
                     int type = coverState.getType();
-                    SubscreenDeviceModelCover subscreenDeviceModelCover = SubscreenDeviceModelCover.this;
+                    SubscreenDeviceModelCover subscreenDeviceModelCover = this.this$0;
                     if (type == 17) {
                         subscreenDeviceModelCover.mIsCovered = !coverState.getSwitchState();
                         if (subscreenDeviceModelCover.popupViewShowing) {
@@ -98,7 +98,7 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
             ((KeyguardStateControllerImpl) keyguardStateController).addCallback(new KeyguardStateController.Callback() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelCover$initKeyguardStateConroller$1
                 @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
                 public final void onKeyguardShowingChanged() {
-                    SubscreenDeviceModelCover subscreenDeviceModelCover = SubscreenDeviceModelCover.this;
+                    SubscreenDeviceModelCover subscreenDeviceModelCover = this.this$0;
                     if (subscreenDeviceModelCover.mIsCovered) {
                         subscreenDeviceModelCover.getClass();
                         subscreenDeviceModelCover.clearMainList();
@@ -110,7 +110,7 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
                 if (Intrinsics.areEqual(uri, Settings.Secure.getUriFor(SettingsHelper.INDEX_LOCK_SCREEN_SHOW_NOTIFICATIONS)) || Intrinsics.areEqual(uri, Settings.Secure.getUriFor(SettingsHelper.INDEX_TURN_ON_COVER_SCREEN_FOR_NOTIFICATION)) || Intrinsics.areEqual(uri, Settings.Secure.getUriFor(SettingsHelper.INDEX_COVER_SCREEN_SHOW_NOTIFICATION))) {
-                    SubscreenDeviceModelCover.this.updateNotiShowBlocked();
+                    this.this$0.updateNotiShowBlocked();
                 }
             }
         };
@@ -143,17 +143,17 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
     public final Animator getPopUpViewDismissAnimator(View view) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_Y, 0.0f, this.mTopPopupHeight * (-1));
-        ofFloat.setDuration(400L);
-        ofFloat.addListener(this.topPopupAnimationListener);
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_Y, 0.0f, this.mTopPopupHeight * (-1));
+        objectAnimatorOfFloat.setDuration(400L);
+        objectAnimatorOfFloat.addListener(this.topPopupAnimationListener);
+        return objectAnimatorOfFloat;
     }
 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
     public final Animator getPopUpViewShowAnimator(View view) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_Y, this.mTopPopupHeight * (-1), 0.0f);
-        ofFloat.setDuration(400L);
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_Y, this.mTopPopupHeight * (-1), 0.0f);
+        objectAnimatorOfFloat.setDuration(400L);
+        return objectAnimatorOfFloat;
     }
 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
@@ -194,16 +194,16 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
     public final void initMainHeaderView(LinearLayout linearLayout) {
         LinearLayout linearLayout2;
-        View findViewById = linearLayout.findViewById(R.id.clear_cover_header_layout);
-        this.mClearCoverHeaderLayout = findViewById;
-        if (findViewById == null || (linearLayout2 = (LinearLayout) findViewById.findViewById(R.id.back_key)) == null) {
+        View viewFindViewById = linearLayout.findViewById(R.id.clear_cover_header_layout);
+        this.mClearCoverHeaderLayout = viewFindViewById;
+        if (viewFindViewById == null || (linearLayout2 = (LinearLayout) viewFindViewById.findViewById(R.id.back_key)) == null) {
             return;
         }
         linearLayout2.setContentDescription(linearLayout2.getContext().getString(R.string.subscreen_back_button_content_description));
         linearLayout2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelCover$initMainHeaderView$backButton$1$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SubscreenDeviceModelCover subscreenDeviceModelCover = SubscreenDeviceModelCover.this;
+                SubscreenDeviceModelCover subscreenDeviceModelCover = this.this$0;
                 if (subscreenDeviceModelCover.mMainViewAnimator != null) {
                     return;
                 }
@@ -211,7 +211,7 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
                 subscreenDeviceModelCover.mMainViewAnimator = subscreenSubRoomNotification != null ? subscreenSubRoomNotification.mNotificationAnimatorManager.alphaAnimatedMainView(300L, subscreenSubRoomNotification.mSubscreenMainLayout, new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenDeviceModelCover$initMainHeaderView$backButton$1$1$1$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SubscreenSubRoomNotification subscreenSubRoomNotification2 = SubscreenSubRoomNotification.this;
+                        SubscreenSubRoomNotification subscreenSubRoomNotification2 = subscreenSubRoomNotification;
                         if (subscreenSubRoomNotification2.mIsShownDetail) {
                             subscreenSubRoomNotification2.hideDetailNotification();
                         } else {
@@ -237,7 +237,7 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
     public final void makePopupDetailView(Context context, NotificationEntry notificationEntry, boolean z, FrameLayout frameLayout) {
-        SubscreenNotificationInfo subscreenNotificationInfo;
+        SubscreenNotificationInfo subscreenNotificationInfoCreateItemsData;
         boolean z2;
         int i;
         ExpandableNotificationRow expandableNotificationRow;
@@ -246,9 +246,9 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
         this.mPopUpViewLayout = z ? LayoutInflater.from(context).inflate(R.layout.clear_cover_subscreen_notification_detail_popup_top, frameLayout) : LayoutInflater.from(context).inflate(R.layout.clear_cover_subscreen_notification_detail_popup_full, frameLayout);
         SubscreenSubRoomNotification subscreenSubRoomNotification = this.mSubRoomNotification;
         if (subscreenSubRoomNotification == null || (subscreenNotificationInfoManager = subscreenSubRoomNotification.mNotificationInfoManager) == null) {
-            subscreenNotificationInfo = null;
+            subscreenNotificationInfoCreateItemsData = null;
         } else {
-            subscreenNotificationInfo = subscreenNotificationInfoManager.createItemsData(notificationEntry != null ? notificationEntry.row : null);
+            subscreenNotificationInfoCreateItemsData = subscreenNotificationInfoManager.createItemsData(notificationEntry != null ? notificationEntry.row : null);
         }
         View view = this.mPopUpViewLayout;
         TextView textView = view != null ? (TextView) view.findViewById(R.id.subscreen_notification_title_text) : null;
@@ -266,15 +266,15 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
         if (textView2 != null) {
             textView2.setVisibility(0);
         }
-        boolean z3 = subscreenNotificationInfo != null && subscreenNotificationInfo.mIsMessagingStyle;
-        Drawable drawable = subscreenNotificationInfo != null ? subscreenNotificationInfo.mIcon : null;
-        Icon icon = subscreenNotificationInfo != null ? subscreenNotificationInfo.mConversationIcon : null;
-        Drawable drawable2 = subscreenNotificationInfo != null ? subscreenNotificationInfo.mAppIcon : null;
-        String title = subscreenNotificationInfo != null ? subscreenNotificationInfo.getTitle() : null;
-        String str = subscreenNotificationInfo != null ? subscreenNotificationInfo.mContent : null;
+        boolean z3 = subscreenNotificationInfoCreateItemsData != null && subscreenNotificationInfoCreateItemsData.mIsMessagingStyle;
+        Drawable drawable = subscreenNotificationInfoCreateItemsData != null ? subscreenNotificationInfoCreateItemsData.mIcon : null;
+        Icon icon = subscreenNotificationInfoCreateItemsData != null ? subscreenNotificationInfoCreateItemsData.mConversationIcon : null;
+        Drawable drawable2 = subscreenNotificationInfoCreateItemsData != null ? subscreenNotificationInfoCreateItemsData.mAppIcon : null;
+        String title = subscreenNotificationInfoCreateItemsData != null ? subscreenNotificationInfoCreateItemsData.getTitle() : null;
+        String str = subscreenNotificationInfoCreateItemsData != null ? subscreenNotificationInfoCreateItemsData.mContent : null;
         boolean z4 = (notificationEntry == null || (expandableNotificationRow = notificationEntry.row) == null || !expandableNotificationRow.needsRedaction()) ? false : true;
         if (z4) {
-            title = subscreenNotificationInfo != null ? subscreenNotificationInfo.mAppName : null;
+            title = subscreenNotificationInfoCreateItemsData != null ? subscreenNotificationInfoCreateItemsData.mAppName : null;
             if (textView2 != null) {
                 textView2.setVisibility(8);
             }
@@ -295,14 +295,14 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
                 textView.setText(str);
             }
             if (z6 && textView != null) {
-                textView.setText(subscreenNotificationInfo != null ? subscreenNotificationInfo.mAppName : null);
+                textView.setText(subscreenNotificationInfoCreateItemsData != null ? subscreenNotificationInfoCreateItemsData.mAppName : null);
             }
         }
         if (z6 && textView2 != null) {
             textView2.setVisibility(8);
         }
         if (z4 || z || !z3 || icon == null) {
-            if (drawable2 == null || subscreenNotificationInfo == null || subscreenNotificationInfo.useSmallIcon()) {
+            if (drawable2 == null || subscreenNotificationInfoCreateItemsData == null || subscreenNotificationInfoCreateItemsData.useSmallIcon()) {
                 if (imageView != null) {
                     imageView.setImageDrawable(drawable);
                 }
@@ -330,15 +330,17 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
                 if (imageView4 != null) {
                     imageView4.setVisibility(0);
                 }
-            } else if (imageView4 != null) {
-                i = 8;
-                imageView4.setVisibility(8);
-                SubscreenDeviceModelParent.updateTwoPhoneIcon(imageView2, subscreenNotificationInfo);
-                updateKnoxIcon(imageView3, subscreenNotificationInfo);
+            } else {
+                if (imageView4 != null) {
+                    i = 8;
+                    imageView4.setVisibility(8);
+                }
+                SubscreenDeviceModelParent.updateTwoPhoneIcon(imageView2, subscreenNotificationInfoCreateItemsData);
+                updateKnoxIcon(imageView3, subscreenNotificationInfoCreateItemsData);
             }
             i = 8;
-            SubscreenDeviceModelParent.updateTwoPhoneIcon(imageView2, subscreenNotificationInfo);
-            updateKnoxIcon(imageView3, subscreenNotificationInfo);
+            SubscreenDeviceModelParent.updateTwoPhoneIcon(imageView2, subscreenNotificationInfoCreateItemsData);
+            updateKnoxIcon(imageView3, subscreenNotificationInfoCreateItemsData);
         }
         if (z && textView2 != null) {
             textView2.setVisibility(i);
@@ -357,12 +359,12 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
             this.mSubDisplay = display;
             Context context = this.mContext;
             display.getClass();
-            Context createDisplayContext = context.createDisplayContext(display);
-            this.mDisplayContext = createDisplayContext;
-            if (createDisplayContext == null) {
-                createDisplayContext = null;
+            Context contextCreateDisplayContext = context.createDisplayContext(display);
+            this.mDisplayContext = contextCreateDisplayContext;
+            if (contextCreateDisplayContext == null) {
+                contextCreateDisplayContext = null;
             }
-            this.mWindowManager = (WindowManager) createDisplayContext.getSystemService("window");
+            this.mWindowManager = (WindowManager) contextCreateDisplayContext.getSystemService("window");
             Log.d("S.S.N.", " CC screen - onDisplayReady");
         }
         SubscreenSubRoomNotification subscreenSubRoomNotification = this.mSubRoomNotification;
@@ -399,7 +401,7 @@ public final class SubscreenDeviceModelCover extends SubscreenDeviceModelParent 
     }
 
     @Override // com.android.systemui.statusbar.notification.SubscreenDeviceModelParent
-    public final void setListAdpaterFirstChildTopMargin(SubscreenParentItemViewHolder subscreenParentItemViewHolder) {
+    public final void setListAdpaterFirstChildTopMargin(SubscreenParentItemViewHolder subscreenParentItemViewHolder) throws Resources.NotFoundException {
         if (this.mListAdapterItemPosition == 0) {
             View view = subscreenParentItemViewHolder.itemView;
             Context context = this.mDisplayContext;

@@ -11,14 +11,13 @@ import kotlin.Unit;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface ApproachLayoutModifierNode extends LayoutModifierNode {
     /* renamed from: approachMeasure-3p2s80s, reason: not valid java name */
-    MeasureResult mo603approachMeasure3p2s80s(ApproachMeasureScope approachMeasureScope, Measurable measurable, long j);
+    MeasureResult mo605approachMeasure3p2s80s(ApproachMeasureScope approachMeasureScope, Measurable measurable, long j);
 
     /* renamed from: isMeasurementApproachInProgress-ozmzZPI, reason: not valid java name */
-    boolean mo604isMeasurementApproachInProgressozmzZPI(long j);
+    boolean mo606isMeasurementApproachInProgressozmzZPI(long j);
 
     default boolean isPlacementApproachInProgress(Placeable.PlacementScope placementScope, LayoutCoordinates layoutCoordinates) {
         return false;
@@ -26,7 +25,6 @@ public interface ApproachLayoutModifierNode extends LayoutModifierNode {
 
     /* JADX WARN: Multi-variable type inference failed */
     default int maxApproachIntrinsicHeight(ApproachIntrinsicMeasureScope approachIntrinsicMeasureScope, IntrinsicMeasurable intrinsicMeasurable, int i) {
-        int height;
         NodeCoordinator nodeCoordinator = ((Modifier.Node) this).node.coordinator;
         nodeCoordinator.getClass();
         LookaheadDelegate lookaheadDelegate = nodeCoordinator.getLookaheadDelegate();
@@ -35,21 +33,19 @@ public interface ApproachLayoutModifierNode extends LayoutModifierNode {
             return intrinsicMeasurable.maxIntrinsicHeight(i);
         }
         NodeMeasuringIntrinsics nodeMeasuringIntrinsics = NodeMeasuringIntrinsics.INSTANCE;
-        NodeMeasuringIntrinsics.ApproachMeasureBlock approachMeasureBlock = new NodeMeasuringIntrinsics.ApproachMeasureBlock() { // from class: androidx.compose.ui.layout.ApproachLayoutModifierNode$maxApproachIntrinsicHeight$1
+        NodeMeasuringIntrinsics.ApproachMeasureBlock approachMeasureBlock = new NodeMeasuringIntrinsics.ApproachMeasureBlock() { // from class: androidx.compose.ui.layout.ApproachLayoutModifierNode.maxApproachIntrinsicHeight.1
             @Override // androidx.compose.ui.node.NodeMeasuringIntrinsics.ApproachMeasureBlock
             /* renamed from: measure-3p2s80s, reason: not valid java name */
-            public final MeasureResult mo605measure3p2s80s(ApproachIntrinsicsMeasureScope approachIntrinsicsMeasureScope, Measurable measurable, long j) {
-                return ApproachLayoutModifierNode.this.mo603approachMeasure3p2s80s(approachIntrinsicsMeasureScope, measurable, j);
+            public final MeasureResult mo607measure3p2s80s(ApproachIntrinsicsMeasureScope approachIntrinsicsMeasureScope, Measurable measurable, long j) {
+                return ApproachLayoutModifierNode.this.mo605approachMeasure3p2s80s(approachIntrinsicsMeasureScope, measurable, j);
             }
         };
         nodeMeasuringIntrinsics.getClass();
-        height = approachMeasureBlock.mo605measure3p2s80s(new ApproachIntrinsicsMeasureScope(approachIntrinsicMeasureScope, approachIntrinsicMeasureScope.getLayoutDirection()), new NodeMeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, NodeMeasuringIntrinsics.IntrinsicMinMax.Max, NodeMeasuringIntrinsics.IntrinsicWidthHeight.Height), ConstraintsKt.Constraints$default(0, i, 0, 0, 13)).getHeight();
-        return height;
+        return approachMeasureBlock.mo607measure3p2s80s(new ApproachIntrinsicsMeasureScope(approachIntrinsicMeasureScope, approachIntrinsicMeasureScope.getLayoutDirection()), new NodeMeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, NodeMeasuringIntrinsics.IntrinsicMinMax.Max, NodeMeasuringIntrinsics.IntrinsicWidthHeight.Height), ConstraintsKt.Constraints$default(0, i, 0, 0, 13)).getHeight();
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     default int maxApproachIntrinsicWidth(ApproachIntrinsicMeasureScope approachIntrinsicMeasureScope, IntrinsicMeasurable intrinsicMeasurable, int i) {
-        int width;
         NodeCoordinator nodeCoordinator = ((Modifier.Node) this).node.coordinator;
         nodeCoordinator.getClass();
         LookaheadDelegate lookaheadDelegate = nodeCoordinator.getLookaheadDelegate();
@@ -58,41 +54,37 @@ public interface ApproachLayoutModifierNode extends LayoutModifierNode {
             return intrinsicMeasurable.maxIntrinsicWidth(i);
         }
         NodeMeasuringIntrinsics nodeMeasuringIntrinsics = NodeMeasuringIntrinsics.INSTANCE;
-        NodeMeasuringIntrinsics.ApproachMeasureBlock approachMeasureBlock = new NodeMeasuringIntrinsics.ApproachMeasureBlock() { // from class: androidx.compose.ui.layout.ApproachLayoutModifierNode$maxApproachIntrinsicWidth$1
+        NodeMeasuringIntrinsics.ApproachMeasureBlock approachMeasureBlock = new NodeMeasuringIntrinsics.ApproachMeasureBlock() { // from class: androidx.compose.ui.layout.ApproachLayoutModifierNode.maxApproachIntrinsicWidth.1
             @Override // androidx.compose.ui.node.NodeMeasuringIntrinsics.ApproachMeasureBlock
             /* renamed from: measure-3p2s80s */
-            public final MeasureResult mo605measure3p2s80s(ApproachIntrinsicsMeasureScope approachIntrinsicsMeasureScope, Measurable measurable, long j) {
-                return ApproachLayoutModifierNode.this.mo603approachMeasure3p2s80s(approachIntrinsicsMeasureScope, measurable, j);
+            public final MeasureResult mo607measure3p2s80s(ApproachIntrinsicsMeasureScope approachIntrinsicsMeasureScope, Measurable measurable, long j) {
+                return ApproachLayoutModifierNode.this.mo605approachMeasure3p2s80s(approachIntrinsicsMeasureScope, measurable, j);
             }
         };
         nodeMeasuringIntrinsics.getClass();
-        width = approachMeasureBlock.mo605measure3p2s80s(new ApproachIntrinsicsMeasureScope(approachIntrinsicMeasureScope, approachIntrinsicMeasureScope.getLayoutDirection()), new NodeMeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, NodeMeasuringIntrinsics.IntrinsicMinMax.Max, NodeMeasuringIntrinsics.IntrinsicWidthHeight.Width), ConstraintsKt.Constraints$default(0, 0, 0, i, 7)).getWidth();
-        return width;
+        return approachMeasureBlock.mo607measure3p2s80s(new ApproachIntrinsicsMeasureScope(approachIntrinsicMeasureScope, approachIntrinsicMeasureScope.getLayoutDirection()), new NodeMeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, NodeMeasuringIntrinsics.IntrinsicMinMax.Max, NodeMeasuringIntrinsics.IntrinsicWidthHeight.Width), ConstraintsKt.Constraints$default(0, 0, 0, i, 7)).getWidth();
     }
 
     @Override // androidx.compose.ui.node.LayoutModifierNode
     /* renamed from: measure-3p2s80s */
     default MeasureResult mo4measure3p2s80s(MeasureScope measureScope, Measurable measurable, long j) {
-        MeasureResult layout$1;
-        final Placeable mo608measureBRTryo0 = measurable.mo608measureBRTryo0(j);
-        layout$1 = measureScope.layout$1(mo608measureBRTryo0.width, mo608measureBRTryo0.height, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.ui.layout.ApproachLayoutModifierNode$measure$1$1
+        final Placeable placeableMo610measureBRTryo0 = measurable.mo610measureBRTryo0(j);
+        return measureScope.layout$1(placeableMo610measureBRTryo0.width, placeableMo610measureBRTryo0.height, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.ui.layout.ApproachLayoutModifierNode$measure$1$1
             {
                 super(1);
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                ((Placeable.PlacementScope) obj).place(Placeable.this, 0, 0, 0.0f);
+            public final Object mo781invoke(Object obj) {
+                ((Placeable.PlacementScope) obj).place(placeableMo610measureBRTryo0, 0, 0, 0.0f);
                 return Unit.INSTANCE;
             }
         });
-        return layout$1;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     default int minApproachIntrinsicHeight(ApproachIntrinsicMeasureScope approachIntrinsicMeasureScope, IntrinsicMeasurable intrinsicMeasurable, int i) {
-        int height;
         NodeCoordinator nodeCoordinator = ((Modifier.Node) this).node.coordinator;
         nodeCoordinator.getClass();
         LookaheadDelegate lookaheadDelegate = nodeCoordinator.getLookaheadDelegate();
@@ -101,21 +93,19 @@ public interface ApproachLayoutModifierNode extends LayoutModifierNode {
             return intrinsicMeasurable.minIntrinsicHeight(i);
         }
         NodeMeasuringIntrinsics nodeMeasuringIntrinsics = NodeMeasuringIntrinsics.INSTANCE;
-        NodeMeasuringIntrinsics.ApproachMeasureBlock approachMeasureBlock = new NodeMeasuringIntrinsics.ApproachMeasureBlock() { // from class: androidx.compose.ui.layout.ApproachLayoutModifierNode$minApproachIntrinsicHeight$1
+        NodeMeasuringIntrinsics.ApproachMeasureBlock approachMeasureBlock = new NodeMeasuringIntrinsics.ApproachMeasureBlock() { // from class: androidx.compose.ui.layout.ApproachLayoutModifierNode.minApproachIntrinsicHeight.1
             @Override // androidx.compose.ui.node.NodeMeasuringIntrinsics.ApproachMeasureBlock
             /* renamed from: measure-3p2s80s */
-            public final MeasureResult mo605measure3p2s80s(ApproachIntrinsicsMeasureScope approachIntrinsicsMeasureScope, Measurable measurable, long j) {
-                return ApproachLayoutModifierNode.this.mo603approachMeasure3p2s80s(approachIntrinsicsMeasureScope, measurable, j);
+            public final MeasureResult mo607measure3p2s80s(ApproachIntrinsicsMeasureScope approachIntrinsicsMeasureScope, Measurable measurable, long j) {
+                return ApproachLayoutModifierNode.this.mo605approachMeasure3p2s80s(approachIntrinsicsMeasureScope, measurable, j);
             }
         };
         nodeMeasuringIntrinsics.getClass();
-        height = approachMeasureBlock.mo605measure3p2s80s(new ApproachIntrinsicsMeasureScope(approachIntrinsicMeasureScope, approachIntrinsicMeasureScope.getLayoutDirection()), new NodeMeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, NodeMeasuringIntrinsics.IntrinsicMinMax.Min, NodeMeasuringIntrinsics.IntrinsicWidthHeight.Height), ConstraintsKt.Constraints$default(0, i, 0, 0, 13)).getHeight();
-        return height;
+        return approachMeasureBlock.mo607measure3p2s80s(new ApproachIntrinsicsMeasureScope(approachIntrinsicMeasureScope, approachIntrinsicMeasureScope.getLayoutDirection()), new NodeMeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, NodeMeasuringIntrinsics.IntrinsicMinMax.Min, NodeMeasuringIntrinsics.IntrinsicWidthHeight.Height), ConstraintsKt.Constraints$default(0, i, 0, 0, 13)).getHeight();
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     default int minApproachIntrinsicWidth(ApproachIntrinsicMeasureScope approachIntrinsicMeasureScope, IntrinsicMeasurable intrinsicMeasurable, int i) {
-        int width;
         NodeCoordinator nodeCoordinator = ((Modifier.Node) this).node.coordinator;
         nodeCoordinator.getClass();
         LookaheadDelegate lookaheadDelegate = nodeCoordinator.getLookaheadDelegate();
@@ -124,15 +114,14 @@ public interface ApproachLayoutModifierNode extends LayoutModifierNode {
             return intrinsicMeasurable.minIntrinsicWidth(i);
         }
         NodeMeasuringIntrinsics nodeMeasuringIntrinsics = NodeMeasuringIntrinsics.INSTANCE;
-        NodeMeasuringIntrinsics.ApproachMeasureBlock approachMeasureBlock = new NodeMeasuringIntrinsics.ApproachMeasureBlock() { // from class: androidx.compose.ui.layout.ApproachLayoutModifierNode$minApproachIntrinsicWidth$1
+        NodeMeasuringIntrinsics.ApproachMeasureBlock approachMeasureBlock = new NodeMeasuringIntrinsics.ApproachMeasureBlock() { // from class: androidx.compose.ui.layout.ApproachLayoutModifierNode.minApproachIntrinsicWidth.1
             @Override // androidx.compose.ui.node.NodeMeasuringIntrinsics.ApproachMeasureBlock
             /* renamed from: measure-3p2s80s */
-            public final MeasureResult mo605measure3p2s80s(ApproachIntrinsicsMeasureScope approachIntrinsicsMeasureScope, Measurable measurable, long j) {
-                return ApproachLayoutModifierNode.this.mo603approachMeasure3p2s80s(approachIntrinsicsMeasureScope, measurable, j);
+            public final MeasureResult mo607measure3p2s80s(ApproachIntrinsicsMeasureScope approachIntrinsicsMeasureScope, Measurable measurable, long j) {
+                return ApproachLayoutModifierNode.this.mo605approachMeasure3p2s80s(approachIntrinsicsMeasureScope, measurable, j);
             }
         };
         nodeMeasuringIntrinsics.getClass();
-        width = approachMeasureBlock.mo605measure3p2s80s(new ApproachIntrinsicsMeasureScope(approachIntrinsicMeasureScope, approachIntrinsicMeasureScope.getLayoutDirection()), new NodeMeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, NodeMeasuringIntrinsics.IntrinsicMinMax.Min, NodeMeasuringIntrinsics.IntrinsicWidthHeight.Width), ConstraintsKt.Constraints$default(0, 0, 0, i, 7)).getWidth();
-        return width;
+        return approachMeasureBlock.mo607measure3p2s80s(new ApproachIntrinsicsMeasureScope(approachIntrinsicMeasureScope, approachIntrinsicMeasureScope.getLayoutDirection()), new NodeMeasuringIntrinsics.DefaultIntrinsicMeasurable(intrinsicMeasurable, NodeMeasuringIntrinsics.IntrinsicMinMax.Min, NodeMeasuringIntrinsics.IntrinsicWidthHeight.Width), ConstraintsKt.Constraints$default(0, 0, 0, i, 7)).getWidth();
     }
 }

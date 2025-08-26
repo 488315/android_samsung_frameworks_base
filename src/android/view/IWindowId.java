@@ -60,9 +60,9 @@ public interface IWindowId extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWindowId)) {
-                return (IWindowId) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWindowId)) {
+                return (IWindowId) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -95,19 +95,19 @@ public interface IWindowId extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IWindowFocusObserver asInterface = IWindowFocusObserver.Stub.asInterface(parcel.readStrongBinder());
+                IWindowFocusObserver iWindowFocusObserverAsInterface = IWindowFocusObserver.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerFocusObserver(asInterface);
+                registerFocusObserver(iWindowFocusObserverAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IWindowFocusObserver asInterface2 = IWindowFocusObserver.Stub.asInterface(parcel.readStrongBinder());
+                IWindowFocusObserver iWindowFocusObserverAsInterface2 = IWindowFocusObserver.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                unregisterFocusObserver(asInterface2);
+                unregisterFocusObserver(iWindowFocusObserverAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                boolean isFocused = isFocused();
+                boolean zIsFocused = isFocused();
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isFocused);
+                parcel2.writeBoolean(zIsFocused);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -132,46 +132,46 @@ public interface IWindowId extends IInterface {
 
             @Override // android.view.IWindowId
             public void registerFocusObserver(IWindowFocusObserver iWindowFocusObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iWindowFocusObserver);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iWindowFocusObserver);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindowId
             public void unregisterFocusObserver(IWindowFocusObserver iWindowFocusObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iWindowFocusObserver);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iWindowFocusObserver);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindowId
             public boolean isFocused() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -55,8 +55,8 @@ public class BlockedNumberContract {
 
     public static boolean isBlocked(Context context, String str) {
         try {
-            Bundle call = context.getContentResolver().call(AUTHORITY_URI, METHOD_IS_BLOCKED, str, (Bundle) null);
-            boolean z = call != null && call.getBoolean(RES_NUMBER_IS_BLOCKED, false);
+            Bundle bundleCall = context.getContentResolver().call(AUTHORITY_URI, METHOD_IS_BLOCKED, str, (Bundle) null);
+            boolean z = bundleCall != null && bundleCall.getBoolean(RES_NUMBER_IS_BLOCKED, false);
             Log.d(LOG_TAG, "isBlocked: phoneNumber=%s, isBlocked=%b", Log.piiHandle(str), Boolean.valueOf(z));
             return z;
         } catch (IllegalArgumentException | NullPointerException unused) {
@@ -72,9 +72,9 @@ public class BlockedNumberContract {
 
     public static boolean canCurrentUserBlockNumbers(Context context) {
         try {
-            Bundle call = context.getContentResolver().call(AUTHORITY_URI, METHOD_CAN_CURRENT_USER_BLOCK_NUMBERS, (String) null, (Bundle) null);
-            if (call != null) {
-                if (call.getBoolean(RES_CAN_BLOCK_NUMBERS, false)) {
+            Bundle bundleCall = context.getContentResolver().call(AUTHORITY_URI, METHOD_CAN_CURRENT_USER_BLOCK_NUMBERS, (String) null, (Bundle) null);
+            if (bundleCall != null) {
+                if (bundleCall.getBoolean(RES_CAN_BLOCK_NUMBERS, false)) {
                     return true;
                 }
             }
@@ -120,8 +120,8 @@ public class BlockedNumberContract {
         public static int shouldSystemBlockNumber(Context context, String str, Bundle bundle) {
             try {
                 String opPackageName = context.getOpPackageName();
-                Bundle call = context.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, METHOD_SHOULD_SYSTEM_BLOCK_NUMBER, str, bundle);
-                int i = call != null ? call.getInt(BlockedNumberContract.RES_BLOCK_STATUS, 0) : 0;
+                Bundle bundleCall = context.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, METHOD_SHOULD_SYSTEM_BLOCK_NUMBER, str, bundle);
+                int i = bundleCall != null ? bundleCall.getInt(BlockedNumberContract.RES_BLOCK_STATUS, 0) : 0;
                 Log.d(BlockedNumberContract.LOG_TAG, "shouldSystemBlockNumber: number=%s, caller=%s, result=%s", Log.piiHandle(str), opPackageName, blockStatusToString(i));
                 return i;
             } catch (IllegalArgumentException | NullPointerException unused) {
@@ -131,17 +131,17 @@ public class BlockedNumberContract {
         }
 
         public static BlockSuppressionStatus getBlockSuppressionStatus(Context context) {
-            Bundle call = context.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, METHOD_GET_BLOCK_SUPPRESSION_STATUS, (String) null, (Bundle) null);
-            BlockSuppressionStatus blockSuppressionStatus = new BlockSuppressionStatus(call.getBoolean(RES_IS_BLOCKING_SUPPRESSED, false), call.getLong(RES_BLOCKING_SUPPRESSED_UNTIL_TIMESTAMP, 0L));
+            Bundle bundleCall = context.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, METHOD_GET_BLOCK_SUPPRESSION_STATUS, (String) null, (Bundle) null);
+            BlockSuppressionStatus blockSuppressionStatus = new BlockSuppressionStatus(bundleCall.getBoolean(RES_IS_BLOCKING_SUPPRESSED, false), bundleCall.getLong(RES_BLOCKING_SUPPRESSED_UNTIL_TIMESTAMP, 0L));
             Log.d(BlockedNumberContract.LOG_TAG, "getBlockSuppressionStatus: caller=%s, status=%s", context.getOpPackageName(), blockSuppressionStatus);
             return blockSuppressionStatus;
         }
 
         public static boolean shouldShowEmergencyCallNotification(Context context) {
             try {
-                Bundle call = context.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, METHOD_SHOULD_SHOW_EMERGENCY_CALL_NOTIFICATION, (String) null, (Bundle) null);
-                if (call != null) {
-                    if (call.getBoolean("show_emergency_call_notification", false)) {
+                Bundle bundleCall = context.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, METHOD_SHOULD_SHOW_EMERGENCY_CALL_NOTIFICATION, (String) null, (Bundle) null);
+                if (bundleCall != null) {
+                    if (bundleCall.getBoolean("show_emergency_call_notification", false)) {
                         return true;
                     }
                 }
@@ -156,9 +156,9 @@ public class BlockedNumberContract {
             Bundle bundle = new Bundle();
             bundle.putString(BlockedNumberContract.EXTRA_ENHANCED_SETTING_KEY, str);
             try {
-                Bundle call = context.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, METHOD_GET_ENHANCED_BLOCK_SETTING, (String) null, bundle);
-                if (call != null) {
-                    if (call.getBoolean(BlockedNumberContract.RES_ENHANCED_SETTING_IS_ENABLED, false)) {
+                Bundle bundleCall = context.getContentResolver().call(BlockedNumberContract.AUTHORITY_URI, METHOD_GET_ENHANCED_BLOCK_SETTING, (String) null, bundle);
+                if (bundleCall != null) {
+                    if (bundleCall.getBoolean(BlockedNumberContract.RES_ENHANCED_SETTING_IS_ENABLED, false)) {
                         return true;
                     }
                 }

@@ -60,9 +60,9 @@ public interface IMbmsDownloadSessionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMbmsDownloadSessionCallback)) {
-                return (IMbmsDownloadSessionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMbmsDownloadSessionCallback)) {
+                return (IMbmsDownloadSessionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -95,14 +95,14 @@ public interface IMbmsDownloadSessionCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onError(readInt, readString);
+                onError(i3, string);
             } else if (i == 2) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(FileServiceInfo.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(FileServiceInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                onFileServicesUpdated(createTypedArrayList);
+                onFileServicesUpdated(arrayListCreateTypedArrayList);
             } else if (i == 3) {
                 onMiddlewareReady();
             } else {
@@ -129,37 +129,37 @@ public interface IMbmsDownloadSessionCallback extends IInterface {
 
             @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
             public void onError(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
             public void onFileServicesUpdated(List<FileServiceInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
             public void onMiddlewareReady() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

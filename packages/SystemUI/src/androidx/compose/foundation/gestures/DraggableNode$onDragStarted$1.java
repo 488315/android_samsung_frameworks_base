@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DraggableNode$onDragStarted$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ long $startedPosition;
@@ -45,9 +44,9 @@ final class DraggableNode$onDragStarted$1 extends SuspendLambda implements Funct
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
             Function3 function3 = this.this$0.onDragStarted;
-            Offset m393boximpl = Offset.m393boximpl(this.$startedPosition);
+            Offset offsetM395boximpl = Offset.m395boximpl(this.$startedPosition);
             this.label = 1;
-            if (function3.invoke(coroutineScope, m393boximpl, this) == coroutineSingletons) {
+            if (function3.invoke(coroutineScope, offsetM395boximpl, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

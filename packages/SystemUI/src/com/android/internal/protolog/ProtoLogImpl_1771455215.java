@@ -9,7 +9,6 @@ import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import java.io.File;
 import java.util.TreeMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ProtoLogImpl_1771455215 {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -17,7 +16,6 @@ public class ProtoLogImpl_1771455215 {
     private static final TreeMap<String, IProtoLogGroup> sLogGroups = createLogGroupsMap();
     private static final ProtoLogCacheUpdater sCacheUpdater = new ProtoLogImpl_1771455215$$ExternalSyntheticLambda0();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Cache {
         public static boolean[] WM_SHELL_enabled = {true, true, true, true, true, true};
         public static boolean[] WM_SHELL_INIT_enabled = {true, true, true, true, true, true};
@@ -250,32 +248,28 @@ public class ProtoLogImpl_1771455215 {
     }
 
     public static synchronized IProtoLog getSingleInstance() {
-        IProtoLog iProtoLog;
-        synchronized (ProtoLogImpl_1771455215.class) {
-            try {
-                if (sServiceInstance == null) {
-                    Log.i("ProtoLogImpl", "Setting up ProtoLogImpl with viewerConfigPath = /system_ext/etc/wmshell.protolog.pb");
-                    IProtoLogGroup[] iProtoLogGroupArr = (IProtoLogGroup[]) sLogGroups.values().toArray(new IProtoLogGroup[0]);
-                    if (new File("/system_ext/etc/wmshell.protolog.pb").exists()) {
-                        try {
-                            ProcessedPerfettoProtoLogImpl processedPerfettoProtoLogImpl = new ProcessedPerfettoProtoLogImpl(ProtoLog.getSharedSingleInstanceDataSource(), "/system_ext/etc/wmshell.protolog.pb", sCacheUpdater, iProtoLogGroupArr);
-                            sServiceInstance = processedPerfettoProtoLogImpl;
-                            processedPerfettoProtoLogImpl.enable();
-                        } catch (ServiceManager.ServiceNotFoundException e) {
-                            throw new RuntimeException((Throwable) e);
-                        }
-                    } else {
-                        Log.e("ProtoLogImpl", "Failed to find viewer config file /system_ext/etc/wmshell.protolog.pb when setting up ProtoLogImpl. ProtoLog will not work here!");
-                        sServiceInstance = new NoViewerConfigProtoLogImpl();
+        try {
+            if (sServiceInstance == null) {
+                Log.i("ProtoLogImpl", "Setting up ProtoLogImpl with viewerConfigPath = /system_ext/etc/wmshell.protolog.pb");
+                IProtoLogGroup[] iProtoLogGroupArr = (IProtoLogGroup[]) sLogGroups.values().toArray(new IProtoLogGroup[0]);
+                if (new File("/system_ext/etc/wmshell.protolog.pb").exists()) {
+                    try {
+                        ProcessedPerfettoProtoLogImpl processedPerfettoProtoLogImpl = new ProcessedPerfettoProtoLogImpl(ProtoLog.getSharedSingleInstanceDataSource(), "/system_ext/etc/wmshell.protolog.pb", sCacheUpdater, iProtoLogGroupArr);
+                        sServiceInstance = processedPerfettoProtoLogImpl;
+                        processedPerfettoProtoLogImpl.enable();
+                    } catch (ServiceManager.ServiceNotFoundException e) {
+                        throw new RuntimeException((Throwable) e);
                     }
-                    sCacheUpdater.update(sServiceInstance);
+                } else {
+                    Log.e("ProtoLogImpl", "Failed to find viewer config file /system_ext/etc/wmshell.protolog.pb when setting up ProtoLogImpl. ProtoLog will not work here!");
+                    sServiceInstance = new NoViewerConfigProtoLogImpl();
                 }
-                iProtoLog = sServiceInstance;
-            } catch (Throwable th) {
-                throw th;
+                sCacheUpdater.update(sServiceInstance);
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return iProtoLog;
+        return sServiceInstance;
     }
 
     public static void i(IProtoLogGroup iProtoLogGroup, long j, int i, Object... objArr) {
@@ -288,9 +282,7 @@ public class ProtoLogImpl_1771455215 {
     }
 
     public static synchronized void setSingleInstance(IProtoLog iProtoLog) {
-        synchronized (ProtoLogImpl_1771455215.class) {
-            sServiceInstance = iProtoLog;
-        }
+        sServiceInstance = iProtoLog;
     }
 
     public static void v(IProtoLogGroup iProtoLogGroup, long j, int i, Object... objArr) {

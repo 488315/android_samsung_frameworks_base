@@ -19,14 +19,12 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AutoClosingRoomOpenHelper implements SupportSQLiteOpenHelper, DelegatingOpenHelper {
     public final AutoCloser autoCloser;
     public final AutoClosingSupportSQLiteDatabase autoClosingDb;
     public final SupportSQLiteOpenHelper delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AutoClosingSupportSQLiteStatement implements SupportSQLiteStatement {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final AutoCloser autoCloser;
@@ -37,7 +35,6 @@ public final class AutoClosingRoomOpenHelper implements SupportSQLiteOpenHelper,
         public String[] stringBindings = new String[0];
         public byte[][] blobBindings = new byte[0][];
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -144,35 +141,34 @@ public final class AutoClosingRoomOpenHelper implements SupportSQLiteOpenHelper,
             this.autoCloser.executeRefCountingFunction(new Function1() { // from class: androidx.room.support.AutoClosingRoomOpenHelper$AutoClosingSupportSQLiteStatement$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    AutoClosingRoomOpenHelper.AutoClosingSupportSQLiteStatement autoClosingSupportSQLiteStatement = AutoClosingRoomOpenHelper.AutoClosingSupportSQLiteStatement.this;
-                    SupportSQLiteStatement compileStatement = ((SupportSQLiteDatabase) obj).compileStatement(autoClosingSupportSQLiteStatement.sql);
+                public final Object mo781invoke(Object obj) {
+                    AutoClosingRoomOpenHelper.AutoClosingSupportSQLiteStatement autoClosingSupportSQLiteStatement = this.f$0;
+                    SupportSQLiteStatement supportSQLiteStatementCompileStatement = ((SupportSQLiteDatabase) obj).compileStatement(autoClosingSupportSQLiteStatement.sql);
                     int length = autoClosingSupportSQLiteStatement.bindingTypes.length;
                     for (int i = 1; i < length; i++) {
                         int i2 = autoClosingSupportSQLiteStatement.bindingTypes[i];
                         if (i2 == 1) {
-                            compileStatement.bindLong(i, autoClosingSupportSQLiteStatement.longBindings[i]);
+                            supportSQLiteStatementCompileStatement.bindLong(i, autoClosingSupportSQLiteStatement.longBindings[i]);
                         } else if (i2 == 2) {
-                            compileStatement.bindDouble(autoClosingSupportSQLiteStatement.doubleBindings[i], i);
+                            supportSQLiteStatementCompileStatement.bindDouble(autoClosingSupportSQLiteStatement.doubleBindings[i], i);
                         } else if (i2 == 3) {
                             String str = autoClosingSupportSQLiteStatement.stringBindings[i];
                             str.getClass();
-                            compileStatement.bindString(i, str);
+                            supportSQLiteStatementCompileStatement.bindString(i, str);
                         } else if (i2 == 4) {
                             byte[] bArr = autoClosingSupportSQLiteStatement.blobBindings[i];
                             bArr.getClass();
-                            compileStatement.bindBlob(i, bArr);
+                            supportSQLiteStatementCompileStatement.bindBlob(i, bArr);
                         } else if (i2 == 5) {
-                            compileStatement.bindNull(i);
+                            supportSQLiteStatementCompileStatement.bindNull(i);
                         }
                     }
-                    return autoClosingRoomOpenHelper$AutoClosingSupportSQLiteStatement$$ExternalSyntheticLambda0.mo779invoke(compileStatement);
+                    return autoClosingRoomOpenHelper$AutoClosingSupportSQLiteStatement$$ExternalSyntheticLambda0.mo781invoke(supportSQLiteStatementCompileStatement);
                 }
             });
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeepAliveCursor implements Cursor {
         public final AutoCloser autoCloser;
         public final Cursor delegate;
@@ -434,7 +430,6 @@ public final class AutoClosingRoomOpenHelper implements SupportSQLiteOpenHelper,
         this.delegate.setWriteAheadLoggingEnabled(z);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AutoClosingSupportSQLiteDatabase implements SupportSQLiteDatabase {
         public final AutoCloser autoCloser;
 

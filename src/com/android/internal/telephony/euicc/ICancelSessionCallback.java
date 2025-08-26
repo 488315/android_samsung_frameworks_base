@@ -44,9 +44,9 @@ public interface ICancelSessionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICancelSessionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICancelSessionCallback)) {
-                return (ICancelSessionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICancelSessionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICancelSessionCallback)) {
+                return (ICancelSessionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface ICancelSessionCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                byte[] createByteArray = parcel.createByteArray();
+                int i3 = parcel.readInt();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                onComplete(readInt, createByteArray);
+                onComplete(i3, bArrCreateByteArray);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface ICancelSessionCallback extends IInterface {
 
             @Override // com.android.internal.telephony.euicc.ICancelSessionCallback
             public void onComplete(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICancelSessionCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICancelSessionCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

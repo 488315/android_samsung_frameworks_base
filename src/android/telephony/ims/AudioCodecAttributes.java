@@ -48,11 +48,11 @@ public final class AudioCodecAttributes implements Parcelable {
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeFloat(this.mBitrateKbps);
-        parcel.writeFloat(this.mBitrateRangeKbps.getLower().floatValue());
-        parcel.writeFloat(this.mBitrateRangeKbps.getUpper().floatValue());
+        parcel.writeFloat(((Float) this.mBitrateRangeKbps.getLower()).floatValue());
+        parcel.writeFloat(((Float) this.mBitrateRangeKbps.getUpper()).floatValue());
         parcel.writeFloat(this.mBandwidthKhz);
-        parcel.writeFloat(this.mBandwidthRangeKhz.getLower().floatValue());
-        parcel.writeFloat(this.mBandwidthRangeKhz.getUpper().floatValue());
+        parcel.writeFloat(((Float) this.mBandwidthRangeKhz.getLower()).floatValue());
+        parcel.writeFloat(((Float) this.mBandwidthRangeKhz.getUpper()).floatValue());
     }
 
     public float getBitrateKbps() {

@@ -27,11 +27,11 @@ public class LocaleHelper {
 
     public static String getDisplayName(Locale locale, Locale locale2, boolean z) {
         String displayName;
-        ULocale forLocale = ULocale.forLocale(locale2);
+        ULocale uLocaleForLocale = ULocale.forLocale(locale2);
         if (shouldUseDialectName(locale)) {
-            displayName = ULocale.getDisplayNameWithDialect(locale.toLanguageTag(), forLocale);
+            displayName = ULocale.getDisplayNameWithDialect(locale.toLanguageTag(), uLocaleForLocale);
         } else {
-            displayName = ULocale.getDisplayName(locale.toLanguageTag(), forLocale);
+            displayName = ULocale.getDisplayName(locale.toLanguageTag(), uLocaleForLocale);
         }
         return z ? toSentenceCase(displayName, locale2) : displayName;
     }
@@ -42,9 +42,9 @@ public class LocaleHelper {
 
     public static String getDisplayCountry(Locale locale, Locale locale2) {
         String languageTag = locale.toLanguageTag();
-        ULocale forLocale = ULocale.forLocale(locale2);
-        String displayCountry = ULocale.getDisplayCountry(languageTag, forLocale);
-        return locale.getUnicodeLocaleType("nu") != null ? String.format("%s (%s)", displayCountry, ULocale.getDisplayKeywordValue(languageTag, "numbers", forLocale)) : displayCountry;
+        ULocale uLocaleForLocale = ULocale.forLocale(locale2);
+        String displayCountry = ULocale.getDisplayCountry(languageTag, uLocaleForLocale);
+        return locale.getUnicodeLocaleType("nu") != null ? String.format("%s (%s)", displayCountry, ULocale.getDisplayKeywordValue(languageTag, "numbers", uLocaleForLocale)) : displayCountry;
     }
 
     public static String getDisplayCountry(Locale locale) {

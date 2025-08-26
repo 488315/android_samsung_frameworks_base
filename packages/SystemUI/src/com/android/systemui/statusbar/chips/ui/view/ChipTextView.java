@@ -6,10 +6,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 import com.android.systemui.R;
-import com.android.systemui.qs.SecQSDetailController$$ExternalSyntheticOutline0;
+import com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ChipTextView extends TextView {
     public final ChipTextTruncationHelper textTruncationHelper;
@@ -22,7 +21,7 @@ public final class ChipTextView extends TextView {
     public final void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
         ChipTextTruncationHelper chipTextTruncationHelper = this.textTruncationHelper;
-        chipTextTruncationHelper.maximumWidthMeasureSpec = new SysuiMeasureSpec(View.MeasureSpec.makeMeasureSpec(SecQSDetailController$$ExternalSyntheticOutline0.m(chipTextTruncationHelper.view, R.dimen.ongoing_activity_chip_max_text_width), Integer.MIN_VALUE));
+        chipTextTruncationHelper.maximumWidthMeasureSpec = new SysuiMeasureSpec(View.MeasureSpec.makeMeasureSpec(QSLayoutEditViewController$$ExternalSyntheticOutline0.m(chipTextTruncationHelper.view, R.dimen.ongoing_activity_chip_max_text_width), Integer.MIN_VALUE));
     }
 
     @Override // android.widget.TextView, android.view.View

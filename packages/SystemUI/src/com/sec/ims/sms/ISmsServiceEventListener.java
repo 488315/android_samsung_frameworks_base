@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ISmsServiceEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.sms.ISmsServiceEventListener";
@@ -17,13 +16,11 @@ public interface ISmsServiceEventListener extends IInterface {
 
     void onReceiveSMSDeliveryReportAck(int i, int i2, int i3) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ISmsServiceEventListener {
         static final int TRANSACTION_onReceiveIncomingSMS = 1;
         static final int TRANSACTION_onReceiveSMSAck = 2;
         static final int TRANSACTION_onReceiveSMSDeliveryReportAck = 3;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ISmsServiceEventListener {
             private IBinder mRemote;
 
@@ -42,54 +39,54 @@ public interface ISmsServiceEventListener extends IInterface {
 
             @Override // com.sec.ims.sms.ISmsServiceEventListener
             public void onReceiveIncomingSMS(int i, String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISmsServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISmsServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.sms.ISmsServiceEventListener
             public void onReceiveSMSAck(int i, int i2, String str, byte[] bArr, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISmsServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISmsServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.sms.ISmsServiceEventListener
             public void onReceiveSMSDeliveryReportAck(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISmsServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISmsServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -102,8 +99,8 @@ public interface ISmsServiceEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISmsServiceEventListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ISmsServiceEventListener)) ? new Proxy(iBinder) : (ISmsServiceEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISmsServiceEventListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ISmsServiceEventListener)) ? new Proxy(iBinder) : (ISmsServiceEventListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -116,30 +113,30 @@ public interface ISmsServiceEventListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
-                byte[] createByteArray = parcel.createByteArray();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                onReceiveIncomingSMS(readInt, readString, createByteArray);
+                onReceiveIncomingSMS(i3, string, bArrCreateByteArray);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                String readString2 = parcel.readString();
-                byte[] createByteArray2 = parcel.createByteArray();
-                int readInt4 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                String string2 = parcel.readString();
+                byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onReceiveSMSAck(readInt2, readInt3, readString2, createByteArray2, readInt4);
+                onReceiveSMSAck(i4, i5, string2, bArrCreateByteArray2, i6);
                 parcel2.writeNoException();
             } else {
                 if (i != 3) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
+                int i7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                int i9 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onReceiveSMSDeliveryReportAck(readInt5, readInt6, readInt7);
+                onReceiveSMSDeliveryReportAck(i7, i8, i9);
                 parcel2.writeNoException();
             }
             return true;
@@ -151,7 +148,6 @@ public interface ISmsServiceEventListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ISmsServiceEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

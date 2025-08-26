@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.Set;
 import org.apache.commons.lang3.ArrayUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class HashCodeBuilder {
     public static final ThreadLocal REGISTRY = new ThreadLocal();
@@ -27,12 +26,12 @@ public class HashCodeBuilder {
         Set set = (Set) threadLocal.get();
         if (set == null || !set.contains(new IDKey(obj))) {
             try {
-                Set set2 = (Set) threadLocal.get();
-                if (set2 == null) {
-                    set2 = new HashSet();
-                    threadLocal.set(set2);
+                Set hashSet = (Set) threadLocal.get();
+                if (hashSet == null) {
+                    hashSet = new HashSet();
+                    threadLocal.set(hashSet);
                 }
-                set2.add(new IDKey(obj));
+                hashSet.add(new IDKey(obj));
                 Field[] declaredFields = cls.getDeclaredFields();
                 Arrays.sort(declaredFields, Comparator.comparing(new HashCodeBuilder$$ExternalSyntheticLambda0()));
                 AccessibleObject.setAccessible(declaredFields, true);
@@ -68,10 +67,10 @@ public class HashCodeBuilder {
                 }
             } finally {
                 ThreadLocal threadLocal2 = REGISTRY;
-                Set set3 = (Set) threadLocal2.get();
-                if (set3 != null) {
-                    set3.remove(new IDKey(obj));
-                    if (set3.isEmpty()) {
+                Set set2 = (Set) threadLocal2.get();
+                if (set2 != null) {
+                    set2.remove(new IDKey(obj));
+                    if (set2.isEmpty()) {
                         threadLocal2.remove();
                     }
                 }
@@ -140,8 +139,8 @@ public class HashCodeBuilder {
             double[] dArr = (double[]) obj;
             int length6 = dArr.length;
             while (i2 < length6) {
-                long doubleToLongBits = Double.doubleToLongBits(dArr[i2]);
-                this.iTotal = (this.iTotal * i) + ((int) (doubleToLongBits ^ (doubleToLongBits >> 32)));
+                long jDoubleToLongBits = Double.doubleToLongBits(dArr[i2]);
+                this.iTotal = (this.iTotal * i) + ((int) (jDoubleToLongBits ^ (jDoubleToLongBits >> 32)));
                 i2++;
             }
             return;

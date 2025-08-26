@@ -5,8 +5,8 @@ import gov.nist.javax.sip.header.ims.Privacy;
 import gov.nist.javax.sip.header.ims.PrivacyList;
 import gov.nist.javax.sip.parser.HeaderParser;
 import gov.nist.javax.sip.parser.Lexer;
+import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PrivacyParser extends HeaderParser {
     public PrivacyParser(String str) {
@@ -14,7 +14,7 @@ public class PrivacyParser extends HeaderParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws ParseException {
         PrivacyList privacyList = new PrivacyList();
         headerName(2126);
         while (this.lexer.lookAhead(0) != '\n') {

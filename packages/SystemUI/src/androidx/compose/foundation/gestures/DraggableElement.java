@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DraggableElement extends ModifierNodeElement<DraggableNode> {
     public static final Function1 CanDrag;
@@ -22,7 +21,6 @@ public final class DraggableElement extends ModifierNodeElement<DraggableNode> {
     public final boolean startDragImmediately;
     public final DraggableState state;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -37,7 +35,7 @@ public final class DraggableElement extends ModifierNodeElement<DraggableNode> {
         CanDrag = new Function1() { // from class: androidx.compose.foundation.gestures.DraggableElement$Companion$CanDrag$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
                 return Boolean.TRUE;
             }
         };
@@ -71,9 +69,9 @@ public final class DraggableElement extends ModifierNodeElement<DraggableNode> {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m((this.orientation.hashCode() + (this.state.hashCode() * 31)) * 31, 31, this.enabled);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m((this.orientation.hashCode() + (this.state.hashCode() * 31)) * 31, 31, this.enabled);
         MutableInteractionSource mutableInteractionSource = this.interactionSource;
-        return Boolean.hashCode(this.reverseDirection) + ((this.onDragStopped.hashCode() + ((this.onDragStarted.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((m + (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0)) * 31, 31, this.startDragImmediately)) * 31)) * 31);
+        return Boolean.hashCode(this.reverseDirection) + ((this.onDragStopped.hashCode() + ((this.onDragStarted.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((iM + (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0)) * 31, 31, this.startDragImmediately)) * 31)) * 31);
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement

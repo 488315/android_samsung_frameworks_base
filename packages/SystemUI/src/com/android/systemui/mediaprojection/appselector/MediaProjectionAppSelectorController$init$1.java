@@ -1,12 +1,25 @@
 package com.android.systemui.mediaprojection.appselector;
 
+import android.content.ComponentName;
+import android.os.UserHandle;
+import com.android.systemui.mediaprojection.appselector.data.RecentTask;
+import com.android.systemui.mediaprojection.appselector.data.RecentTaskListProvider;
+import com.android.systemui.mediaprojection.appselector.data.ShellRecentTaskListProvider;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaProjectionAppSelectorController$init$1 extends SuspendLambda implements Function2 {
     Object L$0;
@@ -29,116 +42,70 @@ final class MediaProjectionAppSelectorController$init$1 extends SuspendLambda im
         return ((MediaProjectionAppSelectorController$init$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:40:0x0030, code lost:
-    
-        if (r10 == r0) goto L29;
-     */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final java.lang.Object invokeSuspend(java.lang.Object r10) {
-        /*
-            r9 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r9.label
-            r2 = 1
-            r3 = 2
-            if (r1 == 0) goto L21
-            if (r1 == r2) goto L1d
-            if (r1 != r3) goto L15
-            java.lang.Object r0 = r9.L$0
-            java.util.List r0 = (java.util.List) r0
-            kotlin.ResultKt.throwOnFailure(r10)
-            goto Lb1
-        L15:
-            java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-            java.lang.String r10 = "call to 'resume' before 'invoke' with coroutine"
-            r9.<init>(r10)
-            throw r9
-        L1d:
-            kotlin.ResultKt.throwOnFailure(r10)
-            goto L34
-        L21:
-            kotlin.ResultKt.throwOnFailure(r10)
-            com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorController r10 = r9.this$0
-            com.android.systemui.mediaprojection.appselector.data.RecentTaskListProvider r10 = r10.recentTaskListProvider
-            r9.label = r2
-            com.android.systemui.mediaprojection.appselector.data.ShellRecentTaskListProvider r10 = (com.android.systemui.mediaprojection.appselector.data.ShellRecentTaskListProvider) r10
-            java.lang.Object r10 = r10.loadRecentTasks(r9)
-            if (r10 != r0) goto L34
-            goto Laf
-        L34:
-            java.util.List r10 = (java.util.List) r10
-            com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorController r1 = r9.this$0
-            r1.getClass()
-            java.lang.Iterable r10 = (java.lang.Iterable) r10
-            java.util.ArrayList r2 = new java.util.ArrayList
-            r2.<init>()
-            java.util.Iterator r10 = r10.iterator()
-        L46:
-            boolean r4 = r10.hasNext()
-            if (r4 == 0) goto L67
-            java.lang.Object r4 = r10.next()
-            r5 = r4
-            com.android.systemui.mediaprojection.appselector.data.RecentTask r5 = (com.android.systemui.mediaprojection.appselector.data.RecentTask) r5
-            int r5 = r5.userId
-            android.os.UserHandle r5 = android.os.UserHandle.of(r5)
-            android.os.UserHandle r6 = r1.hostUserHandle
-            com.android.systemui.mediaprojection.devicepolicy.ScreenCaptureDevicePolicyResolver r7 = r1.devicePolicyResolver
-            boolean r5 = r7.isScreenCaptureAllowed(r5, r6)
-            if (r5 == 0) goto L46
-            r2.add(r4)
-            goto L46
-        L67:
-            java.util.ArrayList r10 = new java.util.ArrayList
-            r10.<init>()
-            int r4 = r2.size()
-            r5 = 0
-        L71:
-            if (r5 >= r4) goto L8a
-            java.lang.Object r6 = r2.get(r5)
-            int r5 = r5 + 1
-            r7 = r6
-            com.android.systemui.mediaprojection.appselector.data.RecentTask r7 = (com.android.systemui.mediaprojection.appselector.data.RecentTask) r7
-            android.content.ComponentName r7 = r7.topActivityComponent
-            android.content.ComponentName r8 = r1.appSelectorComponentName
-            boolean r7 = kotlin.jvm.internal.Intrinsics.areEqual(r7, r8)
-            if (r7 != 0) goto L71
-            r10.add(r6)
-            goto L71
-        L8a:
-            com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorController$sortedTasks$$inlined$sortedBy$1 r2 = new com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorController$sortedTasks$$inlined$sortedBy$1
-            r2.<init>()
-            java.util.List r10 = kotlin.collections.CollectionsKt___CollectionsKt.sortedWith(r10, r2)
-            com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorController r1 = r9.this$0
-            r9.L$0 = r10
-            r9.label = r3
-            r1.getClass()
-            com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorController$refreshForegroundTaskThumbnails$2 r2 = new com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorController$refreshForegroundTaskThumbnails$2
-            r3 = 0
-            r2.<init>(r10, r1, r3)
-            java.lang.Object r1 = kotlinx.coroutines.CoroutineScopeKt.coroutineScope(r2, r9)
-            kotlin.coroutines.intrinsics.CoroutineSingletons r2 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            if (r1 != r2) goto Lab
-            goto Lad
-        Lab:
-            kotlin.Unit r1 = kotlin.Unit.INSTANCE
-        Lad:
-            if (r1 != r0) goto Lb0
-        Laf:
-            return r0
-        Lb0:
-            r0 = r10
-        Lb1:
-            com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorController r9 = r9.this$0
-            com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorView r9 = r9.view
-            com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorActivity r9 = (com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorActivity) r9
-            r9.bind(r0)
-            kotlin.Unit r9 = kotlin.Unit.INSTANCE
-            return r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorController$init$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        List list;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            RecentTaskListProvider recentTaskListProvider = this.this$0.recentTaskListProvider;
+            this.label = 1;
+            obj = ((ShellRecentTaskListProvider) recentTaskListProvider).loadRecentTasks(this);
+            if (obj != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            list = (List) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            ((MediaProjectionAppSelectorActivity) this.this$0.view).bind(list);
+            return Unit.INSTANCE;
+        }
+        ResultKt.throwOnFailure(obj);
+        final MediaProjectionAppSelectorController mediaProjectionAppSelectorController = this.this$0;
+        mediaProjectionAppSelectorController.getClass();
+        ArrayList arrayList = new ArrayList();
+        for (Object obj2 : (List) obj) {
+            if (mediaProjectionAppSelectorController.devicePolicyResolver.isScreenCaptureAllowed(UserHandle.of(((RecentTask) obj2).userId), mediaProjectionAppSelectorController.hostUserHandle)) {
+                arrayList.add(obj2);
+            }
+        }
+        ArrayList arrayList2 = new ArrayList();
+        int size = arrayList.size();
+        int i2 = 0;
+        while (i2 < size) {
+            Object obj3 = arrayList.get(i2);
+            i2++;
+            if (!Intrinsics.areEqual(((RecentTask) obj3).topActivityComponent, mediaProjectionAppSelectorController.appSelectorComponentName)) {
+                arrayList2.add(obj3);
+            }
+        }
+        List listSortedWith = CollectionsKt___CollectionsKt.sortedWith(arrayList2, new Comparator() { // from class: com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorController$sortedTasks$$inlined$sortedBy$1
+            @Override // java.util.Comparator
+            public final int compare(Object obj4, Object obj5) {
+                ComponentName componentName = ((RecentTask) obj4).topActivityComponent;
+                Boolean boolValueOf = Boolean.valueOf(Intrinsics.areEqual(componentName != null ? componentName.getPackageName() : null, mediaProjectionAppSelectorController.callerPackageName));
+                ComponentName componentName2 = ((RecentTask) obj5).topActivityComponent;
+                return ComparisonsKt__ComparisonsKt.compareValues(boolValueOf, Boolean.valueOf(Intrinsics.areEqual(componentName2 != null ? componentName2.getPackageName() : null, mediaProjectionAppSelectorController.callerPackageName)));
+            }
+        });
+        MediaProjectionAppSelectorController mediaProjectionAppSelectorController2 = this.this$0;
+        this.L$0 = listSortedWith;
+        this.label = 2;
+        mediaProjectionAppSelectorController2.getClass();
+        Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new MediaProjectionAppSelectorController$refreshForegroundTaskThumbnails$2(listSortedWith, mediaProjectionAppSelectorController2, null), this);
+        if (objCoroutineScope != CoroutineSingletons.COROUTINE_SUSPENDED) {
+            objCoroutineScope = Unit.INSTANCE;
+        }
+        if (objCoroutineScope != coroutineSingletons) {
+            list = listSortedWith;
+            ((MediaProjectionAppSelectorActivity) this.this$0.view).bind(list);
+            return Unit.INSTANCE;
+        }
+        return coroutineSingletons;
     }
 }

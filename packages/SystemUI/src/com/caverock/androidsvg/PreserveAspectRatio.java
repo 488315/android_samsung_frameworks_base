@@ -1,6 +1,5 @@
 package com.caverock.androidsvg;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PreserveAspectRatio {
     public static final PreserveAspectRatio LETTERBOX;
@@ -8,7 +7,6 @@ public class PreserveAspectRatio {
     public final Alignment alignment;
     public final Scale scale;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Alignment {
         none,
         xMinYMin,
@@ -22,7 +20,6 @@ public class PreserveAspectRatio {
         xMaxYMax
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Scale {
         meet,
         slice

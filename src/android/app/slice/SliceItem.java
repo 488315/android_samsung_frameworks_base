@@ -128,10 +128,10 @@ public final class SliceItem implements Parcelable {
 
     public SliceItem(Parcel parcel) {
         this.mHints = parcel.readStringArray();
-        String readString = parcel.readString();
-        this.mFormat = readString;
+        String string = parcel.readString();
+        this.mFormat = string;
         this.mSubType = parcel.readString();
-        this.mObj = readObj(readString, parcel);
+        this.mObj = readObj(string, parcel);
     }
 
     @Override // android.os.Parcelable
@@ -167,8 +167,8 @@ public final class SliceItem implements Parcelable {
     }
 
     private static String getBaseType(String str) {
-        int indexOf = str.indexOf(47);
-        return indexOf >= 0 ? str.substring(0, indexOf) : str;
+        int iIndexOf = str.indexOf(47);
+        return iIndexOf >= 0 ? str.substring(0, iIndexOf) : str;
     }
 
     /* JADX WARN: Multi-variable type inference failed */

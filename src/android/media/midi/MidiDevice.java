@@ -92,11 +92,11 @@ public final class MidiDevice implements Closeable {
         }
         try {
             Binder binder = new Binder();
-            FileDescriptor openInputPort = this.mDeviceServer.openInputPort(binder, i);
-            if (openInputPort == null) {
+            FileDescriptor fileDescriptorOpenInputPort = this.mDeviceServer.openInputPort(binder, i);
+            if (fileDescriptorOpenInputPort == null) {
                 return null;
             }
-            return new MidiInputPort(this.mDeviceServer, binder, openInputPort, i);
+            return new MidiInputPort(this.mDeviceServer, binder, fileDescriptorOpenInputPort, i);
         } catch (RemoteException unused) {
             Log.e(TAG, "RemoteException in openInputPort");
             return null;
@@ -109,11 +109,11 @@ public final class MidiDevice implements Closeable {
         }
         try {
             Binder binder = new Binder();
-            FileDescriptor openOutputPort = this.mDeviceServer.openOutputPort(binder, i);
-            if (openOutputPort == null) {
+            FileDescriptor fileDescriptorOpenOutputPort = this.mDeviceServer.openOutputPort(binder, i);
+            if (fileDescriptorOpenOutputPort == null) {
                 return null;
             }
-            return new MidiOutputPort(this.mDeviceServer, binder, openOutputPort, i);
+            return new MidiOutputPort(this.mDeviceServer, binder, fileDescriptorOpenOutputPort, i);
         } catch (RemoteException unused) {
             Log.e(TAG, "RemoteException in openOutputPort");
             return null;
@@ -121,17 +121,17 @@ public final class MidiDevice implements Closeable {
     }
 
     public MidiConnection connectPorts(MidiInputPort midiInputPort, int i) {
-        FileDescriptor claimFileDescriptor;
+        FileDescriptor fileDescriptorClaimFileDescriptor;
         if (i < 0 || i >= this.mDeviceInfo.getOutputPortCount()) {
             throw new IllegalArgumentException("outputPortNumber out of range");
         }
-        if (this.mIsDeviceClosed || (claimFileDescriptor = midiInputPort.claimFileDescriptor()) == null) {
+        if (this.mIsDeviceClosed || (fileDescriptorClaimFileDescriptor = midiInputPort.claimFileDescriptor()) == null) {
             return null;
         }
         try {
             Binder binder = new Binder();
-            if (this.mDeviceServer.connectPorts(binder, claimFileDescriptor, i) != Process.myPid()) {
-                IoUtils.closeQuietly(claimFileDescriptor);
+            if (this.mDeviceServer.connectPorts(binder, fileDescriptorClaimFileDescriptor, i) != Process.myPid()) {
+                IoUtils.closeQuietly(fileDescriptorClaimFileDescriptor);
             }
             return new MidiConnection(binder, midiInputPort);
         } catch (RemoteException unused) {

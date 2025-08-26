@@ -205,9 +205,9 @@ public class StatusBarManager {
 
     private synchronized IStatusBarService getService() {
         if (this.mService == null) {
-            IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService(Context.STATUS_BAR_SERVICE));
-            this.mService = asInterface;
-            if (asInterface == null) {
+            IStatusBarService iStatusBarServiceAsInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService(Context.STATUS_BAR_SERVICE));
+            this.mService = iStatusBarServiceAsInterface;
+            if (iStatusBarServiceAsInterface == null) {
                 Slog.w(TAG, "warning: no STATUS_BAR_SERVICE");
             }
         }
@@ -227,13 +227,13 @@ public class StatusBarManager {
         if (callers == null) {
             return null;
         }
-        String[] split = callers.split("[.]");
-        for (int i = 0; i < split.length; i++) {
+        String[] strArrSplit = callers.split("[.]");
+        for (int i = 0; i < strArrSplit.length; i++) {
         }
-        if (split.length <= 0) {
+        if (strArrSplit.length <= 0) {
             return null;
         }
-        return NavigationBarInflaterView.GRAVITY_SEPARATOR + split[split.length - 1];
+        return NavigationBarInflaterView.GRAVITY_SEPARATOR + strArrSplit[strArrSplit.length - 1];
     }
 
     public void disable(int i) {
@@ -448,11 +448,11 @@ public class StatusBarManager {
         try {
             int identifier = Binder.getCallingUserHandle().getIdentifier();
             IStatusBarService service = getService();
-            int[] iArr = {0, 0};
+            int[] disableFlags = {0, 0};
             if (service != null) {
-                iArr = service.getDisableFlags(this.mToken, identifier);
+                disableFlags = service.getDisableFlags(this.mToken, identifier);
             }
-            return new DisableInfo(iArr[0], iArr[1]);
+            return new DisableInfo(disableFlags[0], disableFlags[1]);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -858,7 +858,7 @@ public class StatusBarManager {
             this.mExecutor.execute(new Runnable() { // from class: android.app.StatusBarManager$RequestResultCallback$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StatusBarManager.RequestResultCallback.this.lambda$onTileRequest$0(i);
+                    this.f$0.lambda$onTileRequest$0(i);
                 }
             });
         }
@@ -875,11 +875,11 @@ public class StatusBarManager {
 
         @Override // com.android.internal.statusbar.IUndoMediaTransferCallback
         public void onUndoTriggered() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(this.mCallback);
             } finally {
-                restoreCallingIdentity(clearCallingIdentity);
+                restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -897,7 +897,7 @@ public class StatusBarManager {
             Consumer<List<NearbyDevice>> consumer = new Consumer() { // from class: android.app.StatusBarManager$NearbyMediaDevicesProviderWrapper$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    StatusBarManager.NearbyMediaDevicesProviderWrapper.lambda$registerNearbyDevicesCallback$0(INearbyMediaDevicesUpdateCallback.this, (List) obj);
+                    StatusBarManager.NearbyMediaDevicesProviderWrapper.lambda$registerNearbyDevicesCallback$0(iNearbyMediaDevicesUpdateCallback, (List) obj);
                 }
             };
             this.mRegisteredCallbacks.put(iNearbyMediaDevicesUpdateCallback, consumer);

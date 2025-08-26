@@ -68,7 +68,7 @@ public class MediaFilterPlaceHolder implements MediaFilter, PlaceHolder<MediaFil
         this.mediaFilterUpdaterList.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterPlaceHolder$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                MediaFilterPlaceHolder.this.m9539x59f5e82e((Consumer) obj);
+                this.f$0.m9552x59f5e82e((Consumer) obj);
             }
         });
         MediaFilterRetriever mediaFilterRetriever = this.mediaFilterRetriever;
@@ -81,7 +81,7 @@ public class MediaFilterPlaceHolder implements MediaFilter, PlaceHolder<MediaFil
     }
 
     /* renamed from: lambda$reset$0$com-samsung-android-sume-core-filter-MediaFilterPlaceHolder, reason: not valid java name */
-    /* synthetic */ void m9539x59f5e82e(Consumer consumer) {
+    /* synthetic */ void m9552x59f5e82e(Consumer consumer) {
         consumer.accept(this.mediaFilter);
     }
 

@@ -77,11 +77,11 @@ public final class TelephonyUtils {
     }
 
     public static void runWithCleanCallingIdentity(Runnable runnable) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             runnable.run();
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -101,11 +101,11 @@ public final class TelephonyUtils {
     }
 
     public static <T> T runWithCleanCallingIdentity(Supplier<T> supplier) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             return supplier.get();
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -124,7 +124,7 @@ public final class TelephonyUtils {
         return bundle2;
     }
 
-    public static void waitUntilReady(CountDownLatch countDownLatch, long j) {
+    public static void waitUntilReady(CountDownLatch countDownLatch, long j) throws InterruptedException {
         try {
             countDownLatch.await(j, TimeUnit.MILLISECONDS);
         } catch (InterruptedException unused) {
@@ -193,8 +193,8 @@ public final class TelephonyUtils {
     }
 
     public static void showSwitchToManagedProfileDialogIfAppropriate(Context context, int i, int i2, String str) {
-        ITelephony asInterface;
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        ITelephony iTelephonyAsInterface;
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             UserHandle userHandleForUid = UserHandle.getUserHandleForUid(i2);
             if (isUidForeground(context, i2) && isPackageSMSRoleHolderForUser(context, str, userHandleForUid)) {
@@ -205,16 +205,16 @@ public final class TelephonyUtils {
                 }
                 UserHandle subscriptionUserHandle = subscriptionManager.getSubscriptionUserHandle(i);
                 UserManager userManager = (UserManager) context.getSystemService(UserManager.class);
-                if (subscriptionUserHandle != null && userManager.isManagedProfile(subscriptionUserHandle.getIdentifier()) && (asInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get())) != null) {
+                if (subscriptionUserHandle != null && userManager.isManagedProfile(subscriptionUserHandle.getIdentifier()) && (iTelephonyAsInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get())) != null) {
                     try {
-                        asInterface.showSwitchToManagedProfileDialog();
+                        iTelephonyAsInterface.showSwitchToManagedProfileDialog();
                     } catch (RemoteException unused) {
                         Log.e(LOG_TAG, "Failed to launch switch to managed profile dialog.");
                     }
                 }
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

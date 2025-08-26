@@ -38,22 +38,22 @@ public class KeyStoreSecurityLevel {
         }
     }
 
-    public KeyStoreOperation createOperation(KeyDescriptor keyDescriptor, Collection<KeyParameter> collection) throws KeyStoreException {
+    public KeyStoreOperation createOperation(KeyDescriptor keyDescriptor, Collection<KeyParameter> collection) throws InterruptedException, KeyStoreException {
         StrictMode.noteDiskWrite();
         while (true) {
             try {
-                CreateOperationResponse createOperation = this.mSecurityLevel.createOperation(keyDescriptor, (KeyParameter[]) collection.toArray(new KeyParameter[collection.size()]), false);
-                return new KeyStoreOperation(createOperation.iOperation, createOperation.operationChallenge != null ? Long.valueOf(createOperation.operationChallenge.challenge) : null, createOperation.parameters != null ? createOperation.parameters.keyParameter : null);
+                CreateOperationResponse createOperationResponseCreateOperation = this.mSecurityLevel.createOperation(keyDescriptor, (KeyParameter[]) collection.toArray(new KeyParameter[collection.size()]), false);
+                return new KeyStoreOperation(createOperationResponseCreateOperation.iOperation, createOperationResponseCreateOperation.operationChallenge != null ? Long.valueOf(createOperationResponseCreateOperation.operationChallenge.challenge) : null, createOperationResponseCreateOperation.parameters != null ? createOperationResponseCreateOperation.parameters.keyParameter : null);
             } catch (RemoteException e) {
                 Log.w(TAG, "Cannot connect to keystore", e);
                 throw new KeyStoreConnectException();
             } catch (ServiceSpecificException e2) {
                 if (e2.errorCode == 18) {
-                    long random = (long) ((Math.random() * 80.0d) + 20.0d);
+                    long jRandom = (long) ((Math.random() * 80.0d) + 20.0d);
                     if (CompatChanges.isChangeEnabled(169897160L)) {
-                        throw new BackendBusyException(random);
+                        throw new BackendBusyException(jRandom);
                     }
-                    interruptedPreservingSleep(random);
+                    interruptedPreservingSleep(jRandom);
                 } else {
                     throw KeyStore2.getKeyStoreException(e2.errorCode, e2.getMessage());
                 }
@@ -66,9 +66,7 @@ public class KeyStoreSecurityLevel {
         return (KeyMetadata) handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreSecurityLevel$$ExternalSyntheticLambda2
             @Override // android.security.CheckedRemoteRequest
             public final Object execute() {
-                KeyMetadata lambda$generateKey$0;
-                lambda$generateKey$0 = KeyStoreSecurityLevel.this.lambda$generateKey$0(keyDescriptor, keyDescriptor2, collection, i, bArr);
-                return lambda$generateKey$0;
+                return this.f$0.lambda$generateKey$0(keyDescriptor, keyDescriptor2, collection, i, bArr);
             }
         });
     }
@@ -83,9 +81,7 @@ public class KeyStoreSecurityLevel {
         return (KeyMetadata) handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreSecurityLevel$$ExternalSyntheticLambda0
             @Override // android.security.CheckedRemoteRequest
             public final Object execute() {
-                KeyMetadata lambda$importKey$1;
-                lambda$importKey$1 = KeyStoreSecurityLevel.this.lambda$importKey$1(keyDescriptor, keyDescriptor2, collection, i, bArr);
-                return lambda$importKey$1;
+                return this.f$0.lambda$importKey$1(keyDescriptor, keyDescriptor2, collection, i, bArr);
             }
         });
     }
@@ -105,9 +101,7 @@ public class KeyStoreSecurityLevel {
         return (KeyMetadata) handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreSecurityLevel$$ExternalSyntheticLambda1
             @Override // android.security.CheckedRemoteRequest
             public final Object execute() {
-                KeyMetadata lambda$importWrappedKey$2;
-                lambda$importWrappedKey$2 = KeyStoreSecurityLevel.this.lambda$importWrappedKey$2(keyDescriptor3, keyDescriptor2, bArr2, collection, authenticatorSpecArr);
-                return lambda$importWrappedKey$2;
+                return this.f$0.lambda$importWrappedKey$2(keyDescriptor3, keyDescriptor2, bArr2, collection, authenticatorSpecArr);
             }
         });
     }
@@ -117,7 +111,7 @@ public class KeyStoreSecurityLevel {
         return this.mSecurityLevel.importWrappedKey(keyDescriptor, keyDescriptor2, bArr, (KeyParameter[]) collection.toArray(new KeyParameter[collection.size()]), authenticatorSpecArr);
     }
 
-    protected static void interruptedPreservingSleep(long j) {
+    protected static void interruptedPreservingSleep(long j) throws InterruptedException {
         Calendar calendar = Calendar.getInstance();
         long timeInMillis = calendar.getTimeInMillis() + j;
         boolean z = false;

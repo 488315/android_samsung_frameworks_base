@@ -157,67 +157,34 @@ public class PrecomputedText implements Spannable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0057  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static android.text.PrecomputedText create(java.lang.CharSequence r7, android.text.PrecomputedText.Params r8) {
-        /*
-            boolean r0 = r7 instanceof android.text.PrecomputedText
-            if (r0 == 0) goto L44
-            r0 = r7
-            android.text.PrecomputedText r0 = (android.text.PrecomputedText) r0
-            android.text.PrecomputedText$Params r1 = r0.getParams()
-            android.text.TextPaint r2 = android.text.PrecomputedText.Params.m5440$$Nest$fgetmPaint(r8)
-            android.text.TextDirectionHeuristic r3 = android.text.PrecomputedText.Params.m5441$$Nest$fgetmTextDir(r8)
-            int r4 = android.text.PrecomputedText.Params.m5437$$Nest$fgetmBreakStrategy(r8)
-            int r5 = android.text.PrecomputedText.Params.m5438$$Nest$fgetmHyphenationFrequency(r8)
-            android.graphics.text.LineBreakConfig r6 = android.text.PrecomputedText.Params.m5439$$Nest$fgetmLineBreakConfig(r8)
-            int r2 = r1.checkResultUsable(r2, r3, r4, r5, r6)
-            r3 = 1
-            if (r2 == r3) goto L2b
-            r1 = 2
-            if (r2 == r1) goto L2a
-            goto L44
-        L2a:
-            return r0
-        L2b:
-            int r2 = r8.getBreakStrategy()
-            int r4 = r1.getBreakStrategy()
-            if (r2 != r4) goto L44
-            int r2 = r8.getHyphenationFrequency()
-            int r1 = r1.getHyphenationFrequency()
-            if (r2 != r1) goto L44
-            android.text.PrecomputedText$ParagraphInfo[] r0 = createMeasuredParagraphsFromPrecomputedText(r0, r8, r3)
-            goto L45
-        L44:
-            r0 = 0
-        L45:
-            if (r0 != 0) goto L57
-            int r4 = r7.length()
-            r5 = 1
-            r6 = 1
-            r3 = 0
-            r1 = r7
-            r2 = r8
-            android.text.PrecomputedText$ParagraphInfo[] r0 = createMeasuredParagraphs(r1, r2, r3, r4, r5, r6)
-            r5 = r2
-            r2 = r1
-            goto L59
-        L57:
-            r2 = r7
-            r5 = r8
-        L59:
-            r6 = r0
-            android.text.PrecomputedText r1 = new android.text.PrecomputedText
-            r3 = 0
-            int r4 = r2.length()
-            r1.<init>(r2, r3, r4, r5, r6)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.PrecomputedText.create(java.lang.CharSequence, android.text.PrecomputedText$Params):android.text.PrecomputedText");
+    public static PrecomputedText create(CharSequence charSequence, Params params) {
+        ParagraphInfo[] paragraphInfoArrCreateMeasuredParagraphs;
+        CharSequence charSequence2;
+        Params params2;
+        if (charSequence instanceof PrecomputedText) {
+            PrecomputedText precomputedText = (PrecomputedText) charSequence;
+            Params params3 = precomputedText.getParams();
+            int iCheckResultUsable = params3.checkResultUsable(params.mPaint, params.mTextDir, params.mBreakStrategy, params.mHyphenationFrequency, params.mLineBreakConfig);
+            if (iCheckResultUsable != 1) {
+                if (iCheckResultUsable == 2) {
+                    return precomputedText;
+                }
+            } else if (params.getBreakStrategy() == params3.getBreakStrategy() && params.getHyphenationFrequency() == params3.getHyphenationFrequency()) {
+                paragraphInfoArrCreateMeasuredParagraphs = createMeasuredParagraphsFromPrecomputedText(precomputedText, params, true);
+            }
+            paragraphInfoArrCreateMeasuredParagraphs = null;
+        } else {
+            paragraphInfoArrCreateMeasuredParagraphs = null;
+        }
+        if (paragraphInfoArrCreateMeasuredParagraphs == null) {
+            paragraphInfoArrCreateMeasuredParagraphs = createMeasuredParagraphs(charSequence, params, 0, charSequence.length(), true, true);
+            params2 = params;
+            charSequence2 = charSequence;
+        } else {
+            charSequence2 = charSequence;
+            params2 = params;
+        }
+        return new PrecomputedText(charSequence2, 0, charSequence2.length(), params2, paragraphInfoArrCreateMeasuredParagraphs);
     }
 
     private static ParagraphInfo[] createMeasuredParagraphsFromPrecomputedText(PrecomputedText precomputedText, Params params, boolean z) {
@@ -241,6 +208,11 @@ public class PrecomputedText implements Spannable {
         return (ParagraphInfo[]) arrayList.toArray(new ParagraphInfo[arrayList.size()]);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0063 A[PHI: r2
+      0x0063: PHI (r2v3 android.graphics.text.LineBreakConfig) = (r2v2 android.graphics.text.LineBreakConfig), (r2v7 android.graphics.text.LineBreakConfig) binds: [B:18:0x003f, B:20:0x0049] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static ParagraphInfo[] createMeasuredParagraphs(CharSequence charSequence, Params params, int i, int i2, boolean z, boolean z2) {
         int i3;
         ArrayList arrayList = new ArrayList();
@@ -254,23 +226,19 @@ public class PrecomputedText implements Spannable {
         LineBreakConfig lineBreakConfig = null;
         int i4 = i;
         while (i4 < i2) {
-            int indexOf = TextUtils.indexOf(charSequence, LINE_FEED, i4, i2);
-            int i5 = indexOf < 0 ? i2 : indexOf + 1;
+            int iIndexOf = TextUtils.indexOf(charSequence, LINE_FEED, i4, i2);
+            int i5 = iIndexOf < 0 ? i2 : iIndexOf + 1;
             if (lineBreakConfig == null) {
                 lineBreakConfig = params.getLineBreakConfig();
                 if (lineBreakConfig.getLineBreakWordStyle() == 2) {
                     if (i4 != i || i5 != i2) {
                         lineBreakConfig = new LineBreakConfig.Builder().merge(lineBreakConfig).setLineBreakWordStyle(0).build();
                     }
-                    LineBreakConfig lineBreakConfig2 = lineBreakConfig;
-                    arrayList.add(new ParagraphInfo(i5, MeasuredParagraph.buildForStaticLayout(params.getTextPaint(), lineBreakConfig2, charSequence, i4, i5, params.getTextDirection(), i3, z, z2, null, null)));
-                    lineBreakConfig = lineBreakConfig2;
-                    i4 = i5;
                 }
             }
-            LineBreakConfig lineBreakConfig22 = lineBreakConfig;
-            arrayList.add(new ParagraphInfo(i5, MeasuredParagraph.buildForStaticLayout(params.getTextPaint(), lineBreakConfig22, charSequence, i4, i5, params.getTextDirection(), i3, z, z2, null, null)));
-            lineBreakConfig = lineBreakConfig22;
+            LineBreakConfig lineBreakConfig2 = lineBreakConfig;
+            arrayList.add(new ParagraphInfo(i5, MeasuredParagraph.buildForStaticLayout(params.getTextPaint(), lineBreakConfig2, charSequence, i4, i5, params.getTextDirection(), i3, z, z2, null, null)));
+            lineBreakConfig = lineBreakConfig2;
             i4 = i5;
         }
         return (ParagraphInfo[]) arrayList.toArray(new ParagraphInfo[arrayList.size()]);
@@ -355,13 +323,13 @@ public class PrecomputedText implements Spannable {
         if (i == i2) {
             return 0.0f;
         }
-        int findParaIndex = findParaIndex(i);
-        int paragraphStart = getParagraphStart(findParaIndex);
-        int paragraphEnd = getParagraphEnd(findParaIndex);
+        int iFindParaIndex = findParaIndex(i);
+        int paragraphStart = getParagraphStart(iFindParaIndex);
+        int paragraphEnd = getParagraphEnd(iFindParaIndex);
         if (i < paragraphStart || paragraphEnd < i2) {
             throw new IllegalArgumentException("Cannot measured across the paragraph:para: (" + paragraphStart + ", " + paragraphEnd + "), request: (" + i + ", " + i2 + NavigationBarInflaterView.KEY_CODE_END);
         }
-        return getMeasuredParagraph(findParaIndex).getWidth(i - paragraphStart, i2 - paragraphStart);
+        return getMeasuredParagraph(iFindParaIndex).getWidth(i - paragraphStart, i2 - paragraphStart);
     }
 
     public void getBounds(int i, int i2, Rect rect) {
@@ -373,13 +341,13 @@ public class PrecomputedText implements Spannable {
             rect.set(0, 0, 0, 0);
             return;
         }
-        int findParaIndex = findParaIndex(i);
-        int paragraphStart = getParagraphStart(findParaIndex);
-        int paragraphEnd = getParagraphEnd(findParaIndex);
+        int iFindParaIndex = findParaIndex(i);
+        int paragraphStart = getParagraphStart(iFindParaIndex);
+        int paragraphEnd = getParagraphEnd(iFindParaIndex);
         if (i < paragraphStart || paragraphEnd < i2) {
             throw new IllegalArgumentException("Cannot measured across the paragraph:para: (" + paragraphStart + ", " + paragraphEnd + "), request: (" + i + ", " + i2 + NavigationBarInflaterView.KEY_CODE_END);
         }
-        getMeasuredParagraph(findParaIndex).getBounds(i - paragraphStart, i2 - paragraphStart, rect);
+        getMeasuredParagraph(iFindParaIndex).getBounds(i - paragraphStart, i2 - paragraphStart, rect);
     }
 
     public void getFontMetricsInt(int i, int i2, Paint.FontMetricsInt fontMetricsInt) {
@@ -391,29 +359,29 @@ public class PrecomputedText implements Spannable {
             this.mParams.getTextPaint().getFontMetricsInt(fontMetricsInt);
             return;
         }
-        int findParaIndex = findParaIndex(i);
-        int paragraphStart = getParagraphStart(findParaIndex);
-        int paragraphEnd = getParagraphEnd(findParaIndex);
+        int iFindParaIndex = findParaIndex(i);
+        int paragraphStart = getParagraphStart(iFindParaIndex);
+        int paragraphEnd = getParagraphEnd(iFindParaIndex);
         if (i < paragraphStart || paragraphEnd < i2) {
             throw new IllegalArgumentException("Cannot measured across the paragraph:para: (" + paragraphStart + ", " + paragraphEnd + "), request: (" + i + ", " + i2 + NavigationBarInflaterView.KEY_CODE_END);
         }
-        getMeasuredParagraph(findParaIndex).getFontMetricsInt(i - paragraphStart, i2 - paragraphStart, fontMetricsInt);
+        getMeasuredParagraph(iFindParaIndex).getFontMetricsInt(i - paragraphStart, i2 - paragraphStart, fontMetricsInt);
     }
 
     public float getCharWidthAt(int i) {
         Preconditions.checkArgument(i >= 0 && i < this.mText.length(), "invalid offset");
-        int findParaIndex = findParaIndex(i);
-        int paragraphStart = getParagraphStart(findParaIndex);
-        getParagraphEnd(findParaIndex);
-        return getMeasuredParagraph(findParaIndex).getCharWidthAt(i - paragraphStart);
+        int iFindParaIndex = findParaIndex(i);
+        int paragraphStart = getParagraphStart(iFindParaIndex);
+        getParagraphEnd(iFindParaIndex);
+        return getMeasuredParagraph(iFindParaIndex).getCharWidthAt(i - paragraphStart);
     }
 
     public int getMemoryUsage() {
-        int i = 0;
-        for (int i2 = 0; i2 < getParagraphCount(); i2++) {
-            i += getMeasuredParagraph(i2).getMemoryUsage();
+        int memoryUsage = 0;
+        for (int i = 0; i < getParagraphCount(); i++) {
+            memoryUsage += getMeasuredParagraph(i).getMemoryUsage();
         }
-        return i;
+        return memoryUsage;
     }
 
     @Override // android.text.Spannable

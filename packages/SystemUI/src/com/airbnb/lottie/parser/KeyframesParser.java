@@ -7,7 +7,6 @@ import com.airbnb.lottie.value.Keyframe;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyframesParser {
     public static final JsonReader.Options NAMES = JsonReader.Options.of("k");
@@ -38,13 +37,13 @@ public class KeyframesParser {
                     float f3 = f;
                     ValueParser valueParser3 = valueParser;
                     boolean z3 = z;
-                    Keyframe parse = KeyframeParser.parse(jsonReader3, lottieComposition3, f3, valueParser3, false, z3);
+                    Keyframe keyframe = KeyframeParser.parse(jsonReader3, lottieComposition3, f3, valueParser3, false, z3);
                     jsonReader2 = jsonReader3;
                     lottieComposition2 = lottieComposition3;
                     f2 = f3;
                     valueParser2 = valueParser3;
                     z2 = z3;
-                    arrayList.add(parse);
+                    arrayList.add(keyframe);
                 } else {
                     jsonReader2 = jsonReader;
                     lottieComposition2 = lottieComposition;

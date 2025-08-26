@@ -55,14 +55,14 @@ public class LooperStats implements Looper.Observer {
     @Override // android.os.Looper.Observer
     public Object messageDispatchStarting() {
         if (deviceStateAllowsCollection() && shouldCollectDetailedData()) {
-            DispatchSession poll = this.mSessionPool.poll();
-            if (poll == null) {
-                poll = new DispatchSession();
+            DispatchSession dispatchSessionPoll = this.mSessionPool.poll();
+            if (dispatchSessionPoll == null) {
+                dispatchSessionPoll = new DispatchSession();
             }
-            poll.startTimeMicro = getElapsedRealtimeMicro();
-            poll.cpuStartMicro = getThreadTimeMicro();
-            poll.systemUptimeMillis = getSystemUptimeMillis();
-            return poll;
+            dispatchSessionPoll.startTimeMicro = getElapsedRealtimeMicro();
+            dispatchSessionPoll.cpuStartMicro = getThreadTimeMicro();
+            dispatchSessionPoll.systemUptimeMillis = getSystemUptimeMillis();
+            return dispatchSessionPoll;
         }
         return DispatchSession.NOT_SAMPLED;
     }
@@ -71,23 +71,23 @@ public class LooperStats implements Looper.Observer {
     public void messageDispatched(Object obj, Message message) {
         if (deviceStateAllowsCollection()) {
             DispatchSession dispatchSession = (DispatchSession) obj;
-            Entry findEntry = findEntry(message, dispatchSession != DispatchSession.NOT_SAMPLED);
-            if (findEntry != null) {
-                synchronized (findEntry) {
-                    findEntry.messageCount++;
+            Entry entryFindEntry = findEntry(message, dispatchSession != DispatchSession.NOT_SAMPLED);
+            if (entryFindEntry != null) {
+                synchronized (entryFindEntry) {
+                    entryFindEntry.messageCount++;
                     if (dispatchSession != DispatchSession.NOT_SAMPLED) {
-                        findEntry.recordedMessageCount++;
+                        entryFindEntry.recordedMessageCount++;
                         long elapsedRealtimeMicro = getElapsedRealtimeMicro() - dispatchSession.startTimeMicro;
                         long threadTimeMicro = getThreadTimeMicro() - dispatchSession.cpuStartMicro;
-                        findEntry.totalLatencyMicro += elapsedRealtimeMicro;
-                        findEntry.maxLatencyMicro = Math.max(findEntry.maxLatencyMicro, elapsedRealtimeMicro);
-                        findEntry.cpuUsageMicro += threadTimeMicro;
-                        findEntry.maxCpuUsageMicro = Math.max(findEntry.maxCpuUsageMicro, threadTimeMicro);
+                        entryFindEntry.totalLatencyMicro += elapsedRealtimeMicro;
+                        entryFindEntry.maxLatencyMicro = Math.max(entryFindEntry.maxLatencyMicro, elapsedRealtimeMicro);
+                        entryFindEntry.cpuUsageMicro += threadTimeMicro;
+                        entryFindEntry.maxCpuUsageMicro = Math.max(entryFindEntry.maxCpuUsageMicro, threadTimeMicro);
                         if (message.getWhen() > 0) {
-                            long max = Math.max(0L, dispatchSession.systemUptimeMillis - message.getWhen());
-                            findEntry.delayMillis += max;
-                            findEntry.maxDelayMillis = Math.max(findEntry.maxDelayMillis, max);
-                            findEntry.recordedDelayMessageCount++;
+                            long jMax = Math.max(0L, dispatchSession.systemUptimeMillis - message.getWhen());
+                            entryFindEntry.delayMillis += jMax;
+                            entryFindEntry.maxDelayMillis = Math.max(entryFindEntry.maxDelayMillis, jMax);
+                            entryFindEntry.recordedDelayMessageCount++;
                         }
                     }
                 }
@@ -100,10 +100,10 @@ public class LooperStats implements Looper.Observer {
     public void dispatchingThrewException(Object obj, Message message, Exception exc) {
         if (deviceStateAllowsCollection()) {
             DispatchSession dispatchSession = (DispatchSession) obj;
-            Entry findEntry = findEntry(message, dispatchSession != DispatchSession.NOT_SAMPLED);
-            if (findEntry != null) {
-                synchronized (findEntry) {
-                    findEntry.exceptionCount++;
+            Entry entryFindEntry = findEntry(message, dispatchSession != DispatchSession.NOT_SAMPLED);
+            if (entryFindEntry != null) {
+                synchronized (entryFindEntry) {
+                    entryFindEntry.exceptionCount++;
                 }
             }
             recycleSession(dispatchSession);
@@ -124,9 +124,9 @@ public class LooperStats implements Looper.Observer {
             int size = this.mEntries.size();
             arrayList = new ArrayList(size);
             for (int i = 0; i < size; i++) {
-                Entry valueAt = this.mEntries.valueAt(i);
-                synchronized (valueAt) {
-                    arrayList.add(new ExportedEntry(valueAt));
+                Entry entryValueAt = this.mEntries.valueAt(i);
+                synchronized (entryValueAt) {
+                    arrayList.add(new ExportedEntry(entryValueAt));
                 }
             }
         }
@@ -204,10 +204,10 @@ public class LooperStats implements Looper.Observer {
     }
 
     private Entry findEntry(Message message, boolean z) {
-        boolean isScreenInteractive = this.mTrackScreenInteractive ? this.mDeviceState.isScreenInteractive() : false;
-        int idFor = Entry.idFor(message, isScreenInteractive);
+        boolean zIsScreenInteractive = this.mTrackScreenInteractive ? this.mDeviceState.isScreenInteractive() : false;
+        int iIdFor = Entry.idFor(message, zIsScreenInteractive);
         synchronized (this.mLock) {
-            Entry entry = this.mEntries.get(idFor);
+            Entry entry = this.mEntries.get(iIdFor);
             if (entry == null) {
                 if (!z) {
                     return null;
@@ -215,10 +215,10 @@ public class LooperStats implements Looper.Observer {
                 if (this.mEntries.size() >= this.mEntriesSizeCap) {
                     return this.mOverflowEntry;
                 }
-                entry = new Entry(message, isScreenInteractive);
-                this.mEntries.put(idFor, entry);
+                entry = new Entry(message, zIsScreenInteractive);
+                this.mEntries.put(iIdFor, entry);
             }
-            return (entry.workSourceUid == message.workSourceUid && entry.handler.getClass() == message.getTarget().getClass() && entry.handler.getLooper().getThread() == message.getTarget().getLooper().getThread() && entry.isInteractive == isScreenInteractive) ? entry : this.mHashCollisionEntry;
+            return (entry.workSourceUid == message.workSourceUid && entry.handler.getClass() == message.getTarget().getClass() && entry.handler.getLooper().getThread() == message.getTarget().getLooper().getThread() && entry.isInteractive == zIsScreenInteractive) ? entry : this.mHashCollisionEntry;
         }
     }
 
@@ -301,16 +301,16 @@ public class LooperStats implements Looper.Observer {
 
         static int idFor(Message message, boolean z) {
             int i;
-            int i2;
-            int hashCode = ((((((217 + message.workSourceUid) * 31) + message.getTarget().getLooper().getThread().hashCode()) * 31) + message.getTarget().getClass().hashCode()) * 31) + (z ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
+            int iHashCode;
+            int iHashCode2 = ((((((217 + message.workSourceUid) * 31) + message.getTarget().getLooper().getThread().hashCode()) * 31) + message.getTarget().getClass().hashCode()) * 31) + (z ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
             if (message.getCallback() != null) {
-                i = hashCode * 31;
-                i2 = message.getCallback().getClass().hashCode();
+                i = iHashCode2 * 31;
+                iHashCode = message.getCallback().getClass().hashCode();
             } else {
-                i = hashCode * 31;
-                i2 = message.what;
+                i = iHashCode2 * 31;
+                iHashCode = message.what;
             }
-            return i + i2;
+            return i + iHashCode;
         }
     }
 

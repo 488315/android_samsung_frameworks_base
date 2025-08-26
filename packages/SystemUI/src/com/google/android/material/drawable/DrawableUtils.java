@@ -10,11 +10,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class DrawableUtils {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OutlineCompatR {
         private OutlineCompatR() {
         }
@@ -82,9 +80,9 @@ public final class DrawableUtils {
                 return iArr2;
             }
         }
-        int[] copyOf = Arrays.copyOf(iArr, iArr.length + 1);
-        copyOf[iArr.length] = 16842912;
-        return copyOf;
+        int[] iArrCopyOf = Arrays.copyOf(iArr, iArr.length + 1);
+        iArrCopyOf[iArr.length] = 16842912;
+        return iArrCopyOf;
     }
 
     public static ColorStateList getColorStateListOrNull(Drawable drawable) {

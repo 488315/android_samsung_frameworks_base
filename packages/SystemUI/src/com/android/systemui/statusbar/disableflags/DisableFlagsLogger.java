@@ -7,13 +7,11 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DisableFlagsLogger {
     public final List disable1FlagsList;
     public final List disable2FlagsList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisableFlag {
         public final int bitMask;
         public final char flagIsSetSymbol;
@@ -30,7 +28,6 @@ public final class DisableFlagsLogger {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisableState {
         public final int disable1;
         public final int disable2;
@@ -85,36 +82,36 @@ public final class DisableFlagsLogger {
     }
 
     public final String getDisableFlagsString(DisableState disableState, DisableState disableState2) {
-        String sb;
-        StringBuilder sb2 = new StringBuilder("Received new disable state: ");
-        sb2.append(getFlagsString(disableState));
+        String string;
+        StringBuilder sb = new StringBuilder("Received new disable state: ");
+        sb.append(getFlagsString(disableState));
         if (disableState2 != null && !disableState.equals(disableState2)) {
-            sb2.append(" | New after local modification: ");
-            sb2.append(getFlagsString(disableState2));
-            sb2.append(" ");
+            sb.append(" | New after local modification: ");
+            sb.append(getFlagsString(disableState2));
+            sb.append(" ");
             if (disableState.equals(disableState2)) {
-                sb = "(unchanged)";
+                string = "(unchanged)";
             } else {
-                StringBuilder sb3 = new StringBuilder("(changed: ");
+                StringBuilder sb2 = new StringBuilder("(changed: ");
                 for (DisableFlag disableFlag : this.disable1FlagsList) {
                     char flagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core = disableFlag.getFlagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core(disableState2.disable1);
                     if (disableFlag.getFlagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core(disableState.disable1) != flagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core) {
-                        sb3.append(flagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core);
+                        sb2.append(flagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core);
                     }
                 }
-                sb3.append(".");
+                sb2.append(".");
                 for (DisableFlag disableFlag2 : this.disable2FlagsList) {
                     char flagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core2 = disableFlag2.getFlagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core(disableState2.disable2);
                     if (disableFlag2.getFlagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core(disableState.disable2) != flagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core2) {
-                        sb3.append(flagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core2);
+                        sb2.append(flagStatus$frameworks__base__packages__SystemUI__android_common__SystemUI_core2);
                     }
                 }
-                sb3.append(")");
-                sb = sb3.toString();
+                sb2.append(")");
+                string = sb2.toString();
             }
-            sb2.append(sb);
+            sb.append(string);
         }
-        return sb2.toString();
+        return sb.toString();
     }
 
     public final String getFlagsString(DisableState disableState) {

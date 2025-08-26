@@ -43,11 +43,11 @@ public class IntMap<T> {
     }
 
     public T get(int i) {
-        int findKey = findKey(i);
-        if (findKey == -1) {
+        int iFindKey = findKey(i);
+        if (iFindKey == -1) {
             return null;
         }
-        return this.mValues.get(findKey);
+        return this.mValues.get(iFindKey);
     }
 
     public int size() {
@@ -58,16 +58,16 @@ public class IntMap<T> {
         int i2;
         int i3;
         T t2;
-        int hash = hash(i);
+        int iHash = hash(i);
         int length = this.mKeys.length;
         while (true) {
-            i2 = hash % length;
+            i2 = iHash % length;
             int[] iArr = this.mKeys;
             i3 = iArr[i2];
             if (i3 == Integer.MIN_VALUE || i3 == i) {
                 break;
             }
-            hash = i2 + 1;
+            iHash = i2 + 1;
             length = iArr.length;
         }
         if (i3 == Integer.MIN_VALUE) {
@@ -82,10 +82,10 @@ public class IntMap<T> {
     }
 
     private int findKey(int i) {
-        int hash = hash(i);
+        int iHash = hash(i);
         int length = this.mKeys.length;
         while (true) {
-            int i2 = hash % length;
+            int i2 = iHash % length;
             int[] iArr = this.mKeys;
             int i3 = iArr[i2];
             if (i3 == Integer.MIN_VALUE) {
@@ -94,7 +94,7 @@ public class IntMap<T> {
             if (i3 == i) {
                 return i2;
             }
-            hash = i2 + 1;
+            iHash = i2 + 1;
             length = iArr.length;
         }
     }
@@ -126,24 +126,24 @@ public class IntMap<T> {
     }
 
     public T remove(int i) {
-        int hash = hash(i) % this.mKeys.length;
-        int i2 = hash;
+        int iHash = hash(i) % this.mKeys.length;
+        int length = iHash;
         do {
             int[] iArr = this.mKeys;
-            int i3 = iArr[i2];
-            if (i3 == Integer.MIN_VALUE) {
+            int i2 = iArr[length];
+            if (i2 == Integer.MIN_VALUE) {
                 break;
             }
-            if (i3 == i) {
-                T t = this.mValues.get(i2);
-                this.mKeys[i2] = Integer.MIN_VALUE;
-                this.mValues.set(i2, null);
+            if (i2 == i) {
+                T t = this.mValues.get(length);
+                this.mKeys[length] = Integer.MIN_VALUE;
+                this.mValues.set(length, null);
                 this.mSize--;
-                rehashFrom((i2 + 1) % this.mKeys.length);
+                rehashFrom((length + 1) % this.mKeys.length);
                 return t;
             }
-            i2 = (i2 + 1) % iArr.length;
-        } while (i2 != hash);
+            length = (length + 1) % iArr.length;
+        } while (length != iHash);
         return null;
     }
 

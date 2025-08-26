@@ -1,6 +1,5 @@
 package com.samsung.android.nexus.particle.emitter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public enum EmissionConfigType {
     APPLY_PARENT_ANGULAR_VELOCITY,
@@ -10,15 +9,14 @@ public enum EmissionConfigType {
     final boolean defaultValue;
     int idx;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Holder {
         public static final int sCount;
         public static final EmissionConfigType[] sValuesCache;
 
         static {
-            EmissionConfigType[] values = EmissionConfigType.values();
-            sValuesCache = values;
-            sCount = values.length;
+            EmissionConfigType[] emissionConfigTypeArrValues = EmissionConfigType.values();
+            sValuesCache = emissionConfigTypeArrValues;
+            sCount = emissionConfigTypeArrValues.length;
         }
 
         private Holder() {

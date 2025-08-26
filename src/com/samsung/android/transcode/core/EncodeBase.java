@@ -28,8 +28,13 @@ import com.samsung.android.transcode.util.CodecsHelper;
 import com.samsung.android.transcode.util.FileHelper;
 import com.samsung.android.transcode.util.LogS;
 import com.samsung.android.transcode.util.SEFHelper;
+import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
@@ -168,7 +173,7 @@ public abstract class EncodeBase extends Encode {
     }
 
     @Override // com.samsung.android.transcode.core.Encode
-    protected void startEncoding() throws IOException {
+    protected void startEncoding() throws MediaCodec.CryptoException, IOException {
         if (this.mUserStop) {
             LogS.d("TranscodeLib", "Not starting encoding because it is stopped by user.");
             return;
@@ -219,25 +224,17 @@ public abstract class EncodeBase extends Encode {
         return ((((((bArr[0] & 255) << 8) | (bArr[1] & 255)) << 8) | (bArr[2] & 255)) << 8) | (bArr[3] & 255);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x00f0, code lost:
-    
-        com.samsung.android.transcode.util.LogS.d("TranscodeLib", "filePointer does not go forward. Exit.");
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x00ad, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:30:0x00ad, code lost:
     
         if (r26 == false) goto L32;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:45:0x00af, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:31:0x00af, code lost:
     
         r3.read(r9, 0, r6);
         r0 = com.samsung.android.transcode.core.EncodeBase.mCreationTime;
         r3.write(r0, 0, r0.length);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:46:0x00c7, code lost:
-    
-        r5 = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:48:0x00b9, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:32:0x00b9, code lost:
     
         r0 = com.samsung.android.transcode.core.EncodeBase.mCreationTime;
         r3.read(r0, 0, r0.length);
@@ -245,25 +242,107 @@ public abstract class EncodeBase extends Encode {
         r3.read(r0, 0, r0.length);
         r24.mUpdateCreationTime = true;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:49:0x00c9, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:33:0x00c7, code lost:
+    
+        r5 = true;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:34:0x00c9, code lost:
     
         r0 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:50:0x00ca, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x00ca, code lost:
     
         r1 = r0;
         r5 = true;
      */
+    /* JADX WARN: Code restructure failed: missing block: B:42:0x00f0, code lost:
+    
+        com.samsung.android.transcode.util.LogS.d("TranscodeLib", "filePointer does not go forward. Exit.");
+     */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean updateCreationTime(java.lang.String r25, boolean r26) {
-        /*
-            Method dump skipped, instructions count: 270
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.transcode.core.EncodeBase.updateCreationTime(java.lang.String, boolean):boolean");
+    public boolean updateCreationTime(String str, boolean z) throws Throwable {
+        RandomAccessFile randomAccessFile;
+        byte[] bArr;
+        LogS.d("TranscodeLib", "updateCreationTime mode : " + z + ", filepath : " + str);
+        boolean z2 = false;
+        if (!this.mUpdateCreationTime && z) {
+            LogS.d("TranscodeLib", "Do not update CreationTime");
+            return false;
+        }
+        File file = new File(str);
+        int i = 4;
+        byte[] bArr2 = new byte[4];
+        byte[] bArr3 = new byte[4];
+        byte[] bArr4 = new byte[4];
+        long length = file.length();
+        if (length <= 0) {
+            LogS.e("TranscodeLib", "file size is same or less than 0");
+            return false;
+        }
+        String[] strArr = {"mdia", "minf", "moov", "stbl", "trak"};
+        try {
+            if (z) {
+                randomAccessFile = new RandomAccessFile(file, "rw");
+            } else {
+                randomAccessFile = new RandomAccessFile(file, "r");
+            }
+            RandomAccessFile randomAccessFile2 = randomAccessFile;
+            long jLongValue = 0;
+            while (true) {
+                if (jLongValue >= length) {
+                    break;
+                }
+                try {
+                    try {
+                        randomAccessFile2.seek(jLongValue);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    randomAccessFile2.read(bArr2, 0, i);
+                    long jUnsignedIntToLong = unsignedIntToLong(bArr2);
+                    randomAccessFile2.read(bArr3, 0, i);
+                    String str2 = new String(bArr3, StandardCharsets.UTF_8);
+                    if (Arrays.binarySearch(strArr, str2) >= 0) {
+                        jLongValue += 8;
+                        bArr = bArr2;
+                    } else {
+                        if (str2.equals("mvhd")) {
+                            break;
+                        }
+                        if (jUnsignedIntToLong == 1) {
+                            bArr = bArr2;
+                            randomAccessFile2.seek(jLongValue + 8);
+                            byte[] bArr5 = new byte[8];
+                            randomAccessFile2.read(bArr5, 0, 8);
+                            jLongValue += new BigInteger(bArr5).longValue();
+                        } else {
+                            bArr = bArr2;
+                            if (jUnsignedIntToLong == 0) {
+                                break;
+                            }
+                            jLongValue += jUnsignedIntToLong;
+                        }
+                    }
+                    bArr2 = bArr;
+                    i = 4;
+                } catch (Throwable th) {
+                    Throwable th2 = th;
+                    try {
+                        randomAccessFile2.close();
+                        throw th2;
+                    } catch (Throwable th3) {
+                        th2.addSuppressed(th3);
+                        throw th2;
+                    }
+                }
+            }
+            randomAccessFile2.close();
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
+        return z2;
     }
 
     protected void checkMuxerStart() {
@@ -354,17 +433,17 @@ public abstract class EncodeBase extends Encode {
         return -1;
     }
 
-    private void sendAudioToDecoder() {
+    private void sendAudioToDecoder() throws MediaCodec.CryptoException {
         if (this.mUserStop || this.mAudioExtractorDone) {
             return;
         }
         if (this.mAudioEncoderOutputMediaFormat == null || (this.mMuxerStarted && this.mAudioEncoderInputBufferCount <= 0 && !this.mAudioWaitFrame)) {
             long sampleTime = this.mAudioExtractor.getSampleTime();
-            int checkSilentRegion = (this.mSEFVideo && isSuperSlow()) ? checkSilentRegion(sampleTime) : -1;
-            if (checkSilentRegion != -1) {
-                LogS.d("TranscodeLib", "Seekto region End time :" + (this.mRegionList.get(checkSilentRegion).mRegionEndTime * 1000));
-                this.mAudioExtractor.seekTo(((long) this.mRegionList.get(checkSilentRegion).mRegionEndTime) * 1000, 0);
-                while (this.mAudioExtractor.getSampleTime() < this.mRegionList.get(checkSilentRegion).mRegionEndTime * 1000) {
+            int iCheckSilentRegion = (this.mSEFVideo && isSuperSlow()) ? checkSilentRegion(sampleTime) : -1;
+            if (iCheckSilentRegion != -1) {
+                LogS.d("TranscodeLib", "Seekto region End time :" + (this.mRegionList.get(iCheckSilentRegion).mRegionEndTime * 1000));
+                this.mAudioExtractor.seekTo(((long) this.mRegionList.get(iCheckSilentRegion).mRegionEndTime) * 1000, 0);
+                while (this.mAudioExtractor.getSampleTime() < this.mRegionList.get(iCheckSilentRegion).mRegionEndTime * 1000) {
                     if (this.mAudioExtractor.getSampleTime() == -1) {
                         throw new RuntimeException("Invalid File!");
                     }
@@ -372,9 +451,9 @@ public abstract class EncodeBase extends Encode {
                 }
                 return;
             }
-            int dequeueInputBuffer = this.mInputAudioDecoder.dequeueInputBuffer(10000L);
-            if (dequeueInputBuffer != -1) {
-                int readSampleData = this.mAudioExtractor.readSampleData(this.mAudioDecoderInputBuffers[dequeueInputBuffer], 0);
+            int iDequeueInputBuffer = this.mInputAudioDecoder.dequeueInputBuffer(10000L);
+            if (iDequeueInputBuffer != -1) {
+                int sampleData = this.mAudioExtractor.readSampleData(this.mAudioDecoderInputBuffers[iDequeueInputBuffer], 0);
                 this.mModifiedAudiotime = sampleTime;
                 if (this.mSEFVideo) {
                     if (isSlow120(this.mRecordingMode, this.mRecordingFps)) {
@@ -383,15 +462,15 @@ public abstract class EncodeBase extends Encode {
                         getAudioTime(sampleTime, this.mRecordingMode);
                     }
                 }
-                if (sampleTime <= this.mTrimAudioEndUs && readSampleData >= 0) {
-                    this.mInputAudioDecoder.queueInputBuffer(dequeueInputBuffer, 0, readSampleData, this.mModifiedAudiotime, this.mAudioExtractor.getSampleFlags());
+                if (sampleTime <= this.mTrimAudioEndUs && sampleData >= 0) {
+                    this.mInputAudioDecoder.queueInputBuffer(iDequeueInputBuffer, 0, sampleData, this.mModifiedAudiotime, this.mAudioExtractor.getSampleFlags());
                     this.mAudioExtractor.advance();
                 } else {
                     this.mAudioExtractorDone = true;
                 }
                 if (this.mAudioExtractorDone) {
                     LogS.e("TranscodeLib", "audio decoder sending EOS");
-                    this.mInputAudioDecoder.queueInputBuffer(dequeueInputBuffer, 0, 0, 0L, 4);
+                    this.mInputAudioDecoder.queueInputBuffer(iDequeueInputBuffer, 0, 0, 0L, 4);
                 }
             }
         }
@@ -402,27 +481,27 @@ public abstract class EncodeBase extends Encode {
             return;
         }
         if ((this.mAudioEncoderOutputMediaFormat == null || this.mMuxerStarted) && this.mAudioEncoderInputBufferCount <= 0) {
-            int dequeueOutputBuffer = this.mInputAudioDecoder.dequeueOutputBuffer(this.mAudioDecoderOutputBufferInfo, 10000L);
-            if (dequeueOutputBuffer == -1) {
+            int iDequeueOutputBuffer = this.mInputAudioDecoder.dequeueOutputBuffer(this.mAudioDecoderOutputBufferInfo, 10000L);
+            if (iDequeueOutputBuffer == -1) {
                 LogS.d("TranscodeLib", "audio decoder output buffer try again later while decoding");
                 return;
             }
-            if (dequeueOutputBuffer == -3) {
+            if (iDequeueOutputBuffer == -3) {
                 LogS.e("TranscodeLib", "audio decoder: output buffers changed");
                 this.mAudioDecoderOutputBuffers = this.mInputAudioDecoder.getOutputBuffers();
                 return;
             }
-            if (dequeueOutputBuffer == -2) {
+            if (iDequeueOutputBuffer == -2) {
                 LogS.e("TranscodeLib", "audio decoder: output format changed: ");
                 return;
             }
-            if (dequeueOutputBuffer < 0) {
+            if (iDequeueOutputBuffer < 0) {
                 LogS.e("TranscodeLib", "Unexpected result from audio decoder dequeue output format.");
             } else if ((this.mAudioDecoderOutputBufferInfo.flags & 2) != 0) {
                 LogS.e("TranscodeLib", "audio decoder: codec config buffer");
-                this.mInputAudioDecoder.releaseOutputBuffer(dequeueOutputBuffer, false);
+                this.mInputAudioDecoder.releaseOutputBuffer(iDequeueOutputBuffer, false);
             } else {
-                this.mPendingAudioDecoderOutputBufferIndex = dequeueOutputBuffer;
+                this.mPendingAudioDecoderOutputBufferIndex = iDequeueOutputBuffer;
             }
         }
     }
@@ -440,12 +519,12 @@ public abstract class EncodeBase extends Encode {
         if (this.mUserStop || !this.mCopyAudio || !this.mMuxerStarted || this.mAudioEncoderDone) {
             return;
         }
-        ByteBuffer allocate = ByteBuffer.allocate(131072);
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(131072);
         MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
-        bufferInfo.size = this.mAudioExtractor.readSampleData(allocate, 0);
+        bufferInfo.size = this.mAudioExtractor.readSampleData(byteBufferAllocate, 0);
         LogS.d("TranscodeLib", "Audio rewirte bufferInfoA.size : " + bufferInfo.size);
         bufferInfo.offset = 0;
-        bufferInfo.size = this.mAudioExtractor.readSampleData(allocate, 0);
+        bufferInfo.size = this.mAudioExtractor.readSampleData(byteBufferAllocate, 0);
         if (bufferInfo.size < 0) {
             LogS.d("TranscodeLib", "saw input EOS: Audio");
             this.mAudioEncoderDone = true;
@@ -454,7 +533,7 @@ public abstract class EncodeBase extends Encode {
         }
         bufferInfo.presentationTimeUs = this.mAudioExtractor.getSampleTime();
         bufferInfo.flags = this.mAudioExtractor.getSampleFlags();
-        this.mMuxer.writeSampleData(this.mAudioTrackIndex, allocate, bufferInfo);
+        this.mMuxer.writeSampleData(this.mAudioTrackIndex, byteBufferAllocate, bufferInfo);
         LogS.d("TranscodeLib", "Audio writeSampleData bufferInfoA.size : " + bufferInfo.size + ", bufferInfoA.presentationTimeUs :" + bufferInfo.presentationTimeUs);
         updateProgress(bufferInfo.presentationTimeUs, true);
         this.mAudioExtractor.advance();
@@ -475,24 +554,24 @@ public abstract class EncodeBase extends Encode {
 
     protected void audioVolume(ByteBuffer byteBuffer, int i) {
         LogS.d("TranscodeLib", "AudioVolume  fade_sampleRateConvFactor: 0.1, data_length; " + i);
-        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(i);
-        allocateDirect.position(0);
-        allocateDirect.limit(i);
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(i);
+        byteBufferAllocateDirect.position(0);
+        byteBufferAllocateDirect.limit(i);
         for (int i2 = i / 4; i2 > 0; i2--) {
             short s = (short) (((short) (((short) ((byteBuffer.get() & 255) | ((byteBuffer.get() & 255) << 8))) & 65535)) * 0.1f);
-            allocateDirect.put((byte) (s & 255));
-            allocateDirect.put((byte) ((s & 65280) >> 8));
+            byteBufferAllocateDirect.put((byte) (s & 255));
+            byteBufferAllocateDirect.put((byte) ((s & 65280) >> 8));
             short s2 = (short) (((short) (((short) ((byteBuffer.get() & 255) | ((byteBuffer.get() & 255) << 8))) & 65535)) * 0.1f);
-            allocateDirect.put((byte) (s2 & 255));
-            allocateDirect.put((byte) ((s2 & 65280) >> 8));
+            byteBufferAllocateDirect.put((byte) (s2 & 255));
+            byteBufferAllocateDirect.put((byte) ((s2 & 65280) >> 8));
         }
-        allocateDirect.position(0);
-        allocateDirect.limit(i);
+        byteBufferAllocateDirect.position(0);
+        byteBufferAllocateDirect.limit(i);
         byteBuffer.position(0);
-        while (allocateDirect.hasRemaining()) {
-            byteBuffer.put(allocateDirect.get());
+        while (byteBufferAllocateDirect.hasRemaining()) {
+            byteBuffer.put(byteBufferAllocateDirect.get());
         }
-        allocateDirect.clear();
+        byteBufferAllocateDirect.clear();
     }
 
     protected int getRegionNumber(long j) {
@@ -511,29 +590,29 @@ public abstract class EncodeBase extends Encode {
     }
 
     private boolean checkAudioEncoderOutputBufferIndex() {
-        int dequeueOutputBuffer = this.mOutputAudioEncoder.dequeueOutputBuffer(this.mAudioEncoderOutputBufferInfo, 10000L);
-        if (dequeueOutputBuffer == -1) {
+        int iDequeueOutputBuffer = this.mOutputAudioEncoder.dequeueOutputBuffer(this.mAudioEncoderOutputBufferInfo, 10000L);
+        if (iDequeueOutputBuffer == -1) {
             LogS.d("TranscodeLib", "audio encoder output buffer try again later");
             return false;
         }
-        if (dequeueOutputBuffer == -3) {
+        if (iDequeueOutputBuffer == -3) {
             LogS.d("TranscodeLib", "audio encoder: output buffers changed");
             this.mAudioEncoderOutputBuffers = this.mOutputAudioEncoder.getOutputBuffers();
             return false;
         }
-        if (dequeueOutputBuffer == -2) {
+        if (iDequeueOutputBuffer == -2) {
             this.mAudioEncoderOutputMediaFormat = this.mOutputAudioEncoder.getOutputFormat();
             LogS.e("TranscodeLib", "audio encoder: output format changed " + this.mAudioEncoderOutputMediaFormat);
             return false;
         }
-        if (dequeueOutputBuffer < 0) {
+        if (iDequeueOutputBuffer < 0) {
             LogS.d("TranscodeLib", "Unexpected result from audio encoder dequeue output format.");
             return false;
         }
-        ByteBuffer byteBuffer = this.mAudioEncoderOutputBuffers[dequeueOutputBuffer];
+        ByteBuffer byteBuffer = this.mAudioEncoderOutputBuffers[iDequeueOutputBuffer];
         if ((this.mAudioEncoderOutputBufferInfo.flags & 2) != 0) {
             LogS.e("TranscodeLib", "audio encoder ignoring BUFFER_FLAG_CODEC_CONFIG");
-            this.mOutputAudioEncoder.releaseOutputBuffer(dequeueOutputBuffer, false);
+            this.mOutputAudioEncoder.releaseOutputBuffer(iDequeueOutputBuffer, false);
             return false;
         }
         if (this.mAudioEncoderOutputBufferInfo.size != 0) {
@@ -551,7 +630,7 @@ public abstract class EncodeBase extends Encode {
             LogS.e("TranscodeLib", "saw input EOS: Audio");
             this.mAudioEncoderDone = true;
         }
-        this.mOutputAudioEncoder.releaseOutputBuffer(dequeueOutputBuffer, false);
+        this.mOutputAudioEncoder.releaseOutputBuffer(iDequeueOutputBuffer, false);
         this.mAudioEncoderInputBufferCount--;
         return false;
     }
@@ -579,18 +658,85 @@ public abstract class EncodeBase extends Encode {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:36:0x01fc  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void sendAudioToMuxer(int i, long j, long j2) {
         if (this.mNaccTime == -1) {
             this.mNaccTime = j;
         }
         if (i >= 0) {
-            ByteBuffer duplicate = this.mAudioDecoderOutputBuffers[this.mPendingAudioDecoderOutputBufferIndex].duplicate();
-            duplicate.position(this.mAudioDecoderOutputBufferInfo.offset);
-            duplicate.limit(this.mAudioDecoderOutputBufferInfo.offset + i);
+            ByteBuffer byteBufferDuplicate = this.mAudioDecoderOutputBuffers[this.mPendingAudioDecoderOutputBufferIndex].duplicate();
+            byteBufferDuplicate.position(this.mAudioDecoderOutputBufferInfo.offset);
+            byteBufferDuplicate.limit(this.mAudioDecoderOutputBufferInfo.offset + i);
             int i2 = this.mRecordingMode;
             if ((i2 == 2 || i2 == 1) && i > 0 && sVSPHandle != 0) {
                 float f = this.mTimescale;
-                if (f != 1.0f) {
+                if (f == 1.0f) {
+                    if (isSlowV2() && i > 0 && sSRCHandle != 0) {
+                        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(409600);
+                        byteBufferAllocateDirect.position(0);
+                        LogS.d("TranscodeLib", "SRCExe2 is called");
+                        int iSRCExe2 = this.mAudio.SRCExe2(sSRCHandle, byteBufferDuplicate, byteBufferAllocateDirect, (i / this.mOutputAudioChannelCount) / 2);
+                        byteBufferAllocateDirect.limit(this.mOutputAudioChannelCount * iSRCExe2 * 2);
+                        if (this.mTimescale != 8.0f) {
+                            audioVolume(byteBufferAllocateDirect, this.mOutputAudioChannelCount * iSRCExe2 * 2);
+                        }
+                        byteBufferAllocateDirect.position(0);
+                        byteBufferAllocateDirect.get(this.mTempAudioBuffer, this.mTempAudioLength, this.mOutputAudioChannelCount * iSRCExe2 * 2);
+                        this.mTempAudioLength += iSRCExe2 * this.mOutputAudioChannelCount * 2;
+                        byteBufferAllocateDirect.clear();
+                        while (true) {
+                            int i3 = this.mTempAudioLength;
+                            int i4 = this.mTempAudioEncSize;
+                            if (i3 < i4) {
+                                break;
+                            }
+                            ByteBuffer byteBufferAllocateDirect2 = ByteBuffer.allocateDirect(i4);
+                            byteBufferAllocateDirect2.put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioEncSize);
+                            int i5 = this.mTempAudioOffset;
+                            int i6 = this.mTempAudioEncSize;
+                            int i7 = i5 + i6;
+                            this.mTempAudioOffset = i7;
+                            byte[] bArr = this.mTempAudioBuffer;
+                            System.arraycopy(bArr, i7, bArr, 0, this.mTempAudioLength - i6);
+                            this.mTempAudioOffset = 0;
+                            this.mTempAudioLength -= this.mTempAudioEncSize;
+                            this.mAudioEncoderInputBufferCount++;
+                            ByteBuffer byteBufferAllocateDirect3 = ByteBuffer.allocateDirect(4096);
+                            int iNAACEncoderExe = this.mAudio.NAACEncoderExe(sNAACHandle, byteBufferAllocateDirect2, byteBufferAllocateDirect3, this.mOutputAudioChannelCount);
+                            LogS.d("TranscodeLib", " Enc NAACEncoderExe encoded_size: " + iNAACEncoderExe + " naac_time : " + this.mNaccTime);
+                            this.mAudioEncoderOutputBufferInfo.size = iNAACEncoderExe;
+                            this.mAudioEncoderOutputBufferInfo.presentationTimeUs = this.mNaccTime;
+                            byteBufferAllocateDirect3.limit(iNAACEncoderExe);
+                            this.mMuxer.writeSampleData(this.mAudioTrackIndex, byteBufferAllocateDirect3, this.mAudioEncoderOutputBufferInfo);
+                            long j3 = this.mNaccTime;
+                            this.mPausedVideoUs = j3;
+                            this.mNaccTime = j3 + 21333;
+                            this.mAudioEncoderInputBufferCount--;
+                            byteBufferAllocateDirect2.clear();
+                        }
+                    } else {
+                        ByteBuffer byteBufferAllocateDirect4 = ByteBuffer.allocateDirect(4096);
+                        byteBufferAllocateDirect4.position(0);
+                        byteBufferAllocateDirect4.put(byteBufferDuplicate);
+                        byteBufferAllocateDirect4.limit(i);
+                        this.mAudioEncoderInputBufferCount++;
+                        ByteBuffer byteBufferAllocateDirect5 = ByteBuffer.allocateDirect(4096);
+                        int iNAACEncoderExe2 = this.mAudio.NAACEncoderExe(sNAACHandle, byteBufferAllocateDirect4, byteBufferAllocateDirect5, this.mOutputAudioChannelCount);
+                        LogS.d("TranscodeLib", " Enc NAACEncoderExe2 encoded_size: " + iNAACEncoderExe2 + " naac_time : " + this.mNaccTime);
+                        this.mAudioEncoderOutputBufferInfo.size = iNAACEncoderExe2;
+                        this.mAudioEncoderOutputBufferInfo.presentationTimeUs = this.mNaccTime;
+                        byteBufferAllocateDirect5.limit(iNAACEncoderExe2);
+                        this.mMuxer.writeSampleData(this.mAudioTrackIndex, byteBufferAllocateDirect5, this.mAudioEncoderOutputBufferInfo);
+                        long j4 = this.mNaccTime;
+                        this.mPausedVideoUs = j4;
+                        this.mNaccTime = j4 + 21333;
+                        this.mAudioEncoderInputBufferCount--;
+                        byteBufferAllocateDirect4.clear();
+                    }
+                } else {
                     if (f > 8.0f) {
                         int regionNumber = getRegionNumber(j2);
                         LogS.d("TranscodeLib", "Seekto region : " + regionNumber + ", end time :" + (this.mRegionList.get(regionNumber).mRegionEndTime * 1000) + ", RegionList.size() : " + this.mRegionList.size());
@@ -617,108 +763,46 @@ public abstract class EncodeBase extends Encode {
                         }
                         return;
                     }
-                    ByteBuffer allocateDirect = ByteBuffer.allocateDirect(409600);
-                    allocateDirect.position(0);
+                    ByteBuffer byteBufferAllocateDirect6 = ByteBuffer.allocateDirect(409600);
+                    byteBufferAllocateDirect6.position(0);
                     LogS.d("TranscodeLib", "VSPExe2 is called");
-                    int VSPExe2 = this.mAudio.VSPExe2(sVSPHandle, allocateDirect, duplicate, i / this.mOutputAudioChannelCount);
-                    allocateDirect.limit(this.mOutputAudioChannelCount * VSPExe2 * 2);
-                    allocateDirect.get(this.mTempAudioBuffer, this.mTempAudioLength, this.mOutputAudioChannelCount * VSPExe2 * 2);
-                    this.mTempAudioLength += VSPExe2 * this.mOutputAudioChannelCount * 2;
-                    allocateDirect.clear();
+                    int iVSPExe2 = this.mAudio.VSPExe2(sVSPHandle, byteBufferAllocateDirect6, byteBufferDuplicate, i / this.mOutputAudioChannelCount);
+                    byteBufferAllocateDirect6.limit(this.mOutputAudioChannelCount * iVSPExe2 * 2);
+                    byteBufferAllocateDirect6.get(this.mTempAudioBuffer, this.mTempAudioLength, this.mOutputAudioChannelCount * iVSPExe2 * 2);
+                    this.mTempAudioLength += iVSPExe2 * this.mOutputAudioChannelCount * 2;
+                    byteBufferAllocateDirect6.clear();
                     LogS.d("TranscodeLib", "VSPExe2 original size :" + i + ", mTempAudioLength :" + this.mTempAudioLength + ", mTempAudioEncSize :" + this.mTempAudioEncSize);
                     while (true) {
-                        int i3 = this.mTempAudioLength;
-                        int i4 = this.mTempAudioEncSize;
-                        if (i3 < i4) {
+                        int i8 = this.mTempAudioLength;
+                        int i9 = this.mTempAudioEncSize;
+                        if (i8 < i9) {
                             break;
                         }
-                        ByteBuffer allocateDirect2 = ByteBuffer.allocateDirect(i4);
-                        allocateDirect2.put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioEncSize);
-                        int i5 = this.mTempAudioOffset;
-                        int i6 = this.mTempAudioEncSize;
-                        int i7 = i5 + i6;
-                        this.mTempAudioOffset = i7;
-                        byte[] bArr = this.mTempAudioBuffer;
-                        System.arraycopy(bArr, i7, bArr, 0, this.mTempAudioLength - i6);
+                        ByteBuffer byteBufferAllocateDirect7 = ByteBuffer.allocateDirect(i9);
+                        byteBufferAllocateDirect7.put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioEncSize);
+                        int i10 = this.mTempAudioOffset;
+                        int i11 = this.mTempAudioEncSize;
+                        int i12 = i10 + i11;
+                        this.mTempAudioOffset = i12;
+                        byte[] bArr2 = this.mTempAudioBuffer;
+                        System.arraycopy(bArr2, i12, bArr2, 0, this.mTempAudioLength - i11);
                         this.mTempAudioOffset = 0;
                         this.mTempAudioLength -= this.mTempAudioEncSize;
                         this.mAudioEncoderInputBufferCount++;
-                        ByteBuffer allocateDirect3 = ByteBuffer.allocateDirect(4096);
-                        int NAACEncoderExe = this.mAudio.NAACEncoderExe(sNAACHandle, allocateDirect2, allocateDirect3, this.mOutputAudioChannelCount);
-                        LogS.d("TranscodeLib", " Enc NAACEncoderExe encoded_size: " + NAACEncoderExe + " naac_time : " + this.mNaccTime);
-                        this.mAudioEncoderOutputBufferInfo.size = NAACEncoderExe;
+                        ByteBuffer byteBufferAllocateDirect8 = ByteBuffer.allocateDirect(4096);
+                        int iNAACEncoderExe3 = this.mAudio.NAACEncoderExe(sNAACHandle, byteBufferAllocateDirect7, byteBufferAllocateDirect8, this.mOutputAudioChannelCount);
+                        LogS.d("TranscodeLib", " Enc NAACEncoderExe encoded_size: " + iNAACEncoderExe3 + " naac_time : " + this.mNaccTime);
+                        this.mAudioEncoderOutputBufferInfo.size = iNAACEncoderExe3;
                         this.mAudioEncoderOutputBufferInfo.presentationTimeUs = this.mNaccTime;
-                        allocateDirect3.limit(NAACEncoderExe);
-                        this.mMuxer.writeSampleData(this.mAudioTrackIndex, allocateDirect3, this.mAudioEncoderOutputBufferInfo);
-                        long j3 = this.mNaccTime;
-                        this.mPausedVideoUs = j3;
-                        this.mNaccTime = j3 + 21333;
+                        byteBufferAllocateDirect8.limit(iNAACEncoderExe3);
+                        this.mMuxer.writeSampleData(this.mAudioTrackIndex, byteBufferAllocateDirect8, this.mAudioEncoderOutputBufferInfo);
+                        long j5 = this.mNaccTime;
+                        this.mPausedVideoUs = j5;
+                        this.mNaccTime = j5 + 21333;
                         this.mAudioEncoderInputBufferCount--;
-                        allocateDirect2.clear();
+                        byteBufferAllocateDirect7.clear();
                     }
                 }
-            }
-            if (isSlowV2() && i > 0 && sSRCHandle != 0) {
-                ByteBuffer allocateDirect4 = ByteBuffer.allocateDirect(409600);
-                allocateDirect4.position(0);
-                LogS.d("TranscodeLib", "SRCExe2 is called");
-                int SRCExe2 = this.mAudio.SRCExe2(sSRCHandle, duplicate, allocateDirect4, (i / this.mOutputAudioChannelCount) / 2);
-                allocateDirect4.limit(this.mOutputAudioChannelCount * SRCExe2 * 2);
-                if (this.mTimescale != 8.0f) {
-                    audioVolume(allocateDirect4, this.mOutputAudioChannelCount * SRCExe2 * 2);
-                }
-                allocateDirect4.position(0);
-                allocateDirect4.get(this.mTempAudioBuffer, this.mTempAudioLength, this.mOutputAudioChannelCount * SRCExe2 * 2);
-                this.mTempAudioLength += SRCExe2 * this.mOutputAudioChannelCount * 2;
-                allocateDirect4.clear();
-                while (true) {
-                    int i8 = this.mTempAudioLength;
-                    int i9 = this.mTempAudioEncSize;
-                    if (i8 < i9) {
-                        break;
-                    }
-                    ByteBuffer allocateDirect5 = ByteBuffer.allocateDirect(i9);
-                    allocateDirect5.put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioEncSize);
-                    int i10 = this.mTempAudioOffset;
-                    int i11 = this.mTempAudioEncSize;
-                    int i12 = i10 + i11;
-                    this.mTempAudioOffset = i12;
-                    byte[] bArr2 = this.mTempAudioBuffer;
-                    System.arraycopy(bArr2, i12, bArr2, 0, this.mTempAudioLength - i11);
-                    this.mTempAudioOffset = 0;
-                    this.mTempAudioLength -= this.mTempAudioEncSize;
-                    this.mAudioEncoderInputBufferCount++;
-                    ByteBuffer allocateDirect6 = ByteBuffer.allocateDirect(4096);
-                    int NAACEncoderExe2 = this.mAudio.NAACEncoderExe(sNAACHandle, allocateDirect5, allocateDirect6, this.mOutputAudioChannelCount);
-                    LogS.d("TranscodeLib", " Enc NAACEncoderExe encoded_size: " + NAACEncoderExe2 + " naac_time : " + this.mNaccTime);
-                    this.mAudioEncoderOutputBufferInfo.size = NAACEncoderExe2;
-                    this.mAudioEncoderOutputBufferInfo.presentationTimeUs = this.mNaccTime;
-                    allocateDirect6.limit(NAACEncoderExe2);
-                    this.mMuxer.writeSampleData(this.mAudioTrackIndex, allocateDirect6, this.mAudioEncoderOutputBufferInfo);
-                    long j4 = this.mNaccTime;
-                    this.mPausedVideoUs = j4;
-                    this.mNaccTime = j4 + 21333;
-                    this.mAudioEncoderInputBufferCount--;
-                    allocateDirect5.clear();
-                }
-            } else {
-                ByteBuffer allocateDirect7 = ByteBuffer.allocateDirect(4096);
-                allocateDirect7.position(0);
-                allocateDirect7.put(duplicate);
-                allocateDirect7.limit(i);
-                this.mAudioEncoderInputBufferCount++;
-                ByteBuffer allocateDirect8 = ByteBuffer.allocateDirect(4096);
-                int NAACEncoderExe3 = this.mAudio.NAACEncoderExe(sNAACHandle, allocateDirect7, allocateDirect8, this.mOutputAudioChannelCount);
-                LogS.d("TranscodeLib", " Enc NAACEncoderExe2 encoded_size: " + NAACEncoderExe3 + " naac_time : " + this.mNaccTime);
-                this.mAudioEncoderOutputBufferInfo.size = NAACEncoderExe3;
-                this.mAudioEncoderOutputBufferInfo.presentationTimeUs = this.mNaccTime;
-                allocateDirect8.limit(NAACEncoderExe3);
-                this.mMuxer.writeSampleData(this.mAudioTrackIndex, allocateDirect8, this.mAudioEncoderOutputBufferInfo);
-                long j5 = this.mNaccTime;
-                this.mPausedVideoUs = j5;
-                this.mNaccTime = j5 + 21333;
-                this.mAudioEncoderInputBufferCount--;
-                allocateDirect7.clear();
             }
         }
         if (checkDecoderFinish()) {
@@ -728,10 +812,10 @@ public abstract class EncodeBase extends Encode {
     }
 
     protected int checkDecAudio(int i, boolean z) {
-        ByteBuffer duplicate = this.mAudioDecoderOutputBuffers[this.mPendingAudioDecoderOutputBufferIndex].duplicate();
-        duplicate.position(this.mAudioDecoderOutputBufferInfo.offset);
-        duplicate.limit(this.mAudioDecoderOutputBufferInfo.offset + i);
-        this.mDecAudio = ByteBuffer.allocateDirect(duplicate.capacity());
+        ByteBuffer byteBufferDuplicate = this.mAudioDecoderOutputBuffers[this.mPendingAudioDecoderOutputBufferIndex].duplicate();
+        byteBufferDuplicate.position(this.mAudioDecoderOutputBufferInfo.offset);
+        byteBufferDuplicate.limit(this.mAudioDecoderOutputBufferInfo.offset + i);
+        this.mDecAudio = ByteBuffer.allocateDirect(byteBufferDuplicate.capacity());
         if (this.mOriginalAudioChannelCount > 0) {
             int i2 = (i / this.mOriginalAudioChannelCount) * this.mOutputAudioChannelCount;
             int i3 = this.mOutputAudioChannelCount * 2;
@@ -743,15 +827,15 @@ public abstract class EncodeBase extends Encode {
                     int i7 = i6 * 2;
                     int i8 = (i5 * i3) + i7;
                     int i9 = (i5 * i4) + i7;
-                    this.mDecAudio.put(i8, duplicate.get(i9));
-                    this.mDecAudio.put(i8 + 1, duplicate.get(i9 + 1));
+                    this.mDecAudio.put(i8, byteBufferDuplicate.get(i9));
+                    this.mDecAudio.put(i8 + 1, byteBufferDuplicate.get(i9 + 1));
                 }
             }
             i = i2;
         } else {
             this.mDecAudio.position(0);
             this.mDecAudio.limit(i);
-            this.mDecAudio.put(duplicate);
+            this.mDecAudio.put(byteBufferDuplicate);
         }
         if (!z) {
             this.mDecAudio.position(0);
@@ -785,9 +869,13 @@ public abstract class EncodeBase extends Encode {
         }
     }
 
-    private void sendAudioToEncoder_AudioSolution(int i, long j, long j2) {
+    /* JADX WARN: Removed duplicated region for block: B:24:0x00ee  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private void sendAudioToEncoder_AudioSolution(int i, long j, long j2) throws MediaCodec.CryptoException {
         if (i >= 0) {
-            int checkDecAudio = checkDecAudio(i, true);
+            int iCheckDecAudio = checkDecAudio(i, true);
             int i2 = this.mRecordingMode;
             if ((i2 == 2 || i2 == 1) && i > 0 && sVSPHandle != 0) {
                 float f = this.mTimescale;
@@ -796,23 +884,23 @@ public abstract class EncodeBase extends Encode {
                         checkAudioDecoderEOS(j2);
                         return;
                     }
-                    ByteBuffer allocateDirect = ByteBuffer.allocateDirect(409600);
-                    allocateDirect.position(0);
+                    ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(409600);
+                    byteBufferAllocateDirect.position(0);
                     LogS.d("TranscodeLib", "VSPExe2 is called");
-                    int VSPExe2 = this.mAudio.VSPExe2(sVSPHandle, allocateDirect, this.mDecAudio, checkDecAudio / this.mOutputAudioChannelCount);
-                    allocateDirect.limit(this.mOutputAudioChannelCount * VSPExe2 * 2);
-                    allocateDirect.get(this.mTempAudioBuffer, this.mTempAudioLength, this.mOutputAudioChannelCount * VSPExe2 * 2);
-                    this.mTempAudioLength += VSPExe2 * this.mOutputAudioChannelCount * 2;
-                    allocateDirect.clear();
+                    int iVSPExe2 = this.mAudio.VSPExe2(sVSPHandle, byteBufferAllocateDirect, this.mDecAudio, iCheckDecAudio / this.mOutputAudioChannelCount);
+                    byteBufferAllocateDirect.limit(this.mOutputAudioChannelCount * iVSPExe2 * 2);
+                    byteBufferAllocateDirect.get(this.mTempAudioBuffer, this.mTempAudioLength, this.mOutputAudioChannelCount * iVSPExe2 * 2);
+                    this.mTempAudioLength += iVSPExe2 * this.mOutputAudioChannelCount * 2;
+                    byteBufferAllocateDirect.clear();
                     LogS.d("TranscodeLib", "VSPExe2 original size :" + i + ", mTempAudioLength :" + this.mTempAudioLength);
                     long j3 = j;
                     while (this.mTempAudioLength >= this.mTempAudioEncSize) {
-                        int dequeueInputBuffer = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
-                        if (dequeueInputBuffer == -1) {
+                        int iDequeueInputBuffer = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
+                        if (iDequeueInputBuffer == -1) {
                             LogS.d("TranscodeLib", "audio encoder input buffer try again later");
                             return;
                         }
-                        this.mAudioEncoderInputBuffers[dequeueInputBuffer].put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioEncSize);
+                        this.mAudioEncoderInputBuffers[iDequeueInputBuffer].put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioEncSize);
                         int i3 = this.mTempAudioOffset;
                         int i4 = this.mTempAudioEncSize;
                         int i5 = i3 + i4;
@@ -821,56 +909,55 @@ public abstract class EncodeBase extends Encode {
                         System.arraycopy(bArr, i5, bArr, 0, this.mTempAudioLength - i4);
                         this.mTempAudioOffset = 0;
                         this.mTempAudioLength -= this.mTempAudioEncSize;
-                        this.mOutputAudioEncoder.queueInputBuffer(dequeueInputBuffer, 0, this.mTempAudioEncSize, j3, this.mAudioDecoderOutputBufferInfo.flags);
+                        this.mOutputAudioEncoder.queueInputBuffer(iDequeueInputBuffer, 0, this.mTempAudioEncSize, j3, this.mAudioDecoderOutputBufferInfo.flags);
                         this.mAudioEncoderInputBufferCount++;
                         j3 += 21333;
                     }
-                }
-            }
-            if (isSlowV2() && i > 0 && sSRCHandle != 0) {
-                ByteBuffer allocateDirect2 = ByteBuffer.allocateDirect(409600);
-                allocateDirect2.position(0);
-                LogS.d("TranscodeLib", "SRCExe2 is called");
-                int SRCExe2 = this.mAudio.SRCExe2(sSRCHandle, this.mDecAudio, allocateDirect2, (checkDecAudio / this.mOutputAudioChannelCount) / 2);
-                allocateDirect2.limit(this.mOutputAudioChannelCount * SRCExe2 * 2);
-                if (this.mTimescale != 8.0f) {
-                    audioVolume(allocateDirect2, this.mOutputAudioChannelCount * SRCExe2 * 2);
-                }
-                allocateDirect2.position(0);
-                allocateDirect2.get(this.mTempAudioBuffer, this.mTempAudioLength, this.mOutputAudioChannelCount * SRCExe2 * 2);
-                this.mTempAudioLength += SRCExe2 * this.mOutputAudioChannelCount * 2;
-                allocateDirect2.clear();
-                long j4 = j;
-                while (this.mTempAudioLength >= this.mTempAudioEncSize) {
-                    int dequeueInputBuffer2 = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
-                    if (dequeueInputBuffer2 == -1) {
+                } else if (isSlowV2() && i > 0 && sSRCHandle != 0) {
+                    ByteBuffer byteBufferAllocateDirect2 = ByteBuffer.allocateDirect(409600);
+                    byteBufferAllocateDirect2.position(0);
+                    LogS.d("TranscodeLib", "SRCExe2 is called");
+                    int iSRCExe2 = this.mAudio.SRCExe2(sSRCHandle, this.mDecAudio, byteBufferAllocateDirect2, (iCheckDecAudio / this.mOutputAudioChannelCount) / 2);
+                    byteBufferAllocateDirect2.limit(this.mOutputAudioChannelCount * iSRCExe2 * 2);
+                    if (this.mTimescale != 8.0f) {
+                        audioVolume(byteBufferAllocateDirect2, this.mOutputAudioChannelCount * iSRCExe2 * 2);
+                    }
+                    byteBufferAllocateDirect2.position(0);
+                    byteBufferAllocateDirect2.get(this.mTempAudioBuffer, this.mTempAudioLength, this.mOutputAudioChannelCount * iSRCExe2 * 2);
+                    this.mTempAudioLength += iSRCExe2 * this.mOutputAudioChannelCount * 2;
+                    byteBufferAllocateDirect2.clear();
+                    long j4 = j;
+                    while (this.mTempAudioLength >= this.mTempAudioEncSize) {
+                        int iDequeueInputBuffer2 = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
+                        if (iDequeueInputBuffer2 == -1) {
+                            LogS.d("TranscodeLib", "audio encoder input buffer try again later");
+                            return;
+                        }
+                        this.mAudioEncoderInputBuffers[iDequeueInputBuffer2].put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioEncSize);
+                        int i6 = this.mTempAudioOffset;
+                        int i7 = this.mTempAudioEncSize;
+                        int i8 = i6 + i7;
+                        this.mTempAudioOffset = i8;
+                        byte[] bArr2 = this.mTempAudioBuffer;
+                        System.arraycopy(bArr2, i8, bArr2, 0, this.mTempAudioLength - i7);
+                        this.mTempAudioOffset = 0;
+                        this.mTempAudioLength -= this.mTempAudioEncSize;
+                        this.mOutputAudioEncoder.queueInputBuffer(iDequeueInputBuffer2, 0, this.mTempAudioEncSize, j4, this.mAudioDecoderOutputBufferInfo.flags);
+                        this.mAudioEncoderInputBufferCount++;
+                        j4 += 21333;
+                    }
+                } else {
+                    int iDequeueInputBuffer3 = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
+                    if (iDequeueInputBuffer3 == -1) {
                         LogS.d("TranscodeLib", "audio encoder input buffer try again later");
                         return;
                     }
-                    this.mAudioEncoderInputBuffers[dequeueInputBuffer2].put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioEncSize);
-                    int i6 = this.mTempAudioOffset;
-                    int i7 = this.mTempAudioEncSize;
-                    int i8 = i6 + i7;
-                    this.mTempAudioOffset = i8;
-                    byte[] bArr2 = this.mTempAudioBuffer;
-                    System.arraycopy(bArr2, i8, bArr2, 0, this.mTempAudioLength - i7);
-                    this.mTempAudioOffset = 0;
-                    this.mTempAudioLength -= this.mTempAudioEncSize;
-                    this.mOutputAudioEncoder.queueInputBuffer(dequeueInputBuffer2, 0, this.mTempAudioEncSize, j4, this.mAudioDecoderOutputBufferInfo.flags);
+                    ByteBuffer byteBuffer = this.mAudioEncoderInputBuffers[iDequeueInputBuffer3];
+                    byteBuffer.position(0);
+                    byteBuffer.put(this.mDecAudio);
+                    this.mOutputAudioEncoder.queueInputBuffer(iDequeueInputBuffer3, 0, iCheckDecAudio, j, this.mAudioDecoderOutputBufferInfo.flags);
                     this.mAudioEncoderInputBufferCount++;
-                    j4 += 21333;
                 }
-            } else {
-                int dequeueInputBuffer3 = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
-                if (dequeueInputBuffer3 == -1) {
-                    LogS.d("TranscodeLib", "audio encoder input buffer try again later");
-                    return;
-                }
-                ByteBuffer byteBuffer = this.mAudioEncoderInputBuffers[dequeueInputBuffer3];
-                byteBuffer.position(0);
-                byteBuffer.put(this.mDecAudio);
-                this.mOutputAudioEncoder.queueInputBuffer(dequeueInputBuffer3, 0, checkDecAudio, j, this.mAudioDecoderOutputBufferInfo.flags);
-                this.mAudioEncoderInputBufferCount++;
             }
         }
         checkDecoderFinish();
@@ -964,45 +1051,45 @@ public abstract class EncodeBase extends Encode {
         initAudioSlowV2();
     }
 
-    private void checkTempRadio(int i, int i2, long j) {
+    private void checkTempRadio(int i, int i2, long j) throws MediaCodec.CryptoException {
         ByteBuffer byteBuffer = this.mAudioEncoderInputBuffers[i];
         if (this.mOriginalAudioChannelCount > 0) {
             i2 /= this.mOriginalAudioChannelCount;
         }
         int i3 = i2;
-        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(i3);
-        allocateDirect.position(0);
-        allocateDirect.limit(i3);
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(i3);
+        byteBufferAllocateDirect.position(0);
+        byteBufferAllocateDirect.limit(i3);
         byteBuffer.position(0);
-        byteBuffer.put(allocateDirect);
+        byteBuffer.put(byteBufferAllocateDirect);
         this.mOutputAudioEncoder.queueInputBuffer(i, 0, i3, j, this.mAudioDecoderOutputBufferInfo.flags);
         this.mAudioEncoderInputBufferCount++;
-        allocateDirect.clear();
+        byteBufferAllocateDirect.clear();
         this.mAudioLoopCount++;
     }
 
-    private boolean checkAudioDecoderEOSNotWaitFrameCase(long j) {
+    private boolean checkAudioDecoderEOSNotWaitFrameCase(long j) throws MediaCodec.CryptoException {
         LogS.e("TranscodeLib", "audio decoder: EOS  mTempAudioLength : " + this.mTempAudioLength);
         this.mAudioDecoderDone = true;
         if (this.mTempAudioLength > 0) {
-            int dequeueInputBuffer = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
-            if (dequeueInputBuffer == -1) {
+            int iDequeueInputBuffer = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
+            if (iDequeueInputBuffer == -1) {
                 LogS.d("TranscodeLib", "audio encoder input buffer try again later");
                 return false;
             }
-            this.mAudioEncoderInputBuffers[dequeueInputBuffer].put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioLength);
+            this.mAudioEncoderInputBuffers[iDequeueInputBuffer].put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioLength);
             LogS.d("TranscodeLib", "Enc Last frame queueInputBuffer size:" + this.mTempAudioLength + ", presentationTime :" + j);
-            this.mOutputAudioEncoder.queueInputBuffer(dequeueInputBuffer, 0, this.mTempAudioLength, j, 0);
+            this.mOutputAudioEncoder.queueInputBuffer(iDequeueInputBuffer, 0, this.mTempAudioLength, j, 0);
             this.mAudioEncoderInputBufferCount = this.mAudioEncoderInputBufferCount + 1;
         }
-        int dequeueInputBuffer2 = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
-        if (dequeueInputBuffer2 == -1) {
+        int iDequeueInputBuffer2 = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
+        if (iDequeueInputBuffer2 == -1) {
             LogS.d("TranscodeLib", "audio encoder input buffer try again later");
             return false;
         }
-        this.mAudioEncoderInputBuffers[dequeueInputBuffer2].put(this.mTempAudioBuffer, this.mTempAudioOffset, 0);
+        this.mAudioEncoderInputBuffers[iDequeueInputBuffer2].put(this.mTempAudioBuffer, this.mTempAudioOffset, 0);
         LogS.d("TranscodeLib", "Enc EOS queueInputBuffer  time :" + this.mAudioDecoderOutputBufferInfo.presentationTimeUs + ", size : " + this.mAudioDecoderOutputBufferInfo.size);
-        this.mOutputAudioEncoder.queueInputBuffer(dequeueInputBuffer2, 0, this.mAudioDecoderOutputBufferInfo.size, this.mAudioDecoderOutputBufferInfo.presentationTimeUs, this.mAudioDecoderOutputBufferInfo.flags);
+        this.mOutputAudioEncoder.queueInputBuffer(iDequeueInputBuffer2, 0, this.mAudioDecoderOutputBufferInfo.size, this.mAudioDecoderOutputBufferInfo.presentationTimeUs, this.mAudioDecoderOutputBufferInfo.flags);
         this.mAudioEncoderInputBufferCount = this.mAudioEncoderInputBufferCount + 1;
         return true;
     }
@@ -1025,16 +1112,16 @@ public abstract class EncodeBase extends Encode {
         }
     }
 
-    private void sendAudioToEncoder(int i, long j, long j2, long j3) {
+    private void sendAudioToEncoder(int i, long j, long j2, long j3) throws MediaCodec.CryptoException {
         long j4;
         if (this.mAudioWaitFrame) {
-            int dequeueInputBuffer = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
-            if (dequeueInputBuffer == -1) {
+            int iDequeueInputBuffer = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
+            if (iDequeueInputBuffer == -1) {
                 LogS.d("TranscodeLib", "audio encoder input buffer try again later");
                 return;
             }
             if (i >= 0) {
-                checkTempRadio(dequeueInputBuffer, i, j3);
+                checkTempRadio(iDequeueInputBuffer, i, j3);
             }
             if (j3 > this.mOriginTrimEndUs) {
                 if (this.mPendingAudioDecoderOutputBufferIndex != -1) {
@@ -1075,12 +1162,12 @@ public abstract class EncodeBase extends Encode {
                 if (this.mTempAudioLength < this.mTempAudioEncSize) {
                     break;
                 }
-                int dequeueInputBuffer2 = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
-                if (dequeueInputBuffer2 == -1) {
+                int iDequeueInputBuffer2 = this.mOutputAudioEncoder.dequeueInputBuffer(10000L);
+                if (iDequeueInputBuffer2 == -1) {
                     LogS.d("TranscodeLib", " audio encoder input buffer try again later");
                     break;
                 }
-                this.mAudioEncoderInputBuffers[dequeueInputBuffer2].put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioEncSize);
+                this.mAudioEncoderInputBuffers[iDequeueInputBuffer2].put(this.mTempAudioBuffer, this.mTempAudioOffset, this.mTempAudioEncSize);
                 int i2 = this.mTempAudioOffset;
                 int i3 = this.mTempAudioEncSize;
                 int i4 = i2 + i3;
@@ -1089,7 +1176,7 @@ public abstract class EncodeBase extends Encode {
                 System.arraycopy(bArr, i4, bArr, 0, this.mTempAudioLength - i3);
                 this.mTempAudioOffset = 0;
                 this.mTempAudioLength -= this.mTempAudioEncSize;
-                this.mOutputAudioEncoder.queueInputBuffer(dequeueInputBuffer2, 0, this.mTempAudioEncSize, j4, this.mAudioDecoderOutputBufferInfo.flags);
+                this.mOutputAudioEncoder.queueInputBuffer(iDequeueInputBuffer2, 0, this.mTempAudioEncSize, j4, this.mAudioDecoderOutputBufferInfo.flags);
                 this.mAudioEncoderInputBufferCount++;
                 j4 += 21333;
             }
@@ -1108,7 +1195,7 @@ public abstract class EncodeBase extends Encode {
         this.mkeepAudioFrame = true;
     }
 
-    private void checkSendAudioFollowHandle(int i, long j, long j2, long j3) {
+    private void checkSendAudioFollowHandle(int i, long j, long j2, long j3) throws MediaCodec.CryptoException {
         if (sNAACHandle != 0) {
             sendAudioToMuxer(i, j, j2);
         } else if (sVSPHandle != 0 || sSRCHandle != 0) {
@@ -1118,126 +1205,116 @@ public abstract class EncodeBase extends Encode {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0081, code lost:
-    
-        return r14;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    protected long getSlowfastSeektime(long r14) {
-        /*
-            r13 = this;
-            r0 = 0
-            int r2 = (r14 > r0 ? 1 : (r14 == r0 ? 0 : -1))
-            if (r2 >= 0) goto L9
-            r13 = -1
-            return r13
-        L9:
-            java.util.List<com.samsung.android.transcode.util.SEFHelper$Region> r2 = r13.mRegionList
-            if (r2 == 0) goto L82
-            boolean r2 = r2.isEmpty()
-            if (r2 != 0) goto L82
-            r2 = 0
-        L14:
-            java.util.List<com.samsung.android.transcode.util.SEFHelper$Region> r3 = r13.mRegionList
-            int r3 = r3.size()
-            if (r2 >= r3) goto L81
-            java.util.List<com.samsung.android.transcode.util.SEFHelper$Region> r3 = r13.mRegionList
-            java.lang.Object r3 = r3.get(r2)
-            com.samsung.android.transcode.util.SEFHelper$Region r3 = (com.samsung.android.transcode.util.SEFHelper.Region) r3
-            com.samsung.android.transcode.util.SEFHelper$Speed r3 = r3.mRegionSpeedType
-            float r3 = com.samsung.android.transcode.util.SEFHelper.getTimeScale(r3)
-            java.util.List<com.samsung.android.transcode.util.SEFHelper$Region> r4 = r13.mRegionList
-            java.lang.Object r4 = r4.get(r2)
-            com.samsung.android.transcode.util.SEFHelper$Region r4 = (com.samsung.android.transcode.util.SEFHelper.Region) r4
-            int r4 = r4.mRegionStartTime
-            long r4 = (long) r4
-            r6 = 1000(0x3e8, double:4.94E-321)
-            long r4 = r4 * r6
-            java.util.List<com.samsung.android.transcode.util.SEFHelper$Region> r8 = r13.mRegionList
-            java.lang.Object r8 = r8.get(r2)
-            com.samsung.android.transcode.util.SEFHelper$Region r8 = (com.samsung.android.transcode.util.SEFHelper.Region) r8
-            int r8 = r8.mRegionEndTime
-            long r8 = (long) r8
-            long r8 = r8 * r6
-            long r8 = r8 - r4
-            r6 = 1232348160(0x49742400, float:1000000.0)
-            float r6 = r6 * r3
-            long r6 = (long) r6
-            long r6 = r6 * r8
-            r10 = 1000000(0xf4240, double:4.940656E-318)
-            long r6 = r6 / r10
-            long r10 = r4 + r0
-            int r10 = (r14 > r10 ? 1 : (r14 == r10 ? 0 : -1))
-            if (r10 < 0) goto L63
-            long r11 = r6 + r4
-            long r11 = r11 + r0
-            int r11 = (r14 > r11 ? 1 : (r14 == r11 ? 0 : -1))
-            if (r11 > 0) goto L63
-            long r14 = r14 - r4
-            long r14 = r14 - r0
-            float r13 = (float) r14
-            float r13 = r13 / r3
-            long r13 = (long) r13
-            long r4 = r4 + r13
-            return r4
-        L63:
-            long r4 = r4 + r6
-            long r4 = r4 + r0
-            int r3 = (r14 > r4 ? 1 : (r14 == r4 ? 0 : -1))
-            if (r3 <= 0) goto L77
-            long r6 = r6 - r8
-            long r0 = r0 + r6
-            java.util.List<com.samsung.android.transcode.util.SEFHelper$Region> r3 = r13.mRegionList
-            int r3 = r3.size()
-            int r3 = r3 + (-1)
-            if (r2 != r3) goto L7e
-            long r14 = r14 - r0
-            return r14
-        L77:
-            if (r10 >= 0) goto L7e
-            if (r2 != 0) goto L7c
-            goto L81
-        L7c:
-            long r14 = r14 - r0
-            return r14
-        L7e:
-            int r2 = r2 + 1
-            goto L14
-        L81:
-            return r14
-        L82:
-            java.lang.String r13 = "TranscodeLib"
-            java.lang.String r0 = "There is no region info."
-            com.samsung.android.transcode.util.LogS.d(r13, r0)
-            return r14
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.transcode.core.EncodeBase.getSlowfastSeektime(long):long");
+    protected long getSlowfastSeektime(long j) {
+        long j2 = 0;
+        if (j < 0) {
+            return -1L;
+        }
+        List<SEFHelper.Region> list = this.mRegionList;
+        if (list == null || list.isEmpty()) {
+            LogS.d("TranscodeLib", "There is no region info.");
+            return j;
+        }
+        int i = 0;
+        while (true) {
+            if (i >= this.mRegionList.size()) {
+                break;
+            }
+            float timeScale = SEFHelper.getTimeScale(this.mRegionList.get(i).mRegionSpeedType);
+            long j3 = this.mRegionList.get(i).mRegionStartTime * 1000;
+            long j4 = (this.mRegionList.get(i).mRegionEndTime * 1000) - j3;
+            long j5 = (((long) (1000000.0f * timeScale)) * j4) / 1000000;
+            long j6 = j3 + j2;
+            if (j >= j6 && j <= j5 + j3 + j2) {
+                return j3 + ((long) (((j - j3) - j2) / timeScale));
+            }
+            if (j > j3 + j5 + j2) {
+                j2 += j5 - j4;
+                if (i == this.mRegionList.size() - 1) {
+                    return j - j2;
+                }
+            } else if (j < j6) {
+                if (i != 0) {
+                    return j - j2;
+                }
+            }
+            i++;
+        }
+        return j;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x00e6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:36:0x00e6, code lost:
     
         r0 = r21 + r3;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x00e3, code lost:
-    
-        if (r7 == 0) goto L38;
-     */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected long getSuperslowSeektime(long r21) {
-        /*
-            Method dump skipped, instructions count: 263
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.transcode.core.EncodeBase.getSuperslowSeektime(long):long");
+    protected long getSuperslowSeektime(long j) {
+        EncodeBase encodeBase;
+        EncodeBase encodeBase2 = this;
+        long j2 = 0;
+        if (j < 0) {
+            return -1L;
+        }
+        List<SEFHelper.Region> list = encodeBase2.mRegionList;
+        String str = "TranscodeLib";
+        if (list == null || list.isEmpty()) {
+            LogS.d("TranscodeLib", "There is no region info.");
+            return j;
+        }
+        long j3 = j;
+        int i = 0;
+        while (true) {
+            if (i >= encodeBase2.mRegionList.size()) {
+                break;
+            }
+            long j4 = encodeBase2.mRegionList.get(i).mRegionStartTime * 1000;
+            long j5 = encodeBase2.mRegionList.get(i).mRegionEndTime * 1000;
+            long j6 = encodeBase2.mRegionList.get(i).mRegionAudioEndTime * 1000;
+            long j7 = j5 - j6;
+            boolean z = encodeBase2.mRegionList.get(i).mRegionSpeed == 9;
+            str = str;
+            LogS.d(str, "[getSuperslowSeektime] regStartTime = " + j4 + ",regEndTime : " + j5 + ",regAudioEndTime: " + j6 + ", isCancel =" + z + ",tmpSeekTimeUs: " + j3 + ", timeDelta:" + j2 + ", seekTimeUs:" + j + ", i :" + i);
+            if (j3 < j6 || j3 > j5) {
+                encodeBase = this;
+                if (j3 > j5) {
+                    if (z) {
+                        j2 += j7;
+                        j3 += j7;
+                    }
+                    if (i == encodeBase.mRegionList.size() - 1) {
+                        break;
+                    }
+                    i++;
+                    encodeBase2 = encodeBase;
+                } else if (j3 >= j6) {
+                    i++;
+                    encodeBase2 = encodeBase;
+                } else if (i == 0) {
+                    break;
+                }
+            } else {
+                if (z) {
+                    j2 += j7;
+                    j3 += j7;
+                }
+                encodeBase = this;
+                if (i == encodeBase.mRegionList.size() - 1) {
+                    break;
+                }
+                i++;
+                encodeBase2 = encodeBase;
+            }
+            LogS.d(str, "[getSuperslowSeektime] seekTimeUs= " + j);
+            return j;
+        }
+        long j8 = j;
+        LogS.d(str, "[getSuperslowSeektime] seekTimeUs= " + j8);
+        return j8;
     }
 
-    private void sendAudioDecoderOutput() {
+    private void sendAudioDecoderOutput() throws MediaCodec.CryptoException {
         long j;
         long superslowSeektime;
         while (!this.mUserStop && !this.mAudioDecoderDone) {
@@ -1273,7 +1350,7 @@ public abstract class EncodeBase extends Encode {
         }
     }
 
-    protected void startAudioEncoding() {
+    protected void startAudioEncoding() throws MediaCodec.CryptoException {
         sendAudioToDecoder();
         getAudioDecoderOutput();
         sendAudioDecoderOutput();
@@ -1285,7 +1362,7 @@ public abstract class EncodeBase extends Encode {
         getandsendAudioToMuxer();
     }
 
-    private boolean checkEncoderOutputBufferIndex(int i) {
+    private boolean checkEncoderOutputBufferIndex(int i) throws InterruptedException {
         if (i == -1) {
             LogS.d("TranscodeLib", "no video encoder output buffer");
             try {
@@ -1355,44 +1432,22 @@ public abstract class EncodeBase extends Encode {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0017, code lost:
-    
-        if (r1.mMuxerStarted != false) goto L15;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x001b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public synchronized boolean isVideoEncoderAvailableCondition() {
-        /*
-            r1 = this;
-            monitor-enter(r1)
-            boolean r0 = r1.mCodecError     // Catch: java.lang.Throwable -> L1e
-            if (r0 != 0) goto L1b
-            boolean r0 = r1.mUserStop     // Catch: java.lang.Throwable -> L1e
-            if (r0 != 0) goto L1b
-            boolean r0 = r1.mVideoEncoderDone     // Catch: java.lang.Throwable -> L1e
-            if (r0 != 0) goto L1b
-            boolean r0 = r1.mPrepared     // Catch: java.lang.Throwable -> L1e
-            if (r0 == 0) goto L1b
-            android.media.MediaFormat r0 = r1.mVideoEncoderOutputMediaFormat     // Catch: java.lang.Throwable -> L1e
-            if (r0 == 0) goto L19
-            boolean r0 = r1.mMuxerStarted     // Catch: java.lang.Throwable -> L1e
-            if (r0 == 0) goto L1b
-        L19:
-            r0 = 1
-            goto L1c
-        L1b:
-            r0 = 0
-        L1c:
-            monitor-exit(r1)
-            return r0
-        L1e:
-            r0 = move-exception
-            monitor-exit(r1)     // Catch: java.lang.Throwable -> L1e
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.transcode.core.EncodeBase.isVideoEncoderAvailableCondition():boolean");
+        boolean z;
+        if (this.mCodecError || this.mUserStop || this.mVideoEncoderDone || !this.mPrepared) {
+            z = false;
+        } else {
+            if (this.mVideoEncoderOutputMediaFormat != null) {
+                if (this.mMuxerStarted) {
+                }
+            }
+            z = true;
+        }
+        return z;
     }
 
     private boolean checkDecoderOutputBufferIndex(int i, MediaCodec.BufferInfo bufferInfo) {
@@ -1435,7 +1490,7 @@ public abstract class EncodeBase extends Encode {
             Optional.ofNullable(this.mDecoderReleaseListener).ifPresent(new Consumer() { // from class: com.samsung.android.transcode.core.EncodeBase$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ((DecoderReleaseListener) obj).notifyFrameDecoded(DecodedFrame.this);
+                    ((DecoderReleaseListener) obj).notifyFrameDecoded(decodedFrame);
                 }
             });
         }
@@ -1447,20 +1502,20 @@ public abstract class EncodeBase extends Encode {
     }
 
     protected void sendFrametoEncoder() {
-        DecodedFrame dequeueFrame;
+        DecodedFrame decodedFrameDequeueFrame;
         if (isVideoEncoderAvailableCondition()) {
             int i = 0;
-            while (this.mDecoderFrameManager.queSize() > 0 && i < 3 && !this.mUserStop && (dequeueFrame = this.mDecoderFrameManager.dequeueFrame()) != null) {
+            while (this.mDecoderFrameManager.queSize() > 0 && i < 3 && !this.mUserStop && (decodedFrameDequeueFrame = this.mDecoderFrameManager.dequeueFrame()) != null) {
                 i++;
-                if (releaseOutputBufferOfVideoDecoder(dequeueFrame)) {
+                if (releaseOutputBufferOfVideoDecoder(decodedFrameDequeueFrame)) {
                     try {
                         if (!this.mOutputSurface.checkForNewImage(1000)) {
                             LogS.e("TranscodeLib", "video decoder: checkForNewImage return false!!  mUserStop : " + this.mUserStop);
                         }
                         GLES20.glClear(16384);
                         this.mOutputSurface.drawImage();
-                        if (dequeueFrame.presentationTimeUs >= this.mOriginTrimStartUs) {
-                            checkSkipFrames(dequeueFrame.presentationTimeUs);
+                        if (decodedFrameDequeueFrame.presentationTimeUs >= this.mOriginTrimStartUs) {
+                            checkSkipFrames(decodedFrameDequeueFrame.presentationTimeUs);
                         }
                     } catch (RuntimeException e) {
                         String message = e.getMessage();
@@ -1469,7 +1524,7 @@ public abstract class EncodeBase extends Encode {
                         }
                     }
                 }
-                if ((dequeueFrame.flags & 4) != 0) {
+                if ((decodedFrameDequeueFrame.flags & 4) != 0) {
                     LogS.e("TranscodeLib", "video decoder: EOS");
                     this.mVideoDecoderDone = true;
                     this.mOutputVideoEncoder.signalEndOfInputStream();
@@ -1684,21 +1739,21 @@ public abstract class EncodeBase extends Encode {
 
     private boolean procSuperSlowVideo(long j, int i, int i2) {
         boolean z;
-        long j2;
+        long timeScale;
         int i3;
         EncodeBase encodeBase;
         int i4;
-        long j3 = j;
-        LogS.d("TranscodeLib", "[procSuperSlowVideo]SampleTime = tempSampleTime = " + j3);
-        boolean z2 = false;
+        long j2 = j;
+        LogS.d("TranscodeLib", "[procSuperSlowVideo]SampleTime = tempSampleTime = " + j2);
+        boolean zKeepPrevPFrameForFastVideo = false;
         if (isRegionListExist()) {
-            long j4 = 0;
+            long timeScale2 = 0;
             int i5 = 0;
             while (true) {
                 if (i5 >= this.mRegionList.size()) {
                     break;
                 }
-                if (j3 >= this.mRegionList.get(i5).mRegionStartTime * 1000 && j3 < this.mRegionList.get(i5).mRegionEndTime * 1000) {
+                if (j2 >= this.mRegionList.get(i5).mRegionStartTime * 1000 && j2 < this.mRegionList.get(i5).mRegionEndTime * 1000) {
                     if (this.mRegionList.get(i5).mRegionSpeed == 9) {
                         if (i2 == 0) {
                             i3 = 30;
@@ -1709,32 +1764,32 @@ public abstract class EncodeBase extends Encode {
                             encodeBase = this;
                             i4 = i;
                         }
-                        z2 = encodeBase.keepPrevPFrameForFastVideo(false, i5, j3, i3, i4);
-                        j2 = (this.mRegionList.get(i5).mRegionStartTime * 1000) + (((j - (this.mRegionList.get(i5).mRegionStartTime * 1000)) * ((long) (SEFHelper.getTimeScale(this.mRegionList.get(i5).mRegionSpeedType) * 1000000.0f))) / 1000000);
+                        zKeepPrevPFrameForFastVideo = encodeBase.keepPrevPFrameForFastVideo(false, i5, j2, i3, i4);
+                        timeScale = (this.mRegionList.get(i5).mRegionStartTime * 1000) + (((j - (this.mRegionList.get(i5).mRegionStartTime * 1000)) * ((long) (SEFHelper.getTimeScale(this.mRegionList.get(i5).mRegionSpeedType) * 1000000.0f))) / 1000000);
                         z = true;
                     }
                 } else {
                     if (j >= this.mRegionList.get(i5).mRegionEndTime * 1000 && this.mRegionList.get(i5).mRegionSpeed == 9) {
-                        j4 = (long) (j4 - (((1.0d - SEFHelper.getTimeScale(this.mRegionList.get(i5).mRegionSpeedType)) * 1000.0d) * (this.mRegionList.get(i5).mRegionEndTime - this.mRegionList.get(i5).mRegionStartTime)));
+                        timeScale2 = (long) (timeScale2 - (((1.0d - SEFHelper.getTimeScale(this.mRegionList.get(i5).mRegionSpeedType)) * 1000.0d) * (this.mRegionList.get(i5).mRegionEndTime - this.mRegionList.get(i5).mRegionStartTime)));
                     }
                     i5++;
-                    j3 = j;
+                    j2 = j;
                 }
             }
-            j2 = j;
+            timeScale = j;
             z = false;
-            this.mModifiedVideotime = j2 + j4;
+            this.mModifiedVideotime = timeScale + timeScale2;
         } else {
             z = false;
         }
         if (!z) {
             return false;
         }
-        boolean z3 = i != 0;
-        if (z2) {
+        boolean z2 = i != 0;
+        if (zKeepPrevPFrameForFastVideo) {
             return false;
         }
-        return z3;
+        return z2;
     }
 
     private boolean procSVCLayerDrop(long j, int i, int i2, int i3, int i4) {
@@ -1742,16 +1797,16 @@ public abstract class EncodeBase extends Encode {
         boolean z2;
         boolean z3;
         boolean z4;
-        boolean z5;
+        boolean zKeepPrevPFrameForSlowVideo;
         SEFHelper.Speed speed;
         long j2;
         long j3;
         int i5;
-        boolean z6;
+        boolean z5;
         int i6;
         int i7;
         long j4;
-        boolean z7;
+        boolean z6;
         int i8;
         int i9;
         EncodeBase encodeBase;
@@ -1770,92 +1825,92 @@ public abstract class EncodeBase extends Encode {
         sb.append(i2);
         LogS.d("TranscodeLib", sb.toString());
         if (encodeBase2.isRegionListExist()) {
-            long j7 = 0;
+            long jCheckTimeDelta = 0;
             z = true;
-            boolean z8 = false;
-            z5 = false;
+            boolean z7 = false;
+            zKeepPrevPFrameForSlowVideo = false;
             SEFHelper.Speed speed3 = speed2;
             int i13 = i11;
-            boolean z9 = false;
+            boolean z8 = false;
             int i14 = 0;
             while (true) {
                 if (i14 >= encodeBase2.mRegionList.size()) {
                     z2 = false;
-                    z4 = z9;
+                    z4 = z8;
                     j2 = j6;
-                    j3 = j7;
+                    j3 = jCheckTimeDelta;
                     i5 = i13;
                     break;
                 }
                 if (SEFHelper.getTimeScale(encodeBase2.mRegionList.get(i14).mRegionSpeedType) > 1.0f) {
-                    z9 = true;
-                    z8 = false;
+                    z8 = true;
+                    z7 = false;
                 }
                 if (SEFHelper.getTimeScale(encodeBase2.mRegionList.get(i14).mRegionSpeedType) < 1.0f) {
-                    z6 = true;
+                    z5 = true;
                     z4 = false;
                 } else {
-                    z4 = z9;
-                    z6 = z8;
+                    z4 = z8;
+                    z5 = z7;
                 }
                 if (z4) {
                     i6 = i13;
                     z2 = false;
                     if (j6 < encodeBase2.mRegionList.get(i14).mRegionStartTime * 1000) {
                         int i15 = i6 == 0 ? 240 : i6;
-                        z5 = encodeBase2.keepPrevPFrameForSlowVideo(z5, i14, j6, i15, i12);
+                        zKeepPrevPFrameForSlowVideo = encodeBase2.keepPrevPFrameForSlowVideo(zKeepPrevPFrameForSlowVideo, i14, j6, i15, i12);
                         i7 = i14;
                         i8 = i15;
-                        z8 = z6;
+                        z7 = z5;
                         j4 = j6;
-                        z7 = z4;
-                        i14 = i7 + 1;
-                        i13 = i8;
-                        z9 = z7;
-                        j6 = j4;
-                        i12 = i;
+                        z6 = z4;
                     }
+                    i14 = i7 + 1;
+                    i13 = i8;
+                    z8 = z6;
+                    j6 = j4;
+                    i12 = i;
                 } else {
                     i6 = i13;
                     z2 = false;
                 }
-                boolean z10 = z5;
+                boolean z9 = zKeepPrevPFrameForSlowVideo;
                 if (j6 < encodeBase2.mRegionList.get(i14).mRegionStartTime * 1000 || j6 >= encodeBase2.mRegionList.get(i14).mRegionEndTime * 1000) {
-                    z5 = z10;
+                    zKeepPrevPFrameForSlowVideo = z9;
                     i7 = i14;
                     j4 = j6;
                     EncodeBase encodeBase3 = encodeBase2;
                     if (j4 >= encodeBase3.mRegionList.get(i7).mRegionEndTime * 1000) {
                         encodeBase2 = encodeBase3;
-                        z7 = z4;
-                        z8 = z6;
-                        j7 = encodeBase2.checkTimeDelta(j7, SEFHelper.getTimeScale(encodeBase3.mRegionList.get(i7).mRegionSpeedType), z7, z8, i7);
+                        z6 = z4;
+                        z7 = z5;
+                        jCheckTimeDelta = encodeBase2.checkTimeDelta(jCheckTimeDelta, SEFHelper.getTimeScale(encodeBase3.mRegionList.get(i7).mRegionSpeedType), z6, z7, i7);
                         speed3 = SEFHelper.Speed.NORMAL;
                     } else {
                         encodeBase2 = encodeBase3;
-                        z7 = z4;
-                        z8 = z6;
+                        z6 = z4;
+                        z7 = z5;
                     }
                     i8 = i6;
                     i14 = i7 + 1;
                     i13 = i8;
-                    z9 = z7;
+                    z8 = z6;
                     j6 = j4;
                     i12 = i;
                 } else {
-                    if (z6) {
+                    if (z5) {
                         int i16 = i6 == 0 ? 30 : i6;
-                        boolean keepPrevPFrameForFastVideo = encodeBase2.keepPrevPFrameForFastVideo(z10, i14, j6, i16, i);
+                        boolean zKeepPrevPFrameForFastVideo = encodeBase2.keepPrevPFrameForFastVideo(z9, i14, j6, i16, i);
                         i9 = i14;
                         encodeBase = encodeBase2;
                         i10 = i16;
                         j5 = j6;
-                        z5 = keepPrevPFrameForFastVideo;
+                        zKeepPrevPFrameForSlowVideo = zKeepPrevPFrameForFastVideo;
                     } else {
                         i9 = i14;
                         encodeBase = encodeBase2;
                         i10 = i6;
-                        z5 = z10;
+                        zKeepPrevPFrameForSlowVideo = z9;
                         j5 = j6;
                     }
                     SEFHelper.Speed speed4 = encodeBase.mRegionList.get(i9).mRegionSpeedType;
@@ -1863,29 +1918,29 @@ public abstract class EncodeBase extends Encode {
                     int i17 = i10;
                     speed3 = speed4;
                     encodeBase2 = encodeBase;
-                    z8 = z6;
+                    z7 = z5;
                     i5 = i17;
                     j2 = (encodeBase.mRegionList.get(i9).mRegionStartTime * 1000) + (((j5 - (encodeBase.mRegionList.get(i9).mRegionStartTime * 1000)) * ((long) (timeScale * 1000000.0f))) / 1000000);
-                    j3 = j7;
+                    j3 = jCheckTimeDelta;
                 }
             }
             encodeBase2.mModifiedVideotime = j2 + j3;
             i11 = i5;
-            z3 = z8;
+            z3 = z7;
             speed = speed3;
         } else {
             z = true;
             z2 = false;
             z3 = false;
             z4 = false;
-            z5 = false;
+            zKeepPrevPFrameForSlowVideo = false;
             speed = speed2;
         }
-        boolean z11 = false;
+        boolean z10 = false;
         if (z4) {
-            z11 = (z5 || !encodeBase2.checkRetDropSlowMotion(false, i11, i, i2, speed)) ? z2 : z;
+            z10 = (zKeepPrevPFrameForSlowVideo || !encodeBase2.checkRetDropSlowMotion(false, i11, i, i2, speed)) ? z2 : z;
         }
-        return z3 ? (z5 || !checkRetDropFastMotion(z11, i3, i11, i, i2, speed)) ? z2 : z : z11;
+        return z3 ? (zKeepPrevPFrameForSlowVideo || !checkRetDropFastMotion(z10, i3, i11, i, i2, speed)) ? z2 : z : z10;
     }
 
     private int getLayerNumber(byte[] bArr) {
@@ -1948,22 +2003,22 @@ public abstract class EncodeBase extends Encode {
         int i;
         int layerNumber = getLayerNumber(bArr);
         if (isSlowFastExceptSlowV2120NoneSVC() || (i = this.mRecordingMode) == 15 || i == 19) {
-            boolean procSVCLayerDrop = procSVCLayerDrop(j, layerNumber, this.mNumOfSVCLayers, this.mRecordingMode, this.mRecordingFps);
+            boolean zProcSVCLayerDrop = procSVCLayerDrop(j, layerNumber, this.mNumOfSVCLayers, this.mRecordingMode, this.mRecordingFps);
             LogS.d("TranscodeLib", "layerNumber: " + layerNumber + ", isDrop: " + this.mIsDrop + ", mModifiedVideotime: " + this.mModifiedVideotime);
-            return procSVCLayerDrop;
+            return zProcSVCLayerDrop;
         }
         if (isSuperSlow()) {
-            boolean procSuperSlowVideo = procSuperSlowVideo(j, layerNumber, this.mRecordingFps);
+            boolean zProcSuperSlowVideo = procSuperSlowVideo(j, layerNumber, this.mRecordingFps);
             LogS.d("TranscodeLib", "isDrop: " + this.mIsDrop + " ,mModifiedVideotime: " + this.mModifiedVideotime);
-            return procSuperSlowVideo;
+            return zProcSuperSlowVideo;
         }
         LogS.d("TranscodeLib", "Need to check recording mode and SEF data");
         return false;
     }
 
-    protected void sendVideoToDecoder(int i) {
+    protected void sendVideoToDecoder(int i) throws MediaCodec.CryptoException {
         ByteBuffer inputBuffer = this.mInputVideoDecoder.getInputBuffer(i);
-        int readSampleData = this.mVideoExtractor.readSampleData(inputBuffer, 0);
+        int sampleData = this.mVideoExtractor.readSampleData(inputBuffer, 0);
         long sampleTime = this.mVideoExtractor.getSampleTime();
         this.mIsDrop = false;
         this.mModifiedVideotime = sampleTime;
@@ -1977,10 +2032,10 @@ public abstract class EncodeBase extends Encode {
         if (this.mIsDrop) {
             inputBuffer.clear();
         }
-        pushSampleDataToDecoderInputBuffer(i, readSampleData, this.mModifiedVideotime, this.mIsDrop);
+        pushSampleDataToDecoderInputBuffer(i, sampleData, this.mModifiedVideotime, this.mIsDrop);
     }
 
-    protected void pushSampleDataToDecoderInputBuffer(int i, int i2, long j, boolean z) {
+    protected void pushSampleDataToDecoderInputBuffer(int i, int i2, long j, boolean z) throws MediaCodec.CryptoException {
         if (j <= this.mOriginTrimEndUs && i2 >= 0) {
             if (!z) {
                 this.mInputVideoDecoder.queueInputBuffer(i, 0, i2, j, this.mVideoExtractor.getSampleFlags());
@@ -2050,7 +2105,7 @@ public abstract class EncodeBase extends Encode {
     protected void setVideoDecoderAsyncCallback() {
         this.mInputVideoDecoder.setCallback(new MediaCodec.Callback() { // from class: com.samsung.android.transcode.core.EncodeBase.2
             @Override // android.media.MediaCodec.Callback
-            public void onInputBufferAvailable(MediaCodec mediaCodec, int i) {
+            public void onInputBufferAvailable(MediaCodec mediaCodec, int i) throws MediaCodec.CryptoException {
                 if (EncodeBase.this.mAsyncCodecReleased[ASYNC_CODEC_TYPE.VIDEO_DECODER.ordinal()] || !EncodeBase.this.isVideoDecoderAvailableCondition()) {
                     return;
                 }
@@ -2206,27 +2261,27 @@ public abstract class EncodeBase extends Encode {
         checkOutputVideoFrameRate();
         checkOutputVideoBitRate();
         LogS.e("TranscodeLib", "mOutputVideoBitRate : " + this.mOutputVideoBitRate + ", mOutputAudioBitRate :" + this.mOutputAudioBitRate + ", mSourceFrameRate :" + this.mSourceFrameRate + ", mOutputVideoFrameRate :" + this.mOutputVideoFrameRate + ",mFramesSkipInterval: " + this.mFramesSkipInterval + ", mKeepSourceFrameRate : " + this.mKeepSourceFrameRate + ", mOutputVideoTargetFrameRate : " + this.mOutputVideoTargetFrameRate);
-        MediaFormat createVideoFormat = MediaFormat.createVideoFormat(this.mOutputVideoMimeType, this.mOutputWidth, this.mOutputHeight);
+        MediaFormat mediaFormatCreateVideoFormat = MediaFormat.createVideoFormat(this.mOutputVideoMimeType, this.mOutputWidth, this.mOutputHeight);
         if (CodecsHelper.supportHierB() && this.mOutputVideoMimeType.equals("video/hevc") && isHLG()) {
             String lowerCase = SemSystemProperties.get("ro.hardware").toLowerCase();
-            createVideoFormat.setString(MediaFormat.KEY_TEMPORAL_LAYERING, "android.generic.1+" + ((lowerCase == null || !lowerCase.equals("qcom")) ? 2 : 3));
-            createVideoFormat.setInteger(MediaFormat.KEY_MAX_B_FRAMES, 1);
+            mediaFormatCreateVideoFormat.setString(MediaFormat.KEY_TEMPORAL_LAYERING, "android.generic.1+" + ((lowerCase == null || !lowerCase.equals("qcom")) ? 2 : 3));
+            mediaFormatCreateVideoFormat.setInteger(MediaFormat.KEY_MAX_B_FRAMES, 1);
         }
-        createVideoFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);
-        createVideoFormat.setInteger(MediaFormat.KEY_BIT_RATE, this.mOutputVideoBitRate);
-        createVideoFormat.setInteger(MediaFormat.KEY_FRAME_RATE, this.mOutputVideoFrameRate);
-        createVideoFormat.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, this.mOutputVideoIFrameInterval);
-        createVideoFormat.setInteger("priority", 1);
+        mediaFormatCreateVideoFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);
+        mediaFormatCreateVideoFormat.setInteger(MediaFormat.KEY_BIT_RATE, this.mOutputVideoBitRate);
+        mediaFormatCreateVideoFormat.setInteger(MediaFormat.KEY_FRAME_RATE, this.mOutputVideoFrameRate);
+        mediaFormatCreateVideoFormat.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, this.mOutputVideoIFrameInterval);
+        mediaFormatCreateVideoFormat.setInteger("priority", 1);
         if (checkBitrateMode()) {
-            createVideoFormat.setInteger(MediaFormat.KEY_BITRATE_MODE, 2);
+            mediaFormatCreateVideoFormat.setInteger(MediaFormat.KEY_BITRATE_MODE, 2);
         }
         if (!this.mMMSMode) {
-            createVideoFormat.setInteger(MediaFormat.KEY_COLOR_STANDARD, 1);
+            mediaFormatCreateVideoFormat.setInteger(MediaFormat.KEY_COLOR_STANDARD, 1);
         }
-        LogS.e("TranscodeLib", "output video format " + createVideoFormat);
+        LogS.e("TranscodeLib", "output video format " + mediaFormatCreateVideoFormat);
         this.mOutputVideoEncoder = MediaCodec.createEncoderByType(this.mOutputVideoMimeType);
         setVideoEncoderAsyncCallback();
-        this.mOutputVideoEncoder.configure(createVideoFormat, (Surface) null, (MediaCrypto) null, 1);
+        this.mOutputVideoEncoder.configure(mediaFormatCreateVideoFormat, (Surface) null, (MediaCrypto) null, 1);
         this.mInputSurface = new InputSurface(this.mOutputVideoEncoder.createInputSurface());
         this.mOutputVideoEncoder.start();
         this.mInputSurface.makeCurrent();
@@ -2455,19 +2510,19 @@ public abstract class EncodeBase extends Encode {
         }
     }
 
-    private boolean checkAudioDecoderBufferIndex(int i, ByteBuffer[] byteBufferArr) {
+    private boolean checkAudioDecoderBufferIndex(int i, ByteBuffer[] byteBufferArr) throws MediaCodec.CryptoException {
         if (i == -1) {
             LogS.d("TranscodeLib", "audio decoder input try again later while preparing audio codec");
             return false;
         }
-        int readSampleData = this.mAudioExtractor.readSampleData(byteBufferArr[i], 0);
+        int sampleData = this.mAudioExtractor.readSampleData(byteBufferArr[i], 0);
         long sampleTime = this.mAudioExtractor.getSampleTime();
-        if (readSampleData > 0) {
-            this.mInputAudioDecoder.queueInputBuffer(i, 0, readSampleData, sampleTime, this.mAudioExtractor.getSampleFlags());
-        } else if (readSampleData == -1) {
+        if (sampleData > 0) {
+            this.mInputAudioDecoder.queueInputBuffer(i, 0, sampleData, sampleTime, this.mAudioExtractor.getSampleFlags());
+        } else if (sampleData == -1) {
             this.mCopyAudio = false;
             this.formatupdated = true;
-            LogS.d("TranscodeLib", "Audio buffer is empty, size :" + readSampleData);
+            LogS.d("TranscodeLib", "Audio buffer is empty, size :" + sampleData);
         }
         return false;
     }
@@ -2540,14 +2595,14 @@ public abstract class EncodeBase extends Encode {
         int maxInputSize = getMaxInputSize(trackFormat);
         if (checkAudioChannelCount()) {
             createAudioHandle();
-            MediaFormat createAudioFormat = MediaFormat.createAudioFormat(this.mOutputAudioMimeType, this.mOutputAudioSampleRateHZ, this.mOutputAudioChannelCount);
+            MediaFormat mediaFormatCreateAudioFormat = MediaFormat.createAudioFormat(this.mOutputAudioMimeType, this.mOutputAudioSampleRateHZ, this.mOutputAudioChannelCount);
             if (maxInputSize != 0) {
-                createAudioFormat.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, maxInputSize);
+                mediaFormatCreateAudioFormat.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, maxInputSize);
             }
-            createAudioFormat.setInteger(MediaFormat.KEY_BIT_RATE, this.mOutputAudioBitRate);
-            createAudioFormat.setInteger(MediaFormat.KEY_AAC_PROFILE, this.mOutputAudioAACProfile);
-            LogS.e("TranscodeLib", "Audio output format " + createAudioFormat);
-            this.mOutputAudioEncoder = CodecsHelper.createAudioEncoder(CodecsHelper.getEncoderCodec(this.mOutputAudioMimeType), createAudioFormat);
+            mediaFormatCreateAudioFormat.setInteger(MediaFormat.KEY_BIT_RATE, this.mOutputAudioBitRate);
+            mediaFormatCreateAudioFormat.setInteger(MediaFormat.KEY_AAC_PROFILE, this.mOutputAudioAACProfile);
+            LogS.e("TranscodeLib", "Audio output format " + mediaFormatCreateAudioFormat);
+            this.mOutputAudioEncoder = CodecsHelper.createAudioEncoder(CodecsHelper.getEncoderCodec(this.mOutputAudioMimeType), mediaFormatCreateAudioFormat);
             createInputAudioDecoder(string, trackFormat);
         }
     }
@@ -2560,7 +2615,7 @@ public abstract class EncodeBase extends Encode {
             Runnable runnable = new Runnable() { // from class: com.samsung.android.transcode.core.EncodeBase$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    EncodeBase.this.m9616x8623e4ae();
+                    this.f$0.m9629x8623e4ae();
                 }
             };
             int i = -1;
@@ -2569,13 +2624,13 @@ public abstract class EncodeBase extends Encode {
                 }
                 CodecsHelper.scheduleAfter(3, runnable);
                 if (!this.formatupdated && i == -1) {
-                    int dequeueOutputBuffer = this.mInputAudioDecoder.dequeueOutputBuffer(bufferInfo, 10000L);
-                    if (checkPendingAudioDecoderBufferIndex(dequeueOutputBuffer, str)) {
+                    int iDequeueOutputBuffer = this.mInputAudioDecoder.dequeueOutputBuffer(bufferInfo, 10000L);
+                    if (checkPendingAudioDecoderBufferIndex(iDequeueOutputBuffer, str)) {
                         if ((bufferInfo.flags & 2) != 0) {
                             LogS.d("TranscodeLib", "audio decoder: codec config buffer");
-                            this.mInputAudioDecoder.releaseOutputBuffer(dequeueOutputBuffer, false);
+                            this.mInputAudioDecoder.releaseOutputBuffer(iDequeueOutputBuffer, false);
                         } else {
-                            i = dequeueOutputBuffer;
+                            i = iDequeueOutputBuffer;
                         }
                     }
                 }
@@ -2590,7 +2645,7 @@ public abstract class EncodeBase extends Encode {
     }
 
     /* renamed from: lambda$preprocessAudioOutputFormat$1$com-samsung-android-transcode-core-EncodeBase, reason: not valid java name */
-    /* synthetic */ void m9616x8623e4ae() {
+    /* synthetic */ void m9629x8623e4ae() {
         this.formatupdated = true;
     }
 
@@ -2645,7 +2700,7 @@ public abstract class EncodeBase extends Encode {
     }
 
     protected void updateProgress(long j, boolean z) {
-        long j2;
+        long jMin;
         if (j <= 0) {
             return;
         }
@@ -2655,29 +2710,29 @@ public abstract class EncodeBase extends Encode {
             this.mVidioProgressTime = j;
         }
         if (this.mCopyAudio) {
-            j2 = Math.min(this.mAudioProgressTime, this.mVidioProgressTime);
+            jMin = Math.min(this.mAudioProgressTime, this.mVidioProgressTime);
         } else {
-            j2 = this.mVidioProgressTime;
+            jMin = this.mVidioProgressTime;
         }
-        long j3 = this.mOriginTrimStartUs;
-        int max = Math.max(0, Math.min(100, (int) (((j2 - j3) * 100) / (this.mOriginTrimEndUs - j3))));
-        if (this.mEncodeProgressListener == null || max <= this.mProgress) {
+        long j2 = this.mOriginTrimStartUs;
+        int iMax = Math.max(0, Math.min(100, (int) (((jMin - j2) * 100) / (this.mOriginTrimEndUs - j2))));
+        if (this.mEncodeProgressListener == null || iMax <= this.mProgress) {
             return;
         }
-        LogS.d("TranscodeLib", "updateProgress: audioProgressTime: " + this.mAudioProgressTime + ", vidioProgressTime: " + this.mVidioProgressTime + ", time : " + j2 + ", progress: " + max);
-        this.mEncodeProgressListener.onProgressChanged(max);
-        this.mProgress = max;
+        LogS.d("TranscodeLib", "updateProgress: audioProgressTime: " + this.mAudioProgressTime + ", vidioProgressTime: " + this.mVidioProgressTime + ", time : " + jMin + ", progress: " + iMax);
+        this.mEncodeProgressListener.onProgressChanged(iMax);
+        this.mProgress = iMax;
     }
 
     protected void releaseFramemanager() {
         if (this.mDecoderFrameManager != null) {
             while (this.mDecoderFrameManager.queSize() > 0) {
-                DecodedFrame dequeueFrame = this.mDecoderFrameManager.dequeueFrame();
-                if (dequeueFrame == null) {
+                DecodedFrame decodedFrameDequeueFrame = this.mDecoderFrameManager.dequeueFrame();
+                if (decodedFrameDequeueFrame == null) {
                     return;
                 }
                 if (this.mInputVideoDecoder != null) {
-                    releaseOutputBufferOfVideoDecoder(dequeueFrame);
+                    releaseOutputBufferOfVideoDecoder(decodedFrameDequeueFrame);
                 }
             }
         }

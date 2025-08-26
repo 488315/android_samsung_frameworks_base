@@ -16,7 +16,6 @@ import java.util.Map;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSTileLogger {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -24,7 +23,6 @@ public final class QSTileLogger {
     public final Map logBufferCache;
     public final StatusBarStateController mStatusBarStateController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -76,12 +74,12 @@ public final class QSTileLogger {
         synchronized (this.logBufferCache) {
             try {
                 LinkedHashMap linkedHashMap = (LinkedHashMap) this.logBufferCache;
-                Object obj = linkedHashMap.get(tileSpec);
-                if (obj == null) {
-                    obj = LogBufferFactory.create$default(this.factory, getLogTag(tileSpec), 25, false, null, 24);
-                    linkedHashMap.put(tileSpec, obj);
+                Object objCreate$default = linkedHashMap.get(tileSpec);
+                if (objCreate$default == null) {
+                    objCreate$default = LogBufferFactory.create$default(this.factory, getLogTag(tileSpec), 25, false, null, 24);
+                    linkedHashMap.put(tileSpec, objCreate$default);
                 }
-                logBuffer = (LogBuffer) obj;
+                logBuffer = (LogBuffer) objCreate$default;
             } catch (Throwable th) {
                 throw th;
             }
@@ -96,9 +94,9 @@ public final class QSTileLogger {
 
     public final void logInfo(String str, TileSpec tileSpec) {
         LogBuffer logBuffer = getLogBuffer(tileSpec);
-        LogMessage obtain = logBuffer.obtain(getLogTag(tileSpec), LogLevel.INFO, new QSTileLogger$$ExternalSyntheticLambda0(0), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain(getLogTag(tileSpec), LogLevel.INFO, new QSTileLogger$$ExternalSyntheticLambda0(0), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
     }
 
     public static String toLogString(QSTileUserAction qSTileUserAction) {

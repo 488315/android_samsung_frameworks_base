@@ -7,7 +7,6 @@ import androidx.compose.runtime.internal.ComposableLambdaImpl;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ComposableSingletons$SubcomposeLayoutKt {
     public static final ComposableSingletons$SubcomposeLayoutKt INSTANCE = new ComposableSingletons$SubcomposeLayoutKt();
@@ -17,9 +16,9 @@ public final class ComposableSingletons$SubcomposeLayoutKt {
         @Override // kotlin.jvm.functions.Function2
         public final Object invoke(Object obj, Object obj2) {
             Composer composer = (Composer) obj;
-            int intValue = ((Number) obj2).intValue();
+            int iIntValue = ((Number) obj2).intValue();
             ComposerImpl composerImpl = (ComposerImpl) composer;
-            if (composerImpl.shouldExecute(intValue & 1, (intValue & 3) != 2)) {
+            if (composerImpl.shouldExecute(iIntValue & 1, (iIntValue & 3) != 2)) {
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventStart("androidx.compose.ui.layout.ComposableSingletons$SubcomposeLayoutKt.lambda-1.<anonymous> (SubcomposeLayout.kt:509)");
                 }

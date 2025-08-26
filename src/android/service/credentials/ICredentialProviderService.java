@@ -61,9 +61,9 @@ public interface ICredentialProviderService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICredentialProviderService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICredentialProviderService)) {
-                return (ICredentialProviderService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICredentialProviderService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICredentialProviderService)) {
+                return (ICredentialProviderService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,19 +97,19 @@ public interface ICredentialProviderService extends IInterface {
             }
             if (i == 1) {
                 BeginGetCredentialRequest beginGetCredentialRequest = (BeginGetCredentialRequest) parcel.readTypedObject(BeginGetCredentialRequest.CREATOR);
-                IBeginGetCredentialCallback asInterface = IBeginGetCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
+                IBeginGetCredentialCallback iBeginGetCredentialCallbackAsInterface = IBeginGetCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onBeginGetCredential(beginGetCredentialRequest, asInterface);
+                onBeginGetCredential(beginGetCredentialRequest, iBeginGetCredentialCallbackAsInterface);
             } else if (i == 2) {
                 BeginCreateCredentialRequest beginCreateCredentialRequest = (BeginCreateCredentialRequest) parcel.readTypedObject(BeginCreateCredentialRequest.CREATOR);
-                IBeginCreateCredentialCallback asInterface2 = IBeginCreateCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
+                IBeginCreateCredentialCallback iBeginCreateCredentialCallbackAsInterface = IBeginCreateCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onBeginCreateCredential(beginCreateCredentialRequest, asInterface2);
+                onBeginCreateCredential(beginCreateCredentialRequest, iBeginCreateCredentialCallbackAsInterface);
             } else if (i == 3) {
                 ClearCredentialStateRequest clearCredentialStateRequest = (ClearCredentialStateRequest) parcel.readTypedObject(ClearCredentialStateRequest.CREATOR);
-                IClearCredentialStateCallback asInterface3 = IClearCredentialStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                IClearCredentialStateCallback iClearCredentialStateCallbackAsInterface = IClearCredentialStateCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onClearCredentialState(clearCredentialStateRequest, asInterface3);
+                onClearCredentialState(clearCredentialStateRequest, iClearCredentialStateCallbackAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -134,40 +134,40 @@ public interface ICredentialProviderService extends IInterface {
 
             @Override // android.service.credentials.ICredentialProviderService
             public void onBeginGetCredential(BeginGetCredentialRequest beginGetCredentialRequest, IBeginGetCredentialCallback iBeginGetCredentialCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICredentialProviderService.DESCRIPTOR);
-                    obtain.writeTypedObject(beginGetCredentialRequest, 0);
-                    obtain.writeStrongInterface(iBeginGetCredentialCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICredentialProviderService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(beginGetCredentialRequest, 0);
+                    parcelObtain.writeStrongInterface(iBeginGetCredentialCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.credentials.ICredentialProviderService
             public void onBeginCreateCredential(BeginCreateCredentialRequest beginCreateCredentialRequest, IBeginCreateCredentialCallback iBeginCreateCredentialCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICredentialProviderService.DESCRIPTOR);
-                    obtain.writeTypedObject(beginCreateCredentialRequest, 0);
-                    obtain.writeStrongInterface(iBeginCreateCredentialCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICredentialProviderService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(beginCreateCredentialRequest, 0);
+                    parcelObtain.writeStrongInterface(iBeginCreateCredentialCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.credentials.ICredentialProviderService
             public void onClearCredentialState(ClearCredentialStateRequest clearCredentialStateRequest, IClearCredentialStateCallback iClearCredentialStateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICredentialProviderService.DESCRIPTOR);
-                    obtain.writeTypedObject(clearCredentialStateRequest, 0);
-                    obtain.writeStrongInterface(iClearCredentialStateCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICredentialProviderService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clearCredentialStateRequest, 0);
+                    parcelObtain.writeStrongInterface(iClearCredentialStateCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

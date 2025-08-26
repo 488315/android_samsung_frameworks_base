@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TakingPicturesActivityWrapperV1 extends ActivityWrapper {
     private final List<Content> contents;
@@ -25,7 +24,6 @@ public final class TakingPicturesActivityWrapperV1 extends ActivityWrapper {
     public static final Companion Companion = new Companion(null);
     public static final Parcelable.Creator<TakingPicturesActivityWrapperV1> CREATOR = new Creator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,23 +33,22 @@ public final class TakingPicturesActivityWrapperV1 extends ActivityWrapper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            ArrayList arrayList = new ArrayList(readInt);
-            int i = 0;
-            while (i != readInt) {
-                i = Engram$Creator$$ExternalSyntheticOutline0.m(TakingPicturesActivityWrapperV1.class, parcel, arrayList, i, 1);
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            ArrayList arrayList = new ArrayList(i);
+            int iM = 0;
+            while (iM != i) {
+                iM = Engram$Creator$$ExternalSyntheticOutline0.m(TakingPicturesActivityWrapperV1.class, parcel, arrayList, iM, 1);
             }
-            int readInt2 = parcel.readInt();
-            ArrayList arrayList2 = new ArrayList(readInt2);
-            for (int i2 = 0; i2 != readInt2; i2++) {
+            int i2 = parcel.readInt();
+            ArrayList arrayList2 = new ArrayList(i2);
+            for (int i3 = 0; i3 != i2; i3++) {
                 arrayList2.add(Place.CREATOR.createFromParcel(parcel));
             }
-            return new TakingPicturesActivityWrapperV1(readString, arrayList, arrayList2, parcel.readLong(), parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong()));
+            return new TakingPicturesActivityWrapperV1(string, arrayList, arrayList2, parcel.readLong(), parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong()));
         }
 
         @Override // android.os.Parcelable.Creator
@@ -97,13 +94,13 @@ public final class TakingPicturesActivityWrapperV1 extends ActivityWrapper {
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.id);
-        Iterator m = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.contents);
-        while (m.hasNext()) {
-            parcel.writeParcelable((Parcelable) m.next(), i);
+        Iterator itM = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.contents);
+        while (itM.hasNext()) {
+            parcel.writeParcelable((Parcelable) itM.next(), i);
         }
-        Iterator m2 = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.locations);
-        while (m2.hasNext()) {
-            ((Place) m2.next()).writeToParcel(parcel, i);
+        Iterator itM2 = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.locations);
+        while (itM2.hasNext()) {
+            ((Place) itM2.next()).writeToParcel(parcel, i);
         }
         parcel.writeLong(this.startTimestamp);
         Long l = this.endTimestamp;

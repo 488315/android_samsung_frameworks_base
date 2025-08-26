@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class GestureRecognizerAdapter$gestureStateAsFlow$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ GestureRecognizer $recognizer;
@@ -51,8 +50,8 @@ final class GestureRecognizerAdapter$gestureStateAsFlow$1 extends SuspendLambda 
             this.$recognizer.addGestureStateCallback(new Function1() { // from class: com.android.systemui.touchpad.tutorial.ui.viewmodel.GestureRecognizerAdapter$gestureStateAsFlow$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU((GestureState) obj2);
+                public final Object mo781invoke(Object obj2) {
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU((GestureState) obj2);
                     return Unit.INSTANCE;
                 }
             });
@@ -60,7 +59,7 @@ final class GestureRecognizerAdapter$gestureStateAsFlow$1 extends SuspendLambda 
             Function0 function0 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.viewmodel.GestureRecognizerAdapter$gestureStateAsFlow$1$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    GestureRecognizer.this.clearGestureStateCallback();
+                    gestureRecognizer.clearGestureStateCallback();
                     return Unit.INSTANCE;
                 }
             };

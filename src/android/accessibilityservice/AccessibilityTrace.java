@@ -72,11 +72,11 @@ public interface AccessibilityTrace {
 
     static long getLoggingFlagsFromNames(List<String> list) {
         Iterator<String> it = list.iterator();
-        long j = 0;
+        long jLongValue = 0;
         while (it.hasNext()) {
-            j |= sNamesToFlags.get(it.next()).longValue();
+            jLongValue |= sNamesToFlags.get(it.next()).longValue();
         }
-        return j;
+        return jLongValue;
     }
 
     static List<String> getNamesOfLoggingTypes(long j) {

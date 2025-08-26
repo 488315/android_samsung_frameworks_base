@@ -5,13 +5,11 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.AbstractOwnableSynchronizer;
 import java.util.concurrent.locks.LockSupport;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 abstract class InterruptibleTask<T> extends AtomicReference<Runnable> implements Runnable {
     public static final DoNothingRunnable DONE;
     public static final DoNothingRunnable PARKED;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Blocker extends AbstractOwnableSynchronizer implements Runnable {
         private final InterruptibleTask<?> task;
 
@@ -41,31 +39,31 @@ abstract class InterruptibleTask<T> extends AtomicReference<Runnable> implements
 
     @Override // java.lang.Runnable
     public final void run() {
-        Thread currentThread = Thread.currentThread();
-        Object obj = null;
-        if (compareAndSet(null, currentThread)) {
-            boolean isDone = isDone();
-            if (!isDone) {
+        Thread threadCurrentThread = Thread.currentThread();
+        Object objRunInterruptibly = null;
+        if (compareAndSet(null, threadCurrentThread)) {
+            boolean zIsDone = isDone();
+            if (!zIsDone) {
                 try {
-                    obj = runInterruptibly();
+                    objRunInterruptibly = runInterruptibly();
                 } catch (Throwable th) {
                     try {
                         if (th instanceof InterruptedException) {
                             Thread.currentThread().interrupt();
                         }
-                        if (!compareAndSet(currentThread, DONE)) {
-                            waitForInterrupt(currentThread);
+                        if (!compareAndSet(threadCurrentThread, DONE)) {
+                            waitForInterrupt(threadCurrentThread);
                         }
-                        if (isDone) {
+                        if (zIsDone) {
                             return;
                         }
                         afterRanInterruptiblyFailure(th);
                         return;
                     } finally {
-                        if (!compareAndSet(currentThread, DONE)) {
-                            waitForInterrupt(currentThread);
+                        if (!compareAndSet(threadCurrentThread, DONE)) {
+                            waitForInterrupt(threadCurrentThread);
                         }
-                        if (!isDone) {
+                        if (!zIsDone) {
                             afterRanInterruptiblySuccess(null);
                         }
                     }
@@ -91,9 +89,9 @@ abstract class InterruptibleTask<T> extends AtomicReference<Runnable> implements
         } else {
             str = "running=[NOT STARTED YET]";
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ", ");
-        m.append(toPendingString());
-        return m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ", ");
+        sbM.append(toPendingString());
+        return sbM.toString();
     }
 
     public final void waitForInterrupt(Thread thread) {
@@ -126,7 +124,6 @@ abstract class InterruptibleTask<T> extends AtomicReference<Runnable> implements
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DoNothingRunnable implements Runnable {
         private DoNothingRunnable() {
         }

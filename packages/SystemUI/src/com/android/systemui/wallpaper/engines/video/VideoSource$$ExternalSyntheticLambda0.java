@@ -6,7 +6,6 @@ import android.media.MediaMetadataRetriever;
 import com.sec.ims.configuration.DATA;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class VideoSource$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId = 0;
@@ -35,10 +34,10 @@ public final /* synthetic */ class VideoSource$$ExternalSyntheticLambda0 impleme
                 Point[] pointArr = (Point[]) this.f$1;
                 MediaMetadataRetriever mediaMetadataRetriever2 = (MediaMetadataRetriever) obj;
                 if (mediaMetadataRetriever2 != null) {
-                    String extractMetadata = mediaMetadataRetriever2.extractMetadata(18);
-                    String extractMetadata2 = mediaMetadataRetriever2.extractMetadata(19);
-                    String extractMetadata3 = mediaMetadataRetriever2.extractMetadata(24);
-                    pointArr[0] = (extractMetadata == null || extractMetadata2 == null) ? null : (DATA.DM_FIELD_INDEX.DM_POLLING_PERIOD.equals(extractMetadata3) || "270".equals(extractMetadata3)) ? new Point(Integer.parseInt(extractMetadata2), Integer.parseInt(extractMetadata)) : new Point(Integer.parseInt(extractMetadata), Integer.parseInt(extractMetadata2));
+                    String strExtractMetadata = mediaMetadataRetriever2.extractMetadata(18);
+                    String strExtractMetadata2 = mediaMetadataRetriever2.extractMetadata(19);
+                    String strExtractMetadata3 = mediaMetadataRetriever2.extractMetadata(24);
+                    pointArr[0] = (strExtractMetadata == null || strExtractMetadata2 == null) ? null : (DATA.DM_FIELD_INDEX.DM_POLLING_PERIOD.equals(strExtractMetadata3) || "270".equals(strExtractMetadata3)) ? new Point(Integer.parseInt(strExtractMetadata2), Integer.parseInt(strExtractMetadata)) : new Point(Integer.parseInt(strExtractMetadata), Integer.parseInt(strExtractMetadata2));
                     break;
                 }
                 break;

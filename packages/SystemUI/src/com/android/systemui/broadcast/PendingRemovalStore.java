@@ -13,7 +13,6 @@ import com.android.systemui.log.core.LogMessage;
 import java.io.PrintWriter;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PendingRemovalStore implements Dumpable {
     public final BroadcastDispatcherLogger logger;
@@ -29,15 +28,15 @@ public final class PendingRemovalStore implements Dumpable {
         }
         BroadcastDispatcherLogger broadcastDispatcherLogger = this.logger;
         broadcastDispatcherLogger.getClass();
-        String broadcastReceiver2 = broadcastReceiver.toString();
+        String string = broadcastReceiver.toString();
         LogLevel logLevel = LogLevel.DEBUG;
         BroadcastDispatcherLogger$$ExternalSyntheticLambda0 broadcastDispatcherLogger$$ExternalSyntheticLambda0 = new BroadcastDispatcherLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = broadcastDispatcherLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("BroadcastDispatcherLog", logLevel, broadcastDispatcherLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("BroadcastDispatcherLog", logLevel, broadcastDispatcherLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
-        logMessageImpl.str1 = broadcastReceiver2;
-        logBuffer.commit(obtain);
+        logMessageImpl.str1 = string;
+        logBuffer.commit(logMessageObtain);
     }
 
     @Override // com.android.systemui.Dumpable
@@ -49,10 +48,10 @@ public final class PendingRemovalStore implements Dumpable {
                 }
                 int size = this.pendingRemoval.size();
                 for (int i = 0; i < size; i++) {
-                    int keyAt = this.pendingRemoval.keyAt(i);
-                    printWriter.print(keyAt);
+                    int iKeyAt = this.pendingRemoval.keyAt(i);
+                    printWriter.print(iKeyAt);
                     printWriter.print("->");
-                    printWriter.println(this.pendingRemoval.get(keyAt));
+                    printWriter.println(this.pendingRemoval.get(iKeyAt));
                 }
                 if (printWriter instanceof IndentingPrintWriter) {
                     ((IndentingPrintWriter) printWriter).decreaseIndent();

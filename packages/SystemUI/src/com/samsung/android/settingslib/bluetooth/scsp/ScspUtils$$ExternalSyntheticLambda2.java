@@ -4,10 +4,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class ScspUtils$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ ArrayList f$0;
@@ -23,7 +23,7 @@ public final /* synthetic */ class ScspUtils$$ExternalSyntheticLambda2 implement
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws IOException {
         ArrayList arrayList = this.f$0;
         Context context = this.f$1;
         Collection collection = this.f$2;
@@ -34,16 +34,16 @@ public final /* synthetic */ class ScspUtils$$ExternalSyntheticLambda2 implement
             return;
         }
         int size = arrayList.size();
-        boolean z = false;
+        boolean zMakeAllResourceData = false;
         int i = 0;
         while (i < size) {
             Object obj = arrayList.get(i);
             i++;
             Uri uri = (Uri) obj;
             Log.d("ScspUtils", "saveAllResources: uri = " + uri.toString());
-            z = ScspUtils.makeAllResourceData(context, uri);
+            zMakeAllResourceData = ScspUtils.makeAllResourceData(context, uri);
         }
-        if (!z || collection == null) {
+        if (!zMakeAllResourceData || collection == null) {
             return;
         }
         handler.post(new ScspUtils$$ExternalSyntheticLambda1(collection, 2));

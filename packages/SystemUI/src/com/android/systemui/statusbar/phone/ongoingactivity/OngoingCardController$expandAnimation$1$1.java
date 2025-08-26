@@ -1,5 +1,6 @@
 package com.android.systemui.statusbar.phone.ongoingactivity;
 
+import android.content.res.Resources;
 import android.graphics.PointF;
 import android.util.Log;
 import android.view.View;
@@ -9,7 +10,6 @@ import com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingCardController$expandAnimation$1$1 implements Runnable {
     public final /* synthetic */ OngoingCardController this$0;
@@ -19,7 +19,7 @@ public final class OngoingCardController$expandAnimation$1$1 implements Runnable
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Resources.NotFoundException {
         OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
         Boolean bool = Boolean.FALSE;
         ongoingActivityDataHelper.getClass();
@@ -28,8 +28,8 @@ public final class OngoingCardController$expandAnimation$1$1 implements Runnable
         int i = 0;
         this.this$0.mCardStackView.setVisibility(0);
         OngoingCardController ongoingCardController = this.this$0;
-        View findViewById = ongoingCardController.mExpandedView.findViewById(R.id.ongoing_card_background);
-        findViewById.getClass();
+        View viewFindViewById = ongoingCardController.mExpandedView.findViewById(R.id.ongoing_card_background);
+        viewFindViewById.getClass();
         OngoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0 ongoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0 = new OngoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0(this.this$0, 0);
         Log.d("{OngoingExpandedPipController}", "startExpandAnimation");
         ongoingCardController.mCapsule.getLocationOnScreen(new int[2]);
@@ -45,7 +45,7 @@ public final class OngoingCardController$expandAnimation$1$1 implements Runnable
         float f3 = cardStackLocationOnScreen.x;
         float f4 = cardStackLocationOnScreen.y + ongoingCardController.indicatorGardenPresenter.cachedGardenModel.totalHeight;
         CardStackView.Companion.getClass();
-        ongoingCardController.startAnimation(findViewById, f, f2, f3, f4, CardStackView.expandRootInterpolator, 500L, ongoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0);
+        ongoingCardController.startAnimation(viewFindViewById, f, f2, f3, f4, CardStackView.expandRootInterpolator, 500L, ongoingCardController$expandAnimation$1$1$$ExternalSyntheticLambda0);
         ArrayList arrayList = ongoingCardController.onStateEventListeners;
         int size = arrayList.size();
         while (i < size) {

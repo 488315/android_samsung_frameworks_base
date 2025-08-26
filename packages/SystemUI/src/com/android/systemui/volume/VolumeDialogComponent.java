@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VolumeDialogComponent implements VolumeComponent, TunerService.Tunable {
     public final ActivityStarter mActivityStarter;
@@ -65,7 +64,7 @@ public class VolumeDialogComponent implements VolumeComponent, TunerService.Tuna
         Supplier supplier = new Supplier() { // from class: com.android.systemui.volume.VolumeDialogComponent$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                return VolumeDialogComponent.this.mSamsungVolumeDialog;
+                return this.f$0.mSamsungVolumeDialog;
             }
         };
         ExtensionControllerImpl.ExtensionImpl extensionImpl = extensionBuilder.mExtension;
@@ -73,7 +72,7 @@ public class VolumeDialogComponent implements VolumeComponent, TunerService.Tuna
         extensionBuilder.mExtension.mCallbacks.add(new Consumer() { // from class: com.android.systemui.volume.VolumeDialogComponent$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                VolumeDialogComponent volumeDialogComponent = VolumeDialogComponent.this;
+                VolumeDialogComponent volumeDialogComponent = this.f$0;
                 VolumeDialog volumeDialog2 = (VolumeDialog) obj;
                 VolumeDialog volumeDialog3 = volumeDialogComponent.mDialog;
                 if (volumeDialog3 != null) {

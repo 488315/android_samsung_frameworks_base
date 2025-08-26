@@ -51,9 +51,9 @@ public interface ISemBiometricSysUiDisplayStateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemBiometricSysUiDisplayStateCallback)) {
-                return (ISemBiometricSysUiDisplayStateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemBiometricSysUiDisplayStateCallback)) {
+                return (ISemBiometricSysUiDisplayStateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,17 +83,17 @@ public interface ISemBiometricSysUiDisplayStateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onStart(readInt, readInt2, readInt3);
+                onStart(i3, i4, i5);
             } else if (i == 2) {
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
+                int i8 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onFinish(readInt4, readInt5, readInt6);
+                onFinish(i6, i7, i8);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -118,29 +118,29 @@ public interface ISemBiometricSysUiDisplayStateCallback extends IInterface {
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiDisplayStateCallback
             public void onStart(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiDisplayStateCallback
             public void onFinish(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

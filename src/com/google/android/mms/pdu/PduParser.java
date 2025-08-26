@@ -81,21 +81,21 @@ public class PduParser {
         if (byteArrayInputStream == null) {
             return null;
         }
-        PduHeaders parseHeaders = parseHeaders(byteArrayInputStream);
-        this.mHeaders = parseHeaders;
-        if (parseHeaders == null) {
+        PduHeaders headers = parseHeaders(byteArrayInputStream);
+        this.mHeaders = headers;
+        if (headers == null) {
             return null;
         }
-        int octet = parseHeaders.getOctet(140);
+        int octet = headers.getOctet(140);
         byte[] textString = this.mHeaders.getTextString(132);
         if (!checkMandatoryHeader(this.mHeaders)) {
             log("check mandatory headers failed!");
             return null;
         }
         if (128 == octet || 132 == octet) {
-            PduBody parseParts = parseParts(this.mPduDataStream, textString);
-            this.mBody = parseParts;
-            if (parseParts == null) {
+            PduBody parts = parseParts(this.mPduDataStream, textString);
+            this.mBody = parts;
+            if (parts == null) {
                 return null;
             }
             if (new String(textString).equals("text/plain")) {
@@ -151,41 +151,41 @@ public class PduParser {
         boolean z = true;
         while (z && byteArrayInputStream.available() > 0) {
             byteArrayInputStream.mark(1);
-            int extractByteValue = extractByteValue(byteArrayInputStream);
-            if (extractByteValue >= 32 && extractByteValue <= 127) {
+            int iExtractByteValue = extractByteValue(byteArrayInputStream);
+            if (iExtractByteValue >= 32 && iExtractByteValue <= 127) {
                 byteArrayInputStream.reset();
                 parseWapString(byteArrayInputStream, 0);
             } else {
-                switch (extractByteValue) {
+                switch (iExtractByteValue) {
                     case 129:
                     case 130:
                     case 151:
-                        EncodedStringValue parseEncodedStringValue = parseEncodedStringValue(byteArrayInputStream);
-                        if (parseEncodedStringValue == null) {
+                        EncodedStringValue encodedStringValue2 = parseEncodedStringValue(byteArrayInputStream);
+                        if (encodedStringValue2 == null) {
                             continue;
                         } else {
-                            byte[] textString2 = parseEncodedStringValue.getTextString();
+                            byte[] textString2 = encodedStringValue2.getTextString();
                             if (textString2 != null) {
                                 String str = new String(textString2);
-                                int indexOf = str.indexOf("/");
-                                if (indexOf > 0) {
-                                    str = str.substring(0, indexOf);
+                                int iIndexOf = str.indexOf("/");
+                                if (iIndexOf > 0) {
+                                    str = str.substring(0, iIndexOf);
                                 }
                                 try {
-                                    parseEncodedStringValue.setTextString(str.getBytes());
+                                    encodedStringValue2.setTextString(str.getBytes());
                                 } catch (NullPointerException unused) {
                                     log("null pointer error!");
                                     return null;
                                 }
                             }
                             try {
-                                pduHeaders.appendEncodedStringValue(parseEncodedStringValue, extractByteValue);
+                                pduHeaders.appendEncodedStringValue(encodedStringValue2, iExtractByteValue);
                                 break;
                             } catch (NullPointerException unused2) {
                                 log("null pointer error!");
                                 break;
                             } catch (RuntimeException unused3) {
-                                log(extractByteValue + "is not Encoded-String-Value header field!");
+                                log(iExtractByteValue + "is not Encoded-String-Value header field!");
                                 return null;
                             }
                         }
@@ -198,46 +198,46 @@ public class PduParser {
                     case 185:
                     case 189:
                     case 190:
-                        byte[] parseWapString = parseWapString(byteArrayInputStream, 0);
-                        if (parseWapString == null) {
+                        byte[] wapString = parseWapString(byteArrayInputStream, 0);
+                        if (wapString == null) {
                             break;
                         } else {
                             try {
-                                pduHeaders.setTextString(parseWapString, extractByteValue);
+                                pduHeaders.setTextString(wapString, iExtractByteValue);
                                 break;
                             } catch (NullPointerException unused4) {
                                 log("null pointer error!");
                                 break;
                             } catch (RuntimeException unused5) {
-                                log(extractByteValue + "is not Text-String header field!");
+                                log(iExtractByteValue + "is not Text-String header field!");
                                 return null;
                             }
                         }
                     case 132:
-                        HashMap hashMap = new HashMap();
-                        byte[] parseContentType = parseContentType(byteArrayInputStream, hashMap);
-                        if (parseContentType != null) {
+                        HashMap map = new HashMap();
+                        byte[] contentType = parseContentType(byteArrayInputStream, map);
+                        if (contentType != null) {
                             try {
-                                pduHeaders.setTextString(parseContentType, 132);
+                                pduHeaders.setTextString(contentType, 132);
                             } catch (NullPointerException unused6) {
                                 log("null pointer error!");
                             } catch (RuntimeException unused7) {
-                                log(extractByteValue + "is not Text-String header field!");
+                                log(iExtractByteValue + "is not Text-String header field!");
                                 return null;
                             }
                         }
-                        mStartParam = (byte[]) hashMap.get(153);
-                        mTypeParam = (byte[]) hashMap.get(131);
+                        mStartParam = (byte[]) map.get(153);
+                        mTypeParam = (byte[]) map.get(131);
                         z = false;
                         break;
                     case 133:
                     case 142:
                     case 159:
                         try {
-                            pduHeaders.setLongInteger(parseLongInteger(byteArrayInputStream), extractByteValue);
+                            pduHeaders.setLongInteger(parseLongInteger(byteArrayInputStream), iExtractByteValue);
                             break;
                         } catch (RuntimeException unused8) {
-                            log(extractByteValue + "is not Long-Integer header field!");
+                            log(iExtractByteValue + "is not Long-Integer header field!");
                             return null;
                         }
                     case 134:
@@ -262,15 +262,15 @@ public class PduParser {
                     case 187:
                     case 188:
                     case 191:
-                        int extractByteValue2 = extractByteValue(byteArrayInputStream);
+                        int iExtractByteValue2 = extractByteValue(byteArrayInputStream);
                         try {
-                            pduHeaders.setOctet(extractByteValue2, extractByteValue);
+                            pduHeaders.setOctet(iExtractByteValue2, iExtractByteValue);
                             break;
                         } catch (InvalidHeaderValueException unused9) {
-                            log("Set invalid Octet value: " + extractByteValue2 + " into the header filed: " + extractByteValue);
+                            log("Set invalid Octet value: " + iExtractByteValue2 + " into the header filed: " + iExtractByteValue);
                             return null;
                         } catch (RuntimeException unused10) {
-                            log(extractByteValue + "is not Octet header field!");
+                            log(iExtractByteValue + "is not Octet header field!");
                             return null;
                         }
                     case 135:
@@ -278,21 +278,21 @@ public class PduParser {
                     case 157:
                         try {
                             parseValueLength(byteArrayInputStream);
-                            int extractByteValue3 = extractByteValue(byteArrayInputStream);
+                            int iExtractByteValue3 = extractByteValue(byteArrayInputStream);
                             try {
-                                long parseLongInteger = parseLongInteger(byteArrayInputStream);
-                                if (129 == extractByteValue3) {
-                                    parseLongInteger += System.currentTimeMillis() / 1000;
+                                long longInteger = parseLongInteger(byteArrayInputStream);
+                                if (129 == iExtractByteValue3) {
+                                    longInteger += System.currentTimeMillis() / 1000;
                                 }
                                 try {
-                                    pduHeaders.setLongInteger(parseLongInteger, extractByteValue);
+                                    pduHeaders.setLongInteger(longInteger, iExtractByteValue);
                                     break;
                                 } catch (RuntimeException unused11) {
-                                    log(extractByteValue + "is not Long-Integer header field!");
+                                    log(iExtractByteValue + "is not Long-Integer header field!");
                                     return null;
                                 }
                             } catch (RuntimeException unused12) {
-                                log(extractByteValue + "is not Long-Integer header field!");
+                                log(iExtractByteValue + "is not Long-Integer header field!");
                                 return null;
                             }
                         } catch (IllegalArgumentException unused13) {
@@ -306,9 +306,9 @@ public class PduParser {
                                 encodedStringValue = parseEncodedStringValue(byteArrayInputStream);
                                 if (encodedStringValue != null && (textString = encodedStringValue.getTextString()) != null) {
                                     String str2 = new String(textString);
-                                    int indexOf2 = str2.indexOf("/");
-                                    if (indexOf2 > 0) {
-                                        str2 = str2.substring(0, indexOf2);
+                                    int iIndexOf2 = str2.indexOf("/");
+                                    if (iIndexOf2 > 0) {
+                                        str2 = str2.substring(0, iIndexOf2);
                                     }
                                     try {
                                         encodedStringValue.setTextString(str2.getBytes());
@@ -321,7 +321,7 @@ public class PduParser {
                                 try {
                                     encodedStringValue = new EncodedStringValue(PduHeaders.FROM_INSERT_ADDRESS_TOKEN_STR.getBytes());
                                 } catch (NullPointerException unused15) {
-                                    log(extractByteValue + "is not Encoded-String-Value header field!");
+                                    log(iExtractByteValue + "is not Encoded-String-Value header field!");
                                     return null;
                                 }
                             }
@@ -332,7 +332,7 @@ public class PduParser {
                                 log("null pointer error!");
                                 break;
                             } catch (RuntimeException unused17) {
-                                log(extractByteValue + "is not Encoded-String-Value header field!");
+                                log(iExtractByteValue + "is not Encoded-String-Value header field!");
                                 return null;
                             }
                         } catch (IllegalArgumentException unused18) {
@@ -341,28 +341,28 @@ public class PduParser {
                         }
                     case 138:
                         byteArrayInputStream.mark(1);
-                        int extractByteValue4 = extractByteValue(byteArrayInputStream);
-                        if (extractByteValue4 < 128) {
+                        int iExtractByteValue4 = extractByteValue(byteArrayInputStream);
+                        if (iExtractByteValue4 < 128) {
                             byteArrayInputStream.reset();
-                            byte[] parseWapString2 = parseWapString(byteArrayInputStream, 0);
-                            if (parseWapString2 == null) {
+                            byte[] wapString2 = parseWapString(byteArrayInputStream, 0);
+                            if (wapString2 == null) {
                                 break;
                             } else {
                                 try {
-                                    pduHeaders.setTextString(parseWapString2, 138);
+                                    pduHeaders.setTextString(wapString2, 138);
                                     break;
                                 } catch (NullPointerException unused19) {
                                     log("null pointer error!");
                                     break;
                                 } catch (RuntimeException unused20) {
-                                    log(extractByteValue + "is not Text-String header field!");
+                                    log(iExtractByteValue + "is not Text-String header field!");
                                     return null;
                                 }
                             }
-                        } else if (128 != extractByteValue4) {
-                            if (129 != extractByteValue4) {
-                                if (130 != extractByteValue4) {
-                                    if (131 != extractByteValue4) {
+                        } else if (128 != iExtractByteValue4) {
+                            if (129 != iExtractByteValue4) {
+                                if (130 != iExtractByteValue4) {
+                                    if (131 != iExtractByteValue4) {
                                         break;
                                     } else {
                                         pduHeaders.setTextString("auto".getBytes(), 138);
@@ -384,13 +384,13 @@ public class PduParser {
                                 log("null pointer error!");
                                 break;
                             } catch (RuntimeException unused22) {
-                                log(extractByteValue + "is not Text-String header field!");
+                                log(iExtractByteValue + "is not Text-String header field!");
                                 return null;
                             }
                         }
                     case 140:
-                        int extractByteValue5 = extractByteValue(byteArrayInputStream);
-                        switch (extractByteValue5) {
+                        int iExtractByteValue5 = extractByteValue(byteArrayInputStream);
+                        switch (iExtractByteValue5) {
                             case 137:
                             case 138:
                             case 139:
@@ -409,26 +409,26 @@ public class PduParser {
                                 return null;
                             default:
                                 try {
-                                    pduHeaders.setOctet(extractByteValue5, extractByteValue);
+                                    pduHeaders.setOctet(iExtractByteValue5, iExtractByteValue);
                                     break;
                                 } catch (InvalidHeaderValueException unused23) {
-                                    log("Set invalid Octet value: " + extractByteValue5 + " into the header filed: " + extractByteValue);
+                                    log("Set invalid Octet value: " + iExtractByteValue5 + " into the header filed: " + iExtractByteValue);
                                     return null;
                                 } catch (RuntimeException unused24) {
-                                    log(extractByteValue + "is not Octet header field!");
+                                    log(iExtractByteValue + "is not Octet header field!");
                                     return null;
                                 }
                         }
                     case 141:
-                        int parseShortInteger = parseShortInteger(byteArrayInputStream);
+                        int shortInteger = parseShortInteger(byteArrayInputStream);
                         try {
-                            pduHeaders.setOctet(parseShortInteger, 141);
+                            pduHeaders.setOctet(shortInteger, 141);
                             break;
                         } catch (InvalidHeaderValueException unused25) {
-                            log("Set invalid Octet value: " + parseShortInteger + " into the header filed: " + extractByteValue);
+                            log("Set invalid Octet value: " + shortInteger + " into the header filed: " + iExtractByteValue);
                             return null;
                         } catch (RuntimeException unused26) {
-                            log(extractByteValue + "is not Octet header field!");
+                            log(iExtractByteValue + "is not Octet header field!");
                             return null;
                         }
                     case 147:
@@ -436,32 +436,32 @@ public class PduParser {
                     case 166:
                     case 181:
                     case 182:
-                        EncodedStringValue parseEncodedStringValue2 = parseEncodedStringValue(byteArrayInputStream);
-                        if (parseEncodedStringValue2 == null) {
+                        EncodedStringValue encodedStringValue3 = parseEncodedStringValue(byteArrayInputStream);
+                        if (encodedStringValue3 == null) {
                             break;
                         } else {
                             try {
-                                pduHeaders.setEncodedStringValue(parseEncodedStringValue2, extractByteValue);
+                                pduHeaders.setEncodedStringValue(encodedStringValue3, iExtractByteValue);
                                 break;
                             } catch (NullPointerException unused27) {
                                 log("null pointer error!");
                                 break;
                             } catch (RuntimeException unused28) {
-                                log(extractByteValue + "is not Encoded-String-Value header field!");
+                                log(iExtractByteValue + "is not Encoded-String-Value header field!");
                                 return null;
                             }
                         }
                     case 150:
-                        EncodedStringValue parseEncodedSubjectValue = parseEncodedSubjectValue(byteArrayInputStream);
-                        if (parseEncodedSubjectValue != null) {
+                        EncodedStringValue encodedSubjectValue = parseEncodedSubjectValue(byteArrayInputStream);
+                        if (encodedSubjectValue != null) {
                             try {
-                                pduHeaders.setEncodedStringValue(parseEncodedSubjectValue, extractByteValue);
+                                pduHeaders.setEncodedStringValue(encodedSubjectValue, iExtractByteValue);
                                 break;
                             } catch (NullPointerException unused29) {
                                 log("null pointer error!");
                                 break;
                             } catch (RuntimeException unused30) {
-                                log(extractByteValue + "is not Encoded-String-Value header field!");
+                                log(iExtractByteValue + "is not Encoded-String-Value header field!");
                                 return null;
                             }
                         } else {
@@ -473,23 +473,23 @@ public class PduParser {
                             parseValueLength(byteArrayInputStream);
                             try {
                                 parseIntegerValue(byteArrayInputStream);
-                                EncodedStringValue parseEncodedStringValue3 = parseEncodedStringValue(byteArrayInputStream);
-                                if (parseEncodedStringValue3 == null) {
+                                EncodedStringValue encodedStringValue4 = parseEncodedStringValue(byteArrayInputStream);
+                                if (encodedStringValue4 == null) {
                                     break;
                                 } else {
                                     try {
-                                        pduHeaders.setEncodedStringValue(parseEncodedStringValue3, 160);
+                                        pduHeaders.setEncodedStringValue(encodedStringValue4, 160);
                                         break;
                                     } catch (NullPointerException unused31) {
                                         log("null pointer error!");
                                         break;
                                     } catch (RuntimeException unused32) {
-                                        log(extractByteValue + "is not Encoded-String-Value header field!");
+                                        log(iExtractByteValue + "is not Encoded-String-Value header field!");
                                         return null;
                                     }
                                 }
                             } catch (RuntimeException unused33) {
-                                log(extractByteValue + " is not Integer-Value");
+                                log(iExtractByteValue + " is not Integer-Value");
                                 return null;
                             }
                         } catch (IllegalArgumentException unused34) {
@@ -505,11 +505,11 @@ public class PduParser {
                                     pduHeaders.setLongInteger(parseLongInteger(byteArrayInputStream), 161);
                                     break;
                                 } catch (RuntimeException unused35) {
-                                    log(extractByteValue + "is not Long-Integer header field!");
+                                    log(iExtractByteValue + "is not Long-Integer header field!");
                                     return null;
                                 }
                             } catch (RuntimeException unused36) {
-                                log(extractByteValue + " is not Integer-Value");
+                                log(iExtractByteValue + " is not Integer-Value");
                                 return null;
                             }
                         } catch (IllegalArgumentException unused37) {
@@ -541,7 +541,7 @@ public class PduParser {
                                 parseIntegerValue(byteArrayInputStream);
                                 break;
                             } catch (RuntimeException unused39) {
-                                log(extractByteValue + " is not Integer-Value");
+                                log(iExtractByteValue + " is not Integer-Value");
                                 return null;
                             }
                         } catch (IllegalArgumentException unused40) {
@@ -552,10 +552,10 @@ public class PduParser {
                     case 175:
                     case 179:
                         try {
-                            pduHeaders.setLongInteger(parseIntegerValue(byteArrayInputStream), extractByteValue);
+                            pduHeaders.setLongInteger(parseIntegerValue(byteArrayInputStream), iExtractByteValue);
                             break;
                         } catch (RuntimeException unused41) {
-                            log(extractByteValue + "is not Long-Integer header field!");
+                            log(iExtractByteValue + "is not Long-Integer header field!");
                             return null;
                         }
                     case 178:
@@ -571,7 +571,7 @@ public class PduParser {
         if (byteArrayInputStream == null) {
             return null;
         }
-        int parseUnsignedInt = parseUnsignedInt(byteArrayInputStream);
+        int unsignedInt = parseUnsignedInt(byteArrayInputStream);
         PduBody pduBody = new PduBody();
         String str = new String(bArr);
         if (!str.equals(ContentType.MULTIPART_MIXED) && !str.equals(ContentType.MULTIPART_RELATED)) {
@@ -589,75 +589,75 @@ public class PduParser {
             pduPart2.setContentLocation("attach.txt".getBytes());
             pduPart2.setContentId("attach.txt".getBytes());
             pduPart2.setContentType("text/plain".getBytes());
-            int available = byteArrayInputStream.available();
-            byte[] bArr2 = new byte[available];
-            byteArrayInputStream.read(bArr2, 0, available);
+            int iAvailable = byteArrayInputStream.available();
+            byte[] bArr2 = new byte[iAvailable];
+            byteArrayInputStream.read(bArr2, 0, iAvailable);
             pduPart2.setData(bArr2);
             pduBody.addPart(pduPart2);
             return pduBody;
         }
-        for (int i = 0; i < parseUnsignedInt; i++) {
-            int parseUnsignedInt2 = parseUnsignedInt(byteArrayInputStream);
-            int parseUnsignedInt3 = parseUnsignedInt(byteArrayInputStream);
+        for (int i = 0; i < unsignedInt; i++) {
+            int unsignedInt2 = parseUnsignedInt(byteArrayInputStream);
+            int unsignedInt3 = parseUnsignedInt(byteArrayInputStream);
             PduPart pduPart3 = new PduPart();
-            int available2 = byteArrayInputStream.available();
-            if (available2 <= 0) {
+            int iAvailable2 = byteArrayInputStream.available();
+            if (iAvailable2 <= 0) {
                 return null;
             }
-            HashMap hashMap = new HashMap();
-            byte[] parseContentType = parseContentType(byteArrayInputStream, hashMap);
-            if (parseContentType != null) {
-                pduPart3.setContentType(parseContentType);
+            HashMap map = new HashMap();
+            byte[] contentType = parseContentType(byteArrayInputStream, map);
+            if (contentType != null) {
+                pduPart3.setContentType(contentType);
             } else {
                 pduPart3.setContentType(PduContentTypes.contentTypes[0].getBytes());
             }
-            byte[] bArr3 = (byte[]) hashMap.get(151);
+            byte[] bArr3 = (byte[]) map.get(151);
             if (bArr3 != null) {
                 pduPart3.setName(bArr3);
             }
-            Integer num = (Integer) hashMap.get(129);
+            Integer num = (Integer) map.get(129);
             if (num != null) {
                 pduPart3.setCharset(num.intValue());
             }
-            int available3 = parseUnsignedInt2 - (available2 - byteArrayInputStream.available());
-            if (available3 > 0) {
-                if (!parsePartHeaders(byteArrayInputStream, pduPart3, available3)) {
+            int iAvailable3 = unsignedInt2 - (iAvailable2 - byteArrayInputStream.available());
+            if (iAvailable3 > 0) {
+                if (!parsePartHeaders(byteArrayInputStream, pduPart3, iAvailable3)) {
                     return null;
                 }
-            } else if (available3 < 0) {
+            } else if (iAvailable3 < 0) {
                 return null;
             }
             if (pduPart3.getContentLocation() == null && pduPart3.getName() == null && pduPart3.getFilename() == null && pduPart3.getContentId() == null) {
                 pduPart3.setContentLocation(Long.toOctalString(System.currentTimeMillis()).getBytes());
             }
-            if (parseUnsignedInt3 > 0) {
-                byte[] bArr4 = new byte[parseUnsignedInt3];
+            if (unsignedInt3 > 0) {
+                byte[] bArrDecodeQuotedPrintable = new byte[unsignedInt3];
                 String str3 = new String(pduPart3.getContentType());
-                if (byteArrayInputStream.read(bArr4, 0, parseUnsignedInt3) == -1) {
+                if (byteArrayInputStream.read(bArrDecodeQuotedPrintable, 0, unsignedInt3) == -1) {
                     return null;
                 }
                 if (str3.equalsIgnoreCase(ContentType.MULTIPART_ALTERNATIVE)) {
-                    PduBody parseParts = parseParts(new ByteArrayInputStream(bArr4), parseContentType);
-                    if (parseParts == null) {
+                    PduBody parts = parseParts(new ByteArrayInputStream(bArrDecodeQuotedPrintable), contentType);
+                    if (parts == null) {
                         log("childBody is null");
                     } else {
-                        pduPart3 = parseParts.getPart(0);
+                        pduPart3 = parts.getPart(0);
                     }
                 } else {
                     byte[] contentTransferEncoding = pduPart3.getContentTransferEncoding();
                     if (contentTransferEncoding != null) {
                         String str4 = new String(contentTransferEncoding);
                         if (str4.equalsIgnoreCase(PduPart.P_BASE64)) {
-                            bArr4 = Base64.decodeBase64(bArr4);
+                            bArrDecodeQuotedPrintable = Base64.decodeBase64(bArrDecodeQuotedPrintable);
                         } else if (str4.equalsIgnoreCase(PduPart.P_QUOTED_PRINTABLE)) {
-                            bArr4 = QuotedPrintable.decodeQuotedPrintable(bArr4);
+                            bArrDecodeQuotedPrintable = QuotedPrintable.decodeQuotedPrintable(bArrDecodeQuotedPrintable);
                         }
                     }
-                    if (bArr4 == null) {
+                    if (bArrDecodeQuotedPrintable == null) {
                         log("Decode part data error!");
                         return null;
                     }
-                    pduPart3.setData(bArr4);
+                    pduPart3.setData(bArrDecodeQuotedPrintable);
                 }
             }
             if (checkPartPosition(pduPart3) == 0) {
@@ -670,61 +670,61 @@ public class PduParser {
     }
 
     protected static int parseUnsignedInt(ByteArrayInputStream byteArrayInputStream) {
-        int read = byteArrayInputStream.read();
-        if (read == -1) {
-            return read;
+        int i = byteArrayInputStream.read();
+        if (i == -1) {
+            return i;
         }
-        int i = 0;
-        while ((read & 128) != 0) {
-            i = (i << 7) | (read & 127);
-            read = byteArrayInputStream.read();
-            if (read == -1) {
-                return read;
+        int i2 = 0;
+        while ((i & 128) != 0) {
+            i2 = (i2 << 7) | (i & 127);
+            i = byteArrayInputStream.read();
+            if (i == -1) {
+                return i;
             }
         }
-        return (i << 7) | (read & 127);
+        return (i2 << 7) | (i & 127);
     }
 
     protected static int parseValueLength(ByteArrayInputStream byteArrayInputStream) {
-        int read = byteArrayInputStream.read() & 255;
-        if (read <= 30) {
-            return read;
+        int i = byteArrayInputStream.read() & 255;
+        if (i <= 30) {
+            return i;
         }
-        if (read == 31) {
+        if (i == 31) {
             return parseUnsignedInt(byteArrayInputStream);
         }
         throw new IllegalArgumentException("Value length > LENGTH_QUOTE!");
     }
 
     protected static EncodedStringValue parseEncodedStringValue(ByteArrayInputStream byteArrayInputStream) {
-        int parseShortInteger;
+        int shortInteger;
         byteArrayInputStream.mark(1);
-        int read = byteArrayInputStream.read();
-        if (read == 0) {
+        int i = byteArrayInputStream.read();
+        if (i == 0) {
             return null;
         }
-        int i = read & 255;
-        if (i == 0) {
+        int i2 = i & 255;
+        if (i2 == 0) {
             return new EncodedStringValue("");
         }
         byteArrayInputStream.reset();
-        if (i < 32) {
+        if (i2 < 32) {
             try {
                 parseValueLength(byteArrayInputStream);
-                parseShortInteger = parseShortInteger(byteArrayInputStream);
+                shortInteger = parseShortInteger(byteArrayInputStream);
             } catch (IllegalArgumentException unused) {
                 log("parseValueLength Exception!");
                 return null;
             }
         } else {
-            parseShortInteger = 0;
+            shortInteger = 0;
         }
-        byte[] parseWapString = parseWapString(byteArrayInputStream, 0);
+        byte[] wapString = parseWapString(byteArrayInputStream, 0);
         try {
-            if (parseShortInteger != 0) {
-                return new EncodedStringValue(parseShortInteger, parseWapString);
+            if (shortInteger != 0) {
+                return new EncodedStringValue(shortInteger, wapString);
             }
-            return new EncodedStringValue(parseWapString);
+            return new EncodedStringValue(wapString);
         } catch (Exception unused2) {
             return null;
         }
@@ -732,10 +732,10 @@ public class PduParser {
 
     protected static byte[] parseWapString(ByteArrayInputStream byteArrayInputStream, int i) {
         byteArrayInputStream.mark(1);
-        int read = byteArrayInputStream.read();
-        if (1 == i && 34 == read) {
+        int i2 = byteArrayInputStream.read();
+        if (1 == i && 34 == i2) {
             byteArrayInputStream.mark(1);
-        } else if (i == 0 && 127 == read) {
+        } else if (i == 0 && 127 == i2) {
             byteArrayInputStream.mark(1);
         } else {
             byteArrayInputStream.reset();
@@ -745,16 +745,16 @@ public class PduParser {
 
     protected static byte[] getWapString(ByteArrayInputStream byteArrayInputStream, int i) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        int read = byteArrayInputStream.read();
-        while (-1 != read && read != 0) {
+        int i2 = byteArrayInputStream.read();
+        while (-1 != i2 && i2 != 0) {
             if (i == 2) {
-                if (isTokenCharacter(read)) {
-                    byteArrayOutputStream.write(read);
+                if (isTokenCharacter(i2)) {
+                    byteArrayOutputStream.write(i2);
                 }
-            } else if (isText(read)) {
-                byteArrayOutputStream.write(read);
+            } else if (isText(i2)) {
+                byteArrayOutputStream.write(i2);
             }
-            read = byteArrayInputStream.read();
+            i2 = byteArrayInputStream.read();
         }
         if (byteArrayOutputStream.size() > 0) {
             return byteArrayOutputStream.toByteArray();
@@ -771,12 +771,12 @@ public class PduParser {
     }
 
     protected static long parseLongInteger(ByteArrayInputStream byteArrayInputStream) {
-        int read = byteArrayInputStream.read() & 255;
-        if (read > 8) {
+        int i = byteArrayInputStream.read() & 255;
+        if (i > 8) {
             throw new RuntimeException("Octet count greater than 8 and I can't represent that!");
         }
         long j = 0;
-        for (int i = 0; i < read; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             j = (j << 8) + (byteArrayInputStream.read() & 255);
         }
         return j;
@@ -784,147 +784,147 @@ public class PduParser {
 
     protected static long parseIntegerValue(ByteArrayInputStream byteArrayInputStream) {
         byteArrayInputStream.mark(1);
-        int read = byteArrayInputStream.read();
+        int i = byteArrayInputStream.read();
         byteArrayInputStream.reset();
-        if (read > 127) {
+        if (i > 127) {
             return parseShortInteger(byteArrayInputStream);
         }
         return parseLongInteger(byteArrayInputStream);
     }
 
     protected static int skipWapValue(ByteArrayInputStream byteArrayInputStream, int i) {
-        int read = byteArrayInputStream.read(new byte[i], 0, i);
-        if (read < i) {
+        int i2 = byteArrayInputStream.read(new byte[i], 0, i);
+        if (i2 < i) {
             return -1;
         }
-        return read;
+        return i2;
     }
 
-    protected static void parseContentTypeParams(ByteArrayInputStream byteArrayInputStream, HashMap<Integer, Object> hashMap, Integer num) {
-        int available;
-        int intValue;
-        int available2 = byteArrayInputStream.available();
-        int intValue2 = num.intValue();
-        while (intValue2 > 0) {
-            int read = byteArrayInputStream.read();
-            intValue2--;
-            if (read != 129) {
-                if (read != 131) {
-                    if (read != 133 && read != 151) {
-                        if (read != 153) {
-                            if (read != 137) {
-                                if (read != 138) {
-                                    if (-1 == skipWapValue(byteArrayInputStream, intValue2)) {
+    protected static void parseContentTypeParams(ByteArrayInputStream byteArrayInputStream, HashMap<Integer, Object> map, Integer num) {
+        int iAvailable;
+        int iIntValue;
+        int iAvailable2 = byteArrayInputStream.available();
+        int iIntValue2 = num.intValue();
+        while (iIntValue2 > 0) {
+            int i = byteArrayInputStream.read();
+            iIntValue2--;
+            if (i != 129) {
+                if (i != 131) {
+                    if (i != 133 && i != 151) {
+                        if (i != 153) {
+                            if (i != 137) {
+                                if (i != 138) {
+                                    if (-1 == skipWapValue(byteArrayInputStream, iIntValue2)) {
                                         Log.e(LOG_TAG, "Corrupt Content-Type");
                                     } else {
-                                        intValue2 = 0;
+                                        iIntValue2 = 0;
                                     }
                                 }
                             }
                         }
-                        byte[] parseWapString = parseWapString(byteArrayInputStream, 0);
-                        if (parseWapString != null && hashMap != null) {
-                            hashMap.put(153, parseWapString);
+                        byte[] wapString = parseWapString(byteArrayInputStream, 0);
+                        if (wapString != null && map != null) {
+                            map.put(153, wapString);
                         }
-                        available = byteArrayInputStream.available();
-                        intValue = num.intValue();
+                        iAvailable = byteArrayInputStream.available();
+                        iIntValue = num.intValue();
                     } else {
-                        byte[] parseWapString2 = parseWapString(byteArrayInputStream, 0);
-                        if (parseWapString2 != null && hashMap != null) {
-                            hashMap.put(151, parseWapString2);
+                        byte[] wapString2 = parseWapString(byteArrayInputStream, 0);
+                        if (wapString2 != null && map != null) {
+                            map.put(151, wapString2);
                         }
-                        available = byteArrayInputStream.available();
-                        intValue = num.intValue();
+                        iAvailable = byteArrayInputStream.available();
+                        iIntValue = num.intValue();
                     }
                 }
                 byteArrayInputStream.mark(1);
-                int extractByteValue = extractByteValue(byteArrayInputStream);
+                int iExtractByteValue = extractByteValue(byteArrayInputStream);
                 byteArrayInputStream.reset();
-                if (extractByteValue > 127) {
-                    int parseShortInteger = parseShortInteger(byteArrayInputStream);
-                    if (parseShortInteger < PduContentTypes.contentTypes.length) {
-                        hashMap.put(131, PduContentTypes.contentTypes[parseShortInteger].getBytes());
+                if (iExtractByteValue > 127) {
+                    int shortInteger = parseShortInteger(byteArrayInputStream);
+                    if (shortInteger < PduContentTypes.contentTypes.length) {
+                        map.put(131, PduContentTypes.contentTypes[shortInteger].getBytes());
                     }
                 } else {
-                    byte[] parseWapString3 = parseWapString(byteArrayInputStream, 0);
-                    if (parseWapString3 != null && hashMap != null) {
-                        hashMap.put(131, parseWapString3);
+                    byte[] wapString3 = parseWapString(byteArrayInputStream, 0);
+                    if (wapString3 != null && map != null) {
+                        map.put(131, wapString3);
                     }
                 }
-                available = byteArrayInputStream.available();
-                intValue = num.intValue();
+                iAvailable = byteArrayInputStream.available();
+                iIntValue = num.intValue();
             } else {
                 byteArrayInputStream.mark(1);
-                int extractByteValue2 = extractByteValue(byteArrayInputStream);
+                int iExtractByteValue2 = extractByteValue(byteArrayInputStream);
                 byteArrayInputStream.reset();
-                if ((extractByteValue2 > 32 && extractByteValue2 < 127) || extractByteValue2 == 0) {
-                    byte[] parseWapString4 = parseWapString(byteArrayInputStream, 0);
+                if ((iExtractByteValue2 > 32 && iExtractByteValue2 < 127) || iExtractByteValue2 == 0) {
+                    byte[] wapString4 = parseWapString(byteArrayInputStream, 0);
                     try {
-                        hashMap.put(129, Integer.valueOf(CharacterSets.getMibEnumValue(new String(parseWapString4))));
+                        map.put(129, Integer.valueOf(CharacterSets.getMibEnumValue(new String(wapString4))));
                     } catch (UnsupportedEncodingException e) {
-                        Log.e(LOG_TAG, Arrays.toString(parseWapString4), e);
-                        hashMap.put(129, 0);
+                        Log.e(LOG_TAG, Arrays.toString(wapString4), e);
+                        map.put(129, 0);
                     }
                 } else {
-                    int parseIntegerValue = (int) parseIntegerValue(byteArrayInputStream);
-                    if (hashMap != null) {
-                        hashMap.put(129, Integer.valueOf(parseIntegerValue));
+                    int integerValue = (int) parseIntegerValue(byteArrayInputStream);
+                    if (map != null) {
+                        map.put(129, Integer.valueOf(integerValue));
                     }
                 }
-                available = byteArrayInputStream.available();
-                intValue = num.intValue();
+                iAvailable = byteArrayInputStream.available();
+                iIntValue = num.intValue();
             }
-            intValue2 = intValue - (available2 - available);
+            iIntValue2 = iIntValue - (iAvailable2 - iAvailable);
         }
-        if (intValue2 != 0) {
+        if (iIntValue2 != 0) {
             Log.e(LOG_TAG, "Corrupt Content-Type");
         }
     }
 
-    protected static byte[] parseContentType(ByteArrayInputStream byteArrayInputStream, HashMap<Integer, Object> hashMap) {
-        byte[] parseWapString;
+    protected static byte[] parseContentType(ByteArrayInputStream byteArrayInputStream, HashMap<Integer, Object> map) {
+        byte[] wapString;
         byteArrayInputStream.mark(1);
-        int read = byteArrayInputStream.read();
+        int i = byteArrayInputStream.read();
         byteArrayInputStream.reset();
-        int i = read & 255;
-        if (i >= 32) {
-            if (i <= 127) {
+        int i2 = i & 255;
+        if (i2 >= 32) {
+            if (i2 <= 127) {
                 return parseWapString(byteArrayInputStream, 0);
             }
             return PduContentTypes.contentTypes[parseShortInteger(byteArrayInputStream)].getBytes();
         }
         try {
-            int parseValueLength = parseValueLength(byteArrayInputStream);
-            int available = byteArrayInputStream.available();
-            if (parseValueLength > available) {
-                Log.e(LOG_TAG, "parseContentType: Invalid length " + parseValueLength + " when available bytes are " + available);
+            int valueLength = parseValueLength(byteArrayInputStream);
+            int iAvailable = byteArrayInputStream.available();
+            if (valueLength > iAvailable) {
+                Log.e(LOG_TAG, "parseContentType: Invalid length " + valueLength + " when available bytes are " + iAvailable);
                 return PduContentTypes.contentTypes[0].getBytes();
             }
             byteArrayInputStream.mark(1);
-            int read2 = byteArrayInputStream.read();
+            int i3 = byteArrayInputStream.read();
             byteArrayInputStream.reset();
-            int i2 = read2 & 255;
-            if (i2 >= 32 && i2 <= 127) {
-                parseWapString = parseWapString(byteArrayInputStream, 0);
+            int i4 = i3 & 255;
+            if (i4 >= 32 && i4 <= 127) {
+                wapString = parseWapString(byteArrayInputStream, 0);
             } else {
-                if (i2 <= 127) {
+                if (i4 <= 127) {
                     Log.e(LOG_TAG, "Corrupt content-type");
                     return PduContentTypes.contentTypes[0].getBytes();
                 }
-                int parseShortInteger = parseShortInteger(byteArrayInputStream);
-                if (parseShortInteger < PduContentTypes.contentTypes.length) {
-                    parseWapString = PduContentTypes.contentTypes[parseShortInteger].getBytes();
+                int shortInteger = parseShortInteger(byteArrayInputStream);
+                if (shortInteger < PduContentTypes.contentTypes.length) {
+                    wapString = PduContentTypes.contentTypes[shortInteger].getBytes();
                 } else {
                     byteArrayInputStream.reset();
-                    parseWapString = parseWapString(byteArrayInputStream, 0);
+                    wapString = parseWapString(byteArrayInputStream, 0);
                 }
             }
-            int available2 = parseValueLength - (available - byteArrayInputStream.available());
-            if (available2 > 0) {
-                parseContentTypeParams(byteArrayInputStream, hashMap, Integer.valueOf(available2));
+            int iAvailable2 = valueLength - (iAvailable - byteArrayInputStream.available());
+            if (iAvailable2 > 0) {
+                parseContentTypeParams(byteArrayInputStream, map, Integer.valueOf(iAvailable2));
             }
-            if (available2 >= 0) {
-                return parseWapString;
+            if (iAvailable2 >= 0) {
+                return wapString;
             }
             Log.e(LOG_TAG, "Corrupt MMS message");
             return PduContentTypes.contentTypes[0].getBytes();
@@ -935,28 +935,28 @@ public class PduParser {
     }
 
     protected boolean parsePartHeaders(ByteArrayInputStream byteArrayInputStream, PduPart pduPart, int i) {
-        int available;
-        int available2 = byteArrayInputStream.available();
+        int iAvailable;
+        int iAvailable2 = byteArrayInputStream.available();
         int i2 = i;
         while (i2 > 0) {
-            int read = byteArrayInputStream.read();
+            int i3 = byteArrayInputStream.read();
             i2--;
-            if (read > 127) {
-                if (read == 142) {
-                    byte[] parseWapString = parseWapString(byteArrayInputStream, 0);
-                    if (parseWapString != null) {
-                        pduPart.setContentLocation(parseWapString);
+            if (i3 > 127) {
+                if (i3 == 142) {
+                    byte[] wapString = parseWapString(byteArrayInputStream, 0);
+                    if (wapString != null) {
+                        pduPart.setContentLocation(wapString);
                     }
-                    available = byteArrayInputStream.available();
+                    iAvailable = byteArrayInputStream.available();
                 } else {
-                    if (read != 174) {
-                        if (read == 192) {
-                            byte[] parseWapString2 = parseWapString(byteArrayInputStream, 1);
-                            if (parseWapString2 != null) {
-                                pduPart.setContentId(parseWapString2);
+                    if (i3 != 174) {
+                        if (i3 == 192) {
+                            byte[] wapString2 = parseWapString(byteArrayInputStream, 1);
+                            if (wapString2 != null) {
+                                pduPart.setContentId(wapString2);
                             }
-                            available = byteArrayInputStream.available();
-                        } else if (read != 197) {
+                            iAvailable = byteArrayInputStream.available();
+                        } else if (i3 != 197) {
                             if (-1 == skipWapValue(byteArrayInputStream, i2)) {
                                 Log.e(LOG_TAG, "Corrupt Part headers");
                                 return false;
@@ -966,31 +966,31 @@ public class PduParser {
                     }
                     if (this.mParseContentDisposition) {
                         try {
-                            int parseValueLength = parseValueLength(byteArrayInputStream);
+                            int valueLength = parseValueLength(byteArrayInputStream);
                             byteArrayInputStream.mark(1);
-                            int available3 = byteArrayInputStream.available();
-                            int read2 = byteArrayInputStream.read();
-                            if (read2 == 128) {
+                            int iAvailable3 = byteArrayInputStream.available();
+                            int i4 = byteArrayInputStream.read();
+                            if (i4 == 128) {
                                 pduPart.setContentDisposition(PduPart.DISPOSITION_FROM_DATA);
-                            } else if (read2 == 129) {
+                            } else if (i4 == 129) {
                                 pduPart.setContentDisposition(PduPart.DISPOSITION_ATTACHMENT);
-                            } else if (read2 == 130) {
+                            } else if (i4 == 130) {
                                 pduPart.setContentDisposition(PduPart.DISPOSITION_INLINE);
                             } else {
                                 byteArrayInputStream.reset();
                                 pduPart.setContentDisposition(parseWapString(byteArrayInputStream, 0));
                             }
-                            if (available3 - byteArrayInputStream.available() < parseValueLength) {
+                            if (iAvailable3 - byteArrayInputStream.available() < valueLength) {
                                 if (byteArrayInputStream.read() == 152) {
                                     pduPart.setFilename(parseWapString(byteArrayInputStream, 0));
                                 }
-                                int available4 = available3 - byteArrayInputStream.available();
-                                if (available4 < parseValueLength) {
-                                    int i3 = parseValueLength - available4;
-                                    byteArrayInputStream.read(new byte[i3], 0, i3);
+                                int iAvailable4 = iAvailable3 - byteArrayInputStream.available();
+                                if (iAvailable4 < valueLength) {
+                                    int i5 = valueLength - iAvailable4;
+                                    byteArrayInputStream.read(new byte[i5], 0, i5);
                                 }
                             }
-                            available = byteArrayInputStream.available();
+                            iAvailable = byteArrayInputStream.available();
                         } catch (IllegalArgumentException unused) {
                             log("parseValueLength Exception!");
                             return false;
@@ -999,15 +999,15 @@ public class PduParser {
                         continue;
                     }
                 }
-                i2 = i - (available2 - available);
-            } else if (read >= 32 && read <= 127) {
-                byte[] parseWapString3 = parseWapString(byteArrayInputStream, 0);
-                byte[] parseWapString4 = parseWapString(byteArrayInputStream, 0);
-                if (true == PduPart.CONTENT_TRANSFER_ENCODING.equalsIgnoreCase(new String(parseWapString3))) {
-                    pduPart.setContentTransferEncoding(parseWapString4);
+                i2 = i - (iAvailable2 - iAvailable);
+            } else if (i3 >= 32 && i3 <= 127) {
+                byte[] wapString3 = parseWapString(byteArrayInputStream, 0);
+                byte[] wapString4 = parseWapString(byteArrayInputStream, 0);
+                if (true == PduPart.CONTENT_TRANSFER_ENCODING.equalsIgnoreCase(new String(wapString3))) {
+                    pduPart.setContentTransferEncoding(wapString4);
                 }
-                available = byteArrayInputStream.available();
-                i2 = i - (available2 - available);
+                iAvailable = byteArrayInputStream.available();
+                i2 = i - (iAvailable2 - iAvailable);
             } else {
                 if (-1 == skipWapValue(byteArrayInputStream, i2)) {
                     Log.e(LOG_TAG, "Corrupt Part headers");
@@ -1095,28 +1095,28 @@ public class PduParser {
 
     protected static EncodedStringValue parseEncodedSubjectValue(ByteArrayInputStream byteArrayInputStream) {
         int i;
-        int parseShortInteger;
+        int shortInteger;
         byteArrayInputStream.mark(1);
-        int read = byteArrayInputStream.read();
-        if (read != 0 && (i = read & 255) > 0) {
+        int i2 = byteArrayInputStream.read();
+        if (i2 != 0 && (i = i2 & 255) > 0) {
             byteArrayInputStream.reset();
             if (i < 32) {
                 try {
                     parseValueLength(byteArrayInputStream);
-                    parseShortInteger = parseShortInteger(byteArrayInputStream);
+                    shortInteger = parseShortInteger(byteArrayInputStream);
                 } catch (IllegalArgumentException unused) {
                     log("parseValueLength Exception!");
                     return null;
                 }
             } else {
-                parseShortInteger = 0;
+                shortInteger = 0;
             }
-            byte[] parseWapString = parseWapString(byteArrayInputStream, 0);
+            byte[] wapString = parseWapString(byteArrayInputStream, 0);
             try {
-                if (parseShortInteger != 0) {
-                    return new EncodedStringValue(parseShortInteger, parseWapString);
+                if (shortInteger != 0) {
+                    return new EncodedStringValue(shortInteger, wapString);
                 }
-                return new EncodedStringValue(parseWapString);
+                return new EncodedStringValue(wapString);
             } catch (Exception unused2) {
             }
         }

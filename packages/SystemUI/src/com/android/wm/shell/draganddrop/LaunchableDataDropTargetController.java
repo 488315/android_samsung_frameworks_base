@@ -2,6 +2,7 @@ package com.android.wm.shell.draganddrop;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,7 +30,6 @@ import com.samsung.android.widget.SemTipPopup;
 import com.sec.ims.volte2.data.VolteConstants;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LaunchableDataDropTargetController implements IDropTargetUiController {
     public final Context mContext;
@@ -53,12 +53,13 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
     }
 
     public static boolean isInThreshold$1(DragEvent dragEvent, DragAndDropController.PerDisplay perDisplay) {
-        int min = (int) ((Math.min(r4.width(), r4.height()) * 0.056f) + 0.5f);
-        return dragEvent.getX() < ((float) min) || dragEvent.getX() > ((float) (perDisplay.wm.getCurrentWindowMetrics().getBounds().right - min));
+        int iMin = (int) ((Math.min(r4.width(), r4.height()) * 0.056f) + 0.5f);
+        return dragEvent.getX() < ((float) iMin) || dragEvent.getX() > ((float) (perDisplay.wm.getCurrentWindowMetrics().getBounds().right - iMin));
     }
 
     @Override // com.android.wm.shell.draganddrop.IDropTargetUiController
     public final boolean onDrag(DragEvent dragEvent, int i, final DragAndDropController.PerDisplay perDisplay) {
+        PersistableBundle extras;
         boolean z;
         int action = dragEvent.getAction();
         DragAndDropController dragAndDropController = this.mController;
@@ -77,7 +78,7 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
                             dropTargetLayout.hide(new Runnable() { // from class: com.android.wm.shell.draganddrop.LaunchableDataDropTargetController$$ExternalSyntheticLambda1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    LaunchableDataDropTargetController launchableDataDropTargetController = LaunchableDataDropTargetController.this;
+                                    LaunchableDataDropTargetController launchableDataDropTargetController = this.f$0;
                                     DragAndDropController.PerDisplay perDisplay2 = perDisplay;
                                     launchableDataDropTargetController.getClass();
                                     if (perDisplay2.activeDragCount == 0) {
@@ -143,9 +144,9 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
                 } else {
                     Rect bounds = perDisplay.wm.getCurrentWindowMetrics().getBounds();
                     int x = (int) dragEvent.getX();
-                    int min = (int) ((Math.min(bounds.width(), bounds.height()) * 0.056f) + 0.5f);
-                    int i3 = bounds.right - min;
-                    if ((containsFlag$1(this.mEdgeFlags, 1) && x < min) || (containsFlag$1(this.mEdgeFlags, 2) && x > i3)) {
+                    int iMin = (int) ((Math.min(bounds.width(), bounds.height()) * 0.056f) + 0.5f);
+                    int i3 = bounds.right - iMin;
+                    if ((containsFlag$1(this.mEdgeFlags, 1) && x < iMin) || (containsFlag$1(this.mEdgeFlags, 2) && x > i3)) {
                         if (MultiWindowOverheatUI.showIfNeeded(this.mContext)) {
                             this.mIgnoreActionDragLocation = true;
                             return false;
@@ -166,7 +167,7 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
                             dragAndDropController.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.draganddrop.LaunchableDataDropTargetController$$ExternalSyntheticLambda3
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    LaunchableDataDropTargetController.this.mInputMethodManager.semForceHideSoftInput();
+                                    this.f$0.mInputMethodManager.semForceHideSoftInput();
                                     Log.i("DragAndDropController_Launchable", "Hide the Ime when Drag Layout is shown");
                                 }
                             });
@@ -179,11 +180,11 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
                     int y = (int) dragEvent.getY();
                     if (smartTipController.mShown) {
                         int i4 = smartTipController.mInitialX;
-                        int max = Math.max(0, (y - (smartTipController.mSurfaceHeight / 2)) - smartTipController.mGapWithContent);
+                        int iMax = Math.max(0, (y - (smartTipController.mSurfaceHeight / 2)) - smartTipController.mGapWithContent);
                         SmartTip smartTip = smartTipController.mHelpTip;
                         SemTipPopup semTipPopup = smartTip.mTipPopup;
                         if (semTipPopup != null && semTipPopup.isShowing()) {
-                            smartTip.mTipPopup.setTargetPosition(i4, max);
+                            smartTip.mTipPopup.setTargetPosition(i4, iMax);
                             smartTip.mTipPopup.update();
                         }
                     }
@@ -204,10 +205,10 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
         DisplayController displayController = this.mDisplayController;
         DisplayLayout displayLayout = displayController.getDisplayLayout(i5);
         if (displayLayout != null) {
-            int navigationBarPosition = DisplayLayout.navigationBarPosition(this.mContext.getResources(), displayLayout.mWidth, displayLayout.mHeight, displayLayout.mRotation);
-            if (navigationBarPosition == 1) {
+            int iNavigationBarPosition = DisplayLayout.navigationBarPosition(this.mContext.getResources(), displayLayout.mWidth, displayLayout.mHeight, displayLayout.mRotation);
+            if (iNavigationBarPosition == 1) {
                 this.mEdgeFlags &= -2;
-            } else if (navigationBarPosition == 2) {
+            } else if (iNavigationBarPosition == 2) {
                 this.mEdgeFlags &= -3;
             }
         }
@@ -216,21 +217,23 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
             Slog.d("DragAndDropController_Launchable", "setIgnoreEdgeFlags. clipData null.");
         } else {
             ClipDescription description = clipData.getDescription();
-            if (description == null) {
+            if (description == null || (extras = description.getExtras()) == null) {
                 Slog.d("DragAndDropController_Launchable", "setIgnoreEdgeFlags. description null.");
             } else {
-                PersistableBundle extras = description.getExtras();
-                if (extras == null) {
-                    Slog.d("DragAndDropController_Launchable", "setIgnoreEdgeFlags. description null.");
-                } else {
-                    if (extras.getBoolean("com.samsung.android.content.clipdescription.extra.IGNORE_LEFT_EDGE")) {
-                        this.mEdgeFlags &= -2;
-                    }
-                    if (extras.getBoolean("com.samsung.android.content.clipdescription.extra.IGNORE_RIGHT_EDGE")) {
-                        this.mEdgeFlags &= -3;
-                    }
-                    if (CoreRune.FW_SUPPORT_ONE_TOUCH && Settings.Secure.getInt(this.mContext.getContentResolver(), "otch_long_press_enabled_setting", 1) == 1) {
-                        this.mEdgeFlags &= -3;
+                if (extras.getBoolean("com.samsung.android.content.clipdescription.extra.IGNORE_LEFT_EDGE")) {
+                    this.mEdgeFlags &= -2;
+                }
+                if (extras.getBoolean("com.samsung.android.content.clipdescription.extra.IGNORE_RIGHT_EDGE")) {
+                    this.mEdgeFlags &= -3;
+                }
+                if (CoreRune.FW_SUPPORT_ONE_TOUCH) {
+                    ContentResolver contentResolver = this.mContext.getContentResolver();
+                    if (Settings.Secure.getInt(contentResolver, "otch_long_press_enabled_setting", 1) == 1) {
+                        if (Settings.Secure.getInt(contentResolver, "otch_sidebar_position", 0) == 0) {
+                            this.mEdgeFlags &= -3;
+                        } else {
+                            this.mEdgeFlags &= -2;
+                        }
                     }
                 }
             }
@@ -263,7 +266,7 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
                 smartTipController2.mSurfaceHeight = height;
                 int i7 = x2 > smartTipController2.mDisplayBounds.width() / 2 ? smartTipController2.mDisplayBounds.right : smartTipController2.mDisplayBounds.left;
                 smartTipController2.mInitialX = i7;
-                int max2 = Math.max(0, (y2 - (smartTipController2.mSurfaceHeight / 2)) - smartTipController2.mGapWithContent);
+                int iMax2 = Math.max(0, (y2 - (smartTipController2.mSurfaceHeight / 2)) - smartTipController2.mGapWithContent);
                 int i8 = x2 > smartTipController2.mDisplayBounds.width() / 2 ? 1 : 0;
                 SmartTip smartTip2 = smartTipController2.mHelpTip;
                 SharedPreferences sharedPreferences = smartTip2.mPreferences;
@@ -291,7 +294,7 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
                     }
                     int i9 = i8 ^ 1;
                     if (smartTip2.mRootView.isAttachedToWindow()) {
-                        smartTip2.showTipPopup(i7, max2, i9, true);
+                        smartTip2.showTipPopup(i7, iMax2, i9, true);
                     } else {
                         smartTip2.mRootView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.wm.shell.draganddrop.SmartTip.1
                             public final /* synthetic */ int val$direction;
@@ -299,16 +302,16 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
                             public final /* synthetic */ int val$posX;
                             public final /* synthetic */ int val$posY;
 
-                            public AnonymousClass1(int i72, int max22, boolean z2, int i92) {
-                                r2 = i72;
-                                r3 = max22;
-                                r4 = z2;
-                                r5 = i92;
+                            public AnonymousClass1(int i72, int iMax22, boolean z2, int i92) {
+                                i = i72;
+                                i = iMax22;
+                                z = z2;
+                                i = i92;
                             }
 
                             @Override // android.view.View.OnAttachStateChangeListener
                             public final void onViewAttachedToWindow(View view) {
-                                SmartTip.this.showTipPopup(r2, r3, r5, r4);
+                                SmartTip.this.showTipPopup(i, i, i, z);
                             }
 
                             @Override // android.view.View.OnAttachStateChangeListener
@@ -316,9 +319,9 @@ public class LaunchableDataDropTargetController implements IDropTargetUiControll
                             }
                         });
                     }
-                    SharedPreferences.Editor edit = smartTip2.mPreferences.edit();
-                    edit.putInt(str, smartTip2.mPreferences.getInt(str, 0) + 1);
-                    edit.apply();
+                    SharedPreferences.Editor editorEdit = smartTip2.mPreferences.edit();
+                    editorEdit.putInt(str, smartTip2.mPreferences.getInt(str, 0) + 1);
+                    editorEdit.apply();
                     z = true;
                 } else {
                     z = false;

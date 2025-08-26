@@ -7,7 +7,10 @@ import android.view.View;
 import com.android.systemui.Dependency;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.qs.QSHost;
+import com.android.systemui.qs.SecQSPanel;
+import com.android.systemui.qs.SecQSPanelController;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
+import com.android.systemui.qs.SecTileChunkLayout;
 import com.android.systemui.qs.bar.domain.interactor.BarOrderInteractor;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.tuner.TunerService;
@@ -18,7 +21,6 @@ import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecQSSettingEditResources {
     public static final int REMOVE_ICON_ID;
@@ -36,7 +38,6 @@ public final class SecQSSettingEditResources {
     public SecQSCustomizerTileAdapter tileTopAdapter;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -61,12 +62,12 @@ public final class SecQSSettingEditResources {
         this.mainExecutor = executor;
         this.bgExecutor = executor2;
         this.settingsHelper = settingsHelper;
-        SharedPreferences.Editor edit = context.getSharedPreferences(SystemUIAnalytics.QUICK_PREF_NAME, 0).edit();
-        this.editor = edit;
-        boolean isPanelSplit = settingsHelper.isPanelSplit();
-        if (edit != null) {
-            edit.putString(SystemUIAnalytics.STATUS_NOTIFICATION_AND_QUICK_SETTINGS_VIEW_TYPE, isPanelSplit ? "view separately" : "view all");
-            edit.apply();
+        SharedPreferences.Editor editorEdit = context.getSharedPreferences(SystemUIAnalytics.QUICK_PREF_NAME, 0).edit();
+        this.editor = editorEdit;
+        boolean zIsPanelSplit = settingsHelper.isPanelSplit();
+        if (editorEdit != null) {
+            editorEdit.putString(SystemUIAnalytics.STATUS_NOTIFICATION_AND_QUICK_SETTINGS_VIEW_TYPE, zIsPanelSplit ? "view separately" : "view all");
+            editorEdit.apply();
         }
         updateSALog(SystemUIAnalytics.STATUS_SHOW_BRIGHTNESS_ON_TOP, !Intrinsics.areEqual(tunerService.getValue("brightness_on_top"), "0"));
         updateSALog(SystemUIAnalytics.STATUS_SHOW_DEVICES_AND_MEDIA, !Intrinsics.areEqual(tunerService.getValue("qspanel_media_quickcontrol_bar_available"), "0"));
@@ -80,53 +81,28 @@ public final class SecQSSettingEditResources {
         return (((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isFoldWide() || ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) ? false : true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0024  */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0027  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002c  */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x001d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final int getPanelColumns() {
-        /*
-            r4 = this;
-            com.android.systemui.qs.SecQSPanelResourcePicker r0 = r4.resourcePicker
-            com.android.systemui.qs.panelresource.SecQSPanelResourcePickHelper r1 = r0.resourcePickHelper
-            com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker r1 = r1.getTargetPicker()
-            com.android.systemui.qs.SecQSPanelController r1 = r1.qsPanelController
-            r2 = 0
-            if (r1 != 0) goto Le
-            goto L1d
-        Le:
-            com.android.systemui.qs.SecQSPanel$QSTileLayout r1 = r1.mTileLayout
-            boolean r3 = r1 instanceof com.android.systemui.qs.SecTileChunkLayout
-            if (r3 == 0) goto L17
-            com.android.systemui.qs.SecTileChunkLayout r1 = (com.android.systemui.qs.SecTileChunkLayout) r1
-            goto L18
-        L17:
-            r1 = r2
-        L18:
-            if (r1 == 0) goto L1d
-            int r1 = r1.columns
-            goto L1e
-        L1d:
-            r1 = -1
-        L1e:
-            java.lang.Integer r3 = java.lang.Integer.valueOf(r1)
-            if (r1 < 0) goto L25
-            r2 = r3
-        L25:
-            if (r2 == 0) goto L2c
-            int r4 = r2.intValue()
-            return r4
-        L2c:
-            android.content.Context r4 = r4.context
-            com.android.systemui.qs.panelresource.SecQSPanelResourcePickHelper r0 = r0.resourcePickHelper
-            com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker r0 = r0.getTargetPicker()
-            int r4 = r0.getQsTileColumn(r4)
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.customize.SecQSSettingEditResources.getPanelColumns():int");
+        int i;
+        SecQSPanelResourcePicker secQSPanelResourcePicker = this.resourcePicker;
+        SecQSPanelController secQSPanelController = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().qsPanelController;
+        if (secQSPanelController == null) {
+            i = -1;
+        } else {
+            SecQSPanel.QSTileLayout qSTileLayout = secQSPanelController.mTileLayout;
+            SecTileChunkLayout secTileChunkLayout = qSTileLayout instanceof SecTileChunkLayout ? (SecTileChunkLayout) qSTileLayout : null;
+            if (secTileChunkLayout != null) {
+                i = secTileChunkLayout.columns;
+            }
+        }
+        Integer numValueOf = i >= 0 ? Integer.valueOf(i) : null;
+        if (numValueOf != null) {
+            return numValueOf.intValue();
+        }
+        return secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getQsTileColumn(this.context);
     }
 
     public final boolean isPhoneLandscape() {

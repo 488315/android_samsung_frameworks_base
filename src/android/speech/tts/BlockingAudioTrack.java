@@ -52,11 +52,11 @@ class BlockingAudioTrack {
     }
 
     public boolean init() {
-        AudioTrack createStreamingAudioTrack = createStreamingAudioTrack();
+        AudioTrack audioTrackCreateStreamingAudioTrack = createStreamingAudioTrack();
         synchronized (this.mAudioTrackLock) {
-            this.mAudioTrack = createStreamingAudioTrack;
+            this.mAudioTrack = audioTrackCreateStreamingAudioTrack;
         }
-        return createStreamingAudioTrack != null;
+        return audioTrackCreateStreamingAudioTrack != null;
     }
 
     public void stop() {
@@ -69,7 +69,7 @@ class BlockingAudioTrack {
         }
     }
 
-    public int write(byte[] bArr) {
+    public int write(byte[] bArr) throws IllegalStateException {
         AudioTrack audioTrack;
         synchronized (this.mAudioTrackLock) {
             audioTrack = this.mAudioTrack;
@@ -77,12 +77,12 @@ class BlockingAudioTrack {
         if (audioTrack == null || this.mStopped) {
             return -1;
         }
-        int writeToAudioTrack = writeToAudioTrack(audioTrack, bArr);
-        this.mBytesWritten += writeToAudioTrack;
-        return writeToAudioTrack;
+        int iWriteToAudioTrack = writeToAudioTrack(audioTrack, bArr);
+        this.mBytesWritten += iWriteToAudioTrack;
+        return iWriteToAudioTrack;
     }
 
-    public void waitAndRelease() {
+    public void waitAndRelease() throws IllegalStateException, InterruptedException {
         AudioTrack audioTrack;
         synchronized (this.mAudioTrackLock) {
             audioTrack = this.mAudioTrack;
@@ -107,7 +107,7 @@ class BlockingAudioTrack {
         return ((i / this.mBytesPerFrame) * 1000) / this.mSampleRateInHz;
     }
 
-    private static int writeToAudioTrack(AudioTrack audioTrack, byte[] bArr) {
+    private static int writeToAudioTrack(AudioTrack audioTrack, byte[] bArr) throws IllegalStateException {
         if (audioTrack.getPlayState() != 3) {
             audioTrack.play();
         }
@@ -116,11 +116,11 @@ class BlockingAudioTrack {
             if (i >= bArr.length) {
                 break;
             }
-            int write = audioTrack.write(bArr, i, bArr.length - i);
-            if (write > 0) {
-                i += write;
-            } else if (write < 0) {
-                Log.e(TAG, "An error occurred while writing to audio track: " + write);
+            int iWrite = audioTrack.write(bArr, i, bArr.length - i);
+            if (iWrite > 0) {
+                i += iWrite;
+            } else if (iWrite < 0) {
+                Log.e(TAG, "An error occurred while writing to audio track: " + iWrite);
                 return i;
             }
         }
@@ -129,19 +129,19 @@ class BlockingAudioTrack {
 
     private AudioTrack createStreamingAudioTrack() {
         int channelConfig = getChannelConfig(this.mChannelCount);
-        int max = Math.max(8192, AudioTrack.getMinBufferSize(this.mSampleRateInHz, channelConfig, this.mAudioFormat));
-        AudioTrack audioTrack = new AudioTrack(this.mAudioParams.mAudioAttributes, new AudioFormat.Builder().setChannelMask(channelConfig).setEncoding(this.mAudioFormat).setSampleRate(this.mSampleRateInHz).build(), max, 1, this.mAudioParams.mSessionId);
+        int iMax = Math.max(8192, AudioTrack.getMinBufferSize(this.mSampleRateInHz, channelConfig, this.mAudioFormat));
+        AudioTrack audioTrack = new AudioTrack(this.mAudioParams.mAudioAttributes, new AudioFormat.Builder().setChannelMask(channelConfig).setEncoding(this.mAudioFormat).setSampleRate(this.mSampleRateInHz).build(), iMax, 1, this.mAudioParams.mSessionId);
         if (audioTrack.getState() != 1) {
             Log.w(TAG, "Unable to create audio track.");
             audioTrack.release();
             return null;
         }
-        this.mAudioBufferSize = max;
+        this.mAudioBufferSize = iMax;
         setupVolume(audioTrack, this.mAudioParams.mVolume, this.mAudioParams.mPan);
         return audioTrack;
     }
 
-    private void blockUntilDone(AudioTrack audioTrack) {
+    private void blockUntilDone(AudioTrack audioTrack) throws InterruptedException {
         if (this.mBytesWritten <= 0) {
             return;
         }
@@ -152,14 +152,14 @@ class BlockingAudioTrack {
         }
     }
 
-    private void blockUntilEstimatedCompletion() {
+    private void blockUntilEstimatedCompletion() throws InterruptedException {
         try {
             Thread.sleep(((this.mBytesWritten / this.mBytesPerFrame) * 1000) / this.mSampleRateInHz);
         } catch (InterruptedException unused) {
         }
     }
 
-    private void blockUntilCompletion(AudioTrack audioTrack) {
+    private void blockUntilCompletion(AudioTrack audioTrack) throws InterruptedException {
         int i = this.mBytesWritten / this.mBytesPerFrame;
         int i2 = -1;
         long j = 0;
@@ -168,9 +168,9 @@ class BlockingAudioTrack {
             if (playbackHeadPosition >= i || audioTrack.getPlayState() != 3 || this.mStopped) {
                 return;
             }
-            long clip = clip(((i - playbackHeadPosition) * 1000) / audioTrack.getSampleRate(), 20L, 2500L);
+            long jClip = clip(((i - playbackHeadPosition) * 1000) / audioTrack.getSampleRate(), 20L, 2500L);
             if (playbackHeadPosition == i2) {
-                j += clip;
+                j += jClip;
                 if (j > 2500) {
                     Log.w(TAG, "Waited unsuccessfully for 2500ms for AudioTrack to make progress, Aborting");
                     return;
@@ -179,7 +179,7 @@ class BlockingAudioTrack {
                 j = 0;
             }
             try {
-                Thread.sleep(clip);
+                Thread.sleep(jClip);
                 i2 = playbackHeadPosition;
             } catch (InterruptedException unused) {
                 return;
@@ -189,16 +189,16 @@ class BlockingAudioTrack {
 
     private static void setupVolume(AudioTrack audioTrack, float f, float f2) {
         float f3;
-        float clip = clip(f, 0.0f, 1.0f);
-        float clip2 = clip(f2, -1.0f, 1.0f);
-        if (clip2 > 0.0f) {
-            float f4 = (1.0f - clip2) * clip;
-            f3 = clip;
-            clip = f4;
+        float fClip = clip(f, 0.0f, 1.0f);
+        float fClip2 = clip(f2, -1.0f, 1.0f);
+        if (fClip2 > 0.0f) {
+            float f4 = (1.0f - fClip2) * fClip;
+            f3 = fClip;
+            fClip = f4;
         } else {
-            f3 = clip2 < 0.0f ? (clip2 + 1.0f) * clip : clip;
+            f3 = fClip2 < 0.0f ? (fClip2 + 1.0f) * fClip : fClip;
         }
-        if (audioTrack.setStereoVolume(clip, f3) != 0) {
+        if (audioTrack.setStereoVolume(fClip, f3) != 0) {
             Log.e(TAG, "Failed to set volume");
         }
     }

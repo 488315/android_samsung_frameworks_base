@@ -4,11 +4,9 @@ import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class VolteConstants {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum AudioCodecType {
         AUDIO_CODEC_NONE(PeripheralBarcodeConstants.Symbology.Type.TYPE_NONE),
         AUDIO_CODEC_AMRWB("AMR-WB"),
@@ -42,7 +40,6 @@ public class VolteConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AudioInterfaceMode {
         public static final int AUTO = 3;
         public static final int CMC_AUTO = 4;
@@ -54,14 +51,12 @@ public class VolteConstants {
         public static final int STOP = 2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BearerState {
         public static final int BEARER_STATE_CLOSED = 3;
         public static final int BEARER_STATE_ESTABLISHED = 1;
         public static final int BEARER_STATE_MODIFIED = 2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CAMERA_STATE {
         public static final int DISABLED_ERROR = 7;
         public static final int READY = 0;
@@ -73,7 +68,6 @@ public class VolteConstants {
         public static final int SWITCH_SUCCESS = 5;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CMC_RECORD_INFO_EVENT {
         public static final int CMC_RECORD_EVENT_START = 1;
         public static final int CMC_RECORD_EVENT_STOP_ERROR_UNKNOWN = 100;
@@ -83,7 +77,6 @@ public class VolteConstants {
         public static final int CMC_RECORD_EVENT_UNKNOWN = 0;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CMC_RECORD_STATE {
         public static final int CMC_RECORDER_ERROR_UNKNOWN = 1;
         public static final int CMC_RECORDER_INFO_DURATION_IN_PROGRESS = 901;
@@ -95,7 +88,6 @@ public class VolteConstants {
         public static final int CMC_RECORDER_SUCCESS = 0;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CallType {
         public static final int CALL_TYPE_AUDIO = 1;
         public static final int CALL_TYPE_AUDIO_CONFERENCE = 5;
@@ -119,7 +111,6 @@ public class VolteConstants {
         public static final int CALL_TYPE_VIDEO_SHARE_TX = 3;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CameraState {
         public static final int ACTIVE = 2;
         public static final int INACTIVE = 3;
@@ -127,7 +118,6 @@ public class VolteConstants {
         public static final int ON = 0;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConfUriType {
         public static final int PROFILE = 0;
         public static final int PROFILE_RAW = 1;
@@ -135,13 +125,11 @@ public class VolteConstants {
         public static final int SIM_RAW = 3;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ECMP_MODE {
         public static final int ECMP_CS = 0;
         public static final int ECMP_IMS = 1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EMOJI_STATE {
         public static final int START_FAILURE = 1;
         public static final int START_SUCCESS = 0;
@@ -149,7 +137,6 @@ public class VolteConstants {
         public static final int STOP_SUCCESS = 2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EccCategory {
         public static final int ECC_CATEGORY_AMBULANCE = 2;
         public static final int ECC_CATEGORY_CYBER_TERROR = 19;
@@ -168,7 +155,6 @@ public class VolteConstants {
         public static final int ECC_CATEGORY_UNSPECIFIED = 254;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EccCategoryUrn {
         public static final String URN_ECC_CATEGORY_AMBULANCE = "urn:service:sos.ambulance";
         public static final String URN_ECC_CATEGORY_CYBER_TERROR = "urn:service:sos.country-specific.kr.118";
@@ -185,7 +171,6 @@ public class VolteConstants {
         public static final String URN_ECC_CATEGORY_UNSPECIFIED = "urn:service:unspecified";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ErrorCode {
         public static final int ACTIVE_CALL_ON_ANOTHER_SOFTPHONE = 3007;
         public static final int ADDRESS_INCOMPLETE = 484;
@@ -359,7 +344,6 @@ public class VolteConstants {
         public static final int VONR_NOT_POSSIBLE = 1507;
         public static final int WIFI_CONNECTION_LOST = 1703;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class ErrorDesc {
             public static final String ERROR_DESC_IMS_OUTAGE = "IMS OUTAGE";
         }
@@ -502,12 +486,10 @@ public class VolteConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class GENERAL_EVENT {
         public static final int SCREEN_SHARING_EVENT = 100;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaDirection {
         public static final int INACTIVE = 1;
         public static final int RECVONLY = 3;
@@ -516,7 +498,6 @@ public class VolteConstants {
         public static final int UNKNOWN = 0;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaQuality {
         public static final int UNKNOWN = -1;
         public static final int VIDEO = 11;
@@ -529,7 +510,6 @@ public class VolteConstants {
         public static final int VOICE_HD = 1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NR_MODE {
         public static final int NR_MODE_NSA_ONLY = 1;
         public static final int NR_MODE_SA_NSA = 2;
@@ -538,7 +518,6 @@ public class VolteConstants {
         public static final int NR_MODE_TEMP_SA_ENABLE = 3;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ParticipantState {
         public static final int ACTIVE = 2;
         public static final int ALERTING = 5;
@@ -550,7 +529,6 @@ public class VolteConstants {
         public static final int REMOVING = 3;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Qci {
         public static final int QCI_AUDIO = 1;
         public static final int QCI_VIDEO_GBR = 2;
@@ -558,7 +536,6 @@ public class VolteConstants {
         public static final int QCI_VIDEO_NGBR_7 = 7;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RECORD_STATE {
         public static final int START_FAILURE = 1;
         public static final int START_FAILURE_NO_SPACE = 2;
@@ -568,7 +545,6 @@ public class VolteConstants {
         public static final int STOP_SUCCESS = 3;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum STATE {
         Idle,
         ReadyToCall,
@@ -588,7 +564,6 @@ public class VolteConstants {
         EndedCall
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class USSDDCS {
         public static final int USSD_DCS_7_BIT = 0;
         public static final int USSD_DCS_8_BIT = 4;
@@ -598,7 +573,6 @@ public class VolteConstants {
         public static final int USSD_DCS_UNSPECIFIED = 15;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class USSDStatus {
         public static final int SS_USSD_ACTION_REQUIRE = 2;
         public static final int SS_USSD_NOT_SUPPORT = 5;
@@ -608,7 +582,6 @@ public class VolteConstants {
         public static final int SS_USSD_TIME_OUT = 6;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class USSDType {
         public static final int SS_USSD_TYPE_NOTIFY_RES = 4;
         public static final int SS_USSD_TYPE_USER_INITIATED = 1;
@@ -616,7 +589,6 @@ public class VolteConstants {
         public static final int SS_USSD_TYPE_USER_RES = 2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VCS_EXTRA {
         public static final String ACTION = "com.samsung.telephony.extra.ims.VCS_ACTION";
         public static final String DURATION = "com.samsung.telephony.extra.ims.VCS_DURATION";
@@ -626,14 +598,12 @@ public class VolteConstants {
         public static final String Y_POS = "com.samsung.telephony.extra.ims.VCS_Y_POS";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VIDEO_QUALITY {
         public static final int HIGH = 2;
         public static final int LOW = 0;
         public static final int MEDIUM = 1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VIDEO_STATE {
         public static final int DOWNGRADED = 3;
         public static final int HELD = 1;
@@ -641,7 +611,6 @@ public class VolteConstants {
         public static final int RESUMED = 2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VideoOrientation {
         public static final int LAND = 1;
         public static final int PORT = 0;

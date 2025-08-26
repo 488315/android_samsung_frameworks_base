@@ -6,7 +6,6 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SemWifiEntryFilter {
     public static final int[] SETTING_DEVELOPER_RSSI = {-73, -78, -127};

@@ -56,28 +56,28 @@ final class SerializedCompositionPrimitive implements SerializedComposedEffect.S
         Parser() {
         }
 
-        static SerializedCompositionPrimitive parseNext(TypedXmlPullParser typedXmlPullParser) throws XmlParserException, IOException {
+        static SerializedCompositionPrimitive parseNext(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlParserException {
             XmlValidator.checkStartTag(typedXmlPullParser, XmlConstants.TAG_PRIMITIVE_EFFECT);
             if (Flags.primitiveCompositionAbsoluteDelay()) {
                 XmlValidator.checkTagHasNoUnexpectedAttributes(typedXmlPullParser, "name", XmlConstants.ATTRIBUTE_DELAY_MS, "scale", XmlConstants.ATTRIBUTE_DELAY_TYPE);
             } else {
                 XmlValidator.checkTagHasNoUnexpectedAttributes(typedXmlPullParser, "name", XmlConstants.ATTRIBUTE_DELAY_MS, "scale");
             }
-            XmlConstants.PrimitiveEffectName parsePrimitiveName = parsePrimitiveName(typedXmlPullParser.getAttributeValue(XmlConstants.NAMESPACE, "name"));
-            float readAttributeFloatInRange = XmlReader.readAttributeFloatInRange(typedXmlPullParser, "scale", 0.0f, 1.0f, 1.0f);
-            int readAttributeIntNonNegative = XmlReader.readAttributeIntNonNegative(typedXmlPullParser, XmlConstants.ATTRIBUTE_DELAY_MS, 0);
-            XmlConstants.PrimitiveDelayType parseDelayType = parseDelayType(typedXmlPullParser.getAttributeValue(XmlConstants.NAMESPACE, XmlConstants.ATTRIBUTE_DELAY_TYPE));
+            XmlConstants.PrimitiveEffectName primitiveName = parsePrimitiveName(typedXmlPullParser.getAttributeValue(XmlConstants.NAMESPACE, "name"));
+            float attributeFloatInRange = XmlReader.readAttributeFloatInRange(typedXmlPullParser, "scale", 0.0f, 1.0f, 1.0f);
+            int attributeIntNonNegative = XmlReader.readAttributeIntNonNegative(typedXmlPullParser, XmlConstants.ATTRIBUTE_DELAY_MS, 0);
+            XmlConstants.PrimitiveDelayType delayType = parseDelayType(typedXmlPullParser.getAttributeValue(XmlConstants.NAMESPACE, XmlConstants.ATTRIBUTE_DELAY_TYPE));
             XmlReader.readEndTag(typedXmlPullParser);
-            return new SerializedCompositionPrimitive(parsePrimitiveName, readAttributeFloatInRange, readAttributeIntNonNegative, parseDelayType);
+            return new SerializedCompositionPrimitive(primitiveName, attributeFloatInRange, attributeIntNonNegative, delayType);
         }
 
         private static XmlConstants.PrimitiveEffectName parsePrimitiveName(String str) throws XmlParserException {
             if (str == null) {
                 throw new XmlParserException("Missing primitive effect name");
             }
-            XmlConstants.PrimitiveEffectName findByName = XmlConstants.PrimitiveEffectName.findByName(str);
-            if (findByName != null) {
-                return findByName;
+            XmlConstants.PrimitiveEffectName primitiveEffectNameFindByName = XmlConstants.PrimitiveEffectName.findByName(str);
+            if (primitiveEffectNameFindByName != null) {
+                return primitiveEffectNameFindByName;
             }
             throw new XmlParserException("Unexpected primitive effect name " + str);
         }
@@ -89,9 +89,9 @@ final class SerializedCompositionPrimitive implements SerializedComposedEffect.S
             if (!Flags.primitiveCompositionAbsoluteDelay()) {
                 throw new XmlParserException("Unexpected primitive delay type " + str);
             }
-            XmlConstants.PrimitiveDelayType findByName = XmlConstants.PrimitiveDelayType.findByName(str);
-            if (findByName != null) {
-                return findByName;
+            XmlConstants.PrimitiveDelayType primitiveDelayTypeFindByName = XmlConstants.PrimitiveDelayType.findByName(str);
+            if (primitiveDelayTypeFindByName != null) {
+                return primitiveDelayTypeFindByName;
             }
             throw new XmlParserException("Unexpected primitive delay type " + str);
         }

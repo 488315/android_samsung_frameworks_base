@@ -10,7 +10,6 @@ import androidx.core.math.MathUtils;
 import com.google.android.material.color.MaterialColors;
 import com.google.android.material.progressindicator.DrawingDelegate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LinearDrawingDelegate extends DrawingDelegate {
     public float displayedCornerRadius;
@@ -57,15 +56,15 @@ public final class LinearDrawingDelegate extends DrawingDelegate {
 
     public final void drawLine(Canvas canvas, Paint paint, float f, float f2, int i, int i2, int i3) {
         float f3;
-        float clamp = MathUtils.clamp(f, 0.0f, 1.0f);
-        float clamp2 = MathUtils.clamp(f2, 0.0f, 1.0f);
-        float lerp = com.google.android.material.math.MathUtils.lerp(1.0f - this.totalTrackLengthFraction, 1.0f, clamp);
-        float lerp2 = com.google.android.material.math.MathUtils.lerp(1.0f - this.totalTrackLengthFraction, 1.0f, clamp2);
-        int clamp3 = (int) ((MathUtils.clamp(lerp, 0.0f, 0.01f) * i2) / 0.01f);
-        float clamp4 = 1.0f - MathUtils.clamp(lerp2, 0.99f, 1.0f);
+        float fClamp = MathUtils.clamp(f, 0.0f, 1.0f);
+        float fClamp2 = MathUtils.clamp(f2, 0.0f, 1.0f);
+        float fLerp = com.google.android.material.math.MathUtils.lerp(1.0f - this.totalTrackLengthFraction, 1.0f, fClamp);
+        float fLerp2 = com.google.android.material.math.MathUtils.lerp(1.0f - this.totalTrackLengthFraction, 1.0f, fClamp2);
+        int iClamp = (int) ((MathUtils.clamp(fLerp, 0.0f, 0.01f) * i2) / 0.01f);
+        float fClamp3 = 1.0f - MathUtils.clamp(fLerp2, 0.99f, 1.0f);
         float f4 = this.trackLength;
-        int i4 = (int) ((lerp * f4) + clamp3);
-        int i5 = (int) ((lerp2 * f4) - ((int) ((clamp4 * i3) / 0.01f)));
+        int i4 = (int) ((fLerp * f4) + iClamp);
+        int i5 = (int) ((fLerp2 * f4) - ((int) ((fClamp3 * i3) / 0.01f)));
         float f5 = (-f4) / 2.0f;
         if (i4 <= i5) {
             float f6 = this.displayedCornerRadius;
@@ -101,33 +100,33 @@ public final class LinearDrawingDelegate extends DrawingDelegate {
     }
 
     public final void drawRoundedBlock(Canvas canvas, Paint paint, PointF pointF, PointF pointF2, float f, float f2) {
-        float min = Math.min(f2, this.displayedTrackThickness);
+        float fMin = Math.min(f2, this.displayedTrackThickness);
         float f3 = f / 2.0f;
-        float min2 = Math.min(f3, (this.displayedCornerRadius * min) / this.displayedTrackThickness);
-        RectF rectF = new RectF((-f) / 2.0f, (-min) / 2.0f, f3, min / 2.0f);
+        float fMin2 = Math.min(f3, (this.displayedCornerRadius * fMin) / this.displayedTrackThickness);
+        RectF rectF = new RectF((-f) / 2.0f, (-fMin) / 2.0f, f3, fMin / 2.0f);
         paint.setStyle(Paint.Style.FILL);
         canvas.save();
         if (pointF2 != null) {
             canvas.translate(pointF2.x, pointF2.y);
             Path path = new Path();
-            path.addRoundRect(rectF, min2, min2, Path.Direction.CCW);
+            path.addRoundRect(rectF, fMin2, fMin2, Path.Direction.CCW);
             canvas.clipPath(path);
             canvas.translate(-pointF2.x, -pointF2.y);
         }
         canvas.translate(pointF.x, pointF.y);
-        canvas.drawRoundRect(rectF, min2, min2, paint);
+        canvas.drawRoundRect(rectF, fMin2, fMin2, paint);
         canvas.restore();
     }
 
     @Override // com.google.android.material.progressindicator.DrawingDelegate
     public final void drawStopIndicator(Canvas canvas, Paint paint, int i, int i2) {
-        int compositeARGBWithAlpha = MaterialColors.compositeARGBWithAlpha(i, i2);
+        int iCompositeARGBWithAlpha = MaterialColors.compositeARGBWithAlpha(i, i2);
         LinearProgressIndicatorSpec linearProgressIndicatorSpec = (LinearProgressIndicatorSpec) this.spec;
-        if (linearProgressIndicatorSpec.trackStopIndicatorSize <= 0 || compositeARGBWithAlpha == 0) {
+        if (linearProgressIndicatorSpec.trackStopIndicatorSize <= 0 || iCompositeARGBWithAlpha == 0) {
             return;
         }
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(compositeARGBWithAlpha);
+        paint.setColor(iCompositeARGBWithAlpha);
         PointF pointF = new PointF((this.trackLength / 2.0f) - (this.displayedTrackThickness / 2.0f), 0.0f);
         int i3 = linearProgressIndicatorSpec.trackStopIndicatorSize;
         drawRoundedBlock(canvas, paint, pointF, null, i3, i3);
@@ -135,11 +134,11 @@ public final class LinearDrawingDelegate extends DrawingDelegate {
 
     @Override // com.google.android.material.progressindicator.DrawingDelegate
     public final void fillIndicator(Canvas canvas, Paint paint, DrawingDelegate.ActiveIndicator activeIndicator, int i) {
-        int compositeARGBWithAlpha = MaterialColors.compositeARGBWithAlpha(activeIndicator.color, i);
+        int iCompositeARGBWithAlpha = MaterialColors.compositeARGBWithAlpha(activeIndicator.color, i);
         float f = activeIndicator.startFraction;
         float f2 = activeIndicator.endFraction;
         int i2 = activeIndicator.gapSize;
-        drawLine(canvas, paint, f, f2, compositeARGBWithAlpha, i2, i2);
+        drawLine(canvas, paint, f, f2, iCompositeARGBWithAlpha, i2, i2);
     }
 
     @Override // com.google.android.material.progressindicator.DrawingDelegate

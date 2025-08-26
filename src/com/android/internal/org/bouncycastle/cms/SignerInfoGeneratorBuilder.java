@@ -54,9 +54,9 @@ public class SignerInfoGeneratorBuilder {
     }
 
     public SignerInfoGenerator build(ContentSigner contentSigner, X509CertificateHolder x509CertificateHolder) throws OperatorCreationException {
-        SignerInfoGenerator createGenerator = createGenerator(contentSigner, new SignerIdentifier(new IssuerAndSerialNumber(x509CertificateHolder.toASN1Structure())));
-        createGenerator.setAssociatedCertificate(x509CertificateHolder);
-        return createGenerator;
+        SignerInfoGenerator signerInfoGeneratorCreateGenerator = createGenerator(contentSigner, new SignerIdentifier(new IssuerAndSerialNumber(x509CertificateHolder.toASN1Structure())));
+        signerInfoGeneratorCreateGenerator.setAssociatedCertificate(x509CertificateHolder);
+        return signerInfoGeneratorCreateGenerator;
     }
 
     public SignerInfoGenerator build(ContentSigner contentSigner, byte[] bArr) throws OperatorCreationException {

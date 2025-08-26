@@ -152,10 +152,10 @@ public abstract class ConnectionService extends Service {
         public void addConnectionServiceAdapter(IConnectionServiceAdapter iConnectionServiceAdapter, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_ADD_CS_ADAPTER);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = iConnectionServiceAdapter;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(1, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = iConnectionServiceAdapter;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(1, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -165,10 +165,10 @@ public abstract class ConnectionService extends Service {
         public void removeConnectionServiceAdapter(IConnectionServiceAdapter iConnectionServiceAdapter, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_REMOVE_CS_ADAPTER);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = iConnectionServiceAdapter;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(16, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = iConnectionServiceAdapter;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(16, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -178,14 +178,14 @@ public abstract class ConnectionService extends Service {
         public void createConnection(PhoneAccountHandle phoneAccountHandle, String str, ConnectionRequest connectionRequest, boolean z, boolean z2, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CREATE_CONN);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = phoneAccountHandle;
-                obtain.arg2 = str;
-                obtain.arg3 = connectionRequest;
-                obtain.arg4 = Log.createSubsession();
-                obtain.argi1 = z ? 1 : 0;
-                obtain.argi2 = z2 ? 1 : 0;
-                ConnectionService.this.mHandler.obtainMessage(2, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = phoneAccountHandle;
+                someArgsObtain.arg2 = str;
+                someArgsObtain.arg3 = connectionRequest;
+                someArgsObtain.arg4 = Log.createSubsession();
+                someArgsObtain.argi1 = z ? 1 : 0;
+                someArgsObtain.argi2 = z2 ? 1 : 0;
+                ConnectionService.this.mHandler.obtainMessage(2, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -195,10 +195,10 @@ public abstract class ConnectionService extends Service {
         public void createConnectionComplete(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CREATE_CONN_COMPLETE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(29, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(29, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -208,13 +208,13 @@ public abstract class ConnectionService extends Service {
         public void createConnectionFailed(PhoneAccountHandle phoneAccountHandle, String str, ConnectionRequest connectionRequest, boolean z, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CREATE_CONN_FAILED);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = connectionRequest;
-                obtain.arg3 = Log.createSubsession();
-                obtain.arg4 = phoneAccountHandle;
-                obtain.argi1 = z ? 1 : 0;
-                ConnectionService.this.mHandler.obtainMessage(25, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = connectionRequest;
+                someArgsObtain.arg3 = Log.createSubsession();
+                someArgsObtain.arg4 = phoneAccountHandle;
+                someArgsObtain.argi1 = z ? 1 : 0;
+                ConnectionService.this.mHandler.obtainMessage(25, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -224,14 +224,14 @@ public abstract class ConnectionService extends Service {
         public void createConference(PhoneAccountHandle phoneAccountHandle, String str, ConnectionRequest connectionRequest, boolean z, boolean z2, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CREATE_CONF);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = phoneAccountHandle;
-                obtain.arg2 = str;
-                obtain.arg3 = connectionRequest;
-                obtain.arg4 = Log.createSubsession();
-                obtain.argi1 = z ? 1 : 0;
-                obtain.argi2 = z2 ? 1 : 0;
-                ConnectionService.this.mHandler.obtainMessage(35, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = phoneAccountHandle;
+                someArgsObtain.arg2 = str;
+                someArgsObtain.arg3 = connectionRequest;
+                someArgsObtain.arg4 = Log.createSubsession();
+                someArgsObtain.argi1 = z ? 1 : 0;
+                someArgsObtain.argi2 = z2 ? 1 : 0;
+                ConnectionService.this.mHandler.obtainMessage(35, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -241,10 +241,10 @@ public abstract class ConnectionService extends Service {
         public void createConferenceComplete(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CREATE_CONF_COMPLETE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(36, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(36, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -254,13 +254,13 @@ public abstract class ConnectionService extends Service {
         public void createConferenceFailed(PhoneAccountHandle phoneAccountHandle, String str, ConnectionRequest connectionRequest, boolean z, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CREATE_CONF_FAILED);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = connectionRequest;
-                obtain.arg3 = Log.createSubsession();
-                obtain.arg4 = phoneAccountHandle;
-                obtain.argi1 = z ? 1 : 0;
-                ConnectionService.this.mHandler.obtainMessage(37, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = connectionRequest;
+                someArgsObtain.arg3 = Log.createSubsession();
+                someArgsObtain.arg4 = phoneAccountHandle;
+                someArgsObtain.argi1 = z ? 1 : 0;
+                ConnectionService.this.mHandler.obtainMessage(37, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -270,12 +270,12 @@ public abstract class ConnectionService extends Service {
         public void handoverFailed(String str, ConnectionRequest connectionRequest, int i, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_HANDOVER_FAILED);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = connectionRequest;
-                obtain.arg3 = Log.createSubsession();
-                obtain.arg4 = Integer.valueOf(i);
-                ConnectionService.this.mHandler.obtainMessage(32, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = connectionRequest;
+                someArgsObtain.arg3 = Log.createSubsession();
+                someArgsObtain.arg4 = Integer.valueOf(i);
+                ConnectionService.this.mHandler.obtainMessage(32, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -285,10 +285,10 @@ public abstract class ConnectionService extends Service {
         public void handoverComplete(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_HANDOVER_COMPLETE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(33, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(33, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -298,10 +298,10 @@ public abstract class ConnectionService extends Service {
         public void abort(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_ABORT);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(3, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(3, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -311,11 +311,11 @@ public abstract class ConnectionService extends Service {
         public void answerVideo(String str, int i, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_ANSWER_VIDEO);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                obtain.argi1 = i;
-                ConnectionService.this.mHandler.obtainMessage(17, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                someArgsObtain.argi1 = i;
+                ConnectionService.this.mHandler.obtainMessage(17, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -325,10 +325,10 @@ public abstract class ConnectionService extends Service {
         public void answer(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_ANSWER);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(4, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(4, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -338,11 +338,11 @@ public abstract class ConnectionService extends Service {
         public void deflect(String str, Uri uri, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_DEFLECT);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = uri;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(34, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = uri;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(34, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -352,10 +352,10 @@ public abstract class ConnectionService extends Service {
         public void reject(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_REJECT);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(5, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(5, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -365,11 +365,11 @@ public abstract class ConnectionService extends Service {
         public void rejectWithReason(String str, int i, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_REJECT);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.argi1 = i;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(38, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.argi1 = i;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(38, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -379,11 +379,11 @@ public abstract class ConnectionService extends Service {
         public void rejectWithMessage(String str, String str2, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_REJECT_MESSAGE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = str2;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(20, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = str2;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(20, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -393,12 +393,12 @@ public abstract class ConnectionService extends Service {
         public void transfer(String str, Uri uri, boolean z, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_TRANSFER);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = uri;
-                obtain.argi1 = z ? 1 : 0;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(40, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = uri;
+                someArgsObtain.argi1 = z ? 1 : 0;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(40, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -408,11 +408,11 @@ public abstract class ConnectionService extends Service {
         public void consultativeTransfer(String str, String str2, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CONSULTATIVE_TRANSFER);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = str2;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(41, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = str2;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(41, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -422,10 +422,10 @@ public abstract class ConnectionService extends Service {
         public void silence(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_SILENCE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(21, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(21, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -435,10 +435,10 @@ public abstract class ConnectionService extends Service {
         public void disconnect(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_DISCONNECT);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(6, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(6, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -448,10 +448,10 @@ public abstract class ConnectionService extends Service {
         public void hold(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_HOLD);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(7, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(7, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -461,10 +461,10 @@ public abstract class ConnectionService extends Service {
         public void unhold(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_UNHOLD);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(8, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(8, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -474,11 +474,11 @@ public abstract class ConnectionService extends Service {
         public void onCallAudioStateChanged(String str, CallAudioState callAudioState, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CALL_AUDIO_SC);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = callAudioState;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(9, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = callAudioState;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(9, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -488,11 +488,11 @@ public abstract class ConnectionService extends Service {
         public void onCallEndpointChanged(String str, CallEndpoint callEndpoint, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CALL_ENDPOINT_CHANGED);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = callEndpoint;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(45, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = callEndpoint;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(45, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -502,11 +502,11 @@ public abstract class ConnectionService extends Service {
         public void onAvailableCallEndpointsChanged(String str, List<CallEndpoint> list, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_AVAILABLE_CALL_ENDPOINTS_CHANGED);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = list;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(46, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = list;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(46, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -516,11 +516,11 @@ public abstract class ConnectionService extends Service {
         public void onMuteStateChanged(String str, boolean z, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_MUTE_STATE_CHANGED);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Boolean.valueOf(z);
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(47, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Boolean.valueOf(z);
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(47, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -530,11 +530,11 @@ public abstract class ConnectionService extends Service {
         public void onUsingAlternativeUi(String str, boolean z, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_USING_ALTERNATIVE_UI);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Boolean.valueOf(z);
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(43, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Boolean.valueOf(z);
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(43, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -544,11 +544,11 @@ public abstract class ConnectionService extends Service {
         public void onTrackedByNonUiService(String str, boolean z, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_TRACKED_BY_NON_UI_SERVICE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Boolean.valueOf(z);
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(44, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Boolean.valueOf(z);
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(44, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -558,11 +558,11 @@ public abstract class ConnectionService extends Service {
         public void playDtmfTone(String str, char c, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_PLAY_DTMF);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = Character.valueOf(c);
-                obtain.arg2 = str;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(10, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = Character.valueOf(c);
+                someArgsObtain.arg2 = str;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(10, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -572,10 +572,10 @@ public abstract class ConnectionService extends Service {
         public void stopDtmfTone(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_STOP_DTMF);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(11, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(11, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -585,11 +585,11 @@ public abstract class ConnectionService extends Service {
         public void conference(String str, String str2, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CONFERENCE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = str2;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(12, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = str2;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(12, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -599,10 +599,10 @@ public abstract class ConnectionService extends Service {
         public void splitFromConference(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_SPLIT_CONFERENCE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(13, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(13, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -612,10 +612,10 @@ public abstract class ConnectionService extends Service {
         public void mergeConference(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_MERGE_CONFERENCE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(18, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(18, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -625,10 +625,10 @@ public abstract class ConnectionService extends Service {
         public void swapConference(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_SWAP_CONFERENCE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(19, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(19, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -638,11 +638,11 @@ public abstract class ConnectionService extends Service {
         public void addConferenceParticipants(String str, List<Uri> list, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_ADD_PARTICIPANT);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = list;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(39, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = list;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(39, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -652,11 +652,11 @@ public abstract class ConnectionService extends Service {
         public void onPostDialContinue(String str, boolean z, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_POST_DIAL_CONT);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                obtain.argi1 = z ? 1 : 0;
-                ConnectionService.this.mHandler.obtainMessage(14, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                someArgsObtain.argi1 = z ? 1 : 0;
+                ConnectionService.this.mHandler.obtainMessage(14, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -666,10 +666,10 @@ public abstract class ConnectionService extends Service {
         public void pullExternalCall(String str, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_PULL_EXTERNAL_CALL);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(22, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(22, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -679,12 +679,12 @@ public abstract class ConnectionService extends Service {
         public void sendCallEvent(String str, String str2, Bundle bundle, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_SEND_CALL_EVENT);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = str2;
-                obtain.arg3 = bundle;
-                obtain.arg4 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(23, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = str2;
+                someArgsObtain.arg3 = bundle;
+                someArgsObtain.arg4 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(23, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -694,11 +694,11 @@ public abstract class ConnectionService extends Service {
         public void onCallFilteringCompleted(String str, Connection.CallFilteringCompletionInfo callFilteringCompletionInfo, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_CALL_FILTERING_COMPLETED);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = callFilteringCompletionInfo;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(42, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = callFilteringCompletionInfo;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(42, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -708,11 +708,11 @@ public abstract class ConnectionService extends Service {
         public void onExtrasChanged(String str, Bundle bundle, Session.Info info) {
             Log.startSession(info, ConnectionService.SESSION_EXTRAS_CHANGED);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = bundle;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(24, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = bundle;
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(24, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -722,11 +722,11 @@ public abstract class ConnectionService extends Service {
         public void startRtt(String str, ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, Session.Info info) throws RemoteException {
             Log.startSession(info, ConnectionService.SESSION_START_RTT);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = new Connection.RttTextStream(parcelFileDescriptor2, parcelFileDescriptor);
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(26, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = new Connection.RttTextStream(parcelFileDescriptor2, parcelFileDescriptor);
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(26, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -736,10 +736,10 @@ public abstract class ConnectionService extends Service {
         public void stopRtt(String str, Session.Info info) throws RemoteException {
             Log.startSession(info, ConnectionService.SESSION_STOP_RTT);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                obtain.arg2 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(27, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                someArgsObtain.arg2 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(27, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -749,16 +749,15 @@ public abstract class ConnectionService extends Service {
         public void respondToRttUpgradeRequest(String str, ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, Session.Info info) throws RemoteException {
             Log.startSession(info, ConnectionService.SESSION_RTT_UPGRADE_RESPONSE);
             try {
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = str;
-                if (parcelFileDescriptor2 != null && parcelFileDescriptor != null) {
-                    obtain.arg2 = new Connection.RttTextStream(parcelFileDescriptor2, parcelFileDescriptor);
-                    obtain.arg3 = Log.createSubsession();
-                    ConnectionService.this.mHandler.obtainMessage(28, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = str;
+                if (parcelFileDescriptor2 == null || parcelFileDescriptor == null) {
+                    someArgsObtain.arg2 = null;
+                } else {
+                    someArgsObtain.arg2 = new Connection.RttTextStream(parcelFileDescriptor2, parcelFileDescriptor);
                 }
-                obtain.arg2 = null;
-                obtain.arg3 = Log.createSubsession();
-                ConnectionService.this.mHandler.obtainMessage(28, obtain).sendToTarget();
+                someArgsObtain.arg3 = Log.createSubsession();
+                ConnectionService.this.mHandler.obtainMessage(28, someArgsObtain).sendToTarget();
             } finally {
                 Log.endSession();
             }
@@ -1074,18 +1073,18 @@ public abstract class ConnectionService extends Service {
                     try {
                         final String str4 = (String) someArgs.arg1;
                         final ConnectionRequest connectionRequest3 = (ConnectionRequest) someArgs.arg2;
-                        final int intValue = ((Integer) someArgs.arg4).intValue();
+                        final int iIntValue = ((Integer) someArgs.arg4).intValue();
                         if (!ConnectionService.this.mAreAccountsInitialized) {
                             Log.d(this, "Enqueueing pre-init request %s", str4);
                             ConnectionService.this.mPreInitializationConnectionRequests.add(new Runnable("H.CS.haF.pICR", null) { // from class: android.telecom.ConnectionService.2.7
                                 @Override // android.telecom.Logging.Runnable
                                 public void loggedRun() {
-                                    ConnectionService.this.handoverFailed(str4, connectionRequest3, intValue);
+                                    ConnectionService.this.handoverFailed(str4, connectionRequest3, iIntValue);
                                 }
                             }.prepare());
                         } else {
                             Log.i(this, "createConnectionFailed %s", str4);
-                            ConnectionService.this.handoverFailed(str4, connectionRequest3, intValue);
+                            ConnectionService.this.handoverFailed(str4, connectionRequest3, iIntValue);
                         }
                         return;
                     } finally {
@@ -1723,16 +1722,16 @@ public abstract class ConnectionService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void createConference(PhoneAccountHandle phoneAccountHandle, String str, ConnectionRequest connectionRequest, boolean z, boolean z2) {
-        Conference onCreateOutgoingConference;
+        Conference conferenceOnCreateOutgoingConference;
         if (z) {
-            onCreateOutgoingConference = onCreateIncomingConference(phoneAccountHandle, connectionRequest);
+            conferenceOnCreateOutgoingConference = onCreateIncomingConference(phoneAccountHandle, connectionRequest);
         } else {
-            onCreateOutgoingConference = onCreateOutgoingConference(phoneAccountHandle, connectionRequest);
+            conferenceOnCreateOutgoingConference = onCreateOutgoingConference(phoneAccountHandle, connectionRequest);
         }
-        Log.d(this, "createConference, conference: %s", onCreateOutgoingConference);
-        if (onCreateOutgoingConference == null) {
+        Log.d(this, "createConference, conference: %s", conferenceOnCreateOutgoingConference);
+        if (conferenceOnCreateOutgoingConference == null) {
             Log.i(this, "createConference, implementation returned null conference.", new Object[0]);
-            onCreateOutgoingConference = Conference.createFailedConference(new DisconnectCause(1, "IMPL_RETURNED_NULL_CONFERENCE"), connectionRequest.getAccountHandle());
+            conferenceOnCreateOutgoingConference = Conference.createFailedConference(new DisconnectCause(1, "IMPL_RETURNED_NULL_CONFERENCE"), connectionRequest.getAccountHandle());
         }
         Bundle extras = connectionRequest.getExtras();
         Bundle bundle = new Bundle();
@@ -1741,45 +1740,45 @@ public abstract class ConnectionService extends Service {
             bundle.putString(Connection.EXTRA_REMOTE_CONNECTION_ORIGINATING_PACKAGE_NAME, extras.getString(Connection.EXTRA_REMOTE_CONNECTION_ORIGINATING_PACKAGE_NAME));
             bundle.putParcelable(Connection.EXTRA_REMOTE_PHONE_ACCOUNT_HANDLE, connectionRequest.getAccountHandle());
         }
-        onCreateOutgoingConference.putExtras(bundle);
-        this.mConferenceById.put(str, onCreateOutgoingConference);
-        this.mIdByConference.put(onCreateOutgoingConference, str);
-        onCreateOutgoingConference.addListener(this.mConferenceListener);
-        ParcelableConference build = new ParcelableConference.Builder(connectionRequest.getAccountHandle(), onCreateOutgoingConference.getState()).setConnectionCapabilities(onCreateOutgoingConference.getConnectionCapabilities()).setConnectionProperties(onCreateOutgoingConference.getConnectionProperties()).setVideoAttributes(onCreateOutgoingConference.getVideoProvider() == null ? null : onCreateOutgoingConference.getVideoProvider().getInterface(), onCreateOutgoingConference.getVideoState()).setConnectTimeMillis(onCreateOutgoingConference.getConnectTimeMillis(), onCreateOutgoingConference.getConnectionStartElapsedRealtimeMillis()).setStatusHints(onCreateOutgoingConference.getStatusHints()).setExtras(onCreateOutgoingConference.getExtras()).setAddress(onCreateOutgoingConference.getAddress(), onCreateOutgoingConference.getAddressPresentation()).setCallerDisplayName(onCreateOutgoingConference.getCallerDisplayName(), onCreateOutgoingConference.getCallerDisplayNamePresentation()).setDisconnectCause(onCreateOutgoingConference.getDisconnectCause()).setRingbackRequested(onCreateOutgoingConference.isRingbackRequested()).build();
-        if (onCreateOutgoingConference.getState() != 6) {
-            onCreateOutgoingConference.setTelecomCallId(str);
-            this.mAdapter.setVideoProvider(str, onCreateOutgoingConference.getVideoProvider());
-            this.mAdapter.setVideoState(str, onCreateOutgoingConference.getVideoState());
-            onConferenceAdded(onCreateOutgoingConference);
+        conferenceOnCreateOutgoingConference.putExtras(bundle);
+        this.mConferenceById.put(str, conferenceOnCreateOutgoingConference);
+        this.mIdByConference.put(conferenceOnCreateOutgoingConference, str);
+        conferenceOnCreateOutgoingConference.addListener(this.mConferenceListener);
+        ParcelableConference parcelableConferenceBuild = new ParcelableConference.Builder(connectionRequest.getAccountHandle(), conferenceOnCreateOutgoingConference.getState()).setConnectionCapabilities(conferenceOnCreateOutgoingConference.getConnectionCapabilities()).setConnectionProperties(conferenceOnCreateOutgoingConference.getConnectionProperties()).setVideoAttributes(conferenceOnCreateOutgoingConference.getVideoProvider() == null ? null : conferenceOnCreateOutgoingConference.getVideoProvider().getInterface(), conferenceOnCreateOutgoingConference.getVideoState()).setConnectTimeMillis(conferenceOnCreateOutgoingConference.getConnectTimeMillis(), conferenceOnCreateOutgoingConference.getConnectionStartElapsedRealtimeMillis()).setStatusHints(conferenceOnCreateOutgoingConference.getStatusHints()).setExtras(conferenceOnCreateOutgoingConference.getExtras()).setAddress(conferenceOnCreateOutgoingConference.getAddress(), conferenceOnCreateOutgoingConference.getAddressPresentation()).setCallerDisplayName(conferenceOnCreateOutgoingConference.getCallerDisplayName(), conferenceOnCreateOutgoingConference.getCallerDisplayNamePresentation()).setDisconnectCause(conferenceOnCreateOutgoingConference.getDisconnectCause()).setRingbackRequested(conferenceOnCreateOutgoingConference.isRingbackRequested()).build();
+        if (conferenceOnCreateOutgoingConference.getState() != 6) {
+            conferenceOnCreateOutgoingConference.setTelecomCallId(str);
+            this.mAdapter.setVideoProvider(str, conferenceOnCreateOutgoingConference.getVideoProvider());
+            this.mAdapter.setVideoState(str, conferenceOnCreateOutgoingConference.getVideoState());
+            onConferenceAdded(conferenceOnCreateOutgoingConference);
         }
         Log.d(this, "createConference, calling handleCreateConferenceSuccessful %s", str);
-        this.mAdapter.handleCreateConferenceComplete(str, connectionRequest, build);
+        this.mAdapter.handleCreateConferenceComplete(str, connectionRequest, parcelableConferenceBuild);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void createConnection(PhoneAccountHandle phoneAccountHandle, String str, ConnectionRequest connectionRequest, boolean z, boolean z2) {
-        Connection onCreateOutgoingConnection;
+        Connection connectionOnCreateOutgoingConnection;
         boolean z3 = connectionRequest.getExtras() != null && connectionRequest.getExtras().getBoolean("android.telecom.extra.IS_HANDOVER", false);
         boolean z4 = connectionRequest.getExtras() != null && connectionRequest.getExtras().getBoolean(TelecomManager.EXTRA_IS_HANDOVER_CONNECTION, false);
         Log.i(this, "createConnection, callManagerAccount: %s, callId: %s, request: %s, isIncoming: %b, isUnknown: %b, isLegacyHandover: %b, isHandover: %b,  addSelfManaged: %b", phoneAccountHandle, str, connectionRequest, Boolean.valueOf(z), Boolean.valueOf(z2), Boolean.valueOf(z3), Boolean.valueOf(z4), Boolean.valueOf(connectionRequest.getExtras() != null && connectionRequest.getExtras().getBoolean(PhoneAccount.EXTRA_ADD_SELF_MANAGED_CALLS_TO_INCALLSERVICE, true)));
         if (z4) {
             PhoneAccountHandle phoneAccountHandle2 = connectionRequest.getExtras() != null ? (PhoneAccountHandle) connectionRequest.getExtras().getParcelable(TelecomManager.EXTRA_HANDOVER_FROM_PHONE_ACCOUNT, PhoneAccountHandle.class) : null;
             if (!z) {
-                onCreateOutgoingConnection = onCreateOutgoingHandoverConnection(phoneAccountHandle2, connectionRequest);
+                connectionOnCreateOutgoingConnection = onCreateOutgoingHandoverConnection(phoneAccountHandle2, connectionRequest);
             } else {
-                onCreateOutgoingConnection = onCreateIncomingHandoverConnection(phoneAccountHandle2, connectionRequest);
+                connectionOnCreateOutgoingConnection = onCreateIncomingHandoverConnection(phoneAccountHandle2, connectionRequest);
             }
         } else if (z2) {
-            onCreateOutgoingConnection = onCreateUnknownConnection(phoneAccountHandle, connectionRequest);
+            connectionOnCreateOutgoingConnection = onCreateUnknownConnection(phoneAccountHandle, connectionRequest);
         } else if (z) {
-            onCreateOutgoingConnection = onCreateIncomingConnection(phoneAccountHandle, connectionRequest);
+            connectionOnCreateOutgoingConnection = onCreateIncomingConnection(phoneAccountHandle, connectionRequest);
         } else {
-            onCreateOutgoingConnection = onCreateOutgoingConnection(phoneAccountHandle, connectionRequest);
+            connectionOnCreateOutgoingConnection = onCreateOutgoingConnection(phoneAccountHandle, connectionRequest);
         }
-        Log.d(this, "createConnection, connection: %s", onCreateOutgoingConnection);
-        if (onCreateOutgoingConnection == null) {
+        Log.d(this, "createConnection, connection: %s", connectionOnCreateOutgoingConnection);
+        if (connectionOnCreateOutgoingConnection == null) {
             Log.i(this, "createConnection, implementation returned null connection.", new Object[0]);
-            onCreateOutgoingConnection = Connection.createFailedConnection(new DisconnectCause(1, "IMPL_RETURNED_NULL_CONNECTION"));
+            connectionOnCreateOutgoingConnection = Connection.createFailedConnection(new DisconnectCause(1, "IMPL_RETURNED_NULL_CONNECTION"));
         } else {
             try {
                 Bundle extras = connectionRequest.getExtras();
@@ -1787,26 +1786,26 @@ public abstract class ConnectionService extends Service {
                     Bundle bundle = new Bundle();
                     bundle.putString(Connection.EXTRA_REMOTE_CONNECTION_ORIGINATING_PACKAGE_NAME, extras.getString(Connection.EXTRA_REMOTE_CONNECTION_ORIGINATING_PACKAGE_NAME));
                     bundle.putParcelable(Connection.EXTRA_REMOTE_PHONE_ACCOUNT_HANDLE, connectionRequest.getAccountHandle());
-                    onCreateOutgoingConnection.putExtras(bundle);
+                    connectionOnCreateOutgoingConnection.putExtras(bundle);
                 }
             } catch (UnsupportedOperationException unused) {
             }
         }
-        boolean z5 = (onCreateOutgoingConnection.getConnectionProperties() & 128) == 128;
+        boolean z5 = (connectionOnCreateOutgoingConnection.getConnectionProperties() & 128) == 128;
         if (z5) {
-            onCreateOutgoingConnection.setAudioModeIsVoip(true);
+            connectionOnCreateOutgoingConnection.setAudioModeIsVoip(true);
         }
-        onCreateOutgoingConnection.setTelecomCallId(str);
-        PhoneAccountHandle accountHandle = onCreateOutgoingConnection.getPhoneAccountHandle() == null ? connectionRequest.getAccountHandle() : onCreateOutgoingConnection.getPhoneAccountHandle();
-        if (onCreateOutgoingConnection.getState() != 6) {
-            addConnection(accountHandle, str, onCreateOutgoingConnection);
+        connectionOnCreateOutgoingConnection.setTelecomCallId(str);
+        PhoneAccountHandle accountHandle = connectionOnCreateOutgoingConnection.getPhoneAccountHandle() == null ? connectionRequest.getAccountHandle() : connectionOnCreateOutgoingConnection.getPhoneAccountHandle();
+        if (connectionOnCreateOutgoingConnection.getState() != 6) {
+            addConnection(accountHandle, str, connectionOnCreateOutgoingConnection);
         }
-        Uri address = onCreateOutgoingConnection.getAddress();
-        Log.v(this, "createConnection, number: %s, state: %s, capabilities: %s, properties: %s", Connection.toLogSafePhoneNumber(address == null ? PerfettoProtoLogImpl.NULL_STRING : address.getSchemeSpecificPart()), Connection.stateToString(onCreateOutgoingConnection.getState()), Connection.capabilitiesToString(onCreateOutgoingConnection.getConnectionCapabilities()), Connection.propertiesToString(onCreateOutgoingConnection.getConnectionProperties()));
+        Uri address = connectionOnCreateOutgoingConnection.getAddress();
+        Log.v(this, "createConnection, number: %s, state: %s, capabilities: %s, properties: %s", Connection.toLogSafePhoneNumber(address == null ? PerfettoProtoLogImpl.NULL_STRING : address.getSchemeSpecificPart()), Connection.stateToString(connectionOnCreateOutgoingConnection.getState()), Connection.capabilitiesToString(connectionOnCreateOutgoingConnection.getConnectionCapabilities()), Connection.propertiesToString(connectionOnCreateOutgoingConnection.getConnectionProperties()));
         Log.d(this, "createConnection, calling handleCreateConnectionSuccessful %s", str);
-        this.mAdapter.handleCreateConnectionComplete(str, connectionRequest, new ParcelableConnection(accountHandle, onCreateOutgoingConnection.getState(), onCreateOutgoingConnection.getConnectionCapabilities(), onCreateOutgoingConnection.getConnectionProperties(), onCreateOutgoingConnection.getSupportedAudioRoutes(), onCreateOutgoingConnection.getAddress(), onCreateOutgoingConnection.getAddressPresentation(), onCreateOutgoingConnection.getCallerDisplayName(), onCreateOutgoingConnection.getCallerDisplayNamePresentation(), onCreateOutgoingConnection.getVideoProvider() != null ? onCreateOutgoingConnection.getVideoProvider().getInterface() : null, onCreateOutgoingConnection.getVideoState(), onCreateOutgoingConnection.isRingbackRequested(), onCreateOutgoingConnection.getAudioModeIsVoip(), onCreateOutgoingConnection.getConnectTimeMillis(), onCreateOutgoingConnection.getConnectionStartElapsedRealtimeMillis(), onCreateOutgoingConnection.getStatusHints(), onCreateOutgoingConnection.getDisconnectCause(), createIdList(onCreateOutgoingConnection.getConferenceables()), onCreateOutgoingConnection.getExtras(), onCreateOutgoingConnection.getCallerNumberVerificationStatus()));
+        this.mAdapter.handleCreateConnectionComplete(str, connectionRequest, new ParcelableConnection(accountHandle, connectionOnCreateOutgoingConnection.getState(), connectionOnCreateOutgoingConnection.getConnectionCapabilities(), connectionOnCreateOutgoingConnection.getConnectionProperties(), connectionOnCreateOutgoingConnection.getSupportedAudioRoutes(), connectionOnCreateOutgoingConnection.getAddress(), connectionOnCreateOutgoingConnection.getAddressPresentation(), connectionOnCreateOutgoingConnection.getCallerDisplayName(), connectionOnCreateOutgoingConnection.getCallerDisplayNamePresentation(), connectionOnCreateOutgoingConnection.getVideoProvider() != null ? connectionOnCreateOutgoingConnection.getVideoProvider().getInterface() : null, connectionOnCreateOutgoingConnection.getVideoState(), connectionOnCreateOutgoingConnection.isRingbackRequested(), connectionOnCreateOutgoingConnection.getAudioModeIsVoip(), connectionOnCreateOutgoingConnection.getConnectTimeMillis(), connectionOnCreateOutgoingConnection.getConnectionStartElapsedRealtimeMillis(), connectionOnCreateOutgoingConnection.getStatusHints(), connectionOnCreateOutgoingConnection.getDisconnectCause(), createIdList(connectionOnCreateOutgoingConnection.getConferenceables()), connectionOnCreateOutgoingConnection.getExtras(), connectionOnCreateOutgoingConnection.getCallerNumberVerificationStatus()));
         if (z && connectionRequest.shouldShowIncomingCallUi() && z5) {
-            onCreateOutgoingConnection.onShowIncomingCallUi();
+            connectionOnCreateOutgoingConnection.onShowIncomingCallUi();
         }
         if (z2) {
             triggerConferenceRecalculate();
@@ -2040,20 +2039,20 @@ public abstract class ConnectionService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void conference(String str, String str2) {
         Log.i(this, "conference %s, %s", str, str2);
-        Connection findConnectionForAction = findConnectionForAction(str2, ImsCallProfile.EXTRA_CONFERENCE_DEPRECATED);
+        Connection connectionFindConnectionForAction = findConnectionForAction(str2, ImsCallProfile.EXTRA_CONFERENCE_DEPRECATED);
         Conference nullConference = getNullConference();
-        if (findConnectionForAction == getNullConnection() && (nullConference = findConferenceForAction(str2, ImsCallProfile.EXTRA_CONFERENCE_DEPRECATED)) == getNullConference()) {
+        if (connectionFindConnectionForAction == getNullConnection() && (nullConference = findConferenceForAction(str2, ImsCallProfile.EXTRA_CONFERENCE_DEPRECATED)) == getNullConference()) {
             Log.w(this, "Connection2 or Conference2 missing in conference request %s.", str2);
             return;
         }
-        Connection findConnectionForAction2 = findConnectionForAction(str, ImsCallProfile.EXTRA_CONFERENCE_DEPRECATED);
-        if (findConnectionForAction2 == getNullConnection()) {
-            Conference findConferenceForAction = findConferenceForAction(str, "addConnection");
-            if (findConferenceForAction == getNullConference()) {
+        Connection connectionFindConnectionForAction2 = findConnectionForAction(str, ImsCallProfile.EXTRA_CONFERENCE_DEPRECATED);
+        if (connectionFindConnectionForAction2 == getNullConnection()) {
+            Conference conferenceFindConferenceForAction = findConferenceForAction(str, "addConnection");
+            if (conferenceFindConferenceForAction == getNullConference()) {
                 Log.w(this, "Connection1 or Conference1 missing in conference request %s.", str);
                 return;
-            } else if (findConnectionForAction != getNullConnection()) {
-                findConferenceForAction.onMerge(findConnectionForAction);
+            } else if (connectionFindConnectionForAction != getNullConnection()) {
+                conferenceFindConferenceForAction.onMerge(connectionFindConnectionForAction);
                 return;
             } else {
                 Log.wtf(this, "There can only be one conference and an attempt was made to merge two conferences.", new Object[0]);
@@ -2061,41 +2060,41 @@ public abstract class ConnectionService extends Service {
             }
         }
         if (nullConference != getNullConference()) {
-            nullConference.onMerge(findConnectionForAction2);
+            nullConference.onMerge(connectionFindConnectionForAction2);
         } else {
-            onConference(findConnectionForAction2, findConnectionForAction);
+            onConference(connectionFindConnectionForAction2, connectionFindConnectionForAction);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void splitFromConference(String str) {
         Log.i(this, "splitFromConference(%s)", str);
-        Connection findConnectionForAction = findConnectionForAction(str, "splitFromConference");
-        if (findConnectionForAction == getNullConnection()) {
+        Connection connectionFindConnectionForAction = findConnectionForAction(str, "splitFromConference");
+        if (connectionFindConnectionForAction == getNullConnection()) {
             Log.w(this, "Connection missing in conference request %s.", str);
             return;
         }
-        Conference conference = findConnectionForAction.getConference();
+        Conference conference = connectionFindConnectionForAction.getConference();
         if (conference != null) {
-            conference.onSeparate(findConnectionForAction);
+            conference.onSeparate(connectionFindConnectionForAction);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void mergeConference(String str) {
         Log.i(this, "mergeConference(%s)", str);
-        Conference findConferenceForAction = findConferenceForAction(str, "mergeConference");
-        if (findConferenceForAction != null) {
-            findConferenceForAction.onMerge();
+        Conference conferenceFindConferenceForAction = findConferenceForAction(str, "mergeConference");
+        if (conferenceFindConferenceForAction != null) {
+            conferenceFindConferenceForAction.onMerge();
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void swapConference(String str) {
         Log.i(this, "swapConference(%s)", str);
-        Conference findConferenceForAction = findConferenceForAction(str, "swapConference");
-        if (findConferenceForAction != null) {
-            findConferenceForAction.onSwap();
+        Conference conferenceFindConferenceForAction = findConferenceForAction(str, "swapConference");
+        if (conferenceFindConferenceForAction != null) {
+            conferenceFindConferenceForAction.onSwap();
         }
     }
 
@@ -2112,36 +2111,36 @@ public abstract class ConnectionService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void pullExternalCall(String str) {
         Log.i(this, "pullExternalCall(%s)", str);
-        Connection findConnectionForAction = findConnectionForAction(str, "pullExternalCall");
-        if (findConnectionForAction != null) {
-            findConnectionForAction.onPullExternalCall();
+        Connection connectionFindConnectionForAction = findConnectionForAction(str, "pullExternalCall");
+        if (connectionFindConnectionForAction != null) {
+            connectionFindConnectionForAction.onPullExternalCall();
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void sendCallEvent(String str, String str2, Bundle bundle) {
         Log.i(this, "sendCallEvent(%s, %s)", str, str2);
-        Connection findConnectionForAction = findConnectionForAction(str, "sendCallEvent");
-        if (findConnectionForAction != null) {
-            findConnectionForAction.onCallEvent(str2, bundle);
+        Connection connectionFindConnectionForAction = findConnectionForAction(str, "sendCallEvent");
+        if (connectionFindConnectionForAction != null) {
+            connectionFindConnectionForAction.onCallEvent(str2, bundle);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void onCallFilteringCompleted(String str, Connection.CallFilteringCompletionInfo callFilteringCompletionInfo) {
         Log.i(this, "onCallFilteringCompleted(%s, %s)", str, callFilteringCompletionInfo);
-        Connection findConnectionForAction = findConnectionForAction(str, "onCallFilteringCompleted");
-        if (findConnectionForAction != null) {
-            findConnectionForAction.onCallFilteringCompleted(callFilteringCompletionInfo);
+        Connection connectionFindConnectionForAction = findConnectionForAction(str, "onCallFilteringCompleted");
+        if (connectionFindConnectionForAction != null) {
+            connectionFindConnectionForAction.onCallFilteringCompleted(callFilteringCompletionInfo);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void notifyHandoverComplete(String str) {
         Log.i(this, "notifyHandoverComplete(%s)", str);
-        Connection findConnectionForAction = findConnectionForAction(str, "notifyHandoverComplete");
-        if (findConnectionForAction != null) {
-            findConnectionForAction.onHandoverComplete();
+        Connection connectionFindConnectionForAction = findConnectionForAction(str, "notifyHandoverComplete");
+        if (connectionFindConnectionForAction != null) {
+            connectionFindConnectionForAction.onHandoverComplete();
         }
     }
 
@@ -2245,26 +2244,26 @@ public abstract class ConnectionService extends Service {
 
     public final void addConference(Conference conference) {
         Log.d(this, "addConference: conference=%s", conference);
-        String addConferenceInternal = addConferenceInternal(conference);
-        if (addConferenceInternal != null) {
+        String strAddConferenceInternal = addConferenceInternal(conference);
+        if (strAddConferenceInternal != null) {
             ArrayList arrayList = new ArrayList(2);
             for (Connection connection : conference.getConnections()) {
                 if (this.mIdByConnection.containsKey(connection)) {
                     arrayList.add(this.mIdByConnection.get(connection));
                 }
             }
-            conference.setTelecomCallId(addConferenceInternal);
-            this.mAdapter.addConferenceCall(addConferenceInternal, new ParcelableConference.Builder(conference.getPhoneAccountHandle(), conference.getState()).setConnectionCapabilities(conference.getConnectionCapabilities()).setConnectionProperties(conference.getConnectionProperties()).setConnectionIds(arrayList).setVideoAttributes(conference.getVideoProvider() == null ? null : conference.getVideoProvider().getInterface(), conference.getVideoState()).setConnectTimeMillis(conference.getConnectTimeMillis(), conference.getConnectionStartElapsedRealtimeMillis()).setStatusHints(conference.getStatusHints()).setExtras(conference.getExtras()).setAddress(conference.getAddress(), conference.getAddressPresentation()).setCallerDisplayName(conference.getCallerDisplayName(), conference.getCallerDisplayNamePresentation()).setDisconnectCause(conference.getDisconnectCause()).setRingbackRequested(conference.isRingbackRequested()).setCallDirection(conference.getCallDirection()).build());
-            this.mAdapter.setVideoProvider(addConferenceInternal, conference.getVideoProvider());
-            this.mAdapter.setVideoState(addConferenceInternal, conference.getVideoState());
+            conference.setTelecomCallId(strAddConferenceInternal);
+            this.mAdapter.addConferenceCall(strAddConferenceInternal, new ParcelableConference.Builder(conference.getPhoneAccountHandle(), conference.getState()).setConnectionCapabilities(conference.getConnectionCapabilities()).setConnectionProperties(conference.getConnectionProperties()).setConnectionIds(arrayList).setVideoAttributes(conference.getVideoProvider() == null ? null : conference.getVideoProvider().getInterface(), conference.getVideoState()).setConnectTimeMillis(conference.getConnectTimeMillis(), conference.getConnectionStartElapsedRealtimeMillis()).setStatusHints(conference.getStatusHints()).setExtras(conference.getExtras()).setAddress(conference.getAddress(), conference.getAddressPresentation()).setCallerDisplayName(conference.getCallerDisplayName(), conference.getCallerDisplayNamePresentation()).setDisconnectCause(conference.getDisconnectCause()).setRingbackRequested(conference.isRingbackRequested()).setCallDirection(conference.getCallDirection()).build());
+            this.mAdapter.setVideoProvider(strAddConferenceInternal, conference.getVideoProvider());
+            this.mAdapter.setVideoState(strAddConferenceInternal, conference.getVideoState());
             if (!conference.isMultiparty()) {
-                this.mAdapter.setConferenceState(addConferenceInternal, conference.isMultiparty());
+                this.mAdapter.setConferenceState(strAddConferenceInternal, conference.isMultiparty());
             }
             Iterator<Connection> it = conference.getConnections().iterator();
             while (it.hasNext()) {
                 String str = this.mIdByConnection.get(it.next());
                 if (str != null) {
-                    this.mAdapter.setIsConferenced(str, addConferenceInternal);
+                    this.mAdapter.setIsConferenced(str, strAddConferenceInternal);
                 }
             }
             onConferenceAdded(conference);
@@ -2281,9 +2280,9 @@ public abstract class ConnectionService extends Service {
 
     @SystemApi
     public final void addExistingConnection(PhoneAccountHandle phoneAccountHandle, Connection connection, Conference conference) {
-        String addExistingConnectionInternal = addExistingConnectionInternal(phoneAccountHandle, connection);
-        if (addExistingConnectionInternal != null) {
-            this.mAdapter.addExistingConnection(addExistingConnectionInternal, new ParcelableConnection(phoneAccountHandle, connection.getState(), connection.getConnectionCapabilities(), connection.getConnectionProperties(), connection.getSupportedAudioRoutes(), connection.getAddress(), connection.getAddressPresentation(), connection.getCallerDisplayName(), connection.getCallerDisplayNamePresentation(), connection.getVideoProvider() != null ? connection.getVideoProvider().getInterface() : null, connection.getVideoState(), connection.isRingbackRequested(), connection.getAudioModeIsVoip(), connection.getConnectTimeMillis(), connection.getConnectionStartElapsedRealtimeMillis(), connection.getStatusHints(), connection.getDisconnectCause(), new ArrayList(0), connection.getExtras(), conference != null ? this.mIdByConference.get(conference) : null, connection.getCallDirection(), connection.getCallerNumberVerificationStatus()));
+        String strAddExistingConnectionInternal = addExistingConnectionInternal(phoneAccountHandle, connection);
+        if (strAddExistingConnectionInternal != null) {
+            this.mAdapter.addExistingConnection(strAddExistingConnectionInternal, new ParcelableConnection(phoneAccountHandle, connection.getState(), connection.getConnectionCapabilities(), connection.getConnectionProperties(), connection.getSupportedAudioRoutes(), connection.getAddress(), connection.getAddressPresentation(), connection.getCallerDisplayName(), connection.getCallerDisplayNamePresentation(), connection.getVideoProvider() != null ? connection.getVideoProvider().getInterface() : null, connection.getVideoState(), connection.isRingbackRequested(), connection.getAudioModeIsVoip(), connection.getConnectTimeMillis(), connection.getConnectionStartElapsedRealtimeMillis(), connection.getStatusHints(), connection.getDisconnectCause(), new ArrayList(0), connection.getExtras(), conference != null ? this.mIdByConference.get(conference) : null, connection.getCallDirection(), connection.getCallerNumberVerificationStatus()));
         }
     }
 
@@ -2318,17 +2317,17 @@ public abstract class ConnectionService extends Service {
     }
 
     private String addExistingConnectionInternal(PhoneAccountHandle phoneAccountHandle, Connection connection) {
-        String str;
+        String string;
         if (connection.getExtras() != null && connection.getExtras().containsKey(Connection.EXTRA_ORIGINAL_CONNECTION_ID)) {
-            str = connection.getExtras().getString(Connection.EXTRA_ORIGINAL_CONNECTION_ID);
-            Log.d(this, "addExistingConnectionInternal - conn %s reusing original id %s", connection.getTelecomCallId(), str);
+            string = connection.getExtras().getString(Connection.EXTRA_ORIGINAL_CONNECTION_ID);
+            Log.d(this, "addExistingConnectionInternal - conn %s reusing original id %s", connection.getTelecomCallId(), string);
         } else if (phoneAccountHandle == null) {
-            str = UUID.randomUUID().toString();
+            string = UUID.randomUUID().toString();
         } else {
-            str = phoneAccountHandle.getComponentName().getClassName() + "@" + getNextCallId();
+            string = phoneAccountHandle.getComponentName().getClassName() + "@" + getNextCallId();
         }
-        addConnection(phoneAccountHandle, str, connection);
-        return str;
+        addConnection(phoneAccountHandle, string, connection);
+        return string;
     }
 
     private void addConnection(PhoneAccountHandle phoneAccountHandle, String str, Connection connection) {
@@ -2354,23 +2353,23 @@ public abstract class ConnectionService extends Service {
     }
 
     private String addConferenceInternal(Conference conference) {
-        String str;
+        String string;
         if (conference.getExtras() == null || !conference.getExtras().containsKey(Connection.EXTRA_ORIGINAL_CONNECTION_ID)) {
-            str = null;
+            string = null;
         } else {
-            str = conference.getExtras().getString(Connection.EXTRA_ORIGINAL_CONNECTION_ID);
-            Log.d(this, "addConferenceInternal: conf %s reusing original id %s", conference.getTelecomCallId(), str);
+            string = conference.getExtras().getString(Connection.EXTRA_ORIGINAL_CONNECTION_ID);
+            Log.d(this, "addConferenceInternal: conf %s reusing original id %s", conference.getTelecomCallId(), string);
         }
         if (this.mIdByConference.containsKey(conference)) {
             Log.w(this, "Re-adding an existing conference: %s.", conference);
         } else if (conference != null) {
-            if (str == null) {
-                str = UUID.randomUUID().toString();
+            if (string == null) {
+                string = UUID.randomUUID().toString();
             }
-            this.mConferenceById.put(str, conference);
-            this.mIdByConference.put(conference, str);
+            this.mConferenceById.put(string, conference);
+            this.mIdByConference.put(conference, string);
             conference.addListener(this.mConferenceListener);
-            return str;
+            return string;
         }
         return null;
     }
@@ -2396,15 +2395,11 @@ public abstract class ConnectionService extends Service {
     }
 
     static synchronized Connection getNullConnection() {
-        Connection connection;
-        synchronized (ConnectionService.class) {
-            if (sNullConnection == null) {
-                sNullConnection = new Connection() { // from class: android.telecom.ConnectionService.6
-                };
-            }
-            connection = sNullConnection;
+        if (sNullConnection == null) {
+            sNullConnection = new Connection() { // from class: android.telecom.ConnectionService.6
+            };
         }
-        return connection;
+        return sNullConnection;
     }
 
     private Conference findConferenceForAction(String str, String str2) {

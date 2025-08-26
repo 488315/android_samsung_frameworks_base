@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class EngramQueryOption implements Parcelable {
     public static final Parcelable.Creator<EngramQueryOption> CREATOR = new Creator();
@@ -30,37 +29,36 @@ public final class EngramQueryOption implements Parcelable {
     private final Double radius;
     private final Long startTimestamp;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
             ArrayList arrayList;
             ArrayList arrayList2;
-            Long valueOf = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
-            Long valueOf2 = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
-            String readString = parcel.readString();
-            EngramQueryType valueOf3 = EngramQueryType.valueOf(parcel.readString());
-            ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-            ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+            Long lValueOf = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
+            Long lValueOf2 = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
+            String string = parcel.readString();
+            EngramQueryType engramQueryTypeValueOf = EngramQueryType.valueOf(parcel.readString());
+            ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+            ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
             if (parcel.readInt() == 0) {
                 arrayList = null;
             } else {
-                int readInt = parcel.readInt();
-                arrayList = new ArrayList(readInt);
-                for (int i = 0; i != readInt; i++) {
+                int i = parcel.readInt();
+                arrayList = new ArrayList(i);
+                for (int i2 = 0; i2 != i; i2++) {
                     arrayList.add(ActivityType.valueOf(parcel.readString()));
                 }
             }
             if (parcel.readInt() == 0) {
                 arrayList2 = null;
             } else {
-                int readInt2 = parcel.readInt();
-                arrayList2 = new ArrayList(readInt2);
-                for (int i2 = 0; i2 != readInt2; i2++) {
+                int i3 = parcel.readInt();
+                arrayList2 = new ArrayList(i3);
+                for (int i4 = 0; i4 != i3; i4++) {
                     arrayList2.add(ActivityType.valueOf(parcel.readString()));
                 }
             }
-            return new EngramQueryOption(valueOf, valueOf2, readString, valueOf3, createStringArrayList, createStringArrayList2, arrayList, arrayList2, parcel.readInt(), parcel.readInt(), parcel.readString(), parcel.readInt() == 0 ? null : Double.valueOf(parcel.readDouble()), parcel.readInt() == 0 ? null : Double.valueOf(parcel.readDouble()), parcel.readInt() != 0 ? Double.valueOf(parcel.readDouble()) : null, parcel.readInt() != 0, null);
+            return new EngramQueryOption(lValueOf, lValueOf2, string, engramQueryTypeValueOf, arrayListCreateStringArrayList, arrayListCreateStringArrayList2, arrayList, arrayList2, parcel.readInt(), parcel.readInt(), parcel.readString(), parcel.readInt() == 0 ? null : Double.valueOf(parcel.readDouble()), parcel.readInt() == 0 ? null : Double.valueOf(parcel.readDouble()), parcel.readInt() != 0 ? Double.valueOf(parcel.readDouble()) : null, parcel.readInt() != 0, null);
         }
 
         @Override // android.os.Parcelable.Creator
@@ -69,7 +67,6 @@ public final class EngramQueryOption implements Parcelable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WrapBuilder {
         public final boolean contentFill;
         public final String contentId;

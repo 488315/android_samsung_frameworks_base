@@ -5,7 +5,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserHandle;
 import com.android.internal.app.AbstractMultiProfilePagerAdapter;
-import com.android.internal.app.NoCrossProfileEmptyStateProvider;
 import java.util.function.Supplier;
 
 /* loaded from: classes5.dex */
@@ -64,9 +63,7 @@ public class NoCrossProfileEmptyStateProvider implements AbstractMultiProfilePag
             return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString(this.mDevicePolicyStringTitleId, new Supplier() { // from class: com.android.internal.app.NoCrossProfileEmptyStateProvider$DevicePolicyBlockerEmptyState$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$getTitle$0;
-                    lambda$getTitle$0 = NoCrossProfileEmptyStateProvider.DevicePolicyBlockerEmptyState.this.lambda$getTitle$0();
-                    return lambda$getTitle$0;
+                    return this.f$0.lambda$getTitle$0();
                 }
             });
         }
@@ -81,9 +78,7 @@ public class NoCrossProfileEmptyStateProvider implements AbstractMultiProfilePag
             return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString(this.mDevicePolicyStringSubtitleId, new Supplier() { // from class: com.android.internal.app.NoCrossProfileEmptyStateProvider$DevicePolicyBlockerEmptyState$$ExternalSyntheticLambda1
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$getSubtitle$1;
-                    lambda$getSubtitle$1 = NoCrossProfileEmptyStateProvider.DevicePolicyBlockerEmptyState.this.lambda$getSubtitle$1();
-                    return lambda$getSubtitle$1;
+                    return this.f$0.lambda$getSubtitle$1();
                 }
             });
         }

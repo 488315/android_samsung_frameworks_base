@@ -8,7 +8,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.properties.ReadOnlyProperty;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultipleArgParam implements ReadOnlyProperty, Param {
     public final String description;
@@ -48,17 +47,17 @@ public final class MultipleArgParam implements ReadOnlyProperty, Param {
     }
 
     @Override // com.android.systemui.statusbar.commandline.Param
-    public final void parseArgsFromIter(Iterator it) {
+    public final void parseArgsFromIter(Iterator it) throws Throwable {
         if (!it.hasNext()) {
             throw new ArgParseError("no argument provided for " + this.shortName);
         }
         for (int i = 0; i < this.numArgs; i++) {
-            Object mo2548parseValueIoAF18A = this.valueParser.mo2548parseValueIoAF18A((String) it.next());
-            Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(mo2548parseValueIoAF18A);
-            if (m3422exceptionOrNullimpl != null) {
-                throw m3422exceptionOrNullimpl;
+            Object objMo2565parseValueIoAF18A = this.valueParser.mo2565parseValueIoAF18A((String) it.next());
+            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(objMo2565parseValueIoAF18A);
+            if (thM3442exceptionOrNullimpl != null) {
+                throw thM3442exceptionOrNullimpl;
             }
-            ((ArrayList) this.inner).add(mo2548parseValueIoAF18A);
+            ((ArrayList) this.inner).add(objMo2565parseValueIoAF18A);
         }
     }
 

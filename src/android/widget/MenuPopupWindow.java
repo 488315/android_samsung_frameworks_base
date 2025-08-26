@@ -97,7 +97,7 @@ public class MenuPopupWindow extends ListPopupWindow implements MenuItemHoverLis
             if (listMenuItemView != null && i == this.mRetreatKey) {
                 setSelectedPositionInt(-1);
                 setNextSelectedPositionInt(-1);
-                ListAdapter adapter = getAdapter();
+                Adapter adapter = getAdapter();
                 if (adapter instanceof HeaderViewListAdapter) {
                     menuAdapter = (MenuAdapter) ((HeaderViewListAdapter) adapter).getWrappedAdapter();
                 } else {
@@ -112,20 +112,20 @@ public class MenuPopupWindow extends ListPopupWindow implements MenuItemHoverLis
         @Override // android.widget.DropDownListView, android.view.View
         public boolean onHoverEvent(MotionEvent motionEvent) {
             MenuAdapter menuAdapter;
+            int headersCount;
+            int iPointToPosition;
             int i;
-            int pointToPosition;
-            int i2;
             if (this.mHoverListener != null) {
                 ListAdapter adapter = getAdapter();
                 if (adapter instanceof HeaderViewListAdapter) {
                     HeaderViewListAdapter headerViewListAdapter = (HeaderViewListAdapter) adapter;
-                    i = headerViewListAdapter.getHeadersCount();
+                    headersCount = headerViewListAdapter.getHeadersCount();
                     menuAdapter = (MenuAdapter) headerViewListAdapter.getWrappedAdapter();
                 } else {
                     menuAdapter = (MenuAdapter) adapter;
-                    i = 0;
+                    headersCount = 0;
                 }
-                MenuItemImpl item = (motionEvent.getAction() == 10 || (pointToPosition = pointToPosition((int) motionEvent.getX(), (int) motionEvent.getY())) == -1 || (i2 = pointToPosition - i) < 0 || i2 >= menuAdapter.getCount()) ? null : menuAdapter.getItem(i2);
+                MenuItemImpl item = (motionEvent.getAction() == 10 || (iPointToPosition = pointToPosition((int) motionEvent.getX(), (int) motionEvent.getY())) == -1 || (i = iPointToPosition - headersCount) < 0 || i >= menuAdapter.getCount()) ? null : menuAdapter.getItem(i);
                 MenuItem menuItem = this.mHoveredMenuItem;
                 if (menuItem != item) {
                     MenuBuilder adapterMenu = menuAdapter.getAdapterMenu();

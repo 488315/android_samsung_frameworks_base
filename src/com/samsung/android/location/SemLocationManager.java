@@ -73,10 +73,10 @@ public class SemLocationManager {
 
         @Override // com.samsung.android.location.ISLocationListener
         public void onLocationChanged(Location location) {
-            Message obtain = Message.obtain();
-            obtain.what = 2;
-            obtain.obj = location;
-            sendCallbackMessage(obtain);
+            Message messageObtain = Message.obtain();
+            messageObtain.what = 2;
+            messageObtain.obj = location;
+            sendCallbackMessage(messageObtain);
         }
 
         private void sendCallbackMessage(Message message) {
@@ -152,7 +152,7 @@ public class SemLocationManager {
     }
 
     public int requestSingleLocation(int i, int i2, boolean z, SemLocationListener semLocationListener) {
-        int requestSingleLocation;
+        int iRequestSingleLocation;
         if (this.mService == null) {
             Log.e(TAG, "SLocationService is not supported");
             return -1;
@@ -169,9 +169,9 @@ public class SemLocationManager {
                 }
                 LocListenerTransport locListenerTransport2 = locListenerTransport;
                 this.mLocListeners.put(semLocationListener, locListenerTransport2);
-                requestSingleLocation = this.mService.requestSingleLocation(i, i2, z, null, locListenerTransport2, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+                iRequestSingleLocation = this.mService.requestSingleLocation(i, i2, z, null, locListenerTransport2, this.mContext.getPackageName(), this.mContext.getAttributionTag());
             }
-            return requestSingleLocation;
+            return iRequestSingleLocation;
         } catch (Throwable th) {
             Log.e(TAG, "requestSingleLocation: Throwable " + th.toString());
             return -4;
@@ -188,12 +188,12 @@ public class SemLocationManager {
             return -2;
         }
         try {
-            LocListenerTransport remove = this.mLocListeners.remove(semLocationListener);
-            if (remove == null) {
+            LocListenerTransport locListenerTransportRemove = this.mLocListeners.remove(semLocationListener);
+            if (locListenerTransportRemove == null) {
                 Log.e(TAG, "Already stopped location");
                 return -3;
             }
-            return this.mService.removeSingleLocation(null, remove, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.removeSingleLocation(null, locListenerTransportRemove, this.mContext.getPackageName(), this.mContext.getAttributionTag());
         } catch (Throwable th) {
             Log.e(TAG, "removeSingleLocation: Throwable " + th.toString());
             return -4;
@@ -201,7 +201,7 @@ public class SemLocationManager {
     }
 
     public int requestLocationUpdates(boolean z, SemLocationListener semLocationListener) {
-        int requestLocation;
+        int iRequestLocation;
         if (this.mService == null) {
             Log.e(TAG, "SLocationService is not supported");
             return -1;
@@ -217,9 +217,9 @@ public class SemLocationManager {
                     locListenerTransport = new LocListenerTransport(semLocationListener);
                 }
                 this.mLocListeners.put(semLocationListener, locListenerTransport);
-                requestLocation = this.mService.requestLocation(z, locListenerTransport, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+                iRequestLocation = this.mService.requestLocation(z, locListenerTransport, this.mContext.getPackageName(), this.mContext.getAttributionTag());
             }
-            return requestLocation;
+            return iRequestLocation;
         } catch (Throwable th) {
             Log.e(TAG, "requestLocationUpdates: Throwable " + th.toString());
             return -4;
@@ -236,12 +236,12 @@ public class SemLocationManager {
             return -2;
         }
         try {
-            LocListenerTransport remove = this.mLocListeners.remove(semLocationListener);
-            if (remove == null) {
+            LocListenerTransport locListenerTransportRemove = this.mLocListeners.remove(semLocationListener);
+            if (locListenerTransportRemove == null) {
                 Log.e(TAG, "Already stopped location");
                 return -3;
             }
-            return this.mService.removeLocation(remove, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.removeLocation(locListenerTransportRemove, this.mContext.getPackageName(), this.mContext.getAttributionTag());
         } catch (Throwable th) {
             Log.e(TAG, "removeLocationUpdates: Throwable " + th.toString());
             return -4;

@@ -8,6 +8,7 @@ import kotlin.Unit;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SafeFlow;
 
@@ -18,11 +19,11 @@ public abstract class SnapshotStateKt {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.runtime.collectAsState (SnapshotFlow.kt:58)");
         }
-        MutableState collectAsState = collectAsState(readonlyStateFlow, readonlyStateFlow.$$delegate_0.getValue(), coroutineContext, composer, 0, 0);
+        MutableState mutableStateCollectAsState = collectAsState(readonlyStateFlow, readonlyStateFlow.$$delegate_0.getValue(), coroutineContext, composer, 0, 0);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return collectAsState;
+        return mutableStateCollectAsState;
     }
 
     public static final MutableVector derivedStateObservers() {
@@ -58,22 +59,22 @@ public abstract class SnapshotStateKt {
             ComposerKt.traceEventStart("androidx.compose.runtime.produceState (ProduceState.kt:74)");
         }
         ComposerImpl composerImpl = (ComposerImpl) composer;
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
         Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-        if (rememberedValue == composer$Companion$Empty$1) {
-            rememberedValue = mutableStateOf$default(obj);
-            composerImpl.updateRememberedValue(rememberedValue);
+        if (objRememberedValue == composer$Companion$Empty$1) {
+            objRememberedValue = mutableStateOf$default(obj);
+            composerImpl.updateRememberedValue(objRememberedValue);
         }
-        MutableState mutableState = (MutableState) rememberedValue;
+        MutableState mutableState = (MutableState) objRememberedValue;
         Unit unit = Unit.INSTANCE;
-        boolean changedInstance = composerImpl.changedInstance(function2);
-        Object rememberedValue2 = composerImpl.rememberedValue();
-        if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
-            rememberedValue2 = new SnapshotStateKt__ProduceStateKt$produceState$1$1(function2, mutableState, null);
-            composerImpl.updateRememberedValue(rememberedValue2);
+        boolean zChangedInstance = composerImpl.changedInstance(function2);
+        Object objRememberedValue2 = composerImpl.rememberedValue();
+        if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
+            objRememberedValue2 = new SnapshotStateKt__ProduceStateKt$produceState$1$1(function2, mutableState, null);
+            composerImpl.updateRememberedValue(objRememberedValue2);
         }
-        EffectsKt.LaunchedEffect(composerImpl, unit, (Function2) rememberedValue2);
+        EffectsKt.LaunchedEffect(composerImpl, unit, (Function2) objRememberedValue2);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
@@ -89,13 +90,13 @@ public abstract class SnapshotStateKt {
             ComposerKt.traceEventStart("androidx.compose.runtime.rememberUpdatedState (SnapshotState.kt:329)");
         }
         ComposerImpl composerImpl = (ComposerImpl) composer;
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
-        if (rememberedValue == Composer.Companion.Empty) {
-            rememberedValue = mutableStateOf$default(obj);
-            composerImpl.updateRememberedValue(rememberedValue);
+        if (objRememberedValue == Composer.Companion.Empty) {
+            objRememberedValue = mutableStateOf$default(obj);
+            composerImpl.updateRememberedValue(objRememberedValue);
         }
-        MutableState mutableState = (MutableState) rememberedValue;
+        MutableState mutableState = (MutableState) objRememberedValue;
         mutableState.setValue(obj);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
@@ -117,68 +118,35 @@ public abstract class SnapshotStateKt {
         return new DerivedSnapshotState(function0, null);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0038, code lost:
-    
-        if (r9 == androidx.compose.runtime.Composer.Companion.Empty) goto L14;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x003a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final androidx.compose.runtime.MutableState collectAsState(kotlinx.coroutines.flow.Flow r6, java.lang.Object r7, kotlin.coroutines.CoroutineContext r8, androidx.compose.runtime.Composer r9, int r10, int r11) {
-        /*
-            r11 = r11 & 2
-            if (r11 == 0) goto L11
-            androidx.compose.runtime.StaticProvidableCompositionLocal r8 = androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt.LocalCollectAsStateCoroutineContext
-            r11 = r9
-            androidx.compose.runtime.ComposerImpl r11 = (androidx.compose.runtime.ComposerImpl) r11
-            java.lang.Object r8 = r11.consume(r8)
-            kotlin.coroutines.CoroutineContext r8 = (kotlin.coroutines.CoroutineContext) r8
-        Lf:
-            r2 = r8
-            goto L14
-        L11:
-            androidx.compose.runtime.StaticProvidableCompositionLocal r11 = androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt.LocalCollectAsStateCoroutineContext
-            goto Lf
-        L14:
-            boolean r8 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r8 == 0) goto L1f
-            java.lang.String r8 = "androidx.compose.runtime.collectAsState (SnapshotFlow.kt:74)"
-            androidx.compose.runtime.ComposerKt.traceEventStart(r8)
-        L1f:
-            r4 = r9
-            androidx.compose.runtime.ComposerImpl r4 = (androidx.compose.runtime.ComposerImpl) r4
-            boolean r8 = r4.changedInstance(r2)
-            boolean r9 = r4.changedInstance(r6)
-            r8 = r8 | r9
-            java.lang.Object r9 = r4.rememberedValue()
-            if (r8 != 0) goto L3a
-            androidx.compose.runtime.Composer$Companion r8 = androidx.compose.runtime.Composer.Companion
-            r8.getClass()
-            androidx.compose.runtime.Composer$Companion$Empty$1 r8 = androidx.compose.runtime.Composer.Companion.Empty
-            if (r9 != r8) goto L43
-        L3a:
-            androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1 r9 = new androidx.compose.runtime.SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1
-            r8 = 0
-            r9.<init>(r2, r6, r8)
-            r4.updateRememberedValue(r9)
-        L43:
-            r3 = r9
-            kotlin.jvm.functions.Function2 r3 = (kotlin.jvm.functions.Function2) r3
-            int r8 = r10 >> 3
-            r8 = r8 & 14
-            r9 = r10 & 896(0x380, float:1.256E-42)
-            r5 = r8 | r9
-            r1 = r6
-            r0 = r7
-            androidx.compose.runtime.MutableState r6 = produceState(r0, r1, r2, r3, r4, r5)
-            boolean r7 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r7 == 0) goto L5d
-            androidx.compose.runtime.ComposerKt.traceEventEnd()
-        L5d:
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.SnapshotStateKt.collectAsState(kotlinx.coroutines.flow.Flow, java.lang.Object, kotlin.coroutines.CoroutineContext, androidx.compose.runtime.Composer, int, int):androidx.compose.runtime.MutableState");
+    public static final MutableState collectAsState(Flow flow, Object obj, CoroutineContext coroutineContext, Composer composer, int i, int i2) {
+        if ((i2 & 2) != 0) {
+            coroutineContext = (CoroutineContext) ((ComposerImpl) composer).consume(SnapshotStateKt__SnapshotFlowKt.LocalCollectAsStateCoroutineContext);
+        } else {
+            StaticProvidableCompositionLocal staticProvidableCompositionLocal = SnapshotStateKt__SnapshotFlowKt.LocalCollectAsStateCoroutineContext;
+        }
+        CoroutineContext coroutineContext2 = coroutineContext;
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventStart("androidx.compose.runtime.collectAsState (SnapshotFlow.kt:74)");
+        }
+        ComposerImpl composerImpl = (ComposerImpl) composer;
+        boolean zChangedInstance = composerImpl.changedInstance(coroutineContext2) | composerImpl.changedInstance(flow);
+        Object objRememberedValue = composerImpl.rememberedValue();
+        if (!zChangedInstance) {
+            Composer.Companion.getClass();
+            if (objRememberedValue == Composer.Companion.Empty) {
+                objRememberedValue = new SnapshotStateKt__SnapshotFlowKt$collectAsState$1$1(coroutineContext2, flow, null);
+                composerImpl.updateRememberedValue(objRememberedValue);
+            }
+        }
+        MutableState mutableStateProduceState = produceState(obj, flow, coroutineContext2, (Function2) objRememberedValue, composerImpl, ((i >> 3) & 14) | (i & 896));
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventEnd();
+        }
+        return mutableStateProduceState;
     }
 
     public static final MutableState produceState(Object obj, Object obj2, Function2 function2, Composer composer, int i) {
@@ -186,21 +154,21 @@ public abstract class SnapshotStateKt {
             ComposerKt.traceEventStart("androidx.compose.runtime.produceState (ProduceState.kt:104)");
         }
         ComposerImpl composerImpl = (ComposerImpl) composer;
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
         Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-        if (rememberedValue == composer$Companion$Empty$1) {
-            rememberedValue = mutableStateOf$default(obj);
-            composerImpl.updateRememberedValue(rememberedValue);
+        if (objRememberedValue == composer$Companion$Empty$1) {
+            objRememberedValue = mutableStateOf$default(obj);
+            composerImpl.updateRememberedValue(objRememberedValue);
         }
-        MutableState mutableState = (MutableState) rememberedValue;
-        boolean changedInstance = composerImpl.changedInstance(function2);
-        Object rememberedValue2 = composerImpl.rememberedValue();
-        if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
-            rememberedValue2 = new SnapshotStateKt__ProduceStateKt$produceState$2$1(function2, mutableState, null);
-            composerImpl.updateRememberedValue(rememberedValue2);
+        MutableState mutableState = (MutableState) objRememberedValue;
+        boolean zChangedInstance = composerImpl.changedInstance(function2);
+        Object objRememberedValue2 = composerImpl.rememberedValue();
+        if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
+            objRememberedValue2 = new SnapshotStateKt__ProduceStateKt$produceState$2$1(function2, mutableState, null);
+            composerImpl.updateRememberedValue(objRememberedValue2);
         }
-        EffectsKt.LaunchedEffect(composerImpl, obj2, (Function2) rememberedValue2);
+        EffectsKt.LaunchedEffect(composerImpl, obj2, (Function2) objRememberedValue2);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
@@ -212,21 +180,21 @@ public abstract class SnapshotStateKt {
             ComposerKt.traceEventStart("androidx.compose.runtime.produceState (ProduceState.kt:135)");
         }
         ComposerImpl composerImpl = (ComposerImpl) composer;
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
         Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-        if (rememberedValue == composer$Companion$Empty$1) {
-            rememberedValue = mutableStateOf$default(obj);
-            composerImpl.updateRememberedValue(rememberedValue);
+        if (objRememberedValue == composer$Companion$Empty$1) {
+            objRememberedValue = mutableStateOf$default(obj);
+            composerImpl.updateRememberedValue(objRememberedValue);
         }
-        MutableState mutableState = (MutableState) rememberedValue;
-        boolean changedInstance = composerImpl.changedInstance(function2);
-        Object rememberedValue2 = composerImpl.rememberedValue();
-        if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
-            rememberedValue2 = new SnapshotStateKt__ProduceStateKt$produceState$3$1(function2, mutableState, null);
-            composerImpl.updateRememberedValue(rememberedValue2);
+        MutableState mutableState = (MutableState) objRememberedValue;
+        boolean zChangedInstance = composerImpl.changedInstance(function2);
+        Object objRememberedValue2 = composerImpl.rememberedValue();
+        if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
+            objRememberedValue2 = new SnapshotStateKt__ProduceStateKt$produceState$3$1(function2, mutableState, null);
+            composerImpl.updateRememberedValue(objRememberedValue2);
         }
-        EffectsKt.LaunchedEffect(obj2, obj3, (Function2) rememberedValue2, composerImpl);
+        EffectsKt.LaunchedEffect(obj2, obj3, (Function2) objRememberedValue2, composerImpl);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
@@ -238,22 +206,22 @@ public abstract class SnapshotStateKt {
             ComposerKt.traceEventStart("androidx.compose.runtime.produceState (ProduceState.kt:197)");
         }
         ComposerImpl composerImpl = (ComposerImpl) composer;
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
         Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-        if (rememberedValue == composer$Companion$Empty$1) {
-            rememberedValue = mutableStateOf$default(obj);
-            composerImpl.updateRememberedValue(rememberedValue);
+        if (objRememberedValue == composer$Companion$Empty$1) {
+            objRememberedValue = mutableStateOf$default(obj);
+            composerImpl.updateRememberedValue(objRememberedValue);
         }
-        MutableState mutableState = (MutableState) rememberedValue;
-        Object[] copyOf = Arrays.copyOf(objArr, objArr.length);
-        boolean changedInstance = composerImpl.changedInstance(function2);
-        Object rememberedValue2 = composerImpl.rememberedValue();
-        if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
-            rememberedValue2 = new SnapshotStateKt__ProduceStateKt$produceState$5$1(function2, mutableState, null);
-            composerImpl.updateRememberedValue(rememberedValue2);
+        MutableState mutableState = (MutableState) objRememberedValue;
+        Object[] objArrCopyOf = Arrays.copyOf(objArr, objArr.length);
+        boolean zChangedInstance = composerImpl.changedInstance(function2);
+        Object objRememberedValue2 = composerImpl.rememberedValue();
+        if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
+            objRememberedValue2 = new SnapshotStateKt__ProduceStateKt$produceState$5$1(function2, mutableState, null);
+            composerImpl.updateRememberedValue(objRememberedValue2);
         }
-        EffectsKt.LaunchedEffect(copyOf, (Function2) rememberedValue2, composerImpl);
+        EffectsKt.LaunchedEffect(objArrCopyOf, (Function2) objRememberedValue2, composerImpl);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }

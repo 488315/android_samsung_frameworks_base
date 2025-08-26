@@ -102,9 +102,9 @@ public interface ICameraExtensionsProxyService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICameraExtensionsProxyService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICameraExtensionsProxyService)) {
-                return (ICameraExtensionsProxyService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICameraExtensionsProxyService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICameraExtensionsProxyService)) {
+                return (ICameraExtensionsProxyService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -148,27 +148,27 @@ public interface ICameraExtensionsProxyService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean registerClient = registerClient(readStrongBinder);
+                    boolean zRegisterClient = registerClient(strongBinder);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerClient);
+                    parcel2.writeBoolean(zRegisterClient);
                     return true;
                 case 2:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    unregisterClient(readStrongBinder2);
+                    unregisterClient(strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    boolean advancedExtensionsSupported = advancedExtensionsSupported();
+                    boolean zAdvancedExtensionsSupported = advancedExtensionsSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(advancedExtensionsSupported);
+                    parcel2.writeBoolean(zAdvancedExtensionsSupported);
                     return true;
                 case 4:
-                    IInitializeSessionCallback asInterface = IInitializeSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IInitializeSessionCallback iInitializeSessionCallbackAsInterface = IInitializeSessionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    initializeSession(asInterface);
+                    initializeSession(iInitializeSessionCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 5:
@@ -176,25 +176,25 @@ public interface ICameraExtensionsProxyService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IPreviewExtenderImpl initializePreviewExtension = initializePreviewExtension(readInt);
+                    IPreviewExtenderImpl iPreviewExtenderImplInitializePreviewExtension = initializePreviewExtension(i3);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(initializePreviewExtension);
+                    parcel2.writeStrongInterface(iPreviewExtenderImplInitializePreviewExtension);
                     return true;
                 case 7:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IImageCaptureExtenderImpl initializeImageExtension = initializeImageExtension(readInt2);
+                    IImageCaptureExtenderImpl iImageCaptureExtenderImplInitializeImageExtension = initializeImageExtension(i4);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(initializeImageExtension);
+                    parcel2.writeStrongInterface(iImageCaptureExtenderImplInitializeImageExtension);
                     return true;
                 case 8:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IAdvancedExtenderImpl initializeAdvancedExtension = initializeAdvancedExtension(readInt3);
+                    IAdvancedExtenderImpl iAdvancedExtenderImplInitializeAdvancedExtension = initializeAdvancedExtension(i5);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(initializeAdvancedExtension);
+                    parcel2.writeStrongInterface(iAdvancedExtenderImplInitializeAdvancedExtension);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -219,124 +219,124 @@ public interface ICameraExtensionsProxyService extends IInterface {
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
             public boolean registerClient(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
             public void unregisterClient(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
             public boolean advancedExtensionsSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
             public void initializeSession(IInitializeSessionCallback iInitializeSessionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInitializeSessionCallback);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInitializeSessionCallback);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
             public void releaseSession() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
             public IPreviewExtenderImpl initializePreviewExtension(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IPreviewExtenderImpl.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IPreviewExtenderImpl.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
             public IImageCaptureExtenderImpl initializeImageExtension(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImageCaptureExtenderImpl.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImageCaptureExtenderImpl.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
             public IAdvancedExtenderImpl initializeAdvancedExtension(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IAdvancedExtenderImpl.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICameraExtensionsProxyService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IAdvancedExtenderImpl.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

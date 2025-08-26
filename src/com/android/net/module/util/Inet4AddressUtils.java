@@ -41,13 +41,13 @@ public class Inet4AddressUtils {
         return Integer.reverseBytes(prefixLengthToV4NetmaskIntHTH(i));
     }
 
-    public static int netmaskToPrefixLength(Inet4Address inet4Address) {
-        int inet4AddressToIntHTH = inet4AddressToIntHTH(inet4Address);
-        int bitCount = Integer.bitCount(inet4AddressToIntHTH);
-        if (Integer.numberOfTrailingZeros(inet4AddressToIntHTH) == 32 - bitCount) {
-            return bitCount;
+    public static int netmaskToPrefixLength(Inet4Address inet4Address) throws IllegalArgumentException {
+        int iInet4AddressToIntHTH = inet4AddressToIntHTH(inet4Address);
+        int iBitCount = Integer.bitCount(iInet4AddressToIntHTH);
+        if (Integer.numberOfTrailingZeros(iInet4AddressToIntHTH) == 32 - iBitCount) {
+            return iBitCount;
         }
-        throw new IllegalArgumentException("Non-contiguous netmask: " + Integer.toHexString(inet4AddressToIntHTH));
+        throw new IllegalArgumentException("Non-contiguous netmask: " + Integer.toHexString(iInet4AddressToIntHTH));
     }
 
     public static int getImplicitNetmask(Inet4Address inet4Address) {
@@ -73,13 +73,13 @@ public class Inet4AddressUtils {
         if (str == null) {
             return null;
         }
-        String[] split = str.split("\\.");
-        if (split.length == 4) {
+        String[] strArrSplit = str.split("\\.");
+        if (strArrSplit.length == 4) {
             StringBuilder sb = new StringBuilder(16);
             for (int i = 0; i < 4; i++) {
                 try {
-                    if (split[i].length() <= 3) {
-                        sb.append(Integer.parseInt(split[i]));
+                    if (strArrSplit[i].length() <= 3) {
+                        sb.append(Integer.parseInt(strArrSplit[i]));
                         if (i < 3) {
                             sb.append('.');
                         }

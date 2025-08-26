@@ -22,6 +22,7 @@ public final class SoundTheme {
     public static final String Open_theme = "Open_theme";
     public static final String Retro = "Retro";
     public static final String Ringtone = "Ringtone";
+    private static final String SAMSUNG_BRAND_BRIGHTLINE = "Brightline";
     private static final String SAMSUNG_BRAND_GALAXY_BELLS = "Galaxy Bells";
     private static final String SAMSUNG_BRAND_OVER_THE_HORIZON = "Over the Horizon";
     private static final String SAMSUNG_BRAND_OVER_THE_HORIZON_2022_BY_BTS = "Over the Horizon 2022 produced by SUGA of BTS";
@@ -76,7 +77,7 @@ public final class SoundTheme {
         if (TextUtils.isEmpty(brandSoundVersion) || TextUtils.isEmpty(str) || !"3.1.1".equals(brandSoundVersion)) {
             return false;
         }
-        return str.startsWith(SAMSUNG_BRAND_OVER_THE_HORIZON) || TextUtils.equals(str, SAMSUNG_BRAND_THE_VOYAGE) || TextUtils.equals(str, SAMSUNG_BRAND_GALAXY_BELLS) || TextUtils.equals(str, SAMSUNG_BRAND_SPACELINE);
+        return str.startsWith(SAMSUNG_BRAND_OVER_THE_HORIZON) || TextUtils.equals(str, SAMSUNG_BRAND_THE_VOYAGE) || TextUtils.equals(str, SAMSUNG_BRAND_GALAXY_BELLS) || TextUtils.equals(str, SAMSUNG_BRAND_SPACELINE) || TextUtils.equals(str, SAMSUNG_BRAND_BRIGHTLINE);
     }
 
     private static boolean isSepLiteDevice(Context context) {

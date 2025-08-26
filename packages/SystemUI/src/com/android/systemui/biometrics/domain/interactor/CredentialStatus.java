@@ -4,14 +4,11 @@ import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface CredentialStatus {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Fail extends CredentialStatus {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Error implements Fail {
             public final String error;
             public final Integer remainingAttempts;
@@ -34,11 +31,11 @@ public interface CredentialStatus {
 
             public final int hashCode() {
                 String str = this.error;
-                int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+                int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
                 Integer num = this.remainingAttempts;
-                int hashCode2 = (hashCode + (num == null ? 0 : num.hashCode())) * 31;
+                int iHashCode2 = (iHashCode + (num == null ? 0 : num.hashCode())) * 31;
                 String str2 = this.urgentMessage;
-                return hashCode2 + (str2 != null ? str2.hashCode() : 0);
+                return iHashCode2 + (str2 != null ? str2.hashCode() : 0);
             }
 
             public final String toString() {
@@ -61,7 +58,6 @@ public interface CredentialStatus {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Throttled implements Fail {
             public final String error;
 

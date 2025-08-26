@@ -14,7 +14,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DisableFlagsRepositoryImpl$disableFlags$2 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -52,19 +51,19 @@ final class DisableFlagsRepositoryImpl$disableFlags$2 extends SuspendLambda impl
         disableFlagsModel.getClass();
         LogLevel logLevel = LogLevel.INFO;
         final DisableFlagsLogger disableFlagsLogger = disableFlagsRepositoryImpl.disableFlagsLogger;
-        LogMessage obtain = logBuffer.obtain("DisableFlagsModel", logLevel, new Function1() { // from class: com.android.systemui.statusbar.disableflags.shared.model.DisableFlagsModel$$ExternalSyntheticLambda0
+        LogMessage logMessageObtain = logBuffer.obtain("DisableFlagsModel", logLevel, new Function1() { // from class: com.android.systemui.statusbar.disableflags.shared.model.DisableFlagsModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 LogMessage logMessage = (LogMessage) obj2;
                 int i = DisableFlagsModel.$r8$clinit;
-                return DisableFlagsLogger.this.getDisableFlagsString(new DisableFlagsLogger.DisableState(logMessage.getInt1(), logMessage.getInt2()), null);
+                return disableFlagsLogger.getDisableFlagsString(new DisableFlagsLogger.DisableState(logMessage.getInt1(), logMessage.getInt2()), null);
             }
         }, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = disableFlagsModel.disable1;
         logMessageImpl.int2 = disableFlagsModel.disable2;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

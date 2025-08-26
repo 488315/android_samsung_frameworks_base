@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.graphics.Rect;
 import android.os.Debug;
+import android.util.Log;
 import android.view.InsetsFlags;
 import android.view.ViewDebug;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
@@ -15,9 +16,11 @@ import com.android.systemui.battery.BatteryMeterView;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.navigationbar.NavigationModeController;
 import com.android.systemui.navigationbar.store.NavBarStateManager;
+import com.android.systemui.navigationbar.store.NavBarStateManagerImpl;
 import com.android.systemui.navigationbar.store.NavBarStore;
 import com.android.systemui.navigationbar.store.NavBarStoreImpl;
 import com.android.systemui.plugins.DarkIconDispatcher;
+import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.settings.DisplayTracker;
 import com.android.systemui.shared.statusbar.phone.BarTransitions;
 import com.android.systemui.shared.system.QuickStepContract;
@@ -33,13 +36,13 @@ import com.android.systemui.statusbar.policy.BatteryControllerImpl;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.kotlin.JavaAdapterKt;
+import com.android.systemui.wallpaper.WallpaperUtils;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 import kotlin.coroutines.CoroutineContext;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LightBarControllerImpl implements BatteryController.BatteryStateChangeCallback, LightBarController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -67,7 +70,6 @@ public class LightBarControllerImpl implements BatteryController.BatteryStateCha
     public boolean mNavigationLight;
     public int mNavigationMode;
     public final LightBarTransientObserver mObserver;
-    public boolean mQsCustomizing;
     public boolean mQsExpanded;
     public final SamsungLightBarControlHelper mSamsungLightBarControlHelper;
     public final SamsungStatusBarGrayIconHelper mSamsungStatusBarGrayIconHelper;
@@ -79,16 +81,14 @@ public class LightBarControllerImpl implements BatteryController.BatteryStateCha
     public final LightBarControllerImpl$$ExternalSyntheticLambda1 mNavigationModeListener = new NavigationModeController.ModeChangedListener() { // from class: com.android.systemui.statusbar.phone.LightBarControllerImpl$$ExternalSyntheticLambda1
         @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
         public final void onNavigationModeChanged(int i) {
-            LightBarControllerImpl.this.mNavigationMode = i;
+            this.f$0.mNavigationMode = i;
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         LightBarControllerImpl create(int i, CoroutineScope coroutineScope, DarkIconDispatcher darkIconDispatcher, StatusBarModePerDisplayRepository statusBarModePerDisplayRepository);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LegacyFactory implements LightBarController.Factory {
         public final CoroutineScope mApplicationScope;
         public final DarkIconDispatcherStore mDarkIconDispatcherStore;
@@ -103,7 +103,6 @@ public class LightBarControllerImpl implements BatteryController.BatteryStateCha
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LightBarTransientObserver extends SystemBarObserver {
         public final ArrayList mList;
 
@@ -173,13 +172,13 @@ public class LightBarControllerImpl implements BatteryController.BatteryStateCha
         printWriter.println(ViewDebug.flagsToString(InsetsFlags.class, "appearance", this.mAppearance));
         int length = this.mAppearanceRegions.length;
         for (int i = 0; i < length; i++) {
-            boolean isLight = isLight(this.mAppearanceRegions[i].getAppearance(), this.mStatusBarMode, 8);
+            boolean zIsLight = isLight(this.mAppearanceRegions[i].getAppearance(), this.mStatusBarMode, 8);
             printWriter.print(" stack #");
             printWriter.print(i);
             printWriter.print(": ");
             printWriter.print(this.mAppearanceRegions[i].toString());
             printWriter.print(" isLight=");
-            printWriter.println(isLight);
+            printWriter.println(zIsLight);
         }
         printWriter.print(" mNavigationLight=");
         printWriter.println(this.mNavigationLight);
@@ -197,7 +196,7 @@ public class LightBarControllerImpl implements BatteryController.BatteryStateCha
         printWriter.println(this.mForceLightForScrim);
         printWriter.println();
         printWriter.print(" mQsCustomizing=");
-        printWriter.println(this.mQsCustomizing);
+        printWriter.println(false);
         printWriter.print(" mQsExpanded=");
         printWriter.println(this.mQsExpanded);
         printWriter.print(" mBouncerVisible=");
@@ -250,18 +249,56 @@ public class LightBarControllerImpl implements BatteryController.BatteryStateCha
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:64:0x00bd  */
-    /* JADX WARN: Removed duplicated region for block: B:71:0x00c1  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0037  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onNavigationBarAppearanceChanged(int r21, int r22, boolean r23, boolean r24, java.lang.String r25) {
-        /*
-            Method dump skipped, instructions count: 271
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.LightBarControllerImpl.onNavigationBarAppearanceChanged(int, int, boolean, boolean, java.lang.String):void");
+    public final void onNavigationBarAppearanceChanged(int i, int i2, boolean z, boolean z2, String str) {
+        if (((this.mAppearance ^ i) & 16) != 0 || z) {
+            boolean z3 = BasicRune.NAVBAR_LIGHTBAR;
+            NavBarStateManager navBarStateManager = this.mNavBarStateManager;
+            boolean z4 = false;
+            if (z3) {
+                NavBarStateManagerImpl navBarStateManagerImpl = (NavBarStateManagerImpl) navBarStateManager;
+                int i3 = navBarStateManagerImpl.states.transitionMode;
+                boolean z5 = (i3 == 4 || i3 == 3 || (i3 == 8 && !navBarStateManagerImpl.isNavigationBarUseThemeDefault())) && !navBarStateManagerImpl.states.darkMode;
+                boolean z6 = this.mNavigationLight;
+                this.mHasLightNavigationBar = isLight(i, i2, 16) || (z3 && z5);
+                boolean z7 = this.mDirectReplying && this.mNavbarColorManagedByIme;
+                boolean z8 = this.mForceDarkForScrim && !z7;
+                boolean zIsWhiteKeyguardWallpaper = this.mForceLightForScrim && !z7;
+                boolean z9 = !(!this.mQsExpanded || this.mBouncerVisible || z3) || this.mGlobalActionsVisible;
+                if (z3 && ((StatusBarStateController) Dependency.sDependency.getDependencyInner(StatusBarStateController.class)).getState() != 0) {
+                    zIsWhiteKeyguardWallpaper &= WallpaperUtils.isWhiteKeyguardWallpaper("bottom");
+                }
+                boolean z10 = ((this.mHasLightNavigationBar && !z8) || zIsWhiteKeyguardWallpaper) && !z9;
+                this.mNavigationLight = z10;
+                if (z3 && ((NavBarStateManagerImpl) navBarStateManager).states.regionSamplingEnabled) {
+                    z4 = true;
+                }
+                if (z10 != z6 && z3 && !z4) {
+                    updateNavigation();
+                    String str2 = this.mNavigationLight ? "BLACK button" : "WHITE button";
+                    boolean zIsLight = isLight(i, i2, 16);
+                    boolean z11 = this.mDirectReplying;
+                    boolean z12 = this.mNavbarColorManagedByIme;
+                    boolean z13 = this.mForceDarkForScrim;
+                    boolean z14 = this.mForceLightForScrim;
+                    boolean z15 = this.mQsExpanded;
+                    SamsungLightBarControlHelper samsungLightBarControlHelper = this.mSamsungLightBarControlHelper;
+                    samsungLightBarControlHelper.getClass();
+                    NavigationBarModel navigationBarModel = new NavigationBarModel(str2, z5, zIsLight, z11, z12, z13, z14, false, z15, str);
+                    NavigationBarModel navigationBarModel2 = samsungLightBarControlHelper.navigationBarModel;
+                    if (navigationBarModel2 == null || !navigationBarModel2.equals(navigationBarModel)) {
+                        samsungLightBarControlHelper.navigationBarModel = navigationBarModel;
+                        Log.d("SamsungLightBarControlHelper", "updateNavigationBar " + navigationBarModel);
+                    }
+                }
+            }
+        }
+        this.mAppearance = i;
+        this.mNavigationBarMode = i2;
+        this.mNavbarColorManagedByIme = z2;
     }
 
     @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
@@ -365,15 +402,15 @@ public class LightBarControllerImpl implements BatteryController.BatteryStateCha
             batteryMeterView.mIsGrayColor = false;
             batteryMeterView.mSamsungDrawable.shouldShowGrayIcon = false;
         }
-        boolean isEmpty = arrayList.isEmpty();
+        boolean zIsEmpty = arrayList.isEmpty();
         DarkIconDispatcherImpl darkIconDispatcherImpl = this.mStatusBarIconController;
-        if (isEmpty) {
+        if (zIsEmpty) {
             if (length == 0) {
                 boolean z = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).mIsDreaming;
-                boolean isKeyguardVisible = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isKeyguardVisible();
+                boolean zIsKeyguardVisible = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isKeyguardVisible();
                 boolean z2 = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).mGoingToSleep;
-                if (z || isKeyguardVisible || z2) {
-                    ActionBarContextView$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("SKIP updateStatus (white icon) dreaming:", ", keyguardVisible:", ", goingToSleep:", z, isKeyguardVisible), z2, "LightBarController");
+                if (z || zIsKeyguardVisible || z2) {
+                    ActionBarContextView$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("SKIP updateStatus (white icon) dreaming:", ", keyguardVisible:", ", goingToSleep:", z, zIsKeyguardVisible), z2, "LightBarController");
                     return;
                 }
             }

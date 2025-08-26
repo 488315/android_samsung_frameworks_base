@@ -86,7 +86,7 @@ public class SendChannelRouter extends ChannelRouterBase {
             this.sendOp = new Consumer() { // from class: com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    SendChannelRouter.this.evaluate((MediaBuffer) obj);
+                    this.f$0.evaluate((MediaBuffer) obj);
                 }
             };
             return;
@@ -95,21 +95,21 @@ public class SendChannelRouter extends ChannelRouterBase {
             this.sendOp = new Consumer() { // from class: com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    SendChannelRouter.this.broadcast((MediaBuffer) obj);
+                    this.f$0.broadcast((MediaBuffer) obj);
                 }
             };
         } else if (this.sendType == Type.ANY) {
             this.sendOp = new Consumer() { // from class: com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    SendChannelRouter.this.sendAny((MediaBuffer) obj);
+                    this.f$0.sendAny((MediaBuffer) obj);
                 }
             };
         } else {
             this.sendOp = new Consumer() { // from class: com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheticLambda3
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    SendChannelRouter.this.sendAll((MediaBuffer) obj);
+                    this.f$0.sendAll((MediaBuffer) obj);
                 }
             };
         }
@@ -120,7 +120,7 @@ public class SendChannelRouter extends ChannelRouterBase {
         this.channels.forEach(new Consumer() { // from class: com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheticLambda4
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((BufferChannel) obj).send(MediaBuffer.this.asRef());
+                ((BufferChannel) obj).send(mediaBuffer.asRef());
             }
         });
         return !this.channels.isEmpty();
@@ -131,7 +131,7 @@ public class SendChannelRouter extends ChannelRouterBase {
         return this.evChannelMap.entrySet().stream().anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheticLambda7
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return SendChannelRouter.lambda$evaluate$4(MediaBuffer.this, (Map.Entry) obj);
+                return SendChannelRouter.lambda$evaluate$4(mediaBuffer, (Map.Entry) obj);
             }
         });
     }
@@ -140,7 +140,7 @@ public class SendChannelRouter extends ChannelRouterBase {
         Evaluator evaluator = (Evaluator) entry.getKey();
         BufferChannel bufferChannel = (BufferChannel) entry.getValue();
         boolean z = mediaBuffer instanceof MediaBufferGroup;
-        MediaBufferReader of = MediaBufferReader.of(z ? mediaBuffer.stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheticLambda5
+        MediaBufferReader mediaBufferReaderOf = MediaBufferReader.of(z ? mediaBuffer.stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheticLambda5
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return SendChannelRouter.lambda$evaluate$2((MediaBuffer) obj);
@@ -148,17 +148,15 @@ public class SendChannelRouter extends ChannelRouterBase {
         }).findFirst().orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheticLambda6
             @Override // java.util.function.Supplier
             public final Object get() {
-                MediaBuffer mediaBuffer2;
-                mediaBuffer2 = MediaBuffer.this.asList().get(0);
-                return mediaBuffer2;
+                return mediaBuffer.asList().get(0);
             }
         }) : mediaBuffer, evaluator.getValueType());
-        if (!evaluator.evaluate(of.get())) {
+        if (!evaluator.evaluate(mediaBufferReaderOf.get())) {
             return false;
         }
         if (z && mediaBuffer.containFlags(2)) {
             MediaBuffer primaryBuffer = ((MediaBufferGroup) mediaBuffer).getPrimaryBuffer();
-            primaryBuffer.setExtra("evaluate-value", of.get());
+            primaryBuffer.setExtra("evaluate-value", mediaBufferReaderOf.get());
             primaryBuffer.addExtra(mediaBuffer.getExtra());
             mediaBuffer = primaryBuffer;
         }

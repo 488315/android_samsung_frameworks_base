@@ -4,7 +4,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewParent;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NestedScrollingChildHelper {
     public boolean mIsNestedScrollingEnabled;
@@ -166,7 +165,7 @@ public class NestedScrollingChildHelper {
     }
 
     public final boolean startNestedScroll(int i, int i2) {
-        boolean onStartNestedScroll;
+        boolean zOnStartNestedScroll;
         if (!hasNestedScrollingParent(i2)) {
             if (this.mIsNestedScrollingEnabled) {
                 View view = this.mView;
@@ -174,18 +173,17 @@ public class NestedScrollingChildHelper {
                     View view2 = this.mView;
                     boolean z = parent instanceof NestedScrollingParent2;
                     if (z) {
-                        onStartNestedScroll = ((NestedScrollingParent2) parent).onStartNestedScroll(view, view2, i, i2);
-                    } else {
-                        if (i2 == 0) {
-                            try {
-                                onStartNestedScroll = parent.onStartNestedScroll(view, view2, i);
-                            } catch (AbstractMethodError e) {
-                                Log.e("ViewParentCompat", "ViewParent " + parent + " does not implement interface method onStartNestedScroll", e);
-                            }
+                        zOnStartNestedScroll = ((NestedScrollingParent2) parent).onStartNestedScroll(view, view2, i, i2);
+                    } else if (i2 == 0) {
+                        try {
+                            zOnStartNestedScroll = parent.onStartNestedScroll(view, view2, i);
+                        } catch (AbstractMethodError e) {
+                            Log.e("ViewParentCompat", "ViewParent " + parent + " does not implement interface method onStartNestedScroll", e);
                         }
-                        onStartNestedScroll = false;
+                    } else {
+                        zOnStartNestedScroll = false;
                     }
-                    if (onStartNestedScroll) {
+                    if (zOnStartNestedScroll) {
                         if (i2 == 0) {
                             this.mNestedScrollingParentTouch = parent;
                         } else if (i2 == 1) {

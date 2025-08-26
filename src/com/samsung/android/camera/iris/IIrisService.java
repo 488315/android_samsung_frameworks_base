@@ -212,9 +212,9 @@ public interface IIrisService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIrisService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIrisService)) {
-                return (IIrisService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIrisService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIrisService)) {
+                return (IIrisService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -288,225 +288,225 @@ public interface IIrisService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    int readInt5 = parcel.readInt();
-                    IIrisServiceReceiver asInterface = IIrisServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt6 = parcel.readInt();
-                    String readString = parcel.readString();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    long j = parcel.readLong();
+                    int i7 = parcel.readInt();
+                    IIrisServiceReceiver iIrisServiceReceiverAsInterface = IIrisServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    int i8 = parcel.readInt();
+                    String string = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    byte[] createByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    authenticate(readStrongBinder, readStrongBinder2, readInt, readInt2, readInt3, readInt4, readLong, readInt5, asInterface, readInt6, readString, bundle, createByteArray);
+                    authenticate(strongBinder, strongBinder2, i3, i4, i5, i6, j, i7, iIrisServiceReceiverAsInterface, i8, string, bundle, bArrCreateByteArray);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
-                    long readLong2 = parcel.readLong();
-                    int readInt11 = parcel.readInt();
-                    IIrisServiceReceiver asInterface2 = IIrisServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt12 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    long j2 = parcel.readLong();
+                    int i13 = parcel.readInt();
+                    IIrisServiceReceiver iIrisServiceReceiverAsInterface2 = IIrisServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    int i14 = parcel.readInt();
+                    String string2 = parcel.readString();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    prompt_authenticate(readStrongBinder3, readStrongBinder4, readInt7, readInt8, readInt9, readInt10, readLong2, readInt11, asInterface2, readInt12, readString2, bundle2, createByteArray2);
+                    prompt_authenticate(strongBinder3, strongBinder4, i9, i10, i11, i12, j2, i13, iIrisServiceReceiverAsInterface2, i14, string2, bundle2, bArrCreateByteArray2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
-                    String readString3 = parcel.readString();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    cancelAuthentication(readStrongBinder5, readString3);
+                    cancelAuthentication(strongBinder5, string3);
                     parcel2.writeNoException();
                     break;
                 case 4:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    byte[] createByteArray3 = parcel.createByteArray();
-                    int readInt17 = parcel.readInt();
-                    IIrisServiceReceiver asInterface3 = IIrisServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt18 = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                    int i19 = parcel.readInt();
+                    IIrisServiceReceiver iIrisServiceReceiverAsInterface3 = IIrisServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    int i20 = parcel.readInt();
+                    String string4 = parcel.readString();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    enroll(readStrongBinder6, readStrongBinder7, readInt13, readInt14, readInt15, readInt16, createByteArray3, readInt17, asInterface3, readInt18, readString4, bundle3);
+                    enroll(strongBinder6, strongBinder7, i15, i16, i17, i18, bArrCreateByteArray3, i19, iIrisServiceReceiverAsInterface3, i20, string4, bundle3);
                     parcel2.writeNoException();
                     break;
                 case 5:
-                    IBinder readStrongBinder8 = parcel.readStrongBinder();
+                    IBinder strongBinder8 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    cancelEnrollment(readStrongBinder8);
+                    cancelEnrollment(strongBinder8);
                     parcel2.writeNoException();
                     break;
                 case 6:
-                    IBinder readStrongBinder9 = parcel.readStrongBinder();
-                    int readInt19 = parcel.readInt();
-                    int readInt20 = parcel.readInt();
-                    int readInt21 = parcel.readInt();
-                    IIrisServiceReceiver asInterface4 = IIrisServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder9 = parcel.readStrongBinder();
+                    int i21 = parcel.readInt();
+                    int i22 = parcel.readInt();
+                    int i23 = parcel.readInt();
+                    IIrisServiceReceiver iIrisServiceReceiverAsInterface4 = IIrisServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    remove(readStrongBinder9, readInt19, readInt20, readInt21, asInterface4);
+                    remove(strongBinder9, i21, i22, i23, iIrisServiceReceiverAsInterface4);
                     parcel2.writeNoException();
                     break;
                 case 7:
-                    int readInt22 = parcel.readInt();
-                    int readInt23 = parcel.readInt();
-                    String readString5 = parcel.readString();
+                    int i24 = parcel.readInt();
+                    int i25 = parcel.readInt();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    rename(readInt22, readInt23, readString5);
+                    rename(i24, i25, string5);
                     parcel2.writeNoException();
                     break;
                 case 8:
-                    int readInt24 = parcel.readInt();
-                    String readString6 = parcel.readString();
+                    int i26 = parcel.readInt();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<Iris> enrolledIrises = getEnrolledIrises(readInt24, readString6);
+                    List<Iris> enrolledIrises = getEnrolledIrises(i26, string6);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(enrolledIrises, 1);
                     break;
                 case 9:
-                    long readLong3 = parcel.readLong();
-                    String readString7 = parcel.readString();
+                    long j3 = parcel.readLong();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isHardwareDetected = isHardwareDetected(readLong3, readString7);
+                    boolean zIsHardwareDetected = isHardwareDetected(j3, string7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHardwareDetected);
+                    parcel2.writeBoolean(zIsHardwareDetected);
                     break;
                 case 10:
-                    IBinder readStrongBinder10 = parcel.readStrongBinder();
+                    IBinder strongBinder10 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    long preEnroll = preEnroll(readStrongBinder10);
+                    long jPreEnroll = preEnroll(strongBinder10);
                     parcel2.writeNoException();
-                    parcel2.writeLong(preEnroll);
+                    parcel2.writeLong(jPreEnroll);
                     break;
                 case 11:
-                    IBinder readStrongBinder11 = parcel.readStrongBinder();
+                    IBinder strongBinder11 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    int postEnroll = postEnroll(readStrongBinder11);
+                    int iPostEnroll = postEnroll(strongBinder11);
                     parcel2.writeNoException();
-                    parcel2.writeInt(postEnroll);
+                    parcel2.writeInt(iPostEnroll);
                     break;
                 case 12:
-                    int readInt25 = parcel.readInt();
-                    String readString8 = parcel.readString();
+                    int i27 = parcel.readInt();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasEnrolledIrises = hasEnrolledIrises(readInt25, readString8);
+                    boolean zHasEnrolledIrises = hasEnrolledIrises(i27, string8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasEnrolledIrises);
+                    parcel2.writeBoolean(zHasEnrolledIrises);
                     break;
                 case 13:
-                    int readInt26 = parcel.readInt();
-                    String readString9 = parcel.readString();
+                    int i28 = parcel.readInt();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean hasDisabledIris = hasDisabledIris(readInt26, readString9);
+                    boolean zHasDisabledIris = hasDisabledIris(i28, string9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasDisabledIris);
+                    parcel2.writeBoolean(zHasDisabledIris);
                     break;
                 case 14:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long authenticatorId = getAuthenticatorId(readString10);
+                    long authenticatorId = getAuthenticatorId(string10);
                     parcel2.writeNoException();
                     parcel2.writeLong(authenticatorId);
                     break;
                 case 15:
-                    IBinder readStrongBinder12 = parcel.readStrongBinder();
-                    int readInt27 = parcel.readInt();
-                    byte[] createByteArray4 = parcel.createByteArray();
-                    int readInt28 = parcel.readInt();
-                    if (readInt28 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt28);
+                    IBinder strongBinder12 = parcel.readStrongBinder();
+                    int i29 = parcel.readInt();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
+                    int i30 = parcel.readInt();
+                    if (i30 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i30);
                     }
-                    byte[] bArr = readInt28 < 0 ? null : new byte[readInt28];
-                    int readInt29 = parcel.readInt();
-                    int readInt30 = parcel.readInt();
-                    IIrisServiceReceiver asInterface5 = IIrisServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    byte[] bArr = i30 < 0 ? null : new byte[i30];
+                    int i31 = parcel.readInt();
+                    int i32 = parcel.readInt();
+                    IIrisServiceReceiver iIrisServiceReceiverAsInterface5 = IIrisServiceReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int request = request(readStrongBinder12, readInt27, createByteArray4, bArr, readInt29, readInt30, asInterface5);
+                    int iRequest = request(strongBinder12, i29, bArrCreateByteArray4, bArr, i31, i32, iIrisServiceReceiverAsInterface5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(request);
+                    parcel2.writeInt(iRequest);
                     parcel2.writeByteArray(bArr);
                     break;
                 case 16:
-                    byte[] createByteArray5 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    resetTimeout(createByteArray5);
+                    resetTimeout(bArrCreateByteArray5);
                     parcel2.writeNoException();
                     break;
                 case 17:
-                    IIrisServiceLockoutResetCallback asInterface6 = IIrisServiceLockoutResetCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IIrisServiceLockoutResetCallback iIrisServiceLockoutResetCallbackAsInterface = IIrisServiceLockoutResetCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addLockoutResetCallback(asInterface6);
+                    addLockoutResetCallback(iIrisServiceLockoutResetCallbackAsInterface);
                     parcel2.writeNoException();
                     break;
                 case 18:
-                    int readInt31 = parcel.readInt();
-                    String readString11 = parcel.readString();
-                    int readInt32 = parcel.readInt();
+                    int i33 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setIrisViewType(readInt31, readString11, readInt32);
+                    setIrisViewType(i33, string11, i34);
                     parcel2.writeNoException();
                     break;
                 case 19:
-                    int readInt33 = parcel.readInt();
-                    String readString12 = parcel.readString();
-                    int readInt34 = parcel.readInt();
+                    int i35 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    enableIRImageCallback(readInt33, readString12, readInt34);
+                    enableIRImageCallback(i35, string12, i36);
                     parcel2.writeNoException();
                     break;
                 case 20:
-                    int readInt35 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setActiveUser(readInt35);
+                    setActiveUser(i37);
                     parcel2.writeNoException();
                     break;
                 case 21:
-                    boolean readBoolean = parcel.readBoolean();
-                    IBinder readStrongBinder13 = parcel.readStrongBinder();
-                    long readLong4 = parcel.readLong();
-                    int readInt36 = parcel.readInt();
-                    IBiometricSensorReceiver asInterface7 = IBiometricSensorReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    String readString13 = parcel.readString();
-                    int readInt37 = parcel.readInt();
-                    int readInt38 = parcel.readInt();
-                    int readInt39 = parcel.readInt();
-                    int readInt40 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    IBinder strongBinder13 = parcel.readStrongBinder();
+                    long j4 = parcel.readLong();
+                    int i38 = parcel.readInt();
+                    IBiometricSensorReceiver iBiometricSensorReceiverAsInterface = IBiometricSensorReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    String string13 = parcel.readString();
+                    int i39 = parcel.readInt();
+                    int i40 = parcel.readInt();
+                    int i41 = parcel.readInt();
+                    int i42 = parcel.readInt();
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    prepareForAuthentication(readBoolean, readStrongBinder13, readLong4, readInt36, asInterface7, readString13, readInt37, readInt38, readInt39, readInt40, bundle4);
+                    prepareForAuthentication(z, strongBinder13, j4, i38, iBiometricSensorReceiverAsInterface, string13, i39, i40, i41, i42, bundle4);
                     parcel2.writeNoException();
                     break;
                 case 22:
-                    int readInt41 = parcel.readInt();
+                    int i43 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    startPreparedClient(readInt41);
+                    startPreparedClient(i43);
                     parcel2.writeNoException();
                     break;
                 case 23:
-                    IBinder readStrongBinder14 = parcel.readStrongBinder();
-                    String readString14 = parcel.readString();
-                    int readInt42 = parcel.readInt();
-                    int readInt43 = parcel.readInt();
-                    int readInt44 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    IBinder strongBinder14 = parcel.readStrongBinder();
+                    String string14 = parcel.readString();
+                    int i44 = parcel.readInt();
+                    int i45 = parcel.readInt();
+                    int i46 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    cancelAuthenticationFromService(readStrongBinder14, readString14, readInt42, readInt43, readInt44, readBoolean2);
+                    cancelAuthenticationFromService(strongBinder14, string14, i44, i45, i46, z2);
                     parcel2.writeNoException();
                     break;
                 default:
@@ -533,427 +533,427 @@ public interface IIrisService extends IInterface {
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void authenticate(IBinder iBinder, IBinder iBinder2, int i, int i2, int i3, int i4, long j, int i5, IIrisServiceReceiver iIrisServiceReceiver, int i6, String str, Bundle bundle, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongBinder(iBinder2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i5);
-                    obtain.writeStrongInterface(iIrisServiceReceiver);
-                    obtain.writeInt(i6);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeStrongInterface(iIrisServiceReceiver);
+                    parcelObtain.writeInt(i6);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void prompt_authenticate(IBinder iBinder, IBinder iBinder2, int i, int i2, int i3, int i4, long j, int i5, IIrisServiceReceiver iIrisServiceReceiver, int i6, String str, Bundle bundle, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongBinder(iBinder2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i5);
-                    obtain.writeStrongInterface(iIrisServiceReceiver);
-                    obtain.writeInt(i6);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeStrongInterface(iIrisServiceReceiver);
+                    parcelObtain.writeInt(i6);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void cancelAuthentication(IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void enroll(IBinder iBinder, IBinder iBinder2, int i, int i2, int i3, int i4, byte[] bArr, int i5, IIrisServiceReceiver iIrisServiceReceiver, int i6, String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongBinder(iBinder2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i5);
-                    obtain.writeStrongInterface(iIrisServiceReceiver);
-                    obtain.writeInt(i6);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeStrongInterface(iIrisServiceReceiver);
+                    parcelObtain.writeInt(i6);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void cancelEnrollment(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void remove(IBinder iBinder, int i, int i2, int i3, IIrisServiceReceiver iIrisServiceReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeStrongInterface(iIrisServiceReceiver);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeStrongInterface(iIrisServiceReceiver);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void rename(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public List<Iris> getEnrolledIrises(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(Iris.CREATOR);
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(Iris.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public boolean isHardwareDetected(long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public long preEnroll(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public int postEnroll(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public boolean hasEnrolledIrises(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public boolean hasDisabledIris(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public long getAuthenticatorId(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public int request(IBinder iBinder, int i, byte[] bArr, byte[] bArr2, int i2, int i3, IIrisServiceReceiver iIrisServiceReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(bArr2.length);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeStrongInterface(iIrisServiceReceiver);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readByteArray(bArr2);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(bArr2.length);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeStrongInterface(iIrisServiceReceiver);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i4 = parcelObtain2.readInt();
+                    parcelObtain2.readByteArray(bArr2);
+                    return i4;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void resetTimeout(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void addLockoutResetCallback(IIrisServiceLockoutResetCallback iIrisServiceLockoutResetCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIrisServiceLockoutResetCallback);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIrisServiceLockoutResetCallback);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void setIrisViewType(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void enableIRImageCallback(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void setActiveUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void prepareForAuthentication(boolean z, IBinder iBinder, long j, int i, IBiometricSensorReceiver iBiometricSensorReceiver, String str, int i2, int i3, int i4, int i5, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iBiometricSensorReceiver);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iBiometricSensorReceiver);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void startPreparedClient(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
             public void cancelAuthenticationFromService(IBinder iBinder, String str, int i, int i2, int i3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIrisService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -53,9 +53,9 @@ public interface ISyncServiceAdapter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISyncServiceAdapter)) {
-                return (ISyncServiceAdapter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISyncServiceAdapter)) {
+                return (ISyncServiceAdapter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,14 +85,14 @@ public interface ISyncServiceAdapter extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ISyncContext asInterface = ISyncContext.Stub.asInterface(parcel.readStrongBinder());
+                ISyncContext iSyncContextAsInterface = ISyncContext.Stub.asInterface(parcel.readStrongBinder());
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                startSync(asInterface, bundle);
+                startSync(iSyncContextAsInterface, bundle);
             } else if (i == 2) {
-                ISyncContext asInterface2 = ISyncContext.Stub.asInterface(parcel.readStrongBinder());
+                ISyncContext iSyncContextAsInterface2 = ISyncContext.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                cancelSync(asInterface2);
+                cancelSync(iSyncContextAsInterface2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -117,26 +117,26 @@ public interface ISyncServiceAdapter extends IInterface {
 
             @Override // android.content.ISyncServiceAdapter
             public void startSync(ISyncContext iSyncContext, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSyncContext);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSyncContext);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.ISyncServiceAdapter
             public void cancelSync(ISyncContext iSyncContext) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSyncContext);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSyncContext);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

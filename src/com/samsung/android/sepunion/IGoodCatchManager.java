@@ -61,9 +61,9 @@ public interface IGoodCatchManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGoodCatchManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGoodCatchManager)) {
-                return (IGoodCatchManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGoodCatchManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGoodCatchManager)) {
+                return (IGoodCatchManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,17 +96,17 @@ public interface IGoodCatchManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String[] createStringArray = parcel.createStringArray();
-                IGoodCatchDispatcher asInterface = IGoodCatchDispatcher.Stub.asInterface(parcel.readStrongBinder());
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                String string = parcel.readString();
+                String[] strArrCreateStringArray = parcel.createStringArray();
+                IGoodCatchDispatcher iGoodCatchDispatcherAsInterface = IGoodCatchDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                registerListener(readString, createStringArray, asInterface, readStrongBinder);
+                registerListener(string, strArrCreateStringArray, iGoodCatchDispatcherAsInterface, strongBinder);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                String[] createStringArray2 = parcel.createStringArray();
+                String[] strArrCreateStringArray2 = parcel.createStringArray();
                 parcel.enforceNoDataAvail();
-                update(createStringArray2);
+                update(strArrCreateStringArray2);
                 parcel2.writeNoException();
             } else if (i == 3) {
                 List<String> selectedSettingKey = getSelectedSettingKey();
@@ -136,49 +136,49 @@ public interface IGoodCatchManager extends IInterface {
 
             @Override // com.samsung.android.sepunion.IGoodCatchManager
             public void registerListener(String str, String[] strArr, IGoodCatchDispatcher iGoodCatchDispatcher, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGoodCatchManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStrongInterface(iGoodCatchDispatcher);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IGoodCatchManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStrongInterface(iGoodCatchDispatcher);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IGoodCatchManager
             public void update(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGoodCatchManager.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IGoodCatchManager.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IGoodCatchManager
             public List<String> getSelectedSettingKey() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGoodCatchManager.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IGoodCatchManager.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

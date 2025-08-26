@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SeslExpansionButton extends ImageView {
     public boolean mAutoDisappear;
@@ -20,14 +19,14 @@ public class SeslExpansionButton extends ImageView {
 
     @Override // android.widget.ImageView, android.view.View
     public final int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 2);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 2);
         if (this.mExpanded) {
-            ImageView.mergeDrawableStates(onCreateDrawableState, new int[]{R.attr.state_expansion_button_expanded});
+            ImageView.mergeDrawableStates(iArrOnCreateDrawableState, new int[]{R.attr.state_expansion_button_expanded});
         }
         if (this.mFloated) {
-            ImageView.mergeDrawableStates(onCreateDrawableState, new int[]{R.attr.state_expansion_button_floated});
+            ImageView.mergeDrawableStates(iArrOnCreateDrawableState, new int[]{R.attr.state_expansion_button_floated});
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     @Override // android.widget.ImageView, android.view.View

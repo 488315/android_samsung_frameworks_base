@@ -9,13 +9,11 @@ import androidx.compose.runtime.snapshots.StateRecord;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SnapshotMutableStateImpl<T> extends StateObjectImpl implements SnapshotMutableState<T> {
     public StateStateRecord next;
     public final SnapshotMutationPolicy policy;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class StateStateRecord<T> extends StateRecord {
         public Object value;
 
@@ -42,9 +40,9 @@ public class SnapshotMutableStateImpl<T> extends StateObjectImpl implements Snap
 
     public SnapshotMutableStateImpl(T t, SnapshotMutationPolicy<T> snapshotMutationPolicy) {
         this.policy = snapshotMutationPolicy;
-        Snapshot currentSnapshot = SnapshotKt.currentSnapshot();
-        StateStateRecord stateStateRecord = new StateStateRecord(currentSnapshot.getSnapshotId(), t);
-        if (!(currentSnapshot instanceof GlobalSnapshot)) {
+        Snapshot snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+        StateStateRecord stateStateRecord = new StateStateRecord(snapshotCurrentSnapshot.getSnapshotId(), t);
+        if (!(snapshotCurrentSnapshot instanceof GlobalSnapshot)) {
             stateStateRecord.next = new StateStateRecord(1, t);
         }
         this.next = stateStateRecord;
@@ -57,7 +55,7 @@ public class SnapshotMutableStateImpl<T> extends StateObjectImpl implements Snap
 
     @Override // androidx.compose.runtime.MutableState
     public final Function1 component2() {
-        return new Function1(this) { // from class: androidx.compose.runtime.SnapshotMutableStateImpl$component2$1
+        return new Function1(this) { // from class: androidx.compose.runtime.SnapshotMutableStateImpl.component2.1
             final /* synthetic */ SnapshotMutableStateImpl<Object> this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -68,7 +66,7 @@ public class SnapshotMutableStateImpl<T> extends StateObjectImpl implements Snap
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 this.this$0.setValue(obj);
                 return Unit.INSTANCE;
             }
@@ -105,7 +103,7 @@ public class SnapshotMutableStateImpl<T> extends StateObjectImpl implements Snap
 
     @Override // androidx.compose.runtime.MutableState
     public final void setValue(Object obj) {
-        Snapshot currentSnapshot;
+        Snapshot snapshotCurrentSnapshot;
         StateStateRecord stateStateRecord = (StateStateRecord) SnapshotKt.current(this.next);
         if (this.policy.equivalent(stateStateRecord.value, obj)) {
             return;
@@ -113,11 +111,11 @@ public class SnapshotMutableStateImpl<T> extends StateObjectImpl implements Snap
         StateStateRecord stateStateRecord2 = this.next;
         synchronized (SnapshotKt.lock) {
             Snapshot.Companion.getClass();
-            currentSnapshot = SnapshotKt.currentSnapshot();
-            ((StateStateRecord) SnapshotKt.overwritableRecord(stateStateRecord2, this, currentSnapshot, stateStateRecord)).value = obj;
+            snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+            ((StateStateRecord) SnapshotKt.overwritableRecord(stateStateRecord2, this, snapshotCurrentSnapshot, stateStateRecord)).value = obj;
             Unit unit = Unit.INSTANCE;
         }
-        SnapshotKt.notifyWrite(currentSnapshot, this);
+        SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
     }
 
     public final String toString() {

@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DataStoreImpl$readDataAndUpdateCache$4 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $cachedVersion;
@@ -45,10 +44,10 @@ final class DataStoreImpl$readDataAndUpdateCache$4 extends SuspendLambda impleme
     /* JADX WARN: Type inference failed for: r1v6 */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        int i;
+        int iIntValue;
         Throwable th;
         boolean z;
-        State state;
+        State readException;
         boolean z2;
         boolean z3;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -57,7 +56,7 @@ final class DataStoreImpl$readDataAndUpdateCache$4 extends SuspendLambda impleme
         } catch (Throwable th2) {
             if (z4 != 0) {
                 DataStoreImpl dataStoreImpl = this.this$0;
-                int i2 = DataStoreImpl.$r8$clinit;
+                int i = DataStoreImpl.$r8$clinit;
                 InterProcessCoordinator coordinator = dataStoreImpl.getCoordinator();
                 this.L$0 = th2;
                 this.Z$0 = z4;
@@ -69,7 +68,7 @@ final class DataStoreImpl$readDataAndUpdateCache$4 extends SuspendLambda impleme
                     z = z4 ? 1 : 0;
                 }
             } else {
-                i = this.$cachedVersion;
+                iIntValue = this.$cachedVersion;
                 th = th2;
                 z3 = z4;
             }
@@ -93,18 +92,18 @@ final class DataStoreImpl$readDataAndUpdateCache$4 extends SuspendLambda impleme
                 z = this.Z$0;
                 th = (Throwable) this.L$0;
                 ResultKt.throwOnFailure(obj);
-                i = ((Number) obj).intValue();
+                iIntValue = ((Number) obj).intValue();
                 z3 = z;
-                state = new ReadException(th, i);
+                readException = new ReadException(th, iIntValue);
                 z2 = z3;
-                return new Pair(state, Boolean.valueOf(z2));
+                return new Pair(readException, Boolean.valueOf(z2));
             }
             boolean z6 = this.Z$0;
             ResultKt.throwOnFailure(obj);
             z4 = z6;
         }
-        state = (State) obj;
+        readException = (State) obj;
         z2 = z4;
-        return new Pair(state, Boolean.valueOf(z2));
+        return new Pair(readException, Boolean.valueOf(z2));
     }
 }

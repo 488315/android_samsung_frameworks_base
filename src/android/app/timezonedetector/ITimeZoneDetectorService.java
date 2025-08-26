@@ -110,9 +110,9 @@ public interface ITimeZoneDetectorService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITimeZoneDetectorService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITimeZoneDetectorService)) {
-                return (ITimeZoneDetectorService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITimeZoneDetectorService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITimeZoneDetectorService)) {
+                return (ITimeZoneDetectorService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -163,23 +163,23 @@ public interface ITimeZoneDetectorService extends IInterface {
                     parcel2.writeTypedObject(capabilitiesAndConfig, 1);
                     return true;
                 case 2:
-                    ITimeZoneDetectorListener asInterface = ITimeZoneDetectorListener.Stub.asInterface(parcel.readStrongBinder());
+                    ITimeZoneDetectorListener iTimeZoneDetectorListenerAsInterface = ITimeZoneDetectorListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addListener(asInterface);
+                    addListener(iTimeZoneDetectorListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    ITimeZoneDetectorListener asInterface2 = ITimeZoneDetectorListener.Stub.asInterface(parcel.readStrongBinder());
+                    ITimeZoneDetectorListener iTimeZoneDetectorListenerAsInterface2 = ITimeZoneDetectorListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeListener(asInterface2);
+                    removeListener(iTimeZoneDetectorListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
                     TimeZoneConfiguration timeZoneConfiguration = (TimeZoneConfiguration) parcel.readTypedObject(TimeZoneConfiguration.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean updateConfiguration = updateConfiguration(timeZoneConfiguration);
+                    boolean zUpdateConfiguration = updateConfiguration(timeZoneConfiguration);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(updateConfiguration);
+                    parcel2.writeBoolean(zUpdateConfiguration);
                     return true;
                 case 5:
                     TimeZoneState timeZoneState = getTimeZoneState();
@@ -187,11 +187,11 @@ public interface ITimeZoneDetectorService extends IInterface {
                     parcel2.writeTypedObject(timeZoneState, 1);
                     return true;
                 case 6:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean confirmTimeZone = confirmTimeZone(readString);
+                    boolean zConfirmTimeZone = confirmTimeZone(string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(confirmTimeZone);
+                    parcel2.writeBoolean(zConfirmTimeZone);
                     return true;
                 case 7:
                     ManualTimeZoneSuggestion manualTimeZoneSuggestion = (ManualTimeZoneSuggestion) parcel.readTypedObject(ManualTimeZoneSuggestion.CREATOR);
@@ -203,9 +203,9 @@ public interface ITimeZoneDetectorService extends IInterface {
                 case 8:
                     ManualTimeZoneSuggestion manualTimeZoneSuggestion2 = (ManualTimeZoneSuggestion) parcel.readTypedObject(ManualTimeZoneSuggestion.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean suggestManualTimeZone = suggestManualTimeZone(manualTimeZoneSuggestion2);
+                    boolean zSuggestManualTimeZone = suggestManualTimeZone(manualTimeZoneSuggestion2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(suggestManualTimeZone);
+                    parcel2.writeBoolean(zSuggestManualTimeZone);
                     return true;
                 case 9:
                     TelephonyTimeZoneSuggestion telephonyTimeZoneSuggestion = (TelephonyTimeZoneSuggestion) parcel.readTypedObject(TelephonyTimeZoneSuggestion.CREATOR);
@@ -236,140 +236,140 @@ public interface ITimeZoneDetectorService extends IInterface {
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
             public TimeZoneCapabilitiesAndConfig getCapabilitiesAndConfig() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (TimeZoneCapabilitiesAndConfig) obtain2.readTypedObject(TimeZoneCapabilitiesAndConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (TimeZoneCapabilitiesAndConfig) parcelObtain2.readTypedObject(TimeZoneCapabilitiesAndConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
             public void addListener(ITimeZoneDetectorListener iTimeZoneDetectorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTimeZoneDetectorListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTimeZoneDetectorListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
             public void removeListener(ITimeZoneDetectorListener iTimeZoneDetectorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTimeZoneDetectorListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTimeZoneDetectorListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
             public boolean updateConfiguration(TimeZoneConfiguration timeZoneConfiguration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
-                    obtain.writeTypedObject(timeZoneConfiguration, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(timeZoneConfiguration, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
             public TimeZoneState getTimeZoneState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (TimeZoneState) obtain2.readTypedObject(TimeZoneState.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (TimeZoneState) parcelObtain2.readTypedObject(TimeZoneState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
             public boolean confirmTimeZone(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
             public boolean setManualTimeZone(ManualTimeZoneSuggestion manualTimeZoneSuggestion) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
-                    obtain.writeTypedObject(manualTimeZoneSuggestion, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(manualTimeZoneSuggestion, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
             public boolean suggestManualTimeZone(ManualTimeZoneSuggestion manualTimeZoneSuggestion) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
-                    obtain.writeTypedObject(manualTimeZoneSuggestion, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(manualTimeZoneSuggestion, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
             public void suggestTelephonyTimeZone(TelephonyTimeZoneSuggestion telephonyTimeZoneSuggestion) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
-                    obtain.writeTypedObject(telephonyTimeZoneSuggestion, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(telephonyTimeZoneSuggestion, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

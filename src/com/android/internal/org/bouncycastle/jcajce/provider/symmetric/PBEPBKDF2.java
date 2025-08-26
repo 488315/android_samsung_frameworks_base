@@ -29,13 +29,13 @@ public class PBEPBKDF2 {
     private static final Map prfCodes;
 
     static {
-        HashMap hashMap = new HashMap();
-        prfCodes = hashMap;
-        hashMap.put(PKCSObjectIdentifiers.id_hmacWithSHA1, Integers.valueOf(1));
-        hashMap.put(PKCSObjectIdentifiers.id_hmacWithSHA256, Integers.valueOf(4));
-        hashMap.put(PKCSObjectIdentifiers.id_hmacWithSHA224, Integers.valueOf(7));
-        hashMap.put(PKCSObjectIdentifiers.id_hmacWithSHA384, Integers.valueOf(8));
-        hashMap.put(PKCSObjectIdentifiers.id_hmacWithSHA512, Integers.valueOf(9));
+        HashMap map = new HashMap();
+        prfCodes = map;
+        map.put(PKCSObjectIdentifiers.id_hmacWithSHA1, Integers.valueOf(1));
+        map.put(PKCSObjectIdentifiers.id_hmacWithSHA256, Integers.valueOf(4));
+        map.put(PKCSObjectIdentifiers.id_hmacWithSHA224, Integers.valueOf(7));
+        map.put(PKCSObjectIdentifiers.id_hmacWithSHA384, Integers.valueOf(8));
+        map.put(PKCSObjectIdentifiers.id_hmacWithSHA512, Integers.valueOf(9));
     }
 
     private PBEPBKDF2() {

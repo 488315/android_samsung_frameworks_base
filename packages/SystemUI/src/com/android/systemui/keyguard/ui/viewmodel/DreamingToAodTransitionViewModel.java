@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DreamingToAodTransitionViewModel implements DeviceEntryIconTransition {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 deviceEntryBackgroundViewAlpha;
@@ -26,11 +25,11 @@ public final class DreamingToAodTransitionViewModel implements DeviceEntryIconTr
 
     public DreamingToAodTransitionViewModel(DeviceEntryUdfpsInteractor deviceEntryUdfpsInteractor, KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow) {
         FromDreamingTransitionInteractor.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m2598setupVtjQ1oo = keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(FromDreamingTransitionInteractor.TO_AOD_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.DREAMING, KeyguardState.AOD));
-        this.transitionAnimation = m2598setupVtjQ1oo;
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(FromDreamingTransitionInteractor.TO_AOD_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.DREAMING, KeyguardState.AOD));
+        this.transitionAnimation = flowBuilderM2615setupVtjQ1oo;
         Duration.Companion companion = Duration.Companion;
-        this.lockscreenAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m2598setupVtjQ1oo, DurationKt.toDuration(300, DurationUnit.MILLISECONDS), new AodToLockscreenTransitionViewModel$$ExternalSyntheticLambda6(), 0L, null, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_setDexForegroundModePackageList);
-        this.deviceEntryBackgroundViewAlpha = m2598setupVtjQ1oo.immediatelyTransitionTo(0.0f);
+        this.lockscreenAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM2615setupVtjQ1oo, DurationKt.toDuration(300, DurationUnit.MILLISECONDS), new AodToLockscreenTransitionViewModel$$ExternalSyntheticLambda6(), 0L, null, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_setDexForegroundModePackageList);
+        this.deviceEntryBackgroundViewAlpha = flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(0.0f);
         this.deviceEntryParentViewAlpha = FlowKt.transformLatest(deviceEntryUdfpsInteractor.isUdfpsEnrolledAndEnabled, new DreamingToAodTransitionViewModel$special$$inlined$flatMapLatest$1(null, this));
     }
 

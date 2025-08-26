@@ -14,13 +14,11 @@ import kotlin.collections.CollectionsKt__MutableCollectionsKt;
 import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RippleAnimation {
     public final ValueAnimator animator;
     public final RippleShader rippleShader;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -61,14 +59,14 @@ public final class RippleAnimation {
         ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(alphaComponent, "!!!!color:", "sparkleColor");
         rippleShader.setColorUniform("in_color", alphaComponent);
         int i = rippleAnimationConfig.sparkleColor;
-        float red = Color.red(i) / 255.0f;
-        float green = Color.green(i) / 255.0f;
-        float blue = Color.blue(i) / 255.0f;
-        StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("!!!!sparkleColor:", red, ",", green, ",");
-        m.append(blue);
-        m.append(",1.0");
-        Log.i("sparkleColor", m.toString());
-        rippleShader.setFloatUniform("in_sparkleColor", red, green, blue, 1.0f);
+        float fRed = Color.red(i) / 255.0f;
+        float fGreen = Color.green(i) / 255.0f;
+        float fBlue = Color.blue(i) / 255.0f;
+        StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("!!!!sparkleColor:", fRed, ",", fGreen, ",");
+        sbM.append(fBlue);
+        sbM.append(",1.0");
+        Log.i("sparkleColor", sbM.toString());
+        rippleShader.setFloatUniform("in_sparkleColor", fRed, fGreen, fBlue, 1.0f);
         rippleShader.setFloatUniform("in_sparkle_strength", rippleAnimationConfig.sparkleStrength);
         assignFadeParams(rippleShader.baseRingFadeParams, rippleAnimationConfig.baseRingFadeParams);
         assignFadeParams(rippleShader.sparkleRingFadeParams, rippleAnimationConfig.sparkleRingFadeParams);

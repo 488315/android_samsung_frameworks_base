@@ -7,7 +7,6 @@ import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MutableScatterSet extends ScatterSet {
     public int growthLimit;
@@ -48,8 +47,8 @@ public final class MutableScatterSet extends ScatterSet {
         int i2 = 1;
         char c = 7;
         int i3 = -862048943;
-        int hashCode = (obj != null ? obj.hashCode() : 0) * (-862048943);
-        int i4 = hashCode ^ (hashCode << 16);
+        int iHashCode = (obj != null ? obj.hashCode() : 0) * (-862048943);
+        int i4 = iHashCode ^ (iHashCode << 16);
         int i5 = i4 >>> 7;
         int i6 = i4 & 127;
         int i7 = this._capacity;
@@ -68,19 +67,19 @@ public final class MutableScatterSet extends ScatterSet {
             long j7 = -9187201950435737472L;
             long j8 = (~j6) & (j6 - 72340172838076673L) & (-9187201950435737472L);
             while (j8 != 0) {
-                int numberOfTrailingZeros = (i8 + (Long.numberOfTrailingZeros(j8) >> 3)) & i7;
+                int iNumberOfTrailingZeros = (i8 + (Long.numberOfTrailingZeros(j8) >> 3)) & i7;
                 int i14 = i3;
-                if (Intrinsics.areEqual(this.elements[numberOfTrailingZeros], obj)) {
-                    return numberOfTrailingZeros;
+                if (Intrinsics.areEqual(this.elements[iNumberOfTrailingZeros], obj)) {
+                    return iNumberOfTrailingZeros;
                 }
                 j8 &= j8 - 1;
                 i3 = i14;
             }
             int i15 = i3;
             if ((j4 & ((~j4) << 6) & (-9187201950435737472L)) != 0) {
-                int findFirstAvailableSlot = findFirstAvailableSlot(i5);
+                int iFindFirstAvailableSlot = findFirstAvailableSlot(i5);
                 long j9 = 255;
-                if (this.growthLimit != 0 || ((this.metadata[findFirstAvailableSlot >> 3] >> ((findFirstAvailableSlot & 7) << 3)) & 255) == 254) {
+                if (this.growthLimit != 0 || ((this.metadata[iFindFirstAvailableSlot >> 3] >> ((iFindFirstAvailableSlot & 7) << 3)) & 255) == 254) {
                     j = 255;
                     j2 = 128;
                 } else {
@@ -118,12 +117,12 @@ public final class MutableScatterSet extends ScatterSet {
                                 long j14 = (jArr4[i24] >> i25) & j;
                                 if (j14 != 128 && j14 == 254) {
                                     Object obj2 = objArr2[i23];
-                                    int hashCode2 = (obj2 != null ? obj2.hashCode() : 0) * i15;
-                                    int i26 = (hashCode2 ^ (hashCode2 << 16)) >>> 7;
-                                    int findFirstAvailableSlot2 = findFirstAvailableSlot(i26);
+                                    int iHashCode2 = (obj2 != null ? obj2.hashCode() : 0) * i15;
+                                    int i26 = (iHashCode2 ^ (iHashCode2 << 16)) >>> 7;
+                                    int iFindFirstAvailableSlot2 = findFirstAvailableSlot(i26);
                                     int i27 = i26 & i18;
                                     boolean z2 = z;
-                                    if (((findFirstAvailableSlot2 - i27) & i18) / 8 == ((i23 - i27) & i18) / 8) {
+                                    if (((iFindFirstAvailableSlot2 - i27) & i18) / 8 == ((i23 - i27) & i18) / 8) {
                                         j3 = j13;
                                         jArr4[i24] = ((r8 & 127) << i25) | (jArr4[i24] & (~(j << i25)));
                                         jArr4[jArr4.length - 1] = (jArr4[0] & j3) | Long.MIN_VALUE;
@@ -131,22 +130,22 @@ public final class MutableScatterSet extends ScatterSet {
                                         z = z2;
                                     } else {
                                         j3 = j13;
-                                        int i28 = findFirstAvailableSlot2 >> 3;
+                                        int i28 = iFindFirstAvailableSlot2 >> 3;
                                         long j15 = jArr4[i28];
-                                        int i29 = (findFirstAvailableSlot2 & 7) << 3;
+                                        int i29 = (iFindFirstAvailableSlot2 & 7) << 3;
                                         if (((j15 >> i29) & j) == 128) {
                                             i = i18;
                                             objArr = objArr2;
                                             jArr4[i28] = ((~(j << i29)) & j15) | ((r8 & 127) << i29);
                                             jArr4[i24] = (jArr4[i24] & (~(j << i25))) | (128 << i25);
-                                            objArr[findFirstAvailableSlot2] = objArr[i23];
+                                            objArr[iFindFirstAvailableSlot2] = objArr[i23];
                                             objArr[i23] = null;
                                         } else {
                                             i = i18;
                                             objArr = objArr2;
                                             jArr4[i28] = ((~(j << i29)) & j15) | ((r8 & 127) << i29);
-                                            Object obj3 = objArr[findFirstAvailableSlot2];
-                                            objArr[findFirstAvailableSlot2] = objArr[i23];
+                                            Object obj3 = objArr[iFindFirstAvailableSlot2];
+                                            objArr[iFindFirstAvailableSlot2] = objArr[i23];
                                             objArr[i23] = obj3;
                                             i23--;
                                         }
@@ -162,17 +161,17 @@ public final class MutableScatterSet extends ScatterSet {
                                 }
                             }
                             this.growthLimit = ScatterMapKt.loadedCapacity(this._capacity) - this._size;
-                            findFirstAvailableSlot = findFirstAvailableSlot(i5);
                         }
+                        iFindFirstAvailableSlot = findFirstAvailableSlot(i5);
                     } else {
                         j2 = 128;
                     }
                     j = 255;
-                    int nextCapacity = ScatterMapKt.nextCapacity(this._capacity);
+                    int iNextCapacity = ScatterMapKt.nextCapacity(this._capacity);
                     long[] jArr5 = this.metadata;
                     Object[] objArr3 = this.elements;
                     int i30 = this._capacity;
-                    initializeStorage(nextCapacity);
+                    initializeStorage(iNextCapacity);
                     long[] jArr6 = this.metadata;
                     Object[] objArr4 = this.elements;
                     int i31 = this._capacity;
@@ -180,18 +179,18 @@ public final class MutableScatterSet extends ScatterSet {
                     while (i32 < i30) {
                         if (((jArr5[i32 >> 3] >> ((i32 & 7) << 3)) & 255) < j2) {
                             Object obj4 = objArr3[i32];
-                            int hashCode3 = (obj4 != null ? obj4.hashCode() : 0) * i15;
-                            int i33 = hashCode3 ^ (hashCode3 << 16);
-                            int findFirstAvailableSlot3 = findFirstAvailableSlot(i33 >>> 7);
+                            int iHashCode3 = (obj4 != null ? obj4.hashCode() : 0) * i15;
+                            int i33 = iHashCode3 ^ (iHashCode3 << 16);
+                            int iFindFirstAvailableSlot3 = findFirstAvailableSlot(i33 >>> 7);
                             jArr = jArr6;
                             jArr2 = jArr5;
                             long j16 = i33 & 127;
-                            int i34 = findFirstAvailableSlot3 >> 3;
-                            int i35 = (findFirstAvailableSlot3 & 7) << 3;
+                            int i34 = iFindFirstAvailableSlot3 >> 3;
+                            int i35 = (iFindFirstAvailableSlot3 & 7) << 3;
                             long j17 = (jArr[i34] & (~(255 << i35))) | (j16 << i35);
                             jArr[i34] = j17;
-                            jArr[(((findFirstAvailableSlot3 - 7) & i31) + (i31 & 7)) >> 3] = j17;
-                            objArr4[findFirstAvailableSlot3] = obj4;
+                            jArr[(((iFindFirstAvailableSlot3 - 7) & i31) + (i31 & 7)) >> 3] = j17;
+                            objArr4[iFindFirstAvailableSlot3] = obj4;
                         } else {
                             jArr = jArr6;
                             jArr2 = jArr5;
@@ -200,20 +199,20 @@ public final class MutableScatterSet extends ScatterSet {
                         jArr5 = jArr2;
                         jArr6 = jArr;
                     }
-                    findFirstAvailableSlot = findFirstAvailableSlot(i5);
+                    iFindFirstAvailableSlot = findFirstAvailableSlot(i5);
                 }
                 this._size++;
                 int i36 = this.growthLimit;
                 long[] jArr7 = this.metadata;
-                int i37 = findFirstAvailableSlot >> 3;
+                int i37 = iFindFirstAvailableSlot >> 3;
                 long j18 = jArr7[i37];
-                int i38 = (findFirstAvailableSlot & 7) << 3;
+                int i38 = (iFindFirstAvailableSlot & 7) << 3;
                 this.growthLimit = i36 - (((j18 >> i38) & j) == j2 ? i12 : 0);
                 int i39 = this._capacity;
                 long j19 = (j18 & (~(j << i38))) | (j5 << i38);
                 jArr7[i37] = j19;
-                jArr7[(((findFirstAvailableSlot - 7) & i39) + (i39 & 7)) >> 3] = j19;
-                return findFirstAvailableSlot;
+                jArr7[(((iFindFirstAvailableSlot - 7) & i39) + (i39 & 7)) >> 3] = j19;
+                return iFindFirstAvailableSlot;
             }
             i9 += 8;
             i8 = (i8 + i9) & i7;
@@ -244,226 +243,118 @@ public final class MutableScatterSet extends ScatterSet {
 
     public final void initializeStorage(int i) {
         long[] jArr;
-        int max = i > 0 ? Math.max(7, ScatterMapKt.normalizeCapacity(i)) : 0;
-        this._capacity = max;
-        if (max == 0) {
+        int iMax = i > 0 ? Math.max(7, ScatterMapKt.normalizeCapacity(i)) : 0;
+        this._capacity = iMax;
+        if (iMax == 0) {
             jArr = ScatterMapKt.EmptyGroup;
         } else {
-            int i2 = ((max + 15) & (-8)) >> 3;
+            int i2 = ((iMax + 15) & (-8)) >> 3;
             long[] jArr2 = new long[i2];
             Arrays.fill(jArr2, 0, i2, -9187201950435737472L);
             jArr = jArr2;
         }
         this.metadata = jArr;
-        int i3 = max >> 3;
-        long j = 255 << ((max & 7) << 3);
+        int i3 = iMax >> 3;
+        long j = 255 << ((iMax & 7) << 3);
         jArr[i3] = (jArr[i3] & (~j)) | j;
         this.growthLimit = ScatterMapKt.loadedCapacity(this._capacity) - this._size;
-        this.elements = max == 0 ? ContainerHelpersKt.EMPTY_OBJECTS : new Object[max];
+        this.elements = iMax == 0 ? ContainerHelpersKt.EMPTY_OBJECTS : new Object[iMax];
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0068, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:15:0x0068, code lost:
     
         if (((r4 & ((~r4) << 6)) & (-9187201950435737472L)) == 0) goto L20;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x006a, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:16:0x006a, code lost:
     
         r10 = -1;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void minusAssign(java.lang.Object r14) {
-        /*
-            r13 = this;
-            r0 = 0
-            if (r14 == 0) goto L8
-            int r1 = r14.hashCode()
-            goto L9
-        L8:
-            r1 = r0
-        L9:
-            r2 = -862048943(0xffffffffcc9e2d51, float:-8.293031E7)
-            int r1 = r1 * r2
-            int r2 = r1 << 16
-            r1 = r1 ^ r2
-            r2 = r1 & 127(0x7f, float:1.78E-43)
-            int r3 = r13._capacity
-            int r1 = r1 >>> 7
-        L16:
-            r1 = r1 & r3
-            long[] r4 = r13.metadata
-            int r5 = r1 >> 3
-            r6 = r1 & 7
-            int r6 = r6 << 3
-            r7 = r4[r5]
-            long r7 = r7 >>> r6
-            int r5 = r5 + 1
-            r4 = r4[r5]
-            int r9 = 64 - r6
-            long r4 = r4 << r9
-            long r9 = (long) r6
-            long r9 = -r9
-            r6 = 63
-            long r9 = r9 >> r6
-            long r4 = r4 & r9
-            long r4 = r4 | r7
-            long r6 = (long) r2
-            r8 = 72340172838076673(0x101010101010101, double:7.748604185489348E-304)
-            long r6 = r6 * r8
-            long r6 = r6 ^ r4
-            long r8 = r6 - r8
-            long r6 = ~r6
-            long r6 = r6 & r8
-            r8 = -9187201950435737472(0x8080808080808080, double:-2.937446524422997E-306)
-            long r6 = r6 & r8
-        L42:
-            r10 = 0
-            int r12 = (r6 > r10 ? 1 : (r6 == r10 ? 0 : -1))
-            if (r12 == 0) goto L61
-            int r10 = java.lang.Long.numberOfTrailingZeros(r6)
-            int r10 = r10 >> 3
-            int r10 = r10 + r1
-            r10 = r10 & r3
-            java.lang.Object[] r11 = r13.elements
-            r11 = r11[r10]
-            boolean r11 = kotlin.jvm.internal.Intrinsics.areEqual(r11, r14)
-            if (r11 == 0) goto L5b
-            goto L6b
-        L5b:
-            r10 = 1
-            long r10 = r6 - r10
-            long r6 = r6 & r10
-            goto L42
-        L61:
-            long r6 = ~r4
-            r12 = 6
-            long r6 = r6 << r12
-            long r4 = r4 & r6
-            long r4 = r4 & r8
-            int r4 = (r4 > r10 ? 1 : (r4 == r10 ? 0 : -1))
-            if (r4 == 0) goto L71
-            r10 = -1
-        L6b:
-            if (r10 < 0) goto L70
-            r13.removeElementAt(r10)
-        L70:
-            return
-        L71:
-            int r0 = r0 + 8
-            int r1 = r1 + r0
-            goto L16
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.collection.MutableScatterSet.minusAssign(java.lang.Object):void");
+    public final void minusAssign(Object obj) {
+        int iNumberOfTrailingZeros;
+        int i = 0;
+        int iHashCode = (obj != null ? obj.hashCode() : 0) * (-862048943);
+        int i2 = iHashCode ^ (iHashCode << 16);
+        int i3 = i2 & 127;
+        int i4 = this._capacity;
+        int i5 = i2 >>> 7;
+        loop0: while (true) {
+            int i6 = i5 & i4;
+            long[] jArr = this.metadata;
+            int i7 = i6 >> 3;
+            int i8 = (i6 & 7) << 3;
+            long j = ((jArr[i7 + 1] << (64 - i8)) & ((-i8) >> 63)) | (jArr[i7] >>> i8);
+            long j2 = (i3 * 72340172838076673L) ^ j;
+            long j3 = (~j2) & (j2 - 72340172838076673L) & (-9187201950435737472L);
+            while (true) {
+                if (j3 == 0) {
+                    break;
+                }
+                iNumberOfTrailingZeros = ((Long.numberOfTrailingZeros(j3) >> 3) + i6) & i4;
+                if (Intrinsics.areEqual(this.elements[iNumberOfTrailingZeros], obj)) {
+                    break loop0;
+                } else {
+                    j3 &= j3 - 1;
+                }
+            }
+            i += 8;
+            i5 = i6 + i;
+        }
+        if (iNumberOfTrailingZeros >= 0) {
+            removeElementAt(iNumberOfTrailingZeros);
+        }
     }
 
     public final void plusAssign(Object obj) {
         this.elements[findAbsoluteInsertIndex(obj)] = obj;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x006d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:15:0x006d, code lost:
     
         if (((r7 & ((~r7) << 6)) & (-9187201950435737472L)) == 0) goto L22;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x006f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:16:0x006f, code lost:
     
         r11 = -1;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean remove(java.lang.Object r18) {
-        /*
-            r17 = this;
-            r0 = r17
-            r1 = r18
-            r2 = 0
-            if (r1 == 0) goto Lc
-            int r3 = r1.hashCode()
-            goto Ld
-        Lc:
-            r3 = r2
-        Ld:
-            r4 = -862048943(0xffffffffcc9e2d51, float:-8.293031E7)
-            int r3 = r3 * r4
-            int r4 = r3 << 16
-            r3 = r3 ^ r4
-            r4 = r3 & 127(0x7f, float:1.78E-43)
-            int r5 = r0._capacity
-            int r3 = r3 >>> 7
-            r3 = r3 & r5
-            r6 = r2
-        L1c:
-            long[] r7 = r0.metadata
-            int r8 = r3 >> 3
-            r9 = r3 & 7
-            int r9 = r9 << 3
-            r10 = r7[r8]
-            long r10 = r10 >>> r9
-            r12 = 1
-            int r8 = r8 + r12
-            r7 = r7[r8]
-            int r13 = 64 - r9
-            long r7 = r7 << r13
-            long r13 = (long) r9
-            long r13 = -r13
-            r9 = 63
-            long r13 = r13 >> r9
-            long r7 = r7 & r13
-            long r7 = r7 | r10
-            long r9 = (long) r4
-            r13 = 72340172838076673(0x101010101010101, double:7.748604185489348E-304)
-            long r9 = r9 * r13
-            long r9 = r9 ^ r7
-            long r13 = r9 - r13
-            long r9 = ~r9
-            long r9 = r9 & r13
-            r13 = -9187201950435737472(0x8080808080808080, double:-2.937446524422997E-306)
-            long r9 = r9 & r13
-        L47:
-            r15 = 0
-            int r11 = (r9 > r15 ? 1 : (r9 == r15 ? 0 : -1))
-            if (r11 == 0) goto L66
-            int r11 = java.lang.Long.numberOfTrailingZeros(r9)
-            int r11 = r11 >> 3
-            int r11 = r11 + r3
-            r11 = r11 & r5
-            java.lang.Object[] r15 = r0.elements
-            r15 = r15[r11]
-            boolean r15 = kotlin.jvm.internal.Intrinsics.areEqual(r15, r1)
-            if (r15 == 0) goto L60
-            goto L70
-        L60:
-            r15 = 1
-            long r15 = r9 - r15
-            long r9 = r9 & r15
-            goto L47
-        L66:
-            long r9 = ~r7
-            r11 = 6
-            long r9 = r9 << r11
-            long r7 = r7 & r9
-            long r7 = r7 & r13
-            int r7 = (r7 > r15 ? 1 : (r7 == r15 ? 0 : -1))
-            if (r7 == 0) goto L79
-            r11 = -1
-        L70:
-            if (r11 < 0) goto L73
-            r2 = r12
-        L73:
-            if (r2 == 0) goto L78
-            r0.removeElementAt(r11)
-        L78:
-            return r2
-        L79:
-            int r6 = r6 + 8
-            int r3 = r3 + r6
-            r3 = r3 & r5
-            goto L1c
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.collection.MutableScatterSet.remove(java.lang.Object):boolean");
+    public final boolean remove(Object obj) {
+        int iNumberOfTrailingZeros;
+        int iHashCode = (obj != null ? obj.hashCode() : 0) * (-862048943);
+        int i = iHashCode ^ (iHashCode << 16);
+        int i2 = i & 127;
+        int i3 = this._capacity;
+        int i4 = (i >>> 7) & i3;
+        int i5 = 0;
+        loop0: while (true) {
+            long[] jArr = this.metadata;
+            int i6 = i4 >> 3;
+            int i7 = (i4 & 7) << 3;
+            long j = ((jArr[i6 + 1] << (64 - i7)) & ((-i7) >> 63)) | (jArr[i6] >>> i7);
+            long j2 = (i2 * 72340172838076673L) ^ j;
+            long j3 = (~j2) & (j2 - 72340172838076673L) & (-9187201950435737472L);
+            while (true) {
+                if (j3 == 0) {
+                    break;
+                }
+                iNumberOfTrailingZeros = ((Long.numberOfTrailingZeros(j3) >> 3) + i4) & i3;
+                if (Intrinsics.areEqual(this.elements[iNumberOfTrailingZeros], obj)) {
+                    break loop0;
+                }
+                j3 &= j3 - 1;
+            }
+            i5 += 8;
+            i4 = (i4 + i5) & i3;
+        }
+        boolean z = iNumberOfTrailingZeros >= 0;
+        if (z) {
+            removeElementAt(iNumberOfTrailingZeros);
+        }
+        return z;
     }
 
     public final void removeElementAt(int i) {

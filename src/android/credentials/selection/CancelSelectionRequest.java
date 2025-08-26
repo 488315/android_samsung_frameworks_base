@@ -56,13 +56,13 @@ public final class CancelSelectionRequest implements Parcelable {
     }
 
     private CancelSelectionRequest(Parcel parcel) {
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        this.mToken = readStrongBinder;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readStrongBinder);
+        IBinder strongBinder = parcel.readStrongBinder();
+        this.mToken = strongBinder;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) strongBinder);
         this.mShouldShowCancellationExplanation = parcel.readBoolean();
-        String readString8 = parcel.readString8();
-        this.mPackageName = readString8;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
+        String string8 = parcel.readString8();
+        this.mPackageName = string8;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
     }
 
     @Override // android.os.Parcelable

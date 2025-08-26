@@ -12,7 +12,6 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VideoRenderer implements GLSurfaceView.Renderer {
     private static final float DEFAULT_CONTRAST = 1.6f;
@@ -24,7 +23,6 @@ public final class VideoRenderer implements GLSurfaceView.Renderer {
     public static final Companion Companion = new Companion(null);
     private static final String TAG = "VideoRenderer";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         private Companion() {
         }

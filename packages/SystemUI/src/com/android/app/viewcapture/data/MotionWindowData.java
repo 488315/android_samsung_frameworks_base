@@ -9,7 +9,6 @@ import com.google.protobuf.Parser;
 import com.google.protobuf.ProtobufArrayList;
 import com.google.protobuf.RawMessageInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MotionWindowData extends GeneratedMessageLite implements MessageLiteOrBuilder {
     public static final int CLASSNAME_FIELD_NUMBER = 2;
@@ -19,7 +18,6 @@ public final class MotionWindowData extends GeneratedMessageLite implements Mess
     private Internal.ProtobufList classname_;
     private Internal.ProtobufList frameData_;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.app.viewcapture.data.MotionWindowData$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke;
@@ -58,7 +56,6 @@ public final class MotionWindowData extends GeneratedMessageLite implements Mess
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends GeneratedMessageLite.Builder {
         public /* synthetic */ Builder(AnonymousClass1 anonymousClass1) {
             this();
@@ -108,7 +105,7 @@ public final class MotionWindowData extends GeneratedMessageLite implements Mess
 
     @Override // com.google.protobuf.GeneratedMessageLite
     public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-        Parser parser;
+        Parser defaultInstanceBasedParser;
         int i = AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()];
         AnonymousClass1 anonymousClass1 = null;
         switch (i) {
@@ -121,22 +118,22 @@ public final class MotionWindowData extends GeneratedMessageLite implements Mess
             case 4:
                 return DEFAULT_INSTANCE;
             case 5:
-                Parser parser2 = PARSER;
-                if (parser2 != null) {
-                    return parser2;
+                Parser parser = PARSER;
+                if (parser != null) {
+                    return parser;
                 }
                 synchronized (MotionWindowData.class) {
                     try {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                return parser;
+                return defaultInstanceBasedParser;
             case 6:
                 return (byte) 1;
             case 7:

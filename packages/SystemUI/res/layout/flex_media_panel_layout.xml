@@ -6,8 +6,8 @@
     <LinearLayout android:orientation="vertical" android:id="@id/media_background_area" android:layout_width="fill_parent" android:layout_height="wrap_content">
         <include android:id="@id/media_area" layout="@layout/flex_floating_media_panel" />
     </LinearLayout>
-    <LinearLayout android:gravity="bottom|center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <LinearLayout android:gravity="bottom|center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="100.0">
+    <LinearLayout android:gravity="center|bottom" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center|bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="100.0">
             <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/main_floating_area" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/basic_panel_bottom_margin" android:layout_weight="88.9">
                 <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/upper_area" android:layout_width="fill_parent" android:layout_height="@dimen/grid_area_height">
                     <LinearLayout android:gravity="center" android:background="@drawable/flex_panel_background_expand" android:layout_width="wrap_content" android:layout_height="fill_parent">

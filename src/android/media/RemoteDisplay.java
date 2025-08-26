@@ -118,17 +118,17 @@ public final class RemoteDisplay {
         nativeResume(this.mPtr);
     }
 
-    public int setParam(String str, Object obj) {
+    public int setParam(String str, Object obj) throws JSONException {
         JSONObject jSONObject = new JSONObject();
         try {
             jSONObject.put(str, obj);
         } catch (JSONException e) {
             Log.w(TAG, e.toString());
         }
-        int nativeSetParam = nativeSetParam(jSONObject.toString());
-        Log.d(TAG, "setParam >> ret is " + nativeSetParam);
+        int iNativeSetParam = nativeSetParam(jSONObject.toString());
+        Log.d(TAG, "setParam >> ret is " + iNativeSetParam);
         jSONObject.remove(str);
-        return nativeSetParam;
+        return iNativeSetParam;
     }
 
     private void dispose(boolean z) {
@@ -147,18 +147,18 @@ public final class RemoteDisplay {
     }
 
     private void startListening(String str) {
-        long nativeListen = nativeListen(str, this.mOpPackageName);
-        this.mPtr = nativeListen;
-        if (nativeListen == 0) {
+        long jNativeListen = nativeListen(str, this.mOpPackageName);
+        this.mPtr = jNativeListen;
+        if (jNativeListen == 0) {
             throw new IllegalStateException("Could not start listening for remote display connection on \"" + str + "\"");
         }
         this.mGuard.open("dispose");
     }
 
     private void startListening(String str, String str2) {
-        long nativeListen = nativeListen(str, this.mOpPackageName, str2);
-        this.mPtr = nativeListen;
-        if (nativeListen == 0) {
+        long jNativeListen = nativeListen(str, this.mOpPackageName, str2);
+        this.mPtr = jNativeListen;
+        if (jNativeListen == 0) {
             throw new IllegalStateException("Could not start listening for remote display connection on \"" + str + "\"");
         }
         this.mGuard.open("dispose");

@@ -8,14 +8,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class FlagDependenciesBase implements CoreStartable {
     public final EmptyList allDependencies;
     public final Handler handler;
     public final EmptyList unmetDependencies;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Handler {
     }
 
@@ -29,23 +27,23 @@ public abstract class FlagDependenciesBase implements CoreStartable {
 
     @Override // com.android.systemui.CoreStartable, com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
         EmptyList emptyList = this.allDependencies;
-        asIndenting.append("allDependencies").append((CharSequence) ": ").println(emptyList.size());
-        asIndenting.increaseIndent();
+        indentingPrintWriterAsIndenting.append("allDependencies").append((CharSequence) ": ").println(emptyList.size());
+        indentingPrintWriterAsIndenting.increaseIndent();
         try {
             Iterator<E> it = emptyList.iterator();
             while (it.hasNext()) {
-                asIndenting.println(it.next());
+                indentingPrintWriterAsIndenting.println(it.next());
             }
-            asIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.decreaseIndent();
             EmptyList emptyList2 = this.unmetDependencies;
-            asIndenting.append("unmetDependencies").append((CharSequence) ": ").println(emptyList2.size());
-            asIndenting.increaseIndent();
+            indentingPrintWriterAsIndenting.append("unmetDependencies").append((CharSequence) ": ").println(emptyList2.size());
+            indentingPrintWriterAsIndenting.increaseIndent();
             try {
                 Iterator<E> it2 = emptyList2.iterator();
                 while (it2.hasNext()) {
-                    asIndenting.println(it2.next());
+                    indentingPrintWriterAsIndenting.println(it2.next());
                 }
             } finally {
             }

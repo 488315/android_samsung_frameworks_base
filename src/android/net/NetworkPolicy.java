@@ -208,22 +208,22 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
         return byteArrayOutputStream.toByteArray();
     }
 
-    public static NetworkPolicy getNetworkPolicyFromBackup(DataInputStream dataInputStream) throws IOException, BackupUtils.BadVersionException {
+    public static NetworkPolicy getNetworkPolicyFromBackup(DataInputStream dataInputStream) throws BackupUtils.BadVersionException, IOException {
         DataInputStream dataInputStream2;
-        RecurrenceRule buildRule;
-        int readInt = dataInputStream.readInt();
-        if (readInt < 1 || readInt > 3) {
-            throw new BackupUtils.BadVersionException("Unknown backup version: " + readInt);
+        RecurrenceRule recurrenceRuleBuildRule;
+        int i = dataInputStream.readInt();
+        if (i < 1 || i > 3) {
+            throw new BackupUtils.BadVersionException("Unknown backup version: " + i);
         }
         NetworkTemplate networkTemplateFromBackup = getNetworkTemplateFromBackup(dataInputStream);
-        if (readInt >= 2) {
+        if (i >= 2) {
             dataInputStream2 = dataInputStream;
-            buildRule = new RecurrenceRule(dataInputStream2);
+            recurrenceRuleBuildRule = new RecurrenceRule(dataInputStream2);
         } else {
             dataInputStream2 = dataInputStream;
-            buildRule = buildRule(dataInputStream2.readInt(), ZoneId.of(BackupUtils.readString(dataInputStream2)));
+            recurrenceRuleBuildRule = buildRule(dataInputStream2.readInt(), ZoneId.of(BackupUtils.readString(dataInputStream2)));
         }
-        return new NetworkPolicy(networkTemplateFromBackup, buildRule, dataInputStream2.readLong(), dataInputStream2.readLong(), dataInputStream2.readLong(), dataInputStream2.readLong(), readInt >= 3 ? dataInputStream2.readLong() : -1L, dataInputStream2.readInt() == 1, dataInputStream2.readInt() == 1);
+        return new NetworkPolicy(networkTemplateFromBackup, recurrenceRuleBuildRule, dataInputStream2.readLong(), dataInputStream2.readLong(), dataInputStream2.readLong(), dataInputStream2.readLong(), i >= 3 ? dataInputStream2.readLong() : -1L, dataInputStream2.readInt() == 1, dataInputStream2.readInt() == 1);
     }
 
     private byte[] getNetworkTemplateBytesForBackup() throws IOException {
@@ -241,35 +241,35 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
         return byteArrayOutputStream.toByteArray();
     }
 
-    private static NetworkTemplate getNetworkTemplateFromBackup(DataInputStream dataInputStream) throws IOException, BackupUtils.BadVersionException {
+    private static NetworkTemplate getNetworkTemplateFromBackup(DataInputStream dataInputStream) throws BackupUtils.BadVersionException, IOException {
         int i;
-        int readInt = dataInputStream.readInt();
-        int i2 = 1;
-        if (readInt < 1 || readInt > 3 || readInt == 2) {
+        int i2 = dataInputStream.readInt();
+        int i3 = 1;
+        if (i2 < 1 || i2 > 3 || i2 == 2) {
             throw new BackupUtils.BadVersionException("Unknown Backup Serialization Version");
         }
-        int readInt2 = dataInputStream.readInt();
-        String readString = BackupUtils.readString(dataInputStream);
-        String readString2 = BackupUtils.readString(dataInputStream);
-        if (readInt >= 3) {
+        int i4 = dataInputStream.readInt();
+        String string = BackupUtils.readString(dataInputStream);
+        String string2 = BackupUtils.readString(dataInputStream);
+        if (i2 >= 3) {
             i = dataInputStream.readInt();
         } else {
-            if (readInt2 != 1 && readInt2 != 10) {
-                i2 = -1;
+            if (i4 != 1 && i4 != 10) {
+                i3 = -1;
             }
-            i = i2;
+            i = i3;
         }
         try {
-            NetworkTemplate.Builder meteredness = new NetworkTemplate.Builder(readInt2).setMeteredness(i);
-            if (readString != null) {
-                meteredness.setSubscriberIds(Set.of(readString));
+            NetworkTemplate.Builder meteredness = new NetworkTemplate.Builder(i4).setMeteredness(i);
+            if (string != null) {
+                meteredness.setSubscriberIds(Set.of(string));
             }
-            if (readString2 != null) {
-                meteredness.setWifiNetworkKeys(Set.of(readString2));
+            if (string2 != null) {
+                meteredness.setWifiNetworkKeys(Set.of(string2));
             }
             return meteredness.build();
         } catch (IllegalArgumentException e) {
-            throw new BackupUtils.BadVersionException("Restored network template contains unknown match rule " + readInt2, e);
+            throw new BackupUtils.BadVersionException("Restored network template contains unknown match rule " + i4, e);
         }
     }
 

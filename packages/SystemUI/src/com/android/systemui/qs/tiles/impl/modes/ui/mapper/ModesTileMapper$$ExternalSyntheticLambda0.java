@@ -13,7 +13,6 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ModesTileMapper$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ ModesTileModel f$0;
@@ -26,21 +25,21 @@ public final /* synthetic */ class ModesTileMapper$$ExternalSyntheticLambda0 imp
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         QSTileState.Builder builder = (QSTileState.Builder) obj;
         ModesTileModel modesTileModel = this.f$0;
         builder.icon = modesTileModel.icon;
         builder.activationState = modesTileModel.isActivated ? QSTileState.ActivationState.ACTIVE : QSTileState.ActivationState.INACTIVE;
         MessageFormat messageFormat = new MessageFormat(this.f$1.resources.getString(R.string.zen_mode_active_modes), Locale.getDefault());
         int size = modesTileModel.activeModes.size();
-        HashMap hashMap = new HashMap();
-        hashMap.put(SystemUIAnalytics.QPNE_KEY_COUNT, Integer.valueOf(size));
+        HashMap map = new HashMap();
+        map.put(SystemUIAnalytics.QPNE_KEY_COUNT, Integer.valueOf(size));
         if (size >= 1) {
-            hashMap.put("mode", modesTileModel.activeModes.get(0));
+            map.put("mode", modesTileModel.activeModes.get(0));
         }
-        String format = messageFormat.format(hashMap);
-        builder.secondaryLabel = format;
-        builder.contentDescription = ((Object) builder.label) + ". " + ((Object) format);
+        String str = messageFormat.format(map);
+        builder.secondaryLabel = str;
+        builder.contentDescription = ((Object) builder.label) + ". " + ((Object) str);
         builder.supportedActions = ArraysKt___ArraysKt.toSet(new QSTileState.UserAction[]{QSTileState.UserAction.CLICK, QSTileState.UserAction.LONG_CLICK, QSTileState.UserAction.TOGGLE_CLICK});
         builder.sideViewIcon = QSTileState.SideViewIcon.Chevron.INSTANCE;
         builder.expandedAccessibilityClass = Reflection.getOrCreateKotlinClass(Button.class);

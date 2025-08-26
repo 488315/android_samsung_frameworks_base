@@ -53,7 +53,7 @@ final class SynthesisPlaybackQueueItem extends PlaybackQueueItem implements Audi
     }
 
     @Override // android.speech.tts.PlaybackQueueItem, java.lang.Runnable
-    public void run() {
+    public void run() throws IllegalStateException, InterruptedException {
         if (this.mRunState.compareAndSet(0, 1)) {
             TextToSpeechService.UtteranceProgressDispatcher dispatcher = getDispatcher();
             dispatcher.dispatchOnStart();
@@ -65,11 +65,11 @@ final class SynthesisPlaybackQueueItem extends PlaybackQueueItem implements Audi
             updateMarker();
             while (true) {
                 try {
-                    byte[] take = take();
-                    if (take == null) {
+                    byte[] bArrTake = take();
+                    if (bArrTake == null) {
                         break;
                     }
-                    this.mAudioTrack.write(take);
+                    this.mAudioTrack.write(bArrTake);
                     this.mLogger.onAudioDataWritten();
                 } catch (InterruptedException unused) {
                 }
@@ -134,9 +134,9 @@ final class SynthesisPlaybackQueueItem extends PlaybackQueueItem implements Audi
     }
 
     void updateMarker() {
-        ProgressMarker peek = this.markerList.peek();
-        if (peek != null) {
-            this.mAudioTrack.setNotificationMarkerPosition(peek.frames == 0 ? 1 : peek.frames);
+        ProgressMarker progressMarkerPeek = this.markerList.peek();
+        if (progressMarkerPeek != null) {
+            this.mAudioTrack.setNotificationMarkerPosition(progressMarkerPeek.frames == 0 ? 1 : progressMarkerPeek.frames);
         }
     }
 
@@ -147,11 +147,11 @@ final class SynthesisPlaybackQueueItem extends PlaybackQueueItem implements Audi
 
     @Override // android.media.AudioTrack.OnPlaybackPositionUpdateListener
     public void onMarkerReached(AudioTrack audioTrack) {
-        ProgressMarker poll = this.markerList.poll();
-        if (poll == null) {
+        ProgressMarker progressMarkerPoll = this.markerList.poll();
+        if (progressMarkerPoll == null) {
             Log.e(TAG, "onMarkerReached reached called but no marker in queue");
         } else {
-            getDispatcher().dispatchOnRangeStart(poll.start, poll.end, poll.frames);
+            getDispatcher().dispatchOnRangeStart(progressMarkerPoll.start, progressMarkerPoll.end, progressMarkerPoll.frames);
             updateMarker();
         }
     }
@@ -173,16 +173,16 @@ final class SynthesisPlaybackQueueItem extends PlaybackQueueItem implements Audi
     }
 
     private byte[] take() throws InterruptedException {
-        ListEntry poll;
+        ListEntry listEntryPoll;
         try {
             this.mListLock.lock();
             while (this.mDataBufferList.size() == 0 && !this.mStopped && !this.mDone) {
                 this.mReadReady.await();
             }
-            if (!this.mStopped && (poll = this.mDataBufferList.poll()) != null) {
-                this.mUnconsumedBytes -= poll.mBytes.length;
+            if (!this.mStopped && (listEntryPoll = this.mDataBufferList.poll()) != null) {
+                this.mUnconsumedBytes -= listEntryPoll.mBytes.length;
                 this.mNotFull.signal();
-                return poll.mBytes;
+                return listEntryPoll.mBytes;
             }
             return null;
         } finally {

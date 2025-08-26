@@ -9,7 +9,6 @@ import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class DeviceEntryFingerprintAuthRepositoryImpl$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -29,7 +28,7 @@ public final /* synthetic */ class DeviceEntryFingerprintAuthRepositoryImpl$$Ext
         switch (this.$r8$classId) {
             case 0:
                 int i = DeviceEntryFingerprintAuthRepositoryImpl.$r8$clinit;
-                Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new DeviceEntryFingerprintAuthRepositoryImpl$isLockedOut$2$1(deviceEntryFingerprintAuthRepositoryImpl, null));
+                Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new DeviceEntryFingerprintAuthRepositoryImpl$isLockedOut$2$1(deviceEntryFingerprintAuthRepositoryImpl, null));
                 SharingStarted.Companion.getClass();
                 break;
             case 1:
@@ -40,9 +39,9 @@ public final /* synthetic */ class DeviceEntryFingerprintAuthRepositoryImpl$$Ext
                 break;
             case 3:
                 ChannelExt channelExt = ChannelExt.INSTANCE;
-                Boolean valueOf = Boolean.valueOf(deviceEntryFingerprintAuthRepositoryImpl.keyguardUpdateMonitor.isFingerprintLockedOut());
+                Boolean boolValueOf = Boolean.valueOf(deviceEntryFingerprintAuthRepositoryImpl.keyguardUpdateMonitor.isFingerprintLockedOut());
                 channelExt.getClass();
-                ChannelExt.trySendWithFailureLogging((ProducerScope) obj, valueOf, "DeviceEntryFingerprintAuthRepositoryImpl", "onLockedOutStateChanged");
+                ChannelExt.trySendWithFailureLogging((ProducerScope) obj, boolValueOf, "DeviceEntryFingerprintAuthRepositoryImpl", "onLockedOutStateChanged");
                 break;
             case 4:
                 deviceEntryFingerprintAuthRepositoryImpl.keyguardUpdateMonitor.removeCallback((DeviceEntryFingerprintAuthRepositoryImpl$isLockedOut$2$1$callback$1) obj);

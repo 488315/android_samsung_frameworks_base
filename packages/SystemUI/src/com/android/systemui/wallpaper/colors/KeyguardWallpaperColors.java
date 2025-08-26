@@ -11,7 +11,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.wallpaper.utils.WhichChecker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardWallpaperColors {
     public static final int NUM_SEPARATED_AREA;
@@ -150,7 +149,7 @@ public class KeyguardWallpaperColors {
     }
 
     public final long setSemWallpaperColors(SemWallpaperColors semWallpaperColors, int i) {
-        long j;
+        long jCheckUpdates;
         SemWallpaperColors.Item item;
         SemWallpaperColors.Item item2;
         SemWallpaperColors.Item item3;
@@ -167,34 +166,31 @@ public class KeyguardWallpaperColors {
         }
         SparseArray sparseArray = (WhichChecker.isWatchFace(i) || WhichChecker.isVirtualDisplay(i)) ? this.mSemWallpaperColorsCover : this.mSemWallpaperColors;
         if (semWallpaperColors != null) {
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "setSemWallpaperColors: which = ", ", userId = ", ", colors = ");
-            m.append(semWallpaperColors.toSimpleString());
-            Log.d("KeyguardWallpaperColors", m.toString());
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "setSemWallpaperColors: which = ", ", userId = ", ", colors = ");
+            sbM.append(semWallpaperColors.toSimpleString());
+            Log.d("KeyguardWallpaperColors", sbM.toString());
             ColorData colorData = new ColorData(semWallpaperColors, this.mSettingsHelper.isOpenThemeLook(), this.mSettingsHelper.isOpenThemeLockWallpaper(), false);
             synchronized (sparseArray) {
-                j = checkUpdates((ColorData) sparseArray.get(i2), colorData);
+                jCheckUpdates = checkUpdates((ColorData) sparseArray.get(i2), colorData);
                 sparseArray.put(i2, colorData);
             }
         } else {
-            j = 0;
+            jCheckUpdates = 0;
         }
-        if (z && (WhichChecker.isWatchFace(i) || WhichChecker.isVirtualDisplay(i))) {
-            return j;
-        }
-        if (j != 0) {
-            Log.d("KeyguardWallpaperColors", "writeSettingsWallpaperColors() flags = " + j);
-            if (j != 0 && semWallpaperColors != null) {
-                if ((j & 512) != 0 && (item3 = semWallpaperColors.get(512L)) != null) {
+        if ((!z || (!WhichChecker.isWatchFace(i) && !WhichChecker.isVirtualDisplay(i))) && jCheckUpdates != 0) {
+            Log.d("KeyguardWallpaperColors", "writeSettingsWallpaperColors() flags = " + jCheckUpdates);
+            if (jCheckUpdates != 0 && semWallpaperColors != null) {
+                if ((jCheckUpdates & 512) != 0 && (item3 = semWallpaperColors.get(512L)) != null) {
                     this.mSettingsHelper.setWhiteKeyguardWallpaper(item3.getFontColor());
                 }
-                if ((j & 16) != 0 && (item2 = semWallpaperColors.get(16L)) != null) {
+                if ((jCheckUpdates & 16) != 0 && (item2 = semWallpaperColors.get(16L)) != null) {
                     this.mSettingsHelper.setWhiteKeyguardStatusBar(item2.getFontColor());
                 }
-                if ((j & 256) != 0 && (item = semWallpaperColors.get(256L)) != null) {
+                if ((jCheckUpdates & 256) != 0 && (item = semWallpaperColors.get(256L)) != null) {
                     this.mSettingsHelper.setWhiteKeyguardNavigationBar(item.getFontColor());
                 }
             }
         }
-        return j;
+        return jCheckUpdates;
     }
 }

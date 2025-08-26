@@ -16,16 +16,14 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.JobImpl;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface Modifier {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Element extends Modifier {
         @Override // androidx.compose.ui.Modifier
         default boolean all(Function1 function1) {
-            return ((Boolean) function1.mo779invoke(this)).booleanValue();
+            return ((Boolean) function1.mo781invoke(this)).booleanValue();
         }
 
         @Override // androidx.compose.ui.Modifier
@@ -42,7 +40,6 @@ public interface Modifier {
         return modifier == Companion ? this : new CombinedModifier(this, modifier);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Node implements DelegatableNode {
         public Node child;
         public NodeCoordinator coordinator;
@@ -64,9 +61,9 @@ public interface Modifier {
             if (contextScope != null) {
                 return contextScope;
             }
-            ContextScope CoroutineScope = CoroutineScopeKt.CoroutineScope(((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).coroutineContext.plus(new JobImpl((Job) ((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).coroutineContext.get(Job.Key))));
-            this.scope = CoroutineScope;
-            return CoroutineScope;
+            ContextScope contextScopeCoroutineScope = CoroutineScopeKt.CoroutineScope(((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).coroutineContext.plus(new JobImpl((Job) ((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).coroutineContext.get(Job.Key))));
+            this.scope = contextScopeCoroutineScope;
+            return contextScopeCoroutineScope;
         }
 
         public boolean getShouldAutoInvalidate() {
@@ -157,7 +154,6 @@ public interface Modifier {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion implements Modifier {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 

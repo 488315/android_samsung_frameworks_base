@@ -3,17 +3,21 @@ package com.samsung.android.multiwindow;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.TimeInterpolator;
+import android.app.ActivityManager;
 import android.app.ActivityThread;
 import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import com.android.internal.R;
+import com.android.internal.policy.DesktopModeCompatUtils;
+import com.android.internal.policy.SystemBarUtils;
 
 /* loaded from: classes6.dex */
 public class FreeformResizeGuide {
@@ -143,22 +147,111 @@ public class FreeformResizeGuide {
         return true;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x00a2, code lost:
-    
-        if (r8 != false) goto L34;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00bc  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00aa  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x00ac  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x00b2  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00c1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void updateMinMaxSizeIfNeeded(android.app.ActivityManager.RunningTaskInfo r6, android.graphics.Rect r7, boolean r8) {
-        /*
-            Method dump skipped, instructions count: 394
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.multiwindow.FreeformResizeGuide.updateMinMaxSizeIfNeeded(android.app.ActivityManager$RunningTaskInfo, android.graphics.Rect, boolean):void");
+    public void updateMinMaxSizeIfNeeded(ActivityManager.RunningTaskInfo runningTaskInfo, Rect rect, boolean z, boolean z2) {
+        char c;
+        DisplayMetrics displayMetrics = this.mContext.getResources().getDisplayMetrics();
+        int iDipToPixel = MultiWindowUtils.dipToPixel(z2 ? runningTaskInfo.desktopDefaultMinSize : runningTaskInfo.defaultMinSize, displayMetrics);
+        this.mMinHeight = iDipToPixel;
+        this.mMinWidth = iDipToPixel;
+        if (runningTaskInfo.minWidth != -1) {
+            this.mMinWidth = runningTaskInfo.minWidth;
+        }
+        if (runningTaskInfo.minHeight != -1) {
+            this.mMinHeight = runningTaskInfo.minHeight;
+        }
+        int iDipToPixel2 = MultiWindowUtils.dipToPixel(48, displayMetrics);
+        int iDipToPixel3 = MultiWindowUtils.dipToPixel(32, displayMetrics);
+        this.mMinWidth = Math.max(iDipToPixel2, this.mMinWidth);
+        this.mMinHeight = Math.max(iDipToPixel3, this.mMinHeight);
+        if (runningTaskInfo.maxWidth == -1 || runningTaskInfo.maxWidth > rect.width()) {
+            this.mMaxWidth = rect.width();
+        } else {
+            this.mMaxWidth = runningTaskInfo.maxWidth;
+        }
+        if (runningTaskInfo.maxHeight == -1 || runningTaskInfo.maxHeight > rect.height()) {
+            this.mMaxHeight = rect.height();
+        } else {
+            this.mMaxHeight = runningTaskInfo.maxHeight;
+        }
+        this.mMaxWidth = Math.max(this.mMaxWidth, this.mMinWidth);
+        this.mMaxHeight = Math.max(this.mMaxHeight, this.mMinHeight);
+        runningTaskInfo.configuration.windowConfiguration.getDexTaskDockingState();
+        if (runningTaskInfo.preserveOrientationOnResize()) {
+            int i = runningTaskInfo.resizeMode;
+            if (i == 5) {
+                c = 2;
+                if (c != 1) {
+                    this.mMinHeight = (int) (this.mMinWidth * 1.2f);
+                    this.mMaxWidth = (int) (this.mMaxHeight / 1.2f);
+                } else if (c == 2) {
+                    this.mMinWidth = (int) (this.mMinHeight * 1.2f);
+                    this.mMaxHeight = (int) (this.mMaxWidth / 1.2f);
+                }
+            } else if (i == 6) {
+                c = 1;
+                if (c != 1) {
+                }
+            } else if (i != 7) {
+                c = 0;
+                if (c != 1) {
+                }
+            } else {
+                if (z) {
+                }
+                if (c != 1) {
+                }
+            }
+        }
+        if (!this.mInDesktopWindowing || runningTaskInfo.isResizeable) {
+            return;
+        }
+        Rect appBounds = runningTaskInfo.appCompatTaskInfo.topActivityAppBounds;
+        if (appBounds.isEmpty() && ((appBounds = runningTaskInfo.configuration.windowConfiguration.getAppBounds()) == null || appBounds.isEmpty())) {
+            appBounds = runningTaskInfo.configuration.windowConfiguration.getBounds();
+        }
+        int iWidth = appBounds.width();
+        int iHeight = appBounds.height();
+        if (iWidth <= 0 || iHeight <= 0) {
+            return;
+        }
+        this.mIsNonResizableInDesktopWindowing = true;
+        int desktopViewAppHeaderHeightPx = (runningTaskInfo.topActivityInfo == null || !DesktopModeCompatUtils.shouldExcludeCaptionFromAppBounds(runningTaskInfo.topActivityInfo, runningTaskInfo.isResizeable, runningTaskInfo.appCompatTaskInfo.hasOptOutEdgeToEdge())) ? 0 : SystemBarUtils.getDesktopViewAppHeaderHeightPx(this.mContext);
+        boolean z3 = iWidth >= iHeight;
+        float aspectRatio = MultiWindowUtils.getAspectRatio(iWidth, iHeight);
+        if (z3) {
+            int iMax = Math.max(iDipToPixel3, this.mMinHeight);
+            this.mMinWidth = (int) ((iMax * aspectRatio) + 0.5f);
+            this.mMinHeight = iMax + desktopViewAppHeaderHeightPx;
+        } else {
+            int iMax2 = Math.max(iDipToPixel2, this.mMinWidth);
+            this.mMinWidth = iMax2;
+            this.mMinHeight = ((int) ((iMax2 * aspectRatio) + 0.5f)) + desktopViewAppHeaderHeightPx;
+        }
+        int iWidth2 = rect.width() - 10;
+        int iHeight2 = (rect.height() - 10) - desktopViewAppHeaderHeightPx;
+        if (iWidth2 >= iHeight2) {
+            this.mMaxHeight = iHeight2;
+            if (z3) {
+                this.mMaxWidth = (int) ((iHeight2 * aspectRatio) + 0.5f);
+            } else {
+                this.mMaxWidth = (int) ((iHeight2 / aspectRatio) + 0.5f);
+            }
+        } else {
+            this.mMaxWidth = iWidth2;
+            if (z3) {
+                this.mMaxHeight = (int) ((iWidth2 / aspectRatio) + 0.5f);
+            } else {
+                this.mMaxHeight = (int) ((iWidth2 * aspectRatio) + 0.5f);
+            }
+        }
+        this.mMaxHeight += desktopViewAppHeaderHeightPx;
     }
 
     public void adjustMinMaxSize(Rect rect) {
@@ -296,16 +389,16 @@ public class FreeformResizeGuide {
         if ((this.mCtrlType & 8) != 0) {
             this.mMinimizeTriggerBounds.top = rect.top;
         }
-        int max = Math.max(rect.width() - this.mNotAdjustedBounds.width(), rect.height() - this.mNotAdjustedBounds.height()) / 4;
+        int iMax = Math.max(rect.width() - this.mNotAdjustedBounds.width(), rect.height() - this.mNotAdjustedBounds.height()) / 4;
         if ((this.mCtrlType & 1) != 0) {
-            rect.left += max;
+            rect.left += iMax;
         } else {
-            rect.right -= max;
+            rect.right -= iMax;
         }
         if ((this.mCtrlType & 4) != 0) {
-            rect.top += max;
+            rect.top += iMax;
         } else {
-            rect.bottom -= max;
+            rect.bottom -= iMax;
         }
         if (this.mMinimizeTriggerBounds.contains(i, i2)) {
             if (this.mReadyToMinimize) {

@@ -7,7 +7,6 @@ import android.util.SparseArray;
 import com.android.wm.shell.common.DisplayLayout;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TaskVisibility {
     public final Context mContext;
@@ -48,12 +47,12 @@ public class TaskVisibility {
         StringBuilder sb = new StringBuilder("TaskVisibility{");
         int size = this.mRunningTaskInfo.size();
         for (int i = 0; i < size; i++) {
-            int keyAt = this.mRunningTaskInfo.keyAt(i);
+            int iKeyAt = this.mRunningTaskInfo.keyAt(i);
             ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) this.mRunningTaskInfo.valueAt(i);
             if (i > 0) {
                 sb.append(", ");
             }
-            sb.append(keyAt + "=[TaskId=" + runningTaskInfo.taskId);
+            sb.append(iKeyAt + "=[TaskId=" + runningTaskInfo.taskId);
             sb.append(']');
         }
         sb.append('}');

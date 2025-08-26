@@ -21,7 +21,6 @@ import com.android.systemui.dextouchpad.view.TouchpadSpenExternalGesturesDialog;
 import com.android.systemui.dextouchpad.view.TouchpadSpenGesturesDialog;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DualModeReceiver extends BroadcastReceiver {
     public final Context mContext;
@@ -65,15 +64,15 @@ public class DualModeReceiver extends BroadcastReceiver {
         if ("com.samsung.android.desktopmode.action.SPEN_NOTIFICATION_CHANGE_MODE_PRESSED".equals(action)) {
             this.mSemStatusBarManager.collapsePanels();
             Intent flags = new Intent().setComponent(new ComponentName(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG, "com.android.settings.Settings$DexModeSpenSettingsActivity")).setFlags(337641472);
-            ActivityOptions makeBasic = ActivityOptions.makeBasic();
-            makeBasic.setLaunchDisplayId(Utils.mDesktopDisplayId);
-            this.mContext.startActivityAsUser(flags, makeBasic.toBundle(), UserHandle.of(0));
+            ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+            activityOptionsMakeBasic.setLaunchDisplayId(Utils.mDesktopDisplayId);
+            this.mContext.startActivityAsUser(flags, activityOptionsMakeBasic.toBundle(), UserHandle.of(0));
             return;
         }
         if ("com.samsung.android.desktopmode.action.TOUCHPAD_AVAILABLE_NOTIFICATION_PRESSED".equals(action)) {
-            ActivityOptions makeBasic2 = ActivityOptions.makeBasic();
-            makeBasic2.setLaunchDisplayId(0);
-            this.mContext.startActivityAsUser(Utils.getTouchActivityIntent(), makeBasic2.toBundle(), UserHandle.CURRENT);
+            ActivityOptions activityOptionsMakeBasic2 = ActivityOptions.makeBasic();
+            activityOptionsMakeBasic2.setLaunchDisplayId(0);
+            this.mContext.startActivityAsUser(Utils.getTouchActivityIntent(), activityOptionsMakeBasic2.toBundle(), UserHandle.CURRENT);
             SettingsRepository settingsRepository = this.mSettingsRepo;
             Settings$Key settings$Key = SettingsKeys.TOUCHPAD_AUTO_RUN_GUIDE_COUNT;
             int i = settingsRepository.getInt(settings$Key);

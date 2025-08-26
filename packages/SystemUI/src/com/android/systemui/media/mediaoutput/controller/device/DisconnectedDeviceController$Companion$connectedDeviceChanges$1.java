@@ -19,7 +19,6 @@ import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DisconnectedDeviceController$Companion$connectedDeviceChanges$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ LocalBluetoothManager $this_connectedDeviceChanges;
@@ -62,55 +61,55 @@ final class DisconnectedDeviceController$Companion$connectedDeviceChanges$1 exte
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onAclConnectionStateChanged(CachedBluetoothDevice cachedBluetoothDevice, int i2) {
                     Log.d("DisconnectedDeviceController", "onAclConnectionStateChanged() - " + cachedBluetoothDevice + " - " + i2);
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
 
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onActiveDeviceChanged(CachedBluetoothDevice cachedBluetoothDevice, int i2) {
                     Log.d("DisconnectedDeviceController", "onActiveDeviceChanged() - " + cachedBluetoothDevice + " - " + i2);
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
 
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onAudioModeChanged() {
                     Log.d("DisconnectedDeviceController", "onAudioModeChanged()");
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
 
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onAutoOnStateChanged(int i2) {
                     ListPopupWindow$$ExternalSyntheticOutline0.m(i2, "onAutoOnStateChanged() - ", "DisconnectedDeviceController");
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
 
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onBluetoothStateChanged(int i2) {
                     ListPopupWindow$$ExternalSyntheticOutline0.m(i2, "onBluetoothStateChanged() - ", "DisconnectedDeviceController");
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
 
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onConnectionStateChanged(CachedBluetoothDevice cachedBluetoothDevice, int i2) {
                     Log.d("DisconnectedDeviceController", "onConnectionStateChanged() - " + cachedBluetoothDevice + " - " + i2);
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
 
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onDeviceAdded(CachedBluetoothDevice cachedBluetoothDevice) {
                     Log.d("DisconnectedDeviceController", "onDeviceAdded() - " + cachedBluetoothDevice);
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
 
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onDeviceBondStateChanged(CachedBluetoothDevice cachedBluetoothDevice, int i2) {
                     Log.d("DisconnectedDeviceController", "onDeviceBondStateChanged() - " + cachedBluetoothDevice + " - " + i2);
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
 
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onDeviceDeleted(CachedBluetoothDevice cachedBluetoothDevice) {
                     Log.d("DisconnectedDeviceController", "onDeviceDeleted() - " + cachedBluetoothDevice);
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
 
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
@@ -121,13 +120,13 @@ final class DisconnectedDeviceController$Companion$connectedDeviceChanges$1 exte
                     sb.append(i2);
                     sb.append(" - ");
                     RecyclerView$$ExternalSyntheticOutline0.m(i3, "DisconnectedDeviceController", sb);
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
 
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onScanningStateChanged(boolean z) {
                     EmergencyButtonController$$ExternalSyntheticOutline0.m("onScanningStateChanged() - ", "DisconnectedDeviceController", z);
-                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, localBluetoothManager);
+                    DisconnectedDeviceController$Companion$connectedDeviceChanges$1.invokeSuspend$updateDevices(producerScope, localBluetoothManager);
                 }
             };
             invokeSuspend$updateDevices(producerScope, this.$this_connectedDeviceChanges);
@@ -137,7 +136,7 @@ final class DisconnectedDeviceController$Companion$connectedDeviceChanges$1 exte
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     Log.d("DisconnectedDeviceController", "unregisterCallback");
-                    LocalBluetoothManager.this.mEventManager.unregisterCallback(r1);
+                    localBluetoothManager2.mEventManager.unregisterCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

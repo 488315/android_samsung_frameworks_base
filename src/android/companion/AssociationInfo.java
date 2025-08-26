@@ -288,14 +288,14 @@ public final class AssociationInfo implements Parcelable {
         this.mTimeApprovedMs = parcel.readLong();
         this.mLastTimeConnectedMs = parcel.readLong();
         this.mSystemDataSyncFlags = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (Flags.associationDeviceIcon() && readInt == 1) {
+        int i = parcel.readInt();
+        if (Flags.associationDeviceIcon() && i == 1) {
             this.mDeviceIcon = Icon.CREATOR.createFromParcel(parcel);
         } else {
             this.mDeviceIcon = null;
         }
-        int readInt2 = parcel.readInt();
-        if (Flags.associationTag() && readInt2 == 1) {
+        int i2 = parcel.readInt();
+        if (Flags.associationTag() && i2 == 1) {
             this.mDeviceId = (DeviceId) parcel.readTypedObject(DeviceId.CREATOR);
         } else {
             this.mDeviceId = null;

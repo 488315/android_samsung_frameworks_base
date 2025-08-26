@@ -41,7 +41,6 @@ import java.util.List;
 import java.util.Map;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MobileSignalController extends SignalController {
     public static final SimpleDateFormat SSDF = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
@@ -61,7 +60,6 @@ public class MobileSignalController extends SignalController {
     public final TelephonyManager mPhone;
     public final SubscriptionInfo mSubscriptionInfo;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.connectivity.MobileSignalController$1, reason: invalid class name */
     public class AnonymousClass1 implements MobileStatusTracker.Callback {
         public String mLastStatus;
@@ -74,14 +72,14 @@ public class MobileSignalController extends SignalController {
             MobileSignalController mobileSignalController = MobileSignalController.this;
             if (z2) {
                 String str = mobileSignalController.mTag;
-                StringBuilder m = RowView$$ExternalSyntheticOutline0.m("onMobileStatusChanged= updateTelephony=", " mobileStatus=", z);
-                m.append(mobileStatus.toString());
-                Log.d(str, m.toString());
+                StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("onMobileStatusChanged= updateTelephony=", " mobileStatus=", z);
+                sbM.append(mobileStatus.toString());
+                Log.d(str, sbM.toString());
             }
-            String mobileStatus2 = mobileStatus.toString();
-            if (!mobileStatus2.equals(this.mLastStatus)) {
-                this.mLastStatus = mobileStatus2;
-                String str2 = MobileSignalController.SSDF.format(Long.valueOf(System.currentTimeMillis())) + "," + mobileStatus2;
+            String string = mobileStatus.toString();
+            if (!string.equals(this.mLastStatus)) {
+                this.mLastStatus = string;
+                String str2 = MobileSignalController.SSDF.format(Long.valueOf(System.currentTimeMillis())) + "," + string;
                 int i = mobileSignalController.mMobileStatusHistoryIndex;
                 mobileSignalController.mMobileStatusHistory[i] = str2;
                 mobileSignalController.mMobileStatusHistoryIndex = (i + 1) % 64;
@@ -105,7 +103,6 @@ public class MobileSignalController extends SignalController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class QsInfo {
         public final CharSequence description;
         public final IconState icon;
@@ -122,7 +119,6 @@ public class MobileSignalController extends SignalController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SbInfo {
         public final IconState icon;
         public final int ratTypeIcon;
@@ -152,20 +148,20 @@ public class MobileSignalController extends SignalController {
         this.mSubscriptionInfo = subscriptionInfo;
         this.mMobileMappingsProxy = mobileMappingsProxy;
         this.mNetworkNameSeparator = getTextIfExists(R.string.status_bar_network_name_separator).toString();
-        String charSequence = getTextIfExists(android.R.string.permlab_accessHiddenProfile).toString();
-        this.mNetworkNameDefault = charSequence;
+        String string = getTextIfExists(android.R.string.permlab_accessLastKnownCellId).toString();
+        this.mNetworkNameDefault = string;
         MobileMappings.Config config2 = this.mConfig;
         MobileMappingsProxyImpl mobileMappingsProxyImpl = (MobileMappingsProxyImpl) mobileMappingsProxy;
         mobileMappingsProxyImpl.getClass();
         this.mNetworkToIconLookup = MobileMappings.mapIconSets(config2);
         this.mDefaultIcons = mobileMappingsProxyImpl.getDefaultIcons(this.mConfig);
-        charSequence = subscriptionInfo.getCarrierName() != null ? subscriptionInfo.getCarrierName().toString() : charSequence;
+        string = subscriptionInfo.getCarrierName() != null ? subscriptionInfo.getCarrierName().toString() : string;
         MobileState mobileState = (MobileState) this.mLastState;
         MobileState mobileState2 = (MobileState) this.mCurrentState;
-        mobileState2.networkName = charSequence;
-        mobileState.networkName = charSequence;
-        mobileState2.networkNameData = charSequence;
-        mobileState.networkNameData = charSequence;
+        mobileState2.networkName = string;
+        mobileState.networkName = string;
+        mobileState2.networkNameData = string;
+        mobileState.networkNameData = string;
         mobileState2.enabled = z;
         mobileState.enabled = z;
         SignalIcon$MobileIconGroup signalIcon$MobileIconGroup = this.mDefaultIcons;
@@ -253,9 +249,9 @@ public class MobileSignalController extends SignalController {
 
     public final void handleBroadcast(Intent intent) {
         String action = intent.getAction();
-        boolean equals = action.equals("android.telephony.action.SERVICE_PROVIDERS_UPDATED");
+        boolean zEquals = action.equals("android.telephony.action.SERVICE_PROVIDERS_UPDATED");
         ConnectivityState connectivityState = this.mCurrentState;
-        if (!equals) {
+        if (!zEquals) {
             if (!action.equals("android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED")) {
                 if (action.equals("android.telephony.action.SUBSCRIPTION_CARRIER_IDENTITY_CHANGED")) {
                     ((MobileState) connectivityState).carrierId = intent.getIntExtra("android.telephony.extra.CARRIER_ID", -1);
@@ -325,7 +321,14 @@ public class MobileSignalController extends SignalController {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:101:0x0166  */
+    /* JADX WARN: Removed duplicated region for block: B:70:0x011c  */
+    /* JADX WARN: Removed duplicated region for block: B:86:0x0141  */
+    /* JADX WARN: Removed duplicated region for block: B:94:0x0158  */
     @Override // com.android.systemui.statusbar.connectivity.SignalController
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void notifyListeners(SignalCallback signalCallback) {
         int overrideFor;
         int i;
@@ -341,14 +344,14 @@ public class MobileSignalController extends SignalController {
         }
         ConnectivityState connectivityState = this.mCurrentState;
         SignalIcon$MobileIconGroup signalIcon$MobileIconGroup = (SignalIcon$MobileIconGroup) connectivityState.iconGroup;
-        String charSequence = getTextIfExists(getContentDescription()).toString();
+        String string = getTextIfExists(getContentDescription()).toString();
         CharSequence textIfExists = getTextIfExists(signalIcon$MobileIconGroup.dataContentDescription);
-        String spanned = Html.fromHtml(textIfExists.toString(), 0).toString();
+        String string2 = Html.fromHtml(textIfExists.toString(), 0).toString();
         MobileState mobileState = (MobileState) connectivityState;
         if (mobileState.inetCondition == 0) {
-            spanned = this.mContext.getString(R.string.data_connection_no_internet);
+            string2 = this.mContext.getString(R.string.data_connection_no_internet);
         }
-        String str2 = spanned;
+        String str2 = string2;
         Context context = this.mContext;
         SignalIcon$MobileIconGroup signalIcon$MobileIconGroup2 = (SignalIcon$MobileIconGroup) mobileState.iconGroup;
         int i2 = mobileState.carrierId;
@@ -386,10 +389,9 @@ public class MobileSignalController extends SignalController {
             if (!mobileState.isDefault) {
                 qsInfo = new QsInfo(0, null, null);
                 SignalIcon$IconGroup signalIcon$IconGroup2 = mobileState.iconGroup;
-                byte b = (signalIcon$IconGroup2 != TelephonyIcons.DATA_DISABLED || signalIcon$IconGroup2 == TelephonyIcons.NOT_DEFAULT_DATA) && mobileState.userSetup;
-                IconState iconState2 = new IconState((mobileState.enabled || mobileState.airplaneMode) ? false : true, getCurrentIconId(), charSequence);
-                if ((mobileState.dataConnected || !mobileState.isDefault) && b == false && !this.mConfig.alwaysShowDataRatIcon) {
-                    i3 = 0;
+                Object[] objArr = (signalIcon$IconGroup2 != TelephonyIcons.DATA_DISABLED || signalIcon$IconGroup2 == TelephonyIcons.NOT_DEFAULT_DATA) && mobileState.userSetup;
+                IconState iconState2 = new IconState((mobileState.enabled || mobileState.airplaneMode) ? false : true, getCurrentIconId(), string);
+                if ((mobileState.dataConnected || !mobileState.isDefault) && objArr == false && !this.mConfig.alwaysShowDataRatIcon) {
                 }
                 SbInfo sbInfo = new SbInfo((mobileState.enabled || mobileState.airplaneMode) ? false : true, i3, iconState2);
                 z = mobileState.dataConnected;
@@ -402,7 +404,7 @@ public class MobileSignalController extends SignalController {
                 signalCallback.setMobileDataIndicators(new MobileDataIndicators(sbInfo.icon, qsInfo.icon, sbInfo.ratTypeIcon, qsInfo.ratTypeIcon, z3, (z || mobileState.carrierNetworkChangeMode || !mobileState.activityOut) ? false : z2, str2, textIfExists, qsInfo.description, this.mSubscriptionInfo.getSubscriptionId(), mobileState.roaming, sbInfo.showTriangle));
             }
             i = (mobileState.dataConnected || (((signalIcon$IconGroup = mobileState.iconGroup) == TelephonyIcons.DATA_DISABLED || signalIcon$IconGroup == TelephonyIcons.NOT_DEFAULT_DATA) && mobileState.userSetup) || this.mConfig.alwaysShowDataRatIcon) ? i3 : 0;
-            IconState iconState3 = new IconState(mobileState.enabled && !mobileState.isEmergency, getCurrentIconId(), charSequence);
+            IconState iconState3 = new IconState(mobileState.enabled && !mobileState.isEmergency, getCurrentIconId(), string);
             str = mobileState.isEmergency ? null : mobileState.networkName;
             iconState = iconState3;
         }
@@ -410,17 +412,13 @@ public class MobileSignalController extends SignalController {
         SignalIcon$IconGroup signalIcon$IconGroup22 = mobileState.iconGroup;
         if (signalIcon$IconGroup22 != TelephonyIcons.DATA_DISABLED) {
         }
-        IconState iconState22 = new IconState((mobileState.enabled || mobileState.airplaneMode) ? false : true, getCurrentIconId(), charSequence);
-        if (mobileState.dataConnected) {
-        }
-        i3 = 0;
+        IconState iconState22 = new IconState((mobileState.enabled || mobileState.airplaneMode) ? false : true, getCurrentIconId(), string);
+        i3 = mobileState.dataConnected ? 0 : 0;
         SbInfo sbInfo2 = new SbInfo((mobileState.enabled || mobileState.airplaneMode) ? false : true, i3, iconState22);
         z = mobileState.dataConnected;
         if (z) {
-        }
-        z2 = true;
-        z3 = false;
-        if (z) {
+            z2 = true;
+            z3 = false;
         }
         signalCallback.setMobileDataIndicators(new MobileDataIndicators(sbInfo2.icon, qsInfo.icon, sbInfo2.ratTypeIcon, qsInfo.ratTypeIcon, z3, (z || mobileState.carrierNetworkChangeMode || !mobileState.activityOut) ? false : z2, str2, textIfExists, qsInfo.description, this.mSubscriptionInfo.getSubscriptionId(), mobileState.roaming, sbInfo2.showTriangle));
     }
@@ -441,13 +439,17 @@ public class MobileSignalController extends SignalController {
         notifyListenersIfNecessary();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x004c  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateTelephony() {
         SignalStrength signalStrength;
         TelephonyDisplayInfo telephonyDisplayInfo;
-        String str;
         String operatorAlphaShort;
-        String str2;
-        String str3;
+        String operatorAlphaShort2;
+        String operatorAlphaShort3;
+        String operatorAlphaShort4;
         int level;
         boolean z = SignalController.DEBUG;
         ConnectivityState connectivityState = this.mCurrentState;
@@ -463,31 +465,27 @@ public class MobileSignalController extends SignalController {
         }
         checkDefaultData();
         MobileState mobileState2 = (MobileState) connectivityState;
-        boolean isInService = Utils.isInService(mobileState2.serviceState);
-        mobileState2.connected = isInService;
+        boolean zIsInService = Utils.isInService(mobileState2.serviceState);
+        mobileState2.connected = zIsInService;
         boolean z2 = false;
-        if (isInService) {
+        if (zIsInService) {
             SignalStrength signalStrength2 = mobileState2.signalStrength;
             if (signalStrength2 != null) {
                 if (signalStrength2.isGsm() || !this.mConfig.alwaysShowCdmaRssi) {
                     level = signalStrength2.getLevel();
                 } else {
                     List cellSignalStrengths = signalStrength2.getCellSignalStrengths(CellSignalStrengthCdma.class);
-                    if (!cellSignalStrengths.isEmpty()) {
-                        level = ((CellSignalStrengthCdma) cellSignalStrengths.get(0)).getLevel();
-                    }
+                    level = !cellSignalStrengths.isEmpty() ? ((CellSignalStrengthCdma) cellSignalStrengths.get(0)).getLevel() : 0;
                 }
                 mobileState2.level = level;
             }
-            level = 0;
-            mobileState2.level = level;
         }
         mobileState2.carrierId = this.mPhone.getSimCarrierId();
         TelephonyDisplayInfo telephonyDisplayInfo2 = mobileState2.telephonyDisplayInfo;
         ((MobileMappingsProxyImpl) this.mMobileMappingsProxy).getClass();
-        String num = telephonyDisplayInfo2.getOverrideNetworkType() == 0 ? Integer.toString(telephonyDisplayInfo2.getNetworkType()) : MobileMappings.toDisplayIconKey(telephonyDisplayInfo2.getOverrideNetworkType());
-        if (((HashMap) this.mNetworkToIconLookup).get(num) != null) {
-            mobileState2.iconGroup = (SignalIcon$IconGroup) ((HashMap) this.mNetworkToIconLookup).get(num);
+        String string = telephonyDisplayInfo2.getOverrideNetworkType() == 0 ? Integer.toString(telephonyDisplayInfo2.getNetworkType()) : MobileMappings.toDisplayIconKey(telephonyDisplayInfo2.getOverrideNetworkType());
+        if (((HashMap) this.mNetworkToIconLookup).get(string) != null) {
+            mobileState2.iconGroup = (SignalIcon$IconGroup) ((HashMap) this.mNetworkToIconLookup).get(string);
         } else {
             mobileState2.iconGroup = this.mDefaultIcons;
         }
@@ -513,33 +511,33 @@ public class MobileSignalController extends SignalController {
             mobileState2.isEmergency = z2;
             this.mNetworkController.recalculateEmergency();
         }
-        String str4 = mobileState2.networkName;
-        String str5 = this.mNetworkNameDefault;
-        String str6 = "";
-        if (str4.equals(str5)) {
+        String str = mobileState2.networkName;
+        String str2 = this.mNetworkNameDefault;
+        String str3 = "";
+        if (str.equals(str2)) {
             ServiceState serviceState3 = mobileState2.serviceState;
-            if (serviceState3 == null || (str2 = serviceState3.getOperatorAlphaShort()) == null) {
-                str2 = "";
+            if (serviceState3 == null || (operatorAlphaShort3 = serviceState3.getOperatorAlphaShort()) == null) {
+                operatorAlphaShort3 = "";
             }
-            if (!TextUtils.isEmpty(str2)) {
+            if (!TextUtils.isEmpty(operatorAlphaShort3)) {
                 ServiceState serviceState4 = mobileState2.serviceState;
-                if (serviceState4 == null || (str3 = serviceState4.getOperatorAlphaShort()) == null) {
-                    str3 = "";
+                if (serviceState4 == null || (operatorAlphaShort4 = serviceState4.getOperatorAlphaShort()) == null) {
+                    operatorAlphaShort4 = "";
                 }
-                mobileState2.networkName = str3;
+                mobileState2.networkName = operatorAlphaShort4;
             }
         }
-        if (mobileState2.networkNameData.equals(str5) && mobileState2.dataSim) {
+        if (mobileState2.networkNameData.equals(str2) && mobileState2.dataSim) {
             ServiceState serviceState5 = mobileState2.serviceState;
-            if (serviceState5 == null || (str = serviceState5.getOperatorAlphaShort()) == null) {
-                str = "";
+            if (serviceState5 == null || (operatorAlphaShort = serviceState5.getOperatorAlphaShort()) == null) {
+                operatorAlphaShort = "";
             }
-            if (!TextUtils.isEmpty(str)) {
+            if (!TextUtils.isEmpty(operatorAlphaShort)) {
                 ServiceState serviceState6 = mobileState2.serviceState;
-                if (serviceState6 != null && (operatorAlphaShort = serviceState6.getOperatorAlphaShort()) != null) {
-                    str6 = operatorAlphaShort;
+                if (serviceState6 != null && (operatorAlphaShort2 = serviceState6.getOperatorAlphaShort()) != null) {
+                    str3 = operatorAlphaShort2;
                 }
-                mobileState2.networkNameData = str6;
+                mobileState2.networkNameData = str3;
             }
         }
         notifyListenersIfNecessary();

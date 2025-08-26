@@ -11,7 +11,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1 extends SuspendLambda implements Function3 {
     /* synthetic */ boolean Z$0;
@@ -27,11 +26,11 @@ final class DeviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1 exten
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
         DeviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1 deviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1 = new DeviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1(this.this$0, (Continuation) obj3);
-        deviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1.Z$0 = booleanValue;
-        deviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1.Z$1 = booleanValue2;
+        deviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1.Z$0 = zBooleanValue;
+        deviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1.Z$1 = zBooleanValue2;
         return deviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -45,10 +44,10 @@ final class DeviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1 exten
         boolean z = this.Z$0;
         boolean z2 = this.Z$1;
         LogBuffer logBuffer = this.this$0.logBuffer;
-        LogMessage obtain = logBuffer.obtain("DeviceBasedSatelliteInteractor", LogLevel.INFO, new DeviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1$$ExternalSyntheticLambda0(), null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        ((LogMessageImpl) obtain).bool2 = z2;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("DeviceBasedSatelliteInteractor", LogLevel.INFO, new DeviceBasedSatelliteInteractor$areAllConnectionsOutOfService$1$$ExternalSyntheticLambda0(), null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        ((LogMessageImpl) logMessageObtain).bool2 = z2;
+        logBuffer.commit(logMessageObtain);
         return Boolean.valueOf(z && !z2);
     }
 }

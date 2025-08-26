@@ -6,7 +6,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class PlaceQueryType {
     private static final /* synthetic */ EnumEntries $ENTRIES;
@@ -16,7 +15,6 @@ public final class PlaceQueryType {
     public static final PlaceQueryType BY_ENGRAM_ID = new PlaceQueryType("BY_ENGRAM_ID", 0, 0);
     public static final PlaceQueryType FREQUENTLY_VISITED_PLACES = new PlaceQueryType("FREQUENTLY_VISITED_PLACES", 1, 1);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -31,9 +29,9 @@ public final class PlaceQueryType {
     }
 
     static {
-        PlaceQueryType[] $values = $values();
-        $VALUES = $values;
-        $ENTRIES = EnumEntriesKt.enumEntries($values);
+        PlaceQueryType[] placeQueryTypeArr$values = $values();
+        $VALUES = placeQueryTypeArr$values;
+        $ENTRIES = EnumEntriesKt.enumEntries(placeQueryTypeArr$values);
         Companion = new Companion(null);
     }
 

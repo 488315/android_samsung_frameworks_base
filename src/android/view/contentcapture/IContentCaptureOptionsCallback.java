@@ -45,9 +45,9 @@ public interface IContentCaptureOptionsCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContentCaptureOptionsCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContentCaptureOptionsCallback)) {
-                return (IContentCaptureOptionsCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContentCaptureOptionsCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContentCaptureOptionsCallback)) {
+                return (IContentCaptureOptionsCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface IContentCaptureOptionsCallback extends IInterface {
 
             @Override // android.view.contentcapture.IContentCaptureOptionsCallback
             public void setContentCaptureOptions(ContentCaptureOptions contentCaptureOptions) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentCaptureOptionsCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(contentCaptureOptions, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentCaptureOptionsCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contentCaptureOptions, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

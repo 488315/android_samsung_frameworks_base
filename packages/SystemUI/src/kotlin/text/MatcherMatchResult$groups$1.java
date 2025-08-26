@@ -9,9 +9,8 @@ import kotlin.jvm.functions.Function1;
 import kotlin.ranges.IntRange;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlin.sequences.TransformingSequence;
-import kotlin.sequences.TransformingSequence$iterator$1;
+import kotlin.sequences.TransformingSequence.AnonymousClass1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MatcherMatchResult$groups$1 extends AbstractCollection implements Collection {
     public final /* synthetic */ MatcherMatchResult this$0;
@@ -40,19 +39,19 @@ public final class MatcherMatchResult$groups$1 extends AbstractCollection implem
 
     @Override // java.util.Collection, java.lang.Iterable
     public final Iterator iterator() {
-        return new TransformingSequence$iterator$1(new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(new IntRange(0, size() - 1)), new Function1() { // from class: kotlin.text.MatcherMatchResult$groups$1$$ExternalSyntheticLambda0
+        return new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(new IntRange(0, getSize() - 1)), new Function1() { // from class: kotlin.text.MatcherMatchResult$groups$1$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                int intValue = ((Integer) obj).intValue();
-                MatcherMatchResult$groups$1 matcherMatchResult$groups$1 = MatcherMatchResult$groups$1.this;
+            public final Object mo781invoke(Object obj) {
+                int iIntValue = ((Integer) obj).intValue();
+                MatcherMatchResult$groups$1 matcherMatchResult$groups$1 = this.f$0;
                 Matcher matcher = matcherMatchResult$groups$1.this$0.matcher;
-                IntRange until = RangesKt___RangesKt.until(matcher.start(intValue), matcher.end(intValue));
-                if (until.first >= 0) {
-                    return new MatchGroup(matcherMatchResult$groups$1.this$0.matcher.group(intValue), until);
+                IntRange intRangeUntil = RangesKt___RangesKt.until(matcher.start(iIntValue), matcher.end(iIntValue));
+                if (intRangeUntil.first >= 0) {
+                    return new MatchGroup(matcherMatchResult$groups$1.this$0.matcher.group(iIntValue), intRangeUntil);
                 }
                 return null;
             }
-        }));
+        }).new AnonymousClass1();
     }
 }

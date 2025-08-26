@@ -75,9 +75,9 @@ public final class HostUsiVersion implements Parcelable {
     }
 
     HostUsiVersion(Parcel parcel) {
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        this.mMajorVersion = readInt;
-        this.mMinorVersion = readInt2;
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        this.mMajorVersion = i;
+        this.mMinorVersion = i2;
     }
 }

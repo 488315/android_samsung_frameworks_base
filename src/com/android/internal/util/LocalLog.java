@@ -44,12 +44,12 @@ public class LocalLog {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         synchronized (this.mLines) {
             for (int i = 0; i < this.mLines.size(); i++) {
                 protoOutputStream.write(2237677961217L, this.mLines.get(i));
             }
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 }

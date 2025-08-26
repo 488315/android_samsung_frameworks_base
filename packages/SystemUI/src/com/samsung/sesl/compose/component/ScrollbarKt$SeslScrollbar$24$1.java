@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class ScrollbarKt$SeslScrollbar$24$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Animatable<Float, AnimationVector1D> $offsetAnimated;
@@ -43,17 +42,17 @@ final class ScrollbarKt$SeslScrollbar$24$1 extends SuspendLambda implements Func
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new ScrollbarKt$$ExternalSyntheticLambda2(this.$scrollAdapter, 1));
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new ScrollbarKt$$ExternalSyntheticLambda2(this.$scrollAdapter, 1));
             final Animatable<Float, AnimationVector1D> animatable = this.$offsetAnimated;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.samsung.sesl.compose.component.ScrollbarKt$SeslScrollbar$24$1.2
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    Object snapTo = animatable.snapTo(new Float(((Number) obj2).floatValue()), continuation);
-                    return snapTo == CoroutineSingletons.COROUTINE_SUSPENDED ? snapTo : Unit.INSTANCE;
+                    Object objSnapTo = animatable.snapTo(new Float(((Number) obj2).floatValue()), continuation);
+                    return objSnapTo == CoroutineSingletons.COROUTINE_SUSPENDED ? objSnapTo : Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (snapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
+            if (safeFlowSnapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

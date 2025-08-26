@@ -1,6 +1,7 @@
 package android.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -85,19 +86,19 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         this.mShouldCallbackDuringFling = true;
         this.mShouldCallbackOnUnselectedItemClick = true;
         this.mIsRtl = true;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Gallery, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.Gallery, attributeSet, obtainStyledAttributes, i, i2);
-        int i3 = obtainStyledAttributes.getInt(0, -1);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Gallery, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.Gallery, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        int i3 = typedArrayObtainStyledAttributes.getInt(0, -1);
         if (i3 >= 0) {
             setGravity(i3);
         }
-        int i4 = obtainStyledAttributes.getInt(1, -1);
+        int i4 = typedArrayObtainStyledAttributes.getInt(1, -1);
         if (i4 > 0) {
             setAnimationDuration(i4);
         }
-        setSpacing(obtainStyledAttributes.getDimensionPixelOffset(2, 0));
-        setUnselectedAlpha(obtainStyledAttributes.getFloat(3, 0.5f));
-        obtainStyledAttributes.recycle();
+        setSpacing(typedArrayObtainStyledAttributes.getDimensionPixelOffset(2, 0));
+        setUnselectedAlpha(typedArrayObtainStyledAttributes.getFloat(3, 0.5f));
+        typedArrayObtainStyledAttributes.recycle();
         this.mGroupFlags |= 1024;
         this.mGroupFlags |= 2048;
     }
@@ -170,7 +171,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
 
     @Override // android.widget.AdapterView, android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         super.onLayout(z, i, i2, i3, i4);
         this.mInLayout = true;
         layout(0, false);
@@ -182,7 +183,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         return view.getMeasuredHeight();
     }
 
-    void trackMotionScroll(int i) {
+    void trackMotionScroll(int i) throws Resources.NotFoundException {
         if (getChildCount() == 0) {
             return;
         }
@@ -244,105 +245,61 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         return view.getLeft() + (view.getWidth() / 2);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0033, code lost:
-    
-        if (r10.mIsRtl == false) goto L31;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0069, code lost:
-    
-        r2 = r6;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0066, code lost:
-    
-        if (r10.mIsRtl != false) goto L31;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0069 A[PHI: r5 r6
+      0x0069: PHI (r5v4 int) = (r5v1 int), (r5v6 int) binds: [B:28:0x0066, B:15:0x0033] A[DONT_GENERATE, DONT_INLINE]
+      0x0069: PHI (r6v4 int) = (r6v1 int), (r6v6 int) binds: [B:28:0x0066, B:15:0x0033] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void detachOffScreenChildren(boolean r11) {
-        /*
-            r10 = this;
-            int r0 = r10.getChildCount()
-            int r1 = r10.mFirstPosition
-            r2 = 0
-            if (r11 == 0) goto L36
-            int r3 = r10.mPaddingLeft
-            r4 = r2
-            r5 = r4
-            r6 = r5
-        Le:
-            if (r4 >= r0) goto L31
-            boolean r7 = r10.mIsRtl
-            if (r7 == 0) goto L18
-            int r7 = r0 + (-1)
-            int r7 = r7 - r4
-            goto L19
-        L18:
-            r7 = r4
-        L19:
-            android.view.View r8 = r10.getChildAt(r7)
-            int r9 = r8.getRight()
-            if (r9 < r3) goto L24
-            goto L31
-        L24:
-            int r5 = r5 + 1
-            android.widget.AbsSpinner$RecycleBin r6 = r10.mRecycler
-            int r9 = r1 + r7
-            r6.put(r9, r8)
-            int r4 = r4 + 1
-            r6 = r7
-            goto Le
-        L31:
-            boolean r0 = r10.mIsRtl
-            if (r0 != 0) goto L69
-            goto L6a
-        L36:
-            int r3 = r10.getWidth()
-            int r4 = r10.mPaddingRight
-            int r3 = r3 - r4
-            int r0 = r0 + (-1)
-            r4 = r0
-            r5 = r2
-            r6 = r5
-        L42:
-            if (r4 < 0) goto L64
-            boolean r7 = r10.mIsRtl
-            if (r7 == 0) goto L4b
-            int r7 = r0 - r4
-            goto L4c
-        L4b:
-            r7 = r4
-        L4c:
-            android.view.View r8 = r10.getChildAt(r7)
-            int r9 = r8.getLeft()
-            if (r9 > r3) goto L57
-            goto L64
-        L57:
-            int r5 = r5 + 1
-            android.widget.AbsSpinner$RecycleBin r6 = r10.mRecycler
-            int r9 = r1 + r7
-            r6.put(r9, r8)
-            int r4 = r4 + (-1)
-            r6 = r7
-            goto L42
-        L64:
-            boolean r0 = r10.mIsRtl
-            if (r0 == 0) goto L69
-            goto L6a
-        L69:
-            r2 = r6
-        L6a:
-            r10.detachViewsFromParent(r2, r5)
-            boolean r0 = r10.mIsRtl
-            if (r11 == r0) goto L76
-            int r11 = r10.mFirstPosition
-            int r11 = r11 + r5
-            r10.mFirstPosition = r11
-        L76:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.Gallery.detachOffScreenChildren(boolean):void");
+    private void detachOffScreenChildren(boolean z) {
+        int i;
+        int i2;
+        int childCount = getChildCount();
+        int i3 = this.mFirstPosition;
+        int i4 = 0;
+        if (z) {
+            int i5 = this.mPaddingLeft;
+            int i6 = 0;
+            i = 0;
+            i2 = 0;
+            while (i6 < childCount) {
+                int i7 = this.mIsRtl ? (childCount - 1) - i6 : i6;
+                View childAt = getChildAt(i7);
+                if (childAt.getRight() >= i5) {
+                    break;
+                }
+                i++;
+                this.mRecycler.put(i3 + i7, childAt);
+                i6++;
+                i2 = i7;
+            }
+            if (this.mIsRtl) {
+                i4 = i2;
+            }
+        } else {
+            int width = getWidth() - this.mPaddingRight;
+            int i8 = childCount - 1;
+            int i9 = i8;
+            i = 0;
+            i2 = 0;
+            while (i9 >= 0) {
+                int i10 = this.mIsRtl ? i8 - i9 : i9;
+                View childAt2 = getChildAt(i10);
+                if (childAt2.getLeft() <= width) {
+                    break;
+                }
+                i++;
+                this.mRecycler.put(i3 + i10, childAt2);
+                i9--;
+                i2 = i10;
+            }
+            if (!this.mIsRtl) {
+            }
+        }
+        detachViewsFromParent(i4, i);
+        if (z != this.mIsRtl) {
+            this.mFirstPosition += i;
+        }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -376,7 +333,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         super.selectionChanged();
     }
 
-    private void setSelectionToCenterChild() {
+    private void setSelectionToCenterChild() throws Resources.NotFoundException {
         View view = this.mSelectedChild;
         if (view == null) {
             return;
@@ -395,10 +352,10 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
                 if (childAt.getLeft() <= centerOfGallery && childAt.getRight() >= centerOfGallery) {
                     break;
                 }
-                int min = Math.min(Math.abs(childAt.getLeft() - centerOfGallery), Math.abs(childAt.getRight() - centerOfGallery));
-                if (min < i) {
+                int iMin = Math.min(Math.abs(childAt.getLeft() - centerOfGallery), Math.abs(childAt.getRight() - centerOfGallery));
+                if (iMin < i) {
                     i2 = childCount;
-                    i = min;
+                    i = iMin;
                 }
                 childCount--;
             }
@@ -412,7 +369,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
 
     @Override // android.widget.AbsSpinner
-    void layout(int i, boolean z) {
+    void layout(int i, boolean z) throws Resources.NotFoundException {
         this.mIsRtl = isLayoutRtl();
         int i2 = this.mSpinnerPadding.left;
         int i3 = ((this.mRight - this.mLeft) - this.mSpinnerPadding.left) - this.mSpinnerPadding.right;
@@ -431,8 +388,8 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         this.mRightMost = 0;
         this.mLeftMost = 0;
         this.mFirstPosition = this.mSelectedPosition;
-        View makeAndAddView = makeAndAddView(this.mSelectedPosition, 0, 0, true);
-        makeAndAddView.offsetLeftAndRight(((i2 + (i3 / 2)) - (makeAndAddView.getWidth() / 2)) + this.mSelectedCenterOffset);
+        View viewMakeAndAddView = makeAndAddView(this.mSelectedPosition, 0, 0, true);
+        viewMakeAndAddView.offsetLeftAndRight(((i2 + (i3 / 2)) - (viewMakeAndAddView.getWidth() / 2)) + this.mSelectedCenterOffset);
         fillToGalleryRight();
         fillToGalleryLeft();
         this.mRecycler.clear();
@@ -444,7 +401,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         updateSelectedItemMetadata();
     }
 
-    private void fillToGalleryLeft() {
+    private void fillToGalleryLeft() throws Resources.NotFoundException {
         if (this.mIsRtl) {
             fillToGalleryLeftRtl();
         } else {
@@ -454,50 +411,50 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
     private void fillToGalleryLeftRtl() {
         int i;
-        int i2;
-        int i3 = this.mSpacing;
-        int i4 = this.mPaddingLeft;
+        int left;
+        int i2 = this.mSpacing;
+        int i3 = this.mPaddingLeft;
         int childCount = getChildCount();
-        int i5 = this.mItemCount;
+        int i4 = this.mItemCount;
         View childAt = getChildAt(childCount - 1);
         if (childAt != null) {
             i = this.mFirstPosition + childCount;
-            i2 = childAt.getLeft() - i3;
+            left = childAt.getLeft() - i2;
         } else {
             i = this.mItemCount - 1;
             this.mFirstPosition = i;
-            i2 = (this.mRight - this.mLeft) - this.mPaddingRight;
+            left = (this.mRight - this.mLeft) - this.mPaddingRight;
             this.mShouldStopFling = true;
         }
-        while (i2 > i4 && i < this.mItemCount) {
-            i2 = makeAndAddView(i, i - this.mSelectedPosition, i2, false).getLeft() - i3;
+        while (left > i3 && i < this.mItemCount) {
+            left = makeAndAddView(i, i - this.mSelectedPosition, left, false).getLeft() - i2;
             i++;
         }
     }
 
-    private void fillToGalleryLeftLtr() {
+    private void fillToGalleryLeftLtr() throws Resources.NotFoundException {
+        int left;
         int i;
-        int i2;
-        int i3 = this.mSpacing;
-        int i4 = this.mPaddingLeft;
+        int i2 = this.mSpacing;
+        int i3 = this.mPaddingLeft;
         View childAt = getChildAt(0);
         if (childAt != null) {
-            i2 = this.mFirstPosition - 1;
-            i = childAt.getLeft() - i3;
+            i = this.mFirstPosition - 1;
+            left = childAt.getLeft() - i2;
         } else {
-            i = (this.mRight - this.mLeft) - this.mPaddingRight;
+            left = (this.mRight - this.mLeft) - this.mPaddingRight;
             this.mShouldStopFling = true;
-            i2 = 0;
+            i = 0;
         }
-        while (i > i4 && i2 >= 0) {
-            View makeAndAddView = makeAndAddView(i2, i2 - this.mSelectedPosition, i, false);
-            this.mFirstPosition = i2;
-            i = makeAndAddView.getLeft() - i3;
-            i2--;
+        while (left > i3 && i >= 0) {
+            View viewMakeAndAddView = makeAndAddView(i, i - this.mSelectedPosition, left, false);
+            this.mFirstPosition = i;
+            left = viewMakeAndAddView.getLeft() - i2;
+            i--;
         }
     }
 
-    private void fillToGalleryRight() {
+    private void fillToGalleryRight() throws Resources.NotFoundException {
         if (this.mIsRtl) {
             fillToGalleryRightRtl();
         } else {
@@ -505,51 +462,51 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         }
     }
 
-    private void fillToGalleryRightRtl() {
-        int i;
-        int i2 = this.mSpacing;
-        int i3 = (this.mRight - this.mLeft) - this.mPaddingRight;
-        int i4 = 0;
+    private void fillToGalleryRightRtl() throws Resources.NotFoundException {
+        int right;
+        int i = this.mSpacing;
+        int i2 = (this.mRight - this.mLeft) - this.mPaddingRight;
+        int i3 = 0;
         View childAt = getChildAt(0);
         if (childAt != null) {
-            i4 = this.mFirstPosition - 1;
-            i = childAt.getRight() + i2;
+            i3 = this.mFirstPosition - 1;
+            right = childAt.getRight() + i;
         } else {
-            i = this.mPaddingLeft;
+            right = this.mPaddingLeft;
             this.mShouldStopFling = true;
         }
-        while (i < i3 && i4 >= 0) {
-            View makeAndAddView = makeAndAddView(i4, i4 - this.mSelectedPosition, i, true);
-            this.mFirstPosition = i4;
-            i = makeAndAddView.getRight() + i2;
-            i4--;
+        while (right < i2 && i3 >= 0) {
+            View viewMakeAndAddView = makeAndAddView(i3, i3 - this.mSelectedPosition, right, true);
+            this.mFirstPosition = i3;
+            right = viewMakeAndAddView.getRight() + i;
+            i3--;
         }
     }
 
     private void fillToGalleryRightLtr() {
         int i;
-        int i2;
-        int i3 = this.mSpacing;
-        int i4 = (this.mRight - this.mLeft) - this.mPaddingRight;
+        int right;
+        int i2 = this.mSpacing;
+        int i3 = (this.mRight - this.mLeft) - this.mPaddingRight;
         int childCount = getChildCount();
-        int i5 = this.mItemCount;
+        int i4 = this.mItemCount;
         View childAt = getChildAt(childCount - 1);
         if (childAt != null) {
             i = this.mFirstPosition + childCount;
-            i2 = childAt.getRight() + i3;
+            right = childAt.getRight() + i2;
         } else {
             i = this.mItemCount - 1;
             this.mFirstPosition = i;
-            i2 = this.mPaddingLeft;
+            right = this.mPaddingLeft;
             this.mShouldStopFling = true;
         }
-        while (i2 < i4 && i < i5) {
-            i2 = makeAndAddView(i, i - this.mSelectedPosition, i2, true).getRight() + i3;
+        while (right < i3 && i < i4) {
+            right = makeAndAddView(i, i - this.mSelectedPosition, right, true).getRight() + i2;
             i++;
         }
     }
 
-    private View makeAndAddView(int i, int i2, int i3, boolean z) {
+    private View makeAndAddView(int i, int i2, int i3, boolean z) throws Resources.NotFoundException {
         View view;
         if (!this.mDataChanged && (view = this.mRecycler.get(i)) != null) {
             int left = view.getLeft();
@@ -563,7 +520,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         return view2;
     }
 
-    private void setUpChild(View view, int i, int i2, boolean z) {
+    private void setUpChild(View view, int i, int i2, boolean z) throws Resources.NotFoundException {
         int i3;
         LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
         if (layoutParams == null) {
@@ -572,8 +529,8 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         addViewInLayout(view, z != this.mIsRtl ? -1 : 0, layoutParams, true);
         view.setSelected(i == 0);
         view.measure(ViewGroup.getChildMeasureSpec(this.mWidthMeasureSpec, this.mSpinnerPadding.left + this.mSpinnerPadding.right, layoutParams.width), ViewGroup.getChildMeasureSpec(this.mHeightMeasureSpec, this.mSpinnerPadding.top + this.mSpinnerPadding.bottom, layoutParams.height));
-        int calculateTop = calculateTop(view, true);
-        int measuredHeight = view.getMeasuredHeight() + calculateTop;
+        int iCalculateTop = calculateTop(view, true);
+        int measuredHeight = view.getMeasuredHeight() + iCalculateTop;
         int measuredWidth = view.getMeasuredWidth();
         if (z) {
             i3 = measuredWidth + i2;
@@ -582,7 +539,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
             i3 = i2;
             i2 = i4;
         }
-        view.layout(i2, calculateTop, i3, measuredHeight);
+        view.layout(i2, iCalculateTop, i3, measuredHeight);
     }
 
     private int calculateTop(View view, boolean z) {
@@ -603,16 +560,16 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
 
     @Override // android.view.View
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        boolean onTouchEvent = this.mGestureDetector.onTouchEvent(motionEvent);
+        boolean zOnTouchEvent = this.mGestureDetector.onTouchEvent(motionEvent);
         int action = motionEvent.getAction();
         if (action == 1) {
             onUp();
-            return onTouchEvent;
+            return zOnTouchEvent;
         }
         if (action == 3) {
             onCancel();
         }
-        return onTouchEvent;
+        return zOnTouchEvent;
     }
 
     @Override // android.view.GestureDetector.OnGestureListener
@@ -642,7 +599,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
 
     @Override // android.view.GestureDetector.OnGestureListener
-    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) throws Resources.NotFoundException {
         this.mParent.requestDisallowInterceptTouchEvent(true);
         if (!this.mShouldCallbackDuringFling) {
             if (this.mIsFirstScroll) {
@@ -662,10 +619,10 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     @Override // android.view.GestureDetector.OnGestureListener
     public boolean onDown(MotionEvent motionEvent) {
         this.mFlingRunnable.stop(false);
-        int pointToPosition = pointToPosition((int) motionEvent.getX(), (int) motionEvent.getY());
-        this.mDownTouchPosition = pointToPosition;
-        if (pointToPosition >= 0) {
-            View childAt = getChildAt(pointToPosition - this.mFirstPosition);
+        int iPointToPosition = pointToPosition((int) motionEvent.getX(), (int) motionEvent.getY());
+        this.mDownTouchPosition = iPointToPosition;
+        if (iPointToPosition >= 0) {
+            View childAt = getChildAt(iPointToPosition - this.mFirstPosition);
             this.mDownTouchView = childAt;
             childAt.setPressed(true);
         }
@@ -768,29 +725,29 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     private boolean dispatchLongPress(View view, int i, long j, float f, float f2, boolean z) {
         Gallery gallery;
         long j2;
-        boolean z2;
+        boolean zShowContextMenuForChild;
         if (this.mOnItemLongClickListener != null) {
             Gallery gallery2 = this;
             j2 = j;
-            z2 = this.mOnItemLongClickListener.onItemLongClick(gallery2, this.mDownTouchView, this.mDownTouchPosition, j2);
+            zShowContextMenuForChild = this.mOnItemLongClickListener.onItemLongClick(gallery2, this.mDownTouchView, this.mDownTouchPosition, j2);
             gallery = gallery2;
         } else {
             gallery = this;
             j2 = j;
-            z2 = false;
+            zShowContextMenuForChild = false;
         }
-        if (!z2) {
+        if (!zShowContextMenuForChild) {
             gallery.mContextMenuInfo = new AdapterView.AdapterContextMenuInfo(view, i, j2);
             if (z) {
-                z2 = super.showContextMenuForChild(view, f, f2);
+                zShowContextMenuForChild = super.showContextMenuForChild(view, f, f2);
             } else {
-                z2 = super.showContextMenuForChild(gallery);
+                zShowContextMenuForChild = super.showContextMenuForChild(gallery);
             }
         }
-        if (z2) {
+        if (zShowContextMenuForChild) {
             gallery.performHapticFeedback(0);
         }
-        return z2;
+        return zShowContextMenuForChild;
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -798,7 +755,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         return keyEvent.dispatch(this, null, null);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x001f  */
     @Override // android.view.View, android.view.KeyEvent.Callback
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean onKeyDown(int i, KeyEvent keyEvent) {
         if (i != 66) {
             switch (i) {
@@ -814,10 +775,11 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
                         return true;
                     }
                     break;
+                case 23:
+                    this.mReceivedInvokeKeyDown = true;
+                    break;
             }
-            return super.onKeyDown(i, keyEvent);
         }
-        this.mReceivedInvokeKeyDown = true;
         return super.onKeyDown(i, keyEvent);
     }
 
@@ -862,12 +824,12 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
 
     @Override // android.widget.AdapterView
-    void setSelectedPositionInt(int i) {
+    void setSelectedPositionInt(int i) throws Resources.NotFoundException {
         super.setSelectedPositionInt(i);
         updateSelectedItemMetadata();
     }
 
-    private void updateSelectedItemMetadata() {
+    private void updateSelectedItemMetadata() throws Resources.NotFoundException {
         View view = this.mSelectedChild;
         View childAt = getChildAt(this.mSelectedPosition - this.mFirstPosition);
         this.mSelectedChild = childAt;
@@ -900,7 +862,7 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
     }
 
     @Override // android.view.View
-    protected void onFocusChanged(boolean z, int i, Rect rect) {
+    protected void onFocusChanged(boolean z, int i, Rect rect) throws Resources.NotFoundException {
         View view;
         super.onFocusChanged(z, i, rect);
         if (!z || (view = this.mSelectedChild) == null) {
@@ -994,29 +956,29 @@ public class Gallery extends AbsSpinner implements GestureDetector.OnGestureList
         }
 
         @Override // java.lang.Runnable
-        public void run() {
-            int max;
+        public void run() throws Resources.NotFoundException {
+            int iMax;
             if (Gallery.this.mItemCount == 0) {
                 endFling(true);
                 return;
             }
             Gallery.this.mShouldStopFling = false;
             Scroller scroller = this.mScroller;
-            boolean computeScrollOffset = scroller.computeScrollOffset();
+            boolean zComputeScrollOffset = scroller.computeScrollOffset();
             int currX = scroller.getCurrX();
             int i = this.mLastFlingX - currX;
             if (i > 0) {
                 Gallery gallery = Gallery.this;
                 gallery.mDownTouchPosition = gallery.mIsRtl ? (Gallery.this.mFirstPosition + Gallery.this.getChildCount()) - 1 : Gallery.this.mFirstPosition;
-                max = Math.min(((Gallery.this.getWidth() - Gallery.this.mPaddingLeft) - Gallery.this.mPaddingRight) - 1, i);
+                iMax = Math.min(((Gallery.this.getWidth() - Gallery.this.mPaddingLeft) - Gallery.this.mPaddingRight) - 1, i);
             } else {
                 Gallery.this.getChildCount();
                 Gallery gallery2 = Gallery.this;
                 gallery2.mDownTouchPosition = gallery2.mIsRtl ? Gallery.this.mFirstPosition : (Gallery.this.mFirstPosition + Gallery.this.getChildCount()) - 1;
-                max = Math.max(-(((Gallery.this.getWidth() - Gallery.this.mPaddingRight) - Gallery.this.mPaddingLeft) - 1), i);
+                iMax = Math.max(-(((Gallery.this.getWidth() - Gallery.this.mPaddingRight) - Gallery.this.mPaddingLeft) - 1), i);
             }
-            Gallery.this.trackMotionScroll(max);
-            if (computeScrollOffset && !Gallery.this.mShouldStopFling) {
+            Gallery.this.trackMotionScroll(iMax);
+            if (zComputeScrollOffset && !Gallery.this.mShouldStopFling) {
                 this.mLastFlingX = currX;
                 Gallery.this.post(this);
             } else {

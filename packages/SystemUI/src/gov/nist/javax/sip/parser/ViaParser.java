@@ -10,7 +10,6 @@ import gov.nist.javax.sip.header.Via;
 import gov.nist.javax.sip.header.ViaList;
 import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ViaParser extends HeaderParser {
     public ViaParser(String str) {
@@ -18,9 +17,9 @@ public class ViaParser extends HeaderParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws ParseException {
         NameValue nameValue;
-        String str;
+        String strQuotedString;
         ViaList viaList = new ViaList();
         this.lexer.match(2064);
         this.lexer.SPorHT();
@@ -66,15 +65,15 @@ public class ViaParser extends HeaderParser {
                         this.lexer.consume(1);
                         this.lexer.SPorHT();
                         if (token4.tokenValue.compareToIgnoreCase("received") == 0) {
-                            str = this.lexer.byteStringNoSemicolon();
+                            strQuotedString = this.lexer.byteStringNoSemicolon();
                         } else if (this.lexer.lookAhead(0) == '\"') {
-                            str = this.lexer.quotedString();
+                            strQuotedString = this.lexer.quotedString();
                             z = true;
                         } else {
                             this.lexer.match(4095);
-                            str = this.lexer.currentMatch.tokenValue;
+                            strQuotedString = this.lexer.currentMatch.tokenValue;
                         }
-                        nameValue = new NameValue(token4.tokenValue.toLowerCase(), str);
+                        nameValue = new NameValue(token4.tokenValue.toLowerCase(), strQuotedString);
                         if (z) {
                             nameValue.setQuotedValue();
                         }
@@ -95,21 +94,21 @@ public class ViaParser extends HeaderParser {
                 this.lexer.consume(1);
                 StringBuffer stringBuffer = new StringBuffer();
                 while (true) {
-                    char lookAhead = this.lexer.lookAhead(0);
-                    if (lookAhead == ')') {
+                    char cLookAhead = this.lexer.lookAhead(0);
+                    if (cLookAhead == ')') {
                         this.lexer.consume(1);
                         break;
                     }
-                    if (lookAhead == '\\') {
+                    if (cLookAhead == '\\') {
                         stringBuffer.append(this.lexer.currentMatch.tokenValue);
                         this.lexer.consume(1);
                         stringBuffer.append(this.lexer.currentMatch.tokenValue);
                         this.lexer.consume(1);
                     } else {
-                        if (lookAhead == '\n') {
+                        if (cLookAhead == '\n') {
                             break;
                         }
-                        stringBuffer.append(lookAhead);
+                        stringBuffer.append(cLookAhead);
                         this.lexer.consume(1);
                     }
                 }

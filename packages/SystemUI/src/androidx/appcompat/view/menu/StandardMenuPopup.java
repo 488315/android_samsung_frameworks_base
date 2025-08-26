@@ -2,6 +2,7 @@ package androidx.appcompat.view.menu;
 
 import android.R;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -24,7 +25,6 @@ import androidx.reflect.SeslBaseReflector;
 import androidx.reflect.widget.SeslPopupWindowReflector;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class StandardMenuPopup extends MenuPopup implements PopupWindow.OnDismissListener, AdapterView.OnItemClickListener, View.OnKeyListener {
     public final MenuAdapter mAdapter;
@@ -49,7 +49,7 @@ public final class StandardMenuPopup extends MenuPopup implements PopupWindow.On
     public boolean mAllowScrollingAnchorParent = true;
     public final AnonymousClass1 mGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: androidx.appcompat.view.menu.StandardMenuPopup.1
         @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-        public final void onGlobalLayout() {
+        public final void onGlobalLayout() throws Resources.NotFoundException {
             if (StandardMenuPopup.this.isShowing()) {
                 View view = StandardMenuPopup.this.mShownAnchorView;
                 if (view == null || !view.isShown()) {
@@ -82,7 +82,7 @@ public final class StandardMenuPopup extends MenuPopup implements PopupWindow.On
 
     /* JADX WARN: Type inference failed for: r2v1, types: [androidx.appcompat.view.menu.StandardMenuPopup$1] */
     /* JADX WARN: Type inference failed for: r2v2, types: [androidx.appcompat.view.menu.StandardMenuPopup$2] */
-    public StandardMenuPopup(Context context, MenuBuilder menuBuilder, View view, int i, int i2, boolean z) {
+    public StandardMenuPopup(Context context, MenuBuilder menuBuilder, View view, int i, int i2, boolean z) throws Resources.NotFoundException {
         int i3 = 0;
         this.mIsSubMenu = false;
         TypedValue typedValue = new TypedValue();
@@ -95,15 +95,15 @@ public final class StandardMenuPopup extends MenuPopup implements PopupWindow.On
         this.mMenu = menuBuilder;
         this.mIsSubMenu = menuBuilder instanceof SubMenuBuilder;
         this.mOverflowOnly = z;
-        LayoutInflater from = LayoutInflater.from(context);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(context);
         int size = menuBuilder.mItems.size();
         while (true) {
             if (i3 >= size) {
-                this.mAdapter = new MenuAdapter(menuBuilder, from, this.mOverflowOnly, com.android.systemui.R.layout.sesl_popup_menu_item_layout);
+                this.mAdapter = new MenuAdapter(menuBuilder, layoutInflaterFrom, this.mOverflowOnly, com.android.systemui.R.layout.sesl_popup_menu_item_layout);
                 break;
             } else {
                 if ((((MenuItemImpl) this.mMenu.getItem(i3)).mFlags & 4) != 0) {
-                    this.mAdapter = new MenuAdapter(menuBuilder, from, this.mOverflowOnly, com.android.systemui.R.layout.sesl_popup_sub_menu_item_layout);
+                    this.mAdapter = new MenuAdapter(menuBuilder, layoutInflaterFrom, this.mOverflowOnly, com.android.systemui.R.layout.sesl_popup_sub_menu_item_layout);
                     break;
                 }
                 i3++;
@@ -182,8 +182,8 @@ public final class StandardMenuPopup extends MenuPopup implements PopupWindow.On
     }
 
     @Override // androidx.appcompat.view.menu.MenuPresenter
-    public final boolean onSubMenuSelected(SubMenuBuilder subMenuBuilder) {
-        MenuItem menuItem;
+    public final boolean onSubMenuSelected(SubMenuBuilder subMenuBuilder) throws Resources.NotFoundException {
+        MenuItem item;
         if (!subMenuBuilder.hasVisibleItems()) {
             return false;
         }
@@ -194,24 +194,24 @@ public final class StandardMenuPopup extends MenuPopup implements PopupWindow.On
         if (standardMenuPopup != null) {
             standardMenuPopup.mPresenterCallback = callback;
         }
-        boolean shouldPreserveIconSpacing = MenuPopup.shouldPreserveIconSpacing(subMenuBuilder);
-        menuPopupHelper.mForceShowIcon = shouldPreserveIconSpacing;
+        boolean zShouldPreserveIconSpacing = MenuPopup.shouldPreserveIconSpacing(subMenuBuilder);
+        menuPopupHelper.mForceShowIcon = zShouldPreserveIconSpacing;
         StandardMenuPopup standardMenuPopup2 = menuPopupHelper.mPopup;
         if (standardMenuPopup2 != null) {
-            standardMenuPopup2.mAdapter.mForceShowIcon = shouldPreserveIconSpacing;
+            standardMenuPopup2.mAdapter.mForceShowIcon = zShouldPreserveIconSpacing;
         }
         menuPopupHelper.mOnDismissListener = this.mOnDismissListener;
-        View view = null;
+        View childAt = null;
         this.mOnDismissListener = null;
         int size = this.mMenu.mItems.size();
         int i = 0;
         while (true) {
             if (i >= size) {
-                menuItem = null;
+                item = null;
                 break;
             }
-            menuItem = this.mMenu.getItem(i);
-            if (menuItem.hasSubMenu() && subMenuBuilder == menuItem.getSubMenu()) {
+            item = this.mMenu.getItem(i);
+            if (item.hasSubMenu() && subMenuBuilder == item.getSubMenu()) {
                 break;
             }
             i++;
@@ -223,7 +223,7 @@ public final class StandardMenuPopup extends MenuPopup implements PopupWindow.On
                 i2 = -1;
                 break;
             }
-            if (menuItem == this.mAdapter.getItem(i2)) {
+            if (item == this.mAdapter.getItem(i2)) {
                 break;
             }
             i2++;
@@ -234,10 +234,10 @@ public final class StandardMenuPopup extends MenuPopup implements PopupWindow.On
             if (firstVisiblePosition >= 0) {
                 this.mTmpListView.getChildCount();
             }
-            view = this.mTmpListView.getChildAt(firstVisiblePosition);
+            childAt = this.mTmpListView.getChildAt(firstVisiblePosition);
         }
-        if (view != null) {
-            view.getMeasuredHeight();
+        if (childAt != null) {
+            childAt.getMeasuredHeight();
         }
         menuPopupHelper.mDropDownGravity = this.mDropDownGravity;
         this.mMenu.close(false);

@@ -2,7 +2,6 @@ package com.samsung.android.sesl.transparentvideo.mediaplayer;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class IMediaPlayer$MediaError {
     public final String message;
@@ -25,9 +24,9 @@ public final class IMediaPlayer$MediaError {
     }
 
     public final int hashCode() {
-        int hashCode = this.type.hashCode() * 31;
+        int iHashCode = this.type.hashCode() * 31;
         String str = this.message;
-        return hashCode + (str == null ? 0 : str.hashCode());
+        return iHashCode + (str == null ? 0 : str.hashCode());
     }
 
     public final String toString() {

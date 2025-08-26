@@ -89,7 +89,7 @@ public final class RemoteAction implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public RemoteAction m568clone() {
+    public RemoteAction m572clone() {
         RemoteAction remoteAction = new RemoteAction(this.mIcon, this.mTitle, this.mContentDescription, this.mActionIntent);
         remoteAction.setEnabled(this.mEnabled);
         remoteAction.setShouldShowIcon(this.mShouldShowIcon);

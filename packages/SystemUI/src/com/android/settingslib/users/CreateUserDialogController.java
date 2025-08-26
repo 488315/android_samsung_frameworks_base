@@ -41,9 +41,10 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.concurrent.Callable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CreateUserDialogController {
     public Activity mActivity;
@@ -68,7 +69,6 @@ public class CreateUserDialogController {
     public EditText mUserNameView;
     public boolean mWaitingForActivityResult;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CustomLengthFilter extends InputFilter.LengthFilter {
         public final Activity mActivity;
 
@@ -79,9 +79,9 @@ public class CreateUserDialogController {
 
         @Override // android.text.InputFilter.LengthFilter, android.text.InputFilter
         public final CharSequence filter(CharSequence charSequence, int i, int i2, Spanned spanned, int i3, int i4) {
-            char charAt;
-            CharSequence filter = super.filter(charSequence, i, i2, spanned, i3, i4);
-            if (filter != null) {
+            char cCharAt;
+            CharSequence charSequenceFilter = super.filter(charSequence, i, i2, spanned, i3, i4);
+            if (charSequenceFilter != null) {
                 Toast toast = CreateUserDialogController.this.mMaxToast;
                 if (toast != null && (toast.getView() == null || CreateUserDialogController.this.mMaxToast.getView().isShown())) {
                     CreateUserDialogController.this.mMaxToast.cancel();
@@ -90,11 +90,11 @@ public class CreateUserDialogController {
                 Activity activity = this.mActivity;
                 createUserDialogController.mMaxToast = Toast.makeText(activity, activity.getResources().getString(R.string.max_byte_error), 0);
                 CreateUserDialogController.this.mMaxToast.show();
-                if (filter.length() > 0 && ((charAt = charSequence.charAt(filter.length() - 1)) == 9770 || charAt == 10013)) {
+                if (charSequenceFilter.length() > 0 && ((cCharAt = charSequence.charAt(charSequenceFilter.length() - 1)) == 9770 || cCharAt == 10013)) {
                     return "";
                 }
             }
-            return filter;
+            return charSequenceFilter;
         }
     }
 
@@ -102,20 +102,20 @@ public class CreateUserDialogController {
         this.mFileAuthority = str;
     }
 
-    public final Dialog createDialog(Activity activity, ActivityStarter activityStarter, final boolean z, NewUserData newUserData, Runnable runnable) {
+    public final Dialog createDialog(Activity activity, ActivityStarter activityStarter, final boolean z, NewUserData newUserData, Runnable runnable) throws Resources.NotFoundException {
         this.mActivity = activity;
         this.mCustomDialogHelper = new CustomDialogHelper(activity);
         this.mSuccessCallback = newUserData;
         this.mCancelCallback = runnable;
         this.mActivityStarter = activityStarter;
-        View inflate = View.inflate(this.mActivity, R.layout.grant_admin_dialog_content, null);
-        this.mGrantAdminView = inflate;
-        this.mCustomDialogHelper.mCustomLayout.addView(inflate);
+        View viewInflate = View.inflate(this.mActivity, R.layout.grant_admin_dialog_content, null);
+        this.mGrantAdminView = viewInflate;
+        this.mCustomDialogHelper.mCustomLayout.addView(viewInflate);
         RadioGroup radioGroup = (RadioGroup) this.mGrantAdminView.findViewById(R.id.choose_admin);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() { // from class: com.android.settingslib.users.CreateUserDialogController$$ExternalSyntheticLambda5
             @Override // android.widget.RadioGroup.OnCheckedChangeListener
             public final void onCheckedChanged(RadioGroup radioGroup2, int i) {
-                CreateUserDialogController createUserDialogController = CreateUserDialogController.this;
+                CreateUserDialogController createUserDialogController = this.f$0;
                 createUserDialogController.mCustomDialogHelper.setButtonEnabled(true);
                 createUserDialogController.mIsAdmin = Boolean.valueOf(i == R.id.grant_admin_yes);
             }
@@ -125,9 +125,9 @@ public class CreateUserDialogController {
         } else if (Boolean.FALSE.equals(this.mIsAdmin)) {
             ((RadioButton) radioGroup.findViewById(R.id.grant_admin_no)).setChecked(true);
         }
-        View inflate2 = View.inflate(this.mActivity, R.layout.edit_user_info_dialog_content, null);
-        this.mEditUserInfoView = inflate2;
-        this.mCustomDialogHelper.mCustomLayout.addView(inflate2);
+        View viewInflate2 = View.inflate(this.mActivity, R.layout.edit_user_info_dialog_content, null);
+        this.mEditUserInfoView = viewInflate2;
+        this.mCustomDialogHelper.mCustomLayout.addView(viewInflate2);
         EditText editText = (EditText) this.mEditUserInfoView.findViewById(R.id.user_name);
         this.mUserNameView = editText;
         String str = this.mSavedName;
@@ -145,7 +145,7 @@ public class CreateUserDialogController {
         editText2.setOnFocusChangeListener(new View.OnFocusChangeListener() { // from class: com.android.settingslib.users.CreateUserDialogController$$ExternalSyntheticLambda3
             @Override // android.view.View.OnFocusChangeListener
             public final void onFocusChange(View view, boolean z2) {
-                CreateUserDialogController createUserDialogController = CreateUserDialogController.this;
+                CreateUserDialogController createUserDialogController = this.f$0;
                 EditText editText3 = editText2;
                 if (z2) {
                     createUserDialogController.getClass();
@@ -179,19 +179,19 @@ public class CreateUserDialogController {
         final ImageView imageView = (ImageView) this.mEditUserInfoView.findViewById(R.id.user_photo);
         Drawable defaultUserIcon = UserIcons.getDefaultUserIcon(this.mActivity.getResources(), -10000, false);
         if (this.mCachedDrawablePath != null) {
-            ListenableFuture submit = ((AbstractListeningExecutorService) ThreadUtils.getBackgroundExecutor()).submit(new Callable() { // from class: com.android.settingslib.users.CreateUserDialogController$$ExternalSyntheticLambda6
+            ListenableFuture listenableFutureSubmit = ((AbstractListeningExecutorService) ThreadUtils.getBackgroundExecutor()).submit(new Callable() { // from class: com.android.settingslib.users.CreateUserDialogController$$ExternalSyntheticLambda6
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    CreateUserDialogController createUserDialogController = CreateUserDialogController.this;
+                    CreateUserDialogController createUserDialogController = this.f$0;
                     createUserDialogController.getClass();
-                    Bitmap decodeFile = BitmapFactory.decodeFile(new File(createUserDialogController.mCachedDrawablePath).getAbsolutePath());
-                    createUserDialogController.mSavedPhoto = decodeFile;
-                    CircleFramedDrawable circleFramedDrawable = new CircleFramedDrawable(decodeFile, createUserDialogController.mActivity.getResources().getDimensionPixelSize(R.dimen.user_photo_size_in_user_info_dialog));
+                    Bitmap bitmapDecodeFile = BitmapFactory.decodeFile(new File(createUserDialogController.mCachedDrawablePath).getAbsolutePath());
+                    createUserDialogController.mSavedPhoto = bitmapDecodeFile;
+                    CircleFramedDrawable circleFramedDrawable = new CircleFramedDrawable(bitmapDecodeFile, createUserDialogController.mActivity.getResources().getDimensionPixelSize(R.dimen.user_photo_size_in_user_info_dialog));
                     createUserDialogController.mSavedDrawable = circleFramedDrawable;
                     return circleFramedDrawable;
                 }
             });
-            submit.addListener(new Futures.CallbackListener(submit, new FutureCallback(this) { // from class: com.android.settingslib.users.CreateUserDialogController.1
+            listenableFutureSubmit.addListener(new Futures.CallbackListener(listenableFutureSubmit, new FutureCallback(this) { // from class: com.android.settingslib.users.CreateUserDialogController.1
                 @Override // com.google.common.util.concurrent.FutureCallback
                 public final void onSuccess(Object obj) {
                     imageView.setImageDrawable((Drawable) obj);
@@ -212,7 +212,7 @@ public class CreateUserDialogController {
                 imageView.setOnClickListener(new View.OnClickListener() { // from class: com.android.settingslib.users.CreateUserDialogController$$ExternalSyntheticLambda4
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
-                        CreateUserDialogController createUserDialogController = CreateUserDialogController.this;
+                        CreateUserDialogController createUserDialogController = this.f$0;
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(createUserDialogController.mActivity, changePhotoAdminRestriction);
                     }
                 });
@@ -229,7 +229,7 @@ public class CreateUserDialogController {
             }
 
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
+            public final void onClick(View view) throws Resources.NotFoundException {
                 switch (i) {
                     case 0:
                         CreateUserDialogController createUserDialogController = this.f$0;
@@ -265,7 +265,7 @@ public class CreateUserDialogController {
             }
 
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
+            public final void onClick(View view) throws Resources.NotFoundException {
                 switch (i2) {
                     case 0:
                         CreateUserDialogController createUserDialogController = this.f$0;
@@ -297,7 +297,7 @@ public class CreateUserDialogController {
         this.mUserCreationDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.settingslib.users.CreateUserDialogController$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                CreateUserDialogController createUserDialogController = CreateUserDialogController.this;
+                CreateUserDialogController createUserDialogController = this.f$0;
                 if (createUserDialogController.mCurrentState == 3) {
                     NewUserData newUserData2 = createUserDialogController.mSuccessCallback;
                     if (newUserData2 != null) {
@@ -352,14 +352,14 @@ public class CreateUserDialogController {
         this.mWaitingForActivityResult = false;
         final EditUserPhotoController editUserPhotoController = this.mEditUserPhotoController;
         if (editUserPhotoController != null && i2 == -1 && i == 1004) {
-            boolean hasExtra = intent.hasExtra("default_icon_tint_color");
+            boolean zHasExtra = intent.hasExtra("default_icon_tint_color");
             ListeningExecutorService listeningExecutorService = editUserPhotoController.mExecutorService;
-            if (hasExtra) {
+            if (zHasExtra) {
                 final int intExtra = intent.getIntExtra("default_icon_tint_color", -1);
-                ListenableFuture submit = ((AbstractListeningExecutorService) listeningExecutorService).submit(new Callable() { // from class: com.android.settingslib.users.EditUserPhotoController$$ExternalSyntheticLambda2
+                ListenableFuture listenableFutureSubmit = ((AbstractListeningExecutorService) listeningExecutorService).submit(new Callable() { // from class: com.android.settingslib.users.EditUserPhotoController$$ExternalSyntheticLambda2
                     @Override // java.util.concurrent.Callable
                     public final Object call() {
-                        Resources resources = EditUserPhotoController.this.mActivity.getResources();
+                        Resources resources = editUserPhotoController.mActivity.getResources();
                         return UserIcons.convertToBitmapAtUserIconSize(resources, UserIcons.getDefaultUserIconInColor(resources, intExtra));
                     }
                 });
@@ -374,17 +374,17 @@ public class CreateUserDialogController {
 
                     @Override // com.google.common.util.concurrent.FutureCallback
                     public final void onSuccess(Object obj) {
-                        EditUserPhotoController.m976$$Nest$monPhotoProcessed(EditUserPhotoController.this, (Bitmap) obj);
+                        EditUserPhotoController.m978$$Nest$monPhotoProcessed(EditUserPhotoController.this, (Bitmap) obj);
                     }
                 };
-                submit.addListener(new Futures.CallbackListener(submit, anonymousClass1), editUserPhotoController.mImageView.getContext().getMainExecutor());
+                listenableFutureSubmit.addListener(new Futures.CallbackListener(listenableFutureSubmit, anonymousClass1), editUserPhotoController.mImageView.getContext().getMainExecutor());
                 return;
             }
             if (intent.getData() != null) {
                 final Uri data = intent.getData();
-                ListenableFuture submit2 = ((AbstractListeningExecutorService) listeningExecutorService).submit(new Callable() { // from class: com.android.settingslib.users.EditUserPhotoController$$ExternalSyntheticLambda1
+                ListenableFuture listenableFutureSubmit2 = ((AbstractListeningExecutorService) listeningExecutorService).submit(new Callable() { // from class: com.android.settingslib.users.EditUserPhotoController$$ExternalSyntheticLambda1
                     /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Removed duplicated region for block: B:25:0x003b A[EXC_TOP_SPLITTER, SYNTHETIC] */
+                    /* JADX WARN: Removed duplicated region for block: B:33:0x003b A[EXC_TOP_SPLITTER, SYNTHETIC] */
                     /* JADX WARN: Type inference failed for: r3v2, types: [java.io.InputStream] */
                     /* JADX WARN: Type inference failed for: r3v3 */
                     /* JADX WARN: Type inference failed for: r3v8 */
@@ -392,63 +392,68 @@ public class CreateUserDialogController {
                     /* JADX WARN: Type inference failed for: r5v2, types: [java.io.IOException, java.lang.Throwable] */
                     /* JADX WARN: Type inference failed for: r5v6 */
                     /* JADX WARN: Type inference failed for: r5v7, types: [java.io.InputStream] */
-                    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:34:0x0021 -> B:9:0x0038). Please report as a decompilation issue!!! */
+                    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:9:0x0021 -> B:28:0x0038). Please report as a decompilation issue!!! */
                     @Override // java.util.concurrent.Callable
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
                     */
-                    public final java.lang.Object call() {
-                        /*
-                            r5 = this;
-                            android.net.Uri r0 = r2
-                            com.android.settingslib.users.EditUserPhotoController r5 = com.android.settingslib.users.EditUserPhotoController.this
-                            r5.getClass()
-                            java.lang.String r1 = "Cannot close image stream"
-                            java.lang.String r2 = "EditUserPhotoController"
-                            r3 = 0
-                            android.app.Activity r5 = r5.mActivity     // Catch: java.lang.Throwable -> L2a java.io.FileNotFoundException -> L2c
-                            android.content.ContentResolver r5 = r5.getContentResolver()     // Catch: java.lang.Throwable -> L2a java.io.FileNotFoundException -> L2c
-                            java.io.InputStream r5 = r5.openInputStream(r0)     // Catch: java.lang.Throwable -> L2a java.io.FileNotFoundException -> L2c
-                            android.graphics.Bitmap r3 = android.graphics.BitmapFactory.decodeStream(r5)     // Catch: java.lang.Throwable -> L25 java.io.FileNotFoundException -> L28
-                            if (r5 == 0) goto L38
-                            r5.close()     // Catch: java.io.IOException -> L20
-                            goto L38
-                        L20:
-                            r5 = move-exception
-                            android.util.Log.w(r2, r1, r5)
-                            goto L38
-                        L25:
-                            r0 = move-exception
-                            r3 = r5
-                            goto L39
-                        L28:
-                            r0 = move-exception
-                            goto L2e
-                        L2a:
-                            r0 = move-exception
-                            goto L39
-                        L2c:
-                            r0 = move-exception
-                            r5 = r3
-                        L2e:
-                            java.lang.String r4 = "Cannot find image file"
-                            android.util.Log.w(r2, r4, r0)     // Catch: java.lang.Throwable -> L25
-                            if (r5 == 0) goto L38
-                            r5.close()     // Catch: java.io.IOException -> L20
-                        L38:
-                            return r3
-                        L39:
-                            if (r3 == 0) goto L43
-                            r3.close()     // Catch: java.io.IOException -> L3f
-                            goto L43
-                        L3f:
-                            r5 = move-exception
-                            android.util.Log.w(r2, r1, r5)
-                        L43:
-                            throw r0
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.users.EditUserPhotoController$$ExternalSyntheticLambda1.call():java.lang.Object");
+                    public final Object call() throws Throwable {
+                        Throwable th;
+                        ?? OpenInputStream;
+                        Uri uri = data;
+                        EditUserPhotoController editUserPhotoController2 = editUserPhotoController;
+                        editUserPhotoController2.getClass();
+                        Bitmap bitmapDecodeStream = null;
+                        bitmapDecodeStream = null;
+                        bitmapDecodeStream = null;
+                        ?? r3 = null;
+                        try {
+                            try {
+                                try {
+                                    OpenInputStream = editUserPhotoController2.mActivity.getContentResolver().openInputStream(uri);
+                                    try {
+                                        bitmapDecodeStream = BitmapFactory.decodeStream(OpenInputStream);
+                                        editUserPhotoController2 = OpenInputStream;
+                                        if (OpenInputStream != 0) {
+                                            OpenInputStream.close();
+                                            editUserPhotoController2 = OpenInputStream;
+                                        }
+                                    } catch (FileNotFoundException e) {
+                                        e = e;
+                                        Log.w("EditUserPhotoController", "Cannot find image file", e);
+                                        editUserPhotoController2 = OpenInputStream;
+                                        if (OpenInputStream != 0) {
+                                            OpenInputStream.close();
+                                            editUserPhotoController2 = OpenInputStream;
+                                        }
+                                        return bitmapDecodeStream;
+                                    }
+                                } catch (Throwable th2) {
+                                    th = th2;
+                                    r3 = editUserPhotoController2;
+                                    if (r3 != null) {
+                                        try {
+                                            r3.close();
+                                        } catch (IOException e2) {
+                                            Log.w("EditUserPhotoController", "Cannot close image stream", e2);
+                                        }
+                                    }
+                                    throw th;
+                                }
+                            } catch (FileNotFoundException e3) {
+                                e = e3;
+                                OpenInputStream = 0;
+                            } catch (Throwable th3) {
+                                th = th3;
+                                if (r3 != null) {
+                                }
+                                throw th;
+                            }
+                        } catch (IOException e4) {
+                            Log.w("EditUserPhotoController", "Cannot close image stream", e4);
+                            editUserPhotoController2 = e4;
+                        }
+                        return bitmapDecodeStream;
                     }
                 });
                 EditUserPhotoController.AnonymousClass2 anonymousClass2 = new FutureCallback() { // from class: com.android.settingslib.users.EditUserPhotoController.2
@@ -457,14 +462,14 @@ public class CreateUserDialogController {
 
                     @Override // com.google.common.util.concurrent.FutureCallback
                     public final void onSuccess(Object obj) {
-                        EditUserPhotoController.m976$$Nest$monPhotoProcessed(EditUserPhotoController.this, (Bitmap) obj);
+                        EditUserPhotoController.m978$$Nest$monPhotoProcessed(EditUserPhotoController.this, (Bitmap) obj);
                     }
 
                     @Override // com.google.common.util.concurrent.FutureCallback
                     public final void onFailure(Throwable th) {
                     }
                 };
-                submit2.addListener(new Futures.CallbackListener(submit2, anonymousClass2), editUserPhotoController.mImageView.getContext().getMainExecutor());
+                listenableFutureSubmit2.addListener(new Futures.CallbackListener(listenableFutureSubmit2, anonymousClass2), editUserPhotoController.mImageView.getContext().getMainExecutor());
             }
         }
     }
@@ -497,7 +502,7 @@ public class CreateUserDialogController {
         bundle.putBoolean("awaiting_result", this.mWaitingForActivityResult);
     }
 
-    public final void updateLayout() {
+    public final void updateLayout() throws Resources.NotFoundException {
         Drawable drawable;
         int i = this.mCurrentState;
         if (i == -1) {
@@ -595,12 +600,12 @@ public class CreateUserDialogController {
             drawable = this.mSavedDrawable;
         }
         this.mNewUserIcon = drawable;
-        String trim = this.mUserNameView.getText().toString().trim();
+        String strTrim = this.mUserNameView.getText().toString().trim();
         String string = this.mActivity.getString(R.string.user_new_user_name);
-        if (trim.isEmpty()) {
-            trim = string;
+        if (strTrim.isEmpty()) {
+            strTrim = string;
         }
-        this.mUserName = trim;
+        this.mUserName = strTrim;
         this.mCustomDialogHelper.mDialog.dismiss();
     }
 }

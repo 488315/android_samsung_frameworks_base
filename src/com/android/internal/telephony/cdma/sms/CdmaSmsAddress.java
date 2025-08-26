@@ -51,15 +51,15 @@ public class CdmaSmsAddress extends SmsAddress {
         int length = str.length();
         byte[] bArr = new byte[length];
         for (int i2 = 0; i2 < length; i2++) {
-            char charAt = str.charAt(i2);
-            if (charAt >= '1' && charAt <= '9') {
-                i = charAt - '0';
-            } else if (charAt == '0') {
+            char cCharAt = str.charAt(i2);
+            if (cCharAt >= '1' && cCharAt <= '9') {
+                i = cCharAt - '0';
+            } else if (cCharAt == '0') {
                 i = 10;
-            } else if (charAt == '*') {
+            } else if (cCharAt == '*') {
                 i = 11;
             } else {
-                if (charAt != '#') {
+                if (cCharAt != '#') {
                     return null;
                 }
                 i = 12;
@@ -99,14 +99,14 @@ public class CdmaSmsAddress extends SmsAddress {
         StringBuilder sb = new StringBuilder();
         int length = str.length();
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
+            char cCharAt = str.charAt(i);
             SparseBooleanArray sparseBooleanArray = numericCharDialableMap;
-            int indexOfKey = sparseBooleanArray.indexOfKey(charAt);
-            if (indexOfKey < 0) {
+            int iIndexOfKey = sparseBooleanArray.indexOfKey(cCharAt);
+            if (iIndexOfKey < 0) {
                 return null;
             }
-            if (sparseBooleanArray.valueAt(indexOfKey)) {
-                sb.append(charAt);
+            if (sparseBooleanArray.valueAt(iIndexOfKey)) {
+                sb.append(cCharAt);
             }
         }
         return sb.toString();
@@ -119,48 +119,50 @@ public class CdmaSmsAddress extends SmsAddress {
         StringBuilder sb = new StringBuilder();
         int length = str.length();
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (charAt != ' ' && charAt != '\r' && charAt != '\n' && charAt != '\t') {
-                sb.append(charAt);
+            char cCharAt = str.charAt(i);
+            if (cCharAt != ' ' && cCharAt != '\r' && cCharAt != '\n' && cCharAt != '\t') {
+                sb.append(cCharAt);
             }
         }
         return sb.toString();
     }
 
     public static CdmaSmsAddress parse(String str) {
-        byte[] stringToAscii;
+        byte[] bArrStringToAscii;
         CdmaSmsAddress cdmaSmsAddress = new CdmaSmsAddress();
         cdmaSmsAddress.address = str;
         cdmaSmsAddress.ton = 0;
         cdmaSmsAddress.digitMode = 0;
         cdmaSmsAddress.numberPlan = 0;
         cdmaSmsAddress.numberMode = 0;
-        String filterNumericSugar = filterNumericSugar(str);
-        if (str.contains("+") || filterNumericSugar == null) {
+        String strFilterNumericSugar = filterNumericSugar(str);
+        if (str.contains("+") || strFilterNumericSugar == null) {
             cdmaSmsAddress.digitMode = 1;
             cdmaSmsAddress.numberMode = 1;
-            String filterWhitespace = filterWhitespace(str);
+            String strFilterWhitespace = filterWhitespace(str);
             if (str.contains("@")) {
                 cdmaSmsAddress.ton = 2;
-            } else if (str.contains("+") && filterNumericSugar(str) != null) {
-                cdmaSmsAddress.ton = 1;
-                cdmaSmsAddress.numberPlan = 1;
-                cdmaSmsAddress.numberMode = 0;
-                filterNumericSugar = filterNumericSugar(str);
-                stringToAscii = UserData.stringToAscii(filterNumericSugar);
+            } else {
+                if (str.contains("+") && filterNumericSugar(str) != null) {
+                    cdmaSmsAddress.ton = 1;
+                    cdmaSmsAddress.numberPlan = 1;
+                    cdmaSmsAddress.numberMode = 0;
+                    strFilterNumericSugar = filterNumericSugar(str);
+                }
+                bArrStringToAscii = UserData.stringToAscii(strFilterNumericSugar);
             }
-            filterNumericSugar = filterWhitespace;
-            stringToAscii = UserData.stringToAscii(filterNumericSugar);
+            strFilterNumericSugar = strFilterWhitespace;
+            bArrStringToAscii = UserData.stringToAscii(strFilterNumericSugar);
         } else {
-            stringToAscii = parseToDtmf(filterNumericSugar);
+            bArrStringToAscii = parseToDtmf(strFilterNumericSugar);
         }
-        if (stringToAscii == null) {
+        if (bArrStringToAscii == null) {
             return null;
         }
-        cdmaSmsAddress.origBytes = stringToAscii;
-        cdmaSmsAddress.numberOfDigits = stringToAscii.length;
-        if (filterNumericSugar != null) {
-            cdmaSmsAddress.address = filterNumericSugar;
+        cdmaSmsAddress.origBytes = bArrStringToAscii;
+        cdmaSmsAddress.numberOfDigits = bArrStringToAscii.length;
+        if (strFilterNumericSugar != null) {
+            cdmaSmsAddress.address = strFilterNumericSugar;
         }
         return cdmaSmsAddress;
     }

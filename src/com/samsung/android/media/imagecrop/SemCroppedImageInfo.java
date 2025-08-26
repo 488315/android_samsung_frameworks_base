@@ -31,11 +31,11 @@ public class SemCroppedImageInfo {
         Log.d(TAG, "reAllocate : " + i);
         this.buffer.limit(i);
         this.buffer.rewind();
-        ByteBuffer allocate = ByteBuffer.allocate(i);
-        allocate.put(this.buffer);
-        allocate.flip();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(i);
+        byteBufferAllocate.put(this.buffer);
+        byteBufferAllocate.flip();
         NativeBuffer.freeNativeBuffer(this.buffer);
-        this.buffer = allocate;
+        this.buffer = byteBufferAllocate;
     }
 
     Buffer limit(int i) {

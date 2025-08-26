@@ -1,6 +1,9 @@
 package android.os;
 
+import android.system.ErrnoException;
+import android.system.Os;
 import android.system.OsConstants;
+import android.util.Log;
 import com.android.internal.util.ArrayUtils;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -25,11 +28,11 @@ public class FileBridge extends Thread {
     private ParcelFileDescriptor mServer;
     private ParcelFileDescriptor mTarget;
 
-    public FileBridge() {
+    public FileBridge() throws ErrnoException {
         try {
-            ParcelFileDescriptor[] createSocketPair = ParcelFileDescriptor.createSocketPair(OsConstants.SOCK_STREAM);
-            this.mServer = createSocketPair[0];
-            this.mClient = createSocketPair[1];
+            ParcelFileDescriptor[] parcelFileDescriptorArrCreateSocketPair = ParcelFileDescriptor.createSocketPair(OsConstants.SOCK_STREAM);
+            this.mServer = parcelFileDescriptorArrCreateSocketPair[0];
+            this.mClient = parcelFileDescriptorArrCreateSocketPair[1];
         } catch (IOException unused) {
             throw new RuntimeException("Failed to create bridge");
         }
@@ -53,106 +56,43 @@ public class FileBridge extends Thread {
         return this.mClient;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x00a2, code lost:
-    
-        return;
-     */
     @Override // java.lang.Thread, java.lang.Runnable
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public void run() {
-        /*
-            r6 = this;
-            r0 = 8192(0x2000, float:1.148E-41)
-            java.nio.ByteBuffer r1 = java.nio.ByteBuffer.allocateDirect(r0)
-            boolean r2 = r1.hasArray()
-            if (r2 == 0) goto L11
-            byte[] r0 = r1.array()
-            goto L13
-        L11:
-            byte[] r0 = new byte[r0]
-        L13:
-            android.os.ParcelFileDescriptor r1 = r6.mServer     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.io.FileDescriptor r1 = r1.getFileDescriptor()     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            r2 = 8
-            r3 = 0
-            int r1 = libcore.io.IoBridge.read(r1, r0, r3, r2)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            if (r1 != r2) goto L9f
-            java.nio.ByteOrder r1 = java.nio.ByteOrder.BIG_ENDIAN     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            int r1 = libcore.io.Memory.peekInt(r0, r3, r1)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            r4 = 1
-            if (r1 != r4) goto L6d
-            java.nio.ByteOrder r1 = java.nio.ByteOrder.BIG_ENDIAN     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            r2 = 4
-            int r1 = libcore.io.Memory.peekInt(r0, r2, r1)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-        L32:
-            if (r1 <= 0) goto L13
-            android.os.ParcelFileDescriptor r2 = r6.mServer     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.io.FileDescriptor r2 = r2.getFileDescriptor()     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            int r4 = r0.length     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            int r4 = java.lang.Math.min(r4, r1)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            int r2 = libcore.io.IoBridge.read(r2, r0, r3, r4)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            r4 = -1
-            if (r2 == r4) goto L51
-            android.os.ParcelFileDescriptor r4 = r6.mTarget     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.io.FileDescriptor r4 = r4.getFileDescriptor()     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            libcore.io.IoBridge.write(r4, r0, r3, r2)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            int r1 = r1 - r2
-            goto L32
-        L51:
-            java.io.IOException r0 = new java.io.IOException     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            r2.<init>()     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.lang.String r3 = "Unexpected EOF; still expected "
-            r2.append(r3)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            r2.append(r1)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.lang.String r1 = " bytes"
-            r2.append(r1)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.lang.String r1 = r2.toString()     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            r0.<init>(r1)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            throw r0     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-        L6d:
-            r5 = 2
-            if (r1 != r5) goto L83
-            android.os.ParcelFileDescriptor r1 = r6.mTarget     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.io.FileDescriptor r1 = r1.getFileDescriptor()     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            android.system.Os.fsync(r1)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            android.os.ParcelFileDescriptor r1 = r6.mServer     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.io.FileDescriptor r1 = r1.getFileDescriptor()     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            libcore.io.IoBridge.write(r1, r0, r3, r2)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            goto L13
-        L83:
-            r5 = 3
-            if (r1 != r5) goto L13
-            android.os.ParcelFileDescriptor r1 = r6.mTarget     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.io.FileDescriptor r1 = r1.getFileDescriptor()     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            android.system.Os.fsync(r1)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            android.os.ParcelFileDescriptor r1 = r6.mTarget     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            r1.close()     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            r6.mClosed = r4     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            android.os.ParcelFileDescriptor r1 = r6.mServer     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            java.io.FileDescriptor r1 = r1.getFileDescriptor()     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-            libcore.io.IoBridge.write(r1, r0, r3, r2)     // Catch: java.lang.Throwable -> La3 java.lang.Throwable -> La5
-        L9f:
-            r6.forceClose()
-            return
-        La3:
-            r0 = move-exception
-            goto Lb1
-        La5:
-            r0 = move-exception
-            java.lang.String r1 = "FileBridge"
-            java.lang.String r2 = "Failed during bridge"
-            android.util.Log.wtf(r1, r2, r0)     // Catch: java.lang.Throwable -> La3
-            r6.forceClose()
-            return
-        Lb1:
-            r6.forceClose()
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.FileBridge.run():void");
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(8192);
+        byte[] bArrArray = byteBufferAllocateDirect.hasArray() ? byteBufferAllocateDirect.array() : new byte[8192];
+        while (true) {
+            try {
+                if (IoBridge.read(this.mServer.getFileDescriptor(), bArrArray, 0, 8) != 8) {
+                    break;
+                }
+                int iPeekInt = Memory.peekInt(bArrArray, 0, ByteOrder.BIG_ENDIAN);
+                if (iPeekInt == 1) {
+                    int iPeekInt2 = Memory.peekInt(bArrArray, 4, ByteOrder.BIG_ENDIAN);
+                    while (iPeekInt2 > 0) {
+                        int i = IoBridge.read(this.mServer.getFileDescriptor(), bArrArray, 0, Math.min(bArrArray.length, iPeekInt2));
+                        if (i == -1) {
+                            throw new IOException("Unexpected EOF; still expected " + iPeekInt2 + " bytes");
+                        }
+                        IoBridge.write(this.mTarget.getFileDescriptor(), bArrArray, 0, i);
+                        iPeekInt2 -= i;
+                    }
+                } else if (iPeekInt == 2) {
+                    Os.fsync(this.mTarget.getFileDescriptor());
+                    IoBridge.write(this.mServer.getFileDescriptor(), bArrArray, 0, 8);
+                } else if (iPeekInt == 3) {
+                    Os.fsync(this.mTarget.getFileDescriptor());
+                    this.mTarget.close();
+                    this.mClosed = true;
+                    IoBridge.write(this.mServer.getFileDescriptor(), bArrArray, 0, 8);
+                    break;
+                }
+            } catch (ErrnoException | IOException e) {
+                Log.wtf(TAG, "Failed during bridge", e);
+                return;
+            } finally {
+                forceClose();
+            }
+        }
     }
 
     public static class FileBridgeOutputStream extends OutputStream {
@@ -162,15 +102,15 @@ public class FileBridge extends Thread {
         private final ByteBuffer mTempBuffer;
 
         public FileBridgeOutputStream(ParcelFileDescriptor parcelFileDescriptor) {
-            byte[] bArr;
-            ByteBuffer allocateDirect = ByteBuffer.allocateDirect(8);
-            this.mTempBuffer = allocateDirect;
-            if (allocateDirect.hasArray()) {
-                bArr = allocateDirect.array();
+            byte[] bArrArray;
+            ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(8);
+            this.mTempBuffer = byteBufferAllocateDirect;
+            if (byteBufferAllocateDirect.hasArray()) {
+                bArrArray = byteBufferAllocateDirect.array();
             } else {
-                bArr = new byte[8];
+                bArrArray = new byte[8];
             }
-            this.mTemp = bArr;
+            this.mTemp = bArrArray;
             this.mClientPfd = parcelFileDescriptor;
             this.mClient = parcelFileDescriptor.getFileDescriptor();
         }

@@ -89,61 +89,61 @@ public interface PBE {
         }
 
         public static CipherParameters makePBEParameters(byte[] bArr, int i, int i2, int i3, int i4, AlgorithmParameterSpec algorithmParameterSpec, String str) throws InvalidAlgorithmParameterException {
-            CipherParameters generateDerivedParameters;
+            CipherParameters cipherParametersGenerateDerivedParameters;
             if (algorithmParameterSpec == null || !(algorithmParameterSpec instanceof PBEParameterSpec)) {
                 throw new InvalidAlgorithmParameterException("Need a PBEParameter spec with a PBE key.");
             }
             PBEParameterSpec pBEParameterSpec = (PBEParameterSpec) algorithmParameterSpec;
-            PBEParametersGenerator makePBEGenerator = makePBEGenerator(i, i2);
-            makePBEGenerator.init(bArr, pBEParameterSpec.getSalt(), pBEParameterSpec.getIterationCount());
+            PBEParametersGenerator pBEParametersGeneratorMakePBEGenerator = makePBEGenerator(i, i2);
+            pBEParametersGeneratorMakePBEGenerator.init(bArr, pBEParameterSpec.getSalt(), pBEParameterSpec.getIterationCount());
             if (i4 != 0) {
-                generateDerivedParameters = makePBEGenerator.generateDerivedParameters(i3, i4);
+                cipherParametersGenerateDerivedParameters = pBEParametersGeneratorMakePBEGenerator.generateDerivedParameters(i3, i4);
                 AlgorithmParameterSpec parameterSpecFromPBEParameterSpec = getParameterSpecFromPBEParameterSpec(pBEParameterSpec);
                 if ((i == 1 || i == 5) && (parameterSpecFromPBEParameterSpec instanceof IvParameterSpec)) {
-                    generateDerivedParameters = new ParametersWithIV((KeyParameter) ((ParametersWithIV) generateDerivedParameters).getParameters(), ((IvParameterSpec) parameterSpecFromPBEParameterSpec).getIV());
+                    cipherParametersGenerateDerivedParameters = new ParametersWithIV((KeyParameter) ((ParametersWithIV) cipherParametersGenerateDerivedParameters).getParameters(), ((IvParameterSpec) parameterSpecFromPBEParameterSpec).getIV());
                 }
             } else {
-                generateDerivedParameters = makePBEGenerator.generateDerivedParameters(i3);
+                cipherParametersGenerateDerivedParameters = pBEParametersGeneratorMakePBEGenerator.generateDerivedParameters(i3);
             }
             if (str.startsWith("DES")) {
-                if (generateDerivedParameters instanceof ParametersWithIV) {
-                    DESParameters.setOddParity(((KeyParameter) ((ParametersWithIV) generateDerivedParameters).getParameters()).getKey());
-                    return generateDerivedParameters;
+                if (cipherParametersGenerateDerivedParameters instanceof ParametersWithIV) {
+                    DESParameters.setOddParity(((KeyParameter) ((ParametersWithIV) cipherParametersGenerateDerivedParameters).getParameters()).getKey());
+                    return cipherParametersGenerateDerivedParameters;
                 }
-                DESParameters.setOddParity(((KeyParameter) generateDerivedParameters).getKey());
+                DESParameters.setOddParity(((KeyParameter) cipherParametersGenerateDerivedParameters).getKey());
             }
-            return generateDerivedParameters;
+            return cipherParametersGenerateDerivedParameters;
         }
 
         public static CipherParameters makePBEParameters(BCPBEKey bCPBEKey, AlgorithmParameterSpec algorithmParameterSpec, String str) {
-            CipherParameters generateDerivedParameters;
+            CipherParameters cipherParametersGenerateDerivedParameters;
             if (algorithmParameterSpec == null || !(algorithmParameterSpec instanceof PBEParameterSpec)) {
                 throw new IllegalArgumentException("Need a PBEParameter spec with a PBE key.");
             }
             PBEParameterSpec pBEParameterSpec = (PBEParameterSpec) algorithmParameterSpec;
-            PBEParametersGenerator makePBEGenerator = makePBEGenerator(bCPBEKey.getType(), bCPBEKey.getDigest());
+            PBEParametersGenerator pBEParametersGeneratorMakePBEGenerator = makePBEGenerator(bCPBEKey.getType(), bCPBEKey.getDigest());
             byte[] encoded = bCPBEKey.getEncoded();
             if (bCPBEKey.shouldTryWrongPKCS12()) {
                 encoded = new byte[2];
             }
-            makePBEGenerator.init(encoded, pBEParameterSpec.getSalt(), pBEParameterSpec.getIterationCount());
+            pBEParametersGeneratorMakePBEGenerator.init(encoded, pBEParameterSpec.getSalt(), pBEParameterSpec.getIterationCount());
             if (bCPBEKey.getIvSize() != 0) {
-                generateDerivedParameters = makePBEGenerator.generateDerivedParameters(bCPBEKey.getKeySize(), bCPBEKey.getIvSize());
+                cipherParametersGenerateDerivedParameters = pBEParametersGeneratorMakePBEGenerator.generateDerivedParameters(bCPBEKey.getKeySize(), bCPBEKey.getIvSize());
                 AlgorithmParameterSpec parameterSpecFromPBEParameterSpec = getParameterSpecFromPBEParameterSpec(pBEParameterSpec);
                 if ((bCPBEKey.getType() == 1 || bCPBEKey.getType() == 5) && (parameterSpecFromPBEParameterSpec instanceof IvParameterSpec)) {
-                    generateDerivedParameters = new ParametersWithIV((KeyParameter) ((ParametersWithIV) generateDerivedParameters).getParameters(), ((IvParameterSpec) parameterSpecFromPBEParameterSpec).getIV());
+                    cipherParametersGenerateDerivedParameters = new ParametersWithIV((KeyParameter) ((ParametersWithIV) cipherParametersGenerateDerivedParameters).getParameters(), ((IvParameterSpec) parameterSpecFromPBEParameterSpec).getIV());
                 }
             } else {
-                generateDerivedParameters = makePBEGenerator.generateDerivedParameters(bCPBEKey.getKeySize());
+                cipherParametersGenerateDerivedParameters = pBEParametersGeneratorMakePBEGenerator.generateDerivedParameters(bCPBEKey.getKeySize());
             }
             if (str.startsWith("DES")) {
-                if (generateDerivedParameters instanceof ParametersWithIV) {
-                    DESParameters.setOddParity(((KeyParameter) ((ParametersWithIV) generateDerivedParameters).getParameters()).getKey());
-                    return generateDerivedParameters;
+                if (cipherParametersGenerateDerivedParameters instanceof ParametersWithIV) {
+                    DESParameters.setOddParity(((KeyParameter) ((ParametersWithIV) cipherParametersGenerateDerivedParameters).getParameters()).getKey());
+                    return cipherParametersGenerateDerivedParameters;
                 }
-                DESParameters.setOddParity(((KeyParameter) generateDerivedParameters).getKey());
+                DESParameters.setOddParity(((KeyParameter) cipherParametersGenerateDerivedParameters).getKey());
             }
-            return generateDerivedParameters;
+            return cipherParametersGenerateDerivedParameters;
         }
 
         public static CipherParameters makePBEMacParameters(BCPBEKey bCPBEKey, AlgorithmParameterSpec algorithmParameterSpec) {
@@ -151,47 +151,47 @@ public interface PBE {
                 throw new IllegalArgumentException("Need a PBEParameter spec with a PBE key.");
             }
             PBEParameterSpec pBEParameterSpec = (PBEParameterSpec) algorithmParameterSpec;
-            PBEParametersGenerator makePBEGenerator = makePBEGenerator(bCPBEKey.getType(), bCPBEKey.getDigest());
-            makePBEGenerator.init(bCPBEKey.getEncoded(), pBEParameterSpec.getSalt(), pBEParameterSpec.getIterationCount());
-            return makePBEGenerator.generateDerivedMacParameters(bCPBEKey.getKeySize());
+            PBEParametersGenerator pBEParametersGeneratorMakePBEGenerator = makePBEGenerator(bCPBEKey.getType(), bCPBEKey.getDigest());
+            pBEParametersGeneratorMakePBEGenerator.init(bCPBEKey.getEncoded(), pBEParameterSpec.getSalt(), pBEParameterSpec.getIterationCount());
+            return pBEParametersGeneratorMakePBEGenerator.generateDerivedMacParameters(bCPBEKey.getKeySize());
         }
 
         public static CipherParameters makePBEMacParameters(PBEKeySpec pBEKeySpec, int i, int i2, int i3) {
-            PBEParametersGenerator makePBEGenerator = makePBEGenerator(i, i2);
-            byte[] convertPassword = convertPassword(i, pBEKeySpec);
-            makePBEGenerator.init(convertPassword, pBEKeySpec.getSalt(), pBEKeySpec.getIterationCount());
-            CipherParameters generateDerivedMacParameters = makePBEGenerator.generateDerivedMacParameters(i3);
-            for (int i4 = 0; i4 != convertPassword.length; i4++) {
-                convertPassword[i4] = 0;
+            PBEParametersGenerator pBEParametersGeneratorMakePBEGenerator = makePBEGenerator(i, i2);
+            byte[] bArrConvertPassword = convertPassword(i, pBEKeySpec);
+            pBEParametersGeneratorMakePBEGenerator.init(bArrConvertPassword, pBEKeySpec.getSalt(), pBEKeySpec.getIterationCount());
+            CipherParameters cipherParametersGenerateDerivedMacParameters = pBEParametersGeneratorMakePBEGenerator.generateDerivedMacParameters(i3);
+            for (int i4 = 0; i4 != bArrConvertPassword.length; i4++) {
+                bArrConvertPassword[i4] = 0;
             }
-            return generateDerivedMacParameters;
+            return cipherParametersGenerateDerivedMacParameters;
         }
 
         public static CipherParameters makePBEParameters(PBEKeySpec pBEKeySpec, int i, int i2, int i3, int i4) {
-            CipherParameters generateDerivedParameters;
-            PBEParametersGenerator makePBEGenerator = makePBEGenerator(i, i2);
-            byte[] convertPassword = convertPassword(i, pBEKeySpec);
-            makePBEGenerator.init(convertPassword, pBEKeySpec.getSalt(), pBEKeySpec.getIterationCount());
+            CipherParameters cipherParametersGenerateDerivedParameters;
+            PBEParametersGenerator pBEParametersGeneratorMakePBEGenerator = makePBEGenerator(i, i2);
+            byte[] bArrConvertPassword = convertPassword(i, pBEKeySpec);
+            pBEParametersGeneratorMakePBEGenerator.init(bArrConvertPassword, pBEKeySpec.getSalt(), pBEKeySpec.getIterationCount());
             if (i4 != 0) {
-                generateDerivedParameters = makePBEGenerator.generateDerivedParameters(i3, i4);
+                cipherParametersGenerateDerivedParameters = pBEParametersGeneratorMakePBEGenerator.generateDerivedParameters(i3, i4);
             } else {
-                generateDerivedParameters = makePBEGenerator.generateDerivedParameters(i3);
+                cipherParametersGenerateDerivedParameters = pBEParametersGeneratorMakePBEGenerator.generateDerivedParameters(i3);
             }
-            for (int i5 = 0; i5 != convertPassword.length; i5++) {
-                convertPassword[i5] = 0;
+            for (int i5 = 0; i5 != bArrConvertPassword.length; i5++) {
+                bArrConvertPassword[i5] = 0;
             }
-            return generateDerivedParameters;
+            return cipherParametersGenerateDerivedParameters;
         }
 
         public static CipherParameters makePBEMacParameters(SecretKey secretKey, int i, int i2, int i3, PBEParameterSpec pBEParameterSpec) {
-            PBEParametersGenerator makePBEGenerator = makePBEGenerator(i, i2);
+            PBEParametersGenerator pBEParametersGeneratorMakePBEGenerator = makePBEGenerator(i, i2);
             byte[] encoded = secretKey.getEncoded();
-            makePBEGenerator.init(secretKey.getEncoded(), pBEParameterSpec.getSalt(), pBEParameterSpec.getIterationCount());
-            CipherParameters generateDerivedMacParameters = makePBEGenerator.generateDerivedMacParameters(i3);
+            pBEParametersGeneratorMakePBEGenerator.init(secretKey.getEncoded(), pBEParameterSpec.getSalt(), pBEParameterSpec.getIterationCount());
+            CipherParameters cipherParametersGenerateDerivedMacParameters = pBEParametersGeneratorMakePBEGenerator.generateDerivedMacParameters(i3);
             for (int i4 = 0; i4 != encoded.length; i4++) {
                 encoded[i4] = 0;
             }
-            return generateDerivedMacParameters;
+            return cipherParametersGenerateDerivedMacParameters;
         }
 
         public static AlgorithmParameterSpec getParameterSpecFromPBEParameterSpec(PBEParameterSpec pBEParameterSpec) {

@@ -9,7 +9,6 @@ import androidx.compose.ui.node.DelegatingNode;
 import androidx.compose.ui.node.LayoutNode;
 import androidx.compose.ui.node.NodeChain;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface ModifierLocalModifierNode extends ModifierLocalReadScope, DelegatableNode {
     /* JADX WARN: Multi-variable type inference failed */
@@ -47,56 +46,56 @@ public interface ModifierLocalModifierNode extends ModifierLocalReadScope, Deleg
             InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
         }
         Modifier.Node node2 = node.node.parent;
-        LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(this);
-        while (requireLayoutNode != null) {
-            if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 32) != 0) {
+        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(this);
+        while (layoutNodeRequireLayoutNode != null) {
+            if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 32) != 0) {
                 while (node2 != null) {
                     if ((node2.kindSet & 32) != 0) {
-                        DelegatingNode delegatingNode = node2;
-                        ?? r3 = 0;
-                        while (delegatingNode != 0) {
-                            if (delegatingNode instanceof ModifierLocalModifierNode) {
-                                ModifierLocalModifierNode modifierLocalModifierNode = (ModifierLocalModifierNode) delegatingNode;
+                        DelegatingNode delegatingNodeAccess$pop = node2;
+                        ?? mutableVector = 0;
+                        while (delegatingNodeAccess$pop != 0) {
+                            if (delegatingNodeAccess$pop instanceof ModifierLocalModifierNode) {
+                                ModifierLocalModifierNode modifierLocalModifierNode = (ModifierLocalModifierNode) delegatingNodeAccess$pop;
                                 if (modifierLocalModifierNode.getProvidedValues().contains$ui_release(providableModifierLocal)) {
                                     return modifierLocalModifierNode.getProvidedValues().get$ui_release(providableModifierLocal);
                                 }
-                            } else if ((delegatingNode.kindSet & 32) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                Modifier.Node node3 = delegatingNode.delegate;
+                            } else if ((delegatingNodeAccess$pop.kindSet & 32) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                Modifier.Node node3 = delegatingNodeAccess$pop.delegate;
                                 int i = 0;
-                                delegatingNode = delegatingNode;
-                                r3 = r3;
+                                delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                mutableVector = mutableVector;
                                 while (node3 != null) {
                                     if ((node3.kindSet & 32) != 0) {
                                         i++;
-                                        r3 = r3;
+                                        mutableVector = mutableVector;
                                         if (i == 1) {
-                                            delegatingNode = node3;
+                                            delegatingNodeAccess$pop = node3;
                                         } else {
-                                            if (r3 == 0) {
-                                                r3 = new MutableVector(new Modifier.Node[16], 0);
+                                            if (mutableVector == 0) {
+                                                mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (delegatingNode != 0) {
-                                                r3.add(delegatingNode);
-                                                delegatingNode = 0;
+                                            if (delegatingNodeAccess$pop != 0) {
+                                                mutableVector.add(delegatingNodeAccess$pop);
+                                                delegatingNodeAccess$pop = 0;
                                             }
-                                            r3.add(node3);
+                                            mutableVector.add(node3);
                                         }
                                     }
                                     node3 = node3.child;
-                                    delegatingNode = delegatingNode;
-                                    r3 = r3;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector = mutableVector;
                                 }
                                 if (i == 1) {
                                 }
                             }
-                            delegatingNode = DelegatableNodeKt.access$pop(r3);
+                            delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                         }
                     }
                     node2 = node2.parent;
                 }
             }
-            requireLayoutNode = requireLayoutNode.getParent$ui_release();
-            node2 = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+            node2 = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
         }
         return providableModifierLocal.defaultFactory.invoke();
     }

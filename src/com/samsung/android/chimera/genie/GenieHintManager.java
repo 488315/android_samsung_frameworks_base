@@ -16,14 +16,10 @@ public class GenieHintManager {
     }
 
     public static synchronized GenieHintManager getGenieHintManager() {
-        GenieHintManager genieHintManager;
-        synchronized (GenieHintManager.class) {
-            if (mGenieHintMgr == null) {
-                mGenieHintMgr = new GenieHintManager();
-            }
-            genieHintManager = mGenieHintMgr;
+        if (mGenieHintMgr == null) {
+            mGenieHintMgr = new GenieHintManager();
         }
-        return genieHintManager;
+        return mGenieHintMgr;
     }
 
     private IChimera getChimeraService() {

@@ -2,6 +2,7 @@ package com.samsung.android.globalactions.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -68,7 +69,7 @@ public class SemTipPopupWrapper {
         this.mPopup.setOnStateChangeListener(new SemTipPopup.OnStateChangeListener() { // from class: com.samsung.android.globalactions.util.SemTipPopupWrapper$$ExternalSyntheticLambda0
             @Override // com.samsung.android.widget.SemTipPopup.OnStateChangeListener
             public final void onStateChanged(int i3) {
-                SemTipPopupWrapper.this.lambda$show$0(i3);
+                this.f$0.lambda$show$0(i3);
             }
         });
         addCount(i2);
@@ -82,18 +83,18 @@ public class SemTipPopupWrapper {
     }
 
     private void addCount(int i) {
-        SharedPreferences.Editor edit = this.mPrefrerences.edit();
-        edit.putInt(Contract.Events.Projection.COUNT_ONLY, i + 1);
-        edit.apply();
+        SharedPreferences.Editor editorEdit = this.mPrefrerences.edit();
+        editorEdit.putInt(Contract.Events.Projection.COUNT_ONLY, i + 1);
+        editorEdit.apply();
     }
 
     public void hideTipPermanently() {
-        SharedPreferences.Editor edit = this.mPrefrerences.edit();
-        edit.putInt(Contract.Events.Projection.COUNT_ONLY, 5);
-        edit.apply();
+        SharedPreferences.Editor editorEdit = this.mPrefrerences.edit();
+        editorEdit.putInt(Contract.Events.Projection.COUNT_ONLY, 5);
+        editorEdit.apply();
     }
 
-    public void update() {
+    public void update() throws Resources.NotFoundException {
         this.mPopup.update();
     }
 

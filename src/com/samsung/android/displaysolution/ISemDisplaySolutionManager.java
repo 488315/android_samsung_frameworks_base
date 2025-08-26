@@ -322,9 +322,9 @@ public interface ISemDisplaySolutionManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemDisplaySolutionManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemDisplaySolutionManager)) {
-                return (ISemDisplaySolutionManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemDisplaySolutionManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemDisplaySolutionManager)) {
+                return (ISemDisplaySolutionManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -460,204 +460,204 @@ public interface ISemDisplaySolutionManager extends IInterface {
                     parcel2.writeString(onPixelRatioValueForPMS);
                     return true;
                 case 7:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int videoEnhancerSettingState = getVideoEnhancerSettingState(readString);
+                    int videoEnhancerSettingState = getVideoEnhancerSettingState(string);
                     parcel2.writeNoException();
                     parcel2.writeInt(videoEnhancerSettingState);
                     return true;
                 case 8:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    float fingerPrintBacklightValue = getFingerPrintBacklightValue(readInt);
+                    float fingerPrintBacklightValue = getFingerPrintBacklightValue(i3);
                     parcel2.writeNoException();
                     parcel2.writeFloat(fingerPrintBacklightValue);
                     return true;
                 case 9:
-                    float readFloat = parcel.readFloat();
-                    float readFloat2 = parcel.readFloat();
-                    float readFloat3 = parcel.readFloat();
+                    float f = parcel.readFloat();
+                    float f2 = parcel.readFloat();
+                    float f3 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    float alphaMaskLevel = getAlphaMaskLevel(readFloat, readFloat2, readFloat3);
+                    float alphaMaskLevel = getAlphaMaskLevel(f, f2, f3);
                     parcel2.writeNoException();
                     parcel2.writeFloat(alphaMaskLevel);
                     return true;
                 case 10:
-                    boolean isMdnieScenarioControlServiceEnabled = isMdnieScenarioControlServiceEnabled();
+                    boolean zIsMdnieScenarioControlServiceEnabled = isMdnieScenarioControlServiceEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMdnieScenarioControlServiceEnabled);
+                    parcel2.writeBoolean(zIsMdnieScenarioControlServiceEnabled);
                     return true;
                 case 11:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setHighDynamicRangeMode(readBoolean);
+                    setHighDynamicRangeMode(z);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateAutoBrightnessLux(readInt2, readInt3);
+                    updateAutoBrightnessLux(i4, i5);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setIRCompensationMode(readBoolean2);
+                    setIRCompensationMode(z2);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onDetailVeiwStateChanged(readBoolean3);
+                    onDetailVeiwStateChanged(z3);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onAutoCurrentLimitStateChanged(readBoolean4);
+                    onAutoCurrentLimitStateChanged(z4);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onAutoCurrentLimitStateChangedWithBrightness(readBoolean5);
+                    onAutoCurrentLimitStateChangedWithBrightness(z5);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onAutoCurrentLimitStateChangedInt(readInt4);
+                    onAutoCurrentLimitStateChangedInt(i6);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onAutoCurrentLimitOffMode(readBoolean6);
+                    onAutoCurrentLimitOffMode(z6);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    boolean readBoolean7 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onBurnInPreventionDisabled(readBoolean7);
+                    onBurnInPreventionDisabled(z7);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setVideoModeEnable(readBoolean8);
+                    setVideoModeEnable(z8);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    boolean readBoolean9 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setGalleryModeEnable(readBoolean9);
+                    setGalleryModeEnable(z9);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    boolean readBoolean10 = parcel.readBoolean();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCameraModeEnable(readBoolean10);
+                    setCameraModeEnable(z10);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    boolean readBoolean11 = parcel.readBoolean();
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDouAppModeEnable(readBoolean11);
+                    setDouAppModeEnable(z11);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    boolean readBoolean12 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAutoCurrentLimitOffModeEnabled(readBoolean12);
+                    setAutoCurrentLimitOffModeEnabled(z12);
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    boolean readBoolean13 = parcel.readBoolean();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setMdnieScenarioControlServiceEnable(readBoolean13);
+                    setMdnieScenarioControlServiceEnable(z13);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setScreenBrightnessForPreview(readInt5);
+                    setScreenBrightnessForPreview(i7);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setMultipleScreenBrightness(readString2);
+                    setMultipleScreenBrightness(string2);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setOnPixelRatioValueForPMS(readString3);
+                    setOnPixelRatioValueForPMS(string3);
                     parcel2.writeNoException();
                     return true;
                 case 29:
-                    float readFloat4 = parcel.readFloat();
+                    float f4 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setMultipleScreenBrightnessValueForHDR(readFloat4);
+                    setMultipleScreenBrightnessValueForHDR(f4);
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    float readFloat5 = parcel.readFloat();
+                    float f5 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setEyeComfortWeightingFactor(readFloat5);
+                    setEyeComfortWeightingFactor(f5);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    String readString4 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setVideoEnhancerSettingState(readString4, readInt6);
+                    setVideoEnhancerSettingState(string4, i8);
                     parcel2.writeNoException();
                     return true;
                 case 32:
-                    String readString5 = parcel.readString();
-                    long readLong = parcel.readLong();
-                    long readLong2 = parcel.readLong();
-                    float readFloat6 = parcel.readFloat();
+                    String string5 = parcel.readString();
+                    long j = parcel.readLong();
+                    long j2 = parcel.readLong();
+                    float f6 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setSleepPatternBLF(readString5, readLong, readLong2, readFloat6);
+                    setSleepPatternBLF(string5, j, j2, f6);
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    boolean readBoolean14 = parcel.readBoolean();
-                    int readInt7 = parcel.readInt();
+                    boolean z14 = parcel.readBoolean();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setBlfEnableTimeBySchedule(readBoolean14, readInt7);
+                    setBlfEnableTimeBySchedule(z14, i9);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    updateGlutMode(readString6);
+                    updateGlutMode(string6);
                     parcel2.writeNoException();
                     return true;
                 case 35:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    updateQdcmMode(readString7);
+                    updateQdcmMode(string7);
                     parcel2.writeNoException();
                     return true;
                 case 36:
-                    boolean isBlueLightFilterScheduledTime = isBlueLightFilterScheduledTime();
+                    boolean zIsBlueLightFilterScheduledTime = isBlueLightFilterScheduledTime();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBlueLightFilterScheduledTime);
+                    parcel2.writeBoolean(zIsBlueLightFilterScheduledTime);
                     return true;
                 case 37:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setEadIndexOffset(readInt8);
+                    setEadIndexOffset(i10);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setRenderIntentValue(readInt9);
+                    setRenderIntentValue(i11);
                     parcel2.writeNoException();
                     return true;
                 case 39:
@@ -688,597 +688,597 @@ public interface ISemDisplaySolutionManager extends IInterface {
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public boolean getVideoModeEnable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public boolean getGalleryModeEnable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public boolean getCameraModeEnable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public boolean getDouAppModeEnable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public boolean getAutoCurrentLimitOffModeEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public String getOnPixelRatioValueForPMS() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public int getVideoEnhancerSettingState(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public float getFingerPrintBacklightValue(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public float getAlphaMaskLevel(float f, float f2, float f3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    obtain.writeFloat(f2);
-                    obtain.writeFloat(f3);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeFloat(f2);
+                    parcelObtain.writeFloat(f3);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public boolean isMdnieScenarioControlServiceEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setHighDynamicRangeMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void updateAutoBrightnessLux(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setIRCompensationMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void onDetailVeiwStateChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void onAutoCurrentLimitStateChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void onAutoCurrentLimitStateChangedWithBrightness(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void onAutoCurrentLimitStateChangedInt(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void onAutoCurrentLimitOffMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void onBurnInPreventionDisabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setVideoModeEnable(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setGalleryModeEnable(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setCameraModeEnable(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setDouAppModeEnable(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setAutoCurrentLimitOffModeEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setMdnieScenarioControlServiceEnable(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setScreenBrightnessForPreview(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setMultipleScreenBrightness(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setOnPixelRatioValueForPMS(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setMultipleScreenBrightnessValueForHDR(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setEyeComfortWeightingFactor(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setVideoEnhancerSettingState(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setSleepPatternBLF(String str, long j, long j2, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setBlfEnableTimeBySchedule(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void updateGlutMode(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void updateQdcmMode(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public boolean isBlueLightFilterScheduledTime() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setEadIndexOffset(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public void setRenderIntentValue(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
             public int getBlfAdaptiveCurrentIndex() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemDisplaySolutionManager.DESCRIPTOR);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

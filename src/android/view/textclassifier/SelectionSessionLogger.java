@@ -12,11 +12,11 @@ public final class SelectionSessionLogger {
 
     public static final class SignatureParser {
         static String getClassifierId(String str) {
-            int indexOf;
-            if (str == null || (indexOf = str.indexOf(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)) < 0) {
+            int iIndexOf;
+            if (str == null || (iIndexOf = str.indexOf(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)) < 0) {
                 return "";
             }
-            return str.substring(0, indexOf);
+            return str.substring(0, iIndexOf);
         }
     }
 }

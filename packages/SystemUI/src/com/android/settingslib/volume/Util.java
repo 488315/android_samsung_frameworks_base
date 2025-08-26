@@ -7,7 +7,6 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Util {
     public static final int[] AUDIO_MANAGER_FLAGS = {1, 16, 4, 2, 8, 2048, 128, 4096, 1024};
@@ -42,16 +41,16 @@ public class Util {
             return null;
         }
         int playbackType = playbackInfo.getPlaybackType();
-        String m = playbackType != 1 ? playbackType != 2 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(playbackType, "UNKNOWN_") : "REMOTE" : "LOCAL";
+        String strM = playbackType != 1 ? playbackType != 2 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(playbackType, "UNKNOWN_") : "REMOTE" : "LOCAL";
         int volumeControl = playbackInfo.getVolumeControl();
-        String m2 = volumeControl != 0 ? volumeControl != 1 ? volumeControl != 2 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(volumeControl, "VOLUME_CONTROL_UNKNOWN_") : "VOLUME_CONTROL_ABSOLUTE" : "VOLUME_CONTROL_RELATIVE" : "VOLUME_CONTROL_FIXED";
+        String strM2 = volumeControl != 0 ? volumeControl != 1 ? volumeControl != 2 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(volumeControl, "VOLUME_CONTROL_UNKNOWN_") : "VOLUME_CONTROL_ABSOLUTE" : "VOLUME_CONTROL_RELATIVE" : "VOLUME_CONTROL_FIXED";
         int currentVolume = playbackInfo.getCurrentVolume();
         int maxVolume = playbackInfo.getMaxVolume();
         AudioAttributes audioAttributes = playbackInfo.getAudioAttributes();
-        StringBuilder m3 = MutableObjectList$$ExternalSyntheticOutline0.m(currentVolume, maxVolume, "PlaybackInfo[vol=", ",max=", ",type=");
-        MoveResult$$ExternalSyntheticOutline0.m(m3, m, ",vc=", m2, "],atts=");
-        m3.append(audioAttributes);
-        return m3.toString();
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(currentVolume, maxVolume, "PlaybackInfo[vol=", ",max=", ",type=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM, ",vc=", strM2, "],atts=");
+        sbM.append(audioAttributes);
+        return sbM.toString();
     }
 
     public static String playbackStateToString(PlaybackState playbackState) {

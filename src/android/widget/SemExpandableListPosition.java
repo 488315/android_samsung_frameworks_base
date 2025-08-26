@@ -65,9 +65,9 @@ class SemExpandableListPosition {
     private static SemExpandableListPosition getRecycledOrCreate() {
         synchronized (sPool) {
             if (sPool.size() > 0) {
-                SemExpandableListPosition remove = sPool.remove(0);
-                remove.resetState();
-                return remove;
+                SemExpandableListPosition semExpandableListPositionRemove = sPool.remove(0);
+                semExpandableListPositionRemove.resetState();
+                return semExpandableListPositionRemove;
             }
             return new SemExpandableListPosition();
         }

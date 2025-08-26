@@ -20,14 +20,10 @@ public final class DsmsThreadPoolExecutor extends ThreadPoolExecutor {
     private Condition unpaused;
 
     public static synchronized DsmsThreadPoolExecutor getInstance() {
-        DsmsThreadPoolExecutor dsmsThreadPoolExecutor;
-        synchronized (DsmsThreadPoolExecutor.class) {
-            if (sInstance == null) {
-                sInstance = new DsmsThreadPoolExecutor();
-            }
-            dsmsThreadPoolExecutor = sInstance;
+        if (sInstance == null) {
+            sInstance = new DsmsThreadPoolExecutor();
         }
-        return dsmsThreadPoolExecutor;
+        return sInstance;
     }
 
     private DsmsThreadPoolExecutor() {

@@ -16,7 +16,6 @@ import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DeviceSecurityPolicy {
     public static String TAG = "DeviceSecurityPolicy";
@@ -33,7 +32,7 @@ public class DeviceSecurityPolicy {
         this.mContext = context;
     }
 
-    public boolean addClipboardTextData(String str) {
+    public boolean addClipboardTextData(String str) throws SecurityException {
         AccessController.throwIfParentInstance(this.mContextInfo, "addClipboardTextData");
         EnterpriseLicenseManager.log(this.mContextInfo, "DeviceSecurityPolicy.addClipboardTextData");
         Context context = this.mContext;
@@ -51,11 +50,11 @@ public class DeviceSecurityPolicy {
         return false;
     }
 
-    public final void enforceOwnerOnlyAndClipboardPermission(Context context) {
+    public final void enforceOwnerOnlyAndClipboardPermission(Context context) throws SecurityException {
         AccessController.enforceOwnerOnlyAndActiveAdminPermission(this.mContextInfo, new ArrayList(Arrays.asList(EnterpriseDeviceAdminInfo.USES_POLICY_KNOX_CLIPBOARD_TAG)));
     }
 
-    public String getClipboardTextData() {
+    public String getClipboardTextData() throws SecurityException {
         AccessController.throwIfParentInstance(this.mContextInfo, "getClipboardTextData");
         Context context = this.mContext;
         if (context != null) {

@@ -9,7 +9,6 @@ import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0
 import com.android.systemui.Dependency;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ImageDarkModeFilter {
     public ImageDarkModeFilter(Context context) {
@@ -25,20 +24,20 @@ public class ImageDarkModeFilter {
         Log.d("ImageDarkModeFilter", "isNightMode : Window = " + context.getResources().getConfiguration().uiMode + "App = " + context.getApplicationContext().getResources().getConfiguration().uiMode);
         Log.d("ImageDarkModeFilter", "isNightMode: " + z2 + " ui_mode " + z);
         if (z2 || z) {
-            boolean isApplyDarkFilterToWallpaper = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isApplyDarkFilterToWallpaper();
-            EmergencyButtonController$$ExternalSyntheticOutline0.m("isApplyToWallpaper: ", "ImageDarkModeFilter", isApplyDarkFilterToWallpaper);
-            if (isApplyDarkFilterToWallpaper) {
+            boolean zIsApplyDarkFilterToWallpaper = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isApplyDarkFilterToWallpaper();
+            EmergencyButtonController$$ExternalSyntheticOutline0.m("isApplyToWallpaper: ", "ImageDarkModeFilter", zIsApplyDarkFilterToWallpaper);
+            if (zIsApplyDarkFilterToWallpaper) {
                 float darkModeDimOpacity = semWallpaperColors.getDarkModeDimOpacity();
-                int parseColor = Color.parseColor("#000000");
-                int red = Color.red(parseColor);
-                int green = Color.green(parseColor);
-                int blue = Color.blue(parseColor);
+                int color = Color.parseColor("#000000");
+                int iRed = Color.red(color);
+                int iGreen = Color.green(color);
+                int iBlue = Color.blue(color);
                 Log.i("ImageDarkModeFilter", " Dark mode enabled : opacity :" + darkModeDimOpacity);
                 if (darkModeDimOpacity > 0.25f) {
                     Log.i("ImageDarkModeFilter", " Over limit dark mode opacity. So change opacity");
                     darkModeDimOpacity = 0.25f;
                 }
-                return new float[]{red / 255.0f, green / 255.0f, blue / 255.0f, darkModeDimOpacity};
+                return new float[]{iRed / 255.0f, iGreen / 255.0f, iBlue / 255.0f, darkModeDimOpacity};
             }
         }
         int adaptiveDimColor = semWallpaperColors.getAdaptiveDimColor();
@@ -46,10 +45,10 @@ public class ImageDarkModeFilter {
         if (adaptiveDimOpacity <= 0.0f) {
             return null;
         }
-        int red2 = Color.red(adaptiveDimColor);
-        int green2 = Color.green(adaptiveDimColor);
-        int blue2 = Color.blue(adaptiveDimColor);
+        int iRed2 = Color.red(adaptiveDimColor);
+        int iGreen2 = Color.green(adaptiveDimColor);
+        int iBlue2 = Color.blue(adaptiveDimColor);
         Log.i("ImageDarkModeFilter", " Adaptive dim enabled : col" + adaptiveDimColor + " , opacity :" + adaptiveDimOpacity);
-        return new float[]{red2 / 255.0f, green2 / 255.0f, blue2 / 255.0f, adaptiveDimOpacity};
+        return new float[]{iRed2 / 255.0f, iGreen2 / 255.0f, iBlue2 / 255.0f, adaptiveDimOpacity};
     }
 }

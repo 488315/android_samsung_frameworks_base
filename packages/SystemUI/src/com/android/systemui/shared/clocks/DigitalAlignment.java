@@ -3,7 +3,6 @@ package com.android.systemui.shared.clocks;
 import com.android.systemui.shared.clocks.view.HorizontalAlignment;
 import com.android.systemui.shared.clocks.view.VerticalAlignment;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DigitalAlignment {
     public final HorizontalAlignment horizontalAlignment;
@@ -27,9 +26,9 @@ public final class DigitalAlignment {
 
     public final int hashCode() {
         HorizontalAlignment horizontalAlignment = this.horizontalAlignment;
-        int hashCode = (horizontalAlignment == null ? 0 : horizontalAlignment.hashCode()) * 31;
+        int iHashCode = (horizontalAlignment == null ? 0 : horizontalAlignment.hashCode()) * 31;
         VerticalAlignment verticalAlignment = this.verticalAlignment;
-        return hashCode + (verticalAlignment != null ? verticalAlignment.hashCode() : 0);
+        return iHashCode + (verticalAlignment != null ? verticalAlignment.hashCode() : 0);
     }
 
     public final String toString() {

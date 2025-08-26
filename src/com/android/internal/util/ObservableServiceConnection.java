@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import com.android.internal.util.CallbackRegistry;
-import com.android.internal.util.ObservableServiceConnection;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -57,7 +56,7 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
             ObservableServiceConnection.this.mExecutor.execute(new Runnable() { // from class: com.android.internal.util.ObservableServiceConnection$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ObservableServiceConnection.AnonymousClass1.this.lambda$onNotifyCallback$0(t, callback, observableServiceConnection, i);
+                    this.f$0.lambda$onNotifyCallback$0(t, callback, observableServiceConnection, i);
                 }
             });
         }
@@ -91,9 +90,9 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
             if (this.mBoundCalled) {
                 return false;
             }
-            boolean bindService = this.mContext.bindService(this.mServiceIntent, this.mFlags, this.mExecutor, this);
+            boolean zBindService = this.mContext.bindService(this.mServiceIntent, this.mFlags, this.mExecutor, this);
             this.mBoundCalled = true;
-            return bindService;
+            return zBindService;
         }
     }
 
@@ -106,7 +105,7 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
         this.mExecutor.execute(new Runnable() { // from class: com.android.internal.util.ObservableServiceConnection$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ObservableServiceConnection.this.lambda$addCallback$0(callback);
+                this.f$0.lambda$addCallback$0(callback);
             }
         });
     }
@@ -147,10 +146,10 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
     @Override // android.content.ServiceConnection
     public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         synchronized (this.mLock) {
-            T convert = this.mTransformer.convert(iBinder);
-            this.mService = convert;
+            T tConvert = this.mTransformer.convert(iBinder);
+            this.mService = tConvert;
             this.mLastDisconnectReason = 0;
-            this.mCallbackRegistry.notifyCallbacks(this, 0, convert);
+            this.mCallbackRegistry.notifyCallbacks(this, 0, tConvert);
         }
     }
 

@@ -93,9 +93,9 @@ public interface IContextHubClientCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContextHubClientCallback)) {
-                return (IContextHubClientCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContextHubClientCallback)) {
+                return (IContextHubClientCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -147,36 +147,36 @@ public interface IContextHubClientCallback extends IInterface {
                     onHubReset();
                     return true;
                 case 3:
-                    long readLong = parcel.readLong();
-                    int readInt = parcel.readInt();
+                    long j = parcel.readLong();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNanoAppAborted(readLong, readInt);
+                    onNanoAppAborted(j, i3);
                     return true;
                 case 4:
-                    long readLong2 = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onNanoAppLoaded(readLong2);
+                    onNanoAppLoaded(j2);
                     return true;
                 case 5:
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onNanoAppUnloaded(readLong3);
+                    onNanoAppUnloaded(j3);
                     return true;
                 case 6:
-                    long readLong4 = parcel.readLong();
+                    long j4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onNanoAppEnabled(readLong4);
+                    onNanoAppEnabled(j4);
                     return true;
                 case 7:
-                    long readLong5 = parcel.readLong();
+                    long j5 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onNanoAppDisabled(readLong5);
+                    onNanoAppDisabled(j5);
                     return true;
                 case 8:
-                    long readLong6 = parcel.readLong();
-                    int readInt2 = parcel.readInt();
+                    long j6 = parcel.readLong();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onClientAuthorizationChanged(readLong6, readInt2);
+                    onClientAuthorizationChanged(j6, i4);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -201,98 +201,98 @@ public interface IContextHubClientCallback extends IInterface {
 
             @Override // android.hardware.location.IContextHubClientCallback
             public void onMessageFromNanoApp(NanoAppMessage nanoAppMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(nanoAppMessage, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(nanoAppMessage, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClientCallback
             public void onHubReset() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClientCallback
             public void onNanoAppAborted(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClientCallback
             public void onNanoAppLoaded(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClientCallback
             public void onNanoAppUnloaded(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClientCallback
             public void onNanoAppEnabled(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClientCallback
             public void onNanoAppDisabled(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubClientCallback
             public void onClientAuthorizationChanged(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

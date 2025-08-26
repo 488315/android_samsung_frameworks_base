@@ -7,7 +7,6 @@ import com.android.wm.shell.common.split.SplitWindowManager;
 import com.android.wm.shell.splitscreen.StageCoordinator;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class SplitLayout$$ExternalSyntheticLambda2 implements Consumer {
     public final /* synthetic */ int $r8$classId;

@@ -20,7 +20,6 @@ import com.android.systemui.util.time.SystemClock;
 import com.google.android.msdl.domain.MSDLPlayer;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RearDisplayInnerDialogDelegate implements SystemUIDialog.Delegate {
     public final MSDLPlayer msdlPlayer;
@@ -33,12 +32,10 @@ public final class RearDisplayInnerDialogDelegate implements SystemUIDialog.Dele
     public final boolean touchExplorationEnabled;
     public final VibratorHelper vibratorHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         RearDisplayInnerDialogDelegate create(Context context, Runnable runnable, boolean z);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SeekBarListener implements SeekBar.OnSeekBarChangeListener {
         public final HapticSliderPlugin hapticSliderPlugin;
         public int lastProgress;
@@ -115,7 +112,7 @@ public final class RearDisplayInnerDialogDelegate implements SystemUIDialog.Dele
             button.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.reardisplay.RearDisplayInnerDialogDelegate$onCreate$1$1$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    RearDisplayInnerDialogDelegate.this.onCanceledRunnable.run();
+                    this.this$0.onCanceledRunnable.run();
                 }
             });
         }
@@ -134,7 +131,7 @@ public final class RearDisplayInnerDialogDelegate implements SystemUIDialog.Dele
         seekBar.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.reardisplay.RearDisplayInnerDialogDelegate$onCreate$1$3$1
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                HapticSliderPlugin.this.onTouchEvent(motionEvent);
+                hapticSliderPlugin.onTouchEvent(motionEvent);
                 return false;
             }
         });

@@ -9,7 +9,6 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class WindowHeightSizeClass implements Comparable<WindowHeightSizeClass> {
     public static final List AllSizeClassList;
@@ -20,14 +19,13 @@ public final class WindowHeightSizeClass implements Comparable<WindowHeightSizeC
     public static final int Medium = 1;
     public static final int Expanded = 2;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         /* renamed from: breakpoint-sr04XMo, reason: not valid java name */
-        public static float m326breakpointsr04XMo(int i) {
+        public static float m327breakpointsr04XMo(int i) {
             if (i == WindowHeightSizeClass.Expanded) {
                 float f = 900;
                 Dp.Companion companion = Dp.Companion;
@@ -52,9 +50,9 @@ public final class WindowHeightSizeClass implements Comparable<WindowHeightSizeC
         int i2 = 2;
         int i3 = 0;
         DefaultSizeClasses = ArraysKt___ArraysKt.toSet(new WindowHeightSizeClass[]{new WindowHeightSizeClass(i3), new WindowHeightSizeClass(i), new WindowHeightSizeClass(i2)});
-        List asList = Arrays.asList(new WindowHeightSizeClass(i2), new WindowHeightSizeClass(i), new WindowHeightSizeClass(i3));
-        AllSizeClassList = asList;
-        AllSizeClasses = CollectionsKt___CollectionsKt.toSet(asList);
+        List listAsList = Arrays.asList(new WindowHeightSizeClass(i2), new WindowHeightSizeClass(i), new WindowHeightSizeClass(i3));
+        AllSizeClassList = listAsList;
+        AllSizeClasses = CollectionsKt___CollectionsKt.toSet(listAsList);
     }
 
     private /* synthetic */ WindowHeightSizeClass(int i) {
@@ -62,12 +60,12 @@ public final class WindowHeightSizeClass implements Comparable<WindowHeightSizeC
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ WindowHeightSizeClass m324boximpl(int i) {
+    public static final /* synthetic */ WindowHeightSizeClass m325boximpl(int i) {
         return new WindowHeightSizeClass(i);
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m325toStringimpl(int i) {
+    public static String m326toStringimpl(int i) {
         return "WindowHeightSizeClass.".concat(i == 0 ? "Compact" : i == Medium ? "Medium" : i == Expanded ? "Expanded" : "");
     }
 
@@ -76,10 +74,10 @@ public final class WindowHeightSizeClass implements Comparable<WindowHeightSizeC
         int i = windowHeightSizeClass.value;
         int i2 = this.value;
         Companion.getClass();
-        float m326breakpointsr04XMo = Companion.m326breakpointsr04XMo(i2);
-        float m326breakpointsr04XMo2 = Companion.m326breakpointsr04XMo(i);
+        float fM327breakpointsr04XMo = Companion.m327breakpointsr04XMo(i2);
+        float fM327breakpointsr04XMo2 = Companion.m327breakpointsr04XMo(i);
         Dp.Companion companion = Dp.Companion;
-        return Float.compare(m326breakpointsr04XMo, m326breakpointsr04XMo2);
+        return Float.compare(fM327breakpointsr04XMo, fM327breakpointsr04XMo2);
     }
 
     public final boolean equals(Object obj) {
@@ -91,6 +89,6 @@ public final class WindowHeightSizeClass implements Comparable<WindowHeightSizeC
     }
 
     public final String toString() {
-        return m325toStringimpl(this.value);
+        return m326toStringimpl(this.value);
     }
 }

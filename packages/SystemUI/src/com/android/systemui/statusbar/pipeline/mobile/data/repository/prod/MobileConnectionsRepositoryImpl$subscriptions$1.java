@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionsRepositoryImpl$subscriptions$1 extends SuspendLambda implements Function2 {
     int label;
@@ -41,10 +40,10 @@ final class MobileConnectionsRepositoryImpl$subscriptions$1 extends SuspendLambd
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
         }
         ResultKt.throwOnFailure(obj);
-        List access$fetchSubscriptionsList = MobileConnectionsRepositoryImpl.access$fetchSubscriptionsList(this.this$0);
+        List listAccess$fetchSubscriptionsList = MobileConnectionsRepositoryImpl.access$fetchSubscriptionsList(this.this$0);
         MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl = this.this$0;
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(access$fetchSubscriptionsList, 10));
-        Iterator it = access$fetchSubscriptionsList.iterator();
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAccess$fetchSubscriptionsList, 10));
+        Iterator it = listAccess$fetchSubscriptionsList.iterator();
         while (it.hasNext()) {
             arrayList.add(MobileConnectionsRepositoryImpl.access$toSubscriptionModel(mobileConnectionsRepositoryImpl, (SubscriptionInfo) it.next()));
         }

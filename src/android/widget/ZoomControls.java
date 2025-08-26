@@ -1,6 +1,7 @@
 package android.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,7 +25,7 @@ public class ZoomControls extends LinearLayout {
         this(context, null);
     }
 
-    public ZoomControls(Context context, AttributeSet attributeSet) {
+    public ZoomControls(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         setFocusable(false);
         ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.zoom_controls, (ViewGroup) this, true);

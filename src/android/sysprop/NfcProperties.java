@@ -223,9 +223,7 @@ public final class NfcProperties {
         return tryParseList(new Function() { // from class: android.sysprop.NfcProperties$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer tryParseInteger;
-                tryParseInteger = NfcProperties.tryParseInteger((String) obj);
-                return tryParseInteger;
+                return NfcProperties.tryParseInteger((String) obj);
             }
         }, SystemProperties.get("ro.nfc.info.antpos.X"));
     }
@@ -234,9 +232,7 @@ public final class NfcProperties {
         return tryParseList(new Function() { // from class: android.sysprop.NfcProperties$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer tryParseInteger;
-                tryParseInteger = NfcProperties.tryParseInteger((String) obj);
-                return tryParseInteger;
+                return NfcProperties.tryParseInteger((String) obj);
             }
         }, SystemProperties.get("ro.nfc.info.antpos.Y"));
     }

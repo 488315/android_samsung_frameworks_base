@@ -20,7 +20,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileState extends ConnectivityState {
     public boolean airplaneMode;
@@ -83,15 +82,15 @@ public final class MobileState extends ConnectivityState {
 
     @Override // com.android.systemui.statusbar.connectivity.ConnectivityState
     public final int hashCode() {
-        int hashCode = super.hashCode() * 31;
+        int iHashCode = super.hashCode() * 31;
         String str = this.networkName;
-        int hashCode2 = (hashCode + (str != null ? str.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (str != null ? str.hashCode() : 0)) * 31;
         String str2 = this.networkNameData;
-        int hashCode3 = (this.telephonyDisplayInfo.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.carrierId, (hashCode2 + (str2 != null ? str2.hashCode() : 0)) * 31, 31), 31, this.dataSim), 31, this.dataConnected), 31, this.isEmergency), 31, this.airplaneMode), 31, this.carrierNetworkChangeMode), 31, this.isDefault), 31, this.userSetup), 31, this.roaming) + this.dataState) * 31, 31, this.defaultDataOff)) * 31;
+        int iHashCode3 = (this.telephonyDisplayInfo.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.carrierId, (iHashCode2 + (str2 != null ? str2.hashCode() : 0)) * 31, 31), 31, this.dataSim), 31, this.dataConnected), 31, this.isEmergency), 31, this.airplaneMode), 31, this.carrierNetworkChangeMode), 31, this.isDefault), 31, this.userSetup), 31, this.roaming) + this.dataState) * 31, 31, this.defaultDataOff)) * 31;
         ServiceState serviceState = this.serviceState;
-        int hashCode4 = (hashCode3 + (serviceState != null ? serviceState.hashCode() : 0)) * 31;
+        int iHashCode4 = (iHashCode3 + (serviceState != null ? serviceState.hashCode() : 0)) * 31;
         SignalStrength signalStrength = this.signalStrength;
-        return hashCode4 + (signalStrength != null ? signalStrength.hashCode() : 0);
+        return iHashCode4 + (signalStrength != null ? signalStrength.hashCode() : 0);
     }
 
     @Override // com.android.systemui.statusbar.connectivity.ConnectivityState
@@ -101,32 +100,32 @@ public final class MobileState extends ConnectivityState {
 
     @Override // com.android.systemui.statusbar.connectivity.ConnectivityState
     public final List tableData() {
-        String access$minLog;
-        String access$minLog2;
+        String strAccess$minLog;
+        String strAccess$minLog2;
         SignalIcon$IconGroup signalIcon$IconGroup;
-        Boolean valueOf = Boolean.valueOf(this.dataSim);
-        Integer valueOf2 = Integer.valueOf(this.carrierId);
+        Boolean boolValueOf = Boolean.valueOf(this.dataSim);
+        Integer numValueOf = Integer.valueOf(this.carrierId);
         String str = this.networkName;
         String str2 = this.networkNameData;
-        Boolean valueOf3 = Boolean.valueOf(this.dataConnected);
-        Boolean valueOf4 = Boolean.valueOf(this.roaming);
-        Boolean valueOf5 = Boolean.valueOf(this.isDefault);
-        Boolean valueOf6 = Boolean.valueOf(this.isEmergency);
-        Boolean valueOf7 = Boolean.valueOf(this.airplaneMode);
-        Boolean valueOf8 = Boolean.valueOf(this.carrierNetworkChangeMode);
-        Boolean valueOf9 = Boolean.valueOf(this.userSetup);
-        Integer valueOf10 = Integer.valueOf(this.dataState);
-        Boolean valueOf11 = Boolean.valueOf(this.defaultDataOff);
-        Boolean valueOf12 = Boolean.valueOf(this.dataConnected || (((signalIcon$IconGroup = this.iconGroup) == TelephonyIcons.DATA_DISABLED || signalIcon$IconGroup == TelephonyIcons.NOT_DEFAULT_DATA) && this.userSetup));
+        Boolean boolValueOf2 = Boolean.valueOf(this.dataConnected);
+        Boolean boolValueOf3 = Boolean.valueOf(this.roaming);
+        Boolean boolValueOf4 = Boolean.valueOf(this.isDefault);
+        Boolean boolValueOf5 = Boolean.valueOf(this.isEmergency);
+        Boolean boolValueOf6 = Boolean.valueOf(this.airplaneMode);
+        Boolean boolValueOf7 = Boolean.valueOf(this.carrierNetworkChangeMode);
+        Boolean boolValueOf8 = Boolean.valueOf(this.userSetup);
+        Integer numValueOf2 = Integer.valueOf(this.dataState);
+        Boolean boolValueOf9 = Boolean.valueOf(this.defaultDataOff);
+        Boolean boolValueOf10 = Boolean.valueOf(this.dataConnected || (((signalIcon$IconGroup = this.iconGroup) == TelephonyIcons.DATA_DISABLED || signalIcon$IconGroup == TelephonyIcons.NOT_DEFAULT_DATA) && this.userSetup));
         ServiceState serviceState = this.serviceState;
-        Integer valueOf13 = Integer.valueOf(serviceState != null ? serviceState.getState() : -1);
-        Boolean valueOf14 = Boolean.valueOf(Utils.isInService(this.serviceState));
+        Integer numValueOf3 = Integer.valueOf(serviceState != null ? serviceState.getState() : -1);
+        Boolean boolValueOf11 = Boolean.valueOf(Utils.isInService(this.serviceState));
         ServiceState serviceState2 = this.serviceState;
-        String str3 = (serviceState2 == null || (access$minLog2 = MobileStateKt.access$minLog(serviceState2)) == null) ? "(null)" : access$minLog2;
+        String str3 = (serviceState2 == null || (strAccess$minLog2 = MobileStateKt.access$minLog(serviceState2)) == null) ? "(null)" : strAccess$minLog2;
         SignalStrength signalStrength = this.signalStrength;
-        List asList = Arrays.asList(valueOf, valueOf2, str, str2, valueOf3, valueOf4, valueOf5, valueOf6, valueOf7, valueOf8, valueOf9, valueOf10, valueOf11, valueOf12, valueOf13, valueOf14, this.networkTypeResIdCache, str3, (signalStrength == null || (access$minLog = MobileStateKt.access$minLog(signalStrength)) == null) ? "(null)" : access$minLog, this.telephonyDisplayInfo);
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(asList, 10));
-        Iterator it = asList.iterator();
+        List listAsList = Arrays.asList(boolValueOf, numValueOf, str, str2, boolValueOf2, boolValueOf3, boolValueOf4, boolValueOf5, boolValueOf6, boolValueOf7, boolValueOf8, numValueOf2, boolValueOf9, boolValueOf10, numValueOf3, boolValueOf11, this.networkTypeResIdCache, str3, (signalStrength == null || (strAccess$minLog = MobileStateKt.access$minLog(signalStrength)) == null) ? "(null)" : strAccess$minLog, this.telephonyDisplayInfo);
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAsList, 10));
+        Iterator it = listAsList.iterator();
         while (it.hasNext()) {
             arrayList.add(String.valueOf(it.next()));
         }
@@ -135,8 +134,8 @@ public final class MobileState extends ConnectivityState {
 
     @Override // com.android.systemui.statusbar.connectivity.ConnectivityState
     public final void toString(StringBuilder sb) {
-        String str;
-        String access$minLog;
+        String strAccess$minLog;
+        String strAccess$minLog2;
         SignalIcon$IconGroup signalIcon$IconGroup;
         super.toString(sb);
         sb.append(',');
@@ -161,16 +160,16 @@ public final class MobileState extends ConnectivityState {
         sb2.append(this.networkTypeResIdCache);
         sb.append(sb2.toString());
         ServiceState serviceState2 = this.serviceState;
-        String str2 = "(null)";
-        if (serviceState2 == null || (str = MobileStateKt.access$minLog(serviceState2)) == null) {
-            str = "(null)";
+        String str = "(null)";
+        if (serviceState2 == null || (strAccess$minLog = MobileStateKt.access$minLog(serviceState2)) == null) {
+            strAccess$minLog = "(null)";
         }
-        sb.append("serviceState=" + str + ",");
+        sb.append("serviceState=" + strAccess$minLog + ",");
         SignalStrength signalStrength = this.signalStrength;
-        if (signalStrength != null && (access$minLog = MobileStateKt.access$minLog(signalStrength)) != null) {
-            str2 = access$minLog;
+        if (signalStrength != null && (strAccess$minLog2 = MobileStateKt.access$minLog(signalStrength)) != null) {
+            str = strAccess$minLog2;
         }
-        sb.append("signalStrength=" + str2 + ",");
+        sb.append("signalStrength=" + str + ",");
         sb.append("displayInfo=" + this.telephonyDisplayInfo);
     }
 

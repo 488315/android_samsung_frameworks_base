@@ -3,6 +3,7 @@ package android.telephony.mbms;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -39,7 +40,7 @@ public final class StreamingServiceInfo extends ServiceInfo implements Parcelabl
     }
 
     @Override // android.telephony.mbms.ServiceInfo, android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         super.writeToParcel(parcel, i);
     }
 }

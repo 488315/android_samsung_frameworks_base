@@ -6,7 +6,6 @@ import androidx.compose.ui.geometry.CornerRadius;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RoundRect {
     public final float bottom;
@@ -18,7 +17,6 @@ public final class RoundRect {
     public final long topLeftCornerRadius;
     public final long topRightCornerRadius;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -31,7 +29,7 @@ public final class RoundRect {
     static {
         new Companion(null);
         CornerRadius.Companion.getClass();
-        RoundRectKt.m412RoundRectgG7oq9Y(0.0f, 0.0f, 0.0f, 0.0f, 0L);
+        RoundRectKt.m414RoundRectgG7oq9Y(0.0f, 0.0f, 0.0f, 0.0f, 0L);
     }
 
     public /* synthetic */ RoundRect(float f, float f2, float f3, float f4, long j, long j2, long j3, long j4, DefaultConstructorMarker defaultConstructorMarker) {
@@ -46,7 +44,7 @@ public final class RoundRect {
             return false;
         }
         RoundRect roundRect = (RoundRect) obj;
-        return Float.compare(this.left, roundRect.left) == 0 && Float.compare(this.top, roundRect.top) == 0 && Float.compare(this.right, roundRect.right) == 0 && Float.compare(this.bottom, roundRect.bottom) == 0 && CornerRadius.m391equalsimpl0(this.topLeftCornerRadius, roundRect.topLeftCornerRadius) && CornerRadius.m391equalsimpl0(this.topRightCornerRadius, roundRect.topRightCornerRadius) && CornerRadius.m391equalsimpl0(this.bottomRightCornerRadius, roundRect.bottomRightCornerRadius) && CornerRadius.m391equalsimpl0(this.bottomLeftCornerRadius, roundRect.bottomLeftCornerRadius);
+        return Float.compare(this.left, roundRect.left) == 0 && Float.compare(this.top, roundRect.top) == 0 && Float.compare(this.right, roundRect.right) == 0 && Float.compare(this.bottom, roundRect.bottom) == 0 && CornerRadius.m393equalsimpl0(this.topLeftCornerRadius, roundRect.topLeftCornerRadius) && CornerRadius.m393equalsimpl0(this.topRightCornerRadius, roundRect.topRightCornerRadius) && CornerRadius.m393equalsimpl0(this.bottomRightCornerRadius, roundRect.bottomRightCornerRadius) && CornerRadius.m393equalsimpl0(this.bottomLeftCornerRadius, roundRect.bottomLeftCornerRadius);
     }
 
     public final float getHeight() {
@@ -58,44 +56,44 @@ public final class RoundRect {
     }
 
     public final int hashCode() {
-        int m = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.bottom, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.right, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.top, Float.hashCode(this.left) * 31, 31), 31), 31);
+        int iM = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.bottom, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.right, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.top, Float.hashCode(this.left) * 31, 31), 31), 31);
         CornerRadius.Companion companion = CornerRadius.Companion;
-        return Long.hashCode(this.bottomLeftCornerRadius) + MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(m, 31, this.topLeftCornerRadius), 31, this.topRightCornerRadius), 31, this.bottomRightCornerRadius);
+        return Long.hashCode(this.bottomLeftCornerRadius) + MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(iM, 31, this.topLeftCornerRadius), 31, this.topRightCornerRadius), 31, this.bottomRightCornerRadius);
     }
 
     public final String toString() {
         String str = GeometryUtilsKt.toStringAsFixed(this.left) + ", " + GeometryUtilsKt.toStringAsFixed(this.top) + ", " + GeometryUtilsKt.toStringAsFixed(this.right) + ", " + GeometryUtilsKt.toStringAsFixed(this.bottom);
         long j = this.topLeftCornerRadius;
         long j2 = this.topRightCornerRadius;
-        boolean m391equalsimpl0 = CornerRadius.m391equalsimpl0(j, j2);
+        boolean zM393equalsimpl0 = CornerRadius.m393equalsimpl0(j, j2);
         long j3 = this.bottomRightCornerRadius;
         long j4 = this.bottomLeftCornerRadius;
-        if (!m391equalsimpl0 || !CornerRadius.m391equalsimpl0(j2, j3) || !CornerRadius.m391equalsimpl0(j3, j4)) {
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("RoundRect(rect=", str, ", topLeft=");
-            m.append((Object) CornerRadius.m392toStringimpl(j));
-            m.append(", topRight=");
-            m.append((Object) CornerRadius.m392toStringimpl(j2));
-            m.append(", bottomRight=");
-            m.append((Object) CornerRadius.m392toStringimpl(j3));
-            m.append(", bottomLeft=");
-            m.append((Object) CornerRadius.m392toStringimpl(j4));
-            m.append(')');
-            return m.toString();
+        if (!zM393equalsimpl0 || !CornerRadius.m393equalsimpl0(j2, j3) || !CornerRadius.m393equalsimpl0(j3, j4)) {
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("RoundRect(rect=", str, ", topLeft=");
+            sbM.append((Object) CornerRadius.m394toStringimpl(j));
+            sbM.append(", topRight=");
+            sbM.append((Object) CornerRadius.m394toStringimpl(j2));
+            sbM.append(", bottomRight=");
+            sbM.append((Object) CornerRadius.m394toStringimpl(j3));
+            sbM.append(", bottomLeft=");
+            sbM.append((Object) CornerRadius.m394toStringimpl(j4));
+            sbM.append(')');
+            return sbM.toString();
         }
         int i = (int) (j >> 32);
         int i2 = (int) (j & 4294967295L);
         if (Float.intBitsToFloat(i) == Float.intBitsToFloat(i2)) {
-            StringBuilder m2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("RoundRect(rect=", str, ", radius=");
-            m2.append(GeometryUtilsKt.toStringAsFixed(Float.intBitsToFloat(i)));
-            m2.append(')');
-            return m2.toString();
+            StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("RoundRect(rect=", str, ", radius=");
+            sbM2.append(GeometryUtilsKt.toStringAsFixed(Float.intBitsToFloat(i)));
+            sbM2.append(')');
+            return sbM2.toString();
         }
-        StringBuilder m3 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("RoundRect(rect=", str, ", x=");
-        m3.append(GeometryUtilsKt.toStringAsFixed(Float.intBitsToFloat(i)));
-        m3.append(", y=");
-        m3.append(GeometryUtilsKt.toStringAsFixed(Float.intBitsToFloat(i2)));
-        m3.append(')');
-        return m3.toString();
+        StringBuilder sbM3 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("RoundRect(rect=", str, ", x=");
+        sbM3.append(GeometryUtilsKt.toStringAsFixed(Float.intBitsToFloat(i)));
+        sbM3.append(", y=");
+        sbM3.append(GeometryUtilsKt.toStringAsFixed(Float.intBitsToFloat(i2)));
+        sbM3.append(')');
+        return sbM3.toString();
     }
 
     private RoundRect(float f, float f2, float f3, float f4, long j, long j2, long j3, long j4) {
@@ -110,60 +108,35 @@ public final class RoundRect {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public RoundRect(float r19, float r20, float r21, float r22, long r23, long r25, long r27, long r29, int r31, kotlin.jvm.internal.DefaultConstructorMarker r32) {
-        /*
-            r18 = this;
-            r0 = r31
-            r1 = r0 & 16
-            r2 = 0
-            if (r1 == 0) goto Lf
-            androidx.compose.ui.geometry.CornerRadius$Companion r1 = androidx.compose.ui.geometry.CornerRadius.Companion
-            r1.getClass()
-            r9 = r2
-            goto L11
-        Lf:
-            r9 = r23
-        L11:
-            r1 = r0 & 32
-            if (r1 == 0) goto L1c
-            androidx.compose.ui.geometry.CornerRadius$Companion r1 = androidx.compose.ui.geometry.CornerRadius.Companion
-            r1.getClass()
-            r11 = r2
-            goto L1e
-        L1c:
-            r11 = r25
-        L1e:
-            r1 = r0 & 64
-            if (r1 == 0) goto L29
-            androidx.compose.ui.geometry.CornerRadius$Companion r1 = androidx.compose.ui.geometry.CornerRadius.Companion
-            r1.getClass()
-            r13 = r2
-            goto L2b
-        L29:
-            r13 = r27
-        L2b:
-            r0 = r0 & 128(0x80, float:1.8E-43)
-            if (r0 == 0) goto L36
-            androidx.compose.ui.geometry.CornerRadius$Companion r0 = androidx.compose.ui.geometry.CornerRadius.Companion
-            r0.getClass()
-            r15 = r2
-            goto L38
-        L36:
-            r15 = r29
-        L38:
-            r17 = 0
-            r4 = r18
-            r5 = r19
-            r6 = r20
-            r7 = r21
-            r8 = r22
-            r4.<init>(r5, r6, r7, r8, r9, r11, r13, r15, r17)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.geometry.RoundRect.<init>(float, float, float, float, long, long, long, long, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public RoundRect(float f, float f2, float f3, float f4, long j, long j2, long j3, long j4, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        long j5;
+        long j6;
+        long j7;
+        long j8;
+        if ((i & 16) != 0) {
+            CornerRadius.Companion.getClass();
+            j5 = 0;
+        } else {
+            j5 = j;
+        }
+        if ((i & 32) != 0) {
+            CornerRadius.Companion.getClass();
+            j6 = 0;
+        } else {
+            j6 = j2;
+        }
+        if ((i & 64) != 0) {
+            CornerRadius.Companion.getClass();
+            j7 = 0;
+        } else {
+            j7 = j3;
+        }
+        if ((i & 128) != 0) {
+            CornerRadius.Companion.getClass();
+            j8 = 0;
+        } else {
+            j8 = j4;
+        }
+        this(f, f2, f3, f4, j5, j6, j7, j8, null);
     }
 }

@@ -25,7 +25,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class AlternateBouncerViewBinder$optionallyAddUdfpsViews$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ TouchHandlingViewLogger $logger;
@@ -35,7 +34,6 @@ final class AlternateBouncerViewBinder$optionallyAddUdfpsViews$1 extends Suspend
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder$optionallyAddUdfpsViews$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ TouchHandlingViewLogger $logger;
@@ -45,9 +43,8 @@ final class AlternateBouncerViewBinder$optionallyAddUdfpsViews$1 extends Suspend
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder$optionallyAddUdfpsViews$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C01381 extends SuspendLambda implements Function2 {
+        final class C02451 extends SuspendLambda implements Function2 {
             final /* synthetic */ TouchHandlingViewLogger $logger;
             final /* synthetic */ Lazy $udfpsA11yOverlayViewModel;
             final /* synthetic */ AlternateBouncerUdfpsIconViewModel $udfpsIconViewModel;
@@ -55,7 +52,7 @@ final class AlternateBouncerViewBinder$optionallyAddUdfpsViews$1 extends Suspend
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C01381(AlternateBouncerUdfpsIconViewModel alternateBouncerUdfpsIconViewModel, ConstraintLayout constraintLayout, Lazy lazy, TouchHandlingViewLogger touchHandlingViewLogger, Continuation continuation) {
+            public C02451(AlternateBouncerUdfpsIconViewModel alternateBouncerUdfpsIconViewModel, ConstraintLayout constraintLayout, Lazy lazy, TouchHandlingViewLogger touchHandlingViewLogger, Continuation continuation) {
                 super(2, continuation);
                 this.$udfpsIconViewModel = alternateBouncerUdfpsIconViewModel;
                 this.$view = constraintLayout;
@@ -65,12 +62,12 @@ final class AlternateBouncerViewBinder$optionallyAddUdfpsViews$1 extends Suspend
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C01381(this.$udfpsIconViewModel, this.$view, this.$udfpsA11yOverlayViewModel, this.$logger, continuation);
+                return new C02451(this.$udfpsIconViewModel, this.$view, this.$udfpsA11yOverlayViewModel, this.$logger, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C01381) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C02451) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -88,7 +85,7 @@ final class AlternateBouncerViewBinder$optionallyAddUdfpsViews$1 extends Suspend
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
                             AlternateBouncerUdfpsIconViewModel.IconLocation iconLocation = (AlternateBouncerUdfpsIconViewModel.IconLocation) obj2;
-                            ConstraintLayout constraintLayout2 = ConstraintLayout.this;
+                            ConstraintLayout constraintLayout2 = constraintLayout;
                             if (constraintLayout2.getViewById(R.id.alternate_bouncer_udfps_accessibility_overlay) == null) {
                                 UdfpsAccessibilityOverlay udfpsAccessibilityOverlay = new UdfpsAccessibilityOverlay(constraintLayout2.getContext());
                                 udfpsAccessibilityOverlay.setId(R.id.alternate_bouncer_udfps_accessibility_overlay);
@@ -156,7 +153,7 @@ final class AlternateBouncerViewBinder$optionallyAddUdfpsViews$1 extends Suspend
                 throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
             }
             ResultKt.throwOnFailure(obj);
-            CoroutineTracingKt.launchTraced$default((CoroutineScope) this.L$0, null, null, new C01381(this.$udfpsIconViewModel, this.$view, this.$udfpsA11yOverlayViewModel, this.$logger, null), 6);
+            CoroutineTracingKt.launchTraced$default((CoroutineScope) this.L$0, null, null, new C02451(this.$udfpsIconViewModel, this.$view, this.$udfpsA11yOverlayViewModel, this.$logger, null), 6);
             return Unit.INSTANCE;
         }
     }

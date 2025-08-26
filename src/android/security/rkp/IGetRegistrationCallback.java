@@ -59,9 +59,9 @@ public interface IGetRegistrationCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGetRegistrationCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGetRegistrationCallback)) {
-                return (IGetRegistrationCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGetRegistrationCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGetRegistrationCallback)) {
+                return (IGetRegistrationCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,15 +94,15 @@ public interface IGetRegistrationCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IRegistration asInterface = IRegistration.Stub.asInterface(parcel.readStrongBinder());
+                IRegistration iRegistrationAsInterface = IRegistration.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onSuccess(asInterface);
+                onSuccess(iRegistrationAsInterface);
             } else if (i == 2) {
                 onCancel();
             } else if (i == 3) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onError(readString);
+                onError(string);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -127,36 +127,36 @@ public interface IGetRegistrationCallback extends IInterface {
 
             @Override // android.security.rkp.IGetRegistrationCallback
             public void onSuccess(IRegistration iRegistration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetRegistrationCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRegistration);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetRegistrationCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRegistration);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.rkp.IGetRegistrationCallback
             public void onCancel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetRegistrationCallback.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetRegistrationCallback.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.rkp.IGetRegistrationCallback
             public void onError(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetRegistrationCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetRegistrationCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

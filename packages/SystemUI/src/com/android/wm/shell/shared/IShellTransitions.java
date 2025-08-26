@@ -12,11 +12,9 @@ import com.android.wm.shell.transition.Transitions;
 import com.android.wm.shell.transition.Transitions$IShellTransitionsImpl$$ExternalSyntheticLambda0;
 import com.android.wm.shell.transition.Transitions$IShellTransitionsImpl$$ExternalSyntheticLambda1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface IShellTransitions extends IInterface {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IShellTransitions {
         public Stub() {
             attachInterface(this, "com.android.wm.shell.shared.IShellTransitions");
@@ -31,7 +29,7 @@ public interface IShellTransitions extends IInterface {
                 parcel2.writeString("com.android.wm.shell.shared.IShellTransitions");
                 return true;
             }
-            Object obj = null;
+            Object iHomeTransitionListener$Stub$Proxy = null;
             switch (i) {
                 case 2:
                     TransitionFilter transitionFilter = (TransitionFilter) parcel.readTypedObject(TransitionFilter.CREATOR);
@@ -50,13 +48,13 @@ public interface IShellTransitions extends IInterface {
                     parcel2.writeStrongBinder(defaultApplyToken);
                     return true;
                 case 5:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    if (readStrongBinder != null) {
-                        IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.android.wm.shell.shared.IHomeTransitionListener");
-                        obj = (queryLocalInterface == null || !(queryLocalInterface instanceof IHomeTransitionListener$Stub$Proxy)) ? new IHomeTransitionListener$Stub$Proxy(readStrongBinder) : (IHomeTransitionListener$Stub$Proxy) queryLocalInterface;
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    if (strongBinder != null) {
+                        IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.android.wm.shell.shared.IHomeTransitionListener");
+                        iHomeTransitionListener$Stub$Proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IHomeTransitionListener$Stub$Proxy)) ? new IHomeTransitionListener$Stub$Proxy(strongBinder) : (IHomeTransitionListener$Stub$Proxy) iInterfaceQueryLocalInterface;
                     }
                     parcel.enforceNoDataAvail();
-                    ExternalInterfaceBinder.executeRemoteCallWithTaskPermission(((Transitions.IShellTransitionsImpl) this).mTransitions, "setHomeTransitionListener", new Transitions$IShellTransitionsImpl$$ExternalSyntheticLambda1(obj, 3), false);
+                    ExternalInterfaceBinder.executeRemoteCallWithTaskPermission(((Transitions.IShellTransitionsImpl) this).mTransitions, "setHomeTransitionListener", new Transitions$IShellTransitionsImpl$$ExternalSyntheticLambda1(iHomeTransitionListener$Stub$Proxy, 3), false);
                     return true;
                 case 6:
                     SurfaceControl[] surfaceControlArr = new SurfaceControl[1];
@@ -72,13 +70,13 @@ public interface IShellTransitions extends IInterface {
                     ExternalInterfaceBinder.executeRemoteCallWithTaskPermission(((Transitions.IShellTransitionsImpl) this).mTransitions, "registerRemoteForTakeover", new Transitions$IShellTransitionsImpl$$ExternalSyntheticLambda0(transitionFilter2, remoteTransition3, 1), false);
                     return true;
                 case 8:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    if (readStrongBinder2 != null) {
-                        IInterface queryLocalInterface2 = readStrongBinder2.queryLocalInterface("com.android.wm.shell.shared.IFocusTransitionListener");
-                        obj = (queryLocalInterface2 == null || !(queryLocalInterface2 instanceof IFocusTransitionListener$Stub$Proxy)) ? new IFocusTransitionListener$Stub$Proxy(readStrongBinder2) : (IFocusTransitionListener$Stub$Proxy) queryLocalInterface2;
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    if (strongBinder2 != null) {
+                        IInterface iInterfaceQueryLocalInterface2 = strongBinder2.queryLocalInterface("com.android.wm.shell.shared.IFocusTransitionListener");
+                        iHomeTransitionListener$Stub$Proxy = (iInterfaceQueryLocalInterface2 == null || !(iInterfaceQueryLocalInterface2 instanceof IFocusTransitionListener$Stub$Proxy)) ? new IFocusTransitionListener$Stub$Proxy(strongBinder2) : (IFocusTransitionListener$Stub$Proxy) iInterfaceQueryLocalInterface2;
                     }
                     parcel.enforceNoDataAvail();
-                    ExternalInterfaceBinder.executeRemoteCallWithTaskPermission(((Transitions.IShellTransitionsImpl) this).mTransitions, "setFocusTransitionListener", new Transitions$IShellTransitionsImpl$$ExternalSyntheticLambda1(obj, 2), false);
+                    ExternalInterfaceBinder.executeRemoteCallWithTaskPermission(((Transitions.IShellTransitionsImpl) this).mTransitions, "setFocusTransitionListener", new Transitions$IShellTransitionsImpl$$ExternalSyntheticLambda1(iHomeTransitionListener$Stub$Proxy, 2), false);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

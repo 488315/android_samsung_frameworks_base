@@ -12,7 +12,6 @@ import com.sec.ims.volte2.data.VolteConstants;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DividerSnapAlgorithm {
     public final int mDensityDpi;
@@ -41,7 +40,6 @@ public class DividerSnapAlgorithm {
     public final SnapTarget mStashStartTarget;
     public final ArrayList mTargets;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SnapTarget {
         public final float distanceMultiplier;
         public final int position;
@@ -95,8 +93,8 @@ public class DividerSnapAlgorithm {
     }
 
     public final SnapTarget calculateNonDismissingSnapTarget(int i) {
-        SnapTarget snap = snap(i, false);
-        return snap == this.mDismissStartTarget ? this.mFirstSplitTarget : snap == this.mDismissEndTarget ? this.mLastSplitTarget : snap;
+        SnapTarget snapTargetSnap = snap(i, false);
+        return snapTargetSnap == this.mDismissStartTarget ? this.mFirstSplitTarget : snapTargetSnap == this.mDismissEndTarget ? this.mLastSplitTarget : snapTargetSnap;
     }
 
     public final SnapTarget calculateSnapTarget(int i, boolean z) {
@@ -159,19 +157,19 @@ public class DividerSnapAlgorithm {
         float f = Float.MAX_VALUE;
         for (int i3 = 0; i3 < size; i3++) {
             SnapTarget snapTarget4 = (SnapTarget) this.mTargets.get(i3);
-            float abs = Math.abs(i - snapTarget4.position);
+            float fAbs = Math.abs(i - snapTarget4.position);
             if (z) {
-                abs /= snapTarget4.distanceMultiplier;
+                fAbs /= snapTarget4.distanceMultiplier;
             }
-            if (abs < f) {
+            if (fAbs < f) {
                 i2 = i3;
-                f = abs;
+                f = fAbs;
             }
         }
         return (SnapTarget) this.mTargets.get(i2);
     }
 
-    public DividerSnapAlgorithm(Resources resources, int i, int i2, int i3, boolean z, Rect rect, Rect rect2, int i4, boolean z2, boolean z3, boolean z4, boolean z5) {
+    public DividerSnapAlgorithm(Resources resources, int i, int i2, int i3, boolean z, Rect rect, Rect rect2, int i4, boolean z2, boolean z3, boolean z4, boolean z5) throws Resources.NotFoundException {
         int i5;
         float f;
         ArrayList arrayList = new ArrayList();
@@ -199,19 +197,19 @@ public class DividerSnapAlgorithm {
         int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.immersive_mode_cling_width);
         this.mMinimalSizeResizableTask = dimensionPixelSize;
         boolean z7 = resources.getBoolean(R.bool.config_keepDreamingWhenUnplugging);
-        int dimensionPixelSize2 = z3 ? resources.getDimensionPixelSize(17106397) : 0;
+        int dimensionPixelSize2 = z3 ? resources.getDimensionPixelSize(17106398) : 0;
         this.mDensityDpi = resources.getConfiguration().densityDpi;
-        this.mMultiSplitMinimalSize = resources.getDimensionPixelSize(R.dimen.secondary_content_alpha_material_dark);
-        int dimensionPixelSize3 = resources.getDimensionPixelSize(R.dimen.secondary_content_alpha_material_light);
+        this.mMultiSplitMinimalSize = resources.getDimensionPixelSize(R.dimen.secondary_content_alpha_material_light);
+        int dimensionPixelSize3 = resources.getDimensionPixelSize(R.dimen.secondary_rounded_corner_radius);
         int i6 = resources.getConfiguration().semDisplayDeviceType;
         this.mDisplayDeviceType = i6;
         this.mParallelMultiSplit = z4;
         if (!z5) {
-            int navigationBarPosition = DisplayLayout.navigationBarPosition(resources, i, i2, resources.getConfiguration().windowConfiguration.getRotation());
-            this.mNaviBarPosition = navigationBarPosition;
+            int iNavigationBarPosition = DisplayLayout.navigationBarPosition(resources, i, i2, resources.getConfiguration().windowConfiguration.getRotation());
+            this.mNaviBarPosition = iNavigationBarPosition;
             if (!CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY || (CoreRune.MW_MULTI_SPLIT_FOR_COVER_DISPLAY && i6 == 5)) {
                 if (z) {
-                    this.mNaviBarSize = navigationBarPosition == 1 ? rect.left : rect.right;
+                    this.mNaviBarSize = iNavigationBarPosition == 1 ? rect.left : rect.right;
                 } else {
                     this.mNaviBarSize = rect.bottom;
                 }
@@ -251,46 +249,46 @@ public class DividerSnapAlgorithm {
         if (i12 == 0) {
             int i13 = z ? rect3.left : rect3.top;
             int i14 = z ? i - rect3.right : i2 - rect3.bottom;
-            int floor = (int) Math.floor(((z ? i2 - rect3.bottom : i - rect3.right) - (z ? rect3.top : rect3.left)) * 0.5625f);
-            addNonDismissingTargets(i13 + floor, (i14 - floor) - i3, i7, z);
+            int iFloor = (int) Math.floor(((z ? i2 - rect3.bottom : i - rect3.right) - (z ? rect3.top : rect3.left)) * 0.5625f);
+            addNonDismissingTargets(i13 + iFloor, (i14 - iFloor) - i3, i7, z);
         } else if (i12 == 1) {
             int i15 = z ? rect3.left : rect3.top;
             int i16 = z ? i - rect3.right : i2 - rect3.bottom;
-            int i17 = ((int) (fraction * (i16 - i15))) - (i3 / 2);
-            i17 = z7 ? Math.max(i17, dimensionPixelSize) : i17;
-            addNonDismissingTargets(i15 + i17, (i16 - i17) - i3, i7, z);
+            int iMax = ((int) (fraction * (i16 - i15))) - (i3 / 2);
+            iMax = z7 ? Math.max(iMax, dimensionPixelSize) : iMax;
+            addNonDismissingTargets(i15 + iMax, (i16 - iMax) - i3, i7, z);
         } else if (i12 == 2) {
             addMiddleTarget(z);
         } else if (i12 == 3) {
-            int i18 = dimensionPixelSize2 + rect3.top;
+            int i17 = dimensionPixelSize2 + rect3.top;
             if (z) {
                 if (i4 == 1) {
-                    i18 += rect3.left;
+                    i17 += rect3.left;
                 } else if (i4 == 3) {
-                    i18 = ((i - i18) - rect3.right) - i3;
+                    i17 = ((i - i17) - rect3.right) - i3;
                 }
             }
-            arrayList.add(new SnapTarget(i18, 13));
+            arrayList.add(new SnapTarget(i17, 13));
         } else if (i12 == 4) {
-            int i19 = z ? i : i2;
-            int i20 = ((int) (0.33f * i19)) - (i3 / 2);
+            int i18 = z ? i : i2;
+            int i19 = ((int) (0.33f * i18)) - (i3 / 2);
             int asInt = IntStream.of(getStartInset(), z ? rect3.right : rect3.bottom, z ? rect4.left : rect4.top, z ? rect4.right : rect4.bottom).max().getAsInt();
-            addNonDismissingTargets(asInt + i20, ((i19 - asInt) - i20) - i3, i7, z);
+            addNonDismissingTargets(asInt + i19, ((i18 - asInt) - i19) - i3, i7, z);
         } else if (i12 == 10) {
-            int i21 = z ? rect3.left : rect3.top;
-            int i22 = z ? i - rect3.right : i2 - rect3.bottom;
-            int max = Math.max(Math.round(Math.min(i, i2) * 0.5625f), dimensionPixelSize);
-            addNonDismissingTargets(i21 + max, (i22 - max) - i3, i7, z);
+            int i20 = z ? rect3.left : rect3.top;
+            int i21 = z ? i - rect3.right : i2 - rect3.bottom;
+            int iMax2 = Math.max(Math.round(Math.min(i, i2) * 0.5625f), dimensionPixelSize);
+            addNonDismissingTargets(i20 + iMax2, (i21 - iMax2) - i3, i7, z);
         } else if (i12 == 20 && z6) {
-            int i23 = z ? rect3.left : rect3.top;
-            int i24 = z ? i - rect3.right : i2 - rect3.bottom;
+            int i22 = z ? rect3.left : rect3.top;
+            int i23 = z ? i - rect3.right : i2 - rect3.bottom;
             int minimalSize = getMinimalSize();
-            int i25 = i23 + minimalSize;
-            int i26 = (i24 - minimalSize) - i3;
-            if (i26 - i25 <= dimensionPixelSize3) {
+            int i24 = i22 + minimalSize;
+            int i25 = (i23 - minimalSize) - i3;
+            if (i25 - i24 <= dimensionPixelSize3) {
                 addMiddleTarget(z);
             } else {
-                addNonDismissingTargets(i25, i26, i7, z);
+                addNonDismissingTargets(i24, i25, i7, z);
             }
         }
         if (z8 && z5) {
@@ -305,18 +303,18 @@ public class DividerSnapAlgorithm {
         arrayList.add(new SnapTarget(i7, 12, f));
         if (z8 && z5) {
             this.mFirstSplitTarget = (SnapTarget) arrayList.get(1);
-            this.mLastSplitTarget = (SnapTarget) AlertController$$ExternalSyntheticOutline0.m(arrayList, 2);
+            this.mLastSplitTarget = (SnapTarget) AlertController$$ExternalSyntheticOutline0.m(2, arrayList);
             this.mDismissStartTarget = (SnapTarget) arrayList.get(0);
-            this.mDismissEndTarget = (SnapTarget) AlertController$$ExternalSyntheticOutline0.m(arrayList, 1);
+            this.mDismissEndTarget = (SnapTarget) AlertController$$ExternalSyntheticOutline0.m(1, arrayList);
             this.mStashStartTarget = null;
             this.mStashEndTarget = null;
         } else {
             this.mFirstSplitTarget = (SnapTarget) arrayList.get(2);
             this.mStashStartTarget = (SnapTarget) arrayList.get(1);
-            this.mLastSplitTarget = (SnapTarget) AlertController$$ExternalSyntheticOutline0.m(arrayList, 3);
-            this.mStashEndTarget = (SnapTarget) AlertController$$ExternalSyntheticOutline0.m(arrayList, 2);
+            this.mLastSplitTarget = (SnapTarget) AlertController$$ExternalSyntheticOutline0.m(3, arrayList);
+            this.mStashEndTarget = (SnapTarget) AlertController$$ExternalSyntheticOutline0.m(2, arrayList);
             this.mDismissStartTarget = (SnapTarget) arrayList.get(0);
-            this.mDismissEndTarget = (SnapTarget) AlertController$$ExternalSyntheticOutline0.m(arrayList, 1);
+            this.mDismissEndTarget = (SnapTarget) AlertController$$ExternalSyntheticOutline0.m(1, arrayList);
         }
         SnapTarget snapTarget = (SnapTarget) arrayList.get(arrayList.size() / 2);
         this.mMiddleTarget = snapTarget;

@@ -1,11 +1,11 @@
 package com.android.systemui.settings.multisim.ui.view;
 
-import android.animation.ArgbEvaluator;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -59,7 +59,6 @@ import java.util.List;
 import java.util.Locale;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView, SecQSExpansionStateListener {
     public final Context mContext;
@@ -73,7 +72,6 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
     public int mSlotButtonTextColor;
     public final ArrayList mSlotButtons;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.settings.multisim.ui.view.MultiSIMPreferredSlotView$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$settings$multisim$ui$viewmodel$Button$Layout;
@@ -127,7 +125,6 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PrefferedSlotButton implements Button {
         public final ViewGroup mButtonView;
         public final TextView mCarrierNameText;
@@ -171,32 +168,23 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
                 SIMInfoIconManager.Factory factory = ((MultiSIMController) Dependency.sDependency.getDependencyInner(MultiSIMController.class)).mSIMInfoIconManagerFactory;
                 SIMInfoIconManager sIMInfoIconManager = new SIMInfoIconManager(statusIconContainer, StatusBarLocation.HOME, factory.mWifiUiAdapter, factory.mMobileUiAdapter, factory.mMobileUiAdapterKairos, factory.mMobileContextProvider, factory.mKairosNetwork, factory.mAppScope, factory.mBTTetherUiAdapter, this.mSimSlotId);
                 this.mIconManager = sIMInfoIconManager;
-                DualToneHandler dualToneHandler = MultiSIMPreferredSlotView.this.mDualToneHandler;
-                DualToneHandler.Color color = dualToneHandler.lightColor;
-                int i = (color == null ? null : color).single;
-                DualToneHandler.Color color2 = dualToneHandler.darkColor;
-                int intValue = ((Integer) ArgbEvaluator.getInstance().evaluate(0.0f, Integer.valueOf(i), Integer.valueOf((color2 == null ? null : color2).single))).intValue();
-                DualToneHandler dualToneHandler2 = MultiSIMPreferredSlotView.this.mDualToneHandler;
-                DualToneHandler.Color color3 = dualToneHandler2.lightColor;
-                int i2 = (color3 == null ? null : color3).single;
-                DualToneHandler.Color color4 = dualToneHandler2.darkColor;
-                sIMInfoIconManager.setTint(intValue, ((Integer) ArgbEvaluator.getInstance().evaluate(0.0f, Integer.valueOf(i2), Integer.valueOf((color4 != null ? color4 : null).single))).intValue());
+                sIMInfoIconManager.setTint(MultiSIMPreferredSlotView.this.mDualToneHandler.getSingleColor(), MultiSIMPreferredSlotView.this.mDualToneHandler.getSingleColor());
             }
             TextView textView = this.mCategoryText;
             int[] iArr = AnonymousClass2.$SwitchMap$com$android$systemui$settings$multisim$ui$viewmodel$ButtonType;
-            int i3 = iArr[buttonType.ordinal()];
-            textView.setText(i3 != 1 ? i3 != 3 ? i3 != 4 ? "" : context.getString(R.string.qs_multisim_data_preffered_btn_title) : context.getString(R.string.qs_multisim_sms_preffered_btn_title) : context.getString(R.string.qs_multisim_voice_preffered_btn_title));
+            int i = iArr[buttonType.ordinal()];
+            textView.setText(i != 1 ? i != 3 ? i != 4 ? "" : context.getString(R.string.qs_multisim_data_preffered_btn_title) : context.getString(R.string.qs_multisim_sms_preffered_btn_title) : context.getString(R.string.qs_multisim_voice_preffered_btn_title));
             if (isSimInfoButton()) {
                 changeLayout(Button.Layout.SIMINFO);
             } else {
                 changeLayout(Button.Layout.NORMAL);
             }
-            int i4 = iArr[buttonType.ordinal()];
-            if (i4 == 1 || i4 == 2) {
+            int i2 = iArr[buttonType.ordinal()];
+            if (i2 == 1 || i2 == 2) {
                 viewGroup2.setBackground(context.getResources().getDrawable(R.drawable.qs_panel_multi_sim_button_left_ripple_bg));
-            } else if (i4 == 3) {
+            } else if (i2 == 3) {
                 viewGroup2.setBackground(context.getResources().getDrawable(R.drawable.qs_panel_multi_sim_menu_item_middle_ripple_bg));
-            } else if (i4 == 4 || i4 == 5) {
+            } else if (i2 == 4 || i2 == 5) {
                 viewGroup2.setBackground(context.getResources().getDrawable(R.drawable.qs_panel_multi_sim_button_right_ripple_bg));
             }
             updateTextColor();
@@ -300,7 +288,7 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
                 this.mButtonView.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.settings.multisim.ui.view.MultiSIMPreferredSlotView$PrefferedSlotButton$$ExternalSyntheticLambda1
                     @Override // android.view.View.OnLongClickListener
                     public final boolean onLongClick(View view) {
-                        MultiSIMPreferredSlotView.PrefferedSlotButton prefferedSlotButton = MultiSIMPreferredSlotView.PrefferedSlotButton.this;
+                        MultiSIMPreferredSlotView.PrefferedSlotButton prefferedSlotButton = this.f$0;
                         Button.ClickListener clickListener2 = clickListener;
                         MultiSIMPreferredSlotView multiSIMPreferredSlotView = MultiSIMPreferredSlotView.this;
                         MultiSIMPreferredSlotView.PrefferedSlotPopupWindow prefferedSlotPopupWindow = multiSIMPreferredSlotView.mPopupWindow;
@@ -315,7 +303,7 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
             }
         }
 
-        public final void updateEdgePadding(boolean z) {
+        public final void updateEdgePadding(boolean z) throws Resources.NotFoundException {
             int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.qs_multisim_preffered_slot_button_padding_edge);
             if (z) {
                 ViewGroup viewGroup = this.mButtonView;
@@ -337,29 +325,10 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
             if (!isSimInfoButton() || (sIMInfoIconManager = this.mIconManager) == null) {
                 return;
             }
-            DualToneHandler dualToneHandler = multiSIMPreferredSlotView.mDualToneHandler;
-            DualToneHandler.Color color = dualToneHandler.lightColor;
-            if (color == null) {
-                color = null;
-            }
-            int i = color.single;
-            DualToneHandler.Color color2 = dualToneHandler.darkColor;
-            if (color2 == null) {
-                color2 = null;
-            }
-            int intValue = ((Integer) ArgbEvaluator.getInstance().evaluate(0.0f, Integer.valueOf(i), Integer.valueOf(color2.single))).intValue();
-            DualToneHandler dualToneHandler2 = multiSIMPreferredSlotView.mDualToneHandler;
-            DualToneHandler.Color color3 = dualToneHandler2.lightColor;
-            if (color3 == null) {
-                color3 = null;
-            }
-            int i2 = color3.single;
-            DualToneHandler.Color color4 = dualToneHandler2.darkColor;
-            sIMInfoIconManager.setTint(intValue, ((Integer) ArgbEvaluator.getInstance().evaluate(0.0f, Integer.valueOf(i2), Integer.valueOf((color4 != null ? color4 : null).single))).intValue());
+            sIMInfoIconManager.setTint(multiSIMPreferredSlotView.mDualToneHandler.getSingleColor(), multiSIMPreferredSlotView.mDualToneHandler.getSingleColor());
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PrefferedSlotPopupWindow extends PopupWindow {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final Context mContext;
@@ -393,9 +362,9 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
             this.mPopupWindowTopMargin = context.getResources().getDimensionPixelSize(R.dimen.qs_multisim_popup_menu_top_margin);
             this.mPopupNormalTextColor = context.getResources().getColor(R.color.sec_qs_multisim_preffered_slot_popup_text_color, null);
             this.mPopupSelectedTextColor = context.getResources().getColor(R.color.sec_qs_multisim_preffered_slot_popup_text_color_select, null);
-            View inflate = View.inflate(context, R.layout.qs_panel_multi_sim_preffered_slot_popup_menu, null);
-            this.mPopupContentView = inflate;
-            this.mSlotListButton1Group = (ViewGroup) inflate.findViewById(R.id.slot1_button);
+            View viewInflate = View.inflate(context, R.layout.qs_panel_multi_sim_preffered_slot_popup_menu, null);
+            this.mPopupContentView = viewInflate;
+            this.mSlotListButton1Group = (ViewGroup) viewInflate.findViewById(R.id.slot1_button);
             this.mSlotListButtonText1 = (TextView) this.mPopupContentView.findViewById(R.id.slot1_button_text);
             this.mSlotListButtonImage1 = (ImageView) this.mPopupContentView.findViewById(R.id.slot1_button_image);
             this.mSlotListButtonCheckedImage1 = (ImageView) this.mPopupContentView.findViewById(R.id.slot1_button_checked_image);
@@ -510,13 +479,11 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SIMInfoIconManager extends TintedIconManager {
         public boolean mBlocked;
         public String mSlot;
         public final int mSlotId;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Factory {
             public final CoroutineScope mAppScope;
             public final BTTetherUiAdapter mBTTetherUiAdapter;
@@ -544,7 +511,7 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
 
         @Override // com.android.systemui.statusbar.phone.ui.IconManager
         public final LinearLayout.LayoutParams onCreateLayoutParams(StatusBarIcon.Shape shape) {
-            return (this.mBlocked && ("mobile".equals(this.mSlot) || "mobile2".equals(this.mSlot))) ? new LinearLayout.LayoutParams(0, 0) : new LinearLayout.LayoutParams(-2, this.mContext.getResources().getDimensionPixelSize(17106382));
+            return (this.mBlocked && ("mobile".equals(this.mSlot) || "mobile2".equals(this.mSlot))) ? new LinearLayout.LayoutParams(0, 0) : new LinearLayout.LayoutParams(-2, this.mContext.getResources().getDimensionPixelSize(17106383));
         }
 
         @Override // com.android.systemui.statusbar.phone.ui.TintedIconManager, com.android.systemui.statusbar.phone.ui.IconManager
@@ -554,10 +521,10 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
             }
             this.mBlocked = z;
             this.mSlot = str;
-            boolean isVisible = statusBarIconHolder.isVisible();
-            statusBarIconHolder.setVisible(isVisible && !z);
+            boolean zIsVisible = statusBarIconHolder.isVisible();
+            statusBarIconHolder.setVisible(zIsVisible && !z);
             super.onIconAdded(i, str, z, statusBarIconHolder);
-            statusBarIconHolder.setVisible(isVisible);
+            statusBarIconHolder.setVisible(zIsVisible);
         }
 
         @Override // com.android.systemui.statusbar.phone.ui.IconManager
@@ -696,7 +663,7 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mNightModeOn = (this.mContext.getResources().getConfiguration().uiMode & 32) != 0;
         this.mCurrentOrientation = this.mContext.getResources().getConfiguration().orientation;
@@ -720,7 +687,7 @@ public class MultiSIMPreferredSlotView extends LinearLayout implements SlotsView
             this.mSlotButtons.add(getButton(ButtonType.DATA));
         }
         ((PrefferedSlotButton) this.mSlotButtons.get(0)).updateEdgePadding(true);
-        ((PrefferedSlotButton) AlertController$$ExternalSyntheticOutline0.m(this.mSlotButtons, 1)).updateEdgePadding(false);
+        ((PrefferedSlotButton) AlertController$$ExternalSyntheticOutline0.m(1, this.mSlotButtons)).updateEdgePadding(false);
     }
 
     @Override // android.view.ViewGroup

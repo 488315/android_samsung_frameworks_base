@@ -18,7 +18,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CastDevice {
     public static final Companion Companion = new Companion(null);
@@ -33,7 +32,6 @@ public final class CastDevice {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CastOrigin {
         public static final /* synthetic */ CastOrigin[] $VALUES;
         public static final CastOrigin MediaProjection;
@@ -63,7 +61,6 @@ public final class CastDevice {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CastState {
         public static final /* synthetic */ CastState[] $VALUES;
         public static final CastState Connected;
@@ -94,7 +91,6 @@ public final class CastDevice {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -102,11 +98,11 @@ public final class CastDevice {
 
         public static CastDevice toCastDevice(MediaRouter.RouteInfo routeInfo, Context context) {
             CastState castState = routeInfo.getStatusCode() == 2 ? CastState.Connecting : (routeInfo.isSelected() || routeInfo.getStatusCode() == 6) ? CastState.Connected : CastState.Disconnected;
-            String obj = routeInfo.getTag().toString();
+            String string = routeInfo.getTag().toString();
             CharSequence name = routeInfo.getName(context);
-            String obj2 = name != null ? name.toString() : null;
+            String string2 = name != null ? name.toString() : null;
             CharSequence description = routeInfo.getDescription();
-            return new CastDevice(obj, obj2, description != null ? description.toString() : null, castState, CastOrigin.MediaRouter, routeInfo);
+            return new CastDevice(string, string2, description != null ? description.toString() : null, castState, CastOrigin.MediaRouter, routeInfo);
         }
 
         private Companion() {
@@ -119,16 +115,16 @@ public final class CastDevice {
                 packageName2 = "";
             } else {
                 try {
-                    CharSequence loadLabel = packageManager.getApplicationInfo(packageName2, 0).loadLabel(packageManager);
-                    if (!TextUtils.isEmpty(loadLabel)) {
-                        packageName2 = loadLabel.toString();
+                    CharSequence charSequenceLoadLabel = packageManager.getApplicationInfo(packageName2, 0).loadLabel(packageManager);
+                    if (!TextUtils.isEmpty(charSequenceLoadLabel)) {
+                        packageName2 = charSequenceLoadLabel.toString();
                     } else {
                         LogLevel logLevel = LogLevel.WARNING;
                         final int i = 0;
                         Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.policy.CastDevice$Companion$$ExternalSyntheticLambda0
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
+                            public final Object mo781invoke(Object obj) {
                                 LogMessage logMessage = (LogMessage) obj;
                                 switch (i) {
                                     case 0:
@@ -139,9 +135,9 @@ public final class CastDevice {
                             }
                         };
                         LogBuffer logBuffer = castControllerLogger.logger;
-                        LogMessage obtain = logBuffer.obtain("#getAppName", logLevel, function1, null);
-                        ((LogMessageImpl) obtain).str1 = packageName2;
-                        logBuffer.commit(obtain);
+                        LogMessage logMessageObtain = logBuffer.obtain("#getAppName", logLevel, function1, null);
+                        ((LogMessageImpl) logMessageObtain).str1 = packageName2;
+                        logBuffer.commit(logMessageObtain);
                     }
                 } catch (PackageManager.NameNotFoundException e) {
                     LogLevel logLevel2 = LogLevel.WARNING;
@@ -149,7 +145,7 @@ public final class CastDevice {
                     Function1 function12 = new Function1() { // from class: com.android.systemui.statusbar.policy.CastDevice$Companion$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             LogMessage logMessage = (LogMessage) obj;
                             switch (i2) {
                                 case 0:
@@ -160,9 +156,9 @@ public final class CastDevice {
                         }
                     };
                     LogBuffer logBuffer2 = castControllerLogger.logger;
-                    LogMessage obtain2 = logBuffer2.obtain("#getAppName", logLevel2, function12, e);
-                    ((LogMessageImpl) obtain2).str1 = packageName2;
-                    logBuffer2.commit(obtain2);
+                    LogMessage logMessageObtain2 = logBuffer2.obtain("#getAppName", logLevel2, function12, e);
+                    ((LogMessageImpl) logMessageObtain2).str1 = packageName2;
+                    logBuffer2.commit(logMessageObtain2);
                 }
             }
             return new CastDevice(packageName, packageName2, context.getString(R.string.quick_settings_casting), CastState.Connected, CastOrigin.MediaProjection, mediaProjectionInfo);
@@ -177,14 +173,14 @@ public final class CastDevice {
         this.origin = castOrigin;
         this.tag = obj;
         this.isCasting = castState == CastState.Connecting || castState == CastState.Connected;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("CastDevice(id=", str, " name=", str2, " description=");
-        m.append(str3);
-        m.append(" state=");
-        m.append(castState);
-        m.append(" origin=");
-        m.append(castOrigin);
-        m.append(")");
-        this.shortLogString = m.toString();
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("CastDevice(id=", str, " name=", str2, " description=");
+        sbM.append(str3);
+        sbM.append(" state=");
+        sbM.append(castState);
+        sbM.append(" origin=");
+        sbM.append(castOrigin);
+        sbM.append(")");
+        this.shortLogString = sbM.toString();
     }
 
     public final boolean equals(Object obj) {
@@ -199,13 +195,13 @@ public final class CastDevice {
     }
 
     public final int hashCode() {
-        int hashCode = this.id.hashCode() * 31;
+        int iHashCode = this.id.hashCode() * 31;
         String str = this.name;
-        int hashCode2 = (hashCode + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.description;
-        int hashCode3 = (this.origin.hashCode() + ((this.state.hashCode() + ((hashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31)) * 31)) * 31;
+        int iHashCode3 = (this.origin.hashCode() + ((this.state.hashCode() + ((iHashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31)) * 31)) * 31;
         Object obj = this.tag;
-        return hashCode3 + (obj != null ? obj.hashCode() : 0);
+        return iHashCode3 + (obj != null ? obj.hashCode() : 0);
     }
 
     public final String toString() {

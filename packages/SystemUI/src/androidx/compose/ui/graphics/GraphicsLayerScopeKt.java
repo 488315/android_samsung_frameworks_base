@@ -6,7 +6,6 @@ import androidx.compose.runtime.ComposerKt;
 import androidx.compose.ui.graphics.layer.GraphicsLayer;
 import androidx.compose.ui.platform.CompositionLocalsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class GraphicsLayerScopeKt {
     public static final long DefaultShadowColor;
@@ -22,13 +21,13 @@ public abstract class GraphicsLayerScopeKt {
         }
         ComposerImpl composerImpl = (ComposerImpl) composer;
         GraphicsContext graphicsContext = (GraphicsContext) composerImpl.consume(CompositionLocalsKt.LocalGraphicsContext);
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
-        if (rememberedValue == Composer.Companion.Empty) {
-            rememberedValue = new GraphicsContextObserver(graphicsContext);
-            composerImpl.updateRememberedValue(rememberedValue);
+        if (objRememberedValue == Composer.Companion.Empty) {
+            objRememberedValue = new GraphicsContextObserver(graphicsContext);
+            composerImpl.updateRememberedValue(objRememberedValue);
         }
-        GraphicsLayer graphicsLayer = ((GraphicsContextObserver) rememberedValue).graphicsLayer;
+        GraphicsLayer graphicsLayer = ((GraphicsContextObserver) objRememberedValue).graphicsLayer;
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }

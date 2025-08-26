@@ -44,9 +44,9 @@ public interface ISetNicknameCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISetNicknameCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISetNicknameCallback)) {
-                return (ISetNicknameCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISetNicknameCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISetNicknameCallback)) {
+                return (ISetNicknameCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ISetNicknameCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onComplete(readInt);
+                onComplete(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface ISetNicknameCallback extends IInterface {
 
             @Override // com.android.internal.telephony.euicc.ISetNicknameCallback
             public void onComplete(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISetNicknameCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISetNicknameCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

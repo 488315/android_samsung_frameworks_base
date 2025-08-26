@@ -43,7 +43,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotificationRowBinderImpl$$ExternalSyntheticLambda0 implements RowInflaterTask.RowInflationFinishedListener {
     public final /* synthetic */ NotificationRowBinderImpl f$0;
@@ -65,10 +64,10 @@ public final /* synthetic */ class NotificationRowBinderImpl$$ExternalSyntheticL
         LogLevel logLevel = LogLevel.DEBUG;
         NotificationRowBinderLogger$$ExternalSyntheticLambda0 notificationRowBinderLogger$$ExternalSyntheticLambda0 = new NotificationRowBinderLogger$$ExternalSyntheticLambda0(5);
         LogBuffer logBuffer = notificationRowBinderLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotificationRowBinder", logLevel, notificationRowBinderLogger$$ExternalSyntheticLambda0, null);
+        LogMessage logMessageObtain = logBuffer.obtain("NotificationRowBinder", logLevel, notificationRowBinderLogger$$ExternalSyntheticLambda0, null);
         NotificationEntry notificationEntry = this.f$1;
-        ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        logBuffer.commit(obtain);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        logBuffer.commit(logMessageObtain);
         DaggerReferenceGlobalRootComponent.ExpandableNotificationRowComponentBuilder expandableNotificationRowComponentBuilder = (DaggerReferenceGlobalRootComponent.ExpandableNotificationRowComponentBuilder) notificationRowBinderImpl.mExpandableNotificationRowComponentBuilder;
         expandableNotificationRowComponentBuilder.getClass();
         expandableNotificationRow.getClass();
@@ -105,11 +104,11 @@ public final /* synthetic */ class NotificationRowBinderImpl$$ExternalSyntheticL
             public final void onViewAttachedToWindow(View view) {
                 int i = NotificationBundleUi.$r8$clinit;
                 NotificationEntry entryLegacy = ExpandableNotificationRowController.this.mView.getEntryLegacy();
-                long elapsedRealtime = ExpandableNotificationRowController.this.mClock.elapsedRealtime();
+                long jElapsedRealtime = ExpandableNotificationRowController.this.mClock.elapsedRealtime();
                 entryLegacy.getClass();
                 RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
                 if (entryLegacy.initializationTime == -1) {
-                    entryLegacy.initializationTime = elapsedRealtime;
+                    entryLegacy.initializationTime = jElapsedRealtime;
                 }
                 ExpandableNotificationRowController expandableNotificationRowController2 = ExpandableNotificationRowController.this;
                 final NotificationSettingsController notificationSettingsController = expandableNotificationRowController2.mSettingsController;
@@ -132,7 +131,7 @@ public final /* synthetic */ class NotificationRowBinderImpl$$ExternalSyntheticL
                                 notificationSettingsController.mBackgroundHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.notification.row.NotificationSettingsController$$ExternalSyntheticLambda0
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        NotificationSettingsController notificationSettingsController2 = NotificationSettingsController.this;
+                                        NotificationSettingsController notificationSettingsController2 = notificationSettingsController;
                                         notificationSettingsController2.mSecureSettings.registerContentObserverForUserSync(uri, false, (ContentObserver) notificationSettingsController2.mContentObserver, ((UserTrackerImpl) notificationSettingsController2.mUserTracker).getUserId());
                                     }
                                 });
@@ -144,7 +143,7 @@ public final /* synthetic */ class NotificationRowBinderImpl$$ExternalSyntheticL
                     notificationSettingsController.mBackgroundHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.notification.row.NotificationSettingsController$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            NotificationSettingsController notificationSettingsController2 = NotificationSettingsController.this;
+                            NotificationSettingsController notificationSettingsController2 = notificationSettingsController;
                             Uri uri2 = uri;
                             NotificationSettingsController.Listener listener2 = listener;
                             int userId = ((UserTrackerImpl) notificationSettingsController2.mUserTracker).getUserId();
@@ -188,7 +187,7 @@ public final /* synthetic */ class NotificationRowBinderImpl$$ExternalSyntheticL
                             notificationSettingsController.mBackgroundHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.notification.row.NotificationSettingsController$$ExternalSyntheticLambda2
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    NotificationSettingsController notificationSettingsController2 = NotificationSettingsController.this;
+                                    NotificationSettingsController notificationSettingsController2 = notificationSettingsController;
                                     notificationSettingsController2.mSecureSettings.unregisterContentObserverSync(notificationSettingsController2.mContentObserver);
                                 }
                             });
@@ -206,7 +205,9 @@ public final /* synthetic */ class NotificationRowBinderImpl$$ExternalSyntheticL
         NotificationStackScrollLayoutController.NotificationListContainerImpl notificationListContainerImpl = (NotificationStackScrollLayoutController.NotificationListContainerImpl) notificationRowBinderImpl.mListContainer;
         notificationListContainerImpl.getClass();
         expandableNotificationRow.mHeadsUpAnimatingAwayListener = new NotificationStackScrollLayoutController$NotificationListContainerImpl$$ExternalSyntheticLambda0(notificationListContainerImpl, expandableNotificationRow);
-        expandableNotificationRow.mPrivateLayout.mRemoteInputController = notificationRowBinderImpl.mNotificationRemoteInputManager.mRemoteInputController;
+        NotificationRemoteInputManager notificationRemoteInputManager = notificationRowBinderImpl.mNotificationRemoteInputManager;
+        expandableNotificationRow.mPrivateLayout.mRemoteInputController = notificationRemoteInputManager.mRemoteInputController;
+        expandableNotificationRow.mNotificationRemoteInputManager = notificationRemoteInputManager;
         notificationEntry.row = expandableNotificationRow;
         NotifBindPipeline notifBindPipeline = notificationRowBinderImpl.mNotifBindPipeline;
         NotifBindPipelineLogger notifBindPipelineLogger = notifBindPipeline.mLogger;
@@ -214,12 +215,12 @@ public final /* synthetic */ class NotificationRowBinderImpl$$ExternalSyntheticL
         LogLevel logLevel2 = LogLevel.INFO;
         NotifBindPipelineLogger$$ExternalSyntheticLambda0 notifBindPipelineLogger$$ExternalSyntheticLambda0 = new NotifBindPipelineLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer2 = notifBindPipelineLogger.buffer;
-        LogMessage obtain2 = logBuffer2.obtain("NotifBindPipeline", logLevel2, notifBindPipelineLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain2).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        logBuffer2.commit(obtain2);
-        LogMessage obtain3 = logBuffer2.obtain("NotifBindPipeline", logLevel2, new NotifBindPipelineLogger$$ExternalSyntheticLambda0(1), null);
-        ((LogMessageImpl) obtain3).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        logBuffer2.commit(obtain3);
+        LogMessage logMessageObtain2 = logBuffer2.obtain("NotifBindPipeline", logLevel2, notifBindPipelineLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain2).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        logBuffer2.commit(logMessageObtain2);
+        LogMessage logMessageObtain3 = logBuffer2.obtain("NotifBindPipeline", logLevel2, new NotifBindPipelineLogger$$ExternalSyntheticLambda0(1), null);
+        ((LogMessageImpl) logMessageObtain3).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        logBuffer2.commit(logMessageObtain3);
         NotifBindPipeline.BindEntry bindEntry = (NotifBindPipeline.BindEntry) ((ArrayMap) notifBindPipeline.mBindEntries).get(notificationEntry);
         if (bindEntry != null) {
             bindEntry.row = expandableNotificationRow;

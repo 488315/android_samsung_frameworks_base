@@ -3,10 +3,10 @@ package com.android.systemui.screenshot;
 import android.content.Intent;
 import android.os.UserHandle;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.systemui.screenshot.AnnouncementResolver;
 import com.android.systemui.screenshot.scroll.LongScreenshotActivity;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class LegacyScreenshotController$$ExternalSyntheticLambda9 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -32,7 +32,7 @@ public final /* synthetic */ class LegacyScreenshotController$$ExternalSynthetic
                 LegacyScreenshotController$$ExternalSyntheticLambda10 legacyScreenshotController$$ExternalSyntheticLambda10 = new LegacyScreenshotController$$ExternalSyntheticLambda10(screenshotShelfViewProxy, 1);
                 AnnouncementResolver announcementResolver = legacyScreenshotController.mAnnouncementResolver;
                 announcementResolver.getClass();
-                CoroutineTracingKt.launchTraced$default(announcementResolver.mainScope, null, null, new AnnouncementResolver$getScreenshotAnnouncement$2(legacyScreenshotController$$ExternalSyntheticLambda10, announcementResolver, identifier, null), 7);
+                CoroutineTracingKt.launchTraced$default(announcementResolver.mainScope, null, null, new AnnouncementResolver.AnonymousClass2(legacyScreenshotController$$ExternalSyntheticLambda10, announcementResolver, identifier, null), 7);
                 break;
             case 1:
                 LegacyScreenshotController legacyScreenshotController2 = this.f$0;

@@ -49,25 +49,25 @@ public final class ImeFocusController {
     }
 
     void onTraversal(boolean z, WindowManager.LayoutParams layoutParams) {
-        boolean mayUseInputMethod = WindowManager.LayoutParams.mayUseInputMethod(layoutParams.flags);
-        if (!z || isInLocalFocusMode(layoutParams) || mayUseInputMethod == this.mHasImeFocus) {
+        boolean zMayUseInputMethod = WindowManager.LayoutParams.mayUseInputMethod(layoutParams.flags);
+        if (!z || isInLocalFocusMode(layoutParams) || zMayUseInputMethod == this.mHasImeFocus) {
             return;
         }
-        this.mHasImeFocus = mayUseInputMethod;
-        if (mayUseInputMethod) {
+        this.mHasImeFocus = zMayUseInputMethod;
+        if (zMayUseInputMethod) {
             getImmDelegate().onPreWindowGainedFocus(this.mViewRootImpl);
-            View findFocus = this.mViewRootImpl.mView.findFocus();
-            if (findFocus == null) {
-                findFocus = this.mViewRootImpl.mView;
+            View viewFindFocus = this.mViewRootImpl.mView.findFocus();
+            if (viewFindFocus == null) {
+                viewFindFocus = this.mViewRootImpl.mView;
             }
-            getImmDelegate().onPostWindowGainedFocus(findFocus, layoutParams);
+            getImmDelegate().onPostWindowGainedFocus(viewFindFocus, layoutParams);
         }
     }
 
     void onPreWindowFocus(boolean z, WindowManager.LayoutParams layoutParams) {
-        boolean mayUseInputMethod = WindowManager.LayoutParams.mayUseInputMethod(layoutParams.flags);
-        this.mHasImeFocus = mayUseInputMethod;
-        if (!z || !mayUseInputMethod || isInLocalFocusMode(layoutParams)) {
+        boolean zMayUseInputMethod = WindowManager.LayoutParams.mayUseInputMethod(layoutParams.flags);
+        this.mHasImeFocus = zMayUseInputMethod;
+        if (!z || !zMayUseInputMethod || isInLocalFocusMode(layoutParams)) {
             printLog("onPreWindowFocus: skipped", z);
             if (z) {
                 return;
@@ -135,9 +135,9 @@ public final class ImeFocusController {
     }
 
     void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1133871366145L, this.mHasImeFocus);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     private void printLog(String str, boolean z) {

@@ -14,6 +14,7 @@ import com.android.internal.org.bouncycastle.operator.DigestCalculator;
 import com.android.internal.org.bouncycastle.operator.DigestCalculatorProvider;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Selector;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -124,7 +125,7 @@ public class AttributeCertificateHolder implements Selector {
     }
 
     @Override // com.android.internal.org.bouncycastle.util.Selector
-    public boolean match(Object obj) {
+    public boolean match(Object obj) throws IOException {
         if (!(obj instanceof X509CertificateHolder)) {
             return false;
         }

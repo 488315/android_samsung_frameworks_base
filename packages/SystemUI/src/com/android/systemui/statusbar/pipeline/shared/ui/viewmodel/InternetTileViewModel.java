@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class InternetTileViewModel {
     public static final Companion Companion = new Companion(null);
@@ -36,7 +35,6 @@ public final class InternetTileViewModel {
     public final ReadonlyStateFlow tileModel;
     public final ChannelFlowTransformLatest wifiIconFlow;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -56,10 +54,10 @@ public final class InternetTileViewModel {
         this.ethernetIconFlow = FlowKt.transformLatest(ethernetInteractor.icon, new InternetTileViewModel$special$$inlined$flatMapLatest$4(null, this));
         FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(wifiInteractorImpl.areNetworksAvailable, ((AirplaneModeRepositoryImpl) airplaneModeRepository).isAirplaneMode, new InternetTileViewModel$notConnectedFlow$1(this, null));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), NOT_CONNECTED_NETWORKS_UNAVAILABLE);
-        this.notConnectedFlow = stateIn;
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(((ConnectivityRepositoryImpl) connectivityRepository).defaultConnections, new InternetTileViewModel$special$$inlined$flatMapLatest$5(null, this));
-        this.activeModelProvider = transformLatest;
-        this.tileModel = FlowKt.stateIn(transformLatest, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), stateIn.$$delegate_0.getValue());
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), NOT_CONNECTED_NETWORKS_UNAVAILABLE);
+        this.notConnectedFlow = readonlyStateFlowStateIn;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(((ConnectivityRepositoryImpl) connectivityRepository).defaultConnections, new InternetTileViewModel$special$$inlined$flatMapLatest$5(null, this));
+        this.activeModelProvider = channelFlowTransformLatestTransformLatest;
+        this.tileModel = FlowKt.stateIn(channelFlowTransformLatestTransformLatest, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), readonlyStateFlowStateIn.$$delegate_0.getValue());
     }
 }

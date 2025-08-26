@@ -23,17 +23,17 @@ public class Validator {
         if (eventType == 2) {
             String name = xmlPullParser.getName();
             if (Element.shouldValidate(name)) {
-                Element obtain = Element.obtain(name);
-                Element peek = this.mElements.peek();
-                if (peek != null && peek.hasChild(name)) {
+                Element elementObtain = Element.obtain(name);
+                Element elementPeek = this.mElements.peek();
+                if (elementPeek != null && elementPeek.hasChild(name)) {
                     try {
-                        peek.seen(obtain);
+                        elementPeek.seen(elementObtain);
                     } catch (SecurityException e) {
                         cleanUp();
                         throw e;
                     }
                 }
-                this.mElements.push(obtain);
+                this.mElements.push(elementObtain);
                 return;
             }
             return;
@@ -69,8 +69,8 @@ public class Validator {
         if (!this.mElements.peek().mTag.equals("meta-data") || this.mElements.size() <= 1) {
             return;
         }
-        Element pop = this.mElements.pop();
+        Element elementPop = this.mElements.pop();
         this.mElements.peek().validateComponentMetadata(str);
-        this.mElements.push(pop);
+        this.mElements.push(elementPop);
     }
 }

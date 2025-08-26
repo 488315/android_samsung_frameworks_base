@@ -42,8 +42,8 @@ public final class MediaRoute2ProviderInfo implements Parcelable {
 
     MediaRoute2ProviderInfo(Parcel parcel) {
         this.mUniqueId = parcel.readString();
-        ArrayMap<String, MediaRoute2Info> createTypedArrayMap = parcel.createTypedArrayMap(MediaRoute2Info.CREATOR);
-        this.mRoutes = createTypedArrayMap == null ? ArrayMap.EMPTY : createTypedArrayMap;
+        ArrayMap<String, MediaRoute2Info> arrayMapCreateTypedArrayMap = parcel.createTypedArrayMap(MediaRoute2Info.CREATOR);
+        this.mRoutes = arrayMapCreateTypedArrayMap == null ? ArrayMap.EMPTY : arrayMapCreateTypedArrayMap;
     }
 
     public boolean isValid() {
@@ -52,8 +52,8 @@ public final class MediaRoute2ProviderInfo implements Parcelable {
         }
         int size = this.mRoutes.size();
         for (int i = 0; i < size; i++) {
-            MediaRoute2Info valueAt = this.mRoutes.valueAt(i);
-            if (valueAt == null || !valueAt.isValid()) {
+            MediaRoute2Info mediaRoute2InfoValueAt = this.mRoutes.valueAt(i);
+            if (mediaRoute2InfoValueAt == null || !mediaRoute2InfoValueAt.isValid()) {
                 return false;
             }
         }
@@ -104,8 +104,8 @@ public final class MediaRoute2ProviderInfo implements Parcelable {
             ArrayMap<? extends String, ? extends MediaRoute2Info> arrayMap = new ArrayMap<>();
             Iterator<Map.Entry<String, MediaRoute2Info>> it = this.mRoutes.entrySet().iterator();
             while (it.hasNext()) {
-                MediaRoute2Info build = new MediaRoute2Info.Builder(it.next().getValue()).setProviderPackageName(str).setProviderId(this.mUniqueId).build();
-                arrayMap.put(build.getOriginalId(), build);
+                MediaRoute2Info mediaRoute2InfoBuild = new MediaRoute2Info.Builder(it.next().getValue()).setProviderPackageName(str).setProviderId(this.mUniqueId).build();
+                arrayMap.put(mediaRoute2InfoBuild.getOriginalId(), mediaRoute2InfoBuild);
             }
             this.mRoutes.clear();
             this.mRoutes.putAll(arrayMap);
@@ -115,9 +115,9 @@ public final class MediaRoute2ProviderInfo implements Parcelable {
         public Builder setSystemRouteProvider(boolean z) {
             int size = this.mRoutes.size();
             for (int i = 0; i < size; i++) {
-                MediaRoute2Info valueAt = this.mRoutes.valueAt(i);
-                if (valueAt.isSystemRoute() != z) {
-                    this.mRoutes.setValueAt(i, new MediaRoute2Info.Builder(valueAt).setSystemRoute(z).build());
+                MediaRoute2Info mediaRoute2InfoValueAt = this.mRoutes.valueAt(i);
+                if (mediaRoute2InfoValueAt.isSystemRoute() != z) {
+                    this.mRoutes.setValueAt(i, new MediaRoute2Info.Builder(mediaRoute2InfoValueAt).setSystemRoute(z).build());
                 }
             }
             return this;

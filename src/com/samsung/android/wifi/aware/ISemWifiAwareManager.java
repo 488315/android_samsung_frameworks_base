@@ -107,9 +107,9 @@ public interface ISemWifiAwareManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemWifiAwareManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemWifiAwareManager)) {
-                return (ISemWifiAwareManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemWifiAwareManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemWifiAwareManager)) {
+                return (ISemWifiAwareManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -155,27 +155,27 @@ public interface ISemWifiAwareManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setClusterMergingEnabled(readBoolean);
+                    setClusterMergingEnabled(z);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int isPreEnabled = isPreEnabled();
+                    int iIsPreEnabled = isPreEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isPreEnabled);
+                    parcel2.writeInt(iIsPreEnabled);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i3 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    setNanCommand(readInt, createByteArray);
+                    setNanCommand(i3, bArrCreateByteArray);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    boolean isVendorNanServiceAvailable = isVendorNanServiceAvailable();
+                    boolean zIsVendorNanServiceAvailable = isVendorNanServiceAvailable();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVendorNanServiceAvailable);
+                    parcel2.writeBoolean(zIsVendorNanServiceAvailable);
                     return true;
                 case 5:
                     long stdPlusFeature = getStdPlusFeature();
@@ -183,14 +183,14 @@ public interface ISemWifiAwareManager extends IInterface {
                     parcel2.writeLong(stdPlusFeature);
                     return true;
                 case 6:
-                    boolean isAwareSoftApConcurrencySupported = isAwareSoftApConcurrencySupported();
+                    boolean zIsAwareSoftApConcurrencySupported = isAwareSoftApConcurrencySupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAwareSoftApConcurrencySupported);
+                    parcel2.writeBoolean(zIsAwareSoftApConcurrencySupported);
                     return true;
                 case 7:
-                    boolean isAwareP2pConcurrencySupported = isAwareP2pConcurrencySupported();
+                    boolean zIsAwareP2pConcurrencySupported = isAwareP2pConcurrencySupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAwareP2pConcurrencySupported);
+                    parcel2.writeBoolean(zIsAwareP2pConcurrencySupported);
                     return true;
                 case 8:
                     int maxNdpCountForAwareP2p = getMaxNdpCountForAwareP2p();
@@ -225,137 +225,137 @@ public interface ISemWifiAwareManager extends IInterface {
 
             @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
             public void setClusterMergingEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
             public int isPreEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
             public void setNanCommand(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
             public boolean isVendorNanServiceAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
             public long getStdPlusFeature() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
             public boolean isAwareSoftApConcurrencySupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
             public boolean isAwareP2pConcurrencySupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
             public int getMaxNdpCountForAwareP2p() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
             public int getMaxNdpCountForAwareSoftAp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemWifiAwareManager.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

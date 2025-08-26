@@ -1,6 +1,7 @@
 package com.samsung.android.core.pm.containerservice;
 
 import android.content.pm.parsing.PackageLite;
+import android.os.Environment;
 import android.os.FileUtils;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -162,71 +163,31 @@ public class PackageHelperExt {
         return InstallLocationUtils.calculateInstalledSize(packageLite, handle, str);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0057 A[Catch: RemoteException -> 0x005c, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x005c, blocks: (B:3:0x0013, B:7:0x0020, B:9:0x0045, B:12:0x0057, B:14:0x0032), top: B:2:0x0013 }] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0045 A[Catch: RemoteException -> 0x005c, TryCatch #0 {RemoteException -> 0x005c, blocks: (B:3:0x0013, B:7:0x0020, B:9:0x0045, B:12:0x0057, B:14:0x0032), top: B:2:0x0013 }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static java.lang.String createSdDir(long r8, java.lang.String r10, java.lang.String r11, int r12, boolean r13) {
-        /*
-            java.lang.String r0 = "Failed to create secure container "
-            double r8 = (double) r8
-            r1 = 4607317526788838523(0x3ff07ae147ae147b, double:1.03)
-            double r8 = r8 * r1
-            long r1 = com.samsung.android.core.pm.containerservice.PackageHelperExt.MB_IN_BYTES
-            double r3 = (double) r1
-            double r8 = r8 + r3
-            double r1 = (double) r1
-            double r8 = r8 / r1
-            int r8 = (int) r8
-            int r3 = r8 + 1
-            r8 = 0
-            com.samsung.android.core.pm.containerservice.PackageHelperExt$StorageManagerExt r1 = getStorageManagerExt()     // Catch: android.os.RemoteException -> L5c
-            boolean r9 = android.os.Environment.isExternalStorageEmulated()     // Catch: android.os.RemoteException -> L5c
-            if (r9 != 0) goto L32
-            if (r13 != 0) goto L20
-            goto L32
-        L20:
-            java.lang.String r9 = com.samsung.android.core.pm.containerservice.PackageHelperExt.TAG     // Catch: android.os.RemoteException -> L5c
-            java.lang.String r2 = "createSdDir with fat"
-            android.util.Log.i(r9, r2)     // Catch: android.os.RemoteException -> L5c
-            java.lang.String r4 = "fat"
-            r2 = r10
-            r5 = r11
-            r6 = r12
-            r7 = r13
-            int r9 = r1.createSecureContainer(r2, r3, r4, r5, r6, r7)     // Catch: android.os.RemoteException -> L5c
-            goto L43
-        L32:
-            r2 = r10
-            r5 = r11
-            r6 = r12
-            r7 = r13
-            java.lang.String r9 = com.samsung.android.core.pm.containerservice.PackageHelperExt.TAG     // Catch: android.os.RemoteException -> L5c
-            java.lang.String r10 = "createSdDir with ext4"
-            android.util.Log.i(r9, r10)     // Catch: android.os.RemoteException -> L5c
-            java.lang.String r4 = "ext4"
-            int r9 = r1.createSecureContainer(r2, r3, r4, r5, r6, r7)     // Catch: android.os.RemoteException -> L5c
-        L43:
-            if (r9 == 0) goto L57
-            java.lang.String r9 = com.samsung.android.core.pm.containerservice.PackageHelperExt.TAG     // Catch: android.os.RemoteException -> L5c
-            java.lang.StringBuilder r10 = new java.lang.StringBuilder     // Catch: android.os.RemoteException -> L5c
-            r10.<init>(r0)     // Catch: android.os.RemoteException -> L5c
-            r10.append(r2)     // Catch: android.os.RemoteException -> L5c
-            java.lang.String r10 = r10.toString()     // Catch: android.os.RemoteException -> L5c
-            android.util.Log.e(r9, r10)     // Catch: android.os.RemoteException -> L5c
-            return r8
-        L57:
-            java.lang.String r8 = r1.getSecureContainerPath(r2)     // Catch: android.os.RemoteException -> L5c
-            return r8
-        L5c:
-            java.lang.String r9 = com.samsung.android.core.pm.containerservice.PackageHelperExt.TAG
-            java.lang.String r10 = "StorageManagerService running?"
-            android.util.Log.e(r9, r10)
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.core.pm.containerservice.PackageHelperExt.createSdDir(long, java.lang.String, java.lang.String, int, boolean):java.lang.String");
+    public static String createSdDir(long j, String str, String str2, int i, boolean z) {
+        String str3;
+        int iCreateSecureContainer;
+        long j2 = MB_IN_BYTES;
+        int i2 = ((int) (((j * 1.03d) + j2) / j2)) + 1;
+        try {
+            StorageManagerExt storageManagerExt = getStorageManagerExt();
+            if (Environment.isExternalStorageEmulated() || !z) {
+                str3 = str;
+                Log.i(TAG, "createSdDir with ext4");
+                iCreateSecureContainer = storageManagerExt.createSecureContainer(str3, i2, "ext4", str2, i, z);
+            } else {
+                Log.i(TAG, "createSdDir with fat");
+                str3 = str;
+                iCreateSecureContainer = storageManagerExt.createSecureContainer(str3, i2, "fat", str2, i, z);
+            }
+            if (iCreateSecureContainer != 0) {
+                Log.e(TAG, "Failed to create secure container " + str3);
+                return null;
+            }
+            return storageManagerExt.getSecureContainerPath(str3);
+        } catch (RemoteException unused) {
+            Log.e(TAG, "StorageManagerService running?");
+            return null;
+        }
     }
 
     public static boolean resizeSdDir(long j, String str, String str2) {
@@ -249,9 +210,9 @@ public class PackageHelperExt {
     public static String mountSdDir(String str, String str2, int i, boolean z) {
         try {
             StorageManagerExt storageManagerExt = getStorageManagerExt();
-            int mountSecureContainer = storageManagerExt.mountSecureContainer(str, str2, i, z);
-            if (mountSecureContainer != 0) {
-                Log.i(TAG, "Failed to mount container " + str + ", rc: " + mountSecureContainer);
+            int iMountSecureContainer = storageManagerExt.mountSecureContainer(str, str2, i, z);
+            if (iMountSecureContainer != 0) {
+                Log.i(TAG, "Failed to mount container " + str + ", rc: " + iMountSecureContainer);
                 return null;
             }
             return storageManagerExt.getSecureContainerPath(str);
@@ -263,11 +224,11 @@ public class PackageHelperExt {
 
     public static boolean unMountSdDir(String str, boolean z) {
         try {
-            int unmountSecureContainer = getStorageManagerExt().unmountSecureContainer(str, z);
-            if (unmountSecureContainer == 0) {
+            int iUnmountSecureContainer = getStorageManagerExt().unmountSecureContainer(str, z);
+            if (iUnmountSecureContainer == 0) {
                 return true;
             }
-            Log.e(TAG, "Failed to unmount " + str + ", force: " + z + ", rc: " + unmountSecureContainer);
+            Log.e(TAG, "Failed to unmount " + str + ", force: " + z + ", rc: " + iUnmountSecureContainer);
             return false;
         } catch (RemoteException unused) {
             Log.e(TAG, "StorageManagerService running?");
@@ -277,11 +238,11 @@ public class PackageHelperExt {
 
     public static boolean renameSdDir(String str, String str2) {
         try {
-            int renameSecureContainer = getStorageManagerExt().renameSecureContainer(str, str2);
-            if (renameSecureContainer == 0) {
+            int iRenameSecureContainer = getStorageManagerExt().renameSecureContainer(str, str2);
+            if (iRenameSecureContainer == 0) {
                 return true;
             }
-            Log.e(TAG, "Failed to rename " + str + " to " + str2 + ", rc: " + renameSecureContainer);
+            Log.e(TAG, "Failed to rename " + str + " to " + str2 + ", rc: " + iRenameSecureContainer);
             return false;
         } catch (RemoteException e) {
             Log.i(TAG, "Failed to rename  " + str + " to " + str2 + " with exception " + e);
@@ -373,7 +334,7 @@ public class PackageHelperExt {
         }
     }
 
-    public static long extractPublicFiles(File file, File file2) throws IOException {
+    public static long extractPublicFiles(File file, File file2) throws Exception {
         FileOutputStream fileOutputStream;
         ZipOutputStream zipOutputStream;
         if (file2 == null) {
@@ -388,12 +349,12 @@ public class PackageHelperExt {
             ZipFile zipFile = new ZipFile(file.getAbsolutePath());
             try {
                 Iterator it = Collections.list(zipFile.entries()).iterator();
-                long j = 0;
+                long size = 0;
                 while (it.hasNext()) {
                     ZipEntry zipEntry = (ZipEntry) it.next();
                     String name = zipEntry.getName();
                     if ("AndroidManifest.xml".equals(name) || "resources.arsc".equals(name) || name.startsWith("res/")) {
-                        j += zipEntry.getSize();
+                        size += zipEntry.getSize();
                         if (file2 != null) {
                             copyZipEntry(zipEntry, zipFile, zipOutputStream);
                         }
@@ -406,7 +367,7 @@ public class PackageHelperExt {
                     zipOutputStream.close();
                     FileUtils.setPermissions(file2.getAbsolutePath(), 420, -1, -1);
                 }
-                return j;
+                return size;
             } finally {
                 try {
                     zipFile.close();
@@ -418,7 +379,7 @@ public class PackageHelperExt {
         }
     }
 
-    private static void copyZipEntry(ZipEntry zipEntry, ZipFile zipFile, ZipOutputStream zipOutputStream) throws IOException {
+    private static void copyZipEntry(ZipEntry zipEntry, ZipFile zipFile, ZipOutputStream zipOutputStream) throws Exception {
         ZipEntry zipEntry2;
         byte[] bArr = new byte[4096];
         if (zipEntry.getMethod() == 0) {
@@ -430,9 +391,9 @@ public class PackageHelperExt {
         InputStream inputStream = zipFile.getInputStream(zipEntry);
         while (true) {
             try {
-                int read = inputStream.read(bArr);
-                if (read > 0) {
-                    zipOutputStream.write(bArr, 0, read);
+                int i = inputStream.read(bArr);
+                if (i > 0) {
+                    zipOutputStream.write(bArr, 0, i);
                 } else {
                     zipOutputStream.flush();
                     return;

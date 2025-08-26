@@ -23,7 +23,6 @@ import com.android.systemui.statusbar.phone.QSScrimViewSwitch;
 import com.android.systemui.util.LargeScreenUtils;
 import java.util.function.IntConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScrimView extends View implements ScrimViewBase {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -56,10 +55,10 @@ public class ScrimView extends View implements ScrimViewBase {
     @Override // android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
         String str = this.mScrimName;
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         TouchLogger.Companion.getClass();
-        TouchLogger.Companion.logDispatchTouch(motionEvent, str, dispatchTouchEvent);
-        return dispatchTouchEvent;
+        TouchLogger.Companion.logDispatchTouch(motionEvent, str, zDispatchTouchEvent);
+        return zDispatchTouchEvent;
     }
 
     public final void executeOnExecutor(Runnable runnable) {
@@ -147,7 +146,7 @@ public class ScrimView extends View implements ScrimViewBase {
         executeOnExecutor(new Runnable() { // from class: com.android.systemui.scrim.ScrimView$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                ScrimView scrimView = ScrimView.this;
+                ScrimView scrimView = this.f$0;
                 ColorExtractor.GradientColors gradientColors2 = gradientColors;
                 boolean z2 = z;
                 synchronized (scrimView.mColorLock) {
@@ -192,7 +191,7 @@ public class ScrimView extends View implements ScrimViewBase {
         executeOnExecutor(new Runnable() { // from class: com.android.systemui.scrim.ScrimView$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
             public final void run() {
-                ScrimView scrimView = ScrimView.this;
+                ScrimView scrimView = this.f$0;
                 Drawable drawable2 = drawable;
                 scrimView.mDrawable = drawable2;
                 drawable2.setCallback(scrimView);
@@ -214,7 +213,7 @@ public class ScrimView extends View implements ScrimViewBase {
         executeOnExecutor(new Runnable() { // from class: com.android.systemui.scrim.ScrimView$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                ScrimView scrimView = ScrimView.this;
+                ScrimView scrimView = this.f$0;
                 int i2 = i;
                 if (scrimView.mTintColor == i2) {
                     return;
@@ -230,7 +229,7 @@ public class ScrimView extends View implements ScrimViewBase {
             executeOnExecutor(new Runnable() { // from class: com.android.systemui.scrim.ScrimView$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ScrimView scrimView = ScrimView.this;
+                    ScrimView scrimView = this.f$0;
                     float f2 = f;
                     if (f2 != scrimView.mViewAlpha) {
                         scrimView.mViewAlpha = f2;
@@ -251,12 +250,12 @@ public class ScrimView extends View implements ScrimViewBase {
         Drawable drawable = this.mDrawable;
         if (drawable instanceof ScrimDrawable) {
             ScrimDrawable scrimDrawable = (ScrimDrawable) drawable;
-            float alpha = Color.alpha(this.mTintColor) / 255.0f;
-            int i = this.mTintColor;
+            float fAlpha = Color.alpha(this.mTintColor) / 255.0f;
+            int iBlendARGB = this.mTintColor;
             if (this.mBlendWithMainColor) {
-                i = ColorUtils.blendARGB(alpha, this.mColors.getMainColor(), this.mTintColor);
+                iBlendARGB = ColorUtils.blendARGB(fAlpha, this.mColors.getMainColor(), this.mTintColor);
             }
-            scrimDrawable.setColor(i, z);
+            scrimDrawable.setColor(iBlendARGB, z);
             return;
         }
         if (Color.alpha(this.mTintColor) != 0) {
@@ -299,7 +298,7 @@ public class ScrimView extends View implements ScrimViewBase {
         executeOnExecutor(new Runnable() { // from class: com.android.systemui.scrim.ScrimView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ScrimView scrimView = ScrimView.this;
+                ScrimView scrimView = this.f$0;
                 int i3 = ScrimView.$r8$clinit;
                 scrimView.updateColorWithTint(false);
             }

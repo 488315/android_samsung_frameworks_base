@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GoneToAodTransitionViewModel implements DeviceEntryIconTransition {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 deviceEntryBackgroundViewAlpha;
@@ -38,13 +37,13 @@ public final class GoneToAodTransitionViewModel implements DeviceEntryIconTransi
         SceneKey sceneKey = Scenes.Gone;
         KeyguardState keyguardState = KeyguardState.AOD;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GONE, keyguardState, keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(j, new Edge.ContentToState(sceneKey, keyguardState)));
-        this.transitionAnimation = m;
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GONE, keyguardState, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.ContentToState(sceneKey, keyguardState)));
+        this.transitionAnimation = flowBuilderM;
         Duration.Companion companion2 = Duration.Companion;
         DurationUnit durationUnit = DurationUnit.MILLISECONDS;
-        this.notificationAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m, DurationKt.toDuration(200, durationUnit), new GoneToAodTransitionViewModel$$ExternalSyntheticLambda2(), 0L, null, null, new AnimatedBackgroundKt$$ExternalSyntheticLambda0(), null, null, 220);
-        this.enterFromTopAnimationAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m, DurationKt.toDuration(400, durationUnit), new AodToLockscreenTransitionViewModel$$ExternalSyntheticLambda6(), DurationKt.toDuration(KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED, durationUnit), null, null, new AnimatedBackgroundKt$$ExternalSyntheticLambda0(), null, null, IKnoxCustomManager.Stub.TRANSACTION_getAutoCallNumberAnswerMode);
-        this.deviceEntryBackgroundViewAlpha = m.immediatelyTransitionTo(0.0f);
+        this.notificationAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, DurationKt.toDuration(200, durationUnit), new GoneToAodTransitionViewModel$$ExternalSyntheticLambda2(), 0L, null, null, new AnimatedBackgroundKt$$ExternalSyntheticLambda0(), null, null, 220);
+        this.enterFromTopAnimationAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, DurationKt.toDuration(400, durationUnit), new AodToLockscreenTransitionViewModel$$ExternalSyntheticLambda6(), DurationKt.toDuration(KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED, durationUnit), null, null, new AnimatedBackgroundKt$$ExternalSyntheticLambda0(), null, null, IKnoxCustomManager.Stub.TRANSACTION_getAutoCallNumberAnswerMode);
+        this.deviceEntryBackgroundViewAlpha = flowBuilderM.immediatelyTransitionTo(0.0f);
         this.deviceEntryParentViewAlpha = FlowKt.transformLatest(deviceEntryUdfpsInteractor.isUdfpsEnrolledAndEnabled, new GoneToAodTransitionViewModel$special$$inlined$flatMapLatest$1(null, this));
     }
 

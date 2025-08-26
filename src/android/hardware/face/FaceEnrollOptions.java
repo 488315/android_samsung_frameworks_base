@@ -89,12 +89,12 @@ public class FaceEnrollOptions implements Parcelable {
     }
 
     protected FaceEnrollOptions(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mEnrollReason = readInt;
-        if (readInt == 0 || readInt == 1 || readInt == 2 || readInt == 3) {
+        int i = parcel.readInt();
+        this.mEnrollReason = i;
+        if (i == 0 || i == 1 || i == 2 || i == 3) {
             return;
         }
-        throw new IllegalArgumentException("enrollReason was " + readInt + " but must be one of: ENROLL_REASON_UNKNOWN(0), ENROLL_REASON_RE_ENROLL_NOTIFICATION(1), ENROLL_REASON_SETTINGS(2), ENROLL_REASON_SUW(3)");
+        throw new IllegalArgumentException("enrollReason was " + i + " but must be one of: ENROLL_REASON_UNKNOWN(0), ENROLL_REASON_RE_ENROLL_NOTIFICATION(1), ENROLL_REASON_SETTINGS(2), ENROLL_REASON_SUW(3)");
     }
 
     public static class Builder {

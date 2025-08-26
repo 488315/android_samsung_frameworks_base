@@ -1,6 +1,7 @@
 package androidx.picker.eyeDropper;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -11,7 +12,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslMagnifyingView extends View {
     public final Paint mBitmapPaint;
@@ -39,7 +39,7 @@ public class SeslMagnifyingView extends View {
         }
         float width = getWidth();
         float height = getHeight();
-        float min = Math.min(width, height) / 2.0f;
+        float fMin = Math.min(width, height) / 2.0f;
         float f = this.mTouchPosX;
         float f2 = (width / 3.0f) / 2.0f;
         float f3 = this.mTouchPosY;
@@ -54,7 +54,7 @@ public class SeslMagnifyingView extends View {
         Path path = new Path();
         float f5 = width / 2.0f;
         float f6 = height / 2.0f;
-        path.addCircle(f5, f6, min, Path.Direction.CW);
+        path.addCircle(f5, f6, fMin, Path.Direction.CW);
         canvas2.clipPath(path);
         canvas2.drawBitmap(this.mScreenShotBitmap, rect, rect2, this.mBitmapPaint);
         float f7 = 15;
@@ -75,9 +75,9 @@ public class SeslMagnifyingView extends View {
         float f13 = (height / 15.0f) / 2.0f;
         float f14 = this.mInnerBorderStrokeWidth;
         canvas.drawRoundRect(f5 - f12, f6 - f13, f5 + f12, f13 + f6, f14, f14, this.mCenterSquarePaint);
-        canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, min - ((this.mInnerBorderStrokeWidth / 2.0f) + this.mColorBorderStrokeWidth), this.mInnerBorderPaint);
+        canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, fMin - ((this.mInnerBorderStrokeWidth / 2.0f) + this.mColorBorderStrokeWidth), this.mInnerBorderPaint);
         this.mColorBorderPaint.setColor(this.mColorBorderColor);
-        canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, min - (this.mColorBorderStrokeWidth / 2.0f), this.mColorBorderPaint);
+        canvas.drawCircle(getWidth() / 2.0f, getHeight() / 2.0f, fMin - (this.mColorBorderStrokeWidth / 2.0f), this.mColorBorderPaint);
         canvas.restore();
     }
 
@@ -85,7 +85,7 @@ public class SeslMagnifyingView extends View {
         this(context, attributeSet, 0);
     }
 
-    public SeslMagnifyingView(Context context, AttributeSet attributeSet, int i) {
+    public SeslMagnifyingView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         Paint paint = new Paint();
         this.mBitmapPaint = paint;

@@ -2,7 +2,6 @@ package com.android.systemui.dextouchpad.settings;
 
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class Settings$Key implements Comparable {
     public final String mDefValue;
@@ -27,8 +26,8 @@ public class Settings$Key implements Comparable {
         if (obj != null && getClass() == obj.getClass()) {
             Settings$Key settings$Key = (Settings$Key) obj;
             String str = this.mDefValue;
-            boolean equals = str != null ? str.equals(settings$Key.mDefValue) : true;
-            if (this.mName.equals(settings$Key.mName) && this.mType.equals(settings$Key.mType) && equals) {
+            boolean zEquals = str != null ? str.equals(settings$Key.mDefValue) : true;
+            if (this.mName.equals(settings$Key.mName) && this.mType.equals(settings$Key.mType) && zEquals) {
                 return true;
             }
         }

@@ -5,7 +5,6 @@ import com.android.systemui.kairos.MergeKt;
 import com.android.systemui.kairos.StateScope$DefaultImpls$$ExternalSyntheticLambda3;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class StateScopeImpl$$ExternalSyntheticLambda3 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -24,7 +23,7 @@ public final /* synthetic */ class StateScopeImpl$$ExternalSyntheticLambda3 impl
             case 0:
                 return MergeKt.merge((EventsInit) this.f$0, this.f$1.getEndSignal());
             default:
-                return ((StateScope$DefaultImpls$$ExternalSyntheticLambda3) this.f$0).mo779invoke(this.f$1);
+                return ((StateScope$DefaultImpls$$ExternalSyntheticLambda3) this.f$0).mo781invoke(this.f$1);
         }
     }
 }

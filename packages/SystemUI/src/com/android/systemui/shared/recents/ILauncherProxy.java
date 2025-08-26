@@ -11,7 +11,6 @@ import android.view.KeyEvent;
 import com.android.systemui.recents.LauncherProxyService;
 import com.android.systemui.shared.navigationbar.NavBarEvents;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface ILauncherProxy extends IInterface {
     void appTransitionPending(boolean z);
@@ -86,11 +85,9 @@ public interface ILauncherProxy extends IInterface {
 
     void updateWallpaperVisibility(int i, boolean z);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ILauncherProxy {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements ILauncherProxy {
             public final IBinder mRemote;
 
@@ -100,13 +97,13 @@ public interface ILauncherProxy extends IInterface {
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void appTransitionPending(boolean z) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(35, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(35, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -117,396 +114,396 @@ public interface ILauncherProxy extends IInterface {
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void checkNavBarModes(int i) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(31, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(31, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void disable(int i, int i2, int i3, boolean z) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void finishBarAnimations(int i) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(32, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(32, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void handleNavigationBarEvent(NavBarEvents navBarEvents) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeTypedObject(navBarEvents, 0);
-                    this.mRemote.transact(102, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeTypedObject(navBarEvents, 0);
+                    this.mRemote.transact(102, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void isTaskbarEnabled(boolean z) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(104, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(104, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void notifyPayInfo(int i, boolean z) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(101, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(101, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onActiveNavBarRegionChanges(Region region) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeTypedObject(region, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeTypedObject(region, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onAssistantAvailable(boolean z, boolean z2) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onAssistantOverrideInvoked(int i) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(29, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(29, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onDisplayAddSystemDecorations(int i) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(37, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(37, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onDisplayRemoveSystemDecorations(int i) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(39, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(39, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onDisplayRemoved(int i) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onInitialize(Bundle bundle) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onNavButtonsDarkIntensityChanged(float f) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(23, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(23, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onNavigationBarLumaSamplingEnabled(int i, boolean z) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(24, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onNumberOfVisibleFgsChanged(int i) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(103, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(103, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onOverviewHidden(boolean z, boolean z2) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onOverviewShown(boolean z) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onOverviewToggle() {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onQuickScrubEnd() {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    this.mRemote.transact(107, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    this.mRemote.transact(107, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onQuickScrubStart() {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    this.mRemote.transact(106, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    this.mRemote.transact(106, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onRotationProposal(int i, boolean z) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onScreenTurningOff() {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    this.mRemote.transact(108, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    this.mRemote.transact(108, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onSystemBarAttributesChanged(int i, int i2) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onSystemUiStateChanged(int i, long j) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onTaskbarToggled() {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    this.mRemote.transact(28, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    this.mRemote.transact(28, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onThreeFingerGestureEvent(KeyEvent keyEvent) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeTypedObject(keyEvent, 0);
-                    this.mRemote.transact(109, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeTypedObject(keyEvent, 0);
+                    this.mRemote.transact(109, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onTransitionModeUpdated(int i) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(true);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(true);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             /* JADX WARN: Multi-variable type inference failed */
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void onUnbind(LauncherProxyService.AnonymousClass9 anonymousClass9) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeStrongInterface(anonymousClass9);
-                    this.mRemote.transact(36, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeStrongInterface(anonymousClass9);
+                    this.mRemote.transact(36, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void touchAutoDim(int i, boolean z) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(33, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(33, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void transitionTo(int i, int i2) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(true);
-                    this.mRemote.transact(34, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(true);
+                    this.mRemote.transact(34, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.systemui.shared.recents.ILauncherProxy
             public final void updateWallpaperVisibility(int i, boolean z) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(30, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.systemui.shared.recents.ILauncherProxy");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(30, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -529,23 +526,23 @@ public interface ILauncherProxy extends IInterface {
                 return true;
             }
             if (i == 8) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onOverviewShown(readBoolean);
+                onOverviewShown(z);
                 return true;
             }
             if (i == 9) {
-                boolean readBoolean2 = parcel.readBoolean();
-                boolean readBoolean3 = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
+                boolean z3 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onOverviewHidden(readBoolean2, readBoolean3);
+                onOverviewHidden(z2, z3);
                 return true;
             }
             if (i == 17) {
-                long readLong = parcel.readLong();
-                int readInt = parcel.readInt();
+                long j = parcel.readLong();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onSystemUiStateChanged(readInt, readLong);
+                onSystemUiStateChanged(i3, j);
                 return true;
             }
             if (i == 26) {
@@ -566,10 +563,10 @@ public interface ILauncherProxy extends IInterface {
                     onInitialize(bundle);
                     return true;
                 case 14:
-                    boolean readBoolean4 = parcel.readBoolean();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onAssistantAvailable(readBoolean4, readBoolean5);
+                    onAssistantAvailable(z4, z5);
                     return true;
                 case 15:
                     parcel.readFloat();
@@ -579,41 +576,41 @@ public interface ILauncherProxy extends IInterface {
                 default:
                     switch (i) {
                         case 19:
-                            int readInt2 = parcel.readInt();
-                            boolean readBoolean6 = parcel.readBoolean();
+                            int i4 = parcel.readInt();
+                            boolean z6 = parcel.readBoolean();
                             parcel.enforceNoDataAvail();
-                            onRotationProposal(readInt2, readBoolean6);
+                            onRotationProposal(i4, z6);
                             return true;
                         case 20:
-                            int readInt3 = parcel.readInt();
-                            int readInt4 = parcel.readInt();
-                            int readInt5 = parcel.readInt();
-                            boolean readBoolean7 = parcel.readBoolean();
+                            int i5 = parcel.readInt();
+                            int i6 = parcel.readInt();
+                            int i7 = parcel.readInt();
+                            boolean z7 = parcel.readBoolean();
                             parcel.enforceNoDataAvail();
-                            disable(readInt3, readInt4, readInt5, readBoolean7);
+                            disable(i5, i6, i7, z7);
                             return true;
                         case 21:
-                            int readInt6 = parcel.readInt();
-                            int readInt7 = parcel.readInt();
+                            int i8 = parcel.readInt();
+                            int i9 = parcel.readInt();
                             parcel.enforceNoDataAvail();
-                            onSystemBarAttributesChanged(readInt6, readInt7);
+                            onSystemBarAttributesChanged(i8, i9);
                             return true;
                         case 22:
-                            int readInt8 = parcel.readInt();
+                            int i10 = parcel.readInt();
                             parcel.readBoolean();
                             parcel.enforceNoDataAvail();
-                            onTransitionModeUpdated(readInt8);
+                            onTransitionModeUpdated(i10);
                             return true;
                         case 23:
-                            float readFloat = parcel.readFloat();
+                            float f = parcel.readFloat();
                             parcel.enforceNoDataAvail();
-                            onNavButtonsDarkIntensityChanged(readFloat);
+                            onNavButtonsDarkIntensityChanged(f);
                             return true;
                         case 24:
-                            int readInt9 = parcel.readInt();
-                            boolean readBoolean8 = parcel.readBoolean();
+                            int i11 = parcel.readInt();
+                            boolean z8 = parcel.readBoolean();
                             parcel.enforceNoDataAvail();
-                            onNavigationBarLumaSamplingEnabled(readInt9, readBoolean8);
+                            onNavigationBarLumaSamplingEnabled(i11, z8);
                             return true;
                         default:
                             switch (i) {
@@ -621,71 +618,71 @@ public interface ILauncherProxy extends IInterface {
                                     onTaskbarToggled();
                                     return true;
                                 case 29:
-                                    int readInt10 = parcel.readInt();
+                                    int i12 = parcel.readInt();
                                     parcel.enforceNoDataAvail();
-                                    onAssistantOverrideInvoked(readInt10);
+                                    onAssistantOverrideInvoked(i12);
                                     return true;
                                 case 30:
-                                    int readInt11 = parcel.readInt();
-                                    boolean readBoolean9 = parcel.readBoolean();
+                                    int i13 = parcel.readInt();
+                                    boolean z9 = parcel.readBoolean();
                                     parcel.enforceNoDataAvail();
-                                    updateWallpaperVisibility(readInt11, readBoolean9);
+                                    updateWallpaperVisibility(i13, z9);
                                     return true;
                                 case 31:
-                                    int readInt12 = parcel.readInt();
+                                    int i14 = parcel.readInt();
                                     parcel.enforceNoDataAvail();
-                                    checkNavBarModes(readInt12);
+                                    checkNavBarModes(i14);
                                     return true;
                                 case 32:
-                                    int readInt13 = parcel.readInt();
+                                    int i15 = parcel.readInt();
                                     parcel.enforceNoDataAvail();
-                                    finishBarAnimations(readInt13);
+                                    finishBarAnimations(i15);
                                     return true;
                                 case 33:
-                                    int readInt14 = parcel.readInt();
-                                    boolean readBoolean10 = parcel.readBoolean();
+                                    int i16 = parcel.readInt();
+                                    boolean z10 = parcel.readBoolean();
                                     parcel.enforceNoDataAvail();
-                                    touchAutoDim(readInt14, readBoolean10);
+                                    touchAutoDim(i16, z10);
                                     return true;
                                 case 34:
-                                    int readInt15 = parcel.readInt();
-                                    int readInt16 = parcel.readInt();
+                                    int i17 = parcel.readInt();
+                                    int i18 = parcel.readInt();
                                     parcel.readBoolean();
                                     parcel.enforceNoDataAvail();
-                                    transitionTo(readInt15, readInt16);
+                                    transitionTo(i17, i18);
                                     return true;
                                 case 35:
-                                    boolean readBoolean11 = parcel.readBoolean();
+                                    boolean z11 = parcel.readBoolean();
                                     parcel.enforceNoDataAvail();
-                                    appTransitionPending(readBoolean11);
+                                    appTransitionPending(z11);
                                     return true;
                                 case 36:
-                                    IRemoteCallback asInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                                    IRemoteCallback iRemoteCallbackAsInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                                     parcel.enforceNoDataAvail();
-                                    onUnbind((LauncherProxyService.AnonymousClass9) asInterface);
+                                    onUnbind((LauncherProxyService.AnonymousClass9) iRemoteCallbackAsInterface);
                                     return true;
                                 case 37:
-                                    int readInt17 = parcel.readInt();
+                                    int i19 = parcel.readInt();
                                     parcel.enforceNoDataAvail();
-                                    onDisplayAddSystemDecorations(readInt17);
+                                    onDisplayAddSystemDecorations(i19);
                                     return true;
                                 case 38:
-                                    int readInt18 = parcel.readInt();
+                                    int i20 = parcel.readInt();
                                     parcel.enforceNoDataAvail();
-                                    onDisplayRemoved(readInt18);
+                                    onDisplayRemoved(i20);
                                     return true;
                                 case 39:
-                                    int readInt19 = parcel.readInt();
+                                    int i21 = parcel.readInt();
                                     parcel.enforceNoDataAvail();
-                                    onDisplayRemoveSystemDecorations(readInt19);
+                                    onDisplayRemoveSystemDecorations(i21);
                                     return true;
                                 default:
                                     switch (i) {
                                         case 101:
-                                            boolean readBoolean12 = parcel.readBoolean();
-                                            int readInt20 = parcel.readInt();
+                                            boolean z12 = parcel.readBoolean();
+                                            int i22 = parcel.readInt();
                                             parcel.enforceNoDataAvail();
-                                            notifyPayInfo(readInt20, readBoolean12);
+                                            notifyPayInfo(i22, z12);
                                             return true;
                                         case 102:
                                             NavBarEvents navBarEvents = (NavBarEvents) parcel.readTypedObject(NavBarEvents.CREATOR);
@@ -693,14 +690,14 @@ public interface ILauncherProxy extends IInterface {
                                             handleNavigationBarEvent(navBarEvents);
                                             return true;
                                         case 103:
-                                            int readInt21 = parcel.readInt();
+                                            int i23 = parcel.readInt();
                                             parcel.enforceNoDataAvail();
-                                            onNumberOfVisibleFgsChanged(readInt21);
+                                            onNumberOfVisibleFgsChanged(i23);
                                             return true;
                                         case 104:
-                                            boolean readBoolean13 = parcel.readBoolean();
+                                            boolean z13 = parcel.readBoolean();
                                             parcel.enforceNoDataAvail();
-                                            isTaskbarEnabled(readBoolean13);
+                                            isTaskbarEnabled(z13);
                                             return true;
                                         case 105:
                                             executeSearcle();

@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Month implements Comparable, Parcelable {
     public static final Parcelable.Creator<Month> CREATOR = new Parcelable.Creator() { // from class: com.google.android.material.datepicker.Month.1

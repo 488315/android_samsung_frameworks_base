@@ -7,7 +7,6 @@ import android.graphics.Point;
 import android.view.View;
 import com.android.systemui.keyguardimage.ImageOptionCreator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface ImageCreator {
     static Bitmap getViewImage(View view, ImageOptionCreator.ImageOption imageOption, boolean z) {
@@ -18,8 +17,8 @@ public interface ImageCreator {
             return null;
         }
         view.layout(0, 0, measuredWidth, measuredHeight);
-        Bitmap createBitmap = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         if (z) {
             Path path = new Path();
             float f = measuredWidth / 2.0f;
@@ -28,7 +27,7 @@ public interface ImageCreator {
         }
         view.draw(canvas);
         float f2 = imageOption.scale;
-        return (f2 <= 0.0f || f2 >= 1.0f) ? createBitmap : Bitmap.createScaledBitmap(createBitmap, (int) (measuredWidth * f2), (int) (measuredHeight * f2), true);
+        return (f2 <= 0.0f || f2 >= 1.0f) ? bitmapCreateBitmap : Bitmap.createScaledBitmap(bitmapCreateBitmap, (int) (measuredWidth * f2), (int) (measuredHeight * f2), true);
     }
 
     Bitmap createImage(ImageOptionCreator.ImageOption imageOption, Point point);

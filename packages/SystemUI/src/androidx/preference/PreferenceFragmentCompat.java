@@ -2,7 +2,9 @@ package androidx.preference;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import androidx.appcompat.util.SeslRoundedCorner;
 import androidx.appcompat.util.SeslSubheaderRoundedCorner;
+import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.BackStackRecord;
 import androidx.fragment.app.DialogFragment;
@@ -30,7 +33,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.systemui.R;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PreferenceFragmentCompat extends Fragment implements PreferenceManager.OnPreferenceTreeClickListener, PreferenceManager.OnDisplayPreferenceDialogListener, PreferenceManager.OnNavigateToScreenListener, DialogPreference.TargetFragment {
     public boolean mHavePrefs;
@@ -74,7 +76,6 @@ public abstract class PreferenceFragmentCompat extends Fragment implements Prefe
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.preference.PreferenceFragmentCompat$4, reason: invalid class name */
     public class AnonymousClass4 implements ViewTreeObserver.OnPreDrawListener {
         public AnonymousClass4() {
@@ -111,7 +112,6 @@ public abstract class PreferenceFragmentCompat extends Fragment implements Prefe
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DividerDecoration extends RecyclerView.ItemDecoration {
         public boolean mAllowDividerAfterLastItem = true;
         public Drawable mDivider;
@@ -120,121 +120,74 @@ public abstract class PreferenceFragmentCompat extends Fragment implements Prefe
         public DividerDecoration() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:21:0x0080  */
+        /* JADX WARN: Removed duplicated region for block: B:22:0x007d  */
+        /* JADX WARN: Removed duplicated region for block: B:24:0x0080  */
         @Override // androidx.recyclerview.widget.RecyclerView.ItemDecoration
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void seslOnDispatchDraw(android.graphics.Canvas r13, androidx.recyclerview.widget.RecyclerView r14, androidx.recyclerview.widget.RecyclerView.State r15) {
-            /*
-                r12 = this;
-                super.seslOnDispatchDraw(r13, r14, r15)
-                int r15 = r14.getChildCount()
-                int r0 = r14.getLeft()
-                int r1 = r14.getPaddingLeft()
-                int r1 = r1 + r0
-                int r0 = r14.getRight()
-                int r2 = r14.getPaddingRight()
-                int r0 = r0 - r2
-                r2 = 0
-                r3 = r2
-            L1b:
-                androidx.preference.PreferenceFragmentCompat r4 = androidx.preference.PreferenceFragmentCompat.this
-                if (r3 >= r15) goto Lb9
-                android.view.View r5 = r14.getChildAt(r3)
-                androidx.recyclerview.widget.RecyclerView$ViewHolder r6 = r14.getChildViewHolder(r5)
-                boolean r7 = r6 instanceof androidx.preference.PreferenceViewHolder
-                if (r7 == 0) goto L31
-                androidx.preference.PreferenceViewHolder r6 = (androidx.preference.PreferenceViewHolder) r6
-                r6.getClass()
-                goto L32
-            L31:
-                r6 = 0
-            L32:
-                android.content.res.Resources r7 = r4.getResources()
-                android.content.res.Configuration r7 = r7.getConfiguration()
-                r7.getLayoutDirection()
-                float r7 = r5.getY()
-                int r7 = (int) r7
-                int r8 = r5.getHeight()
-                int r8 = r8 + r7
-                android.graphics.drawable.Drawable r7 = r12.mDivider
-                if (r7 == 0) goto L8d
-                androidx.recyclerview.widget.RecyclerView$ViewHolder r7 = r14.getChildViewHolder(r5)
-                boolean r9 = r7 instanceof androidx.preference.PreferenceViewHolder
-                if (r9 == 0) goto L7d
-                androidx.preference.PreferenceViewHolder r7 = (androidx.preference.PreferenceViewHolder) r7
-                boolean r7 = r7.mDividerAllowedBelow
-                if (r7 == 0) goto L7d
-                boolean r7 = r12.mAllowDividerAfterLastItem
-                int r9 = r14.indexOfChild(r5)
-                int r10 = r14.getChildCount()
-                r11 = 1
-                int r10 = r10 - r11
-                if (r9 >= r10) goto L7e
-                int r9 = r9 + 1
-                android.view.View r7 = r14.getChildAt(r9)
-                androidx.recyclerview.widget.RecyclerView$ViewHolder r7 = r14.getChildViewHolder(r7)
-                boolean r9 = r7 instanceof androidx.preference.PreferenceViewHolder
-                if (r9 == 0) goto L7d
-                androidx.preference.PreferenceViewHolder r7 = (androidx.preference.PreferenceViewHolder) r7
-                boolean r7 = r7.mDividerAllowedAbove
-                if (r7 == 0) goto L7d
-                r7 = r11
-                goto L7e
-            L7d:
-                r7 = r2
-            L7e:
-                if (r7 == 0) goto L8d
-                int r7 = r12.mDividerHeight
-                int r7 = r7 + r8
-                android.graphics.drawable.Drawable r9 = r12.mDivider
-                r9.setBounds(r1, r8, r0, r7)
-                android.graphics.drawable.Drawable r7 = r12.mDivider
-                r7.draw(r13)
-            L8d:
-                boolean r7 = r4.mIsRoundedCorner
-                if (r7 == 0) goto Lb5
-                if (r6 == 0) goto Lb5
-                boolean r7 = r6.mDrawBackground
-                if (r7 != 0) goto L98
-                goto Lb5
-            L98:
-                boolean r7 = r6.mSubheaderRound
-                if (r7 == 0) goto La9
-                androidx.appcompat.util.SeslSubheaderRoundedCorner r7 = r4.mSubheaderRoundedCorner
-                int r6 = r6.mDrawCorners
-                r7.setRoundedCorners(r6)
-                androidx.appcompat.util.SeslSubheaderRoundedCorner r4 = r4.mSubheaderRoundedCorner
-                r4.drawRoundedCorner(r5, r13)
-                goto Lb5
-            La9:
-                androidx.appcompat.util.SeslRoundedCorner r7 = r4.mRoundedCorner
-                int r6 = r6.mDrawCorners
-                r7.setRoundedCorners(r6)
-                androidx.appcompat.util.SeslRoundedCorner r4 = r4.mRoundedCorner
-                r4.drawRoundedCorner(r5, r13)
-            Lb5:
-                int r3 = r3 + 1
-                goto L1b
-            Lb9:
-                boolean r12 = r4.mIsRoundedCorner
-                if (r12 == 0) goto Ld5
-                androidx.appcompat.util.SeslRoundedCorner r12 = r4.mListRoundedCorner
-                int r14 = r4.mLeft
-                int r15 = r4.mTop
-                int r0 = r4.mRight
-                int r1 = r4.mBottom
-                androidx.core.graphics.Insets r14 = androidx.core.graphics.Insets.of(r14, r15, r0, r1)
-                r12.mInsets = r14
-                android.graphics.Rect r14 = r12.mRoundedCornerBounds
-                r13.getClipBounds(r14)
-                r12.drawRoundedCornerInternal$1(r13)
-            Ld5:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.preference.PreferenceFragmentCompat.DividerDecoration.seslOnDispatchDraw(android.graphics.Canvas, androidx.recyclerview.widget.RecyclerView, androidx.recyclerview.widget.RecyclerView$State):void");
+        public final void seslOnDispatchDraw(Canvas canvas, RecyclerView recyclerView, RecyclerView.State state) {
+            PreferenceFragmentCompat preferenceFragmentCompat;
+            PreferenceViewHolder preferenceViewHolder;
+            boolean z;
+            super.seslOnDispatchDraw(canvas, recyclerView, state);
+            int childCount = recyclerView.getChildCount();
+            int paddingLeft = recyclerView.getPaddingLeft() + recyclerView.getLeft();
+            int right = recyclerView.getRight() - recyclerView.getPaddingRight();
+            int i = 0;
+            while (true) {
+                preferenceFragmentCompat = PreferenceFragmentCompat.this;
+                if (i >= childCount) {
+                    break;
+                }
+                View childAt = recyclerView.getChildAt(i);
+                RecyclerView.ViewHolder childViewHolder = recyclerView.getChildViewHolder(childAt);
+                if (childViewHolder instanceof PreferenceViewHolder) {
+                    preferenceViewHolder = (PreferenceViewHolder) childViewHolder;
+                    preferenceViewHolder.getClass();
+                } else {
+                    preferenceViewHolder = null;
+                }
+                preferenceFragmentCompat.getResources().getConfiguration().getLayoutDirection();
+                int height = childAt.getHeight() + ((int) childAt.getY());
+                if (this.mDivider != null) {
+                    RecyclerView.ViewHolder childViewHolder2 = recyclerView.getChildViewHolder(childAt);
+                    if ((childViewHolder2 instanceof PreferenceViewHolder) && ((PreferenceViewHolder) childViewHolder2).mDividerAllowedBelow) {
+                        z = this.mAllowDividerAfterLastItem;
+                        int iIndexOfChild = recyclerView.indexOfChild(childAt);
+                        if (iIndexOfChild < recyclerView.getChildCount() - 1) {
+                            RecyclerView.ViewHolder childViewHolder3 = recyclerView.getChildViewHolder(recyclerView.getChildAt(iIndexOfChild + 1));
+                            if ((childViewHolder3 instanceof PreferenceViewHolder) && ((PreferenceViewHolder) childViewHolder3).mDividerAllowedAbove) {
+                                z = true;
+                            }
+                        }
+                        if (z) {
+                        }
+                    } else {
+                        z = false;
+                        if (z) {
+                            this.mDivider.setBounds(paddingLeft, height, right, this.mDividerHeight + height);
+                            this.mDivider.draw(canvas);
+                        }
+                    }
+                }
+                if (preferenceFragmentCompat.mIsRoundedCorner && preferenceViewHolder != null && preferenceViewHolder.mDrawBackground) {
+                    if (preferenceViewHolder.mSubheaderRound) {
+                        preferenceFragmentCompat.mSubheaderRoundedCorner.setRoundedCorners(preferenceViewHolder.mDrawCorners);
+                        preferenceFragmentCompat.mSubheaderRoundedCorner.drawRoundedCorner(childAt, canvas);
+                    } else {
+                        preferenceFragmentCompat.mRoundedCorner.setRoundedCorners(preferenceViewHolder.mDrawCorners);
+                        preferenceFragmentCompat.mRoundedCorner.drawRoundedCorner(childAt, canvas);
+                    }
+                }
+                i++;
+            }
+            if (preferenceFragmentCompat.mIsRoundedCorner) {
+                SeslRoundedCorner seslRoundedCorner = preferenceFragmentCompat.mListRoundedCorner;
+                seslRoundedCorner.mInsets = Insets.of(preferenceFragmentCompat.mLeft, preferenceFragmentCompat.mTop, preferenceFragmentCompat.mRight, preferenceFragmentCompat.mBottom);
+                canvas.getClipBounds(seslRoundedCorner.mRoundedCornerBounds);
+                seslRoundedCorner.drawRoundedCornerInternal$1(canvas);
+            }
         }
     }
 
@@ -266,9 +219,9 @@ public abstract class PreferenceFragmentCompat extends Fragment implements Prefe
             if (z != this.mIsReducedMargin && (adapter instanceof PreferenceGroupAdapter) && layoutManager != null) {
                 this.mIsReducedMargin = z;
                 if (getContext() != null) {
-                    TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(null, R$styleable.PreferenceFragmentCompat, R.attr.preferenceFragmentCompatStyle, 0);
+                    TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(null, R$styleable.PreferenceFragmentCompat, R.attr.preferenceFragmentCompatStyle, 0);
                     try {
-                        Drawable drawable = obtainStyledAttributes.getDrawable(1);
+                        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(1);
                         DividerDecoration dividerDecoration = this.mDividerDecoration;
                         if (drawable != null) {
                             dividerDecoration.getClass();
@@ -278,12 +231,12 @@ public abstract class PreferenceFragmentCompat extends Fragment implements Prefe
                         }
                         dividerDecoration.mDivider = drawable;
                         PreferenceFragmentCompat.this.mList.invalidateItemDecorations();
-                        Parcelable onSaveInstanceState = layoutManager.onSaveInstanceState();
+                        Parcelable parcelableOnSaveInstanceState = layoutManager.onSaveInstanceState();
                         RecyclerView recyclerView3 = this.mList;
                         recyclerView3.setAdapter(recyclerView3.mAdapter);
-                        layoutManager.onRestoreInstanceState(onSaveInstanceState);
+                        layoutManager.onRestoreInstanceState(parcelableOnSaveInstanceState);
                     } finally {
-                        obtainStyledAttributes.recycle();
+                        typedArrayObtainStyledAttributes.recycle();
                     }
                 }
             }
@@ -316,33 +269,33 @@ public abstract class PreferenceFragmentCompat extends Fragment implements Prefe
     public abstract void onCreatePreferences(String str);
 
     @Override // androidx.fragment.app.Fragment
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) throws Resources.NotFoundException {
         RecyclerView recyclerView;
-        TypedArray obtainStyledAttributes = requireContext().obtainStyledAttributes(null, R$styleable.PreferenceFragmentCompat, R.attr.preferenceFragmentCompatStyle, 0);
-        this.mLayoutResId = obtainStyledAttributes.getResourceId(0, this.mLayoutResId);
+        TypedArray typedArrayObtainStyledAttributes = requireContext().obtainStyledAttributes(null, R$styleable.PreferenceFragmentCompat, R.attr.preferenceFragmentCompatStyle, 0);
+        this.mLayoutResId = typedArrayObtainStyledAttributes.getResourceId(0, this.mLayoutResId);
         boolean z = true;
-        Drawable drawable = obtainStyledAttributes.getDrawable(1);
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(2, -1);
-        boolean z2 = obtainStyledAttributes.getBoolean(3, true);
-        obtainStyledAttributes.recycle();
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(1);
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(2, -1);
+        boolean z2 = typedArrayObtainStyledAttributes.getBoolean(3, true);
+        typedArrayObtainStyledAttributes.recycle();
         Context context = getContext();
         if (context != null) {
-            TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(null, androidx.appcompat.R$styleable.View, android.R.attr.listSeparatorTextViewStyle, 0);
-            Drawable drawable2 = obtainStyledAttributes2.getDrawable(1);
+            TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(null, androidx.appcompat.R$styleable.View, android.R.attr.listSeparatorTextViewStyle, 0);
+            Drawable drawable2 = typedArrayObtainStyledAttributes2.getDrawable(1);
             if (drawable2 instanceof ColorDrawable) {
                 this.mSubheaderColor = ((ColorDrawable) drawable2).getColor();
             }
-            obtainStyledAttributes2.recycle();
+            typedArrayObtainStyledAttributes2.recycle();
         }
-        LayoutInflater cloneInContext = layoutInflater.cloneInContext(context);
-        View inflate = cloneInContext.inflate(this.mLayoutResId, viewGroup, false);
-        View findViewById = inflate.findViewById(android.R.id.list_container);
-        if (!(findViewById instanceof ViewGroup)) {
+        LayoutInflater layoutInflaterCloneInContext = layoutInflater.cloneInContext(context);
+        View viewInflate = layoutInflaterCloneInContext.inflate(this.mLayoutResId, viewGroup, false);
+        View viewFindViewById = viewInflate.findViewById(android.R.id.list_container);
+        if (!(viewFindViewById instanceof ViewGroup)) {
             throw new IllegalStateException("Content has view with id attribute 'android.R.id.list_container' that is not a ViewGroup class");
         }
-        ViewGroup viewGroup2 = (ViewGroup) findViewById;
+        ViewGroup viewGroup2 = (ViewGroup) viewFindViewById;
         if (!requireContext().getPackageManager().hasSystemFeature("android.hardware.type.automotive") || (recyclerView = (RecyclerView) viewGroup2.findViewById(R.id.recycler_view)) == null) {
-            recyclerView = (RecyclerView) cloneInContext.inflate(R.layout.sesl_preference_recyclerview, viewGroup2, false);
+            recyclerView = (RecyclerView) layoutInflaterCloneInContext.inflate(R.layout.sesl_preference_recyclerview, viewGroup2, false);
             recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
             PreferenceRecyclerViewAccessibilityDelegate preferenceRecyclerViewAccessibilityDelegate = new PreferenceRecyclerViewAccessibilityDelegate(recyclerView);
             recyclerView.mAccessibilityDelegate = preferenceRecyclerViewAccessibilityDelegate;
@@ -429,7 +382,7 @@ public abstract class PreferenceFragmentCompat extends Fragment implements Prefe
             recyclerView3.seslSetFillHorizontalPaddingEnabled(z);
             this.mList.setScrollBarStyle((this.mLeft > 0 || this.mRight > 0) ? 33554432 : 0);
         }
-        return inflate;
+        return viewInflate;
     }
 
     @Override // androidx.fragment.app.Fragment
@@ -516,11 +469,11 @@ public abstract class PreferenceFragmentCompat extends Fragment implements Prefe
             preference.mExtras = new Bundle();
         }
         Bundle bundle = preference.mExtras;
-        Fragment instantiate = parentFragmentManager.getFragmentFactory().instantiate(requireActivity().getClassLoader(), preference.mFragment);
-        instantiate.setArguments(bundle);
-        instantiate.setTargetFragment(this);
+        Fragment fragmentInstantiate = parentFragmentManager.getFragmentFactory().instantiate(requireActivity().getClassLoader(), preference.mFragment);
+        fragmentInstantiate.setArguments(bundle);
+        fragmentInstantiate.setTargetFragment(this);
         BackStackRecord backStackRecord = new BackStackRecord(parentFragmentManager);
-        backStackRecord.replace(((View) requireView().getParent()).getId(), instantiate, null);
+        backStackRecord.replace(((View) requireView().getParent()).getId(), fragmentInstantiate, null);
         if (!backStackRecord.mAllowAddToBackStack) {
             throw new IllegalStateException("This FragmentTransaction is not allowed to be added to the back stack.");
         }

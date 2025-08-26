@@ -4,7 +4,6 @@ import java.util.Map;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMutableMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class StoreEntry implements Map.Entry, KMutableMap.Entry {
     public final Object key;
@@ -40,9 +39,9 @@ public final class StoreEntry implements Map.Entry, KMutableMap.Entry {
     @Override // java.util.Map.Entry
     public final int hashCode() {
         Object obj = this.key;
-        int hashCode = (obj == null ? 0 : obj.hashCode()) * 31;
+        int iHashCode = (obj == null ? 0 : obj.hashCode()) * 31;
         Object obj2 = this.value;
-        return hashCode + (obj2 != null ? obj2.hashCode() : 0);
+        return iHashCode + (obj2 != null ? obj2.hashCode() : 0);
     }
 
     @Override // java.util.Map.Entry

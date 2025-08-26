@@ -7,34 +7,34 @@ import java.util.Collection;
 /* loaded from: classes4.dex */
 public class Rfc822Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
     public static void tokenize(CharSequence charSequence, Collection<Rfc822Token> collection) {
-        char charAt;
+        char cCharAt;
         StringBuilder sb = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
         StringBuilder sb3 = new StringBuilder();
         int length = charSequence.length();
         int i = 0;
         while (i < length) {
-            char charAt2 = charSequence.charAt(i);
-            if (charAt2 != ',' && charAt2 != ';') {
-                if (charAt2 != '\"') {
-                    if (charAt2 != '(') {
-                        if (charAt2 == '<') {
+            char cCharAt2 = charSequence.charAt(i);
+            if (cCharAt2 != ',' && cCharAt2 != ';') {
+                if (cCharAt2 != '\"') {
+                    if (cCharAt2 != '(') {
+                        if (cCharAt2 == '<') {
                             while (true) {
                                 i++;
                                 if (i >= length) {
                                     break;
                                 }
-                                char charAt3 = charSequence.charAt(i);
-                                if (charAt3 == '>') {
+                                char cCharAt3 = charSequence.charAt(i);
+                                if (cCharAt3 == '>') {
                                     break;
                                 } else {
-                                    sb2.append(charAt3);
+                                    sb2.append(cCharAt3);
                                 }
                             }
-                        } else if (charAt2 == ' ') {
+                        } else if (cCharAt2 == ' ') {
                             sb.append((char) 0);
                         } else {
-                            sb.append(charAt2);
+                            sb.append(cCharAt2);
                         }
                         i++;
                         break;
@@ -43,23 +43,23 @@ public class Rfc822Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
                     i++;
                     int i2 = 1;
                     while (i < length && i2 > 0) {
-                        char charAt4 = charSequence.charAt(i);
-                        if (charAt4 == ')') {
+                        char cCharAt4 = charSequence.charAt(i);
+                        if (cCharAt4 == ')') {
                             if (i2 > 1) {
-                                sb3.append(charAt4);
+                                sb3.append(cCharAt4);
                             }
                             i2--;
-                        } else if (charAt4 == '(') {
-                            sb3.append(charAt4);
+                        } else if (cCharAt4 == '(') {
+                            sb3.append(cCharAt4);
                             i2++;
-                        } else if (charAt4 == '\\') {
+                        } else if (cCharAt4 == '\\') {
                             int i3 = i + 1;
                             if (i3 < length) {
                                 sb3.append(charSequence.charAt(i3));
                             }
                             i += 2;
                         } else {
-                            sb3.append(charAt4);
+                            sb3.append(cCharAt4);
                         }
                         i++;
                     }
@@ -67,11 +67,11 @@ public class Rfc822Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
                     while (true) {
                         i++;
                         while (i < length) {
-                            charAt = charSequence.charAt(i);
-                            if (charAt == '\"') {
+                            cCharAt = charSequence.charAt(i);
+                            if (cCharAt == '\"') {
                                 break;
                             }
-                            if (charAt == '\\') {
+                            if (cCharAt == '\\') {
                                 int i4 = i + 1;
                                 if (i4 < length) {
                                     sb.append(charSequence.charAt(i4));
@@ -79,7 +79,7 @@ public class Rfc822Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
                                 i += 2;
                             }
                         }
-                        sb.append(charAt);
+                        sb.append(cCharAt);
                     }
                     i++;
                     break;
@@ -145,24 +145,24 @@ public class Rfc822Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
 
     @Override // android.widget.MultiAutoCompleteTextView.Tokenizer
     public int findTokenStart(CharSequence charSequence, int i) {
-        int i2 = 0;
+        int iFindTokenEnd = 0;
         while (true) {
-            int i3 = i2;
-            while (i2 < i) {
-                i2 = findTokenEnd(charSequence, i2);
-                if (i2 < i) {
+            int i2 = iFindTokenEnd;
+            while (iFindTokenEnd < i) {
+                iFindTokenEnd = findTokenEnd(charSequence, iFindTokenEnd);
+                if (iFindTokenEnd < i) {
                     do {
-                        i2++;
-                        if (i2 >= i) {
+                        iFindTokenEnd++;
+                        if (iFindTokenEnd >= i) {
                             break;
                         }
-                    } while (charSequence.charAt(i2) == ' ');
-                    if (i2 < i) {
+                    } while (charSequence.charAt(iFindTokenEnd) == ' ');
+                    if (iFindTokenEnd < i) {
                         break;
                     }
                 }
             }
-            return i3;
+            return i2;
         }
     }
 
@@ -170,11 +170,11 @@ public class Rfc822Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
     public int findTokenEnd(CharSequence charSequence, int i) {
         int length = charSequence.length();
         while (i < length) {
-            char charAt = charSequence.charAt(i);
-            if (charAt != ',' && charAt != ';') {
-                if (charAt != '\"') {
-                    if (charAt != '(') {
-                        if (charAt == '<') {
+            char cCharAt = charSequence.charAt(i);
+            if (cCharAt != ',' && cCharAt != ';') {
+                if (cCharAt != '\"') {
+                    if (cCharAt != '(') {
+                        if (cCharAt == '<') {
                             do {
                                 i++;
                                 if (i < length) {
@@ -183,16 +183,17 @@ public class Rfc822Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
                         }
                         i++;
                         break;
+                        break;
                     }
                     i++;
                     int i2 = 1;
                     while (i < length && i2 > 0) {
-                        char charAt2 = charSequence.charAt(i);
-                        if (charAt2 == ')') {
+                        char cCharAt2 = charSequence.charAt(i);
+                        if (cCharAt2 == ')') {
                             i2--;
-                        } else if (charAt2 == '(') {
+                        } else if (cCharAt2 == '(') {
                             i2++;
-                        } else if (charAt2 == '\\' && i + 1 < length) {
+                        } else if (cCharAt2 == '\\' && i + 1 < length) {
                             i += 2;
                         }
                         i++;
@@ -201,15 +202,18 @@ public class Rfc822Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
                     while (true) {
                         i++;
                         while (i < length) {
-                            char charAt3 = charSequence.charAt(i);
-                            if (charAt3 == '\"') {
+                            char cCharAt3 = charSequence.charAt(i);
+                            if (cCharAt3 == '\"') {
                                 break;
                             }
-                            if (charAt3 == '\\' && i + 1 < length) {
-                                i += 2;
+                            if (cCharAt3 != '\\' || i + 1 >= length) {
+                                break;
                             }
+                            i += 2;
                         }
                     }
+                    i++;
+                    break;
                 }
             } else {
                 break;

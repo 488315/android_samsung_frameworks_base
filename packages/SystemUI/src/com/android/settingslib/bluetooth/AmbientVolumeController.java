@@ -6,7 +6,6 @@ import android.bluetooth.BluetoothVolumeControl;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
-import com.android.settingslib.bluetooth.AmbientVolumeController;
 import com.android.settingslib.bluetooth.HearingDeviceLocalDataManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.google.common.util.concurrent.ListeningExecutorService;
@@ -17,7 +16,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AmbientVolumeController implements LocalBluetoothProfileManager.ServiceListener {
     public final AmbientVolumeControlCallback mCallback;
@@ -27,7 +25,6 @@ public class AmbientVolumeController implements LocalBluetoothProfileManager.Ser
     public final Map mDeviceCallbackMap = new ArrayMap();
     public final Map mDeviceAmbientStateMap = new ArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AmbientCallback implements AudioInputControl.AudioInputCallback {
         public final AmbientVolumeControlCallback mCallback;
         public final BluetoothDevice mDevice;
@@ -86,11 +83,9 @@ public class AmbientVolumeController implements LocalBluetoothProfileManager.Ser
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AmbientVolumeControlCallback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RemoteAmbientState extends Record {
         public final int gainSetting;
         public final int mute;
@@ -117,15 +112,15 @@ public class AmbientVolumeController implements LocalBluetoothProfileManager.Ser
         @Override // java.lang.Record
         public final String toString() {
             Object[] objArr = {Integer.valueOf(this.gainSetting), Integer.valueOf(this.mute)};
-            String[] split = "gainSetting;mute".length() == 0 ? new String[0] : "gainSetting;mute".split(";");
+            String[] strArrSplit = "gainSetting;mute".length() == 0 ? new String[0] : "gainSetting;mute".split(";");
             StringBuilder sb = new StringBuilder();
             sb.append(RemoteAmbientState.class.getSimpleName());
             sb.append("[");
-            for (int i = 0; i < split.length; i++) {
-                sb.append(split[i]);
+            for (int i = 0; i < strArrSplit.length; i++) {
+                sb.append(strArrSplit[i]);
                 sb.append("=");
                 sb.append(objArr[i]);
-                if (i != split.length - 1) {
+                if (i != strArrSplit.length - 1) {
                     sb.append(", ");
                 }
             }
@@ -158,7 +153,7 @@ public class AmbientVolumeController implements LocalBluetoothProfileManager.Ser
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
                         AudioInputControl audioInputControl = (AudioInputControl) obj;
-                        AmbientVolumeController.this.getClass();
+                        this.f$0.getClass();
                         return (audioInputControl.getAudioInputType() == 7) && (audioInputControl.getGainMode() == 2 || audioInputControl.getGainMode() == 0) && (audioInputControl.getAudioInputStatus() == 1);
                     }
                 }).toList();
@@ -187,20 +182,20 @@ public class AmbientVolumeController implements LocalBluetoothProfileManager.Ser
     }
 
     public final RemoteAmbientState refreshAmbientState(BluetoothDevice bluetoothDevice) {
-        int i;
+        int gainSetting;
         int mute;
         if (bluetoothDevice == null || !bluetoothDevice.isConnected()) {
             return null;
         }
         List ambientControls = getAmbientControls(bluetoothDevice);
-        int i2 = HearingDeviceLocalDataManager.Data.$r8$clinit;
-        int i3 = 2;
+        int i = HearingDeviceLocalDataManager.Data.$r8$clinit;
+        int i2 = 2;
         if (ambientControls.isEmpty()) {
-            i = Integer.MIN_VALUE;
+            gainSetting = Integer.MIN_VALUE;
         } else {
             synchronized (this.mDeviceAmbientStateMap) {
-                i = ((AudioInputControl) ambientControls.getFirst()).getGainSetting();
-                ((ArrayMap) this.mDeviceAmbientStateMap).put(bluetoothDevice, new RemoteAmbientState(i, ((RemoteAmbientState) this.mDeviceAmbientStateMap.getOrDefault(bluetoothDevice, new RemoteAmbientState(Integer.MIN_VALUE, 2))).mute));
+                gainSetting = ((AudioInputControl) ambientControls.getFirst()).getGainSetting();
+                ((ArrayMap) this.mDeviceAmbientStateMap).put(bluetoothDevice, new RemoteAmbientState(gainSetting, ((RemoteAmbientState) this.mDeviceAmbientStateMap.getOrDefault(bluetoothDevice, new RemoteAmbientState(Integer.MIN_VALUE, 2))).mute));
             }
         }
         List ambientControls2 = getAmbientControls(bluetoothDevice);
@@ -209,9 +204,9 @@ public class AmbientVolumeController implements LocalBluetoothProfileManager.Ser
                 mute = ((AudioInputControl) ambientControls2.getFirst()).getMute();
                 ((ArrayMap) this.mDeviceAmbientStateMap).put(bluetoothDevice, new RemoteAmbientState(((RemoteAmbientState) this.mDeviceAmbientStateMap.getOrDefault(bluetoothDevice, new RemoteAmbientState(Integer.MIN_VALUE, 2))).gainSetting, mute));
             }
-            i3 = mute;
+            i2 = mute;
         }
-        return new RemoteAmbientState(i, i3);
+        return new RemoteAmbientState(gainSetting, i2);
     }
 
     public final void registerCallback(final ListeningExecutorService listeningExecutorService, BluetoothDevice bluetoothDevice) {
@@ -223,7 +218,7 @@ public class AmbientVolumeController implements LocalBluetoothProfileManager.Ser
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 try {
-                    ((AudioInputControl) obj).registerCallback(ListeningExecutorService.this, ambientCallback);
+                    ((AudioInputControl) obj).registerCallback(listeningExecutorService, ambientCallback);
                 } catch (IllegalArgumentException e) {
                     Log.i("AmbientController", "Skip registering the callback, " + e.getMessage());
                 }
@@ -267,7 +262,7 @@ public class AmbientVolumeController implements LocalBluetoothProfileManager.Ser
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 try {
-                    ((AudioInputControl) obj).unregisterCallback(AmbientVolumeController.AmbientCallback.this);
+                    ((AudioInputControl) obj).unregisterCallback(ambientCallback);
                 } catch (IllegalArgumentException e) {
                     Log.i("AmbientController", "Skip unregistering the callback, " + e.getMessage());
                 }

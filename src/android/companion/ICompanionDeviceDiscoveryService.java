@@ -53,9 +53,9 @@ public interface ICompanionDeviceDiscoveryService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICompanionDeviceDiscoveryService)) {
-                return (ICompanionDeviceDiscoveryService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICompanionDeviceDiscoveryService)) {
+                return (ICompanionDeviceDiscoveryService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,11 +86,11 @@ public interface ICompanionDeviceDiscoveryService extends IInterface {
             }
             if (i == 1) {
                 AssociationRequest associationRequest = (AssociationRequest) parcel.readTypedObject(AssociationRequest.CREATOR);
-                String readString = parcel.readString();
-                IAssociationRequestCallback asInterface = IAssociationRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                IAssociationRequestCallback iAssociationRequestCallbackAsInterface = IAssociationRequestCallback.Stub.asInterface(parcel.readStrongBinder());
                 AndroidFuture<String> androidFuture = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                 parcel.enforceNoDataAvail();
-                startDiscovery(associationRequest, readString, asInterface, androidFuture);
+                startDiscovery(associationRequest, string, iAssociationRequestCallbackAsInterface, androidFuture);
             } else if (i == 2) {
                 onAssociationCreated();
             } else {
@@ -117,27 +117,27 @@ public interface ICompanionDeviceDiscoveryService extends IInterface {
 
             @Override // android.companion.ICompanionDeviceDiscoveryService
             public void startDiscovery(AssociationRequest associationRequest, String str, IAssociationRequestCallback iAssociationRequestCallback, AndroidFuture<String> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(associationRequest, 0);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iAssociationRequestCallback);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(associationRequest, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iAssociationRequestCallback);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceDiscoveryService
             public void onAssociationCreated() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -16,7 +16,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SemanticsNode {
     public SemanticsNode fakeNodeParent;
@@ -40,11 +39,11 @@ public final class SemanticsNode {
     }
 
     /* renamed from: fakeSemanticsNode-ypyhhiA, reason: not valid java name */
-    public final SemanticsNode m715fakeSemanticsNodeypyhhiA(Role role, Function1 function1) {
+    public final SemanticsNode m717fakeSemanticsNodeypyhhiA(Role role, Function1 function1) {
         SemanticsConfiguration semanticsConfiguration = new SemanticsConfiguration();
         semanticsConfiguration.isMergingSemanticsOfDescendants = false;
         semanticsConfiguration.isClearingSemantics = false;
-        function1.mo779invoke(semanticsConfiguration);
+        function1.mo781invoke(semanticsConfiguration);
         SemanticsNode semanticsNode = new SemanticsNode(new SemanticsNode$fakeSemanticsNode$fakeNode$1(function1), false, new LayoutNode(true, this.id + (role != null ? 1000000000 : 2000000000)), semanticsConfiguration);
         semanticsNode.isFake = true;
         semanticsNode.fakeNodeParent = this;
@@ -58,7 +57,7 @@ public final class SemanticsNode {
         for (int i2 = 0; i2 < i; i2++) {
             LayoutNode layoutNode2 = (LayoutNode) objArr[i2];
             if (layoutNode2.isAttached() && !layoutNode2.isDeactivated) {
-                if (layoutNode2.nodes.m663hasH91voCI$ui_release(8)) {
+                if (layoutNode2.nodes.m665hasH91voCI$ui_release(8)) {
                     ((ArrayList) list).add(SemanticsNodeKt.SemanticsNode(layoutNode2, this.mergingEnabled));
                 } else {
                     fillOneLayerOfSemanticsWrappers(layoutNode2, list);
@@ -79,7 +78,7 @@ public final class SemanticsNode {
         if (outerMergingSemantics == null) {
             outerMergingSemantics = this.outerSemanticsNode;
         }
-        return DelegatableNodeKt.m632requireCoordinator64DMado(outerMergingSemantics, 8);
+        return DelegatableNodeKt.m634requireCoordinator64DMado(outerMergingSemantics, 8);
     }
 
     public final void findOneLayerOfMergingSemanticsNodes(List list, List list2) {
@@ -97,14 +96,14 @@ public final class SemanticsNode {
     }
 
     public final Rect getBoundsInRoot() {
-        Rect localBoundingBoxOf;
-        NodeCoordinator findCoordinatorToGetBounds$ui_release = findCoordinatorToGetBounds$ui_release();
-        if (findCoordinatorToGetBounds$ui_release != null) {
-            if (!findCoordinatorToGetBounds$ui_release.getTail().isAttached) {
-                findCoordinatorToGetBounds$ui_release = null;
+        Rect rectLocalBoundingBoxOf;
+        NodeCoordinator nodeCoordinatorFindCoordinatorToGetBounds$ui_release = findCoordinatorToGetBounds$ui_release();
+        if (nodeCoordinatorFindCoordinatorToGetBounds$ui_release != null) {
+            if (!nodeCoordinatorFindCoordinatorToGetBounds$ui_release.getTail().isAttached) {
+                nodeCoordinatorFindCoordinatorToGetBounds$ui_release = null;
             }
-            if (findCoordinatorToGetBounds$ui_release != null && (localBoundingBoxOf = LayoutCoordinatesKt.findRootCoordinates(findCoordinatorToGetBounds$ui_release).localBoundingBoxOf(findCoordinatorToGetBounds$ui_release, true)) != null) {
-                return localBoundingBoxOf;
+            if (nodeCoordinatorFindCoordinatorToGetBounds$ui_release != null && (rectLocalBoundingBoxOf = LayoutCoordinatesKt.findRootCoordinates(nodeCoordinatorFindCoordinatorToGetBounds$ui_release).localBoundingBoxOf(nodeCoordinatorFindCoordinatorToGetBounds$ui_release, true)) != null) {
+                return rectLocalBoundingBoxOf;
             }
         }
         Rect.Companion.getClass();
@@ -112,14 +111,14 @@ public final class SemanticsNode {
     }
 
     public final Rect getBoundsInWindow() {
-        Rect boundsInWindow;
-        NodeCoordinator findCoordinatorToGetBounds$ui_release = findCoordinatorToGetBounds$ui_release();
-        if (findCoordinatorToGetBounds$ui_release != null) {
-            if (!findCoordinatorToGetBounds$ui_release.getTail().isAttached) {
-                findCoordinatorToGetBounds$ui_release = null;
+        Rect rectBoundsInWindow;
+        NodeCoordinator nodeCoordinatorFindCoordinatorToGetBounds$ui_release = findCoordinatorToGetBounds$ui_release();
+        if (nodeCoordinatorFindCoordinatorToGetBounds$ui_release != null) {
+            if (!nodeCoordinatorFindCoordinatorToGetBounds$ui_release.getTail().isAttached) {
+                nodeCoordinatorFindCoordinatorToGetBounds$ui_release = null;
             }
-            if (findCoordinatorToGetBounds$ui_release != null && (boundsInWindow = LayoutCoordinatesKt.boundsInWindow(findCoordinatorToGetBounds$ui_release)) != null) {
-                return boundsInWindow;
+            if (nodeCoordinatorFindCoordinatorToGetBounds$ui_release != null && (rectBoundsInWindow = LayoutCoordinatesKt.boundsInWindow(nodeCoordinatorFindCoordinatorToGetBounds$ui_release)) != null) {
+                return rectBoundsInWindow;
             }
         }
         Rect.Companion.getClass();
@@ -139,10 +138,14 @@ public final class SemanticsNode {
         return arrayList2;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0063  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final SemanticsConfiguration getConfig() {
-        boolean isMergingSemanticsOfDescendants = isMergingSemanticsOfDescendants();
+        boolean zIsMergingSemanticsOfDescendants = isMergingSemanticsOfDescendants();
         SemanticsConfiguration semanticsConfiguration = this.unmergedConfig;
-        if (!isMergingSemanticsOfDescendants) {
+        if (!zIsMergingSemanticsOfDescendants) {
             return semanticsConfiguration;
         }
         semanticsConfiguration.getClass();
@@ -172,11 +175,11 @@ public final class SemanticsNode {
                     if (i2 != 8) {
                         break;
                     }
+                    if (i == length) {
+                        break;
+                    }
+                    i++;
                 }
-                if (i == length) {
-                    break;
-                }
-                i++;
             }
         }
         mergeConfig(new ArrayList(), semanticsConfiguration2);
@@ -184,42 +187,44 @@ public final class SemanticsNode {
     }
 
     public final SemanticsNode getParent() {
-        LayoutNode layoutNode;
+        LayoutNode parent$ui_release;
         SemanticsNode semanticsNode = this.fakeNodeParent;
         if (semanticsNode != null) {
             return semanticsNode;
         }
-        LayoutNode layoutNode2 = this.layoutNode;
+        LayoutNode layoutNode = this.layoutNode;
         boolean z = this.mergingEnabled;
         if (z) {
-            layoutNode = layoutNode2.getParent$ui_release();
-            while (layoutNode != null) {
-                SemanticsConfiguration semanticsConfiguration = layoutNode.getSemanticsConfiguration();
+            parent$ui_release = layoutNode.getParent$ui_release();
+            while (parent$ui_release != null) {
+                SemanticsConfiguration semanticsConfiguration = parent$ui_release.getSemanticsConfiguration();
                 if (semanticsConfiguration != null && semanticsConfiguration.isMergingSemanticsOfDescendants) {
-                    break;
-                }
-                layoutNode = layoutNode.getParent$ui_release();
-            }
-        }
-        layoutNode = null;
-        if (layoutNode == null) {
-            LayoutNode parent$ui_release = layoutNode2.getParent$ui_release();
-            while (true) {
-                if (parent$ui_release == null) {
-                    layoutNode = null;
-                    break;
-                }
-                if (parent$ui_release.nodes.m663hasH91voCI$ui_release(8)) {
-                    layoutNode = parent$ui_release;
                     break;
                 }
                 parent$ui_release = parent$ui_release.getParent$ui_release();
             }
+            parent$ui_release = null;
+        } else {
+            parent$ui_release = null;
         }
-        if (layoutNode == null) {
+        if (parent$ui_release == null) {
+            LayoutNode parent$ui_release2 = layoutNode.getParent$ui_release();
+            while (true) {
+                if (parent$ui_release2 == null) {
+                    parent$ui_release = null;
+                    break;
+                }
+                if (parent$ui_release2.nodes.m665hasH91voCI$ui_release(8)) {
+                    parent$ui_release = parent$ui_release2;
+                    break;
+                }
+                parent$ui_release2 = parent$ui_release2.getParent$ui_release();
+            }
+        }
+        if (parent$ui_release == null) {
             return null;
         }
-        return SemanticsNodeKt.SemanticsNode(layoutNode, z);
+        return SemanticsNodeKt.SemanticsNode(parent$ui_release, z);
     }
 
     public final boolean isMergingSemanticsOfDescendants() {
@@ -292,9 +297,9 @@ public final class SemanticsNode {
                                     SemanticsPropertyKey semanticsPropertyKey = (SemanticsPropertyKey) obj;
                                     arrayList2 = arrayList3;
                                     i4 = size;
-                                    Object invoke = semanticsPropertyKey.mergePolicy.invoke(semanticsConfiguration.props.get(semanticsPropertyKey), obj2);
-                                    if (invoke != null) {
-                                        semanticsConfiguration.props.set(semanticsPropertyKey, invoke);
+                                    Object objInvoke = semanticsPropertyKey.mergePolicy.invoke(semanticsConfiguration.props.get(semanticsPropertyKey), obj2);
+                                    if (objInvoke != null) {
+                                        semanticsConfiguration.props.set(semanticsPropertyKey, objInvoke);
                                     }
                                 } else {
                                     i3 = size2;
@@ -352,15 +357,15 @@ public final class SemanticsNode {
             SemanticsConfiguration semanticsConfiguration = this.unmergedConfig;
             final Role role = (Role) SemanticsConfigurationKt.getOrNull(semanticsConfiguration, semanticsPropertyKey);
             if (role != null && semanticsConfiguration.isMergingSemanticsOfDescendants && !list.isEmpty()) {
-                ((ArrayList) list).add(m715fakeSemanticsNodeypyhhiA(role, new Function1() { // from class: androidx.compose.ui.semantics.SemanticsNode$emitFakeNodes$fakeNode$1
+                ((ArrayList) list).add(m717fakeSemanticsNodeypyhhiA(role, new Function1() { // from class: androidx.compose.ui.semantics.SemanticsNode$emitFakeNodes$fakeNode$1
                     {
                         super(1);
                     }
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
-                        SemanticsPropertiesKt.m717setRolekuIjeqM((SemanticsPropertyReceiver) obj, Role.this.value);
+                    public final Object mo781invoke(Object obj) {
+                        SemanticsPropertiesKt.m719setRolekuIjeqM((SemanticsPropertyReceiver) obj, role.value);
                         return Unit.INSTANCE;
                     }
                 }));
@@ -370,7 +375,7 @@ public final class SemanticsNode {
                 List list2 = (List) SemanticsConfigurationKt.getOrNull(semanticsConfiguration, semanticsPropertyKey2);
                 final String str = list2 != null ? (String) CollectionsKt___CollectionsKt.firstOrNull(list2) : null;
                 if (str != null) {
-                    ((ArrayList) list).add(0, m715fakeSemanticsNodeypyhhiA(null, new Function1() { // from class: androidx.compose.ui.semantics.SemanticsNode$emitFakeNodes$fakeNode$2
+                    ((ArrayList) list).add(0, m717fakeSemanticsNodeypyhhiA(null, new Function1() { // from class: androidx.compose.ui.semantics.SemanticsNode$emitFakeNodes$fakeNode$2
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
@@ -378,7 +383,7 @@ public final class SemanticsNode {
 
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             SemanticsPropertiesKt.setContentDescription((SemanticsPropertyReceiver) obj, str);
                             return Unit.INSTANCE;
                         }

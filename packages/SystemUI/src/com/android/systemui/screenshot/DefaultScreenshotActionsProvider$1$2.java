@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DefaultScreenshotActionsProvider$1$2 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -50,11 +49,11 @@ final class DefaultScreenshotActionsProvider$1$2 extends SuspendLambda implement
             this.L$0 = screenshotSavedResult2;
             this.L$1 = actionExecutor2;
             this.label = 1;
-            Object createEdit = defaultScreenshotActionsProvider.actionIntentCreator.createEdit(uri, this);
-            if (createEdit == coroutineSingletons) {
+            Object objCreateEdit = defaultScreenshotActionsProvider.actionIntentCreator.createEdit(uri, this);
+            if (objCreateEdit == coroutineSingletons) {
                 return coroutineSingletons;
             }
-            obj = createEdit;
+            obj = objCreateEdit;
             screenshotSavedResult = screenshotSavedResult2;
             actionExecutor = actionExecutor2;
         } else {

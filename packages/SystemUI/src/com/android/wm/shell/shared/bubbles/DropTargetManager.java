@@ -19,7 +19,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DropTargetManager {
     public ValueAnimator animator;
@@ -31,7 +30,6 @@ public final class DropTargetManager {
     public final RectF morphRect = new RectF(0.0f, 0.0f, 0.0f, 0.0f);
     public DragState state;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,7 +39,6 @@ public final class DropTargetManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DragState {
         public DragZone currentDragZone;
         public final List dragZones;
@@ -72,7 +69,6 @@ public final class DropTargetManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DragZoneChangedListener {
     }
 
@@ -98,7 +94,7 @@ public final class DropTargetManager {
         startFadeAnimation(this.dropTargetView.getAlpha(), 0.0f, new Function0() { // from class: com.android.wm.shell.shared.bubbles.DropTargetManager$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                DropTargetManager dropTargetManager = DropTargetManager.this;
+                DropTargetManager dropTargetManager = this.f$0;
                 dropTargetManager.container.removeView(dropTargetManager.dropTargetView);
                 return Unit.INSTANCE;
             }
@@ -136,23 +132,23 @@ public final class DropTargetManager {
             valueAnimator.cancel();
         }
         long j = f < f2 ? 150L : 100L;
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
-        ofFloat.setDuration(j);
-        ofFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.wm.shell.shared.bubbles.DropTargetManager$startFadeAnimation$1
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+        valueAnimatorOfFloat.setDuration(j);
+        valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.wm.shell.shared.bubbles.DropTargetManager.startFadeAnimation.1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
-                DropTargetManager.this.dropTargetView.setAlpha(((Float) ofFloat.getAnimatedValue()).floatValue());
+                DropTargetManager.this.dropTargetView.setAlpha(((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue());
             }
         });
         if (dropTargetManager$$ExternalSyntheticLambda0 != null) {
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.shared.bubbles.DropTargetManager$doOnEnd$1
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.shared.bubbles.DropTargetManager$doOnEnd$1
                 @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    Function0.this.invoke();
+                    dropTargetManager$$ExternalSyntheticLambda0.invoke();
                 }
             });
         }
-        this.animator = ofFloat;
-        ofFloat.start(false);
+        this.animator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.start(false);
     }
 }

@@ -6,7 +6,6 @@ import java.text.ParseException;
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Warning extends SIPHeader implements Header {
     private static final long serialVersionUID = -3433328864230783899L;
@@ -38,14 +37,14 @@ public class Warning extends SIPHeader implements Header {
         this.agent = str;
     }
 
-    public final void setCode(int i) {
+    public final void setCode(int i) throws InvalidArgumentException {
         if (i <= 99 || i >= 1000) {
             throw new InvalidArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Code parameter in the Warning header is invalid: code="));
         }
         this.code = i;
     }
 
-    public final void setText(String str) {
+    public final void setText(String str) throws ParseException {
         if (str == null) {
             throw new ParseException("The text parameter in the Warning header is null", 0);
         }

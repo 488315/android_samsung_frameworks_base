@@ -7,7 +7,6 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class HighlightDbHelper extends SQLiteOpenHelper {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -15,9 +14,9 @@ public abstract class HighlightDbHelper extends SQLiteOpenHelper {
 
     public HighlightDbHelper(Context context, String str, int i) {
         super(context, str, (SQLiteDatabase.CursorFactory) null, i);
-        HashMap hashMap = new HashMap();
-        this.mTables = hashMap;
-        init(hashMap);
+        HashMap map = new HashMap();
+        this.mTables = map;
+        init(map);
     }
 
     public abstract void init(Map map);

@@ -20,7 +20,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaOutputWindow$Companion$dismissCallback$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Context $this_dismissCallback;
@@ -71,7 +70,7 @@ final class MediaOutputWindow$Companion$dismissCallback$1 extends SuspendLambda 
                     if (list == null) {
                         return true;
                     }
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     BuildersKt.launch$default(producerScope2, null, null, new MediaOutputWindow$Companion$dismissCallback$1$activityControllerListener$1$onActivityStarting$2$1(producerScope2, null), 3);
                     return true;
                 }

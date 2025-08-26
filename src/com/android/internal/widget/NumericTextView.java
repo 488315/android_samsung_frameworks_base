@@ -2,6 +2,7 @@ package com.android.internal.widget;
 
 import android.app.blob.XmlTags;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.StateSet;
@@ -44,7 +45,7 @@ public class NumericTextView extends TextView {
     }
 
     @Override // android.widget.TextView, android.view.View
-    protected void onFocusChanged(boolean z, int i, Rect rect) {
+    protected void onFocusChanged(boolean z, int i, Rect rect) throws Resources.NotFoundException {
         super.onFocusChanged(z, i, rect);
         if (z) {
             this.mPreviousValue = this.mValue;
@@ -175,9 +176,9 @@ public class NumericTextView extends TextView {
                 return false;
             }
             if (this.mCount < this.mMaxCount) {
-                int numericKeyCodeToInt = (this.mValue * 10) + numericKeyCodeToInt(i);
-                if (numericKeyCodeToInt <= this.mMaxValue) {
-                    this.mValue = numericKeyCodeToInt;
+                int iNumericKeyCodeToInt = (this.mValue * 10) + numericKeyCodeToInt(i);
+                if (iNumericKeyCodeToInt <= this.mMaxValue) {
+                    this.mValue = iNumericKeyCodeToInt;
                     this.mCount++;
                 }
             }

@@ -2,7 +2,9 @@ package com.google.android.setupdesign;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -55,7 +57,6 @@ import com.google.android.setupdesign.util.LayoutStyler;
 import com.google.android.setupdesign.util.PartnerStyleHelper;
 import com.google.android.setupdesign.util.TextViewPartnerStyler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class GlifLayout extends PartnerCustomizationLayout {
     public static final Logger LOG = new Logger((Class<?>) GlifLayout.class);
@@ -70,13 +71,13 @@ public class GlifLayout extends PartnerCustomizationLayout {
     }
 
     public static boolean isEmbeddedActivityOnePaneEnabled(Context context) {
-        boolean isEmbeddedActivityOnePaneEnabled = PartnerConfigHelper.isEmbeddedActivityOnePaneEnabled(context);
+        boolean zIsEmbeddedActivityOnePaneEnabled = PartnerConfigHelper.isEmbeddedActivityOnePaneEnabled(context);
         ActivityEmbeddingController activityEmbeddingController = ActivityEmbeddingController.getInstance(context);
-        Activity lookupActivityFromContext = PartnerConfigHelper.lookupActivityFromContext(context);
+        Activity activityLookupActivityFromContext = PartnerConfigHelper.lookupActivityFromContext(context);
         EmbeddingInterfaceCompat embeddingInterfaceCompat = ((ExtensionEmbeddingBackend) activityEmbeddingController.backend).embeddingExtension;
-        boolean isActivityEmbedded = embeddingInterfaceCompat != null ? ((EmbeddingCompat) embeddingInterfaceCompat).embeddingExtension.isActivityEmbedded(lookupActivityFromContext) : false;
+        boolean zIsActivityEmbedded = embeddingInterfaceCompat != null ? ((EmbeddingCompat) embeddingInterfaceCompat).embeddingExtension.isActivityEmbedded(activityLookupActivityFromContext) : false;
         LOG.getClass();
-        return isEmbeddedActivityOnePaneEnabled && isActivityEmbedded;
+        return zIsEmbeddedActivityOnePaneEnabled && zIsActivityEmbedded;
     }
 
     @Override // com.google.android.setupcompat.PartnerCustomizationLayout, com.google.android.setupcompat.internal.TemplateLayout
@@ -88,19 +89,19 @@ public class GlifLayout extends PartnerCustomizationLayout {
     }
 
     public final ScrollView getScrollView() {
-        View findManagedViewById = findManagedViewById(R.id.sud_scroll_view);
-        if (findManagedViewById instanceof ScrollView) {
-            return (ScrollView) findManagedViewById;
+        View viewFindManagedViewById = findManagedViewById(R.id.sud_scroll_view);
+        if (viewFindManagedViewById instanceof ScrollView) {
+            return (ScrollView) viewFindManagedViewById;
         }
         return null;
     }
 
-    public final void init$1(AttributeSet attributeSet, int i) {
+    public final void init$1(AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         if (isInEditMode()) {
             return;
         }
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SudGlifLayout, i, 0);
-        this.applyPartnerHeavyThemeResource = shouldApplyPartnerResource() && obtainStyledAttributes.getBoolean(4, false);
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SudGlifLayout, i, 0);
+        this.applyPartnerHeavyThemeResource = shouldApplyPartnerResource() && typedArrayObtainStyledAttributes.getBoolean(4, false);
         registerMixin(HeaderMixin.class, new HeaderMixin(this, attributeSet, i));
         registerMixin(DescriptionMixin.class, new DescriptionMixin(this, attributeSet, i));
         registerMixin(IconMixin.class, new IconMixin(this, attributeSet, i));
@@ -114,46 +115,46 @@ public class GlifLayout extends PartnerCustomizationLayout {
         if (scrollView != null) {
             new ScrollViewScrollHandlingDelegate(requireScrollMixin, scrollView);
         }
-        ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(2);
+        ColorStateList colorStateList = typedArrayObtainStyledAttributes.getColorStateList(2);
         if (colorStateList != null) {
             this.primaryColor = colorStateList;
             updateBackground();
             ProgressBarMixin progressBarMixin = (ProgressBarMixin) getMixin(ProgressBarMixin.class);
             progressBarMixin.color = colorStateList;
-            ProgressBar peekProgressBar = progressBarMixin.peekProgressBar();
-            if (peekProgressBar != null) {
-                peekProgressBar.setIndeterminateTintList(colorStateList);
-                peekProgressBar.setProgressBackgroundTintList(colorStateList);
+            ProgressBar progressBarPeekProgressBar = progressBarMixin.peekProgressBar();
+            if (progressBarPeekProgressBar != null) {
+                progressBarPeekProgressBar.setIndeterminateTintList(colorStateList);
+                progressBarPeekProgressBar.setProgressBackgroundTintList(colorStateList);
             }
         }
         if (shouldApplyPartnerHeavyThemeResource() && !useFullDynamicColor()) {
             getRootView().setBackgroundColor(PartnerConfigHelper.get(getContext()).getColor(getContext(), PartnerConfig.CONFIG_LAYOUT_BACKGROUND_COLOR));
         }
-        View findManagedViewById = findManagedViewById(R.id.sud_layout_content);
-        if (findManagedViewById != null) {
+        View viewFindManagedViewById = findManagedViewById(R.id.sud_layout_content);
+        if (viewFindManagedViewById != null) {
             if (shouldApplyPartnerResource()) {
-                LayoutStyler.applyPartnerCustomizationExtraPaddingStyle(findManagedViewById);
+                LayoutStyler.applyPartnerCustomizationExtraPaddingStyle(viewFindManagedViewById);
             }
             if (!(this instanceof GlifPreferenceLayout)) {
-                tryApplyPartnerCustomizationContentPaddingTopStyle(findManagedViewById);
+                tryApplyPartnerCustomizationContentPaddingTopStyle(viewFindManagedViewById);
             }
         }
         updateLandscapeMiddleHorizontalSpacing();
         if (KeyboardHelper.isKeyboardFocusEnhancementEnabled(getContext())) {
-            View findManagedViewById2 = findManagedViewById(R.id.sud_header_scroll_view);
-            if (findManagedViewById2 != null) {
-                findManagedViewById2.setFocusable(false);
+            View viewFindManagedViewById2 = findManagedViewById(R.id.sud_header_scroll_view);
+            if (viewFindManagedViewById2 != null) {
+                viewFindManagedViewById2.setFocusable(false);
             }
-            View findManagedViewById3 = findManagedViewById(R.id.sud_scroll_view);
-            if (findManagedViewById3 != null) {
-                findManagedViewById3.setFocusable(false);
+            View viewFindManagedViewById3 = findManagedViewById(R.id.sud_scroll_view);
+            if (viewFindManagedViewById3 != null) {
+                viewFindManagedViewById3.setFocusable(false);
             }
         }
-        this.backgroundBaseColor = obtainStyledAttributes.getColorStateList(0);
+        this.backgroundBaseColor = typedArrayObtainStyledAttributes.getColorStateList(0);
         updateBackground();
-        this.backgroundPatterned = obtainStyledAttributes.getBoolean(1, true);
+        this.backgroundPatterned = typedArrayObtainStyledAttributes.getBoolean(1, true);
         updateBackground();
-        int resourceId = obtainStyledAttributes.getResourceId(3, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(3, 0);
         if (resourceId != 0) {
             ViewStub viewStub = (ViewStub) findManagedViewById(R.id.sud_layout_sticky_header);
             viewStub.setLayoutResource(resourceId);
@@ -163,7 +164,7 @@ public class GlifLayout extends PartnerCustomizationLayout {
             initScrollingListener();
         }
         initBackButton();
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public final void initBackButton() {
@@ -171,7 +172,7 @@ public class GlifLayout extends PartnerCustomizationLayout {
             LOG.atDebug("isGlifExpressiveEnabled is false");
             return;
         }
-        Activity lookupActivityFromContext = PartnerConfigHelper.lookupActivityFromContext(getContext());
+        Activity activityLookupActivityFromContext = PartnerConfigHelper.lookupActivityFromContext(getContext());
         final FloatingBackButtonMixin floatingBackButtonMixin = (FloatingBackButtonMixin) getMixin(FloatingBackButtonMixin.class);
         if (floatingBackButtonMixin == null) {
             LOG.w("FloatingBackButtonMixin button is null");
@@ -182,13 +183,13 @@ public class GlifLayout extends PartnerCustomizationLayout {
             backButton.setVisibility(0);
             ((FrameLayout) floatingBackButtonMixin.templateLayout.findManagedViewById(R.id.sud_layout_floating_back_button_container)).setVisibility(0);
         }
-        final GlifLayout$$ExternalSyntheticLambda1 glifLayout$$ExternalSyntheticLambda1 = new GlifLayout$$ExternalSyntheticLambda1(lookupActivityFromContext);
+        final GlifLayout$$ExternalSyntheticLambda1 glifLayout$$ExternalSyntheticLambda1 = new GlifLayout$$ExternalSyntheticLambda1(activityLookupActivityFromContext);
         Button backButton2 = floatingBackButtonMixin.getBackButton();
         if (backButton2 != null) {
             backButton2.setOnClickListener(new View.OnClickListener() { // from class: com.google.android.setupdesign.template.FloatingBackButtonMixin$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    FloatingBackButtonMixin floatingBackButtonMixin2 = FloatingBackButtonMixin.this;
+                    FloatingBackButtonMixin floatingBackButtonMixin2 = floatingBackButtonMixin;
                     glifLayout$$ExternalSyntheticLambda1.onClick(view);
                     floatingBackButtonMixin2.clickCount++;
                 }
@@ -203,7 +204,7 @@ public class GlifLayout extends PartnerCustomizationLayout {
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.google.android.setupdesign.GlifLayout$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    GlifLayout glifLayout = GlifLayout.this;
+                    GlifLayout glifLayout = this.f$0;
                     ScrollView scrollView2 = scrollView;
                     Logger logger = GlifLayout.LOG;
                     glifLayout.getClass();
@@ -233,10 +234,10 @@ public class GlifLayout extends PartnerCustomizationLayout {
             } else {
                 persistableBundle = PersistableBundle.EMPTY;
             }
-            CustomEvent create = CustomEvent.create(MetricKey.get("SetupDesignMetrics", this.activity), persistableBundle);
-            SetupMetricsLogger.logCustomEvent(getContext(), create);
+            CustomEvent customEventCreate = CustomEvent.create(MetricKey.get("SetupDesignMetrics", this.activity), persistableBundle);
+            SetupMetricsLogger.logCustomEvent(getContext(), customEventCreate);
             Logger logger = LOG;
-            CustomEvent.toBundle(create).toString();
+            CustomEvent.toBundle(customEventCreate).toString();
             logger.getClass();
         }
         ScrollView scrollView = getScrollView();
@@ -246,7 +247,7 @@ public class GlifLayout extends PartnerCustomizationLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         super.onFinishInflate();
         ((IconMixin) getMixin(IconMixin.class)).tryApplyPartnerCustomizationStyle();
         ((HeaderMixin) getMixin(HeaderMixin.class)).tryApplyPartnerCustomizationStyle();
@@ -256,33 +257,33 @@ public class GlifLayout extends PartnerCustomizationLayout {
             TextViewPartnerStyler.applyPartnerCustomizationStyle(textView, new TextViewPartnerStyler.TextPartnerConfigs(PartnerConfig.CONFIG_DESCRIPTION_TEXT_COLOR, PartnerConfig.CONFIG_DESCRIPTION_LINK_TEXT_COLOR, PartnerConfig.CONFIG_DESCRIPTION_TEXT_SIZE, PartnerConfig.CONFIG_DESCRIPTION_FONT_FAMILY, PartnerConfig.CONFIG_DESCRIPTION_FONT_WEIGHT, PartnerConfig.CONFIG_DESCRIPTION_LINK_FONT_FAMILY, PartnerConfig.CONFIG_DESCRIPTION_TEXT_MARGIN_TOP, PartnerConfig.CONFIG_DESCRIPTION_TEXT_MARGIN_BOTTOM, PartnerStyleHelper.getLayoutGravity(textView.getContext())));
         }
         ProgressBarMixin progressBarMixin = (ProgressBarMixin) getMixin(ProgressBarMixin.class);
-        ProgressBar peekProgressBar = progressBarMixin.peekProgressBar();
-        if (progressBarMixin.useBottomProgressBar && peekProgressBar != null) {
+        ProgressBar progressBarPeekProgressBar = progressBarMixin.peekProgressBar();
+        if (progressBarMixin.useBottomProgressBar && progressBarPeekProgressBar != null) {
             TemplateLayout templateLayout2 = progressBarMixin.templateLayout;
             if (!(templateLayout2 instanceof GlifLayout) ? false : ((GlifLayout) templateLayout2).shouldApplyPartnerHeavyThemeResource()) {
-                Context context = peekProgressBar.getContext();
-                ViewGroup.LayoutParams layoutParams = peekProgressBar.getLayoutParams();
+                Context context = progressBarPeekProgressBar.getContext();
+                ViewGroup.LayoutParams layoutParams = progressBarPeekProgressBar.getLayoutParams();
                 if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
                     ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams;
-                    int i = marginLayoutParams.topMargin;
+                    int dimension = marginLayoutParams.topMargin;
                     PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context);
                     PartnerConfig partnerConfig = PartnerConfig.CONFIG_PROGRESS_BAR_MARGIN_TOP;
                     if (partnerConfigHelper.isPartnerConfigAvailable(partnerConfig)) {
-                        i = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, context.getResources().getDimension(R.dimen.sud_progress_bar_margin_top));
+                        dimension = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, context.getResources().getDimension(R.dimen.sud_progress_bar_margin_top));
                     }
-                    int i2 = marginLayoutParams.bottomMargin;
+                    int dimension2 = marginLayoutParams.bottomMargin;
                     PartnerConfigHelper partnerConfigHelper2 = PartnerConfigHelper.get(context);
                     PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_PROGRESS_BAR_MARGIN_BOTTOM;
                     if (partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2)) {
-                        i2 = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig2, context.getResources().getDimension(R.dimen.sud_progress_bar_margin_bottom));
+                        dimension2 = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig2, context.getResources().getDimension(R.dimen.sud_progress_bar_margin_bottom));
                     }
-                    if (i != marginLayoutParams.topMargin || i2 != marginLayoutParams.bottomMargin) {
-                        marginLayoutParams.setMargins(marginLayoutParams.leftMargin, i, marginLayoutParams.rightMargin, i2);
+                    if (dimension != marginLayoutParams.topMargin || dimension2 != marginLayoutParams.bottomMargin) {
+                        marginLayoutParams.setMargins(marginLayoutParams.leftMargin, dimension, marginLayoutParams.rightMargin, dimension2);
                     }
                 }
             } else {
-                Context context2 = peekProgressBar.getContext();
-                ViewGroup.LayoutParams layoutParams2 = peekProgressBar.getLayoutParams();
+                Context context2 = progressBarPeekProgressBar.getContext();
+                ViewGroup.LayoutParams layoutParams2 = progressBarPeekProgressBar.getLayoutParams();
                 if (layoutParams2 instanceof ViewGroup.MarginLayoutParams) {
                     ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) layoutParams2;
                     marginLayoutParams2.setMargins(marginLayoutParams2.leftMargin, (int) context2.getResources().getDimension(R.dimen.sud_progress_bar_margin_top), marginLayoutParams2.rightMargin, (int) context2.getResources().getDimension(R.dimen.sud_progress_bar_margin_bottom));
@@ -304,9 +305,9 @@ public class GlifLayout extends PartnerCustomizationLayout {
                 }
                 imageView.setMaxHeight((int) PartnerConfigHelper.get(context3).getDimension(context3, PartnerConfig.CONFIG_ACCOUNT_AVATAR_SIZE, context3.getResources().getDimension(R.dimen.sud_account_avatar_max_height)));
                 textView2.setTextSize(0, (int) PartnerConfigHelper.get(context3).getDimension(context3, PartnerConfig.CONFIG_ACCOUNT_NAME_TEXT_SIZE, context3.getResources().getDimension(R.dimen.sud_account_name_text_size)));
-                Typeface create = Typeface.create(PartnerConfigHelper.get(context3).getString(context3, PartnerConfig.CONFIG_ACCOUNT_NAME_FONT_FAMILY), 0);
-                if (create != null) {
-                    textView2.setTypeface(create);
+                Typeface typefaceCreate = Typeface.create(PartnerConfigHelper.get(context3).getString(context3, PartnerConfig.CONFIG_ACCOUNT_NAME_FONT_FAMILY), 0);
+                if (typefaceCreate != null) {
+                    textView2.setTypeface(typefaceCreate);
                 }
                 linearLayout.setGravity(PartnerStyleHelper.getLayoutGravity(linearLayout.getContext()));
             }
@@ -320,22 +321,22 @@ public class GlifLayout extends PartnerCustomizationLayout {
                 if (frameLayout != null) {
                     Context context4 = frameLayout.getContext();
                     ViewGroup.LayoutParams layoutParams4 = frameLayout.getLayoutParams();
-                    int dimension = (int) context4.getResources().getDimension(R.dimen.sud_glif_expressive_back_button_height);
+                    int dimension3 = (int) context4.getResources().getDimension(R.dimen.sud_glif_expressive_back_button_height);
                     PartnerConfig partnerConfig3 = PartnerConfig.CONFIG_ICON_SIZE;
-                    int dimension2 = PartnerConfigHelper.get(context4).isPartnerConfigAvailable(partnerConfig3) ? (int) PartnerConfigHelper.get(context4).getDimension(context4, partnerConfig3, 0.0f) : 0;
-                    int i3 = dimension2 > dimension ? dimension2 - dimension : 0;
+                    int dimension4 = PartnerConfigHelper.get(context4).isPartnerConfigAvailable(partnerConfig3) ? (int) PartnerConfigHelper.get(context4).getDimension(context4, partnerConfig3, 0.0f) : 0;
+                    int i = dimension4 > dimension3 ? dimension4 - dimension3 : 0;
                     ViewGroup.MarginLayoutParams marginLayoutParams4 = (ViewGroup.MarginLayoutParams) layoutParams4;
                     PartnerConfig partnerConfig4 = PartnerConfig.CONFIG_ICON_MARGIN_TOP;
-                    int i4 = marginLayoutParams4.topMargin;
+                    int dimension5 = marginLayoutParams4.topMargin;
                     if (PartnerConfigHelper.get(context4).isPartnerConfigAvailable(partnerConfig4)) {
-                        i4 = (int) PartnerConfigHelper.get(context4).getDimension(context4, partnerConfig4, 0.0f);
+                        dimension5 = (int) PartnerConfigHelper.get(context4).getDimension(context4, partnerConfig4, 0.0f);
                     }
-                    if (i3 != 0) {
-                        i4 += i3 / 2;
+                    if (i != 0) {
+                        dimension5 += i / 2;
                     }
-                    if (i4 != marginLayoutParams4.topMargin) {
+                    if (dimension5 != marginLayoutParams4.topMargin) {
                         FrameLayout.LayoutParams layoutParams5 = new FrameLayout.LayoutParams(-2, -2);
-                        layoutParams5.setMargins(marginLayoutParams4.leftMargin, i4, marginLayoutParams4.rightMargin, marginLayoutParams4.bottomMargin);
+                        layoutParams5.setMargins(marginLayoutParams4.leftMargin, dimension5, marginLayoutParams4.rightMargin, marginLayoutParams4.bottomMargin);
                         frameLayout.setLayoutParams(layoutParams5);
                     }
                 }
@@ -406,8 +407,8 @@ public class GlifLayout extends PartnerCustomizationLayout {
         Context context = view.getContext();
         PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context);
         PartnerConfig partnerConfig = PartnerConfig.CONFIG_CONTENT_PADDING_TOP;
-        boolean isPartnerConfigAvailable = partnerConfigHelper.isPartnerConfigAvailable(partnerConfig);
-        if (shouldApplyPartnerResource() && isPartnerConfigAvailable && (dimension = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f)) != view.getPaddingTop()) {
+        boolean zIsPartnerConfigAvailable = partnerConfigHelper.isPartnerConfigAvailable(partnerConfig);
+        if (shouldApplyPartnerResource() && zIsPartnerConfigAvailable && (dimension = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f)) != view.getPaddingTop()) {
             view.setPadding(view.getPaddingStart(), dimension, view.getPaddingEnd(), view.getPaddingBottom());
         }
     }
@@ -426,101 +427,54 @@ public class GlifLayout extends PartnerCustomizationLayout {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00d8  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0065  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x00bf  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateLandscapeMiddleHorizontalSpacing() {
-        /*
-            r8 = this;
-            android.content.res.Resources r0 = r8.getResources()
-            r1 = 2131171445(0x7f071875, float:1.7957277E38)
-            int r0 = r0.getDimensionPixelSize(r1)
-            boolean r1 = r8.shouldApplyPartnerResource()
-            r2 = 0
-            if (r1 == 0) goto L33
-            android.content.Context r1 = r8.getContext()
-            com.google.android.setupcompat.partnerconfig.PartnerConfigHelper r1 = com.google.android.setupcompat.partnerconfig.PartnerConfigHelper.get(r1)
-            com.google.android.setupcompat.partnerconfig.PartnerConfig r3 = com.google.android.setupcompat.partnerconfig.PartnerConfig.CONFIG_LAND_MIDDLE_HORIZONTAL_SPACING
-            boolean r1 = r1.isPartnerConfigAvailable(r3)
-            if (r1 == 0) goto L33
-            android.content.Context r0 = r8.getContext()
-            com.google.android.setupcompat.partnerconfig.PartnerConfigHelper r0 = com.google.android.setupcompat.partnerconfig.PartnerConfigHelper.get(r0)
-            android.content.Context r1 = r8.getContext()
-            float r0 = r0.getDimension(r1, r3, r2)
-            int r0 = (int) r0
-        L33:
-            r1 = 2131365221(0x7f0a0d65, float:1.8350301E38)
-            android.view.View r1 = r8.findManagedViewById(r1)
-            r3 = 0
-            if (r1 == 0) goto L8e
-            boolean r4 = r8.shouldApplyPartnerResource()
-            if (r4 == 0) goto L65
-            android.content.Context r4 = r8.getContext()
-            com.google.android.setupcompat.partnerconfig.PartnerConfigHelper r4 = com.google.android.setupcompat.partnerconfig.PartnerConfigHelper.get(r4)
-            com.google.android.setupcompat.partnerconfig.PartnerConfig r5 = com.google.android.setupcompat.partnerconfig.PartnerConfig.CONFIG_LAYOUT_MARGIN_END
-            boolean r4 = r4.isPartnerConfigAvailable(r5)
-            if (r4 == 0) goto L65
-            android.content.Context r4 = r8.getContext()
-            com.google.android.setupcompat.partnerconfig.PartnerConfigHelper r4 = com.google.android.setupcompat.partnerconfig.PartnerConfigHelper.get(r4)
-            android.content.Context r6 = r8.getContext()
-            float r4 = r4.getDimension(r6, r5, r2)
-            int r4 = (int) r4
-            goto L7c
-        L65:
-            android.content.Context r4 = r8.getContext()
-            r5 = 2130970410(0x7f04072a, float:1.754953E38)
-            int[] r5 = new int[]{r5}
-            android.content.res.TypedArray r4 = r4.obtainStyledAttributes(r5)
-            int r5 = r4.getDimensionPixelSize(r3, r3)
-            r4.recycle()
-            r4 = r5
-        L7c:
-            int r5 = r0 / 2
-            int r5 = r5 - r4
-            int r4 = r1.getPaddingStart()
-            int r6 = r1.getPaddingTop()
-            int r7 = r1.getPaddingBottom()
-            r1.setPadding(r4, r6, r5, r7)
-        L8e:
-            r4 = 2131365220(0x7f0a0d64, float:1.83503E38)
-            android.view.View r4 = r8.findManagedViewById(r4)
-            if (r4 == 0) goto Leb
-            boolean r5 = r8.shouldApplyPartnerResource()
-            if (r5 == 0) goto Lbf
-            android.content.Context r5 = r8.getContext()
-            com.google.android.setupcompat.partnerconfig.PartnerConfigHelper r5 = com.google.android.setupcompat.partnerconfig.PartnerConfigHelper.get(r5)
-            com.google.android.setupcompat.partnerconfig.PartnerConfig r6 = com.google.android.setupcompat.partnerconfig.PartnerConfig.CONFIG_LAYOUT_MARGIN_START
-            boolean r5 = r5.isPartnerConfigAvailable(r6)
-            if (r5 == 0) goto Lbf
-            android.content.Context r5 = r8.getContext()
-            com.google.android.setupcompat.partnerconfig.PartnerConfigHelper r5 = com.google.android.setupcompat.partnerconfig.PartnerConfigHelper.get(r5)
-            android.content.Context r8 = r8.getContext()
-            float r8 = r5.getDimension(r8, r6, r2)
-            int r8 = (int) r8
-            goto Ld6
-        Lbf:
-            android.content.Context r8 = r8.getContext()
-            r2 = 2130970411(0x7f04072b, float:1.7549531E38)
-            int[] r2 = new int[]{r2}
-            android.content.res.TypedArray r8 = r8.obtainStyledAttributes(r2)
-            int r2 = r8.getDimensionPixelSize(r3, r3)
-            r8.recycle()
-            r8 = r2
-        Ld6:
-            if (r1 == 0) goto Ldc
-            int r0 = r0 / 2
-            int r3 = r0 - r8
-        Ldc:
-            int r8 = r4.getPaddingTop()
-            int r0 = r4.getPaddingEnd()
-            int r1 = r4.getPaddingBottom()
-            r4.setPadding(r3, r8, r0, r1)
-        Leb:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.setupdesign.GlifLayout.updateLandscapeMiddleHorizontalSpacing():void");
+    public final void updateLandscapeMiddleHorizontalSpacing() throws Resources.NotFoundException {
+        int dimension;
+        int dimension2;
+        int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.sud_glif_land_middle_horizontal_spacing);
+        if (shouldApplyPartnerResource()) {
+            PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(getContext());
+            PartnerConfig partnerConfig = PartnerConfig.CONFIG_LAND_MIDDLE_HORIZONTAL_SPACING;
+            if (partnerConfigHelper.isPartnerConfigAvailable(partnerConfig)) {
+                dimensionPixelSize = (int) PartnerConfigHelper.get(getContext()).getDimension(getContext(), partnerConfig, 0.0f);
+            }
+        }
+        View viewFindManagedViewById = findManagedViewById(R.id.sud_landscape_header_area);
+        if (viewFindManagedViewById != null) {
+            if (shouldApplyPartnerResource()) {
+                PartnerConfigHelper partnerConfigHelper2 = PartnerConfigHelper.get(getContext());
+                PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_LAYOUT_MARGIN_END;
+                if (partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2)) {
+                    dimension2 = (int) PartnerConfigHelper.get(getContext()).getDimension(getContext(), partnerConfig2, 0.0f);
+                } else {
+                    TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(new int[]{R.attr.sudMarginEnd});
+                    int dimensionPixelSize2 = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+                    typedArrayObtainStyledAttributes.recycle();
+                    dimension2 = dimensionPixelSize2;
+                }
+                viewFindManagedViewById.setPadding(viewFindManagedViewById.getPaddingStart(), viewFindManagedViewById.getPaddingTop(), (dimensionPixelSize / 2) - dimension2, viewFindManagedViewById.getPaddingBottom());
+            }
+        }
+        View viewFindManagedViewById2 = findManagedViewById(R.id.sud_landscape_content_area);
+        if (viewFindManagedViewById2 != null) {
+            if (shouldApplyPartnerResource()) {
+                PartnerConfigHelper partnerConfigHelper3 = PartnerConfigHelper.get(getContext());
+                PartnerConfig partnerConfig3 = PartnerConfig.CONFIG_LAYOUT_MARGIN_START;
+                if (partnerConfigHelper3.isPartnerConfigAvailable(partnerConfig3)) {
+                    dimension = (int) PartnerConfigHelper.get(getContext()).getDimension(getContext(), partnerConfig3, 0.0f);
+                } else {
+                    TypedArray typedArrayObtainStyledAttributes2 = getContext().obtainStyledAttributes(new int[]{R.attr.sudMarginStart});
+                    int dimensionPixelSize3 = typedArrayObtainStyledAttributes2.getDimensionPixelSize(0, 0);
+                    typedArrayObtainStyledAttributes2.recycle();
+                    dimension = dimensionPixelSize3;
+                }
+            }
+            viewFindManagedViewById2.setPadding(viewFindManagedViewById != null ? (dimensionPixelSize / 2) - dimension : 0, viewFindManagedViewById2.getPaddingTop(), viewFindManagedViewById2.getPaddingEnd(), viewFindManagedViewById2.getPaddingBottom());
+        }
     }
 
     public GlifLayout(Context context, int i) {
@@ -528,7 +482,7 @@ public class GlifLayout extends PartnerCustomizationLayout {
     }
 
     /* JADX WARN: Type inference failed for: r1v3, types: [com.google.android.setupdesign.GlifLayout$1] */
-    public GlifLayout(Context context, int i, int i2) {
+    public GlifLayout(Context context, int i, int i2) throws Resources.NotFoundException {
         super(context, i, i2);
         this.backgroundPatterned = true;
         this.applyPartnerHeavyThemeResource = false;
@@ -544,7 +498,7 @@ public class GlifLayout extends PartnerCustomizationLayout {
     }
 
     /* JADX WARN: Type inference failed for: r1v3, types: [com.google.android.setupdesign.GlifLayout$1] */
-    public GlifLayout(Context context, AttributeSet attributeSet) {
+    public GlifLayout(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.backgroundPatterned = true;
         this.applyPartnerHeavyThemeResource = false;
@@ -560,7 +514,7 @@ public class GlifLayout extends PartnerCustomizationLayout {
     }
 
     /* JADX WARN: Type inference failed for: r1v3, types: [com.google.android.setupdesign.GlifLayout$1] */
-    public GlifLayout(Context context, AttributeSet attributeSet, int i) {
+    public GlifLayout(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         this.backgroundPatterned = true;
         this.applyPartnerHeavyThemeResource = false;

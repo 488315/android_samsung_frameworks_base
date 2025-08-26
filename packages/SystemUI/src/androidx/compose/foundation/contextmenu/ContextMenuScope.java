@@ -16,7 +16,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ContextMenuScope {
     public final SnapshotStateList composables = new SnapshotStateList();
@@ -36,20 +35,20 @@ public final class ContextMenuScope {
             public final Object invoke(Object obj, Object obj2, Object obj3) {
                 ContextMenuColors contextMenuColors = (ContextMenuColors) obj;
                 Composer composer = (Composer) obj2;
-                int intValue = ((Number) obj3).intValue();
-                if ((intValue & 6) == 0) {
-                    intValue |= ((ComposerImpl) composer).changed(contextMenuColors) ? 4 : 2;
+                int iIntValue = ((Number) obj3).intValue();
+                if ((iIntValue & 6) == 0) {
+                    iIntValue |= ((ComposerImpl) composer).changed(contextMenuColors) ? 4 : 2;
                 }
                 ComposerImpl composerImpl = (ComposerImpl) composer;
-                if (composerImpl.shouldExecute(intValue & 1, (intValue & 19) != 18)) {
+                if (composerImpl.shouldExecute(iIntValue & 1, (iIntValue & 19) != 18)) {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("androidx.compose.foundation.contextmenu.ContextMenuScope.item.<anonymous> (ContextMenuUi.android.kt:282)");
                     }
-                    String str = (String) Function2.this.invoke(composerImpl, 0);
+                    String str = (String) contextMenu_androidKt$TextItem$1.invoke(composerImpl, 0);
                     if (StringsKt__StringsKt.isBlank(str)) {
                         InlineClassHelperKt.throwIllegalStateException("Label must not be blank");
                     }
-                    ContextMenuUi_androidKt.ContextMenuItem(str, z, contextMenuColors, companion, function3, function0, composerImpl, (intValue << 6) & 896, 0);
+                    ContextMenuUi_androidKt.ContextMenuItem(str, z, contextMenuColors, companion, function3, function0, composerImpl, (iIntValue << 6) & 896, 0);
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }
@@ -83,9 +82,9 @@ public final class ContextMenuScope {
         } else {
             composerImpl.skipToGroupEnd();
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.foundation.contextmenu.ContextMenuScope$Content$2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.foundation.contextmenu.ContextMenuScope$Content$2
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -94,7 +93,7 @@ public final class ContextMenuScope {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Number) obj2).intValue();
-                    ContextMenuScope.this.Content$foundation_release(contextMenuColors, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1));
+                    this.$tmp0_rcvr.Content$foundation_release(contextMenuColors, (Composer) obj, RecomposeScopeImplKt.updateChangedFlags(i | 1));
                     return Unit.INSTANCE;
                 }
             };

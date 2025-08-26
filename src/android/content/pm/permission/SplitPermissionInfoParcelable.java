@@ -89,16 +89,16 @@ public class SplitPermissionInfoParcelable implements Parcelable {
     }
 
     protected SplitPermissionInfoParcelable(Parcel parcel) {
-        String readString = parcel.readString();
+        String string = parcel.readString();
         ArrayList arrayList = new ArrayList();
         parcel.readStringList(arrayList);
-        int readInt = parcel.readInt();
-        this.mSplitPermission = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
+        int i = parcel.readInt();
+        this.mSplitPermission = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
         this.mNewPermissions = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
-        this.mTargetSdk = readInt;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, readInt, "from", 0L);
+        this.mTargetSdk = i;
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i, "from", 0L);
         onConstructed();
     }
 }

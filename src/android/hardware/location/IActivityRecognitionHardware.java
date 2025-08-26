@@ -107,9 +107,9 @@ public interface IActivityRecognitionHardware extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IActivityRecognitionHardware)) {
-                return (IActivityRecognitionHardware) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IActivityRecognitionHardware)) {
+                return (IActivityRecognitionHardware) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -156,47 +156,47 @@ public interface IActivityRecognitionHardware extends IInterface {
                     parcel2.writeStringArray(supportedActivities);
                     return true;
                 case 2:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isActivitySupported = isActivitySupported(readString);
+                    boolean zIsActivitySupported = isActivitySupported(string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isActivitySupported);
+                    parcel2.writeBoolean(zIsActivitySupported);
                     return true;
                 case 3:
-                    IActivityRecognitionHardwareSink asInterface = IActivityRecognitionHardwareSink.Stub.asInterface(parcel.readStrongBinder());
+                    IActivityRecognitionHardwareSink iActivityRecognitionHardwareSinkAsInterface = IActivityRecognitionHardwareSink.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerSink = registerSink(asInterface);
+                    boolean zRegisterSink = registerSink(iActivityRecognitionHardwareSinkAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerSink);
+                    parcel2.writeBoolean(zRegisterSink);
                     return true;
                 case 4:
-                    IActivityRecognitionHardwareSink asInterface2 = IActivityRecognitionHardwareSink.Stub.asInterface(parcel.readStrongBinder());
+                    IActivityRecognitionHardwareSink iActivityRecognitionHardwareSinkAsInterface2 = IActivityRecognitionHardwareSink.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterSink = unregisterSink(asInterface2);
+                    boolean zUnregisterSink = unregisterSink(iActivityRecognitionHardwareSinkAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterSink);
+                    parcel2.writeBoolean(zUnregisterSink);
                     return true;
                 case 5:
-                    String readString2 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    long readLong = parcel.readLong();
+                    String string2 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean enableActivityEvent = enableActivityEvent(readString2, readInt, readLong);
+                    boolean zEnableActivityEvent = enableActivityEvent(string2, i3, j);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableActivityEvent);
+                    parcel2.writeBoolean(zEnableActivityEvent);
                     return true;
                 case 6:
-                    String readString3 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean disableActivityEvent = disableActivityEvent(readString3, readInt2);
+                    boolean zDisableActivityEvent = disableActivityEvent(string3, i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disableActivityEvent);
+                    parcel2.writeBoolean(zDisableActivityEvent);
                     return true;
                 case 7:
-                    boolean flush = flush();
+                    boolean zFlush = flush();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(flush);
+                    parcel2.writeBoolean(zFlush);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -221,114 +221,114 @@ public interface IActivityRecognitionHardware extends IInterface {
 
             @Override // android.hardware.location.IActivityRecognitionHardware
             public String[] getSupportedActivities() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardware
             public boolean isActivitySupported(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardware
             public boolean registerSink(IActivityRecognitionHardwareSink iActivityRecognitionHardwareSink) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iActivityRecognitionHardwareSink);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iActivityRecognitionHardwareSink);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardware
             public boolean unregisterSink(IActivityRecognitionHardwareSink iActivityRecognitionHardwareSink) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iActivityRecognitionHardwareSink);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iActivityRecognitionHardwareSink);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardware
             public boolean enableActivityEvent(String str, int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardware
             public boolean disableActivityEvent(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardware
             public boolean flush() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

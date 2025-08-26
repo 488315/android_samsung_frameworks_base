@@ -14,7 +14,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AodBurnInSection extends KeyguardSection {
     public AodBurnInLayer burnInLayer;
@@ -23,7 +22,7 @@ public final class AodBurnInSection extends KeyguardSection {
     public final Lazy emptyView$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.AodBurnInSection$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            View view = new View(AodBurnInSection.this.context, null);
+            View view = new View(this.f$0.context, null);
             view.setId(R.id.burn_in_layer_empty_view);
             view.setVisibility(8);
             return view;

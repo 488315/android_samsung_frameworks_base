@@ -143,17 +143,17 @@ public final class TranslationResponse implements Parcelable {
 
     TranslationResponse(Parcel parcel) {
         boolean z = (parcel.readByte() & 8) != 0;
-        int readInt = parcel.readInt();
-        SparseArray<TranslationResponseValue> readSparseArray = parcel.readSparseArray(TranslationResponseValue.class.getClassLoader());
-        SparseArray<ViewTranslationResponse> readSparseArray2 = parcel.readSparseArray(ViewTranslationResponse.class.getClassLoader());
-        this.mTranslationStatus = readInt;
-        if (readInt != 0 && readInt != 1 && readInt != 2) {
-            throw new IllegalArgumentException("translationStatus was " + readInt + " but must be one of: TRANSLATION_STATUS_SUCCESS(0), TRANSLATION_STATUS_UNKNOWN_ERROR(1), TRANSLATION_STATUS_CONTEXT_UNSUPPORTED(2)");
+        int i = parcel.readInt();
+        SparseArray<TranslationResponseValue> sparseArray = parcel.readSparseArray(TranslationResponseValue.class.getClassLoader());
+        SparseArray<ViewTranslationResponse> sparseArray2 = parcel.readSparseArray(ViewTranslationResponse.class.getClassLoader());
+        this.mTranslationStatus = i;
+        if (i != 0 && i != 1 && i != 2) {
+            throw new IllegalArgumentException("translationStatus was " + i + " but must be one of: TRANSLATION_STATUS_SUCCESS(0), TRANSLATION_STATUS_UNKNOWN_ERROR(1), TRANSLATION_STATUS_CONTEXT_UNSUPPORTED(2)");
         }
-        this.mTranslationResponseValues = readSparseArray;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readSparseArray);
-        this.mViewTranslationResponses = readSparseArray2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readSparseArray2);
+        this.mTranslationResponseValues = sparseArray;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) sparseArray);
+        this.mViewTranslationResponses = sparseArray2;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) sparseArray2);
         this.mFinalResponse = z;
     }
 

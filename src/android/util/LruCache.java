@@ -55,113 +55,78 @@ public class LruCache<K, V> {
                 return v2;
             }
             this.missCount++;
-            V create = create(k);
-            if (create == null) {
+            V vCreate = create(k);
+            if (vCreate == null) {
                 return null;
             }
             synchronized (this) {
                 this.createCount++;
-                v = (V) this.map.put(k, create);
+                v = (V) this.map.put(k, vCreate);
                 if (v != null) {
                     this.map.put(k, v);
                 } else {
-                    this.size += safeSizeOf(k, create);
+                    this.size += safeSizeOf(k, vCreate);
                 }
             }
             if (v != null) {
-                entryRemoved(false, k, create, v);
+                entryRemoved(false, k, vCreate, v);
                 return v;
             }
             trimToSize(this.maxSize);
-            return create;
+            return vCreate;
         }
     }
 
     public final V put(K k, V v) {
-        V put;
+        V vPut;
         if (k == null || v == null) {
             throw new NullPointerException("key == null || value == null");
         }
         synchronized (this) {
             this.putCount++;
             this.size += safeSizeOf(k, v);
-            put = this.map.put(k, v);
-            if (put != null) {
-                this.size -= safeSizeOf(k, put);
+            vPut = this.map.put(k, v);
+            if (vPut != null) {
+                this.size -= safeSizeOf(k, vPut);
             }
         }
-        if (put != null) {
-            entryRemoved(false, k, put, v);
+        if (vPut != null) {
+            entryRemoved(false, k, vPut, v);
         }
         trimToSize(this.maxSize);
-        return put;
+        return vPut;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x005f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x005f, code lost:
     
         throw new java.lang.IllegalStateException(getClass().getName() + ".sizeOf() is reporting inconsistent results!");
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void trimToSize(int r5) {
-        /*
-            r4 = this;
-        L0:
-            monitor-enter(r4)
-            int r0 = r4.size     // Catch: java.lang.Throwable -> L60
-            if (r0 < 0) goto L41
-            java.util.LinkedHashMap<K, V> r0 = r4.map     // Catch: java.lang.Throwable -> L60
-            boolean r0 = r0.isEmpty()     // Catch: java.lang.Throwable -> L60
-            if (r0 == 0) goto L11
-            int r0 = r4.size     // Catch: java.lang.Throwable -> L60
-            if (r0 != 0) goto L41
-        L11:
-            int r0 = r4.size     // Catch: java.lang.Throwable -> L60
-            if (r0 > r5) goto L17
-            monitor-exit(r4)     // Catch: java.lang.Throwable -> L60
-            return
-        L17:
-            java.util.Map$Entry r0 = r4.eldest()     // Catch: java.lang.Throwable -> L60
-            if (r0 != 0) goto L1f
-            monitor-exit(r4)     // Catch: java.lang.Throwable -> L60
-            return
-        L1f:
-            java.lang.Object r1 = r0.getKey()     // Catch: java.lang.Throwable -> L60
-            java.lang.Object r0 = r0.getValue()     // Catch: java.lang.Throwable -> L60
-            java.util.LinkedHashMap<K, V> r2 = r4.map     // Catch: java.lang.Throwable -> L60
-            r2.remove(r1)     // Catch: java.lang.Throwable -> L60
-            int r2 = r4.size     // Catch: java.lang.Throwable -> L60
-            int r3 = r4.safeSizeOf(r1, r0)     // Catch: java.lang.Throwable -> L60
-            int r2 = r2 - r3
-            r4.size = r2     // Catch: java.lang.Throwable -> L60
-            int r2 = r4.evictionCount     // Catch: java.lang.Throwable -> L60
-            r3 = 1
-            int r2 = r2 + r3
-            r4.evictionCount = r2     // Catch: java.lang.Throwable -> L60
-            monitor-exit(r4)     // Catch: java.lang.Throwable -> L60
-            r2 = 0
-            r4.entryRemoved(r3, r1, r0, r2)
-            goto L0
-        L41:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException     // Catch: java.lang.Throwable -> L60
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L60
-            r0.<init>()     // Catch: java.lang.Throwable -> L60
-            java.lang.Class r1 = r4.getClass()     // Catch: java.lang.Throwable -> L60
-            java.lang.String r1 = r1.getName()     // Catch: java.lang.Throwable -> L60
-            r0.append(r1)     // Catch: java.lang.Throwable -> L60
-            java.lang.String r1 = ".sizeOf() is reporting inconsistent results!"
-            r0.append(r1)     // Catch: java.lang.Throwable -> L60
-            java.lang.String r0 = r0.toString()     // Catch: java.lang.Throwable -> L60
-            r5.<init>(r0)     // Catch: java.lang.Throwable -> L60
-            throw r5     // Catch: java.lang.Throwable -> L60
-        L60:
-            r5 = move-exception
-            monitor-exit(r4)     // Catch: java.lang.Throwable -> L60
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.LruCache.trimToSize(int):void");
+    public void trimToSize(int i) {
+        K key;
+        V value;
+        while (true) {
+            synchronized (this) {
+                if (this.size < 0 || (this.map.isEmpty() && this.size != 0)) {
+                    break;
+                }
+                if (this.size <= i) {
+                    return;
+                }
+                Map.Entry<K, V> entryEldest = eldest();
+                if (entryEldest == null) {
+                    return;
+                }
+                key = entryEldest.getKey();
+                value = entryEldest.getValue();
+                this.map.remove(key);
+                this.size -= safeSizeOf(key, value);
+                this.evictionCount++;
+            }
+            entryRemoved(true, key, value, null);
+        }
     }
 
     private Map.Entry<K, V> eldest() {
@@ -169,26 +134,26 @@ public class LruCache<K, V> {
     }
 
     public final V remove(K k) {
-        V remove;
+        V vRemove;
         if (k == null) {
             throw new NullPointerException("key == null");
         }
         synchronized (this) {
-            remove = this.map.remove(k);
-            if (remove != null) {
-                this.size -= safeSizeOf(k, remove);
+            vRemove = this.map.remove(k);
+            if (vRemove != null) {
+                this.size -= safeSizeOf(k, vRemove);
             }
         }
-        if (remove != null) {
-            entryRemoved(false, k, remove, null);
+        if (vRemove != null) {
+            entryRemoved(false, k, vRemove, null);
         }
-        return remove;
+        return vRemove;
     }
 
     private int safeSizeOf(K k, V v) {
-        int sizeOf = sizeOf(k, v);
-        if (sizeOf >= 0) {
-            return sizeOf;
+        int iSizeOf = sizeOf(k, v);
+        if (iSizeOf >= 0) {
+            return iSizeOf;
         }
         throw new IllegalStateException("Negative size: " + k + "=" + v);
     }

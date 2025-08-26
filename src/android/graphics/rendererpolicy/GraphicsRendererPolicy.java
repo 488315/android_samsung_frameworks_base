@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.GraphicsStatsService;
-import android.graphics.rendererpolicy.GraphicsRendererPolicy;
 import android.graphics.rendererpolicy.ScpmApiContract;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
@@ -93,14 +93,14 @@ public class GraphicsRendererPolicy {
         initForScpm();
         this.mExecutorService.execute(new Runnable() { // from class: android.graphics.rendererpolicy.GraphicsRendererPolicy$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
-            public final void run() {
-                GraphicsRendererPolicy.this.lambda$init$0();
+            public final void run() throws IOException {
+                this.f$0.lambda$init$0();
             }
         });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$init$0() {
+    public /* synthetic */ void lambda$init$0() throws IOException {
         gLogD("start agent policy loading");
         tryScpmRegister();
         applyPolicyToChecker();
@@ -116,7 +116,7 @@ public class GraphicsRendererPolicy {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void applyPolicyToChecker() {
+    public void applyPolicyToChecker() throws IOException {
         gLogD("applyPolicyToChecker");
         InputStream fdFromStoredPolicy = getFdFromStoredPolicy();
         if (fdFromStoredPolicy == null) {
@@ -137,8 +137,8 @@ public class GraphicsRendererPolicy {
                 Slog.d(GraphicsRendererPolicy.TAG, "ACTION_UPDATE_RENDER_ENGINE");
                 GraphicsRendererPolicy.this.mExecutorService.execute(new Runnable() { // from class: android.graphics.rendererpolicy.GraphicsRendererPolicy$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        GraphicsRendererPolicy.AnonymousClass1.this.lambda$onReceive$0(context);
+                    public final void run() throws IOException {
+                        this.f$0.lambda$onReceive$0(context);
                     }
                 });
             } else if ("com.samsung.android.scpm.policy.CLEAR_DATA".equals(intent.getAction())) {
@@ -146,22 +146,22 @@ public class GraphicsRendererPolicy {
                 GraphicsRendererPolicy.this.mExecutorService.schedule(new Runnable() { // from class: android.graphics.rendererpolicy.GraphicsRendererPolicy$1$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        GraphicsRendererPolicy.AnonymousClass1.this.lambda$onReceive$1();
+                        this.f$0.lambda$onReceive$1();
                     }
                 }, 60L, TimeUnit.SECONDS);
             } else if (Intent.ACTION_LAZY_BOOT_COMPLETED.equals(intent.getAction())) {
                 Slog.d(GraphicsRendererPolicy.TAG, "ACTION_LAZY_BOOT_COMPLETED");
                 GraphicsRendererPolicy.this.mExecutorService.execute(new Runnable() { // from class: android.graphics.rendererpolicy.GraphicsRendererPolicy$1$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        GraphicsRendererPolicy.AnonymousClass1.this.lambda$onReceive$2(context);
+                    public final void run() throws IOException {
+                        this.f$0.lambda$onReceive$2(context);
                     }
                 });
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onReceive$0(Context context) {
+        public /* synthetic */ void lambda$onReceive$0(Context context) throws IOException {
             GraphicsRendererPolicy.this.loadScpmPolicy(context);
             GraphicsRendererPolicy.this.applyPolicyToChecker();
         }
@@ -172,7 +172,7 @@ public class GraphicsRendererPolicy {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onReceive$2(Context context) {
+        public /* synthetic */ void lambda$onReceive$2(Context context) throws IOException {
             GraphicsRendererPolicy.this.tryScpmRegister();
             GraphicsRendererPolicy.this.loadScpmPolicy(context);
             GraphicsRendererPolicy.this.applyPolicyToChecker();
@@ -197,7 +197,7 @@ public class GraphicsRendererPolicy {
         }
     }
 
-    public int getRendererType(String str) {
+    public int getRendererType(String str) throws NumberFormatException {
         if (this.mBlocklistChecker.checkSkiaGlBlocklist(makeQueryInfo(str))) {
             Slog.d(TAG, "pkg: " + str + " need to use GL.");
             return GraphicsStatsService.GraphicsStatsRenderEngine.GL.ordinal();
@@ -205,15 +205,15 @@ public class GraphicsRendererPolicy {
         return GraphicsStatsService.GraphicsStatsRenderEngine.VK.ordinal();
     }
 
-    private QueryInfo makeQueryInfo(String str) {
+    private QueryInfo makeQueryInfo(String str) throws NumberFormatException {
         String str2 = SystemProperties.get("ro.product.model", "");
         String str3 = SystemProperties.get("ro.soc.model", "");
-        int parseInt = Integer.parseInt(SystemProperties.get("ro.build.version.release", "0"));
-        gLogD("makeQueryInfo - packageName: " + str + ", modelName: " + str2 + ", chipsetName: " + str3 + ", osVersion: " + parseInt);
-        return new QueryInfo(str, str2, str3, parseInt);
+        int i = Integer.parseInt(SystemProperties.get("ro.build.version.release", "0"));
+        gLogD("makeQueryInfo - packageName: " + str + ", modelName: " + str2 + ", chipsetName: " + str3 + ", osVersion: " + i);
+        return new QueryInfo(str, str2, str3, i);
     }
 
-    private InputStream getFdFromStoredPolicy() {
+    private InputStream getFdFromStoredPolicy() throws IOException {
         try {
             File file = new File(AGENT_POLICY_FILE_DIRECTORY, AGENT_POLICY_UPDATED_FILE_NAME);
             if (!file.exists()) {
@@ -224,9 +224,9 @@ public class GraphicsRendererPolicy {
             FileOutputStream fileOutputStream = new FileOutputStream(file2);
             try {
                 this.mGraphicsRendererPolicyCipher.decrypt(file, fileOutputStream);
-                InputStream newInputStream = Files.newInputStream(file2.toPath(), new OpenOption[0]);
+                InputStream inputStreamNewInputStream = Files.newInputStream(file2.toPath(), new OpenOption[0]);
                 fileOutputStream.close();
-                return newInputStream;
+                return inputStreamNewInputStream;
             } finally {
             }
         } catch (Exception e) {
@@ -243,12 +243,12 @@ public class GraphicsRendererPolicy {
                 bundle.putString(ScpmApiContract.Key.APP_ID, APP_ID);
                 bundle.putString("version", "1.0.0");
                 bundle.putString(ScpmApiContract.Key.RECEIVER_PACKAGE_NAME, "android");
-                Bundle call = this.mContext.getContentResolver().call(this.SCPM_URI_V2, ScpmApiContract.Method.REGISTER, "android", bundle);
-                if (call != null) {
-                    int i = call.getInt("result", 1);
-                    String string = call.getString("token", null);
-                    int i2 = call.getInt(ScpmApiContract.Key.RCODE, -1);
-                    String string2 = call.getString(ScpmApiContract.Key.RMSG, "");
+                Bundle bundleCall = this.mContext.getContentResolver().call(this.SCPM_URI_V2, ScpmApiContract.Method.REGISTER, "android", bundle);
+                if (bundleCall != null) {
+                    int i = bundleCall.getInt("result", 1);
+                    String string = bundleCall.getString("token", null);
+                    int i2 = bundleCall.getInt(ScpmApiContract.Key.RCODE, -1);
+                    String string2 = bundleCall.getString(ScpmApiContract.Key.RMSG, "");
                     if (i == 1) {
                         gLogD("success to call");
                         return string;
@@ -267,6 +267,7 @@ public class GraphicsRendererPolicy {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void loadScpmPolicy(Context context) {
+        BufferedReader bufferedReader;
         gLogD("load policy start");
         if (TextUtils.isEmpty(this.mScpmToken)) {
             gLogD("try to get new permission");
@@ -276,67 +277,67 @@ public class GraphicsRendererPolicy {
             gLogD("fail due to permission error");
             return;
         }
-        Uri parse = Uri.parse(ScpmApiContract.URI_STRING + this.mScpmToken + "/hwui-skiagl-blocklist");
+        Uri uri = Uri.parse(ScpmApiContract.URI_STRING + this.mScpmToken + "/hwui-skiagl-blocklist");
         try {
-            ParcelFileDescriptor openFileDescriptor = context.getContentResolver().openFileDescriptor(parse, "r");
+            ParcelFileDescriptor parcelFileDescriptorOpenFileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r");
             try {
-                if (openFileDescriptor == null) {
+                if (parcelFileDescriptorOpenFileDescriptor == null) {
                     gLogD("pfd is null");
                     Bundle bundle = new Bundle();
                     bundle.putString("token", this.mScpmToken);
-                    Bundle callScpmApi = callScpmApi(parse, ScpmApiContract.Method.GET_LAST_ERROR, bundle);
-                    if (callScpmApi == null) {
+                    Bundle bundleCallScpmApi = callScpmApi(uri, ScpmApiContract.Method.GET_LAST_ERROR, bundle);
+                    if (bundleCallScpmApi == null) {
                         gLogD("bundle is null");
-                        if (openFileDescriptor == null) {
+                        if (parcelFileDescriptorOpenFileDescriptor == null) {
                             return;
                         }
                     } else {
-                        gLogD("code=" + callScpmApi.getInt(ScpmApiContract.Key.RCODE, -1) + ", msg=" + callScpmApi.getString(ScpmApiContract.Key.RMSG));
-                        if (openFileDescriptor == null) {
+                        gLogD("code=" + bundleCallScpmApi.getInt(ScpmApiContract.Key.RCODE, -1) + ", msg=" + bundleCallScpmApi.getString(ScpmApiContract.Key.RMSG));
+                        if (parcelFileDescriptorOpenFileDescriptor == null) {
                             return;
                         }
                     }
                 } else {
-                    FileDescriptor fileDescriptor = openFileDescriptor.getFileDescriptor();
+                    FileDescriptor fileDescriptor = parcelFileDescriptorOpenFileDescriptor.getFileDescriptor();
                     if (fileDescriptor == null) {
                         gLogD("fd is null");
-                        if (openFileDescriptor == null) {
+                        if (parcelFileDescriptorOpenFileDescriptor == null) {
                             return;
                         }
                     } else {
                         try {
-                            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileDescriptor));
-                            try {
-                                StringBuilder sb = new StringBuilder();
-                                while (true) {
-                                    String readLine = bufferedReader.readLine();
-                                    if (readLine == null) {
-                                        break;
-                                    } else {
-                                        sb.append(readLine);
-                                    }
-                                }
-                                storeScpmPolicyToFile(sb);
-                                bufferedReader.close();
-                            } catch (Throwable th) {
-                                try {
-                                    bufferedReader.close();
-                                } catch (Throwable th2) {
-                                    th.addSuppressed(th2);
-                                }
-                                throw th;
-                            }
+                            bufferedReader = new BufferedReader(new FileReader(fileDescriptor));
                         } catch (Exception e) {
                             gLogE("failed to store data. " + e);
                         }
-                        if (openFileDescriptor != null) {
-                            openFileDescriptor.close();
+                        try {
+                            StringBuilder sb = new StringBuilder();
+                            while (true) {
+                                String line = bufferedReader.readLine();
+                                if (line == null) {
+                                    break;
+                                } else {
+                                    sb.append(line);
+                                }
+                            }
+                            storeScpmPolicyToFile(sb);
+                            bufferedReader.close();
+                            if (parcelFileDescriptorOpenFileDescriptor != null) {
+                                parcelFileDescriptorOpenFileDescriptor.close();
+                                return;
+                            }
                             return;
+                        } catch (Throwable th) {
+                            try {
+                                bufferedReader.close();
+                            } catch (Throwable th2) {
+                                th.addSuppressed(th2);
+                            }
+                            throw th;
                         }
-                        return;
                     }
                 }
-                openFileDescriptor.close();
+                parcelFileDescriptorOpenFileDescriptor.close();
             } finally {
             }
         } catch (Exception e2) {
@@ -344,7 +345,7 @@ public class GraphicsRendererPolicy {
         }
     }
 
-    private void storeScpmPolicyToFile(StringBuilder sb) {
+    private void storeScpmPolicyToFile(StringBuilder sb) throws IOException {
         gLogD("HWUI Renderer policy begin ---------------------- ");
         gLogD(sb.toString());
         gLogD(" ------------------------- HWUI Renderer policy end");

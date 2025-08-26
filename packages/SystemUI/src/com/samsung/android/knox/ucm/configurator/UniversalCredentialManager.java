@@ -8,9 +8,12 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.util.Log;
+import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
+import com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.AppIdentity;
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EdmConstants;
+import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import com.samsung.android.knox.multiuser.MultiUserManager$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.ucm.configurator.IUniversalCredentialManager;
@@ -26,7 +29,6 @@ import java.security.spec.ECGenParameterSpec;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class UniversalCredentialManager {
     public static final String ACTION_UCM_CONFIG_STATUS = "com.samsung.android.knox.intent.action.UCM_CONFIG_STATUS";
@@ -119,84 +121,55 @@ public class UniversalCredentialManager {
     }
 
     public static synchronized UniversalCredentialManager getUCMManager(Context context) {
-        synchronized (UniversalCredentialManager.class) {
-            if (EdmConstants.getEnterpriseKnoxSdkVersion().compareTo(EdmConstants.EnterpriseKnoxSdkVersion.KNOX_ENTERPRISE_SDK_VERSION_2_6) < 0) {
-                Log.i(TAG, "getUCMManager : support above KNOX_ENTERPRISE_SDK_VERSION_2_6");
-                return null;
-            }
-            int userId = UserHandle.getUserId(Process.myUid());
-            if (isValidUser(context, userId)) {
-                return new UniversalCredentialManager(new ContextInfo(Process.myUid()), context);
-            }
-            Log.i(TAG, "getUCMManager : Invalid user request userId-" + userId);
+        if (EdmConstants.getEnterpriseKnoxSdkVersion().compareTo(EdmConstants.EnterpriseKnoxSdkVersion.KNOX_ENTERPRISE_SDK_VERSION_2_6) < 0) {
+            Log.i(TAG, "getUCMManager : support above KNOX_ENTERPRISE_SDK_VERSION_2_6");
             return null;
         }
+        int userId = UserHandle.getUserId(Process.myUid());
+        if (isValidUser(context, userId)) {
+            return new UniversalCredentialManager(new ContextInfo(Process.myUid()), context);
+        }
+        Log.i(TAG, "getUCMManager : Invalid user request userId-" + userId);
+        return null;
     }
 
     public static synchronized IUniversalCredentialManager getUCMService() {
-        IUniversalCredentialManager iUniversalCredentialManager;
-        synchronized (UniversalCredentialManager.class) {
-            try {
-                if (mUCMService == null) {
-                    mUCMService = IUniversalCredentialManager.Stub.asInterface(ServiceManager.getService("knox_ucsm_policy"));
-                }
-                iUniversalCredentialManager = mUCMService;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (mUCMService == null) {
+                mUCMService = IUniversalCredentialManager.Stub.asInterface(ServiceManager.getService("knox_ucsm_policy"));
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return iUniversalCredentialManager;
+        return mUCMService;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x001a, code lost:
-    
-        if (r3.exists(r4) != false) goto L14;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x001f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean isValidUser(android.content.Context r3, int r4) {
-        /*
-            java.lang.String r0 = com.samsung.android.knox.ucm.configurator.UniversalCredentialManager.TAG
-            java.lang.String r1 = "isValidUser userId-"
-            com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(r4, r1, r0)
-            r0 = 1
-            if (r4 != 0) goto Lb
-            goto L20
-        Lb:
-            r1 = 0
-            java.lang.String r2 = "persona"
-            java.lang.Object r3 = r3.getSystemService(r2)     // Catch: java.lang.Exception -> L1d
-            com.samsung.android.knox.SemPersonaManager r3 = (com.samsung.android.knox.SemPersonaManager) r3     // Catch: java.lang.Exception -> L1d
-            if (r3 == 0) goto L1f
-            boolean r3 = r3.exists(r4)     // Catch: java.lang.Exception -> L1d
-            if (r3 == 0) goto L1f
-            goto L20
-        L1d:
-            r3 = move-exception
-            goto L22
-        L1f:
-            r0 = r1
-        L20:
-            r1 = r0
-            goto L39
-        L22:
-            java.lang.String r4 = com.samsung.android.knox.ucm.configurator.UniversalCredentialManager.TAG
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r2 = "The exception occurs "
-            r0.<init>(r2)
-            java.lang.String r3 = r3.getMessage()
-            r0.append(r3)
-            java.lang.String r3 = r0.toString()
-            android.util.Log.i(r4, r3)
-        L39:
-            java.lang.String r3 = com.samsung.android.knox.ucm.configurator.UniversalCredentialManager.TAG
-            java.lang.String r4 = "isValidUser status-"
-            com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m(r4, r3, r1)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.ucm.configurator.UniversalCredentialManager.isValidUser(android.content.Context, int):boolean");
+    public static boolean isValidUser(Context context, int i) {
+        boolean z;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "isValidUser userId-", TAG);
+        boolean z2 = true;
+        if (i == 0) {
+            z = z2;
+        } else {
+            z = false;
+            try {
+                SemPersonaManager semPersonaManager = (SemPersonaManager) context.getSystemService("persona");
+                if (semPersonaManager != null) {
+                    if (!semPersonaManager.exists(i)) {
+                        z2 = false;
+                    }
+                    z = z2;
+                }
+            } catch (Exception e) {
+                Log.i(TAG, "The exception occurs " + e.getMessage());
+            }
+        }
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("isValidUser status-", TAG, z);
+        return z;
     }
 
     public int addPackagesToExemptList(CredentialStorage credentialStorage, int i, List<AppIdentity> list) {
@@ -421,9 +394,9 @@ public class UniversalCredentialManager {
         if (algorithmParameterSpec != null && (algorithmParameterSpec instanceof ECGenParameterSpec)) {
             bundle.putString("ecCurveName", ((ECGenParameterSpec) algorithmParameterSpec).getName());
         }
-        Bundle generateKeyPair = mUCMService.generateKeyPair(this.mContextInfo, credentialStorage, str, bundle);
-        if (generateKeyPair != null) {
-            return new KeyPair((PublicKey) generateKeyPair.getSerializable(UcmAgentService.PLUGIN_PUBLIC_KEY), null);
+        Bundle bundleGenerateKeyPair = mUCMService.generateKeyPair(this.mContextInfo, credentialStorage, str, bundle);
+        if (bundleGenerateKeyPair != null) {
+            return new KeyPair((PublicKey) bundleGenerateKeyPair.getSerializable(UcmAgentService.PLUGIN_PUBLIC_KEY), null);
         }
         Log.e(TAG, "KeyPair is null");
         return null;
@@ -991,7 +964,7 @@ public class UniversalCredentialManager {
         return -1;
     }
 
-    public boolean setKeyPairCertificate(CredentialStorage credentialStorage, String str, List<Certificate> list) {
+    public boolean setKeyPairCertificate(CredentialStorage credentialStorage, String str, List<Certificate> list) throws IOException {
         EnterpriseLicenseManager.log(this.mContextInfo, "UniversalCredentialManager.setKeyPairCertificate");
         Log.i(TAG, "UniversalCredentialManager.setKeyPairCertificate is called....");
         if (isNotSupportKnoxSdk(EdmConstants.EnterpriseKnoxSdkVersion.KNOX_ENTERPRISE_SDK_VERSION_3_12)) {
@@ -1094,16 +1067,14 @@ public class UniversalCredentialManager {
     }
 
     public static synchronized UniversalCredentialManager getUCMManager(Context context, int i) {
-        synchronized (UniversalCredentialManager.class) {
-            if (EdmConstants.getEnterpriseKnoxSdkVersion().compareTo(EdmConstants.EnterpriseKnoxSdkVersion.KNOX_ENTERPRISE_SDK_VERSION_2_6) < 0) {
-                Log.i(TAG, "getUCMManager : support above KNOX_ENTERPRISE_SDK_VERSION_2_6");
-                return null;
-            }
-            if (!isValidUser(context, i)) {
-                Log.i(TAG, "getUCMManager : Invalid user request userId-" + i);
-                return null;
-            }
-            return new UniversalCredentialManager(new ContextInfo(Process.myUid(), i), context);
+        if (EdmConstants.getEnterpriseKnoxSdkVersion().compareTo(EdmConstants.EnterpriseKnoxSdkVersion.KNOX_ENTERPRISE_SDK_VERSION_2_6) < 0) {
+            Log.i(TAG, "getUCMManager : support above KNOX_ENTERPRISE_SDK_VERSION_2_6");
+            return null;
         }
+        if (!isValidUser(context, i)) {
+            Log.i(TAG, "getUCMManager : Invalid user request userId-" + i);
+            return null;
+        }
+        return new UniversalCredentialManager(new ContextInfo(Process.myUid(), i), context);
     }
 }

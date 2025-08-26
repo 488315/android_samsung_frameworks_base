@@ -7,7 +7,6 @@ import kotlinx.atomicfu.AtomicLong;
 import kotlinx.atomicfu.AtomicRef;
 import kotlinx.atomicfu.TraceBase;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LockFreeTaskQueueCore {
     public static final Companion Companion = new Companion(null);
@@ -19,7 +18,6 @@ public final class LockFreeTaskQueueCore {
     public final int mask;
     public final boolean singleConsumer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -29,7 +27,6 @@ public final class LockFreeTaskQueueCore {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Placeholder {
         public final int index;
 
@@ -52,6 +49,13 @@ public final class LockFreeTaskQueueCore {
         }
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x0056, code lost:
+    
+        return 1;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final int addLast(Object obj) {
         AtomicLong atomicLong = this._state;
         while (true) {
@@ -93,7 +97,6 @@ public final class LockFreeTaskQueueCore {
                 return 0;
             }
         }
-        return 1;
     }
 
     public final boolean close() {
@@ -141,12 +144,12 @@ public final class LockFreeTaskQueueCore {
                 if (i4 == (i3 & i2)) {
                     break;
                 }
-                Object obj = this.array.array[i4].value;
-                if (obj == null) {
-                    obj = new Placeholder(i);
+                Object placeholder = this.array.array[i4].value;
+                if (placeholder == null) {
+                    placeholder = new Placeholder(i);
                 }
                 AtomicArray atomicArray = lockFreeTaskQueueCore2.array;
-                atomicArray.array[lockFreeTaskQueueCore2.mask & i].setValue(obj);
+                atomicArray.array[lockFreeTaskQueueCore2.mask & i].setValue(placeholder);
                 i++;
             }
             AtomicLong atomicLong2 = lockFreeTaskQueueCore2._state;
@@ -160,6 +163,13 @@ public final class LockFreeTaskQueueCore {
         }
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:17:0x003e, code lost:
+    
+        return null;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object removeFirstOrNull() {
         AtomicLong atomicLong = this._state;
         while (true) {
@@ -190,26 +200,26 @@ public final class LockFreeTaskQueueCore {
                         return obj;
                     }
                     if (this.singleConsumer) {
-                        LockFreeTaskQueueCore lockFreeTaskQueueCore = this;
+                        LockFreeTaskQueueCore next = this;
                         while (true) {
-                            AtomicLong atomicLong3 = lockFreeTaskQueueCore._state;
+                            AtomicLong atomicLong3 = next._state;
                             while (true) {
                                 long j4 = atomicLong3.value;
                                 int i5 = (int) (j4 & 1073741823);
                                 if ((j4 & 1152921504606846976L) != j2) {
-                                    lockFreeTaskQueueCore = lockFreeTaskQueueCore.next();
+                                    next = next.next();
                                     break;
                                 }
-                                AtomicLong atomicLong4 = lockFreeTaskQueueCore._state;
+                                AtomicLong atomicLong4 = next._state;
                                 Companion.getClass();
                                 if (atomicLong4.compareAndSet(j4, (j4 & (-1073741824)) | j3)) {
-                                    lockFreeTaskQueueCore.array.array[lockFreeTaskQueueCore.mask & i5].setValue(null);
-                                    lockFreeTaskQueueCore = null;
+                                    next.array.array[next.mask & i5].setValue(null);
+                                    next = null;
                                     break;
                                 }
                                 j2 = 0;
                             }
-                            if (lockFreeTaskQueueCore == null) {
+                            if (next == null) {
                                 return obj;
                             }
                             j2 = 0;
@@ -220,6 +230,5 @@ public final class LockFreeTaskQueueCore {
                 return REMOVE_FROZEN;
             }
         }
-        return null;
     }
 }

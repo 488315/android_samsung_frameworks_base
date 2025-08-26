@@ -44,9 +44,9 @@ public interface StartInstallingUpdateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(StartInstallingUpdateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof StartInstallingUpdateCallback)) {
-                return (StartInstallingUpdateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(StartInstallingUpdateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof StartInstallingUpdateCallback)) {
+                return (StartInstallingUpdateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface StartInstallingUpdateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onStartInstallingUpdateError(readInt, readString);
+                onStartInstallingUpdateError(i3, string);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface StartInstallingUpdateCallback extends IInterface {
 
             @Override // android.app.admin.StartInstallingUpdateCallback
             public void onStartInstallingUpdateError(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(StartInstallingUpdateCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(StartInstallingUpdateCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

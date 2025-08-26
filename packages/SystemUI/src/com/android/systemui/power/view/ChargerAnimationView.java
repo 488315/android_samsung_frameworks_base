@@ -3,6 +3,7 @@ package com.android.systemui.power.view;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,7 +17,6 @@ import com.android.systemui.power.DozeChargingHelper;
 import com.android.systemui.power.listener.ChargerAnimationListener;
 import com.android.systemui.power.utils.ChargerAnimationUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ChargerAnimationView extends RelativeLayout {
     public AnimatorSet mAlphaAnimatorSet;
@@ -44,7 +44,7 @@ public class ChargerAnimationView extends RelativeLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mBackGroundView = (LinearLayout) findViewById(R.id.backgroundArea);
         this.mBatteryTextContainer = (LinearLayout) findViewById(R.id.charging_content_container);
@@ -59,7 +59,7 @@ public class ChargerAnimationView extends RelativeLayout {
         setBatteryLevelText();
     }
 
-    public final void setBatteryLevelText() {
+    public final void setBatteryLevelText() throws Resources.NotFoundException {
         int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.charger_anim_text_margin_start);
         FontSizeUtils.updateFontSize(this.mBatteryLevelTextView, R.dimen.charger_anim_battery_text_size);
         this.mBatteryLevelTextView.setText(String.format("%d", Integer.valueOf(this.mCurrentBatteryLevel)));

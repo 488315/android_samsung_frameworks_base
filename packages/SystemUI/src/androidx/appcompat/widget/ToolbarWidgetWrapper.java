@@ -13,7 +13,6 @@ import androidx.appcompat.view.menu.ActionMenuItem;
 import androidx.core.view.ViewCompat;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ToolbarWidgetWrapper {
     public ActionMenuPresenter mActionMenuPresenter;
@@ -84,9 +83,9 @@ public class ToolbarWidgetWrapper {
 
     public final void updateHomeAccessibility() {
         if ((this.mDisplayOpts & 4) != 0) {
-            boolean isEmpty = TextUtils.isEmpty(this.mHomeDescription);
+            boolean zIsEmpty = TextUtils.isEmpty(this.mHomeDescription);
             Toolbar toolbar = this.mToolbar;
-            if (!isEmpty) {
+            if (!zIsEmpty) {
                 toolbar.setNavigationContentDescription(this.mHomeDescription);
             } else {
                 int i = this.mDefaultNavigationContentDescription;
@@ -100,12 +99,7 @@ public class ToolbarWidgetWrapper {
         int i = this.mDisplayOpts;
         if ((i & 2) == 0) {
             drawable = null;
-        } else if ((i & 1) != 0) {
-            drawable = this.mLogo;
-            if (drawable == null) {
-                drawable = this.mIcon;
-            }
-        } else {
+        } else if ((i & 1) == 0 || (drawable = this.mLogo) == null) {
             drawable = this.mIcon;
         }
         this.mToolbar.setLogo(drawable);
@@ -120,11 +114,11 @@ public class ToolbarWidgetWrapper {
         this.mSubtitle = toolbar.mSubtitleText;
         this.mTitleSet = charSequence != null;
         this.mNavIcon = toolbar.getNavigationIcon();
-        TintTypedArray obtainStyledAttributes = TintTypedArray.obtainStyledAttributes(toolbar.getContext(), null, R$styleable.ActionBar, R.attr.actionBarStyle, 0);
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(toolbar.getContext(), null, R$styleable.ActionBar, R.attr.actionBarStyle, 0);
         int i3 = 15;
-        this.mDefaultNavigationIcon = obtainStyledAttributes.getDrawable(15);
+        this.mDefaultNavigationIcon = tintTypedArrayObtainStyledAttributes.getDrawable(15);
         if (z) {
-            CharSequence text = obtainStyledAttributes.mWrapped.getText(27);
+            CharSequence text = tintTypedArrayObtainStyledAttributes.mWrapped.getText(27);
             if (!TextUtils.isEmpty(text)) {
                 this.mTitleSet = true;
                 this.mTitle = text;
@@ -136,19 +130,19 @@ public class ToolbarWidgetWrapper {
                     }
                 }
             }
-            CharSequence text2 = obtainStyledAttributes.mWrapped.getText(25);
+            CharSequence text2 = tintTypedArrayObtainStyledAttributes.mWrapped.getText(25);
             if (!TextUtils.isEmpty(text2)) {
                 this.mSubtitle = text2;
                 if ((this.mDisplayOpts & 8) != 0) {
                     toolbar.setSubtitle(text2);
                 }
             }
-            Drawable drawable2 = obtainStyledAttributes.getDrawable(20);
+            Drawable drawable2 = tintTypedArrayObtainStyledAttributes.getDrawable(20);
             if (drawable2 != null) {
                 this.mLogo = drawable2;
                 updateToolbarLogo();
             }
-            Drawable drawable3 = obtainStyledAttributes.getDrawable(17);
+            Drawable drawable3 = tintTypedArrayObtainStyledAttributes.getDrawable(17);
             if (drawable3 != null) {
                 this.mIcon = drawable3;
                 updateToolbarLogo();
@@ -163,37 +157,37 @@ public class ToolbarWidgetWrapper {
                     toolbar3.setNavigationIcon(null);
                 }
             }
-            setDisplayOptions(obtainStyledAttributes.mWrapped.getInt(10, 0));
-            int resourceId = obtainStyledAttributes.mWrapped.getResourceId(9, 0);
+            setDisplayOptions(tintTypedArrayObtainStyledAttributes.mWrapped.getInt(10, 0));
+            int resourceId = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(9, 0);
             if (resourceId != 0) {
-                View inflate = LayoutInflater.from(toolbar.getContext()).inflate(resourceId, (ViewGroup) toolbar, false);
+                View viewInflate = LayoutInflater.from(toolbar.getContext()).inflate(resourceId, (ViewGroup) toolbar, false);
                 View view = this.mCustomView;
                 if (view != null && (this.mDisplayOpts & 16) != 0) {
                     toolbar.removeView(view);
                 }
-                this.mCustomView = inflate;
-                if (inflate != null && (this.mDisplayOpts & 16) != 0) {
-                    toolbar.addView(inflate);
+                this.mCustomView = viewInflate;
+                if (viewInflate != null && (this.mDisplayOpts & 16) != 0) {
+                    toolbar.addView(viewInflate);
                 }
                 setDisplayOptions(this.mDisplayOpts | 16);
             }
-            int layoutDimension = obtainStyledAttributes.mWrapped.getLayoutDimension(13, 0);
+            int layoutDimension = tintTypedArrayObtainStyledAttributes.mWrapped.getLayoutDimension(13, 0);
             if (layoutDimension > 0) {
                 ViewGroup.LayoutParams layoutParams = toolbar.getLayoutParams();
                 layoutParams.height = layoutDimension;
                 toolbar.setLayoutParams(layoutParams);
             }
-            int dimensionPixelOffset = obtainStyledAttributes.mWrapped.getDimensionPixelOffset(7, -1);
-            int dimensionPixelOffset2 = obtainStyledAttributes.mWrapped.getDimensionPixelOffset(3, -1);
+            int dimensionPixelOffset = tintTypedArrayObtainStyledAttributes.mWrapped.getDimensionPixelOffset(7, -1);
+            int dimensionPixelOffset2 = tintTypedArrayObtainStyledAttributes.mWrapped.getDimensionPixelOffset(3, -1);
             if (dimensionPixelOffset >= 0 || dimensionPixelOffset2 >= 0) {
-                int max = Math.max(dimensionPixelOffset, 0);
-                int max2 = Math.max(dimensionPixelOffset2, 0);
+                int iMax = Math.max(dimensionPixelOffset, 0);
+                int iMax2 = Math.max(dimensionPixelOffset2, 0);
                 if (toolbar.mContentInsets == null) {
                     toolbar.mContentInsets = new RtlSpacingHelper();
                 }
-                toolbar.mContentInsets.setRelative(max, max2);
+                toolbar.mContentInsets.setRelative(iMax, iMax2);
             }
-            int resourceId2 = obtainStyledAttributes.mWrapped.getResourceId(28, 0);
+            int resourceId2 = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(28, 0);
             if (resourceId2 != 0) {
                 Context context = toolbar.getContext();
                 toolbar.mTitleTextAppearance = resourceId2;
@@ -202,7 +196,7 @@ public class ToolbarWidgetWrapper {
                     appCompatTextView.setTextAppearance(context, resourceId2);
                 }
             }
-            int resourceId3 = obtainStyledAttributes.mWrapped.getResourceId(26, 0);
+            int resourceId3 = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(26, 0);
             if (resourceId3 != 0) {
                 Context context2 = toolbar.getContext();
                 toolbar.mSubtitleTextAppearance = resourceId3;
@@ -211,7 +205,7 @@ public class ToolbarWidgetWrapper {
                     appCompatTextView2.setTextAppearance(context2, resourceId3);
                 }
             }
-            int resourceId4 = obtainStyledAttributes.mWrapped.getResourceId(22, 0);
+            int resourceId4 = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(22, 0);
             if (resourceId4 != 0 && toolbar.mPopupTheme != resourceId4) {
                 toolbar.mPopupTheme = resourceId4;
                 if (resourceId4 == 0) {
@@ -228,7 +222,7 @@ public class ToolbarWidgetWrapper {
             }
             this.mDisplayOpts = i3;
         }
-        obtainStyledAttributes.recycle();
+        tintTypedArrayObtainStyledAttributes.recycle();
         if (i != this.mDefaultNavigationContentDescription) {
             this.mDefaultNavigationContentDescription = i;
             AppCompatImageButton appCompatImageButton = toolbar.mNavButtonView;

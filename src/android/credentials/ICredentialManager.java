@@ -140,9 +140,9 @@ public interface ICredentialManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICredentialManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICredentialManager)) {
-                return (ICredentialManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICredentialManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICredentialManager)) {
+                return (ICredentialManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -195,101 +195,101 @@ public interface ICredentialManager extends IInterface {
             switch (i) {
                 case 1:
                     GetCredentialRequest getCredentialRequest = (GetCredentialRequest) parcel.readTypedObject(GetCredentialRequest.CREATOR);
-                    IGetCredentialCallback asInterface = IGetCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
+                    IGetCredentialCallback iGetCredentialCallbackAsInterface = IGetCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal executeGetCredential = executeGetCredential(getCredentialRequest, asInterface, readString);
+                    ICancellationSignal iCancellationSignalExecuteGetCredential = executeGetCredential(getCredentialRequest, iGetCredentialCallbackAsInterface, string);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(executeGetCredential);
+                    parcel2.writeStrongInterface(iCancellationSignalExecuteGetCredential);
                     return true;
                 case 2:
                     GetCredentialRequest getCredentialRequest2 = (GetCredentialRequest) parcel.readTypedObject(GetCredentialRequest.CREATOR);
-                    IPrepareGetCredentialCallback asInterface2 = IPrepareGetCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
-                    IGetCredentialCallback asInterface3 = IGetCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString2 = parcel.readString();
+                    IPrepareGetCredentialCallback iPrepareGetCredentialCallbackAsInterface = IPrepareGetCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IGetCredentialCallback iGetCredentialCallbackAsInterface2 = IGetCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal executePrepareGetCredential = executePrepareGetCredential(getCredentialRequest2, asInterface2, asInterface3, readString2);
+                    ICancellationSignal iCancellationSignalExecutePrepareGetCredential = executePrepareGetCredential(getCredentialRequest2, iPrepareGetCredentialCallbackAsInterface, iGetCredentialCallbackAsInterface2, string2);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(executePrepareGetCredential);
+                    parcel2.writeStrongInterface(iCancellationSignalExecutePrepareGetCredential);
                     return true;
                 case 3:
                     CreateCredentialRequest createCredentialRequest = (CreateCredentialRequest) parcel.readTypedObject(CreateCredentialRequest.CREATOR);
-                    ICreateCredentialCallback asInterface4 = ICreateCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString3 = parcel.readString();
+                    ICreateCredentialCallback iCreateCredentialCallbackAsInterface = ICreateCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal executeCreateCredential = executeCreateCredential(createCredentialRequest, asInterface4, readString3);
+                    ICancellationSignal iCancellationSignalExecuteCreateCredential = executeCreateCredential(createCredentialRequest, iCreateCredentialCallbackAsInterface, string3);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(executeCreateCredential);
+                    parcel2.writeStrongInterface(iCancellationSignalExecuteCreateCredential);
                     return true;
                 case 4:
                     GetCredentialRequest getCredentialRequest3 = (GetCredentialRequest) parcel.readTypedObject(GetCredentialRequest.CREATOR);
-                    IGetCandidateCredentialsCallback asInterface5 = IGetCandidateCredentialsCallback.Stub.asInterface(parcel.readStrongBinder());
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    String readString4 = parcel.readString();
+                    IGetCandidateCredentialsCallback iGetCandidateCredentialsCallbackAsInterface = IGetCandidateCredentialsCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal candidateCredentials = getCandidateCredentials(getCredentialRequest3, asInterface5, readStrongBinder, readString4);
+                    ICancellationSignal candidateCredentials = getCandidateCredentials(getCredentialRequest3, iGetCandidateCredentialsCallbackAsInterface, strongBinder, string4);
                     parcel2.writeNoException();
                     parcel2.writeStrongInterface(candidateCredentials);
                     return true;
                 case 5:
                     ClearCredentialStateRequest clearCredentialStateRequest = (ClearCredentialStateRequest) parcel.readTypedObject(ClearCredentialStateRequest.CREATOR);
-                    IClearCredentialStateCallback asInterface6 = IClearCredentialStateCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString5 = parcel.readString();
+                    IClearCredentialStateCallback iClearCredentialStateCallbackAsInterface = IClearCredentialStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ICancellationSignal clearCredentialState = clearCredentialState(clearCredentialStateRequest, asInterface6, readString5);
+                    ICancellationSignal iCancellationSignalClearCredentialState = clearCredentialState(clearCredentialStateRequest, iClearCredentialStateCallbackAsInterface, string5);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(clearCredentialState);
+                    parcel2.writeStrongInterface(iCancellationSignalClearCredentialState);
                     return true;
                 case 6:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                    int readInt = parcel.readInt();
-                    ISetEnabledProvidersCallback asInterface7 = ISetEnabledProvidersCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                    int i3 = parcel.readInt();
+                    ISetEnabledProvidersCallback iSetEnabledProvidersCallbackAsInterface = ISetEnabledProvidersCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setEnabledProviders(createStringArrayList, createStringArrayList2, readInt, asInterface7);
+                    setEnabledProviders(arrayListCreateStringArrayList, arrayListCreateStringArrayList2, i3, iSetEnabledProvidersCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 7:
                     RegisterCredentialDescriptionRequest registerCredentialDescriptionRequest = (RegisterCredentialDescriptionRequest) parcel.readTypedObject(RegisterCredentialDescriptionRequest.CREATOR);
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    registerCredentialDescription(registerCredentialDescriptionRequest, readString6);
+                    registerCredentialDescription(registerCredentialDescriptionRequest, string6);
                     parcel2.writeNoException();
                     return true;
                 case 8:
                     UnregisterCredentialDescriptionRequest unregisterCredentialDescriptionRequest = (UnregisterCredentialDescriptionRequest) parcel.readTypedObject(UnregisterCredentialDescriptionRequest.CREATOR);
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unregisterCredentialDescription(unregisterCredentialDescriptionRequest, readString7);
+                    unregisterCredentialDescription(unregisterCredentialDescriptionRequest, string7);
                     parcel2.writeNoException();
                     return true;
                 case 9:
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isEnabledCredentialProviderService = isEnabledCredentialProviderService(componentName, readString8);
+                    boolean zIsEnabledCredentialProviderService = isEnabledCredentialProviderService(componentName, string8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEnabledCredentialProviderService);
+                    parcel2.writeBoolean(zIsEnabledCredentialProviderService);
                     return true;
                 case 10:
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<CredentialProviderInfo> credentialProviderServices = getCredentialProviderServices(readInt2, readInt3);
+                    List<CredentialProviderInfo> credentialProviderServices = getCredentialProviderServices(i4, i5);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(credentialProviderServices, 1);
                     return true;
                 case 11:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<CredentialProviderInfo> credentialProviderServicesForTesting = getCredentialProviderServicesForTesting(readInt4);
+                    List<CredentialProviderInfo> credentialProviderServicesForTesting = getCredentialProviderServicesForTesting(i6);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(credentialProviderServicesForTesting, 1);
                     return true;
                 case 12:
-                    boolean isServiceEnabled = isServiceEnabled();
+                    boolean zIsServiceEnabled = isServiceEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isServiceEnabled);
+                    parcel2.writeBoolean(zIsServiceEnabled);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -314,208 +314,208 @@ public interface ICredentialManager extends IInterface {
 
             @Override // android.credentials.ICredentialManager
             public ICancellationSignal executeGetCredential(GetCredentialRequest getCredentialRequest, IGetCredentialCallback iGetCredentialCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeTypedObject(getCredentialRequest, 0);
-                    obtain.writeStrongInterface(iGetCredentialCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(getCredentialRequest, 0);
+                    parcelObtain.writeStrongInterface(iGetCredentialCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public ICancellationSignal executePrepareGetCredential(GetCredentialRequest getCredentialRequest, IPrepareGetCredentialCallback iPrepareGetCredentialCallback, IGetCredentialCallback iGetCredentialCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeTypedObject(getCredentialRequest, 0);
-                    obtain.writeStrongInterface(iPrepareGetCredentialCallback);
-                    obtain.writeStrongInterface(iGetCredentialCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(getCredentialRequest, 0);
+                    parcelObtain.writeStrongInterface(iPrepareGetCredentialCallback);
+                    parcelObtain.writeStrongInterface(iGetCredentialCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public ICancellationSignal executeCreateCredential(CreateCredentialRequest createCredentialRequest, ICreateCredentialCallback iCreateCredentialCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeTypedObject(createCredentialRequest, 0);
-                    obtain.writeStrongInterface(iCreateCredentialCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(createCredentialRequest, 0);
+                    parcelObtain.writeStrongInterface(iCreateCredentialCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public ICancellationSignal getCandidateCredentials(GetCredentialRequest getCredentialRequest, IGetCandidateCredentialsCallback iGetCandidateCredentialsCallback, IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeTypedObject(getCredentialRequest, 0);
-                    obtain.writeStrongInterface(iGetCandidateCredentialsCallback);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(getCredentialRequest, 0);
+                    parcelObtain.writeStrongInterface(iGetCandidateCredentialsCallback);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public ICancellationSignal clearCredentialState(ClearCredentialStateRequest clearCredentialStateRequest, IClearCredentialStateCallback iClearCredentialStateCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeTypedObject(clearCredentialStateRequest, 0);
-                    obtain.writeStrongInterface(iClearCredentialStateCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clearCredentialStateRequest, 0);
+                    parcelObtain.writeStrongInterface(iClearCredentialStateCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public void setEnabledProviders(List<String> list, List<String> list2, int i, ISetEnabledProvidersCallback iSetEnabledProvidersCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeStringList(list2);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSetEnabledProvidersCallback);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSetEnabledProvidersCallback);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public void registerCredentialDescription(RegisterCredentialDescriptionRequest registerCredentialDescriptionRequest, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeTypedObject(registerCredentialDescriptionRequest, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(registerCredentialDescriptionRequest, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public void unregisterCredentialDescription(UnregisterCredentialDescriptionRequest unregisterCredentialDescriptionRequest, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeTypedObject(unregisterCredentialDescriptionRequest, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(unregisterCredentialDescriptionRequest, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public boolean isEnabledCredentialProviderService(ComponentName componentName, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public List<CredentialProviderInfo> getCredentialProviderServices(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(CredentialProviderInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(CredentialProviderInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public List<CredentialProviderInfo> getCredentialProviderServicesForTesting(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(CredentialProviderInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(CredentialProviderInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.ICredentialManager
             public boolean isServiceEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICredentialManager.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -34,7 +34,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TunerServiceImpl extends TunerService {
     public static final String[] RESET_EXCEPTION_LIST = {"sysui_qs_tiles", "doze_always_on", "qs_media_resumption"};
@@ -52,7 +51,6 @@ public class TunerServiceImpl extends TunerService {
     public final ComponentName mTunerComponent;
     public UserTracker mUserTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Observer extends ContentObserver {
         public Observer() {
             super(new Handler(Looper.getMainLooper()));
@@ -80,8 +78,8 @@ public class TunerServiceImpl extends TunerService {
     }
 
     public TunerServiceImpl(Context context, Handler handler, LeakDetector leakDetector, DemoModeController demoModeController, UserTracker userTracker, Lazy lazy) {
-        super(context);
         String value;
+        super(context);
         this.mObserver = new Observer();
         this.mListeningUris = new ArrayMap();
         this.mTunableLookup = new ConcurrentHashMap();
@@ -112,7 +110,7 @@ public class TunerServiceImpl extends TunerService {
                     handler.postDelayed(new Runnable() { // from class: com.android.systemui.tuner.TunerServiceImpl$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TunerServiceImpl.this.clearAllFromUser(i);
+                            this.f$0.clearAllFromUser(i);
                         }
                     }, 5000L);
                 }
@@ -167,7 +165,7 @@ public class TunerServiceImpl extends TunerService {
             tunable.onTuningChanged(str, (String) DejankUtils.whitelistIpcs(new Supplier() { // from class: com.android.systemui.tuner.TunerServiceImpl$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    TunerServiceImpl tunerServiceImpl = TunerServiceImpl.this;
+                    TunerServiceImpl tunerServiceImpl = this.f$0;
                     return Settings.Secure.getStringForUser(tunerServiceImpl.mContentResolver, str, tunerServiceImpl.mCurrentUser);
                 }
             }));
@@ -213,14 +211,14 @@ public class TunerServiceImpl extends TunerService {
 
     @Override // com.android.systemui.tuner.TunerService
     public final void showResetRequest(final TunerFragment$$ExternalSyntheticLambda0 tunerFragment$$ExternalSyntheticLambda0) {
-        SystemUIDialog create = ((SystemUIDialog.Factory) this.mSystemUIDialogFactoryLazy.get()).create();
-        SystemUIDialog.setShowForAllUsers(create);
-        create.setMessage(R.string.remove_from_settings_prompt);
-        create.setButton(-2, this.mContext.getString(R.string.cancel), (DialogInterface.OnClickListener) null);
-        create.setButton(-1, this.mContext.getString(R.string.qs_customize_remove), new DialogInterface.OnClickListener() { // from class: com.android.systemui.tuner.TunerServiceImpl$$ExternalSyntheticLambda2
+        SystemUIDialog systemUIDialogCreate = ((SystemUIDialog.Factory) this.mSystemUIDialogFactoryLazy.get()).create();
+        SystemUIDialog.setShowForAllUsers(systemUIDialogCreate);
+        systemUIDialogCreate.setMessage(R.string.remove_from_settings_prompt);
+        systemUIDialogCreate.setButton(-2, this.mContext.getString(R.string.cancel), (DialogInterface.OnClickListener) null);
+        systemUIDialogCreate.setButton(-1, this.mContext.getString(R.string.qs_customize_remove), new DialogInterface.OnClickListener() { // from class: com.android.systemui.tuner.TunerServiceImpl$$ExternalSyntheticLambda2
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                TunerServiceImpl tunerServiceImpl = TunerServiceImpl.this;
+                TunerServiceImpl tunerServiceImpl = this.f$0;
                 TunerFragment$$ExternalSyntheticLambda0 tunerFragment$$ExternalSyntheticLambda02 = tunerFragment$$ExternalSyntheticLambda0;
                 tunerServiceImpl.mContext.sendBroadcast(new Intent("com.android.systemui.action.CLEAR_TUNER"));
                 ((UserTrackerImpl) tunerServiceImpl.mUserTracker).getUserContext().getPackageManager().setComponentEnabledSetting(tunerServiceImpl.mTunerComponent, 2, 1);
@@ -228,7 +226,7 @@ public class TunerServiceImpl extends TunerService {
                 tunerFragment$$ExternalSyntheticLambda02.run();
             }
         });
-        create.show();
+        systemUIDialogCreate.show();
     }
 
     @Override // com.android.systemui.tuner.TunerService

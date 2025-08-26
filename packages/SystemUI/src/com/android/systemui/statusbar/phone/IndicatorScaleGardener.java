@@ -3,6 +3,7 @@ package com.android.systemui.statusbar.phone;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.SystemProperties;
 import android.util.Log;
 import com.android.systemui.BasicRune;
 import com.android.systemui.Dumpable;
@@ -12,8 +13,11 @@ import com.android.systemui.dump.DumpManager;
 import com.android.systemui.util.DeviceType;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.StringCompanionObject;
+import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IndicatorScaleGardener implements Dumpable {
     public final Context context;
@@ -21,7 +25,15 @@ public final class IndicatorScaleGardener implements Dumpable {
     public final boolean logEnabled = DeviceType.isEngOrUTBinary();
     public float baseSmallestWidth = 411.0f;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Companion() {
+        }
+    }
+
     public final class ScaleModel {
         public final int currentSmallestWidth;
         public final int displayDeviceType;
@@ -51,20 +63,24 @@ public final class IndicatorScaleGardener implements Dumpable {
         }
 
         public final String toString() {
-            StringBuilder sb = new StringBuilder("ScaleModel(ratio=");
-            sb.append(this.ratio);
-            sb.append(", iconSize=");
-            sb.append(this.iconSize);
-            sb.append(", displayDeviceType=");
-            sb.append(this.displayDeviceType);
-            sb.append(", currentSmallestWidth=");
-            return ReorderTile$$ExternalSyntheticOutline0.m(this.currentSmallestWidth, ")", sb);
+            StringBuilder sb = new StringBuilder("(");
+            int i = StringCompanionObject.$r8$clinit;
+            sb.append("ratio:".concat(String.format("%.2f", Arrays.copyOf(new Object[]{Float.valueOf(this.ratio)}, 1))));
+            sb.append(", iconSize:" + this.iconSize);
+            sb.append(", displayType:" + this.displayDeviceType);
+            sb.append(", currentSW:" + this.currentSmallestWidth);
+            sb.append(")");
+            return sb.toString();
         }
+    }
+
+    static {
+        new Companion(null);
     }
 
     public IndicatorScaleGardener(Context context, DumpManager dumpManager) {
         this.context = context;
-        this.latestScaleModel = new ScaleModel(1.0f, context.getResources().getDimensionPixelSize(17106386), context.getResources().getConfiguration().semDisplayDeviceType, context.getResources().getConfiguration().smallestScreenWidthDp);
+        this.latestScaleModel = new ScaleModel(1.0f, context.getResources().getDimensionPixelSize(17106387), context.getResources().getConfiguration().semDisplayDeviceType, context.getResources().getConfiguration().smallestScreenWidthDp);
         dumpManager.registerNormalDumpable(this);
     }
 
@@ -73,19 +89,34 @@ public final class IndicatorScaleGardener implements Dumpable {
         ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "IndicatorScaleGardener ", getLogText());
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0043  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final ScaleModel getLatestScaleModel(Context context) {
-        float f;
+        float integer;
         Configuration configuration = context.getResources().getConfiguration();
         int i = configuration.smallestScreenWidthDp;
         Resources resources = context.getResources();
         if (resources != null) {
-            f = (BasicRune.BASIC_FOLDABLE_TYPE_FOLD && this.context.getResources().getConfiguration().semDisplayDeviceType == 5) ? resources.getInteger(R.integer.status_bar_scale_base_smallest_width_for_fold_cover) : resources.getInteger(R.integer.status_bar_scale_base_smallest_width);
+            integer = (BasicRune.BASIC_FOLDABLE_TYPE_FOLD && this.context.getResources().getConfiguration().semDisplayDeviceType == 5) ? resources.getInteger(R.integer.status_bar_scale_base_smallest_width_for_fold_cover) : resources.getInteger(R.integer.status_bar_scale_base_smallest_width);
         } else {
-            f = 411.0f;
+            integer = 411.0f;
         }
-        this.baseSmallestWidth = f;
-        float min = (DeviceType.isTablet() || (BasicRune.BASIC_FOLDABLE_TYPE_FOLD && this.context.getResources().getConfiguration().semDisplayDeviceType == 0)) ? 1.0f : Math.min(i / this.baseSmallestWidth, 1.3f);
-        ScaleModel scaleModel = new ScaleModel(min, (int) (context.getResources().getDimensionPixelSize(17106386) * min), configuration.semDisplayDeviceType, i);
+        this.baseSmallestWidth = integer;
+        float fMax = i / integer;
+        if (DeviceType.isTablet()) {
+            fMax = 1.0f;
+        } else {
+            String str = SystemProperties.get("ro.product.name", "");
+            if ((str.startsWith("q6q") || str.startsWith("v6q")) && this.context.getResources().getConfiguration().semDisplayDeviceType == 0) {
+                float fMin = Math.min(fMax, 1.0f);
+                fMax = ((Math.max(fMax, 1.0f) - fMin) * 0.5f) + fMin;
+            } else if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD && this.context.getResources().getConfiguration().semDisplayDeviceType == 0) {
+            }
+        }
+        float fCoerceIn = RangesKt___RangesKt.coerceIn(fMax, 0.75f, 1.0f);
+        ScaleModel scaleModel = new ScaleModel(fCoerceIn, (int) (context.getResources().getDimensionPixelSize(17106387) * fCoerceIn), configuration.semDisplayDeviceType, i);
         if (!scaleModel.equals(this.latestScaleModel)) {
             this.latestScaleModel = scaleModel;
             if (this.logEnabled) {
@@ -95,9 +126,10 @@ public final class IndicatorScaleGardener implements Dumpable {
         return this.latestScaleModel;
     }
 
-    public final String getLogText() {
-        StringBuilder sb = new StringBuilder(" model:" + this.latestScaleModel);
-        sb.append(", baseSmallestWidth:" + this.baseSmallestWidth);
+    public final String getLogText() throws Resources.NotFoundException {
+        StringBuilder sb = new StringBuilder(" model" + this.latestScaleModel);
+        sb.append(", baseSmallestWidth:" + this.baseSmallestWidth + "}");
+        sb.append(", 24dp:" + this.context.getResources().getDimensionPixelSize(R.dimen.status_bar_default_height_24dp) + "px");
         return sb.toString();
     }
 }

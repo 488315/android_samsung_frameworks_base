@@ -10,16 +10,16 @@ public abstract class NetworkEvent implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public NetworkEvent createFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
-            parcel.setDataPosition(dataPosition);
-            if (readInt == 1) {
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
+            parcel.setDataPosition(iDataPosition);
+            if (i == 1) {
                 return DnsEvent.CREATOR.createFromParcel(parcel);
             }
-            if (readInt == 2) {
+            if (i == 2) {
                 return ConnectEvent.CREATOR.createFromParcel(parcel);
             }
-            throw new ParcelFormatException("Unexpected NetworkEvent token in parcel: " + readInt);
+            throw new ParcelFormatException("Unexpected NetworkEvent token in parcel: " + i);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

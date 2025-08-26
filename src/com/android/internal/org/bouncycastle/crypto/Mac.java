@@ -2,7 +2,7 @@ package com.android.internal.org.bouncycastle.crypto;
 
 /* loaded from: classes5.dex */
 public interface Mac {
-    int doFinal(byte[] bArr, int i) throws DataLengthException, IllegalStateException;
+    int doFinal(byte[] bArr, int i) throws IllegalStateException, DataLengthException;
 
     String getAlgorithmName();
 
@@ -14,5 +14,5 @@ public interface Mac {
 
     void update(byte b) throws IllegalStateException;
 
-    void update(byte[] bArr, int i, int i2) throws DataLengthException, IllegalStateException;
+    void update(byte[] bArr, int i, int i2) throws IllegalStateException, DataLengthException;
 }

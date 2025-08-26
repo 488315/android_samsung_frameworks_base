@@ -10,7 +10,6 @@ jadx.core.utils.exceptions.JadxRuntimeException: Init of enum field 'CONFIG_STAT
 	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
  */
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class PartnerConfig {
     public static final /* synthetic */ PartnerConfig[] $VALUES;
@@ -108,7 +107,6 @@ public final class PartnerConfig {
     private final String resourceName;
     private final ResourceType resourceType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ResourceType {
         INTEGER,
         BOOL,

@@ -73,9 +73,9 @@ public interface ISystemPersonaObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISystemPersonaObserver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISystemPersonaObserver)) {
-                return (ISystemPersonaObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISystemPersonaObserver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISystemPersonaObserver)) {
+                return (ISystemPersonaObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -114,31 +114,31 @@ public interface ISystemPersonaObserver extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onPersonaActive(readInt);
+                onPersonaActive(i3);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onRemovePersona(readInt2);
+                onRemovePersona(i4);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onResetPersona(readInt3);
+                onResetPersona(i5);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onKnoxContainerLaunch(readInt4);
+                onKnoxContainerLaunch(i6);
                 parcel2.writeNoException();
             } else if (i == 5) {
-                int readInt5 = parcel.readInt();
+                int i7 = parcel.readInt();
                 SemPersonaState semPersonaState = (SemPersonaState) parcel.readTypedObject(SemPersonaState.CREATOR);
                 SemPersonaState semPersonaState2 = (SemPersonaState) parcel.readTypedObject(SemPersonaState.CREATOR);
                 parcel.enforceNoDataAvail();
-                onStateChange(readInt5, semPersonaState, semPersonaState2);
+                onStateChange(i7, semPersonaState, semPersonaState2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -164,78 +164,78 @@ public interface ISystemPersonaObserver extends IInterface {
 
             @Override // android.content.pm.ISystemPersonaObserver
             public void onPersonaActive(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISystemPersonaObserver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISystemPersonaObserver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.ISystemPersonaObserver
             public void onRemovePersona(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISystemPersonaObserver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISystemPersonaObserver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.ISystemPersonaObserver
             public void onResetPersona(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISystemPersonaObserver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISystemPersonaObserver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.ISystemPersonaObserver
             public void onKnoxContainerLaunch(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISystemPersonaObserver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISystemPersonaObserver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.ISystemPersonaObserver
             public void onStateChange(int i, SemPersonaState semPersonaState, SemPersonaState semPersonaState2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISystemPersonaObserver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(semPersonaState, 0);
-                    obtain.writeTypedObject(semPersonaState2, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISystemPersonaObserver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(semPersonaState, 0);
+                    parcelObtain.writeTypedObject(semPersonaState2, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

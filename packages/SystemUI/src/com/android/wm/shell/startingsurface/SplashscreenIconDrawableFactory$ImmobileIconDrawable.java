@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.Trace;
 import java.io.Closeable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplashscreenIconDrawableFactory$ImmobileIconDrawable extends Drawable implements Closeable {
     public static final /* synthetic */ int $r8$clinit = 0;

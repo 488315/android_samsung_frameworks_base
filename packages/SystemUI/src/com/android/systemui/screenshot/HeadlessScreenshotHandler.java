@@ -13,14 +13,12 @@ import com.android.systemui.R;
 import com.android.systemui.screenshot.ImageExporter;
 import com.android.systemui.screenshot.ScreenshotNotificationsController;
 import com.android.systemui.screenshot.TakeScreenshotService;
-import com.google.common.util.concurrent.ListenableFuture;
 import java.util.UUID;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class HeadlessScreenshotHandler implements ScreenshotHandler {
     public final ImageExporter imageExporter;
@@ -29,7 +27,6 @@ public final class HeadlessScreenshotHandler implements ScreenshotHandler {
     public final UiEventLogger uiEventLogger;
     public final UserManager userManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -71,12 +68,12 @@ public final class HeadlessScreenshotHandler implements ScreenshotHandler {
             ((TakeScreenshotService.RequestCallbackImpl) requestCallback).reportError();
             return;
         }
-        final CallbackToFutureAdapter.SafeFuture export = this.imageExporter.export(Executors.newSingleThreadExecutor(), UUID.randomUUID(), screenshotData.bitmap, screenshotData.userHandle, screenshotData.displayId);
-        export.delegate.addListener(new Runnable() { // from class: com.android.systemui.screenshot.HeadlessScreenshotHandler$handleScreenshot$1
+        final CallbackToFutureAdapter.SafeFuture safeFutureExport = this.imageExporter.export(Executors.newSingleThreadExecutor(), UUID.randomUUID(), screenshotData.bitmap, screenshotData.userHandle, screenshotData.displayId);
+        safeFutureExport.delegate.addListener(new Runnable() { // from class: com.android.systemui.screenshot.HeadlessScreenshotHandler.handleScreenshot.1
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws RemoteException {
                 try {
-                    ImageExporter.Result result = (ImageExporter.Result) ListenableFuture.this.get();
+                    ImageExporter.Result result = (ImageExporter.Result) safeFutureExport.get();
                     Log.d("HeadlessScreenshotHandler", "Saved screenshot: " + result);
                     HeadlessScreenshotHandler.access$logScreenshotResultStatus(this, result.uri, screenshotData);
                     consumer.accept(result.uri);

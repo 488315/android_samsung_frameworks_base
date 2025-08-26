@@ -23,7 +23,6 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DatePicker extends Picker {
     public static final int[] DATE_FIELDS = {5, 2, 1};
@@ -41,7 +40,6 @@ public class DatePicker extends Picker {
     public final Calendar mTempDate;
     public final PickerColumn mYearColumn;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.leanback.widget.picker.DatePicker$1, reason: invalid class name */
     public class AnonymousClass1 implements Runnable {
         public final /* synthetic */ boolean val$animation;
@@ -183,25 +181,21 @@ public class DatePicker extends Picker {
             setColumnAt(this.mColMonthIndex, pickerColumn);
         }
         int[] iArr = R$styleable.lbDatePicker;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr);
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        ViewCompat.Api29Impl.saveAttributeDataForStyleable(this, context, iArr, attributeSet, obtainStyledAttributes, 0, 0);
+        ViewCompat.Api29Impl.saveAttributeDataForStyleable(this, context, iArr, attributeSet, typedArrayObtainStyledAttributes, 0, 0);
         try {
-            String string = obtainStyledAttributes.getString(0);
-            String string2 = obtainStyledAttributes.getString(1);
-            String string3 = obtainStyledAttributes.getString(2);
-            obtainStyledAttributes.recycle();
+            String string = typedArrayObtainStyledAttributes.getString(0);
+            String string2 = typedArrayObtainStyledAttributes.getString(1);
+            String string3 = typedArrayObtainStyledAttributes.getString(2);
+            typedArrayObtainStyledAttributes.recycle();
             this.mTempDate.clear();
-            if (TextUtils.isEmpty(string)) {
-                this.mTempDate.set(1900, 0, 1);
-            } else if (!parseDate(string, this.mTempDate)) {
+            if (TextUtils.isEmpty(string) || !parseDate(string, this.mTempDate)) {
                 this.mTempDate.set(1900, 0, 1);
             }
             this.mMinDate.setTimeInMillis(this.mTempDate.getTimeInMillis());
             this.mTempDate.clear();
-            if (TextUtils.isEmpty(string2)) {
-                this.mTempDate.set(2100, 0, 1);
-            } else if (!parseDate(string2, this.mTempDate)) {
+            if (TextUtils.isEmpty(string2) || !parseDate(string2, this.mTempDate)) {
                 this.mTempDate.set(2100, 0, 1);
             }
             this.mMaxDate.setTimeInMillis(this.mTempDate.getTimeInMillis());
@@ -220,28 +214,28 @@ public class DatePicker extends Picker {
             int i5 = 0;
             char c = 0;
             while (i4 < str.length()) {
-                char charAt = str.charAt(i4);
+                char cCharAt = str.charAt(i4);
                 int i6 = i3;
-                if (charAt != ' ') {
-                    if (charAt != '\'') {
+                if (cCharAt != ' ') {
+                    if (cCharAt != '\'') {
                         if (i5 == 0) {
                             int i7 = 0;
                             while (true) {
                                 if (i7 >= i2) {
-                                    sb.append(charAt);
+                                    sb.append(cCharAt);
                                     break;
-                                } else if (charAt != cArr[i7]) {
+                                } else if (cCharAt != cArr[i7]) {
                                     i7++;
                                     i2 = 6;
-                                } else if (charAt != c) {
+                                } else if (cCharAt != c) {
                                     arrayList.add(sb.toString());
                                     sb.setLength(0);
                                 }
                             }
                         } else {
-                            sb.append(charAt);
+                            sb.append(cCharAt);
                         }
-                        c = charAt;
+                        c = cCharAt;
                     } else if (i5 == 0) {
                         sb.setLength(0);
                         i5 = i6;
@@ -269,8 +263,8 @@ public class DatePicker extends Picker {
             String upperCase = string3.toUpperCase(this.mConstant.locale);
             ArrayList arrayList2 = new ArrayList(3);
             for (int i9 = 0; i9 < upperCase.length(); i9++) {
-                char charAt2 = upperCase.charAt(i9);
-                if (charAt2 == 'D') {
+                char cCharAt2 = upperCase.charAt(i9);
+                if (cCharAt2 == 'D') {
                     if (this.mDayColumn != null) {
                         throw new IllegalArgumentException("datePicker format error");
                     }
@@ -279,8 +273,8 @@ public class DatePicker extends Picker {
                     arrayList2.add(pickerColumn2);
                     this.mDayColumn.mLabelFormat = "%02d";
                     this.mColDayIndex = i9;
-                } else if (charAt2 != 'M') {
-                    if (charAt2 != 'Y') {
+                } else if (cCharAt2 != 'M') {
+                    if (cCharAt2 != 'Y') {
                         throw new IllegalArgumentException("datePicker format error");
                     }
                     if (this.mYearColumn != null) {
@@ -322,17 +316,17 @@ public class DatePicker extends Picker {
             if (this.mSelectedColumn > r3.size() - 1) {
                 this.mSelectedColumn = this.mColumns.size() - 1;
             }
-            LayoutInflater from = LayoutInflater.from(getContext());
+            LayoutInflater layoutInflaterFrom = LayoutInflater.from(getContext());
             ArrayList arrayList3 = this.mColumns;
             int size = arrayList3 == null ? 0 : arrayList3.size();
             if (!TextUtils.isEmpty((CharSequence) ((ArrayList) this.mSeparators).get(0))) {
-                TextView textView = (TextView) from.inflate(R.layout.lb_picker_separator, this.mPickerView, false);
+                TextView textView = (TextView) layoutInflaterFrom.inflate(R.layout.lb_picker_separator, this.mPickerView, false);
                 textView.setText((CharSequence) ((ArrayList) this.mSeparators).get(0));
                 this.mPickerView.addView(textView);
             }
             int i11 = 0;
             while (i11 < size) {
-                VerticalGridView verticalGridView = (VerticalGridView) from.inflate(R.layout.lb_picker_column, this.mPickerView, false);
+                VerticalGridView verticalGridView = (VerticalGridView) layoutInflaterFrom.inflate(R.layout.lb_picker_column, this.mPickerView, false);
                 updateColumnSize(verticalGridView);
                 verticalGridView.mLayoutManager.mWindowAlignment.mMainAxis.mWindowAlignment = 0;
                 verticalGridView.requestLayout();
@@ -345,7 +339,7 @@ public class DatePicker extends Picker {
                 this.mPickerView.addView(verticalGridView);
                 int i12 = i11 + 1;
                 if (!TextUtils.isEmpty((CharSequence) ((ArrayList) this.mSeparators).get(i12))) {
-                    TextView textView2 = (TextView) from.inflate(R.layout.lb_picker_separator, this.mPickerView, false);
+                    TextView textView2 = (TextView) layoutInflaterFrom.inflate(R.layout.lb_picker_separator, this.mPickerView, false);
                     textView2.setText((CharSequence) ((ArrayList) this.mSeparators).get(i12));
                     this.mPickerView.addView(textView2);
                 }
@@ -367,7 +361,7 @@ public class DatePicker extends Picker {
             }
             post(new AnonymousClass1(false));
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

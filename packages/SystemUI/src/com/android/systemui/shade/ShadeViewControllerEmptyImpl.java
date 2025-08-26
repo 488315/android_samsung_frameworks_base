@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.policy.BrightnessMirrorController$$Externa
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ShadeViewControllerEmptyImpl implements ShadeViewController, ShadeBackActionInteractor, ShadeLockscreenInteractor, PanelExpansionInteractor {
     public final FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 legacyPanelExpansion;
@@ -18,9 +17,9 @@ public class ShadeViewControllerEmptyImpl implements ShadeViewController, ShadeB
     public final ShadeFoldAnimatorEmptyImpl shadeFoldAnimator = new ShadeFoldAnimatorEmptyImpl();
 
     public ShadeViewControllerEmptyImpl() {
-        Float valueOf = Float.valueOf(0.0f);
-        this.legacyPanelExpansion = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(valueOf);
-        StateFlowKt.MutableStateFlow(valueOf);
+        Float fValueOf = Float.valueOf(0.0f);
+        this.legacyPanelExpansion = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(fValueOf);
+        StateFlowKt.MutableStateFlow(fValueOf);
     }
 
     @Override // com.android.systemui.shade.domain.interactor.ShadeBackActionInteractor

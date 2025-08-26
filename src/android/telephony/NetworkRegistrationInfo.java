@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
 import android.telephony.DataSpecificRegistrationInfo;
 import android.text.TextUtils;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -137,7 +138,7 @@ public final class NetworkRegistrationInfo implements Parcelable {
         this(i, i2, i3, i4, i5, z, list, cellIdentity, str, null, new DataSpecificRegistrationInfo.Builder(i6).setDcNrRestricted(z2).setNrAvailable(z3).setEnDcAvailable(z4).setVopsSupportInfo(vopsSupportInfo).build(), false);
     }
 
-    private NetworkRegistrationInfo(Parcel parcel) {
+    private NetworkRegistrationInfo(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mDomain = parcel.readInt();
         this.mTransportType = parcel.readInt();
         this.mRegistrationState = parcel.readInt();
@@ -171,11 +172,11 @@ public final class NetworkRegistrationInfo implements Parcelable {
         this.mEmergencyOnly = networkRegistrationInfo.mEmergencyOnly;
         this.mAvailableServices = new ArrayList<>(networkRegistrationInfo.mAvailableServices);
         if (networkRegistrationInfo.mCellIdentity != null) {
-            Parcel obtain = Parcel.obtain();
-            networkRegistrationInfo.mCellIdentity.writeToParcel(obtain, 0);
-            obtain.setDataPosition(0);
-            this.mCellIdentity = CellIdentity.CREATOR.createFromParcel(obtain);
-            obtain.recycle();
+            Parcel parcelObtain = Parcel.obtain();
+            networkRegistrationInfo.mCellIdentity.writeToParcel(parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
+            this.mCellIdentity = CellIdentity.CREATOR.createFromParcel(parcelObtain);
+            parcelObtain.recycle();
         }
         if (networkRegistrationInfo.mVoiceSpecificInfo != null) {
             this.mVoiceSpecificInfo = new VoiceSpecificRegistrationInfo(networkRegistrationInfo.mVoiceSpecificInfo);
@@ -428,9 +429,7 @@ public final class NetworkRegistrationInfo implements Parcelable {
         sb2.append(arrayList != null ? (String) arrayList.stream().map(new Function() { // from class: android.telephony.NetworkRegistrationInfo$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String serviceTypeToString;
-                serviceTypeToString = NetworkRegistrationInfo.serviceTypeToString(((Integer) obj).intValue());
-                return serviceTypeToString;
+                return NetworkRegistrationInfo.serviceTypeToString(((Integer) obj).intValue());
             }
         }).collect(Collectors.joining(",")) : null);
         sb2.append(NavigationBarInflaterView.SIZE_MOD_END);
@@ -503,17 +502,17 @@ public final class NetworkRegistrationInfo implements Parcelable {
     }
 
     public NetworkRegistrationInfo sanitizeLocationInfo() {
-        NetworkRegistrationInfo copy = copy();
-        copy.mCellIdentity = null;
-        return copy;
+        NetworkRegistrationInfo networkRegistrationInfoCopy = copy();
+        networkRegistrationInfoCopy.mCellIdentity = null;
+        return networkRegistrationInfoCopy;
     }
 
     private NetworkRegistrationInfo copy() {
-        Parcel obtain = Parcel.obtain();
-        writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        NetworkRegistrationInfo networkRegistrationInfo = new NetworkRegistrationInfo(obtain);
-        obtain.recycle();
+        Parcel parcelObtain = Parcel.obtain();
+        writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        NetworkRegistrationInfo networkRegistrationInfo = new NetworkRegistrationInfo(parcelObtain);
+        parcelObtain.recycle();
         return networkRegistrationInfo;
     }
 

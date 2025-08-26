@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ AlternateBouncerDependencies $alternateBouncerDependencies;
@@ -33,7 +32,6 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder$bind$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ AlternateBouncerDependencies $alternateBouncerDependencies;
@@ -44,9 +42,8 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder$bind$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C01341 extends SuspendLambda implements Function2 {
+        final class C02411 extends SuspendLambda implements Function2 {
             final /* synthetic */ AlternateBouncerDependencies $alternateBouncerDependencies;
             final /* synthetic */ SwipeUpAnywhereGestureHandler $swipeUpAnywhereGestureHandler;
             final /* synthetic */ TapGestureDetector $tapGestureDetector;
@@ -54,7 +51,7 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C01341(AlternateBouncerViewModel alternateBouncerViewModel, SwipeUpAnywhereGestureHandler swipeUpAnywhereGestureHandler, TapGestureDetector tapGestureDetector, AlternateBouncerDependencies alternateBouncerDependencies, Continuation continuation) {
+            public C02411(AlternateBouncerViewModel alternateBouncerViewModel, SwipeUpAnywhereGestureHandler swipeUpAnywhereGestureHandler, TapGestureDetector tapGestureDetector, AlternateBouncerDependencies alternateBouncerDependencies, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = alternateBouncerViewModel;
                 this.$swipeUpAnywhereGestureHandler = swipeUpAnywhereGestureHandler;
@@ -64,12 +61,12 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C01341(this.$viewModel, this.$swipeUpAnywhereGestureHandler, this.$tapGestureDetector, this.$alternateBouncerDependencies, continuation);
+                return new C02411(this.$viewModel, this.$swipeUpAnywhereGestureHandler, this.$tapGestureDetector, this.$alternateBouncerDependencies, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C01341) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C02411) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -86,10 +83,10 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder.bind.1.1.1.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            boolean booleanValue = ((Boolean) obj2).booleanValue();
+                            boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                             TapGestureDetector tapGestureDetector2 = tapGestureDetector;
-                            SwipeUpAnywhereGestureHandler swipeUpAnywhereGestureHandler2 = SwipeUpAnywhereGestureHandler.this;
-                            if (booleanValue) {
+                            SwipeUpAnywhereGestureHandler swipeUpAnywhereGestureHandler2 = swipeUpAnywhereGestureHandler;
+                            if (zBooleanValue) {
                                 AlternateBouncerDependencies alternateBouncerDependencies2 = alternateBouncerDependencies;
                                 AlternateBouncerViewModel alternateBouncerViewModel2 = alternateBouncerViewModel;
                                 swipeUpAnywhereGestureHandler2.addOnGestureDetectedCallback("AlternateBouncer-SWIPE", new AlternateBouncerViewBinder$bind$1$1$$ExternalSyntheticLambda0(1, alternateBouncerDependencies2, alternateBouncerViewModel2));
@@ -115,7 +112,6 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder$bind$1$1$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             final /* synthetic */ ScrimView $scrim;
@@ -150,7 +146,7 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder.bind.1.1.3.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            ScrimView.this.setViewAlpha(((Number) obj2).floatValue());
+                            scrimView.setViewAlpha(((Number) obj2).floatValue());
                             return Unit.INSTANCE;
                         }
                     };
@@ -168,7 +164,6 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder$bind$1$1$4, reason: invalid class name */
         final class AnonymousClass4 extends SuspendLambda implements Function2 {
             final /* synthetic */ ScrimView $scrim;
@@ -203,7 +198,7 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.ui.binder.AlternateBouncerViewBinder.bind.1.1.4.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            ScrimView.this.setTint(((Number) obj2).intValue());
+                            scrimView.setTint(((Number) obj2).intValue());
                             return Unit.INSTANCE;
                         }
                     };
@@ -251,7 +246,7 @@ final class AlternateBouncerViewBinder$bind$1 extends SuspendLambda implements F
             }
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C01341(this.$viewModel, this.$swipeUpAnywhereGestureHandler, this.$tapGestureDetector, this.$alternateBouncerDependencies, null), 6).invokeOnCompletion(new AlternateBouncerViewBinder$bind$1$1$$ExternalSyntheticLambda0(0, this.$swipeUpAnywhereGestureHandler, this.$tapGestureDetector));
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C02411(this.$viewModel, this.$swipeUpAnywhereGestureHandler, this.$tapGestureDetector, this.$alternateBouncerDependencies, null), 6).invokeOnCompletion(new AlternateBouncerViewBinder$bind$1$1$$ExternalSyntheticLambda0(0, this.$swipeUpAnywhereGestureHandler, this.$tapGestureDetector));
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(this.$viewModel, this.$scrim, null), 6);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass4(this.$viewModel, this.$scrim, null), 6);
             return Unit.INSTANCE;

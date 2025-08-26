@@ -74,9 +74,9 @@ public class VignetteFilter extends Filter {
             }
             float f = fArr[0];
             float f2 = fArr[1];
-            float sqrt = ((float) Math.sqrt((f * f) + (f2 * f2))) * 0.5f;
+            float fSqrt = ((float) Math.sqrt((f * f) + (f2 * f2))) * 0.5f;
             this.mProgram.setHostValue("scale", fArr);
-            this.mProgram.setHostValue("inv_max_dist", Float.valueOf(1.0f / sqrt));
+            this.mProgram.setHostValue("inv_max_dist", Float.valueOf(1.0f / fSqrt));
             this.mProgram.setHostValue(Camera.Parameters.WHITE_BALANCE_SHADE, Float.valueOf(0.85f));
             updateParameters();
         }
@@ -95,8 +95,8 @@ public class VignetteFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
         if (this.mProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
         }
@@ -105,9 +105,9 @@ public class VignetteFilter extends Filter {
             this.mHeight = format.getHeight();
             initParameters();
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
-        this.mProgram.process(pullInput, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
+        this.mProgram.process(framePullInput, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 }

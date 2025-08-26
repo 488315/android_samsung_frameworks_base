@@ -44,9 +44,9 @@ public interface SemTasPolicyListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(SemTasPolicyListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof SemTasPolicyListener)) {
-                return (SemTasPolicyListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(SemTasPolicyListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof SemTasPolicyListener)) {
+                return (SemTasPolicyListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface SemTasPolicyListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onTasPolicyChanged(readInt, readInt2);
+                onTasPolicyChanged(i3, i4);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface SemTasPolicyListener extends IInterface {
 
             @Override // com.samsung.android.wifi.SemTasPolicyListener
             public void onTasPolicyChanged(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(SemTasPolicyListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(SemTasPolicyListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

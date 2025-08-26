@@ -4,7 +4,6 @@ import com.android.systemui.dump.DumpManager;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SysUIStateOverride extends SysUiStateImpl {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -15,7 +14,6 @@ public final class SysUIStateOverride extends SysUiStateImpl {
     public final StateChange override;
     public final SysUIStateDispatcher stateDispatcher;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         SysUIStateOverride create(int i);
     }
@@ -32,10 +30,10 @@ public final class SysUIStateOverride extends SysUiStateImpl {
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 ((Long) obj).longValue();
-                int intValue = ((Integer) obj2).intValue();
+                int iIntValue = ((Integer) obj2).intValue();
                 int i2 = SysUIStateOverride.$r8$clinit;
-                if (intValue == 0) {
-                    SysUIStateOverride.this.commitUpdate();
+                if (iIntValue == 0) {
+                    this.f$0.commitUpdate();
                 }
                 return Unit.INSTANCE;
             }

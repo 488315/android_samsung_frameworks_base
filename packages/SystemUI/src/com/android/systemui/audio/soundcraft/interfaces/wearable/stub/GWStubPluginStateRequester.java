@@ -17,13 +17,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import org.json.JSONArray;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class GWStubPluginStateRequester extends GWStubServiceRequester {
     public final Function1 onPluginStateReceived;
     public final Messenger receiver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,7 +42,7 @@ public final class GWStubPluginStateRequester extends GWStubServiceRequester {
             @Override // android.os.Handler.Callback
             public final boolean handleMessage(Message message) {
                 Object failure;
-                Function1 function12 = GWStubPluginStateRequester.this.onPluginStateReceived;
+                Function1 function12 = this.this$0.onPluginStateReceived;
                 String string = message.getData().getString("result");
                 if (string == null) {
                     string = "";
@@ -69,16 +67,16 @@ public final class GWStubPluginStateRequester extends GWStubServiceRequester {
                                 arrayList.add(gWPluginModel);
                             }
                         }
-                        function12.mo779invoke(arrayList);
+                        function12.mo781invoke(arrayList);
                         failure = Unit.INSTANCE;
                     } catch (Throwable th) {
                         int i3 = Result.$r8$clinit;
                         failure = new Result.Failure(th);
                     }
-                    Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-                    if (m3422exceptionOrNullimpl != null) {
-                        Log.e("SoundCraft.wearable.GWStubPluginStateRequester", "failed : e=" + m3422exceptionOrNullimpl);
-                        function12.mo779invoke(EmptyList.INSTANCE);
+                    Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                    if (thM3442exceptionOrNullimpl != null) {
+                        Log.e("SoundCraft.wearable.GWStubPluginStateRequester", "failed : e=" + thM3442exceptionOrNullimpl);
+                        function12.mo781invoke(EmptyList.INSTANCE);
                     }
                 }
                 return true;
@@ -94,16 +92,16 @@ public final class GWStubPluginStateRequester extends GWStubServiceRequester {
             Messenger messenger = this.messenger;
             failure = null;
             if (messenger != null) {
-                Message obtain = Message.obtain((Handler) null, 1001);
-                obtain.replyTo = this.receiver;
-                messenger.send(obtain);
+                Message messageObtain = Message.obtain((Handler) null, 1001);
+                messageObtain.replyTo = this.receiver;
+                messenger.send(messageObtain);
                 failure = Unit.INSTANCE;
             }
         } catch (Throwable th) {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        if (Result.m3422exceptionOrNullimpl(failure) != null) {
+        if (Result.m3442exceptionOrNullimpl(failure) != null) {
             Log.e("SoundCraft.wearable.GWStubPluginStateRequester", "execute : onFailure");
         }
     }

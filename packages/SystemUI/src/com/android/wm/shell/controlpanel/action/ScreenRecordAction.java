@@ -11,7 +11,6 @@ import com.android.systemui.R;
 import com.android.wm.shell.controlpanel.activity.FlexPanelActivity;
 import com.android.wm.shell.controlpanel.utils.ControlPanelUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ScreenRecordAction extends MenuActionType {
     public final Context mContext;

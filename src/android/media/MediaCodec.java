@@ -409,9 +409,7 @@ public final class MediaCodec {
                     if (MediaCodec.GetFlag(new Supplier() { // from class: android.media.MediaCodec$EventHandler$$ExternalSyntheticLambda0
                         @Override // java.util.function.Supplier
                         public final Object get() {
-                            Boolean valueOf;
-                            valueOf = Boolean.valueOf(Flags.subsessionMetrics());
-                            return valueOf;
+                            return Boolean.valueOf(Flags.subsessionMetrics());
                         }
                     })) {
                         MediaCodec.this.mCallback.onMetricsFlushed(this.mCodec, (PersistableBundle) message.obj);
@@ -461,6 +459,7 @@ public final class MediaCodec {
         this(str, z, z2, -1, -1);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     private MediaCodec(String str, boolean z, boolean z2, int i, int i2) {
         this.mListenerLock = new Object();
         this.mCodecInfoLock = new Object();
@@ -475,9 +474,9 @@ public final class MediaCodec {
         this.mOutputFrames = new ArrayList<>();
         this.mNativeContext = 0L;
         this.mNativeContextLock = new ReentrantLock();
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null) {
-            this.mEventHandler = new EventHandler(this, myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null) {
+            this.mEventHandler = new EventHandler(this, looperMyLooper);
         } else {
             Looper mainLooper = Looper.getMainLooper();
             if (mainLooper != null) {
@@ -571,24 +570,20 @@ public final class MediaCodec {
         if (mediaCrypto != null && iHwBinder != null) {
             throw new IllegalArgumentException("Can't use crypto and descrambler together!");
         }
-        boolean GetFlag = GetFlag(new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda7
+        boolean zGetFlag = GetFlag(new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda7
             @Override // java.util.function.Supplier
             public final Object get() {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Flags.nullOutputSurfaceSupport());
-                return valueOf;
+                return Boolean.valueOf(Flags.nullOutputSurfaceSupport());
             }
         });
         if (!GetFlag(new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda8
             @Override // java.util.function.Supplier
             public final Object get() {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Flags.nullOutputSurface());
-                return valueOf;
+                return Boolean.valueOf(Flags.nullOutputSurface());
             }
         })) {
-            GetFlag = false;
-        } else if (surface == null && (i & 8) != 0 && !GetFlag) {
+            zGetFlag = false;
+        } else if (surface == null && (i & 8) != 0 && !zGetFlag) {
             throw new IllegalArgumentException("Codec does not support detached surface");
         }
         if (mediaFormat != null) {
@@ -599,9 +594,9 @@ public final class MediaCodec {
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 if (entry.getKey().equals(MediaFormat.KEY_AUDIO_SESSION_ID)) {
                     try {
-                        int intValue = ((Integer) entry.getValue()).intValue();
+                        int iIntValue = ((Integer) entry.getValue()).intValue();
                         strArr2[i2] = MediaFormat.KEY_AUDIO_HW_SYNC;
-                        objArr2[i2] = Integer.valueOf(AudioSystem.getAudioHwSyncForSession(intValue));
+                        objArr2[i2] = Integer.valueOf(AudioSystem.getAudioHwSyncForSession(iIntValue));
                     } catch (Exception unused) {
                         throw new IllegalArgumentException("Wrong Session ID Parameter!");
                     }
@@ -660,7 +655,7 @@ public final class MediaCodec {
             }
         }
         native_configure(strArr, objArr, surface, mediaCrypto, iHwBinder, i);
-        if (GetFlag && surface == null && (i & 8) != 0) {
+        if (zGetFlag && surface == null && (i & 8) != 0) {
             this.mHasSurface = true;
         }
     }
@@ -701,9 +696,7 @@ public final class MediaCodec {
         if (GetFlag(new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda9
             @Override // java.util.function.Supplier
             public final Object get() {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Flags.nullOutputSurfaceSupport());
-                return valueOf;
+                return Boolean.valueOf(Flags.nullOutputSurfaceSupport());
             }
         })) {
             native_detachOutputSurface();
@@ -1061,14 +1054,14 @@ public final class MediaCodec {
                 throw new IncompatibleWithBlockModelException("dequeueInputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use MediaCodec.Callback objectes to get input buffer slots.");
             }
         }
-        int native_dequeueInputBuffer = native_dequeueInputBuffer(j);
-        if (native_dequeueInputBuffer >= 0) {
+        int iNative_dequeueInputBuffer = native_dequeueInputBuffer(j);
+        if (iNative_dequeueInputBuffer >= 0) {
             synchronized (this.mBufferLock) {
-                validateInputByteBufferLocked(this.mCachedInputBuffers, native_dequeueInputBuffer);
+                validateInputByteBufferLocked(this.mCachedInputBuffers, iNative_dequeueInputBuffer);
             }
         }
         Trace.traceEnd(512L);
-        return native_dequeueInputBuffer;
+        return iNative_dequeueInputBuffer;
     }
 
     public static final class LinearBlock {
@@ -1148,14 +1141,14 @@ public final class MediaCodec {
         }
 
         public static LinearBlock obtain(int i, String[] strArr) {
-            LinearBlock poll = sPool.poll();
-            if (poll == null) {
-                poll = new LinearBlock();
+            LinearBlock linearBlockPoll = sPool.poll();
+            if (linearBlockPoll == null) {
+                linearBlockPoll = new LinearBlock();
             }
-            synchronized (poll.mLock) {
-                poll.native_obtain(i, strArr);
+            synchronized (linearBlockPoll.mLock) {
+                linearBlockPoll.native_obtain(i, strArr);
             }
-            return poll;
+            return linearBlockPoll;
         }
 
         private void setInternalStateLocked(long j, boolean z) {
@@ -1387,7 +1380,7 @@ public final class MediaCodec {
     }
 
     public QueueRequest getQueueRequest(int i) {
-        QueueRequest clear;
+        QueueRequest queueRequestClear;
         synchronized (this.mBufferLock) {
             if (this.mBufferMode != 1) {
                 throw new IllegalStateException("The codec is not configured for block model");
@@ -1402,9 +1395,9 @@ public final class MediaCodec {
             if (!queueRequest.isAccessible()) {
                 throw new IllegalArgumentException("The request is stale at index " + i);
             }
-            clear = queueRequest.clear();
+            queueRequestClear = queueRequest.clear();
         }
-        return clear;
+        return queueRequestClear;
     }
 
     public final int dequeueOutputBuffer(BufferInfo bufferInfo, long j) {
@@ -1413,22 +1406,22 @@ public final class MediaCodec {
                 throw new IncompatibleWithBlockModelException("dequeueOutputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use MediaCodec.Callback objects to get output buffer slots.");
             }
         }
-        int native_dequeueOutputBuffer = native_dequeueOutputBuffer(bufferInfo, j);
+        int iNative_dequeueOutputBuffer = native_dequeueOutputBuffer(bufferInfo, j);
         synchronized (this.mBufferLock) {
             try {
-                if (native_dequeueOutputBuffer == -3) {
+                if (iNative_dequeueOutputBuffer == -3) {
                     cacheBuffersLocked(false);
-                } else if (native_dequeueOutputBuffer >= 0) {
-                    validateOutputByteBufferLocked(this.mCachedOutputBuffers, native_dequeueOutputBuffer, bufferInfo);
+                } else if (iNative_dequeueOutputBuffer >= 0) {
+                    validateOutputByteBufferLocked(this.mCachedOutputBuffers, iNative_dequeueOutputBuffer, bufferInfo);
                     if (this.mHasSurface || this.mCachedOutputBuffers == null) {
-                        this.mDequeuedOutputInfos.put(Integer.valueOf(native_dequeueOutputBuffer), bufferInfo.dup());
+                        this.mDequeuedOutputInfos.put(Integer.valueOf(iNative_dequeueOutputBuffer), bufferInfo.dup());
                     }
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
-        return native_dequeueOutputBuffer;
+        return iNative_dequeueOutputBuffer;
     }
 
     public final void releaseOutputBuffer(int i, boolean z) {
@@ -1590,20 +1583,16 @@ public final class MediaCodec {
     /* JADX INFO: Access modifiers changed from: private */
     public void validateOutputByteBuffersLocked(ByteBuffer[] byteBufferArr, int i, ArrayDeque<BufferInfo> arrayDeque) {
         ByteBuffer byteBuffer;
-        Optional min = arrayDeque.stream().min(new Comparator() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda0
+        Optional optionalMin = arrayDeque.stream().min(new Comparator() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda0
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Integer.compare(((MediaCodec.BufferInfo) obj).offset, ((MediaCodec.BufferInfo) obj2).offset);
-                return compare;
+                return Integer.compare(((MediaCodec.BufferInfo) obj).offset, ((MediaCodec.BufferInfo) obj2).offset);
             }
         });
-        Optional max = arrayDeque.stream().max(new Comparator() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda1
+        Optional optionalMax = arrayDeque.stream().max(new Comparator() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda1
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Integer.compare(((MediaCodec.BufferInfo) obj).offset, ((MediaCodec.BufferInfo) obj2).offset);
-                return compare;
+                return Integer.compare(((MediaCodec.BufferInfo) obj).offset, ((MediaCodec.BufferInfo) obj2).offset);
             }
         });
         if (byteBufferArr == null) {
@@ -1611,12 +1600,12 @@ public final class MediaCodec {
                 this.mValidOutputIndices.set(i);
             }
         } else {
-            if (i < 0 || i >= byteBufferArr.length || (byteBuffer = byteBufferArr[i]) == null || !min.isPresent() || !max.isPresent()) {
+            if (i < 0 || i >= byteBufferArr.length || (byteBuffer = byteBufferArr[i]) == null || !optionalMin.isPresent() || !optionalMax.isPresent()) {
                 return;
             }
             byteBuffer.setAccessible(true);
-            byteBuffer.limit(((BufferInfo) max.get()).offset + ((BufferInfo) max.get()).size);
-            byteBuffer.position(((BufferInfo) min.get()).offset);
+            byteBuffer.limit(((BufferInfo) optionalMax.get()).offset + ((BufferInfo) optionalMax.get()).size);
+            byteBuffer.position(((BufferInfo) optionalMin.get()).offset);
         }
     }
 
@@ -1676,21 +1665,21 @@ public final class MediaCodec {
     }
 
     private void cacheBuffersLocked(boolean z) {
-        ByteBuffer[] byteBufferArr;
+        ByteBuffer[] buffers;
         BufferInfo bufferInfo;
         try {
-            byteBufferArr = getBuffers(z);
+            buffers = getBuffers(z);
             try {
-                invalidateByteBuffersLocked(byteBufferArr);
+                invalidateByteBuffersLocked(buffers);
             } catch (IllegalStateException unused) {
             }
         } catch (IllegalStateException unused2) {
-            byteBufferArr = null;
+            buffers = null;
         }
-        if (byteBufferArr != null) {
+        if (buffers != null) {
             BitSet bitSet = z ? this.mValidInputIndices : this.mValidOutputIndices;
-            for (int i = 0; i < byteBufferArr.length; i++) {
-                ByteBuffer byteBuffer = byteBufferArr[i];
+            for (int i = 0; i < buffers.length; i++) {
+                ByteBuffer byteBuffer = buffers[i];
                 if (byteBuffer != null && bitSet.get(i)) {
                     byteBuffer.setAccessible(true);
                     if (!z && (bufferInfo = this.mDequeuedOutputInfos.get(Integer.valueOf(i))) != null) {
@@ -1701,9 +1690,9 @@ public final class MediaCodec {
             bitSet.clear();
         }
         if (z) {
-            this.mCachedInputBuffers = byteBufferArr;
+            this.mCachedInputBuffers = buffers;
         } else {
-            this.mCachedOutputBuffers = byteBufferArr;
+            this.mCachedOutputBuffers = buffers;
         }
     }
 
@@ -1945,9 +1934,9 @@ public final class MediaCodec {
         for (String str : bundle.keySet()) {
             if (str.equals(MediaFormat.KEY_AUDIO_SESSION_ID)) {
                 try {
-                    int intValue = ((Integer) bundle.get(str)).intValue();
+                    int iIntValue = ((Integer) bundle.get(str)).intValue();
                     strArr[i] = MediaFormat.KEY_AUDIO_HW_SYNC;
-                    objArr[i] = Integer.valueOf(AudioSystem.getAudioHwSyncForSession(intValue));
+                    objArr[i] = Integer.valueOf(AudioSystem.getAudioHwSyncForSession(iIntValue));
                 } catch (Exception unused) {
                     throw new IllegalArgumentException("Wrong Session ID Parameter!");
                 }
@@ -2005,12 +1994,10 @@ public final class MediaCodec {
     }
 
     public void setCallback(Callback callback, Handler handler) {
-        boolean GetFlag = GetFlag(new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda2
+        boolean zGetFlag = GetFlag(new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda2
             @Override // java.util.function.Supplier
             public final Object get() {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Flags.setCallbackStall());
-                return valueOf;
+                return Boolean.valueOf(Flags.setCallbackStall());
             }
         });
         if (callback != null) {
@@ -2018,17 +2005,17 @@ public final class MediaCodec {
                 EventHandler eventHandlerOn = getEventHandlerOn(handler, this.mCallbackHandler);
                 EventHandler eventHandler = this.mCallbackHandler;
                 if (eventHandlerOn != eventHandler) {
-                    if (GetFlag) {
+                    if (zGetFlag) {
                         logAndRun("[new handler] removeMessages(SET_CALLBACK)", new Runnable() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda3
                             @Override // java.lang.Runnable
                             public final void run() {
-                                MediaCodec.this.lambda$setCallback$6();
+                                this.f$0.lambda$setCallback$6();
                             }
                         });
                         logAndRun("[new handler] removeMessages(CALLBACK)", new Runnable() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda4
                             @Override // java.lang.Runnable
                             public final void run() {
-                                MediaCodec.this.lambda$setCallback$7();
+                                this.f$0.lambda$setCallback$7();
                             }
                         });
                     } else {
@@ -2041,17 +2028,17 @@ public final class MediaCodec {
         } else {
             EventHandler eventHandler2 = this.mCallbackHandler;
             if (eventHandler2 != null) {
-                if (GetFlag) {
+                if (zGetFlag) {
                     logAndRun("[null handler] removeMessages(SET_CALLBACK)", new Runnable() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MediaCodec.this.lambda$setCallback$8();
+                            this.f$0.lambda$setCallback$8();
                         }
                     });
                     logAndRun("[null handler] removeMessages(CALLBACK)", new Runnable() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda6
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MediaCodec.this.lambda$setCallback$9();
+                            this.f$0.lambda$setCallback$9();
                         }
                     });
                 } else {

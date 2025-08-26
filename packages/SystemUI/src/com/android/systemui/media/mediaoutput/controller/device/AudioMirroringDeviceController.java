@@ -34,7 +34,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AudioMirroringDeviceController extends RouteDeviceController {
     public static final Companion Companion = new Companion(null);
@@ -42,7 +41,6 @@ public final class AudioMirroringDeviceController extends RouteDeviceController 
     public final ControllerType controllerType;
     public volatile String mediaPackageName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,18 +53,18 @@ public final class AudioMirroringDeviceController extends RouteDeviceController 
                 int i = Result.$r8$clinit;
                 Log.i("AudioMirroringDeviceController", "setAudioMirroringSpeakerMode() : ".concat(str));
                 ContentResolver contentResolver = context.getContentResolver();
-                Uri parse = Uri.parse("content://com.samsung.android.audiomirroring");
+                Uri uri = Uri.parse("content://com.samsung.android.audiomirroring");
                 Bundle bundle = new Bundle();
                 bundle.putString("method", str);
                 Unit unit = Unit.INSTANCE;
-                failure = contentResolver.call(parse, "set_speaker_mode", (String) null, bundle);
+                failure = contentResolver.call(uri, "set_speaker_mode", (String) null, bundle);
             } catch (Throwable th) {
                 int i2 = Result.$r8$clinit;
                 failure = new Result.Failure(th);
             }
-            Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-            if (m3422exceptionOrNullimpl != null) {
-                m3422exceptionOrNullimpl.printStackTrace();
+            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+            if (thM3442exceptionOrNullimpl != null) {
+                thM3442exceptionOrNullimpl.printStackTrace();
             }
         }
 
@@ -147,17 +145,19 @@ public final class AudioMirroringDeviceController extends RouteDeviceController 
 
     @Override // com.android.systemui.media.mediaoutput.controller.device.RouteDeviceController
     public final List getTransferableRoutes() {
-        List transferableRoutes;
+        EmptyList emptyList;
         String str = this.mediaPackageName;
         if (str != null) {
-            if (str.startsWith("com.spotify.music") ? this.isSpotifyCastingPriority : this.isCastingPriority) {
+            if (!str.startsWith("com.spotify.music")) {
                 str = null;
             }
-            if (str != null && (transferableRoutes = getRouter2Manager$1().getTransferableRoutes(getPackageName())) != null) {
-                return transferableRoutes;
+            if (str != null) {
+                if ((this.isSpotifyCastingPriority ? str : null) != null && (emptyList = EmptyList.INSTANCE) != null) {
+                    return emptyList;
+                }
             }
         }
-        return EmptyList.INSTANCE;
+        return getRouter2Manager$1().getTransferableRoutes(getPackageName());
     }
 
     @Override // com.android.systemui.media.mediaoutput.controller.device.RouteDeviceController, com.android.systemui.media.mediaoutput.controller.device.DeviceController
@@ -166,8 +166,8 @@ public final class AudioMirroringDeviceController extends RouteDeviceController 
         if (audioDevice instanceof AudioMirroringDevice) {
             Companion.access$setAudioMirroringSpeakerMode(Companion, this.context, "selectRoute");
         }
-        Unit select = super.select(audioDevice, continuationImpl);
-        return select == CoroutineSingletons.COROUTINE_SUSPENDED ? select : Unit.INSTANCE;
+        Unit unitSelect = super.select(audioDevice, continuationImpl);
+        return unitSelect == CoroutineSingletons.COROUTINE_SUSPENDED ? unitSelect : Unit.INSTANCE;
     }
 
     @Override // com.android.systemui.media.mediaoutput.controller.device.RouteDeviceController
@@ -199,18 +199,18 @@ public final class AudioMirroringDeviceController extends RouteDeviceController 
                 int i = Result.$r8$clinit;
                 Log.i("AudioMirroringDeviceController", "setAudioMirroringPackageName() : ".concat(str));
                 ContentResolver contentResolver = context.getContentResolver();
-                Uri parse = Uri.parse("content://com.samsung.android.audiomirroring");
+                Uri uri = Uri.parse("content://com.samsung.android.audiomirroring");
                 Bundle bundle = new Bundle();
                 bundle.putString("mediaPackageName", str);
                 Unit unit = Unit.INSTANCE;
-                failure = contentResolver.call(parse, "set_package_name", (String) null, bundle);
+                failure = contentResolver.call(uri, "set_package_name", (String) null, bundle);
             } catch (Throwable th) {
                 int i2 = Result.$r8$clinit;
                 failure = new Result.Failure(th);
             }
-            Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-            if (m3422exceptionOrNullimpl != null) {
-                m3422exceptionOrNullimpl.printStackTrace();
+            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+            if (thM3442exceptionOrNullimpl != null) {
+                thM3442exceptionOrNullimpl.printStackTrace();
             }
             Companion.access$setAudioMirroringSpeakerMode(Companion, this.context, "transfer");
             mediaRoute2Info = ((AudioMirroringDevice) audioDevice).mediaRoute2Info;
@@ -219,7 +219,7 @@ public final class AudioMirroringDeviceController extends RouteDeviceController 
             getRouter2Manager$1().transfer(getPackageName(), mediaRoute2Info, Process.myUserHandle());
             return Unit.INSTANCE;
         }
-        Object transfer$suspendImpl = RouteDeviceController.transfer$suspendImpl(this, audioDevice, (ContinuationImpl) continuation);
-        return transfer$suspendImpl == CoroutineSingletons.COROUTINE_SUSPENDED ? transfer$suspendImpl : Unit.INSTANCE;
+        Object objTransfer$suspendImpl = RouteDeviceController.transfer$suspendImpl(this, audioDevice, (ContinuationImpl) continuation);
+        return objTransfer$suspendImpl == CoroutineSingletons.COROUTINE_SUSPENDED ? objTransfer$suspendImpl : Unit.INSTANCE;
     }
 }

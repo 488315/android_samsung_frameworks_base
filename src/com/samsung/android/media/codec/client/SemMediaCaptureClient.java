@@ -26,7 +26,7 @@ public class SemMediaCaptureClient extends ClientImpl {
     }
 
     @Override // com.samsung.android.media.codec.client.ClientImpl
-    public void stop() {
+    public void stop() throws IllegalStateException, InterruptedException, IOException {
         this.mIgnoreError = true;
         if (this.mIsRunning) {
             Log.i(Context.SEM_VIDEO_TRANSCODING_SERVICE, "stop running client id(" + this.mID + NavigationBarInflaterView.KEY_CODE_END);
@@ -61,11 +61,11 @@ public class SemMediaCaptureClient extends ClientImpl {
     }
 
     @Override // com.samsung.android.media.codec.client.ClientImpl
-    public void transcode() {
+    public void transcode() throws IOException {
         try {
             this.mCapture.setOnPreparedListener(new SemMediaCapture.OnPreparedListener() { // from class: com.samsung.android.media.codec.client.SemMediaCaptureClient.1
                 @Override // com.samsung.android.media.mediacapture.SemMediaCapture.OnPreparedListener
-                public void onPrepared(SemMediaCapture semMediaCapture) {
+                public void onPrepared(SemMediaCapture semMediaCapture) throws IllegalStateException {
                     Log.d(Context.SEM_VIDEO_TRANSCODING_SERVICE, "onPrepared() " + SemMediaCaptureClient.this.mID);
                     SemMediaCaptureClient.this.mCapture.startCapture();
                     SemMediaCaptureClient.this.new CaptureThread().start();
@@ -73,7 +73,7 @@ public class SemMediaCaptureClient extends ClientImpl {
             });
             this.mCapture.setOnRecordingCompletionListener(new SemMediaCapture.OnRecordingCompletionListener() { // from class: com.samsung.android.media.codec.client.SemMediaCaptureClient.2
                 @Override // com.samsung.android.media.mediacapture.SemMediaCapture.OnRecordingCompletionListener
-                public void onRecordingCompletion(SemMediaCapture semMediaCapture) {
+                public void onRecordingCompletion(SemMediaCapture semMediaCapture) throws IllegalStateException, IOException {
                     Log.d(Context.SEM_VIDEO_TRANSCODING_SERVICE, "onRecordingCompletion() " + SemMediaCaptureClient.this.mID);
                     try {
                         SemMediaCaptureClient.this.mIsRunning = false;
@@ -100,7 +100,7 @@ public class SemMediaCaptureClient extends ClientImpl {
             });
             this.mCapture.setOnErrorListener(new SemMediaCapture.OnErrorListener() { // from class: com.samsung.android.media.codec.client.SemMediaCaptureClient.3
                 @Override // com.samsung.android.media.mediacapture.SemMediaCapture.OnErrorListener
-                public boolean onError(SemMediaCapture semMediaCapture, int i, int i2) {
+                public boolean onError(SemMediaCapture semMediaCapture, int i, int i2) throws IllegalStateException, IOException {
                     Log.d(Context.SEM_VIDEO_TRANSCODING_SERVICE, "onError() " + SemMediaCaptureClient.this.mID);
                     SemMediaCaptureClient.this.mIsRunning = false;
                     SemMediaCaptureClient.this.mCapture.reset();
@@ -135,33 +135,31 @@ public class SemMediaCaptureClient extends ClientImpl {
             this.mFos = new FileOutputStream(new File((String) this.mArgs.get(SemVideoTranscodingService.KEY_OUTPUT_PATH)));
             this.mCapture.setOutputFile(this.mFos.getFD());
             this.mCapture.setParameter(1006, 1);
-            if (this.mMode != 200 && this.mMode != 201) {
-                if (this.mMode == 202) {
-                    this.mCapture.setParameter(1011, 3);
-                    this.mCapture.setParameter(1012, 80);
-                    SemVideoTranscodingService.PlaybackSpeedChange playbackSpeedChange = (SemVideoTranscodingService.PlaybackSpeedChange) ((ArrayList) this.mArgs.get(SemVideoTranscodingService.KEY_PLAYBACK_SPEED_CHANGES)).get(0);
-                    SemMediaCapture semMediaCapture = this.mCapture;
-                    SemMediaCapture semMediaCapture2 = this.mCapture;
-                    Objects.requireNonNull(semMediaCapture2);
-                    semMediaCapture.setBoomerangConfiguration(new SemMediaCapture.BoomerangConfiguration(semMediaCapture2, playbackSpeedChange.startMs, playbackSpeedChange.endMs, playbackSpeedChange.rate, playbackSpeedChange.repeatCount));
+            if (this.mMode == 200 || this.mMode == 201) {
+                this.mCapture.setParameter(1010, 1);
+                this.mCapture.setParameter(1011, 2);
+                this.mCapture.setParameter(1012, 89);
+                if (this.mMode == 201) {
+                    this.mCapture.setParameter(1013, 1);
                 }
-                this.mCapture.prepare();
-            }
-            this.mCapture.setParameter(1010, 1);
-            this.mCapture.setParameter(1011, 2);
-            this.mCapture.setParameter(1012, 89);
-            if (this.mMode == 201) {
-                this.mCapture.setParameter(1013, 1);
-            }
-            ArrayList arrayList = new ArrayList();
-            Iterator it = ((ArrayList) this.mArgs.get(SemVideoTranscodingService.KEY_PLAYBACK_SPEED_CHANGES)).iterator();
-            while (it.hasNext()) {
-                SemVideoTranscodingService.PlaybackSpeedChange playbackSpeedChange2 = (SemVideoTranscodingService.PlaybackSpeedChange) it.next();
+                ArrayList arrayList = new ArrayList();
+                Iterator it = ((ArrayList) this.mArgs.get(SemVideoTranscodingService.KEY_PLAYBACK_SPEED_CHANGES)).iterator();
+                while (it.hasNext()) {
+                    SemVideoTranscodingService.PlaybackSpeedChange playbackSpeedChange = (SemVideoTranscodingService.PlaybackSpeedChange) it.next();
+                    SemMediaCapture semMediaCapture = this.mCapture;
+                    Objects.requireNonNull(semMediaCapture);
+                    arrayList.add(new SemMediaCapture.DynamicViewingConfiguration(semMediaCapture, playbackSpeedChange.startMs, playbackSpeedChange.endMs, playbackSpeedChange.rate));
+                }
+                this.mCapture.setDynamicViewingConfigurations(arrayList);
+            } else if (this.mMode == 202) {
+                this.mCapture.setParameter(1011, 3);
+                this.mCapture.setParameter(1012, 80);
+                SemVideoTranscodingService.PlaybackSpeedChange playbackSpeedChange2 = (SemVideoTranscodingService.PlaybackSpeedChange) ((ArrayList) this.mArgs.get(SemVideoTranscodingService.KEY_PLAYBACK_SPEED_CHANGES)).get(0);
+                SemMediaCapture semMediaCapture2 = this.mCapture;
                 SemMediaCapture semMediaCapture3 = this.mCapture;
                 Objects.requireNonNull(semMediaCapture3);
-                arrayList.add(new SemMediaCapture.DynamicViewingConfiguration(semMediaCapture3, playbackSpeedChange2.startMs, playbackSpeedChange2.endMs, playbackSpeedChange2.rate));
+                semMediaCapture2.setBoomerangConfiguration(new SemMediaCapture.BoomerangConfiguration(semMediaCapture3, playbackSpeedChange2.startMs, playbackSpeedChange2.endMs, playbackSpeedChange2.rate, playbackSpeedChange2.repeatCount));
             }
-            this.mCapture.setDynamicViewingConfigurations(arrayList);
             this.mCapture.prepare();
         } catch (Exception e) {
             e.printStackTrace();

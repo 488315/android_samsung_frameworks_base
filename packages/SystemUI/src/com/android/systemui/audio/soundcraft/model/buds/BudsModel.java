@@ -9,7 +9,6 @@ import java.util.Set;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BudsModel {
 
@@ -141,39 +140,39 @@ public final class BudsModel {
 
     public final int hashCode() {
         Boolean bool = this.connectionState;
-        int hashCode = (bool == null ? 0 : bool.hashCode()) * 31;
+        int iHashCode = (bool == null ? 0 : bool.hashCode()) * 31;
         List<Equalizer> list = this.equalizerList;
-        int hashCode2 = (hashCode + (list == null ? 0 : list.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (list == null ? 0 : list.hashCode())) * 31;
         Set<NoiseControl> set = this.noiseControlsList;
-        int hashCode3 = (hashCode2 + (set == null ? 0 : set.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (set == null ? 0 : set.hashCode())) * 31;
         Integer num = this.maxActiveNoiseCancelingLevel;
-        int hashCode4 = (hashCode3 + (num == null ? 0 : num.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (num == null ? 0 : num.hashCode())) * 31;
         Integer num2 = this.noiseCancelingLevel;
-        int hashCode5 = (hashCode4 + (num2 == null ? 0 : num2.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (num2 == null ? 0 : num2.hashCode())) * 31;
         Integer num3 = this.maxAmbientSoundVolume;
-        int hashCode6 = (hashCode5 + (num3 == null ? 0 : num3.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (num3 == null ? 0 : num3.hashCode())) * 31;
         Integer num4 = this.ambientSoundVolume;
-        int hashCode7 = (hashCode6 + (num4 == null ? 0 : num4.hashCode())) * 31;
+        int iHashCode7 = (iHashCode6 + (num4 == null ? 0 : num4.hashCode())) * 31;
         Boolean bool2 = this.hearingEnhancement;
-        int hashCode8 = (hashCode7 + (bool2 == null ? 0 : bool2.hashCode())) * 31;
+        int iHashCode8 = (iHashCode7 + (bool2 == null ? 0 : bool2.hashCode())) * 31;
         Boolean bool3 = this.touchControls;
-        int hashCode9 = (hashCode8 + (bool3 == null ? 0 : bool3.hashCode())) * 31;
+        int iHashCode9 = (iHashCode8 + (bool3 == null ? 0 : bool3.hashCode())) * 31;
         Boolean bool4 = this.wearingL;
-        int hashCode10 = (hashCode9 + (bool4 == null ? 0 : bool4.hashCode())) * 31;
+        int iHashCode10 = (iHashCode9 + (bool4 == null ? 0 : bool4.hashCode())) * 31;
         Boolean bool5 = this.wearingR;
-        int hashCode11 = (hashCode10 + (bool5 == null ? 0 : bool5.hashCode())) * 31;
+        int iHashCode11 = (iHashCode10 + (bool5 == null ? 0 : bool5.hashCode())) * 31;
         Boolean bool6 = this.oneEarbudNoiseControls;
-        int hashCode12 = (hashCode11 + (bool6 == null ? 0 : bool6.hashCode())) * 31;
+        int iHashCode12 = (iHashCode11 + (bool6 == null ? 0 : bool6.hashCode())) * 31;
         Boolean bool7 = this.spatialAudio;
-        int hashCode13 = (hashCode12 + (bool7 == null ? 0 : bool7.hashCode())) * 31;
+        int iHashCode13 = (iHashCode12 + (bool7 == null ? 0 : bool7.hashCode())) * 31;
         Boolean bool8 = this.headTracking;
-        int hashCode14 = (hashCode13 + (bool8 == null ? 0 : bool8.hashCode())) * 31;
+        int iHashCode14 = (iHashCode13 + (bool8 == null ? 0 : bool8.hashCode())) * 31;
         Boolean bool9 = this.voiceBoost;
-        int hashCode15 = (hashCode14 + (bool9 == null ? 0 : bool9.hashCode())) * 31;
+        int iHashCode15 = (iHashCode14 + (bool9 == null ? 0 : bool9.hashCode())) * 31;
         Boolean bool10 = this.volumeNormalization;
-        int hashCode16 = (hashCode15 + (bool10 == null ? 0 : bool10.hashCode())) * 31;
+        int iHashCode16 = (iHashCode15 + (bool10 == null ? 0 : bool10.hashCode())) * 31;
         Boolean bool11 = this.uhq;
-        return hashCode16 + (bool11 != null ? bool11.hashCode() : 0);
+        return iHashCode16 + (bool11 != null ? bool11.hashCode() : 0);
     }
 
     public final void setAmbientSoundVolume(Integer num) {

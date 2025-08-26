@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PromptViewModel$legacyFingerprintSensorHeight$1 extends SuspendLambda implements Function3 {
     /* synthetic */ int I$0;
@@ -24,10 +23,10 @@ final class PromptViewModel$legacyFingerprintSensorHeight$1 extends SuspendLambd
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        int intValue = ((Number) obj2).intValue();
+        int iIntValue = ((Number) obj2).intValue();
         PromptViewModel$legacyFingerprintSensorHeight$1 promptViewModel$legacyFingerprintSensorHeight$1 = new PromptViewModel$legacyFingerprintSensorHeight$1(this.this$0, (Continuation) obj3);
         promptViewModel$legacyFingerprintSensorHeight$1.L$0 = (BiometricModalities) obj;
-        promptViewModel$legacyFingerprintSensorHeight$1.I$0 = intValue;
+        promptViewModel$legacyFingerprintSensorHeight$1.I$0 = iIntValue;
         return promptViewModel$legacyFingerprintSensorHeight$1.invokeSuspend(Unit.INSTANCE);
     }
 

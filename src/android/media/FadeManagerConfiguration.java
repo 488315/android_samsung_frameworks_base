@@ -8,6 +8,7 @@ import android.util.ArrayMap;
 import android.util.IntArray;
 import android.util.SparseArray;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -248,30 +249,30 @@ public final class FadeManagerConfiguration implements Parcelable {
         parcel.writeTypedList(this.mUnfadeableAudioAttributes, i);
     }
 
-    FadeManagerConfiguration(Parcel parcel) {
-        int readInt = parcel.readInt();
-        long readLong = parcel.readLong();
-        long readLong2 = parcel.readLong();
-        long readLong3 = parcel.readLong();
-        SparseArray<FadeVolumeShaperConfigsWrapper> createTypedSparseArray = parcel.createTypedSparseArray(FadeVolumeShaperConfigsWrapper.CREATOR);
+    FadeManagerConfiguration(Parcel parcel) throws ClassNotFoundException, IOException {
+        int i = parcel.readInt();
+        long j = parcel.readLong();
+        long j2 = parcel.readLong();
+        long j3 = parcel.readLong();
+        SparseArray<FadeVolumeShaperConfigsWrapper> sparseArrayCreateTypedSparseArray = parcel.createTypedSparseArray(FadeVolumeShaperConfigsWrapper.CREATOR);
         ArrayMap<AudioAttributes, FadeVolumeShaperConfigsWrapper> arrayMap = new ArrayMap<>();
         parcel.readMap(arrayMap, getClass().getClassLoader(), AudioAttributes.class, FadeVolumeShaperConfigsWrapper.class);
-        int[] createIntArray = parcel.createIntArray();
-        int[] createIntArray2 = parcel.createIntArray();
-        int[] createIntArray3 = parcel.createIntArray();
-        int[] createIntArray4 = parcel.createIntArray();
+        int[] iArrCreateIntArray = parcel.createIntArray();
+        int[] iArrCreateIntArray2 = parcel.createIntArray();
+        int[] iArrCreateIntArray3 = parcel.createIntArray();
+        int[] iArrCreateIntArray4 = parcel.createIntArray();
         ArrayList arrayList = new ArrayList();
         parcel.readTypedList(arrayList, AudioAttributes.CREATOR);
-        this.mFadeState = readInt;
-        this.mFadeOutDurationMillis = readLong;
-        this.mFadeInDurationMillis = readLong2;
-        this.mFadeInDelayForOffendersMillis = readLong3;
-        this.mUsageToFadeWrapperMap = createTypedSparseArray;
+        this.mFadeState = i;
+        this.mFadeOutDurationMillis = j;
+        this.mFadeInDurationMillis = j2;
+        this.mFadeInDelayForOffendersMillis = j3;
+        this.mUsageToFadeWrapperMap = sparseArrayCreateTypedSparseArray;
         this.mAttrToFadeWrapperMap = arrayMap;
-        this.mFadeableUsages = IntArray.wrap(createIntArray);
-        this.mUnfadeableContentTypes = IntArray.wrap(createIntArray2);
-        this.mUnfadeablePlayerTypes = IntArray.wrap(createIntArray3);
-        this.mUnfadeableUids = IntArray.wrap(createIntArray4);
+        this.mFadeableUsages = IntArray.wrap(iArrCreateIntArray);
+        this.mUnfadeableContentTypes = IntArray.wrap(iArrCreateIntArray2);
+        this.mUnfadeablePlayerTypes = IntArray.wrap(iArrCreateIntArray3);
+        this.mUnfadeableUids = IntArray.wrap(iArrCreateIntArray4);
         this.mUnfadeableAudioAttributes = arrayList;
     }
 
@@ -401,12 +402,12 @@ public final class FadeManagerConfiguration implements Parcelable {
             this.mFadeState = fadeManagerConfiguration.mFadeState;
             copyUsageToFadeWrapperMapInternal(fadeManagerConfiguration.mUsageToFadeWrapperMap);
             this.mAttrToFadeWrapperMap = new ArrayMap<>(fadeManagerConfiguration.mAttrToFadeWrapperMap);
-            this.mFadeableUsages = fadeManagerConfiguration.mFadeableUsages.m5502clone();
+            this.mFadeableUsages = fadeManagerConfiguration.mFadeableUsages.m5509clone();
             setFlag(2L);
-            this.mUnfadeableContentTypes = fadeManagerConfiguration.mUnfadeableContentTypes.m5502clone();
+            this.mUnfadeableContentTypes = fadeManagerConfiguration.mUnfadeableContentTypes.m5509clone();
             setFlag(4L);
-            this.mUnfadeablePlayerTypes = fadeManagerConfiguration.mUnfadeablePlayerTypes.m5502clone();
-            this.mUnfadeableUids = fadeManagerConfiguration.mUnfadeableUids.m5502clone();
+            this.mUnfadeablePlayerTypes = fadeManagerConfiguration.mUnfadeablePlayerTypes.m5509clone();
+            this.mUnfadeableUids = fadeManagerConfiguration.mUnfadeableUids.m5509clone();
             this.mUnfadeableAudioAttributes = new ArrayList(fadeManagerConfiguration.mUnfadeableAudioAttributes);
             this.mFadeOutDurationMillis = fadeManagerConfiguration.mFadeOutDurationMillis;
             this.mFadeInDurationMillis = fadeManagerConfiguration.mFadeInDurationMillis;
@@ -701,8 +702,8 @@ public final class FadeManagerConfiguration implements Parcelable {
         private void validateUnfadeableAudioAttributes() {
             for (int i = 0; i < this.mUnfadeableAudioAttributes.size(); i++) {
                 AudioAttributes audioAttributes = this.mUnfadeableAudioAttributes.get(i);
-                boolean contains = this.mFadeableUsages.contains(audioAttributes.getSystemUsage());
-                Preconditions.checkArgument(!contains || (contains && !isGeneric(audioAttributes)), "Unfadeable audio attributes cannot be generic of the fadeable usage");
+                boolean zContains = this.mFadeableUsages.contains(audioAttributes.getSystemUsage());
+                Preconditions.checkArgument(!zContains || (zContains && !isGeneric(audioAttributes)), "Unfadeable audio attributes cannot be generic of the fadeable usage");
             }
         }
 
@@ -771,7 +772,7 @@ public final class FadeManagerConfiguration implements Parcelable {
         }
 
         public boolean equals(Object obj) {
-            boolean z;
+            boolean zEquals;
             if (this == obj) {
                 return true;
             }
@@ -784,21 +785,21 @@ public final class FadeManagerConfiguration implements Parcelable {
             }
             VolumeShaper.Configuration configuration = this.mFadeOutVolShaperConfig;
             if (configuration != null) {
-                z = configuration.equals(fadeVolumeShaperConfigsWrapper.mFadeOutVolShaperConfig);
+                zEquals = configuration.equals(fadeVolumeShaperConfigsWrapper.mFadeOutVolShaperConfig);
             } else {
                 if (fadeVolumeShaperConfigsWrapper.mFadeOutVolShaperConfig != null) {
                     return false;
                 }
-                z = true;
+                zEquals = true;
             }
             VolumeShaper.Configuration configuration2 = this.mFadeInVolShaperConfig;
             if (configuration2 != null) {
-                return z && configuration2.equals(fadeVolumeShaperConfigsWrapper.mFadeInVolShaperConfig);
+                return zEquals && configuration2.equals(fadeVolumeShaperConfigsWrapper.mFadeInVolShaperConfig);
             }
             if (fadeVolumeShaperConfigsWrapper.mFadeInVolShaperConfig != null) {
                 return false;
             }
-            return z;
+            return zEquals;
         }
 
         public int hashCode() {

@@ -14,7 +14,7 @@ jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r0v0 com.
 	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
 	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
 	at jadx.core.utils.InsnRemover.lambda$unbindInsns$1(InsnRemover.java:99)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at jadx.core.utils.InsnRemover.unbindInsns(InsnRemover.java:98)
 	at jadx.core.utils.InsnRemover.removeAllAndUnbind(InsnRemover.java:252)
 	at jadx.core.dex.visitors.EnumVisitor.convertToEnum(EnumVisitor.java:180)

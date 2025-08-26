@@ -13,6 +13,7 @@ import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.internal.logging.MetricsLogger;
 import com.android.systemui.animation.Expandable;
 import com.android.systemui.common.shared.model.Icon;
+import com.android.systemui.flags.RefactorFlagUtils;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.qs.QSTile;
@@ -21,6 +22,7 @@ import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.QSTileIconKt;
 import com.android.systemui.qs.QsEventLogger;
+import com.android.systemui.qs.flags.QSComposeFragment;
 import com.android.systemui.qs.flags.QsInCompose;
 import com.android.systemui.qs.logging.QSLogger;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
@@ -53,7 +55,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ModesTile extends QSTileImpl {
     public static final Companion Companion = new Companion(null);
@@ -65,31 +66,29 @@ public final class ModesTile extends QSTileImpl {
     public QSTileState tileState;
     public final ModesTileUserActionInteractor userActionInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.ModesTile$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.tiles.ModesTile$1$1, reason: invalid class name and collision with other inner class name */
-        final class C02611 extends SuspendLambda implements Function2 {
+        final class C04171 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ ModesTile this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C02611(ModesTile modesTile, Continuation continuation) {
+            public C04171(ModesTile modesTile, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = modesTile;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C02611(this.this$0, continuation);
+                return new C04171(this.this$0, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C02611) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C04171) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -99,18 +98,18 @@ public final class ModesTile extends QSTileImpl {
                 if (i == 0) {
                     ResultKt.throwOnFailure(obj);
                     ModesTileDataInteractor modesTileDataInteractor = this.this$0.dataInteractor;
-                    Flow distinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.flowOn(new ModesTileDataInteractor$tileData$$inlined$map$1(modesTileDataInteractor.zenModeInteractor.activeModes, modesTileDataInteractor), modesTileDataInteractor.bgDispatcher));
+                    Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.flowOn(new ModesTileDataInteractor$tileData$$inlined$map$1(modesTileDataInteractor.zenModeInteractor.activeModes, modesTileDataInteractor), modesTileDataInteractor.bgDispatcher));
                     final ModesTile modesTile = this.this$0;
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.tiles.ModesTile.1.1.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
                             Companion companion = ModesTile.Companion;
-                            ModesTile.this.refreshState((ModesTileModel) obj2);
+                            modesTile.refreshState((ModesTileModel) obj2);
                             return Unit.INSTANCE;
                         }
                     };
                     this.label = 1;
-                    if (distinctUntilChanged.collect(flowCollector, this) == coroutineSingletons) {
+                    if (flowDistinctUntilChanged.collect(flowCollector, this) == coroutineSingletons) {
                         return coroutineSingletons;
                     }
                 } else {
@@ -146,9 +145,9 @@ public final class ModesTile extends QSTileImpl {
                 ModesTile modesTile = ModesTile.this;
                 LifecycleRegistry lifecycleRegistry = modesTile.mLifecycle;
                 Lifecycle.State state = Lifecycle.State.CREATED;
-                C02611 c02611 = new C02611(modesTile, null);
+                C04171 c04171 = new C04171(modesTile, null);
                 this.label = 1;
-                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleRegistry, state, c02611, this) == coroutineSingletons) {
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleRegistry, state, c04171, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -161,13 +160,115 @@ public final class ModesTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.tiles.ModesTile$handleClick$1, reason: invalid class name and case insensitive filesystem */
+    final class C10081 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Expandable $expandable;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C10081(Expandable expandable, Continuation continuation) {
+            super(2, continuation);
+            this.$expandable = expandable;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ModesTile.this.new C10081(this.$expandable, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C10081) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                ModesTileUserActionInteractor modesTileUserActionInteractor = ModesTile.this.userActionInteractor;
+                Expandable expandable = this.$expandable;
+                this.label = 1;
+                Object objShowDialog = modesTileUserActionInteractor.dialogDelegate.showDialog(expandable, this);
+                if (objShowDialog != coroutineSingletons) {
+                    objShowDialog = Unit.INSTANCE;
+                }
+                if (objShowDialog == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.tiles.ModesTile$handleSecondaryClick$1, reason: invalid class name and case insensitive filesystem */
+    final class C10091 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C10091(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ModesTile.this.new C10091(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C10091) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Code restructure failed: missing block: B:14:0x0045, code lost:
+        
+            if (kotlin.Unit.INSTANCE == r0) goto L15;
+         */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                ModesTileDataInteractor modesTileDataInteractor = ModesTile.this.dataInteractor;
+                this.label = 1;
+                obj = modesTileDataInteractor.getCurrentTileModel(this);
+                if (obj != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i != 1) {
+                if (i != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            ResultKt.throwOnFailure(obj);
+            ModesTileUserActionInteractor modesTileUserActionInteractor = ModesTile.this.userActionInteractor;
+            this.label = 2;
+            modesTileUserActionInteractor.getClass();
+            RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+            int i2 = QSComposeFragment.$r8$clinit;
+            refactorFlagUtils.getClass();
+            RefactorFlagUtils.assertOnEngBuild("New code path expects com.android.systemui.qs_ui_refactor_compose_fragment to be enabled.");
         }
     }
 
@@ -186,7 +287,7 @@ public final class ModesTile extends QSTileImpl {
         return new ModesDetailsViewModel(new Function0() { // from class: com.android.systemui.qs.tiles.ModesTile$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                ModesTileUserActionInteractor modesTileUserActionInteractor = ModesTile.this.userActionInteractor;
+                ModesTileUserActionInteractor modesTileUserActionInteractor = this.f$0.userActionInteractor;
                 QSTileIntentUserInputHandler.handle$default(modesTileUserActionInteractor.qsTileIntentUserInputHandler, null, modesTileUserActionInteractor.longClickIntent);
                 return Unit.INSTANCE;
             }
@@ -208,18 +309,18 @@ public final class ModesTile extends QSTileImpl {
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final void handleClick(Expandable expandable) {
-        BuildersKt.runBlocking(EmptyCoroutineContext.INSTANCE, new ModesTile$handleClick$1(this, expandable, null));
+    public final void handleClick(Expandable expandable) throws Throwable {
+        BuildersKt.runBlocking(EmptyCoroutineContext.INSTANCE, new C10081(expandable, null));
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final void handleSecondaryClick(Expandable expandable) {
-        BuildersKt.runBlocking(EmptyCoroutineContext.INSTANCE, new ModesTile$handleSecondaryClick$1(this, null));
+    public final void handleSecondaryClick(Expandable expandable) throws Throwable {
+        BuildersKt.runBlocking(EmptyCoroutineContext.INSTANCE, new C10091(null));
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public void handleUpdateState(QSTile.State state, Object obj) {
-        QSTile.Icon icon;
+    public void handleUpdateState(QSTile.State state, Object obj) throws Throwable {
+        QSTile.Icon iconAsQSTileIcon;
         if (!(obj instanceof ModesTileModel)) {
             obj = BuildersKt.runBlocking(EmptyCoroutineContext.INSTANCE, new ModesTile$handleUpdateState$model$1(this, null));
         }
@@ -232,22 +333,22 @@ public final class ModesTile extends QSTileImpl {
         QSTileUIConfig qSTileUIConfig = this.config.uiConfig;
         ModesTileMapper$$ExternalSyntheticLambda0 modesTileMapper$$ExternalSyntheticLambda0 = new ModesTileMapper$$ExternalSyntheticLambda0(modesTileModel, modesTileMapper);
         companion.getClass();
-        QSTileState build = QSTileState.Companion.build(resources, theme, qSTileUIConfig, modesTileMapper$$ExternalSyntheticLambda0);
-        this.tileState = build;
+        QSTileState qSTileStateBuild = QSTileState.Companion.build(resources, theme, qSTileUIConfig, modesTileMapper$$ExternalSyntheticLambda0);
+        this.tileState = qSTileStateBuild;
         if (state != null) {
-            state.state = build.activationState.getLegacyState();
+            state.state = qSTileStateBuild.activationState.getLegacyState();
             QSTileState qSTileState = this.tileState;
             if (qSTileState == null) {
                 qSTileState = null;
             }
-            Icon icon2 = qSTileState.icon;
-            if (icon2 != null) {
-                icon = QSTileIconKt.asQSTileIcon(icon2);
+            Icon icon = qSTileState.icon;
+            if (icon != null) {
+                iconAsQSTileIcon = QSTileIconKt.asQSTileIcon(icon);
             } else {
                 int i = QsInCompose.$r8$clinit;
-                icon = QSTileImpl.ResourceIcon.get(ICON_RES_ID);
+                iconAsQSTileIcon = QSTileImpl.ResourceIcon.get(ICON_RES_ID);
             }
-            state.icon = icon;
+            state.icon = iconAsQSTileIcon;
             state.label = getTileLabel();
             QSTileState qSTileState2 = this.tileState;
             state.secondaryLabel = (qSTileState2 == null ? null : qSTileState2).secondaryLabel;

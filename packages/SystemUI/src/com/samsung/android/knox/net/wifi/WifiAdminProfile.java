@@ -7,7 +7,6 @@ import com.samsung.android.knox.net.AuthConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class WifiAdminProfile implements Parcelable {
     public static final Parcelable.Creator<WifiAdminProfile> CREATOR = new Parcelable.Creator<WifiAdminProfile>() { // from class: com.samsung.android.knox.net.wifi.WifiAdminProfile.1
@@ -65,7 +64,6 @@ public class WifiAdminProfile implements Parcelable {
     public String wepKey4;
     public int wepKeyId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum PolicyState {
         FALSE,
         TRUE,

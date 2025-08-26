@@ -80,9 +80,9 @@ public class PrivacyIndicatorBounds implements Parcelable {
         if (rect == null) {
             return null;
         }
-        int max = Math.max(0, rect.left - i);
-        int max2 = Math.max(0, rect.top - i2);
-        return new Rect(max, max2, Math.max(max, rect.right - i3), Math.max(max2, rect.bottom - i4));
+        int iMax = Math.max(0, rect.left - i);
+        int iMax2 = Math.max(0, rect.top - i2);
+        return new Rect(iMax, iMax2, Math.max(iMax, rect.right - i3), Math.max(iMax2, rect.bottom - i4));
     }
 
     public PrivacyIndicatorBounds rotate(int i) {
@@ -148,9 +148,9 @@ public class PrivacyIndicatorBounds implements Parcelable {
 
     protected PrivacyIndicatorBounds(Parcel parcel) {
         Rect[] rectArr = (Rect[]) parcel.createTypedArray(Rect.CREATOR);
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.mStaticBounds = rectArr;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) rectArr);
-        this.mRotation = readInt;
+        this.mRotation = i;
     }
 }

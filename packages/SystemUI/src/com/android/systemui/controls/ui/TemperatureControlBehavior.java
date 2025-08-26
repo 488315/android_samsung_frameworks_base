@@ -1,5 +1,6 @@
 package com.android.systemui.controls.ui;
 
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.service.controls.Control;
@@ -10,7 +11,6 @@ import com.android.systemui.R;
 import java.util.Set;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TemperatureControlBehavior implements Behavior, SecBehavior {
     public Drawable clipLayer;
@@ -19,7 +19,7 @@ public final class TemperatureControlBehavior implements Behavior, SecBehavior {
     public Behavior subBehavior;
 
     @Override // com.android.systemui.controls.ui.Behavior
-    public final void bind(ControlWithState controlWithState, int i) {
+    public final void bind(ControlWithState controlWithState, int i) throws Resources.NotFoundException {
         Control control = controlWithState.control;
         control.getClass();
         this.control = control;
@@ -55,7 +55,7 @@ public final class TemperatureControlBehavior implements Behavior, SecBehavior {
             }
             controlViewHolder3.applyRenderInfo$frameworks__base__packages__SystemUI__android_common__SystemUI_core(currentActiveMode, z, true);
             ControlViewHolder controlViewHolder4 = this.cvh;
-            (controlViewHolder4 != null ? controlViewHolder4 : null).layout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.TemperatureControlBehavior$bind$1
+            (controlViewHolder4 != null ? controlViewHolder4 : null).layout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.TemperatureControlBehavior.bind.1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
                     ControlViewHolder controlViewHolder5 = TemperatureControlBehavior.this.cvh;

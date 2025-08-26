@@ -3,7 +3,6 @@ package gov.nist.javax.sip.header;
 import java.text.ParseException;
 import javax.sip.header.CallIdHeader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class InReplyTo extends SIPHeader implements CallIdHeader {
     private static final long serialVersionUID = 1682602905733508890L;
@@ -37,7 +36,7 @@ public class InReplyTo extends SIPHeader implements CallIdHeader {
         return callIdentifier.encode();
     }
 
-    public final void setCallId(String str) {
+    public final void setCallId(String str) throws ParseException {
         try {
             this.callId = new CallIdentifier(str);
         } catch (Exception e) {

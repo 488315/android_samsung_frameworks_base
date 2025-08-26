@@ -17,12 +17,10 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
-import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.MutablePropertyReference0Impl;
 import kotlin.jvm.internal.Reflection;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class EvalScopeImpl implements EvalScope, NetworkScope, DeferScope, TransactionScope {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
@@ -31,7 +29,7 @@ public final class EvalScopeImpl implements EvalScope, NetworkScope, DeferScope,
     public final Lazy now$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.kairos.internal.EvalScopeImpl$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            EvalScopeImpl evalScopeImpl = EvalScopeImpl.this;
+            EvalScopeImpl evalScopeImpl = this.f$0;
             KProperty[] kPropertyArr = EvalScopeImpl.$$delegatedProperties;
             final EventsLoop eventsLoop = new EventsLoop();
             StateSource stateSource = new StateSource((Lazy) new CompletableLazy(new EventsInit(new Init("now", new InitKt$constInit$1(new EventsImpl() { // from class: com.android.systemui.kairos.internal.EvalScopeImpl$now_delegate$lambda$7$$inlined$EventsImplCheap$1
@@ -48,17 +46,17 @@ public final class EvalScopeImpl implements EvalScope, NetworkScope, DeferScope,
                     KProperty kProperty = EvalScopeImpl.$$delegatedProperties[0];
                     EventsLoop eventsLoop2 = eventsLoop;
                     eventsLoop2.getClass();
-                    ActivationResult activate = ((EventsImpl) EventsKt.getInit(EventsKt.mapCheap(eventsLoop2, new Function2() { // from class: com.android.systemui.kairos.internal.EvalScopeImpl$now$2$1$1
+                    ActivationResult activationResultActivate = ((EventsImpl) EventsKt.getInit(EventsKt.mapCheap(eventsLoop2, new Function2() { // from class: com.android.systemui.kairos.internal.EvalScopeImpl$now$2$1$1
                         @Override // kotlin.jvm.functions.Function2
                         public final Object invoke(Object obj, Object obj2) {
                             return EventsKt.emptyEvents;
                         }
                     })).connect(evalScope)).activate(evalScope, schedulable);
-                    if (activate == null) {
+                    if (activationResultActivate == null) {
                         return null;
                     }
-                    NodeConnection nodeConnection = activate.connection;
-                    return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                    NodeConnection nodeConnection = activationResultActivate.connection;
+                    return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, stateImplKt$activatedStateSource$$inlined$filterImpl$1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                 }
             })), new SingletonMapK.Factory());
             Unit unit = Unit.INSTANCE;
@@ -66,10 +64,10 @@ public final class EvalScopeImpl implements EvalScope, NetworkScope, DeferScope,
             Output output = new Output(null, null, new StateImplKt$activatedStateSource$$inlined$OneShot$1(demuxImpl$eventsForKey$$inlined$EventsImplCheap$1, stateSource), 3, null);
             output.result = unit;
             evalScopeImpl.scheduleOutput(output);
-            EventsInit switchEvents = SwitchKt.switchEvents(new StateInit(new Init("now", new InitKt$constInit$1(new StateImpl("now", "now", demuxImpl$eventsForKey$$inlined$EventsImplCheap$1, stateSource)))));
+            EventsInit eventsInitSwitchEvents = SwitchKt.switchEvents(new StateInit(new Init("now", new InitKt$constInit$1(new StateImpl("now", "now", demuxImpl$eventsForKey$$inlined$EventsImplCheap$1, stateSource)))));
             KProperty[] kPropertyArr2 = EvalScopeImpl.$$delegatedProperties;
             KProperty kProperty = kPropertyArr2[0];
-            eventsLoop.setLoopback(switchEvents);
+            eventsLoop.setLoopback(eventsInitSwitchEvents);
             KProperty kProperty2 = kPropertyArr2[0];
             return eventsLoop;
         }

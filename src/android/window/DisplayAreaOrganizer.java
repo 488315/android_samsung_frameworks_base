@@ -2,7 +2,6 @@ package android.window;
 
 import android.os.RemoteException;
 import android.view.SurfaceControl;
-import android.window.DisplayAreaOrganizer;
 import android.window.IDisplayAreaOrganizer;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -90,7 +89,7 @@ public class DisplayAreaOrganizer extends WindowOrganizer {
             DisplayAreaOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.DisplayAreaOrganizer$1$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DisplayAreaOrganizer.AnonymousClass1.this.lambda$onDisplayAreaAppeared$0(displayAreaInfo, surfaceControl);
+                    this.f$0.lambda$onDisplayAreaAppeared$0(displayAreaInfo, surfaceControl);
                 }
             });
         }
@@ -105,7 +104,7 @@ public class DisplayAreaOrganizer extends WindowOrganizer {
             DisplayAreaOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.DisplayAreaOrganizer$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DisplayAreaOrganizer.AnonymousClass1.this.lambda$onDisplayAreaVanished$1(displayAreaInfo);
+                    this.f$0.lambda$onDisplayAreaVanished$1(displayAreaInfo);
                 }
             });
         }
@@ -120,7 +119,7 @@ public class DisplayAreaOrganizer extends WindowOrganizer {
             DisplayAreaOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.DisplayAreaOrganizer$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DisplayAreaOrganizer.AnonymousClass1.this.lambda$onDisplayAreaInfoChanged$2(displayAreaInfo);
+                    this.f$0.lambda$onDisplayAreaInfoChanged$2(displayAreaInfo);
                 }
             });
         }

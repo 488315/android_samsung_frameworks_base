@@ -2,11 +2,10 @@ package androidx.compose.ui.spatial;
 
 import androidx.compose.ui.unit.IntOffset;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class RectManagerKt {
     /* renamed from: access$analyzeComponents-58bKbWc, reason: not valid java name */
-    public static final int m721access$analyzeComponents58bKbWc(float[] fArr) {
+    public static final int m723access$analyzeComponents58bKbWc(float[] fArr) {
         int i = 0;
         if (fArr.length < 16) {
             return 0;
@@ -19,8 +18,8 @@ public abstract class RectManagerKt {
     }
 
     /* renamed from: access$isSet--gyyYBs, reason: not valid java name */
-    public static final boolean m722access$isSetgyyYBs(long j) {
+    public static final boolean m724access$isSetgyyYBs(long j) {
         IntOffset.Companion.getClass();
-        return !IntOffset.m849equalsimpl0(j, IntOffset.Max);
+        return !IntOffset.m851equalsimpl0(j, IntOffset.Max);
     }
 }

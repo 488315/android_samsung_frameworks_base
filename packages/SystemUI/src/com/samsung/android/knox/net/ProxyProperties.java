@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ProxyProperties implements Parcelable {
     public static final Parcelable.Creator<ProxyProperties> CREATOR = new Parcelable.Creator<ProxyProperties>() { // from class: com.samsung.android.knox.net.ProxyProperties.1
@@ -63,9 +62,9 @@ public class ProxyProperties implements Parcelable {
     }
 
     public boolean isValid() {
-        boolean isEmpty = TextUtils.isEmpty(this.mPacFileUrl);
-        boolean isEmpty2 = TextUtils.isEmpty(this.mHostname);
-        if (!isEmpty && !isEmpty2) {
+        boolean zIsEmpty = TextUtils.isEmpty(this.mPacFileUrl);
+        boolean zIsEmpty2 = TextUtils.isEmpty(this.mHostname);
+        if (!zIsEmpty && !zIsEmpty2) {
             return false;
         }
         if (!isAuthenticationConfigured()) {

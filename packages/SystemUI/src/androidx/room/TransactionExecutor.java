@@ -4,7 +4,6 @@ import java.util.ArrayDeque;
 import java.util.concurrent.Executor;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TransactionExecutor implements Executor {
     public Runnable active;
@@ -45,10 +44,10 @@ public final class TransactionExecutor implements Executor {
     public final void scheduleNext() {
         synchronized (this.syncLock) {
             try {
-                Object poll = this.tasks.poll();
-                Runnable runnable = (Runnable) poll;
+                Object objPoll = this.tasks.poll();
+                Runnable runnable = (Runnable) objPoll;
                 this.active = runnable;
-                if (poll != null) {
+                if (objPoll != null) {
                     this.executor.execute(runnable);
                 }
                 Unit unit = Unit.INSTANCE;

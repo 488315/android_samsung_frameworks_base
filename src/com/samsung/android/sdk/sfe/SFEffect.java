@@ -12,9 +12,9 @@ public class SFEffect {
     private static boolean mIsInitialized = false;
 
     public static void initialize() {
-        boolean equals = "eng".equals(Build.TYPE);
-        DEBUG = equals;
-        if (equals) {
+        boolean zEquals = "eng".equals(Build.TYPE);
+        DEBUG = zEquals;
+        if (zEquals) {
             Log.d(TAG, "initialize");
         }
         if (mIsInitialized) {

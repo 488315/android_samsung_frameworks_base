@@ -29,7 +29,6 @@ import com.samsung.android.rune.CoreRune;
 import com.samsung.android.util.InterpolatorUtils;
 import com.sec.ims.presence.ServiceTuple;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DragTargetView extends FrameLayout {
     public static final RectEvaluator RECT_EVALUATOR = new RectEvaluator(new Rect());
@@ -99,31 +98,31 @@ public class DragTargetView extends FrameLayout {
         if (!this.mIsDragEndCalled) {
             Rect minimumDragTargetViewBounds = getMinimumDragTargetViewBounds();
             if (rect.width() > minimumDragTargetViewBounds.width()) {
-                int width = rect.left + ((rect.width() - minimumDragTargetViewBounds.width()) / 2);
-                rect.left = width;
-                rect.right = minimumDragTargetViewBounds.width() + width;
+                int iWidth = rect.left + ((rect.width() - minimumDragTargetViewBounds.width()) / 2);
+                rect.left = iWidth;
+                rect.right = minimumDragTargetViewBounds.width() + iWidth;
             }
             if (rect.height() > minimumDragTargetViewBounds.height()) {
                 rect.bottom = minimumDragTargetViewBounds.height() + rect.top;
             }
         }
-        boolean isEmpty = this.mEndBounds.isEmpty();
+        boolean zIsEmpty = this.mEndBounds.isEmpty();
         if (this.mEndBounds.equals(rect)) {
             return;
         }
         this.mEndBounds.set(rect);
         Drawable drawable = this.mDragTargetImage.getDrawable();
-        final float width2 = rect.width() < ((this.mHasProtectedContent || drawable == null) ? rect.width() : drawable.getIntrinsicWidth()) ? (rect.width() - r1) / 2.0f : 0.0f;
-        final long j = this.mIsDragEndCalled ? 150L : isEmpty ? 350L : 175L;
+        final float fWidth = rect.width() < ((this.mHasProtectedContent || drawable == null) ? rect.width() : drawable.getIntrinsicWidth()) ? (rect.width() - r1) / 2.0f : 0.0f;
+        final long j = this.mIsDragEndCalled ? 150L : zIsEmpty ? 350L : 175L;
         if (this.mDragTarget.isAttachedToWindow()) {
             this.mDragTarget.getHandler().post(new Runnable() { // from class: com.android.wm.shell.naturalswitching.DragTargetView$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final DragTargetView dragTargetView = DragTargetView.this;
+                    final DragTargetView dragTargetView = this.f$0;
                     final ViewGroup.MarginLayoutParams marginLayoutParams2 = marginLayoutParams;
                     final Rect rect2 = rect;
                     long j2 = j;
-                    final float f = width2;
+                    final float f = fWidth;
                     RectEvaluator rectEvaluator = DragTargetView.RECT_EVALUATOR;
                     dragTargetView.getClass();
                     PathInterpolator pathInterpolator = InterpolatorUtils.SINE_OUT_60;
@@ -140,12 +139,12 @@ public class DragTargetView extends FrameLayout {
                     final float f2 = dragTargetView.mTmpFloats[2];
                     final Rect rect3 = new Rect();
                     dragTargetView.mDragTargetImage.getGlobalVisibleRect(rect3);
-                    ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                    dragTargetView.mBoundsAnimator = ofFloat;
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.naturalswitching.DragTargetView$$ExternalSyntheticLambda2
+                    ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                    dragTargetView.mBoundsAnimator = valueAnimatorOfFloat;
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.naturalswitching.DragTargetView$$ExternalSyntheticLambda2
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                            DragTargetView dragTargetView2 = DragTargetView.this;
+                            DragTargetView dragTargetView2 = dragTargetView;
                             Rect rect4 = rect3;
                             Rect rect5 = rect2;
                             ViewGroup.MarginLayoutParams marginLayoutParams3 = marginLayoutParams2;
@@ -153,16 +152,16 @@ public class DragTargetView extends FrameLayout {
                             float f4 = f;
                             RectEvaluator rectEvaluator2 = DragTargetView.RECT_EVALUATOR;
                             dragTargetView2.getClass();
-                            float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                            Rect evaluate = DragTargetView.RECT_EVALUATOR.evaluate(floatValue, rect4, rect5);
-                            marginLayoutParams3.width = evaluate.width();
-                            marginLayoutParams3.height = evaluate.height();
-                            marginLayoutParams3.leftMargin = evaluate.left;
-                            marginLayoutParams3.topMargin = evaluate.top;
+                            float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                            Rect rectEvaluate = DragTargetView.RECT_EVALUATOR.evaluate(fFloatValue, rect4, rect5);
+                            marginLayoutParams3.width = rectEvaluate.width();
+                            marginLayoutParams3.height = rectEvaluate.height();
+                            marginLayoutParams3.leftMargin = rectEvaluate.left;
+                            marginLayoutParams3.topMargin = rectEvaluate.top;
                             dragTargetView2.mDragTarget.setLayoutParams(marginLayoutParams3);
                             if (f3 != f4) {
                                 Matrix imageMatrix = dragTargetView2.mDragTargetImage.getImageMatrix();
-                                imageMatrix.setTranslate(DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f4, f3, floatValue, f3), 0.0f);
+                                imageMatrix.setTranslate(DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f4, f3, fFloatValue, f3), 0.0f);
                                 dragTargetView2.mDragTargetImage.setImageMatrix(imageMatrix);
                                 dragTargetView2.mDragTargetImage.invalidate();
                             }
@@ -193,48 +192,215 @@ public class DragTargetView extends FrameLayout {
         return this.mCurrentDragTargetRect;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:152:0x0173, code lost:
-    
-        if (r8 >= r10) goto L107;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:153:0x0175, code lost:
-    
-        r1 = 2;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:157:0x017d, code lost:
-    
-        if (r11 >= r10) goto L121;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:162:0x018a, code lost:
-    
-        if (r11 >= r10) goto L121;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:165:0x0191, code lost:
-    
-        if (r11 < r12) goto L130;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:170:0x019c, code lost:
-    
-        if (r8 >= r12) goto L107;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:172:0x01a1, code lost:
-    
-        if (r11 >= r12) goto L121;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0052 A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x011d A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0116 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x010d A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:102:0x0167  */
+    /* JADX WARN: Removed duplicated region for block: B:107:0x0175  */
+    /* JADX WARN: Removed duplicated region for block: B:121:0x0193  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0052 A[ORIG_RETURN, RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:78:0x010d A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:81:0x0116 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:84:0x011d A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final int getDropSide() {
-        /*
-            Method dump skipped, instructions count: 635
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.naturalswitching.DragTargetView.getDropSide():int");
+        int i;
+        int i2;
+        if (CoreRune.MW_PARALLEL_MULTI_SPLIT && this.mController.isParallelMultiSplit()) {
+            this.mDragTargetImage.getGlobalVisibleRect(this.mCurrentDragTargetRect);
+            Rect rect = new Rect(this.mStableRect);
+            rect.top += 120;
+            Rect taskBounds = this.mTaskVisibility.getTaskBounds(this.mDragTargetWindowingMode);
+            if (this.mTaskVisibility.mDisplayLayout.isLandscape()) {
+                Rect rect2 = this.mCurrentDragTargetRect;
+                int i3 = rect2.right;
+                int i4 = rect2.left;
+                int i5 = i3 - i4;
+                int i6 = taskBounds.left;
+                if (i6 <= rect.left) {
+                    int i7 = taskBounds.right;
+                    if (i5 >= i7) {
+                        if (i4 >= rect.right || i5 <= i7) {
+                        }
+                    }
+                    return 2;
+                }
+                int i8 = taskBounds.right;
+                if (i8 < rect.right) {
+                    if (i5 >= i6) {
+                        if (i5 >= i8) {
+                        }
+                    }
+                    return 2;
+                }
+                if (i5 <= i6) {
+                    if (i5 >= i6 || i3 <= i6) {
+                    }
+                }
+                return 8;
+            }
+            int i9 = taskBounds.top;
+            if (i9 <= rect.top) {
+                Rect rect3 = this.mCurrentDragTargetRect;
+                if (rect3.top >= taskBounds.bottom) {
+                    if (rect3.bottom < rect.bottom) {
+                        return 32;
+                    }
+                }
+                return 4;
+            }
+            int i10 = taskBounds.bottom;
+            if (i10 < rect.bottom) {
+                int i11 = this.mCurrentDragTargetRect.top;
+                if (i11 >= i9) {
+                    if (i11 >= i10) {
+                    }
+                }
+                return 4;
+            }
+            Rect rect4 = this.mCurrentDragTargetRect;
+            int i12 = rect4.top;
+            if (i12 <= i9) {
+                if (i12 >= i9 || rect4.bottom < i9) {
+                    return 4;
+                }
+            }
+            return 16;
+        }
+        this.mDragTargetImage.getGlobalVisibleRect(this.mCurrentDragTargetRect);
+        Rect rect5 = new Rect(this.mStableRect);
+        rect5.top += 120;
+        TaskVisibility taskVisibility = this.mTaskVisibility;
+        if (taskVisibility.mSupportOnlyTwoUpMode) {
+            if (taskVisibility.mDisplayLayout.isLandscape()) {
+                Rect rect6 = this.mCurrentDragTargetRect;
+                if (rect6.left > rect5.left) {
+                    if (rect6.right >= rect5.right) {
+                        return 8;
+                    }
+                }
+                return 2;
+            }
+            Rect rect7 = this.mCurrentDragTargetRect;
+            if (rect7.top > rect5.top) {
+                if (rect7.bottom >= rect5.bottom) {
+                    return 16;
+                }
+            }
+            return 4;
+            return 1;
+        }
+        if (taskVisibility.isTwoUp() && isFloatingDragTarget()) {
+            if (this.mController.isVerticalDivision()) {
+                Rect rect8 = this.mCurrentDragTargetRect;
+                if (rect8.top > rect5.top) {
+                    if (rect8.bottom >= rect5.bottom) {
+                    }
+                }
+                return 4;
+            }
+            Rect rect9 = this.mCurrentDragTargetRect;
+            if (rect9.left > rect5.left) {
+                if (rect9.right >= rect5.right) {
+                }
+            }
+            return 2;
+        }
+        Rect rect10 = new Rect();
+        this.mDragTarget.getBoundsOnScreen(rect10);
+        int i13 = rect5.left - rect10.left;
+        int i14 = rect5.top - rect10.top;
+        int i15 = rect10.right - rect5.right;
+        int iWidth = getMinimumDragTargetViewBounds().width() / 2;
+        int i16 = rect10.bottom;
+        int i17 = rect5.bottom;
+        int i18 = i16 - i17;
+        if (i18 <= iWidth) {
+            iWidth = i18;
+        }
+        Rect rect11 = this.mCurrentDragTargetRect;
+        int i19 = rect11.left;
+        int i20 = rect5.left;
+        if (i19 > i20) {
+            i = 32;
+            int i21 = rect11.top;
+            int i22 = rect5.top;
+            if (i21 <= i22) {
+                if (i19 <= i20) {
+                    if (i13 >= i14) {
+                        i2 = 2;
+                    }
+                } else if (rect11.right >= rect5.right && i15 >= i14) {
+                    i2 = 8;
+                }
+                i2 = 4;
+            } else {
+                int i23 = rect11.right;
+                int i24 = rect5.right;
+                if (i23 >= i24) {
+                    if (i21 <= i22) {
+                        if (i15 < i14) {
+                            i2 = 4;
+                        }
+                    } else if (rect11.bottom >= i17 && i15 < iWidth) {
+                        i2 = 16;
+                    }
+                    i2 = 8;
+                } else if (rect11.bottom >= i17) {
+                    if (i19 <= i20) {
+                        if (i13 >= iWidth) {
+                        }
+                    } else if (i23 != i24 || i15 < iWidth) {
+                    }
+                    i2 = 16;
+                } else {
+                    i2 = 1;
+                }
+            }
+        } else if (rect11.top <= rect5.top) {
+            i2 = i13 >= i14 ? 2 : 4;
+            i = 32;
+        } else {
+            if (rect11.bottom >= i17 && i13 < iWidth) {
+                i2 = 16;
+            }
+            i = 32;
+        }
+        if (this.mTaskVisibility.isMultiSplit() && i2 == 1 && !isQuarter(this.mDragTargetWindowingMode)) {
+            Rect taskBounds2 = this.mTaskVisibility.getTaskBounds(this.mDragTargetWindowingMode);
+            int splitCreateMode = this.mController.getSplitCreateMode();
+            if (splitCreateMode != 2) {
+                if (splitCreateMode != 3) {
+                    if (splitCreateMode != 4) {
+                        if (splitCreateMode != 5) {
+                            Log.d("DragTargetView", "invalid create mode");
+                            return i2;
+                        }
+                        if (this.mCurrentDragTargetRect.bottom > taskBounds2.bottom) {
+                            return i;
+                        }
+                    } else if (this.mCurrentDragTargetRect.right > taskBounds2.right) {
+                        return i;
+                    }
+                } else if (this.mCurrentDragTargetRect.top < taskBounds2.top - this.mDividerSize) {
+                    return i;
+                }
+            } else if (this.mCurrentDragTargetRect.left < taskBounds2.left - this.mDividerSize) {
+                return i;
+            }
+        } else if (this.mTaskVisibility.isMultiSplit()) {
+            if (isQuarter(this.mDragTargetWindowingMode)) {
+                int cellStageWindowConfigPosition = this.mController.getCellStageWindowConfigPosition();
+                if (!this.mNonDragTargetView.isNonTargetsHorizontal() ? (i2 != 2 || (cellStageWindowConfigPosition & 8) == 0) && (i2 != 8 || (cellStageWindowConfigPosition & 32) == 0) : (i2 != 4 || (cellStageWindowConfigPosition & 16) == 0) && (i2 != 16 || (cellStageWindowConfigPosition & 64) == 0)) {
+                }
+            }
+        } else if (isFloatingDragTarget() && this.mTaskVisibility.isTwoUp()) {
+            if (!this.mNonDragTargetView.isNonTargetsHorizontal() ? i2 == 4 || i2 == 16 : i2 == 2 || i2 == 8) {
+            }
+        } else if (!this.mTaskVisibility.isTwoUp() && isFloatingDragTarget()) {
+            this.mTaskVisibility.isTaskVisible(1);
+        }
+        return i2;
+        return 1;
     }
 
     public final Rect getMinimumDragTargetViewBounds() {
@@ -242,15 +408,15 @@ public class DragTargetView extends FrameLayout {
             return new Rect(0, 0, this.mDragTargetBounds.width(), this.mDragTargetBounds.height());
         }
         Rect rect = new Rect(this.mStableRect);
-        int width = rect.width();
-        int height = rect.height();
+        int iWidth = rect.width();
+        int iHeight = rect.height();
         if (!this.mTaskVisibility.mSupportOnlyTwoUpMode) {
             rect.scale(0.5f);
-        } else if (width > height) {
-            rect.right = rect.left + ((int) ((width * 0.5f) + 0.5f));
+        } else if (iWidth > iHeight) {
+            rect.right = rect.left + ((int) ((iWidth * 0.5f) + 0.5f));
         } else {
-            rect.bottom = rect.top + ((int) ((height * 0.5f) + 0.5f));
-            rect.right = rect.left + ((int) ((width * 0.85f) + 0.5f));
+            rect.bottom = rect.top + ((int) ((iHeight * 0.5f) + 0.5f));
+            rect.right = rect.left + ((int) ((iWidth * 0.85f) + 0.5f));
         }
         int i = rect.right;
         int i2 = this.mDividerSize;
@@ -295,7 +461,7 @@ public class DragTargetView extends FrameLayout {
         }
         if (!isFloatingDragTarget()) {
             Rect rect = new Rect();
-            boolean isLandscape = this.mTaskVisibility.mDisplayLayout.isLandscape();
+            boolean zIsLandscape = this.mTaskVisibility.mDisplayLayout.isLandscape();
             Rect rect2 = this.mDragTargetBounds;
             int i = rect2.left;
             Rect rect3 = this.mStableRect;
@@ -305,7 +471,7 @@ public class DragTargetView extends FrameLayout {
             }
             int i3 = rect2.top;
             int i4 = rect3.top;
-            if (i3 < i4 && !isLandscape) {
+            if (i3 < i4 && !zIsLandscape) {
                 rect.top = i4 - i3;
             }
             int i5 = rect2.right;
@@ -326,9 +492,9 @@ public class DragTargetView extends FrameLayout {
                 }
                 final Rect rect4 = new Rect();
                 final Rect rect5 = new Rect(this.mTargetOutlineInsets);
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                this.mOutlineInsetsAnimator = ofFloat;
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.naturalswitching.DragTargetView.3
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                this.mOutlineInsetsAnimator = valueAnimatorOfFloat;
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.naturalswitching.DragTargetView.3
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                         DragTargetView.this.mCurrentOutlineInsets.set(DragTargetView.RECT_EVALUATOR.evaluate(((Float) valueAnimator2.getAnimatedValue()).floatValue(), rect4, rect5));
@@ -352,7 +518,7 @@ public class DragTargetView extends FrameLayout {
         postDelayed(new Runnable() { // from class: com.android.wm.shell.naturalswitching.DragTargetView$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                DragTargetView dragTargetView = DragTargetView.this;
+                DragTargetView dragTargetView = this.f$0;
                 dragTargetView.mScaleDownAnimX.cancel();
                 dragTargetView.mScaleDownAnimY.cancel();
                 dragTargetView.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(108));

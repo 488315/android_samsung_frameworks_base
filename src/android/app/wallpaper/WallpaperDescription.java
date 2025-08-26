@@ -2,7 +2,6 @@ package android.app.wallpaper;
 
 import android.annotation.SystemApi;
 import android.app.WallpaperManager;
-import android.app.wallpaper.WallpaperDescription;
 import android.content.ComponentName;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -139,7 +138,7 @@ public final class WallpaperDescription implements Parcelable {
         return Objects.hash(this.mComponent, this.mId);
     }
 
-    public void saveToXml(TypedXmlSerializer typedXmlSerializer) throws IOException, XmlPullParserException {
+    public void saveToXml(TypedXmlSerializer typedXmlSerializer) throws XmlPullParserException, IOException {
         ComponentName componentName = this.mComponent;
         if (componentName != null) {
             typedXmlSerializer.attribute(null, "component", componentName.flattenToShortString());
@@ -165,9 +164,9 @@ public final class WallpaperDescription implements Parcelable {
             typedXmlSerializer.attribute(null, "contextdescription", toHtml(charSequence2));
         }
         for (Pair<Integer, String> pair : screenDimensionPairs()) {
-            int intValue = pair.first.intValue();
+            int iIntValue = pair.first.intValue();
             String str2 = pair.second;
-            Rect rect = this.mCropHints.get(intValue);
+            Rect rect = this.mCropHints.get(iIntValue);
             if (rect != null) {
                 typedXmlSerializer.attributeInt(null, "cropLeft" + str2, rect.left);
                 typedXmlSerializer.attributeInt(null, "cropTop" + str2, rect.top);
@@ -192,27 +191,27 @@ public final class WallpaperDescription implements Parcelable {
         }
     }
 
-    public static WallpaperDescription restoreFromXml(final TypedXmlPullParser typedXmlPullParser) throws IOException, XmlPullParserException {
+    public static WallpaperDescription restoreFromXml(final TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException {
         int depth = typedXmlPullParser.getDepth();
         String attributeValue = typedXmlPullParser.getAttributeValue(null, "component");
-        ComponentName unflattenFromString = attributeValue != null ? ComponentName.unflattenFromString(attributeValue) : null;
+        ComponentName componentNameUnflattenFromString = attributeValue != null ? ComponentName.unflattenFromString(attributeValue) : null;
         String attributeValue2 = typedXmlPullParser.getAttributeValue(null, "id");
         String attributeValue3 = typedXmlPullParser.getAttributeValue(null, "thumbnail");
-        Uri parse = attributeValue3 != null ? Uri.parse(attributeValue3) : null;
-        CharSequence fromHtml = fromHtml(typedXmlPullParser.getAttributeValue(null, "title"));
+        Uri uri = attributeValue3 != null ? Uri.parse(attributeValue3) : null;
+        CharSequence charSequenceFromHtml = fromHtml(typedXmlPullParser.getAttributeValue(null, "title"));
         String attributeValue4 = typedXmlPullParser.getAttributeValue(null, "contexturi");
-        Uri parse2 = attributeValue4 != null ? Uri.parse(attributeValue4) : null;
-        CharSequence fromHtml2 = fromHtml(typedXmlPullParser.getAttributeValue(null, "contextdescription"));
+        Uri uri2 = attributeValue4 != null ? Uri.parse(attributeValue4) : null;
+        CharSequence charSequenceFromHtml2 = fromHtml(typedXmlPullParser.getAttributeValue(null, "contextdescription"));
         final SparseArray sparseArray = new SparseArray();
         screenDimensionPairs().forEach(new Consumer() { // from class: android.app.wallpaper.WallpaperDescription$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                WallpaperDescription.lambda$restoreFromXml$0(TypedXmlPullParser.this, sparseArray, (Pair) obj);
+                WallpaperDescription.lambda$restoreFromXml$0(typedXmlPullParser, sparseArray, (Pair) obj);
             }
         });
         float attributeFloat = typedXmlPullParser.getAttributeFloat(null, "sampleSize", 1.0f);
         ArrayList arrayList = new ArrayList();
-        PersistableBundle persistableBundle = null;
+        PersistableBundle persistableBundleRestoreFromXml = null;
         while (true) {
             int next = typedXmlPullParser.next();
             if (next == 1 || (next == 3 && typedXmlPullParser.getDepth() <= depth)) {
@@ -225,22 +224,22 @@ public final class WallpaperDescription implements Parcelable {
                         arrayList.add(fromHtml(typedXmlPullParser.getAttributeValue(i)));
                     }
                 } else if ("content".equals(name)) {
-                    persistableBundle = PersistableBundle.restoreFromXml(typedXmlPullParser);
+                    persistableBundleRestoreFromXml = PersistableBundle.restoreFromXml(typedXmlPullParser);
                 }
             }
         }
-        return new WallpaperDescription(unflattenFromString, attributeValue2, parse, fromHtml, arrayList, parse2, fromHtml2, persistableBundle, sparseArray, attributeFloat);
+        return new WallpaperDescription(componentNameUnflattenFromString, attributeValue2, uri, charSequenceFromHtml, arrayList, uri2, charSequenceFromHtml2, persistableBundleRestoreFromXml, sparseArray, attributeFloat);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ void lambda$restoreFromXml$0(TypedXmlPullParser typedXmlPullParser, SparseArray sparseArray, Pair pair) {
-        int intValue = ((Integer) pair.first).intValue();
+        int iIntValue = ((Integer) pair.first).intValue();
         String str = (String) pair.second;
         Rect rect = new Rect(typedXmlPullParser.getAttributeInt(null, "cropLeft" + str, 0), typedXmlPullParser.getAttributeInt(null, "cropTop" + str, 0), typedXmlPullParser.getAttributeInt(null, "cropRight" + str, 0), typedXmlPullParser.getAttributeInt(null, "cropBottom" + str, 0));
         if (rect.isEmpty()) {
             return;
         }
-        sparseArray.put(intValue, rect);
+        sparseArray.put(iIntValue, rect);
     }
 
     private static String toHtml(CharSequence charSequence) {
@@ -278,7 +277,7 @@ public final class WallpaperDescription implements Parcelable {
         screenDimensionPairs().forEach(new Consumer() { // from class: android.app.wallpaper.WallpaperDescription$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                WallpaperDescription.this.lambda$new$1(parcel, (Pair) obj);
+                this.f$0.lambda$new$1(parcel, (Pair) obj);
             }
         });
         this.mSampleSize = parcel.readFloat();
@@ -287,10 +286,10 @@ public final class WallpaperDescription implements Parcelable {
     /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Multi-variable type inference failed */
     public /* synthetic */ void lambda$new$1(Parcel parcel, Pair pair) {
-        int intValue = ((Integer) pair.first).intValue();
+        int iIntValue = ((Integer) pair.first).intValue();
         Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
         if (rect != null) {
-            this.mCropHints.put(intValue, rect);
+            this.mCropHints.put(iIntValue, rect);
         }
     }
 
@@ -307,7 +306,7 @@ public final class WallpaperDescription implements Parcelable {
         screenDimensionPairs().forEach(new Consumer() { // from class: android.app.wallpaper.WallpaperDescription$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                WallpaperDescription.this.lambda$writeToParcel$2(parcel, i, (Pair) obj);
+                this.f$0.lambda$writeToParcel$2(parcel, i, (Pair) obj);
             }
         });
         parcel.writeFloat(this.mSampleSize);
@@ -381,7 +380,7 @@ public final class WallpaperDescription implements Parcelable {
             map.forEach(new BiConsumer() { // from class: android.app.wallpaper.WallpaperDescription$Builder$$ExternalSyntheticLambda0
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
-                    WallpaperDescription.Builder.this.lambda$setCropHints$0((Point) obj, (Rect) obj2);
+                    this.f$0.lambda$setCropHints$0((Point) obj, (Rect) obj2);
                 }
             });
             return this;

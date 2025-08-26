@@ -8,6 +8,7 @@ import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
@@ -62,7 +63,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class BaseTransientBottomBar {
     public static int TRANSITION_HEIGHT;
@@ -138,18 +138,18 @@ public abstract class BaseTransientBottomBar {
                 if (snackbarBaseLayout2.getVisibility() == 0) {
                     int i3 = snackbarBaseLayout2.animationMode;
                     if (i3 == 1 || i3 == 2) {
-                        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-                        ofFloat.setInterpolator(baseTransientBottomBar2.animationFadeInterpolator);
-                        ofFloat.addUpdateListener(baseTransientBottomBar2.new AnonymousClass11());
-                        ofFloat.setInterpolator(android.view.animation.AnimationUtils.loadInterpolator(baseTransientBottomBar2.context, android.R.interpolator.accelerate_quad));
-                        ofFloat.setDuration(baseTransientBottomBar2.animationFadeOutDuration);
-                        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.snackbar.BaseTransientBottomBar.10
+                        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+                        valueAnimatorOfFloat.setInterpolator(baseTransientBottomBar2.animationFadeInterpolator);
+                        valueAnimatorOfFloat.addUpdateListener(baseTransientBottomBar2.new AnonymousClass11());
+                        valueAnimatorOfFloat.setInterpolator(android.view.animation.AnimationUtils.loadInterpolator(baseTransientBottomBar2.context, android.R.interpolator.accelerate_quad));
+                        valueAnimatorOfFloat.setDuration(baseTransientBottomBar2.animationFadeOutDuration);
+                        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.snackbar.BaseTransientBottomBar.10
                             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                             public final void onAnimationEnd(Animator animator) {
                                 BaseTransientBottomBar.this.onViewHidden(i2);
                             }
                         });
-                        ofFloat.start();
+                        valueAnimatorOfFloat.start();
                         return true;
                     }
                     ValueAnimator valueAnimator = new ValueAnimator();
@@ -186,9 +186,9 @@ public abstract class BaseTransientBottomBar {
                     valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.snackbar.BaseTransientBottomBar.16
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                            int intValue = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
+                            int iIntValue = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
                             int i4 = BaseTransientBottomBar.TRANSITION_HEIGHT;
-                            BaseTransientBottomBar.this.view.setTranslationY(intValue);
+                            BaseTransientBottomBar.this.view.setTranslationY(iIntValue);
                         }
                     });
                     valueAnimator.start();
@@ -200,7 +200,6 @@ public abstract class BaseTransientBottomBar {
         }
     });
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.android.material.snackbar.BaseTransientBottomBar$11, reason: invalid class name */
     public class AnonymousClass11 implements ValueAnimator.AnimatorUpdateListener {
         public AnonymousClass11() {
@@ -212,14 +211,12 @@ public abstract class BaseTransientBottomBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.android.material.snackbar.BaseTransientBottomBar$5, reason: invalid class name */
     public class AnonymousClass5 implements SnackbarManager.Callback {
         public AnonymousClass5() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.android.material.snackbar.BaseTransientBottomBar$7, reason: invalid class name */
     public class AnonymousClass7 implements SwipeDismissBehavior.OnDismissListener {
         public AnonymousClass7() {
@@ -233,7 +230,6 @@ public abstract class BaseTransientBottomBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Behavior extends SwipeDismissBehavior<View> {
         public final BehaviorDelegate delegate = new BehaviorDelegate(this);
 
@@ -259,7 +255,6 @@ public abstract class BaseTransientBottomBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BehaviorDelegate {
         public AnonymousClass5 managerCallback;
 
@@ -271,12 +266,11 @@ public abstract class BaseTransientBottomBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SnackbarBaseLayout extends FrameLayout {
         public static final AnonymousClass1 consumeAllTouchListener = new View.OnTouchListener() { // from class: com.google.android.material.snackbar.BaseTransientBottomBar.SnackbarBaseLayout.1
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                View view2;
+                View childAt;
                 if (!(view instanceof ViewGroup)) {
                     return true;
                 }
@@ -287,20 +281,20 @@ public abstract class BaseTransientBottomBar {
                 int childCount = viewGroup.getChildCount() - 1;
                 while (true) {
                     if (childCount < 0) {
-                        view2 = null;
+                        childAt = null;
                         break;
                     }
-                    view2 = viewGroup.getChildAt(childCount);
-                    float x2 = view2.getX();
-                    float y2 = view2.getY();
-                    float width = view2.getWidth() + x2;
-                    float height = view2.getHeight() + y2;
+                    childAt = viewGroup.getChildAt(childCount);
+                    float x2 = childAt.getX();
+                    float y2 = childAt.getY();
+                    float width = childAt.getWidth() + x2;
+                    float height = childAt.getHeight() + y2;
                     if (x >= x2 && y >= y2 && x < width && y < height) {
                         break;
                     }
                     childCount--;
                 }
-                return view2 != null;
+                return childAt != null;
             }
         };
         public final float actionTextColorAlpha;
@@ -393,11 +387,11 @@ public abstract class BaseTransientBottomBar {
         public final void setBackgroundTintList(ColorStateList colorStateList) {
             this.backgroundTint = colorStateList;
             if (getBackground() != null) {
-                Drawable mutate = getBackground().mutate();
-                mutate.setTintList(colorStateList);
-                mutate.setTintMode(this.backgroundTintMode);
-                if (mutate != getBackground()) {
-                    super.setBackgroundDrawable(mutate);
+                Drawable drawableMutate = getBackground().mutate();
+                drawableMutate.setTintList(colorStateList);
+                drawableMutate.setTintMode(this.backgroundTintMode);
+                if (drawableMutate != getBackground()) {
+                    super.setBackgroundDrawable(drawableMutate);
                 }
             }
         }
@@ -406,10 +400,10 @@ public abstract class BaseTransientBottomBar {
         public final void setBackgroundTintMode(PorterDuff.Mode mode) {
             this.backgroundTintMode = mode;
             if (getBackground() != null) {
-                Drawable mutate = getBackground().mutate();
-                mutate.setTintMode(mode);
-                if (mutate != getBackground()) {
-                    super.setBackgroundDrawable(mutate);
+                Drawable drawableMutate = getBackground().mutate();
+                drawableMutate.setTintMode(mode);
+                if (drawableMutate != getBackground()) {
+                    super.setBackgroundDrawable(drawableMutate);
                 }
             }
         }
@@ -436,43 +430,43 @@ public abstract class BaseTransientBottomBar {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        public SnackbarBaseLayout(Context context, AttributeSet attributeSet) {
-            super(MaterialThemeOverlay.wrap(context, attributeSet, 0, 0), attributeSet);
+        public SnackbarBaseLayout(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
             GradientDrawable gradientDrawable;
+            super(MaterialThemeOverlay.wrap(context, attributeSet, 0, 0), attributeSet);
             Context context2 = getContext();
-            TypedArray obtainStyledAttributes = context2.obtainStyledAttributes(attributeSet, R$styleable.SnackbarLayout);
-            if (obtainStyledAttributes.hasValue(6)) {
-                float dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(6, 0);
+            TypedArray typedArrayObtainStyledAttributes = context2.obtainStyledAttributes(attributeSet, R$styleable.SnackbarLayout);
+            if (typedArrayObtainStyledAttributes.hasValue(6)) {
+                float dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(6, 0);
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
                 ViewCompat.Api21Impl.setElevation(this, dimensionPixelSize);
             }
-            this.animationMode = obtainStyledAttributes.getInt(2, 1);
-            if (obtainStyledAttributes.hasValue(8) || obtainStyledAttributes.hasValue(9)) {
+            this.animationMode = typedArrayObtainStyledAttributes.getInt(2, 1);
+            if (typedArrayObtainStyledAttributes.hasValue(8) || typedArrayObtainStyledAttributes.hasValue(9)) {
                 this.shapeAppearanceModel = ShapeAppearanceModel.builder(context2, attributeSet, 0, 0).build();
             }
-            float f = obtainStyledAttributes.getFloat(3, 1.0f);
-            setBackgroundTintList(MaterialResources.getColorStateList(context2, obtainStyledAttributes, 4));
-            setBackgroundTintMode(ViewUtils.parseTintMode(obtainStyledAttributes.getInt(5, -1), PorterDuff.Mode.SRC_IN));
-            this.actionTextColorAlpha = obtainStyledAttributes.getFloat(1, 1.0f);
-            obtainStyledAttributes.getDimensionPixelSize(0, -1);
-            obtainStyledAttributes.getDimensionPixelSize(7, -1);
-            BaseTransientBottomBar.TRANSITION_HEIGHT = obtainStyledAttributes.getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_suggest_transition_height);
-            obtainStyledAttributes.recycle();
+            float f = typedArrayObtainStyledAttributes.getFloat(3, 1.0f);
+            setBackgroundTintList(MaterialResources.getColorStateList(context2, typedArrayObtainStyledAttributes, 4));
+            setBackgroundTintMode(ViewUtils.parseTintMode(typedArrayObtainStyledAttributes.getInt(5, -1), PorterDuff.Mode.SRC_IN));
+            this.actionTextColorAlpha = typedArrayObtainStyledAttributes.getFloat(1, 1.0f);
+            typedArrayObtainStyledAttributes.getDimensionPixelSize(0, -1);
+            typedArrayObtainStyledAttributes.getDimensionPixelSize(7, -1);
+            BaseTransientBottomBar.TRANSITION_HEIGHT = typedArrayObtainStyledAttributes.getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_suggest_transition_height);
+            typedArrayObtainStyledAttributes.recycle();
             setOnTouchListener(consumeAllTouchListener);
             setFocusable(true);
             if (getBackground() == null) {
-                int layer = MaterialColors.layer(f, MaterialColors.getColor(this, R.attr.colorSurface), MaterialColors.getColor(this, R.attr.colorOnSurface));
+                int iLayer = MaterialColors.layer(f, MaterialColors.getColor(this, R.attr.colorSurface), MaterialColors.getColor(this, R.attr.colorOnSurface));
                 ShapeAppearanceModel shapeAppearanceModel = this.shapeAppearanceModel;
                 if (shapeAppearanceModel != null) {
                     MaterialShapeDrawable materialShapeDrawable = new MaterialShapeDrawable(shapeAppearanceModel);
-                    materialShapeDrawable.setFillColor(ColorStateList.valueOf(layer));
+                    materialShapeDrawable.setFillColor(ColorStateList.valueOf(iLayer));
                     gradientDrawable = materialShapeDrawable;
                 } else {
                     float dimension = getResources().getDimension(R.dimen.mtrl_snackbar_background_corner_radius);
                     GradientDrawable gradientDrawable2 = new GradientDrawable();
                     gradientDrawable2.setShape(0);
                     gradientDrawable2.setCornerRadius(dimension);
-                    gradientDrawable2.setColor(layer);
+                    gradientDrawable2.setColor(iLayer);
                     gradientDrawable = gradientDrawable2;
                 }
                 ColorStateList colorStateList = this.backgroundTint;
@@ -588,21 +582,21 @@ public abstract class BaseTransientBottomBar {
                     SnackbarBaseLayout snackbarBaseLayout3 = baseTransientBottomBar.view;
                     int i = snackbarBaseLayout3.animationMode;
                     if (i == 1) {
-                        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                        ofFloat.setInterpolator(baseTransientBottomBar.animationFadeInterpolator);
-                        ofFloat.addUpdateListener(baseTransientBottomBar.new AnonymousClass11());
-                        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.2f, 1.0f);
-                        ofFloat2.setInterpolator(baseTransientBottomBar.animationScaleInterpolator);
-                        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.snackbar.BaseTransientBottomBar.12
+                        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                        valueAnimatorOfFloat.setInterpolator(baseTransientBottomBar.animationFadeInterpolator);
+                        valueAnimatorOfFloat.addUpdateListener(baseTransientBottomBar.new AnonymousClass11());
+                        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.2f, 1.0f);
+                        valueAnimatorOfFloat2.setInterpolator(baseTransientBottomBar.animationScaleInterpolator);
+                        valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.snackbar.BaseTransientBottomBar.12
                             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                                BaseTransientBottomBar.this.view.setScaleX(floatValue);
-                                BaseTransientBottomBar.this.view.setScaleY(floatValue);
+                                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                                BaseTransientBottomBar.this.view.setScaleX(fFloatValue);
+                                BaseTransientBottomBar.this.view.setScaleY(fFloatValue);
                             }
                         });
                         AnimatorSet animatorSet = new AnimatorSet();
-                        animatorSet.playTogether(ofFloat);
+                        animatorSet.playTogether(valueAnimatorOfFloat);
                         animatorSet.setInterpolator(android.view.animation.AnimationUtils.loadInterpolator(baseTransientBottomBar.context, android.R.interpolator.decelerate_quad));
                         animatorSet.setDuration(baseTransientBottomBar.animationFadeInDuration);
                         animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.snackbar.BaseTransientBottomBar.9
@@ -626,7 +620,7 @@ public abstract class BaseTransientBottomBar {
                         snackbarContentLayout.post(new Runnable() { // from class: com.google.android.material.snackbar.BaseTransientBottomBar$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
                             public final void run() {
-                                final BaseTransientBottomBar baseTransientBottomBar2 = BaseTransientBottomBar.this;
+                                final BaseTransientBottomBar baseTransientBottomBar2 = baseTransientBottomBar;
                                 final SnackbarContentLayout snackbarContentLayout2 = snackbarContentLayout;
                                 final TextView textView2 = textView;
                                 final Button button2 = button;
@@ -657,7 +651,7 @@ public abstract class BaseTransientBottomBar {
                                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.google.android.material.snackbar.BaseTransientBottomBar$$ExternalSyntheticLambda1
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        final BaseTransientBottomBar baseTransientBottomBar3 = BaseTransientBottomBar.this;
+                                        final BaseTransientBottomBar baseTransientBottomBar3 = baseTransientBottomBar2;
                                         TextView textView3 = textView2;
                                         Button button3 = button2;
                                         final SnackbarContentLayout snackbarContentLayout3 = snackbarContentLayout2;
@@ -681,11 +675,11 @@ public abstract class BaseTransientBottomBar {
 
                                             @Override // androidx.dynamicanimation.animation.FloatPropertyCompat
                                             public final void setValue(Object obj, float f) {
-                                                float min = Math.min(4.0f * f, 1.0f);
-                                                int lerp = (int) MathUtils.lerp(i5, i6, min);
-                                                int lerp2 = (int) MathUtils.lerp(i7, i8, min);
+                                                float fMin = Math.min(4.0f * f, 1.0f);
+                                                int iLerp = (int) MathUtils.lerp(i5, i6, fMin);
+                                                int iLerp2 = (int) MathUtils.lerp(i7, i8, fMin);
                                                 int i10 = BaseTransientBottomBar.TRANSITION_HEIGHT;
-                                                BaseTransientBottomBar.this.updateContentBackground(snackbarContentLayout3, lerp, lerp2);
+                                                BaseTransientBottomBar.this.updateContentBackground(snackbarContentLayout3, iLerp, iLerp2);
                                                 this._value = f;
                                             }
                                         });
@@ -709,7 +703,7 @@ public abstract class BaseTransientBottomBar {
                                             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
                                             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z3, float f, float f2) {
                                                 int i10 = BaseTransientBottomBar.TRANSITION_HEIGHT;
-                                                BaseTransientBottomBar.this.onViewShown();
+                                                baseTransientBottomBar3.onViewShown();
                                             }
                                         });
                                     }
@@ -754,9 +748,9 @@ public abstract class BaseTransientBottomBar {
                     valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(height) { // from class: com.google.android.material.snackbar.BaseTransientBottomBar.14
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                            int intValue = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
+                            int iIntValue = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
                             int i2 = BaseTransientBottomBar.TRANSITION_HEIGHT;
-                            BaseTransientBottomBar.this.view.setTranslationY(intValue);
+                            BaseTransientBottomBar.this.view.setTranslationY(iIntValue);
                         }
                     });
                     valueAnimator.start();
@@ -772,18 +766,18 @@ public abstract class BaseTransientBottomBar {
 
     public final void updateContentBackground(View view, int i, int i2) {
         GradientDrawable gradientDrawable = (GradientDrawable) view.getBackground();
-        float min = Math.min(i, i2) / 2.0f;
+        float fMin = Math.min(i, i2) / 2.0f;
         float dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_suggest_background_radius);
-        if (min > dimensionPixelSize) {
-            min = dimensionPixelSize;
+        if (fMin > dimensionPixelSize) {
+            fMin = dimensionPixelSize;
         }
-        gradientDrawable.setCornerRadius(min);
+        gradientDrawable.setCornerRadius(fMin);
         Rect bounds = gradientDrawable.getBounds();
-        int centerX = bounds.centerX();
-        int centerY = bounds.centerY();
+        int iCenterX = bounds.centerX();
+        int iCenterY = bounds.centerY();
         int i3 = i / 2;
         int i4 = i2 / 2;
-        gradientDrawable.setBounds(centerX - i3, centerY - i4, centerX + i3, centerY + i4);
+        gradientDrawable.setBounds(iCenterX - i3, iCenterY - i4, iCenterX + i3, iCenterY + i4);
         gradientDrawable.invalidateSelf();
     }
 
@@ -839,14 +833,14 @@ public abstract class BaseTransientBottomBar {
                 if (baseTransientBottomBar.view == null || (context2 = baseTransientBottomBar.context) == null) {
                     return;
                 }
-                int height = ((WindowManager) context2.getSystemService("window")).getCurrentWindowMetrics().getBounds().height();
+                int iHeight = ((WindowManager) context2.getSystemService("window")).getCurrentWindowMetrics().getBounds().height();
                 int[] iArr = new int[2];
                 SnackbarBaseLayout snackbarBaseLayout = BaseTransientBottomBar.this.view;
                 snackbarBaseLayout.getLocationInWindow(iArr);
-                int height2 = (height - (snackbarBaseLayout.getHeight() + iArr[1])) + ((int) BaseTransientBottomBar.this.view.getTranslationY());
+                int height = (iHeight - (snackbarBaseLayout.getHeight() + iArr[1])) + ((int) BaseTransientBottomBar.this.view.getTranslationY());
                 BaseTransientBottomBar baseTransientBottomBar2 = BaseTransientBottomBar.this;
                 int i = baseTransientBottomBar2.extraBottomMarginGestureInset;
-                if (height2 >= i) {
+                if (height >= i) {
                     baseTransientBottomBar2.appliedBottomMarginGestureInset = i;
                     return;
                 }
@@ -859,7 +853,7 @@ public abstract class BaseTransientBottomBar {
                 int i2 = baseTransientBottomBar3.extraBottomMarginGestureInset;
                 baseTransientBottomBar3.appliedBottomMarginGestureInset = i2;
                 ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams;
-                marginLayoutParams.bottomMargin = (i2 - height2) + marginLayoutParams.bottomMargin;
+                marginLayoutParams.bottomMargin = (i2 - height) + marginLayoutParams.bottomMargin;
                 baseTransientBottomBar3.view.requestLayout();
             }
         };
@@ -877,11 +871,11 @@ public abstract class BaseTransientBottomBar {
         this.contentViewCallback = contentViewCallback;
         this.context = context;
         ThemeEnforcement.checkTheme(context, ThemeEnforcement.APPCOMPAT_CHECK_ATTRS, "Theme.AppCompat");
-        LayoutInflater from = LayoutInflater.from(context);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(SNACKBAR_STYLE_ATTR);
-        int resourceId = obtainStyledAttributes.getResourceId(0, -1);
-        obtainStyledAttributes.recycle();
-        SnackbarBaseLayout snackbarBaseLayout = (SnackbarBaseLayout) from.inflate(resourceId != -1 ? R.layout.mtrl_layout_snackbar : R.layout.design_layout_snackbar, viewGroup, false);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(context);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(SNACKBAR_STYLE_ATTR);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, -1);
+        typedArrayObtainStyledAttributes.recycle();
+        SnackbarBaseLayout snackbarBaseLayout = (SnackbarBaseLayout) layoutInflaterFrom.inflate(resourceId != -1 ? R.layout.mtrl_layout_snackbar : R.layout.design_layout_snackbar, viewGroup, false);
         this.view = snackbarBaseLayout;
         snackbarBaseLayout.baseTransientBottomBar = this;
         if (view instanceof SnackbarContentLayout) {
@@ -934,7 +928,6 @@ public abstract class BaseTransientBottomBar {
         this.animationSlideInterpolator = MotionUtils.resolveThemeInterpolator(context, R.attr.motionEasingEmphasizedInterpolator, DEFAULT_ANIMATION_SLIDE_INTERPOLATOR);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class BaseCallback {
         public void onShown(BaseTransientBottomBar baseTransientBottomBar) {
         }

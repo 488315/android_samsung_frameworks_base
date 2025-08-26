@@ -19,38 +19,38 @@ public class StatsExpressLog {
     public static final int EXPRESS_UID_HISTOGRAM_SAMPLE_REPORTED = 658;
 
     public static void write(int i, long j, long j2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeLong(j);
-        newBuilder.writeLong(j2);
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, long j, long j2, int i2) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeLong(j);
-        newBuilder.writeLong(j2);
-        newBuilder.writeInt(i2);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.writeInt(i2);
         if (644 == i) {
-            newBuilder.addBooleanAnnotation((byte) 1, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 1, true);
         }
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 
     public static void write(int i, long j, long j2, int i2, int i3) {
-        StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-        newBuilder.setAtomId(i);
-        newBuilder.writeLong(j);
-        newBuilder.writeLong(j2);
-        newBuilder.writeInt(i2);
-        newBuilder.writeInt(i3);
+        StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+        builderNewBuilder.setAtomId(i);
+        builderNewBuilder.writeLong(j);
+        builderNewBuilder.writeLong(j2);
+        builderNewBuilder.writeInt(i2);
+        builderNewBuilder.writeInt(i3);
         if (658 == i) {
-            newBuilder.addBooleanAnnotation((byte) 1, true);
+            builderNewBuilder.addBooleanAnnotation((byte) 1, true);
         }
-        newBuilder.usePooledBuffer();
-        StatsLog.write(newBuilder.build());
+        builderNewBuilder.usePooledBuffer();
+        StatsLog.write(builderNewBuilder.build());
     }
 }

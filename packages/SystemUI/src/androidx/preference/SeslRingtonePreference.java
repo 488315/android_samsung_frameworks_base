@@ -11,24 +11,23 @@ import androidx.reflect.os.SeslUserHandleReflector;
 import com.android.systemui.R;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslRingtonePreference extends Preference {
     public SeslRingtonePreference(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.RingtonePreference, i, i2);
-        obtainStyledAttributes.getInt(0, 1);
-        obtainStyledAttributes.getBoolean(1, true);
-        obtainStyledAttributes.getBoolean(2, true);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.RingtonePreference, i, i2);
+        typedArrayObtainStyledAttributes.getInt(0, 1);
+        typedArrayObtainStyledAttributes.getBoolean(1, true);
+        typedArrayObtainStyledAttributes.getBoolean(2, true);
         this.mIntent = new Intent("android.intent.action.RINGTONE_PICKER");
         Method declaredMethod = SeslBaseReflector.getDeclaredMethod(SeslUserHandleReflector.mClass, "hidden_myUserId", new Class[0]);
         if (declaredMethod != null) {
-            Object invoke = SeslBaseReflector.invoke(null, declaredMethod, new Object[0]);
-            if (invoke instanceof Integer) {
-                ((Integer) invoke).intValue();
+            Object objInvoke = SeslBaseReflector.invoke(null, declaredMethod, new Object[0]);
+            if (objInvoke instanceof Integer) {
+                ((Integer) objInvoke).intValue();
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // androidx.preference.Preference
@@ -42,8 +41,8 @@ public class SeslRingtonePreference extends Preference {
         if (z || TextUtils.isEmpty(str)) {
             return;
         }
-        Uri parse = Uri.parse(str);
-        persistString(parse != null ? parse.toString() : "");
+        Uri uri = Uri.parse(str);
+        persistString(uri != null ? uri.toString() : "");
     }
 
     public SeslRingtonePreference(Context context, AttributeSet attributeSet, int i) {

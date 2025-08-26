@@ -25,9 +25,9 @@ public class AccountItemView extends LinearLayout {
 
     public AccountItemView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        View inflate = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.simple_account_item, (ViewGroup) null);
-        addView(inflate);
-        initViewItem(inflate);
+        View viewInflate = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.simple_account_item, (ViewGroup) null);
+        addView(viewInflate);
+        initViewItem(viewInflate);
     }
 
     private void initViewItem(View view) {

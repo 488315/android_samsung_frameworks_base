@@ -12,6 +12,7 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.android.internal.R;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -31,8 +32,8 @@ public class ContactsInternal {
     }
 
     public static void startQuickContactWithErrorToast(Context context, Intent intent) {
-        int match = sContactsUriMatcher.match(intent.getData());
-        if ((match == 1000 || match == 1001) && maybeStartManagedQuickContact(context, intent)) {
+        int iMatch = sContactsUriMatcher.match(intent.getData());
+        if ((iMatch == 1000 || iMatch == 1001) && maybeStartManagedQuickContact(context, intent)) {
             return;
         }
         startQuickContactWithErrorToastForUser(context, intent, context.getUser());
@@ -46,29 +47,29 @@ public class ContactsInternal {
         }
     }
 
-    private static boolean maybeStartManagedQuickContact(Context context, Intent intent) {
-        long parseId;
+    private static boolean maybeStartManagedQuickContact(Context context, Intent intent) throws UnsupportedEncodingException {
+        long id;
         Uri data = intent.getData();
         List<String> pathSegments = data.getPathSegments();
         boolean z = pathSegments.size() < 4;
         if (z) {
-            parseId = ContactsContract.Contacts.ENTERPRISE_CONTACT_ID_BASE;
+            id = ContactsContract.Contacts.ENTERPRISE_CONTACT_ID_BASE;
         } else {
-            parseId = ContentUris.parseId(data);
+            id = ContentUris.parseId(data);
         }
         String str = pathSegments.get(2);
         String queryParameter = data.getQueryParameter("directory");
-        long parseLong = queryParameter == null ? 1000000000L : Long.parseLong(queryParameter);
+        long j = queryParameter == null ? 1000000000L : Long.parseLong(queryParameter);
         if (TextUtils.isEmpty(str) || !str.startsWith(ContactsContract.Contacts.ENTERPRISE_CONTACT_LOOKUP_PREFIX)) {
             return false;
         }
-        if (!ContactsContract.Contacts.isEnterpriseContactId(parseId)) {
-            throw new IllegalArgumentException("Invalid enterprise contact id: " + parseId);
+        if (!ContactsContract.Contacts.isEnterpriseContactId(id)) {
+            throw new IllegalArgumentException("Invalid enterprise contact id: " + id);
         }
-        if (!ContactsContract.Directory.isEnterpriseDirectoryId(parseLong)) {
-            throw new IllegalArgumentException("Invalid enterprise directory id: " + parseLong);
+        if (!ContactsContract.Directory.isEnterpriseDirectoryId(j)) {
+            throw new IllegalArgumentException("Invalid enterprise directory id: " + j);
         }
-        ((DevicePolicyManager) context.getSystemService(DevicePolicyManager.class)).startManagedQuickContact(str.substring(ContactsContract.Contacts.ENTERPRISE_CONTACT_LOOKUP_PREFIX.length()), parseId - ContactsContract.Contacts.ENTERPRISE_CONTACT_ID_BASE, z, parseLong - 1000000000, intent);
+        ((DevicePolicyManager) context.getSystemService(DevicePolicyManager.class)).startManagedQuickContact(str.substring(ContactsContract.Contacts.ENTERPRISE_CONTACT_LOOKUP_PREFIX.length()), id - ContactsContract.Contacts.ENTERPRISE_CONTACT_ID_BASE, z, j - 1000000000, intent);
         return true;
     }
 }

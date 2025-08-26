@@ -93,13 +93,13 @@ public final class Sender {
         bundle.putString("pkg_name", DSMS_PACKAGE);
         bundle.putString("type", "ev");
         bundle.putString("value", String.valueOf(dsmsMessage.getValue()));
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         if (dsmsMessage.getDetail() != null) {
-            hashMap.put("det", dsmsMessage.getDetail());
+            map.put("det", dsmsMessage.getDetail());
         }
-        hashMap.put(GnssSignalType.CODE_TYPE_S, GnssSignalType.CODE_TYPE_S);
-        hashMap.put("C", DsmsInfoCache.getInstance().isCommercializedDevice() ? "1" : "0");
-        bundle.putSerializable("dimension", hashMap);
+        map.put(GnssSignalType.CODE_TYPE_S, GnssSignalType.CODE_TYPE_S);
+        map.put("C", DsmsInfoCache.getInstance().isCommercializedDevice() ? "1" : "0");
+        bundle.putSerializable("dimension", map);
         Intent intent = new Intent();
         intent.setAction("com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY");
         intent.setPackage("com.sec.android.diagmonagent");

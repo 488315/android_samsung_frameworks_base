@@ -31,9 +31,9 @@ public class HubEndpointSession implements AutoCloseable {
         if (this.mIsClosed.get()) {
             throw new IllegalStateException("Session is already closed.");
         }
-        boolean isResponseRequired = hubMessage.isResponseRequired();
-        ContextHubTransaction<Void> contextHubTransaction = new ContextHubTransaction<>(isResponseRequired ? 7 : 6);
-        if (!isResponseRequired) {
+        boolean zIsResponseRequired = hubMessage.isResponseRequired();
+        ContextHubTransaction<Void> contextHubTransaction = new ContextHubTransaction<>(zIsResponseRequired ? 7 : 6);
+        if (!zIsResponseRequired) {
             this.mHubEndpoint.sendMessage(this, hubMessage, null);
             contextHubTransaction.setResponse(new ContextHubTransaction.Response<>(0, null));
             return contextHubTransaction;
@@ -74,7 +74,7 @@ public class HubEndpointSession implements AutoCloseable {
     }
 
     public boolean equals(Object obj) {
-        boolean z;
+        boolean zEquals;
         if (obj == this) {
             return true;
         }
@@ -82,14 +82,14 @@ public class HubEndpointSession implements AutoCloseable {
             return false;
         }
         HubEndpointSession hubEndpointSession = (HubEndpointSession) obj;
-        boolean z2 = hubEndpointSession.getId() == this.mId;
+        boolean z = hubEndpointSession.getId() == this.mId;
         String str = this.mServiceDescriptor;
         if (str != null) {
-            z = str.equals(hubEndpointSession.getServiceDescriptor());
+            zEquals = str.equals(hubEndpointSession.getServiceDescriptor());
         } else {
-            z = hubEndpointSession.getServiceDescriptor() == null;
+            zEquals = hubEndpointSession.getServiceDescriptor() == null;
         }
-        return z2 & z & (this.mInitiator.equals(hubEndpointSession.mInitiator) && this.mDestination.equals(hubEndpointSession.mDestination));
+        return z & zEquals & (this.mInitiator.equals(hubEndpointSession.mInitiator) && this.mDestination.equals(hubEndpointSession.mDestination));
     }
 
     public int hashCode() {

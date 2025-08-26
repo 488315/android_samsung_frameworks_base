@@ -19,7 +19,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.sec.ims.volte2.data.VolteConstants;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardWallpaperEventHandler {
     private static final String ACTION_LAUNCH_FESTIVAL_WALLPAPER = "com.samsung.intent.action.LAUNCH_FESTIVAL_WALLPAPER";
@@ -100,21 +99,21 @@ public class KeyguardWallpaperEventHandler {
                     return;
                 }
                 Log.d(KeyguardWallpaperEventHandler.TAG, "onChanged: uri = " + uri.toString());
-                boolean equals = uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_ULTRA_POWERSAVING_MODE));
+                boolean zEquals = uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_ULTRA_POWERSAVING_MODE));
                 KeyguardWallpaperEventHandler keyguardWallpaperEventHandler = KeyguardWallpaperEventHandler.this;
-                if (equals || uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_MINIMAL_BATTERY_USE))) {
-                    boolean isUltraPowerSavingMode = keyguardWallpaperEventHandler.mSettingsHelper.isUltraPowerSavingMode();
-                    if (WallpaperUtils.mIsUltraPowerSavingMode != isUltraPowerSavingMode) {
-                        WallpaperUtils.mIsUltraPowerSavingMode = isUltraPowerSavingMode;
+                if (zEquals || uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_MINIMAL_BATTERY_USE))) {
+                    boolean zIsUltraPowerSavingMode = keyguardWallpaperEventHandler.mSettingsHelper.isUltraPowerSavingMode();
+                    if (WallpaperUtils.mIsUltraPowerSavingMode != zIsUltraPowerSavingMode) {
+                        WallpaperUtils.mIsUltraPowerSavingMode = zIsUltraPowerSavingMode;
                         keyguardWallpaperEventHandler.sendMessage(VolteConstants.ErrorCode.DECLINE, null, -1, -1);
                         return;
                     }
                     return;
                 }
                 if (uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_EMERGENCY_MODE))) {
-                    boolean isEmergencyMode = keyguardWallpaperEventHandler.mSettingsHelper.isEmergencyMode();
-                    if (WallpaperUtils.mIsEmergencyMode != isEmergencyMode) {
-                        WallpaperUtils.mIsEmergencyMode = isEmergencyMode;
+                    boolean zIsEmergencyMode = keyguardWallpaperEventHandler.mSettingsHelper.isEmergencyMode();
+                    if (WallpaperUtils.mIsEmergencyMode != zIsEmergencyMode) {
+                        WallpaperUtils.mIsEmergencyMode = zIsEmergencyMode;
                         keyguardWallpaperEventHandler.sendMessage(602, null, -1, -1);
                         return;
                     }

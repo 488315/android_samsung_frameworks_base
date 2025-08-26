@@ -16,22 +16,22 @@ public final class ParcelableConnection implements Parcelable {
         public ParcelableConnection createFromParcel(Parcel parcel) {
             ClassLoader classLoader = ParcelableConnection.class.getClassLoader();
             PhoneAccountHandle phoneAccountHandle = (PhoneAccountHandle) parcel.readParcelable(classLoader, PhoneAccountHandle.class);
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             Uri uri = (Uri) parcel.readParcelable(classLoader, Uri.class);
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
-            int readInt4 = parcel.readInt();
-            IVideoProvider asInterface = IVideoProvider.Stub.asInterface(parcel.readStrongBinder());
-            int readInt5 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
+            int i4 = parcel.readInt();
+            IVideoProvider iVideoProviderAsInterface = IVideoProvider.Stub.asInterface(parcel.readStrongBinder());
+            int i5 = parcel.readInt();
             boolean z = parcel.readByte() == 1;
             boolean z2 = parcel.readByte() == 1;
-            long readLong = parcel.readLong();
+            long j = parcel.readLong();
             StatusHints statusHints = (StatusHints) parcel.readParcelable(classLoader, StatusHints.class);
             DisconnectCause disconnectCause = (DisconnectCause) parcel.readParcelable(classLoader, DisconnectCause.class);
             ArrayList arrayList = new ArrayList();
             parcel.readStringList(arrayList);
-            return new ParcelableConnection(phoneAccountHandle, readInt, readInt2, parcel.readInt(), parcel.readInt(), uri, readInt3, readString, readInt4, asInterface, readInt5, z, z2, readLong, parcel.readLong(), statusHints, disconnectCause, arrayList, Bundle.setDefusable(parcel.readBundle(classLoader), true), parcel.readString(), parcel.readInt(), parcel.readInt());
+            return new ParcelableConnection(phoneAccountHandle, i, i2, parcel.readInt(), parcel.readInt(), uri, i3, string, i4, iVideoProviderAsInterface, i5, z, z2, j, parcel.readLong(), statusHints, disconnectCause, arrayList, Bundle.setDefusable(parcel.readBundle(classLoader), true), parcel.readString(), parcel.readInt(), parcel.readInt());
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

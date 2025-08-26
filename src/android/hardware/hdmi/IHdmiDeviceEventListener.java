@@ -44,9 +44,9 @@ public interface IHdmiDeviceEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IHdmiDeviceEventListener)) {
-                return (IHdmiDeviceEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IHdmiDeviceEventListener)) {
+                return (IHdmiDeviceEventListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IHdmiDeviceEventListener extends IInterface {
             }
             if (i == 1) {
                 HdmiDeviceInfo hdmiDeviceInfo = (HdmiDeviceInfo) parcel.readTypedObject(HdmiDeviceInfo.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onStatusChanged(hdmiDeviceInfo, readInt);
+                onStatusChanged(hdmiDeviceInfo, i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IHdmiDeviceEventListener extends IInterface {
 
             @Override // android.hardware.hdmi.IHdmiDeviceEventListener
             public void onStatusChanged(HdmiDeviceInfo hdmiDeviceInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(hdmiDeviceInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hdmiDeviceInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

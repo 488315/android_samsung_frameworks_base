@@ -7,6 +7,7 @@ import android.content.pm.IPackageManager;
 import android.graphics.Point;
 import android.hardware.display.DisplayManagerGlobal;
 import android.hardware.display.IDisplayManager;
+import android.hardware.display.SemWifiDisplayConfig;
 import android.hardware.display.VirtualDisplay;
 import android.hardware.display.VirtualDisplayConfig;
 import android.media.projection.MediaProjection;
@@ -38,6 +39,9 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /* loaded from: classes2.dex */
 public final class DisplayManager {
@@ -241,9 +245,7 @@ public final class DisplayManager {
             return getDisplays(displayIds, new Predicate() { // from class: android.hardware.display.DisplayManager$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean isBuiltInDisplay;
-                    isBuiltInDisplay = DisplayManager.isBuiltInDisplay((Display) obj);
-                    return isBuiltInDisplay;
+                    return DisplayManager.isBuiltInDisplay((Display) obj);
                 }
             });
         }
@@ -251,9 +253,7 @@ public final class DisplayManager {
             return getDisplays(displayIds, new Predicate() { // from class: android.hardware.display.DisplayManager$$ExternalSyntheticLambda1
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean isPresentationDisplay;
-                    isPresentationDisplay = DisplayManager.isPresentationDisplay((Display) obj);
-                    return isPresentationDisplay;
+                    return DisplayManager.isPresentationDisplay((Display) obj);
                 }
             });
         }
@@ -261,9 +261,7 @@ public final class DisplayManager {
             return getDisplays(displayIds, new Predicate() { // from class: android.hardware.display.DisplayManager$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean isRearDisplay;
-                    isRearDisplay = DisplayManager.isRearDisplay((Display) obj);
-                    return isRearDisplay;
+                    return DisplayManager.isRearDisplay((Display) obj);
                 }
             });
         }
@@ -271,9 +269,7 @@ public final class DisplayManager {
             return getDisplays(displayIds, new Predicate() { // from class: android.hardware.display.DisplayManager$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean isBuiltInDisplay;
-                    isBuiltInDisplay = DisplayManager.isBuiltInDisplay((Display) obj);
-                    return isBuiltInDisplay;
+                    return DisplayManager.isBuiltInDisplay((Display) obj);
                 }
             });
         }
@@ -281,9 +277,7 @@ public final class DisplayManager {
             return getDisplays(displayIds, new Predicate() { // from class: android.hardware.display.DisplayManager$$ExternalSyntheticLambda3
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean checkNonNullIncludingBuiltIn;
-                    checkNonNullIncludingBuiltIn = DisplayManager.checkNonNullIncludingBuiltIn((Display) obj);
-                    return checkNonNullIncludingBuiltIn;
+                    return DisplayManager.checkNonNullIncludingBuiltIn((Display) obj);
                 }
             });
         }
@@ -291,9 +285,7 @@ public final class DisplayManager {
             return getDisplays(displayIds, new Predicate() { // from class: android.hardware.display.DisplayManager$$ExternalSyntheticLambda4
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean isViewCoverDisplay;
-                    isViewCoverDisplay = DisplayManager.isViewCoverDisplay((Display) obj);
-                    return isViewCoverDisplay;
+                    return DisplayManager.isViewCoverDisplay((Display) obj);
                 }
             });
         }
@@ -301,9 +293,7 @@ public final class DisplayManager {
             return getDisplays(displayIds, new Predicate() { // from class: android.hardware.display.DisplayManager$$ExternalSyntheticLambda5
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean isRemoteAppDisplay;
-                    isRemoteAppDisplay = DisplayManager.isRemoteAppDisplay((Display) obj);
-                    return isRemoteAppDisplay;
+                    return DisplayManager.isRemoteAppDisplay((Display) obj);
                 }
             });
         }
@@ -311,9 +301,7 @@ public final class DisplayManager {
             return getDisplays(displayIds, new Predicate() { // from class: android.hardware.display.DisplayManager$$ExternalSyntheticLambda6
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean isCarLifeDisplay;
-                    isCarLifeDisplay = DisplayManager.isCarLifeDisplay((Display) obj);
-                    return isCarLifeDisplay;
+                    return DisplayManager.isCarLifeDisplay((Display) obj);
                 }
             });
         }
@@ -321,9 +309,7 @@ public final class DisplayManager {
             return getDisplays(displayIds, new Predicate() { // from class: android.hardware.display.DisplayManager$$ExternalSyntheticLambda7
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean checkNonNullAndOtherPolicy;
-                    checkNonNullAndOtherPolicy = DisplayManager.checkNonNullAndOtherPolicy((Display) obj);
-                    return checkNonNullAndOtherPolicy;
+                    return DisplayManager.checkNonNullAndOtherPolicy((Display) obj);
                 }
             });
         }
@@ -431,19 +417,19 @@ public final class DisplayManager {
     }
 
     private Display getOrCreateDisplay(int i, boolean z) {
-        Display display;
+        Display compatibleDisplay;
         synchronized (this.mLock) {
-            display = this.mDisplayCache.get(i);
-            if (display == null) {
-                display = this.mGlobal.getCompatibleDisplay(i, this.mContext.getDisplayId() == i ? this.mContext.getResources() : null);
-                if (display != null) {
-                    this.mDisplayCache.put(display);
+            compatibleDisplay = this.mDisplayCache.get(i);
+            if (compatibleDisplay == null) {
+                compatibleDisplay = this.mGlobal.getCompatibleDisplay(i, this.mContext.getDisplayId() == i ? this.mContext.getResources() : null);
+                if (compatibleDisplay != null) {
+                    this.mDisplayCache.put(compatibleDisplay);
                 }
-            } else if (!z && !display.isValid()) {
-                display = null;
+            } else if (!z && !compatibleDisplay.isValid()) {
+                compatibleDisplay = null;
             }
         }
-        return display;
+        return compatibleDisplay;
     }
 
     public void registerDisplayListener(DisplayListener displayListener, Handler handler) {
@@ -510,6 +496,10 @@ public final class DisplayManager {
 
     public WifiDisplayStatus getWifiDisplayStatus() {
         return this.mGlobal.getWifiDisplayStatus();
+    }
+
+    public void setEnableConnectedDisplay(int i, boolean z) {
+        this.mGlobal.setEnableConnectedDisplay(i, z);
     }
 
     public void enableConnectedDisplay(int i) {
@@ -750,19 +740,19 @@ public final class DisplayManager {
 
     @SystemApi
     public static VirtualDisplay createVirtualDisplay(String str, int i, int i2, int i3, Surface surface) {
-        IDisplayManager asInterface = IDisplayManager.Stub.asInterface(ServiceManager.getService(Context.DISPLAY_SERVICE));
-        IPackageManager asInterface2 = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
+        IDisplayManager iDisplayManagerAsInterface = IDisplayManager.Stub.asInterface(ServiceManager.getService(Context.DISPLAY_SERVICE));
+        IPackageManager iPackageManagerAsInterface = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
         VirtualDisplayConfig.Builder displayIdToMirror = new VirtualDisplayConfig.Builder(str, i, i2, 1).setFlags(16).setDisplayIdToMirror(i3);
         if (surface != null) {
             displayIdToMirror.setSurface(surface);
         }
-        VirtualDisplayConfig build = displayIdToMirror.build();
+        VirtualDisplayConfig virtualDisplayConfigBuild = displayIdToMirror.build();
         try {
-            String[] packagesForUid = asInterface2.getPackagesForUid(Process.myUid());
+            String[] packagesForUid = iPackageManagerAsInterface.getPackagesForUid(Process.myUid());
             String str2 = packagesForUid == null ? null : packagesForUid[0];
             DisplayManagerGlobal.VirtualDisplayCallback virtualDisplayCallback = new DisplayManagerGlobal.VirtualDisplayCallback(null, null);
             try {
-                return DisplayManagerGlobal.getInstance().createVirtualDisplayWrapper(build, virtualDisplayCallback, asInterface.createVirtualDisplay(build, virtualDisplayCallback, null, str2));
+                return DisplayManagerGlobal.getInstance().createVirtualDisplayWrapper(virtualDisplayConfigBuild, virtualDisplayCallback, iDisplayManagerAsInterface.createVirtualDisplay(virtualDisplayConfigBuild, virtualDisplayCallback, null, str2));
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1062,18 +1052,85 @@ public final class DisplayManager {
         return new SemWifiDisplayStatus(this.mGlobal.getWifiDisplayStatus());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00da  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x012b  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00c9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void semEnableWifiDisplay(java.lang.String r23, java.lang.String r24, int r25, java.lang.String r26, java.lang.String r27, java.lang.String r28, boolean r29) {
-        /*
-            Method dump skipped, instructions count: 388
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.display.DisplayManager.semEnableWifiDisplay(java.lang.String, java.lang.String, int, java.lang.String, java.lang.String, java.lang.String, boolean):void");
+    public void semEnableWifiDisplay(String str, String str2, int i, String str3, String str4, String str5, boolean z) throws JSONException {
+        int i2;
+        int i3;
+        String str6;
+        int i4;
+        char c = i == 16 ? (char) 3 : (char) 2;
+        ArrayList arrayList = new ArrayList();
+        ArrayList arrayList2 = new ArrayList();
+        ArrayList arrayList3 = new ArrayList();
+        if (i == 14) {
+            i2 = 32;
+            i3 = 0;
+        } else if (i == 19 || i == 16) {
+            i2 = 0;
+            i3 = 3;
+        } else if (i == 17) {
+            i2 = 0;
+            i3 = 2;
+        } else {
+            i2 = 0;
+            i3 = 0;
+        }
+        if (str3 != null) {
+            if (str3.isEmpty()) {
+                str6 = SemWifiDisplayParameter.GET_PARAMETER;
+            } else {
+                JSONObject jSONObject = new JSONObject(str3);
+                if (jSONObject.has(SemWifiDisplayParameter.GET_PARAMETER)) {
+                    JSONArray jSONArray = jSONObject.getJSONArray(SemWifiDisplayParameter.GET_PARAMETER);
+                    str6 = SemWifiDisplayParameter.GET_PARAMETER;
+                    int i5 = 0;
+                    while (i5 < jSONArray.length()) {
+                        try {
+                            i4 = i2;
+                            try {
+                                arrayList2.add(new SemWifiDisplayParameter(jSONArray.getString(i5)));
+                                i5++;
+                                i2 = i4;
+                            } catch (JSONException unused) {
+                            }
+                        } catch (JSONException unused2) {
+                        }
+                    }
+                } else {
+                    str6 = SemWifiDisplayParameter.GET_PARAMETER;
+                }
+                i4 = i2;
+                if (jSONObject.has(SemWifiDisplayParameter.SET_PARAMETER)) {
+                    JSONArray jSONArray2 = jSONObject.getJSONArray(SemWifiDisplayParameter.SET_PARAMETER);
+                    int i6 = 0;
+                    while (i6 < jSONArray2.length()) {
+                        String[] strArrSplit = jSONArray2.getString(i6).split(": ");
+                        JSONArray jSONArray3 = jSONArray2;
+                        if (strArrSplit.length == 2) {
+                            arrayList3.add(new SemWifiDisplayParameter(strArrSplit[0], strArrSplit[1]));
+                        }
+                        i6++;
+                        jSONArray2 = jSONArray3;
+                    }
+                }
+                if (jSONObject.has(SemWifiDisplayParameter.KEY_SCAMBLE_SUPPORT)) {
+                    arrayList.add(new SemWifiDisplayParameter(SemWifiDisplayParameter.KEY_SCAMBLE_SUPPORT, jSONObject.getString(SemWifiDisplayParameter.KEY_SCAMBLE_SUPPORT)));
+                }
+            }
+            i4 = i2;
+        }
+        if (c == 3) {
+            SemWifiDisplayConfig semWifiDisplayConfigBuild = new SemWifiDisplayConfig.Builder().setUsbConnection(str, str2, str4, str5).setMode(i3).addFlags(i4).addParameters(SemWifiDisplayParameter.INIT_PARAMETER, arrayList).addParameters(str6, arrayList2).addParameters(SemWifiDisplayParameter.SET_PARAMETER, arrayList3).build();
+            Log.d(TAG, "semEnableWifiDisplay : deviceType = " + i + ", config = " + semWifiDisplayConfigBuild.toString() + ", option = " + str3);
+            this.mGlobal.connectWifiDisplay(semWifiDisplayConfigBuild, null, null);
+            return;
+        }
+        SemWifiDisplayConfig semWifiDisplayConfigBuild2 = new SemWifiDisplayConfig.Builder().setApConnection(str, str2, str4, str5).setMode(i3).addFlags(i4).addParameters(SemWifiDisplayParameter.INIT_PARAMETER, arrayList).addParameters(str6, arrayList2).addParameters(SemWifiDisplayParameter.SET_PARAMETER, arrayList3).build();
+        Log.d(TAG, "semEnableWifiDisplay : deviceType = " + i + ", config = " + semWifiDisplayConfigBuild2.toString() + ", option = " + str3);
+        this.mGlobal.connectWifiDisplay(semWifiDisplayConfigBuild2, null, null);
     }
 
     public void semDisconnectDevice() {

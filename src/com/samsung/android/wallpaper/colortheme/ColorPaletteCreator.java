@@ -102,16 +102,16 @@ public class ColorPaletteCreator {
 
     static float hueMove(float f, int i) {
         int length;
-        int findRange = findRange(f);
-        float findRatio = findRatio(f, findRange);
-        if (findRatio > 0.5f) {
-            length = (findRange + i) % (range.length - 1);
+        int iFindRange = findRange(f);
+        float fFindRatio = findRatio(f, iFindRange);
+        if (fFindRatio > 0.5f) {
+            length = (iFindRange + i) % (range.length - 1);
         } else {
-            int i2 = findRange - i;
+            int i2 = iFindRange - i;
             int[] iArr = range;
             length = ((i2 + iArr.length) - 1) % (iArr.length - 1);
         }
-        return getHue(length, findRatio);
+        return getHue(length, fFindRatio);
     }
 
     static boolean isGrayImage(float[][] fArr) {
@@ -392,9 +392,7 @@ public class ColorPaletteCreator {
         return arrayList.stream().mapToInt(new ToIntFunction() { // from class: com.samsung.android.wallpaper.colortheme.ColorPaletteCreator$$ExternalSyntheticLambda0
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
+                return ((Integer) obj).intValue();
             }
         }).toArray();
     }

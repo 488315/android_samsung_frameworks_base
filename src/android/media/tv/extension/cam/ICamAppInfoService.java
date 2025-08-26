@@ -61,9 +61,9 @@ public interface ICamAppInfoService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamAppInfoService");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICamAppInfoService)) {
-                return (ICamAppInfoService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamAppInfoService");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICamAppInfoService)) {
+                return (ICamAppInfoService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,20 +96,20 @@ public interface ICamAppInfoService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ICamAppInfoListener asInterface = ICamAppInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                ICamAppInfoListener iCamAppInfoListenerAsInterface = ICamAppInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addCamAppInfoListener(asInterface);
+                addCamAppInfoListener(iCamAppInfoListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                ICamAppInfoListener asInterface2 = ICamAppInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                ICamAppInfoListener iCamAppInfoListenerAsInterface2 = ICamAppInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeCamAppInfoListener(asInterface2);
+                removeCamAppInfoListener(iCamAppInfoListenerAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Bundle bundle = new Bundle();
                 parcel.enforceNoDataAvail();
-                int camAppInfo = getCamAppInfo(readInt, bundle);
+                int camAppInfo = getCamAppInfo(i3, bundle);
                 parcel2.writeNoException();
                 parcel2.writeInt(camAppInfo);
                 parcel2.writeTypedObject(bundle, 1);
@@ -137,51 +137,51 @@ public interface ICamAppInfoService extends IInterface {
 
             @Override // android.media.tv.extension.cam.ICamAppInfoService
             public void addCamAppInfoListener(ICamAppInfoListener iCamAppInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamAppInfoService");
-                    obtain.writeStrongInterface(iCamAppInfoListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamAppInfoService");
+                    parcelObtain.writeStrongInterface(iCamAppInfoListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamAppInfoService
             public void removeCamAppInfoListener(ICamAppInfoListener iCamAppInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamAppInfoService");
-                    obtain.writeStrongInterface(iCamAppInfoListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamAppInfoService");
+                    parcelObtain.writeStrongInterface(iCamAppInfoListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamAppInfoService
             public int getCamAppInfo(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamAppInfoService");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    if (obtain2.readInt() != 0) {
-                        bundle.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamAppInfoService");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    if (parcelObtain2.readInt() != 0) {
+                        bundle.readFromParcel(parcelObtain2);
                     }
-                    return readInt;
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

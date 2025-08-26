@@ -21,10 +21,10 @@ public class MultiUserSupportsHelper {
     public static final boolean IS_TABLET;
 
     static {
-        boolean contains = SystemProperties.get("ro.build.characteristics", "").contains(BnRConstants.DEVICETYPE_TABLET);
-        IS_TABLET = contains;
-        DEFAULT_MAX_USERS = contains ? 8 : 1;
-        DEFAULT_ENABLE_STATUS = contains;
+        boolean zContains = SystemProperties.get("ro.build.characteristics", "").contains(BnRConstants.DEVICETYPE_TABLET);
+        IS_TABLET = zContains;
+        DEFAULT_MAX_USERS = zContains ? 8 : 1;
+        DEFAULT_ENABLE_STATUS = zContains;
     }
 
     public static boolean supportsMultipleUsers() {
@@ -74,18 +74,18 @@ public class MultiUserSupportsHelper {
     }
 
     private static Drawable getBmodeUserIcon(Resources resources, boolean z) {
-        Drawable mutate;
+        Drawable drawableMutate;
         int i;
         if (z) {
-            mutate = resources.getDrawable(R.drawable.mum_bmode_1, null).mutate();
+            drawableMutate = resources.getDrawable(R.drawable.mum_bmode_1, null).mutate();
             i = R.color.user_icon_bmode_1;
         } else {
-            mutate = resources.getDrawable(R.drawable.mum_bmode_2, null).mutate();
+            drawableMutate = resources.getDrawable(R.drawable.mum_bmode_2, null).mutate();
             i = R.color.user_icon_bmode_2;
         }
-        mutate.setColorFilter(resources.getColor(i), PorterDuff.Mode.SCREEN);
-        mutate.setBounds(0, 0, mutate.getIntrinsicWidth(), mutate.getIntrinsicHeight());
-        return mutate;
+        drawableMutate.setColorFilter(resources.getColor(i), PorterDuff.Mode.SCREEN);
+        drawableMutate.setBounds(0, 0, drawableMutate.getIntrinsicWidth(), drawableMutate.getIntrinsicHeight());
+        return drawableMutate;
     }
 
     private MultiUserSupportsHelper() {

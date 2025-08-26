@@ -13,16 +13,16 @@ public final class MidiDeviceInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public MidiDeviceInfo createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            int readInt4 = parcel.readInt();
-            String[] createStringArray = parcel.createStringArray();
-            String[] createStringArray2 = parcel.createStringArray();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            int i4 = parcel.readInt();
+            String[] strArrCreateStringArray = parcel.createStringArray();
+            String[] strArrCreateStringArray2 = parcel.createStringArray();
             boolean z = parcel.readInt() == 1;
-            int readInt5 = parcel.readInt();
+            int i5 = parcel.readInt();
             parcel.readBundle();
-            return new MidiDeviceInfo(readInt, readInt2, readInt3, readInt4, createStringArray, createStringArray2, parcel.readBundle(), z, readInt5);
+            return new MidiDeviceInfo(i, i2, i3, i4, strArrCreateStringArray, strArrCreateStringArray2, parcel.readBundle(), z, i5);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

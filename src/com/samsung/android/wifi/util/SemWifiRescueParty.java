@@ -16,10 +16,10 @@ public class SemWifiRescueParty {
 
     /* JADX WARN: Type inference failed for: r0v1, types: [boolean, int] */
     public static int resetAllWifiStoredData(int[] iArr) {
-        ?? removeFile = removeFile("/data/system/wifigeofence.db");
-        int i = removeFile;
+        ?? RemoveFile = removeFile("/data/system/wifigeofence.db");
+        int i = RemoveFile;
         if (removeFile("/data/system/wifigeofence.db-journal")) {
-            i = removeFile + 1;
+            i = RemoveFile + 1;
         }
         int i2 = i;
         if (removeFile("/data/system/WifiHistory.db")) {
@@ -37,12 +37,12 @@ public class SemWifiRescueParty {
         if (removeFile("/data/system/WifiConfigStore.db-journal")) {
             i5 = i4 + 1;
         }
-        int removeFiles = i5 + removeFiles("/data/misc/wifi") + removeFiles("/data/misc/apexdata/com.android.wifi");
+        int iRemoveFiles = i5 + removeFiles("/data/misc/wifi") + removeFiles("/data/misc/apexdata/com.android.wifi");
         for (int i6 : iArr) {
-            removeFiles = removeFiles + removeFiles(MISC_USER_PATH + i6 + "/wifi") + removeFiles(MISC_USER_PATH + i6 + "/apexdata/com.android.wifi");
+            iRemoveFiles = iRemoveFiles + removeFiles(MISC_USER_PATH + i6 + "/wifi") + removeFiles(MISC_USER_PATH + i6 + "/apexdata/com.android.wifi");
         }
-        Log.e(TAG, "reset all Wi-Fi stored files: " + removeFiles);
-        return removeFiles;
+        Log.e(TAG, "reset all Wi-Fi stored files: " + iRemoveFiles);
+        return iRemoveFiles;
     }
 
     private static boolean removeFile(String str) {
@@ -75,9 +75,9 @@ public class SemWifiRescueParty {
     }
 
     private static void fetchCompleteList(List<String> list, List<String> list2, String str) {
-        File[] listFiles = new File(str).listFiles();
-        if (listFiles != null) {
-            for (File file : listFiles) {
+        File[] fileArrListFiles = new File(str).listFiles();
+        if (fileArrListFiles != null) {
+            for (File file : fileArrListFiles) {
                 if (file.isDirectory()) {
                     list2.add(file.getAbsolutePath());
                     fetchCompleteList(list, list2, file.getAbsolutePath());

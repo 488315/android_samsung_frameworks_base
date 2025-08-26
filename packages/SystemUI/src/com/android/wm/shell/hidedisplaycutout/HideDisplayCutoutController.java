@@ -3,6 +3,7 @@ package com.android.wm.shell.hidedisplaycutout;
 import android.R;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.view.SurfaceControl;
 import android.window.DisplayAreaAppearedInfo;
 import android.window.WindowContainerTransaction;
@@ -15,7 +16,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class HideDisplayCutoutController implements ConfigurationChangeListener {
     public final Context mContext;
@@ -31,12 +31,12 @@ public class HideDisplayCutoutController implements ConfigurationChangeListener 
         this.mOrganizer = hideDisplayCutoutOrganizer;
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.hidedisplaycutout.HideDisplayCutoutController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
-            public final void run() {
-                final HideDisplayCutoutController hideDisplayCutoutController = HideDisplayCutoutController.this;
+            public final void run() throws Resources.NotFoundException {
+                final HideDisplayCutoutController hideDisplayCutoutController = this.f$0;
                 hideDisplayCutoutController.mShellCommandHandler.addDumpCallback(new BiConsumer() { // from class: com.android.wm.shell.hidedisplaycutout.HideDisplayCutoutController$$ExternalSyntheticLambda1
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
-                        HideDisplayCutoutController hideDisplayCutoutController2 = HideDisplayCutoutController.this;
+                        HideDisplayCutoutController hideDisplayCutoutController2 = hideDisplayCutoutController;
                         PrintWriter printWriter = (PrintWriter) obj;
                         hideDisplayCutoutController2.getClass();
                         printWriter.print("HideDisplayCutoutController");
@@ -89,11 +89,11 @@ public class HideDisplayCutoutController implements ConfigurationChangeListener 
     }
 
     @Override // com.android.wm.shell.sysui.ConfigurationChangeListener
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         updateStatus();
     }
 
-    public void updateStatus() {
+    public void updateStatus() throws Resources.NotFoundException {
         boolean z = this.mContext.getResources().getBoolean(R.bool.config_lockscreenWeatherEnabledByDefault);
         if (z == this.mEnabled) {
             return;
@@ -111,9 +111,9 @@ public class HideDisplayCutoutController implements ConfigurationChangeListener 
         if (displayLayout != null) {
             hideDisplayCutoutOrganizer.mRotation = displayLayout.mRotation;
         }
-        List registerOrganizer = hideDisplayCutoutOrganizer.registerOrganizer(6);
-        for (int i = 0; i < registerOrganizer.size(); i++) {
-            hideDisplayCutoutOrganizer.addDisplayAreaInfoAndLeashToMap(((DisplayAreaAppearedInfo) registerOrganizer.get(i)).getDisplayAreaInfo(), ((DisplayAreaAppearedInfo) registerOrganizer.get(i)).getLeash());
+        List listRegisterOrganizer = hideDisplayCutoutOrganizer.registerOrganizer(6);
+        for (int i = 0; i < listRegisterOrganizer.size(); i++) {
+            hideDisplayCutoutOrganizer.addDisplayAreaInfoAndLeashToMap(((DisplayAreaAppearedInfo) listRegisterOrganizer.get(i)).getDisplayAreaInfo(), ((DisplayAreaAppearedInfo) listRegisterOrganizer.get(i)).getLeash());
         }
         hideDisplayCutoutOrganizer.updateBoundsAndOffsets(true);
         WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();

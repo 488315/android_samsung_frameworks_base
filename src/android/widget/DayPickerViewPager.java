@@ -36,35 +36,35 @@ class DayPickerViewPager extends ViewPager {
         populate();
         int childCount = getChildCount();
         boolean z = (View.MeasureSpec.getMode(i) == 1073741824 && View.MeasureSpec.getMode(i2) == 1073741824) ? false : true;
-        int i3 = 0;
-        int i4 = 0;
-        int i5 = 0;
-        for (int i6 = 0; i6 < childCount; i6++) {
-            View childAt = getChildAt(i6);
+        int iMax = 0;
+        int iMax2 = 0;
+        int iCombineMeasuredStates = 0;
+        for (int i3 = 0; i3 < childCount; i3++) {
+            View childAt = getChildAt(i3);
             if (childAt.getVisibility() != 8) {
                 measureChild(childAt, i, i2);
                 ViewPager.LayoutParams layoutParams = (ViewPager.LayoutParams) childAt.getLayoutParams();
-                i3 = Math.max(i3, childAt.getMeasuredWidth());
-                i4 = Math.max(i4, childAt.getMeasuredHeight());
-                i5 = combineMeasuredStates(i5, childAt.getMeasuredState());
+                iMax = Math.max(iMax, childAt.getMeasuredWidth());
+                iMax2 = Math.max(iMax2, childAt.getMeasuredHeight());
+                iCombineMeasuredStates = combineMeasuredStates(iCombineMeasuredStates, childAt.getMeasuredState());
                 if (z && (layoutParams.width == -1 || layoutParams.height == -1)) {
                     this.mMatchParentChildren.add(childAt);
                 }
             }
         }
-        int paddingLeft = i3 + getPaddingLeft() + getPaddingRight();
-        int max = Math.max(i4 + getPaddingTop() + getPaddingBottom(), getSuggestedMinimumHeight());
-        int max2 = Math.max(paddingLeft, getSuggestedMinimumWidth());
+        int paddingLeft = iMax + getPaddingLeft() + getPaddingRight();
+        int iMax3 = Math.max(iMax2 + getPaddingTop() + getPaddingBottom(), getSuggestedMinimumHeight());
+        int iMax4 = Math.max(paddingLeft, getSuggestedMinimumWidth());
         Drawable foreground = getForeground();
         if (foreground != null) {
-            max = Math.max(max, foreground.getMinimumHeight());
-            max2 = Math.max(max2, foreground.getMinimumWidth());
+            iMax3 = Math.max(iMax3, foreground.getMinimumHeight());
+            iMax4 = Math.max(iMax4, foreground.getMinimumWidth());
         }
-        setMeasuredDimension(resolveSizeAndState(max2, i, i5), resolveSizeAndState(max, i2, i5 << 16));
+        setMeasuredDimension(resolveSizeAndState(iMax4, i, iCombineMeasuredStates), resolveSizeAndState(iMax3, i2, iCombineMeasuredStates << 16));
         int size = this.mMatchParentChildren.size();
         if (size > 1) {
-            for (int i7 = 0; i7 < size; i7++) {
-                View view = this.mMatchParentChildren.get(i7);
+            for (int i4 = 0; i4 < size; i4++) {
+                View view = this.mMatchParentChildren.get(i4);
                 ViewPager.LayoutParams layoutParams2 = (ViewPager.LayoutParams) view.getLayoutParams();
                 if (layoutParams2.width == -1) {
                     childMeasureSpec = View.MeasureSpec.makeMeasureSpec((getMeasuredWidth() - getPaddingLeft()) - getPaddingRight(), 1073741824);

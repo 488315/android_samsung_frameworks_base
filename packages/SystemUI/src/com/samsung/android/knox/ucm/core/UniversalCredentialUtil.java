@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.crypto.SecretKey;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class UniversalCredentialUtil {
     public static final String AGENT_CONFIGURATORLIST = "configuratorList";
@@ -74,7 +73,6 @@ public class UniversalCredentialUtil {
     public final IUcmService mBinder;
     public ContextInfo mContextInfo = new ContextInfo(Process.myUid());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UcmUri {
         public static final int ALIAS_PATH = 4;
         public static final int RESOURCE_PATH = 5;
@@ -96,7 +94,7 @@ public class UniversalCredentialUtil {
             return this.uri.getLastPathSegment();
         }
 
-        public int getResourceId() {
+        public int getResourceId() throws NumberFormatException {
             List<String> pathSegments = this.uri.getPathSegments();
             if (pathSegments == null) {
                 throw new IllegalArgumentException("resource is not known");
@@ -104,9 +102,9 @@ public class UniversalCredentialUtil {
             try {
                 String str = UniversalCredentialUtil.getUCMVersion().equals("v1") ? pathSegments.get(1) : "";
                 Log.d(UniversalCredentialUtil.TAG, "resource:" + str);
-                int parseInt = Integer.parseInt(str);
-                if (parseInt == 1 || parseInt == 2 || parseInt == 3 || parseInt == 4) {
-                    return parseInt;
+                int i = Integer.parseInt(str);
+                if (i == 1 || i == 2 || i == 3 || i == 4) {
+                    return i;
                 }
                 return -1;
             } catch (IndexOutOfBoundsException e) {
@@ -179,7 +177,6 @@ public class UniversalCredentialUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UcmUriBuilder {
         public String alias;
         public String resourceId;
@@ -219,9 +216,9 @@ public class UniversalCredentialUtil {
                     builder.appendPath(str3);
                 }
             }
-            Uri build = builder.build();
-            Log.d(UniversalCredentialUtil.TAG, "uri created : " + build.toString());
-            return build.toString();
+            Uri uriBuild = builder.build();
+            Log.d(UniversalCredentialUtil.TAG, "uri created : " + uriBuild.toString());
+            return uriBuild.toString();
         }
 
         public UcmUriBuilder setAlias(String str) {
@@ -262,11 +259,11 @@ public class UniversalCredentialUtil {
     }
 
     public static UniversalCredentialUtil getInstance() {
-        IUcmService asInterface = IUcmService.Stub.asInterface(ServiceManager.getService("com.samsung.ucs.ucsservice"));
-        if (asInterface == null) {
+        IUcmService iUcmServiceAsInterface = IUcmService.Stub.asInterface(ServiceManager.getService("com.samsung.ucs.ucsservice"));
+        if (iUcmServiceAsInterface == null) {
             return null;
         }
-        return new UniversalCredentialUtil(asInterface);
+        return new UniversalCredentialUtil(iUcmServiceAsInterface);
     }
 
     public static String getKeychainUri(String str, String str2, int i, int i2) {
@@ -304,15 +301,15 @@ public class UniversalCredentialUtil {
     }
 
     public static boolean isKeyChainUri(String str) {
-        Uri parse;
+        Uri uri;
         String scheme;
-        return (str == null || (parse = Uri.parse(str)) == null || (scheme = parse.getScheme()) == null || !scheme.equals("ucmkeychain")) ? false : true;
+        return (str == null || (uri = Uri.parse(str)) == null || (scheme = uri.getScheme()) == null || !scheme.equals("ucmkeychain")) ? false : true;
     }
 
     public static boolean isUcsStoreUri(String str) {
-        Uri parse;
+        Uri uri;
         String scheme;
-        return (str == null || (parse = Uri.parse(str)) == null || (scheme = parse.getScheme()) == null || !scheme.equals("ucmkeychain")) ? false : true;
+        return (str == null || (uri = Uri.parse(str)) == null || (scheme = uri.getScheme()) == null || !scheme.equals("ucmkeychain")) ? false : true;
     }
 
     public static boolean isValidUri(String str) {
@@ -359,13 +356,13 @@ public class UniversalCredentialUtil {
 
     public Bundle delete(String str) {
         try {
-            Bundle delete = this.mBinder.delete(str);
-            if (delete == null) {
+            Bundle bundleDelete = this.mBinder.delete(str);
+            if (bundleDelete == null) {
                 Log.d(TAG, "response is null");
                 return null;
             }
-            Log.d(TAG, "UCMERRORTESTING: @UniversalCredentialUtil responding to delete with error code  = " + delete.getInt(UcmAgentService.PLUGIN_ERROR_CODE));
-            return delete;
+            Log.d(TAG, "UCMERRORTESTING: @UniversalCredentialUtil responding to delete with error code  = " + bundleDelete.getInt(UcmAgentService.PLUGIN_ERROR_CODE));
+            return bundleDelete;
         } catch (RemoteException e) {
             Log.w(TAG, "Cannot connect to service", e);
             return null;
@@ -500,13 +497,13 @@ public class UniversalCredentialUtil {
     public Provider[] getProviders() {
         Log.d(TAG, "getProviders");
         try {
-            Bundle[] listProviders = this.mBinder.listProviders();
-            if (listProviders == null || listProviders.length == 0) {
+            Bundle[] bundleArrListProviders = this.mBinder.listProviders();
+            if (bundleArrListProviders == null || bundleArrListProviders.length == 0) {
                 Log.d(TAG, "Provider list is empty");
                 return null;
             }
             ArrayList arrayList = new ArrayList();
-            for (Bundle bundle : listProviders) {
+            for (Bundle bundle : bundleArrListProviders) {
                 String string = bundle.getString(UNIQUE_ID);
                 if (string == null) {
                     Log.d(TAG, "NULL agent ID name Returned for bundle");
@@ -536,33 +533,33 @@ public class UniversalCredentialUtil {
     }
 
     public Bundle importKey(String str, Bundle bundle) {
-        Bundle bundle2;
+        Bundle bundleImportKey;
         String str2;
         try {
-            bundle2 = this.mBinder.importKey(str, bundle);
+            bundleImportKey = this.mBinder.importKey(str, bundle);
         } catch (RemoteException e) {
             Log.w(TAG, "Cannot connect to service", e);
-            bundle2 = null;
+            bundleImportKey = null;
         }
         StringBuilder sb = new StringBuilder("UCMERRORTESTING: @UniversalCredentialUtil responding to importKey ");
-        if (bundle2 == null) {
+        if (bundleImportKey == null) {
             str2 = "null";
         } else {
-            str2 = "Not null, error code = " + bundle2.getInt(UcmAgentService.PLUGIN_ERROR_CODE);
+            str2 = "Not null, error code = " + bundleImportKey.getInt(UcmAgentService.PLUGIN_ERROR_CODE);
         }
         ExifInterface$$ExternalSyntheticOutline0.m(sb, str2, TAG);
-        return bundle2;
+        return bundleImportKey;
     }
 
     public Bundle importKeyPair(String str, byte[] bArr, byte[] bArr2, Bundle bundle) {
         try {
-            Bundle importKeyPair = this.mBinder.importKeyPair(str, bArr, bArr2, bundle);
-            if (importKeyPair == null) {
+            Bundle bundleImportKeyPair = this.mBinder.importKeyPair(str, bArr, bArr2, bundle);
+            if (bundleImportKeyPair == null) {
                 Log.d(TAG, "response is null");
                 return null;
             }
-            Log.d(TAG, "UCMERRORTESTING: @UniversalCredentialUtil responding to importKeyPair with error code  = " + importKeyPair.getInt(UcmAgentService.PLUGIN_ERROR_CODE));
-            return importKeyPair;
+            Log.d(TAG, "UCMERRORTESTING: @UniversalCredentialUtil responding to importKeyPair with error code  = " + bundleImportKeyPair.getInt(UcmAgentService.PLUGIN_ERROR_CODE));
+            return bundleImportKeyPair;
         } catch (RemoteException e) {
             Log.w(TAG, "Cannot connect to service", e);
             return null;
@@ -600,13 +597,13 @@ public class UniversalCredentialUtil {
     public Bundle saw(String str, int i) {
         KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("Credential Manager calling saw for ", str, TAG);
         try {
-            Bundle saw = this.mBinder.saw(str, i);
-            if (saw == null) {
+            Bundle bundleSaw = this.mBinder.saw(str, i);
+            if (bundleSaw == null) {
                 Log.d(TAG, "response is null");
                 return null;
             }
-            Log.d(TAG, "UCMERRORTESTING: @UniversalCredentialUtil responding to saw with error code  = " + saw.getInt(UcmAgentService.PLUGIN_ERROR_CODE));
-            return saw;
+            Log.d(TAG, "UCMERRORTESTING: @UniversalCredentialUtil responding to saw with error code  = " + bundleSaw.getInt(UcmAgentService.PLUGIN_ERROR_CODE));
+            return bundleSaw;
         } catch (RemoteException e) {
             Log.w(TAG, "Cannot connect to service", e);
             return null;

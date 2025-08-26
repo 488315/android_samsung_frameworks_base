@@ -20,7 +20,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.hardware.context.SemContextManager;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class RotationButtonWindow extends ButtonWindow {
     public int mLatestRotation;
@@ -57,7 +56,7 @@ public class RotationButtonWindow extends ButtonWindow {
         this.mOnGestureListener = new ButtonWindow.OnGestureListener() { // from class: com.android.systemui.dextouchpad.activity.RotationButtonWindow$$ExternalSyntheticLambda0
             @Override // com.android.systemui.dextouchpad.activity.ButtonWindow.OnGestureListener
             public final void onDoubleTap() {
-                RotationButtonWindow rotationButtonWindow = RotationButtonWindow.this;
+                RotationButtonWindow rotationButtonWindow = this.f$0;
                 int i = rotationButtonWindow.mActivity.getResources().getConfiguration().orientation;
                 boolean z = i == 2;
                 boolean z2 = Features.DEBUG;
@@ -66,7 +65,7 @@ public class RotationButtonWindow extends ButtonWindow {
                 }
                 String str = "1";
                 if (!z) {
-                    Utils.sendSALogging("703", "7014", "1");
+                    Utils.sendSALogging("703", "7004", "1");
                     rotationButtonWindow.mActivity.setRequestedOrientation(6);
                     return;
                 }
@@ -79,7 +78,7 @@ public class RotationButtonWindow extends ButtonWindow {
                 } else if (rotation == 3) {
                     str = "2";
                 }
-                Utils.sendSALogging("703", "7014", str);
+                Utils.sendSALogging("703", "7004", str);
                 rotationButtonWindow.mActivity.setRequestedOrientation(1);
             }
         };

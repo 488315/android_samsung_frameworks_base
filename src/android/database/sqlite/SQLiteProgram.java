@@ -19,29 +19,21 @@ public abstract class SQLiteProgram extends SQLiteClosable {
         return -1;
     }
 
-    SQLiteProgram(SQLiteDatabase sQLiteDatabase, String str, Object[] objArr, CancellationSignal cancellationSignal) {
-        boolean z;
+    SQLiteProgram(SQLiteDatabase sQLiteDatabase, String str, Object[] objArr, CancellationSignal cancellationSignal) throws InterruptedException {
         this.mDatabase = sQLiteDatabase;
-        String trim = str.trim();
-        this.mSql = trim;
-        int sqlStatementType = DatabaseUtils.getSqlStatementType(trim);
+        String strTrim = str.trim();
+        this.mSql = strTrim;
+        int sqlStatementType = DatabaseUtils.getSqlStatementType(strTrim);
         if (sqlStatementType == 4 || sqlStatementType == 5 || sqlStatementType == 6) {
             this.mReadOnly = false;
             this.mColumnNames = EMPTY_STRING_ARRAY;
             this.mNumParameters = 0;
         } else {
-            boolean z2 = sqlStatementType == 1;
+            boolean z = sqlStatementType == 1;
             try {
                 SQLiteStatementInfo sQLiteStatementInfo = new SQLiteStatementInfo();
-                sQLiteDatabase.getThreadSession().prepare(trim, sQLiteDatabase.getThreadDefaultConnectionFlags(z2), cancellationSignal, sQLiteStatementInfo);
-                if (sqlStatementType != 7 && sqlStatementType != 8) {
-                    z = sQLiteStatementInfo.readOnly;
-                    this.mReadOnly = z;
-                    this.mColumnNames = sQLiteStatementInfo.columnNames;
-                    this.mNumParameters = sQLiteStatementInfo.numParameters;
-                }
-                z = false;
-                this.mReadOnly = z;
+                sQLiteDatabase.getThreadSession().prepare(strTrim, sQLiteDatabase.getThreadDefaultConnectionFlags(z), cancellationSignal, sQLiteStatementInfo);
+                this.mReadOnly = (sqlStatementType == 7 || sqlStatementType == 8) ? false : sQLiteStatementInfo.readOnly;
                 this.mColumnNames = sQLiteStatementInfo.columnNames;
                 this.mNumParameters = sQLiteStatementInfo.numParameters;
             } catch (SQLiteDatabaseCorruptException e) {
@@ -63,7 +55,7 @@ public abstract class SQLiteProgram extends SQLiteClosable {
             this.mBindArgs = null;
         }
         if (sqlStatementType == 7) {
-            SQLitePragma.checkAndSetSpecialPragma(sQLiteDatabase, trim, cancellationSignal);
+            SQLitePragma.checkAndSetSpecialPragma(sQLiteDatabase, strTrim, cancellationSignal);
         }
     }
 
@@ -95,7 +87,7 @@ public abstract class SQLiteProgram extends SQLiteClosable {
         this.mDatabase.onCorruption();
     }
 
-    protected final void onCorruption(int i) {
+    protected final void onCorruption(int i) throws InterruptedException {
         this.mDatabase.onCorruption(i);
     }
 

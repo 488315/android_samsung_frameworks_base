@@ -67,26 +67,25 @@ public class PrintFileDocumentAdapter extends PrintDocumentAdapter {
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
-        public Void doInBackground(Void... voidArr) {
-            FileInputStream fileInputStream;
+        public Void doInBackground(Void... voidArr) throws IOException {
             try {
-                fileInputStream = new FileInputStream(PrintFileDocumentAdapter.this.mFile);
+                FileInputStream fileInputStream = new FileInputStream(PrintFileDocumentAdapter.this.mFile);
+                try {
+                    FileOutputStream fileOutputStream = new FileOutputStream(this.mDestination.getFileDescriptor());
+                    try {
+                        FileUtils.copy(fileInputStream, fileOutputStream, this.mCancellationSignal, (Executor) null, (FileUtils.ProgressListener) null);
+                        fileOutputStream.close();
+                        fileInputStream.close();
+                    } finally {
+                    }
+                } finally {
+                }
             } catch (OperationCanceledException unused) {
             } catch (IOException e) {
                 Log.e(PrintFileDocumentAdapter.LOG_TAG, "Error writing data!", e);
                 this.mResultCallback.onWriteFailed(PrintFileDocumentAdapter.this.mContext.getString(R.string.write_fail_reason_cannot_write));
             }
-            try {
-                FileOutputStream fileOutputStream = new FileOutputStream(this.mDestination.getFileDescriptor());
-                try {
-                    FileUtils.copy(fileInputStream, fileOutputStream, this.mCancellationSignal, (Executor) null, (FileUtils.ProgressListener) null);
-                    fileOutputStream.close();
-                    fileInputStream.close();
-                    return null;
-                } finally {
-                }
-            } finally {
-            }
+            return null;
         }
 
         /* JADX INFO: Access modifiers changed from: protected */

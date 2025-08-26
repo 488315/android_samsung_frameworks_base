@@ -45,9 +45,9 @@ public interface ISatsService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISatsService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISatsService)) {
-                return (ISatsService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISatsService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISatsService)) {
+                return (ISatsService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,11 +74,11 @@ public interface ISatsService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                String executePseudoDrkAtCommnd = executePseudoDrkAtCommnd(readString);
+                String strExecutePseudoDrkAtCommnd = executePseudoDrkAtCommnd(string);
                 parcel2.writeNoException();
-                parcel2.writeString(executePseudoDrkAtCommnd);
+                parcel2.writeString(strExecutePseudoDrkAtCommnd);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,17 +102,17 @@ public interface ISatsService extends IInterface {
 
             @Override // com.samsung.android.service.sats.ISatsService
             public String executePseudoDrkAtCommnd(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISatsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISatsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

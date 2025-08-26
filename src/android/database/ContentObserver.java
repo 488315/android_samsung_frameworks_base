@@ -120,7 +120,7 @@ public abstract class ContentObserver {
             executor.execute(new Runnable() { // from class: android.database.ContentObserver$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContentObserver.this.lambda$dispatchChange$0(z, collection, i, i2);
+                    this.f$0.lambda$dispatchChange$0(z, collection, i, i2);
                 }
             });
             return;
@@ -130,7 +130,7 @@ public abstract class ContentObserver {
             handler.post(new Runnable() { // from class: android.database.ContentObserver$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ContentObserver.this.lambda$dispatchChange$1(z, collection, i, i2);
+                    this.f$0.lambda$dispatchChange$1(z, collection, i, i2);
                 }
             });
         } else {

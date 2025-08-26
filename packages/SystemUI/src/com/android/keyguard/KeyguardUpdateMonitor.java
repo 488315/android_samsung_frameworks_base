@@ -64,6 +64,7 @@ import com.android.keyguard.logging.SimLogger$$ExternalSyntheticLambda0;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 import com.android.systemui.CoreStartable;
+import com.android.systemui.CscRune;
 import com.android.systemui.DejankUtils;
 import com.android.systemui.LsRune;
 import com.android.systemui.R;
@@ -101,6 +102,7 @@ import com.google.android.collect.Lists;
 import com.samsung.android.knox.custom.CustomDeviceManager;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 import com.samsung.android.knox.net.vpn.VpnErrorValues;
+import com.sec.ims.settings.ImsProfile;
 import com.sec.ims.volte2.data.VolteConstants;
 import dalvik.annotation.optimization.NeverCompile;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
@@ -122,8 +124,8 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import javax.inject.Provider;
+import kotlin.NoWhenBranchMatchedException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListener, CoreStartable, KeyguardSecUpdateMonitor {
     public static final int BIOMETRIC_HELP_FINGERPRINT_NOT_RECOGNIZED = -1;
@@ -252,7 +254,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
     public static final ComponentName FALLBACK_HOME_COMPONENT = new ComponentName(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG, "com.android.settings.FallbackHome");
     public static final List ABSENT_SIM_STATE_LIST = Arrays.asList(1, 0, 6);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardUpdateMonitor$2, reason: invalid class name */
     public class AnonymousClass2 extends IBiometricEnabledOnKeyguardCallback.Stub {
         public AnonymousClass2() {
@@ -263,7 +264,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardUpdateMonitor$20, reason: invalid class name */
     public class AnonymousClass20 implements AuthController.Callback {
         public AnonymousClass20() {
@@ -294,7 +294,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardUpdateMonitor$24, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass24 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;
@@ -313,7 +312,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class BiometricAuthenticated {
         public final boolean mAuthenticated;
         public final boolean mIsStrongBiometric;
@@ -324,7 +322,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SimData {
         public int simState;
         public int slotId;
@@ -346,7 +343,6 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StrongAuthTracker extends LockPatternUtils.StrongAuthTracker {
         public StrongAuthTracker(Context context) {
             super(context);
@@ -449,9 +445,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel = LogLevel.WARNING;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(11);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger2.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-                ((LogMessageImpl) obtain).int1 = i;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                ((LogMessageImpl) logMessageObtain).int1 = i;
+                logBuffer.commit(logMessageObtain);
                 if (!KeyguardUpdateMonitor.this.mFingerprintSensorProperties.isEmpty()) {
                     KeyguardUpdateMonitor.this.updateFingerprintListeningState(2);
                     return;
@@ -474,30 +470,164 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel = LogLevel.WARNING;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(7);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger2.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-                ((LogMessageImpl) obtain).int1 = i;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                ((LogMessageImpl) logMessageObtain).int1 = i;
+                logBuffer.commit(logMessageObtain);
                 KeyguardUpdateMonitor.this.updateFaceListeningState(2, FaceAuthUiEvent.FACE_AUTH_TRIGGERED_RETRY_AFTER_HW_UNAVAILABLE);
             }
         };
         new Object(this) { // from class: com.android.keyguard.KeyguardUpdateMonitor.7
         };
         this.mBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.keyguard.KeyguardUpdateMonitor.8
-            /* JADX WARN: Code restructure failed: missing block: B:66:0x0120, code lost:
-            
-                if ("NETWORK".equals(r4) != false) goto L40;
-             */
+            /* JADX WARN: Removed duplicated region for block: B:40:0x00f6  */
+            /* JADX WARN: Removed duplicated region for block: B:71:0x015c  */
             @Override // android.content.BroadcastReceiver
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final void onReceive(android.content.Context r18, android.content.Intent r19) {
-                /*
-                    Method dump skipped, instructions count: 669
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardUpdateMonitor.AnonymousClass8.onReceive(android.content.Context, android.content.Intent):void");
+            public final void onReceive(Context context2, Intent intent) {
+                int i;
+                String action = intent.getAction();
+                KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger2 = KeyguardUpdateMonitor.this.mLogger;
+                keyguardUpdateMonitorLogger2.getClass();
+                LogLevel logLevel = LogLevel.DEBUG;
+                KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(20);
+                LogBuffer logBuffer = keyguardUpdateMonitorLogger2.logBuffer;
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                ((LogMessageImpl) logMessageObtain).str1 = action;
+                logBuffer.commit(logMessageObtain);
+                if ("android.intent.action.TIME_TICK".equals(action) || "android.intent.action.TIME_SET".equals(action)) {
+                    sendEmptyMessage(301);
+                    return;
+                }
+                if ("android.intent.action.TIMEZONE_CHANGED".equals(action)) {
+                    sendMessage(obtainMessage(339, intent.getStringExtra("time-zone")));
+                    return;
+                }
+                if ("android.intent.action.BATTERY_CHANGED".equals(action)) {
+                    sendMessage(KeyguardUpdateMonitor.this.getKeyguardBatteryMessage(intent));
+                    return;
+                }
+                if ("com.samsung.server.BatteryService.action.SEC_BATTERY_REMAINING_CHARGING_TIME_CHANGED".equals(action)) {
+                    KeyguardUpdateMonitor.this.updateBatteryRemainTime(intent);
+                    return;
+                }
+                if ("android.hardware.usb.action.USB_PORT_COMPLIANCE_CHANGED".equals(action)) {
+                    KeyguardUpdateMonitor keyguardUpdateMonitor = KeyguardUpdateMonitor.this;
+                    keyguardUpdateMonitor.mHandler.sendMessage(keyguardUpdateMonitor.getKeyguardBatteryMessage(intent));
+                    return;
+                }
+                if (!"android.intent.action.SIM_STATE_CHANGED".equals(action)) {
+                    if ("android.intent.action.PHONE_STATE".equals(action)) {
+                        String stringExtra = intent.getStringExtra("state");
+                        AnonymousClass16 anonymousClass16 = KeyguardUpdateMonitor.this.mHandler;
+                        anonymousClass16.sendMessage(anonymousClass16.obtainMessage(VpnErrorValues.ERROR_STOPPING_CONNECTION_BEFORE_REMOVING, stringExtra));
+                        return;
+                    }
+                    if ("android.telephony.action.SERVICE_PROVIDERS_UPDATED".equals(action)) {
+                        obtainMessage(347, intent).sendToTarget();
+                        return;
+                    }
+                    if ("android.intent.action.AIRPLANE_MODE".equals(action)) {
+                        sendEmptyMessage(329);
+                        return;
+                    }
+                    if (CscRune.SECURITY_DISABLE_EMERGENCY_CALL_WHEN_OFFLINE || !"android.intent.action.SERVICE_STATE".equals(action)) {
+                        if ("android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED".equals(action)) {
+                            sendEmptyMessage(328);
+                            return;
+                        } else {
+                            if ("android.intent.action.LOCALE_CHANGED".equals(action)) {
+                                sendEmptyMessage(VolteConstants.ErrorCode.RTP_TIME_OUT);
+                                return;
+                            }
+                            return;
+                        }
+                    }
+                    ServiceState serviceStateNewFromBundle = ServiceState.newFromBundle(intent.getExtras());
+                    int intExtra = intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_INDEX", -1);
+                    SimLogger simLogger2 = KeyguardUpdateMonitor.this.mSimLogger;
+                    simLogger2.getClass();
+                    LogLevel logLevel2 = LogLevel.VERBOSE;
+                    SimLogger$$ExternalSyntheticLambda0 simLogger$$ExternalSyntheticLambda0 = new SimLogger$$ExternalSyntheticLambda0(5);
+                    LogBuffer logBuffer2 = simLogger2.logBuffer;
+                    LogMessage logMessageObtain2 = logBuffer2.obtain("SimLog", logLevel2, simLogger$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain2;
+                    logMessageImpl.str1 = action;
+                    logMessageImpl.str2 = String.valueOf(serviceStateNewFromBundle);
+                    logMessageImpl.int1 = intExtra;
+                    logBuffer2.commit(logMessageObtain2);
+                    AnonymousClass16 anonymousClass162 = KeyguardUpdateMonitor.this.mHandler;
+                    anonymousClass162.sendMessage(anonymousClass162.obtainMessage(330, intExtra, 0, serviceStateNewFromBundle));
+                    return;
+                }
+                if (!"android.intent.action.SIM_STATE_CHANGED".equals(intent.getAction())) {
+                    throw new IllegalArgumentException("only handles intent ACTION_SIM_STATE_CHANGED");
+                }
+                String stringExtra2 = intent.getStringExtra(ImsProfile.SERVICE_SS);
+                int intExtra2 = intent.getIntExtra("android.telephony.extra.SLOT_INDEX", -1);
+                int intExtra3 = intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_INDEX", -1);
+                if ("ABSENT".equals(stringExtra2)) {
+                    i = 1;
+                } else if ("LOCKED".equals(stringExtra2)) {
+                    String stringExtra3 = intent.getStringExtra("reason");
+                    if ("PIN".equals(stringExtra3)) {
+                        i = 2;
+                    } else if ("PUK".equals(stringExtra3)) {
+                        i = 3;
+                    } else if (!"NETWORK".equals(stringExtra3)) {
+                        if ("PERM_DISABLED".equals(stringExtra3)) {
+                            i = 7;
+                        } else if (LsRune.SECURITY_SIM_PERSO_LOCK && "PERSO".equals(stringExtra3)) {
+                            i = 12;
+                        } else {
+                            if (!"PERM_DISABLED".equals(stringExtra3)) {
+                                i = "NETWORK".equals(stringExtra3) ? 4 : 0;
+                            }
+                            i = 7;
+                        }
+                    }
+                } else if ("CARD_IO_ERROR".equals(stringExtra2)) {
+                    i = 8;
+                } else if ("CARD_RESTRICTED".equals(stringExtra2)) {
+                    i = 9;
+                } else if ("NOT_READY".equals(stringExtra2)) {
+                    i = 6;
+                } else if ("READY".equals(stringExtra2) || "LOADED".equals(stringExtra2) || "IMSI".equals(stringExtra2)) {
+                    i = 5;
+                }
+                SimData simData = new SimData(i, intExtra2, intExtra3);
+                if (intent.getBooleanExtra("rebroadcastOnUnlock", false)) {
+                    if (simData.simState == 1) {
+                        obtainMessage(338, Boolean.TRUE).sendToTarget();
+                        return;
+                    }
+                    return;
+                }
+                SimLogger simLogger3 = KeyguardUpdateMonitor.this.mSimLogger;
+                String stringExtra4 = intent.getStringExtra(ImsProfile.SERVICE_SS);
+                int i2 = simData.slotId;
+                int i3 = simData.subId;
+                simLogger3.getClass();
+                LogLevel logLevel3 = LogLevel.VERBOSE;
+                SimLogger$$ExternalSyntheticLambda0 simLogger$$ExternalSyntheticLambda02 = new SimLogger$$ExternalSyntheticLambda0(4);
+                LogBuffer logBuffer3 = simLogger3.logBuffer;
+                LogMessage logMessageObtain3 = logBuffer3.obtain("SimLog", logLevel3, simLogger$$ExternalSyntheticLambda02, null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain3;
+                logMessageImpl2.str1 = action;
+                logMessageImpl2.str2 = stringExtra4;
+                logMessageImpl2.int1 = i2;
+                logMessageImpl2.int2 = i3;
+                logBuffer3.commit(logMessageObtain3);
+                int i4 = simData.slotId;
+                if (i4 == -1) {
+                    return;
+                }
+                KeyguardUpdateMonitor.this.resetSimPinPassed(i4);
+                if (LsRune.SECURITY_ESIM) {
+                    KeyguardUpdateMonitor.this.clearESimRemoved();
+                }
+                obtainMessage(304, simData.subId, simData.slotId, Integer.valueOf(simData.simState)).sendToTarget();
             }
         };
         this.mBroadcastAllReceiver = new BroadcastReceiver() { // from class: com.android.keyguard.KeyguardUpdateMonitor.9
@@ -557,9 +687,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(29);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger2.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-                ((LogMessageImpl) obtain).int1 = i;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+                ((LogMessageImpl) logMessageObtain).int1 = i;
+                logBuffer.commit(logMessageObtain);
                 KeyguardUpdateMonitor.this.handleFingerprintAcquired(i);
                 Trace.endSection();
             }
@@ -600,9 +730,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(4);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger2.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-                ((LogMessageImpl) obtain).int1 = i;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                ((LogMessageImpl) logMessageObtain).int1 = i;
+                logBuffer.commit(logMessageObtain);
                 KeyguardUpdateMonitor.this.requestFaceAuth("Face auth triggered due to finger down on UDFPS");
             }
 
@@ -612,9 +742,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(28);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger2.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-                ((LogMessageImpl) obtain).int1 = i;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+                ((LogMessageImpl) logMessageObtain).int1 = i;
+                logBuffer.commit(logMessageObtain);
             }
         };
         this.mFingerprintDetectionCallback = new FingerprintManager.FingerprintDetectionCallback() { // from class: com.android.keyguard.KeyguardUpdateMonitor.13
@@ -651,11 +781,11 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(27);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger2.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.int1 = i2;
                 logMessageImpl.bool1 = z;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
                 Trace.endSection();
             }
         };
@@ -731,9 +861,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                         LogLevel logLevel = LogLevel.VERBOSE;
                         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(15);
                         LogBuffer logBuffer = keyguardUpdateMonitorLogger2.logBuffer;
-                        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-                        ((LogMessageImpl) obtain).bool1 = z;
-                        logBuffer.commit(obtain);
+                        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                        ((LogMessageImpl) logMessageObtain).bool1 = z;
+                        logBuffer.commit(logMessageObtain);
                         keyguardUpdateMonitor.updateFingerprintListeningState(2);
                     }
                     ActivityTaskManager.RootTaskInfo rootTaskInfo2 = keyguardUpdateMonitor.mActivityTaskManager.getRootTaskInfo(0, 4);
@@ -746,9 +876,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                     LogLevel logLevel2 = LogLevel.VERBOSE;
                     KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(9);
                     LogBuffer logBuffer2 = keyguardUpdateMonitorLogger3.logBuffer;
-                    LogMessage obtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32, null);
-                    ((LogMessageImpl) obtain2).bool1 = z3;
-                    logBuffer2.commit(obtain2);
+                    LogMessage logMessageObtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32, null);
+                    ((LogMessageImpl) logMessageObtain2).bool1 = z3;
+                    logBuffer2.commit(logMessageObtain2);
                     AnonymousClass16 anonymousClass16 = keyguardUpdateMonitor.mHandler;
                     anonymousClass16.sendMessage(anonymousClass16.obtainMessage(335, Boolean.valueOf(rootTaskInfo2.visible)));
                 } catch (RemoteException e) {
@@ -953,28 +1083,28 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                         int i10 = KeyguardUpdateMonitor.BIOMETRIC_HELP_FINGERPRINT_NOT_RECOGNIZED;
                         keyguardUpdateMonitor.getClass();
                         Assert.isMainThread();
-                        boolean isUserUnlocked = keyguardUpdateMonitor.mUserManager.isUserUnlocked(i9);
+                        boolean zIsUserUnlocked = keyguardUpdateMonitor.mUserManager.isUserUnlocked(i9);
                         KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger2 = keyguardUpdateMonitor.mLogger;
                         keyguardUpdateMonitorLogger2.getClass();
                         LogLevel logLevel = LogLevel.DEBUG;
                         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(18);
                         LogBuffer logBuffer = keyguardUpdateMonitorLogger2.logBuffer;
-                        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-                        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                         logMessageImpl.int1 = i9;
-                        logMessageImpl.bool1 = isUserUnlocked;
-                        logBuffer.commit(obtain);
-                        keyguardUpdateMonitor.mUserIsUnlocked.put(i9, isUserUnlocked);
+                        logMessageImpl.bool1 = zIsUserUnlocked;
+                        logBuffer.commit(logMessageObtain);
+                        keyguardUpdateMonitor.mUserIsUnlocked.put(i9, zIsUserUnlocked);
                         break;
                     case 341:
                         keyguardUpdateMonitor.handleUserRemoved(message.arg1);
                         break;
                     case 342:
-                        boolean booleanValue = ((Boolean) message.obj).booleanValue();
+                        boolean zBooleanValue = ((Boolean) message.obj).booleanValue();
                         int i11 = KeyguardUpdateMonitor.BIOMETRIC_HELP_FINGERPRINT_NOT_RECOGNIZED;
                         keyguardUpdateMonitor.getClass();
                         Assert.isMainThread();
-                        keyguardUpdateMonitor.setKeyguardGoingAway(booleanValue);
+                        keyguardUpdateMonitor.setKeyguardGoingAway(zBooleanValue);
                         break;
                     case 344:
                         String str2 = (String) message.obj;
@@ -986,9 +1116,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                         LogLevel logLevel2 = LogLevel.DEBUG;
                         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(10);
                         LogBuffer logBuffer2 = keyguardUpdateMonitorLogger3.logBuffer;
-                        LogMessage obtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32, null);
-                        ((LogMessageImpl) obtain2).str1 = str2;
-                        logBuffer2.commit(obtain2);
+                        LogMessage logMessageObtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32, null);
+                        ((LogMessageImpl) logMessageObtain2).str1 = str2;
+                        logBuffer2.commit(logMessageObtain2);
                         while (i2 < keyguardUpdateMonitor.mCallbacks.size()) {
                             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback4 = (KeyguardUpdateMonitorCallback) ((WeakReference) keyguardUpdateMonitor.mCallbacks.get(i2)).get();
                             if (keyguardUpdateMonitorCallback4 != null) {
@@ -1028,12 +1158,12 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                         LogLevel logLevel3 = LogLevel.VERBOSE;
                         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda33 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(17);
                         LogBuffer logBuffer3 = keyguardUpdateMonitorLogger4.logBuffer;
-                        LogMessage obtain3 = logBuffer3.obtain("KeyguardUpdateMonitorLog", logLevel3, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda33, null);
-                        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain3;
+                        LogMessage logMessageObtain3 = logBuffer3.obtain("KeyguardUpdateMonitorLog", logLevel3, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda33, null);
+                        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain3;
                         logMessageImpl2.int1 = intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_INDEX", -1);
                         logMessageImpl2.str1 = intent.getStringExtra("android.telephony.extra.SPN");
                         logMessageImpl2.str2 = intent.getStringExtra("android.telephony.extra.PLMN");
-                        logBuffer3.commit(obtain3);
+                        logBuffer3.commit(logMessageObtain3);
                         keyguardUpdateMonitor.callbacksRefreshCarrierInfo(intent);
                         break;
                     case 348:
@@ -1050,9 +1180,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                         LogLevel logLevel4 = LogLevel.DEBUG;
                         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda34 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(19);
                         LogBuffer logBuffer4 = keyguardUpdateMonitorLogger5.logBuffer;
-                        LogMessage obtain4 = logBuffer4.obtain("KeyguardUpdateMonitorLog", logLevel4, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda34, null);
-                        ((LogMessageImpl) obtain4).str1 = String.valueOf(biometricSourceType);
-                        logBuffer4.commit(obtain4);
+                        LogMessage logMessageObtain4 = logBuffer4.obtain("KeyguardUpdateMonitorLog", logLevel4, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda34, null);
+                        ((LogMessageImpl) logMessageObtain4).str1 = String.valueOf(biometricSourceType);
+                        logBuffer4.commit(logMessageObtain4);
                         Assert.isMainThread();
                         while (i2 < keyguardUpdateMonitor.mCallbacks.size()) {
                             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback7 = (KeyguardUpdateMonitorCallback) ((WeakReference) keyguardUpdateMonitor.mCallbacks.get(i2)).get();
@@ -1077,11 +1207,7 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
     }
 
     public static synchronized int getCurrentUser() {
-        int i;
-        synchronized (KeyguardUpdateMonitor.class) {
-            i = sCurrentUser;
-        }
-        return i;
+        return sCurrentUser;
     }
 
     public final void callbacksRefreshCarrierInfo(Intent intent) {
@@ -1119,9 +1245,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
     @Override // com.android.systemui.CoreStartable, com.android.systemui.Dumpable
     @NeverCompile
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "KeyguardUpdateMonitor state:", "  forceIsDismissible="), this.mForceIsDismissible, printWriter, "  forceIsDismissibleIsKeepingDeviceUnlocked=");
-        m.append(forceIsDismissibleIsKeepingDeviceUnlocked());
-        printWriter.println(m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "KeyguardUpdateMonitor state:", "  forceIsDismissible="), this.mForceIsDismissible, printWriter, "  forceIsDismissibleIsKeepingDeviceUnlocked=");
+        sbM.append(forceIsDismissibleIsKeepingDeviceUnlocked());
+        printWriter.println(sbM.toString());
         printWriter.println("  getUserHasTrust()=" + getUserHasTrust(this.mSelectedUserInteractor.getSelectedUserId()));
         printWriter.println("  getUserUnlockedWithBiometric()=" + getUserUnlockedWithBiometric(this.mSelectedUserInteractor.getSelectedUserId()));
         printWriter.println("  SIM States:");
@@ -1138,9 +1264,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         printWriter.println("  Current active data subId=" + this.mActiveMobileDataSubscription);
         printWriter.println("  Service states:");
         for (Integer num : this.mServiceStates.keySet()) {
-            StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(num.intValue(), "    ", "=");
-            m2.append(this.mServiceStates.get(num));
-            printWriter.println(m2.toString());
+            StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(num.intValue(), "    ", "=");
+            sbM2.append(this.mServiceStates.get(num));
+            printWriter.println(sbM2.toString());
         }
         dumpAllUsers(printWriter);
     }
@@ -1235,12 +1361,12 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         int i2;
         synchronized (this.mSimDataLockObject) {
             try {
-                HashMap hashMap = this.mSimDatasBySlotId;
+                HashMap map = this.mSimDatasBySlotId;
                 int slotIndex = SubscriptionManager.getSlotIndex(i);
-                if (!hashMap.containsKey(Integer.valueOf(slotIndex))) {
+                if (!map.containsKey(Integer.valueOf(slotIndex))) {
                     refreshSimState(i, slotIndex);
                 }
-                SimData simData = (SimData) hashMap.get(Integer.valueOf(slotIndex));
+                SimData simData = (SimData) map.get(Integer.valueOf(slotIndex));
                 i2 = simData != null ? simData.slotId : -1;
             } catch (Throwable th) {
                 throw th;
@@ -1302,18 +1428,47 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         return biometricAuthenticated != null && biometricAuthenticated.mAuthenticated && isUnlockingWithBiometricAllowed(biometricAuthenticated.mIsStrongBiometric);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00c1 A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x0009  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void handleBatteryUpdate(com.android.settingslib.fuelgauge.BatteryStatus r8) {
-        /*
-            Method dump skipped, instructions count: 194
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardUpdateMonitor.handleBatteryUpdate(com.android.settingslib.fuelgauge.BatteryStatus):void");
+    public void handleBatteryUpdate(BatteryStatus batteryStatus) {
+        boolean z;
+        Assert.isMainThread();
+        BatteryStatus batteryStatus2 = this.mBatteryStatus;
+        if (batteryStatus2 == null) {
+            z = true;
+        } else {
+            boolean zIsPluggedIn = batteryStatus.isPluggedIn();
+            boolean zIsPluggedIn2 = batteryStatus2.isPluggedIn();
+            boolean z2 = zIsPluggedIn2 && zIsPluggedIn && batteryStatus2.status != batteryStatus.status;
+            if (zIsPluggedIn2 == zIsPluggedIn && !z2 && batteryStatus2.level == batteryStatus.level && ((!zIsPluggedIn || batteryStatus.maxChargingWattage == batteryStatus2.maxChargingWattage) && batteryStatus2.present == batteryStatus.present && batteryStatus2.incompatibleCharger.equals(batteryStatus.incompatibleCharger) && batteryStatus.chargingStatus == batteryStatus2.chargingStatus)) {
+                z = false;
+            }
+        }
+        this.mBatteryStatus = batteryStatus;
+        if (z) {
+            KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger = this.mLogger;
+            keyguardUpdateMonitorLogger.getClass();
+            LogLevel logLevel = LogLevel.DEBUG;
+            KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(22);
+            LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
+            LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+            logMessageImpl.bool1 = batteryStatus != null;
+            logMessageImpl.int1 = batteryStatus != null ? batteryStatus.status : -1;
+            logMessageImpl.int2 = batteryStatus != null ? batteryStatus.chargingStatus : -1;
+            logMessageImpl.long1 = batteryStatus != null ? batteryStatus.level : -1;
+            logMessageImpl.long2 = batteryStatus != null ? batteryStatus.maxChargingWattage : -1;
+            logMessageImpl.str1 = String.valueOf(batteryStatus != null ? batteryStatus.plugged : -1);
+            logBuffer.commit(logMessageObtain);
+            for (int i = 0; i < this.mCallbacks.size(); i++) {
+                KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = (KeyguardUpdateMonitorCallback) ((WeakReference) this.mCallbacks.get(i)).get();
+                if (keyguardUpdateMonitorCallback != null) {
+                    keyguardUpdateMonitorCallback.onRefreshBatteryInfo(batteryStatus);
+                }
+            }
+        }
     }
 
     public void handleDevicePolicyManagerStateChanged(int i) {
@@ -1392,9 +1547,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(15);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-                ((LogMessageImpl) obtain).int1 = i;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+                ((LogMessageImpl) logMessageObtain).int1 = i;
+                logBuffer.commit(logMessageObtain);
                 return;
             }
             if (isFaceDisabled(selectedUserId)) {
@@ -1403,9 +1558,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel2 = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda12 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(17);
                 LogBuffer logBuffer2 = keyguardUpdateMonitorLogger2.logBuffer;
-                LogMessage obtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda12, null);
-                ((LogMessageImpl) obtain2).int1 = selectedUserId;
-                logBuffer2.commit(obtain2);
+                LogMessage logMessageObtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda12, null);
+                ((LogMessageImpl) logMessageObtain2).int1 = selectedUserId;
+                logBuffer2.commit(logMessageObtain2);
                 return;
             }
             KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger3 = this.mLogger;
@@ -1413,9 +1568,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             LogLevel logLevel3 = LogLevel.DEBUG;
             KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda13 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(20);
             LogBuffer logBuffer3 = keyguardUpdateMonitorLogger3.logBuffer;
-            LogMessage obtain3 = logBuffer3.obtain("KeyguardUpdateMonitorLog", logLevel3, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda13, null);
-            ((LogMessageImpl) obtain3).int1 = selectedUserId;
-            logBuffer3.commit(obtain3);
+            LogMessage logMessageObtain3 = logBuffer3.obtain("KeyguardUpdateMonitorLog", logLevel3, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda13, null);
+            ((LogMessageImpl) logMessageObtain3).int1 = selectedUserId;
+            logBuffer3.commit(logMessageObtain3);
             onFaceAuthenticated(selectedUserId, z);
             setFaceRunningState(0);
             Trace.endSection();
@@ -1433,16 +1588,16 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(25);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.int1 = i;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         if (hasCallbacks(this.mFaceCancelNotReceived)) {
             removeCallbacks(this.mFaceCancelNotReceived);
         }
         this.mFaceCancelSignal = null;
-        boolean isSensorPrivacyEnabled = this.mSensorPrivacyManager.isSensorPrivacyEnabled(1, 2);
+        boolean zIsSensorPrivacyEnabled = this.mSensorPrivacyManager.isSensorPrivacyEnabled(1, 2);
         if (i == 5 && this.mFaceRunningState == 3) {
             setFaceRunningState(0);
             updateFaceListeningState(2, FaceAuthUiEvent.FACE_AUTH_TRIGGERED_DURING_CANCELLATION);
@@ -1464,7 +1619,7 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         } else {
             z = false;
         }
-        if (z2 && isSensorPrivacyEnabled) {
+        if (z2 && zIsSensorPrivacyEnabled) {
             str = this.mContext.getString(R.string.kg_face_sensor_privacy_enabled);
         }
         for (int i3 = 0; i3 < this.mCallbacks.size(); i3++) {
@@ -1500,9 +1655,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(2);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
         boolean z = this.mFaceLockedOutPermanent;
         boolean z2 = i == 2;
         this.mFaceLockedOutPermanent = z2;
@@ -1537,9 +1692,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             }
         }
         if (isUdfpsSupported()) {
-            handleFingerprintHelp(-1, this.mContext.getString(android.R.string.mediasize_iso_b8));
+            handleFingerprintHelp(-1, this.mContext.getString(android.R.string.mediasize_iso_c0));
         } else {
-            handleFingerprintHelp(-1, this.mContext.getString(android.R.string.mediasize_iso_a3));
+            handleFingerprintHelp(-1, this.mContext.getString(android.R.string.mediasize_iso_a5));
         }
     }
 
@@ -1557,9 +1712,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(23);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-                ((LogMessageImpl) obtain).int1 = i;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+                ((LogMessageImpl) logMessageObtain).int1 = i;
+                logBuffer.commit(logMessageObtain);
                 return;
             }
             if (!isFingerprintDisabled(selectedUserId)) {
@@ -1573,9 +1728,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             LogLevel logLevel2 = LogLevel.DEBUG;
             KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(3);
             LogBuffer logBuffer2 = keyguardUpdateMonitorLogger2.logBuffer;
-            LogMessage obtain2 = logBuffer2.obtain("KeyguardFingerprintLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-            ((LogMessageImpl) obtain2).int1 = selectedUserId;
-            logBuffer2.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer2.obtain("KeyguardFingerprintLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+            ((LogMessageImpl) logMessageObtain2).int1 = selectedUserId;
+            logBuffer2.commit(logMessageObtain2);
         } finally {
             setFingerprintRunningState(0);
         }
@@ -1624,11 +1779,11 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(14);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.int1 = i;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         for (int i2 = 0; i2 < this.mCallbacks.size(); i2++) {
             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = (KeyguardUpdateMonitorCallback) ((WeakReference) this.mCallbacks.get(i2)).get();
             if (keyguardUpdateMonitorCallback != null) {
@@ -1656,9 +1811,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(18);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
         boolean z = this.mFingerprintLockedOut;
         boolean z2 = this.mFingerprintLockedOutPermanent;
         boolean z3 = i == 1 || i == 2;
@@ -1708,9 +1863,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(6);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
         if (TelephonyManager.EXTRA_STATE_IDLE.equals(str)) {
             this.mPhoneState = 0;
         } else if (TelephonyManager.EXTRA_STATE_OFFHOOK.equals(str)) {
@@ -1739,11 +1894,11 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(27);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = z3;
         logMessageImpl.bool2 = z4;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         if (this.mPrimaryBouncerFullyShown) {
             this.mSecureCameraLaunched = false;
         } else {
@@ -1789,11 +1944,11 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         SimLogger$$ExternalSyntheticLambda0 simLogger$$ExternalSyntheticLambda0 = new SimLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = simLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("SimLog", logLevel, simLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("SimLog", logLevel, simLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.str1 = String.valueOf(serviceState);
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         if (SubscriptionManager.isValidSubscriptionId(i)) {
             updateTelephonyCapable(true);
             this.mServiceStates.put(Integer.valueOf(i), serviceState);
@@ -1810,17 +1965,17 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
     public void handleSimStateChange(final int i, final int i2, final int i3) {
         Assert.isMainThread();
         SimLogger simLogger = this.mSimLogger;
-        String simStateToString = TelephonyManager.simStateToString(i3);
+        String strSimStateToString = TelephonyManager.simStateToString(i3);
         simLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         SimLogger$$ExternalSyntheticLambda0 simLogger$$ExternalSyntheticLambda0 = new SimLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer = simLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("SimLog", logLevel, simLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("SimLog", logLevel, simLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.int2 = i2;
-        logMessageImpl.str1 = simStateToString;
-        logBuffer.commit(obtain);
+        logMessageImpl.str1 = strSimStateToString;
+        logBuffer.commit(logMessageObtain);
         Log.d("KeyguardUpdateMonitor", "handleSimStateChange(subId=" + i + ", slotId=" + i2 + ", state=" + TelephonyManager.simStateToString(i3) + ")");
         if (isSimPinPassed(i2, i3)) {
             this.mLogger.d("handleSimStateChange isSimPinPassed");
@@ -1840,7 +1995,7 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             });
             return;
         }
-        boolean contains = ABSENT_SIM_STATE_LIST.contains(Integer.valueOf(i3));
+        boolean zContains = ABSENT_SIM_STATE_LIST.contains(Integer.valueOf(i3));
         boolean z2 = true;
         if (!SubscriptionManager.isValidSubscriptionId(i)) {
             SimLogger simLogger2 = this.mSimLogger;
@@ -1866,8 +2021,8 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                     simData.subId = i;
                     simData.slotId = i2;
                 }
-                Log.d("KeyguardUpdateMonitor", "    handleSimStateChange changed=" + z2 + ", becameAbsent=" + contains);
-                if (z2 || contains) {
+                Log.d("KeyguardUpdateMonitor", "    handleSimStateChange changed=" + z2 + ", becameAbsent=" + zContains);
+                if (z2 || zContains) {
                     arrayList.add(new SimData(i3, i2, i));
                 }
             } catch (Throwable th) {
@@ -1907,9 +2062,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             LogLevel logLevel = LogLevel.VERBOSE;
             KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(21);
             LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-            ((LogMessageImpl) obtain).str1 = PowerManager.wakeReasonToString(i);
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+            ((LogMessageImpl) logMessageObtain).str1 = PowerManager.wakeReasonToString(i);
+            logBuffer.commit(logMessageObtain);
         }
         if (((FaceWakeUpTriggersConfigImpl) this.mFaceWakeUpTriggersConfig).triggerFaceAuthOnWakeUpFrom.contains(Integer.valueOf(i))) {
             ActiveUnlockConfig.ActiveUnlockRequestOrigin activeUnlockRequestOrigin = this.mActiveUnlockConfig.wakeupsConsideredUnlockIntents.contains(Integer.valueOf(i)) ? ActiveUnlockConfig.ActiveUnlockRequestOrigin.UNLOCK_INTENT : ActiveUnlockConfig.ActiveUnlockRequestOrigin.WAKE;
@@ -1925,9 +2080,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             LogLevel logLevel2 = LogLevel.DEBUG;
             KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(16);
             LogBuffer logBuffer2 = keyguardUpdateMonitorLogger2.logBuffer;
-            LogMessage obtain2 = logBuffer2.obtain("ActiveUnlock", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32, null);
-            ((LogMessageImpl) obtain2).int1 = i;
-            logBuffer2.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer2.obtain("ActiveUnlock", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32, null);
+            ((LogMessageImpl) logMessageObtain2).int1 = i;
+            logBuffer2.commit(logMessageObtain2);
         }
         for (int i2 = 0; i2 < this.mCallbacks.size(); i2++) {
             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = (KeyguardUpdateMonitorCallback) ((WeakReference) this.mCallbacks.get(i2)).get();
@@ -1945,9 +2100,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(0);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
         this.mUserIsUnlocked.delete(i);
         this.mUserTrustIsUsuallyManaged.delete(i);
     }
@@ -1958,11 +2113,11 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(4);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.str1 = "from UserTracker";
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         Assert.isMainThread();
         for (int i2 = 0; i2 < this.mCallbacks.size(); i2++) {
             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = (KeyguardUpdateMonitorCallback) ((WeakReference) this.mCallbacks.get(i2)).get();
@@ -1992,17 +2147,17 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(13);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.str1 = "from UserTracker";
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         Assert.isMainThread();
         setForceIsDismissibleKeyguard(false);
         clearFingerprintRecognized();
-        boolean isTrustUsuallyManaged = this.mTrustManager.isTrustUsuallyManaged(i);
-        this.mLogger.logTrustUsuallyManagedUpdated("userSwitching", i, this.mUserTrustIsUsuallyManaged.get(i), isTrustUsuallyManaged);
-        this.mUserTrustIsUsuallyManaged.put(i, isTrustUsuallyManaged);
+        boolean zIsTrustUsuallyManaged = this.mTrustManager.isTrustUsuallyManaged(i);
+        this.mLogger.logTrustUsuallyManagedUpdated("userSwitching", i, this.mUserTrustIsUsuallyManaged.get(i), zIsTrustUsuallyManaged);
+        this.mUserTrustIsUsuallyManaged.put(i, zIsTrustUsuallyManaged);
         for (int i2 = 0; i2 < this.mCallbacks.size(); i2++) {
             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = (KeyguardUpdateMonitorCallback) ((WeakReference) this.mCallbacks.get(i2)).get();
             if (keyguardUpdateMonitorCallback != null) {
@@ -2019,9 +2174,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(5);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
         this.mUserIsUnlocked.put(i, true);
         this.mNeedsSlowUnlockTransition = resolveNeedsSlowUnlockTransition();
         for (int i2 = 0; i2 < this.mCallbacks.size(); i2++) {
@@ -2038,9 +2193,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
     }
 
     public boolean isFaceClass3() {
-        int semGetSecurityLevel = this.mFaceManager.semGetSecurityLevel(true);
-        Log.d("KeyguardUpdateMonitor", "faceSecurityLevel : " + semGetSecurityLevel);
-        return isFaceSupported() && semGetSecurityLevel == 1;
+        int iSemGetSecurityLevel = this.mFaceManager.semGetSecurityLevel(true);
+        Log.d("KeyguardUpdateMonitor", "faceSecurityLevel : " + iSemGetSecurityLevel);
+        return isFaceSupported() && iSemGetSecurityLevel == 1;
     }
 
     public final boolean isFaceDetectionRunning() {
@@ -2051,7 +2206,7 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         return ((Boolean) DejankUtils.whitelistIpcs(new Supplier() { // from class: com.android.keyguard.KeyguardUpdateMonitor$$ExternalSyntheticLambda8
             @Override // java.util.function.Supplier
             public final Object get() {
-                KeyguardUpdateMonitor keyguardUpdateMonitor = KeyguardUpdateMonitor.this;
+                KeyguardUpdateMonitor keyguardUpdateMonitor = this.f$0;
                 return Boolean.valueOf((keyguardUpdateMonitor.mDevicePolicyManager.getKeyguardDisabledFeatures(null, i) & 128) != 0 || keyguardUpdateMonitor.isSimPinSecure());
             }
         })).booleanValue();
@@ -2143,9 +2298,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.VERBOSE;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(10);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        ((LogMessageImpl) obtain).str1 = String.valueOf(keyguardListenModel);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        ((LogMessageImpl) logMessageObtain).str1 = String.valueOf(keyguardListenModel);
+        logBuffer.commit(logMessageObtain);
         if (!(keyguardListenModel instanceof KeyguardFingerprintListenModel)) {
             if (keyguardListenModel instanceof KeyguardActiveUnlockModel) {
                 KeyguardActiveUnlockModel keyguardActiveUnlockModel = (KeyguardActiveUnlockModel) keyguardListenModel;
@@ -2282,7 +2437,7 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             getFastBioUnlockController().executor.submit(new KeyguardFastBioUnlockController.Task(new Runnable() { // from class: com.android.keyguard.KeyguardUpdateMonitor$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KeyguardUpdateMonitor keyguardUpdateMonitor = KeyguardUpdateMonitor.this;
+                    KeyguardUpdateMonitor keyguardUpdateMonitor = this.f$0;
                     keyguardUpdateMonitor.mTrustManager.unlockedByBiometricForUser(i, BiometricSourceType.FINGERPRINT);
                 }
             }, "TrustManager#unlockedByBiometricForUser"));
@@ -2293,11 +2448,11 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(16);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         updateFingerprintListeningState(2);
         for (int i2 = 0; i2 < this.mCallbacks.size(); i2++) {
             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = (KeyguardUpdateMonitorCallback) ((WeakReference) this.mCallbacks.get(i2)).get();
@@ -2332,12 +2487,12 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(2);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = z3;
         logMessageImpl.bool2 = z;
         logMessageImpl.int1 = i;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         for (int i3 = 0; i3 < this.mCallbacks.size(); i3++) {
             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = (KeyguardUpdateMonitorCallback) ((WeakReference) this.mCallbacks.get(i3)).get();
             if (keyguardUpdateMonitorCallback != null) {
@@ -2362,13 +2517,13 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             LogLevel logLevel2 = LogLevel.DEBUG;
             KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda12 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(12);
             LogBuffer logBuffer2 = keyguardUpdateMonitorLogger2.logBuffer;
-            LogMessage obtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda12, null);
-            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+            LogMessage logMessageObtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda12, null);
+            LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
             logMessageImpl2.int1 = i2;
             logMessageImpl2.bool1 = z2;
             logMessageImpl2.int2 = i;
             logMessageImpl2.str1 = str;
-            logBuffer2.commit(obtain2);
+            logBuffer2.commit(logMessageObtain2);
             if (i == this.mSelectedUserInteractor.getSelectedUserId()) {
                 if (z2) {
                     this.mUiEventLogger.log(TrustAgentUiEvent.TRUST_AGENT_NEWLY_UNLOCKED, ((SessionTracker) this.mSessionTrackerProvider.get()).getSessionId(1));
@@ -2400,9 +2555,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
     public final void onTrustManagedChanged(boolean z, int i) {
         Assert.isMainThread();
         this.mUserTrustIsManaged.put(i, z);
-        boolean isTrustUsuallyManaged = this.mTrustManager.isTrustUsuallyManaged(i);
-        this.mLogger.logTrustUsuallyManagedUpdated("onTrustManagedChanged", i, this.mUserTrustIsUsuallyManaged.get(i), isTrustUsuallyManaged);
-        this.mUserTrustIsUsuallyManaged.put(i, isTrustUsuallyManaged);
+        boolean zIsTrustUsuallyManaged = this.mTrustManager.isTrustUsuallyManaged(i);
+        this.mLogger.logTrustUsuallyManagedUpdated("onTrustManagedChanged", i, this.mUserTrustIsUsuallyManaged.get(i), zIsTrustUsuallyManaged);
+        this.mUserTrustIsUsuallyManaged.put(i, zIsTrustUsuallyManaged);
         for (int i2 = 0; i2 < this.mCallbacks.size(); i2++) {
             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = (KeyguardUpdateMonitorCallback) ((WeakReference) this.mCallbacks.get(i2)).get();
             if (keyguardUpdateMonitorCallback != null) {
@@ -2422,8 +2577,8 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 SubscriptionManager.isValidSubscriptionId(i);
                 SimData simData = (SimData) this.mSimDatasBySlotId.get(Integer.valueOf(i2));
                 if (simData != null) {
-                    r4 = simData.simState != simState;
-                    if (r4) {
+                    z = simData.simState != simState;
+                    if (z) {
                         Log.d("KeyguardUpdateMonitor", "refreshSimState [subId=" + i + ", slotId=" + i2 + "] state [" + simData.simState + "] changed to TelephonyManager state[" + simState + "]");
                     }
                     simData.simState = simState;
@@ -2432,13 +2587,13 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 } else if (SubscriptionManager.isValidSubscriptionId(i)) {
                     Log.d("KeyguardUpdateMonitor", "refreshSimState put [subId=" + i + ", slotId=" + i2 + ", state[" + simState + "]");
                     this.mSimDatasBySlotId.put(Integer.valueOf(i2), new SimData(simState, i2, i));
-                    r4 = true;
+                    z = true;
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
-        return r4;
+        return z;
     }
 
     public void registerCallback(KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback) {
@@ -2448,9 +2603,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.VERBOSE;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(7);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        ((LogMessageImpl) obtain).str1 = String.valueOf(keyguardUpdateMonitorCallback);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        ((LogMessageImpl) logMessageObtain).str1 = String.valueOf(keyguardUpdateMonitorCallback);
+        logBuffer.commit(logMessageObtain);
         for (int i = 0; i < this.mCallbacks.size(); i++) {
             if (((WeakReference) this.mCallbacks.get(i)).get() == keyguardUpdateMonitorCallback) {
                 this.mLogger.logException("Object tried to add another callback", new Exception("Called by"));
@@ -2469,13 +2624,13 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.VERBOSE;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(22);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        ((LogMessageImpl) obtain).str1 = String.valueOf(keyguardUpdateMonitorCallback);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        ((LogMessageImpl) logMessageObtain).str1 = String.valueOf(keyguardUpdateMonitorCallback);
+        logBuffer.commit(logMessageObtain);
         this.mCallbacks.removeIf(new Predicate() { // from class: com.android.keyguard.KeyguardUpdateMonitor$$ExternalSyntheticLambda3
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback2 = KeyguardUpdateMonitorCallback.this;
+                KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback2 = keyguardUpdateMonitorCallback;
                 int i = KeyguardUpdateMonitor.BIOMETRIC_HELP_FINGERPRINT_NOT_RECOGNIZED;
                 return ((WeakReference) obj).get() == keyguardUpdateMonitorCallback2;
             }
@@ -2493,39 +2648,73 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.VERBOSE;
         SimLogger$$ExternalSyntheticLambda0 simLogger$$ExternalSyntheticLambda0 = new SimLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = simLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("SimLog", logLevel, simLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("SimLog", logLevel, simLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
         updatedSimPinPassed(getSlotId(i));
         handleSimStateChange(i, getSlotId(i), 5);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0037, code lost:
-    
-        if (r0.requestActiveUnlockOnUnlockIntentLegacy == false) goto L35;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0051, code lost:
-    
-        r3 = false;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x004e, code lost:
-    
-        if (r0.requestActiveUnlockOnWakeup == false) goto L35;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:66:0x0063, code lost:
-    
-        if (r0.shouldRequestActiveUnlockOnUnlockIntentFromBiometricEnrollment() == false) goto L35;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0051  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void requestActiveUnlock(com.android.keyguard.ActiveUnlockConfig.ActiveUnlockRequestOrigin r7, java.lang.String r8, boolean r9) {
-        /*
-            Method dump skipped, instructions count: 245
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardUpdateMonitor.requestActiveUnlock(com.android.keyguard.ActiveUnlockConfig$ActiveUnlockRequestOrigin, java.lang.String, boolean):void");
+    public final void requestActiveUnlock(ActiveUnlockConfig.ActiveUnlockRequestOrigin activeUnlockRequestOrigin, String str, boolean z) {
+        if (hasMessages(336)) {
+            return;
+        }
+        ActiveUnlockConfig activeUnlockConfig = this.mActiveUnlockConfig;
+        activeUnlockConfig.getClass();
+        int i = ActiveUnlockConfig.WhenMappings.$EnumSwitchMapping$0[activeUnlockRequestOrigin.ordinal()];
+        boolean z2 = true;
+        if (i == 1) {
+            z2 = activeUnlockConfig.requestActiveUnlockOnWakeup;
+        } else if (i == 2) {
+            z2 = activeUnlockConfig.requestActiveUnlockOnUnlockIntentLegacy;
+        } else if (i != 3) {
+            if (i != 4) {
+                if (i != 5) {
+                    throw new NoWhenBranchMatchedException();
+                }
+                if (!activeUnlockConfig.requestActiveUnlockOnWakeup && !activeUnlockConfig.requestActiveUnlockOnUnlockIntent && !activeUnlockConfig.requestActiveUnlockOnBioFail && !activeUnlockConfig.requestActiveUnlockOnUnlockIntentLegacy) {
+                    z2 = false;
+                }
+            } else if (!activeUnlockConfig.requestActiveUnlockOnBioFail && !activeUnlockConfig.requestActiveUnlockOnUnlockIntentLegacy && !activeUnlockConfig.requestActiveUnlockOnUnlockIntent && !activeUnlockConfig.requestActiveUnlockOnWakeup) {
+            }
+        } else if (!activeUnlockConfig.requestActiveUnlockOnUnlockIntent && !activeUnlockConfig.requestActiveUnlockOnUnlockIntentLegacy && !activeUnlockConfig.requestActiveUnlockOnWakeup && !activeUnlockConfig.shouldRequestActiveUnlockOnUnlockIntentFromBiometricEnrollment()) {
+        }
+        if (activeUnlockRequestOrigin == ActiveUnlockConfig.ActiveUnlockRequestOrigin.WAKE && !z2) {
+            ActiveUnlockConfig activeUnlockConfig2 = this.mActiveUnlockConfig;
+            if (activeUnlockConfig2.requestActiveUnlockOnWakeup || activeUnlockConfig2.requestActiveUnlockOnUnlockIntent || activeUnlockConfig2.requestActiveUnlockOnBioFail || activeUnlockConfig2.requestActiveUnlockOnUnlockIntentLegacy) {
+                if (!hasMessages(336) && shouldTriggerActiveUnlock()) {
+                    KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger = this.mLogger;
+                    keyguardUpdateMonitorLogger.getClass();
+                    LogLevel logLevel = LogLevel.DEBUG;
+                    KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(28);
+                    LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
+                    LogMessage logMessageObtain = logBuffer.obtain("ActiveUnlock", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                    ((LogMessageImpl) logMessageObtain).str1 = str;
+                    logBuffer.commit(logMessageObtain);
+                    this.mTrustManager.reportUserMayRequestUnlock(this.mSelectedUserInteractor.getSelectedUserId());
+                    return;
+                }
+                return;
+            }
+        }
+        if (z2 && shouldTriggerActiveUnlock()) {
+            KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger2 = this.mLogger;
+            keyguardUpdateMonitorLogger2.getClass();
+            LogLevel logLevel2 = LogLevel.DEBUG;
+            KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(24);
+            LogBuffer logBuffer2 = keyguardUpdateMonitorLogger2.logBuffer;
+            LogMessage logMessageObtain2 = logBuffer2.obtain("ActiveUnlock", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda32, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain2;
+            logMessageImpl.str1 = activeUnlockRequestOrigin.name();
+            logMessageImpl.str2 = str;
+            logMessageImpl.bool1 = z;
+            logBuffer2.commit(logMessageObtain2);
+            this.mTrustManager.reportUserRequestedUnlock(this.mSelectedUserInteractor.getSelectedUserId(), z);
+        }
     }
 
     public final void requestFaceAuth(String str) {
@@ -2534,9 +2723,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(21);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
         Object obj = FaceAuthReasonKt.apiRequestReasonToUiEvent.get(str);
         obj.getClass();
         updateFaceListeningState(0, (FaceAuthUiEvent) obj);
@@ -2552,9 +2741,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         if (this.mUserManager.isUserUnlocked(this.mSelectedUserInteractor.getSelectedUserId())) {
             return false;
         }
-        ResolveInfo resolveActivityAsUser = this.mPackageManager.resolveActivityAsUser(new Intent("android.intent.action.MAIN").addCategory("android.intent.category.HOME"), 0, this.mSelectedUserInteractor.getSelectedUserId());
-        if (resolveActivityAsUser != null) {
-            return FALLBACK_HOME_COMPONENT.equals(resolveActivityAsUser.getComponentInfo().getComponentName());
+        ResolveInfo resolveInfoResolveActivityAsUser = this.mPackageManager.resolveActivityAsUser(new Intent("android.intent.action.MAIN").addCategory("android.intent.category.HOME"), 0, this.mSelectedUserInteractor.getSelectedUserId());
+        if (resolveInfoResolveActivityAsUser != null) {
+            return FALLBACK_HOME_COMPONENT.equals(resolveInfoResolveActivityAsUser.getComponentInfo().getComponentName());
         }
         KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger = this.mLogger;
         keyguardUpdateMonitorLogger.getClass();
@@ -2590,15 +2779,15 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(1);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = z;
         logMessageImpl.bool2 = z2;
-        logBuffer.commit(obtain);
-        Message obtainMessage = obtainMessage(322);
-        obtainMessage.arg1 = z ? 1 : 0;
-        obtainMessage.arg2 = z2 ? 1 : 0;
-        obtainMessage.sendToTarget();
+        logBuffer.commit(logMessageObtain);
+        Message messageObtainMessage = obtainMessage(322);
+        messageObtainMessage.arg1 = z ? 1 : 0;
+        messageObtainMessage.arg2 = z2 ? 1 : 0;
+        messageObtainMessage.sendToTarget();
     }
 
     public final void sendUpdates(KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback) {
@@ -2649,9 +2838,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.VERBOSE;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(29);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
         updateBiometricListeningState(2, FaceAuthUiEvent.FACE_AUTH_UPDATED_ASSISTANT_VISIBILITY_CHANGED);
         if (this.mAssistantVisible) {
             requestActiveUnlock(ActiveUnlockConfig.ActiveUnlockRequestOrigin.ASSISTANT, SettingsHelper.INDEX_ASSISTANT, true);
@@ -2672,9 +2861,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(13);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
         if (z != z2) {
             Assert.isMainThread();
             for (int i2 = 0; i2 < this.mCallbacks.size(); i2++) {
@@ -2698,9 +2887,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(14);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardFingerprintLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
         if (z != z2) {
             Assert.isMainThread();
             for (int i2 = 0; i2 < this.mCallbacks.size(); i2++) {
@@ -2726,9 +2915,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(9);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-                ((LogMessageImpl) obtain).bool1 = z;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+                ((LogMessageImpl) logMessageObtain).bool1 = z;
+                logBuffer.commit(logMessageObtain);
                 for (int i = 0; i < this.mCallbacks.size(); i++) {
                     KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = (KeyguardUpdateMonitorCallback) ((WeakReference) this.mCallbacks.get(i)).get();
                     if (keyguardUpdateMonitorCallback != null) {
@@ -2757,19 +2946,19 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         boolean z3 = this.mKeyguardOccluded != z2;
         boolean z4 = this.mKeyguardShowing != z;
         if (z3 || z4) {
-            boolean isKeyguardVisible = isKeyguardVisible();
+            boolean zIsKeyguardVisible = isKeyguardVisible();
             this.mKeyguardShowing = z;
             this.mKeyguardOccluded = z2;
-            boolean isKeyguardVisible2 = isKeyguardVisible();
-            this.mLogger.logKeyguardShowingChanged(z, z2, isKeyguardVisible2);
-            if (isKeyguardVisible2 != isKeyguardVisible) {
-                if (isKeyguardVisible2) {
+            boolean zIsKeyguardVisible2 = isKeyguardVisible();
+            this.mLogger.logKeyguardShowingChanged(z, z2, zIsKeyguardVisible2);
+            if (zIsKeyguardVisible2 != zIsKeyguardVisible) {
+                if (zIsKeyguardVisible2) {
                     this.mSecureCameraLaunched = false;
                 }
                 for (int i = 0; i < this.mCallbacks.size(); i++) {
                     KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = (KeyguardUpdateMonitorCallback) ((WeakReference) this.mCallbacks.get(i)).get();
                     if (keyguardUpdateMonitorCallback != null) {
-                        keyguardUpdateMonitorCallback.onKeyguardVisibilityChanged(isKeyguardVisible2);
+                        keyguardUpdateMonitorCallback.onKeyguardVisibilityChanged(zIsKeyguardVisible2);
                     }
                 }
             }
@@ -2798,11 +2987,11 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             LogLevel logLevel = LogLevel.DEBUG;
             KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(13);
             LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.int1 = selectedUserId;
             logMessageImpl.str1 = "from setSwitchingUser";
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         } else {
             KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger2 = this.mLogger;
             int selectedUserId2 = this.mSelectedUserInteractor.getSelectedUserId();
@@ -2810,11 +2999,11 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             LogLevel logLevel2 = LogLevel.DEBUG;
             KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(4);
             LogBuffer logBuffer2 = keyguardUpdateMonitorLogger2.logBuffer;
-            LogMessage obtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+            LogMessage logMessageObtain2 = logBuffer2.obtain("KeyguardUpdateMonitorLog", logLevel2, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+            LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
             logMessageImpl2.int1 = selectedUserId2;
             logMessageImpl2.str1 = "from setSwitchingUser";
-            logBuffer2.commit(obtain2);
+            logBuffer2.commit(logMessageObtain2);
         }
         this.mSwitchingUser = z;
         post(new KeyguardUpdateMonitor$$ExternalSyntheticLambda4(this, 1));
@@ -2824,20 +3013,48 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:53:0x00b0  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00be  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x00c4 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x00d0 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x007a  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00b9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean shouldListenForFingerprint(boolean r32) {
-        /*
-            Method dump skipped, instructions count: 290
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardUpdateMonitor.shouldListenForFingerprint(boolean):boolean");
+    public boolean shouldListenForFingerprint(boolean z) {
+        boolean z2;
+        boolean z3;
+        boolean z4;
+        int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
+        boolean userHasTrust = getUserHasTrust(selectedUserId);
+        boolean z5 = !userHasTrust;
+        BiometricAuthenticated biometricAuthenticated = this.mUserFingerprintAuthenticated.get(this.mSelectedUserInteractor.getSelectedUserId());
+        boolean z6 = this.mAssistantVisible && this.mKeyguardOccluded && (biometricAuthenticated == null || !biometricAuthenticated.mAuthenticated) && !this.mUserHasTrust.get(this.mSelectedUserInteractor.getSelectedUserId(), false);
+        if (isKeyguardVisible() || !this.mDeviceInteractive) {
+            z2 = true;
+        } else {
+            int i = SceneContainerFlag.$r8$clinit;
+            if ((!this.mPrimaryBouncerIsOrWillBeShowing || this.mKeyguardGoingAway) && !this.mGoingToSleep && !z6 && ((!(z4 = this.mKeyguardOccluded) || !this.mIsDreaming) && (!z4 || userHasTrust || !this.mKeyguardShowing || (!this.mOccludingAppRequestingFp && !z && !this.mAlternateBouncerShowing && !this.mAllowFingerprintOnCurrentOccludingActivity)))) {
+                z2 = false;
+            }
+        }
+        boolean z7 = this.mBiometricEnabledForUser.get(selectedUserId);
+        boolean userCanSkipBouncer = getUserCanSkipBouncer(selectedUserId);
+        boolean zIsFingerprintDisabled = isFingerprintDisabled(selectedUserId);
+        boolean z8 = (this.mSwitchingUser || zIsFingerprintDisabled || (this.mKeyguardGoingAway && this.mDeviceInteractive) || !this.mIsSystemUser || !z7 || isUserInLockdown(selectedUserId)) ? false : true;
+        boolean zIsUnlockingWithBiometricAllowed = isUnlockingWithBiometricAllowed(BiometricSourceType.FINGERPRINT);
+        boolean z9 = !zIsUnlockingWithBiometricAllowed;
+        if (!zIsUnlockingWithBiometricAllowed) {
+            int i2 = SceneContainerFlag.$r8$clinit;
+            z3 = !this.mPrimaryBouncerIsOrWillBeShowing;
+        }
+        if (this.mCommunalShowing) {
+            int i3 = SceneContainerFlag.$r8$clinit;
+            boolean z10 = this.mAlternateBouncerShowing;
+        }
+        boolean z11 = z2 && z8 && z3 && (!z || (!userCanSkipBouncer && zIsUnlockingWithBiometricAllowed && !userHasTrust)) && !this.mBiometricPromptShowing;
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        boolean z12 = this.mAllowFingerprintOnCurrentOccludingActivity;
+        int i4 = SceneContainerFlag.$r8$clinit;
+        logListenerModelData(new KeyguardFingerprintListenModel(jCurrentTimeMillis, selectedUserId, z11, z12, this.mAlternateBouncerShowing, z7, this.mBiometricPromptShowing, this.mPrimaryBouncerIsOrWillBeShowing, userCanSkipBouncer, this.mCredentialAttempted, this.mDeviceInteractive, this.mIsDreaming, zIsFingerprintDisabled, this.mFingerprintLockedOut, this.mGoingToSleep, this.mKeyguardGoingAway, isKeyguardVisible(), this.mKeyguardOccluded, this.mOccludingAppRequestingFp, z6, z9, this.mSwitchingUser, this.mIsSystemUser, z, z5, this.mCommunalShowing));
+        return z11;
     }
 
     public final boolean shouldTriggerActiveUnlock() {
@@ -2846,11 +3063,11 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         boolean z2 = this.mPrimaryBouncerFullyShown || this.mAlternateBouncerShowing || !(!isKeyguardVisible() || this.mGoingToSleep || this.mStatusBarState == 2);
         int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
         boolean z3 = getUserCanSkipBouncer(selectedUserId) || !this.mLockPatternUtils.isSecure(selectedUserId);
-        boolean isFingerprintLockedOut = isFingerprintLockedOut();
-        boolean isUnlockingWithBiometricAllowed = isUnlockingWithBiometricAllowed(true);
-        boolean z4 = !isUnlockingWithBiometricAllowed;
-        boolean z5 = ((!this.mAuthInterruptActive && !z && !z2) || this.mSwitchingUser || z3 || isFingerprintLockedOut || !isUnlockingWithBiometricAllowed || this.mKeyguardGoingAway || this.mSecureCameraLaunched) ? false : true;
-        logListenerModelData(new KeyguardActiveUnlockModel(System.currentTimeMillis(), selectedUserId, z5, z2, this.mAuthInterruptActive, isFingerprintLockedOut, z4, this.mSwitchingUser, z, z3));
+        boolean zIsFingerprintLockedOut = isFingerprintLockedOut();
+        boolean zIsUnlockingWithBiometricAllowed = isUnlockingWithBiometricAllowed(true);
+        boolean z4 = !zIsUnlockingWithBiometricAllowed;
+        boolean z5 = ((!this.mAuthInterruptActive && !z && !z2) || this.mSwitchingUser || z3 || zIsFingerprintLockedOut || !zIsUnlockingWithBiometricAllowed || this.mKeyguardGoingAway || this.mSecureCameraLaunched) ? false : true;
+        logListenerModelData(new KeyguardActiveUnlockModel(System.currentTimeMillis(), selectedUserId, z5, z2, this.mAuthInterruptActive, zIsFingerprintLockedOut, z4, this.mSwitchingUser, z, z3));
         return z5;
     }
 
@@ -2876,9 +3093,9 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                     LogLevel logLevel = LogLevel.DEBUG;
                     KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(26);
                     LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-                    LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-                    ((LogMessageImpl) obtain).bool1 = z2;
-                    logBuffer.commit(obtain);
+                    LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                    ((LogMessageImpl) logMessageObtain).bool1 = z2;
+                    logBuffer.commit(logMessageObtain);
                 }
             };
             this.mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor("device_provisioned"), false, this.mDeviceProvisionedObserver);
@@ -2941,25 +3158,25 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
         ((DevicePostureControllerImpl) this.mDevicePostureController).addCallback(this.mPostureCallback);
         this.mTaskStackChangeListeners.registerTaskStackListener(this.mTaskStackListener);
         int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
-        boolean isUserUnlocked = this.mUserManager.isUserUnlocked(selectedUserId);
+        boolean zIsUserUnlocked = this.mUserManager.isUserUnlocked(selectedUserId);
         KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger = this.mLogger;
         keyguardUpdateMonitorLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(25);
         LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = selectedUserId;
-        logMessageImpl.bool1 = isUserUnlocked;
-        logBuffer.commit(obtain);
-        this.mUserIsUnlocked.put(selectedUserId, isUserUnlocked);
+        logMessageImpl.bool1 = zIsUserUnlocked;
+        logBuffer.commit(logMessageObtain);
+        this.mUserIsUnlocked.put(selectedUserId, zIsUserUnlocked);
         updateSecondaryLockscreenRequirement(selectedUserId);
         for (UserInfo userInfo : this.mUserManager.getUsers()) {
-            boolean isTrustUsuallyManaged = this.mTrustManager.isTrustUsuallyManaged(userInfo.id);
+            boolean zIsTrustUsuallyManaged = this.mTrustManager.isTrustUsuallyManaged(userInfo.id);
             KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger2 = this.mLogger;
             int i = userInfo.id;
-            keyguardUpdateMonitorLogger2.logTrustUsuallyManagedUpdated("init from constructor", i, this.mUserTrustIsUsuallyManaged.get(i), isTrustUsuallyManaged);
-            this.mUserTrustIsUsuallyManaged.put(userInfo.id, isTrustUsuallyManaged);
+            keyguardUpdateMonitorLogger2.logTrustUsuallyManagedUpdated("init from constructor", i, this.mUserTrustIsUsuallyManaged.get(i), zIsTrustUsuallyManaged);
+            this.mUserTrustIsUsuallyManaged.put(userInfo.id, zIsTrustUsuallyManaged);
         }
         if (WirelessUtils.isAirplaneModeOn(this.mContext) && !hasMessages(329)) {
             sendEmptyMessage(329);
@@ -2981,7 +3198,7 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
 
     public void startListeningForFingerprint(boolean z) {
         int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
-        boolean isUnlockWithFingerprintPossible = isUnlockWithFingerprintPossible(selectedUserId);
+        boolean zIsUnlockWithFingerprintPossible = isUnlockWithFingerprintPossible(selectedUserId);
         if (this.mFingerprintCancelSignal != null) {
             KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger = this.mLogger;
             int i = this.mFingerprintRunningState;
@@ -2989,27 +3206,27 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             LogLevel logLevel = LogLevel.ERROR;
             KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(1);
             LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.int1 = i;
-            logMessageImpl.bool1 = isUnlockWithFingerprintPossible;
-            logBuffer.commit(obtain);
+            logMessageImpl.bool1 = zIsUnlockWithFingerprintPossible;
+            logBuffer.commit(logMessageObtain);
         }
         int i2 = this.mFingerprintRunningState;
         if (i2 == 2) {
             setFingerprintRunningState(3);
             return;
         }
-        if (i2 != 3 && isUnlockWithFingerprintPossible) {
+        if (i2 != 3 && zIsUnlockWithFingerprintPossible) {
             this.mFingerprintCancelSignal = new CancellationSignal();
-            FingerprintAuthenticateOptions build = new FingerprintAuthenticateOptions.Builder().setUserId(selectedUserId).build();
+            FingerprintAuthenticateOptions fingerprintAuthenticateOptionsBuild = new FingerprintAuthenticateOptions.Builder().setUserId(selectedUserId).build();
             if (z) {
                 this.mLogger.v("startListeningForFingerprint - detect");
-                this.mFpm.detectFingerprint(this.mFingerprintCancelSignal, this.mFingerprintDetectionCallback, build);
+                this.mFpm.detectFingerprint(this.mFingerprintCancelSignal, this.mFingerprintDetectionCallback, fingerprintAuthenticateOptionsBuild);
                 this.mFingerprintDetectRunning = true;
             } else {
                 this.mLogger.v("startListeningForFingerprint");
-                this.mFpm.authenticate((FingerprintManager.CryptoObject) null, this.mFingerprintCancelSignal, this.mFingerprintAuthenticationCallback, (Handler) null, build);
+                this.mFpm.authenticate((FingerprintManager.CryptoObject) null, this.mFingerprintCancelSignal, this.mFingerprintAuthenticationCallback, (Handler) null, fingerprintAuthenticateOptionsBuild);
                 this.mFingerprintDetectRunning = false;
             }
             setFingerprintRunningState(1);
@@ -3045,22 +3262,22 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             LogLevel logLevel = LogLevel.DEBUG;
             KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda1(5);
             LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
-            ((LogMessageImpl) obtain).int1 = i;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda1, null);
+            ((LogMessageImpl) logMessageObtain).int1 = i;
+            logBuffer.commit(logMessageObtain);
             return;
         }
         if (!this.mAuthController.mAllFingerprintAuthenticatorsRegistered) {
             this.mLogger.d("All FP authenticators not registered, skipping FP listening state update");
             return;
         }
-        boolean shouldListenForFingerprint = shouldListenForFingerprint(isUdfpsSupported());
+        boolean zShouldListenForFingerprint = shouldListenForFingerprint(isUdfpsSupported());
         int i2 = this.mFingerprintRunningState;
         boolean z = i2 == 1;
         boolean z2 = z || i2 == 3;
-        boolean isUnlockingWithBiometricAllowed = isUnlockingWithBiometricAllowed(BiometricSourceType.FINGERPRINT);
-        boolean z3 = !isUnlockingWithBiometricAllowed;
-        if (z2 && !shouldListenForFingerprint) {
+        boolean zIsUnlockingWithBiometricAllowed = isUnlockingWithBiometricAllowed(BiometricSourceType.FINGERPRINT);
+        boolean z3 = !zIsUnlockingWithBiometricAllowed;
+        if (z2 && !zShouldListenForFingerprint) {
             if (i == 0) {
                 this.mLogger.v("Ignoring stopListeningForFingerprint()");
                 return;
@@ -3069,7 +3286,7 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 return;
             }
         }
-        if (!z2 && shouldListenForFingerprint) {
+        if (!z2 && zShouldListenForFingerprint) {
             if (i == 1) {
                 this.mLogger.v("Ignoring startListeningForFingerprint()");
                 return;
@@ -3082,7 +3299,7 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
             return;
         }
         if (i == 1) {
-            if (isUnlockingWithBiometricAllowed) {
+            if (zIsUnlockingWithBiometricAllowed) {
                 this.mLogger.v("Ignoring startListeningForFingerprint() switch detect -> auth");
                 return;
             }
@@ -3093,8 +3310,8 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
 
     public final void updateSecondaryLockscreenRequirement(int i) {
         Intent intent = (Intent) ((HashMap) this.mSecondaryLockscreenRequirement).get(Integer.valueOf(i));
-        boolean isSecondaryLockscreenEnabled = this.mDevicePolicyManager.isSecondaryLockscreenEnabled(UserHandle.of(i));
-        if (isSecondaryLockscreenEnabled && intent == null) {
+        boolean zIsSecondaryLockscreenEnabled = this.mDevicePolicyManager.isSecondaryLockscreenEnabled(UserHandle.of(i));
+        if (zIsSecondaryLockscreenEnabled && intent == null) {
             ComponentName profileOwnerOrDeviceOwnerSupervisionComponent = this.mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(UserHandle.of(i));
             if (profileOwnerOrDeviceOwnerSupervisionComponent == null) {
                 KeyguardUpdateMonitorLogger keyguardUpdateMonitorLogger = this.mLogger;
@@ -3102,19 +3319,19 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
                 LogLevel logLevel = LogLevel.ERROR;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(12);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-                ((LogMessageImpl) obtain).int1 = i;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                ((LogMessageImpl) logMessageObtain).int1 = i;
+                logBuffer.commit(logMessageObtain);
                 return;
             }
-            ResolveInfo resolveService = this.mPackageManager.resolveService(new Intent("android.app.action.BIND_SECONDARY_LOCKSCREEN_SERVICE").setPackage(profileOwnerOrDeviceOwnerSupervisionComponent.getPackageName()), 0);
-            if (resolveService == null || resolveService.serviceInfo == null) {
+            ResolveInfo resolveInfoResolveService = this.mPackageManager.resolveService(new Intent("android.app.action.BIND_SECONDARY_LOCKSCREEN_SERVICE").setPackage(profileOwnerOrDeviceOwnerSupervisionComponent.getPackageName()), 0);
+            if (resolveInfoResolveService == null || resolveInfoResolveService.serviceInfo == null) {
                 return;
             }
-            Intent component = new Intent().setComponent(resolveService.serviceInfo.getComponentName());
+            Intent component = new Intent().setComponent(resolveInfoResolveService.serviceInfo.getComponentName());
             ((HashMap) this.mSecondaryLockscreenRequirement).put(Integer.valueOf(i), component);
         } else {
-            if (isSecondaryLockscreenEnabled || intent == null) {
+            if (zIsSecondaryLockscreenEnabled || intent == null) {
                 return;
             }
             ((HashMap) this.mSecondaryLockscreenRequirement).put(Integer.valueOf(i), null);
@@ -3187,17 +3404,17 @@ public abstract class KeyguardUpdateMonitor implements TrustManager.TrustListene
     public void updateFaceListeningState(int i, FaceAuthUiEvent faceAuthUiEvent) {
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0024  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void requestActiveUnlock(ActiveUnlockConfig.ActiveUnlockRequestOrigin activeUnlockRequestOrigin, String str) {
         boolean z;
         KeyguardBypassController keyguardBypassController;
         if (!isFaceEnabledAndEnrolled() || (keyguardBypassController = this.mKeyguardBypassController) == null || !keyguardBypassController.canBypass()) {
             int i = SceneContainerFlag.$r8$clinit;
-            if (!this.mAlternateBouncerShowing && !this.mPrimaryBouncerFullyShown && !isUdfpsFingerDown()) {
-                z = false;
-                requestActiveUnlock(activeUnlockRequestOrigin, str, z);
-            }
+            z = this.mAlternateBouncerShowing || this.mPrimaryBouncerFullyShown || isUdfpsFingerDown();
         }
-        z = true;
         requestActiveUnlock(activeUnlockRequestOrigin, str, z);
     }
 }

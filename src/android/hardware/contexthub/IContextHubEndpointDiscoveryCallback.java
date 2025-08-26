@@ -51,9 +51,9 @@ public interface IContextHubEndpointDiscoveryCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContextHubEndpointDiscoveryCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContextHubEndpointDiscoveryCallback)) {
-                return (IContextHubEndpointDiscoveryCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContextHubEndpointDiscoveryCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContextHubEndpointDiscoveryCallback)) {
+                return (IContextHubEndpointDiscoveryCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,9 +88,9 @@ public interface IContextHubEndpointDiscoveryCallback extends IInterface {
                 onEndpointsStarted(hubEndpointInfoArr);
             } else if (i == 2) {
                 HubEndpointInfo[] hubEndpointInfoArr2 = (HubEndpointInfo[]) parcel.createTypedArray(HubEndpointInfo.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onEndpointsStopped(hubEndpointInfoArr2, readInt);
+                onEndpointsStopped(hubEndpointInfoArr2, i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,26 +115,26 @@ public interface IContextHubEndpointDiscoveryCallback extends IInterface {
 
             @Override // android.hardware.contexthub.IContextHubEndpointDiscoveryCallback
             public void onEndpointsStarted(HubEndpointInfo[] hubEndpointInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContextHubEndpointDiscoveryCallback.DESCRIPTOR);
-                    obtain.writeTypedArray(hubEndpointInfoArr, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContextHubEndpointDiscoveryCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(hubEndpointInfoArr, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHubEndpointDiscoveryCallback
             public void onEndpointsStopped(HubEndpointInfo[] hubEndpointInfoArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContextHubEndpointDiscoveryCallback.DESCRIPTOR);
-                    obtain.writeTypedArray(hubEndpointInfoArr, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContextHubEndpointDiscoveryCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(hubEndpointInfoArr, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

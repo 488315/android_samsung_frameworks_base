@@ -138,9 +138,7 @@ public final class RefreshRateConfig {
                 this.supportedRefreshRateListForPassive = (List) list.stream().filter(new Predicate() { // from class: com.samsung.android.hardware.display.RefreshRateConfig$SupportedRefreshRate$$ExternalSyntheticLambda2
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
-                        boolean lambda$new$0;
-                        lambda$new$0 = RefreshRateConfig.SupportedRefreshRate.this.lambda$new$0((Integer) obj);
-                        return lambda$new$0;
+                        return this.f$0.lambda$new$0((Integer) obj);
                     }
                 }).collect(Collectors.toList());
                 return;

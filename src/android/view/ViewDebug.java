@@ -290,7 +290,7 @@ public class ViewDebug {
         return Debug.countInstancesOfClass(ViewRootImpl.class);
     }
 
-    static void dispatchCommand(View view, String str, String str2, OutputStream outputStream) throws IOException {
+    static void dispatchCommand(View view, String str, String str2, OutputStream outputStream) throws Throwable {
         View rootView = view.getRootView();
         if (REMOTE_COMMAND_DUMP.equalsIgnoreCase(str)) {
             dump(rootView, false, true, outputStream);
@@ -308,36 +308,36 @@ public class ViewDebug {
             captureLayers(rootView, new DataOutputStream(outputStream));
             return;
         }
-        String[] split = str2.split(" ");
+        String[] strArrSplit = str2.split(" ");
         if (REMOTE_COMMAND_CAPTURE.equalsIgnoreCase(str)) {
-            capture(rootView, outputStream, split[0]);
+            capture(rootView, outputStream, strArrSplit[0]);
             return;
         }
         if (REMOTE_COMMAND_OUTPUT_DISPLAYLIST.equalsIgnoreCase(str)) {
-            outputDisplayList(rootView, split[0]);
+            outputDisplayList(rootView, strArrSplit[0]);
             return;
         }
         if (REMOTE_COMMAND_INVALIDATE.equalsIgnoreCase(str)) {
-            invalidate(rootView, split[0]);
+            invalidate(rootView, strArrSplit[0]);
             return;
         }
         if (REMOTE_COMMAND_REQUEST_LAYOUT.equalsIgnoreCase(str)) {
-            requestLayout(rootView, split[0]);
+            requestLayout(rootView, strArrSplit[0]);
         } else if (REMOTE_PROFILE.equalsIgnoreCase(str)) {
-            profile(rootView, outputStream, split[0]);
+            profile(rootView, outputStream, strArrSplit[0]);
         } else if (REMOTE_COMMAND_INVOKE_METHOD.equals(str)) {
-            invokeViewMethod(rootView, outputStream, split);
+            invokeViewMethod(rootView, outputStream, strArrSplit);
         }
     }
 
     public static View findView(View view, String str) {
         if (str.indexOf(64) != -1) {
-            String[] split = str.split("@");
-            String str2 = split[0];
-            int parseLong = (int) Long.parseLong(split[1], 16);
+            String[] strArrSplit = str.split("@");
+            String str2 = strArrSplit[0];
+            int i = (int) Long.parseLong(strArrSplit[1], 16);
             View rootView = view.getRootView();
             if (rootView instanceof ViewGroup) {
-                return findView((ViewGroup) rootView, str2, parseLong);
+                return findView((ViewGroup) rootView, str2, i);
             }
             return null;
         }
@@ -345,60 +345,61 @@ public class ViewDebug {
     }
 
     private static void invalidate(View view, String str) {
-        View findView = findView(view, str);
-        if (findView != null) {
-            findView.postInvalidate();
+        View viewFindView = findView(view, str);
+        if (viewFindView != null) {
+            viewFindView.postInvalidate();
         }
     }
 
     private static void requestLayout(View view, String str) {
-        final View findView = findView(view, str);
-        if (findView != null) {
+        final View viewFindView = findView(view, str);
+        if (viewFindView != null) {
             view.post(new Runnable() { // from class: android.view.ViewDebug.1
                 @Override // java.lang.Runnable
                 public void run() {
-                    View.this.requestLayout();
+                    viewFindView.requestLayout();
                 }
             });
         }
     }
 
-    private static void profile(View view, OutputStream outputStream, String str) throws IOException {
-        View findView = findView(view, str);
-        BufferedWriter bufferedWriter = null;
+    private static void profile(View view, OutputStream outputStream, String str) throws Throwable {
+        BufferedWriter bufferedWriter;
+        View viewFindView = findView(view, str);
+        BufferedWriter bufferedWriter2 = null;
         try {
             try {
-                BufferedWriter bufferedWriter2 = new BufferedWriter(new OutputStreamWriter(outputStream), 32768);
-                try {
-                    if (findView != null) {
-                        profileViewAndChildren(findView, bufferedWriter2);
-                    } else {
-                        bufferedWriter2.write("-1 -1 -1");
-                        bufferedWriter2.newLine();
-                    }
-                    bufferedWriter2.write("DONE.");
-                    bufferedWriter2.newLine();
-                    bufferedWriter2.close();
-                } catch (Exception e) {
-                    e = e;
-                    bufferedWriter = bufferedWriter2;
-                    Log.w("View", "Problem profiling the view:", e);
-                    if (bufferedWriter != null) {
-                        bufferedWriter.close();
-                    }
-                } catch (Throwable th) {
-                    th = th;
-                    bufferedWriter = bufferedWriter2;
-                    if (bufferedWriter != null) {
-                        bufferedWriter.close();
-                    }
-                    throw th;
-                }
-            } catch (Exception e2) {
-                e = e2;
+                bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream), 32768);
+            } catch (Throwable th) {
+                th = th;
+            }
+        } catch (Exception e) {
+            e = e;
+        }
+        try {
+            if (viewFindView != null) {
+                profileViewAndChildren(viewFindView, bufferedWriter);
+            } else {
+                bufferedWriter.write("-1 -1 -1");
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.write("DONE.");
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (Exception e2) {
+            e = e2;
+            bufferedWriter2 = bufferedWriter;
+            Log.w("View", "Problem profiling the view:", e);
+            if (bufferedWriter2 != null) {
+                bufferedWriter2.close();
             }
         } catch (Throwable th2) {
             th = th2;
+            bufferedWriter2 = bufferedWriter;
+            if (bufferedWriter2 != null) {
+                bufferedWriter2.close();
+            }
+            throw th;
         }
     }
 
@@ -407,14 +408,14 @@ public class ViewDebug {
     }
 
     private static void profileViewAndChildren(View view, RenderNode renderNode, BufferedWriter bufferedWriter, boolean z) throws IOException {
-        long profileViewMeasure = (z || (view.mPrivateFlags & 2048) != 0) ? profileViewMeasure(view) : 0L;
-        long profileViewLayout = (z || (view.mPrivateFlags & 8192) != 0) ? profileViewLayout(view) : 0L;
-        long profileViewDraw = (!z && view.willNotDraw() && (view.mPrivateFlags & 32) == 0) ? 0L : profileViewDraw(view, renderNode);
-        bufferedWriter.write(String.valueOf(profileViewMeasure));
+        long jProfileViewMeasure = (z || (view.mPrivateFlags & 2048) != 0) ? profileViewMeasure(view) : 0L;
+        long jProfileViewLayout = (z || (view.mPrivateFlags & 8192) != 0) ? profileViewLayout(view) : 0L;
+        long jProfileViewDraw = (!z && view.willNotDraw() && (view.mPrivateFlags & 32) == 0) ? 0L : profileViewDraw(view, renderNode);
+        bufferedWriter.write(String.valueOf(jProfileViewMeasure));
         bufferedWriter.write(32);
-        bufferedWriter.write(String.valueOf(profileViewLayout));
+        bufferedWriter.write(String.valueOf(jProfileViewLayout));
         bufferedWriter.write(32);
-        bufferedWriter.write(String.valueOf(profileViewDraw));
+        bufferedWriter.write(String.valueOf(jProfileViewDraw));
         bufferedWriter.newLine();
         if (view instanceof ViewGroup) {
             ViewGroup viewGroup = (ViewGroup) view;
@@ -429,7 +430,7 @@ public class ViewDebug {
         return profileViewOperation(view, new ViewOperation() { // from class: android.view.ViewDebug.2
             @Override // android.view.ViewDebug.ViewOperation
             public void pre() {
-                forceLayout(View.this);
+                forceLayout(view);
             }
 
             private void forceLayout(View view2) {
@@ -445,8 +446,8 @@ public class ViewDebug {
 
             @Override // android.view.ViewDebug.ViewOperation
             public void run() {
-                View view2 = View.this;
-                view2.measure(view2.mOldWidthMeasureSpec, View.this.mOldHeightMeasureSpec);
+                View view2 = view;
+                view2.measure(view2.mOldWidthMeasureSpec, view.mOldHeightMeasureSpec);
             }
         });
     }
@@ -454,8 +455,9 @@ public class ViewDebug {
     private static long profileViewLayout(final View view) {
         return profileViewOperation(view, new ViewOperation() { // from class: android.view.ViewDebug$$ExternalSyntheticLambda0
             @Override // android.view.ViewDebug.ViewOperation
-            public final void run() {
-                r0.layout(r0.mLeft, r0.mTop, r0.mRight, View.this.mBottom);
+            public final void run() throws Resources.NotFoundException {
+                View view2 = view;
+                view2.layout(view2.mLeft, view2.mTop, view2.mRight, view2.mBottom);
             }
         });
     }
@@ -466,30 +468,30 @@ public class ViewDebug {
             return 0L;
         }
         if (view.isHardwareAccelerated()) {
-            final RecordingCanvas beginRecording = renderNode.beginRecording(displayMetrics.widthPixels, displayMetrics.heightPixels);
+            final RecordingCanvas recordingCanvasBeginRecording = renderNode.beginRecording(displayMetrics.widthPixels, displayMetrics.heightPixels);
             try {
                 return profileViewOperation(view, new ViewOperation() { // from class: android.view.ViewDebug$$ExternalSyntheticLambda1
                     @Override // android.view.ViewDebug.ViewOperation
                     public final void run() {
-                        View.this.draw(beginRecording);
+                        view.draw(recordingCanvasBeginRecording);
                     }
                 });
             } finally {
                 renderNode.endRecording();
             }
         }
-        Bitmap createBitmap = Bitmap.createBitmap(displayMetrics, displayMetrics.widthPixels, displayMetrics.heightPixels, Bitmap.Config.RGB_565);
-        final Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(displayMetrics, displayMetrics.widthPixels, displayMetrics.heightPixels, Bitmap.Config.RGB_565);
+        final Canvas canvas = new Canvas(bitmapCreateBitmap);
         try {
             return profileViewOperation(view, new ViewOperation() { // from class: android.view.ViewDebug$$ExternalSyntheticLambda2
                 @Override // android.view.ViewDebug.ViewOperation
                 public final void run() {
-                    View.this.draw(canvas);
+                    view.draw(canvas);
                 }
             });
         } finally {
             canvas.setBitmap(null);
-            createBitmap.recycle();
+            bitmapCreateBitmap.recycle();
         }
     }
 
@@ -499,7 +501,7 @@ public class ViewDebug {
         view.post(new Runnable() { // from class: android.view.ViewDebug$$ExternalSyntheticLambda9
             @Override // java.lang.Runnable
             public final void run() {
-                ViewDebug.lambda$profileViewOperation$3(ViewDebug.ViewOperation.this, jArr, countDownLatch);
+                ViewDebug.lambda$profileViewOperation$3(viewOperation, jArr, countDownLatch);
             }
         });
         try {
@@ -518,9 +520,9 @@ public class ViewDebug {
     static /* synthetic */ void lambda$profileViewOperation$3(ViewOperation viewOperation, long[] jArr, CountDownLatch countDownLatch) {
         try {
             viewOperation.pre();
-            long threadCpuTimeNanos = Debug.threadCpuTimeNanos();
+            long jThreadCpuTimeNanos = Debug.threadCpuTimeNanos();
             viewOperation.run();
-            jArr[0] = Debug.threadCpuTimeNanos() - threadCpuTimeNanos;
+            jArr[0] = Debug.threadCpuTimeNanos() - jThreadCpuTimeNanos;
         } finally {
             countDownLatch.countDown();
         }
@@ -543,7 +545,7 @@ public class ViewDebug {
     /* JADX WARN: Type inference failed for: r8v1 */
     /* JADX WARN: Type inference failed for: r8v2, types: [boolean, int] */
     /* JADX WARN: Type inference failed for: r8v3 */
-    private static void captureViewLayer(View view, DataOutputStream dataOutputStream, boolean z) throws IOException {
+    private static void captureViewLayer(View view, DataOutputStream dataOutputStream, boolean z) throws InterruptedException, IOException {
         ?? r8 = (view.getVisibility() == 0 && z) ? 1 : 0;
         if ((view.mPrivateFlags & 128) != 128) {
             int id = view.getId();
@@ -559,10 +561,10 @@ public class ViewDebug {
             dataOutputStream.writeInt(iArr[0]);
             dataOutputStream.writeInt(iArr[1]);
             dataOutputStream.flush();
-            Bitmap performViewCapture = performViewCapture(view, true);
-            if (performViewCapture != null) {
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(performViewCapture.getWidth() * performViewCapture.getHeight() * 2);
-                performViewCapture.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            Bitmap bitmapPerformViewCapture = performViewCapture(view, true);
+            if (bitmapPerformViewCapture != null) {
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(bitmapPerformViewCapture.getWidth() * bitmapPerformViewCapture.getHeight() * 2);
+                bitmapPerformViewCapture.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 dataOutputStream.writeInt(byteArrayOutputStream.size());
                 byteArrayOutputStream.writeTo(dataOutputStream);
             }
@@ -581,8 +583,8 @@ public class ViewDebug {
     }
 
     private static void outputDisplayList(View view, String str) throws IOException {
-        View findView = findView(view, str);
-        findView.getViewRootImpl().outputDisplayList(findView);
+        View viewFindView = findView(view, str);
+        viewFindView.getViewRootImpl().outputDisplayList(viewFindView);
     }
 
     public static void outputDisplayList(View view, View view2) {
@@ -626,20 +628,20 @@ public class ViewDebug {
             if (this.mRenderThread == null) {
                 this.mRenderThread = Thread.currentThread();
             }
-            Picture removeLast = this.mQueue.size() == 3 ? this.mQueue.removeLast() : null;
+            Picture pictureRemoveLast = this.mQueue.size() == 3 ? this.mQueue.removeLast() : null;
             this.mQueue.add(picture);
             this.mLock.unlock();
-            if (removeLast == null) {
+            if (pictureRemoveLast == null) {
                 this.mExecutor.execute(this);
             } else {
-                removeLast.close();
+                pictureRemoveLast.close();
             }
         }
 
         @Override // java.lang.Runnable
         public void run() {
             this.mLock.lock();
-            Picture poll = this.mQueue.poll();
+            Picture picturePoll = this.mQueue.poll();
             boolean z = this.mStopListening;
             this.mLock.unlock();
             if (Thread.currentThread() == this.mRenderThread) {
@@ -647,9 +649,9 @@ public class ViewDebug {
                 throw new IllegalStateException("ViewDebug#startRenderingCommandsCapture must be given an executor that invokes asynchronously");
             }
             if (z) {
-                poll.close();
+                picturePoll.close();
             } else {
-                if (this.mCallback.apply(poll).booleanValue()) {
+                if (this.mCallback.apply(picturePoll).booleanValue()) {
                     return;
                 }
                 close();
@@ -725,10 +727,10 @@ public class ViewDebug {
         }
 
         @Override // java.lang.Runnable
-        public void run() {
-            OutputStream outputStream;
+        public void run() throws Exception {
+            OutputStream outputStreamCall;
             this.mLock.lock();
-            Picture poll = this.mQueue.poll();
+            Picture picturePoll = this.mQueue.poll();
             boolean z = this.mStopListening;
             this.mLock.unlock();
             if (Thread.currentThread() == this.mRenderThread) {
@@ -739,15 +741,15 @@ public class ViewDebug {
                 return;
             }
             try {
-                outputStream = this.mCallback.call();
+                outputStreamCall = this.mCallback.call();
             } catch (Exception e) {
                 Log.w(ViewDebug.TAG, "Aborting rendering commands capture because callback threw exception", e);
-                outputStream = null;
+                outputStreamCall = null;
             }
-            if (outputStream != null) {
+            if (outputStreamCall != null) {
                 try {
-                    poll.writeToStream(outputStream);
-                    outputStream.flush();
+                    picturePoll.writeToStream(outputStreamCall);
+                    outputStreamCall.flush();
                     return;
                 } catch (IOException e2) {
                     Log.w(ViewDebug.TAG, "Aborting rendering commands capture due to IOException writing to output stream", e2);
@@ -773,40 +775,40 @@ public class ViewDebug {
         return null;
     }
 
-    private static void capture(View view, OutputStream outputStream, String str) throws IOException {
+    private static void capture(View view, OutputStream outputStream, String str) throws Throwable {
         capture(view, outputStream, findView(view, str));
     }
 
-    public static void capture(View view, OutputStream outputStream, View view2) throws IOException {
+    public static void capture(View view, OutputStream outputStream, View view2) throws Throwable {
         BufferedOutputStream bufferedOutputStream;
         Throwable th;
-        Bitmap performViewCapture = performViewCapture(view2, false);
-        if (performViewCapture == null) {
+        Bitmap bitmapPerformViewCapture = performViewCapture(view2, false);
+        if (bitmapPerformViewCapture == null) {
             Log.w("View", "Failed to create capture bitmap!");
-            performViewCapture = Bitmap.createBitmap(view.getResources().getDisplayMetrics(), 1, 1, Bitmap.Config.ARGB_8888);
+            bitmapPerformViewCapture = Bitmap.createBitmap(view.getResources().getDisplayMetrics(), 1, 1, Bitmap.Config.ARGB_8888);
         }
         try {
             bufferedOutputStream = new BufferedOutputStream(outputStream, 32768);
-        } catch (Throwable th2) {
-            bufferedOutputStream = null;
-            th = th2;
-        }
-        try {
-            performViewCapture.compress(Bitmap.CompressFormat.PNG, 100, bufferedOutputStream);
-            bufferedOutputStream.flush();
-            bufferedOutputStream.close();
-            performViewCapture.recycle();
-        } catch (Throwable th3) {
-            th = th3;
-            if (bufferedOutputStream != null) {
+            try {
+                bitmapPerformViewCapture.compress(Bitmap.CompressFormat.PNG, 100, bufferedOutputStream);
+                bufferedOutputStream.flush();
                 bufferedOutputStream.close();
+                bitmapPerformViewCapture.recycle();
+            } catch (Throwable th2) {
+                th = th2;
+                if (bufferedOutputStream != null) {
+                    bufferedOutputStream.close();
+                }
+                bitmapPerformViewCapture.recycle();
+                throw th;
             }
-            performViewCapture.recycle();
-            throw th;
+        } catch (Throwable th3) {
+            bufferedOutputStream = null;
+            th = th3;
         }
     }
 
-    private static Bitmap performViewCapture(final View view, final boolean z) {
+    private static Bitmap performViewCapture(final View view, final boolean z) throws InterruptedException {
         if (view == null) {
             return null;
         }
@@ -815,7 +817,7 @@ public class ViewDebug {
         view.post(new Runnable() { // from class: android.view.ViewDebug$$ExternalSyntheticLambda10
             @Override // java.lang.Runnable
             public final void run() {
-                ViewDebug.lambda$performViewCapture$4(View.this, bitmapArr, z, countDownLatch);
+                ViewDebug.lambda$performViewCapture$4(view, bitmapArr, z, countDownLatch);
             }
         });
         try {
@@ -839,55 +841,56 @@ public class ViewDebug {
     }
 
     @Deprecated
-    public static void dump(View view, boolean z, boolean z2, OutputStream outputStream) throws IOException {
+    public static void dump(View view, boolean z, boolean z2, OutputStream outputStream) throws Throwable {
         Throwable th;
         Exception exc;
-        BufferedWriter bufferedWriter = null;
+        BufferedWriter bufferedWriter;
+        BufferedWriter bufferedWriter2 = null;
         try {
             try {
-                BufferedWriter bufferedWriter2 = new BufferedWriter(new OutputStreamWriter(outputStream, "utf-8"), 32768);
-                try {
-                    View rootView = view.getRootView();
-                    if (rootView instanceof ViewGroup) {
-                        ViewGroup viewGroup = (ViewGroup) rootView;
-                        dumpViewHierarchy(viewGroup.getContext(), viewGroup, bufferedWriter2, 0, z, z2);
-                    }
-                    bufferedWriter2.write("DONE.");
-                    bufferedWriter2.newLine();
-                    bufferedWriter2.close();
-                } catch (Exception e) {
-                    exc = e;
-                    bufferedWriter = bufferedWriter2;
-                    Log.w("View", "Problem dumping the view:", exc);
-                    if (bufferedWriter != null) {
-                        bufferedWriter.close();
-                    }
-                } catch (Throwable th2) {
-                    th = th2;
-                    bufferedWriter = bufferedWriter2;
-                    if (bufferedWriter != null) {
-                        bufferedWriter.close();
-                        throw th;
-                    }
-                    throw th;
-                }
-            } catch (Throwable th3) {
-                th = th3;
+                bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "utf-8"), 32768);
+            } catch (Exception e) {
+                exc = e;
             }
+        } catch (Throwable th2) {
+            th = th2;
+        }
+        try {
+            View rootView = view.getRootView();
+            if (rootView instanceof ViewGroup) {
+                ViewGroup viewGroup = (ViewGroup) rootView;
+                dumpViewHierarchy(viewGroup.getContext(), viewGroup, bufferedWriter, 0, z, z2);
+            }
+            bufferedWriter.write("DONE.");
+            bufferedWriter.newLine();
+            bufferedWriter.close();
         } catch (Exception e2) {
             exc = e2;
+            bufferedWriter2 = bufferedWriter;
+            Log.w("View", "Problem dumping the view:", exc);
+            if (bufferedWriter2 != null) {
+                bufferedWriter2.close();
+            }
+        } catch (Throwable th3) {
+            th = th3;
+            bufferedWriter2 = bufferedWriter;
+            if (bufferedWriter2 != null) {
+                bufferedWriter2.close();
+                throw th;
+            }
+            throw th;
         }
     }
 
-    public static void dumpv2(final View view, ByteArrayOutputStream byteArrayOutputStream) throws InterruptedException {
+    public static void dumpv2(final View view, ByteArrayOutputStream byteArrayOutputStream) throws InterruptedException, IOException {
         final ViewHierarchyEncoder viewHierarchyEncoder = new ViewHierarchyEncoder(byteArrayOutputStream);
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         view.post(new Runnable() { // from class: android.view.ViewDebug.3
             @Override // java.lang.Runnable
-            public void run() {
-                ViewHierarchyEncoder.this.addProperty("window:left", view.mAttachInfo.mWindowLeft);
-                ViewHierarchyEncoder.this.addProperty("window:top", view.mAttachInfo.mWindowTop);
-                view.encode(ViewHierarchyEncoder.this);
+            public void run() throws Resources.NotFoundException, IOException {
+                viewHierarchyEncoder.addProperty("window:left", view.mAttachInfo.mWindowLeft);
+                viewHierarchyEncoder.addProperty("window:top", view.mAttachInfo.mWindowTop);
+                view.encode(viewHierarchyEncoder);
                 countDownLatch.countDown();
             }
         });
@@ -895,7 +898,7 @@ public class ViewDebug {
         viewHierarchyEncoder.endStream();
     }
 
-    private static void dumpEncoded(View view, OutputStream outputStream) throws IOException {
+    private static void dumpEncoded(View view, OutputStream outputStream) throws Resources.NotFoundException, IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ViewHierarchyEncoder viewHierarchyEncoder = new ViewHierarchyEncoder(byteArrayOutputStream);
         viewHierarchyEncoder.setUserPropertiesEnabled(false);
@@ -906,44 +909,45 @@ public class ViewDebug {
         outputStream.write(byteArrayOutputStream.toByteArray());
     }
 
-    public static void dumpTheme(View view, OutputStream outputStream) throws IOException {
-        BufferedWriter bufferedWriter = null;
+    public static void dumpTheme(View view, OutputStream outputStream) throws Throwable {
+        BufferedWriter bufferedWriter;
+        BufferedWriter bufferedWriter2 = null;
         try {
             try {
-                BufferedWriter bufferedWriter2 = new BufferedWriter(new OutputStreamWriter(outputStream, "utf-8"), 32768);
-                try {
-                    String[] styleAttributesDump = getStyleAttributesDump(view.getContext().getResources(), view.getContext().getTheme());
-                    if (styleAttributesDump != null) {
-                        for (int i = 0; i < styleAttributesDump.length; i += 2) {
-                            if (styleAttributesDump[i] != null) {
-                                bufferedWriter2.write(styleAttributesDump[i] + ShaderAssembler.NEWLINE);
-                                bufferedWriter2.write(styleAttributesDump[i + 1] + ShaderAssembler.NEWLINE);
-                            }
-                        }
+                bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "utf-8"), 32768);
+            } catch (Throwable th) {
+                th = th;
+            }
+        } catch (Exception e) {
+            e = e;
+        }
+        try {
+            String[] styleAttributesDump = getStyleAttributesDump(view.getContext().getResources(), view.getContext().getTheme());
+            if (styleAttributesDump != null) {
+                for (int i = 0; i < styleAttributesDump.length; i += 2) {
+                    if (styleAttributesDump[i] != null) {
+                        bufferedWriter.write(styleAttributesDump[i] + ShaderAssembler.NEWLINE);
+                        bufferedWriter.write(styleAttributesDump[i + 1] + ShaderAssembler.NEWLINE);
                     }
-                    bufferedWriter2.write("DONE.");
-                    bufferedWriter2.newLine();
-                    bufferedWriter2.close();
-                } catch (Exception e) {
-                    e = e;
-                    bufferedWriter = bufferedWriter2;
-                    Log.w("View", "Problem dumping View Theme:", e);
-                    if (bufferedWriter != null) {
-                        bufferedWriter.close();
-                    }
-                } catch (Throwable th) {
-                    th = th;
-                    bufferedWriter = bufferedWriter2;
-                    if (bufferedWriter != null) {
-                        bufferedWriter.close();
-                    }
-                    throw th;
                 }
-            } catch (Exception e2) {
-                e = e2;
+            }
+            bufferedWriter.write("DONE.");
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (Exception e2) {
+            e = e2;
+            bufferedWriter2 = bufferedWriter;
+            Log.w("View", "Problem dumping View Theme:", e);
+            if (bufferedWriter2 != null) {
+                bufferedWriter2.close();
             }
         } catch (Throwable th2) {
             th = th2;
+            bufferedWriter2 = bufferedWriter;
+            if (bufferedWriter2 != null) {
+                bufferedWriter2.close();
+            }
+            throw th;
         }
     }
 
@@ -972,8 +976,8 @@ public class ViewDebug {
 
     /* JADX WARN: Multi-variable type inference failed */
     private static View findView(ViewGroup viewGroup, String str, int i) {
-        View findHierarchyView;
-        View findView;
+        View viewFindHierarchyView;
+        View viewFindView;
         if (isRequestedView(viewGroup, str, i)) {
             return viewGroup;
         }
@@ -981,18 +985,18 @@ public class ViewDebug {
         for (int i2 = 0; i2 < childCount; i2++) {
             View childAt = viewGroup.getChildAt(i2);
             if (childAt instanceof ViewGroup) {
-                View findView2 = findView((ViewGroup) childAt, str, i);
-                if (findView2 != null) {
-                    return findView2;
+                View viewFindView2 = findView((ViewGroup) childAt, str, i);
+                if (viewFindView2 != null) {
+                    return viewFindView2;
                 }
             } else if (isRequestedView(childAt, str, i)) {
                 return childAt;
             }
-            if (childAt.mOverlay != null && (findView = findView(childAt.mOverlay.mOverlayViewGroup, str, i)) != null) {
-                return findView;
+            if (childAt.mOverlay != null && (viewFindView = findView(childAt.mOverlay.mOverlayViewGroup, str, i)) != null) {
+                return viewFindView;
             }
-            if ((childAt instanceof HierarchyHandler) && (findHierarchyView = ((HierarchyHandler) childAt).findHierarchyView(str, i)) != null) {
-                return findHierarchyView;
+            if ((childAt instanceof HierarchyHandler) && (viewFindHierarchyView = ((HierarchyHandler) childAt).findHierarchyView(str, i)) != null) {
+                return viewFindHierarchyView;
             }
         }
         return null;
@@ -1009,7 +1013,7 @@ public class ViewDebug {
         return str.equals(name);
     }
 
-    private static void dumpViewHierarchy(final Context context, final ViewGroup viewGroup, final BufferedWriter bufferedWriter, final int i, final boolean z, final boolean z2) {
+    private static void dumpViewHierarchy(final Context context, final ViewGroup viewGroup, final BufferedWriter bufferedWriter, final int i, final boolean z, final boolean z2) throws ExecutionException, InterruptedException, TimeoutException, IOException {
         cacheExportedProperties(viewGroup.getClass());
         if (!z) {
             cacheExportedPropertiesForChildren(viewGroup);
@@ -1024,13 +1028,13 @@ public class ViewDebug {
         }
         FutureTask futureTask = new FutureTask(new Runnable() { // from class: android.view.ViewDebug$$ExternalSyntheticLambda8
             @Override // java.lang.Runnable
-            public final void run() {
-                ViewDebug.dumpViewHierarchyOnUIThread(Context.this, viewGroup, bufferedWriter, i, z, z2);
+            public final void run() throws IOException {
+                ViewDebug.dumpViewHierarchyOnUIThread(context, viewGroup, bufferedWriter, i, z, z2);
             }
         }, null);
-        Message obtain = Message.obtain(handler, futureTask);
-        obtain.setAsynchronous(true);
-        handler.sendMessage(obtain);
+        Message messageObtain = Message.obtain(handler, futureTask);
+        messageObtain.setAsynchronous(true);
+        handler.sendMessage(messageObtain);
         while (true) {
             try {
                 futureTask.get(6000L, TimeUnit.MILLISECONDS);
@@ -1054,11 +1058,11 @@ public class ViewDebug {
     }
 
     private static void cacheExportedProperties(Class<?> cls) {
-        HashMap<Class<?>, PropertyInfo<ExportedProperty, ?>[]> hashMap = sExportProperties;
-        if (hashMap == null || !hashMap.containsKey(cls)) {
+        HashMap<Class<?>, PropertyInfo<ExportedProperty, ?>[]> map = sExportProperties;
+        if (map == null || !map.containsKey(cls)) {
             do {
                 for (PropertyInfo<ExportedProperty, ?> propertyInfo : getExportedProperties(cls)) {
-                    if (!propertyInfo.returnType.isPrimitive() && propertyInfo.property.deepExport()) {
+                    if (!propertyInfo.returnType.isPrimitive() && ((ExportedProperty) propertyInfo.property).deepExport()) {
                         cacheExportedProperties(propertyInfo.returnType);
                     }
                 }
@@ -1069,7 +1073,7 @@ public class ViewDebug {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Multi-variable type inference failed */
-    public static void dumpViewHierarchyOnUIThread(Context context, ViewGroup viewGroup, BufferedWriter bufferedWriter, int i, boolean z, boolean z2) {
+    public static void dumpViewHierarchyOnUIThread(Context context, ViewGroup viewGroup, BufferedWriter bufferedWriter, int i, boolean z, boolean z2) throws IOException {
         boolean z3 = z2;
         if (dumpView(context, viewGroup, bufferedWriter, i, z2) && !z) {
             int childCount = viewGroup.getChildCount();
@@ -1093,7 +1097,7 @@ public class ViewDebug {
         }
     }
 
-    private static boolean dumpView(Context context, View view, BufferedWriter bufferedWriter, int i, boolean z) {
+    private static boolean dumpView(Context context, View view, BufferedWriter bufferedWriter, int i, boolean z) throws IOException {
         for (int i2 = 0; i2 < i; i2++) {
             try {
                 bufferedWriter.write(32);
@@ -1121,16 +1125,12 @@ public class ViewDebug {
         return (PropertyInfo[]) Stream.of((Object[]) new Stream[]{Arrays.stream(methodArr).map(new Function() { // from class: android.view.ViewDebug$$ExternalSyntheticLambda4
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                ViewDebug.PropertyInfo forMethod;
-                forMethod = ViewDebug.PropertyInfo.forMethod((Method) obj, cls);
-                return forMethod;
+                return ViewDebug.PropertyInfo.forMethod((Method) obj, cls);
             }
         }), Arrays.stream(fieldArr).map(new Function() { // from class: android.view.ViewDebug$$ExternalSyntheticLambda5
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                ViewDebug.PropertyInfo forField;
-                forField = ViewDebug.PropertyInfo.forField((Field) obj, cls);
-                return forField;
+                return ViewDebug.PropertyInfo.forField((Field) obj, cls);
             }
         })}).flatMap(Function.identity()).filter(new Predicate() { // from class: android.view.ViewDebug$$ExternalSyntheticLambda6
             @Override // java.util.function.Predicate
@@ -1153,14 +1153,14 @@ public class ViewDebug {
         if (sExportProperties == null) {
             sExportProperties = new HashMap<>();
         }
-        HashMap<Class<?>, PropertyInfo<ExportedProperty, ?>[]> hashMap = sExportProperties;
-        PropertyInfo<ExportedProperty, ?>[] propertyInfoArr = hashMap.get(cls);
+        HashMap<Class<?>, PropertyInfo<ExportedProperty, ?>[]> map = sExportProperties;
+        PropertyInfo<ExportedProperty, ?>[] propertyInfoArr = map.get(cls);
         if (propertyInfoArr != null) {
             return propertyInfoArr;
         }
-        PropertyInfo<ExportedProperty, ?>[] convertToPropertyInfos = convertToPropertyInfos(cls.getDeclaredMethods(), cls.getDeclaredFields(), ExportedProperty.class);
-        hashMap.put(cls, convertToPropertyInfos);
-        return convertToPropertyInfos;
+        PropertyInfo<ExportedProperty, ?>[] propertyInfoArrConvertToPropertyInfos = convertToPropertyInfos(cls.getDeclaredMethods(), cls.getDeclaredFields(), ExportedProperty.class);
+        map.put(cls, propertyInfoArrConvertToPropertyInfos);
+        return propertyInfoArrConvertToPropertyInfos;
     }
 
     private static void dumpViewProperties(Context context, Object obj, BufferedWriter bufferedWriter) throws IOException {
@@ -1172,11 +1172,11 @@ public class ViewDebug {
             bufferedWriter.write(str + "=4,null ");
             return;
         }
-        Class<?> cls = obj.getClass();
+        Class<?> superclass = obj.getClass();
         do {
-            writeExportedProperties(context, obj, bufferedWriter, cls, str);
-            cls = cls.getSuperclass();
-        } while (cls != Object.class);
+            writeExportedProperties(context, obj, bufferedWriter, superclass, str);
+            superclass = superclass.getSuperclass();
+        } while (superclass != Object.class);
     }
 
     private static String formatIntToHexString(int i) {
@@ -1184,63 +1184,63 @@ public class ViewDebug {
     }
 
     private static void writeExportedProperties(Context context, Object obj, BufferedWriter bufferedWriter, Class<?> cls, String str) throws IOException {
-        Object invoke;
+        Object objInvoke;
         String str2;
         BufferedWriter bufferedWriter2;
         boolean z;
         for (PropertyInfo<ExportedProperty, ?> propertyInfo : getExportedProperties(cls)) {
             try {
-                invoke = propertyInfo.invoke(obj);
-                str2 = propertyInfo.property.category().length() != 0 ? propertyInfo.property.category() + ":" : "";
+                objInvoke = propertyInfo.invoke(obj);
+                str2 = ((ExportedProperty) propertyInfo.property).category().length() != 0 ? ((ExportedProperty) propertyInfo.property).category() + ":" : "";
             } catch (Exception unused) {
             }
             if (propertyInfo.returnType == Integer.TYPE || propertyInfo.returnType == Byte.TYPE) {
                 bufferedWriter2 = bufferedWriter;
-                if (propertyInfo.property.resolveId() && context != null) {
-                    invoke = resolveId(context, ((Integer) invoke).intValue());
-                } else if (propertyInfo.property.formatToHexString()) {
+                if (((ExportedProperty) propertyInfo.property).resolveId() && context != null) {
+                    objInvoke = resolveId(context, ((Integer) objInvoke).intValue());
+                } else if (((ExportedProperty) propertyInfo.property).formatToHexString()) {
                     if (propertyInfo.returnType == Integer.TYPE) {
-                        invoke = formatIntToHexString(((Integer) invoke).intValue());
+                        objInvoke = formatIntToHexString(((Integer) objInvoke).intValue());
                     } else if (propertyInfo.returnType == Byte.TYPE) {
-                        invoke = "0x" + HexEncoding.encodeToString(((Byte) invoke).byteValue(), true);
+                        objInvoke = "0x" + HexEncoding.encodeToString(((Byte) objInvoke).byteValue(), true);
                     }
                 } else {
-                    FlagToString[] flagMapping = propertyInfo.property.flagMapping();
-                    if (flagMapping.length > 0) {
-                        exportUnrolledFlags(bufferedWriter2, flagMapping, ((Integer) invoke).intValue(), str2 + str + propertyInfo.name + '_');
+                    FlagToString[] flagToStringArrFlagMapping = ((ExportedProperty) propertyInfo.property).flagMapping();
+                    if (flagToStringArrFlagMapping.length > 0) {
+                        exportUnrolledFlags(bufferedWriter2, flagToStringArrFlagMapping, ((Integer) objInvoke).intValue(), str2 + str + propertyInfo.name + '_');
                     }
-                    IntToString[] mapping = propertyInfo.property.mapping();
-                    if (mapping.length > 0) {
-                        Integer num = (Integer) invoke;
-                        int intValue = num.intValue();
-                        int length = mapping.length;
+                    IntToString[] intToStringArrMapping = ((ExportedProperty) propertyInfo.property).mapping();
+                    if (intToStringArrMapping.length > 0) {
+                        Integer num = (Integer) objInvoke;
+                        int iIntValue = num.intValue();
+                        int length = intToStringArrMapping.length;
                         int i = 0;
                         while (true) {
                             if (i >= length) {
                                 z = false;
                                 break;
                             }
-                            IntToString intToString = mapping[i];
-                            if (intToString.from() == intValue) {
-                                invoke = intToString.to();
+                            IntToString intToString = intToStringArrMapping[i];
+                            if (intToString.from() == iIntValue) {
+                                objInvoke = intToString.to();
                                 z = true;
                                 break;
                             }
                             i++;
                         }
                         if (!z) {
-                            invoke = num;
+                            objInvoke = num;
                         }
                     }
                 }
             } else {
                 if (propertyInfo.returnType == int[].class) {
-                    exportUnrolledArray(context, bufferedWriter, propertyInfo.property, (int[]) invoke, str2 + str + propertyInfo.name + '_', propertyInfo.entrySuffix);
+                    exportUnrolledArray(context, bufferedWriter, (ExportedProperty) propertyInfo.property, (int[]) objInvoke, str2 + str + propertyInfo.name + '_', propertyInfo.entrySuffix);
                 } else {
                     bufferedWriter2 = bufferedWriter;
                     if (propertyInfo.returnType == String[].class) {
-                        String[] strArr = (String[]) invoke;
-                        if (propertyInfo.property.hasAdjacentMapping() && strArr != null) {
+                        String[] strArr = (String[]) objInvoke;
+                        if (((ExportedProperty) propertyInfo.property).hasAdjacentMapping() && strArr != null) {
                             for (int i2 = 0; i2 < strArr.length; i2 += 2) {
                                 if (strArr[i2] != null) {
                                     String str3 = str2 + str;
@@ -1254,12 +1254,12 @@ public class ViewDebug {
                                 }
                             }
                         }
-                    } else if (!propertyInfo.returnType.isPrimitive() && propertyInfo.property.deepExport()) {
-                        dumpViewProperties(context, invoke, bufferedWriter2, str + propertyInfo.property.prefix());
+                    } else if (!propertyInfo.returnType.isPrimitive() && ((ExportedProperty) propertyInfo.property).deepExport()) {
+                        dumpViewProperties(context, objInvoke, bufferedWriter2, str + ((ExportedProperty) propertyInfo.property).prefix());
                     }
                 }
             }
-            writeEntry(bufferedWriter2, str2 + str, propertyInfo.name, propertyInfo.entrySuffix, invoke);
+            writeEntry(bufferedWriter2, str2 + str, propertyInfo.name, propertyInfo.entrySuffix, objInvoke);
         }
     }
 
@@ -1274,11 +1274,11 @@ public class ViewDebug {
 
     private static void exportUnrolledFlags(BufferedWriter bufferedWriter, FlagToString[] flagToStringArr, int i, String str) throws IOException {
         for (FlagToString flagToString : flagToStringArr) {
-            boolean outputIf = flagToString.outputIf();
-            int mask = flagToString.mask() & i;
-            boolean z = mask == flagToString.equals();
-            if ((z && outputIf) || (!z && !outputIf)) {
-                writeEntry(bufferedWriter, str, flagToString.name(), "", formatIntToHexString(mask));
+            boolean zOutputIf = flagToString.outputIf();
+            int iMask = flagToString.mask() & i;
+            boolean z = iMask == flagToString.equals();
+            if ((z && zOutputIf) || (!z && !zOutputIf)) {
+                writeEntry(bufferedWriter, str, flagToString.name(), "", formatIntToHexString(iMask));
             }
         }
     }
@@ -1303,8 +1303,8 @@ public class ViewDebug {
         }
         StringBuilder sb = new StringBuilder();
         for (FlagToString flagToString : flagMapping) {
-            boolean outputIf = flagToString.outputIf();
-            if ((flagToString.mask() & i) == flagToString.equals() && outputIf) {
+            boolean zOutputIf = flagToString.outputIf();
+            if ((flagToString.mask() & i) == flagToString.equals() && zOutputIf) {
                 sb.append(flagToString.name());
                 sb.append(' ');
             }
@@ -1332,46 +1332,48 @@ public class ViewDebug {
     }
 
     private static void exportUnrolledArray(Context context, BufferedWriter bufferedWriter, ExportedProperty exportedProperty, int[] iArr, String str, String str2) throws IOException {
-        String str3;
-        IntToString[] indexMapping = exportedProperty.indexMapping();
-        boolean z = indexMapping.length > 0;
-        IntToString[] mapping = exportedProperty.mapping();
-        boolean z2 = mapping.length > 0;
+        String strValueOf;
+        IntToString[] intToStringArrIndexMapping = exportedProperty.indexMapping();
+        boolean z = intToStringArrIndexMapping.length > 0;
+        IntToString[] intToStringArrMapping = exportedProperty.mapping();
+        boolean z2 = intToStringArrMapping.length > 0;
         boolean z3 = exportedProperty.resolveId() && context != null;
         int length = iArr.length;
         for (int i = 0; i < length; i++) {
             int i2 = iArr[i];
-            String valueOf = String.valueOf(i);
+            String strValueOf2 = String.valueOf(i);
             if (z) {
-                int length2 = indexMapping.length;
+                int length2 = intToStringArrIndexMapping.length;
                 int i3 = 0;
                 while (true) {
                     if (i3 >= length2) {
                         break;
                     }
-                    IntToString intToString = indexMapping[i3];
+                    IntToString intToString = intToStringArrIndexMapping[i3];
                     if (intToString.from() == i) {
-                        valueOf = intToString.to();
+                        strValueOf2 = intToString.to();
                         break;
                     }
                     i3++;
                 }
             }
             if (z2) {
-                for (IntToString intToString2 : mapping) {
+                for (IntToString intToString2 : intToStringArrMapping) {
                     if (intToString2.from() == i2) {
-                        str3 = intToString2.to();
+                        strValueOf = intToString2.to();
                         break;
                     }
                 }
+                strValueOf = null;
+            } else {
+                strValueOf = null;
             }
-            str3 = null;
             if (!z3) {
-                str3 = String.valueOf(i2);
-            } else if (str3 == null) {
-                str3 = (String) resolveId(context, i2);
+                strValueOf = String.valueOf(i2);
+            } else if (strValueOf == null) {
+                strValueOf = (String) resolveId(context, i2);
             }
-            writeEntry(bufferedWriter, str, valueOf, str2, str3);
+            writeEntry(bufferedWriter, str, strValueOf2, str2, strValueOf);
         }
     }
 
@@ -1390,10 +1392,10 @@ public class ViewDebug {
     private static void writeValue(BufferedWriter bufferedWriter, Object obj) throws IOException {
         if (obj != null) {
             try {
-                String replace = obj.toString().replace(ShaderAssembler.NEWLINE, "\\n");
-                bufferedWriter.write(String.valueOf(replace.length()));
+                String strReplace = obj.toString().replace(ShaderAssembler.NEWLINE, "\\n");
+                bufferedWriter.write(String.valueOf(strReplace.length()));
                 bufferedWriter.write(",");
-                bufferedWriter.write(replace);
+                bufferedWriter.write(strReplace);
                 return;
             } catch (Throwable th) {
                 bufferedWriter.write(String.valueOf(11));
@@ -1409,14 +1411,14 @@ public class ViewDebug {
         if (sCapturedViewProperties == null) {
             sCapturedViewProperties = new HashMap<>();
         }
-        HashMap<Class<?>, PropertyInfo<CapturedViewProperty, ?>[]> hashMap = sCapturedViewProperties;
-        PropertyInfo<CapturedViewProperty, ?>[] propertyInfoArr = hashMap.get(cls);
+        HashMap<Class<?>, PropertyInfo<CapturedViewProperty, ?>[]> map = sCapturedViewProperties;
+        PropertyInfo<CapturedViewProperty, ?>[] propertyInfoArr = map.get(cls);
         if (propertyInfoArr != null) {
             return propertyInfoArr;
         }
-        PropertyInfo<CapturedViewProperty, ?>[] convertToPropertyInfos = convertToPropertyInfos(cls.getMethods(), cls.getFields(), CapturedViewProperty.class);
-        hashMap.put(cls, convertToPropertyInfos);
-        return convertToPropertyInfos;
+        PropertyInfo<CapturedViewProperty, ?>[] propertyInfoArrConvertToPropertyInfos = convertToPropertyInfos(cls.getMethods(), cls.getFields(), CapturedViewProperty.class);
+        map.put(cls, propertyInfoArrConvertToPropertyInfos);
+        return propertyInfoArrConvertToPropertyInfos;
     }
 
     private static String exportCapturedViewProperties(Object obj, Class<?> cls, String str) {
@@ -1426,16 +1428,16 @@ public class ViewDebug {
         StringBuilder sb = new StringBuilder();
         for (PropertyInfo<CapturedViewProperty, ?> propertyInfo : getCapturedViewProperties(cls)) {
             try {
-                Object invoke = propertyInfo.invoke(obj);
-                if (propertyInfo.property.retrieveReturn()) {
-                    sb.append(exportCapturedViewProperties(invoke, propertyInfo.returnType, propertyInfo.name + "#"));
+                Object objInvoke = propertyInfo.invoke(obj);
+                if (((CapturedViewProperty) propertyInfo.property).retrieveReturn()) {
+                    sb.append(exportCapturedViewProperties(objInvoke, propertyInfo.returnType, propertyInfo.name + "#"));
                 } else {
                     sb.append(str);
                     sb.append(propertyInfo.name);
                     sb.append(propertyInfo.entrySuffix);
                     sb.append("=");
-                    if (invoke != null) {
-                        sb.append(invoke.toString().replace(ShaderAssembler.NEWLINE, "\\n"));
+                    if (objInvoke != null) {
+                        sb.append(objInvoke.toString().replace(ShaderAssembler.NEWLINE, "\\n"));
                     } else {
                         sb.append(PerfettoProtoLogImpl.NULL_STRING);
                     }
@@ -1456,26 +1458,26 @@ public class ViewDebug {
     }
 
     private static void invokeViewMethod(View view, OutputStream outputStream, String[] strArr) throws IOException {
-        byte[] decode;
+        byte[] bArrDecode;
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream), 32768);
         try {
             if (strArr.length < 2) {
                 throw new IllegalArgumentException("Missing parameter");
             }
-            View findView = findView(view, strArr[0]);
-            if (findView == null) {
+            View viewFindView = findView(view, strArr[0]);
+            if (viewFindView == null) {
                 throw new IllegalArgumentException("View not found: " + strArr[0]);
             }
             String str = strArr[1];
             if (strArr.length < 2) {
-                decode = new byte[0];
+                bArrDecode = new byte[0];
             } else {
-                decode = Base64.decode(strArr[2], 2);
+                bArrDecode = Base64.decode(strArr[2], 2);
             }
-            byte[] invokeViewMethod = invokeViewMethod(findView, str, ByteBuffer.wrap(decode));
+            byte[] bArrInvokeViewMethod = invokeViewMethod(viewFindView, str, ByteBuffer.wrap(bArrDecode));
             bufferedWriter.write("1");
             bufferedWriter.newLine();
-            bufferedWriter.write(Base64.encodeToString(invokeViewMethod, 2));
+            bufferedWriter.write(Base64.encodeToString(bArrInvokeViewMethod, 2));
             bufferedWriter.newLine();
         } catch (Exception e) {
             bufferedWriter.write("-1");
@@ -1487,7 +1489,7 @@ public class ViewDebug {
         }
     }
 
-    public static byte[] invokeViewMethod(final View view, String str, ByteBuffer byteBuffer) throws ViewMethodInvocationSerializationException {
+    public static byte[] invokeViewMethod(final View view, String str, ByteBuffer byteBuffer) throws ExecutionException, ViewMethodInvocationSerializationException, InterruptedException, NoSuchMethodException, SecurityException {
         final Object[] objArr;
         Class<?>[] clsArr;
         if (!byteBuffer.hasRemaining()) {
@@ -1507,9 +1509,7 @@ public class ViewDebug {
                 FutureTask futureTask = new FutureTask(new Callable() { // from class: android.view.ViewDebug$$ExternalSyntheticLambda3
                     @Override // java.util.concurrent.Callable
                     public final Object call() {
-                        Object invoke;
-                        invoke = method.invoke(view, objArr);
-                        return invoke;
+                        return method.invoke(view, objArr);
                     }
                 });
                 view.post(futureTask);
@@ -1530,7 +1530,7 @@ public class ViewDebug {
         }
     }
 
-    public static void setLayoutParameter(final View view, String str, int i) throws NoSuchFieldException, IllegalAccessException {
+    public static void setLayoutParameter(final View view, String str, int i) throws IllegalAccessException, NoSuchFieldException, IllegalArgumentException {
         final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         Field field = layoutParams.getClass().getField(str);
         if (field.getType() != Integer.TYPE) {
@@ -1540,7 +1540,7 @@ public class ViewDebug {
         view.post(new Runnable() { // from class: android.view.ViewDebug.4
             @Override // java.lang.Runnable
             public void run() {
-                View.this.setLayoutParams(layoutParams);
+                view.setLayoutParams(layoutParams);
             }
         });
     }
@@ -1552,12 +1552,12 @@ public class ViewDebug {
 
         @Override // android.view.ViewDebug.CanvasProvider
         public Canvas getCanvas(View view, int i, int i2) {
-            Bitmap createBitmap = Bitmap.createBitmap(view.getResources().getDisplayMetrics(), i, i2, Bitmap.Config.ARGB_8888);
-            this.mBitmap = createBitmap;
-            if (createBitmap == null) {
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(view.getResources().getDisplayMetrics(), i, i2, Bitmap.Config.ARGB_8888);
+            this.mBitmap = bitmapCreateBitmap;
+            if (bitmapCreateBitmap == null) {
                 throw new OutOfMemoryError();
             }
-            createBitmap.setDensity(view.getResources().getDisplayMetrics().densityDpi);
+            bitmapCreateBitmap.setDensity(view.getResources().getDisplayMetrics().densityDpi);
             if (view.mAttachInfo != null) {
                 this.mCanvas = view.mAttachInfo.mCanvas;
             }

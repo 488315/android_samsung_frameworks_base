@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PresetTraceConfigs {
     public static final TraceOptions BATTERY_TRACE_OPTIONS;
@@ -29,7 +28,6 @@ public class PresetTraceConfigs {
     public static Set mThermalTagList;
     public static Set mUiTagList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TraceOptions {
         public final boolean apps;
         public final boolean attachToBugreport;
@@ -51,10 +49,10 @@ public class PresetTraceConfigs {
     }
 
     static {
-        List asList = Arrays.asList("aidl", "am", "binder_driver", "camera", "cpm", "dalvik", "disk", "freq", "gfx", "hal", "idle", "input", "memory", "memreclaim", "network", "power", "res", "sched", ImsProfile.SERVICE_SS, "sync", "thermal", "view", "webview", "wm", "workq");
-        DEFAULT_TRACE_TAGS = asList;
-        PERFORMANCE_TRACE_TAGS = asList;
-        UI_TRACE_TAGS = asList;
+        List listAsList = Arrays.asList("aidl", "am", "binder_driver", "camera", "cpm", "dalvik", "disk", "freq", "gfx", "hal", "idle", "input", "memory", "memreclaim", "network", "power", "res", "sched", ImsProfile.SERVICE_SS, "sync", "thermal", "view", "webview", "wm", "workq");
+        DEFAULT_TRACE_TAGS = listAsList;
+        PERFORMANCE_TRACE_TAGS = listAsList;
+        UI_TRACE_TAGS = listAsList;
         THERMAL_TRACE_TAGS = Arrays.asList("aidl", "am", "binder_driver", "camera", "dalvik", "disk", "freq", "gfx", "hal", "idle", "input", "memory", "memreclaim", "network", "power", "res", "sched", ImsProfile.SERVICE_SS, "sync", "thermal", "thermal_tj", "view", "webview", "wm", "workq");
         BATTERY_TRACE_TAGS = Arrays.asList("aidl", "am", "binder_driver", "network", "nnapi", "pm", "power", ImsProfile.SERVICE_SS, "thermal", "wm");
         USER_BUILD_DISABLED_TRACE_TAGS = Arrays.asList("workq", "sync");

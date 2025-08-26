@@ -91,7 +91,7 @@ public final class SuspendDialogInfo implements Parcelable {
         return this.mNeutralButtonAction;
     }
 
-    public void saveToXml(TypedXmlSerializer typedXmlSerializer) throws IOException {
+    public void saveToXml(TypedXmlSerializer typedXmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         int i = this.mIconResId;
         if (i != 0) {
             typedXmlSerializer.attributeInt(null, "iconResId", i);
@@ -122,29 +122,29 @@ public final class SuspendDialogInfo implements Parcelable {
         try {
             int attributeInt = typedXmlPullParser.getAttributeInt(null, "iconResId", 0);
             int attributeInt2 = typedXmlPullParser.getAttributeInt(null, XML_ATTR_TITLE_RES_ID, 0);
-            String readStringAttribute = XmlUtils.readStringAttribute(typedXmlPullParser, "title");
+            String stringAttribute = XmlUtils.readStringAttribute(typedXmlPullParser, "title");
             int attributeInt3 = typedXmlPullParser.getAttributeInt(null, XML_ATTR_BUTTON_TEXT_RES_ID, 0);
-            String readStringAttribute2 = XmlUtils.readStringAttribute(typedXmlPullParser, XML_ATTR_BUTTON_TEXT);
+            String stringAttribute2 = XmlUtils.readStringAttribute(typedXmlPullParser, XML_ATTR_BUTTON_TEXT);
             int attributeInt4 = typedXmlPullParser.getAttributeInt(null, XML_ATTR_BUTTON_ACTION, 0);
             int attributeInt5 = typedXmlPullParser.getAttributeInt(null, XML_ATTR_DIALOG_MESSAGE_RES_ID, 0);
-            String readStringAttribute3 = XmlUtils.readStringAttribute(typedXmlPullParser, XML_ATTR_DIALOG_MESSAGE);
+            String stringAttribute3 = XmlUtils.readStringAttribute(typedXmlPullParser, XML_ATTR_DIALOG_MESSAGE);
             if (attributeInt != 0) {
                 builder.setIcon(attributeInt);
             }
             if (attributeInt2 != 0) {
                 builder.setTitle(attributeInt2);
-            } else if (readStringAttribute != null) {
-                builder.setTitle(readStringAttribute);
+            } else if (stringAttribute != null) {
+                builder.setTitle(stringAttribute);
             }
             if (attributeInt3 != 0) {
                 builder.setNeutralButtonText(attributeInt3);
-            } else if (readStringAttribute2 != null) {
-                builder.setNeutralButtonText(readStringAttribute2);
+            } else if (stringAttribute2 != null) {
+                builder.setNeutralButtonText(stringAttribute2);
             }
             if (attributeInt5 != 0) {
                 builder.setMessage(attributeInt5);
-            } else if (readStringAttribute3 != null) {
-                builder.setMessage(readStringAttribute3);
+            } else if (stringAttribute3 != null) {
+                builder.setMessage(stringAttribute3);
             }
             builder.setNeutralButtonAction(attributeInt4);
         } catch (Exception e) {

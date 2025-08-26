@@ -1,36 +1,48 @@
 package com.android.wm.shell.desktopmode;
 
-import android.R;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.app.ActivityOptions;
 import android.app.ActivityTaskManager;
 import android.app.KeyguardManager;
 import android.app.PendingIntent;
+import android.app.PictureInPictureParams;
 import android.app.TaskInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.hardware.devicestate.DeviceStateManager;
+import android.hardware.display.DisplayManager;
+import android.net.Uri;
+import android.os.BadParcelableException;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Parcel;
+import android.os.ServiceManager;
+import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.ArrayMap;
 import android.util.IndentingPrintWriter;
+import android.util.Log;
+import android.util.Pair;
 import android.util.Slog;
 import android.view.Display;
 import android.view.DragEvent;
+import android.view.IWindowManager;
 import android.view.MotionEvent;
 import android.view.SurfaceControl;
-import android.view.SurfaceControlViewHost;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 import android.window.DesktopExperienceFlags;
@@ -38,9 +50,12 @@ import android.window.DesktopModeFlags;
 import android.window.DisplayAreaInfo;
 import android.window.RemoteTransition;
 import android.window.TransitionInfo;
+import android.window.TransitionRequestInfo;
 import android.window.WindowContainerToken;
 import android.window.WindowContainerTransaction;
+import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
+import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import androidx.core.util.SparseArrayKt$valueIterator$1;
@@ -49,6 +64,8 @@ import com.android.internal.policy.DesktopModeCompatUtils;
 import com.android.internal.policy.SystemBarUtils;
 import com.android.internal.protolog.ProtoLog;
 import com.android.keyguard.ActiveUnlockConfig$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0;
+import com.android.systemui.R;
 import com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$$ExternalSyntheticOutline0;
 import com.android.wm.shell.RootTaskDisplayAreaOrganizer;
@@ -59,6 +76,7 @@ import com.android.wm.shell.common.DisplayController;
 import com.android.wm.shell.common.DisplayLayout;
 import com.android.wm.shell.common.DragHintToFullscreenManager;
 import com.android.wm.shell.common.ExternalInterfaceBinder;
+import com.android.wm.shell.common.HandlerExecutor;
 import com.android.wm.shell.common.HomeIntentProvider;
 import com.android.wm.shell.common.MultiInstanceHelper;
 import com.android.wm.shell.common.RemoteCallable;
@@ -66,6 +84,7 @@ import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.common.SingleInstanceRemoteListener;
 import com.android.wm.shell.common.SyncTransactionQueue;
 import com.android.wm.shell.common.UserProfileContexts;
+import com.android.wm.shell.common.pip.PipUtils;
 import com.android.wm.shell.desktopmode.DesktopImmersiveController;
 import com.android.wm.shell.desktopmode.DesktopMixedTransitionHandler;
 import com.android.wm.shell.desktopmode.DesktopModeEventLogger;
@@ -87,12 +106,14 @@ import com.android.wm.shell.desktopmode.multidesks.RootTaskDesksOrganizer;
 import com.android.wm.shell.desktopmode.persistence.DesktopRepositoryInitializer;
 import com.android.wm.shell.desktopmode.persistence.DesktopRepositoryInitializerImpl;
 import com.android.wm.shell.draganddrop.DragAndDropController;
-import com.android.wm.shell.draganddrop.GlobalDragListener$onUnhandledDrop$1;
+import com.android.wm.shell.draganddrop.GlobalDragListener;
 import com.android.wm.shell.freeform.FreeformTaskTransitionStarter;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.recents.RecentTasksController;
 import com.android.wm.shell.recents.RecentsTransitionHandler;
 import com.android.wm.shell.recents.RecentsTransitionStateListener;
+import com.android.wm.shell.shared.GroupedTaskInfo;
+import com.android.wm.shell.shared.TransitionUtil;
 import com.android.wm.shell.shared.desktopmode.DesktopConfig;
 import com.android.wm.shell.shared.desktopmode.DesktopConfigImpl;
 import com.android.wm.shell.shared.desktopmode.DesktopModeCompatPolicy;
@@ -116,14 +137,21 @@ import com.android.wm.shell.windowdecor.tiling.DesktopTilingDecorViewModel;
 import com.android.wm.shell.windowdecor.tiling.DesktopTilingDividerWindowManager;
 import com.android.wm.shell.windowdecor.tiling.DesktopTilingWindowDecoration;
 import com.android.wm.shell.windowdecor.tiling.DesktopTilingWindowDecoration$$ExternalSyntheticLambda2;
+import com.samsung.android.core.CoreSaLogger;
+import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
+import com.samsung.android.multiwindow.MultiWindowCoreState;
+import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
 import com.sec.ims.volte2.data.VolteConstants;
+import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -133,43 +161,53 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import kotlin.ExceptionsKt__ExceptionsKt;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.Result;
+import kotlin.ResultKt;
 import kotlin.Triple;
 import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysJvmKt;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.collections.EmptyList;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.SafeContinuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.jvm.internal.SpreadBuilder;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlin.sequences.FilteringSequence;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.Sequence;
 import kotlin.sequences.SequencesKt___SequencesKt;
+import kotlin.sequences.TransformingSequence;
+import kotlin.text.CharsKt__CharJVMKt;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopTasksController implements RemoteCallable, Transitions.TransitionHandler, DragAndDropController.DragAndDropListener, UserChangeListener {
     public final Optional bubbleController;
     public final Context context;
-    public DefaultDisplayDesktopModeChangeListener defaultDisplayDesktopModeChangeListener;
-    public Executor defaultDisplayDesktopModeChangeListenerExecutor;
+    public DesktopModeWindowDecorViewModel.AnonymousClass1 decorViewModelDesktopDisabledChangeListener;
+    public final List defaultDisplayDesktopModeChangeListenerExecutors;
+    public final List defaultDisplayDesktopModeChangeListeners;
+    public DesktopTasksController$IDesktopModeImpl$deskChangeListener$1 deskChangeListener;
     public final DesksOrganizer desksOrganizer;
     public final DesksTransitionObserver desksTransitionObserver;
     public final DesktopConfig desktopConfig;
+    public DesktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1 desktopDisabledFlagsListener;
+    public int desktopDisabledFlagsOnDefaultDisplay;
     public final ShellExecutor desktopExecutor;
     public final DesktopImmersiveController desktopImmersiveController;
     public final DesktopMixedTransitionHandler desktopMixedTransitionHandler;
@@ -179,10 +217,13 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
     public final DesktopModeEventLogger desktopModeEventLogger;
     public final DesktopModeShellCommandHandler desktopModeShellCommandHandler;
     public final DesktopModeUiEventLogger desktopModeUiEventLogger;
+    public Long desktopStartMillis;
+    public Long desktopStartMillisOnExternal;
     public final DesktopState desktopState;
     public final Optional desktopTasksLimiter;
     public final DesktopWallpaperActivityTokenProvider desktopWallpaperActivityTokenProvider;
     public final DisplayController displayController;
+    public final DisplayManager displayManager;
     public final DragAndDropController dragAndDropController;
     public Binder dragAndDropFullscreenCookie;
     public DragHintToFullscreenManager dragHintToFullscreenManager;
@@ -225,15 +266,16 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
     public static final float DESKTOP_MODE_INITIAL_BOUNDS_SCALE = SystemProperties.getInt("persist.wm.debug.desktop_mode_initial_bounds_scale", 75) / 100.0f;
     public static final long APP_HANDLE_DRAG_HOLD_CUJ_TIMEOUT_MS = TimeUnit.SECONDS.toMillis(10);
     public static final IBinder SYNTHETIC_TRANSITION = new Binder();
-    public final DesktopTasksController$$ExternalSyntheticLambda1 mOnAnimationFinishedCallback = new DesktopTasksController$$ExternalSyntheticLambda1(this);
+    public static final long SA_DURATION_UNIT_MS = TimeUnit.MINUTES.toMillis(1);
+    public final DesktopTasksController$$ExternalSyntheticLambda1 mOnAnimationFinishedCallback = new DesktopTasksController$$ExternalSyntheticLambda1(this, 0);
     public final DesktopTasksController$dragToDesktopStateListener$1 dragToDesktopStateListener = new DesktopTasksController$dragToDesktopStateListener$1(this);
     public int recentsTransitionState = 1;
+    public final ArrayList taskIdsOfTabletMode = new ArrayList();
+    public int disableConnectDisplayIdBeforeUserSwitch = -1;
     public final DesktopModeImpl desktopMode = new DesktopModeImpl();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -267,127 +309,25 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DefaultDisplayDesktopModeChangeListener {
         void onDefaultDisplayDesktopModeChanged(boolean z);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DesktopModeImpl implements DesktopMode {
         public DesktopModeImpl() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IDesktopModeImpl extends IDesktopMode$Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public DesktopTasksController controller;
         public final SingleInstanceRemoteListener remoteListener;
-        public final DesktopTasksController$IDesktopModeImpl$deskChangeListener$1 deskChangeListener = new DesktopRepository.DeskChangeListener() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$IDesktopModeImpl$deskChangeListener$1
-            @Override // com.android.wm.shell.desktopmode.DesktopRepository.DeskChangeListener
-            public final void onActiveDeskChanged(final int i, final int i2, final int i3) {
-                ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "IDesktopModeImpl: onActiveDeskChanged display=%d new=%d old=%d", new Object[]{Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3)});
-                SingleInstanceRemoteListener singleInstanceRemoteListener = DesktopTasksController.IDesktopModeImpl.this.remoteListener;
-                if (singleInstanceRemoteListener == null) {
-                    singleInstanceRemoteListener = null;
-                }
-                singleInstanceRemoteListener.call(new SingleInstanceRemoteListener.RemoteCall() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$IDesktopModeImpl$deskChangeListener$1$onActiveDeskChanged$1
-                    @Override // com.android.wm.shell.common.SingleInstanceRemoteListener.RemoteCall
-                    public final void accept(Object obj) {
-                        IDesktopTaskListener$Stub$Proxy iDesktopTaskListener$Stub$Proxy = (IDesktopTaskListener$Stub$Proxy) ((IDesktopTaskListener) obj);
-                        int i4 = i;
-                        int i5 = i2;
-                        int i6 = i3;
-                        Parcel obtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
-                        try {
-                            obtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
-                            obtain.writeInt(i4);
-                            obtain.writeInt(i5);
-                            obtain.writeInt(i6);
-                            iDesktopTaskListener$Stub$Proxy.mRemote.transact(10, obtain, null, 1);
-                        } finally {
-                            obtain.recycle();
-                        }
-                    }
-                });
-            }
-
-            @Override // com.android.wm.shell.desktopmode.DesktopRepository.DeskChangeListener
-            public final void onCanCreateDesksChanged(final boolean z) {
-                if (!CoreRune.DW_MULTIPLE_DESKS) {
-                    ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "IDesktopModeImpl: onCanCreateDesksChanged do not support multiple desks", new Object[0]);
-                    return;
-                }
-                ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "IDesktopModeImpl: onCanCreateDesksChanged canCreateDesks=%b", new Object[]{Boolean.valueOf(z)});
-                SingleInstanceRemoteListener singleInstanceRemoteListener = DesktopTasksController.IDesktopModeImpl.this.remoteListener;
-                if (singleInstanceRemoteListener == null) {
-                    singleInstanceRemoteListener = null;
-                }
-                singleInstanceRemoteListener.call(new SingleInstanceRemoteListener.RemoteCall() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$IDesktopModeImpl$deskChangeListener$1$onCanCreateDesksChanged$1
-                    @Override // com.android.wm.shell.common.SingleInstanceRemoteListener.RemoteCall
-                    public final void accept(Object obj) {
-                        boolean z2 = z;
-                        IDesktopTaskListener$Stub$Proxy iDesktopTaskListener$Stub$Proxy = (IDesktopTaskListener$Stub$Proxy) ((IDesktopTaskListener) obj);
-                        Parcel obtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
-                        try {
-                            obtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
-                            obtain.writeBoolean(z2);
-                            iDesktopTaskListener$Stub$Proxy.mRemote.transact(7, obtain, null, 1);
-                        } finally {
-                            obtain.recycle();
-                        }
-                    }
-                });
-            }
-
-            /* JADX WARN: Code restructure failed: missing block: B:58:0x0078, code lost:
-            
-                if (r0 == null) goto L24;
-             */
-            @Override // com.android.wm.shell.desktopmode.DesktopRepository.DeskChangeListener
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public final void onDeskAdded(final int r8, final int r9) {
-                /*
-                    Method dump skipped, instructions count: 304
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.DesktopTasksController$IDesktopModeImpl$deskChangeListener$1.onDeskAdded(int, int):void");
-            }
-
-            @Override // com.android.wm.shell.desktopmode.DesktopRepository.DeskChangeListener
-            public final void onDeskRemoved(final int i, final int i2) {
-                ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "IDesktopModeImpl: onDeskRemoved display=%d deskId=%d", new Object[]{Integer.valueOf(i), Integer.valueOf(i2)});
-                SingleInstanceRemoteListener singleInstanceRemoteListener = DesktopTasksController.IDesktopModeImpl.this.remoteListener;
-                if (singleInstanceRemoteListener == null) {
-                    singleInstanceRemoteListener = null;
-                }
-                singleInstanceRemoteListener.call(new SingleInstanceRemoteListener.RemoteCall() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$IDesktopModeImpl$deskChangeListener$1$onDeskRemoved$1
-                    @Override // com.android.wm.shell.common.SingleInstanceRemoteListener.RemoteCall
-                    public final void accept(Object obj) {
-                        IDesktopTaskListener$Stub$Proxy iDesktopTaskListener$Stub$Proxy = (IDesktopTaskListener$Stub$Proxy) ((IDesktopTaskListener) obj);
-                        int i3 = i;
-                        int i4 = i2;
-                        Parcel obtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
-                        try {
-                            obtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
-                            obtain.writeInt(i3);
-                            obtain.writeInt(i4);
-                            iDesktopTaskListener$Stub$Proxy.mRemote.transact(9, obtain, null, 1);
-                        } finally {
-                            obtain.recycle();
-                        }
-                    }
-                });
-            }
-        };
+        public final DesktopTasksController$IDesktopModeImpl$deskChangeListener$1 deskChangeListener = new DesktopTasksController$IDesktopModeImpl$deskChangeListener$1(this);
         public final DesktopTasksController$IDesktopModeImpl$visibleTasksListener$1 visibleTasksListener = new DesktopRepository.VisibleTasksListener() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$IDesktopModeImpl$visibleTasksListener$1
             @Override // com.android.wm.shell.desktopmode.DesktopRepository.VisibleTasksListener
             public final void onTasksVisibilityChanged(final int i, final int i2) {
                 ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "IDesktopModeImpl: onVisibilityChanged display=%d visible=%d", new Object[]{Integer.valueOf(i), Integer.valueOf(i2)});
-                SingleInstanceRemoteListener singleInstanceRemoteListener = DesktopTasksController.IDesktopModeImpl.this.remoteListener;
+                SingleInstanceRemoteListener singleInstanceRemoteListener = this.this$0.remoteListener;
                 if (singleInstanceRemoteListener == null) {
                     singleInstanceRemoteListener = null;
                 }
@@ -397,14 +337,14 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                         IDesktopTaskListener$Stub$Proxy iDesktopTaskListener$Stub$Proxy = (IDesktopTaskListener$Stub$Proxy) ((IDesktopTaskListener) obj);
                         int i3 = i;
                         int i4 = i2;
-                        Parcel obtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
+                        Parcel parcelObtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
                         try {
-                            obtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
-                            obtain.writeInt(i3);
-                            obtain.writeInt(i4);
-                            iDesktopTaskListener$Stub$Proxy.mRemote.transact(2, obtain, null, 1);
+                            parcelObtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
+                            parcelObtain.writeInt(i3);
+                            parcelObtain.writeInt(i4);
+                            iDesktopTaskListener$Stub$Proxy.mRemote.transact(2, parcelObtain, null, 1);
                         } finally {
-                            obtain.recycle();
+                            parcelObtain.recycle();
                         }
                     }
                 });
@@ -413,8 +353,8 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         public final DesktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 taskbarDesktopTaskListener = new DesktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1(this);
         public final DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 desktopModeEntryExitTransitionListener = new DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1(this);
         public final DesktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 exitDesktopModeListener = new DesktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1(this);
+        public final DesktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1 desktopDisabledFlagsListener = new DesktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1(this);
 
-        /* JADX WARN: Type inference failed for: r4v1, types: [com.android.wm.shell.desktopmode.DesktopTasksController$IDesktopModeImpl$deskChangeListener$1] */
         /* JADX WARN: Type inference failed for: r4v2, types: [com.android.wm.shell.desktopmode.DesktopTasksController$IDesktopModeImpl$visibleTasksListener$1] */
         public IDesktopModeImpl(DesktopTasksController desktopTasksController) {
             this.controller = desktopTasksController;
@@ -431,58 +371,59 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     singleInstanceRemoteListener.call(new SingleInstanceRemoteListener.RemoteCall() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$IDesktopModeImpl$syncInitialState$1
                         @Override // com.android.wm.shell.common.SingleInstanceRemoteListener.RemoteCall
                         public final void accept(Object obj2) {
+                            DesktopModeWindowDecorViewModel.AnonymousClass1 anonymousClass1;
                             IDesktopTaskListener iDesktopTaskListener = (IDesktopTaskListener) obj2;
-                            DesktopTasksController desktopTasksController3 = DesktopTasksController.this;
+                            DesktopTasksController desktopTasksController3 = desktopTasksController2;
                             DesktopRepository.DesktopData desktopData = desktopTasksController3.taskRepository.desktopData;
-                            FilteringSequence filter = SequencesKt___SequencesKt.filter(desktopData.desksSequence(), new DesktopRepository$$ExternalSyntheticLambda2(4));
+                            FilteringSequence filteringSequenceFilter = SequencesKt___SequencesKt.filter(desktopData.desksSequence(), new DesktopRepository$$ExternalSyntheticLambda0(6));
                             LinkedHashMap linkedHashMap = new LinkedHashMap();
-                            FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(filter);
-                            while (filteringSequence$iterator$1.hasNext()) {
-                                Object next = filteringSequence$iterator$1.next();
-                                Integer valueOf = Integer.valueOf(((DesktopRepository.Desk) next).displayId);
-                                Object obj3 = linkedHashMap.get(valueOf);
-                                if (obj3 == null) {
-                                    obj3 = new ArrayList();
-                                    linkedHashMap.put(valueOf, obj3);
+                            FilteringSequence.AnonymousClass1 anonymousClass12 = filteringSequenceFilter.new AnonymousClass1();
+                            while (anonymousClass12.hasNext()) {
+                                Object next = anonymousClass12.next();
+                                Integer numValueOf = Integer.valueOf(((DesktopRepository.Desk) next).displayId);
+                                Object arrayList = linkedHashMap.get(numValueOf);
+                                if (arrayList == null) {
+                                    arrayList = new ArrayList();
+                                    linkedHashMap.put(numValueOf, arrayList);
                                 }
-                                ((List) obj3).add(next);
+                                ((List) arrayList).add(next);
                             }
-                            ArrayList arrayList = new ArrayList(linkedHashMap.size());
+                            ArrayList arrayList2 = new ArrayList(linkedHashMap.size());
                             for (Map.Entry entry : linkedHashMap.entrySet()) {
-                                int intValue = ((Number) entry.getKey()).intValue();
+                                int iIntValue = ((Number) entry.getKey()).intValue();
                                 List list = (List) entry.getValue();
-                                DesktopRepository.Desk activeDesk = desktopData.getActiveDesk(intValue);
-                                Integer valueOf2 = activeDesk != null ? Integer.valueOf(activeDesk.deskId) : null;
+                                DesktopRepository.Desk activeDesk = desktopData.getActiveDesk(iIntValue);
+                                Integer numValueOf2 = activeDesk != null ? Integer.valueOf(activeDesk.deskId) : null;
                                 DisplayDeskState displayDeskState = new DisplayDeskState();
-                                displayDeskState.displayId = intValue;
-                                displayDeskState.activeDeskId = valueOf2 != null ? valueOf2.intValue() : -1;
+                                displayDeskState.displayId = iIntValue;
+                                displayDeskState.activeDeskId = numValueOf2 != null ? numValueOf2.intValue() : -1;
                                 List list2 = list;
-                                ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
+                                ArrayList arrayList3 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
                                 Iterator it = list2.iterator();
                                 while (it.hasNext()) {
-                                    arrayList2.add(Integer.valueOf(((DesktopRepository.Desk) it.next()).deskId));
+                                    arrayList3.add(Integer.valueOf(((DesktopRepository.Desk) it.next()).deskId));
                                 }
-                                displayDeskState.deskIds = CollectionsKt___CollectionsKt.toIntArray(arrayList2);
-                                arrayList.add(displayDeskState);
+                                displayDeskState.deskIds = CollectionsKt___CollectionsKt.toIntArray(arrayList3);
+                                arrayList2.add(displayDeskState);
                             }
-                            boolean z = false;
-                            DisplayDeskState[] displayDeskStateArr = (DisplayDeskState[]) arrayList.toArray(new DisplayDeskState[0]);
-                            if (CoreRune.DW_MULTIPLE_DESKS) {
-                                DesktopRepository desktopRepository = desktopTasksController3.taskRepository;
-                                int i = ((DesktopConfigImpl) desktopTasksController3.desktopConfig).maxDeskLimit;
-                                if (i == 0 || desktopRepository.desktopData.getNumberOfDesks() < i) {
-                                    z = true;
-                                }
-                            }
+                            DisplayDeskState[] displayDeskStateArr = (DisplayDeskState[]) arrayList2.toArray(new DisplayDeskState[0]);
+                            boolean zCanCreateDesks$default = CoreRune.DW_MULTIPLE_DESKS ? DesktopTasksController.canCreateDesks$default(desktopTasksController3) : false;
                             IDesktopTaskListener$Stub$Proxy iDesktopTaskListener$Stub$Proxy = (IDesktopTaskListener$Stub$Proxy) iDesktopTaskListener;
-                            Parcel obtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
+                            Parcel parcelObtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
                             try {
-                                obtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
-                                obtain.writeTypedArray(displayDeskStateArr, 0);
-                                obtain.writeBoolean(z);
-                                iDesktopTaskListener$Stub$Proxy.mRemote.transact(1, obtain, null, 1);
-                            } finally {
-                                obtain.recycle();
+                                parcelObtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
+                                parcelObtain.writeTypedArray(displayDeskStateArr, 0);
+                                parcelObtain.writeBoolean(zCanCreateDesks$default);
+                                iDesktopTaskListener$Stub$Proxy.mRemote.transact(1, parcelObtain, null, 1);
+                                parcelObtain.recycle();
+                                iDesktopTaskListener$Stub$Proxy.onDesktopDisabledFlagsChangedOnDefaultDisplay(desktopTasksController3.desktopDisabledFlagsOnDefaultDisplay);
+                                if (!CoreRune.MW_CAPTION_DESKTOP_DISABLED || (anonymousClass1 = desktopTasksController3.decorViewModelDesktopDisabledChangeListener) == null) {
+                                    return;
+                                }
+                                anonymousClass1.onDesktopDisabledFlagsChangedOnDefaultDisplay(desktopTasksController3.desktopDisabledFlagsOnDefaultDisplay);
+                            } catch (Throwable th) {
+                                parcelObtain.recycle();
+                                throw th;
                             }
                         }
                     });
@@ -495,6 +436,8 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     desktopTasksController2.taskbarDesktopTaskListener = iDesktopModeImpl.taskbarDesktopTaskListener;
                     desktopTasksController2.desktopModeEnterExitTransitionListener = iDesktopModeImpl.desktopModeEntryExitTransitionListener;
                     desktopTasksController2.exitDesktopModeListener = iDesktopModeImpl.exitDesktopModeListener;
+                    desktopTasksController2.desktopDisabledFlagsListener = iDesktopModeImpl.desktopDisabledFlagsListener;
+                    desktopTasksController2.deskChangeListener = iDesktopModeImpl.deskChangeListener;
                 }
             }, new Consumer() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController.IDesktopModeImpl.2
                 @Override // java.util.function.Consumer
@@ -511,6 +454,8 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     desktopTasksController2.taskbarDesktopTaskListener = null;
                     desktopTasksController2.desktopModeEnterExitTransitionListener = null;
                     desktopTasksController2.exitDesktopModeListener = null;
+                    desktopTasksController2.desktopDisabledFlagsListener = null;
+                    desktopTasksController2.deskChangeListener = null;
                 }
             });
         }
@@ -528,7 +473,6 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SnapPosition {
         public static final /* synthetic */ SnapPosition[] $VALUES;
         public static final SnapPosition LEFT;
@@ -556,7 +500,6 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -609,6 +552,121 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
     }
 
+    /* renamed from: com.android.wm.shell.desktopmode.DesktopTasksController$createDeskRoot$1, reason: invalid class name and case insensitive filesystem */
+    public final class C12011 implements DesksOrganizer.OnCreateCallback {
+        public final /* synthetic */ int $displayId;
+        public final /* synthetic */ Function1 $onResult;
+        public final /* synthetic */ int $userId;
+
+        public C12011(int i, int i2, Function1 function1) {
+            this.$displayId = i;
+            this.$userId = i2;
+            this.$onResult = function1;
+        }
+
+        public final void onCreated(int i) {
+            Object[] objArr = {Integer.valueOf(i), Integer.valueOf(this.$displayId), Integer.valueOf(this.$userId)};
+            Companion companion = DesktopTasksController.Companion;
+            DesktopTasksController.this.getClass();
+            DesktopTasksController.logD$1("createDesk obtained deskId=%d for displayId=%d and userId=%d", objArr);
+            this.$onResult.mo781invoke(Integer.valueOf(i));
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.DesktopTasksController$moveTaskToDefaultDeskAndActivate$1, reason: invalid class name and case insensitive filesystem */
+    final class C12021 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $displayId;
+        final /* synthetic */ RemoteTransition $remoteTransition;
+        final /* synthetic */ int $taskId;
+        final /* synthetic */ DesktopModeTransitionSource $transitionSource;
+        final /* synthetic */ WindowContainerTransaction $wct;
+        int I$0;
+        Object L$0;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C12021(int i, int i2, WindowContainerTransaction windowContainerTransaction, DesktopModeTransitionSource desktopModeTransitionSource, RemoteTransition remoteTransition, Continuation continuation) {
+            super(2, continuation);
+            this.$taskId = i;
+            this.$displayId = i2;
+            this.$wct = windowContainerTransaction;
+            this.$transitionSource = desktopModeTransitionSource;
+            this.$remoteTransition = remoteTransition;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return DesktopTasksController.this.new C12021(this.$taskId, this.$displayId, this.$wct, this.$transitionSource, this.$remoteTransition, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C12021) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Type inference failed for: r5v0, types: [com.android.wm.shell.desktopmode.DesktopTasksController$createDeskSuspending$2$1] */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            Object orThrow;
+            DesktopTasksController desktopTasksController;
+            int i;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i2 = this.label;
+            try {
+                if (i2 == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    DesktopTasksController desktopTasksController2 = DesktopTasksController.this;
+                    int i3 = this.$taskId;
+                    int i4 = this.$displayId;
+                    this.L$0 = desktopTasksController2;
+                    this.I$0 = i3;
+                    this.label = 1;
+                    Integer defaultDeskId = desktopTasksController2.taskRepository.getDefaultDeskId(i4);
+                    if (defaultDeskId != null) {
+                        orThrow = new Integer(defaultDeskId.intValue());
+                    } else {
+                        int i5 = desktopTasksController2.userId;
+                        final SafeContinuation safeContinuation = new SafeContinuation(IntrinsicsKt__IntrinsicsJvmKt.intercepted(this));
+                        DesktopTasksController.createDesk$default(desktopTasksController2, i4, i5, false, new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$createDeskSuspending$2$1
+                            @Override // kotlin.jvm.functions.Function1
+                            /* renamed from: invoke */
+                            public final Object mo781invoke(Object obj2) {
+                                int iIntValue = ((Number) obj2).intValue();
+                                int i6 = Result.$r8$clinit;
+                                safeContinuation.resumeWith(Integer.valueOf(iIntValue));
+                                return Unit.INSTANCE;
+                            }
+                        }, 24);
+                        orThrow = safeContinuation.getOrThrow();
+                    }
+                    if (orThrow == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                    desktopTasksController = desktopTasksController2;
+                    i = i3;
+                    obj = orThrow;
+                } else {
+                    if (i2 != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    int i6 = this.I$0;
+                    DesktopTasksController desktopTasksController3 = (DesktopTasksController) this.L$0;
+                    ResultKt.throwOnFailure(obj);
+                    i = i6;
+                    desktopTasksController = desktopTasksController3;
+                }
+                DesktopTasksController.moveTaskToDesk$default(desktopTasksController, i, ((Number) obj).intValue(), this.$wct, this.$transitionSource, this.$remoteTransition, 32);
+            } catch (Throwable th) {
+                DesktopTasksController desktopTasksController4 = DesktopTasksController.this;
+                Object[] objArr = {th.getMessage()};
+                Companion companion = DesktopTasksController.Companion;
+                desktopTasksController4.getClass();
+                DesktopTasksController.logE("Failed to move task to default desk: %s", objArr);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     public DesktopTasksController(Context context, ShellInit shellInit, ShellCommandHandler shellCommandHandler, ShellController shellController, DisplayController displayController, ShellTaskOrganizer shellTaskOrganizer, SyncTransactionQueue syncTransactionQueue, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, DragAndDropController dragAndDropController, Transitions transitions, KeyguardManager keyguardManager, ReturnToDragStartAnimator returnToDragStartAnimator, DesktopMixedTransitionHandler desktopMixedTransitionHandler, EnterDesktopTaskTransitionHandler enterDesktopTaskTransitionHandler, ExitDesktopTaskTransitionHandler exitDesktopTaskTransitionHandler, DesktopModeDragAndDropTransitionHandler desktopModeDragAndDropTransitionHandler, ToggleResizeDesktopTaskTransitionHandler toggleResizeDesktopTaskTransitionHandler, DragToDesktopTransitionHandler dragToDesktopTransitionHandler, DesktopImmersiveController desktopImmersiveController, DesktopUserRepositories desktopUserRepositories, DesktopRepositoryInitializer desktopRepositoryInitializer, RecentsTransitionHandler recentsTransitionHandler, MultiInstanceHelper multiInstanceHelper, ShellExecutor shellExecutor, CoroutineScope coroutineScope, ShellExecutor shellExecutor2, Optional<DesktopTasksLimiter> optional, RecentTasksController recentTasksController, InteractionJankMonitor interactionJankMonitor, Handler handler, FocusTransitionObserver focusTransitionObserver, DesktopModeEventLogger desktopModeEventLogger, DesktopModeUiEventLogger desktopModeUiEventLogger, DesktopWallpaperActivityTokenProvider desktopWallpaperActivityTokenProvider, Optional<BubbleController> optional2, OverviewToDesktopTransitionObserver overviewToDesktopTransitionObserver, DesksOrganizer desksOrganizer, DesksTransitionObserver desksTransitionObserver, UserProfileContexts userProfileContexts, DesktopModeCompatPolicy desktopModeCompatPolicy, DragToDisplayTransitionHandler dragToDisplayTransitionHandler, DesktopModeMoveToDisplayTransitionHandler desktopModeMoveToDisplayTransitionHandler, HomeIntentProvider homeIntentProvider, DesktopState desktopState, DesktopConfig desktopConfig) {
         this.context = context;
         this.shellCommandHandler = shellCommandHandler;
@@ -654,10 +712,12 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         this.desktopState = desktopState;
         this.desktopConfig = desktopConfig;
         this.desktopModeShellCommandHandler = new DesktopModeShellCommandHandler(this, focusTransitionObserver);
+        this.displayManager = (DisplayManager) context.getSystemService(DisplayManager.class);
         if (((DesktopStateImpl) desktopState).canEnterDesktopMode) {
             shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController.1
                 @Override // java.lang.Runnable
                 public final void run() {
+                    RecentTasksController recentTasksController2;
                     DeviceStateManager deviceStateManager;
                     final DesktopTasksController desktopTasksController = DesktopTasksController.this;
                     Companion companion = DesktopTasksController.Companion;
@@ -665,8 +725,8 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     DesktopTasksController.logD$1("onInit", new Object[0]);
                     BiConsumer biConsumer = new BiConsumer() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$onInit$1
                         @Override // java.util.function.BiConsumer
-                        public final void accept(Object obj, Object obj2) {
-                            DesktopTasksController.this.dump$2((PrintWriter) obj, (String) obj2);
+                        public final void accept(Object obj, Object obj2) throws Resources.NotFoundException {
+                            desktopTasksController.dump$2((PrintWriter) obj, (String) obj2);
                         }
                     };
                     ShellCommandHandler shellCommandHandler2 = desktopTasksController.shellCommandHandler;
@@ -675,7 +735,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     Supplier supplier = new Supplier() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$onInit$2
                         @Override // java.util.function.Supplier
                         public final Object get() {
-                            DesktopTasksController desktopTasksController2 = DesktopTasksController.this;
+                            DesktopTasksController desktopTasksController2 = desktopTasksController;
                             DesktopTasksController.Companion companion2 = DesktopTasksController.Companion;
                             desktopTasksController2.getClass();
                             return new DesktopTasksController.IDesktopModeImpl(desktopTasksController2);
@@ -687,13 +747,13 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     desktopTasksController.updateCurrentUser(ActivityManager.getCurrentUser());
                     desktopTasksController.transitions.addHandler(desktopTasksController);
                     desktopTasksController.dragToDesktopTransitionHandler.dragToDesktopStateListener = desktopTasksController.dragToDesktopStateListener;
-                    desktopTasksController.recentsTransitionHandler.mStateListeners.add(new RecentsTransitionStateListener() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$onInit$3
+                    RecentsTransitionStateListener recentsTransitionStateListener = new RecentsTransitionStateListener() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$onInit$3
                         @Override // com.android.wm.shell.recents.RecentsTransitionStateListener
                         public final void onTransitionStateChanged(int i) {
                             DesktopTilingDividerWindowManager desktopTilingDividerWindowManager;
                             String str = i != 1 ? i != 2 ? i != 3 ? "UNKNOWN" : "TRANSITION_STATE_ANIMATING" : "TRANSITION_STATE_REQUESTED" : "TRANSITION_STATE_NOT_RUNNING";
                             DesktopTasksController.Companion companion2 = DesktopTasksController.Companion;
-                            DesktopTasksController desktopTasksController2 = DesktopTasksController.this;
+                            DesktopTasksController desktopTasksController2 = desktopTasksController;
                             desktopTasksController2.getClass();
                             DesktopTasksController.logV$1("Recents transition state changed: %s", str);
                             desktopTasksController2.recentsTransitionState = i;
@@ -723,39 +783,103 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                                 }
                             }
                         }
-                    });
+                    };
+                    RecentsTransitionHandler recentsTransitionHandler2 = desktopTasksController.recentsTransitionHandler;
+                    recentsTransitionHandler2.mStateListeners.add(recentsTransitionStateListener);
                     desktopTasksController.dragAndDropController.mListeners.add(desktopTasksController);
-                    if (!CoreRune.DW_MULTI_FOLD_POLICY || (deviceStateManager = (DeviceStateManager) desktopTasksController.context.getSystemService(DeviceStateManager.class)) == null) {
-                        return;
-                    }
-                    deviceStateManager.registerCallback(desktopTasksController.mainExecutor, new DeviceStateManager.FoldStateListener(desktopTasksController.context, new Consumer() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$onInit$4
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            Integer activeDeskId;
-                            Boolean bool = (Boolean) obj;
-                            if (bool != null) {
-                                DesktopTasksController desktopTasksController2 = DesktopTasksController.this;
-                                boolean booleanValue = bool.booleanValue();
-                                DesktopTasksController.Companion companion2 = DesktopTasksController.Companion;
-                                desktopTasksController2.getClass();
-                                if (booleanValue) {
-                                    DesktopStateImpl.Companion.getClass();
-                                    if (!DesktopStateImpl.Companion.inDesktopWindowing(0) || (activeDeskId = desktopTasksController2.taskRepository.getActiveDeskId(0)) == null) {
-                                        return;
-                                    }
-                                    WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-                                    desktopTasksController2.moveHomeTaskToTop(windowContainerTransaction, 0);
-                                    desktopTasksController2.prepareDeskDeactivationIfNeeded(windowContainerTransaction, activeDeskId);
-                                    desktopTasksController2.shellTaskOrganizer.applyTransaction(windowContainerTransaction);
-                                    desktopTasksController2.taskRepository.setDeskInactive(activeDeskId.intValue());
-                                    DesktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 = desktopTasksController2.exitDesktopModeListener;
-                                    if (desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 != null) {
-                                        desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1.onExitDesktopModeStarted();
+                    if (CoreRune.DW_MULTI_FOLD_POLICY && (deviceStateManager = (DeviceStateManager) desktopTasksController.context.getSystemService(DeviceStateManager.class)) != null) {
+                        deviceStateManager.registerCallback(desktopTasksController.mainExecutor, new DeviceStateManager.FoldStateListener(desktopTasksController.context, new Consumer() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$onInit$4
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) throws Resources.NotFoundException {
+                                Boolean bool = (Boolean) obj;
+                                if (bool != null) {
+                                    DesktopTasksController desktopTasksController2 = desktopTasksController;
+                                    boolean zBooleanValue = bool.booleanValue();
+                                    DesktopTasksController.Companion companion2 = DesktopTasksController.Companion;
+                                    desktopTasksController2.getClass();
+                                    if (zBooleanValue) {
+                                        DesktopStateImpl.Companion.getClass();
+                                        if (DesktopStateImpl.Companion.inDesktopWindowing(0)) {
+                                            DesktopTasksController.exitDefaultDisplayDesktopWindowing$default(desktopTasksController2, null, 3);
+                                        }
                                     }
                                 }
                             }
+                        }));
+                    }
+                    final Uri uri = Uri.parse("content://com.samsung.android.smartmirroring/smart_view_connected");
+                    final Uri uri2 = Uri.parse("content://com.samsung.android.secondscreen/second_screen_connected");
+                    final Handler handler2 = desktopTasksController.handler;
+                    ContentObserver contentObserver = new ContentObserver(handler2) { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$registerDesktopDisabledObservers$settingsObserver$1
+                        @Override // android.database.ContentObserver
+                        public final void onChange(boolean z, Uri uri3) throws Resources.NotFoundException {
+                            if (uri3 == null) {
+                                return;
+                            }
+                            if (!uri3.equals(uri)) {
+                                if (uri3.equals(uri2)) {
+                                    DesktopTasksController desktopTasksController2 = desktopTasksController;
+                                    String type = desktopTasksController2.context.getContentResolver().getType(Uri.parse("content://com.samsung.android.secondscreen/second_screen_connected"));
+                                    if (type != null) {
+                                        if (Boolean.parseBoolean(type)) {
+                                            desktopTasksController2.addDesktopDisabledFlagsOnDefaultDisplay(4);
+                                            return;
+                                        } else {
+                                            desktopTasksController2.removeDesktopDisabledFlagsOnDefaultDisplay(4);
+                                            return;
+                                        }
+                                    }
+                                    return;
+                                }
+                                return;
+                            }
+                            DesktopTasksController desktopTasksController3 = desktopTasksController;
+                            String type2 = desktopTasksController3.context.getContentResolver().getType(Uri.parse("content://com.samsung.android.smartmirroring/smart_view_connected"));
+                            if (type2 != null) {
+                                if (!Boolean.parseBoolean(type2)) {
+                                    desktopTasksController3.removeDesktopDisabledFlagsOnDefaultDisplay(2);
+                                    return;
+                                }
+                                if (desktopTasksController3.taskRepository.getActiveDeskId(0) != null) {
+                                    desktopTasksController3.showDesktopDisabledToast(Integer.valueOf(R.string.dw_desktop_disabled_while_smart_view_is_in_use));
+                                    DesktopTasksController.exitDefaultDisplayDesktopWindowing$default(desktopTasksController3, null, 3);
+                                }
+                                desktopTasksController3.addDesktopDisabledFlagsOnDefaultDisplay(2);
+                            }
                         }
-                    }));
+                    };
+                    uri.getClass();
+                    try {
+                        desktopTasksController.context.getContentResolver().registerContentObserver(uri, false, contentObserver);
+                    } catch (SecurityException unused) {
+                        DesktopTasksController.logD$1("registerObserver can not register observer", new Object[0]);
+                    }
+                    uri2.getClass();
+                    try {
+                        desktopTasksController.context.getContentResolver().registerContentObserver(uri2, false, contentObserver);
+                    } catch (SecurityException unused2) {
+                        DesktopTasksController.logD$1("registerObserver can not register observer", new Object[0]);
+                    }
+                    int i = desktopTasksController.desktopDisabledFlagsOnDefaultDisplay;
+                    if (!MultiWindowCoreState.MW_ENABLED) {
+                        i |= 1;
+                    }
+                    if (Boolean.parseBoolean(desktopTasksController.context.getContentResolver().getType(Uri.parse("content://com.samsung.android.smartmirroring/smart_view_connected")))) {
+                        i |= 2;
+                    }
+                    if (Boolean.parseBoolean(desktopTasksController.context.getContentResolver().getType(Uri.parse("content://com.samsung.android.secondscreen/second_screen_connected")))) {
+                        i |= 4;
+                    }
+                    IWindowManager iWindowManagerAsInterface = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
+                    if (iWindowManagerAsInterface != null && iWindowManagerAsInterface.isSafeModeEnabled()) {
+                        i |= 8;
+                    }
+                    desktopTasksController.desktopDisabledFlagsOnDefaultDisplay = i;
+                    recentsTransitionHandler2.mDesktopTasksController = desktopTasksController;
+                    if (!CoreRune.DW_DESK_LABEL || (recentTasksController2 = desktopTasksController.recentTasksController) == null) {
+                        return;
+                    }
+                    recentTasksController2.mDesktopTasksController = desktopTasksController;
                 }
             }, this);
         }
@@ -774,9 +898,9 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     desktopTasksController.createDeskRoot(i2, i, new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$createDeskRootSuspending$2$1
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             int i4 = Result.$r8$clinit;
-                            Continuation.this.resumeWith((Integer) obj);
+                            safeContinuation.resumeWith((Integer) obj);
                             return Unit.INSTANCE;
                         }
                     });
@@ -787,7 +911,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             };
             desktopRepositoryInitializerImpl.deskActivationFactory = new DesktopRepositoryInitializer.DeskActivationFactory() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController.3
                 @Override // com.android.wm.shell.desktopmode.persistence.DesktopRepositoryInitializer.DeskActivationFactory
-                public final Object activeDesk(int i, Continuation continuation) {
+                public final Object activeDesk(int i, Continuation continuation) throws Resources.NotFoundException {
                     Companion companion = DesktopTasksController.Companion;
                     DesktopTasksController desktopTasksController = DesktopTasksController.this;
                     desktopTasksController.getClass();
@@ -795,14 +919,14 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     Function1 function1 = new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$activeDeskSuspending$2$1
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             int i2 = Result.$r8$clinit;
-                            Continuation.this.resumeWith((Integer) obj);
+                            safeContinuation.resumeWith((Integer) obj);
                             return Unit.INSTANCE;
                         }
                     };
                     DesktopTasksController.activateDesk$default(desktopTasksController, i, null, 0, 0, 14);
-                    function1.mo779invoke(Integer.valueOf(i));
+                    function1.mo781invoke(Integer.valueOf(i));
                     Object orThrow = safeContinuation.getOrThrow();
                     CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
                     if (orThrow != coroutineSingletons) {
@@ -811,19 +935,34 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     return orThrow == coroutineSingletons ? orThrow : Unit.INSTANCE;
                 }
             };
-            optional.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda2
-                @Override // kotlin.jvm.functions.Function1
-                /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    DesktopTasksController.Companion companion = DesktopTasksController.Companion;
-                    ((DesktopTasksLimiter) obj).desktopTasksController = DesktopTasksController.this;
-                    return Unit.INSTANCE;
-                }
-            }));
+            optional.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda2(this, 0)));
         }
+        shellTaskOrganizer.registerMultiWindowCoreStateListener(new ShellTaskOrganizer.MultiWindowCoreStateChangeListener() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController.5
+            @Override // com.android.wm.shell.ShellTaskOrganizer.MultiWindowCoreStateChangeListener
+            public final boolean onMultiWindowCoreStateChanged(int i) throws Resources.NotFoundException {
+                Companion companion = DesktopTasksController.Companion;
+                DesktopTasksController desktopTasksController = DesktopTasksController.this;
+                desktopTasksController.getClass();
+                if ((i & 1) == 0) {
+                    return false;
+                }
+                if (MultiWindowCoreState.MW_ENABLED) {
+                    desktopTasksController.removeDesktopDisabledFlagsOnDefaultDisplay(1);
+                    return true;
+                }
+                DesktopStateImpl.Companion.getClass();
+                if (DesktopStateImpl.Companion.inDesktopWindowing(0)) {
+                    DesktopTasksController.exitDefaultDisplayDesktopWindowing$default(desktopTasksController, null, 3);
+                }
+                desktopTasksController.addDesktopDisabledFlagsOnDefaultDisplay(1);
+                return true;
+            }
+        });
+        this.defaultDisplayDesktopModeChangeListeners = new ArrayList();
+        this.defaultDisplayDesktopModeChangeListenerExecutors = new ArrayList();
     }
 
-    public static /* synthetic */ void activateDesk$default(DesktopTasksController desktopTasksController, int i, RemoteTransition remoteTransition, int i2, int i3, int i4) {
+    public static /* synthetic */ void activateDesk$default(DesktopTasksController desktopTasksController, int i, RemoteTransition remoteTransition, int i2, int i3, int i4) throws Resources.NotFoundException {
         if ((i4 & 2) != 0) {
             remoteTransition = null;
         }
@@ -837,30 +976,36 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public static Function1 addDeskActivationChanges$default(final DesktopTasksController desktopTasksController, final int i, WindowContainerTransaction windowContainerTransaction, TaskInfo taskInfo, int i2, int i3, int i4) {
-        int i5;
-        final Integer num;
+    /* JADX WARN: Removed duplicated region for block: B:134:0x02c3  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public static Function1 addDeskActivationChanges$default(final DesktopTasksController desktopTasksController, final int i, WindowContainerTransaction windowContainerTransaction, TaskInfo taskInfo, int i2, int i3, int i4) throws Resources.NotFoundException {
+        ShellTaskOrganizer shellTaskOrganizer;
+        DesktopModeVisualIndicator desktopModeVisualIndicator;
+        final Integer taskIdToMinimize;
+        int i5 = 1;
         final TaskInfo taskInfo2 = (i4 & 4) != 0 ? null : taskInfo;
         int i6 = 0;
         final boolean z = (i4 & 8) == 0;
         int i7 = (i4 & 16) != 0 ? -1 : i2;
         final int displayForDesk = (i4 & 32) != 0 ? i7 != -1 ? i7 : desktopTasksController.taskRepository.desktopData.getDisplayForDesk(i) : i3;
         desktopTasksController.getClass();
-        Integer valueOf = taskInfo2 != null ? Integer.valueOf(taskInfo2.taskId) : null;
+        Integer numValueOf = taskInfo2 != null ? Integer.valueOf(taskInfo2.taskId) : null;
         logV$1("addDeskActivationChanges newTaskId=%d deskId=%d displayId=%d", taskInfo2 != null ? Integer.valueOf(taskInfo2.taskId) : null, Integer.valueOf(i), Integer.valueOf(displayForDesk));
-        boolean isTrue = DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue();
-        ShellTaskOrganizer shellTaskOrganizer = desktopTasksController.shellTaskOrganizer;
-        if (!isTrue) {
-            Integer valueOf2 = taskInfo2 != null ? Integer.valueOf(taskInfo2.taskId) : null;
-            logV$1("bringDesktopAppsToFront, newTaskId=%d", valueOf2);
+        boolean zIsTrue = DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue();
+        ShellTaskOrganizer shellTaskOrganizer2 = desktopTasksController.shellTaskOrganizer;
+        if (!zIsTrue) {
+            Integer numValueOf2 = taskInfo2 != null ? Integer.valueOf(taskInfo2.taskId) : null;
+            logV$1("bringDesktopAppsToFront, newTaskId=%d", numValueOf2);
             desktopTasksController.prepareForDeskActivation(windowContainerTransaction, displayForDesk);
             List expandedTasksOrdered = desktopTasksController.taskRepository.getExpandedTasksOrdered(displayForDesk);
-            if (valueOf2 == null || !desktopTasksController.desktopTasksLimiter.isPresent()) {
-                num = null;
+            if (numValueOf2 == null || !desktopTasksController.desktopTasksLimiter.isPresent()) {
+                taskIdToMinimize = null;
             } else {
                 DesktopTasksLimiter desktopTasksLimiter = (DesktopTasksLimiter) desktopTasksController.desktopTasksLimiter.get();
                 int i8 = DesktopTasksLimiter.$r8$clinit;
-                num = desktopTasksLimiter.getTaskIdToMinimize(expandedTasksOrdered, valueOf2, false);
+                taskIdToMinimize = desktopTasksLimiter.getTaskIdToMinimize(expandedTasksOrdered, numValueOf2, false);
             }
             ArrayList arrayList = new ArrayList();
             ArrayList arrayList2 = (ArrayList) expandedTasksOrdered;
@@ -868,42 +1013,42 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             while (i6 < size) {
                 Object obj = arrayList2.get(i6);
                 i6++;
-                int intValue = ((Number) obj).intValue();
-                if (num == null || intValue != num.intValue()) {
+                int iIntValue = ((Number) obj).intValue();
+                if (taskIdToMinimize == null || iIntValue != taskIdToMinimize.intValue()) {
                     arrayList.add(obj);
                 }
             }
             Iterator it = CollectionsKt___CollectionsKt.reversed(arrayList).iterator();
             while (it.hasNext()) {
-                int intValue2 = ((Number) it.next()).intValue();
-                ActivityManager.RunningTaskInfo runningTaskInfo = shellTaskOrganizer.getRunningTaskInfo(intValue2);
+                int iIntValue2 = ((Number) it.next()).intValue();
+                ActivityManager.RunningTaskInfo runningTaskInfo = shellTaskOrganizer2.getRunningTaskInfo(iIntValue2);
                 if (runningTaskInfo != null) {
                     windowContainerTransaction.reorder(runningTaskInfo.token, true);
                 } else if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_PERSISTENCE.isTrue()) {
-                    ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                    makeBasic.setLaunchWindowingMode(5);
-                    makeBasic.setSplashScreenStyle(1);
-                    windowContainerTransaction.startTask(intValue2, makeBasic.toBundle());
+                    ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                    activityOptionsMakeBasic.setLaunchWindowingMode(5);
+                    activityOptionsMakeBasic.setSplashScreenStyle(1);
+                    windowContainerTransaction.startTask(iIntValue2, activityOptionsMakeBasic.toBundle());
                 }
             }
             DesktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController.taskbarDesktopTaskListener;
             if (desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 != null) {
                 desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1.onTaskbarCornerRoundingUpdate(desktopTasksController.doesAnyTaskRequireTaskbarRounding(displayForDesk, null));
             }
-            return new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda3
+            return new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda4
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     TaskInfo taskInfo3 = taskInfo2;
                     IBinder iBinder = (IBinder) obj2;
                     DesktopTasksController.Companion companion = DesktopTasksController.Companion;
-                    Integer num2 = num;
+                    Integer num = taskIdToMinimize;
                     DesktopTasksController desktopTasksController2 = desktopTasksController;
-                    if (num2 != null) {
-                        desktopTasksController2.addPendingMinimizeTransition(iBinder, num2.intValue(), DesktopModeEventLogger.Companion.MinimizeReason.TASK_LIMIT);
+                    if (num != null) {
+                        desktopTasksController2.addPendingMinimizeTransition(iBinder, num.intValue(), DesktopModeEventLogger.Companion.MinimizeReason.TASK_LIMIT);
                     }
                     if (taskInfo3 != null && z) {
-                        desktopTasksController2.addPendingAppLaunchTransition(iBinder, taskInfo3.taskId, num2);
+                        desktopTasksController2.addPendingAppLaunchTransition(iBinder, taskInfo3.taskId, num);
                     }
                     return Unit.INSTANCE;
                 }
@@ -917,16 +1062,116 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 ((Executor) entry.getValue()).execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$postPendingOnDeskAddedIfNeeded$1$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DesktopRepository.DeskChangeListener.this.onDeskAdded(displayForDesk, i);
+                        deskChangeListener.onDeskAdded(displayForDesk, i);
                         DesktopRepository desktopRepository2 = desktopRepository;
                         int i9 = DesktopRepository.$r8$clinit;
                         if (desktopRepository2.canCreateDesks()) {
                             return;
                         }
-                        DesktopRepository.DeskChangeListener.this.onCanCreateDesksChanged(false);
+                        deskChangeListener.onCanCreateDesksChanged(false);
                     }
                 });
             }
+        }
+        if (CoreRune.DW_DESK_LABEL && (desktopModeVisualIndicator = desktopTasksController.visualIndicator) == null) {
+            if (desktopModeVisualIndicator == null) {
+                Context context = desktopTasksController.context;
+                BubbleController bubbleController = (BubbleController) desktopTasksController.bubbleController.orElse(null);
+                BubblePositioner bubblePositioner = bubbleController != null ? bubbleController.mBubblePositioner : null;
+                DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = desktopTasksController.snapEventHandler;
+                shellTaskOrganizer = shellTaskOrganizer2;
+                desktopModeVisualIndicator = new DesktopModeVisualIndicator(desktopTasksController.desktopExecutor, desktopTasksController.mainExecutor, desktopTasksController.syncQueue, displayForDesk, desktopTasksController.displayController, desktopTasksController.rootTaskDisplayAreaOrganizer, context, bubblePositioner, desktopModeWindowDecorViewModel == null ? null : desktopModeWindowDecorViewModel, desktopTasksController.recentTasksController);
+            } else {
+                shellTaskOrganizer = shellTaskOrganizer2;
+            }
+            if (desktopTasksController.visualIndicator == null) {
+                desktopTasksController.visualIndicator = desktopModeVisualIndicator;
+            }
+            DesktopModeVisualIndicator desktopModeVisualIndicator2 = desktopTasksController.visualIndicator;
+            if (desktopModeVisualIndicator2 != null) {
+                final DesktopTasksController$$ExternalSyntheticLambda1 desktopTasksController$$ExternalSyntheticLambda1 = new DesktopTasksController$$ExternalSyntheticLambda1(desktopTasksController, 1);
+                final Integer numValueOf3 = Integer.valueOf(i);
+                final VisualIndicatorViewContainer visualIndicatorViewContainer = desktopModeVisualIndicator2.mVisualIndicatorViewContainer;
+                visualIndicatorViewContainer.getClass();
+                visualIndicatorViewContainer.desktopExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$startDeskLabelAnimator$1
+                    /* JADX WARN: Multi-variable type inference failed */
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        View view = visualIndicatorViewContainer.indicatorView;
+                        final View viewFindViewById = view != null ? view.findViewById(R.id.labelContainer) : null;
+                        if (viewFindViewById != null) {
+                            viewFindViewById.setAlpha(1.0f);
+                        }
+                        final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
+                        final VisualIndicatorViewContainer visualIndicatorViewContainer2 = visualIndicatorViewContainer;
+                        ShellExecutor shellExecutor = visualIndicatorViewContainer2.mainExecutor;
+                        final Integer num = numValueOf3;
+                        shellExecutor.executeBlocking(new Runnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$startDeskLabelAnimator$1.1
+                            /* JADX WARN: Multi-variable type inference failed */
+                            /* JADX WARN: Removed duplicated region for block: B:11:0x001c  */
+                            @Override // java.lang.Runnable
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                            */
+                            public final void run() {
+                                GroupedTaskInfo deskForSnapshot;
+                                RecentTasksController recentTasksController;
+                                Ref$ObjectRef ref$ObjectRef2 = ref$ObjectRef;
+                                Integer num2 = num;
+                                T deskLabel = 0;
+                                deskLabel = 0;
+                                deskLabel = 0;
+                                if (num2 != null) {
+                                    VisualIndicatorViewContainer visualIndicatorViewContainer3 = visualIndicatorViewContainer2;
+                                    int iIntValue3 = num2.intValue();
+                                    RecentTasksController recentTasksController2 = visualIndicatorViewContainer3.recentsTasksController;
+                                    Integer deskLabel2 = recentTasksController2 != null ? recentTasksController2.getDeskLabel(iIntValue3) : null;
+                                    if (deskLabel2 == null) {
+                                        RecentTasksController recentTasksController3 = visualIndicatorViewContainer2.recentsTasksController;
+                                        if (recentTasksController3 != null && (deskForSnapshot = recentTasksController3.getDeskForSnapshot()) != null && (recentTasksController = visualIndicatorViewContainer2.recentsTasksController) != null) {
+                                            if (deskForSnapshot.mType == 4) {
+                                                throw new IllegalStateException("No desk ID for a mixed task");
+                                            }
+                                            deskLabel = recentTasksController.getDeskLabel(deskForSnapshot.mDeskId);
+                                        }
+                                    } else {
+                                        deskLabel = deskLabel2;
+                                    }
+                                }
+                                ref$ObjectRef2.element = deskLabel;
+                            }
+                        });
+                        visualIndicatorViewContainer.addDeskLabel((Integer) ref$ObjectRef.element);
+                        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+                        final VisualIndicatorViewContainer visualIndicatorViewContainer3 = visualIndicatorViewContainer;
+                        final Function0 function0 = desktopTasksController$$ExternalSyntheticLambda1;
+                        valueAnimatorOfFloat.setStartDelay(1000L);
+                        valueAnimatorOfFloat.setDuration(300L);
+                        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$startDeskLabelAnimator$1$animator$1$1
+                            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                View view2 = viewFindViewById;
+                                if (view2 != null) {
+                                    view2.setAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                                }
+                            }
+                        });
+                        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$startDeskLabelAnimator$1$animator$1$2
+                            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                            public final void onAnimationEnd(Animator animator) {
+                                visualIndicatorViewContainer3.releaseVisualIndicator();
+                                Function0 function02 = function0;
+                                if (function02 != null) {
+                                    function02.invoke();
+                                }
+                            }
+                        });
+                        valueAnimatorOfFloat.start();
+                    }
+                });
+            }
+        } else {
+            shellTaskOrganizer = shellTaskOrganizer2;
         }
         desktopTasksController.prepareForDeskActivation(windowContainerTransaction, displayForDesk);
         DesksOrganizer desksOrganizer = desktopTasksController.desksOrganizer;
@@ -959,7 +1204,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
         final Ref$ObjectRef ref$ObjectRef2 = new Ref$ObjectRef();
         DesktopTasksLimiter desktopTasksLimiter2 = (DesktopTasksLimiter) desktopTasksController.desktopTasksLimiter.orElse(null);
-        T taskIdsToMinimize$default = desktopTasksLimiter2 != null ? DesktopTasksLimiter.getTaskIdsToMinimize$default(desktopTasksLimiter2, expandedTasksIdsInDeskOrdered, valueOf) : 0;
+        T taskIdsToMinimize$default = desktopTasksLimiter2 != null ? DesktopTasksLimiter.getTaskIdsToMinimize$default(desktopTasksLimiter2, expandedTasksIdsInDeskOrdered, numValueOf) : 0;
         ref$ObjectRef2.element = taskIdsToMinimize$default;
         List list = (List) taskIdsToMinimize$default;
         if (list != null) {
@@ -971,80 +1216,110 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 }
             }
         }
-        if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_PERSISTENCE.isTrue()) {
+        boolean zIsTrue2 = DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_PERSISTENCE.isTrue();
+        DisplayController displayController = desktopTasksController.displayController;
+        if (zIsTrue2) {
             ArrayList arrayList3 = new ArrayList();
             ArrayList arrayList4 = (ArrayList) expandedTasksIdsInDeskOrdered;
             int size2 = arrayList4.size();
             int i9 = 0;
             while (i9 < size2) {
+                int i10 = i5;
                 Object obj4 = arrayList4.get(i9);
-                i9 += i5;
-                int intValue3 = ((Number) obj4).intValue();
+                i9++;
+                int iIntValue3 = ((Number) obj4).intValue();
+                DesksOrganizer desksOrganizer2 = desksOrganizer;
                 T t = ref$ObjectRef2.element;
-                if (t != 0) {
-                    i5 = ((List) t).contains(Integer.valueOf(intValue3)) ? 1 : 1;
-                    arrayList3.add(obj4);
-                } else {
-                    Integer num2 = (Integer) ref$ObjectRef.element;
-                    if (num2 != null && intValue3 == num2.intValue()) {
+                if (t == 0) {
+                    Integer num = (Integer) ref$ObjectRef.element;
+                    if (num != null && iIntValue3 == num.intValue()) {
                     }
+                } else if (!((List) t).contains(Integer.valueOf(iIntValue3))) {
                     arrayList3.add(obj4);
                 }
+                i5 = i10;
+                desksOrganizer = desksOrganizer2;
             }
+            DesksOrganizer desksOrganizer3 = desksOrganizer;
+            int i11 = i5;
             Iterator it3 = CollectionsKt___CollectionsKt.reversed(arrayList3).iterator();
             while (it3.hasNext()) {
-                int intValue4 = ((Number) it3.next()).intValue();
-                ActivityManager.RunningTaskInfo runningTaskInfo3 = shellTaskOrganizer.getRunningTaskInfo(intValue4);
+                int iIntValue4 = ((Number) it3.next()).intValue();
+                ActivityManager.RunningTaskInfo runningTaskInfo3 = shellTaskOrganizer.getRunningTaskInfo(iIntValue4);
                 if (runningTaskInfo3 == null) {
-                    ActivityOptions makeBasic2 = ActivityOptions.makeBasic();
-                    makeBasic2.setLaunchWindowingMode(5);
-                    makeBasic2.setSplashScreenStyle(1);
-                    windowContainerTransaction.startTask(intValue4, makeBasic2.toBundle());
+                    ActivityOptions activityOptionsMakeBasic2 = ActivityOptions.makeBasic();
+                    activityOptionsMakeBasic2.setLaunchWindowingMode(5);
+                    activityOptionsMakeBasic2.setSplashScreenStyle(i11);
+                    DisplayLayout displayLayout = displayController.getDisplayLayout(displayForDesk);
+                    activityOptionsMakeBasic2.setLaunchBounds(displayLayout != null ? DesktopModeUtils.calculateDefaultDesktopTaskBounds(displayLayout) : null);
+                    Unit unit = Unit.INSTANCE;
+                    windowContainerTransaction.startTask(iIntValue4, activityOptionsMakeBasic2.toBundle());
                 } else if (runningTaskInfo3.parentTaskId != i) {
-                    ((RootTaskDesksOrganizer) desksOrganizer).moveTaskToDesk(windowContainerTransaction, i, runningTaskInfo3);
+                    ((RootTaskDesksOrganizer) desksOrganizer3).moveTaskToDesk(windowContainerTransaction, i, runningTaskInfo3);
                 } else {
-                    ((RootTaskDesksOrganizer) desksOrganizer).reorderTaskToFront(windowContainerTransaction, i, runningTaskInfo3);
+                    ((RootTaskDesksOrganizer) desksOrganizer3).reorderTaskToFront(windowContainerTransaction, i, runningTaskInfo3);
                 }
+                i11 = 1;
             }
         }
         Integer activeDeskId = desktopTasksController.taskRepository.getActiveDeskId(displayForDesk);
-        final DesktopTasksController$$ExternalSyntheticLambda5 prepareDeskDeactivationIfNeeded = desktopTasksController.prepareDeskDeactivationIfNeeded(windowContainerTransaction, (activeDeskId == null || activeDeskId.intValue() == i) ? null : activeDeskId);
+        Integer num2 = (activeDeskId == null || activeDeskId.intValue() == i) ? null : activeDeskId;
+        boolean z2 = CoreRune.MW_SA_LOGGING;
+        final DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3PrepareDeskDeactivationIfNeeded$default = prepareDeskDeactivationIfNeeded$default(desktopTasksController, windowContainerTransaction, num2, 0, 0, 12);
         if (displayForDesk == 0) {
             DesktopStateImpl.Companion.getClass();
-            DesktopStateImpl.Companion.setInDesktopWindowing(true);
-            desktopTasksController.onDefaultDisplayDesktopModeChanged(true);
+            if (!DesktopStateImpl.Companion.inDesktopWindowing(0)) {
+                desktopTasksController.onDefaultDisplayDesktopModeChanged(true);
+                DesktopStateImpl.Companion.setInDesktopWindowing(true);
+            }
         } else {
             DesktopStateImpl.Companion.getClass();
-            DesktopStateImpl.desktopExternalDisplayId = displayForDesk;
+            DesktopStateImpl.Companion.setDesktopExternalDisplayId(displayForDesk);
         }
-        final int i10 = displayForDesk;
-        final Integer num3 = valueOf;
-        return new Function1(num3, i10, i, desktopTasksController, ref$ObjectRef2, ref$ObjectRef, prepareDeskDeactivationIfNeeded) { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda4
+        if (z2) {
+            long jElapsedRealtime = SystemClock.elapsedRealtime();
+            if (displayForDesk != 0 && desktopTasksController.desktopStartMillisOnExternal == null) {
+                desktopTasksController.desktopStartMillisOnExternal = Long.valueOf(jElapsedRealtime);
+                Display display = displayController.mDisplayManager.getDisplay(displayForDesk);
+                if (display != null) {
+                    String str = display.getType() == 2 ? "By wired display connected" : display.getType() == 3 ? "By wireless display connected" : null;
+                    if (str != null) {
+                        CoreSaLogger.logForDexWithScreenId("300", "3004", str);
+                    }
+                }
+            }
+            if (desktopTasksController.desktopStartMillis == null) {
+                desktopTasksController.desktopStartMillis = Long.valueOf(jElapsedRealtime);
+            }
+        }
+        final Integer num3 = numValueOf;
+        final int i12 = displayForDesk;
+        return new Function1(num3, i12, i, desktopTasksController, ref$ObjectRef2, ref$ObjectRef, desktopTasksController$$ExternalSyntheticLambda3PrepareDeskDeactivationIfNeeded$default) { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda6
             public final /* synthetic */ Integer f$0;
             public final /* synthetic */ int f$1;
             public final /* synthetic */ int f$2;
             public final /* synthetic */ DesktopTasksController f$3;
             public final /* synthetic */ Ref$ObjectRef f$4;
-            public final /* synthetic */ DesktopTasksController$$ExternalSyntheticLambda5 f$6;
+            public final /* synthetic */ DesktopTasksController$$ExternalSyntheticLambda3 f$6;
 
             {
-                this.f$6 = prepareDeskDeactivationIfNeeded;
+                this.f$6 = desktopTasksController$$ExternalSyntheticLambda3PrepareDeskDeactivationIfNeeded$default;
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj5) {
+            public final Object mo781invoke(Object obj5) {
                 DeskTransition activateDesk;
                 final IBinder iBinder = (IBinder) obj5;
                 Integer num4 = this.f$0;
-                int i11 = this.f$1;
-                int i12 = this.f$2;
+                int i13 = this.f$1;
+                int i14 = this.f$2;
                 DesktopTasksController desktopTasksController2 = this.f$3;
                 if (num4 != null) {
                     DesktopTasksController.Companion companion = DesktopTasksController.Companion;
-                    activateDesk = new DeskTransition.ActiveDeskWithTask(iBinder, i11, i12, num4.intValue());
+                    activateDesk = new DeskTransition.ActiveDeskWithTask(iBinder, i13, i14, num4.intValue());
                 } else {
-                    activateDesk = desktopTasksController2.taskRepository.desktopData.getDisplayForDesk(i12) != i11 ? new DeskTransition.ActivateDesk(iBinder, i11, i12, desktopTasksController2.onDeskRemovedListener) : new DeskTransition.ActivateDesk(iBinder, i11, i12, null, 8, null);
+                    activateDesk = desktopTasksController2.taskRepository.desktopData.getDisplayForDesk(i14) != i13 ? new DeskTransition.ActivateDesk(iBinder, i13, i14, desktopTasksController2.onDeskRemovedListener, desktopTasksController2.userId) : new DeskTransition.ActivateDesk(iBinder, i13, i14, null, 0, 24, null);
                 }
                 desktopTasksController2.desksTransitionObserver.addPendingTransition(activateDesk);
                 final List list2 = (List) this.f$4.element;
@@ -1052,10 +1327,10 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     final DesktopModeEventLogger.Companion.MinimizeReason minimizeReason = DesktopModeEventLogger.Companion.MinimizeReason.TASK_LIMIT;
                     Integer num5 = (Integer) CollectionsKt___CollectionsKt.firstOrNull(list2);
                     final ActivityManager.RunningTaskInfo runningTaskInfo4 = num5 != null ? desktopTasksController2.shellTaskOrganizer.getRunningTaskInfo(num5.intValue()) : null;
-                    desktopTasksController2.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda8
+                    desktopTasksController2.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda9
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj6) {
+                        public final Object mo781invoke(Object obj6) {
                             IBinder iBinder2 = iBinder;
                             ActivityManager.RunningTaskInfo runningTaskInfo5 = runningTaskInfo4;
                             List list3 = list2;
@@ -1066,13 +1341,22 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                         }
                     }));
                 }
-                DesktopTasksController$$ExternalSyntheticLambda5 desktopTasksController$$ExternalSyntheticLambda5 = this.f$6;
-                if (desktopTasksController$$ExternalSyntheticLambda5 != null) {
-                    desktopTasksController$$ExternalSyntheticLambda5.mo779invoke(iBinder);
+                DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3 = this.f$6;
+                if (desktopTasksController$$ExternalSyntheticLambda3 != null) {
+                    desktopTasksController$$ExternalSyntheticLambda3.mo781invoke(iBinder);
                 }
                 return Unit.INSTANCE;
             }
         };
+    }
+
+    public static boolean canCreateDesks$default(DesktopTasksController desktopTasksController) {
+        DesktopRepository desktopRepository = desktopTasksController.taskRepository;
+        if (desktopTasksController.desktopDisabledFlagsOnDefaultDisplay != 0) {
+            return false;
+        }
+        int i = ((DesktopConfigImpl) desktopTasksController.desktopConfig).maxDeskLimit;
+        return i == 0 || desktopRepository.desktopData.getNumberOfDesks() < i;
     }
 
     public static void createDesk$default(final DesktopTasksController desktopTasksController, final int i, int i2, boolean z, DesktopTasksController$createDeskSuspending$2$1 desktopTasksController$createDeskSuspending$2$1, int i3) {
@@ -1084,11 +1368,11 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         boolean z2 = (i3 & 4) != 0;
         final boolean z3 = (i3 & 8) != 0 ? false : z;
         final boolean z4 = (i3 & 16) == 0;
-        Function1 function1 = desktopTasksController$createDeskSuspending$2$1;
+        Function1 desktopTasksController$$ExternalSyntheticLambda12 = desktopTasksController$createDeskSuspending$2$1;
         if ((i3 & 32) != 0) {
-            function1 = new DesktopTasksController$$ExternalSyntheticLambda10(0);
+            desktopTasksController$$ExternalSyntheticLambda12 = new DesktopTasksController$$ExternalSyntheticLambda12(0);
         }
-        final Function1 function12 = function1;
+        final Function1 function1 = desktopTasksController$$ExternalSyntheticLambda12;
         Object[] objArr = {Integer.valueOf(i), Integer.valueOf(i5), Boolean.valueOf(z2)};
         desktopTasksController.getClass();
         logV$1("createDesk displayId=%d, userId=%d enforceDeskLimit=%b", objArr);
@@ -1096,10 +1380,10 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         DesktopRepository.DesktopData desktopData = profile.desktopData;
         if (i == 0 && z4) {
             DesktopRepository.Desk deskForCreateByHome = desktopData.getDeskForCreateByHome();
-            Integer valueOf = deskForCreateByHome != null ? Integer.valueOf(deskForCreateByHome.deskId) : null;
-            if (valueOf != null) {
-                final int intValue = valueOf.intValue();
-                DesktopRepository.Desk desk = desktopData.getDesk(intValue);
+            Integer numValueOf = deskForCreateByHome != null ? Integer.valueOf(deskForCreateByHome.deskId) : null;
+            if (numValueOf != null) {
+                final int iIntValue = numValueOf.intValue();
+                DesktopRepository.Desk desk = desktopData.getDesk(iIntValue);
                 if (desk != null) {
                     desk.usedDesk = 0;
                 }
@@ -1109,27 +1393,27 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     ((Executor) entry.getValue()).execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$postCreateDeskFromHomeAndReuse$1$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            DesktopRepository.DeskChangeListener.this.onDeskAdded(i, intValue);
+                            deskChangeListener.onDeskAdded(i, iIntValue);
                             DesktopRepository desktopRepository = profile;
                             int i6 = DesktopRepository.$r8$clinit;
                             if (desktopRepository.canCreateDesks()) {
                                 return;
                             }
-                            DesktopRepository.DeskChangeListener.this.onCanCreateDesksChanged(false);
+                            deskChangeListener.onCanCreateDesksChanged(false);
                         }
                     });
                 }
                 return;
             }
         }
-        if (!z2 || (i4 = ((DesktopConfigImpl) desktopTasksController.desktopConfig).maxDeskLimit) == 0 || desktopData.getNumberOfDesks() < i4) {
-            desktopTasksController.createDeskRoot(i, i5, new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda14
+        if (!z2 || (desktopTasksController.desktopDisabledFlagsOnDefaultDisplay == 0 && ((i4 = ((DesktopConfigImpl) desktopTasksController.desktopConfig).maxDeskLimit) == 0 || desktopData.getNumberOfDesks() < i4))) {
+            desktopTasksController.createDeskRoot(i, i5, new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda17
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) throws Resources.NotFoundException {
                     Integer num = (Integer) obj;
                     DesktopTasksController.Companion companion = DesktopTasksController.Companion;
-                    DesktopTasksController desktopTasksController2 = DesktopTasksController.this;
+                    DesktopTasksController desktopTasksController2 = this.f$0;
                     int i6 = i;
                     if (num == null) {
                         Object[] objArr2 = {Integer.valueOf(i6), Integer.valueOf(i5)};
@@ -1142,7 +1426,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                         } else {
                             desktopRepository.addDesk(i6, num.intValue(), -1);
                         }
-                        function12.mo779invoke(num);
+                        function1.mo781invoke(num);
                         if (z3) {
                             DesktopTasksController.activateDesk$default(desktopTasksController2, num.intValue(), null, 0, 0, 14);
                         }
@@ -1155,32 +1439,92 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
     }
 
+    public static void exitDefaultDisplayDesktopWindowing$default(DesktopTasksController desktopTasksController, ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws Resources.NotFoundException {
+        if ((i & 1) != 0) {
+            runningTaskInfo = null;
+        }
+        boolean z = (i & 2) == 0;
+        Integer activeDeskId = desktopTasksController.taskRepository.getActiveDeskId(0);
+        if (activeDeskId != null) {
+            WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+            if (runningTaskInfo != null) {
+                DisplayAreaInfo displayAreaInfo = desktopTasksController.rootTaskDisplayAreaOrganizer.getDisplayAreaInfo(0);
+                if (displayAreaInfo != null) {
+                    windowContainerTransaction.reparent(runningTaskInfo.token, displayAreaInfo.token, true);
+                }
+            } else {
+                desktopTasksController.moveHomeTaskToTop(windowContainerTransaction, 0);
+            }
+            ShellTaskOrganizer shellTaskOrganizer = desktopTasksController.shellTaskOrganizer;
+            if (z) {
+                for (Pair pair : CollectionsKt___CollectionsKt.reversed(desktopTasksController.taskIdsOfTabletMode)) {
+                    Integer num = (Integer) pair.first;
+                    Integer num2 = (Integer) pair.second;
+                    DesktopRepository desktopRepository = desktopTasksController.taskRepository;
+                    num.getClass();
+                    if (desktopRepository.getDeskIdForTask(num.intValue()) == null) {
+                        if (num2 != null && num2.intValue() == 6) {
+                            SplitScreenController splitScreenController = desktopTasksController.splitScreenController;
+                            if (splitScreenController == null) {
+                                splitScreenController = null;
+                            }
+                            if (splitScreenController.isTaskRoot(num.intValue())) {
+                                SplitScreenController splitScreenController2 = desktopTasksController.splitScreenController;
+                                if (splitScreenController2 == null) {
+                                    splitScreenController2 = null;
+                                }
+                                if (!splitScreenController2.isSplitScreenActive()) {
+                                }
+                            }
+                        }
+                        ActivityManager.RunningTaskInfo runningTaskInfo2 = shellTaskOrganizer.getRunningTaskInfo(num.intValue());
+                        if (runningTaskInfo2 != null) {
+                            windowContainerTransaction.reorder(runningTaskInfo2.token, true);
+                            if (num2 != null && num2.intValue() == 5) {
+                                windowContainerTransaction.setAlwaysOnTop(runningTaskInfo2.token, true);
+                            }
+                        }
+                    }
+                }
+                desktopTasksController.taskIdsOfTabletMode.clear();
+            }
+            windowContainerTransaction.setDisplayIdForChangeTransition(0, "desktop_exit");
+            prepareDeskDeactivationIfNeeded$default(desktopTasksController, windowContainerTransaction, activeDeskId, 0, 0, 28);
+            shellTaskOrganizer.applyTransaction(windowContainerTransaction);
+            desktopTasksController.taskRepository.setDeskInactive(activeDeskId.intValue());
+            DesktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 = desktopTasksController.exitDesktopModeListener;
+            if (desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 != null) {
+                desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1.onExitDesktopModeStarted();
+            }
+        }
+    }
+
     public static void logD$1(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String concat = "%s: ".concat(str);
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopTasksController", objArr);
-        ProtoLog.d(shellProtoLogGroup, concat, m.list.toArray(new Object[m.list.size()]));
+        String strConcat = "%s: ".concat(str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopTasksController", objArr);
+        ProtoLog.d(shellProtoLogGroup, strConcat, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public static void logE(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String concat = "%s: ".concat(str);
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopTasksController", objArr);
-        ProtoLog.e(shellProtoLogGroup, concat, m.list.toArray(new Object[m.list.size()]));
+        String strConcat = "%s: ".concat(str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopTasksController", objArr);
+        ProtoLog.e(shellProtoLogGroup, strConcat, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public static void logV$1(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
-        SpreadBuilder m2 = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopTasksController", objArr);
-        ProtoLog.v(shellProtoLogGroup, m, m2.list.toArray(new Object[m2.list.size()]));
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopTasksController", objArr);
+        ProtoLog.v(shellProtoLogGroup, strM, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public static void logW(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
-        SpreadBuilder m2 = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopTasksController", objArr);
-        ProtoLog.w(shellProtoLogGroup, m, m2.list.toArray(new Object[m2.list.size()]));
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopTasksController", objArr);
+        ProtoLog.w(shellProtoLogGroup, strM, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public static /* synthetic */ boolean moveTaskToDefaultDeskAndActivate$default(DesktopTasksController desktopTasksController, int i, DesktopModeTransitionSource desktopModeTransitionSource, RemoteTransition remoteTransition, IMoveToDesktopCallback iMoveToDesktopCallback, int i2) {
@@ -1191,11 +1535,10 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         return desktopTasksController.moveTaskToDefaultDeskAndActivate(i, windowContainerTransaction, desktopModeTransitionSource, remoteTransition);
     }
 
-    public static boolean moveTaskToDesk$default(DesktopTasksController desktopTasksController, int i, int i2, WindowContainerTransaction windowContainerTransaction, DesktopModeTransitionSource desktopModeTransitionSource, RemoteTransition remoteTransition, int i3) {
-        boolean z;
-        IBinder moveToDesktop;
+    public static boolean moveTaskToDesk$default(DesktopTasksController desktopTasksController, int i, int i2, WindowContainerTransaction windowContainerTransaction, DesktopModeTransitionSource desktopModeTransitionSource, RemoteTransition remoteTransition, int i3) throws Resources.NotFoundException {
+        IBinder iBinderMoveToDesktop;
         Function1 function1;
-        IBinder moveToDesktop2;
+        IBinder iBinderMoveToDesktop2;
         Function1 function12;
         WindowContainerTransaction windowContainerTransaction2 = (i3 & 4) != 0 ? new WindowContainerTransaction() : windowContainerTransaction;
         RemoteTransition remoteTransition2 = (i3 & 16) != 0 ? null : remoteTransition;
@@ -1206,80 +1549,129 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         DesktopImmersiveController desktopImmersiveController = desktopTasksController.desktopImmersiveController;
         if (runningTaskInfo != null) {
             int displayForDesk = desktopTasksController.taskRepository.desktopData.getDisplayForDesk(i2);
-            z = true;
             logV$1("moveRunningTaskToDesk taskId=%d deskId=%d displayId=%d", Integer.valueOf(runningTaskInfo.taskId), Integer.valueOf(i2), Integer.valueOf(displayForDesk));
             desktopTasksController.exitSplitIfApplicable(windowContainerTransaction2, runningTaskInfo);
-            DesktopImmersiveController.ExitResult exitImmersiveIfApplicable = desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction2, displayForDesk, Integer.valueOf(runningTaskInfo.taskId), DesktopImmersiveController.ExitReason.TASK_LAUNCH);
-            Function1 addDeskActivationChanges$default = addDeskActivationChanges$default(desktopTasksController, i2, windowContainerTransaction2, runningTaskInfo, 0, 0, 56);
-            desktopTasksController.addMoveToDeskTaskChanges(windowContainerTransaction2, runningTaskInfo, i2, null);
+            DesktopImmersiveController.ExitResult exitResultExitImmersiveIfApplicable = desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction2, displayForDesk, Integer.valueOf(runningTaskInfo.taskId), DesktopImmersiveController.ExitReason.TASK_LAUNCH);
+            Function1 function1AddDeskActivationChanges$default = addDeskActivationChanges$default(desktopTasksController, i2, windowContainerTransaction2, runningTaskInfo, 0, 0, 56);
+            WindowContainerTransaction windowContainerTransaction3 = windowContainerTransaction2;
+            desktopTasksController.addMoveToDeskTaskChanges(windowContainerTransaction3, runningTaskInfo, i2, null, false);
             if (remoteTransition2 != null) {
                 OneShotRemoteHandler oneShotRemoteHandler = new OneShotRemoteHandler(shellExecutor, remoteTransition2);
-                moveToDesktop2 = transitions.startTransition(3, windowContainerTransaction2, oneShotRemoteHandler);
-                oneShotRemoteHandler.mTransition = moveToDesktop2;
+                iBinderMoveToDesktop2 = transitions.startTransition(3, windowContainerTransaction3, oneShotRemoteHandler);
+                oneShotRemoteHandler.mTransition = iBinderMoveToDesktop2;
             } else {
-                moveToDesktop2 = enterDesktopTaskTransitionHandler.moveToDesktop(windowContainerTransaction2, desktopModeTransitionSource);
+                iBinderMoveToDesktop2 = enterDesktopTaskTransitionHandler.moveToDesktop(windowContainerTransaction3, desktopModeTransitionSource);
             }
             DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 = desktopTasksController.desktopModeEnterExitTransitionListener;
             if (desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 != null) {
                 desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1.onEnterDesktopModeTransitionStarted();
             }
-            addDeskActivationChanges$default.mo779invoke(moveToDesktop2);
-            DesktopImmersiveController.ExitResult.Exit asExit = exitImmersiveIfApplicable.asExit();
-            if (asExit != null && (function12 = asExit.runOnTransitionStart) != null) {
-                function12.mo779invoke(moveToDesktop2);
+            function1AddDeskActivationChanges$default.mo781invoke(iBinderMoveToDesktop2);
+            DesktopImmersiveController.ExitResult.Exit exitAsExit = exitResultExitImmersiveIfApplicable.asExit();
+            if (exitAsExit != null && (function12 = exitAsExit.runOnTransitionStart) != null) {
+                function12.mo781invoke(iBinderMoveToDesktop2);
             }
-            if (!DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
-                desktopTasksController.taskRepository.setActiveDesk(displayForDesk, i2);
+            if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
                 return true;
             }
-        } else {
-            z = true;
-            RecentTasksController recentTasksController = desktopTasksController.recentTasksController;
-            if ((recentTasksController != null ? recentTasksController.findTaskInBackground(i) : null) == null) {
-                logW("moveTaskToDesk taskId=%d not found", Integer.valueOf(i));
-                return false;
-            }
-            ActivityManager.RecentTaskInfo findTaskInBackground = recentTasksController != null ? recentTasksController.findTaskInBackground(i) : null;
-            if (findTaskInBackground == null) {
-                logW("moveBackgroundTaskToDesktop taskId=%d not found", Integer.valueOf(i));
-                return false;
-            }
-            logV$1("moveBackgroundTaskToDesktop with taskId=%d", Integer.valueOf(i));
-            Integer orCreateDefaultDeskId = desktopTasksController.getOrCreateDefaultDeskId(findTaskInBackground.displayId, false);
-            if (orCreateDefaultDeskId == null) {
-                return false;
-            }
-            Function1 addDeskActivationChanges$default2 = addDeskActivationChanges$default(desktopTasksController, orCreateDefaultDeskId.intValue(), windowContainerTransaction2, findTaskInBackground, 0, 0, 56);
-            DesktopImmersiveController.ExitResult exitImmersiveIfApplicable2 = desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction2, 0, Integer.valueOf(i), DesktopImmersiveController.ExitReason.TASK_LAUNCH);
-            ActivityOptions makeBasic = ActivityOptions.makeBasic();
-            makeBasic.setLaunchWindowingMode(5);
-            Unit unit = Unit.INSTANCE;
-            windowContainerTransaction2.startTask(i, makeBasic.toBundle());
-            if (remoteTransition2 != null) {
-                OneShotRemoteHandler oneShotRemoteHandler2 = new OneShotRemoteHandler(shellExecutor, remoteTransition2);
-                moveToDesktop = transitions.startTransition(3, windowContainerTransaction2, oneShotRemoteHandler2);
-                oneShotRemoteHandler2.mTransition = moveToDesktop;
-            } else {
-                moveToDesktop = enterDesktopTaskTransitionHandler.moveToDesktop(windowContainerTransaction2, desktopModeTransitionSource);
-            }
-            DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$12 = desktopTasksController.desktopModeEnterExitTransitionListener;
-            if (desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$12 != null) {
-                desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$12.onEnterDesktopModeTransitionStarted();
-            }
-            addDeskActivationChanges$default2.mo779invoke(moveToDesktop);
-            DesktopImmersiveController.ExitResult.Exit asExit2 = exitImmersiveIfApplicable2.asExit();
-            if (asExit2 != null && (function1 = asExit2.runOnTransitionStart) != null) {
-                function1.mo779invoke(moveToDesktop);
-            }
+            desktopTasksController.taskRepository.setActiveDesk(displayForDesk, i2);
+            return true;
         }
-        return z;
+        RecentTasksController recentTasksController = desktopTasksController.recentTasksController;
+        if ((recentTasksController != null ? recentTasksController.findTaskInBackground(i) : null) == null) {
+            logW("moveTaskToDesk taskId=%d not found", Integer.valueOf(i));
+            return false;
+        }
+        ActivityManager.RecentTaskInfo recentTaskInfoFindTaskInBackground = recentTasksController != null ? recentTasksController.findTaskInBackground(i) : null;
+        if (recentTaskInfoFindTaskInBackground == null) {
+            logW("moveBackgroundTaskToDesktop taskId=%d not found", Integer.valueOf(i));
+            return false;
+        }
+        logV$1("moveBackgroundTaskToDesktop with taskId=%d", Integer.valueOf(i));
+        Integer orCreateDefaultDeskId = desktopTasksController.getOrCreateDefaultDeskId(recentTaskInfoFindTaskInBackground.displayId, false);
+        if (orCreateDefaultDeskId == null) {
+            return false;
+        }
+        Function1 function1AddDeskActivationChanges$default2 = addDeskActivationChanges$default(desktopTasksController, orCreateDefaultDeskId.intValue(), windowContainerTransaction2, recentTaskInfoFindTaskInBackground, 0, 0, 56);
+        DesktopImmersiveController.ExitResult exitResultExitImmersiveIfApplicable2 = desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction2, 0, Integer.valueOf(i), DesktopImmersiveController.ExitReason.TASK_LAUNCH);
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setLaunchWindowingMode(5);
+        Unit unit = Unit.INSTANCE;
+        windowContainerTransaction2.startTask(i, activityOptionsMakeBasic.toBundle());
+        if (remoteTransition2 != null) {
+            OneShotRemoteHandler oneShotRemoteHandler2 = new OneShotRemoteHandler(shellExecutor, remoteTransition2);
+            iBinderMoveToDesktop = transitions.startTransition(3, windowContainerTransaction2, oneShotRemoteHandler2);
+            oneShotRemoteHandler2.mTransition = iBinderMoveToDesktop;
+        } else {
+            iBinderMoveToDesktop = enterDesktopTaskTransitionHandler.moveToDesktop(windowContainerTransaction2, desktopModeTransitionSource);
+        }
+        DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$12 = desktopTasksController.desktopModeEnterExitTransitionListener;
+        if (desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$12 != null) {
+            desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$12.onEnterDesktopModeTransitionStarted();
+        }
+        function1AddDeskActivationChanges$default2.mo781invoke(iBinderMoveToDesktop);
+        DesktopImmersiveController.ExitResult.Exit exitAsExit2 = exitResultExitImmersiveIfApplicable2.asExit();
+        if (exitAsExit2 == null || (function1 = exitAsExit2.runOnTransitionStart) == null) {
+            return true;
+        }
+        function1.mo781invoke(iBinderMoveToDesktop);
+        return true;
     }
 
-    public static /* synthetic */ DesktopTasksController$$ExternalSyntheticLambda5 performDesktopExitCleanUp$default(DesktopTasksController desktopTasksController, WindowContainerTransaction windowContainerTransaction, Integer num, int i, boolean z, boolean z2, int i2) {
+    public static /* synthetic */ DesktopTasksController$$ExternalSyntheticLambda3 performDesktopExitCleanUp$default(DesktopTasksController desktopTasksController, WindowContainerTransaction windowContainerTransaction, Integer num, int i, boolean z, boolean z2, int i2) throws Resources.NotFoundException {
         if ((i2 & 16) != 0) {
             z2 = true;
         }
         return desktopTasksController.performDesktopExitCleanUp(windowContainerTransaction, num, i, z, z2, false);
+    }
+
+    public static DesktopTasksController$$ExternalSyntheticLambda3 prepareDeskDeactivationIfNeeded$default(DesktopTasksController desktopTasksController, WindowContainerTransaction windowContainerTransaction, Integer num, int i, int i2, int i3) {
+        boolean z = CoreRune.MW_SA_LOGGING;
+        if ((i3 & 4) != 0) {
+            i = -1;
+        }
+        if ((i3 & 8) != 0) {
+            i2 = -1;
+        }
+        if ((i3 & 16) != 0) {
+            z = false;
+        }
+        desktopTasksController.getClass();
+        if (!DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue() || num == null) {
+            return null;
+        }
+        int iIntValue = num.intValue();
+        RootTaskDesksOrganizer rootTaskDesksOrganizer = (RootTaskDesksOrganizer) desktopTasksController.desksOrganizer;
+        rootTaskDesksOrganizer.getClass();
+        RootTaskDesksOrganizer.logV$2("deactivateDesk %d", num);
+        rootTaskDesksOrganizer.updateLaunchRoot(iIntValue, windowContainerTransaction, false);
+        for (DesktopRepository desktopRepository : desktopTasksController.userRepositories.getRepositoriesWithDeskId(num.intValue())) {
+            if (desktopRepository.desktopData.getDisplayForDesk(num.intValue()) == 0) {
+                DesktopStateImpl.Companion.getClass();
+                if (DesktopStateImpl.Companion.inDesktopWindowing(0)) {
+                    Integer activeDeskId = desktopRepository.getActiveDeskId(0);
+                    if (activeDeskId == null || !activeDeskId.equals(num)) {
+                        int i4 = desktopTasksController.userId;
+                        StringBuilder sb = new StringBuilder("prepareDeskDeactivationIfNeeded: skip, desk=");
+                        sb.append(num);
+                        sb.append(", active=");
+                        sb.append(activeDeskId);
+                        sb.append(", repo_user=");
+                        KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0.m(sb, desktopRepository.userId, ", current_user=", i4, "ShellDesktopMode");
+                    } else if (!z) {
+                        DesktopStateImpl.Companion.setInDesktopWindowing(false);
+                        desktopTasksController.onDefaultDisplayDesktopModeChanged(false);
+                    }
+                }
+            } else if (i == -1 || i == DesktopStateImpl.desktopExternalDisplayId) {
+                DesktopStateImpl.Companion.getClass();
+                DesktopStateImpl.Companion.setDesktopExternalDisplayId(-1);
+            }
+            if (CoreRune.MW_SA_LOGGING && !z) {
+                desktopTasksController.desktopExitLogging(desktopRepository.desktopData.getDisplayForDesk(num.intValue()));
+            }
+        }
+        return new DesktopTasksController$$ExternalSyntheticLambda3(desktopTasksController, num, i2);
     }
 
     public static void removeDesk$default(DesktopTasksController desktopTasksController, int i) {
@@ -1291,55 +1683,65 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
     public static void setBoundsToDropPosition(WindowContainerTransaction windowContainerTransaction, ActivityManager.RunningTaskInfo runningTaskInfo, DisplayLayout displayLayout, PointF pointF, Rect rect) {
         Rect rect2 = new Rect(rect);
         rect2.offsetTo(((int) pointF.x) - (rect2.width() / 2), (int) pointF.y);
-        int i = rect2.left;
-        int i2 = rect2.top;
+        int iWidth = rect2.left;
+        int iHeight = rect2.top;
         Rect rect3 = new Rect();
         displayLayout.getStableBounds(rect3, false);
-        int i3 = rect2.right;
-        int i4 = rect3.right;
-        if (i3 > i4) {
-            i = i4 - rect2.width();
+        int i = rect2.right;
+        int i2 = rect3.right;
+        if (i > i2) {
+            iWidth = i2 - rect2.width();
         } else {
-            int i5 = rect2.left;
-            int i6 = rect3.left;
-            if (i5 < i6) {
-                i = i6;
+            int i3 = rect2.left;
+            int i4 = rect3.left;
+            if (i3 < i4) {
+                iWidth = i4;
             }
         }
-        int i7 = rect2.bottom;
-        int i8 = rect3.bottom;
-        if (i7 > i8) {
-            i2 = i8 - rect2.height();
+        int i5 = rect2.bottom;
+        int i6 = rect3.bottom;
+        if (i5 > i6) {
+            iHeight = i6 - rect2.height();
         } else {
-            int i9 = rect2.top;
-            int i10 = rect3.top;
-            if (i9 < i10) {
-                i2 = i10;
+            int i7 = rect2.top;
+            int i8 = rect3.top;
+            if (i7 < i8) {
+                iHeight = i8;
             }
         }
-        rect2.offsetTo(i, i2);
+        rect2.offsetTo(iWidth, iHeight);
         windowContainerTransaction.setBounds(runningTaskInfo.token, rect2);
     }
 
-    public static /* synthetic */ void startLaunchTransition$default(DesktopTasksController desktopTasksController, WindowContainerTransaction windowContainerTransaction, int i, int i2) {
+    public static /* synthetic */ void startLaunchTransition$default(DesktopTasksController desktopTasksController, WindowContainerTransaction windowContainerTransaction, int i, int i2) throws Resources.NotFoundException {
         desktopTasksController.startLaunchTransition(1, windowContainerTransaction, null, null, i, i2, DesktopModeEventLogger.Companion.UnminimizeReason.UNKNOWN);
     }
 
-    public final void activateDesk(int i, RemoteTransition remoteTransition, int i2, int i3) {
+    /* JADX WARN: Removed duplicated region for block: B:63:0x015d  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void activateDesk(int i, RemoteTransition remoteTransition, int i2, int i3) throws Resources.NotFoundException {
+        int i4;
         Integer num;
         int displayForDesk;
         Integer activeDeskId;
         if (this.taskRepository.getAllDeskIds().contains(Integer.valueOf(i))) {
-            if (i2 == -1 || i2 == (displayForDesk = this.taskRepository.desktopData.getDisplayForDesk(i)) || (activeDeskId = this.taskRepository.getActiveDeskId(displayForDesk)) == null || i != activeDeskId.intValue()) {
+            if (i2 == -1 || i2 == (displayForDesk = this.taskRepository.desktopData.getDisplayForDesk(i)) || (activeDeskId = this.taskRepository.getActiveDeskId(displayForDesk)) == null || i != activeDeskId.intValue() || !(displayForDesk == 0 || i2 == 0)) {
+                if ((i2 == 0 || (i2 == -1 && this.taskRepository.desktopData.getDisplayForDesk(i) == 0)) && (i4 = this.desktopDisabledFlagsOnDefaultDisplay) != 0) {
+                    logD$1("activateDesk do not activate desk on default display flags=0x%x", Integer.valueOf(i4));
+                    showDesktopDisabledToast(null);
+                    return;
+                }
                 WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-                Function1 addDeskActivationChanges$default = addDeskActivationChanges$default(this, i, windowContainerTransaction, null, i2, 0, 44);
-                int i4 = 0;
+                Function1 function1AddDeskActivationChanges$default = addDeskActivationChanges$default(this, i, windowContainerTransaction, null, i2, 0, 44);
+                int i5 = 0;
                 if (i3 != -1) {
                     List expandedTasksIdsInDeskOrdered = this.taskRepository.getExpandedTasksIdsInDeskOrdered(i);
                     DesktopTasksLimiter desktopTasksLimiter = (DesktopTasksLimiter) this.desktopTasksLimiter.orElse(null);
                     List taskIdsToMinimize$default = desktopTasksLimiter != null ? DesktopTasksLimiter.getTaskIdsToMinimize$default(desktopTasksLimiter, expandedTasksIdsInDeskOrdered, Integer.valueOf(i3)) : null;
-                    DesksOrganizer desksOrganizer = this.desksOrganizer;
                     ShellTaskOrganizer shellTaskOrganizer = this.shellTaskOrganizer;
+                    DesksOrganizer desksOrganizer = this.desksOrganizer;
                     if (taskIdsToMinimize$default != null) {
                         int displayForDesk2 = i2 != -1 ? i2 : this.taskRepository.desktopData.getDisplayForDesk(i);
                         Iterator it = taskIdsToMinimize$default.iterator();
@@ -1351,39 +1753,52 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                         }
                         DesktopTasksLimiter desktopTasksLimiter2 = (DesktopTasksLimiter) this.desktopTasksLimiter.orElse(null);
                         if (desktopTasksLimiter2 != null && (num = desktopTasksLimiter2.maxTasksLimit) != null) {
-                            int intValue = num.intValue();
+                            int iIntValue = num.intValue();
                             desktopTasksLimiter2.desktopUserRepositories.getCurrent();
-                            Toast.makeText(desktopTasksLimiter2.displayController.getDisplayContext(displayForDesk2), desktopTasksLimiter2.context.getResources().getQuantityString(R.plurals.duration_days_shortest_future, intValue, Integer.valueOf(intValue)), 0).show();
+                            Toast.makeText(desktopTasksLimiter2.displayController.getDisplayContext(displayForDesk2), desktopTasksLimiter2.context.getResources().getQuantityString(android.R.plurals.duration_days_shortest_future, iIntValue, Integer.valueOf(iIntValue)), 0).show();
                         }
                     }
                     ActivityManager.RunningTaskInfo runningTaskInfo2 = shellTaskOrganizer.getRunningTaskInfo(i3);
                     if (runningTaskInfo2 != null) {
-                        ((RootTaskDesksOrganizer) desksOrganizer).reorderTaskToFront(windowContainerTransaction, i, runningTaskInfo2);
-                    } else {
-                        logV$1("moveBackgroundTaskToFront taskId=%s", Integer.valueOf(i3));
-                        DisplayLayout displayLayout = this.displayController.getDisplayLayout(this.taskRepository.desktopData.getDisplayForDesk(i));
-                        if (displayLayout != null) {
-                            ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                            makeBasic.setLaunchWindowingMode(5);
-                            makeBasic.setLaunchBounds(DesktopModeUtils.calculateDefaultDesktopTaskBounds(displayLayout));
-                            Unit unit = Unit.INSTANCE;
-                            windowContainerTransaction.startTask(i3, makeBasic.toBundle());
+                        RootTaskDesksOrganizer rootTaskDesksOrganizer = (RootTaskDesksOrganizer) desksOrganizer;
+                        RootTaskDesksOrganizer.DeskRoot deskRoot = (RootTaskDesksOrganizer.DeskRoot) rootTaskDesksOrganizer.deskRootsByDeskId.get(i);
+                        if (deskRoot == null) {
+                            throw new IllegalStateException(("Root not found for desk: " + i).toString());
+                        }
+                        Object obj = ((LinkedHashMap) rootTaskDesksOrganizer.deskMinimizationRootsByDeskId).get(Integer.valueOf(i));
+                        if (obj == null) {
+                            throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Minimization root not found for desk: ").toString());
+                        }
+                        RootTaskDesksOrganizer.DeskMinimizationRoot deskMinimizationRoot = (RootTaskDesksOrganizer.DeskMinimizationRoot) obj;
+                        if (deskRoot.children.contains(Integer.valueOf(runningTaskInfo2.taskId)) || deskMinimizationRoot.children.contains(Integer.valueOf(runningTaskInfo2.taskId))) {
+                            rootTaskDesksOrganizer.reorderTaskToFront(windowContainerTransaction, i, runningTaskInfo2);
+                        } else {
+                            logV$1("moveBackgroundTaskToFront taskId=%s", Integer.valueOf(i3));
+                            DisplayLayout displayLayout = this.displayController.getDisplayLayout(this.taskRepository.desktopData.getDisplayForDesk(i));
+                            if (displayLayout != null) {
+                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                activityOptionsMakeBasic.setLaunchWindowingMode(5);
+                                activityOptionsMakeBasic.setLaunchBounds(DesktopModeUtils.calculateDefaultDesktopTaskBounds(displayLayout));
+                                Unit unit = Unit.INSTANCE;
+                                windowContainerTransaction.startTask(i3, activityOptionsMakeBasic.toBundle());
+                            }
                         }
                     }
                 }
+                windowContainerTransaction.setTransactionType(4);
                 if (remoteTransition == null) {
                     logV$1("RemoteTransition is null", new Object[0]);
                 } else {
-                    i4 = 3;
+                    i5 = 3;
                 }
                 Transitions transitions = this.transitions;
                 OneShotRemoteHandler oneShotRemoteHandler = remoteTransition != null ? new OneShotRemoteHandler(transitions.mMainExecutor, remoteTransition) : null;
-                IBinder startTransition = transitions.startTransition(i4, windowContainerTransaction, oneShotRemoteHandler);
+                IBinder iBinderStartTransition = transitions.startTransition(i5, windowContainerTransaction, oneShotRemoteHandler);
                 if (oneShotRemoteHandler != null) {
-                    oneShotRemoteHandler.mTransition = startTransition;
+                    oneShotRemoteHandler.mTransition = iBinderStartTransition;
                 }
-                startTransition.getClass();
-                addDeskActivationChanges$default.mo779invoke(startTransition);
+                iBinderStartTransition.getClass();
+                function1AddDeskActivationChanges$default.mo781invoke(iBinderStartTransition);
                 DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 = this.desktopModeEnterExitTransitionListener;
                 if (desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 != null) {
                     desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1.onEnterDesktopModeTransitionStarted();
@@ -1405,12 +1820,12 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         desktopTasksLimiter.getClass();
         DesktopTasksLimiter.logV("addAndGetMinimizeTaskChanges, newFrontTask=%d", num);
         DesktopRepository current = desktopTasksLimiter.desktopUserRepositories.getCurrent();
-        boolean isDeskActive = current.isDeskActive(i);
+        boolean zIsDeskActive = current.isDeskActive(i);
         DesktopRepository.DesktopData desktopData = current.desktopData;
         DesksOrganizer desksOrganizer = desktopTasksLimiter.desksOrganizer;
         DisplayController displayController = desktopTasksLimiter.displayController;
         ShellTaskOrganizer shellTaskOrganizer = desktopTasksLimiter.shellTaskOrganizer;
-        if (!isDeskActive) {
+        if (!zIsDeskActive) {
             Integer taskIdToMinimize = desktopTasksLimiter.getTaskIdToMinimize(current.getExpandedTasksIdsInDeskOrdered(i), num, z);
             if (taskIdToMinimize != null && (runningTaskInfo = shellTaskOrganizer.getRunningTaskInfo(taskIdToMinimize.intValue())) != null) {
                 if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
@@ -1421,8 +1836,8 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 }
                 Integer num2 = desktopTasksLimiter.maxTasksLimit;
                 if (num2 != null) {
-                    int intValue = num2.intValue();
-                    Toast.makeText(displayController.getDisplayContext(desktopData.getDisplayForDesk(i)), desktopTasksLimiter.context.getResources().getQuantityString(R.plurals.duration_days_shortest_future, intValue, Integer.valueOf(intValue)), 0).show();
+                    int iIntValue = num2.intValue();
+                    Toast.makeText(displayController.getDisplayContext(desktopData.getDisplayForDesk(i)), desktopTasksLimiter.context.getResources().getQuantityString(android.R.plurals.duration_days_shortest_future, iIntValue, Integer.valueOf(iIntValue)), 0).show();
                 }
             }
             return taskIdToMinimize;
@@ -1440,8 +1855,8 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             if (runningTaskInfo2 != null) {
                 Integer num3 = desktopTasksLimiter.maxTasksLimit;
                 if (num3 != null) {
-                    int intValue2 = num3.intValue();
-                    Toast.makeText(displayController.getDisplayContext(desktopData.getDisplayForDesk(i)), desktopTasksLimiter.context.getResources().getQuantityString(R.plurals.duration_days_shortest_future, intValue2, Integer.valueOf(intValue2)), 0).show();
+                    int iIntValue2 = num3.intValue();
+                    Toast.makeText(displayController.getDisplayContext(desktopData.getDisplayForDesk(i)), desktopTasksLimiter.context.getResources().getQuantityString(android.R.plurals.duration_days_shortest_future, iIntValue2, Integer.valueOf(iIntValue2)), 0).show();
                 }
                 ((RootTaskDesksOrganizer) desksOrganizer).minimizeTask(windowContainerTransaction, i, runningTaskInfo2);
                 return taskIdToMinimize2;
@@ -1450,113 +1865,101 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x0045, code lost:
-    
-        if (r8 == 0) goto L20;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void addMoveToDeskTaskChanges(android.window.WindowContainerTransaction r5, android.app.ActivityManager.RunningTaskInfo r6, int r7, android.graphics.PointF r8) {
-        /*
-            r4 = this;
-            com.android.wm.shell.desktopmode.DesktopRepository r0 = r4.taskRepository
-            com.android.wm.shell.desktopmode.DesktopRepository$DesktopData r0 = r0.desktopData
-            int r0 = r0.getDisplayForDesk(r7)
-            com.android.wm.shell.common.DisplayController r1 = r4.displayController
-            com.android.wm.shell.common.DisplayLayout r1 = r1.getDisplayLayout(r0)
-            if (r1 != 0) goto L11
-            return
-        L11:
-            com.android.wm.shell.desktopmode.DesktopRepository r2 = r4.taskRepository
-            com.android.wm.shell.ShellTaskOrganizer r3 = r4.shellTaskOrganizer
-            android.graphics.Rect r2 = com.android.wm.shell.desktopmode.DesktopModeUtils.getInheritedExistingTaskBounds(r2, r3, r6, r7)
-            if (r2 == 0) goto L2b
-            if (r8 == 0) goto L21
-            setBoundsToDropPosition(r5, r6, r1, r8, r2)
-            goto L4c
-        L21:
-            android.window.WindowContainerToken r8 = r6.token
-            android.window.WindowContainerTransaction r8 = r5.setBounds(r8, r2)
-            r8.getClass()
-            goto L4c
-        L2b:
-            android.graphics.Rect r2 = r4.getInitialBounds(r1, r6, r0)
-            if (r8 == 0) goto L35
-            setBoundsToDropPosition(r5, r6, r1, r8, r2)
-            goto L4c
-        L35:
-            android.content.pm.ActivityInfo r8 = r6.topActivityInfo
-            if (r8 == 0) goto L47
-            android.content.pm.ActivityInfo$WindowLayout r8 = r8.windowLayout
-            if (r8 == 0) goto L47
-            int r8 = r8.gravity
-            r1 = r8 & 7
-            r8 = r8 & 112(0x70, float:1.57E-43)
-            if (r1 != 0) goto L4c
-            if (r8 != 0) goto L4c
-        L47:
-            android.window.WindowContainerToken r8 = r6.token
-            r5.setBounds(r8, r2)
-        L4c:
-            android.window.DesktopExperienceFlags r8 = android.window.DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND
-            boolean r8 = r8.isTrue()
-            r1 = 1
-            if (r8 == 0) goto L5d
-            com.android.wm.shell.desktopmode.multidesks.DesksOrganizer r8 = r4.desksOrganizer
-            com.android.wm.shell.desktopmode.multidesks.RootTaskDesksOrganizer r8 = (com.android.wm.shell.desktopmode.multidesks.RootTaskDesksOrganizer) r8
-            r8.moveTaskToDesk(r5, r7, r6)
-            goto L80
-        L5d:
-            com.android.wm.shell.RootTaskDisplayAreaOrganizer r7 = r4.rootTaskDisplayAreaOrganizer
-            android.window.DisplayAreaInfo r7 = r7.getDisplayAreaInfo(r0)
-            r7.getClass()
-            android.content.res.Configuration r7 = r7.configuration
-            android.app.WindowConfiguration r7 = r7.windowConfiguration
-            int r7 = r7.getWindowingMode()
-            r8 = 5
-            if (r7 != r8) goto L72
-            r8 = 0
-        L72:
-            android.window.WindowContainerToken r7 = r6.token
-            r5.setWindowingMode(r7, r8)
-            android.window.WindowContainerToken r7 = r6.token
-            android.window.WindowContainerTransaction r7 = r5.reorder(r7, r1)
-            r7.getClass()
-        L80:
-            com.android.wm.shell.shared.desktopmode.DesktopConfig r4 = r4.desktopConfig
-            com.android.wm.shell.shared.desktopmode.DesktopConfigImpl r4 = (com.android.wm.shell.shared.desktopmode.DesktopConfigImpl) r4
-            boolean r7 = r4.useDesktopOverrideDensity
-            if (r7 == 0) goto L8f
-            android.window.WindowContainerToken r7 = r6.token
-            int r4 = r4.desktopDensityOverride
-            r5.setDensityDpi(r7, r4)
-        L8f:
-            android.window.WindowContainerToken r4 = r6.token
-            r5.setSkipLayoutTask(r4, r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.DesktopTasksController.addMoveToDeskTaskChanges(android.window.WindowContainerTransaction, android.app.ActivityManager$RunningTaskInfo, int, android.graphics.PointF):void");
+    public final void addDesktopDisabledFlagsOnDefaultDisplay(int i) {
+        DesktopModeWindowDecorViewModel.AnonymousClass1 anonymousClass1;
+        DesktopTasksController$IDesktopModeImpl$deskChangeListener$1 desktopTasksController$IDesktopModeImpl$deskChangeListener$1;
+        if ((this.desktopDisabledFlagsOnDefaultDisplay & i) != 0) {
+            return;
+        }
+        boolean zCanCreateDesks$default = canCreateDesks$default(this);
+        int i2 = i | this.desktopDisabledFlagsOnDefaultDisplay;
+        this.desktopDisabledFlagsOnDefaultDisplay = i2;
+        DesktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1 desktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1 = this.desktopDisabledFlagsListener;
+        if (desktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1 != null) {
+            desktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1.onDesktopDisabledFlagsChangedOnDefaultDisplay(i2);
+        }
+        boolean zCanCreateDesks$default2 = canCreateDesks$default(this);
+        if (zCanCreateDesks$default != zCanCreateDesks$default2 && (desktopTasksController$IDesktopModeImpl$deskChangeListener$1 = this.deskChangeListener) != null) {
+            desktopTasksController$IDesktopModeImpl$deskChangeListener$1.onCanCreateDesksChanged(zCanCreateDesks$default2);
+        }
+        if (!CoreRune.MW_CAPTION_DESKTOP_DISABLED || (anonymousClass1 = this.decorViewModelDesktopDisabledChangeListener) == null) {
+            return;
+        }
+        anonymousClass1.onDesktopDisabledFlagsChangedOnDefaultDisplay(this.desktopDisabledFlagsOnDefaultDisplay);
     }
 
-    public final DesktopTasksController$$ExternalSyntheticLambda5 addMoveToFullscreenChanges(WindowContainerTransaction windowContainerTransaction, ActivityManager.RunningTaskInfo runningTaskInfo, boolean z) {
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0051  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void addMoveToDeskTaskChanges(WindowContainerTransaction windowContainerTransaction, ActivityManager.RunningTaskInfo runningTaskInfo, int i, PointF pointF, boolean z) throws Resources.NotFoundException {
+        ActivityInfo.WindowLayout windowLayout;
+        int displayForDesk = this.taskRepository.desktopData.getDisplayForDesk(i);
+        DisplayLayout displayLayout = this.displayController.getDisplayLayout(displayForDesk);
+        if (displayLayout == null) {
+            return;
+        }
+        Rect inheritedExistingTaskBounds = DesktopModeUtils.getInheritedExistingTaskBounds(this.taskRepository, this.shellTaskOrganizer, runningTaskInfo, i);
+        if (z) {
+            Slog.e("DesktopTasksController", "addMoveToDeskTaskChanges: keep current systemModalTask");
+            return;
+        }
+        if (inheritedExistingTaskBounds == null) {
+            Rect initialBounds = getInitialBounds(displayLayout, runningTaskInfo, displayForDesk);
+            if (pointF != null) {
+                setBoundsToDropPosition(windowContainerTransaction, runningTaskInfo, displayLayout, pointF, initialBounds);
+            } else {
+                ActivityInfo activityInfo = ((TaskInfo) runningTaskInfo).topActivityInfo;
+                if (activityInfo == null || (windowLayout = activityInfo.windowLayout) == null) {
+                    windowContainerTransaction.setBounds(runningTaskInfo.token, initialBounds);
+                } else {
+                    int i2 = windowLayout.gravity;
+                    int i3 = i2 & 7;
+                    int i4 = i2 & 112;
+                    if (i3 == 0 && i4 == 0) {
+                    }
+                }
+            }
+        } else if (pointF != null) {
+            setBoundsToDropPosition(windowContainerTransaction, runningTaskInfo, displayLayout, pointF, inheritedExistingTaskBounds);
+        } else {
+            windowContainerTransaction.setBounds(runningTaskInfo.token, inheritedExistingTaskBounds).getClass();
+        }
+        if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
+            ((RootTaskDesksOrganizer) this.desksOrganizer).moveTaskToDesk(windowContainerTransaction, i, runningTaskInfo);
+        } else {
+            DisplayAreaInfo displayAreaInfo = this.rootTaskDisplayAreaOrganizer.getDisplayAreaInfo(displayForDesk);
+            displayAreaInfo.getClass();
+            windowContainerTransaction.setWindowingMode(runningTaskInfo.token, displayAreaInfo.configuration.windowConfiguration.getWindowingMode() == 5 ? 0 : 5);
+            windowContainerTransaction.reorder(runningTaskInfo.token, true).getClass();
+        }
+        DesktopConfigImpl desktopConfigImpl = (DesktopConfigImpl) this.desktopConfig;
+        if (desktopConfigImpl.useDesktopOverrideDensity) {
+            windowContainerTransaction.setDensityDpi(runningTaskInfo.token, desktopConfigImpl.desktopDensityOverride);
+        }
+        windowContainerTransaction.setSkipLayoutTask(runningTaskInfo.token, true);
+    }
+
+    public final DesktopTasksController$$ExternalSyntheticLambda3 addMoveToFullscreenChanges(WindowContainerTransaction windowContainerTransaction, ActivityManager.RunningTaskInfo runningTaskInfo, boolean z) {
         ActivityManager.RunningTaskInfo runningTaskInfo2;
         DisplayAreaInfo displayAreaInfo = this.rootTaskDisplayAreaOrganizer.getDisplayAreaInfo(runningTaskInfo.displayId);
         displayAreaInfo.getClass();
         int windowingMode = displayAreaInfo.configuration.windowConfiguration.getWindowingMode();
-        boolean isTopActivityExemptFromDesktopWindowing = this.desktopModeCompatPolicy.isTopActivityExemptFromDesktopWindowing(runningTaskInfo);
-        windowContainerTransaction.setWindowingMode(runningTaskInfo.token, (windowingMode != 1 || isTopActivityExemptFromDesktopWindowing) ? 1 : 0);
+        boolean zIsTopActivityExemptFromDesktopWindowing = this.desktopModeCompatPolicy.isTopActivityExemptFromDesktopWindowing(runningTaskInfo);
+        boolean z2 = false;
+        windowContainerTransaction.setWindowingMode(runningTaskInfo.token, (windowingMode != 1 || zIsTopActivityExemptFromDesktopWindowing) ? 1 : 0);
         windowContainerTransaction.setBounds(runningTaskInfo.token, new Rect());
         if (((DesktopConfigImpl) this.desktopConfig).useDesktopOverrideDensity) {
             windowContainerTransaction.setDensityDpi(runningTaskInfo.token, this.context.getResources().getDisplayMetrics().densityDpi);
         }
-        if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue() && !isTopActivityExemptFromDesktopWindowing) {
+        if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue() && !zIsTopActivityExemptFromDesktopWindowing) {
             windowContainerTransaction.reparent(runningTaskInfo.token, displayAreaInfo.token, true);
         }
-        boolean z2 = DesktopModeCompatPolicy.isTransparentTask(((TaskInfo) runningTaskInfo).numActivities, ((TaskInfo) runningTaskInfo).isActivityStackTransparent) && isTopActivityExemptFromDesktopWindowing;
-        if (((RootTaskDesksOrganizer) this.desksOrganizer).deskRootsByDeskId.contains(runningTaskInfo.parentTaskId) && !z2 && (runningTaskInfo2 = this.shellTaskOrganizer.getRunningTaskInfo(runningTaskInfo.parentTaskId)) != null) {
+        if (((RootTaskDesksOrganizer) this.desksOrganizer).deskRootsByDeskId.contains(runningTaskInfo.parentTaskId) && !zIsTopActivityExemptFromDesktopWindowing && (runningTaskInfo2 = this.shellTaskOrganizer.getRunningTaskInfo(runningTaskInfo.parentTaskId)) != null) {
             windowContainerTransaction.reorder(runningTaskInfo2.token, false);
+        }
+        if (DesktopModeCompatPolicy.isTransparentTask(((TaskInfo) runningTaskInfo).numActivities, ((TaskInfo) runningTaskInfo).isActivityStackTransparent) && zIsTopActivityExemptFromDesktopWindowing) {
+            z2 = true;
         }
         windowContainerTransaction.setFullscreenTransparentInDesktop(runningTaskInfo.token, z2);
         return performDesktopExitCleanUp$default(this, windowContainerTransaction, this.taskRepository.getDeskIdForTask(runningTaskInfo.taskId), runningTaskInfo.displayId, z, false, 32);
@@ -1569,10 +1972,11 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
     }
 
     public final void addPendingMinimizeTransition(IBinder iBinder, int i, DesktopModeEventLogger.Companion.MinimizeReason minimizeReason) {
-        this.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda7(iBinder, this.shellTaskOrganizer.getRunningTaskInfo(i), i, minimizeReason)));
+        this.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda8(iBinder, this.shellTaskOrganizer.getRunningTaskInfo(i), i, minimizeReason)));
     }
 
-    public final void cascadeWindow(Rect rect, DisplayLayout displayLayout, int i) {
+    public final void cascadeWindow(Rect rect, DisplayLayout displayLayout, int i) throws Resources.NotFoundException {
+        Object obj;
         Rect rect2 = new Rect();
         displayLayout.getStableBounds(rect2, false);
         int i2 = displayLayout.mNavBarFrameHeight;
@@ -1580,7 +1984,21 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         if (i2 != i3) {
             rect2.bottom = displayLayout.mHeight - i3;
         }
-        Integer num = (Integer) CollectionsKt___CollectionsKt.firstOrNull(this.taskRepository.getExpandedTasksOrdered(i));
+        ArrayList arrayList = (ArrayList) this.taskRepository.getExpandedTasksOrdered(i);
+        int size = arrayList.size();
+        int i4 = 0;
+        while (true) {
+            if (i4 >= size) {
+                obj = null;
+                break;
+            }
+            obj = arrayList.get(i4);
+            i4++;
+            if (!this.taskRepository.isClosingTask(((Number) obj).intValue())) {
+                break;
+            }
+        }
+        Integer num = (Integer) obj;
         if (num != null) {
             ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(num.intValue());
             if (runningTaskInfo != null) {
@@ -1591,7 +2009,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 DesktopTaskPosition.Center center = DesktopTaskPosition.Center.INSTANCE;
                 Point topLeftCoordinates = center.getTopLeftCoordinates(rect2, rect3);
                 rect3.offsetTo(topLeftCoordinates.x, topLeftCoordinates.y);
-                int dimensionPixelSize = resources.getDimensionPixelSize(com.android.systemui.R.dimen.freeform_required_visible_empty_space_in_header);
+                int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.freeform_required_visible_empty_space_in_header);
                 boolean z = rect3.left - bounds.left > dimensionPixelSize;
                 boolean z2 = rect3.top - bounds.top > dimensionPixelSize;
                 boolean z3 = bounds.right - rect3.right > dimensionPixelSize;
@@ -1608,29 +2026,29 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         Object obj = null;
         if (i == -1) {
             logW("createDesk attempt with invalid displayId", Integer.valueOf(i));
-            function1.mo779invoke(null);
+            function1.mo781invoke(null);
             return;
         }
         if (!DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
             logD$1("createDesk reusing displayId=%d for single-desk", Integer.valueOf(i));
-            function1.mo779invoke(Integer.valueOf(i));
+            function1.mo781invoke(Integer.valueOf(i));
             return;
         }
         int i3 = 0;
         if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_HSUM.isTrue() && UserManager.isHeadlessSystemUserMode() && i2 == 0) {
             logW("createDesk ignoring attempt for system user", new Object[0]);
-            function1.mo779invoke(null);
+            function1.mo781invoke(null);
             return;
         }
-        DesktopTasksController$createDeskRoot$1 desktopTasksController$createDeskRoot$1 = new DesktopTasksController$createDeskRoot$1(this, i, i2, function1);
+        C12011 c12011 = new C12011(i, i2, function1);
         RootTaskDesksOrganizer rootTaskDesksOrganizer = (RootTaskDesksOrganizer) this.desksOrganizer;
         Object[] objArr = {Integer.valueOf(i), Integer.valueOf(i2)};
         rootTaskDesksOrganizer.getClass();
         RootTaskDesksOrganizer.logV$2("createDesk in displayId=%d userId=%s", objArr);
-        RootTaskDesksOrganizer.DeskRoot firstUnassignedDesk = rootTaskDesksOrganizer.firstUnassignedDesk(i, i2);
-        if (firstUnassignedDesk != null) {
-            firstUnassignedDesk.users.add(Integer.valueOf(i2));
-            desktopTasksController$createDeskRoot$1.onCreated(firstUnassignedDesk.deskId);
+        RootTaskDesksOrganizer.DeskRoot deskRootFirstUnassignedDesk = rootTaskDesksOrganizer.firstUnassignedDesk(i, i2);
+        if (deskRootFirstUnassignedDesk != null) {
+            deskRootFirstUnassignedDesk.users.add(Integer.valueOf(i2));
+            c12011.onCreated(deskRootFirstUnassignedDesk.deskId);
             return;
         }
         ArrayList arrayList = (ArrayList) rootTaskDesksOrganizer.createDeskRootRequests;
@@ -1654,10 +2072,10 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             arrayList2.add(new RootTaskDesksOrganizer.CreateDeskRequest(createDeskRequest.displayId, Integer.valueOf(i2), createDeskRequest.onCreateCallback));
             return;
         }
-        Integer valueOf = Integer.valueOf(i2);
-        RootTaskDesksOrganizer.logV$2("createDeskRoot in display: %d for user: %d", Integer.valueOf(i), valueOf);
-        ((ArrayList) rootTaskDesksOrganizer.createDeskRootRequests).add(new RootTaskDesksOrganizer.CreateDeskRequest(i, valueOf, desktopTasksController$createDeskRoot$1));
-        rootTaskDesksOrganizer.shellTaskOrganizer.createDeskRootTask(i, 1, rootTaskDesksOrganizer);
+        Integer numValueOf = Integer.valueOf(i2);
+        RootTaskDesksOrganizer.logV$2("createDeskRoot in display: %d for user: %d", Integer.valueOf(i), numValueOf);
+        ((ArrayList) rootTaskDesksOrganizer.createDeskRootRequests).add(new RootTaskDesksOrganizer.CreateDeskRequest(i, numValueOf, c12011));
+        rootTaskDesksOrganizer.shellTaskOrganizer.createDeskRootTask(i, 1, -1, rootTaskDesksOrganizer);
     }
 
     public final ActivityOptions createNewWindowOptions(ActivityManager.RunningTaskInfo runningTaskInfo) {
@@ -1680,11 +2098,35 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             }
             initialBounds = new Rect();
         }
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setLaunchWindowingMode(i);
-        makeBasic.setPendingIntentBackgroundActivityStartMode(3);
-        makeBasic.setLaunchBounds(initialBounds);
-        return makeBasic;
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setLaunchWindowingMode(i);
+        activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(3);
+        activityOptionsMakeBasic.setLaunchBounds(initialBounds);
+        return activityOptionsMakeBasic;
+    }
+
+    public final void desktopExitLogging(int i) {
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        long j = SA_DURATION_UNIT_MS;
+        if (i != 0) {
+            DesktopStateImpl.Companion.getClass();
+            if (!DesktopStateImpl.Companion.inDesktopWindowing(i)) {
+                Long l = this.desktopStartMillisOnExternal;
+                if (l != null) {
+                    CoreSaLogger.logForDexWithScreenId("300", "3901", (jElapsedRealtime - l.longValue()) / j);
+                }
+                this.desktopStartMillisOnExternal = null;
+            }
+        }
+        DesktopStateImpl.Companion.getClass();
+        if (DesktopStateImpl.inDesktopWindowing || DesktopStateImpl.desktopExternalDisplayId != -1) {
+            return;
+        }
+        Long l2 = this.desktopStartMillis;
+        if (l2 != null) {
+            CoreSaLogger.logForDexWithScreenId("300", "3900", String.valueOf((jElapsedRealtime - l2.longValue()) / j), i == 0 ? 1 : 2);
+        }
+        this.desktopStartMillis = null;
     }
 
     public final boolean doesAnyTaskRequireTaskbarRounding(int i, Integer num) {
@@ -1697,77 +2139,79 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         while (i2 < size) {
             Object obj = arrayList2.get(i2);
             i2++;
-            int intValue = ((Number) obj).intValue();
-            if (num == null || intValue != num.intValue()) {
+            int iIntValue = ((Number) obj).intValue();
+            if (num == null || iIntValue != num.intValue()) {
                 arrayList.add(obj);
             }
         }
-        if (!arrayList.isEmpty()) {
+        if (arrayList.isEmpty()) {
+            z = false;
+        } else {
             int size2 = arrayList.size();
             int i3 = 0;
             while (i3 < size2) {
                 Object obj2 = arrayList.get(i3);
                 i3++;
                 ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(((Number) obj2).intValue());
-                if (runningTaskInfo != null) {
-                    DisplayLayout displayLayout = this.displayController.getDisplayLayout(runningTaskInfo.displayId);
-                    Rect rect = new Rect();
-                    if (displayLayout != null) {
-                        displayLayout.getStableBounds(rect, false);
-                    }
-                    logD$1("taskInfo = %s", runningTaskInfo);
-                    Rect bounds = runningTaskInfo.configuration.windowConfiguration.getBounds();
-                    SnapPosition snapPosition = SnapPosition.LEFT;
-                    logD$1("isTaskSnappedToHalfScreen(taskInfo) = %s", Boolean.valueOf(getSnapBounds(runningTaskInfo, snapPosition).equals(bounds) || getSnapBounds(runningTaskInfo, SnapPosition.RIGHT).equals(bounds)));
-                    Rect bounds2 = runningTaskInfo.configuration.windowConfiguration.getBounds();
-                    float f = DesktopModeUtils.DESKTOP_MODE_INITIAL_BOUNDS_SCALE;
-                    logD$1("isMaximizedToStableBoundsEdges(taskInfo, stableBounds) = %s", Boolean.valueOf(Intrinsics.areEqual(bounds2, rect)));
-                    Rect bounds3 = runningTaskInfo.configuration.windowConfiguration.getBounds();
-                    if (getSnapBounds(runningTaskInfo, snapPosition).equals(bounds3) || getSnapBounds(runningTaskInfo, SnapPosition.RIGHT).equals(bounds3) || Intrinsics.areEqual(runningTaskInfo.configuration.windowConfiguration.getBounds(), rect)) {
-                        break;
-                    }
-                } else {
+                if (runningTaskInfo == null) {
                     return false;
                 }
+                DisplayLayout displayLayout = this.displayController.getDisplayLayout(runningTaskInfo.displayId);
+                Rect rect = new Rect();
+                if (displayLayout != null) {
+                    displayLayout.getStableBounds(rect, false);
+                }
+                logD$1("taskInfo = %s", runningTaskInfo);
+                Rect bounds = runningTaskInfo.configuration.windowConfiguration.getBounds();
+                SnapPosition snapPosition = SnapPosition.LEFT;
+                logD$1("isTaskSnappedToHalfScreen(taskInfo) = %s", Boolean.valueOf(getSnapBounds(runningTaskInfo, snapPosition).equals(bounds) || getSnapBounds(runningTaskInfo, SnapPosition.RIGHT).equals(bounds)));
+                Rect bounds2 = runningTaskInfo.configuration.windowConfiguration.getBounds();
+                int i4 = DesktopModeUtils.DESKTOP_MODE_LANDSCAPE_APP_PADDING;
+                logD$1("isMaximizedToStableBoundsEdges(taskInfo, stableBounds) = %s", Boolean.valueOf(Intrinsics.areEqual(bounds2, rect)));
+                Rect bounds3 = runningTaskInfo.configuration.windowConfiguration.getBounds();
+                if (getSnapBounds(runningTaskInfo, snapPosition).equals(bounds3) || getSnapBounds(runningTaskInfo, SnapPosition.RIGHT).equals(bounds3) || Intrinsics.areEqual(runningTaskInfo.configuration.windowConfiguration.getBounds(), rect)) {
+                    break;
+                }
             }
+            z = false;
         }
-        z = false;
         logD$1("doesAnyTaskRequireTaskbarRounding = %s", Boolean.valueOf(z));
         return z;
     }
 
-    public final void dump$2(PrintWriter printWriter, String str) {
-        String joinToString$default;
-        String joinToString$default2;
-        String joinToString$default3;
-        String joinToString$default4;
+    public final void dump$2(PrintWriter printWriter, String str) throws Resources.NotFoundException {
         String str2;
         String str3 = "  ";
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
         QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, str, "DesktopTasksController");
+        int i = this.desktopDisabledFlagsOnDefaultDisplay;
+        if (i != 0) {
+            CharsKt__CharJVMKt.checkRadix(16);
+            printWriter.println(strM + "desktopDisabledOnDefaultDisplay=0x" + Integer.toString(i, 16));
+        }
         DesktopConfigImpl desktopConfigImpl = (DesktopConfigImpl) this.desktopConfig;
         desktopConfigImpl.getClass();
-        new IndentingPrintWriter(printWriter, "  ", m).increaseIndent();
+        new IndentingPrintWriter(printWriter, "  ", strM).increaseIndent();
         printWriter.println("DesktopConfig");
         DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("maxTaskLimit=", desktopConfigImpl.maxTaskLimit, printWriter);
-        printWriter.print("maxTaskLimit config override=" + desktopConfigImpl.context.getResources().getInteger(R.integer.config_previousVibrationsDumpSizeLimit));
-        SystemProperties.Handle find = SystemProperties.find("persist.wm.debug.desktop_max_task_limit");
-        DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("maxTaskLimit sysprop=", find != null ? Integer.valueOf(find.getInt(-1)) : "null", printWriter);
+        printWriter.print("maxTaskLimit config override=" + desktopConfigImpl.context.getResources().getInteger(android.R.integer.config_previousVibrationsDumpSizeLimit));
+        SystemProperties.Handle handleFind = SystemProperties.find("persist.wm.debug.desktop_max_task_limit");
+        DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("maxTaskLimit sysprop=", handleFind != null ? Integer.valueOf(handleFind.getInt(-1)) : "null", printWriter);
         desktopConfigImpl.desktopState.getClass();
         printWriter.println("showAppHandle config override=false");
         ActiveUnlockConfig$$ExternalSyntheticOutline0.m(printWriter, "inDesktopWindowing=", DesktopStateImpl.inDesktopWindowing);
         DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("desktopExternalDisplayId=", DesktopStateImpl.desktopExternalDisplayId, printWriter);
         DesktopUserRepositories desktopUserRepositories = this.userRepositories;
         desktopUserRepositories.getClass();
-        String str4 = m + "    ";
-        QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, m, "DesktopUserRepositories:");
+        String str4 = strM + "    ";
+        QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, strM, "DesktopUserRepositories:");
         printWriter.println(str4 + "currentUserId=" + desktopUserRepositories.userId);
         DesktopUserRepositories$desktopRepoByUserId$1 desktopUserRepositories$desktopRepoByUserId$1 = desktopUserRepositories.desktopRepoByUserId;
         int size = desktopUserRepositories$desktopRepoByUserId$1.size();
-        int i = 0;
-        while (i < size) {
-            desktopUserRepositories$desktopRepoByUserId$1.keyAt(i);
-            DesktopRepository desktopRepository = (DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i);
+        int i2 = 0;
+        while (i2 < size) {
+            desktopUserRepositories$desktopRepoByUserId$1.keyAt(i2);
+            DesktopRepository desktopRepository = (DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i2);
             desktopRepository.getClass();
             String str5 = str4 + str3;
             printWriter.println(str4 + "DesktopRepository");
@@ -1775,18 +2219,18 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             StringBuilder sb = new StringBuilder();
             sb.append(str5);
             sb.append(str3);
-            String sb2 = sb.toString();
+            String string = sb.toString();
             DesktopRepository.DesktopData desktopData = desktopRepository.desktopData;
-            Sequence desksSequence = desktopData.desksSequence();
+            Sequence sequenceDesksSequence = desktopData.desksSequence();
             LinkedHashMap linkedHashMap = new LinkedHashMap();
-            for (Object obj : desksSequence) {
+            for (Object obj : sequenceDesksSequence) {
                 DesktopUserRepositories$desktopRepoByUserId$1 desktopUserRepositories$desktopRepoByUserId$12 = desktopUserRepositories$desktopRepoByUserId$1;
-                Integer valueOf = Integer.valueOf(((DesktopRepository.Desk) obj).displayId);
-                Object obj2 = linkedHashMap.get(valueOf);
+                Integer numValueOf = Integer.valueOf(((DesktopRepository.Desk) obj).displayId);
+                Object obj2 = linkedHashMap.get(numValueOf);
                 if (obj2 == null) {
                     str2 = str4;
                     ArrayList arrayList = new ArrayList();
-                    linkedHashMap.put(valueOf, arrayList);
+                    linkedHashMap.put(numValueOf, arrayList);
                     obj2 = arrayList;
                 } else {
                     str2 = str4;
@@ -1801,62 +2245,57 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             Iterator it = linkedHashMap.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry entry = (Map.Entry) it.next();
-                int intValue = ((Number) entry.getKey()).intValue();
+                int iIntValue = ((Number) entry.getKey()).intValue();
                 List list = (List) entry.getValue();
                 Iterator it2 = it;
-                Integer valueOf2 = Integer.valueOf(intValue);
-                DesktopRepository.Desk activeDesk = desktopData.getActiveDesk(intValue);
-                arrayList2.add(new Triple(valueOf2, activeDesk != null ? Integer.valueOf(activeDesk.deskId) : null, list));
+                Integer numValueOf2 = Integer.valueOf(iIntValue);
+                DesktopRepository.Desk activeDesk = desktopData.getActiveDesk(iIntValue);
+                arrayList2.add(new Triple(numValueOf2, activeDesk != null ? Integer.valueOf(activeDesk.deskId) : null, list));
                 it = it2;
             }
             int size2 = arrayList2.size();
-            int i2 = 0;
-            while (i2 < size2) {
-                Object obj3 = arrayList2.get(i2);
-                i2++;
+            int i3 = 0;
+            while (i3 < size2) {
+                Object obj3 = arrayList2.get(i3);
+                i3++;
                 Triple triple = (Triple) obj3;
-                int intValue2 = ((Number) triple.component1()).intValue();
+                int iIntValue2 = ((Number) triple.component1()).intValue();
                 Integer num = (Integer) triple.component2();
                 List<DesktopRepository.Desk> list2 = (List) triple.component3();
                 ArrayList arrayList3 = arrayList2;
-                StringBuilder sb3 = new StringBuilder();
-                sb3.append(str5);
-                int i3 = size2;
-                sb3.append("Display #");
-                sb3.append(intValue2);
-                sb3.append(":");
-                printWriter.println(sb3.toString());
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(str5);
+                int i4 = size2;
+                sb2.append("Display #");
+                sb2.append(iIntValue2);
+                sb2.append(":");
+                printWriter.println(sb2.toString());
                 int size3 = list2.size();
-                StringBuilder sb4 = new StringBuilder();
-                sb4.append(sb2);
-                int i4 = size;
-                sb4.append("numOfDesks=");
-                sb4.append(size3);
-                printWriter.println(sb4.toString());
-                printWriter.println(sb2 + "activeDesk=" + num);
-                printWriter.println(sb2 + "desks:");
-                String str7 = sb2 + str3;
+                StringBuilder sb3 = new StringBuilder();
+                sb3.append(string);
+                int i5 = size;
+                sb3.append("numOfDesks=");
+                sb3.append(size3);
+                printWriter.println(sb3.toString());
+                printWriter.println(string + "activeDesk=" + num);
+                printWriter.println(string + "desks:");
+                String str7 = string + str3;
                 for (DesktopRepository.Desk desk : list2) {
-                    int i5 = desk.deskId;
-                    StringBuilder sb5 = new StringBuilder();
-                    sb5.append(str7);
-                    String str8 = str3;
-                    sb5.append("Desk #");
-                    sb5.append(i5);
-                    sb5.append(":");
-                    printWriter.println(sb5.toString());
+                    int i6 = desk.deskId;
+                    StringBuilder sb4 = new StringBuilder();
+                    sb4.append(str7);
+                    sb4.append("Desk #");
+                    sb4.append(i6);
+                    sb4.append(":");
+                    printWriter.println(sb4.toString());
                     printWriter.print(str7 + "  activeTasks=");
-                    joinToString$default = CollectionsKt___CollectionsKt.joinToString$default(desk.activeTasks, ", ", "[", "]", null, 56);
-                    printWriter.println(joinToString$default);
+                    printWriter.println(CollectionsKt___CollectionsKt.joinToString$default(desk.activeTasks, ", ", "[", "]", null, 56));
                     printWriter.print(str7 + "  visibleTasks=");
-                    joinToString$default2 = CollectionsKt___CollectionsKt.joinToString$default(desk.visibleTasks, ", ", "[", "]", null, 56);
-                    printWriter.println(joinToString$default2);
+                    printWriter.println(CollectionsKt___CollectionsKt.joinToString$default(desk.visibleTasks, ", ", "[", "]", null, 56));
                     printWriter.print(str7 + "  freeformTasksInZOrder=");
-                    joinToString$default3 = CollectionsKt___CollectionsKt.joinToString$default(desk.freeformTasksInZOrder, ", ", "[", "]", null, 56);
-                    printWriter.println(joinToString$default3);
+                    printWriter.println(CollectionsKt___CollectionsKt.joinToString$default(desk.freeformTasksInZOrder, ", ", "[", "]", null, 56));
                     printWriter.print(str7 + "  minimizedTasks=");
-                    joinToString$default4 = CollectionsKt___CollectionsKt.joinToString$default(desk.minimizedTasks, ", ", "[", "]", null, 56);
-                    printWriter.println(joinToString$default4);
+                    printWriter.println(CollectionsKt___CollectionsKt.joinToString$default(desk.minimizedTasks, ", ", "[", "]", null, 56));
                     printWriter.print(str7 + "  fullImmersiveTaskId=");
                     printWriter.println(desk.fullImmersiveTaskId);
                     printWriter.print(str7 + "  topTransparentFullscreenTaskId=");
@@ -1865,15 +2304,15 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     printWriter.println(desk.usedDesk);
                     printWriter.print(str7 + "  deskLabel=");
                     printWriter.println(desk.deskLabel);
-                    str3 = str8;
+                    str3 = str3;
                 }
                 arrayList2 = arrayList3;
-                size2 = i3;
-                size = i4;
+                size2 = i4;
+                size = i5;
             }
             printWriter.println(str5 + "activeTasksListeners=" + desktopRepository.activeTasksListeners.size());
             printWriter.println(str5 + "visibleTasksListeners=" + desktopRepository.visibleTasksListeners.size());
-            i++;
+            i2++;
             desktopUserRepositories$desktopRepoByUserId$1 = desktopUserRepositories$desktopRepoByUserId$13;
             str4 = str6;
             size = size;
@@ -1881,14 +2320,14 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
         FocusTransitionObserver focusTransitionObserver = this.focusTransitionObserver;
         focusTransitionObserver.getClass();
-        IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "    ", m);
+        IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "    ", strM);
         indentingPrintWriter.println("FocusTransitionObserver:");
         indentingPrintWriter.increaseIndent();
         indentingPrintWriter.printf("currentFocusedDisplayId=%d\n", new Object[]{Integer.valueOf(focusTransitionObserver.mFocusedDisplayId)});
         indentingPrintWriter.println("currentFocusedTaskOnDisplay:");
         indentingPrintWriter.increaseIndent();
-        for (int i6 = 0; i6 < focusTransitionObserver.mFocusedTaskOnDisplay.size(); i6++) {
-            indentingPrintWriter.printf("Display #%d: taskId=%d topActivity=%s\n", new Object[]{Integer.valueOf(focusTransitionObserver.mFocusedTaskOnDisplay.keyAt(i6)), Integer.valueOf(((ActivityManager.RunningTaskInfo) focusTransitionObserver.mFocusedTaskOnDisplay.valueAt(i6)).taskId), ((ActivityManager.RunningTaskInfo) focusTransitionObserver.mFocusedTaskOnDisplay.valueAt(i6)).topActivity});
+        for (int i7 = 0; i7 < focusTransitionObserver.mFocusedTaskOnDisplay.size(); i7++) {
+            indentingPrintWriter.printf("Display #%d: taskId=%d topActivity=%s\n", new Object[]{Integer.valueOf(focusTransitionObserver.mFocusedTaskOnDisplay.keyAt(i7)), Integer.valueOf(((ActivityManager.RunningTaskInfo) focusTransitionObserver.mFocusedTaskOnDisplay.valueAt(i7)).taskId), ((ActivityManager.RunningTaskInfo) focusTransitionObserver.mFocusedTaskOnDisplay.valueAt(i7)).topActivity});
         }
     }
 
@@ -1975,34 +2414,76 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         return (ActivityManager.RunningTaskInfo) obj;
     }
 
-    public final Rect getInitialBounds(DisplayLayout displayLayout, ActivityManager.RunningTaskInfo runningTaskInfo, int i) {
-        Rect calculateDefaultDesktopTaskBounds;
+    public final Rect getInitialBounds(DisplayLayout displayLayout, ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws Resources.NotFoundException {
+        Rect rectCalculateDefaultDesktopTaskBounds;
         if (DesktopModeFlags.ENABLE_WINDOWING_DYNAMIC_INITIAL_BOUNDS.isTrue()) {
             this.desktopModeCompatPolicy.getClass();
             ActivityInfo activityInfo = ((TaskInfo) runningTaskInfo).topActivityInfo;
-            calculateDefaultDesktopTaskBounds = DesktopModeUtils.calculateInitialBounds$default(displayLayout, runningTaskInfo, activityInfo != null ? DesktopModeCompatUtils.shouldExcludeCaptionFromAppBounds(activityInfo, ((TaskInfo) runningTaskInfo).isResizeable, ((TaskInfo) runningTaskInfo).appCompatTaskInfo.hasOptOutEdgeToEdge()) : false ? SystemBarUtils.getDesktopViewAppHeaderHeightPx(this.context) : 0, null, 20);
+            rectCalculateDefaultDesktopTaskBounds = DesktopModeUtils.calculateInitialBounds$default(displayLayout, runningTaskInfo, activityInfo != null ? DesktopModeCompatUtils.shouldExcludeCaptionFromAppBounds(activityInfo, ((TaskInfo) runningTaskInfo).isResizeable, ((TaskInfo) runningTaskInfo).appCompatTaskInfo.hasOptOutEdgeToEdge()) : false ? SystemBarUtils.getDesktopViewAppHeaderHeightPx(this.context) : 0, null, 20);
         } else {
-            calculateDefaultDesktopTaskBounds = DesktopModeUtils.calculateDefaultDesktopTaskBounds(displayLayout);
+            rectCalculateDefaultDesktopTaskBounds = DesktopModeUtils.calculateDefaultDesktopTaskBounds(displayLayout);
         }
         if (DesktopModeFlags.ENABLE_CASCADING_WINDOWS.isTrue()) {
-            cascadeWindow(calculateDefaultDesktopTaskBounds, displayLayout, i);
+            cascadeWindow(rectCalculateDefaultDesktopTaskBounds, displayLayout, i);
         }
-        return calculateDefaultDesktopTaskBounds;
+        return rectCalculateDefaultDesktopTaskBounds;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00ca  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00e6  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00dc  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x00a4  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x00b6  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00c0  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Integer getOrCreateDefaultDeskId(int r7, boolean r8) {
-        /*
-            Method dump skipped, instructions count: 259
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.DesktopTasksController.getOrCreateDefaultDeskId(int, boolean):java.lang.Integer");
+    public final Integer getOrCreateDefaultDeskId(int i, boolean z) {
+        Integer numValueOf;
+        Integer lastUsedDeskIdInDefaultDisplay;
+        if (z && i == 0 && (lastUsedDeskIdInDefaultDisplay = this.taskRepository.getLastUsedDeskIdInDefaultDisplay()) != null) {
+            return lastUsedDeskIdInDefaultDisplay;
+        }
+        Integer defaultDeskId = this.taskRepository.getDefaultDeskId(i);
+        if (defaultDeskId != null) {
+            return defaultDeskId;
+        }
+        int i2 = this.userId;
+        logV$1("createDeskImmediate displayId=%d, userId=%d", Integer.valueOf(i), Integer.valueOf(i2));
+        DesktopRepository profile = this.userRepositories.getProfile(i2);
+        Integer num = null;
+        if (i != -1) {
+            if (!DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
+                logD$1("createDeskRootImmediate reusing displayId=%d for single-desk", Integer.valueOf(i));
+                numValueOf = Integer.valueOf(i);
+            } else if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_HSUM.isTrue() && UserManager.isHeadlessSystemUserMode() && i2 == 0) {
+                logW("createDeskRootImmediate ignoring attempt for system user", new Object[0]);
+            } else {
+                RootTaskDesksOrganizer rootTaskDesksOrganizer = (RootTaskDesksOrganizer) this.desksOrganizer;
+                Object[] objArr = {Integer.valueOf(i), Integer.valueOf(i2)};
+                rootTaskDesksOrganizer.getClass();
+                RootTaskDesksOrganizer.logV$2("createDeskImmediate in displayId=%d userId=%s", objArr);
+                RootTaskDesksOrganizer.DeskRoot deskRootFirstUnassignedDesk = rootTaskDesksOrganizer.firstUnassignedDesk(i, i2);
+                if (deskRootFirstUnassignedDesk != null) {
+                    deskRootFirstUnassignedDesk.users.add(Integer.valueOf(i2));
+                    numValueOf = Integer.valueOf(deskRootFirstUnassignedDesk.deskId);
+                }
+            }
+            if (numValueOf != null) {
+                logW("Failed to add desk in displayId=%d for userId=%d", Integer.valueOf(i), Integer.valueOf(i2));
+            } else {
+                profile.addDesk(i, numValueOf.intValue(), -1);
+                num = numValueOf;
+            }
+            if (num == null) {
+                logE("Failed to create immediate desk in displayId=%s for userId=%s:\n%s", Integer.valueOf(i), Integer.valueOf(this.userId), ExceptionsKt__ExceptionsKt.stackTraceToString(new Throwable()));
+            }
+            return num;
+        }
+        logW("createDeskRootImmediate attempt with invalid displayId", Integer.valueOf(i));
+        numValueOf = null;
+        if (numValueOf != null) {
+        }
+        if (num == null) {
+        }
+        return num;
     }
 
     @Override // com.android.wm.shell.common.RemoteCallable
@@ -2016,44 +2497,582 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             return new Rect();
         }
         Rect rect = new Rect();
-        displayLayout.getStableBounds(rect, false);
-        int width = rect.width() / 2;
+        displayLayout.getStableBoundsByInsetsVisibility(rect);
+        int iWidth = rect.width() / 2;
         int i = WhenMappings.$EnumSwitchMapping$0[snapPosition.ordinal()];
         if (i == 1) {
             int i2 = rect.left;
-            return new Rect(i2, rect.top, width + i2, rect.bottom);
+            return new Rect(i2, rect.top, iWidth + i2, rect.bottom);
         }
         if (i != 2) {
             throw new NoWhenBranchMatchedException();
         }
         int i3 = rect.right;
-        return new Rect(i3 - width, rect.top, i3, rect.bottom);
+        return new Rect(i3 - iWidth, rect.top, i3, rect.bottom);
     }
 
     public final DesktopModeVisualIndicator getVisualIndicator() {
         return this.visualIndicator;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:126:0x0312, code lost:
-    
-        if (r1.isEmpty() != false) goto L125;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x020c  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x0265  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x0624 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x063a  */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x0643  */
+    /* JADX WARN: Removed duplicated region for block: B:129:0x02b8  */
+    /* JADX WARN: Removed duplicated region for block: B:162:0x0373  */
+    /* JADX WARN: Removed duplicated region for block: B:204:0x0456  */
+    /* JADX WARN: Removed duplicated region for block: B:267:0x05d1  */
+    /* JADX WARN: Removed duplicated region for block: B:294:0x0655  */
+    /* JADX WARN: Removed duplicated region for block: B:297:0x0666  */
+    /* JADX WARN: Removed duplicated region for block: B:298:0x0680  */
+    /* JADX WARN: Removed duplicated region for block: B:301:0x0691  */
+    /* JADX WARN: Removed duplicated region for block: B:302:0x0693  */
+    /* JADX WARN: Removed duplicated region for block: B:309:0x06b7  */
+    /* JADX WARN: Removed duplicated region for block: B:311:0x06c2  */
+    /* JADX WARN: Removed duplicated region for block: B:317:0x06d5  */
+    /* JADX WARN: Removed duplicated region for block: B:322:0x06df A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:330:0x06f5  */
+    /* JADX WARN: Removed duplicated region for block: B:333:0x06fe  */
+    /* JADX WARN: Removed duplicated region for block: B:339:0x070c A[ADDED_TO_REGION] */
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.window.WindowContainerTransaction handleRequest(final android.os.IBinder r17, android.window.TransitionRequestInfo r18) {
-        /*
-            Method dump skipped, instructions count: 1625
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.DesktopTasksController.handleRequest(android.os.IBinder, android.window.TransitionRequestInfo):android.window.WindowContainerTransaction");
+    public final WindowContainerTransaction handleRequest(final IBinder iBinder, TransitionRequestInfo transitionRequestInfo) throws Resources.NotFoundException {
+        boolean z;
+        boolean z2;
+        boolean z3;
+        boolean z4;
+        WindowContainerTransaction windowContainerTransaction;
+        ActivityManager.RunningTaskInfo runningTaskInfo;
+        DesktopTasksController desktopTasksController;
+        WindowContainerTransaction windowContainerTransaction2;
+        boolean z5;
+        WindowContainerTransaction windowContainerTransaction3;
+        Integer activeDeskId;
+        ActivityManager.RunningTaskInfo runningTaskInfo2;
+        Rect inheritedExistingTaskBounds;
+        DesktopConfigImpl desktopConfigImpl;
+        WindowContainerTransaction windowContainerTransaction4;
+        IBinder iBinder2;
+        Function1 function1;
+        Integer numAddAndGetMinimizeChanges;
+        DisplayLayout displayLayout;
+        Function1 function1AddDeskActivationChanges$default;
+        DesktopImmersiveController.ExitResult.Exit exitAsExit;
+        Function1 function12;
+        Integer deskIdForTask;
+        ActivityManager.RunningTaskInfo triggerTask;
+        ArrayList arrayList;
+        int type = transitionRequestInfo.getType();
+        ActivityManager.RunningTaskInfo triggerTask2 = transitionRequestInfo.getTriggerTask();
+        Integer numValueOf = triggerTask2 != null ? Integer.valueOf(triggerTask2.taskId) : null;
+        String strM = "";
+        String strM2 = transitionRequestInfo.getFlags() == 0 ? "" : ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(transitionRequestInfo.getFlags(), "f=", ", ");
+        String str = transitionRequestInfo.getPipChange() == null ? "" : "pip=" + transitionRequestInfo.getPipChange() + ", ";
+        String str2 = transitionRequestInfo.getDisplayChange() == null ? "" : "d=" + transitionRequestInfo.getDisplayChange() + ", ";
+        String str3 = transitionRequestInfo.getRemoteTransition() == null ? "" : "remote=true, ";
+        int debugId = transitionRequestInfo.getDebugId();
+        StringBuilder sb = new StringBuilder("TransitionRequestInfo {type=");
+        sb.append(type);
+        sb.append(", tid=");
+        sb.append(numValueOf);
+        sb.append(", ");
+        MoveResult$$ExternalSyntheticOutline0.m(sb, strM2, str, str2, str3);
+        sb.append("debugId=");
+        sb.append(debugId);
+        sb.append("}");
+        Log.d("ShellDesktopMode", "handleRequest: " + sb.toString());
+        TransitionRequestInfo.DisplayChange displayChange = transitionRequestInfo.getDisplayChange();
+        if (DesktopExperienceFlags.ENABLE_DISPLAY_DISCONNECT_INTERACTION.isTrue() && displayChange != null && displayChange.getDisconnectReparentDisplay() != -1) {
+            final int displayId = displayChange.getDisplayId();
+            final int disconnectReparentDisplay = displayChange.getDisconnectReparentDisplay();
+            final WindowContainerTransaction windowContainerTransaction5 = new WindowContainerTransaction();
+            WindowContainerToken token = this.desktopWallpaperActivityTokenProvider.getToken(displayId);
+            if (token != null) {
+                logV$1("removeWallpaperTask", new Object[0]);
+                windowContainerTransaction5.removeTask(token);
+            }
+            logV$1("removeHomeTask in displayId=%d", Integer.valueOf(displayId));
+            ActivityManager.RunningTaskInfo homeTask = getHomeTask(displayId);
+            if (homeTask != null) {
+                windowContainerTransaction5.removeRootTask(homeTask.getToken());
+            }
+            Function1 function13 = new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda14
+                @Override // kotlin.jvm.functions.Function1
+                /* renamed from: invoke */
+                public final Object mo781invoke(Object obj) {
+                    WindowContainerTransaction windowContainerTransaction6 = windowContainerTransaction5;
+                    IBinder iBinder3 = iBinder;
+                    DesktopRepository desktopRepository = (DesktopRepository) obj;
+                    DesktopTasksController.Companion companion = DesktopTasksController.Companion;
+                    DesktopRepository.DesktopData desktopData = desktopRepository.desktopData;
+                    int i = displayId;
+                    List list = CollectionsKt___CollectionsKt.toList(SequencesKt___SequencesKt.toSet(new TransformingSequence(desktopData.desksSequence(i), new DesktopRepository$$ExternalSyntheticLambda0(2))));
+                    DesktopTasksController desktopTasksController2 = this;
+                    DesktopStateImpl desktopStateImpl = (DesktopStateImpl) desktopTasksController2.desktopState;
+                    int i2 = disconnectReparentDisplay;
+                    boolean zIsDesktopModeSupportedOnDisplay = desktopStateImpl.isDesktopModeSupportedOnDisplay(i2);
+                    ShellTaskOrganizer shellTaskOrganizer = desktopTasksController2.shellTaskOrganizer;
+                    DesksTransitionObserver desksTransitionObserver = desktopTasksController2.desksTransitionObserver;
+                    if (zIsDesktopModeSupportedOnDisplay) {
+                        Iterator it = list.iterator();
+                        while (it.hasNext()) {
+                            int iIntValue = ((Number) it.next()).intValue();
+                            RootTaskDesksOrganizer rootTaskDesksOrganizer = (RootTaskDesksOrganizer) desktopTasksController2.desksOrganizer;
+                            Object[] objArr = {Integer.valueOf(iIntValue), Integer.valueOf(i2), Boolean.FALSE};
+                            rootTaskDesksOrganizer.getClass();
+                            RootTaskDesksOrganizer.logV$2("moveDeskToDisplay deskId=%d, displayId=%d, toTop=%b", objArr);
+                            DisplayAreaInfo displayAreaInfo = rootTaskDesksOrganizer.rootTaskDisplayAreaOrganizer.getDisplayAreaInfo(i2);
+                            if (displayAreaInfo == null) {
+                                throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "DisplayAreaInfo not found for displayId=").toString());
+                            }
+                            Object obj2 = rootTaskDesksOrganizer.deskRootsByDeskId.get(iIntValue);
+                            if (obj2 == null) {
+                                throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iIntValue, "Root not found for desk: ").toString());
+                            }
+                            RootTaskDesksOrganizer.DeskRoot deskRoot = (RootTaskDesksOrganizer.DeskRoot) obj2;
+                            windowContainerTransaction6.reparent(deskRoot.token, displayAreaInfo.token, false);
+                            RootTaskDesksOrganizer.DeskMinimizationRoot deskMinimizationRoot = (RootTaskDesksOrganizer.DeskMinimizationRoot) ((LinkedHashMap) rootTaskDesksOrganizer.deskMinimizationRootsByDeskId).get(Integer.valueOf(iIntValue));
+                            if (deskMinimizationRoot == null) {
+                                throw new IllegalStateException(("Minimization root not found for desk: " + iIntValue).toString());
+                            }
+                            windowContainerTransaction6.reparent(deskMinimizationRoot.token, displayAreaInfo.token, false);
+                            windowContainerTransaction6.setWindowingMode(deskRoot.token, 5);
+                            windowContainerTransaction6.setWindowingMode(deskMinimizationRoot.token, 5);
+                            ActivityManager.RunningTaskInfo runningTaskInfo3 = shellTaskOrganizer.getRunningTaskInfo(iIntValue);
+                            if (runningTaskInfo3 != null) {
+                                windowContainerTransaction6.setReparentLeafTaskIfRelaunch(runningTaskInfo3.token, false);
+                            }
+                            desksTransitionObserver.addPendingTransition(new DeskTransition.ChangeDeskDisplay(iBinder3, iIntValue, i2));
+                            int i3 = i2;
+                            DesktopTasksController desktopTasksController3 = desktopTasksController2;
+                            int i4 = i;
+                            Function1 function1UpdateDesksActivationOnDisconnection = desktopTasksController3.updateDesksActivationOnDisconnection(i4, desktopRepository.userId, iIntValue, i3, windowContainerTransaction6, false);
+                            desktopTasksController2 = desktopTasksController3;
+                            if (function1UpdateDesksActivationOnDisconnection != null) {
+                                function1UpdateDesksActivationOnDisconnection.mo781invoke(iBinder3);
+                            }
+                            i = i4;
+                            i2 = i3;
+                        }
+                    } else {
+                        if (desktopTasksController2.rootTaskDisplayAreaOrganizer.getDisplayAreaInfo(i2) == null) {
+                            throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "Expected to find displayAreaInfo for displayId=").toString());
+                        }
+                        Iterator it2 = list.iterator();
+                        while (it2.hasNext()) {
+                            int iIntValue2 = ((Number) it2.next()).intValue();
+                            ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
+                            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(iIntValue2, i, "DesktopTasksController: onDisplayDisconnect deskId=", ", disconnect=", ", destination=");
+                            sbM.append(i2);
+                            ProtoLog.v(shellProtoLogGroup, sbM.toString(), new Object[0]);
+                            desksTransitionObserver.addPendingTransition(new DeskTransition.ChangeDeskDisplay(iBinder3, iIntValue2, i2));
+                            ActivityManager.RunningTaskInfo runningTaskInfo4 = shellTaskOrganizer.getRunningTaskInfo(iIntValue2);
+                            if (runningTaskInfo4 != null) {
+                                windowContainerTransaction6.setReparentLeafTaskIfRelaunch(runningTaskInfo4.token, true);
+                            }
+                        }
+                        desksTransitionObserver.addPendingTransition(new DeskTransition.RemoveDisplay(iBinder3, i));
+                        DesktopStateImpl.Companion.getClass();
+                        if (DesktopStateImpl.desktopExternalDisplayId == i) {
+                            DesktopStateImpl.Companion.setDesktopExternalDisplayId(-1);
+                        }
+                        if (CoreRune.MW_SA_LOGGING) {
+                            desktopTasksController2.desktopExitLogging(i);
+                        }
+                    }
+                    return Unit.INSTANCE;
+                }
+            };
+            DesktopUserRepositories$desktopRepoByUserId$1 desktopUserRepositories$desktopRepoByUserId$1 = this.userRepositories.desktopRepoByUserId;
+            int size = desktopUserRepositories$desktopRepoByUserId$1.size();
+            for (int i = 0; i < size; i++) {
+                desktopUserRepositories$desktopRepoByUserId$1.keyAt(i);
+                function13.mo781invoke((DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i));
+            }
+            return windowContainerTransaction5;
+        }
+        ActivityManager.RunningTaskInfo triggerTask3 = transitionRequestInfo.getTriggerTask();
+        boolean z6 = this.recentsTransitionState >= 3;
+        boolean z7 = z6 && triggerTask3 != null && triggerTask3.getWindowingMode() == 5 && TransitionUtil.isOpeningType(transitionRequestInfo.getType()) && this.taskRepository.isActiveTask(triggerTask3.taskId);
+        if (triggerTask3 == null || (arrayList = triggerTask3.launchCookies) == null || arrayList.isEmpty()) {
+            z = false;
+        } else {
+            int size2 = arrayList.size();
+            int i2 = 0;
+            while (i2 < size2) {
+                Object obj = arrayList.get(i2);
+                i2++;
+                if (Intrinsics.areEqual((IBinder) obj, this.dragAndDropFullscreenCookie)) {
+                    z = true;
+                    break;
+                }
+            }
+            z = false;
+        }
+        if ((transitionRequestInfo.getFlags() & 2097152) != 0) {
+            z2 = z;
+            z3 = true;
+        } else {
+            z2 = z;
+            z3 = false;
+        }
+        if (z7) {
+            z4 = true;
+        } else {
+            if (z6) {
+                strM = "recents animation is running";
+            } else if (z2) {
+                this.dragAndDropFullscreenCookie = null;
+            } else {
+                if (!DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_WALLPAPER_ACTIVITY.isTrue() || !TransitionUtil.isClosingType(transitionRequestInfo.getType()) || transitionRequestInfo.getTriggerTask() == null) {
+                    if (transitionRequestInfo.getType() != 1 && transitionRequestInfo.getType() != 3) {
+                        strM = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(transitionRequestInfo.getType(), "transition type not handled (", ")");
+                    } else if (triggerTask3 == null) {
+                        strM = "triggerTask is null";
+                    } else if (triggerTask3.getActivityType() != 1) {
+                        strM = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(triggerTask3.getActivityType(), "activityType not handled (", ")");
+                    } else if (triggerTask3.getWindowingMode() != 1 && !triggerTask3.isFreeform()) {
+                        strM = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(triggerTask3.getWindowingMode(), "windowingMode not handled (", ")");
+                    } else if (CoreRune.SYSFW_APP_SPEG && this.context.getPackageManager().isSpeg(triggerTask3.effectiveUid)) {
+                        strM = "app launched by SPEG";
+                    }
+                }
+                z4 = true;
+            }
+            z4 = false;
+        }
+        if (!z4) {
+            logV$1("skipping handleRequest reason=%s", strM);
+            if (transitionRequestInfo.getType() == 4 && (triggerTask = transitionRequestInfo.getTriggerTask()) != null && this.taskRepository.isActiveTask(triggerTask.taskId)) {
+                logV$1(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(triggerTask.taskId, "handleMoveTaskToBackIfNeeded: #"), new Object[0]);
+                minimizeTask(triggerTask, DesktopModeEventLogger.Companion.MinimizeReason.TASK_TO_BACK);
+            }
+            if (triggerTask3 != null) {
+                DesktopStateImpl.Companion companion = DesktopStateImpl.Companion;
+                int i3 = triggerTask3.displayId;
+                companion.getClass();
+                if (DesktopStateImpl.Companion.inDesktopWindowing(i3) && triggerTask3.getActivityType() == 2 && TransitionUtil.isOpeningType(transitionRequestInfo.getType())) {
+                    minimizeAllTasks(triggerTask3.displayId);
+                }
+            }
+            return null;
+        }
+        if (triggerTask3 != null) {
+            if (!z7) {
+                if (TransitionUtil.isClosingType(transitionRequestInfo.getType())) {
+                    transitionRequestInfo.getType();
+                    logV$1("handleTaskClosing", new Object[0]);
+                    if (isDesktopModeShowing(triggerTask3.displayId) && ((deskIdForTask = this.taskRepository.getDeskIdForTask(triggerTask3.taskId)) != null || !DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue())) {
+                        windowContainerTransaction2 = new WindowContainerTransaction();
+                        DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default = !willExitDesktop(triggerTask3.taskId, false) ? null : performDesktopExitCleanUp$default(this, windowContainerTransaction2, deskIdForTask, triggerTask3.displayId, true, true, 32);
+                        if (desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default != null) {
+                            desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default.mo781invoke(iBinder);
+                        }
+                        if (!DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_BACK_NAVIGATION.isTrue()) {
+                            this.taskRepository.addClosingTask(triggerTask3.displayId, deskIdForTask, triggerTask3.taskId);
+                            DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = this.snapEventHandler;
+                            if (desktopModeWindowDecorViewModel == null) {
+                                desktopModeWindowDecorViewModel = null;
+                            }
+                            desktopModeWindowDecorViewModel.removeTaskIfTiled(triggerTask3.displayId, triggerTask3.taskId);
+                        }
+                        DesktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = this.taskbarDesktopTaskListener;
+                        if (desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 != null) {
+                            desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1.onTaskbarCornerRoundingUpdate(doesAnyTaskRequireTaskbarRounding(triggerTask3.displayId, Integer.valueOf(triggerTask3.taskId)));
+                        }
+                        if (windowContainerTransaction2.isEmpty()) {
+                            windowContainerTransaction2 = null;
+                        }
+                    }
+                } else {
+                    boolean zIsTopActivityExemptFromDesktopWindowing = this.desktopModeCompatPolicy.isTopActivityExemptFromDesktopWindowing(triggerTask3);
+                    DesksOrganizer desksOrganizer = this.desksOrganizer;
+                    ShellTaskOrganizer shellTaskOrganizer = this.shellTaskOrganizer;
+                    if (zIsTopActivityExemptFromDesktopWindowing) {
+                        logV$1("handleIncompatibleTaskLaunch", new Object[0]);
+                        if (triggerTask3.getWindowingMode() == 1) {
+                            if (((RootTaskDesksOrganizer) desksOrganizer).deskRootsByDeskId.contains(triggerTask3.parentTaskId) && this.taskRepository.getActiveDeskId(triggerTask3.displayId) == null) {
+                                WindowContainerTransaction windowContainerTransaction6 = new WindowContainerTransaction();
+                                DisplayAreaInfo displayAreaInfo = this.rootTaskDisplayAreaOrganizer.getDisplayAreaInfo(triggerTask3.displayId);
+                                displayAreaInfo.getClass();
+                                windowContainerTransaction6.reparent(triggerTask3.token, displayAreaInfo.token, true);
+                                windowContainerTransaction6.setWindowingMode(triggerTask3.token, 0);
+                                shellTaskOrganizer.applyTransaction(windowContainerTransaction6);
+                            } else if (isDesktopModeShowing(triggerTask3.displayId) || forceEnterDesktop(triggerTask3.displayId)) {
+                                if (DesktopModeFlags.INCLUDE_TOP_TRANSPARENT_FULLSCREEN_TASK_IN_DESKTOP_HEURISTIC.isTrue()) {
+                                    if (DesktopModeCompatPolicy.isTransparentTask(((TaskInfo) triggerTask3).numActivities, ((TaskInfo) triggerTask3).isActivityStackTransparent)) {
+                                        DesktopRepository desktopRepository = this.taskRepository;
+                                        int i4 = triggerTask3.displayId;
+                                        int i5 = triggerTask3.taskId;
+                                        desktopRepository.logD("Top transparent fullscreen task set for display: taskId=%d, displayId=%d", Integer.valueOf(i5), Integer.valueOf(i4));
+                                        DesktopRepository.Desk activeDesk = desktopRepository.desktopData.getActiveDesk(i4);
+                                        if (activeDesk != null) {
+                                            activeDesk.topTransparentFullscreenTaskId = Integer.valueOf(i5);
+                                        }
+                                    }
+                                }
+                                if (triggerTask3.getWindowingMode() != 1) {
+                                    windowContainerTransaction2 = new WindowContainerTransaction();
+                                    ArrayList runningTasks = shellTaskOrganizer.getRunningTasks(triggerTask3.displayId);
+                                    ArrayList arrayList2 = new ArrayList();
+                                    int size3 = runningTasks.size();
+                                    int i6 = 0;
+                                    while (i6 < size3) {
+                                        Object obj2 = runningTasks.get(i6);
+                                        i6++;
+                                        ActivityManager.RunningTaskInfo runningTaskInfo3 = (ActivityManager.RunningTaskInfo) obj2;
+                                        if (runningTaskInfo3.getActivityType() == 3 && runningTaskInfo3.isVisible) {
+                                            arrayList2.add(obj2);
+                                        }
+                                    }
+                                    ActivityManager.RunningTaskInfo runningTaskInfo4 = (ActivityManager.RunningTaskInfo) CollectionsKt___CollectionsKt.firstOrNull((List) arrayList2);
+                                    if (runningTaskInfo4 != null) {
+                                        windowContainerTransaction2.reorder(runningTaskInfo4.token, false);
+                                    }
+                                    DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges = addMoveToFullscreenChanges(windowContainerTransaction2, triggerTask3, willExitDesktop(triggerTask3.taskId, false));
+                                    if (desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges != null) {
+                                        desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges.mo781invoke(iBinder);
+                                    }
+                                }
+                            }
+                            windowContainerTransaction2 = null;
+                        }
+                    } else {
+                        int windowingMode = triggerTask3.getWindowingMode();
+                        DesktopImmersiveController desktopImmersiveController = this.desktopImmersiveController;
+                        if (windowingMode == 1) {
+                            logV$1("handleFullscreenTaskLaunch", new Object[0]);
+                            if (!shouldFullscreenTaskLaunchSwitchToDesktop(triggerTask3)) {
+                                DesktopStateImpl.Companion companion2 = DesktopStateImpl.Companion;
+                                int i7 = triggerTask3.displayId;
+                                companion2.getClass();
+                                if (DesktopStateImpl.Companion.inDesktopWindowing(i7)) {
+                                    logD$1("Switch fullscreen task to freeform on transition: taskId=%d, keepFull=%s", Integer.valueOf(triggerTask3.taskId), Boolean.valueOf(z3));
+                                    windowContainerTransaction2 = new WindowContainerTransaction();
+                                    Integer orCreateDefaultDeskId = getOrCreateDefaultDeskId(triggerTask3.displayId, false);
+                                    if (orCreateDefaultDeskId != null) {
+                                        int iIntValue = orCreateDefaultDeskId.intValue();
+                                        addMoveToDeskTaskChanges(windowContainerTransaction2, triggerTask3, iIntValue, null, z3);
+                                        if ((triggerTask3.baseIntent.getFlags() & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) == 0 && isDesktopModeShowing(triggerTask3.displayId)) {
+                                            function1AddDeskActivationChanges$default = new DesktopTasksController$$ExternalSyntheticLambda8(this, iIntValue, windowContainerTransaction2, triggerTask3);
+                                            desktopTasksController = this;
+                                            runningTaskInfo = triggerTask3;
+                                        } else {
+                                            function1AddDeskActivationChanges$default = addDeskActivationChanges$default(this, iIntValue, windowContainerTransaction2, triggerTask3, 0, 0, 48);
+                                            desktopTasksController = this;
+                                            windowContainerTransaction2 = windowContainerTransaction2;
+                                            runningTaskInfo = triggerTask3;
+                                            windowContainerTransaction2.reorder(runningTaskInfo.token, true);
+                                        }
+                                        function1AddDeskActivationChanges$default.mo781invoke(iBinder);
+                                        int i8 = runningTaskInfo.displayId;
+                                        DesktopImmersiveController.ExitReason exitReason = DesktopImmersiveController.ExitReason.TASK_LAUNCH;
+                                        desktopImmersiveController.getClass();
+                                        if (DesktopModeFlags.ENABLE_FULLY_IMMERSIVE_IN_DESKTOP.isTrue() && (exitAsExit = desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction2, i8, null, exitReason).asExit()) != null && (function12 = exitAsExit.runOnTransitionStart) != null) {
+                                            function12.mo781invoke(iBinder);
+                                        }
+                                    }
+                                } else if (this.taskRepository.isActiveTask(triggerTask3.taskId)) {
+                                    windowContainerTransaction2 = new WindowContainerTransaction();
+                                    DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges2 = addMoveToFullscreenChanges(windowContainerTransaction2, triggerTask3, willExitDesktop(triggerTask3.taskId, true));
+                                    if (desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges2 != null) {
+                                        desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges2.mo781invoke(iBinder);
+                                    }
+                                } else {
+                                    windowContainerTransaction2 = null;
+                                }
+                                runningTaskInfo = triggerTask3;
+                                desktopTasksController = this;
+                            }
+                        } else {
+                            runningTaskInfo = triggerTask3;
+                            desktopTasksController = this;
+                            if (runningTaskInfo.isFreeform()) {
+                                logV$1("handleFreeformTaskLaunch", new Object[0]);
+                                if (desktopTasksController.keyguardManager.isKeyguardLocked()) {
+                                    logV$1("skip keyguard is locked", new Object[0]);
+                                } else {
+                                    int i9 = runningTaskInfo.displayId;
+                                    if (i9 <= 0 || ((DesktopStateImpl) desktopTasksController.desktopState).isDesktopModeSupportedOnDisplay(i9)) {
+                                        Integer orCreateDefaultDeskId2 = desktopTasksController.getOrCreateDefaultDeskId(runningTaskInfo.displayId, false);
+                                        if (orCreateDefaultDeskId2 != null) {
+                                            int iIntValue2 = orCreateDefaultDeskId2.intValue();
+                                            WindowContainerTransaction windowContainerTransaction7 = new WindowContainerTransaction();
+                                            if (desktopTasksController.isDesktopModeShowing(runningTaskInfo.displayId)) {
+                                                ArrayList runningTasks2 = shellTaskOrganizer.getRunningTasks(runningTaskInfo.displayId);
+                                                ArrayList arrayList3 = new ArrayList();
+                                                int size4 = runningTasks2.size();
+                                                int i10 = 0;
+                                                while (i10 < size4) {
+                                                    Object obj3 = runningTasks2.get(i10);
+                                                    i10++;
+                                                    ActivityManager.RunningTaskInfo runningTaskInfo5 = (ActivityManager.RunningTaskInfo) obj3;
+                                                    ArrayList arrayList4 = runningTasks2;
+                                                    if (runningTaskInfo5.getActivityType() == 3 && runningTaskInfo5.isVisible) {
+                                                        arrayList3.add(obj3);
+                                                    }
+                                                    runningTasks2 = arrayList4;
+                                                }
+                                                ActivityManager.RunningTaskInfo runningTaskInfo6 = (ActivityManager.RunningTaskInfo) CollectionsKt___CollectionsKt.firstOrNull((List) arrayList3);
+                                                if (runningTaskInfo6 != null) {
+                                                    windowContainerTransaction7.reorder(runningTaskInfo6.token, false);
+                                                }
+                                                Integer deskIdForTask2 = desktopTasksController.taskRepository.getDeskIdForTask(runningTaskInfo.taskId);
+                                                if (deskIdForTask2 == null || iIntValue2 == deskIdForTask2.intValue() || desktopTasksController.taskRepository.desktopData.getDisplayForDesk(iIntValue2) != 0) {
+                                                    if (runningTaskInfo.parentTaskId == -1 && deskIdForTask2 == null && (activeDeskId = desktopTasksController.taskRepository.getActiveDeskId(runningTaskInfo.displayId)) != null && activeDeskId.intValue() == iIntValue2 && (runningTaskInfo2 = shellTaskOrganizer.getRunningTaskInfo(iIntValue2)) != null) {
+                                                        windowContainerTransaction7.reparent(runningTaskInfo.token, runningTaskInfo2.token, true);
+                                                    }
+                                                    inheritedExistingTaskBounds = DesktopModeUtils.getInheritedExistingTaskBounds(desktopTasksController.taskRepository, shellTaskOrganizer, runningTaskInfo, iIntValue2);
+                                                    if (!desktopTasksController.taskRepository.isActiveTask(runningTaskInfo.taskId) && inheritedExistingTaskBounds != null) {
+                                                        windowContainerTransaction7.setBounds(runningTaskInfo.token, inheritedExistingTaskBounds);
+                                                    }
+                                                    if (inheritedExistingTaskBounds == null && DesktopModeFlags.ENABLE_CASCADING_WINDOWS.isTrue() && !desktopTasksController.taskRepository.isVisibleTask(runningTaskInfo.taskId) && !desktopTasksController.taskRepository.isMinimizedTask(runningTaskInfo.taskId) && (displayLayout = desktopTasksController.displayController.getDisplayLayout(runningTaskInfo.displayId)) != null) {
+                                                        Rect rect = new Rect(runningTaskInfo.configuration.windowConfiguration.getBounds());
+                                                        desktopTasksController.cascadeWindow(rect, displayLayout, runningTaskInfo.displayId);
+                                                        windowContainerTransaction7.setBounds(runningTaskInfo.token, rect);
+                                                    }
+                                                    desktopConfigImpl = (DesktopConfigImpl) desktopTasksController.desktopConfig;
+                                                    if (desktopConfigImpl.useDesktopOverrideDensity) {
+                                                        windowContainerTransaction7.setDensityDpi(runningTaskInfo.token, desktopConfigImpl.desktopDensityOverride);
+                                                    }
+                                                    if (desktopTasksController.taskRepository.isMinimizedTask(runningTaskInfo.taskId)) {
+                                                        windowContainerTransaction4 = windowContainerTransaction7;
+                                                        iBinder2 = iBinder;
+                                                    } else {
+                                                        windowContainerTransaction4 = windowContainerTransaction7;
+                                                        iBinder2 = iBinder;
+                                                        desktopTasksController.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda7(iBinder2, runningTaskInfo.displayId, runningTaskInfo.taskId, DesktopModeEventLogger.Companion.UnminimizeReason.TASK_LAUNCH, 0)));
+                                                    }
+                                                    int i11 = runningTaskInfo.displayId;
+                                                    DesktopImmersiveController.ExitReason exitReason2 = DesktopImmersiveController.ExitReason.TASK_LAUNCH;
+                                                    desktopImmersiveController.getClass();
+                                                    if (DesktopModeFlags.ENABLE_FULLY_IMMERSIVE_IN_DESKTOP.isTrue()) {
+                                                        windowContainerTransaction = null;
+                                                    } else {
+                                                        windowContainerTransaction = null;
+                                                        DesktopImmersiveController.ExitResult.Exit exitAsExit2 = desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction4, i11, null, exitReason2).asExit();
+                                                        if (exitAsExit2 != null && (function1 = exitAsExit2.runOnTransitionStart) != null) {
+                                                            function1.mo781invoke(iBinder2);
+                                                        }
+                                                    }
+                                                    numAddAndGetMinimizeChanges = desktopTasksController.addAndGetMinimizeChanges(iIntValue2, windowContainerTransaction4, Integer.valueOf(runningTaskInfo.taskId), false);
+                                                    desktopTasksController.addPendingAppLaunchTransition(iBinder2, runningTaskInfo.taskId, numAddAndGetMinimizeChanges);
+                                                    if (numAddAndGetMinimizeChanges == null) {
+                                                        desktopTasksController.addPendingMinimizeTransition(iBinder2, numAddAndGetMinimizeChanges.intValue(), DesktopModeEventLogger.Companion.MinimizeReason.TASK_LIMIT);
+                                                    } else if (!windowContainerTransaction4.isEmpty()) {
+                                                        WindowContainerTransaction windowContainerTransaction8 = desktopTasksController.snapEventHandler;
+                                                        if (windowContainerTransaction8 == null) {
+                                                            windowContainerTransaction8 = windowContainerTransaction;
+                                                        }
+                                                        windowContainerTransaction8.removeTaskIfTiled(runningTaskInfo.displayId, runningTaskInfo.taskId);
+                                                    }
+                                                    windowContainerTransaction2 = windowContainerTransaction4;
+                                                } else {
+                                                    if (desktopTasksController.taskRepository.desktopData.getDisplayForDesk(deskIdForTask2.intValue()) == 0) {
+                                                        ((RootTaskDesksOrganizer) desksOrganizer).moveTaskToDesk(windowContainerTransaction7, iIntValue2, runningTaskInfo);
+                                                        ActivityManager.RunningTaskInfo runningTaskInfo7 = shellTaskOrganizer.getRunningTaskInfo(deskIdForTask2.intValue());
+                                                        if (runningTaskInfo7 != null) {
+                                                            windowContainerTransaction7.reorder(runningTaskInfo7.token, false);
+                                                        }
+                                                    }
+                                                    inheritedExistingTaskBounds = DesktopModeUtils.getInheritedExistingTaskBounds(desktopTasksController.taskRepository, shellTaskOrganizer, runningTaskInfo, iIntValue2);
+                                                    if (!desktopTasksController.taskRepository.isActiveTask(runningTaskInfo.taskId)) {
+                                                        windowContainerTransaction7.setBounds(runningTaskInfo.token, inheritedExistingTaskBounds);
+                                                    }
+                                                    if (inheritedExistingTaskBounds == null) {
+                                                        Rect rect2 = new Rect(runningTaskInfo.configuration.windowConfiguration.getBounds());
+                                                        desktopTasksController.cascadeWindow(rect2, displayLayout, runningTaskInfo.displayId);
+                                                        windowContainerTransaction7.setBounds(runningTaskInfo.token, rect2);
+                                                    }
+                                                    desktopConfigImpl = (DesktopConfigImpl) desktopTasksController.desktopConfig;
+                                                    if (desktopConfigImpl.useDesktopOverrideDensity) {
+                                                    }
+                                                    if (desktopTasksController.taskRepository.isMinimizedTask(runningTaskInfo.taskId)) {
+                                                    }
+                                                    int i112 = runningTaskInfo.displayId;
+                                                    DesktopImmersiveController.ExitReason exitReason22 = DesktopImmersiveController.ExitReason.TASK_LAUNCH;
+                                                    desktopImmersiveController.getClass();
+                                                    if (DesktopModeFlags.ENABLE_FULLY_IMMERSIVE_IN_DESKTOP.isTrue()) {
+                                                    }
+                                                    numAddAndGetMinimizeChanges = desktopTasksController.addAndGetMinimizeChanges(iIntValue2, windowContainerTransaction4, Integer.valueOf(runningTaskInfo.taskId), false);
+                                                    desktopTasksController.addPendingAppLaunchTransition(iBinder2, runningTaskInfo.taskId, numAddAndGetMinimizeChanges);
+                                                    if (numAddAndGetMinimizeChanges == null) {
+                                                    }
+                                                    windowContainerTransaction2 = windowContainerTransaction4;
+                                                }
+                                            } else {
+                                                logD$1("Bring desktop tasks to front on transition=taskId=%d", Integer.valueOf(runningTaskInfo.taskId));
+                                                if (desktopTasksController.taskRepository.isActiveTask(runningTaskInfo.taskId) && !desktopTasksController.forceEnterDesktop(runningTaskInfo.displayId)) {
+                                                    DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges3 = desktopTasksController.addMoveToFullscreenChanges(windowContainerTransaction7, runningTaskInfo, desktopTasksController.willExitDesktop(runningTaskInfo.taskId, true));
+                                                    if (desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges3 != null) {
+                                                        desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges3.mo781invoke(iBinder);
+                                                    }
+                                                    windowContainerTransaction2 = windowContainerTransaction7;
+                                                }
+                                            }
+                                        } else {
+                                            windowContainerTransaction = null;
+                                        }
+                                    }
+                                }
+                                windowContainerTransaction2 = null;
+                                windowContainerTransaction = null;
+                            }
+                        }
+                        windowContainerTransaction = null;
+                    }
+                }
+                z5 = CoreRune.MW_SPLIT_SHELL_TRANSITION;
+                if (z5 && runningTaskInfo != null && !z7 && TransitionUtil.isOpeningType(transitionRequestInfo.getType()) && runningTaskInfo.displayId != 0) {
+                    windowContainerTransaction3 = desktopTasksController.splitScreenController;
+                    if (windowContainerTransaction3 == null) {
+                        windowContainerTransaction3 = windowContainerTransaction;
+                    }
+                    if (windowContainerTransaction3.isTaskInSplitScreen$1(runningTaskInfo.taskId)) {
+                        WindowContainerTransaction windowContainerTransaction9 = desktopTasksController.splitScreenController;
+                        (windowContainerTransaction9 == null ? windowContainerTransaction : windowContainerTransaction9).dismissSplitTask(runningTaskInfo.token);
+                    }
+                }
+                if (z5 && runningTaskInfo != null && windowContainerTransaction2 != null) {
+                    desktopTasksController.exitSplitIfApplicable(windowContainerTransaction2, runningTaskInfo);
+                }
+                logV$1("handleRequest result=%s", windowContainerTransaction2);
+                return windowContainerTransaction2;
+            }
+            logV$1("DesktopTasksController: handleMidRecentsFreeformTaskLaunch", new Object[0]);
+            windowContainerTransaction2 = new WindowContainerTransaction();
+            DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges4 = addMoveToFullscreenChanges(windowContainerTransaction2, triggerTask3, willExitDesktop(triggerTask3.taskId, true));
+            if (desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges4 != null) {
+                desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges4.mo781invoke(iBinder);
+            }
+            windowContainerTransaction2.reorder(triggerTask3.token, true);
+            windowContainerTransaction = null;
+            runningTaskInfo = triggerTask3;
+            desktopTasksController = this;
+            z5 = CoreRune.MW_SPLIT_SHELL_TRANSITION;
+            if (z5) {
+                windowContainerTransaction3 = desktopTasksController.splitScreenController;
+                if (windowContainerTransaction3 == null) {
+                }
+                if (windowContainerTransaction3.isTaskInSplitScreen$1(runningTaskInfo.taskId)) {
+                }
+            }
+            if (z5) {
+                desktopTasksController.exitSplitIfApplicable(windowContainerTransaction2, runningTaskInfo);
+            }
+            logV$1("handleRequest result=%s", windowContainerTransaction2);
+            return windowContainerTransaction2;
+        }
+        windowContainerTransaction = null;
+        runningTaskInfo = triggerTask3;
+        desktopTasksController = this;
+        windowContainerTransaction2 = windowContainerTransaction;
+        z5 = CoreRune.MW_SPLIT_SHELL_TRANSITION;
+        if (z5) {
+        }
+        if (z5) {
+        }
+        logV$1("handleRequest result=%s", windowContainerTransaction2);
+        return windowContainerTransaction2;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -2078,11 +3097,11 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     DesktopTasksController.Companion companion = DesktopTasksController.Companion;
-                    Context context2 = (Context) Ref$ObjectRef.this.element;
+                    Context context2 = (Context) ref$ObjectRef.element;
                     if (context2 == null) {
                         context2 = this.context;
                     }
-                    Toast.makeText(context2, com.android.systemui.R.string.multiwindow_desktop_mode_non_resizable_snap_text, 0).show();
+                    Toast.makeText(context2, R.string.multiwindow_desktop_mode_non_resizable_snap_text, 0).show();
                     return Unit.INSTANCE;
                 }
             });
@@ -2100,17 +3119,17 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
     }
 
     public final boolean isDesktopModeShowing(int i) {
-        boolean isAnyDeskActive = this.taskRepository.isAnyDeskActive(i);
-        boolean z = ((Integer) SequencesKt___SequencesKt.firstOrNull(SequencesKt___SequencesKt.mapNotNull(this.taskRepository.desktopData.desksSequence(i), new DesktopRepository$$ExternalSyntheticLambda2(2)))) != null;
+        boolean zIsAnyDeskActive = this.taskRepository.isAnyDeskActive(i);
+        boolean z = ((Integer) SequencesKt___SequencesKt.firstOrNull(SequencesKt___SequencesKt.mapNotNull(this.taskRepository.desktopData.desksSequence(i), new DesktopRepository$$ExternalSyntheticLambda0(4)))) != null;
         if (DesktopModeFlags.INCLUDE_TOP_TRANSPARENT_FULLSCREEN_TASK_IN_DESKTOP_HEURISTIC.isTrue() && DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_MODALS_POLICY.isTrue()) {
-            logV$1("isDesktopModeShowing: hasVisibleTasks=%s hasTopTransparentFullscreenTask=%s", Boolean.valueOf(isAnyDeskActive), Boolean.valueOf(z));
-            return isAnyDeskActive || z;
+            logV$1("isDesktopModeShowing: hasVisibleTasks=%s hasTopTransparentFullscreenTask=%s", Boolean.valueOf(zIsAnyDeskActive), Boolean.valueOf(z));
+            return zIsAnyDeskActive || z;
         }
-        logV$1("isDesktopModeShowing: hasVisibleTasks=%s", Boolean.valueOf(isAnyDeskActive));
-        return isAnyDeskActive;
+        logV$1("isDesktopModeShowing: hasVisibleTasks=%s", Boolean.valueOf(zIsAnyDeskActive));
+        return zIsAnyDeskActive;
     }
 
-    public final void minimizeAllTasks(int i) {
+    public final void minimizeAllTasks(int i) throws Resources.NotFoundException {
         Set set;
         Integer activeDeskId = this.taskRepository.getActiveDeskId(i);
         Set activeTaskIdsInDesk = activeDeskId != null ? this.taskRepository.getActiveTaskIdsInDesk(activeDeskId.intValue()) : null;
@@ -2120,58 +3139,165 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         minimizeTasks(CollectionsKt___CollectionsKt.toList(activeTaskIdsInDesk), activeDeskId.intValue(), i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0075  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:33:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x009c  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0071  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void minimizeTask(android.app.ActivityManager.RunningTaskInfo r17, com.android.wm.shell.desktopmode.DesktopModeEventLogger.Companion.MinimizeReason r18) {
-        /*
-            Method dump skipped, instructions count: 292
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.DesktopTasksController.minimizeTask(android.app.ActivityManager$RunningTaskInfo, com.android.wm.shell.desktopmode.DesktopModeEventLogger$Companion$MinimizeReason):void");
-    }
-
-    public final void minimizeTasks(final List list, int i, final int i2) {
+    public final void minimizeTask(ActivityManager.RunningTaskInfo runningTaskInfo, DesktopModeEventLogger.Companion.MinimizeReason minimizeReason) throws Resources.NotFoundException {
+        boolean zIsOnlyVisibleNonClosingTask;
+        boolean z;
+        DesktopTasksController desktopTasksController;
+        int i;
+        int i2;
+        Function1 function1;
         WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-        Iterator it = list.iterator();
-        while (true) {
-            if (!it.hasNext()) {
-                break;
+        int i3 = runningTaskInfo.taskId;
+        int i4 = runningTaskInfo.displayId;
+        Integer deskIdForTask = this.taskRepository.getDeskIdForTask(i3);
+        if (deskIdForTask == null) {
+            if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
+                logW(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(runningTaskInfo.taskId, "minimizeTask: desk not found for task: "), new Object[0]);
+                return;
             }
-            int intValue = ((Number) it.next()).intValue();
-            ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(intValue);
-            if (runningTaskInfo != null) {
-                DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = this.snapEventHandler;
-                (desktopModeWindowDecorViewModel != null ? desktopModeWindowDecorViewModel : null).removeTaskIfTiled(i2, intValue);
-                ((RootTaskDesksOrganizer) this.desksOrganizer).minimizeTask(windowContainerTransaction, i, runningTaskInfo);
+            deskIdForTask = getOrCreateDefaultDeskId(runningTaskInfo.displayId, false);
+        }
+        Integer num = deskIdForTask;
+        DesktopExperienceFlags desktopExperienceFlags = DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND;
+        if (desktopExperienceFlags.isTrue()) {
+            DesktopRepository desktopRepository = this.taskRepository;
+            if (num == null) {
+                throw new IllegalStateException("Expected non-null deskId");
+            }
+            zIsOnlyVisibleNonClosingTask = desktopRepository.isOnlyVisibleNonClosingTaskInDesk(i3, num.intValue());
+        } else {
+            zIsOnlyVisibleNonClosingTask = this.taskRepository.isOnlyVisibleNonClosingTask(i3, i4);
+        }
+        boolean z2 = zIsOnlyVisibleNonClosingTask;
+        if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_PIP.isTrue()) {
+            PictureInPictureParams pictureInPictureParams = runningTaskInfo.pictureInPictureParams;
+            if ((pictureInPictureParams != null ? pictureInPictureParams.isAutoEnterEnabled() : false) && i4 == 0) {
+                z = true;
+            }
+        } else {
+            z = false;
+        }
+        if (z) {
+            windowContainerTransaction.merge((WindowContainerTransaction) this.transitions.dispatchRequest(SYNTHETIC_TRANSITION, new TransitionRequestInfo(10, (ActivityManager.RunningTaskInfo) null, runningTaskInfo, (RemoteTransition) null, (TransitionRequestInfo.DisplayChange) null, 0), null).second, true);
+            FreeformTaskTransitionStarter freeformTaskTransitionStarter = this.freeformTaskTransitionStarter;
+            IBinder iBinderStartPipTransition = (freeformTaskTransitionStarter != null ? freeformTaskTransitionStarter : null).startPipTransition(windowContainerTransaction);
+            if (!PipUtils.isPip2ExperimentEnabled()) {
+                this.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda8(iBinderStartPipTransition, i4, Collections.singletonList(Integer.valueOf(i3)), minimizeReason)));
+            }
+            i2 = i3;
+            i = i4;
+            desktopTasksController = this;
+        } else {
+            DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = this.snapEventHandler;
+            if (desktopModeWindowDecorViewModel == null) {
+                desktopModeWindowDecorViewModel = null;
+            }
+            desktopModeWindowDecorViewModel.removeTaskIfTiled(i4, i3);
+            DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default = performDesktopExitCleanUp$default(this, windowContainerTransaction, num, i4, willExitDesktop(i3, false), false, 48);
+            desktopTasksController = this;
+            i = i4;
+            DesktopImmersiveController.ExitResult exitResultExitImmersiveIfApplicable = desktopTasksController.desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction, runningTaskInfo, DesktopImmersiveController.ExitReason.MINIMIZED);
+            if (!desktopExperienceFlags.isTrue()) {
+                windowContainerTransaction.reorder(runningTaskInfo.token, false).getClass();
+            } else {
+                if (num == null) {
+                    throw new IllegalStateException("Expected non-null deskId");
+                }
+                ((RootTaskDesksOrganizer) desktopTasksController.desksOrganizer).minimizeTask(windowContainerTransaction, num.intValue(), runningTaskInfo);
+            }
+            FreeformTaskTransitionStarter freeformTaskTransitionStarter2 = desktopTasksController.freeformTaskTransitionStarter;
+            IBinder iBinderStartMinimizedModeTransition = (freeformTaskTransitionStarter2 != null ? freeformTaskTransitionStarter2 : null).startMinimizedModeTransition(i3, windowContainerTransaction, z2);
+            i2 = i3;
+            desktopTasksController.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda7(iBinderStartMinimizedModeTransition, i, i2, minimizeReason, 1)));
+            DesktopImmersiveController.ExitResult.Exit exitAsExit = exitResultExitImmersiveIfApplicable.asExit();
+            if (exitAsExit != null && (function1 = exitAsExit.runOnTransitionStart) != null) {
+                iBinderStartMinimizedModeTransition.getClass();
+                function1.mo781invoke(iBinderStartMinimizedModeTransition);
+            }
+            if (desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default != null) {
+                iBinderStartMinimizedModeTransition.getClass();
+                desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default.mo781invoke(iBinderStartMinimizedModeTransition);
             }
         }
-        FreeformTaskTransitionStarter freeformTaskTransitionStarter = this.freeformTaskTransitionStarter;
-        final IBinder startMinimizeAllTransition = (freeformTaskTransitionStarter != null ? freeformTaskTransitionStarter : null).startMinimizeAllTransition(windowContainerTransaction, i2);
-        this.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda11
-            @Override // kotlin.jvm.functions.Function1
-            /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                IBinder iBinder = startMinimizeAllTransition;
-                List list2 = list;
-                DesktopTasksController.Companion companion = DesktopTasksController.Companion;
-                iBinder.getClass();
-                ((DesktopTasksLimiter) obj).addPendingMinimizeChanges(iBinder, i2, list2, DesktopModeEventLogger.Companion.MinimizeReason.TASK_LIMIT);
-                return Unit.INSTANCE;
-            }
-        }));
+        if (CoreRune.MW_SA_LOGGING) {
+            CoreSaLogger.logForDexMW("3002", String.valueOf(desktopTasksController.taskRepository.getMinimizedTaskIdsInDesk(i).size()));
+        }
+        DesktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController.taskbarDesktopTaskListener;
+        if (desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 != null) {
+            desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1.onTaskbarCornerRoundingUpdate(desktopTasksController.doesAnyTaskRequireTaskbarRounding(i, Integer.valueOf(i2)));
+        }
     }
 
-    public final void moveHomeTaskToTop(WindowContainerTransaction windowContainerTransaction, int i) {
+    public final void minimizeTasks(List list, int i, int i2) throws Resources.NotFoundException {
+        ActivityManager.RunningTaskInfo runningTaskInfo;
+        ActivityManager.RunningTaskInfo runningTaskInfo2;
+        Object next;
+        if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_PIP.isTrue() && !PipUtils.isPip2ExperimentEnabled() && i2 == 0) {
+            DesktopRepository.Desk desk = this.taskRepository.desktopData.getDesk(i);
+            if (desk == null) {
+                throw new IllegalStateException(("Could not find desk for pip: " + i).toString());
+            }
+            FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.mapNotNull(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(desk.freeformTasksInZOrder), new DesktopTasksController$$ExternalSyntheticLambda2(this, 1)).new AnonymousClass1();
+            while (true) {
+                if (!anonymousClass1.hasNext()) {
+                    next = null;
+                    break;
+                }
+                next = anonymousClass1.next();
+                PictureInPictureParams pictureInPictureParams = ((ActivityManager.RunningTaskInfo) next).pictureInPictureParams;
+                if (pictureInPictureParams != null && pictureInPictureParams.isAutoEnterEnabled()) {
+                    break;
+                }
+            }
+            runningTaskInfo = (ActivityManager.RunningTaskInfo) next;
+            if (runningTaskInfo != null) {
+                logV$1("findPipCandidate taskId=%d", Integer.valueOf(runningTaskInfo.taskId));
+            }
+        } else {
+            runningTaskInfo = null;
+        }
+        int i3 = runningTaskInfo != null ? runningTaskInfo.taskId : -1;
+        WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+        Iterator it = list.iterator();
+        while (it.hasNext()) {
+            int iIntValue = ((Number) it.next()).intValue();
+            if (iIntValue != i3 && (runningTaskInfo2 = this.shellTaskOrganizer.getRunningTaskInfo(iIntValue)) != null) {
+                DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = this.snapEventHandler;
+                if (desktopModeWindowDecorViewModel == null) {
+                    desktopModeWindowDecorViewModel = null;
+                }
+                desktopModeWindowDecorViewModel.removeTaskIfTiled(i2, iIntValue);
+                ((RootTaskDesksOrganizer) this.desksOrganizer).minimizeTask(windowContainerTransaction, i, runningTaskInfo2);
+            }
+        }
+        ArrayList arrayList = new ArrayList(list);
+        if (i3 != -1) {
+            arrayList.remove(Integer.valueOf(i3));
+        }
+        if (!arrayList.isEmpty()) {
+            FreeformTaskTransitionStarter freeformTaskTransitionStarter = this.freeformTaskTransitionStarter;
+            if (freeformTaskTransitionStarter == null) {
+                freeformTaskTransitionStarter = null;
+            }
+            this.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda3(freeformTaskTransitionStarter.startMinimizeAllTransition(windowContainerTransaction, i2), i2, arrayList)));
+        }
+        if (runningTaskInfo != null) {
+            DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel2 = this.snapEventHandler;
+            (desktopModeWindowDecorViewModel2 != null ? desktopModeWindowDecorViewModel2 : null).removeTaskIfTiled(i2, runningTaskInfo.taskId);
+            minimizeTask(runningTaskInfo, DesktopModeEventLogger.Companion.MinimizeReason.TASK_LIMIT);
+        }
+    }
+
+    public final void moveHomeTaskToTop(WindowContainerTransaction windowContainerTransaction, int i) throws Resources.NotFoundException {
         logV$1("moveHomeTaskToTop in displayId=%d", Integer.valueOf(i));
         ActivityManager.RunningTaskInfo homeTask = getHomeTask(i);
-        if (homeTask != null) {
-            windowContainerTransaction.reorder(homeTask.getToken(), true);
+        if (homeTask == null || windowContainerTransaction.reorder(homeTask.getToken(), true) == null) {
+            this.homeIntentProvider.addLaunchHomePendingIntent(windowContainerTransaction, i, Integer.valueOf(this.userId));
+            Unit unit = Unit.INSTANCE;
         }
     }
 
@@ -2187,7 +3313,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
         int i2 = runningTaskInfo.displayId;
         if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
-            BuildersKt.launch$default(this.mainScope, null, null, new DesktopTasksController$moveTaskToDefaultDeskAndActivate$1(this, i, i2, windowContainerTransaction, desktopModeTransitionSource, remoteTransition, null), 3);
+            BuildersKt.launch$default(this.mainScope, null, null, new C12021(i, i2, windowContainerTransaction, desktopModeTransitionSource, remoteTransition, null), 3);
             return true;
         }
         Integer orCreateDefaultDeskId = getOrCreateDefaultDeskId(i2, false);
@@ -2197,7 +3323,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         return false;
     }
 
-    public final void moveTaskToFront(int i, RemoteTransition remoteTransition, DesktopModeEventLogger.Companion.UnminimizeReason unminimizeReason) {
+    public final void moveTaskToFront(int i, RemoteTransition remoteTransition, DesktopModeEventLogger.Companion.UnminimizeReason unminimizeReason) throws Resources.NotFoundException {
         ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(i);
         if (runningTaskInfo != null) {
             moveTaskToFront(runningTaskInfo, remoteTransition, unminimizeReason);
@@ -2205,10 +3331,10 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
         logV$1("moveBackgroundTaskToFront taskId=%s", Integer.valueOf(i));
         WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setLaunchWindowingMode(5);
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setLaunchWindowingMode(5);
         Unit unit = Unit.INSTANCE;
-        windowContainerTransaction.startTask(i, makeBasic.toBundle());
+        windowContainerTransaction.startTask(i, activityOptionsMakeBasic.toBundle());
         Integer deskIdForTask = this.taskRepository.getDeskIdForTask(i);
         if (deskIdForTask == null && (deskIdForTask = getOrCreateDefaultDeskId(0, false)) == null) {
             return;
@@ -2216,18 +3342,17 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         startLaunchTransition(1, windowContainerTransaction, Integer.valueOf(i), remoteTransition, deskIdForTask.intValue(), 0, unminimizeReason);
     }
 
-    public final void moveToDisplay(ActivityManager.RunningTaskInfo runningTaskInfo, int i, Rect rect, Transitions.TransitionHandler transitionHandler) {
+    public final void moveToDisplay(ActivityManager.RunningTaskInfo runningTaskInfo, int i, Rect rect, Transitions.TransitionHandler transitionHandler) throws Resources.NotFoundException {
         DisplayLayout displayLayout;
-        Rect initialBounds;
+        Rect rectCalculateMaximizeBounds;
         boolean z;
-        WindowContainerTransaction windowContainerTransaction;
-        DesktopTasksController$$ExternalSyntheticLambda5 desktopTasksController$$ExternalSyntheticLambda5;
+        DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default;
         logV$1("moveToDisplay: taskId=%d displayId=%d", Integer.valueOf(runningTaskInfo.taskId), Integer.valueOf(i));
         if (runningTaskInfo.displayId == i) {
             logD$1("moveToDisplay: task already on display %d", Integer.valueOf(i));
             return;
         }
-        WindowContainerTransaction windowContainerTransaction2 = new WindowContainerTransaction();
+        WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
         DisplayAreaInfo displayAreaInfo = this.rootTaskDisplayAreaOrganizer.getDisplayAreaInfo(i);
         if (displayAreaInfo == null) {
             logW("moveToDisplay: display not found", new Object[0]);
@@ -2246,75 +3371,87 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         Integer activeDeskId = this.taskRepository.getActiveDeskId(i);
         Transitions transitions = this.transitions;
         if (activeDeskId == null && i == 0) {
-            windowContainerTransaction2.reparent(runningTaskInfo.token, displayAreaInfo.token, true);
-            windowContainerTransaction2.setWindowingMode(runningTaskInfo.token, 0);
-            windowContainerTransaction2.setBounds(runningTaskInfo.token, new Rect());
-            transitions.startTransition(1, windowContainerTransaction2, null);
+            windowContainerTransaction.reparent(runningTaskInfo.token, displayAreaInfo.token, true);
+            windowContainerTransaction.setWindowingMode(runningTaskInfo.token, 0);
+            windowContainerTransaction.setBounds(runningTaskInfo.token, new Rect());
+            transitions.startTransition(1, windowContainerTransaction, null);
             return;
         }
         if (runningTaskInfo.isFreeform()) {
             if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
-                ((RootTaskDesksOrganizer) this.desksOrganizer).moveTaskToDesk(windowContainerTransaction2, defaultDeskId.intValue(), runningTaskInfo);
+                ((RootTaskDesksOrganizer) this.desksOrganizer).moveTaskToDesk(windowContainerTransaction, defaultDeskId.intValue(), runningTaskInfo);
             }
             if (runningTaskInfo.getDisplayId() == 0) {
                 logD$1("moveToDisplay: when it go to external display, unset alwaysOnTop", new Object[0]);
-                WindowContainerTransaction windowContainerTransaction3 = new WindowContainerTransaction();
-                windowContainerTransaction3.setAlwaysOnTop(runningTaskInfo.token, false);
-                this.shellTaskOrganizer.applyTransaction(windowContainerTransaction3);
+                WindowContainerTransaction windowContainerTransaction2 = new WindowContainerTransaction();
+                windowContainerTransaction2.setAlwaysOnTop(runningTaskInfo.token, false);
+                this.shellTaskOrganizer.applyTransaction(windowContainerTransaction2);
             }
             if (rect != null) {
-                windowContainerTransaction2.setBounds(runningTaskInfo.token, rect);
+                windowContainerTransaction.setBounds(runningTaskInfo.token, rect);
             } else {
                 int i2 = runningTaskInfo.displayId;
                 DisplayController displayController = this.displayController;
                 DisplayLayout displayLayout2 = displayController.getDisplayLayout(i2);
                 if (displayLayout2 != null && (displayLayout = displayController.getDisplayLayout(i)) != null) {
                     Rect bounds = runningTaskInfo.configuration.windowConfiguration.getBounds();
-                    int width = (bounds.width() * displayLayout.mDensityDpi) / displayLayout2.mDensityDpi;
-                    int height = (bounds.height() * displayLayout.mDensityDpi) / displayLayout2.mDensityDpi;
-                    int width2 = displayLayout2.mWidth - bounds.width();
-                    int height2 = displayLayout2.mHeight - bounds.height();
-                    int i3 = displayLayout.mWidth - width;
-                    int i4 = displayLayout.mHeight - height;
-                    int i5 = width2 != 0 ? (bounds.left * i3) / width2 : i3 / 2;
-                    int i6 = height2 != 0 ? (bounds.top * i4) / height2 : i4 / 2;
+                    int iWidth = (bounds.width() * displayLayout.mDensityDpi) / displayLayout2.mDensityDpi;
+                    int iHeight = (bounds.height() * displayLayout.mDensityDpi) / displayLayout2.mDensityDpi;
+                    int iWidth2 = displayLayout2.mWidth - bounds.width();
+                    int iHeight2 = displayLayout2.mHeight - bounds.height();
+                    int i3 = displayLayout.mWidth - iWidth;
+                    int i4 = displayLayout.mHeight - iHeight;
+                    int i5 = iWidth2 != 0 ? (bounds.left * i3) / iWidth2 : i3 / 2;
+                    int i6 = iHeight2 != 0 ? (bounds.top * i4) / iHeight2 : i4 / 2;
                     if (i3 < 0 || i4 < 0) {
-                        initialBounds = getInitialBounds(displayLayout, runningTaskInfo, i);
+                        DesktopStateImpl.Companion.getClass();
+                        rectCalculateMaximizeBounds = DesktopStateImpl.Companion.inNonResizableDesktopWindowing(runningTaskInfo) ? DesktopModeUtils.calculateMaximizeBounds(displayLayout, runningTaskInfo) : getInitialBounds(displayLayout, runningTaskInfo, i);
                     } else {
-                        initialBounds = new Rect(0, 0, width, height);
-                        initialBounds.offsetTo(RangesKt___RangesKt.coerceIn(i5, 0, i3), RangesKt___RangesKt.coerceIn(i6, 0, i4));
+                        rectCalculateMaximizeBounds = new Rect(0, 0, iWidth, iHeight);
+                        rectCalculateMaximizeBounds.offsetTo(RangesKt___RangesKt.coerceIn(i5, 0, i3), RangesKt___RangesKt.coerceIn(i6, 0, i4));
                     }
-                    windowContainerTransaction2.setBounds(runningTaskInfo.token, initialBounds);
+                    windowContainerTransaction.setBounds(runningTaskInfo.token, rectCalculateMaximizeBounds);
                 }
             }
         } else {
-            addMoveToDeskTaskChanges(windowContainerTransaction2, runningTaskInfo, defaultDeskId.intValue(), null);
+            addMoveToDeskTaskChanges(windowContainerTransaction, runningTaskInfo, defaultDeskId.intValue(), null, false);
+            windowContainerTransaction = windowContainerTransaction;
         }
         DesktopExperienceFlags desktopExperienceFlags = DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND;
         if (desktopExperienceFlags.isTrue()) {
             z = true;
         } else {
             z = true;
-            windowContainerTransaction2.reparent(runningTaskInfo.token, displayAreaInfo.token, true);
+            windowContainerTransaction.reparent(runningTaskInfo.token, displayAreaInfo.token, true);
         }
-        Function1 addDeskActivationChanges$default = addDeskActivationChanges$default(this, defaultDeskId.intValue(), windowContainerTransaction2, runningTaskInfo, 0, 0, 56);
-        windowContainerTransaction2.reorder(runningTaskInfo.token, z, z);
+        WindowContainerTransaction windowContainerTransaction3 = windowContainerTransaction;
+        Function1 function1AddDeskActivationChanges$default = addDeskActivationChanges$default(this, defaultDeskId.intValue(), windowContainerTransaction3, runningTaskInfo, 0, 0, 56);
+        windowContainerTransaction3.reorder(runningTaskInfo.token, z, z);
         int i7 = runningTaskInfo.displayId;
         Integer deskIdForTask = this.taskRepository.getDeskIdForTask(runningTaskInfo.taskId);
-        if (desktopExperienceFlags.isTrue() && willExitDesktop(runningTaskInfo.taskId, false)) {
-            windowContainerTransaction = windowContainerTransaction2;
-            desktopTasksController$$ExternalSyntheticLambda5 = performDesktopExitCleanUp$default(this, windowContainerTransaction, deskIdForTask, i7, true, false, 32);
+        if (desktopExperienceFlags.isTrue()) {
+            desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default = !willExitDesktop(runningTaskInfo.taskId, false) ? null : performDesktopExitCleanUp$default(this, windowContainerTransaction3, deskIdForTask, i7, true, false, 32);
+            if (desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default == null) {
+                Integer deskIdForTask2 = this.taskRepository.getDeskIdForTask(runningTaskInfo.taskId);
+                int iIntValue = deskIdForTask2 != null ? deskIdForTask2.intValue() : -1;
+                Integer displayIdForTask = this.taskRepository.getDisplayIdForTask(runningTaskInfo.taskId);
+                int iIntValue2 = displayIdForTask != null ? displayIdForTask.intValue() : -1;
+                int i8 = runningTaskInfo.taskId;
+                if (iIntValue != -1 && iIntValue2 != -1) {
+                    this.taskRepository.setTaskInFullImmersiveStateInDesk(iIntValue, i8, false);
+                }
+                desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default = null;
+            }
         } else {
-            windowContainerTransaction = windowContainerTransaction2;
-            desktopTasksController$$ExternalSyntheticLambda5 = null;
+            desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default = null;
         }
-        IBinder startTransition = transitions.startTransition(6, windowContainerTransaction, transitionHandler == null ? this.moveToDisplayTransitionHandler : transitionHandler);
-        if (desktopTasksController$$ExternalSyntheticLambda5 != null) {
-            startTransition.getClass();
-            desktopTasksController$$ExternalSyntheticLambda5.mo779invoke(startTransition);
+        IBinder iBinderStartTransition = transitions.startTransition(6, windowContainerTransaction3, transitionHandler == null ? this.moveToDisplayTransitionHandler : transitionHandler);
+        if (desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default != null) {
+            iBinderStartTransition.getClass();
+            desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default.mo781invoke(iBinderStartTransition);
         }
-        startTransition.getClass();
-        addDeskActivationChanges$default.mo779invoke(startTransition);
+        iBinderStartTransition.getClass();
+        function1AddDeskActivationChanges$default.mo781invoke(iBinderStartTransition);
         SplitScreenController splitScreenController = this.splitScreenController;
         if (splitScreenController == null) {
             splitScreenController = null;
@@ -2325,7 +3462,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
     }
 
-    public final void moveToFullscreen(int i, DesktopModeTransitionSource desktopModeTransitionSource) {
+    public final void moveToFullscreen(int i, DesktopModeTransitionSource desktopModeTransitionSource) throws Resources.NotFoundException {
         ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(i);
         if (runningTaskInfo != null) {
             DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = this.snapEventHandler;
@@ -2337,7 +3474,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
     }
 
-    public final void moveToFullscreenWithAnimation(ActivityManager.RunningTaskInfo runningTaskInfo, Point point, DesktopModeTransitionSource desktopModeTransitionSource, Rect rect) {
+    public final void moveToFullscreenWithAnimation(ActivityManager.RunningTaskInfo runningTaskInfo, Point point, DesktopModeTransitionSource desktopModeTransitionSource, Rect rect) throws Resources.NotFoundException {
         DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1;
         DesktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 = this.exitDesktopModeListener;
         if (desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 != null) {
@@ -2345,7 +3482,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
         logV$1("moveToFullscreenWithAnimation taskId=%d", Integer.valueOf(runningTaskInfo.taskId));
         WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-        DesktopTasksController$$ExternalSyntheticLambda5 addMoveToFullscreenChanges = addMoveToFullscreenChanges(windowContainerTransaction, runningTaskInfo, willExitDesktop(runningTaskInfo.taskId, true));
+        DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges = addMoveToFullscreenChanges(windowContainerTransaction, runningTaskInfo, willExitDesktop(runningTaskInfo.taskId, true));
         if (CoreRune.DW_SHELL_CHANGE_TRANSITION) {
             windowContainerTransaction.setChangeTransitMode(runningTaskInfo.token, 1, "moveToFullscreenWithAnimation(" + desktopModeTransitionSource + ")");
             if (rect != null) {
@@ -2362,11 +3499,11 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         exitDesktopTaskTransitionHandler.mOnAnimationFinishedCallback = this.mOnAnimationFinishedCallback;
         int i = DesktopModeTransitionTypes.$r8$clinit;
         int i2 = DesktopModeTransitionTypes.WhenMappings.$EnumSwitchMapping$0[desktopModeTransitionSource.ordinal()];
-        IBinder startTransition = exitDesktopTaskTransitionHandler.mTransitions.startTransition(i2 != 1 ? i2 != 3 ? i2 != 4 ? VolteConstants.ErrorCode.CALL_REJECT_REASON_USR_BUSY_CS_CALL : VolteConstants.ErrorCode.CALL_STATUS_CONF_ADD_USER_TO_SESSION_FAILURE : VolteConstants.ErrorCode.CALL_END_CALL_NW_HANDOVER : VolteConstants.ErrorCode.CALL_STATUS_CONF_REMOVE_USER_FROM_SESSION_FAILURE, windowContainerTransaction, exitDesktopTaskTransitionHandler);
-        ((ArrayList) exitDesktopTaskTransitionHandler.mPendingTransitionTokens).add(startTransition);
-        if (addMoveToFullscreenChanges != null) {
-            startTransition.getClass();
-            addMoveToFullscreenChanges.mo779invoke(startTransition);
+        IBinder iBinderStartTransition = exitDesktopTaskTransitionHandler.mTransitions.startTransition(i2 != 1 ? i2 != 3 ? i2 != 4 ? VolteConstants.ErrorCode.CALL_REJECT_REASON_USR_BUSY_CS_CALL : VolteConstants.ErrorCode.CALL_STATUS_CONF_ADD_USER_TO_SESSION_FAILURE : VolteConstants.ErrorCode.CALL_END_CALL_NW_HANDOVER : VolteConstants.ErrorCode.CALL_STATUS_CONF_REMOVE_USER_FROM_SESSION_FAILURE, windowContainerTransaction, exitDesktopTaskTransitionHandler);
+        ((ArrayList) exitDesktopTaskTransitionHandler.mPendingTransitionTokens).add(iBinderStartTransition);
+        if (desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges != null) {
+            iBinderStartTransition.getClass();
+            desktopTasksController$$ExternalSyntheticLambda3AddMoveToFullscreenChanges.mo781invoke(iBinderStartTransition);
         }
         if (this.taskRepository.isOnlyVisibleNonClosingTask(runningTaskInfo.taskId, -1) || DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue() || (desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 = this.desktopModeEnterExitTransitionListener) == null) {
             return;
@@ -2378,9 +3515,9 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
     /* JADX WARN: Type inference failed for: r1v7 */
     /* JADX WARN: Type inference failed for: r1v8 */
     /* JADX WARN: Type inference failed for: r1v9, types: [java.lang.Object] */
-    public final void moveToNextDisplay(int i) {
-        Object obj;
-        Integer num;
+    public final void moveToNextDisplay(int i) throws Resources.NotFoundException {
+        Object next;
+        Integer next2;
         ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(i);
         if (runningTaskInfo == null) {
             logW("moveToNextDisplay: taskId=%d not found", Integer.valueOf(i));
@@ -2392,58 +3529,89 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         if (numArr.length > 1) {
             Arrays.sort(numArr);
         }
-        List asList = Arrays.asList(typedArray);
-        Iterator it = asList.iterator();
+        List listAsList = Arrays.asList(typedArray);
+        Iterator it = listAsList.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             } else {
-                obj = it.next();
-                if (((Number) obj).intValue() > runningTaskInfo.displayId) {
+                next = it.next();
+                if (((Number) next).intValue() > runningTaskInfo.displayId) {
                     break;
                 }
             }
         }
-        Integer num2 = (Integer) obj;
-        if (num2 == null) {
-            Iterator it2 = asList.iterator();
+        Integer num = (Integer) next;
+        if (num == null) {
+            Iterator it2 = listAsList.iterator();
             while (true) {
                 if (!it2.hasNext()) {
-                    num = 0;
+                    next2 = 0;
                     break;
                 } else {
-                    num = it2.next();
-                    if (((Number) num).intValue() < runningTaskInfo.displayId) {
+                    next2 = it2.next();
+                    if (((Number) next2).intValue() < runningTaskInfo.displayId) {
                         break;
                     }
                 }
             }
-            num2 = num;
+            num = next2;
         }
-        if (num2 == null) {
+        if (num == null) {
             logW("moveToNextDisplay: next display not found", new Object[0]);
         } else {
-            moveToDisplay(runningTaskInfo, num2.intValue(), null, null);
+            moveToDisplay(runningTaskInfo, num.intValue(), null, null);
         }
+    }
+
+    @Override // com.android.wm.shell.sysui.UserChangeListener
+    public final void onBeforeUserSwitching(int i) {
+        DesktopTasksController desktopTasksController;
+        logV$1("onBeforeUserSwitching newUserId=%d", Integer.valueOf(i));
+        Integer activeDeskId = this.taskRepository.getActiveDeskId(0);
+        if (activeDeskId != null) {
+            WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+            desktopTasksController = this;
+            prepareDeskDeactivationIfNeeded$default(desktopTasksController, windowContainerTransaction, activeDeskId, 0, 0, 28);
+            desktopTasksController.shellTaskOrganizer.applyTransaction(windowContainerTransaction);
+            desktopTasksController.taskRepository.setDeskInactive(activeDeskId.intValue());
+            DesktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 = desktopTasksController.exitDesktopModeListener;
+            if (desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1 != null) {
+                desktopTasksController$IDesktopModeImpl$exitDesktopModeListener$1.onExitDesktopModeStarted();
+            }
+        } else {
+            desktopTasksController = this;
+        }
+        Display display = desktopTasksController.displayController.mDisplayManager.getDisplay(DesktopStateImpl.desktopExternalDisplayId);
+        if (display == null || display.getType() != 2) {
+            return;
+        }
+        desktopTasksController.displayManager.setEnableConnectedDisplay(display.getDisplayId(), false);
+        desktopTasksController.disableConnectDisplayIdBeforeUserSwitch = display.getDisplayId();
     }
 
     public final void onDefaultDisplayDesktopModeChanged(final boolean z) {
-        Executor executor;
-        final DefaultDisplayDesktopModeChangeListener defaultDisplayDesktopModeChangeListener = this.defaultDisplayDesktopModeChangeListener;
-        if (defaultDisplayDesktopModeChangeListener == null || (executor = this.defaultDisplayDesktopModeChangeListenerExecutor) == null) {
+        Iterator it = ((ArrayList) this.defaultDisplayDesktopModeChangeListeners).iterator();
+        int i = 0;
+        while (it.hasNext()) {
+            final DefaultDisplayDesktopModeChangeListener defaultDisplayDesktopModeChangeListener = (DefaultDisplayDesktopModeChangeListener) it.next();
+            ((Executor) ((ArrayList) this.defaultDisplayDesktopModeChangeListenerExecutors).get(i)).execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController.onDefaultDisplayDesktopModeChanged.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    defaultDisplayDesktopModeChangeListener.onDefaultDisplayDesktopModeChanged(z);
+                }
+            });
+            i++;
+        }
+        if (z) {
             return;
         }
-        executor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$onDefaultDisplayDesktopModeChanged$1$1
-            @Override // java.lang.Runnable
-            public final void run() {
-                DesktopTasksController.DefaultDisplayDesktopModeChangeListener.this.onDefaultDisplayDesktopModeChanged(z);
-            }
-        });
+        this.taskIdsOfTabletMode.clear();
     }
 
     @Override // com.android.wm.shell.draganddrop.DragAndDropController.DragAndDropListener
-    public final boolean onUnhandledDrag(PendingIntent pendingIntent, int i, DragEvent dragEvent, GlobalDragListener$onUnhandledDrop$1 globalDragListener$onUnhandledDrop$1) {
+    public final boolean onUnhandledDrag(PendingIntent pendingIntent, int i, DragEvent dragEvent, GlobalDragListener.AnonymousClass1 anonymousClass1) throws Resources.NotFoundException {
         int i2;
         if (isDesktopModeShowing(0)) {
             MultiInstanceHelper.Companion.getClass();
@@ -2454,22 +3622,22 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             }
             ActivityManager.RunningTaskInfo focusedFreeformTask = getFocusedFreeformTask(0);
             if (focusedFreeformTask != null) {
-                DesktopModeVisualIndicator.IndicatorType updateVisualIndicator = updateVisualIndicator(focusedFreeformTask, dragEvent.getDragSurface(), dragEvent.getX(), dragEvent.getY(), DesktopModeVisualIndicator.DragStartState.DRAGGED_INTENT, false, true);
+                DesktopModeVisualIndicator.IndicatorType indicatorTypeUpdateVisualIndicator = updateVisualIndicator(focusedFreeformTask, dragEvent.getDragSurface(), dragEvent.getX(), dragEvent.getY(), DesktopModeVisualIndicator.DragStartState.DRAGGED_INTENT, false, true, true);
                 releaseVisualIndicator();
                 int[] iArr = WhenMappings.$EnumSwitchMapping$1;
-                int i3 = iArr[updateVisualIndicator.ordinal()];
+                int i3 = iArr[indicatorTypeUpdateVisualIndicator.ordinal()];
                 if (i3 == 1) {
                     i2 = 1;
                 } else {
                     if (i3 != 2 && i3 != 3 && i3 != 7 && i3 != 8) {
-                        throw new IllegalStateException(("Invalid indicator type: " + updateVisualIndicator).toString());
+                        throw new IllegalStateException(("Invalid indicator type: " + indicatorTypeUpdateVisualIndicator).toString());
                     }
                     i2 = 5;
                 }
                 DisplayLayout displayLayout = this.displayController.getDisplayLayout(0);
                 if (displayLayout != null) {
                     Rect rect = new Rect();
-                    int i4 = iArr[updateVisualIndicator.ordinal()];
+                    int i4 = iArr[indicatorTypeUpdateVisualIndicator.ordinal()];
                     if (i4 == 2) {
                         rect.set(getSnapBounds(focusedFreeformTask, SnapPosition.LEFT));
                     } else if (i4 == 3) {
@@ -2480,19 +3648,19 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                     } else if (i4 == 8) {
                         rect.set(DesktopModeUtils.calculateMaximizeBounds(displayLayout, focusedFreeformTask));
                     }
-                    ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                    makeBasic.setLaunchWindowingMode(i2);
-                    makeBasic.setLaunchBounds(rect);
-                    makeBasic.setPendingIntentBackgroundActivityStartMode(3);
-                    makeBasic.setPendingIntentLaunchFlags(402653184);
-                    makeBasic.setSplashScreenStyle(1);
+                    ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                    activityOptionsMakeBasic.setLaunchWindowingMode(i2);
+                    activityOptionsMakeBasic.setLaunchBounds(rect);
+                    activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(3);
+                    activityOptionsMakeBasic.setPendingIntentLaunchFlags(402653184);
+                    activityOptionsMakeBasic.setSplashScreenStyle(1);
                     if (i2 == 1) {
                         Binder binder = new Binder();
                         this.dragAndDropFullscreenCookie = binder;
-                        makeBasic.setLaunchCookie(binder);
+                        activityOptionsMakeBasic.setLaunchCookie(binder);
                     }
                     WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-                    windowContainerTransaction.sendPendingIntent(pendingIntent, (Intent) null, makeBasic.toBundle());
+                    windowContainerTransaction.sendPendingIntent(pendingIntent, (Intent) null, activityOptionsMakeBasic.toBundle());
                     if (i2 != 5) {
                         this.transitions.startTransition(1, windowContainerTransaction, null);
                     } else if (DesktopModeFlags.ENABLE_DESKTOP_TAB_TEARING_MINIMIZE_ANIMATION_BUGFIX.isTrue()) {
@@ -2502,12 +3670,12 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                         }
                     } else {
                         DesktopModeDragAndDropTransitionHandler desktopModeDragAndDropTransitionHandler = this.desktopModeDragAndDropTransitionHandler;
-                        IBinder startTransition = desktopModeDragAndDropTransitionHandler.transitions.startTransition(1, windowContainerTransaction, desktopModeDragAndDropTransitionHandler);
+                        IBinder iBinderStartTransition = desktopModeDragAndDropTransitionHandler.transitions.startTransition(1, windowContainerTransaction, desktopModeDragAndDropTransitionHandler);
                         List list = desktopModeDragAndDropTransitionHandler.pendingTransitionTokens;
-                        startTransition.getClass();
-                        ((ArrayList) list).add(startTransition);
+                        iBinderStartTransition.getClass();
+                        ((ArrayList) list).add(iBinderStartTransition);
                     }
-                    globalDragListener$onUnhandledDrop$1.accept(Boolean.TRUE);
+                    anonymousClass1.accept(Boolean.TRUE);
                     SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
                     transaction.remove(dragEvent.getDragSurface());
                     transaction.apply();
@@ -2522,9 +3690,19 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
     public final void onUserChanged(int i, Context context) {
         logV$1("onUserChanged previousUserId=%d, newUserId=%d", Integer.valueOf(this.userId), Integer.valueOf(i));
         updateCurrentUser(i);
+        final int i2 = this.disableConnectDisplayIdBeforeUserSwitch;
+        if (i2 != -1) {
+            ((HandlerExecutor) this.mainExecutor).executeDelayed(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController.onUserChanged.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    DesktopTasksController.this.displayManager.setEnableConnectedDisplay(i2, true);
+                }
+            }, 7000L);
+            this.disableConnectDisplayIdBeforeUserSwitch = -1;
+        }
     }
 
-    public final DesktopTasksController$$ExternalSyntheticLambda5 performDesktopExitCleanUp(WindowContainerTransaction windowContainerTransaction, Integer num, int i, boolean z, boolean z2, boolean z3) {
+    public final DesktopTasksController$$ExternalSyntheticLambda3 performDesktopExitCleanUp(WindowContainerTransaction windowContainerTransaction, Integer num, int i, boolean z, boolean z2, boolean z3) throws Resources.NotFoundException {
         if (!z) {
             return null;
         }
@@ -2533,9 +3711,9 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1.onExitDesktopModeTransitionStarted();
         }
         if (!z3 || !DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
-            boolean isTrue = DesktopModeFlags.ENABLE_DESKTOP_WALLPAPER_ACTIVITY_FOR_SYSTEM_USER.isTrue();
+            boolean zIsTrue = DesktopModeFlags.ENABLE_DESKTOP_WALLPAPER_ACTIVITY_FOR_SYSTEM_USER.isTrue();
             DesktopWallpaperActivityTokenProvider desktopWallpaperActivityTokenProvider = this.desktopWallpaperActivityTokenProvider;
-            if (isTrue) {
+            if (zIsTrue) {
                 WindowContainerToken token = desktopWallpaperActivityTokenProvider.getToken(i);
                 if (token != null) {
                     logV$1("moveWallpaperActivityToBack", new Object[0]);
@@ -2552,31 +3730,10 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 this.homeIntentProvider.addLaunchHomePendingIntent(windowContainerTransaction, i, Integer.valueOf(this.userId));
             }
         }
-        return prepareDeskDeactivationIfNeeded(windowContainerTransaction, num);
+        return prepareDeskDeactivationIfNeeded$default(this, windowContainerTransaction, num, 0, 0, 28);
     }
 
-    public final DesktopTasksController$$ExternalSyntheticLambda5 prepareDeskDeactivationIfNeeded(WindowContainerTransaction windowContainerTransaction, Integer num) {
-        if (!DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue() || num == null) {
-            return null;
-        }
-        int intValue = num.intValue();
-        RootTaskDesksOrganizer rootTaskDesksOrganizer = (RootTaskDesksOrganizer) this.desksOrganizer;
-        rootTaskDesksOrganizer.getClass();
-        RootTaskDesksOrganizer.logV$2("deactivateDesk %d", num);
-        rootTaskDesksOrganizer.updateLaunchRoot(intValue, windowContainerTransaction, false);
-        DesktopRepository desktopRepository = this.taskRepository;
-        if (desktopRepository.desktopData.getDisplayForDesk(num.intValue()) == 0) {
-            DesktopStateImpl.Companion.getClass();
-            DesktopStateImpl.Companion.setInDesktopWindowing(false);
-            onDefaultDisplayDesktopModeChanged(false);
-        } else {
-            DesktopStateImpl.Companion.getClass();
-            DesktopStateImpl.desktopExternalDisplayId = -1;
-        }
-        return new DesktopTasksController$$ExternalSyntheticLambda5(this, num);
-    }
-
-    public final void prepareForDeskActivation(WindowContainerTransaction windowContainerTransaction, int i) {
+    public final void prepareForDeskActivation(WindowContainerTransaction windowContainerTransaction, int i) throws Resources.NotFoundException {
         if (i == 0) {
             ArrayList runningTasks = this.shellTaskOrganizer.getRunningTasks(i);
             ArrayList arrayList = new ArrayList();
@@ -2601,63 +3758,37 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         moveHomeTaskToTop(windowContainerTransaction, !DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue() ? this.context.getDisplayId() : i);
         if (i == 0 && DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_WALLPAPER_ACTIVITY.isTrue()) {
             logV$1("addWallpaperActivity", new Object[0]);
-            boolean isTrue = DesktopModeFlags.ENABLE_DESKTOP_WALLPAPER_ACTIVITY_FOR_SYSTEM_USER.isTrue();
+            boolean zIsTrue = DesktopModeFlags.ENABLE_DESKTOP_WALLPAPER_ACTIVITY_FOR_SYSTEM_USER.isTrue();
             DesktopWallpaperActivityTokenProvider desktopWallpaperActivityTokenProvider = this.desktopWallpaperActivityTokenProvider;
-            if (isTrue) {
+            if (zIsTrue) {
                 WindowContainerToken token = desktopWallpaperActivityTokenProvider.getToken(i);
                 if (token != null) {
                     windowContainerTransaction.reorder(token, true);
                     return;
                 }
                 Intent intent = new Intent(this.context, (Class<?>) DesktopWallpaperActivity.class);
-                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                makeBasic.setLaunchWindowingMode(1);
-                makeBasic.setPendingIntentBackgroundActivityStartMode(3);
-                windowContainerTransaction.sendPendingIntent(PendingIntent.getActivity(this.context, 0, intent, 67108864), intent, makeBasic.toBundle());
+                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                activityOptionsMakeBasic.setLaunchWindowingMode(1);
+                activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(3);
+                windowContainerTransaction.sendPendingIntent(PendingIntent.getActivity(this.context, 0, intent, 67108864), intent, activityOptionsMakeBasic.toBundle());
                 return;
             }
-            UserHandle of = UserHandle.of(this.userId);
-            Context createContextAsUser = this.context.createContextAsUser(of, 0);
-            Intent intent2 = new Intent(createContextAsUser, (Class<?>) DesktopWallpaperActivity.class);
+            UserHandle userHandleOf = UserHandle.of(this.userId);
+            Context contextCreateContextAsUser = this.context.createContextAsUser(userHandleOf, 0);
+            Intent intent2 = new Intent(contextCreateContextAsUser, (Class<?>) DesktopWallpaperActivity.class);
             desktopWallpaperActivityTokenProvider.getToken(i);
             intent2.putExtra("android.intent.extra.user_handle", this.userId);
-            ActivityOptions makeBasic2 = ActivityOptions.makeBasic();
-            makeBasic2.setLaunchWindowingMode(1);
-            makeBasic2.setPendingIntentBackgroundActivityStartMode(3);
-            windowContainerTransaction.sendPendingIntent(PendingIntent.getActivityAsUser(createContextAsUser, 0, intent2, 67108864, null, of), intent2, makeBasic2.toBundle());
+            ActivityOptions activityOptionsMakeBasic2 = ActivityOptions.makeBasic();
+            activityOptionsMakeBasic2.setLaunchWindowingMode(1);
+            activityOptionsMakeBasic2.setPendingIntentBackgroundActivityStartMode(3);
+            windowContainerTransaction.sendPendingIntent(PendingIntent.getActivityAsUser(contextCreateContextAsUser, 0, intent2, 67108864, null, userHandleOf), intent2, activityOptionsMakeBasic2.toBundle());
         }
     }
 
     public final void releaseVisualIndicator() {
         DesktopModeVisualIndicator desktopModeVisualIndicator = this.visualIndicator;
         if (desktopModeVisualIndicator != null) {
-            final VisualIndicatorViewContainer visualIndicatorViewContainer = desktopModeVisualIndicator.mVisualIndicatorViewContainer;
-            if (!visualIndicatorViewContainer.isReleased) {
-                visualIndicatorViewContainer.desktopExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$releaseVisualIndicator$1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SurfaceControlViewHost surfaceControlViewHost = VisualIndicatorViewContainer.this.indicatorViewHost;
-                        if (surfaceControlViewHost != null) {
-                            surfaceControlViewHost.release();
-                        }
-                        VisualIndicatorViewContainer.this.indicatorViewHost = null;
-                    }
-                });
-                SurfaceControl surfaceControl = visualIndicatorViewContainer.indicatorLeash;
-                if (surfaceControl != null) {
-                    final SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
-                    transaction.remove(surfaceControl);
-                    visualIndicatorViewContainer.indicatorLeash = null;
-                    visualIndicatorViewContainer.syncQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$releaseVisualIndicator$2$1
-                        @Override // com.android.wm.shell.common.SyncTransactionQueue.TransactionRunnable
-                        public final void runWithTransaction(SurfaceControl.Transaction transaction2) {
-                            transaction2.merge(transaction);
-                            transaction.close();
-                        }
-                    });
-                }
-                visualIndicatorViewContainer.isReleased = true;
-            }
+            desktopModeVisualIndicator.mVisualIndicatorViewContainer.releaseVisualIndicator();
         }
         this.visualIndicator = null;
     }
@@ -2682,20 +3813,39 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 }
             }
         }
-        RootTaskDesksOrganizer rootTaskDesksOrganizer = (RootTaskDesksOrganizer) this.desksOrganizer;
-        if (rootTaskDesksOrganizer.deskRootsByDeskId.contains(i)) {
-            RecentTasksController recentTasksController = this.recentTasksController;
-            if (recentTasksController != null) {
-                ActivityTaskManager.getService().removeAllTasksInRootTask(i);
+        if (((RootTaskDesksOrganizer) this.desksOrganizer).deskRootsByDeskId.contains(i)) {
+            Set activeTaskIdsInDesk = this.taskRepository.getActiveTaskIdsInDesk(i);
+            if (this.recentTasksController != null) {
+                ActivityTaskManager.getService().removeAllVisibleRecentTasksExt(true, CollectionsKt___CollectionsKt.toIntArray(activeTaskIdsInDesk));
             }
-            RootTaskDesksOrganizer.DeskMinimizationRoot deskMinimizationRoot = (RootTaskDesksOrganizer.DeskMinimizationRoot) ((LinkedHashMap) rootTaskDesksOrganizer.deskMinimizationRootsByDeskId).get(Integer.valueOf(i));
-            Integer valueOf = deskMinimizationRoot != null ? Integer.valueOf(deskMinimizationRoot.taskInfo.taskId) : null;
-            if (valueOf != null) {
-                int intValue = valueOf.intValue();
-                if (recentTasksController != null) {
-                    ActivityTaskManager.getService().removeAllTasksInRootTask(intValue);
-                }
+        }
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0017  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void removeAllVisibleRecentTasks() {
+        List<ActivityManager.RecentTaskInfo> recentTasks;
+        RecentTasksController recentTasksController = this.recentTasksController;
+        if (recentTasksController != null) {
+            try {
+                recentTasks = recentTasksController.mActivityTaskManager.getRecentTasks(Integer.MAX_VALUE, 3, ActivityManager.getCurrentUser());
+            } catch (BadParcelableException unused) {
+                recentTasks = Collections.EMPTY_LIST;
             }
+            if (recentTasks == null) {
+                recentTasks = EmptyList.INSTANCE;
+            }
+        }
+        LinkedHashSet linkedHashSet = new LinkedHashSet();
+        for (ActivityManager.RecentTaskInfo recentTaskInfo : recentTasks) {
+            if (!this.taskRepository.isActiveTask(recentTaskInfo.taskId)) {
+                linkedHashSet.add(Integer.valueOf(recentTaskInfo.taskId));
+            }
+        }
+        if (recentTasksController != null) {
+            ActivityTaskManager.getService().removeAllVisibleRecentTasksExt(true, CollectionsKt___CollectionsKt.toIntArray(linkedHashSet));
         }
     }
 
@@ -2709,14 +3859,14 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
             Iterator it = activeTaskIdsInDesk.iterator();
             while (it.hasNext()) {
-                int intValue = ((Number) it.next()).intValue();
-                ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(intValue);
+                int iIntValue = ((Number) it.next()).intValue();
+                ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(iIntValue);
                 if (runningTaskInfo != null) {
                     windowContainerTransaction.removeTask(runningTaskInfo.token);
                 } else {
                     RecentTasksController recentTasksController = this.recentTasksController;
                     if (recentTasksController != null) {
-                        recentTasksController.mActivityTaskManager.removeTask(intValue);
+                        recentTasksController.mActivityTaskManager.removeTask(iIntValue);
                     }
                 }
             }
@@ -2731,8 +3881,8 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 if (deskRoot == null) {
                     Object[] objArr2 = {Integer.valueOf(i2)};
                     ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-                    SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "RootTaskDesksOrganizer", objArr2);
-                    ProtoLog.w(shellProtoLogGroup, "%s: removeDesk attempted to remove non-existent desk=%d", m.list.toArray(new Object[m.list.size()]));
+                    SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "RootTaskDesksOrganizer", objArr2);
+                    ProtoLog.w(shellProtoLogGroup, "%s: removeDesk attempted to remove non-existent desk=%d", spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
                 } else {
                     rootTaskDesksOrganizer.updateLaunchRoot(i2, windowContainerTransaction, false);
                     deskRoot.users.remove(Integer.valueOf(i5));
@@ -2748,12 +3898,12 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 }
             }
             if (desktopExperienceFlags.isTrue() || !windowContainerTransaction.isEmpty()) {
-                IBinder startTransition = this.transitions.startTransition(2, windowContainerTransaction, null);
+                IBinder iBinderStartTransition = this.transitions.startTransition(2, windowContainerTransaction, null);
                 if (desktopExperienceFlags.isTrue()) {
-                    startTransition.getClass();
+                    iBinderStartTransition.getClass();
                     i3 = i;
                     i4 = i2;
-                    this.desksTransitionObserver.addPendingTransition(new DeskTransition.RemoveDesk(startTransition, i3, i4, activeTaskIdsInDesk, this.onDeskRemovedListener));
+                    this.desksTransitionObserver.addPendingTransition(new DeskTransition.RemoveDesk(iBinderStartTransition, i3, i4, activeTaskIdsInDesk, this.onDeskRemovedListener));
                 } else {
                     i3 = i;
                     i4 = i2;
@@ -2763,11 +3913,39 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 }
                 if ((activeDeskId.intValue() == i4 ? activeDeskId : null) != null) {
                     DesktopStateImpl.Companion.getClass();
-                    DesktopStateImpl.Companion.setInDesktopWindowing(false);
-                    onDefaultDisplayDesktopModeChanged(false);
+                    if (DesktopStateImpl.Companion.inDesktopWindowing(0)) {
+                        DesktopStateImpl.Companion.setInDesktopWindowing(false);
+                        onDefaultDisplayDesktopModeChanged(false);
+                        if (CoreRune.MW_SA_LOGGING && !DesktopStateImpl.inDesktopWindowing && DesktopStateImpl.desktopExternalDisplayId == -1) {
+                            desktopExitLogging(0);
+                        }
+                    }
                 }
             }
         }
+    }
+
+    public final void removeDesktopDisabledFlagsOnDefaultDisplay(int i) {
+        DesktopModeWindowDecorViewModel.AnonymousClass1 anonymousClass1;
+        DesktopTasksController$IDesktopModeImpl$deskChangeListener$1 desktopTasksController$IDesktopModeImpl$deskChangeListener$1;
+        if ((this.desktopDisabledFlagsOnDefaultDisplay & i) == 0) {
+            return;
+        }
+        boolean zCanCreateDesks$default = canCreateDesks$default(this);
+        int i2 = (~i) & this.desktopDisabledFlagsOnDefaultDisplay;
+        this.desktopDisabledFlagsOnDefaultDisplay = i2;
+        DesktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1 desktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1 = this.desktopDisabledFlagsListener;
+        if (desktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1 != null) {
+            desktopTasksController$IDesktopModeImpl$desktopDisabledFlagsListener$1.onDesktopDisabledFlagsChangedOnDefaultDisplay(i2);
+        }
+        boolean zCanCreateDesks$default2 = canCreateDesks$default(this);
+        if (zCanCreateDesks$default != zCanCreateDesks$default2 && (desktopTasksController$IDesktopModeImpl$deskChangeListener$1 = this.deskChangeListener) != null) {
+            desktopTasksController$IDesktopModeImpl$deskChangeListener$1.onCanCreateDesksChanged(zCanCreateDesks$default2);
+        }
+        if (!CoreRune.MW_CAPTION_DESKTOP_DISABLED || (anonymousClass1 = this.decorViewModelDesktopDisabledChangeListener) == null) {
+            return;
+        }
+        anonymousClass1.onDesktopDisabledFlagsChangedOnDefaultDisplay(this.desktopDisabledFlagsOnDefaultDisplay);
     }
 
     public final void requestFloat(ActivityManager.RunningTaskInfo runningTaskInfo, Boolean bool) {
@@ -2775,7 +3953,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         boolean inProgress$1 = dragToDesktopTransitionHandler.getInProgress$1();
         if (TaskInfoKt.isFullscreen(runningTaskInfo) || runningTaskInfo.isFreeform() || inProgress$1 || TaskInfoKt.isMultiWindow(runningTaskInfo)) {
             if (!inProgress$1) {
-                this.bubbleController.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda10(1)));
+                this.bubbleController.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda12(1)));
             } else {
                 releaseVisualIndicator();
                 dragToDesktopTransitionHandler.cancelDragToDesktopTransition(Intrinsics.areEqual(bool, Boolean.TRUE) ? DragToDesktopTransitionHandler.CancelState.CANCEL_BUBBLE_LEFT : DragToDesktopTransitionHandler.CancelState.CANCEL_BUBBLE_RIGHT);
@@ -2783,9 +3961,9 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
     }
 
-    public final void requestSplit(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z) {
+    public final void requestSplit(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z) throws Resources.NotFoundException {
         DesktopTasksController desktopTasksController;
-        DesktopTasksController$$ExternalSyntheticLambda5 performDesktopExitCleanUp$default;
+        DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default;
         DragToDesktopTransitionHandler dragToDesktopTransitionHandler = this.dragToDesktopTransitionHandler;
         boolean inProgress$1 = dragToDesktopTransitionHandler.getInProgress$1();
         if (TaskInfoKt.isFullscreen(runningTaskInfo) || runningTaskInfo.isFreeform() || inProgress$1) {
@@ -2805,17 +3983,17 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             int i2 = runningTaskInfo.displayId;
             if (willExitDesktop(i, true)) {
                 desktopTasksController = this;
-                performDesktopExitCleanUp$default = performDesktopExitCleanUp$default(desktopTasksController, windowContainerTransaction, deskIdForTask, i2, true, false, 32);
+                desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default = performDesktopExitCleanUp$default(desktopTasksController, windowContainerTransaction, deskIdForTask, i2, true, false, 32);
             } else {
                 desktopTasksController = this;
-                performDesktopExitCleanUp$default = null;
+                desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default = null;
             }
             SplitScreenController splitScreenController = desktopTasksController.splitScreenController;
-            IBinder requestEnterSplitSelect = (splitScreenController != null ? splitScreenController : null).requestEnterSplitSelect(!z ? 1 : 0, runningTaskInfo, runningTaskInfo.configuration.windowConfiguration.getBounds(), windowContainerTransaction);
-            if (requestEnterSplitSelect == null || performDesktopExitCleanUp$default == null) {
+            IBinder iBinderRequestEnterSplitSelect = (splitScreenController != null ? splitScreenController : null).requestEnterSplitSelect(!z ? 1 : 0, runningTaskInfo, runningTaskInfo.configuration.windowConfiguration.getBounds(), windowContainerTransaction);
+            if (iBinderRequestEnterSplitSelect == null || desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default == null) {
                 return;
             }
-            performDesktopExitCleanUp$default.mo779invoke(requestEnterSplitSelect);
+            desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default.mo781invoke(iBinderRequestEnterSplitSelect);
         }
     }
 
@@ -2831,16 +4009,25 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         return forceEnterDesktop(runningTaskInfo.displayId);
     }
 
+    public final void showDesktopDisabledToast(Integer num) {
+        if (num == null) {
+            num = (this.desktopDisabledFlagsOnDefaultDisplay & 2) != 0 ? Integer.valueOf(R.string.dw_desktop_disabled_while_smart_view_is_in_use) : null;
+        }
+        if (num != null) {
+            Toast.makeText(this.context, num.intValue(), 0).show();
+        }
+    }
+
     public final void snapToHalfScreen(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, Rect rect, SnapPosition snapPosition, DesktopModeEventLogger.Companion.ResizeTrigger resizeTrigger, DesktopModeEventLogger.Companion.InputMethod inputMethod) {
         DesktopTilingWindowDecoration desktopTilingWindowDecoration;
         ActivityManager.RunningTaskInfo runningTaskInfo2;
         int i;
         DesktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1;
         ActivityManager.RunningTaskInfo runningTaskInfo3;
-        Integer valueOf = Integer.valueOf(rect.width());
-        Integer valueOf2 = Integer.valueOf(rect.height());
+        Integer numValueOf = Integer.valueOf(rect.width());
+        Integer numValueOf2 = Integer.valueOf(rect.height());
         DesktopModeEventLogger.Companion companion = DesktopModeEventLogger.Companion;
-        this.desktopModeEventLogger.logTaskResizingStarted(resizeTrigger, inputMethod, runningTaskInfo, valueOf, valueOf2, this.displayController, null);
+        this.desktopModeEventLogger.logTaskResizingStarted(resizeTrigger, inputMethod, runningTaskInfo, numValueOf, numValueOf2, this.displayController, null);
         Rect snapBounds = getSnapBounds(runningTaskInfo, snapPosition);
         this.desktopModeEventLogger.logTaskResizingEnded(resizeTrigger, inputMethod, runningTaskInfo, Integer.valueOf(snapBounds.width()), Integer.valueOf(snapBounds.height()), this.displayController, null);
         if (!DesktopModeFlags.ENABLE_TILE_RESIZING.isTrue()) {
@@ -2884,7 +4071,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         Rect snapBounds2 = desktopTilingWindowDecoration.getSnapBounds(snapPosition);
         DesktopTilingWindowDecoration.AppResizingHelper appResizingHelper = new DesktopTilingWindowDecoration.AppResizingHelper(runningTaskInfo, desktopModeWindowDecoration, desktopTilingWindowDecoration.context, snapBounds2, desktopTilingWindowDecoration.displayController, desktopTilingWindowDecoration.taskResourceLoader, desktopTilingWindowDecoration.mainDispatcher, desktopTilingWindowDecoration.bgScope, desktopTilingWindowDecoration.transactionSupplier);
         boolean z = desktopTilingWindowDecoration.leftTaskResizingHelper == null && desktopTilingWindowDecoration.rightTaskResizingHelper == null;
-        boolean equals = snapBounds2.equals(runningTaskInfo.configuration.windowConfiguration.getBounds());
+        boolean zEquals = snapBounds2.equals(runningTaskInfo.configuration.windowConfiguration.getBounds());
         int[] iArr = DesktopTilingWindowDecoration.WhenMappings.$EnumSwitchMapping$0;
         int i5 = iArr[snapPosition.ordinal()];
         if (i5 == 1) {
@@ -2930,19 +4117,20 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             }
             desktopUserRepositories.getCurrent().addRightTiledTask(i10, i8);
         }
-        if (!equals) {
+        if (!zEquals) {
             WindowContainerTransaction bounds2 = new WindowContainerTransaction().setBounds(runningTaskInfo.token, snapBounds2);
             if (CoreRune.DW_SHELL_CHANGE_TRANSITION) {
                 bounds2.setChangeTransitStartBounds(runningTaskInfo.token, rect);
                 bounds2.setChangeTransitMode(runningTaskInfo.token, 1, "onAppTiled");
             }
+            desktopTilingWindowDecoration.lastFocusedTiledTaskId = runningTaskInfo.taskId;
             desktopTilingWindowDecoration.toggleResizeDesktopTaskTransitionHandler.startTransition(bounds2, rect, desktopTilingWindowDecoration$$ExternalSyntheticLambda2);
         } else if (snapBounds2.equals(rect)) {
             desktopTilingWindowDecoration$$ExternalSyntheticLambda2.invoke();
         } else {
             desktopTilingWindowDecoration.returnToDragStartAnimator.start(runningTaskInfo.taskId, appResizingHelper.desktopModeWindowDecoration.mTaskSurface, rect, snapBounds2, desktopTilingWindowDecoration$$ExternalSyntheticLambda2);
         }
-        if (equals || (desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = this.taskbarDesktopTaskListener) == null) {
+        if (zEquals || (desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = this.taskbarDesktopTaskListener) == null) {
             return;
         }
         desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1.onTaskbarCornerRoundingUpdate(true);
@@ -2953,19 +4141,19 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         return false;
     }
 
-    public final IBinder startLaunchTransition(int i, WindowContainerTransaction windowContainerTransaction, Integer num, RemoteTransition remoteTransition, int i2, int i3, DesktopModeEventLogger.Companion.UnminimizeReason unminimizeReason) {
-        Function1 addDeskActivationChanges$default;
-        IBinder startTransition;
+    public final IBinder startLaunchTransition(int i, WindowContainerTransaction windowContainerTransaction, Integer num, RemoteTransition remoteTransition, int i2, int i3, DesktopModeEventLogger.Companion.UnminimizeReason unminimizeReason) throws Resources.NotFoundException {
+        Function1 function1AddDeskActivationChanges$default;
+        IBinder iBinderStartTransition;
         Function1 function1;
         WindowContainerTransaction windowContainerTransaction2 = windowContainerTransaction;
         logV$1("startLaunchTransition type=%s launchingTaskId=%d deskId=%d displayId=%d", WindowManager.transitTypeToString(i), num, Integer.valueOf(i2), Integer.valueOf(i3));
-        Integer addAndGetMinimizeChanges = addAndGetMinimizeChanges(i2, windowContainerTransaction2, num, num == null);
-        DesktopImmersiveController.ExitResult exitImmersiveIfApplicable = this.desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction2, i3, num, DesktopImmersiveController.ExitReason.TASK_LAUNCH);
+        Integer numAddAndGetMinimizeChanges = addAndGetMinimizeChanges(i2, windowContainerTransaction2, num, num == null);
+        DesktopImmersiveController.ExitResult exitResultExitImmersiveIfApplicable = this.desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction2, i3, num, DesktopImmersiveController.ExitReason.TASK_LAUNCH);
         if (!DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue() ? !(!DesktopExperienceFlags.ENABLE_DISPLAY_WINDOWING_MODE_SWITCHING.isTrue() || isDesktopModeShowing(i3)) : !this.taskRepository.isDeskActive(i2)) {
-            addDeskActivationChanges$default = null;
+            function1AddDeskActivationChanges$default = null;
         } else {
             WindowContainerTransaction windowContainerTransaction3 = new WindowContainerTransaction();
-            addDeskActivationChanges$default = addDeskActivationChanges$default(this, i2, windowContainerTransaction3, null, 0, 0, 60);
+            function1AddDeskActivationChanges$default = addDeskActivationChanges$default(this, i2, windowContainerTransaction3, null, 0, 0, 60);
             windowContainerTransaction3.merge(windowContainerTransaction2, true);
             DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 = this.desktopModeEnterExitTransitionListener;
             if (desktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 != null) {
@@ -2975,69 +4163,69 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
         if (remoteTransition == null) {
             logV$1("startLaunchTransition -- no remoteTransition -- wct = " + windowContainerTransaction2, new Object[0]);
-            DesktopImmersiveController.ExitResult.Exit asExit = exitImmersiveIfApplicable.asExit();
-            Integer valueOf = asExit != null ? Integer.valueOf(asExit.exitingTask) : null;
+            DesktopImmersiveController.ExitResult.Exit exitAsExit = exitResultExitImmersiveIfApplicable.asExit();
+            Integer numValueOf = exitAsExit != null ? Integer.valueOf(exitAsExit.exitingTask) : null;
             DesktopMixedTransitionHandler desktopMixedTransitionHandler = this.desktopMixedTransitionHandler;
             desktopMixedTransitionHandler.getClass();
-            boolean isTrue = DesktopModeFlags.ENABLE_FULLY_IMMERSIVE_IN_DESKTOP.isTrue();
+            boolean zIsTrue = DesktopModeFlags.ENABLE_FULLY_IMMERSIVE_IN_DESKTOP.isTrue();
             Transitions transitions = desktopMixedTransitionHandler.transitions;
-            if (isTrue || DesktopModeFlags.ENABLE_DESKTOP_APP_LAUNCH_TRANSITIONS_BUGFIX.isTrue()) {
-                if (valueOf == null) {
+            if (zIsTrue || DesktopModeFlags.ENABLE_DESKTOP_APP_LAUNCH_TRANSITIONS_BUGFIX.isTrue()) {
+                if (numValueOf == null) {
                     DesktopMixedTransitionHandler.logV$6("Starting mixed launch transition for task#%d", num);
                 } else {
-                    DesktopMixedTransitionHandler.logV$6("Starting mixed launch transition for task#%d with immersive exit of task#%d", num, valueOf);
+                    DesktopMixedTransitionHandler.logV$6("Starting mixed launch transition for task#%d with immersive exit of task#%d", num, numValueOf);
                 }
-                IBinder startTransition2 = transitions.startTransition(i, windowContainerTransaction2, desktopMixedTransitionHandler);
+                IBinder iBinderStartTransition2 = transitions.startTransition(i, windowContainerTransaction2, desktopMixedTransitionHandler);
                 List list = desktopMixedTransitionHandler.pendingMixedTransitions;
-                startTransition2.getClass();
-                ((ArrayList) list).add(new DesktopMixedTransitionHandler.PendingMixedTransition.Launch(startTransition2, num, addAndGetMinimizeChanges, valueOf));
-                startTransition = startTransition2;
+                iBinderStartTransition2.getClass();
+                ((ArrayList) list).add(new DesktopMixedTransitionHandler.PendingMixedTransition.Launch(iBinderStartTransition2, num, numAddAndGetMinimizeChanges, numValueOf));
+                iBinderStartTransition = iBinderStartTransition2;
             } else {
-                startTransition = transitions.startTransition(i, windowContainerTransaction2, null);
+                iBinderStartTransition = transitions.startTransition(i, windowContainerTransaction2, null);
             }
         } else {
             Transitions transitions2 = this.transitions;
             ShellExecutor shellExecutor = this.mainExecutor;
-            if (addAndGetMinimizeChanges == null) {
+            if (numAddAndGetMinimizeChanges == null) {
                 OneShotRemoteHandler oneShotRemoteHandler = new OneShotRemoteHandler(shellExecutor, remoteTransition);
-                startTransition = transitions2.startTransition(i, windowContainerTransaction2, oneShotRemoteHandler);
-                oneShotRemoteHandler.mTransition = startTransition;
+                iBinderStartTransition = transitions2.startTransition(i, windowContainerTransaction2, oneShotRemoteHandler);
+                oneShotRemoteHandler.mTransition = iBinderStartTransition;
             } else {
-                DesktopWindowLimitRemoteHandler desktopWindowLimitRemoteHandler = new DesktopWindowLimitRemoteHandler(shellExecutor, this.rootTaskDisplayAreaOrganizer, remoteTransition, addAndGetMinimizeChanges.intValue());
-                startTransition = transitions2.startTransition(i, windowContainerTransaction2, desktopWindowLimitRemoteHandler);
-                startTransition.getClass();
-                desktopWindowLimitRemoteHandler.transition = startTransition;
-                desktopWindowLimitRemoteHandler.oneShotRemoteHandler.mTransition = startTransition;
+                DesktopWindowLimitRemoteHandler desktopWindowLimitRemoteHandler = new DesktopWindowLimitRemoteHandler(shellExecutor, this.rootTaskDisplayAreaOrganizer, remoteTransition, numAddAndGetMinimizeChanges.intValue());
+                iBinderStartTransition = transitions2.startTransition(i, windowContainerTransaction2, desktopWindowLimitRemoteHandler);
+                iBinderStartTransition.getClass();
+                desktopWindowLimitRemoteHandler.transition = iBinderStartTransition;
+                desktopWindowLimitRemoteHandler.oneShotRemoteHandler.mTransition = iBinderStartTransition;
             }
         }
-        if (addAndGetMinimizeChanges != null) {
-            startTransition.getClass();
-            addPendingMinimizeTransition(startTransition, addAndGetMinimizeChanges.intValue(), DesktopModeEventLogger.Companion.MinimizeReason.TASK_LIMIT);
+        if (numAddAndGetMinimizeChanges != null) {
+            iBinderStartTransition.getClass();
+            addPendingMinimizeTransition(iBinderStartTransition, numAddAndGetMinimizeChanges.intValue(), DesktopModeEventLogger.Companion.MinimizeReason.TASK_LIMIT);
         }
         if (num != null && this.taskRepository.isMinimizedTask(num.intValue())) {
-            startTransition.getClass();
-            this.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda6(startTransition, i3, num.intValue(), unminimizeReason, 0)));
+            iBinderStartTransition.getClass();
+            this.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda7(iBinderStartTransition, i3, num.intValue(), unminimizeReason, 0)));
         }
-        if (addDeskActivationChanges$default != null) {
-            startTransition.getClass();
-            addDeskActivationChanges$default.mo779invoke(startTransition);
+        if (function1AddDeskActivationChanges$default != null) {
+            iBinderStartTransition.getClass();
+            function1AddDeskActivationChanges$default.mo781invoke(iBinderStartTransition);
         }
-        DesktopImmersiveController.ExitResult.Exit asExit2 = exitImmersiveIfApplicable.asExit();
-        if (asExit2 != null && (function1 = asExit2.runOnTransitionStart) != null) {
-            startTransition.getClass();
-            function1.mo779invoke(startTransition);
+        DesktopImmersiveController.ExitResult.Exit exitAsExit2 = exitResultExitImmersiveIfApplicable.asExit();
+        if (exitAsExit2 != null && (function1 = exitAsExit2.runOnTransitionStart) != null) {
+            iBinderStartTransition.getClass();
+            function1.mo781invoke(iBinderStartTransition);
         }
-        startTransition.getClass();
-        return startTransition;
+        iBinderStartTransition.getClass();
+        return iBinderStartTransition;
     }
 
     public final void toggleDesktopTask(ActivityManager.RunningTaskInfo runningTaskInfo, ToggleTaskSizeInteraction.Direction direction) {
-        boolean isTaskMaximized = DesktopModeUtils.isTaskMaximized(runningTaskInfo, this.displayController);
-        if (!isTaskMaximized && direction == ToggleTaskSizeInteraction.Direction.RESTORE) {
+        boolean zIsTaskMaximized = DesktopModeUtils.isTaskMaximized(runningTaskInfo, this.displayController);
+        if (!zIsTaskMaximized && direction == ToggleTaskSizeInteraction.Direction.RESTORE) {
             logD$1("toggleDesktopTask taskId##%d is not maximized state", Integer.valueOf(runningTaskInfo.taskId));
             return;
         }
-        if (isTaskMaximized && direction == ToggleTaskSizeInteraction.Direction.MAXIMIZE) {
+        if (zIsTaskMaximized && direction == ToggleTaskSizeInteraction.Direction.MAXIMIZE) {
             logD$1("toggleDesktopTask taskId##%d is maximized state", Integer.valueOf(runningTaskInfo.taskId));
             return;
         }
@@ -3047,10 +4235,10 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
 
     public final void toggleDesktopTaskSize(ActivityManager.RunningTaskInfo runningTaskInfo, ToggleTaskSizeInteraction toggleTaskSizeInteraction) {
         Rect bounds = runningTaskInfo.configuration.windowConfiguration.getBounds();
-        Integer valueOf = Integer.valueOf(bounds.width());
-        Integer valueOf2 = Integer.valueOf(bounds.height());
+        Integer numValueOf = Integer.valueOf(bounds.width());
+        Integer numValueOf2 = Integer.valueOf(bounds.height());
         DesktopModeEventLogger.Companion companion = DesktopModeEventLogger.Companion;
-        this.desktopModeEventLogger.logTaskResizingStarted(toggleTaskSizeInteraction.resizeTrigger, toggleTaskSizeInteraction.inputMethod, runningTaskInfo, valueOf, valueOf2, this.displayController, null);
+        this.desktopModeEventLogger.logTaskResizingStarted(toggleTaskSizeInteraction.resizeTrigger, toggleTaskSizeInteraction.inputMethod, runningTaskInfo, numValueOf, numValueOf2, this.displayController, null);
         DisplayLayout displayLayout = this.displayController.getDisplayLayout(runningTaskInfo.displayId);
         if (displayLayout == null) {
             return;
@@ -3063,6 +4251,30 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         if (z) {
             Rect rect2 = (Rect) this.taskRepository.boundsBeforeMaximizeByTaskId.removeReturnOld(runningTaskInfo.taskId);
             if (rect2 != null) {
+                DesktopStateImpl.Companion.getClass();
+                if (DesktopStateImpl.Companion.inNonResizableDesktopWindowing(runningTaskInfo)) {
+                    Rect rect3 = new Rect();
+                    displayLayout.getStableBoundsByInsetsVisibility(rect3);
+                    if (MultiWindowUtils.isTaskWidthOrHeightGreaterOrEqual(rect2, rect3)) {
+                        rect2.set(DesktopModeUtils.calculateInitialBounds$default(displayLayout, runningTaskInfo, 0, null, 28));
+                    }
+                } else {
+                    DisplayLayout displayLayout2 = (DisplayLayout) this.taskRepository.displayLayoutBeforeMaximizeByTaskId.removeReturnOld(runningTaskInfo.taskId);
+                    int i = displayLayout.mRotation;
+                    if (displayLayout2 != null) {
+                        int i2 = displayLayout2.mRotation;
+                        if (i2 == -1 || i == -1) {
+                            return;
+                        }
+                        if (i2 % 2 != i % 2) {
+                            Rect rect4 = new Rect();
+                            Rect rect5 = new Rect();
+                            rect4.set(0, 0, displayLayout.mWidth, displayLayout.mHeight);
+                            rect5.set(0, 0, displayLayout2.mWidth, displayLayout2.mHeight);
+                            MultiWindowUtils.adjustBoundsForScreenRatio(rect5, rect4, rect2, rect2);
+                        }
+                    }
+                }
                 rect.set(rect2);
             } else if (DesktopModeFlags.ENABLE_WINDOWING_DYNAMIC_INITIAL_BOUNDS.isTrue()) {
                 rect.set(DesktopModeUtils.calculateInitialBounds$default(displayLayout, runningTaskInfo, 0, null, 28));
@@ -3073,6 +4285,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = this.snapEventHandler;
             (desktopModeWindowDecorViewModel != null ? desktopModeWindowDecorViewModel : null).removeTaskIfTiled(runningTaskInfo.displayId, runningTaskInfo.taskId);
             this.taskRepository.boundsBeforeMaximizeByTaskId.set(runningTaskInfo.taskId, new Rect(bounds));
+            this.taskRepository.displayLayoutBeforeMaximizeByTaskId.set(runningTaskInfo.taskId, new DisplayLayout(displayLayout));
             rect.set(DesktopModeUtils.calculateMaximizeBounds(displayLayout, runningTaskInfo));
         }
         boolean z3 = z && (getSnapBounds(runningTaskInfo, SnapPosition.LEFT).equals(rect) || getSnapBounds(runningTaskInfo, SnapPosition.RIGHT).equals(rect));
@@ -3095,7 +4308,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         ToggleResizeDesktopTaskTransitionHandler.startTransition$default(this.toggleResizeDesktopTaskTransitionHandler, bounds2, toggleTaskSizeInteraction.animationStartBounds, 4);
     }
 
-    public final void toggleExternalDisplay(int i) {
+    public final void toggleExternalDisplay(int i) throws Resources.NotFoundException {
         int i2;
         ActivityManager.RunningTaskInfo runningTaskInfo = this.shellTaskOrganizer.getRunningTaskInfo(i);
         if (runningTaskInfo == null) {
@@ -3124,11 +4337,11 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
     }
 
-    public final Function1 updateDesksActivationOnDisconnection(int i, int i2, WindowContainerTransaction windowContainerTransaction, boolean z) {
-        return z ? addDeskActivationChanges$default(this, i, windowContainerTransaction, null, 0, i2, 28) : prepareDeskDeactivationIfNeeded(windowContainerTransaction, Integer.valueOf(i));
+    public final Function1 updateDesksActivationOnDisconnection(int i, int i2, int i3, int i4, WindowContainerTransaction windowContainerTransaction, boolean z) {
+        return z ? addDeskActivationChanges$default(this, i3, windowContainerTransaction, null, 0, i4, 28) : prepareDeskDeactivationIfNeeded$default(this, windowContainerTransaction, Integer.valueOf(i3), i, i2, 16);
     }
 
-    public final DesktopModeVisualIndicator.IndicatorType updateVisualIndicator(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, float f, float f2, DesktopModeVisualIndicator.DragStartState dragStartState, boolean z, boolean z2) {
+    public final DesktopModeVisualIndicator.IndicatorType updateVisualIndicator(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, float f, float f2, DesktopModeVisualIndicator.DragStartState dragStartState, boolean z, boolean z2, boolean z3) {
         DesktopModeVisualIndicator.DragStartState dragStartState2;
         DesktopModeVisualIndicator desktopModeVisualIndicator;
         DesktopModeVisualIndicator desktopModeVisualIndicator2 = this.visualIndicator;
@@ -3149,14 +4362,14 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             BubbleController bubbleController = (BubbleController) this.bubbleController.orElse(null);
             BubblePositioner bubblePositioner = bubbleController != null ? bubbleController.mBubblePositioner : null;
             DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = this.snapEventHandler;
-            desktopModeVisualIndicator = new DesktopModeVisualIndicator(this.desktopExecutor, this.mainExecutor, this.syncQueue, runningTaskInfo, displayController, displayContext, surfaceControl, this.rootTaskDisplayAreaOrganizer, dragStartState2, bubblePositioner, desktopModeWindowDecorViewModel == null ? null : desktopModeWindowDecorViewModel);
+            desktopModeVisualIndicator = new DesktopModeVisualIndicator(this.desktopExecutor, this.mainExecutor, this.syncQueue, runningTaskInfo, displayController, displayContext, surfaceControl, this.rootTaskDisplayAreaOrganizer, dragStartState2, bubblePositioner, desktopModeWindowDecorViewModel == null ? null : desktopModeWindowDecorViewModel, this.recentTasksController);
         } else {
             desktopModeVisualIndicator = desktopModeVisualIndicator3;
         }
         if (this.visualIndicator == null) {
             this.visualIndicator = desktopModeVisualIndicator;
         }
-        return desktopModeVisualIndicator.updateIndicatorType(new PointF(f, f2), runningTaskInfo, z, false, z2);
+        return desktopModeVisualIndicator.updateIndicatorType(new PointF(f, f2), runningTaskInfo, z, false, z2, z3);
     }
 
     public final boolean willExitDesktop(int i, boolean z) {
@@ -3169,13 +4382,17 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         return z;
     }
 
-    public final void moveTaskToFront(ActivityManager.RunningTaskInfo runningTaskInfo, RemoteTransition remoteTransition, DesktopModeEventLogger.Companion.UnminimizeReason unminimizeReason) {
-        Integer deskIdForTask = this.taskRepository.getDeskIdForTask(runningTaskInfo.taskId);
-        if (deskIdForTask == null && (deskIdForTask = getOrCreateDefaultDeskId(runningTaskInfo.displayId, false)) == null) {
+    public final void moveTaskToFront(ActivityManager.RunningTaskInfo runningTaskInfo, RemoteTransition remoteTransition, DesktopModeEventLogger.Companion.UnminimizeReason unminimizeReason) throws Resources.NotFoundException {
+        int i = runningTaskInfo.displayId;
+        Integer activeDeskId = this.taskRepository.getActiveDeskId(i);
+        if (activeDeskId == null) {
+            logV$1("moveTaskToFront no active desk in displayId=%s", Integer.valueOf(i));
+        }
+        if (activeDeskId == null && (activeDeskId = this.taskRepository.getDeskIdForTask(runningTaskInfo.taskId)) == null && (activeDeskId = getOrCreateDefaultDeskId(runningTaskInfo.displayId, false)) == null) {
             return;
         }
-        int intValue = deskIdForTask.intValue();
-        logV$1("moveTaskToFront taskId=%s deskId=%s", Integer.valueOf(runningTaskInfo.taskId), Integer.valueOf(intValue));
+        int iIntValue = activeDeskId.intValue();
+        logV$1("moveTaskToFront taskId=%s deskId=%s", Integer.valueOf(runningTaskInfo.taskId), Integer.valueOf(iIntValue));
         DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = this.snapEventHandler;
         if (desktopModeWindowDecorViewModel == null) {
             desktopModeWindowDecorViewModel = null;
@@ -3186,11 +4403,33 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         }
         WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
         if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
-            ((RootTaskDesksOrganizer) this.desksOrganizer).reorderTaskToFront(windowContainerTransaction, intValue, runningTaskInfo);
+            Integer deskIdForTask = this.taskRepository.getDeskIdForTask(runningTaskInfo.taskId);
+            DesksOrganizer desksOrganizer = this.desksOrganizer;
+            if (deskIdForTask == null || deskIdForTask.intValue() != iIntValue) {
+                ((RootTaskDesksOrganizer) desksOrganizer).moveTaskToDesk(windowContainerTransaction, iIntValue, runningTaskInfo);
+            } else {
+                ((RootTaskDesksOrganizer) desksOrganizer).reorderTaskToFront(windowContainerTransaction, iIntValue, runningTaskInfo);
+            }
         } else {
             windowContainerTransaction.reorder(runningTaskInfo.token, true, true).getClass();
         }
-        startLaunchTransition(3, windowContainerTransaction, Integer.valueOf(runningTaskInfo.taskId), remoteTransition, intValue, runningTaskInfo.displayId, unminimizeReason);
+        ArrayList runningTasks = this.shellTaskOrganizer.getRunningTasks(runningTaskInfo.displayId);
+        ArrayList arrayList = new ArrayList();
+        int size = runningTasks.size();
+        int i2 = 0;
+        while (i2 < size) {
+            Object obj = runningTasks.get(i2);
+            i2++;
+            ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) obj;
+            if (runningTaskInfo2.getActivityType() == 3 && runningTaskInfo2.isVisible) {
+                arrayList.add(obj);
+            }
+        }
+        ActivityManager.RunningTaskInfo runningTaskInfo3 = (ActivityManager.RunningTaskInfo) CollectionsKt___CollectionsKt.firstOrNull((List) arrayList);
+        if (runningTaskInfo3 != null) {
+            windowContainerTransaction.reorder(runningTaskInfo3.token, false);
+        }
+        startLaunchTransition(3, windowContainerTransaction, Integer.valueOf(runningTaskInfo.taskId), remoteTransition, iIntValue, runningTaskInfo.displayId, unminimizeReason);
     }
 
     public static /* synthetic */ void getDesktopModeEnterExitTransitionListener$annotations() {

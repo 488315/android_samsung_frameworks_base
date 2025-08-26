@@ -4,7 +4,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import okio.Path;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class OkioStorage$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -30,9 +29,9 @@ public final /* synthetic */ class OkioStorage$$ExternalSyntheticLambda0 impleme
                 path.getClass();
                 if (okio.internal.Path.access$rootLength(path) != -1) {
                     Path.Companion companion = Path.Companion;
-                    String utf8 = path.bytes.utf8();
+                    String strUtf8 = path.bytes.utf8();
                     companion.getClass();
-                    return Path.Companion.get(utf8, true);
+                    return Path.Companion.get(strUtf8, true);
                 }
                 throw new IllegalStateException(("OkioStorage requires absolute paths, but did not get an absolute path from producePath = " + function0 + ", instead got " + path).toString());
         }

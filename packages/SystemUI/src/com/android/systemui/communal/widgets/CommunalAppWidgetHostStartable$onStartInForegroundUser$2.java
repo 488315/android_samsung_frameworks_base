@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalAppWidgetHostStartable$onStartInForegroundUser$2 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -35,21 +34,21 @@ final class CommunalAppWidgetHostStartable$onStartInForegroundUser$2 extends Sus
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            boolean booleanValue = ((Boolean) ((WithPrev) this.L$0).component2()).booleanValue();
+            boolean zBooleanValue = ((Boolean) ((WithPrev) this.L$0).component2()).booleanValue();
             CommunalAppWidgetHostStartable communalAppWidgetHostStartable = this.this$0;
             this.label = 1;
             int i2 = CommunalAppWidgetHostStartable.$r8$clinit;
             communalAppWidgetHostStartable.getClass();
-            Object withContext = BuildersKt.withContext(communalAppWidgetHostStartable.uiDispatcher, new CommunalAppWidgetHostStartable$updateAppWidgetHostActive$2(booleanValue, communalAppWidgetHostStartable, null), this);
-            if (withContext != obj2) {
-                withContext = Unit.INSTANCE;
+            Object objWithContext = BuildersKt.withContext(communalAppWidgetHostStartable.uiDispatcher, new CommunalAppWidgetHostStartable$updateAppWidgetHostActive$2(zBooleanValue, communalAppWidgetHostStartable, null), this);
+            if (objWithContext != obj2) {
+                objWithContext = Unit.INSTANCE;
             }
-            if (withContext == obj2) {
+            if (objWithContext == obj2) {
                 return obj2;
             }
         } else {

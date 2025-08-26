@@ -5,7 +5,6 @@ import android.graphics.drawable.Icon;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MediaOngoingActivityInfo {
     public final Icon appIcon;
@@ -32,11 +31,11 @@ public final class MediaOngoingActivityInfo {
     }
 
     public final int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.bgColor, this.songTitle.hashCode() * 31, 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.bgColor, this.songTitle.hashCode() * 31, 31);
         Icon icon = this.appIcon;
-        int hashCode = (m + (icon == null ? 0 : icon.hashCode())) * 31;
+        int iHashCode = (iM + (icon == null ? 0 : icon.hashCode())) * 31;
         PendingIntent pendingIntent = this.clickIntent;
-        return hashCode + (pendingIntent != null ? pendingIntent.hashCode() : 0);
+        return iHashCode + (pendingIntent != null ? pendingIntent.hashCode() : 0);
     }
 
     public final String toString() {

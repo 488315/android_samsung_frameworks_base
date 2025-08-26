@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.GraphicsContext;
 import androidx.compose.ui.graphics.layer.GraphicsLayer;
 import androidx.compose.ui.internal.InlineClassHelperKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScopedGraphicsContext implements GraphicsContext {
     public MutableObjectList allocatedGraphicsLayers;
@@ -18,17 +17,17 @@ final class ScopedGraphicsContext implements GraphicsContext {
         if (graphicsContext == null) {
             InlineClassHelperKt.throwIllegalStateException("GraphicsContext not provided");
         }
-        GraphicsLayer createGraphicsLayer = graphicsContext.createGraphicsLayer();
+        GraphicsLayer graphicsLayerCreateGraphicsLayer = graphicsContext.createGraphicsLayer();
         MutableObjectList mutableObjectList = this.allocatedGraphicsLayers;
         if (mutableObjectList != null) {
-            mutableObjectList.add(createGraphicsLayer);
-            return createGraphicsLayer;
+            mutableObjectList.add(graphicsLayerCreateGraphicsLayer);
+            return graphicsLayerCreateGraphicsLayer;
         }
         Object[] objArr = ObjectListKt.EmptyArray;
         MutableObjectList mutableObjectList2 = new MutableObjectList(1);
-        mutableObjectList2.add(createGraphicsLayer);
+        mutableObjectList2.add(graphicsLayerCreateGraphicsLayer);
         this.allocatedGraphicsLayers = mutableObjectList2;
-        return createGraphicsLayer;
+        return graphicsLayerCreateGraphicsLayer;
     }
 
     @Override // androidx.compose.ui.graphics.GraphicsContext

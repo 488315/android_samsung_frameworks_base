@@ -12,7 +12,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ProcessLock {
     public static final Companion Companion = new Companion(null);
@@ -22,7 +21,6 @@ public final class ProcessLock {
     public final boolean processLock;
     public final Lock threadLock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,13 +38,13 @@ public final class ProcessLock {
         Map map = threadLocksMap;
         synchronized (map) {
             try {
-                HashMap hashMap = (HashMap) map;
-                Object obj = hashMap.get(str);
-                if (obj == null) {
-                    obj = new ReentrantLock();
-                    hashMap.put(str, obj);
+                HashMap map2 = (HashMap) map;
+                Object reentrantLock = map2.get(str);
+                if (reentrantLock == null) {
+                    reentrantLock = new ReentrantLock();
+                    map2.put(str, reentrantLock);
                 }
-                lock = (Lock) obj;
+                lock = (Lock) reentrantLock;
             } catch (Throwable th) {
                 throw th;
             }
@@ -54,7 +52,7 @@ public final class ProcessLock {
         this.threadLock = lock;
     }
 
-    public final void lock(boolean z) {
+    public final void lock(boolean z) throws IOException {
         this.threadLock.lock();
         if (z) {
             try {

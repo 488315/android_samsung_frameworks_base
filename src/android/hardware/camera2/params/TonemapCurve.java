@@ -108,10 +108,10 @@ public final class TonemapCurve {
         if (this.mHashCalculated) {
             return this.mHashCode;
         }
-        int hashCodeGeneric = HashCodeHelpers.hashCodeGeneric(this.mRed, this.mGreen, this.mBlue);
-        this.mHashCode = hashCodeGeneric;
+        int iHashCodeGeneric = HashCodeHelpers.hashCodeGeneric(this.mRed, this.mGreen, this.mBlue);
+        this.mHashCode = iHashCodeGeneric;
         this.mHashCalculated = true;
-        return hashCodeGeneric;
+        return iHashCodeGeneric;
     }
 
     public String toString() {

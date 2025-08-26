@@ -2,6 +2,7 @@ package com.android.internal.widget;
 
 import android.app.Flags;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -83,7 +84,7 @@ public class NotificationExpandButton extends FrameLayout {
     }
 
     @RemotableViewMethod
-    public void setExpanded(boolean z) {
+    public void setExpanded(boolean z) throws Resources.NotFoundException {
         this.mExpanded = z;
         updateExpandedState();
     }
@@ -93,7 +94,7 @@ public class NotificationExpandButton extends FrameLayout {
         setPaddingRelative(i, getPaddingTop(), getPaddingEnd(), getPaddingBottom());
     }
 
-    private void updateExpandedState() {
+    private void updateExpandedState() throws Resources.NotFoundException {
         int i;
         int i2;
         if (this.mExpanded) {
@@ -111,12 +112,12 @@ public class NotificationExpandButton extends FrameLayout {
         updateNumber();
     }
 
-    private void updateNumber() {
+    private void updateNumber() throws Resources.NotFoundException {
         updateColors();
         updatePadding();
     }
 
-    private void updatePadding() {
+    private void updatePadding() throws Resources.NotFoundException {
         if (Flags.notificationsRedesignTemplates()) {
             int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.notification_2025_expand_button_reduced_end_padding);
             int dimensionPixelSize2 = getResources().getDimensionPixelSize(R.dimen.notification_2025_expand_button_horizontal_icon_padding);
@@ -166,7 +167,7 @@ public class NotificationExpandButton extends FrameLayout {
     }
 
     @RemotableViewMethod
-    public void setNumber(int i) {
+    public void setNumber(int i) throws Resources.NotFoundException {
         if (this.mNumber != i) {
             this.mNumber = i;
             updateNumber();

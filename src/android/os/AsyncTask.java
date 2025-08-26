@@ -125,9 +125,9 @@ public abstract class AsyncTask<Params, Progress, Result> {
         }
 
         protected synchronized void scheduleNext() {
-            Runnable poll = this.mTasks.poll();
-            this.mActive = poll;
-            if (poll != null) {
+            Runnable runnablePoll = this.mTasks.poll();
+            this.mActive = runnablePoll;
+            if (runnablePoll != null) {
                 AsyncTask.THREAD_POOL_EXECUTOR.execute(this.mActive);
             }
         }
@@ -234,11 +234,11 @@ public abstract class AsyncTask<Params, Progress, Result> {
         return this.mFuture.cancel(z);
     }
 
-    public final Result get() throws InterruptedException, ExecutionException {
+    public final Result get() throws ExecutionException, InterruptedException {
         return this.mFuture.get();
     }
 
-    public final Result get(long j, TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
+    public final Result get(long j, TimeUnit timeUnit) throws ExecutionException, InterruptedException, TimeoutException {
         return this.mFuture.get(j, timeUnit);
     }
 
@@ -248,11 +248,11 @@ public abstract class AsyncTask<Params, Progress, Result> {
 
     public final AsyncTask<Params, Progress, Result> executeOnExecutor(Executor executor, Params... paramsArr) {
         if (this.mStatus != Status.PENDING) {
-            int ordinal = this.mStatus.ordinal();
-            if (ordinal == 1) {
+            int iOrdinal = this.mStatus.ordinal();
+            if (iOrdinal == 1) {
                 throw new IllegalStateException("Cannot execute task: the task is already running.");
             }
-            if (ordinal == 2) {
+            if (iOrdinal == 2) {
                 throw new IllegalStateException("Cannot execute task: the task has already been executed (a task can be executed only once)");
             }
         }

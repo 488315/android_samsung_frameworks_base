@@ -86,9 +86,7 @@ public class AppLocaleStore {
         return (HashSet) hashSet.stream().filter(new Predicate() { // from class: com.android.internal.app.AppLocaleStore$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean matchLanguageInSet;
-                matchLanguageInSet = AppLocaleStore.matchLanguageInSet((Locale) obj, hashSet2);
-                return matchLanguageInSet;
+                return AppLocaleStore.matchLanguageInSet((Locale) obj, hashSet2);
             }
         }).collect(Collectors.toCollection(new Supplier() { // from class: com.android.internal.app.AppLocaleStore$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier

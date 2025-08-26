@@ -43,11 +43,11 @@ public class AsconDigest implements ExtendedDigest {
 
     public AsconDigest(AsconParameters asconParameters) {
         this.asconParameters = asconParameters;
-        int ordinal = asconParameters.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = asconParameters.ordinal();
+        if (iOrdinal == 0) {
             this.ASCON_PB_ROUNDS = 12;
             this.algorithmName = "Ascon-Hash";
-        } else if (ordinal == 1) {
+        } else if (iOrdinal == 1) {
             this.ASCON_PB_ROUNDS = 8;
             this.algorithmName = "Ascon-HashA";
         } else {
@@ -139,9 +139,9 @@ public class AsconDigest implements ExtendedDigest {
             i2 += 8;
             size -= 8;
         }
-        long LOADBYTES = this.x0 ^ LOADBYTES(byteArray, i2, size);
-        this.x0 = LOADBYTES;
-        this.x0 = PAD(size) ^ LOADBYTES;
+        long jLOADBYTES = this.x0 ^ LOADBYTES(byteArray, i2, size);
+        this.x0 = jLOADBYTES;
+        this.x0 = PAD(size) ^ jLOADBYTES;
         P(12);
         int i3 = i;
         int i4 = 32;
@@ -162,8 +162,8 @@ public class AsconDigest implements ExtendedDigest {
     @Override // com.android.internal.org.bouncycastle.crypto.Digest
     public void reset() {
         this.buffer.reset();
-        int ordinal = this.asconParameters.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = this.asconParameters.ordinal();
+        if (iOrdinal == 0) {
             this.x0 = -1255492011513352131L;
             this.x1 = -8380609354527731710L;
             this.x2 = -5437372128236807582L;
@@ -171,7 +171,7 @@ public class AsconDigest implements ExtendedDigest {
             this.x4 = 3787428097924915520L;
             return;
         }
-        if (ordinal != 1) {
+        if (iOrdinal != 1) {
             return;
         }
         this.x0 = 92044056785660070L;

@@ -4,13 +4,11 @@ import com.android.systemui.volume.util.SALoggingWrapper;
 import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface VolumeInfraMediator {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Conditions {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ Conditions[] $VALUES;
@@ -58,9 +56,9 @@ public interface VolumeInfraMediator {
         }
 
         static {
-            Conditions[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            Conditions[] conditionsArr$values = $values();
+            $VALUES = conditionsArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(conditionsArr$values);
         }
 
         private Conditions(String str, int i) {
@@ -81,7 +79,6 @@ public interface VolumeInfraMediator {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Values {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ Values[] $VALUES;
@@ -107,9 +104,9 @@ public interface VolumeInfraMediator {
         }
 
         static {
-            Values[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            Values[] valuesArr$values = $values();
+            $VALUES = valuesArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(valuesArr$values);
         }
 
         private Values(String str, int i) {

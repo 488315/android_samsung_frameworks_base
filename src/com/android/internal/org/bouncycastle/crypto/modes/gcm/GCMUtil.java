@@ -129,29 +129,29 @@ public abstract class GCMUtil {
     }
 
     public static void multiply(byte[] bArr, byte[] bArr2) {
-        long[] asLongs = asLongs(bArr);
-        multiply(asLongs, asLongs(bArr2));
-        asBytes(asLongs, bArr);
+        long[] jArrAsLongs = asLongs(bArr);
+        multiply(jArrAsLongs, asLongs(bArr2));
+        asBytes(jArrAsLongs, bArr);
     }
 
     static void multiply(byte[] bArr, long[] jArr) {
-        long bigEndianToLong = Pack.bigEndianToLong(bArr, 0);
-        long bigEndianToLong2 = Pack.bigEndianToLong(bArr, 8);
+        long jBigEndianToLong = Pack.bigEndianToLong(bArr, 0);
+        long jBigEndianToLong2 = Pack.bigEndianToLong(bArr, 8);
         long j = jArr[0];
         long j2 = jArr[1];
-        long reverse = Longs.reverse(bigEndianToLong);
-        long reverse2 = Longs.reverse(bigEndianToLong2);
-        long reverse3 = Longs.reverse(j);
-        long reverse4 = Longs.reverse(j2);
-        long reverse5 = Longs.reverse(implMul64(reverse, reverse3));
-        long implMul64 = implMul64(bigEndianToLong, j) << 1;
-        long reverse6 = Longs.reverse(implMul64(reverse2, reverse4));
-        long implMul642 = implMul64(bigEndianToLong2, j2);
-        long j3 = implMul642 << 1;
-        long reverse7 = Longs.reverse(implMul64(reverse ^ reverse2, reverse3 ^ reverse4));
-        long implMul643 = ((implMul64(bigEndianToLong ^ bigEndianToLong2, j ^ j2) << 1) ^ ((reverse6 ^ implMul64) ^ j3)) ^ ((implMul642 << 63) ^ (implMul642 << 58));
-        Pack.longToBigEndian(reverse5 ^ (((implMul643 >>> 2) ^ ((implMul643 >>> 1) ^ implMul643)) ^ (implMul643 >>> 7)), bArr, 0);
-        Pack.longToBigEndian(((implMul643 << 57) ^ ((implMul643 << 63) ^ (implMul643 << 62))) ^ ((reverse7 ^ ((implMul64 ^ reverse5) ^ reverse6)) ^ (((j3 ^ (j3 >>> 1)) ^ (j3 >>> 2)) ^ (j3 >>> 7))), bArr, 8);
+        long jReverse = Longs.reverse(jBigEndianToLong);
+        long jReverse2 = Longs.reverse(jBigEndianToLong2);
+        long jReverse3 = Longs.reverse(j);
+        long jReverse4 = Longs.reverse(j2);
+        long jReverse5 = Longs.reverse(implMul64(jReverse, jReverse3));
+        long jImplMul64 = implMul64(jBigEndianToLong, j) << 1;
+        long jReverse6 = Longs.reverse(implMul64(jReverse2, jReverse4));
+        long jImplMul642 = implMul64(jBigEndianToLong2, j2);
+        long j3 = jImplMul642 << 1;
+        long jReverse7 = Longs.reverse(implMul64(jReverse ^ jReverse2, jReverse3 ^ jReverse4));
+        long jImplMul643 = ((implMul64(jBigEndianToLong ^ jBigEndianToLong2, j ^ j2) << 1) ^ ((jReverse6 ^ jImplMul64) ^ j3)) ^ ((jImplMul642 << 63) ^ (jImplMul642 << 58));
+        Pack.longToBigEndian(jReverse5 ^ (((jImplMul643 >>> 2) ^ ((jImplMul643 >>> 1) ^ jImplMul643)) ^ (jImplMul643 >>> 7)), bArr, 0);
+        Pack.longToBigEndian(((jImplMul643 << 57) ^ ((jImplMul643 << 63) ^ (jImplMul643 << 62))) ^ ((jReverse7 ^ ((jImplMul64 ^ jReverse5) ^ jReverse6)) ^ (((j3 ^ (j3 >>> 1)) ^ (j3 >>> 2)) ^ (j3 >>> 7))), bArr, 8);
     }
 
     public static void multiply(int[] iArr, int[] iArr2) {
@@ -190,19 +190,19 @@ public abstract class GCMUtil {
         long j2 = jArr[1];
         long j3 = jArr2[0];
         long j4 = jArr2[1];
-        long reverse = Longs.reverse(j);
-        long reverse2 = Longs.reverse(j2);
-        long reverse3 = Longs.reverse(j3);
-        long reverse4 = Longs.reverse(j4);
-        long reverse5 = Longs.reverse(implMul64(reverse, reverse3));
-        long implMul64 = implMul64(j, j3) << 1;
-        long reverse6 = Longs.reverse(implMul64(reverse2, reverse4));
-        long implMul642 = implMul64(j2, j4);
-        long j5 = implMul642 << 1;
-        long reverse7 = Longs.reverse(implMul64(reverse ^ reverse2, reverse3 ^ reverse4));
-        long implMul643 = ((implMul64(j ^ j2, j3 ^ j4) << 1) ^ ((reverse6 ^ implMul64) ^ j5)) ^ ((implMul642 << 63) ^ (implMul642 << 58));
-        jArr[0] = reverse5 ^ ((implMul643 >>> 7) ^ (((implMul643 >>> 1) ^ implMul643) ^ (implMul643 >>> 2)));
-        jArr[1] = ((implMul643 << 57) ^ ((implMul643 << 63) ^ (implMul643 << 62))) ^ ((reverse7 ^ ((implMul64 ^ reverse5) ^ reverse6)) ^ (((j5 ^ (j5 >>> 1)) ^ (j5 >>> 2)) ^ (j5 >>> 7)));
+        long jReverse = Longs.reverse(j);
+        long jReverse2 = Longs.reverse(j2);
+        long jReverse3 = Longs.reverse(j3);
+        long jReverse4 = Longs.reverse(j4);
+        long jReverse5 = Longs.reverse(implMul64(jReverse, jReverse3));
+        long jImplMul64 = implMul64(j, j3) << 1;
+        long jReverse6 = Longs.reverse(implMul64(jReverse2, jReverse4));
+        long jImplMul642 = implMul64(j2, j4);
+        long j5 = jImplMul642 << 1;
+        long jReverse7 = Longs.reverse(implMul64(jReverse ^ jReverse2, jReverse3 ^ jReverse4));
+        long jImplMul643 = ((implMul64(j ^ j2, j3 ^ j4) << 1) ^ ((jReverse6 ^ jImplMul64) ^ j5)) ^ ((jImplMul642 << 63) ^ (jImplMul642 << 58));
+        jArr[0] = jReverse5 ^ ((jImplMul643 >>> 7) ^ (((jImplMul643 >>> 1) ^ jImplMul643) ^ (jImplMul643 >>> 2)));
+        jArr[1] = ((jImplMul643 << 57) ^ ((jImplMul643 << 63) ^ (jImplMul643 << 62))) ^ ((jReverse7 ^ ((jImplMul64 ^ jReverse5) ^ jReverse6)) ^ (((j5 ^ (j5 >>> 1)) ^ (j5 >>> 2)) ^ (j5 >>> 7)));
     }
 
     public static void multiplyP(int[] iArr) {

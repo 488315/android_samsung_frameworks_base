@@ -22,18 +22,18 @@ public class AliasActivity extends Activity {
         XmlResourceParser xmlResourceParser = null;
         try {
             try {
-                XmlResourceParser loadXmlMetaData = getPackageManager().getActivityInfo(getComponentName(), 128).loadXmlMetaData(getPackageManager(), "android.app.alias");
-                if (loadXmlMetaData == null) {
+                XmlResourceParser xmlResourceParserLoadXmlMetaData = getPackageManager().getActivityInfo(getComponentName(), 128).loadXmlMetaData(getPackageManager(), "android.app.alias");
+                if (xmlResourceParserLoadXmlMetaData == null) {
                     throw new RuntimeException("Alias requires a meta-data field android.app.alias");
                 }
-                Intent parseAlias = parseAlias(loadXmlMetaData);
-                if (parseAlias == null) {
+                Intent alias = parseAlias(xmlResourceParserLoadXmlMetaData);
+                if (alias == null) {
                     throw new RuntimeException("No <intent> tag found in alias description");
                 }
-                startActivity(parseAlias);
+                startActivity(alias);
                 finish();
-                if (loadXmlMetaData != null) {
-                    loadXmlMetaData.close();
+                if (xmlResourceParserLoadXmlMetaData != null) {
+                    xmlResourceParserLoadXmlMetaData.close();
                 }
             } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
                 throw new RuntimeException("Error parsing alias", e);
@@ -48,7 +48,7 @@ public class AliasActivity extends Activity {
 
     private Intent parseAlias(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         int next;
-        AttributeSet asAttributeSet = Xml.asAttributeSet(xmlPullParser);
+        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlPullParser);
         do {
             next = xmlPullParser.next();
             if (next == 1) {
@@ -68,9 +68,9 @@ public class AliasActivity extends Activity {
             }
             if (next2 != 3 && next2 != 4) {
                 if ("intent".equals(xmlPullParser.getName())) {
-                    Intent parseIntent = Intent.parseIntent(getResources(), xmlPullParser, asAttributeSet);
+                    Intent intent2 = Intent.parseIntent(getResources(), xmlPullParser, attributeSetAsAttributeSet);
                     if (intent == null) {
-                        intent = parseIntent;
+                        intent = intent2;
                     }
                 } else {
                     XmlUtils.skipCurrentTag(xmlPullParser);

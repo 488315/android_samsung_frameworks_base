@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FloatArrayList extends AbstractProtobufList implements RandomAccess, PrimitiveNonBoxingCollection {
     public float[] array;
@@ -25,12 +24,12 @@ public final class FloatArrayList extends AbstractProtobufList implements Random
     @Override // androidx.datastore.preferences.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
     public final void add(int i, Object obj) {
         int i2;
-        float floatValue = ((Float) obj).floatValue();
+        float fFloatValue = ((Float) obj).floatValue();
         ensureIsMutable();
         if (i < 0 || i > (i2 = this.size)) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
-            m.append(this.size);
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
+            sbM.append(this.size);
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
         float[] fArr = this.array;
         if (i2 < fArr.length) {
@@ -41,7 +40,7 @@ public final class FloatArrayList extends AbstractProtobufList implements Random
             System.arraycopy(this.array, i, fArr2, i + 1, this.size - i);
             this.array = fArr2;
         }
-        this.array[i] = floatValue;
+        this.array[i] = fFloatValue;
         this.size++;
         ((AbstractList) this).modCount++;
     }
@@ -96,9 +95,9 @@ public final class FloatArrayList extends AbstractProtobufList implements Random
 
     public final void ensureIndexInRange$2(int i) {
         if (i < 0 || i >= this.size) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
-            m.append(this.size);
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
+            sbM.append(this.size);
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
     }
 
@@ -131,11 +130,11 @@ public final class FloatArrayList extends AbstractProtobufList implements Random
 
     @Override // androidx.datastore.preferences.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
     public final int hashCode() {
-        int i = 1;
-        for (int i2 = 0; i2 < this.size; i2++) {
-            i = (i * 31) + Float.floatToIntBits(this.array[i2]);
+        int iFloatToIntBits = 1;
+        for (int i = 0; i < this.size; i++) {
+            iFloatToIntBits = (iFloatToIntBits * 31) + Float.floatToIntBits(this.array[i]);
         }
-        return i;
+        return iFloatToIntBits;
     }
 
     @Override // java.util.AbstractList, java.util.List
@@ -143,10 +142,10 @@ public final class FloatArrayList extends AbstractProtobufList implements Random
         if (!(obj instanceof Float)) {
             return -1;
         }
-        float floatValue = ((Float) obj).floatValue();
+        float fFloatValue = ((Float) obj).floatValue();
         int i = this.size;
         for (int i2 = 0; i2 < i; i2++) {
-            if (this.array[i2] == floatValue) {
+            if (this.array[i2] == fFloatValue) {
                 return i2;
             }
         }
@@ -189,12 +188,12 @@ public final class FloatArrayList extends AbstractProtobufList implements Random
 
     @Override // androidx.datastore.preferences.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
     public final Object set(int i, Object obj) {
-        float floatValue = ((Float) obj).floatValue();
+        float fFloatValue = ((Float) obj).floatValue();
         ensureIsMutable();
         ensureIndexInRange$2(i);
         float[] fArr = this.array;
         float f = fArr[i];
-        fArr[i] = floatValue;
+        fArr[i] = fFloatValue;
         return Float.valueOf(f);
     }
 

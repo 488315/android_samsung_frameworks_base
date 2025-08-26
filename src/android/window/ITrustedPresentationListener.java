@@ -44,9 +44,9 @@ public interface ITrustedPresentationListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITrustedPresentationListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITrustedPresentationListener)) {
-                return (ITrustedPresentationListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITrustedPresentationListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITrustedPresentationListener)) {
+                return (ITrustedPresentationListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface ITrustedPresentationListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int[] createIntArray = parcel.createIntArray();
-                int[] createIntArray2 = parcel.createIntArray();
+                int[] iArrCreateIntArray = parcel.createIntArray();
+                int[] iArrCreateIntArray2 = parcel.createIntArray();
                 parcel.enforceNoDataAvail();
-                onTrustedPresentationChanged(createIntArray, createIntArray2);
+                onTrustedPresentationChanged(iArrCreateIntArray, iArrCreateIntArray2);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface ITrustedPresentationListener extends IInterface {
 
             @Override // android.window.ITrustedPresentationListener
             public void onTrustedPresentationChanged(int[] iArr, int[] iArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITrustedPresentationListener.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeIntArray(iArr2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITrustedPresentationListener.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeIntArray(iArr2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -94,9 +94,9 @@ final class EntityConfidence implements Parcelable {
         ArrayMap<String, Float> arrayMap = new ArrayMap<>();
         this.mEntityConfidence = arrayMap;
         this.mSortedEntities = new ArrayList<>();
-        int readInt = parcel.readInt();
-        arrayMap.ensureCapacity(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        arrayMap.ensureCapacity(i);
+        for (int i2 = 0; i2 < i; i2++) {
             this.mEntityConfidence.put(parcel.readString(), Float.valueOf(parcel.readFloat()));
         }
         resetSortedEntitiesFromMap();
@@ -109,9 +109,7 @@ final class EntityConfidence implements Parcelable {
         this.mSortedEntities.sort(new Comparator() { // from class: android.view.textclassifier.EntityConfidence$$ExternalSyntheticLambda0
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int lambda$resetSortedEntitiesFromMap$0;
-                lambda$resetSortedEntitiesFromMap$0 = EntityConfidence.this.lambda$resetSortedEntitiesFromMap$0((String) obj, (String) obj2);
-                return lambda$resetSortedEntitiesFromMap$0;
+                return this.f$0.lambda$resetSortedEntitiesFromMap$0((String) obj, (String) obj2);
             }
         });
     }

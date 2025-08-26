@@ -16,7 +16,7 @@ class DHKeyGeneratorHelper {
     }
 
     BigInteger calculatePrivate(DHParameters dHParameters, SecureRandom secureRandom) {
-        BigInteger createRandomInRange;
+        BigInteger bigIntegerCreateRandomInRange;
         BigInteger bit;
         int l = dHParameters.getL();
         if (l != 0) {
@@ -28,17 +28,17 @@ class DHKeyGeneratorHelper {
         }
         BigInteger bigInteger = TWO;
         int m = dHParameters.getM();
-        BigInteger shiftLeft = m != 0 ? ONE.shiftLeft(m - 1) : bigInteger;
+        BigInteger bigIntegerShiftLeft = m != 0 ? ONE.shiftLeft(m - 1) : bigInteger;
         BigInteger q = dHParameters.getQ();
         if (q == null) {
             q = dHParameters.getP();
         }
-        BigInteger subtract = q.subtract(bigInteger);
-        int bitLength = subtract.bitLength() >>> 2;
+        BigInteger bigIntegerSubtract = q.subtract(bigInteger);
+        int iBitLength = bigIntegerSubtract.bitLength() >>> 2;
         do {
-            createRandomInRange = BigIntegers.createRandomInRange(shiftLeft, subtract, secureRandom);
-        } while (WNafUtil.getNafWeight(createRandomInRange) < bitLength);
-        return createRandomInRange;
+            bigIntegerCreateRandomInRange = BigIntegers.createRandomInRange(bigIntegerShiftLeft, bigIntegerSubtract, secureRandom);
+        } while (WNafUtil.getNafWeight(bigIntegerCreateRandomInRange) < iBitLength);
+        return bigIntegerCreateRandomInRange;
     }
 
     BigInteger calculatePublic(DHParameters dHParameters, BigInteger bigInteger) {

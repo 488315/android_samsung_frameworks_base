@@ -15,7 +15,6 @@ import com.samsung.systemui.splugins.slimindicator.SPluginSlimIndicatorModel;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMediator, SlimIndicatorManager {
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
@@ -26,7 +25,6 @@ public class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMediator,
     public final SlimIndicatorCarrierCrew mCarrierCrew = new SlimIndicatorCarrierCrew();
     public final HashMap mSubscriberList = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SettingsListener implements SettingsHelper.OnChangedCallback {
         public SettingsListener() {
             Uri[] uriArr = {Settings.Secure.getUriFor("icon_blacklist")};
@@ -44,7 +42,6 @@ public class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMediator,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class UserSwitchListener extends KeyguardUpdateMonitorCallback {
         public /* synthetic */ UserSwitchListener(SlimIndicatorViewMediatorImpl slimIndicatorViewMediatorImpl, int i) {
             this();
@@ -68,12 +65,12 @@ public class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMediator,
         SlimIndicatorCarrierCrew slimIndicatorCarrierCrew = slimIndicatorViewMediatorImpl.mCarrierCrew;
         slimIndicatorCarrierCrew.getClass();
         if (str != null) {
-            boolean contains = str.contains(SPluginSlimIndicatorModel.DB_KEY_LOCK_CARRIER);
-            boolean contains2 = str.contains(SPluginSlimIndicatorModel.DB_KEY_HOME_CARRIER);
-            boolean contains3 = str.contains(SPluginSlimIndicatorModel.DB_KEY_PANEL_CARRIER);
-            slimIndicatorCarrierCrew.mIsLockCarrierDisabled = contains ? 1 : -1;
-            slimIndicatorCarrierCrew.mIsHomeCarrierDisabled = contains2 ? 1 : -1;
-            slimIndicatorCarrierCrew.mIsPanelCarrierDisabled = contains3 ? 1 : -1;
+            boolean zContains = str.contains(SPluginSlimIndicatorModel.DB_KEY_LOCK_CARRIER);
+            boolean zContains2 = str.contains(SPluginSlimIndicatorModel.DB_KEY_HOME_CARRIER);
+            boolean zContains3 = str.contains(SPluginSlimIndicatorModel.DB_KEY_PANEL_CARRIER);
+            slimIndicatorCarrierCrew.mIsLockCarrierDisabled = zContains ? 1 : -1;
+            slimIndicatorCarrierCrew.mIsHomeCarrierDisabled = zContains2 ? 1 : -1;
+            slimIndicatorCarrierCrew.mIsPanelCarrierDisabled = zContains3 ? 1 : -1;
         }
         slimIndicatorViewMediatorImpl.notifyNewsToSubscribers();
     }
@@ -135,11 +132,11 @@ public class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMediator,
     }
 
     public final void notifyNewsToSubscribers() {
-        HashMap hashMap = this.mSubscriberList;
-        if (hashMap == null) {
+        HashMap map = this.mSubscriberList;
+        if (map == null) {
             return;
         }
-        for (String str : hashMap.keySet()) {
+        for (String str : map.keySet()) {
             if (!TextUtils.isEmpty(str)) {
                 SlimIndicatorViewSubscriber slimIndicatorViewSubscriber = (SlimIndicatorViewSubscriber) this.mSubscriberList.get(str);
                 if (slimIndicatorViewSubscriber != null) {
@@ -162,7 +159,7 @@ public class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMediator,
         ((Handler) Dependency.sDependency.getDependencyInner(Dependency.MAIN_HANDLER)).post(new Runnable() { // from class: com.android.systemui.slimindicator.SlimIndicatorViewMediatorImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SlimIndicatorViewMediatorImpl.$r8$lambda$lqyFPHTxnS2sH5Go2gjJjY1dJSs(SlimIndicatorViewMediatorImpl.this, str);
+                SlimIndicatorViewMediatorImpl.$r8$lambda$lqyFPHTxnS2sH5Go2gjJjY1dJSs(this.f$0, str);
             }
         });
     }
@@ -171,9 +168,9 @@ public class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMediator,
         if (this.mSubscriberList == null || slimIndicatorViewSubscriber == null) {
             return;
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("registerSubscriber(", str, ") to ");
-        m.append(getSubscriberTicketList());
-        Log.d("[QuickStar]SlimIndicatorViewMediator", m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("registerSubscriber(", str, ") to ");
+        sbM.append(getSubscriberTicketList());
+        Log.d("[QuickStar]SlimIndicatorViewMediator", sbM.toString());
         this.mSubscriberList.put(str, slimIndicatorViewSubscriber);
         slimIndicatorViewSubscriber.updateQuickStarStyle();
     }
@@ -197,9 +194,9 @@ public class SlimIndicatorViewMediatorImpl implements SlimIndicatorViewMediator,
         if (this.mSubscriberList == null || str == null) {
             return;
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("unregisterSubscriber(", str, ") From ");
-        m.append(getSubscriberTicketList());
-        Log.d("[QuickStar]SlimIndicatorViewMediator", m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("unregisterSubscriber(", str, ") From ");
+        sbM.append(getSubscriberTicketList());
+        Log.d("[QuickStar]SlimIndicatorViewMediator", sbM.toString());
         this.mSubscriberList.remove(str);
     }
 }

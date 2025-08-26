@@ -1,8 +1,8 @@
 package com.android.systemui.statusbar.notification.row;
 
+import android.content.res.Resources;
 import android.view.View;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotificationInfo$$ExternalSyntheticLambda0 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
@@ -14,7 +14,7 @@ public final /* synthetic */ class NotificationInfo$$ExternalSyntheticLambda0 im
     }
 
     @Override // android.view.View.OnClickListener
-    public final void onClick(View view) {
+    public final void onClick(View view) throws Resources.NotFoundException {
         ChannelEditorDialogController channelEditorDialogController;
         int i = this.$r8$classId;
         final NotificationInfo notificationInfo = this.f$0;
@@ -47,7 +47,7 @@ public final /* synthetic */ class NotificationInfo$$ExternalSyntheticLambda0 im
                 channelEditorDialogController2.onFinishListener = new OnChannelEditorDialogFinishedListener() { // from class: com.android.systemui.statusbar.notification.row.NotificationInfo$$ExternalSyntheticLambda9
                     @Override // com.android.systemui.statusbar.notification.row.OnChannelEditorDialogFinishedListener
                     public final void onChannelEditorDialogFinished() {
-                        NotificationInfo notificationInfo2 = NotificationInfo.this;
+                        NotificationInfo notificationInfo2 = notificationInfo;
                         notificationInfo2.mPresentingChannelEditorDialog = false;
                         notificationInfo2.mGutsContainer.closeControls(notificationInfo2, false);
                     }

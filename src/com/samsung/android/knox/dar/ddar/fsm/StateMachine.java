@@ -25,8 +25,8 @@ public class StateMachine {
 
     public static void setInitialState() throws Exception {
         Log.d(TAG, "Set initial state DualDAR");
-        Bundle sendCommand = sendCommand(SET_INITIAL_STATE, null);
-        if (sendCommand == null || !sendCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
+        Bundle bundleSendCommand = sendCommand(SET_INITIAL_STATE, null);
+        if (bundleSendCommand == null || !bundleSendCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
             throw new Exception("DualDAR initiate State failed!!");
         }
     }
@@ -38,31 +38,31 @@ public class StateMachine {
         Bundle bundle = new Bundle();
         bundle.putInt(KEY_DUAL_DAR_USER_ID, i);
         bundle.putString(KEY_EVENT, event.name());
-        Bundle sendCommand = sendCommand(PROCESS_EVENT, bundle);
-        if (sendCommand == null) {
+        Bundle bundleSendCommand = sendCommand(PROCESS_EVENT, bundle);
+        if (bundleSendCommand == null) {
             return false;
         }
-        return sendCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE);
+        return bundleSendCommand.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE);
     }
 
     public static State getPreviousState(int i) {
         Bundle bundle = new Bundle();
         bundle.putInt(KEY_DUAL_DAR_USER_ID, i);
-        Bundle sendCommand = sendCommand(GET_PREVIOUS_STATE, bundle);
-        if (sendCommand == null) {
+        Bundle bundleSendCommand = sendCommand(GET_PREVIOUS_STATE, bundle);
+        if (bundleSendCommand == null) {
             return null;
         }
-        return State.valueOf(sendCommand.getString(KEY_STATE));
+        return State.valueOf(bundleSendCommand.getString(KEY_STATE));
     }
 
     public static State getCurrentState(int i) {
         Bundle bundle = new Bundle();
         bundle.putInt(KEY_DUAL_DAR_USER_ID, i);
-        Bundle sendCommand = sendCommand(GET_CURRENT_STATE, bundle);
-        if (sendCommand == null) {
+        Bundle bundleSendCommand = sendCommand(GET_CURRENT_STATE, bundle);
+        if (bundleSendCommand == null) {
             return null;
         }
-        return State.valueOf(sendCommand.getString(KEY_STATE));
+        return State.valueOf(bundleSendCommand.getString(KEY_STATE));
     }
 
     private static Bundle sendCommand(String str, Bundle bundle) {

@@ -36,7 +36,6 @@ import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import com.samsung.android.feature.SemCscFeature;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DeviceController {
     private static final int ORIENTATION_LANDSCAPE = 1;
@@ -58,10 +57,10 @@ public class DeviceController {
     }
 
     private boolean isNeedSecureConfirm(ContentResolver contentResolver) {
-        boolean isRMMLockEnabled = this.mLockPatternUtils.isRMMLockEnabled(ActivityManager.getCurrentUser());
+        boolean zIsRMMLockEnabled = this.mLockPatternUtils.isRMMLockEnabled(ActivityManager.getCurrentUser());
         boolean z = Settings.System.getInt(contentResolver, "power_off_lock_option", 1) == 0;
-        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("isRMMLocked = ", ", isPowerOffUnLocked = ", TAG, isRMMLockEnabled, z);
-        return (isRMMLockEnabled || z) ? false : true;
+        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("isRMMLocked = ", ", isPowerOffUnLocked = ", TAG, zIsRMMLockEnabled, z);
+        return (zIsRMMLockEnabled || z) ? false : true;
     }
 
     private boolean isScreenRotationSupported() {
@@ -89,10 +88,10 @@ public class DeviceController {
             Log.d(TAG, "Already set as landscape mode");
             return new CommandActionResponse(2, "already_set");
         }
-        boolean isRotationLocked = this.mRotationLockController.isRotationLocked();
+        boolean zIsRotationLocked = this.mRotationLockController.isRotationLocked();
         this.mRotationLockController.setRotationLockedAtAngle(i, "DeviceController#setAutoRotate", true);
-        Log.d(TAG, "set as orientation = " + i + " success - isRotationRocked = " + isRotationLocked);
-        return isRotationLocked ? new CommandActionResponse(1, "success") : new CommandActionResponse(1, ActionResults.RESULT_SUCCESS_AFTER_SET_OFF);
+        Log.d(TAG, "set as orientation = " + i + " success - isRotationRocked = " + zIsRotationLocked);
+        return zIsRotationLocked ? new CommandActionResponse(1, "success") : new CommandActionResponse(1, ActionResults.RESULT_SUCCESS_AFTER_SET_OFF);
     }
 
     public PendingIntent getFlashLightIntent() {
@@ -100,9 +99,9 @@ public class DeviceController {
         intent.setAction("com.android.systemui.indexsearch.OPEN_DETAIL");
         intent.setClass(this.mContext, DetailPanelLaunchActivity.class);
         intent.putExtra("tileSpec", PluginLockShortcutTask.FLASH_LIGHT_TASK);
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setPendingIntentCreatorBackgroundActivityStartMode(1);
-        return PendingIntent.getActivity(this.mContext, 0, intent, 67108864, makeBasic.toBundle());
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setPendingIntentCreatorBackgroundActivityStartMode(1);
+        return PendingIntent.getActivity(this.mContext, 0, intent, 67108864, activityOptionsMakeBasic.toBundle());
     }
 
     public int getFlashLightLevel() {
@@ -123,10 +122,10 @@ public class DeviceController {
 
     public void restartDevice(Context context) {
         Log.d(TAG, "restartDevice");
-        IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
-        if (asInterface != null) {
+        IStatusBarService iStatusBarServiceAsInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+        if (iStatusBarServiceAsInterface != null) {
             try {
-                asInterface.rebootByBixby(false);
+                iStatusBarServiceAsInterface.rebootByBixby(false);
             } catch (RemoteException e) {
                 Log.e(TAG, "reboot RemoteException ", e);
             }
@@ -152,8 +151,8 @@ public class DeviceController {
         if (!((FlashlightControllerImpl) this.mFlashlightController).isAvailable()) {
             return new CommandActionResponse(2, null);
         }
-        boolean isEnabled = ((FlashlightControllerImpl) this.mFlashlightController).isEnabled();
-        if ((z && isEnabled) || (!z && !isEnabled)) {
+        boolean zIsEnabled = ((FlashlightControllerImpl) this.mFlashlightController).isEnabled();
+        if ((z && zIsEnabled) || (!z && !zIsEnabled)) {
             return new CommandActionResponse(2, "already_set");
         }
         ((FlashlightControllerImpl) this.mFlashlightController).setFlashlight(z);
@@ -161,18 +160,18 @@ public class DeviceController {
     }
 
     public CommandActionResponse setFlashlightWithLevel(int i) {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "setFlashlightWithLevel new level = ", " current level = ");
-        m.append(getFlashLightLevel());
-        Log.d(TAG, m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "setFlashlightWithLevel new level = ", " current level = ");
+        sbM.append(getFlashLightLevel());
+        Log.d(TAG, sbM.toString());
         if (!((FlashlightControllerImpl) this.mFlashlightController).isAvailable()) {
             return new CommandActionResponse(2, null);
         }
-        boolean isEnabled = ((FlashlightControllerImpl) this.mFlashlightController).isEnabled();
+        boolean zIsEnabled = ((FlashlightControllerImpl) this.mFlashlightController).isEnabled();
         int flashLightLevel = getFlashLightLevel();
-        if (isEnabled && i == flashLightLevel) {
+        if (zIsEnabled && i == flashLightLevel) {
             return new CommandActionResponse(2, "already_set");
         }
-        if (!isEnabled) {
+        if (!zIsEnabled) {
             ((FlashlightControllerImpl) this.mFlashlightController).setFlashlight(true);
         }
         this.mSecFlashlightController.setFlashlightLevel(i, true);
@@ -192,7 +191,7 @@ public class DeviceController {
     public void turnOffDevice(final Context context) {
         Log.d(TAG, "turnOffDevice");
         ContentResolver contentResolver = context.getContentResolver();
-        IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+        IStatusBarService iStatusBarServiceAsInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
         if (this.mSignal == null) {
             this.mSignal = new CancellationSignal();
         }
@@ -204,7 +203,7 @@ public class DeviceController {
         }
         if (this.mLockPatternUtils.isFMMLockEnabled(ActivityManager.getCurrentUser())) {
             Log.d(TAG, "isFMMLocked = true");
-            final int i = DeviceType.isTablet() ? R.string.mmiComplete : R.string.mmcc_imsi_unknown_in_hlr_msim_template;
+            final int i = DeviceType.isTablet() ? R.string.mmiErrorNotSupported : R.string.mmiError;
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable(this) { // from class: com.android.systemui.bixby2.controller.DeviceController.1
                 @Override // java.lang.Runnable
                 public void run() {
@@ -219,9 +218,9 @@ public class DeviceController {
             Log.d(TAG, "init BiometricPrompt");
             this.mBiometricPromptWrapperBixby.initPrompt(" ", true);
             this.mBiometricPromptWrapperBixby.buildAndRun(this.mSignal);
-        } else if (asInterface != null) {
+        } else if (iStatusBarServiceAsInterface != null) {
             try {
-                asInterface.shutdownByBixby();
+                iStatusBarServiceAsInterface.shutdownByBixby();
             } catch (RemoteException e) {
                 Log.e(TAG, "shutdown RemoteException ", e);
             }

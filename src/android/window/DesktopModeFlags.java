@@ -501,26 +501,26 @@ public enum DesktopModeFlags {
             return booleanSupplier.getAsBoolean();
         }
         if (Flags.showDesktopExperienceDevOption()) {
-            int ordinal = getToggleOverride().ordinal();
-            if (ordinal == 0 || ordinal == 1) {
+            int iOrdinal = getToggleOverride().ordinal();
+            if (iOrdinal == 0 || iOrdinal == 1) {
                 return booleanSupplier.getAsBoolean();
             }
-            if (ordinal == 2) {
+            if (iOrdinal == 2) {
                 return true;
             }
             throw new RuntimeException(null, null);
         }
         if (Flags.showDesktopWindowingDevOption()) {
-            boolean enableDesktopWindowingMode = Flags.enableDesktopWindowingMode();
-            int ordinal2 = getToggleOverride().ordinal();
-            if (ordinal2 == 0) {
+            boolean zEnableDesktopWindowingMode = Flags.enableDesktopWindowingMode();
+            int iOrdinal2 = getToggleOverride().ordinal();
+            if (iOrdinal2 == 0) {
                 return booleanSupplier.getAsBoolean();
             }
-            if (ordinal2 == 1) {
-                return !enableDesktopWindowingMode && booleanSupplier.getAsBoolean();
+            if (iOrdinal2 == 1) {
+                return !zEnableDesktopWindowingMode && booleanSupplier.getAsBoolean();
             }
-            if (ordinal2 == 2) {
-                return !enableDesktopWindowingMode || booleanSupplier.getAsBoolean();
+            if (iOrdinal2 == 2) {
+                return !zEnableDesktopWindowingMode || booleanSupplier.getAsBoolean();
             }
             throw new RuntimeException(null, null);
         }
@@ -543,12 +543,12 @@ public enum DesktopModeFlags {
         if (Flags.showDesktopExperienceDevOption()) {
             i = SystemProperties.getInt("persist.wm.debug.desktop_experience_devopts", ToggleOverride.OVERRIDE_UNSET.getSetting());
         } else {
-            Application currentApplication = ActivityThread.currentApplication();
-            if (currentApplication == null) {
+            Application applicationCurrentApplication = ActivityThread.currentApplication();
+            if (applicationCurrentApplication == null) {
                 Log.w(TAG, "Could not get the current application.");
                 return ToggleOverride.OVERRIDE_UNSET;
             }
-            ContentResolver contentResolver = currentApplication.getContentResolver();
+            ContentResolver contentResolver = applicationCurrentApplication.getContentResolver();
             if (contentResolver == null) {
                 Log.w(TAG, "Could not get the content resolver for the application.");
                 return ToggleOverride.OVERRIDE_UNSET;
@@ -564,14 +564,14 @@ public enum DesktopModeFlags {
         OVERRIDE_ON;
 
         public int getSetting() {
-            int ordinal = ordinal();
-            if (ordinal == 0) {
+            int iOrdinal = ordinal();
+            if (iOrdinal == 0) {
                 return -1;
             }
-            if (ordinal == 1) {
+            if (iOrdinal == 1) {
                 return 0;
             }
-            if (ordinal == 2) {
+            if (iOrdinal == 2) {
                 return 1;
             }
             throw new RuntimeException(null, null);

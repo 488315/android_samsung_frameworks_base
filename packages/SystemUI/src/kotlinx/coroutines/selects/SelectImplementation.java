@@ -5,9 +5,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
@@ -17,12 +21,12 @@ import kotlinx.atomicfu.AtomicFU;
 import kotlinx.atomicfu.AtomicRef;
 import kotlinx.coroutines.CancelHandler;
 import kotlinx.coroutines.CancellableContinuation;
+import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.DisposableHandle;
 import kotlinx.coroutines.Waiter;
 import kotlinx.coroutines.internal.Segment;
 import kotlinx.coroutines.internal.Symbol;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SelectImplementation implements CancelHandler, SelectInstance, Waiter {
     public final CoroutineContext context;
@@ -32,7 +36,6 @@ public class SelectImplementation implements CancelHandler, SelectInstance, Wait
     public int indexInSegment = -1;
     public Object internalResult = SelectKt.NO_RESULT;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ClauseData {
         public final Object block;
         public final Object clauseObject;
@@ -65,6 +68,24 @@ public class SelectImplementation implements CancelHandler, SelectInstance, Wait
         }
     }
 
+    /* renamed from: kotlinx.coroutines.selects.SelectImplementation$doSelectSuspend$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return SelectImplementation.this.doSelectSuspend(this);
+        }
+    }
+
     public SelectImplementation(CoroutineContext coroutineContext) {
         this.context = coroutineContext;
     }
@@ -89,31 +110,88 @@ public class SelectImplementation implements CancelHandler, SelectInstance, Wait
             this.internalResult = SelectKt.NO_RESULT;
             this.clauses = null;
         }
-        Object invoke = clauseData.processResFunc.invoke(clauseData.clauseObject, clauseData.param, obj);
+        Object objInvoke = clauseData.processResFunc.invoke(clauseData.clauseObject, clauseData.param, obj);
         Symbol symbol = SelectKt.PARAM_CLAUSE_0;
         Object obj3 = clauseData.param;
         Object obj4 = clauseData.block;
-        return obj3 == symbol ? ((Function1) obj4).mo779invoke(continuationImpl) : ((Function2) obj4).invoke(invoke, continuationImpl);
+        return obj3 == symbol ? ((Function1) obj4).mo781invoke(continuationImpl) : ((Function2) obj4).invoke(objInvoke, continuationImpl);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:46:0x00b8, code lost:
-    
-        if (r10 == r1) goto L46;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00c5 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00c6 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object doSelectSuspend(kotlin.coroutines.jvm.internal.ContinuationImpl r10) {
-        /*
-            Method dump skipped, instructions count: 223
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.selects.SelectImplementation.doSelectSuspend(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object doSelectSuspend(ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.label = 1;
+            CancellableContinuationImpl cancellableContinuationImpl = new CancellableContinuationImpl(IntrinsicsKt__IntrinsicsJvmKt.intercepted(anonymousClass1), 1);
+            cancellableContinuationImpl.initCancellability();
+            AtomicRef atomicRef = this.state;
+            while (true) {
+                Object obj2 = atomicRef.value;
+                Symbol symbol = SelectKt.STATE_REG;
+                if (obj2 == symbol) {
+                    if (this.state.compareAndSet(obj2, cancellableContinuationImpl)) {
+                        cancellableContinuationImpl.invokeOnCancellationImpl(this);
+                        break;
+                    }
+                } else if (obj2 instanceof List) {
+                    if (this.state.compareAndSet(obj2, symbol)) {
+                        Iterator it = ((Iterable) obj2).iterator();
+                        while (it.hasNext()) {
+                            ClauseData clauseDataFindClause = findClause(it.next());
+                            clauseDataFindClause.getClass();
+                            clauseDataFindClause.disposableHandleOrSegment = null;
+                            clauseDataFindClause.indexInSegment = -1;
+                            register(clauseDataFindClause, true);
+                        }
+                    }
+                } else {
+                    if (!(obj2 instanceof ClauseData)) {
+                        throw new IllegalStateException(("unexpected state: " + obj2).toString());
+                    }
+                    Unit unit = Unit.INSTANCE;
+                    ClauseData clauseData = (ClauseData) obj2;
+                    Object obj3 = this.internalResult;
+                    Function3 function3 = clauseData.onCancellationConstructor;
+                    cancellableContinuationImpl.resume(unit, function3 != null ? (Function3) function3.invoke(this, clauseData.param, obj3) : null);
+                }
+            }
+            Object result = cancellableContinuationImpl.getResult();
+            if (result != CoroutineSingletons.COROUTINE_SUSPENDED) {
+                result = Unit.INSTANCE;
+            }
+            if (result != coroutineSingletons) {
+            }
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return obj;
+        }
+        this = (SelectImplementation) anonymousClass1.L$0;
+        ResultKt.throwOnFailure(obj);
+        anonymousClass1.L$0 = null;
+        anonymousClass1.label = 2;
+        Object objComplete = this.complete(anonymousClass1);
+        return objComplete == coroutineSingletons ? coroutineSingletons : objComplete;
     }
 
     public final ClauseData findClause(Object obj) {
@@ -205,20 +283,20 @@ public class SelectImplementation implements CancelHandler, SelectInstance, Wait
         while (true) {
             Object obj3 = this.state.value;
             if (obj3 instanceof CancellableContinuation) {
-                ClauseData findClause = findClause(obj);
-                if (findClause != null) {
-                    Function3 function3 = findClause.onCancellationConstructor;
-                    Function3 function32 = function3 != null ? (Function3) function3.invoke(this, findClause.param, obj2) : null;
-                    if (this.state.compareAndSet(obj3, findClause)) {
+                ClauseData clauseDataFindClause = findClause(obj);
+                if (clauseDataFindClause != null) {
+                    Function3 function3 = clauseDataFindClause.onCancellationConstructor;
+                    Function3 function32 = function3 != null ? (Function3) function3.invoke(this, clauseDataFindClause.param, obj2) : null;
+                    if (this.state.compareAndSet(obj3, clauseDataFindClause)) {
                         CancellableContinuation cancellableContinuation = (CancellableContinuation) obj3;
                         this.internalResult = obj2;
                         SelectKt$DUMMY_PROCESS_RESULT_FUNCTION$1 selectKt$DUMMY_PROCESS_RESULT_FUNCTION$1 = SelectKt.DUMMY_PROCESS_RESULT_FUNCTION;
-                        Symbol tryResume = cancellableContinuation.tryResume(Unit.INSTANCE, function32);
-                        if (tryResume == null) {
+                        Symbol symbolTryResume = cancellableContinuation.tryResume(Unit.INSTANCE, function32);
+                        if (symbolTryResume == null) {
                             this.internalResult = SelectKt.NO_RESULT;
                             return 2;
                         }
-                        cancellableContinuation.completeResume(tryResume);
+                        cancellableContinuation.completeResume(symbolTryResume);
                         return 0;
                     }
                 } else {

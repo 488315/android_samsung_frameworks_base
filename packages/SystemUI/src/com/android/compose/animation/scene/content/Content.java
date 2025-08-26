@@ -45,7 +45,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Content {
     public static final Companion Companion = new Companion(null);
@@ -63,7 +62,6 @@ public abstract class Content {
     public final MutableState verticalEffects$delegate;
     public final MutableFloatState zIndex$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -107,15 +105,15 @@ public abstract class Content {
                 ComposerKt.traceEventStart("com.android.compose.animation.scene.content.Content.Content (Content.kt:163)");
             }
             SceneTransitionLayoutImpl sceneTransitionLayoutImpl = this.layoutImpl;
-            Modifier then = modifier.then(new ContentElement(this, sceneTransitionLayoutImpl.state.isElevationPossible$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(getKey(), null), z));
+            Modifier modifierThen = modifier.then(new ContentElement(this, sceneTransitionLayoutImpl.state.isElevationPossible$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(getKey(), null), z));
             if (sceneTransitionLayoutImpl.implicitTestTags) {
-                then = then.then(TestTagKt.testTag(Modifier.Companion, getKey().getTestTag()));
+                modifierThen = modifierThen.then(TestTagKt.testTag(Modifier.Companion, getKey().getTestTag()));
             }
             Alignment.Companion.getClass();
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, then);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierThen);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -128,32 +126,36 @@ public abstract class Content {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
             CompositionLocalKt.CompositionLocalProvider(OverscrollKt.LocalOverscrollFactory.defaultProvidedValue$runtime_release((OverscrollFactory) ((SnapshotMutableStateImpl) this.lastFactory$delegate).getValue()), ComposableLambdaKt.rememberComposableLambda(-2101144691, new Function2() { // from class: com.android.compose.animation.scene.content.Content$Content$5$1
+                /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
                 @Override // kotlin.jvm.functions.Function2
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final Object invoke(Object obj, Object obj2) {
                     Composer composer2 = (Composer) obj;
                     if ((((Number) obj2).intValue() & 3) == 2) {
                         ComposerImpl composerImpl2 = (ComposerImpl) composer2;
                         if (composerImpl2.getSkipping()) {
                             composerImpl2.skipToGroupEnd();
-                            return Unit.INSTANCE;
+                        } else {
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("com.android.compose.animation.scene.content.Content.Content.<anonymous>.<anonymous> (Content.kt:176)");
+                            }
+                            Content content = this.this$0;
+                            ((Function3) ((SnapshotMutableStateImpl) content.content$delegate).getValue()).invoke(content.scope, composer2, 0);
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventEnd();
+                            }
                         }
-                    }
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("com.android.compose.animation.scene.content.Content.Content.<anonymous>.<anonymous> (Content.kt:176)");
-                    }
-                    Content content = Content.this;
-                    ((Function3) ((SnapshotMutableStateImpl) content.content$delegate).getValue()).invoke(content.scope, composer2, 0);
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventEnd();
                     }
                     return Unit.INSTANCE;
                 }
@@ -165,9 +167,9 @@ public abstract class Content {
         }
         final Modifier modifier2 = modifier;
         final boolean z2 = z;
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2(modifier2, z2, i, i2) { // from class: com.android.compose.animation.scene.content.Content$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(modifier2, z2, i, i2) { // from class: com.android.compose.animation.scene.content.Content$$ExternalSyntheticLambda0
                 public final /* synthetic */ Modifier f$1;
                 public final /* synthetic */ boolean f$2;
                 public final /* synthetic */ int f$4;
@@ -181,8 +183,8 @@ public abstract class Content {
                     Composer composer2 = (Composer) obj;
                     ((Integer) obj2).getClass();
                     Content.Companion companion = Content.Companion;
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
-                    Content.this.Content(this.f$1, this.f$2, composer2, updateChangedFlags, this.f$4);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
+                    this.f$0.Content(this.f$1, this.f$2, composer2, iUpdateChangedFlags, this.f$4);
                     return Unit.INSTANCE;
                 }
             };
@@ -202,7 +204,7 @@ public abstract class Content {
         this.containerState = new ContainerState();
         this.content$delegate = SnapshotStateKt.mutableStateOf$default(function3);
         Element.Companion.getClass();
-        this.targetSize$delegate = SnapshotStateKt.mutableStateOf$default(IntSize.m859boximpl(Element.SizeUnspecified));
+        this.targetSize$delegate = SnapshotStateKt.mutableStateOf$default(IntSize.m861boximpl(Element.SizeUnspecified));
         this.userActions$delegate = SnapshotStateKt.mutableStateOf$default(map);
         this.zIndex$delegate = PrimitiveSnapshotStateKt.mutableFloatStateOf(f);
         this.globalZIndex$delegate = SnapshotLongStateKt.mutableLongStateOf(j);

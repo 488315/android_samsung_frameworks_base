@@ -27,7 +27,6 @@ import com.android.systemui.statusbar.policy.NextAlarmController;
 import java.util.Locale;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AlarmTile extends QSTileImpl {
     public final AlarmTile$callback$1 callback;
@@ -36,7 +35,6 @@ public final class AlarmTile extends QSTileImpl {
     public AlarmManager.AlarmClockInfo lastAlarmInfo;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,7 +57,7 @@ public final class AlarmTile extends QSTileImpl {
         ?? r1 = new NextAlarmController.NextAlarmChangeCallback() { // from class: com.android.systemui.qs.tiles.AlarmTile$callback$1
             @Override // com.android.systemui.statusbar.policy.NextAlarmController.NextAlarmChangeCallback
             public final void onNextAlarmChanged(AlarmManager.AlarmClockInfo alarmClockInfo) {
-                AlarmTile alarmTile = AlarmTile.this;
+                AlarmTile alarmTile = this.this$0;
                 alarmTile.lastAlarmInfo = alarmClockInfo;
                 alarmTile.refreshState(null);
             }
@@ -86,14 +84,14 @@ public final class AlarmTile extends QSTileImpl {
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleClick(Expandable expandable) {
-        ActivityTransitionAnimator.Controller activityTransitionController = expandable != null ? expandable.activityTransitionController(32) : null;
+        ActivityTransitionAnimator.Controller controllerActivityTransitionController = expandable != null ? expandable.activityTransitionController(32) : null;
         AlarmManager.AlarmClockInfo alarmClockInfo = this.lastAlarmInfo;
         PendingIntent showIntent = alarmClockInfo != null ? alarmClockInfo.getShowIntent() : null;
         ActivityStarter activityStarter = this.mActivityStarter;
         if (showIntent != null) {
-            activityStarter.postStartActivityDismissingKeyguard(showIntent, activityTransitionController);
+            activityStarter.postStartActivityDismissingKeyguard(showIntent, controllerActivityTransitionController);
         } else {
-            activityStarter.postStartActivityDismissingKeyguard(this.defaultIntent, 0, activityTransitionController);
+            activityStarter.postStartActivityDismissingKeyguard(this.defaultIntent, 0, controllerActivityTransitionController);
         }
     }
 

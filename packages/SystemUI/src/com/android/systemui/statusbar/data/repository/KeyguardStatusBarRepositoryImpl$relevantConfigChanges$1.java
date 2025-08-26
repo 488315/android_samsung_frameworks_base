@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class KeyguardStatusBarRepositoryImpl$relevantConfigChanges$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ConfigurationController $configurationController;
@@ -50,12 +49,12 @@ final class KeyguardStatusBarRepositoryImpl$relevantConfigChanges$1 extends Susp
             final ?? r1 = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.data.repository.KeyguardStatusBarRepositoryImpl$relevantConfigChanges$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
                 public final void onDensityOrFontScaleChanged() {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
 
                 @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
                 public final void onSmallestScreenWidthChanged() {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             ((ConfigurationControllerImpl) this.$configurationController).addCallback(r1);
@@ -63,7 +62,7 @@ final class KeyguardStatusBarRepositoryImpl$relevantConfigChanges$1 extends Susp
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.data.repository.KeyguardStatusBarRepositoryImpl$relevantConfigChanges$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((ConfigurationControllerImpl) ConfigurationController.this).removeCallback(r1);
+                    ((ConfigurationControllerImpl) configurationController).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.net.INetworkScoreCache;
 import android.net.INetworkScoreService;
-import android.net.NetworkScoreManager;
 import android.os.Binder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -170,16 +169,16 @@ public class NetworkScoreManager {
 
         @Override // android.net.INetworkScoreCache
         public void updateScores(final List<ScoredNetwork> list) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.net.NetworkScoreManager$NetworkScoreCallbackProxy$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NetworkScoreManager.NetworkScoreCallbackProxy.this.lambda$updateScores$0(list);
+                        this.f$0.lambda$updateScores$0(list);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -190,16 +189,16 @@ public class NetworkScoreManager {
 
         @Override // android.net.INetworkScoreCache
         public void clearScores() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.net.NetworkScoreManager$NetworkScoreCallbackProxy$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NetworkScoreManager.NetworkScoreCallbackProxy.this.lambda$clearScores$1();
+                        this.f$0.lambda$clearScores$1();
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

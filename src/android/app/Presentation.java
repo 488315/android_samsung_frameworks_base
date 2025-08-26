@@ -138,13 +138,13 @@ public class Presentation extends Dialog {
         if (display == null) {
             throw new IllegalArgumentException("display must not be null");
         }
-        Context createWindowContext = context.createDisplayContext(display).createWindowContext(getWindowType(i2, display), null);
+        Context contextCreateWindowContext = context.createDisplayContext(display).createWindowContext(getWindowType(i2, display), null);
         if (i == 0) {
             TypedValue typedValue = new TypedValue();
-            createWindowContext.getTheme().resolveAttribute(16843712, typedValue, true);
+            contextCreateWindowContext.getTheme().resolveAttribute(16843712, typedValue, true);
             i = typedValue.resourceId;
         }
-        return new ContextThemeWrapper(createWindowContext, i);
+        return new ContextThemeWrapper(contextCreateWindowContext, i);
     }
 
     private void sendPresentationIntent(boolean z) {

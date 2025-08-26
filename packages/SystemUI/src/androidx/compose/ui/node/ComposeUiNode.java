@@ -16,12 +16,10 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface ComposeUiNode {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
         public static final Function0 Constructor;
@@ -100,46 +98,46 @@ public interface ComposeUiNode {
                     if ((node2.aggregateChildKindSet & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0) {
                         while (node2 != null) {
                             if ((node2.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0) {
-                                DelegatingNode delegatingNode = node2;
-                                ?? r1 = 0;
-                                while (delegatingNode != 0) {
-                                    if (delegatingNode instanceof CompositionLocalConsumerModifierNode) {
-                                        Modifier.Node node3 = ((Modifier.Node) ((CompositionLocalConsumerModifierNode) delegatingNode)).node;
+                                DelegatingNode delegatingNodeAccess$pop = node2;
+                                ?? mutableVector = 0;
+                                while (delegatingNodeAccess$pop != 0) {
+                                    if (delegatingNodeAccess$pop instanceof CompositionLocalConsumerModifierNode) {
+                                        Modifier.Node node3 = ((Modifier.Node) ((CompositionLocalConsumerModifierNode) delegatingNodeAccess$pop)).node;
                                         if (node3.isAttached) {
                                             NodeKindKt.autoInvalidateUpdatedNode(node3);
                                         } else {
                                             node3.updatedNodeAwaitingAttachForInvalidation = true;
                                         }
-                                    } else if ((delegatingNode.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                        Modifier.Node node4 = delegatingNode.delegate;
+                                    } else if ((delegatingNodeAccess$pop.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                        Modifier.Node node4 = delegatingNodeAccess$pop.delegate;
                                         int i = 0;
-                                        delegatingNode = delegatingNode;
-                                        r1 = r1;
+                                        delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                        mutableVector = mutableVector;
                                         while (node4 != null) {
                                             if ((node4.kindSet & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0) {
                                                 i++;
-                                                r1 = r1;
+                                                mutableVector = mutableVector;
                                                 if (i == 1) {
-                                                    delegatingNode = node4;
+                                                    delegatingNodeAccess$pop = node4;
                                                 } else {
-                                                    if (r1 == 0) {
-                                                        r1 = new MutableVector(new Modifier.Node[16], 0);
+                                                    if (mutableVector == 0) {
+                                                        mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                                     }
-                                                    if (delegatingNode != 0) {
-                                                        r1.add(delegatingNode);
-                                                        delegatingNode = 0;
+                                                    if (delegatingNodeAccess$pop != 0) {
+                                                        mutableVector.add(delegatingNodeAccess$pop);
+                                                        delegatingNodeAccess$pop = 0;
                                                     }
-                                                    r1.add(node4);
+                                                    mutableVector.add(node4);
                                                 }
                                             }
                                             node4 = node4.child;
-                                            delegatingNode = delegatingNode;
-                                            r1 = r1;
+                                            delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                            mutableVector = mutableVector;
                                         }
                                         if (i == 1) {
                                         }
                                     }
-                                    delegatingNode = DelegatableNodeKt.access$pop(r1);
+                                    delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                                 }
                             }
                             if ((node2.aggregateChildKindSet & NetworkAnalyticsConstants.DataPoints.FLAG_UID) == 0) {

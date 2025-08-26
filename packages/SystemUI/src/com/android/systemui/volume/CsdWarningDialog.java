@@ -24,7 +24,6 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import java.util.List;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CsdWarningDialog extends SystemUIDialog implements DialogInterface.OnDismissListener, DialogInterface.OnClickListener {
     public static final String TAG = Util.logTag(CsdWarningDialog.class);
@@ -45,7 +44,6 @@ public class CsdWarningDialog extends SystemUIDialog implements DialogInterface.
     public long mShowTime;
     public final Object mTimerLock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         CsdWarningDialog create(int i, Runnable runnable, Optional optional);
     }
@@ -110,12 +108,12 @@ public class CsdWarningDialog extends SystemUIDialog implements DialogInterface.
         this.mBroadcastDispatcher = broadcastDispatcher;
         getWindow().setType(2010);
         SystemUIDialog.setShowForAllUsers(this);
-        int i2 = R.string.fingerprint_udfps_error_not_match;
+        int i2 = R.string.floating_toolbar_close_overflow_description;
         if (i != 1) {
             if (i != 3) {
                 Log.e(TAG, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Invalid CSD warning event "), new Exception());
             } else {
-                i2 = R.string.fingerprints;
+                i2 = R.string.floating_toolbar_open_overflow_description;
             }
         }
         setMessage(context.getString(i2));
@@ -127,7 +125,7 @@ public class CsdWarningDialog extends SystemUIDialog implements DialogInterface.
             this.mNoUserActionRunnable = new Runnable() { // from class: com.android.systemui.volume.CsdWarningDialog$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CsdWarningDialog csdWarningDialog = CsdWarningDialog.this;
+                    CsdWarningDialog csdWarningDialog = this.f$0;
                     if (csdWarningDialog.mCsdWarning == 1) {
                         csdWarningDialog.mCachedMediaStreamVolume = csdWarningDialog.mAudioManager.getStreamVolume(3);
                         csdWarningDialog.mAudioManager.lowerVolumeToRs1();

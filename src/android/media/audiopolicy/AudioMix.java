@@ -13,14 +13,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
+/* loaded from: classes3.dex */
 public class AudioMix implements Parcelable {
     private static final int CALLBACK_FLAGS_ALL = 1;
     public static final int CALLBACK_FLAG_NOTIFY_ACTIVITY = 1;
     public static final Parcelable.Creator<AudioMix> CREATOR = new Parcelable.Creator<AudioMix>() { // from class: android.media.audiopolicy.AudioMix.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
-        public AudioMix createFromParcel(Parcel parcel) {
+        public AudioMix createFromParcel(Parcel parcel) throws IllegalArgumentException {
             Builder builder = new Builder();
             builder.setRouteFlags(parcel.readInt());
             builder.setCallbackFlags(parcel.readInt());
@@ -165,8 +165,8 @@ public class AudioMix implements Parcelable {
         }
         if (obj != null && getClass() == obj.getClass()) {
             AudioMix audioMix = (AudioMix) obj;
-            boolean equals = Flags.audioMixOwnership() ? Objects.equals(this.mToken, audioMix.mToken) : true;
-            if (Objects.equals(Integer.valueOf(this.mRouteFlags), Integer.valueOf(audioMix.mRouteFlags)) && Objects.equals(this.mRule, audioMix.mRule) && Objects.equals(Integer.valueOf(this.mMixType), Integer.valueOf(audioMix.mMixType)) && Objects.equals(this.mFormat, audioMix.mFormat) && equals) {
+            boolean zEquals = Flags.audioMixOwnership() ? Objects.equals(this.mToken, audioMix.mToken) : true;
+            if (Objects.equals(Integer.valueOf(this.mRouteFlags), Integer.valueOf(audioMix.mRouteFlags)) && Objects.equals(this.mRule, audioMix.mRule) && Objects.equals(Integer.valueOf(this.mMixType), Integer.valueOf(audioMix.mMixType)) && Objects.equals(this.mFormat, audioMix.mFormat) && zEquals) {
                 return true;
             }
         }
@@ -299,7 +299,7 @@ public class AudioMix implements Parcelable {
         }
 
         public AudioMix build() throws IllegalArgumentException {
-            String canBeUsedForPrivilegedMediaCapture;
+            String strCanBeUsedForPrivilegedMediaCapture;
             if (this.mRule == null) {
                 throw new IllegalArgumentException("Illegal null AudioMixingRule");
             }
@@ -335,8 +335,8 @@ public class AudioMix implements Parcelable {
                     throw new IllegalArgumentException("ROUTE_FLAG_RENDER/ROUTE_FLAG_LOOP_BACK_RENDER is not supported for non-playback mix rule");
                 }
             }
-            if (this.mRule.allowPrivilegedMediaPlaybackCapture() && (canBeUsedForPrivilegedMediaCapture = AudioMix.canBeUsedForPrivilegedMediaCapture(this.mFormat)) != null) {
-                throw new IllegalArgumentException(canBeUsedForPrivilegedMediaCapture);
+            if (this.mRule.allowPrivilegedMediaPlaybackCapture() && (strCanBeUsedForPrivilegedMediaCapture = AudioMix.canBeUsedForPrivilegedMediaCapture(this.mFormat)) != null) {
+                throw new IllegalArgumentException(strCanBeUsedForPrivilegedMediaCapture);
             }
             if (this.mToken == null) {
                 this.mToken = new Binder();

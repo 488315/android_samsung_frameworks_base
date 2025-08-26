@@ -3,6 +3,8 @@ package com.android.systemui.scene.domain.startable;
 import android.content.Context;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteException;
+import android.util.Log;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.systemui.CoreStartable;
@@ -15,11 +17,16 @@ import com.android.systemui.power.domain.interactor.PowerInteractor;
 import com.android.systemui.scene.domain.interactor.SceneContainerOcclusionInteractor;
 import com.android.systemui.scene.domain.interactor.SceneInteractor;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class StatusBarStartable implements CoreStartable {
     public final Context applicationContext;
@@ -37,13 +44,47 @@ public final class StatusBarStartable implements CoreStartable {
     public final SelectedUserInteractor selectedUserInteractor;
     public final IStatusBarService statusBarService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.scene.domain.startable.StatusBarStartable$onBootCompleted$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return StatusBarStartable.this.new AnonymousClass1(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            try {
+                StatusBarStartable statusBarStartable = StatusBarStartable.this;
+                statusBarStartable.statusBarService.disableForUser(0, statusBarStartable.disableToken, statusBarStartable.applicationContext.getPackageName(), StatusBarStartable.this.selectedUserInteractor.getSelectedUserId());
+            } catch (RemoteException e) {
+                Log.d("StatusBarStartable", "Failed to clear flags", e);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -69,7 +110,7 @@ public final class StatusBarStartable implements CoreStartable {
 
     @Override // com.android.systemui.CoreStartable
     public final void onBootCompleted() {
-        CoroutineTracingKt.launchTraced$default(this.applicationScope, this.backgroundDispatcher, null, new StatusBarStartable$onBootCompleted$1(this, null), 5);
+        CoroutineTracingKt.launchTraced$default(this.applicationScope, this.backgroundDispatcher, null, new AnonymousClass1(null), 5);
     }
 
     @Override // com.android.systemui.CoreStartable

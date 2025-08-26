@@ -24,6 +24,7 @@ import com.android.systemui.R;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.controls.BaseActivity;
 import com.android.systemui.controls.ControlStatus;
+import com.android.systemui.controls.controller.ComponentInfo;
 import com.android.systemui.controls.controller.ControlInfo;
 import com.android.systemui.controls.controller.ControlsController;
 import com.android.systemui.controls.controller.ControlsControllerImpl;
@@ -43,6 +44,7 @@ import com.android.systemui.controls.util.SALogger;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -52,11 +54,12 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecControlsFavoritingActivity extends BaseActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -91,7 +94,6 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
     public SecStructureAdapter structureAdapter;
     public AllStructureModel structureModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -177,10 +179,10 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
     public final void loadForComponent(ControlsController.LoadData loadData, boolean z) {
         List list;
         ControlsControllerKt$createLoadDataObject$1 controlsControllerKt$createLoadDataObject$1 = (ControlsControllerKt$createLoadDataObject$1) loadData;
-        ?? r0 = controlsControllerKt$createLoadDataObject$1.allControls;
+        ?? arrayList = controlsControllerKt$createLoadDataObject$1.allControls;
         List list2 = this.currentFavorites;
         if (list2 != null) {
-            for (ControlStatus controlStatus : (Iterable) r0) {
+            for (ControlStatus controlStatus : (Iterable) arrayList) {
                 controlStatus.favorite = list2.contains(controlStatus.control.getControlId());
             }
         }
@@ -192,12 +194,12 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
         if (controlsControllerKt$createLoadDataObject$1.errorOnLoad) {
             this.executor.execute(new Runnable() { // from class: com.android.systemui.controls.management.SecControlsFavoritingActivity$showErrorDialog$1
                 @Override // java.lang.Runnable
-                public final void run() {
-                    SecControlsFavoritingActivity.this.activity.isDestroyed();
-                    if (SecControlsFavoritingActivity.this.activity.isDestroyed()) {
+                public final void run() throws Resources.NotFoundException {
+                    this.this$0.activity.isDestroyed();
+                    if (this.this$0.activity.isDestroyed()) {
                         return;
                     }
-                    final SecControlsFavoritingActivity secControlsFavoritingActivity = SecControlsFavoritingActivity.this;
+                    final SecControlsFavoritingActivity secControlsFavoritingActivity = this.this$0;
                     String string = secControlsFavoritingActivity.getResources().getString(R.string.controls_retry_dialog_loading_timeout, secControlsFavoritingActivity.appName);
                     AlertDialog.Builder builder = new AlertDialog.Builder(secControlsFavoritingActivity, 2132018766);
                     AlertController.AlertParams alertParams = builder.P;
@@ -206,7 +208,7 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
                     DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() { // from class: com.android.systemui.controls.management.SecControlsFavoritingActivity$createErrorDialog$builder$1$1
                         @Override // android.content.DialogInterface.OnClickListener
                         public final void onClick(DialogInterface dialogInterface, int i) {
-                            SecControlsFavoritingActivity secControlsFavoritingActivity2 = SecControlsFavoritingActivity.this;
+                            SecControlsFavoritingActivity secControlsFavoritingActivity2 = secControlsFavoritingActivity;
                             int i2 = SecControlsFavoritingActivity.$r8$clinit;
                             ComponentName componentName = secControlsFavoritingActivity2.component;
                             if (componentName != null) {
@@ -220,7 +222,7 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
                     DialogInterface.OnClickListener onClickListener2 = new DialogInterface.OnClickListener() { // from class: com.android.systemui.controls.management.SecControlsFavoritingActivity$createErrorDialog$builder$1$2
                         @Override // android.content.DialogInterface.OnClickListener
                         public final void onClick(DialogInterface dialogInterface, int i) {
-                            SecControlsFavoritingActivity secControlsFavoritingActivity2 = SecControlsFavoritingActivity.this;
+                            SecControlsFavoritingActivity secControlsFavoritingActivity2 = secControlsFavoritingActivity;
                             dialogInterface.getClass();
                             int i2 = SecControlsFavoritingActivity.$r8$clinit;
                             secControlsFavoritingActivity2.onBackPressed();
@@ -235,7 +237,7 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
                             if (i != 4) {
                                 return false;
                             }
-                            SecControlsFavoritingActivity secControlsFavoritingActivity2 = SecControlsFavoritingActivity.this;
+                            SecControlsFavoritingActivity secControlsFavoritingActivity2 = secControlsFavoritingActivity;
                             dialogInterface.getClass();
                             int i2 = SecControlsFavoritingActivity.$r8$clinit;
                             secControlsFavoritingActivity2.onBackPressed();
@@ -243,10 +245,10 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
                             return true;
                         }
                     };
-                    AlertDialog create = builder.create();
-                    create.setCanceledOnTouchOutside(false);
-                    secControlsFavoritingActivity.retryDialog = create;
-                    AlertDialog alertDialog = SecControlsFavoritingActivity.this.retryDialog;
+                    AlertDialog alertDialogCreate = builder.create();
+                    alertDialogCreate.setCanceledOnTouchOutside(false);
+                    secControlsFavoritingActivity.retryDialog = alertDialogCreate;
+                    AlertDialog alertDialog = this.this$0.retryDialog;
                     if (alertDialog != null) {
                         alertDialog.show();
                     }
@@ -254,23 +256,23 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
             });
             return;
         }
-        Iterable iterable = (Iterable) r0;
-        ArrayList arrayList = new ArrayList();
+        Iterable iterable = (Iterable) arrayList;
+        ArrayList arrayList2 = new ArrayList();
         for (Object obj : iterable) {
             if (((ControlStatus) obj).removed) {
-                arrayList.add(obj);
+                arrayList2.add(obj);
             }
         }
-        arrayList.toString();
+        arrayList2.toString();
         if (this.isAutoRemove) {
-            r0 = new ArrayList();
+            arrayList = new ArrayList();
             for (Object obj2 : iterable) {
                 if (!((ControlStatus) obj2).removed) {
-                    r0.add(obj2);
+                    arrayList.add(obj2);
                 }
             }
         }
-        Iterable<ControlStatus> iterable2 = (Iterable) r0;
+        Iterable<ControlStatus> iterable2 = (Iterable) arrayList;
         for (ControlStatus controlStatus2 : iterable2) {
             ControlsUtil.Companion companion = ControlsUtil.Companion;
             Control control = controlStatus2.control;
@@ -284,12 +286,12 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
             if (structure == null) {
                 structure = "";
             }
-            Object obj4 = linkedHashMap.get(structure);
-            if (obj4 == null) {
-                obj4 = new ArrayList();
-                linkedHashMap.put(structure, obj4);
+            Object arrayList3 = linkedHashMap.get(structure);
+            if (arrayList3 == null) {
+                arrayList3 = new ArrayList();
+                linkedHashMap.put(structure, arrayList3);
             }
-            ((List) obj4).add(obj3);
+            ((List) arrayList3).add(obj3);
         }
         this.controlsMap = linkedHashMap;
         this.structureModel = new AllStructureModel(getResources(), list5, list4, this.favoriteControlChangeMainCallback, false);
@@ -299,12 +301,12 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
             ((ControlsControllerImpl) this.controller).getClass();
             Favorites.INSTANCE.getClass();
             List structuresForComponent = Favorites.getStructuresForComponent(componentName);
-            ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(structuresForComponent, 10));
+            ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(structuresForComponent, 10));
             Iterator it = structuresForComponent.iterator();
             while (it.hasNext()) {
-                arrayList2.add(((StructureInfo) it.next()).structure);
+                arrayList4.add(((StructureInfo) it.next()).structure);
             }
-            list = arrayList2;
+            list = arrayList4;
         } else {
             list = this.requestOrder;
         }
@@ -316,7 +318,7 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
         if (z) {
             changeDataAndShow();
         } else {
-            this.executor.execute(new Runnable() { // from class: com.android.systemui.controls.management.SecControlsFavoritingActivity$loadForComponent$4
+            this.executor.execute(new Runnable() { // from class: com.android.systemui.controls.management.SecControlsFavoritingActivity.loadForComponent.4
                 @Override // java.lang.Runnable
                 public final void run() {
                     SecControlsFavoritingActivity secControlsFavoritingActivity = SecControlsFavoritingActivity.this;
@@ -351,15 +353,15 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
     }
 
     @Override // com.android.systemui.controls.BaseActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         CharSequence charSequenceExtra = getIntent().getCharSequenceExtra("extra_app_label");
         this.appName = charSequenceExtra;
         setTitle(charSequenceExtra);
         CharSequence charSequenceExtra2 = getIntent().getCharSequenceExtra("extra_from_activity");
-        boolean equals = charSequenceExtra2 != null ? charSequenceExtra2.equals(Reflection.getOrCreateKotlinClass(SecControlsActivity.class).getSimpleName()) : false;
-        this.isFromMainActivity = equals;
-        Log.d("SecControlsFavoritingActivity", "onCreate isFromMainActivity = " + equals + ", class = " + ((Object) charSequenceExtra2));
+        boolean zEquals = charSequenceExtra2 != null ? charSequenceExtra2.equals(Reflection.getOrCreateKotlinClass(SecControlsActivity.class).getSimpleName()) : false;
+        this.isFromMainActivity = zEquals;
+        Log.d("SecControlsFavoritingActivity", "onCreate isFromMainActivity = " + zEquals + ", class = " + ((Object) charSequenceExtra2));
         this.component = (ComponentName) getIntent().getParcelableExtra("android.intent.extra.COMPONENT_NAME");
         if (bundle != null) {
             this.currentFavorites = bundle.getStringArrayList("current_favorites");
@@ -395,7 +397,7 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
         this.structureAdapter = new SecStructureAdapter(this.layoutUtil, this.controlsUtil, this.auiFacade, ((UserTrackerImpl) this.userTracker).getUserId(), this.currentPosition != null ? new Consumer() { // from class: com.android.systemui.controls.management.SecControlsFavoritingActivity$bindViews$layoutCompletedCallback$1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((RecyclerView.LayoutManager) obj).onRestoreInstanceState(SecControlsFavoritingActivity.this.currentPosition);
+                ((RecyclerView.LayoutManager) obj).onRestoreInstanceState(this.this$0.currentPosition);
             }
         } : null);
         RecyclerView recyclerView = (RecyclerView) requireViewById(R.id.listAll);
@@ -423,8 +425,8 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
     @Override // android.app.Activity
     public final boolean onCreateOptionsMenu(Menu menu) {
         Map map;
-        Set keySet;
-        if (this.isLoadingFinished && (map = this.controlsMap) != null && (keySet = ((LinkedHashMap) map).keySet()) != null && keySet.size() > 1) {
+        Set setKeySet;
+        if (this.isLoadingFinished && (map = this.controlsMap) != null && (setKeySet = ((LinkedHashMap) map).keySet()) != null && setKeySet.size() > 1) {
             getMenuInflater().inflate(R.menu.controls_reorder_menu, menu);
         }
         return true;
@@ -446,12 +448,12 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
         }
         if (this.isLoadingFinished) {
             Map map = this.controlsMap;
-            int i5 = 0;
+            int size = 0;
             if (map != null) {
                 LinkedHashMap linkedHashMap = (LinkedHashMap) map;
-                int size = linkedHashMap.keySet().size();
-                int i6 = 0;
-                int i7 = 0;
+                int size2 = linkedHashMap.keySet().size();
+                int size3 = 0;
+                int size4 = 0;
                 for (List list : linkedHashMap.values()) {
                     ArrayList arrayList = new ArrayList();
                     for (Object obj : list) {
@@ -459,27 +461,27 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
                             arrayList.add(obj);
                         }
                     }
-                    i5 += arrayList.size();
-                    i6 += list.size();
+                    size += arrayList.size();
+                    size3 += list.size();
                     LinkedHashMap linkedHashMap2 = new LinkedHashMap();
                     for (Object obj2 : list) {
                         CharSequence zone = ((ControlStatus) obj2).control.getZone();
                         if (zone == null) {
                             zone = "";
                         }
-                        Object obj3 = linkedHashMap2.get(zone);
-                        if (obj3 == null) {
-                            obj3 = new ArrayList();
-                            linkedHashMap2.put(zone, obj3);
+                        Object arrayList2 = linkedHashMap2.get(zone);
+                        if (arrayList2 == null) {
+                            arrayList2 = new ArrayList();
+                            linkedHashMap2.put(zone, arrayList2);
                         }
-                        ((List) obj3).add(obj2);
+                        ((List) arrayList2).add(obj2);
                     }
-                    i7 += linkedHashMap2.keySet().size();
+                    size4 += linkedHashMap2.keySet().size();
                 }
-                i = i5;
-                i3 = size;
-                i2 = i6;
-                i4 = i7;
+                i = size;
+                i3 = size2;
+                i2 = size3;
+                i4 = size4;
             } else {
                 i = 0;
                 i2 = 0;
@@ -572,18 +574,96 @@ public final class SecControlsFavoritingActivity extends BaseActivity {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0107 A[LOOP:5: B:59:0x0105->B:60:0x0107, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0118  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x012d  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0100  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateFavorites() {
-        /*
-            Method dump skipped, instructions count: 319
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.controls.management.SecControlsFavoritingActivity.updateFavorites():void");
+        int i;
+        boolean z;
+        List list;
+        if (this.isLoadingFinished) {
+            ArrayList arrayList = new ArrayList();
+            Iterator it = this.currentOrder.iterator();
+            while (true) {
+                i = 0;
+                if (!it.hasNext()) {
+                    break;
+                }
+                CharSequence charSequence = (CharSequence) it.next();
+                Map map = this.controlsMap;
+                if (map != null && (list = (List) ((LinkedHashMap) map).get(charSequence)) != null) {
+                    AllStructureModel allStructureModel = this.structureModel;
+                    if (allStructureModel == null) {
+                        allStructureModel = null;
+                    }
+                    List favorites = allStructureModel.getFavorites();
+                    ArrayList arrayList2 = new ArrayList();
+                    ArrayList arrayList3 = (ArrayList) favorites;
+                    int size = arrayList3.size();
+                    while (i < size) {
+                        Object obj = arrayList3.get(i);
+                        i++;
+                        ControlInfo controlInfo = (ControlInfo) obj;
+                        List list2 = list;
+                        if (!(list2 instanceof Collection) || !list2.isEmpty()) {
+                            Iterator it2 = list2.iterator();
+                            while (true) {
+                                if (!it2.hasNext()) {
+                                    break;
+                                } else if (Intrinsics.areEqual(((ControlStatus) it2.next()).control.getControlId(), controlInfo.controlId)) {
+                                    arrayList2.add(obj);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    ComponentName componentName = this.component;
+                    componentName.getClass();
+                    arrayList.add(new StructureInfo(componentName, charSequence, arrayList2, false, 8, null));
+                }
+            }
+            ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList, 10));
+            int size2 = arrayList.size();
+            int i2 = 0;
+            while (i2 < size2) {
+                Object obj2 = arrayList.get(i2);
+                i2++;
+                List list3 = ((StructureInfo) obj2).controls;
+                ArrayList arrayList5 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list3, 10));
+                Iterator it3 = list3.iterator();
+                while (it3.hasNext()) {
+                    arrayList5.add(((ControlInfo) it3.next()).controlId);
+                }
+                arrayList4.add(arrayList5);
+            }
+            boolean zIsEmpty = CollectionsKt___CollectionsKt.minus((Iterable) CollectionsKt__IterablesKt.flatten(arrayList4), (Iterable) this.initialFavoriteIds).isEmpty();
+            SecControlsController secControlsController = this.secController;
+            if (zIsEmpty) {
+                ComponentName componentName2 = this.component;
+                componentName2.getClass();
+                ((ControlsControllerImpl) secControlsController).getClass();
+                Favorites.INSTANCE.getClass();
+                z = Favorites.getActiveFlag(componentName2);
+            }
+            int size3 = arrayList.size();
+            while (i < size3) {
+                Object obj3 = arrayList.get(i);
+                i++;
+                ((StructureInfo) obj3).active = z;
+            }
+            if (!arrayList.isEmpty()) {
+                ComponentName componentName3 = this.component;
+                componentName3.getClass();
+                ((ControlsControllerImpl) secControlsController).replaceFavoritesForComponent(new ComponentInfo(componentName3, arrayList), this.isFromMainActivity);
+            } else {
+                ComponentName componentName4 = this.component;
+                componentName4.getClass();
+                boolean z2 = this.isFromMainActivity;
+                ((ControlsControllerImpl) secControlsController).getClass();
+                Favorites.INSTANCE.getClass();
+                Favorites.removeStructures(componentName4, z2);
+            }
+        }
     }
 }

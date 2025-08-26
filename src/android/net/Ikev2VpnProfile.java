@@ -19,8 +19,10 @@ import java.security.GeneralSecurityException;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -259,7 +261,7 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
     }
 
     @Override // android.net.PlatformVpnProfile
-    public VpnProfile toVpnProfile() throws IOException, GeneralSecurityException {
+    public VpnProfile toVpnProfile() throws GeneralSecurityException, IOException {
         VpnProfile vpnProfile = new VpnProfile("", this.mIsRestrictedToTestNetworks, this.mExcludeLocalRoutes, this.mRequiresInternetValidation, this.mIkeTunConnParams, this.mAutomaticNattKeepaliveTimerEnabled, this.mAutomaticIpVersionSelectionEnabled);
         vpnProfile.proxy = this.mProxyInfo;
         vpnProfile.isBypassable = this.mIsBypassable;
@@ -297,7 +299,7 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         throw new IllegalArgumentException("Invalid auth method set");
     }
 
-    private static PrivateKey getPrivateKeyFromAndroidKeystore(String str) {
+    private static PrivateKey getPrivateKeyFromAndroidKeystore(String str) throws NoSuchAlgorithmException, UnrecoverableKeyException, IOException, KeyStoreException, CertificateException {
         try {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
@@ -311,7 +313,7 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
         }
     }
 
-    public static Ikev2VpnProfile fromVpnProfile(VpnProfile vpnProfile) throws GeneralSecurityException {
+    public static Ikev2VpnProfile fromVpnProfile(VpnProfile vpnProfile) throws GeneralSecurityException, IOException {
         Builder builder;
         PrivateKey privateKey;
         if (vpnProfile.ikeTunConnParams == null) {
@@ -388,11 +390,11 @@ public final class Ikev2VpnProfile extends PlatformVpnProfile {
             return null;
         }
         try {
-            List<X509Certificate> convertFromPem = android.security.Credentials.convertFromPem(str.getBytes(StandardCharsets.US_ASCII));
-            if (convertFromPem.isEmpty()) {
+            List<X509Certificate> listConvertFromPem = android.security.Credentials.convertFromPem(str.getBytes(StandardCharsets.US_ASCII));
+            if (listConvertFromPem.isEmpty()) {
                 return null;
             }
-            return convertFromPem.get(0);
+            return listConvertFromPem.get(0);
         } catch (IOException e) {
             throw new CertificateException(e);
         }

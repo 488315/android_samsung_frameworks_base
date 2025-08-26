@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ProximityCheck implements Runnable {
     private final DelayableExecutor mDelayableExecutor;
@@ -23,7 +22,7 @@ public class ProximityCheck implements Runnable {
         this.mListener = new ThresholdSensor.Listener() { // from class: com.android.systemui.util.sensors.ProximityCheck$$ExternalSyntheticLambda1
             @Override // com.android.systemui.util.sensors.ThresholdSensor.Listener
             public final void onThresholdCrossed(ThresholdSensorEvent thresholdSensorEvent) {
-                ProximityCheck.this.onProximityEvent(thresholdSensorEvent);
+                this.f$0.onProximityEvent(thresholdSensorEvent);
             }
         };
     }
@@ -41,7 +40,7 @@ public class ProximityCheck implements Runnable {
         list.forEach(new Consumer() { // from class: com.android.systemui.util.sensors.ProximityCheck$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ProximityCheck.lambda$onProximityEvent$0(ThresholdSensorEvent.this, (Consumer) obj);
+                ProximityCheck.lambda$onProximityEvent$0(thresholdSensorEvent, (Consumer) obj);
             }
         });
     }

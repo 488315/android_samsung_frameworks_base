@@ -1,54 +1,44 @@
 package com.android.systemui.biometrics;
 
-import android.content.Context;
 import android.graphics.Rect;
 import android.hardware.fingerprint.IUdfpsOverlayControllerCallback;
-import android.os.Build;
+import android.os.Trace;
 import android.util.RotationUtils;
 import android.view.LayoutInflater;
 import android.view.Surface;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.keyguard.KeyguardUpdateMonitor;
-import com.android.systemui.animation.ActivityTransitionAnimator;
 import com.android.systemui.biometrics.domain.interactor.UdfpsOverlayInteractor;
 import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
 import com.android.systemui.biometrics.ui.view.UdfpsTouchOverlay;
-import com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor;
-import com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor;
-import com.android.systemui.dump.DumpManager;
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
-import com.android.systemui.plugins.statusbar.StatusBarStateController;
+import com.android.systemui.keyguard.shared.model.KeyguardState;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
 import com.android.systemui.power.shared.model.WakefulnessModel;
-import com.android.systemui.shade.domain.interactor.ShadeInteractor;
-import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
-import com.android.systemui.statusbar.phone.SystemUIDialogManager;
-import com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController;
-import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
-import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import dagger.Lazy;
 import java.util.Objects;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
-import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class UdfpsControllerOverlay {
     public final AccessibilityManager accessibilityManager;
-    public UdfpsControllerOverlay$addViewNowOrLater$1 addViewRunnable;
+    public AnonymousClass1 addViewRunnable;
     public final IUdfpsOverlayControllerCallback controllerCallback;
     public final WindowManager.LayoutParams coreLayoutParams;
     public final UdfpsControllerOverlay$special$$inlined$map$1 currentStateUpdatedToOffAodOrDozing;
@@ -63,36 +53,215 @@ public final class UdfpsControllerOverlay {
     public UdfpsControllerOverlay$show$2$1 overlayTouchListener;
     public UdfpsTouchOverlay overlayTouchView;
     public final PowerInteractor powerInteractor;
+    public final Lazy promptUdfpsTouchOverlayViewModel;
     public final long requestId;
     public final int requestReason;
     public final CoroutineScope scope;
     public Rect sensorBounds;
-    public final StatusBarStateController statusBarStateController;
     public final UdfpsDisplayModeProvider udfpsDisplayModeProvider;
     public final UdfpsOverlayInteractor udfpsOverlayInteractor;
     public final WindowManager windowManager;
 
-    public UdfpsControllerOverlay(Context context, LayoutInflater layoutInflater, WindowManager windowManager, AccessibilityManager accessibilityManager, StatusBarStateController statusBarStateController, StatusBarKeyguardViewManager statusBarKeyguardViewManager, KeyguardUpdateMonitor keyguardUpdateMonitor, SystemUIDialogManager systemUIDialogManager, DumpManager dumpManager, ConfigurationController configurationController, KeyguardStateController keyguardStateController, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, UdfpsDisplayModeProvider udfpsDisplayModeProvider, long j, int i, IUdfpsOverlayControllerCallback iUdfpsOverlayControllerCallback, Function2 function2, ActivityTransitionAnimator activityTransitionAnimator, PrimaryBouncerInteractor primaryBouncerInteractor, AlternateBouncerInteractor alternateBouncerInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, SelectedUserInteractor selectedUserInteractor, Lazy lazy, Lazy lazy2, ShadeInteractor shadeInteractor, UdfpsOverlayInteractor udfpsOverlayInteractor, PowerInteractor powerInteractor, CoroutineScope coroutineScope) {
-        this(context, layoutInflater, windowManager, accessibilityManager, statusBarStateController, statusBarKeyguardViewManager, keyguardUpdateMonitor, systemUIDialogManager, dumpManager, configurationController, keyguardStateController, unlockedScreenOffAnimationController, udfpsDisplayModeProvider, j, i, iUdfpsOverlayControllerCallback, function2, activityTransitionAnimator, primaryBouncerInteractor, alternateBouncerInteractor, false, keyguardTransitionInteractor, selectedUserInteractor, lazy, lazy2, shadeInteractor, udfpsOverlayInteractor, powerInteractor, coroutineScope, 1048576, null);
+    /* renamed from: com.android.systemui.biometrics.UdfpsControllerOverlay$addViewNowOrLater$1, reason: invalid class name */
+    public final class AnonymousClass1 implements Runnable {
+        public final /* synthetic */ UdfpsAnimationViewController $animation;
+        public final /* synthetic */ View $view;
+
+        public AnonymousClass1(View view, UdfpsAnimationViewController udfpsAnimationViewController) {
+            this.$view = view;
+            this.$animation = udfpsAnimationViewController;
+        }
+
+        @Override // java.lang.Runnable
+        public final void run() {
+            Trace.setCounter("UdfpsAddView", 1L);
+            UdfpsControllerOverlay udfpsControllerOverlay = UdfpsControllerOverlay.this;
+            WindowManager windowManager = udfpsControllerOverlay.windowManager;
+            View view = this.$view;
+            WindowManager.LayoutParams layoutParams = udfpsControllerOverlay.coreLayoutParams;
+            udfpsControllerOverlay.updateDimensions(layoutParams, this.$animation);
+            windowManager.addView(view, layoutParams);
+        }
+    }
+
+    /* renamed from: com.android.systemui.biometrics.UdfpsControllerOverlay$addViewNowOrLater$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass2(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return UdfpsControllerOverlay.this.new AnonymousClass2(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final UdfpsControllerOverlay udfpsControllerOverlay = UdfpsControllerOverlay.this;
+                UdfpsControllerOverlay$special$$inlined$map$1 udfpsControllerOverlay$special$$inlined$map$1 = udfpsControllerOverlay.currentStateUpdatedToOffAodOrDozing;
+                FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.biometrics.UdfpsControllerOverlay.addViewNowOrLater.2.1
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    public final Object emit(Object obj2, Continuation continuation) {
+                        UdfpsControllerOverlay udfpsControllerOverlay2 = udfpsControllerOverlay;
+                        AnonymousClass1 anonymousClass1 = udfpsControllerOverlay2.addViewRunnable;
+                        if (anonymousClass1 != null) {
+                            StandaloneCoroutine standaloneCoroutine = udfpsControllerOverlay2.listenForCurrentKeyguardState;
+                            if (standaloneCoroutine != null) {
+                                standaloneCoroutine.cancel(null);
+                            }
+                            anonymousClass1.run();
+                        }
+                        udfpsControllerOverlay2.addViewRunnable = null;
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (udfpsControllerOverlay$special$$inlined$map$1.collect(flowCollector, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    public UdfpsControllerOverlay(LayoutInflater layoutInflater, WindowManager windowManager, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, UdfpsDisplayModeProvider udfpsDisplayModeProvider, long j, int i, IUdfpsOverlayControllerCallback iUdfpsOverlayControllerCallback, Function2 function2, KeyguardTransitionInteractor keyguardTransitionInteractor, Lazy lazy, Lazy lazy2, Lazy lazy3, UdfpsOverlayInteractor udfpsOverlayInteractor, PowerInteractor powerInteractor, CoroutineScope coroutineScope) {
+        this.inflater = layoutInflater;
+        this.windowManager = windowManager;
+        this.accessibilityManager = accessibilityManager;
+        this.keyguardUpdateMonitor = keyguardUpdateMonitor;
+        this.keyguardStateController = keyguardStateController;
+        this.udfpsDisplayModeProvider = udfpsDisplayModeProvider;
+        this.requestId = j;
+        this.requestReason = i;
+        this.controllerCallback = iUdfpsOverlayControllerCallback;
+        this.onTouch = function2;
+        this.deviceEntryUdfpsTouchOverlayViewModel = lazy;
+        this.defaultUdfpsTouchOverlayViewModel = lazy2;
+        this.promptUdfpsTouchOverlayViewModel = lazy3;
+        this.udfpsOverlayInteractor = udfpsOverlayInteractor;
+        this.powerInteractor = powerInteractor;
+        this.scope = coroutineScope;
+        final ReadonlyStateFlow readonlyStateFlow = keyguardTransitionInteractor.currentKeyguardState;
+        this.currentStateUpdatedToOffAodOrDozing = new UdfpsControllerOverlay$special$$inlined$map$1(new Flow() { // from class: com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1
+
+            /* renamed from: com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1$2, reason: invalid class name */
+            public final class AnonymousClass2 implements FlowCollector {
+                public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                /* renamed from: com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1$2$1, reason: invalid class name */
+                public final class AnonymousClass1 extends ContinuationImpl {
+                    Object L$0;
+                    Object L$1;
+                    int label;
+                    /* synthetic */ Object result;
+
+                    public AnonymousClass1(Continuation continuation) {
+                        super(continuation);
+                    }
+
+                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                    public final Object invokeSuspend(Object obj) {
+                        this.result = obj;
+                        this.label |= Integer.MIN_VALUE;
+                        return AnonymousClass2.this.emit(null, this);
+                    }
+                }
+
+                public AnonymousClass2(FlowCollector flowCollector) {
+                    this.$this_unsafeFlow = flowCollector;
+                }
+
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        KeyguardState keyguardState = (KeyguardState) obj;
+                        if (keyguardState == KeyguardState.OFF || keyguardState == KeyguardState.AOD || keyguardState == KeyguardState.DOZING) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
+                }
+            }
+
+            @Override // kotlinx.coroutines.flow.Flow
+            public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+            }
+        });
+        this.overlayParams = new UdfpsOverlayParams(null, null, 0, 0, 0.0f, 0, 0, 127, null);
+        this.sensorBounds = new Rect();
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(2024, 0, -3);
+        layoutParams.setTitle("UdfpsControllerOverlay");
+        layoutParams.setFitInsetsTypes(0);
+        layoutParams.gravity = 51;
+        layoutParams.layoutInDisplayCutoutMode = 3;
+        layoutParams.flags = 16777512;
+        layoutParams.privateFlags = 538968064;
+        layoutParams.accessibilityTitle = " ";
+        layoutParams.inputFeatures = 4;
+        this.coreLayoutParams = layoutParams;
     }
 
     public final void addViewNowOrLater(UdfpsTouchOverlay udfpsTouchOverlay) {
-        this.addViewRunnable = new UdfpsControllerOverlay$addViewNowOrLater$1(this, udfpsTouchOverlay, null);
+        this.addViewRunnable = new AnonymousClass1(udfpsTouchOverlay, null);
         if (!((WakefulnessModel) this.powerInteractor.detailedWakefulness.$$delegate_0.getValue()).isAwake()) {
             StandaloneCoroutine standaloneCoroutine = this.listenForCurrentKeyguardState;
             if (standaloneCoroutine != null) {
                 standaloneCoroutine.cancel(null);
             }
-            this.listenForCurrentKeyguardState = CoroutineTracingKt.launchTraced$default(this.scope, null, null, new UdfpsControllerOverlay$addViewNowOrLater$2(this, null), 7);
+            this.listenForCurrentKeyguardState = CoroutineTracingKt.launchTraced$default(this.scope, null, null, new AnonymousClass2(null), 7);
             return;
         }
-        UdfpsControllerOverlay$addViewNowOrLater$1 udfpsControllerOverlay$addViewNowOrLater$1 = this.addViewRunnable;
-        if (udfpsControllerOverlay$addViewNowOrLater$1 != null) {
+        AnonymousClass1 anonymousClass1 = this.addViewRunnable;
+        if (anonymousClass1 != null) {
             StandaloneCoroutine standaloneCoroutine2 = this.listenForCurrentKeyguardState;
             if (standaloneCoroutine2 != null) {
                 standaloneCoroutine2.cancel(null);
             }
-            udfpsControllerOverlay$addViewNowOrLater$1.run();
+            anonymousClass1.run();
         }
         this.addViewRunnable = null;
     }
@@ -127,139 +296,5 @@ public final class UdfpsControllerOverlay {
         layoutParams.y = rect.top;
         layoutParams.height = rect.height();
         layoutParams.width = rect.width();
-    }
-
-    public UdfpsControllerOverlay(Context context, LayoutInflater layoutInflater, WindowManager windowManager, AccessibilityManager accessibilityManager, StatusBarStateController statusBarStateController, StatusBarKeyguardViewManager statusBarKeyguardViewManager, KeyguardUpdateMonitor keyguardUpdateMonitor, SystemUIDialogManager systemUIDialogManager, DumpManager dumpManager, ConfigurationController configurationController, KeyguardStateController keyguardStateController, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, UdfpsDisplayModeProvider udfpsDisplayModeProvider, long j, int i, IUdfpsOverlayControllerCallback iUdfpsOverlayControllerCallback, Function2 function2, ActivityTransitionAnimator activityTransitionAnimator, PrimaryBouncerInteractor primaryBouncerInteractor, AlternateBouncerInteractor alternateBouncerInteractor, boolean z, KeyguardTransitionInteractor keyguardTransitionInteractor, SelectedUserInteractor selectedUserInteractor, Lazy lazy, Lazy lazy2, ShadeInteractor shadeInteractor, UdfpsOverlayInteractor udfpsOverlayInteractor, PowerInteractor powerInteractor, CoroutineScope coroutineScope) {
-        this.inflater = layoutInflater;
-        this.windowManager = windowManager;
-        this.accessibilityManager = accessibilityManager;
-        this.statusBarStateController = statusBarStateController;
-        this.keyguardUpdateMonitor = keyguardUpdateMonitor;
-        this.keyguardStateController = keyguardStateController;
-        this.udfpsDisplayModeProvider = udfpsDisplayModeProvider;
-        this.requestId = j;
-        this.requestReason = i;
-        this.controllerCallback = iUdfpsOverlayControllerCallback;
-        this.onTouch = function2;
-        this.deviceEntryUdfpsTouchOverlayViewModel = lazy;
-        this.defaultUdfpsTouchOverlayViewModel = lazy2;
-        this.udfpsOverlayInteractor = udfpsOverlayInteractor;
-        this.powerInteractor = powerInteractor;
-        this.scope = coroutineScope;
-        final ReadonlyStateFlow readonlyStateFlow = keyguardTransitionInteractor.currentKeyguardState;
-        this.currentStateUpdatedToOffAodOrDozing = new UdfpsControllerOverlay$special$$inlined$map$1(new Flow() { // from class: com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1
-
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
-            /* renamed from: com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1$2, reason: invalid class name */
-            public final class AnonymousClass2 implements FlowCollector {
-                public final /* synthetic */ FlowCollector $this_unsafeFlow;
-
-                /* renamed from: com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1$2$1, reason: invalid class name */
-                public final class AnonymousClass1 extends ContinuationImpl {
-                    Object L$0;
-                    Object L$1;
-                    int label;
-                    /* synthetic */ Object result;
-
-                    public AnonymousClass1(Continuation continuation) {
-                        super(continuation);
-                    }
-
-                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-                    public final Object invokeSuspend(Object obj) {
-                        this.result = obj;
-                        this.label |= Integer.MIN_VALUE;
-                        return AnonymousClass2.this.emit(null, this);
-                    }
-                }
-
-                public AnonymousClass2(FlowCollector flowCollector) {
-                    this.$this_unsafeFlow = flowCollector;
-                }
-
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-                @Override // kotlinx.coroutines.flow.FlowCollector
-                /*
-                    Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
-                */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1$2$1 r0 = (com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1$2$1 r0 = new com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4c
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.keyguard.shared.model.KeyguardState r6 = (com.android.systemui.keyguard.shared.model.KeyguardState) r6
-                        com.android.systemui.keyguard.shared.model.KeyguardState r2 = com.android.systemui.keyguard.shared.model.KeyguardState.OFF
-                        if (r6 == r2) goto L41
-                        com.android.systemui.keyguard.shared.model.KeyguardState r2 = com.android.systemui.keyguard.shared.model.KeyguardState.AOD
-                        if (r6 == r2) goto L41
-                        com.android.systemui.keyguard.shared.model.KeyguardState r2 = com.android.systemui.keyguard.shared.model.KeyguardState.DOZING
-                        if (r6 != r2) goto L4c
-                    L41:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4c
-                        return r1
-                    L4c:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.UdfpsControllerOverlay$special$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
-                }
-            }
-
-            @Override // kotlinx.coroutines.flow.Flow
-            public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
-            }
-        });
-        this.overlayParams = new UdfpsOverlayParams(null, null, 0, 0, 0.0f, 0, 0, 127, null);
-        this.sensorBounds = new Rect();
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(2024, 0, -3);
-        layoutParams.setTitle("UdfpsControllerOverlay");
-        layoutParams.setFitInsetsTypes(0);
-        layoutParams.gravity = 51;
-        layoutParams.layoutInDisplayCutoutMode = 3;
-        layoutParams.flags = 16777512;
-        layoutParams.privateFlags = 538968064;
-        layoutParams.accessibilityTitle = " ";
-        layoutParams.inputFeatures = 4;
-        this.coreLayoutParams = layoutParams;
-    }
-
-    public /* synthetic */ UdfpsControllerOverlay(Context context, LayoutInflater layoutInflater, WindowManager windowManager, AccessibilityManager accessibilityManager, StatusBarStateController statusBarStateController, StatusBarKeyguardViewManager statusBarKeyguardViewManager, KeyguardUpdateMonitor keyguardUpdateMonitor, SystemUIDialogManager systemUIDialogManager, DumpManager dumpManager, ConfigurationController configurationController, KeyguardStateController keyguardStateController, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, UdfpsDisplayModeProvider udfpsDisplayModeProvider, long j, int i, IUdfpsOverlayControllerCallback iUdfpsOverlayControllerCallback, Function2 function2, ActivityTransitionAnimator activityTransitionAnimator, PrimaryBouncerInteractor primaryBouncerInteractor, AlternateBouncerInteractor alternateBouncerInteractor, boolean z, KeyguardTransitionInteractor keyguardTransitionInteractor, SelectedUserInteractor selectedUserInteractor, Lazy lazy, Lazy lazy2, ShadeInteractor shadeInteractor, UdfpsOverlayInteractor udfpsOverlayInteractor, PowerInteractor powerInteractor, CoroutineScope coroutineScope, int i2, DefaultConstructorMarker defaultConstructorMarker) {
-        this(context, layoutInflater, windowManager, accessibilityManager, statusBarStateController, statusBarKeyguardViewManager, keyguardUpdateMonitor, systemUIDialogManager, dumpManager, configurationController, keyguardStateController, unlockedScreenOffAnimationController, udfpsDisplayModeProvider, j, i, iUdfpsOverlayControllerCallback, function2, activityTransitionAnimator, primaryBouncerInteractor, alternateBouncerInteractor, (i2 & 1048576) != 0 ? Build.IS_DEBUGGABLE : z, keyguardTransitionInteractor, selectedUserInteractor, lazy, lazy2, shadeInteractor, udfpsOverlayInteractor, powerInteractor, coroutineScope);
     }
 }

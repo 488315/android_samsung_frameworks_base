@@ -34,7 +34,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ShadeTouchHandler implements TouchHandler {
     public Boolean capture;
@@ -47,7 +46,6 @@ public final class ShadeTouchHandler implements TouchHandler {
     public boolean touchAvailable;
     public final Optional windowRootViewProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.ambient.touch.ShadeTouchHandler$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -77,7 +75,7 @@ public final class ShadeTouchHandler implements TouchHandler {
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.ambient.touch.ShadeTouchHandler.1.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        ShadeTouchHandler.this.onGlanceableTouchAvailable(((Boolean) obj2).booleanValue());
+                        shadeTouchHandler.onGlanceableTouchAvailable(((Boolean) obj2).booleanValue());
                         return Unit.INSTANCE;
                     }
                 };
@@ -106,7 +104,7 @@ public final class ShadeTouchHandler implements TouchHandler {
         LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.ambient.touch.ShadeTouchHandler$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return (WindowRootView) ((Provider) ShadeTouchHandler.this.windowRootViewProvider.get()).get();
+                return (WindowRootView) ((Provider) this.f$0.windowRootViewProvider.get()).get();
             }
         });
         CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(null), 7);
@@ -156,13 +154,13 @@ public final class ShadeTouchHandler implements TouchHandler {
             return;
         }
         final TouchMonitor.TouchSessionImpl touchSessionImpl = (TouchMonitor.TouchSessionImpl) touchSession;
-        touchSessionImpl.mCallbacks.add(new TouchHandler.TouchSession.Callback() { // from class: com.android.systemui.ambient.touch.ShadeTouchHandler$onSessionStart$1
+        touchSessionImpl.mCallbacks.add(new TouchHandler.TouchSession.Callback() { // from class: com.android.systemui.ambient.touch.ShadeTouchHandler.onSessionStart.1
             @Override // com.android.systemui.ambient.touch.TouchHandler.TouchSession.Callback
             public final void onRemoved() {
                 ShadeTouchHandler.this.capture = null;
             }
         });
-        touchSessionImpl.mEventListeners.add(new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.ambient.touch.ShadeTouchHandler$onSessionStart$2
+        touchSessionImpl.mEventListeners.add(new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.ambient.touch.ShadeTouchHandler.onSessionStart.2
             @Override // com.android.systemui.shared.system.InputChannelCompat$InputEventListener
             public final void onInputEvent(InputEvent inputEvent) {
                 if (inputEvent instanceof MotionEvent) {
@@ -182,7 +180,7 @@ public final class ShadeTouchHandler implements TouchHandler {
                 }
             }
         });
-        touchSessionImpl.mGestureListeners.add(new GestureDetector.SimpleOnGestureListener() { // from class: com.android.systemui.ambient.touch.ShadeTouchHandler$onSessionStart$3
+        touchSessionImpl.mGestureListeners.add(new GestureDetector.SimpleOnGestureListener() { // from class: com.android.systemui.ambient.touch.ShadeTouchHandler.onSessionStart.3
             @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
             public final boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
                 return Intrinsics.areEqual(ShadeTouchHandler.this.capture, Boolean.TRUE);

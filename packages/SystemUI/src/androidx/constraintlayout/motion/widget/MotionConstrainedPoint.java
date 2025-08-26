@@ -10,7 +10,6 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MotionConstrainedPoint implements Comparable {
     public int mVisibility;
@@ -35,9 +34,9 @@ public class MotionConstrainedPoint implements Comparable {
         return (Float.isNaN(f) || Float.isNaN(f2)) ? Float.isNaN(f) != Float.isNaN(f2) : Math.abs(f - f2) > 1.0E-6f;
     }
 
-    public final void addValues(int i, HashMap hashMap) {
-        for (String str : hashMap.keySet()) {
-            ViewSpline viewSpline = (ViewSpline) hashMap.get(str);
+    public final void addValues(int i, HashMap map) {
+        for (String str : map.keySet()) {
+            ViewSpline viewSpline = (ViewSpline) map.get(str);
             if (viewSpline != null) {
                 str.getClass();
                 switch (str) {

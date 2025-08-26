@@ -13,7 +13,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class MediaSessionManagerExtKt$defaultRemoteSessionChanged$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ MediaSessionManager $this_defaultRemoteSessionChanged;
@@ -47,7 +46,7 @@ final class MediaSessionManagerExtKt$defaultRemoteSessionChanged$1 extends Suspe
             final ProducerScope producerScope = (ProducerScope) this.L$0;
             MediaSessionManager.RemoteSessionCallback remoteSessionCallback = new MediaSessionManager.RemoteSessionCallback() { // from class: com.android.settingslib.media.session.MediaSessionManagerExtKt$defaultRemoteSessionChanged$1$callback$1
                 public final void onDefaultRemoteSessionChanged(MediaSession.Token token) {
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     BuildersKt.launch$default(producerScope2, null, null, new MediaSessionManagerExtKt$defaultRemoteSessionChanged$1$callback$1$onDefaultRemoteSessionChanged$1(producerScope2, token, null), 3);
                 }
 

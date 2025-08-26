@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EmergencyPhoneWidget extends LinearLayout implements View.OnClickListener, View.OnTouchListener {
     public static final int BG_COLOR = -16777216;
@@ -79,7 +78,7 @@ public class EmergencyPhoneWidget extends LinearLayout implements View.OnClickLi
         }
         Button button = new Button(this.mContext);
         this.mBtn = button;
-        button.setText(LSOUtils.getResourceString(this.mContext, R.string.zen_mode_trigger_summary_range_symbol_combination));
+        button.setText(LSOUtils.getResourceString(this.mContext, R.string.zen_mode_until_next_day));
         this.mBtn.setBackgroundDrawable(null);
         this.mBtn.setTextColor(-1);
         this.mContainer.addView(this.mBtn, new LinearLayout.LayoutParams(-2, -2));

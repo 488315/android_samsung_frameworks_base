@@ -21,7 +21,6 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginHomeWallpaper {
     private static final String PREFIX_FIRST_FILE = "wallpaper_0";
@@ -31,7 +30,6 @@ public class PluginHomeWallpaper {
     private final Map<Integer, WallpaperData> mWallpaperDataList;
     private PluginWallpaperCallback mWallpaperUpdateCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class WallpaperData {
         private SemWallpaperColors mHints;
         private String mIntelligentCrops;
@@ -123,51 +121,50 @@ public class PluginHomeWallpaper {
             this.mRect = null;
         }
 
-        private Rect getRect(String str) {
-            FileInputStream fileInputStream;
-            String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str.replaceFirst("[.^][^.]+$", ""), "_rect.txt");
-            Rect rect = null;
+        private Rect getRect(String str) throws IOException {
+            String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str.replaceFirst("[.^][^.]+$", ""), "_rect.txt");
+            Rect rectUnflattenFromString = null;
             try {
-                fileInputStream = new FileInputStream(m);
+                FileInputStream fileInputStream = new FileInputStream(strM);
+                try {
+                    InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+                    try {
+                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                        try {
+                            rectUnflattenFromString = Rect.unflattenFromString(bufferedReader.readLine());
+                            bufferedReader.close();
+                            inputStreamReader.close();
+                            fileInputStream.close();
+                        } finally {
+                        }
+                    } finally {
+                    }
+                } catch (Throwable th) {
+                    try {
+                        fileInputStream.close();
+                    } catch (Throwable th2) {
+                        th.addSuppressed(th2);
+                    }
+                    throw th;
+                }
             } catch (FileNotFoundException unused) {
-                Log.w(PluginHomeWallpaper.TAG, "getRect, " + m + " is not available");
+                Log.w(PluginHomeWallpaper.TAG, "getRect, " + strM + " is not available");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            try {
-                InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    try {
-                        rect = Rect.unflattenFromString(bufferedReader.readLine());
-                        bufferedReader.close();
-                        inputStreamReader.close();
-                        fileInputStream.close();
-                        Log.d(PluginHomeWallpaper.TAG, "getRect, rectPath: " + m + ", rect: " + rect);
-                        return rect;
-                    } finally {
-                    }
-                } finally {
-                }
-            } catch (Throwable th) {
-                try {
-                    fileInputStream.close();
-                } catch (Throwable th2) {
-                    th.addSuppressed(th2);
-                }
-                throw th;
-            }
+            Log.d(PluginHomeWallpaper.TAG, "getRect, rectPath: " + strM + ", rect: " + rectUnflattenFromString);
+            return rectUnflattenFromString;
         }
     }
 
     public PluginHomeWallpaper(Context context) {
-        HashMap hashMap = new HashMap();
-        this.mWallpaperDataList = hashMap;
+        HashMap map = new HashMap();
+        this.mWallpaperDataList = map;
         this.mContext = context;
         int i = 0;
-        hashMap.put(0, new WallpaperData(i));
+        map.put(0, new WallpaperData(i));
         if (LsRune.WALLPAPER_SUB_WATCHFACE || LsRune.WALLPAPER_VIRTUAL_DISPLAY) {
-            hashMap.put(1, new WallpaperData(i));
+            map.put(1, new WallpaperData(i));
         }
     }
 
@@ -291,13 +288,13 @@ public class PluginHomeWallpaper {
     }
 
     public void setWallpaper(int i, int i2, int i3, String str, String str2) {
-        boolean contains;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i2, i3, "setWallpaper() wallpaperType:", ", sourceType:", ", source:");
-        m.append(str);
-        m.append(", screen:");
-        m.append(i);
-        m.append(", iCrops = ");
-        ExifInterface$$ExternalSyntheticOutline0.m(m, str2, TAG);
+        boolean zContains;
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i2, i3, "setWallpaper() wallpaperType:", ", sourceType:", ", source:");
+        sbM.append(str);
+        sbM.append(", screen:");
+        sbM.append(i);
+        sbM.append(", iCrops = ");
+        ExifInterface$$ExternalSyntheticOutline0.m(sbM, str2, TAG);
         WallpaperData wallpaperData = this.mWallpaperDataList.get(Integer.valueOf(getKey(i)));
         boolean z = false;
         z = false;
@@ -305,23 +302,23 @@ public class PluginHomeWallpaper {
             wallpaperData = new WallpaperData(z ? 1 : 0);
             this.mWallpaperDataList.put(Integer.valueOf(getKey(i)), wallpaperData);
         }
-        boolean hasData = wallpaperData.hasData();
+        boolean zHasData = wallpaperData.hasData();
         wallpaperData.setType(i2);
         wallpaperData.setIntelligentCrops(str2);
         if (i3 == 0) {
             wallpaperData.setPath(str);
-            contains = str.contains(PREFIX_FIRST_FILE);
+            zContains = str.contains(PREFIX_FIRST_FILE);
         } else if (i3 != 2) {
             Log.w(TAG, "setWallpaper() unsupported type!");
             return;
         } else {
             wallpaperData.setUri(Uri.parse(str));
-            contains = false;
+            zContains = false;
         }
         Log.d(TAG, "setWallpaper() mWallpaperUpdateCallback:" + this.mWallpaperUpdateCallback);
         PluginWallpaperCallback pluginWallpaperCallback = this.mWallpaperUpdateCallback;
         if (pluginWallpaperCallback != null) {
-            if (!hasData && contains) {
+            if (!zHasData && zContains) {
                 z = true;
             }
             pluginWallpaperCallback.onWallpaperUpdate(z);

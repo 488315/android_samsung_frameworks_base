@@ -123,9 +123,9 @@ public interface ISehRadioMessaging extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISehRadioMessaging)) {
-                return (ISehRadioMessaging) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISehRadioMessaging)) {
+                return (ISehRadioMessaging) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -152,62 +152,62 @@ public interface ISehRadioMessaging extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getCellBroadcastConfig(readInt);
+                    getCellBroadcastConfig(i3);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getImsRegistrationState(readInt2);
+                    getImsRegistrationState(i4);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getStoredMsgCountFromSim(readInt3);
+                    getStoredMsgCountFromSim(i5);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    readSmsFromSim(readInt4, readInt5);
+                    readSmsFromSim(i6, i7);
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     SehCdmaSmsMessage sehCdmaSmsMessage = (SehCdmaSmsMessage) parcel.readTypedObject(SehCdmaSmsMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendCdmaSms(readInt6, sehCdmaSmsMessage);
+                    sendCdmaSms(i8, sehCdmaSmsMessage);
                     return true;
                 case 6:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     SehCdmaSmsMessage sehCdmaSmsMessage2 = (SehCdmaSmsMessage) parcel.readTypedObject(SehCdmaSmsMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendCdmaSmsExpectMore(readInt7, sehCdmaSmsMessage2);
+                    sendCdmaSmsExpectMore(i9, sehCdmaSmsMessage2);
                     return true;
                 case 7:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     SehGsmSmsMessage sehGsmSmsMessage = (SehGsmSmsMessage) parcel.readTypedObject(SehGsmSmsMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendSMSExpectMore(readInt8, sehGsmSmsMessage);
+                    sendSMSExpectMore(i10, sehGsmSmsMessage);
                     return true;
                 case 8:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     SehGsmSmsMessage sehGsmSmsMessage2 = (SehGsmSmsMessage) parcel.readTypedObject(SehGsmSmsMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendSms(readInt9, sehGsmSmsMessage2);
+                    sendSms(i11, sehGsmSmsMessage2);
                     return true;
                 case 9:
-                    ISehRadioMessagingResponse asInterface = ISehRadioMessagingResponse.Stub.asInterface(parcel.readStrongBinder());
-                    ISehRadioMessagingIndication asInterface2 = ISehRadioMessagingIndication.Stub.asInterface(parcel.readStrongBinder());
+                    ISehRadioMessagingResponse iSehRadioMessagingResponseAsInterface = ISehRadioMessagingResponse.Stub.asInterface(parcel.readStrongBinder());
+                    ISehRadioMessagingIndication iSehRadioMessagingIndicationAsInterface = ISehRadioMessagingIndication.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setResponseFunctions(asInterface, asInterface2);
+                    setResponseFunctions(iSehRadioMessagingResponseAsInterface, iSehRadioMessagingIndicationAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     SehSimMsgArgs sehSimMsgArgs = (SehSimMsgArgs) parcel.readTypedObject(SehSimMsgArgs.CREATOR);
                     parcel.enforceNoDataAvail();
-                    writeSmsToSim(readInt10, sehSimMsgArgs);
+                    writeSmsToSim(i12, sehSimMsgArgs);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -234,176 +234,176 @@ public interface ISehRadioMessaging extends IInterface {
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public void getCellBroadcastConfig(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(1, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(1, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCellBroadcastConfig is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public void getImsRegistrationState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(2, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(2, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getImsRegistrationState is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public void getStoredMsgCountFromSim(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(3, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(3, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getStoredMsgCountFromSim is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public void readSmsFromSim(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(4, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(4, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method readSmsFromSim is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public void sendCdmaSms(int i, SehCdmaSmsMessage sehCdmaSmsMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(sehCdmaSmsMessage, 0);
-                    if (this.mRemote.transact(5, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(sehCdmaSmsMessage, 0);
+                    if (this.mRemote.transact(5, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendCdmaSms is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public void sendCdmaSmsExpectMore(int i, SehCdmaSmsMessage sehCdmaSmsMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(sehCdmaSmsMessage, 0);
-                    if (this.mRemote.transact(6, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(sehCdmaSmsMessage, 0);
+                    if (this.mRemote.transact(6, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendCdmaSmsExpectMore is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public void sendSMSExpectMore(int i, SehGsmSmsMessage sehGsmSmsMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(sehGsmSmsMessage, 0);
-                    if (this.mRemote.transact(7, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(sehGsmSmsMessage, 0);
+                    if (this.mRemote.transact(7, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendSMSExpectMore is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public void sendSms(int i, SehGsmSmsMessage sehGsmSmsMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(sehGsmSmsMessage, 0);
-                    if (this.mRemote.transact(8, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(sehGsmSmsMessage, 0);
+                    if (this.mRemote.transact(8, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendSms is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public void setResponseFunctions(ISehRadioMessagingResponse iSehRadioMessagingResponse, ISehRadioMessagingIndication iSehRadioMessagingIndication) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iSehRadioMessagingResponse);
-                    obtain.writeStrongInterface(iSehRadioMessagingIndication);
-                    if (!this.mRemote.transact(9, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSehRadioMessagingResponse);
+                    parcelObtain.writeStrongInterface(iSehRadioMessagingIndication);
+                    if (!this.mRemote.transact(9, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setResponseFunctions is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public void writeSmsToSim(int i, SehSimMsgArgs sehSimMsgArgs) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(sehSimMsgArgs, 0);
-                    if (this.mRemote.transact(10, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(sehSimMsgArgs, 0);
+                    if (this.mRemote.transact(10, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method writeSmsToSim is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -412,18 +412,18 @@ public interface ISehRadioMessaging extends IInterface {
             @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessaging
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

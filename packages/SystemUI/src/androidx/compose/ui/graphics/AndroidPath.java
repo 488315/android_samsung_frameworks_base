@@ -5,7 +5,6 @@ import android.graphics.RectF;
 import androidx.compose.ui.geometry.Rect;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidPath implements Path {
     public final android.graphics.Path internalPath;
@@ -13,6 +12,7 @@ public final class AndroidPath implements Path {
     public float[] radii;
     public RectF rectF;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public AndroidPath() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -28,7 +28,7 @@ public final class AndroidPath implements Path {
     }
 
     /* renamed from: op-N5in7k0, reason: not valid java name */
-    public final boolean m443opN5in7k0(Path path, Path path2, int i) {
+    public final boolean m445opN5in7k0(Path path, Path path2, int i) {
         PathOperation.Companion.getClass();
         Path.Op op = i == 0 ? Path.Op.DIFFERENCE : i == PathOperation.Intersect ? Path.Op.INTERSECT : i == PathOperation.ReverseDifference ? Path.Op.REVERSE_DIFFERENCE : i == PathOperation.Union ? Path.Op.UNION : Path.Op.XOR;
         android.graphics.Path path3 = this.internalPath;
@@ -47,20 +47,20 @@ public final class AndroidPath implements Path {
     }
 
     /* renamed from: setFillType-oQ8Xj4U, reason: not valid java name */
-    public final void m444setFillTypeoQ8Xj4U(int i) {
+    public final void m446setFillTypeoQ8Xj4U(int i) {
         android.graphics.Path path = this.internalPath;
         PathFillType.Companion.getClass();
         path.setFillType(i == PathFillType.EvenOdd ? Path.FillType.EVEN_ODD : Path.FillType.WINDING);
     }
 
     /* renamed from: transform-58bKbWc, reason: not valid java name */
-    public final void m445transform58bKbWc(float[] fArr) {
+    public final void m447transform58bKbWc(float[] fArr) {
         if (this.mMatrix == null) {
             this.mMatrix = new android.graphics.Matrix();
         }
         android.graphics.Matrix matrix = this.mMatrix;
         matrix.getClass();
-        AndroidMatrixConversions_androidKt.m432setFromEL8BTi8(matrix, fArr);
+        AndroidMatrixConversions_androidKt.m434setFromEL8BTi8(matrix, fArr);
         android.graphics.Path path = this.internalPath;
         android.graphics.Matrix matrix2 = this.mMatrix;
         matrix2.getClass();
@@ -68,7 +68,7 @@ public final class AndroidPath implements Path {
     }
 
     /* renamed from: translate-k-4lQ0M, reason: not valid java name */
-    public final void m446translatek4lQ0M(long j) {
+    public final void m448translatek4lQ0M(long j) {
         android.graphics.Matrix matrix = this.mMatrix;
         if (matrix == null) {
             this.mMatrix = new android.graphics.Matrix();

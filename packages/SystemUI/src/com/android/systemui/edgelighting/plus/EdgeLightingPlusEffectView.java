@@ -24,7 +24,6 @@ import com.samsung.android.nexus.particle.emitter.texture.BitmapParticleTexture;
 import com.samsung.android.nexus.particle.emitter.view.ParticleEmitterView;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingPlusEffectView extends ParticleEmitterView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -50,8 +49,8 @@ public class EdgeLightingPlusEffectView extends ParticleEmitterView {
 
     @Override // com.samsung.android.nexus.particle.emitter.view.ParticleEmitterView, android.view.ViewGroup, android.view.View
     public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
-        Drawable drawable;
-        Bitmap bitmap;
+        Drawable drawableSemGetApplicationIconForIconTray;
+        Bitmap bitmapCreateBitmap;
         super.onLayout(z, i, i2, i3, i4);
         if (this.isLoaded) {
             return;
@@ -61,20 +60,20 @@ public class EdgeLightingPlusEffectView extends ParticleEmitterView {
         if (notificationELPlusEffect.mIsUsedAppIconForEdgeLightingPlus) {
             EdgeLightingPlusEffectView edgeLightingPlusEffectView = notificationELPlusEffect.mParticleView;
             try {
-                drawable = notificationELPlusEffect.getContext().getPackageManager().semGetApplicationIconForIconTray(notificationELPlusEffect.mEdgeEffectInfo.mPackageName, 1);
+                drawableSemGetApplicationIconForIconTray = notificationELPlusEffect.getContext().getPackageManager().semGetApplicationIconForIconTray(notificationELPlusEffect.mEdgeEffectInfo.mPackageName, 1);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
-                drawable = null;
+                drawableSemGetApplicationIconForIconTray = null;
             }
-            if (drawable != null) {
-                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-                drawable.draw(canvas);
+            if (drawableSemGetApplicationIconForIconTray != null) {
+                bitmapCreateBitmap = Bitmap.createBitmap(drawableSemGetApplicationIconForIconTray.getIntrinsicWidth(), drawableSemGetApplicationIconForIconTray.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmapCreateBitmap);
+                drawableSemGetApplicationIconForIconTray.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                drawableSemGetApplicationIconForIconTray.draw(canvas);
             } else {
-                bitmap = null;
+                bitmapCreateBitmap = null;
             }
-            edgeLightingPlusEffectView.mAppIcon = bitmap;
+            edgeLightingPlusEffectView.mAppIcon = bitmapCreateBitmap;
         }
         EdgeLightingPlusEffectView edgeLightingPlusEffectView2 = notificationELPlusEffect.mParticleView;
         Bundle bundle = notificationELPlusEffect.mEmitterItemInfo;
@@ -108,14 +107,14 @@ public class EdgeLightingPlusEffectView extends ParticleEmitterView {
             longRangeable.onRangeUpdated();
             emissionRule.intervalFraction = null;
             ParticleRule particleRule = edgeLightingPlusEffectView2.emitter.mParticleRule;
-            Bitmap bitmap2 = edgeLightingPlusEffectView2.mAppIcon;
-            particleRule.particleTexture = bitmap2 != null ? new BitmapParticleTexture(edgeLightingPlusEffectView2.mContext, new BitmapCache.DrawBitmapLoader(new EdgeLightingPlusEffectView$$ExternalSyntheticLambda0(bitmap2))) : new BitmapParticleTexture(edgeLightingPlusEffectView2.mContext, new BitmapCache.DrawBitmapLoader(new EdgeLightingPlusEffectView$$ExternalSyntheticLambda0(plusEffectInfo.bitmap)));
+            Bitmap bitmap = edgeLightingPlusEffectView2.mAppIcon;
+            particleRule.particleTexture = bitmap != null ? new BitmapParticleTexture(edgeLightingPlusEffectView2.mContext, new BitmapCache.DrawBitmapLoader(new EdgeLightingPlusEffectView$$ExternalSyntheticLambda0(bitmap))) : new BitmapParticleTexture(edgeLightingPlusEffectView2.mContext, new BitmapCache.DrawBitmapLoader(new EdgeLightingPlusEffectView$$ExternalSyntheticLambda0(plusEffectInfo.bitmap)));
             int i7 = (edgeLightingPlusEffectView2.isUsedAppIcon || edgeLightingPlusEffectView2.isUsedAI || !edgeLightingPlusEffectView2.isUsedEffectColor) ? 0 : plusEffectInfo.color;
             particleRule.colorMode = 10;
             FactorType factorType = FactorType.COLOR_ALPHA;
-            float alpha = Color.alpha(i7);
+            float fAlpha = Color.alpha(i7);
             FactorRangeableList factorRangeableList = particleRule.factorRangeableList;
-            factorRangeableList.setValue(factorType, alpha);
+            factorRangeableList.setValue(factorType, fAlpha);
             FactorType factorType2 = FactorType.COLOR_RED;
             factorRangeableList.setValue(factorType2, Color.red(i7));
             FactorType factorType3 = FactorType.COLOR_GREEN;
@@ -186,13 +185,13 @@ public class EdgeLightingPlusEffectView extends ParticleEmitterView {
             PlusEffectInfo.Pos pos4 = speedRange.maxPos;
             particleRule3.setSpeedRange(factorType10, f4, pos4.value);
             float f5 = pos3.x;
-            float abs = Math.abs(f5) * f5;
+            float fAbs = Math.abs(f5) * f5;
             float f6 = pos4.x;
-            particleRule3.setSpeedRange(factorType11, abs, f6 * Math.abs(f6));
+            particleRule3.setSpeedRange(factorType11, fAbs, f6 * Math.abs(f6));
             float f7 = pos3.y;
-            float abs2 = Math.abs(f7) * f7;
+            float fAbs2 = Math.abs(f7) * f7;
             float f8 = pos4.y;
-            particleRule3.setSpeedRange(factorType12, abs2, Math.abs(f8) * f8);
+            particleRule3.setSpeedRange(factorType12, fAbs2, Math.abs(f8) * f8);
             PlusEffectInfo.Scale scale3 = speedRange.minScale;
             float f9 = scale3.value;
             PlusEffectInfo.Scale scale4 = speedRange.maxScale;

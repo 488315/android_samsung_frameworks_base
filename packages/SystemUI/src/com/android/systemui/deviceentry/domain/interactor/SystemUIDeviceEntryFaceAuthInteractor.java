@@ -35,7 +35,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SystemUIDeviceEntryFaceAuthInteractor implements DeviceEntryFaceAuthInteractor {
     public final ChannelLimitedFlowMerge authenticationStatus;
@@ -49,7 +48,6 @@ public final class SystemUIDeviceEntryFaceAuthInteractor implements DeviceEntryF
     public final Lazy primaryBouncerInteractor;
     public final DeviceEntryFaceAuthRepository repository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -71,12 +69,12 @@ public final class SystemUIDeviceEntryFaceAuthInteractor implements DeviceEntryF
         LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.deviceentry.domain.interactor.SystemUIDeviceEntryFaceAuthInteractor$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return ((PrimaryBouncerInteractor) SystemUIDeviceEntryFaceAuthInteractor.this.primaryBouncerInteractor.get()).isShowing;
+                return ((PrimaryBouncerInteractor) this.f$0.primaryBouncerInteractor.get()).isShowing;
             }
         });
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
-        this.faceAuthenticationStatusOverride = MutableStateFlow;
-        this.authenticationStatus = FlowKt.merge(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(MutableStateFlow), new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(deviceEntryFaceAuthStatusInteractor.authenticationStatus));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(null);
+        this.faceAuthenticationStatusOverride = stateFlowImplMutableStateFlow;
+        this.authenticationStatus = FlowKt.merge(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateFlowImplMutableStateFlow), new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(deviceEntryFaceAuthStatusInteractor.authenticationStatus));
         DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl = (DeviceEntryFaceAuthRepositoryImpl) deviceEntryFaceAuthRepository;
         new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(deviceEntryFaceAuthRepositoryImpl._detectionStatus);
         this.isLockedOut = deviceEntryFaceAuthRepositoryImpl.isLockedOut;

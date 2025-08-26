@@ -26,10 +26,10 @@ public final class TimeZoneFinder {
     }
 
     public CountryTimeZones lookupCountryTimeZones(String str) {
-        com.android.i18n.timezone.CountryTimeZones lookupCountryTimeZones = this.mDelegate.lookupCountryTimeZones(str);
-        if (lookupCountryTimeZones == null) {
+        com.android.i18n.timezone.CountryTimeZones countryTimeZonesLookupCountryTimeZones = this.mDelegate.lookupCountryTimeZones(str);
+        if (countryTimeZonesLookupCountryTimeZones == null) {
             return null;
         }
-        return new CountryTimeZones(lookupCountryTimeZones);
+        return new CountryTimeZones(countryTimeZonesLookupCountryTimeZones);
     }
 }

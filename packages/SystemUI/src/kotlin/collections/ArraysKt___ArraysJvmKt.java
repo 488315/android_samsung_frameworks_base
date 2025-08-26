@@ -2,7 +2,6 @@ package kotlin.collections;
 
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ArraysKt___ArraysJvmKt extends ArraysKt__ArraysKt {
     public static void copyInto(Object[] objArr, Object[] objArr2, int i, int i2, int i3) {
@@ -22,10 +21,10 @@ public class ArraysKt___ArraysJvmKt extends ArraysKt__ArraysKt {
     public static int[] plus(int[] iArr, int[] iArr2) {
         int length = iArr.length;
         int length2 = iArr2.length;
-        int[] copyOf = Arrays.copyOf(iArr, length + length2);
-        System.arraycopy(iArr2, 0, copyOf, length, length2);
-        copyOf.getClass();
-        return copyOf;
+        int[] iArrCopyOf = Arrays.copyOf(iArr, length + length2);
+        System.arraycopy(iArr2, 0, iArrCopyOf, length, length2);
+        iArrCopyOf.getClass();
+        return iArrCopyOf;
     }
 
     public static Integer[] toTypedArray(int[] iArr) {

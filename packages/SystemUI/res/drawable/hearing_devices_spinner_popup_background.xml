@@ -3,5 +3,5 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <corners android:radius="@dimen/hearing_devices_preset_spinner_background_radius" />
-    <solid android:color="@android:color/seekbar_track_progress_material" />
+    <solid android:color="@android:color/notification_secondary_text_color_dark" />
 </shape>

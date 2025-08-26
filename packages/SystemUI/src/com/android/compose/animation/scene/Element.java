@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Element {
     public static final float AlphaUnspecified;
@@ -23,7 +22,6 @@ public final class Element {
     public final SnapshotStateMap stateByContent = new SnapshotStateMap();
     public boolean wasDrawnInAnyContent;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,7 +31,6 @@ public final class Element {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class State {
         public float alphaBeforeInterruption;
         public float alphaInterruptionDelta;
@@ -57,11 +54,11 @@ public final class Element {
             this.contents = list;
             Element.Companion.getClass();
             long j = Element.SizeUnspecified;
-            this.targetSize$delegate = SnapshotStateKt.mutableStateOf$default(IntSize.m859boximpl(j));
+            this.targetSize$delegate = SnapshotStateKt.mutableStateOf$default(IntSize.m861boximpl(j));
             Offset.Companion.getClass();
             long j2 = Offset.Unspecified;
-            this.targetOffset$delegate = SnapshotStateKt.mutableStateOf$default(Offset.m393boximpl(j2));
-            this.approachSize$delegate = SnapshotStateKt.mutableStateOf$default(IntSize.m859boximpl(j));
+            this.targetOffset$delegate = SnapshotStateKt.mutableStateOf$default(Offset.m395boximpl(j2));
+            this.approachSize$delegate = SnapshotStateKt.mutableStateOf$default(IntSize.m861boximpl(j));
             this.lastOffset = j2;
             this.lastSize = j;
             Scale.Companion.getClass();
@@ -81,12 +78,12 @@ public final class Element {
         }
 
         /* renamed from: getTargetOffset-F1C5BW0, reason: not valid java name */
-        public final long m920getTargetOffsetF1C5BW0() {
+        public final long m922getTargetOffsetF1C5BW0() {
             return ((Offset) ((SnapshotMutableStateImpl) this.targetOffset$delegate).getValue()).packedValue;
         }
 
         /* renamed from: getTargetSize-YbymL2g, reason: not valid java name */
-        public final long m921getTargetSizeYbymL2g() {
+        public final long m923getTargetSizeYbymL2g() {
             return ((IntSize) ((SnapshotMutableStateImpl) this.targetSize$delegate).getValue()).packedValue;
         }
     }

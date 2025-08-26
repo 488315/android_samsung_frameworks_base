@@ -3,7 +3,6 @@ package com.android.keyguard;
 import com.android.keyguard.CarrierTextManager;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class CarrierTextManager$$ExternalSyntheticLambda7 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -36,7 +35,7 @@ public final /* synthetic */ class CarrierTextManager$$ExternalSyntheticLambda7 
                 carrierTextManager4.mWakefulnessLifecycle.removeObserver(carrierTextManager4.mWakefulnessObserver);
                 break;
             default:
-                HashMap hashMap = CarrierTextManager.shortCarrierNameMap;
+                HashMap map = CarrierTextManager.shortCarrierNameMap;
                 ((CarrierTextManager.CarrierTextCallback) obj).updateCarrierInfo(new CarrierTextManager.CarrierTextCallbackInfo(null, "", "", null, false, false, null, false));
                 break;
         }

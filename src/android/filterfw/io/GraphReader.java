@@ -15,15 +15,15 @@ public abstract class GraphReader {
 
     public abstract KeyValueMap readKeyValueAssignments(String str) throws GraphIOException;
 
-    public FilterGraph readGraphResource(Context context, int i) throws GraphIOException {
+    public FilterGraph readGraphResource(Context context, int i) throws IOException, GraphIOException {
         InputStreamReader inputStreamReader = new InputStreamReader(context.getResources().openRawResource(i));
         StringWriter stringWriter = new StringWriter();
         char[] cArr = new char[1024];
         while (true) {
             try {
-                int read = inputStreamReader.read(cArr, 0, 1024);
-                if (read > 0) {
-                    stringWriter.write(cArr, 0, read);
+                int i2 = inputStreamReader.read(cArr, 0, 1024);
+                if (i2 > 0) {
+                    stringWriter.write(cArr, 0, i2);
                 } else {
                     return readGraphString(stringWriter.toString());
                 }

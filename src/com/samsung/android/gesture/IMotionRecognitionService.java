@@ -149,9 +149,9 @@ public interface IMotionRecognitionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMotionRecognitionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMotionRecognitionService)) {
-                return (IMotionRecognitionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMotionRecognitionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMotionRecognitionService)) {
+                return (IMotionRecognitionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -209,11 +209,11 @@ public interface IMotionRecognitionService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerCallback(readStrongBinder, readInt, readInt2);
+                    registerCallback(strongBinder, i3, i4);
                     parcel2.writeNoException();
                     return true;
                 case 2:
@@ -227,59 +227,59 @@ public interface IMotionRecognitionService extends IInterface {
                     parcel2.writeBoolean(pickUpMotionStatus);
                     return true;
                 case 4:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    unregisterCallback(readStrongBinder2);
+                    unregisterCallback(strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    boolean readBoolean = parcel.readBoolean();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    useMotionAlways(readStrongBinder3, readBoolean);
+                    useMotionAlways(strongBinder3, z);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    int readInt3 = parcel.readInt();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setMotionAngle(readStrongBinder4, readInt3);
+                    setMotionAngle(strongBinder4, i5);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setMotionTiltLevel(readInt4, readInt5, readInt6, readInt7, readInt8, readInt9);
+                    setMotionTiltLevel(i6, i7, i8, i9, i10, i11);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    int resetMotionEngine = resetMotionEngine();
+                    int iResetMotionEngine = resetMotionEngine();
                     parcel2.writeNoException();
-                    parcel2.writeInt(resetMotionEngine);
+                    parcel2.writeInt(iResetMotionEngine);
                     return true;
                 case 9:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAvailable = isAvailable(readInt10);
+                    boolean zIsAvailable = isAvailable(i12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAvailable);
+                    parcel2.writeBoolean(zIsAvailable);
                     return true;
                 case 10:
-                    float[] createFloatArray = parcel.createFloatArray();
+                    float[] fArrCreateFloatArray = parcel.createFloatArray();
                     parcel.enforceNoDataAvail();
-                    float[] evToLux = getEvToLux(createFloatArray);
+                    float[] evToLux = getEvToLux(fArrCreateFloatArray);
                     parcel2.writeNoException();
                     parcel2.writeFloatArray(evToLux);
                     return true;
                 case 11:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String evLuxTableInfo = getEvLuxTableInfo(readString);
+                    String evLuxTableInfo = getEvLuxTableInfo(string);
                     parcel2.writeNoException();
                     parcel2.writeString(evLuxTableInfo);
                     return true;
@@ -297,12 +297,12 @@ public interface IMotionRecognitionService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    long readLong = parcel.readLong();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    long j = parcel.readLong();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    enableSARDevice(readBoolean2, readLong, readInt11, readInt12);
+                    enableSARDevice(z2, j, i13, i14);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -328,239 +328,239 @@ public interface IMotionRecognitionService extends IInterface {
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public void registerCallback(IBinder iBinder, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public boolean getSSPstatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public boolean getPickUpMotionStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public void unregisterCallback(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public void useMotionAlways(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public void setMotionAngle(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public void setMotionTiltLevel(int i, int i2, int i3, int i4, int i5, int i6) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeInt(i6);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeInt(i6);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public int resetMotionEngine() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public boolean isAvailable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public float[] getEvToLux(float[] fArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    obtain.writeFloatArray(fArr);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createFloatArray();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeFloatArray(fArr);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createFloatArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public String getEvLuxTableInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public boolean setTestSensor() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public void startAdaptiveBrightness() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public void stopAdaptiveBrightness() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
             public void enableSARDevice(boolean z, long j, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMotionRecognitionService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

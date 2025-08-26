@@ -56,15 +56,15 @@ public class MbmsStreamingSession implements AutoCloseable {
             throw new IllegalStateException("Cannot create two instances of MbmsStreamingSession");
         }
         MbmsStreamingSession mbmsStreamingSession = new MbmsStreamingSession(context, executor, i, mbmsStreamingSessionCallback);
-        final int bindAndInitialize = mbmsStreamingSession.bindAndInitialize();
-        if (bindAndInitialize == 0) {
+        final int iBindAndInitialize = mbmsStreamingSession.bindAndInitialize();
+        if (iBindAndInitialize == 0) {
             return mbmsStreamingSession;
         }
         sIsInitialized.set(false);
         executor.execute(new Runnable() { // from class: android.telephony.MbmsStreamingSession.2
             @Override // java.lang.Runnable
             public void run() {
-                MbmsStreamingSessionCallback.this.onError(bindAndInitialize, null);
+                mbmsStreamingSessionCallback.onError(iBindAndInitialize, null);
             }
         });
         return null;
@@ -102,13 +102,13 @@ public class MbmsStreamingSession implements AutoCloseable {
             throw new IllegalStateException("Middleware not yet bound");
         }
         try {
-            int requestUpdateStreamingServices = iMbmsStreamingService.requestUpdateStreamingServices(this.mSubscriptionId, list);
-            if (requestUpdateStreamingServices == -1) {
+            int iRequestUpdateStreamingServices = iMbmsStreamingService.requestUpdateStreamingServices(this.mSubscriptionId, list);
+            if (iRequestUpdateStreamingServices == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
             }
-            if (requestUpdateStreamingServices != 0) {
-                sendErrorToApp(requestUpdateStreamingServices, null);
+            if (iRequestUpdateStreamingServices != 0) {
+                sendErrorToApp(iRequestUpdateStreamingServices, null);
             }
         } catch (RemoteException unused) {
             Log.w(LOG_TAG, "Remote process died");
@@ -127,15 +127,15 @@ public class MbmsStreamingSession implements AutoCloseable {
         StreamingService streamingService = new StreamingService(this.mSubscriptionId, iMbmsStreamingService, this, streamingServiceInfo, internalStreamingServiceCallback);
         this.mKnownActiveStreamingServices.add(streamingService);
         try {
-            int startStreaming = iMbmsStreamingService.startStreaming(this.mSubscriptionId, streamingServiceInfo.getServiceId(), internalStreamingServiceCallback);
-            if (startStreaming == -1) {
+            int iStartStreaming = iMbmsStreamingService.startStreaming(this.mSubscriptionId, streamingServiceInfo.getServiceId(), internalStreamingServiceCallback);
+            if (iStartStreaming == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
             }
-            if (startStreaming == 0) {
+            if (iStartStreaming == 0) {
                 return streamingService;
             }
-            sendErrorToApp(startStreaming, null);
+            sendErrorToApp(iStartStreaming, null);
             return null;
         } catch (RemoteException unused) {
             Log.w(LOG_TAG, "Remote process died");
@@ -154,21 +154,21 @@ public class MbmsStreamingSession implements AutoCloseable {
         ServiceConnection serviceConnection = new ServiceConnection() { // from class: android.telephony.MbmsStreamingSession.3
             @Override // android.content.ServiceConnection
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                IMbmsStreamingService asInterface = IMbmsStreamingService.Stub.asInterface(iBinder);
+                IMbmsStreamingService iMbmsStreamingServiceAsInterface = IMbmsStreamingService.Stub.asInterface(iBinder);
                 try {
-                    int initialize = asInterface.initialize(MbmsStreamingSession.this.mInternalCallback, MbmsStreamingSession.this.mSubscriptionId);
-                    if (initialize == -1) {
+                    int iInitialize = iMbmsStreamingServiceAsInterface.initialize(MbmsStreamingSession.this.mInternalCallback, MbmsStreamingSession.this.mSubscriptionId);
+                    if (iInitialize == -1) {
                         MbmsStreamingSession.this.close();
                         throw new IllegalStateException("Middleware must not return an unknown error code");
                     }
-                    if (initialize != 0) {
-                        MbmsStreamingSession.this.sendErrorToApp(initialize, "Error returned during initialization");
+                    if (iInitialize != 0) {
+                        MbmsStreamingSession.this.sendErrorToApp(iInitialize, "Error returned during initialization");
                         MbmsStreamingSession.sIsInitialized.set(false);
                         return;
                     }
                     try {
-                        asInterface.asBinder().linkToDeath(MbmsStreamingSession.this.mDeathRecipient, 0);
-                        MbmsStreamingSession.this.mService.set(asInterface);
+                        iMbmsStreamingServiceAsInterface.asBinder().linkToDeath(MbmsStreamingSession.this.mDeathRecipient, 0);
+                        MbmsStreamingSession.this.mService.set(iMbmsStreamingServiceAsInterface);
                     } catch (RemoteException unused) {
                         MbmsStreamingSession.this.sendErrorToApp(3, "Middleware lost during initialization");
                         MbmsStreamingSession.sIsInitialized.set(false);

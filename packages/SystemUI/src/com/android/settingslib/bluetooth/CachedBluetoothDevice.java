@@ -1,5 +1,7 @@
 package com.android.settingslib.bluetooth;
 
+import android.app.StatusBarManager;
+import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
@@ -10,6 +12,7 @@ import android.bluetooth.BluetoothPbap;
 import android.bluetooth.BluetoothUuid;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,20 +22,25 @@ import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.os.ParcelUuid;
 import android.os.Process;
+import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.sec.enterprise.auditlog.AuditLog;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.LruCache;
 import android.util.Pair;
 import android.view.InputDevice;
+import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
 import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
+import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.internal.util.ArrayUtils;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.AdaptiveIcon;
 import com.android.settingslib.widget.AdaptiveOutlineDrawable;
@@ -42,16 +50,23 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.samsung.android.bluetooth.SmepTag;
+import com.samsung.android.emergencymode.SemEmergencyManager;
+import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.knox.custom.CustomDeviceManager;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import com.samsung.android.settingslib.bluetooth.BluetoothRestoredDevice;
 import com.samsung.android.settingslib.bluetooth.GattProfile;
 import com.samsung.android.settingslib.bluetooth.ManufacturerData;
 import com.samsung.android.settingslib.bluetooth.SppProfile;
 import com.samsung.android.settingslib.bluetooth.detector.BluetoothRetryDetector;
 import com.samsung.android.settingslib.bluetooth.scsp.ScspUtils;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -63,15 +78,16 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CachedBluetoothDevice implements Comparable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -126,7 +142,6 @@ public class CachedBluetoothDevice implements Comparable {
     public boolean mUnpairing;
     public boolean mVisible;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.settingslib.bluetooth.CachedBluetoothDevice$3, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass3 {
         public static final /* synthetic */ int[] $SwitchMap$com$samsung$android$bluetooth$SmepTag;
@@ -141,7 +156,6 @@ public class CachedBluetoothDevice implements Comparable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onDeviceAttributesChanged();
     }
@@ -150,7 +164,7 @@ public class CachedBluetoothDevice implements Comparable {
         ParcelUuid.fromString("4de17a00-52cb-11e6-bdf4-0800200c9a66");
     }
 
-    public CachedBluetoothDevice(Context context, LocalBluetoothProfileManager localBluetoothProfileManager, BluetoothDevice bluetoothDevice) {
+    public CachedBluetoothDevice(Context context, LocalBluetoothProfileManager localBluetoothProfileManager, BluetoothDevice bluetoothDevice) throws Throwable {
         InputDevice inputDevice;
         byte[] metadata;
         this.mType = 0;
@@ -193,8 +207,10 @@ public class CachedBluetoothDevice implements Comparable {
                     break;
                 }
             }
+            inputDevice = null;
+        } else {
+            inputDevice = null;
         }
-        inputDevice = null;
         if (inputDevice == null || !inputDevice.supportsSource(16386)) {
             BluetoothDevice bluetoothDevice2 = this.mDevice;
             if (bluetoothDevice2 != null && (metadata = bluetoothDevice2.getMetadata(17)) != null) {
@@ -207,9 +223,9 @@ public class CachedBluetoothDevice implements Comparable {
     public final void addMemberDevice(CachedBluetoothDevice cachedBluetoothDevice) {
         Context context = this.mContext;
         String packageName = (context == null || context.getPackageName() == null) ? "null" : this.mContext.getPackageName();
-        int myPid = Process.myPid();
+        int iMyPid = Process.myPid();
         Log.d("CachedBluetoothDevice", this + " addMemberDevice = " + cachedBluetoothDevice.mDevice.getAnonymizedAddress());
-        BluetoothDump.BtLog("CachedBtDev -- addMemberDevice: main = " + this.mDevice.getAnonymizedAddress() + ", member = " + cachedBluetoothDevice.mDevice.getAnonymizedAddress() + " called by PID : " + myPid + " @ " + packageName);
+        BluetoothDump.BtLog("CachedBtDev -- addMemberDevice: main = " + this.mDevice.getAnonymizedAddress() + ", member = " + cachedBluetoothDevice.mDevice.getAnonymizedAddress() + " called by PID : " + iMyPid + " @ " + packageName);
         if (this.mMemberDevices.contains(cachedBluetoothDevice)) {
             BluetoothDump.BtLog("CachedBtDev -- addMemberDevice: contains already");
         } else {
@@ -273,43 +289,151 @@ public class CachedBluetoothDevice implements Comparable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00ad A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00ae  */
+    /* JADX WARN: Removed duplicated region for block: B:80:0x00ad A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:81:0x00ae  */
     @Override // java.lang.Comparable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int compareTo(java.lang.Object r10) {
-        /*
-            Method dump skipped, instructions count: 195
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDevice.compareTo(java.lang.Object):int");
+    public final int compareTo(Object obj) {
+        int i;
+        CachedBluetoothDevice cachedBluetoothDevice = (CachedBluetoothDevice) obj;
+        int i2 = cachedBluetoothDevice.mCachedMaxConnectionState;
+        int i3 = this.mCachedMaxConnectionState;
+        int i4 = ((!this.mIsRestored || this.mIsSynced) ? 0 : 1) - ((!cachedBluetoothDevice.mIsRestored || cachedBluetoothDevice.mIsSynced) ? 0 : 1);
+        if (i4 != 0) {
+            return i4;
+        }
+        int i5 = (this.mIsSynced ? 1 : 0) - (cachedBluetoothDevice.mIsSynced ? 1 : 0);
+        if (i5 != 0) {
+            return i5;
+        }
+        int i6 = (i2 == 2 ? 1 : 0) - (i3 == 2 ? 1 : 0);
+        if (i6 != 0) {
+            return i6;
+        }
+        int i7 = cachedBluetoothDevice.mBondState == 12 ? 1 : 0;
+        int i8 = this.mBondState;
+        int i9 = i7 - (i8 == 12 ? 1 : 0);
+        if (i9 != 0) {
+            return i9;
+        }
+        if (i8 == 12) {
+            int i10 = ((i2 == 1 || i2 == 3) ? 1 : 0) - ((i3 == 1 || i3 == 3) ? 1 : 0);
+            if (i10 != 0) {
+                return i10;
+            }
+            int i11 = (cachedBluetoothDevice.mIsHearingAidDeviceByUUID ? 1 : 0) - (this.mIsHearingAidDeviceByUUID ? 1 : 0);
+            if (i11 != 0) {
+                return i11;
+            }
+            long connectionTimeStamp = cachedBluetoothDevice.mDevice.getConnectionTimeStamp() - this.mDevice.getConnectionTimeStamp();
+            if (connectionTimeStamp <= 0) {
+                if (connectionTimeStamp < 0) {
+                    return -1;
+                }
+                i = (cachedBluetoothDevice.mJustDiscovered ? 1 : 0) - (this.mJustDiscovered ? 1 : 0);
+                if (i == 0) {
+                    return i;
+                }
+                int i12 = cachedBluetoothDevice.mRssi - this.mRssi;
+                return i12 != 0 ? i12 : getName().compareTo(cachedBluetoothDevice.getName());
+            }
+            return 1;
+        }
+        int i13 = (cachedBluetoothDevice.mIsHearingAidDeviceByUUID ? 1 : 0) - (this.mIsHearingAidDeviceByUUID ? 1 : 0);
+        if (i13 != 0) {
+            return i13;
+        }
+        int i14 = cachedBluetoothDevice.mRssiGroup - this.mRssiGroup;
+        if (i14 != 0) {
+            return i14;
+        }
+        long j = cachedBluetoothDevice.mBondTimeStamp - this.mBondTimeStamp;
+        if (j <= 0) {
+            if (j < 0) {
+                return -1;
+            }
+            int i15 = this.mSequence - cachedBluetoothDevice.mSequence;
+            if (i15 != 0) {
+                return i15;
+            }
+            i = (cachedBluetoothDevice.mJustDiscovered ? 1 : 0) - (this.mJustDiscovered ? 1 : 0);
+            if (i == 0) {
+            }
+        }
+        return 1;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x009e, code lost:
-    
-        if (android.text.TextUtils.isEmpty(null) == false) goto L35;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:5:0x00d6 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x00d7  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00ac  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void connect$1() {
-        /*
-            Method dump skipped, instructions count: 238
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDevice.connect$1():void");
+        boolean z;
+        Intent intent;
+        String packageName = this.mContext.getPackageName();
+        if (isHearableUsingWearableManager()) {
+            try {
+                BluetoothUtils.onStartBudsUniteManager(this.mContext, this);
+            } catch (RuntimeException e) {
+                Log.d("CachedBluetoothDevice", "error getting RuntimeException", e);
+            }
+            z = false;
+        } else {
+            String address = this.mDevice.getAddress();
+            int deviceType = getDeviceType();
+            if (deviceType != 1) {
+                if (deviceType == 2) {
+                    intent = new Intent("com.samsung.android.action.BLUETOOTH_DEVICE");
+                    intent.putExtra("DATA", getManufacturerRawData());
+                    intent.setPackage("com.samsung.android.app.watchmanagerstub");
+                    Log.d("CachedBluetoothDevice", "shouldLaunchGM :: Send Bradcast to WatchManagerStub, type : ".concat(deviceType != 0 ? deviceType != 1 ? deviceType != 2 ? "UNKNOWN" : "GEAR" : "GEAR1" : "GENERIC"));
+                    z = !isHearableUsingWearableManager();
+                }
+                z = false;
+            } else {
+                intent = new Intent("com.samsung.android.sconnect.action.CONNECT_WEARABLE");
+                intent.putExtra("WM_MANAGER", "watchmanager");
+                intent.setPackage("com.samsung.android.app.watchmanagerstub");
+                Log.d("CachedBluetoothDevice", "shouldLaunchGM :: Send Bradcast to WatchManagerStub, type : ".concat(deviceType != 0 ? deviceType != 1 ? deviceType != 2 ? "UNKNOWN" : "GEAR" : "GEAR1" : "GENERIC"));
+                z = true;
+            }
+            if (packageName != null) {
+                intent.putExtra("request_app_package_name", packageName);
+            }
+            intent.putExtra("MAC", address);
+            String str = this.mDeviceName;
+            if (str == null || str.equals(this.mAddress)) {
+                String str2 = TextUtils.isEmpty(null) ? this.mDeviceName : null;
+                intent.putExtra(PeripheralConstants.Internal.BtPairingExtraDataType.DEVICE_NAME, str2);
+                intent.putExtra("IS_START_ACTIVITY", false);
+                intent.addFlags(268435456);
+                intent.addFlags(32);
+                intent.addFlags(16777216);
+                this.mContext.sendBroadcast(intent, "com.samsung.bluetooth.permission.BLUETOOTH_DEVICE");
+                StatusBarManager statusBarManager = (StatusBarManager) this.mContext.getSystemService("statusbar");
+                if (statusBarManager != null) {
+                    statusBarManager.collapsePanels();
+                }
+            }
+        }
+        if (z) {
+            return;
+        }
+        if (this.mBondState == 10) {
+            startPairing();
+            return;
+        }
+        checkLEConnectionGuide(true);
+        this.mConnectAttempted = SystemClock.elapsedRealtime();
+        connectDevice();
     }
 
     public final void connectDevice() {
         boolean z;
+        boolean zIsTetheringOn;
         boolean z2;
-        boolean z3;
         NetworkCapabilities networkCapabilities;
         synchronized (this.mProfileLock) {
             try {
@@ -326,11 +450,11 @@ public class CachedBluetoothDevice implements Comparable {
                     synchronized (this.mProfileLock) {
                         try {
                             z = true;
-                            z2 = false;
-                            z3 = this.mProfiles.size() == 1 && this.mProfiles.stream().anyMatch(new Predicate() { // from class: com.android.settingslib.bluetooth.CachedBluetoothDevice$$ExternalSyntheticLambda1
+                            zIsTetheringOn = false;
+                            z2 = this.mProfiles.size() == 1 && this.mProfiles.stream().anyMatch(new Predicate() { // from class: com.android.settingslib.bluetooth.CachedBluetoothDevice$$ExternalSyntheticLambda1
                                 @Override // java.util.function.Predicate
                                 public final boolean test(Object obj) {
-                                    CachedBluetoothDevice cachedBluetoothDevice = CachedBluetoothDevice.this;
+                                    CachedBluetoothDevice cachedBluetoothDevice = this.f$0;
                                     LocalBluetoothProfile localBluetoothProfile = (LocalBluetoothProfile) obj;
                                     int i = CachedBluetoothDevice.$r8$clinit;
                                     cachedBluetoothDevice.getClass();
@@ -344,7 +468,7 @@ public class CachedBluetoothDevice implements Comparable {
                         } finally {
                         }
                     }
-                    if (z3) {
+                    if (z2) {
                         this.mErrorMsg = null;
                         ConnectivityManager connectivityManager = (ConnectivityManager) this.mContext.getSystemService("connectivity");
                         if (connectivityManager != null && (networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork())) != null && networkCapabilities.hasTransport(1)) {
@@ -359,9 +483,9 @@ public class CachedBluetoothDevice implements Comparable {
                         }
                         BluetoothPan bluetoothPan = this.mProfileManager.mPanProfile.mService;
                         if (bluetoothPan != null) {
-                            z2 = bluetoothPan.isTetheringOn();
+                            zIsTetheringOn = bluetoothPan.isTetheringOn();
                         }
-                        if (z2) {
+                        if (zIsTetheringOn) {
                             Context context2 = this.mContext;
                             BluetoothDevice bluetoothDevice = this.mDevice;
                             Intent intent = new Intent("com.samsung.android.settings.bluetooth.LAUNCH_TETHERING_OFF_ACTIVITY");
@@ -403,8 +527,8 @@ public class CachedBluetoothDevice implements Comparable {
             String identityAddress2 = this.mDevice.getIdentityAddress();
             if (!BluetoothUtils.DEBUG) {
                 if (identityAddress2 != null) {
-                    String replaceAll = identityAddress2.replaceAll(":", "");
-                    identityAddress2 = replaceAll.substring(0, 6) + "_" + replaceAll.substring(11);
+                    String strReplaceAll = identityAddress2.replaceAll(":", "");
+                    identityAddress2 = strReplaceAll.substring(0, 6) + "_" + strReplaceAll.substring(11);
                 } else {
                     identityAddress2 = "null";
                 }
@@ -603,21 +727,72 @@ public class CachedBluetoothDevice implements Comparable {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00ec  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00f6  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00d0  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void fillData() {
-        /*
-            Method dump skipped, instructions count: 326
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDevice.fillData():void");
+    public final void fillData() throws Throwable {
+        fetchName();
+        BluetoothClass bluetoothClass = this.mDevice.getBluetoothClass();
+        if (bluetoothClass != null) {
+            setBtClass(bluetoothClass);
+        }
+        updateProfiles(this.mDevice.getUuids());
+        fetchActiveDevices();
+        SharedPreferences sharedPreferences = this.mContext.getSharedPreferences("bluetooth_phonebook_permission", 0);
+        if (sharedPreferences.contains(this.mDevice.getAddress())) {
+            if (this.mDevice.getPhonebookAccessPermission() == 0) {
+                int i = sharedPreferences.getInt(this.mDevice.getAddress(), 0);
+                if (i == 1) {
+                    this.mDevice.setPhonebookAccessPermission(1);
+                } else if (i == 2) {
+                    this.mDevice.setPhonebookAccessPermission(2);
+                }
+            }
+            SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+            editorEdit.remove(this.mDevice.getAddress());
+            editorEdit.commit();
+        }
+        SharedPreferences sharedPreferences2 = this.mContext.getSharedPreferences("bluetooth_message_permission", 0);
+        if (sharedPreferences2.contains(this.mDevice.getAddress())) {
+            if (this.mDevice.getMessageAccessPermission() == 0) {
+                int i2 = sharedPreferences2.getInt(this.mDevice.getAddress(), 0);
+                if (i2 == 1) {
+                    this.mDevice.setMessageAccessPermission(1);
+                } else if (i2 == 2) {
+                    this.mDevice.setMessageAccessPermission(2);
+                }
+            }
+            SharedPreferences.Editor editorEdit2 = sharedPreferences2.edit();
+            editorEdit2.remove(this.mDevice.getAddress());
+            editorEdit2.commit();
+        }
+        this.mAppearance = (short) this.mDevice.semGetAppearance();
+        fetchManufacturerData(this.mDevice.semGetManufacturerData());
+        if (getManufacturerRawData() != null) {
+            ManufacturerData manufacturerData = this.mManufacturerData;
+            if (manufacturerData.mManufacturerType == 2 && manufacturerData.mData.mDeviceCategory == 2) {
+                this.mIsTablet = true;
+            } else {
+                this.mIsTablet = false;
+            }
+        }
+        this.mBondState = this.mDevice.getBondState();
+        this.mType = this.mDevice.getType();
+        this.mVisible = true;
+        this.mIsBondingByCached = false;
+        if (isRing()) {
+            this.mBondingDetector = new BluetoothRetryDetector(BluetoothRetryDetector.FailCase.CONNECTION_FAILURE_RING, false);
+        } else if (BluetoothUtils.isGalaxyWatchDevice(this.mDeviceName, this.mBtClass, getManufacturerRawData(), this.mDevice.getUuids())) {
+            this.mBondingDetector = new BluetoothRetryDetector(BluetoothRetryDetector.FailCase.CONNECTION_FAILURE_WATCH, false);
+        } else {
+            this.mBondingDetector = this.mBondState == 12 ? new BluetoothRetryDetector(BluetoothRetryDetector.FailCase.CONNECTION_FAILURE, false) : new BluetoothRetryDetector(BluetoothRetryDetector.FailCase.PAIRING_FAILURE, false);
+        }
+        Log.d("CachedBluetoothDevice", "fillData :: " + describeDetail());
+        dispatchAttributesChanged$1();
     }
 
-    public final void fillRestoredData() {
+    public final void fillRestoredData() throws Throwable {
         if (TextUtils.isEmpty(this.mRestoredDevice.mName)) {
             fetchName();
         } else {
@@ -684,36 +859,323 @@ public class CachedBluetoothDevice implements Comparable {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:113:0x0111, code lost:
-    
-        if (hasProfile(r7.mProfileManager.mHeadsetProfile) != false) goto L87;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public final int getBtClassDrawable() {
-        /*
-            Method dump skipped, instructions count: 455
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDevice.getBtClassDrawable():int");
+        int deviceIcon;
+        String str = this.mDeviceName;
+        String upperCase = str != null ? str.toUpperCase() : null;
+        StringBuilder sb = new StringBuilder("getBtClassDrawable :: ");
+        sb.append(getNameForLog());
+        sb.append(", BluetoothClass = ");
+        sb.append(this.mBtClass);
+        sb.append(", Appearance = ");
+        RecyclerView$$ExternalSyntheticOutline0.m(this.mAppearance, "CachedBluetoothDevice", sb);
+        ManufacturerData manufacturerData = this.mManufacturerData;
+        if (manufacturerData != null && (deviceIcon = manufacturerData.getDeviceIcon()) != 0) {
+            return deviceIcon;
+        }
+        BluetoothClass bluetoothClass = this.mBtClass;
+        if (bluetoothClass != null) {
+            int majorDeviceClass = bluetoothClass.getMajorDeviceClass();
+            if (majorDeviceClass == 256) {
+                return this.mBtClass.getDeviceClass() == 284 ? R.drawable.list_ic_tablet : R.drawable.list_ic_laptop;
+            }
+            if (majorDeviceClass == 512) {
+                return this.mIsTablet ? R.drawable.list_ic_tablet : R.drawable.list_ic_mobile;
+            }
+            if (majorDeviceClass == 1024) {
+                if (upperCase != null) {
+                    int i = upperCase.startsWith("SAMSUNG LEVEL") ? upperCase.contains("BOX") ? R.drawable.list_ic_dlna_audio : R.drawable.list_ic_headset : (upperCase.startsWith("GEAR CIRCLE") && isGearIconX()) ? R.drawable.list_ic_gear_circle : 0;
+                    if (i != 0) {
+                        return i;
+                    }
+                }
+                if (isGearIconX()) {
+                    return R.drawable.list_ic_true_wireless_earbuds;
+                }
+                if (this.mBtClass.getDeviceClass() == 1084) {
+                    return R.drawable.list_ic_tv;
+                }
+                if (this.mBtClass.getDeviceClass() == 1076) {
+                    return R.drawable.list_ic_camcoder;
+                }
+                LocalBluetoothProfileManager localBluetoothProfileManager = this.mProfileManager;
+                if (localBluetoothProfileManager == null || !hasProfile(localBluetoothProfileManager.mA2dpProfile) || !hasProfile(this.mProfileManager.mHeadsetProfile)) {
+                }
+                return R.drawable.list_ic_sound_accessory_default;
+            }
+            if (majorDeviceClass == 1280) {
+                return HidProfile.getHidClassDrawable(this.mBtClass);
+            }
+            if (majorDeviceClass == 1536) {
+                return (this.mBtClass.getDeviceClass() == 1664 || this.mBtClass.getDeviceClass() == 1600) ? R.drawable.list_ic_printer : R.drawable.list_ic_camera;
+            }
+            if (majorDeviceClass == 1792 && this.mBtClass.getDeviceClass() == 1796) {
+                return upperCase != null ? (upperCase.startsWith("GEAR FIT") || upperCase.startsWith("GALAXY FIT")) ? R.drawable.list_ic_band : R.drawable.list_ic_wearable : R.drawable.list_ic_wearable;
+            }
+            int appearanceDrawable = getAppearanceDrawable(this.mAppearance);
+            if (appearanceDrawable != 0) {
+                return appearanceDrawable;
+            }
+            if (!this.mBtClass.doesClassMatch(1)) {
+                if (this.mBtClass.doesClassMatch(0)) {
+                    return R.drawable.list_ic_mono_headset;
+                }
+            }
+            return R.drawable.list_ic_sound_accessory_default;
+        }
+        short s = this.mAppearance;
+        if (s != 0) {
+            int appearanceDrawable2 = getAppearanceDrawable(s);
+            if (appearanceDrawable2 != 0) {
+                return appearanceDrawable2;
+            }
+        } else {
+            Log.w("CachedBluetoothDevice", "mBtClass is null");
+        }
+        if (isHearingDevice()) {
+            return R.drawable.sec_bluetooth_2d_hearing_aids;
+        }
+        LocalBluetoothProfileManager localBluetoothProfileManager2 = this.mProfileManager;
+        if (localBluetoothProfileManager2 != null && hasProfile(localBluetoothProfileManager2.mA2dpProfile) && hasProfile(this.mProfileManager.mHeadsetProfile)) {
+            setBtClass(new BluetoothClass(1056));
+            return R.drawable.list_ic_sound_accessory_default;
+        }
+        List<LocalBluetoothProfile> profiles = getProfiles();
+        for (LocalBluetoothProfile localBluetoothProfile : profiles) {
+            for (int i2 = 0; i2 < profiles.size(); i2++) {
+                if (profiles.get(i2) instanceof A2dpProfile) {
+                    setBtClass(new BluetoothClass(1048));
+                    return R.drawable.list_ic_sound_accessory_default;
+                }
+            }
+            int drawableResource = localBluetoothProfile.getDrawableResource(this.mBtClass);
+            if (drawableResource != 0) {
+                return drawableResource;
+            }
+        }
+        return R.drawable.list_ic_general_device;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x0161  */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x0167 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x03ed  */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x03f2 A[ORIG_RETURN, RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:219:0x03ea  */
+    /* JADX WARN: Removed duplicated region for block: B:221:0x03ed  */
+    /* JADX WARN: Removed duplicated region for block: B:222:0x03f2 A[ORIG_RETURN, RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String getConnectionSummary() {
-        /*
-            Method dump skipped, instructions count: 1014
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDevice.getConnectionSummary():java.lang.String");
+    public final String getConnectionSummary() {
+        Integer num;
+        String string;
+        boolean zSemIsDualPlayMode;
+        BluetoothA2dp bluetoothA2dp;
+        BluetoothA2dp bluetoothA2dp2;
+        int profileConnectionState;
+        Iterator it;
+        Iterator it2;
+        char c;
+        String str = this.mBluetoothCastMsg;
+        if (str != null) {
+            return str;
+        }
+        boolean z = BluetoothUtils.DEBUG;
+        if (this.mDevice != null) {
+            if (!this.mIsRestored || this.mBondState == 11 || !TextUtils.isEmpty(this.mErrorMsg)) {
+                try {
+                    Class[] clsArr = new Class[0];
+                    num = (Integer) BluetoothDevice.class.getDeclaredMethod("getKeyMissingCount", null).invoke(this.mDevice, null);
+                    num.getClass();
+                } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException unused) {
+                    Log.w("BluetoothUtils", "error happens when getKeyMissingCount.");
+                    num = null;
+                }
+                if (isConnected() || num == null || num.intValue() <= 0) {
+                    synchronized (this.mProfileLock) {
+                        try {
+                            Iterator it3 = getProfiles().iterator();
+                            boolean z2 = false;
+                            boolean z3 = false;
+                            boolean z4 = false;
+                            boolean z5 = false;
+                            boolean z6 = false;
+                            boolean z7 = false;
+                            boolean z8 = false;
+                            boolean z9 = false;
+                            boolean z10 = false;
+                            boolean z11 = true;
+                            while (true) {
+                                if (it3.hasNext()) {
+                                    LocalBluetoothProfile localBluetoothProfile = (LocalBluetoothProfile) it3.next();
+                                    if (localBluetoothProfile == null) {
+                                        Log.d("CachedBluetoothDevice", "getConnectionSummary :: profile is null");
+                                    } else if (localBluetoothProfile instanceof CsipSetCoordinatorProfile) {
+                                        Log.d("CachedBluetoothDevice", "getConnectionSummary :: csip profile is excluded from the summary");
+                                    } else {
+                                        profileConnectionState = getProfileConnectionState(localBluetoothProfile);
+                                        StringBuilder sb = new StringBuilder();
+                                        it = it3;
+                                        sb.append("getConnectionSummary :: profile ::");
+                                        sb.append(localBluetoothProfile);
+                                        sb.append("  connectionStatus::");
+                                        sb.append(profileConnectionState);
+                                        Log.d("CachedBluetoothDevice", sb.toString());
+                                        if (profileConnectionState != 0) {
+                                            if (profileConnectionState == 1) {
+                                                Iterator it4 = getProfiles().iterator();
+                                                boolean z12 = false;
+                                                boolean z13 = false;
+                                                while (it4.hasNext()) {
+                                                    LocalBluetoothProfile localBluetoothProfile2 = (LocalBluetoothProfile) it4.next();
+                                                    if (localBluetoothProfile2 != null) {
+                                                        int profileConnectionState2 = getProfileConnectionState(localBluetoothProfile2);
+                                                        it2 = it4;
+                                                        if (profileConnectionState2 == 1 || profileConnectionState2 == 3) {
+                                                            z12 = true;
+                                                        }
+                                                        c = 2;
+                                                        if (profileConnectionState2 == 2) {
+                                                            z13 = true;
+                                                        }
+                                                    } else {
+                                                        it2 = it4;
+                                                        c = 2;
+                                                    }
+                                                    it4 = it2;
+                                                }
+                                                if ((z12 && !z13) || this.mBondState == 11) {
+                                                    break;
+                                                }
+                                            } else if (profileConnectionState == 2) {
+                                                if (localBluetoothProfile instanceof A2dpProfile) {
+                                                    z3 = true;
+                                                }
+                                                if (localBluetoothProfile instanceof HeadsetProfile) {
+                                                    z4 = true;
+                                                }
+                                                if (localBluetoothProfile instanceof HidProfile) {
+                                                    z6 = true;
+                                                }
+                                                if ((localBluetoothProfile instanceof PanProfile) && ((PanProfile) localBluetoothProfile).isLocalRoleNap(this.mDevice)) {
+                                                    z7 = true;
+                                                }
+                                                if (localBluetoothProfile instanceof PanProfile) {
+                                                    z8 = true;
+                                                }
+                                                if (localBluetoothProfile instanceof SppProfile) {
+                                                    z9 = true;
+                                                }
+                                                if (localBluetoothProfile instanceof GattProfile) {
+                                                    z10 = true;
+                                                }
+                                                z2 = true;
+                                                if (localBluetoothProfile instanceof LeAudioProfile) {
+                                                    z5 = true;
+                                                }
+                                            } else if (profileConnectionState == 3) {
+                                                string = this.mContext.getString(BluetoothUtils.getConnectionStateSummary(profileConnectionState));
+                                            }
+                                        } else if (localBluetoothProfile.isProfileReady()) {
+                                            if (localBluetoothProfile instanceof HearingAidProfile) {
+                                                z11 = false;
+                                            } else if (localBluetoothProfile instanceof LeAudioProfile) {
+                                                z5 = false;
+                                            }
+                                        }
+                                        it3 = it;
+                                    }
+                                    it = it3;
+                                    it3 = it;
+                                } else {
+                                    int iOrElse = Stream.concat(Stream.of(this), this.mMemberDevices.stream()).mapToInt(new CachedBluetoothDevice$$ExternalSyntheticLambda8()).filter(new CachedBluetoothDevice$$ExternalSyntheticLambda10()).min().orElse(-1);
+                                    if (z2) {
+                                        if (BluetoothUtils.getBooleanMetaData(this.mDevice)) {
+                                            BluetoothUtils.getIntMetaData(this.mDevice, 10);
+                                            BluetoothUtils.getIntMetaData(this.mDevice, 11);
+                                        }
+                                        if ((BluetoothUtils.getBooleanMetaData(this.mDevice) ? BluetoothUtils.getIntMetaData(this.mDevice, 10) : -1) == -1) {
+                                            zSemIsDualPlayMode = false;
+                                            getHearingAidSideBattery(0);
+                                        } else {
+                                            zSemIsDualPlayMode = false;
+                                        }
+                                        if ((BluetoothUtils.getBooleanMetaData(this.mDevice) ? BluetoothUtils.getIntMetaData(this.mDevice, 11) : -1) == -1) {
+                                            getHearingAidSideBattery(1);
+                                        }
+                                        if (z3 && z4) {
+                                            LocalBluetoothProfileManager localBluetoothProfileManager = this.mProfileManager;
+                                            A2dpProfile a2dpProfile = localBluetoothProfileManager == null ? null : localBluetoothProfileManager.mA2dpProfile;
+                                            if (a2dpProfile != null && (bluetoothA2dp2 = a2dpProfile.mService) != null) {
+                                                zSemIsDualPlayMode = bluetoothA2dp2.semIsDualPlayMode();
+                                            }
+                                            if (zSemIsDualPlayMode && iOrElse != -1) {
+                                                StringBuilder sb2 = new StringBuilder();
+                                                sb2.append(this.mContext.getString(R.string.bluetooth_summary_connected_to_a2dp_headset_battery, Integer.valueOf(iOrElse)));
+                                                string = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.bluetooth_summary_connected_to_a2dp_headset_dual_audio, sb2);
+                                            } else if (iOrElse != -1) {
+                                                string = this.mContext.getString(R.string.bluetooth_summary_connected_to_a2dp_headset_battery, Integer.valueOf(iOrElse));
+                                            } else if (zSemIsDualPlayMode) {
+                                                StringBuilder sb3 = new StringBuilder();
+                                                sb3.append(this.mContext.getString(R.string.bluetooth_summary_connected_to_a2dp_headset));
+                                                string = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.bluetooth_summary_connected_to_a2dp_headset_dual_audio, sb3);
+                                            } else {
+                                                string = this.mContext.getString(R.string.bluetooth_summary_connected_to_a2dp_headset);
+                                            }
+                                        } else if (z5) {
+                                            string = iOrElse != -1 ? this.mContext.getString(R.string.bluetooth_summary_connected_to_a2dp_headset_battery, Integer.valueOf(iOrElse)) : this.mContext.getString(R.string.bluetooth_summary_connected_to_a2dp_headset);
+                                        } else if (z3) {
+                                            LocalBluetoothProfileManager localBluetoothProfileManager2 = this.mProfileManager;
+                                            A2dpProfile a2dpProfile2 = localBluetoothProfileManager2 == null ? null : localBluetoothProfileManager2.mA2dpProfile;
+                                            boolean zSemIsDualPlayMode2 = (a2dpProfile2 == null || (bluetoothA2dp = a2dpProfile2.mService) == null) ? zSemIsDualPlayMode : bluetoothA2dp.semIsDualPlayMode();
+                                            if (zSemIsDualPlayMode2 && iOrElse != -1) {
+                                                StringBuilder sb4 = new StringBuilder();
+                                                sb4.append(this.mContext.getString(R.string.bluetooth_a2dp_profile_summary_connected_battery, Integer.valueOf(iOrElse)));
+                                                string = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.bluetooth_summary_connected_to_a2dp_headset_dual_audio, sb4);
+                                            } else if (iOrElse != -1) {
+                                                string = this.mContext.getString(R.string.bluetooth_a2dp_profile_summary_connected_battery, Integer.valueOf(iOrElse));
+                                            } else if (zSemIsDualPlayMode2) {
+                                                StringBuilder sb5 = new StringBuilder();
+                                                sb5.append(this.mContext.getString(R.string.bluetooth_a2dp_profile_summary_connected));
+                                                string = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.bluetooth_summary_connected_to_a2dp_headset_dual_audio, sb5);
+                                            } else {
+                                                string = this.mContext.getString(R.string.bluetooth_a2dp_profile_summary_connected);
+                                            }
+                                        } else {
+                                            string = z4 ? iOrElse != -1 ? this.mContext.getString(R.string.bluetooth_headset_profile_summary_connected_battery, Integer.valueOf(iOrElse)) : this.mContext.getString(R.string.bluetooth_headset_profile_summary_connected) : (z6 || z7 || z8 || z9 || z10 || z11 || iOrElse == -1) ? this.mContext.getString(R.string.sec_bluetooth_connected) : this.mContext.getString(R.string.bluetooth_connected_battery, Integer.valueOf(iOrElse));
+                                        }
+                                    } else {
+                                        String str2 = this.mErrorMsg;
+                                        if (str2 != null && !str2.isEmpty()) {
+                                            string = this.mErrorMsg;
+                                        } else if (this.mIsHearingAidDeviceByUUID) {
+                                            string = this.mContext.getString(R.string.bluetooth_hearingaid_subtext);
+                                        } else {
+                                            int i = this.mBondState;
+                                            if (i != 10) {
+                                                string = i != 11 ? null : this.mContext.getString(R.string.bluetooth_pairing);
+                                            } else if (this.mLocalAdapter != null && getName().equals(this.mDevice.getAddress())) {
+                                                string = this.mLocalAdapter.isDiscovering() ? this.mContext.getString(R.string.bluetooth_getting_remote_device_name) : this.mContext.getString(R.string.bluetooth_display_remote_device_name_after_pair);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            string = this.mContext.getString(BluetoothUtils.getConnectionStateSummary(profileConnectionState));
+                        } finally {
+                        }
+                    }
+                } else {
+                    string = this.mContext.getString(R.string.sec_bluetooth_not_connect);
+                }
+            } else if (!this.mIsSynced) {
+                string = this.mIsAddrSwitched ? this.mContext.getString(R.string.bluetooth_summary_addr_switched_device) : this.mContext.getString(R.string.bluetooth_summary_restored_device);
+            }
+            if (string == null) {
+                return string.toString();
+            }
+            return null;
+        }
+        Log.e("CachedBluetoothDevice", "getConnectionSummary :: mDevice is null");
+        string = null;
+        if (string == null) {
+        }
     }
 
     public final int getDeviceSide() {
@@ -724,176 +1186,82 @@ public class CachedBluetoothDevice implements Comparable {
         return -1;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:48:0x00b0, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:60:0x00b0, code lost:
     
         r8 = r8.mManufacturerData.mData;
         r3 = r8.mDeviceStatus;
         r8 = r8.mDeviceSubType;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:49:0x00bb, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:61:0x00bb, code lost:
     
         if ((r3 & 128) != 128) goto L70;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x00bf, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:63:0x00bf, code lost:
     
         if (r8 < 16) goto L70;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:53:0x00c3, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:65:0x00c3, code lost:
     
         if (r8 > 31) goto L70;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x00c5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:66:0x00c5, code lost:
     
         android.util.Log.i("CachedBluetoothDevice", "Found a SEC Wearable device with new type");
      */
-    /* JADX WARN: Code restructure failed: missing block: B:55:0x00ce, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:67:0x00ce, code lost:
     
         if (r0.isValidStub() == false) goto L70;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:56:0x00d0, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:68:0x00d0, code lost:
     
         android.util.Log.w("CachedBluetoothDevice", "jump to WM");
      */
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x00d5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:69:0x00d5, code lost:
     
         return 2;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final int getDeviceType() {
-        /*
-            r8 = this;
-            android.content.Context r0 = r8.mContext
-            boolean r1 = com.android.settingslib.bluetooth.BluetoothUtils.DEBUG
-            com.samsung.android.feature.SemFloatingFeature r1 = com.samsung.android.feature.SemFloatingFeature.getInstance()
-            java.lang.String r2 = "SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE"
-            boolean r1 = r1.getBoolean(r2)
-            r2 = 0
-            if (r1 != 0) goto L2c
-            com.samsung.android.feature.SemFloatingFeature r1 = com.samsung.android.feature.SemFloatingFeature.getInstance()
-            java.lang.String r3 = "SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING"
-            boolean r1 = r1.getBoolean(r3)
-            if (r1 != 0) goto L2c
-            com.samsung.android.feature.SemFloatingFeature r1 = com.samsung.android.feature.SemFloatingFeature.getInstance()
-            java.lang.String r3 = "SEC_FLOATING_FEATURE_COMMON_SUPPORT_BATTERY_CONVERSING"
-            boolean r1 = r1.getBoolean(r3)
-            if (r1 == 0) goto L2a
-            goto L2c
-        L2a:
-            r0 = r2
-            goto L37
-        L2c:
-            com.samsung.android.emergencymode.SemEmergencyManager r1 = com.samsung.android.emergencymode.SemEmergencyManager.getInstance(r0)
-            if (r1 != 0) goto L33
-            goto L2a
-        L33:
-            boolean r0 = com.samsung.android.emergencymode.SemEmergencyManager.isEmergencyMode(r0)
-        L37:
-            java.lang.String r1 = "CachedBluetoothDevice"
-            if (r0 == 0) goto L41
-            java.lang.String r8 = "getDeviceType: EmergencyMode enabled"
-            android.util.Log.d(r1, r8)
-            return r2
-        L41:
-            com.android.settingslib.bluetooth.LocalBluetoothProfileManager r0 = r8.mProfileManager
-            if (r0 != 0) goto L4b
-            java.lang.String r8 = "getDeviceType: LocalBluetoothProfileManager is null"
-            android.util.Log.d(r1, r8)
-            return r2
-        L4b:
-            com.android.settingslib.bluetooth.CachedBluetoothDeviceManager r0 = r0.mDeviceManager
-            if (r0 != 0) goto L55
-            java.lang.String r8 = "getDeviceType: CachedBluetoothDeviceManager is null"
-            android.util.Log.d(r1, r8)
-            return r2
-        L55:
-            int r3 = r8.getBtClassDrawable()
-            r4 = 2131233955(0x7f080ca3, float:1.8084062E38)
-            r5 = 1
-            if (r3 != r4) goto L6d
-            java.lang.String r3 = r8.mDeviceName
-            if (r3 == 0) goto L6d
-            java.lang.String r4 = "GALAXY Gear ("
-            boolean r3 = r3.startsWith(r4)
-            if (r3 == 0) goto L6d
-            r3 = r5
-            goto L6e
-        L6d:
-            r3 = r2
-        L6e:
-            if (r3 == 0) goto L77
-            boolean r8 = r0.isValidStub()
-            if (r8 == 0) goto Ld6
-            return r5
-        L77:
-            byte[] r3 = r8.getManufacturerRawData()
-            if (r3 == 0) goto Ld6
-            com.samsung.android.settingslib.bluetooth.ManufacturerData r3 = r8.mManufacturerData
-            int r4 = r3.mManufacturerType
-            r6 = 3
-            r7 = 2
-            if (r4 == r5) goto L8a
-            if (r4 == r7) goto L8a
-            if (r4 == r6) goto L8a
-            goto Ld6
-        L8a:
-            com.samsung.android.settingslib.bluetooth.ManufacturerData$Data r3 = r3.mData
-            byte[] r3 = r3.mDeviceId
-            r4 = r3[r2]
-            if (r4 != 0) goto La3
-            r3 = r3[r5]
-            r3 = r3 & 255(0xff, float:3.57E-43)
-            if (r3 < r5) goto Lb0
-            r4 = 144(0x90, float:2.02E-43)
-            if (r3 >= r4) goto Lb0
-            boolean r3 = r0.isValidStub()
-            if (r3 == 0) goto Lb0
-            goto Laf
-        La3:
-            if (r4 == r5) goto La9
-            if (r4 == r7) goto La9
-            if (r4 != r6) goto Lb0
-        La9:
-            boolean r3 = r0.isValidStub()
-            if (r3 == 0) goto Lb0
-        Laf:
-            return r7
-        Lb0:
-            com.samsung.android.settingslib.bluetooth.ManufacturerData r8 = r8.mManufacturerData
-            com.samsung.android.settingslib.bluetooth.ManufacturerData$Data r8 = r8.mData
-            byte r3 = r8.mDeviceStatus
-            byte r8 = r8.mDeviceSubType
-            r4 = 128(0x80, float:1.8E-43)
-            r3 = r3 & r4
-            if (r3 != r4) goto Ld6
-            r3 = 16
-            if (r8 < r3) goto Ld6
-            r3 = 31
-            if (r8 > r3) goto Ld6
-            java.lang.String r8 = "Found a SEC Wearable device with new type"
-            android.util.Log.i(r1, r8)
-            boolean r8 = r0.isValidStub()
-            if (r8 == 0) goto Ld6
-            java.lang.String r8 = "jump to WM"
-            android.util.Log.w(r1, r8)
-            return r7
-        Ld6:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDevice.getDeviceType():int");
+        ManufacturerData manufacturerData;
+        int i;
+        String str;
+        Context context = this.mContext;
+        boolean z = BluetoothUtils.DEBUG;
+        if (((SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_BATTERY_CONVERSING")) && SemEmergencyManager.getInstance(context) != null) ? SemEmergencyManager.isEmergencyMode(context) : false) {
+            Log.d("CachedBluetoothDevice", "getDeviceType: EmergencyMode enabled");
+            return 0;
+        }
+        LocalBluetoothProfileManager localBluetoothProfileManager = this.mProfileManager;
+        if (localBluetoothProfileManager == null) {
+            Log.d("CachedBluetoothDevice", "getDeviceType: LocalBluetoothProfileManager is null");
+            return 0;
+        }
+        CachedBluetoothDeviceManager cachedBluetoothDeviceManager = localBluetoothProfileManager.mDeviceManager;
+        if (cachedBluetoothDeviceManager == null) {
+            Log.d("CachedBluetoothDevice", "getDeviceType: CachedBluetoothDeviceManager is null");
+            return 0;
+        }
+        if (getBtClassDrawable() == R.drawable.list_ic_wearable && (str = this.mDeviceName) != null && str.startsWith("GALAXY Gear (")) {
+            if (cachedBluetoothDeviceManager.isValidStub()) {
+                return 1;
+            }
+        } else if (getManufacturerRawData() != null && ((i = (manufacturerData = this.mManufacturerData).mManufacturerType) == 1 || i == 2 || i == 3)) {
+            return (r4 = (r3 = manufacturerData.mData.mDeviceId)[0]) == 0 ? 2 : 2;
+        }
+        return 0;
     }
 
-    public final Pair getDrawableWithDescription() {
+    public final Pair getDrawableWithDescription() throws Resources.NotFoundException {
         byte[] metadata;
         BluetoothDevice bluetoothDevice = this.mDevice;
         boolean z = BluetoothUtils.DEBUG;
         String str = (bluetoothDevice == null || (metadata = bluetoothDevice.getMetadata(5)) == null) ? null : new String(metadata);
-        Uri parse = str != null ? Uri.parse(str) : null;
+        Uri uri = str != null ? Uri.parse(str) : null;
         Pair btClassDrawableWithDescription = BluetoothUtils.getBtClassDrawableWithDescription(this.mContext, this);
-        if (BluetoothUtils.isAdvancedDetailsHeader(this.mDevice) && parse != null) {
-            BitmapDrawable bitmapDrawable = this.mDrawableCache.get(parse.toString());
+        if (BluetoothUtils.isAdvancedDetailsHeader(this.mDevice) && uri != null) {
+            BitmapDrawable bitmapDrawable = this.mDrawableCache.get(uri.toString());
             if (bitmapDrawable != null) {
                 return new Pair(new AdaptiveOutlineDrawable(this.mContext.getResources(), bitmapDrawable.getBitmap()), (String) btClassDrawableWithDescription.second);
             }
@@ -906,20 +1274,20 @@ public class CachedBluetoothDevice implements Comparable {
             return new Pair(new AdaptiveOutlineDrawable(resources, ((BitmapDrawable) btDrawableWithDescription.first).getBitmap()), (String) btDrawableWithDescription.second);
         }
         int i = this.mGroupId;
-        int hashCode = i != -1 ? new Integer(i).hashCode() : this.mDevice.getAddress().hashCode();
+        int iHashCode = i != -1 ? new Integer(i).hashCode() : this.mDevice.getAddress().hashCode();
         Drawable drawable = (Drawable) btDrawableWithDescription.first;
         Resources resources2 = context.getResources();
         int[] intArray = resources2.getIntArray(R.array.bt_icon_fg_colors);
         int[] intArray2 = resources2.getIntArray(R.array.bt_icon_bg_colors);
-        int abs = Math.abs(hashCode % intArray2.length);
-        drawable.setTint(intArray[abs]);
+        int iAbs = Math.abs(iHashCode % intArray2.length);
+        drawable.setTint(intArray[iAbs]);
         AdaptiveIcon adaptiveIcon = new AdaptiveIcon(context, drawable);
-        adaptiveIcon.setBackgroundColor(intArray2[abs]);
+        adaptiveIcon.setBackgroundColor(intArray2[iAbs]);
         return new Pair(adaptiveIcon, (String) btDrawableWithDescription.second);
     }
 
     public final int getHearingAidSideBattery(final int i) {
-        Optional findAny = Stream.concat(Stream.of((Object[]) new CachedBluetoothDevice[]{this, this.mSubDevice}), this.mMemberDevices.stream()).filter(new CachedBluetoothDevice$$ExternalSyntheticLambda0(1)).filter(new Predicate() { // from class: com.android.settingslib.bluetooth.CachedBluetoothDevice$$ExternalSyntheticLambda12
+        Optional optionalFindAny = Stream.concat(Stream.of((Object[]) new CachedBluetoothDevice[]{this, this.mSubDevice}), this.mMemberDevices.stream()).filter(new CachedBluetoothDevice$$ExternalSyntheticLambda0(1)).filter(new Predicate() { // from class: com.android.settingslib.bluetooth.CachedBluetoothDevice$$ExternalSyntheticLambda12
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 int i2 = i;
@@ -927,8 +1295,8 @@ public class CachedBluetoothDevice implements Comparable {
                 return ((CachedBluetoothDevice) obj).getDeviceSide() == i2;
             }
         }).filter(new CachedBluetoothDevice$$ExternalSyntheticLambda0(2)).findAny();
-        if (findAny.isPresent()) {
-            return ((Integer) findAny.map(new CachedBluetoothDevice$$ExternalSyntheticLambda6()).filter(new CachedBluetoothDevice$$ExternalSyntheticLambda0(5)).orElse(-1)).intValue();
+        if (optionalFindAny.isPresent()) {
+            return ((Integer) optionalFindAny.map(new CachedBluetoothDevice$$ExternalSyntheticLambda6()).filter(new CachedBluetoothDevice$$ExternalSyntheticLambda0(5)).orElse(-1)).intValue();
         }
         return -1;
     }
@@ -941,7 +1309,7 @@ public class CachedBluetoothDevice implements Comparable {
         return 0L;
     }
 
-    public final Drawable getIconDrawable(boolean z) {
+    public final Drawable getIconDrawable(boolean z) throws Throwable {
         BitmapDrawable listIcon;
         String resourcePath = getResourcePath(true);
         if (TextUtils.isEmpty(resourcePath)) {
@@ -968,79 +1336,44 @@ public class CachedBluetoothDevice implements Comparable {
         return (deviceIcon == 0 || deviceIcon != R.drawable.list_ic_earbuds_stem) ? BluetoothUtils.getOverlayIconTintableDrawable(drawable, this.mContext, R.drawable.auracast_ic_overlay, R.drawable.auracast_ic_tintable) : resources.getDrawable(R.drawable.list_ic_earbuds_stem_auracast);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x004d, code lost:
-    
-        if (r2.this$0.isBuds3Device() != false) goto L25;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x004f  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0053  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.graphics.drawable.Drawable getIconDrawableForSolid() {
-        /*
-            r8 = this;
-            r0 = 0
-            java.lang.String r1 = r8.getResourcePath(r0)
-            boolean r2 = android.text.TextUtils.isEmpty(r1)
-            if (r2 == 0) goto L14
-            java.lang.String r1 = "CachedBluetoothDevice"
-            java.lang.String r2 = "getLocalIconResourceForSolid: path is null"
-            android.util.Log.d(r1, r2)
-            r1 = 0
-            goto L1a
-        L14:
-            android.content.Context r2 = r8.mContext
-            android.graphics.drawable.BitmapDrawable r1 = com.samsung.android.settingslib.bluetooth.scsp.ScspUtils.getListIcon(r2, r1)
-        L1a:
-            if (r1 != 0) goto L67
-            com.samsung.android.settingslib.bluetooth.ManufacturerData r2 = r8.mManufacturerData
-            if (r2 == 0) goto L67
-            int r3 = r2.mManufacturerType
-            r4 = 3
-            r5 = 2
-            if (r3 == r5) goto L29
-            if (r3 == r4) goto L29
-            goto L5a
-        L29:
-            com.samsung.android.settingslib.bluetooth.ManufacturerData$Data r3 = r2.mData
-            byte r6 = r3.mDeviceCategory
-            byte r3 = r3.mDeviceIconIndex
-            com.samsung.android.settingslib.bluetooth.ManufacturerData$SSdevice r2 = r2.mSSdevice
-            r2.getClass()
-            r7 = 21
-            if (r6 == r7) goto L39
-            goto L5a
-        L39:
-            if (r3 == r5) goto L57
-            if (r3 == r4) goto L47
-            r0 = 4
-            if (r3 == r0) goto L53
-            r0 = 5
-            if (r3 == r0) goto L4f
-            r0 = 2131233908(0x7f080c74, float:1.8083967E38)
-            goto L5a
-        L47:
-            com.samsung.android.settingslib.bluetooth.ManufacturerData r0 = com.samsung.android.settingslib.bluetooth.ManufacturerData.this
-            boolean r0 = r0.isBuds3Device()
-            if (r0 == 0) goto L53
-        L4f:
-            r0 = 2131236208(0x7f081570, float:1.8088632E38)
-            goto L5a
-        L53:
-            r0 = 2131236207(0x7f08156f, float:1.808863E38)
-            goto L5a
-        L57:
-            r0 = 2131233921(0x7f080c81, float:1.8083993E38)
-        L5a:
-            if (r0 == 0) goto L67
-            android.content.Context r8 = r8.mContext
-            android.content.res.Resources r8 = r8.getResources()
-            android.graphics.drawable.Drawable r8 = r8.getDrawable(r0)
-            return r8
-        L67:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDevice.getIconDrawableForSolid():android.graphics.drawable.Drawable");
+    public final Drawable getIconDrawableForSolid() throws Throwable {
+        BitmapDrawable listIcon;
+        ManufacturerData manufacturerData;
+        int i = 0;
+        String resourcePath = getResourcePath(false);
+        if (TextUtils.isEmpty(resourcePath)) {
+            Log.d("CachedBluetoothDevice", "getLocalIconResourceForSolid: path is null");
+            listIcon = null;
+        } else {
+            listIcon = ScspUtils.getListIcon(this.mContext, resourcePath);
+        }
+        if (listIcon == null && (manufacturerData = this.mManufacturerData) != null) {
+            int i2 = manufacturerData.mManufacturerType;
+            if (i2 == 2 || i2 == 3) {
+                ManufacturerData.Data data = manufacturerData.mData;
+                byte b = data.mDeviceCategory;
+                byte b2 = data.mDeviceIconIndex;
+                ManufacturerData.SSdevice sSdevice = manufacturerData.mSSdevice;
+                sSdevice.getClass();
+                if (b == 21) {
+                    if (b2 == 2) {
+                        i = R.drawable.list_ic_mono_headset;
+                    } else if (b2 != 3) {
+                        i = b2 != 4 ? b2 != 5 ? R.drawable.list_ic_headset : R.drawable.systemui_ic_buds3_solid : R.drawable.systemui_ic_buds2_solid;
+                    } else if (ManufacturerData.this.isBuds3Device()) {
+                    }
+                }
+            }
+            if (i != 0) {
+                return this.mContext.getResources().getDrawable(i);
+            }
+        }
+        return listIcon;
     }
 
     public final byte[] getManufacturerRawData() {
@@ -1092,37 +1425,180 @@ public class CachedBluetoothDevice implements Comparable {
         return Collections.unmodifiableList(arrayList);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:55:0x00f7, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x00f7, code lost:
     
         r2 = r0[1].trim();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x00fd, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:36:0x00fd, code lost:
     
         r10.close();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:60:0x0101, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:38:0x0101, code lost:
     
         r0 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:61:0x0102, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:39:0x0102, code lost:
     
         android.util.Log.w("ScspUtils", "getMappingKey: Exception.", r0);
      */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0142  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x01b3  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x0137 A[Catch: Exception -> 0x0111, TRY_ENTER, TRY_LEAVE, TryCatch #6 {Exception -> 0x0111, blocks: (B:67:0x010d, B:73:0x0137), top: B:19:0x0092 }] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x01bb A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:85:? A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:123:? A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x0137 A[Catch: Exception -> 0x0111, TRY_ENTER, TRY_LEAVE, TryCatch #6 {Exception -> 0x0111, blocks: (B:44:0x010d, B:56:0x0137), top: B:109:0x0092 }] */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x0142  */
+    /* JADX WARN: Removed duplicated region for block: B:70:0x01b3  */
+    /* JADX WARN: Removed duplicated region for block: B:99:0x01bb A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String getResourcePath(boolean r18) {
-        /*
-            Method dump skipped, instructions count: 602
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDevice.getResourcePath(boolean):java.lang.String");
+    public final String getResourcePath(boolean z) throws Throwable {
+        char c;
+        Throwable th;
+        BufferedReader bufferedReader;
+        Log.d("CachedBluetoothDevice", "getResourcePath: name = " + getNameForLog());
+        ManufacturerData manufacturerData = this.mManufacturerData;
+        BufferedReader bufferedReader2 = null;
+        if (manufacturerData == null) {
+            Log.d("CachedBluetoothDevice", "getResourcePath: mManufacturerData is null");
+            return null;
+        }
+        ManufacturerData.Data data = manufacturerData.mData;
+        byte b = data.mDeviceCategory;
+        if (b <= 0) {
+            return null;
+        }
+        byte b2 = data.mDeviceIconIndex;
+        boolean zIsBuds3Device = isBuds3Device();
+        if (b != 21 || b2 != 3 || zIsBuds3Device) {
+            if (isBuds3Device()) {
+                b2 = 5;
+            }
+            byte[] bArr = {b, b2};
+            String fileDirPath = ScspUtils.getFileDirPath(this.mContext);
+            String strMakeByteArrayDir = ScspUtils.makeByteArrayDir(bArr);
+            if (TextUtils.isEmpty(fileDirPath) || TextUtils.isEmpty(strMakeByteArrayDir)) {
+                ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("getIconIndexFileDirPath: "), TextUtils.isEmpty(fileDirPath) ? "dirPath" : "iconIndexDir", " is null", "ScspUtils");
+                return null;
+            }
+            StringBuilder sb = new StringBuilder("getIconIndexFileDirPath: iconIndex = ");
+            sb.append(ScspUtils.byteToString(bArr[0]));
+            sb.append(ScspUtils.byteToString(bArr[1]));
+            sb.append(", iconIndexDir = ");
+            sb.append(strMakeByteArrayDir);
+            sb.append(", isLineType = ");
+            ActionBarContextView$$ExternalSyntheticOutline0.m(sb, z, "ScspUtils");
+            String str = ScspUtils.FILE_PATH_ICON_INDEX;
+            if (z) {
+                return fileDirPath + str + strMakeByteArrayDir + File.separator;
+            }
+            StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(fileDirPath);
+            sbM.append(ScspUtils.FILE_PATH_SOLID);
+            sbM.append(str);
+            sbM.append(strMakeByteArrayDir);
+            sbM.append(File.separator);
+            return sbM.toString();
+        }
+        byte[] bArr2 = this.mManufacturerData.mData.mDeviceId;
+        Log.d("CachedBluetoothDevice", "getResourcePath: deviceId = " + ScspUtils.byteToString(bArr2[0]) + ScspUtils.byteToString(bArr2[1]));
+        Context context = this.mContext;
+        String fileDirPath2 = ScspUtils.getFileDirPath(context);
+        String strMakeByteArrayDir2 = ScspUtils.makeByteArrayDir(bArr2);
+        try {
+            if ((strMakeByteArrayDir2 == null || strMakeByteArrayDir2.isEmpty()) ? false : Pattern.compile("^(?:[a-fA-F0-9]|([a-fA-F0-9]{2}))_(?:[a-fA-F0-9]|([a-fA-F0-9]{2}))$").matcher(strMakeByteArrayDir2).matches()) {
+                try {
+                    try {
+                        c = 0;
+                    } catch (Exception e) {
+                        e = e;
+                        c = 0;
+                    }
+                    try {
+                        bufferedReader = new BufferedReader(new FileReader(ScspUtils.getFileDirPath(context) + ScspUtils.FILE_NAME_TABLE));
+                        while (true) {
+                            try {
+                                try {
+                                    String line = bufferedReader.readLine();
+                                    if (line == null) {
+                                        bufferedReader.close();
+                                        break;
+                                    }
+                                    String[] strArrSplit = line.split(",");
+                                    if (strArrSplit != null && strArrSplit.length == 2) {
+                                        Log.d("ScspUtils", "getMappingKey: row[0] = " + strArrSplit[0] + ", row[1] = " + strArrSplit[1]);
+                                        if (strMakeByteArrayDir2.equalsIgnoreCase(strArrSplit[0].trim())) {
+                                            break;
+                                        }
+                                    }
+                                } catch (Exception e2) {
+                                    e = e2;
+                                    Log.w("ScspUtils", "getMappingKey: Exception " + e);
+                                    if (bufferedReader != null) {
+                                        bufferedReader.close();
+                                    }
+                                    String strTrim = null;
+                                    if (TextUtils.isEmpty(fileDirPath2)) {
+                                    }
+                                    ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("getDeviceIdFileDirPath: "), TextUtils.isEmpty(fileDirPath2) ? "dirPath" : "deviceIdDir", " is null", "ScspUtils");
+                                    return null;
+                                }
+                            } catch (Throwable th2) {
+                                th = th2;
+                                bufferedReader2 = bufferedReader;
+                                if (bufferedReader2 != null) {
+                                    throw th;
+                                }
+                                try {
+                                    bufferedReader2.close();
+                                    throw th;
+                                } catch (Exception e3) {
+                                    Log.w("ScspUtils", "getMappingKey: Exception.", e3);
+                                    throw th;
+                                }
+                            }
+                        }
+                    } catch (Exception e4) {
+                        e = e4;
+                        bufferedReader = null;
+                        Log.w("ScspUtils", "getMappingKey: Exception " + e);
+                        if (bufferedReader != null) {
+                        }
+                        String strTrim2 = null;
+                        if (TextUtils.isEmpty(fileDirPath2)) {
+                        }
+                        ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("getDeviceIdFileDirPath: "), TextUtils.isEmpty(fileDirPath2) ? "dirPath" : "deviceIdDir", " is null", "ScspUtils");
+                        return null;
+                    }
+                } catch (Throwable th3) {
+                    th = th3;
+                    if (bufferedReader2 != null) {
+                    }
+                }
+            } else {
+                c = 0;
+            }
+        } catch (Exception e5) {
+            Log.w("ScspUtils", "getMappingKey: Exception.", e5);
+        }
+        String strTrim22 = null;
+        if (!TextUtils.isEmpty(fileDirPath2) || TextUtils.isEmpty(strTrim22)) {
+            ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("getDeviceIdFileDirPath: "), TextUtils.isEmpty(fileDirPath2) ? "dirPath" : "deviceIdDir", " is null", "ScspUtils");
+            return null;
+        }
+        StringBuilder sb2 = new StringBuilder("getDeviceIdFileDirPath: deviceId = ");
+        sb2.append(ScspUtils.byteToString(bArr2[c]));
+        sb2.append(ScspUtils.byteToString(bArr2[1]));
+        sb2.append(", deviceIdDir = ");
+        sb2.append(strTrim22);
+        sb2.append(", isLineType = ");
+        ActionBarContextView$$ExternalSyntheticOutline0.m(sb2, z, "ScspUtils");
+        String str2 = ScspUtils.FILE_PATH_DEVICE_ID;
+        if (z) {
+            return fileDirPath2 + str2 + strTrim22 + File.separator;
+        }
+        StringBuilder sbM2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(fileDirPath2);
+        sbM2.append(ScspUtils.FILE_PATH_SOLID);
+        sbM2.append(str2);
+        sbM2.append(strTrim22);
+        sbM2.append(File.separator);
+        return sbM2.toString();
     }
 
     public final List getUiAccessibleProfiles() {
@@ -1294,18 +1770,18 @@ public class CachedBluetoothDevice implements Comparable {
                 BluetoothDevice bluetoothDevice = this.mDevice;
                 SmepTag smepTag = SmepTag.SUPPORTED_FEATURES;
                 int tag = smepTag.getTag();
-                byte[] semGetMetadata = bluetoothDevice.semGetMetadata(new byte[]{(byte) tag, (byte) (tag >> 8)});
-                if (semGetMetadata == null || semGetMetadata.length < 5) {
+                byte[] bArrSemGetMetadata = bluetoothDevice.semGetMetadata(new byte[]{(byte) tag, (byte) (tag >> 8)});
+                if (bArrSemGetMetadata == null || bArrSemGetMetadata.length < 5) {
                     Log.e("CachedBluetoothDevice", "isSupportAssistant: DataPacket is too short.");
                     return false;
                 }
-                if ((((semGetMetadata[0] & 255) | ((semGetMetadata[1] & 255) << 8)) & CustomDeviceManager.QUICK_PANEL_ALL) == smepTag.getTag()) {
+                if ((((bArrSemGetMetadata[0] & 255) | ((bArrSemGetMetadata[1] & 255) << 8)) & CustomDeviceManager.QUICK_PANEL_ALL) == smepTag.getTag()) {
                     int i = 2;
-                    while (i < semGetMetadata.length) {
-                        int i2 = ((semGetMetadata[i] & 255) | ((semGetMetadata[i + 1] & 255) << 8)) & CustomDeviceManager.QUICK_PANEL_ALL;
-                        int i3 = semGetMetadata[i + 2] & 255;
+                    while (i < bArrSemGetMetadata.length) {
+                        int i2 = ((bArrSemGetMetadata[i] & 255) | ((bArrSemGetMetadata[i + 1] & 255) << 8)) & CustomDeviceManager.QUICK_PANEL_ALL;
+                        int i3 = bArrSemGetMetadata[i + 2] & 255;
                         byte[] bArr = new byte[i3];
-                        System.arraycopy(semGetMetadata, i + 3, bArr, 0, i3);
+                        System.arraycopy(bArrSemGetMetadata, i + 3, bArr, 0, i3);
                         i += i3 + 3;
                         if (AnonymousClass3.$SwitchMap$com$samsung$android$bluetooth$SmepTag[SmepTag.getSmepKey(i2).ordinal()] == 1) {
                             if (i3 < 1) {
@@ -1377,17 +1853,17 @@ public class CachedBluetoothDevice implements Comparable {
     }
 
     public final void refresh() {
-        ListenableFuture submit = ((AbstractListeningExecutorService) ThreadUtils.getBackgroundExecutor()).submit(new Callable() { // from class: com.android.settingslib.bluetooth.CachedBluetoothDevice$$ExternalSyntheticLambda2
+        ListenableFuture listenableFutureSubmit = ((AbstractListeningExecutorService) ThreadUtils.getBackgroundExecutor()).submit(new Callable() { // from class: com.android.settingslib.bluetooth.CachedBluetoothDevice$$ExternalSyntheticLambda2
             @Override // java.util.concurrent.Callable
             public final Object call() {
                 byte[] metadata;
-                CachedBluetoothDevice cachedBluetoothDevice = CachedBluetoothDevice.this;
+                CachedBluetoothDevice cachedBluetoothDevice = this.f$0;
                 if (BluetoothUtils.isAdvancedDetailsHeader(cachedBluetoothDevice.mDevice)) {
                     BluetoothDevice bluetoothDevice = cachedBluetoothDevice.mDevice;
                     String str = (bluetoothDevice == null || (metadata = bluetoothDevice.getMetadata(5)) == null) ? null : new String(metadata);
-                    Uri parse = str == null ? null : Uri.parse(str);
-                    if (parse != null && cachedBluetoothDevice.mDrawableCache.get(parse.toString()) == null) {
-                        cachedBluetoothDevice.mDrawableCache.put(parse.toString(), (BitmapDrawable) BluetoothUtils.getBtDrawableWithDescription(cachedBluetoothDevice.mContext, cachedBluetoothDevice).first);
+                    Uri uri = str == null ? null : Uri.parse(str);
+                    if (uri != null && cachedBluetoothDevice.mDrawableCache.get(uri.toString()) == null) {
+                        cachedBluetoothDevice.mDrawableCache.put(uri.toString(), (BitmapDrawable) BluetoothUtils.getBtDrawableWithDescription(cachedBluetoothDevice.mContext, cachedBluetoothDevice).first);
                     }
                 }
                 return null;
@@ -1403,7 +1879,7 @@ public class CachedBluetoothDevice implements Comparable {
             public final void onFailure(Throwable th) {
             }
         };
-        submit.addListener(new Futures.CallbackListener(submit, futureCallback), this.mContext.getMainExecutor());
+        listenableFutureSubmit.addListener(new Futures.CallbackListener(listenableFutureSubmit, futureCallback), this.mContext.getMainExecutor());
     }
 
     public final void refreshName() {
@@ -1491,25 +1967,25 @@ public class CachedBluetoothDevice implements Comparable {
 
     public final void setName(String str) {
         byte b;
-        byte[] bArr;
+        byte[] byteArray;
         if (TextUtils.isEmpty(str) || TextUtils.equals(str, getName())) {
             return;
         }
         BluetoothDevice bluetoothDevice = this.mDevice;
         int tag = SmepTag.FEATURE_CHANGE_DEVICE_NAME.getTag();
-        byte[] semGetMetadata = bluetoothDevice.semGetMetadata(new byte[]{(byte) tag, (byte) (tag >> 8)});
-        if (semGetMetadata == null || semGetMetadata.length == 0) {
+        byte[] bArrSemGetMetadata = bluetoothDevice.semGetMetadata(new byte[]{(byte) tag, (byte) (tag >> 8)});
+        if (bArrSemGetMetadata == null || bArrSemGetMetadata.length == 0) {
             Log.d("CachedBluetoothDevice", "FEATURE_CHANGE_DEVICE_NAME = null");
         } else {
-            Log.d("CachedBluetoothDevice", "FEATURE_CHANGE_DEVICE_NAME = " + Arrays.toString(semGetMetadata));
+            Log.d("CachedBluetoothDevice", "FEATURE_CHANGE_DEVICE_NAME = " + Arrays.toString(bArrSemGetMetadata));
         }
-        if (semGetMetadata == null || semGetMetadata.length <= 3 || (b = semGetMetadata[3]) <= 0 || b == -1) {
+        if (bArrSemGetMetadata == null || bArrSemGetMetadata.length <= 3 || (b = bArrSemGetMetadata[3]) <= 0 || b == -1) {
             this.mDevice.setAlias(str);
         } else {
             int tag2 = SmepTag.CMD_PERSONALIZED_NAME_VALUE.getTag();
             byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
             if (!SmepTag.isValidConstantKey(tag2) || bytes == null || bytes.length == 0) {
-                bArr = null;
+                byteArray = null;
             } else {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 try {
@@ -1519,9 +1995,9 @@ public class CachedBluetoothDevice implements Comparable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                bArr = byteArrayOutputStream.toByteArray();
+                byteArray = byteArrayOutputStream.toByteArray();
             }
-            this.mDevice.semSetMetadata(bArr);
+            this.mDevice.semSetMetadata(byteArray);
         }
         dispatchAttributesChanged$1();
         Iterator it = ((HashSet) this.mMemberDevices).iterator();
@@ -1712,34 +2188,109 @@ public class CachedBluetoothDevice implements Comparable {
         Log.w("CachedBluetoothDevice", "Fail to set preferred transport");
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x006b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:39:0x006b, code lost:
     
         android.util.Log.d("CachedBluetoothDevice", "PAN connection exists. Restore PAN profile.");
         r6.mRemovedProfiles.remove(r1);
         r7 = r6.mProfileLock;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x0079, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:40:0x0079, code lost:
     
         monitor-enter(r7);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x007a, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:41:0x007a, code lost:
     
         r6.mProfiles.add(r1);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x007f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:42:0x007f, code lost:
     
         monitor-exit(r7);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized boolean updateProfiles(android.os.ParcelUuid[] r8) {
-        /*
-            Method dump skipped, instructions count: 218
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDevice.updateProfiles(android.os.ParcelUuid[]):boolean");
+    public final synchronized boolean updateProfiles(ParcelUuid[] parcelUuidArr) throws Throwable {
+        Throwable th;
+        CachedBluetoothDevice cachedBluetoothDevice;
+        ParcelUuid[] parcelUuidArr2;
+        CachedBluetoothDevice cachedBluetoothDevice2;
+        try {
+            if (parcelUuidArr == null) {
+                try {
+                    Log.e("CachedBluetoothDevice", "updateProfiles :: uuids is null");
+                    if (this.mIsRestored) {
+                        parcelUuidArr = this.mRestoredDevice.mUuids;
+                    }
+                    this.mIsHearingAidDeviceByUUID = checkHearingAidByUuid();
+                    if (parcelUuidArr == null) {
+                        return false;
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                    cachedBluetoothDevice = this;
+                    throw th;
+                }
+            }
+            parcelUuidArr2 = parcelUuidArr;
+        } catch (Throwable th3) {
+            th = th3;
+        }
+        try {
+            List uuidsList = this.mLocalAdapter.getUuidsList();
+            int size = uuidsList.size();
+            ParcelUuid[] parcelUuidArr3 = new ParcelUuid[size];
+            uuidsList.toArray(parcelUuidArr3);
+            if (size == 0) {
+                return false;
+            }
+            synchronized (this.mProfileLock) {
+                try {
+                    LocalBluetoothProfileManager localBluetoothProfileManager = this.mProfileManager;
+                    if (localBluetoothProfileManager != null) {
+                        cachedBluetoothDevice2 = this;
+                        try {
+                            localBluetoothProfileManager.updateProfiles(parcelUuidArr2, parcelUuidArr3, this.mProfiles, this.mRemovedProfiles, cachedBluetoothDevice2);
+                        } catch (Throwable th4) {
+                            th = th4;
+                            throw th;
+                        }
+                    } else {
+                        cachedBluetoothDevice2 = this;
+                    }
+                    if (cachedBluetoothDevice2.mLocalNapRoleConnected) {
+                        Iterator it = cachedBluetoothDevice2.mRemovedProfiles.iterator();
+                        while (true) {
+                            if (!it.hasNext()) {
+                                break;
+                            }
+                            LocalBluetoothProfile localBluetoothProfile = (LocalBluetoothProfile) it.next();
+                            if (localBluetoothProfile instanceof PanProfile) {
+                                break;
+                            }
+                        }
+                    }
+                    cachedBluetoothDevice2.mIsHearingAidDeviceByUUID = cachedBluetoothDevice2.checkHearingAidByUuid();
+                    if (BluetoothUtils.DEBUG) {
+                        Log.e("CachedBluetoothDevice", "updating profiles for " + cachedBluetoothDevice2.mDevice.getAlias() + ", " + cachedBluetoothDevice2.mDevice);
+                        BluetoothClass bluetoothClass = cachedBluetoothDevice2.mDevice.getBluetoothClass();
+                        if (bluetoothClass != null) {
+                            bluetoothClass.toString();
+                        }
+                        for (ParcelUuid parcelUuid : parcelUuidArr2) {
+                            Objects.toString(parcelUuid);
+                        }
+                    }
+                    return true;
+                } catch (Throwable th5) {
+                    th = th5;
+                }
+            }
+        } catch (Throwable th6) {
+            th = th6;
+            cachedBluetoothDevice = this;
+            th = th;
+            throw th;
+        }
     }
 
     public void setInputDevice(InputDevice inputDevice) {
@@ -1748,21 +2299,82 @@ public class CachedBluetoothDevice implements Comparable {
     public void setLocalBluetoothManager(LocalBluetoothManager localBluetoothManager) {
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00da  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00e4  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x00c2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public CachedBluetoothDevice(android.content.Context r5, com.android.settingslib.bluetooth.LocalBluetoothProfileManager r6, android.bluetooth.BluetoothDevice r7, android.content.Intent r8) {
-        /*
-            Method dump skipped, instructions count: 294
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.CachedBluetoothDevice.<init>(android.content.Context, com.android.settingslib.bluetooth.LocalBluetoothProfileManager, android.bluetooth.BluetoothDevice, android.content.Intent):void");
+    public CachedBluetoothDevice(Context context, LocalBluetoothProfileManager localBluetoothProfileManager, BluetoothDevice bluetoothDevice, Intent intent) throws Throwable {
+        this.mType = 0;
+        this.mVisible = true;
+        this.mIsBondingByCached = false;
+        this.mSemCallbacks = new ArrayList();
+        this.mProfileLock = new Object();
+        this.mProfiles = new LinkedHashSet();
+        this.mRemovedProfiles = new LinkedHashSet();
+        this.mCallbacks = new CopyOnWriteArrayList();
+        this.mCallbackExecutorMap = new ConcurrentHashMap();
+        this.mConnectAttempted = -1L;
+        this.mIsActiveDeviceA2dp = false;
+        this.mIsActiveDeviceHeadset = false;
+        this.mIsActiveDeviceHearingAid = false;
+        this.mIsActiveDeviceLeAudio = false;
+        this.mMemberDevices = new HashSet();
+        this.mLeadDevice = null;
+        this.mIsRestored = false;
+        this.mIsSynced = false;
+        this.mIsAddrSwitched = false;
+        this.mCachedMaxConnectionState = 0;
+        this.mContext = context;
+        this.mLocalAdapter = BluetoothAdapter.getDefaultAdapter();
+        this.mProfileManager = localBluetoothProfileManager;
+        this.mDevice = bluetoothDevice;
+        String address = bluetoothDevice.getAddress();
+        this.mAddress = address;
+        String stringExtra = intent.getStringExtra("android.bluetooth.device.extra.NAME");
+        if (TextUtils.isEmpty(stringExtra)) {
+            if (BluetoothUtils.DEBUG) {
+                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Device has no name (yet), use address: ", address, "CachedBluetoothDevice");
+            }
+            this.mName = address;
+            this.mDeviceName = address;
+        } else {
+            this.mName = stringExtra;
+            this.mDeviceName = stringExtra;
+        }
+        BluetoothClass bluetoothClass = (BluetoothClass) intent.getParcelableExtra("android.bluetooth.device.extra.CLASS");
+        if (bluetoothClass != null) {
+            setBtClass(bluetoothClass);
+        }
+        updateProfiles(this.mDevice.getUuids());
+        this.mAppearance = intent.getShortExtra("com.samsung.bluetooth.device.extra.APPEARANCE", (short) 0);
+        fetchManufacturerData(intent.getByteArrayExtra("com.samsung.bluetooth.device.extra.MANUFACTURER_DATA"));
+        if (getManufacturerRawData() != null) {
+            ManufacturerData manufacturerData = this.mManufacturerData;
+            if (manufacturerData.mManufacturerType == 2 && manufacturerData.mData.mDeviceCategory == 2) {
+                this.mIsTablet = true;
+            } else {
+                this.mIsTablet = false;
+            }
+        }
+        this.mBondState = 10;
+        this.mType = this.mDevice.getType();
+        this.mVisible = true;
+        this.mIsBondingByCached = false;
+        if (isRing()) {
+            this.mBondingDetector = new BluetoothRetryDetector(BluetoothRetryDetector.FailCase.CONNECTION_FAILURE_RING, false);
+        } else if (BluetoothUtils.isGalaxyWatchDevice(this.mDeviceName, this.mBtClass, getManufacturerRawData(), null)) {
+            this.mBondingDetector = new BluetoothRetryDetector(BluetoothRetryDetector.FailCase.CONNECTION_FAILURE_WATCH, false);
+        } else {
+            this.mBondingDetector = new BluetoothRetryDetector(BluetoothRetryDetector.FailCase.PAIRING_FAILURE, false);
+        }
+        Log.d("CachedBluetoothDevice", "fillUnBondedData :: " + describeDetail());
+        dispatchAttributesChanged$1();
+        this.mGroupId = -1;
+        initDrawableCache();
+        this.mUnpairing = false;
     }
 
-    public CachedBluetoothDevice(Context context, LocalBluetoothProfileManager localBluetoothProfileManager, BluetoothRestoredDevice bluetoothRestoredDevice) {
+    public CachedBluetoothDevice(Context context, LocalBluetoothProfileManager localBluetoothProfileManager, BluetoothRestoredDevice bluetoothRestoredDevice) throws Throwable {
         this.mType = 0;
         this.mVisible = true;
         this.mIsBondingByCached = false;
@@ -1798,7 +2410,7 @@ public class CachedBluetoothDevice implements Comparable {
         initDrawableCache();
     }
 
-    public CachedBluetoothDevice(Context context, LocalBluetoothProfileManager localBluetoothProfileManager, BluetoothRestoredDevice bluetoothRestoredDevice, boolean z) {
+    public CachedBluetoothDevice(Context context, LocalBluetoothProfileManager localBluetoothProfileManager, BluetoothRestoredDevice bluetoothRestoredDevice, boolean z) throws Throwable {
         this.mType = 0;
         this.mVisible = true;
         this.mIsBondingByCached = false;

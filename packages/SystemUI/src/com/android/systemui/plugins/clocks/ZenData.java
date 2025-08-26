@@ -5,7 +5,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ZenData {
     public static final int $stable = 0;
@@ -14,7 +13,6 @@ public final class ZenData {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ZenMode {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ ZenMode[] $VALUES;
@@ -25,7 +23,6 @@ public final class ZenData {
         public static final ZenMode NO_INTERRUPTIONS = new ZenMode("NO_INTERRUPTIONS", 2, 2);
         public static final ZenMode ALARMS = new ZenMode("ALARMS", 3, 3);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -49,9 +46,9 @@ public final class ZenData {
         }
 
         static {
-            ZenMode[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            ZenMode[] zenModeArr$values = $values();
+            $VALUES = zenModeArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(zenModeArr$values);
             Companion = new Companion(null);
         }
 
@@ -123,9 +120,9 @@ public final class ZenData {
     }
 
     public int hashCode() {
-        int hashCode = this.zenMode.hashCode() * 31;
+        int iHashCode = this.zenMode.hashCode() * 31;
         String str = this.descriptionId;
-        return hashCode + (str == null ? 0 : str.hashCode());
+        return iHashCode + (str == null ? 0 : str.hashCode());
     }
 
     public String toString() {

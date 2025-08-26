@@ -8,6 +8,8 @@ public interface FeatureFlags {
 
     boolean mediaProjectionConnectedDisplayNoVirtualDevice();
 
+    boolean recordingOverlay();
+
     boolean showStopDialogPostCallEnd();
 
     boolean stopMediaProjectionOnCallEnd();

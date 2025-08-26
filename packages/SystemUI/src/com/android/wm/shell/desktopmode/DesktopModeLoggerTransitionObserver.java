@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.IBinder;
 import android.os.SystemProperties;
+import android.os.Trace;
 import android.util.EventLog;
 import android.util.SparseArray;
 import android.view.SurfaceControl;
@@ -14,6 +15,7 @@ import androidx.core.util.SparseArrayKt;
 import com.android.internal.protolog.ProtoLog;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.wm.shell.desktopmode.DesktopModeEventLogger;
+import com.android.wm.shell.desktopmode.DesktopTasksLimiter;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.TransitionUtil;
 import com.android.wm.shell.shared.desktopmode.DesktopState;
@@ -22,12 +24,12 @@ import com.android.wm.shell.sysui.ShellInit;
 import com.android.wm.shell.transition.Transitions;
 import com.samsung.android.knox.license.KnoxEnterpriseLicenseManager;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Optional;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopModeLoggerTransitionObserver implements Transitions.TransitionObserver {
     public final DesktopModeEventLogger desktopModeEventLogger;
@@ -40,7 +42,6 @@ public final class DesktopModeLoggerTransitionObserver implements Transitions.Tr
     public boolean wasPreviousTransitionExitByScreenOff;
     public boolean wasPreviousTransitionExitToOverview;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -106,21 +107,152 @@ public final class DesktopModeLoggerTransitionObserver implements Transitions.Tr
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00c6  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x01a7  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01b2  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0182  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0086  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x0182  */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x01a7  */
+    /* JADX WARN: Removed duplicated region for block: B:69:0x01b2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void identifyAndLogTaskUpdates(android.os.IBinder r32, android.window.TransitionInfo r33, android.util.SparseArray r34, android.util.SparseArray r35, android.app.TaskInfo r36) {
-        /*
-            Method dump skipped, instructions count: 488
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.DesktopModeLoggerTransitionObserver.identifyAndLogTaskUpdates(android.os.IBinder, android.window.TransitionInfo, android.util.SparseArray, android.util.SparseArray, android.app.TaskInfo):void");
+    public final void identifyAndLogTaskUpdates(IBinder iBinder, TransitionInfo transitionInfo, SparseArray sparseArray, SparseArray sparseArray2, TaskInfo taskInfo) {
+        String str;
+        DesktopModeEventLogger desktopModeEventLogger;
+        DesktopTasksLimiter.TaskDetails taskDetails;
+        DesktopTasksLimiter.TaskDetails taskDetails2;
+        long j;
+        DesktopModeEventLogger.Companion.MinimizeReason minimizeReason;
+        DesktopModeEventLogger.Companion.MinimizeReason minimizeReason2;
+        String str2;
+        long j2;
+        int i;
+        DesktopTasksLimiter.TaskDetails taskDetails3;
+        DesktopTasksLimiter desktopTasksLimiter;
+        DesktopModeLoggerTransitionObserver desktopModeLoggerTransitionObserver = this;
+        int size = sparseArray2.size();
+        int i2 = 0;
+        while (true) {
+            str = "debug.tracing.desktop_mode_visible_tasks";
+            desktopModeEventLogger = desktopModeLoggerTransitionObserver.desktopModeEventLogger;
+            if (i2 >= size) {
+                break;
+            }
+            int iKeyAt = sparseArray2.keyAt(i2);
+            TaskInfo taskInfo2 = (TaskInfo) sparseArray2.valueAt(i2);
+            DesktopModeEventLogger.Companion.FocusReason focusReason = (taskInfo == null || iKeyAt != taskInfo.taskId || taskInfo.equals(desktopModeLoggerTransitionObserver.focusedFreeformTask)) ? null : DesktopModeEventLogger.Companion.FocusReason.UNKNOWN;
+            DesktopModeEventLogger.Companion.TaskUpdate taskUpdateBuildTaskUpdateForTask$default = buildTaskUpdateForTask$default(desktopModeLoggerTransitionObserver, taskInfo2, sparseArray2.size(), null, focusReason, 12);
+            TaskInfo taskInfo3 = (TaskInfo) sparseArray.get(iKeyAt);
+            if (taskInfo3 == null) {
+                if (iBinder == null || (desktopTasksLimiter = (DesktopTasksLimiter) desktopModeLoggerTransitionObserver.desktopTasksLimiter.orElse(null)) == null) {
+                    taskDetails3 = null;
+                } else {
+                    DesktopTasksLimiter.MinimizeTransitionObserver minimizeTransitionObserver = desktopTasksLimiter.minimizeTransitionObserver;
+                    taskDetails3 = (DesktopTasksLimiter.TaskDetails) ((LinkedHashMap) minimizeTransitionObserver.pendingUnminimizeTransitionTokensAndTasks).get(iBinder);
+                    if (taskDetails3 == null) {
+                        taskDetails3 = (DesktopTasksLimiter.TaskDetails) ((LinkedHashMap) minimizeTransitionObserver.activeUnminimizeTransitionTokensAndTasks).get(iBinder);
+                    }
+                }
+                if (taskDetails3 != null) {
+                    DesktopModeEventLogger.Companion.UnminimizeReason unminimizeReason = taskDetails3.taskId == taskInfo2.taskId ? taskDetails3.unminimizeReason : null;
+                    DesktopModeEventLogger.Companion.TaskUpdate taskUpdate = new DesktopModeEventLogger.Companion.TaskUpdate(taskUpdateBuildTaskUpdateForTask$default.instanceId, taskUpdateBuildTaskUpdateForTask$default.uid, taskUpdateBuildTaskUpdateForTask$default.taskHeight, taskUpdateBuildTaskUpdateForTask$default.taskWidth, taskUpdateBuildTaskUpdateForTask$default.taskX, taskUpdateBuildTaskUpdateForTask$default.taskY, taskUpdateBuildTaskUpdateForTask$default.minimizeReason, unminimizeReason, taskUpdateBuildTaskUpdateForTask$default.visibleTaskCount, taskUpdateBuildTaskUpdateForTask$default.focusReason);
+                    int i3 = desktopModeEventLogger.currentSessionId.get();
+                    if (i3 == 0) {
+                        ProtoLog.w(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: No session id found for logging task added", new Object[0]);
+                    } else {
+                        ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: Logging task added, session: %s taskId: %s", new Object[]{Integer.valueOf(i3), Integer.valueOf(taskUpdate.instanceId)});
+                        DesktopModeEventLogger.logTaskUpdate(1, i3, taskUpdate);
+                    }
+                    Trace.setCounter(32L, "desktop_mode_visible_tasks", sparseArray2.size());
+                    SystemProperties.set("debug.tracing.desktop_mode_visible_tasks", String.valueOf(sparseArray2.size()));
+                }
+                i2++;
+            } else if (focusReason != null) {
+                desktopModeEventLogger.logTaskInfoChanged(taskUpdateBuildTaskUpdateForTask$default);
+            } else {
+                desktopModeLoggerTransitionObserver = this;
+                if (!buildTaskUpdateForTask$default(desktopModeLoggerTransitionObserver, taskInfo3, sparseArray2.size(), null, focusReason, 12).equals(taskUpdateBuildTaskUpdateForTask$default)) {
+                    desktopModeEventLogger.logTaskInfoChanged(taskUpdateBuildTaskUpdateForTask$default);
+                }
+                i2++;
+            }
+            desktopModeLoggerTransitionObserver = this;
+            i2++;
+        }
+        long j3 = 32;
+        int size2 = sparseArray.size();
+        int i4 = 0;
+        while (i4 < size2) {
+            int iKeyAt2 = sparseArray.keyAt(i4);
+            TaskInfo taskInfo4 = (TaskInfo) sparseArray.valueAt(i4);
+            if (sparseArray2.indexOfKey(iKeyAt2) >= 0) {
+                str2 = str;
+                j2 = j3;
+            } else {
+                if (transitionInfo == null || transitionInfo.getType() != 1020) {
+                    if (iBinder != null) {
+                        taskDetails = null;
+                        DesktopTasksLimiter desktopTasksLimiter2 = (DesktopTasksLimiter) desktopModeLoggerTransitionObserver.desktopTasksLimiter.orElse(null);
+                        if (desktopTasksLimiter2 != null) {
+                            DesktopTasksLimiter.MinimizeTransitionObserver minimizeTransitionObserver2 = desktopTasksLimiter2.minimizeTransitionObserver;
+                            taskDetails2 = (DesktopTasksLimiter.TaskDetails) ((LinkedHashMap) minimizeTransitionObserver2.pendingUnminimizeTransitionTokensAndTasks).get(iBinder);
+                            if (taskDetails2 == null && (taskDetails2 = (DesktopTasksLimiter.TaskDetails) ((LinkedHashMap) minimizeTransitionObserver2.pendingTransitionTokensAndTasks).get(iBinder)) == null) {
+                                taskDetails2 = (DesktopTasksLimiter.TaskDetails) ((LinkedHashMap) minimizeTransitionObserver2.activeTransitionTokensAndTasks).get(iBinder);
+                            }
+                        }
+                        if (taskDetails2 != null) {
+                            if (taskDetails2.taskId == taskInfo4.taskId) {
+                                minimizeReason2 = taskDetails2.minimizeReason;
+                                j = j3;
+                            }
+                        }
+                        j = j3;
+                        minimizeReason = taskDetails;
+                        str2 = str;
+                        j2 = j;
+                        DesktopModeEventLogger.Companion.TaskUpdate taskUpdateBuildTaskUpdateForTask$default2 = buildTaskUpdateForTask$default(desktopModeLoggerTransitionObserver, taskInfo4, sparseArray2.size(), minimizeReason, null, 24);
+                        i = desktopModeEventLogger.currentSessionId.get();
+                        if (i == 0) {
+                            ProtoLog.w(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: No session id found for logging task removed", new Object[0]);
+                        } else {
+                            ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: Logging task remove, session: %s taskId: %s", new Object[]{Integer.valueOf(i), Integer.valueOf(taskUpdateBuildTaskUpdateForTask$default2.instanceId)});
+                            DesktopModeEventLogger.logTaskUpdate(2, i, taskUpdateBuildTaskUpdateForTask$default2);
+                        }
+                        Trace.setCounter(j2, "desktop_mode_visible_tasks", sparseArray2.size());
+                        SystemProperties.set(str2, String.valueOf(sparseArray2.size()));
+                    } else {
+                        taskDetails = null;
+                    }
+                    taskDetails2 = taskDetails;
+                    if (taskDetails2 != null) {
+                    }
+                    j = j3;
+                    minimizeReason = taskDetails;
+                    str2 = str;
+                    j2 = j;
+                    DesktopModeEventLogger.Companion.TaskUpdate taskUpdateBuildTaskUpdateForTask$default22 = buildTaskUpdateForTask$default(desktopModeLoggerTransitionObserver, taskInfo4, sparseArray2.size(), minimizeReason, null, 24);
+                    i = desktopModeEventLogger.currentSessionId.get();
+                    if (i == 0) {
+                    }
+                    Trace.setCounter(j2, "desktop_mode_visible_tasks", sparseArray2.size());
+                    SystemProperties.set(str2, String.valueOf(sparseArray2.size()));
+                } else {
+                    minimizeReason2 = DesktopModeEventLogger.Companion.MinimizeReason.MINIMIZE_BUTTON;
+                    j = j3;
+                }
+                minimizeReason = minimizeReason2;
+                str2 = str;
+                j2 = j;
+                DesktopModeEventLogger.Companion.TaskUpdate taskUpdateBuildTaskUpdateForTask$default222 = buildTaskUpdateForTask$default(desktopModeLoggerTransitionObserver, taskInfo4, sparseArray2.size(), minimizeReason, null, 24);
+                i = desktopModeEventLogger.currentSessionId.get();
+                if (i == 0) {
+                }
+                Trace.setCounter(j2, "desktop_mode_visible_tasks", sparseArray2.size());
+                SystemProperties.set(str2, String.valueOf(sparseArray2.size()));
+            }
+            i4++;
+            desktopModeLoggerTransitionObserver = this;
+            j3 = j2;
+            str = str2;
+        }
     }
 
     public final void identifyLogEventAndUpdateState(IBinder iBinder, TransitionInfo transitionInfo, SparseArray sparseArray, SparseArray sparseArray2, TaskInfo taskInfo) {
@@ -172,9 +304,7 @@ public final class DesktopModeLoggerTransitionObserver implements Transitions.Tr
                 enterReason = DesktopModeEventLogger.Companion.EnterReason.APP_FROM_OVERVIEW;
             } else if (transitionInfo != null && transitionInfo.getType() == 1103) {
                 enterReason = DesktopModeEventLogger.Companion.EnterReason.KEYBOARD_SHORTCUT_ENTER;
-            } else if (transitionInfo != null && transitionInfo.getType() == 3) {
-                enterReason = DesktopModeEventLogger.Companion.EnterReason.OVERVIEW;
-            } else if (this.wasPreviousTransitionExitToOverview) {
+            } else if ((transitionInfo != null && transitionInfo.getType() == 3) || this.wasPreviousTransitionExitToOverview) {
                 enterReason = DesktopModeEventLogger.Companion.EnterReason.OVERVIEW;
             } else if (transitionInfo == null || transitionInfo.getType() != 1) {
                 ProtoLog.w(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "Unknown enter reason for transition type: %s", new Object[]{transitionInfo != null ? Integer.valueOf(transitionInfo.getType()) : null});
@@ -183,14 +313,14 @@ public final class DesktopModeLoggerTransitionObserver implements Transitions.Tr
                 enterReason = DesktopModeEventLogger.Companion.EnterReason.APP_FREEFORM_INTENT;
             }
             this.wasPreviousTransitionExitByScreenOff = false;
-            int nextInt = desktopModeEventLogger.random.nextInt(1048576) + 1;
-            int andSet2 = desktopModeEventLogger.currentSessionId.getAndSet(nextInt);
+            int iNextInt = desktopModeEventLogger.random.nextInt(1048576) + 1;
+            int andSet2 = desktopModeEventLogger.currentSessionId.getAndSet(iNextInt);
             if (andSet2 != 0) {
                 ProtoLog.w(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: Existing desktop mode session id: %s found on desktop mode enter", new Object[]{Integer.valueOf(andSet2)});
             }
-            ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: Logging session enter, session: %s reason: %s", new Object[]{Integer.valueOf(nextInt), enterReason.name()});
-            FrameworkStatsLog.write(818, 1, enterReason.getReason(), 0, nextInt);
-            EventLog.writeEvent(38500, Integer.valueOf(enterReason.getReason()), Integer.valueOf(nextInt));
+            ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: Logging session enter, session: %s reason: %s", new Object[]{Integer.valueOf(iNextInt), enterReason.name()});
+            FrameworkStatsLog.write(818, 1, enterReason.getReason(), 0, iNextInt);
+            EventLog.writeEvent(38500, Integer.valueOf(enterReason.getReason()), Integer.valueOf(iNextInt));
             identifyAndLogTaskUpdates(iBinder, transitionInfo, sparseArray, sparseArray2, taskInfo);
         } else if (this.isSessionActive) {
             identifyAndLogTaskUpdates(iBinder, transitionInfo, sparseArray, sparseArray2, taskInfo);
@@ -204,7 +334,7 @@ public final class DesktopModeLoggerTransitionObserver implements Transitions.Tr
     public final void onTransitionReady(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) {
         SparseArray sparseArray;
         SparseArray sparseArray2;
-        Object obj;
+        Object objPrevious;
         int i = 0;
         if (isExitToRecentsTransition(transitionInfo) && this.tasksSavedForRecents.size() == 0) {
             ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: Recents animation running, saving tasks for later", new Object[0]);
@@ -215,22 +345,22 @@ public final class DesktopModeLoggerTransitionObserver implements Transitions.Tr
         } else {
             List changes = transitionInfo.getChanges();
             ArrayList arrayList = new ArrayList();
-            for (Object obj2 : changes) {
-                TransitionInfo.Change change = (TransitionInfo.Change) obj2;
+            for (Object obj : changes) {
+                TransitionInfo.Change change = (TransitionInfo.Change) obj;
                 if (change.getTaskInfo() != null && requireTaskInfo(change).taskId != -1) {
-                    arrayList.add(obj2);
+                    arrayList.add(obj);
                 }
             }
             ArrayList arrayList2 = new ArrayList();
             int size = arrayList.size();
             int i2 = 0;
             while (i2 < size) {
-                Object obj3 = arrayList.get(i2);
+                Object obj2 = arrayList.get(i2);
                 i2++;
-                TransitionInfo.Change change2 = (TransitionInfo.Change) obj3;
+                TransitionInfo.Change change2 = (TransitionInfo.Change) obj2;
                 change2.getClass();
                 if (requireTaskInfo(change2).getWindowingMode() == 5 || this.visibleFreeformTaskInfos.indexOfKey(requireTaskInfo(change2).taskId) >= 0) {
-                    arrayList2.add(obj3);
+                    arrayList2.add(obj2);
                 }
             }
             SparseArray sparseArray3 = new SparseArray();
@@ -238,17 +368,17 @@ public final class DesktopModeLoggerTransitionObserver implements Transitions.Tr
             int size2 = arrayList2.size();
             int i3 = 0;
             while (i3 < size2) {
-                Object obj4 = arrayList2.get(i3);
+                Object obj3 = arrayList2.get(i3);
                 i3++;
-                TransitionInfo.Change change3 = (TransitionInfo.Change) obj4;
+                TransitionInfo.Change change3 = (TransitionInfo.Change) obj3;
                 change3.getClass();
-                ActivityManager.RunningTaskInfo requireTaskInfo = requireTaskInfo(change3);
-                if (this.visibleFreeformTaskInfos.indexOfKey(requireTaskInfo.taskId) >= 0 && ((TaskInfo) this.visibleFreeformTaskInfos.get(requireTaskInfo.taskId)).getWindowingMode() == 5 && requireTaskInfo.getWindowingMode() != 5) {
-                    sparseArray3.remove(requireTaskInfo.taskId);
+                ActivityManager.RunningTaskInfo runningTaskInfoRequireTaskInfo = requireTaskInfo(change3);
+                if (this.visibleFreeformTaskInfos.indexOfKey(runningTaskInfoRequireTaskInfo.taskId) >= 0 && ((TaskInfo) this.visibleFreeformTaskInfos.get(runningTaskInfoRequireTaskInfo.taskId)).getWindowingMode() == 5 && runningTaskInfoRequireTaskInfo.getWindowingMode() != 5) {
+                    sparseArray3.remove(runningTaskInfoRequireTaskInfo.taskId);
                 } else if (!TransitionUtil.isOpeningType(change3.getMode()) && (TransitionUtil.isClosingType(change3.getMode()) || change3.getMode() != 6)) {
-                    sparseArray3.remove(requireTaskInfo.taskId);
+                    sparseArray3.remove(runningTaskInfoRequireTaskInfo.taskId);
                 } else {
-                    sparseArray3.put(requireTaskInfo.taskId, requireTaskInfo);
+                    sparseArray3.put(runningTaskInfoRequireTaskInfo.taskId, runningTaskInfoRequireTaskInfo);
                 }
             }
             ProtoLog.v(ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE, "DesktopModeLogger: taskInfo map after processing changes %s", new Object[]{Integer.valueOf(sparseArray3.size())});
@@ -268,36 +398,36 @@ public final class DesktopModeLoggerTransitionObserver implements Transitions.Tr
         SparseArray sparseArray6 = this.visibleFreeformTaskInfos;
         List changes2 = transitionInfo.getChanges();
         ArrayList arrayList3 = new ArrayList();
-        for (Object obj5 : changes2) {
-            TransitionInfo.Change change4 = (TransitionInfo.Change) obj5;
+        for (Object obj4 : changes2) {
+            TransitionInfo.Change change4 = (TransitionInfo.Change) obj4;
             if (change4.getTaskInfo() != null && requireTaskInfo(change4).taskId != -1) {
-                arrayList3.add(obj5);
+                arrayList3.add(obj4);
             }
         }
         ArrayList arrayList4 = new ArrayList();
         int size3 = arrayList3.size();
         while (i < size3) {
-            Object obj6 = arrayList3.get(i);
+            Object obj5 = arrayList3.get(i);
             i++;
-            TransitionInfo.Change change5 = (TransitionInfo.Change) obj6;
+            TransitionInfo.Change change5 = (TransitionInfo.Change) obj5;
             change5.getClass();
             if (requireTaskInfo(change5).getWindowingMode() == 5) {
-                arrayList4.add(obj6);
+                arrayList4.add(obj5);
             }
         }
         ListIterator listIterator = arrayList4.listIterator(arrayList4.size());
         while (true) {
             if (!listIterator.hasPrevious()) {
-                obj = null;
+                objPrevious = null;
                 break;
             }
-            obj = listIterator.previous();
-            TransitionInfo.Change change6 = (TransitionInfo.Change) obj;
+            objPrevious = listIterator.previous();
+            TransitionInfo.Change change6 = (TransitionInfo.Change) objPrevious;
             if (change6.hasFlags(1048576) || change6.getMode() == 1) {
                 break;
             }
         }
-        TransitionInfo.Change change7 = (TransitionInfo.Change) obj;
+        TransitionInfo.Change change7 = (TransitionInfo.Change) objPrevious;
         identifyLogEventAndUpdateState(iBinder, transitionInfo, sparseArray6, sparseArray2, change7 != null ? change7.getTaskInfo() : null);
         this.wasPreviousTransitionExitToOverview = isExitToRecentsTransition(transitionInfo);
     }

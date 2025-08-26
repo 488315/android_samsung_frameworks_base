@@ -48,9 +48,9 @@ public abstract class BulkCursorNative extends Binder implements IBulkCursor {
                     return true;
                 case 3:
                     parcel.enforceInterface(IBulkCursor.descriptor);
-                    int requery = requery(IContentObserver.Stub.asInterface(parcel.readStrongBinder()));
+                    int iRequery = requery(IContentObserver.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
-                    parcel2.writeInt(requery);
+                    parcel2.writeInt(iRequery);
                     parcel2.writeBundle(getExtras());
                     return true;
                 case 4:
@@ -66,9 +66,9 @@ public abstract class BulkCursorNative extends Binder implements IBulkCursor {
                     return true;
                 case 6:
                     parcel.enforceInterface(IBulkCursor.descriptor);
-                    Bundle respond = respond(parcel.readBundle());
+                    Bundle bundleRespond = respond(parcel.readBundle());
                     parcel2.writeNoException();
-                    parcel2.writeBundle(respond);
+                    parcel2.writeBundle(bundleRespond);
                     return true;
                 case 7:
                     parcel.enforceInterface(IBulkCursor.descriptor);

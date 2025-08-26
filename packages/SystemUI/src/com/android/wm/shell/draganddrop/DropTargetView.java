@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -27,7 +28,6 @@ import com.samsung.android.rune.CoreRune;
 import com.samsung.android.util.InterpolatorUtils;
 import com.samsung.android.view.SemWindowManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DropTargetView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -63,7 +63,7 @@ public class DropTargetView extends FrameLayout {
 
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DropTargetView dropTargetView2 = DropTargetView.this;
+                    DropTargetView dropTargetView2 = this.f$0;
                     Bitmap bitmap2 = this.f$1;
                     ImageView imageView = dropTargetView2.mPartialBlurView;
                     if (imageView == null) {
@@ -94,33 +94,33 @@ public class DropTargetView extends FrameLayout {
     public final void hide() {
         if (this.mHideAnimatorSet == null) {
             this.mHideAnimatorSet = new AnimatorSet();
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "alpha", 1.0f, 0.0f);
-            ofFloat.setDuration(300L);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, "alpha", 1.0f, 0.0f);
+            objectAnimatorOfFloat.setDuration(300L);
             PathInterpolator pathInterpolator = InterpolatorUtils.SINE_OUT_60;
-            ofFloat.setInterpolator(pathInterpolator);
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mText, "alpha", 1.0f, 0.0f);
-            ofFloat2.setDuration(300L);
-            ofFloat2.setInterpolator(pathInterpolator);
-            ValueAnimator ofInt = ObjectAnimator.ofInt(CoreRune.MW_SUPPORT_DRAG_AND_DROP_REAL_TIME_BLUR ? 125 : 80, 0);
-            ofInt.setDuration(200L);
-            ofInt.setInterpolator(pathInterpolator);
-            ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(this.mText, "scaleX", 1.0f, 0.8f);
-            ofFloat3.setDuration(150L);
+            objectAnimatorOfFloat.setInterpolator(pathInterpolator);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mText, "alpha", 1.0f, 0.0f);
+            objectAnimatorOfFloat2.setDuration(300L);
+            objectAnimatorOfFloat2.setInterpolator(pathInterpolator);
+            ValueAnimator valueAnimatorOfInt = ObjectAnimator.ofInt(CoreRune.MW_SUPPORT_DRAG_AND_DROP_REAL_TIME_BLUR ? 125 : 80, 0);
+            valueAnimatorOfInt.setDuration(200L);
+            valueAnimatorOfInt.setInterpolator(pathInterpolator);
+            ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(this.mText, "scaleX", 1.0f, 0.8f);
+            objectAnimatorOfFloat3.setDuration(150L);
             PathInterpolator pathInterpolator2 = InterpolatorUtils.ONE_EASING;
-            ofFloat3.setInterpolator(pathInterpolator2);
-            ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(this.mText, "scaleY", 1.0f, 0.8f);
-            ofFloat4.setDuration(150L);
-            ofFloat4.setInterpolator(pathInterpolator2);
-            ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.draganddrop.DropTargetView.3
+            objectAnimatorOfFloat3.setInterpolator(pathInterpolator2);
+            ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(this.mText, "scaleY", 1.0f, 0.8f);
+            objectAnimatorOfFloat4.setDuration(150L);
+            objectAnimatorOfFloat4.setInterpolator(pathInterpolator2);
+            valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.draganddrop.DropTargetView.3
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                     DropTargetView dropTargetView = DropTargetView.this;
-                    int intValue = ((Integer) valueAnimator.getAnimatedValue()).intValue();
+                    int iIntValue = ((Integer) valueAnimator.getAnimatedValue()).intValue();
                     int i = DropTargetView.$r8$clinit;
-                    dropTargetView.setBlurEffect(intValue);
+                    dropTargetView.setBlurEffect(iIntValue);
                 }
             });
-            this.mHideAnimatorSet.playTogether(ofFloat, ofFloat2, ofFloat3, ofFloat4, ofInt);
+            this.mHideAnimatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2, objectAnimatorOfFloat3, objectAnimatorOfFloat4, valueAnimatorOfInt);
         }
         AnimatorSet animatorSet = this.mShowAnimatorSet;
         if (animatorSet != null && animatorSet.isRunning()) {
@@ -139,7 +139,7 @@ public class DropTargetView extends FrameLayout {
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         int i = configuration.orientation;
         if (i != this.mOrientation) {
@@ -170,7 +170,7 @@ public class DropTargetView extends FrameLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mView = findViewById(R.id.dnd_drop_target_view);
         this.mText = (TextView) findViewById(R.id.dnd_drop_target_text);
@@ -184,9 +184,9 @@ public class DropTargetView extends FrameLayout {
     }
 
     public final void setBlurEffect(int i) {
-        SemBlurInfo semBlurInfo;
+        SemBlurInfo semBlurInfoBuild;
         if (CoreRune.MW_SUPPORT_DRAG_AND_DROP_REAL_TIME_BLUR) {
-            semBlurInfo = new SemBlurInfo.Builder(0).setRadius(i).setBackgroundCornerRadius(getResources().getDimension(R.dimen.dnd_drop_freeform_corner_radius_size)).build();
+            semBlurInfoBuild = new SemBlurInfo.Builder(0).setRadius(i).setBackgroundCornerRadius(getResources().getDimension(R.dimen.dnd_drop_freeform_corner_radius_size)).build();
         } else if (CoreRune.MW_SUPPORT_DRAG_AND_DROP_CAPTURED_BLUR) {
             int backgroundResourceId = getBackgroundResourceId();
             if (this.mCapture == null) {
@@ -200,34 +200,35 @@ public class DropTargetView extends FrameLayout {
                 if (this.mIsFreeform) {
                     rect.inset((rect.width() - this.mFreeformWidth) / 2, (rect.height() - this.mFreeformHeight) / 2);
                 }
-                Bitmap screenshot = SemWindowManager.getInstance().screenshot(0, 2000, false, rect, rect.width(), rect.height(), false, ((FrameLayout) this).mContext.getDisplay().getRotation());
-                if (screenshot == null) {
+                Bitmap bitmapScreenshot = SemWindowManager.getInstance().screenshot(0, 2000, false, rect, rect.width(), rect.height(), false, ((FrameLayout) this).mContext.getDisplay().getRotation());
+                if (bitmapScreenshot == null) {
                     Log.w("DropTargetView", "setBlurEffect: failed, capture failed, " + Debug.getCallers(7));
+                    this.mPartialBlurView.semSetBlurInfo(null);
                     return;
                 }
-                this.mCapture = screenshot;
+                this.mCapture = bitmapScreenshot;
             }
             if (this.mBackgroundExecutor != null && this.mUiHandler != null) {
                 if (this.mBlurredBitmapCreated) {
                     return;
                 }
-                final long currentTimeMillis = System.currentTimeMillis();
+                final long jCurrentTimeMillis = System.currentTimeMillis();
                 this.mBlurredBitmapCreated = true;
                 this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.wm.shell.draganddrop.DropTargetView$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DropTargetView.$r8$lambda$tplp4yJwUthw95eKri7lNnjwHIU(DropTargetView.this, currentTimeMillis);
+                        DropTargetView.$r8$lambda$tplp4yJwUthw95eKri7lNnjwHIU(this.f$0, jCurrentTimeMillis);
                     }
                 });
                 return;
             }
-            semBlurInfo = new SemBlurInfo.Builder(1).setRadius(i).setBitmap(this.mCapture).build();
+            semBlurInfoBuild = new SemBlurInfo.Builder(1).setRadius(i).setBitmap(this.mCapture).build();
             this.mPartialBlurView.setBackgroundResource(backgroundResourceId);
             this.mPartialBlurView.setClipToOutline(true);
         } else {
-            semBlurInfo = null;
+            semBlurInfoBuild = null;
         }
-        this.mPartialBlurView.semSetBlurInfo(semBlurInfo);
+        this.mPartialBlurView.semSetBlurInfo(semBlurInfoBuild);
     }
 
     public final void showBlurEffect() {

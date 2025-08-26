@@ -185,14 +185,14 @@ public final class KeyboardLayout implements Parcelable, Comparable<KeyboardLayo
 
     @Override // java.lang.Comparable
     public int compareTo(KeyboardLayout keyboardLayout) {
-        int compare = Integer.compare(keyboardLayout.mPriority, this.mPriority);
-        if (compare == 0) {
-            compare = Integer.compare(this.mLayoutType.mValue, keyboardLayout.mLayoutType.mValue);
+        int iCompare = Integer.compare(keyboardLayout.mPriority, this.mPriority);
+        if (iCompare == 0) {
+            iCompare = Integer.compare(this.mLayoutType.mValue, keyboardLayout.mLayoutType.mValue);
         }
-        if (compare == 0) {
-            compare = this.mLabel.compareToIgnoreCase(keyboardLayout.mLabel);
+        if (iCompare == 0) {
+            iCompare = this.mLabel.compareToIgnoreCase(keyboardLayout.mLabel);
         }
-        return compare == 0 ? this.mCollection.compareToIgnoreCase(keyboardLayout.mCollection) : compare;
+        return iCompare == 0 ? this.mCollection.compareToIgnoreCase(keyboardLayout.mCollection) : iCompare;
     }
 
     public String toString() {

@@ -84,9 +84,9 @@ public class PointF implements Parcelable {
 
     public int hashCode() {
         float f = this.x;
-        int floatToIntBits = (f != 0.0f ? Float.floatToIntBits(f) : 0) * 31;
+        int iFloatToIntBits = (f != 0.0f ? Float.floatToIntBits(f) : 0) * 31;
         float f2 = this.y;
-        return floatToIntBits + (f2 != 0.0f ? Float.floatToIntBits(f2) : 0);
+        return iFloatToIntBits + (f2 != 0.0f ? Float.floatToIntBits(f2) : 0);
     }
 
     public String toString() {

@@ -102,12 +102,12 @@ public class BaseMovementMethod implements MovementMethod {
 
     @Override // android.text.method.MovementMethod
     public boolean onKeyDown(TextView textView, Spannable spannable, int i, KeyEvent keyEvent) {
-        boolean handleMovementKey = handleMovementKey(textView, spannable, i, getMovementMetaState(spannable, keyEvent), keyEvent);
-        if (handleMovementKey) {
+        boolean zHandleMovementKey = handleMovementKey(textView, spannable, i, getMovementMetaState(spannable, keyEvent), keyEvent);
+        if (zHandleMovementKey) {
             MetaKeyKeyListener.adjustMetaAfterKeypress(spannable);
             MetaKeyKeyListener.resetLockedMeta(spannable);
         }
-        return handleMovementKey;
+        return zHandleMovementKey;
     }
 
     @Override // android.text.method.MovementMethod
@@ -151,8 +151,8 @@ public class BaseMovementMethod implements MovementMethod {
     public boolean onGenericMotionEvent(TextView textView, Spannable spannable, MotionEvent motionEvent) {
         float f;
         float axisValue;
-        boolean scrollDown;
-        boolean z = false;
+        boolean zScrollDown;
+        boolean zScrollRight = false;
         if ((motionEvent.getSource() & 2) != 0 && motionEvent.getAction() == 8) {
             if ((motionEvent.getMetaState() & 1) != 0) {
                 axisValue = motionEvent.getAxisValue(9);
@@ -162,18 +162,18 @@ public class BaseMovementMethod implements MovementMethod {
                 axisValue = motionEvent.getAxisValue(10);
             }
             if (axisValue < 0.0f) {
-                z = scrollLeft(textView, spannable, (int) Math.ceil(-axisValue));
+                zScrollRight = scrollLeft(textView, spannable, (int) Math.ceil(-axisValue));
             } else if (axisValue > 0.0f) {
-                z = scrollRight(textView, spannable, (int) Math.ceil(axisValue));
+                zScrollRight = scrollRight(textView, spannable, (int) Math.ceil(axisValue));
             }
             if (f < 0.0f) {
-                scrollDown = scrollUp(textView, spannable, (int) Math.ceil(-f));
+                zScrollDown = scrollUp(textView, spannable, (int) Math.ceil(-f));
             } else if (f > 0.0f) {
-                scrollDown = scrollDown(textView, spannable, (int) Math.ceil(f));
+                zScrollDown = scrollDown(textView, spannable, (int) Math.ceil(f));
             }
-            return scrollDown | z;
+            return zScrollDown | zScrollRight;
         }
-        return z;
+        return zScrollRight;
     }
 
     protected int getMovementMetaState(Spannable spannable, KeyEvent keyEvent) {
@@ -296,9 +296,9 @@ public class BaseMovementMethod implements MovementMethod {
         }
         int i = Integer.MAX_VALUE;
         while (topLine <= bottomLine) {
-            int floor = (int) Math.floor(layout.getLineLeft(topLine));
-            if (floor < i) {
-                i = floor;
+            int iFloor = (int) Math.floor(layout.getLineLeft(topLine));
+            if (iFloor < i) {
+                i = iFloor;
             }
             topLine++;
         }
@@ -314,9 +314,9 @@ public class BaseMovementMethod implements MovementMethod {
         }
         int i = Integer.MIN_VALUE;
         while (topLine <= bottomLine) {
-            int ceil = (int) Math.ceil(layout.getLineRight(topLine));
-            if (ceil > i) {
-                i = ceil;
+            int iCeil = (int) Math.ceil(layout.getLineRight(topLine));
+            if (iCeil > i) {
+                i = iCeil;
             }
             topLine++;
         }

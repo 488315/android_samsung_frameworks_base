@@ -90,9 +90,9 @@ public interface IAutoFillService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAutoFillService)) {
-                return (IAutoFillService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAutoFillService)) {
+                return (IAutoFillService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -134,39 +134,39 @@ public interface IAutoFillService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onConnectedStateChanged(readBoolean);
+                    onConnectedStateChanged(z);
                     return true;
                 case 2:
                     FillRequest fillRequest = (FillRequest) parcel.readTypedObject(FillRequest.CREATOR);
-                    IFillCallback asInterface = IFillCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IFillCallback iFillCallbackAsInterface = IFillCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onFillRequest(fillRequest, asInterface);
+                    onFillRequest(fillRequest, iFillCallbackAsInterface);
                     return true;
                 case 3:
                     FillRequest fillRequest2 = (FillRequest) parcel.readTypedObject(FillRequest.CREATOR);
-                    IFillCallback asInterface2 = IFillCallback.Stub.asInterface(parcel.readStrongBinder());
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IFillCallback iFillCallbackAsInterface2 = IFillCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    onFillCredentialRequest(fillRequest2, asInterface2, readStrongBinder);
+                    onFillCredentialRequest(fillRequest2, iFillCallbackAsInterface2, strongBinder);
                     return true;
                 case 4:
                     SaveRequest saveRequest = (SaveRequest) parcel.readTypedObject(SaveRequest.CREATOR);
-                    ISaveCallback asInterface3 = ISaveCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISaveCallback iSaveCallbackAsInterface = ISaveCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onSaveRequest(saveRequest, asInterface3);
+                    onSaveRequest(saveRequest, iSaveCallbackAsInterface);
                     return true;
                 case 5:
-                    IResultReceiver asInterface4 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    IResultReceiver iResultReceiverAsInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onSavedPasswordCountRequest(asInterface4);
+                    onSavedPasswordCountRequest(iResultReceiverAsInterface);
                     return true;
                 case 6:
                     ConvertCredentialRequest convertCredentialRequest = (ConvertCredentialRequest) parcel.readTypedObject(ConvertCredentialRequest.CREATOR);
-                    IConvertCredentialCallback asInterface5 = IConvertCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IConvertCredentialCallback iConvertCredentialCallbackAsInterface = IConvertCredentialCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onConvertCredentialRequest(convertCredentialRequest, asInterface5);
+                    onConvertCredentialRequest(convertCredentialRequest, iConvertCredentialCallbackAsInterface);
                     return true;
                 case 7:
                     FillEventHistory fillEventHistory = (FillEventHistory) parcel.readTypedObject(FillEventHistory.CREATOR);
@@ -196,90 +196,90 @@ public interface IAutoFillService extends IInterface {
 
             @Override // android.service.autofill.IAutoFillService
             public void onConnectedStateChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IAutoFillService
             public void onFillRequest(FillRequest fillRequest, IFillCallback iFillCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(fillRequest, 0);
-                    obtain.writeStrongInterface(iFillCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(fillRequest, 0);
+                    parcelObtain.writeStrongInterface(iFillCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IAutoFillService
             public void onFillCredentialRequest(FillRequest fillRequest, IFillCallback iFillCallback, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(fillRequest, 0);
-                    obtain.writeStrongInterface(iFillCallback);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(fillRequest, 0);
+                    parcelObtain.writeStrongInterface(iFillCallback);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IAutoFillService
             public void onSaveRequest(SaveRequest saveRequest, ISaveCallback iSaveCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(saveRequest, 0);
-                    obtain.writeStrongInterface(iSaveCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(saveRequest, 0);
+                    parcelObtain.writeStrongInterface(iSaveCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IAutoFillService
             public void onSavedPasswordCountRequest(IResultReceiver iResultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IAutoFillService
             public void onConvertCredentialRequest(ConvertCredentialRequest convertCredentialRequest, IConvertCredentialCallback iConvertCredentialCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(convertCredentialRequest, 0);
-                    obtain.writeStrongInterface(iConvertCredentialCallback);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(convertCredentialRequest, 0);
+                    parcelObtain.writeStrongInterface(iConvertCredentialCallback);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.autofill.IAutoFillService
             public void onSessionDestroyed(FillEventHistory fillEventHistory) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(fillEventHistory, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(fillEventHistory, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -14,19 +14,19 @@ public class ColorThemeExtractor {
         if (bitmap == null) {
             return null;
         }
-        int[] makeClusterGroupColorBandBasedFromHueInterval = ColorPaletteExtractor.makeClusterGroupColorBandBasedFromHueInterval(30, new float[]{0.5f, 0.2f});
-        float fineScaleValueBySquareRootSize = BitmapHelper.fineScaleValueBySquareRootSize(bitmap.getWidth(), bitmap.getHeight(), 150);
-        if (fineScaleValueBySquareRootSize > 1.0f) {
-            fineScaleValueBySquareRootSize = 1.0f;
+        int[] iArrMakeClusterGroupColorBandBasedFromHueInterval = ColorPaletteExtractor.makeClusterGroupColorBandBasedFromHueInterval(30, new float[]{0.5f, 0.2f});
+        float fFineScaleValueBySquareRootSize = BitmapHelper.fineScaleValueBySquareRootSize(bitmap.getWidth(), bitmap.getHeight(), 150);
+        if (fFineScaleValueBySquareRootSize > 1.0f) {
+            fFineScaleValueBySquareRootSize = 1.0f;
         }
-        Bitmap createScaledBitmap = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * fineScaleValueBySquareRootSize), (int) (bitmap.getHeight() * fineScaleValueBySquareRootSize), false);
+        Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * fFineScaleValueBySquareRootSize), (int) (bitmap.getHeight() * fFineScaleValueBySquareRootSize), false);
         ColorPaletteExtractor.setSaturationThresholdForGrayscale(0.12f);
         ColorPaletteExtractor.setBrightnessThresholdForGrayscale(0.18f);
         ColorPaletteExtractor.setHsvSpaceHueRadiusValue(1.0f);
-        ColorExtractor.DominantColorResult[] kMeansHsv = ColorPaletteExtractor.kMeansHsv(createScaledBitmap, makeClusterGroupColorBandBasedFromHueInterval);
+        ColorExtractor.DominantColorResult[] dominantColorResultArrKMeansHsv = ColorPaletteExtractor.kMeansHsv(bitmapCreateScaledBitmap, iArrMakeClusterGroupColorBandBasedFromHueInterval);
         double d = 45.0f;
-        ColorPaletteExtractor.discardSameColorFromDominantColorsForColorPalette(kMeansHsv, d / 360.0d, ColorPaletteExtractor.ColorSpace.HUE, true);
-        int[] onlyColorsFromDominantColor = ColorPaletteExtractor.getOnlyColorsFromDominantColor(kMeansHsv, d);
+        ColorPaletteExtractor.discardSameColorFromDominantColorsForColorPalette(dominantColorResultArrKMeansHsv, d / 360.0d, ColorPaletteExtractor.ColorSpace.HUE, true);
+        int[] onlyColorsFromDominantColor = ColorPaletteExtractor.getOnlyColorsFromDominantColor(dominantColorResultArrKMeansHsv, d);
         return onlyColorsFromDominantColor == null ? new int[]{-16777216} : onlyColorsFromDominantColor;
     }
 }

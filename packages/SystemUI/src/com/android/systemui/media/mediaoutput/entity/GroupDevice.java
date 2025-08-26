@@ -15,7 +15,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GroupDevice implements AudioDevice, DeviceAction {
     public final Painter badge;
@@ -139,11 +138,11 @@ public final class GroupDevice implements AudioDevice, DeviceAction {
     }
 
     public final int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name);
         String str = this.description;
-        int hashCode = (this.icon.hashCode() + ((m + (str == null ? 0 : str.hashCode())) * 31)) * 31;
+        int iM2 = AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.icon, (iM + (str == null ? 0 : str.hashCode())) * 31, 31);
         Painter painter = this.badge;
-        return this.selectedDevices.hashCode() + ((this.state.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (hashCode + (painter != null ? painter.hashCode() : 0)) * 31, 31), 31)) * 31);
+        return this.selectedDevices.hashCode() + ((this.state.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (iM2 + (painter != null ? painter.hashCode() : 0)) * 31, 31), 31)) * 31);
     }
 
     public final String toString() {

@@ -8,21 +8,21 @@ class Children {
     }
 
     Element getOrCreate(Element element, String str, String str2) {
-        int hashCode = (str.hashCode() * 31) + str2.hashCode();
-        int i = hashCode & 15;
+        int iHashCode = (str.hashCode() * 31) + str2.hashCode();
+        int i = iHashCode & 15;
         Child child = this.children[i];
         if (child == null) {
-            Child child2 = new Child(element, str, str2, element.depth + 1, hashCode);
+            Child child2 = new Child(element, str, str2, element.depth + 1, iHashCode);
             this.children[i] = child2;
             return child2;
         }
         while (true) {
-            if (child.hash == hashCode && child.uri.compareTo(str) == 0 && child.localName.compareTo(str2) == 0) {
+            if (child.hash == iHashCode && child.uri.compareTo(str) == 0 && child.localName.compareTo(str2) == 0) {
                 return child;
             }
             Child child3 = child.next;
             if (child3 == null) {
-                Child child4 = new Child(element, str, str2, element.depth + 1, hashCode);
+                Child child4 = new Child(element, str, str2, element.depth + 1, iHashCode);
                 child.next = child4;
                 return child4;
             }
@@ -31,13 +31,13 @@ class Children {
     }
 
     Element get(String str, String str2) {
-        int hashCode = (str.hashCode() * 31) + str2.hashCode();
-        Child child = this.children[hashCode & 15];
+        int iHashCode = (str.hashCode() * 31) + str2.hashCode();
+        Child child = this.children[iHashCode & 15];
         if (child == null) {
             return null;
         }
         do {
-            if (child.hash == hashCode && child.uri.compareTo(str) == 0 && child.localName.compareTo(str2) == 0) {
+            if (child.hash == iHashCode && child.uri.compareTo(str) == 0 && child.localName.compareTo(str2) == 0) {
                 return child;
             }
             child = child.next;

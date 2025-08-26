@@ -9,7 +9,6 @@ import com.sec.ims.util.ImsUri;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ICapabilityServiceEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.options.ICapabilityServiceEventListener";
@@ -22,7 +21,6 @@ public interface ICapabilityServiceEventListener extends IInterface {
 
     void onOwnCapabilitiesChanged() throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ICapabilityServiceEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -46,14 +44,12 @@ public interface ICapabilityServiceEventListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ICapabilityServiceEventListener {
         static final int TRANSACTION_onCapabilitiesChanged = 2;
         static final int TRANSACTION_onCapabilityAndAvailabilityPublished = 4;
         static final int TRANSACTION_onMultipleCapabilitiesChanged = 3;
         static final int TRANSACTION_onOwnCapabilitiesChanged = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ICapabilityServiceEventListener {
             private IBinder mRemote;
 
@@ -72,62 +68,62 @@ public interface ICapabilityServiceEventListener extends IInterface {
 
             @Override // com.sec.ims.options.ICapabilityServiceEventListener
             public void onCapabilitiesChanged(List<ImsUri> list, Capabilities capabilities) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityServiceEventListener.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedObject(capabilities, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICapabilityServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedObject(capabilities, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityServiceEventListener
             public void onCapabilityAndAvailabilityPublished(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICapabilityServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityServiceEventListener
             public void onMultipleCapabilitiesChanged(List<ImsUri> list, List<Capabilities> list2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityServiceEventListener.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedList(list2, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICapabilityServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedList(list2, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.options.ICapabilityServiceEventListener
             public void onOwnCapabilitiesChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICapabilityServiceEventListener.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICapabilityServiceEventListener.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -140,8 +136,8 @@ public interface ICapabilityServiceEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICapabilityServiceEventListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ICapabilityServiceEventListener)) ? new Proxy(iBinder) : (ICapabilityServiceEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICapabilityServiceEventListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ICapabilityServiceEventListener)) ? new Proxy(iBinder) : (ICapabilityServiceEventListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -157,24 +153,24 @@ public interface ICapabilityServiceEventListener extends IInterface {
                 onOwnCapabilitiesChanged();
                 parcel2.writeNoException();
             } else if (i == 2) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ImsUri.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ImsUri.CREATOR);
                 Capabilities capabilities = (Capabilities) parcel.readTypedObject(Capabilities.CREATOR);
                 parcel.enforceNoDataAvail();
-                onCapabilitiesChanged(createTypedArrayList, capabilities);
+                onCapabilitiesChanged(arrayListCreateTypedArrayList, capabilities);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                ArrayList createTypedArrayList2 = parcel.createTypedArrayList(ImsUri.CREATOR);
-                ArrayList createTypedArrayList3 = parcel.createTypedArrayList(Capabilities.CREATOR);
+                ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(ImsUri.CREATOR);
+                ArrayList arrayListCreateTypedArrayList3 = parcel.createTypedArrayList(Capabilities.CREATOR);
                 parcel.enforceNoDataAvail();
-                onMultipleCapabilitiesChanged(createTypedArrayList2, createTypedArrayList3);
+                onMultipleCapabilitiesChanged(arrayListCreateTypedArrayList2, arrayListCreateTypedArrayList3);
                 parcel2.writeNoException();
             } else {
                 if (i != 4) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCapabilityAndAvailabilityPublished(readInt);
+                onCapabilityAndAvailabilityPublished(i3);
                 parcel2.writeNoException();
             }
             return true;

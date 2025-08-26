@@ -162,8 +162,8 @@ public class PerformanceCollector {
         Debug.getMemoryInfo(new Debug.MemoryInfo());
         Runtime runtime = Runtime.getRuntime();
         long j = runtime.totalMemory() / 1024;
-        long freeMemory = runtime.freeMemory() / 1024;
-        long j2 = j - freeMemory;
+        long jFreeMemory = runtime.freeMemory() / 1024;
+        long j2 = j - jFreeMemory;
         Bundle binderCounts = getBinderCounts();
         Iterator<String> it = binderCounts.keySet().iterator();
         while (it.hasNext()) {
@@ -171,11 +171,11 @@ public class PerformanceCollector {
             String next = it.next();
             this.mPerfSnapshot.putLong(next, binderCounts.getLong(next));
             it = it2;
-            freeMemory = freeMemory;
+            jFreeMemory = jFreeMemory;
             j2 = j2;
         }
         long j3 = j2;
-        long j4 = freeMemory;
+        long j4 = jFreeMemory;
         Bundle allocCounts = getAllocCounts();
         for (String str : allocCounts.keySet()) {
             this.mPerfSnapshot.putLong(str, allocCounts.getLong(str));

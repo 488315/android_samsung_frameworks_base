@@ -5,7 +5,6 @@ import androidx.compose.ui.unit.Dp;
 import androidx.compose.ui.unit.fontscaling.FontScaleConverter;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DensityWithConverter implements Density {
     public final FontScaleConverter converter;
@@ -45,20 +44,20 @@ final class DensityWithConverter implements Density {
 
     @Override // androidx.compose.ui.unit.FontScaling
     /* renamed from: toDp-GaN1DYA */
-    public final float mo52toDpGaN1DYA(long j) {
-        long m867getTypeUIouoOA = TextUnit.m867getTypeUIouoOA(j);
+    public final float mo53toDpGaN1DYA(long j) {
+        long jM869getTypeUIouoOA = TextUnit.m869getTypeUIouoOA(j);
         TextUnitType.Companion.getClass();
-        if (!TextUnitType.m874equalsimpl0(m867getTypeUIouoOA, TextUnitType.Sp)) {
+        if (!TextUnitType.m876equalsimpl0(jM869getTypeUIouoOA, TextUnitType.Sp)) {
             throw new IllegalStateException("Only Sp can convert to Px");
         }
-        float convertSpToDp = this.converter.convertSpToDp(TextUnit.m868getValueimpl(j));
+        float fConvertSpToDp = this.converter.convertSpToDp(TextUnit.m870getValueimpl(j));
         Dp.Companion companion = Dp.Companion;
-        return convertSpToDp;
+        return fConvertSpToDp;
     }
 
     @Override // androidx.compose.ui.unit.FontScaling
     /* renamed from: toSp-0xMU5do */
-    public final long mo59toSp0xMU5do(float f) {
+    public final long mo60toSp0xMU5do(float f) {
         return TextUnitKt.pack(this.converter.convertDpToSp(f), 4294967296L);
     }
 

@@ -18,7 +18,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final /* synthetic */ class PhysicsAnimator$startAction$1 extends FunctionReferenceImpl implements Function0 {
     public PhysicsAnimator$startAction$1(Object obj) {
@@ -37,10 +36,10 @@ final /* synthetic */ class PhysicsAnimator$startAction$1 extends FunctionRefere
             Log.w("PhysicsAnimator", "Trying to animate a GC-ed object.");
         } else {
             ArrayList arrayList = new ArrayList();
-            Set keySet = physicsAnimator2.springConfigs.keySet();
-            Set keySet2 = physicsAnimator2.flingConfigs.keySet();
-            Set mutableSet = CollectionsKt___CollectionsKt.toMutableSet(keySet);
-            CollectionsKt__MutableCollectionsKt.addAll(keySet2, mutableSet);
+            Set setKeySet = physicsAnimator2.springConfigs.keySet();
+            Set setKeySet2 = physicsAnimator2.flingConfigs.keySet();
+            Set mutableSet = CollectionsKt___CollectionsKt.toMutableSet(setKeySet);
+            CollectionsKt__MutableCollectionsKt.addAll(setKeySet2, mutableSet);
             Iterator it = mutableSet.iterator();
             while (true) {
                 i = 0;
@@ -58,7 +57,7 @@ final /* synthetic */ class PhysicsAnimator$startAction$1 extends FunctionRefere
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             PhysicsAnimator.Companion companion = PhysicsAnimator.Companion;
-                            PhysicsAnimator.FlingConfig flingConfig2 = PhysicsAnimator.FlingConfig.this;
+                            PhysicsAnimator.FlingConfig flingConfig2 = flingConfig;
                             float f = flingConfig2.min;
                             float f2 = value;
                             flingConfig2.min = Math.min(f2, f);
@@ -121,7 +120,7 @@ final /* synthetic */ class PhysicsAnimator$startAction$1 extends FunctionRefere
                         PhysicsAnimator.EndListener endListener = new PhysicsAnimator.EndListener() { // from class: com.android.wm.shell.shared.animation.PhysicsAnimator$startInternal$3
                             @Override // com.android.wm.shell.shared.animation.PhysicsAnimator.EndListener
                             public final void onAnimationEnd(Object obj6, FloatPropertyCompat floatPropertyCompat3, boolean z, boolean z2, float f3, float f4) {
-                                FloatPropertyCompat floatPropertyCompat4 = FloatPropertyCompat.this;
+                                FloatPropertyCompat floatPropertyCompat4 = floatPropertyCompat;
                                 if (Intrinsics.areEqual(floatPropertyCompat3, floatPropertyCompat4) && z && !z2) {
                                     boolean z3 = Math.abs(f4) > 0.0f;
                                     float f5 = f;
@@ -174,10 +173,10 @@ final /* synthetic */ class PhysicsAnimator$startAction$1 extends FunctionRefere
             Object obj6 = obj2;
             PhysicsAnimator physicsAnimator4 = physicsAnimator2;
             ArrayList arrayList3 = physicsAnimator4.internalListeners;
-            Set keySet3 = physicsAnimator4.springConfigs.keySet();
-            Set keySet4 = physicsAnimator4.flingConfigs.keySet();
-            Set mutableSet2 = CollectionsKt___CollectionsKt.toMutableSet(keySet3);
-            CollectionsKt__MutableCollectionsKt.addAll(keySet4, mutableSet2);
+            Set setKeySet3 = physicsAnimator4.springConfigs.keySet();
+            Set setKeySet4 = physicsAnimator4.flingConfigs.keySet();
+            Set mutableSet2 = CollectionsKt___CollectionsKt.toMutableSet(setKeySet3);
+            CollectionsKt__MutableCollectionsKt.addAll(setKeySet4, mutableSet2);
             arrayList3.add(physicsAnimator4.new InternalListener(obj6, mutableSet2, new ArrayList(physicsAnimator4.updateListeners), new ArrayList(physicsAnimator4.endListeners), new ArrayList(physicsAnimator4.endActions)));
             int size = arrayList.size();
             while (i < size) {

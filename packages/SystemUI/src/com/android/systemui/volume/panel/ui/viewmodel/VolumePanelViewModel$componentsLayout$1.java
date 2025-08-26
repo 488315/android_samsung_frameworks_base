@@ -26,7 +26,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumePanelViewModel$componentsLayout$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -76,9 +75,9 @@ final class VolumePanelViewModel$componentsLayout$1 extends SuspendLambda implem
         ArrayList arrayList2 = new ArrayList();
         Iterator it = arrayList.iterator();
         while (true) {
-            boolean hasNext = it.hasNext();
+            boolean zHasNext = it.hasNext();
             str = defaultComponentsLayoutManager.bottomBar;
-            if (!hasNext) {
+            if (!zHasNext) {
                 break;
             }
             Object next = it.next();
@@ -102,10 +101,10 @@ final class VolumePanelViewModel$componentsLayout$1 extends SuspendLambda implem
                 arrayList3.add(obj3);
             }
         }
-        List sortedWith = CollectionsKt___CollectionsKt.sortedWith(arrayList3, new Comparator() { // from class: com.android.systemui.volume.panel.ui.layout.DefaultComponentsLayoutManager$layout$$inlined$sortedBy$1
+        List listSortedWith = CollectionsKt___CollectionsKt.sortedWith(arrayList3, new Comparator() { // from class: com.android.systemui.volume.panel.ui.layout.DefaultComponentsLayoutManager$layout$$inlined$sortedBy$1
             @Override // java.util.Comparator
             public final int compare(Object obj4, Object obj5) {
-                return ComparisonsKt__ComparisonsKt.compareValues(Integer.valueOf(CollectionsKt___CollectionsKt.indexOf(DefaultComponentsLayoutManager.this.headerComponents, ((ComponentState) obj4).key)), Integer.valueOf(CollectionsKt___CollectionsKt.indexOf(DefaultComponentsLayoutManager.this.headerComponents, ((ComponentState) obj5).key)));
+                return ComparisonsKt__ComparisonsKt.compareValues(Integer.valueOf(CollectionsKt___CollectionsKt.indexOf(defaultComponentsLayoutManager.headerComponents, ((ComponentState) obj4).key)), Integer.valueOf(CollectionsKt___CollectionsKt.indexOf(defaultComponentsLayoutManager.headerComponents, ((ComponentState) obj5).key)));
             }
         });
         ArrayList arrayList4 = new ArrayList();
@@ -118,13 +117,13 @@ final class VolumePanelViewModel$componentsLayout$1 extends SuspendLambda implem
                 arrayList4.add(obj4);
             }
         }
-        List sortedWith2 = CollectionsKt___CollectionsKt.sortedWith(arrayList4, new Comparator() { // from class: com.android.systemui.volume.panel.ui.layout.DefaultComponentsLayoutManager$layout$$inlined$sortedBy$2
+        List listSortedWith2 = CollectionsKt___CollectionsKt.sortedWith(arrayList4, new Comparator() { // from class: com.android.systemui.volume.panel.ui.layout.DefaultComponentsLayoutManager$layout$$inlined$sortedBy$2
             @Override // java.util.Comparator
             public final int compare(Object obj5, Object obj6) {
-                return ComparisonsKt__ComparisonsKt.compareValues(Integer.valueOf(CollectionsKt___CollectionsKt.indexOf(DefaultComponentsLayoutManager.this.footerComponents, ((ComponentState) obj5).key)), Integer.valueOf(CollectionsKt___CollectionsKt.indexOf(DefaultComponentsLayoutManager.this.footerComponents, ((ComponentState) obj6).key)));
+                return ComparisonsKt__ComparisonsKt.compareValues(Integer.valueOf(CollectionsKt___CollectionsKt.indexOf(defaultComponentsLayoutManager.footerComponents, ((ComponentState) obj5).key)), Integer.valueOf(CollectionsKt___CollectionsKt.indexOf(defaultComponentsLayoutManager.footerComponents, ((ComponentState) obj6).key)));
             }
         });
-        List sortedWith3 = CollectionsKt___CollectionsKt.sortedWith(arrayList2, new Comparator() { // from class: com.android.systemui.volume.panel.ui.layout.DefaultComponentsLayoutManager$layout$$inlined$sortedBy$3
+        List listSortedWith3 = CollectionsKt___CollectionsKt.sortedWith(arrayList2, new Comparator() { // from class: com.android.systemui.volume.panel.ui.layout.DefaultComponentsLayoutManager$layout$$inlined$sortedBy$3
             @Override // java.util.Comparator
             public final int compare(Object obj5, Object obj6) {
                 return ComparisonsKt__ComparisonsKt.compareValues(((ComponentState) obj5).key, ((ComponentState) obj6).key);
@@ -144,7 +143,7 @@ final class VolumePanelViewModel$componentsLayout$1 extends SuspendLambda implem
         }
         ComponentState componentState2 = (ComponentState) obj2;
         if (componentState2 != null) {
-            return new ComponentsLayout(sortedWith, sortedWith3, sortedWith2, componentState2);
+            return new ComponentsLayout(listSortedWith, listSortedWith3, listSortedWith2, componentState2);
         }
         throw new IllegalStateException("VolumePanelComponents.BOTTOM_BAR must be present in the default components layout.");
     }

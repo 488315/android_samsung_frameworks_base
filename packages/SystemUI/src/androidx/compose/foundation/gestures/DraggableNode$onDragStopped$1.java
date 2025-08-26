@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DraggableNode$onDragStopped$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ long $velocity;
@@ -46,10 +45,10 @@ final class DraggableNode$onDragStopped$1 extends SuspendLambda implements Funct
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
             DraggableNode draggableNode = this.this$0;
             Function3 function3 = draggableNode.onDragStopped;
-            long m882timesadjELrA = Velocity.m882timesadjELrA(draggableNode.reverseDirection ? -1.0f : 1.0f, this.$velocity);
+            long jM884timesadjELrA = Velocity.m884timesadjELrA(draggableNode.reverseDirection ? -1.0f : 1.0f, this.$velocity);
             Orientation orientation = this.this$0.orientation;
             Function3 function32 = DraggableKt.NoOpOnDragStarted;
-            Float f = new Float(orientation == Orientation.Vertical ? Velocity.m879getYimpl(m882timesadjELrA) : Velocity.m878getXimpl(m882timesadjELrA));
+            Float f = new Float(orientation == Orientation.Vertical ? Velocity.m881getYimpl(jM884timesadjELrA) : Velocity.m880getXimpl(jM884timesadjELrA));
             this.label = 1;
             if (function3.invoke(coroutineScope, f, this) == coroutineSingletons) {
                 return coroutineSingletons;

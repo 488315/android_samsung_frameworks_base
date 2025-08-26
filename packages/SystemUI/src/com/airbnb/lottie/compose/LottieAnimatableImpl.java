@@ -9,7 +9,6 @@ import com.airbnb.lottie.LottieComposition;
 import kotlin.jvm.functions.Function0;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LottieAnimatableImpl implements LottieAnimatable {
     public final MutatorMutex mutex;
@@ -28,19 +27,19 @@ public final class LottieAnimatableImpl implements LottieAnimatable {
 
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            float f = 0.0f;
-            if (((LottieComposition) ((SnapshotMutableStateImpl) LottieAnimatableImpl.this.composition$delegate).getValue()) != null) {
-                if (LottieAnimatableImpl.this.getSpeed() < 0.0f) {
-                    LottieClipSpec lottieClipSpec = (LottieClipSpec) ((SnapshotMutableStateImpl) LottieAnimatableImpl.this.clipSpec$delegate).getValue();
+            float maxProgress$lottie_compose_release = 0.0f;
+            if (((LottieComposition) ((SnapshotMutableStateImpl) this.this$0.composition$delegate).getValue()) != null) {
+                if (this.this$0.getSpeed() < 0.0f) {
+                    LottieClipSpec lottieClipSpec = (LottieClipSpec) ((SnapshotMutableStateImpl) this.this$0.clipSpec$delegate).getValue();
                     if (lottieClipSpec != null) {
-                        f = lottieClipSpec.getMinProgress$lottie_compose_release();
+                        maxProgress$lottie_compose_release = lottieClipSpec.getMinProgress$lottie_compose_release();
                     }
                 } else {
-                    LottieClipSpec lottieClipSpec2 = (LottieClipSpec) ((SnapshotMutableStateImpl) LottieAnimatableImpl.this.clipSpec$delegate).getValue();
-                    f = lottieClipSpec2 == null ? 1.0f : lottieClipSpec2.getMaxProgress$lottie_compose_release();
+                    LottieClipSpec lottieClipSpec2 = (LottieClipSpec) ((SnapshotMutableStateImpl) this.this$0.clipSpec$delegate).getValue();
+                    maxProgress$lottie_compose_release = lottieClipSpec2 == null ? 1.0f : lottieClipSpec2.getMaxProgress$lottie_compose_release();
                 }
             }
-            return Float.valueOf(f);
+            return Float.valueOf(maxProgress$lottie_compose_release);
         }
     });
 
@@ -52,7 +51,7 @@ public final class LottieAnimatableImpl implements LottieAnimatable {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Boolean.valueOf(((Number) ((SnapshotMutableStateImpl) LottieAnimatableImpl.this.iteration$delegate).getValue()).intValue() == ((Number) ((SnapshotMutableStateImpl) LottieAnimatableImpl.this.iterations$delegate).getValue()).intValue() && LottieAnimatableImpl.this.getProgress() == ((Number) LottieAnimatableImpl.this.endProgress$delegate.getValue()).floatValue());
+                return Boolean.valueOf(((Number) ((SnapshotMutableStateImpl) this.this$0.iteration$delegate).getValue()).intValue() == ((Number) ((SnapshotMutableStateImpl) this.this$0.iterations$delegate).getValue()).intValue() && this.this$0.getProgress() == ((Number) this.this$0.endProgress$delegate.getValue()).floatValue());
             }
         });
         this.mutex = new MutatorMutex();
@@ -64,14 +63,14 @@ public final class LottieAnimatableImpl implements LottieAnimatable {
             return true;
         }
         MutableState mutableState = lottieAnimatableImpl.lastFrameNanos$delegate;
-        long longValue = ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).longValue() == Long.MIN_VALUE ? 0L : j - ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).longValue();
+        long jLongValue = ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).longValue() == Long.MIN_VALUE ? 0L : j - ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).longValue();
         ((SnapshotMutableStateImpl) mutableState).setValue(Long.valueOf(j));
         MutableState mutableState2 = lottieAnimatableImpl.clipSpec$delegate;
         LottieClipSpec lottieClipSpec = (LottieClipSpec) ((SnapshotMutableStateImpl) mutableState2).getValue();
         float minProgress$lottie_compose_release = lottieClipSpec == null ? 0.0f : lottieClipSpec.getMinProgress$lottie_compose_release();
         LottieClipSpec lottieClipSpec2 = (LottieClipSpec) ((SnapshotMutableStateImpl) mutableState2).getValue();
         float maxProgress$lottie_compose_release = lottieClipSpec2 == null ? 1.0f : lottieClipSpec2.getMaxProgress$lottie_compose_release();
-        float speed = lottieAnimatableImpl.getSpeed() * ((longValue / 1000000) / lottieComposition.getDuration());
+        float speed = lottieAnimatableImpl.getSpeed() * ((jLongValue / 1000000) / lottieComposition.getDuration());
         float progress = lottieAnimatableImpl.getSpeed() < 0.0f ? minProgress$lottie_compose_release - (lottieAnimatableImpl.getProgress() + speed) : (lottieAnimatableImpl.getProgress() + speed) - maxProgress$lottie_compose_release;
         if (progress < 0.0f) {
             lottieAnimatableImpl.setProgress$1(RangesKt___RangesKt.coerceIn(lottieAnimatableImpl.getProgress(), minProgress$lottie_compose_release, maxProgress$lottie_compose_release) + speed);

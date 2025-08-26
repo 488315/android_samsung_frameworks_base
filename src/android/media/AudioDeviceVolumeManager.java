@@ -131,7 +131,7 @@ public class AudioDeviceVolumeManager {
                     listenerInfo.mExecutor.execute(new Runnable() { // from class: android.media.AudioDeviceVolumeManager$DeviceVolumeDispatcherStub$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            AudioDeviceVolumeManager.ListenerInfo.this.mListener.onAudioDeviceVolumeChanged(audioDeviceAttributes, volumeInfo);
+                            listenerInfo.mListener.onAudioDeviceVolumeChanged(audioDeviceAttributes, volumeInfo);
                         }
                     });
                 }
@@ -159,7 +159,7 @@ public class AudioDeviceVolumeManager {
                     listenerInfo.mExecutor.execute(new Runnable() { // from class: android.media.AudioDeviceVolumeManager$DeviceVolumeDispatcherStub$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            AudioDeviceVolumeManager.ListenerInfo.this.mListener.onAudioDeviceVolumeAdjusted(audioDeviceAttributes2, volumeInfo2, i3, i4);
+                            listenerInfo.mListener.onAudioDeviceVolumeAdjusted(audioDeviceAttributes2, volumeInfo2, i3, i4);
                         }
                     });
                 } else {
@@ -259,9 +259,7 @@ public class AudioDeviceVolumeManager {
                 this.mDeviceVolumeListeners.removeIf(new Predicate() { // from class: android.media.AudioDeviceVolumeManager$$ExternalSyntheticLambda0
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
-                        boolean equalTypeAddress;
-                        equalTypeAddress = ((AudioDeviceVolumeManager.ListenerInfo) obj).mDevice.equalTypeAddress(AudioDeviceAttributes.this);
-                        return equalTypeAddress;
+                        return ((AudioDeviceVolumeManager.ListenerInfo) obj).mDevice.equalTypeAddress(audioDeviceAttributes);
                     }
                 });
             }
@@ -274,9 +272,7 @@ public class AudioDeviceVolumeManager {
         this.mDeviceVolumeBehaviorChangedListenerMgr.addListener(executor, onDeviceVolumeBehaviorChangedListener, "addOnDeviceVolumeBehaviorChangedListener", new Supplier() { // from class: android.media.AudioDeviceVolumeManager$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                CallbackUtil.DispatcherStub lambda$addOnDeviceVolumeBehaviorChangedListener$1;
-                lambda$addOnDeviceVolumeBehaviorChangedListener$1 = AudioDeviceVolumeManager.this.lambda$addOnDeviceVolumeBehaviorChangedListener$1();
-                return lambda$addOnDeviceVolumeBehaviorChangedListener$1;
+                return this.f$0.lambda$addOnDeviceVolumeBehaviorChangedListener$1();
             }
         });
     }
@@ -390,7 +386,7 @@ public class AudioDeviceVolumeManager {
             AudioDeviceVolumeManager.this.mDeviceVolumeBehaviorChangedListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.AudioDeviceVolumeManager$DeviceVolumeBehaviorDispatcherStub$$ExternalSyntheticLambda0
                 @Override // android.media.CallbackUtil.CallbackMethod
                 public final void callbackMethod(Object obj) {
-                    ((AudioDeviceVolumeManager.OnDeviceVolumeBehaviorChangedListener) obj).onDeviceVolumeBehaviorChanged(AudioDeviceAttributes.this, i);
+                    ((AudioDeviceVolumeManager.OnDeviceVolumeBehaviorChangedListener) obj).onDeviceVolumeBehaviorChanged(audioDeviceAttributes, i);
                 }
             });
         }
@@ -402,8 +398,8 @@ public class AudioDeviceVolumeManager {
         if (iAudioService != null) {
             return iAudioService;
         }
-        IAudioService asInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
-        sService = asInterface;
-        return asInterface;
+        IAudioService iAudioServiceAsInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
+        sService = iAudioServiceAsInterface;
+        return iAudioServiceAsInterface;
     }
 }

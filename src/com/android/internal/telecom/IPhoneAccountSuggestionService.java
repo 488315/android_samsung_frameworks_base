@@ -45,9 +45,9 @@ public interface IPhoneAccountSuggestionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPhoneAccountSuggestionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPhoneAccountSuggestionService)) {
-                return (IPhoneAccountSuggestionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPhoneAccountSuggestionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPhoneAccountSuggestionService)) {
+                return (IPhoneAccountSuggestionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IPhoneAccountSuggestionService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IPhoneAccountSuggestionCallback asInterface = IPhoneAccountSuggestionCallback.Stub.asInterface(parcel.readStrongBinder());
-                String readString = parcel.readString();
+                IPhoneAccountSuggestionCallback iPhoneAccountSuggestionCallbackAsInterface = IPhoneAccountSuggestionCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onAccountSuggestionRequest(asInterface, readString);
+                onAccountSuggestionRequest(iPhoneAccountSuggestionCallbackAsInterface, string);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IPhoneAccountSuggestionService extends IInterface {
 
             @Override // com.android.internal.telecom.IPhoneAccountSuggestionService
             public void onAccountSuggestionRequest(IPhoneAccountSuggestionCallback iPhoneAccountSuggestionCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPhoneAccountSuggestionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPhoneAccountSuggestionCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPhoneAccountSuggestionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPhoneAccountSuggestionCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

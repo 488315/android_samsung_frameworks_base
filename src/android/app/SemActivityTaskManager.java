@@ -22,14 +22,10 @@ public class SemActivityTaskManager {
     }
 
     public static synchronized SemActivityTaskManager getInstance() {
-        SemActivityTaskManager semActivityTaskManager;
-        synchronized (SemActivityTaskManager.class) {
-            if (sInstance == null) {
-                sInstance = new SemActivityTaskManager();
-            }
-            semActivityTaskManager = sInstance;
+        if (sInstance == null) {
+            sInstance = new SemActivityTaskManager();
         }
-        return semActivityTaskManager;
+        return sInstance;
     }
 
     private static IActivityTaskManager getTaskService() {

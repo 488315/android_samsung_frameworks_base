@@ -13,7 +13,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyGridMeasureResult implements LazyGridLayoutInfo, MeasureResult {
     public final int afterContentPadding;
@@ -157,7 +156,7 @@ public final class LazyGridMeasureResult implements LazyGridLayoutInfo, MeasureR
     }
 
     /* renamed from: getViewportSize-YbymL2g, reason: not valid java name */
-    public final long m160getViewportSizeYbymL2g() {
+    public final long m161getViewportSizeYbymL2g() {
         MeasureResult measureResult = this.measureResult;
         long width = (measureResult.getWidth() << 32) | (measureResult.getHeight() & 4294967295L);
         IntSize.Companion companion = IntSize.Companion;

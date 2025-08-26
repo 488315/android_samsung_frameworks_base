@@ -66,9 +66,9 @@ public interface IAuthenticationPolicyService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAuthenticationPolicyService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAuthenticationPolicyService)) {
-                return (IAuthenticationPolicyService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAuthenticationPolicyService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAuthenticationPolicyService)) {
+                return (IAuthenticationPolicyService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,15 +100,15 @@ public interface IAuthenticationPolicyService extends IInterface {
             if (i == 1) {
                 EnableSecureLockDeviceParams enableSecureLockDeviceParams = (EnableSecureLockDeviceParams) parcel.readTypedObject(EnableSecureLockDeviceParams.CREATOR);
                 parcel.enforceNoDataAvail();
-                int enableSecureLockDevice = enableSecureLockDevice(enableSecureLockDeviceParams);
+                int iEnableSecureLockDevice = enableSecureLockDevice(enableSecureLockDeviceParams);
                 parcel2.writeNoException();
-                parcel2.writeInt(enableSecureLockDevice);
+                parcel2.writeInt(iEnableSecureLockDevice);
             } else if (i == 2) {
                 DisableSecureLockDeviceParams disableSecureLockDeviceParams = (DisableSecureLockDeviceParams) parcel.readTypedObject(DisableSecureLockDeviceParams.CREATOR);
                 parcel.enforceNoDataAvail();
-                int disableSecureLockDevice = disableSecureLockDevice(disableSecureLockDeviceParams);
+                int iDisableSecureLockDevice = disableSecureLockDevice(disableSecureLockDeviceParams);
                 parcel2.writeNoException();
-                parcel2.writeInt(disableSecureLockDevice);
+                parcel2.writeInt(iDisableSecureLockDevice);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -133,33 +133,33 @@ public interface IAuthenticationPolicyService extends IInterface {
 
             @Override // android.security.authenticationpolicy.IAuthenticationPolicyService
             public int enableSecureLockDevice(EnableSecureLockDeviceParams enableSecureLockDeviceParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthenticationPolicyService.DESCRIPTOR);
-                    obtain.writeTypedObject(enableSecureLockDeviceParams, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IAuthenticationPolicyService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(enableSecureLockDeviceParams, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.authenticationpolicy.IAuthenticationPolicyService
             public int disableSecureLockDevice(DisableSecureLockDeviceParams disableSecureLockDeviceParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuthenticationPolicyService.DESCRIPTOR);
-                    obtain.writeTypedObject(disableSecureLockDeviceParams, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IAuthenticationPolicyService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(disableSecureLockDeviceParams, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -40,16 +40,16 @@ public class X500NameTokenizer {
                 }
                 return this.value.substring(i, this.index);
             }
-            char charAt = this.value.charAt(this.index);
+            char cCharAt = this.value.charAt(this.index);
             if (z) {
                 z = false;
-            } else if (charAt == '\"') {
+            } else if (cCharAt == '\"') {
                 z2 = !z2;
             } else if (z2) {
                 continue;
-            } else if (charAt == '\\') {
+            } else if (cCharAt == '\\') {
                 z = true;
-            } else if (charAt == this.separator) {
+            } else if (cCharAt == this.separator) {
                 return this.value.substring(i, this.index);
             }
         }

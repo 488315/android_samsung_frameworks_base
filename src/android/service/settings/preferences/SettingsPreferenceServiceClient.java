@@ -12,7 +12,6 @@ import android.service.settings.preferences.IGetValueCallback;
 import android.service.settings.preferences.IMetadataCallback;
 import android.service.settings.preferences.ISetValueCallback;
 import android.service.settings.preferences.ISettingsPreferenceService;
-import android.service.settings.preferences.SettingsPreferenceServiceClient;
 import java.util.concurrent.Executor;
 
 /* loaded from: classes3.dex */
@@ -39,7 +38,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(new IllegalStateException("Service not ready"));
+                    outcomeReceiver.onError(new IllegalStateException("Service not ready"));
                 }
             });
             return;
@@ -50,7 +49,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(e);
+                    outcomeReceiver.onError(e);
                 }
             });
         }
@@ -73,7 +72,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onResult(metadataResult);
+                    outcomeReceiver.onResult(metadataResult);
                 }
             });
         }
@@ -85,7 +84,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(new IllegalStateException("Service call failure"));
+                    outcomeReceiver.onError(new IllegalStateException("Service call failure"));
                 }
             });
         }
@@ -97,7 +96,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(new IllegalStateException("Service not ready"));
+                    outcomeReceiver.onError(new IllegalStateException("Service not ready"));
                 }
             });
             return;
@@ -108,7 +107,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(e);
+                    outcomeReceiver.onError(e);
                 }
             });
         }
@@ -131,7 +130,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$2$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onResult(getValueResult);
+                    outcomeReceiver.onResult(getValueResult);
                 }
             });
         }
@@ -143,7 +142,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$2$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(new IllegalStateException("Service call failure"));
+                    outcomeReceiver.onError(new IllegalStateException("Service call failure"));
                 }
             });
         }
@@ -155,7 +154,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(new IllegalStateException("Service not ready"));
+                    outcomeReceiver.onError(new IllegalStateException("Service not ready"));
                 }
             });
             return;
@@ -166,7 +165,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(e);
+                    outcomeReceiver.onError(e);
                 }
             });
         }
@@ -189,7 +188,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$3$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onResult(setValueResult);
+                    outcomeReceiver.onResult(setValueResult);
                 }
             });
         }
@@ -201,7 +200,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$3$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(new IllegalStateException("Service call failure"));
+                    outcomeReceiver.onError(new IllegalStateException("Service call failure"));
                 }
             });
         }
@@ -216,20 +215,20 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
     }
 
     private void connect(boolean z, Executor executor, final OutcomeReceiver<SettingsPreferenceServiceClient, Exception> outcomeReceiver) {
-        PackageManager.ResolveInfoFlags of;
+        PackageManager.ResolveInfoFlags resolveInfoFlagsOf;
         PackageManager packageManager = this.mContext.getPackageManager();
         if (z) {
-            of = PackageManager.ResolveInfoFlags.of(1048576L);
+            resolveInfoFlagsOf = PackageManager.ResolveInfoFlags.of(1048576L);
         } else {
-            of = PackageManager.ResolveInfoFlags.of(131072L);
+            resolveInfoFlagsOf = PackageManager.ResolveInfoFlags.of(131072L);
         }
-        if (packageManager.queryIntentServices(this.mServiceIntent, of).size() == 1 && this.mContext.bindService(this.mServiceIntent, this.mServiceConnection, 1)) {
+        if (packageManager.queryIntentServices(this.mServiceIntent, resolveInfoFlagsOf).size() == 1 && this.mContext.bindService(this.mServiceIntent, this.mServiceConnection, 1)) {
             return;
         }
         executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                OutcomeReceiver.this.onError(new IllegalStateException("Unable to bind service"));
+                outcomeReceiver.onError(new IllegalStateException("Unable to bind service"));
             }
         });
     }
@@ -252,7 +251,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$4$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SettingsPreferenceServiceClient.AnonymousClass4.this.lambda$onServiceConnected$0(outcomeReceiver);
+                    this.f$0.lambda$onServiceConnected$0(outcomeReceiver);
                 }
             });
         }
@@ -279,7 +278,7 @@ public class SettingsPreferenceServiceClient implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.service.settings.preferences.SettingsPreferenceServiceClient$4$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OutcomeReceiver.this.onError(new IllegalStateException("Unable to connect client"));
+                    outcomeReceiver.onError(new IllegalStateException("Unable to connect client"));
                 }
             });
             SettingsPreferenceServiceClient.this.close();

@@ -4,7 +4,7 @@
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
-            <solid android:color="@android:color/secondary_text_inverse_when_activated_material" />
+            <solid android:color="@android:color/notification_default_color_light" />
             <corners android:radius="10000.0dip" />
         </shape>
     </item>

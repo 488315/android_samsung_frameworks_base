@@ -8,7 +8,6 @@ import com.google.android.material.color.MaterialColors;
 import com.google.android.material.math.MathUtils;
 import com.google.android.material.progressindicator.DrawingDelegate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CircularDrawingDelegate extends DrawingDelegate {
     public float adjustedRadius;
@@ -23,13 +22,13 @@ public final class CircularDrawingDelegate extends DrawingDelegate {
 
     @Override // com.google.android.material.progressindicator.DrawingDelegate
     public final void adjustCanvas(Canvas canvas, Rect rect, float f, boolean z, boolean z2) {
-        float width = rect.width() / getSize();
-        float height = rect.height() / getSize();
+        float fWidth = rect.width() / getSize();
+        float fHeight = rect.height() / getSize();
         CircularProgressIndicatorSpec circularProgressIndicatorSpec = (CircularProgressIndicatorSpec) this.spec;
         float f2 = (circularProgressIndicatorSpec.indicatorSize / 2.0f) + circularProgressIndicatorSpec.indicatorInset;
-        canvas.translate((f2 * width) + rect.left, (f2 * height) + rect.top);
+        canvas.translate((f2 * fWidth) + rect.left, (f2 * fHeight) + rect.top);
         canvas.rotate(-90.0f);
-        canvas.scale(width, height);
+        canvas.scale(fWidth, fHeight);
         if (circularProgressIndicatorSpec.indicatorDirection != 0) {
             canvas.scale(1.0f, -1.0f);
         }
@@ -72,11 +71,11 @@ public final class CircularDrawingDelegate extends DrawingDelegate {
         if (f4 == 0.0f && f3 >= 0.99f) {
             f3 += (((degrees * 2.0f) / 360.0f) * (f3 - 0.99f)) / 0.01f;
         }
-        float lerp = MathUtils.lerp(1.0f - this.totalTrackLengthFraction, 1.0f, f4);
-        float lerp2 = MathUtils.lerp(0.0f, this.totalTrackLengthFraction, f3);
+        float fLerp = MathUtils.lerp(1.0f - this.totalTrackLengthFraction, 1.0f, f4);
+        float fLerp2 = MathUtils.lerp(0.0f, this.totalTrackLengthFraction, f3);
         float degrees2 = (float) Math.toDegrees(i2 / this.adjustedRadius);
-        float degrees3 = ((lerp2 * 360.0f) - degrees2) - ((float) Math.toDegrees(i3 / this.adjustedRadius));
-        float f6 = (lerp * 360.0f) + degrees2;
+        float degrees3 = ((fLerp2 * 360.0f) - degrees2) - ((float) Math.toDegrees(i3 / this.adjustedRadius));
+        float f6 = (fLerp * 360.0f) + degrees2;
         if (degrees3 <= 0.0f) {
             return;
         }
@@ -106,26 +105,26 @@ public final class CircularDrawingDelegate extends DrawingDelegate {
     }
 
     public final void drawRoundedBlock(Canvas canvas, Paint paint, float f, float f2, float f3, float f4) {
-        float min = (int) Math.min(f3, this.displayedTrackThickness);
+        float fMin = (int) Math.min(f3, this.displayedTrackThickness);
         float f5 = f2 / 2.0f;
-        float min2 = Math.min(f5, (this.displayedCornerRadius * min) / this.displayedTrackThickness);
-        RectF rectF = new RectF((-min) / 2.0f, (-f2) / 2.0f, min / 2.0f, f5);
+        float fMin2 = Math.min(f5, (this.displayedCornerRadius * fMin) / this.displayedTrackThickness);
+        RectF rectF = new RectF((-fMin) / 2.0f, (-f2) / 2.0f, fMin / 2.0f, f5);
         canvas.save();
         double d = f;
         canvas.translate((float) (Math.cos(Math.toRadians(d)) * this.adjustedRadius), (float) (Math.sin(Math.toRadians(d)) * this.adjustedRadius));
         canvas.rotate(f);
         canvas.scale(f4, f4);
-        canvas.drawRoundRect(rectF, min2, min2, paint);
+        canvas.drawRoundRect(rectF, fMin2, fMin2, paint);
         canvas.restore();
     }
 
     @Override // com.google.android.material.progressindicator.DrawingDelegate
     public final void fillIndicator(Canvas canvas, Paint paint, DrawingDelegate.ActiveIndicator activeIndicator, int i) {
-        int compositeARGBWithAlpha = MaterialColors.compositeARGBWithAlpha(activeIndicator.color, i);
+        int iCompositeARGBWithAlpha = MaterialColors.compositeARGBWithAlpha(activeIndicator.color, i);
         float f = activeIndicator.startFraction;
         float f2 = activeIndicator.endFraction;
         int i2 = activeIndicator.gapSize;
-        drawArc(canvas, paint, f, f2, compositeARGBWithAlpha, i2, i2);
+        drawArc(canvas, paint, f, f2, iCompositeARGBWithAlpha, i2, i2);
     }
 
     @Override // com.google.android.material.progressindicator.DrawingDelegate

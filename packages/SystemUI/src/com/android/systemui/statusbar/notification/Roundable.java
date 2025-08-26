@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.notification;
 import java.util.LinkedHashMap;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface Roundable {
     default void applyRoundnessAndInvalidate() {
@@ -18,22 +17,22 @@ public interface Roundable {
 
     default boolean requestBottomRoundness(float f, SourceType sourceType, boolean z) {
         LinkedHashMap linkedHashMap = (LinkedHashMap) getRoundableState().bottomRoundnessMap;
-        Float m3430maxOrNull = CollectionsKt___CollectionsKt.m3430maxOrNull((Iterable) linkedHashMap.values());
-        float floatValue = m3430maxOrNull != null ? m3430maxOrNull.floatValue() : 0.0f;
+        Float fM3450maxOrNull = CollectionsKt___CollectionsKt.m3450maxOrNull((Iterable) linkedHashMap.values());
+        float fFloatValue = fM3450maxOrNull != null ? fM3450maxOrNull.floatValue() : 0.0f;
         if (f == 0.0f) {
             linkedHashMap.remove(sourceType);
         } else {
             linkedHashMap.put(sourceType, Float.valueOf(f));
         }
-        Float m3430maxOrNull2 = CollectionsKt___CollectionsKt.m3430maxOrNull((Iterable) linkedHashMap.values());
-        float floatValue2 = m3430maxOrNull2 != null ? m3430maxOrNull2.floatValue() : 0.0f;
-        if (floatValue == floatValue2) {
+        Float fM3450maxOrNull2 = CollectionsKt___CollectionsKt.m3450maxOrNull((Iterable) linkedHashMap.values());
+        float fFloatValue2 = fM3450maxOrNull2 != null ? fM3450maxOrNull2.floatValue() : 0.0f;
+        if (fFloatValue == fFloatValue2) {
             return false;
         }
         RoundableState roundableState = getRoundableState();
-        boolean z2 = (roundableState.targetView.getTag(roundableState.bottomAnimatable.val$animatorTag) != null) && Math.abs(floatValue2 - floatValue) > 0.5f;
+        boolean z2 = (roundableState.targetView.getTag(roundableState.bottomAnimatable.val$animatorTag) != null) && Math.abs(fFloatValue2 - fFloatValue) > 0.5f;
         RoundableState roundableState2 = getRoundableState();
-        PropertyAnimator.setProperty(roundableState2.targetView, roundableState2.bottomAnimatable, floatValue2, RoundableState.DURATION, z2 || z);
+        PropertyAnimator.setProperty(roundableState2.targetView, roundableState2.bottomAnimatable, fFloatValue2, RoundableState.DURATION, z2 || z);
         return true;
     }
 
@@ -47,22 +46,22 @@ public interface Roundable {
 
     default boolean requestTopRoundness(float f, SourceType sourceType, boolean z) {
         LinkedHashMap linkedHashMap = (LinkedHashMap) getRoundableState().topRoundnessMap;
-        Float m3430maxOrNull = CollectionsKt___CollectionsKt.m3430maxOrNull((Iterable) linkedHashMap.values());
-        float floatValue = m3430maxOrNull != null ? m3430maxOrNull.floatValue() : 0.0f;
+        Float fM3450maxOrNull = CollectionsKt___CollectionsKt.m3450maxOrNull((Iterable) linkedHashMap.values());
+        float fFloatValue = fM3450maxOrNull != null ? fM3450maxOrNull.floatValue() : 0.0f;
         if (f == 0.0f) {
             linkedHashMap.remove(sourceType);
         } else {
             linkedHashMap.put(sourceType, Float.valueOf(f));
         }
-        Float m3430maxOrNull2 = CollectionsKt___CollectionsKt.m3430maxOrNull((Iterable) linkedHashMap.values());
-        float floatValue2 = m3430maxOrNull2 != null ? m3430maxOrNull2.floatValue() : 0.0f;
-        if (floatValue == floatValue2) {
+        Float fM3450maxOrNull2 = CollectionsKt___CollectionsKt.m3450maxOrNull((Iterable) linkedHashMap.values());
+        float fFloatValue2 = fM3450maxOrNull2 != null ? fM3450maxOrNull2.floatValue() : 0.0f;
+        if (fFloatValue == fFloatValue2) {
             return false;
         }
         RoundableState roundableState = getRoundableState();
-        boolean z2 = (roundableState.targetView.getTag(roundableState.topAnimatable.val$animatorTag) != null) && Math.abs(floatValue2 - floatValue) > 0.5f;
+        boolean z2 = (roundableState.targetView.getTag(roundableState.topAnimatable.val$animatorTag) != null) && Math.abs(fFloatValue2 - fFloatValue) > 0.5f;
         RoundableState roundableState2 = getRoundableState();
-        PropertyAnimator.setProperty(roundableState2.targetView, roundableState2.topAnimatable, floatValue2, RoundableState.DURATION, z2 || z);
+        PropertyAnimator.setProperty(roundableState2.targetView, roundableState2.topAnimatable, fFloatValue2, RoundableState.DURATION, z2 || z);
         return true;
     }
 }

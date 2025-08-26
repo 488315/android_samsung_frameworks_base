@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyguardIndicationRotateTextViewController extends ViewController implements Dumpable {
     public int mCurrIndicationType;
@@ -48,7 +47,6 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
     public final StatusBarStateController mStatusBarStateController;
     public final AnonymousClass1 mStatusBarStateListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ShowNextIndication {
         public Runnable mCancelDelayedRunnable;
         public final KeyguardIndicationRotateTextViewController$ShowNextIndication$$ExternalSyntheticLambda0 mShowIndicationRunnable;
@@ -149,20 +147,20 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "KeyguardIndicationRotatingTextViewController:", "    currentTextViewMessage=");
-        m.append((Object) ((KeyguardIndicationTextView) this.mView).getText());
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "KeyguardIndicationRotatingTextViewController:", "    currentTextViewMessage=");
+        sbM.append((Object) ((KeyguardIndicationTextView) this.mView).getText());
+        printWriter.println(sbM.toString());
         printWriter.println("    currentStoredMessage=" + ((Object) ((KeyguardIndicationTextView) this.mView).mMessage));
-        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    dozing:"), this.mIsDozing, printWriter, "    queue:");
-        m2.append(this.mIndicationQueue);
-        printWriter.println(m2.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    dozing:"), this.mIsDozing, printWriter, "    queue:");
+        sbM2.append(this.mIndicationQueue);
+        printWriter.println(sbM2.toString());
         printWriter.println("    showNextIndicationRunnable:" + this.mShowNextIndicationRunnable);
         if (((HashMap) this.mIndicationMessages).keySet().size() > 0) {
             printWriter.println("    All messages:");
             for (Integer num : ((HashMap) this.mIndicationMessages).keySet()) {
-                StringBuilder m3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(num.intValue(), "        type=", " ");
-                m3.append(((HashMap) this.mIndicationMessages).get(num));
-                printWriter.println(m3.toString());
+                StringBuilder sbM3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(num.intValue(), "        type=", " ");
+                sbM3.append(((HashMap) this.mIndicationMessages).get(num));
+                printWriter.println(sbM3.toString());
             }
         }
     }
@@ -223,27 +221,27 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
         this.mLastIndicationSwitch = SystemClock.uptimeMillis();
         if (!TextUtils.equals(charSequence2, this.mCurrMessage) || i2 != this.mCurrIndicationType) {
             CharSequence charSequence3 = this.mCurrMessage;
-            String charSequence4 = charSequence3 != null ? charSequence3.toString() : null;
+            String string = charSequence3 != null ? charSequence3.toString() : null;
             final KeyguardLogger keyguardLogger = this.mLogger;
             keyguardLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             Function1 function1 = new Function1() { // from class: com.android.keyguard.logging.KeyguardLogger$$ExternalSyntheticLambda2
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     LogMessage logMessage = (LogMessage) obj;
                     int int1 = logMessage.getInt1();
                     String str1 = logMessage.getStr1();
-                    KeyguardLogger.this.getClass();
+                    keyguardLogger.getClass();
                     return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("keyguardSwitchIndication ", int1 == 3 ? AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("type=", KeyguardIndicationRotateTextViewController.indicationTypeToString(int1), " message=", str1) : AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("type=", KeyguardIndicationRotateTextViewController.indicationTypeToString(int1)));
                 }
             };
             LogBuffer logBuffer = keyguardLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("KeyguardIndication", logLevel, function1, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("KeyguardIndication", logLevel, function1, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.int1 = i;
-            logMessageImpl.str1 = charSequence4;
-            logBuffer.commit(obtain);
+            logMessageImpl.str1 = string;
+            logBuffer.commit(logMessageObtain);
             KeyguardIndicationTextView keyguardIndicationTextView = (KeyguardIndicationTextView) this.mView;
             KeyguardIndication keyguardIndication = (KeyguardIndication) ((HashMap) this.mIndicationMessages).get(Integer.valueOf(i));
             if (keyguardIndication == null) {
@@ -258,7 +256,7 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
             return;
         }
         KeyguardIndication keyguardIndication2 = (KeyguardIndication) ((HashMap) this.mIndicationMessages).get(Integer.valueOf(i));
-        long max = Math.max((keyguardIndication2 == null || (l = keyguardIndication2.mMinVisibilityMillis) == null) ? 0L : l.longValue(), 3500L);
+        long jMax = Math.max((keyguardIndication2 == null || (l = keyguardIndication2.mMinVisibilityMillis) == null) ? 0L : l.longValue(), 3500L);
         ShowNextIndication showNextIndication2 = this.mShowNextIndicationRunnable;
         if (showNextIndication2 != null) {
             Runnable runnable2 = showNextIndication2.mCancelDelayedRunnable;
@@ -268,7 +266,7 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
             }
             this.mShowNextIndicationRunnable = null;
         }
-        this.mShowNextIndicationRunnable = new ShowNextIndication(max);
+        this.mShowNextIndicationRunnable = new ShowNextIndication(jMax);
     }
 
     public final void updateIndication(int i, KeyguardIndication keyguardIndication, boolean z) {
@@ -281,8 +279,8 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
             return;
         }
         KeyguardIndication keyguardIndication2 = (KeyguardIndication) ((HashMap) this.mIndicationMessages).get(Integer.valueOf(this.mCurrIndicationType));
-        long j = 0;
-        long longValue = (keyguardIndication2 == null || (l2 = keyguardIndication2.mMinVisibilityMillis) == null) ? 0L : l2.longValue();
+        long jLongValue = 0;
+        long jLongValue2 = (keyguardIndication2 == null || (l2 = keyguardIndication2.mMinVisibilityMillis) == null) ? 0L : l2.longValue();
         boolean z2 = (keyguardIndication == null || TextUtils.isEmpty(keyguardIndication.mMessage)) ? false : true;
         if (z2) {
             if (!((ArrayList) this.mIndicationQueue).contains(Integer.valueOf(i))) {
@@ -296,8 +294,8 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
         if (this.mIsDozing) {
             return;
         }
-        long uptimeMillis = SystemClock.uptimeMillis() - this.mLastIndicationSwitch;
-        boolean z3 = uptimeMillis >= longValue;
+        long jUptimeMillis = SystemClock.uptimeMillis() - this.mLastIndicationSwitch;
+        boolean z3 = jUptimeMillis >= jLongValue2;
         if (!z2) {
             if (this.mCurrIndicationType == i && !z2 && z) {
                 ShowNextIndication showNextIndication = this.mShowNextIndicationRunnable;
@@ -327,7 +325,7 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
             }
             ((ArrayList) this.mIndicationQueue).removeIf(new KeyguardIndicationRotateTextViewController$$ExternalSyntheticLambda0(i, 1));
             ((ArrayList) this.mIndicationQueue).add(0, Integer.valueOf(i));
-            long j2 = longValue - uptimeMillis;
+            long j = jLongValue2 - jUptimeMillis;
             ShowNextIndication showNextIndication2 = this.mShowNextIndicationRunnable;
             if (showNextIndication2 != null) {
                 Runnable runnable2 = showNextIndication2.mCancelDelayedRunnable;
@@ -337,7 +335,7 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
                 }
                 this.mShowNextIndicationRunnable = null;
             }
-            this.mShowNextIndicationRunnable = new ShowNextIndication(j2);
+            this.mShowNextIndicationRunnable = new ShowNextIndication(j);
             return;
         }
         if (this.mShowNextIndicationRunnable != null) {
@@ -345,14 +343,14 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
         }
         KeyguardIndication keyguardIndication3 = (KeyguardIndication) ((HashMap) this.mIndicationMessages).get(Integer.valueOf(i));
         if (keyguardIndication3 != null && (l = keyguardIndication3.mMinVisibilityMillis) != null) {
-            j = l.longValue();
+            jLongValue = l.longValue();
         }
-        long max = Math.max(j, 3500L);
-        if (uptimeMillis >= max) {
+        long jMax = Math.max(jLongValue, 3500L);
+        if (jUptimeMillis >= jMax) {
             showIndication(i);
             return;
         }
-        long j3 = max - uptimeMillis;
+        long j2 = jMax - jUptimeMillis;
         ShowNextIndication showNextIndication3 = this.mShowNextIndicationRunnable;
         if (showNextIndication3 != null) {
             Runnable runnable3 = showNextIndication3.mCancelDelayedRunnable;
@@ -362,6 +360,6 @@ public class KeyguardIndicationRotateTextViewController extends ViewController i
             }
             this.mShowNextIndicationRunnable = null;
         }
-        this.mShowNextIndicationRunnable = new ShowNextIndication(j3);
+        this.mShowNextIndicationRunnable = new ShowNextIndication(j2);
     }
 }

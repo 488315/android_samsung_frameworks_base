@@ -78,9 +78,9 @@ public final class RemoteController {
         if (looper != null) {
             this.mEventHandler = new EventHandler(this, looper);
         } else {
-            Looper myLooper = Looper.myLooper();
-            if (myLooper != null) {
-                this.mEventHandler = new EventHandler(this, myLooper);
+            Looper looperMyLooper = Looper.myLooper();
+            if (looperMyLooper != null) {
+                this.mEventHandler = new EventHandler(this, looperMyLooper);
             } else {
                 throw new IllegalArgumentException("Calling thread not associated with a looper");
             }

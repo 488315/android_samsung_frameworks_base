@@ -39,12 +39,12 @@ public abstract class AmbientContextDetectionService extends Service {
             AmbientContextDetectionService.this.onStartDetection(ambientContextEventRequest, str, new Consumer() { // from class: android.service.ambientcontext.AmbientContextDetectionService$1$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    AmbientContextDetectionService.AnonymousClass1.lambda$startDetection$0(RemoteCallback.this, (AmbientContextDetectionResult) obj);
+                    AmbientContextDetectionService.AnonymousClass1.lambda$startDetection$0(remoteCallback, (AmbientContextDetectionResult) obj);
                 }
             }, new Consumer() { // from class: android.service.ambientcontext.AmbientContextDetectionService$1$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    AmbientContextDetectionService.AnonymousClass1.lambda$startDetection$1(RemoteCallback.this, (AmbientContextDetectionServiceStatus) obj);
+                    AmbientContextDetectionService.AnonymousClass1.lambda$startDetection$1(remoteCallback2, (AmbientContextDetectionServiceStatus) obj);
                 }
             });
             Slog.d(AmbientContextDetectionService.TAG, "startDetection " + ambientContextEventRequest);
@@ -76,7 +76,7 @@ public abstract class AmbientContextDetectionService extends Service {
             AmbientContextDetectionService.this.onQueryServiceStatus(iArr, str, new Consumer() { // from class: android.service.ambientcontext.AmbientContextDetectionService$1$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    AmbientContextDetectionService.AnonymousClass1.lambda$queryServiceStatus$2(RemoteCallback.this, (AmbientContextDetectionServiceStatus) obj);
+                    AmbientContextDetectionService.AnonymousClass1.lambda$queryServiceStatus$2(remoteCallback, (AmbientContextDetectionServiceStatus) obj);
                 }
             });
         }

@@ -46,16 +46,14 @@ public class ASKSManager {
     private static ArrayList<String> mIMEIList = new ArrayList<>();
 
     public static synchronized IASKSManager getASKSManager() {
-        synchronized (ASKSManager.class) {
-            if (sASKSManager != null) {
-                return sASKSManager;
-            }
-            IBinder service = ServiceManager.getService("asks");
-            Slog.v(TAG, "default service binder = " + service);
-            sASKSManager = IASKSManager.Stub.asInterface(service);
-            Slog.v(TAG, "default service = " + sASKSManager);
+        if (sASKSManager != null) {
             return sASKSManager;
         }
+        IBinder service = ServiceManager.getService("asks");
+        Slog.v(TAG, "default service binder = " + service);
+        sASKSManager = IASKSManager.Stub.asInterface(service);
+        Slog.v(TAG, "default service = " + sASKSManager);
+        return sASKSManager;
     }
 
     public static boolean isRestrictedTarget(String str, String str2) {
@@ -71,10 +69,10 @@ public class ASKSManager {
         return z;
     }
 
-    public static void updateRestrictedTargetPackages(HashMap<String, String> hashMap) {
+    public static void updateRestrictedTargetPackages(HashMap<String, String> map) {
         synchronized (mASKSRestrictedPackages) {
             mASKSRestrictedPackages.clear();
-            mASKSRestrictedPackages.putAll(hashMap);
+            mASKSRestrictedPackages.putAll(map);
         }
     }
 
@@ -125,11 +123,11 @@ public class ASKSManager {
         return hasBlockedPolicy;
     }
 
-    public static boolean isBlockTarget(int i, String str) {
+    public static boolean isBlockTarget(int i, String str) throws XmlPullParserException, IOException {
         if (!isExactlyTargetDevice) {
-            HashMap hashMap = new HashMap();
-            getASKSIDataFromXML(hashMap);
-            if (!hashMap.isEmpty()) {
+            HashMap map = new HashMap();
+            getASKSIDataFromXML(map);
+            if (!map.isEmpty()) {
                 if (sASKSManager != null && mIMEIList.isEmpty()) {
                     try {
                         List<String> iMEIList = sASKSManager.getIMEIList();
@@ -144,7 +142,7 @@ public class ASKSManager {
                     if (!it.hasNext()) {
                         break;
                     }
-                    if (hashMap.containsKey(it.next())) {
+                    if (map.containsKey(it.next())) {
                         Slog.i(TAG, "blocking target matched");
                         isExactlyTargetDevice = true;
                         break;
@@ -168,7 +166,7 @@ public class ASKSManager {
         return false;
     }
 
-    private static void getASKSIDataFromXML(HashMap<String, ArrayList<String>> hashMap) {
+    private static void getASKSIDataFromXML(HashMap<String, ArrayList<String>> map) throws XmlPullParserException, IOException {
         ArrayList arrayList = new ArrayList();
         arrayList.add("IDENT");
         arrayList.add("DUMMY");
@@ -184,23 +182,23 @@ public class ASKSManager {
         try {
             FileReader fileReader = new FileReader(file);
             try {
-                XmlPullParser newPullParser = Xml.newPullParser();
-                newPullParser.setInput(fileReader);
-                String str = "";
+                XmlPullParser xmlPullParserNewPullParser = Xml.newPullParser();
+                xmlPullParserNewPullParser.setInput(fileReader);
+                String attributeValue = "";
                 ArrayList<String> arrayList2 = null;
-                for (int eventType = newPullParser.getEventType(); eventType != 1; eventType = newPullParser.next()) {
-                    String name = newPullParser.getName();
+                for (int eventType = xmlPullParserNewPullParser.getEventType(); eventType != 1; eventType = xmlPullParserNewPullParser.next()) {
+                    String name = xmlPullParserNewPullParser.getName();
                     if (eventType == 2) {
                         if (((String) arrayList.get(0)).equals(name)) {
-                            if (newPullParser.getAttributeValue(0) != null) {
-                                str = newPullParser.getAttributeValue(0);
+                            if (xmlPullParserNewPullParser.getAttributeValue(0) != null) {
+                                attributeValue = xmlPullParserNewPullParser.getAttributeValue(0);
                             }
                             arrayList2 = new ArrayList<>();
-                        } else if (arrayList.contains(name) && newPullParser.getAttributeValue(0) != null && arrayList2 != null) {
-                            arrayList2.add(newPullParser.getAttributeValue(0));
+                        } else if (arrayList.contains(name) && xmlPullParserNewPullParser.getAttributeValue(0) != null && arrayList2 != null) {
+                            arrayList2.add(xmlPullParserNewPullParser.getAttributeValue(0));
                         }
-                    } else if (eventType == 3 && ((String) arrayList.get(0)).equals(name) && hashMap != null) {
-                        hashMap.put(str, arrayList2);
+                    } else if (eventType == 3 && ((String) arrayList.get(0)).equals(name) && map != null) {
+                        map.put(attributeValue, arrayList2);
                     }
                 }
                 fileReader.close();

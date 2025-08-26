@@ -36,14 +36,10 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
         }
 
         public static synchronized LoudnessCodecUpdatesDispatcherStub getInstance() {
-            LoudnessCodecUpdatesDispatcherStub loudnessCodecUpdatesDispatcherStub;
-            synchronized (LoudnessCodecUpdatesDispatcherStub.class) {
-                if (sLoudnessCodecStub == null) {
-                    sLoudnessCodecStub = new LoudnessCodecUpdatesDispatcherStub();
-                }
-                loudnessCodecUpdatesDispatcherStub = sLoudnessCodecStub;
+            if (sLoudnessCodecStub == null) {
+                sLoudnessCodecStub = new LoudnessCodecUpdatesDispatcherStub();
             }
-            return loudnessCodecUpdatesDispatcherStub;
+            return sLoudnessCodecStub;
         }
 
         private LoudnessCodecUpdatesDispatcherStub() {
@@ -54,7 +50,7 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
             this.mLoudnessListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda0
                 @Override // android.media.CallbackUtil.CallbackMethod
                 public final void callbackMethod(Object obj) {
-                    LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub.this.lambda$dispatchLoudnessCodecParameterChange$2(i, persistableBundle, (LoudnessCodecController.OnLoudnessCodecUpdateListener) obj);
+                    this.f$0.lambda$dispatchLoudnessCodecParameterChange$2(i, persistableBundle, (LoudnessCodecController.OnLoudnessCodecUpdateListener) obj);
                 }
             });
         }
@@ -76,7 +72,7 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
                 loudnessCodecController.mediaCodecsConsume(new Consumer() { // from class: android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda2
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub.lambda$dispatchLoudnessCodecParameterChange$0(PersistableBundle.this, onLoudnessCodecUpdateListener, (Map.Entry) obj);
+                        LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub.lambda$dispatchLoudnessCodecParameterChange$0(persistableBundle, onLoudnessCodecUpdateListener, (Map.Entry) obj);
                     }
                 });
             }
@@ -85,13 +81,13 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
 
         static /* synthetic */ void lambda$dispatchLoudnessCodecParameterChange$0(PersistableBundle persistableBundle, LoudnessCodecController.OnLoudnessCodecUpdateListener onLoudnessCodecUpdateListener, Map.Entry entry) {
             boolean z;
-            String num = Integer.toString(((LoudnessCodecInfo) entry.getKey()).hashCode());
-            Bundle bundle = persistableBundle.containsKey(num) ? new Bundle(persistableBundle.getPersistableBundle(num)) : null;
+            String string = Integer.toString(((LoudnessCodecInfo) entry.getKey()).hashCode());
+            Bundle bundle = persistableBundle.containsKey(string) ? new Bundle(persistableBundle.getPersistableBundle(string)) : null;
             for (MediaCodec mediaCodec : (Set) entry.getValue()) {
-                String num2 = Integer.toString(mediaCodec.hashCode());
-                if (bundle != null || persistableBundle.containsKey(num2)) {
+                String string2 = Integer.toString(mediaCodec.hashCode());
+                if (bundle != null || persistableBundle.containsKey(string2)) {
                     if (bundle == null) {
-                        bundle = new Bundle(persistableBundle.getPersistableBundle(num2));
+                        bundle = new Bundle(persistableBundle.getPersistableBundle(string2));
                         z = true;
                     } else {
                         z = false;
@@ -141,7 +137,7 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
             this.mLoudnessListenerMgr.addListener(executor, onLoudnessCodecUpdateListener, "addLoudnessCodecListener", new Supplier() { // from class: android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda1
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    return LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub.lambda$addLoudnessCodecListener$3(CallbackUtil.DispatcherStub.this);
+                    return LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub.lambda$addLoudnessCodecListener$3(dispatcherStub);
                 }
             });
             synchronized (this.mLock) {
@@ -150,25 +146,25 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
         }
 
         void removeLoudnessCodecListener(LoudnessCodecController loudnessCodecController) {
-            LoudnessCodecController.OnLoudnessCodecUpdateListener onLoudnessCodecUpdateListener;
+            LoudnessCodecController.OnLoudnessCodecUpdateListener key;
             Objects.requireNonNull(loudnessCodecController);
             synchronized (this.mLock) {
                 Iterator<Map.Entry<LoudnessCodecController.OnLoudnessCodecUpdateListener, LoudnessCodecController>> it = this.mConfiguratorListener.entrySet().iterator();
                 while (true) {
                     if (!it.hasNext()) {
-                        onLoudnessCodecUpdateListener = null;
+                        key = null;
                         break;
                     }
                     Map.Entry<LoudnessCodecController.OnLoudnessCodecUpdateListener, LoudnessCodecController> next = it.next();
                     if (next.getValue() == loudnessCodecController) {
-                        onLoudnessCodecUpdateListener = next.getKey();
+                        key = next.getKey();
                         it.remove();
                         break;
                     }
                 }
             }
-            if (onLoudnessCodecUpdateListener != null) {
-                this.mLoudnessListenerMgr.removeListener(onLoudnessCodecUpdateListener, "removeLoudnessCodecListener");
+            if (key != null) {
+                this.mLoudnessListenerMgr.removeListener(key, "removeLoudnessCodecListener");
             }
         }
     }

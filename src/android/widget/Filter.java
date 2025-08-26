@@ -45,6 +45,7 @@ public abstract class Filter {
         filter(charSequence, null);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public final void filter(CharSequence charSequence, FilterListener filterListener) {
         synchronized (this.mLock) {
             if (this.mThreadHandler == null) {
@@ -54,14 +55,14 @@ public abstract class Filter {
             }
             Delayer delayer = this.mDelayer;
             long postingDelay = delayer == null ? 0L : delayer.getPostingDelay(charSequence);
-            Message obtainMessage = this.mThreadHandler.obtainMessage(FILTER_TOKEN);
+            Message messageObtainMessage = this.mThreadHandler.obtainMessage(FILTER_TOKEN);
             RequestArguments requestArguments = new RequestArguments();
             requestArguments.constraint = charSequence != null ? charSequence.toString() : null;
             requestArguments.listener = filterListener;
-            obtainMessage.obj = requestArguments;
+            messageObtainMessage.obj = requestArguments;
             this.mThreadHandler.removeMessages(FILTER_TOKEN);
             this.mThreadHandler.removeMessages(FINISH_TOKEN);
-            this.mThreadHandler.sendMessageDelayed(obtainMessage, postingDelay);
+            this.mThreadHandler.sendMessageDelayed(messageObtainMessage, postingDelay);
         }
     }
 
@@ -106,9 +107,9 @@ public abstract class Filter {
                     }
                 }
             } finally {
-                Message obtainMessage = Filter.this.mResultHandler.obtainMessage(i);
-                obtainMessage.obj = requestArguments;
-                obtainMessage.sendToTarget();
+                Message messageObtainMessage = Filter.this.mResultHandler.obtainMessage(i);
+                messageObtainMessage.obj = requestArguments;
+                messageObtainMessage.sendToTarget();
             }
         }
     }

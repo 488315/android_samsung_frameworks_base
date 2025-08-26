@@ -18,13 +18,11 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CustomTileMapper implements QSTileDataToStateMapper {
     public final Context context;
     public final IUriGrantsManager uriGrantsManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IconResult {
         public final boolean failedToLoad;
         public final Icon icon;
@@ -42,39 +40,39 @@ public final class CustomTileMapper implements QSTileDataToStateMapper {
 
     @Override // com.android.systemui.qs.tiles.base.ui.model.QSTileDataToStateMapper
     public final QSTileState map(QSTileConfig qSTileConfig, Object obj) {
-        Context context;
+        Context contextCreateContextAsUser;
         final IconResult iconResult;
-        Drawable drawable;
+        Drawable drawableLoadDrawableCheckingUriGrant;
         Drawable.ConstantState constantState;
-        Drawable newDrawable;
+        Drawable drawableNewDrawable;
         final CustomTileDataModel customTileDataModel = (CustomTileDataModel) obj;
         boolean z = false;
         Icon.Loaded loaded = null;
         try {
-            context = this.context.createContextAsUser(new UserHandle(customTileDataModel.user.getIdentifier()), 0);
+            contextCreateContextAsUser = this.context.createContextAsUser(new UserHandle(customTileDataModel.user.getIdentifier()), 0);
         } catch (IllegalStateException unused) {
-            context = null;
+            contextCreateContextAsUser = null;
         }
-        if (context != null) {
+        if (contextCreateContextAsUser != null) {
             android.graphics.drawable.Icon icon = customTileDataModel.tile.getIcon();
             int i = customTileDataModel.callingAppUid;
             String packageName = customTileDataModel.componentName.getPackageName();
             android.graphics.drawable.Icon icon2 = customTileDataModel.defaultTileIcon;
             if (icon != null) {
                 try {
-                    drawable = icon.loadDrawableCheckingUriGrant(context, this.uriGrantsManager, i, packageName);
+                    drawableLoadDrawableCheckingUriGrant = icon.loadDrawableCheckingUriGrant(contextCreateContextAsUser, this.uriGrantsManager, i, packageName);
                 } catch (Exception unused2) {
-                    drawable = null;
+                    drawableLoadDrawableCheckingUriGrant = null;
                     z = true;
                 }
             } else {
-                drawable = null;
+                drawableLoadDrawableCheckingUriGrant = null;
             }
-            if (drawable == null) {
-                drawable = icon2 != null ? icon2.loadDrawable(context) : null;
+            if (drawableLoadDrawableCheckingUriGrant == null) {
+                drawableLoadDrawableCheckingUriGrant = icon2 != null ? icon2.loadDrawable(contextCreateContextAsUser) : null;
             }
-            if (drawable != null && (constantState = drawable.getConstantState()) != null && (newDrawable = constantState.newDrawable()) != null) {
-                loaded = new Icon.Loaded(newDrawable, null, null, 4, null);
+            if (drawableLoadDrawableCheckingUriGrant != null && (constantState = drawableLoadDrawableCheckingUriGrant.getConstantState()) != null && (drawableNewDrawable = constantState.newDrawable()) != null) {
+                loaded = new Icon.Loaded(drawableNewDrawable, null, null, 4, null);
             }
             iconResult = new IconResult(loaded, z);
         } else {
@@ -85,10 +83,10 @@ public final class CustomTileMapper implements QSTileDataToStateMapper {
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.custom.ui.mapper.CustomTileMapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 QSTileState.ActivationState activationState;
                 QSTileState.Builder builder = (QSTileState.Builder) obj2;
-                CustomTileDataModel customTileDataModel2 = CustomTileDataModel.this;
+                CustomTileDataModel customTileDataModel2 = customTileDataModel;
                 int state = customTileDataModel2.tile.getState();
                 if (customTileDataModel2.hasPendingBind) {
                     state = 0;

@@ -52,9 +52,9 @@ public interface ISignificantPlaceProvider extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISignificantPlaceProvider.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISignificantPlaceProvider)) {
-                return (ISignificantPlaceProvider) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISignificantPlaceProvider.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISignificantPlaceProvider)) {
+                return (ISignificantPlaceProvider) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,9 +84,9 @@ public interface ISignificantPlaceProvider extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ISignificantPlaceProviderManager asInterface = ISignificantPlaceProviderManager.Stub.asInterface(parcel.readStrongBinder());
+                ISignificantPlaceProviderManager iSignificantPlaceProviderManagerAsInterface = ISignificantPlaceProviderManager.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setSignificantPlaceProviderManager(asInterface);
+                setSignificantPlaceProviderManager(iSignificantPlaceProviderManagerAsInterface);
             } else if (i == 2) {
                 onSignificantPlaceCheck();
             } else {
@@ -113,24 +113,24 @@ public interface ISignificantPlaceProvider extends IInterface {
 
             @Override // android.hardware.location.ISignificantPlaceProvider
             public void setSignificantPlaceProviderManager(ISignificantPlaceProviderManager iSignificantPlaceProviderManager) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISignificantPlaceProvider.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSignificantPlaceProviderManager);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISignificantPlaceProvider.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSignificantPlaceProviderManager);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.ISignificantPlaceProvider
             public void onSignificantPlaceCheck() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISignificantPlaceProvider.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISignificantPlaceProvider.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

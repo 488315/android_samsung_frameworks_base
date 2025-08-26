@@ -5,7 +5,6 @@ import android.bluetooth.BluetoothDevice;
 import android.media.midi.IMidiDeviceListener;
 import android.media.midi.IMidiDeviceOpenCallback;
 import android.media.midi.MidiDeviceServer;
-import android.media.midi.MidiManager;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -73,7 +72,7 @@ public final class MidiManager {
                     executor.execute(new Runnable() { // from class: android.media.midi.MidiManager$DeviceListener$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MidiManager.DeviceListener.this.lambda$onDeviceAdded$0(midiDeviceInfo);
+                            this.f$0.lambda$onDeviceAdded$0(midiDeviceInfo);
                         }
                     });
                 } else {
@@ -95,7 +94,7 @@ public final class MidiManager {
                     executor.execute(new Runnable() { // from class: android.media.midi.MidiManager$DeviceListener$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MidiManager.DeviceListener.this.lambda$onDeviceRemoved$1(midiDeviceInfo);
+                            this.f$0.lambda$onDeviceRemoved$1(midiDeviceInfo);
                         }
                     });
                 } else {
@@ -116,7 +115,7 @@ public final class MidiManager {
                 executor.execute(new Runnable() { // from class: android.media.midi.MidiManager$DeviceListener$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        MidiManager.DeviceListener.this.lambda$onDeviceStatusChanged$2(midiDeviceStatus);
+                        this.f$0.lambda$onDeviceStatusChanged$2(midiDeviceStatus);
                     }
                 });
             } else {
@@ -176,10 +175,10 @@ public final class MidiManager {
     }
 
     public void unregisterDeviceCallback(DeviceCallback deviceCallback) {
-        DeviceListener remove = this.mDeviceListeners.remove(deviceCallback);
-        if (remove != null) {
+        DeviceListener deviceListenerRemove = this.mDeviceListeners.remove(deviceCallback);
+        if (deviceListenerRemove != null) {
             try {
-                this.mService.unregisterListener(this.mToken, remove);
+                this.mService.unregisterListener(this.mToken, deviceListenerRemove);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -248,9 +247,9 @@ public final class MidiManager {
                         } catch (RemoteException unused) {
                             Log.e(MidiManager.TAG, "remote exception in getDeviceInfo()");
                         }
-                        MidiManager.this.sendOpenDeviceResponse(midiDevice, onDeviceOpenedListener, handler);
+                    } else {
+                        midiDevice = null;
                     }
-                    midiDevice = null;
                     MidiManager.this.sendOpenDeviceResponse(midiDevice, onDeviceOpenedListener, handler);
                 }
             });

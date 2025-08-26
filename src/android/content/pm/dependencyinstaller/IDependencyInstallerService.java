@@ -47,9 +47,9 @@ public interface IDependencyInstallerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDependencyInstallerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDependencyInstallerService)) {
-                return (IDependencyInstallerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDependencyInstallerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDependencyInstallerService)) {
+                return (IDependencyInstallerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,10 +76,10 @@ public interface IDependencyInstallerService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SharedLibraryInfo.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SharedLibraryInfo.CREATOR);
                 DependencyInstallerCallback dependencyInstallerCallback = (DependencyInstallerCallback) parcel.readTypedObject(DependencyInstallerCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                onDependenciesRequired(createTypedArrayList, dependencyInstallerCallback);
+                onDependenciesRequired(arrayListCreateTypedArrayList, dependencyInstallerCallback);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,14 +103,14 @@ public interface IDependencyInstallerService extends IInterface {
 
             @Override // android.content.pm.dependencyinstaller.IDependencyInstallerService
             public void onDependenciesRequired(List<SharedLibraryInfo> list, DependencyInstallerCallback dependencyInstallerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDependencyInstallerService.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedObject(dependencyInstallerCallback, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDependencyInstallerService.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedObject(dependencyInstallerCallback, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

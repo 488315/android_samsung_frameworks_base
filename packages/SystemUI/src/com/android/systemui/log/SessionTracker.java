@@ -21,7 +21,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SessionTracker implements CoreStartable {
     public static final boolean DEBUG = Log.isLoggable("SessionTracker", 3);
@@ -77,7 +76,6 @@ public class SessionTracker implements CoreStartable {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum SessionUiEvent implements UiEventLogger.UiEventEnum {
         KEYGUARD_SESSION_END_KEYGUARD_GOING_AWAY(1354),
         KEYGUARD_SESSION_END_GOING_TO_SLEEP(1355);
@@ -169,11 +167,11 @@ public class SessionTracker implements CoreStartable {
             Log.e("SessionTracker", "session [" + getString(i) + "] was already started");
             return;
         }
-        InstanceId newInstanceId = this.mInstanceIdGenerator.newInstanceId();
-        ((HashMap) this.mSessionToInstanceId).put(Integer.valueOf(i), newInstanceId);
-        boolean isVisibleBackgroundUsersEnabled = UserManager.isVisibleBackgroundUsersEnabled();
+        InstanceId instanceIdNewInstanceId = this.mInstanceIdGenerator.newInstanceId();
+        ((HashMap) this.mSessionToInstanceId).put(Integer.valueOf(i), instanceIdNewInstanceId);
+        boolean zIsVisibleBackgroundUsersEnabled = UserManager.isVisibleBackgroundUsersEnabled();
         boolean z = DEBUG;
-        if (isVisibleBackgroundUsersEnabled) {
+        if (zIsVisibleBackgroundUsersEnabled) {
             ProcessWrapper processWrapper = this.mProcessWrapper;
             processWrapper.getClass();
             if (!ProcessWrapper.isSystemUser() && !processWrapper.mActivityManager.isProfileForeground(Process.myUserHandle())) {
@@ -186,12 +184,12 @@ public class SessionTracker implements CoreStartable {
         }
         if (z) {
             try {
-                Log.d("SessionTracker", "Session start for [" + getString(i) + "] id=" + newInstanceId);
+                Log.d("SessionTracker", "Session start for [" + getString(i) + "] id=" + instanceIdNewInstanceId);
             } catch (RemoteException e) {
                 Log.e("SessionTracker", "Unable to send onSessionStarted for session=[" + getString(i) + "]", e);
                 return;
             }
         }
-        this.mStatusBarManagerService.onSessionStarted(i, newInstanceId);
+        this.mStatusBarManagerService.onSessionStarted(i, instanceIdNewInstanceId);
     }
 }

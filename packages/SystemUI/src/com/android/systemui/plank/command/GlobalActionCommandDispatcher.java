@@ -9,13 +9,11 @@ import com.samsung.android.knox.ucm.configurator.UniversalCredentialManager;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GlobalActionCommandDispatcher implements PlankCommandDispatcher {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Action {
         public static final /* synthetic */ Action[] $VALUES;
         public static final Action add_condition;
@@ -61,7 +59,6 @@ public final class GlobalActionCommandDispatcher implements PlankCommandDispatch
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -105,15 +102,15 @@ public final class GlobalActionCommandDispatcher implements PlankCommandDispatch
 
     @Override // com.android.systemui.plank.command.PlankCommandDispatcher
     public final Bundle dispatch(Bundle bundle, String str) {
-        Action action;
+        Action actionValueOf;
         Bundle bundle2 = new Bundle();
         bundle2.putBoolean("key_monitor_result", true);
         try {
-            action = Action.valueOf(str);
+            actionValueOf = Action.valueOf(str);
         } catch (Exception unused) {
-            action = Action.unknown;
+            actionValueOf = Action.unknown;
         }
-        switch (WhenMappings.$EnumSwitchMapping$0[action.ordinal()]) {
+        switch (WhenMappings.$EnumSwitchMapping$0[actionValueOf.ordinal()]) {
             case 1:
             case 2:
                 ((GlobalActionsComponent) Dependency.sDependency.getDependencyInner(GlobalActionsComponent.class)).handleShowGlobalActionsMenu(-1);

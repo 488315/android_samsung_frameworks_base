@@ -6,7 +6,7 @@
         <item>
             <shape android:shape="oval">
                 <size android:height="24.0dip" android:width="24.0dip" />
-                <solid android:color="@android:color/secondary_text_nofocus" />
+                <solid android:color="@android:color/notification_secondary_text_color_current" />
             </shape>
         </item>
     </ripple>

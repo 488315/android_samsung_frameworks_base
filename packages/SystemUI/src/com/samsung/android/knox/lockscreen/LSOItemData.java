@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class LSOItemData implements Parcelable {
     public static final Parcelable.Creator<LSOItemData> CREATOR = new Parcelable.Creator<LSOItemData>() { // from class: com.samsung.android.knox.lockscreen.LSOItemData.1
@@ -24,10 +23,10 @@ public abstract class LSOItemData implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public LSOItemData createFromParcel(Parcel parcel) {
             try {
-                int dataPosition = parcel.dataPosition();
-                byte readByte = parcel.readByte();
-                parcel.setDataPosition(dataPosition);
-                return LSOItemCreator.createItem(readByte, parcel);
+                int iDataPosition = parcel.dataPosition();
+                byte b = parcel.readByte();
+                parcel.setDataPosition(iDataPosition);
+                return LSOItemCreator.createItem(b, parcel);
             } catch (Exception e) {
                 EmergencyButton$$ExternalSyntheticOutline0.m("Exception in createFromParcel: ", e, LSOItemData.TAG);
                 return null;
@@ -68,7 +67,7 @@ public abstract class LSOItemData implements Parcelable {
         this.gravity = -1;
     }
 
-    public void closeFileDescriptor() {
+    public void closeFileDescriptor() throws IOException {
         ParcelFileDescriptor parcelFileDescriptor = this.pfd;
         if (parcelFileDescriptor != null && parcelFileDescriptor != null) {
             try {

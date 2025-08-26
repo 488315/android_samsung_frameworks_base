@@ -4,7 +4,6 @@ import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.viewpager.widget.ViewPager$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PluginFaceWidgetColorScheme {
     public static final int $stable = 8;
@@ -128,8 +127,8 @@ public final class PluginFaceWidgetColorScheme {
         int i3 = this.accentSecondaryFromScheme;
         int i4 = this.backgroundStartFromScheme;
         int i5 = this.backgroundEndFromScheme;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "PluginFaceWidgetColorScheme(surfaceFromScheme=", ", accentPrimaryFromScheme=", ", accentSecondaryFromScheme=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i3, ", backgroundStartFromScheme=", i4, ", backgroundEndFromScheme=");
-        return ReorderTile$$ExternalSyntheticOutline0.m(i5, ")", m);
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "PluginFaceWidgetColorScheme(surfaceFromScheme=", ", accentPrimaryFromScheme=", ", accentSecondaryFromScheme=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i3, ", backgroundStartFromScheme=", i4, ", backgroundEndFromScheme=");
+        return ReorderTile$$ExternalSyntheticOutline0.m(i5, ")", sbM);
     }
 }

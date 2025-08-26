@@ -3,6 +3,7 @@ package android.hardware.biometrics;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class SensorPropertiesInternal implements Parcelable {
         this.resetLockoutRequiresChallenge = z2;
     }
 
-    protected SensorPropertiesInternal(Parcel parcel) {
+    protected SensorPropertiesInternal(Parcel parcel) throws ClassNotFoundException, IOException {
         this.sensorId = parcel.readInt();
         this.sensorStrength = parcel.readInt();
         this.maxEnrollmentsPerUser = parcel.readInt();

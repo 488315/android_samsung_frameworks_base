@@ -95,7 +95,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipController implements PipTransitionController.PipTransitionCallback, RemoteCallable, ConfigurationChangeListener, KeyguardChangeListener, UserChangeListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -139,7 +138,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
     public final PipController$$ExternalSyntheticLambda2 mRotationController = new PipController$$ExternalSyntheticLambda2(this);
     final DisplayController.OnDisplaysChangedListener mDisplaysChangedListener = new DisplayController.OnDisplaysChangedListener() { // from class: com.android.wm.shell.pip.phone.PipController.1
         @Override // com.android.wm.shell.common.DisplayController.OnDisplaysChangedListener
-        public final void onDisplayAdded(int i) {
+        public final void onDisplayAdded(int i) throws Resources.NotFoundException {
             PipController pipController = PipController.this;
             if (i != pipController.mPipDisplayLayoutState.mDisplayId) {
                 return;
@@ -148,7 +147,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         }
 
         @Override // com.android.wm.shell.common.DisplayController.OnDisplaysChangedListener
-        public final void onDisplayConfigurationChanged(int i, Configuration configuration) {
+        public final void onDisplayConfigurationChanged(int i, Configuration configuration) throws Resources.NotFoundException {
             PipController pipController = PipController.this;
             if (i != pipController.mPipDisplayLayoutState.mDisplayId) {
                 return;
@@ -186,14 +185,12 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.pip.phone.PipController$3, reason: invalid class name */
     public class AnonymousClass3 {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.pip.phone.PipController$4, reason: invalid class name */
     public class AnonymousClass4 implements DisplayInsetsController.OnInsetsChangedListener {
         public AnonymousClass4() {
@@ -217,7 +214,6 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IPipImpl extends IPip.Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public PipController mController;
@@ -232,13 +228,13 @@ public class PipController implements PipTransitionController.PipTransitionCallb
                 }
                 try {
                     IPipAnimationListener$Stub$Proxy iPipAnimationListener$Stub$Proxy = (IPipAnimationListener$Stub$Proxy) iInterface;
-                    Parcel obtain = Parcel.obtain(iPipAnimationListener$Stub$Proxy.mRemote);
+                    Parcel parcelObtain = Parcel.obtain(iPipAnimationListener$Stub$Proxy.mRemote);
                     try {
-                        obtain.writeInterfaceToken("com.android.wm.shell.common.pip.IPipAnimationListener");
-                        iPipAnimationListener$Stub$Proxy.mRemote.transact(3, obtain, null, 1);
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken("com.android.wm.shell.common.pip.IPipAnimationListener");
+                        iPipAnimationListener$Stub$Proxy.mRemote.transact(3, parcelObtain, null, 1);
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 } catch (RemoteException e) {
@@ -313,8 +309,8 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         public final void setPipAnimationListener(final IPipAnimationListener$Stub$Proxy iPipAnimationListener$Stub$Proxy) {
             ExternalInterfaceBinder.executeRemoteCallWithTaskPermission(this.mController, "setPipAnimationListener", new Consumer() { // from class: com.android.wm.shell.pip.phone.PipController$IPipImpl$$ExternalSyntheticLambda9
                 @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    PipController.IPipImpl iPipImpl = PipController.IPipImpl.this;
+                public final void accept(Object obj) throws RemoteException {
+                    PipController.IPipImpl iPipImpl = this.f$0;
                     IPipAnimationListener$Stub$Proxy iPipAnimationListener$Stub$Proxy2 = iPipAnimationListener$Stub$Proxy;
                     if (iPipAnimationListener$Stub$Proxy2 != null) {
                         iPipImpl.mListener.register(iPipAnimationListener$Stub$Proxy2);
@@ -340,7 +336,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
             final Rect[] rectArr = new Rect[1];
             ExternalInterfaceBinder.executeRemoteCallWithTaskPermission(this.mController, "startSwipePipToHome", new Consumer() { // from class: com.android.wm.shell.pip.phone.PipController$IPipImpl$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
+                public final void accept(Object obj) throws Resources.NotFoundException {
                     Rect[] rectArr2 = rectArr;
                     ActivityManager.RunningTaskInfo runningTaskInfo2 = runningTaskInfo;
                     int i2 = i;
@@ -379,6 +375,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
                     } else {
                         pipTaskOrganizer.mPipTransitionState.setTransitionState(3);
                         pipTransitionController.sendOnPipTransitionStarted$1(2);
+                        pipTaskOrganizer.mTransitionDirection = 2;
                     }
                     PipBoundsState pipBoundsState2 = pipTaskOrganizer.mPipBoundsState;
                     PipBoundsAlgorithm pipBoundsAlgorithm = pipTaskOrganizer.mPipBoundsAlgorithm;
@@ -449,7 +446,6 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     interface PipAnimationListener {
         void onExpandPip();
 
@@ -458,16 +454,20 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         void onPipResourceDimensionsChanged(int i, int i2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipControllerPinnedTaskListener extends PinnedStackListenerForwarder.PinnedTaskListener {
         public /* synthetic */ PipControllerPinnedTaskListener(PipController pipController, int i) {
             this();
         }
 
         @Override // com.android.wm.shell.pip.PinnedStackListenerForwarder.PinnedTaskListener
-        public final void onImeVisibilityChanged(boolean z, int i) {
+        public final void onImeVisibilityChanged(boolean z, int i) throws Resources.NotFoundException {
             PipController pipController = PipController.this;
-            pipController.mPipBoundsState.setImeVisibility(i, z);
+            PipBoundsState pipBoundsState = pipController.mPipBoundsState;
+            pipBoundsState.mIsImeShowing = z;
+            pipBoundsState.mImeHeight = i;
+            if (z) {
+                pipBoundsState.mRestoreBounds.set(pipBoundsState.getBounds());
+            }
             PipTouchHandler pipTouchHandler = pipController.mTouchHandler;
             pipTouchHandler.mIsImeShowing = z;
             pipTouchHandler.mImeHeight = i;
@@ -486,7 +486,6 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipImpl implements Pip {
         public PipImpl() {
         }
@@ -499,6 +498,14 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         @Override // com.android.wm.shell.pip.Pip
         public final void addPipExclusionBoundsChangeListener(Consumer consumer) {
             PipController.this.mMainExecutor.execute(new PipController$PipImpl$$ExternalSyntheticLambda0(this, consumer, 1));
+        }
+
+        @Override // com.android.wm.shell.pip.Pip
+        public final boolean isExitingPipToLastParent(int i) {
+            int i2;
+            PipController pipController = PipController.this;
+            ActivityManager.RunningTaskInfo runningTaskInfo = pipController.mPipTaskOrganizer.mTaskInfo;
+            return runningTaskInfo != null && (i2 = runningTaskInfo.lastParentTaskIdBeforePip) != -1 && i == i2 && pipController.mPipTransitionState.mState == 5;
         }
 
         @Override // com.android.wm.shell.pip.Pip
@@ -518,7 +525,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
             PipController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.pip.phone.PipController$PipImpl$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PipController.PipImpl pipImpl = PipController.PipImpl.this;
+                    PipController.PipImpl pipImpl = this.f$0;
                     ((HashMap) PipController.this.mPipTransitionController.mPipTransitionCallbacks).put(anonymousClass7, executor);
                 }
             });
@@ -540,7 +547,6 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SettingsObserver extends ContentObserver {
         public final Uri mEdgeHandleSizePercentUri;
         public final Uri mEdgeHandlerPositionPercentUri;
@@ -644,7 +650,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
     }
 
     @Override // com.android.wm.shell.sysui.ConfigurationChangeListener
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         this.mPipBoundsAlgorithm.reloadResources(this.mContext);
         PipTouchHandler pipTouchHandler = this.mTouchHandler;
         pipTouchHandler.mPipResizeGestureHandler.reloadResources();
@@ -687,7 +693,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         }
     }
 
-    public final void onDisplayChanged(DisplayLayout displayLayout, boolean z) {
+    public final void onDisplayChanged(DisplayLayout displayLayout, boolean z) throws Resources.NotFoundException {
         if (displayLayout == null) {
             Log.w("PipController", "onDisplayChanged - layout is null");
             return;
@@ -712,7 +718,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         onDisplayChangedUncheck(displayLayout, z);
     }
 
-    public final void onDisplayChangedUncheck(DisplayLayout displayLayout, boolean z) {
+    public final void onDisplayChangedUncheck(DisplayLayout displayLayout, boolean z) throws Resources.NotFoundException {
         PipTransitionState pipTransitionState = this.mPipTransitionState;
         if (pipTransitionState.mInSwipePipToHomeTransition) {
             return;
@@ -819,7 +825,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
     @Override // com.android.wm.shell.pip.PipTransitionController.PipTransitionCallback
     public final void onPipTransitionStarted(int i, Rect rect) {
         String str;
-        InteractionJankMonitor.Configuration.Builder withSurface = InteractionJankMonitor.Configuration.Builder.withSurface(35, this.mContext, this.mPipTaskOrganizer.mLeash, this.mHandler);
+        InteractionJankMonitor.Configuration.Builder builderWithSurface = InteractionJankMonitor.Configuration.Builder.withSurface(35, this.mContext, this.mPipTaskOrganizer.mLeash, this.mHandler);
         switch (i) {
             case 2:
                 str = "TRANSITION_TO_PIP";
@@ -846,7 +852,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
                 str = "TRANSITION_LEAVE_UNKNOWN";
                 break;
         }
-        InteractionJankMonitor.getInstance().begin(withSurface.setTag(str).setTimeout(DelayableMarqueeTextView.DEFAULT_MARQUEE_DELAY));
+        InteractionJankMonitor.getInstance().begin(builderWithSurface.setTag(str).setTimeout(DelayableMarqueeTextView.DEFAULT_MARQUEE_DELAY));
         if (PipAnimationController.isOutPipDirection(i)) {
             this.mPipBoundsState.saveReentryState(this.mPipBoundsAlgorithm.getSnapFraction(rect));
         }
@@ -866,7 +872,7 @@ public class PipController implements PipTransitionController.PipTransitionCallb
     }
 
     @Override // com.android.wm.shell.sysui.ConfigurationChangeListener
-    public final void onThemeChanged() {
+    public final void onThemeChanged() throws Resources.NotFoundException {
         this.mTouchHandler.mPipDismissTargetHandler.getClass();
         Context context = this.mContext;
         onDisplayChanged(new DisplayLayout(context, context.getDisplay()), false);
@@ -909,21 +915,21 @@ public class PipController implements PipTransitionController.PipTransitionCallb
     }
 
     public final void updateMovementBounds(Rect rect, boolean z, boolean z2, boolean z3, WindowContainerTransaction windowContainerTransaction) {
-        int i;
+        int transitionDirection;
         PipTaskOrganizer pipTaskOrganizer = this.mPipTaskOrganizer;
-        int i2 = pipTaskOrganizer.mPipTransitionState.mState;
-        if (z3 && (i2 == 2 || i2 == 3)) {
+        int i = pipTaskOrganizer.mPipTransitionState.mState;
+        if (z3 && (i == 2 || i == 3)) {
             return;
         }
         Rect rect2 = new Rect(rect);
-        int i3 = this.mPipDisplayLayoutState.getDisplayLayout().mRotation;
+        int i2 = this.mPipDisplayLayoutState.getDisplayLayout().mRotation;
         Rect rect3 = this.mTmpInsetBounds;
         PipBoundsAlgorithm pipBoundsAlgorithm = this.mPipBoundsAlgorithm;
         pipBoundsAlgorithm.getInsetBounds(rect3);
-        int i4 = 0;
-        Rect transformBoundsToAspectRatioIfValid = pipBoundsAlgorithm.transformBoundsToAspectRatioIfValid(pipBoundsAlgorithm.mPipBoundsState.mAspectRatio, pipBoundsAlgorithm.getDefaultBounds(), false, false);
+        int i3 = 0;
+        Rect rectTransformBoundsToAspectRatioIfValid = pipBoundsAlgorithm.transformBoundsToAspectRatioIfValid(pipBoundsAlgorithm.mPipBoundsState.mAspectRatio, pipBoundsAlgorithm.getDefaultBounds(), false, false);
         PipBoundsState pipBoundsState = this.mPipBoundsState;
-        pipBoundsState.mNormalBounds.set(transformBoundsToAspectRatioIfValid);
+        pipBoundsState.mNormalBounds.set(rectTransformBoundsToAspectRatioIfValid);
         if (rect2.isEmpty()) {
             rect2.set(pipBoundsAlgorithm.getDefaultBounds());
         }
@@ -953,14 +959,15 @@ public class PipController implements PipTransitionController.PipTransitionCallb
                 } else if (z7) {
                     pipBoundsState2.setBounds(rect2);
                     if (pipTransitionAnimator != null) {
-                        i = pipTransitionAnimator.getTransitionDirection();
+                        transitionDirection = pipTransitionAnimator.getTransitionDirection();
                         PipAnimationController.quietCancel(pipTransitionAnimator);
-                        pipTaskOrganizer.mPipTransitionController.sendOnPipTransitionCancelled$1(i);
-                        pipTaskOrganizer.sendOnPipTransitionFinished(i);
+                        pipTaskOrganizer.mPipTransitionController.sendOnPipTransitionCancelled$1(transitionDirection);
+                        pipTaskOrganizer.mTransitionDirection = transitionDirection;
+                        pipTaskOrganizer.sendOnPipTransitionFinished(transitionDirection);
                     } else {
-                        i = 0;
+                        transitionDirection = 0;
                     }
-                    pipTaskOrganizer.prepareFinishResizeTransaction(rect2, i, pipTaskOrganizer.createFinishResizeSurfaceTransaction(rect2), windowContainerTransaction);
+                    pipTaskOrganizer.prepareFinishResizeTransaction(rect2, transitionDirection, pipTaskOrganizer.createFinishResizeSurfaceTransaction(rect2), windowContainerTransaction);
                 } else if (pipTransitionAnimator == null || !pipTransitionAnimator.isRunning()) {
                     if (!pipBoundsState2.getBounds().isEmpty()) {
                         rect2.set(pipBoundsState2.getBounds());
@@ -979,35 +986,35 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         if (pipTouchHandler.mPipResizeGestureHandler.mUserResizeBounds.isEmpty()) {
             pipTouchHandler.mPipResizeGestureHandler.setUserResizeBounds(rect6);
         }
-        int i5 = pipTouchHandler.mIsImeShowing ? pipTouchHandler.mImeHeight : 0;
-        if (pipTouchHandler.mDisplayRotation != i3) {
+        int i4 = pipTouchHandler.mIsImeShowing ? pipTouchHandler.mImeHeight : 0;
+        if (pipTouchHandler.mDisplayRotation != i2) {
             pipTouchHandler.mTouchState.reset();
         }
         Rect rect7 = new Rect();
         pipTouchHandler.mPipBoundsAlgorithm.getClass();
-        PipBoundsAlgorithm.getMovementBounds(rect6, rect5, rect7, i5);
+        PipBoundsAlgorithm.getMovementBounds(rect6, rect5, rect7, i4);
         PipBoundsState pipBoundsState3 = pipTouchHandler.mPipBoundsState;
         if (pipBoundsState3.mMovementBounds.isEmpty()) {
             PipBoundsAlgorithm.getMovementBounds(rect2, rect5, pipBoundsState3.mMovementBounds, 0);
         }
-        float width = rect6.width() / rect6.height();
-        Size defaultSize = ((PhoneSizeSpecSource) pipTouchHandler.mSizeSpecSource).getDefaultSize(width);
+        float fWidth = rect6.width() / rect6.height();
+        Size defaultSize = ((PhoneSizeSpecSource) pipTouchHandler.mSizeSpecSource).getDefaultSize(fWidth);
         pipBoundsState3.mExpandedBounds.set(new Rect(0, 0, defaultSize.getWidth(), defaultSize.getHeight()));
         Rect rect8 = new Rect();
-        PipBoundsAlgorithm.getMovementBounds(pipBoundsState3.mExpandedBounds, rect5, rect8, i5);
-        pipTouchHandler.updatePipSizeConstraints(rect6, width);
+        PipBoundsAlgorithm.getMovementBounds(pipBoundsState3.mExpandedBounds, rect5, rect8, i4);
+        pipTouchHandler.updatePipSizeConstraints(rect6, fWidth);
         boolean z8 = pipTouchHandler.mIsImeShowing;
-        int i6 = z8 ? pipTouchHandler.mImeOffset : 0;
+        int i5 = z8 ? pipTouchHandler.mImeOffset : 0;
         if (!z8 && pipTouchHandler.mIsShelfShowing) {
-            i4 = pipTouchHandler.mShelfHeight;
+            i3 = pipTouchHandler.mShelfHeight;
         }
-        int max = Math.max(i6, i4);
+        int iMax = Math.max(i5, i3);
         pipBoundsState3.mNormalMovementBounds.set(rect7);
         pipBoundsState3.mExpandedMovementBounds.set(rect8);
-        pipTouchHandler.mDisplayRotation = i3;
+        pipTouchHandler.mDisplayRotation = i2;
         pipTouchHandler.mInsetBounds.set(rect5);
         pipTouchHandler.updateMovementBounds();
-        pipTouchHandler.mMovementBoundsExtraOffsets = max;
+        pipTouchHandler.mMovementBoundsExtraOffsets = iMax;
         Rect rect9 = pipBoundsState3.mExpandedBounds;
         Rect rect10 = pipBoundsState3.mNormalMovementBounds;
         Rect rect11 = pipBoundsState3.mExpandedMovementBounds;
@@ -1016,14 +1023,14 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         pipAccessibilityInteractionConnection.mExpandedBounds.set(rect9);
         pipAccessibilityInteractionConnection.mNormalMovementBounds.set(rect10);
         pipAccessibilityInteractionConnection.mExpandedMovementBounds.set(rect11);
-        if (pipTouchHandler.mDeferResizeToNormalBoundsUntilRotation == i3) {
+        if (pipTouchHandler.mDeferResizeToNormalBoundsUntilRotation == i2) {
             pipTouchHandler.mMotionHelper.animateToUnexpandedState(rect6, pipTouchHandler.mSavedSnapFraction, pipBoundsState3.mNormalMovementBounds, pipBoundsState3.mMovementBounds, true);
             pipTouchHandler.mSavedSnapFraction = -1.0f;
             pipTouchHandler.mDeferResizeToNormalBoundsUntilRotation = -1;
         }
     }
 
-    public final void updatePipPositionForKeepClearAreas() {
+    public final void updatePipPositionForKeepClearAreas() throws Resources.NotFoundException {
         PipTransitionState pipTransitionState;
         int i;
         if (this.mIsKeyguardShowingOrAnimating || (i = (pipTransitionState = this.mPipTransitionState).mState) < 3 || i == 5) {
@@ -1032,61 +1039,45 @@ public class PipController implements PipTransitionController.PipTransitionCallb
         PhonePipKeepClearAlgorithm phonePipKeepClearAlgorithm = (PhonePipKeepClearAlgorithm) this.mPipKeepClearAlgorithm;
         phonePipKeepClearAlgorithm.getClass();
         PipBoundsState pipBoundsState = this.mPipBoundsState;
-        boolean isEmpty = pipBoundsState.getBounds().isEmpty();
+        boolean zIsEmpty = pipBoundsState.getBounds().isEmpty();
         PipBoundsAlgorithm pipBoundsAlgorithm = this.mPipBoundsAlgorithm;
-        Rect entryDestinationBoundsIgnoringKeepClearAreas = isEmpty ? pipBoundsAlgorithm.getEntryDestinationBoundsIgnoringKeepClearAreas() : pipBoundsState.getBounds();
-        if (pipBoundsState.mIsImeShowing || pipBoundsState.mRestoreBounds.isEmpty()) {
-            Rect rect = pipBoundsState.mNormalBounds;
-            if (!pipBoundsState.mHasUserResizedPip && !pipBoundsState.mHasUserMovedPip && entryDestinationBoundsIgnoringKeepClearAreas.width() != rect.width() && entryDestinationBoundsIgnoringKeepClearAreas.height() != rect.height()) {
-                int i2 = entryDestinationBoundsIgnoringKeepClearAreas.right;
-                int i3 = entryDestinationBoundsIgnoringKeepClearAreas.bottom;
-                entryDestinationBoundsIgnoringKeepClearAreas.set(i2 - rect.width(), i3 - rect.height(), i2, i3);
-            }
-        } else {
-            Rect rect2 = pipBoundsState.mRestoreBounds;
-            if (pipBoundsState.mHasUserResizedPip || pipBoundsState.mHasUserMovedPip || entryDestinationBoundsIgnoringKeepClearAreas.width() <= rect2.width() || entryDestinationBoundsIgnoringKeepClearAreas.height() <= rect2.height()) {
-                entryDestinationBoundsIgnoringKeepClearAreas.set(rect2);
-            } else {
-                int width = entryDestinationBoundsIgnoringKeepClearAreas.width();
-                int height = entryDestinationBoundsIgnoringKeepClearAreas.height();
-                int i4 = rect2.right;
-                int i5 = rect2.bottom;
-                entryDestinationBoundsIgnoringKeepClearAreas.set(i4 - width, i5 - height, i4, i5);
-            }
+        Rect entryDestinationBoundsIgnoringKeepClearAreas = zIsEmpty ? pipBoundsAlgorithm.getEntryDestinationBoundsIgnoringKeepClearAreas() : pipBoundsState.getBounds();
+        if (!pipBoundsState.mIsImeShowing && !pipBoundsState.mRestoreBounds.isEmpty()) {
+            entryDestinationBoundsIgnoringKeepClearAreas.set(pipBoundsState.mRestoreBounds);
             pipBoundsState.mRestoreBounds.setEmpty();
         }
-        Rect rect3 = new Rect();
-        pipBoundsAlgorithm.getInsetBounds(rect3);
+        Rect rect = new Rect();
+        pipBoundsAlgorithm.getInsetBounds(rect);
         if (pipBoundsState.mIsImeShowing) {
-            rect3.bottom -= pipBoundsState.mImeHeight + phonePipKeepClearAlgorithm.mImeOffset;
+            rect.bottom -= pipBoundsState.mImeHeight + phonePipKeepClearAlgorithm.mImeOffset;
         }
         if (pipBoundsState.isStashed()) {
-            int i6 = entryDestinationBoundsIgnoringKeepClearAreas.bottom;
-            int i7 = rect3.bottom;
-            if (i6 > i7 || entryDestinationBoundsIgnoringKeepClearAreas.top < rect3.top) {
-                entryDestinationBoundsIgnoringKeepClearAreas.offset(0, i7 - i6);
+            int i2 = entryDestinationBoundsIgnoringKeepClearAreas.bottom;
+            int i3 = rect.bottom;
+            if (i2 > i3 || entryDestinationBoundsIgnoringKeepClearAreas.top < rect.top) {
+                entryDestinationBoundsIgnoringKeepClearAreas.offset(0, i3 - i2);
             }
         } else {
-            Rect rect4 = new Rect(entryDestinationBoundsIgnoringKeepClearAreas);
-            boolean z = (pipBoundsState.mHasUserMovedPip || pipBoundsState.mHasUserResizedPip) ? !rect3.contains(rect4) : true;
+            Rect rect2 = new Rect(entryDestinationBoundsIgnoringKeepClearAreas);
+            boolean z = (pipBoundsState.mHasUserMovedPip || pipBoundsState.mHasUserResizedPip) ? !rect.contains(rect2) : true;
             if (phonePipKeepClearAlgorithm.mKeepClearAreaGravityEnabled || z) {
                 float snapFraction = pipBoundsAlgorithm.getSnapFraction(entryDestinationBoundsIgnoringKeepClearAreas);
                 char c = (snapFraction < 0.5f || snapFraction >= 2.5f) ? (char) 3 : (char) 5;
-                rect4.offsetTo(rect4.left, rect3.bottom - rect4.height());
+                rect2.offsetTo(rect2.left, rect.bottom - rect2.height());
                 if (c == 5) {
-                    rect4.offsetTo(rect3.right - rect4.width(), rect4.top);
+                    rect2.offsetTo(rect.right - rect2.width(), rect2.top);
                 } else {
-                    rect4.offsetTo(rect3.left, rect4.top);
+                    rect2.offsetTo(rect.left, rect2.top);
                 }
             }
-            entryDestinationBoundsIgnoringKeepClearAreas = phonePipKeepClearAlgorithm.findUnoccludedPosition(rect4, pipBoundsState.mRestrictedKeepClearAreas, pipBoundsState.getUnrestrictedKeepClearAreas(), rect3);
+            entryDestinationBoundsIgnoringKeepClearAreas = phonePipKeepClearAlgorithm.findUnoccludedPosition(rect2, pipBoundsState.mRestrictedKeepClearAreas, pipBoundsState.getUnrestrictedKeepClearAreas(), rect);
         }
         if (entryDestinationBoundsIgnoringKeepClearAreas.equals(pipBoundsState.getBounds())) {
             return;
         }
-        boolean hasEnteredPip = pipTransitionState.hasEnteredPip();
+        boolean zHasEnteredPip = pipTransitionState.hasEnteredPip();
         PipTaskOrganizer pipTaskOrganizer = this.mPipTaskOrganizer;
-        if (hasEnteredPip) {
+        if (zHasEnteredPip) {
             pipTaskOrganizer.scheduleAnimateResizePip(this.mEnterAnimationDuration, 0, entryDestinationBoundsIgnoringKeepClearAreas);
         } else if (pipTransitionState.mState == 3) {
             pipTaskOrganizer.updateAnimatorBounds(entryDestinationBoundsIgnoringKeepClearAreas);

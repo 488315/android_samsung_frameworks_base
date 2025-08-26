@@ -548,9 +548,9 @@ public class Canvas extends BaseCanvas {
 
     public void drawPicture(Picture picture) {
         picture.endRecording();
-        int save = save();
+        int iSave = save();
         picture.draw(this);
-        restoreToCount(save);
+        restoreToCount(iSave);
     }
 
     public void drawPicture(Picture picture, RectF rectF) {

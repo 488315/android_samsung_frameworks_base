@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.EmptyFlow;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AudioSharingInteractorEmptyImpl implements AudioSharingInteractor {
     public final FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 isInAudioSharing = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
@@ -15,7 +14,6 @@ public final class AudioSharingInteractorEmptyImpl implements AudioSharingIntera
     public final FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 secondaryDevice = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
     public final EmptyFlow volume = EmptyFlow.INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

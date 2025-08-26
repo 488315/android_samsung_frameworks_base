@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.operator.DigestCalculator;
+import java.io.IOException;
 import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
@@ -23,7 +24,7 @@ public class RespID {
         this.id = new ResponderID(x500Name);
     }
 
-    public RespID(SubjectPublicKeyInfo subjectPublicKeyInfo, DigestCalculator digestCalculator) throws OCSPException {
+    public RespID(SubjectPublicKeyInfo subjectPublicKeyInfo, DigestCalculator digestCalculator) throws OCSPException, IOException {
         try {
             if (!digestCalculator.getAlgorithmIdentifier().equals(HASH_SHA1)) {
                 throw new IllegalArgumentException("only SHA-1 can be used with RespID - found: " + digestCalculator.getAlgorithmIdentifier().getAlgorithm());

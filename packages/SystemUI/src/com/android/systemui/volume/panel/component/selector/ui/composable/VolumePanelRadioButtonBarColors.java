@@ -7,7 +7,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumePanelRadioButtonBarColors {
     public final long iconColor;
@@ -31,7 +30,7 @@ public final class VolumePanelRadioButtonBarColors {
         VolumePanelRadioButtonBarColors volumePanelRadioButtonBarColors = (VolumePanelRadioButtonBarColors) obj;
         long j = volumePanelRadioButtonBarColors.indicatorColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.indicatorColor, j) && ULong.m3427equalsimpl0(this.indicatorBackgroundColor, volumePanelRadioButtonBarColors.indicatorBackgroundColor) && ULong.m3427equalsimpl0(this.iconColor, volumePanelRadioButtonBarColors.iconColor) && ULong.m3427equalsimpl0(this.selectedIconColor, volumePanelRadioButtonBarColors.selectedIconColor) && ULong.m3427equalsimpl0(this.labelColor, volumePanelRadioButtonBarColors.labelColor) && ULong.m3427equalsimpl0(this.selectedLabelColor, volumePanelRadioButtonBarColors.selectedLabelColor);
+        return ULong.m3447equalsimpl0(this.indicatorColor, j) && ULong.m3447equalsimpl0(this.indicatorBackgroundColor, volumePanelRadioButtonBarColors.indicatorBackgroundColor) && ULong.m3447equalsimpl0(this.iconColor, volumePanelRadioButtonBarColors.iconColor) && ULong.m3447equalsimpl0(this.selectedIconColor, volumePanelRadioButtonBarColors.selectedIconColor) && ULong.m3447equalsimpl0(this.labelColor, volumePanelRadioButtonBarColors.labelColor) && ULong.m3447equalsimpl0(this.selectedLabelColor, volumePanelRadioButtonBarColors.selectedLabelColor);
     }
 
     public final int hashCode() {
@@ -41,15 +40,15 @@ public final class VolumePanelRadioButtonBarColors {
     }
 
     public final String toString() {
-        String m462toStringimpl = Color.m462toStringimpl(this.indicatorColor);
-        String m462toStringimpl2 = Color.m462toStringimpl(this.indicatorBackgroundColor);
-        String m462toStringimpl3 = Color.m462toStringimpl(this.iconColor);
-        String m462toStringimpl4 = Color.m462toStringimpl(this.selectedIconColor);
-        String m462toStringimpl5 = Color.m462toStringimpl(this.labelColor);
-        String m462toStringimpl6 = Color.m462toStringimpl(this.selectedLabelColor);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("VolumePanelRadioButtonBarColors(indicatorColor=", m462toStringimpl, ", indicatorBackgroundColor=", m462toStringimpl2, ", iconColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl3, ", selectedIconColor=", m462toStringimpl4, ", labelColor=");
-        return NotificationController$$ExternalSyntheticOutline0.m(m, m462toStringimpl5, ", selectedLabelColor=", m462toStringimpl6, ")");
+        String strM464toStringimpl = Color.m464toStringimpl(this.indicatorColor);
+        String strM464toStringimpl2 = Color.m464toStringimpl(this.indicatorBackgroundColor);
+        String strM464toStringimpl3 = Color.m464toStringimpl(this.iconColor);
+        String strM464toStringimpl4 = Color.m464toStringimpl(this.selectedIconColor);
+        String strM464toStringimpl5 = Color.m464toStringimpl(this.labelColor);
+        String strM464toStringimpl6 = Color.m464toStringimpl(this.selectedLabelColor);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("VolumePanelRadioButtonBarColors(indicatorColor=", strM464toStringimpl, ", indicatorBackgroundColor=", strM464toStringimpl2, ", iconColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl3, ", selectedIconColor=", strM464toStringimpl4, ", labelColor=");
+        return NotificationController$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl5, ", selectedLabelColor=", strM464toStringimpl6, ")");
     }
 
     private VolumePanelRadioButtonBarColors(long j, long j2, long j3, long j4, long j5, long j6) {

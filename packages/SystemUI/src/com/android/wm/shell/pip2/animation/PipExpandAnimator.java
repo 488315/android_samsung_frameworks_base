@@ -11,7 +11,6 @@ import com.android.systemui.R;
 import com.android.wm.shell.pip2.PipSurfaceTransactionHelper;
 import com.android.wm.shell.shared.animation.Interpolators;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipExpandAnimator extends ValueAnimator {
     public final Rect mAnimatedRect;
@@ -33,8 +32,8 @@ public class PipExpandAnimator extends ValueAnimator {
     public final Rect mZeroInsets;
 
     /* renamed from: -$$Nest$monExpandAnimationUpdate, reason: not valid java name */
-    public static void m3258$$Nest$monExpandAnimationUpdate(PipExpandAnimator pipExpandAnimator, SurfaceControl.Transaction transaction, float f) {
-        Rect evaluate = pipExpandAnimator.mInsetEvaluator.evaluate(f, pipExpandAnimator.mSourceRectHintInsets, pipExpandAnimator.mZeroInsets);
+    public static void m3275$$Nest$monExpandAnimationUpdate(PipExpandAnimator pipExpandAnimator, SurfaceControl.Transaction transaction, float f) {
+        Rect rectEvaluate = pipExpandAnimator.mInsetEvaluator.evaluate(f, pipExpandAnimator.mSourceRectHintInsets, pipExpandAnimator.mZeroInsets);
         int i = pipExpandAnimator.mRotation;
         if (i == 0) {
             PipSurfaceTransactionHelper pipSurfaceTransactionHelper = pipExpandAnimator.mPipSurfaceTransactionHelper;
@@ -43,10 +42,10 @@ public class PipExpandAnimator extends ValueAnimator {
             Rect rect2 = pipExpandAnimator.mAnimatedRect;
             pipSurfaceTransactionHelper.mTmpDestinationRect.set(rect);
             pipSurfaceTransactionHelper.mTmpDestinationRect.offsetTo(0, 0);
-            pipSurfaceTransactionHelper.mTmpDestinationRect.inset(evaluate);
-            float max = Math.max(rect2.width() / rect.width(), rect2.height() / rect.height());
-            pipSurfaceTransactionHelper.mTmpTransform.setScale(max, max);
-            transaction.setMatrix(surfaceControl, pipSurfaceTransactionHelper.mTmpTransform, pipSurfaceTransactionHelper.mTmpFloat9).setCrop(surfaceControl, pipSurfaceTransactionHelper.mTmpDestinationRect).setPosition(surfaceControl, rect2.left - (evaluate.left * max), rect2.top - (evaluate.top * max));
+            pipSurfaceTransactionHelper.mTmpDestinationRect.inset(rectEvaluate);
+            float fMax = Math.max(rect2.width() / rect.width(), rect2.height() / rect.height());
+            pipSurfaceTransactionHelper.mTmpTransform.setScale(fMax, fMax);
+            transaction.setMatrix(surfaceControl, pipSurfaceTransactionHelper.mTmpTransform, pipSurfaceTransactionHelper.mTmpFloat9).setCrop(surfaceControl, pipSurfaceTransactionHelper.mTmpDestinationRect).setPosition(surfaceControl, rect2.left - (rectEvaluate.left * fMax), rect2.top - (rectEvaluate.top * fMax));
         } else {
             Rect rect3 = pipExpandAnimator.mStartBounds;
             Rect rect4 = pipExpandAnimator.mEndBounds;
@@ -60,18 +59,18 @@ public class PipExpandAnimator extends ValueAnimator {
             Rect rect5 = pipExpandAnimator.mBaseBounds;
             Rect rect6 = pipExpandAnimator.mAnimatedRect;
             pipSurfaceTransactionHelper2.mTmpDestinationRect.set(rect5);
-            pipSurfaceTransactionHelper2.mTmpDestinationRect.inset(evaluate);
-            int width = pipSurfaceTransactionHelper2.mTmpDestinationRect.width();
-            int height = pipSurfaceTransactionHelper2.mTmpDestinationRect.height();
-            int width2 = rect6.width();
-            int height2 = rect6.height();
-            float f5 = width <= height ? width2 / width : height2 / height;
+            pipSurfaceTransactionHelper2.mTmpDestinationRect.inset(rectEvaluate);
+            int iWidth = pipSurfaceTransactionHelper2.mTmpDestinationRect.width();
+            int iHeight = pipSurfaceTransactionHelper2.mTmpDestinationRect.height();
+            int iWidth2 = rect6.width();
+            int iHeight2 = rect6.height();
+            float f5 = iWidth <= iHeight ? iWidth2 / iWidth : iHeight2 / iHeight;
             Rect rect7 = pipSurfaceTransactionHelper2.mTmpDestinationRect;
-            rect7.set(0, 0, width2, height2);
+            rect7.set(0, 0, iWidth2, iHeight2);
             rect7.scale(1.0f / f5);
-            rect7.offset(evaluate.left, evaluate.top);
+            rect7.offset(rectEvaluate.left, rectEvaluate.top);
             pipSurfaceTransactionHelper2.mTmpTransform.setScale(f5, f5);
-            pipSurfaceTransactionHelper2.mTmpTransform.postTranslate(f2 - (evaluate.left * f5), f3 - (evaluate.top * f5));
+            pipSurfaceTransactionHelper2.mTmpTransform.postTranslate(f2 - (rectEvaluate.left * f5), f3 - (rectEvaluate.top * f5));
             pipSurfaceTransactionHelper2.mTmpTransform.postRotate(f4);
             transaction.setMatrix(surfaceControl2, pipSurfaceTransactionHelper2.mTmpTransform, pipSurfaceTransactionHelper2.mTmpFloat9).setCrop(surfaceControl2, rect7);
         }
@@ -104,7 +103,7 @@ public class PipExpandAnimator extends ValueAnimator {
                 PipExpandAnimator pipExpandAnimator = PipExpandAnimator.this;
                 SurfaceControl.Transaction transaction3 = pipExpandAnimator.mFinishTransaction;
                 if (transaction3 != null) {
-                    PipExpandAnimator.m3258$$Nest$monExpandAnimationUpdate(pipExpandAnimator, transaction3, 1.0f);
+                    PipExpandAnimator.m3275$$Nest$monExpandAnimationUpdate(pipExpandAnimator, transaction3, 1.0f);
                 }
                 Runnable runnable = PipExpandAnimator.this.mAnimationEndCallback;
                 if (runnable != null) {
@@ -122,7 +121,7 @@ public class PipExpandAnimator extends ValueAnimator {
                 PipExpandAnimator pipExpandAnimator = PipExpandAnimator.this;
                 SurfaceControl.Transaction transaction3 = pipExpandAnimator.mStartTransaction;
                 if (transaction3 != null) {
-                    PipExpandAnimator.m3258$$Nest$monExpandAnimationUpdate(pipExpandAnimator, transaction3, 0.0f);
+                    PipExpandAnimator.m3275$$Nest$monExpandAnimationUpdate(pipExpandAnimator, transaction3, 0.0f);
                     PipExpandAnimator.this.mStartTransaction.apply();
                 }
             }
@@ -132,7 +131,7 @@ public class PipExpandAnimator extends ValueAnimator {
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 SurfaceControl.Transaction transaction3 = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) PipExpandAnimator.this.mSurfaceControlTransactionFactory).getTransaction();
-                PipExpandAnimator.m3258$$Nest$monExpandAnimationUpdate(PipExpandAnimator.this, transaction3, PipExpandAnimator.this.getAnimatedFraction());
+                PipExpandAnimator.m3275$$Nest$monExpandAnimationUpdate(PipExpandAnimator.this, transaction3, PipExpandAnimator.this.getAnimatedFraction());
                 transaction3.apply();
             }
         };

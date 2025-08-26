@@ -14,18 +14,15 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class WifiNetworkModel implements Diffable {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CarrierMerged extends WifiNetworkModel {
         public static final Companion Companion = new Companion(null);
         public final int level;
         public final int numberOfLevels;
         public final int subscriptionId;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -114,7 +111,6 @@ public abstract class WifiNetworkModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -129,7 +125,6 @@ public abstract class WifiNetworkModel implements Diffable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HotspotDeviceType {
         public static final /* synthetic */ HotspotDeviceType[] $VALUES;
         public static final HotspotDeviceType AUTO;
@@ -175,10 +170,10 @@ public abstract class WifiNetworkModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Inactive extends WifiNetworkModel {
         public final String inactiveReason;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public Inactive() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -238,7 +233,6 @@ public abstract class WifiNetworkModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Invalid extends WifiNetworkModel {
         public final String invalidReason;
 
@@ -289,7 +283,6 @@ public abstract class WifiNetworkModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Unavailable extends WifiNetworkModel {
         public static final Unavailable INSTANCE = new Unavailable();
 
@@ -323,7 +316,6 @@ public abstract class WifiNetworkModel implements Diffable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WifiNetworkType {
         public static final /* synthetic */ WifiNetworkType[] $VALUES;
         public static final WifiNetworkType FIVEG;
@@ -368,7 +360,6 @@ public abstract class WifiNetworkModel implements Diffable {
         this();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Active extends WifiNetworkModel {
         public static final Companion Companion = new Companion(null);
         public final HotspotDeviceType hotspotDeviceType;
@@ -378,7 +369,6 @@ public abstract class WifiNetworkModel implements Diffable {
         public final String ssid;
         public final WifiNetworkType wifiNetworkType;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -407,9 +397,9 @@ public abstract class WifiNetworkModel implements Diffable {
         }
 
         public final int hashCode() {
-            int m = ReorderTile$$ExternalSyntheticOutline0.m(this.level, Boolean.hashCode(this.isValidated) * 31, 31);
+            int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.level, Boolean.hashCode(this.isValidated) * 31, 31);
             String str = this.ssid;
-            return Integer.hashCode(this.receivedInetCondition) + ((this.wifiNetworkType.hashCode() + ((this.hotspotDeviceType.hashCode() + ((m + (str == null ? 0 : str.hashCode())) * 31)) * 31)) * 31);
+            return Integer.hashCode(this.receivedInetCondition) + ((this.wifiNetworkType.hashCode() + ((this.hotspotDeviceType.hashCode() + ((iM + (str == null ? 0 : str.hashCode())) * 31)) * 31)) * 31);
         }
 
         @Override // com.android.systemui.log.table.Diffable
@@ -468,18 +458,18 @@ public abstract class WifiNetworkModel implements Diffable {
         public final String toString() {
             boolean z = this.isValidated;
             int i = this.receivedInetCondition;
-            StringBuilder m = RowView$$ExternalSyntheticOutline0.m("Active(isValidated=", ", level=", z);
-            m.append(this.level);
-            m.append(", ssid=");
-            m.append(this.ssid);
-            m.append(", hotspotDeviceType=");
-            m.append(this.hotspotDeviceType);
-            m.append(", wifiNetworkType=");
-            m.append(this.wifiNetworkType);
-            m.append(", receivedInetCondition=");
-            m.append(i);
-            m.append(")");
-            return m.toString();
+            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("Active(isValidated=", ", level=", z);
+            sbM.append(this.level);
+            sbM.append(", ssid=");
+            sbM.append(this.ssid);
+            sbM.append(", hotspotDeviceType=");
+            sbM.append(this.hotspotDeviceType);
+            sbM.append(", wifiNetworkType=");
+            sbM.append(this.wifiNetworkType);
+            sbM.append(", receivedInetCondition=");
+            sbM.append(i);
+            sbM.append(")");
+            return sbM.toString();
         }
 
         private Active(boolean z, int i, String str, HotspotDeviceType hotspotDeviceType, WifiNetworkType wifiNetworkType, int i2) {

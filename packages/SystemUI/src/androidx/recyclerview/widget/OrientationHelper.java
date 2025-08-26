@@ -5,14 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class OrientationHelper {
     public int mLastTotalSpace;
     public final RecyclerView.LayoutManager mLayoutManager;
     public final Rect mTmpRect;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.recyclerview.widget.OrientationHelper$1, reason: invalid class name */
     public class AnonymousClass1 extends OrientationHelper {
         public AnonymousClass1(RecyclerView.LayoutManager layoutManager) {
@@ -98,7 +96,6 @@ public abstract class OrientationHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.recyclerview.widget.OrientationHelper$2, reason: invalid class name */
     public class AnonymousClass2 extends OrientationHelper {
         public AnonymousClass2(RecyclerView.LayoutManager layoutManager) {

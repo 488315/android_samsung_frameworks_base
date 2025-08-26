@@ -68,9 +68,9 @@ public class FloatExpression extends Operation implements ComponentData, Variabl
             }
             float f = fArr2[i];
             if (Float.isNaN(f) && !AnimatedFloatExpression.isMathOperator(f) && !NanMap.isDataVariable(f)) {
-                int idFromNan = Utils.idFromNan(f);
+                int iIdFromNan = Utils.idFromNan(f);
                 float f2 = remoteContext.getFloat(Utils.idFromNan(f));
-                if (idFromNan == 27 && f2 == 0.0f) {
+                if (iIdFromNan == 27 && f2 == 0.0f) {
                     f2 = 1.0f;
                 }
                 if (this.mFloatAnimation != null) {
@@ -93,35 +93,33 @@ public class FloatExpression extends Operation implements ComponentData, Variabl
             }
             i++;
         }
-        float f3 = this.mLastCalculatedValue;
+        float fEval = this.mLastCalculatedValue;
         if (z2) {
             AnimatedFloatExpression animatedFloatExpression = this.mExp;
             float[] fArr5 = this.mPreCalcValue;
-            f3 = animatedFloatExpression.eval(fArr5, fArr5.length, new float[0]);
-            if (f3 != this.mLastCalculatedValue) {
+            fEval = animatedFloatExpression.eval(fArr5, fArr5.length, new float[0]);
+            if (fEval != this.mLastCalculatedValue) {
                 this.mLastChange = remoteContext.getAnimationTime();
-                this.mLastCalculatedValue = f3;
+                this.mLastCalculatedValue = fEval;
+                z = z2;
             }
-            if (z || (floatAnimation = this.mFloatAnimation) == null) {
-                if (z || (springStopEngine = this.mSpring) == null) {
-                }
-                springStopEngine.setTargetValue(f3);
+        } else {
+            z = z2;
+        }
+        if (!z || (floatAnimation = this.mFloatAnimation) == null) {
+            if (!z || (springStopEngine = this.mSpring) == null) {
                 return;
             }
-            if (Float.isNaN(floatAnimation.getTargetValue())) {
-                this.mFloatAnimation.setInitialValue(f3);
-            } else {
-                FloatAnimation floatAnimation2 = this.mFloatAnimation;
-                floatAnimation2.setInitialValue(floatAnimation2.getTargetValue());
-            }
-            this.mFloatAnimation.setTargetValue(f3);
+            springStopEngine.setTargetValue(fEval);
             return;
         }
-        z = z2;
-        if (z) {
+        if (Float.isNaN(floatAnimation.getTargetValue())) {
+            this.mFloatAnimation.setInitialValue(fEval);
+        } else {
+            FloatAnimation floatAnimation2 = this.mFloatAnimation;
+            floatAnimation2.setInitialValue(floatAnimation2.getTargetValue());
         }
-        if (z) {
-        }
+        this.mFloatAnimation.setTargetValue(fEval);
     }
 
     @Override // com.android.internal.widget.remotecompose.core.VariableSupport
@@ -145,9 +143,9 @@ public class FloatExpression extends Operation implements ComponentData, Variabl
                     AnimatedFloatExpression animatedFloatExpression = this.mExp;
                     CollectionsAccess collectionsAccess = remoteContext.getCollectionsAccess();
                     float[] fArr = this.mPreCalcValue;
-                    float eval = animatedFloatExpression.eval(collectionsAccess, fArr, fArr.length);
-                    this.mLastCalculatedValue = eval;
-                    this.mFloatAnimation.setTargetValue(eval);
+                    float fEval = animatedFloatExpression.eval(collectionsAccess, fArr, fArr.length);
+                    this.mLastCalculatedValue = fEval;
+                    this.mFloatAnimation.setTargetValue(fEval);
                     if (Float.isNaN(this.mFloatAnimation.getInitialValue())) {
                         this.mFloatAnimation.setInitialValue(this.mLastCalculatedValue);
                     }
@@ -249,26 +247,26 @@ public class FloatExpression extends Operation implements ComponentData, Variabl
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
         float[] fArr;
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        int i = readInt2 & 65535;
-        if (i > 32) {
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        int i3 = i2 & 65535;
+        if (i3 > 32) {
             throw new RuntimeException("Float expression too long");
         }
-        int i2 = (readInt2 >> 16) & 65535;
-        float[] fArr2 = new float[i];
-        for (int i3 = 0; i3 < i; i3++) {
-            fArr2[i3] = wireBuffer.readFloat();
+        int i4 = (i2 >> 16) & 65535;
+        float[] fArr2 = new float[i3];
+        for (int i5 = 0; i5 < i3; i5++) {
+            fArr2[i5] = wireBuffer.readFloat();
         }
-        if (i2 != 0) {
-            fArr = new float[i2];
-            for (int i4 = 0; i4 < i2; i4++) {
-                fArr[i4] = wireBuffer.readFloat();
+        if (i4 != 0) {
+            fArr = new float[i4];
+            for (int i6 = 0; i6 < i4; i6++) {
+                fArr[i6] = wireBuffer.readFloat();
             }
         } else {
             fArr = null;
         }
-        list.add(new FloatExpression(readInt, fArr2, fArr));
+        list.add(new FloatExpression(i, fArr2, fArr));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

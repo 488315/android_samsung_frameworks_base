@@ -28,18 +28,18 @@ public class SyncStateContract {
         private static final String SELECT_BY_ACCOUNT = "account_name=? AND account_type=?";
 
         public static byte[] get(ContentProviderClient contentProviderClient, Uri uri, Account account) throws RemoteException {
-            Cursor query = contentProviderClient.query(uri, DATA_PROJECTION, SELECT_BY_ACCOUNT, new String[]{account.name, account.type}, null);
-            if (query == null) {
+            Cursor cursorQuery = contentProviderClient.query(uri, DATA_PROJECTION, SELECT_BY_ACCOUNT, new String[]{account.name, account.type}, null);
+            if (cursorQuery == null) {
                 throw new RemoteException();
             }
             try {
-                if (query.moveToNext()) {
-                    return query.getBlob(query.getColumnIndexOrThrow("data"));
+                if (cursorQuery.moveToNext()) {
+                    return cursorQuery.getBlob(cursorQuery.getColumnIndexOrThrow("data"));
                 }
-                query.close();
+                cursorQuery.close();
                 return null;
             } finally {
-                query.close();
+                cursorQuery.close();
             }
         }
 
@@ -66,19 +66,19 @@ public class SyncStateContract {
         }
 
         public static Pair<Uri, byte[]> getWithUri(ContentProviderClient contentProviderClient, Uri uri, Account account) throws RemoteException {
-            Cursor query = contentProviderClient.query(uri, DATA_PROJECTION, SELECT_BY_ACCOUNT, new String[]{account.name, account.type}, null);
-            if (query == null) {
+            Cursor cursorQuery = contentProviderClient.query(uri, DATA_PROJECTION, SELECT_BY_ACCOUNT, new String[]{account.name, account.type}, null);
+            if (cursorQuery == null) {
                 throw new RemoteException();
             }
             try {
-                if (!query.moveToNext()) {
-                    query.close();
+                if (!cursorQuery.moveToNext()) {
+                    cursorQuery.close();
                     return null;
                 }
-                long j = query.getLong(1);
-                return Pair.create(ContentUris.withAppendedId(uri, j), query.getBlob(query.getColumnIndexOrThrow("data")));
+                long j = cursorQuery.getLong(1);
+                return Pair.create(ContentUris.withAppendedId(uri, j), cursorQuery.getBlob(cursorQuery.getColumnIndexOrThrow("data")));
             } finally {
-                query.close();
+                cursorQuery.close();
             }
         }
 

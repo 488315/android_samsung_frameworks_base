@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -30,17 +31,24 @@ import com.android.wm.shell.windowdecor.WindowDecoration;
 import com.android.wm.shell.windowdecor.common.DecorThemeUtil;
 import com.android.wm.shell.windowdecor.common.Theme;
 import com.android.wm.shell.windowdecor.common.WindowDecorTaskResourceLoader;
+import com.samsung.android.rune.CoreRune;
 import com.samsung.systemui.splugins.volume.VolumePanelState;
 import java.util.function.Supplier;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ResizeVeil {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -69,7 +77,6 @@ public final class ResizeVeil {
     public SurfaceControl veilSurface;
     public SurfaceControlViewHost viewHost;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -79,11 +86,9 @@ public final class ResizeVeil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SurfaceControlBuilderFactory {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -98,6 +103,136 @@ public final class ResizeVeil {
             } catch (NoSuchFieldError unused2) {
             }
             $EnumSwitchMapping$0 = iArr;
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.windowdecor.ResizeVeil$setupResizeVeil$1, reason: invalid class name and case insensitive filesystem */
+    final class C12161 extends SuspendLambda implements Function2 {
+        final /* synthetic */ ActivityManager.RunningTaskInfo $taskInfo;
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.wm.shell.windowdecor.ResizeVeil$setupResizeVeil$1$1, reason: invalid class name and collision with other inner class name */
+        final class C06601 extends SuspendLambda implements Function2 {
+            final /* synthetic */ Bitmap $icon;
+            private /* synthetic */ Object L$0;
+            int label;
+            final /* synthetic */ ResizeVeil this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C06601(ResizeVeil resizeVeil, Bitmap bitmap, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = resizeVeil;
+                this.$icon = bitmap;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                C06601 c06601 = new C06601(this.this$0, this.$icon, continuation);
+                c06601.L$0 = obj;
+                return c06601;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C06601) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                if (!CoroutineScopeKt.isActive((CoroutineScope) this.L$0)) {
+                    return Unit.INSTANCE;
+                }
+                ImageView imageView = this.this$0.iconView;
+                if (imageView == null) {
+                    imageView = null;
+                }
+                imageView.setImageBitmap(this.$icon);
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C12161(ActivityManager.RunningTaskInfo runningTaskInfo, Continuation continuation) {
+            super(2, continuation);
+            this.$taskInfo = runningTaskInfo;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            C12161 c12161 = ResizeVeil.this.new C12161(this.$taskInfo, continuation);
+            c12161.L$0 = obj;
+            return c12161;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C12161) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Removed duplicated region for block: B:27:0x00b1 A[RETURN] */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) {
+            Bitmap bitmapCreateScaledBitmap;
+            CoroutineDispatcher coroutineDispatcher;
+            C06601 c06601;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                if (!CoroutineScopeKt.isActive((CoroutineScope) this.L$0)) {
+                    return Unit.INSTANCE;
+                }
+                WindowDecorTaskResourceLoader windowDecorTaskResourceLoader = ResizeVeil.this.taskResourceLoader;
+                ActivityManager.RunningTaskInfo runningTaskInfo = this.$taskInfo;
+                windowDecorTaskResourceLoader.getClass();
+                boolean z = CoreRune.MW_CAPTION_BUG_FIX;
+                if (z) {
+                    if (!windowDecorTaskResourceLoader.existingTasks.contains(Integer.valueOf(runningTaskInfo.taskId))) {
+                        bitmapCreateScaledBitmap = windowDecorTaskResourceLoader.veilIconFactory.createScaledBitmap(windowDecorTaskResourceLoader.userProfilesContexts.getOrCreate(runningTaskInfo.userId).getPackageManager().getDefaultActivityIcon(), 0);
+                    }
+                    ResizeVeil resizeVeil = ResizeVeil.this;
+                    coroutineDispatcher = resizeVeil.mainDispatcher;
+                    c06601 = new C06601(resizeVeil, bitmapCreateScaledBitmap, null);
+                    this.label = 1;
+                    if (BuildersKt.withContext(coroutineDispatcher, c06601, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    windowDecorTaskResourceLoader.checkWindowDecorExists(runningTaskInfo);
+                }
+                WindowDecorTaskResourceLoader.AppResources appResources = (WindowDecorTaskResourceLoader.AppResources) windowDecorTaskResourceLoader.taskToResourceCache.get(Integer.valueOf(runningTaskInfo.taskId));
+                if (appResources != null) {
+                    bitmapCreateScaledBitmap = appResources.veilIcon;
+                } else {
+                    WindowDecorTaskResourceLoader.AppResources appResourcesLoadAppResources = windowDecorTaskResourceLoader.loadAppResources(runningTaskInfo);
+                    windowDecorTaskResourceLoader.localeListOnCache.put(Integer.valueOf(runningTaskInfo.taskId), runningTaskInfo.getConfiguration().getLocales());
+                    if (z) {
+                        windowDecorTaskResourceLoader.densityListOnCache.put(Integer.valueOf(runningTaskInfo.taskId), Integer.valueOf(runningTaskInfo.getConfiguration().densityDpi));
+                    }
+                    bitmapCreateScaledBitmap = appResourcesLoadAppResources.veilIcon;
+                }
+                ResizeVeil resizeVeil2 = ResizeVeil.this;
+                coroutineDispatcher = resizeVeil2.mainDispatcher;
+                c06601 = new C06601(resizeVeil2, bitmapCreateScaledBitmap, null);
+                this.label = 1;
+                if (BuildersKt.withContext(coroutineDispatcher, c06601, this) == coroutineSingletons) {
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -170,37 +305,37 @@ public final class ResizeVeil {
             if (surfaceControl == null || surfaceControl2 == null) {
                 return;
             }
-            final ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-            ofFloat.setDuration(200L);
-            ofFloat.setStartDelay(33L);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$hideVeil$1$1
+            final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+            valueAnimatorOfFloat.setDuration(200L);
+            valueAnimatorOfFloat.setStartDelay(33L);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$hideVeil$1$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    ((SurfaceControl.Transaction) ResizeVeil.this.surfaceControlTransactionSupplier.get()).setAlpha(surfaceControl, ((Float) ofFloat.getAnimatedValue()).floatValue()).apply();
+                    ((SurfaceControl.Transaction) this.this$0.surfaceControlTransactionSupplier.get()).setAlpha(surfaceControl, ((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue()).apply();
                 }
             });
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$hideVeil$1$2
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$hideVeil$1$2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    ((SurfaceControl.Transaction) ResizeVeil.this.surfaceControlTransactionSupplier.get()).hide(surfaceControl).apply();
+                    ((SurfaceControl.Transaction) this.this$0.surfaceControlTransactionSupplier.get()).hide(surfaceControl).apply();
                 }
             });
-            this.veilAnimator = ofFloat;
-            final ValueAnimator ofFloat2 = ValueAnimator.ofFloat(1.0f, 0.0f);
-            ofFloat2.setDuration(50L);
-            ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$hideVeil$2$1
+            this.veilAnimator = valueAnimatorOfFloat;
+            final ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(1.0f, 0.0f);
+            valueAnimatorOfFloat2.setDuration(50L);
+            valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$hideVeil$2$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    ((SurfaceControl.Transaction) ResizeVeil.this.surfaceControlTransactionSupplier.get()).setAlpha(surfaceControl2, ((Float) ofFloat2.getAnimatedValue()).floatValue()).apply();
+                    ((SurfaceControl.Transaction) this.this$0.surfaceControlTransactionSupplier.get()).setAlpha(surfaceControl2, ((Float) valueAnimatorOfFloat2.getAnimatedValue()).floatValue()).apply();
                 }
             });
-            ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$hideVeil$2$2
+            valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$hideVeil$2$2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    ((SurfaceControl.Transaction) ResizeVeil.this.surfaceControlTransactionSupplier.get()).hide(surfaceControl2).apply();
+                    ((SurfaceControl.Transaction) this.this$0.surfaceControlTransactionSupplier.get()).hide(surfaceControl2).apply();
                 }
             });
-            this.iconAnimator = ofFloat2;
+            this.iconAnimator = valueAnimatorOfFloat2;
             ValueAnimator valueAnimator = this.veilAnimator;
             if (valueAnimator != null) {
                 valueAnimator.start();
@@ -234,14 +369,14 @@ public final class ResizeVeil {
             return;
         }
         Trace.beginSection("ResizeVeil#setupResizeVeil");
-        String m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(runningTaskInfo.taskId, "Resize veil of Task=");
+        String strM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(runningTaskInfo.taskId, "Resize veil of Task=");
         this.surfaceControlBuilderFactory.getClass();
-        this.veilSurface = new SurfaceControl.Builder().setName(m).setContainerLayer().setHidden(true).setParent(this.parentSurface).setCallsite("ResizeVeil#setupResizeVeil").build();
+        this.veilSurface = new SurfaceControl.Builder().setName(strM).setContainerLayer().setHidden(true).setParent(this.parentSurface).setCallsite("ResizeVeil#setupResizeVeil").build();
         this.backgroundSurface = new SurfaceControl.Builder().setName(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(runningTaskInfo.taskId, "Resize veil background of Task=")).setColorLayer().setHidden(true).setParent(this.veilSurface).setCallsite("ResizeVeil#setupResizeVeil").build();
         this.iconSurface = new SurfaceControl.Builder().setName(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(runningTaskInfo.taskId, "Resize veil icon of Task=")).setContainerLayer().setHidden(true).setParent(this.veilSurface).setCallsite("ResizeVeil#setupResizeVeil").build();
         this.iconSize = this.context.getResources().getDimensionPixelSize(R.dimen.desktop_mode_resize_veil_icon_size);
-        View inflate = LayoutInflater.from(this.context).inflate(R.layout.desktop_mode_resize_veil, (ViewGroup) null);
-        this.iconView = (ImageView) inflate.requireViewById(R.id.veil_application_icon);
+        View viewInflate = LayoutInflater.from(this.context).inflate(R.layout.desktop_mode_resize_veil, (ViewGroup) null);
+        this.iconView = (ImageView) viewInflate.requireViewById(R.id.veil_application_icon);
         int i2 = this.iconSize;
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(i2, i2, 2, 8, -2);
         layoutParams.setTitle("Resize veil icon window of Task=" + runningTaskInfo.taskId);
@@ -253,8 +388,8 @@ public final class ResizeVeil {
         this.surfaceControlViewHostFactory.getClass();
         SurfaceControlViewHost surfaceControlViewHost = new SurfaceControlViewHost(context, display2, windowlessWindowManager, "ResizeVeil");
         this.viewHost = surfaceControlViewHost;
-        surfaceControlViewHost.setView(inflate, layoutParams);
-        this.loadAppInfoJob = BuildersKt.launch$default(this.bgScope, null, null, new ResizeVeil$setupResizeVeil$1(this, runningTaskInfo, null), 3);
+        surfaceControlViewHost.setView(viewInflate, layoutParams);
+        this.loadAppInfoJob = BuildersKt.launch$default(this.bgScope, null, null, new C12161(runningTaskInfo, null), 3);
         Trace.endSection();
     }
 
@@ -276,15 +411,15 @@ public final class ResizeVeil {
         cancelAnimation();
         final SurfaceControl.Transaction transaction2 = (SurfaceControl.Transaction) this.surfaceControlTransactionSupplier.get();
         final SurfaceControl.Transaction transaction3 = (SurfaceControl.Transaction) this.surfaceControlTransactionSupplier.get();
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(50L);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$showVeil$1$1
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(50L);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$showVeil$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                transaction2.setAlpha(surfaceControl2, ((Float) ofFloat.getAnimatedValue()).floatValue()).apply();
+                transaction2.setAlpha(surfaceControl2, ((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue()).apply();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$showVeil$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$showVeil$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 transaction2.setAlpha(surfaceControl2, 1.0f).apply();
@@ -295,17 +430,17 @@ public final class ResizeVeil {
                 transaction2.show(surfaceControl2).setAlpha(surfaceControl2, 0.0f).apply();
             }
         });
-        this.veilAnimator = ofFloat;
-        final ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat2.setDuration(50L);
-        ofFloat2.setStartDelay(33L);
-        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$showVeil$2$1
+        this.veilAnimator = valueAnimatorOfFloat;
+        final ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat2.setDuration(50L);
+        valueAnimatorOfFloat2.setStartDelay(33L);
+        valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$showVeil$2$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                transaction3.setAlpha(surfaceControl3, ((Float) ofFloat2.getAnimatedValue()).floatValue()).apply();
+                transaction3.setAlpha(surfaceControl3, ((Float) valueAnimatorOfFloat2.getAnimatedValue()).floatValue()).apply();
             }
         });
-        ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$showVeil$2$2
+        valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.windowdecor.ResizeVeil$showVeil$2$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 transaction3.setAlpha(surfaceControl3, 1.0f).apply();
@@ -316,7 +451,7 @@ public final class ResizeVeil {
                 transaction3.show(surfaceControl3).setAlpha(surfaceControl3, 0.0f).apply();
             }
         });
-        this.iconAnimator = ofFloat2;
+        this.iconAnimator = valueAnimatorOfFloat2;
         transaction.hide(surfaceControl3).hide(surfaceControl2).apply();
         ValueAnimator valueAnimator = this.veilAnimator;
         if (valueAnimator != null) {
@@ -353,7 +488,7 @@ public final class ResizeVeil {
             }
             j = this.darkColors.surfaceContainer;
         }
-        transaction.show(surfaceControl4).setLayer(surfaceControl4, VolumePanelState.DIALOG_TIMEOUT_SET_SAFE_MEDIA_VOLUME_MILLIS).setLayer(surfaceControl3, 1).setLayer(surfaceControl2, 0).setColor(surfaceControl2, Color.valueOf(ColorKt.m467toArgb8_81llA(j)).getComponents());
+        transaction.show(surfaceControl4).setLayer(surfaceControl4, VolumePanelState.DIALOG_TIMEOUT_SET_SAFE_MEDIA_VOLUME_MILLIS).setLayer(surfaceControl3, 1).setLayer(surfaceControl2, 0).setColor(surfaceControl2, Color.valueOf(ColorKt.m469toArgb8_81llA(j)).getComponents());
         relayout(rect, transaction);
         if (z) {
             return;

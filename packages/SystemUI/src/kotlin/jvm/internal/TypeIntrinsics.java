@@ -20,7 +20,6 @@ import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.jvm.internal.markers.KMutableCollection;
 import kotlin.jvm.internal.markers.KMutableMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TypeIntrinsics {
     public static Collection asMutableCollection(Object obj) {
@@ -71,37 +70,37 @@ public class TypeIntrinsics {
     }
 
     public static boolean isFunctionOfArity(int i, Object obj) {
-        int i2;
+        int arity;
         if (obj instanceof Function) {
             if (obj instanceof FunctionBase) {
-                i2 = ((FunctionBase) obj).getArity();
+                arity = ((FunctionBase) obj).getArity();
             } else if (obj instanceof Function0) {
-                i2 = 0;
+                arity = 0;
             } else if (obj instanceof Function1) {
-                i2 = 1;
+                arity = 1;
             } else if (obj instanceof Function2) {
-                i2 = 2;
+                arity = 2;
             } else if (obj instanceof Function3) {
-                i2 = 3;
+                arity = 3;
             } else if (obj instanceof Function4) {
-                i2 = 4;
+                arity = 4;
             } else if (obj instanceof Function5) {
-                i2 = 5;
+                arity = 5;
             } else if (obj instanceof Function6) {
-                i2 = 6;
+                arity = 6;
             } else if (obj instanceof Function7) {
-                i2 = 7;
+                arity = 7;
             } else if (obj instanceof Function8) {
-                i2 = 8;
+                arity = 8;
             } else if (obj instanceof Function9) {
-                i2 = 9;
+                arity = 9;
             } else if (obj instanceof Function10) {
-                i2 = 10;
+                arity = 10;
             } else {
                 boolean z = obj instanceof ComposableLambda;
-                i2 = z ? 11 : z ? 13 : z ? 14 : z ? 15 : z ? 16 : z ? 17 : z ? 18 : z ? 19 : z ? 20 : z ? 21 : -1;
+                arity = z ? 11 : z ? 13 : z ? 14 : z ? 15 : z ? 16 : z ? 17 : z ? 18 : z ? 19 : z ? 20 : z ? 21 : -1;
             }
-            if (i2 == i) {
+            if (arity == i) {
                 return true;
             }
         }

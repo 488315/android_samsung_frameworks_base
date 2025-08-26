@@ -45,9 +45,9 @@ public interface IInternalServiceBridgeListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInternalServiceBridgeListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInternalServiceBridgeListener)) {
-                return (IInternalServiceBridgeListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInternalServiceBridgeListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInternalServiceBridgeListener)) {
+                return (IInternalServiceBridgeListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IInternalServiceBridgeListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onUpdated(readString, bundle);
+                onUpdated(string, bundle);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IInternalServiceBridgeListener extends IInterface {
 
             @Override // com.samsung.android.mocca.IInternalServiceBridgeListener
             public void onUpdated(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInternalServiceBridgeListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInternalServiceBridgeListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

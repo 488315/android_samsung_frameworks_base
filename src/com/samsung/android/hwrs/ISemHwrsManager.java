@@ -109,9 +109,9 @@ public interface ISemHwrsManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemHwrsManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemHwrsManager)) {
-                return (ISemHwrsManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemHwrsManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemHwrsManager)) {
+                return (ISemHwrsManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -157,55 +157,55 @@ public interface ISemHwrsManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addShare = addShare(readString, readString2, readString3, readString4, readString5);
+                    boolean zAddShare = addShare(string, string2, string3, string4, string5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addShare);
+                    parcel2.writeBoolean(zAddShare);
                     return true;
                 case 2:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addUser = addUser(readString6, readString7);
+                    boolean zAddUser = addUser(string6, string7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addUser);
+                    parcel2.writeBoolean(zAddUser);
                     return true;
                 case 3:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean deleteUser = deleteUser(readString8);
+                    boolean zDeleteUser = deleteUser(string8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteUser);
+                    parcel2.writeBoolean(zDeleteUser);
                     return true;
                 case 4:
-                    boolean startKsmbdServer = startKsmbdServer();
+                    boolean zStartKsmbdServer = startKsmbdServer();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(startKsmbdServer);
+                    parcel2.writeBoolean(zStartKsmbdServer);
                     return true;
                 case 5:
-                    boolean stopKsmbdServer = stopKsmbdServer();
+                    boolean zStopKsmbdServer = stopKsmbdServer();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(stopKsmbdServer);
+                    parcel2.writeBoolean(zStopKsmbdServer);
                     return true;
                 case 6:
-                    boolean restartKsmbdServer = restartKsmbdServer();
+                    boolean zRestartKsmbdServer = restartKsmbdServer();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(restartKsmbdServer);
+                    parcel2.writeBoolean(zRestartKsmbdServer);
                     return true;
                 case 7:
-                    boolean reloadKmbdServerConfiguration = reloadKmbdServerConfiguration();
+                    boolean zReloadKmbdServerConfiguration = reloadKmbdServerConfiguration();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(reloadKmbdServerConfiguration);
+                    parcel2.writeBoolean(zReloadKmbdServerConfiguration);
                     return true;
                 case 8:
-                    boolean ksmbdServerCleanup = ksmbdServerCleanup();
+                    boolean zKsmbdServerCleanup = ksmbdServerCleanup();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(ksmbdServerCleanup);
+                    parcel2.writeBoolean(zKsmbdServerCleanup);
                     return true;
                 case 9:
                     String ksmbdServerStatus = getKsmbdServerStatus();
@@ -235,144 +235,144 @@ public interface ISemHwrsManager extends IInterface {
 
             @Override // com.samsung.android.hwrs.ISemHwrsManager
             public boolean addShare(String str, String str2, String str3, String str4, String str5) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hwrs.ISemHwrsManager
             public boolean addUser(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hwrs.ISemHwrsManager
             public boolean deleteUser(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hwrs.ISemHwrsManager
             public boolean startKsmbdServer() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hwrs.ISemHwrsManager
             public boolean stopKsmbdServer() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hwrs.ISemHwrsManager
             public boolean restartKsmbdServer() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hwrs.ISemHwrsManager
             public boolean reloadKmbdServerConfiguration() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hwrs.ISemHwrsManager
             public boolean ksmbdServerCleanup() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hwrs.ISemHwrsManager
             public String getKsmbdServerStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemHwrsManager.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

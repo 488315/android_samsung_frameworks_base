@@ -36,13 +36,13 @@ public final class LteVopsInfo {
 
     public static final ArrayList<LteVopsInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<LteVopsInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 2, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 2, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             LteVopsInfo lteVopsInfo = new LteVopsInfo();
-            lteVopsInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 2);
+            lteVopsInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 2);
             arrayList.add(lteVopsInfo);
         }
         return arrayList;

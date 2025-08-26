@@ -7,6 +7,7 @@ import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
+import android.hardware.camera2.CameraExtensionCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadataInfo;
 import android.hardware.camera2.CameraOfflineSession;
@@ -17,6 +18,7 @@ import android.hardware.camera2.ICameraDeviceCallbacks;
 import android.hardware.camera2.ICameraDeviceUser;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.impl.CameraOfflineSessionImpl;
+import android.hardware.camera2.params.ExtensionSessionConfiguration;
 import android.hardware.camera2.params.InputConfiguration;
 import android.hardware.camera2.params.MultiResolutionStreamConfigurationMap;
 import android.hardware.camera2.params.MultiResolutionStreamInfo;
@@ -69,9 +71,9 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
 
         @Override // java.util.concurrent.ThreadFactory
         public Thread newThread(Runnable runnable) {
-            Thread newThread = mFactory.newThread(runnable);
-            newThread.setName("CameraDeviceExecutor");
-            return newThread;
+            Thread threadNewThread = mFactory.newThread(runnable);
+            threadNewThread.setName("CameraDeviceExecutor");
+            return threadNewThread;
         }
     };
     private final String TAG;
@@ -362,8 +364,8 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         this.mContext = context;
         this.mCameraDeviceSetup = cameraDeviceSetup;
         this.mSharedMode = z;
-        String format = String.format("CameraDevice-JV-%s", str);
-        this.TAG = format.length() > 23 ? format.substring(0, 23) : format;
+        String str2 = String.format("CameraDevice-JV-%s", str);
+        this.TAG = str2.length() > 23 ? str2.substring(0, 23) : str2;
         Integer num = (Integer) cameraCharacteristics.get(CameraCharacteristics.REQUEST_PARTIAL_RESULT_COUNT);
         if (num == null) {
             this.mTotalPartialCount = 1;
@@ -402,14 +404,14 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 return;
             }
             this.mRemoteDevice = new ICameraDeviceUserWrapper(iCameraDeviceUser);
-            Parcel obtain = Parcel.obtain();
-            this.mRemoteDevice.getCaptureResultMetadataQueue().writeToParcel(obtain, 1);
-            this.mFMQReader = nativeCreateFMQReader(obtain);
-            obtain.recycle();
-            IBinder asBinder = iCameraDeviceUser.asBinder();
-            if (asBinder != null) {
+            Parcel parcelObtain = Parcel.obtain();
+            this.mRemoteDevice.getCaptureResultMetadataQueue().writeToParcel(parcelObtain, 1);
+            this.mFMQReader = nativeCreateFMQReader(parcelObtain);
+            parcelObtain.recycle();
+            IBinder iBinderAsBinder = iCameraDeviceUser.asBinder();
+            if (iBinderAsBinder != null) {
                 try {
-                    asBinder.linkToDeath(this, 0);
+                    iBinderAsBinder.linkToDeath(this, 0);
                 } catch (RemoteException unused) {
                     this.mDeviceExecutor.execute(this.mCallOnDisconnected);
                     throw new CameraAccessException(2, "The camera device has encountered a serious error");
@@ -430,22 +432,22 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         final boolean z;
         int i = serviceSpecificException.errorCode;
         final int i2 = 4;
-        if (i != 4) {
-            if (i != 10) {
-                if (i == 6) {
-                    i2 = 3;
-                } else if (i == 7) {
-                    z = true;
-                    i2 = 1;
-                } else if (i != 8) {
-                    Log.e(this.TAG, "Unexpected failure in opening camera device: " + serviceSpecificException.errorCode + serviceSpecificException.getMessage());
-                } else {
-                    i2 = 2;
-                }
-            }
+        if (i == 4) {
+            z = false;
+        } else if (i == 10) {
             z = true;
         } else {
-            z = false;
+            if (i == 6) {
+                i2 = 3;
+            } else if (i == 7) {
+                z = true;
+                i2 = 1;
+            } else if (i != 8) {
+                Log.e(this.TAG, "Unexpected failure in opening camera device: " + serviceSpecificException.errorCode + serviceSpecificException.getMessage());
+            } else {
+                i2 = 2;
+            }
+            z = true;
         }
         synchronized (this.mInterfaceLock) {
             this.mInError = true;
@@ -477,26 +479,125 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00e8 A[Catch: IllegalArgumentException -> 0x016b, all -> 0x016d, CameraAccessException -> 0x016f, LOOP:1: B:45:0x00e2->B:47:0x00e8, LOOP_END, TryCatch #1 {CameraAccessException -> 0x016f, blocks: (B:29:0x0078, B:31:0x007c, B:32:0x007f, B:35:0x0091, B:38:0x0099, B:40:0x00b8, B:43:0x00c8, B:44:0x00de, B:45:0x00e2, B:47:0x00e8, B:49:0x0101, B:50:0x0105, B:52:0x010b, B:55:0x0117, B:61:0x0125, B:62:0x0136, B:64:0x013d, B:66:0x0140, B:68:0x0145, B:79:0x0130), top: B:28:0x0078, outer: #3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x010b A[Catch: IllegalArgumentException -> 0x016b, all -> 0x016d, CameraAccessException -> 0x016f, TryCatch #1 {CameraAccessException -> 0x016f, blocks: (B:29:0x0078, B:31:0x007c, B:32:0x007f, B:35:0x0091, B:38:0x0099, B:40:0x00b8, B:43:0x00c8, B:44:0x00de, B:45:0x00e2, B:47:0x00e8, B:49:0x0101, B:50:0x0105, B:52:0x010b, B:55:0x0117, B:61:0x0125, B:62:0x0136, B:64:0x013d, B:66:0x0140, B:68:0x0145, B:79:0x0130), top: B:28:0x0078, outer: #3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0125 A[Catch: IllegalArgumentException -> 0x016b, all -> 0x016d, CameraAccessException -> 0x016f, TryCatch #1 {CameraAccessException -> 0x016f, blocks: (B:29:0x0078, B:31:0x007c, B:32:0x007f, B:35:0x0091, B:38:0x0099, B:40:0x00b8, B:43:0x00c8, B:44:0x00de, B:45:0x00e2, B:47:0x00e8, B:49:0x0101, B:50:0x0105, B:52:0x010b, B:55:0x0117, B:61:0x0125, B:62:0x0136, B:64:0x013d, B:66:0x0140, B:68:0x0145, B:79:0x0130), top: B:28:0x0078, outer: #3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0145 A[Catch: IllegalArgumentException -> 0x016b, all -> 0x016d, CameraAccessException -> 0x016f, TRY_LEAVE, TryCatch #1 {CameraAccessException -> 0x016f, blocks: (B:29:0x0078, B:31:0x007c, B:32:0x007f, B:35:0x0091, B:38:0x0099, B:40:0x00b8, B:43:0x00c8, B:44:0x00de, B:45:0x00e2, B:47:0x00e8, B:49:0x0101, B:50:0x0105, B:52:0x010b, B:55:0x0117, B:61:0x0125, B:62:0x0136, B:64:0x013d, B:66:0x0140, B:68:0x0145, B:79:0x0130), top: B:28:0x0078, outer: #3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0159 A[Catch: all -> 0x01ae, TryCatch #4 {, blocks: (B:13:0x002f, B:14:0x003d, B:16:0x0045, B:18:0x0059, B:21:0x0060, B:23:0x006b, B:24:0x0064, B:27:0x006e, B:72:0x0153, B:74:0x0159, B:76:0x0169, B:78:0x0161, B:82:0x019d, B:83:0x01a4, B:96:0x01a6, B:97:0x01ad, B:29:0x0078, B:31:0x007c, B:32:0x007f, B:35:0x0091, B:38:0x0099, B:40:0x00b8, B:43:0x00c8, B:44:0x00de, B:45:0x00e2, B:47:0x00e8, B:49:0x0101, B:50:0x0105, B:52:0x010b, B:55:0x0117, B:61:0x0125, B:62:0x0136, B:64:0x013d, B:66:0x0140, B:68:0x0145, B:79:0x0130, B:81:0x0183, B:90:0x0170, B:92:0x0177, B:93:0x017e, B:94:0x017f), top: B:12:0x002f, inners: #3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0161 A[Catch: all -> 0x01ae, DONT_GENERATE, TryCatch #4 {, blocks: (B:13:0x002f, B:14:0x003d, B:16:0x0045, B:18:0x0059, B:21:0x0060, B:23:0x006b, B:24:0x0064, B:27:0x006e, B:72:0x0153, B:74:0x0159, B:76:0x0169, B:78:0x0161, B:82:0x019d, B:83:0x01a4, B:96:0x01a6, B:97:0x01ad, B:29:0x0078, B:31:0x007c, B:32:0x007f, B:35:0x0091, B:38:0x0099, B:40:0x00b8, B:43:0x00c8, B:44:0x00de, B:45:0x00e2, B:47:0x00e8, B:49:0x0101, B:50:0x0105, B:52:0x010b, B:55:0x0117, B:61:0x0125, B:62:0x0136, B:64:0x013d, B:66:0x0140, B:68:0x0145, B:79:0x0130, B:81:0x0183, B:90:0x0170, B:92:0x0177, B:93:0x017e, B:94:0x017f), top: B:12:0x002f, inners: #3 }] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0130 A[Catch: IllegalArgumentException -> 0x016b, all -> 0x016d, CameraAccessException -> 0x016f, TryCatch #1 {CameraAccessException -> 0x016f, blocks: (B:29:0x0078, B:31:0x007c, B:32:0x007f, B:35:0x0091, B:38:0x0099, B:40:0x00b8, B:43:0x00c8, B:44:0x00de, B:45:0x00e2, B:47:0x00e8, B:49:0x0101, B:50:0x0105, B:52:0x010b, B:55:0x0117, B:61:0x0125, B:62:0x0136, B:64:0x013d, B:66:0x0140, B:68:0x0145, B:79:0x0130), top: B:28:0x0078, outer: #3 }] */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x00dc  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x00e8 A[Catch: IllegalArgumentException -> 0x016b, all -> 0x016d, CameraAccessException -> 0x016f, LOOP:1: B:42:0x00e2->B:44:0x00e8, LOOP_END, TryCatch #1 {CameraAccessException -> 0x016f, blocks: (B:26:0x0078, B:28:0x007c, B:29:0x007f, B:32:0x0091, B:35:0x0099, B:37:0x00b8, B:39:0x00c8, B:41:0x00de, B:42:0x00e2, B:44:0x00e8, B:45:0x0101, B:46:0x0105, B:48:0x010b, B:50:0x0117, B:52:0x0125, B:54:0x0136, B:56:0x013d, B:58:0x0140, B:60:0x0145, B:53:0x0130), top: B:90:0x0078, outer: #3 }] */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x010b A[Catch: IllegalArgumentException -> 0x016b, all -> 0x016d, CameraAccessException -> 0x016f, TryCatch #1 {CameraAccessException -> 0x016f, blocks: (B:26:0x0078, B:28:0x007c, B:29:0x007f, B:32:0x0091, B:35:0x0099, B:37:0x00b8, B:39:0x00c8, B:41:0x00de, B:42:0x00e2, B:44:0x00e8, B:45:0x0101, B:46:0x0105, B:48:0x010b, B:50:0x0117, B:52:0x0125, B:54:0x0136, B:56:0x013d, B:58:0x0140, B:60:0x0145, B:53:0x0130), top: B:90:0x0078, outer: #3 }] */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x0125 A[Catch: IllegalArgumentException -> 0x016b, all -> 0x016d, CameraAccessException -> 0x016f, TryCatch #1 {CameraAccessException -> 0x016f, blocks: (B:26:0x0078, B:28:0x007c, B:29:0x007f, B:32:0x0091, B:35:0x0099, B:37:0x00b8, B:39:0x00c8, B:41:0x00de, B:42:0x00e2, B:44:0x00e8, B:45:0x0101, B:46:0x0105, B:48:0x010b, B:50:0x0117, B:52:0x0125, B:54:0x0136, B:56:0x013d, B:58:0x0140, B:60:0x0145, B:53:0x0130), top: B:90:0x0078, outer: #3 }] */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x0130 A[Catch: IllegalArgumentException -> 0x016b, all -> 0x016d, CameraAccessException -> 0x016f, TryCatch #1 {CameraAccessException -> 0x016f, blocks: (B:26:0x0078, B:28:0x007c, B:29:0x007f, B:32:0x0091, B:35:0x0099, B:37:0x00b8, B:39:0x00c8, B:41:0x00de, B:42:0x00e2, B:44:0x00e8, B:45:0x0101, B:46:0x0105, B:48:0x010b, B:50:0x0117, B:52:0x0125, B:54:0x0136, B:56:0x013d, B:58:0x0140, B:60:0x0145, B:53:0x0130), top: B:90:0x0078, outer: #3 }] */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x0145 A[Catch: IllegalArgumentException -> 0x016b, all -> 0x016d, CameraAccessException -> 0x016f, TRY_LEAVE, TryCatch #1 {CameraAccessException -> 0x016f, blocks: (B:26:0x0078, B:28:0x007c, B:29:0x007f, B:32:0x0091, B:35:0x0099, B:37:0x00b8, B:39:0x00c8, B:41:0x00de, B:42:0x00e2, B:44:0x00e8, B:45:0x0101, B:46:0x0105, B:48:0x010b, B:50:0x0117, B:52:0x0125, B:54:0x0136, B:56:0x013d, B:58:0x0140, B:60:0x0145, B:53:0x0130), top: B:90:0x0078, outer: #3 }] */
+    /* JADX WARN: Removed duplicated region for block: B:64:0x0159 A[Catch: all -> 0x01ae, TryCatch #4 {, blocks: (B:14:0x002f, B:15:0x003d, B:17:0x0045, B:19:0x0059, B:22:0x0060, B:24:0x006b, B:23:0x0064, B:25:0x006e, B:62:0x0153, B:64:0x0159, B:67:0x0169, B:65:0x0161, B:82:0x019d, B:83:0x01a4, B:85:0x01a6, B:86:0x01ad, B:26:0x0078, B:28:0x007c, B:29:0x007f, B:32:0x0091, B:35:0x0099, B:37:0x00b8, B:39:0x00c8, B:41:0x00de, B:42:0x00e2, B:44:0x00e8, B:45:0x0101, B:46:0x0105, B:48:0x010b, B:50:0x0117, B:52:0x0125, B:54:0x0136, B:56:0x013d, B:58:0x0140, B:60:0x0145, B:53:0x0130, B:81:0x0183, B:74:0x0170, B:76:0x0177, B:77:0x017e, B:78:0x017f), top: B:94:0x002f, inners: #3 }] */
+    /* JADX WARN: Removed duplicated region for block: B:65:0x0161 A[Catch: all -> 0x01ae, DONT_GENERATE, TryCatch #4 {, blocks: (B:14:0x002f, B:15:0x003d, B:17:0x0045, B:19:0x0059, B:22:0x0060, B:24:0x006b, B:23:0x0064, B:25:0x006e, B:62:0x0153, B:64:0x0159, B:67:0x0169, B:65:0x0161, B:82:0x019d, B:83:0x01a4, B:85:0x01a6, B:86:0x01ad, B:26:0x0078, B:28:0x007c, B:29:0x007f, B:32:0x0091, B:35:0x0099, B:37:0x00b8, B:39:0x00c8, B:41:0x00de, B:42:0x00e2, B:44:0x00e8, B:45:0x0101, B:46:0x0105, B:48:0x010b, B:50:0x0117, B:52:0x0125, B:54:0x0136, B:56:0x013d, B:58:0x0140, B:60:0x0145, B:53:0x0130, B:81:0x0183, B:74:0x0170, B:76:0x0177, B:77:0x017e, B:78:0x017f), top: B:94:0x002f, inners: #3 }] */
     /* JADX WARN: Type inference failed for: r3v4 */
     /* JADX WARN: Type inference failed for: r3v5, types: [int] */
     /* JADX WARN: Type inference failed for: r3v8 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean configureStreamsChecked(android.hardware.camera2.params.InputConfiguration r17, java.util.List<android.hardware.camera2.params.OutputConfiguration> r18, int r19, android.hardware.camera2.CaptureRequest r20, long r21) throws android.hardware.camera2.CameraAccessException {
-        /*
-            Method dump skipped, instructions count: 433
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.camera2.impl.CameraDeviceImpl.configureStreamsChecked(android.hardware.camera2.params.InputConfiguration, java.util.List, int, android.hardware.camera2.CaptureRequest, long):boolean");
+    public boolean configureStreamsChecked(InputConfiguration inputConfiguration, List<OutputConfiguration> list, int i, CaptureRequest captureRequest, long j) throws CameraAccessException {
+        boolean z;
+        int[] iArrEndConfigure;
+        int length;
+        ?? r3;
+        List<OutputConfiguration> arrayList = list == null ? new ArrayList<>() : list;
+        if (arrayList.size() == 0 && inputConfiguration != null) {
+            throw new IllegalArgumentException("cannot configure an input stream without any output streams");
+        }
+        checkInputConfiguration(inputConfiguration);
+        List<OutputConfiguration> listApplyExtensionStreamOption = applyExtensionStreamOption(arrayList, captureRequest);
+        synchronized (this.mInterfaceLock) {
+            checkIfCameraClosedOrInError();
+            HashSet hashSet = new HashSet(listApplyExtensionStreamOption);
+            ArrayList<Integer> arrayList2 = new ArrayList();
+            for (int i2 = 0; i2 < this.mConfiguredOutputs.size(); i2++) {
+                int iKeyAt = this.mConfiguredOutputs.keyAt(i2);
+                OutputConfiguration outputConfigurationValueAt = this.mConfiguredOutputs.valueAt(i2);
+                if (!listApplyExtensionStreamOption.contains(outputConfigurationValueAt) || outputConfigurationValueAt.isDeferredConfiguration()) {
+                    arrayList2.add(Integer.valueOf(iKeyAt));
+                } else {
+                    hashSet.remove(outputConfigurationValueAt);
+                }
+            }
+            this.mDeviceExecutor.execute(this.mCallOnBusy);
+            stopRepeating();
+            try {
+                try {
+                    try {
+                        if (!this.mSharedMode) {
+                            waitUntilIdle();
+                        }
+                        this.mRemoteDevice.beginConfigure();
+                        InputConfiguration value = this.mConfiguredInput.getValue();
+                        if (inputConfiguration == value || (inputConfiguration != null && inputConfiguration.equals(value))) {
+                            z = false;
+                            for (Integer num : arrayList2) {
+                                this.mRemoteDevice.deleteStream(num.intValue());
+                                this.mConfiguredOutputs.delete(num.intValue());
+                            }
+                            for (OutputConfiguration outputConfiguration : listApplyExtensionStreamOption) {
+                                if (hashSet.contains(outputConfiguration)) {
+                                    this.mConfiguredOutputs.put(this.mRemoteDevice.createStream(outputConfiguration), outputConfiguration);
+                                }
+                            }
+                            if (captureRequest == null) {
+                                iArrEndConfigure = this.mRemoteDevice.endConfigure(i, captureRequest.getNativeCopy(), j);
+                            } else {
+                                iArrEndConfigure = this.mRemoteDevice.endConfigure(i, null, j);
+                            }
+                            this.mOfflineSupport.clear();
+                            if (iArrEndConfigure != null && iArrEndConfigure.length > 0) {
+                                length = iArrEndConfigure.length;
+                                for (r3 = z; r3 < length; r3++) {
+                                    this.mOfflineSupport.add(Integer.valueOf(iArrEndConfigure[r3]));
+                                }
+                            }
+                            if (listApplyExtensionStreamOption.size() <= 0) {
+                                this.mDeviceExecutor.execute(this.mCallOnIdle);
+                            }
+                            return true;
+                        }
+                        if (value != null) {
+                            this.mRemoteDevice.deleteStream(this.mConfiguredInput.getKey().intValue());
+                            this.mConfiguredInput = new AbstractMap.SimpleEntry<>(-1, null);
+                        }
+                        if (inputConfiguration != null) {
+                            z = false;
+                            try {
+                                this.mConfiguredInput = new AbstractMap.SimpleEntry<>(Integer.valueOf(this.mRemoteDevice.createInputStream(inputConfiguration.getWidth(), inputConfiguration.getHeight(), inputConfiguration.getFormat(), inputConfiguration.isMultiResolution())), inputConfiguration);
+                            } catch (IllegalArgumentException e) {
+                                e = e;
+                                Log.w(this.TAG, "Stream configuration failed due to: " + e.getMessage());
+                                return z;
+                            }
+                        }
+                        while (r0.hasNext()) {
+                        }
+                        while (r0.hasNext()) {
+                        }
+                        if (captureRequest == null) {
+                        }
+                        this.mOfflineSupport.clear();
+                        if (iArrEndConfigure != null) {
+                            length = iArrEndConfigure.length;
+                            while (r3 < length) {
+                            }
+                        }
+                        if (listApplyExtensionStreamOption.size() <= 0) {
+                        }
+                        return true;
+                    } catch (IllegalArgumentException e2) {
+                        e = e2;
+                        z = false;
+                    }
+                } catch (CameraAccessException e3) {
+                    if (e3.getReason() == 4) {
+                        throw new IllegalStateException("The camera is currently busy. You must wait until the previous operation completes.", e3);
+                    }
+                    throw e3;
+                }
+            } finally {
+                this.mDeviceExecutor.execute(this.mCallOnUnconfigured);
+            }
+        }
     }
 
     @Override // android.hardware.camera2.CameraDevice
@@ -608,9 +709,9 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         List<OutputConfiguration> list2;
         CameraAccessException cameraAccessException;
         boolean z;
-        Surface surface;
+        Surface inputSurface;
         CameraCaptureSessionCore cameraCaptureSessionImpl;
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         synchronized (this.mInterfaceLock) {
             checkIfCameraClosedOrInError();
             boolean z2 = false;
@@ -656,14 +757,14 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 this.mCurrentAdvancedExtensionSession = null;
             }
             try {
-                boolean configureStreamsChecked = configureStreamsChecked(inputConfiguration, list2, i, captureRequest, uptimeMillis);
-                z = configureStreamsChecked;
-                surface = (!configureStreamsChecked || inputConfiguration == null) ? null : this.mRemoteDevice.getInputSurface();
+                boolean zConfigureStreamsChecked = configureStreamsChecked(inputConfiguration, list2, i, captureRequest, jUptimeMillis);
+                z = zConfigureStreamsChecked;
+                inputSurface = (!zConfigureStreamsChecked || inputConfiguration == null) ? null : this.mRemoteDevice.getInputSurface();
                 cameraAccessException = null;
             } catch (CameraAccessException e) {
                 cameraAccessException = e;
                 z = false;
-                surface = null;
+                inputSurface = null;
             }
             if (z4) {
                 ArrayList arrayList = new ArrayList(list.size());
@@ -686,7 +787,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
             } else {
                 int i4 = this.mNextSessionId;
                 this.mNextSessionId = i4 + 1;
-                cameraCaptureSessionImpl = new CameraCaptureSessionImpl(i4, surface, stateCallback, executor, this, this.mDeviceExecutor, z);
+                cameraCaptureSessionImpl = new CameraCaptureSessionImpl(i4, inputSurface, stateCallback, executor, this, this.mDeviceExecutor, z);
             }
             this.mCurrentSession = cameraCaptureSessionImpl;
             if (cameraAccessException != null) {
@@ -697,7 +798,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
     }
 
     @Override // android.hardware.camera2.CameraDevice
-    public boolean isSessionConfigurationSupported(SessionConfiguration sessionConfiguration) throws CameraAccessException, UnsupportedOperationException, IllegalArgumentException {
+    public boolean isSessionConfigurationSupported(SessionConfiguration sessionConfiguration) throws UnsupportedOperationException, CameraAccessException, IllegalArgumentException {
         CameraDevice.CameraDeviceSetup cameraDeviceSetup;
         synchronized (this.mInterfaceLock) {
             checkIfCameraClosedOrInError();
@@ -742,9 +843,9 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                     throw new IllegalStateException("Physical id matches the logical id!");
                 }
             }
-            CameraMetadataNative createDefaultRequest = this.mRemoteDevice.createDefaultRequest(i);
-            disableZslIfNeeded(createDefaultRequest, this.mAppTargetSdkVersion, i);
-            builder = new CaptureRequest.Builder(createDefaultRequest, false, -1, getId(), set);
+            CameraMetadataNative cameraMetadataNativeCreateDefaultRequest = this.mRemoteDevice.createDefaultRequest(i);
+            disableZslIfNeeded(cameraMetadataNativeCreateDefaultRequest, this.mAppTargetSdkVersion, i);
+            builder = new CaptureRequest.Builder(cameraMetadataNativeCreateDefaultRequest, false, -1, getId(), set);
         }
         return builder;
     }
@@ -757,9 +858,9 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
             if (Flags.cameraMultiClient() && this.mSharedMode && !this.mIsPrimaryClient) {
                 throw new UnsupportedOperationException("In shared session mode,only primary clients can create capture request.");
             }
-            CameraMetadataNative createDefaultRequest = this.mRemoteDevice.createDefaultRequest(i);
-            disableZslIfNeeded(createDefaultRequest, this.mAppTargetSdkVersion, i);
-            builder = new CaptureRequest.Builder(createDefaultRequest, false, -1, getId(), null);
+            CameraMetadataNative cameraMetadataNativeCreateDefaultRequest = this.mRemoteDevice.createDefaultRequest(i);
+            disableZslIfNeeded(cameraMetadataNativeCreateDefaultRequest, this.mAppTargetSdkVersion, i);
+            builder = new CaptureRequest.Builder(cameraMetadataNativeCreateDefaultRequest, false, -1, getId(), null);
         }
         return builder;
     }
@@ -779,34 +880,34 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
     }
 
     public void prepare(Surface surface) throws CameraAccessException {
-        int i;
+        int iKeyAt;
         if (surface == null) {
             throw new IllegalArgumentException("Surface is null");
         }
         synchronized (this.mInterfaceLock) {
             checkIfCameraClosedOrInError();
-            int i2 = 0;
+            int i = 0;
             while (true) {
-                if (i2 >= this.mConfiguredOutputs.size()) {
-                    i = -1;
+                if (i >= this.mConfiguredOutputs.size()) {
+                    iKeyAt = -1;
                     break;
                 } else {
-                    if (this.mConfiguredOutputs.valueAt(i2).getSurfaces().contains(surface)) {
-                        i = this.mConfiguredOutputs.keyAt(i2);
+                    if (this.mConfiguredOutputs.valueAt(i).getSurfaces().contains(surface)) {
+                        iKeyAt = this.mConfiguredOutputs.keyAt(i);
                         break;
                     }
-                    i2++;
+                    i++;
                 }
             }
-            if (i == -1) {
+            if (iKeyAt == -1) {
                 throw new IllegalArgumentException("Surface is not part of this session");
             }
-            this.mRemoteDevice.prepare(i);
+            this.mRemoteDevice.prepare(iKeyAt);
         }
     }
 
     public void prepare(int i, Surface surface) throws CameraAccessException {
-        int i2;
+        int iKeyAt;
         if (surface == null) {
             throw new IllegalArgumentException("Surface is null");
         }
@@ -815,54 +916,54 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         }
         synchronized (this.mInterfaceLock) {
             checkIfCameraClosedOrInError();
-            int i3 = 0;
-            while (true) {
-                if (i3 >= this.mConfiguredOutputs.size()) {
-                    i2 = -1;
-                    break;
-                } else {
-                    if (surface == this.mConfiguredOutputs.valueAt(i3).getSurface()) {
-                        i2 = this.mConfiguredOutputs.keyAt(i3);
-                        break;
-                    }
-                    i3++;
-                }
-            }
-            if (i2 == -1) {
-                throw new IllegalArgumentException("Surface is not part of this session");
-            }
-            this.mRemoteDevice.prepare2(i, i2);
-        }
-    }
-
-    public void updateOutputConfiguration(OutputConfiguration outputConfiguration) throws CameraAccessException {
-        int i;
-        synchronized (this.mInterfaceLock) {
-            checkIfCameraClosedOrInError();
             int i2 = 0;
             while (true) {
                 if (i2 >= this.mConfiguredOutputs.size()) {
-                    i = -1;
+                    iKeyAt = -1;
                     break;
                 } else {
-                    if (outputConfiguration.getSurface() == this.mConfiguredOutputs.valueAt(i2).getSurface()) {
-                        i = this.mConfiguredOutputs.keyAt(i2);
+                    if (surface == this.mConfiguredOutputs.valueAt(i2).getSurface()) {
+                        iKeyAt = this.mConfiguredOutputs.keyAt(i2);
                         break;
                     }
                     i2++;
                 }
             }
-            if (i == -1) {
+            if (iKeyAt == -1) {
+                throw new IllegalArgumentException("Surface is not part of this session");
+            }
+            this.mRemoteDevice.prepare2(i, iKeyAt);
+        }
+    }
+
+    public void updateOutputConfiguration(OutputConfiguration outputConfiguration) throws CameraAccessException {
+        int iKeyAt;
+        synchronized (this.mInterfaceLock) {
+            checkIfCameraClosedOrInError();
+            int i = 0;
+            while (true) {
+                if (i >= this.mConfiguredOutputs.size()) {
+                    iKeyAt = -1;
+                    break;
+                } else {
+                    if (outputConfiguration.getSurface() == this.mConfiguredOutputs.valueAt(i).getSurface()) {
+                        iKeyAt = this.mConfiguredOutputs.keyAt(i);
+                        break;
+                    }
+                    i++;
+                }
+            }
+            if (iKeyAt == -1) {
                 throw new IllegalArgumentException("Invalid output configuration");
             }
-            this.mRemoteDevice.updateOutputConfiguration(i, outputConfiguration);
-            this.mConfiguredOutputs.put(i, outputConfiguration);
+            this.mRemoteDevice.updateOutputConfiguration(iKeyAt, outputConfiguration);
+            this.mConfiguredOutputs.put(iKeyAt, outputConfiguration);
         }
     }
 
     public CameraOfflineSession switchToOffline(Collection<Surface> collection, Executor executor, CameraOfflineSession.CameraOfflineSessionCallback cameraOfflineSessionCallback) throws CameraAccessException {
         CameraOfflineSessionImpl cameraOfflineSessionImpl;
-        int i;
+        int iKeyAt;
         if (collection.isEmpty()) {
             throw new IllegalArgumentException("Invalid offline surfaces!");
         }
@@ -874,26 +975,26 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 throw new IllegalStateException("Switch to offline mode already in progress");
             }
             for (Surface surface : collection) {
-                int i2 = 0;
+                int i = 0;
                 while (true) {
-                    if (i2 >= this.mConfiguredOutputs.size()) {
-                        i = -1;
+                    if (i >= this.mConfiguredOutputs.size()) {
+                        iKeyAt = -1;
                         break;
                     }
-                    if (surface == this.mConfiguredOutputs.valueAt(i2).getSurface()) {
-                        i = this.mConfiguredOutputs.keyAt(i2);
-                        sparseArray.append(i, this.mConfiguredOutputs.valueAt(i2));
+                    if (surface == this.mConfiguredOutputs.valueAt(i).getSurface()) {
+                        iKeyAt = this.mConfiguredOutputs.keyAt(i);
+                        sparseArray.append(iKeyAt, this.mConfiguredOutputs.valueAt(i));
                         break;
                     }
-                    i2++;
+                    i++;
                 }
-                if (i == -1) {
+                if (iKeyAt == -1) {
                     throw new IllegalArgumentException("Offline surface is not part of this session");
                 }
-                if (!this.mOfflineSupport.contains(Integer.valueOf(i))) {
+                if (!this.mOfflineSupport.contains(Integer.valueOf(iKeyAt))) {
                     throw new IllegalArgumentException("Surface: " + surface + " does not  support offline mode");
                 }
-                hashSet.add(Integer.valueOf(i));
+                hashSet.add(Integer.valueOf(iKeyAt));
             }
             stopRepeating();
             cameraOfflineSessionImpl = new CameraOfflineSessionImpl(this.mCameraId, this.mCharacteristics, executor, cameraOfflineSessionCallback, sparseArray, this.mConfiguredInput, this.mConfiguredOutputs, this.mFrameNumberTracker, this.mCaptureCallbackMap, this.mRequestLastFrameNumbersList);
@@ -927,88 +1028,88 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
     }
 
     public boolean supportsOfflineProcessing(Surface surface) {
-        int i;
-        boolean contains;
+        int iKeyAt;
+        boolean zContains;
         if (surface == null) {
             throw new IllegalArgumentException("Surface is null");
         }
         synchronized (this.mInterfaceLock) {
-            int i2 = 0;
+            int i = 0;
             while (true) {
-                if (i2 >= this.mConfiguredOutputs.size()) {
-                    i = -1;
+                if (i >= this.mConfiguredOutputs.size()) {
+                    iKeyAt = -1;
                     break;
                 }
-                if (surface == this.mConfiguredOutputs.valueAt(i2).getSurface()) {
-                    i = this.mConfiguredOutputs.keyAt(i2);
+                if (surface == this.mConfiguredOutputs.valueAt(i).getSurface()) {
+                    iKeyAt = this.mConfiguredOutputs.keyAt(i);
                     break;
                 }
-                i2++;
+                i++;
             }
-            if (i == -1) {
+            if (iKeyAt == -1) {
                 throw new IllegalArgumentException("Surface is not part of this session");
             }
-            contains = this.mOfflineSupport.contains(Integer.valueOf(i));
+            zContains = this.mOfflineSupport.contains(Integer.valueOf(iKeyAt));
         }
-        return contains;
+        return zContains;
     }
 
     public void tearDown(Surface surface) throws CameraAccessException {
-        int i;
+        int iKeyAt;
         if (surface == null) {
             throw new IllegalArgumentException("Surface is null");
         }
         synchronized (this.mInterfaceLock) {
             checkIfCameraClosedOrInError();
-            int i2 = 0;
+            int i = 0;
             while (true) {
-                if (i2 >= this.mConfiguredOutputs.size()) {
-                    i = -1;
+                if (i >= this.mConfiguredOutputs.size()) {
+                    iKeyAt = -1;
                     break;
                 } else {
-                    if (surface == this.mConfiguredOutputs.valueAt(i2).getSurface()) {
-                        i = this.mConfiguredOutputs.keyAt(i2);
+                    if (surface == this.mConfiguredOutputs.valueAt(i).getSurface()) {
+                        iKeyAt = this.mConfiguredOutputs.keyAt(i);
                         break;
                     }
-                    i2++;
+                    i++;
                 }
             }
-            if (i == -1) {
+            if (iKeyAt == -1) {
                 throw new IllegalArgumentException("Surface is not part of this session");
             }
-            this.mRemoteDevice.tearDown(i);
+            this.mRemoteDevice.tearDown(iKeyAt);
         }
     }
 
     public void finalizeOutputConfigs(List<OutputConfiguration> list) throws CameraAccessException {
-        int i;
+        int iKeyAt;
         if (list == null || list.size() == 0) {
             throw new IllegalArgumentException("deferred config is null or empty");
         }
         synchronized (this.mInterfaceLock) {
             checkIfCameraClosedOrInError();
             for (OutputConfiguration outputConfiguration : list) {
-                int i2 = 0;
+                int i = 0;
                 while (true) {
-                    if (i2 >= this.mConfiguredOutputs.size()) {
-                        i = -1;
+                    if (i >= this.mConfiguredOutputs.size()) {
+                        iKeyAt = -1;
                         break;
                     } else {
-                        if (outputConfiguration.equals(this.mConfiguredOutputs.valueAt(i2))) {
-                            i = this.mConfiguredOutputs.keyAt(i2);
+                        if (outputConfiguration.equals(this.mConfiguredOutputs.valueAt(i))) {
+                            iKeyAt = this.mConfiguredOutputs.keyAt(i);
                             break;
                         }
-                        i2++;
+                        i++;
                     }
                 }
-                if (i == -1) {
+                if (iKeyAt == -1) {
                     throw new IllegalArgumentException("Deferred config is not part of this session");
                 }
                 if (outputConfiguration.getSurfaces().size() == 0) {
-                    throw new IllegalArgumentException("The final config for stream " + i + " must have at least 1 surface");
+                    throw new IllegalArgumentException("The final config for stream " + iKeyAt + " must have at least 1 surface");
                 }
-                this.mRemoteDevice.finalizeOutputConfigurations(i, outputConfiguration);
-                this.mConfiguredOutputs.put(i, outputConfiguration);
+                this.mRemoteDevice.finalizeOutputConfigurations(iKeyAt, outputConfiguration);
+                this.mConfiguredOutputs.put(iKeyAt, outputConfiguration);
             }
         }
     }
@@ -1029,25 +1130,25 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
     /* JADX INFO: Access modifiers changed from: private */
     public void checkEarlyTriggerSequenceCompleteLocked(final int i, long j, int[] iArr) {
         if (j == -1) {
-            int indexOfKey = this.mCaptureCallbackMap.indexOfKey(i);
-            final CaptureCallbackHolder valueAt = indexOfKey >= 0 ? this.mCaptureCallbackMap.valueAt(indexOfKey) : null;
-            if (valueAt != null) {
-                this.mCaptureCallbackMap.removeAt(indexOfKey);
+            int iIndexOfKey = this.mCaptureCallbackMap.indexOfKey(i);
+            final CaptureCallbackHolder captureCallbackHolderValueAt = iIndexOfKey >= 0 ? this.mCaptureCallbackMap.valueAt(iIndexOfKey) : null;
+            if (captureCallbackHolderValueAt != null) {
+                this.mCaptureCallbackMap.removeAt(iIndexOfKey);
                 Runnable runnable = new Runnable() { // from class: android.hardware.camera2.impl.CameraDeviceImpl.12
                     @Override // java.lang.Runnable
                     public void run() {
                         if (CameraDeviceImpl.this.isClosed()) {
                             return;
                         }
-                        valueAt.getCallback().onCaptureSequenceAborted(CameraDeviceImpl.this, i);
+                        captureCallbackHolderValueAt.getCallback().onCaptureSequenceAborted(CameraDeviceImpl.this, i);
                     }
                 };
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    valueAt.getExecutor().execute(runnable);
+                    captureCallbackHolderValueAt.getExecutor().execute(runnable);
                     return;
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
             Log.w(this.TAG, String.format("did not register callback to request %d", Integer.valueOf(i)));
@@ -1081,9 +1182,9 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
     /* JADX INFO: Access modifiers changed from: private */
     public void updateTracker(int i, long j, int i2, CaptureResult captureResult, boolean z) {
         if (this.mBatchOutputMap.containsKey(Integer.valueOf(i))) {
-            int intValue = this.mBatchOutputMap.get(Integer.valueOf(i)).intValue();
-            for (int i3 = 0; i3 < intValue; i3++) {
-                this.mFrameNumberTracker.updateTracker(j - ((intValue - 1) - i3), captureResult, z, i2);
+            int iIntValue = this.mBatchOutputMap.get(Integer.valueOf(i)).intValue();
+            for (int i3 = 0; i3 < iIntValue; i3++) {
+                this.mFrameNumberTracker.updateTracker(j - ((iIntValue - 1) - i3), captureResult, z, i2);
             }
             return;
         }
@@ -1094,7 +1195,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         List<CaptureRequest> list2;
         boolean z2;
         int requestId;
-        Executor checkExecutor = checkExecutor(executor, captureCallback);
+        Executor executorCheckExecutor = checkExecutor(executor, captureCallback);
         synchronized (this.mInterfaceLock) {
             checkIfCameraClosedOrInError();
             for (CaptureRequest captureRequest : list) {
@@ -1115,17 +1216,17 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
             for (CaptureRequest captureRequest2 : captureRequestArr) {
                 captureRequest2.convertSurfaceToStreamId(this.mConfiguredOutputs);
             }
-            SubmitInfo submitRequestList = this.mRemoteDevice.submitRequestList(captureRequestArr, z);
+            SubmitInfo submitInfoSubmitRequestList = this.mRemoteDevice.submitRequestList(captureRequestArr, z);
             for (CaptureRequest captureRequest3 : captureRequestArr) {
                 captureRequest3.recoverStreamIdToSurface();
             }
             if (hasBatchedOutputs(list)) {
-                this.mBatchOutputMap.put(Integer.valueOf(submitRequestList.getRequestId()), Integer.valueOf(list.size()));
+                this.mBatchOutputMap.put(Integer.valueOf(submitInfoSubmitRequestList.getRequestId()), Integer.valueOf(list.size()));
             }
             if (captureCallback != null) {
                 list2 = list;
                 z2 = z;
-                this.mCaptureCallbackMap.put(submitRequestList.getRequestId(), new CaptureCallbackHolder(captureCallback, list2, checkExecutor, z2, this.mNextSessionId - 1));
+                this.mCaptureCallbackMap.put(submitInfoSubmitRequestList.getRequestId(), new CaptureCallbackHolder(captureCallback, list2, executorCheckExecutor, z2, this.mNextSessionId - 1));
             } else {
                 list2 = list;
                 z2 = z;
@@ -1133,25 +1234,25 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
             if (z2) {
                 int i = this.mRepeatingRequestId;
                 if (i != -1) {
-                    checkEarlyTriggerSequenceCompleteLocked(i, submitRequestList.getLastFrameNumber(), this.mRepeatingRequestTypes);
+                    checkEarlyTriggerSequenceCompleteLocked(i, submitInfoSubmitRequestList.getLastFrameNumber(), this.mRepeatingRequestTypes);
                 }
-                this.mRepeatingRequestId = submitRequestList.getRequestId();
+                this.mRepeatingRequestId = submitInfoSubmitRequestList.getRequestId();
                 this.mRepeatingRequestTypes = getRequestTypes(captureRequestArr);
             } else {
-                this.mRequestLastFrameNumbersList.add(new RequestLastFrameNumbersHolder(list2, submitRequestList));
+                this.mRequestLastFrameNumbersList.add(new RequestLastFrameNumbersHolder(list2, submitInfoSubmitRequestList));
             }
             if (this.mIdle) {
                 this.mDeviceExecutor.execute(this.mCallOnActive);
             }
             this.mIdle = false;
-            requestId = submitRequestList.getRequestId();
+            requestId = submitInfoSubmitRequestList.getRequestId();
         }
         return requestId;
     }
 
     public int startStreaming(List<Surface> list, CaptureCallback captureCallback, Executor executor) throws CameraAccessException {
         int requestId;
-        Executor checkExecutor = checkExecutor(executor, captureCallback);
+        Executor executorCheckExecutor = checkExecutor(executor, captureCallback);
         synchronized (this.mInterfaceLock) {
             checkIfCameraClosedOrInError();
             Iterator<Surface> it = list.iterator();
@@ -1166,27 +1267,27 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
             while (it2.hasNext()) {
                 builder.addTarget(it2.next());
             }
-            CaptureRequest build = builder.build();
-            build.convertSurfaceToStreamId(this.mConfiguredOutputs);
-            SubmitInfo startStreaming = this.mRemoteDevice.startStreaming(build.getStreamIds(), build.getSurfaceIds());
-            build.recoverStreamIdToSurface();
+            CaptureRequest captureRequestBuild = builder.build();
+            captureRequestBuild.convertSurfaceToStreamId(this.mConfiguredOutputs);
+            SubmitInfo submitInfoStartStreaming = this.mRemoteDevice.startStreaming(captureRequestBuild.getStreamIds(), captureRequestBuild.getSurfaceIds());
+            captureRequestBuild.recoverStreamIdToSurface();
             ArrayList arrayList = new ArrayList();
-            arrayList.add(build);
+            arrayList.add(captureRequestBuild);
             if (captureCallback != null) {
-                this.mCaptureCallbackMap.put(startStreaming.getRequestId(), new CaptureCallbackHolder(captureCallback, arrayList, checkExecutor, true, this.mNextSessionId - 1));
+                this.mCaptureCallbackMap.put(submitInfoStartStreaming.getRequestId(), new CaptureCallbackHolder(captureCallback, arrayList, executorCheckExecutor, true, this.mNextSessionId - 1));
             }
             int i = this.mRepeatingRequestId;
             if (i != -1) {
-                checkEarlyTriggerSequenceCompleteLocked(i, startStreaming.getLastFrameNumber(), this.mRepeatingRequestTypes);
+                checkEarlyTriggerSequenceCompleteLocked(i, submitInfoStartStreaming.getLastFrameNumber(), this.mRepeatingRequestTypes);
             }
             CaptureRequest[] captureRequestArr = (CaptureRequest[]) arrayList.toArray(new CaptureRequest[arrayList.size()]);
-            this.mRepeatingRequestId = startStreaming.getRequestId();
+            this.mRepeatingRequestId = submitInfoStartStreaming.getRequestId();
             this.mRepeatingRequestTypes = getRequestTypes(captureRequestArr);
             if (this.mIdle) {
                 this.mDeviceExecutor.execute(this.mCallOnActive);
             }
             this.mIdle = false;
-            requestId = startStreaming.getRequestId();
+            requestId = submitInfoStartStreaming.getRequestId();
         }
         return requestId;
     }
@@ -1243,10 +1344,10 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 Log.w(this.TAG, "flush - transit busy->idle immediately, don't actually flush");
                 return;
             }
-            long flush = this.mRemoteDevice.flush();
+            long jFlush = this.mRemoteDevice.flush();
             int i = this.mRepeatingRequestId;
             if (i != -1) {
-                checkEarlyTriggerSequenceCompleteLocked(i, flush, this.mRepeatingRequestTypes);
+                checkEarlyTriggerSequenceCompleteLocked(i, jFlush, this.mRepeatingRequestTypes);
                 this.mRepeatingRequestId = -1;
                 this.mRepeatingRequestTypes = null;
             }
@@ -1403,30 +1504,30 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 if (lastRegularFrameNumber <= completedFrameNumber && lastReprocessFrameNumber <= completedReprocessFrameNumber && lastZslStillFrameNumber <= completedZslStillFrameNumber) {
                     next.markSequenceCompleted();
                 }
-                int indexOfKey = this.mCaptureCallbackMap.indexOfKey(requestId);
-                final CaptureCallbackHolder valueAt = indexOfKey >= 0 ? this.mCaptureCallbackMap.valueAt(indexOfKey) : null;
-                if (valueAt != null && next.isSequenceCompleted()) {
+                int iIndexOfKey = this.mCaptureCallbackMap.indexOfKey(requestId);
+                final CaptureCallbackHolder captureCallbackHolderValueAt = iIndexOfKey >= 0 ? this.mCaptureCallbackMap.valueAt(iIndexOfKey) : null;
+                if (captureCallbackHolderValueAt != null && next.isSequenceCompleted()) {
                     Runnable runnable = new Runnable() { // from class: android.hardware.camera2.impl.CameraDeviceImpl.13
                         @Override // java.lang.Runnable
                         public void run() {
                             if (CameraDeviceImpl.this.isClosed()) {
                                 return;
                             }
-                            valueAt.getCallback().onCaptureSequenceCompleted(CameraDeviceImpl.this, requestId, next.getLastFrameNumber());
+                            captureCallbackHolderValueAt.getCallback().onCaptureSequenceCompleted(CameraDeviceImpl.this, requestId, next.getLastFrameNumber());
                         }
                     };
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                    long jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        valueAt.getExecutor().execute(runnable);
+                        captureCallbackHolderValueAt.getExecutor().execute(runnable);
                     } finally {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                     }
                 }
             }
             if (next.isSequenceCompleted() && next.isInflightCompleted()) {
-                int indexOfKey2 = this.mCaptureCallbackMap.indexOfKey(requestId);
-                if (indexOfKey2 >= 0) {
-                    this.mCaptureCallbackMap.removeAt(indexOfKey2);
+                int iIndexOfKey2 = this.mCaptureCallbackMap.indexOfKey(requestId);
+                if (iIndexOfKey2 >= 0) {
+                    this.mCaptureCallbackMap.removeAt(iIndexOfKey2);
                 }
                 it.remove();
             }
@@ -1448,9 +1549,9 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
             long lastZslStillFrameNumber = next.getLastZslStillFrameNumber();
             if (lastRegularFrameNumber <= j && lastReprocessFrameNumber <= j2 && lastZslStillFrameNumber <= j3) {
                 if (next.isSequenceCompleted()) {
-                    int indexOfKey = this.mCaptureCallbackMap.indexOfKey(requestId);
-                    if (indexOfKey >= 0) {
-                        this.mCaptureCallbackMap.removeAt(indexOfKey);
+                    int iIndexOfKey = this.mCaptureCallbackMap.indexOfKey(requestId);
+                    if (iIndexOfKey >= 0) {
+                        this.mCaptureCallbackMap.removeAt(iIndexOfKey);
                     }
                     it.remove();
                 } else {
@@ -1465,7 +1566,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
             if (this.mRemoteDevice == null && this.mRemoteDeviceInit) {
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mDeviceExecutor.execute(PooledLambda.obtainRunnable(new BiConsumer() { // from class: android.hardware.camera2.impl.CameraDeviceImpl$$ExternalSyntheticLambda1
                     @Override // java.util.function.BiConsumer
@@ -1474,7 +1575,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                     }
                 }, this, Boolean.valueOf(z)).recycleOnUse());
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -1499,11 +1600,11 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 return;
             }
             if (i == 0) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mDeviceExecutor.execute(this.mCallOnDisconnected);
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             } else if (i == 1) {
                 scheduleNotifyError(4);
@@ -1520,7 +1621,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
 
     private void scheduleNotifyError(int i) {
         this.mInError = true;
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mDeviceExecutor.execute(PooledLambda.obtainRunnable(new BiConsumer() { // from class: android.hardware.camera2.impl.CameraDeviceImpl$$ExternalSyntheticLambda0
                 @Override // java.util.function.BiConsumer
@@ -1529,7 +1630,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 }
             }, this, Integer.valueOf(i)).recycleOnUse());
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -1542,7 +1643,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
     }
 
     private void onCaptureErrorLocked(int i, CaptureResultExtras captureResultExtras) {
-        long clearCallingIdentity;
+        long jClearCallingIdentity;
         int requestId = captureResultExtras.getRequestId();
         int subsequenceId = captureResultExtras.getSubsequenceId();
         final long frameNumber = captureResultExtras.getFrameNumber();
@@ -1572,10 +1673,10 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                     };
                     CaptureCallbackHolder captureCallbackHolder2 = captureCallbackHolder;
                     CaptureRequest captureRequest = request;
-                    clearCallingIdentity = Binder.clearCallingIdentity();
+                    jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         captureCallbackHolder2.getExecutor().execute(runnable);
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                         request = captureRequest;
                         captureCallbackHolder = captureCallbackHolder2;
                     } finally {
@@ -1606,7 +1707,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
             }
             checkAndFireSequenceComplete();
         }
-        clearCallingIdentity = Binder.clearCallingIdentity();
+        jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             captureCallbackHolder.getExecutor().execute(runnable2);
         } finally {
@@ -1625,12 +1726,12 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
             }
             removeCompletedCallbackHolderLocked(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE);
             if (!this.mIdle) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mDeviceExecutor.execute(this.mCallOnIdle);
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 } catch (Throwable th) {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                     throw th;
                 }
             }
@@ -1690,7 +1791,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
             long lastCompletedRegularFrameNumber = captureResultExtras.getLastCompletedRegularFrameNumber();
             long lastCompletedReprocessFrameNumber = captureResultExtras.getLastCompletedReprocessFrameNumber();
             long lastCompletedZslFrameNumber = captureResultExtras.getLastCompletedZslFrameNumber();
-            final boolean hasReadoutTimestamp = captureResultExtras.hasReadoutTimestamp();
+            final boolean zHasReadoutTimestamp = captureResultExtras.hasReadoutTimestamp();
             final long readoutTimestamp = captureResultExtras.getReadoutTimestamp();
             synchronized (CameraDeviceImpl.this.mInterfaceLock) {
                 if (CameraDeviceImpl.this.mRemoteDevice == null) {
@@ -1708,7 +1809,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 if (CameraDeviceImpl.this.isClosed()) {
                     return;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     captureCallbackHolder.getExecutor().execute(new Runnable() { // from class: android.hardware.camera2.impl.CameraDeviceImpl.CameraDeviceCallbacks.1
                         @Override // java.lang.Runnable
@@ -1724,20 +1825,20 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                                     long j2 = subsequenceId - i;
                                     long j3 = j2 * 1000000000;
                                     captureCallbackHolder.getCallback().onCaptureStarted(CameraDeviceImpl.this, captureCallbackHolder.getRequest(i), j - (j3 / ((Integer) range.getUpper()).intValue()), frameNumber - j2);
-                                    if (hasReadoutTimestamp) {
+                                    if (zHasReadoutTimestamp) {
                                         captureCallbackHolder.getCallback().onReadoutStarted(CameraDeviceImpl.this, captureCallbackHolder.getRequest(i), readoutTimestamp - (j3 / ((Integer) range.getUpper()).intValue()), frameNumber - j2);
                                     }
                                 }
                                 return;
                             }
                             captureCallbackHolder.getCallback().onCaptureStarted(CameraDeviceImpl.this, request, j, frameNumber);
-                            if (hasReadoutTimestamp) {
+                            if (zHasReadoutTimestamp) {
                                 captureCallbackHolder.getCallback().onReadoutStarted(CameraDeviceImpl.this, request, readoutTimestamp, frameNumber);
                             }
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -1776,14 +1877,14 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 } else {
                     metadata = cameraMetadataInfo.getMetadata();
                 }
-                PhysicalCaptureResultInfo[] readMetadata = readMetadata(physicalCaptureResultInfoArr);
+                PhysicalCaptureResultInfo[] metadata2 = readMetadata(physicalCaptureResultInfoArr);
                 if (CameraDeviceImpl.this.mOfflineSessionImpl != null) {
-                    CameraDeviceImpl.this.mOfflineSessionImpl.getCallbacks().onResultReceived(CameraMetadataInfo.metadata(metadata), captureResultExtras, readMetadata);
+                    CameraDeviceImpl.this.mOfflineSessionImpl.getCallbacks().onResultReceived(CameraMetadataInfo.metadata(metadata), captureResultExtras, metadata2);
                     return;
                 }
                 metadata.set((CameraCharacteristics.Key<CameraCharacteristics.Key<Size>>) CameraCharacteristics.LENS_INFO_SHADING_MAP_SIZE, (CameraCharacteristics.Key<Size>) CameraDeviceImpl.this.getCharacteristics().get(CameraCharacteristics.LENS_INFO_SHADING_MAP_SIZE));
                 Map physicalIdToChars = CameraDeviceImpl.this.getPhysicalIdToChars();
-                for (PhysicalCaptureResultInfo physicalCaptureResultInfo : readMetadata) {
+                for (PhysicalCaptureResultInfo physicalCaptureResultInfo : metadata2) {
                     String cameraId = physicalCaptureResultInfo.getCameraId();
                     CameraMetadataNative cameraMetadata = physicalCaptureResultInfo.getCameraMetadata();
                     CameraCharacteristics cameraCharacteristics = (CameraCharacteristics) physicalIdToChars.get(cameraId);
@@ -1828,19 +1929,19 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                     captureResult = captureResult2;
                     captureCallbackHolder = captureCallbackHolder2;
                 } else {
-                    List<CaptureResult> popPartialResults = CameraDeviceImpl.this.mFrameNumberTracker.popPartialResults(frameNumber);
+                    List<CaptureResult> listPopPartialResults = CameraDeviceImpl.this.mFrameNumberTracker.popPartialResults(frameNumber);
                     if (CameraDeviceImpl.this.mBatchOutputMap.containsKey(Integer.valueOf(requestId))) {
-                        for (int intValue = ((Integer) CameraDeviceImpl.this.mBatchOutputMap.get(Integer.valueOf(requestId))).intValue(); i < intValue; intValue = intValue) {
-                            CameraDeviceImpl.this.mFrameNumberTracker.popPartialResults(frameNumber - (intValue - i));
+                        for (int iIntValue = ((Integer) CameraDeviceImpl.this.mBatchOutputMap.get(Integer.valueOf(requestId))).intValue(); i < iIntValue; iIntValue = iIntValue) {
+                            CameraDeviceImpl.this.mFrameNumberTracker.popPartialResults(frameNumber - (iIntValue - i));
                             i++;
-                            popPartialResults = popPartialResults;
+                            listPopPartialResults = listPopPartialResults;
                         }
                     }
-                    final List<CaptureResult> list = popPartialResults;
-                    final long longValue = ((Long) metadata.get(CaptureResult.SENSOR_TIMESTAMP)).longValue();
+                    final List<CaptureResult> list = listPopPartialResults;
+                    final long jLongValue = ((Long) metadata.get(CaptureResult.SENSOR_TIMESTAMP)).longValue();
                     final Range range = (Range) request.get(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE);
                     final int subsequenceId = captureResultExtras.getSubsequenceId();
-                    final TotalCaptureResult totalCaptureResult = new TotalCaptureResult(CameraDeviceImpl.this.getId(), metadata, request, captureResultExtras, list, captureCallbackHolder2.getSessionId(), readMetadata);
+                    final TotalCaptureResult totalCaptureResult = new TotalCaptureResult(CameraDeviceImpl.this.getId(), metadata, request, captureResultExtras, list, captureCallbackHolder2.getSessionId(), metadata2);
                     captureCallbackHolder = captureCallbackHolder2;
                     runnable = new Runnable() { // from class: android.hardware.camera2.impl.CameraDeviceImpl.CameraDeviceCallbacks.3
                         @Override // java.lang.Runnable
@@ -1850,7 +1951,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                             }
                             if (captureCallbackHolder.hasBatchedOutputs()) {
                                 for (int i2 = 0; i2 < captureCallbackHolder.getRequestCount(); i2++) {
-                                    cameraMetadataNative.set((CaptureResult.Key<CaptureResult.Key<Long>>) CaptureResult.SENSOR_TIMESTAMP, (CaptureResult.Key<Long>) Long.valueOf(longValue - (((subsequenceId - i2) * 1000000000) / ((Integer) range.getUpper()).intValue())));
+                                    cameraMetadataNative.set((CaptureResult.Key<CaptureResult.Key<Long>>) CaptureResult.SENSOR_TIMESTAMP, (CaptureResult.Key<Long>) Long.valueOf(jLongValue - (((subsequenceId - i2) * 1000000000) / ((Integer) range.getUpper()).intValue())));
                                     captureCallbackHolder.getCallback().onCaptureCompleted(CameraDeviceImpl.this, captureCallbackHolder.getRequest(i2), new TotalCaptureResult(CameraDeviceImpl.this.getId(), new CameraMetadataNative(cameraMetadataNative), captureCallbackHolder.getRequest(i2), captureResultExtras, list, captureCallbackHolder.getSessionId(), new PhysicalCaptureResultInfo[0]));
                                 }
                                 return;
@@ -1861,16 +1962,16 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                     cameraDeviceCallbacks = this;
                     captureResult = totalCaptureResult;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     captureCallbackHolder.getExecutor().execute(runnable);
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                     CameraDeviceImpl.this.updateTracker(requestId, frameNumber, requestType, captureResult, z2);
                     if (!z2) {
                         CameraDeviceImpl.this.checkAndFireSequenceComplete();
                     }
                 } catch (Throwable th) {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                     throw th;
                 }
             }
@@ -1949,11 +2050,11 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         if (handler != null) {
             return handler;
         }
-        Looper myLooper = Looper.myLooper();
-        if (myLooper == null) {
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper == null) {
             throw new IllegalArgumentException("No handler given, and current thread has no looper!");
         }
-        return new Handler(myLooper);
+        return new Handler(looperMyLooper);
     }
 
     static <T> Handler checkHandler(Handler handler, T t) {
@@ -1995,11 +2096,11 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
                 CameraDeviceImpl.this.mDeviceCallback.onError(CameraDeviceImpl.this, 5);
             }
         };
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mDeviceExecutor.execute(runnable);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -2023,107 +2124,57 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:30:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:32:? A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:37:? A[SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r1v3, types: [int] */
     /* JADX WARN: Type inference failed for: r1v4 */
     @Override // android.hardware.camera2.CameraDevice
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void createExtensionSession(android.hardware.camera2.params.ExtensionSessionConfiguration r8) throws android.hardware.camera2.CameraAccessException {
-        /*
-            r7 = this;
-            boolean r0 = com.android.internal.camera.flags.Flags.cameraMultiClient()
-            if (r0 == 0) goto L13
-            boolean r0 = r7.mSharedMode
-            if (r0 != 0) goto Lb
-            goto L13
-        Lb:
-            java.lang.UnsupportedOperationException r7 = new java.lang.UnsupportedOperationException
-            java.lang.String r8 = "In shared session mode,extension sessions are not supported."
-            r7.<init>(r8)
-            throw r7
-        L13:
-            java.util.HashMap r2 = new java.util.HashMap
-            java.util.Map r0 = r7.getPhysicalIdToChars()
-            r2.<init>(r0)
-            java.lang.String r0 = r7.mCameraId
-            android.hardware.camera2.CameraCharacteristics r1 = r7.mCharacteristics
-            r2.put(r0, r1)
-            android.os.Binder r6 = new android.os.Binder
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>()
-            java.lang.String r1 = r7.TAG
-            r0.append(r1)
-            java.lang.String r1 = " : "
-            r0.append(r1)
-            int r1 = r7.mNextSessionId
-            int r3 = r1 + 1
-            r7.mNextSessionId = r3
-            r0.append(r1)
-            java.lang.String r0 = r0.toString()
-            r6.<init>(r0)
-            android.content.Context r0 = r7.mContext     // Catch: java.lang.Throwable -> L85 android.os.RemoteException -> L8a
-            int r1 = r8.getExtension()     // Catch: java.lang.Throwable -> L85 android.os.RemoteException -> L8a
-            java.lang.String r3 = r7.mCameraId     // Catch: java.lang.Throwable -> L85 android.os.RemoteException -> L8a
-            java.util.Map r4 = android.hardware.camera2.impl.CameraExtensionUtils.getCharacteristicsMapNative(r2)     // Catch: java.lang.Throwable -> L85 android.os.RemoteException -> L8a
-            boolean r0 = android.hardware.camera2.CameraExtensionCharacteristics.registerClient(r0, r6, r1, r3, r4)     // Catch: java.lang.Throwable -> L85 android.os.RemoteException -> L8a
-            if (r0 == 0) goto L7a
-            int r0 = r8.getExtension()     // Catch: java.lang.Throwable -> L85 android.os.RemoteException -> L8a
-            boolean r0 = android.hardware.camera2.CameraExtensionCharacteristics.areAdvancedExtensionsSupported(r0)     // Catch: java.lang.Throwable -> L85 android.os.RemoteException -> L8a
-            if (r0 == 0) goto L6d
-            android.content.Context r3 = r7.mContext     // Catch: java.lang.Throwable -> L85 android.os.RemoteException -> L8a
-            int r5 = r7.mNextSessionId     // Catch: java.lang.Throwable -> L85 android.os.RemoteException -> L8a
-            r1 = r7
-            r4 = r8
-            android.hardware.camera2.impl.CameraAdvancedExtensionSessionImpl r7 = android.hardware.camera2.impl.CameraAdvancedExtensionSessionImpl.createCameraAdvancedExtensionSession(r1, r2, r3, r4, r5, r6)     // Catch: android.os.RemoteException -> L8c java.lang.Throwable -> L93
-            r1.mCurrentAdvancedExtensionSession = r7     // Catch: android.os.RemoteException -> L8c java.lang.Throwable -> L93
-            goto L79
-        L6d:
-            r1 = r7
-            r4 = r8
-            android.content.Context r3 = r1.mContext     // Catch: android.os.RemoteException -> L8c java.lang.Throwable -> L93
-            int r5 = r1.mNextSessionId     // Catch: android.os.RemoteException -> L8c java.lang.Throwable -> L93
-            android.hardware.camera2.impl.CameraExtensionSessionImpl r7 = android.hardware.camera2.impl.CameraExtensionSessionImpl.createCameraExtensionSession(r1, r2, r3, r4, r5, r6)     // Catch: android.os.RemoteException -> L8c java.lang.Throwable -> L93
-            r1.mCurrentExtensionSession = r7     // Catch: android.os.RemoteException -> L8c java.lang.Throwable -> L93
-        L79:
-            return
-        L7a:
-            r1 = r7
-            r4 = r8
-            r6 = 0
-            java.lang.UnsupportedOperationException r7 = new java.lang.UnsupportedOperationException     // Catch: android.os.RemoteException -> L8c java.lang.Throwable -> L93
-            java.lang.String r8 = "Unsupported extension!"
-            r7.<init>(r8)     // Catch: android.os.RemoteException -> L8c java.lang.Throwable -> L93
-            throw r7     // Catch: android.os.RemoteException -> L8c java.lang.Throwable -> L93
-        L85:
-            r0 = move-exception
-            r1 = r7
-            r4 = r8
-        L88:
-            r7 = r0
-            goto L95
-        L8a:
-            r1 = r7
-            r4 = r8
-        L8c:
-            android.hardware.camera2.CameraAccessException r7 = new android.hardware.camera2.CameraAccessException     // Catch: java.lang.Throwable -> L93
-            r8 = 3
-            r7.<init>(r8)     // Catch: java.lang.Throwable -> L93
-            throw r7     // Catch: java.lang.Throwable -> L93
-        L93:
-            r0 = move-exception
-            goto L88
-        L95:
-            if (r6 == 0) goto La0
-            android.content.Context r8 = r1.mContext
-            int r0 = r4.getExtension()
-            android.hardware.camera2.CameraExtensionCharacteristics.unregisterClient(r8, r6, r0)
-        La0:
-            throw r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.camera2.impl.CameraDeviceImpl.createExtensionSession(android.hardware.camera2.params.ExtensionSessionConfiguration):void");
+    public void createExtensionSession(ExtensionSessionConfiguration extensionSessionConfiguration) throws Throwable {
+        if (Flags.cameraMultiClient() && this.mSharedMode) {
+            throw new UnsupportedOperationException("In shared session mode,extension sessions are not supported.");
+        }
+        HashMap map = new HashMap(getPhysicalIdToChars());
+        map.put(this.mCameraId, this.mCharacteristics);
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.TAG);
+        sb.append(" : ");
+        CameraDeviceImpl cameraDeviceImpl = this.mNextSessionId;
+        this.mNextSessionId = cameraDeviceImpl + 1;
+        sb.append((int) cameraDeviceImpl);
+        Binder binder = new Binder(sb.toString());
+        try {
+            try {
+                try {
+                    if (!CameraExtensionCharacteristics.registerClient(this.mContext, binder, extensionSessionConfiguration.getExtension(), this.mCameraId, CameraExtensionUtils.getCharacteristicsMapNative(map))) {
+                        throw new UnsupportedOperationException("Unsupported extension!");
+                    }
+                    if (CameraExtensionCharacteristics.areAdvancedExtensionsSupported(extensionSessionConfiguration.getExtension())) {
+                        this.mCurrentAdvancedExtensionSession = CameraAdvancedExtensionSessionImpl.createCameraAdvancedExtensionSession(this, map, this.mContext, extensionSessionConfiguration, this.mNextSessionId, binder);
+                    } else {
+                        this.mCurrentExtensionSession = CameraExtensionSessionImpl.createCameraExtensionSession(this, map, this.mContext, extensionSessionConfiguration, this.mNextSessionId, binder);
+                    }
+                } catch (RemoteException unused) {
+                    throw new CameraAccessException(3);
+                }
+            } catch (Throwable th) {
+                th = th;
+                Throwable th2 = th;
+                if (binder == null) {
+                    CameraExtensionCharacteristics.unregisterClient(cameraDeviceImpl.mContext, binder, extensionSessionConfiguration.getExtension());
+                    throw th2;
+                }
+                throw th2;
+            }
+        } catch (RemoteException unused2) {
+        } catch (Throwable th3) {
+            th = th3;
+            cameraDeviceImpl = this;
+            Throwable th22 = th;
+            if (binder == null) {
+            }
+        }
     }
 
     private List<OutputConfiguration> applyExtensionStreamOption(List<OutputConfiguration> list, CaptureRequest captureRequest) {

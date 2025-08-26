@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CoverUtilWrapper {
     public CoverSupportStrategy$$ExternalSyntheticLambda1 mActionBeforeSecureConfirm;
@@ -24,7 +23,7 @@ public class CoverUtilWrapper {
             @Override // com.android.systemui.util.CoverUtil.CoverStateChangedListener
             public final void onUpdateCoverState(CoverState coverState) {
                 CoverSupportStrategy$$ExternalSyntheticLambda1 coverSupportStrategy$$ExternalSyntheticLambda1;
-                CoverUtilWrapper coverUtilWrapper = CoverUtilWrapper.this;
+                CoverUtilWrapper coverUtilWrapper = this.f$0;
                 if (((HashMap) coverUtilWrapper.mListeners).isEmpty()) {
                     return;
                 }

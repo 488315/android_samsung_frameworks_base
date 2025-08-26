@@ -14,8 +14,8 @@ public class ParcelableGranteeMap implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public ParcelableGranteeMap createFromParcel(Parcel parcel) {
             ArrayMap arrayMap = new ArrayMap();
-            int readInt = parcel.readInt();
-            for (int i = 0; i < readInt; i++) {
+            int i = parcel.readInt();
+            for (int i2 = 0; i2 < i; i2++) {
                 arrayMap.put(Integer.valueOf(parcel.readInt()), new ArraySet(parcel.readStringArray()));
             }
             return new ParcelableGranteeMap(arrayMap);

@@ -16,7 +16,6 @@ import com.samsung.context.sdk.samsunganalytics.internal.util.Utils;
 import com.sec.android.diagmonagent.common.util.executor.SingleThreadExecutor;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PolicyUtils {
     public static int senderType = -1;
@@ -25,9 +24,9 @@ public class PolicyUtils {
         try {
             return (String) Class.forName("android.os.SystemProperties").getMethod("get", String.class).invoke(null, str);
         } catch (Exception e) {
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("failed to get system properties : ", str, ", error : ");
-            m.append(e.getMessage());
-            Debug.logwingW(m.toString());
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("failed to get system properties : ", str, ", error : ");
+            sbM.append(e.getMessage());
+            Debug.logwingW(sbM.toString());
             return "";
         }
     }
@@ -44,30 +43,30 @@ public class PolicyUtils {
         Debug.LogENG("Build policy client, trid: " + configuration.trackingId.substring(0, 7) + ", uv: " + configuration.version);
         SharedPreferences preferences = Preferences.getPreferences(context);
         API api = API.GET_POLICY;
-        HashMap hashMap = new HashMap();
-        hashMap.put("pkn", context.getPackageName());
-        hashMap.put("dm", deviceInfo.deviceModel);
+        HashMap map = new HashMap();
+        map.put("pkn", context.getPackageName());
+        map.put("dm", deviceInfo.deviceModel);
         if (!TextUtils.isEmpty(deviceInfo.mcc)) {
-            hashMap.put("mcc", deviceInfo.mcc);
+            map.put("mcc", deviceInfo.mcc);
         }
         if (!TextUtils.isEmpty(deviceInfo.mnc)) {
-            hashMap.put("mnc", deviceInfo.mnc);
+            map.put("mnc", deviceInfo.mnc);
         }
-        hashMap.put("uv", configuration.version);
-        hashMap.put("sv", "6.05.073");
-        hashMap.put("tid", configuration.trackingId);
-        String valueOf = String.valueOf(System.currentTimeMillis());
-        hashMap.put("ts", valueOf);
-        hashMap.put("hc", AuthUtil.sha256(configuration.trackingId + valueOf + ClientUtil.SALT));
+        map.put("uv", configuration.version);
+        map.put("sv", "6.05.073");
+        map.put("tid", configuration.trackingId);
+        String strValueOf = String.valueOf(System.currentTimeMillis());
+        map.put("ts", strValueOf);
+        map.put("hc", AuthUtil.sha256(configuration.trackingId + strValueOf + ClientUtil.SALT));
         String systemProperties = getSystemProperties("ro.csc.sales_code");
         if (!TextUtils.isEmpty(systemProperties)) {
-            hashMap.put("csc", systemProperties);
+            map.put("csc", systemProperties);
         }
         String systemProperties2 = getSystemProperties("ro.csc.countryiso_code");
         if (!TextUtils.isEmpty(systemProperties2)) {
-            hashMap.put("cc", systemProperties2);
+            map.put("cc", systemProperties2);
         }
-        singleThreadExecutor.execute(new PolicyClient(api, hashMap, preferences, anonymousClass7));
+        singleThreadExecutor.execute(new PolicyClient(api, map, preferences, anonymousClass7));
     }
 
     public static void useQuota(Context context, int i, int i2) {

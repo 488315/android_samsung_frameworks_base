@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsSettingsRepositoryImpl$makeFlowForSetting$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ String $setting$inlined;
@@ -43,9 +42,9 @@ public final class ControlsSettingsRepositoryImpl$makeFlowForSetting$$inlined$fl
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            Flow distinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(new ControlsSettingsRepositoryImpl$makeFlowForSetting$1$1(this.this$0, (UserInfo) this.L$1, this.$setting$inlined, null)), this.this$0.backgroundDispatcher));
+            Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.flowOn(FlowConflatedKt.conflatedCallbackFlow(new ControlsSettingsRepositoryImpl$makeFlowForSetting$1$1(this.this$0, (UserInfo) this.L$1, this.$setting$inlined, null)), this.this$0.backgroundDispatcher));
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, distinctUntilChanged, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowDistinctUntilChanged, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

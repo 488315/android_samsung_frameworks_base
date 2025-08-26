@@ -37,13 +37,13 @@ public final class NetworkScanRequest {
 
     public static final ArrayList<NetworkScanRequest> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<NetworkScanRequest> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             NetworkScanRequest networkScanRequest = new NetworkScanRequest();
-            networkScanRequest.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+            networkScanRequest.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
             arrayList.add(networkScanRequest);
         }
         return arrayList;
@@ -54,11 +54,11 @@ public final class NetworkScanRequest {
         this.interval = hwBlob.getInt32(4 + j);
         long j2 = j + 8;
         int int32 = hwBlob.getInt32(j + 16);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 72, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 72, hwBlob.handle(), j2, true);
         this.specifiers.clear();
         for (int i = 0; i < int32; i++) {
             RadioAccessSpecifier radioAccessSpecifier = new RadioAccessSpecifier();
-            radioAccessSpecifier.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 72);
+            radioAccessSpecifier.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 72);
             this.specifiers.add(radioAccessSpecifier);
         }
     }

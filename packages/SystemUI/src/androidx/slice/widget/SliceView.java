@@ -26,7 +26,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceView extends ViewGroup implements Observer, View.OnClickListener {
     public static final AnonymousClass3 SLICE_ACTION_PRIORITY_COMPARATOR = new Comparator() { // from class: androidx.slice.widget.SliceView.3
@@ -98,8 +97,8 @@ public class SliceView extends ViewGroup implements Observer, View.OnClickListen
         if (i != -1) {
             return i;
         }
-        SliceItem findSubtype = SliceQuery.findSubtype(this.mCurrentSlice, "int", "color");
-        return findSubtype != null ? findSubtype.getInt() : SliceViewUtil.getColorAttr(R.attr.colorAccent, getContext());
+        SliceItem sliceItemFindSubtype = SliceQuery.findSubtype(this.mCurrentSlice, "int", "color");
+        return sliceItemFindSubtype != null ? sliceItemFindSubtype.getInt() : SliceViewUtil.getColorAttr(R.attr.colorAccent, getContext());
     }
 
     public final boolean handleTouchForLongpress(MotionEvent motionEvent) {
@@ -322,9 +321,9 @@ public class SliceView extends ViewGroup implements Observer, View.OnClickListen
                 }
             }
         }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(size, 1073741824);
-        this.mActionRow.measure(makeMeasureSpec, View.MeasureSpec.makeMeasureSpec(i3 > 0 ? getPaddingBottom() + i3 : 0, 1073741824));
-        this.mCurrentView.measure(makeMeasureSpec, View.MeasureSpec.makeMeasureSpec(getPaddingTop() + paddingTop + (i3 <= 0 ? getPaddingBottom() : 0), 1073741824));
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(size, 1073741824);
+        this.mActionRow.measure(iMakeMeasureSpec, View.MeasureSpec.makeMeasureSpec(i3 > 0 ? getPaddingBottom() + i3 : 0, 1073741824));
+        this.mCurrentView.measure(iMakeMeasureSpec, View.MeasureSpec.makeMeasureSpec(getPaddingTop() + paddingTop + (i3 <= 0 ? getPaddingBottom() : 0), 1073741824));
         setMeasuredDimension(size, this.mActionRow.getMeasuredHeight() + this.mCurrentView.getMeasuredHeight());
     }
 
@@ -364,11 +363,11 @@ public class SliceView extends ViewGroup implements Observer, View.OnClickListen
         if (!sliceMetadata.isExpired()) {
             SliceMetadata sliceMetadata2 = this.mSliceMetadata;
             sliceMetadata2.getClass();
-            long currentTimeMillis = System.currentTimeMillis();
+            long jCurrentTimeMillis = System.currentTimeMillis();
             long j2 = sliceMetadata2.mExpiry;
             long j3 = 0;
-            if (j2 != 0 && j2 != -1 && currentTimeMillis <= j2) {
-                j3 = j2 - currentTimeMillis;
+            if (j2 != 0 && j2 != -1 && jCurrentTimeMillis <= j2) {
+                j3 = j2 - jCurrentTimeMillis;
             }
             j = 60000 + j3;
         }
@@ -408,11 +407,11 @@ public class SliceView extends ViewGroup implements Observer, View.OnClickListen
         boolean z2 = (slice == null || this.mCurrentSlice == null || !Uri.parse(slice.mUri).equals(Uri.parse(this.mCurrentSlice.mUri))) ? false : true;
         SliceMetadata sliceMetadata = this.mSliceMetadata;
         this.mCurrentSlice = slice;
-        SliceMetadata from = slice != null ? SliceMetadata.from(getContext(), this.mCurrentSlice) : null;
-        this.mSliceMetadata = from;
+        SliceMetadata sliceMetadataFrom = slice != null ? SliceMetadata.from(getContext(), this.mCurrentSlice) : null;
+        this.mSliceMetadata = sliceMetadataFrom;
         if (!z2) {
             this.mCurrentView.resetView();
-        } else if (sliceMetadata.getLoadingState() == 2 && from.getLoadingState() == 0) {
+        } else if (sliceMetadata.getLoadingState() == 2 && sliceMetadataFrom.getLoadingState() == 0) {
             return;
         }
         SliceMetadata sliceMetadata2 = this.mSliceMetadata;

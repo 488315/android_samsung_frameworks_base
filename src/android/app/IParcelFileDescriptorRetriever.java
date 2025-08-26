@@ -46,9 +46,9 @@ public interface IParcelFileDescriptorRetriever extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IParcelFileDescriptorRetriever.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IParcelFileDescriptorRetriever)) {
-                return (IParcelFileDescriptorRetriever) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IParcelFileDescriptorRetriever.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IParcelFileDescriptorRetriever)) {
+                return (IParcelFileDescriptorRetriever) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -101,16 +101,16 @@ public interface IParcelFileDescriptorRetriever extends IInterface {
 
             @Override // android.app.IParcelFileDescriptorRetriever
             public ParcelFileDescriptor getPfd() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IParcelFileDescriptorRetriever.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(IParcelFileDescriptorRetriever.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

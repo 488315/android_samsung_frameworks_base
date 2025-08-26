@@ -36,17 +36,17 @@ public final class CapabilityParams implements Parcelable {
     }
 
     private CapabilityParams(String str, String str2, Collection<String> collection) {
-        List<String> unmodifiableList;
+        List<String> listUnmodifiableList;
         Objects.requireNonNull(str);
         Objects.requireNonNull(str2);
         this.mName = str;
         this.mPrimaryValue = str2;
         if (collection == null) {
-            unmodifiableList = Collections.EMPTY_LIST;
+            listUnmodifiableList = Collections.EMPTY_LIST;
         } else {
-            unmodifiableList = Collections.unmodifiableList(new ArrayList(collection));
+            listUnmodifiableList = Collections.unmodifiableList(new ArrayList(collection));
         }
-        this.mAliases = unmodifiableList;
+        this.mAliases = listUnmodifiableList;
     }
 
     CapabilityParams(CapabilityParams capabilityParams) {

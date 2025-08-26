@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import okio.FileSystem;
 import okio.Path;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PreferenceDataStoreFactory {
     public static final PreferenceDataStoreFactory INSTANCE = new PreferenceDataStoreFactory();
@@ -26,7 +25,7 @@ public final class PreferenceDataStoreFactory {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 PreferenceDataStoreFactory preferenceDataStoreFactory = PreferenceDataStoreFactory.INSTANCE;
-                File file = (File) Function0.this.invoke();
+                File file = (File) function0.invoke();
                 if (Intrinsics.areEqual(StringsKt__StringsKt.substringAfterLast(file.getName(), ""), "preferences_pb")) {
                     return Path.Companion.get$default(Path.Companion, file.getAbsoluteFile());
                 }

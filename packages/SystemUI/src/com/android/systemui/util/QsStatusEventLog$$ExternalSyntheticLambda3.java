@@ -6,7 +6,6 @@ import com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteracto
 import java.util.LinkedHashMap;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class QsStatusEventLog$$ExternalSyntheticLambda3 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -24,17 +23,17 @@ public final /* synthetic */ class QsStatusEventLog$$ExternalSyntheticLambda3 im
         switch (i) {
             case 0:
                 SecPanelSAStatusLogRepository secPanelSAStatusLogRepository = ((SecPanelSAStatusLogInteractor) obj).repository;
-                String valueOf = String.valueOf(((Number) secPanelSAStatusLogRepository._openQuickPanelFromStatusBarInShade.getValue()).longValue());
+                String strValueOf = String.valueOf(((Number) secPanelSAStatusLogRepository._openQuickPanelFromStatusBarInShade.getValue()).longValue());
                 StateFlowImpl stateFlowImpl = secPanelSAStatusLogRepository._openQuickPanelFromStatusBarInKeyguard;
-                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_EXPANDED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_SEPARATE, "indicator_excluding_lockscreen", valueOf, "indicator_lockscreen", String.valueOf(((Number) stateFlowImpl.getValue()).longValue()));
+                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_EXPANDED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_SEPARATE, "indicator_excluding_lockscreen", strValueOf, "indicator_lockscreen", String.valueOf(((Number) stateFlowImpl.getValue()).longValue()));
                 StateFlowImpl stateFlowImpl2 = secPanelSAStatusLogRepository._openQuickPanelFromWipeDownInShade;
-                String valueOf2 = String.valueOf(((Number) stateFlowImpl2.getValue()).longValue());
+                String strValueOf2 = String.valueOf(((Number) stateFlowImpl2.getValue()).longValue());
                 StateFlowImpl stateFlowImpl3 = secPanelSAStatusLogRepository._openQuickPanelFromWipeDownInKeyguard;
-                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_EXPANDED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_SEPARATE, "swipe_down_on_the_notification_panel_excluding_lockscreen", valueOf2, "swipe_down_on_the_notification_panel_lockscreen", String.valueOf(((Number) stateFlowImpl3.getValue()).longValue()));
+                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_EXPANDED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_SEPARATE, "swipe_down_on_the_notification_panel_excluding_lockscreen", strValueOf2, "swipe_down_on_the_notification_panel_lockscreen", String.valueOf(((Number) stateFlowImpl3.getValue()).longValue()));
                 StateFlowImpl stateFlowImpl4 = secPanelSAStatusLogRepository._openQuickPanelFromHorizontalSwipingInShade;
-                String valueOf3 = String.valueOf(((Number) stateFlowImpl4.getValue()).longValue());
+                String strValueOf3 = String.valueOf(((Number) stateFlowImpl4.getValue()).longValue());
                 StateFlowImpl stateFlowImpl5 = secPanelSAStatusLogRepository._openQuickPanelFromHorizontalSwipingInKeyguard;
-                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_EXPANDED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_SEPARATE, "swipe_left_on_the_notification_panel_excluding_lockscreen", valueOf3, "swipe_left_on_the_notification_panel_lockscreen", String.valueOf(((Number) stateFlowImpl5.getValue()).longValue()));
+                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_EXPANDED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_SEPARATE, "swipe_left_on_the_notification_panel_excluding_lockscreen", strValueOf3, "swipe_left_on_the_notification_panel_lockscreen", String.valueOf(((Number) stateFlowImpl5.getValue()).longValue()));
                 secPanelSAStatusLogRepository._openQuickPanelFromStatusBarInShade.updateState(null, 0L);
                 stateFlowImpl.updateState(null, 0L);
                 stateFlowImpl2.updateState(null, 0L);
@@ -44,17 +43,17 @@ public final /* synthetic */ class QsStatusEventLog$$ExternalSyntheticLambda3 im
                 break;
             case 1:
                 SecPanelSAStatusLogRepository secPanelSAStatusLogRepository2 = ((SecPanelSAStatusLogInteractor) obj).repository;
-                String valueOf4 = String.valueOf(((Number) secPanelSAStatusLogRepository2._openQuickPanelFrom1DepthStatusBarInShade.getValue()).longValue());
+                String strValueOf4 = String.valueOf(((Number) secPanelSAStatusLogRepository2._openQuickPanelFrom1DepthStatusBarInShade.getValue()).longValue());
                 StateFlowImpl stateFlowImpl6 = secPanelSAStatusLogRepository2._openQuickPanelFrom1DepthStatusBarInKeyguard;
-                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_OPENED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_TOGETHER, "QPN001 indicator_excluding_lockscreen", valueOf4, "QPN001 indicator_lockscreen", String.valueOf(((Number) stateFlowImpl6.getValue()).longValue()));
+                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_OPENED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_TOGETHER, "QPN001 indicator_excluding_lockscreen", strValueOf4, "QPN001 indicator_lockscreen", String.valueOf(((Number) stateFlowImpl6.getValue()).longValue()));
                 StateFlowImpl stateFlowImpl7 = secPanelSAStatusLogRepository2._openQuickPanelFrom1DepthEtcInShade;
-                long longValue = ((Number) stateFlowImpl7.getValue()).longValue();
+                long jLongValue = ((Number) stateFlowImpl7.getValue()).longValue();
                 StateFlowImpl stateFlowImpl8 = secPanelSAStatusLogRepository2._openQuickPanelFrom1DepthEtcInKeyguard;
-                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_OPENED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_TOGETHER, "QPN001 etc", String.valueOf(((Number) stateFlowImpl8.getValue()).longValue() + longValue));
+                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_OPENED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_TOGETHER, "QPN001 etc", String.valueOf(((Number) stateFlowImpl8.getValue()).longValue() + jLongValue));
                 StateFlowImpl stateFlowImpl9 = secPanelSAStatusLogRepository2._openQuickPanelFrom2Depth;
-                String valueOf5 = String.valueOf(((Number) stateFlowImpl9.getValue()).longValue());
+                String strValueOf5 = String.valueOf(((Number) stateFlowImpl9.getValue()).longValue());
                 StateFlowImpl stateFlowImpl10 = secPanelSAStatusLogRepository2._openQuickPanelFrom2Depth2Finger;
-                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_OPENED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_TOGETHER, "QPP101 swipe_down", valueOf5, "QPP101 two_finger", String.valueOf(((Number) stateFlowImpl10.getValue()).longValue()));
+                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_OPENED, SystemUIAnalytics.EID_OPEN_QUICK_PANEL_TOGETHER, "QPP101 swipe_down", strValueOf5, "QPP101 two_finger", String.valueOf(((Number) stateFlowImpl10.getValue()).longValue()));
                 secPanelSAStatusLogRepository2._openQuickPanelFrom1DepthStatusBarInShade.updateState(null, 0L);
                 stateFlowImpl6.updateState(null, 0L);
                 stateFlowImpl7.updateState(null, 0L);

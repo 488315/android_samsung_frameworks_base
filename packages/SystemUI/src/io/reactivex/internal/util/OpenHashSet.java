@@ -2,7 +2,6 @@ package io.reactivex.internal.util;
 
 import io.reactivex.disposables.Disposable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class OpenHashSet {
     public Object[] keys;
@@ -20,8 +19,8 @@ public final class OpenHashSet {
         Object obj2;
         Object[] objArr = this.keys;
         int i = this.mask;
-        int hashCode = disposable.hashCode() * (-1640531527);
-        int i2 = (hashCode ^ (hashCode >>> 16)) & i;
+        int iHashCode = disposable.hashCode() * (-1640531527);
+        int i2 = (iHashCode ^ (iHashCode >>> 16)) & i;
         Object obj3 = objArr[i2];
         if (obj3 != null) {
             if (obj3.equals(disposable)) {
@@ -58,8 +57,8 @@ public final class OpenHashSet {
                 length--;
                 obj = objArr2[length];
             } while (obj == null);
-            int hashCode2 = obj.hashCode() * (-1640531527);
-            int i7 = (hashCode2 ^ (hashCode2 >>> 16)) & i5;
+            int iHashCode2 = obj.hashCode() * (-1640531527);
+            int i7 = (iHashCode2 ^ (iHashCode2 >>> 16)) & i5;
             if (objArr3[i7] != null) {
                 do {
                     i7 = (i7 + 1) & i5;
@@ -83,14 +82,15 @@ public final class OpenHashSet {
                     objArr[i] = null;
                     return;
                 }
-                int hashCode = obj.hashCode() * (-1640531527);
-                int i5 = (hashCode ^ (hashCode >>> 16)) & i2;
-                if (i > i3) {
-                    if (i >= i5 && i5 > i3) {
+                int iHashCode = obj.hashCode() * (-1640531527);
+                int i5 = (iHashCode ^ (iHashCode >>> 16)) & i2;
+                if (i <= i3) {
+                    if (i >= i5 || i5 > i3) {
                         break;
+                    } else {
+                        i4 = i3 + 1;
                     }
-                    i4 = i3 + 1;
-                } else if (i < i5 && i5 <= i3) {
+                } else if (i < i5 || i5 <= i3) {
                     i4 = i3 + 1;
                 }
             }
@@ -105,9 +105,9 @@ public final class OpenHashSet {
 
     public OpenHashSet(int i, float f) {
         this.loadFactor = f;
-        int numberOfLeadingZeros = 1 << (32 - Integer.numberOfLeadingZeros(i - 1));
-        this.mask = numberOfLeadingZeros - 1;
-        this.maxSize = (int) (f * numberOfLeadingZeros);
-        this.keys = new Object[numberOfLeadingZeros];
+        int iNumberOfLeadingZeros = 1 << (32 - Integer.numberOfLeadingZeros(i - 1));
+        this.mask = iNumberOfLeadingZeros - 1;
+        this.maxSize = (int) (f * iNumberOfLeadingZeros);
+        this.keys = new Object[iNumberOfLeadingZeros];
     }
 }

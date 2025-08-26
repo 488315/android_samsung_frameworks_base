@@ -78,7 +78,7 @@ public class TextureView extends View {
         this.mUpdateListener = new SurfaceTexture.OnFrameAvailableListener() { // from class: android.view.TextureView$$ExternalSyntheticLambda0
             @Override // android.graphics.SurfaceTexture.OnFrameAvailableListener
             public final void onFrameAvailable(SurfaceTexture surfaceTexture) {
-                TextureView.this.lambda$new$1(surfaceTexture);
+                this.f$0.lambda$new$1(surfaceTexture);
             }
         };
         this.mRenderNode.setIsTextureView();
@@ -95,7 +95,7 @@ public class TextureView extends View {
         this.mUpdateListener = new SurfaceTexture.OnFrameAvailableListener() { // from class: android.view.TextureView$$ExternalSyntheticLambda0
             @Override // android.graphics.SurfaceTexture.OnFrameAvailableListener
             public final void onFrameAvailable(SurfaceTexture surfaceTexture) {
-                TextureView.this.lambda$new$1(surfaceTexture);
+                this.f$0.lambda$new$1(surfaceTexture);
             }
         };
         this.mRenderNode.setIsTextureView();
@@ -112,7 +112,7 @@ public class TextureView extends View {
         this.mUpdateListener = new SurfaceTexture.OnFrameAvailableListener() { // from class: android.view.TextureView$$ExternalSyntheticLambda0
             @Override // android.graphics.SurfaceTexture.OnFrameAvailableListener
             public final void onFrameAvailable(SurfaceTexture surfaceTexture) {
-                TextureView.this.lambda$new$1(surfaceTexture);
+                this.f$0.lambda$new$1(surfaceTexture);
             }
         };
         this.mRenderNode.setIsTextureView();
@@ -129,7 +129,7 @@ public class TextureView extends View {
         this.mUpdateListener = new SurfaceTexture.OnFrameAvailableListener() { // from class: android.view.TextureView$$ExternalSyntheticLambda0
             @Override // android.graphics.SurfaceTexture.OnFrameAvailableListener
             public final void onFrameAvailable(SurfaceTexture surfaceTexture) {
-                TextureView.this.lambda$new$1(surfaceTexture);
+                this.f$0.lambda$new$1(surfaceTexture);
             }
         };
         this.mRenderNode.setIsTextureView();
@@ -188,11 +188,11 @@ public class TextureView extends View {
         SurfaceTexture surfaceTexture = this.mSurface;
         if (surfaceTexture != null) {
             SurfaceTextureListener surfaceTextureListener = this.mListener;
-            boolean onSurfaceTextureDestroyed = surfaceTextureListener != null ? surfaceTextureListener.onSurfaceTextureDestroyed(surfaceTexture) : true;
+            boolean zOnSurfaceTextureDestroyed = surfaceTextureListener != null ? surfaceTextureListener.onSurfaceTextureDestroyed(surfaceTexture) : true;
             synchronized (this.mNativeWindowLock) {
                 nDestroyNativeWindow();
             }
-            if (onSurfaceTextureDestroyed) {
+            if (zOnSurfaceTextureDestroyed) {
                 this.mSurface.release();
             }
             this.mSurface = null;
@@ -277,7 +277,7 @@ public class TextureView extends View {
                 this.mSurface.setOnSetFrameRateListener(new SurfaceTexture.OnSetFrameRateListener() { // from class: android.view.TextureView$$ExternalSyntheticLambda1
                     @Override // android.graphics.SurfaceTexture.OnSetFrameRateListener
                     public final void onSetFrameRate(SurfaceTexture surfaceTexture2, float f, int i, int i2) {
-                        TextureView.this.lambda$getTextureLayer$0(surfaceTexture2, f, i, i2);
+                        this.f$0.lambda$getTextureLayer$0(surfaceTexture2, f, i, i2);
                     }
                 }, this.mAttachInfo.mHandler);
             }

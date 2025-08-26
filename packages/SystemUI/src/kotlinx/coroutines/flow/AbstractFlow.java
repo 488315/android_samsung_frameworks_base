@@ -1,81 +1,85 @@
 package kotlinx.coroutines.flow;
 
+import kotlin.ResultKt;
+import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlinx.coroutines.flow.internal.SafeCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractFlow implements Flow, CancellableFlow {
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+
+    /* renamed from: kotlinx.coroutines.flow.AbstractFlow$collect$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return AbstractFlow.this.collect(null, this);
+        }
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // kotlinx.coroutines.flow.Flow
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object collect(kotlinx.coroutines.flow.FlowCollector r5, kotlin.coroutines.Continuation r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof kotlinx.coroutines.flow.AbstractFlow$collect$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            kotlinx.coroutines.flow.AbstractFlow$collect$1 r0 = (kotlinx.coroutines.flow.AbstractFlow$collect$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            kotlinx.coroutines.flow.AbstractFlow$collect$1 r0 = new kotlinx.coroutines.flow.AbstractFlow$collect$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L35
-            if (r2 != r3) goto L2d
-            java.lang.Object r4 = r0.L$0
-            kotlinx.coroutines.flow.internal.SafeCollector r4 = (kotlinx.coroutines.flow.internal.SafeCollector) r4
-            kotlin.ResultKt.throwOnFailure(r6)     // Catch: java.lang.Throwable -> L2b
-            goto L4d
-        L2b:
-            r5 = move-exception
-            goto L57
-        L2d:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L35:
-            kotlin.ResultKt.throwOnFailure(r6)
-            kotlinx.coroutines.flow.internal.SafeCollector r6 = new kotlinx.coroutines.flow.internal.SafeCollector
-            kotlin.coroutines.CoroutineContext r2 = r0.getContext()
-            r6.<init>(r5, r2)
-            r0.L$0 = r6     // Catch: java.lang.Throwable -> L55
-            r0.label = r3     // Catch: java.lang.Throwable -> L55
-            java.lang.Object r4 = r4.collectSafely(r6, r0)     // Catch: java.lang.Throwable -> L55
-            if (r4 != r1) goto L4c
-            return r1
-        L4c:
-            r4 = r6
-        L4d:
-            r4.releaseIntercepted()
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        L53:
-            r4 = r6
-            goto L57
-        L55:
-            r5 = move-exception
-            goto L53
-        L57:
-            r4.releaseIntercepted()
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.flow.AbstractFlow.collect(kotlinx.coroutines.flow.FlowCollector, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object collect(FlowCollector flowCollector, Continuation continuation) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        SafeCollector safeCollector;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 != 0) {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            safeCollector = (SafeCollector) anonymousClass1.L$0;
+            try {
+                ResultKt.throwOnFailure(obj);
+                safeCollector.releaseIntercepted();
+                return Unit.INSTANCE;
+            } catch (Throwable th) {
+                th = th;
+                safeCollector.releaseIntercepted();
+                throw th;
+            }
+        }
+        ResultKt.throwOnFailure(obj);
+        SafeCollector safeCollector2 = new SafeCollector(flowCollector, anonymousClass1.getContext());
+        try {
+            anonymousClass1.L$0 = safeCollector2;
+            anonymousClass1.label = 1;
+            if (collectSafely(safeCollector2, anonymousClass1) == obj2) {
+                return obj2;
+            }
+            safeCollector = safeCollector2;
+            safeCollector.releaseIntercepted();
+            return Unit.INSTANCE;
+        } catch (Throwable th2) {
+            th = th2;
+            safeCollector = safeCollector2;
+            safeCollector.releaseIntercepted();
+            throw th;
+        }
     }
 
     public abstract Object collectSafely(SafeCollector safeCollector, Continuation continuation);

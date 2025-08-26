@@ -6,7 +6,6 @@ import android.hardware.biometrics.BiometricPrompt;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.Looper;
-import com.samsung.android.globalactions.util.BiometricPromptWrapper;
 import java.util.concurrent.Executor;
 
 /* loaded from: classes6.dex */
@@ -34,7 +33,7 @@ public class BiometricPromptWrapper {
                 BiometricPromptWrapper.this.mHandler.postDelayed(new Runnable() { // from class: com.samsung.android.globalactions.util.BiometricPromptWrapper$1$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BiometricPromptWrapper.AnonymousClass1.this.lambda$onAuthenticationError$0();
+                        this.f$0.lambda$onAuthenticationError$0();
                     }
                 }, 100L);
             }
@@ -51,7 +50,7 @@ public class BiometricPromptWrapper {
                 BiometricPromptWrapper.this.mHandler.post(new Runnable() { // from class: com.samsung.android.globalactions.util.BiometricPromptWrapper$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BiometricPromptWrapper.AnonymousClass1.this.lambda$onAuthenticationSucceeded$1();
+                        this.f$0.lambda$onAuthenticationSucceeded$1();
                     }
                 });
             }
@@ -90,8 +89,8 @@ public class BiometricPromptWrapper {
     }
 
     public boolean canAuthenticate(int i) {
-        int canAuthenticate = this.mBiometricManager.canAuthenticate(i);
-        this.mLogWrapper.i(TAG, "canAuthenticate() : " + canAuthenticate);
-        return canAuthenticate == 0;
+        int iCanAuthenticate = this.mBiometricManager.canAuthenticate(i);
+        this.mLogWrapper.i(TAG, "canAuthenticate() : " + iCanAuthenticate);
+        return iCanAuthenticate == 0;
     }
 }

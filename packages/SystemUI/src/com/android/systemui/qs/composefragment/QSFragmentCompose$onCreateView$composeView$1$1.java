@@ -21,7 +21,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class QSFragmentCompose$onCreateView$composeView$1$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ ComposeView $this_apply;
@@ -30,7 +29,6 @@ final class QSFragmentCompose$onCreateView$composeView$1$1 extends SuspendLambda
     int label;
     final /* synthetic */ QSFragmentCompose this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.composefragment.QSFragmentCompose$onCreateView$composeView$1$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ LifecycleOwner $$this$repeatWhenAttached;
@@ -71,9 +69,9 @@ final class QSFragmentCompose$onCreateView$composeView$1$1 extends SuspendLambda
 
                 {
                     OnBackPressedDispatcher onBackPressedDispatcher = new OnBackPressedDispatcher(null, 1, null);
-                    onBackPressedDispatcher.setOnBackInvokedDispatcher(r5.getViewRootImpl().getOnBackInvokedDispatcher());
+                    onBackPressedDispatcher.setOnBackInvokedDispatcher(view.getViewRootImpl().getOnBackInvokedDispatcher());
                     this.onBackPressedDispatcher = onBackPressedDispatcher;
-                    this.lifecycle = r4.getLifecycle();
+                    this.lifecycle = lifecycleOwner.getLifecycle();
                 }
 
                 @Override // androidx.lifecycle.LifecycleOwner
@@ -89,23 +87,27 @@ final class QSFragmentCompose$onCreateView$composeView$1$1 extends SuspendLambda
             ComposeView composeView = this.$this_apply;
             final QSFragmentCompose qSFragmentCompose = this.this$0;
             composeView.setContent(new ComposableLambdaImpl(587635122, true, new Function2() { // from class: com.android.systemui.qs.composefragment.QSFragmentCompose.onCreateView.composeView.1.1.1.2
+                /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
                 @Override // kotlin.jvm.functions.Function2
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final Object invoke(Object obj2, Object obj3) {
                     Composer composer = (Composer) obj2;
                     if ((((Number) obj3).intValue() & 3) == 2) {
                         ComposerImpl composerImpl = (ComposerImpl) composer;
                         if (composerImpl.getSkipping()) {
                             composerImpl.skipToGroupEnd();
-                            return Unit.INSTANCE;
+                        } else {
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventStart("com.android.systemui.qs.composefragment.QSFragmentCompose.onCreateView.<anonymous>.<anonymous>.<anonymous>.<anonymous> (QSFragmentCompose.kt:235)");
+                            }
+                            int i = QSFragmentCompose.$r8$clinit;
+                            qSFragmentCompose.Content$1(0, composer);
+                            if (ComposerKt.isTraceInProgress()) {
+                                ComposerKt.traceEventEnd();
+                            }
                         }
-                    }
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventStart("com.android.systemui.qs.composefragment.QSFragmentCompose.onCreateView.<anonymous>.<anonymous>.<anonymous>.<anonymous> (QSFragmentCompose.kt:235)");
-                    }
-                    int i = QSFragmentCompose.$r8$clinit;
-                    QSFragmentCompose.this.Content$1(0, composer);
-                    if (ComposerKt.isTraceInProgress()) {
-                        ComposerKt.traceEventEnd();
                     }
                     return Unit.INSTANCE;
                 }

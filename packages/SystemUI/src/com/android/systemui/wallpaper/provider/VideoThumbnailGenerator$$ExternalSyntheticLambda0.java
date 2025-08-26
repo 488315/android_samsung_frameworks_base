@@ -9,7 +9,6 @@ import com.android.systemui.wallpaper.engines.video.VideoSource;
 import com.samsung.android.wallpaper.utils.SemWallpaperProperties;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class VideoThumbnailGenerator$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ VideoThumbnailGenerator f$0;
@@ -27,7 +26,7 @@ public final /* synthetic */ class VideoThumbnailGenerator$$ExternalSyntheticLam
     }
 
     @Override // java.util.function.Consumer
-    public final void accept(Object obj) {
+    public final void accept(Object obj) throws NumberFormatException {
         VideoSource videoSource = this.f$1;
         Context context = this.f$2;
         Bitmap[] bitmapArr = this.f$3;

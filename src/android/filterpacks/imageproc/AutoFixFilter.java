@@ -77,9 +77,9 @@ public class AutoFixFilter extends Filter {
         for (int i = 0; i < 1024; i++) {
             iArr[i] = (int) ((normal_cdf[i] * 65535) / 766);
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(1024, 1, 3, 3));
-        this.mDensityFrame = newFrame;
-        newFrame.setInts(iArr);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(1024, 1, 3, 3));
+        this.mDensityFrame = frameNewFrame;
+        frameNewFrame.setInts(iArr);
     }
 
     @Override // android.filterfw.core.Filter
@@ -106,8 +106,8 @@ public class AutoFixFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
         if (this.mShaderProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
             initParameters();
@@ -116,12 +116,12 @@ public class AutoFixFilter extends Filter {
             this.mWidth = format.getWidth();
             int height = format.getHeight();
             this.mHeight = height;
-            createHistogramFrame(filterContext, this.mWidth, height, pullInput.getInts());
+            createHistogramFrame(filterContext, this.mWidth, height, framePullInput.getInts());
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
-        this.mShaderProgram.process(new Frame[]{pullInput, this.mHistFrame, this.mDensityFrame}, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
+        this.mShaderProgram.process(new Frame[]{framePullInput, this.mHistFrame, this.mDensityFrame}, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 
     private void createHistogramFrame(FilterContext filterContext, int i, int i2, int[] iArr) {
@@ -142,13 +142,13 @@ public class AutoFixFilter extends Filter {
         for (int i11 = 0; i11 < 766; i11++) {
             iArr2[i11] = (int) ((iArr2[i11] * 65535) / i5);
         }
-        MutableFrameFormat create = ImageFormat.create(766, 1, 3, 3);
+        MutableFrameFormat mutableFrameFormatCreate = ImageFormat.create(766, 1, 3, 3);
         Frame frame = this.mHistFrame;
         if (frame != null) {
             frame.release();
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(create);
-        this.mHistFrame = newFrame;
-        newFrame.setInts(iArr2);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(mutableFrameFormatCreate);
+        this.mHistFrame = frameNewFrame;
+        frameNewFrame.setInts(iArr2);
     }
 }

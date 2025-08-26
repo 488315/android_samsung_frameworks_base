@@ -32,14 +32,14 @@ public final class SSLSessionCache {
     }
 
     public SSLSessionCache(Context context) {
-        SSLClientSessionCache sSLClientSessionCache;
+        SSLClientSessionCache sSLClientSessionCacheUsingDirectory;
         File dir = context.getDir("sslcache", 0);
         try {
-            sSLClientSessionCache = FileClientSessionCache.usingDirectory(dir);
+            sSLClientSessionCacheUsingDirectory = FileClientSessionCache.usingDirectory(dir);
         } catch (IOException e) {
             Log.w(TAG, "Unable to create SSL session cache in " + dir, e);
-            sSLClientSessionCache = null;
+            sSLClientSessionCacheUsingDirectory = null;
         }
-        this.mSessionCache = sSLClientSessionCache;
+        this.mSessionCache = sSLClientSessionCacheUsingDirectory;
     }
 }

@@ -15,7 +15,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StackEducationView extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,7 +25,6 @@ public final class StackEducationView extends LinearLayout {
     public final Lazy titleTextView$delegate;
     public final Lazy view$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,7 +34,6 @@ public final class StackEducationView extends LinearLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Manager {
     }
 
@@ -137,7 +134,7 @@ public final class StackEducationView extends LinearLayout {
         }
         this.isHiding = true;
         ((BubbleStackViewManager$Companion$fromBubbleController$1) ((BubbleStackView$$ExternalSyntheticLambda18) this.manager).f$0).$controller.updateWindowFlagsForBackpress(false);
-        animate().alpha(0.0f).setDuration(z ? 40L : 200L).withEndAction(new Runnable() { // from class: com.android.wm.shell.bubbles.StackEducationView$hide$1
+        animate().alpha(0.0f).setDuration(z ? 40L : 200L).withEndAction(new Runnable() { // from class: com.android.wm.shell.bubbles.StackEducationView.hide.1
             @Override // java.lang.Runnable
             public final void run() {
                 StackEducationView.this.setVisibility(8);
@@ -149,7 +146,7 @@ public final class StackEducationView extends LinearLayout {
     public final void onAttachedToWindow() {
         super.onAttachedToWindow();
         setFocusableInTouchMode(true);
-        setOnKeyListener(new View.OnKeyListener() { // from class: com.android.wm.shell.bubbles.StackEducationView$onAttachedToWindow$1
+        setOnKeyListener(new View.OnKeyListener() { // from class: com.android.wm.shell.bubbles.StackEducationView.onAttachedToWindow.1
             @Override // android.view.View.OnKeyListener
             public final boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if (keyEvent.getAction() == 1 && i == 4) {
@@ -175,13 +172,13 @@ public final class StackEducationView extends LinearLayout {
     public final void onFinishInflate() {
         super.onFinishInflate();
         setLayoutDirection(getResources().getConfiguration().getLayoutDirection());
-        TypedArray obtainStyledAttributes = ((LinearLayout) this).mContext.obtainStyledAttributes(new int[]{android.R.attr.colorAccent, android.R.attr.textColorPrimaryInverse});
-        int color = obtainStyledAttributes.getColor(0, -16777216);
-        int color2 = obtainStyledAttributes.getColor(1, -1);
-        obtainStyledAttributes.recycle();
-        int ensureTextContrast = ContrastColorUtil.ensureTextContrast(color2, color, true);
-        ((TextView) this.titleTextView$delegate.getValue()).setTextColor(ensureTextContrast);
-        ((TextView) this.descTextView$delegate.getValue()).setTextColor(ensureTextContrast);
+        TypedArray typedArrayObtainStyledAttributes = ((LinearLayout) this).mContext.obtainStyledAttributes(new int[]{android.R.attr.colorAccent, android.R.attr.textColorPrimaryInverse});
+        int color = typedArrayObtainStyledAttributes.getColor(0, -16777216);
+        int color2 = typedArrayObtainStyledAttributes.getColor(1, -1);
+        typedArrayObtainStyledAttributes.recycle();
+        int iEnsureTextContrast = ContrastColorUtil.ensureTextContrast(color2, color, true);
+        ((TextView) this.titleTextView$delegate.getValue()).setTextColor(iEnsureTextContrast);
+        ((TextView) this.descTextView$delegate.getValue()).setTextColor(iEnsureTextContrast);
     }
 
     @Override // android.view.View

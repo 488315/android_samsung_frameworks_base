@@ -14,7 +14,6 @@ import com.android.systemui.popup.view.PopupUIAlertDialogFactory;
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import com.samsung.android.view.SemWindowManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SimTrayProtectionViewModel implements PopupUIViewModel, WakefulnessLifecycle.Observer {
     private static final String TAG = "SimTrayProtectionViewModel";

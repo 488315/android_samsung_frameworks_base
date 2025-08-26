@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.SuggestionsAdapter$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.TooltipPopup$$ExternalSyntheticOutline0;
+import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
@@ -42,12 +43,12 @@ import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.sdk.cover.ScoverManager;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockManagerImpl implements PluginLockManager, KeyguardListener.SPlugin, KeyguardListener.UserSwitch, DesktopManager.Callback, Dumpable {
     private static final String DO_NOT_DISTURB_TASK = "Dnd";
@@ -109,7 +110,7 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         SettingsHelper.OnChangedCallback onChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.pluginlock.PluginLockManagerImpl$$ExternalSyntheticLambda3
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                PluginLockManagerImpl.this.lambda$new$0(uri);
+                this.f$0.lambda$new$0(uri);
             }
         };
         this.mSettingsCallback = onChangedCallback;
@@ -134,8 +135,8 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         } else {
             this.mScreenList = new int[]{0};
         }
-        boolean isOwnerProcess = isOwnerProcess();
-        if (settingsHelper != null && isOwnerProcess) {
+        boolean zIsOwnerProcess = isOwnerProcess();
+        if (settingsHelper != null && zIsOwnerProcess) {
             settingsHelper.registerCallback(onChangedCallback, uriArr);
         }
         if (LsRune.LOCKUI_SUB_DISPLAY_LOCK || LsRune.WALLPAPER_SUB_WATCHFACE) {
@@ -158,7 +159,7 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
             ((KeyguardFoldControllerImpl) keyguardFoldController).addCallback(new KeyguardFoldController.StateListener() { // from class: com.android.systemui.pluginlock.PluginLockManagerImpl$$ExternalSyntheticLambda4
                 @Override // com.android.systemui.keyguard.KeyguardFoldController.StateListener
                 public final void onFoldStateChanged(boolean z) {
-                    PluginLockManagerImpl.this.onFolderStateChanged(z);
+                    this.f$0.onFolderStateChanged(z);
                 }
             }, 1000, false);
         }
@@ -379,17 +380,17 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
     }
 
     private void setLatestPluginInstance(int i, boolean z) {
-        boolean isCurrentOwner = this.mUtils.isCurrentOwner();
-        Log.d(TAG, "setLatestPluginInstance map size: " + this.mLockPluginMap.size() + ", isCurrentOwner:" + isCurrentOwner);
-        if (isCurrentOwner) {
-            long j = 0;
+        boolean zIsCurrentOwner = this.mUtils.isCurrentOwner();
+        Log.d(TAG, "setLatestPluginInstance map size: " + this.mLockPluginMap.size() + ", isCurrentOwner:" + zIsCurrentOwner);
+        if (zIsCurrentOwner) {
+            long jLongValue = 0;
             Map.Entry<String, PluginLockInstanceState> entry = null;
             for (Map.Entry<String, PluginLockInstanceState> entry2 : this.mLockPluginMap.entrySet()) {
                 PluginLockInstanceData.Data data = entry2.getValue().getData();
                 if (data != null) {
                     Long timeStamps = LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION ? data.getTimeStamps(i) : data.getTimeStamp();
-                    if (timeStamps != null && j < timeStamps.longValue()) {
-                        j = timeStamps.longValue();
+                    if (timeStamps != null && jLongValue < timeStamps.longValue()) {
+                        jLongValue = timeStamps.longValue();
                         entry = entry2;
                     }
                 }
@@ -445,20 +446,20 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         }
         updateEnabledState(i, z2);
         PluginLockUtils pluginLockUtils = this.mUtils;
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("[PluginLock Switching]\n screen:", i, "\n enable:", z, "\n pluginValue(final):");
-        m.append(currentPluginValue);
-        m.append("\n pluginValue(current):");
-        m.append(getCurrentPluginValue(i));
-        m.append("\n pluginValue(setting):");
-        m.append(this.mSettingsHelper.getPluginLockValue(i));
-        m.append("\n wasEnabled:");
-        m.append(z3);
-        m.append("\n isEnabled:");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, this.mIsDynamicEnabled, "\n isForcedDisable:", z2, "\n isOwnerProcess:");
-        m.append(isOwnerProcess());
-        m.append("\n isCurrentOwner:");
-        m.append(this.mUtils.isCurrentOwner());
-        pluginLockUtils.addDump(TAG, m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("[PluginLock Switching]\n screen:", i, "\n enable:", z, "\n pluginValue(final):");
+        sbM.append(currentPluginValue);
+        sbM.append("\n pluginValue(current):");
+        sbM.append(getCurrentPluginValue(i));
+        sbM.append("\n pluginValue(setting):");
+        sbM.append(this.mSettingsHelper.getPluginLockValue(i));
+        sbM.append("\n wasEnabled:");
+        sbM.append(z3);
+        sbM.append("\n isEnabled:");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mIsDynamicEnabled, "\n isForcedDisable:", z2, "\n isOwnerProcess:");
+        sbM.append(isOwnerProcess());
+        sbM.append("\n isCurrentOwner:");
+        sbM.append(this.mUtils.isCurrentOwner());
+        pluginLockUtils.addDump(TAG, sbM.toString());
         if (z && currentPluginValue != 0 && this.mUtils.isGoingToRescueParty()) {
             this.mUtils.addDump(TAG, "[PluginLock Switching] getting disabled by the rescue party");
             this.mSettingsHelper.setPluginLockValue(i, 0);
@@ -467,8 +468,8 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         if (z) {
             this.mMediator.setLockscreenEnabled(true);
             this.mMediator.registerUpdateMonitor();
-            Set<String> keySet = this.mLockPluginMap.keySet();
-            Iterator<String> it = keySet.iterator();
+            Set<String> setKeySet = this.mLockPluginMap.keySet();
+            Iterator<String> it = setKeySet.iterator();
             while (it.hasNext()) {
                 PluginLockInstanceState pluginLockInstanceState4 = this.mLockPluginMap.get(it.next());
                 if (pluginLockInstanceState4 == null) {
@@ -483,20 +484,20 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
                     }
                 }
             }
-            Iterator<String> it2 = keySet.iterator();
+            Iterator<String> it2 = setKeySet.iterator();
             while (true) {
                 if (!it2.hasNext() || (pluginLockInstanceState2 = this.mLockPluginMap.get((next = it2.next()))) == null) {
                     break;
                 }
                 if (this.mPolicy.isSameInstance(currentPluginValue, pluginLockInstanceState2.getAllowedNumber())) {
                     PluginLockUtils pluginLockUtils2 = this.mUtils;
-                    StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "[PluginLock Switching] enable, screen: ", ", mScreenType: ");
-                    m2.append(this.mScreenType);
-                    m2.append(", key:");
-                    m2.append(next);
-                    m2.append(", number:");
-                    m2.append(currentPluginValue);
-                    pluginLockUtils2.addDump(TAG, m2.toString());
+                    StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "[PluginLock Switching] enable, screen: ", ", mScreenType: ");
+                    sbM2.append(this.mScreenType);
+                    sbM2.append(", key:");
+                    sbM2.append(next);
+                    sbM2.append(", number:");
+                    sbM2.append(currentPluginValue);
+                    pluginLockUtils2.addDump(TAG, sbM2.toString());
                     PluginLock pluginLockInstance = pluginLockInstanceState2.getPluginLockInstance();
                     if (!LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION || i == this.mScreenType) {
                         setPluginInstance(i, pluginLockInstanceState2);
@@ -549,9 +550,9 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
                 }
                 if (currentPluginValue == 0 || currentPluginValue == 20000 || currentPluginValue == 30000 || this.mPolicy.isSameInstance(currentPluginValue, pluginLockInstanceState5.getAllowedNumber())) {
                     PluginLockUtils pluginLockUtils3 = this.mUtils;
-                    StringBuilder m3 = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(currentPluginValue, "[PluginLock Switching] disable, pluginValue:", "key:", str, ", number:");
-                    m3.append(pluginLockInstanceState5.getAllowedNumber());
-                    pluginLockUtils3.addDump(TAG, m3.toString());
+                    StringBuilder sbM3 = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(currentPluginValue, "[PluginLock Switching] disable, pluginValue:", "key:", str, ", number:");
+                    sbM3.append(pluginLockInstanceState5.getAllowedNumber());
+                    pluginLockUtils3.addDump(TAG, sbM3.toString());
                     notifyPluginLockModeChanged(pluginLockInstanceState5.getPluginLockInstance(), i, false);
                     if (currentPluginValue == 0) {
                         if (pluginLockInstanceState5.getPluginLockTimeStamp() > 0) {
@@ -613,22 +614,22 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
 
     @Override // com.android.systemui.pluginlock.PluginLockManager
     public boolean getShortcutTaskState(String str) {
-        boolean z;
+        boolean zIsEnabled;
         if (str.equals("Dnd")) {
             if (this.mTaskDnd == null) {
                 this.mTaskDnd = new PluginLockShortcutDnd(this.mContext, this.mMediator);
             }
-            z = this.mTaskDnd.isEnabled();
+            zIsEnabled = this.mTaskDnd.isEnabled();
         } else if (str.equals("Flashlight")) {
             if (this.mTaskFlashLight == null) {
                 this.mTaskFlashLight = new PluginLockShortcutFlashLight(this.mContext, this.mMediator);
             }
-            z = this.mTaskFlashLight.isEnabled();
+            zIsEnabled = this.mTaskFlashLight.isEnabled();
         } else {
-            z = false;
+            zIsEnabled = false;
         }
-        LogUtil.d(TAG, FakeFeatures$$ExternalSyntheticOutline0.m("getShortcutTaskState [taskName] ", str, ",[isEnable] ", z), new Object[0]);
-        return z;
+        LogUtil.d(TAG, FakeFeatures$$ExternalSyntheticOutline0.m("getShortcutTaskState [taskName] ", str, ",[isEnable] ", zIsEnabled), new Object[0]);
+        return zIsEnabled;
     }
 
     @Override // com.android.systemui.pluginlock.PluginLockManager
@@ -667,8 +668,10 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
                     break;
                 }
             }
+            pluginLockInstanceState = null;
+        } else {
+            pluginLockInstanceState = null;
         }
-        pluginLockInstanceState = null;
         if (LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION && isDynamicLockEnabled()) {
             try {
                 if (this.mInstanceState != null) {
@@ -696,9 +699,9 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
             }
             updateEnabledState(this.mScreenType, false);
         }
-        boolean isDynamicLockEnabled = isDynamicLockEnabled();
-        this.mMediator.setEnabled(isDynamicLockEnabled);
-        if (isDynamicLockEnabled) {
+        boolean zIsDynamicLockEnabled = isDynamicLockEnabled();
+        this.mMediator.setEnabled(zIsDynamicLockEnabled);
+        if (zIsDynamicLockEnabled) {
             try {
                 if (this.mInstanceState != null) {
                     Log.i(TAG, "onFolderStateChanged, new: " + this.mInstanceState.getPackageName());
@@ -712,9 +715,9 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
 
     @Override // com.android.systemui.pluginlock.listener.KeyguardListener.SPlugin
     public void onPluginConnected(PluginLock pluginLock, Context context) {
-        boolean isOwnerProcess = isOwnerProcess();
-        Log.d(TAG, "onPluginConnected : " + context.getPackageName() + ", isOwnerProcess: " + isOwnerProcess);
-        if (isOwnerProcess) {
+        boolean zIsOwnerProcess = isOwnerProcess();
+        Log.d(TAG, "onPluginConnected : " + context.getPackageName() + ", isOwnerProcess: " + zIsOwnerProcess);
+        if (zIsOwnerProcess) {
             PluginLockInstanceState pluginLockInstanceState = new PluginLockInstanceState(pluginLock, context, this.mUtils);
             if (LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION) {
                 migration(pluginLockInstanceState);
@@ -767,17 +770,79 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         this.mMediator.registerStateCallback(state);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0070  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0118  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void removeInstance(int r14, com.samsung.systemui.splugins.pluginlock.PluginLock r15) {
-        /*
-            Method dump skipped, instructions count: 321
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.PluginLockManagerImpl.removeInstance(int, com.samsung.systemui.splugins.pluginlock.PluginLock):void");
+    public void removeInstance(int i, PluginLock pluginLock) {
+        Log.d(TAG, "removeInstance() reason " + i);
+        ArrayList arrayList = new ArrayList();
+        Iterator<Map.Entry<String, PluginLockInstanceState>> it = this.mLockPluginMap.entrySet().iterator();
+        boolean z = false;
+        while (it.hasNext()) {
+            PluginLockInstanceState value = it.next().getValue();
+            if (value.getPluginLockInstance() == pluginLock) {
+                PluginLockUtils pluginLockUtils = this.mUtils;
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "disconnected, reason: ", ", package:");
+                sbM.append(value.getPackageName());
+                pluginLockUtils.addDump(TAG, sbM.toString());
+                for (int i2 : this.mScreenList) {
+                    boolean z2 = LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION;
+                    if (z2) {
+                        if (value.isRecentInstance(i2)) {
+                            if (i == 0) {
+                                if (z2) {
+                                    value.setStateData(i2, false);
+                                } else {
+                                    value.setTimeStamp(false);
+                                }
+                                if (isPluginLockPackage(value.getPackageName())) {
+                                    this.mUtils.addDump(TAG, "plugin Package removed" + value.getPackageName());
+                                    this.mRemovedPackageName = value.getPackageName();
+                                }
+                                z = true;
+                            }
+                            notifyPluginLockModeChanged(pluginLock, i2, false);
+                            this.mMediator.resetConfigs();
+                            this.mMediator.resetDynamicLockData(false);
+                            this.mMediator.resetDynamicLock();
+                        }
+                    } else if (value.isRecentInstance()) {
+                    }
+                }
+                arrayList.add(value.getPackageName());
+            }
+        }
+        int size = arrayList.size();
+        int i3 = 0;
+        while (i3 < size) {
+            Object obj = arrayList.get(i3);
+            i3++;
+            String str = (String) obj;
+            PluginLockInstanceState pluginLockInstanceState = this.mLockPluginMap.get(str);
+            Log.d(TAG, "removeInstance() pkgName:" + str + ", state: " + pluginLockInstanceState + ", map size: " + this.mLockPluginMap.size());
+            if (pluginLockInstanceState != null) {
+                for (int i4 : this.mScreenList) {
+                    if (LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION) {
+                        if (pluginLockInstanceState.isRecentInstance(i4)) {
+                            this.mPluginLock = null;
+                            this.mInstanceState = null;
+                            this.mMediator.updateWindowSecureState(false);
+                            this.mDelegateApp.setBasicManager(null);
+                            this.mDelegateSysUi.setPluginLockInstanceState(i4, null);
+                        }
+                    } else if (pluginLockInstanceState.isRecentInstance()) {
+                    }
+                }
+                pluginLockInstanceState.destroy();
+            }
+            this.mLockPluginMap.remove(str);
+        }
+        arrayList.clear();
+        if (z) {
+            setLatestPluginInstance(true);
+        }
     }
 
     @Override // com.android.systemui.pluginlock.PluginLockManager
@@ -805,18 +870,80 @@ public class PluginLockManagerImpl implements PluginLockManager, KeyguardListene
         this.mMediator.resetDynamicLock();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:69:0x01a4  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x01ad  */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x0184  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setPluginInstanceState(com.android.systemui.pluginlock.PluginLockInstanceState r14) {
-        /*
-            Method dump skipped, instructions count: 463
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.PluginLockManagerImpl.setPluginInstanceState(com.android.systemui.pluginlock.PluginLockInstanceState):void");
+    public void setPluginInstanceState(PluginLockInstanceState pluginLockInstanceState) {
+        boolean z = false;
+        boolean z2 = false;
+        for (int i : this.mScreenList) {
+            int pluginLockValue = this.mSettingsHelper.getPluginLockValue(i);
+            if (!z) {
+                z = pluginLockValue == 20000;
+            }
+            if (!z2) {
+                z2 = pluginLockValue == 30000;
+            }
+            Log.d(TAG, "setPluginInstanceState() settingValue:" + pluginLockValue + ", " + pluginLockInstanceState);
+            if (!pluginLockInstanceState.hasEnabledPlugin(i) && pluginLockValue % 10 > 0) {
+                this.mUtils.addDump(TAG, "setPluginInstanceState(): abnormal case detected: " + pluginLockValue);
+                int allowedNumber = pluginLockInstanceState.getAllowedNumber();
+                if (this.mPolicy.isSameInstance(pluginLockValue, allowedNumber)) {
+                    this.mUtils.addDump(TAG, "setPluginInstanceState(): " + allowedNumber + " will have a timestamp");
+                    if (LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION) {
+                        pluginLockInstanceState.setStateData(i, true);
+                    } else {
+                        pluginLockInstanceState.setTimeStamp(true);
+                    }
+                }
+            }
+        }
+        Log.d(TAG, "setPluginInstanceState() getPackageName " + pluginLockInstanceState.getPackageName());
+        putPluginInstanceToMap(pluginLockInstanceState.getPackageName(), pluginLockInstanceState);
+        if (this.mPolicy.isDefaultInstance(pluginLockInstanceState.getAllowedNumber())) {
+            this.mMediator.onReady();
+            if (Settings.System.getInt(this.mCr, "tss_activated", 0) == 1) {
+                this.mUtils.addDump(TAG, "TSS Activated");
+                Settings.System.putInt(this.mCr, "tss_activated", 0);
+                new Handler(Looper.getMainLooper()).postDelayed(new PluginLockManagerImpl$$ExternalSyntheticLambda1(this, 1), 500L);
+            }
+        }
+        this.mUtils.addDump(TAG, "connected: " + pluginLockInstanceState.getPackageName());
+        if (z && (this.mSettingsHelper.isEmergencyMode() || this.mSettingsHelper.isPowerSavingMode())) {
+            this.mUtils.addDump(TAG, "setPluginInstanceState() skip, disabled by mode");
+            return;
+        }
+        if (z2 && !this.mUtils.isCurrentOwner()) {
+            this.mUtils.addDump(TAG, "setPluginInstanceState() skip, disabled by user");
+            this.mMediator.registerUpdateMonitor();
+            return;
+        }
+        if (this.mRemovedPackageName != null && isPluginLockPackage(pluginLockInstanceState.getPackageName()) && this.mRemovedPackageName.equals(pluginLockInstanceState.getPackageName())) {
+            this.mUtils.addDump(TAG, "Re install after deleting package " + this.mRemovedPackageName);
+            this.mMediator.onDataCleared();
+            this.mRemovedPackageName = null;
+        }
+        for (int i2 : this.mScreenList) {
+            boolean z3 = LsRune.PLUGIN_LOCK_MULTIPLE_ACTIVATION;
+            if (z3) {
+                if (pluginLockInstanceState.isRecentInstance(i2)) {
+                    if (!z3 || this.mScreenType == i2) {
+                        this.mInstanceState = pluginLockInstanceState;
+                        this.mPluginLock = pluginLockInstanceState.getPluginLockInstance();
+                    }
+                    int pluginLockValue2 = this.mSettingsHelper.getPluginLockValue(i2);
+                    int allowedNumber2 = pluginLockInstanceState.getAllowedNumber();
+                    int i3 = this.mPolicy.isSameInstance(pluginLockValue2, allowedNumber2) ? allowedNumber2 + (pluginLockValue2 % 10 == 1 ? 2 : 1) : allowedNumber2 + 1;
+                    PluginLockUtils pluginLockUtils = this.mUtils;
+                    StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i2, pluginLockValue2, "setPluginInstanceState screen:", ", now:", ", new:");
+                    sbM.append(i3);
+                    pluginLockUtils.addDump(TAG, sbM.toString());
+                    this.mSettingsHelper.setPluginLockValue(i2, i3);
+                }
+            } else if (pluginLockInstanceState.isRecentInstance()) {
+            }
+        }
     }
 
     public void updateLockStarData(Bundle bundle) {

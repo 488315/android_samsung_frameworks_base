@@ -13,7 +13,6 @@ import com.android.systemui.statusbar.notification.row.NotificationRowContentBin
 import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
 import kotlin.ExceptionsKt__ExceptionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotifInflaterImpl implements NotifInflater {
     public final NotifInflaterLogger mLogger;
@@ -39,18 +38,17 @@ public class NotifInflaterImpl implements NotifInflater {
             LogLevel logLevel = LogLevel.WARNING;
             NotifInflaterLogger$$ExternalSyntheticLambda0 notifInflaterLogger$$ExternalSyntheticLambda0 = new NotifInflaterLogger$$ExternalSyntheticLambda0(0);
             LogBuffer logBuffer = notifInflaterLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotifInflater", logLevel, notifInflaterLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("NotifInflater", logLevel, notifInflaterLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry);
             logMessageImpl.str2 = ExceptionsKt__ExceptionsKt.stackTraceToString(e);
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             notifInflationErrorManager.setInflationError(notificationEntry, e);
         } catch (RuntimeException e2) {
             notifInflationErrorManager.setInflationError(notificationEntry, e2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.collection.NotifInflaterImpl$1, reason: invalid class name */
     public class AnonymousClass1 implements NotificationRowContentBinder.InflationCallback {
         public final /* synthetic */ NotifInflater.InflationCallback val$callback;

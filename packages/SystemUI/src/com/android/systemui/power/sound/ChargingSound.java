@@ -11,7 +11,6 @@ import com.android.systemui.PowerUiRune;
 import com.samsung.android.media.SemSoundAssistantManager;
 import java.util.HashSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ChargingSound extends PowerUiSound {
     public final AnonymousClass1 mChargingSoundVibrationHandler;
@@ -49,11 +48,11 @@ public class ChargingSound extends PowerUiSound {
             return true;
         }
         Log.i("ChargingSound", "Check charging sound condition");
-        int semGetCurrentDeviceType = this.mAudioManager.semGetCurrentDeviceType();
+        int iSemGetCurrentDeviceType = this.mAudioManager.semGetCurrentDeviceType();
         if (!PowerUiRune.AUDIO_DISABLE_HEADSET_CHARGING_SOUND) {
             return true;
         }
-        if (semGetCurrentDeviceType != 3 && semGetCurrentDeviceType != 4) {
+        if (iSemGetCurrentDeviceType != 3 && iSemGetCurrentDeviceType != 4) {
             return true;
         }
         Log.w("ChargingSound", "Should skip charging sound headset noise model...");
@@ -64,11 +63,11 @@ public class ChargingSound extends PowerUiSound {
     public final AudioAttributes getAudioAttribute() {
         HashSet hashSet = new HashSet();
         hashSet.add("FAST_TRACK");
-        AudioAttributes.Builder replaceTags = new AudioAttributes.Builder().setInternalLegacyStreamType(1).replaceTags(hashSet);
+        AudioAttributes.Builder builderReplaceTags = new AudioAttributes.Builder().setInternalLegacyStreamType(1).replaceTags(hashSet);
         if (PowerUiRune.AUDIO_SUPPORT_SITUATION_EXTENSION) {
-            replaceTags.semAddAudioTag("stv_charger_connection");
+            builderReplaceTags.semAddAudioTag("stv_charger_connection");
         }
-        return replaceTags.build();
+        return builderReplaceTags.build();
     }
 
     @Override // com.android.systemui.power.sound.PowerUiSound

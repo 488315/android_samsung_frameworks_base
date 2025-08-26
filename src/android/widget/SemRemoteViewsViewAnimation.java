@@ -61,12 +61,12 @@ public class SemRemoteViewsViewAnimation extends SemRemoteViewsAnimation {
 
     @Override // android.widget.SemRemoteViewsAnimation
     protected void startAnimation(View view) {
-        View findViewById;
-        Animation loadAnimation;
-        if (view == null || this.mAnimResId <= 0 || this.mIsExpired || (findViewById = view.findViewById(this.mViewId)) == null || (loadAnimation = AnimationUtils.loadAnimation(view.getContext(), this.mAnimResId)) == null) {
+        View viewFindViewById;
+        Animation animationLoadAnimation;
+        if (view == null || this.mAnimResId <= 0 || this.mIsExpired || (viewFindViewById = view.findViewById(this.mViewId)) == null || (animationLoadAnimation = AnimationUtils.loadAnimation(view.getContext(), this.mAnimResId)) == null) {
             return;
         }
-        loadAnimation.setAnimationListener(new Animation.AnimationListener() { // from class: android.widget.SemRemoteViewsViewAnimation.2
+        animationLoadAnimation.setAnimationListener(new Animation.AnimationListener() { // from class: android.widget.SemRemoteViewsViewAnimation.2
             @Override // android.view.animation.Animation.AnimationListener
             public void onAnimationRepeat(Animation animation) {
             }
@@ -81,8 +81,8 @@ public class SemRemoteViewsViewAnimation extends SemRemoteViewsAnimation {
             }
         });
         if (this.mIsExpired) {
-            loadAnimation.setDuration(0L);
+            animationLoadAnimation.setDuration(0L);
         }
-        findViewById.startAnimation(loadAnimation);
+        viewFindViewById.startAnimation(animationLoadAnimation);
     }
 }

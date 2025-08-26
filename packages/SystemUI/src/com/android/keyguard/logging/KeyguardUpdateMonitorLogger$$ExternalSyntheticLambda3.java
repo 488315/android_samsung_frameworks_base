@@ -12,7 +12,6 @@ import com.android.keyguard.KeyguardFMMViewController$$ExternalSyntheticOutline0
 import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -23,16 +22,16 @@ public final /* synthetic */ class KeyguardUpdateMonitorLogger$$ExternalSyntheti
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
                 int int1 = logMessage.getInt1();
                 String str1 = logMessage.getStr1();
                 String str2 = logMessage.getStr2();
-                StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int1, "startListeningForFace(): ", ", reason: ", str1, " ");
-                m.append(str2);
-                return m.toString();
+                StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int1, "startListeningForFace(): ", ", reason: ", str1, " ");
+                sbM.append(str2);
+                return sbM.toString();
             case 1:
                 return "sendPrimaryBouncerChanged primaryBouncerIsOrWillBeShowing=" + logMessage.getBool1() + " primaryBouncerFullyShown=" + logMessage.getBool2();
             case 2:
@@ -51,9 +50,9 @@ public final /* synthetic */ class KeyguardUpdateMonitorLogger$$ExternalSyntheti
                 int int2 = logMessage.getInt2();
                 int int12 = logMessage.getInt1();
                 String str12 = logMessage.getStr1();
-                StringBuilder m2 = MutableObjectList$$ExternalSyntheticOutline0.m(int2, int12, "Fingerprint scheduling retry auth after ", " ms due to(", ") -> ");
-                m2.append(str12);
-                return m2.toString();
+                StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(int2, int12, "Fingerprint scheduling retry auth after ", " ms due to(", ") -> ");
+                sbM2.append(str12);
+                return sbM2.toString();
             case 9:
                 return KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("TaskStackChanged for ACTIVITY_TYPE_ASSISTANT, assistant visible: ", logMessage.getBool1());
             case 10:
@@ -74,9 +73,9 @@ public final /* synthetic */ class KeyguardUpdateMonitorLogger$$ExternalSyntheti
                 int int13 = logMessage.getInt1();
                 String str13 = logMessage.getStr1();
                 String str22 = logMessage.getStr2();
-                StringBuilder m3 = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int13, "action SERVICE_PROVIDERS_UPDATED subId=", " spn=", str13, " plmn=");
-                m3.append(str22);
-                return m3.toString();
+                StringBuilder sbM3 = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int13, "action SERVICE_PROVIDERS_UPDATED subId=", " spn=", str13, " plmn=");
+                sbM3.append(str22);
+                return sbM3.toString();
             case 18:
                 return "userStopped userId: " + logMessage.getInt1() + " isUnlocked: " + logMessage.getBool1();
             case 19:
@@ -92,23 +91,23 @@ public final /* synthetic */ class KeyguardUpdateMonitorLogger$$ExternalSyntheti
                 String str14 = logMessage.getStr1();
                 int int22 = logMessage.getInt2();
                 long long2 = logMessage.getLong2();
-                StringBuilder m4 = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("handleBatteryUpdate: isNotNull: ", int14, " BatteryStatus{status= ", bool1, ", level=");
-                m4.append(long1);
-                m4.append(", plugged=");
-                m4.append(str14);
-                m4.append(", chargingStatus=");
-                m4.append(int22);
-                m4.append(", maxChargingWattage= ");
-                return MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(long2, "}", m4);
+                StringBuilder sbM4 = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("handleBatteryUpdate: isNotNull: ", int14, " BatteryStatus{status= ", bool1, ", level=");
+                sbM4.append(long1);
+                sbM4.append(", plugged=");
+                sbM4.append(str14);
+                sbM4.append(", chargingStatus=");
+                sbM4.append(int22);
+                sbM4.append(", maxChargingWattage= ");
+                return MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(long2, "}", sbM4);
             case 23:
                 return "onAuthInterruptDetected(" + logMessage.getBool1() + ")";
             case 24:
                 String str15 = logMessage.getStr1();
                 String str23 = logMessage.getStr2();
                 boolean bool12 = logMessage.getBool1();
-                StringBuilder m5 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("reportUserRequestedUnlock origin=", str15, " reason=", str23, " dismissKeyguard=");
-                m5.append(bool12);
-                return m5.toString();
+                StringBuilder sbM5 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("reportUserRequestedUnlock origin=", str15, " reason=", str23, " dismissKeyguard=");
+                sbM5.append(bool12);
+                return sbM5.toString();
             case 25:
                 return "userUnlockedInitialState userId: " + logMessage.getInt1() + " isUnlocked: " + logMessage.getBool1();
             case 26:

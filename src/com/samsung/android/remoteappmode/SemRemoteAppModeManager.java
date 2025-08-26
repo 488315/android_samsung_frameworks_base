@@ -188,11 +188,11 @@ public final class SemRemoteAppModeManager {
         }
 
         public String toString() {
-            String valueOf;
+            String strValueOf;
             synchronized (SemRemoteAppModeManager.sLock) {
-                valueOf = String.valueOf(this.mListener);
+                strValueOf = String.valueOf(this.mListener);
             }
-            return valueOf;
+            return strValueOf;
         }
 
         void nullOutListenerLocked() {
@@ -270,11 +270,11 @@ public final class SemRemoteAppModeManager {
         }
 
         public String toString() {
-            String valueOf;
+            String strValueOf;
             synchronized (SemRemoteAppModeManager.sLock) {
-                valueOf = String.valueOf(this.mListener);
+                strValueOf = String.valueOf(this.mListener);
             }
-            return valueOf;
+            return strValueOf;
         }
 
         void nullOutListenerLocked() {
@@ -318,8 +318,8 @@ public final class SemRemoteAppModeManager {
             if (map == null) {
                 return;
             }
-            TaskChangeListenerDelegate remove = map.remove(taskChangeListener);
-            if (remove == null) {
+            TaskChangeListenerDelegate taskChangeListenerDelegateRemove = map.remove(taskChangeListener);
+            if (taskChangeListenerDelegateRemove == null) {
                 Log.w(TAG, "unregisterTaskChangeListener: " + taskChangeListener + " already unregistered");
                 return;
             }
@@ -327,12 +327,12 @@ public final class SemRemoteAppModeManager {
                 this.mTaskChangeListeners = null;
             }
             try {
-                this.mService.unregisterTaskChangeListener(remove);
+                this.mService.unregisterTaskChangeListener(taskChangeListenerDelegateRemove);
                 Log.i(TAG, "unregisterTaskChangeListener: " + taskChangeListener);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
-            remove.nullOutListenerLocked();
+            taskChangeListenerDelegateRemove.nullOutListenerLocked();
         }
     }
 
@@ -419,11 +419,11 @@ public final class SemRemoteAppModeManager {
         }
 
         public String toString() {
-            String valueOf;
+            String strValueOf;
             synchronized (SemRemoteAppModeManager.sLock) {
-                valueOf = String.valueOf(this.mListener);
+                strValueOf = String.valueOf(this.mListener);
             }
-            return valueOf;
+            return strValueOf;
         }
 
         void nullOutListenerLocked() {
@@ -467,8 +467,8 @@ public final class SemRemoteAppModeManager {
             if (map == null) {
                 return;
             }
-            RotationChangedListenerDelegate remove = map.remove(rotationChangedListener);
-            if (remove == null) {
+            RotationChangedListenerDelegate rotationChangedListenerDelegateRemove = map.remove(rotationChangedListener);
+            if (rotationChangedListenerDelegateRemove == null) {
                 Log.w(TAG, "unregisterRotationChangeListener: " + rotationChangedListener + " already unregistered");
                 return;
             }
@@ -476,12 +476,12 @@ public final class SemRemoteAppModeManager {
                 this.mRotationChangedListeners = null;
             }
             try {
-                this.mService.unregisterRotationChangeListener(remove);
+                this.mService.unregisterRotationChangeListener(rotationChangedListenerDelegateRemove);
                 Log.i(TAG, "unregisterRotationChangeListener: " + rotationChangedListener);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
-            remove.nullOutListenerLocked();
+            rotationChangedListenerDelegateRemove.nullOutListenerLocked();
         }
     }
 
@@ -517,11 +517,11 @@ public final class SemRemoteAppModeManager {
         }
 
         public String toString() {
-            String valueOf;
+            String strValueOf;
             synchronized (SemRemoteAppModeManager.sLock) {
-                valueOf = String.valueOf(this.mListener);
+                strValueOf = String.valueOf(this.mListener);
             }
-            return valueOf;
+            return strValueOf;
         }
 
         void nullOutListenerLocked() {
@@ -565,8 +565,8 @@ public final class SemRemoteAppModeManager {
             if (map == null) {
                 return;
             }
-            SecureAppChangedListenerDelegate remove = map.remove(secureAppChangedListener);
-            if (remove == null) {
+            SecureAppChangedListenerDelegate secureAppChangedListenerDelegateRemove = map.remove(secureAppChangedListener);
+            if (secureAppChangedListenerDelegateRemove == null) {
                 Log.w(TAG, "unregisterSecureAppChangedListener: " + secureAppChangedListener + " already unregistered");
                 return;
             }
@@ -574,33 +574,34 @@ public final class SemRemoteAppModeManager {
                 this.mSecureAppChangedListeners = null;
             }
             try {
-                this.mService.unregisterSecureAppChangedListener(remove);
+                this.mService.unregisterSecureAppChangedListener(secureAppChangedListenerDelegateRemove);
                 Log.i(TAG, "unregisterSecureAppChangedListener: " + secureAppChangedListener);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
-            remove.nullOutListenerLocked();
+            secureAppChangedListenerDelegateRemove.nullOutListenerLocked();
         }
     }
 
     public void clearAll() {
+        Map<StartActivityInterceptedListener, StartActivityInterceptedListenerDelegate> map;
         synchronized (sLock) {
             try {
                 this.mService.clearAll();
-                Map<TaskChangeListener, TaskChangeListenerDelegate> map = this.mTaskChangeListeners;
-                if (map != null) {
-                    map.clear();
-                }
-                Map<SecureAppChangedListener, SecureAppChangedListenerDelegate> map2 = this.mSecureAppChangedListeners;
+                Map<TaskChangeListener, TaskChangeListenerDelegate> map2 = this.mTaskChangeListeners;
                 if (map2 != null) {
                     map2.clear();
                 }
-                Map<StartActivityInterceptedListener, StartActivityInterceptedListenerDelegate> map3 = this.mStartActivityInterceptedListeners;
+                Map<SecureAppChangedListener, SecureAppChangedListenerDelegate> map3 = this.mSecureAppChangedListeners;
                 if (map3 != null) {
                     map3.clear();
                 }
+                map = this.mStartActivityInterceptedListeners;
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
+            }
+            if (map != null) {
+                map.clear();
             }
         }
     }
@@ -625,11 +626,11 @@ public final class SemRemoteAppModeManager {
         }
 
         public String toString() {
-            String valueOf;
+            String strValueOf;
             synchronized (SemRemoteAppModeManager.sLock) {
-                valueOf = String.valueOf(this.mListener);
+                strValueOf = String.valueOf(this.mListener);
             }
-            return valueOf;
+            return strValueOf;
         }
 
         void nullOutListenerLocked() {
@@ -673,8 +674,8 @@ public final class SemRemoteAppModeManager {
             if (map == null) {
                 return;
             }
-            StartActivityInterceptedListenerDelegate remove = map.remove(startActivityInterceptedListener);
-            if (remove == null) {
+            StartActivityInterceptedListenerDelegate startActivityInterceptedListenerDelegateRemove = map.remove(startActivityInterceptedListener);
+            if (startActivityInterceptedListenerDelegateRemove == null) {
                 Log.w(TAG, "unregisterListener: " + startActivityInterceptedListener + " already unregistered");
                 return;
             }
@@ -682,12 +683,12 @@ public final class SemRemoteAppModeManager {
                 this.mStartActivityInterceptedListeners = null;
             }
             try {
-                this.mService.unregisterStartActivityInterceptListener(remove);
+                this.mService.unregisterStartActivityInterceptListener(startActivityInterceptedListenerDelegateRemove);
                 Log.i(TAG, "unregisterListener: " + startActivityInterceptedListener);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
-            remove.nullOutListenerLocked();
+            startActivityInterceptedListenerDelegateRemove.nullOutListenerLocked();
         }
     }
 
@@ -745,11 +746,11 @@ public final class SemRemoteAppModeManager {
         }
 
         public String toString() {
-            String valueOf;
+            String strValueOf;
             synchronized (SemRemoteAppModeManager.sLock) {
-                valueOf = String.valueOf(this.mListener);
+                strValueOf = String.valueOf(this.mListener);
             }
-            return valueOf;
+            return strValueOf;
         }
 
         void nullOutListenerLocked() {
@@ -793,8 +794,8 @@ public final class SemRemoteAppModeManager {
             if (map == null) {
                 return;
             }
-            RemoteAppModeListenerDelegate remove = map.remove(remoteAppModeListener);
-            if (remove == null) {
+            RemoteAppModeListenerDelegate remoteAppModeListenerDelegateRemove = map.remove(remoteAppModeListener);
+            if (remoteAppModeListenerDelegateRemove == null) {
                 Log.w(TAG, "unregisterRemoteAppModeListener: " + remoteAppModeListener + " already unregistered");
                 return;
             }
@@ -802,12 +803,12 @@ public final class SemRemoteAppModeManager {
                 this.mRemoteAppModeListeners = null;
             }
             try {
-                this.mService.unregisterRemoteAppModeListener(remove);
+                this.mService.unregisterRemoteAppModeListener(remoteAppModeListenerDelegateRemove);
                 Log.i(TAG, "unregisterRemoteAppModeListener: " + remoteAppModeListener);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
-            remove.nullOutListenerLocked();
+            remoteAppModeListenerDelegateRemove.nullOutListenerLocked();
         }
     }
 }

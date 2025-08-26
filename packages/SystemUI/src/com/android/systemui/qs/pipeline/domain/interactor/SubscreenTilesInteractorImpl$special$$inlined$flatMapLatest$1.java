@@ -1,12 +1,19 @@
 package com.android.systemui.qs.pipeline.domain.interactor;
 
+import com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl;
+import com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl$getInstalledTilesComponents$$inlined$map$1;
+import com.android.systemui.qs.pipeline.data.repository.TileSpecRepository;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
+import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
+import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SubscreenTilesInteractorImpl$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     int I$0;
@@ -29,87 +36,52 @@ public final class SubscreenTilesInteractorImpl$special$$inlined$flatMapLatest$1
         return subscreenTilesInteractorImpl$special$$inlined$flatMapLatest$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x006d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x006d, code lost:
     
         if (kotlinx.coroutines.flow.FlowKt.emitAll(r3, r1, r8) == r0) goto L20;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r9) {
-        /*
-            r8 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r8.label
-            r2 = 2
-            r3 = 1
-            if (r1 == 0) goto L22
-            if (r1 == r3) goto L18
-            if (r1 != r2) goto L10
-            kotlin.ResultKt.throwOnFailure(r9)
-            goto L70
-        L10:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-            r8.<init>(r9)
-            throw r8
-        L18:
-            int r1 = r8.I$0
-            java.lang.Object r3 = r8.L$0
-            kotlinx.coroutines.flow.FlowCollector r3 = (kotlinx.coroutines.flow.FlowCollector) r3
-            kotlin.ResultKt.throwOnFailure(r9)
-            goto L45
-        L22:
-            kotlin.ResultKt.throwOnFailure(r9)
-            java.lang.Object r9 = r8.L$0
-            kotlinx.coroutines.flow.FlowCollector r9 = (kotlinx.coroutines.flow.FlowCollector) r9
-            java.lang.Object r1 = r8.L$1
-            java.lang.Number r1 = (java.lang.Number) r1
-            int r1 = r1.intValue()
-            com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl r4 = r8.this$0
-            com.android.systemui.qs.pipeline.data.repository.TileSpecRepository r4 = r4.tileSpecRepository
-            r8.L$0 = r9
-            r8.I$0 = r1
-            r8.label = r3
-            java.lang.Object r3 = r4.tilesSpecs(r1, r8)
-            if (r3 != r0) goto L42
-            goto L6f
-        L42:
-            r7 = r3
-            r3 = r9
-            r9 = r7
-        L45:
-            kotlinx.coroutines.flow.Flow r9 = (kotlinx.coroutines.flow.Flow) r9
-            com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl r4 = r8.this$0
-            com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepository r4 = r4.installedTilesComponentRepository
-            com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl r4 = (com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl) r4
-            java.util.Map r5 = r4.userMap
-            monitor-enter(r5)
-            kotlinx.coroutines.flow.StateFlow r4 = r4.getForUserLocked(r1)     // Catch: java.lang.Throwable -> L73
-            monitor-exit(r5)
-            com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl$getInstalledTilesComponents$$inlined$map$1 r5 = new com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl$getInstalledTilesComponents$$inlined$map$1
-            r5.<init>(r4)
-            com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$userAndTiles$1$1 r4 = new com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$userAndTiles$1$1
-            r6 = 0
-            r4.<init>(r1, r6)
-            kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 r1 = new kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1
-            r1.<init>(r9, r5, r4)
-            r8.L$0 = r6
-            r8.label = r2
-            java.lang.Object r8 = kotlinx.coroutines.flow.FlowKt.emitAll(r3, r1, r8)
-            if (r8 != r0) goto L70
-        L6f:
-            return r0
-        L70:
-            kotlin.Unit r8 = kotlin.Unit.INSTANCE
-            return r8
-        L73:
-            r8 = move-exception
-            monitor-exit(r5)
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.pipeline.domain.interactor.SubscreenTilesInteractorImpl$special$$inlined$flatMapLatest$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        int iIntValue;
+        FlowCollector flowCollector;
+        StateFlow forUserLocked;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            FlowCollector flowCollector2 = (FlowCollector) this.L$0;
+            iIntValue = ((Number) this.L$1).intValue();
+            TileSpecRepository tileSpecRepository = this.this$0.tileSpecRepository;
+            this.L$0 = flowCollector2;
+            this.I$0 = iIntValue;
+            this.label = 1;
+            Object objTilesSpecs = tileSpecRepository.tilesSpecs(iIntValue, this);
+            if (objTilesSpecs != coroutineSingletons) {
+                flowCollector = flowCollector2;
+                obj = objTilesSpecs;
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        iIntValue = this.I$0;
+        flowCollector = (FlowCollector) this.L$0;
+        ResultKt.throwOnFailure(obj);
+        Flow flow = (Flow) obj;
+        InstalledTilesComponentRepositoryImpl installedTilesComponentRepositoryImpl = (InstalledTilesComponentRepositoryImpl) this.this$0.installedTilesComponentRepository;
+        synchronized (installedTilesComponentRepositoryImpl.userMap) {
+            forUserLocked = installedTilesComponentRepositoryImpl.getForUserLocked(iIntValue);
+        }
+        FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(flow, new InstalledTilesComponentRepositoryImpl$getInstalledTilesComponents$$inlined$map$1(forUserLocked), new SubscreenTilesInteractorImpl$userAndTiles$1$1(iIntValue, null));
+        this.L$0 = null;
+        this.label = 2;
     }
 }

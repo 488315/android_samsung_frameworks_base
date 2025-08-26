@@ -132,13 +132,13 @@ public class SprDocument implements Cloneable {
         this.mName = str.substring(str.lastIndexOf("/") + 1);
         SprInputStream sprInputStream = new SprInputStream(inputStream);
         sprInputStream.mAnimationObject = this.mAnimationObject;
-        long currentTimeMillis = System.currentTimeMillis();
-        int readInt = sprInputStream.readInt();
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        int i2 = sprInputStream.readInt();
         sprInputStream.mMajorVersion = sprInputStream.readShort();
         sprInputStream.mMinorVersion = sprInputStream.readShort();
-        int readInt2 = sprInputStream.readInt();
-        int readInt3 = sprInputStream.readInt();
-        int readInt4 = sprInputStream.readInt();
+        int i3 = sprInputStream.readInt();
+        int i4 = sprInputStream.readInt();
+        int i5 = sprInputStream.readInt();
         sprInputStream.readInt();
         sprInputStream.readInt();
         this.mLeft = sprInputStream.readFloat();
@@ -170,69 +170,69 @@ public class SprDocument implements Cloneable {
             this.mAnimationMode = 0;
             this.mAnimationInterval = 0;
         }
-        if (readInt != 1397772800 && readInt != 1398162944) {
+        if (i2 != 1397772800 && i2 != 1398162944) {
             throw new RuntimeException("wrong file format");
         }
-        if (readInt4 != 0) {
-            sprInputStream.skip(readInt4 - sprInputStream.getPosition());
-            int readInt5 = sprInputStream.readInt();
-            int i2 = 0;
-            while (i2 < readInt5) {
-                byte readByte = sprInputStream.readByte();
-                int readInt6 = sprInputStream.readInt();
-                if (readByte == b) {
-                    j = currentTimeMillis;
+        if (i5 != 0) {
+            sprInputStream.skip(i5 - sprInputStream.getPosition());
+            int i6 = sprInputStream.readInt();
+            int i7 = 0;
+            while (i7 < i6) {
+                byte b2 = sprInputStream.readByte();
+                int i8 = sprInputStream.readInt();
+                if (b2 == b) {
+                    j = jCurrentTimeMillis;
                     sprFileAttributeNinePatch = new SprFileAttributeNinePatch(sprInputStream);
                 } else {
-                    Log.e(TAG, "unknown element type:" + ((int) readByte));
-                    j = currentTimeMillis;
-                    sprInputStream.skip((long) readInt6);
+                    Log.e(TAG, "unknown element type:" + ((int) b2));
+                    j = jCurrentTimeMillis;
+                    sprInputStream.skip((long) i8);
                     sprFileAttributeNinePatch = null;
                 }
                 if (sprFileAttributeNinePatch != null) {
                     this.mFileAttributes.add(sprFileAttributeNinePatch);
                 }
-                i2++;
-                currentTimeMillis = j;
+                i7++;
+                jCurrentTimeMillis = j;
                 b = 1;
             }
         }
-        long j2 = currentTimeMillis;
-        sprInputStream.skip(readInt2 - sprInputStream.getPosition());
-        int readInt7 = sprInputStream.readInt();
-        for (int i3 = 0; i3 < readInt7; i3++) {
+        long j2 = jCurrentTimeMillis;
+        sprInputStream.skip(i3 - sprInputStream.getPosition());
+        int i9 = sprInputStream.readInt();
+        for (int i10 = 0; i10 < i9; i10++) {
             sprInputStream.readInt();
-            byte readByte2 = sprInputStream.readByte();
-            int readInt8 = (sprInputStream.mMajorVersion < 12336 || sprInputStream.mMinorVersion < 12338) ? 0 : sprInputStream.readInt();
-            if (readByte2 == 1) {
+            byte b3 = sprInputStream.readByte();
+            int i11 = (sprInputStream.mMajorVersion < 12336 || sprInputStream.mMinorVersion < 12338) ? 0 : sprInputStream.readInt();
+            if (b3 == 1) {
                 sprObjectShapeCircle = new SprObjectShapeCircle(sprInputStream);
-            } else if (readByte2 == 2) {
+            } else if (b3 == 2) {
                 sprObjectShapeCircle = new SprObjectShapeEllipse(sprInputStream);
-            } else if (readByte2 == 3) {
+            } else if (b3 == 3) {
                 sprObjectShapeCircle = new SprObjectShapeLine(sprInputStream);
-            } else if (readByte2 == 4) {
+            } else if (b3 == 4) {
                 sprObjectShapeCircle = new SprObjectShapePath(sprInputStream);
-            } else if (readByte2 == 5) {
+            } else if (b3 == 5) {
                 sprObjectShapeCircle = new SprObjectShapeRectangle(sprInputStream);
-            } else if (readByte2 == 16) {
+            } else if (b3 == 16) {
                 sprObjectShapeCircle = new SprObjectShapeGroup(false, sprInputStream);
-            } else if (readByte2 == 17) {
+            } else if (b3 == 17) {
                 sprObjectShapeCircle = new SprObjectShapeUse(sprInputStream);
             } else {
-                Log.e(TAG, "unknown element type:" + ((int) readByte2));
-                sprInputStream.skip((long) readInt8);
+                Log.e(TAG, "unknown element type:" + ((int) b3));
+                sprInputStream.skip((long) i11);
                 sprObjectShapeCircle = null;
             }
             if (sprObjectShapeCircle != null) {
-                this.mReferenceMap.append(i3, sprObjectShapeCircle);
+                this.mReferenceMap.append(i10, sprObjectShapeCircle);
             }
         }
-        sprInputStream.skip(readInt3 - sprInputStream.getPosition());
-        for (int i4 = 0; i4 < i; i4++) {
+        sprInputStream.skip(i4 - sprInputStream.getPosition());
+        for (int i12 = 0; i12 < i; i12++) {
             this.mDocuments.add(new SprObjectShapeGroup(true, sprInputStream));
         }
-        int i5 = this.mAnimationMode;
-        if (i5 >= 1 && i5 <= 8) {
+        int i13 = this.mAnimationMode;
+        if (i13 >= 1 && i13 <= 8) {
             applyTimeAnimationMode();
         }
         this.mLoadingTime = System.currentTimeMillis() - j2;
@@ -260,21 +260,21 @@ public class SprDocument implements Cloneable {
             throw new XmlPullParserException("No start tag found");
         }
         int attributeCount = xmlPullParser.getAttributeCount();
-        float f = 0.0f;
-        float f2 = 0.0f;
-        float f3 = 0.0f;
+        float fFloatValue = 0.0f;
+        float fFloatValue2 = 0.0f;
+        float fFloatValue3 = 0.0f;
         for (int i = 0; i < attributeCount; i++) {
             String attributeName = xmlPullParser.getAttributeName(i);
             String attributeValue = xmlPullParser.getAttributeValue(i);
             if ("width".equals(attributeName)) {
                 if (attributeValue.endsWith("dp")) {
-                    f3 = Float.valueOf(attributeValue.substring(0, attributeValue.length() - 2)).floatValue();
+                    fFloatValue3 = Float.valueOf(attributeValue.substring(0, attributeValue.length() - 2)).floatValue();
                 }
             } else if (!"height".equals(attributeName)) {
                 if ("viewportHeight".equals(attributeName)) {
-                    f2 = Float.valueOf(attributeValue).floatValue();
+                    fFloatValue2 = Float.valueOf(attributeValue).floatValue();
                 } else if ("viewportWidth".equals(attributeName)) {
-                    f = Float.valueOf(attributeValue).floatValue();
+                    fFloatValue = Float.valueOf(attributeValue).floatValue();
                 } else if (!"autoMirrored".equals(attributeName) && !"tintMode".equals(attributeName)) {
                     "tint".equals(attributeName);
                 }
@@ -282,9 +282,9 @@ public class SprDocument implements Cloneable {
         }
         this.mTop = 0.0f;
         this.mLeft = 0.0f;
-        this.mRight = f;
-        this.mBottom = f2;
-        this.mDensity = f / f3;
+        this.mRight = fFloatValue;
+        this.mBottom = fFloatValue2;
+        this.mDensity = fFloatValue / fFloatValue3;
         this.mNinePatchBottom = 0.0f;
         this.mNinePatchRight = 0.0f;
         this.mNinePatchTop = 0.0f;
@@ -333,18 +333,18 @@ public class SprDocument implements Cloneable {
             Log.d(TAG, "Already closed");
             return false;
         }
-        int i3 = 4;
+        int sPRSize = 4;
         if (this.mFileAttributes.isEmpty()) {
             i = 0;
             i2 = 0;
         } else {
             Iterator<SprFileAttributeBase> it = this.mFileAttributes.iterator();
-            int i4 = 0;
+            int sPRSize2 = 0;
             i2 = 0;
             while (it.hasNext()) {
                 SprFileAttributeBase next = it.next();
                 if (next.isValid()) {
-                    i4 += next.getSPRSize() + 5;
+                    sPRSize2 += next.getSPRSize() + 5;
                     i2++;
                 } else if (next.mType == 1) {
                     SprFileAttributeNinePatch sprFileAttributeNinePatch = (SprFileAttributeNinePatch) next;
@@ -356,18 +356,18 @@ public class SprDocument implements Cloneable {
                     }
                 }
             }
-            i = i4 + (i4 == 0 ? 0 : 4);
+            i = sPRSize2 + (sPRSize2 == 0 ? 0 : 4);
         }
         int size = this.mReferenceMap.size();
-        for (int i5 = 0; i5 < size; i5++) {
-            i3 += this.mReferenceMap.valueAt(i5).getSPRSize();
+        for (int i3 = 0; i3 < size; i3++) {
+            sPRSize += this.mReferenceMap.valueAt(i3).getSPRSize();
         }
         dataOutputStream.writeInt(SPRTAG);
         dataOutputStream.writeShort(SemHoverPopupWindow.Gravity.TOP_ABOVE);
         dataOutputStream.writeShort(12340);
-        int i6 = i + 97;
-        dataOutputStream.writeInt(i6);
-        dataOutputStream.writeInt(i6 + i3);
+        int i4 = i + 97;
+        dataOutputStream.writeInt(i4);
+        dataOutputStream.writeInt(i4 + sPRSize);
         dataOutputStream.writeInt(i == 0 ? 0 : 97);
         dataOutputStream.writeInt(0);
         dataOutputStream.writeInt(0);
@@ -403,12 +403,12 @@ public class SprDocument implements Cloneable {
         }
         dataOutputStream.writeInt(this.mReferenceMap.size());
         int size2 = this.mReferenceMap.size();
-        for (int i7 = 0; i7 < size2; i7++) {
-            int keyAt = this.mReferenceMap.keyAt(i7);
-            SprObjectBase valueAt = this.mReferenceMap.valueAt(i7);
-            dataOutputStream.writeInt(keyAt);
-            dataOutputStream.writeByte(valueAt.mType);
-            valueAt.toSPR(dataOutputStream);
+        for (int i5 = 0; i5 < size2; i5++) {
+            int iKeyAt = this.mReferenceMap.keyAt(i5);
+            SprObjectBase sprObjectBaseValueAt = this.mReferenceMap.valueAt(i5);
+            dataOutputStream.writeInt(iKeyAt);
+            dataOutputStream.writeByte(sprObjectBaseValueAt.mType);
+            sprObjectBaseValueAt.toSPR(dataOutputStream);
         }
         Iterator<SprObjectShapeGroup> it3 = this.mDocuments.iterator();
         while (it3.hasNext()) {
@@ -619,14 +619,14 @@ public class SprDocument implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SprDocument m9220clone() throws CloneNotSupportedException {
+    public SprDocument m9232clone() throws CloneNotSupportedException {
         SprDocument sprDocument = (SprDocument) super.clone();
-        sprDocument.mReferenceMap = this.mReferenceMap.m5529clone();
+        sprDocument.mReferenceMap = this.mReferenceMap.m5536clone();
         sprDocument.mDocuments = new ArrayList<>();
         sprDocument.mAnimationObject = new ArrayList<>();
         Iterator<SprObjectShapeGroup> it = this.mDocuments.iterator();
         while (it.hasNext()) {
-            sprDocument.mDocuments.add(it.next().mo9224clone());
+            sprDocument.mDocuments.add(it.next().mo9236clone());
             ArrayList<SprObjectShapeGroup> arrayList = sprDocument.mDocuments;
             sprDocument.updateAnimationObjectList(arrayList.get(arrayList.size() - 1));
         }

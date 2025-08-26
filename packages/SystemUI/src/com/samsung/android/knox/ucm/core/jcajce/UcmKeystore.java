@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Vector;
 import javax.crypto.SecretKey;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class UcmKeystore extends KeyStoreSpi {
     public static final String NAME = "KNOX";
@@ -51,8 +50,8 @@ public class UcmKeystore extends KeyStoreSpi {
     @Override // java.security.KeyStoreSpi
     public Enumeration<String> engineAliases() {
         Log.d("UcmKeystore", "engineAliases ");
-        Bundle saw = UniversalCredentialUtil.getInstance().saw(new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).build(), 1);
-        String[] stringArray = saw != null ? saw.getStringArray(UcmAgentService.PLUGIN_STRINGARRAY_RESPONSE) : null;
+        Bundle bundleSaw = UniversalCredentialUtil.getInstance().saw(new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).build(), 1);
+        String[] stringArray = bundleSaw != null ? bundleSaw.getStringArray(UcmAgentService.PLUGIN_STRINGARRAY_RESPONSE) : null;
         if (stringArray == null || stringArray.length == 0) {
             return null;
         }
@@ -66,8 +65,8 @@ public class UcmKeystore extends KeyStoreSpi {
     @Override // java.security.KeyStoreSpi
     public boolean engineContainsAlias(String str) {
         Log.d("UcmKeystore", "engineContainsAlias " + str);
-        Bundle saw = UniversalCredentialUtil.getInstance().saw(new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(str).build(), 1);
-        String[] stringArray = saw != null ? saw.getStringArray(UcmAgentService.PLUGIN_STRINGARRAY_RESPONSE) : null;
+        Bundle bundleSaw = UniversalCredentialUtil.getInstance().saw(new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(str).build(), 1);
+        String[] stringArray = bundleSaw != null ? bundleSaw.getStringArray(UcmAgentService.PLUGIN_STRINGARRAY_RESPONSE) : null;
         if (stringArray == null) {
             return false;
         }
@@ -82,8 +81,8 @@ public class UcmKeystore extends KeyStoreSpi {
     @Override // java.security.KeyStoreSpi
     public void engineDeleteEntry(String str) throws KeyStoreException {
         Log.d("UcmKeystore", "engineDeleteEntry " + str);
-        Bundle delete = UniversalCredentialUtil.getInstance().delete(new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(str).build());
-        if (!(delete != null ? delete.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE) : false)) {
+        Bundle bundleDelete = UniversalCredentialUtil.getInstance().delete(new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(str).build());
+        if (!(bundleDelete != null ? bundleDelete.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE) : false)) {
             throw new KeyStoreException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("failed to delete entry ", str));
         }
     }
@@ -91,9 +90,9 @@ public class UcmKeystore extends KeyStoreSpi {
     @Override // java.security.KeyStoreSpi
     public Certificate engineGetCertificate(String str) {
         Log.d("UcmKeystore", "engineGetCertificate " + str);
-        Certificate[] engineGetCertificateChain = engineGetCertificateChain(str);
-        if (engineGetCertificateChain != null) {
-            return engineGetCertificateChain[0];
+        Certificate[] certificateArrEngineGetCertificateChain = engineGetCertificateChain(str);
+        if (certificateArrEngineGetCertificateChain != null) {
+            return certificateArrEngineGetCertificateChain[0];
         }
         Log.d("UcmKeystore", "engineGetCertificate empty");
         return null;
@@ -130,11 +129,11 @@ public class UcmKeystore extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public Key engineGetKey(String str, char[] cArr) throws NoSuchAlgorithmException, UnrecoverableKeyException {
+    public Key engineGetKey(String str, char[] cArr) throws UnrecoverableKeyException, NoSuchAlgorithmException {
         Log.d("UcmKeystore", "engineGetKey " + str);
-        String build = new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(str).build();
+        String strBuild = new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(str).build();
         UniversalCredentialUtil universalCredentialUtil = UniversalCredentialUtil.getInstance();
-        Bundle keyType = universalCredentialUtil.getKeyType(build);
+        Bundle keyType = universalCredentialUtil.getKeyType(strBuild);
         if (keyType == null) {
             Log.d("UcmKeystore", "engineGetKey response is null");
             return null;
@@ -148,10 +147,10 @@ public class UcmKeystore extends KeyStoreSpi {
         String string = keyType.getString(UcmAgentService.PLUGIN_STRING_RESPONSE);
         KeyguardCarrierViewController$2$$ExternalSyntheticOutline0.m(i, "getKeyType = ", "; algorithm = ", string, "UcmKeystore");
         if (i == 1) {
-            return universalCredentialUtil.getSecretKey(build, string);
+            return universalCredentialUtil.getSecretKey(strBuild, string);
         }
         if (i == 2) {
-            return universalCredentialUtil.getPrivateKey(build);
+            return universalCredentialUtil.getPrivateKey(strBuild);
         }
         throw new UnrecoverableKeyException("Key type not supported");
     }
@@ -169,7 +168,7 @@ public class UcmKeystore extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineLoad(InputStream inputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineLoad(InputStream inputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
         Log.d("UcmKeystore", "engineLoad");
     }
 
@@ -197,29 +196,29 @@ public class UcmKeystore extends KeyStoreSpi {
 
     @Override // java.security.KeyStoreSpi
     public void engineSetKeyEntry(String str, Key key, char[] cArr, Certificate[] certificateArr) throws KeyStoreException {
-        String str2;
-        byte[] bArr;
+        String algorithm;
+        byte[] encoded;
         MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("engineSetKeyEntry ", str, "UcmKeystore");
         if (cArr != null && cArr.length > 0) {
             throw new KeyStoreException("entries cannot be protected with passwords");
         }
         if (key == null || key.getEncoded() == null) {
             MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("key.getEncoded() == null ", str, "UcmKeystore");
-            str2 = null;
-            bArr = null;
+            algorithm = null;
+            encoded = null;
         } else {
             Log.d("UcmKeystore", "key.getEncoded() is not null " + str);
-            str2 = key.getAlgorithm();
-            if (!isKeySupported(str2, key.getFormat())) {
+            algorithm = key.getAlgorithm();
+            if (!isKeySupported(algorithm, key.getFormat())) {
                 throw new KeyStoreException("Key format not supported");
             }
-            bArr = key.getEncoded();
-            if (bArr == null) {
+            encoded = key.getEncoded();
+            if (encoded == null) {
                 throw new KeyStoreException("PrivateKey has no encoding");
             }
         }
         if (key instanceof PrivateKey) {
-            importKeyPair(str, bArr, certificateArr, str2);
+            importKeyPair(str, encoded, certificateArr, algorithm);
         } else {
             if (!(key instanceof SecretKey)) {
                 throw new KeyStoreException("Key not supported");
@@ -231,8 +230,8 @@ public class UcmKeystore extends KeyStoreSpi {
     @Override // java.security.KeyStoreSpi
     public int engineSize() {
         Log.d("UcmKeystore", "engineSize ");
-        Bundle saw = UniversalCredentialUtil.getInstance().saw(new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).build(), 1);
-        String[] stringArray = saw != null ? saw.getStringArray(UcmAgentService.PLUGIN_STRINGARRAY_RESPONSE) : null;
+        Bundle bundleSaw = UniversalCredentialUtil.getInstance().saw(new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).build(), 1);
+        String[] stringArray = bundleSaw != null ? bundleSaw.getStringArray(UcmAgentService.PLUGIN_STRINGARRAY_RESPONSE) : null;
         if (stringArray != null) {
             return stringArray.length;
         }
@@ -240,16 +239,16 @@ public class UcmKeystore extends KeyStoreSpi {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineStore(OutputStream outputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineStore(OutputStream outputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
         throw new UnsupportedOperationException("Can not serialize to OutputStream");
     }
 
     public final void importKey(String str, SecretKey secretKey, KeyProtection keyProtection) throws KeyStoreException {
-        String build = new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(str).build();
+        String strBuild = new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(str).build();
         UniversalCredentialUtil universalCredentialUtil = UniversalCredentialUtil.getInstance();
         if (engineContainsAlias(str)) {
-            Bundle delete = universalCredentialUtil.delete(build);
-            if (!(delete != null ? delete.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE) : false)) {
+            Bundle bundleDelete = universalCredentialUtil.delete(strBuild);
+            if (!(bundleDelete != null ? bundleDelete.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE) : false)) {
                 throw new KeyStoreException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("failed to replace key ", str));
             }
         }
@@ -266,8 +265,8 @@ public class UcmKeystore extends KeyStoreSpi {
                 bundle.putString(UcmAgentProviderImpl.KEY_EXTRA_SIGNATURE_PADDINGS, keyProtection.getEncryptionPaddings()[0]);
             }
         }
-        Bundle importKey = universalCredentialUtil.importKey(build, bundle);
-        if (!(importKey != null ? importKey.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE) : false)) {
+        Bundle bundleImportKey = universalCredentialUtil.importKey(strBuild, bundle);
+        if (!(bundleImportKey != null ? bundleImportKey.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE) : false)) {
             throw new KeyStoreException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("failed to import keypair ", str));
         }
     }
@@ -291,15 +290,15 @@ public class UcmKeystore extends KeyStoreSpi {
         }
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         UniversalCredentialUtil universalCredentialUtil = UniversalCredentialUtil.getInstance();
-        String build = new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(str).build();
+        String strBuild = new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(str).build();
         if (engineContainsAlias(str) && bArr != null) {
-            Bundle delete = universalCredentialUtil.delete(build);
-            if (!(delete != null ? delete.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE) : false)) {
+            Bundle bundleDelete = universalCredentialUtil.delete(strBuild);
+            if (!(bundleDelete != null ? bundleDelete.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE) : false)) {
                 throw new KeyStoreException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("failed to replace keypair ", str));
             }
         }
-        Bundle importKeyPair = universalCredentialUtil.importKeyPair(build, bArr, byteArray, KeyguardSecPatternView$$ExternalSyntheticOutline0.m(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_ALGORITHM, str2));
-        if (!(importKeyPair != null ? importKeyPair.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE) : false)) {
+        Bundle bundleImportKeyPair = universalCredentialUtil.importKeyPair(strBuild, bArr, byteArray, KeyguardSecPatternView$$ExternalSyntheticOutline0.m(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_ALGORITHM, str2));
+        if (!(bundleImportKeyPair != null ? bundleImportKeyPair.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE) : false)) {
             throw new KeyStoreException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("failed to import keypair ", str));
         }
     }

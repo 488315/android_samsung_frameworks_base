@@ -7,9 +7,13 @@ import android.util.Slog;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -39,9 +43,9 @@ public class GraphicsRendererPolicyCipher {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             try {
-                boolean encrypt = encrypt(inputStream, fileOutputStream);
+                boolean zEncrypt = encrypt(inputStream, fileOutputStream);
                 fileOutputStream.close();
-                return encrypt;
+                return zEncrypt;
             } finally {
             }
         } catch (Throwable th) {
@@ -50,13 +54,13 @@ public class GraphicsRendererPolicyCipher {
         }
     }
 
-    public boolean decrypt(File file, OutputStream outputStream) {
+    public boolean decrypt(File file, OutputStream outputStream) throws IOException {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             try {
-                boolean decrypt = decrypt(fileInputStream, outputStream);
+                boolean zDecrypt = decrypt(fileInputStream, outputStream);
                 fileInputStream.close();
-                return decrypt;
+                return zDecrypt;
             } finally {
             }
         } catch (Exception e) {
@@ -74,11 +78,11 @@ public class GraphicsRendererPolicyCipher {
             outputStream.write(iv);
             byte[] bArr = new byte[8192];
             while (true) {
-                int read = inputStream.read(bArr);
-                if (read != -1) {
-                    byte[] update = cipher.update(bArr, 0, read);
-                    if (update != null) {
-                        outputStream.write(update);
+                int i = inputStream.read(bArr);
+                if (i != -1) {
+                    byte[] bArrUpdate = cipher.update(bArr, 0, i);
+                    if (bArrUpdate != null) {
+                        outputStream.write(bArrUpdate);
                     }
                 } else {
                     outputStream.write(cipher.doFinal());
@@ -95,16 +99,16 @@ public class GraphicsRendererPolicyCipher {
         try {
             Cipher cipher = Cipher.getInstance(AES_CBC_PKCS_7_PADDING);
             byte[] bArr = new byte[8192];
-            int read = inputStream.read();
-            byte[] bArr2 = new byte[read];
-            inputStream.read(bArr2, 0, read);
+            int i = inputStream.read();
+            byte[] bArr2 = new byte[i];
+            inputStream.read(bArr2, 0, i);
             cipher.init(2, KeyStoreHolder.getKey(this.context, this.appId), new IvParameterSpec(bArr2));
             while (true) {
-                int read2 = inputStream.read(bArr);
-                if (read2 != -1) {
-                    byte[] update = cipher.update(bArr, 0, read2);
-                    if (update != null) {
-                        outputStream.write(update);
+                int i2 = inputStream.read(bArr);
+                if (i2 != -1) {
+                    byte[] bArrUpdate = cipher.update(bArr, 0, i2);
+                    if (bArrUpdate != null) {
+                        outputStream.write(bArrUpdate);
                     } else {
                         Slog.e(TAG, "updateResult result is null");
                     }
@@ -119,7 +123,7 @@ public class GraphicsRendererPolicyCipher {
         }
     }
 
-    public void clear() {
+    public void clear() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         KeyStoreHolder.clear(this.context, this.appId);
     }
 
@@ -137,13 +141,13 @@ public class GraphicsRendererPolicyCipher {
         public static SecretKey getKey(Context context, String str) throws Exception {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
-            String format = String.format(GraphicsRendererPolicyCipher.SCSPCIPHER_FORMAT, context.getPackageName(), str);
-            SecretKey secretKey = (SecretKey) keyStore.getKey(format, null);
-            return secretKey == null ? generateKey(format) : secretKey;
+            String str2 = String.format(GraphicsRendererPolicyCipher.SCSPCIPHER_FORMAT, context.getPackageName(), str);
+            SecretKey secretKey = (SecretKey) keyStore.getKey(str2, null);
+            return secretKey == null ? generateKey(str2) : secretKey;
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public static void clear(Context context, String str) {
+        public static void clear(Context context, String str) throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
             try {
                 KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
                 keyStore.load(null);

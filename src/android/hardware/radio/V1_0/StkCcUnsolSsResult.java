@@ -41,13 +41,13 @@ public final class StkCcUnsolSsResult {
 
     public static final ArrayList<StkCcUnsolSsResult> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<StkCcUnsolSsResult> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 56, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 56, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             StkCcUnsolSsResult stkCcUnsolSsResult = new StkCcUnsolSsResult();
-            stkCcUnsolSsResult.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 56);
+            stkCcUnsolSsResult.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 56);
             arrayList.add(stkCcUnsolSsResult);
         }
         return arrayList;
@@ -60,19 +60,19 @@ public final class StkCcUnsolSsResult {
         this.serviceClass = hwBlob.getInt32(12 + j);
         this.result = hwBlob.getInt32(16 + j);
         int int32 = hwBlob.getInt32(32 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 24, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 24, true);
         this.ssInfo.clear();
         for (int i = 0; i < int32; i++) {
             SsInfoData ssInfoData = new SsInfoData();
-            ssInfoData.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 16);
+            ssInfoData.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 16);
             this.ssInfo.add(ssInfoData);
         }
         int int322 = hwBlob.getInt32(j + 48);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 40, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 40, true);
         this.cfData.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             CfData cfData = new CfData();
-            cfData.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer2, i2 * 16);
+            cfData.readEmbeddedFromParcel(hwParcel, embeddedBuffer2, i2 * 16);
             this.cfData.add(cfData);
         }
     }

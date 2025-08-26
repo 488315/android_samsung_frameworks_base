@@ -38,9 +38,9 @@ public interface IVibratorStateListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVibratorStateListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVibratorStateListener)) {
-                return (IVibratorStateListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVibratorStateListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVibratorStateListener)) {
+                return (IVibratorStateListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -67,9 +67,9 @@ public interface IVibratorStateListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onVibrating(readBoolean);
+                onVibrating(z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -93,13 +93,13 @@ public interface IVibratorStateListener extends IInterface {
 
             @Override // android.os.IVibratorStateListener
             public void onVibrating(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVibratorStateListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVibratorStateListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

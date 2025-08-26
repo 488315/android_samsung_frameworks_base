@@ -5,7 +5,6 @@ import com.android.systemui.util.sensors.ThresholdSensorImpl;
 import dagger.internal.Provider;
 import dagger.internal.Providers;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SensorModule_ProvidePrimaryProximitySensorFactory implements Provider {
     private final Provider sensorManagerProvider;
@@ -21,9 +20,9 @@ public final class SensorModule_ProvidePrimaryProximitySensorFactory implements 
     }
 
     public static ThresholdSensor providePrimaryProximitySensor(SensorManager sensorManager, ThresholdSensorImpl.Builder builder) {
-        ThresholdSensor providePrimaryProximitySensor = SensorModule.providePrimaryProximitySensor(sensorManager, builder);
-        providePrimaryProximitySensor.getClass();
-        return providePrimaryProximitySensor;
+        ThresholdSensor thresholdSensorProvidePrimaryProximitySensor = SensorModule.providePrimaryProximitySensor(sensorManager, builder);
+        thresholdSensorProvidePrimaryProximitySensor.getClass();
+        return thresholdSensorProvidePrimaryProximitySensor;
     }
 
     public static SensorModule_ProvidePrimaryProximitySensorFactory create(Provider provider, Provider provider2) {

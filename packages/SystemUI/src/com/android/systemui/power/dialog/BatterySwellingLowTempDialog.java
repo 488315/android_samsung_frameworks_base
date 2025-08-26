@@ -11,7 +11,6 @@ import com.android.systemui.R;
 import com.android.systemui.power.SecBatterySnapshot;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BatterySwellingLowTempDialog extends PowerUiDialog {
     public BatterySwellingLowTempDialog(Context context) {
@@ -25,15 +24,15 @@ public class BatterySwellingLowTempDialog extends PowerUiDialog {
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog
     public final AlertDialog getDialog() {
-        View inflate = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.power_ui_dialog_theme)).inflate(R.layout.power_ui_dialog, (ViewGroup) null);
-        ((TextView) inflate.findViewById(R.id.notice_text)).setText((DeviceType.isTablet() ? this.mContext.getString(R.string.battery_swelling_mode_low_temp_popup_text_tablet) : this.mContext.getString(R.string.battery_swelling_mode_low_temp_popup_text)) + "\n\n");
+        View viewInflate = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.power_ui_dialog_theme)).inflate(R.layout.power_ui_dialog, (ViewGroup) null);
+        ((TextView) viewInflate.findViewById(R.id.notice_text)).setText((DeviceType.isTablet() ? this.mContext.getString(R.string.battery_swelling_mode_low_temp_popup_text_tablet) : this.mContext.getString(R.string.battery_swelling_mode_low_temp_popup_text)) + "\n\n");
         AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext, R.style.power_ui_dialog_theme);
         builder.P.mTitle = this.mContext.getString(R.string.battery_swelling_mode_low_temp_popup_title);
         builder.setPositiveButton(this.mContext.getString(R.string.dialog_button_text_ok), null);
-        builder.setView(inflate);
-        AlertDialog create = builder.create();
-        create.getWindow().setType(2009);
-        return create;
+        builder.setView(viewInflate);
+        AlertDialog alertDialogCreate = builder.create();
+        alertDialogCreate.getWindow().setType(2009);
+        return alertDialogCreate;
     }
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog

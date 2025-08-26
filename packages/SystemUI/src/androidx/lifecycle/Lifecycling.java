@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Lifecycling {
     public static final Lifecycling INSTANCE = new Lifecycling();
@@ -40,14 +39,21 @@ public final class Lifecycling {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public static int getObserverConstructorType(Class cls) {
-        Constructor constructor;
-        boolean z;
+    /* JADX WARN: Removed duplicated region for block: B:60:0x00fc  */
+    /* JADX WARN: Removed duplicated region for block: B:87:0x012d A[SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public static int getObserverConstructorType(Class cls) throws NoSuchMethodException, SecurityException {
+        Constructor declaredConstructor;
+        boolean zBooleanValue;
+        int length;
+        int i;
         Integer num = (Integer) ((HashMap) callbackCache).get(cls);
         if (num != null) {
             return num.intValue();
         }
-        int i = 1;
+        int i2 = 1;
         if (cls.getCanonicalName() != null) {
             ArrayList arrayList = null;
             try {
@@ -61,80 +67,87 @@ public final class Lifecycling {
                 if (name.length() != 0) {
                     adapterName = name + '.' + adapterName;
                 }
-                constructor = Class.forName(adapterName).getDeclaredConstructor(cls);
-                if (!constructor.isAccessible()) {
-                    constructor.setAccessible(true);
+                declaredConstructor = Class.forName(adapterName).getDeclaredConstructor(cls);
+                if (!declaredConstructor.isAccessible()) {
+                    declaredConstructor.setAccessible(true);
                 }
             } catch (ClassNotFoundException unused) {
-                constructor = null;
+                declaredConstructor = null;
             } catch (NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
-            if (constructor != null) {
-                ((HashMap) classToAdapters).put(cls, Collections.singletonList(constructor));
+            if (declaredConstructor != null) {
+                ((HashMap) classToAdapters).put(cls, Collections.singletonList(declaredConstructor));
             } else {
                 ClassesInfoCache classesInfoCache = ClassesInfoCache.sInstance;
                 Boolean bool = (Boolean) ((HashMap) classesInfoCache.mHasLifecycleMethods).get(cls);
                 if (bool != null) {
-                    z = bool.booleanValue();
+                    zBooleanValue = bool.booleanValue();
                 } else {
                     try {
                         Method[] declaredMethods = cls.getDeclaredMethods();
-                        int length = declaredMethods.length;
-                        int i2 = 0;
+                        int length2 = declaredMethods.length;
+                        int i3 = 0;
                         while (true) {
-                            if (i2 >= length) {
+                            if (i3 >= length2) {
                                 ((HashMap) classesInfoCache.mHasLifecycleMethods).put(cls, Boolean.FALSE);
-                                z = false;
+                                zBooleanValue = false;
                                 break;
                             }
-                            if (((OnLifecycleEvent) declaredMethods[i2].getAnnotation(OnLifecycleEvent.class)) != null) {
+                            if (((OnLifecycleEvent) declaredMethods[i3].getAnnotation(OnLifecycleEvent.class)) != null) {
                                 classesInfoCache.createInfo(cls, declaredMethods);
-                                z = true;
+                                zBooleanValue = true;
                                 break;
                             }
-                            i2++;
+                            i3++;
                         }
                     } catch (NoClassDefFoundError e2) {
                         throw new IllegalArgumentException("The observer class has some methods that use newer APIs which are not available in the current OS version. Lifecycles cannot access even other methods so you should make sure that your observer classes only access framework classes that are available in your min API level OR use lifecycle:compiler annotation processor.", e2);
                     }
                 }
-                if (!z) {
+                if (!zBooleanValue) {
                     Class superclass = cls.getSuperclass();
-                    if (superclass != null && LifecycleObserver.class.isAssignableFrom(superclass)) {
-                        if (getObserverConstructorType(superclass) != 1) {
-                            Object obj = ((HashMap) classToAdapters).get(superclass);
-                            obj.getClass();
-                            arrayList = new ArrayList((Collection) obj);
-                        }
-                    }
-                    Class<?>[] interfaces = cls.getInterfaces();
-                    int length2 = interfaces.length;
-                    int i3 = 0;
-                    while (true) {
-                        if (i3 < length2) {
-                            Class<?> cls2 = interfaces[i3];
-                            if (cls2 != null && LifecycleObserver.class.isAssignableFrom(cls2)) {
-                                if (getObserverConstructorType(cls2) == 1) {
-                                    break;
+                    if (!(superclass != null && LifecycleObserver.class.isAssignableFrom(superclass))) {
+                        Class<?>[] interfaces = cls.getInterfaces();
+                        length = interfaces.length;
+                        i = 0;
+                        while (true) {
+                            if (i < length) {
+                                Class<?> cls2 = interfaces[i];
+                                if (cls2 != null && LifecycleObserver.class.isAssignableFrom(cls2)) {
+                                    if (getObserverConstructorType(cls2) == 1) {
+                                        break;
+                                    }
+                                    if (arrayList == null) {
+                                        arrayList = new ArrayList();
+                                    }
+                                    Object obj = ((HashMap) classToAdapters).get(cls2);
+                                    obj.getClass();
+                                    arrayList.addAll((Collection) obj);
                                 }
-                                if (arrayList == null) {
-                                    arrayList = new ArrayList();
-                                }
-                                Object obj2 = ((HashMap) classToAdapters).get(cls2);
-                                obj2.getClass();
-                                arrayList.addAll((Collection) obj2);
+                                i++;
+                            } else if (arrayList != null) {
+                                ((HashMap) classToAdapters).put(cls, arrayList);
                             }
-                            i3++;
-                        } else if (arrayList != null) {
-                            ((HashMap) classToAdapters).put(cls, arrayList);
+                        }
+                    } else if (getObserverConstructorType(superclass) != 1) {
+                        Object obj2 = ((HashMap) classToAdapters).get(superclass);
+                        obj2.getClass();
+                        arrayList = new ArrayList((Collection) obj2);
+                        Class<?>[] interfaces2 = cls.getInterfaces();
+                        length = interfaces2.length;
+                        i = 0;
+                        while (true) {
+                            if (i < length) {
+                            }
+                            i++;
                         }
                     }
                 }
             }
-            i = 2;
+            i2 = 2;
         }
-        ((HashMap) callbackCache).put(cls, Integer.valueOf(i));
-        return i;
+        ((HashMap) callbackCache).put(cls, Integer.valueOf(i2));
+        return i2;
     }
 }

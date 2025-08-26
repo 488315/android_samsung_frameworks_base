@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -65,7 +66,6 @@ import java.util.concurrent.Executor;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, InternetDetailsContentController.InternetDialogCallback {
     public static final boolean DEBUG = Log.isLoggable("InternetDialog", 3);
@@ -128,12 +128,10 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
     public Drawable mBackgroundOff = null;
     MutableLiveData mDataInternetContent = new MutableLiveData();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         InternetDialogDelegateLegacy create(boolean z, boolean z2, boolean z3, CoroutineScope coroutineScope);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class InternetContent {
         public CharSequence mInternetDialogTitleString = "";
         public CharSequence mInternetDialogSubTitle = "";
@@ -149,7 +147,6 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
         public int mActiveAutoSwitchNonDdsSubId = -1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum InternetDialogEvent implements UiEventLogger.UiEventEnum {
         INTERNET_DIALOG_SHOW(843),
         SHARE_WIFI_QS_BUTTON_CLICKED(1462);
@@ -201,15 +198,15 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
 
     @Override // com.android.systemui.statusbar.phone.SystemUIDialog.Delegate
     public final SystemUIDialog createDialog() {
-        SystemUIDialog create = this.mSystemUIDialogFactory.create(this, ((ShadeDialogContextInteractorImpl) this.mShadeDialogContextInteractor).getContext());
+        SystemUIDialog systemUIDialogCreate = this.mSystemUIDialogFactory.create(this, ((ShadeDialogContextInteractorImpl) this.mShadeDialogContextInteractor).getContext());
         if (!this.mAboveStatusBar) {
-            create.getWindow().setType(2038);
+            systemUIDialogCreate.getWindow().setType(2038);
         }
         SystemUIDialog systemUIDialog = this.mDialog;
         if (systemUIDialog != null) {
             systemUIDialog.dismiss();
         }
-        this.mDialog = create;
+        this.mDialog = systemUIDialogCreate;
         this.mLifecycleOwner = new LifecycleOwner() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy.1
             @Override // androidx.lifecycle.LifecycleOwner
             public final Lifecycle getLifecycle() {
@@ -217,7 +214,7 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
             }
         };
         this.mLifecycleRegistry = new LifecycleRegistry(this.mLifecycleOwner);
-        return create;
+        return systemUIDialogCreate;
     }
 
     @Override // com.android.systemui.qs.tiles.dialog.InternetDetailsContentController.InternetDialogCallback
@@ -257,7 +254,7 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
             public final void run() {
-                InternetDialogDelegateLegacy internetDialogDelegateLegacy = InternetDialogDelegateLegacy.this;
+                InternetDialogDelegateLegacy internetDialogDelegateLegacy = this.f$0;
                 WifiEntry wifiEntry2 = wifiEntry;
                 List list2 = list;
                 boolean z3 = z;
@@ -290,16 +287,16 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
     }
 
     @Override // com.android.systemui.statusbar.phone.DialogDelegate
-    public final void onCreate(Dialog dialog, Bundle bundle) {
+    public final void onCreate(Dialog dialog, Bundle bundle) throws Resources.NotFoundException {
         final SystemUIDialog systemUIDialog = (SystemUIDialog) dialog;
         if (DEBUG) {
             Log.d("InternetDialog", "onCreate");
         }
         Context context = systemUIDialog.getContext();
         this.mUiEventLogger.log(InternetDialogEvent.INTERNET_DIALOG_SHOW);
-        View inflate = LayoutInflater.from(context).inflate(R.layout.internet_connectivity_dialog, (ViewGroup) null);
-        this.mDialogView = inflate;
-        inflate.setAccessibilityPaneTitle(context.getText(R.string.accessibility_desc_quick_settings));
+        View viewInflate = LayoutInflater.from(context).inflate(R.layout.internet_connectivity_dialog, (ViewGroup) null);
+        this.mDialogView = viewInflate;
+        viewInflate.setAccessibilityPaneTitle(context.getText(R.string.accessibility_desc_quick_settings));
         Window window = systemUIDialog.getWindow();
         window.setContentView(this.mDialogView);
         window.setWindowAnimations(R.style.Animation_InternetDialog);
@@ -307,9 +304,9 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
         this.mLifecycleRegistry.setCurrentState(Lifecycle.State.CREATED);
         this.mDataInternetContent.observe(this.mLifecycleOwner, new Observer() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda0
             @Override // androidx.lifecycle.Observer
-            public final void onChanged(Object obj) {
+            public final void onChanged(Object obj) throws Resources.NotFoundException {
                 boolean z = InternetDialogDelegateLegacy.DEBUG;
-                InternetDialogDelegateLegacy.this.updateDialogUI((InternetDialogDelegateLegacy.InternetContent) obj);
+                this.f$0.updateDialogUI((InternetDialogDelegateLegacy.InternetContent) obj);
             }
         });
         this.mInternetDialogTitle = (TextView) this.mDialogView.requireViewById(R.id.internet_dialog_title);
@@ -354,7 +351,7 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
             }
 
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
+            public final void onClick(View view) throws Resources.NotFoundException {
                 SystemUIDialog systemUIDialog2;
                 switch (i) {
                     case 0:
@@ -368,10 +365,10 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
                             if (TextUtils.isEmpty(mobileNetworkTitle)) {
                                 mobileNetworkTitle = context2.getString(R.string.mobile_data_disable_message_default_carrier);
                             }
-                            AlertDialog create = new AlertDialog.Builder(context2).setTitle(context2.getString(R.string.auto_data_switch_disable_title, mobileNetworkTitle)).setMessage(R.string.auto_data_switch_disable_message).setNegativeButton(R.string.auto_data_switch_dialog_negative_button, new InternetDialogDelegateLegacy$$ExternalSyntheticLambda18()).setPositiveButton(R.string.auto_data_switch_dialog_positive_button, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda20
+                            AlertDialog alertDialogCreate = new AlertDialog.Builder(context2).setTitle(context2.getString(R.string.auto_data_switch_disable_title, mobileNetworkTitle)).setMessage(R.string.auto_data_switch_disable_message).setNegativeButton(R.string.auto_data_switch_dialog_negative_button, new InternetDialogDelegateLegacy$$ExternalSyntheticLambda18()).setPositiveButton(R.string.auto_data_switch_dialog_positive_button, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda20
                                 @Override // android.content.DialogInterface.OnClickListener
                                 public final void onClick(DialogInterface dialogInterface, int i3) {
-                                    InternetDialogDelegateLegacy internetDialogDelegateLegacy2 = InternetDialogDelegateLegacy.this;
+                                    InternetDialogDelegateLegacy internetDialogDelegateLegacy2 = internetDialogDelegateLegacy;
                                     int i4 = i2;
                                     InternetDetailsContentController internetDetailsContentController3 = internetDialogDelegateLegacy2.mInternetDetailsContentController;
                                     TelephonyManager orDefault = internetDetailsContentController3.mSubIdTelephonyManagerMap.getOrDefault(Integer.valueOf(i4), internetDetailsContentController3.mTelephonyManager);
@@ -386,8 +383,8 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
                                     }
                                 }
                             }).create();
-                            internetDialogDelegateLegacy.mAlertDialog = create;
-                            create.getWindow().setType(2009);
+                            internetDialogDelegateLegacy.mAlertDialog = alertDialogCreate;
+                            alertDialogCreate.getWindow().setType(2009);
                             SystemUIDialog.setShowForAllUsers(internetDialogDelegateLegacy.mAlertDialog);
                             SystemUIDialog.registerDismissListener(internetDialogDelegateLegacy.mAlertDialog);
                             SystemUIDialog.setWindowOnTop(internetDialogDelegateLegacy.mAlertDialog, ((KeyguardStateControllerImpl) internetDialogDelegateLegacy.mKeyguard).mShowing);
@@ -428,30 +425,30 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
                     default:
                         final InternetDialogDelegateLegacy internetDialogDelegateLegacy2 = this.f$0;
                         SystemUIDialog systemUIDialog4 = systemUIDialog;
-                        boolean isChecked = internetDialogDelegateLegacy2.mMobileDataToggle.isChecked();
+                        boolean zIsChecked = internetDialogDelegateLegacy2.mMobileDataToggle.isChecked();
                         InternetDetailsContentController internetDetailsContentController3 = internetDialogDelegateLegacy2.mInternetDetailsContentController;
-                        if (!isChecked && (systemUIDialog2 = internetDialogDelegateLegacy2.mDialog) != null) {
+                        if (!zIsChecked && (systemUIDialog2 = internetDialogDelegateLegacy2.mDialog) != null) {
                             boolean z3 = Prefs.getBoolean(systemUIDialog2.getContext(), "QsHasTurnedOffMobileData", false);
                             if (internetDetailsContentController3.mIsMobileDataEnabled && !z3) {
                                 internetDialogDelegateLegacy2.mMobileDataToggle.setChecked(true);
                                 final Context context3 = systemUIDialog4.getContext();
                                 CharSequence mobileNetworkTitle2 = internetDetailsContentController3.getMobileNetworkTitle(internetDialogDelegateLegacy2.mDefaultDataSubId);
-                                boolean isVoiceStateInService = internetDetailsContentController3.isVoiceStateInService(internetDialogDelegateLegacy2.mDefaultDataSubId);
-                                if (TextUtils.isEmpty(mobileNetworkTitle2) || !isVoiceStateInService) {
+                                boolean zIsVoiceStateInService = internetDetailsContentController3.isVoiceStateInService(internetDialogDelegateLegacy2.mDefaultDataSubId);
+                                if (TextUtils.isEmpty(mobileNetworkTitle2) || !zIsVoiceStateInService) {
                                     mobileNetworkTitle2 = context3.getString(R.string.mobile_data_disable_message_default_carrier);
                                 }
-                                AlertDialog create2 = new AlertDialog.Builder(context3).setTitle(R.string.mobile_data_disable_title).setMessage(context3.getString(R.string.mobile_data_disable_message, mobileNetworkTitle2)).setNegativeButton(android.R.string.cancel, new InternetDialogDelegateLegacy$$ExternalSyntheticLambda18()).setPositiveButton(android.R.string.car_loading_profile, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda19
+                                AlertDialog alertDialogCreate2 = new AlertDialog.Builder(context3).setTitle(R.string.mobile_data_disable_title).setMessage(context3.getString(R.string.mobile_data_disable_message, mobileNetworkTitle2)).setNegativeButton(android.R.string.cancel, new InternetDialogDelegateLegacy$$ExternalSyntheticLambda18()).setPositiveButton(android.R.string.car_loading_profile, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda19
                                     @Override // android.content.DialogInterface.OnClickListener
                                     public final void onClick(DialogInterface dialogInterface, int i3) {
-                                        InternetDialogDelegateLegacy internetDialogDelegateLegacy3 = InternetDialogDelegateLegacy.this;
+                                        InternetDialogDelegateLegacy internetDialogDelegateLegacy3 = internetDialogDelegateLegacy2;
                                         Context context4 = context3;
                                         internetDialogDelegateLegacy3.mInternetDetailsContentController.setMobileDataEnabled(context4, internetDialogDelegateLegacy3.mDefaultDataSubId, false);
                                         internetDialogDelegateLegacy3.mMobileDataToggle.setChecked(false);
                                         Prefs.putBoolean(context4, "QsHasTurnedOffMobileData", true);
                                     }
                                 }).create();
-                                internetDialogDelegateLegacy2.mAlertDialog = create2;
-                                create2.getWindow().setType(2009);
+                                internetDialogDelegateLegacy2.mAlertDialog = alertDialogCreate2;
+                                alertDialogCreate2.getWindow().setType(2009);
                                 SystemUIDialog.setShowForAllUsers(internetDialogDelegateLegacy2.mAlertDialog);
                                 SystemUIDialog.registerDismissListener(internetDialogDelegateLegacy2.mAlertDialog);
                                 SystemUIDialog.setWindowOnTop(internetDialogDelegateLegacy2.mAlertDialog, ((KeyguardStateControllerImpl) internetDialogDelegateLegacy2.mKeyguard).mShowing);
@@ -459,8 +456,8 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
                                 break;
                             }
                         }
-                        if (internetDetailsContentController3.mIsMobileDataEnabled != isChecked) {
-                            internetDetailsContentController3.setMobileDataEnabled(systemUIDialog4.getContext(), internetDialogDelegateLegacy2.mDefaultDataSubId, isChecked);
+                        if (internetDetailsContentController3.mIsMobileDataEnabled != zIsChecked) {
+                            internetDetailsContentController3.setMobileDataEnabled(systemUIDialog4.getContext(), internetDialogDelegateLegacy2.mDefaultDataSubId, zIsChecked);
                             break;
                         }
                         break;
@@ -476,7 +473,7 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
             }
 
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
+            public final void onClick(View view) throws Resources.NotFoundException {
                 SystemUIDialog systemUIDialog2;
                 switch (i2) {
                     case 0:
@@ -490,10 +487,10 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
                             if (TextUtils.isEmpty(mobileNetworkTitle)) {
                                 mobileNetworkTitle = context2.getString(R.string.mobile_data_disable_message_default_carrier);
                             }
-                            AlertDialog create = new AlertDialog.Builder(context2).setTitle(context2.getString(R.string.auto_data_switch_disable_title, mobileNetworkTitle)).setMessage(R.string.auto_data_switch_disable_message).setNegativeButton(R.string.auto_data_switch_dialog_negative_button, new InternetDialogDelegateLegacy$$ExternalSyntheticLambda18()).setPositiveButton(R.string.auto_data_switch_dialog_positive_button, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda20
+                            AlertDialog alertDialogCreate = new AlertDialog.Builder(context2).setTitle(context2.getString(R.string.auto_data_switch_disable_title, mobileNetworkTitle)).setMessage(R.string.auto_data_switch_disable_message).setNegativeButton(R.string.auto_data_switch_dialog_negative_button, new InternetDialogDelegateLegacy$$ExternalSyntheticLambda18()).setPositiveButton(R.string.auto_data_switch_dialog_positive_button, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda20
                                 @Override // android.content.DialogInterface.OnClickListener
                                 public final void onClick(DialogInterface dialogInterface, int i3) {
-                                    InternetDialogDelegateLegacy internetDialogDelegateLegacy2 = InternetDialogDelegateLegacy.this;
+                                    InternetDialogDelegateLegacy internetDialogDelegateLegacy2 = internetDialogDelegateLegacy;
                                     int i4 = i22;
                                     InternetDetailsContentController internetDetailsContentController3 = internetDialogDelegateLegacy2.mInternetDetailsContentController;
                                     TelephonyManager orDefault = internetDetailsContentController3.mSubIdTelephonyManagerMap.getOrDefault(Integer.valueOf(i4), internetDetailsContentController3.mTelephonyManager);
@@ -508,8 +505,8 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
                                     }
                                 }
                             }).create();
-                            internetDialogDelegateLegacy.mAlertDialog = create;
-                            create.getWindow().setType(2009);
+                            internetDialogDelegateLegacy.mAlertDialog = alertDialogCreate;
+                            alertDialogCreate.getWindow().setType(2009);
                             SystemUIDialog.setShowForAllUsers(internetDialogDelegateLegacy.mAlertDialog);
                             SystemUIDialog.registerDismissListener(internetDialogDelegateLegacy.mAlertDialog);
                             SystemUIDialog.setWindowOnTop(internetDialogDelegateLegacy.mAlertDialog, ((KeyguardStateControllerImpl) internetDialogDelegateLegacy.mKeyguard).mShowing);
@@ -550,30 +547,30 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
                     default:
                         final InternetDialogDelegateLegacy internetDialogDelegateLegacy2 = this.f$0;
                         SystemUIDialog systemUIDialog4 = systemUIDialog;
-                        boolean isChecked = internetDialogDelegateLegacy2.mMobileDataToggle.isChecked();
+                        boolean zIsChecked = internetDialogDelegateLegacy2.mMobileDataToggle.isChecked();
                         InternetDetailsContentController internetDetailsContentController3 = internetDialogDelegateLegacy2.mInternetDetailsContentController;
-                        if (!isChecked && (systemUIDialog2 = internetDialogDelegateLegacy2.mDialog) != null) {
+                        if (!zIsChecked && (systemUIDialog2 = internetDialogDelegateLegacy2.mDialog) != null) {
                             boolean z3 = Prefs.getBoolean(systemUIDialog2.getContext(), "QsHasTurnedOffMobileData", false);
                             if (internetDetailsContentController3.mIsMobileDataEnabled && !z3) {
                                 internetDialogDelegateLegacy2.mMobileDataToggle.setChecked(true);
                                 final Context context3 = systemUIDialog4.getContext();
                                 CharSequence mobileNetworkTitle2 = internetDetailsContentController3.getMobileNetworkTitle(internetDialogDelegateLegacy2.mDefaultDataSubId);
-                                boolean isVoiceStateInService = internetDetailsContentController3.isVoiceStateInService(internetDialogDelegateLegacy2.mDefaultDataSubId);
-                                if (TextUtils.isEmpty(mobileNetworkTitle2) || !isVoiceStateInService) {
+                                boolean zIsVoiceStateInService = internetDetailsContentController3.isVoiceStateInService(internetDialogDelegateLegacy2.mDefaultDataSubId);
+                                if (TextUtils.isEmpty(mobileNetworkTitle2) || !zIsVoiceStateInService) {
                                     mobileNetworkTitle2 = context3.getString(R.string.mobile_data_disable_message_default_carrier);
                                 }
-                                AlertDialog create2 = new AlertDialog.Builder(context3).setTitle(R.string.mobile_data_disable_title).setMessage(context3.getString(R.string.mobile_data_disable_message, mobileNetworkTitle2)).setNegativeButton(android.R.string.cancel, new InternetDialogDelegateLegacy$$ExternalSyntheticLambda18()).setPositiveButton(android.R.string.car_loading_profile, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda19
+                                AlertDialog alertDialogCreate2 = new AlertDialog.Builder(context3).setTitle(R.string.mobile_data_disable_title).setMessage(context3.getString(R.string.mobile_data_disable_message, mobileNetworkTitle2)).setNegativeButton(android.R.string.cancel, new InternetDialogDelegateLegacy$$ExternalSyntheticLambda18()).setPositiveButton(android.R.string.car_loading_profile, new DialogInterface.OnClickListener() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda19
                                     @Override // android.content.DialogInterface.OnClickListener
                                     public final void onClick(DialogInterface dialogInterface, int i3) {
-                                        InternetDialogDelegateLegacy internetDialogDelegateLegacy3 = InternetDialogDelegateLegacy.this;
+                                        InternetDialogDelegateLegacy internetDialogDelegateLegacy3 = internetDialogDelegateLegacy2;
                                         Context context4 = context3;
                                         internetDialogDelegateLegacy3.mInternetDetailsContentController.setMobileDataEnabled(context4, internetDialogDelegateLegacy3.mDefaultDataSubId, false);
                                         internetDialogDelegateLegacy3.mMobileDataToggle.setChecked(false);
                                         Prefs.putBoolean(context4, "QsHasTurnedOffMobileData", true);
                                     }
                                 }).create();
-                                internetDialogDelegateLegacy2.mAlertDialog = create2;
-                                create2.getWindow().setType(2009);
+                                internetDialogDelegateLegacy2.mAlertDialog = alertDialogCreate2;
+                                alertDialogCreate2.getWindow().setType(2009);
                                 SystemUIDialog.setShowForAllUsers(internetDialogDelegateLegacy2.mAlertDialog);
                                 SystemUIDialog.registerDismissListener(internetDialogDelegateLegacy2.mAlertDialog);
                                 SystemUIDialog.setWindowOnTop(internetDialogDelegateLegacy2.mAlertDialog, ((KeyguardStateControllerImpl) internetDialogDelegateLegacy2.mKeyguard).mShowing);
@@ -581,8 +578,8 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
                                 break;
                             }
                         }
-                        if (internetDetailsContentController3.mIsMobileDataEnabled != isChecked) {
-                            internetDetailsContentController3.setMobileDataEnabled(systemUIDialog4.getContext(), internetDialogDelegateLegacy2.mDefaultDataSubId, isChecked);
+                        if (internetDetailsContentController3.mIsMobileDataEnabled != zIsChecked) {
+                            internetDetailsContentController3.setMobileDataEnabled(systemUIDialog4.getContext(), internetDialogDelegateLegacy2.mDefaultDataSubId, zIsChecked);
                             break;
                         }
                         break;
@@ -777,7 +774,7 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
             @Override // java.lang.Runnable
             public final void run() {
                 WifiManager wifiManager;
-                InternetDialogDelegateLegacy internetDialogDelegateLegacy = InternetDialogDelegateLegacy.this;
+                InternetDialogDelegateLegacy internetDialogDelegateLegacy = this.f$0;
                 boolean z2 = z;
                 MutableLiveData mutableLiveData = internetDialogDelegateLegacy.mDataInternetContent;
                 InternetDialogDelegateLegacy.InternetContent internetContent = new InternetDialogDelegateLegacy.InternetContent();
@@ -805,7 +802,7 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
         });
     }
 
-    public final void updateDialogUI(InternetContent internetContent) {
+    public final void updateDialogUI(InternetContent internetContent) throws Resources.NotFoundException {
         int i;
         SystemUIDialog systemUIDialog;
         boolean z = DEBUG;
@@ -842,7 +839,7 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
                 this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        InternetDialogDelegateLegacy internetDialogDelegateLegacy = InternetDialogDelegateLegacy.this;
+                        InternetDialogDelegateLegacy internetDialogDelegateLegacy = this.f$0;
                         internetDialogDelegateLegacy.mHandler.post(new InternetDialogDelegateLegacy$$ExternalSyntheticLambda16(internetDialogDelegateLegacy, internetDialogDelegateLegacy.mInternetDetailsContentController.getSignalStrengthDrawable(internetDialogDelegateLegacy.mDefaultDataSubId), 0));
                     }
                 });
@@ -879,7 +876,7 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
                     this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            InternetDialogDelegateLegacy internetDialogDelegateLegacy = InternetDialogDelegateLegacy.this;
+                            InternetDialogDelegateLegacy internetDialogDelegateLegacy = this.f$0;
                             internetDialogDelegateLegacy.mHandler.post(new InternetDialogDelegateLegacy$$ExternalSyntheticLambda16(imageView, internetDialogDelegateLegacy.mInternetDetailsContentController.getSignalStrengthDrawable(i3), 1));
                         }
                     });
@@ -915,9 +912,9 @@ public class InternetDialogDelegateLegacy implements SystemUIDialog.Delegate, In
             }
         }
         if (this.mCanConfigWifi) {
-            boolean isChecked = this.mWiFiToggle.isChecked();
+            boolean zIsChecked = this.mWiFiToggle.isChecked();
             boolean z5 = internetContent.mIsWifiEnabled;
-            if (isChecked != z5) {
+            if (zIsChecked != z5) {
                 this.mWiFiToggle.setChecked(z5);
             }
             if (internetContent.mIsDeviceLocked) {

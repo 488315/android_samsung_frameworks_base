@@ -7,7 +7,6 @@ import com.samsung.android.bluetooth.SemBluetoothCastProfile;
 import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BluetoothAudioCastWrapper {
     public final BluetoothAudioCastWrapper$audioCastProfileListener$1 audioCastProfileListener;
@@ -17,11 +16,11 @@ public final class BluetoothAudioCastWrapper {
     public BluetoothAudioCastWrapper(Context context) {
         ?? r0 = new SemBluetoothCastProfile.BluetoothCastProfileListener() { // from class: com.android.systemui.volume.util.BluetoothAudioCastWrapper$audioCastProfileListener$1
             public final void onServiceConnected(SemBluetoothCastProfile semBluetoothCastProfile) {
-                BluetoothAudioCastWrapper.this.service = (SemBluetoothAudioCast) semBluetoothCastProfile;
+                this.this$0.service = (SemBluetoothAudioCast) semBluetoothCastProfile;
             }
 
             public final void onServiceDisconnected() {
-                BluetoothAudioCastWrapper bluetoothAudioCastWrapper = BluetoothAudioCastWrapper.this;
+                BluetoothAudioCastWrapper bluetoothAudioCastWrapper = this.this$0;
                 SemBluetoothAudioCast semBluetoothAudioCast = bluetoothAudioCastWrapper.service;
                 if (semBluetoothAudioCast != null) {
                     semBluetoothAudioCast.closeProxy();

@@ -9,14 +9,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MenuHostHelper {
     public final Runnable mOnInvalidateMenuCallback;
     public final CopyOnWriteArrayList mMenuProviders = new CopyOnWriteArrayList();
     public final Map mProviderToLifecycleContainers = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LifecycleContainer {
         public final Lifecycle mLifecycle;
         public LifecycleEventObserver mObserver;

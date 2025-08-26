@@ -89,7 +89,7 @@ public class MediaScannerConnection implements ServiceConnection {
             BackgroundThread.getExecutor().execute(new Runnable() { // from class: android.media.MediaScannerConnection$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MediaScannerConnection.this.lambda$scanFile$0(str);
+                    this.f$0.lambda$scanFile$0(str);
                 }
             });
         }
@@ -104,24 +104,24 @@ public class MediaScannerConnection implements ServiceConnection {
         BackgroundThread.getExecutor().execute(new Runnable() { // from class: android.media.MediaScannerConnection$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                MediaScannerConnection.lambda$scanFile$1(Context.this, strArr, onScanCompletedListener);
+                MediaScannerConnection.lambda$scanFile$1(context, strArr, onScanCompletedListener);
             }
         });
     }
 
     static /* synthetic */ void lambda$scanFile$1(Context context, String[] strArr, OnScanCompletedListener onScanCompletedListener) {
-        ContentProviderClient acquireContentProviderClient = context.getContentResolver().acquireContentProviderClient(AppJankStats.WIDGET_CATEGORY_MEDIA);
+        ContentProviderClient contentProviderClientAcquireContentProviderClient = context.getContentResolver().acquireContentProviderClient(AppJankStats.WIDGET_CATEGORY_MEDIA);
         try {
             for (String str : strArr) {
-                runCallBack(context, onScanCompletedListener, str, scanFileQuietly(acquireContentProviderClient, new File(str)));
+                runCallBack(context, onScanCompletedListener, str, scanFileQuietly(contentProviderClientAcquireContentProviderClient, new File(str)));
             }
-            if (acquireContentProviderClient != null) {
-                acquireContentProviderClient.close();
+            if (contentProviderClientAcquireContentProviderClient != null) {
+                contentProviderClientAcquireContentProviderClient.close();
             }
         } catch (Throwable th) {
-            if (acquireContentProviderClient != null) {
+            if (contentProviderClientAcquireContentProviderClient != null) {
                 try {
-                    acquireContentProviderClient.close();
+                    contentProviderClientAcquireContentProviderClient.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -131,14 +131,14 @@ public class MediaScannerConnection implements ServiceConnection {
     }
 
     private static Uri scanFileQuietly(ContentProviderClient contentProviderClient, File file) {
-        Uri uri = null;
+        Uri uriScanFile = null;
         try {
-            uri = MediaStore.scanFile(ContentResolver.wrap(contentProviderClient), file.getCanonicalFile());
-            Log.d(TAG, "Scanned " + file + " to " + uri);
-            return uri;
+            uriScanFile = MediaStore.scanFile(ContentResolver.wrap(contentProviderClient), file.getCanonicalFile());
+            Log.d(TAG, "Scanned " + file + " to " + uriScanFile);
+            return uriScanFile;
         } catch (Exception e) {
             Log.w(TAG, "Failed to scan " + file + ": " + e);
-            return uri;
+            return uriScanFile;
         }
     }
 

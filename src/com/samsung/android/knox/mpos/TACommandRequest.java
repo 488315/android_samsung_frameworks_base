@@ -97,18 +97,18 @@ public class TACommandRequest implements Parcelable {
 
     public void readFromParcel(Parcel parcel) {
         this.mVersion = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        if (i > 0) {
+            byte[] bArr = new byte[i];
             this.mMagicNum = bArr;
             parcel.readByteArray(bArr);
         }
         this.mCommandId = parcel.readInt();
         this.mLength = parcel.readInt();
         this.mOffset = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        if (readInt2 > 0) {
-            byte[] bArr2 = new byte[readInt2];
+        int i2 = parcel.readInt();
+        if (i2 > 0) {
+            byte[] bArr2 = new byte[i2];
             this.mRequest = bArr2;
             parcel.readByteArray(bArr2);
         }

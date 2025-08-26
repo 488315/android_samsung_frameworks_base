@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SafeWindowExtensionsProvider {
     public final ClassLoader loader;
@@ -23,7 +22,7 @@ public final class SafeWindowExtensionsProvider {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return SafeWindowExtensionsProvider.this.loader.loadClass("androidx.window.extensions.WindowExtensionsProvider");
+                return this.this$0.loader.loadClass("androidx.window.extensions.WindowExtensionsProvider");
             }
         };
         reflectionUtils.getClass();
@@ -35,13 +34,13 @@ public final class SafeWindowExtensionsProvider {
                 }
 
                 @Override // kotlin.jvm.functions.Function0
-                public final Object invoke() {
+                public final Object invoke() throws NoSuchMethodException, SecurityException, ClassNotFoundException {
                     boolean z = false;
                     Class[] clsArr = new Class[0];
-                    Method declaredMethod = SafeWindowExtensionsProvider.this.loader.loadClass("androidx.window.extensions.WindowExtensionsProvider").getDeclaredMethod("getWindowExtensions", null);
-                    Class<?> loadClass = SafeWindowExtensionsProvider.this.loader.loadClass("androidx.window.extensions.WindowExtensions");
+                    Method declaredMethod = this.this$0.loader.loadClass("androidx.window.extensions.WindowExtensionsProvider").getDeclaredMethod("getWindowExtensions", null);
+                    Class<?> clsLoadClass = this.this$0.loader.loadClass("androidx.window.extensions.WindowExtensions");
                     ReflectionUtils.INSTANCE.getClass();
-                    if (declaredMethod.getReturnType().equals(loadClass) && Modifier.isPublic(declaredMethod.getModifiers())) {
+                    if (declaredMethod.getReturnType().equals(clsLoadClass) && Modifier.isPublic(declaredMethod.getModifiers())) {
                         z = true;
                     }
                     return Boolean.valueOf(z);

@@ -105,9 +105,9 @@ public final class AudioHalVersionInfo implements Parcelable, Comparable<AudioHa
     @Override // java.lang.Comparable
     public int compareTo(AudioHalVersionInfo audioHalVersionInfo) {
         List<AudioHalVersionInfo> list = VERSIONS;
-        int indexOf = list.indexOf(audioHalVersionInfo);
-        int indexOf2 = list.indexOf(this);
-        return (indexOf2 < 0 || indexOf < 0) ? indexOf2 - indexOf : indexOf - indexOf2;
+        int iIndexOf = list.indexOf(audioHalVersionInfo);
+        int iIndexOf2 = list.indexOf(this);
+        return (iIndexOf2 < 0 || iIndexOf < 0) ? iIndexOf2 - iIndexOf : iIndexOf - iIndexOf2;
     }
 
     @Override // android.os.Parcelable

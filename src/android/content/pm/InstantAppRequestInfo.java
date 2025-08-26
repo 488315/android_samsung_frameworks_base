@@ -87,19 +87,19 @@ public final class InstantAppRequestInfo implements Parcelable {
     }
 
     InstantAppRequestInfo(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        boolean z = (readByte & 8) != 0;
+        byte b = parcel.readByte();
+        boolean z = (b & 8) != 0;
         Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-        int[] createIntArray = (readByte & 2) == 0 ? null : parcel.createIntArray();
+        int[] iArrCreateIntArray = (b & 2) == 0 ? null : parcel.createIntArray();
         UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-        String readString = parcel.readString();
+        String string = parcel.readString();
         this.mIntent = intent;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) intent);
-        this.mHostDigestPrefix = createIntArray;
+        this.mHostDigestPrefix = iArrCreateIntArray;
         this.mUserHandle = userHandle;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) userHandle);
         this.mRequesterInstantApp = z;
-        this.mToken = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
+        this.mToken = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
     }
 }

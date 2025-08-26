@@ -26,11 +26,11 @@ public interface ListenerExecutor {
         void operate(TListener tlistener) throws Exception;
     }
 
-    default <TListener> void executeSafely(Executor executor, Supplier<TListener> supplier, ListenerOperation<TListener> listenerOperation) {
+    default <TListener> void executeSafely(Executor executor, Supplier<TListener> supplier, ListenerOperation<TListener> listenerOperation) throws Throwable {
         executeSafely(executor, supplier, listenerOperation, null);
     }
 
-    default <TListener, TListenerOperation extends ListenerOperation<TListener>> void executeSafely(Executor executor, final Supplier<TListener> supplier, final TListenerOperation tlisteneroperation, final FailureCallback<TListenerOperation> failureCallback) {
+    default <TListener, TListenerOperation extends ListenerOperation<TListener>> void executeSafely(Executor executor, final Supplier<TListener> supplier, final TListenerOperation tlisteneroperation, final FailureCallback<TListenerOperation> failureCallback) throws Throwable {
         final TListener tlistener;
         boolean z;
         if (tlisteneroperation == null || (tlistener = supplier.get()) == null) {
@@ -39,24 +39,24 @@ public interface ListenerExecutor {
         try {
             tlisteneroperation.onPreExecute();
             z = true;
-        } catch (Throwable th) {
-            th = th;
-            z = false;
-        }
-        try {
-            executor.execute(new Runnable() { // from class: com.android.internal.listeners.ListenerExecutor$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ListenerExecutor.lambda$executeSafely$0(tlistener, supplier, tlisteneroperation, failureCallback);
+            try {
+                executor.execute(new Runnable() { // from class: com.android.internal.listeners.ListenerExecutor$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ListenerExecutor.lambda$executeSafely$0(tlistener, supplier, tlisteneroperation, failureCallback);
+                    }
+                });
+            } catch (Throwable th) {
+                th = th;
+                if (z) {
+                    tlisteneroperation.onPostExecute(false);
                 }
-            });
+                tlisteneroperation.onComplete(false);
+                throw th;
+            }
         } catch (Throwable th2) {
             th = th2;
-            if (z) {
-                tlisteneroperation.onPostExecute(false);
-            }
-            tlisteneroperation.onComplete(false);
-            throw th;
+            z = false;
         }
     }
 

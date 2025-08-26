@@ -87,9 +87,9 @@ public interface IDescrambler extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDescrambler)) {
-                return (IDescrambler) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDescrambler)) {
+                return (IDescrambler) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -115,26 +115,26 @@ public interface IDescrambler extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                setDemuxSource(readInt);
+                setDemuxSource(i3);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                setKeyToken(createByteArray);
+                setKeyToken(bArrCreateByteArray);
                 parcel2.writeNoException();
             } else if (i == 3) {
                 DemuxPid demuxPid = (DemuxPid) parcel.readTypedObject(DemuxPid.CREATOR);
-                IFilter asInterface = IFilter.Stub.asInterface(parcel.readStrongBinder());
+                IFilter iFilterAsInterface = IFilter.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addPid(demuxPid, asInterface);
+                addPid(demuxPid, iFilterAsInterface);
                 parcel2.writeNoException();
             } else if (i == 4) {
                 DemuxPid demuxPid2 = (DemuxPid) parcel.readTypedObject(DemuxPid.CREATOR);
-                IFilter asInterface2 = IFilter.Stub.asInterface(parcel.readStrongBinder());
+                IFilter iFilterAsInterface2 = IFilter.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removePid(demuxPid2, asInterface2);
+                removePid(demuxPid2, iFilterAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 5) {
                 close();
@@ -165,103 +165,103 @@ public interface IDescrambler extends IInterface {
 
             @Override // android.hardware.tv.tuner.IDescrambler
             public void setDemuxSource(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setDemuxSource is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDescrambler
             public void setKeyToken(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setKeyToken is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDescrambler
             public void addPid(DemuxPid demuxPid, IFilter iFilter) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(demuxPid, 0);
-                    obtain.writeStrongInterface(iFilter);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(demuxPid, 0);
+                    parcelObtain.writeStrongInterface(iFilter);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method addPid is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDescrambler
             public void removePid(DemuxPid demuxPid, IFilter iFilter) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(demuxPid, 0);
-                    obtain.writeStrongInterface(iFilter);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(demuxPid, 0);
+                    parcelObtain.writeStrongInterface(iFilter);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method removePid is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDescrambler
             public void close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method close is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.tv.tuner.IDescrambler
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -270,18 +270,18 @@ public interface IDescrambler extends IInterface {
             @Override // android.hardware.tv.tuner.IDescrambler
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

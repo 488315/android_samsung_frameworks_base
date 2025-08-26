@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SmallSortedMap extends AbstractMap {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -24,7 +23,6 @@ public class SmallSortedMap extends AbstractMap {
     public Map overflowEntries;
     public Map overflowEntriesDescending;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DescendingEntryIterator implements Iterator {
         public Iterator lazyOverflowIterator;
         public int pos;
@@ -63,7 +61,6 @@ public class SmallSortedMap extends AbstractMap {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DescendingEntrySet extends EntrySet {
         private DescendingEntrySet() {
             super();
@@ -75,7 +72,6 @@ public class SmallSortedMap extends AbstractMap {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EmptySet {
         public static final AnonymousClass1 ITERATOR = new Iterator() { // from class: com.google.protobuf.SmallSortedMap.EmptySet.1
             @Override // java.util.Iterator
@@ -104,7 +100,6 @@ public class SmallSortedMap extends AbstractMap {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Entry implements Map.Entry, Comparable {
         public final Comparable key;
         public Object value;
@@ -150,9 +145,9 @@ public class SmallSortedMap extends AbstractMap {
         @Override // java.util.Map.Entry
         public final int hashCode() {
             Comparable comparable = this.key;
-            int hashCode = comparable == null ? 0 : comparable.hashCode();
+            int iHashCode = comparable == null ? 0 : comparable.hashCode();
             Object obj = this.value;
-            return hashCode ^ (obj != null ? obj.hashCode() : 0);
+            return iHashCode ^ (obj != null ? obj.hashCode() : 0);
         }
 
         @Override // java.util.Map.Entry
@@ -175,7 +170,6 @@ public class SmallSortedMap extends AbstractMap {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EntryIterator implements Iterator {
         public Iterator lazyOverflowIterator;
         public boolean nextCalledBeforeRemove;
@@ -225,7 +219,6 @@ public class SmallSortedMap extends AbstractMap {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EntrySet extends AbstractSet {
         private EntrySet() {
         }
@@ -277,35 +270,45 @@ public class SmallSortedMap extends AbstractMap {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0024  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final int binarySearchInArray(Comparable comparable) {
         int i;
+        int i2;
         int size = this.entryList.size();
-        int i2 = size - 1;
-        if (i2 >= 0) {
-            int compareTo = comparable.compareTo(((Entry) this.entryList.get(i2)).key);
-            if (compareTo > 0) {
-                i = size + 1;
-                return -i;
-            }
-            if (compareTo == 0) {
-                return i2;
-            }
-        }
-        int i3 = 0;
-        while (i3 <= i2) {
-            int i4 = (i3 + i2) / 2;
-            int compareTo2 = comparable.compareTo(((Entry) this.entryList.get(i4)).key);
-            if (compareTo2 < 0) {
-                i2 = i4 - 1;
-            } else {
-                if (compareTo2 <= 0) {
-                    return i4;
+        int i3 = size - 1;
+        if (i3 < 0) {
+            i = 0;
+            while (i <= i3) {
+                int i4 = (i + i3) / 2;
+                int iCompareTo = comparable.compareTo(((Entry) this.entryList.get(i4)).key);
+                if (iCompareTo < 0) {
+                    i3 = i4 - 1;
+                } else {
+                    if (iCompareTo <= 0) {
+                        return i4;
+                    }
+                    i = i4 + 1;
                 }
-                i3 = i4 + 1;
+            }
+            i2 = i + 1;
+        } else {
+            int iCompareTo2 = comparable.compareTo(((Entry) this.entryList.get(i3)).key);
+            if (iCompareTo2 > 0) {
+                i2 = size + 1;
+            } else {
+                if (iCompareTo2 == 0) {
+                    return i3;
+                }
+                i = 0;
+                while (i <= i3) {
+                }
+                i2 = i + 1;
             }
         }
-        i = i3 + 1;
-        return -i;
+        return -i2;
     }
 
     public final void checkMutable() {
@@ -371,8 +374,8 @@ public class SmallSortedMap extends AbstractMap {
     @Override // java.util.AbstractMap, java.util.Map
     public final Object get(Object obj) {
         Comparable comparable = (Comparable) obj;
-        int binarySearchInArray = binarySearchInArray(comparable);
-        return binarySearchInArray >= 0 ? ((Entry) this.entryList.get(binarySearchInArray)).value : this.overflowEntries.get(comparable);
+        int iBinarySearchInArray = binarySearchInArray(comparable);
+        return iBinarySearchInArray >= 0 ? ((Entry) this.entryList.get(iBinarySearchInArray)).value : this.overflowEntries.get(comparable);
     }
 
     public final Map.Entry getArrayEntryAt(int i) {
@@ -396,11 +399,11 @@ public class SmallSortedMap extends AbstractMap {
     @Override // java.util.AbstractMap, java.util.Map
     public final int hashCode() {
         int size = this.entryList.size();
-        int i = 0;
-        for (int i2 = 0; i2 < size; i2++) {
-            i += ((Entry) this.entryList.get(i2)).hashCode();
+        int iHashCode = 0;
+        for (int i = 0; i < size; i++) {
+            iHashCode += ((Entry) this.entryList.get(i)).hashCode();
         }
-        return this.overflowEntries.size() > 0 ? this.overflowEntries.hashCode() + i : i;
+        return this.overflowEntries.size() > 0 ? this.overflowEntries.hashCode() + iHashCode : iHashCode;
     }
 
     public void makeImmutable() {
@@ -416,9 +419,9 @@ public class SmallSortedMap extends AbstractMap {
     public final Object remove(Object obj) {
         checkMutable();
         Comparable comparable = (Comparable) obj;
-        int binarySearchInArray = binarySearchInArray(comparable);
-        if (binarySearchInArray >= 0) {
-            return removeArrayEntryAt(binarySearchInArray);
+        int iBinarySearchInArray = binarySearchInArray(comparable);
+        if (iBinarySearchInArray >= 0) {
+            return removeArrayEntryAt(iBinarySearchInArray);
         }
         if (this.overflowEntries.isEmpty()) {
             return null;
@@ -453,15 +456,15 @@ public class SmallSortedMap extends AbstractMap {
     @Override // java.util.AbstractMap, java.util.Map
     public final Object put(Comparable comparable, Object obj) {
         checkMutable();
-        int binarySearchInArray = binarySearchInArray(comparable);
-        if (binarySearchInArray >= 0) {
-            return ((Entry) this.entryList.get(binarySearchInArray)).setValue(obj);
+        int iBinarySearchInArray = binarySearchInArray(comparable);
+        if (iBinarySearchInArray >= 0) {
+            return ((Entry) this.entryList.get(iBinarySearchInArray)).setValue(obj);
         }
         checkMutable();
         if (this.entryList.isEmpty() && !(this.entryList instanceof ArrayList)) {
             this.entryList = new ArrayList(this.maxArraySize);
         }
-        int i = -(binarySearchInArray + 1);
+        int i = -(iBinarySearchInArray + 1);
         if (i >= this.maxArraySize) {
             return getOverflowEntriesMutable().put(comparable, obj);
         }

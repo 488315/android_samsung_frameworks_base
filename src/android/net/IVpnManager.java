@@ -522,9 +522,9 @@ public interface IVpnManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVpnManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVpnManager)) {
-                return (IVpnManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVpnManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVpnManager)) {
+                return (IVpnManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -676,44 +676,44 @@ public interface IVpnManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean prepareVpn = prepareVpn(readString, readString2, readInt);
+                    boolean zPrepareVpn = prepareVpn(string, string2, i3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(prepareVpn);
+                    parcel2.writeBoolean(zPrepareVpn);
                     return true;
                 case 2:
-                    String readString3 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setVpnPackageAuthorization(readString3, readInt2, readInt3);
+                    setVpnPackageAuthorization(string3, i4, i5);
                     parcel2.writeNoException();
                     return true;
                 case 3:
                     VpnConfig vpnConfig = (VpnConfig) parcel.readTypedObject(VpnConfig.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ParcelFileDescriptor establishVpn = establishVpn(vpnConfig);
+                    ParcelFileDescriptor parcelFileDescriptorEstablishVpn = establishVpn(vpnConfig);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(establishVpn, 1);
+                    parcel2.writeTypedObject(parcelFileDescriptorEstablishVpn, 1);
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean addVpnAddress = addVpnAddress(readString4, readInt4);
+                    boolean zAddVpnAddress = addVpnAddress(string4, i6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addVpnAddress);
+                    parcel2.writeBoolean(zAddVpnAddress);
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean removeVpnAddress = removeVpnAddress(readString5, readInt5);
+                    boolean zRemoveVpnAddress = removeVpnAddress(string5, i7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeVpnAddress);
+                    parcel2.writeBoolean(zRemoveVpnAddress);
                     return true;
                 case 6:
                     Network[] networkArr = (Network[]) parcel.createTypedArray(Network.CREATOR);
@@ -724,103 +724,103 @@ public interface IVpnManager extends IInterface {
                     return true;
                 case 7:
                     VpnProfile vpnProfile = (VpnProfile) parcel.readTypedObject(VpnProfile.CREATOR);
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean provisionVpnProfile = provisionVpnProfile(vpnProfile, readString6);
+                    boolean zProvisionVpnProfile = provisionVpnProfile(vpnProfile, string6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(provisionVpnProfile);
+                    parcel2.writeBoolean(zProvisionVpnProfile);
                     return true;
                 case 8:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    deleteVpnProfile(readString7);
+                    deleteVpnProfile(string7);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String startVpnProfile = startVpnProfile(readString8);
+                    String strStartVpnProfile = startVpnProfile(string8);
                     parcel2.writeNoException();
-                    parcel2.writeString(startVpnProfile);
+                    parcel2.writeString(strStartVpnProfile);
                     return true;
                 case 10:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    stopVpnProfile(readString9);
+                    stopVpnProfile(string9);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    VpnProfileState provisionedVpnProfileState = getProvisionedVpnProfileState(readString10);
+                    VpnProfileState provisionedVpnProfileState = getProvisionedVpnProfileState(string10);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(provisionedVpnProfileState, 1);
                     return true;
                 case 12:
-                    int readInt6 = parcel.readInt();
-                    String readString11 = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    int i8 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean appExclusionList = setAppExclusionList(readInt6, readString11, createStringArrayList);
+                    boolean appExclusionList = setAppExclusionList(i8, string11, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(appExclusionList);
                     return true;
                 case 13:
-                    int readInt7 = parcel.readInt();
-                    String readString12 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> appExclusionList2 = getAppExclusionList(readInt7, readString12);
+                    List<String> appExclusionList2 = getAppExclusionList(i9, string12);
                     parcel2.writeNoException();
                     parcel2.writeStringList(appExclusionList2);
                     return true;
                 case 14:
-                    int readInt8 = parcel.readInt();
-                    String readString13 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isAlwaysOnVpnPackageSupported = isAlwaysOnVpnPackageSupported(readInt8, readString13);
+                    boolean zIsAlwaysOnVpnPackageSupported = isAlwaysOnVpnPackageSupported(i10, string13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAlwaysOnVpnPackageSupported);
+                    parcel2.writeBoolean(zIsAlwaysOnVpnPackageSupported);
                     return true;
                 case 15:
-                    int readInt9 = parcel.readInt();
-                    String readString14 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    int i11 = parcel.readInt();
+                    String string14 = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean alwaysOnVpnPackage = setAlwaysOnVpnPackage(readInt9, readString14, readBoolean, createStringArrayList2);
+                    boolean alwaysOnVpnPackage = setAlwaysOnVpnPackage(i11, string14, z, arrayListCreateStringArrayList2);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(alwaysOnVpnPackage);
                     return true;
                 case 16:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String alwaysOnVpnPackage2 = getAlwaysOnVpnPackage(readInt10);
+                    String alwaysOnVpnPackage2 = getAlwaysOnVpnPackage(i12);
                     parcel2.writeNoException();
                     parcel2.writeString(alwaysOnVpnPackage2);
                     return true;
                 case 17:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isVpnLockdownEnabled = isVpnLockdownEnabled(readInt11);
+                    boolean zIsVpnLockdownEnabled = isVpnLockdownEnabled(i13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVpnLockdownEnabled);
+                    parcel2.writeBoolean(zIsVpnLockdownEnabled);
                     return true;
                 case 18:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> vpnLockdownAllowlist = getVpnLockdownAllowlist(readInt12);
+                    List<String> vpnLockdownAllowlist = getVpnLockdownAllowlist(i14);
                     parcel2.writeNoException();
                     parcel2.writeStringList(vpnLockdownAllowlist);
                     return true;
                 case 19:
-                    boolean isCallerCurrentAlwaysOnVpnApp = isCallerCurrentAlwaysOnVpnApp();
+                    boolean zIsCallerCurrentAlwaysOnVpnApp = isCallerCurrentAlwaysOnVpnApp();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCallerCurrentAlwaysOnVpnApp);
+                    parcel2.writeBoolean(zIsCallerCurrentAlwaysOnVpnApp);
                     return true;
                 case 20:
-                    boolean isCallerCurrentAlwaysOnVpnLockdownApp = isCallerCurrentAlwaysOnVpnLockdownApp();
+                    boolean zIsCallerCurrentAlwaysOnVpnLockdownApp = isCallerCurrentAlwaysOnVpnLockdownApp();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCallerCurrentAlwaysOnVpnLockdownApp);
+                    parcel2.writeBoolean(zIsCallerCurrentAlwaysOnVpnLockdownApp);
                     return true;
                 case 21:
                     VpnProfile vpnProfile2 = (VpnProfile) parcel.readTypedObject(VpnProfile.CREATOR);
@@ -829,50 +829,50 @@ public interface IVpnManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    LegacyVpnInfo legacyVpnInfo = getLegacyVpnInfo(readInt13);
+                    LegacyVpnInfo legacyVpnInfo = getLegacyVpnInfo(i15);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(legacyVpnInfo, 1);
                     return true;
                 case 23:
-                    boolean updateLockdownVpn = updateLockdownVpn();
+                    boolean zUpdateLockdownVpn = updateLockdownVpn();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(updateLockdownVpn);
+                    parcel2.writeBoolean(zUpdateLockdownVpn);
                     return true;
                 case 24:
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    byte[] fromVpnProfileStore = getFromVpnProfileStore(readString15);
+                    byte[] fromVpnProfileStore = getFromVpnProfileStore(string15);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(fromVpnProfileStore);
                     return true;
                 case 25:
-                    String readString16 = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
+                    String string16 = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    boolean putIntoVpnProfileStore = putIntoVpnProfileStore(readString16, createByteArray);
+                    boolean zPutIntoVpnProfileStore = putIntoVpnProfileStore(string16, bArrCreateByteArray);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(putIntoVpnProfileStore);
+                    parcel2.writeBoolean(zPutIntoVpnProfileStore);
                     return true;
                 case 26:
-                    String readString17 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeFromVpnProfileStore = removeFromVpnProfileStore(readString17);
+                    boolean zRemoveFromVpnProfileStore = removeFromVpnProfileStore(string17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeFromVpnProfileStore);
+                    parcel2.writeBoolean(zRemoveFromVpnProfileStore);
                     return true;
                 case 27:
-                    String readString18 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String[] listFromVpnProfileStore = listFromVpnProfileStore(readString18);
+                    String[] strArrListFromVpnProfileStore = listFromVpnProfileStore(string18);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(listFromVpnProfileStore);
+                    parcel2.writeStringArray(strArrListFromVpnProfileStore);
                     return true;
                 case 28:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    VpnConfig vpnConfig2 = getVpnConfig(readInt14);
+                    VpnConfig vpnConfig2 = getVpnConfig(i16);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(vpnConfig2, 1);
                     return true;
@@ -881,163 +881,163 @@ public interface IVpnManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean chainingEnabledForProfile = getChainingEnabledForProfile(readInt15);
+                    boolean chainingEnabledForProfile = getChainingEnabledForProfile(i17);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(chainingEnabledForProfile);
                     return true;
                 case 31:
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int knoxVpnProfileType = knoxVpnProfileType(readString19);
+                    int iKnoxVpnProfileType = knoxVpnProfileType(string19);
                     parcel2.writeNoException();
-                    parcel2.writeInt(knoxVpnProfileType);
+                    parcel2.writeInt(iKnoxVpnProfileType);
                     return true;
                 case 32:
-                    int readInt16 = parcel.readInt();
-                    String readString20 = parcel.readString();
+                    int i18 = parcel.readInt();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int[] knoxVpnZtnaProxyInfoForUid = getKnoxVpnZtnaProxyInfoForUid(readInt16, readString20);
+                    int[] knoxVpnZtnaProxyInfoForUid = getKnoxVpnZtnaProxyInfoForUid(i18, string20);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(knoxVpnZtnaProxyInfoForUid);
                     return true;
                 case 33:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String[] proxyInfoForUid = getProxyInfoForUid(readInt17);
+                    String[] proxyInfoForUid = getProxyInfoForUid(i19);
                     parcel2.writeNoException();
                     parcel2.writeStringArray(proxyInfoForUid);
                     return true;
                 case 34:
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkIfLocalProxyPortExists = checkIfLocalProxyPortExists(readInt18);
+                    boolean zCheckIfLocalProxyPortExists = checkIfLocalProxyPortExists(i20);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkIfLocalProxyPortExists);
+                    parcel2.writeBoolean(zCheckIfLocalProxyPortExists);
                     return true;
                 case 35:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkIfUidIsExempted = checkIfUidIsExempted(readInt19);
+                    boolean zCheckIfUidIsExempted = checkIfUidIsExempted(i21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkIfUidIsExempted);
+                    parcel2.writeBoolean(zCheckIfUidIsExempted);
                     return true;
                 case 36:
-                    String readString21 = parcel.readString();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String[] dnsServerListForInterface = getDnsServerListForInterface(readString21);
+                    String[] dnsServerListForInterface = getDnsServerListForInterface(string21);
                     parcel2.writeNoException();
                     parcel2.writeStringArray(dnsServerListForInterface);
                     return true;
                 case 37:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isProxyConfiguredForKnoxVpn = isProxyConfiguredForKnoxVpn(readInt20);
+                    boolean zIsProxyConfiguredForKnoxVpn = isProxyConfiguredForKnoxVpn(i22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isProxyConfiguredForKnoxVpn);
+                    parcel2.writeBoolean(zIsProxyConfiguredForKnoxVpn);
                     return true;
                 case 38:
-                    String readString22 = parcel.readString();
-                    int readInt21 = parcel.readInt();
-                    String readString23 = parcel.readString();
+                    String string22 = parcel.readString();
+                    int i23 = parcel.readInt();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    resetUidListInNetworkCapabilities(readString22, readInt21, readString23);
+                    resetUidListInNetworkCapabilities(string22, i23, string23);
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    String readString24 = parcel.readString();
-                    int readInt22 = parcel.readInt();
-                    String readString25 = parcel.readString();
+                    String string24 = parcel.readString();
+                    int i24 = parcel.readInt();
+                    String string25 = parcel.readString();
                     ProxyInfo proxyInfo = (ProxyInfo) parcel.readTypedObject(ProxyInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateLocalProxyInfo(readString24, readInt22, readString25, proxyInfo);
+                    updateLocalProxyInfo(string24, i24, string25, proxyInfo);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    String readString26 = parcel.readString();
-                    int readInt23 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    String readString27 = parcel.readString();
+                    String string26 = parcel.readString();
+                    int i25 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    applyBlockingRulesToUidRange(readString26, readInt23, readBoolean2, readString27);
+                    applyBlockingRulesToUidRange(string26, i25, z2, string27);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    String readString28 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    String string28 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean prepareEnterpriseVpnExt = prepareEnterpriseVpnExt(readString28, readBoolean3);
+                    boolean zPrepareEnterpriseVpnExt = prepareEnterpriseVpnExt(string28, z3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(prepareEnterpriseVpnExt);
+                    parcel2.writeBoolean(zPrepareEnterpriseVpnExt);
                     return true;
                 case 42:
-                    String readString29 = parcel.readString();
-                    int readInt24 = parcel.readInt();
+                    String string29 = parcel.readString();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean disconnectKnoxVpn = disconnectKnoxVpn(readString29, readInt24);
+                    boolean zDisconnectKnoxVpn = disconnectKnoxVpn(string29, i26);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disconnectKnoxVpn);
+                    parcel2.writeBoolean(zDisconnectKnoxVpn);
                     return true;
                 case 43:
-                    String readString30 = parcel.readString();
-                    int readInt25 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    String string30 = parcel.readString();
+                    int i27 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    updateEnterpriseVpn(readString30, readInt25, readBoolean4);
+                    updateEnterpriseVpn(string30, i27, z4);
                     parcel2.writeNoException();
                     return true;
                 case 44:
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateNotificationIcon(readInt26);
+                    updateNotificationIcon(i28);
                     parcel2.writeNoException();
                     return true;
                 case 45:
-                    String readString31 = parcel.readString();
-                    String readString32 = parcel.readString();
-                    int readInt27 = parcel.readInt();
-                    int readInt28 = parcel.readInt();
+                    String string31 = parcel.readString();
+                    String string32 = parcel.readString();
+                    int i29 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    createEnterpriseVpnInstance(readString31, readString32, readInt27, readInt28);
+                    createEnterpriseVpnInstance(string31, string32, i29, i30);
                     parcel2.writeNoException();
                     return true;
                 case 46:
-                    String readString33 = parcel.readString();
-                    String readString34 = parcel.readString();
-                    int readInt29 = parcel.readInt();
+                    String string33 = parcel.readString();
+                    String string34 = parcel.readString();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeEnterpriseVpnInstance(readString33, readString34, readInt29);
+                    removeEnterpriseVpnInstance(string33, string34, i31);
                     parcel2.writeNoException();
                     return true;
                 case 47:
-                    String readString35 = parcel.readString();
-                    int readInt30 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    int[] createIntArray = parcel.createIntArray();
-                    String readString36 = parcel.readString();
+                    String string35 = parcel.readString();
+                    int i32 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    String string36 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    updateUidRangesToPerAppVpn(readString35, readInt30, readBoolean5, createIntArray, readString36);
+                    updateUidRangesToPerAppVpn(string35, i32, z5, iArrCreateIntArray, string36);
                     parcel2.writeNoException();
                     return true;
                 case 48:
-                    String readString37 = parcel.readString();
-                    int readInt31 = parcel.readInt();
-                    boolean readBoolean6 = parcel.readBoolean();
-                    int readInt32 = parcel.readInt();
-                    String readString38 = parcel.readString();
+                    String string37 = parcel.readString();
+                    int i33 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
+                    int i34 = parcel.readInt();
+                    String string38 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    updateUidRangesToUserVpn(readString37, readInt31, readBoolean6, readInt32, readString38);
+                    updateUidRangesToUserVpn(string37, i33, z6, i34, string38);
                     parcel2.writeNoException();
                     return true;
                 case 49:
-                    String readString39 = parcel.readString();
-                    int readInt33 = parcel.readInt();
-                    int readInt34 = parcel.readInt();
-                    int[] createIntArray2 = parcel.createIntArray();
-                    String readString40 = parcel.readString();
+                    String string39 = parcel.readString();
+                    int i35 = parcel.readInt();
+                    int i36 = parcel.readInt();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
+                    String string40 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    updateUidRangesToUserVpnWithBlackList(readString39, readInt33, readInt34, createIntArray2, readString40);
+                    updateUidRangesToUserVpnWithBlackList(string39, i35, i36, iArrCreateIntArray2, string40);
                     parcel2.writeNoException();
                     return true;
                 case 50:
@@ -1064,59 +1064,59 @@ public interface IVpnManager extends IInterface {
                     parcel2.writeString(activeDefaultInterface);
                     return true;
                 case 55:
-                    int readInt35 = parcel.readInt();
-                    String readString41 = parcel.readString();
+                    int i37 = parcel.readInt();
+                    String string41 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int knoxNwFilterHttpProxyPort = getKnoxNwFilterHttpProxyPort(readInt35, readString41);
+                    int knoxNwFilterHttpProxyPort = getKnoxNwFilterHttpProxyPort(i37, string41);
                     parcel2.writeNoException();
                     parcel2.writeInt(knoxNwFilterHttpProxyPort);
                     return true;
                 case 56:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isVpnConfigured = isVpnConfigured(readInt36);
+                    boolean zIsVpnConfigured = isVpnConfigured(i38);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVpnConfigured);
+                    parcel2.writeBoolean(zIsVpnConfigured);
                     return true;
                 case 57:
-                    int readInt37 = parcel.readInt();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isDoEnabled = isDoEnabled(readInt37);
+                    boolean zIsDoEnabled = isDoEnabled(i39);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDoEnabled);
+                    parcel2.writeBoolean(zIsDoEnabled);
                     return true;
                 case 58:
-                    int readInt38 = parcel.readInt();
+                    int i40 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int vpnNetId = getVpnNetId(readInt38);
+                    int vpnNetId = getVpnNetId(i40);
                     parcel2.writeNoException();
                     parcel2.writeInt(vpnNetId);
                     return true;
                 case 59:
-                    int readInt39 = parcel.readInt();
+                    int i41 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int vpnClientUid = getVpnClientUid(readInt39);
+                    int vpnClientUid = getVpnClientUid(i41);
                     parcel2.writeNoException();
                     parcel2.writeInt(vpnClientUid);
                     return true;
                 case 60:
-                    int readInt40 = parcel.readInt();
+                    int i42 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isLockdownVpnEnabled = isLockdownVpnEnabled(readInt40);
+                    boolean zIsLockdownVpnEnabled = isLockdownVpnEnabled(i42);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isLockdownVpnEnabled);
+                    parcel2.writeBoolean(zIsLockdownVpnEnabled);
                     return true;
                 case 61:
-                    int readInt41 = parcel.readInt();
+                    int i43 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> lockdownVpnAllowList = getLockdownVpnAllowList(readInt41);
+                    List<String> lockdownVpnAllowList = getLockdownVpnAllowList(i43);
                     parcel2.writeNoException();
                     parcel2.writeStringList(lockdownVpnAllowList);
                     return true;
                 case 62:
-                    int readInt42 = parcel.readInt();
+                    int i44 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    VpnConfig vpnConfigForUser = getVpnConfigForUser(readInt42);
+                    VpnConfig vpnConfigForUser = getVpnConfigForUser(i44);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(vpnConfigForUser, 1);
                     return true;
@@ -1143,1013 +1143,1013 @@ public interface IVpnManager extends IInterface {
 
             @Override // android.net.IVpnManager
             public boolean prepareVpn(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void setVpnPackageAuthorization(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public ParcelFileDescriptor establishVpn(VpnConfig vpnConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeTypedObject(vpnConfig, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(vpnConfig, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean addVpnAddress(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean removeVpnAddress(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean setUnderlyingNetworksForVpn(Network[] networkArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeTypedArray(networkArr, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(networkArr, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean provisionVpnProfile(VpnProfile vpnProfile, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeTypedObject(vpnProfile, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(vpnProfile, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void deleteVpnProfile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public String startVpnProfile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void stopVpnProfile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public VpnProfileState getProvisionedVpnProfileState(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VpnProfileState) obtain2.readTypedObject(VpnProfileState.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VpnProfileState) parcelObtain2.readTypedObject(VpnProfileState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean setAppExclusionList(int i, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public List<String> getAppExclusionList(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean isAlwaysOnVpnPackageSupported(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean setAlwaysOnVpnPackage(int i, String str, boolean z, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public String getAlwaysOnVpnPackage(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean isVpnLockdownEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public List<String> getVpnLockdownAllowlist(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean isCallerCurrentAlwaysOnVpnApp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean isCallerCurrentAlwaysOnVpnLockdownApp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void startLegacyVpn(VpnProfile vpnProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeTypedObject(vpnProfile, 0);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(vpnProfile, 0);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public LegacyVpnInfo getLegacyVpnInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LegacyVpnInfo) obtain2.readTypedObject(LegacyVpnInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LegacyVpnInfo) parcelObtain2.readTypedObject(LegacyVpnInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean updateLockdownVpn() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public byte[] getFromVpnProfileStore(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean putIntoVpnProfileStore(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean removeFromVpnProfileStore(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public String[] listFromVpnProfileStore(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public VpnConfig getVpnConfig(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VpnConfig) obtain2.readTypedObject(VpnConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VpnConfig) parcelObtain2.readTypedObject(VpnConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void factoryReset() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean getChainingEnabledForProfile(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public int knoxVpnProfileType(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public int[] getKnoxVpnZtnaProxyInfoForUid(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public String[] getProxyInfoForUid(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean checkIfLocalProxyPortExists(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean checkIfUidIsExempted(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public String[] getDnsServerListForInterface(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean isProxyConfiguredForKnoxVpn(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void resetUidListInNetworkCapabilities(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void updateLocalProxyInfo(String str, int i, String str2, ProxyInfo proxyInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(proxyInfo, 0);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(proxyInfo, 0);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void applyBlockingRulesToUidRange(String str, int i, boolean z, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean prepareEnterpriseVpnExt(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean disconnectKnoxVpn(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void updateEnterpriseVpn(String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void updateNotificationIcon(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void createEnterpriseVpnInstance(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void removeEnterpriseVpnInstance(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void updateUidRangesToPerAppVpn(String str, int i, boolean z, int[] iArr, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void updateUidRangesToUserVpn(String str, int i, boolean z, int i2, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void updateUidRangesToUserVpnWithBlackList(String str, int i, int i2, int[] iArr, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void registerSystemDefaultNetworkCallback() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public void unregisterSystemDefaultNetworkCallback() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public int getNetIdforActiveDefaultInterface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public Network getActiveDefaultNetwork() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Network) obtain2.readTypedObject(Network.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Network) parcelObtain2.readTypedObject(Network.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public String getActiveDefaultInterface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public int getKnoxNwFilterHttpProxyPort(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean isVpnConfigured(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean isDoEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public int getVpnNetId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public int getVpnClientUid(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public boolean isLockdownVpnEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public List<String> getLockdownVpnAllowList(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IVpnManager
             public VpnConfig getVpnConfigForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VpnConfig) obtain2.readTypedObject(VpnConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVpnManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VpnConfig) parcelObtain2.readTypedObject(VpnConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

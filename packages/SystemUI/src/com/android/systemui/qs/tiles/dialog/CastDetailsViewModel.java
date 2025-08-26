@@ -7,12 +7,10 @@ import com.android.internal.app.MediaRouteControllerContentManager;
 import com.android.systemui.plugins.qs.TileDetailsViewModel;
 import com.android.systemui.qs.tiles.base.domain.actions.QSTileIntentUserInputHandler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CastDetailsViewModel implements MediaRouteControllerContentManager.Delegate, TileDetailsViewModel {
     public final QSTileIntentUserInputHandler qsTileIntentUserActionHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         CastDetailsViewModel create(Context context, int i);
     }

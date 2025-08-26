@@ -26,7 +26,6 @@ import com.android.systemui.screenshot.TimeoutHandler;
 import com.samsung.systemui.splugins.edgelightingplus.PluginEdgeLightingPlus;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ClipboardOverlayController implements ClipboardOverlayView.ClipboardOverlayCallbacks {
     public final Executor mBgExecutor;
@@ -116,7 +115,6 @@ public class ClipboardOverlayController implements ClipboardOverlayView.Clipboar
     public final ClipboardOverlayView mView;
     public final ClipboardOverlayWindow mWindow;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.clipboardoverlay.ClipboardOverlayController$10, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass10 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$clipboardoverlay$ClipboardModel$Type;
@@ -143,7 +141,6 @@ public class ClipboardOverlayController implements ClipboardOverlayView.Clipboar
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ClipboardLogger {
         public boolean mGuarded = false;
         public final UiEventLogger mUiEventLogger;
@@ -188,16 +185,16 @@ public class ClipboardOverlayController implements ClipboardOverlayView.Clipboar
         Runnable runnable = new Runnable() { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayWindow$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                final ClipboardOverlayWindow clipboardOverlayWindow2 = ClipboardOverlayWindow.this;
+                final ClipboardOverlayWindow clipboardOverlayWindow2 = clipboardOverlayWindow;
                 clipboardOverlayWindow2.mKeyboardVisible = clipboardOverlayWindow2.mWindowManager.getCurrentWindowMetrics().getWindowInsets().isVisible(WindowInsets.Type.ime());
                 clipboardOverlayWindow2.peekDecorView().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayWindow$$ExternalSyntheticLambda1
                     @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
                     public final void onGlobalLayout() {
-                        ClipboardOverlayWindow clipboardOverlayWindow3 = ClipboardOverlayWindow.this;
+                        ClipboardOverlayWindow clipboardOverlayWindow3 = clipboardOverlayWindow2;
                         WindowInsets windowInsets = clipboardOverlayWindow3.mWindowManager.getCurrentWindowMetrics().getWindowInsets();
-                        boolean isVisible = windowInsets.isVisible(WindowInsets.Type.ime());
-                        if (isVisible != clipboardOverlayWindow3.mKeyboardVisible) {
-                            clipboardOverlayWindow3.mKeyboardVisible = isVisible;
+                        boolean zIsVisible = windowInsets.isVisible(WindowInsets.Type.ime());
+                        if (zIsVisible != clipboardOverlayWindow3.mKeyboardVisible) {
+                            clipboardOverlayWindow3.mKeyboardVisible = zIsVisible;
                             clipboardOverlayWindow3.mOnKeyboardChangeListener.accept(windowInsets, Integer.valueOf(clipboardOverlayWindow3.mOrientation));
                         }
                     }
@@ -365,9 +362,9 @@ public class ClipboardOverlayController implements ClipboardOverlayView.Clipboar
             this.mEnterAnimator.cancel();
         }
         ClipboardOverlayView clipboardOverlayView = this.mView;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(clipboardOverlayView.mMinimizedPreview, "alpha", 1.0f, 0.0f);
-        ofFloat.setDuration(66L);
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView.3
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(clipboardOverlayView.mMinimizedPreview, "alpha", 1.0f, 0.0f);
+        objectAnimatorOfFloat.setDuration(66L);
+        objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayView.3
             public AnonymousClass3() {
             }
 
@@ -378,8 +375,8 @@ public class ClipboardOverlayController implements ClipboardOverlayView.Clipboar
                 ClipboardOverlayView.this.mMinimizedPreview.setAlpha(1.0f);
             }
         });
-        this.mEnterAnimator = ofFloat;
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayController.5
+        this.mEnterAnimator = objectAnimatorOfFloat;
+        objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.clipboardoverlay.ClipboardOverlayController.5
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator2) {
                 super.onAnimationEnd(animator2);
@@ -432,9 +429,9 @@ public class ClipboardOverlayController implements ClipboardOverlayView.Clipboar
     public final void hideImmediate() {
         this.mTimeoutHandler.removeMessages(2);
         ClipboardOverlayWindow clipboardOverlayWindow = this.mWindow;
-        View peekDecorView = clipboardOverlayWindow.peekDecorView();
-        if (peekDecorView != null && peekDecorView.isAttachedToWindow()) {
-            clipboardOverlayWindow.mWindowManager.removeViewImmediate(peekDecorView);
+        View viewPeekDecorView = clipboardOverlayWindow.peekDecorView();
+        if (viewPeekDecorView != null && viewPeekDecorView.isAttachedToWindow()) {
+            clipboardOverlayWindow.mWindowManager.removeViewImmediate(viewPeekDecorView);
         }
         AnonymousClass3 anonymousClass3 = this.mCloseDialogsReceiver;
         BroadcastDispatcher broadcastDispatcher = this.mBroadcastDispatcher;

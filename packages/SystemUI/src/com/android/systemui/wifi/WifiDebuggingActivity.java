@@ -26,7 +26,6 @@ import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import com.sec.ims.IMSParameter;
 import com.sec.ims.settings.ImsProfile;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WifiDebuggingActivity extends AlertActivity implements DialogInterface.OnClickListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -36,7 +35,6 @@ public class WifiDebuggingActivity extends AlertActivity implements DialogInterf
     public WifiChangeReceiver mWifiChangeReceiver;
     public WifiManager mWifiManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WifiChangeReceiver extends BroadcastReceiver {
         public final Activity mActivity;
 
@@ -86,11 +84,11 @@ public class WifiDebuggingActivity extends AlertActivity implements DialogInterf
         boolean z = i == -1;
         boolean z2 = z && this.mAlwaysAllow.isChecked();
         try {
-            IAdbManager asInterface = IAdbManager.Stub.asInterface(ServiceManager.getService("adb"));
+            IAdbManager iAdbManagerAsInterface = IAdbManager.Stub.asInterface(ServiceManager.getService("adb"));
             if (z) {
-                asInterface.allowWirelessDebugging(z2, this.mBssid);
+                iAdbManagerAsInterface.allowWirelessDebugging(z2, this.mBssid);
             } else {
-                asInterface.denyWirelessDebugging();
+                iAdbManagerAsInterface.denyWirelessDebugging();
             }
         } catch (Exception e) {
             Log.e("WifiDebuggingActivity", "Unable to notify Adb service", e);
@@ -121,12 +119,12 @@ public class WifiDebuggingActivity extends AlertActivity implements DialogInterf
         alertParams.mNegativeButtonText = getString(android.R.string.cancel);
         alertParams.mPositiveButtonListener = this;
         alertParams.mNegativeButtonListener = this;
-        View inflate = LayoutInflater.from(alertParams.mContext).inflate(android.R.layout.auto_complete_list, (ViewGroup) null);
-        CheckBox checkBox = (CheckBox) inflate.findViewById(android.R.id.autofill_save_no);
+        View viewInflate = LayoutInflater.from(alertParams.mContext).inflate(android.R.layout.auto_complete_list, (ViewGroup) null);
+        CheckBox checkBox = (CheckBox) viewInflate.findViewById(android.R.id.autofill_save_no);
         this.mAlwaysAllow = checkBox;
         checkBox.setText(getString(R.string.wifi_debugging_always));
         this.mAlwaysAllow.setTextColor(getResources().getColor(R.color.wifi_debugging_always_allow_color));
-        alertParams.mView = inflate;
+        alertParams.mView = viewInflate;
         window.setCloseOnTouchOutside(false);
         setupAlert();
         ((AlertActivity) this).mAlert.getButton(-1).setOnTouchListener(new WifiDebuggingActivity$$ExternalSyntheticLambda0());

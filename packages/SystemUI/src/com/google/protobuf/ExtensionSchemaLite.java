@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ExtensionSchemaLite extends ExtensionSchema {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.protobuf.ExtensionSchemaLite$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType;
@@ -115,7 +113,7 @@ public final class ExtensionSchemaLite extends ExtensionSchema {
         GeneratedMessageLite.ExtendableMessage extendableMessage = (GeneratedMessageLite.ExtendableMessage) obj;
         FieldSet fieldSet = extendableMessage.extensions;
         if (fieldSet.isImmutable) {
-            extendableMessage.extensions = fieldSet.m3270clone();
+            extendableMessage.extensions = fieldSet.m3288clone();
         }
         return extendableMessage.extensions;
     }
@@ -131,8 +129,8 @@ public final class ExtensionSchemaLite extends ExtensionSchema {
     }
 
     @Override // com.google.protobuf.ExtensionSchema
-    public final Object parseExtension(Object obj, CodedInputStreamReader codedInputStreamReader, Object obj2, ExtensionRegistryLite extensionRegistryLite, FieldSet fieldSet, Object obj3, UnknownFieldSchema unknownFieldSchema) {
-        Object valueOf;
+    public final Object parseExtension(Object obj, CodedInputStreamReader codedInputStreamReader, Object obj2, ExtensionRegistryLite extensionRegistryLite, FieldSet fieldSet, Object obj3, UnknownFieldSchema unknownFieldSchema) throws InvalidProtocolBufferException {
+        Object objValueOf;
         Object field;
         ArrayList arrayList;
         GeneratedMessageLite.GeneratedExtension generatedExtension = (GeneratedMessageLite.GeneratedExtension) obj2;
@@ -210,155 +208,155 @@ public final class ExtensionSchemaLite extends ExtensionSchema {
             switch (i2) {
                 case 1:
                     codedInputStreamReader.requireWireType(1);
-                    valueOf = Double.valueOf(codedInputStreamReader.input.readDouble());
+                    objValueOf = Double.valueOf(codedInputStreamReader.input.readDouble());
                     break;
                 case 2:
                     codedInputStreamReader.requireWireType(5);
-                    valueOf = Float.valueOf(codedInputStreamReader.input.readFloat());
+                    objValueOf = Float.valueOf(codedInputStreamReader.input.readFloat());
                     break;
                 case 3:
                     codedInputStreamReader.requireWireType(0);
-                    valueOf = Long.valueOf(codedInputStreamReader.input.readInt64());
+                    objValueOf = Long.valueOf(codedInputStreamReader.input.readInt64());
                     break;
                 case 4:
                     codedInputStreamReader.requireWireType(0);
-                    valueOf = Long.valueOf(codedInputStreamReader.input.readUInt64());
+                    objValueOf = Long.valueOf(codedInputStreamReader.input.readUInt64());
                     break;
                 case 5:
                     codedInputStreamReader.requireWireType(0);
-                    valueOf = Integer.valueOf(codedInputStreamReader.input.readInt32());
+                    objValueOf = Integer.valueOf(codedInputStreamReader.input.readInt32());
                     break;
                 case 6:
                     codedInputStreamReader.requireWireType(1);
-                    valueOf = Long.valueOf(codedInputStreamReader.input.readFixed64());
+                    objValueOf = Long.valueOf(codedInputStreamReader.input.readFixed64());
                     break;
                 case 7:
                     codedInputStreamReader.requireWireType(5);
-                    valueOf = Integer.valueOf(codedInputStreamReader.input.readFixed32());
+                    objValueOf = Integer.valueOf(codedInputStreamReader.input.readFixed32());
                     break;
                 case 8:
                     codedInputStreamReader.requireWireType(0);
-                    valueOf = Boolean.valueOf(codedInputStreamReader.input.readBool());
+                    objValueOf = Boolean.valueOf(codedInputStreamReader.input.readBool());
                     break;
                 case 9:
                     codedInputStreamReader.requireWireType(0);
-                    valueOf = Integer.valueOf(codedInputStreamReader.input.readUInt32());
+                    objValueOf = Integer.valueOf(codedInputStreamReader.input.readUInt32());
                     break;
                 case 10:
                     codedInputStreamReader.requireWireType(5);
-                    valueOf = Integer.valueOf(codedInputStreamReader.input.readSFixed32());
+                    objValueOf = Integer.valueOf(codedInputStreamReader.input.readSFixed32());
                     break;
                 case 11:
                     codedInputStreamReader.requireWireType(1);
-                    valueOf = Long.valueOf(codedInputStreamReader.input.readSFixed64());
+                    objValueOf = Long.valueOf(codedInputStreamReader.input.readSFixed64());
                     break;
                 case 12:
                     codedInputStreamReader.requireWireType(0);
-                    valueOf = Integer.valueOf(codedInputStreamReader.input.readSInt32());
+                    objValueOf = Integer.valueOf(codedInputStreamReader.input.readSInt32());
                     break;
                 case 13:
                     codedInputStreamReader.requireWireType(0);
-                    valueOf = Long.valueOf(codedInputStreamReader.input.readSInt64());
+                    objValueOf = Long.valueOf(codedInputStreamReader.input.readSInt64());
                     break;
                 case 14:
                     throw new IllegalStateException("Shouldn't reach here.");
                 case 15:
-                    valueOf = codedInputStreamReader.readBytes();
+                    objValueOf = codedInputStreamReader.readBytes();
                     break;
                 case 16:
                     codedInputStreamReader.requireWireType(2);
-                    valueOf = codedInputStreamReader.input.readString();
+                    objValueOf = codedInputStreamReader.input.readString();
                     break;
                 case 17:
                     if (!extensionDescriptor.isRepeated) {
                         Object field2 = fieldSet.getField(extensionDescriptor);
                         if (field2 instanceof GeneratedMessageLite) {
-                            Schema schemaFor = Protobuf.INSTANCE.schemaFor(field2);
+                            Schema schemaSchemaFor = Protobuf.INSTANCE.schemaFor(field2);
                             if (!((GeneratedMessageLite) field2).isMutable()) {
-                                GeneratedMessageLite newInstance = schemaFor.newInstance();
-                                schemaFor.mergeFrom(newInstance, field2);
-                                fieldSet.setField(extensionDescriptor, newInstance);
-                                field2 = newInstance;
+                                GeneratedMessageLite generatedMessageLiteNewInstance = schemaSchemaFor.newInstance();
+                                schemaSchemaFor.mergeFrom(generatedMessageLiteNewInstance, field2);
+                                fieldSet.setField(extensionDescriptor, generatedMessageLiteNewInstance);
+                                field2 = generatedMessageLiteNewInstance;
                             }
                             codedInputStreamReader.requireWireType(3);
-                            codedInputStreamReader.mergeGroupFieldInternal(field2, schemaFor, extensionRegistryLite);
+                            codedInputStreamReader.mergeGroupFieldInternal(field2, schemaSchemaFor, extensionRegistryLite);
                             return obj3;
                         }
                     }
                     Class<?> cls = messageLite.getClass();
                     codedInputStreamReader.requireWireType(3);
-                    Schema schemaFor2 = Protobuf.INSTANCE.schemaFor((Class) cls);
-                    GeneratedMessageLite newInstance2 = schemaFor2.newInstance();
-                    codedInputStreamReader.mergeGroupFieldInternal(newInstance2, schemaFor2, extensionRegistryLite);
-                    schemaFor2.makeImmutable(newInstance2);
-                    valueOf = newInstance2;
+                    Schema schemaSchemaFor2 = Protobuf.INSTANCE.schemaFor((Class) cls);
+                    GeneratedMessageLite generatedMessageLiteNewInstance2 = schemaSchemaFor2.newInstance();
+                    codedInputStreamReader.mergeGroupFieldInternal(generatedMessageLiteNewInstance2, schemaSchemaFor2, extensionRegistryLite);
+                    schemaSchemaFor2.makeImmutable(generatedMessageLiteNewInstance2);
+                    objValueOf = generatedMessageLiteNewInstance2;
                     break;
                 case 18:
                     if (!extensionDescriptor.isRepeated) {
                         Object field3 = fieldSet.getField(extensionDescriptor);
                         if (field3 instanceof GeneratedMessageLite) {
-                            Schema schemaFor3 = Protobuf.INSTANCE.schemaFor(field3);
+                            Schema schemaSchemaFor3 = Protobuf.INSTANCE.schemaFor(field3);
                             if (!((GeneratedMessageLite) field3).isMutable()) {
-                                GeneratedMessageLite newInstance3 = schemaFor3.newInstance();
-                                schemaFor3.mergeFrom(newInstance3, field3);
-                                fieldSet.setField(extensionDescriptor, newInstance3);
-                                field3 = newInstance3;
+                                GeneratedMessageLite generatedMessageLiteNewInstance3 = schemaSchemaFor3.newInstance();
+                                schemaSchemaFor3.mergeFrom(generatedMessageLiteNewInstance3, field3);
+                                fieldSet.setField(extensionDescriptor, generatedMessageLiteNewInstance3);
+                                field3 = generatedMessageLiteNewInstance3;
                             }
                             codedInputStreamReader.requireWireType(2);
-                            codedInputStreamReader.mergeMessageFieldInternal(field3, schemaFor3, extensionRegistryLite);
+                            codedInputStreamReader.mergeMessageFieldInternal(field3, schemaSchemaFor3, extensionRegistryLite);
                             return obj3;
                         }
                     }
-                    valueOf = codedInputStreamReader.readMessage(messageLite.getClass(), extensionRegistryLite);
+                    objValueOf = codedInputStreamReader.readMessage(messageLite.getClass(), extensionRegistryLite);
                     break;
                 default:
-                    valueOf = null;
+                    objValueOf = null;
                     break;
             }
         } else {
             codedInputStreamReader.requireWireType(0);
-            int readInt32 = codedInputStreamReader.input.readInt32();
-            if (extensionDescriptor.enumTypeMap.findValueByNumber(readInt32) == null) {
-                return SchemaUtil.storeUnknownEnum(obj, i, readInt32, obj3, unknownFieldSchema);
+            int int32 = codedInputStreamReader.input.readInt32();
+            if (extensionDescriptor.enumTypeMap.findValueByNumber(int32) == null) {
+                return SchemaUtil.storeUnknownEnum(obj, i, int32, obj3, unknownFieldSchema);
             }
-            valueOf = Integer.valueOf(readInt32);
+            objValueOf = Integer.valueOf(int32);
         }
         if (extensionDescriptor.isRepeated) {
-            fieldSet.addRepeatedField(extensionDescriptor, valueOf);
+            fieldSet.addRepeatedField(extensionDescriptor, objValueOf);
             return obj3;
         }
         int i3 = AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[extensionDescriptor.type.ordinal()];
         if ((i3 == 17 || i3 == 18) && (field = fieldSet.getField(extensionDescriptor)) != null) {
             GeneratedMessageLite.Builder builder = ((GeneratedMessageLite) ((MessageLite) field)).toBuilder();
-            MessageLite messageLite2 = (MessageLite) valueOf;
+            MessageLite messageLite2 = (MessageLite) objValueOf;
             if (!builder.defaultInstance.getClass().isInstance(messageLite2)) {
                 throw new IllegalArgumentException("mergeFrom(MessageLite) can only merge messages of the same type.");
             }
             builder.mergeFrom((GeneratedMessageLite) ((AbstractMessageLite) messageLite2));
-            valueOf = builder.buildPartial();
+            objValueOf = builder.buildPartial();
         }
-        fieldSet.setField(extensionDescriptor, valueOf);
+        fieldSet.setField(extensionDescriptor, objValueOf);
         return obj3;
     }
 
     @Override // com.google.protobuf.ExtensionSchema
-    public final void parseLengthPrefixedMessageSetItem(CodedInputStreamReader codedInputStreamReader, Object obj, ExtensionRegistryLite extensionRegistryLite, FieldSet fieldSet) {
+    public final void parseLengthPrefixedMessageSetItem(CodedInputStreamReader codedInputStreamReader, Object obj, ExtensionRegistryLite extensionRegistryLite, FieldSet fieldSet) throws InvalidProtocolBufferException {
         GeneratedMessageLite.GeneratedExtension generatedExtension = (GeneratedMessageLite.GeneratedExtension) obj;
         fieldSet.setField(generatedExtension.descriptor, codedInputStreamReader.readMessage(generatedExtension.messageDefaultInstance.getClass(), extensionRegistryLite));
     }
 
     @Override // com.google.protobuf.ExtensionSchema
-    public final void parseMessageSetItem(ByteString byteString, Object obj, ExtensionRegistryLite extensionRegistryLite, FieldSet fieldSet) {
+    public final void parseMessageSetItem(ByteString byteString, Object obj, ExtensionRegistryLite extensionRegistryLite, FieldSet fieldSet) throws IOException {
         GeneratedMessageLite.GeneratedExtension generatedExtension = (GeneratedMessageLite.GeneratedExtension) obj;
         GeneratedMessageLite generatedMessageLite = (GeneratedMessageLite) generatedExtension.messageDefaultInstance;
         generatedMessageLite.getClass();
         GeneratedMessageLite.Builder builder = (GeneratedMessageLite.Builder) generatedMessageLite.dynamicMethod(GeneratedMessageLite.MethodToInvoke.NEW_BUILDER);
-        CodedInputStream.ArrayDecoder newCodedInput = byteString.newCodedInput();
+        CodedInputStream.ArrayDecoder arrayDecoderNewCodedInput = byteString.newCodedInput();
         builder.copyOnWrite();
         try {
-            Protobuf.INSTANCE.schemaFor(builder.instance).mergeFrom(builder.instance, CodedInputStreamReader.forCodedInput(newCodedInput), extensionRegistryLite);
+            Protobuf.INSTANCE.schemaFor(builder.instance).mergeFrom(builder.instance, CodedInputStreamReader.forCodedInput(arrayDecoderNewCodedInput), extensionRegistryLite);
             fieldSet.setField(generatedExtension.descriptor, builder.buildPartial());
-            newCodedInput.checkLastTagWas(0);
+            arrayDecoderNewCodedInput.checkLastTagWas(0);
         } catch (RuntimeException e) {
             if (!(e.getCause() instanceof IOException)) {
                 throw e;

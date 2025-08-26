@@ -5,6 +5,7 @@ import com.android.systemui.R;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.shared.animation.UnfoldConstantTranslateAnimator;
 import com.android.systemui.unfold.util.NaturalRotationUnfoldProgressProvider;
+import java.util.Collections;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.collections.ArraysKt___ArraysKt;
@@ -12,7 +13,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationPanelUnfoldAnimationController {
     public final Context context;
@@ -25,7 +25,7 @@ public final class NotificationPanelUnfoldAnimationController {
         this.filterShade = new Function0() { // from class: com.android.systemui.shade.NotificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                StatusBarStateController statusBarStateController2 = StatusBarStateController.this;
+                StatusBarStateController statusBarStateController2 = statusBarStateController;
                 return Boolean.valueOf(statusBarStateController2.getState() == 0 || statusBarStateController2.getState() == 2);
             }
         };
@@ -41,22 +41,20 @@ public final class NotificationPanelUnfoldAnimationController {
             public final Object invoke() {
                 switch (i) {
                     case 0:
-                        UnfoldConstantTranslateAnimator.Direction direction = UnfoldConstantTranslateAnimator.Direction.START;
-                        NotificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0 notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0 = this.f$0.filterShade;
-                        return new UnfoldConstantTranslateAnimator(ArraysKt___ArraysKt.toSet(new UnfoldConstantTranslateAnimator.ViewIdToTranslate[]{new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.quick_settings_panel, direction, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, null, 8, null), new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.notification_stack_scroller, UnfoldConstantTranslateAnimator.Direction.END, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, null, 8, null)}), naturalRotationUnfoldProgressProvider);
+                        return new UnfoldConstantTranslateAnimator(Collections.singleton(new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.quick_settings_panel, UnfoldConstantTranslateAnimator.Direction.START, this.f$0.filterShade, null, 8, null)), naturalRotationUnfoldProgressProvider);
                     default:
-                        UnfoldConstantTranslateAnimator.Direction direction2 = UnfoldConstantTranslateAnimator.Direction.END;
-                        NotificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0 notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02 = this.f$0.filterShade;
-                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.shade_header_system_icons, direction2, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02, null, 8, null);
+                        UnfoldConstantTranslateAnimator.Direction direction = UnfoldConstantTranslateAnimator.Direction.END;
+                        NotificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0 notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0 = this.f$0.filterShade;
+                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.shade_header_system_icons, direction, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, null, 8, null);
                         Function2 function2 = null;
                         int i2 = 8;
-                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate2 = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.privacy_container, direction2, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02, function2, i2, null);
-                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate3 = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.carrier_group, direction2, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02, function2, i2, null);
-                        UnfoldConstantTranslateAnimator.Direction direction3 = UnfoldConstantTranslateAnimator.Direction.START;
+                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate2 = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.privacy_container, direction, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, function2, i2, null);
+                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate3 = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.carrier_group, direction, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, function2, i2, null);
+                        UnfoldConstantTranslateAnimator.Direction direction2 = UnfoldConstantTranslateAnimator.Direction.START;
                         Function2 function22 = null;
                         int i3 = 8;
                         DefaultConstructorMarker defaultConstructorMarker = null;
-                        return new UnfoldConstantTranslateAnimator(ArraysKt___ArraysKt.toSet(new UnfoldConstantTranslateAnimator.ViewIdToTranslate[]{viewIdToTranslate, viewIdToTranslate2, viewIdToTranslate3, new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.clock, direction3, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02, function22, i3, defaultConstructorMarker), new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.date, direction3, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02, function22, i3, defaultConstructorMarker)}), naturalRotationUnfoldProgressProvider);
+                        return new UnfoldConstantTranslateAnimator(ArraysKt___ArraysKt.toSet(new UnfoldConstantTranslateAnimator.ViewIdToTranslate[]{viewIdToTranslate, viewIdToTranslate2, viewIdToTranslate3, new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.clock, direction2, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, function22, i3, defaultConstructorMarker), new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.date, direction2, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, function22, i3, defaultConstructorMarker)}), naturalRotationUnfoldProgressProvider);
                 }
             }
         });
@@ -72,22 +70,20 @@ public final class NotificationPanelUnfoldAnimationController {
             public final Object invoke() {
                 switch (i2) {
                     case 0:
-                        UnfoldConstantTranslateAnimator.Direction direction = UnfoldConstantTranslateAnimator.Direction.START;
-                        NotificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0 notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0 = this.f$0.filterShade;
-                        return new UnfoldConstantTranslateAnimator(ArraysKt___ArraysKt.toSet(new UnfoldConstantTranslateAnimator.ViewIdToTranslate[]{new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.quick_settings_panel, direction, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, null, 8, null), new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.notification_stack_scroller, UnfoldConstantTranslateAnimator.Direction.END, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, null, 8, null)}), naturalRotationUnfoldProgressProvider);
+                        return new UnfoldConstantTranslateAnimator(Collections.singleton(new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.quick_settings_panel, UnfoldConstantTranslateAnimator.Direction.START, this.f$0.filterShade, null, 8, null)), naturalRotationUnfoldProgressProvider);
                     default:
-                        UnfoldConstantTranslateAnimator.Direction direction2 = UnfoldConstantTranslateAnimator.Direction.END;
-                        NotificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0 notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02 = this.f$0.filterShade;
-                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.shade_header_system_icons, direction2, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02, null, 8, null);
+                        UnfoldConstantTranslateAnimator.Direction direction = UnfoldConstantTranslateAnimator.Direction.END;
+                        NotificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0 notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0 = this.f$0.filterShade;
+                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.shade_header_system_icons, direction, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, null, 8, null);
                         Function2 function2 = null;
                         int i22 = 8;
-                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate2 = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.privacy_container, direction2, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02, function2, i22, null);
-                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate3 = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.carrier_group, direction2, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02, function2, i22, null);
-                        UnfoldConstantTranslateAnimator.Direction direction3 = UnfoldConstantTranslateAnimator.Direction.START;
+                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate2 = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.privacy_container, direction, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, function2, i22, null);
+                        UnfoldConstantTranslateAnimator.ViewIdToTranslate viewIdToTranslate3 = new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.carrier_group, direction, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, function2, i22, null);
+                        UnfoldConstantTranslateAnimator.Direction direction2 = UnfoldConstantTranslateAnimator.Direction.START;
                         Function2 function22 = null;
                         int i3 = 8;
                         DefaultConstructorMarker defaultConstructorMarker = null;
-                        return new UnfoldConstantTranslateAnimator(ArraysKt___ArraysKt.toSet(new UnfoldConstantTranslateAnimator.ViewIdToTranslate[]{viewIdToTranslate, viewIdToTranslate2, viewIdToTranslate3, new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.clock, direction3, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02, function22, i3, defaultConstructorMarker), new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.date, direction3, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda02, function22, i3, defaultConstructorMarker)}), naturalRotationUnfoldProgressProvider);
+                        return new UnfoldConstantTranslateAnimator(ArraysKt___ArraysKt.toSet(new UnfoldConstantTranslateAnimator.ViewIdToTranslate[]{viewIdToTranslate, viewIdToTranslate2, viewIdToTranslate3, new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.clock, direction2, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, function22, i3, defaultConstructorMarker), new UnfoldConstantTranslateAnimator.ViewIdToTranslate(R.id.date, direction2, notificationPanelUnfoldAnimationController$$ExternalSyntheticLambda0, function22, i3, defaultConstructorMarker)}), naturalRotationUnfoldProgressProvider);
                 }
             }
         });

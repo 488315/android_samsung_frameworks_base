@@ -38,9 +38,9 @@ public interface IIncidentDumpCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIncidentDumpCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIncidentDumpCallback)) {
-                return (IIncidentDumpCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIncidentDumpCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIncidentDumpCallback)) {
+                return (IIncidentDumpCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -93,13 +93,13 @@ public interface IIncidentDumpCallback extends IInterface {
 
             @Override // android.os.IIncidentDumpCallback
             public void onDumpSection(ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIncidentDumpCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIncidentDumpCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

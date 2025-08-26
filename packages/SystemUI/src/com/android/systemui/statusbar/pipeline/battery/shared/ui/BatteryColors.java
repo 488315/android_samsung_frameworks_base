@@ -3,11 +3,9 @@ package com.android.systemui.statusbar.pipeline.battery.shared.ui;
 import androidx.compose.ui.graphics.Color;
 import androidx.compose.ui.graphics.ColorKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface BatteryColors {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DarkThemeChargingColors implements BatteryColors {
         public static final DarkThemeChargingColors INSTANCE = new DarkThemeChargingColors();
 
@@ -33,7 +31,6 @@ public interface BatteryColors {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DarkThemeDefaultColors implements BatteryColors {
         public static final DarkThemeDefaultColors INSTANCE = new DarkThemeDefaultColors();
 
@@ -60,7 +57,6 @@ public interface BatteryColors {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DarkThemeErrorColors implements BatteryColors {
         public static final DarkThemeErrorColors INSTANCE = new DarkThemeErrorColors();
 
@@ -86,7 +82,6 @@ public interface BatteryColors {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DarkThemePowerSaveColors implements BatteryColors {
         public static final DarkThemePowerSaveColors INSTANCE = new DarkThemePowerSaveColors();
 
@@ -112,7 +107,6 @@ public interface BatteryColors {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LightThemeChargingColors implements BatteryColors {
         public static final LightThemeChargingColors INSTANCE = new LightThemeChargingColors();
 
@@ -138,7 +132,6 @@ public interface BatteryColors {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LightThemeDefaultColors implements BatteryColors {
         public static final LightThemeDefaultColors INSTANCE = new LightThemeDefaultColors();
 
@@ -165,7 +158,6 @@ public interface BatteryColors {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LightThemeErrorColors implements BatteryColors {
         public static final LightThemeErrorColors INSTANCE = new LightThemeErrorColors();
 
@@ -191,7 +183,6 @@ public interface BatteryColors {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LightThemePowerSaveColors implements BatteryColors {
         public static final LightThemePowerSaveColors INSTANCE = new LightThemePowerSaveColors();
 

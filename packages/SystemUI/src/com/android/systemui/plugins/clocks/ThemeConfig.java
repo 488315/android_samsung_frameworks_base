@@ -4,7 +4,6 @@ import android.R;
 import android.content.Context;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ThemeConfig {
     public static final int $stable = 0;
@@ -63,9 +62,9 @@ public final class ThemeConfig {
     }
 
     public int hashCode() {
-        int hashCode = Boolean.hashCode(this.isDarkTheme) * 31;
+        int iHashCode = Boolean.hashCode(this.isDarkTheme) * 31;
         Integer num = this.seedColor;
-        return hashCode + (num == null ? 0 : num.hashCode());
+        return iHashCode + (num == null ? 0 : num.hashCode());
     }
 
     public final boolean isDarkTheme() {

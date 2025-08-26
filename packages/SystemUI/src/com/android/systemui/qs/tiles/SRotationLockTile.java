@@ -48,7 +48,6 @@ import com.android.systemui.util.settings.SecureSettings;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SRotationLockTile extends SQSTileImpl implements BatteryController.BatteryStateChangeCallback, QsResetSettingsManager.DemoResetSettingsApplier, QsResetSettingsManager.ResetSettingsApplier {
     public final QSTileImpl.AnimationIcon mAutoToLandscape;
@@ -71,7 +70,7 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
     public final QSTile.BooleanState mStateBeforeClick;
 
     /* renamed from: -$$Nest$mgetBackupData, reason: not valid java name */
-    public static String m2904$$Nest$mgetBackupData(SRotationLockTile sRotationLockTile, boolean z) {
+    public static String m2921$$Nest$mgetBackupData(SRotationLockTile sRotationLockTile, boolean z) {
         String str;
         String str2;
         String str3;
@@ -98,13 +97,13 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
     }
 
     /* renamed from: -$$Nest$msetRestoreData, reason: not valid java name */
-    public static void m2905$$Nest$msetRestoreData(SRotationLockTile sRotationLockTile, String str) {
+    public static void m2922$$Nest$msetRestoreData(SRotationLockTile sRotationLockTile, String str) {
         sRotationLockTile.getClass();
-        String[] split = str.split("::");
+        String[] strArrSplit = str.split("::");
         Log.d("SRotationLockTile", "restoreData: ".concat(str));
-        if (split.length > 1) {
-            if (split[0].equals("autorotate_rotationlock")) {
-                String str2 = split[1];
+        if (strArrSplit.length > 1) {
+            if (strArrSplit[0].equals("autorotate_rotationlock")) {
+                String str2 = strArrSplit[1];
                 if (str2 == null) {
                     Log.w("SRotationLockTile", "restoredRotationLock is null");
                     return;
@@ -112,24 +111,24 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
                     sRotationLockTile.mController.setRotationLocked("SRotationLockTile #setRestoreData", str2.equals("true"));
                 }
             }
-            if (split[0].equals("autorotate_homescreen")) {
-                String str3 = split[1];
+            if (strArrSplit[0].equals("autorotate_homescreen")) {
+                String str3 = strArrSplit[1];
                 if (str3 == null) {
                     Log.w("SRotationLockTile", "restoredHomeScreenSetting is null");
                     return;
                 }
                 sRotationLockTile.mSettingsHelper.setHomeScreenRotationAllowed(str3.equals("true"));
             }
-            if (split[0].equals("autorotate_lockscreen")) {
-                String str4 = split[1];
+            if (strArrSplit[0].equals("autorotate_lockscreen")) {
+                String str4 = strArrSplit[1];
                 if (str4 == null) {
                     Log.w("SRotationLockTile", "restoredLockScreenSetting is null");
                     return;
                 }
                 sRotationLockTile.mSettingsHelper.setLockScreenRotationAllowed(str4.equals("true"));
             }
-            if (split[0].equals("autorotate_voicecallscreen")) {
-                String str5 = split[1];
+            if (strArrSplit[0].equals("autorotate_voicecallscreen")) {
+                String str5 = strArrSplit[1];
                 if (str5 == null) {
                     Log.w("SRotationLockTile", "restoredCallScreenRotateSetting is null");
                 } else {
@@ -170,7 +169,7 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
         this.mCallback = r4;
         this.mSensorPrivacyChangedListener = new SensorPrivacyManager.OnSensorPrivacyChangedListener() { // from class: com.android.systemui.qs.tiles.SRotationLockTile$$ExternalSyntheticLambda0
             public final void onSensorPrivacyChanged(int i, boolean z) {
-                SRotationLockTile.this.refreshState(null);
+                this.f$0.refreshState(null);
             }
         };
         this.mController = rotationLockController;
@@ -191,15 +190,15 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
         settingsHelper.registerCallback(this.mSettingsCallback, uriArr);
         SharedPreferences sharedPreferences = this.mContext.getSharedPreferences(SystemUIAnalytics.QUICK_PREF_NAME, 0);
         if (sharedPreferences != null) {
-            SharedPreferences.Editor edit = sharedPreferences.edit();
-            this.mRotationLockTilePrefEditor = edit;
+            SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+            this.mRotationLockTilePrefEditor = editorEdit;
             if (QpRune.QUICK_TILE_ROTATION_MANUAL) {
-                edit.putBoolean(SystemUIAnalytics.STATUS_ROTATION_DETAIL_NAVIGATION_BAR_ROTATE_SUGGESTION_ENABLED, settingsHelper.isNavigationBarRotateSuggestionEnabled());
+                editorEdit.putBoolean(SystemUIAnalytics.STATUS_ROTATION_DETAIL_NAVIGATION_BAR_ROTATE_SUGGESTION_ENABLED, settingsHelper.isNavigationBarRotateSuggestionEnabled());
             }
-            edit.putBoolean(SystemUIAnalytics.STATUS_ROTATION_DETAIL_HOME_SCREEN_SWITCH, settingsHelper.isHomeScreenRotationAllowed());
-            edit.putBoolean(SystemUIAnalytics.STATUS_ROTATION_DETAIL_LOCK_SCREEN_SWITCH, settingsHelper.isLockScreenRotationAllowed());
-            edit.putBoolean(SystemUIAnalytics.STATUS_ROTATION_DETAIL_CALL_SCREEN_SWITCH, settingsHelper.isCallScreenRotationAllowed());
-            edit.commit();
+            editorEdit.putBoolean(SystemUIAnalytics.STATUS_ROTATION_DETAIL_HOME_SCREEN_SWITCH, settingsHelper.isHomeScreenRotationAllowed());
+            editorEdit.putBoolean(SystemUIAnalytics.STATUS_ROTATION_DETAIL_LOCK_SCREEN_SWITCH, settingsHelper.isLockScreenRotationAllowed());
+            editorEdit.putBoolean(SystemUIAnalytics.STATUS_ROTATION_DETAIL_CALL_SCREEN_SWITCH, settingsHelper.isCallScreenRotationAllowed());
+            editorEdit.commit();
         }
         this.mDetailAdapter = new RotationLockDetailAdapter(this.mContext, ((SQSTileImpl) this).mHandler, settingsHelper, rotationLockController, pluginLockMediator, this.mRotationLockTilePrefEditor, this);
         if (!QpRune.QUICK_TABLET) {
@@ -212,12 +211,12 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
 
                 @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
                 public final String onBackup(boolean z) {
-                    return SRotationLockTile.m2904$$Nest$mgetBackupData(SRotationLockTile.this, z);
+                    return SRotationLockTile.m2921$$Nest$mgetBackupData(SRotationLockTile.this, z);
                 }
 
                 @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
                 public final void onRestore(String str) {
-                    SRotationLockTile.m2905$$Nest$msetRestoreData(SRotationLockTile.this, str);
+                    SRotationLockTile.m2922$$Nest$msetRestoreData(SRotationLockTile.this, str);
                 }
             });
         }
@@ -351,18 +350,18 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
     public final void handleUpdateState(QSTile.State state, Object obj) {
         Context context;
         int i;
-        String m;
+        String strM;
         PackageManager packageManager;
         String rotationResolverPackageName;
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
         RotationLockController rotationLockController = this.mController;
-        boolean isRotationLocked = rotationLockController.isRotationLocked();
+        boolean zIsRotationLocked = rotationLockController.isRotationLocked();
         boolean z = ((BatteryControllerImpl) this.mBatteryController).mPowerSave;
-        boolean isSensorPrivacyEnabled = this.mPrivacyManager.isSensorPrivacyEnabled(2);
-        if (!z && !isSensorPrivacyEnabled && (rotationResolverPackageName = (packageManager = this.mContext.getPackageManager()).getRotationResolverPackageName()) != null && packageManager.checkPermission("android.permission.CAMERA", rotationResolverPackageName) == 0) {
+        boolean zIsSensorPrivacyEnabled = this.mPrivacyManager.isSensorPrivacyEnabled(2);
+        if (!z && !zIsSensorPrivacyEnabled && (rotationResolverPackageName = (packageManager = this.mContext.getPackageManager()).getRotationResolverPackageName()) != null && packageManager.checkPermission("android.permission.CAMERA", rotationResolverPackageName) == 0) {
             rotationLockController.isCameraRotationEnabled();
         }
-        booleanState.value = !isRotationLocked;
+        booleanState.value = !zIsRotationLocked;
         booleanState.dualTarget = true;
         Resources resources = this.mResources;
         int rotationLockOrientation = rotationLockController.getRotationLockOrientation();
@@ -370,9 +369,9 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
         Context context2 = this.mContext;
         int i2 = com.android.systemui.R.string.sec_quick_settings_rotation_unlocked_label;
         String string = context2.getString(com.android.systemui.R.string.sec_quick_settings_rotation_unlocked_label);
-        if (isRotationLocked) {
+        if (zIsRotationLocked) {
             i2 = z2 ? com.android.systemui.R.string.sec_quick_settings_rotation_locked_portrait_label : com.android.systemui.R.string.sec_quick_settings_rotation_locked_landscape_label;
-            m = this.mContext.getString(i2) + ", " + string;
+            strM = this.mContext.getString(i2) + ", " + string;
             booleanState.icon = z2 ? this.mAutoToPortrait : this.mAutoToLandscape;
         } else {
             if (this.mResources.getConfiguration().orientation == 1) {
@@ -382,7 +381,7 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
                 context = this.mContext;
                 i = com.android.systemui.R.string.quick_settings_rotation_lock_set_to_landscape;
             }
-            m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, ", ", context.getString(i));
+            strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, ", ", context.getString(i));
             booleanState.icon = z2 ? this.mPortraitToAuto : this.mLandscapeToAuto;
         }
         booleanState.label = this.mContext.getString(i2);
@@ -391,8 +390,8 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
         } else {
             booleanState.state = 0;
         }
-        booleanState.contentDescription = m;
-        this.mRotationLocked = isRotationLocked;
+        booleanState.contentDescription = strM;
+        this.mRotationLocked = zIsRotationLocked;
         StringBuilder sb = new StringBuilder(" mRotationLocked: ");
         sb.append(this.mRotationLocked);
         sb.append(" handleUpdateState: ");

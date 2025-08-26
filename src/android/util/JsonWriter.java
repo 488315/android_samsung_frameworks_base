@@ -70,12 +70,12 @@ public final class JsonWriter implements Closeable {
     }
 
     private JsonWriter close(JsonScope jsonScope, JsonScope jsonScope2, String str) throws IOException {
-        JsonScope peek = peek();
-        if (peek != jsonScope2 && peek != jsonScope) {
+        JsonScope jsonScopePeek = peek();
+        if (jsonScopePeek != jsonScope2 && jsonScopePeek != jsonScope) {
             throw new IllegalStateException("Nesting problem: " + this.stack);
         }
         this.stack.remove(r3.size() - 1);
-        if (peek == jsonScope2) {
+        if (jsonScopePeek == jsonScope2) {
             newline();
         }
         this.out.write(str);
@@ -139,12 +139,12 @@ public final class JsonWriter implements Closeable {
         if (number == null) {
             return nullValue();
         }
-        String obj = number.toString();
-        if (!this.lenient && (obj.equals("-Infinity") || obj.equals("Infinity") || obj.equals("NaN"))) {
+        String string = number.toString();
+        if (!this.lenient && (string.equals("-Infinity") || string.equals("Infinity") || string.equals("NaN"))) {
             throw new IllegalArgumentException("Numeric values must be finite, but was " + number);
         }
         beforeValue(false);
-        this.out.append((CharSequence) obj);
+        this.out.append((CharSequence) string);
         return this;
     }
 
@@ -164,16 +164,16 @@ public final class JsonWriter implements Closeable {
         this.out.write("\"");
         int length = str.length();
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (charAt == '\f') {
+            char cCharAt = str.charAt(i);
+            if (cCharAt == '\f') {
                 this.out.write("\\f");
-            } else if (charAt == '\r') {
+            } else if (cCharAt == '\r') {
                 this.out.write("\\r");
-            } else if (charAt != '\"' && charAt != '\\') {
-                if (charAt == 8232 || charAt == 8233) {
-                    this.out.write(String.format("\\u%04x", Integer.valueOf(charAt)));
+            } else if (cCharAt != '\"' && cCharAt != '\\') {
+                if (cCharAt == 8232 || cCharAt == 8233) {
+                    this.out.write(String.format("\\u%04x", Integer.valueOf(cCharAt)));
                 } else {
-                    switch (charAt) {
+                    switch (cCharAt) {
                         case '\b':
                             this.out.write("\\b");
                             break;
@@ -184,18 +184,18 @@ public final class JsonWriter implements Closeable {
                             this.out.write("\\n");
                             break;
                         default:
-                            if (charAt <= 31) {
-                                this.out.write(String.format("\\u%04x", Integer.valueOf(charAt)));
+                            if (cCharAt <= 31) {
+                                this.out.write(String.format("\\u%04x", Integer.valueOf(cCharAt)));
                                 break;
                             } else {
-                                this.out.write(charAt);
+                                this.out.write(cCharAt);
                                 break;
                             }
                     }
                 }
             } else {
                 this.out.write(92);
-                this.out.write(charAt);
+                this.out.write(cCharAt);
             }
         }
         this.out.write("\"");
@@ -212,10 +212,10 @@ public final class JsonWriter implements Closeable {
     }
 
     private void beforeName() throws IOException {
-        JsonScope peek = peek();
-        if (peek == JsonScope.NONEMPTY_OBJECT) {
+        JsonScope jsonScopePeek = peek();
+        if (jsonScopePeek == JsonScope.NONEMPTY_OBJECT) {
             this.out.write(44);
-        } else if (peek != JsonScope.EMPTY_OBJECT) {
+        } else if (jsonScopePeek != JsonScope.EMPTY_OBJECT) {
             throw new IllegalStateException("Nesting problem: " + this.stack);
         }
         newline();

@@ -20,16 +20,16 @@ public class AudioFxHelper {
     static {
         ArrayMap<Integer, Float> arrayMap = new ArrayMap<>();
         sPreDefinedVolumeEffects = arrayMap;
-        Float valueOf = Float.valueOf(0.5f);
-        arrayMap.put(5, valueOf);
-        arrayMap.put(6, valueOf);
-        arrayMap.put(7, valueOf);
-        arrayMap.put(8, valueOf);
+        Float fValueOf = Float.valueOf(0.5f);
+        arrayMap.put(5, fValueOf);
+        arrayMap.put(6, fValueOf);
+        arrayMap.put(7, fValueOf);
+        arrayMap.put(8, fValueOf);
         arrayMap.put(Integer.valueOf(getPlaySoundTypeForSEP(101)), Float.valueOf(1.0f));
     }
 
     public static float getSoundFxVolumeByType(int i) {
-        AudioParameter build = new AudioParameter.Builder().setParam(AudioParameter.SEC_GLOBAL_VOLUME_SITUATION_KEY).setParam("type", 1).setParam("device", 0).build();
+        AudioParameter audioParameterBuild = new AudioParameter.Builder().setParam(AudioParameter.SEC_GLOBAL_VOLUME_SITUATION_KEY).setParam("type", 1).setParam("device", 0).build();
         ArrayMap<Integer, Float> arrayMap = sPreDefinedVolumeEffects;
         if (arrayMap.containsKey(Integer.valueOf(i))) {
             return arrayMap.get(Integer.valueOf(i)).floatValue();
@@ -42,7 +42,7 @@ public class AudioFxHelper {
             return f;
         }
         try {
-            sSoundEffectVolume = Float.parseFloat(AudioSystem.getParameters(build.toString()));
+            sSoundEffectVolume = Float.parseFloat(AudioSystem.getParameters(audioParameterBuild.toString()));
         } catch (NumberFormatException unused) {
         }
         return sSoundEffectVolume;

@@ -3,13 +3,11 @@ package com.google.android.material.carousel;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class KeylineState {
     public final float itemSize;
     public final List keylines;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Keyline {
         public final float loc;
         public final float locOffset;

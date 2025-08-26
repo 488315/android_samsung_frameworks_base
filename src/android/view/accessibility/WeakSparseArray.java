@@ -34,11 +34,11 @@ final class WeakSparseArray<E> {
 
     private void removeUnreachableValues() {
         while (true) {
-            Reference<? extends E> poll = this.mRefQueue.poll();
-            if (poll == null) {
+            Reference<? extends E> referencePoll = this.mRefQueue.poll();
+            if (referencePoll == null) {
                 return;
             } else {
-                this.mSparseArray.remove(((WeakReferenceWithId) poll).mId);
+                this.mSparseArray.remove(((WeakReferenceWithId) referencePoll).mId);
             }
         }
     }

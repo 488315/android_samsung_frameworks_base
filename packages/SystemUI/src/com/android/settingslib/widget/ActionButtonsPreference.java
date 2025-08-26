@@ -19,7 +19,6 @@ import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ActionButtonsPreference extends Preference {
     public final List mBtnBackgroundStyle1;
@@ -35,7 +34,6 @@ public class ActionButtonsPreference extends Preference {
     public View mDivider3;
     public final List mVisibleButtonInfos;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ButtonInfo {
         public LinearLayout mActionLayout;
         public Button mButton;

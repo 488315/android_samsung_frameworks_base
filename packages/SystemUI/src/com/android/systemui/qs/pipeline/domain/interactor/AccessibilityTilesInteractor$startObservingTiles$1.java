@@ -20,14 +20,12 @@ import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class AccessibilityTilesInteractor$startObservingTiles$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ CurrentTilesInteractor $currentTilesInteractor;
     int label;
     final /* synthetic */ AccessibilityTilesInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.pipeline.domain.interactor.AccessibilityTilesInteractor$startObservingTiles$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function3 {
         /* synthetic */ Object L$0;
@@ -65,7 +63,6 @@ final class AccessibilityTilesInteractor$startObservingTiles$1 extends SuspendLa
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.pipeline.domain.interactor.AccessibilityTilesInteractor$startObservingTiles$1$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         /* synthetic */ Object L$0;
@@ -137,10 +134,10 @@ final class AccessibilityTilesInteractor$startObservingTiles$1 extends SuspendLa
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            Flow sample = FlowKt.sample(this.$currentTilesInteractor.getCurrentTiles(), this.$currentTilesInteractor.getUserContext(), new AnonymousClass1(null));
+            Flow flowSample = FlowKt.sample(this.$currentTilesInteractor.getCurrentTiles(), this.$currentTilesInteractor.getUserContext(), new AnonymousClass1(null));
             AnonymousClass2 anonymousClass2 = new AnonymousClass2(this.this$0, null);
             this.label = 1;
-            if (kotlinx.coroutines.flow.FlowKt.collectLatest(sample, anonymousClass2, this) == coroutineSingletons) {
+            if (kotlinx.coroutines.flow.FlowKt.collectLatest(flowSample, anonymousClass2, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

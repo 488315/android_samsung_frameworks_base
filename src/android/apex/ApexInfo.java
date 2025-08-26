@@ -47,7 +47,7 @@ public class ApexInfo implements Parcelable {
 
     @Override // android.os.Parcelable
     public final void writeToParcel(Parcel parcel, int i) {
-        int dataPosition = parcel.dataPosition();
+        int iDataPosition = parcel.dataPosition();
         parcel.writeInt(0);
         parcel.writeString(this.moduleName);
         parcel.writeString(this.modulePath);
@@ -59,82 +59,82 @@ public class ApexInfo implements Parcelable {
         parcel.writeInt(this.hasClassPathJars ? 1 : 0);
         parcel.writeInt(this.activeApexChanged ? 1 : 0);
         parcel.writeByte(this.partition);
-        int dataPosition2 = parcel.dataPosition();
-        parcel.setDataPosition(dataPosition);
-        parcel.writeInt(dataPosition2 - dataPosition);
-        parcel.setDataPosition(dataPosition2);
+        int iDataPosition2 = parcel.dataPosition();
+        parcel.setDataPosition(iDataPosition);
+        parcel.writeInt(iDataPosition2 - iDataPosition);
+        parcel.setDataPosition(iDataPosition2);
     }
 
     public final void readFromParcel(Parcel parcel) {
-        int dataPosition = parcel.dataPosition();
-        int readInt = parcel.readInt();
+        int iDataPosition = parcel.dataPosition();
+        int i = parcel.readInt();
         try {
-            if (readInt < 4) {
+            if (i < 4) {
                 throw new BadParcelableException("Parcelable too small");
             }
-            if (parcel.dataPosition() - dataPosition < readInt) {
+            if (parcel.dataPosition() - iDataPosition < i) {
                 this.moduleName = parcel.readString();
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.modulePath = parcel.readString();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.preinstalledModulePath = parcel.readString();
-                        if (parcel.dataPosition() - dataPosition < readInt) {
+                        if (parcel.dataPosition() - iDataPosition < i) {
                             this.versionCode = parcel.readLong();
-                            if (parcel.dataPosition() - dataPosition < readInt) {
+                            if (parcel.dataPosition() - iDataPosition < i) {
                                 this.versionName = parcel.readString();
-                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                if (parcel.dataPosition() - iDataPosition < i) {
                                     boolean z = true;
                                     this.isFactory = parcel.readInt() != 0;
-                                    if (parcel.dataPosition() - dataPosition < readInt) {
+                                    if (parcel.dataPosition() - iDataPosition < i) {
                                         this.isActive = parcel.readInt() != 0;
-                                        if (parcel.dataPosition() - dataPosition < readInt) {
+                                        if (parcel.dataPosition() - iDataPosition < i) {
                                             this.hasClassPathJars = parcel.readInt() != 0;
-                                            if (parcel.dataPosition() - dataPosition < readInt) {
+                                            if (parcel.dataPosition() - iDataPosition < i) {
                                                 if (parcel.readInt() == 0) {
                                                     z = false;
                                                 }
                                                 this.activeApexChanged = z;
-                                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                                if (parcel.dataPosition() - iDataPosition < i) {
                                                     this.partition = parcel.readByte();
-                                                    if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                    if (iDataPosition > Integer.MAX_VALUE - i) {
                                                         throw new BadParcelableException("Overflow in the size of parcelable");
                                                     }
-                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                                 }
-                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                 throw new BadParcelableException("Overflow in the size of parcelable");
                                             }
-                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                             throw new BadParcelableException("Overflow in the size of parcelable");
                                         }
-                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                         throw new BadParcelableException("Overflow in the size of parcelable");
                                     }
-                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                 }
-                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                 throw new BadParcelableException("Overflow in the size of parcelable");
                             }
-                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                 throw new BadParcelableException("Overflow in the size of parcelable");
             }
-            parcel.setDataPosition(dataPosition + readInt);
+            parcel.setDataPosition(iDataPosition + i);
         } catch (Throwable th) {
-            if (dataPosition > Integer.MAX_VALUE - readInt) {
+            if (iDataPosition > Integer.MAX_VALUE - i) {
                 throw new BadParcelableException("Overflow in the size of parcelable");
             }
-            parcel.setDataPosition(dataPosition + readInt);
+            parcel.setDataPosition(iDataPosition + i);
             throw th;
         }
     }

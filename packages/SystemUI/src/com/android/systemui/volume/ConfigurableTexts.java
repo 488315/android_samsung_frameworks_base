@@ -6,7 +6,6 @@ import android.util.ArrayMap;
 import android.widget.TextView;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ConfigurableTexts {
     public final Context mContext;
@@ -21,10 +20,10 @@ public class ConfigurableTexts {
             for (int i2 = 0; i2 < ConfigurableTexts.this.mTextLabels.size(); i2++) {
                 ConfigurableTexts configurableTexts = ConfigurableTexts.this;
                 TextView textView = (TextView) configurableTexts.mTextLabels.keyAt(i2);
-                int intValue = ((Integer) ConfigurableTexts.this.mTextLabels.valueAt(i2)).intValue();
-                if (intValue >= 0) {
+                int iIntValue = ((Integer) ConfigurableTexts.this.mTextLabels.valueAt(i2)).intValue();
+                if (iIntValue >= 0) {
                     try {
-                        String string = configurableTexts.mContext.getString(intValue);
+                        String string = configurableTexts.mContext.getString(iIntValue);
                         CharSequence text = textView.getText();
                         String str = null;
                         if (text == null || text.length() == 0) {

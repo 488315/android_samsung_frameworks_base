@@ -128,9 +128,9 @@ public interface ITvRemoteServiceInput extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITvRemoteServiceInput)) {
-                return (ITvRemoteServiceInput) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITvRemoteServiceInput)) {
+                return (ITvRemoteServiceInput) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -184,85 +184,85 @@ public interface ITvRemoteServiceInput extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    openInputBridge(readStrongBinder, readString, readInt, readInt2, readInt3);
+                    openInputBridge(strongBinder, string, i3, i4, i5);
                     return true;
                 case 2:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    closeInputBridge(readStrongBinder2);
+                    closeInputBridge(strongBinder2);
                     return true;
                 case 3:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    clearInputBridge(readStrongBinder3);
+                    clearInputBridge(strongBinder3);
                     return true;
                 case 4:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    long readLong = parcel.readLong();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    sendTimestamp(readStrongBinder4, readLong);
+                    sendTimestamp(strongBinder4, j);
                     return true;
                 case 5:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
-                    int readInt4 = parcel.readInt();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendKeyDown(readStrongBinder5, readInt4);
+                    sendKeyDown(strongBinder5, i6);
                     return true;
                 case 6:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    int readInt5 = parcel.readInt();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendKeyUp(readStrongBinder6, readInt5);
+                    sendKeyUp(strongBinder6, i7);
                     return true;
                 case 7:
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendPointerDown(readStrongBinder7, readInt6, readInt7, readInt8);
+                    sendPointerDown(strongBinder7, i8, i9, i10);
                     return true;
                 case 8:
-                    IBinder readStrongBinder8 = parcel.readStrongBinder();
-                    int readInt9 = parcel.readInt();
+                    IBinder strongBinder8 = parcel.readStrongBinder();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendPointerUp(readStrongBinder8, readInt9);
+                    sendPointerUp(strongBinder8, i11);
                     return true;
                 case 9:
-                    IBinder readStrongBinder9 = parcel.readStrongBinder();
+                    IBinder strongBinder9 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    sendPointerSync(readStrongBinder9);
+                    sendPointerSync(strongBinder9);
                     return true;
                 case 10:
-                    IBinder readStrongBinder10 = parcel.readStrongBinder();
-                    String readString2 = parcel.readString();
+                    IBinder strongBinder10 = parcel.readStrongBinder();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    openGamepadBridge(readStrongBinder10, readString2);
+                    openGamepadBridge(strongBinder10, string2);
                     return true;
                 case 11:
-                    IBinder readStrongBinder11 = parcel.readStrongBinder();
-                    int readInt10 = parcel.readInt();
+                    IBinder strongBinder11 = parcel.readStrongBinder();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendGamepadKeyDown(readStrongBinder11, readInt10);
+                    sendGamepadKeyDown(strongBinder11, i12);
                     return true;
                 case 12:
-                    IBinder readStrongBinder12 = parcel.readStrongBinder();
-                    int readInt11 = parcel.readInt();
+                    IBinder strongBinder12 = parcel.readStrongBinder();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendGamepadKeyUp(readStrongBinder12, readInt11);
+                    sendGamepadKeyUp(strongBinder12, i13);
                     return true;
                 case 13:
-                    IBinder readStrongBinder13 = parcel.readStrongBinder();
-                    int readInt12 = parcel.readInt();
-                    float readFloat = parcel.readFloat();
+                    IBinder strongBinder13 = parcel.readStrongBinder();
+                    int i14 = parcel.readInt();
+                    float f = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    sendGamepadAxisValue(readStrongBinder13, readInt12, readFloat);
+                    sendGamepadAxisValue(strongBinder13, i14, f);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -287,173 +287,173 @@ public interface ITvRemoteServiceInput extends IInterface {
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void openInputBridge(IBinder iBinder, String str, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void closeInputBridge(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void clearInputBridge(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void sendTimestamp(IBinder iBinder, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void sendKeyDown(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void sendKeyUp(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void sendPointerDown(IBinder iBinder, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void sendPointerUp(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void sendPointerSync(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void openGamepadBridge(IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void sendGamepadKeyDown(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void sendGamepadKeyUp(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
             public void sendGamepadAxisValue(IBinder iBinder, int i, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

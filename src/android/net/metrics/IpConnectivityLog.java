@@ -36,11 +36,11 @@ public class IpConnectivityLog {
         if (this.mService != null) {
             return true;
         }
-        IIpConnectivityMetrics asInterface = IIpConnectivityMetrics.Stub.asInterface(ServiceManager.getService(SERVICE_NAME));
-        if (asInterface == null) {
+        IIpConnectivityMetrics iIpConnectivityMetricsAsInterface = IIpConnectivityMetrics.Stub.asInterface(ServiceManager.getService(SERVICE_NAME));
+        if (iIpConnectivityMetricsAsInterface == null) {
             return false;
         }
-        this.mService = asInterface;
+        this.mService = iIpConnectivityMetricsAsInterface;
         return true;
     }
 
@@ -60,15 +60,15 @@ public class IpConnectivityLog {
     }
 
     public boolean log(long j, Event event) {
-        ConnectivityMetricsEvent makeEv = makeEv(event);
-        makeEv.timestamp = j;
-        return log(makeEv);
+        ConnectivityMetricsEvent connectivityMetricsEventMakeEv = makeEv(event);
+        connectivityMetricsEventMakeEv.timestamp = j;
+        return log(connectivityMetricsEventMakeEv);
     }
 
     public boolean log(String str, Event event) {
-        ConnectivityMetricsEvent makeEv = makeEv(event);
-        makeEv.ifname = str;
-        return log(makeEv);
+        ConnectivityMetricsEvent connectivityMetricsEventMakeEv = makeEv(event);
+        connectivityMetricsEventMakeEv.ifname = str;
+        return log(connectivityMetricsEventMakeEv);
     }
 
     public boolean log(Network network, int[] iArr, Event event) {
@@ -76,10 +76,10 @@ public class IpConnectivityLog {
     }
 
     public boolean log(int i, int[] iArr, Event event) {
-        ConnectivityMetricsEvent makeEv = makeEv(event);
-        makeEv.netId = i;
-        makeEv.transports = BitUtils.packBits(iArr);
-        return log(makeEv);
+        ConnectivityMetricsEvent connectivityMetricsEventMakeEv = makeEv(event);
+        connectivityMetricsEventMakeEv.netId = i;
+        connectivityMetricsEventMakeEv.transports = BitUtils.packBits(iArr);
+        return log(connectivityMetricsEventMakeEv);
     }
 
     public boolean log(Event event) {

@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.notification.row.ui.viewmodel.FacePile;
 import com.android.systemui.statusbar.notification.row.ui.viewmodel.SingleIcon;
 import com.android.systemui.statusbar.notification.row.ui.viewmodel.SingleLineViewModel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SingleLineViewBinder {
     static {
@@ -78,10 +77,10 @@ public final class SingleLineViewBinder {
         CharSequence charSequence2 = singleLineViewModel != null ? singleLineViewModel.contentText : null;
         CharSequence charSequence3 = (singleLineViewModel == null || (conversationData2 = singleLineViewModel.conversationData) == null) ? null : conversationData2.conversationSenderName;
         if (singleLineViewModel != null && (conversationData = singleLineViewModel.conversationData) != null) {
-            r1 = conversationData.summarization;
+            charSequence = conversationData.summarization;
         }
         hybridConversationNotificationView2.getClass();
-        if (TextUtils.isEmpty(r1)) {
+        if (TextUtils.isEmpty(charSequence)) {
             hybridConversationNotificationView2.mTextView.setSingleLine(true);
             if (charSequence3 == null) {
                 hybridConversationNotificationView2.mConversationSenderName.setVisibility(8);
@@ -93,8 +92,8 @@ public final class SingleLineViewBinder {
             hybridConversationNotificationView2.mConversationSenderName.setVisibility(8);
             hybridConversationNotificationView2.mTextView.setSingleLine(false);
             hybridConversationNotificationView2.mTextView.setMaxLines(1);
-            charSequence2 = r1;
+            charSequence2 = charSequence;
         }
-        hybridConversationNotificationView2.bind(charSequence, charSequence2, TextUtils.isEmpty(r1));
+        hybridConversationNotificationView2.bind(charSequence, charSequence2, TextUtils.isEmpty(charSequence));
     }
 }

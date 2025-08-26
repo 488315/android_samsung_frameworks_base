@@ -4,8 +4,8 @@
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:layout_marginStart="16.0dip" android:layout_marginEnd="16.0dip">
         <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
-            <TextView android:textAppearance="?android:textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="12.0dip" android:text="@string/privacy_dialog_title" android:fontFamily="@android:string/emailTypeOther" />
-            <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="@android:color/safe_mode_text" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip" android:text="@string/privacy_dialog_summary" />
+            <TextView android:textAppearance="?android:textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="12.0dip" android:text="@string/privacy_dialog_title" android:fontFamily="@android:string/duration_days_shortest" />
+            <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="@android:color/material_grey_600" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip" android:text="@string/privacy_dialog_summary" />
         </LinearLayout>
         <LinearLayout android:orientation="vertical" android:id="@id/privacy_dialog_items_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip" />
         <LinearLayout android:orientation="horizontal" android:id="@id/button_layout" android:focusable="false" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="18.0dip">

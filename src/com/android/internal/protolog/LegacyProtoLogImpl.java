@@ -1,8 +1,10 @@
 package com.android.internal.protolog;
 
+import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
 import android.os.ShellCommand;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
 import com.android.internal.protolog.common.ILogger;
@@ -25,7 +27,7 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class LegacyProtoLogImpl implements IProtoLog {
     private static final int BUFFER_CAPACITY = 1048576;
     private static final long MAGIC_NUMBER_VALUE = 5138409603453637200L;
@@ -73,56 +75,28 @@ public class LegacyProtoLogImpl implements IProtoLog {
         throw new IllegalStateException("Not implemented. Only implemented for PerfettoProtoLogImpl.");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:5:0x001a  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private void logToLogcat(java.lang.String r4, com.android.internal.protolog.common.LogLevel r5, long r6, java.lang.Object[] r8) {
-        /*
-            r3 = this;
-            com.android.internal.protolog.LegacyProtoLogViewerConfigReader r0 = r3.mViewerConfig
-            java.lang.String r0 = r0.getViewerString(r6)
-            if (r0 == 0) goto L17
-            if (r8 == 0) goto L18
-            java.lang.String r0 = android.text.TextUtils.formatSimple(r0, r8)     // Catch: java.lang.Exception -> Lf
-            goto L18
-        Lf:
-            r0 = move-exception
-            java.lang.String r1 = "ProtoLog"
-            java.lang.String r2 = "Invalid ProtoLog format string."
-            android.util.Slog.w(r1, r2, r0)
-        L17:
-            r0 = 0
-        L18:
-            if (r0 != 0) goto L49
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r2 = "UNKNOWN MESSAGE ("
-            r1.<init>(r2)
-            r1.append(r6)
-            java.lang.String r6 = ")"
-            r1.append(r6)
-            java.lang.String r6 = r1.toString()
-            r0.<init>(r6)
-            if (r8 == 0) goto L45
-            int r6 = r8.length
-            r7 = 0
-        L36:
-            if (r7 >= r6) goto L45
-            r1 = r8[r7]
-            java.lang.String r2 = " "
-            r0.append(r2)
-            r0.append(r1)
-            int r7 = r7 + 1
-            goto L36
-        L45:
-            java.lang.String r0 = r0.toString()
-        L49:
-            r3.passToLogcat(r4, r5, r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.protolog.LegacyProtoLogImpl.logToLogcat(java.lang.String, com.android.internal.protolog.common.LogLevel, long, java.lang.Object[]):void");
+    private void logToLogcat(String str, LogLevel logLevel, long j, Object[] objArr) {
+        String viewerString = this.mViewerConfig.getViewerString(j);
+        if (viewerString == null) {
+            viewerString = null;
+        } else if (objArr != null) {
+            try {
+                viewerString = TextUtils.formatSimple(viewerString, objArr);
+            } catch (Exception e) {
+                Slog.w(TAG, "Invalid ProtoLog format string.", e);
+            }
+        }
+        if (viewerString == null) {
+            StringBuilder sb = new StringBuilder("UNKNOWN MESSAGE (" + j + NavigationBarInflaterView.KEY_CODE_END);
+            if (objArr != null) {
+                for (Object obj : objArr) {
+                    sb.append(" ");
+                    sb.append(obj);
+                }
+            }
+            viewerString = sb.toString();
+        }
+        passToLogcat(str, logLevel, viewerString);
     }
 
     /* renamed from: com.android.internal.protolog.LegacyProtoLogImpl$1, reason: invalid class name */
@@ -188,7 +162,7 @@ public class LegacyProtoLogImpl implements IProtoLog {
         if (isProtoEnabled()) {
             try {
                 ProtoOutputStream protoOutputStream = new ProtoOutputStream(this.mPerChunkSize);
-                long start = protoOutputStream.start(2246267895812L);
+                long jStart = protoOutputStream.start(2246267895812L);
                 protoOutputStream.write(ProtoLogMessage.MESSAGE_HASH, j);
                 protoOutputStream.write(ProtoLogMessage.ELAPSED_REALTIME_NANOS, SystemClock.elapsedRealtimeNanos());
                 if (objArr != null) {
@@ -200,25 +174,31 @@ public class LegacyProtoLogImpl implements IProtoLog {
                     int i3 = 0;
                     while (i2 < length) {
                         Object obj = objArr[i2];
-                        int bitmaskToLogDataType = LogDataType.bitmaskToLogDataType(i, i3);
+                        int iBitmaskToLogDataType = LogDataType.bitmaskToLogDataType(i, i3);
                         int i4 = i2;
-                        if (bitmaskToLogDataType == 0) {
+                        if (iBitmaskToLogDataType == 0) {
                             protoOutputStream.write(2237677961219L, obj.toString());
-                        } else if (bitmaskToLogDataType == 1) {
+                        } else if (iBitmaskToLogDataType == 1) {
                             arrayList3.add(Long.valueOf(((Number) obj).longValue()));
-                        } else if (bitmaskToLogDataType == 2) {
-                            arrayList4.add(Double.valueOf(((Number) obj).doubleValue()));
-                        } else if (bitmaskToLogDataType == 3) {
-                            try {
-                                Boolean bool = (Boolean) obj;
-                                bool.booleanValue();
-                                arrayList5.add(bool);
-                            } catch (ClassCastException e) {
-                                arrayList2 = arrayList3;
-                                arrayList = arrayList4;
-                                protoOutputStream.write(2237677961219L, "(INVALID PARAMS_MASK) " + obj.toString());
-                                Slog.e(TAG, "Invalid ProtoLog paramsMask", e);
+                        } else if (iBitmaskToLogDataType != 2) {
+                            if (iBitmaskToLogDataType == 3) {
+                                try {
+                                    Boolean bool = (Boolean) obj;
+                                    bool.booleanValue();
+                                    arrayList5.add(bool);
+                                } catch (ClassCastException e) {
+                                    arrayList2 = arrayList3;
+                                    arrayList = arrayList4;
+                                    protoOutputStream.write(2237677961219L, "(INVALID PARAMS_MASK) " + obj.toString());
+                                    Slog.e(TAG, "Invalid ProtoLog paramsMask", e);
+                                }
                             }
+                            i3++;
+                            arrayList3 = arrayList2;
+                            arrayList4 = arrayList;
+                            i2 = i4 + 1;
+                        } else {
+                            arrayList4.add(Double.valueOf(((Number) obj).doubleValue()));
                         }
                         arrayList2 = arrayList3;
                         arrayList = arrayList4;
@@ -233,9 +213,7 @@ public class LegacyProtoLogImpl implements IProtoLog {
                         protoOutputStream.writePackedSInt64(ProtoLogMessage.SINT64_PARAMS, arrayList6.stream().mapToLong(new ToLongFunction() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda6
                             @Override // java.util.function.ToLongFunction
                             public final long applyAsLong(Object obj2) {
-                                long longValue;
-                                longValue = ((Long) obj2).longValue();
-                                return longValue;
+                                return ((Long) obj2).longValue();
                             }
                         }).toArray());
                     }
@@ -243,9 +221,7 @@ public class LegacyProtoLogImpl implements IProtoLog {
                         protoOutputStream.writePackedDouble(ProtoLogMessage.DOUBLE_PARAMS, arrayList7.stream().mapToDouble(new ToDoubleFunction() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda7
                             @Override // java.util.function.ToDoubleFunction
                             public final double applyAsDouble(Object obj2) {
-                                double doubleValue;
-                                doubleValue = ((Double) obj2).doubleValue();
-                                return doubleValue;
+                                return ((Double) obj2).doubleValue();
                             }
                         }).toArray());
                     }
@@ -257,7 +233,7 @@ public class LegacyProtoLogImpl implements IProtoLog {
                         protoOutputStream.writePackedBool(ProtoLogMessage.BOOLEAN_PARAMS, zArr);
                     }
                 }
-                protoOutputStream.end(start);
+                protoOutputStream.end(jStart);
                 this.mBuffer.add(protoOutputStream);
             } catch (Exception e2) {
                 Slog.e(TAG, "Exception while logging to proto", e2);
@@ -412,11 +388,11 @@ public class LegacyProtoLogImpl implements IProtoLog {
 
     private void writeProtoLogToFileLocked() {
         try {
-            long currentTimeMillis = System.currentTimeMillis() - (SystemClock.elapsedRealtimeNanos() / 1000000);
+            long jCurrentTimeMillis = System.currentTimeMillis() - (SystemClock.elapsedRealtimeNanos() / 1000000);
             ProtoOutputStream protoOutputStream = new ProtoOutputStream(this.mPerChunkSize);
             protoOutputStream.write(1125281431553L, MAGIC_NUMBER_VALUE);
             protoOutputStream.write(1138166333442L, PROTOLOG_VERSION);
-            protoOutputStream.write(1125281431555L, currentTimeMillis);
+            protoOutputStream.write(1125281431555L, jCurrentTimeMillis);
             this.mBuffer.writeTraceToFile(this.mLogFile, protoOutputStream);
         } catch (IOException e) {
             Slog.e(TAG, "Unable to write buffer to file", e);
@@ -460,7 +436,7 @@ public class LegacyProtoLogImpl implements IProtoLog {
         for (IProtoLogGroup iProtoLogGroup : iProtoLogGroupArr) {
             this.mLogGroups.put(iProtoLogGroup.name(), iProtoLogGroup);
         }
-        boolean anyMatch = Arrays.stream(iProtoLogGroupArr).anyMatch(new Predicate() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda0
+        boolean zAnyMatch = Arrays.stream(iProtoLogGroupArr).anyMatch(new Predicate() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((IProtoLogGroup) obj).isLogToLogcat();
@@ -472,7 +448,7 @@ public class LegacyProtoLogImpl implements IProtoLog {
                 Slog.i(LegacyProtoLogImpl.TAG, str);
             }
         };
-        if (anyMatch) {
+        if (zAnyMatch) {
             this.mViewerConfig.loadViewerConfig(iLogger, this.mLegacyViewerConfigFilename);
         }
     }

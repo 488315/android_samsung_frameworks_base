@@ -126,24 +126,30 @@ final class AndroidDistinguishedNameParser {
         }
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:28:0x0054, code lost:
+    
+        r6.end = r0;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private String hexAV() {
-        int i;
         char[] cArr;
         char c;
-        int i2 = this.pos;
-        if (i2 + 4 >= this.length) {
+        int i = this.pos;
+        if (i + 4 >= this.length) {
             throw new IllegalStateException("Unexpected end of DN: " + this.dn);
         }
-        this.beg = i2;
-        this.pos = i2 + 1;
+        this.beg = i;
+        this.pos = i + 1;
         while (true) {
-            i = this.pos;
-            if (i == this.length || (c = (cArr = this.chars)[i]) == '+' || c == ',' || c == ';') {
+            int i2 = this.pos;
+            if (i2 == this.length || (c = (cArr = this.chars)[i2]) == '+' || c == ',' || c == ';') {
                 break;
             }
             if (c == ' ') {
-                this.end = i;
-                this.pos = i + 1;
+                this.end = i2;
+                this.pos = i2 + 1;
                 while (true) {
                     int i3 = this.pos;
                     if (i3 >= this.length || this.chars[i3] != ' ') {
@@ -153,12 +159,11 @@ final class AndroidDistinguishedNameParser {
                 }
             } else {
                 if (c >= 'A' && c <= 'F') {
-                    cArr[i] = (char) (c + ' ');
+                    cArr[i2] = (char) (c + ' ');
                 }
-                this.pos = i + 1;
+                this.pos = i2 + 1;
             }
         }
-        this.end = i;
         int i4 = this.end;
         int i5 = this.beg;
         int i6 = i4 - i5;
@@ -175,108 +180,81 @@ final class AndroidDistinguishedNameParser {
         return new String(this.chars, this.beg, i6);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x009d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:16:0x0051, code lost:
     
-        return new java.lang.String(r1, r2, r8.cur - r2);
+        r1 = r8.chars;
+        r2 = r8.beg;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:17:0x005d, code lost:
+    
+        return new java.lang.String(r1, r2, r8.end - r2);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.lang.String escapedAV() {
-        /*
-            r8 = this;
-            int r0 = r8.pos
-            r8.beg = r0
-            r8.end = r0
-        L6:
-            int r0 = r8.pos
-            int r1 = r8.length
-            if (r0 < r1) goto L19
-            java.lang.String r0 = new java.lang.String
-            char[] r1 = r8.chars
-            int r2 = r8.beg
-            int r8 = r8.end
-            int r8 = r8 - r2
-            r0.<init>(r1, r2, r8)
-            return r0
-        L19:
-            char[] r1 = r8.chars
-            char r2 = r1[r0]
-            r3 = 44
-            r4 = 43
-            r5 = 59
-            r6 = 32
-            if (r2 == r6) goto L5e
-            if (r2 == r5) goto L51
-            r5 = 92
-            if (r2 == r5) goto L3e
-            if (r2 == r4) goto L51
-            if (r2 == r3) goto L51
-            int r3 = r8.end
-            int r4 = r3 + 1
-            r8.end = r4
-            r1[r3] = r2
-            int r0 = r0 + 1
-            r8.pos = r0
-            goto L6
-        L3e:
-            int r0 = r8.end
-            int r2 = r0 + 1
-            r8.end = r2
-            char r2 = r8.getEscaped()
-            r1[r0] = r2
-            int r0 = r8.pos
-            int r0 = r0 + 1
-            r8.pos = r0
-            goto L6
-        L51:
-            java.lang.String r0 = new java.lang.String
-            char[] r1 = r8.chars
-            int r2 = r8.beg
-            int r8 = r8.end
-            int r8 = r8 - r2
-            r0.<init>(r1, r2, r8)
-            return r0
-        L5e:
-            int r2 = r8.end
-            r8.cur = r2
-            int r0 = r0 + 1
-            r8.pos = r0
-            int r0 = r2 + 1
-            r8.end = r0
-            r1[r2] = r6
-        L6c:
-            int r0 = r8.pos
-            int r1 = r8.length
-            if (r0 >= r1) goto L85
-            char[] r2 = r8.chars
-            char r7 = r2[r0]
-            if (r7 != r6) goto L85
-            int r1 = r8.end
-            int r7 = r1 + 1
-            r8.end = r7
-            r2[r1] = r6
-            int r0 = r0 + 1
-            r8.pos = r0
-            goto L6c
-        L85:
-            if (r0 == r1) goto L91
-            char[] r1 = r8.chars
-            char r0 = r1[r0]
-            if (r0 == r3) goto L91
-            if (r0 == r4) goto L91
-            if (r0 != r5) goto L6
-        L91:
-            java.lang.String r0 = new java.lang.String
-            char[] r1 = r8.chars
-            int r2 = r8.beg
-            int r8 = r8.cur
-            int r8 = r8 - r2
-            r0.<init>(r1, r2, r8)
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: org.apache.http.conn.ssl.AndroidDistinguishedNameParser.escapedAV():java.lang.String");
+    private String escapedAV() {
+        int i;
+        int i2;
+        char c;
+        int i3 = this.pos;
+        this.beg = i3;
+        this.end = i3;
+        while (true) {
+            int i4 = this.pos;
+            if (i4 >= this.length) {
+                char[] cArr = this.chars;
+                int i5 = this.beg;
+                return new String(cArr, i5, this.end - i5);
+            }
+            char[] cArr2 = this.chars;
+            char c2 = cArr2[i4];
+            if (c2 == ' ') {
+                int i6 = this.end;
+                this.cur = i6;
+                this.pos = i4 + 1;
+                this.end = i6 + 1;
+                cArr2[i6] = ' ';
+                while (true) {
+                    i = this.pos;
+                    i2 = this.length;
+                    if (i >= i2) {
+                        break;
+                    }
+                    char[] cArr3 = this.chars;
+                    if (cArr3[i] != ' ') {
+                        break;
+                    }
+                    int i7 = this.end;
+                    this.end = i7 + 1;
+                    cArr3[i7] = ' ';
+                    this.pos = i + 1;
+                }
+                if (i == i2 || (c = this.chars[i]) == ',' || c == '+' || c == ';') {
+                    break;
+                }
+            } else {
+                if (c2 == ';') {
+                    break;
+                }
+                if (c2 == '\\') {
+                    int i8 = this.end;
+                    this.end = i8 + 1;
+                    cArr2[i8] = getEscaped();
+                    this.pos++;
+                } else {
+                    if (c2 == '+' || c2 == ',') {
+                        break;
+                    }
+                    int i9 = this.end;
+                    this.end = i9 + 1;
+                    cArr2[i9] = c2;
+                    this.pos = i4 + 1;
+                }
+            }
+        }
+        char[] cArr4 = this.chars;
+        int i10 = this.beg;
+        return new String(cArr4, i10, this.cur - i10);
     }
 
     private char getEscaped() {
@@ -381,14 +359,14 @@ final class AndroidDistinguishedNameParser {
     }
 
     public String findMostSpecific(String str) {
-        String quotedAV;
+        String strQuotedAV;
         this.pos = 0;
         this.beg = 0;
         this.end = 0;
         this.cur = 0;
         this.chars = this.dn.toCharArray();
-        String nextAT = nextAT();
-        if (nextAT == null) {
+        String strNextAT = nextAT();
+        if (strNextAT == null) {
             return null;
         }
         do {
@@ -398,16 +376,16 @@ final class AndroidDistinguishedNameParser {
             }
             char c = this.chars[i];
             if (c == '\"') {
-                quotedAV = quotedAV();
+                strQuotedAV = quotedAV();
             } else if (c == '#') {
-                quotedAV = hexAV();
+                strQuotedAV = hexAV();
             } else if (c == '+' || c == ',' || c == ';') {
-                quotedAV = "";
+                strQuotedAV = "";
             } else {
-                quotedAV = escapedAV();
+                strQuotedAV = escapedAV();
             }
-            if (str.equalsIgnoreCase(nextAT)) {
-                return quotedAV;
+            if (str.equalsIgnoreCase(strNextAT)) {
+                return strQuotedAV;
             }
             int i2 = this.pos;
             if (i2 >= this.length) {
@@ -418,55 +396,55 @@ final class AndroidDistinguishedNameParser {
                 throw new IllegalStateException("Malformed DN: " + this.dn);
             }
             this.pos = i2 + 1;
-            nextAT = nextAT();
-        } while (nextAT != null);
+            strNextAT = nextAT();
+        } while (strNextAT != null);
         throw new IllegalStateException("Malformed DN: " + this.dn);
     }
 
     public List<String> getAllMostSpecificFirst(String str) {
-        String quotedAV;
+        String strQuotedAV;
         this.pos = 0;
         this.beg = 0;
         this.end = 0;
         this.cur = 0;
         this.chars = this.dn.toCharArray();
-        List<String> list = Collections.EMPTY_LIST;
-        String nextAT = nextAT();
-        if (nextAT == null) {
-            return list;
+        List<String> arrayList = Collections.EMPTY_LIST;
+        String strNextAT = nextAT();
+        if (strNextAT == null) {
+            return arrayList;
         }
         do {
             int i = this.pos;
             if (i >= this.length) {
-                return list;
+                return arrayList;
             }
             char c = this.chars[i];
             if (c == '\"') {
-                quotedAV = quotedAV();
+                strQuotedAV = quotedAV();
             } else if (c == '#') {
-                quotedAV = hexAV();
+                strQuotedAV = hexAV();
             } else if (c == '+' || c == ',' || c == ';') {
-                quotedAV = "";
+                strQuotedAV = "";
             } else {
-                quotedAV = escapedAV();
+                strQuotedAV = escapedAV();
             }
-            if (str.equalsIgnoreCase(nextAT)) {
-                if (list.isEmpty()) {
-                    list = new ArrayList<>();
+            if (str.equalsIgnoreCase(strNextAT)) {
+                if (arrayList.isEmpty()) {
+                    arrayList = new ArrayList<>();
                 }
-                list.add(quotedAV);
+                arrayList.add(strQuotedAV);
             }
             int i2 = this.pos;
             if (i2 >= this.length) {
-                return list;
+                return arrayList;
             }
             char c2 = this.chars[i2];
             if (c2 != ',' && c2 != ';' && c2 != '+') {
                 throw new IllegalStateException("Malformed DN: " + this.dn);
             }
             this.pos = i2 + 1;
-            nextAT = nextAT();
-        } while (nextAT != null);
+            strNextAT = nextAT();
+        } while (strNextAT != null);
         throw new IllegalStateException("Malformed DN: " + this.dn);
     }
 }

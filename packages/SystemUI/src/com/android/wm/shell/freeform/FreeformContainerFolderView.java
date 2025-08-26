@@ -8,6 +8,7 @@ import android.animation.ValueAnimator;
 import android.app.ActivityTaskManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -58,7 +59,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 class FreeformContainerFolderView extends RecyclerView implements FreeformContainerCallback {
     public static final float[] TAIL_ICON_ALPHA_ARRAY = {1.0f, 0.5f, 0.1f};
@@ -130,29 +130,28 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
     public int mWidth;
     public final WindowManager mWindowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.freeform.FreeformContainerFolderView$1, reason: invalid class name */
     public class AnonymousClass1 implements Runnable {
         public AnonymousClass1() {
         }
 
         @Override // java.lang.Runnable
-        public final void run() {
+        public final void run() throws Resources.NotFoundException {
             FreeformContainerFolderView.this.setHorizontalScrollBarEnabled(true);
             Log.i("FreeformContainer", "[FolderView] mOpenFolderRunnable Run()");
             for (int itemCount = FreeformContainerFolderView.this.mAdapter.getItemCount() - 1; itemCount >= 0; itemCount--) {
-                final RecyclerView.ViewHolder findViewHolderForAdapterPosition = FreeformContainerFolderView.this.findViewHolderForAdapterPosition(itemCount);
-                if (findViewHolderForAdapterPosition != null) {
+                final RecyclerView.ViewHolder viewHolderFindViewHolderForAdapterPosition = FreeformContainerFolderView.this.findViewHolderForAdapterPosition(itemCount);
+                if (viewHolderFindViewHolderForAdapterPosition != null) {
                     if (itemCount == 0) {
                         FreeformContainerFolderView freeformContainerFolderView = FreeformContainerFolderView.this;
                         freeformContainerFolderView.mBlockDataUpdate = true;
-                        freeformContainerFolderView.mH.postDelayed(new FreeformContainerFolderView$1$$ExternalSyntheticLambda0(0, this, findViewHolderForAdapterPosition), 213L);
+                        freeformContainerFolderView.mH.postDelayed(new FreeformContainerFolderView$1$$ExternalSyntheticLambda0(0, this, viewHolderFindViewHolderForAdapterPosition), 213L);
                     } else {
-                        Animation loadAnimation = AnimationUtils.loadAnimation(FreeformContainerFolderView.this.mContext, R.anim.freeform_container_icon_appearing_in_folder);
-                        loadAnimation.setAnimationListener(new Animation.AnimationListener(this) { // from class: com.android.wm.shell.freeform.FreeformContainerFolderView.1.1
+                        Animation animationLoadAnimation = AnimationUtils.loadAnimation(FreeformContainerFolderView.this.mContext, R.anim.freeform_container_icon_appearing_in_folder);
+                        animationLoadAnimation.setAnimationListener(new Animation.AnimationListener(this) { // from class: com.android.wm.shell.freeform.FreeformContainerFolderView.1.1
                             @Override // android.view.animation.Animation.AnimationListener
                             public final void onAnimationStart(Animation animation) {
-                                findViewHolderForAdapterPosition.itemView.setVisibility(0);
+                                viewHolderFindViewHolderForAdapterPosition.itemView.setVisibility(0);
                             }
 
                             @Override // android.view.animation.Animation.AnimationListener
@@ -163,7 +162,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                             public final void onAnimationRepeat(Animation animation) {
                             }
                         });
-                        findViewHolderForAdapterPosition.itemView.startAnimation(loadAnimation);
+                        viewHolderFindViewHolderForAdapterPosition.itemView.startAnimation(animationLoadAnimation);
                     }
                 }
             }
@@ -171,7 +170,6 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FolderItemDecoration extends RecyclerView.ItemDecoration {
         public final Rect mItemMargin;
         public int mItemSpace;
@@ -217,7 +215,6 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FolderViewAdapter extends RecyclerView.Adapter {
         public /* synthetic */ FolderViewAdapter(FreeformContainerFolderView freeformContainerFolderView, int i) {
             this();
@@ -294,8 +291,8 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                         f = 1.0f;
                     } else {
                         int i9 = itemCount2 - 2;
-                        int max = Math.max(itemCount2 - 3, i5);
-                        if (i9 < i7 || i7 < max) {
+                        int iMax = Math.max(itemCount2 - 3, i5);
+                        if (i9 < i7 || i7 < iMax) {
                             i2 = i5;
                             i3 = i6;
                             c = c2;
@@ -322,9 +319,9 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                                             FreeformContainerFolderView freeformContainerFolderView3 = freeformContainerFolderView;
                                             View view3 = childAt;
                                             if (!freeformContainerFolderView3.mIsAppIconMoving) {
-                                                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                                                view3.setScaleX(floatValue);
-                                                view3.setScaleY(floatValue);
+                                                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                                                view3.setScaleX(fFloatValue);
+                                                view3.setScaleY(fFloatValue);
                                                 break;
                                             }
                                             break;
@@ -356,9 +353,9 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                                             FreeformContainerFolderView freeformContainerFolderView3 = freeformContainerFolderView;
                                             View view3 = childAt;
                                             if (!freeformContainerFolderView3.mIsAppIconMoving) {
-                                                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                                                view3.setScaleX(floatValue);
-                                                view3.setScaleY(floatValue);
+                                                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                                                view3.setScaleX(fFloatValue);
+                                                view3.setScaleY(fFloatValue);
                                                 break;
                                             }
                                             break;
@@ -390,9 +387,9 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                                             FreeformContainerFolderView freeformContainerFolderView3 = freeformContainerFolderView;
                                             View view3 = childAt;
                                             if (!freeformContainerFolderView3.mIsAppIconMoving) {
-                                                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                                                view3.setScaleX(floatValue);
-                                                view3.setScaleY(floatValue);
+                                                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                                                view3.setScaleX(fFloatValue);
+                                                view3.setScaleY(fFloatValue);
                                                 break;
                                             }
                                             break;
@@ -413,22 +410,22 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                             float[] fArr = new float[2];
                             fArr[i2] = 1.0f;
                             fArr[i3] = f2;
-                            ValueAnimator ofFloat = ValueAnimator.ofFloat(fArr);
-                            ofFloat.addUpdateListener(animatorUpdateListener);
+                            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(fArr);
+                            valueAnimatorOfFloat.addUpdateListener(animatorUpdateListener);
                             float[] fArr2 = new float[2];
                             fArr2[i2] = 1.0f;
                             fArr2[i3] = f3;
-                            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(fArr2);
-                            ofFloat2.addUpdateListener(animatorUpdateListener2);
+                            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(fArr2);
+                            valueAnimatorOfFloat2.addUpdateListener(animatorUpdateListener2);
                             float[] fArr3 = new float[2];
                             fArr3[i2] = y;
                             fArr3[i3] = y2;
-                            ValueAnimator ofFloat3 = ValueAnimator.ofFloat(fArr3);
-                            ofFloat3.addUpdateListener(animatorUpdateListener3);
+                            ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(fArr3);
+                            valueAnimatorOfFloat3.addUpdateListener(animatorUpdateListener3);
                             ArrayList arrayList = new ArrayList();
-                            arrayList.add(ofFloat);
-                            arrayList.add(ofFloat2);
-                            arrayList.add(ofFloat3);
+                            arrayList.add(valueAnimatorOfFloat);
+                            arrayList.add(valueAnimatorOfFloat2);
+                            arrayList.add(valueAnimatorOfFloat3);
                             AnimatorSet animatorSet = new AnimatorSet();
                             animatorSet.setDuration(200L);
                             animatorSet.playTogether(arrayList);
@@ -484,7 +481,6 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class FolderViewItemViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener {
         public FreeformContainerItem mItem;
 
@@ -493,14 +489,12 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MultiInstanceItemViewHolder extends FolderViewItemViewHolder {
         public final FreeformContainerFolderView$MultiInstanceItemViewHolder$$ExternalSyntheticLambda1 mButtonHoverListener;
         public final FreeformContainerFolderView$1$$ExternalSyntheticLambda1 mDismissMultiInstancePreviewByHoverExit;
         public final MultiInstanceEventHandler mHandler;
         public final ViewGroup mMultiInstancePointerGroupView;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class MultiInstanceEventHandler extends Handler {
             public MultiInstanceEventHandler() {
             }
@@ -514,7 +508,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                         removeMessages(1);
                         return;
                     } else {
-                        MultiInstanceItemViewHolder.m3249$$Nest$mcreateMultiInstancePreview(multiInstanceItemViewHolder, true);
+                        MultiInstanceItemViewHolder.m3266$$Nest$mcreateMultiInstancePreview(multiInstanceItemViewHolder, true);
                         removeMessages(1);
                         return;
                     }
@@ -523,39 +517,39 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                     if (hasMessages(1)) {
                         removeMessages(1);
                     }
-                    MultiInstanceItemViewHolder.m3249$$Nest$mcreateMultiInstancePreview(multiInstanceItemViewHolder, false);
+                    MultiInstanceItemViewHolder.m3266$$Nest$mcreateMultiInstancePreview(multiInstanceItemViewHolder, false);
                     removeMessages(2);
                 }
             }
         }
 
         /* renamed from: -$$Nest$mcreateMultiInstancePreview, reason: not valid java name */
-        public static void m3249$$Nest$mcreateMultiInstancePreview(final MultiInstanceItemViewHolder multiInstanceItemViewHolder, boolean z) {
+        public static void m3266$$Nest$mcreateMultiInstancePreview(final MultiInstanceItemViewHolder multiInstanceItemViewHolder, boolean z) {
             int height;
             FreeformContainerItem freeformContainerItem;
-            MultiInstanceItem asMultiInstanceItem = multiInstanceItemViewHolder.mItem.asMultiInstanceItem();
-            if (asMultiInstanceItem == null || asMultiInstanceItem.mChildItemList.size() <= 1) {
-                Log.w("FreeformContainer", "createMultiInstancePreview: invalid item, " + asMultiInstanceItem);
+            MultiInstanceItem multiInstanceItemAsMultiInstanceItem = multiInstanceItemViewHolder.mItem.asMultiInstanceItem();
+            if (multiInstanceItemAsMultiInstanceItem == null || multiInstanceItemAsMultiInstanceItem.mChildItemList.size() <= 1) {
+                Log.w("FreeformContainer", "createMultiInstancePreview: invalid item, " + multiInstanceItemAsMultiInstanceItem);
                 return;
             }
             int itemCount = multiInstanceItemViewHolder.mItem.getItemCount() - 1;
             View childAt = multiInstanceItemViewHolder.mMultiInstancePointerGroupView.getChildAt(itemCount);
             if (childAt == null) {
-                Log.w("FreeformContainer", "createMultiInstancePreview: cannot find child view, " + asMultiInstanceItem);
+                Log.w("FreeformContainer", "createMultiInstancePreview: cannot find child view, " + multiInstanceItemAsMultiInstanceItem);
                 return;
             }
             ArrayList arrayList = new ArrayList();
             while (itemCount >= 0) {
                 MultiInstanceItem multiInstanceItem = (MultiInstanceItem) multiInstanceItemViewHolder.mItem.getItemList().get(itemCount);
-                Bitmap bitmap = multiInstanceItem.mSnapshotBitmap;
-                if (bitmap == null) {
+                Bitmap bitmapCreateBitmap = multiInstanceItem.mSnapshotBitmap;
+                if (bitmapCreateBitmap == null) {
                     Log.w("FreeformContainer", "Use dummy bitmap, " + multiInstanceItem);
                     FreeformContainerFolderView freeformContainerFolderView = FreeformContainerFolderView.this;
-                    bitmap = Bitmap.createBitmap(freeformContainerFolderView.mPreviewWidth, freeformContainerFolderView.mPreviewHeight, Bitmap.Config.ARGB_8888);
-                    new Canvas(bitmap).drawColor(-1);
+                    bitmapCreateBitmap = Bitmap.createBitmap(freeformContainerFolderView.mPreviewWidth, freeformContainerFolderView.mPreviewHeight, Bitmap.Config.ARGB_8888);
+                    new Canvas(bitmapCreateBitmap).drawColor(-1);
                 }
                 FreeformContainerFolderView freeformContainerFolderView2 = FreeformContainerFolderView.this;
-                arrayList.add(Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight()), freeformContainerFolderView2.mPreviewWidth, freeformContainerFolderView2.mPreviewHeight, true));
+                arrayList.add(Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmapCreateBitmap, 0, 0, bitmapCreateBitmap.getWidth(), bitmapCreateBitmap.getHeight()), freeformContainerFolderView2.mPreviewWidth, freeformContainerFolderView2.mPreviewHeight, true));
                 itemCount--;
             }
             Rect rect = FreeformContainerFolderView.this.mItemDecoration.mItemMargin;
@@ -564,8 +558,8 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
             FreeformContainerFolderView.this.dismissMultiInstancePreviewPopup("create_new_popup");
             LayoutInflater layoutInflater = FreeformContainerFolderView.this.mLayoutInflater;
             Objects.requireNonNull(layoutInflater);
-            View inflate = layoutInflater.inflate(R.layout.preview_list_container, (ViewGroup) null);
-            FreeformContainerFolderView.this.mPopupWindow = new MultiInstancePreviewPopupWindow(inflate, -2, -2, true, z, freeformContainerItem2);
+            View viewInflate = layoutInflater.inflate(R.layout.preview_list_container, (ViewGroup) null);
+            FreeformContainerFolderView.this.mPopupWindow = new MultiInstancePreviewPopupWindow(viewInflate, -2, -2, true, z, freeformContainerItem2);
             FreeformContainerFolderView.this.mPopupWindow.setTouchable(true);
             MultiInstancePreviewPopupWindow multiInstancePreviewPopupWindow = FreeformContainerFolderView.this.mPopupWindow;
             if (!multiInstancePreviewPopupWindow.mOpenedByHoverAction && (freeformContainerItem = multiInstancePreviewPopupWindow.mItem) != null && freeformContainerItem == freeformContainerItem2) {
@@ -573,7 +567,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
             }
             FreeformContainerFolderView.this.mPopupWindow.setFocusable(false);
             FreeformContainerFolderView.this.mPopupWindow.setBackgroundDrawable(new ColorDrawable(0));
-            FreeformContainerFolderView.this.mPreviewRecycler = inflate.findViewById(R.id.previewRecycler);
+            FreeformContainerFolderView.this.mPreviewRecycler = viewInflate.findViewById(R.id.previewRecycler);
             FreeformContainerFolderView.this.mMultiInstancePreviewAdapter = FreeformContainerFolderView.this.new MultiInstancePreviewAdapter(arrayList, freeformContainerItem2);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(FreeformContainerFolderView.this.mContext);
             linearLayoutManager.setOrientation(0);
@@ -622,7 +616,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                         freeformContainerFolderView7.mViewController.hideDismissButtonAndDismissIcon(freeformContainerFolderView7.mTargetPreviewItem, freeformContainerFolderView7.mDraggingPreview, freeformContainerFolderView7.mTmpBounds);
                         MultiInstanceItemViewHolder multiInstanceItemViewHolder2 = MultiInstanceItemViewHolder.this;
                         if (!FreeformContainerFolderView.this.mHasPreviewMoved) {
-                            MultiInstanceItemViewHolder.m3250$$Nest$mrestorePreview(multiInstanceItemViewHolder2);
+                            MultiInstanceItemViewHolder.m3267$$Nest$mrestorePreview(multiInstanceItemViewHolder2);
                         }
                         if (FreeformContainerFolderView.this.mViewController.isEnterDismissButton()) {
                             return;
@@ -637,12 +631,12 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                         freeformContainerFolderView8.mAnimatingSpringPreviewX = Math.abs(translationX - f) > 2.0f;
                         FreeformContainerFolderView.this.mAnimatingSpringPreviewY = Math.abs(translationY - f2) > 2.0f;
                         if (!FreeformContainerFolderView.this.isSpringPreviewAnimating()) {
-                            StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("[FolderView] animateToReturnDraggingAppIconView: spring failed, from=[", translationX, ",", translationY, "], to=[");
-                            m.append(f);
-                            m.append(",");
-                            m.append(f2);
-                            m.append("], call finishDraggingAppIcon()");
-                            Log.i("FreeformContainer", m.toString());
+                            StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("[FolderView] animateToReturnDraggingAppIconView: spring failed, from=[", translationX, ",", translationY, "], to=[");
+                            sbM.append(f);
+                            sbM.append(",");
+                            sbM.append(f2);
+                            sbM.append("], call finishDraggingAppIcon()");
+                            Log.i("FreeformContainer", sbM.toString());
                             FreeformContainerFolderView.this.finishDraggingAppPreview();
                             return;
                         }
@@ -662,7 +656,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                                     return;
                                 }
                                 Log.i("FreeformContainer", "[FolderView] onSpringAtRest of springX, releaseDraggingState");
-                                MultiInstanceItemViewHolder.m3250$$Nest$mrestorePreview(multiInstanceItemViewHolder4);
+                                MultiInstanceItemViewHolder.m3267$$Nest$mrestorePreview(multiInstanceItemViewHolder4);
                                 FreeformContainerFolderView.this.finishDraggingAppPreview();
                             }
 
@@ -689,7 +683,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                                     return;
                                 }
                                 Log.i("FreeformContainer", "[FolderView] onSpringAtRest of springY, releaseDraggingState");
-                                MultiInstanceItemViewHolder.m3250$$Nest$mrestorePreview(multiInstanceItemViewHolder4);
+                                MultiInstanceItemViewHolder.m3267$$Nest$mrestorePreview(multiInstanceItemViewHolder4);
                                 FreeformContainerFolderView.this.finishDraggingAppPreview();
                             }
 
@@ -755,7 +749,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         }
 
         /* renamed from: -$$Nest$mrestorePreview, reason: not valid java name */
-        public static void m3250$$Nest$mrestorePreview(MultiInstanceItemViewHolder multiInstanceItemViewHolder) {
+        public static void m3267$$Nest$mrestorePreview(MultiInstanceItemViewHolder multiInstanceItemViewHolder) {
             int size = FreeformContainerFolderView.this.mMultiInstancePreviewAdapter.mSnapshotBitmapList.size();
             for (int i = 0; i < size; i++) {
                 MultiInstancePreviewAdapter.PreviewItemViewHolder previewItemViewHolder = (MultiInstancePreviewAdapter.PreviewItemViewHolder) FreeformContainerFolderView.this.mPreviewRecycler.findViewHolderForAdapterPosition(i);
@@ -828,9 +822,9 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                 float f = itemCount < freeformContainerFolderView3.mVisibleIconMaxCount ? rawX - freeformContainerFolderView3.mLastPositionX : 0.0f;
                 float f2 = rawY - freeformContainerFolderView3.mLastPositionY;
                 FreeformContainerFolderView.getDraggingViewBounds(freeformContainerFolderView3.mTmpBounds, freeformContainerFolderView3.mDraggingIconView);
-                float hypot = (float) Math.hypot(f, f2);
+                float fHypot = (float) Math.hypot(f, f2);
                 FreeformContainerFolderView freeformContainerFolderView4 = FreeformContainerFolderView.this;
-                if (hypot >= freeformContainerFolderView4.mThresholdToMove && !freeformContainerFolderView4.mViewController.isDismissButtonShowing() && !FreeformContainerFolderView.this.isSpringAnimating()) {
+                if (fHypot >= freeformContainerFolderView4.mThresholdToMove && !freeformContainerFolderView4.mViewController.isDismissButtonShowing() && !FreeformContainerFolderView.this.isSpringAnimating()) {
                     FreeformContainerFolderView freeformContainerFolderView5 = FreeformContainerFolderView.this;
                     if (!freeformContainerFolderView5.mIsAppIconMoving) {
                         freeformContainerFolderView5.mIsAppIconMoving = true;
@@ -845,7 +839,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                     freeformContainerFolderView6.mTargetIconView = (ImageView) viewGroup.getChildAt(viewGroup.getChildCount() - 1);
                     FreeformContainerFolderView freeformContainerFolderView7 = FreeformContainerFolderView.this;
                     freeformContainerFolderView7.mTargetItem = this.mItem;
-                    FreeformContainerFolderView.m3248$$Nest$mstartDraggingAppIcon(freeformContainerFolderView7);
+                    FreeformContainerFolderView.m3265$$Nest$mstartDraggingAppIcon(freeformContainerFolderView7);
                     for (int i = 0; i < this.mMultiInstancePointerGroupView.getChildCount(); i++) {
                         View childAt = this.mMultiInstancePointerGroupView.getChildAt(i);
                         if (childAt instanceof ImageView) {
@@ -860,13 +854,11 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MultiInstancePreviewAdapter extends RecyclerView.Adapter {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final FreeformContainerItem mItem;
         public final List mSnapshotBitmapList;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class PreviewItemViewHolder extends RecyclerView.ViewHolder {
             public FreeformContainerItem mItem;
             public final ImageView mPreview;
@@ -893,7 +885,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
             ((RecyclerView.ViewHolder) previewItemViewHolder).itemView.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.wm.shell.freeform.FreeformContainerFolderView$MultiInstancePreviewAdapter$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnTouchListener
                 public final boolean onTouch(View view, MotionEvent motionEvent) {
-                    FreeformContainerFolderView.MultiInstancePreviewAdapter multiInstancePreviewAdapter = FreeformContainerFolderView.MultiInstancePreviewAdapter.this;
+                    FreeformContainerFolderView.MultiInstancePreviewAdapter multiInstancePreviewAdapter = this.f$0;
                     FreeformContainerFolderView.MultiInstancePreviewAdapter.PreviewItemViewHolder previewItemViewHolder2 = previewItemViewHolder;
                     int i2 = FreeformContainerFolderView.MultiInstancePreviewAdapter.$r8$clinit;
                     float rawX = motionEvent.getRawX();
@@ -921,9 +913,9 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                         float f = size < freeformContainerFolderView2.mVisibleIconMaxCount ? rawX - freeformContainerFolderView2.mLastPositionX : 0.0f;
                         float f2 = rawY - freeformContainerFolderView2.mLastPositionY;
                         FreeformContainerFolderView.getDraggingViewBounds(freeformContainerFolderView2.mTmpBounds, freeformContainerFolderView2.mDraggingPreview);
-                        float hypot = (float) Math.hypot(f, f2);
+                        float fHypot = (float) Math.hypot(f, f2);
                         FreeformContainerFolderView freeformContainerFolderView3 = FreeformContainerFolderView.this;
-                        if (hypot >= freeformContainerFolderView3.mThresholdToMove && !freeformContainerFolderView3.mViewController.isDismissButtonShowing() && !FreeformContainerFolderView.this.isSpringPreviewAnimating()) {
+                        if (fHypot >= freeformContainerFolderView3.mThresholdToMove && !freeformContainerFolderView3.mViewController.isDismissButtonShowing() && !FreeformContainerFolderView.this.isSpringPreviewAnimating()) {
                             FreeformContainerFolderView freeformContainerFolderView4 = FreeformContainerFolderView.this;
                             FreeformContainerViewController freeformContainerViewController = freeformContainerFolderView4.mViewController;
                             Rect rect = freeformContainerFolderView4.mTmpBounds;
@@ -990,7 +982,6 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MultiInstancePreviewPopupWindow extends PopupWindow {
         public final FreeformContainerItem mItem;
         public final boolean mOpenedByHoverAction;
@@ -1012,7 +1003,6 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingsObserver extends ContentObserver {
         public final Uri mEasyModeSwitchUri;
 
@@ -1033,7 +1023,6 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SingleInstanceItemViewHolder extends FolderViewItemViewHolder {
         public final FreeformContainerFolderView$MultiInstanceItemViewHolder$$ExternalSyntheticLambda1 mButtonHoverListener;
         public final AnonymousClass2 mDismissPreview;
@@ -1047,7 +1036,13 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
             super(FreeformContainerFolderView.this, view);
             this.mIsVisiblePreview = false;
             this.mShowPreview = new Runnable() { // from class: com.android.wm.shell.freeform.FreeformContainerFolderView.SingleInstanceItemViewHolder.1
+                /* JADX WARN: Removed duplicated region for block: B:23:0x0076 A[PHI: r3 r4
+                  0x0076: PHI (r3v6 float) = (r3v2 float), (r3v10 float), (r3v2 float) binds: [B:18:0x0063, B:16:0x005a, B:11:0x0048] A[DONT_GENERATE, DONT_INLINE]
+                  0x0076: PHI (r4v6 float) = (r4v3 float), (r4v11 float), (r4v3 float) binds: [B:18:0x0063, B:16:0x005a, B:11:0x0048] A[DONT_GENERATE, DONT_INLINE]] */
                 @Override // java.lang.Runnable
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
                 public final void run() {
                     Bitmap taskSnapshot;
                     float f;
@@ -1062,9 +1057,9 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                     singleInstanceItemViewHolder2.mIsVisiblePreview = true;
                     FreeformThumbnailView freeformThumbnailView = FreeformContainerFolderView.this.mFreeformThumbnailView;
                     freeformThumbnailView.mBitmap = taskSnapshot;
-                    Bitmap createBitmap = Bitmap.createBitmap(taskSnapshot, 0, 0, taskSnapshot.getWidth(), freeformThumbnailView.mBitmap.getHeight());
-                    float width = createBitmap.getWidth();
-                    float height2 = createBitmap.getHeight();
+                    Bitmap bitmapCreateBitmap = Bitmap.createBitmap(taskSnapshot, 0, 0, taskSnapshot.getWidth(), freeformThumbnailView.mBitmap.getHeight());
+                    float width = bitmapCreateBitmap.getWidth();
+                    float height2 = bitmapCreateBitmap.getHeight();
                     if (width > height2) {
                         if (width > freeformThumbnailView.mMaxSize) {
                             Log.d("FreeformThumbnailView", "Width recompute");
@@ -1075,30 +1070,34 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                                 float f4 = f2;
                                 height2 = f;
                                 width = f4;
+                                int i = (int) width;
+                                freeformThumbnailView.mWidth = i;
+                                int i2 = (int) height2;
+                                freeformThumbnailView.mHeight = i2;
+                                freeformThumbnailView.mBitmap = Bitmap.createScaledBitmap(bitmapCreateBitmap, i, i2, true);
                             }
+                        } else {
+                            int i3 = (int) width;
+                            freeformThumbnailView.mWidth = i3;
+                            int i22 = (int) height2;
+                            freeformThumbnailView.mHeight = i22;
+                            freeformThumbnailView.mBitmap = Bitmap.createScaledBitmap(bitmapCreateBitmap, i3, i22, true);
                         }
-                        int i = (int) width;
-                        freeformThumbnailView.mWidth = i;
-                        int i2 = (int) height2;
-                        freeformThumbnailView.mHeight = i2;
-                        freeformThumbnailView.mBitmap = Bitmap.createScaledBitmap(createBitmap, i, i2, true);
-                    } else {
-                        if (height2 > freeformThumbnailView.mMaxSize) {
-                            Log.d("FreeformThumbnailView", "Height recompute");
-                            float f5 = height2 / width;
-                            if (f5 != 0.0f) {
-                                f = freeformThumbnailView.mMaxSize;
-                                f2 = f / f5;
-                                float f42 = f2;
-                                height2 = f;
-                                width = f42;
-                            }
+                    } else if (height2 > freeformThumbnailView.mMaxSize) {
+                        Log.d("FreeformThumbnailView", "Height recompute");
+                        float f5 = height2 / width;
+                        if (f5 != 0.0f) {
+                            f = freeformThumbnailView.mMaxSize;
+                            f2 = f / f5;
+                            float f42 = f2;
+                            height2 = f;
+                            width = f42;
+                            int i32 = (int) width;
+                            freeformThumbnailView.mWidth = i32;
+                            int i222 = (int) height2;
+                            freeformThumbnailView.mHeight = i222;
+                            freeformThumbnailView.mBitmap = Bitmap.createScaledBitmap(bitmapCreateBitmap, i32, i222, true);
                         }
-                        int i3 = (int) width;
-                        freeformThumbnailView.mWidth = i3;
-                        int i22 = (int) height2;
-                        freeformThumbnailView.mHeight = i22;
-                        freeformThumbnailView.mBitmap = Bitmap.createScaledBitmap(createBitmap, i3, i22, true);
                     }
                     freeformThumbnailView.mImageView.setImageBitmap(freeformThumbnailView.mBitmap);
                     SingleInstanceItemViewHolder singleInstanceItemViewHolder3 = SingleInstanceItemViewHolder.this;
@@ -1201,9 +1200,9 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                 float f = itemCount < freeformContainerFolderView2.mVisibleIconMaxCount ? rawX - freeformContainerFolderView2.mLastPositionX : 0.0f;
                 float f2 = rawY - freeformContainerFolderView2.mLastPositionY;
                 FreeformContainerFolderView.getDraggingViewBounds(freeformContainerFolderView2.mTmpBounds, freeformContainerFolderView2.mDraggingIconView);
-                float hypot = (float) Math.hypot(f, f2);
+                float fHypot = (float) Math.hypot(f, f2);
                 FreeformContainerFolderView freeformContainerFolderView3 = FreeformContainerFolderView.this;
-                if (hypot >= freeformContainerFolderView3.mThresholdToMove && !freeformContainerFolderView3.mViewController.isDismissButtonShowing() && !FreeformContainerFolderView.this.isSpringAnimating()) {
+                if (fHypot >= freeformContainerFolderView3.mThresholdToMove && !freeformContainerFolderView3.mViewController.isDismissButtonShowing() && !FreeformContainerFolderView.this.isSpringAnimating()) {
                     FreeformContainerFolderView freeformContainerFolderView4 = FreeformContainerFolderView.this;
                     FreeformContainerViewController freeformContainerViewController = freeformContainerFolderView4.mViewController;
                     Rect rect = freeformContainerFolderView4.mTmpBounds;
@@ -1213,7 +1212,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                     FreeformContainerFolderView freeformContainerFolderView5 = FreeformContainerFolderView.this;
                     freeformContainerFolderView5.mTargetIconView = this.mIconView;
                     freeformContainerFolderView5.mTargetItem = this.mItem;
-                    FreeformContainerFolderView.m3248$$Nest$mstartDraggingAppIcon(freeformContainerFolderView5);
+                    FreeformContainerFolderView.m3265$$Nest$mstartDraggingAppIcon(freeformContainerFolderView5);
                     this.mIconView.setImageDrawable(FreeformContainerFolderView.this.mEmptySlotIcon);
                     Log.i("FreeformContainer", "[FolderView] onTouch(" + MotionEvent.actionToString(action) + "): Ready to move");
                     return false;
@@ -1224,7 +1223,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
     }
 
     /* renamed from: -$$Nest$mstartDraggingAppIcon, reason: not valid java name */
-    public static void m3248$$Nest$mstartDraggingAppIcon(FreeformContainerFolderView freeformContainerFolderView) {
+    public static void m3265$$Nest$mstartDraggingAppIcon(FreeformContainerFolderView freeformContainerFolderView) {
         ImageView imageView = freeformContainerFolderView.mTargetIconView;
         if (imageView == null) {
             Log.e("FreeformContainer", "[FolderView] mTargetIconView is null");
@@ -1306,11 +1305,11 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
     }
 
     public static Drawable getCloneDrawableFromImageView(ImageView imageView) {
-        Drawable newDrawable = (imageView.getDrawable() == null || imageView.getDrawable().getConstantState() == null) ? null : imageView.getDrawable().getConstantState().newDrawable();
-        if (newDrawable == null) {
+        Drawable drawableNewDrawable = (imageView.getDrawable() == null || imageView.getDrawable().getConstantState() == null) ? null : imageView.getDrawable().getConstantState().newDrawable();
+        if (drawableNewDrawable == null) {
             Log.e("FreeformContainer", "[FolderView] " + imageView + " failed to newDrawable()");
         }
-        return newDrawable;
+        return drawableNewDrawable;
     }
 
     public static void getDraggingViewBounds(Rect rect, View view) {
@@ -1320,7 +1319,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
     }
 
     public final void calculateFolderSize() {
-        int min = Math.min((this.mViewController.mNonDecorDisplayFrame.width() - this.mPaddingLeft) - this.mPaddingRight, this.mFolderMaxWidth);
+        int iMin = Math.min((this.mViewController.mNonDecorDisplayFrame.width() - this.mPaddingLeft) - this.mPaddingRight, this.mFolderMaxWidth);
         FolderItemDecoration folderItemDecoration = this.mItemDecoration;
         Rect rect = folderItemDecoration.mItemMargin;
         FreeformContainerFolderTrayView freeformContainerFolderTrayView = this.mTrayView;
@@ -1332,8 +1331,8 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         this.mMaxWidth = i5;
         this.mVisibleIconCount = i4;
         int i6 = rect.right;
-        if (min < i5 + i6 + i) {
-            this.mMaxWidth = min - (i6 + i);
+        if (iMin < i5 + i6 + i) {
+            this.mMaxWidth = iMin - (i6 + i);
         }
         if (this.mAdapter.getItemCount() > 20) {
             return;
@@ -1344,12 +1343,12 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         FolderItemDecoration folderItemDecoration2 = this.mItemDecoration;
         int i9 = ((this.mItemSize + folderItemDecoration2.mItemSpace) * itemCount) + folderItemDecoration2.mItemMargin.left;
         this.mWidth = i9;
-        int min2 = Math.min(i9, this.mMaxWidth);
-        this.mWidth = min2;
+        int iMin2 = Math.min(i9, this.mMaxWidth);
+        this.mWidth = iMin2;
         Rect rect2 = this.mItemDecoration.mItemMargin;
         int i10 = rect2.top + this.mItemSize + rect2.bottom;
         this.mHeight = i10;
-        if (i7 == min2 && i8 == i10) {
+        if (i7 == iMin2 && i8 == i10) {
             return;
         }
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
@@ -1376,7 +1375,7 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         }
     }
 
-    public final void collapse(boolean z) {
+    public final void collapse(boolean z) throws Resources.NotFoundException {
         FreeformThumbnailView freeformThumbnailView;
         if (this.mIsExpanded) {
             this.mIsExpanded = false;
@@ -1387,9 +1386,9 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
             this.mH.removeCallbacks(this.mOpenFolderRunnable);
             int itemCount = this.mAdapter.getItemCount();
             for (int i = 0; i < itemCount; i++) {
-                RecyclerView.ViewHolder findViewHolderForAdapterPosition = findViewHolderForAdapterPosition(i);
-                if (findViewHolderForAdapterPosition != null) {
-                    findViewHolderForAdapterPosition.itemView.clearAnimation();
+                RecyclerView.ViewHolder viewHolderFindViewHolderForAdapterPosition = findViewHolderForAdapterPosition(i);
+                if (viewHolderFindViewHolderForAdapterPosition != null) {
+                    viewHolderFindViewHolderForAdapterPosition.itemView.clearAnimation();
                 }
             }
             this.mAdapter.notifyDataSetChanged();
@@ -1398,8 +1397,8 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
             if (z) {
                 Log.i("FreeformContainer", "[FolderView] animateCollapse");
                 this.mIsCollapseAnimating = true;
-                Animator loadAnimator = AnimatorInflater.loadAnimator(this.mContext, R.anim.freeform_container_folder_collapse);
-                loadAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.freeform.FreeformContainerFolderView.4
+                Animator animatorLoadAnimator = AnimatorInflater.loadAnimator(this.mContext, R.anim.freeform_container_folder_collapse);
+                animatorLoadAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.freeform.FreeformContainerFolderView.4
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
                         FreeformContainerFolderView.this.setVisibility(8);
@@ -1408,8 +1407,8 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
                         FreeformContainerFolderView.this.mIsCollapseAnimating = false;
                     }
                 });
-                loadAnimator.setTarget(this);
-                loadAnimator.start();
+                animatorLoadAnimator.setTarget(this);
+                animatorLoadAnimator.start();
                 this.mTrayView.setVisibility(8);
             } else {
                 setVisibility(8);
@@ -1511,9 +1510,9 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         try {
             TaskSnapshot taskSnapshot = ActivityTaskManager.getService().getTaskSnapshot(i, true);
             if (taskSnapshot != null && (snapshot = taskSnapshot.getSnapshot()) != null) {
-                Bitmap wrapHardwareBuffer = Bitmap.wrapHardwareBuffer(HardwareBuffer.createFromGraphicBuffer(snapshot), null);
-                this.mCachedBitmaps.put(Integer.valueOf(i), wrapHardwareBuffer);
-                return wrapHardwareBuffer;
+                Bitmap bitmapWrapHardwareBuffer = Bitmap.wrapHardwareBuffer(HardwareBuffer.createFromGraphicBuffer(snapshot), null);
+                this.mCachedBitmaps.put(Integer.valueOf(i), bitmapWrapHardwareBuffer);
+                return bitmapWrapHardwareBuffer;
             }
         } catch (RemoteException e) {
             Log.e("FreeformContainer", "Failed to get task snapshot, taskId=" + e);
@@ -1617,20 +1616,119 @@ class FreeformContainerFolderView extends RecyclerView implements FreeformContai
         finishDraggingAppIcon();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x001b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:9:0x001b, code lost:
     
         if (r2 != 3) goto L38;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onTouchEvent(android.view.MotionEvent r15) {
-        /*
-            Method dump skipped, instructions count: 322
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.freeform.FreeformContainerFolderView.onTouchEvent(android.view.MotionEvent):boolean");
+    public final boolean onTouchEvent(MotionEvent motionEvent) {
+        if (this.mViewController.isDismissButtonShowing()) {
+            float rawX = motionEvent.getRawX();
+            float rawY = motionEvent.getRawY();
+            int action = motionEvent.getAction();
+            if (action != 1) {
+                if (action == 2) {
+                    ImageView imageView = this.mDraggingIconView;
+                    imageView.setX((rawX - this.mLastPositionX) + imageView.getX());
+                    ImageView imageView2 = this.mDraggingIconView;
+                    imageView2.setY((rawY - this.mLastPositionY) + imageView2.getY());
+                    this.mLastPositionX = rawX;
+                    this.mLastPositionY = rawY;
+                    getDraggingViewBounds(this.mTmpBounds, this.mDraggingIconView);
+                    FreeformContainerViewController freeformContainerViewController = this.mViewController;
+                    Rect rect = this.mTmpBounds;
+                    FreeformContainerDismissButtonView freeformContainerDismissButtonView = freeformContainerViewController.mDismissButtonView;
+                    if (freeformContainerDismissButtonView != null) {
+                        freeformContainerDismissButtonView.mDismissViewManager.mView.updateView(rect);
+                    }
+                    this.mHasIconMoved = true;
+                    return true;
+                }
+            }
+            if (CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER_MULTIINSTANCE_PREVIEW) {
+                this.mIsAppIconMoving = false;
+            }
+            getDraggingViewBounds(this.mTmpBounds, this.mDraggingIconView);
+            this.mViewController.hideDismissButtonAndDismissIcon(this.mTargetItem, this.mDraggingIconView, this.mTmpBounds);
+            if (!this.mHasIconMoved) {
+                restoreAppIcon();
+            }
+            if (!this.mViewController.isEnterDismissButton()) {
+                float translationX = this.mDraggingIconView.getTranslationX();
+                float translationY = this.mDraggingIconView.getTranslationY();
+                int[] iArr = this.mDraggingIconReturnLocation;
+                float f = iArr[0];
+                float f2 = iArr[1];
+                this.mAnimatingSpringX = Math.abs(translationX - f) > 2.0f;
+                this.mAnimatingSpringY = Math.abs(translationY - f2) > 2.0f;
+                if (!isSpringAnimating()) {
+                    StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("[FolderView] animateToReturnDraggingAppIconView: spring failed, from=[", translationX, ",", translationY, "], to=[");
+                    sbM.append(f);
+                    sbM.append(",");
+                    sbM.append(f2);
+                    sbM.append("], call finishDraggingAppIcon()");
+                    Log.i("FreeformContainer", sbM.toString());
+                    finishDraggingAppIcon();
+                    return true;
+                }
+                Spring springCreateSpring = this.mSpringSystem.createSpring();
+                this.mDraggingIconSpringX = springCreateSpring;
+                springCreateSpring.mSpringConfig = new SpringConfig(180.0d, 18.0d);
+                Spring spring = this.mDraggingIconSpringX;
+                spring.mRestSpeedThreshold = 0.30000001192092896d;
+                spring.mDisplacementFromRestThreshold = 0.30000001192092896d;
+                spring.addListener(new SimpleSpringListener() { // from class: com.android.wm.shell.freeform.FreeformContainerFolderView.6
+                    @Override // com.facebook.rebound.SimpleSpringListener, com.facebook.rebound.SpringListener
+                    public final void onSpringAtRest(Spring spring2) {
+                        FreeformContainerFolderView freeformContainerFolderView = FreeformContainerFolderView.this;
+                        freeformContainerFolderView.mAnimatingSpringX = false;
+                        if (freeformContainerFolderView.isSpringAnimating()) {
+                            return;
+                        }
+                        Log.i("FreeformContainer", "[FolderView] onSpringAtRest of springX, releaseDraggingState");
+                        freeformContainerFolderView.restoreAppIcon();
+                        freeformContainerFolderView.finishDraggingAppIcon();
+                    }
+
+                    @Override // com.facebook.rebound.SimpleSpringListener, com.facebook.rebound.SpringListener
+                    public final void onSpringUpdate(Spring spring2) {
+                        FreeformContainerFolderView.this.mDraggingIconView.setX((float) spring2.mCurrentState.position);
+                    }
+                });
+                this.mDraggingIconSpringX.setCurrentValue(translationX);
+                this.mDraggingIconSpringX.setEndValue(f);
+                Spring springCreateSpring2 = this.mSpringSystem.createSpring();
+                this.mDraggingIconSpringY = springCreateSpring2;
+                springCreateSpring2.mSpringConfig = new SpringConfig(180.0d, 18.0d);
+                Spring spring2 = this.mDraggingIconSpringY;
+                spring2.mRestSpeedThreshold = 0.30000001192092896d;
+                spring2.mDisplacementFromRestThreshold = 0.30000001192092896d;
+                spring2.addListener(new SimpleSpringListener() { // from class: com.android.wm.shell.freeform.FreeformContainerFolderView.7
+                    @Override // com.facebook.rebound.SimpleSpringListener, com.facebook.rebound.SpringListener
+                    public final void onSpringAtRest(Spring spring3) {
+                        FreeformContainerFolderView freeformContainerFolderView = FreeformContainerFolderView.this;
+                        freeformContainerFolderView.mAnimatingSpringY = false;
+                        if (freeformContainerFolderView.isSpringAnimating()) {
+                            return;
+                        }
+                        Log.i("FreeformContainer", "[FolderView] onSpringAtRest of springY, releaseDraggingState");
+                        freeformContainerFolderView.restoreAppIcon();
+                        freeformContainerFolderView.finishDraggingAppIcon();
+                    }
+
+                    @Override // com.facebook.rebound.SimpleSpringListener, com.facebook.rebound.SpringListener
+                    public final void onSpringUpdate(Spring spring3) {
+                        FreeformContainerFolderView.this.mDraggingIconView.setY((float) spring3.mCurrentState.position);
+                    }
+                });
+                this.mDraggingIconSpringY.setCurrentValue(translationY);
+                this.mDraggingIconSpringY.setEndValue(f2);
+            }
+            return true;
+        }
+        return super.onTouchEvent(motionEvent);
     }
 
     @Override // com.android.wm.shell.freeform.FreeformContainerCallback

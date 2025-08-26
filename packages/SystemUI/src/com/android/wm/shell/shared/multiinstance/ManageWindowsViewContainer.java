@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.window.TaskSnapshot;
 import androidx.slice.widget.ActionRow$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
-import com.android.wm.shell.shared.multiinstance.ManageWindowsViewContainer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,7 +26,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ManageWindowsViewContainer {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,7 +33,6 @@ public abstract class ManageWindowsViewContainer {
     public final int menuBackgroundColor;
     public ManageWindowsView menuView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -45,7 +42,6 @@ public abstract class ManageWindowsViewContainer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ManageWindowsView {
         public final Context context;
         public int menuHeight;
@@ -56,7 +52,6 @@ public abstract class ManageWindowsViewContainer {
         public final List animators = new ArrayList();
         public final List iconViews = new ArrayList();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -100,18 +95,18 @@ public abstract class ManageWindowsViewContainer {
 
         public final void animateView(View view, float f, float f2, float f3, float f4) {
             List list = this.animators;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, f, f2);
-            ofFloat.setDuration(200L);
-            list.add(ofFloat);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, f, f2);
+            objectAnimatorOfFloat.setDuration(200L);
+            list.add(objectAnimatorOfFloat);
             List list2 = this.animators;
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, f, f2);
-            ofFloat2.setDuration(200L);
-            list2.add(ofFloat2);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, f, f2);
+            objectAnimatorOfFloat2.setDuration(200L);
+            list2.add(objectAnimatorOfFloat2);
             List list3 = this.animators;
-            ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, f3, f4);
-            ofFloat3.setDuration(100L);
-            ofFloat3.setStartDelay(50L);
-            list3.add(ofFloat3);
+            ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, f3, f4);
+            objectAnimatorOfFloat3.setDuration(100L);
+            objectAnimatorOfFloat3.setStartDelay(50L);
+            list3.add(objectAnimatorOfFloat3);
         }
 
         public final float getDimensionPixelSize(float f) {
@@ -151,7 +146,7 @@ public abstract class ManageWindowsViewContainer {
     public final void createMenu(List list, Function1 function1, Function0 function0) {
         Iterator it;
         int i;
-        Bitmap bitmap;
+        Bitmap bitmapCreateBitmap;
         ArrayList arrayList = new ArrayList();
         for (Object obj : list) {
             if (((Pair) obj).getSecond() != null) {
@@ -166,11 +161,11 @@ public abstract class ManageWindowsViewContainer {
             Object obj2 = arrayList.get(i3);
             i3++;
             Pair pair = (Pair) obj2;
-            int intValue = ((Number) pair.component1()).intValue();
+            int iIntValue = ((Number) pair.component1()).intValue();
             TaskSnapshot taskSnapshot = (TaskSnapshot) pair.component2();
-            Integer valueOf = Integer.valueOf(intValue);
+            Integer numValueOf = Integer.valueOf(iIntValue);
             taskSnapshot.getClass();
-            arrayList2.add(new Pair(valueOf, Bitmap.wrapHardwareBuffer(taskSnapshot.getHardwareBuffer(), taskSnapshot.getColorSpace())));
+            arrayList2.add(new Pair(numValueOf, Bitmap.wrapHardwareBuffer(taskSnapshot.getHardwareBuffer(), taskSnapshot.getColorSpace())));
         }
         final ManageWindowsView manageWindowsView = new ManageWindowsView(this.context, this.menuBackgroundColor);
         manageWindowsView.onOutsideClickListener = function0;
@@ -187,35 +182,35 @@ public abstract class ManageWindowsViewContainer {
         for (Iterator it2 = arrayList2.iterator(); it2.hasNext(); it2 = it) {
             int i5 = i4 + 1;
             Pair pair2 = (Pair) it2.next();
-            final int intValue2 = ((Number) pair2.getFirst()).intValue();
-            Bitmap bitmap2 = (Bitmap) pair2.getSecond();
+            final int iIntValue2 = ((Number) pair2.getFirst()).intValue();
+            Bitmap bitmap = (Bitmap) pair2.getSecond();
             if (i4 % 3 == 0) {
                 linearLayout = new LinearLayout(manageWindowsView.context);
                 linearLayout.setOrientation(i2);
                 manageWindowsView.rootView.addView(linearLayout);
                 manageWindowsView.menuHeight += (int) (dimensionPixelSize + dimensionPixelSize4);
             }
-            if (bitmap2 != null) {
-                int width = bitmap2.getWidth();
-                int height = bitmap2.getHeight();
+            if (bitmap != null) {
+                int width = bitmap.getWidth();
+                int height = bitmap.getHeight();
                 float f = width;
                 float f2 = height;
                 it = it2;
                 float f3 = f2 * 1.6f;
                 if (f > f3) {
-                    bitmap = Bitmap.createBitmap(bitmap2, (int) ((f - f3) / 2), 0, (int) f3, height);
+                    bitmapCreateBitmap = Bitmap.createBitmap(bitmap, (int) ((f - f3) / 2), 0, (int) f3, height);
                     i = 0;
                 } else {
                     i = 0;
                     float f4 = f / 1.6f;
-                    bitmap = Bitmap.createBitmap(bitmap2, 0, (int) ((f2 - f4) / 2), width, (int) f4);
+                    bitmapCreateBitmap = Bitmap.createBitmap(bitmap, 0, (int) ((f2 - f4) / 2), width, (int) f4);
                 }
             } else {
                 it = it2;
                 i = i2;
-                bitmap = null;
+                bitmapCreateBitmap = null;
             }
-            final Bitmap createScaledBitmap = bitmap != null ? Bitmap.createScaledBitmap(bitmap, (int) dimensionPixelSize2, (int) dimensionPixelSize, true) : null;
+            final Bitmap bitmapCreateScaledBitmap = bitmapCreateBitmap != null ? Bitmap.createScaledBitmap(bitmapCreateBitmap, (int) dimensionPixelSize2, (int) dimensionPixelSize, true) : null;
             final SurfaceView surfaceView = new SurfaceView(manageWindowsView.context);
             surfaceView.setCornerRadius(dimensionPixelSize3);
             surfaceView.setZOrderOnTop(true);
@@ -223,9 +218,9 @@ public abstract class ManageWindowsViewContainer {
             surfaceView.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.shared.multiinstance.ManageWindowsViewContainer$ManageWindowsView$generateIconViews$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    Function1 function12 = ManageWindowsViewContainer.ManageWindowsView.this.onIconClickListener;
+                    Function1 function12 = manageWindowsView.onIconClickListener;
                     if (function12 != null) {
-                        function12.mo779invoke(Integer.valueOf(intValue2));
+                        function12.mo781invoke(Integer.valueOf(iIntValue2));
                     }
                 }
             });
@@ -247,10 +242,10 @@ public abstract class ManageWindowsViewContainer {
                     @Override // java.lang.Runnable
                     public final void run() {
                         Surface surface = surfaceView.getHolder().getSurface();
-                        Bitmap bitmap3 = createScaledBitmap;
-                        HardwareBuffer hardwareBuffer = bitmap3 != null ? bitmap3.getHardwareBuffer() : null;
-                        Bitmap bitmap4 = createScaledBitmap;
-                        surface.attachAndQueueBufferWithColorSpace(hardwareBuffer, bitmap4 != null ? bitmap4.getColorSpace() : null);
+                        Bitmap bitmap2 = bitmapCreateScaledBitmap;
+                        HardwareBuffer hardwareBuffer = bitmap2 != null ? bitmap2.getHardwareBuffer() : null;
+                        Bitmap bitmap3 = bitmapCreateScaledBitmap;
+                        surface.attachAndQueueBufferWithColorSpace(hardwareBuffer, bitmap3 != null ? bitmap3.getColorSpace() : null);
                     }
                 });
             }

@@ -8,14 +8,12 @@ import android.provider.Settings;
 import android.util.Log;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SamsungStatusBarGrayIconHelper {
     public final Context context;
     public PhoneStatusBarViewControllerExt$setUpBatteryView$1$1$1 grayIconChangedCallback;
     public int homeIndicatorIconColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -25,7 +23,6 @@ public final class SamsungStatusBarGrayIconHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingsObserver extends ContentObserver {
         public final Context context;
         public final Uri customStatusUri;
@@ -37,7 +34,7 @@ public final class SamsungStatusBarGrayIconHelper {
         }
 
         @Override // android.database.ContentObserver
-        public final void onChange(boolean z, Uri uri) {
+        public final void onChange(boolean z, Uri uri) throws Settings.SettingNotFoundException {
             int i;
             SamsungStatusBarGrayIconHelper samsungStatusBarGrayIconHelper = SamsungStatusBarGrayIconHelper.this;
             samsungStatusBarGrayIconHelper.getClass();
@@ -56,7 +53,7 @@ public final class SamsungStatusBarGrayIconHelper {
         new Companion(null);
     }
 
-    public SamsungStatusBarGrayIconHelper(Context context) {
+    public SamsungStatusBarGrayIconHelper(Context context) throws Settings.SettingNotFoundException {
         int i;
         this.context = context;
         SettingsObserver settingsObserver = new SettingsObserver(context);

@@ -60,9 +60,9 @@ public interface IAssociationRequestCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAssociationRequestCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAssociationRequestCallback)) {
-                return (IAssociationRequestCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAssociationRequestCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAssociationRequestCallback)) {
+                return (IAssociationRequestCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -103,10 +103,10 @@ public interface IAssociationRequestCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onAssociationCreated(associationInfo);
             } else if (i == 3) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 parcel.enforceNoDataAvail();
-                onFailure(readInt, charSequence);
+                onFailure(i3, charSequence);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -131,43 +131,43 @@ public interface IAssociationRequestCallback extends IInterface {
 
             @Override // android.companion.IAssociationRequestCallback
             public void onAssociationPending(PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAssociationRequestCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAssociationRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.IAssociationRequestCallback
             public void onAssociationCreated(AssociationInfo associationInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAssociationRequestCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(associationInfo, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAssociationRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(associationInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.IAssociationRequestCallback
             public void onFailure(int i, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAssociationRequestCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
+                    parcelObtain.writeInterfaceToken(IAssociationRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(3, obtain, null, 1);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

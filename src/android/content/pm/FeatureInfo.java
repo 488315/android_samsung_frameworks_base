@@ -58,7 +58,7 @@ public class FeatureInfo implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         String str = this.name;
         if (str != null) {
             protoOutputStream.write(1138166333441L, str);
@@ -66,7 +66,7 @@ public class FeatureInfo implements Parcelable {
         protoOutputStream.write(1120986464258L, this.version);
         protoOutputStream.write(1138166333443L, getGlEsVersion());
         protoOutputStream.write(1120986464260L, this.flags);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     private FeatureInfo(Parcel parcel) {

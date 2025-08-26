@@ -13,7 +13,6 @@ import androidx.compose.runtime.changelist.Operations;
 import java.util.ArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ComposerChangeListWriter {
     public ChangeList changeList;
@@ -29,7 +28,6 @@ public final class ComposerChangeListWriter {
     public int moveFrom = -1;
     public int moveTo = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -97,7 +95,7 @@ public final class ComposerChangeListWriter {
             Operation.Downs downs = Operation.Downs.INSTANCE;
             Operations operations2 = changeList2.operations;
             operations2.pushOp(downs);
-            Operations.WriteScope.m338setObjectDKhxnng(operations2, 0, objArr);
+            Operations.WriteScope.m339setObjectDKhxnng(operations2, 0, objArr);
         }
         this.pendingDownNodes.clear();
     }
@@ -179,7 +177,7 @@ public final class ComposerChangeListWriter {
                     Operation.EnsureGroupStarted ensureGroupStarted = Operation.EnsureGroupStarted.INSTANCE;
                     Operations operations = changeList2.operations;
                     operations.pushOp(ensureGroupStarted);
-                    Operations.WriteScope.m338setObjectDKhxnng(operations, 0, anchor);
+                    Operations.WriteScope.m339setObjectDKhxnng(operations, 0, anchor);
                     this.startedGroup = true;
                 }
             }

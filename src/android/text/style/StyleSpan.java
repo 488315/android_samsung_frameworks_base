@@ -70,28 +70,28 @@ public class StyleSpan extends MetricAffectingSpan implements ParcelableSpan {
     }
 
     private static void apply(Paint paint, int i, int i2) {
-        Typeface create;
+        Typeface typefaceCreate;
         Typeface typeface = paint.getTypeface();
         int style = (typeface == null ? 0 : typeface.getStyle()) | i;
         if (paint.getTextSkewX() == -0.25f && i == 1 && typeface == Typeface.defaultFromStyle(2)) {
             typeface = Typeface.defaultFromStyle(1);
         }
         if (typeface == null) {
-            create = Typeface.defaultFromStyle(style);
+            typefaceCreate = Typeface.defaultFromStyle(style);
         } else {
-            create = Typeface.create(typeface, style);
+            typefaceCreate = Typeface.create(typeface, style);
         }
         if ((i & 1) != 0 && i2 != 0 && i2 != Integer.MAX_VALUE) {
-            create = Typeface.create(create, Math.min(Math.max(create.getWeight() + i2, 1), 1000), (style & 2) != 0);
+            typefaceCreate = Typeface.create(typefaceCreate, Math.min(Math.max(typefaceCreate.getWeight() + i2, 1), 1000), (style & 2) != 0);
         }
-        int i3 = (~create.getStyle()) & style;
+        int i3 = (~typefaceCreate.getStyle()) & style;
         if ((i3 & 1) != 0) {
             paint.setFakeBoldText(true);
         }
         if ((i3 & 2) != 0) {
             paint.setTextSkewX(-0.25f);
         }
-        paint.setTypeface(create);
+        paint.setTypeface(typefaceCreate);
     }
 
     public String toString() {

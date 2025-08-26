@@ -417,9 +417,9 @@ public interface IRadioNetwork extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRadioNetwork)) {
-                return (IRadioNetwork) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRadioNetwork)) {
+                return (IRadioNetwork) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -446,293 +446,293 @@ public interface IRadioNetwork extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getAllowedNetworkTypesBitmap(readInt);
+                    getAllowedNetworkTypesBitmap(i3);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getAvailableBandModes(readInt2);
+                    getAvailableBandModes(i4);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getAvailableNetworks(readInt3);
+                    getAvailableNetworks(i5);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getBarringInfo(readInt4);
+                    getBarringInfo(i6);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getCdmaRoamingPreference(readInt5);
+                    getCdmaRoamingPreference(i7);
                     return true;
                 case 6:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getCellInfoList(readInt6);
+                    getCellInfoList(i8);
                     return true;
                 case 7:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getDataRegistrationState(readInt7);
+                    getDataRegistrationState(i9);
                     return true;
                 case 8:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getImsRegistrationState(readInt8);
+                    getImsRegistrationState(i10);
                     return true;
                 case 9:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getNetworkSelectionMode(readInt9);
+                    getNetworkSelectionMode(i11);
                     return true;
                 case 10:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getOperator(readInt10);
+                    getOperator(i12);
                     return true;
                 case 11:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getSignalStrength(readInt11);
+                    getSignalStrength(i13);
                     return true;
                 case 12:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getSystemSelectionChannels(readInt12);
+                    getSystemSelectionChannels(i14);
                     return true;
                 case 13:
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getVoiceRadioTechnology(readInt13);
+                    getVoiceRadioTechnology(i15);
                     return true;
                 case 14:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getVoiceRegistrationState(readInt14);
+                    getVoiceRegistrationState(i16);
                     return true;
                 case 15:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    isNrDualConnectivityEnabled(readInt15);
+                    isNrDualConnectivityEnabled(i17);
                     return true;
                 case 16:
                     responseAcknowledgement();
                     return true;
                 case 17:
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setAllowedNetworkTypesBitmap(readInt16, readInt17);
+                    setAllowedNetworkTypesBitmap(i18, i19);
                     return true;
                 case 18:
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setBandMode(readInt18, readInt19);
+                    setBandMode(i20, i21);
                     return true;
                 case 19:
-                    int readInt20 = parcel.readInt();
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
+                    int i22 = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setBarringPassword(readInt20, readString, readString2, readString3);
+                    setBarringPassword(i22, string, string2, string3);
                     return true;
                 case 20:
-                    int readInt21 = parcel.readInt();
-                    int readInt22 = parcel.readInt();
+                    int i23 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setCdmaRoamingPreference(readInt21, readInt22);
+                    setCdmaRoamingPreference(i23, i24);
                     return true;
                 case 21:
-                    int readInt23 = parcel.readInt();
-                    int readInt24 = parcel.readInt();
+                    int i25 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setCellInfoListRate(readInt23, readInt24);
+                    setCellInfoListRate(i25, i26);
                     return true;
                 case 22:
-                    int readInt25 = parcel.readInt();
-                    int readInt26 = parcel.readInt();
+                    int i27 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setIndicationFilter(readInt25, readInt26);
+                    setIndicationFilter(i27, i28);
                     return true;
                 case 23:
-                    int readInt27 = parcel.readInt();
-                    int readInt28 = parcel.readInt();
-                    int readInt29 = parcel.readInt();
-                    int readInt30 = parcel.readInt();
-                    int[] createIntArray = parcel.createIntArray();
-                    int[] createIntArray2 = parcel.createIntArray();
-                    int readInt31 = parcel.readInt();
+                    int i29 = parcel.readInt();
+                    int i30 = parcel.readInt();
+                    int i31 = parcel.readInt();
+                    int i32 = parcel.readInt();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setLinkCapacityReportingCriteria(readInt27, readInt28, readInt29, readInt30, createIntArray, createIntArray2, readInt31);
+                    setLinkCapacityReportingCriteria(i29, i30, i31, i32, iArrCreateIntArray, iArrCreateIntArray2, i33);
                     return true;
                 case 24:
-                    int readInt32 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i34 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setLocationUpdates(readInt32, readBoolean);
+                    setLocationUpdates(i34, z);
                     return true;
                 case 25:
-                    int readInt33 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setNetworkSelectionModeAutomatic(readInt33);
+                    setNetworkSelectionModeAutomatic(i35);
                     return true;
                 case 26:
-                    int readInt34 = parcel.readInt();
-                    String readString4 = parcel.readString();
-                    int readInt35 = parcel.readInt();
+                    int i36 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setNetworkSelectionModeManual(readInt34, readString4, readInt35);
+                    setNetworkSelectionModeManual(i36, string4, i37);
                     return true;
                 case 27:
-                    int readInt36 = parcel.readInt();
-                    byte readByte = parcel.readByte();
+                    int i38 = parcel.readInt();
+                    byte b = parcel.readByte();
                     parcel.enforceNoDataAvail();
-                    setNrDualConnectivityState(readInt36, readByte);
+                    setNrDualConnectivityState(i38, b);
                     return true;
                 case 28:
-                    IRadioNetworkResponse asInterface = IRadioNetworkResponse.Stub.asInterface(parcel.readStrongBinder());
-                    IRadioNetworkIndication asInterface2 = IRadioNetworkIndication.Stub.asInterface(parcel.readStrongBinder());
+                    IRadioNetworkResponse iRadioNetworkResponseAsInterface = IRadioNetworkResponse.Stub.asInterface(parcel.readStrongBinder());
+                    IRadioNetworkIndication iRadioNetworkIndicationAsInterface = IRadioNetworkIndication.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setResponseFunctions(asInterface, asInterface2);
+                    setResponseFunctions(iRadioNetworkResponseAsInterface, iRadioNetworkIndicationAsInterface);
                     return true;
                 case 29:
-                    int readInt37 = parcel.readInt();
+                    int i39 = parcel.readInt();
                     SignalThresholdInfo[] signalThresholdInfoArr = (SignalThresholdInfo[]) parcel.createTypedArray(SignalThresholdInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setSignalStrengthReportingCriteria(readInt37, signalThresholdInfoArr);
+                    setSignalStrengthReportingCriteria(i39, signalThresholdInfoArr);
                     return true;
                 case 30:
-                    int readInt38 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i40 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSuppServiceNotifications(readInt38, readBoolean2);
+                    setSuppServiceNotifications(i40, z2);
                     return true;
                 case 31:
-                    int readInt39 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i41 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     RadioAccessSpecifier[] radioAccessSpecifierArr = (RadioAccessSpecifier[]) parcel.createTypedArray(RadioAccessSpecifier.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setSystemSelectionChannels(readInt39, readBoolean3, radioAccessSpecifierArr);
+                    setSystemSelectionChannels(i41, z3, radioAccessSpecifierArr);
                     return true;
                 case 32:
-                    int readInt40 = parcel.readInt();
+                    int i42 = parcel.readInt();
                     NetworkScanRequest networkScanRequest = (NetworkScanRequest) parcel.readTypedObject(NetworkScanRequest.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startNetworkScan(readInt40, networkScanRequest);
+                    startNetworkScan(i42, networkScanRequest);
                     return true;
                 case 33:
-                    int readInt41 = parcel.readInt();
+                    int i43 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopNetworkScan(readInt41);
+                    stopNetworkScan(i43);
                     return true;
                 case 34:
-                    int readInt42 = parcel.readInt();
-                    String readString5 = parcel.readString();
+                    int i44 = parcel.readInt();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    supplyNetworkDepersonalization(readInt42, readString5);
+                    supplyNetworkDepersonalization(i44, string5);
                     return true;
                 case 35:
-                    int readInt43 = parcel.readInt();
-                    int readInt44 = parcel.readInt();
+                    int i45 = parcel.readInt();
+                    int i46 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setUsageSetting(readInt43, readInt44);
+                    setUsageSetting(i45, i46);
                     return true;
                 case 36:
-                    int readInt45 = parcel.readInt();
+                    int i47 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getUsageSetting(readInt45);
+                    getUsageSetting(i47);
                     return true;
                 case 37:
-                    int readInt46 = parcel.readInt();
-                    int readInt47 = parcel.readInt();
+                    int i48 = parcel.readInt();
+                    int i49 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setEmergencyMode(readInt46, readInt47);
+                    setEmergencyMode(i48, i49);
                     return true;
                 case 38:
-                    int readInt48 = parcel.readInt();
+                    int i50 = parcel.readInt();
                     EmergencyNetworkScanTrigger emergencyNetworkScanTrigger = (EmergencyNetworkScanTrigger) parcel.readTypedObject(EmergencyNetworkScanTrigger.CREATOR);
                     parcel.enforceNoDataAvail();
-                    triggerEmergencyNetworkScan(readInt48, emergencyNetworkScanTrigger);
+                    triggerEmergencyNetworkScan(i50, emergencyNetworkScanTrigger);
                     return true;
                 case 39:
-                    int readInt49 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i51 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    cancelEmergencyNetworkScan(readInt49, readBoolean4);
+                    cancelEmergencyNetworkScan(i51, z4);
                     return true;
                 case 40:
-                    int readInt50 = parcel.readInt();
+                    int i52 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    exitEmergencyMode(readInt50);
+                    exitEmergencyMode(i52);
                     return true;
                 case 41:
-                    int readInt51 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i53 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setNullCipherAndIntegrityEnabled(readInt51, readBoolean5);
+                    setNullCipherAndIntegrityEnabled(i53, z5);
                     return true;
                 case 42:
-                    int readInt52 = parcel.readInt();
+                    int i54 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    isNullCipherAndIntegrityEnabled(readInt52);
+                    isNullCipherAndIntegrityEnabled(i54);
                     return true;
                 case 43:
-                    int readInt53 = parcel.readInt();
+                    int i55 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    isN1ModeEnabled(readInt53);
+                    isN1ModeEnabled(i55);
                     return true;
                 case 44:
-                    int readInt54 = parcel.readInt();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    int i56 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setN1ModeEnabled(readInt54, readBoolean6);
+                    setN1ModeEnabled(i56, z6);
                     return true;
                 case 45:
-                    int readInt55 = parcel.readInt();
+                    int i57 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    isCellularIdentifierTransparencyEnabled(readInt55);
+                    isCellularIdentifierTransparencyEnabled(i57);
                     return true;
                 case 46:
-                    int readInt56 = parcel.readInt();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    int i58 = parcel.readInt();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCellularIdentifierTransparencyEnabled(readInt56, readBoolean7);
+                    setCellularIdentifierTransparencyEnabled(i58, z7);
                     return true;
                 case 47:
-                    int readInt57 = parcel.readInt();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    int i59 = parcel.readInt();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSecurityAlgorithmsUpdatedEnabled(readInt57, readBoolean8);
+                    setSecurityAlgorithmsUpdatedEnabled(i59, z8);
                     return true;
                 case 48:
-                    int readInt58 = parcel.readInt();
+                    int i60 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    isSecurityAlgorithmsUpdatedEnabled(readInt58);
+                    isSecurityAlgorithmsUpdatedEnabled(i60);
                     return true;
                 case 49:
-                    int readInt59 = parcel.readInt();
-                    String[] createStringArray = parcel.createStringArray();
-                    String[] createStringArray2 = parcel.createStringArray();
+                    int i61 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    setSatellitePlmn(readInt59, createStringArray, createStringArray2);
+                    setSatellitePlmn(i61, strArrCreateStringArray, strArrCreateStringArray2);
                     return true;
                 case 50:
-                    int readInt60 = parcel.readInt();
-                    boolean readBoolean9 = parcel.readBoolean();
+                    int i62 = parcel.readInt();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSatelliteEnabledForCarrier(readInt60, readBoolean9);
+                    setSatelliteEnabledForCarrier(i62, z9);
                     return true;
                 case 51:
-                    int readInt61 = parcel.readInt();
+                    int i63 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    isSatelliteEnabledForCarrier(readInt61);
+                    isSatelliteEnabledForCarrier(i63);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -759,817 +759,817 @@ public interface IRadioNetwork extends IInterface {
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getAllowedNetworkTypesBitmap(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(1, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(1, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getAllowedNetworkTypesBitmap is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getAvailableBandModes(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(2, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(2, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getAvailableBandModes is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getAvailableNetworks(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(3, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(3, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getAvailableNetworks is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getBarringInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(4, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(4, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getBarringInfo is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getCdmaRoamingPreference(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(5, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(5, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCdmaRoamingPreference is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getCellInfoList(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(6, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(6, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCellInfoList is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getDataRegistrationState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(7, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(7, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getDataRegistrationState is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getImsRegistrationState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(8, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(8, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getImsRegistrationState is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getNetworkSelectionMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(9, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(9, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getNetworkSelectionMode is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getOperator(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(10, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(10, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getOperator is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getSignalStrength(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(11, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(11, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getSignalStrength is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getSystemSelectionChannels(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(12, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(12, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getSystemSelectionChannels is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getVoiceRadioTechnology(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(13, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(13, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getVoiceRadioTechnology is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getVoiceRegistrationState(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(14, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(14, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getVoiceRegistrationState is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void isNrDualConnectivityEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(15, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(15, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method isNrDualConnectivityEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void responseAcknowledgement() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (this.mRemote.transact(16, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (this.mRemote.transact(16, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method responseAcknowledgement is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setAllowedNetworkTypesBitmap(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(17, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(17, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setAllowedNetworkTypesBitmap is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setBandMode(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(18, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(18, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setBandMode is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setBarringPassword(int i, String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    if (this.mRemote.transact(19, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    if (this.mRemote.transact(19, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setBarringPassword is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setCdmaRoamingPreference(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(20, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(20, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCdmaRoamingPreference is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setCellInfoListRate(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(21, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(21, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCellInfoListRate is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setIndicationFilter(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(22, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(22, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setIndicationFilter is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setLinkCapacityReportingCriteria(int i, int i2, int i3, int i4, int[] iArr, int[] iArr2, int i5) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeIntArray(iArr2);
-                    obtain.writeInt(i5);
-                    if (this.mRemote.transact(23, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeIntArray(iArr2);
+                    parcelObtain.writeInt(i5);
+                    if (this.mRemote.transact(23, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setLinkCapacityReportingCriteria is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setLocationUpdates(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(24, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(24, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setLocationUpdates is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setNetworkSelectionModeAutomatic(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(25, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(25, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setNetworkSelectionModeAutomatic is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setNetworkSelectionModeManual(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(26, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(26, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setNetworkSelectionModeManual is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setNrDualConnectivityState(int i, byte b) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByte(b);
-                    if (this.mRemote.transact(27, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByte(b);
+                    if (this.mRemote.transact(27, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setNrDualConnectivityState is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setResponseFunctions(IRadioNetworkResponse iRadioNetworkResponse, IRadioNetworkIndication iRadioNetworkIndication) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iRadioNetworkResponse);
-                    obtain.writeStrongInterface(iRadioNetworkIndication);
-                    if (this.mRemote.transact(28, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRadioNetworkResponse);
+                    parcelObtain.writeStrongInterface(iRadioNetworkIndication);
+                    if (this.mRemote.transact(28, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setResponseFunctions is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setSignalStrengthReportingCriteria(int i, SignalThresholdInfo[] signalThresholdInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(signalThresholdInfoArr, 0);
-                    if (this.mRemote.transact(29, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(signalThresholdInfoArr, 0);
+                    if (this.mRemote.transact(29, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setSignalStrengthReportingCriteria is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setSuppServiceNotifications(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(30, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(30, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setSuppServiceNotifications is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setSystemSelectionChannels(int i, boolean z, RadioAccessSpecifier[] radioAccessSpecifierArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedArray(radioAccessSpecifierArr, 0);
-                    if (this.mRemote.transact(31, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedArray(radioAccessSpecifierArr, 0);
+                    if (this.mRemote.transact(31, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setSystemSelectionChannels is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void startNetworkScan(int i, NetworkScanRequest networkScanRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(networkScanRequest, 0);
-                    if (this.mRemote.transact(32, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(networkScanRequest, 0);
+                    if (this.mRemote.transact(32, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method startNetworkScan is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void stopNetworkScan(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(33, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(33, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method stopNetworkScan is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void supplyNetworkDepersonalization(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    if (this.mRemote.transact(34, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    if (this.mRemote.transact(34, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method supplyNetworkDepersonalization is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setUsageSetting(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(35, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(35, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setUsageSetting is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void getUsageSetting(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(36, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(36, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getUsageSetting is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setEmergencyMode(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(37, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(37, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setEmergencyMode is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void triggerEmergencyNetworkScan(int i, EmergencyNetworkScanTrigger emergencyNetworkScanTrigger) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(emergencyNetworkScanTrigger, 0);
-                    if (this.mRemote.transact(38, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(emergencyNetworkScanTrigger, 0);
+                    if (this.mRemote.transact(38, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method triggerEmergencyNetworkScan is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void cancelEmergencyNetworkScan(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(39, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(39, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method cancelEmergencyNetworkScan is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void exitEmergencyMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(40, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(40, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method exitEmergencyMode is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setNullCipherAndIntegrityEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(41, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(41, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setNullCipherAndIntegrityEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void isNullCipherAndIntegrityEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(42, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(42, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method isNullCipherAndIntegrityEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void isN1ModeEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(43, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(43, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method isN1ModeEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setN1ModeEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(44, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(44, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setN1ModeEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void isCellularIdentifierTransparencyEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(45, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(45, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method isCellularIdentifierTransparencyEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setCellularIdentifierTransparencyEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(46, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(46, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCellularIdentifierTransparencyEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setSecurityAlgorithmsUpdatedEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(47, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(47, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setSecurityAlgorithmsUpdatedEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void isSecurityAlgorithmsUpdatedEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(48, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(48, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method isSecurityAlgorithmsUpdatedEnabled is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setSatellitePlmn(int i, String[] strArr, String[] strArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStringArray(strArr2);
-                    if (this.mRemote.transact(49, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStringArray(strArr2);
+                    if (this.mRemote.transact(49, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setSatellitePlmn is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void setSatelliteEnabledForCarrier(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(50, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(50, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setSatelliteEnabledForCarrier is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public void isSatelliteEnabledForCarrier(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(51, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(51, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method isSatelliteEnabledForCarrier is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.network.IRadioNetwork
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -1578,18 +1578,18 @@ public interface IRadioNetwork extends IInterface {
             @Override // android.hardware.radio.network.IRadioNetwork
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

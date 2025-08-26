@@ -4,7 +4,6 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.MaxForwardsHeader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaxForwards extends SIPHeader implements MaxForwardsHeader {
     private static final long serialVersionUID = -3096874323347175943L;
@@ -29,7 +28,7 @@ public class MaxForwards extends SIPHeader implements MaxForwardsHeader {
         return (obj instanceof MaxForwardsHeader) && this.maxForwards == ((MaxForwards) ((MaxForwardsHeader) obj)).maxForwards;
     }
 
-    public final void setMaxForwards(int i) {
+    public final void setMaxForwards(int i) throws InvalidArgumentException {
         if (i < 0 || i > 255) {
             throw new InvalidArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "bad max forwards value "));
         }

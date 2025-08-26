@@ -1,7 +1,6 @@
 package android.app.contentsuggestions;
 
 import android.annotation.SystemApi;
-import android.app.contentsuggestions.ContentSuggestionsManager;
 import android.app.contentsuggestions.IClassificationsCallback;
 import android.app.contentsuggestions.ISelectionsCallback;
 import android.graphics.Bitmap;
@@ -166,16 +165,16 @@ public final class ContentSuggestionsManager {
 
         @Override // android.app.contentsuggestions.ISelectionsCallback
         public void onContentSelectionsAvailable(final int i, final List<ContentSelection> list) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.app.contentsuggestions.ContentSuggestionsManager$SelectionsCallbackWrapper$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ContentSuggestionsManager.SelectionsCallbackWrapper.this.lambda$onContentSelectionsAvailable$0(i, list);
+                        this.f$0.lambda$onContentSelectionsAvailable$0(i, list);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -197,16 +196,16 @@ public final class ContentSuggestionsManager {
 
         @Override // android.app.contentsuggestions.IClassificationsCallback
         public void onContentClassificationsAvailable(final int i, final List<ContentClassification> list) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.app.contentsuggestions.ContentSuggestionsManager$ClassificationsCallbackWrapper$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ContentSuggestionsManager.ClassificationsCallbackWrapper.this.lambda$onContentClassificationsAvailable$0(i, list);
+                        this.f$0.lambda$onContentClassificationsAvailable$0(i, list);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

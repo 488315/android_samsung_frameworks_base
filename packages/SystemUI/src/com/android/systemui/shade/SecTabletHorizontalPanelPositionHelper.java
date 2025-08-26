@@ -4,11 +4,16 @@ import android.util.Log;
 import android.widget.FrameLayout;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
+import com.android.systemui.flags.RefactorFlagUtils;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
-import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
+import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
+import com.android.systemui.scene.shared.flag.SceneContainerFlag;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManager;
+import com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener;
+import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
+import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import com.android.systemui.util.SettingsHelper;
 import java.util.function.BooleanSupplier;
@@ -20,7 +25,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecTabletHorizontalPanelPositionHelper {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -28,7 +32,7 @@ public final class SecTabletHorizontalPanelPositionHelper {
     public float controllerCenter;
     public int currentOrientation;
     public final DoubleSupplier expandedFractionSupplier;
-    public RepeatWhenAttachedKt$repeatWhenAttached$1 handle;
+    public RepeatWhenAttachedKt.C09181 handle;
     public final Lazy headsUpManager$delegate;
     public float horizontalPanelTranslation;
     public final BooleanSupplier isFullyCollapsedSupplier;
@@ -44,8 +48,8 @@ public final class SecTabletHorizontalPanelPositionHelper {
     public final Supplier qsFrameLayoutSupplier;
     public final Lazy qsUiDisplayModeInteractor$delegate;
     public final Lazy resourcePicker$delegate;
-    public boolean reversed;
     public float rightMost;
+    public final Lazy secPanelSplitHelper$delegate;
     public final Lazy settingsHelper$delegate;
     public boolean transitionSwitchOn;
     public boolean transitioning;
@@ -54,8 +58,17 @@ public final class SecTabletHorizontalPanelPositionHelper {
     public final SplitStateInteractor splitStateInteractor = (SplitStateInteractor) Dependency.sDependency.getDependencyInner(SplitStateInteractor.class);
     public SecQsUiDisplayModeInteractor.FoldState foldState = SecQsUiDisplayModeInteractor.FoldState.UNSET;
     public int isQsSTATE = -1;
+    public final SecTabletHorizontalPanelPositionHelper$onHeadsUpChangedListener$1 onHeadsUpChangedListener = new OnHeadsUpChangedListener() { // from class: com.android.systemui.shade.SecTabletHorizontalPanelPositionHelper$onHeadsUpChangedListener$1
+        @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
+        public final void onHeadsUpPinnedModeChanged(boolean z) {
+            Log.d("SecTabletHorizontalPanelPositionHelper", "onHeadsUpPinnedModeChanged(" + z + ")");
+            if (z) {
+                int i = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                this.this$0.resetHorizontalPanelPosition(true);
+            }
+        }
+    };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -69,6 +82,7 @@ public final class SecTabletHorizontalPanelPositionHelper {
         new Companion(null);
     }
 
+    /* JADX WARN: Type inference failed for: r1v23, types: [com.android.systemui.shade.SecTabletHorizontalPanelPositionHelper$onHeadsUpChangedListener$1] */
     public SecTabletHorizontalPanelPositionHelper(DoubleSupplier doubleSupplier, BooleanSupplier booleanSupplier, BooleanSupplier booleanSupplier2, NotificationStackScrollLayoutController notificationStackScrollLayoutController, IntSupplier intSupplier, Supplier<FrameLayout> supplier, Supplier<NotificationPanelView> supplier2, dagger.Lazy lazy, IntSupplier intSupplier2) {
         this.expandedFractionSupplier = doubleSupplier;
         this.isFullyCollapsedSupplier = booleanSupplier;
@@ -96,8 +110,11 @@ public final class SecTabletHorizontalPanelPositionHelper {
                     case 3:
                         int i5 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
                         return (WakefulnessLifecycle) Dependency.sDependency.getDependencyInner(WakefulnessLifecycle.class);
-                    default:
+                    case 4:
                         int i6 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (SecPanelSplitHelper) Dependency.sDependency.getDependencyInner(SecPanelSplitHelper.class);
+                    default:
+                        int i7 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
                         return (HeadsUpManager) Dependency.sDependency.getDependencyInner(HeadsUpManager.class);
                 }
             }
@@ -119,8 +136,11 @@ public final class SecTabletHorizontalPanelPositionHelper {
                     case 3:
                         int i5 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
                         return (WakefulnessLifecycle) Dependency.sDependency.getDependencyInner(WakefulnessLifecycle.class);
-                    default:
+                    case 4:
                         int i6 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (SecPanelSplitHelper) Dependency.sDependency.getDependencyInner(SecPanelSplitHelper.class);
+                    default:
+                        int i7 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
                         return (HeadsUpManager) Dependency.sDependency.getDependencyInner(HeadsUpManager.class);
                 }
             }
@@ -142,8 +162,11 @@ public final class SecTabletHorizontalPanelPositionHelper {
                     case 3:
                         int i5 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
                         return (WakefulnessLifecycle) Dependency.sDependency.getDependencyInner(WakefulnessLifecycle.class);
-                    default:
+                    case 4:
                         int i6 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (SecPanelSplitHelper) Dependency.sDependency.getDependencyInner(SecPanelSplitHelper.class);
+                    default:
+                        int i7 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
                         return (HeadsUpManager) Dependency.sDependency.getDependencyInner(HeadsUpManager.class);
                 }
             }
@@ -165,14 +188,17 @@ public final class SecTabletHorizontalPanelPositionHelper {
                     case 3:
                         int i5 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
                         return (WakefulnessLifecycle) Dependency.sDependency.getDependencyInner(WakefulnessLifecycle.class);
-                    default:
+                    case 4:
                         int i6 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (SecPanelSplitHelper) Dependency.sDependency.getDependencyInner(SecPanelSplitHelper.class);
+                    default:
+                        int i7 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
                         return (HeadsUpManager) Dependency.sDependency.getDependencyInner(HeadsUpManager.class);
                 }
             }
         });
         final int i5 = 4;
-        this.headsUpManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.SecTabletHorizontalPanelPositionHelper$$ExternalSyntheticLambda0
+        this.secPanelSplitHelper$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.SecTabletHorizontalPanelPositionHelper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 switch (i5) {
@@ -188,8 +214,37 @@ public final class SecTabletHorizontalPanelPositionHelper {
                     case 3:
                         int i52 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
                         return (WakefulnessLifecycle) Dependency.sDependency.getDependencyInner(WakefulnessLifecycle.class);
-                    default:
+                    case 4:
                         int i6 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (SecPanelSplitHelper) Dependency.sDependency.getDependencyInner(SecPanelSplitHelper.class);
+                    default:
+                        int i7 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (HeadsUpManager) Dependency.sDependency.getDependencyInner(HeadsUpManager.class);
+                }
+            }
+        });
+        final int i6 = 5;
+        this.headsUpManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.shade.SecTabletHorizontalPanelPositionHelper$$ExternalSyntheticLambda0
+            @Override // kotlin.jvm.functions.Function0
+            public final Object invoke() {
+                switch (i6) {
+                    case 0:
+                        int i22 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class);
+                    case 1:
+                        int i32 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
+                    case 2:
+                        int i42 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class);
+                    case 3:
+                        int i52 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (WakefulnessLifecycle) Dependency.sDependency.getDependencyInner(WakefulnessLifecycle.class);
+                    case 4:
+                        int i62 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
+                        return (SecPanelSplitHelper) Dependency.sDependency.getDependencyInner(SecPanelSplitHelper.class);
+                    default:
+                        int i7 = SecTabletHorizontalPanelPositionHelper.$r8$clinit;
                         return (HeadsUpManager) Dependency.sDependency.getDependencyInner(HeadsUpManager.class);
                 }
             }
@@ -198,7 +253,7 @@ public final class SecTabletHorizontalPanelPositionHelper {
     }
 
     public final void resetHorizontalPanelPosition(boolean z) {
-        if (!((SecQsUiDisplayModeInteractor) this.qsUiDisplayModeInteractor$delegate.getValue()).isTablet() || ((float) this.expandedFractionSupplier.getAsDouble()) <= 0.01f || z) {
+        if (!((SecQsUiDisplayModeInteractor) this.qsUiDisplayModeInteractor$delegate.getValue()).isTablet() || ((float) this.expandedFractionSupplier.getAsDouble()) <= 0.0f || z) {
             this.posResult = 0.0f;
             this.posRatio = 0.0f;
             setHorizontalPanelTranslation(0.0f, true);
@@ -223,19 +278,26 @@ public final class SecTabletHorizontalPanelPositionHelper {
     public final void setHorizontalPanelTranslation(float f, boolean z) {
         float f2;
         float f3;
+        Lazy lazy = this.settingsHelper$delegate;
         if (!z && this.isQsSTATE == 0) {
-            if (this.reversed) {
-                f2 = this.leftMost;
+            boolean z2 = ((NotificationPanelView) this.viewSupplier.get()).getContext().getResources().getConfiguration().getLayoutDirection() == 1;
+            boolean zIsPanelSplitReversed = ((SettingsHelper) lazy.getValue()).isPanelSplitReversed();
+            SecPanelSplitHelper.Companion.getClass();
+            if (!SecPanelSplitHelper.isEnabled || ((!z2 || zIsPanelSplitReversed) && (z2 || !zIsPanelSplitReversed))) {
+                f2 = this.rightMost;
                 f3 = this.panelCenter;
             } else {
-                f2 = this.rightMost;
+                f2 = this.leftMost;
                 f3 = this.panelCenter;
             }
             f = f2 - f3;
         }
         this.horizontalPanelTranslation = f;
         Log.d("SecTabletHorizontalPanelPositionHelper", "setHorizontalPanelTranslation(" + f + "), force : " + z);
-        this.notificationStackScrollLayoutController.mView.setTranslationX(this.horizontalPanelTranslation);
+        float f4 = this.horizontalPanelTranslation;
+        NotificationStackScrollLayout notificationStackScrollLayout = this.notificationStackScrollLayoutController.mView;
+        notificationStackScrollLayout.mPreviousTranslationX = f4;
+        notificationStackScrollLayout.setTranslationX(f4);
         ((FrameLayout) this.qsFrameLayoutSupplier.get()).setTranslationX(this.horizontalPanelTranslation);
         ((NotificationPanelViewController) this.panelViewControllerLazy.get()).mNotificationContainerParent.requestLayout();
         ((SecQSPanelResourcePicker) this.resourcePicker$delegate.getValue()).resourcePickHelper.getTargetPicker().qsTransitionX = this.horizontalPanelTranslation;
@@ -243,5 +305,27 @@ public final class SecTabletHorizontalPanelPositionHelper {
         if (this.transitionSwitchOn) {
             this.transitionSwitchOn = false;
         }
+        if (((SecQsUiDisplayModeInteractor) this.qsUiDisplayModeInteractor$delegate.getValue()).isTablet()) {
+            SecPanelSplitHelper.Companion.getClass();
+            if (SecPanelSplitHelper.isEnabled && ((SettingsHelper) lazy.getValue()).isRemoveAnimation()) {
+                ((SecPanelSplitHelper) this.secPanelSplitHelper$delegate.getValue()).updateTransitionVisibility(this.isQsSTATE);
+            }
+        }
+    }
+
+    public final void updateResources() {
+        float displayWidth = DeviceState.getDisplayWidth(((NotificationPanelView) this.viewSupplier.get()).getContext());
+        NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.notificationStackScrollLayoutController;
+        notificationStackScrollLayoutController.getClass();
+        int i = SceneContainerFlag.$r8$clinit;
+        RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+        float width = notificationStackScrollLayoutController.mView.getWidth();
+        int popOverMargin = ((SecQSPanelResourcePicker) this.resourcePicker$delegate.getValue()).getPopOverMargin(((NotificationPanelView) this.viewSupplier.get()).getContext());
+        float f = 2;
+        this.panelCenter = displayWidth / f;
+        this.controllerCenter = width / f;
+        float asInt = this.positionMinSideMarginSupplier.getAsInt() + this.controllerCenter + popOverMargin;
+        this.leftMost = asInt;
+        this.rightMost = displayWidth - asInt;
     }
 }

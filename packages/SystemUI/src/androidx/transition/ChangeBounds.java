@@ -20,7 +20,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ChangeBounds extends Transition {
     public static final AnonymousClass3 BOTTOM_RIGHT_ONLY_PROPERTY;
@@ -39,14 +38,13 @@ public class ChangeBounds extends Transition {
         public final void set(Object obj, Object obj2) {
             View view = (View) obj;
             PointF pointF = (PointF) obj2;
-            int round = Math.round(pointF.x);
-            int round2 = Math.round(pointF.y);
-            ViewUtils.setLeftTopRightBottom(view, round, round2, view.getWidth() + round, view.getHeight() + round2);
+            int iRound = Math.round(pointF.x);
+            int iRound2 = Math.round(pointF.y);
+            ViewUtils.setLeftTopRightBottom(view, iRound, iRound2, view.getWidth() + iRound, view.getHeight() + iRound2);
         }
     };
     public static final RectEvaluator sRectEvaluator = new RectEvaluator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ClipListener extends AnimatorListenerAdapter implements Transition.TransitionListener {
         public final int mEndBottom;
         public final Rect mEndClip;
@@ -130,11 +128,11 @@ public class ChangeBounds extends Transition {
 
         @Override // android.animation.Animator.AnimatorListener
         public final void onAnimationStart(Animator animator, boolean z) {
-            int max = Math.max(this.mStartRight - this.mStartLeft, this.mEndRight - this.mEndLeft);
-            int max2 = Math.max(this.mStartBottom - this.mStartTop, this.mEndBottom - this.mEndTop);
+            int iMax = Math.max(this.mStartRight - this.mStartLeft, this.mEndRight - this.mEndLeft);
+            int iMax2 = Math.max(this.mStartBottom - this.mStartTop, this.mEndBottom - this.mEndTop);
             int i = z ? this.mEndLeft : this.mStartLeft;
             int i2 = z ? this.mEndTop : this.mStartTop;
-            ViewUtils.setLeftTopRightBottom(this.mView, i, i2, max + i, max2 + i2);
+            ViewUtils.setLeftTopRightBottom(this.mView, i, i2, iMax + i, iMax2 + i2);
             this.mView.setClipBounds(z ? this.mEndClip : this.mStartClip);
         }
 
@@ -147,7 +145,6 @@ public class ChangeBounds extends Transition {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SuppressLayoutListener extends TransitionListenerAdapter {
         public boolean mCanceled = false;
         public final ViewGroup mParent;
@@ -181,7 +178,6 @@ public class ChangeBounds extends Transition {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewBounds {
         public int mBottom;
         public int mBottomRightCalls;
@@ -215,12 +211,12 @@ public class ChangeBounds extends Transition {
                 PointF pointF = (PointF) obj2;
                 viewBounds.getClass();
                 viewBounds.mLeft = Math.round(pointF.x);
-                int round = Math.round(pointF.y);
-                viewBounds.mTop = round;
+                int iRound = Math.round(pointF.y);
+                viewBounds.mTop = iRound;
                 int i = viewBounds.mTopLeftCalls + 1;
                 viewBounds.mTopLeftCalls = i;
                 if (i == viewBounds.mBottomRightCalls) {
-                    ViewUtils.setLeftTopRightBottom(viewBounds.mView, viewBounds.mLeft, round, viewBounds.mRight, viewBounds.mBottom);
+                    ViewUtils.setLeftTopRightBottom(viewBounds.mView, viewBounds.mLeft, iRound, viewBounds.mRight, viewBounds.mBottom);
                     viewBounds.mTopLeftCalls = 0;
                     viewBounds.mBottomRightCalls = 0;
                 }
@@ -239,12 +235,12 @@ public class ChangeBounds extends Transition {
                 PointF pointF = (PointF) obj2;
                 viewBounds.getClass();
                 viewBounds.mRight = Math.round(pointF.x);
-                int round = Math.round(pointF.y);
-                viewBounds.mBottom = round;
+                int iRound = Math.round(pointF.y);
+                viewBounds.mBottom = iRound;
                 int i = viewBounds.mBottomRightCalls + 1;
                 viewBounds.mBottomRightCalls = i;
                 if (viewBounds.mTopLeftCalls == i) {
-                    ViewUtils.setLeftTopRightBottom(viewBounds.mView, viewBounds.mLeft, viewBounds.mTop, viewBounds.mRight, round);
+                    ViewUtils.setLeftTopRightBottom(viewBounds.mView, viewBounds.mLeft, viewBounds.mTop, viewBounds.mRight, iRound);
                     viewBounds.mTopLeftCalls = 0;
                     viewBounds.mBottomRightCalls = 0;
                 }
@@ -316,10 +312,10 @@ public class ChangeBounds extends Transition {
         int i2;
         int i3;
         int i4;
-        Animator ofObject;
+        Animator animatorOfObject;
         int i5;
         Rect rect;
-        ObjectAnimator objectAnimator;
+        ObjectAnimator objectAnimatorOfObject;
         if (transitionValues != null && transitionValues2 != null) {
             Map map = transitionValues.values;
             Map map2 = transitionValues2.values;
@@ -361,7 +357,7 @@ public class ChangeBounds extends Transition {
                 if (this.mResizeClip) {
                     ViewUtils.setLeftTopRightBottom(view, i6, i8, i6 + Math.max(i14, i16), i8 + Math.max(i15, i17));
                     if (i6 == i7 && i8 == i9) {
-                        ofObject = null;
+                        animatorOfObject = null;
                         i2 = i13;
                         i4 = i7;
                         i3 = i11;
@@ -369,7 +365,7 @@ public class ChangeBounds extends Transition {
                         i2 = i13;
                         i3 = i11;
                         i4 = i7;
-                        ofObject = ObjectAnimatorUtils$Api21Impl.ofObject(view, POSITION_PROPERTY, this.mPathMotion.getPath(i6, i8, i7, i9));
+                        animatorOfObject = ObjectAnimatorUtils$Api21Impl.ofObject(view, POSITION_PROPERTY, this.mPathMotion.getPath(i6, i8, i7, i9));
                     }
                     boolean z = rect4 == null;
                     if (z) {
@@ -382,33 +378,33 @@ public class ChangeBounds extends Transition {
                     int i19 = rect5 == null ? 1 : i5;
                     Rect rect6 = i19 != 0 ? new Rect(i5, i5, i16, i17) : rect5;
                     if (rect.equals(rect6)) {
-                        objectAnimator = null;
+                        objectAnimatorOfObject = null;
                     } else {
                         view.setClipBounds(rect);
-                        objectAnimator = ObjectAnimator.ofObject(view, "clipBounds", sRectEvaluator, rect, rect6);
+                        objectAnimatorOfObject = ObjectAnimator.ofObject(view, "clipBounds", sRectEvaluator, rect, rect6);
                         ClipListener clipListener = new ClipListener(view, rect, z, rect6, i19, i6, i8, i10, i12, i4, i9, i3, i2);
-                        objectAnimator.addListener(clipListener);
+                        objectAnimatorOfObject.addListener(clipListener);
                         addListener(clipListener);
                     }
-                    if (ofObject == null) {
-                        ofObject = objectAnimator;
-                    } else if (objectAnimator != null) {
+                    if (animatorOfObject == null) {
+                        animatorOfObject = objectAnimatorOfObject;
+                    } else if (objectAnimatorOfObject != null) {
                         AnimatorSet animatorSet = new AnimatorSet();
-                        animatorSet.playTogether(ofObject, objectAnimator);
-                        ofObject = animatorSet;
+                        animatorSet.playTogether(animatorOfObject, objectAnimatorOfObject);
+                        animatorOfObject = animatorSet;
                     }
                 } else {
                     ViewUtils.setLeftTopRightBottom(view, i6, i8, i10, i12);
                     if (i18 != 2) {
-                        ofObject = (i6 == i7 && i8 == i9) ? ObjectAnimatorUtils$Api21Impl.ofObject(view, BOTTOM_RIGHT_ONLY_PROPERTY, this.mPathMotion.getPath(i10, i12, i11, i13)) : ObjectAnimatorUtils$Api21Impl.ofObject(view, TOP_LEFT_ONLY_PROPERTY, this.mPathMotion.getPath(i6, i8, i7, i9));
+                        animatorOfObject = (i6 == i7 && i8 == i9) ? ObjectAnimatorUtils$Api21Impl.ofObject(view, BOTTOM_RIGHT_ONLY_PROPERTY, this.mPathMotion.getPath(i10, i12, i11, i13)) : ObjectAnimatorUtils$Api21Impl.ofObject(view, TOP_LEFT_ONLY_PROPERTY, this.mPathMotion.getPath(i6, i8, i7, i9));
                     } else if (i14 == i16 && i15 == i17) {
-                        ofObject = ObjectAnimatorUtils$Api21Impl.ofObject(view, POSITION_PROPERTY, this.mPathMotion.getPath(i6, i8, i7, i9));
+                        animatorOfObject = ObjectAnimatorUtils$Api21Impl.ofObject(view, POSITION_PROPERTY, this.mPathMotion.getPath(i6, i8, i7, i9));
                     } else {
                         ViewBounds viewBounds = new ViewBounds(view);
-                        Animator ofObject2 = ObjectAnimatorUtils$Api21Impl.ofObject(viewBounds, TOP_LEFT_PROPERTY, this.mPathMotion.getPath(i6, i8, i7, i9));
-                        Animator ofObject3 = ObjectAnimatorUtils$Api21Impl.ofObject(viewBounds, BOTTOM_RIGHT_PROPERTY, this.mPathMotion.getPath(i10, i12, i11, i13));
+                        Animator animatorOfObject2 = ObjectAnimatorUtils$Api21Impl.ofObject(viewBounds, TOP_LEFT_PROPERTY, this.mPathMotion.getPath(i6, i8, i7, i9));
+                        Animator animatorOfObject3 = ObjectAnimatorUtils$Api21Impl.ofObject(viewBounds, BOTTOM_RIGHT_PROPERTY, this.mPathMotion.getPath(i10, i12, i11, i13));
                         AnimatorSet animatorSet2 = new AnimatorSet();
-                        animatorSet2.playTogether(ofObject2, ofObject3);
+                        animatorSet2.playTogether(animatorOfObject2, animatorOfObject3);
                         animatorSet2.addListener(new AnimatorListenerAdapter(this, viewBounds) { // from class: androidx.transition.ChangeBounds.6
                             private final ViewBounds mViewBounds;
 
@@ -416,7 +412,7 @@ public class ChangeBounds extends Transition {
                                 this.mViewBounds = viewBounds;
                             }
                         });
-                        ofObject = animatorSet2;
+                        animatorOfObject = animatorSet2;
                     }
                 }
                 if (view.getParent() instanceof ViewGroup) {
@@ -424,7 +420,7 @@ public class ChangeBounds extends Transition {
                     ViewGroupUtils$Api29Impl.suppressLayout(viewGroup4, true);
                     getRootTransition().addListener(new SuppressLayoutListener(viewGroup4));
                 }
-                return ofObject;
+                return animatorOfObject;
             }
         }
         return null;
@@ -438,9 +434,9 @@ public class ChangeBounds extends Transition {
     public ChangeBounds(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mResizeClip = false;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, Styleable.CHANGE_BOUNDS);
-        boolean z = TypedArrayUtils.hasAttribute((XmlResourceParser) attributeSet, "resizeClip") ? obtainStyledAttributes.getBoolean(0, false) : false;
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, Styleable.CHANGE_BOUNDS);
+        boolean z = TypedArrayUtils.hasAttribute((XmlResourceParser) attributeSet, "resizeClip") ? typedArrayObtainStyledAttributes.getBoolean(0, false) : false;
+        typedArrayObtainStyledAttributes.recycle();
         this.mResizeClip = z;
     }
 }

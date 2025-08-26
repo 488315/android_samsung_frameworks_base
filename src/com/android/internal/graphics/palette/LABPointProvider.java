@@ -15,8 +15,8 @@ public class LABPointProvider implements PointProvider {
 
     @Override // com.android.internal.graphics.palette.PointProvider
     public int toInt(float[] fArr) {
-        float[] transform = this.mLabToRgb.transform(fArr);
-        return Color.rgb(transform[0], transform[1], transform[2]);
+        float[] fArrTransform = this.mLabToRgb.transform(fArr);
+        return Color.rgb(fArrTransform[0], fArrTransform[1], fArrTransform[2]);
     }
 
     @Override // com.android.internal.graphics.palette.PointProvider

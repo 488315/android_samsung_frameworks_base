@@ -6,7 +6,6 @@ import java.io.EOFException;
 import java.nio.ByteBuffer;
 import kotlin.text.Charsets;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RealBufferedSource implements BufferedSource {
     public final Buffer bufferField = new Buffer();
@@ -51,18 +50,18 @@ public final class RealBufferedSource implements BufferedSource {
         if (this.closed) {
             throw new IllegalStateException(ServiceTuple.BASIC_STATUS_CLOSED);
         }
-        long j = 0;
+        long jMax = 0;
         while (true) {
-            long indexOfElement = this.bufferField.indexOfElement(byteString, j);
-            if (indexOfElement != -1) {
-                return indexOfElement;
+            long jIndexOfElement = this.bufferField.indexOfElement(byteString, jMax);
+            if (jIndexOfElement != -1) {
+                return jIndexOfElement;
             }
             Buffer buffer = this.bufferField;
-            long j2 = buffer.size;
+            long j = buffer.size;
             if (this.source.read(buffer, 8192L) == -1) {
                 return -1L;
             }
-            j = Math.max(j, j2);
+            jMax = Math.max(jMax, j);
         }
     }
 
@@ -91,19 +90,19 @@ public final class RealBufferedSource implements BufferedSource {
         return this.bufferField.read(buffer, Math.min(j, this.bufferField.size));
     }
 
-    public final byte readByte() {
+    public final byte readByte() throws EOFException {
         require(1L);
         return this.bufferField.readByte();
     }
 
-    public final int readIntLe() {
+    public final int readIntLe() throws EOFException {
         require(4L);
-        int readInt = this.bufferField.readInt();
-        int i = SegmentedByteString.DEFAULT__ByteString_size;
-        return ((readInt & 255) << 24) | (((-16777216) & readInt) >>> 24) | ((16711680 & readInt) >>> 8) | ((65280 & readInt) << 8);
+        int i = this.bufferField.readInt();
+        int i2 = SegmentedByteString.DEFAULT__ByteString_size;
+        return ((i & 255) << 24) | (((-16777216) & i) >>> 24) | ((16711680 & i) >>> 8) | ((65280 & i) << 8);
     }
 
-    public final long readLongLe() {
+    public final long readLongLe() throws EOFException {
         char c;
         char c2;
         char c3;
@@ -147,7 +146,7 @@ public final class RealBufferedSource implements BufferedSource {
         return ((j & 255) << c4) | (((-72057594037927936L) & j) >>> c4) | ((71776119061217280L & j) >>> c3) | ((280375465082880L & j) >>> c2) | ((1095216660480L & j) >>> c) | ((4278190080L & j) << c) | ((16711680 & j) << c2) | ((65280 & j) << c3);
     }
 
-    public final short readShortLe() {
+    public final short readShortLe() throws EOFException {
         short s;
         require(2L);
         Buffer buffer = this.bufferField;
@@ -179,7 +178,7 @@ public final class RealBufferedSource implements BufferedSource {
         return (short) (((s & 255) << 8) | ((65280 & s) >>> 8));
     }
 
-    public final String readUtf8(long j) {
+    public final String readUtf8(long j) throws EOFException {
         require(j);
         Buffer buffer = this.bufferField;
         buffer.getClass();
@@ -204,23 +203,23 @@ public final class RealBufferedSource implements BufferedSource {
         return false;
     }
 
-    public final void require(long j) {
+    public final void require(long j) throws EOFException {
         if (!request(j)) {
             throw new EOFException();
         }
     }
 
     @Override // okio.BufferedSource
-    public final int select(Options options) {
+    public final int select(Options options) throws EOFException {
         if (this.closed) {
             throw new IllegalStateException(ServiceTuple.BASIC_STATUS_CLOSED);
         }
         while (true) {
-            int selectPrefix = okio.internal.Buffer.selectPrefix(this.bufferField, options, true);
-            if (selectPrefix != -2) {
-                if (selectPrefix != -1) {
-                    this.bufferField.skip(options.byteStrings[selectPrefix].getSize$external__okio__android_common__okio_lib());
-                    return selectPrefix;
+            int iSelectPrefix = okio.internal.Buffer.selectPrefix(this.bufferField, options, true);
+            if (iSelectPrefix != -2) {
+                if (iSelectPrefix != -1) {
+                    this.bufferField.skip(options.byteStrings[iSelectPrefix].getSize$external__okio__android_common__okio_lib());
+                    return iSelectPrefix;
                 }
             } else if (this.source.read(this.bufferField, 8192L) == -1) {
                 break;
@@ -230,7 +229,7 @@ public final class RealBufferedSource implements BufferedSource {
     }
 
     @Override // okio.BufferedSource
-    public final void skip(long j) {
+    public final void skip(long j) throws EOFException {
         if (this.closed) {
             throw new IllegalStateException(ServiceTuple.BASIC_STATUS_CLOSED);
         }
@@ -239,9 +238,9 @@ public final class RealBufferedSource implements BufferedSource {
             if (buffer.size == 0 && this.source.read(buffer, 8192L) == -1) {
                 throw new EOFException();
             }
-            long min = Math.min(j, this.bufferField.size);
-            this.bufferField.skip(min);
-            j -= min;
+            long jMin = Math.min(j, this.bufferField.size);
+            this.bufferField.skip(jMin);
+            j -= jMin;
         }
     }
 

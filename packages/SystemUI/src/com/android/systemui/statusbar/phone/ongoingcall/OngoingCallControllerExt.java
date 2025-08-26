@@ -1,29 +1,30 @@
 package com.android.systemui.statusbar.phone.ongoingcall;
 
 import android.app.PendingIntent;
-import android.content.res.Resources;
 import android.util.Log;
 import com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0;
 import com.android.systemui.animation.ActivityTransitionAnimator;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.plugins.ActivityStarter;
-import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
-import com.android.systemui.statusbar.policy.ConfigurationController;
+import com.android.systemui.slimindicator.SlimIndicatorViewMediator;
+import com.android.systemui.statusbar.phone.IndicatorGardenPresenter;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.time.SystemClock;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingCallControllerExt {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final ActivityStarter activityStarter;
     public boolean blockClickListener;
+    public final IndicatorGardenPresenter indicatorGardenPresenter;
+    public boolean isShowingOAChip;
     public final LogBuffer logger;
+    public final SlimIndicatorViewMediator slimIndicatorViewMediator;
     public final SystemClock systemClock;
+    public OngoingCallChronometer timeView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -37,10 +38,12 @@ public final class OngoingCallControllerExt {
         new Companion(null);
     }
 
-    public OngoingCallControllerExt(Resources resources, ActivityStarter activityStarter, LogBuffer logBuffer, KeyguardCallChipController keyguardCallChipController, SystemClock systemClock, ConfigurationController configurationController, IndicatorScaleGardener indicatorScaleGardener) {
+    public OngoingCallControllerExt(ActivityStarter activityStarter, LogBuffer logBuffer, SystemClock systemClock, IndicatorGardenPresenter indicatorGardenPresenter, SlimIndicatorViewMediator slimIndicatorViewMediator) {
         this.activityStarter = activityStarter;
         this.logger = logBuffer;
         this.systemClock = systemClock;
+        this.indicatorGardenPresenter = indicatorGardenPresenter;
+        this.slimIndicatorViewMediator = slimIndicatorViewMediator;
     }
 
     public static final void access$handleClickCallChip(OngoingCallControllerExt ongoingCallControllerExt, PendingIntent pendingIntent, OngoingCallBackgroundContainer ongoingCallBackgroundContainer) {

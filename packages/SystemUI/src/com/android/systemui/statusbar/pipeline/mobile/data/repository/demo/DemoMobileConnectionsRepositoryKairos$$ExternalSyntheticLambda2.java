@@ -13,7 +13,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DemoMobileConnectionsRepositoryKairos$$ExternalSyntheticLambda2 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -32,11 +31,11 @@ public final /* synthetic */ class DemoMobileConnectionsRepositoryKairos$$Extern
             case 1:
                 int i2 = DemoMobileConnectionsRepositoryKairos.$r8$clinit;
                 Set set = (Set) obj2;
-                int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(set, 10));
-                if (mapCapacity < 16) {
-                    mapCapacity = 16;
+                int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(set, 10));
+                if (iMapCapacity < 16) {
+                    iMapCapacity = 16;
                 }
-                LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
+                LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
                 for (Object obj3 : set) {
                     linkedHashMap.put(obj3, new SubscriptionModel(((Number) obj3).intValue(), false, false, null, "demo carrier", -1, false, false, 0, false, 972, null));
                 }

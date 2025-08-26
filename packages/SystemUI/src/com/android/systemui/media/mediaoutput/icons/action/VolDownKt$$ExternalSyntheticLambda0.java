@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.Dp;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class VolDownKt$$ExternalSyntheticLambda0 implements Function0 {
     @Override // kotlin.jvm.functions.Function0
@@ -26,7 +25,7 @@ public final /* synthetic */ class VolDownKt$$ExternalSyntheticLambda0 implement
         StrokeJoin.Companion.getClass();
         int i2 = StrokeJoin.Round;
         PathFillType.Companion.getClass();
-        builder.m565addPathoIyEayM("", ExpandMoreKt$$ExternalSyntheticOutline0.m(4.125f, 12.0f, 19.875f, 12.0f)._nodes, PathFillType.EvenOdd, solidColor, 1.0f, solidColor2, 1.0f, 1.5f, i, i2, 4.0f, 0.0f, 1.0f, 0.0f);
+        builder.m567addPathoIyEayM("", ExpandMoreKt$$ExternalSyntheticOutline0.m(4.125f, 12.0f, 19.875f, 12.0f)._nodes, PathFillType.EvenOdd, solidColor, 1.0f, solidColor2, 1.0f, 1.5f, i, i2, 4.0f, 0.0f, 1.0f, 0.0f);
         return builder.build();
     }
 }

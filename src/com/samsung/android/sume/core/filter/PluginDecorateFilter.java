@@ -10,8 +10,8 @@ public abstract class PluginDecorateFilter<T extends PluginFixture<?>> extends D
     protected T plugin;
 
     PluginDecorateFilter(T t, MediaFilter mediaFilter) {
-        super(mediaFilter);
         final ExecuteDelegator executeDelegator;
+        super(mediaFilter);
         this.plugin = t;
         if (!(t instanceof NNPlugin) || (executeDelegator = ((NNPlugin) t).getExecuteDelegator()) == null) {
             return;
@@ -23,7 +23,7 @@ public abstract class PluginDecorateFilter<T extends PluginFixture<?>> extends D
             ((MediaFilterPlaceHolder) mediaFilter).setMediaFilterUpdater(new Consumer() { // from class: com.samsung.android.sume.core.filter.PluginDecorateFilter$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    PluginDecorateFilter.lambda$new$0(ExecuteDelegator.this, (MediaFilter) obj);
+                    PluginDecorateFilter.lambda$new$0(executeDelegator, (MediaFilter) obj);
                 }
             });
         }

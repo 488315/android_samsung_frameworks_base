@@ -30,10 +30,6 @@ public interface ITaskOrganizer extends IInterface {
         }
 
         @Override // android.window.ITaskOrganizer
-        public void minimizeAllDesktopTasks(int i) throws RemoteException {
-        }
-
-        @Override // android.window.ITaskOrganizer
         public void onAppSplashScreenViewRemoved(int i) throws RemoteException {
         }
 
@@ -82,8 +78,6 @@ public interface ITaskOrganizer extends IInterface {
 
     void copySplashScreenView(int i) throws RemoteException;
 
-    void minimizeAllDesktopTasks(int i) throws RemoteException;
-
     void onAppSplashScreenViewRemoved(int i) throws RemoteException;
 
     void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException;
@@ -109,7 +103,6 @@ public interface ITaskOrganizer extends IInterface {
     public static abstract class Stub extends Binder implements ITaskOrganizer {
         static final int TRANSACTION_addStartingWindow = 1;
         static final int TRANSACTION_copySplashScreenView = 3;
-        static final int TRANSACTION_minimizeAllDesktopTasks = 14;
         static final int TRANSACTION_onAppSplashScreenViewRemoved = 4;
         static final int TRANSACTION_onBackPressedOnTaskRoot = 8;
         static final int TRANSACTION_onImeDrawnOnTask = 9;
@@ -129,7 +122,7 @@ public interface ITaskOrganizer extends IInterface {
 
         @Override // android.os.Binder
         public int getMaxTransactionId() {
-            return 13;
+            return 12;
         }
 
         public Stub() {
@@ -140,9 +133,9 @@ public interface ITaskOrganizer extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITaskOrganizer.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITaskOrganizer)) {
-                return (ITaskOrganizer) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITaskOrganizer.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITaskOrganizer)) {
+                return (ITaskOrganizer) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -175,8 +168,6 @@ public interface ITaskOrganizer extends IInterface {
                     return "requestAffordanceAnim";
                 case 13:
                     return "preloadSplashScreenAppIcon";
-                case 14:
-                    return "minimizeAllDesktopTasks";
                 default:
                     return null;
             }
@@ -208,14 +199,14 @@ public interface ITaskOrganizer extends IInterface {
                     removeStartingWindow(startingWindowRemovalInfo);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    copySplashScreenView(readInt);
+                    copySplashScreenView(i3);
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onAppSplashScreenViewRemoved(readInt2);
+                    onAppSplashScreenViewRemoved(i4);
                     return true;
                 case 5:
                     ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
@@ -239,9 +230,9 @@ public interface ITaskOrganizer extends IInterface {
                     onBackPressedOnTaskRoot(runningTaskInfo4);
                     return true;
                 case 9:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onImeDrawnOnTask(readInt3);
+                    onImeDrawnOnTask(i5);
                     return true;
                 case 10:
                     ActivityManager.RunningTaskInfo runningTaskInfo5 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
@@ -250,28 +241,23 @@ public interface ITaskOrganizer extends IInterface {
                     onSplitLayoutChangeRequested(runningTaskInfo5, bundle);
                     return true;
                 case 11:
-                    int readInt4 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i6 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    resetStashedFreeform(readInt4, readBoolean);
+                    resetStashedFreeform(i6, z);
                     return true;
                 case 12:
                     ActivityManager.RunningTaskInfo runningTaskInfo6 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestAffordanceAnim(runningTaskInfo6, readInt5);
+                    requestAffordanceAnim(runningTaskInfo6, i7);
                     return true;
                 case 13:
                     ActivityInfo activityInfo = (ActivityInfo) parcel.readTypedObject(ActivityInfo.CREATOR);
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     Configuration configuration = (Configuration) parcel.readTypedObject(Configuration.CREATOR);
                     parcel.enforceNoDataAvail();
-                    preloadSplashScreenAppIcon(activityInfo, readInt6, configuration);
-                    return true;
-                case 14:
-                    int readInt7 = parcel.readInt();
-                    parcel.enforceNoDataAvail();
-                    minimizeAllDesktopTasks(readInt7);
+                    preloadSplashScreenAppIcon(activityInfo, i8, configuration);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -296,175 +282,163 @@ public interface ITaskOrganizer extends IInterface {
 
             @Override // android.window.ITaskOrganizer
             public void addStartingWindow(StartingWindowInfo startingWindowInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(startingWindowInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(startingWindowInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void removeStartingWindow(StartingWindowRemovalInfo startingWindowRemovalInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(startingWindowRemovalInfo, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(startingWindowRemovalInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void copySplashScreenView(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void onAppSplashScreenViewRemoved(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void onTaskAppeared(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    obtain.writeTypedObject(surfaceControl, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    parcelObtain.writeTypedObject(surfaceControl, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void onTaskVanished(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void onTaskInfoChanged(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void onImeDrawnOnTask(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void onSplitLayoutChangeRequested(ActivityManager.RunningTaskInfo runningTaskInfo, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void resetStashedFreeform(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void requestAffordanceAnim(ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizer
             public void preloadSplashScreenAppIcon(ActivityInfo activityInfo, int i, Configuration configuration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(activityInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(configuration, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(activityInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(configuration, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
-                }
-            }
-
-            @Override // android.window.ITaskOrganizer
-            public void minimizeAllDesktopTasks(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                try {
-                    obtain.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, null, 1);
-                } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

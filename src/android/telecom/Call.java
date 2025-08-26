@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.os.UserHandle;
-import android.telecom.Call;
 import android.telecom.InCallService;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -554,13 +553,13 @@ public final class Call {
             this.mTransmitStream.flush();
         }
 
-        public String read() {
+        public String read() throws IOException {
             try {
-                int read = this.mReceiveStream.read(this.mReadBuffer, 0, 1000);
-                if (read < 0) {
+                int i = this.mReceiveStream.read(this.mReadBuffer, 0, 1000);
+                if (i < 0) {
                     return null;
                 }
-                return new String(this.mReadBuffer, 0, read);
+                return new String(this.mReadBuffer, 0, i);
             } catch (IOException e) {
                 Log.w(this, "Exception encountered when reading from InputStreamReader: %s", e);
                 return null;
@@ -568,14 +567,14 @@ public final class Call {
         }
 
         public String readImmediately() throws IOException {
-            int read;
-            if (!this.mReceiveStream.ready() || (read = this.mReceiveStream.read(this.mReadBuffer, 0, 1000)) < 0) {
+            int i;
+            if (!this.mReceiveStream.ready() || (i = this.mReceiveStream.read(this.mReadBuffer, 0, 1000)) < 0) {
                 return null;
             }
-            return new String(this.mReadBuffer, 0, read);
+            return new String(this.mReadBuffer, 0, i);
         }
 
-        public void close() {
+        public void close() throws IOException {
             try {
                 this.mReceiveStream.close();
             } catch (IOException unused) {
@@ -774,11 +773,11 @@ public final class Call {
             this.mChildren.clear();
             Iterator<String> it = this.mChildrenIds.iterator();
             while (it.hasNext()) {
-                Call internalGetCallByTelecomId = this.mPhone.internalGetCallByTelecomId(it.next());
-                if (internalGetCallByTelecomId == null) {
+                Call callInternalGetCallByTelecomId = this.mPhone.internalGetCallByTelecomId(it.next());
+                if (callInternalGetCallByTelecomId == null) {
                     this.mChildrenCached = false;
                 } else {
-                    this.mChildren.add(internalGetCallByTelecomId);
+                    this.mChildren.add(callInternalGetCallByTelecomId);
                 }
             }
         }
@@ -938,16 +937,16 @@ public final class Call {
         return this.mTelecomCallId;
     }
 
-    final void internalUpdate(ParcelableCall parcelableCall, Map<String, Call> map) {
+    final void internalUpdate(ParcelableCall parcelableCall, Map<String, Call> map) throws IOException {
         boolean z;
         ParcelableCall parcelableCall2;
         boolean z2;
         boolean z3;
         VideoCallImpl videoCallImpl;
-        Details createFromParcelableCall = Details.createFromParcelableCall(parcelableCall);
-        boolean equals = Objects.equals(this.mDetails, createFromParcelableCall);
-        if (!equals) {
-            this.mDetails = createFromParcelableCall;
+        Details detailsCreateFromParcelableCall = Details.createFromParcelableCall(parcelableCall);
+        boolean zEquals = Objects.equals(this.mDetails, detailsCreateFromParcelableCall);
+        if (!zEquals) {
+            this.mDetails = detailsCreateFromParcelableCall;
         }
         if (this.mCannedTextResponses != null || parcelableCall.getCannedSmsResponses() == null || parcelableCall.getCannedSmsResponses().isEmpty()) {
             z = false;
@@ -986,19 +985,19 @@ public final class Call {
             this.mState = state;
         }
         String parentCallId = parcelableCall2.getParentCallId();
-        boolean equals2 = Objects.equals(this.mParentId, parentCallId);
-        if (!equals2) {
+        boolean zEquals2 = Objects.equals(this.mParentId, parentCallId);
+        if (!zEquals2) {
             this.mParentId = parentCallId;
         }
-        boolean equals3 = Objects.equals(parcelableCall2.getChildCallIds(), this.mChildrenIds);
-        if (!equals3) {
+        boolean zEquals3 = Objects.equals(parcelableCall2.getChildCallIds(), this.mChildrenIds);
+        if (!zEquals3) {
             this.mChildrenIds.clear();
             this.mChildrenIds.addAll(parcelableCall2.getChildCallIds());
             this.mChildrenCached = false;
         }
         String activeChildCallId = parcelableCall2.getActiveChildCallId();
-        boolean equals4 = Objects.equals(activeChildCallId, this.mActiveGenericConferenceChild);
-        if (!equals4) {
+        boolean zEquals4 = Objects.equals(activeChildCallId, this.mActiveGenericConferenceChild);
+        if (!zEquals4) {
             this.mActiveGenericConferenceChild = activeChildCallId;
         }
         List<String> conferenceableCallIds = parcelableCall2.getConferenceableCallIds();
@@ -1040,7 +1039,7 @@ public final class Call {
         if (z5) {
             fireStateChanged(this.mState);
         }
-        if (!equals) {
+        if (!zEquals) {
             fireDetailsChanged(this.mDetails);
         }
         if (z) {
@@ -1049,10 +1048,10 @@ public final class Call {
         if (z4) {
             fireVideoCallChanged(this.mVideoCallImpl);
         }
-        if (!equals2) {
+        if (!zEquals2) {
             fireParentChanged(getParent());
         }
-        if (!equals3 || !equals4) {
+        if (!zEquals3 || !zEquals4) {
             fireChildrenChanged(getChildren());
         }
         if (z2) {
@@ -1095,7 +1094,7 @@ public final class Call {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.Call$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Call.Callback.this.onRttRequest(this, i);
+                    callback.onRttRequest(this, i);
                 }
             });
         }
@@ -1107,7 +1106,7 @@ public final class Call {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.Call$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Call.Callback.this.onRttInitiationFailure(this, i);
+                    callback.onRttInitiationFailure(this, i);
                 }
             });
         }
@@ -1119,7 +1118,7 @@ public final class Call {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.Call$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Call.Callback.this.onHandoverFailed(this, i);
+                    callback.onHandoverFailed(this, i);
                 }
             });
         }
@@ -1131,7 +1130,7 @@ public final class Call {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.Call$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Call.Callback.this.onHandoverComplete(this);
+                    callback.onHandoverComplete(this);
                 }
             });
         }
@@ -1230,7 +1229,7 @@ public final class Call {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.Call.8
                 @Override // java.lang.Runnable
                 public void run() {
-                    boolean isEmpty;
+                    boolean zIsEmpty;
                     try {
                         callback.onCallDestroyed(this);
                         e = null;
@@ -1239,9 +1238,9 @@ public final class Call {
                     }
                     synchronized (Call.this) {
                         Call.this.mCallbackRecords.remove(callbackRecord);
-                        isEmpty = Call.this.mCallbackRecords.isEmpty();
+                        zIsEmpty = Call.this.mCallbackRecords.isEmpty();
                     }
-                    if (isEmpty) {
+                    if (zIsEmpty) {
                         Call.this.mPhone.internalRemoveCall(this);
                     }
                     if (e != null) {
@@ -1282,7 +1281,7 @@ public final class Call {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.Call$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Call.Callback.this.onRttStatusChanged(this, z, rttCall);
+                    callback.onRttStatusChanged(this, z, rttCall);
                 }
             });
         }
@@ -1294,7 +1293,7 @@ public final class Call {
             callbackRecord.getHandler().post(new Runnable() { // from class: android.telecom.Call$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Call.Callback.this.onRttModeChanged(this, i);
+                    callback.onRttModeChanged(this, i);
                 }
             });
         }

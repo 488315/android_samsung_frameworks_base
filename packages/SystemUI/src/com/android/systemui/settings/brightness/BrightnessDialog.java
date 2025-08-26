@@ -3,6 +3,7 @@ package com.android.systemui.settings.brightness;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -39,7 +40,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BrightnessDialog extends Activity {
     static final int DIALOG_TIMEOUT_MILLIS = 3000;
@@ -93,7 +93,7 @@ public class BrightnessDialog extends Activity {
     }
 
     @Override // android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         boolean z;
         super.onCreate(bundle);
         Window window = getWindow();
@@ -132,16 +132,16 @@ public class BrightnessDialog extends Activity {
             return;
         }
         setContentView(R.layout.sec_brightness_mirror_container);
-        View findViewById = findViewById(R.id.brightness_mirror_container);
-        FrameLayout frameLayout = (FrameLayout) findViewById;
-        BrightnessSliderController create = ((BrightnessSliderController.BrightnessSliderControllerFactory) this.mToggleSliderFactory).create(this, frameLayout);
-        create.init();
-        frameLayout.addView(create.getRootView(), -1, -1);
-        this.mBrightnessController = this.mBrightnessControllerFactory.create(create);
+        View viewFindViewById = findViewById(R.id.brightness_mirror_container);
+        FrameLayout frameLayout = (FrameLayout) viewFindViewById;
+        BrightnessSliderController brightnessSliderControllerCreate = ((BrightnessSliderController.BrightnessSliderControllerFactory) this.mToggleSliderFactory).create(this, frameLayout);
+        brightnessSliderControllerCreate.init();
+        frameLayout.addView(brightnessSliderControllerCreate.getRootView(), -1, -1);
+        this.mBrightnessController = this.mBrightnessControllerFactory.create(brightnessSliderControllerCreate);
         SecQSPanelResourcePicker secQSPanelResourcePicker = (SecQSPanelResourcePicker) secBrightnessDialogController.resourcePicker$delegate.getValue();
         BrightnessDialog brightnessDialog = secBrightnessDialogController.dialog;
         int brightnessBarHeight = secQSPanelResourcePicker.getBrightnessBarHeight(brightnessDialog.getApplicationContext());
-        SecBrightnessSliderController secBrightnessSliderController = create.mSecBrightnessSliderController;
+        SecBrightnessSliderController secBrightnessSliderController = brightnessSliderControllerCreate.mSecBrightnessSliderController;
         if (secBrightnessSliderController != null) {
             secBrightnessSliderController.updateSliderHeight(brightnessBarHeight);
         }
@@ -149,9 +149,10 @@ public class BrightnessDialog extends Activity {
         if (secBrightnessController != null) {
             secBrightnessController.brightnessDialog = brightnessDialog;
         }
+        viewFindViewById.findViewById(R.id.brightness_detail).setVisibility(8);
         Configuration configuration = getResources().getConfiguration();
-        findViewById.setVisibility(0);
-        ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) findViewById.getLayoutParams();
+        viewFindViewById.setVisibility(0);
+        ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) viewFindViewById.getLayoutParams();
         final int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.notification_side_paddings);
         marginLayoutParams.leftMargin = dimensionPixelSize;
         marginLayoutParams.rightMargin = dimensionPixelSize;
@@ -165,9 +166,9 @@ public class BrightnessDialog extends Activity {
         WindowMetrics currentWindowMetrics = getWindowManager().getCurrentWindowMetrics();
         int i2 = currentWindowMetrics.getWindowInsets().getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars() | WindowInsets.Type.displayCutout()).right;
         currentWindowMetrics.getBounds().width();
-        findViewById.setLayoutParams(marginLayoutParams);
+        viewFindViewById.setLayoutParams(marginLayoutParams);
         final Rect rect = new Rect();
-        findViewById.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.settings.brightness.BrightnessDialog$$ExternalSyntheticLambda1
+        viewFindViewById.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.settings.brightness.BrightnessDialog$$ExternalSyntheticLambda1
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10) {
                 Rect rect2 = rect;
@@ -181,13 +182,13 @@ public class BrightnessDialog extends Activity {
         if (((Boolean) shadeInteractorImpl.baseShadeInteractor.isQsExpanded().getValue()).booleanValue()) {
             finish();
         }
-        JavaAdapterKt.collectFlow(findViewById, shadeInteractorImpl.baseShadeInteractor.isQsExpanded(), new Consumer() { // from class: com.android.systemui.settings.brightness.BrightnessDialog$$ExternalSyntheticLambda0
+        JavaAdapterKt.collectFlow(viewFindViewById, shadeInteractorImpl.baseShadeInteractor.isQsExpanded(), new Consumer() { // from class: com.android.systemui.settings.brightness.BrightnessDialog$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                BrightnessDialog brightnessDialog2 = BrightnessDialog.this;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                BrightnessDialog brightnessDialog2 = this.f$0;
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 int i3 = BrightnessDialog.DIALOG_TIMEOUT_MILLIS;
-                if (booleanValue) {
+                if (zBooleanValue) {
                     brightnessDialog2.finish();
                 } else {
                     brightnessDialog2.getClass();
@@ -242,7 +243,7 @@ public class BrightnessDialog extends Activity {
 
                     @Override // android.os.CountDownTimer
                     public final void onFinish() {
-                        SecBrightnessDialogController.this.dialog.finish();
+                        secBrightnessDialogController.dialog.finish();
                     }
 
                     @Override // android.os.CountDownTimer

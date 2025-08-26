@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipTransitionState {
     public boolean mInSwipePipToHomeTransition;
@@ -33,17 +32,17 @@ public class PipTransitionState {
         if (this.mState != i) {
             for (int i2 = 0; i2 < ((ArrayList) this.mOnPipTransitionStateChangedListeners).size(); i2++) {
                 PipController$$ExternalSyntheticLambda9 pipController$$ExternalSyntheticLambda9 = (PipController$$ExternalSyntheticLambda9) ((ArrayList) this.mOnPipTransitionStateChangedListeners).get(i2);
-                boolean isInPip = isInPip(this.mState);
-                boolean isInPip2 = isInPip(i);
+                boolean zIsInPip = isInPip(this.mState);
+                boolean zIsInPip2 = isInPip(i);
                 PipController pipController = pipController$$ExternalSyntheticLambda9.f$0;
-                if (isInPip2 != isInPip) {
+                if (zIsInPip2 != zIsInPip) {
                     ArrayList arrayList = (ArrayList) pipController.mOnIsInPipStateChangedListeners;
                     int size = arrayList.size();
                     int i3 = 0;
                     while (i3 < size) {
                         Object obj = arrayList.get(i3);
                         i3++;
-                        ((Consumer) obj).accept(Boolean.valueOf(isInPip2));
+                        ((Consumer) obj).accept(Boolean.valueOf(zIsInPip2));
                     }
                 } else {
                     int i4 = PipController.$r8$clinit;

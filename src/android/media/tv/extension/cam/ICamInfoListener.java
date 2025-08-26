@@ -59,9 +59,9 @@ public interface ICamInfoListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamInfoListener");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICamInfoListener)) {
-                return (ICamInfoListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamInfoListener");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICamInfoListener)) {
+                return (ICamInfoListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,20 +94,20 @@ public interface ICamInfoListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onCamInfoChanged(readInt, bundle);
+                onCamInfoChanged(i3, bundle);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onSlotInfoChanged(readInt2, bundle2);
+                onSlotInfoChanged(i4, bundle2);
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onNewTypeCamInsert(readInt3, bundle3);
+                onNewTypeCamInsert(i5, bundle3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -132,40 +132,40 @@ public interface ICamInfoListener extends IInterface {
 
             @Override // android.media.tv.extension.cam.ICamInfoListener
             public void onCamInfoChanged(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamInfoListener");
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamInfoListener");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamInfoListener
             public void onSlotInfoChanged(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamInfoListener");
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamInfoListener");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamInfoListener
             public void onNewTypeCamInsert(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamInfoListener");
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamInfoListener");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class UdfpsAccessibilityOverlayViewModel$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -40,9 +39,9 @@ public final class UdfpsAccessibilityOverlayViewModel$special$$inlined$flatMapLa
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            Flow isVisibleWhenTouchExplorationEnabled = ((Boolean) this.L$1).booleanValue() ? this.this$0.isVisibleWhenTouchExplorationEnabled() : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
+            Flow flowIsVisibleWhenTouchExplorationEnabled = ((Boolean) this.L$1).booleanValue() ? this.this$0.isVisibleWhenTouchExplorationEnabled() : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, isVisibleWhenTouchExplorationEnabled, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowIsVisibleWhenTouchExplorationEnabled, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

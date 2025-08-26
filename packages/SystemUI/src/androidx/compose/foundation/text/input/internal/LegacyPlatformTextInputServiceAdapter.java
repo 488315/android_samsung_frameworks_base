@@ -7,12 +7,10 @@ import androidx.compose.ui.platform.DelegatingSoftwareKeyboardController;
 import androidx.compose.ui.platform.SoftwareKeyboardController;
 import androidx.compose.ui.text.input.PlatformTextInputService;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LegacyPlatformTextInputServiceAdapter implements PlatformTextInputService {
     public LegacyAdaptingPlatformTextInputModifierNode textInputModifierNode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface LegacyPlatformTextInputNode {
     }
 

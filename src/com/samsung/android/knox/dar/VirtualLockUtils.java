@@ -92,13 +92,13 @@ public class VirtualLockUtils {
     private List<Integer> getVirtualUserList() {
         int i;
         ArrayList arrayList = new ArrayList();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            File[] listFiles = new File(BASE_DIR).listFiles();
-            if (listFiles == null) {
+            File[] fileArrListFiles = new File(BASE_DIR).listFiles();
+            if (fileArrListFiles == null) {
                 return arrayList;
             }
-            for (File file : listFiles) {
+            for (File file : fileArrListFiles) {
                 if (file.isDirectory()) {
                     try {
                         i = Integer.parseInt(file.getName());
@@ -112,7 +112,7 @@ public class VirtualLockUtils {
             }
             return arrayList;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

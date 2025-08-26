@@ -12,7 +12,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class PrivacyChipRepositoryImpl$privacyItems$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -47,7 +46,7 @@ final class PrivacyChipRepositoryImpl$privacyItems$1 extends SuspendLambda imple
             PrivacyItemController.Callback callback = new PrivacyItemController.Callback() { // from class: com.android.systemui.shade.data.repository.PrivacyChipRepositoryImpl$privacyItems$1$callback$1
                 @Override // com.android.systemui.privacy.PrivacyItemController.Callback
                 public final void onPrivacyItemsChanged(List list) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(list);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(list);
                 }
             };
             this.this$0.privacyItemController.addCallback(callback);

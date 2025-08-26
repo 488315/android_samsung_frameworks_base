@@ -48,7 +48,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.reflect.KProperty;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ModalBottomSheet_androidKt {
     public static final void ModalBottomSheetDialog(final Function0 function0, final ModalBottomSheetProperties modalBottomSheetProperties, final Animatable animatable, final Function2 function2, Composer composer, final int i) {
@@ -83,26 +82,26 @@ public abstract class ModalBottomSheet_androidKt {
             View view = (View) composerImpl.consume(AndroidCompositionLocals_androidKt.LocalView);
             Density density = (Density) composerImpl.consume(CompositionLocalsKt.LocalDensity);
             LayoutDirection layoutDirection2 = (LayoutDirection) composerImpl.consume(CompositionLocalsKt.LocalLayoutDirection);
-            ComposerImpl.CompositionContextImpl rememberCompositionContext = ComposablesKt.rememberCompositionContext(composerImpl);
-            final MutableState rememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function2, composerImpl);
+            ComposerImpl.CompositionContextImpl compositionContextImplRememberCompositionContext = ComposablesKt.rememberCompositionContext(composerImpl);
+            final MutableState mutableStateRememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function2, composerImpl);
             UUID uuid = (UUID) RememberSaveableKt.rememberSaveable(new Object[0], null, null, new Function0() { // from class: androidx.compose.material3.ModalBottomSheet_androidKt$ModalBottomSheetDialog$dialogId$1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     return UUID.randomUUID();
                 }
             }, composerImpl, 3072, 6);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
+            if (objRememberedValue == composer$Companion$Empty$1) {
                 CompositionScopedCoroutineScopeCanceller compositionScopedCoroutineScopeCanceller = new CompositionScopedCoroutineScopeCanceller(EffectsKt.createCompositionCoroutineScope(EmptyCoroutineContext.INSTANCE, composerImpl));
                 composerImpl.updateRememberedValue(compositionScopedCoroutineScopeCanceller);
-                rememberedValue = compositionScopedCoroutineScopeCanceller;
+                objRememberedValue = compositionScopedCoroutineScopeCanceller;
             }
-            CoroutineScope coroutineScope = ((CompositionScopedCoroutineScopeCanceller) rememberedValue).coroutineScope;
-            boolean changed = composerImpl.changed(view) | composerImpl.changed(density);
-            Object rememberedValue2 = composerImpl.rememberedValue();
-            if (changed || rememberedValue2 == composer$Companion$Empty$1) {
+            CoroutineScope coroutineScope = ((CompositionScopedCoroutineScopeCanceller) objRememberedValue).coroutineScope;
+            boolean zChanged = composerImpl.changed(view) | composerImpl.changed(density);
+            Object objRememberedValue2 = composerImpl.rememberedValue();
+            if (zChanged || objRememberedValue2 == composer$Companion$Empty$1) {
                 i3 = 32;
                 i4 = i2;
                 layoutDirection = layoutDirection2;
@@ -115,68 +114,72 @@ public abstract class ModalBottomSheet_androidKt {
                         super(2);
                     }
 
+                    /* JADX WARN: Removed duplicated region for block: B:8:0x001c  */
                     @Override // kotlin.jvm.functions.Function2
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
                     public final Object invoke(Object obj2, Object obj3) {
                         Composer composer2 = (Composer) obj2;
                         if ((((Number) obj3).intValue() & 3) == 2) {
                             ComposerImpl composerImpl2 = (ComposerImpl) composer2;
                             if (composerImpl2.getSkipping()) {
                                 composerImpl2.skipToGroupEnd();
-                                return Unit.INSTANCE;
+                            } else {
+                                if (ComposerKt.isTraceInProgress()) {
+                                    ComposerKt.traceEventStart("androidx.compose.material3.ModalBottomSheetDialog.<anonymous>.<anonymous>.<anonymous> (ModalBottomSheet.android.kt:311)");
+                                }
+                                Modifier modifierSemantics = SemanticsModifierKt.semantics(Modifier.Companion, false, new Function1() { // from class: androidx.compose.material3.ModalBottomSheet_androidKt$ModalBottomSheetDialog$dialog$1$1$1.1
+                                    @Override // kotlin.jvm.functions.Function1
+                                    /* renamed from: invoke */
+                                    public final Object mo781invoke(Object obj4) {
+                                        KProperty[] kPropertyArr = SemanticsPropertiesKt.$$delegatedProperties;
+                                        SemanticsProperties.INSTANCE.getClass();
+                                        SemanticsPropertyKey semanticsPropertyKey = SemanticsProperties.IsDialog;
+                                        Unit unit = Unit.INSTANCE;
+                                        ((SemanticsConfiguration) ((SemanticsPropertyReceiver) obj4)).set(semanticsPropertyKey, unit);
+                                        return unit;
+                                    }
+                                });
+                                State<Function2> state = mutableStateRememberUpdatedState;
+                                Alignment.Companion.getClass();
+                                MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
+                                int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composer2);
+                                ComposerImpl composerImpl3 = (ComposerImpl) composer2;
+                                PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl3.currentCompositionLocalScope();
+                                Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composer2, modifierSemantics);
+                                ComposeUiNode.Companion.getClass();
+                                Function0 function02 = ComposeUiNode.Companion.Constructor;
+                                if (composerImpl3.applier == null) {
+                                    ComposablesKt.invalidApplier();
+                                    throw null;
+                                }
+                                composerImpl3.startReusableNode();
+                                if (composerImpl3.inserting) {
+                                    composerImpl3.createNode(function02);
+                                } else {
+                                    composerImpl3.useNode();
+                                }
+                                Updater.m337setimpl(composer2, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+                                Updater.m337setimpl(composer2, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+                                Function2 function22 = ComposeUiNode.Companion.SetCompositeKeyHash;
+                                if (composerImpl3.inserting || !Intrinsics.areEqual(composerImpl3.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
+                                    AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl3, currentCompositeKeyHash, function22);
+                                }
+                                Updater.m337setimpl(composer2, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
+                                BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
+                                ((Function2) state.getValue()).invoke(composer2, 0);
+                                composerImpl3.end(true);
+                                if (ComposerKt.isTraceInProgress()) {
+                                    ComposerKt.traceEventEnd();
+                                }
                             }
-                        }
-                        if (ComposerKt.isTraceInProgress()) {
-                            ComposerKt.traceEventStart("androidx.compose.material3.ModalBottomSheetDialog.<anonymous>.<anonymous>.<anonymous> (ModalBottomSheet.android.kt:311)");
-                        }
-                        Modifier semantics = SemanticsModifierKt.semantics(Modifier.Companion, false, new Function1() { // from class: androidx.compose.material3.ModalBottomSheet_androidKt$ModalBottomSheetDialog$dialog$1$1$1.1
-                            @Override // kotlin.jvm.functions.Function1
-                            /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj4) {
-                                KProperty[] kPropertyArr = SemanticsPropertiesKt.$$delegatedProperties;
-                                SemanticsProperties.INSTANCE.getClass();
-                                SemanticsPropertyKey semanticsPropertyKey = SemanticsProperties.IsDialog;
-                                Unit unit = Unit.INSTANCE;
-                                ((SemanticsConfiguration) ((SemanticsPropertyReceiver) obj4)).set(semanticsPropertyKey, unit);
-                                return unit;
-                            }
-                        });
-                        State<Function2> state = rememberUpdatedState;
-                        Alignment.Companion.getClass();
-                        MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
-                        int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composer2);
-                        ComposerImpl composerImpl3 = (ComposerImpl) composer2;
-                        PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl3.currentCompositionLocalScope();
-                        Modifier materializeModifier = ComposedModifierKt.materializeModifier(composer2, semantics);
-                        ComposeUiNode.Companion.getClass();
-                        Function0 function02 = ComposeUiNode.Companion.Constructor;
-                        if (composerImpl3.applier == null) {
-                            ComposablesKt.invalidApplier();
-                            throw null;
-                        }
-                        composerImpl3.startReusableNode();
-                        if (composerImpl3.inserting) {
-                            composerImpl3.createNode(function02);
-                        } else {
-                            composerImpl3.useNode();
-                        }
-                        Updater.m336setimpl(composer2, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-                        Updater.m336setimpl(composer2, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
-                        Function2 function22 = ComposeUiNode.Companion.SetCompositeKeyHash;
-                        if (composerImpl3.inserting || !Intrinsics.areEqual(composerImpl3.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
-                            AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl3, currentCompositeKeyHash, function22);
-                        }
-                        Updater.m336setimpl(composer2, materializeModifier, ComposeUiNode.Companion.SetModifier);
-                        BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
-                        ((Function2) state.getValue()).invoke(composer2, 0);
-                        composerImpl3.end(true);
-                        if (ComposerKt.isTraceInProgress()) {
-                            ComposerKt.traceEventEnd();
                         }
                         return Unit.INSTANCE;
                     }
                 });
                 ModalBottomSheetDialogLayout modalBottomSheetDialogLayout = modalBottomSheetDialogWrapper.dialogLayout;
-                modalBottomSheetDialogLayout.setParentCompositionContext(rememberCompositionContext);
+                modalBottomSheetDialogLayout.setParentCompositionContext(compositionContextImplRememberCompositionContext);
                 ((SnapshotMutableStateImpl) modalBottomSheetDialogLayout.content$delegate).setValue(composableLambdaImpl);
                 modalBottomSheetDialogLayout.shouldCreateCompositionOnAttachedToWindow = true;
                 modalBottomSheetDialogLayout.createComposition();
@@ -184,42 +187,42 @@ public abstract class ModalBottomSheet_androidKt {
                 obj = modalBottomSheetDialogWrapper;
             } else {
                 i4 = i2;
-                obj = rememberedValue2;
+                obj = objRememberedValue2;
                 i3 = 32;
                 layoutDirection = layoutDirection2;
                 i5 = 4;
             }
             final ModalBottomSheetDialogWrapper modalBottomSheetDialogWrapper2 = (ModalBottomSheetDialogWrapper) obj;
-            boolean changedInstance = composerImpl.changedInstance(modalBottomSheetDialogWrapper2);
-            Object rememberedValue3 = composerImpl.rememberedValue();
-            if (changedInstance || rememberedValue3 == composer$Companion$Empty$1) {
-                rememberedValue3 = new Function1() { // from class: androidx.compose.material3.ModalBottomSheet_androidKt$ModalBottomSheetDialog$1$1
+            boolean zChangedInstance = composerImpl.changedInstance(modalBottomSheetDialogWrapper2);
+            Object objRememberedValue3 = composerImpl.rememberedValue();
+            if (zChangedInstance || objRememberedValue3 == composer$Companion$Empty$1) {
+                objRememberedValue3 = new Function1() { // from class: androidx.compose.material3.ModalBottomSheet_androidKt$ModalBottomSheetDialog$1$1
                     {
                         super(1);
                     }
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
-                        ModalBottomSheetDialogWrapper.this.show();
-                        final ModalBottomSheetDialogWrapper modalBottomSheetDialogWrapper3 = ModalBottomSheetDialogWrapper.this;
+                    public final Object mo781invoke(Object obj2) {
+                        modalBottomSheetDialogWrapper2.show();
+                        final ModalBottomSheetDialogWrapper modalBottomSheetDialogWrapper3 = modalBottomSheetDialogWrapper2;
                         return new DisposableEffectResult() { // from class: androidx.compose.material3.ModalBottomSheet_androidKt$ModalBottomSheetDialog$1$1$invoke$$inlined$onDispose$1
                             @Override // androidx.compose.runtime.DisposableEffectResult
                             public final void dispose() {
-                                ModalBottomSheetDialogWrapper modalBottomSheetDialogWrapper4 = ModalBottomSheetDialogWrapper.this;
+                                ModalBottomSheetDialogWrapper modalBottomSheetDialogWrapper4 = modalBottomSheetDialogWrapper3;
                                 modalBottomSheetDialogWrapper4.dismiss();
                                 modalBottomSheetDialogWrapper4.dialogLayout.disposeComposition();
                             }
                         };
                     }
                 };
-                composerImpl.updateRememberedValue(rememberedValue3);
+                composerImpl.updateRememberedValue(objRememberedValue3);
             }
-            EffectsKt.DisposableEffect(modalBottomSheetDialogWrapper2, (Function1) rememberedValue3, composerImpl);
-            boolean changedInstance2 = composerImpl.changedInstance(modalBottomSheetDialogWrapper2) | ((i4 & 14) == i5) | ((i4 & 112) == i3) | composerImpl.changed(layoutDirection);
-            Object rememberedValue4 = composerImpl.rememberedValue();
-            if (changedInstance2 || rememberedValue4 == composer$Companion$Empty$1) {
-                rememberedValue4 = new Function0() { // from class: androidx.compose.material3.ModalBottomSheet_androidKt$ModalBottomSheetDialog$2$1
+            EffectsKt.DisposableEffect(modalBottomSheetDialogWrapper2, (Function1) objRememberedValue3, composerImpl);
+            boolean zChangedInstance2 = composerImpl.changedInstance(modalBottomSheetDialogWrapper2) | ((i4 & 14) == i5) | ((i4 & 112) == i3) | composerImpl.changed(layoutDirection);
+            Object objRememberedValue4 = composerImpl.rememberedValue();
+            if (zChangedInstance2 || objRememberedValue4 == composer$Companion$Empty$1) {
+                objRememberedValue4 = new Function0() { // from class: androidx.compose.material3.ModalBottomSheet_androidKt$ModalBottomSheetDialog$2$1
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
@@ -227,20 +230,20 @@ public abstract class ModalBottomSheet_androidKt {
 
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        ModalBottomSheetDialogWrapper.this.updateParameters(function0, modalBottomSheetProperties, layoutDirection);
+                        modalBottomSheetDialogWrapper2.updateParameters(function0, modalBottomSheetProperties, layoutDirection);
                         return Unit.INSTANCE;
                     }
                 };
-                composerImpl.updateRememberedValue(rememberedValue4);
+                composerImpl.updateRememberedValue(objRememberedValue4);
             }
-            EffectsKt.SideEffect((Function0) rememberedValue4, composerImpl);
+            EffectsKt.SideEffect((Function0) objRememberedValue4, composerImpl);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.material3.ModalBottomSheet_androidKt$ModalBottomSheetDialog$3
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.material3.ModalBottomSheet_androidKt.ModalBottomSheetDialog.3
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -249,7 +252,7 @@ public abstract class ModalBottomSheet_androidKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj2, Object obj3) {
                     ((Number) obj3).intValue();
-                    ModalBottomSheet_androidKt.ModalBottomSheetDialog(Function0.this, modalBottomSheetProperties, animatable, function2, (Composer) obj2, RecomposeScopeImplKt.updateChangedFlags(i | 1));
+                    ModalBottomSheet_androidKt.ModalBottomSheetDialog(function0, modalBottomSheetProperties, animatable, function2, (Composer) obj2, RecomposeScopeImplKt.updateChangedFlags(i | 1));
                     return Unit.INSTANCE;
                 }
             };

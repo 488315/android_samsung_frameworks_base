@@ -14,7 +14,6 @@ import com.airbnb.lottie.value.Keyframe;
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Layer {
     public final BlurEffect blurEffect;
@@ -42,7 +41,6 @@ public class Layer {
     public final float timeStretch;
     public final AnimatableTransform transform;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum LayerType {
         PRE_COMP,
         SOLID,
@@ -53,7 +51,6 @@ public class Layer {
         UNKNOWN
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum MatteType {
         NONE,
         ADD,
@@ -93,44 +90,44 @@ public class Layer {
 
     public final String toString(String str) {
         int i;
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
-        m.append(this.layerName);
-        m.append("\n");
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
+        sbM.append(this.layerName);
+        sbM.append("\n");
         LottieComposition lottieComposition = this.composition;
         Layer layer = (Layer) lottieComposition.layerMap.get(this.parentId);
         if (layer != null) {
-            m.append("\t\tParents: ");
-            m.append(layer.layerName);
+            sbM.append("\t\tParents: ");
+            sbM.append(layer.layerName);
             for (Layer layer2 = (Layer) lottieComposition.layerMap.get(layer.parentId); layer2 != null; layer2 = (Layer) lottieComposition.layerMap.get(layer2.parentId)) {
-                m.append("->");
-                m.append(layer2.layerName);
+                sbM.append("->");
+                sbM.append(layer2.layerName);
             }
-            m.append(str);
-            m.append("\n");
+            sbM.append(str);
+            sbM.append("\n");
         }
         if (!this.masks.isEmpty()) {
-            m.append(str);
-            m.append("\tMasks: ");
-            m.append(this.masks.size());
-            m.append("\n");
+            sbM.append(str);
+            sbM.append("\tMasks: ");
+            sbM.append(this.masks.size());
+            sbM.append("\n");
         }
         int i2 = this.solidWidth;
         if (i2 != 0 && (i = this.solidHeight) != 0) {
-            m.append(str);
-            m.append("\tBackground: ");
-            m.append(String.format(Locale.US, "%dx%d %X\n", Integer.valueOf(i2), Integer.valueOf(i), Integer.valueOf(this.solidColor)));
+            sbM.append(str);
+            sbM.append("\tBackground: ");
+            sbM.append(String.format(Locale.US, "%dx%d %X\n", Integer.valueOf(i2), Integer.valueOf(i), Integer.valueOf(this.solidColor)));
         }
         if (!this.shapes.isEmpty()) {
-            m.append(str);
-            m.append("\tShapes:\n");
+            sbM.append(str);
+            sbM.append("\tShapes:\n");
             for (Object obj : this.shapes) {
-                m.append(str);
-                m.append("\t\t");
-                m.append(obj);
-                m.append("\n");
+                sbM.append(str);
+                sbM.append("\t\t");
+                sbM.append(obj);
+                sbM.append("\n");
             }
         }
-        return m.toString();
+        return sbM.toString();
     }
 
     public final String toString() {

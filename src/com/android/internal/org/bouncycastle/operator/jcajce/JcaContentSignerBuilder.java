@@ -29,6 +29,7 @@ import com.android.internal.protolog.PerfettoProtoLogImpl;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
 import java.security.PrivateKey;
 import java.security.Provider;
 import java.security.SecureRandom;
@@ -94,7 +95,7 @@ public class JcaContentSignerBuilder {
         return this;
     }
 
-    public ContentSigner build(PrivateKey privateKey) throws OperatorCreationException {
+    public ContentSigner build(PrivateKey privateKey) throws OperatorCreationException, IOException, InvalidKeyException {
         if (privateKey instanceof CompositePrivateKey) {
             return buildComposite((CompositePrivateKey) privateKey);
         }
@@ -109,22 +110,22 @@ public class JcaContentSignerBuilder {
                 }
             }
             AlgorithmIdentifier algorithmIdentifier = this.sigAlgId;
-            Signature createSignature = this.helper.createSignature(algorithmIdentifier);
+            Signature signatureCreateSignature = this.helper.createSignature(algorithmIdentifier);
             SecureRandom secureRandom = this.random;
             if (secureRandom != null) {
-                createSignature.initSign(privateKey, secureRandom);
+                signatureCreateSignature.initSign(privateKey, secureRandom);
             } else {
-                createSignature.initSign(privateKey);
+                signatureCreateSignature.initSign(privateKey);
             }
-            return new ContentSigner(this, createSignature, algorithmIdentifier) { // from class: com.android.internal.org.bouncycastle.operator.jcajce.JcaContentSignerBuilder.1
+            return new ContentSigner(this, signatureCreateSignature, algorithmIdentifier) { // from class: com.android.internal.org.bouncycastle.operator.jcajce.JcaContentSignerBuilder.1
                 private OutputStream stream;
                 final /* synthetic */ Signature val$sig;
                 final /* synthetic */ AlgorithmIdentifier val$signatureAlgId;
 
                 {
-                    this.val$sig = createSignature;
+                    this.val$sig = signatureCreateSignature;
                     this.val$signatureAlgId = algorithmIdentifier;
-                    this.stream = OutputStreamFactory.createStream(createSignature);
+                    this.stream = OutputStreamFactory.createStream(signatureCreateSignature);
                 }
 
                 @Override // com.android.internal.org.bouncycastle.operator.ContentSigner
@@ -151,37 +152,37 @@ public class JcaContentSignerBuilder {
         }
     }
 
-    private ContentSigner buildComposite(CompositePrivateKey compositePrivateKey) throws OperatorCreationException {
+    private ContentSigner buildComposite(CompositePrivateKey compositePrivateKey) throws OperatorCreationException, IOException, InvalidKeyException {
         try {
             List<PrivateKey> privateKeys = compositePrivateKey.getPrivateKeys();
             ASN1Sequence aSN1Sequence = ASN1Sequence.getInstance(this.sigAlgId.getParameters());
             int size = aSN1Sequence.size();
             Signature[] signatureArr = new Signature[size];
             for (int i = 0; i != aSN1Sequence.size(); i++) {
-                Signature createSignature = this.helper.createSignature(AlgorithmIdentifier.getInstance(aSN1Sequence.getObjectAt(i)));
-                signatureArr[i] = createSignature;
+                Signature signatureCreateSignature = this.helper.createSignature(AlgorithmIdentifier.getInstance(aSN1Sequence.getObjectAt(i)));
+                signatureArr[i] = signatureCreateSignature;
                 if (this.random != null) {
-                    createSignature.initSign(privateKeys.get(i), this.random);
+                    signatureCreateSignature.initSign(privateKeys.get(i), this.random);
                 } else {
-                    createSignature.initSign(privateKeys.get(i));
+                    signatureCreateSignature.initSign(privateKeys.get(i));
                 }
             }
-            OutputStream createStream = OutputStreamFactory.createStream(signatureArr[0]);
+            OutputStream outputStreamCreateStream = OutputStreamFactory.createStream(signatureArr[0]);
             int i2 = 1;
             while (i2 != size) {
-                TeeOutputStream teeOutputStream = new TeeOutputStream(createStream, OutputStreamFactory.createStream(signatureArr[i2]));
+                TeeOutputStream teeOutputStream = new TeeOutputStream(outputStreamCreateStream, OutputStreamFactory.createStream(signatureArr[i2]));
                 i2++;
-                createStream = teeOutputStream;
+                outputStreamCreateStream = teeOutputStream;
             }
-            return new ContentSigner(createStream, signatureArr) { // from class: com.android.internal.org.bouncycastle.operator.jcajce.JcaContentSignerBuilder.2
+            return new ContentSigner(outputStreamCreateStream, signatureArr) { // from class: com.android.internal.org.bouncycastle.operator.jcajce.JcaContentSignerBuilder.2
                 OutputStream stream;
                 final /* synthetic */ OutputStream val$sigStream;
                 final /* synthetic */ Signature[] val$sigs;
 
                 {
-                    this.val$sigStream = createStream;
+                    this.val$sigStream = outputStreamCreateStream;
                     this.val$sigs = signatureArr;
-                    this.stream = createStream;
+                    this.stream = outputStreamCreateStream;
                 }
 
                 @Override // com.android.internal.org.bouncycastle.operator.ContentSigner
@@ -216,15 +217,15 @@ public class JcaContentSignerBuilder {
 
     private static RSASSAPSSparams createPSSParams(PSSParameterSpec pSSParameterSpec) {
         DefaultDigestAlgorithmIdentifierFinder defaultDigestAlgorithmIdentifierFinder = new DefaultDigestAlgorithmIdentifierFinder();
-        AlgorithmIdentifier find = defaultDigestAlgorithmIdentifierFinder.find(pSSParameterSpec.getDigestAlgorithm());
-        if (find.getParameters() == null) {
-            find = new AlgorithmIdentifier(find.getAlgorithm(), DERNull.INSTANCE);
+        AlgorithmIdentifier algorithmIdentifierFind = defaultDigestAlgorithmIdentifierFinder.find(pSSParameterSpec.getDigestAlgorithm());
+        if (algorithmIdentifierFind.getParameters() == null) {
+            algorithmIdentifierFind = new AlgorithmIdentifier(algorithmIdentifierFind.getAlgorithm(), DERNull.INSTANCE);
         }
-        AlgorithmIdentifier find2 = defaultDigestAlgorithmIdentifierFinder.find(((MGF1ParameterSpec) pSSParameterSpec.getMGFParameters()).getDigestAlgorithm());
-        if (find2.getParameters() == null) {
-            find2 = new AlgorithmIdentifier(find2.getAlgorithm(), DERNull.INSTANCE);
+        AlgorithmIdentifier algorithmIdentifierFind2 = defaultDigestAlgorithmIdentifierFinder.find(((MGF1ParameterSpec) pSSParameterSpec.getMGFParameters()).getDigestAlgorithm());
+        if (algorithmIdentifierFind2.getParameters() == null) {
+            algorithmIdentifierFind2 = new AlgorithmIdentifier(algorithmIdentifierFind2.getAlgorithm(), DERNull.INSTANCE);
         }
-        return new RSASSAPSSparams(find, new AlgorithmIdentifier(PKCSObjectIdentifiers.id_mgf1, find2), new ASN1Integer(pSSParameterSpec.getSaltLength()), new ASN1Integer(pSSParameterSpec.getTrailerField()));
+        return new RSASSAPSSparams(algorithmIdentifierFind, new AlgorithmIdentifier(PKCSObjectIdentifiers.id_mgf1, algorithmIdentifierFind2), new ASN1Integer(pSSParameterSpec.getSaltLength()), new ASN1Integer(pSSParameterSpec.getTrailerField()));
     }
 
     private static ASN1Sequence createCompParams(CompositeAlgorithmSpec compositeAlgorithmSpec) {

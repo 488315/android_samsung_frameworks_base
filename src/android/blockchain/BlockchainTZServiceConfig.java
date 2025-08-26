@@ -102,8 +102,8 @@ public class BlockchainTZServiceConfig implements Parcelable {
 
     public void readFromParcel(Parcel parcel) {
         this.mClient = parcel.readStrongBinder();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             this.mTAConfigs.put(Integer.valueOf(parcel.readInt()), new TAConfig(parcel.readString(), parcel.readString(), parcel.readString(), parcel.readInt(), parcel.readInt()));
         }
     }

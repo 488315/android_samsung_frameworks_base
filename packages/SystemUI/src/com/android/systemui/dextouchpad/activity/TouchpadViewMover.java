@@ -13,7 +13,6 @@ import java.lang.ref.WeakReference;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TouchpadViewMover {
     public static final long MOVE_POSITION_INTERVAL;
@@ -25,7 +24,7 @@ public class TouchpadViewMover {
     public final TouchpadViewMover$$ExternalSyntheticLambda0 mUpdatePositionRunnable = new Runnable() { // from class: com.android.systemui.dextouchpad.activity.TouchpadViewMover$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
         public final void run() {
-            TouchpadViewMover touchpadViewMover = TouchpadViewMover.this;
+            TouchpadViewMover touchpadViewMover = this.f$0;
             touchpadViewMover.mIsMoveStarted = true;
             touchpadViewMover.updatePosition(true);
         }
@@ -68,10 +67,10 @@ public class TouchpadViewMover {
         int i;
         boolean z2 = Features.DEBUG;
         if (z2) {
-            StringBuilder m = RowView$$ExternalSyntheticOutline0.m("updatePosition(), isUpdated=", ", mIsMoveStarted=", z);
-            m.append(this.mIsMoveStarted);
-            m.append(", mIsSpenEnabled=");
-            ActionBarContextView$$ExternalSyntheticOutline0.m(m, this.mIsSpenEnabled, "DexTouchpadViewMover");
+            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("updatePosition(), isUpdated=", ", mIsMoveStarted=", z);
+            sbM.append(this.mIsMoveStarted);
+            sbM.append(", mIsSpenEnabled=");
+            ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, this.mIsSpenEnabled, "DexTouchpadViewMover");
         }
         if (!this.mIsMoveStarted || this.mIsSpenEnabled) {
             return;
@@ -88,14 +87,14 @@ public class TouchpadViewMover {
             while (true) {
                 Point point2 = this.mPosition;
                 point.set(point2.x, point2.y);
-                int nextInt = random.nextInt(4);
-                if (nextInt == 0) {
+                int iNextInt = random.nextInt(4);
+                if (iNextInt == 0) {
                     point.offset(1, 1);
-                } else if (nextInt == 1) {
+                } else if (iNextInt == 1) {
                     point.offset(-1, 1);
-                } else if (nextInt == 2) {
+                } else if (iNextInt == 2) {
                     point.offset(-1, -1);
-                } else if (nextInt == 3) {
+                } else if (iNextInt == 3) {
                     point.offset(1, -1);
                 }
                 int i2 = point.x;

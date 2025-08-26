@@ -1,6 +1,7 @@
 package androidx.constraintlayout.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
@@ -9,7 +10,6 @@ import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.SharedValues;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ReactiveGuide extends View implements SharedValues.SharedValuesListener {
     private boolean mAnimateChange;
@@ -27,7 +27,7 @@ public class ReactiveGuide extends View implements SharedValues.SharedValuesList
         init(null);
     }
 
-    private void changeValue(int i, int i2, MotionLayout motionLayout, int i3) {
+    private void changeValue(int i, int i2, MotionLayout motionLayout, int i3) throws Resources.NotFoundException, NumberFormatException {
         ConstraintSet constraintSet = motionLayout.getConstraintSet(i3);
         constraintSet.setGuidelineEnd(i2, i);
         motionLayout.updateState(i3, constraintSet);
@@ -35,21 +35,21 @@ public class ReactiveGuide extends View implements SharedValues.SharedValuesList
 
     private void init(AttributeSet attributeSet) {
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_ReactiveGuide);
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_ReactiveGuide);
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 if (index == R.styleable.ConstraintLayout_ReactiveGuide_reactiveGuide_valueId) {
-                    this.mAttributeId = obtainStyledAttributes.getResourceId(index, this.mAttributeId);
+                    this.mAttributeId = typedArrayObtainStyledAttributes.getResourceId(index, this.mAttributeId);
                 } else if (index == R.styleable.ConstraintLayout_ReactiveGuide_reactiveGuide_animateChange) {
-                    this.mAnimateChange = obtainStyledAttributes.getBoolean(index, this.mAnimateChange);
+                    this.mAnimateChange = typedArrayObtainStyledAttributes.getBoolean(index, this.mAnimateChange);
                 } else if (index == R.styleable.ConstraintLayout_ReactiveGuide_reactiveGuide_applyToConstraintSet) {
-                    this.mApplyToConstraintSetId = obtainStyledAttributes.getResourceId(index, this.mApplyToConstraintSetId);
+                    this.mApplyToConstraintSetId = typedArrayObtainStyledAttributes.getResourceId(index, this.mApplyToConstraintSetId);
                 } else if (index == R.styleable.ConstraintLayout_ReactiveGuide_reactiveGuide_applyToAllConstraintSets) {
-                    this.mApplyToAllConstraintSets = obtainStyledAttributes.getBoolean(index, this.mApplyToAllConstraintSets);
+                    this.mApplyToAllConstraintSets = typedArrayObtainStyledAttributes.getBoolean(index, this.mApplyToAllConstraintSets);
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
         if (this.mAttributeId != -1) {
             ConstraintLayout.getSharedValues().addListener(this.mAttributeId, this);
@@ -74,7 +74,7 @@ public class ReactiveGuide extends View implements SharedValues.SharedValuesList
     }
 
     @Override // androidx.constraintlayout.widget.SharedValues.SharedValuesListener
-    public void onNewValue(int i, int i2, int i3) {
+    public void onNewValue(int i, int i2, int i3) throws Resources.NotFoundException, NumberFormatException {
         setGuidelineBegin(i2);
         int id = getId();
         if (id > 0 && (getParent() instanceof MotionLayout)) {
@@ -107,9 +107,9 @@ public class ReactiveGuide extends View implements SharedValues.SharedValuesList
                     i5++;
                 }
             }
-            ConstraintSet cloneConstraintSet = motionLayout.cloneConstraintSet(currentState);
-            cloneConstraintSet.setGuidelineEnd(id, i2);
-            motionLayout.updateStateAnimate(currentState, cloneConstraintSet, 1000);
+            ConstraintSet constraintSetCloneConstraintSet = motionLayout.cloneConstraintSet(currentState);
+            constraintSetCloneConstraintSet.setGuidelineEnd(id, i2);
+            motionLayout.updateStateAnimate(currentState, constraintSetCloneConstraintSet, 1000);
         }
     }
 

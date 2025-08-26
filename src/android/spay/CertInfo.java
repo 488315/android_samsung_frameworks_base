@@ -58,19 +58,19 @@ public class CertInfo implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        Log.d(TAG, "Reading Certificates = " + readInt);
-        for (int i = 0; i < readInt; i++) {
-            String readString = parcel.readString();
-            Log.d(TAG, "Reading Certificate = " + readString);
-            int readInt2 = parcel.readInt();
-            Log.d(TAG, "Reading Certificate Len = " + readInt2);
-            if (readInt2 == 0) {
-                this.mCerts.put(readString, null);
+        int i = parcel.readInt();
+        Log.d(TAG, "Reading Certificates = " + i);
+        for (int i2 = 0; i2 < i; i2++) {
+            String string = parcel.readString();
+            Log.d(TAG, "Reading Certificate = " + string);
+            int i3 = parcel.readInt();
+            Log.d(TAG, "Reading Certificate Len = " + i3);
+            if (i3 == 0) {
+                this.mCerts.put(string, null);
             } else {
-                byte[] bArr = new byte[readInt2];
+                byte[] bArr = new byte[i3];
                 parcel.readByteArray(bArr);
-                this.mCerts.put(readString, bArr);
+                this.mCerts.put(string, bArr);
                 Log.d(TAG, "certdata = " + Arrays.toString(bArr));
             }
         }

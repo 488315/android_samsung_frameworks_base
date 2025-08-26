@@ -6,7 +6,6 @@ import java.time.Instant;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GestureEduModel {
     public final int educationShownCount;
@@ -65,13 +64,13 @@ public final class GestureEduModel {
     }
 
     public final int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.educationShownCount, ReorderTile$$ExternalSyntheticOutline0.m(this.signalCount, this.gestureType.hashCode() * 31, 31), 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.educationShownCount, ReorderTile$$ExternalSyntheticOutline0.m(this.signalCount, this.gestureType.hashCode() * 31, 31), 31);
         Instant instant = this.lastShortcutTriggeredTime;
-        int hashCode = (m + (instant == null ? 0 : instant.hashCode())) * 31;
+        int iHashCode = (iM + (instant == null ? 0 : instant.hashCode())) * 31;
         Instant instant2 = this.usageSessionStartTime;
-        int hashCode2 = (hashCode + (instant2 == null ? 0 : instant2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (instant2 == null ? 0 : instant2.hashCode())) * 31;
         Instant instant3 = this.lastEducationTime;
-        return Integer.hashCode(this.userId) + ((hashCode2 + (instant3 != null ? instant3.hashCode() : 0)) * 31);
+        return Integer.hashCode(this.userId) + ((iHashCode2 + (instant3 != null ? instant3.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

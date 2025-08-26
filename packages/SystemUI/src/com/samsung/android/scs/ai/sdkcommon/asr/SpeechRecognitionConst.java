@@ -1,6 +1,5 @@
 package com.samsung.android.scs.ai.sdkcommon.asr;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SpeechRecognitionConst {
     public static final String SERVER_ASR_TOS_BASE_URL = "tos.samsung-svoice.com";
@@ -14,7 +13,6 @@ public class SpeechRecognitionConst {
     public static final Integer SINCE_SPEECH_RECOGNITION = 1;
     public static final Integer SINCE_SPEAKER_DIARISATION = 5;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Key {
         public static final String APP_SERVER_TYPE = "app_server_type";
         public static final String BTC_LOCALE_INFO_LIST = "btc_locale_info_list";
@@ -47,7 +45,6 @@ public class SpeechRecognitionConst {
         public static final String TARGET_LANGPACK_RESOURCE_PACKAGE = "resource_package_name";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Method {
         public static final String CHECK_AVAILABILITY = "check_availability";
         public static final String GET_BTC_LOCALE_LIST = "get_btc_locale_list";
@@ -58,7 +55,6 @@ public class SpeechRecognitionConst {
         public static final String GET_TARGET_LOCAL_RESOURCE_PACKAGE_NAME = "get_target_local_package_name";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public @interface ServerType {
         public static final int DEV_ENG = 3;
         public static final int DEV_INT = 2;

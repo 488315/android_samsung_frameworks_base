@@ -8,7 +8,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class VectorComponent$drawVectorBlock$1 extends Lambda implements Function1 {
     final /* synthetic */ VectorComponent this$0;
@@ -21,7 +20,7 @@ final class VectorComponent$drawVectorBlock$1 extends Lambda implements Function
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         DrawScope drawScope = (DrawScope) obj;
         VectorComponent vectorComponent = this.this$0;
         GroupComponent groupComponent = vectorComponent.root;
@@ -29,15 +28,15 @@ final class VectorComponent$drawVectorBlock$1 extends Lambda implements Function
         float f2 = vectorComponent.rootScaleY;
         Offset.Companion.getClass();
         CanvasDrawScope$drawContext$1 drawContext = drawScope.getDrawContext();
-        long m526getSizeNHjbRc = drawContext.m526getSizeNHjbRc();
+        long jM528getSizeNHjbRc = drawContext.m528getSizeNHjbRc();
         drawContext.getCanvas().save();
         try {
-            drawContext.transform.m530scale0AR0LA0(f, f2, 0L);
+            drawContext.transform.m532scale0AR0LA0(f, f2, 0L);
             groupComponent.draw(drawScope);
-            BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, m526getSizeNHjbRc);
+            BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, jM528getSizeNHjbRc);
             return Unit.INSTANCE;
         } catch (Throwable th) {
-            BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, m526getSizeNHjbRc);
+            BorderModifierNode$drawRoundRectBorder$1$$ExternalSyntheticOutline0.m(drawContext, jM528getSizeNHjbRc);
             throw th;
         }
     }

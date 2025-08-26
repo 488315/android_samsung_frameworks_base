@@ -8,13 +8,11 @@ import androidx.core.view.ViewCompat;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class WindowInsetsCompat {
     public static final WindowInsetsCompat CONSUMED = Impl30.CONSUMED;
     public final Impl mImpl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BuilderImpl {
         public final WindowInsetsCompat mInsets;
         public final Insets[] mInsetsTypeMask;
@@ -68,14 +66,12 @@ public class WindowInsetsCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BuilderImpl30 extends BuilderImpl29 {
         public BuilderImpl30(WindowInsetsCompat windowInsetsCompat) {
             super(windowInsetsCompat);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl20 extends Impl {
         public Insets[] mOverriddenInsets;
         public final WindowInsets mPlatformInsets;
@@ -141,11 +137,11 @@ public class WindowInsetsCompat {
                 Insets systemWindowInsets = getSystemWindowInsets();
                 WindowInsetsCompat windowInsetsCompat = this.mRootWindowInsets;
                 stableInsets = windowInsetsCompat != null ? windowInsetsCompat.mImpl.getStableInsets() : null;
-                int i3 = systemWindowInsets.bottom;
+                int iMin = systemWindowInsets.bottom;
                 if (stableInsets != null) {
-                    i3 = Math.min(i3, stableInsets.bottom);
+                    iMin = Math.min(iMin, stableInsets.bottom);
                 }
-                return Insets.of(systemWindowInsets.left, 0, systemWindowInsets.right, i3);
+                return Insets.of(systemWindowInsets.left, 0, systemWindowInsets.right, iMin);
             }
             if (i != 8) {
                 if (i == 16) {
@@ -171,9 +167,9 @@ public class WindowInsetsCompat {
             }
             Insets systemWindowInsets2 = getSystemWindowInsets();
             Insets rootStableInsets2 = getRootStableInsets();
-            int i4 = systemWindowInsets2.bottom;
-            if (i4 > rootStableInsets2.bottom) {
-                return Insets.of(0, 0, 0, i4);
+            int i3 = systemWindowInsets2.bottom;
+            if (i3 > rootStableInsets2.bottom) {
+                return Insets.of(0, 0, 0, i3);
             }
             Insets insets = this.mRootViewVisibleInsets;
             return (insets == null || insets.equals(Insets.NONE) || (i2 = this.mRootViewVisibleInsets.bottom) <= rootStableInsets2.bottom) ? Insets.NONE : Insets.of(0, 0, 0, i2);
@@ -195,9 +191,9 @@ public class WindowInsetsCompat {
         @Override // androidx.core.view.WindowInsetsCompat.Impl
         public WindowInsetsCompat inset(int i, int i2, int i3, int i4) {
             Builder builder = new Builder(WindowInsetsCompat.toWindowInsetsCompat(null, this.mPlatformInsets));
-            Insets insetInsets = WindowInsetsCompat.insetInsets(getSystemWindowInsets(), i, i2, i3, i4);
+            Insets insetsInsetInsets = WindowInsetsCompat.insetInsets(getSystemWindowInsets(), i, i2, i3, i4);
             BuilderImpl30 builderImpl30 = builder.mImpl;
-            builderImpl30.setSystemWindowInsets(insetInsets);
+            builderImpl30.setSystemWindowInsets(insetsInsetInsets);
             builderImpl30.setStableInsets(WindowInsetsCompat.insetInsets(getStableInsets(), i, i2, i3, i4));
             return builderImpl30.build();
         }
@@ -245,13 +241,13 @@ public class WindowInsetsCompat {
         }
 
         private Insets getInsets(int i, boolean z) {
-            Insets insets = Insets.NONE;
+            Insets insetsMax = Insets.NONE;
             for (int i2 = 1; i2 <= 256; i2 <<= 1) {
                 if ((i & i2) != 0) {
-                    insets = Insets.max(insets, getInsetsForType(i2, z));
+                    insetsMax = Insets.max(insetsMax, getInsetsForType(i2, z));
                 }
             }
-            return insets;
+            return insetsMax;
         }
 
         public Impl20(WindowInsetsCompat windowInsetsCompat, Impl20 impl20) {
@@ -259,7 +255,6 @@ public class WindowInsetsCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl28 extends Impl21 {
         public Impl28(WindowInsetsCompat windowInsetsCompat, WindowInsets windowInsets) {
             super(windowInsetsCompat, windowInsets);
@@ -297,7 +292,6 @@ public class WindowInsetsCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl30 extends Impl29 {
         public static final WindowInsetsCompat CONSUMED = WindowInsetsCompat.toWindowInsetsCompat(null, WindowInsets.CONSUMED);
 
@@ -329,7 +323,6 @@ public class WindowInsetsCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Type {
         private Type() {
         }
@@ -366,34 +359,33 @@ public class WindowInsetsCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TypeImpl30 {
         private TypeImpl30() {
         }
 
         public static int toPlatformType(int i) {
-            int statusBars;
+            int iStatusBars;
             int i2 = 0;
             for (int i3 = 1; i3 <= 256; i3 <<= 1) {
                 if ((i & i3) != 0) {
                     if (i3 == 1) {
-                        statusBars = WindowInsets.Type.statusBars();
+                        iStatusBars = WindowInsets.Type.statusBars();
                     } else if (i3 == 2) {
-                        statusBars = WindowInsets.Type.navigationBars();
+                        iStatusBars = WindowInsets.Type.navigationBars();
                     } else if (i3 == 4) {
-                        statusBars = WindowInsets.Type.captionBar();
+                        iStatusBars = WindowInsets.Type.captionBar();
                     } else if (i3 == 8) {
-                        statusBars = WindowInsets.Type.ime();
+                        iStatusBars = WindowInsets.Type.ime();
                     } else if (i3 == 16) {
-                        statusBars = WindowInsets.Type.systemGestures();
+                        iStatusBars = WindowInsets.Type.systemGestures();
                     } else if (i3 == 32) {
-                        statusBars = WindowInsets.Type.mandatorySystemGestures();
+                        iStatusBars = WindowInsets.Type.mandatorySystemGestures();
                     } else if (i3 == 64) {
-                        statusBars = WindowInsets.Type.tappableElement();
+                        iStatusBars = WindowInsets.Type.tappableElement();
                     } else if (i3 == 128) {
-                        statusBars = WindowInsets.Type.displayCutout();
+                        iStatusBars = WindowInsets.Type.displayCutout();
                     }
-                    i2 |= statusBars;
+                    i2 |= iStatusBars;
                 }
             }
             return i2;
@@ -405,11 +397,11 @@ public class WindowInsetsCompat {
     }
 
     public static Insets insetInsets(Insets insets, int i, int i2, int i3, int i4) {
-        int max = Math.max(0, insets.left - i);
-        int max2 = Math.max(0, insets.top - i2);
-        int max3 = Math.max(0, insets.right - i3);
-        int max4 = Math.max(0, insets.bottom - i4);
-        return (max == i && max2 == i2 && max3 == i3 && max4 == i4) ? insets : Insets.of(max, max2, max3, max4);
+        int iMax = Math.max(0, insets.left - i);
+        int iMax2 = Math.max(0, insets.top - i2);
+        int iMax3 = Math.max(0, insets.right - i3);
+        int iMax4 = Math.max(0, insets.bottom - i4);
+        return (iMax == i && iMax2 == i2 && iMax3 == i3 && iMax4 == i4) ? insets : Insets.of(iMax, iMax2, iMax3, iMax4);
     }
 
     public static WindowInsetsCompat toWindowInsetsCompat(View view, WindowInsets windowInsets) {
@@ -467,7 +459,6 @@ public class WindowInsetsCompat {
         return null;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public final BuilderImpl30 mImpl;
 
@@ -480,7 +471,6 @@ public class WindowInsetsCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BuilderImpl29 extends BuilderImpl {
         public final WindowInsets.Builder mPlatBuilder;
 
@@ -520,8 +510,8 @@ public class WindowInsetsCompat {
         }
 
         public BuilderImpl29(WindowInsetsCompat windowInsetsCompat) {
-            super(windowInsetsCompat);
             WindowInsets.Builder builder;
+            super(windowInsetsCompat);
             WindowInsets windowInsets = windowInsetsCompat.toWindowInsets();
             if (windowInsets != null) {
                 builder = new WindowInsets.Builder(windowInsets);
@@ -532,7 +522,6 @@ public class WindowInsetsCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl21 extends Impl20 {
         public Insets mStableInsets;
 
@@ -593,7 +582,6 @@ public class WindowInsetsCompat {
         this.mImpl = new Impl(this);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl29 extends Impl28 {
         public Insets mMandatorySystemGestureInsets;
         public Insets mSystemGestureInsets;
@@ -643,7 +631,6 @@ public class WindowInsetsCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl {
         public static final WindowInsetsCompat CONSUMED = new Builder().mImpl.build().mImpl.consumeDisplayCutout().mImpl.consumeStableInsets().mImpl.consumeSystemWindowInsets();
         public final WindowInsetsCompat mHost;

@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
@@ -39,6 +40,7 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.time.SystemClock;
 import com.samsung.android.server.notification.NotificationHistoryImageProvider;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashSet;
@@ -49,10 +51,10 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
-import kotlin.ranges.IntProgressionIterator;
-import kotlin.ranges.IntRange;
+import java.util.stream.Stream;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationListener extends NotificationListenerWithPlugins implements PipelineDumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -68,7 +70,6 @@ public class NotificationListener extends NotificationListenerWithPlugins implem
     public long mSkippingRankingUpdatesSince;
     public final SystemClock mSystemClock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface NotificationSettingsListener {
     }
 
@@ -81,17 +82,17 @@ public class NotificationListener extends NotificationListenerWithPlugins implem
         this.mDispatchRankingUpdateRunnable = new Runnable() { // from class: com.android.systemui.statusbar.NotificationListener$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                NotificationListener notificationListener = NotificationListener.this;
+                NotificationListener notificationListener = this.f$0;
                 NotificationListenerService.RankingMap rankingMap = (NotificationListenerService.RankingMap) ((ConcurrentLinkedDeque) notificationListener.mRankingMapQueue).pollFirst();
                 if (rankingMap == null) {
                     Log.wtf("NotificationListener", "mRankingMapQueue was empty!");
                 }
                 if (!((ConcurrentLinkedDeque) notificationListener.mRankingMapQueue).isEmpty()) {
-                    long elapsedRealtime = notificationListener.mSystemClock.elapsedRealtime();
+                    long jElapsedRealtime = notificationListener.mSystemClock.elapsedRealtime();
                     if (notificationListener.mSkippingRankingUpdatesSince == -1) {
-                        notificationListener.mSkippingRankingUpdatesSince = elapsedRealtime;
+                        notificationListener.mSkippingRankingUpdatesSince = jElapsedRealtime;
                     }
-                    if (elapsedRealtime - notificationListener.mSkippingRankingUpdatesSince < 500) {
+                    if (jElapsedRealtime - notificationListener.mSkippingRankingUpdatesSince < 500) {
                         return;
                     }
                 }
@@ -132,7 +133,7 @@ public class NotificationListener extends NotificationListenerWithPlugins implem
         this.mPlugins.forEach(new Consumer() { // from class: com.android.systemui.statusbar.phone.NotificationListenerWithPlugins$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                NotificationListener notificationListener = NotificationListener.this;
+                NotificationListener notificationListener = this.f$0;
                 int i = NotificationListenerWithPlugins.$r8$clinit;
                 ((NotificationListenerController) obj).onListenerConnected(new NotificationListenerWithPlugins.AnonymousClass1());
             }
@@ -161,7 +162,7 @@ public class NotificationListener extends NotificationListenerWithPlugins implem
         this.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.NotificationListener$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                NotificationListener notificationListener = NotificationListener.this;
+                NotificationListener notificationListener = this.f$0;
                 String str2 = str;
                 UserHandle userHandle2 = userHandle;
                 NotificationChannel notificationChannel2 = notificationChannel;
@@ -193,7 +194,7 @@ public class NotificationListener extends NotificationListenerWithPlugins implem
                 }
             }
             this.mMainExecutor.execute(new NotificationListener$$ExternalSyntheticLambda1(this, statusBarNotification, rankingMap, 1));
-            final Uri uri = null;
+            final Uri dataUri = null;
             if (statusBarNotification.getKey().contains("smartcapture") && statusBarNotification.getId() == 5755) {
                 PanelScreenShotLogger.INSTANCE.getClass();
                 ArrayList arrayList2 = PanelScreenShotLogger.assembledLogs;
@@ -205,80 +206,93 @@ public class NotificationListener extends NotificationListenerWithPlugins implem
                     arrayList2.add("\n");
                 }
                 PanelScreenShotLogger.INSTANCE.getClass();
-                StringBuilder sb = new StringBuilder();
-                IntProgressionIterator it2 = new IntRange(0, arrayList2.size() - 1).iterator();
-                while (it2.hasNext) {
-                    sb.append((String) arrayList2.get(it2.nextInt()));
-                    sb.append("\n");
-                }
-                String sb2 = sb.toString();
+                final StringBuilder sb = new StringBuilder();
+                Stream stream = arrayList2.stream();
+                final Function1 function1 = new Function1() { // from class: com.android.systemui.logging.PanelScreenShotLogger$$ExternalSyntheticLambda0
+                    @Override // kotlin.jvm.functions.Function1
+                    /* renamed from: invoke */
+                    public final Object mo781invoke(Object obj2) {
+                        PanelScreenShotLogger panelScreenShotLogger = PanelScreenShotLogger.INSTANCE;
+                        StringBuilder sb2 = sb;
+                        sb2.append((String) obj2);
+                        sb2.append("\n");
+                        return Unit.INSTANCE;
+                    }
+                };
+                stream.forEach(new Consumer() { // from class: com.android.systemui.logging.PanelScreenShotLogger$sam$java_util_function_Consumer$0
+                    @Override // java.util.function.Consumer
+                    public final /* synthetic */ void accept(Object obj2) {
+                        function1.mo781invoke(obj2);
+                    }
+                });
+                String string = sb.toString();
                 PanelScreenShotBufferLogger panelScreenShotBufferLogger = PanelScreenShotLogger.panelScreenShotBufferLogger;
                 panelScreenShotBufferLogger.getClass();
                 LogLevel logLevel = LogLevel.INFO;
                 PanelScreenShotBufferLogger$$ExternalSyntheticLambda0 panelScreenShotBufferLogger$$ExternalSyntheticLambda0 = new PanelScreenShotBufferLogger$$ExternalSyntheticLambda0();
                 LogBuffer logBuffer = panelScreenShotBufferLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("PanelScreenShotLog", logLevel, panelScreenShotBufferLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str2 = sb2;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("PanelScreenShotLog", logLevel, panelScreenShotBufferLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str2 = string;
+                logBuffer.commit(logMessageObtain);
             }
             if (NotiRune.NOTI_SUBSCREEN_SUPPORT_NOTIFICATION_HISTORY) {
                 Context context = this.mContext;
                 Notification notification2 = statusBarNotification.getNotification();
                 if (notification2 != null) {
-                    Notification.Builder recoverBuilder = Notification.Builder.recoverBuilder(context, notification2);
-                    if ((recoverBuilder.getStyle() instanceof Notification.MessagingStyle) && (messages = ((Notification.MessagingStyle) recoverBuilder.getStyle()).getMessages()) != null && messages.size() > 0) {
+                    Notification.Builder builderRecoverBuilder = Notification.Builder.recoverBuilder(context, notification2);
+                    if ((builderRecoverBuilder.getStyle() instanceof Notification.MessagingStyle) && (messages = ((Notification.MessagingStyle) builderRecoverBuilder.getStyle()).getMessages()) != null && messages.size() > 0) {
                         Notification.MessagingStyle.Message message = (Notification.MessagingStyle.Message) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, messages);
                         if (message.getDataUri() != null && message.getDataMimeType() != null && message.getDataMimeType().startsWith("image/")) {
-                            uri = message.getDataUri();
+                            dataUri = message.getDataUri();
                         }
                     }
                 }
-                if (uri != null) {
+                if (dataUri != null) {
                     new Thread(new Runnable() { // from class: com.android.systemui.statusbar.NotificationListener.1
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            Bitmap bitmap;
+                        public final void run() throws Resources.NotFoundException, IOException {
+                            Bitmap bitmapCreateScaledBitmap;
                             NotificationListener notificationListener = NotificationListener.this;
-                            Uri uri2 = uri;
+                            Uri uri = dataUri;
                             int i2 = NotificationListener.$r8$clinit;
                             notificationListener.getClass();
-                            byte[] bArr = null;
+                            byte[] byteArray = null;
                             try {
-                                Bitmap decodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(notificationListener.mContext.getContentResolver(), uri2));
-                                int width = decodeBitmap.getWidth();
-                                int height = decodeBitmap.getHeight();
+                                Bitmap bitmapDecodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(notificationListener.mContext.getContentResolver(), uri));
+                                int width = bitmapDecodeBitmap.getWidth();
+                                int height = bitmapDecodeBitmap.getHeight();
                                 Context context2 = notificationListener.mContext;
                                 double d = width;
                                 if (d > Math.round(context2.getResources().getDimensionPixelSize(R.dimen.subscreen_noti_detail_history_image_size_b5) * context2.getResources().getDisplayMetrics().density) * 1.0d) {
-                                    double round = Math.round((d / r5) * 100.0d) / 100.0d;
-                                    width = (int) (d / round);
-                                    height = (int) (height / round);
+                                    double dRound = Math.round((d / r5) * 100.0d) / 100.0d;
+                                    width = (int) (d / dRound);
+                                    height = (int) (height / dRound);
                                 }
-                                bitmap = Bitmap.createScaledBitmap(decodeBitmap, width, height, true);
+                                bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmapDecodeBitmap, width, height, true);
                             } catch (Exception e) {
                                 e.printStackTrace();
-                                bitmap = null;
+                                bitmapCreateScaledBitmap = null;
                             }
-                            if (bitmap != null) {
+                            if (bitmapCreateScaledBitmap != null) {
                                 try {
                                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                                    bitmap.compress(Bitmap.CompressFormat.WEBP, 50, byteArrayOutputStream);
-                                    bArr = byteArrayOutputStream.toByteArray();
+                                    bitmapCreateScaledBitmap.compress(Bitmap.CompressFormat.WEBP, 50, byteArrayOutputStream);
+                                    byteArray = byteArrayOutputStream.toByteArray();
                                 } catch (Exception e2) {
                                     e2.printStackTrace();
                                 }
                             }
-                            if (bArr == null || bArr.length == 0) {
+                            if (byteArray == null || byteArray.length == 0) {
                                 return;
                             }
                             ContentValues contentValues = new ContentValues();
-                            contentValues.put("uri_id", uri.toString());
-                            contentValues.put("image", bArr);
+                            contentValues.put("uri_id", dataUri.toString());
+                            contentValues.put("image", byteArray);
                             contentValues.put("time", Long.valueOf(System.currentTimeMillis()));
-                            StringBuilder sb3 = new StringBuilder("uri= ");
-                            sb3.append(uri.toString());
-                            sb3.append(", image= ");
-                            RecyclerView$$ExternalSyntheticOutline0.m(bArr.length, "NotificationListener", sb3);
+                            StringBuilder sb2 = new StringBuilder("uri= ");
+                            sb2.append(dataUri.toString());
+                            sb2.append(", image= ");
+                            RecyclerView$$ExternalSyntheticOutline0.m(byteArray.length, "NotificationListener", sb2);
                             NotificationListener.this.mContext.getContentResolver().insert(NotificationHistoryImageProvider.CONTENT_URI, contentValues);
                         }
                     }).start();
@@ -314,7 +328,7 @@ public class NotificationListener extends NotificationListenerWithPlugins implem
                     this.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.NotificationListener$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            NotificationListener notificationListener = NotificationListener.this;
+                            NotificationListener notificationListener = this.f$0;
                             StatusBarNotification statusBarNotification2 = statusBarNotification;
                             NotificationListenerService.RankingMap rankingMap2 = rankingMap;
                             int i3 = i;
@@ -370,7 +384,6 @@ public class NotificationListener extends NotificationListenerWithPlugins implem
         onNotificationRemoved(statusBarNotification, rankingMap, 0);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface NotificationHandler {
         void onNotificationPosted(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap);
 

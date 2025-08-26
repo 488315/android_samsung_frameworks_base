@@ -52,9 +52,9 @@ public interface ITvRemoteProvider extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITvRemoteProvider)) {
-                return (ITvRemoteProvider) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITvRemoteProvider)) {
+                return (ITvRemoteProvider) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,13 +84,13 @@ public interface ITvRemoteProvider extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ITvRemoteServiceInput asInterface = ITvRemoteServiceInput.Stub.asInterface(parcel.readStrongBinder());
+                ITvRemoteServiceInput iTvRemoteServiceInputAsInterface = ITvRemoteServiceInput.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setRemoteServiceInputSink(asInterface);
+                setRemoteServiceInputSink(iTvRemoteServiceInputAsInterface);
             } else if (i == 2) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                onInputBridgeConnected(readStrongBinder);
+                onInputBridgeConnected(strongBinder);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,25 +115,25 @@ public interface ITvRemoteProvider extends IInterface {
 
             @Override // android.media.tv.ITvRemoteProvider
             public void setRemoteServiceInputSink(ITvRemoteServiceInput iTvRemoteServiceInput) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTvRemoteServiceInput);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTvRemoteServiceInput);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ITvRemoteProvider
             public void onInputBridgeConnected(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -8,7 +8,6 @@ import androidx.compose.ui.node.ModifierNodeElement;
 import kotlin.jvm.internal.Intrinsics;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ScrollableElement extends ModifierNodeElement<ScrollableNode> {
     public final BringIntoViewSpec bringIntoViewSpec;
@@ -48,15 +47,15 @@ public final class ScrollableElement extends ModifierNodeElement<ScrollableNode>
     }
 
     public final int hashCode() {
-        int hashCode = (this.orientation.hashCode() + (this.state.hashCode() * 31)) * 31;
+        int iHashCode = (this.orientation.hashCode() + (this.state.hashCode() * 31)) * 31;
         OverscrollEffect overscrollEffect = this.overscrollEffect;
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((hashCode + (overscrollEffect != null ? overscrollEffect.hashCode() : 0)) * 31, 31, this.enabled), 31, this.reverseDirection);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (overscrollEffect != null ? overscrollEffect.hashCode() : 0)) * 31, 31, this.enabled), 31, this.reverseDirection);
         FlingBehavior flingBehavior = this.flingBehavior;
-        int hashCode2 = (m + (flingBehavior != null ? flingBehavior.hashCode() : 0)) * 31;
+        int iHashCode2 = (iM + (flingBehavior != null ? flingBehavior.hashCode() : 0)) * 31;
         MutableInteractionSource mutableInteractionSource = this.interactionSource;
-        int hashCode3 = (hashCode2 + (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0)) * 31;
+        int iHashCode3 = (iHashCode2 + (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0)) * 31;
         BringIntoViewSpec bringIntoViewSpec = this.bringIntoViewSpec;
-        return hashCode3 + (bringIntoViewSpec != null ? bringIntoViewSpec.hashCode() : 0);
+        return iHashCode3 + (bringIntoViewSpec != null ? bringIntoViewSpec.hashCode() : 0);
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement

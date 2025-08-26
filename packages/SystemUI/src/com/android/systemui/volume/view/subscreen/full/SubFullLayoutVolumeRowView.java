@@ -2,11 +2,14 @@ package com.android.systemui.volume.view.subscreen.full;
 
 import android.R;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -18,8 +21,13 @@ import androidx.dynamicanimation.animation.SpringForce;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.systemui.BasicRune;
+import com.android.systemui.Dependency;
+import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.volume.store.StoreInteractor;
+import com.android.systemui.volume.store.VolumePanelStore;
 import com.android.systemui.volume.util.BluetoothIconUtil;
+import com.android.systemui.volume.util.ContextUtils;
 import com.android.systemui.volume.util.HandlerWrapper;
 import com.android.systemui.volume.util.ViewUtil;
 import com.android.systemui.volume.util.ViewVisibilityUtil;
@@ -39,7 +47,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubFullLayoutVolumeRowView extends FrameLayout implements VolumeObserver<VolumePanelState> {
     public ImageView bluetoothDeviceIcon;
@@ -63,7 +70,6 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
     public SpringAnimation touchUpAnimation;
     public SubFullLayoutVolumePanelMotion volumePanelMotion;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -114,7 +120,7 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
     }
 
     /* renamed from: $r8$lambda$oovOMvrowRvnsb1_qcZm9-hq0lo, reason: not valid java name */
-    public static SpringAnimation m3204$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(final SubFullLayoutVolumeRowView subFullLayoutVolumeRowView) {
+    public static SpringAnimation m3221$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(final SubFullLayoutVolumeRowView subFullLayoutVolumeRowView) {
         SpringAnimation springAnimation = new SpringAnimation(new FloatValueHolder());
         SpringForce springForce = new SpringForce();
         springForce.setDampingRatio(1.0f);
@@ -130,7 +136,7 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
         springAnimation.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView$progressBarSpring$2$1$2
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar2 = SubFullLayoutVolumeRowView.this.seekBar;
+                SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar2 = this.this$0.seekBar;
                 if (subFullLayoutVolumeSeekBar2 == null) {
                     subFullLayoutVolumeSeekBar2 = null;
                 }
@@ -147,20 +153,20 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
         this.recheckCallback = new Runnable() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView$recheckCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                StoreInteractor storeInteractor = SubFullLayoutVolumeRowView.this.storeInteractor;
-                VolumePanelAction.Builder stream = new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CHECK_IF_NEED_TO_SET_PROGRESS).stream(SubFullLayoutVolumeRowView.this.stream);
-                SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar = SubFullLayoutVolumeRowView.this.seekBar;
+                StoreInteractor storeInteractor = this.this$0.storeInteractor;
+                VolumePanelAction.Builder builderStream = new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CHECK_IF_NEED_TO_SET_PROGRESS).stream(this.this$0.stream);
+                SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar = this.this$0.seekBar;
                 if (subFullLayoutVolumeSeekBar == null) {
                     subFullLayoutVolumeSeekBar = null;
                 }
-                storeInteractor.sendAction(stream.progress(subFullLayoutVolumeSeekBar.getProgress()).build(), false);
+                storeInteractor.sendAction(builderStream.progress(subFullLayoutVolumeSeekBar.getProgress()).build(), false);
             }
         };
         this.buttonAnimatorRunnable = SubFullLayoutVolumeRowView$buttonAnimatorRunnable$1.INSTANCE;
         this.progressBarSpring$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return SubFullLayoutVolumeRowView.m3204$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(SubFullLayoutVolumeRowView.this);
+                return SubFullLayoutVolumeRowView.m3221$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(this.f$0);
             }
         });
     }
@@ -180,7 +186,7 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
             Runnable runnable = new Runnable() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView$animateSeekBarButton$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SecRoundedCornerSeekBarDrawable.this.animateButton(z);
+                    secRoundedCornerSeekBarDrawable.animateButton(z);
                 }
             };
             this.buttonAnimatorRunnable = runnable;
@@ -225,40 +231,257 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
         return super.dispatchTouchEvent(motionEvent);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:101:0x0330  */
-    /* JADX WARN: Removed duplicated region for block: B:104:0x0370  */
-    /* JADX WARN: Removed duplicated region for block: B:107:0x0388  */
-    /* JADX WARN: Removed duplicated region for block: B:110:0x0396  */
-    /* JADX WARN: Removed duplicated region for block: B:115:0x03be  */
-    /* JADX WARN: Removed duplicated region for block: B:127:0x0422  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x0431  */
-    /* JADX WARN: Removed duplicated region for block: B:138:0x0404  */
-    /* JADX WARN: Removed duplicated region for block: B:142:0x03ab  */
-    /* JADX WARN: Removed duplicated region for block: B:143:0x0374  */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x033f  */
-    /* JADX WARN: Removed duplicated region for block: B:154:0x0308  */
-    /* JADX WARN: Removed duplicated region for block: B:161:0x0102  */
-    /* JADX WARN: Removed duplicated region for block: B:162:0x0108 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00b0  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00bc  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c8  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00d4  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x01ad  */
-    /* JADX WARN: Removed duplicated region for block: B:67:0x0200  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0234  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x023f  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x026a  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x02c4  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x00a3  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void initialize(com.android.systemui.volume.store.VolumePanelStore r6, com.android.systemui.volume.util.HandlerWrapper r7, com.samsung.systemui.splugins.volume.VolumePanelRow r8, com.samsung.systemui.splugins.volume.VolumePanelState r9, com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelMotion r10) {
-        /*
-            Method dump skipped, instructions count: 1084
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView.initialize(com.android.systemui.volume.store.VolumePanelStore, com.android.systemui.volume.util.HandlerWrapper, com.samsung.systemui.splugins.volume.VolumePanelRow, com.samsung.systemui.splugins.volume.VolumePanelState, com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelMotion):void");
+    public final void initialize(VolumePanelStore volumePanelStore, HandlerWrapper handlerWrapper, VolumePanelRow volumePanelRow, VolumePanelState volumePanelState, SubFullLayoutVolumePanelMotion subFullLayoutVolumePanelMotion) throws Resources.NotFoundException {
+        boolean z;
+        String string;
+        StoreInteractor storeInteractor = this.storeInteractor;
+        storeInteractor.store = volumePanelStore;
+        storeInteractor.observeStore();
+        this.handlerWrapper = handlerWrapper;
+        this.stream = volumePanelRow.getStreamType();
+        this.volumePanelMotion = subFullLayoutVolumePanelMotion;
+        SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar = (SubFullLayoutVolumeSeekBar) requireViewById(com.android.systemui.R.id.volume_seekbar);
+        this.seekBar = subFullLayoutVolumeSeekBar;
+        if (subFullLayoutVolumeSeekBar == null) {
+            subFullLayoutVolumeSeekBar = null;
+        }
+        subFullLayoutVolumeSeekBar.stream = this.stream;
+        subFullLayoutVolumeSeekBar.isTracking = false;
+        StoreInteractor storeInteractor2 = subFullLayoutVolumeSeekBar.storeInteractor;
+        storeInteractor2.store = volumePanelStore;
+        storeInteractor2.observeStore();
+        SubFullLayoutVolumeIcon subFullLayoutVolumeIcon = (SubFullLayoutVolumeIcon) requireViewById(com.android.systemui.R.id.volume_button);
+        this.icon = subFullLayoutVolumeIcon;
+        if (subFullLayoutVolumeIcon == null) {
+            subFullLayoutVolumeIcon = null;
+        }
+        SubFullLayoutVolumePanelMotion subFullLayoutVolumePanelMotion2 = this.volumePanelMotion;
+        if (subFullLayoutVolumePanelMotion2 == null) {
+            subFullLayoutVolumePanelMotion2 = null;
+        }
+        ((StoreInteractor) subFullLayoutVolumeIcon.storeInteractor$delegate.getValue()).store = volumePanelStore;
+        ((StoreInteractor) subFullLayoutVolumeIcon.storeInteractor$delegate.getValue()).observeStore();
+        subFullLayoutVolumeIcon.volumePanelMotion = subFullLayoutVolumePanelMotion2;
+        int streamType = volumePanelRow.getStreamType();
+        subFullLayoutVolumeIcon.stream = streamType;
+        if (VolumePanelValues.isRing(streamType)) {
+            subFullLayoutVolumeIcon.iconType = volumePanelRow.getIconType();
+        }
+        boolean z2 = true;
+        subFullLayoutVolumeIcon.updateIconLayout$1(volumePanelRow, true);
+        subFullLayoutVolumeIcon.updateIconState$1(volumePanelRow, false);
+        subFullLayoutVolumeIcon.updateIconTintColor(volumePanelState, volumePanelRow);
+        subFullLayoutVolumeIcon.updateEnableState$1(volumePanelState, volumePanelRow);
+        this.seekBarBackground = (ViewGroup) requireViewById(com.android.systemui.R.id.volume_seekbar_background);
+        if (volumePanelState.isDualAudio()) {
+            if (volumePanelState.isMultiSoundBt() ? VolumePanelValues.isMultiSound(volumePanelState.getActiveStream()) : VolumePanelValues.isMusic(volumePanelState.getActiveStream())) {
+                z = true;
+            }
+        } else {
+            z = false;
+        }
+        this.isDualViewEnabled = z;
+        this.isAODEnabled = volumePanelState.isAodVolumePanel();
+        SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar2 = this.seekBar;
+        if (subFullLayoutVolumeSeekBar2 == null) {
+            subFullLayoutVolumeSeekBar2 = null;
+        }
+        subFullLayoutVolumeSeekBar2.semSetMin(ViewLevelConverter.viewMinLevel(volumePanelRow));
+        SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar3 = this.seekBar;
+        if (subFullLayoutVolumeSeekBar3 == null) {
+            subFullLayoutVolumeSeekBar3 = null;
+        }
+        subFullLayoutVolumeSeekBar3.setMax(ViewLevelConverter.viewMaxLevel(volumePanelRow));
+        SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar4 = this.seekBar;
+        if (subFullLayoutVolumeSeekBar4 == null) {
+            subFullLayoutVolumeSeekBar4 = null;
+        }
+        subFullLayoutVolumeSeekBar4.setProgress(ViewLevelConverter.viewRealLevel(volumePanelRow), true);
+        SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar5 = this.seekBar;
+        if (subFullLayoutVolumeSeekBar5 == null) {
+            subFullLayoutVolumeSeekBar5 = null;
+        }
+        subFullLayoutVolumeSeekBar5.setEnabled(volumePanelRow.isSliderEnabled());
+        this.iconClickable = volumePanelRow.isIconClickable();
+        if (VolumePanelValues.isSmartView(volumePanelRow.getStreamType()) && !TextUtils.isEmpty(volumePanelRow.getSmartViewLabel())) {
+            string = volumePanelRow.getSmartViewLabel();
+        } else if (volumePanelRow.isDynamic()) {
+            string = volumePanelRow.getRemoteLabel();
+        } else {
+            try {
+                string = getContext().getString(getContext().getResources().getIdentifier(volumePanelRow.getNameRes(), null, null));
+                string.getClass();
+            } catch (Exception unused) {
+                string = "";
+            }
+            if (volumePanelState.isRemoteMic()) {
+                if (VolumePanelValues.isBluetoothSco(volumePanelRow.getStreamType())) {
+                    string = getContext().getString(com.android.systemui.R.string.volume_amplify_ambient_sound_title);
+                } else if (VolumePanelValues.isMusic(volumePanelRow.getStreamType()) && !volumePanelState.isBtScoOn()) {
+                    string = getContext().getString(com.android.systemui.R.string.volume_amplify_ambient_sound_title);
+                }
+            }
+            int streamType2 = volumePanelRow.getStreamType();
+            String remoteLabel = volumePanelRow.getRemoteLabel();
+            if (!TextUtils.isEmpty(remoteLabel) && (VolumePanelValues.isMusic(streamType2) || VolumePanelValues.isDualAudio(streamType2) || VolumePanelValues.isBluetoothSco(streamType2) || VolumePanelValues.isMultiSound(streamType2) || VolumePanelValues.isAudioSharing(streamType2) || VolumePanelValues.isVoiceCall(streamType2))) {
+                string = string + " (" + remoteLabel + ")";
+            }
+        }
+        this.label = string;
+        if (volumePanelState.isShowA11yStream()) {
+            if (VolumePanelValues.isAccessibility(this.stream)) {
+                SubFullLayoutVolumeIcon subFullLayoutVolumeIcon2 = this.icon;
+                if (subFullLayoutVolumeIcon2 == null) {
+                    subFullLayoutVolumeIcon2 = null;
+                }
+                subFullLayoutVolumeIcon2.setImportantForAccessibility(2);
+            } else {
+                SubFullLayoutVolumeIcon subFullLayoutVolumeIcon3 = this.icon;
+                if (subFullLayoutVolumeIcon3 == null) {
+                    subFullLayoutVolumeIcon3 = null;
+                }
+                subFullLayoutVolumeIcon3.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView.initialize.1
+                    @Override // android.view.View.OnClickListener
+                    public final void onClick(View view) {
+                        SubFullLayoutVolumeRowView.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_ICON_CLICKED).stream(SubFullLayoutVolumeRowView.this.stream).isFromOutside(true).build(), false);
+                    }
+                });
+                updateContentDescription$1(volumePanelState, volumePanelRow);
+                SubFullLayoutVolumeIcon subFullLayoutVolumeIcon4 = this.icon;
+                SubFullLayoutVolumeIcon subFullLayoutVolumeIcon5 = subFullLayoutVolumeIcon4 == null ? null : subFullLayoutVolumeIcon4;
+                if (subFullLayoutVolumeIcon4 == null) {
+                    subFullLayoutVolumeIcon4 = null;
+                }
+                subFullLayoutVolumeIcon5.setClickable(subFullLayoutVolumeIcon4.isEnabled() && this.iconClickable);
+            }
+            SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar6 = this.seekBar;
+            if (subFullLayoutVolumeSeekBar6 == null) {
+                subFullLayoutVolumeSeekBar6 = null;
+            }
+            subFullLayoutVolumeSeekBar6.setContentDescription(this.label);
+        }
+        ImageView imageView = (ImageView) requireViewById(com.android.systemui.R.id.volume_panel_bluetooth_device_icon);
+        this.bluetoothDeviceIcon = imageView;
+        if (imageView == null) {
+            imageView = null;
+        }
+        imageView.setImageTintList(new ColorStateList(new int[][]{new int[0]}, new int[]{getContext().getResources().getColor(com.android.systemui.R.color.volume_panel_bluetooth_device_icon_color, null)}));
+        updateBluetoothDeviceIcon$1(volumePanelRow);
+        int dimenInt = ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_seekbar_height, getContext());
+        SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar7 = this.seekBar;
+        if (subFullLayoutVolumeSeekBar7 == null) {
+            subFullLayoutVolumeSeekBar7 = null;
+        }
+        subFullLayoutVolumeSeekBar7.getLayoutParams().width = dimenInt;
+        ViewGroup viewGroup = this.seekBarBackground;
+        if (viewGroup == null) {
+            viewGroup = null;
+        }
+        viewGroup.getLayoutParams().height = dimenInt;
+        requireViewById(com.android.systemui.R.id.volume_panel_blur).getLayoutParams().height = dimenInt;
+        if (!volumePanelState.isExpanded() && !this.isDualViewEnabled) {
+            z2 = false;
+        }
+        ImageView imageView2 = (ImageView) requireViewById(com.android.systemui.R.id.volume_panel_status_icon);
+        if (!z2) {
+            imageView2.setImageTintList(new ColorStateList(new int[][]{new int[0]}, new int[]{getContext().getResources().getColor(com.android.systemui.R.color.volume_panel_status_message_color, null)}));
+        }
+        if (z2 || !(volumePanelState.isAllSoundOff() || volumePanelState.isZenMode() || volumePanelState.isLeBroadcasting())) {
+            ViewVisibilityUtil.INSTANCE.getClass();
+            ViewVisibilityUtil.setGone(imageView2);
+        } else {
+            ViewVisibilityUtil.INSTANCE.getClass();
+            imageView2.setVisibility(0);
+        }
+        ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) ((ViewGroup) requireViewById(com.android.systemui.R.id.volume_icon_area)).getLayoutParams();
+        if (z2) {
+            int dimenInt2 = ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_panel_icon_margin_touch_expanded, getContext());
+            int dimenInt3 = ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_panel_icon_margin_bottom_expanded, getContext());
+            marginLayoutParams.bottomMargin = 0;
+            SubFullLayoutVolumeIcon subFullLayoutVolumeIcon6 = this.icon;
+            if (subFullLayoutVolumeIcon6 == null) {
+                subFullLayoutVolumeIcon6 = null;
+            }
+            ViewGroup.LayoutParams layoutParams = subFullLayoutVolumeIcon6.getLayoutParams();
+            layoutParams.height = ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_icon_touch_height, getContext());
+            layoutParams.width = ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_icon_touch_width, getContext());
+            SubFullLayoutVolumeIcon subFullLayoutVolumeIcon7 = this.icon;
+            if (subFullLayoutVolumeIcon7 == null) {
+                subFullLayoutVolumeIcon7 = null;
+            }
+            subFullLayoutVolumeIcon7.setPadding(dimenInt2, dimenInt3, dimenInt2, dimenInt2);
+        } else {
+            marginLayoutParams.bottomMargin = ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_seekbar_elevation_padding, getContext());
+            int dimenInt4 = ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_icon_touch_padding, getContext());
+            SubFullLayoutVolumeIcon subFullLayoutVolumeIcon8 = this.icon;
+            if (subFullLayoutVolumeIcon8 == null) {
+                subFullLayoutVolumeIcon8 = null;
+            }
+            subFullLayoutVolumeIcon8.setPadding(dimenInt4, dimenInt4, dimenInt4, dimenInt4);
+        }
+        ViewGroup viewGroup2 = (ViewGroup) requireViewById(com.android.systemui.R.id.volume_seekbar_container);
+        if (z2) {
+            viewGroup2.setPadding(0, 0, 0, ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_expand_panel_horizontal_padding_min, getContext()));
+        } else {
+            int dimenInt5 = ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_seekbar_elevation_padding, getContext());
+            int dimenInt6 = ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_panel_additional_margin, getContext());
+            if (BasicRune.VOLUME_SUB_DISPLAY_FULLSCREEN_VOLUME_DIALOG) {
+                viewGroup2.setPadding(dimenInt6, dimenInt5, dimenInt6, dimenInt5);
+            } else {
+                viewGroup2.setPadding(dimenInt5, dimenInt5, dimenInt5, dimenInt5);
+            }
+            viewGroup2.setClipChildren(false);
+        }
+        int i = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isReduceTransparencyEnabled() ? com.android.systemui.R.drawable.volume_seekbar_bg_reduce_transparency : (BasicRune.VOLUME_PARTIAL_BLUR || BasicRune.VOLUME_CAPTURED_BLUR) ? com.android.systemui.R.drawable.sub_full_volume_seekbar_bg_blur : com.android.systemui.R.drawable.volume_seekbar_bg;
+        ViewGroup viewGroup3 = this.seekBarBackground;
+        if (viewGroup3 == null) {
+            viewGroup3 = null;
+        }
+        viewGroup3.setBackground(getContext().getDrawable(i));
+        if (z2) {
+            ViewGroup viewGroup4 = (ViewGroup) requireViewById(com.android.systemui.R.id.volume_seekbar_outline_stroke_expand);
+            ViewVisibilityUtil.INSTANCE.getClass();
+            viewGroup4.setVisibility(0);
+        } else {
+            ViewGroup viewGroup5 = this.seekBarBackground;
+            if (viewGroup5 == null) {
+                viewGroup5 = null;
+            }
+            viewGroup5.setElevation(ContextUtils.getDimenInt(com.android.systemui.R.dimen.sub_full_volume_seekbar_elevation, getContext()));
+        }
+        if (!z2) {
+            SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar8 = this.seekBar;
+            if (subFullLayoutVolumeSeekBar8 == null) {
+                subFullLayoutVolumeSeekBar8 = null;
+            }
+            subFullLayoutVolumeSeekBar8.setProgressDrawable(getContext().getResources().getDrawable(com.android.systemui.R.drawable.sub_full_volume_seekbar_drawable_blur, null));
+        } else if (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isReduceTransparencyEnabled() || !(BasicRune.VOLUME_PARTIAL_BLUR || BasicRune.VOLUME_CAPTURED_BLUR)) {
+            SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar9 = this.seekBar;
+            if (subFullLayoutVolumeSeekBar9 == null) {
+                subFullLayoutVolumeSeekBar9 = null;
+            }
+            subFullLayoutVolumeSeekBar9.setProgressDrawable(getContext().getResources().getDrawable(com.android.systemui.R.drawable.volume_seekbar_circle_drawable_expand, null));
+        } else {
+            SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar10 = this.seekBar;
+            if (subFullLayoutVolumeSeekBar10 == null) {
+                subFullLayoutVolumeSeekBar10 = null;
+            }
+            subFullLayoutVolumeSeekBar10.setProgressDrawable(getContext().getResources().getDrawable(com.android.systemui.R.drawable.sub_full_volume_seekbar_drawable_expand_blur, null));
+        }
+        updateProgressDrawable$1(volumePanelState);
+        SubFullLayoutVolumePanelMotion subFullLayoutVolumePanelMotion3 = this.volumePanelMotion;
+        if (subFullLayoutVolumePanelMotion3 == null) {
+            subFullLayoutVolumePanelMotion3 = null;
+        }
+        subFullLayoutVolumePanelMotion3.getClass();
+        this.touchDownAnimation = SubFullLayoutVolumePanelMotion.getSeekBarTouchDownAnimation(this);
+        SubFullLayoutVolumePanelMotion subFullLayoutVolumePanelMotion4 = this.volumePanelMotion;
+        (subFullLayoutVolumePanelMotion4 != null ? subFullLayoutVolumePanelMotion4 : null).getClass();
+        this.touchUpAnimation = SubFullLayoutVolumePanelMotion.getSeekBarTouchUpAnimation(this);
     }
 
     public final boolean isIconClicked(float f, float f2) {
@@ -283,14 +506,14 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
     public final void onChanged(VolumePanelState volumePanelState) {
         int earProtectLevel;
         VolumePanelState volumePanelState2 = volumePanelState;
-        r2 = null;
+        springAnimation = null;
         SpringAnimation springAnimation = null;
         switch (WhenMappings.$EnumSwitchMapping$0[volumePanelState2.getStateType().ordinal()]) {
             case 1:
                 VolumePanelStateExt volumePanelStateExt = VolumePanelStateExt.INSTANCE;
                 if (volumePanelStateExt.isRowVisible(volumePanelState2, this.stream)) {
-                    VolumePanelRow findRow = volumePanelStateExt.findRow(volumePanelState2, this.stream);
-                    if (findRow != null && (earProtectLevel = findRow.getEarProtectLevel()) != this.earProtectLevel) {
+                    VolumePanelRow volumePanelRowFindRow = volumePanelStateExt.findRow(volumePanelState2, this.stream);
+                    if (volumePanelRowFindRow != null && (earProtectLevel = volumePanelRowFindRow.getEarProtectLevel()) != this.earProtectLevel) {
                         this.earProtectLevel = earProtectLevel;
                         SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar = this.seekBar;
                         if (subFullLayoutVolumeSeekBar == null) {
@@ -299,26 +522,26 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
                         subFullLayoutVolumeSeekBar.getClass();
                     }
                     updateProgressDrawable$1(volumePanelState2);
-                    VolumePanelRow findRow2 = volumePanelStateExt.findRow(volumePanelState2, this.stream);
-                    if (findRow2 != null) {
+                    VolumePanelRow volumePanelRowFindRow2 = volumePanelStateExt.findRow(volumePanelState2, this.stream);
+                    if (volumePanelRowFindRow2 != null) {
                         SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar2 = this.seekBar;
                         if (subFullLayoutVolumeSeekBar2 == null) {
                             subFullLayoutVolumeSeekBar2 = null;
                         }
-                        subFullLayoutVolumeSeekBar2.setEnabled(findRow2.isSliderEnabled());
+                        subFullLayoutVolumeSeekBar2.setEnabled(volumePanelRowFindRow2.isSliderEnabled());
                     }
-                    VolumePanelRow findRow3 = volumePanelStateExt.findRow(volumePanelState2, this.stream);
-                    if (findRow3 != null) {
-                        updateContentDescription$1(volumePanelState2, findRow3);
+                    VolumePanelRow volumePanelRowFindRow3 = volumePanelStateExt.findRow(volumePanelState2, this.stream);
+                    if (volumePanelRowFindRow3 != null) {
+                        updateContentDescription$1(volumePanelState2, volumePanelRowFindRow3);
                     }
-                    VolumePanelRow findRow4 = volumePanelStateExt.findRow(volumePanelState2, this.stream);
-                    if (findRow4 != null) {
-                        updateBluetoothDeviceIcon$1(findRow4);
+                    VolumePanelRow volumePanelRowFindRow4 = volumePanelStateExt.findRow(volumePanelState2, this.stream);
+                    if (volumePanelRowFindRow4 != null) {
+                        updateBluetoothDeviceIcon$1(volumePanelRowFindRow4);
                     }
                     StoreInteractor storeInteractor = this.storeInteractor;
-                    VolumePanelAction.Builder stream = new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CHECK_IF_NEED_TO_SET_PROGRESS).stream(this.stream);
+                    VolumePanelAction.Builder builderStream = new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CHECK_IF_NEED_TO_SET_PROGRESS).stream(this.stream);
                     SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar3 = this.seekBar;
-                    storeInteractor.sendAction(stream.progress((subFullLayoutVolumeSeekBar3 != null ? subFullLayoutVolumeSeekBar3 : null).getProgress()).build(), true);
+                    storeInteractor.sendAction(builderStream.progress((subFullLayoutVolumeSeekBar3 != null ? subFullLayoutVolumeSeekBar3 : null).getProgress()).build(), true);
                     break;
                 }
                 break;
@@ -349,12 +572,12 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
             case 5:
                 if (this.stream == volumePanelState2.getStream()) {
                     StoreInteractor storeInteractor2 = this.storeInteractor;
-                    VolumePanelAction.Builder stream2 = new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_UPDATE_PROGRESS_BAR).stream(this.stream);
+                    VolumePanelAction.Builder builderStream2 = new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_UPDATE_PROGRESS_BAR).stream(this.stream);
                     SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar4 = this.seekBar;
                     if (subFullLayoutVolumeSeekBar4 == null) {
                         subFullLayoutVolumeSeekBar4 = null;
                     }
-                    storeInteractor2.sendAction(stream2.progress(subFullLayoutVolumeSeekBar4.getProgress()).build(), true);
+                    storeInteractor2.sendAction(builderStream2.progress(subFullLayoutVolumeSeekBar4.getProgress()).build(), true);
                     HandlerWrapper handlerWrapper3 = this.handlerWrapper;
                     if (handlerWrapper3 == null) {
                         handlerWrapper3 = null;
@@ -497,8 +720,8 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
         Context context = getContext();
         bluetoothIconUtil.getClass();
         BluetoothUtils.AnonymousClass2 anonymousClass2 = BluetoothUtils.mOnInitCallback;
-        CachedBluetoothDevice findDevice = LocalBluetoothManager.getInstance(context, anonymousClass2).mCachedDeviceManager.findDevice(LocalBluetoothManager.getInstance(context, anonymousClass2).mLocalAdapter.mAdapter.getRemoteDevice(dualBtDeviceAddress));
-        Drawable iconDrawable = findDevice != null ? findDevice.getIconDrawable(true) : null;
+        CachedBluetoothDevice cachedBluetoothDeviceFindDevice = LocalBluetoothManager.getInstance(context, anonymousClass2).mCachedDeviceManager.findDevice(LocalBluetoothManager.getInstance(context, anonymousClass2).mLocalAdapter.mAdapter.getRemoteDevice(dualBtDeviceAddress));
+        Drawable iconDrawable = cachedBluetoothDeviceFindDevice != null ? cachedBluetoothDeviceFindDevice.getIconDrawable(true) : null;
         ImageView imageView3 = this.bluetoothDeviceIcon;
         if (imageView3 == null) {
             imageView3 = null;
@@ -523,34 +746,34 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
     }
 
     public final void updateProgress$1(VolumePanelState volumePanelState) {
-        VolumePanelRow findRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, this.stream);
-        if (findRow != null) {
-            int viewRealLevel = ViewLevelConverter.viewRealLevel(findRow);
-            if (!findRow.isVisible()) {
+        VolumePanelRow volumePanelRowFindRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, this.stream);
+        if (volumePanelRowFindRow != null) {
+            int iViewRealLevel = ViewLevelConverter.viewRealLevel(volumePanelRowFindRow);
+            if (!volumePanelRowFindRow.isVisible()) {
                 ((SpringAnimation) this.progressBarSpring$delegate.getValue()).cancel();
                 SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar = this.seekBar;
-                (subFullLayoutVolumeSeekBar != null ? subFullLayoutVolumeSeekBar : null).setProgress(viewRealLevel);
+                (subFullLayoutVolumeSeekBar != null ? subFullLayoutVolumeSeekBar : null).setProgress(iViewRealLevel);
             } else {
                 ((SpringAnimation) this.progressBarSpring$delegate.getValue()).setStartValue((this.seekBar != null ? r2 : null).getProgress());
-                ((SpringAnimation) this.progressBarSpring$delegate.getValue()).animateToFinalPosition(viewRealLevel);
+                ((SpringAnimation) this.progressBarSpring$delegate.getValue()).animateToFinalPosition(iViewRealLevel);
             }
         }
     }
 
     public final void updateProgressDrawable$1(VolumePanelState volumePanelState) {
-        VolumePanelRow findRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, this.stream);
-        if (findRow != null) {
+        VolumePanelRow volumePanelRowFindRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, this.stream);
+        if (volumePanelRowFindRow != null) {
             SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar = this.seekBar;
             if (subFullLayoutVolumeSeekBar == null) {
                 subFullLayoutVolumeSeekBar = null;
             }
             SecRoundedCornerSeekBarDrawable secRoundedCornerSeekBarDrawable = (SecRoundedCornerSeekBarDrawable) ((LayerDrawable) subFullLayoutVolumeSeekBar.getProgressDrawable()).findDrawableByLayerId(R.id.progress);
             secRoundedCornerSeekBarDrawable.setContext(getContext());
-            boolean z = volumePanelState.isLeBroadcasting() && !findRow.isRoutedToBluetooth();
+            boolean z = volumePanelState.isLeBroadcasting() && !volumePanelRowFindRow.isRoutedToBluetooth();
             if (volumePanelState.isSafeMediaDeviceOn() || volumePanelState.isSafeMediaPinDeviceOn()) {
-                int earProtectLevel = findRow.getEarProtectLevel();
-                int realLevel = findRow.getRealLevel();
-                if (VolumePanelValues.isAudioSharing(findRow.getStreamType())) {
+                int earProtectLevel = volumePanelRowFindRow.getEarProtectLevel();
+                int realLevel = volumePanelRowFindRow.getRealLevel();
+                if (VolumePanelValues.isAudioSharing(volumePanelRowFindRow.getStreamType())) {
                     realLevel *= 100;
                 }
                 if (1 <= earProtectLevel && earProtectLevel < realLevel && !z) {
@@ -558,7 +781,7 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
                     return;
                 }
             }
-            if (ViewLevelConverter.viewRealLevel(findRow) == ViewLevelConverter.viewMaxLevel(findRow)) {
+            if (ViewLevelConverter.viewRealLevel(volumePanelRowFindRow) == ViewLevelConverter.viewMaxLevel(volumePanelRowFindRow)) {
                 secRoundedCornerSeekBarDrawable.setShockColor(true);
             } else {
                 secRoundedCornerSeekBarDrawable.setShockColor(false);
@@ -573,20 +796,20 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
         this.recheckCallback = new Runnable() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView$recheckCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                StoreInteractor storeInteractor = SubFullLayoutVolumeRowView.this.storeInteractor;
-                VolumePanelAction.Builder stream = new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CHECK_IF_NEED_TO_SET_PROGRESS).stream(SubFullLayoutVolumeRowView.this.stream);
-                SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar = SubFullLayoutVolumeRowView.this.seekBar;
+                StoreInteractor storeInteractor = this.this$0.storeInteractor;
+                VolumePanelAction.Builder builderStream = new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CHECK_IF_NEED_TO_SET_PROGRESS).stream(this.this$0.stream);
+                SubFullLayoutVolumeSeekBar subFullLayoutVolumeSeekBar = this.this$0.seekBar;
                 if (subFullLayoutVolumeSeekBar == null) {
                     subFullLayoutVolumeSeekBar = null;
                 }
-                storeInteractor.sendAction(stream.progress(subFullLayoutVolumeSeekBar.getProgress()).build(), false);
+                storeInteractor.sendAction(builderStream.progress(subFullLayoutVolumeSeekBar.getProgress()).build(), false);
             }
         };
         this.buttonAnimatorRunnable = SubFullLayoutVolumeRowView$buttonAnimatorRunnable$1.INSTANCE;
         this.progressBarSpring$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return SubFullLayoutVolumeRowView.m3204$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(SubFullLayoutVolumeRowView.this);
+                return SubFullLayoutVolumeRowView.m3221$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(this.f$0);
             }
         });
     }

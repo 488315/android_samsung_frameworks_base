@@ -56,7 +56,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedListener, StatusBarStateController.StateListener, ShadeExpansionListener, Dumpable {
     public static final NotificationWakeUpCoordinator$Companion$notificationVisibility$1 notificationVisibility;
@@ -94,7 +93,6 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
     public final Interpolator dozeAmountInterpolator = Interpolators.FAST_OUT_SLOW_IN;
     public final Set entrySetToClearWhenFinished = new LinkedHashSet();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.NotificationWakeUpCoordinator$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
@@ -126,7 +124,7 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
                     public final Object emit(Object obj2, Continuation continuation) {
                         ((Boolean) obj2).booleanValue();
                         NotificationWakeUpCoordinator$Companion$notificationVisibility$1 notificationWakeUpCoordinator$Companion$notificationVisibility$1 = NotificationWakeUpCoordinator.notificationVisibility;
-                        NotificationWakeUpCoordinator notificationWakeUpCoordinator2 = NotificationWakeUpCoordinator.this;
+                        NotificationWakeUpCoordinator notificationWakeUpCoordinator2 = notificationWakeUpCoordinator;
                         if (!notificationWakeUpCoordinator2.overrideDozeAmountIfCommunalShowing()) {
                             notificationWakeUpCoordinator2.maybeClearHardDozeAmountOverrideHidingNotifs();
                         }
@@ -147,7 +145,6 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -157,7 +154,6 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface WakeUpListener {
         void onFullyHiddenChanged(boolean z);
     }
@@ -196,7 +192,7 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
             @Override // com.android.systemui.statusbar.phone.KeyguardBypassController.OnBypassStateChangedListener
             public final void onBypassStateChanged(boolean z) {
                 NotificationWakeUpCoordinator$Companion$notificationVisibility$1 notificationWakeUpCoordinator$Companion$notificationVisibility$1 = NotificationWakeUpCoordinator.notificationVisibility;
-                NotificationWakeUpCoordinator.this.maybeClearHardDozeAmountOverrideHidingNotifs();
+                this.this$0.maybeClearHardDozeAmountOverrideHidingNotifs();
             }
         };
         dumpManager.registerDumpable(this);
@@ -271,11 +267,11 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
             StatusBarStateController statusBarStateController = this.statusBarStateController;
             boolean z = false;
             boolean z2 = statusBarStateController.getState() == 1;
-            boolean isDozing = statusBarStateController.isDozing();
+            boolean zIsDozing = statusBarStateController.isDozing();
             boolean bypassEnabled = this.bypassController.getBypassEnabled();
-            boolean booleanValue = ((Boolean) this.communalInteractor.isIdleOnCommunal.$$delegate_0.getValue()).booleanValue();
-            boolean overrideNotificationsFullyDozingOnKeyguard = this.screenOffAnimationController.overrideNotificationsFullyDozingOnKeyguard();
-            if ((!z2 || !isDozing) && !bypassEnabled && !overrideNotificationsFullyDozingOnKeyguard && !booleanValue) {
+            boolean zBooleanValue = ((Boolean) this.communalInteractor.isIdleOnCommunal.$$delegate_0.getValue()).booleanValue();
+            boolean zOverrideNotificationsFullyDozingOnKeyguard = this.screenOffAnimationController.overrideNotificationsFullyDozingOnKeyguard();
+            if ((!z2 || !zIsDozing) && !bypassEnabled && !zOverrideNotificationsFullyDozingOnKeyguard && !zBooleanValue) {
                 z = true;
             }
             NotificationWakeUpCoordinatorLogger notificationWakeUpCoordinatorLogger = this.logger;
@@ -283,11 +279,11 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
             LogLevel logLevel = LogLevel.DEBUG;
             NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 = new NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0(5);
             LogBuffer logBuffer = notificationWakeUpCoordinatorLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
-            StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("willRemove=", " onKeyguard=", " dozing=", z, z2);
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, isDozing, " bypass=", bypassEnabled, " animating=");
-            ((LogMessageImpl) obtain).str1 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, overrideNotificationsFullyDozingOnKeyguard, " idleOnCommunal=", booleanValue);
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
+            StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("willRemove=", " onKeyguard=", " dozing=", z, z2);
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zIsDozing, " bypass=", bypassEnabled, " animating=");
+            ((LogMessageImpl) logMessageObtain).str1 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zOverrideNotificationsFullyDozingOnKeyguard, " idleOnCommunal=", zBooleanValue);
+            logBuffer.commit(logMessageObtain);
             if (z) {
                 clearHardDozeAmountOverride();
             }
@@ -317,11 +313,11 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
             LogLevel logLevel = LogLevel.DEBUG;
             NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 = new NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0(2);
             LogBuffer logBuffer = notificationWakeUpCoordinatorLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.double1 = f;
             logMessageImpl.str2 = String.valueOf(f2);
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
         this.inputLinearDozeAmount = f;
         this.inputEasedDozeAmount = f2;
@@ -344,7 +340,7 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
 
     @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
     public final void onHeadsUpStateChanged(NotificationEntry notificationEntry, boolean z) {
-        boolean shouldAnimateVisibility = shouldAnimateVisibility();
+        boolean zShouldAnimateVisibility = shouldAnimateVisibility();
         if (z) {
             if (this.entrySetToClearWhenFinished.contains(notificationEntry)) {
                 this.entrySetToClearWhenFinished.remove(notificationEntry);
@@ -355,7 +351,7 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
             }
         } else if (this.outputLinearDozeAmount != 0.0f && this.linearVisibilityAmount != 0.0f) {
             if (notificationEntry.isRowDismissed()) {
-                shouldAnimateVisibility = false;
+                zShouldAnimateVisibility = false;
             } else if (!this.wakingUp && !this.willWakeUp) {
                 ExpandableNotificationRow expandableNotificationRow2 = notificationEntry.row;
                 if (expandableNotificationRow2 != null) {
@@ -364,7 +360,7 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
                 this.entrySetToClearWhenFinished.add(notificationEntry);
             }
         }
-        updateNotificationVisibility(shouldAnimateVisibility, false);
+        updateNotificationVisibility(zShouldAnimateVisibility, false);
     }
 
     @Override // com.android.systemui.shade.ShadeExpansionListener
@@ -381,15 +377,15 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
             LogLevel logLevel = LogLevel.DEBUG;
             NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 = new NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0(7);
             LogBuffer logBuffer = notificationWakeUpCoordinatorLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
+            LogMessage logMessageObtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
             double d = f;
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.double1 = d;
             logMessageImpl.bool1 = z;
             logMessageImpl.bool2 = z2;
             logMessageImpl.bool3 = canShowPulsingHuns;
             logMessageImpl.bool4 = canShowPulsingHuns2;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             if (!canShowPulsingHuns || canShowPulsingHuns2) {
                 return;
             }
@@ -406,11 +402,11 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
         LogLevel logLevel = LogLevel.DEBUG;
         NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 = new NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0(6);
         LogBuffer logBuffer = notificationWakeUpCoordinatorLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.int2 = i2;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         if (this.state == 0 && i == 0) {
             setHardDozeAmountOverride("Override: Shade->Shade (lock cancelled by unlock)", false);
             this.state = i;
@@ -459,16 +455,16 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
         LogLevel logLevel = LogLevel.DEBUG;
         NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 = new NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = notificationWakeUpCoordinatorLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = z;
         logMessageImpl.str1 = str;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         Float f = this.hardDozeAmountOverride;
-        Float valueOf = Float.valueOf(z ? 1.0f : 0.0f);
-        this.hardDozeAmountOverride = valueOf;
+        Float fValueOf = Float.valueOf(z ? 1.0f : 0.0f);
+        this.hardDozeAmountOverride = fValueOf;
         this.hardDozeAmountOverrideSource = str;
-        if (f != null && f.floatValue() == valueOf.floatValue()) {
+        if (f != null && f.floatValue() == fValueOf.floatValue()) {
             return;
         }
         updateDozeAmount();
@@ -490,11 +486,11 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
         notifyAnimationStart(z);
         boolean z4 = this.notificationsVisible;
         this.visibilityInterpolator = z4 ? Interpolators.TOUCH_RESPONSE : Interpolators.FAST_OUT_SLOW_IN_REVERSE;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, notificationVisibility, z4 ? 1.0f : 0.0f);
-        ofFloat.setInterpolator(InterpolatorsAndroidX.LINEAR);
-        ofFloat.m894setDuration(z3 ? (long) (500 / 1.5f) : 500L);
-        ofFloat.start();
-        this.visibilityAnimator = ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, notificationVisibility, z4 ? 1.0f : 0.0f);
+        objectAnimatorOfFloat.setInterpolator(InterpolatorsAndroidX.LINEAR);
+        objectAnimatorOfFloat.m896setDuration(z3 ? (long) (500 / 1.5f) : 500L);
+        objectAnimatorOfFloat.start();
+        this.visibilityAnimator = objectAnimatorOfFloat;
     }
 
     public final void setNotificationsVisibleForExpansion(boolean z, boolean z2, boolean z3) {
@@ -515,9 +511,9 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
             LogLevel logLevel = LogLevel.DEBUG;
             NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 = new NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0(0);
             LogBuffer logBuffer = notificationWakeUpCoordinatorLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).double1 = f;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).double1 = f;
+            logBuffer.commit(logMessageObtain);
         }
         this.linearVisibilityAmount = f;
         this.visibilityAmount = this.visibilityInterpolator.getInterpolation(f);
@@ -542,9 +538,9 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
         NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 = new NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0(8);
         LogBuffer logBuffer = notificationWakeUpCoordinatorLogger.buffer;
         ExpandableView expandableView = null;
-        LogMessage obtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
         this.willWakeUp = false;
         if (z) {
             boolean z2 = this.notificationsVisible;
@@ -570,7 +566,7 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
                 }
                 notificationStackScrollLayout.setPulseHeight(expandableView != null ? notificationStackScrollLayout.mKeyguardBypassEnabled ? expandableView.getHeadsUpHeightWithoutHeader() : expandableView.getCollapsedHeight() : 0.0f);
                 int childCount2 = notificationStackScrollLayout.getChildCount();
-                float f = -1.0f;
+                float translationY = -1.0f;
                 boolean z3 = true;
                 for (int i2 = 0; i2 < childCount2; i2++) {
                     ExpandableView expandableView3 = (ExpandableView) notificationStackScrollLayout.getChildAt(i2);
@@ -579,10 +575,10 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
                         if ((expandableView3 instanceof ExpandableNotificationRow) || z4) {
                             if (expandableView3.getVisibility() != 0 || z4) {
                                 if (!z3) {
-                                    expandableView3.setTranslationY(f);
+                                    expandableView3.setTranslationY(translationY);
                                 }
                             } else if (z3) {
-                                f = (expandableView3.getTranslationY() + expandableView3.mActualHeight) - notificationStackScrollLayout.mShelf.getHeight();
+                                translationY = (expandableView3.getTranslationY() + expandableView3.mActualHeight) - notificationStackScrollLayout.mShelf.getHeight();
                                 z3 = false;
                             }
                         }
@@ -604,15 +600,15 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
     public final void updateDozeAmount() {
         Float f;
         Float f2 = this.hardDozeAmountOverride;
-        float floatValue = f2 != null ? f2.floatValue() : this.inputLinearDozeAmount;
+        float fFloatValue = f2 != null ? f2.floatValue() : this.inputLinearDozeAmount;
         float f3 = this.outputLinearDozeAmount;
-        boolean z = f3 == floatValue;
+        boolean z = f3 == fFloatValue;
         boolean z2 = !z;
-        if (floatValue != 1.0f && floatValue != 0.0f && (f3 == 0.0f || f3 == 1.0f)) {
+        if (fFloatValue != 1.0f && fFloatValue != 0.0f && (f3 == 0.0f || f3 == 1.0f)) {
             notifyAnimationStart(f3 == 1.0f);
         }
-        this.outputLinearDozeAmount = floatValue;
-        this.outputEasedDozeAmount = ((PathInterpolator) this.dozeAmountInterpolator).getInterpolation(floatValue);
+        this.outputLinearDozeAmount = fFloatValue;
+        this.outputEasedDozeAmount = ((PathInterpolator) this.dozeAmountInterpolator).getInterpolation(fFloatValue);
         float f4 = this.inputLinearDozeAmount;
         Float f5 = this.hardDozeAmountOverride;
         float f6 = this.outputLinearDozeAmount;
@@ -627,15 +623,15 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
             LogLevel logLevel = LogLevel.DEBUG;
             NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 = new NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = notificationWakeUpCoordinatorLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
+            LogMessage logMessageObtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
             double d = f4;
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.double1 = d;
             logMessageImpl.str1 = String.valueOf(f5);
             logMessageImpl.str2 = String.valueOf(f6);
             logMessageImpl.int1 = state;
             logMessageImpl.bool1 = z2;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
         NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.stackScrollerController;
         NotificationStackScrollLayoutController notificationStackScrollLayoutController2 = notificationStackScrollLayoutController != null ? notificationStackScrollLayoutController : null;
@@ -659,21 +655,21 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
     }
 
     public final void updateHideAmount() {
-        float min = Math.min(1.0f - this.linearVisibilityAmount, this.outputLinearDozeAmount);
-        float min2 = Math.min(1.0f - this.visibilityAmount, this.outputEasedDozeAmount);
+        float fMin = Math.min(1.0f - this.linearVisibilityAmount, this.outputLinearDozeAmount);
+        float fMin2 = Math.min(1.0f - this.visibilityAmount, this.outputEasedDozeAmount);
         NotificationWakeUpCoordinatorLogger notificationWakeUpCoordinatorLogger = this.logger;
         int i = 0;
-        if (notificationWakeUpCoordinatorLogger.lastSetHideAmount != min) {
-            notificationWakeUpCoordinatorLogger.lastSetHideAmount = min;
-            boolean z = (min == 1.0f || min == 0.0f) ? false : true;
+        if (notificationWakeUpCoordinatorLogger.lastSetHideAmount != fMin) {
+            notificationWakeUpCoordinatorLogger.lastSetHideAmount = fMin;
+            boolean z = (fMin == 1.0f || fMin == 0.0f) ? false : true;
             if (!notificationWakeUpCoordinatorLogger.lastSetHideAmountLogWasFractional || !z) {
                 notificationWakeUpCoordinatorLogger.lastSetHideAmountLogWasFractional = z;
                 LogLevel logLevel = LogLevel.DEBUG;
                 NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0 = new NotificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0(3);
                 LogBuffer logBuffer = notificationWakeUpCoordinatorLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).double1 = min;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("NotificationWakeUpCoordinator", logLevel, notificationWakeUpCoordinatorLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).double1 = fMin;
+                logBuffer.commit(logMessageObtain);
             }
         }
         NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.stackScrollerController;
@@ -681,48 +677,41 @@ public final class NotificationWakeUpCoordinator implements OnHeadsUpChangedList
             notificationStackScrollLayoutController = null;
         }
         NotificationStackScrollLayout notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
-        notificationStackScrollLayout.mLinearHideAmount = min;
-        notificationStackScrollLayout.mInterpolatedHideAmount = min2;
-        boolean isFullyHidden = notificationStackScrollLayout.mAmbientState.isFullyHidden();
-        boolean isHiddenAtAll = notificationStackScrollLayout.mAmbientState.isHiddenAtAll();
+        notificationStackScrollLayout.mLinearHideAmount = fMin;
+        notificationStackScrollLayout.mInterpolatedHideAmount = fMin2;
+        boolean zIsFullyHidden = notificationStackScrollLayout.mAmbientState.isFullyHidden();
+        boolean zIsHiddenAtAll = notificationStackScrollLayout.mAmbientState.isHiddenAtAll();
         AmbientState ambientState = notificationStackScrollLayout.mAmbientState;
-        if (min2 == 1.0f && ambientState.mHideAmount != min2) {
+        if (fMin2 == 1.0f && ambientState.mHideAmount != fMin2) {
             ambientState.setPulseHeight(100000.0f);
         }
-        ambientState.mHideAmount = min2;
-        boolean isFullyHidden2 = notificationStackScrollLayout.mAmbientState.isFullyHidden();
-        boolean isHiddenAtAll2 = notificationStackScrollLayout.mAmbientState.isHiddenAtAll();
-        if (isFullyHidden2 != isFullyHidden) {
-            NotificationStackScrollLayoutController notificationStackScrollLayoutController2 = notificationStackScrollLayout.mController;
-            boolean z2 = (notificationStackScrollLayout.mAmbientState.isFullyHidden() && notificationStackScrollLayout.onKeyguard()) ? false : true;
-            notificationStackScrollLayoutController2.getClass();
-            if (z2 && notificationStackScrollLayoutController2.mBlockHideAmountVisibility) {
-                notificationStackScrollLayoutController2.mBlockHideAmountVisibility = false;
-                z2 = false;
-            }
-            notificationStackScrollLayoutController2.mView.setVisibility(z2 ? 0 : 4);
+        ambientState.mHideAmount = fMin2;
+        boolean zIsFullyHidden2 = notificationStackScrollLayout.mAmbientState.isFullyHidden();
+        boolean zIsHiddenAtAll2 = notificationStackScrollLayout.mAmbientState.isHiddenAtAll();
+        if (zIsFullyHidden2 != zIsFullyHidden) {
+            notificationStackScrollLayout.mController.updateVisibility((notificationStackScrollLayout.mAmbientState.isFullyHidden() && notificationStackScrollLayout.onKeyguard()) ? false : true);
             notificationStackScrollLayout.resetAllSwipeState();
         }
-        if (!isHiddenAtAll && isHiddenAtAll2) {
+        if (!zIsHiddenAtAll && zIsHiddenAtAll2) {
             notificationStackScrollLayout.mSwipeHelper.resetExposedMenuView$1(true, true);
         }
-        if (isFullyHidden2 != isFullyHidden || isHiddenAtAll != isHiddenAtAll2) {
+        if (zIsFullyHidden2 != zIsFullyHidden || zIsHiddenAtAll != zIsHiddenAtAll2) {
             notificationStackScrollLayout.invalidateOutline();
         }
         notificationStackScrollLayout.updateAlgorithmHeightAndPadding();
         notificationStackScrollLayout.requestChildrenUpdate();
         notificationStackScrollLayout.updateOwnTranslationZ();
-        boolean z3 = min == 1.0f;
-        if (this.notificationsFullyHidden != z3) {
-            this.notificationsFullyHidden = z3;
+        boolean z2 = fMin == 1.0f;
+        if (this.notificationsFullyHidden != z2) {
+            this.notificationsFullyHidden = z2;
             ArrayList arrayList = this.wakeUpListeners;
             int size = arrayList.size();
             while (i < size) {
                 Object obj = arrayList.get(i);
                 i++;
-                ((WakeUpListener) obj).onFullyHiddenChanged(z3);
+                ((WakeUpListener) obj).onFullyHiddenChanged(z2);
             }
-            this.notifsKeyguardInteractor.repository.areNotificationsFullyHidden.updateState(null, Boolean.valueOf(z3));
+            this.notifsKeyguardInteractor.repository.areNotificationsFullyHidden.updateState(null, Boolean.valueOf(z2));
         }
     }
 

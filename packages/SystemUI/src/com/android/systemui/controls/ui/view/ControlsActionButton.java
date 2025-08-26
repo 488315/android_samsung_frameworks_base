@@ -7,7 +7,6 @@ import android.widget.ProgressBar;
 import com.android.systemui.R;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsActionButton {
     public CharSequence actionButtonDescription;
@@ -18,15 +17,15 @@ public final class ControlsActionButton {
 
     public ControlsActionButton(ViewStub viewStub) {
         viewStub.setLayoutResource(R.layout.controls_action_button);
-        View inflate = viewStub.inflate();
-        ImageView imageView = (ImageView) inflate.findViewById(R.id.action_icon);
+        View viewInflate = viewStub.inflate();
+        ImageView imageView = (ImageView) viewInflate.findViewById(R.id.action_icon);
         if (imageView != null) {
             imageView.setSoundEffectsEnabled(false);
         } else {
             imageView = null;
         }
         this.actionIcon = imageView;
-        this.actionIconProgress = (ProgressBar) inflate.findViewById(R.id.action_icon_progress_circle);
+        this.actionIconProgress = (ProgressBar) viewInflate.findViewById(R.id.action_icon_progress_circle);
         this.actionButtonDescription = viewStub.getContext().getString(R.string.controls_action_button);
     }
 

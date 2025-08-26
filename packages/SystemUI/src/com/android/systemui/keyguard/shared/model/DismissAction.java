@@ -2,11 +2,9 @@ package com.android.systemui.keyguard.shared.model;
 
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface DismissAction {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class None implements DismissAction {
         public static final String message;
         public static final DismissAction$None$onCancelAction$1 onCancelAction = null;
@@ -53,7 +51,6 @@ public interface DismissAction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RunImmediately implements DismissAction {
         public final String message;
         public final Runnable onCancelAction;

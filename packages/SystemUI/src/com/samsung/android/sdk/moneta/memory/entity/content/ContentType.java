@@ -8,7 +8,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ContentType {
     private static final /* synthetic */ EnumEntries $ENTRIES;
@@ -23,27 +22,26 @@ public final class ContentType {
     public static final ContentType Music = new ContentType("Music", 5, 5);
     public static final ContentType Video = new ContentType(SystemUIAnalytics.DT_WALLPAPER_STATUS_TYPE_VIDEO, 6, 6);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         public static ContentType fromInt(Integer num) {
-            Object obj;
+            Object next;
             Iterator<E> it = ContentType.getEntries().iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 }
-                obj = it.next();
-                int value = ((ContentType) obj).getValue();
+                next = it.next();
+                int value = ((ContentType) next).getValue();
                 if (num != null && value == num.intValue()) {
                     break;
                 }
             }
-            return (ContentType) obj;
+            return (ContentType) next;
         }
 
         private Companion() {
@@ -55,9 +53,9 @@ public final class ContentType {
     }
 
     static {
-        ContentType[] $values = $values();
-        $VALUES = $values;
-        $ENTRIES = EnumEntriesKt.enumEntries($values);
+        ContentType[] contentTypeArr$values = $values();
+        $VALUES = contentTypeArr$values;
+        $ENTRIES = EnumEntriesKt.enumEntries(contentTypeArr$values);
         Companion = new Companion(null);
     }
 

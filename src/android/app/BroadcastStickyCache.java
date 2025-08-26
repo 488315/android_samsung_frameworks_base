@@ -71,25 +71,23 @@ public class BroadcastStickyCache {
     }
 
     public static Intent getIntent(final IApplicationThread iApplicationThread, final String str, final String str2, final IntentFilter intentFilter, final String str3, final int i, final int i2) {
-        IpcDataCache<Void, Intent> findIpcDataCache;
+        IpcDataCache<Void, Intent> ipcDataCacheFindIpcDataCache;
         synchronized (BroadcastStickyCache.class) {
-            findIpcDataCache = findIpcDataCache(intentFilter);
-            if (findIpcDataCache == null) {
+            ipcDataCacheFindIpcDataCache = findIpcDataCache(intentFilter);
+            if (ipcDataCacheFindIpcDataCache == null) {
                 String action = intentFilter.getAction(0);
                 StickyBroadcastFilter stickyBroadcastFilter = new StickyBroadcastFilter(intentFilter, action);
                 IpcDataCache<Void, Intent> ipcDataCache = new IpcDataCache<>(getConfig(action), (IpcDataCache.RemoteCall<Void, Intent>) new IpcDataCache.RemoteCall() { // from class: android.app.BroadcastStickyCache$$ExternalSyntheticLambda0
                     @Override // android.os.IpcDataCache.RemoteCall
                     public final Object apply(Object obj) {
-                        Intent registerReceiverWithFeature;
-                        registerReceiverWithFeature = ActivityManager.getService().registerReceiverWithFeature(IApplicationThread.this, str, str2, PerfettoProtoLogImpl.NULL_STRING, null, intentFilter, str3, i, i2);
-                        return registerReceiverWithFeature;
+                        return ActivityManager.getService().registerReceiverWithFeature(iApplicationThread, str, str2, PerfettoProtoLogImpl.NULL_STRING, null, intentFilter, str3, i, i2);
                     }
                 });
                 sFilterCacheMap.put(stickyBroadcastFilter, ipcDataCache);
-                findIpcDataCache = ipcDataCache;
+                ipcDataCacheFindIpcDataCache = ipcDataCache;
             }
         }
-        return findIpcDataCache.query(null);
+        return ipcDataCacheFindIpcDataCache.query(null);
     }
 
     public static void clearCacheForTest() {
@@ -101,8 +99,8 @@ public class BroadcastStickyCache {
     private static IpcDataCache<Void, Intent> findIpcDataCache(IntentFilter intentFilter) {
         for (int size = sFilterCacheMap.size() - 1; size >= 0; size--) {
             ArrayMap<StickyBroadcastFilter, IpcDataCache<Void, Intent>> arrayMap = sFilterCacheMap;
-            StickyBroadcastFilter keyAt = arrayMap.keyAt(size);
-            if (intentFilter.getAction(0).equals(keyAt.action()) && IntentFilter.filterEquals(keyAt.filter(), intentFilter)) {
+            StickyBroadcastFilter stickyBroadcastFilterKeyAt = arrayMap.keyAt(size);
+            if (intentFilter.getAction(0).equals(stickyBroadcastFilterKeyAt.action()) && IntentFilter.filterEquals(stickyBroadcastFilterKeyAt.filter(), intentFilter)) {
                 return arrayMap.valueAt(size);
             }
         }
@@ -137,15 +135,15 @@ public class BroadcastStickyCache {
         } else {
             for (int i = 0; i < size; i++) {
                 ArrayMap<StickyBroadcastFilter, IpcDataCache<Void, Intent>> arrayMap = sFilterCacheMap;
-                StickyBroadcastFilter keyAt = arrayMap.keyAt(i);
-                IpcDataCache<Void, Intent> valueAt = arrayMap.valueAt(i);
+                StickyBroadcastFilter stickyBroadcastFilterKeyAt = arrayMap.keyAt(i);
+                IpcDataCache<Void, Intent> ipcDataCacheValueAt = arrayMap.valueAt(i);
                 indentingPrintWriter.print("Entry #");
                 indentingPrintWriter.print(i);
                 indentingPrintWriter.println(":");
                 indentingPrintWriter.increaseIndent();
-                indentingPrintWriter.print("action", keyAt.action).println();
-                indentingPrintWriter.print("filter", keyAt.filter.toLongString()).println();
-                valueAt.dumpCacheEntries(printWriter);
+                indentingPrintWriter.print("action", stickyBroadcastFilterKeyAt.action).println();
+                indentingPrintWriter.print("filter", stickyBroadcastFilterKeyAt.filter.toLongString()).println();
+                ipcDataCacheValueAt.dumpCacheEntries(printWriter);
                 indentingPrintWriter.decreaseIndent();
             }
         }

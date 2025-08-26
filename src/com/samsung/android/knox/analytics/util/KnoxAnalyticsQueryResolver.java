@@ -29,23 +29,23 @@ public class KnoxAnalyticsQueryResolver {
         contentValues.put("id", Long.valueOf(j));
         contentValues.put("data", str);
         Uri uriFromType = getUriFromType(i);
-        long j2 = -1;
+        long id = -1;
         if (uriFromType == null) {
             Log.d(str2, "addEvent(): null ret uri");
             return -1L;
         }
-        Uri insert = contentResolver.insert(uriFromType, contentValues);
-        if (insert == null) {
+        Uri uriInsert = contentResolver.insert(uriFromType, contentValues);
+        if (uriInsert == null) {
             Log.d(str2, "addEvent(): null ret uri");
             return -1L;
         }
         try {
-            j2 = ContentUris.parseId(insert);
+            id = ContentUris.parseId(uriInsert);
         } catch (NumberFormatException e) {
             Log.e(TAG, "addEvent(): error parsing return id - " + e.getMessage());
         }
-        Log.d(TAG, "addEvent(): actualId = " + j2);
-        return j2;
+        Log.d(TAG, "addEvent(): actualId = " + id);
+        return id;
     }
 
     public static long addCleanEvent(Context context, long j, ContentValues contentValues) {
@@ -54,23 +54,23 @@ public class KnoxAnalyticsQueryResolver {
         ContentResolver contentResolver = context.getContentResolver();
         contentValues.put("id", Long.valueOf(j));
         Uri uriFromType = getUriFromType(0);
-        long j2 = -1;
+        long id = -1;
         if (uriFromType == null) {
             Log.d(str, "addCleanEvent(): wrong uri");
             return -1L;
         }
-        Uri insert = contentResolver.insert(uriFromType, contentValues);
-        if (insert == null) {
+        Uri uriInsert = contentResolver.insert(uriFromType, contentValues);
+        if (uriInsert == null) {
             Log.d(str, "addCleanEvent(): null ret uri");
             return -1L;
         }
         try {
-            j2 = ContentUris.parseId(insert);
+            id = ContentUris.parseId(uriInsert);
         } catch (NumberFormatException e) {
             Log.e(TAG, "addCleanEvent(): error parsing return id - " + e.getMessage());
         }
-        Log.d(TAG, "addCleanEvent(): actualId = " + j2);
-        return j2;
+        Log.d(TAG, "addCleanEvent(): actualId = " + id);
+        return id;
     }
 
     public static long addBulkEvents(Context context, long j, Bundle bundle, int i) {
@@ -87,13 +87,13 @@ public class KnoxAnalyticsQueryResolver {
         Event event;
         ContentResolver contentResolver = context.getContentResolver();
         EventList eventList = new EventList();
-        Cursor query = contentResolver.query(Contract.Events.CONTENT_URI, new String[]{Contract.Events.Projection.CHUNK_SIZE_ONLY_PLAIN_EVENTS}, null, null, null);
-        if (query != null) {
+        Cursor cursorQuery = contentResolver.query(Contract.Events.CONTENT_URI, new String[]{Contract.Events.Projection.CHUNK_SIZE_ONLY_PLAIN_EVENTS}, null, null, null);
+        if (cursorQuery != null) {
             try {
-                if (query.getCount() > 0) {
-                    while (query.moveToNext()) {
+                if (cursorQuery.getCount() > 0) {
+                    while (cursorQuery.moveToNext()) {
                         try {
-                            event = new Event(query.getInt(query.getColumnIndex("id")), query.getInt(query.getColumnIndex(Contract.Events.Field.VERSIONING_ID)), query.getInt(query.getColumnIndex("bulk")), query.getString(query.getColumnIndex("data")));
+                            event = new Event(cursorQuery.getInt(cursorQuery.getColumnIndex("id")), cursorQuery.getInt(cursorQuery.getColumnIndex(Contract.Events.Field.VERSIONING_ID)), cursorQuery.getInt(cursorQuery.getColumnIndex("bulk")), cursorQuery.getString(cursorQuery.getColumnIndex("data")));
                         } catch (JSONException e) {
                             Log.e(TAG, "Could not parse JSON. Invalid format", e);
                             event = null;
@@ -102,30 +102,30 @@ public class KnoxAnalyticsQueryResolver {
                             eventList.put(event);
                         }
                     }
-                    if (query != null) {
-                        query.close();
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
                     }
                     return eventList;
                 }
             } finally {
             }
         }
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return null;
     }
 
     public static Bundle performCompressedEventsTransaction(Context context, EventList eventList) {
-        ZipResult deflate = ZipHandler.deflate(eventList.toByteArray());
-        if (deflate == null) {
+        ZipResult zipResultDeflate = ZipHandler.deflate(eventList.toByteArray());
+        if (zipResultDeflate == null) {
             Log.d(TAG, "performCompressedEventsTransaction(): null input data");
             return null;
         }
         ContentValues contentValues = new ContentValues();
-        contentValues.put("content", deflate.getContent());
-        contentValues.put(Contract.CompressedEvents.Field.LENGTH, Integer.valueOf(deflate.getLength()));
-        contentValues.put(Contract.CompressedEvents.Field.ORIGINAL_LENGTH, Integer.valueOf(deflate.getOriginalLength()));
+        contentValues.put("content", zipResultDeflate.getContent());
+        contentValues.put(Contract.CompressedEvents.Field.LENGTH, Integer.valueOf(zipResultDeflate.getLength()));
+        contentValues.put(Contract.CompressedEvents.Field.ORIGINAL_LENGTH, Integer.valueOf(zipResultDeflate.getOriginalLength()));
         contentValues.put("bulk", Integer.valueOf(eventList.getTotalEventsCount()));
         contentValues.put(Contract.CompressedEvents.Keys.PLAIN_EVENTS_SIZE, Integer.valueOf(eventList.length()));
         Bundle bundle = new Bundle();
@@ -144,88 +144,60 @@ public class KnoxAnalyticsQueryResolver {
         return null;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x003c, code lost:
-    
-        if (r4 != null) goto L19;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x003e A[Catch: IllegalStateException -> 0x004d, PHI: r1
+      0x003e: PHI (r1v8 long) = (r1v5 long), (r1v4 long) binds: [B:13:0x0033, B:18:0x003c] A[DONT_GENERATE, DONT_INLINE], TRY_ENTER, TRY_LEAVE, TryCatch #2 {IllegalStateException -> 0x004d, blocks: (B:3:0x000b, B:19:0x003e, B:26:0x004c, B:25:0x0049, B:6:0x001c, B:9:0x0023, B:11:0x002a, B:17:0x0037, B:22:0x0044), top: B:33:0x000b, inners: #0, #1 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static long getLastEventId(android.content.Context r4) {
-        /*
-            java.lang.String r0 = com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver.TAG
-            java.lang.String r1 = "getLastEventId()"
-            com.samsung.android.knox.analytics.util.Log.d(r0, r1)
-            android.content.ContentResolver r4 = r4.getContentResolver()
-            android.net.Uri r1 = com.samsung.android.knox.analytics.database.Contract.Events.CONTENT_URI     // Catch: java.lang.IllegalStateException -> L4d
-            java.lang.String r2 = "lastEventId"
-            java.lang.String[] r2 = new java.lang.String[]{r2}     // Catch: java.lang.IllegalStateException -> L4d
-            r3 = 0
-            android.database.Cursor r4 = r4.query(r1, r2, r3, r3)     // Catch: java.lang.IllegalStateException -> L4d
-            r1 = -1
-            if (r4 == 0) goto L37
-            int r3 = r4.getCount()     // Catch: java.lang.Throwable -> L35
-            if (r3 != 0) goto L23
-            goto L37
-        L23:
-            r0 = 0
-            boolean r3 = r4.isNull(r0)     // Catch: java.lang.Throwable -> L35
-            if (r3 != 0) goto L31
-            r4.moveToFirst()     // Catch: java.lang.Throwable -> L35
-            long r1 = r4.getLong(r0)     // Catch: java.lang.Throwable -> L35
-        L31:
-            if (r4 == 0) goto L34
-            goto L3e
-        L34:
-            return r1
-        L35:
-            r0 = move-exception
-            goto L42
-        L37:
-            java.lang.String r3 = "getLastEventId(): empty cursor"
-            com.samsung.android.knox.analytics.util.Log.d(r0, r3)     // Catch: java.lang.Throwable -> L35
-            if (r4 == 0) goto L41
-        L3e:
-            r4.close()     // Catch: java.lang.IllegalStateException -> L4d
-        L41:
-            return r1
-        L42:
-            if (r4 == 0) goto L4c
-            r4.close()     // Catch: java.lang.Throwable -> L48
-            goto L4c
-        L48:
-            r4 = move-exception
-            r0.addSuppressed(r4)     // Catch: java.lang.IllegalStateException -> L4d
-        L4c:
-            throw r0     // Catch: java.lang.IllegalStateException -> L4d
-        L4d:
-            r4 = move-exception
-            java.lang.String r0 = com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver.TAG
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r2 = "getLastEventId(): ERROR READING CONTENT PROVIDER! "
-            r1.<init>(r2)
-            java.lang.String r2 = r4.getLocalizedMessage()
-            r1.append(r2)
-            java.lang.String r1 = r1.toString()
-            com.samsung.android.knox.analytics.util.Log.e(r0, r1)
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver.getLastEventId(android.content.Context):long");
+    public static long getLastEventId(Context context) throws Throwable {
+        String str = TAG;
+        Log.d(str, "getLastEventId()");
+        try {
+            Cursor cursorQuery = context.getContentResolver().query(Contract.Events.CONTENT_URI, new String[]{"lastEventId"}, null, null);
+            long j = -1;
+            if (cursorQuery != null) {
+                try {
+                    if (cursorQuery.getCount() == 0) {
+                        Log.d(str, "getLastEventId(): empty cursor");
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
+                        }
+                    } else {
+                        if (!cursorQuery.isNull(0)) {
+                            cursorQuery.moveToFirst();
+                            j = cursorQuery.getLong(0);
+                        }
+                        if (cursorQuery == null) {
+                            return j;
+                        }
+                        cursorQuery.close();
+                    }
+                } finally {
+                }
+            } else {
+                Log.d(str, "getLastEventId(): empty cursor");
+                if (cursorQuery != null) {
+                }
+            }
+            return j;
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "getLastEventId(): ERROR READING CONTENT PROVIDER! " + e.getLocalizedMessage());
+            throw e;
+        }
     }
 
-    public static long getEventCount(Context context) {
+    public static long getEventCount(Context context) throws Throwable {
         String str = TAG;
         Log.d(str, "getEventCount()");
         try {
-            Cursor query = context.getContentResolver().query(Contract.Events.CONTENT_URI, new String[]{Contract.Events.Projection.COUNT_ONLY}, null, null);
-            if (query != null) {
+            Cursor cursorQuery = context.getContentResolver().query(Contract.Events.CONTENT_URI, new String[]{Contract.Events.Projection.COUNT_ONLY}, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.getCount() > 0) {
-                        query.moveToFirst();
-                        long j = query.getLong(0);
-                        if (query != null) {
-                            query.close();
+                    if (cursorQuery.getCount() > 0) {
+                        cursorQuery.moveToFirst();
+                        long j = cursorQuery.getLong(0);
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return j;
                     }
@@ -233,8 +205,8 @@ public class KnoxAnalyticsQueryResolver {
                 }
             }
             Log.d(str, "getEventCount(): empty cursor");
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return -1L;
         } catch (IllegalStateException e) {
@@ -243,23 +215,23 @@ public class KnoxAnalyticsQueryResolver {
         }
     }
 
-    public static List<BlacklistedFeature> getFeaturesBlacklist(Context context) {
+    public static List<BlacklistedFeature> getFeaturesBlacklist(Context context) throws Throwable {
         String str = TAG;
         Log.d(str, "getFeaturesBlacklist()");
         try {
-            Cursor query = context.getContentResolver().query(Contract.FeaturesBlacklist.CONTENT_URI, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = context.getContentResolver().query(Contract.FeaturesBlacklist.CONTENT_URI, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.getCount() != 0) {
-                        int columnIndex = query.getColumnIndex("feature");
-                        int columnIndex2 = query.getColumnIndex("event");
-                        ArrayList arrayList = new ArrayList(query.getCount());
-                        query.moveToFirst();
+                    if (cursorQuery.getCount() != 0) {
+                        int columnIndex = cursorQuery.getColumnIndex("feature");
+                        int columnIndex2 = cursorQuery.getColumnIndex("event");
+                        ArrayList arrayList = new ArrayList(cursorQuery.getCount());
+                        cursorQuery.moveToFirst();
                         do {
-                            arrayList.add(new BlacklistedFeature(query.getString(columnIndex), convertEventToList(query.getString(columnIndex2))));
-                        } while (query.moveToNext());
-                        if (query != null) {
-                            query.close();
+                            arrayList.add(new BlacklistedFeature(cursorQuery.getString(columnIndex), convertEventToList(cursorQuery.getString(columnIndex2))));
+                        } while (cursorQuery.moveToNext());
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return arrayList;
                     }
@@ -268,8 +240,8 @@ public class KnoxAnalyticsQueryResolver {
             }
             Log.d(str, "getFeaturesBlacklist(): empty cursor");
             List<BlacklistedFeature> list = Collections.EMPTY_LIST;
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return list;
         } catch (IllegalStateException e) {
@@ -290,103 +262,50 @@ public class KnoxAnalyticsQueryResolver {
         return DatabaseCleanResult.fromBundle(contentResolver.call(Contract.CONTENT_URI, Contract.DatabaseClean.METHOD, (String) null, bundle));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0067, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:13:0x0067, code lost:
     
         if (r7 != null) goto L14;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0069, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:14:0x0069, code lost:
     
         r7.close();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x006c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:15:0x006c, code lost:
     
         return r3;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0075, code lost:
-    
-        return r3;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0072, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:17:0x0072, code lost:
     
         if (r7 != null) goto L14;
      */
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x0075, code lost:
+    
+        return r3;
+     */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String[] getVersioningBlob(android.content.Context r7) {
-        /*
-            java.lang.String r0 = "getVersioningBlob() - id = "
-            java.lang.String r1 = com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver.TAG
-            java.lang.String r2 = "getVersioningBlob()"
-            com.samsung.android.knox.analytics.util.Log.d(r1, r2)
-            android.content.ContentResolver r7 = r7.getContentResolver()
-            r2 = 0
-            android.net.Uri r3 = com.samsung.android.knox.analytics.database.Contract.Versioning.CONTENT_URI     // Catch: java.lang.IllegalStateException -> L82
-            android.database.Cursor r7 = r7.query(r3, r2, r2, r2)     // Catch: java.lang.IllegalStateException -> L82
-            r3 = 2
-            java.lang.String[] r3 = new java.lang.String[r3]     // Catch: java.lang.Throwable -> L76
-            java.lang.String r4 = "-1"
-            r5 = 0
-            r3[r5] = r4     // Catch: java.lang.Throwable -> L76
-            java.lang.String r4 = ""
-            r6 = 1
-            r3[r6] = r4     // Catch: java.lang.Throwable -> L76
-            if (r7 == 0) goto L6d
-            int r4 = r7.getCount()     // Catch: java.lang.Throwable -> L76
-            if (r4 != 0) goto L2a
-            goto L6d
-        L2a:
-            boolean r4 = r7.moveToLast()     // Catch: java.lang.Throwable -> L76
-            if (r4 == 0) goto L67
-            java.lang.String r4 = "id"
-            int r4 = r7.getColumnIndex(r4)     // Catch: java.lang.Throwable -> L76
-            int r4 = r7.getInt(r4)     // Catch: java.lang.Throwable -> L76
-            java.lang.String r4 = java.lang.String.valueOf(r4)     // Catch: java.lang.Throwable -> L76
-            r3[r5] = r4     // Catch: java.lang.Throwable -> L76
-            java.lang.String r4 = "data"
-            int r4 = r7.getColumnIndex(r4)     // Catch: java.lang.Throwable -> L76
-            java.lang.String r4 = r7.getString(r4)     // Catch: java.lang.Throwable -> L76
-            r3[r6] = r4     // Catch: java.lang.Throwable -> L76
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L76
-            r4.<init>(r0)     // Catch: java.lang.Throwable -> L76
-            r0 = r3[r5]     // Catch: java.lang.Throwable -> L76
-            r4.append(r0)     // Catch: java.lang.Throwable -> L76
-            java.lang.String r0 = ", data = "
-            r4.append(r0)     // Catch: java.lang.Throwable -> L76
-            r0 = r3[r6]     // Catch: java.lang.Throwable -> L76
-            r4.append(r0)     // Catch: java.lang.Throwable -> L76
-            java.lang.String r0 = r4.toString()     // Catch: java.lang.Throwable -> L76
-            com.samsung.android.knox.analytics.util.Log.d(r1, r0)     // Catch: java.lang.Throwable -> L76
-        L67:
-            if (r7 == 0) goto L75
-        L69:
-            r7.close()     // Catch: java.lang.IllegalStateException -> L82
-            return r3
-        L6d:
-            java.lang.String r0 = "getVersioningBlob(): empty cursor"
-            com.samsung.android.knox.analytics.util.Log.d(r1, r0)     // Catch: java.lang.Throwable -> L76
-            if (r7 == 0) goto L75
-            goto L69
-        L75:
-            return r3
-        L76:
-            r0 = move-exception
-            if (r7 == 0) goto L81
-            r7.close()     // Catch: java.lang.Throwable -> L7d
-            goto L81
-        L7d:
-            r7 = move-exception
-            r0.addSuppressed(r7)     // Catch: java.lang.IllegalStateException -> L82
-        L81:
-            throw r0     // Catch: java.lang.IllegalStateException -> L82
-        L82:
-            java.lang.String r7 = com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver.TAG
-            java.lang.String r0 = "getFeaturesBlacklist(): ERROR READING CONTENT PROVIDER! "
-            com.samsung.android.knox.analytics.util.Log.e(r7, r0)
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver.getVersioningBlob(android.content.Context):java.lang.String[]");
+    public static String[] getVersioningBlob(Context context) throws Throwable {
+        String str = TAG;
+        Log.d(str, "getVersioningBlob()");
+        try {
+            Cursor cursorQuery = context.getContentResolver().query(Contract.Versioning.CONTENT_URI, null, null, null);
+            try {
+                String[] strArr = {"-1", ""};
+                if (cursorQuery != null && cursorQuery.getCount() != 0) {
+                    if (cursorQuery.moveToLast()) {
+                        strArr[0] = String.valueOf(cursorQuery.getInt(cursorQuery.getColumnIndex("id")));
+                        strArr[1] = cursorQuery.getString(cursorQuery.getColumnIndex("data"));
+                        Log.d(str, "getVersioningBlob() - id = " + strArr[0] + ", data = " + strArr[1]);
+                    }
+                }
+                Log.d(str, "getVersioningBlob(): empty cursor");
+            } finally {
+            }
+        } catch (IllegalStateException unused) {
+            Log.e(TAG, "getFeaturesBlacklist(): ERROR READING CONTENT PROVIDER! ");
+            return null;
+        }
     }
 
     public static long addVersioningBlob(Context context, int i, String str, long j) {
@@ -397,94 +316,65 @@ public class KnoxAnalyticsQueryResolver {
         contentValues.put("id", Integer.valueOf(i));
         contentValues.put("data", str);
         contentValues.put(Contract.Versioning.AUX_FIELD_EVENT_ID, Long.valueOf(j));
-        Uri insert = contentResolver.insert(Contract.Versioning.CONTENT_URI, contentValues);
-        if (insert == null) {
+        Uri uriInsert = contentResolver.insert(Contract.Versioning.CONTENT_URI, contentValues);
+        if (uriInsert == null) {
             Log.d(str2, "addVersioningBlob(): null ret uri");
             return -1L;
         }
         try {
-            return ContentUris.parseId(insert);
+            return ContentUris.parseId(uriInsert);
         } catch (NumberFormatException unused) {
             Log.e(TAG, "addVersioningBlob(): error parsing return id");
             return -1L;
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0036, code lost:
-    
-        if (r4 != null) goto L19;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0038 A[Catch: IllegalStateException -> 0x0047, PHI: r1
+      0x0038: PHI (r1v8 long) = (r1v5 long), (r1v4 long) binds: [B:13:0x002d, B:18:0x0036] A[DONT_GENERATE, DONT_INLINE], TRY_ENTER, TRY_LEAVE, TryCatch #1 {IllegalStateException -> 0x0047, blocks: (B:3:0x000b, B:19:0x0038, B:26:0x0046, B:25:0x0043, B:22:0x003e, B:6:0x0016, B:9:0x001d, B:11:0x0027, B:17:0x0031), top: B:32:0x000b, inners: #0, #2 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static long getDatabaseSize(android.content.Context r4) {
-        /*
-            java.lang.String r0 = com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver.TAG
-            java.lang.String r1 = "getDatabaseSize()"
-            com.samsung.android.knox.analytics.util.Log.d(r0, r1)
-            android.content.ContentResolver r4 = r4.getContentResolver()
-            android.net.Uri r1 = com.samsung.android.knox.analytics.database.Contract.DatabaseSize.CONTENT_URI     // Catch: java.lang.IllegalStateException -> L47
-            r2 = 0
-            android.database.Cursor r4 = r4.query(r1, r2, r2, r2)     // Catch: java.lang.IllegalStateException -> L47
-            r1 = -1
-            if (r4 == 0) goto L31
-            int r3 = r4.getCount()     // Catch: java.lang.Throwable -> L2f
-            if (r3 != 0) goto L1d
-            goto L31
-        L1d:
-            r4.moveToFirst()     // Catch: java.lang.Throwable -> L2f
-            r0 = 0
-            boolean r3 = r4.isNull(r0)     // Catch: java.lang.Throwable -> L2f
-            if (r3 != 0) goto L2b
-            long r1 = r4.getLong(r0)     // Catch: java.lang.Throwable -> L2f
-        L2b:
-            if (r4 == 0) goto L2e
-            goto L38
-        L2e:
-            return r1
-        L2f:
-            r0 = move-exception
-            goto L3c
-        L31:
-            java.lang.String r3 = "getDatabaseSize(): empty cursor"
-            com.samsung.android.knox.analytics.util.Log.d(r0, r3)     // Catch: java.lang.Throwable -> L2f
-            if (r4 == 0) goto L3b
-        L38:
-            r4.close()     // Catch: java.lang.IllegalStateException -> L47
-        L3b:
-            return r1
-        L3c:
-            if (r4 == 0) goto L46
-            r4.close()     // Catch: java.lang.Throwable -> L42
-            goto L46
-        L42:
-            r4 = move-exception
-            r0.addSuppressed(r4)     // Catch: java.lang.IllegalStateException -> L47
-        L46:
-            throw r0     // Catch: java.lang.IllegalStateException -> L47
-        L47:
-            r4 = move-exception
-            java.lang.String r0 = com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver.TAG
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r2 = "getDatabaseSize(): ERROR READING CONTENT PROVIDER! "
-            r1.<init>(r2)
-            java.lang.String r2 = r4.getLocalizedMessage()
-            r1.append(r2)
-            java.lang.String r1 = r1.toString()
-            com.samsung.android.knox.analytics.util.Log.e(r0, r1)
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver.getDatabaseSize(android.content.Context):long");
+    public static long getDatabaseSize(Context context) throws Throwable {
+        String str = TAG;
+        Log.d(str, "getDatabaseSize()");
+        try {
+            Cursor cursorQuery = context.getContentResolver().query(Contract.DatabaseSize.CONTENT_URI, null, null, null);
+            if (cursorQuery != null) {
+                try {
+                    if (cursorQuery.getCount() == 0) {
+                        Log.d(str, "getDatabaseSize(): empty cursor");
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
+                        }
+                    } else {
+                        cursorQuery.moveToFirst();
+                        j = cursorQuery.isNull(0) ? -1L : cursorQuery.getLong(0);
+                        if (cursorQuery == null) {
+                            return j;
+                        }
+                        cursorQuery.close();
+                    }
+                } finally {
+                }
+            } else {
+                Log.d(str, "getDatabaseSize(): empty cursor");
+                if (cursorQuery != null) {
+                }
+            }
+            return j;
+        } catch (IllegalStateException e) {
+            Log.e(TAG, "getDatabaseSize(): ERROR READING CONTENT PROVIDER! " + e.getLocalizedMessage());
+            throw e;
+        }
     }
 
-    public static DatabaseCleanResult removeAllEvents(Context context) {
+    public static DatabaseCleanResult removeAllEvents(Context context) throws Throwable {
         Log.d(TAG, "removeAllEvents()");
         long databaseSize = getDatabaseSize(context);
-        int delete = context.getContentResolver().delete(Contract.Reset.CONTENT_URI, null, null);
+        int iDelete = context.getContentResolver().delete(Contract.Reset.CONTENT_URI, null, null);
         long databaseSize2 = databaseSize - getDatabaseSize(context);
         Bundle bundle = new Bundle();
-        bundle.putLong(Contract.DatabaseClean.Extra.DELETED_EVENTS_COUNT, delete);
+        bundle.putLong(Contract.DatabaseClean.Extra.DELETED_EVENTS_COUNT, iDelete);
         bundle.putLong(Contract.DatabaseClean.Extra.DELETED_SIZE_BYTES, databaseSize2);
         return DatabaseCleanResult.fromBundle(bundle);
     }
@@ -494,23 +384,23 @@ public class KnoxAnalyticsQueryResolver {
         context.getContentResolver().call(Contract.CONTENT_URI, Contract.Versioning.METHOD_NOTIFY_VERSIONING_COMPLETED, (String) null, (Bundle) null);
     }
 
-    public static List<WhitelistedFeature> getFeaturesWhitelist(Context context) {
+    public static List<WhitelistedFeature> getFeaturesWhitelist(Context context) throws Throwable {
         String str = TAG;
         Log.d(str, "getFeaturesWhitelist()");
         try {
-            Cursor query = context.getContentResolver().query(Contract.FeaturesWhitelist.CONTENT_URI, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = context.getContentResolver().query(Contract.FeaturesWhitelist.CONTENT_URI, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.getCount() != 0) {
-                        int columnIndex = query.getColumnIndex("feature");
-                        int columnIndex2 = query.getColumnIndex("enable_type");
-                        ArrayList arrayList = new ArrayList(query.getCount());
-                        query.moveToFirst();
+                    if (cursorQuery.getCount() != 0) {
+                        int columnIndex = cursorQuery.getColumnIndex("feature");
+                        int columnIndex2 = cursorQuery.getColumnIndex("enable_type");
+                        ArrayList arrayList = new ArrayList(cursorQuery.getCount());
+                        cursorQuery.moveToFirst();
                         do {
-                            arrayList.add(new WhitelistedFeature(query.getString(columnIndex), query.isNull(columnIndex2) ? null : Integer.valueOf(query.getInt(columnIndex2))));
-                        } while (query.moveToNext());
-                        if (query != null) {
-                            query.close();
+                            arrayList.add(new WhitelistedFeature(cursorQuery.getString(columnIndex), cursorQuery.isNull(columnIndex2) ? null : Integer.valueOf(cursorQuery.getInt(columnIndex2))));
+                        } while (cursorQuery.moveToNext());
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return arrayList;
                     }
@@ -519,8 +409,8 @@ public class KnoxAnalyticsQueryResolver {
             }
             Log.d(str, "getFeaturesWhitelist(): empty cursor");
             List<WhitelistedFeature> list = Collections.EMPTY_LIST;
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return list;
         } catch (IllegalStateException e) {
@@ -529,22 +419,22 @@ public class KnoxAnalyticsQueryResolver {
         }
     }
 
-    public static List<String> getB2CFeaturePackageList(Context context) {
+    public static List<String> getB2CFeaturePackageList(Context context) throws Throwable {
         String str = TAG;
         Log.d(str, "getB2CFeaturePackages()");
         try {
-            Cursor query = context.getContentResolver().query(Contract.B2CFeatures.CONTENT_URI, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = context.getContentResolver().query(Contract.B2CFeatures.CONTENT_URI, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.getCount() != 0) {
-                        int columnIndex = query.getColumnIndex("packageName");
-                        ArrayList arrayList = new ArrayList(query.getCount());
-                        query.moveToFirst();
+                    if (cursorQuery.getCount() != 0) {
+                        int columnIndex = cursorQuery.getColumnIndex("packageName");
+                        ArrayList arrayList = new ArrayList(cursorQuery.getCount());
+                        cursorQuery.moveToFirst();
                         do {
-                            arrayList.add(query.getString(columnIndex));
-                        } while (query.moveToNext());
-                        if (query != null) {
-                            query.close();
+                            arrayList.add(cursorQuery.getString(columnIndex));
+                        } while (cursorQuery.moveToNext());
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return arrayList;
                     }
@@ -553,8 +443,8 @@ public class KnoxAnalyticsQueryResolver {
             }
             Log.d(str, "getB2CFeaturePackages(): empty cursor");
             List<String> list = Collections.EMPTY_LIST;
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return list;
         } catch (IllegalStateException e) {
@@ -563,22 +453,22 @@ public class KnoxAnalyticsQueryResolver {
         }
     }
 
-    public static List<String> getB2CFeaturesList(Context context) {
+    public static List<String> getB2CFeaturesList(Context context) throws Throwable {
         String str = TAG;
         Log.d(str, "getB2CFeatureFeaturesList()");
         try {
-            Cursor query = context.getContentResolver().query(Contract.B2CFeatures.CONTENT_URI, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = context.getContentResolver().query(Contract.B2CFeatures.CONTENT_URI, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.getCount() != 0) {
-                        int columnIndex = query.getColumnIndex("feature_name");
-                        ArrayList arrayList = new ArrayList(query.getCount());
-                        query.moveToFirst();
+                    if (cursorQuery.getCount() != 0) {
+                        int columnIndex = cursorQuery.getColumnIndex("feature_name");
+                        ArrayList arrayList = new ArrayList(cursorQuery.getCount());
+                        cursorQuery.moveToFirst();
                         do {
-                            arrayList.add(query.getString(columnIndex));
-                        } while (query.moveToNext());
-                        if (query != null) {
-                            query.close();
+                            arrayList.add(cursorQuery.getString(columnIndex));
+                        } while (cursorQuery.moveToNext());
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return arrayList;
                     }
@@ -587,8 +477,8 @@ public class KnoxAnalyticsQueryResolver {
             }
             Log.d(str, "getB2CFeatureFeaturesList(): empty cursor");
             List<String> list = Collections.EMPTY_LIST;
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return list;
         } catch (IllegalStateException e) {
@@ -601,15 +491,15 @@ public class KnoxAnalyticsQueryResolver {
         String str2 = TAG;
         Log.d(str2, "getB2CFeatureFeaturesList()");
         try {
-            Cursor query = context.getContentResolver().query(Contract.B2CFeatures.CONTENT_URI, new String[]{"feature_name"}, "packageName", new String[]{str}, null);
-            if (query != null) {
+            Cursor cursorQuery = context.getContentResolver().query(Contract.B2CFeatures.CONTENT_URI, new String[]{"feature_name"}, "packageName", new String[]{str}, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.getCount() != 0) {
-                        int columnIndex = query.getColumnIndex("feature_name");
-                        query.moveToFirst();
-                        String string = query.getString(columnIndex);
-                        if (query != null) {
-                            query.close();
+                    if (cursorQuery.getCount() != 0) {
+                        int columnIndex = cursorQuery.getColumnIndex("feature_name");
+                        cursorQuery.moveToFirst();
+                        String string = cursorQuery.getString(columnIndex);
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return string;
                     }
@@ -617,8 +507,8 @@ public class KnoxAnalyticsQueryResolver {
                 }
             }
             Log.d(str2, "getB2CFeatureFeaturesList(): empty cursor");
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return null;
         } catch (IllegalStateException e) {

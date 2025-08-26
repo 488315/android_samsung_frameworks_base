@@ -18,17 +18,17 @@ public class CircEaseInOut implements Interpolator {
     }
 
     private float inout(float f) {
-        double sqrt;
+        double dSqrt;
         double d;
         float f2 = f * 2.0f;
         if (f2 < 1.0f) {
-            sqrt = Math.sqrt(1.0f - (f2 * f2)) - 1.0d;
+            dSqrt = Math.sqrt(1.0f - (f2 * f2)) - 1.0d;
             d = -0.5d;
         } else {
             float f3 = f2 - 2.0f;
-            sqrt = Math.sqrt(1.0f - (f3 * f3)) + 1.0d;
+            dSqrt = Math.sqrt(1.0f - (f3 * f3)) + 1.0d;
             d = 0.5d;
         }
-        return (float) (sqrt * d);
+        return (float) (dSqrt * d);
     }
 }

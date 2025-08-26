@@ -3,24 +3,35 @@ package com.android.systemui.qs.tiles.detail;
 import android.app.KeyguardManager;
 import android.app.PendingIntent;
 import android.app.SemStatusBarManager;
+import android.app.admin.IDevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
+import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
+import com.android.internal.logging.MetricsLogger;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
+import com.android.systemui.CvOperator;
+import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0;
+import com.android.systemui.knox.KnoxStateMonitor;
+import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.qs.DetailAdapter;
 import com.android.systemui.plugins.qs.QSTile;
@@ -31,7 +42,10 @@ import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.statusbar.connectivity.AccessPointController;
 import com.android.systemui.statusbar.connectivity.AccessPointControllerImpl;
 import com.android.systemui.statusbar.connectivity.NetworkController;
+import com.android.systemui.statusbar.connectivity.NetworkControllerImpl;
+import com.android.systemui.statusbar.connectivity.NetworkControllerImpl.AnonymousClass7;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
+import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.Utils;
 import com.android.wifitrackerlib.HotspotNetworkEntry;
@@ -45,7 +59,6 @@ import com.sec.ims.settings.ImsProfile;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class WifiDetailAdapter implements DetailAdapter, AccessPointController.AccessPointCallback, AccessPointController.WifiApBleStateChangeCallback, QSDetailItems.Callback {
     public static final boolean DEBUG = Log.isLoggable("WifiDetailAdapter", 3);
@@ -91,28 +104,100 @@ public class WifiDetailAdapter implements DetailAdapter, AccessPointController.A
         this.mKeyguardManager = (KeyguardManager) context.getSystemService("keyguard");
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x011c, code lost:
-    
-        if (r4.ssid != null) goto L31;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x014f  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0163  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x01b8  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x01cb  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x01ba  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0182  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0159  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0120  */
     @Override // com.android.systemui.plugins.qs.DetailAdapter
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.view.View createDetailView(android.content.Context r10, android.view.View r11, android.view.ViewGroup r12) {
-        /*
-            Method dump skipped, instructions count: 473
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.detail.WifiDetailAdapter.createDetailView(android.content.Context, android.view.View, android.view.ViewGroup):android.view.View");
+    public final View createDetailView(Context context, View view, ViewGroup viewGroup) {
+        boolean z;
+        StringBuilder sb = new StringBuilder("createDetailView convertView=");
+        sb.append(view != null);
+        sb.append(" State : ");
+        WifiTile wifiTile = this.mWifiTile;
+        sb.append(((QSTile.BooleanState) wifiTile.mState).value);
+        sb.append(" enabled : ");
+        ActionBarContextView$$ExternalSyntheticOutline0.m(sb, this.mInfo.enabled, "WifiDetailAdapter");
+        this.mAccessPoints = null;
+        if (!this.mIsHavingConvertView) {
+            view = null;
+        }
+        if (view == null) {
+            view = LayoutInflater.from(this.mContext).inflate(R.layout.qs_detail_wifi, viewGroup, false);
+            ViewGroup viewGroup2 = (ViewGroup) view.findViewById(R.id.current_network);
+            this.mConnected = viewGroup2;
+            this.mConnectedNetworksTitle = viewGroup2.findViewById(R.id.connected_networks_title);
+            QSDetailItems qSDetailItemsConvertOrInflate = QSDetailItems.convertOrInflate(context, this.mConnected);
+            this.mItems = qSDetailItemsConvertOrInflate;
+            this.mConnected.addView(qSDetailItemsConvertOrInflate);
+            this.mItems.setTagSuffix("Wifi");
+            if (Utils.SPF_SupportMobileApEnhanced || Utils.SPF_SupportMobileApEnhancedLite || Utils.SPF_SupportMobileApEnhancedWifiOnlyLite) {
+                ViewGroup viewGroup3 = (ViewGroup) view.findViewById(R.id.hotspot_live_networks);
+                this.mHotspotLive = viewGroup3;
+                ((TextView) viewGroup3.findViewById(R.id.hotspot_live_networks_title)).setText(CvOperator.getHotspotStringID(R.string.sec_wifi_hotspot_live_preference_category_title));
+                QSDetailItems qSDetailItemsConvertOrInflate2 = QSDetailItems.convertOrInflate(context, this.mHotspotLive);
+                this.mHotspotLiveItems = qSDetailItemsConvertOrInflate2;
+                qSDetailItemsConvertOrInflate2.setTagSuffix("Hotspot.Available");
+                this.mHotspotLive.addView(this.mHotspotLiveItems);
+            }
+            if (Utils.SPF_SupportInstantHotspot) {
+                ViewGroup viewGroup4 = (ViewGroup) view.findViewById(R.id.instant_hotspot_networks);
+                this.mInstantHotspot = viewGroup4;
+                ((TextView) viewGroup4.findViewById(R.id.instant_hotspot_networks_title)).setText("Instant Hotspot");
+                QSDetailItems qSDetailItemsConvertOrInflate3 = QSDetailItems.convertOrInflate(context, this.mInstantHotspot);
+                this.mInstantHotspotItems = qSDetailItemsConvertOrInflate3;
+                qSDetailItemsConvertOrInflate3.setTagSuffix("InstantHotspot.Available");
+                this.mInstantHotspot.addView(this.mInstantHotspotItems);
+            }
+            ViewGroup viewGroup5 = (ViewGroup) view.findViewById(R.id.available_networks);
+            this.mAvailable = viewGroup5;
+            QSDetailItems qSDetailItemsConvertOrInflate4 = QSDetailItems.convertOrInflate(context, viewGroup5);
+            this.mAvailableItems = qSDetailItemsConvertOrInflate4;
+            qSDetailItemsConvertOrInflate4.setTagSuffix("Wifi.Available");
+            this.mAvailable.addView(this.mAvailableItems);
+            this.mIsHavingConvertView = true;
+        }
+        QSDetailItems qSDetailItems = this.mAvailableItems;
+        boolean z2 = ((QSTile.BooleanState) wifiTile.mState).value;
+        if (z2) {
+            if (this.mItems.mAdapter.getCount() <= 0) {
+                WifiTile.CallbackInfo callbackInfo = this.mInfo;
+                if (!callbackInfo.enabled || callbackInfo.wifiSignalIconId <= 0 || callbackInfo.ssid == null) {
+                }
+            }
+            z = true;
+        } else {
+            z = false;
+        }
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("isConnectedVisible = ", ",getItemCount() = ", z);
+        sbM.append(this.mItems.mAdapter.getCount());
+        sbM.append(",mWifiConnected = ");
+        WifiTile.CallbackInfo callbackInfo2 = this.mInfo;
+        ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, callbackInfo2.enabled && callbackInfo2.wifiSignalIconId > 0 && callbackInfo2.ssid != null, "WifiDetailAdapter");
+        qSDetailItems.setEmptyState(z2 ? z ? R.string.quick_settings_wifi_detail_scanning_text : R.string.quick_settings_wifi_scanning_text : R.string.quick_settings_wifi_detail_off_text);
+        if (Utils.SPF_SupportInstantHotspot) {
+            this.mInstantHotspotItems.setCallback(this);
+        }
+        this.mItems.setCallback(this);
+        boolean z3 = Utils.SPF_SupportMobileApEnhanced;
+        AccessPointController accessPointController = this.mAccessPointController;
+        if (z3 || Utils.SPF_SupportMobileApEnhancedLite || Utils.SPF_SupportMobileApEnhancedWifiOnlyLite) {
+            SemWifiManager semWifiManager = ((AccessPointControllerImpl) accessPointController).mSemWifiManager;
+            if (semWifiManager != null) {
+                semWifiManager.setWifiSettingsForegroundState(1);
+            }
+            Log.d("WifiDetailAdapter", "adding wififoreground");
+            this.mHotspotLiveItems.setCallback(this);
+        }
+        this.mAvailableItems.setCallback(this);
+        this.mItems.setItems(null);
+        SemWifiEntryFlags.isWepAllowed = -1;
+        ((AccessPointControllerImpl) accessPointController).scanForAccessPoints();
+        wifiTile.fireScanStateChanged(((QSTile.BooleanState) wifiTile.mState).value);
+        this.mConnected.setVisibility(this.mItems.mAdapter.getCount() > 0 ? 0 : 8);
+        this.mConnectedNetworksTitle.setVisibility(this.mItems.mAdapter.getCount() <= 0 ? 8 : 0);
+        setItemsVisible(((QSTile.BooleanState) wifiTile.mState).value);
+        return view;
     }
 
     @Override // com.android.systemui.plugins.qs.DetailAdapter
@@ -214,31 +299,31 @@ public class WifiDetailAdapter implements DetailAdapter, AccessPointController.A
                 }
                 SemWifiEntryFlags semWifiEntryFlags = wifiEntry3.mSemFlags;
                 if (semWifiEntryFlags.isSupportedWifi7 && ((wifiInfo = wifiEntry3.mWifiInfo) == null ? semWifiEntryFlags.wifiStandard >= 8 : wifiInfo.getWifiStandard() == 8)) {
-                    boolean isOpenNetwork = AccessPointControllerImpl.isOpenNetwork(wifiEntry3);
+                    boolean zIsOpenNetwork = AccessPointControllerImpl.isOpenNetwork(wifiEntry3);
                     int[][] iArr = AccessPointControllerImpl.ICONS_WIFI7;
-                    i = !isOpenNetwork ? iArr[level][1] : iArr[level][0];
+                    i = !zIsOpenNetwork ? iArr[level][1] : iArr[level][0];
                 } else {
                     WifiInfo wifiInfo2 = wifiEntry3.mWifiInfo;
                     if (wifiInfo2 != null ? wifiEntry3.checkWifi6EStandard(wifiInfo2.getFrequency(), wifiInfo2.getWifiStandard()) : semWifiEntryFlags.has6EStandard) {
-                        boolean isOpenNetwork2 = AccessPointControllerImpl.isOpenNetwork(wifiEntry3);
+                        boolean zIsOpenNetwork2 = AccessPointControllerImpl.isOpenNetwork(wifiEntry3);
                         int[][] iArr2 = AccessPointControllerImpl.ICONS_WIFI6E;
-                        i = !isOpenNetwork2 ? iArr2[level][1] : iArr2[level][0];
+                        i = !zIsOpenNetwork2 ? iArr2[level][1] : iArr2[level][0];
                     } else {
                         WifiInfo wifiInfo3 = wifiEntry3.mWifiInfo;
                         if (wifiInfo3 == null ? semWifiEntryFlags.wifiStandard >= 6 : wifiInfo3.getWifiStandard() == 6) {
-                            boolean isOpenNetwork3 = AccessPointControllerImpl.isOpenNetwork(wifiEntry3);
+                            boolean zIsOpenNetwork3 = AccessPointControllerImpl.isOpenNetwork(wifiEntry3);
                             int[][] iArr3 = AccessPointControllerImpl.ICONS_WIFI6;
-                            i = !isOpenNetwork3 ? iArr3[level][1] : iArr3[level][0];
+                            i = !zIsOpenNetwork3 ? iArr3[level][1] : iArr3[level][0];
                         } else {
                             WifiInfo wifiInfo4 = wifiEntry3.mWifiInfo;
                             if (wifiInfo4 == null ? semWifiEntryFlags.wifiStandard >= 5 : wifiInfo4.getWifiStandard() == 5) {
-                                boolean isOpenNetwork4 = AccessPointControllerImpl.isOpenNetwork(wifiEntry3);
+                                boolean zIsOpenNetwork4 = AccessPointControllerImpl.isOpenNetwork(wifiEntry3);
                                 int[][] iArr4 = AccessPointControllerImpl.ICONS_WIFI5;
-                                i = !isOpenNetwork4 ? iArr4[level][1] : iArr4[level][0];
+                                i = !zIsOpenNetwork4 ? iArr4[level][1] : iArr4[level][0];
                             } else {
-                                boolean isOpenNetwork5 = AccessPointControllerImpl.isOpenNetwork(wifiEntry3);
+                                boolean zIsOpenNetwork5 = AccessPointControllerImpl.isOpenNetwork(wifiEntry3);
                                 int[][] iArr5 = AccessPointControllerImpl.ICONS_WIFI;
-                                i = !isOpenNetwork5 ? iArr5[level][1] : iArr5[level][0];
+                                i = !zIsOpenNetwork5 ? iArr5[level][1] : iArr5[level][0];
                             }
                         }
                     }
@@ -309,7 +394,7 @@ public class WifiDetailAdapter implements DetailAdapter, AccessPointController.A
         }
         boolean z = obj instanceof WifiEntry;
         AccessPointController accessPointController = this.mAccessPointController;
-        boolean z2 = false;
+        boolean zConnectToSmartMHS = false;
         int i = 0;
         if (!z) {
             if ((Utils.SPF_SupportMobileApEnhanced || Utils.SPF_SupportMobileApEnhancedLite || Utils.SPF_SupportMobileApEnhancedWifiOnlyLite) && (obj instanceof SemWifiApBleScanResult) && !item.isDisabled) {
@@ -317,10 +402,10 @@ public class WifiDetailAdapter implements DetailAdapter, AccessPointController.A
                 AccessPointControllerImpl accessPointControllerImpl = (AccessPointControllerImpl) accessPointController;
                 accessPointControllerImpl.getClass();
                 if (semWifiApBleScanResult.mBattery > 15) {
-                    z2 = accessPointControllerImpl.mWifiPickerTracker.mSemWifiManager.connectToSmartMHS(semWifiApBleScanResult.mDevice, semWifiApBleScanResult.mMHSdeviceType, semWifiApBleScanResult.mhidden, semWifiApBleScanResult.mSecurity, semWifiApBleScanResult.mWifiMac, semWifiApBleScanResult.mUserName, semWifiApBleScanResult.version, semWifiApBleScanResult.isWifiProfileShareEnabled);
+                    zConnectToSmartMHS = accessPointControllerImpl.mWifiPickerTracker.mSemWifiManager.connectToSmartMHS(semWifiApBleScanResult.mDevice, semWifiApBleScanResult.mMHSdeviceType, semWifiApBleScanResult.mhidden, semWifiApBleScanResult.mSecurity, semWifiApBleScanResult.mWifiMac, semWifiApBleScanResult.mUserName, semWifiApBleScanResult.version, semWifiApBleScanResult.isWifiProfileShareEnabled);
                 }
-                Log.d("AccessPointController.AutoHotspot", "triggerWifiApBleConnection() : bleDevice -> " + semWifiApBleScanResult.mSSID + " mBattery: " + semWifiApBleScanResult.mBattery + " ret: " + z2);
-                if (z2) {
+                Log.d("AccessPointController.AutoHotspot", "triggerWifiApBleConnection() : bleDevice -> " + semWifiApBleScanResult.mSSID + " mBattery: " + semWifiApBleScanResult.mBattery + " ret: " + zConnectToSmartMHS);
+                if (zConnectToSmartMHS) {
                     Log.d("WifiDetailAdapter.AutoHotspot", "onDetailItemClick() - Triggering updateHotspotItems for connecting with apBLE.mWifiMac-> " + semWifiApBleScanResult.mWifiMac);
                     updateHotspotItems();
                     return;
@@ -365,32 +450,30 @@ public class WifiDetailAdapter implements DetailAdapter, AccessPointController.A
             }
         }
         if (!wifiEntry.mSemFlags.isOpenRoamingNetwork || ((string = Settings.Global.getString(accessPointControllerImpl2.mWifiPickerTrackerFactory.context.getContentResolver(), "sem_wifi_allowed_oauth_provider")) != null && string.contains("[cisco]"))) {
-            boolean isSaved = wifiEntry.isSaved();
+            boolean zIsSaved = wifiEntry.isSaved();
             AccessPointControllerImpl.AnonymousClass2 anonymousClass2 = accessPointControllerImpl2.mConnectCallback;
-            if (isSaved) {
+            if (zIsSaved || AccessPointControllerImpl.isOpenNetwork(wifiEntry)) {
                 wifiEntry.connect(anonymousClass2);
-            } else if (AccessPointControllerImpl.isOpenNetwork(wifiEntry)) {
-                wifiEntry.connect(anonymousClass2);
-            } else {
-                accessPointControllerImpl2.startSettings(wifiEntry);
+                this.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.qs.tiles.detail.WifiDetailAdapter.1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ((SQSTileImpl) WifiDetailAdapter.this.mWifiTile).mHandler.obtainMessage(103, 0, 0).sendToTarget();
+                    }
+                }, 250L);
+                return;
             }
-            this.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.qs.tiles.detail.WifiDetailAdapter.1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ((SQSTileImpl) WifiDetailAdapter.this.mWifiTile).mHandler.obtainMessage(103, 0, 0).sendToTarget();
-                }
-            }, 250L);
-            return;
-        }
-        Intent intent2 = new Intent("android.settings.WIFI_SETTINGS");
-        intent2.putExtra("wifi_start_connect_ssid", "wifi_start_openroaming");
-        intent2.addFlags(268435456);
-        ArrayList arrayList = accessPointControllerImpl2.mCallbacks;
-        int size = arrayList.size();
-        while (i < size) {
-            Object obj2 = arrayList.get(i);
-            i++;
-            ((AccessPointController.AccessPointCallback) obj2).onSettingsActivityTriggered(intent2);
+            accessPointControllerImpl2.startSettings(wifiEntry);
+        } else {
+            Intent intent2 = new Intent("android.settings.WIFI_SETTINGS");
+            intent2.putExtra("wifi_start_connect_ssid", "wifi_start_openroaming");
+            intent2.addFlags(268435456);
+            ArrayList arrayList = accessPointControllerImpl2.mCallbacks;
+            int size = arrayList.size();
+            while (i < size) {
+                Object obj2 = arrayList.get(i);
+                i++;
+                ((AccessPointController.AccessPointCallback) obj2).onSettingsActivityTriggered(intent2);
+            }
         }
         SemStatusBarManager semStatusBarManager = this.mStatusBarManager;
         if (semStatusBarManager == null || !semStatusBarManager.isPanelExpanded() || (keyguardManager = this.mKeyguardManager) == null || keyguardManager.isKeyguardLocked()) {
@@ -435,107 +518,61 @@ public class WifiDetailAdapter implements DetailAdapter, AccessPointController.A
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x003c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:14:0x003c, code lost:
     
         if (r2.semGetAllowWifi((android.content.ComponentName) null, android.app.ActivityManager.getCurrentUser()) == false) goto L36;
      */
     @Override // com.android.systemui.plugins.qs.DetailAdapter
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setToggleState(boolean r8) {
-        /*
-            r7 = this;
-            java.lang.String r0 = "WifiDetailAdapter"
-            boolean r1 = com.android.systemui.qs.tiles.detail.WifiDetailAdapter.DEBUG
-            if (r1 == 0) goto Lc
-            java.lang.String r2 = "setToggleState "
-            com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0.m(r2, r0, r8)
-        Lc:
-            android.content.Context r2 = r7.mContext
-            r3 = 153(0x99, float:2.14E-43)
-            com.android.internal.logging.MetricsLogger.action(r2, r3, r8)
-            boolean r2 = r7.mIsSatelliteModeOn
-            if (r2 == 0) goto L18
-            return
-        L18:
-            com.android.systemui.Dependency r2 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.android.systemui.knox.KnoxStateMonitor> r4 = com.android.systemui.knox.KnoxStateMonitor.class
-            java.lang.Object r2 = r2.getDependencyInner(r4)
-            com.android.systemui.knox.KnoxStateMonitor r2 = (com.android.systemui.knox.KnoxStateMonitor) r2
-            com.android.systemui.knox.KnoxStateMonitorImpl r2 = (com.android.systemui.knox.KnoxStateMonitorImpl) r2
-            boolean r2 = r2.isWifiTileBlocked()
-            com.android.systemui.qs.tiles.WifiTile r4 = r7.mWifiTile
-            if (r2 != 0) goto Lb1
-            r4.getClass()
-            android.app.admin.IDevicePolicyManager r2 = r4.mDevicePolicyManager     // Catch: android.os.RemoteException -> L3f
-            if (r2 == 0) goto L3f
-            int r5 = android.app.ActivityManager.getCurrentUser()     // Catch: android.os.RemoteException -> L3f
-            r6 = 0
-            boolean r2 = r2.semGetAllowWifi(r6, r5)     // Catch: android.os.RemoteException -> L3f
-            if (r2 != 0) goto L3f
-            goto Lb1
-        L3f:
-            com.android.systemui.statusbar.policy.KeyguardStateController r2 = r7.mKeyguardStateController
-            com.android.systemui.statusbar.policy.KeyguardStateControllerImpl r2 = (com.android.systemui.statusbar.policy.KeyguardStateControllerImpl) r2
-            boolean r2 = r2.mShowing
-            if (r2 == 0) goto L80
-            com.android.keyguard.KeyguardUpdateMonitor r2 = r7.mKeyguardUpdateMonitor
-            boolean r5 = r2.isSecure()
-            if (r5 == 0) goto L80
-            int r5 = com.android.keyguard.KeyguardUpdateMonitor.getCurrentUser()
-            boolean r2 = r2.getUserCanSkipBouncer(r5)
-            if (r2 != 0) goto L80
-            com.android.systemui.util.SettingsHelper r2 = r7.mSettingsHelper
-            boolean r2 = r2.isLockFunctionsEnabled()
-            if (r2 == 0) goto L80
-            com.android.systemui.plugins.qs.QSTile$State r2 = r4.mState
-            com.android.systemui.plugins.qs.QSTile$BooleanState r2 = (com.android.systemui.plugins.qs.QSTile.BooleanState) r2
-            boolean r2 = r2.value
-            r5 = 1
-            if (r2 != r5) goto L80
-            com.android.systemui.qs.tiles.detail.WifiDetailAdapter$$ExternalSyntheticLambda0 r8 = new com.android.systemui.qs.tiles.detail.WifiDetailAdapter$$ExternalSyntheticLambda0
-            r8.<init>()
-            com.android.systemui.plugins.ActivityStarter r0 = r7.mActivityStarter
-            r0.postQSRunnableDismissingKeyguard(r8)
-            java.lang.Boolean r7 = r7.getToggleState()
-            boolean r7 = r7.booleanValue()
-            r4.fireToggleStateChanged(r7)
-            return
-        L80:
-            if (r1 == 0) goto L88
-            java.lang.String r1 = "setToggleState fireToggleStateChanged"
-            com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0.m(r1, r0, r8)
-        L88:
-            r4.fireToggleStateChanged(r8)
-            android.content.Context r0 = r7.mContext
-            com.android.internal.logging.MetricsLogger.action(r0, r3, r8)
-            com.android.systemui.statusbar.connectivity.NetworkController r0 = r7.mController
-            com.android.systemui.statusbar.connectivity.NetworkControllerImpl r0 = (com.android.systemui.statusbar.connectivity.NetworkControllerImpl) r0
-            r0.getClass()
-            com.android.systemui.statusbar.connectivity.NetworkControllerImpl$7 r1 = new com.android.systemui.statusbar.connectivity.NetworkControllerImpl$7
-            r1.<init>(r8)
-            r0 = 0
-            java.lang.Void[] r0 = new java.lang.Void[r0]
-            r1.execute(r0)
-            com.android.systemui.qs.QSDetailItems r7 = r7.mAvailableItems
-            if (r8 == 0) goto Laa
-            r8 = 2131955932(0x7f1310dc, float:1.9548405E38)
-            goto Lad
-        Laa:
-            r8 = 2131955929(0x7f1310d9, float:1.95484E38)
-        Lad:
-            r7.setEmptyState(r8)
-            return
-        Lb1:
-            r4.showItPolicyToast()
-            java.lang.Boolean r7 = r7.getToggleState()
-            boolean r7 = r7.booleanValue()
-            r4.fireToggleStateChanged(r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.detail.WifiDetailAdapter.setToggleState(boolean):void");
+    public final void setToggleState(boolean z) {
+        boolean z2 = DEBUG;
+        if (z2) {
+            EmergencyButtonController$$ExternalSyntheticOutline0.m("setToggleState ", "WifiDetailAdapter", z);
+        }
+        MetricsLogger.action(this.mContext, 153, z);
+        if (this.mIsSatelliteModeOn) {
+            return;
+        }
+        boolean zIsWifiTileBlocked = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isWifiTileBlocked();
+        WifiTile wifiTile = this.mWifiTile;
+        if (!zIsWifiTileBlocked) {
+            wifiTile.getClass();
+            try {
+                IDevicePolicyManager iDevicePolicyManager = wifiTile.mDevicePolicyManager;
+                if (iDevicePolicyManager != null) {
+                }
+            } catch (RemoteException unused) {
+            }
+            if (((KeyguardStateControllerImpl) this.mKeyguardStateController).mShowing) {
+                KeyguardUpdateMonitor keyguardUpdateMonitor = this.mKeyguardUpdateMonitor;
+                if (keyguardUpdateMonitor.isSecure() && !keyguardUpdateMonitor.getUserCanSkipBouncer(KeyguardUpdateMonitor.getCurrentUser()) && this.mSettingsHelper.isLockFunctionsEnabled() && ((QSTile.BooleanState) wifiTile.mState).value) {
+                    this.mActivityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.detail.WifiDetailAdapter$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            WifiDetailAdapter wifiDetailAdapter = this.f$0;
+                            boolean z3 = WifiDetailAdapter.DEBUG;
+                            wifiDetailAdapter.setToggleState(!wifiDetailAdapter.getToggleState().booleanValue());
+                        }
+                    });
+                    wifiTile.fireToggleStateChanged(getToggleState().booleanValue());
+                    return;
+                }
+            }
+            if (z2) {
+                EmergencyButtonController$$ExternalSyntheticOutline0.m("setToggleState fireToggleStateChanged", "WifiDetailAdapter", z);
+            }
+            wifiTile.fireToggleStateChanged(z);
+            MetricsLogger.action(this.mContext, 153, z);
+            NetworkControllerImpl networkControllerImpl = (NetworkControllerImpl) this.mController;
+            networkControllerImpl.getClass();
+            networkControllerImpl.new AnonymousClass7(z).execute(new Void[0]);
+            this.mAvailableItems.setEmptyState(z ? R.string.quick_settings_wifi_scanning_text : R.string.quick_settings_wifi_detail_off_text);
+            return;
+        }
+        wifiTile.showItPolicyToast();
+        wifiTile.fireToggleStateChanged(getToggleState().booleanValue());
     }
 
     public final void updateHotspotItems() {

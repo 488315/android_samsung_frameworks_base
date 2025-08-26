@@ -32,7 +32,6 @@ import kotlin.LazyThreadSafetyMode;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AudioEffectBoxView extends LinearLayout implements SoundCraftVMComponent {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -45,7 +44,6 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
     public final Lazy voiceBoostView$delegate;
     public final Lazy volumeNormalizationView$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -76,7 +74,7 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
     }
 
     /* renamed from: $r8$lambda$728lp9L-bisQF_njlpjjxgANtyA, reason: not valid java name */
-    public static BaseAudioEffectItemView m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(AudioEffectBoxView audioEffectBoxView) {
+    public static BaseAudioEffectItemView m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(AudioEffectBoxView audioEffectBoxView) {
         SoundCraftViewModelExt soundCraftViewModelExt = SoundCraftViewModelExt.INSTANCE;
         SoundCraftLocalViewModelStoreOwner.INSTANCE.getClass();
         SoundCraftViewComponent soundCraftViewComponent = SoundCraftLocalViewModelStoreOwner.current;
@@ -97,7 +95,7 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
     }
 
     /* renamed from: $r8$lambda$Dd2GgMtMDbYx-IywsyMatPJAVJI, reason: not valid java name */
-    public static BaseAudioEffectItemView m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(AudioEffectBoxView audioEffectBoxView) {
+    public static BaseAudioEffectItemView m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(AudioEffectBoxView audioEffectBoxView) {
         SoundCraftViewModelExt soundCraftViewModelExt = SoundCraftViewModelExt.INSTANCE;
         SoundCraftLocalViewModelStoreOwner.INSTANCE.getClass();
         SoundCraftViewComponent soundCraftViewComponent = SoundCraftLocalViewModelStoreOwner.current;
@@ -154,9 +152,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -182,9 +180,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -210,9 +208,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -238,9 +236,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -266,9 +264,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -294,9 +292,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -383,9 +381,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -411,9 +409,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -439,9 +437,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -467,9 +465,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -495,9 +493,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -523,9 +521,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -568,9 +566,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -596,9 +594,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -624,9 +622,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -652,9 +650,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -680,9 +678,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:
@@ -708,9 +706,9 @@ public final class AudioEffectBoxView extends LinearLayout implements SoundCraft
                     case 1:
                         return AudioEffectBoxView.$r8$lambda$5GO1jNqcC5323wIhpCBPP88oo0A(audioEffectBoxView);
                     case 2:
-                        return AudioEffectBoxView.m1014$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
+                        return AudioEffectBoxView.m1016$r8$lambda$Dd2GgMtMDbYxIywsyMatPJAVJI(audioEffectBoxView);
                     case 3:
-                        return AudioEffectBoxView.m1013$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
+                        return AudioEffectBoxView.m1015$r8$lambda$728lp9LbisQF_njlpjjxgANtyA(audioEffectBoxView);
                     case 4:
                         return AudioEffectBoxView.$r8$lambda$Absc27UF86ReW0UX134pZyNZuuA(audioEffectBoxView);
                     default:

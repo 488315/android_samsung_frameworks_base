@@ -44,9 +44,9 @@ public interface ISwitchEventChangedListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISwitchEventChangedListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISwitchEventChangedListener)) {
-                return (ISwitchEventChangedListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISwitchEventChangedListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISwitchEventChangedListener)) {
+                return (ISwitchEventChangedListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,12 +73,12 @@ public interface ISwitchEventChangedListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onSwitchEventChanged(readInt, readInt2, readInt3, readInt4);
+                onSwitchEventChanged(i3, i4, i5, i6);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,16 +102,16 @@ public interface ISwitchEventChangedListener extends IInterface {
 
             @Override // android.hardware.input.ISwitchEventChangedListener
             public void onSwitchEventChanged(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISwitchEventChangedListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISwitchEventChangedListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

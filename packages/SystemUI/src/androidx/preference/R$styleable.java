@@ -2,7 +2,6 @@ package androidx.preference;
 
 import android.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class R$styleable {
     public static final int[] CheckBoxPreference = {R.attr.summaryOn, R.attr.summaryOff, R.attr.disableDependentsState, com.android.systemui.R.attr.disableDependentsState, com.android.systemui.R.attr.summaryOff, com.android.systemui.R.attr.summaryOn};

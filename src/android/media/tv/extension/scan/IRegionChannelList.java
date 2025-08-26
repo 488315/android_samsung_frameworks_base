@@ -54,9 +54,9 @@ public interface IRegionChannelList extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IRegionChannelList");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRegionChannelList)) {
-                return (IRegionChannelList) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IRegionChannelList");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRegionChannelList)) {
+                return (IRegionChannelList) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,15 +86,15 @@ public interface IRegionChannelList extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int regionChannelList = setRegionChannelList(readString);
+                int regionChannelList = setRegionChannelList(string);
                 parcel2.writeNoException();
                 parcel2.writeInt(regionChannelList);
             } else if (i == 2) {
-                IRegionChannelListListener asInterface = IRegionChannelListListener.Stub.asInterface(parcel.readStrongBinder());
+                IRegionChannelListListener iRegionChannelListListenerAsInterface = IRegionChannelListListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int listener = setListener(asInterface);
+                int listener = setListener(iRegionChannelListListenerAsInterface);
                 parcel2.writeNoException();
                 parcel2.writeInt(listener);
             } else {
@@ -121,33 +121,33 @@ public interface IRegionChannelList extends IInterface {
 
             @Override // android.media.tv.extension.scan.IRegionChannelList
             public int setRegionChannelList(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IRegionChannelList");
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IRegionChannelList");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.IRegionChannelList
             public int setListener(IRegionChannelListListener iRegionChannelListListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IRegionChannelList");
-                    obtain.writeStrongInterface(iRegionChannelListListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IRegionChannelList");
+                    parcelObtain.writeStrongInterface(iRegionChannelListListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

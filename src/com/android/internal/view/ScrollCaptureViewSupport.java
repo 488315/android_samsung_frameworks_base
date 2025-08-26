@@ -62,11 +62,11 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
     }
 
     public static int computeScrollAmount(Rect rect, Rect rect2) {
-        int height = rect.height();
+        int iHeight = rect.height();
         int i = rect.top;
         int i2 = rect.bottom;
         if (rect2.bottom > i2 && rect2.top > i) {
-            if (rect2.height() > height) {
+            if (rect2.height() > iHeight) {
                 return rect2.top - i;
             }
             return rect2.bottom - i2;
@@ -74,12 +74,16 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
         if (rect2.top >= i || rect2.bottom >= i2) {
             return 0;
         }
-        if (rect2.height() > height) {
+        if (rect2.height() > iHeight) {
             return 0 - (i2 - rect2.bottom);
         }
         return 0 - (i - rect2.top);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x002e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static View findScrollingReferenceView(ViewGroup viewGroup, int i) {
         viewGroup.getLocalVisibleRect(new Rect());
         int childCount = viewGroup.getChildCount();
@@ -88,12 +92,12 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
             View childAt = viewGroup.getChildAt(i2);
             if (view != null) {
                 if (i < 0) {
-                    if (childAt.getTop() >= view.getTop()) {
+                    if (childAt.getTop() < view.getTop()) {
+                        view = childAt;
                     }
-                } else if (childAt.getBottom() <= view.getBottom()) {
+                } else if (childAt.getBottom() > view.getBottom()) {
                 }
             }
-            view = childAt;
         }
         return view;
     }
@@ -141,7 +145,7 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
             this.mViewHelper.onScrollRequested(v, scrollCaptureSession.getScrollBounds(), rect, cancellationSignal, new Consumer() { // from class: com.android.internal.view.ScrollCaptureViewSupport$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ScrollCaptureViewSupport.this.lambda$onScrollCaptureImageRequest$0(v, cancellationSignal, consumer, (ScrollCaptureViewHelper.ScrollResult) obj);
+                    this.f$0.lambda$onScrollCaptureImageRequest$0(v, cancellationSignal, consumer, (ScrollCaptureViewHelper.ScrollResult) obj);
                 }
             });
         }
@@ -162,7 +166,7 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
             v.postOnAnimationDelayed(new Runnable() { // from class: com.android.internal.view.ScrollCaptureViewSupport$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ScrollCaptureViewSupport.this.lambda$onScrollResult$1(scrollResult, v, rect, consumer);
+                    this.f$0.lambda$onScrollResult$1(scrollResult, v, rect, consumer);
                 }
             }, this.mPostScrollDelayMillis);
         }
@@ -171,12 +175,12 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: doCapture, reason: merged with bridge method [inline-methods] */
     public void lambda$onScrollResult$1(ScrollCaptureViewHelper.ScrollResult scrollResult, V v, Rect rect, Consumer<Rect> consumer) {
-        int renderView = this.mRenderer.renderView(v, rect);
-        if (renderView == 0 || renderView == 1) {
+        int iRenderView = this.mRenderer.renderView(v, rect);
+        if (iRenderView == 0 || iRenderView == 1) {
             consumer.accept(new Rect(scrollResult.availableArea));
             return;
         }
-        Log.e(TAG, "syncAndDraw(): SyncAndDrawResult = " + renderView);
+        Log.e(TAG, "syncAndDraw(): SyncAndDrawResult = " + iRenderView);
         consumer.accept(new Rect());
     }
 
@@ -242,25 +246,25 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
             View rootView = view.getRootView();
             transformToRoot(view, rect, this.mTempRect);
             this.mCaptureRenderNode.setPosition(0, 0, this.mTempRect.width(), this.mTempRect.height());
-            RecordingCanvas beginRecording = this.mCaptureRenderNode.beginRecording();
-            beginRecording.enableZ();
-            beginRecording.translate(-this.mTempRect.left, -this.mTempRect.top);
-            RenderNode updateDisplayListIfDirty = rootView.updateDisplayListIfDirty();
-            if (updateDisplayListIfDirty.hasDisplayList()) {
-                beginRecording.drawRenderNode(updateDisplayListIfDirty);
+            RecordingCanvas recordingCanvasBeginRecording = this.mCaptureRenderNode.beginRecording();
+            recordingCanvasBeginRecording.enableZ();
+            recordingCanvasBeginRecording.translate(-this.mTempRect.left, -this.mTempRect.top);
+            RenderNode renderNodeUpdateDisplayListIfDirty = rootView.updateDisplayListIfDirty();
+            if (renderNodeUpdateDisplayListIfDirty.hasDisplayList()) {
+                recordingCanvasBeginRecording.drawRenderNode(renderNodeUpdateDisplayListIfDirty);
             }
             this.mCaptureRenderNode.endRecording();
         }
 
         public int renderView(View view, Rect rect) {
-            HardwareRenderer.FrameRenderRequest createRenderRequest = this.mRenderer.createRenderRequest();
-            createRenderRequest.setVsyncTime(System.nanoTime());
+            HardwareRenderer.FrameRenderRequest frameRenderRequestCreateRenderRequest = this.mRenderer.createRenderRequest();
+            frameRenderRequestCreateRenderRequest.setVsyncTime(System.nanoTime());
             if (updateForView(view)) {
                 setupLighting(view);
             }
             view.invalidate();
             updateRootNode(view, rect);
-            return createRenderRequest.syncAndDraw();
+            return frameRenderRequestCreateRenderRequest.syncAndDraw();
         }
 
         public void trimMemory() {

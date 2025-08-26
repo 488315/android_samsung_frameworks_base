@@ -34,7 +34,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.internal.R;
-import com.android.internal.app.IntentForwarderActivity;
 import com.android.internal.app.chooser.TargetInfo;
 import com.android.internal.hidden_from_bootclasspath.android.os.Flags;
 import com.android.internal.logging.MetricsLogger;
@@ -90,7 +89,7 @@ public class IntentForwarderActivity extends Activity {
 
     @Override // android.app.Activity
     protected void onCreate(Bundle bundle) {
-        int i;
+        int profileParent;
         String str;
         UserInfo userInfo;
         super.onCreate(bundle);
@@ -100,24 +99,24 @@ public class IntentForwarderActivity extends Activity {
         String className = intent.getComponent().getClassName();
         if (className.equals(FORWARD_INTENT_TO_PARENT)) {
             String forwardToPersonalMessage = getForwardToPersonalMessage();
-            i = getProfileParent();
+            profileParent = getProfileParent();
             getMetricsLogger().write(new LogMaker(MetricsProto.MetricsEvent.ACTION_SWITCH_SHARE_PROFILE).setSubtype(1));
             str = forwardToPersonalMessage;
             userInfo = null;
         } else if (className.equals(FORWARD_INTENT_TO_MANAGED_PROFILE)) {
             String forwardToWorkMessage = getForwardToWorkMessage();
             UserInfo managedProfile = getManagedProfile();
-            i = managedProfile == null ? -10000 : managedProfile.id;
+            profileParent = managedProfile == null ? -10000 : managedProfile.id;
             getMetricsLogger().write(new LogMaker(MetricsProto.MetricsEvent.ACTION_SWITCH_SHARE_PROFILE).setSubtype(2));
             userInfo = managedProfile;
             str = forwardToWorkMessage;
         } else {
             Slog.wtf(TAG, IntentForwarderActivity.class.getName() + " cannot be called directly");
-            i = -10000;
+            profileParent = -10000;
             str = null;
             userInfo = null;
         }
-        if (i == -10000) {
+        if (profileParent == -10000) {
             finish();
             return;
         }
@@ -126,18 +125,18 @@ public class IntentForwarderActivity extends Activity {
             return;
         }
         int userId = getUserId();
-        Intent canForward = canForward(intent, getUserId(), i, this.mInjector.getIPackageManager(), getContentResolver());
-        if (canForward == null) {
-            Slog.wtf(TAG, "the intent: " + intent + " cannot be forwarded from user " + userId + " to user " + i);
+        Intent intentCanForward = canForward(intent, getUserId(), profileParent, this.mInjector.getIPackageManager(), getContentResolver());
+        if (intentCanForward == null) {
+            Slog.wtf(TAG, "the intent: " + intent + " cannot be forwarded from user " + userId + " to user " + profileParent);
             finish();
             return;
         }
-        canForward.prepareToLeaveUser(userId);
-        CompletableFuture<ResolveInfo> resolveActivityAsUser = this.mInjector.resolveActivityAsUser(canForward, 65536, i);
+        intentCanForward.prepareToLeaveUser(userId);
+        CompletableFuture<ResolveInfo> completableFutureResolveActivityAsUser = this.mInjector.resolveActivityAsUser(intentCanForward, 65536, profileParent);
         if (isPrivateProfile(userId)) {
-            buildAndExecuteForPrivateProfile(intent, className, canForward, userId, i);
+            buildAndExecuteForPrivateProfile(intent, className, intentCanForward, userId, profileParent);
         } else {
-            buildAndExecute(resolveActivityAsUser, intent, className, canForward, userId, i, str, userInfo);
+            buildAndExecute(completableFutureResolveActivityAsUser, intent, className, intentCanForward, userId, profileParent, str, userInfo);
         }
     }
 
@@ -145,14 +144,12 @@ public class IntentForwarderActivity extends Activity {
         completableFuture.thenApplyAsync(new Function() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda10
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                ResolveInfo lambda$buildAndExecute$0;
-                lambda$buildAndExecute$0 = IntentForwarderActivity.this.lambda$buildAndExecute$0(intent, str, intent2, i, i2, (ResolveInfo) obj);
-                return lambda$buildAndExecute$0;
+                return this.f$0.lambda$buildAndExecute$0(intent, str, intent2, i, i2, (ResolveInfo) obj);
             }
         }, (Executor) this.mExecutorService).thenAcceptAsync((Consumer<? super U>) new Consumer() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda11
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                IntentForwarderActivity.this.lambda$buildAndExecute$1(str, intent, str2, intent2, userInfo, (ResolveInfo) obj);
+                this.f$0.lambda$buildAndExecute$1(str, intent, str2, intent2, userInfo, (ResolveInfo) obj);
             }
         }, getApplicationContext().getMainExecutor());
     }
@@ -183,7 +180,7 @@ public class IntentForwarderActivity extends Activity {
         this.mInjector.resolveActivityAsUser(intent2, 65536, i2).thenAcceptAsync(new Consumer() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                IntentForwarderActivity.this.lambda$buildAndExecuteForPrivateProfile$2(intent, str, intent2, i, i2, (ResolveInfo) obj);
+                this.f$0.lambda$buildAndExecuteForPrivateProfile$2(intent, str, intent2, i, i2, (ResolveInfo) obj);
             }
         }, getApplicationContext().getMainExecutor());
     }
@@ -218,12 +215,12 @@ public class IntentForwarderActivity extends Activity {
         PackageManager packageManager = createContextAsUser(UserHandle.of(i), 0).getPackageManager();
         buildMiniResolver(resolveInfo, intent, i, getOpenInWorkMessage(intent, resolveInfo.loadLabel(packageManager)), packageManager);
         ((Button) findViewById(R.id.button_open)).setText(getOpenInWorkButtonString(intent));
-        View findViewById = findViewById(R.id.miniresolver_info_section);
+        View viewFindViewById = findViewById(R.id.miniresolver_info_section);
         if ((isDialerIntent(intent) || isTextMessageIntent(intent)) && devicePolicyManager.getManagedSubscriptionsPolicy().getPolicyType() == 1) {
-            findViewById.setVisibility(0);
+            viewFindViewById.setVisibility(0);
             ((TextView) findViewById(R.id.miniresolver_info_section_text)).lambda$setTextAsync$0(getWorkTelephonyInfoSectionMessage(intent));
         } else {
-            findViewById.setVisibility(8);
+            viewFindViewById.setVisibility(8);
         }
     }
 
@@ -253,13 +250,13 @@ public class IntentForwarderActivity extends Activity {
         findViewById(R.id.use_same_profile_browser).setOnClickListener(new View.OnClickListener() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda4
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                IntentForwarderActivity.this.lambda$buildMiniResolver$3(view);
+                this.f$0.lambda$buildMiniResolver$3(view);
             }
         });
         findViewById(R.id.button_open).setOnClickListener(new View.OnClickListener() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda5
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                IntentForwarderActivity.this.lambda$buildMiniResolver$4(intent, i, view);
+                this.f$0.lambda$buildMiniResolver$4(intent, i, view);
             }
         });
     }
@@ -296,9 +293,7 @@ public class IntentForwarderActivity extends Activity {
             return ((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.MINIRESOLVER_CALL_FROM_WORK, new Supplier() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda6
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$getOpenInWorkMessage$5;
-                    lambda$getOpenInWorkMessage$5 = IntentForwarderActivity.this.lambda$getOpenInWorkMessage$5();
-                    return lambda$getOpenInWorkMessage$5;
+                    return this.f$0.lambda$getOpenInWorkMessage$5();
                 }
             });
         }
@@ -306,18 +301,14 @@ public class IntentForwarderActivity extends Activity {
             return ((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.MINIRESOLVER_SWITCH_TO_WORK, new Supplier() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda7
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$getOpenInWorkMessage$6;
-                    lambda$getOpenInWorkMessage$6 = IntentForwarderActivity.this.lambda$getOpenInWorkMessage$6();
-                    return lambda$getOpenInWorkMessage$6;
+                    return this.f$0.lambda$getOpenInWorkMessage$6();
                 }
             });
         }
         return ((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.MINIRESOLVER_OPEN_WORK, new Supplier() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda8
             @Override // java.util.function.Supplier
             public final Object get() {
-                String lambda$getOpenInWorkMessage$7;
-                lambda$getOpenInWorkMessage$7 = IntentForwarderActivity.this.lambda$getOpenInWorkMessage$7(charSequence);
-                return lambda$getOpenInWorkMessage$7;
+                return this.f$0.lambda$getOpenInWorkMessage$7(charSequence);
             }
         }, charSequence);
     }
@@ -342,9 +333,7 @@ public class IntentForwarderActivity extends Activity {
             return ((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString("Core.MINIRESOLVER_WORK_TELEPHONY_INFORMATION", new Supplier() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$getWorkTelephonyInfoSectionMessage$8;
-                    lambda$getWorkTelephonyInfoSectionMessage$8 = IntentForwarderActivity.this.lambda$getWorkTelephonyInfoSectionMessage$8();
-                    return lambda$getWorkTelephonyInfoSectionMessage$8;
+                    return this.f$0.lambda$getWorkTelephonyInfoSectionMessage$8();
                 }
             });
         }
@@ -352,9 +341,7 @@ public class IntentForwarderActivity extends Activity {
             return ((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString("Core.MINIRESOLVER_WORK_TELEPHONY_INFORMATION", new Supplier() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda1
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$getWorkTelephonyInfoSectionMessage$9;
-                    lambda$getWorkTelephonyInfoSectionMessage$9 = IntentForwarderActivity.this.lambda$getWorkTelephonyInfoSectionMessage$9();
-                    return lambda$getWorkTelephonyInfoSectionMessage$9;
+                    return this.f$0.lambda$getWorkTelephonyInfoSectionMessage$9();
                 }
             });
         }
@@ -375,9 +362,7 @@ public class IntentForwarderActivity extends Activity {
         return ((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.FORWARD_INTENT_TO_PERSONAL, new Supplier() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda9
             @Override // java.util.function.Supplier
             public final Object get() {
-                String lambda$getForwardToPersonalMessage$10;
-                lambda$getForwardToPersonalMessage$10 = IntentForwarderActivity.this.lambda$getForwardToPersonalMessage$10();
-                return lambda$getForwardToPersonalMessage$10;
+                return this.f$0.lambda$getForwardToPersonalMessage$10();
             }
         });
     }
@@ -391,9 +376,7 @@ public class IntentForwarderActivity extends Activity {
         return ((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.FORWARD_INTENT_TO_WORK, new Supplier() { // from class: com.android.internal.app.IntentForwarderActivity$$ExternalSyntheticLambda3
             @Override // java.util.function.Supplier
             public final Object get() {
-                String lambda$getForwardToWorkMessage$11;
-                lambda$getForwardToWorkMessage$11 = IntentForwarderActivity.this.lambda$getForwardToWorkMessage$11();
-                return lambda$getForwardToWorkMessage$11;
+                return this.f$0.lambda$getForwardToWorkMessage$11();
             }
         });
     }
@@ -431,9 +414,9 @@ public class IntentForwarderActivity extends Activity {
     }
 
     private void launchChooserActivityWithCorrectTab(Intent intent, String str) {
-        int findSelectedProfile = findSelectedProfile(str);
+        int iFindSelectedProfile = findSelectedProfile(str);
         sanitizeIntent(intent);
-        intent.putExtra("com.android.internal.app.ResolverActivity.EXTRA_SELECTED_PROFILE", findSelectedProfile);
+        intent.putExtra("com.android.internal.app.ResolverActivity.EXTRA_SELECTED_PROFILE", iFindSelectedProfile);
         Intent intent2 = (Intent) intent.getParcelableExtra("android.intent.extra.INTENT", Intent.class);
         if (intent2 == null) {
             Slog.wtf(TAG, "Cannot start a chooser intent with no extra android.intent.extra.INTENT");
@@ -449,9 +432,9 @@ public class IntentForwarderActivity extends Activity {
         if (!isIntentForwarderResolveInfo(this.mInjector.resolveActivityAsUser(intent2, 65536, i).join())) {
             i2 = i;
         }
-        int findSelectedProfile = findSelectedProfile(str);
+        int iFindSelectedProfile = findSelectedProfile(str);
         sanitizeIntent(intent);
-        intent.putExtra("com.android.internal.app.ResolverActivity.EXTRA_SELECTED_PROFILE", findSelectedProfile);
+        intent.putExtra("com.android.internal.app.ResolverActivity.EXTRA_SELECTED_PROFILE", iFindSelectedProfile);
         intent.putExtra("com.android.internal.app.ResolverActivity.EXTRA_CALLING_USER", UserHandle.of(i));
         if (z) {
             intent.putExtra("com.android.internal.app.ResolverActivity.EXTRA_RESTRICT_TO_SINGLE_USER", true);
@@ -584,9 +567,9 @@ public class IntentForwarderActivity extends Activity {
     }
 
     private void setMiniresolverPadding() {
-        View findViewById = findViewById(R.id.button_bar_container);
-        if (findViewById != null) {
-            findViewById.setPadding(0, 0, 0, getWindowManager().getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.systemBars()).bottom + getResources().getDimensionPixelOffset(R.dimen.resolver_button_bar_spacing));
+        View viewFindViewById = findViewById(R.id.button_bar_container);
+        if (viewFindViewById != null) {
+            viewFindViewById.setPadding(0, 0, 0, getWindowManager().getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.systemBars()).bottom + getResources().getDimensionPixelOffset(R.dimen.resolver_button_bar_spacing));
         }
     }
 
@@ -619,9 +602,7 @@ public class IntentForwarderActivity extends Activity {
             return CompletableFuture.supplyAsync(new Supplier() { // from class: com.android.internal.app.IntentForwarderActivity$InjectorImpl$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    ResolveInfo lambda$resolveActivityAsUser$0;
-                    lambda$resolveActivityAsUser$0 = IntentForwarderActivity.InjectorImpl.this.lambda$resolveActivityAsUser$0(intent, i, i2);
-                    return lambda$resolveActivityAsUser$0;
+                    return this.f$0.lambda$resolveActivityAsUser$0(intent, i, i2);
                 }
             });
         }

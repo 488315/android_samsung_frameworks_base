@@ -6,7 +6,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.ranges.IntRange;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class IntList {
     public int _size;
@@ -24,9 +23,9 @@ public abstract class IntList {
             if (i == i2) {
                 int[] iArr = this.content;
                 int[] iArr2 = intList.content;
-                IntRange until = RangesKt___RangesKt.until(0, i2);
-                int i3 = until.first;
-                int i4 = until.last;
+                IntRange intRangeUntil = RangesKt___RangesKt.until(0, i2);
+                int i3 = intRangeUntil.first;
+                int i4 = intRangeUntil.last;
                 if (i3 > i4) {
                     return true;
                 }
@@ -53,11 +52,11 @@ public abstract class IntList {
     public final int hashCode() {
         int[] iArr = this.content;
         int i = this._size;
-        int i2 = 0;
-        for (int i3 = 0; i3 < i; i3++) {
-            i2 += Integer.hashCode(iArr[i3]) * 31;
+        int iHashCode = 0;
+        for (int i2 = 0; i2 < i; i2++) {
+            iHashCode += Integer.hashCode(iArr[i2]) * 31;
         }
-        return i2;
+        return iHashCode;
     }
 
     public final int last() {

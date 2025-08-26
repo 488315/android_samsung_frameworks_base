@@ -7,7 +7,6 @@ import androidx.compose.ui.node.ModifierNodeElement;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class StylusHoverIconModifierElement extends ModifierNodeElement<StylusHoverIconModifierNode> {
     public final PointerIcon icon;
@@ -35,9 +34,9 @@ public final class StylusHoverIconModifierElement extends ModifierNodeElement<St
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(this.icon.hashCode() * 31, 31, this.overrideDescendants);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(this.icon.hashCode() * 31, 31, this.overrideDescendants);
         DpTouchBoundsExpansion dpTouchBoundsExpansion = this.touchBoundsExpansion;
-        return m + (dpTouchBoundsExpansion == null ? 0 : dpTouchBoundsExpansion.hashCode());
+        return iM + (dpTouchBoundsExpansion == null ? 0 : dpTouchBoundsExpansion.hashCode());
     }
 
     public final String toString() {

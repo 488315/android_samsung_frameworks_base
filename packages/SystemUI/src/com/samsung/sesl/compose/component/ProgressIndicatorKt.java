@@ -11,11 +11,10 @@ import com.sec.ims.volte2.data.VolteConstants;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ProgressIndicatorKt {
     /* renamed from: SeslIndeterminateCircularProgressIndicator-h1eT-Ww, reason: not valid java name */
-    public static final void m3322SeslIndeterminateCircularProgressIndicatorh1eTWw(float f, final int i, long j, long j2, Composer composer, final Modifier.Companion companion) {
+    public static final void m3340SeslIndeterminateCircularProgressIndicatorh1eTWw(float f, final int i, long j, long j2, Composer composer, final Modifier.Companion companion) {
         int i2;
         float f2;
         final long j3;
@@ -46,10 +45,10 @@ public abstract class ProgressIndicatorKt {
             Modifier.Companion companion2 = companion;
             composerImpl.endDefaults();
             if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslIndeterminateCircularProgressIndicator (ProgressIndicator.kt:38)");
+                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslIndeterminateCircularProgressIndicator (ProgressIndicator.kt:99)");
             }
             f2 = f;
-            BasicProgressIndicatorKt.m3320SeslBasicIndeterminateCircularProgressIndicatorZO3OeZo(f2, ((i2 >> 3) & 1022) | 3072, j5, j6, composerImpl, companion2);
+            BasicProgressIndicatorKt.m3338SeslBasicIndeterminateCircularProgressIndicatorZO3OeZo(f2, ((i2 >> 3) & 1022) | 3072, j5, j6, composerImpl, companion2);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -57,10 +56,10 @@ public abstract class ProgressIndicatorKt {
             j4 = j6;
             companion = companion2;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
             final float f3 = f2;
-            endRestartGroup.block = new Function2(f3, i, j3, j4, companion) { // from class: com.samsung.sesl.compose.component.ProgressIndicatorKt$$ExternalSyntheticLambda0
+            recomposeScopeImplEndRestartGroup.block = new Function2(f3, i, j3, j4, companion) { // from class: com.samsung.sesl.compose.component.ProgressIndicatorKt$$ExternalSyntheticLambda0
                 public final /* synthetic */ Modifier.Companion f$0;
                 public final /* synthetic */ long f$1;
                 public final /* synthetic */ long f$2;
@@ -75,11 +74,11 @@ public abstract class ProgressIndicatorKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
                     long j7 = this.f$2;
                     float f4 = this.f$3;
                     Modifier.Companion companion3 = this.f$0;
-                    ProgressIndicatorKt.m3322SeslIndeterminateCircularProgressIndicatorh1eTWw(f4, updateChangedFlags, this.f$1, j7, (Composer) obj, companion3);
+                    ProgressIndicatorKt.m3340SeslIndeterminateCircularProgressIndicatorh1eTWw(f4, iUpdateChangedFlags, this.f$1, j7, (Composer) obj, companion3);
                     return Unit.INSTANCE;
                 }
             };

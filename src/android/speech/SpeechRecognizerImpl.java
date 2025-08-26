@@ -17,7 +17,6 @@ import android.speech.IRecognitionListener;
 import android.speech.IRecognitionServiceManager;
 import android.speech.IRecognitionServiceManagerCallback;
 import android.speech.IRecognitionSupportCallback;
-import android.speech.SpeechRecognizerImpl;
 import android.text.TextUtils;
 import android.util.Log;
 import java.util.Objects;
@@ -149,6 +148,7 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         putMessage(Message.obtain(this.mHandler, 6, new CheckRecognitionSupportArgs(intent, executor, recognitionSupportCallback)));
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     @Override // android.speech.SpeechRecognizer
     public void triggerModelDownload(Intent intent) {
         Objects.requireNonNull(intent, "intent must not be null");
@@ -244,7 +244,7 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
                 executor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RecognitionSupportCallback.this.onError(5);
+                        recognitionSupportCallback.onError(5);
                     }
                 });
             }
@@ -271,7 +271,7 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
                 executor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ModelDownloadListener.this.onError(5);
+                        modelDownloadListener.onError(5);
                     }
                 });
             }
@@ -350,9 +350,9 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         if (service == null && this.mOnDevice) {
             service = (IBinder) this.mContext.getSystemService(Context.SPEECH_RECOGNITION_SERVICE);
         }
-        IRecognitionServiceManager asInterface = IRecognitionServiceManager.Stub.asInterface(service);
-        this.mManagerService = asInterface;
-        if (asInterface != null) {
+        IRecognitionServiceManager iRecognitionServiceManagerAsInterface = IRecognitionServiceManager.Stub.asInterface(service);
+        this.mManagerService = iRecognitionServiceManagerAsInterface;
+        if (iRecognitionServiceManagerAsInterface != null) {
             return true;
         }
         InternalRecognitionListener internalRecognitionListener = this.mListener;
@@ -549,7 +549,7 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalSupportCallback$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SpeechRecognizerImpl.InternalSupportCallback.this.lambda$onSupportResult$0(recognitionSupport);
+                    this.f$0.lambda$onSupportResult$0(recognitionSupport);
                 }
             });
         }
@@ -564,7 +564,7 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalSupportCallback$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SpeechRecognizerImpl.InternalSupportCallback.this.lambda$onError$1(i);
+                    this.f$0.lambda$onError$1(i);
                 }
             });
         }
@@ -590,7 +590,7 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SpeechRecognizerImpl.InternalModelDownloadListener.this.lambda$onProgress$0(i);
+                    this.f$0.lambda$onProgress$0(i);
                 }
             });
         }
@@ -605,7 +605,7 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SpeechRecognizerImpl.InternalModelDownloadListener.this.lambda$onSuccess$1();
+                    this.f$0.lambda$onSuccess$1();
                 }
             });
         }
@@ -620,7 +620,7 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SpeechRecognizerImpl.InternalModelDownloadListener.this.lambda$onScheduled$2();
+                    this.f$0.lambda$onScheduled$2();
                 }
             });
         }
@@ -635,7 +635,7 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SpeechRecognizerImpl.InternalModelDownloadListener.this.lambda$onError$3(i);
+                    this.f$0.lambda$onError$3(i);
                 }
             });
         }

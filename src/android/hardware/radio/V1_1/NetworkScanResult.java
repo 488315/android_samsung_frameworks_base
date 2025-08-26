@@ -39,13 +39,13 @@ public final class NetworkScanResult {
 
     public static final ArrayList<NetworkScanResult> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<NetworkScanResult> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             NetworkScanResult networkScanResult = new NetworkScanResult();
-            networkScanResult.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+            networkScanResult.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
             arrayList.add(networkScanResult);
         }
         return arrayList;
@@ -56,11 +56,11 @@ public final class NetworkScanResult {
         this.error = hwBlob.getInt32(4 + j);
         long j2 = j + 8;
         int int32 = hwBlob.getInt32(j + 16);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 104, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 104, hwBlob.handle(), j2, true);
         this.networkInfos.clear();
         for (int i = 0; i < int32; i++) {
             CellInfo cellInfo = new CellInfo();
-            cellInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 104);
+            cellInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 104);
             this.networkInfos.add(cellInfo);
         }
     }

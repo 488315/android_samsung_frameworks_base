@@ -44,9 +44,9 @@ public interface IEnhancedAttestationPolicyCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEnhancedAttestationPolicyCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEnhancedAttestationPolicyCallback)) {
-                return (IEnhancedAttestationPolicyCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEnhancedAttestationPolicyCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEnhancedAttestationPolicyCallback)) {
+                return (IEnhancedAttestationPolicyCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,16 +100,16 @@ public interface IEnhancedAttestationPolicyCallback extends IInterface {
 
             @Override // com.samsung.android.knox.tima.attestation.IEnhancedAttestationPolicyCallback
             public void onAttestationFinished(EnhancedAttestationResult enhancedAttestationResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnhancedAttestationPolicyCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(enhancedAttestationResult, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEnhancedAttestationPolicyCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(enhancedAttestationResult, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

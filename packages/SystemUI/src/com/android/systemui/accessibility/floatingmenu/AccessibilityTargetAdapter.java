@@ -1,7 +1,9 @@
 package com.android.systemui.accessibility.floatingmenu;
 
+import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -9,6 +11,7 @@ import android.text.TextUtils;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
@@ -24,7 +27,6 @@ import com.samsung.android.settings.accessibility.advanced.shortcut.WrappedDrawa
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AccessibilityTargetAdapter extends RecyclerView.Adapter {
     static final int PAYLOAD_HEARING_STATUS_DRAWABLE = 1;
@@ -33,21 +35,18 @@ public class AccessibilityTargetAdapter extends RecyclerView.Adapter {
     public int mItemPadding;
     public final List mTargets;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BottomViewHolder extends ViewHolder {
         public BottomViewHolder(View view) {
             super(view);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TopViewHolder extends ViewHolder {
         public TopViewHolder(View view) {
             super(view);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final ImageView mIconView;
         public final View mLeftBadgeView;
@@ -66,137 +65,54 @@ public class AccessibilityTargetAdapter extends RecyclerView.Adapter {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x009b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x009b, code lost:
     
         if (android.provider.Settings.System.getIntForUser(r10.getContentResolver(), r2, 0, -2) == 1) goto L42;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x00ba, code lost:
-    
-        return r10.getString(com.android.systemui.R.string.switch_bar_on);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x00a6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:38:0x00a6, code lost:
     
         if (android.provider.Settings.Secure.getIntForUser(r10.getContentResolver(), r2, 0, -2) == 1) goto L42;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x00b1, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:41:0x00b1, code lost:
     
         if (android.provider.Settings.Global.getInt(r10.getContentResolver(), r2, 0) == 1) goto L42;
      */
+    /* JADX WARN: Code restructure failed: missing block: B:43:0x00ba, code lost:
+    
+        return r10.getString(com.android.systemui.R.string.switch_bar_on);
+     */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.CharSequence getStateDescription(com.android.internal.accessibility.dialog.AccessibilityTarget r9, android.content.Context r10) {
-        /*
-            r0 = 0
-            r1 = 1
-            java.lang.CharSequence r2 = r9.getStateDescription()
-            boolean r2 = android.text.TextUtils.isEmpty(r2)
-            if (r2 != 0) goto L11
-            java.lang.CharSequence r9 = r9.getStateDescription()
-            return r9
-        L11:
-            android.content.pm.PackageManager r2 = r10.getPackageManager()
-            android.view.accessibility.AccessibilityManager r3 = android.view.accessibility.AccessibilityManager.getInstance(r10)
-            java.util.List r3 = r3.getInstalledAccessibilityShortcutListAsUser(r10, r0)
-            java.lang.String r4 = ""
-            r5 = r0
-            r6 = r4
-        L21:
-            int r7 = r3.size()
-            if (r5 >= r7) goto L4b
-            java.lang.Object r7 = r3.get(r5)
-            android.accessibilityservice.AccessibilityShortcutInfo r7 = (android.accessibilityservice.AccessibilityShortcutInfo) r7
-            android.content.ComponentName r7 = r7.getComponentName()
-            java.lang.String r7 = r7.toString()
-            java.lang.String r8 = r9.getId()
-            boolean r7 = r7.contains(r8)
-            if (r7 == 0) goto L49
-            java.lang.Object r6 = r3.get(r5)
-            android.accessibilityservice.AccessibilityShortcutInfo r6 = (android.accessibilityservice.AccessibilityShortcutInfo) r6
-            java.lang.String r6 = r6.loadSummary(r2)
-        L49:
-            int r5 = r5 + r1
-            goto L21
-        L4b:
-            boolean r9 = android.text.TextUtils.isEmpty(r6)
-            if (r9 != 0) goto Lc3
-            java.lang.String r9 = ";;;"
-            boolean r2 = r6.contains(r9)
-            if (r2 == 0) goto Lc3
-            java.lang.String[] r9 = r6.split(r9)
-            r2 = r9[r0]
-            r9 = r9[r1]
-            r9.getClass()
-            r3 = -2
-            r4 = -1
-            int r5 = r9.hashCode()
-            switch(r5) {
-                case -1243020381: goto L85;
-                case -906273929: goto L7a;
-                case -887328209: goto L6e;
-                default: goto L6d;
+    public static CharSequence getStateDescription(AccessibilityTarget accessibilityTarget, Context context) {
+        if (!TextUtils.isEmpty(accessibilityTarget.getStateDescription())) {
+            return accessibilityTarget.getStateDescription();
+        }
+        PackageManager packageManager = context.getPackageManager();
+        List installedAccessibilityShortcutListAsUser = AccessibilityManager.getInstance(context).getInstalledAccessibilityShortcutListAsUser(context, 0);
+        String strLoadSummary = "";
+        for (int i = 0; i < installedAccessibilityShortcutListAsUser.size(); i++) {
+            if (((AccessibilityShortcutInfo) installedAccessibilityShortcutListAsUser.get(i)).getComponentName().toString().contains(accessibilityTarget.getId())) {
+                strLoadSummary = ((AccessibilityShortcutInfo) installedAccessibilityShortcutListAsUser.get(i)).loadSummary(packageManager);
             }
-        L6d:
-            goto L8f
-        L6e:
-            java.lang.String r5 = "system"
-            boolean r9 = r9.equals(r5)
-            if (r9 != 0) goto L78
-            goto L8f
-        L78:
-            r4 = 2
-            goto L8f
-        L7a:
-            java.lang.String r5 = "secure"
-            boolean r9 = r9.equals(r5)
-            if (r9 != 0) goto L83
-            goto L8f
-        L83:
-            r4 = r1
-            goto L8f
-        L85:
-            java.lang.String r5 = "global"
-            boolean r9 = r9.equals(r5)
-            if (r9 != 0) goto L8e
-            goto L8f
-        L8e:
-            r4 = r0
-        L8f:
-            switch(r4) {
-                case 0: goto La9;
-                case 1: goto L9e;
-                case 2: goto L93;
-                default: goto L92;
-            }
-        L92:
-            goto Lbb
-        L93:
-            android.content.ContentResolver r9 = r10.getContentResolver()
-            int r9 = android.provider.Settings.System.getIntForUser(r9, r2, r0, r3)
-            if (r9 != r1) goto Lbb
-            goto Lb3
-        L9e:
-            android.content.ContentResolver r9 = r10.getContentResolver()
-            int r9 = android.provider.Settings.Secure.getIntForUser(r9, r2, r0, r3)
-            if (r9 != r1) goto Lbb
-            goto Lb3
-        La9:
-            android.content.ContentResolver r9 = r10.getContentResolver()
-            int r9 = android.provider.Settings.Global.getInt(r9, r2, r0)
-            if (r9 != r1) goto Lbb
-        Lb3:
-            r9 = 2131957033(0x7f131529, float:1.9550639E38)
-            java.lang.String r9 = r10.getString(r9)
-            return r9
-        Lbb:
-            r9 = 2131957032(0x7f131528, float:1.9550636E38)
-            java.lang.String r9 = r10.getString(r9)
-            return r9
-        Lc3:
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.floatingmenu.AccessibilityTargetAdapter.getStateDescription(com.android.internal.accessibility.dialog.AccessibilityTarget, android.content.Context):java.lang.CharSequence");
+        }
+        if (TextUtils.isEmpty(strLoadSummary) || !strLoadSummary.contains(";;;")) {
+            return "";
+        }
+        String[] strArrSplit = strLoadSummary.split(";;;");
+        String str = strArrSplit[0];
+        String str2 = strArrSplit[1];
+        str2.getClass();
+        switch (str2) {
+            case "global":
+                break;
+            case "secure":
+                break;
+            case "system":
+                break;
+            default:
+                return context.getString(R.string.switch_bar_off);
+        }
     }
 
     public static void updateHearingDeviceStatusDrawable(ViewHolder viewHolder, int i) {
@@ -249,8 +165,8 @@ public class AccessibilityTargetAdapter extends RecyclerView.Adapter {
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View m = KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0.m(viewGroup, R.layout.accessibility_floating_menu_item, viewGroup, false);
-        return i == 0 ? new TopViewHolder(m) : i == 2 ? new BottomViewHolder(m) : new ViewHolder(m);
+        View viewM = KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0.m(viewGroup, R.layout.accessibility_floating_menu_item, viewGroup, false);
+        return i == 0 ? new TopViewHolder(viewM) : i == 2 ? new BottomViewHolder(viewM) : new ViewHolder(viewM);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
@@ -262,7 +178,7 @@ public class AccessibilityTargetAdapter extends RecyclerView.Adapter {
             list.forEach(new Consumer() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityTargetAdapter$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    AccessibilityTargetAdapter accessibilityTargetAdapter = AccessibilityTargetAdapter.this;
+                    AccessibilityTargetAdapter accessibilityTargetAdapter = this.f$0;
                     AccessibilityTargetAdapter.ViewHolder viewHolder3 = viewHolder2;
                     accessibilityTargetAdapter.getClass();
                     if ((obj instanceof Integer) && ((Integer) obj).intValue() == 1) {
@@ -303,7 +219,7 @@ public class AccessibilityTargetAdapter extends RecyclerView.Adapter {
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityTargetAdapter$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                AccessibilityTargetAdapter.ViewHolder viewHolder2 = AccessibilityTargetAdapter.ViewHolder.this;
+                AccessibilityTargetAdapter.ViewHolder viewHolder2 = viewHolder;
                 AccessibilityTarget accessibilityTarget2 = accessibilityTarget;
                 viewHolder2.itemView.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(41));
                 accessibilityTarget2.onSelected();

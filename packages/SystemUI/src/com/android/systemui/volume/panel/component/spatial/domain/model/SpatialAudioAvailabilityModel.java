@@ -1,10 +1,8 @@
 package com.android.systemui.volume.panel.component.spatial.domain.model;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface SpatialAudioAvailabilityModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HeadTracking implements SpatialAudio {
         public static final HeadTracking INSTANCE = new HeadTracking();
 
@@ -24,11 +22,9 @@ public interface SpatialAudioAvailabilityModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SpatialAudio extends SpatialAudioAvailabilityModel {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion implements SpatialAudio {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -37,7 +33,6 @@ public interface SpatialAudioAvailabilityModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Unavailable implements SpatialAudioAvailabilityModel {
         public static final Unavailable INSTANCE = new Unavailable();
 

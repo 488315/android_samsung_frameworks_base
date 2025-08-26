@@ -9,11 +9,15 @@ import com.android.systemui.camera.CameraGestureHelper;
 import com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig;
 import com.android.systemui.settings.UserTracker;
 import dagger.Lazy;
+import kotlin.ResultKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CameraQuickAffordanceConfig implements KeyguardQuickAffordanceConfig {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -23,6 +27,24 @@ public final class CameraQuickAffordanceConfig implements KeyguardQuickAffordanc
     public final DevicePolicyManager devicePolicyManager;
     public final PackageManager packageManager;
     public final UserTracker userTracker;
+
+    /* renamed from: com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig$getPickerScreenState$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return CameraQuickAffordanceConfig.this.getPickerScreenState(this);
+        }
+    }
 
     public CameraQuickAffordanceConfig(Context context, PackageManager packageManager, Lazy lazy, UserTracker userTracker, DevicePolicyManager devicePolicyManager, CoroutineDispatcher coroutineDispatcher) {
         this.context = context;
@@ -48,93 +70,49 @@ public final class CameraQuickAffordanceConfig implements KeyguardQuickAffordanc
         return R.drawable.ic_camera;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x005a, code lost:
-    
-        if (r7 == r1) goto L27;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object getPickerScreenState(kotlin.coroutines.Continuation r7) {
-        /*
-            r6 = this;
-            boolean r0 = r7 instanceof com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig$getPickerScreenState$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig$getPickerScreenState$1 r0 = (com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig$getPickerScreenState$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig$getPickerScreenState$1 r0 = new com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig$getPickerScreenState$1
-            r0.<init>(r6, r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 2
-            r5 = 1
-            if (r2 == 0) goto L3b
-            if (r2 == r5) goto L33
-            if (r2 != r4) goto L2b
-            kotlin.ResultKt.throwOnFailure(r7)
-            return r7
-        L2b:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L33:
-            java.lang.Object r6 = r0.L$0
-            com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig r6 = (com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig) r6
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L5d
-        L3b:
-            kotlin.ResultKt.throwOnFailure(r7)
-            r0.L$0 = r6
-            r0.label = r5
-            android.content.pm.PackageManager r7 = r6.packageManager
-            java.lang.String r2 = "android.hardware.camera.any"
-            boolean r7 = r7.hasSystemFeature(r2)
-            if (r7 == 0) goto L58
-            com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig$isLaunchable$2 r7 = new com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig$isLaunchable$2
-            r7.<init>(r6, r3)
-            kotlinx.coroutines.CoroutineDispatcher r2 = r6.backgroundDispatcher
-            java.lang.Object r7 = kotlinx.coroutines.BuildersKt.withContext(r2, r7, r0)
-            goto L5a
-        L58:
-            java.lang.Boolean r7 = java.lang.Boolean.FALSE
-        L5a:
-            if (r7 != r1) goto L5d
-            goto L6f
-        L5d:
-            java.lang.Boolean r7 = (java.lang.Boolean) r7
-            boolean r7 = r7.booleanValue()
-            if (r7 == 0) goto L71
-            r0.L$0 = r3
-            r0.label = r4
-            java.lang.Object r6 = super.getPickerScreenState(r0)
-            if (r6 != r1) goto L70
-        L6f:
-            return r1
-        L70:
-            return r6
-        L71:
-            com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig$PickerScreenState$UnavailableOnDevice r6 = com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig.PickerScreenState.UnavailableOnDevice.INSTANCE
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.quickaffordance.CameraQuickAffordanceConfig.getPickerScreenState(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object getPickerScreenState(Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object objWithContext = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objWithContext);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.label = 1;
+            objWithContext = this.packageManager.hasSystemFeature("android.hardware.camera.any") ? BuildersKt.withContext(this.backgroundDispatcher, new CameraQuickAffordanceConfig$isLaunchable$2(this, null), anonymousClass1) : Boolean.FALSE;
+            if (objWithContext != coroutineSingletons) {
+            }
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(objWithContext);
+            return objWithContext;
+        }
+        this = (CameraQuickAffordanceConfig) anonymousClass1.L$0;
+        ResultKt.throwOnFailure(objWithContext);
+        if (!((Boolean) objWithContext).booleanValue()) {
+            return KeyguardQuickAffordanceConfig.PickerScreenState.UnavailableOnDevice.INSTANCE;
+        }
+        anonymousClass1.L$0 = null;
+        anonymousClass1.label = 2;
+        Object pickerScreenState = super.getPickerScreenState(anonymousClass1);
+        return pickerScreenState == coroutineSingletons ? coroutineSingletons : pickerScreenState;
     }
 
     @Override // com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig

@@ -4,7 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.graphics.drawable.Icon;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +22,7 @@ import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.systemui.Dependency;
 import com.android.systemui.NotiRune;
 import com.android.systemui.R;
+import com.android.systemui.media.controls.domain.pipeline.MediaDataManager;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.KeyguardBatteryStatus;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
@@ -62,7 +63,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public class InsignificantCoordinator implements Coordinator {
@@ -111,14 +111,14 @@ public class InsignificantCoordinator implements Coordinator {
         this.mSettingsValueList = uriArr;
         SettingsHelper.OnChangedCallback onChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.InsignificantCoordinator.1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
-            public void onChanged(Uri uri) {
+            public void onChanged(Uri uri) throws Resources.NotFoundException {
                 InsignificantCoordinator.this.resetInsignificant();
             }
         };
         this.mSettingsChangedListener = onChangedCallback;
         KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.InsignificantCoordinator.2
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public void onUserSwitchComplete(int i) {
+            public void onUserSwitchComplete(int i) throws Resources.NotFoundException {
                 KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0.m(new StringBuilder("onUserSwitchComplete user changed : "), ((NotificationLockscreenUserManagerImpl) InsignificantCoordinator.this.mLockscreenUserManager).mCurrentUserId, " userID : ", i, InsignificantCoordinator.this.TAG);
                 InsignificantCoordinator.this.resetInsignificant();
             }
@@ -240,19 +240,12 @@ public class InsignificantCoordinator implements Coordinator {
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifFilter
             public boolean shouldFilterOut(NotificationEntry notificationEntry, long j) {
                 StatusBarNotification statusBarNotification = notificationEntry.mSbn;
-                GroupEntry groupEntry = (GroupEntry) notificationEntry.mAttachState.parent;
-                boolean isInsignificant = notificationEntry.isInsignificant();
-                String str = notificationEntry.mKey;
-                if (isInsignificant && groupEntry == GroupEntry.ROOT_ENTRY && !((HeadsUpManagerImpl) InsignificantCoordinator.this.mHeadsUpManager).isHeadsUpEntry(str) && InsignificantCoordinator.this.mStatusBarStateController.isExpanded()) {
-                    InsignificantCoordinator.this.mWaitingForGroupSummary = true;
-                    return true;
-                }
                 if (!statusBarNotification.getGroupKey().contains("INSIGNIFICANT") || !InsignificantCoordinator.this.mChildren.isEmpty() || InsignificantCoordinator.this.mWaitingForGroupSummary) {
                     if (statusBarNotification.getNotification().isGroupSummary()) {
                         String groupKey = statusBarNotification.getGroupKey();
                         char c = 0;
                         for (NotificationEntry notificationEntry2 : ((NotifPipeline) ((CommonNotifCollection) InsignificantCoordinator.this.mCommonNotifCollectionLazy.get())).getAllNotifs()) {
-                            if (((NotificationLockscreenUserManagerImpl) InsignificantCoordinator.this.mLockscreenUserManager).isCurrentProfile(notificationEntry2.mSbn.getUser().getIdentifier()) && !notificationEntry2.mKey.equals(str) && groupKey.equals(notificationEntry2.mSbn.getGroupKey())) {
+                            if (((NotificationLockscreenUserManagerImpl) InsignificantCoordinator.this.mLockscreenUserManager).isCurrentProfile(notificationEntry2.mSbn.getUser().getIdentifier()) && !notificationEntry2.mKey.equals(notificationEntry.mKey) && groupKey.equals(notificationEntry2.mSbn.getGroupKey())) {
                                 if (!notificationEntry2.isInsignificant()) {
                                     c = 2;
                                 } else if (c != 2) {
@@ -281,10 +274,10 @@ public class InsignificantCoordinator implements Coordinator {
                 }
                 if (size != InsignificantCoordinator.this.mChildren.size() || notificationEntry.isInsignificant()) {
                     Log.d(InsignificantCoordinator.this.TAG, "onEntryAdded :" + notificationEntry.mKey + " flags: " + Integer.toHexString(notificationEntry.mSbn.getNotification().semFlags) + " updateSummary entrySize:" + InsignificantCoordinator.this.mChildren.size());
-                    Message obtain = Message.obtain();
-                    obtain.what = 2;
+                    Message messageObtain = Message.obtain();
+                    messageObtain.what = 2;
                     InsignificantCoordinator.this.mInsiginificantHandler.removeMessages(2);
-                    InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(obtain, 0L);
+                    InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(messageObtain, 0L);
                 }
             }
 
@@ -294,17 +287,17 @@ public class InsignificantCoordinator implements Coordinator {
                     Log.d(InsignificantCoordinator.this.TAG, "onEntryRemoved :" + notificationEntry.mKey + " flags: " + Integer.toHexString(notificationEntry.mSbn.getNotification().semFlags) + " entrySize:" + InsignificantCoordinator.this.mChildren.size());
                 }
                 if (notificationEntry.mSbn.getGroupKey().contains("INSIGNIFICANT") && !InsignificantCoordinator.this.mChildren.isEmpty()) {
-                    Message obtain = Message.obtain();
-                    obtain.what = 1;
-                    InsignificantCoordinator.this.mInsiginificantHandler.sendMessage(obtain);
+                    Message messageObtain = Message.obtain();
+                    messageObtain.what = 1;
+                    InsignificantCoordinator.this.mInsiginificantHandler.sendMessage(messageObtain);
                     return;
                 }
                 InsignificantCoordinator.this.mChildren.remove(notificationEntry);
                 if (notificationEntry.isInsignificant()) {
-                    Message obtain2 = Message.obtain();
-                    obtain2.what = 2;
+                    Message messageObtain2 = Message.obtain();
+                    messageObtain2.what = 2;
                     InsignificantCoordinator.this.mInsiginificantHandler.removeMessages(2);
-                    InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(obtain2, 0L);
+                    InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(messageObtain2, 0L);
                 }
             }
 
@@ -325,10 +318,10 @@ public class InsignificantCoordinator implements Coordinator {
                 }
                 if (size != InsignificantCoordinator.this.mChildren.size() || notificationEntry.isInsignificant()) {
                     Log.d(InsignificantCoordinator.this.TAG, "onEntryUpdated :" + notificationEntry.mKey + " flags: " + Integer.toHexString(notificationEntry.mSbn.getNotification().semFlags) + " updateSummary entrySize:" + InsignificantCoordinator.this.mChildren.size());
-                    Message obtain = Message.obtain();
-                    obtain.what = 2;
+                    Message messageObtain = Message.obtain();
+                    messageObtain.what = 2;
                     InsignificantCoordinator.this.mInsiginificantHandler.removeMessages(2);
-                    InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(obtain, 0L);
+                    InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(messageObtain, 0L);
                 }
             }
 
@@ -363,10 +356,10 @@ public class InsignificantCoordinator implements Coordinator {
                 Iterator<PipelineEntry> it = list.iterator();
                 while (it.hasNext()) {
                     if (it.next().getKey().equals("INSIGNIFICANT")) {
-                        Message obtain = Message.obtain();
-                        obtain.what = 2;
+                        Message messageObtain = Message.obtain();
+                        messageObtain.what = 2;
                         InsignificantCoordinator.this.mInsiginificantHandler.removeMessages(2);
-                        InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(obtain, 200L);
+                        InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(messageObtain, 200L);
                     }
                 }
             }
@@ -388,11 +381,11 @@ public class InsignificantCoordinator implements Coordinator {
                 if (((HeadsUpManagerImpl) InsignificantCoordinator.this.mHeadsUpManager).isHeadsUpEntry(pipelineEntry.getKey()) || (representativeEntry = pipelineEntry.getRepresentativeEntry()) == null) {
                     return false;
                 }
-                boolean isInsignificant = representativeEntry.isInsignificant();
-                if (isInsignificant && (pipelineEntry instanceof GroupEntry)) {
+                boolean zIsInsignificant = representativeEntry.isInsignificant();
+                if (zIsInsignificant && (pipelineEntry instanceof GroupEntry)) {
                     ((ArrayList) ((GroupEntry) pipelineEntry).mChildren).sort(getComparator());
                 }
-                return isInsignificant;
+                return zIsInsignificant;
             }
 
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
@@ -408,10 +401,10 @@ public class InsignificantCoordinator implements Coordinator {
                 }
                 InsignificantCoordinator insignificantCoordinator = InsignificantCoordinator.this;
                 insignificantCoordinator.mBarState = ((StatusBarStateControllerImpl) insignificantCoordinator.mStatusBarStateController).mUpcomingState;
-                Message obtain = Message.obtain();
-                obtain.what = 2;
+                Message messageObtain = Message.obtain();
+                messageObtain.what = 2;
                 InsignificantCoordinator.this.mInsiginificantHandler.removeMessages(2);
-                InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(obtain, 200L);
+                InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(messageObtain, 200L);
             }
         };
         this.mStatusBarStateListener = stateListener;
@@ -420,10 +413,10 @@ public class InsignificantCoordinator implements Coordinator {
             public void onHeadsUpStateChanged(NotificationEntry notificationEntry, boolean z) {
                 Log.d(InsignificantCoordinator.this.TAG, "onHeadsUpStateChanged : " + notificationEntry.mKey + " isHeadsUP :" + z + " entry? " + notificationEntry.mIsHeadsUpEntry + " headsupManager? " + ((HeadsUpManagerImpl) InsignificantCoordinator.this.mHeadsUpManager).isHeadsUpEntry(notificationEntry.mKey));
                 if (notificationEntry.isInsignificant()) {
-                    Message obtain = Message.obtain();
-                    obtain.what = 2;
+                    Message messageObtain = Message.obtain();
+                    messageObtain.what = 2;
                     InsignificantCoordinator.this.mInsiginificantHandler.removeMessages(2);
-                    InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(obtain, 0L);
+                    InsignificantCoordinator.this.mInsiginificantHandler.sendMessageDelayed(messageObtain, 0L);
                 }
             }
 
@@ -446,7 +439,7 @@ public class InsignificantCoordinator implements Coordinator {
         this.mOnHeadsUpChangedListener = onHeadsUpChangedListener;
         this.mInsiginificantHandler = new Handler() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.InsignificantCoordinator.9
             @Override // android.os.Handler
-            public void handleMessage(Message message) {
+            public void handleMessage(Message message) throws Resources.NotFoundException {
                 int i = message.what;
                 if (i == 0) {
                     InsignificantCoordinator.this.updateInsignificantSummary(true);
@@ -460,7 +453,7 @@ public class InsignificantCoordinator implements Coordinator {
         };
         this.mInflationErrorListener = new NotifInflationErrorManager.NotifInflationErrorListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.InsignificantCoordinator.10
             @Override // com.android.systemui.statusbar.notification.row.NotifInflationErrorManager.NotifInflationErrorListener
-            public void onNotifInflationError(NotificationEntry notificationEntry, Exception exc) {
+            public void onNotifInflationError(NotificationEntry notificationEntry, Exception exc) throws Resources.NotFoundException {
                 if (notificationEntry.mSbn.getGroupKey().contains("INSIGNIFICANT")) {
                     Log.d(InsignificantCoordinator.this.TAG, "onNotifInflationError mWaitingForGroupSummary = false ");
                     InsignificantCoordinator.this.mWaitingForGroupSummary = false;
@@ -500,7 +493,7 @@ public class InsignificantCoordinator implements Coordinator {
         bubbleCoordinator.setUpdateInsignificantGroupRunnable(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.InsignificantCoordinator$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                InsignificantCoordinator.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         });
     }
@@ -521,14 +514,14 @@ public class InsignificantCoordinator implements Coordinator {
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0() {
-        Message obtain = Message.obtain();
-        obtain.what = 2;
+        Message messageObtain = Message.obtain();
+        messageObtain.what = 2;
         this.mInsiginificantHandler.removeMessages(2);
-        this.mInsiginificantHandler.sendMessageDelayed(obtain, 0L);
+        this.mInsiginificantHandler.sendMessageDelayed(messageObtain, 0L);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void resetInsignificant() {
+    public void resetInsignificant() throws Resources.NotFoundException {
         Log.d(this.TAG, "SettingValue changed Promotion : " + ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableInsignificantPromotion() + " BG activities : " + ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableInsignificantBgActivities() + " Minimized : " + ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableInsignificantMinimized() + " Old : " + ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnableInsignificantOld());
         Collection<NotificationEntry> allNotifs = ((NotifPipeline) ((CommonNotifCollection) this.mCommonNotifCollectionLazy.get())).getAllNotifs();
         this.mChildren.clear();
@@ -555,14 +548,14 @@ public class InsignificantCoordinator implements Coordinator {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void updateInsignificantSummary(boolean z) {
-        SubscreenNotificationController subscreenNotificationController;
+    public void updateInsignificantSummary(boolean z) throws Resources.NotFoundException {
         ExpandableNotificationRow expandableNotificationRow;
         ExpandableNotificationRow expandableNotificationRow2;
+        SubscreenNotificationController subscreenNotificationController;
         boolean z2;
+        SubscreenNotificationController subscreenNotificationController2;
         Collection<NotificationEntry> allNotifs = ((NotifPipeline) ((CommonNotifCollection) this.mCommonNotifCollectionLazy.get())).getAllNotifs();
         ArrayList arrayList = new ArrayList();
-        Icon icon = null;
         NotificationEntry notificationEntry = null;
         boolean z3 = false;
         for (NotificationEntry notificationEntry2 : allNotifs) {
@@ -573,10 +566,13 @@ public class InsignificantCoordinator implements Coordinator {
                 if (notificationEntry2.isInsignificant()) {
                     if (!notificationEntry2.mSbn.getGroupKey().contains("INSIGNIFICANT")) {
                         z2 = false;
-                    } else if (((StatusBarStateControllerImpl) this.mStatusBarStateController).mUpcomingState == 1) {
-                        z3 = true;
+                    } else if (((StatusBarStateControllerImpl) this.mStatusBarStateController).mUpcomingState != 1) {
+                        z2 = true;
+                    } else if (NotiRune.NOTI_SUBSCREEN_ALL && (subscreenNotificationController2 = this.mSubscreenController) != null && subscreenNotificationController2.mDeviceModel.isSubScreen()) {
+                        z3 = false;
                         z2 = true;
                     } else {
+                        z3 = true;
                         z2 = true;
                     }
                     if (!notificationEntry2.mSbn.getNotification().isGroupSummary() && !((HeadsUpManagerImpl) this.mHeadsUpManager).isHeadsUpEntry(notificationEntry2.mKey)) {
@@ -601,8 +597,12 @@ public class InsignificantCoordinator implements Coordinator {
                                 if (z2) {
                                     z3 = true;
                                 }
-                            } else if (!isDesktopLauncherFilterOut(notificationEntry2) && !isEdgeLightFilterOut(notificationEntry2) && !this.mBubbleCoordinator.isBubbleNotificationSuppressed(notificationEntry2) && !z2) {
-                                arrayList.add(notificationEntry2);
+                            } else if (!isDesktopLauncherFilterOut(notificationEntry2) && !isEdgeLightFilterOut(notificationEntry2) && !this.mBubbleCoordinator.isBubbleNotificationSuppressed(notificationEntry2)) {
+                                StatusBarNotification statusBarNotification = notificationEntry2.mSbn;
+                                MediaDataManager.Companion.getClass();
+                                if (!MediaDataManager.Companion.isMediaNotification(statusBarNotification) && !z2) {
+                                    arrayList.add(notificationEntry2);
+                                }
                             }
                         } else if (z2) {
                             z3 = true;
@@ -628,41 +628,33 @@ public class InsignificantCoordinator implements Coordinator {
         } else {
             arrayList.sort(this.mTimeSortCoordinator.getTimeComparator());
             NotificationEntry notificationEntry3 = (NotificationEntry) arrayList.getFirst();
-            icon = notificationEntry3.mSbn.getNotification().getSmallIcon();
             int size2 = arrayList.size();
-            int i = this.mGroupCount;
-            String str = notificationEntry3.mKey;
-            if (size2 == i && str.equals(this.mFirstChildKey) && (expandableNotificationRow2 = notificationEntry3.row) != null && expandableNotificationRow2.isChildInGroup()) {
-                Log.d(this.TAG, "do not update summary : " + str + " size: " + size2);
+            if (NotiRune.NOTI_SUBSCREEN_ALL && (subscreenNotificationController = this.mSubscreenController) != null) {
+                subscreenNotificationController.mDeviceModel.mMoreNotificationCount = size2;
+            }
+            if (size2 == this.mGroupCount && notificationEntry3.mKey.equals(this.mFirstChildKey) && (expandableNotificationRow2 = notificationEntry3.row) != null && expandableNotificationRow2.isChildInGroup()) {
+                Log.d(this.TAG, "do not update summary : " + notificationEntry3.mKey + " size: " + size2);
                 return;
             }
             this.mGroupCount = size2;
-            this.mFirstChildKey = str;
+            this.mFirstChildKey = notificationEntry3.mKey;
             if (notificationEntry != null && (expandableNotificationRow = notificationEntry.row) != null) {
                 ((ArrayList) expandableNotificationRow.mInsigificantChildrenList).clear();
                 int size3 = arrayList.size();
-                int i2 = 0;
-                while (i2 < size3) {
-                    Object obj = arrayList.get(i2);
-                    i2++;
+                int i = 0;
+                while (i < size3) {
+                    Object obj = arrayList.get(i);
+                    i++;
                     ((ArrayList) expandableNotificationRow.mInsigificantChildrenList).add((NotificationEntry) obj);
                 }
             }
-            Log.d(this.TAG, "update summary with firstEntry : " + str + " size: " + size2);
+            Log.d(this.TAG, "update summary with firstEntry : " + notificationEntry3.mKey + " size: " + size2);
             size = size2;
-        }
-        if (NotiRune.NOTI_SUBSCREEN_ALL && (subscreenNotificationController = this.mSubscreenController) != null) {
-            subscreenNotificationController.mDeviceModel.mMoreNotificationCount = arrayList.size();
         }
         String quantityString = this.mContext.getResources().getQuantityString(R.plurals.notification_insignificant_title, size, Integer.valueOf(size));
         String string = this.mContext.getResources().getString(R.string.notification_inginificatn_header_text);
         Notification.Builder builder = new Notification.Builder(this.mContext, NotificationChannels.INSIGNIFICANT);
-        builder.setContentTitle(quantityString).setVisibility(1).setGroup("INSIGNIFICANT").setOngoing(false).setShowWhen(false);
-        if (this.mWaitingForGroupSummary) {
-            builder.setSmallIcon(R.drawable.ic_info);
-        } else {
-            builder.setSmallIcon(icon);
-        }
+        builder.setContentTitle(quantityString).setVisibility(1).setGroup("INSIGNIFICANT").setSmallIcon(R.drawable.ic_info).setOngoing(false).setShowWhen(false);
         Bundle bundle = new Bundle();
         bundle.putString("android.substName", string);
         builder.addExtras(bundle);
@@ -670,10 +662,10 @@ public class InsignificantCoordinator implements Coordinator {
         if (this.mWaitingForGroupSummary) {
             Log.d(this.TAG, "mWaitingForGroupSummary = false updateSummary again for children count");
             this.mWaitingForGroupSummary = false;
-            Message obtain = Message.obtain();
-            obtain.what = 2;
+            Message messageObtain = Message.obtain();
+            messageObtain.what = 2;
             this.mInsiginificantHandler.removeMessages(2);
-            this.mInsiginificantHandler.sendMessageDelayed(obtain, 0L);
+            this.mInsiginificantHandler.sendMessageDelayed(messageObtain, 0L);
         }
     }
 

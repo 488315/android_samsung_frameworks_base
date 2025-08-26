@@ -10,7 +10,6 @@ import android.annotation.UserIdInt;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.media.quality.ParameterCapability;
 import java.lang.annotation.Annotation;
 
 /* loaded from: classes4.dex */
@@ -101,62 +100,32 @@ public class AnnotationValidations {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x000b  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static void validate(Class<Size> cls, Size size, int i, String str, int i2) {
-        char c;
         str.hashCode();
-        switch (str.hashCode()) {
-            case 107876:
-                if (str.equals("max")) {
-                    c = 0;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 108114:
-                if (str.equals(ParameterCapability.CAPABILITY_MIN)) {
-                    c = 1;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 111972721:
-                if (str.equals("value")) {
-                    c = 2;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 653829648:
-                if (str.equals("multiple")) {
-                    c = 3;
-                    break;
-                }
-                c = 65535;
-                break;
-            default:
-                c = 65535;
-                break;
-        }
-        switch (c) {
-            case 0:
+        switch (str) {
+            case "max":
                 if (i > i2) {
                     invalid(cls, Integer.valueOf(i), str, Integer.valueOf(i2));
                     break;
                 }
                 break;
-            case 1:
+            case "min":
                 if (i < i2) {
                     invalid(cls, Integer.valueOf(i), str, Integer.valueOf(i2));
                     break;
                 }
                 break;
-            case 2:
+            case "value":
                 if (i2 != -1 && i != i2) {
                     invalid(cls, Integer.valueOf(i), str, Integer.valueOf(i2));
                     break;
                 }
                 break;
-            case 3:
+            case "multiple":
                 if (i % i2 != 0) {
                     invalid(cls, Integer.valueOf(i), str, Integer.valueOf(i2));
                     break;

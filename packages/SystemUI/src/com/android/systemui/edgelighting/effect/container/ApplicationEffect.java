@@ -13,7 +13,6 @@ import com.android.systemui.edgelighting.effect.container.EdgeLightingDialog;
 import com.android.systemui.edgelighting.effect.view.EdgeLightAppEffectView;
 import com.samsung.android.util.SemLog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ApplicationEffect extends AbsEdgeLightingView {
     public ValueAnimator mContainerAnimator;
@@ -32,9 +31,9 @@ public class ApplicationEffect extends AbsEdgeLightingView {
             this.mContainerAnimator.removeAllListeners();
             this.mContainerAnimator.cancel();
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
-        this.mContainerAnimator = ofFloat;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.edgelighting.effect.container.ApplicationEffect.1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+        this.mContainerAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.edgelighting.effect.container.ApplicationEffect.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                 ApplicationEffect.this.setAlpha(((Float) valueAnimator2.getAnimatedValue()).floatValue());

@@ -1,6 +1,7 @@
 package com.android.systemui.keyguard.ui.view.layout.sections;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.widget.FrameLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -9,7 +10,6 @@ import com.android.systemui.customization.R$dimen;
 import com.android.systemui.keyguard.shared.model.KeyguardSection;
 import com.android.systemui.media.controls.ui.controller.KeyguardMediaController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SplitShadeMediaSection extends KeyguardSection {
     public final Context context;
@@ -22,7 +22,7 @@ public final class SplitShadeMediaSection extends KeyguardSection {
     }
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
-    public final void addViews(ConstraintLayout constraintLayout) {
+    public final void addViews(ConstraintLayout constraintLayout) throws Resources.NotFoundException {
         FrameLayout frameLayout = new FrameLayout(this.context, null);
         frameLayout.setId(this.mediaContainerId);
         int dimensionPixelSize = frameLayout.getContext().getResources().getDimensionPixelSize(R.dimen.qs_media_padding);

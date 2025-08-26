@@ -2,6 +2,7 @@ package android.text.style;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.LeakyTypefaceStorage;
 import android.graphics.Typeface;
@@ -46,25 +47,25 @@ public class TextAppearanceSpan extends MetricAffectingSpan implements Parcelabl
         this(context, i, -1);
     }
 
-    public TextAppearanceSpan(Context context, int i, int i2) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(i, R.styleable.TextAppearance);
-        ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(3);
-        this.mTextColorLink = obtainStyledAttributes.getColorStateList(6);
-        this.mTextSize = obtainStyledAttributes.getDimensionPixelSize(0, -1);
-        this.mStyle = obtainStyledAttributes.getInt(2, 0);
+    public TextAppearanceSpan(Context context, int i, int i2) throws Resources.NotFoundException {
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(i, R.styleable.TextAppearance);
+        ColorStateList colorStateList = typedArrayObtainStyledAttributes.getColorStateList(3);
+        this.mTextColorLink = typedArrayObtainStyledAttributes.getColorStateList(6);
+        this.mTextSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, -1);
+        this.mStyle = typedArrayObtainStyledAttributes.getInt(2, 0);
         if (!context.isRestricted() && context.canLoadUnsafeResources()) {
-            this.mTypeface = obtainStyledAttributes.getFont(12);
+            this.mTypeface = typedArrayObtainStyledAttributes.getFont(12);
         } else {
             this.mTypeface = null;
         }
         if (this.mTypeface != null) {
             this.mFamilyName = null;
         } else {
-            String string = obtainStyledAttributes.getString(12);
+            String string = typedArrayObtainStyledAttributes.getString(12);
             if (string != null) {
                 this.mFamilyName = string;
             } else {
-                int i3 = obtainStyledAttributes.getInt(1, 0);
+                int i3 = typedArrayObtainStyledAttributes.getInt(1, 0);
                 if (i3 == 1) {
                     this.mFamilyName = "sans";
                 } else if (i3 == 2) {
@@ -76,33 +77,33 @@ public class TextAppearanceSpan extends MetricAffectingSpan implements Parcelabl
                 }
             }
         }
-        this.mTextFontWeight = obtainStyledAttributes.getInt(18, -1);
-        String string2 = obtainStyledAttributes.getString(19);
+        this.mTextFontWeight = typedArrayObtainStyledAttributes.getInt(18, -1);
+        String string2 = typedArrayObtainStyledAttributes.getString(19);
         if (string2 != null) {
-            LocaleList forLanguageTags = LocaleList.forLanguageTags(string2);
-            if (!forLanguageTags.isEmpty()) {
-                this.mTextLocales = forLanguageTags;
+            LocaleList localeListForLanguageTags = LocaleList.forLanguageTags(string2);
+            if (!localeListForLanguageTags.isEmpty()) {
+                this.mTextLocales = localeListForLanguageTags;
             } else {
                 this.mTextLocales = null;
             }
         } else {
             this.mTextLocales = null;
         }
-        this.mShadowRadius = obtainStyledAttributes.getFloat(10, 0.0f);
-        this.mShadowDx = obtainStyledAttributes.getFloat(8, 0.0f);
-        this.mShadowDy = obtainStyledAttributes.getFloat(9, 0.0f);
-        this.mShadowColor = obtainStyledAttributes.getInt(7, 0);
-        this.mHasElegantTextHeight = obtainStyledAttributes.hasValue(13);
-        this.mElegantTextHeight = obtainStyledAttributes.getBoolean(13, false);
-        this.mHasLetterSpacing = obtainStyledAttributes.hasValue(14);
-        this.mLetterSpacing = obtainStyledAttributes.getFloat(14, 0.0f);
-        this.mFontFeatureSettings = obtainStyledAttributes.getString(15);
-        this.mFontVariationSettings = obtainStyledAttributes.getString(16);
-        obtainStyledAttributes.recycle();
+        this.mShadowRadius = typedArrayObtainStyledAttributes.getFloat(10, 0.0f);
+        this.mShadowDx = typedArrayObtainStyledAttributes.getFloat(8, 0.0f);
+        this.mShadowDy = typedArrayObtainStyledAttributes.getFloat(9, 0.0f);
+        this.mShadowColor = typedArrayObtainStyledAttributes.getInt(7, 0);
+        this.mHasElegantTextHeight = typedArrayObtainStyledAttributes.hasValue(13);
+        this.mElegantTextHeight = typedArrayObtainStyledAttributes.getBoolean(13, false);
+        this.mHasLetterSpacing = typedArrayObtainStyledAttributes.hasValue(14);
+        this.mLetterSpacing = typedArrayObtainStyledAttributes.getFloat(14, 0.0f);
+        this.mFontFeatureSettings = typedArrayObtainStyledAttributes.getString(15);
+        this.mFontVariationSettings = typedArrayObtainStyledAttributes.getString(16);
+        typedArrayObtainStyledAttributes.recycle();
         if (i2 >= 0) {
-            TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(16973829, R.styleable.Theme);
-            colorStateList = obtainStyledAttributes2.getColorStateList(i2);
-            obtainStyledAttributes2.recycle();
+            TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(16973829, R.styleable.Theme);
+            colorStateList = typedArrayObtainStyledAttributes2.getColorStateList(i2);
+            typedArrayObtainStyledAttributes2.recycle();
         }
         this.mTextColor = colorStateList;
     }
@@ -279,39 +280,39 @@ public class TextAppearanceSpan extends MetricAffectingSpan implements Parcelabl
     @Override // android.text.style.MetricAffectingSpan
     public void updateMeasureState(TextPaint textPaint) {
         int style;
-        Typeface create;
+        Typeface typefaceCreate;
         Typeface typeface = this.mTypeface;
         if (typeface != null) {
             style = this.mStyle;
-            create = Typeface.create(typeface, style);
+            typefaceCreate = Typeface.create(typeface, style);
         } else if (this.mFamilyName == null && this.mStyle == 0) {
-            create = null;
+            typefaceCreate = null;
             style = 0;
         } else {
             Typeface typeface2 = textPaint.getTypeface();
             style = (typeface2 != null ? typeface2.getStyle() : 0) | this.mStyle;
             String str = this.mFamilyName;
             if (str != null) {
-                create = Typeface.create(str, style);
+                typefaceCreate = Typeface.create(str, style);
             } else if (typeface2 == null) {
-                create = Typeface.defaultFromStyle(style);
+                typefaceCreate = Typeface.defaultFromStyle(style);
             } else {
-                create = Typeface.create(typeface2, style);
+                typefaceCreate = Typeface.create(typeface2, style);
             }
         }
-        if (create != null) {
+        if (typefaceCreate != null) {
             int i = this.mTextFontWeight;
             if (i >= 0) {
-                create = textPaint.setTypeface(Typeface.create(create, Math.min(1000, i), (style & 2) != 0));
+                typefaceCreate = textPaint.setTypeface(Typeface.create(typefaceCreate, Math.min(1000, i), (style & 2) != 0));
             }
-            int i2 = (~create.getStyle()) & style;
+            int i2 = (~typefaceCreate.getStyle()) & style;
             if ((i2 & 1) != 0) {
                 textPaint.setFakeBoldText(true);
             }
             if ((i2 & 2) != 0) {
                 textPaint.setTextSkewX(-0.25f);
             }
-            textPaint.setTypeface(create);
+            textPaint.setTypeface(typefaceCreate);
         }
         int i3 = this.mTextSize;
         if (i3 > 0) {

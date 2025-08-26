@@ -4,12 +4,10 @@ import com.android.systemui.R;
 import com.android.wm.shell.controlpanel.activity.FlexPanelActivity;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ControlPanelAction {
     public static final ArrayList mActionType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Action {
         None(0),
         QuickPanel(1),
@@ -35,7 +33,6 @@ public class ControlPanelAction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class GridViewItem {
         public final int mAct;
         public final int mIcon;

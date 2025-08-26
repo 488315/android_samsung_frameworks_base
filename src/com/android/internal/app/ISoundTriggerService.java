@@ -80,9 +80,9 @@ public interface ISoundTriggerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISoundTriggerService)) {
-                return (ISoundTriggerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISoundTriggerService)) {
+                return (ISoundTriggerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -123,35 +123,35 @@ public interface ISoundTriggerService extends IInterface {
             if (i == 1) {
                 Identity identity = (Identity) parcel.readTypedObject(Identity.CREATOR);
                 SoundTrigger.ModuleProperties moduleProperties = (SoundTrigger.ModuleProperties) parcel.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                ISoundTriggerSession attachAsOriginator = attachAsOriginator(identity, moduleProperties, readStrongBinder);
+                ISoundTriggerSession iSoundTriggerSessionAttachAsOriginator = attachAsOriginator(identity, moduleProperties, strongBinder);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(attachAsOriginator);
+                parcel2.writeStrongInterface(iSoundTriggerSessionAttachAsOriginator);
             } else if (i == 2) {
                 Identity identity2 = (Identity) parcel.readTypedObject(Identity.CREATOR);
                 Identity identity3 = (Identity) parcel.readTypedObject(Identity.CREATOR);
                 SoundTrigger.ModuleProperties moduleProperties2 = (SoundTrigger.ModuleProperties) parcel.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
-                IBinder readStrongBinder2 = parcel.readStrongBinder();
+                IBinder strongBinder2 = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                ISoundTriggerSession attachAsMiddleman = attachAsMiddleman(identity2, identity3, moduleProperties2, readStrongBinder2);
+                ISoundTriggerSession iSoundTriggerSessionAttachAsMiddleman = attachAsMiddleman(identity2, identity3, moduleProperties2, strongBinder2);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(attachAsMiddleman);
+                parcel2.writeStrongInterface(iSoundTriggerSessionAttachAsMiddleman);
             } else if (i == 3) {
                 Identity identity4 = (Identity) parcel.readTypedObject(Identity.CREATOR);
                 parcel.enforceNoDataAvail();
-                List<SoundTrigger.ModuleProperties> listModuleProperties = listModuleProperties(identity4);
+                List<SoundTrigger.ModuleProperties> listListModuleProperties = listModuleProperties(identity4);
                 parcel2.writeNoException();
-                parcel2.writeTypedList(listModuleProperties, 1);
+                parcel2.writeTypedList(listListModuleProperties, 1);
             } else if (i == 4) {
-                ISoundTriggerInjection asInterface = ISoundTriggerInjection.Stub.asInterface(parcel.readStrongBinder());
+                ISoundTriggerInjection iSoundTriggerInjectionAsInterface = ISoundTriggerInjection.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                attachInjection(asInterface);
+                attachInjection(iSoundTriggerInjectionAsInterface);
                 parcel2.writeNoException();
             } else if (i == 5) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setInPhoneCallState(readBoolean);
+                setInPhoneCallState(z);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -177,84 +177,84 @@ public interface ISoundTriggerService extends IInterface {
 
             @Override // com.android.internal.app.ISoundTriggerService
             public ISoundTriggerSession attachAsOriginator(Identity identity, SoundTrigger.ModuleProperties moduleProperties, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(identity, 0);
-                    obtain.writeTypedObject(moduleProperties, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ISoundTriggerSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(identity, 0);
+                    parcelObtain.writeTypedObject(moduleProperties, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ISoundTriggerSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.ISoundTriggerService
             public ISoundTriggerSession attachAsMiddleman(Identity identity, Identity identity2, SoundTrigger.ModuleProperties moduleProperties, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(identity, 0);
-                    obtain.writeTypedObject(identity2, 0);
-                    obtain.writeTypedObject(moduleProperties, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ISoundTriggerSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(identity, 0);
+                    parcelObtain.writeTypedObject(identity2, 0);
+                    parcelObtain.writeTypedObject(moduleProperties, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ISoundTriggerSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.ISoundTriggerService
             public List<SoundTrigger.ModuleProperties> listModuleProperties(Identity identity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(identity, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SoundTrigger.ModuleProperties.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(identity, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SoundTrigger.ModuleProperties.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.ISoundTriggerService
             public void attachInjection(ISoundTriggerInjection iSoundTriggerInjection) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSoundTriggerInjection);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSoundTriggerInjection);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.ISoundTriggerService
             public void setInPhoneCallState(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

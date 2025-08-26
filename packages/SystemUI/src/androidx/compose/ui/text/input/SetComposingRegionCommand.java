@@ -3,7 +3,6 @@ package androidx.compose.ui.text.input;
 import androidx.activity.BackEventCompat$$ExternalSyntheticOutline0;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SetComposingRegionCommand implements EditCommand {
     public final int end;
@@ -21,13 +20,13 @@ public final class SetComposingRegionCommand implements EditCommand {
             editingBuffer.compositionEnd = -1;
         }
         PartialGapBuffer partialGapBuffer = editingBuffer.gapBuffer;
-        int coerceIn = RangesKt___RangesKt.coerceIn(this.start, 0, partialGapBuffer.getLength());
-        int coerceIn2 = RangesKt___RangesKt.coerceIn(this.end, 0, partialGapBuffer.getLength());
-        if (coerceIn != coerceIn2) {
-            if (coerceIn < coerceIn2) {
-                editingBuffer.setComposition$ui_text_release(coerceIn, coerceIn2);
+        int iCoerceIn = RangesKt___RangesKt.coerceIn(this.start, 0, partialGapBuffer.getLength());
+        int iCoerceIn2 = RangesKt___RangesKt.coerceIn(this.end, 0, partialGapBuffer.getLength());
+        if (iCoerceIn != iCoerceIn2) {
+            if (iCoerceIn < iCoerceIn2) {
+                editingBuffer.setComposition$ui_text_release(iCoerceIn, iCoerceIn2);
             } else {
-                editingBuffer.setComposition$ui_text_release(coerceIn2, coerceIn);
+                editingBuffer.setComposition$ui_text_release(iCoerceIn2, iCoerceIn);
             }
         }
     }

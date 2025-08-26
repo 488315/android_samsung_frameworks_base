@@ -44,9 +44,9 @@ public interface IAODCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAODCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAODCallback)) {
-                return (IAODCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAODCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAODCallback)) {
+                return (IAODCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,12 +97,12 @@ public interface IAODCallback extends IInterface {
 
             @Override // com.samsung.android.aod.IAODCallback
             public void onScreenTurningOn() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAODCallback.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAODCallback.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

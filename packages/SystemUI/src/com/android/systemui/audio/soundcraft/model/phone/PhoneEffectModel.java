@@ -6,7 +6,6 @@ import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutli
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PhoneEffectModel {
     public int dolbyIndex;
@@ -42,13 +41,13 @@ public final class PhoneEffectModel {
         boolean z2 = this.volumeNormalization;
         boolean z3 = this.uhqUpscaler;
         boolean z4 = this.spatialAudio;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "PhoneEffectModel(dolbyIndex=", ", eqIndex=", ", voiceBoost=");
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, z, ", volumeNormalization=", z2, ", uhqUpscaler=");
-        m.append(z3);
-        m.append(", spatialAudio=");
-        m.append(z4);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "PhoneEffectModel(dolbyIndex=", ", eqIndex=", ", voiceBoost=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z, ", volumeNormalization=", z2, ", uhqUpscaler=");
+        sbM.append(z3);
+        sbM.append(", spatialAudio=");
+        sbM.append(z4);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     public PhoneEffectModel(int i, int i2, boolean z, boolean z2, boolean z3, boolean z4) {

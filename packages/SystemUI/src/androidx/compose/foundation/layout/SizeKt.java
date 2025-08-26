@@ -8,7 +8,6 @@ import androidx.compose.ui.platform.InspectableValueKt;
 import androidx.compose.ui.unit.Dp;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SizeKt {
     public static final FillElement FillWholeMaxHeight;
@@ -47,7 +46,7 @@ public abstract class SizeKt {
     }
 
     /* renamed from: defaultMinSize-VpY3zN4, reason: not valid java name */
-    public static final Modifier m129defaultMinSizeVpY3zN4(Modifier modifier, float f, float f2) {
+    public static final Modifier m130defaultMinSizeVpY3zN4(Modifier modifier, float f, float f2) {
         return modifier.then(new UnspecifiedConstraintsElement(f, f2, null));
     }
 
@@ -74,17 +73,17 @@ public abstract class SizeKt {
     }
 
     /* renamed from: height-3ABfNKs, reason: not valid java name */
-    public static final Modifier m130height3ABfNKs(Modifier modifier, float f) {
+    public static final Modifier m131height3ABfNKs(Modifier modifier, float f) {
         return modifier.then(new SizeElement(0.0f, f, 0.0f, f, true, InspectableValueKt.NoInspectorInfo, 5, null));
     }
 
     /* renamed from: heightIn-VpY3zN4, reason: not valid java name */
-    public static final Modifier m131heightInVpY3zN4(Modifier modifier, float f, float f2) {
+    public static final Modifier m132heightInVpY3zN4(Modifier modifier, float f, float f2) {
         return modifier.then(new SizeElement(0.0f, f, 0.0f, f2, true, InspectableValueKt.NoInspectorInfo, 5, null));
     }
 
     /* renamed from: heightIn-VpY3zN4$default, reason: not valid java name */
-    public static Modifier m132heightInVpY3zN4$default(Modifier modifier, float f, float f2, int i) {
+    public static Modifier m133heightInVpY3zN4$default(Modifier modifier, float f, float f2, int i) {
         if ((i & 1) != 0) {
             Dp.Companion.getClass();
             f = Dp.Unspecified;
@@ -93,16 +92,16 @@ public abstract class SizeKt {
             Dp.Companion.getClass();
             f2 = Dp.Unspecified;
         }
-        return m131heightInVpY3zN4(modifier, f, f2);
+        return m132heightInVpY3zN4(modifier, f, f2);
     }
 
     /* renamed from: requiredHeight-3ABfNKs, reason: not valid java name */
-    public static final Modifier m133requiredHeight3ABfNKs(Modifier modifier, float f) {
+    public static final Modifier m134requiredHeight3ABfNKs(Modifier modifier, float f) {
         return modifier.then(new SizeElement(0.0f, f, 0.0f, f, false, InspectableValueKt.NoInspectorInfo, 5, null));
     }
 
     /* renamed from: requiredHeightIn-VpY3zN4$default, reason: not valid java name */
-    public static Modifier m134requiredHeightInVpY3zN4$default(Modifier modifier, float f, float f2, int i) {
+    public static Modifier m135requiredHeightInVpY3zN4$default(Modifier modifier, float f, float f2, int i) {
         if ((i & 1) != 0) {
             Dp.Companion.getClass();
             f = Dp.Unspecified;
@@ -116,17 +115,17 @@ public abstract class SizeKt {
     }
 
     /* renamed from: requiredSize-3ABfNKs, reason: not valid java name */
-    public static final Modifier m135requiredSize3ABfNKs(Modifier modifier, float f) {
+    public static final Modifier m136requiredSize3ABfNKs(Modifier modifier, float f) {
         return modifier.then(new SizeElement(f, f, f, f, false, InspectableValueKt.NoInspectorInfo, null));
     }
 
     /* renamed from: requiredSize-VpY3zN4, reason: not valid java name */
-    public static final Modifier m136requiredSizeVpY3zN4(Modifier modifier, float f, float f2) {
+    public static final Modifier m137requiredSizeVpY3zN4(Modifier modifier, float f, float f2) {
         return modifier.then(new SizeElement(f, f2, f, f2, false, InspectableValueKt.NoInspectorInfo, null));
     }
 
     /* renamed from: requiredSizeIn-qDBjuR0$default, reason: not valid java name */
-    public static Modifier m137requiredSizeInqDBjuR0$default(Modifier modifier, float f, float f2, float f3, float f4, int i) {
+    public static Modifier m138requiredSizeInqDBjuR0$default(Modifier modifier, float f, float f2, float f3, float f4, int i) {
         if ((i & 2) != 0) {
             Dp.Companion.getClass();
             f2 = Dp.Unspecified;
@@ -145,27 +144,27 @@ public abstract class SizeKt {
     }
 
     /* renamed from: requiredWidth-3ABfNKs, reason: not valid java name */
-    public static final Modifier m138requiredWidth3ABfNKs(Modifier modifier, float f) {
+    public static final Modifier m139requiredWidth3ABfNKs(Modifier modifier, float f) {
         return modifier.then(new SizeElement(f, 0.0f, f, 0.0f, false, InspectableValueKt.NoInspectorInfo, 10, null));
     }
 
     /* renamed from: size-3ABfNKs, reason: not valid java name */
-    public static final Modifier m139size3ABfNKs(Modifier modifier, float f) {
+    public static final Modifier m140size3ABfNKs(Modifier modifier, float f) {
         return modifier.then(new SizeElement(f, f, f, f, true, InspectableValueKt.NoInspectorInfo, null));
     }
 
     /* renamed from: size-VpY3zN4, reason: not valid java name */
-    public static final Modifier m140sizeVpY3zN4(Modifier modifier, float f, float f2) {
+    public static final Modifier m141sizeVpY3zN4(Modifier modifier, float f, float f2) {
         return modifier.then(new SizeElement(f, f2, f, f2, true, InspectableValueKt.NoInspectorInfo, null));
     }
 
     /* renamed from: sizeIn-qDBjuR0, reason: not valid java name */
-    public static final Modifier m141sizeInqDBjuR0(Modifier modifier, float f, float f2, float f3, float f4) {
+    public static final Modifier m142sizeInqDBjuR0(Modifier modifier, float f, float f2, float f3, float f4) {
         return modifier.then(new SizeElement(f, f2, f3, f4, true, InspectableValueKt.NoInspectorInfo, null));
     }
 
     /* renamed from: sizeIn-qDBjuR0$default, reason: not valid java name */
-    public static Modifier m142sizeInqDBjuR0$default(Modifier modifier, float f, float f2, float f3, float f4, int i) {
+    public static Modifier m143sizeInqDBjuR0$default(Modifier modifier, float f, float f2, float f3, float f4, int i) {
         if ((i & 1) != 0) {
             Dp.Companion.getClass();
             f = Dp.Unspecified;
@@ -182,21 +181,21 @@ public abstract class SizeKt {
             Dp.Companion.getClass();
             f4 = Dp.Unspecified;
         }
-        return m141sizeInqDBjuR0(modifier, f, f2, f3, f4);
+        return m142sizeInqDBjuR0(modifier, f, f2, f3, f4);
     }
 
     /* renamed from: width-3ABfNKs, reason: not valid java name */
-    public static final Modifier m143width3ABfNKs(Modifier modifier, float f) {
+    public static final Modifier m144width3ABfNKs(Modifier modifier, float f) {
         return modifier.then(new SizeElement(f, 0.0f, f, 0.0f, true, InspectableValueKt.NoInspectorInfo, 10, null));
     }
 
     /* renamed from: widthIn-VpY3zN4, reason: not valid java name */
-    public static final Modifier m144widthInVpY3zN4(Modifier modifier, float f, float f2) {
+    public static final Modifier m145widthInVpY3zN4(Modifier modifier, float f, float f2) {
         return modifier.then(new SizeElement(f, 0.0f, f2, 0.0f, true, InspectableValueKt.NoInspectorInfo, 10, null));
     }
 
     /* renamed from: widthIn-VpY3zN4$default, reason: not valid java name */
-    public static Modifier m145widthInVpY3zN4$default(Modifier modifier, float f, float f2, int i) {
+    public static Modifier m146widthInVpY3zN4$default(Modifier modifier, float f, float f2, int i) {
         if ((i & 1) != 0) {
             Dp.Companion.getClass();
             f = Dp.Unspecified;
@@ -205,7 +204,7 @@ public abstract class SizeKt {
             Dp.Companion.getClass();
             f2 = Dp.Unspecified;
         }
-        return m144widthInVpY3zN4(modifier, f, f2);
+        return m145widthInVpY3zN4(modifier, f, f2);
     }
 
     public static Modifier wrapContentHeight$default(Modifier modifier, int i) {

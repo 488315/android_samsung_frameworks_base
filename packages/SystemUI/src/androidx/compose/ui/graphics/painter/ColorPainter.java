@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.drawscope.DrawScope;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ColorPainter extends Painter {
     public float alpha;
@@ -40,12 +39,12 @@ public final class ColorPainter extends Painter {
         }
         long j = ((ColorPainter) obj).color;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.color, j);
+        return ULong.m3447equalsimpl0(this.color, j);
     }
 
     @Override // androidx.compose.ui.graphics.painter.Painter
     /* renamed from: getIntrinsicSize-NH-jbRc */
-    public final long mo561getIntrinsicSizeNHjbRc() {
+    public final long mo563getIntrinsicSizeNHjbRc() {
         return this.intrinsicSize;
     }
 
@@ -57,11 +56,11 @@ public final class ColorPainter extends Painter {
 
     @Override // androidx.compose.ui.graphics.painter.Painter
     public final void onDraw(DrawScope drawScope) {
-        DrawScope.m539drawRectnJ9OG0$default(drawScope, this.color, 0L, 0L, this.alpha, null, this.colorFilter, 0, 86);
+        DrawScope.m541drawRectnJ9OG0$default(drawScope, this.color, 0L, 0L, this.alpha, null, this.colorFilter, 0, 86);
     }
 
     public final String toString() {
-        return "ColorPainter(color=" + ((Object) Color.m462toStringimpl(this.color)) + ')';
+        return "ColorPainter(color=" + ((Object) Color.m464toStringimpl(this.color)) + ')';
     }
 
     private ColorPainter(long j) {

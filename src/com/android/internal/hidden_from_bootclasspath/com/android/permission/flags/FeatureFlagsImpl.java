@@ -29,25 +29,25 @@ public final class FeatureFlagsImpl implements FeatureFlags {
 
     private void init() {
         try {
-            AconfigPackage load = AconfigPackage.load("com.android.permission.flags");
-            addBannersToPrivacySensitiveAppsForAaos = load.getBooleanFlagValue("add_banners_to_privacy_sensitive_apps_for_aaos", false);
-            appPermissionFragmentUsesPreferences = load.getBooleanFlagValue("app_permission_fragment_uses_preferences", false);
-            archivingReadOnly = load.getBooleanFlagValue("archiving_read_only", false);
-            crossUserRoleEnabled = load.getBooleanFlagValue("cross_user_role_enabled", false);
-            crossUserRoleUxBugfixEnabled = load.getBooleanFlagValue("cross_user_role_ux_bugfix_enabled", false);
-            declutteredPermissionManagerEnabled = load.getBooleanFlagValue("decluttered_permission_manager_enabled", false);
-            defaultAppsRecommendationEnabled = load.getBooleanFlagValue("default_apps_recommendation_enabled", false);
-            enableCoarseFineLocationPromptForAaos = load.getBooleanFlagValue("enable_coarse_fine_location_prompt_for_aaos", false);
-            enhancedConfirmationBackportEnabled = load.getBooleanFlagValue("enhanced_confirmation_backport_enabled", false);
-            expressiveDesignEnabled = load.getBooleanFlagValue("expressive_design_enabled", false);
-            fixSafetyCenterTouchTarget = load.getBooleanFlagValue("fix_safety_center_touch_target", false);
-            odadNotificationsSupported = load.getBooleanFlagValue("odad_notifications_supported", false);
-            permissionTimelineAttributionLabelFix = load.getBooleanFlagValue("permission_timeline_attribution_label_fix", false);
+            AconfigPackage aconfigPackageLoad = AconfigPackage.load("com.android.permission.flags");
+            addBannersToPrivacySensitiveAppsForAaos = aconfigPackageLoad.getBooleanFlagValue("add_banners_to_privacy_sensitive_apps_for_aaos", false);
+            appPermissionFragmentUsesPreferences = aconfigPackageLoad.getBooleanFlagValue("app_permission_fragment_uses_preferences", false);
+            archivingReadOnly = aconfigPackageLoad.getBooleanFlagValue("archiving_read_only", false);
+            crossUserRoleEnabled = aconfigPackageLoad.getBooleanFlagValue("cross_user_role_enabled", false);
+            crossUserRoleUxBugfixEnabled = aconfigPackageLoad.getBooleanFlagValue("cross_user_role_ux_bugfix_enabled", false);
+            declutteredPermissionManagerEnabled = aconfigPackageLoad.getBooleanFlagValue("decluttered_permission_manager_enabled", false);
+            defaultAppsRecommendationEnabled = aconfigPackageLoad.getBooleanFlagValue("default_apps_recommendation_enabled", false);
+            enableCoarseFineLocationPromptForAaos = aconfigPackageLoad.getBooleanFlagValue("enable_coarse_fine_location_prompt_for_aaos", false);
+            enhancedConfirmationBackportEnabled = aconfigPackageLoad.getBooleanFlagValue("enhanced_confirmation_backport_enabled", false);
+            expressiveDesignEnabled = aconfigPackageLoad.getBooleanFlagValue("expressive_design_enabled", false);
+            fixSafetyCenterTouchTarget = aconfigPackageLoad.getBooleanFlagValue("fix_safety_center_touch_target", false);
+            odadNotificationsSupported = aconfigPackageLoad.getBooleanFlagValue("odad_notifications_supported", false);
+            permissionTimelineAttributionLabelFix = aconfigPackageLoad.getBooleanFlagValue("permission_timeline_attribution_label_fix", false);
             privateProfileSupported = true;
             privateProfileTitleApi = true;
-            safetyCenterEnabledNoDeviceConfig = load.getBooleanFlagValue("safety_center_enabled_no_device_config", false);
-            safetyCenterIssueOnlyAffectsGroupStatus = load.getBooleanFlagValue("safety_center_issue_only_affects_group_status", false);
-            wearComposeMaterial3 = load.getBooleanFlagValue("wear_compose_material3", false);
+            safetyCenterEnabledNoDeviceConfig = aconfigPackageLoad.getBooleanFlagValue("safety_center_enabled_no_device_config", false);
+            safetyCenterIssueOnlyAffectsGroupStatus = aconfigPackageLoad.getBooleanFlagValue("safety_center_issue_only_affects_group_status", false);
+            wearComposeMaterial3 = aconfigPackageLoad.getBooleanFlagValue("wear_compose_material3", false);
             wearPrivacyDashboardEnabledReadOnly = true;
         } catch (Exception e) {
             Log.e(TAG, e.toString());

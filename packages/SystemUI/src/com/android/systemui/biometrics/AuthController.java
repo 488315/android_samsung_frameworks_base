@@ -90,7 +90,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AuthController implements CoreStartable, ConfigurationController.ConfigurationListener, CommandQueue.Callbacks, DozeReceiver {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -146,7 +145,6 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
     public final DisplayInfo mCachedDisplayInfo = new DisplayInfo();
     final TaskStackListener mTaskStackListener = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.AuthController$1, reason: invalid class name */
     public class AnonymousClass1 extends TaskStackListener {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -164,7 +162,6 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.AuthController$4, reason: invalid class name */
     public class AnonymousClass4 extends BiometricStateListener {
         public AnonymousClass4() {
@@ -175,7 +172,6 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.AuthController$5, reason: invalid class name */
     public class AnonymousClass5 extends BiometricStateListener {
         public AnonymousClass5() {
@@ -186,7 +182,6 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.AuthController$6, reason: invalid class name */
     public class AnonymousClass6 extends IFingerprintAuthenticatorsRegisteredCallback.Stub {
         public AnonymousClass6() {
@@ -197,7 +192,6 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.AuthController$7, reason: invalid class name */
     public class AnonymousClass7 extends IFaceAuthenticatorsRegisteredCallback.Stub {
         public AnonymousClass7() {
@@ -208,7 +202,6 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         default void onEnrollmentsChanged(int i) {
         }
@@ -233,7 +226,7 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
     }
 
     /* renamed from: -$$Nest$mhandleEnrollmentsChanged, reason: not valid java name */
-    public static void m1017$$Nest$mhandleEnrollmentsChanged(AuthController authController, int i, int i2, int i3, boolean z) {
+    public static void m1019$$Nest$mhandleEnrollmentsChanged(AuthController authController, int i, int i2, int i3, boolean z) {
         authController.mExecution.assertIsMainThread();
         Log.d("AuthController", "handleEnrollmentsChanged, userId: " + i2 + ", sensorId: " + i3 + ", hasEnrollments: " + z);
         BiometricType biometricType = BiometricType.UNKNOWN;
@@ -328,7 +321,7 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         keyguardManager.addKeyguardLockedStateListener(context.getMainExecutor(), new KeyguardManager.KeyguardLockedStateListener() { // from class: com.android.systemui.biometrics.AuthController$$ExternalSyntheticLambda0
             @Override // android.app.KeyguardManager.KeyguardLockedStateListener
             public final void onKeyguardLockedStateChanged(boolean z) {
-                AuthController authController = AuthController.this;
+                AuthController authController = this.f$0;
                 int i = AuthController.$r8$clinit;
                 if (z) {
                     authController.closeDialog(3, "Device lock");
@@ -341,7 +334,7 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i = AuthController.$r8$clinit;
-                AuthController.this.updateSensorLocations();
+                this.f$0.updateSensorLocations();
                 return Unit.INSTANCE;
             }
         });
@@ -393,18 +386,18 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
     public final void dump(PrintWriter printWriter, String[] strArr) {
         AuthContainerView authContainerView = this.mCurrentDialog;
         printWriter.println("  mCachedDisplayInfo=" + this.mCachedDisplayInfo);
-        StringBuilder m = MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mScaleFactor="), this.mScaleFactor, printWriter, "  fingerprintSensorLocationInNaturalOrientation=");
-        m.append(getFingerprintSensorLocationInNaturalOrientation());
-        printWriter.println(m.toString());
+        StringBuilder sbM = MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mScaleFactor="), this.mScaleFactor, printWriter, "  fingerprintSensorLocationInNaturalOrientation=");
+        sbM.append(getFingerprintSensorLocationInNaturalOrientation());
+        printWriter.println(sbM.toString());
         printWriter.println("  fingerprintSensorLocation=" + this.mFingerprintSensorLocation);
         printWriter.println("  udfpsBounds=" + this.mUdfpsBounds);
         printWriter.println("  allFingerprintAuthenticatorsRegistered=" + this.mAllFingerprintAuthenticatorsRegistered);
         printWriter.println("  currentDialog=" + authContainerView);
         if (authContainerView != null) {
             printWriter.println("    isAttachedToWindow=" + authContainerView.isAttachedToWindow());
-            StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    containerState="), authContainerView.mContainerState, printWriter, "    pendingCallbackReason=");
-            m2.append(authContainerView.mPendingCallbackReason);
-            printWriter.println(m2.toString());
+            StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    containerState="), authContainerView.mContainerState, printWriter, "    pendingCallbackReason=");
+            sbM2.append(authContainerView.mPendingCallbackReason);
+            printWriter.println(sbM2.toString());
             KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    config exist="), authContainerView.mConfig != null, printWriter);
             if (authContainerView.mConfig != null) {
                 KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    config.sensorIds exist="), authContainerView.mConfig.mSensorIds != null, printWriter);
@@ -428,7 +421,7 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         return this.mReceiver;
     }
 
-    public final Point getFingerprintSensorLocationInNaturalOrientation() {
+    public final Point getFingerprintSensorLocationInNaturalOrientation() throws Resources.NotFoundException {
         if (getUdfpsLocation() != null) {
             return getUdfpsLocation();
         }
@@ -456,9 +449,9 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
             return;
         }
         if (j != authContainerView.mConfig.mRequestId) {
-            StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("ignore - ids do not match: ", j, " current: ");
-            m.append(this.mCurrentDialog.mConfig.mRequestId);
-            Log.w("AuthController", m.toString());
+            StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("ignore - ids do not match: ", j, " current: ");
+            sbM.append(this.mCurrentDialog.mConfig.mRequestId);
+            Log.w("AuthController", sbM.toString());
         } else {
             authContainerView.animateAway(0, false);
             Iterator it = ((HashSet) this.mCallbacks).iterator();
@@ -486,9 +479,9 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
                 ComponentName componentName = ((ActivityManager.RunningTaskInfo) tasks.get(0)).topActivity;
                 boolean z2 = context.checkCallingOrSelfPermission("android.permission.USE_BIOMETRIC_INTERNAL") == 0 && "android".equals(str);
                 componentName.getClass();
-                boolean areEqual = Intrinsics.areEqual(componentName.getPackageName(), str);
+                boolean zAreEqual = Intrinsics.areEqual(componentName.getPackageName(), str);
                 boolean z3 = classNameIfItIsConfirmDeviceCredentialActivity != null;
-                if ((!z2 && !areEqual) || (z3 && !Intrinsics.areEqual(componentName.getClassName(), classNameIfItIsConfirmDeviceCredentialActivity))) {
+                if ((!z2 && !zAreEqual) || (z3 && !Intrinsics.areEqual(componentName.getClassName(), classNameIfItIsConfirmDeviceCredentialActivity))) {
                     z = true;
                 }
             }
@@ -531,9 +524,12 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00c6  */
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onBiometricError(final int i, int i2, int i3) {
-        int i4;
         Log.d("AuthController", String.format("onBiometricError(%d, %d, %d)", Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3)));
         boolean z = true;
         boolean z2 = i2 == 7 || i2 == 9;
@@ -561,17 +557,17 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
             }
             return;
         }
-        String str = "";
+        String errorString = "";
         if (!z) {
             if (i == 2) {
-                str = FingerprintManager.getErrorString(this.mContext, i2, i3);
+                errorString = FingerprintManager.getErrorString(this.mContext, i2, i3);
             } else if (i == 8) {
-                str = FaceManager.getErrorString(this.mContext, i2, i3);
+                errorString = FaceManager.getErrorString(this.mContext, i2, i3);
             }
-            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("onBiometricError, hard error: ", str, "AuthController");
+            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("onBiometricError, hard error: ", errorString, "AuthController");
             Spaghetti spaghetti2 = this.mCurrentDialog.mBiometricView;
             if (spaghetti2 != null) {
-                spaghetti2.onError(i, str);
+                spaghetti2.onError(i, errorString);
                 return;
             } else {
                 Log.e("AuthContainerView", "onError(): mBiometricView is null");
@@ -579,29 +575,25 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
             }
         }
         if (i2 == 100 || i2 == 3) {
-            int i5 = this.mCurrentDialogArgs.argi1;
-            if (this.mFaceProps != null ? this.mFaceEnrolledForUser.get(i5) : false) {
-                if (((Boolean) ((HashMap) this.mFpEnrolledForUser).getOrDefault(Integer.valueOf(i5), Boolean.FALSE)).booleanValue()) {
-                    i4 = i == 8 ? android.R.string.mediasize_chinese_prc_7 : android.R.string.mediasize_iso_a3;
-                    str = this.mContext.getString(i4);
-                }
+            int i4 = this.mCurrentDialogArgs.argi1;
+            if (this.mFaceProps != null ? this.mFaceEnrolledForUser.get(i4) : false) {
+                int i5 = ((Boolean) ((HashMap) this.mFpEnrolledForUser).getOrDefault(Integer.valueOf(i4), Boolean.FALSE)).booleanValue() ? i == 8 ? android.R.string.mediasize_chinese_prc_9 : android.R.string.mediasize_iso_a5 : android.R.string.config_displayWhiteBalanceColorTemperatureSensorName;
+                errorString = this.mContext.getString(i5);
             }
-            i4 = android.R.string.config_displayWhiteBalanceColorTemperatureSensorName;
-            str = this.mContext.getString(i4);
         } else if (i == 2) {
-            str = FingerprintManager.getErrorString(this.mContext, i2, i3);
+            errorString = FingerprintManager.getErrorString(this.mContext, i2, i3);
         } else if (i == 8) {
-            str = FaceManager.getErrorString(this.mContext, i2, i3);
+            errorString = FaceManager.getErrorString(this.mContext, i2, i3);
         }
-        MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("onBiometricError, soft error: ", str, "AuthController");
+        MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("onBiometricError, soft error: ", errorString, "AuthController");
         if (z3) {
             this.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.biometrics.AuthController$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AuthController authController = AuthController.this;
+                    AuthController authController = this.f$0;
                     int i6 = i;
                     AuthContainerView authContainerView2 = authController.mCurrentDialog;
-                    String string = authController.mContext.getString(android.R.string.lockscreen_transport_pause_description);
+                    String string = authController.mContext.getString(android.R.string.lockscreen_transport_prev_description);
                     if (authContainerView2.mBiometricView == null) {
                         Log.e("AuthContainerView", "onAuthenticationFailed(): mBiometricView is null");
                         return;
@@ -617,7 +609,7 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
             Log.e("AuthContainerView", "onAuthenticationFailed(): mBiometricView is null");
         } else {
             ((HashSet) authContainerView2.mFailedModalities).add(Integer.valueOf(i));
-            authContainerView2.mBiometricView.onAuthenticationFailed(i, str);
+            authContainerView2.mBiometricView.onAuthenticationFailed(i, errorString);
         }
     }
 
@@ -681,32 +673,32 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
             sb.append(i2);
             sb.append(" ");
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(authenticators, "showAuthenticationDialog, authenticators: ", ", sensorIds: ");
-        m.append(sb.toString());
-        m.append(", credentialAllowed: ");
-        m.append(z);
-        m.append(", requireConfirmation: ");
-        m.append(z2);
-        m.append(", operationId: ");
-        m.append(j);
-        m.append(", requestId: ");
-        m.append(j2);
-        Log.d("AuthController", m.toString());
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = promptInfo;
-        obtain.arg2 = iBiometricSysuiReceiver;
-        obtain.arg3 = iArr;
-        obtain.arg4 = Boolean.valueOf(z);
-        obtain.arg5 = Boolean.valueOf(z2);
-        obtain.argi1 = i;
-        obtain.arg6 = str;
-        obtain.argl1 = j;
-        obtain.argl2 = j2;
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(authenticators, "showAuthenticationDialog, authenticators: ", ", sensorIds: ");
+        sbM.append(sb.toString());
+        sbM.append(", credentialAllowed: ");
+        sbM.append(z);
+        sbM.append(", requireConfirmation: ");
+        sbM.append(z2);
+        sbM.append(", operationId: ");
+        sbM.append(j);
+        sbM.append(", requestId: ");
+        sbM.append(j2);
+        Log.d("AuthController", sbM.toString());
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = promptInfo;
+        someArgsObtain.arg2 = iBiometricSysuiReceiver;
+        someArgsObtain.arg3 = iArr;
+        someArgsObtain.arg4 = Boolean.valueOf(z);
+        someArgsObtain.arg5 = Boolean.valueOf(z2);
+        someArgsObtain.argi1 = i;
+        someArgsObtain.arg6 = str;
+        someArgsObtain.argl1 = j;
+        someArgsObtain.argl2 = j2;
         if (this.mCurrentDialog != null) {
             Log.w("AuthController", "mCurrentDialog: " + this.mCurrentDialog);
             z3 = true;
         }
-        showDialog(obtain, z3, (PromptViewModel) this.mPromptViewModelProvider.get());
+        showDialog(someArgsObtain, z3, (PromptViewModel) this.mPromptViewModelProvider.get());
     }
 
     public final void showDialog(SomeArgs someArgs, boolean z, PromptViewModel promptViewModel) {
@@ -715,7 +707,7 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         PromptInfo promptInfo = (PromptInfo) someArgs.arg1;
         int[] iArr = (int[]) someArgs.arg3;
         ((Boolean) someArgs.arg4).getClass();
-        boolean booleanValue = ((Boolean) someArgs.arg5).booleanValue();
+        boolean zBooleanValue = ((Boolean) someArgs.arg5).booleanValue();
         int i = someArgs.argi1;
         String str = (String) someArgs.arg6;
         long j = someArgs.argl1;
@@ -726,7 +718,7 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         config.mContext = this.mContext;
         config.mCallback = this;
         config.mPromptInfo = promptInfo;
-        config.mRequireConfirmation = booleanValue;
+        config.mRequireConfirmation = zBooleanValue;
         config.mUserId = i;
         config.mOpPackageName = str;
         config.mSkipIntro = z;
@@ -734,11 +726,11 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
         config.mRequestId = j2;
         config.mSensorIds = iArr;
         AuthContainerView authContainerView = new AuthContainerView(config, this.mApplicationCoroutineScope, this.mFpProps, this.mFaceProps, this.mWakefulnessLifecycle, userManager, null, lockPatternUtils, this.mInteractionJankMonitor, this.mPromptSelectorInteractor, promptViewModel, this.mCredentialViewModelProvider, this.mBackgroundExecutor, this.mVibratorHelper, this.mMSDLPlayer);
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "userId: ", " mCurrentDialog: ");
-        m.append(this.mCurrentDialog);
-        m.append(" newDialog: ");
-        m.append(authContainerView);
-        Log.d("AuthController", m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "userId: ", " mCurrentDialog: ");
+        sbM.append(this.mCurrentDialog);
+        sbM.append(" newDialog: ");
+        sbM.append(authContainerView);
+        Log.d("AuthController", sbM.toString());
         AuthContainerView authContainerView2 = this.mCurrentDialog;
         if (authContainerView2 != null) {
             authContainerView2.dismissWithoutCallback();
@@ -767,9 +759,9 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
                     if (display == null) {
                         ClockEventController$$ExternalSyntheticOutline0.m(i, "unable to get Display for user=", "AuthController");
                     } else {
-                        Context createDisplayContext = this.mContext.createDisplayContext(display);
+                        Context contextCreateDisplayContext = this.mContext.createDisplayContext(display);
                         ((WindowManagerProviderImpl) this.mWindowManagerProvider).getClass();
-                        windowManager = WindowManagerUtils.getWindowManager(createDisplayContext);
+                        windowManager = WindowManagerUtils.getWindowManager(contextCreateDisplayContext);
                     }
                 }
             } else {
@@ -833,12 +825,12 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
     public final void updateUdfpsLocation() {
         int naturalHeight;
         int naturalWidth;
+        int naturalHeight2;
+        int naturalHeight3;
+        int naturalHeight4;
         int i;
-        int i2;
-        int i3;
-        int i4;
         if (this.mUdfpsController != null) {
-            int i5 = 0;
+            int i2 = 0;
             FingerprintSensorPropertiesInternal fingerprintSensorPropertiesInternal = (FingerprintSensorPropertiesInternal) this.mUdfpsProps.get(0);
             Rect rect = this.mUdfpsBounds;
             UdfpsOverlayParams udfpsOverlayParams = this.mUdfpsOverlayParams;
@@ -848,47 +840,47 @@ public class AuthController implements CoreStartable, ConfigurationController.Co
             int inDisplayFingerprintHeight = DeviceState.getInDisplayFingerprintHeight();
             int inDisplayFingerprintImageSize = DeviceState.getInDisplayFingerprintImageSize();
             int naturalWidth2 = this.mCachedDisplayInfo.getNaturalWidth() / 2;
-            int i6 = inDisplayFingerprintImageSize / 2;
+            int i3 = inDisplayFingerprintImageSize / 2;
             String str = LsRune.VALUE_SUB_DISPLAY_POLICY;
             DisplayInfo displayInfo = this.mCachedDisplayInfo;
-            int i7 = displayInfo.rotation;
-            if (i7 == 0) {
-                i3 = displayInfo.getNaturalHeight() / 2;
+            int i4 = displayInfo.rotation;
+            if (i4 == 0) {
+                naturalHeight4 = displayInfo.getNaturalHeight() / 2;
                 naturalHeight = this.mCachedDisplayInfo.getNaturalWidth();
                 naturalWidth = this.mCachedDisplayInfo.getNaturalHeight();
-                i = naturalWidth2 - i6;
-                i2 = this.mCachedDisplayInfo.getNaturalHeight() - inDisplayFingerprintHeight;
-                inDisplayFingerprintHeight = naturalWidth2 + i6;
-                i4 = inDisplayFingerprintImageSize + i2;
-            } else if (i7 == 2) {
+                naturalHeight2 = naturalWidth2 - i3;
+                naturalHeight3 = this.mCachedDisplayInfo.getNaturalHeight() - inDisplayFingerprintHeight;
+                inDisplayFingerprintHeight = naturalWidth2 + i3;
+                i = inDisplayFingerprintImageSize + naturalHeight3;
+            } else if (i4 == 2) {
                 int naturalWidth3 = displayInfo.getNaturalWidth();
                 naturalWidth = this.mCachedDisplayInfo.getNaturalHeight() / 2;
-                i = naturalWidth2 - i6;
-                i2 = inDisplayFingerprintHeight - inDisplayFingerprintImageSize;
-                i4 = inDisplayFingerprintHeight;
-                inDisplayFingerprintHeight = naturalWidth2 + i6;
+                naturalHeight2 = naturalWidth2 - i3;
+                naturalHeight3 = inDisplayFingerprintHeight - inDisplayFingerprintImageSize;
+                i = inDisplayFingerprintHeight;
+                inDisplayFingerprintHeight = naturalWidth2 + i3;
                 naturalHeight = naturalWidth3;
-                i3 = 0;
-            } else if (i7 == 1) {
-                int naturalHeight2 = displayInfo.getNaturalHeight() / 2;
+                naturalHeight4 = 0;
+            } else if (i4 == 1) {
+                int naturalHeight5 = displayInfo.getNaturalHeight() / 2;
                 naturalHeight = this.mCachedDisplayInfo.getNaturalHeight();
                 naturalWidth = this.mCachedDisplayInfo.getNaturalWidth();
-                i = this.mCachedDisplayInfo.getNaturalHeight() - inDisplayFingerprintHeight;
-                i2 = naturalWidth2 - i6;
-                inDisplayFingerprintHeight = i + inDisplayFingerprintImageSize;
-                i4 = naturalWidth2 + i6;
-                i3 = 0;
-                i5 = naturalHeight2;
+                naturalHeight2 = this.mCachedDisplayInfo.getNaturalHeight() - inDisplayFingerprintHeight;
+                naturalHeight3 = naturalWidth2 - i3;
+                inDisplayFingerprintHeight = naturalHeight2 + inDisplayFingerprintImageSize;
+                i = naturalWidth2 + i3;
+                naturalHeight4 = 0;
+                i2 = naturalHeight5;
             } else {
                 naturalHeight = displayInfo.getNaturalHeight() / 2;
                 naturalWidth = this.mCachedDisplayInfo.getNaturalWidth();
-                i = inDisplayFingerprintHeight - inDisplayFingerprintImageSize;
-                i2 = naturalWidth2 - i6;
-                i3 = 0;
-                i4 = naturalWidth2 + i6;
+                naturalHeight2 = inDisplayFingerprintHeight - inDisplayFingerprintImageSize;
+                naturalHeight3 = naturalWidth2 - i3;
+                naturalHeight4 = 0;
+                i = naturalWidth2 + i3;
             }
-            this.mUdfpsBounds = new Rect(i, i2, inDisplayFingerprintHeight, i4);
-            UdfpsOverlayParams udfpsOverlayParams2 = new UdfpsOverlayParams(this.mUdfpsBounds, new Rect(i5, i3, naturalHeight, naturalWidth), this.mCachedDisplayInfo.getNaturalWidth(), this.mCachedDisplayInfo.getNaturalHeight(), this.mScaleFactor, this.mCachedDisplayInfo.rotation, fingerprintSensorPropertiesInternal.sensorType);
+            this.mUdfpsBounds = new Rect(naturalHeight2, naturalHeight3, inDisplayFingerprintHeight, i);
+            UdfpsOverlayParams udfpsOverlayParams2 = new UdfpsOverlayParams(this.mUdfpsBounds, new Rect(i2, naturalHeight4, naturalHeight, naturalWidth), this.mCachedDisplayInfo.getNaturalWidth(), this.mCachedDisplayInfo.getNaturalHeight(), this.mScaleFactor, this.mCachedDisplayInfo.rotation, fingerprintSensorPropertiesInternal.sensorType);
             this.mUdfpsOverlayParams = udfpsOverlayParams2;
             UdfpsController udfpsController = this.mUdfpsController;
             if (udfpsController.mSensorProps.sensorId != fingerprintSensorPropertiesInternal.sensorId) {

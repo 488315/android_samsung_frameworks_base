@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.HashSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationMemoryMeter {
     public static final NotificationMemoryMeter INSTANCE = new NotificationMemoryMeter();
@@ -17,40 +16,40 @@ public final class NotificationMemoryMeter {
     }
 
     public static int computeBitmapUse(Bitmap bitmap, HashSet hashSet) {
-        int identityHashCode = System.identityHashCode(bitmap);
-        if (hashSet.contains(Integer.valueOf(identityHashCode))) {
+        int iIdentityHashCode = System.identityHashCode(bitmap);
+        if (hashSet.contains(Integer.valueOf(iIdentityHashCode))) {
             return 0;
         }
-        hashSet.add(Integer.valueOf(identityHashCode));
+        hashSet.add(Integer.valueOf(iIdentityHashCode));
         return bitmap.getAllocationByteCount();
     }
 
     public static int computeBundleSize(Bundle bundle) {
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            bundle.writeToParcel(obtain, 0);
-            return obtain.dataSize();
+            bundle.writeToParcel(parcelObtain, 0);
+            return parcelObtain.dataSize();
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
     public static int computeIconUse(Icon icon, HashSet hashSet) {
-        Integer valueOf = icon != null ? Integer.valueOf(icon.getType()) : null;
-        if (valueOf != null && valueOf.intValue() == 1) {
+        Integer numValueOf = icon != null ? Integer.valueOf(icon.getType()) : null;
+        if (numValueOf != null && numValueOf.intValue() == 1) {
             return computeBitmapUse(icon.getBitmap(), hashSet);
         }
-        if (valueOf != null && valueOf.intValue() == 5) {
+        if (numValueOf != null && numValueOf.intValue() == 5) {
             return computeBitmapUse(icon.getBitmap(), hashSet);
         }
-        if (valueOf == null || valueOf.intValue() != 3) {
+        if (numValueOf == null || numValueOf.intValue() != 3) {
             return 0;
         }
-        int identityHashCode = System.identityHashCode(icon.getDataBytes());
-        if (hashSet.contains(Integer.valueOf(identityHashCode))) {
+        int iIdentityHashCode = System.identityHashCode(icon.getDataBytes());
+        if (hashSet.contains(Integer.valueOf(iIdentityHashCode))) {
             return 0;
         }
-        hashSet.add(Integer.valueOf(identityHashCode));
+        hashSet.add(Integer.valueOf(iIdentityHashCode));
         return icon.getDataLength();
     }
 

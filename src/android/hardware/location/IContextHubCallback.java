@@ -44,9 +44,9 @@ public interface IContextHubCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContextHubCallback)) {
-                return (IContextHubCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContextHubCallback)) {
+                return (IContextHubCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,11 +73,11 @@ public interface IContextHubCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 ContextHubMessage contextHubMessage = (ContextHubMessage) parcel.readTypedObject(ContextHubMessage.CREATOR);
                 parcel.enforceNoDataAvail();
-                onMessageReceipt(readInt, readInt2, contextHubMessage);
+                onMessageReceipt(i3, i4, contextHubMessage);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,15 +101,15 @@ public interface IContextHubCallback extends IInterface {
 
             @Override // android.hardware.location.IContextHubCallback
             public void onMessageReceipt(int i, int i2, ContextHubMessage contextHubMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(contextHubMessage, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(contextHubMessage, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

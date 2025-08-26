@@ -10,7 +10,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ParagraphInfo {
     public final float bottom;
@@ -47,17 +46,17 @@ public final class ParagraphInfo {
     }
 
     public final Rect toGlobal(Rect rect) {
-        long floatToRawIntBits = (Float.floatToRawIntBits(0.0f) << 32) | (Float.floatToRawIntBits(this.top) & 4294967295L);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(0.0f) << 32) | (Float.floatToRawIntBits(this.top) & 4294967295L);
         Offset.Companion companion = Offset.Companion;
-        return rect.m410translatek4lQ0M(floatToRawIntBits);
+        return rect.m412translatek4lQ0M(jFloatToRawIntBits);
     }
 
     /* renamed from: toGlobal-xdX6-G0, reason: not valid java name */
-    public final long m737toGlobalxdX6G0(long j, boolean z) {
+    public final long m739toGlobalxdX6G0(long j, boolean z) {
         if (z) {
             TextRange.Companion.getClass();
             long j2 = TextRange.Zero;
-            if (TextRange.m746equalsimpl0(j, j2)) {
+            if (TextRange.m748equalsimpl0(j, j2)) {
                 return j2;
             }
         }
@@ -68,9 +67,9 @@ public final class ParagraphInfo {
 
     public final Rect toLocal(Rect rect) {
         float f = -this.top;
-        long floatToRawIntBits = (Float.floatToRawIntBits(0.0f) << 32) | (Float.floatToRawIntBits(f) & 4294967295L);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(0.0f) << 32) | (Float.floatToRawIntBits(f) & 4294967295L);
         Offset.Companion companion = Offset.Companion;
-        return rect.m410translatek4lQ0M(floatToRawIntBits);
+        return rect.m412translatek4lQ0M(jFloatToRawIntBits);
     }
 
     public final int toLocalIndex(int i) {

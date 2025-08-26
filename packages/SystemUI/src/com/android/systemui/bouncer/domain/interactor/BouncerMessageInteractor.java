@@ -1,11 +1,15 @@
 package com.android.systemui.bouncer.domain.interactor;
 
 import android.hardware.biometrics.BiometricSourceType;
+import android.os.SystemProperties;
 import com.android.keyguard.KeyguardSecurityModel;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.systemui.authentication.shared.model.AuthenticationMethodModel;
 import com.android.systemui.biometrics.data.repository.FacePropertyRepository;
+import com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl;
+import com.android.systemui.biometrics.data.repository.FaceSensorInfo;
+import com.android.systemui.biometrics.shared.model.SensorStrength;
 import com.android.systemui.bouncer.data.repository.BouncerMessageRepository;
 import com.android.systemui.bouncer.data.repository.BouncerMessageRepositoryImpl;
 import com.android.systemui.bouncer.shared.model.BouncerMessageModel;
@@ -29,6 +33,7 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
+import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
@@ -42,7 +47,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BouncerMessageInteractor {
     public final StateFlowImpl bouncerMessage;
@@ -57,7 +61,6 @@ public final class BouncerMessageInteractor {
     public final SystemPropertiesHelper systemPropertiesHelper;
     public final UserRepository userRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function3 {
         /* synthetic */ Object L$0;
@@ -70,9 +73,9 @@ public final class BouncerMessageInteractor {
 
         @Override // kotlin.jvm.functions.Function3
         public final Object invoke(Object obj, Object obj2, Object obj3) {
-            boolean booleanValue = ((Boolean) obj).booleanValue();
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
             AnonymousClass1 anonymousClass1 = new AnonymousClass1((Continuation) obj3);
-            anonymousClass1.Z$0 = booleanValue;
+            anonymousClass1.Z$0 = zBooleanValue;
             anonymousClass1.L$0 = (BouncerMessageModel) obj2;
             return anonymousClass1.invokeSuspend(Unit.INSTANCE);
         }
@@ -93,7 +96,6 @@ public final class BouncerMessageInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         /* synthetic */ Object L$0;
@@ -139,11 +141,10 @@ public final class BouncerMessageInteractor {
         this.securityModel = keyguardSecurityModel;
         ChannelFlowTransformLatest channelFlowTransformLatest = deviceEntryBiometricsAllowedInteractor.isFingerprintCurrentlyAllowedOnBouncer;
         SharingStarted.Companion.getClass();
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(channelFlowTransformLatest, coroutineScope, SharingStarted.Companion.Eagerly, Boolean.FALSE);
-        this.isFingerprintAuthCurrentlyAllowedOnBouncer = stateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(channelFlowTransformLatest, coroutineScope, SharingStarted.Companion.Eagerly, Boolean.FALSE);
+        this.isFingerprintAuthCurrentlyAllowedOnBouncer = readonlyStateFlowStateIn;
         ?? r6 = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$kumCallback$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -174,7 +175,7 @@ public final class BouncerMessageInteractor {
             public final void onBiometricAuthFailed(BiometricSourceType biometricSourceType) {
                 BouncerMessageModel message;
                 BiometricSourceType biometricSourceType2 = BiometricSourceType.FACE;
-                DeviceEntryBiometricsAllowedInteractor deviceEntryBiometricsAllowedInteractor2 = DeviceEntryBiometricsAllowedInteractor.this;
+                DeviceEntryBiometricsAllowedInteractor deviceEntryBiometricsAllowedInteractor2 = deviceEntryBiometricsAllowedInteractor;
                 if (biometricSourceType == biometricSourceType2 && ((Boolean) deviceEntryBiometricsAllowedInteractor2.isFaceLockedOut.getValue()).booleanValue()) {
                     return;
                 }
@@ -189,15 +190,15 @@ public final class BouncerMessageInteractor {
                     if (i != 2) {
                         BouncerMessageStrings bouncerMessageStrings = BouncerMessageStrings.INSTANCE;
                         AuthenticationMethodModel authModel = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
-                        boolean booleanValue = ((Boolean) readonlyStateFlow.$$delegate_0.getValue()).booleanValue();
+                        boolean zBooleanValue = ((Boolean) readonlyStateFlow.$$delegate_0.getValue()).booleanValue();
                         bouncerMessageStrings.getClass();
-                        message = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.defaultMessage(authModel, booleanValue));
+                        message = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.defaultMessage(authModel, zBooleanValue));
                     } else {
                         BouncerMessageStrings bouncerMessageStrings2 = BouncerMessageStrings.INSTANCE;
                         AuthenticationMethodModel authModel2 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
-                        boolean booleanValue2 = ((Boolean) readonlyStateFlow.$$delegate_0.getValue()).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) readonlyStateFlow.$$delegate_0.getValue()).booleanValue();
                         bouncerMessageStrings2.getClass();
-                        message = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.incorrectFaceInput(authModel2, booleanValue2));
+                        message = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.incorrectFaceInput(authModel2, zBooleanValue2));
                     }
                 } else {
                     BouncerMessageStrings bouncerMessageStrings3 = BouncerMessageStrings.INSTANCE;
@@ -224,10 +225,9 @@ public final class BouncerMessageInteractor {
         FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(biometricSettingsRepositoryImpl.isFaceAuthEnrolledAndEnabled, biometricSettingsRepositoryImpl.isFingerprintEnrolledAndEnabled, new BouncerMessageInteractorKt$or$1(null));
         this.isAnyBiometricsEnabledAndEnrolled = flowKt__ZipKt$combine$$inlined$unsafeFlow$1;
         final TrustRepositoryImpl trustRepositoryImpl = (TrustRepositoryImpl) trustRepository;
-        final Flow[] flowArr = {primaryBouncerInteractor.lastShownSecurityMode, biometricSettingsRepositoryImpl.authenticationFlags, trustRepositoryImpl.isCurrentUserTrustManaged(), flowKt__ZipKt$combine$$inlined$unsafeFlow$1, deviceEntryBiometricsAllowedInteractor.isFingerprintLockedOut, deviceEntryBiometricsAllowedInteractor.isFaceLockedOut, stateIn};
+        final Flow[] flowArr = {primaryBouncerInteractor.lastShownSecurityMode, biometricSettingsRepositoryImpl.authenticationFlags, trustRepositoryImpl.isCurrentUserTrustManaged(), flowKt__ZipKt$combine$$inlined$unsafeFlow$1, deviceEntryBiometricsAllowedInteractor.isFingerprintLockedOut, deviceEntryBiometricsAllowedInteractor.isFaceLockedOut, readonlyStateFlowStateIn};
         final Flow flow = new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$special$$inlined$combine$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$special$$inlined$combine$1$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -260,11 +260,11 @@ public final class BouncerMessageInteractor {
                         Object obj5 = objArr[3];
                         Object obj6 = objArr[4];
                         Object obj7 = objArr[5];
-                        boolean booleanValue = ((Boolean) objArr[6]).booleanValue();
-                        boolean booleanValue2 = ((Boolean) obj7).booleanValue();
-                        boolean booleanValue3 = ((Boolean) obj6).booleanValue();
+                        boolean zBooleanValue = ((Boolean) objArr[6]).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj7).booleanValue();
+                        boolean zBooleanValue3 = ((Boolean) obj6).booleanValue();
                         KeyguardSecurityModel.SecurityMode securityMode = (KeyguardSecurityModel.SecurityMode) obj2;
-                        Septuple septuple = new Septuple(securityMode, (AuthenticationFlags) obj3, Boolean.valueOf(((Boolean) obj4).booleanValue()), Boolean.valueOf(((Boolean) obj5).booleanValue()), Boolean.valueOf(booleanValue3), Boolean.valueOf(booleanValue2), Boolean.valueOf(booleanValue));
+                        Septuple septuple = new Septuple(securityMode, (AuthenticationFlags) obj3, Boolean.valueOf(((Boolean) obj4).booleanValue()), Boolean.valueOf(((Boolean) obj5).booleanValue()), Boolean.valueOf(zBooleanValue3), Boolean.valueOf(zBooleanValue2), Boolean.valueOf(zBooleanValue));
                         this.label = 1;
                         if (flowCollector.emit(septuple, this) == coroutineSingletons) {
                             return coroutineSingletons;
@@ -282,18 +282,17 @@ public final class BouncerMessageInteractor {
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
-                Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$special$$inlined$combine$1.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$special$$inlined$combine$1.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr2.length];
                     }
                 }, new AnonymousClass3(null), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         };
         ?? r7 = new Flow() { // from class: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ BiometricSettingsRepository $biometricSettingsRepository$inlined;
@@ -326,26 +325,136 @@ public final class BouncerMessageInteractor {
                     this.$biometricSettingsRepository$inlined = biometricSettingsRepository;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x0030  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r10, kotlin.coroutines.Continuation r11) {
-                    /*
-                        Method dump skipped, instructions count: 635
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    BouncerMessageModel defaultMessage;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Septuple septuple = (Septuple) obj;
+                        AuthenticationFlags authenticationFlags = (AuthenticationFlags) septuple.component2();
+                        boolean zBooleanValue = ((Boolean) septuple.component4()).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) septuple.component5()).booleanValue();
+                        boolean zBooleanValue3 = ((Boolean) septuple.component6()).booleanValue();
+                        boolean zBooleanValue4 = ((Boolean) ((TrustRepositoryImpl) this.$trustRepository$inlined).isCurrentUserTrustUsuallyManaged.$$delegate_0.getValue()).booleanValue();
+                        boolean z = zBooleanValue4 || zBooleanValue;
+                        BouncerMessageInteractor bouncerMessageInteractor = this.this$0;
+                        if (z && authenticationFlags.isPrimaryAuthRequiredAfterReboot) {
+                            bouncerMessageInteractor.systemPropertiesHelper.getClass();
+                            if (Intrinsics.areEqual(SystemProperties.get("sys.boot.reason.last"), "reboot,mainline_update")) {
+                                BouncerMessageStrings bouncerMessageStrings = BouncerMessageStrings.INSTANCE;
+                                AuthenticationMethodModel authModel = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                                bouncerMessageStrings.getClass();
+                                defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.authRequiredForMainlineUpdate(authModel));
+                            } else {
+                                BouncerMessageStrings bouncerMessageStrings2 = BouncerMessageStrings.INSTANCE;
+                                AuthenticationMethodModel authModel2 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                                bouncerMessageStrings2.getClass();
+                                defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.authRequiredAfterReboot(authModel2));
+                            }
+                        } else if (z && authenticationFlags.isPrimaryAuthRequiredAfterTimeout) {
+                            BouncerMessageStrings bouncerMessageStrings3 = BouncerMessageStrings.INSTANCE;
+                            AuthenticationMethodModel authModel3 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                            bouncerMessageStrings3.getClass();
+                            defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.authRequiredAfterPrimaryAuthTimeout(authModel3));
+                        } else if (authenticationFlags.isPrimaryAuthRequiredAfterDpmLockdown) {
+                            BouncerMessageStrings bouncerMessageStrings4 = BouncerMessageStrings.INSTANCE;
+                            AuthenticationMethodModel authModel4 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                            bouncerMessageStrings4.getClass();
+                            defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.authRequiredAfterAdminLockdown(authModel4));
+                        } else if (z && authenticationFlags.isPrimaryAuthRequiredForUnattendedUpdate) {
+                            BouncerMessageStrings bouncerMessageStrings5 = BouncerMessageStrings.INSTANCE;
+                            AuthenticationMethodModel authModel5 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                            bouncerMessageStrings5.getClass();
+                            defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.authRequiredForUnattendedUpdate(authModel5));
+                        } else {
+                            BiometricSettingsRepositoryImpl biometricSettingsRepositoryImpl = (BiometricSettingsRepositoryImpl) this.$biometricSettingsRepository$inlined;
+                            if (((Boolean) biometricSettingsRepositoryImpl.isFingerprintEnrolledAndEnabled.$$delegate_0.getValue()).booleanValue() && zBooleanValue2) {
+                                BouncerMessageStrings bouncerMessageStrings6 = BouncerMessageStrings.INSTANCE;
+                                AuthenticationMethodModel authModel6 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                                bouncerMessageStrings6.getClass();
+                                defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.class3AuthLockedOut(authModel6));
+                            } else if (((Boolean) biometricSettingsRepositoryImpl.isFaceAuthEnrolledAndEnabled.$$delegate_0.getValue()).booleanValue() && zBooleanValue3) {
+                                FaceSensorInfo faceSensorInfo = (FaceSensorInfo) ((FacePropertyRepositoryImpl) bouncerMessageInteractor.facePropertyRepository).sensorInfo.$$delegate_0.getValue();
+                                if ((faceSensorInfo != null ? faceSensorInfo.strength : null) == SensorStrength.STRONG) {
+                                    BouncerMessageStrings bouncerMessageStrings7 = BouncerMessageStrings.INSTANCE;
+                                    AuthenticationMethodModel authModel7 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                                    bouncerMessageStrings7.getClass();
+                                    defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.class3AuthLockedOut(authModel7));
+                                } else {
+                                    BouncerMessageStrings bouncerMessageStrings8 = BouncerMessageStrings.INSTANCE;
+                                    AuthenticationMethodModel authModel8 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                                    boolean zBooleanValue5 = ((Boolean) bouncerMessageInteractor.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue();
+                                    bouncerMessageStrings8.getClass();
+                                    defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.faceLockedOut(authModel8, zBooleanValue5));
+                                }
+                            } else if (authenticationFlags.isSomeAuthRequiredAfterAdaptiveAuthRequest) {
+                                BouncerMessageStrings bouncerMessageStrings9 = BouncerMessageStrings.INSTANCE;
+                                AuthenticationMethodModel authModel9 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                                boolean zBooleanValue6 = ((Boolean) bouncerMessageInteractor.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue();
+                                bouncerMessageStrings9.getClass();
+                                defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.authRequiredAfterAdaptiveAuthRequest(authModel9, zBooleanValue6));
+                            } else if (z && authenticationFlags.strongerAuthRequiredAfterNonStrongBiometricsTimeout) {
+                                BouncerMessageStrings bouncerMessageStrings10 = BouncerMessageStrings.INSTANCE;
+                                AuthenticationMethodModel authModel10 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                                boolean zBooleanValue7 = ((Boolean) bouncerMessageInteractor.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue();
+                                bouncerMessageStrings10.getClass();
+                                defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.nonStrongAuthTimeout(authModel10, zBooleanValue7));
+                            } else if (zBooleanValue4 && authenticationFlags.someAuthRequiredAfterUserRequest) {
+                                BouncerMessageStrings bouncerMessageStrings11 = BouncerMessageStrings.INSTANCE;
+                                AuthenticationMethodModel authModel11 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                                boolean zBooleanValue8 = ((Boolean) bouncerMessageInteractor.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue();
+                                bouncerMessageStrings11.getClass();
+                                defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.trustAgentDisabled(authModel11, zBooleanValue8));
+                            } else if (zBooleanValue4 && authenticationFlags.someAuthRequiredAfterTrustAgentExpired) {
+                                BouncerMessageStrings bouncerMessageStrings12 = BouncerMessageStrings.INSTANCE;
+                                AuthenticationMethodModel authModel12 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                                boolean zBooleanValue9 = ((Boolean) bouncerMessageInteractor.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue();
+                                bouncerMessageStrings12.getClass();
+                                defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.trustAgentDisabled(authModel12, zBooleanValue9));
+                            } else if (z && authenticationFlags.isInUserLockdown) {
+                                BouncerMessageStrings bouncerMessageStrings13 = BouncerMessageStrings.INSTANCE;
+                                AuthenticationMethodModel authModel13 = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
+                                bouncerMessageStrings13.getClass();
+                                defaultMessage = BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.authRequiredAfterUserLockdown(authModel13));
+                            } else {
+                                defaultMessage = bouncerMessageInteractor.getDefaultMessage();
+                            }
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(defaultMessage, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, trustRepositoryImpl, this, biometricSettingsRepository), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector, trustRepositoryImpl, this, biometricSettingsRepository), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.initialBouncerMessage = r7;
@@ -361,16 +470,16 @@ public final class BouncerMessageInteractor {
     public final BouncerMessageModel getDefaultMessage() {
         BouncerMessageStrings bouncerMessageStrings = BouncerMessageStrings.INSTANCE;
         AuthenticationMethodModel authModel = BouncerMessageInteractorKt.toAuthModel(getCurrentSecurityMode());
-        boolean booleanValue = ((Boolean) this.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue();
+        boolean zBooleanValue = ((Boolean) this.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue();
         bouncerMessageStrings.getClass();
-        return BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.defaultMessage(authModel, booleanValue));
+        return BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.defaultMessage(authModel, zBooleanValue));
     }
 
     public final void setFaceAcquisitionMessage(String str) {
-        BouncerMessageModel access$defaultMessage = BouncerMessageInteractorKt.access$defaultMessage(getCurrentSecurityMode(), str, ((Boolean) this.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue());
+        BouncerMessageModel bouncerMessageModelAccess$defaultMessage = BouncerMessageInteractorKt.access$defaultMessage(getCurrentSecurityMode(), str, ((Boolean) this.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue());
         BiometricSourceType biometricSourceType = BiometricSourceType.FACE;
         BouncerMessageRepositoryImpl bouncerMessageRepositoryImpl = (BouncerMessageRepositoryImpl) this.repository;
-        bouncerMessageRepositoryImpl._bouncerMessage.setValue(access$defaultMessage);
+        bouncerMessageRepositoryImpl._bouncerMessage.setValue(bouncerMessageModelAccess$defaultMessage);
         bouncerMessageRepositoryImpl.messageSource = biometricSourceType;
     }
 }

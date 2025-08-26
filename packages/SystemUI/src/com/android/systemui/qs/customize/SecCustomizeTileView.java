@@ -1,6 +1,7 @@
 package com.android.systemui.qs.customize;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -10,7 +11,6 @@ import com.android.systemui.qs.tileimpl.QSIconViewImpl;
 import com.android.systemui.qs.tileimpl.SecQSTileView;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecCustomizeTileView extends SecQSTileView implements CustomActionView {
     public final QSIconViewImpl mCustomizeIcon;
@@ -70,7 +70,7 @@ public class SecCustomizeTileView extends SecQSTileView implements CustomActionV
     }
 
     @Override // com.android.systemui.qs.tileimpl.SecQSTileView
-    public final void updateTouchTargetArea() {
+    public final void updateTouchTargetArea() throws Resources.NotFoundException {
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) this.mLabelContainer.getLayoutParams();
         layoutParams.height = getResources().getDimensionPixelOffset(R.dimen.qs_edit_tile_label_height);
         layoutParams.topMargin = 0;

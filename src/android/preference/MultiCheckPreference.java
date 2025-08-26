@@ -26,17 +26,17 @@ public class MultiCheckPreference extends DialogPreference {
 
     public MultiCheckPreference(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ListPreference, i, i2);
-        CharSequence[] textArray = obtainStyledAttributes.getTextArray(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ListPreference, i, i2);
+        CharSequence[] textArray = typedArrayObtainStyledAttributes.getTextArray(0);
         this.mEntries = textArray;
         if (textArray != null) {
             setEntries(textArray);
         }
-        setEntryValuesCS(obtainStyledAttributes.getTextArray(1));
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.Preference, 0, 0);
-        this.mSummary = obtainStyledAttributes2.getString(7);
-        obtainStyledAttributes2.recycle();
+        setEntryValuesCS(typedArrayObtainStyledAttributes.getTextArray(1));
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.Preference, 0, 0);
+        this.mSummary = typedArrayObtainStyledAttributes2.getString(7);
+        typedArrayObtainStyledAttributes2.recycle();
     }
 
     public MultiCheckPreference(Context context, AttributeSet attributeSet, int i) {
@@ -179,11 +179,11 @@ public class MultiCheckPreference extends DialogPreference {
 
     @Override // android.preference.DialogPreference, android.preference.Preference
     protected Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         if (isPersistent()) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         savedState.values = getValues();
         return savedState;
     }

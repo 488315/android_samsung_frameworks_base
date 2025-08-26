@@ -1,9 +1,9 @@
 package androidx.compose.ui.window;
 
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
+import androidx.compose.runtime.DynamicProvidableCompositionLocal;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PopupProperties {
     public final boolean dismissOnBackPress;
@@ -110,46 +110,10 @@ public final class PopupProperties {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public PopupProperties(boolean r8, boolean r9, boolean r10, androidx.compose.ui.window.SecureFlagPolicy r11, boolean r12, boolean r13, boolean r14) {
-        /*
-            r7 = this;
-            androidx.compose.runtime.DynamicProvidableCompositionLocal r0 = androidx.compose.ui.window.AndroidPopup_androidKt.LocalPopupTestTag
-            if (r8 != 0) goto L8
-            r8 = 262152(0x40008, float:3.67353E-40)
-            goto La
-        L8:
-            r8 = 262144(0x40000, float:3.67342E-40)
-        La:
-            androidx.compose.ui.window.SecureFlagPolicy r0 = androidx.compose.ui.window.SecureFlagPolicy.SecureOn
-            if (r11 != r0) goto L10
-            r8 = r8 | 8192(0x2000, float:1.148E-41)
-        L10:
-            if (r13 != 0) goto L14
-            r8 = r8 | 512(0x200, float:7.17E-43)
-        L14:
-            r1 = r8
-            androidx.compose.ui.window.SecureFlagPolicy r8 = androidx.compose.ui.window.SecureFlagPolicy.Inherit
-            if (r11 != r8) goto L21
-            r8 = 1
-        L1a:
-            r0 = r7
-            r2 = r8
-            r3 = r9
-            r4 = r10
-            r5 = r12
-            r6 = r14
-            goto L23
-        L21:
-            r8 = 0
-            goto L1a
-        L23:
-            r0.<init>(r1, r2, r3, r4, r5, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.window.PopupProperties.<init>(boolean, boolean, boolean, androidx.compose.ui.window.SecureFlagPolicy, boolean, boolean, boolean):void");
+    public PopupProperties(boolean z, boolean z2, boolean z3, SecureFlagPolicy secureFlagPolicy, boolean z4, boolean z5, boolean z6) {
+        DynamicProvidableCompositionLocal dynamicProvidableCompositionLocal = AndroidPopup_androidKt.LocalPopupTestTag;
+        int i = !z ? 262152 : 262144;
+        i = secureFlagPolicy == SecureFlagPolicy.SecureOn ? i | 8192 : i;
+        this(z5 ? i : i | 512, secureFlagPolicy == SecureFlagPolicy.Inherit, z2, z3, z4, z6);
     }
 }

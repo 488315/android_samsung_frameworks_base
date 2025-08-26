@@ -27,7 +27,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public class BubbleCoordinator implements Coordinator {
@@ -65,14 +64,14 @@ public class BubbleCoordinator implements Coordinator {
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifDismissInterceptor
-        public boolean shouldInterceptDismissal(NotificationEntry notificationEntry) {
+        public boolean shouldInterceptDismissal(NotificationEntry notificationEntry) throws InterruptedException {
             ArrayList arrayList;
-            boolean booleanValue;
+            boolean zBooleanValue;
             if (BubbleCoordinator.this.mBubblesManagerOptional.isPresent()) {
                 BubblesManager bubblesManager = (BubblesManager) BubbleCoordinator.this.mBubblesManagerOptional.get();
                 bubblesManager.getClass();
                 if (notificationEntry == null) {
-                    booleanValue = false;
+                    zBooleanValue = false;
                 } else {
                     List attachedNotifChildren = notificationEntry.getAttachedNotifChildren();
                     Object obj = null;
@@ -90,14 +89,14 @@ public class BubbleCoordinator implements Coordinator {
                     } else {
                         arrayList = null;
                     }
-                    BubbleEntry notifToBubbleEntry = bubblesManager.notifToBubbleEntry(notificationEntry);
+                    BubbleEntry bubbleEntryNotifToBubbleEntry = bubblesManager.notifToBubbleEntry(notificationEntry);
                     BubblesManager$$ExternalSyntheticLambda3 bubblesManager$$ExternalSyntheticLambda3 = new BubblesManager$$ExternalSyntheticLambda3(bubblesManager, attachedNotifChildren, notificationEntry);
                     Executor executor = bubblesManager.mSysuiMainExecutor;
                     BubbleController.BubblesImpl bubblesImpl = (BubbleController.BubblesImpl) bubblesManager.mBubbles;
                     bubblesImpl.getClass();
                     BubbleController$BubblesImpl$$ExternalSyntheticLambda11 bubbleController$BubblesImpl$$ExternalSyntheticLambda11 = new BubbleController$BubblesImpl$$ExternalSyntheticLambda11(executor, bubblesManager$$ExternalSyntheticLambda3);
                     ShellExecutor shellExecutor = BubbleController.this.mMainExecutor;
-                    final BubbleController$BubblesImpl$$ExternalSyntheticLambda12 bubbleController$BubblesImpl$$ExternalSyntheticLambda12 = new BubbleController$BubblesImpl$$ExternalSyntheticLambda12(bubblesImpl, notifToBubbleEntry, arrayList, bubbleController$BubblesImpl$$ExternalSyntheticLambda11);
+                    final BubbleController$BubblesImpl$$ExternalSyntheticLambda12 bubbleController$BubblesImpl$$ExternalSyntheticLambda12 = new BubbleController$BubblesImpl$$ExternalSyntheticLambda12(bubblesImpl, bubbleEntryNotifToBubbleEntry, arrayList, bubbleController$BubblesImpl$$ExternalSyntheticLambda11);
                     shellExecutor.getClass();
                     final Object[] objArr = (Object[]) Array.newInstance((Class<?>) Boolean.class, 1);
                     final CountDownLatch countDownLatch = new CountDownLatch(1);
@@ -116,9 +115,9 @@ public class BubbleCoordinator implements Coordinator {
                         obj = objArr[0];
                     } catch (InterruptedException unused) {
                     }
-                    booleanValue = ((Boolean) obj).booleanValue();
+                    zBooleanValue = ((Boolean) obj).booleanValue();
                 }
-                if (booleanValue) {
+                if (zBooleanValue) {
                     BubbleCoordinator.this.mInterceptedDismissalEntries.add(notificationEntry.mKey);
                     return true;
                 }
@@ -203,7 +202,7 @@ public class BubbleCoordinator implements Coordinator {
         this.mBubblesManagerOptional.ifPresent(new Consumer() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.BubbleCoordinator$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                BubbleCoordinator.this.lambda$attach$0((BubblesManager) obj);
+                this.f$0.lambda$attach$0((BubblesManager) obj);
             }
         });
     }

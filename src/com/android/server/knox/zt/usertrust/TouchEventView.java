@@ -241,36 +241,36 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
     }
 
     private void KeyboardInfo() {
-        Cursor query;
+        Cursor cursorQuery;
         String[] strArr = {FLOATING_KEYBOARD_INFO};
         AutoCloseable autoCloseable = null;
         try {
             String string = Settings.Secure.getString(this.mContext.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
             if (SKBD_DEFAULT_PACKAGE_NAME.equals(string)) {
-                query = this.mContext.getContentResolver().query(Uri.parse(KEYBOARD_SETTINGS_PROVIDER), null, null, strArr, null);
+                cursorQuery = this.mContext.getContentResolver().query(Uri.parse(KEYBOARD_SETTINGS_PROVIDER), null, null, strArr, null);
             } else if (SKBDN_DEFAULT_PACKAGE_NAME.equals(string)) {
-                query = this.mContext.getContentResolver().query(Uri.parse(KEYBOARD_SETTINGS_PROVIDER_BETA), null, null, strArr, null);
+                cursorQuery = this.mContext.getContentResolver().query(Uri.parse(KEYBOARD_SETTINGS_PROVIDER_BETA), null, null, strArr, null);
             } else if ("com.samsung.android.honeyboard/.service.HoneyBoardService".equals(string)) {
-                query = this.mContext.getContentResolver().query(Uri.parse(HONEY_BOARD_PROVIDER), null, null, strArr, null);
+                cursorQuery = this.mContext.getContentResolver().query(Uri.parse(HONEY_BOARD_PROVIDER), null, null, strArr, null);
             } else {
                 Log.d(TAG, "unkown keyboard");
                 return;
             }
-            if (query != null) {
-                query.moveToFirst();
-                int i = query.getInt(query.getColumnIndex(FLOATING_KEYBOARD_ON));
-                int i2 = query.getInt(query.getColumnIndex(FLOATING_KEYBOARD_LOCATION_X));
-                int i3 = query.getInt(query.getColumnIndex(FLOATING_KEYBOARD_LOCATION_Y));
-                int i4 = query.getInt(query.getColumnIndex(FLOATING_KEYBOARD_LOCATION_LAND_X));
-                int i5 = query.getInt(query.getColumnIndex(FLOATING_KEYBOARD_LOCATION_LAND_Y));
-                int i6 = query.getInt(query.getColumnIndex(FLOATING_KEYBOARD_WIDTH));
-                int i7 = query.getInt(query.getColumnIndex(FLOATING_KEYBOARD_HEIGHT));
+            if (cursorQuery != null) {
+                cursorQuery.moveToFirst();
+                int i = cursorQuery.getInt(cursorQuery.getColumnIndex(FLOATING_KEYBOARD_ON));
+                int i2 = cursorQuery.getInt(cursorQuery.getColumnIndex(FLOATING_KEYBOARD_LOCATION_X));
+                int i3 = cursorQuery.getInt(cursorQuery.getColumnIndex(FLOATING_KEYBOARD_LOCATION_Y));
+                int i4 = cursorQuery.getInt(cursorQuery.getColumnIndex(FLOATING_KEYBOARD_LOCATION_LAND_X));
+                int i5 = cursorQuery.getInt(cursorQuery.getColumnIndex(FLOATING_KEYBOARD_LOCATION_LAND_Y));
+                int i6 = cursorQuery.getInt(cursorQuery.getColumnIndex(FLOATING_KEYBOARD_WIDTH));
+                int i7 = cursorQuery.getInt(cursorQuery.getColumnIndex(FLOATING_KEYBOARD_HEIGHT));
                 Log.i(TAG, "isFloatingKeyboardOn: " + i + ", x: " + i2 + ", y: " + i3 + ", landX: " + i4 + ", landY: " + i5);
                 this.keyboard_x = i6;
                 this.keyboard_y = i7;
             }
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
         } catch (Exception unused) {
             if (0 != 0) {
@@ -395,16 +395,16 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
                 append("-2147483648");
                 return this;
             }
-            int reserve = reserve(11);
+            int iReserve = reserve(11);
             char[] cArr = this.mChars;
             if (i == 0) {
-                cArr[reserve] = '0';
+                cArr[iReserve] = '0';
                 this.mLength++;
                 return this;
             }
             if (z) {
-                cArr[reserve] = '-';
-                reserve++;
+                cArr[iReserve] = '-';
+                iReserve++;
             }
             int i3 = 1000000000;
             int i4 = 10;
@@ -412,21 +412,21 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
                 i3 /= 10;
                 i4--;
                 if (i4 < i2) {
-                    cArr[reserve] = '0';
-                    reserve++;
+                    cArr[iReserve] = '0';
+                    iReserve++;
                 }
             }
             while (true) {
                 int i5 = i / i3;
                 i -= i5 * i3;
                 i3 /= 10;
-                int i6 = reserve + 1;
-                cArr[reserve] = (char) (i5 + 48);
+                int i6 = iReserve + 1;
+                cArr[iReserve] = (char) (i5 + 48);
                 if (i3 == 0) {
                     this.mLength = i6;
                     return this;
                 }
-                reserve = i6;
+                iReserve = i6;
             }
         }
 
@@ -436,16 +436,16 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
                 i2 *= 10;
             }
             float f2 = i2;
-            float rint = (float) (Math.rint(f * f2) / i2);
-            int i4 = (int) rint;
-            if (i4 == 0 && rint < 0.0f) {
+            float fRint = (float) (Math.rint(f * f2) / i2);
+            int i4 = (int) fRint;
+            if (i4 == 0 && fRint < 0.0f) {
                 append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
             }
             append(i4);
             if (i != 0) {
                 append(MediaMetrics.SEPARATOR);
-                double abs = Math.abs(rint);
-                append((int) (((float) (abs - Math.floor(abs))) * f2), i);
+                double dAbs = Math.abs(fRint);
+                append((int) (((float) (dAbs - Math.floor(dAbs))) * f2), i);
             }
             return this;
         }

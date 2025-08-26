@@ -1,6 +1,7 @@
 package com.android.internal.view.menu;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -44,21 +45,21 @@ public final class IconMenuView extends ViewGroup implements MenuBuilder.ItemInv
     public IconMenuView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mMenuBeingLongpressed = false;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.IconMenuView, 0, 0);
-        this.mRowHeight = obtainStyledAttributes.getDimensionPixelSize(0, 64);
-        this.mMaxRows = obtainStyledAttributes.getInt(1, 2);
-        this.mMaxItems = obtainStyledAttributes.getInt(4, 6);
-        this.mMaxItemsPerRow = obtainStyledAttributes.getInt(2, 3);
-        this.mMoreIcon = obtainStyledAttributes.getDrawable(3);
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.MenuView, 0, 0);
-        this.mItemBackground = obtainStyledAttributes2.getDrawable(5);
-        this.mHorizontalDivider = obtainStyledAttributes2.getDrawable(2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.IconMenuView, 0, 0);
+        this.mRowHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 64);
+        this.mMaxRows = typedArrayObtainStyledAttributes.getInt(1, 2);
+        this.mMaxItems = typedArrayObtainStyledAttributes.getInt(4, 6);
+        this.mMaxItemsPerRow = typedArrayObtainStyledAttributes.getInt(2, 3);
+        this.mMoreIcon = typedArrayObtainStyledAttributes.getDrawable(3);
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.MenuView, 0, 0);
+        this.mItemBackground = typedArrayObtainStyledAttributes2.getDrawable(5);
+        this.mHorizontalDivider = typedArrayObtainStyledAttributes2.getDrawable(2);
         this.mHorizontalDividerRects = new ArrayList<>();
-        this.mVerticalDivider = obtainStyledAttributes2.getDrawable(3);
+        this.mVerticalDivider = typedArrayObtainStyledAttributes2.getDrawable(3);
         this.mVerticalDividerRects = new ArrayList<>();
-        this.mAnimations = obtainStyledAttributes2.getResourceId(0, 0);
-        obtainStyledAttributes2.recycle();
+        this.mAnimations = typedArrayObtainStyledAttributes2.getResourceId(0, 0);
+        typedArrayObtainStyledAttributes2.recycle();
         Drawable drawable = this.mHorizontalDivider;
         if (drawable != null) {
             int intrinsicHeight = drawable.getIntrinsicHeight();
@@ -91,9 +92,9 @@ public final class IconMenuView extends ViewGroup implements MenuBuilder.ItemInv
             this.mLayoutNumRows = 0;
             return;
         }
-        for (int min = Math.min((int) Math.ceil(childCount / this.mMaxItemsPerRow), this.mMaxRows); min <= this.mMaxRows; min++) {
-            layoutItemsUsingGravity(min, childCount);
-            if (min >= childCount || doItemsFit()) {
+        for (int iMin = Math.min((int) Math.ceil(childCount / this.mMaxItemsPerRow), this.mMaxRows); iMin <= this.mMaxRows; iMin++) {
+            layoutItemsUsingGravity(iMin, childCount);
+            if (iMin >= childCount || doItemsFit()) {
                 return;
             }
         }
@@ -227,20 +228,20 @@ public final class IconMenuView extends ViewGroup implements MenuBuilder.ItemInv
 
     @Override // android.view.View
     protected void onMeasure(int i, int i2) {
-        int resolveSize = resolveSize(Integer.MAX_VALUE, i);
-        calculateItemFittingMetadata(resolveSize);
-        layoutItems(resolveSize);
+        int iResolveSize = resolveSize(Integer.MAX_VALUE, i);
+        calculateItemFittingMetadata(iResolveSize);
+        layoutItems(iResolveSize);
         int i3 = this.mLayoutNumRows;
         int i4 = this.mRowHeight;
         int i5 = this.mHorizontalDividerHeight;
-        setMeasuredDimension(resolveSize, resolveSize(((i4 + i5) * i3) - i5, i2));
+        setMeasuredDimension(iResolveSize, resolveSize(((i4 + i5) * i3) - i5, i2));
         if (i3 > 0) {
             positionChildren(getMeasuredWidth(), getMeasuredHeight());
         }
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         for (int childCount = getChildCount() - 1; childCount >= 0; childCount--) {
             View childAt = getChildAt(childCount);
             LayoutParams layoutParams = (LayoutParams) childAt.getLayoutParams();
@@ -400,19 +401,19 @@ public final class IconMenuView extends ViewGroup implements MenuBuilder.ItemInv
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         View focusedChild = getFocusedChild();
         for (int childCount = getChildCount() - 1; childCount >= 0; childCount--) {
             if (getChildAt(childCount) == focusedChild) {
-                return new SavedState(onSaveInstanceState, childCount);
+                return new SavedState(parcelableOnSaveInstanceState, childCount);
             }
         }
-        return new SavedState(onSaveInstanceState, -1);
+        return new SavedState(parcelableOnSaveInstanceState, -1);
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
-    public void onRestoreInstanceState(Parcelable parcelable) {
+    public void onRestoreInstanceState(Parcelable parcelable) throws Resources.NotFoundException {
         View childAt;
         SavedState savedState = (SavedState) parcelable;
         super.onRestoreInstanceState(savedState.getSuperState());

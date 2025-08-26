@@ -177,11 +177,11 @@ public abstract class Filter {
     }
 
     public final InputPort getInputPort(String str) {
-        HashMap<String, InputPort> hashMap = this.mInputPorts;
-        if (hashMap == null) {
+        HashMap<String, InputPort> map = this.mInputPorts;
+        if (map == null) {
             throw new NullPointerException("Attempting to access input port '" + str + "' of " + this + " before Filter has been initialized!");
         }
-        InputPort inputPort = hashMap.get(str);
+        InputPort inputPort = map.get(str);
         if (inputPort != null) {
             return inputPort;
         }
@@ -210,15 +210,15 @@ public abstract class Filter {
     }
 
     protected final Frame pullInput(String str) {
-        Frame pullFrame = getInputPort(str).pullFrame();
+        Frame framePullFrame = getInputPort(str).pullFrame();
         if (this.mCurrentTimestamp == -1) {
-            this.mCurrentTimestamp = pullFrame.getTimestamp();
+            this.mCurrentTimestamp = framePullFrame.getTimestamp();
             if (this.mLogVerbose) {
                 Log.v(TAG, "Default-setting current timestamp from input port " + str + " to " + this.mCurrentTimestamp);
             }
         }
-        this.mFramesToRelease.add(pullFrame);
-        return pullFrame;
+        this.mFramesToRelease.add(framePullFrame);
+        return framePullFrame;
     }
 
     protected void transferInputPortFrame(String str, FilterContext filterContext) {
@@ -500,8 +500,8 @@ public abstract class Filter {
     }
 
     private final void addProgramGenerator(GenerateProgramPort generateProgramPort, Field field) {
-        String name = generateProgramPort.name();
-        addProgramPort(name, generateProgramPort.variableName().isEmpty() ? name : generateProgramPort.variableName(), field, generateProgramPort.type(), generateProgramPort.hasDefault());
+        String strName = generateProgramPort.name();
+        addProgramPort(strName, generateProgramPort.variableName().isEmpty() ? strName : generateProgramPort.variableName(), field, generateProgramPort.type(), generateProgramPort.hasDefault());
     }
 
     private final void setInitialInputValues(KeyValueMap keyValueMap) {
@@ -528,15 +528,15 @@ public abstract class Filter {
 
     private final Frame wrapInputValue(String str, Object obj) {
         Frame simpleFrame;
-        MutableFrameFormat fromObject = ObjectFormat.fromObject(obj, 1);
+        MutableFrameFormat mutableFrameFormatFromObject = ObjectFormat.fromObject(obj, 1);
         if (obj == null) {
             FrameFormat portFormat = getInputPort(str).getPortFormat();
-            fromObject.setObjectClass(portFormat == null ? null : portFormat.getObjectClass());
+            mutableFrameFormatFromObject.setObjectClass(portFormat == null ? null : portFormat.getObjectClass());
         }
         if (!(obj instanceof Number) && !(obj instanceof Boolean) && !(obj instanceof String) && (obj instanceof Serializable)) {
-            simpleFrame = new SerializedFrame(fromObject, null);
+            simpleFrame = new SerializedFrame(mutableFrameFormatFromObject, null);
         } else {
-            simpleFrame = new SimpleFrame(fromObject, null);
+            simpleFrame = new SimpleFrame(mutableFrameFormatFromObject, null);
         }
         simpleFrame.setObjectValue(obj);
         return simpleFrame;

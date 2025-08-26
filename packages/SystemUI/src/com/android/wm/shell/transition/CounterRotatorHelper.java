@@ -10,7 +10,6 @@ import com.android.wm.shell.shared.CounterRotator;
 import com.android.wm.shell.shared.TransitionUtil;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CounterRotatorHelper {
     public int mLastRotationDelta;
@@ -30,11 +29,11 @@ public class CounterRotatorHelper {
 
     public final void handleClosingChanges(TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, TransitionInfo.Change change) {
         SurfaceControl.Transaction transaction2;
-        int deltaRotation = RotationUtils.deltaRotation(change.getStartRotation(), change.getEndRotation());
+        int iDeltaRotation = RotationUtils.deltaRotation(change.getStartRotation(), change.getEndRotation());
         Rect endAbsBounds = change.getEndAbsBounds();
-        int width = endAbsBounds.width();
-        int height = endAbsBounds.height();
-        this.mLastRotationDelta = deltaRotation;
+        int iWidth = endAbsBounds.width();
+        int iHeight = endAbsBounds.height();
+        this.mLastRotationDelta = iDeltaRotation;
         this.mLastDisplayBounds.set(endAbsBounds);
         List changes = transitionInfo.getChanges();
         int size = changes.size();
@@ -47,7 +46,7 @@ public class CounterRotatorHelper {
                 if (counterRotator == null) {
                     counterRotator = new CounterRotator();
                     transaction2 = transaction;
-                    counterRotator.setup(transaction2, transitionInfo.getChange(parent).getLeash(), deltaRotation, width, height);
+                    counterRotator.setup(transaction2, transitionInfo.getChange(parent).getLeash(), iDeltaRotation, iWidth, iHeight);
                     SurfaceControl surfaceControl = counterRotator.mSurface;
                     if (surfaceControl != null) {
                         transaction2.setLayer(surfaceControl, (change2.getFlags() & 2) == 0 ? size - i : -1);

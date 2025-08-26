@@ -6,7 +6,6 @@ import com.android.wm.shell.bubbles.storage.BubbleVolatileRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleController$BubblesImpl$$ExternalSyntheticLambda22 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -21,7 +20,7 @@ public final /* synthetic */ class BubbleController$BubblesImpl$$ExternalSynthet
 
     @Override // java.lang.Runnable
     public final void run() {
-        boolean z;
+        boolean zRemoveBubblesForUserWithParent;
         switch (this.$r8$classId) {
             case 0:
                 BubbleController.BubblesImpl bubblesImpl = this.f$0;
@@ -78,14 +77,14 @@ public final /* synthetic */ class BubbleController$BubblesImpl$$ExternalSynthet
                 BubbleVolatileRepository bubbleVolatileRepository = bubbleDataRepository.volatileRepository;
                 synchronized (bubbleVolatileRepository) {
                     if (identifier != -1) {
-                        z = bubbleVolatileRepository.removeBubblesForUserWithParent(i, identifier);
+                        zRemoveBubblesForUserWithParent = bubbleVolatileRepository.removeBubblesForUserWithParent(i, identifier);
                     } else {
                         List list = (List) bubbleVolatileRepository.entitiesByUser.get(i);
                         bubbleVolatileRepository.entitiesByUser.remove(i);
-                        z = list != null;
+                        zRemoveBubblesForUserWithParent = list != null;
                     }
                 }
-                if (z) {
+                if (zRemoveBubblesForUserWithParent) {
                     BubbleDataRepository.persistToDisk$default(bubbleDataRepository);
                     return;
                 }

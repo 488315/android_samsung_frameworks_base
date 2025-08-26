@@ -52,9 +52,9 @@ public interface IRemoteLockscreenValidationCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteLockscreenValidationCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteLockscreenValidationCallback)) {
-                return (IRemoteLockscreenValidationCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteLockscreenValidationCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteLockscreenValidationCallback)) {
+                return (IRemoteLockscreenValidationCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,9 +88,9 @@ public interface IRemoteLockscreenValidationCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onSuccess(remoteLockscreenValidationResult);
             } else if (i == 2) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onFailure(readString);
+                onFailure(string);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,25 +115,25 @@ public interface IRemoteLockscreenValidationCallback extends IInterface {
 
             @Override // android.service.remotelockscreenvalidation.IRemoteLockscreenValidationCallback
             public void onSuccess(RemoteLockscreenValidationResult remoteLockscreenValidationResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteLockscreenValidationCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteLockscreenValidationResult, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteLockscreenValidationCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteLockscreenValidationResult, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.remotelockscreenvalidation.IRemoteLockscreenValidationCallback
             public void onFailure(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteLockscreenValidationCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteLockscreenValidationCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

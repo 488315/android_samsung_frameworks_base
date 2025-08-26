@@ -94,16 +94,16 @@ public class SQLiteCursor extends AbstractWindowedCursor {
         if (this.mColumnNameMap == null) {
             String[] strArr = this.mColumns;
             int length = strArr.length;
-            HashMap hashMap = new HashMap(length, 1.0f);
+            HashMap map = new HashMap(length, 1.0f);
             for (int i = 0; i < length; i++) {
-                hashMap.put(strArr[i], Integer.valueOf(i));
+                map.put(strArr[i], Integer.valueOf(i));
             }
-            this.mColumnNameMap = hashMap;
+            this.mColumnNameMap = map;
         }
-        int lastIndexOf = str.lastIndexOf(46);
-        if (lastIndexOf != -1) {
+        int iLastIndexOf = str.lastIndexOf(46);
+        if (iLastIndexOf != -1) {
             Log.e(TAG, "requesting column name with table name -- " + str, new Exception());
-            str = str.substring(lastIndexOf + 1);
+            str = str.substring(iLastIndexOf + 1);
         }
         Integer num = this.mColumnNameMap.get(str);
         if (num != null) {

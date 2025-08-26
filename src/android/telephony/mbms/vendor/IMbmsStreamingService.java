@@ -88,9 +88,9 @@ public interface IMbmsStreamingService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMbmsStreamingService)) {
-                return (IMbmsStreamingService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMbmsStreamingService)) {
+                return (IMbmsStreamingService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -130,49 +130,49 @@ public interface IMbmsStreamingService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IMbmsStreamingSessionCallback asInterface = IMbmsStreamingSessionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt = parcel.readInt();
+                    IMbmsStreamingSessionCallback iMbmsStreamingSessionCallbackAsInterface = IMbmsStreamingSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int initialize = initialize(asInterface, readInt);
+                    int iInitialize = initialize(iMbmsStreamingSessionCallbackAsInterface, i3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(initialize);
+                    parcel2.writeInt(iInitialize);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    int i4 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    int requestUpdateStreamingServices = requestUpdateStreamingServices(readInt2, createStringArrayList);
+                    int iRequestUpdateStreamingServices = requestUpdateStreamingServices(i4, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeInt(requestUpdateStreamingServices);
+                    parcel2.writeInt(iRequestUpdateStreamingServices);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    String readString = parcel.readString();
-                    IStreamingServiceCallback asInterface2 = IStreamingServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    String string = parcel.readString();
+                    IStreamingServiceCallback iStreamingServiceCallbackAsInterface = IStreamingServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int startStreaming = startStreaming(readInt3, readString, asInterface2);
+                    int iStartStreaming = startStreaming(i5, string, iStreamingServiceCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startStreaming);
+                    parcel2.writeInt(iStartStreaming);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Uri playbackUri = getPlaybackUri(readInt4, readString2);
+                    Uri playbackUri = getPlaybackUri(i6, string2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(playbackUri, 1);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    stopStreaming(readInt5, readString3);
+                    stopStreaming(i7, string3);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    dispose(readInt6);
+                    dispose(i8);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -198,101 +198,101 @@ public interface IMbmsStreamingService extends IInterface {
 
             @Override // android.telephony.mbms.vendor.IMbmsStreamingService
             public int initialize(IMbmsStreamingSessionCallback iMbmsStreamingSessionCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMbmsStreamingSessionCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMbmsStreamingSessionCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsStreamingService
             public int requestUpdateStreamingServices(int i, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsStreamingService
             public int startStreaming(int i, String str, IStreamingServiceCallback iStreamingServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iStreamingServiceCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iStreamingServiceCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsStreamingService
             public Uri getPlaybackUri(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Uri) obtain2.readTypedObject(Uri.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Uri) parcelObtain2.readTypedObject(Uri.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsStreamingService
             public void stopStreaming(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsStreamingService
             public void dispose(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

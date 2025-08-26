@@ -13,7 +13,6 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NetworkOverLimitActivity extends Activity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,7 +33,7 @@ public class NetworkOverLimitActivity extends Activity {
         this.mDialog.setPositiveButton(R.string.data_connection_data_limit_resume_button, new DialogInterface.OnClickListener() { // from class: com.android.systemui.net.NetworkOverLimitActivity$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                NetworkOverLimitActivity networkOverLimitActivity = NetworkOverLimitActivity.this;
+                NetworkOverLimitActivity networkOverLimitActivity = this.f$0;
                 NetworkTemplate networkTemplate = parcelableExtra;
                 int i2 = NetworkOverLimitActivity.$r8$clinit;
                 networkOverLimitActivity.getClass();
@@ -50,7 +49,7 @@ public class NetworkOverLimitActivity extends Activity {
         this.mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.net.NetworkOverLimitActivity$$ExternalSyntheticLambda1
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                NetworkOverLimitActivity networkOverLimitActivity = NetworkOverLimitActivity.this;
+                NetworkOverLimitActivity networkOverLimitActivity = this.f$0;
                 int i = NetworkOverLimitActivity.$r8$clinit;
                 networkOverLimitActivity.finish();
             }

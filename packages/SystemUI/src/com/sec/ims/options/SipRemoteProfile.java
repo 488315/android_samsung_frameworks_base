@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SipRemoteProfile implements Parcelable {
     public static final Parcelable.Creator<SipRemoteProfile> CREATOR = new Parcelable.Creator<SipRemoteProfile>() { // from class: com.sec.ims.options.SipRemoteProfile.1
@@ -63,7 +62,6 @@ public class SipRemoteProfile implements Parcelable {
         this.mAvailability = sipRemoteProfile.getAvailability();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         private SipRemoteProfile mProfile;
 

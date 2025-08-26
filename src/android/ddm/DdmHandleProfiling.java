@@ -65,9 +65,9 @@ public class DdmHandleProfiling extends DdmHandle {
     }
 
     private Chunk handleMPRS(Chunk chunk) {
-        ByteBuffer wrapChunk = wrapChunk(chunk);
+        ByteBuffer byteBufferWrapChunk = wrapChunk(chunk);
         try {
-            Debug.startMethodTracing(getString(wrapChunk, wrapChunk.getInt()), wrapChunk.getInt(), wrapChunk.getInt());
+            Debug.startMethodTracing(getString(byteBufferWrapChunk, byteBufferWrapChunk.getInt()), byteBufferWrapChunk.getInt(), byteBufferWrapChunk.getInt());
             return null;
         } catch (RuntimeException e) {
             return createFailChunk(1, e.getMessage());
@@ -87,9 +87,9 @@ public class DdmHandleProfiling extends DdmHandle {
     }
 
     private Chunk handleMPSS(Chunk chunk) {
-        ByteBuffer wrapChunk = wrapChunk(chunk);
+        ByteBuffer byteBufferWrapChunk = wrapChunk(chunk);
         try {
-            Debug.startMethodTracingDdms(wrapChunk.getInt(), wrapChunk.getInt(), false, 0);
+            Debug.startMethodTracingDdms(byteBufferWrapChunk.getInt(), byteBufferWrapChunk.getInt(), false, 0);
             return null;
         } catch (RuntimeException e) {
             return createFailChunk(1, e.getMessage());
@@ -111,9 +111,9 @@ public class DdmHandleProfiling extends DdmHandle {
     }
 
     private Chunk handleSPSS(Chunk chunk) {
-        ByteBuffer wrapChunk = wrapChunk(chunk);
+        ByteBuffer byteBufferWrapChunk = wrapChunk(chunk);
         try {
-            Debug.startMethodTracingDdms(wrapChunk.getInt(), wrapChunk.getInt(), true, wrapChunk.getInt());
+            Debug.startMethodTracingDdms(byteBufferWrapChunk.getInt(), byteBufferWrapChunk.getInt(), true, byteBufferWrapChunk.getInt());
             return null;
         } catch (RuntimeException e) {
             return createFailChunk(1, e.getMessage());

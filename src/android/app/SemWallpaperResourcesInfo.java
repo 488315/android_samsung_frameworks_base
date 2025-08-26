@@ -12,6 +12,7 @@ import com.samsung.android.wallpaper.utils.SemWallpaperProperties;
 import com.samsung.android.wallpaper.utils.WhichChecker;
 import java.io.BufferedReader;
 import java.io.FileDescriptor;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -174,19 +175,19 @@ public class SemWallpaperResourcesInfo {
                 Log.w(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: mode is missing. which=" + i, new IllegalArgumentException());
             }
             ArrayList<Item> arrayList = this.mItemsMap.get(Integer.valueOf(i2));
-            Item chooseDefaultWallpaperItem = (arrayList == null || arrayList.isEmpty()) ? null : chooseDefaultWallpaperItem(i, str, arrayList);
-            if (chooseDefaultWallpaperItem == null) {
+            Item itemChooseDefaultWallpaperItem = (arrayList == null || arrayList.isEmpty()) ? null : chooseDefaultWallpaperItem(i, str, arrayList);
+            if (itemChooseDefaultWallpaperItem == null) {
                 Log.w(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: nothing matched. which=" + i);
                 return null;
             }
-            if (WhichChecker.isSystemAndLock(chooseDefaultWallpaperItem.which) && WhichChecker.isLock(i)) {
-                Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: paired lock. which=" + i + ", matched=[" + chooseDefaultWallpaperItem + NavigationBarInflaterView.SIZE_MOD_END);
+            if (WhichChecker.isSystemAndLock(itemChooseDefaultWallpaperItem.which) && WhichChecker.isLock(i)) {
+                Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: paired lock. which=" + i + ", matched=[" + itemChooseDefaultWallpaperItem + NavigationBarInflaterView.SIZE_MOD_END);
                 return null;
             }
             if (SemWallpaperResourcesInfo.DEBUG) {
-                Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: which=" + i + ", colorCode=" + str + ", matched=[" + chooseDefaultWallpaperItem + NavigationBarInflaterView.SIZE_MOD_END);
+                Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: which=" + i + ", colorCode=" + str + ", matched=[" + itemChooseDefaultWallpaperItem + NavigationBarInflaterView.SIZE_MOD_END);
             }
-            return chooseDefaultWallpaperItem;
+            return itemChooseDefaultWallpaperItem;
         }
 
         private Item chooseDefaultWallpaperItem(int i, String str, ArrayList<Item> arrayList) {
@@ -201,12 +202,12 @@ public class SemWallpaperResourcesInfo {
                 }
                 return firstExactlyMatchedItem;
             }
-            boolean isBespokeCode = isBespokeCode(str);
+            boolean zIsBespokeCode = isBespokeCode(str);
             Iterator<Item> it = arrayList.iterator();
             Item item = null;
             while (it.hasNext()) {
                 Item next = it.next();
-                if ((next.which & i) == i && (isBespokeCode || !next.isBespoke)) {
+                if ((next.which & i) == i && (zIsBespokeCode || !next.isBespoke)) {
                     if (item == null) {
                         item = next;
                     }
@@ -228,7 +229,7 @@ public class SemWallpaperResourcesInfo {
             Item item2 = null;
             while (it2.hasNext()) {
                 Item next2 = it2.next();
-                if (isBespokeCode || !next2.isBespoke) {
+                if (zIsBespokeCode || !next2.isBespoke) {
                     if (item2 == null) {
                         item2 = next2;
                     }
@@ -252,9 +253,9 @@ public class SemWallpaperResourcesInfo {
 
         private Item getFirstExactlyMatchedItemFromAllTypes(int i, String str) {
             ArrayList arrayList = new ArrayList(this.mItemsMap.keySet());
-            int indexOf = arrayList.indexOf(8);
-            if (indexOf >= 0) {
-                arrayList.remove(indexOf);
+            int iIndexOf = arrayList.indexOf(8);
+            if (iIndexOf >= 0) {
+                arrayList.remove(iIndexOf);
                 arrayList.add(0, 8);
             }
             Iterator it = arrayList.iterator();
@@ -309,8 +310,8 @@ public class SemWallpaperResourcesInfo {
         }
 
         public void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-            HashMap<Integer, Integer> hashMap = this.mDefaultTypeMap;
-            if (hashMap == null || hashMap.size() <= 0) {
+            HashMap<Integer, Integer> map = this.mDefaultTypeMap;
+            if (map == null || map.size() <= 0) {
                 return;
             }
             for (Map.Entry<Integer, Integer> entry : this.mDefaultTypeMap.entrySet()) {
@@ -394,28 +395,28 @@ public class SemWallpaperResourcesInfo {
             this.mContext = context;
         }
 
-        public ResourceData parseJson(String str) {
+        public ResourceData parseJson(String str) throws IOException {
             ResourceData resourceData = new ResourceData();
             int identifier = this.mContext.getResources().getIdentifier("resources_info", "raw", str);
             StringWriter stringWriter = new StringWriter();
             char[] cArr = new char[1024];
             try {
-                InputStream openRawResource = this.mContext.getResources().openRawResource(identifier);
+                InputStream inputStreamOpenRawResource = this.mContext.getResources().openRawResource(identifier);
                 try {
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(openRawResource, "UTF-8"));
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStreamOpenRawResource, "UTF-8"));
                     while (true) {
-                        int read = bufferedReader.read(cArr);
-                        if (read == -1) {
+                        int i = bufferedReader.read(cArr);
+                        if (i == -1) {
                             break;
                         }
-                        stringWriter.write(cArr, 0, read);
+                        stringWriter.write(cArr, 0, i);
                     }
-                    if (openRawResource != null) {
-                        openRawResource.close();
+                    if (inputStreamOpenRawResource != null) {
+                        inputStreamOpenRawResource.close();
                     }
-                    String obj = stringWriter.toString();
+                    String string = stringWriter.toString();
                     try {
-                        JSONObject jSONObject = new JSONObject(obj);
+                        JSONObject jSONObject = new JSONObject(string);
                         parseWallpaperList(jSONObject, "phone", resourceData);
                         parseWallpaperList(jSONObject, "dex", resourceData);
                         parseTypes(jSONObject, resourceData);
@@ -424,7 +425,7 @@ public class SemWallpaperResourcesInfo {
                         return resourceData;
                     } catch (JSONException e) {
                         Log.e(SemWallpaperResourcesInfo.TAG, "parseJson: e=" + e, e);
-                        Log.e(SemWallpaperResourcesInfo.TAG, "parseJson: " + obj);
+                        Log.e(SemWallpaperResourcesInfo.TAG, "parseJson: " + string);
                         return new ResourceData();
                     }
                 } finally {
@@ -440,11 +441,11 @@ public class SemWallpaperResourcesInfo {
             try {
                 JSONArray jSONArray = jSONObject.getJSONArray(str);
                 int length = jSONArray.length();
-                int i2 = -1;
-                for (int i3 = 0; i3 < length; i3++) {
+                int iIntValue = -1;
+                for (int i2 = 0; i2 < length; i2++) {
                     try {
                         Item item = new Item();
-                        JSONObject jSONObject2 = jSONArray.getJSONObject(i3);
+                        JSONObject jSONObject2 = jSONArray.getJSONObject(i2);
                         item.isDefault = jSONObject2.getBoolean("isDefault");
                         item.index = Integer.valueOf(jSONObject2.getInt("index"));
                         item.type = jSONObject2.getInt("type");
@@ -464,10 +465,10 @@ public class SemWallpaperResourcesInfo {
                         resourceData.addKnownColors(item.cmfInfo);
                         parseTypeParams(jSONObject2.optJSONObject("type_params"), item);
                         resourceData.addItem(item);
-                        i2 = item.index.intValue();
+                        iIntValue = item.index.intValue();
                     } catch (JSONException e2) {
                         e = e2;
-                        i = i2;
+                        i = iIntValue;
                         Log.e(SemWallpaperResourcesInfo.TAG, "parseWallpaperListTag: last parse success item : section=" + str + ", index=" + i);
                         throw e;
                     }
@@ -478,29 +479,29 @@ public class SemWallpaperResourcesInfo {
         }
 
         private void parseTypes(JSONObject jSONObject, ResourceData resourceData) throws JSONException {
-            JSONArray optJSONArray = jSONObject.optJSONArray("types");
-            if (optJSONArray == null) {
+            JSONArray jSONArrayOptJSONArray = jSONObject.optJSONArray("types");
+            if (jSONArrayOptJSONArray == null) {
                 return;
             }
-            for (int i = 0; i < optJSONArray.length(); i++) {
-                JSONObject jSONObject2 = optJSONArray.getJSONObject(i);
-                int determineModeEnsuredWhich = determineModeEnsuredWhich(jSONObject2.getInt("which"), jSONObject2.getInt("screen"));
+            for (int i = 0; i < jSONArrayOptJSONArray.length(); i++) {
+                JSONObject jSONObject2 = jSONArrayOptJSONArray.getJSONObject(i);
+                int iDetermineModeEnsuredWhich = determineModeEnsuredWhich(jSONObject2.getInt("which"), jSONObject2.getInt("screen"));
                 int i2 = jSONObject2.getInt("type");
                 if (i2 == 10) {
                     i2 = 7;
                 }
-                resourceData.setDefaultWallpaperType(determineModeEnsuredWhich, i2);
+                resourceData.setDefaultWallpaperType(iDetermineModeEnsuredWhich, i2);
                 if (i2 == 3) {
-                    resourceData.setDefaultMultipackStyle(determineModeEnsuredWhich, jSONObject2.getString("style"));
+                    resourceData.setDefaultMultipackStyle(iDetermineModeEnsuredWhich, jSONObject2.getString("style"));
                 }
             }
         }
 
         private static void parseBespoke(JSONObject jSONObject, ResourceData resourceData) throws JSONException {
-            JSONArray optJSONArray = jSONObject.optJSONArray("bespoke");
-            if (optJSONArray != null) {
-                for (int i = 0; i < optJSONArray.length(); i++) {
-                    String lowerCase = ((String) optJSONArray.get(i)).toLowerCase();
+            JSONArray jSONArrayOptJSONArray = jSONObject.optJSONArray("bespoke");
+            if (jSONArrayOptJSONArray != null) {
+                for (int i = 0; i < jSONArrayOptJSONArray.length(); i++) {
+                    String lowerCase = ((String) jSONArrayOptJSONArray.get(i)).toLowerCase();
                     if (!TextUtils.isEmpty(lowerCase)) {
                         resourceData.addBespokeCode(lowerCase);
                         resourceData.addKnownColor(lowerCase);
@@ -509,20 +510,20 @@ public class SemWallpaperResourcesInfo {
             }
         }
 
-        private void parseTypeParams(JSONObject jSONObject, Item item) {
+        private void parseTypeParams(JSONObject jSONObject, Item item) throws JSONException {
             if (jSONObject == null || item == null) {
                 return;
             }
             TypeParams typeParams = item.typeParams;
             typeParams.mServicePkgName = jSONObject.optString("service_package_name", null);
             typeParams.mServiceClassName = jSONObject.optString("service_class_name", null);
-            String optString = jSONObject.optString("content_type", null);
-            if (!TextUtils.isEmpty(optString)) {
-                typeParams.mExtras.putString("contentType", optString);
+            String strOptString = jSONObject.optString("content_type", null);
+            if (!TextUtils.isEmpty(strOptString)) {
+                typeParams.mExtras.putString("contentType", strOptString);
             }
-            JSONObject optJSONObject = jSONObject.optJSONObject("service_settings");
-            if (optJSONObject != null) {
-                typeParams.mExtras.putBundle(SemWallpaperProperties.KEY_SERVICE_SETTINGS, convertJsonObjectToBundle(optJSONObject));
+            JSONObject jSONObjectOptJSONObject = jSONObject.optJSONObject("service_settings");
+            if (jSONObjectOptJSONObject != null) {
+                typeParams.mExtras.putBundle(SemWallpaperProperties.KEY_SERVICE_SETTINGS, convertJsonObjectToBundle(jSONObjectOptJSONObject));
             }
         }
 
@@ -541,26 +542,26 @@ public class SemWallpaperResourcesInfo {
             }
         }
 
-        private Bundle convertJsonObjectToBundle(JSONObject jSONObject) {
+        private Bundle convertJsonObjectToBundle(JSONObject jSONObject) throws JSONException {
             Bundle bundle = new Bundle();
-            Iterator<String> keys = jSONObject.keys();
-            while (keys.hasNext()) {
-                String obj = keys.next().toString();
+            Iterator<String> itKeys = jSONObject.keys();
+            while (itKeys.hasNext()) {
+                String string = itKeys.next().toString();
                 try {
-                    Object obj2 = jSONObject.get(obj);
-                    if (obj2 instanceof String) {
-                        bundle.putString(obj, (String) obj2);
-                    } else if (obj2 instanceof Integer) {
-                        bundle.putInt(obj, ((Integer) obj2).intValue());
-                    } else if (obj2 instanceof Boolean) {
-                        bundle.putBoolean(obj, ((Boolean) obj2).booleanValue());
-                    } else if (obj2 instanceof Double) {
-                        bundle.putDouble(obj, ((Double) obj2).doubleValue());
-                    } else if (obj2 instanceof JSONObject) {
-                        bundle.putBundle(obj, convertJsonObjectToBundle((JSONObject) obj2));
+                    Object obj = jSONObject.get(string);
+                    if (obj instanceof String) {
+                        bundle.putString(string, (String) obj);
+                    } else if (obj instanceof Integer) {
+                        bundle.putInt(string, ((Integer) obj).intValue());
+                    } else if (obj instanceof Boolean) {
+                        bundle.putBoolean(string, ((Boolean) obj).booleanValue());
+                    } else if (obj instanceof Double) {
+                        bundle.putDouble(string, ((Double) obj).doubleValue());
+                    } else if (obj instanceof JSONObject) {
+                        bundle.putBundle(string, convertJsonObjectToBundle((JSONObject) obj));
                     }
                 } catch (JSONException unused) {
-                    Log.e(SemWallpaperResourcesInfo.TAG, "convertJsonObjectToBundle: failed to get value. key=" + obj);
+                    Log.e(SemWallpaperResourcesInfo.TAG, "convertJsonObjectToBundle: failed to get value. key=" + string);
                 }
             }
             return bundle;
@@ -593,9 +594,9 @@ public class SemWallpaperResourcesInfo {
 
     public SemWallpaperResourcesInfo(Context context) {
         try {
-            Context createPackageContext = context.createPackageContext(WALLPAPER_PACKAGE, 0);
-            this.mResPkgContext = createPackageContext;
-            if (createPackageContext != null) {
+            Context contextCreatePackageContext = context.createPackageContext(WALLPAPER_PACKAGE, 0);
+            this.mResPkgContext = contextCreatePackageContext;
+            if (contextCreatePackageContext != null) {
                 this.mResource = new ResourceParser(this.mResPkgContext).parseJson(WALLPAPER_PACKAGE);
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -646,7 +647,7 @@ public class SemWallpaperResourcesInfo {
     }
 
     public String getDefaultImageFileName(int i) {
-        Item defaultWallpaperItem = getDefaultWallpaperItem(i, 0);
+        Item defaultWallpaperItem = getDefaultWallpaperItem(i, 0, true);
         if (defaultWallpaperItem == null) {
             return null;
         }
@@ -654,7 +655,7 @@ public class SemWallpaperResourcesInfo {
     }
 
     public String getDefaultVideoWallpaperFileName(int i) {
-        Item defaultWallpaperItem = getDefaultWallpaperItem(i, 8);
+        Item defaultWallpaperItem = getDefaultWallpaperItem(i, 8, true);
         String str = defaultWallpaperItem != null ? defaultWallpaperItem.fileName : null;
         Log.i(TAG, "getDefaultVideoWallpaperFileName: " + str);
         return str;
@@ -677,7 +678,7 @@ public class SemWallpaperResourcesInfo {
     }
 
     public ComponentName getDefaultLiveWallpaperComponentName(int i) {
-        Item defaultWallpaperItem = getDefaultWallpaperItem(i, 7);
+        Item defaultWallpaperItem = getDefaultWallpaperItem(i, 7, false);
         if (defaultWallpaperItem == null) {
             Log.w(TAG, "getDefaultLiveWallpaperComponentName: no matched item" + i);
             return null;
@@ -690,7 +691,7 @@ public class SemWallpaperResourcesInfo {
     }
 
     public Bundle getDefaultLiveWallpaperExtras(int i) {
-        Item defaultWallpaperItem = getDefaultWallpaperItem(i, 7);
+        Item defaultWallpaperItem = getDefaultWallpaperItem(i, 7, false);
         if (defaultWallpaperItem == null) {
             Log.w(TAG, "getDefaultLiveWallpaperExtras: no matched item. which=" + i);
             return null;
@@ -708,9 +709,9 @@ public class SemWallpaperResourcesInfo {
 
     public boolean isKnownColorCode(String str) {
         String refinedColorCode = getRefinedColorCode(str);
-        boolean isKnownColorCode = this.mResource.isKnownColorCode(refinedColorCode);
-        Log.d(TAG, "isKnownColorCode: code = " + refinedColorCode + ", isKnown = " + isKnownColorCode);
-        return isKnownColorCode;
+        boolean zIsKnownColorCode = this.mResource.isKnownColorCode(refinedColorCode);
+        Log.d(TAG, "isKnownColorCode: code = " + refinedColorCode + ", isKnown = " + zIsKnownColorCode);
+        return zIsKnownColorCode;
     }
 
     public boolean isSupportCMF() {
@@ -726,7 +727,7 @@ public class SemWallpaperResourcesInfo {
     }
 
     public boolean isDefaultWallpaperPaired(int i, int i2) {
-        Item defaultWallpaperItem = getDefaultWallpaperItem(WhichChecker.getMode(i) | 1, i2);
+        Item defaultWallpaperItem = getDefaultWallpaperItem(WhichChecker.getMode(i) | 1, i2, false);
         if (defaultWallpaperItem == null) {
             return false;
         }
@@ -738,8 +739,17 @@ public class SemWallpaperResourcesInfo {
         this.mResource.dump(fileDescriptor, printWriter, strArr);
     }
 
-    private Item getDefaultWallpaperItem(int i, int i2) {
-        return this.mResource.getDefaultWallpaperItem(getModeEnsuredWhich(i), getDeviceColorCode(), i2);
+    private Item getDefaultWallpaperItem(int i, int i2, boolean z) {
+        int modeEnsuredWhich = getModeEnsuredWhich(i);
+        String deviceColorCode = getDeviceColorCode();
+        Item defaultWallpaperItem = this.mResource.getDefaultWallpaperItem(modeEnsuredWhich, deviceColorCode, i2);
+        if (defaultWallpaperItem == null && z && WhichChecker.isLock(modeEnsuredWhich)) {
+            Item defaultWallpaperItem2 = this.mResource.getDefaultWallpaperItem(WhichChecker.getMode(modeEnsuredWhich) | 1, deviceColorCode, i2);
+            if (defaultWallpaperItem2 != null && WhichChecker.isSystemAndLock(defaultWallpaperItem2.which)) {
+                return defaultWallpaperItem2;
+            }
+        }
+        return defaultWallpaperItem;
     }
 
     private int getModeEnsuredWhich(int i) {

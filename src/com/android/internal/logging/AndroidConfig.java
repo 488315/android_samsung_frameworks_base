@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 /* loaded from: classes5.dex */
 public class AndroidConfig {
-    public AndroidConfig() {
+    public AndroidConfig() throws SecurityException {
         try {
             Logger logger = Logger.getLogger("");
             logger.addHandler(new AndroidHandler());

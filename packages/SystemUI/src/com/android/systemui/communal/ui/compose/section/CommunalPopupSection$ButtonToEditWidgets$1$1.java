@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalPopupSection$ButtonToEditWidgets$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ FocusRequester $focusRequester;
@@ -48,7 +47,7 @@ final class CommunalPopupSection$ButtonToEditWidgets$1$1 extends SuspendLambda i
             }
             ResultKt.throwOnFailure(obj);
         }
-        FocusRequester.m376requestFocus3ESFkO8$default(this.$focusRequester);
+        FocusRequester.m378requestFocus3ESFkO8$default(this.$focusRequester);
         return Unit.INSTANCE;
     }
 }

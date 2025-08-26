@@ -51,7 +51,7 @@ public class FilterFactory {
             Log.v(TAG, "Looking up class " + str);
         }
         Iterator<String> it = this.mPackages.iterator();
-        Class<?> cls = null;
+        Class<?> clsLoadClass = null;
         while (it.hasNext()) {
             String next = it.next();
             try {
@@ -59,18 +59,18 @@ public class FilterFactory {
                     Log.v(TAG, "Trying " + next + MediaMetrics.SEPARATOR + str);
                 }
                 synchronized (mClassLoaderGuard) {
-                    cls = mCurrentClassLoader.loadClass(next + MediaMetrics.SEPARATOR + str);
+                    clsLoadClass = mCurrentClassLoader.loadClass(next + MediaMetrics.SEPARATOR + str);
                 }
             } catch (ClassNotFoundException unused) {
             }
-            if (cls != null) {
+            if (clsLoadClass != null) {
                 break;
             }
         }
-        if (cls == null) {
+        if (clsLoadClass == null) {
             throw new IllegalArgumentException("Unknown filter class '" + str + "'!");
         }
-        return createFilterByClass(cls, str2);
+        return createFilterByClass(clsLoadClass, str2);
     }
 
     public Filter createFilterByClass(Class cls, String str) {

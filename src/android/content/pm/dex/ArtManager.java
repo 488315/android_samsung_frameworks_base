@@ -2,7 +2,6 @@ package android.content.pm.dex;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.content.pm.dex.ArtManager;
 import android.content.pm.dex.ISnapshotRuntimeProfileCallback;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
@@ -77,7 +76,7 @@ public class ArtManager {
             this.mExecutor.execute(new Runnable() { // from class: android.content.pm.dex.ArtManager$SnapshotRuntimeProfileCallbackDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ArtManager.SnapshotRuntimeProfileCallbackDelegate.this.lambda$onSuccess$0(parcelFileDescriptor);
+                    this.f$0.lambda$onSuccess$0(parcelFileDescriptor);
                 }
             });
         }
@@ -92,7 +91,7 @@ public class ArtManager {
             this.mExecutor.execute(new Runnable() { // from class: android.content.pm.dex.ArtManager$SnapshotRuntimeProfileCallbackDelegate$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ArtManager.SnapshotRuntimeProfileCallbackDelegate.this.lambda$onError$1(i);
+                    this.f$0.lambda$onError$1(i);
                 }
             });
         }

@@ -11,7 +11,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class TrustRepositoryImpl$isCurrentUserActiveUnlockRunning$6 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -45,9 +44,9 @@ final class TrustRepositoryImpl$isCurrentUserActiveUnlockRunning$6 extends Suspe
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             TrustRepositoryImpl trustRepositoryImpl = this.this$0;
             ActiveUnlockModel activeUnlockModel = (ActiveUnlockModel) ((LinkedHashMap) trustRepositoryImpl.activeUnlockRunningForUser).get(new Integer(((UserRepositoryImpl) trustRepositoryImpl.userRepository).getSelectedUserInfo().id));
-            Boolean valueOf = Boolean.valueOf(activeUnlockModel != null ? activeUnlockModel.isRunning : false);
+            Boolean boolValueOf = Boolean.valueOf(activeUnlockModel != null ? activeUnlockModel.isRunning : false);
             this.label = 1;
-            if (flowCollector.emit(valueOf, this) == coroutineSingletons) {
+            if (flowCollector.emit(boolValueOf, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

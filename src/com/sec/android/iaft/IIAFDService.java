@@ -52,9 +52,9 @@ public interface IIAFDService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIAFDService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIAFDService)) {
-                return (IIAFDService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIAFDService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIAFDService)) {
+                return (IIAFDService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,24 +84,24 @@ public interface IIAFDService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                String readString3 = parcel.readString();
-                String readString4 = parcel.readString();
-                String readString5 = parcel.readString();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                String string3 = parcel.readString();
+                String string4 = parcel.readString();
+                String string5 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean IAFDParse = IAFDParse(readString, readString2, readInt, readInt2, readInt3, readString3, readString4, readString5);
+                boolean zIAFDParse = IAFDParse(string, string2, i3, i4, i5, string3, string4, string5);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(IAFDParse);
+                parcel2.writeBoolean(zIAFDParse);
             } else if (i == 2) {
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
-                String readString6 = parcel.readString();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
+                String string6 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                IAFDShow(readInt4, readInt5, readString6);
+                IAFDShow(i6, i7, string6);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -127,41 +127,41 @@ public interface IIAFDService extends IInterface {
 
             @Override // com.sec.android.iaft.IIAFDService
             public boolean IAFDParse(String str, String str2, int i, int i2, int i3, String str3, String str4, String str5) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIAFDService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIAFDService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.iaft.IIAFDService
             public void IAFDShow(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIAFDService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIAFDService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

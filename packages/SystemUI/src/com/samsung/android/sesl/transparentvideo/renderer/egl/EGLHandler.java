@@ -11,7 +11,6 @@ import javax.microedition.khronos.opengles.GL10;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class EGLHandler {
     public final EGL10 egl;
@@ -20,7 +19,6 @@ public final class EGLHandler {
     public final EGLSurface eglSurface;
     public final GL10 gl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -34,29 +32,29 @@ public final class EGLHandler {
         new Companion(null);
     }
 
-    public EGLHandler(SurfaceTexture surfaceTexture) {
+    public EGLHandler(SurfaceTexture surfaceTexture) throws Exception {
         Log.i("EGLHandler", "Initialize egl context");
         EGL10 egl10 = (EGL10) EGLContext.getEGL();
         this.egl = egl10;
-        EGLDisplay eglGetDisplay = egl10.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY);
-        egl10.eglInitialize(eglGetDisplay, new int[3]);
-        this.eglDisplay = eglGetDisplay;
+        EGLDisplay eGLDisplayEglGetDisplay = egl10.eglGetDisplay(EGL10.EGL_DEFAULT_DISPLAY);
+        egl10.eglInitialize(eGLDisplayEglGetDisplay, new int[3]);
+        this.eglDisplay = eGLDisplayEglGetDisplay;
         int[] iArr = new int[1];
         int[] iArr2 = {12324, 8, 12323, 8, 12322, 8, 12321, 8, 12325, 16, 12352, 4, 12344};
-        egl10.eglChooseConfig(eglGetDisplay, iArr2, null, 0, iArr);
+        egl10.eglChooseConfig(eGLDisplayEglGetDisplay, iArr2, null, 0, iArr);
         int i = iArr[0];
         EGLConfig[] eGLConfigArr = new EGLConfig[i];
-        egl10.eglChooseConfig(eglGetDisplay, iArr2, eGLConfigArr, i, iArr);
+        egl10.eglChooseConfig(eGLDisplayEglGetDisplay, iArr2, eGLConfigArr, i, iArr);
         EGLConfig eGLConfig = (EGLConfig) ArraysKt___ArraysKt.first(eGLConfigArr);
         if (eGLConfig == null) {
             throw new Exception("Couldn't create egl config");
         }
-        EGLSurface eglCreateWindowSurface = egl10.eglCreateWindowSurface(eglGetDisplay, eGLConfig, surfaceTexture, null);
-        this.eglSurface = eglCreateWindowSurface;
-        EGLContext eglCreateContext = egl10.eglCreateContext(eglGetDisplay, eGLConfig, EGL10.EGL_NO_CONTEXT, new int[]{12440, 3, 12344});
-        this.eglContext = eglCreateContext;
-        egl10.eglMakeCurrent(eglGetDisplay, eglCreateWindowSurface, eglCreateWindowSurface, eglCreateContext);
-        this.gl = (GL10) eglCreateContext.getGL();
+        EGLSurface eGLSurfaceEglCreateWindowSurface = egl10.eglCreateWindowSurface(eGLDisplayEglGetDisplay, eGLConfig, surfaceTexture, null);
+        this.eglSurface = eGLSurfaceEglCreateWindowSurface;
+        EGLContext eGLContextEglCreateContext = egl10.eglCreateContext(eGLDisplayEglGetDisplay, eGLConfig, EGL10.EGL_NO_CONTEXT, new int[]{12440, 3, 12344});
+        this.eglContext = eGLContextEglCreateContext;
+        egl10.eglMakeCurrent(eGLDisplayEglGetDisplay, eGLSurfaceEglCreateWindowSurface, eGLSurfaceEglCreateWindowSurface, eGLContextEglCreateContext);
+        this.gl = (GL10) eGLContextEglCreateContext.getGL();
     }
 
     public final void makeCurrent() {

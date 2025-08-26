@@ -17,7 +17,6 @@ import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class QuickAccessWalletKeyguardQuickAffordanceConfig$queryCards$2 extends SuspendLambda implements Function2 {
     Object L$0;
@@ -59,13 +58,13 @@ final class QuickAccessWalletKeyguardQuickAffordanceConfig$queryCards$2 extends 
         cancellableContinuationImpl.initCancellability();
         quickAccessWalletKeyguardQuickAffordanceConfig.walletController.queryWalletCards(new QuickAccessWalletClient.OnWalletCardsRetrievedCallback() { // from class: com.android.systemui.keyguard.data.quickaffordance.QuickAccessWalletKeyguardQuickAffordanceConfig$queryCards$2$1$callback$1
             public final void onWalletCardRetrievalError(GetWalletCardsError getWalletCardsError) {
-                CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                 int i2 = Result.$r8$clinit;
                 cancellableContinuation.resumeWith(EmptyList.INSTANCE);
             }
 
             public final void onWalletCardsRetrieved(GetWalletCardsResponse getWalletCardsResponse) {
-                CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                 int i2 = Result.$r8$clinit;
                 cancellableContinuation.resumeWith(WalletCardUtilsKt.getPaymentCards(getWalletCardsResponse.getWalletCards()));
             }

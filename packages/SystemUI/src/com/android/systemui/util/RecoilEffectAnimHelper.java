@@ -6,7 +6,6 @@ import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RecoilEffectAnimHelper {
     private static final long DOWN_DURATION = 100;
@@ -19,7 +18,6 @@ public final class RecoilEffectAnimHelper {
     public static final int $stable = 8;
     private static final Interpolator LINEAR_INTERPOLATOR = new PathInterpolator(0.0f, 0.0f, 1.0f, 1.0f);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

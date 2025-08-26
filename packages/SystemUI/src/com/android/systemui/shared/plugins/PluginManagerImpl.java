@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PluginManagerImpl extends BroadcastReceiver implements PluginManager {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -40,7 +39,6 @@ public class PluginManagerImpl extends BroadcastReceiver implements PluginManage
     public final ArrayMap mPluginMap = new ArrayMap();
     public final Map mClassLoaders = new ArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ClassLoaderFilter extends ClassLoader {
         public final ClassLoader mBase;
         public final String[] mPackages;
@@ -62,38 +60,36 @@ public class PluginManagerImpl extends BroadcastReceiver implements PluginManage
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CrashWhilePluginActiveException extends RuntimeException {
         public CrashWhilePluginActiveException(Throwable th) {
             super(th);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PluginExceptionHandler implements Thread.UncaughtExceptionHandler {
         public /* synthetic */ PluginExceptionHandler(PluginManagerImpl pluginManagerImpl, int i) {
             this();
         }
 
         public final boolean checkStack(Throwable th) {
-            boolean z;
+            boolean zCheckAndDisable;
             if (th == null) {
                 return false;
             }
             synchronized (this) {
                 try {
-                    z = false;
+                    zCheckAndDisable = false;
                     for (StackTraceElement stackTraceElement : th.getStackTrace()) {
                         Iterator it = PluginManagerImpl.this.mPluginMap.values().iterator();
                         while (it.hasNext()) {
-                            z |= ((PluginActionManager) it.next()).checkAndDisable(stackTraceElement.getClassName());
+                            zCheckAndDisable |= ((PluginActionManager) it.next()).checkAndDisable(stackTraceElement.getClassName());
                         }
                     }
                 } catch (Throwable th2) {
                     throw th2;
                 }
             }
-            return checkStack(th.getCause()) | z;
+            return checkStack(th.getCause()) | zCheckAndDisable;
         }
 
         @Override // java.lang.Thread.UncaughtExceptionHandler
@@ -101,19 +97,19 @@ public class PluginManagerImpl extends BroadcastReceiver implements PluginManage
             if (SystemProperties.getBoolean("plugin.debugging", false)) {
                 return;
             }
-            boolean checkStack = checkStack(th);
-            if (!checkStack) {
+            boolean zCheckStack = checkStack(th);
+            if (!zCheckStack) {
                 synchronized (this) {
                     try {
                         Iterator it = PluginManagerImpl.this.mPluginMap.values().iterator();
                         while (it.hasNext()) {
-                            checkStack |= ((PluginActionManager) it.next()).disableAll();
+                            zCheckStack |= ((PluginActionManager) it.next()).disableAll();
                         }
                     } finally {
                     }
                 }
             }
-            if (checkStack) {
+            if (zCheckStack) {
                 new CrashWhilePluginActiveException(th);
             }
         }
@@ -213,25 +209,25 @@ public class PluginManagerImpl extends BroadcastReceiver implements PluginManage
             return;
         }
         if ("com.android.systemui.action.DISABLE_PLUGIN".equals(intent.getAction())) {
-            ComponentName unflattenFromString = ComponentName.unflattenFromString(intent.getData().toString().substring(10));
+            ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(intent.getData().toString().substring(10));
             Iterator it2 = this.mPrivilegedPlugins.iterator();
             while (it2.hasNext()) {
                 String str = (String) it2.next();
-                ComponentName unflattenFromString2 = ComponentName.unflattenFromString(str);
-                if (unflattenFromString2 != null) {
-                    if (unflattenFromString2.equals(unflattenFromString)) {
+                ComponentName componentNameUnflattenFromString2 = ComponentName.unflattenFromString(str);
+                if (componentNameUnflattenFromString2 != null) {
+                    if (componentNameUnflattenFromString2.equals(componentNameUnflattenFromString)) {
                         return;
                     }
-                } else if (str.equals(unflattenFromString.getPackageName())) {
+                } else if (str.equals(componentNameUnflattenFromString.getPackageName())) {
                     return;
                 }
             }
-            this.mPluginEnabler.setDisabled(unflattenFromString, 2);
-            ((NotificationManager) this.mContext.getSystemService(NotificationManager.class)).cancel(unflattenFromString.getClassName(), 6);
+            this.mPluginEnabler.setDisabled(componentNameUnflattenFromString, 2);
+            ((NotificationManager) this.mContext.getSystemService(NotificationManager.class)).cancel(componentNameUnflattenFromString.getClassName(), 6);
             return;
         }
         final String encodedSchemeSpecificPart = intent.getData().getEncodedSchemeSpecificPart();
-        ComponentName unflattenFromString3 = ComponentName.unflattenFromString(encodedSchemeSpecificPart);
+        ComponentName componentNameUnflattenFromString3 = ComponentName.unflattenFromString(encodedSchemeSpecificPart);
         if (((ArrayMap) this.mClassLoaders).remove(encodedSchemeSpecificPart) != null && Build.IS_ENG) {
             Toast.makeText(this.mContext, "Reloading " + encodedSchemeSpecificPart, 1).show();
         }
@@ -240,21 +236,21 @@ public class PluginManagerImpl extends BroadcastReceiver implements PluginManage
             this.mPluginInstanceFactory.getClass();
             ((ArrayMap) PluginInstance.sClassLoaders).remove(encodedSchemeSpecificPart);
         }
-        if ("android.intent.action.PACKAGE_REPLACED".equals(intent.getAction()) && unflattenFromString3 != null && ((disableReason = this.mPluginEnabler.getDisableReason(unflattenFromString3)) == 3 || disableReason == 4 || disableReason == 2)) {
-            Log.i("PluginManagerImpl", "Re-enabling previously disabled plugin that has been updated: " + unflattenFromString3.flattenToShortString());
-            this.mPluginEnabler.setEnabled(unflattenFromString3);
+        if ("android.intent.action.PACKAGE_REPLACED".equals(intent.getAction()) && componentNameUnflattenFromString3 != null && ((disableReason = this.mPluginEnabler.getDisableReason(componentNameUnflattenFromString3)) == 3 || disableReason == 4 || disableReason == 2)) {
+            Log.i("PluginManagerImpl", "Re-enabling previously disabled plugin that has been updated: " + componentNameUnflattenFromString3.flattenToShortString());
+            this.mPluginEnabler.setEnabled(componentNameUnflattenFromString3);
         }
         synchronized (this) {
             try {
-                if (!"android.intent.action.PACKAGE_ADDED".equals(intent.getAction()) && !"android.intent.action.PACKAGE_CHANGED".equals(intent.getAction()) && !"android.intent.action.PACKAGE_REPLACED".equals(intent.getAction())) {
+                if ("android.intent.action.PACKAGE_ADDED".equals(intent.getAction()) || "android.intent.action.PACKAGE_CHANGED".equals(intent.getAction()) || "android.intent.action.PACKAGE_REPLACED".equals(intent.getAction())) {
                     for (final PluginActionManager pluginActionManager : this.mPluginMap.values()) {
-                        final int i = 1;
+                        final int i = 0;
                         pluginActionManager.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.shared.plugins.PluginActionManager$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
                             public final void run() {
                                 switch (i) {
                                     case 0:
-                                        PluginActionManager.m2938$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(pluginActionManager, encodedSchemeSpecificPart);
+                                        PluginActionManager.m2955$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(pluginActionManager, encodedSchemeSpecificPart);
                                         break;
                                     default:
                                         pluginActionManager.removePkg(encodedSchemeSpecificPart);
@@ -263,22 +259,23 @@ public class PluginManagerImpl extends BroadcastReceiver implements PluginManage
                             }
                         });
                     }
-                }
-                for (final PluginActionManager pluginActionManager2 : this.mPluginMap.values()) {
-                    final int i2 = 0;
-                    pluginActionManager2.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.shared.plugins.PluginActionManager$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            switch (i2) {
-                                case 0:
-                                    PluginActionManager.m2938$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(pluginActionManager2, encodedSchemeSpecificPart);
-                                    break;
-                                default:
-                                    pluginActionManager2.removePkg(encodedSchemeSpecificPart);
-                                    break;
+                } else {
+                    for (final PluginActionManager pluginActionManager2 : this.mPluginMap.values()) {
+                        final int i2 = 1;
+                        pluginActionManager2.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.shared.plugins.PluginActionManager$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                switch (i2) {
+                                    case 0:
+                                        PluginActionManager.m2955$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(pluginActionManager2, encodedSchemeSpecificPart);
+                                        break;
+                                    default:
+                                        pluginActionManager2.removePkg(encodedSchemeSpecificPart);
+                                        break;
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             } finally {
             }

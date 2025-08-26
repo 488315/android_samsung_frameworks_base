@@ -6,11 +6,9 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface VolumeDialogEventModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AccessibilityModeChanged implements VolumeDialogEventModel {
         public final boolean showA11yStream;
 
@@ -34,7 +32,6 @@ public interface VolumeDialogEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DismissRequested implements VolumeDialogEventModel {
         public final int reason;
 
@@ -58,7 +55,6 @@ public interface VolumeDialogEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LayoutDirectionChanged implements VolumeDialogEventModel {
         public final int layoutDirection;
 
@@ -82,7 +78,6 @@ public interface VolumeDialogEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScreenOff implements VolumeDialogEventModel {
         public static final ScreenOff INSTANCE = new ScreenOff();
 
@@ -102,7 +97,6 @@ public interface VolumeDialogEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowCsdWarning implements VolumeDialogEventModel {
         public final int csdWarning;
         public final int durationMs;
@@ -135,7 +129,6 @@ public interface VolumeDialogEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowRequested implements VolumeDialogEventModel {
         public final boolean keyguardLocked;
         public final int lockTaskModeState;
@@ -172,7 +165,6 @@ public interface VolumeDialogEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowSafetyWarning implements VolumeDialogEventModel {
         public final int flags;
 
@@ -196,7 +188,6 @@ public interface VolumeDialogEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StateChanged implements VolumeDialogEventModel {
         public final VolumeDialogController.State state;
 
@@ -220,7 +211,6 @@ public interface VolumeDialogEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SubscribedToEvents implements VolumeDialogEventModel {
         public static final SubscribedToEvents INSTANCE = new SubscribedToEvents();
 
@@ -240,7 +230,6 @@ public interface VolumeDialogEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VolumeChangedFromKey implements VolumeDialogEventModel {
         public static final VolumeChangedFromKey INSTANCE = new VolumeChangedFromKey();
 

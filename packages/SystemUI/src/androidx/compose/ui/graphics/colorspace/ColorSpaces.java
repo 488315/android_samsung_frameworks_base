@@ -1,6 +1,5 @@
 package androidx.compose.ui.graphics.colorspace;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ColorSpaces {
     public static final Rgb Aces;
@@ -324,8 +323,8 @@ public final class ColorSpaces {
         double d3 = d * d2;
         double d4 = transferParameters.a;
         double d5 = transferParameters.c;
-        double pow = (Math.pow(d3, d5) * transferParameters.b) + d4;
-        return Math.pow((pow >= 0.0d ? pow : 0.0d) / ((Math.pow(d3, d5) * transferParameters.e) + transferParameters.d), transferParameters.f) * d2;
+        double dPow = (Math.pow(d3, d5) * transferParameters.b) + d4;
+        return Math.pow((dPow >= 0.0d ? dPow : 0.0d) / ((Math.pow(d3, d5) * transferParameters.e) + transferParameters.d), transferParameters.f) * d2;
     }
 
     public static double transferSt2048Oetf$ui_graphics_release(TransferParameters transferParameters, double d) {

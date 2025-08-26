@@ -44,9 +44,9 @@ public interface IUserVisibleJobObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUserVisibleJobObserver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUserVisibleJobObserver)) {
-                return (IUserVisibleJobObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUserVisibleJobObserver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUserVisibleJobObserver)) {
+                return (IUserVisibleJobObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IUserVisibleJobObserver extends IInterface {
             }
             if (i == 1) {
                 UserVisibleJobSummary userVisibleJobSummary = (UserVisibleJobSummary) parcel.readTypedObject(UserVisibleJobSummary.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onUserVisibleJobStateChanged(userVisibleJobSummary, readBoolean);
+                onUserVisibleJobStateChanged(userVisibleJobSummary, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IUserVisibleJobObserver extends IInterface {
 
             @Override // android.app.job.IUserVisibleJobObserver
             public void onUserVisibleJobStateChanged(UserVisibleJobSummary userVisibleJobSummary, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUserVisibleJobObserver.DESCRIPTOR);
-                    obtain.writeTypedObject(userVisibleJobSummary, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUserVisibleJobObserver.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userVisibleJobSummary, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.Color;
 import androidx.compose.ui.graphics.ShaderBrush;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BrushStyle implements TextForegroundStyle {
     public final float alpha;
@@ -40,7 +39,7 @@ final class BrushStyle implements TextForegroundStyle {
 
     @Override // androidx.compose.ui.text.style.TextForegroundStyle
     /* renamed from: getColor-0d7_KjU, reason: not valid java name */
-    public final long mo792getColor0d7_KjU() {
+    public final long mo794getColor0d7_KjU() {
         Color.Companion.getClass();
         return Color.Unspecified;
     }

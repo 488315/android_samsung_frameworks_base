@@ -7,7 +7,6 @@ import com.android.systemui.R;
 import com.android.systemui.edgelighting.interfaces.IEdgeLightingStyle;
 import com.android.systemui.edgelighting.utils.DrawableUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingStyle implements IEdgeLightingStyle {
     public final boolean mColorOption;
@@ -18,7 +17,6 @@ public class EdgeLightingStyle implements IEdgeLightingStyle {
     public final boolean mTransparencyOption;
     public final boolean mWidthOption;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.data.style.EdgeLightingStyle$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$edgelighting$data$style$EdgeLightingStyleOption;

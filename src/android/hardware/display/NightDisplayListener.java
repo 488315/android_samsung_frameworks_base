@@ -85,7 +85,7 @@ public class NightDisplayListener {
             this.mHandler.post(new Runnable() { // from class: android.hardware.display.NightDisplayListener$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NightDisplayListener.this.lambda$setCallback$0(callback);
+                    this.f$0.lambda$setCallback$0(callback);
                 }
             });
         }

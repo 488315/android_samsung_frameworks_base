@@ -45,7 +45,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PartnerCustomizationLayout extends TemplateLayout {
     public static final Logger LOG = new Logger("PartnerCustomizationLayout");
@@ -72,7 +71,7 @@ public class PartnerCustomizationLayout extends TemplateLayout {
             setupCompatServiceInvoker.loggingExecutor.execute(new Runnable() { // from class: com.google.android.setupcompat.internal.SetupCompatServiceInvoker$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SetupCompatServiceInvoker setupCompatServiceInvoker2 = SetupCompatServiceInvoker.this;
+                    SetupCompatServiceInvoker setupCompatServiceInvoker2 = setupCompatServiceInvoker;
                     String str = shortString;
                     Bundle bundle2 = bundle;
                     Logger logger = SetupCompatServiceInvoker.LOG;
@@ -113,12 +112,12 @@ public class PartnerCustomizationLayout extends TemplateLayout {
         if (isInEditMode()) {
             return;
         }
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SucPartnerCustomizationLayout, i, 0);
-        boolean z = obtainStyledAttributes.getBoolean(1, true);
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = getContext().obtainStyledAttributes(attributeSet, R$styleable.SucFooterBarMixin, i, 0);
-        this.footerBarPaddingBottom = obtainStyledAttributes2.getDimensionPixelSize(13, obtainStyledAttributes2.getDimensionPixelSize(17, 0));
-        obtainStyledAttributes2.recycle();
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SucPartnerCustomizationLayout, i, 0);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(1, true);
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = getContext().obtainStyledAttributes(attributeSet, R$styleable.SucFooterBarMixin, i, 0);
+        this.footerBarPaddingBottom = typedArrayObtainStyledAttributes2.getDimensionPixelSize(13, typedArrayObtainStyledAttributes2.getDimensionPixelSize(17, 0));
+        typedArrayObtainStyledAttributes2.recycle();
         if (z) {
             setSystemUiVisibility(1024);
         }
@@ -159,22 +158,22 @@ public class PartnerCustomizationLayout extends TemplateLayout {
         if (!WizardManagerHelper.isAnySetupWizard(activity.getIntent()) || (fragmentManager = activity.getFragmentManager()) == null || fragmentManager.isDestroyed()) {
             LifecycleFragment.LOG.atDebug("Skip attach " + activity.getClass().getSimpleName() + " because it's not in SUW flow.");
         } else {
-            Fragment findFragmentByTag = fragmentManager.findFragmentByTag("lifecycle_monitor");
-            if (findFragmentByTag == null) {
+            Fragment fragmentFindFragmentByTag = fragmentManager.findFragmentByTag("lifecycle_monitor");
+            if (fragmentFindFragmentByTag == null) {
                 LifecycleFragment lifecycleFragment2 = new LifecycleFragment();
                 lifecycleFragment2.lifecycleChangeListener = partnerCustomizationLayout$$ExternalSyntheticLambda1;
                 try {
                     fragmentManager.beginTransaction().add(lifecycleFragment2, "lifecycle_monitor").commitNow();
-                    findFragmentByTag = lifecycleFragment2;
+                    fragmentFindFragmentByTag = lifecycleFragment2;
                 } catch (IllegalStateException e) {
                     LifecycleFragment.LOG.e("Error occurred when attach to Activity:" + activity.getComponentName(), e);
                 }
-            } else if (findFragmentByTag instanceof LifecycleFragment) {
+            } else if (fragmentFindFragmentByTag instanceof LifecycleFragment) {
                 LifecycleFragment.LOG.atDebug("Find an existing fragment that belongs to ".concat(activity.getClass().getSimpleName()));
             } else {
                 Log.wtf("LifecycleFragment", activity.getClass().getSimpleName().concat(" Incorrect instance on lifecycle fragment."));
             }
-            lifecycleFragment = (LifecycleFragment) findFragmentByTag;
+            lifecycleFragment = (LifecycleFragment) fragmentFindFragmentByTag;
         }
         if (lifecycleFragment == null) {
             Logger logger2 = LOG;
@@ -186,15 +185,15 @@ public class PartnerCustomizationLayout extends TemplateLayout {
         }
         FooterBarMixin footerBarMixin = (FooterBarMixin) getMixin(FooterBarMixin.class);
         FooterBarMixinMetrics footerBarMixinMetrics = footerBarMixin.metrics;
-        boolean isPrimaryButtonVisible = footerBarMixin.isPrimaryButtonVisible();
-        boolean equals = footerBarMixinMetrics.primaryButtonVisibility.equals(C2paManifestList.UNKNOWN_VALUE);
+        boolean zIsPrimaryButtonVisible = footerBarMixin.isPrimaryButtonVisible();
+        boolean zEquals = footerBarMixinMetrics.primaryButtonVisibility.equals(C2paManifestList.UNKNOWN_VALUE);
         String str = ActionResults.RESULT_LAUNCHER_INVISIBLE;
-        footerBarMixinMetrics.primaryButtonVisibility = equals ? isPrimaryButtonVisible ? ActionResults.RESULT_LAUNCHER_VISIBLE : ActionResults.RESULT_LAUNCHER_INVISIBLE : footerBarMixinMetrics.primaryButtonVisibility;
+        footerBarMixinMetrics.primaryButtonVisibility = zEquals ? zIsPrimaryButtonVisible ? ActionResults.RESULT_LAUNCHER_VISIBLE : ActionResults.RESULT_LAUNCHER_INVISIBLE : footerBarMixinMetrics.primaryButtonVisibility;
         FooterBarMixinMetrics footerBarMixinMetrics2 = footerBarMixin.metrics;
-        boolean isSecondaryButtonVisible = footerBarMixin.isSecondaryButtonVisible();
+        boolean zIsSecondaryButtonVisible = footerBarMixin.isSecondaryButtonVisible();
         if (!footerBarMixinMetrics2.secondaryButtonVisibility.equals(C2paManifestList.UNKNOWN_VALUE)) {
             str = footerBarMixinMetrics2.secondaryButtonVisibility;
-        } else if (isSecondaryButtonVisible) {
+        } else if (zIsSecondaryButtonVisible) {
             str = ActionResults.RESULT_LAUNCHER_VISIBLE;
         }
         footerBarMixinMetrics2.secondaryButtonVisibility = str;
@@ -233,19 +232,19 @@ public class PartnerCustomizationLayout extends TemplateLayout {
                 logger.atDebug("Register the onFragmentAttached lifecycle callbacks to ".concat(activity.getClass().getSimpleName()));
             }
         }
-        boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(this.activity.getIntent());
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SucPartnerCustomizationLayout, i, 0);
-        if (!obtainStyledAttributes.hasValue(2)) {
+        boolean zIsAnySetupWizard = WizardManagerHelper.isAnySetupWizard(this.activity.getIntent());
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SucPartnerCustomizationLayout, i, 0);
+        if (!typedArrayObtainStyledAttributes.hasValue(2)) {
             logger.e("Attribute sucUsePartnerResource not found in " + this.activity.getComponentName());
         }
-        if (!isAnySetupWizard && !obtainStyledAttributes.getBoolean(2, true)) {
+        if (!zIsAnySetupWizard && !typedArrayObtainStyledAttributes.getBoolean(2, true)) {
             z = false;
         }
         this.usePartnerResourceAttr = z;
-        this.useDynamicColor = obtainStyledAttributes.hasValue(0);
-        this.useFullDynamicColorAttr = obtainStyledAttributes.getBoolean(0, false);
-        obtainStyledAttributes.recycle();
-        logger.atDebug("activity=" + this.activity.getClass().getSimpleName() + " isSetupFlow=" + isAnySetupWizard + " enablePartnerResourceLoading=true usePartnerResourceAttr=" + this.usePartnerResourceAttr + " useDynamicColor=" + this.useDynamicColor + " useFullDynamicColorAttr=" + this.useFullDynamicColorAttr);
+        this.useDynamicColor = typedArrayObtainStyledAttributes.hasValue(0);
+        this.useFullDynamicColorAttr = typedArrayObtainStyledAttributes.getBoolean(0, false);
+        typedArrayObtainStyledAttributes.recycle();
+        logger.atDebug("activity=" + this.activity.getClass().getSimpleName() + " isSetupFlow=" + zIsAnySetupWizard + " enablePartnerResourceLoading=true usePartnerResourceAttr=" + this.usePartnerResourceAttr + " useDynamicColor=" + this.useDynamicColor + " useFullDynamicColorAttr=" + this.useFullDynamicColorAttr);
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -255,10 +254,10 @@ public class PartnerCustomizationLayout extends TemplateLayout {
         if (WizardManagerHelper.isAnySetupWizard(this.activity.getIntent())) {
             FooterBarMixin footerBarMixin = (FooterBarMixin) getMixin(FooterBarMixin.class);
             FooterBarMixinMetrics footerBarMixinMetrics = footerBarMixin.metrics;
-            boolean isPrimaryButtonVisible = footerBarMixin.isPrimaryButtonVisible();
-            boolean isSecondaryButtonVisible = footerBarMixin.isSecondaryButtonVisible();
-            footerBarMixinMetrics.primaryButtonVisibility = FooterBarMixinMetrics.updateButtonVisibilityState(footerBarMixinMetrics.primaryButtonVisibility, isPrimaryButtonVisible);
-            footerBarMixinMetrics.secondaryButtonVisibility = FooterBarMixinMetrics.updateButtonVisibilityState(footerBarMixinMetrics.secondaryButtonVisibility, isSecondaryButtonVisible);
+            boolean zIsPrimaryButtonVisible = footerBarMixin.isPrimaryButtonVisible();
+            boolean zIsSecondaryButtonVisible = footerBarMixin.isSecondaryButtonVisible();
+            footerBarMixinMetrics.primaryButtonVisibility = FooterBarMixinMetrics.updateButtonVisibilityState(footerBarMixinMetrics.primaryButtonVisibility, zIsPrimaryButtonVisible);
+            footerBarMixinMetrics.secondaryButtonVisibility = FooterBarMixinMetrics.updateButtonVisibilityState(footerBarMixinMetrics.secondaryButtonVisibility, zIsSecondaryButtonVisible);
             FooterButton footerButton = footerBarMixin.primaryButton;
             FooterButton footerButton2 = footerBarMixin.secondaryButton;
             SetupMetricsLogger.logCustomEvent(getContext(), CustomEvent.create(MetricKey.get("SetupCompatMetrics", this.activity), PersistableBundles.mergeBundles(footerBarMixin.getLoggingMetrics(), footerButton != null ? footerButton.getMetrics("PrimaryFooterButton") : PersistableBundle.EMPTY, footerButton2 != null ? footerButton2.getMetrics("SecondaryFooterButton") : PersistableBundle.EMPTY, PersistableBundle.EMPTY)));
@@ -327,7 +326,7 @@ public class PartnerCustomizationLayout extends TemplateLayout {
         this.windowFocusChangeListener = new ViewTreeObserver.OnWindowFocusChangeListener() { // from class: com.google.android.setupcompat.PartnerCustomizationLayout$$ExternalSyntheticLambda0
             @Override // android.view.ViewTreeObserver.OnWindowFocusChangeListener
             public final void onWindowFocusChanged(boolean z) {
-                PartnerCustomizationLayout.$r8$lambda$LkXYrnw5DYvjSfWXKSuSlNqcyss(PartnerCustomizationLayout.this, z);
+                PartnerCustomizationLayout.$r8$lambda$LkXYrnw5DYvjSfWXKSuSlNqcyss(this.f$0, z);
             }
         };
         init$2(null, R.attr.sucLayoutTheme);
@@ -338,7 +337,7 @@ public class PartnerCustomizationLayout extends TemplateLayout {
         this.windowFocusChangeListener = new ViewTreeObserver.OnWindowFocusChangeListener() { // from class: com.google.android.setupcompat.PartnerCustomizationLayout$$ExternalSyntheticLambda0
             @Override // android.view.ViewTreeObserver.OnWindowFocusChangeListener
             public final void onWindowFocusChanged(boolean z) {
-                PartnerCustomizationLayout.$r8$lambda$LkXYrnw5DYvjSfWXKSuSlNqcyss(PartnerCustomizationLayout.this, z);
+                PartnerCustomizationLayout.$r8$lambda$LkXYrnw5DYvjSfWXKSuSlNqcyss(this.f$0, z);
             }
         };
         init$2(attributeSet, R.attr.sucLayoutTheme);
@@ -349,7 +348,7 @@ public class PartnerCustomizationLayout extends TemplateLayout {
         this.windowFocusChangeListener = new ViewTreeObserver.OnWindowFocusChangeListener() { // from class: com.google.android.setupcompat.PartnerCustomizationLayout$$ExternalSyntheticLambda0
             @Override // android.view.ViewTreeObserver.OnWindowFocusChangeListener
             public final void onWindowFocusChanged(boolean z) {
-                PartnerCustomizationLayout.$r8$lambda$LkXYrnw5DYvjSfWXKSuSlNqcyss(PartnerCustomizationLayout.this, z);
+                PartnerCustomizationLayout.$r8$lambda$LkXYrnw5DYvjSfWXKSuSlNqcyss(this.f$0, z);
             }
         };
         init$2(attributeSet, i);

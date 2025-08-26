@@ -6,7 +6,6 @@ import com.android.systemui.touchpad.tutorial.ui.gesture.GestureState;
 import com.android.systemui.touchpad.tutorial.ui.viewmodel.GestureRecognizerAdapter$gestureStateAsFlow$1$$ExternalSyntheticLambda0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BackGestureRecognizer implements GestureRecognizer {
     public final int gestureDistanceThresholdPx;
@@ -23,27 +22,27 @@ public final class BackGestureRecognizer implements GestureRecognizer {
         if (GestureRecognizerKt.isMultifingerTouchpadSwipe(motionEvent)) {
             if (!GestureRecognizerKt.isNFingerTouchpadSwipe(motionEvent, 3)) {
                 if (motionEvent.getActionMasked() == 1) {
-                    this.gestureStateChangedCallback.mo779invoke(GestureState.Error.INSTANCE);
+                    this.gestureStateChangedCallback.mo781invoke(GestureState.Error.INSTANCE);
                     return;
                 }
                 return;
             }
-            DistanceGestureState processEvent = this.distanceTracker.processEvent(motionEvent);
+            DistanceGestureState distanceGestureStateProcessEvent = this.distanceTracker.processEvent(motionEvent);
             Function1 function1 = this.gestureStateChangedCallback;
-            if (processEvent instanceof Finished) {
-                if (Math.abs(((Finished) processEvent).deltaX) >= this.gestureDistanceThresholdPx) {
-                    function1.mo779invoke(GestureState.Finished.INSTANCE);
+            if (distanceGestureStateProcessEvent instanceof Finished) {
+                if (Math.abs(((Finished) distanceGestureStateProcessEvent).deltaX) >= this.gestureDistanceThresholdPx) {
+                    function1.mo781invoke(GestureState.Finished.INSTANCE);
                     return;
                 } else {
-                    function1.mo779invoke(GestureState.Error.INSTANCE);
+                    function1.mo781invoke(GestureState.Error.INSTANCE);
                     return;
                 }
             }
-            if (processEvent instanceof Moving) {
-                float f = ((Moving) processEvent).deltaX;
-                function1.mo779invoke(new GestureState.InProgress(MathUtils.saturate(Math.abs(f / this.gestureDistanceThresholdPx)), f > 0.0f ? GestureDirection.RIGHT : GestureDirection.LEFT));
-            } else if (processEvent instanceof Started) {
-                function1.mo779invoke(new GestureState.InProgress(0.0f, null, 3, null));
+            if (distanceGestureStateProcessEvent instanceof Moving) {
+                float f = ((Moving) distanceGestureStateProcessEvent).deltaX;
+                function1.mo781invoke(new GestureState.InProgress(MathUtils.saturate(Math.abs(f / this.gestureDistanceThresholdPx)), f > 0.0f ? GestureDirection.RIGHT : GestureDirection.LEFT));
+            } else if (distanceGestureStateProcessEvent instanceof Started) {
+                function1.mo781invoke(new GestureState.InProgress(0.0f, null, 3, null));
             }
         }
     }

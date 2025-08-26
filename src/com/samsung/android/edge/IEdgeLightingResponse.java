@@ -44,9 +44,9 @@ public interface IEdgeLightingResponse extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEdgeLightingResponse.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEdgeLightingResponse)) {
-                return (IEdgeLightingResponse) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEdgeLightingResponse.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEdgeLightingResponse)) {
+                return (IEdgeLightingResponse) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,12 +97,12 @@ public interface IEdgeLightingResponse extends IInterface {
 
             @Override // com.samsung.android.edge.IEdgeLightingResponse
             public void onFinished() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEdgeLightingResponse.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEdgeLightingResponse.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

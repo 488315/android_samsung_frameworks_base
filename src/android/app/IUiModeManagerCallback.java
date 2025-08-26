@@ -51,9 +51,9 @@ public interface IUiModeManagerCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUiModeManagerCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUiModeManagerCallback)) {
-                return (IUiModeManagerCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUiModeManagerCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUiModeManagerCallback)) {
+                return (IUiModeManagerCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,13 +83,13 @@ public interface IUiModeManagerCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                float readFloat = parcel.readFloat();
+                float f = parcel.readFloat();
                 parcel.enforceNoDataAvail();
-                notifyContrastChanged(readFloat);
+                notifyContrastChanged(f);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                notifyForceInvertStateChanged(readInt);
+                notifyForceInvertStateChanged(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -114,25 +114,25 @@ public interface IUiModeManagerCallback extends IInterface {
 
             @Override // android.app.IUiModeManagerCallback
             public void notifyContrastChanged(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUiModeManagerCallback.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUiModeManagerCallback.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IUiModeManagerCallback
             public void notifyForceInvertStateChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUiModeManagerCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUiModeManagerCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

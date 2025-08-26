@@ -161,30 +161,30 @@ public class Header extends Operation implements RemoteComposeOperation {
     public static Header readDirect(InputStream inputStream) throws IOException {
         DataInputStream dataInputStream = new DataInputStream(inputStream);
         try {
-            byte readByte = dataInputStream.readByte();
-            if (readByte != 0) {
-                throw new IOException("Invalid header " + ((int) readByte) + " != 0");
+            byte b = dataInputStream.readByte();
+            if (b != 0) {
+                throw new IOException("Invalid header " + ((int) b) + " != 0");
             }
-            int readInt = dataInputStream.readInt();
-            int readInt2 = dataInputStream.readInt();
-            int readInt3 = dataInputStream.readInt();
-            if (readInt < 65536) {
-                return new Header(readInt, readInt2, readInt3, dataInputStream.readInt(), dataInputStream.readInt(), 1.0f, dataInputStream.readLong());
+            int i = dataInputStream.readInt();
+            int i2 = dataInputStream.readInt();
+            int i3 = dataInputStream.readInt();
+            if (i < 65536) {
+                return new Header(i, i2, i3, dataInputStream.readInt(), dataInputStream.readInt(), 1.0f, dataInputStream.readLong());
             }
-            int i = (-65536) & readInt;
-            if (i != MAGIC_NUMBER) {
-                throw new IOException("Invalid header MAGIC_NUMBER " + i + " != 76283904");
+            int i4 = (-65536) & i;
+            if (i4 != MAGIC_NUMBER) {
+                throw new IOException("Invalid header MAGIC_NUMBER " + i4 + " != 76283904");
             }
-            int i2 = 65535 & readInt;
-            int readInt4 = dataInputStream.readInt();
-            short[] sArr = new short[readInt4];
-            Object[] objArr = new Object[readInt4];
+            int i5 = 65535 & i;
+            int i6 = dataInputStream.readInt();
+            short[] sArr = new short[i6];
+            Object[] objArr = new Object[i6];
             readMap(dataInputStream, sArr, objArr);
             IntMap intMap = new IntMap();
-            for (int i3 = 0; i3 < readInt4; i3++) {
-                intMap.put(sArr[i3], objArr[i3]);
+            for (int i7 = 0; i7 < i6; i7++) {
+                intMap.put(sArr[i7], objArr[i7]);
             }
-            return new Header(i2, readInt2, readInt3, intMap);
+            return new Header(i5, i2, i3, intMap);
         } finally {
             dataInputStream.close();
         }
@@ -192,10 +192,10 @@ public class Header extends Operation implements RemoteComposeOperation {
 
     private static void readMap(DataInputStream dataInputStream, short[] sArr, Object[] objArr) throws IOException {
         for (int i = 0; i < sArr.length; i++) {
-            short readShort = dataInputStream.readShort();
+            short s = dataInputStream.readShort();
             dataInputStream.readShort();
-            int i2 = readShort >> 10;
-            sArr[i] = (short) (readShort & 63);
+            int i2 = s >> 10;
+            sArr[i] = (short) (s & 63);
             if (i2 == 0) {
                 objArr[i] = Integer.valueOf(dataInputStream.readInt());
             } else if (i2 == 1) {
@@ -211,31 +211,31 @@ public class Header extends Operation implements RemoteComposeOperation {
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        int readInt3 = wireBuffer.readInt();
-        if (readInt < 65536) {
-            list.add(new Header(readInt, readInt2, readInt3, wireBuffer.readInt(), wireBuffer.readInt(), 1.0f, wireBuffer.readLong()));
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        int i3 = wireBuffer.readInt();
+        if (i < 65536) {
+            list.add(new Header(i, i2, i3, wireBuffer.readInt(), wireBuffer.readInt(), 1.0f, wireBuffer.readLong()));
             return;
         }
-        int i = 65535 & readInt;
-        int readInt4 = wireBuffer.readInt();
-        short[] sArr = new short[readInt4];
-        Object[] objArr = new Object[readInt4];
+        int i4 = 65535 & i;
+        int i5 = wireBuffer.readInt();
+        short[] sArr = new short[i5];
+        Object[] objArr = new Object[i5];
         readMap(wireBuffer, sArr, objArr);
         IntMap intMap = new IntMap();
-        for (int i2 = 0; i2 < readInt4; i2++) {
-            intMap.put(sArr[i2], objArr[i2]);
+        for (int i6 = 0; i6 < i5; i6++) {
+            intMap.put(sArr[i6], objArr[i6]);
         }
-        list.add(new Header(i, readInt2, readInt3, intMap));
+        list.add(new Header(i4, i2, i3, intMap));
     }
 
     private static void readMap(WireBuffer wireBuffer, short[] sArr, Object[] objArr) {
         for (int i = 0; i < sArr.length; i++) {
-            short readShort = (short) wireBuffer.readShort();
+            short s = (short) wireBuffer.readShort();
             wireBuffer.readShort();
-            int i2 = readShort >> 10;
-            sArr[i] = (short) (readShort & 63);
+            int i2 = s >> 10;
+            sArr[i] = (short) (s & 63);
             if (i2 == 0) {
                 objArr[i] = Integer.valueOf(wireBuffer.readInt());
             } else if (i2 == 1) {

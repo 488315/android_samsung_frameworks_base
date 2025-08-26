@@ -21,7 +21,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class LightRevealScrimInteractor$listenForStartedKeyguardTransitionStep$1 extends SuspendLambda implements Function2 {
     int label;
@@ -56,7 +55,7 @@ final class LightRevealScrimInteractor$listenForStartedKeyguardTransitionStep$1 
                 public final Object emit(Object obj2, Continuation continuation) {
                     boolean z;
                     TransitionStep transitionStep = (TransitionStep) obj2;
-                    LightRevealScrimInteractor lightRevealScrimInteractor2 = LightRevealScrimInteractor.this;
+                    LightRevealScrimInteractor lightRevealScrimInteractor2 = lightRevealScrimInteractor;
                     ScrimLogger scrimLogger = lightRevealScrimInteractor2.scrimLogger;
                     LightRevealScrimInteractor.Companion.getClass();
                     scrimLogger.d(LightRevealScrimInteractor.TAG, "listenForStartedKeyguardTransitionStep", transitionStep);

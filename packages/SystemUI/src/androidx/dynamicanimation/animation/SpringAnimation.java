@@ -3,7 +3,6 @@ package androidx.dynamicanimation.animation;
 import android.util.AndroidRuntimeException;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SpringAnimation extends DynamicAnimation {
     public boolean mEndRequested;
@@ -73,9 +72,9 @@ public final class SpringAnimation extends DynamicAnimation {
         if (d < this.mMinValue) {
             throw new UnsupportedOperationException("Final position of the spring cannot be less than the min value.");
         }
-        double abs = Math.abs(this.mMinVisibleChange * 0.75f);
-        springForce.mValueThreshold = abs;
-        springForce.mVelocityThreshold = abs * 62.5d;
+        double dAbs = Math.abs(this.mMinVisibleChange * 0.75f);
+        springForce.mValueThreshold = dAbs;
+        springForce.mVelocityThreshold = dAbs * 62.5d;
         super.start();
     }
 
@@ -94,21 +93,21 @@ public final class SpringAnimation extends DynamicAnimation {
         }
         if (this.mPendingPosition != Float.MAX_VALUE) {
             long j2 = j / 2;
-            DynamicAnimation.MassState updateValues = this.mSpring.updateValues(this.mValue, this.mVelocity, j2);
+            DynamicAnimation.MassState massStateUpdateValues = this.mSpring.updateValues(this.mValue, this.mVelocity, j2);
             SpringForce springForce = this.mSpring;
             springForce.mFinalPosition = this.mPendingPosition;
             this.mPendingPosition = Float.MAX_VALUE;
-            DynamicAnimation.MassState updateValues2 = springForce.updateValues(updateValues.mValue, updateValues.mVelocity, j2);
-            this.mValue = updateValues2.mValue;
-            this.mVelocity = updateValues2.mVelocity;
+            DynamicAnimation.MassState massStateUpdateValues2 = springForce.updateValues(massStateUpdateValues.mValue, massStateUpdateValues.mVelocity, j2);
+            this.mValue = massStateUpdateValues2.mValue;
+            this.mVelocity = massStateUpdateValues2.mVelocity;
         } else {
-            DynamicAnimation.MassState updateValues3 = this.mSpring.updateValues(this.mValue, this.mVelocity, j);
-            this.mValue = updateValues3.mValue;
-            this.mVelocity = updateValues3.mVelocity;
+            DynamicAnimation.MassState massStateUpdateValues3 = this.mSpring.updateValues(this.mValue, this.mVelocity, j);
+            this.mValue = massStateUpdateValues3.mValue;
+            this.mVelocity = massStateUpdateValues3.mVelocity;
         }
-        float max = Math.max(this.mValue, this.mMinValue);
-        this.mValue = max;
-        this.mValue = Math.min(max, this.mMaxValue);
+        float fMax = Math.max(this.mValue, this.mMinValue);
+        this.mValue = fMax;
+        this.mValue = Math.min(fMax, this.mMaxValue);
         float f2 = this.mVelocity;
         SpringForce springForce2 = this.mSpring;
         springForce2.getClass();

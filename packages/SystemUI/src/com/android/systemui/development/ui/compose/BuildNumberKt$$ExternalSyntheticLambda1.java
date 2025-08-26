@@ -10,7 +10,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.channels.BufferedChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class BuildNumberKt$$ExternalSyntheticLambda1 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -25,7 +24,7 @@ public final /* synthetic */ class BuildNumberKt$$ExternalSyntheticLambda1 imple
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         switch (this.$r8$classId) {
             case 0:
                 SemanticsPropertiesKt.onLongClick((SemanticsPropertyReceiver) obj, (String) this.f$0, new BuildNumberKt$$ExternalSyntheticLambda0(this.f$1, 1));
@@ -33,10 +32,10 @@ public final /* synthetic */ class BuildNumberKt$$ExternalSyntheticLambda1 imple
             default:
                 HapticFeedbackType.Companion.getClass();
                 PlatformHapticFeedbackType.INSTANCE.getClass();
-                ((HapticFeedback) this.f$0).mo570performHapticFeedbackCdsT49E(0);
+                ((HapticFeedback) this.f$0).mo572performHapticFeedbackCdsT49E(0);
                 BufferedChannel bufferedChannel = this.f$1.copyRequests;
                 Unit unit = Unit.INSTANCE;
-                bufferedChannel.mo3456trySendJP2dKIU(unit);
+                bufferedChannel.mo3476trySendJP2dKIU(unit);
                 return unit;
         }
     }

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageButton android:gravity="center" android:background="@drawable/volume_ringer_item_bg" android:padding="@dimen/volume_dialog_ringer_drawer_button_icon_radius" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/volume_ringer_item_bg" android:tint="@android:color/ripple_material_light" android:contentDescription="@string/volume_ringer_mode"
+<ImageButton android:gravity="center" android:background="@drawable/volume_ringer_item_bg" android:padding="@dimen/volume_dialog_ringer_drawer_button_icon_radius" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/volume_ringer_item_bg" android:tint="@android:color/material_grey_50" android:contentDescription="@string/volume_ringer_mode"
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" />

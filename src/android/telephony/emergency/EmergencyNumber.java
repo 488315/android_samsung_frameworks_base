@@ -415,16 +415,16 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
     private static void fillServiceCategoryAndUrns(EmergencyNumber emergencyNumber, SparseIntArray sparseIntArray, SparseArray<List<String>> sparseArray) {
         int emergencyNumberSourceBitmask = emergencyNumber.getEmergencyNumberSourceBitmask();
         for (int i : EMERGENCY_NUMBER_SOURCE_PRECEDENCE) {
-            Integer valueOf = Integer.valueOf(i);
-            valueOf.getClass();
+            Integer numValueOf = Integer.valueOf(i);
+            numValueOf.getClass();
             int i2 = emergencyNumberSourceBitmask & i;
-            valueOf.getClass();
+            numValueOf.getClass();
             if (i2 == i) {
                 if (!emergencyNumber.isInEmergencyServiceCategories(0)) {
-                    valueOf.getClass();
+                    numValueOf.getClass();
                     sparseIntArray.put(i, emergencyNumber.getEmergencyServiceCategoryBitmask());
                 }
-                valueOf.getClass();
+                numValueOf.getClass();
                 sparseArray.put(i, emergencyNumber.getEmergencyUrns());
                 return;
             }
@@ -462,13 +462,13 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
             i2++;
         }
         int i4 = emergencyServiceCategoryBitmask;
-        List list = arrayList;
+        List listMergeEmergencyUrns = arrayList;
         for (int i5 : EMERGENCY_NUMBER_SOURCE_PRECEDENCE) {
             if (sparseArray.contains(i5)) {
-                list = mergeEmergencyUrns(list, (List) sparseArray.get(i5));
+                listMergeEmergencyUrns = mergeEmergencyUrns(listMergeEmergencyUrns, (List) sparseArray.get(i5));
             }
         }
-        return new EmergencyNumber(emergencyNumber.getNumber(), emergencyNumber.getCountryIso(), emergencyNumber.getMnc(), i4, list, emergencyNumber.getEmergencyNumberSourceBitmask() | emergencyNumber2.getEmergencyNumberSourceBitmask(), i);
+        return new EmergencyNumber(emergencyNumber.getNumber(), emergencyNumber.getCountryIso(), emergencyNumber.getMnc(), i4, listMergeEmergencyUrns, emergencyNumber.getEmergencyNumberSourceBitmask() | emergencyNumber2.getEmergencyNumberSourceBitmask(), i);
     }
 
     public static boolean validateEmergencyNumberAddress(String str) {

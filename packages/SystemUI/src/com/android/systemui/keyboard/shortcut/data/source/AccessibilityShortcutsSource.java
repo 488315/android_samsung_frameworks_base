@@ -11,7 +11,6 @@ import java.util.Collections;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AccessibilityShortcutsSource implements KeyboardShortcutGroupsSource {
     public final Resources resources;
@@ -21,7 +20,7 @@ public final class AccessibilityShortcutsSource implements KeyboardShortcutGroup
     }
 
     @Override // com.android.systemui.keyboard.shortcut.data.source.KeyboardShortcutGroupsSource
-    public final Object shortcutGroups(int i, Continuation continuation) {
+    public final Object shortcutGroups(int i, Continuation continuation) throws Resources.NotFoundException {
         String string = this.resources.getString(R.string.shortcutHelper_category_accessibility);
         ArrayList arrayList = new ArrayList();
         KeyboardShortcutInfoBuilder keyboardShortcutInfoBuilder = new KeyboardShortcutInfoBuilder(this.resources.getString(R.string.group_accessibility_toggle_bounce_keys));

@@ -1,6 +1,7 @@
 package android.inputmethodservice;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.IBinder;
 import android.util.Slog;
 import android.view.MotionEvent;
@@ -95,14 +96,14 @@ final class InkWindow extends PhoneWindow {
     }
 
     @Override // com.android.internal.policy.PhoneWindow, android.view.Window
-    public void setContentView(View view, ViewGroup.LayoutParams layoutParams) {
+    public void setContentView(View view, ViewGroup.LayoutParams layoutParams) throws Resources.NotFoundException {
         this.mInkView = view;
         super.setContentView(view, layoutParams);
         initInkViewVisibilityListener();
     }
 
     @Override // com.android.internal.policy.PhoneWindow, android.view.Window
-    public void setContentView(View view) {
+    public void setContentView(View view) throws Resources.NotFoundException {
         this.mInkView = view;
         super.setContentView(view);
         initInkViewVisibilityListener();

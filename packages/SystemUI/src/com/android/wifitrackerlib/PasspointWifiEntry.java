@@ -27,7 +27,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PasspointWifiEntry extends WifiEntry implements WifiEntry.WifiEntryCallback {
     public final List mCurrentHomeScanResults;
@@ -102,7 +101,11 @@ public class PasspointWifiEntry extends WifiEntry implements WifiEntry.WifiEntry
         return getConnectedState() == 2;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:11:0x000e  */
     @Override // com.android.wifitrackerlib.WifiEntry
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final synchronized boolean canSetAutoJoinEnabled() {
         boolean z;
         if (this.mPasspointConfig == null) {
@@ -111,12 +114,18 @@ public class PasspointWifiEntry extends WifiEntry implements WifiEntry.WifiEntry
         return z;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0015  */
     @Override // com.android.wifitrackerlib.WifiEntry
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final synchronized boolean canSignIn() {
         boolean z;
         NetworkCapabilities networkCapabilities;
-        if (this.mNetwork != null && (networkCapabilities = this.mNetworkCapabilities) != null) {
-            z = networkCapabilities.hasCapability(17);
+        if (this.mNetwork == null || (networkCapabilities = this.mNetworkCapabilities) == null) {
+            z = false;
+        } else if (networkCapabilities.hasCapability(17)) {
+            z = true;
         }
         return z;
     }
@@ -230,7 +239,11 @@ public class PasspointWifiEntry extends WifiEntry implements WifiEntry.WifiEntry
         return "";
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:31:0x009a  */
     @Override // com.android.wifitrackerlib.WifiEntry
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final synchronized String getSummary(boolean z) {
         StringJoiner stringJoiner;
         String disconnectedDescription;
@@ -266,14 +279,15 @@ public class PasspointWifiEntry extends WifiEntry implements WifiEntry.WifiEntry
                     Context context = this.mContext;
                     NetworkInfo networkInfo = this.mNetworkInfo;
                     List list = Utils.defaultSsidList;
-                    if (context != null && networkInfo != null) {
+                    if (context == null || networkInfo == null) {
+                        disconnectedDescription = "";
+                    } else {
                         String[] stringArray = context.getResources().getStringArray(R.array.wifitrackerlib_wifi_status);
-                        int ordinal = NetworkInfo.DetailedState.CONNECTING.ordinal();
-                        if (ordinal < stringArray.length) {
-                            disconnectedDescription = stringArray[ordinal];
+                        int iOrdinal = NetworkInfo.DetailedState.CONNECTING.ordinal();
+                        if (iOrdinal < stringArray.length) {
+                            disconnectedDescription = stringArray[iOrdinal];
                         }
                     }
-                    disconnectedDescription = "";
                 }
                 if (this.mShowBandSummary) {
                     stringJoiner.add(getBandSummary(connectedState, this.mWifiInfo));
@@ -382,7 +396,11 @@ public class PasspointWifiEntry extends WifiEntry implements WifiEntry.WifiEntry
         return this.mPasspointConfig != null;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x000d  */
     @Override // com.android.wifitrackerlib.WifiEntry
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final synchronized boolean isSuggestion() {
         boolean z;
         WifiConfiguration wifiConfiguration = this.mWifiConfig;

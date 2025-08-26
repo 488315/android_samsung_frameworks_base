@@ -22,6 +22,7 @@ import com.android.internal.jank.FrameTracker;
 import com.android.internal.jank.InteractionJankMonitor;
 import com.android.internal.protolog.PerfettoProtoLogImpl;
 import com.android.internal.util.PerfettoTrigger;
+import java.io.IOException;
 import java.time.Instant;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -260,7 +261,7 @@ public class InteractionJankMonitor {
 
     static {
         String canonicalName = InteractionJankMonitor.class.getCanonicalName();
-        DEFAULT_WORKER_NAME = TAG + "-Worker";
+        DEFAULT_WORKER_NAME = "InteractionJankMonitor-Worker";
         DEFAULT_TIMEOUT_MS = TimeUnit.SECONDS.toMillis(2L);
         DEFAULT_ENABLED = Build.IS_DEBUGGABLE;
         ACTION_SESSION_END = canonicalName + ".ACTION_SESSION_END";
@@ -284,9 +285,9 @@ public class InteractionJankMonitor {
         Handler threadHandler = handlerThread.getThreadHandler();
         this.mWorker = threadHandler;
         this.mDisplayResolutionTracker = new DisplayResolutionTracker(threadHandler);
-        Application currentApplication = ActivityThread.currentApplication();
-        this.mCurrentApplication = currentApplication;
-        if (currentApplication == null || currentApplication.checkCallingOrSelfPermission(Manifest.permission.READ_DEVICE_CONFIG) != 0) {
+        Application applicationCurrentApplication = ActivityThread.currentApplication();
+        this.mCurrentApplication = applicationCurrentApplication;
+        if (applicationCurrentApplication == null || applicationCurrentApplication.checkCallingOrSelfPermission(Manifest.permission.READ_DEVICE_CONFIG) != 0) {
             String str = TAG;
             StringBuilder sb = new StringBuilder("Initializing without READ_DEVICE_CONFIG permission. enabled=");
             sb.append(this.mEnabled);
@@ -297,10 +298,10 @@ public class InteractionJankMonitor {
             sb.append(", frameTimeThreshold=");
             sb.append(this.mTraceThresholdFrameTimeMillis);
             sb.append(", package=");
-            if (currentApplication == null) {
+            if (applicationCurrentApplication == null) {
                 packageName = PerfettoProtoLogImpl.NULL_STRING;
             } else {
-                packageName = currentApplication.getPackageName();
+                packageName = applicationCurrentApplication.getPackageName();
             }
             sb.append(packageName);
             Log.w(str, sb.toString());
@@ -309,7 +310,7 @@ public class InteractionJankMonitor {
         threadHandler.post(new Runnable() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
             public final void run() {
-                InteractionJankMonitor.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         });
     }
@@ -320,7 +321,7 @@ public class InteractionJankMonitor {
             updateProperties(DeviceConfig.getProperties("interaction_jank_monitor", new String[0]));
             DeviceConfig.addOnPropertiesChangedListener("interaction_jank_monitor", new HandlerExecutor(this.mWorker), new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda3
                 public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                    InteractionJankMonitor.this.updateProperties(properties);
+                    this.f$0.updateProperties(properties);
                 }
             });
         } catch (SecurityException unused) {
@@ -348,7 +349,7 @@ public class InteractionJankMonitor {
             handler.runWithScissors(new Runnable() { // from class: com.android.internal.jank.InteractionJankMonitor$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InteractionJankMonitor.AnonymousClass1.this.lambda$onCujEvents$0(configuration, frameTracker, str, i);
+                    this.f$0.lambda$onCujEvents$0(configuration, frameTracker, str, i);
                 }
             }, InteractionJankMonitor.EXECUTOR_TASK_TIMEOUT);
         }
@@ -362,8 +363,8 @@ public class InteractionJankMonitor {
         public void triggerPerfetto(final Configuration configuration) {
             InteractionJankMonitor.this.mWorker.post(new Runnable() { // from class: com.android.internal.jank.InteractionJankMonitor$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
-                public final void run() {
-                    PerfettoTrigger.trigger(InteractionJankMonitor.Configuration.this.getPerfettoTrigger());
+                public final void run() throws IOException {
+                    PerfettoTrigger.trigger(configuration.getPerfettoTrigger());
                 }
             });
         }
@@ -381,11 +382,11 @@ public class InteractionJankMonitor {
     }
 
     public boolean isInstrumenting(int i) {
-        boolean contains;
+        boolean zContains;
         synchronized (this.mLock) {
-            contains = this.mRunningTrackers.contains(i);
+            zContains = this.mRunningTrackers.contains(i);
         }
-        return contains;
+        return zContains;
     }
 
     public boolean begin(View view, int i) {
@@ -408,11 +409,11 @@ public class InteractionJankMonitor {
 
     public boolean begin(SurfaceControl surfaceControl, Context context, Handler handler, int i, String str) {
         try {
-            Configuration.Builder withSurface = Configuration.Builder.withSurface(i, context, surfaceControl, handler);
+            Configuration.Builder builderWithSurface = Configuration.Builder.withSurface(i, context, surfaceControl, handler);
             if (!TextUtils.isEmpty(str)) {
-                withSurface.setTag(str);
+                builderWithSurface.setTag(str);
             }
-            return begin(withSurface);
+            return begin(builderWithSurface);
         } catch (IllegalArgumentException e) {
             Log.d(TAG, "Build configuration failed!", e);
             return false;
@@ -421,21 +422,22 @@ public class InteractionJankMonitor {
 
     public boolean begin(Configuration.Builder builder) {
         try {
-            final Configuration build = builder.build();
+            final Configuration configurationBuild = builder.build();
             postEventLogToWorkerThread(new TimeFunction() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda1
                 @Override // com.android.internal.jank.InteractionJankMonitor.TimeFunction
                 public final void invoke(long j, long j2, long j3) {
-                    EventLogTags.writeJankCujEventsBeginRequest(r0.mCujType, j, j2, j3, InteractionJankMonitor.Configuration.this.mTag);
+                    InteractionJankMonitor.Configuration configuration = configurationBuild;
+                    EventLogTags.writeJankCujEventsBeginRequest(configuration.mCujType, j, j2, j3, configuration.mTag);
                 }
             });
             final TrackerResult trackerResult = new TrackerResult();
-            if (!build.getHandler().runWithScissors(new Runnable() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda2
+            if (!configurationBuild.getHandler().runWithScissors(new Runnable() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InteractionJankMonitor.this.lambda$begin$2(trackerResult, build);
+                    this.f$0.lambda$begin$2(trackerResult, configurationBuild);
                 }
             }, EXECUTOR_TASK_TIMEOUT)) {
-                Log.d(TAG, "begin failed due to timeout, CUJ=" + Cuj.getNameOfCuj(build.mCujType));
+                Log.d(TAG, "begin failed due to timeout, CUJ=" + Cuj.getNameOfCuj(configurationBuild.mCujType));
                 return false;
             }
             return trackerResult.mResult;
@@ -459,19 +461,17 @@ public class InteractionJankMonitor {
             Log.w(TAG, "The view has since become invalid, aborting the CUJ.");
             return false;
         }
-        RunningTracker putTrackerIfNoCurrent = putTrackerIfNoCurrent(i, new Supplier() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda4
+        RunningTracker runningTrackerPutTrackerIfNoCurrent = putTrackerIfNoCurrent(i, new Supplier() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda4
             @Override // java.util.function.Supplier
             public final Object get() {
-                InteractionJankMonitor.RunningTracker lambda$beginInternal$4;
-                lambda$beginInternal$4 = InteractionJankMonitor.this.lambda$beginInternal$4(configuration, i);
-                return lambda$beginInternal$4;
+                return this.f$0.lambda$beginInternal$4(configuration, i);
             }
         });
-        if (putTrackerIfNoCurrent == null) {
+        if (runningTrackerPutTrackerIfNoCurrent == null) {
             return false;
         }
-        putTrackerIfNoCurrent.mTracker.begin();
-        scheduleTimeoutAction(putTrackerIfNoCurrent.mConfig, putTrackerIfNoCurrent.mTimeoutAction);
+        runningTrackerPutTrackerIfNoCurrent.mTracker.begin();
+        scheduleTimeoutAction(runningTrackerPutTrackerIfNoCurrent.mConfig, runningTrackerPutTrackerIfNoCurrent.mTimeoutAction);
         return true;
     }
 
@@ -480,7 +480,7 @@ public class InteractionJankMonitor {
         return new RunningTracker(configuration, createFrameTracker(configuration), new Runnable() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                InteractionJankMonitor.this.lambda$beginInternal$3(i);
+                this.f$0.lambda$beginInternal$3(i);
             }
         });
     }
@@ -515,7 +515,7 @@ public class InteractionJankMonitor {
             if (!tracker.mConfig.getHandler().runWithScissors(new Runnable() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda9
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InteractionJankMonitor.this.lambda$end$6(trackerResult, tracker);
+                    this.f$0.lambda$end$6(trackerResult, tracker);
                 }
             }, EXECUTOR_TASK_TIMEOUT)) {
                 Log.d(TAG, "end failed due to timeout, CUJ=" + Cuj.getNameOfCuj(i));
@@ -561,7 +561,7 @@ public class InteractionJankMonitor {
             if (!tracker.mConfig.getHandler().runWithScissors(new Runnable() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InteractionJankMonitor.this.lambda$cancel$8(trackerResult, tracker, i2);
+                    this.f$0.lambda$cancel$8(trackerResult, tracker, i2);
                 }
             }, EXECUTOR_TASK_TIMEOUT)) {
                 Log.d(TAG, "cancel failed due to timeout, CUJ=" + Cuj.getNameOfCuj(i));
@@ -633,6 +633,10 @@ public class InteractionJankMonitor {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00ae  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void updateProperties(DeviceConfig.Properties properties) {
         InteractionMonitorDebugOverlay interactionMonitorDebugOverlay;
         for (String str : properties.getKeyset()) {
@@ -655,13 +659,12 @@ public class InteractionJankMonitor {
                                 try {
                                     if (this.mDebugOverlay == null) {
                                         this.mDebugOverlay = new InteractionMonitorDebugOverlay(this.mCurrentApplication, this.mWorker, this.mDebugBgColor, this.mDebugYOffset);
+                                    } else if (!z && (interactionMonitorDebugOverlay = this.mDebugOverlay) != null) {
+                                        interactionMonitorDebugOverlay.dispose();
+                                        this.mDebugOverlay = null;
                                     }
                                 } finally {
                                 }
-                            }
-                            if (!z && (interactionMonitorDebugOverlay = this.mDebugOverlay) != null) {
-                                interactionMonitorDebugOverlay.dispose();
-                                this.mDebugOverlay = null;
                             }
                         }
                         break;
@@ -694,13 +697,13 @@ public class InteractionJankMonitor {
     }
 
     private void postEventLogToWorkerThread(final TimeFunction timeFunction) {
-        final long convert = TimeUnit.NANOSECONDS.convert(Instant.now().getEpochSecond(), TimeUnit.SECONDS) + r0.getNano();
-        final long elapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos();
-        final long uptimeNanos = SystemClock.uptimeNanos();
+        final long jConvert = TimeUnit.NANOSECONDS.convert(Instant.now().getEpochSecond(), TimeUnit.SECONDS) + r0.getNano();
+        final long jElapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos();
+        final long jUptimeNanos = SystemClock.uptimeNanos();
         this.mWorker.post(new Runnable() { // from class: com.android.internal.jank.InteractionJankMonitor$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                InteractionJankMonitor.TimeFunction.this.invoke(convert, elapsedRealtimeNanos, uptimeNanos);
+                timeFunction.invoke(jConvert, jElapsedRealtimeNanos, jUptimeNanos);
             }
         });
     }
@@ -796,8 +799,8 @@ public class InteractionJankMonitor {
         private Configuration(int i, View view, String str, long j, boolean z, Context context, SurfaceControl surfaceControl, boolean z2, Handler handler) {
             this.mCujType = i;
             this.mTag = str;
-            String generateSessionName = generateSessionName(Cuj.getNameOfCuj(i), str);
-            this.mSessionName = generateSessionName;
+            String strGenerateSessionName = generateSessionName(Cuj.getNameOfCuj(i), str);
+            this.mSessionName = strGenerateSessionName;
             this.mTimeout = j;
             this.mView = view;
             this.mSurfaceOnly = z;
@@ -808,7 +811,7 @@ public class InteractionJankMonitor {
             if (handler != null) {
                 this.mHandler = handler;
             } else if (z) {
-                Log.w(InteractionJankMonitor.TAG, "No UIThread provided for " + generateSessionName + " (surface only). Defaulting to app main thread.");
+                Log.w(InteractionJankMonitor.TAG, "No UIThread provided for " + strGenerateSessionName + " (surface only). Defaulting to app main thread.");
                 this.mHandler = context.getMainThreadHandler();
             } else {
                 this.mHandler = view.getHandler();
@@ -817,19 +820,24 @@ public class InteractionJankMonitor {
         }
 
         public static String generateSessionName(String str, String str2) {
-            boolean isEmpty = TextUtils.isEmpty(str2);
-            if (!isEmpty) {
+            boolean zIsEmpty = TextUtils.isEmpty(str2);
+            if (!zIsEmpty) {
                 int length = str.length();
                 if (str2.length() > 100 - length) {
                     str2 = str2.substring(0, 97 - length).concat(Session.TRUNCATE_STRING);
                 }
             }
-            if (!isEmpty) {
+            if (!zIsEmpty) {
                 return TextUtils.formatSimple("J<%s::%s>", str, str2);
             }
             return TextUtils.formatSimple("J<%s>", str);
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:36:0x009d A[PHI: r1
+          0x009d: PHI (r1v9 boolean) = (r1v3 boolean), (r1v13 boolean) binds: [B:23:0x004d, B:20:0x0041] A[DONT_GENERATE, DONT_INLINE]] */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         private void validate() {
             boolean z;
             boolean z2;
@@ -858,23 +866,21 @@ public class InteractionJankMonitor {
                 }
                 if (this.mHandler == null) {
                     sb.append("Must pass a UI thread handler when only a surface control is provided.");
+                } else {
+                    z4 = z;
                 }
-                z4 = z;
-            } else {
-                if (!hasValidView()) {
-                    View view = this.mView;
-                    if (view != null) {
-                        boolean isAttachedToWindow = view.isAttachedToWindow();
-                        z3 = this.mView.getViewRootImpl() != null;
-                        r3 = isAttachedToWindow;
-                        z2 = this.mView.getThreadedRenderer() != null;
-                    } else {
-                        z2 = false;
-                        z3 = false;
-                    }
-                    sb.append("invalid view: view=" + this.mView + ", attached=" + r3 + ", hasViewRoot=" + z3 + ", hasRenderer=" + z2);
+            } else if (!hasValidView()) {
+                View view = this.mView;
+                if (view != null) {
+                    boolean zIsAttachedToWindow = view.isAttachedToWindow();
+                    z3 = this.mView.getViewRootImpl() != null;
+                    z = zIsAttachedToWindow;
+                    z2 = this.mView.getThreadedRenderer() != null;
+                } else {
+                    z2 = false;
+                    z3 = false;
                 }
-                z4 = z;
+                sb.append("invalid view: view=" + this.mView + ", attached=" + z + ", hasViewRoot=" + z3 + ", hasRenderer=" + z2);
             }
             if (z4) {
                 throw new IllegalArgumentException(sb.toString());

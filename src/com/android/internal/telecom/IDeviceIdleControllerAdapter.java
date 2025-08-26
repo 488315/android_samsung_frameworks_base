@@ -44,9 +44,9 @@ public interface IDeviceIdleControllerAdapter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDeviceIdleControllerAdapter.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDeviceIdleControllerAdapter)) {
-                return (IDeviceIdleControllerAdapter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDeviceIdleControllerAdapter.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDeviceIdleControllerAdapter)) {
+                return (IDeviceIdleControllerAdapter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,12 +73,12 @@ public interface IDeviceIdleControllerAdapter extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                long readLong = parcel.readLong();
-                int readInt = parcel.readInt();
-                String readString2 = parcel.readString();
+                String string = parcel.readString();
+                long j = parcel.readLong();
+                int i3 = parcel.readInt();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                exemptAppTemporarilyForEvent(readString, readLong, readInt, readString2);
+                exemptAppTemporarilyForEvent(string, j, i3, string2);
                 parcel2.writeNoException();
                 return true;
             }
@@ -103,19 +103,19 @@ public interface IDeviceIdleControllerAdapter extends IInterface {
 
             @Override // com.android.internal.telecom.IDeviceIdleControllerAdapter
             public void exemptAppTemporarilyForEvent(String str, long j, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceIdleControllerAdapter.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceIdleControllerAdapter.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

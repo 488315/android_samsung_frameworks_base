@@ -15,7 +15,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class HomeStatusBarViewBinderImpl$bind$1$1$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ StatusBarVisibilityChangeListener $listener;
@@ -51,7 +50,7 @@ final class HomeStatusBarViewBinderImpl$bind$1$1$1$1 extends SuspendLambda imple
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     ((Boolean) obj2).getClass();
-                    CollapsedStatusBarFragment.AnonymousClass5 anonymousClass5 = (CollapsedStatusBarFragment.AnonymousClass5) StatusBarVisibilityChangeListener.this;
+                    CollapsedStatusBarFragment.AnonymousClass5 anonymousClass5 = (CollapsedStatusBarFragment.AnonymousClass5) statusBarVisibilityChangeListener;
                     anonymousClass5.getClass();
                     int i2 = StatusBarRootModernization.$r8$clinit;
                     int i3 = CollapsedStatusBarFragment.$r8$clinit;

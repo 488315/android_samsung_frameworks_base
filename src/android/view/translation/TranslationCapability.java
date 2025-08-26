@@ -115,20 +115,20 @@ public final class TranslationCapability implements Parcelable {
 
     TranslationCapability(Parcel parcel) {
         boolean z = (parcel.readByte() & 8) != 0;
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         TranslationSpec translationSpec = (TranslationSpec) parcel.readTypedObject(TranslationSpec.CREATOR);
         TranslationSpec translationSpec2 = (TranslationSpec) parcel.readTypedObject(TranslationSpec.CREATOR);
-        int readInt2 = parcel.readInt();
-        this.mState = readInt;
-        if (readInt != 1 && readInt != 2 && readInt != 3 && readInt != 4 && readInt != 1000) {
-            throw new IllegalArgumentException("state was " + readInt + " but must be one of: STATE_AVAILABLE_TO_DOWNLOAD(1), STATE_DOWNLOADING(2), STATE_ON_DEVICE(3), STATE_NOT_AVAILABLE(4), STATE_REMOVED_AND_AVAILABLE(1000)");
+        int i2 = parcel.readInt();
+        this.mState = i;
+        if (i != 1 && i != 2 && i != 3 && i != 4 && i != 1000) {
+            throw new IllegalArgumentException("state was " + i + " but must be one of: STATE_AVAILABLE_TO_DOWNLOAD(1), STATE_DOWNLOADING(2), STATE_ON_DEVICE(3), STATE_NOT_AVAILABLE(4), STATE_REMOVED_AND_AVAILABLE(1000)");
         }
         this.mSourceSpec = translationSpec;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) translationSpec);
         this.mTargetSpec = translationSpec2;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) translationSpec2);
         this.mUiTranslationEnabled = z;
-        this.mSupportedTranslationFlags = readInt2;
-        AnnotationValidations.validate((Class<? extends Annotation>) TranslationContext.TranslationFlag.class, (Annotation) null, readInt2);
+        this.mSupportedTranslationFlags = i2;
+        AnnotationValidations.validate((Class<? extends Annotation>) TranslationContext.TranslationFlag.class, (Annotation) null, i2);
     }
 }

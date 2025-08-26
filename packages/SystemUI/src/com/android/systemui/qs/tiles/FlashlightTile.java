@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
@@ -44,7 +45,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.sec.ims.IMSParameter;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FlashlightTile extends SQSTileImpl implements FlashlightController.FlashlightListener {
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -92,8 +92,8 @@ public class FlashlightTile extends SQSTileImpl implements FlashlightController.
                     } else {
                         FlashlightTile flashlightTile2 = FlashlightTile.this;
                         flashlightTile2.mIsLowBattery = true;
-                        boolean isEmergencyMode = flashlightTile2.mSettingsHelper.isEmergencyMode();
-                        if (((FlashlightControllerImpl) FlashlightTile.this.mFlashlightController).isEnabled() && !isEmergencyMode) {
+                        boolean zIsEmergencyMode = flashlightTile2.mSettingsHelper.isEmergencyMode();
+                        if (((FlashlightControllerImpl) FlashlightTile.this.mFlashlightController).isEnabled() && !zIsEmergencyMode) {
                             FlashlightTile flashlightTile3 = FlashlightTile.this;
                             flashlightTile3.showWarningMessage(flashlightTile3.mContext.getString(R.string.flash_light_turn_off_by_low_battery));
                             FlashlightTile flashlightTile4 = FlashlightTile.this;
@@ -143,7 +143,7 @@ public class FlashlightTile extends SQSTileImpl implements FlashlightController.
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final ArrayList getSearchWords() {
+    public final ArrayList getSearchWords() throws Resources.NotFoundException {
         ArrayList searchWords = super.getSearchWords();
         if (searchWords != null) {
             for (String str : this.mContext.getResources().getStringArray(R.array.quick_settings_flashlight_proper_noun_search_keywords)) {
@@ -170,7 +170,7 @@ public class FlashlightTile extends SQSTileImpl implements FlashlightController.
             handler.postDelayed(new Runnable() { // from class: com.android.systemui.qs.tiles.FlashlightTile$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FlashlightTile.this.handleClick(expandable);
+                    this.f$0.handleClick(expandable);
                 }
             }, 200L);
             return;
@@ -220,7 +220,7 @@ public class FlashlightTile extends SQSTileImpl implements FlashlightController.
         handler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.FlashlightTile$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                FlashlightTile.this.mSubscreenFlashlightController.finishFlashLightActivity();
+                this.f$0.mSubscreenFlashlightController.finishFlashLightActivity();
             }
         });
     }
@@ -234,9 +234,9 @@ public class FlashlightTile extends SQSTileImpl implements FlashlightController.
 
     @Override // com.android.systemui.qs.tileimpl.SQSTileImpl, com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleSecondaryClick(Expandable expandable) {
-        boolean isAvailable = ((FlashlightControllerImpl) this.mFlashlightController).isAvailable();
+        boolean zIsAvailable = ((FlashlightControllerImpl) this.mFlashlightController).isAvailable();
         SecFlashlightControllerImpl secFlashlightControllerImpl = this.mSecFlashlightController;
-        if (!isAvailable) {
+        if (!zIsAvailable) {
             if (secFlashlightControllerImpl.isThermalRestricted()) {
                 showWarningMessage(this.mContext.getString(R.string.unable_to_turn_on_by_high_temperature));
                 return;
@@ -271,11 +271,11 @@ public class FlashlightTile extends SQSTileImpl implements FlashlightController.
     public final void handleUpdateState(QSTile.State state, Object obj) {
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
         if (obj instanceof Boolean) {
-            boolean booleanValue = ((Boolean) obj).booleanValue();
-            if (booleanValue == booleanState.value) {
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+            if (zBooleanValue == booleanState.value) {
                 return;
             } else {
-                booleanState.value = booleanValue;
+                booleanState.value = zBooleanValue;
             }
         } else {
             booleanState.value = ((FlashlightControllerImpl) this.mFlashlightController).isEnabled();

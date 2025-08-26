@@ -1,6 +1,7 @@
 package com.android.systemui.facewidget.plugin;
 
 import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.util.Log;
@@ -13,11 +14,9 @@ import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.keyguardstatusview.PluginKeyguardStatusCallback;
 import com.android.systemui.shade.NotificationPanelViewController;
 import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda18;
-import com.android.systemui.shade.SecPanelSplitHelper;
+import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda7;
 import com.android.systemui.shade.domain.interactor.SecQuickSettingsAffordanceInteractor;
 import com.android.systemui.statusbar.KeyguardSecAffordanceView;
-import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
-import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
 import com.android.systemui.statusbar.phone.KeyguardSecAffordanceHelper;
 import com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
@@ -26,7 +25,6 @@ import com.samsung.systemui.splugins.noticenter.PluginNotiCenter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FaceWidgetKeyguardStatusCallbackWrapper implements PluginKeyguardStatusCallback {
     public NotificationPanelViewController.AnonymousClass10 mStatusCallback;
@@ -71,8 +69,7 @@ public class FaceWidgetKeyguardStatusCallbackWrapper implements PluginKeyguardSt
             notificationPanelViewController.getClass();
             Log.d("NotificationPanelView", "onMusicItemExpaned() isExpanded = " + z);
             notificationPanelViewController.mMediaNowBarExpandState = z ? 1 : 0;
-            NotificationStackScrollLayoutController notificationStackScrollLayoutController = notificationPanelViewController.mNotificationStackScrollLayoutController;
-            notificationStackScrollLayoutController.mMusicItemExpanded = z;
+            notificationPanelViewController.mNotificationStackScrollLayoutController.getClass();
             PluginLockStarManager pluginLockStarManager = (PluginLockStarManager) notificationPanelViewController.mPluginLockStarManagerLazy.get();
             if (pluginLockStarManager != null && pluginLockStarManager.mPluginLockStar != null) {
                 AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("onMediaNowBarExpandStateChanged: isExpanded= ", "LStar|PluginLockStarManager", z);
@@ -82,15 +79,16 @@ public class FaceWidgetKeyguardStatusCallbackWrapper implements PluginKeyguardSt
                     Log.e("LStar|PluginLockStarManager", "onMediaNowBarExpandStateChanged: error = " + th.getMessage());
                 }
             }
-            NotificationStackScrollLayout notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
-            if (notificationStackScrollLayout != null) {
-                notificationStackScrollLayout.animate().cancel();
-                if (z) {
-                    notificationStackScrollLayout.animate().setStartDelay(0L).setDuration(150L).alpha(0.0f).setInterpolator(InterpolatorUtils.SINE_OUT_60).start();
-                } else if (SecPanelSplitHelper.isEnabled()) {
-                    notificationStackScrollLayout.animate().setStartDelay(150L).setDuration(300L).alpha(1.0f).setInterpolator(InterpolatorUtils.SINE_OUT_60).start();
-                }
+            ValueAnimator valueAnimator = notificationPanelViewController.mStackScrollerAlphaAnimator;
+            if (valueAnimator != null) {
+                valueAnimator.cancel();
             }
+            ValueAnimator duration = ValueAnimator.ofFloat(z ? 1.0f : 0.0f, z ? 0.0f : 1.0f).setDuration(z ? 150L : 300L);
+            notificationPanelViewController.mStackScrollerAlphaAnimator = duration;
+            duration.setStartDelay(z ? 0L : 150L);
+            notificationPanelViewController.mStackScrollerAlphaAnimator.setInterpolator(InterpolatorUtils.SINE_OUT_60);
+            notificationPanelViewController.mStackScrollerAlphaAnimator.addUpdateListener(new NotificationPanelViewController$$ExternalSyntheticLambda7(notificationPanelViewController, 2));
+            notificationPanelViewController.mStackScrollerAlphaAnimator.start();
         }
     }
 
@@ -182,7 +180,7 @@ public class FaceWidgetKeyguardStatusCallbackWrapper implements PluginKeyguardSt
             ActivityStarter activityStarter = notificationPanelViewController.mActivityStarter;
             StatusBarKeyguardViewManager statusBarKeyguardViewManager = notificationPanelViewController.mStatusBarKeyguardViewManager;
             Objects.requireNonNull(statusBarKeyguardViewManager);
-            activityStarter.startPendingIntentDismissingKeyguard(pendingIntent, new NotificationPanelViewController$$ExternalSyntheticLambda18(statusBarKeyguardViewManager, 12));
+            activityStarter.startPendingIntentDismissingKeyguard(pendingIntent, new NotificationPanelViewController$$ExternalSyntheticLambda18(statusBarKeyguardViewManager, 15));
         }
     }
 

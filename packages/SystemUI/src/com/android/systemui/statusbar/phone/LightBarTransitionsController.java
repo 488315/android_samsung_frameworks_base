@@ -18,7 +18,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LightBarTransitionsController implements Dumpable {
     public final DarkIntensityApplier mApplier;
@@ -48,7 +47,6 @@ public class LightBarTransitionsController implements Dumpable {
     };
     public boolean iconColorChanged = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Callback implements CommandQueue.Callbacks, StatusBarStateController.StateListener {
         public final WeakReference mSelf;
 
@@ -117,14 +115,12 @@ public class LightBarTransitionsController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DarkIntensityApplier {
         void applyDarkIntensity(float f);
 
         int getTintAnimationDuration();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         LightBarTransitionsController create(DarkIntensityApplier darkIntensityApplier);
     }
@@ -146,7 +142,7 @@ public class LightBarTransitionsController implements Dumpable {
         GestureNavigationSettingsObserver gestureNavigationSettingsObserver = new GestureNavigationSettingsObserver(handler2, handler, context, new Runnable() { // from class: com.android.systemui.statusbar.phone.LightBarTransitionsController$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                LightBarTransitionsController lightBarTransitionsController = LightBarTransitionsController.this;
+                LightBarTransitionsController lightBarTransitionsController = this.f$0;
                 lightBarTransitionsController.mNavigationButtonsForcedVisible = lightBarTransitionsController.mGestureNavigationSettingsObserver.areNavigationButtonForcedVisible();
             }
         });
@@ -162,24 +158,24 @@ public class LightBarTransitionsController implements Dumpable {
                 valueAnimator.cancel();
             }
             this.mNextDarkIntensity = f;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mDarkIntensity, f);
-            this.mTintAnimator = ofFloat;
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.LightBarTransitionsController$$ExternalSyntheticLambda0
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mDarkIntensity, f);
+            this.mTintAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.LightBarTransitionsController$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                    LightBarTransitionsController lightBarTransitionsController = LightBarTransitionsController.this;
+                    LightBarTransitionsController lightBarTransitionsController = this.f$0;
                     lightBarTransitionsController.getClass();
-                    float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                    lightBarTransitionsController.mDarkIntensity = floatValue;
+                    float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                    lightBarTransitionsController.mDarkIntensity = fFloatValue;
                     boolean z = BasicRune.NAVBAR_ENABLED;
                     LightBarTransitionsController.DarkIntensityApplier darkIntensityApplier = lightBarTransitionsController.mApplier;
                     if (z) {
-                        darkIntensityApplier.applyDarkIntensity(floatValue);
+                        darkIntensityApplier.applyDarkIntensity(fFloatValue);
                     } else {
                         if (z) {
                             return;
                         }
-                        darkIntensityApplier.applyDarkIntensity(MathUtils.lerp(floatValue, 0.0f, lightBarTransitionsController.mDozeAmount));
+                        darkIntensityApplier.applyDarkIntensity(MathUtils.lerp(fFloatValue, 0.0f, lightBarTransitionsController.mDozeAmount));
                     }
                 }
             });

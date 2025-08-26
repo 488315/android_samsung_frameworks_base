@@ -141,13 +141,13 @@ public final class PathData extends BaseData implements Parcelable {
     }
 
     public static PathData fromCsvString(String str) {
-        List asList = Arrays.asList(str.split(","));
-        if (asList.size() != 10) {
+        List listAsList = Arrays.asList(str.split(","));
+        if (listAsList.size() != 10) {
             Log.w(TAG, "Invalid CSV string: " + str);
             return null;
         }
         try {
-            return new PathData((String) asList.get(0), Float.parseFloat((String) asList.get(4)), Integer.parseInt((String) asList.get(7)), Integer.parseInt((String) asList.get(6)), Float.parseFloat((String) asList.get(1)), Float.parseFloat((String) asList.get(2)), Float.parseFloat((String) asList.get(3)), Float.parseFloat((String) asList.get(5)), Integer.parseInt((String) asList.get(8)), (String) asList.get(9));
+            return new PathData((String) listAsList.get(0), Float.parseFloat((String) listAsList.get(4)), Integer.parseInt((String) listAsList.get(7)), Integer.parseInt((String) listAsList.get(6)), Float.parseFloat((String) listAsList.get(1)), Float.parseFloat((String) listAsList.get(2)), Float.parseFloat((String) listAsList.get(3)), Float.parseFloat((String) listAsList.get(5)), Integer.parseInt((String) listAsList.get(8)), (String) listAsList.get(9));
         } catch (Exception e) {
             Log.w(TAG, "Invalid CSV string: " + str);
             e.printStackTrace();

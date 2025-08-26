@@ -59,7 +59,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaProjectionAppSelectorActivity extends ChooserActivity implements MediaProjectionAppSelectorView, MediaProjectionAppSelectorResultHandler, LifecycleOwner {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -78,7 +77,6 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
     public boolean reviewGrantedConsentRequired;
     public boolean taskSelected;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -88,7 +86,6 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RecyclerViewExpandingAccessibilityDelegate extends RecyclerViewAccessibilityDelegate {
         public final ResolverActivity.AppListAccessibilityDelegate delegate;
 
@@ -105,7 +102,6 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScreenShareType {
         public static final /* synthetic */ ScreenShareType[] $VALUES;
         public static final ScreenShareType ScreenRecord;
@@ -136,7 +132,6 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -209,13 +204,13 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
             return viewGroup2;
         }
         ViewGroup viewGroup3 = (ViewGroup) KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0.m(viewGroup, R.layout.media_projection_recent_tasks, viewGroup, false);
-        View requireViewById = viewGroup3.requireViewById(R.id.media_projection_recent_tasks_container);
-        mediaProjectionRecentsViewController.setTaskHeightSize(requireViewById);
-        View requireViewById2 = viewGroup3.requireViewById(R.id.media_projection_recent_tasks_loader);
+        View viewRequireViewById = viewGroup3.requireViewById(R.id.media_projection_recent_tasks_container);
+        mediaProjectionRecentsViewController.setTaskHeightSize(viewRequireViewById);
+        View viewRequireViewById2 = viewGroup3.requireViewById(R.id.media_projection_recent_tasks_loader);
         androidx.recyclerview.widget.RecyclerView recyclerView = (androidx.recyclerview.widget.RecyclerView) viewGroup3.requireViewById(R.id.media_projection_recent_tasks_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(viewGroup.getContext(), 0, false));
         recyclerView.addItemDecoration(new HorizontalSpacerItemDecoration(viewGroup.getResources().getDimensionPixelOffset(R.dimen.media_projection_app_selector_recents_padding)));
-        MediaProjectionRecentsViewController.Views views2 = new MediaProjectionRecentsViewController.Views(viewGroup3, requireViewById, requireViewById2, recyclerView);
+        MediaProjectionRecentsViewController.Views views2 = new MediaProjectionRecentsViewController.Views(viewGroup3, viewRequireViewById, viewRequireViewById2, recyclerView);
         mediaProjectionRecentsViewController.views = views2;
         List list = mediaProjectionRecentsViewController.lastBoundData;
         if (list != null) {
@@ -227,11 +222,11 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
     public final ResolverListController createListController(UserHandle userHandle) {
         ResolverListController resolverListController;
         Function1 function1 = this.listControllerFactory;
-        return (function1 == null || (resolverListController = (ResolverListController) function1.mo779invoke(userHandle)) == null) ? super.createListController(userHandle) : resolverListController;
+        return (function1 == null || (resolverListController = (ResolverListController) function1.mo781invoke(userHandle)) == null) ? super.createListController(userHandle) : resolverListController;
     }
 
     public final AbstractMultiProfilePagerAdapter.MyUserIdProvider createMyUserIdProvider() {
-        return new AbstractMultiProfilePagerAdapter.MyUserIdProvider() { // from class: com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorActivity$createMyUserIdProvider$1
+        return new AbstractMultiProfilePagerAdapter.MyUserIdProvider() { // from class: com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorActivity.createMyUserIdProvider.1
             public final int getMyUserId() {
                 MediaProjectionAppSelectorComponent mediaProjectionAppSelectorComponent = MediaProjectionAppSelectorActivity.this.component;
                 if (mediaProjectionAppSelectorComponent == null) {
@@ -287,9 +282,9 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
         if (!getIntent().hasExtra("launched_from_host_uid")) {
             throw new IllegalStateException("MediaProjectionAppSelectorActivity should be provided with launched_from_host_uid extra");
         }
-        MediaProjectionAppSelectorComponent create = factory.create(userHandle, getIntent().getIntExtra("launched_from_host_uid", -1), getCallingPackage(), this, this, bundle == null);
-        this.component = create;
-        Iterator<T> it = ((DaggerReferenceGlobalRootComponent.MediaProjectionAppSelectorComponentImpl) create).getLifecycleObservers().iterator();
+        MediaProjectionAppSelectorComponent mediaProjectionAppSelectorComponentCreate = factory.create(userHandle, getIntent().getIntExtra("launched_from_host_uid", -1), getCallingPackage(), this, this, bundle == null);
+        this.component = mediaProjectionAppSelectorComponentCreate;
+        Iterator<T> it = ((DaggerReferenceGlobalRootComponent.MediaProjectionAppSelectorComponentImpl) mediaProjectionAppSelectorComponentCreate).getLifecycleObservers().iterator();
         while (it.hasNext()) {
             this.lifecycle.addObserver((DefaultLifecycleObserver) it.next());
         }
@@ -373,20 +368,20 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
             }
             imageView.setImageResource(i5);
             ScreenShareType screenShareType3 = getScreenShareType();
-            Integer valueOf = (screenShareType3 != null ? WhenMappings.$EnumSwitchMapping$0[screenShareType3.ordinal()] : -1) == 3 ? Integer.valueOf(R.color.screenrecord_icon_color) : null;
-            if (valueOf != null) {
-                imageView.setColorFilter(getResources().getColor(valueOf.intValue(), getTheme()));
+            Integer numValueOf = (screenShareType3 != null ? WhenMappings.$EnumSwitchMapping$0[screenShareType3.ordinal()] : -1) == 3 ? Integer.valueOf(R.color.screenrecord_icon_color) : null;
+            if (numValueOf != null) {
+                imageView.setColorFilter(getResources().getColor(numValueOf.intValue(), getTheme()));
             }
         }
-        ResolverDrawerLayout requireViewById = requireViewById(android.R.id.date_picker_year_picker);
+        ResolverDrawerLayout resolverDrawerLayoutRequireViewById = requireViewById(android.R.id.date_picker_year_picker);
         int count = ((ChooserActivity) this).mMultiProfilePagerAdapter.getCount();
         for (int i6 = 0; i6 < count; i6++) {
-            RecyclerView findViewById = ((ChooserActivity) this).mMultiProfilePagerAdapter.getItem(i6).rootView.findViewById(android.R.id.switch_old);
-            if (findViewById == null || !(findViewById instanceof RecyclerView)) {
+            RecyclerView recyclerViewFindViewById = ((ChooserActivity) this).mMultiProfilePagerAdapter.getItem(i6).rootView.findViewById(android.R.id.sync);
+            if (recyclerViewFindViewById == null || !(recyclerViewFindViewById instanceof RecyclerView)) {
                 Log.wtf("MediaProjectionAppSelectorActivity", "MediaProjection only supports RecyclerView");
             } else {
-                RecyclerView recyclerView = findViewById;
-                recyclerView.setAccessibilityDelegate(new RecyclerViewExpandingAccessibilityDelegate(requireViewById, recyclerView));
+                RecyclerView recyclerView = recyclerViewFindViewById;
+                recyclerView.setAccessibilityDelegate(new RecyclerViewExpandingAccessibilityDelegate(resolverDrawerLayoutRequireViewById, recyclerView));
             }
         }
     }
@@ -459,17 +454,17 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
             bundle.putParcelable("capture_region", mediaProjectionCaptureTarget);
             resultReceiver.send(-1, bundle);
         } else {
-            IMediaProjection asInterface = IMediaProjection.Stub.asInterface(getIntent().getIBinderExtra("android.media.projection.extra.EXTRA_MEDIA_PROJECTION"));
-            asInterface.setLaunchCookie(launchCookie);
-            asInterface.setTaskId(i);
+            IMediaProjection iMediaProjectionAsInterface = IMediaProjection.Stub.asInterface(getIntent().getIBinderExtra("android.media.projection.extra.EXTRA_MEDIA_PROJECTION"));
+            iMediaProjectionAsInterface.setLaunchCookie(launchCookie);
+            iMediaProjectionAsInterface.setTaskId(i);
             Intent intent = new Intent();
-            intent.putExtra("android.media.projection.extra.EXTRA_MEDIA_PROJECTION", asInterface.asBinder());
+            intent.putExtra("android.media.projection.extra.EXTRA_MEDIA_PROJECTION", iMediaProjectionAsInterface.asBinder());
             setResult(-1, intent);
             setForceSendResultForMediaProjection();
             MediaProjectionServiceHelper.Companion companion = MediaProjectionServiceHelper.Companion;
             boolean z = this.reviewGrantedConsentRequired;
             companion.getClass();
-            MediaProjectionServiceHelper.Companion.setReviewedConsentIfNeeded(2, z, asInterface);
+            MediaProjectionServiceHelper.Companion.setReviewedConsentIfNeeded(2, z, iMediaProjectionAsInterface);
         }
         finish();
     }
@@ -502,35 +497,35 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
 
     /* JADX WARN: Multi-variable type inference failed */
     public final void startSelected(int i, boolean z, boolean z2) {
-        String str;
-        final TargetInfo targetInfoForPosition = ((ChooserActivity) this).mChooserMultiProfilePagerAdapter.getActiveListAdapter().targetInfoForPosition(i, z2);
-        if (targetInfoForPosition == null || (targetInfoForPosition instanceof NotSelectableTargetInfo)) {
+        String packageName;
+        final TargetInfo targetInfoTargetInfoForPosition = ((ChooserActivity) this).mChooserMultiProfilePagerAdapter.getActiveListAdapter().targetInfoForPosition(i, z2);
+        if (targetInfoTargetInfoForPosition == null || (targetInfoTargetInfoForPosition instanceof NotSelectableTargetInfo)) {
             return;
         }
-        Intent intent = new Intent(targetInfoForPosition.getResolvedIntent());
+        Intent intent = new Intent(targetInfoTargetInfoForPosition.getResolvedIntent());
         intent.setFlags(intent.getFlags() | 268435456);
         intent.setFlags(intent.getFlags() & (-33554433));
         if (BasicRune.POPUPUI_FOLDERBLE_TYPE_FLIP && !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
             ComponentName component = intent.getComponent();
-            if (component == null || (str = component.getPackageName()) == null) {
-                str = "";
+            if (component == null || (packageName = component.getPackageName()) == null) {
+                packageName = "";
             }
             PendingIntent activity = PendingIntent.getActivity(this, 0, intent, 67108864);
-            if (!this.activityTaskManagerService.isPackageEnabledForCoverLauncher(str, UserHandle.semGetMyUserId())) {
+            if (!this.activityTaskManagerService.isPackageEnabledForCoverLauncher(packageName, UserHandle.semGetMyUserId())) {
                 this.pluginAODManager.showCoverToast(activity, intent);
             }
         }
         final ActivityOptions.LaunchCookie launchCookie = new ActivityOptions.LaunchCookie("media_projection_launch_token");
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setLaunchCookie(launchCookie);
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setLaunchCookie(launchCookie);
         UserHandle userHandle = ((ChooserActivity) this).mMultiProfilePagerAdapter.getActiveListAdapter().getUserHandle();
         AsyncActivityLauncher asyncActivityLauncher = this.activityLauncher;
         userHandle.getClass();
-        asyncActivityLauncher.startActivityAsUser(intent, userHandle, makeBasic.toBundle(), new Function1() { // from class: com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorActivity$$ExternalSyntheticLambda0
+        asyncActivityLauncher.startActivityAsUser(intent, userHandle, activityOptionsMakeBasic.toBundle(), new Function1() { // from class: com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorActivity$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                TargetInfo targetInfo = targetInfoForPosition;
+            public final Object mo781invoke(Object obj) {
+                TargetInfo targetInfo = targetInfoTargetInfoForPosition;
                 ActivityOptions.LaunchCookie launchCookie2 = launchCookie;
                 int i2 = MediaProjectionAppSelectorActivity.$r8$clinit;
                 ComponentName resolvedComponentName = targetInfo.getResolvedComponentName();
@@ -543,7 +538,7 @@ public final class MediaProjectionAppSelectorActivity extends ChooserActivity im
                 return Unit.INSTANCE;
             }
         });
-        targetInfoForPosition.isSuspended();
+        targetInfoTargetInfoForPosition.isSuspended();
     }
 
     public MediaProjectionAppSelectorActivity(IActivityTaskManager iActivityTaskManager, PluginAODManager pluginAODManager, MediaProjectionAppSelectorComponent.Factory factory, AsyncActivityLauncher asyncActivityLauncher, ActivityManagerWrapper activityManagerWrapper) {

@@ -17,7 +17,6 @@ import com.google.android.material.internal.ThemeEnforcement;
 import com.google.android.material.internal.ViewUtils;
 import com.google.android.material.theme.overlay.MaterialThemeOverlay;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialSwitch extends SwitchCompat {
     public static final int[] STATE_SET_WITH_ICON = {R.attr.state_with_icon};
@@ -51,21 +50,21 @@ public class MaterialSwitch extends SwitchCompat {
 
     @Override // androidx.appcompat.widget.SwitchCompat, android.widget.CompoundButton, android.widget.TextView, android.view.View
     public final int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
         if (this.thumbIconDrawable != null) {
-            CompoundButton.mergeDrawableStates(onCreateDrawableState, STATE_SET_WITH_ICON);
+            CompoundButton.mergeDrawableStates(iArrOnCreateDrawableState, STATE_SET_WITH_ICON);
         }
-        int[] iArr = new int[onCreateDrawableState.length];
+        int[] iArr = new int[iArrOnCreateDrawableState.length];
         int i2 = 0;
-        for (int i3 : onCreateDrawableState) {
+        for (int i3 : iArrOnCreateDrawableState) {
             if (i3 != 16842912) {
                 iArr[i2] = i3;
                 i2++;
             }
         }
         this.currentStateUnchecked = iArr;
-        this.currentStateChecked = DrawableUtils.getCheckedState(onCreateDrawableState);
-        return onCreateDrawableState;
+        this.currentStateChecked = DrawableUtils.getCheckedState(iArrOnCreateDrawableState);
+        return iArrOnCreateDrawableState;
     }
 
     public final void updateDrawableTints() {
@@ -113,64 +112,64 @@ public class MaterialSwitch extends SwitchCompat {
         int[] iArr = R$styleable.MaterialSwitch;
         ThemeEnforcement.checkCompatibleTheme(context2, attributeSet, i, R.style.Widget_Material3_CompoundButton_MaterialSwitch);
         ThemeEnforcement.checkTextAppearance(context2, attributeSet, iArr, i, R.style.Widget_Material3_CompoundButton_MaterialSwitch, new int[0]);
-        TintTypedArray obtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context2, attributeSet, iArr, i, R.style.Widget_Material3_CompoundButton_MaterialSwitch);
-        this.thumbIconDrawable = obtainStyledAttributes.getDrawable(0);
-        int dimensionPixelSize = obtainStyledAttributes.mWrapped.getDimensionPixelSize(1, -1);
-        ColorStateList colorStateList3 = obtainStyledAttributes.getColorStateList(2);
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context2, attributeSet, iArr, i, R.style.Widget_Material3_CompoundButton_MaterialSwitch);
+        this.thumbIconDrawable = tintTypedArrayObtainStyledAttributes.getDrawable(0);
+        int dimensionPixelSize = tintTypedArrayObtainStyledAttributes.mWrapped.getDimensionPixelSize(1, -1);
+        ColorStateList colorStateList3 = tintTypedArrayObtainStyledAttributes.getColorStateList(2);
         this.thumbIconTintList = colorStateList3;
-        int i2 = obtainStyledAttributes.mWrapped.getInt(3, -1);
+        int i2 = tintTypedArrayObtainStyledAttributes.mWrapped.getInt(3, -1);
         PorterDuff.Mode mode = PorterDuff.Mode.SRC_IN;
-        PorterDuff.Mode parseTintMode = ViewUtils.parseTintMode(i2, mode);
-        this.trackDecorationDrawable = obtainStyledAttributes.getDrawable(4);
-        ColorStateList colorStateList4 = obtainStyledAttributes.getColorStateList(5);
+        PorterDuff.Mode tintMode = ViewUtils.parseTintMode(i2, mode);
+        this.trackDecorationDrawable = tintTypedArrayObtainStyledAttributes.getDrawable(4);
+        ColorStateList colorStateList4 = tintTypedArrayObtainStyledAttributes.getColorStateList(5);
         this.trackDecorationTintList = colorStateList4;
-        PorterDuff.Mode parseTintMode2 = ViewUtils.parseTintMode(obtainStyledAttributes.mWrapped.getInt(6, -1), mode);
-        obtainStyledAttributes.recycle();
+        PorterDuff.Mode tintMode2 = ViewUtils.parseTintMode(tintTypedArrayObtainStyledAttributes.mWrapped.getInt(6, -1), mode);
+        tintTypedArrayObtainStyledAttributes.recycle();
         invalidate();
         this.thumbDrawable = DrawableUtils.createTintableMutatedDrawableIfNeeded(this.thumbDrawable, colorStateList, this.mThumbTintMode);
-        this.thumbIconDrawable = DrawableUtils.createTintableMutatedDrawableIfNeeded(this.thumbIconDrawable, colorStateList3, parseTintMode);
+        this.thumbIconDrawable = DrawableUtils.createTintableMutatedDrawableIfNeeded(this.thumbIconDrawable, colorStateList3, tintMode);
         updateDrawableTints();
-        Drawable compositeTwoLayeredDrawable = DrawableUtils.compositeTwoLayeredDrawable(this.thumbDrawable, this.thumbIconDrawable, dimensionPixelSize, dimensionPixelSize);
+        Drawable drawableCompositeTwoLayeredDrawable = DrawableUtils.compositeTwoLayeredDrawable(this.thumbDrawable, this.thumbIconDrawable, dimensionPixelSize, dimensionPixelSize);
         Drawable drawable = this.mThumbDrawable;
         if (drawable != null) {
             drawable.setCallback(null);
         }
-        this.mThumbDrawable = compositeTwoLayeredDrawable;
-        if (compositeTwoLayeredDrawable != null) {
-            compositeTwoLayeredDrawable.setCallback(this);
+        this.mThumbDrawable = drawableCompositeTwoLayeredDrawable;
+        if (drawableCompositeTwoLayeredDrawable != null) {
+            drawableCompositeTwoLayeredDrawable.setCallback(this);
         }
         requestLayout();
         refreshDrawableState();
         this.trackDrawable = DrawableUtils.createTintableMutatedDrawableIfNeeded(this.trackDrawable, colorStateList2, this.mTrackTintMode);
-        this.trackDecorationDrawable = DrawableUtils.createTintableMutatedDrawableIfNeeded(this.trackDecorationDrawable, colorStateList4, parseTintMode2);
+        this.trackDecorationDrawable = DrawableUtils.createTintableMutatedDrawableIfNeeded(this.trackDecorationDrawable, colorStateList4, tintMode2);
         updateDrawableTints();
-        Drawable drawable2 = this.trackDrawable;
-        if (drawable2 != null && this.trackDecorationDrawable != null) {
-            drawable2 = new LayerDrawable(new Drawable[]{this.trackDrawable, this.trackDecorationDrawable});
-        } else if (drawable2 == null) {
-            drawable2 = this.trackDecorationDrawable;
+        Drawable layerDrawable = this.trackDrawable;
+        if (layerDrawable != null && this.trackDecorationDrawable != null) {
+            layerDrawable = new LayerDrawable(new Drawable[]{this.trackDrawable, this.trackDecorationDrawable});
+        } else if (layerDrawable == null) {
+            layerDrawable = this.trackDecorationDrawable;
         }
-        if (drawable2 != null) {
-            drawable2.getIntrinsicWidth();
+        if (layerDrawable != null) {
+            layerDrawable.getIntrinsicWidth();
             requestLayout();
         }
-        Drawable drawable3 = this.mTrackDrawable;
-        if (drawable3 != null) {
-            drawable3.setCallback(null);
-        }
-        this.mTrackDrawable = drawable2;
+        Drawable drawable2 = this.mTrackDrawable;
         if (drawable2 != null) {
-            Drawable.ConstantState constantState = drawable2.getConstantState();
+            drawable2.setCallback(null);
+        }
+        this.mTrackDrawable = layerDrawable;
+        if (layerDrawable != null) {
+            Drawable.ConstantState constantState = layerDrawable.getConstantState();
             if (constantState != null) {
                 this.mTrackOnDrawable = constantState.newDrawable();
                 this.mTrackOffDrawable = constantState.newDrawable();
             } else {
-                this.mTrackOnDrawable = drawable2;
-                this.mTrackOffDrawable = drawable2;
+                this.mTrackOnDrawable = layerDrawable;
+                this.mTrackOffDrawable = layerDrawable;
             }
             this.mTrackOnDrawable.setState(new int[]{android.R.attr.state_enabled, android.R.attr.state_checked});
             this.mTrackOffDrawable.setState(new int[]{android.R.attr.state_enabled, -16842912});
-            drawable2.setCallback(this);
+            layerDrawable.setCallback(this);
         }
         requestLayout();
     }

@@ -6,7 +6,6 @@ import android.view.ViewTreeObserver;
 import androidx.constraintlayout.helper.widget.Layer;
 import kotlin.collections.ArraysKt___ArraysKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AodBurnInLayer extends Layer {
     public final AodBurnInLayer$_predrawListener$1 _predrawListener;
@@ -23,13 +22,13 @@ public final class AodBurnInLayer extends Layer {
         this._predrawListener = new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.AodBurnInLayer$_predrawListener$1
             @Override // android.view.ViewTreeObserver.OnPreDrawListener
             public final boolean onPreDraw() {
-                AodBurnInLayer aodBurnInLayer = AodBurnInLayer.this;
+                AodBurnInLayer aodBurnInLayer = this.this$0;
                 super/*androidx.constraintlayout.helper.widget.Layer*/.setScaleX(aodBurnInLayer._scaleX);
-                AodBurnInLayer aodBurnInLayer2 = AodBurnInLayer.this;
+                AodBurnInLayer aodBurnInLayer2 = this.this$0;
                 super/*androidx.constraintlayout.helper.widget.Layer*/.setScaleY(aodBurnInLayer2._scaleY);
-                AodBurnInLayer aodBurnInLayer3 = AodBurnInLayer.this;
+                AodBurnInLayer aodBurnInLayer3 = this.this$0;
                 super/*androidx.constraintlayout.helper.widget.Layer*/.setTranslationX(aodBurnInLayer3._translationX);
-                AodBurnInLayer aodBurnInLayer4 = AodBurnInLayer.this;
+                AodBurnInLayer aodBurnInLayer4 = this.this$0;
                 super/*androidx.constraintlayout.helper.widget.Layer*/.setTranslationY(aodBurnInLayer4._translationY);
                 return true;
             }

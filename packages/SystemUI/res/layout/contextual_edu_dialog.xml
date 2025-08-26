@@ -3,5 +3,5 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <ImageView android:id="@id/edu_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@null" android:importantForAccessibility="no" android:paddingHorizontal="16.0dip" />
-    <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@android:color/search_url_text_material_dark" android:ellipsize="end" android:id="@id/edu_message" android:background="@color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="280.0dip" android:fontFamily="google-sans-medium" />
+    <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@android:color/material_grey_900" android:ellipsize="end" android:id="@id/edu_message" android:background="@color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="280.0dip" android:fontFamily="google-sans-medium" />
 </LinearLayout>

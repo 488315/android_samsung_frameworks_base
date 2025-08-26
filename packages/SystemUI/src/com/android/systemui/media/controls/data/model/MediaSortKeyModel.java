@@ -7,7 +7,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaSortKeyModel {
     public final boolean active;
@@ -36,11 +35,11 @@ public final class MediaSortKeyModel {
 
     public final int hashCode() {
         Boolean bool = this.isPlaying;
-        int m = MoveResult$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.playbackLocation, (bool == null ? 0 : bool.hashCode()) * 31, 31), 31, this.active), 31, this.isResume), 31, this.lastActive);
+        int iM = MoveResult$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.playbackLocation, (bool == null ? 0 : bool.hashCode()) * 31, 31), 31, this.active), 31, this.isResume), 31, this.lastActive);
         String str = this.notificationKey;
-        int m2 = MoveResult$$ExternalSyntheticOutline0.m((m + (str == null ? 0 : str.hashCode())) * 31, 31, this.updateTime);
+        int iM2 = MoveResult$$ExternalSyntheticOutline0.m((iM + (str == null ? 0 : str.hashCode())) * 31, 31, this.updateTime);
         InstanceId instanceId = this.instanceId;
-        return m2 + (instanceId != null ? instanceId.hashCode() : 0);
+        return iM2 + (instanceId != null ? instanceId.hashCode() : 0);
     }
 
     public final String toString() {

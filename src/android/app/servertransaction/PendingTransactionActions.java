@@ -98,16 +98,16 @@ public class PendingTransactionActions {
             try {
                 ActivityClient.getInstance().activityStopped(this.mActivity.token, this.mState, this.mPersistentState, this.mDescription);
             } catch (RuntimeException e) {
-                String collectBundleStates = collectBundleStates();
+                String strCollectBundleStates = collectBundleStates();
                 if (e.getCause() instanceof TransactionTooLargeException) {
-                    RuntimeException runtimeException = new RuntimeException(e.getMessage() + ShaderAssembler.NEWLINE + collectBundleStates, e.getCause());
+                    RuntimeException runtimeException = new RuntimeException(e.getMessage() + ShaderAssembler.NEWLINE + strCollectBundleStates, e.getCause());
                     if (this.mActivity.packageInfo.getTargetSdkVersion() < 24) {
                         Log.e(TAG, "App sent too much data in instance state, so it was ignored", runtimeException);
                         return;
                     }
                     throw runtimeException;
                 }
-                Log.w(TAG, collectBundleStates);
+                Log.w(TAG, strCollectBundleStates);
                 throw e;
             }
         }

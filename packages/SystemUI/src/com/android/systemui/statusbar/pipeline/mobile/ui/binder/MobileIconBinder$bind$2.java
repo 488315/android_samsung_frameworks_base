@@ -23,7 +23,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlow;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileIconBinder$bind$2 extends SuspendLambda implements Function3 {
     final /* synthetic */ Ref$BooleanRef $isCollecting;
@@ -33,7 +32,6 @@ public final class MobileIconBinder$bind$2 extends SuspendLambda implements Func
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.pipeline.mobile.ui.binder.MobileIconBinder$bind$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Ref$BooleanRef $isCollecting;
@@ -43,26 +41,25 @@ public final class MobileIconBinder$bind$2 extends SuspendLambda implements Func
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.pipeline.mobile.ui.binder.MobileIconBinder$bind$2$1$1, reason: invalid class name and collision with other inner class name */
-        final class C03611 extends SuspendLambda implements Function2 {
+        final class C05621 extends SuspendLambda implements Function2 {
             final /* synthetic */ LocationBasedMobileViewModel $viewModel;
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C03611(LocationBasedMobileViewModel locationBasedMobileViewModel, Continuation continuation) {
+            public C05621(LocationBasedMobileViewModel locationBasedMobileViewModel, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = locationBasedMobileViewModel;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C03611(this.$viewModel, continuation);
+                return new C05621(this.$viewModel, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C03611) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C05621) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -86,7 +83,6 @@ public final class MobileIconBinder$bind$2 extends SuspendLambda implements Func
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.pipeline.mobile.ui.binder.MobileIconBinder$bind$2$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ LocationBasedMobileViewModel $viewModel;
@@ -162,7 +158,7 @@ public final class MobileIconBinder$bind$2 extends SuspendLambda implements Func
                     CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
                     this.$logger.logCollectionStarted(this.$view, this.$viewModel);
                     this.$isCollecting.element = true;
-                    CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C03611(this.$viewModel, null), 7);
+                    CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C05621(this.$viewModel, null), 7);
                     CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(this.$viewModel, null), 7);
                     this.label = 1;
                     if (DelayKt.awaitCancellation(this) == coroutineSingletons) {

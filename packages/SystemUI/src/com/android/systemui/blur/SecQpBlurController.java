@@ -1,6 +1,7 @@
 package com.android.systemui.blur;
 
 import android.animation.ValueAnimator;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.util.MathUtils;
 import android.view.Choreographer;
@@ -12,13 +13,18 @@ import com.android.systemui.blur.data.repository.SecCapturedBlurRepositoryImpl;
 import com.android.systemui.blur.di.SecPanelBackgroundBinding;
 import com.android.systemui.blur.di.SecPanelBlurBinding;
 import com.android.systemui.blur.di.SecPanelCapturedBlurBinding;
+import com.android.systemui.blur.domain.interactor.SecBlurCustomColorInteractor;
+import com.android.systemui.blur.domain.interactor.SecBlurSettingsInteractor;
 import com.android.systemui.blur.domain.interactor.SecCapturedBlurBitmapGenerator;
 import com.android.systemui.blur.ui.viewbinder.SecCapturedBlurContainerBinder;
 import com.android.systemui.blur.ui.viewbinder.SecPanelBackgroundBinder;
+import com.android.systemui.common.ui.domain.interactor.ConfigurationInteractor;
+import com.android.systemui.common.ui.domain.interactor.ConfigurationInteractorImpl;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.logging.PanelScreenShotLogger;
 import com.android.systemui.shade.NotificationShadeWindowView;
 import com.android.systemui.shade.SecPanelSplitHelper;
+import com.android.systemui.shade.ShadeControllerImpl;
 import com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor;
 import com.android.systemui.statusbar.StatusBarState;
 import com.android.systemui.statusbar.phone.SecPanelBackground;
@@ -26,7 +32,9 @@ import com.android.systemui.statusbar.phone.UnlockedScreenOffAnimationController
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import dagger.Lazy;
 import java.util.ArrayList;
+import kotlin.Pair;
 import kotlin.ResultKt;
+import kotlin.Triple;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -43,12 +51,12 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecQpBlurController implements PanelScreenShotLogger.LogProvider {
     public static final String TAG;
     public float animatedFraction;
     public final Choreographer choreographer;
+    public final Flow configurationChanged;
     public final boolean isBlurAnimatorRunning;
     public boolean isBouncerShowing;
     public boolean isMirrorVisible;
@@ -57,24 +65,24 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
     public final SecPanelBackgroundBinding panelBackgroundBinding;
     public final SecPanelBlurBinding panelBlurBinding;
     public float panelExpandedFraction;
+    public final SecBlurCustomColorInteractor secBlurCustomColorInteractor;
     public final SecCapturedBlurBitmapGenerator secCapturedBlurBitmapGenerator;
     public final SecPanelExpansionStateInteractor secPanelExpansionStateInteractor;
+    public final SecBlurSettingsInteractor settingsInteractor;
+    public final ShadeControllerImpl shadeController;
     public final Function1 updateBlurCallback = new SecQpBlurController$updateBlurCallback$1(this);
     public ValueAnimator blurAnimator = ValueAnimator.ofFloat(0.0f, 1.0f);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.blur.SecQpBlurController$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.blur.SecQpBlurController$1$1, reason: invalid class name and collision with other inner class name */
-        final class C00501 extends SuspendLambda implements Function2 {
+        final class C01011 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ SecQpBlurController this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.blur.SecQpBlurController$1$1$2, reason: invalid class name */
             final class AnonymousClass2 extends SuspendLambda implements Function2 {
                 /* synthetic */ float F$0;
@@ -119,19 +127,19 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
             }
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C00501(SecQpBlurController secQpBlurController, Continuation continuation) {
+            public C01011(SecQpBlurController secQpBlurController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = secQpBlurController;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C00501(this.this$0, continuation);
+                return new C01011(this.this$0, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C00501) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C01011) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -144,7 +152,6 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
                     final StateFlowImpl stateFlowImpl = secQpBlurController.secPanelExpansionStateInteractor.lockscreenShadeFraction;
                     Flow flow = new Flow() { // from class: com.android.systemui.blur.SecQpBlurController$1$1$invokeSuspend$$inlined$filterNot$1
 
-                        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                         /* renamed from: com.android.systemui.blur.SecQpBlurController$1$1$invokeSuspend$$inlined$filterNot$1$2, reason: invalid class name */
                         public final class AnonymousClass2 implements FlowCollector {
                             public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -174,72 +181,48 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
                                 this.this$0 = secQpBlurController;
                             }
 
-                            /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                            /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                            /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             /*
                                 Code decompiled incorrectly, please refer to instructions dump.
-                                To view partially-correct code enable 'Show inconsistent code' option in preferences
                             */
-                            public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                                /*
-                                    r4 = this;
-                                    boolean r0 = r6 instanceof com.android.systemui.blur.SecQpBlurController$1$1$invokeSuspend$$inlined$filterNot$1.AnonymousClass2.AnonymousClass1
-                                    if (r0 == 0) goto L13
-                                    r0 = r6
-                                    com.android.systemui.blur.SecQpBlurController$1$1$invokeSuspend$$inlined$filterNot$1$2$1 r0 = (com.android.systemui.blur.SecQpBlurController$1$1$invokeSuspend$$inlined$filterNot$1.AnonymousClass2.AnonymousClass1) r0
-                                    int r1 = r0.label
-                                    r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                                    r3 = r1 & r2
-                                    if (r3 == 0) goto L13
-                                    int r1 = r1 - r2
-                                    r0.label = r1
-                                    goto L18
-                                L13:
-                                    com.android.systemui.blur.SecQpBlurController$1$1$invokeSuspend$$inlined$filterNot$1$2$1 r0 = new com.android.systemui.blur.SecQpBlurController$1$1$invokeSuspend$$inlined$filterNot$1$2$1
-                                    r0.<init>(r6)
-                                L18:
-                                    java.lang.Object r6 = r0.result
-                                    kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                    int r2 = r0.label
-                                    r3 = 1
-                                    if (r2 == 0) goto L2f
-                                    if (r2 != r3) goto L27
-                                    kotlin.ResultKt.throwOnFailure(r6)
-                                    goto L4e
-                                L27:
-                                    java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                                    java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                                    r4.<init>(r5)
-                                    throw r4
-                                L2f:
-                                    kotlin.ResultKt.throwOnFailure(r6)
-                                    r6 = r5
-                                    java.lang.Number r6 = (java.lang.Number) r6
-                                    r6.floatValue()
-                                    com.android.systemui.blur.SecQpBlurController r6 = r4.this$0
-                                    com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor r6 = r6.secPanelExpansionStateInteractor
-                                    int r6 = r6.getstatusBarState()
-                                    if (r6 == r3) goto L43
-                                    goto L4e
-                                L43:
-                                    r0.label = r3
-                                    kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                                    java.lang.Object r4 = r4.emit(r5, r0)
-                                    if (r4 != r1) goto L4e
-                                    return r1
-                                L4e:
-                                    kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                                    return r4
-                                */
-                                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.blur.SecQpBlurController$1$1$invokeSuspend$$inlined$filterNot$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                            public final Object emit(Object obj, Continuation continuation) {
+                                AnonymousClass1 anonymousClass1;
+                                if (continuation instanceof AnonymousClass1) {
+                                    anonymousClass1 = (AnonymousClass1) continuation;
+                                    int i = anonymousClass1.label;
+                                    if ((i & Integer.MIN_VALUE) != 0) {
+                                        anonymousClass1.label = i - Integer.MIN_VALUE;
+                                    } else {
+                                        anonymousClass1 = new AnonymousClass1(continuation);
+                                    }
+                                }
+                                Object obj2 = anonymousClass1.result;
+                                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                                int i2 = anonymousClass1.label;
+                                if (i2 == 0) {
+                                    ResultKt.throwOnFailure(obj2);
+                                    ((Number) obj).floatValue();
+                                    if (this.this$0.secPanelExpansionStateInteractor.getstatusBarState() == 1) {
+                                        anonymousClass1.label = 1;
+                                        if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                            return coroutineSingletons;
+                                        }
+                                    }
+                                } else {
+                                    if (i2 != 1) {
+                                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                    }
+                                    ResultKt.throwOnFailure(obj2);
+                                }
+                                return Unit.INSTANCE;
                             }
                         }
 
                         @Override // kotlinx.coroutines.flow.Flow
                         public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                            Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, secQpBlurController), continuation);
-                            return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                            Object objCollect = stateFlowImpl.collect(new AnonymousClass2(flowCollector, secQpBlurController), continuation);
+                            return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                         }
                     };
                     AnonymousClass2 anonymousClass2 = new AnonymousClass2(this.this$0, null);
@@ -257,35 +240,33 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.blur.SecQpBlurController$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ SecQpBlurController this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.blur.SecQpBlurController$1$2$2, reason: invalid class name and collision with other inner class name */
-            final class C00512 extends SuspendLambda implements Function2 {
+            final class C01022 extends SuspendLambda implements Function2 {
                 /* synthetic */ float F$0;
                 int label;
                 final /* synthetic */ SecQpBlurController this$0;
 
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                public C00512(SecQpBlurController secQpBlurController, Continuation continuation) {
+                public C01022(SecQpBlurController secQpBlurController, Continuation continuation) {
                     super(2, continuation);
                     this.this$0 = secQpBlurController;
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 public final Continuation create(Object obj, Continuation continuation) {
-                    C00512 c00512 = new C00512(this.this$0, continuation);
-                    c00512.F$0 = ((Number) obj).floatValue();
-                    return c00512;
+                    C01022 c01022 = new C01022(this.this$0, continuation);
+                    c01022.F$0 = ((Number) obj).floatValue();
+                    return c01022;
                 }
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
-                    return ((C00512) create(Float.valueOf(((Number) obj).floatValue()), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                    return ((C01022) create(Float.valueOf(((Number) obj).floatValue()), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -334,7 +315,6 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
                     final StateFlowImpl stateFlowImpl = secQpBlurController.secPanelExpansionStateInteractor.shadeFraction;
                     Flow flow = new Flow() { // from class: com.android.systemui.blur.SecQpBlurController$1$2$invokeSuspend$$inlined$filterNot$1
 
-                        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                         /* renamed from: com.android.systemui.blur.SecQpBlurController$1$2$invokeSuspend$$inlined$filterNot$1$2, reason: invalid class name */
                         public final class AnonymousClass2 implements FlowCollector {
                             public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -364,77 +344,53 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
                                 this.this$0 = secQpBlurController;
                             }
 
-                            /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                            /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                            /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             /*
                                 Code decompiled incorrectly, please refer to instructions dump.
-                                To view partially-correct code enable 'Show inconsistent code' option in preferences
                             */
-                            public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                                /*
-                                    r4 = this;
-                                    boolean r0 = r6 instanceof com.android.systemui.blur.SecQpBlurController$1$2$invokeSuspend$$inlined$filterNot$1.AnonymousClass2.AnonymousClass1
-                                    if (r0 == 0) goto L13
-                                    r0 = r6
-                                    com.android.systemui.blur.SecQpBlurController$1$2$invokeSuspend$$inlined$filterNot$1$2$1 r0 = (com.android.systemui.blur.SecQpBlurController$1$2$invokeSuspend$$inlined$filterNot$1.AnonymousClass2.AnonymousClass1) r0
-                                    int r1 = r0.label
-                                    r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                                    r3 = r1 & r2
-                                    if (r3 == 0) goto L13
-                                    int r1 = r1 - r2
-                                    r0.label = r1
-                                    goto L18
-                                L13:
-                                    com.android.systemui.blur.SecQpBlurController$1$2$invokeSuspend$$inlined$filterNot$1$2$1 r0 = new com.android.systemui.blur.SecQpBlurController$1$2$invokeSuspend$$inlined$filterNot$1$2$1
-                                    r0.<init>(r6)
-                                L18:
-                                    java.lang.Object r6 = r0.result
-                                    kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                    int r2 = r0.label
-                                    r3 = 1
-                                    if (r2 == 0) goto L2f
-                                    if (r2 != r3) goto L27
-                                    kotlin.ResultKt.throwOnFailure(r6)
-                                    goto L4e
-                                L27:
-                                    java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                                    java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                                    r4.<init>(r5)
-                                    throw r4
-                                L2f:
-                                    kotlin.ResultKt.throwOnFailure(r6)
-                                    r6 = r5
-                                    java.lang.Number r6 = (java.lang.Number) r6
-                                    r6.floatValue()
-                                    com.android.systemui.blur.SecQpBlurController r6 = r4.this$0
-                                    com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor r6 = r6.secPanelExpansionStateInteractor
-                                    int r6 = r6.getstatusBarState()
-                                    if (r6 != r3) goto L43
-                                    goto L4e
-                                L43:
-                                    r0.label = r3
-                                    kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                                    java.lang.Object r4 = r4.emit(r5, r0)
-                                    if (r4 != r1) goto L4e
-                                    return r1
-                                L4e:
-                                    kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                                    return r4
-                                */
-                                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.blur.SecQpBlurController$1$2$invokeSuspend$$inlined$filterNot$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                            public final Object emit(Object obj, Continuation continuation) {
+                                AnonymousClass1 anonymousClass1;
+                                if (continuation instanceof AnonymousClass1) {
+                                    anonymousClass1 = (AnonymousClass1) continuation;
+                                    int i = anonymousClass1.label;
+                                    if ((i & Integer.MIN_VALUE) != 0) {
+                                        anonymousClass1.label = i - Integer.MIN_VALUE;
+                                    } else {
+                                        anonymousClass1 = new AnonymousClass1(continuation);
+                                    }
+                                }
+                                Object obj2 = anonymousClass1.result;
+                                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                                int i2 = anonymousClass1.label;
+                                if (i2 == 0) {
+                                    ResultKt.throwOnFailure(obj2);
+                                    ((Number) obj).floatValue();
+                                    if (this.this$0.secPanelExpansionStateInteractor.getstatusBarState() != 1) {
+                                        anonymousClass1.label = 1;
+                                        if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                            return coroutineSingletons;
+                                        }
+                                    }
+                                } else {
+                                    if (i2 != 1) {
+                                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                    }
+                                    ResultKt.throwOnFailure(obj2);
+                                }
+                                return Unit.INSTANCE;
                             }
                         }
 
                         @Override // kotlinx.coroutines.flow.Flow
                         public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                            Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, secQpBlurController), continuation);
-                            return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                            Object objCollect = stateFlowImpl.collect(new AnonymousClass2(flowCollector, secQpBlurController), continuation);
+                            return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                         }
                     };
-                    C00512 c00512 = new C00512(this.this$0, null);
+                    C01022 c01022 = new C01022(this.this$0, null);
                     this.label = 1;
-                    if (FlowKt.collectLatest(flow, c00512, this) == coroutineSingletons) {
+                    if (FlowKt.collectLatest(flow, c01022, this) == coroutineSingletons) {
                         return coroutineSingletons;
                     }
                 } else {
@@ -447,35 +403,33 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.blur.SecQpBlurController$1$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ SecQpBlurController this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.blur.SecQpBlurController$1$3$1, reason: invalid class name and collision with other inner class name */
-            final class C00521 extends SuspendLambda implements Function2 {
+            final class C01031 extends SuspendLambda implements Function2 {
                 /* synthetic */ int I$0;
                 int label;
                 final /* synthetic */ SecQpBlurController this$0;
 
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                public C00521(SecQpBlurController secQpBlurController, Continuation continuation) {
+                public C01031(SecQpBlurController secQpBlurController, Continuation continuation) {
                     super(2, continuation);
                     this.this$0 = secQpBlurController;
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 public final Continuation create(Object obj, Continuation continuation) {
-                    C00521 c00521 = new C00521(this.this$0, continuation);
-                    c00521.I$0 = ((Number) obj).intValue();
-                    return c00521;
+                    C01031 c01031 = new C01031(this.this$0, continuation);
+                    c01031.I$0 = ((Number) obj).intValue();
+                    return c01031;
                 }
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
-                    return ((C00521) create(Integer.valueOf(((Number) obj).intValue()), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                    return ((C01031) create(Integer.valueOf(((Number) obj).intValue()), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -519,9 +473,176 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
                     ResultKt.throwOnFailure(obj);
                     SecQpBlurController secQpBlurController = this.this$0;
                     StateFlowImpl stateFlowImpl = secQpBlurController.secPanelExpansionStateInteractor.statusBarState;
-                    C00521 c00521 = new C00521(secQpBlurController, null);
+                    C01031 c01031 = new C01031(secQpBlurController, null);
                     this.label = 1;
-                    if (FlowKt.collectLatest(stateFlowImpl, c00521, this) == coroutineSingletons) {
+                    if (FlowKt.collectLatest(stateFlowImpl, c01031, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.blur.SecQpBlurController$1$4, reason: invalid class name */
+        final class AnonymousClass4 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ SecQpBlurController this$0;
+
+            /* renamed from: com.android.systemui.blur.SecQpBlurController$1$4$1, reason: invalid class name and collision with other inner class name */
+            final class C01041 extends SuspendLambda implements Function2 {
+                int label;
+                final /* synthetic */ SecQpBlurController this$0;
+
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                public C01041(SecQpBlurController secQpBlurController, Continuation continuation) {
+                    super(2, continuation);
+                    this.this$0 = secQpBlurController;
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Continuation create(Object obj, Continuation continuation) {
+                    return new C01041(this.this$0, continuation);
+                }
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    return ((C01041) create((Triple) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Object invokeSuspend(Object obj) {
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    if (this.label != 0) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                    Log.d(SecQpBlurController.TAG, "configurationChanged");
+                    SecQpBlurController secQpBlurController = this.this$0;
+                    float calculatedFraction = secQpBlurController.getCalculatedFraction();
+                    SecPanelBlurBinding.BlurType blurType = SecPanelBlurBinding.BlurType.QUICK_PANEL;
+                    SecPanelBlurBinding secPanelBlurBinding = secQpBlurController.panelBlurBinding;
+                    secPanelBlurBinding.setFraction(calculatedFraction, blurType);
+                    secPanelBlurBinding.updateConfigurationChanged();
+                    return Unit.INSTANCE;
+                }
+            }
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass4(SecQpBlurController secQpBlurController, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = secQpBlurController;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass4(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass4) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    SecQpBlurController secQpBlurController = this.this$0;
+                    Flow flow = secQpBlurController.secBlurCustomColorInteractor.configurationChanged;
+                    C01041 c01041 = new C01041(secQpBlurController, null);
+                    this.label = 1;
+                    if (FlowKt.collectLatest(flow, c01041, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.blur.SecQpBlurController$1$5, reason: invalid class name */
+        final class AnonymousClass5 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ SecQpBlurController this$0;
+
+            /* renamed from: com.android.systemui.blur.SecQpBlurController$1$5$1, reason: invalid class name and collision with other inner class name */
+            final class C01051 extends SuspendLambda implements Function2 {
+                int label;
+                final /* synthetic */ SecQpBlurController this$0;
+
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                public C01051(SecQpBlurController secQpBlurController, Continuation continuation) {
+                    super(2, continuation);
+                    this.this$0 = secQpBlurController;
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Continuation create(Object obj, Continuation continuation) {
+                    return new C01051(this.this$0, continuation);
+                }
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    return ((C01051) create((Pair) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Object invokeSuspend(Object obj) {
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    if (this.label != 0) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                    SecQpBlurController secQpBlurController = this.this$0;
+                    if (secQpBlurController.panelExpandedFraction > 0.0f && !secQpBlurController.shadeController.isExpandingOrCollapsing()) {
+                        if (this.this$0.secPanelExpansionStateInteractor.getstatusBarState() == 1) {
+                            this.this$0.shadeController.getNpvc().animateCollapseQs(true);
+                        } else {
+                            this.this$0.shadeController.instantCollapseShade();
+                        }
+                    }
+                    return Unit.INSTANCE;
+                }
+            }
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass5(SecQpBlurController secQpBlurController, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = secQpBlurController;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass5(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass5) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    SecQpBlurController secQpBlurController = this.this$0;
+                    Flow flow = secQpBlurController.configurationChanged;
+                    C01051 c01051 = new C01051(secQpBlurController, null);
+                    this.label = 1;
+                    if (FlowKt.collectLatest(flow, c01051, this) == coroutineSingletons) {
                         return coroutineSingletons;
                     }
                 } else {
@@ -558,14 +679,17 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
             }
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-            BuildersKt.launch$default(coroutineScope, null, null, new C00501(SecQpBlurController.this, null), 3);
+            BuildersKt.launch$default(coroutineScope, null, null, new C01011(SecQpBlurController.this, null), 3);
             BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass2(SecQpBlurController.this, null), 3);
             BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass3(SecQpBlurController.this, null), 3);
+            BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass4(SecQpBlurController.this, null), 3);
+            if (QpRune.QUICK_PANEL_BLUR_MASSIVE) {
+                BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass5(SecQpBlurController.this, null), 3);
+            }
             return Unit.INSTANCE;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -582,7 +706,7 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
         TAG = simpleName;
     }
 
-    public SecQpBlurController(CoroutineScope coroutineScope, SecPanelExpansionStateInteractor secPanelExpansionStateInteractor, SecPanelBackgroundBinding secPanelBackgroundBinding, KeyguardInteractor keyguardInteractor, Choreographer choreographer, Lazy lazy, SecPanelBlurBinding secPanelBlurBinding, SecCapturedBlurBitmapGenerator secCapturedBlurBitmapGenerator) {
+    public SecQpBlurController(CoroutineScope coroutineScope, SecPanelExpansionStateInteractor secPanelExpansionStateInteractor, SecPanelBackgroundBinding secPanelBackgroundBinding, KeyguardInteractor keyguardInteractor, Choreographer choreographer, Lazy lazy, SecPanelBlurBinding secPanelBlurBinding, SecCapturedBlurBitmapGenerator secCapturedBlurBitmapGenerator, SecBlurCustomColorInteractor secBlurCustomColorInteractor, ShadeControllerImpl shadeControllerImpl, ConfigurationInteractor configurationInteractor, SecBlurSettingsInteractor secBlurSettingsInteractor) {
         this.secPanelExpansionStateInteractor = secPanelExpansionStateInteractor;
         this.panelBackgroundBinding = secPanelBackgroundBinding;
         this.keyguardInteractor = keyguardInteractor;
@@ -590,46 +714,123 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
         this.lazyUnlockedScreenOffAnimationController = lazy;
         this.panelBlurBinding = secPanelBlurBinding;
         this.secCapturedBlurBitmapGenerator = secCapturedBlurBitmapGenerator;
+        this.secBlurCustomColorInteractor = secBlurCustomColorInteractor;
+        this.shadeController = shadeControllerImpl;
+        this.settingsInteractor = secBlurSettingsInteractor;
+        final Flow flow = ((ConfigurationInteractorImpl) configurationInteractor).configurationValues;
+        this.configurationChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.blur.SecQpBlurController$special$$inlined$map$1
+
+            /* renamed from: com.android.systemui.blur.SecQpBlurController$special$$inlined$map$1$2, reason: invalid class name */
+            public final class AnonymousClass2 implements FlowCollector {
+                public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                /* renamed from: com.android.systemui.blur.SecQpBlurController$special$$inlined$map$1$2$1, reason: invalid class name */
+                public final class AnonymousClass1 extends ContinuationImpl {
+                    Object L$0;
+                    int label;
+                    /* synthetic */ Object result;
+
+                    public AnonymousClass1(Continuation continuation) {
+                        super(continuation);
+                    }
+
+                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                    public final Object invokeSuspend(Object obj) {
+                        this.result = obj;
+                        this.label |= Integer.MIN_VALUE;
+                        return AnonymousClass2.this.emit(null, this);
+                    }
+                }
+
+                public AnonymousClass2(FlowCollector flowCollector) {
+                    this.$this_unsafeFlow = flowCollector;
+                }
+
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Configuration configuration = (Configuration) obj;
+                        Pair pair = new Pair(new Integer(configuration.uiMode), new Integer(configuration.orientation));
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(pair, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
+                }
+            }
+
+            @Override // kotlinx.coroutines.flow.Flow
+            public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+            }
+        });
         BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass1(null), 3);
         PanelScreenShotLogger.INSTANCE.addLogProvider(TAG, this);
         this.isBlurAnimatorRunning = this.blurAnimator.isRunning();
     }
 
     public static final void access$doFrame(SecQpBlurController secQpBlurController) {
-        float interpolation = ((UnlockedScreenOffAnimationController) secQpBlurController.lazyUnlockedScreenOffAnimationController.get()).lightRevealAnimationPlaying ? 0.0f : secQpBlurController.isMirrorVisible ? secQpBlurController.animatedFraction : (secQpBlurController.isBouncerShowing && secQpBlurController.panelExpandedFraction == 1.0f) ? 1.0f : secQpBlurController.panelBlurBinding.getInterpolation(secQpBlurController.panelExpandedFraction);
-        secQpBlurController.doBlur(interpolation, SecPanelBlurBinding.BlurType.QUICK_PANEL);
+        float calculatedFraction = secQpBlurController.getCalculatedFraction();
+        secQpBlurController.doBlur(calculatedFraction, SecPanelBlurBinding.BlurType.QUICK_PANEL);
         SecPanelBackgroundBinder secPanelBackgroundBinder = (SecPanelBackgroundBinder) secQpBlurController.panelBackgroundBinding;
         if (secPanelBackgroundBinder.view.getVisibility() != 0 || ((UnlockedScreenOffAnimationController) secQpBlurController.lazyUnlockedScreenOffAnimationController.get()).lightRevealAnimationPlaying) {
             return;
         }
-        boolean isTablet = ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
+        boolean zIsTablet = ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
         SecPanelBackground secPanelBackground = secPanelBackgroundBinder.view;
         NotificationShadeWindowView notificationShadeWindowView = secPanelBackgroundBinder.shadeWindowView;
-        if (isTablet) {
+        if (zIsTablet) {
             SecPanelSplitHelper.Companion companion = SecPanelSplitHelper.Companion;
             companion.getClass();
-            float f = interpolation - (SecPanelSplitHelper.isEnabled ? 0.5f : 0.0f);
+            float f = calculatedFraction - (SecPanelSplitHelper.isEnabled ? 0.5f : 0.1f);
             float f2 = 1;
             companion.getClass();
-            float constrain = MathUtils.constrain(f / (f2 - (!SecPanelSplitHelper.isEnabled ? 0.0f : 0.5f)), 0.0f, 1.0f);
+            float f3 = f2 - (SecPanelSplitHelper.isEnabled ? 0.5f : 0.1f);
+            companion.getClass();
+            float fConstrain = MathUtils.constrain(f / (f3 - (SecPanelSplitHelper.isEnabled ? 0.0f : 0.7f)), 0.0f, 1.0f);
             SecPanelBackground secPanelBackground2 = (SecPanelBackground) notificationShadeWindowView.findViewById(R.id.qs_new_blur_background);
             if (secPanelBackground2 != null) {
-                secPanelBackground2.setAlpha(secPanelBackgroundBinder.getMaxAlpha() * constrain);
+                secPanelBackground2.setAlpha(fConstrain);
             }
             secPanelBackground.setAlpha(0.0f);
         } else {
-            secPanelBackground.setAlpha(secPanelBackgroundBinder.getMaxAlpha() * interpolation);
+            secPanelBackground.setAlpha(calculatedFraction);
             SecQSNewBlurView secQSNewBlurView = (SecQSNewBlurView) notificationShadeWindowView.findViewById(R.id.qs_new_blur);
             if (secQSNewBlurView != null) {
                 secQSNewBlurView.setAlpha(0.0f);
             }
         }
-        Log.d(SecPanelBackgroundBinder.TAG, "setAlpha = " + (secPanelBackgroundBinder.getMaxAlpha() * interpolation));
+        Log.d(SecPanelBackgroundBinder.TAG, "setAlpha = " + (((Number) secPanelBackgroundBinder.viewModel.maxAlpha.$$delegate_0.getValue()).floatValue() * calculatedFraction));
     }
 
     public final void doBlur(float f, SecPanelBlurBinding.BlurType blurType) {
         SecPanelBlurBinding secPanelBlurBinding = this.panelBlurBinding;
-        secPanelBlurBinding.setFraction(f);
+        secPanelBlurBinding.setFraction(f, blurType);
         secPanelBlurBinding.doBlur(blurType);
     }
 
@@ -643,15 +844,31 @@ public final class SecQpBlurController implements PanelScreenShotLogger.LogProvi
         return arrayList;
     }
 
+    public final float getCalculatedFraction() {
+        if (((UnlockedScreenOffAnimationController) this.lazyUnlockedScreenOffAnimationController.get()).lightRevealAnimationPlaying) {
+            return 0.0f;
+        }
+        if (this.isMirrorVisible) {
+            return this.animatedFraction;
+        }
+        if (!this.isBouncerShowing) {
+            return this.panelBlurBinding.getInterpolation(this.panelExpandedFraction);
+        }
+        if (this.panelExpandedFraction != 1.0f || ((Boolean) this.settingsInteractor.blurReduced.$$delegate_0.getValue()).booleanValue()) {
+            return this.animatedFraction;
+        }
+        return 1.0f;
+    }
+
     public final void makeAnimationAndRun(float f, float f2, int i) {
         if (this.isBlurAnimatorRunning) {
             this.blurAnimator.cancel();
             Log.d(TAG, "Cancel Blur Animator");
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
-        this.blurAnimator = ofFloat;
-        ofFloat.setDuration(i);
-        this.blurAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.blur.SecQpBlurController$makeAnimationAndRun$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+        this.blurAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setDuration(i);
+        this.blurAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.blur.SecQpBlurController.makeAnimationAndRun.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 SecQpBlurController.this.animatedFraction = ((Float) valueAnimator.getAnimatedValue()).floatValue();

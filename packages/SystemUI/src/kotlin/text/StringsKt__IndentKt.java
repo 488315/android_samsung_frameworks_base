@@ -1,6 +1,7 @@
 package kotlin.text;
 
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,10 +10,9 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StringsKt__IndentKt extends StringsKt__AppendableKt {
-    public static String trimIndent(String str) {
+    public static String trimIndent(String str) throws IOException {
         List list = SequencesKt___SequencesKt.toList(new StringsKt__StringsKt$lineSequence$$inlined$Sequence$1(str));
         ArrayList arrayList = new ArrayList();
         for (Object obj : list) {
@@ -29,64 +29,64 @@ public class StringsKt__IndentKt extends StringsKt__AppendableKt {
             i2++;
             String str2 = (String) obj2;
             int length = str2.length();
-            int i3 = 0;
+            int length2 = 0;
             while (true) {
-                if (i3 >= length) {
-                    i3 = -1;
+                if (length2 >= length) {
+                    length2 = -1;
                     break;
                 }
-                if (!CharsKt__CharJVMKt.isWhitespace(str2.charAt(i3))) {
+                if (!CharsKt__CharJVMKt.isWhitespace(str2.charAt(length2))) {
                     break;
                 }
-                i3++;
+                length2++;
             }
-            if (i3 == -1) {
-                i3 = str2.length();
+            if (length2 == -1) {
+                length2 = str2.length();
             }
-            arrayList2.add(Integer.valueOf(i3));
+            arrayList2.add(Integer.valueOf(length2));
         }
         Integer num = (Integer) CollectionsKt___CollectionsKt.minOrNull(arrayList2);
-        int intValue = num != null ? num.intValue() : 0;
-        int length2 = str.length();
+        int iIntValue = num != null ? num.intValue() : 0;
+        int length3 = str.length();
         list.size();
         int size2 = list.size() - 1;
         ArrayList arrayList3 = new ArrayList();
         Iterator it = list.iterator();
         while (true) {
-            String str3 = null;
+            String strSubstring = null;
             if (!it.hasNext()) {
-                StringBuilder sb = new StringBuilder(length2);
+                StringBuilder sb = new StringBuilder(length3);
                 CollectionsKt___CollectionsKt.joinTo$default(arrayList3, sb, "\n", null, 124);
                 return sb.toString();
             }
             Object next = it.next();
-            int i4 = i + 1;
+            int i3 = i + 1;
             if (i < 0) {
                 CollectionsKt__CollectionsKt.throwIndexOverflow();
                 throw null;
             }
-            String str4 = (String) next;
-            if ((i != 0 && i != size2) || !StringsKt__StringsKt.isBlank(str4)) {
-                if (intValue < 0) {
-                    throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(intValue, "Requested character count ", " is less than zero.").toString());
+            String str3 = (String) next;
+            if ((i != 0 && i != size2) || !StringsKt__StringsKt.isBlank(str3)) {
+                if (iIntValue < 0) {
+                    throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(iIntValue, "Requested character count ", " is less than zero.").toString());
                 }
-                int length3 = str4.length();
-                if (intValue <= length3) {
-                    length3 = intValue;
+                int length4 = str3.length();
+                if (iIntValue <= length4) {
+                    length4 = iIntValue;
                 }
-                str3 = str4.substring(length3);
-                if (str3 == null) {
-                    str3 = str4;
+                strSubstring = str3.substring(length4);
+                if (strSubstring == null) {
+                    strSubstring = str3;
                 }
             }
-            if (str3 != null) {
-                arrayList3.add(str3);
+            if (strSubstring != null) {
+                arrayList3.add(strSubstring);
             }
-            i = i4;
+            i = i3;
         }
     }
 
-    public static String trimMargin$default(String str) {
+    public static String trimMargin$default(String str) throws IOException {
         if (StringsKt__StringsKt.isBlank("|")) {
             throw new IllegalArgumentException("marginPrefix must be non-blank string.");
         }
@@ -98,7 +98,7 @@ public class StringsKt__IndentKt extends StringsKt__AppendableKt {
         Iterator it = list.iterator();
         int i = 0;
         while (true) {
-            String str2 = null;
+            String strSubstring = null;
             if (!it.hasNext()) {
                 StringBuilder sb = new StringBuilder(length);
                 CollectionsKt___CollectionsKt.joinTo$default(arrayList, sb, "\n", null, 124);
@@ -110,29 +110,29 @@ public class StringsKt__IndentKt extends StringsKt__AppendableKt {
                 CollectionsKt__CollectionsKt.throwIndexOverflow();
                 throw null;
             }
-            String str3 = (String) next;
-            if ((i != 0 && i != size) || !StringsKt__StringsKt.isBlank(str3)) {
-                int length2 = str3.length();
+            String str2 = (String) next;
+            if ((i != 0 && i != size) || !StringsKt__StringsKt.isBlank(str2)) {
+                int length2 = str2.length();
                 int i3 = 0;
                 while (true) {
                     if (i3 >= length2) {
                         i3 = -1;
                         break;
                     }
-                    if (!CharsKt__CharJVMKt.isWhitespace(str3.charAt(i3))) {
+                    if (!CharsKt__CharJVMKt.isWhitespace(str2.charAt(i3))) {
                         break;
                     }
                     i3++;
                 }
-                if (i3 != -1 && str3.startsWith("|", i3)) {
-                    str2 = str3.substring("|".length() + i3);
+                if (i3 != -1 && str2.startsWith("|", i3)) {
+                    strSubstring = str2.substring("|".length() + i3);
                 }
-                if (str2 == null) {
-                    str2 = str3;
+                if (strSubstring == null) {
+                    strSubstring = str2;
                 }
             }
-            if (str2 != null) {
-                arrayList.add(str2);
+            if (strSubstring != null) {
+                arrayList.add(strSubstring);
             }
             i = i2;
         }

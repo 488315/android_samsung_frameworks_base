@@ -8,7 +8,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class GestureInteractor$_topActivity$2 extends SuspendLambda implements Function2 {
     int label;
@@ -31,7 +30,7 @@ final class GestureInteractor$_topActivity$2 extends SuspendLambda implements Fu
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i != 0) {
@@ -45,7 +44,7 @@ final class GestureInteractor$_topActivity$2 extends SuspendLambda implements Fu
         GestureInteractor gestureInteractor = this.this$0;
         this.label = 1;
         gestureInteractor.getClass();
-        Object withContext = BuildersKt.withContext(gestureInteractor.backgroundCoroutineContext, new GestureInteractor$getTopActivity$2(gestureInteractor, null), this);
-        return withContext == coroutineSingletons ? coroutineSingletons : withContext;
+        Object objWithContext = BuildersKt.withContext(gestureInteractor.backgroundCoroutineContext, new GestureInteractor$getTopActivity$2(gestureInteractor, null), this);
+        return objWithContext == coroutineSingletons ? coroutineSingletons : objWithContext;
     }
 }

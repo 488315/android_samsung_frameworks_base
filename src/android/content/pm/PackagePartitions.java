@@ -32,16 +32,16 @@ public class PackagePartitions {
         boolean z2 = true;
         boolean z3 = true;
         boolean z4 = true;
-        SYSTEM_PARTITIONS = new ArrayList<>(Arrays.asList(new SystemPartition(Environment.getRootDirectory(), 0, "system", true, false), new SystemPartition(Environment.getVendorDirectory(), true ? 1 : 0, "vendor", true, z), new SystemPartition(Environment.getOdmDirectory(), 2, Build.Partition.PARTITION_NAME_ODM, z, true), new SystemPartition(Environment.getOemDirectory(), 3, Build.Partition.PARTITION_NAME_OEM, false, z2), new SystemPartition(Environment.getProductDirectory(), 4, "product", z2, z3), new SystemPartition(Environment.getSystemExtDirectory(), 5, Build.Partition.PARTITION_NAME_SYSTEM_EXT, z3, z4), new SystemPartition(new File("/prism"), 0, "prism", z4, false), new SystemPartition(new File(Environment.getRootDirectory(), "carrier"), 0, "carrier", true, false)));
+        SYSTEM_PARTITIONS = new ArrayList<>(Arrays.asList(new SystemPartition(Environment.getRootDirectory(), 0, "system", true, false), new SystemPartition(Environment.getVendorDirectory(), 1 == true ? 1 : 0, "vendor", true, z), new SystemPartition(Environment.getOdmDirectory(), 2, Build.Partition.PARTITION_NAME_ODM, z, true), new SystemPartition(Environment.getOemDirectory(), 3, Build.Partition.PARTITION_NAME_OEM, false, z2), new SystemPartition(Environment.getProductDirectory(), 4, "product", z2, z3), new SystemPartition(Environment.getSystemExtDirectory(), 5, Build.Partition.PARTITION_NAME_SYSTEM_EXT, z3, z4), new SystemPartition(new File("/prism"), 0, "prism", z4, false), new SystemPartition(new File(Environment.getRootDirectory(), "carrier"), 0, "carrier", true, false)));
     }
 
     public static <T> ArrayList<T> getOrderedPartitions(Function<SystemPartition, T> function) {
         ArrayList<T> arrayList = new ArrayList<>();
         int size = SYSTEM_PARTITIONS.size();
         for (int i = 0; i < size; i++) {
-            T apply = function.apply(SYSTEM_PARTITIONS.get(i));
-            if (apply != null) {
-                arrayList.add(apply);
+            T tApply = function.apply(SYSTEM_PARTITIONS.get(i));
+            if (tApply != null) {
+                arrayList.add(tApply);
             }
         }
         return arrayList;
@@ -80,12 +80,13 @@ public class PackagePartitions {
         private final DeferredCanonicalFile mPrivAppFolder;
         public final int type;
 
+        /* JADX WARN: Multi-variable type inference failed */
         private SystemPartition(File file, int i, String str, boolean z, boolean z2) {
             DeferredCanonicalFile deferredCanonicalFile;
             this.type = i;
             this.mName = str;
-            byte b = 0;
-            byte b2 = 0;
+            Object[] objArr = 0;
+            Object[] objArr2 = 0;
             this.mFolder = new DeferredCanonicalFile(file);
             this.mAppFolder = new DeferredCanonicalFile(file, "app");
             if (z) {

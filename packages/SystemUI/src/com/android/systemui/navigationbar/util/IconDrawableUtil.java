@@ -13,7 +13,6 @@ import com.android.systemui.R;
 import com.android.systemui.navigationbar.gestural.GestureHintDrawable;
 import com.samsung.android.graphics.spr.SemPathRenderingDrawable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class IconDrawableUtil {
     public static Drawable flipIconDrawable(Resources resources, Drawable drawable) {
@@ -33,24 +32,24 @@ public class IconDrawableUtil {
         if (!(drawable instanceof VectorDrawable) && !(drawable instanceof GradientDrawable)) {
             return null;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static Bitmap[] getBitmapFromDrawable(Context context, GestureHintDrawable gestureHintDrawable) {
-        Drawable mutate = gestureHintDrawable.getDrawable(0).mutate();
-        if (mutate instanceof GradientDrawable) {
-            ((GradientDrawable) mutate).setCornerRadius(context.getResources().getDimension(R.dimen.samsung_taskbar_gesture_hint_corner_radius));
+        Drawable drawableMutate = gestureHintDrawable.getDrawable(0).mutate();
+        if (drawableMutate instanceof GradientDrawable) {
+            ((GradientDrawable) drawableMutate).setCornerRadius(context.getResources().getDimension(R.dimen.samsung_taskbar_gesture_hint_corner_radius));
         }
-        Drawable mutate2 = gestureHintDrawable.getDrawable(1).mutate();
-        if (mutate2 instanceof GradientDrawable) {
-            ((GradientDrawable) mutate2).setCornerRadius(context.getResources().getDimension(R.dimen.samsung_taskbar_gesture_hint_corner_radius));
+        Drawable drawableMutate2 = gestureHintDrawable.getDrawable(1).mutate();
+        if (drawableMutate2 instanceof GradientDrawable) {
+            ((GradientDrawable) drawableMutate2).setCornerRadius(context.getResources().getDimension(R.dimen.samsung_taskbar_gesture_hint_corner_radius));
         }
-        mutate.setAlpha(255);
-        mutate2.setAlpha(255);
-        return new Bitmap[]{getBitmap(mutate), getBitmap(mutate2)};
+        drawableMutate.setAlpha(255);
+        drawableMutate2.setAlpha(255);
+        return new Bitmap[]{getBitmap(drawableMutate), getBitmap(drawableMutate2)};
     }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TtsPackageInfo implements Parcelable {
     public static final Parcelable.Creator<TtsPackageInfo> CREATOR = new Parcelable.Creator<TtsPackageInfo>() { // from class: com.samsung.android.sivs.ai.sdkcommon.tts.TtsPackageInfo.1

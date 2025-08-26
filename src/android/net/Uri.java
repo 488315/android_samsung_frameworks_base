@@ -40,20 +40,20 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public Uri createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == 0) {
+            int i = parcel.readInt();
+            if (i == 0) {
                 return null;
             }
-            if (readInt == 1) {
+            if (i == 1) {
                 return StringUri.readFrom(parcel);
             }
-            if (readInt == 2) {
+            if (i == 2) {
                 return OpaqueUri.readFrom(parcel);
             }
-            if (readInt == 3) {
+            if (i == 3) {
                 return HierarchicalUri.readFrom(parcel);
             }
-            throw new IllegalArgumentException("Unknown URI type: " + readInt);
+            throw new IllegalArgumentException("Unknown URI type: " + i);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -168,9 +168,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
                 }
             } else if (schemeSpecificPart != null) {
                 for (int i = 0; i < schemeSpecificPart.length(); i++) {
-                    char charAt = schemeSpecificPart.charAt(i);
-                    if (charAt == '-' || charAt == '@' || charAt == '.') {
-                        sb.append(charAt);
+                    char cCharAt = schemeSpecificPart.charAt(i);
+                    if (cCharAt == '-' || cCharAt == '@' || cCharAt == '.') {
+                        sb.append(cCharAt);
                     } else {
                         sb.append(EpicenterTranslateClipReveal.StateProperty.TARGET_X);
                     }
@@ -231,29 +231,29 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
 
         private int findSchemeSeparator() {
             if (this.cachedSsi == -2) {
-                int indexOf = this.uriString.indexOf(58);
-                this.cachedSsi = indexOf;
-                return indexOf;
+                int iIndexOf = this.uriString.indexOf(58);
+                this.cachedSsi = iIndexOf;
+                return iIndexOf;
             }
             return this.cachedSsi;
         }
 
         private int findFragmentSeparator() {
             if (this.cachedFsi == -2) {
-                int indexOf = this.uriString.indexOf(35, findSchemeSeparator());
-                this.cachedFsi = indexOf;
-                return indexOf;
+                int iIndexOf = this.uriString.indexOf(35, findSchemeSeparator());
+                this.cachedFsi = iIndexOf;
+                return iIndexOf;
             }
             return this.cachedFsi;
         }
 
         @Override // android.net.Uri
         public boolean isHierarchical() {
-            int findSchemeSeparator = findSchemeSeparator();
-            if (findSchemeSeparator == -1) {
+            int iFindSchemeSeparator = findSchemeSeparator();
+            if (iFindSchemeSeparator == -1) {
                 return true;
             }
-            int i = findSchemeSeparator + 1;
+            int i = iFindSchemeSeparator + 1;
             return this.uriString.length() != i && this.uriString.charAt(i) == '/';
         }
 
@@ -267,18 +267,18 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (this.scheme != NotCachedHolder.NOT_CACHED) {
                 return this.scheme;
             }
-            String parseScheme = parseScheme();
-            this.scheme = parseScheme;
-            return parseScheme;
+            String scheme = parseScheme();
+            this.scheme = scheme;
+            return scheme;
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public String parseScheme() {
-            int findSchemeSeparator = findSchemeSeparator();
-            if (findSchemeSeparator == -1) {
+            int iFindSchemeSeparator = findSchemeSeparator();
+            if (iFindSchemeSeparator == -1) {
                 return null;
             }
-            return this.uriString.substring(0, findSchemeSeparator);
+            return this.uriString.substring(0, iFindSchemeSeparator);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -287,9 +287,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (part != null) {
                 return part;
             }
-            Part fromEncoded = Part.fromEncoded(parseSsp());
-            this.ssp = fromEncoded;
-            return fromEncoded;
+            Part partFromEncoded = Part.fromEncoded(parseSsp());
+            this.ssp = partFromEncoded;
+            return partFromEncoded;
         }
 
         @Override // android.net.Uri
@@ -303,12 +303,12 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         }
 
         private String parseSsp() {
-            int findSchemeSeparator = findSchemeSeparator();
-            int findFragmentSeparator = findFragmentSeparator();
-            if (findFragmentSeparator == -1) {
-                return this.uriString.substring(findSchemeSeparator + 1);
+            int iFindSchemeSeparator = findSchemeSeparator();
+            int iFindFragmentSeparator = findFragmentSeparator();
+            if (iFindFragmentSeparator == -1) {
+                return this.uriString.substring(iFindSchemeSeparator + 1);
             }
-            return this.uriString.substring(findSchemeSeparator + 1, findFragmentSeparator);
+            return this.uriString.substring(iFindSchemeSeparator + 1, iFindFragmentSeparator);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -317,9 +317,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (part != null) {
                 return part;
             }
-            Part fromEncoded = Part.fromEncoded(parseAuthority(this.uriString, findSchemeSeparator()));
-            this.authority = fromEncoded;
-            return fromEncoded;
+            Part partFromEncoded = Part.fromEncoded(parseAuthority(this.uriString, findSchemeSeparator()));
+            this.authority = partFromEncoded;
+            return partFromEncoded;
         }
 
         @Override // android.net.Uri
@@ -338,9 +338,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (pathPart != null) {
                 return pathPart;
             }
-            PathPart fromEncoded = PathPart.fromEncoded(parsePath());
-            this.path = fromEncoded;
-            return fromEncoded;
+            PathPart pathPartFromEncoded = PathPart.fromEncoded(parsePath());
+            this.path = pathPartFromEncoded;
+            return pathPartFromEncoded;
         }
 
         @Override // android.net.Uri
@@ -361,9 +361,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         private String parsePath() {
             int i;
             String str = this.uriString;
-            int findSchemeSeparator = findSchemeSeparator();
-            if (findSchemeSeparator <= -1 || ((i = findSchemeSeparator + 1) != str.length() && str.charAt(i) == '/')) {
-                return parsePath(str, findSchemeSeparator);
+            int iFindSchemeSeparator = findSchemeSeparator();
+            if (iFindSchemeSeparator <= -1 || ((i = iFindSchemeSeparator + 1) != str.length() && str.charAt(i) == '/')) {
+                return parsePath(str, iFindSchemeSeparator);
             }
             return null;
         }
@@ -374,9 +374,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (part != null) {
                 return part;
             }
-            Part fromEncoded = Part.fromEncoded(parseQuery());
-            this.query = fromEncoded;
-            return fromEncoded;
+            Part partFromEncoded = Part.fromEncoded(parseQuery());
+            this.query = partFromEncoded;
+            return partFromEncoded;
         }
 
         @Override // android.net.Uri
@@ -385,18 +385,18 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         }
 
         private String parseQuery() {
-            int indexOf = this.uriString.indexOf(63, findSchemeSeparator());
-            if (indexOf == -1) {
+            int iIndexOf = this.uriString.indexOf(63, findSchemeSeparator());
+            if (iIndexOf == -1) {
                 return null;
             }
-            int findFragmentSeparator = findFragmentSeparator();
-            if (findFragmentSeparator == -1) {
-                return this.uriString.substring(indexOf + 1);
+            int iFindFragmentSeparator = findFragmentSeparator();
+            if (iFindFragmentSeparator == -1) {
+                return this.uriString.substring(iIndexOf + 1);
             }
-            if (findFragmentSeparator < indexOf) {
+            if (iFindFragmentSeparator < iIndexOf) {
                 return null;
             }
-            return this.uriString.substring(indexOf + 1, findFragmentSeparator);
+            return this.uriString.substring(iIndexOf + 1, iFindFragmentSeparator);
         }
 
         @Override // android.net.Uri
@@ -410,9 +410,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (part != null) {
                 return part;
             }
-            Part fromEncoded = Part.fromEncoded(parseFragment());
-            this.fragment = fromEncoded;
-            return fromEncoded;
+            Part partFromEncoded = Part.fromEncoded(parseFragment());
+            this.fragment = partFromEncoded;
+            return partFromEncoded;
         }
 
         @Override // android.net.Uri
@@ -421,11 +421,11 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         }
 
         private String parseFragment() {
-            int findFragmentSeparator = findFragmentSeparator();
-            if (findFragmentSeparator == -1) {
+            int iFindFragmentSeparator = findFragmentSeparator();
+            if (iFindFragmentSeparator == -1) {
                 return null;
             }
-            return this.uriString.substring(findFragmentSeparator + 1);
+            return this.uriString.substring(iFindFragmentSeparator + 1);
         }
 
         @Override // android.net.Uri
@@ -447,8 +447,8 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             int i3 = i + 3;
             int i4 = i3;
             while (i4 < length) {
-                char charAt = str.charAt(i4);
-                if (charAt == '#' || charAt == '/' || charAt == '?' || charAt == '\\') {
+                char cCharAt = str.charAt(i4);
+                if (cCharAt == '#' || cCharAt == '/' || cCharAt == '?' || cCharAt == '\\') {
                     break;
                 }
                 i4++;
@@ -463,17 +463,17 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (length > i3 && str.charAt(i + 1) == '/' && str.charAt(i3) == '/') {
                 i2 = i + 3;
                 while (i2 < length) {
-                    char charAt = str.charAt(i2);
-                    if (charAt == '#') {
+                    char cCharAt = str.charAt(i2);
+                    if (cCharAt == '#') {
                         return "";
                     }
-                    if (charAt == '/') {
+                    if (cCharAt == '/') {
                         break;
                     }
-                    if (charAt == '?') {
+                    if (cCharAt == '?') {
                         return "";
                     }
-                    if (charAt == '\\') {
+                    if (cCharAt == '\\') {
                         break;
                     }
                     i2++;
@@ -483,8 +483,8 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             }
             int i4 = i2;
             while (i4 < length) {
-                char charAt2 = str.charAt(i4);
-                if (charAt2 == '#' || charAt2 == '?') {
+                char cCharAt2 = str.charAt(i4);
+                if (cCharAt2 == '#' || cCharAt2 == '?') {
                     break;
                 }
                 i4++;
@@ -650,9 +650,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
                 sb.append('#');
                 sb.append(this.fragment.getEncoded());
             }
-            String sb2 = sb.toString();
-            this.cachedString = sb2;
-            return sb2;
+            String string = sb.toString();
+            this.cachedString = string;
+            return string;
         }
 
         @Override // android.net.Uri
@@ -745,9 +745,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (part != null) {
                 return part;
             }
-            Part fromEncoded = Part.fromEncoded(parseUserInfo());
-            this.userInfo = fromEncoded;
-            return fromEncoded;
+            Part partFromEncoded = Part.fromEncoded(parseUserInfo());
+            this.userInfo = partFromEncoded;
+            return partFromEncoded;
         }
 
         @Override // android.net.Uri
@@ -756,12 +756,12 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         }
 
         private String parseUserInfo() {
-            int lastIndexOf;
+            int iLastIndexOf;
             String encodedAuthority = getEncodedAuthority();
-            if (encodedAuthority == null || (lastIndexOf = encodedAuthority.lastIndexOf(64)) == -1) {
+            if (encodedAuthority == null || (iLastIndexOf = encodedAuthority.lastIndexOf(64)) == -1) {
                 return null;
             }
-            return encodedAuthority.substring(0, lastIndexOf);
+            return encodedAuthority.substring(0, iLastIndexOf);
         }
 
         @Override // android.net.Uri
@@ -774,45 +774,45 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (this.host != NotCachedHolder.NOT_CACHED) {
                 return this.host;
             }
-            String parseHost = parseHost();
-            this.host = parseHost;
-            return parseHost;
+            String host = parseHost();
+            this.host = host;
+            return host;
         }
 
         private String parseHost() {
-            String substring;
+            String strSubstring;
             String encodedAuthority = getEncodedAuthority();
             if (encodedAuthority == null) {
                 return null;
             }
-            int lastIndexOf = encodedAuthority.lastIndexOf(64);
-            int findPortSeparator = findPortSeparator(encodedAuthority);
-            if (findPortSeparator == -1) {
-                substring = encodedAuthority.substring(lastIndexOf + 1);
+            int iLastIndexOf = encodedAuthority.lastIndexOf(64);
+            int iFindPortSeparator = findPortSeparator(encodedAuthority);
+            if (iFindPortSeparator == -1) {
+                strSubstring = encodedAuthority.substring(iLastIndexOf + 1);
             } else {
-                substring = encodedAuthority.substring(lastIndexOf + 1, findPortSeparator);
+                strSubstring = encodedAuthority.substring(iLastIndexOf + 1, iFindPortSeparator);
             }
-            return decode(substring);
+            return decode(strSubstring);
         }
 
         @Override // android.net.Uri
         public int getPort() {
             if (this.port == -2) {
-                int parsePort = parsePort();
-                this.port = parsePort;
-                return parsePort;
+                int port = parsePort();
+                this.port = port;
+                return port;
             }
             return this.port;
         }
 
         private int parsePort() {
             String encodedAuthority = getEncodedAuthority();
-            int findPortSeparator = findPortSeparator(encodedAuthority);
-            if (findPortSeparator == -1) {
+            int iFindPortSeparator = findPortSeparator(encodedAuthority);
+            if (iFindPortSeparator == -1) {
                 return -1;
             }
             try {
-                return Integer.parseInt(decode(encodedAuthority.substring(findPortSeparator + 1)));
+                return Integer.parseInt(decode(encodedAuthority.substring(iFindPortSeparator + 1)));
             } catch (NumberFormatException e) {
                 Log.w(Uri.LOG, "Error parsing port string.", e);
                 return -1;
@@ -824,11 +824,11 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
                 return -1;
             }
             for (int length = str.length() - 1; length >= 0; length--) {
-                char charAt = str.charAt(length);
-                if (':' == charAt) {
+                char cCharAt = str.charAt(length);
+                if (':' == cCharAt) {
                     return length;
                 }
-                if (charAt < '0' || charAt > '9') {
+                if (cCharAt < '0' || cCharAt > '9') {
                     break;
                 }
             }
@@ -900,9 +900,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (part != null) {
                 return part;
             }
-            Part fromEncoded = Part.fromEncoded(makeSchemeSpecificPart());
-            this.ssp = fromEncoded;
-            return fromEncoded;
+            Part partFromEncoded = Part.fromEncoded(makeSchemeSpecificPart());
+            this.ssp = partFromEncoded;
+            return partFromEncoded;
         }
 
         @Override // android.net.Uri
@@ -915,13 +915,13 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             return getSsp().getDecoded();
         }
 
-        private String makeSchemeSpecificPart() {
+        private String makeSchemeSpecificPart() throws UnsupportedEncodingException {
             StringBuilder sb = new StringBuilder();
             appendSspTo(sb);
             return sb.toString();
         }
 
-        private void appendSspTo(StringBuilder sb) {
+        private void appendSspTo(StringBuilder sb) throws UnsupportedEncodingException {
             String encoded = this.authority.getEncoded();
             if (encoded != null) {
                 sb.append("//");
@@ -984,16 +984,16 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         }
 
         @Override // android.net.Uri
-        public String toString() {
+        public String toString() throws UnsupportedEncodingException {
             if (this.uriString != NotCachedHolder.NOT_CACHED) {
                 return this.uriString;
             }
-            String makeUriString = makeUriString();
-            this.uriString = makeUriString;
-            return makeUriString;
+            String strMakeUriString = makeUriString();
+            this.uriString = strMakeUriString;
+            return strMakeUriString;
         }
 
-        private String makeUriString() {
+        private String makeUriString() throws UnsupportedEncodingException {
             StringBuilder sb = new StringBuilder();
             String str = this.scheme;
             if (str != null) {
@@ -1135,13 +1135,13 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
                 }
                 return new OpaqueUri(this.scheme, this.opaquePart, this.fragment);
             }
-            PathPart pathPart = this.path;
-            if (pathPart == null || pathPart == PathPart.NULL) {
-                pathPart = PathPart.EMPTY;
+            PathPart pathPartMakeAbsolute = this.path;
+            if (pathPartMakeAbsolute == null || pathPartMakeAbsolute == PathPart.NULL) {
+                pathPartMakeAbsolute = PathPart.EMPTY;
             } else if (hasSchemeOrAuthority()) {
-                pathPart = PathPart.makeAbsolute(pathPart);
+                pathPartMakeAbsolute = PathPart.makeAbsolute(pathPartMakeAbsolute);
             }
-            return new HierarchicalUri(this.scheme, this.authority, pathPart, this.query, this.fragment);
+            return new HierarchicalUri(this.scheme, this.authority, pathPartMakeAbsolute, this.query, this.fragment);
         }
 
         private boolean hasSchemeOrAuthority() {
@@ -1168,21 +1168,21 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         LinkedHashSet linkedHashSet = new LinkedHashSet();
         int i = 0;
         do {
-            int indexOf = encodedQuery.indexOf(38, i);
-            if (indexOf == -1) {
-                indexOf = encodedQuery.length();
+            int iIndexOf = encodedQuery.indexOf(38, i);
+            if (iIndexOf == -1) {
+                iIndexOf = encodedQuery.length();
             }
-            int indexOf2 = encodedQuery.indexOf(61, i);
-            if (indexOf2 > indexOf || indexOf2 == -1) {
-                indexOf2 = indexOf;
+            int iIndexOf2 = encodedQuery.indexOf(61, i);
+            if (iIndexOf2 > iIndexOf || iIndexOf2 == -1) {
+                iIndexOf2 = iIndexOf;
             }
-            linkedHashSet.add(decode(encodedQuery.substring(i, indexOf2)));
-            i = indexOf + 1;
+            linkedHashSet.add(decode(encodedQuery.substring(i, iIndexOf2)));
+            i = iIndexOf + 1;
         } while (i < encodedQuery.length());
         return Collections.unmodifiableSet(linkedHashSet);
     }
 
-    public List<String> getQueryParameters(String str) {
+    public List<String> getQueryParameters(String str) throws UnsupportedEncodingException {
         if (isOpaque()) {
             throw new UnsupportedOperationException(NOT_HIERARCHICAL);
         }
@@ -1194,34 +1194,34 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             return Collections.EMPTY_LIST;
         }
         try {
-            String encode = URLEncoder.encode(str, "UTF-8");
+            String strEncode = URLEncoder.encode(str, "UTF-8");
             ArrayList arrayList = new ArrayList();
             int i = 0;
             while (true) {
-                int indexOf = encodedQuery.indexOf(38, i);
-                int length = indexOf != -1 ? indexOf : encodedQuery.length();
-                int indexOf2 = encodedQuery.indexOf(61, i);
-                if (indexOf2 > length || indexOf2 == -1) {
-                    indexOf2 = length;
+                int iIndexOf = encodedQuery.indexOf(38, i);
+                int length = iIndexOf != -1 ? iIndexOf : encodedQuery.length();
+                int iIndexOf2 = encodedQuery.indexOf(61, i);
+                if (iIndexOf2 > length || iIndexOf2 == -1) {
+                    iIndexOf2 = length;
                 }
-                if (indexOf2 - i == encode.length() && encodedQuery.regionMatches(i, encode, 0, encode.length())) {
-                    if (indexOf2 == length) {
+                if (iIndexOf2 - i == strEncode.length() && encodedQuery.regionMatches(i, strEncode, 0, strEncode.length())) {
+                    if (iIndexOf2 == length) {
                         arrayList.add("");
                     } else {
-                        arrayList.add(decode(encodedQuery.substring(indexOf2 + 1, length)));
+                        arrayList.add(decode(encodedQuery.substring(iIndexOf2 + 1, length)));
                     }
                 }
-                if (indexOf == -1) {
+                if (iIndexOf == -1) {
                     return Collections.unmodifiableList(arrayList);
                 }
-                i = indexOf + 1;
+                i = iIndexOf + 1;
             }
         } catch (UnsupportedEncodingException e) {
             throw new AssertionError(e);
         }
     }
 
-    public String getQueryParameter(String str) {
+    public String getQueryParameter(String str) throws UnsupportedEncodingException {
         if (isOpaque()) {
             throw new UnsupportedOperationException(NOT_HIERARCHICAL);
         }
@@ -1232,30 +1232,30 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         if (encodedQuery == null) {
             return null;
         }
-        String encode = encode(str, null);
+        String strEncode = encode(str, null);
         int length = encodedQuery.length();
         int i = 0;
         while (true) {
-            int indexOf = encodedQuery.indexOf(38, i);
-            int i2 = indexOf != -1 ? indexOf : length;
-            int indexOf2 = encodedQuery.indexOf(61, i);
-            if (indexOf2 > i2 || indexOf2 == -1) {
-                indexOf2 = i2;
+            int iIndexOf = encodedQuery.indexOf(38, i);
+            int i2 = iIndexOf != -1 ? iIndexOf : length;
+            int iIndexOf2 = encodedQuery.indexOf(61, i);
+            if (iIndexOf2 > i2 || iIndexOf2 == -1) {
+                iIndexOf2 = i2;
             }
-            if (indexOf2 - i == encode.length() && encodedQuery.regionMatches(i, encode, 0, encode.length())) {
-                if (indexOf2 == i2) {
+            if (iIndexOf2 - i == strEncode.length() && encodedQuery.regionMatches(i, strEncode, 0, strEncode.length())) {
+                if (iIndexOf2 == i2) {
                     return "";
                 }
-                return UriCodec.decode(encodedQuery.substring(indexOf2 + 1, i2), true, StandardCharsets.UTF_8, false);
+                return UriCodec.decode(encodedQuery.substring(iIndexOf2 + 1, i2), true, StandardCharsets.UTF_8, false);
             }
-            if (indexOf == -1) {
+            if (iIndexOf == -1) {
                 return null;
             }
-            i = indexOf + 1;
+            i = iIndexOf + 1;
         }
     }
 
-    public boolean getBooleanQueryParameter(String str, boolean z) {
+    public boolean getBooleanQueryParameter(String str, boolean z) throws UnsupportedEncodingException {
         String queryParameter = getQueryParameter(str);
         if (queryParameter == null) {
             return z;
@@ -1287,7 +1287,7 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         return encode(str, null);
     }
 
-    public static String encode(String str, String str2) {
+    public static String encode(String str, String str2) throws UnsupportedEncodingException {
         StringBuilder sb = null;
         if (str == null) {
             return null;
@@ -1359,8 +1359,8 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             return true;
         }
         for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
-            if (!isAllowed(charAt, str2) && charAt != '%') {
+            char cCharAt = str.charAt(i);
+            if (!isAllowed(cCharAt, str2) && cCharAt != '%') {
                 return false;
             }
         }
@@ -1405,9 +1405,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (this.decoded != NotCachedHolder.NOT_CACHED) {
                 return this.decoded;
             }
-            String decode = Uri.decode(this.encoded);
-            this.decoded = decode;
-            return decode;
+            String strDecode = Uri.decode(this.encoded);
+            this.decoded = strDecode;
+            return strDecode;
         }
     }
 
@@ -1428,9 +1428,9 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             if (this.encoded != NotCachedHolder.NOT_CACHED) {
                 return this.encoded;
             }
-            String encode = Uri.encode(this.decoded);
-            this.encoded = encode;
-            return encode;
+            String strEncode = Uri.encode(this.decoded);
+            this.encoded = strEncode;
+            return strEncode;
         }
 
         static Part nonNull(Part part) {
@@ -1488,16 +1488,16 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         }
 
         @Override // android.net.Uri.AbstractPart
-        String getEncoded() {
+        String getEncoded() throws UnsupportedEncodingException {
             if (this.encoded != NotCachedHolder.NOT_CACHED) {
                 return this.encoded;
             }
-            String encode = Uri.encode(this.decoded, "/");
-            this.encoded = encode;
-            return encode;
+            String strEncode = Uri.encode(this.decoded, "/");
+            this.encoded = strEncode;
+            return strEncode;
         }
 
-        PathSegments getPathSegments() {
+        PathSegments getPathSegments() throws UnsupportedEncodingException {
             PathSegments pathSegments = this.pathSegments;
             if (pathSegments != null) {
                 return pathSegments;
@@ -1511,24 +1511,24 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
             PathSegmentsBuilder pathSegmentsBuilder = new PathSegmentsBuilder();
             int i = 0;
             while (true) {
-                int indexOf = encoded.indexOf(47, i);
-                if (indexOf <= -1) {
+                int iIndexOf = encoded.indexOf(47, i);
+                if (iIndexOf <= -1) {
                     break;
                 }
-                if (i < indexOf) {
-                    pathSegmentsBuilder.add(Uri.decode(encoded.substring(i, indexOf)));
+                if (i < iIndexOf) {
+                    pathSegmentsBuilder.add(Uri.decode(encoded.substring(i, iIndexOf)));
                 }
-                i = indexOf + 1;
+                i = iIndexOf + 1;
             }
             if (i < encoded.length()) {
                 pathSegmentsBuilder.add(Uri.decode(encoded.substring(i)));
             }
-            PathSegments build = pathSegmentsBuilder.build();
-            this.pathSegments = build;
-            return build;
+            PathSegments pathSegmentsBuild = pathSegmentsBuilder.build();
+            this.pathSegments = pathSegmentsBuild;
+            return pathSegmentsBuild;
         }
 
-        static PathPart appendEncodedSegment(PathPart pathPart, String str) {
+        static PathPart appendEncodedSegment(PathPart pathPart, String str) throws UnsupportedEncodingException {
             String str2;
             if (pathPart == null) {
                 return fromEncoded("/" + str);
@@ -1596,16 +1596,16 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
         return uri.buildUpon().appendEncodedPath(str).build();
     }
 
-    public Uri getCanonicalUri() {
+    public Uri getCanonicalUri() throws IOException {
         if (!"file".equals(getScheme())) {
             return this;
         }
         try {
             String canonicalPath = new File(getPath()).getCanonicalPath();
             if (Environment.isExternalStorageEmulated()) {
-                String file = Environment.getLegacyExternalStorageDirectory().toString();
-                if (canonicalPath.startsWith(file)) {
-                    return fromFile(new File(Environment.getExternalStorageDirectory().toString(), canonicalPath.substring(file.length() + 1)));
+                String string = Environment.getLegacyExternalStorageDirectory().toString();
+                if (canonicalPath.startsWith(string)) {
+                    return fromFile(new File(Environment.getExternalStorageDirectory().toString(), canonicalPath.substring(string.length() + 1)));
                 }
             }
             return fromFile(new File(canonicalPath));

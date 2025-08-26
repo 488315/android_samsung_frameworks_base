@@ -53,9 +53,9 @@ public interface IInstantAppResolver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInstantAppResolver)) {
-                return (IInstantAppResolver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInstantAppResolver)) {
+                return (IInstantAppResolver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,15 +86,15 @@ public interface IInstantAppResolver extends IInterface {
             }
             if (i == 1) {
                 InstantAppRequestInfo instantAppRequestInfo = (InstantAppRequestInfo) parcel.readTypedObject(InstantAppRequestInfo.CREATOR);
-                int readInt = parcel.readInt();
-                IRemoteCallback asInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                IRemoteCallback iRemoteCallbackAsInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getInstantAppResolveInfoList(instantAppRequestInfo, readInt, asInterface);
+                getInstantAppResolveInfoList(instantAppRequestInfo, i3, iRemoteCallbackAsInterface);
             } else if (i == 2) {
                 InstantAppRequestInfo instantAppRequestInfo2 = (InstantAppRequestInfo) parcel.readTypedObject(InstantAppRequestInfo.CREATOR);
-                IRemoteCallback asInterface2 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                IRemoteCallback iRemoteCallbackAsInterface2 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getInstantAppIntentFilterList(instantAppRequestInfo2, asInterface2);
+                getInstantAppIntentFilterList(instantAppRequestInfo2, iRemoteCallbackAsInterface2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -119,28 +119,28 @@ public interface IInstantAppResolver extends IInterface {
 
             @Override // android.app.IInstantAppResolver
             public void getInstantAppResolveInfoList(InstantAppRequestInfo instantAppRequestInfo, int i, IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(instantAppRequestInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(instantAppRequestInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IInstantAppResolver
             public void getInstantAppIntentFilterList(InstantAppRequestInfo instantAppRequestInfo, IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(instantAppRequestInfo, 0);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(instantAppRequestInfo, 0);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

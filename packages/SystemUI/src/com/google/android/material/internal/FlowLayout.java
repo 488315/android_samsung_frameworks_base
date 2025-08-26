@@ -10,7 +10,6 @@ import com.android.systemui.R;
 import com.google.android.material.R$styleable;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FlowLayout extends ViewGroup {
     public int itemSpacing;
@@ -32,8 +31,8 @@ public class FlowLayout extends ViewGroup {
 
     @Override // android.view.ViewGroup, android.view.View
     public void onLayout(boolean z, int i, int i2, int i3, int i4) {
-        int i5;
-        int i6;
+        int marginEnd;
+        int marginStart;
         if (getChildCount() == 0) {
             this.rowCount = 0;
             return;
@@ -44,39 +43,39 @@ public class FlowLayout extends ViewGroup {
         int paddingRight = z2 ? getPaddingRight() : getPaddingLeft();
         int paddingLeft = z2 ? getPaddingLeft() : getPaddingRight();
         int paddingTop = getPaddingTop();
-        int i7 = (i3 - i) - paddingLeft;
-        int i8 = paddingRight;
-        int i9 = paddingTop;
-        for (int i10 = 0; i10 < getChildCount(); i10++) {
-            View childAt = getChildAt(i10);
+        int i5 = (i3 - i) - paddingLeft;
+        int measuredWidth = paddingRight;
+        int i6 = paddingTop;
+        for (int i7 = 0; i7 < getChildCount(); i7++) {
+            View childAt = getChildAt(i7);
             if (childAt.getVisibility() == 8) {
                 childAt.setTag(R.id.row_index_key, -1);
             } else {
                 ViewGroup.LayoutParams layoutParams = childAt.getLayoutParams();
                 if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
                     ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams;
-                    i6 = marginLayoutParams.getMarginStart();
-                    i5 = marginLayoutParams.getMarginEnd();
+                    marginStart = marginLayoutParams.getMarginStart();
+                    marginEnd = marginLayoutParams.getMarginEnd();
                 } else {
-                    i5 = 0;
-                    i6 = 0;
+                    marginEnd = 0;
+                    marginStart = 0;
                 }
-                int measuredWidth = childAt.getMeasuredWidth() + i8 + i6;
-                if (!this.singleLine && measuredWidth > i7) {
-                    i9 = this.lineSpacing + paddingTop;
+                int measuredWidth2 = childAt.getMeasuredWidth() + measuredWidth + marginStart;
+                if (!this.singleLine && measuredWidth2 > i5) {
+                    i6 = this.lineSpacing + paddingTop;
                     this.rowCount++;
-                    i8 = paddingRight;
+                    measuredWidth = paddingRight;
                 }
                 childAt.setTag(R.id.row_index_key, Integer.valueOf(this.rowCount - 1));
-                int i11 = i8 + i6;
-                int measuredWidth2 = childAt.getMeasuredWidth() + i11;
-                int measuredHeight = childAt.getMeasuredHeight() + i9;
+                int i8 = measuredWidth + marginStart;
+                int measuredWidth3 = childAt.getMeasuredWidth() + i8;
+                int measuredHeight = childAt.getMeasuredHeight() + i6;
                 if (z2) {
-                    childAt.layout(i7 - measuredWidth2, i9, (i7 - i8) - i6, measuredHeight);
+                    childAt.layout(i5 - measuredWidth3, i6, (i5 - measuredWidth) - marginStart, measuredHeight);
                 } else {
-                    childAt.layout(i11, i9, measuredWidth2, measuredHeight);
+                    childAt.layout(i8, i6, measuredWidth3, measuredHeight);
                 }
-                i8 += childAt.getMeasuredWidth() + i6 + i5 + this.itemSpacing;
+                measuredWidth += childAt.getMeasuredWidth() + marginStart + marginEnd + this.itemSpacing;
                 paddingTop = measuredHeight;
             }
         }
@@ -154,18 +153,18 @@ public class FlowLayout extends ViewGroup {
     public FlowLayout(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.singleLine = false;
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.FlowLayout, 0, 0);
-        this.lineSpacing = obtainStyledAttributes.getDimensionPixelSize(1, 0);
-        this.itemSpacing = obtainStyledAttributes.getDimensionPixelSize(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.FlowLayout, 0, 0);
+        this.lineSpacing = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+        this.itemSpacing = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public FlowLayout(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.singleLine = false;
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.FlowLayout, 0, 0);
-        this.lineSpacing = obtainStyledAttributes.getDimensionPixelSize(1, 0);
-        this.itemSpacing = obtainStyledAttributes.getDimensionPixelSize(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.FlowLayout, 0, 0);
+        this.lineSpacing = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+        this.itemSpacing = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

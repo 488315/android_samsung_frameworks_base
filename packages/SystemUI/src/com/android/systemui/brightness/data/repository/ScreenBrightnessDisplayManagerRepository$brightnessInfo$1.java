@@ -12,7 +12,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScreenBrightnessDisplayManagerRepository$brightnessInfo$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -50,8 +49,8 @@ final class ScreenBrightnessDisplayManagerRepository$brightnessInfo$1 extends Su
             final ?? r4 = new DisplayManager.DisplayListener() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$brightnessInfo$1$listener$1
                 @Override // android.hardware.display.DisplayManager.DisplayListener
                 public final void onDisplayChanged(int i2) {
-                    if (i2 == ScreenBrightnessDisplayManagerRepository.this.displayId) {
-                        ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    if (i2 == screenBrightnessDisplayManagerRepository.displayId) {
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                     }
                 }
 
@@ -68,7 +67,7 @@ final class ScreenBrightnessDisplayManagerRepository$brightnessInfo$1 extends Su
             Function0 function0 = new Function0() { // from class: com.android.systemui.brightness.data.repository.ScreenBrightnessDisplayManagerRepository$brightnessInfo$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ScreenBrightnessDisplayManagerRepository.this.displayManager.unregisterDisplayListener(r4);
+                    screenBrightnessDisplayManagerRepository2.displayManager.unregisterDisplayListener(r4);
                     return Unit.INSTANCE;
                 }
             };

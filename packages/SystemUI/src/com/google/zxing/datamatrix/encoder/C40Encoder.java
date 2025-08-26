@@ -1,11 +1,10 @@
 package com.google.zxing.datamatrix.encoder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class C40Encoder implements Encoder {
     public static void writeNextTriplet(EncoderContext encoderContext, StringBuilder sb) {
-        int charAt = sb.charAt(2) + (sb.charAt(1) * '(') + (sb.charAt(0) * 1600) + 1;
-        encoderContext.codewords.append(new String(new char[]{(char) (charAt / 256), (char) (charAt % 256)}));
+        int iCharAt = sb.charAt(2) + (sb.charAt(1) * '(') + (sb.charAt(0) * 1600) + 1;
+        encoderContext.codewords.append(new String(new char[]{(char) (iCharAt / 256), (char) (iCharAt % 256)}));
         sb.delete(0, 3);
     }
 
@@ -18,7 +17,7 @@ public class C40Encoder implements Encoder {
             }
             char currentChar = encoderContext.getCurrentChar();
             encoderContext.pos++;
-            int encodeChar = encodeChar(currentChar, sb);
+            int iEncodeChar = encodeChar(currentChar, sb);
             int length = encoderContext.codewords.length() + ((sb.length() / 3) * 2);
             encoderContext.updateSymbolInfo(length);
             int i = encoderContext.symbolInfo.dataCapacity - length;
@@ -26,16 +25,16 @@ public class C40Encoder implements Encoder {
                 StringBuilder sb2 = new StringBuilder();
                 if (sb.length() % 3 == 2 && i != 2) {
                     int length2 = sb.length();
-                    sb.delete(length2 - encodeChar, length2);
+                    sb.delete(length2 - iEncodeChar, length2);
                     encoderContext.pos--;
-                    encodeChar = encodeChar(encoderContext.getCurrentChar(), sb2);
+                    iEncodeChar = encodeChar(encoderContext.getCurrentChar(), sb2);
                     encoderContext.symbolInfo = null;
                 }
-                while (sb.length() % 3 == 1 && (encodeChar > 3 || i != 1)) {
+                while (sb.length() % 3 == 1 && (iEncodeChar > 3 || i != 1)) {
                     int length3 = sb.length();
-                    sb.delete(length3 - encodeChar, length3);
+                    sb.delete(length3 - iEncodeChar, length3);
                     encoderContext.pos--;
-                    encodeChar = encodeChar(encoderContext.getCurrentChar(), sb2);
+                    iEncodeChar = encodeChar(encoderContext.getCurrentChar(), sb2);
                     encoderContext.symbolInfo = null;
                 }
             } else if (sb.length() % 3 == 0 && HighLevelEncoder.lookAheadTest(encoderContext.pos, getEncodingMode(), encoderContext.msg) != getEncodingMode()) {

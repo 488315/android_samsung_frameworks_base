@@ -12,7 +12,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecurityModel {
     public static final Companion Companion = new Companion(null);
@@ -31,7 +30,6 @@ public final class SecurityModel {
     public final String workProfileOrganizationName;
     public final String workProfileVpnName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -47,17 +45,17 @@ public final class SecurityModel {
         public final SecurityModel create(SecurityController securityController) {
             SecurityControllerImpl securityControllerImpl = (SecurityControllerImpl) securityController;
             DeviceAdminInfo deviceAdminInfo = securityControllerImpl.isParentalControlsEnabled() ? securityControllerImpl.getDeviceAdminInfo() : null;
-            Drawable loadIcon = deviceAdminInfo == null ? null : deviceAdminInfo.loadIcon(securityControllerImpl.mPackageManager);
-            boolean isDeviceManaged = securityControllerImpl.mDevicePolicyManager.isDeviceManaged();
-            boolean hasWorkProfile$1 = securityControllerImpl.hasWorkProfile$1();
-            UserHandle of = UserHandle.of(securityControllerImpl.getWorkProfileUserId$1(securityControllerImpl.mCurrentUserId));
-            boolean z = (of == null || securityControllerImpl.mUserManager.isQuietModeEnabled(of)) ? false : true;
-            boolean isOrganizationOwnedDeviceWithManagedProfile = securityControllerImpl.mDevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile();
+            Drawable drawableLoadIcon = deviceAdminInfo == null ? null : deviceAdminInfo.loadIcon(securityControllerImpl.mPackageManager);
+            boolean zIsDeviceManaged = securityControllerImpl.mDevicePolicyManager.isDeviceManaged();
+            boolean zHasWorkProfile$1 = securityControllerImpl.hasWorkProfile$1();
+            UserHandle userHandleOf = UserHandle.of(securityControllerImpl.getWorkProfileUserId$1(securityControllerImpl.mCurrentUserId));
+            boolean z = (userHandleOf == null || securityControllerImpl.mUserManager.isQuietModeEnabled(userHandleOf)) ? false : true;
+            boolean zIsOrganizationOwnedDeviceWithManagedProfile = securityControllerImpl.mDevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile();
             CharSequence deviceOwnerOrganizationName = securityControllerImpl.mDevicePolicyManager.getDeviceOwnerOrganizationName();
-            String obj = deviceOwnerOrganizationName != null ? deviceOwnerOrganizationName.toString() : null;
+            String string = deviceOwnerOrganizationName != null ? deviceOwnerOrganizationName.toString() : null;
             int workProfileUserId$1 = securityControllerImpl.getWorkProfileUserId$1(securityControllerImpl.mCurrentUserId);
             CharSequence organizationNameForUser = workProfileUserId$1 == -10000 ? null : securityControllerImpl.mDevicePolicyManager.getOrganizationNameForUser(workProfileUserId$1);
-            return new SecurityModel(isDeviceManaged, hasWorkProfile$1, z, isOrganizationOwnedDeviceWithManagedProfile, obj, organizationNameForUser != null ? organizationNameForUser.toString() : null, securityControllerImpl.mDevicePolicyManager.isNetworkLoggingEnabled(null), securityControllerImpl.isVpnBranded(), securityControllerImpl.getPrimaryVpnName(), securityControllerImpl.getWorkProfileVpnName(), securityControllerImpl.hasCACertInCurrentUser(), securityControllerImpl.hasCACertInWorkProfile(), securityControllerImpl.isParentalControlsEnabled(), loadIcon);
+            return new SecurityModel(zIsDeviceManaged, zHasWorkProfile$1, z, zIsOrganizationOwnedDeviceWithManagedProfile, string, organizationNameForUser != null ? organizationNameForUser.toString() : null, securityControllerImpl.mDevicePolicyManager.isNetworkLoggingEnabled(null), securityControllerImpl.isVpnBranded(), securityControllerImpl.getPrimaryVpnName(), securityControllerImpl.getWorkProfileVpnName(), securityControllerImpl.hasCACertInCurrentUser(), securityControllerImpl.hasCACertInWorkProfile(), securityControllerImpl.isParentalControlsEnabled(), drawableLoadIcon);
         }
     }
 
@@ -94,17 +92,17 @@ public final class SecurityModel {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.isDeviceManaged) * 31, 31, this.hasWorkProfile), 31, this.isWorkProfileOn), 31, this.isProfileOwnerOfOrganizationOwnedDevice);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.isDeviceManaged) * 31, 31, this.hasWorkProfile), 31, this.isWorkProfileOn), 31, this.isProfileOwnerOfOrganizationOwnedDevice);
         String str = this.deviceOwnerOrganizationName;
-        int hashCode = (m + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode = (iM + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.workProfileOrganizationName;
-        int m2 = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((hashCode + (str2 == null ? 0 : str2.hashCode())) * 31, 31, this.isNetworkLoggingEnabled), 31, this.isVpnBranded);
+        int iM2 = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (str2 == null ? 0 : str2.hashCode())) * 31, 31, this.isNetworkLoggingEnabled), 31, this.isVpnBranded);
         String str3 = this.primaryVpnName;
-        int hashCode2 = (m2 + (str3 == null ? 0 : str3.hashCode())) * 31;
+        int iHashCode2 = (iM2 + (str3 == null ? 0 : str3.hashCode())) * 31;
         String str4 = this.workProfileVpnName;
-        int m3 = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((hashCode2 + (str4 == null ? 0 : str4.hashCode())) * 31, 31, this.hasCACertInCurrentUser), 31, this.hasCACertInWorkProfile), 31, this.isParentalControlsEnabled);
+        int iM3 = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iHashCode2 + (str4 == null ? 0 : str4.hashCode())) * 31, 31, this.hasCACertInCurrentUser), 31, this.hasCACertInWorkProfile), 31, this.isParentalControlsEnabled);
         Drawable drawable = this.deviceAdminIcon;
-        return m3 + (drawable != null ? drawable.hashCode() : 0);
+        return iM3 + (drawable != null ? drawable.hashCode() : 0);
     }
 
     public final String toString() {

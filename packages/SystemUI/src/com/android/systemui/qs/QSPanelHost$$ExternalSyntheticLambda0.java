@@ -1,11 +1,11 @@
 package com.android.systemui.qs;
 
+import android.content.res.Resources;
 import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.qs.SecQSPanelControllerBase;
 import com.android.systemui.qs.bar.TileChunkLayoutBar$$ExternalSyntheticLambda0;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class QSPanelHost$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -15,7 +15,7 @@ public final /* synthetic */ class QSPanelHost$$ExternalSyntheticLambda0 impleme
     }
 
     @Override // java.util.function.Consumer
-    public final void accept(Object obj) {
+    public final void accept(Object obj) throws Resources.NotFoundException {
         switch (this.$r8$classId) {
             case 0:
                 ((SecQSPanelControllerBase.TileRecord) obj).tile.removeCallbacks();

@@ -107,23 +107,23 @@ public class DSAParametersGenerator {
             bArr4[19] = (byte) (bArr4[19] | 1);
             BigInteger bigInteger = new BigInteger(1, bArr4);
             if (isProbablePrime(bigInteger)) {
-                byte[] clone = Arrays.clone(bArr);
-                inc(clone);
+                byte[] bArrClone = Arrays.clone(bArr);
+                inc(bArrClone);
                 int i6 = 0;
                 while (i6 < 4096) {
                     for (int i7 = 1; i7 <= i3; i7++) {
-                        inc(clone);
-                        hash(this.digest, clone, bArr5, i4 - (i7 * 20));
+                        inc(bArrClone);
+                        hash(this.digest, bArrClone, bArr5, i4 - (i7 * 20));
                     }
                     int i8 = i4 - (i3 * 20);
-                    inc(clone);
-                    hash(this.digest, clone, bArr2, 0);
+                    inc(bArrClone);
+                    hash(this.digest, bArrClone, bArr2, 0);
                     System.arraycopy(bArr2, 20 - i8, bArr5, 0, i8);
                     bArr5[0] = (byte) (bArr5[0] | Byte.MIN_VALUE);
                     BigInteger bigInteger2 = new BigInteger(1, bArr5);
-                    BigInteger subtract = bigInteger2.subtract(bigInteger2.mod(bigInteger.shiftLeft(1)).subtract(ONE));
-                    if (subtract.bitLength() == this.L && isProbablePrime(subtract)) {
-                        return new DSAParameters(subtract, bigInteger, calculateGenerator_FIPS186_2(subtract, bigInteger, this.random), new DSAValidationParameters(bArr, i6));
+                    BigInteger bigIntegerSubtract = bigInteger2.subtract(bigInteger2.mod(bigInteger.shiftLeft(1)).subtract(ONE));
+                    if (bigIntegerSubtract.bitLength() == this.L && isProbablePrime(bigIntegerSubtract)) {
+                        return new DSAParameters(bigIntegerSubtract, bigInteger, calculateGenerator_FIPS186_2(bigIntegerSubtract, bigInteger, this.random), new DSAValidationParameters(bArr, i6));
                     }
                     i6++;
                     i = 20;
@@ -133,20 +133,20 @@ public class DSAParametersGenerator {
     }
 
     private static BigInteger calculateGenerator_FIPS186_2(BigInteger bigInteger, BigInteger bigInteger2, SecureRandom secureRandom) {
-        BigInteger modPow;
-        BigInteger divide = bigInteger.subtract(ONE).divide(bigInteger2);
-        BigInteger subtract = bigInteger.subtract(TWO);
+        BigInteger bigIntegerModPow;
+        BigInteger bigIntegerDivide = bigInteger.subtract(ONE).divide(bigInteger2);
+        BigInteger bigIntegerSubtract = bigInteger.subtract(TWO);
         do {
-            modPow = BigIntegers.createRandomInRange(TWO, subtract, secureRandom).modPow(divide, bigInteger);
-        } while (modPow.bitLength() <= 1);
-        return modPow;
+            bigIntegerModPow = BigIntegers.createRandomInRange(TWO, bigIntegerSubtract, secureRandom).modPow(bigIntegerDivide, bigInteger);
+        } while (bigIntegerModPow.bitLength() <= 1);
+        return bigIntegerModPow;
     }
 
     private DSAParameters generateParameters_FIPS186_3() {
         BigInteger bit;
         int i;
-        BigInteger subtract;
-        BigInteger calculateGenerator_FIPS186_3_Verifiable;
+        BigInteger bigIntegerSubtract;
+        BigInteger bigIntegerCalculateGenerator_FIPS186_3_Verifiable;
         Digest digest = this.digest;
         int digestSize = digest.getDigestSize() * 8;
         byte[] bArr = new byte[this.N / 8];
@@ -163,22 +163,22 @@ public class DSAParametersGenerator {
             hash(digest, bArr, bArr3, 0);
             bit = new BigInteger(1, bArr3).mod(ONE.shiftLeft(this.N - 1)).setBit(0).setBit(this.N - 1);
             if (isProbablePrime(bit)) {
-                byte[] clone = Arrays.clone(bArr);
+                byte[] bArrClone = Arrays.clone(bArr);
                 int i7 = this.L * 4;
                 i = 0;
                 while (i < i7) {
                     for (int i8 = 1; i8 <= i3; i8++) {
-                        inc(clone);
-                        hash(digest, clone, bArr2, i5 - (i8 * digestSize2));
+                        inc(bArrClone);
+                        hash(digest, bArrClone, bArr2, i5 - (i8 * digestSize2));
                     }
                     int i9 = i5 - (i3 * digestSize2);
-                    inc(clone);
-                    hash(digest, clone, bArr3, i6);
+                    inc(bArrClone);
+                    hash(digest, bArrClone, bArr3, i6);
                     System.arraycopy(bArr3, digestSize2 - i9, bArr2, i6, i9);
                     bArr2[i6] = (byte) (bArr2[i6] | Byte.MIN_VALUE);
                     BigInteger bigInteger = new BigInteger(1, bArr2);
-                    subtract = bigInteger.subtract(bigInteger.mod(bit.shiftLeft(1)).subtract(ONE));
-                    if (subtract.bitLength() == this.L && isProbablePrime(subtract)) {
+                    bigIntegerSubtract = bigInteger.subtract(bigInteger.mod(bit.shiftLeft(1)).subtract(ONE));
+                    if (bigIntegerSubtract.bitLength() == this.L && isProbablePrime(bigIntegerSubtract)) {
                         break loop0;
                     }
                     i++;
@@ -187,10 +187,10 @@ public class DSAParametersGenerator {
             }
         }
         int i10 = this.usageIndex;
-        if (i10 >= 0 && (calculateGenerator_FIPS186_3_Verifiable = calculateGenerator_FIPS186_3_Verifiable(digest, subtract, bit, bArr, i10)) != null) {
-            return new DSAParameters(subtract, bit, calculateGenerator_FIPS186_3_Verifiable, new DSAValidationParameters(bArr, i, this.usageIndex));
+        if (i10 >= 0 && (bigIntegerCalculateGenerator_FIPS186_3_Verifiable = calculateGenerator_FIPS186_3_Verifiable(digest, bigIntegerSubtract, bit, bArr, i10)) != null) {
+            return new DSAParameters(bigIntegerSubtract, bit, bigIntegerCalculateGenerator_FIPS186_3_Verifiable, new DSAValidationParameters(bArr, i, this.usageIndex));
         }
-        return new DSAParameters(subtract, bit, calculateGenerator_FIPS186_3_Unverifiable(subtract, bit, this.random), new DSAValidationParameters(bArr, i));
+        return new DSAParameters(bigIntegerSubtract, bit, calculateGenerator_FIPS186_3_Unverifiable(bigIntegerSubtract, bit, this.random), new DSAValidationParameters(bArr, i));
     }
 
     private boolean isProbablePrime(BigInteger bigInteger) {
@@ -202,20 +202,20 @@ public class DSAParametersGenerator {
     }
 
     private static BigInteger calculateGenerator_FIPS186_3_Verifiable(Digest digest, BigInteger bigInteger, BigInteger bigInteger2, byte[] bArr, int i) {
-        BigInteger divide = bigInteger.subtract(ONE).divide(bigInteger2);
-        byte[] decodeStrict = Hex.decodeStrict("6767656E");
-        int length = bArr.length + decodeStrict.length;
+        BigInteger bigIntegerDivide = bigInteger.subtract(ONE).divide(bigInteger2);
+        byte[] bArrDecodeStrict = Hex.decodeStrict("6767656E");
+        int length = bArr.length + bArrDecodeStrict.length;
         byte[] bArr2 = new byte[length + 3];
         System.arraycopy(bArr, 0, bArr2, 0, bArr.length);
-        System.arraycopy(decodeStrict, 0, bArr2, bArr.length, decodeStrict.length);
+        System.arraycopy(bArrDecodeStrict, 0, bArr2, bArr.length, bArrDecodeStrict.length);
         bArr2[length] = (byte) i;
         byte[] bArr3 = new byte[digest.getDigestSize()];
         for (int i2 = 1; i2 < 65536; i2++) {
             inc(bArr2);
             hash(digest, bArr2, bArr3, 0);
-            BigInteger modPow = new BigInteger(1, bArr3).modPow(divide, bigInteger);
-            if (modPow.compareTo(TWO) >= 0) {
-                return modPow;
+            BigInteger bigIntegerModPow = new BigInteger(1, bArr3).modPow(bigIntegerDivide, bigInteger);
+            if (bigIntegerModPow.compareTo(TWO) >= 0) {
+                return bigIntegerModPow;
             }
         }
         return null;

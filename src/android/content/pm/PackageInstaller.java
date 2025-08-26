@@ -218,7 +218,7 @@ public class PackageInstaller {
         this.mUserId = i;
     }
 
-    public int createSession(SessionParams sessionParams) throws IOException {
+    public int createSession(SessionParams sessionParams) throws Throwable {
         try {
             return this.mInstaller.createSession(sessionParams, this.mInstallerPackageName, this.mAttributionTag, this.mUserId);
         } catch (RemoteException e) {
@@ -229,7 +229,7 @@ public class PackageInstaller {
         }
     }
 
-    public Session openSession(int i) throws IOException {
+    public Session openSession(int i) throws Throwable {
         try {
             try {
                 return new Session(this.mInstaller.openSession(i));
@@ -242,7 +242,7 @@ public class PackageInstaller {
         }
     }
 
-    public ParcelFileDescriptor requestCopy(String str, long j) throws IOException {
+    public ParcelFileDescriptor requestCopy(String str, long j) throws Throwable {
         try {
             return this.mInstaller.requestCopy(str, j);
         } catch (RemoteException e) {
@@ -253,7 +253,7 @@ public class PackageInstaller {
         }
     }
 
-    public Session openSessionQuick(int i, String str) throws IOException {
+    public Session openSessionQuick(int i, String str) throws Throwable {
         try {
             try {
                 return new Session(this.mInstaller.openSessionQuick(i, str));
@@ -275,17 +275,17 @@ public class PackageInstaller {
     }
 
     public void updateSessionAppLabel(int i, CharSequence charSequence) {
-        String charSequence2;
+        String string;
         if (charSequence != null) {
             try {
-                charSequence2 = charSequence.toString();
+                string = charSequence.toString();
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         } else {
-            charSequence2 = null;
+            string = null;
         }
-        this.mInstaller.updateSessionAppLabel(i, charSequence2);
+        this.mInstaller.updateSessionAppLabel(i, string);
     }
 
     public void abandonSession(int i) {
@@ -426,7 +426,7 @@ public class PackageInstaller {
                     executor.execute(new Runnable() { // from class: android.content.pm.PackageInstaller$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            r1.accept((PackageInstaller.InstallConstraintsResult) bundle.getParcelable("result", PackageInstaller.InstallConstraintsResult.class));
+                            consumer.accept((PackageInstaller.InstallConstraintsResult) bundle.getParcelable("result", PackageInstaller.InstallConstraintsResult.class));
                         }
                     });
                 }
@@ -446,9 +446,9 @@ public class PackageInstaller {
 
     public void commitSessionAfterInstallConstraintsAreMet(int i, IntentSender intentSender, InstallConstraints installConstraints, long j) {
         try {
-            IPackageInstallerSession openSession = this.mInstaller.openSession(i);
-            openSession.seal();
-            waitForInstallConstraints(openSession.fetchPackageNames(), installConstraints, new LocalIntentSender(ActivityThread.currentApplication(), i, openSession, intentSender).getIntentSender(), j);
+            IPackageInstallerSession iPackageInstallerSessionOpenSession = this.mInstaller.openSession(i);
+            iPackageInstallerSessionOpenSession.seal();
+            waitForInstallConstraints(iPackageInstallerSessionOpenSession.fetchPackageNames(), installConstraints, new LocalIntentSender(ActivityThread.currentApplication(), i, iPackageInstallerSessionOpenSession, intentSender).getIntentSender(), j);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -638,7 +638,7 @@ public class PackageInstaller {
             }
         }
 
-        public OutputStream openWrite(String str, long j, long j2) throws IOException {
+        public OutputStream openWrite(String str, long j, long j2) throws Throwable {
             try {
                 if (PackageInstaller.ENABLE_REVOCABLE_FD) {
                     return new ParcelFileDescriptor.AutoCloseOutputStream(this.mSession.openWrite(str, j, j2));
@@ -652,7 +652,7 @@ public class PackageInstaller {
             }
         }
 
-        public void write(String str, long j, long j2, ParcelFileDescriptor parcelFileDescriptor) throws IOException {
+        public void write(String str, long j, long j2, ParcelFileDescriptor parcelFileDescriptor) throws Throwable {
             try {
                 this.mSession.write(str, j, j2, parcelFileDescriptor);
             } catch (RemoteException e) {
@@ -663,7 +663,7 @@ public class PackageInstaller {
             }
         }
 
-        public void stageViaHardLink(String str) throws IOException {
+        public void stageViaHardLink(String str) throws Throwable {
             try {
                 this.mSession.stageViaHardLink(str);
             } catch (RemoteException e) {
@@ -674,7 +674,7 @@ public class PackageInstaller {
             }
         }
 
-        public void fsync(OutputStream outputStream) throws IOException {
+        public void fsync(OutputStream outputStream) throws IOException, ErrnoException {
             if (PackageInstaller.ENABLE_REVOCABLE_FD) {
                 if (outputStream instanceof ParcelFileDescriptor.AutoCloseOutputStream) {
                     try {
@@ -693,7 +693,7 @@ public class PackageInstaller {
             throw new IllegalArgumentException("Unrecognized stream");
         }
 
-        public String[] getNames() throws IOException {
+        public String[] getNames() throws Throwable {
             try {
                 return this.mSession.getNames();
             } catch (RemoteException e) {
@@ -704,7 +704,7 @@ public class PackageInstaller {
             }
         }
 
-        public InputStream openRead(String str) throws IOException {
+        public InputStream openRead(String str) throws Throwable {
             try {
                 return new ParcelFileDescriptor.AutoCloseInputStream(this.mSession.openRead(str));
             } catch (RemoteException e) {
@@ -715,7 +715,7 @@ public class PackageInstaller {
             }
         }
 
-        public void removeSplit(String str) throws IOException {
+        public void removeSplit(String str) throws Throwable {
             try {
                 this.mSession.removeSplit(str);
             } catch (RemoteException e) {
@@ -758,7 +758,7 @@ public class PackageInstaller {
         }
 
         @Deprecated
-        public void setChecksums(String str, List<Checksum> list, byte[] bArr) throws IOException {
+        public void setChecksums(String str, List<Checksum> list, byte[] bArr) throws Throwable {
             Objects.requireNonNull(str);
             Objects.requireNonNull(list);
             try {
@@ -785,7 +785,7 @@ public class PackageInstaller {
             return arrayList;
         }
 
-        public void requestChecksums(String str, int i, List<Certificate> list, Executor executor, PackageManager.OnChecksumsReadyListener onChecksumsReadyListener) throws CertificateEncodingException, FileNotFoundException {
+        public void requestChecksums(String str, int i, List<Certificate> list, Executor executor, PackageManager.OnChecksumsReadyListener onChecksumsReadyListener) throws Throwable {
             Objects.requireNonNull(str);
             Objects.requireNonNull(list);
             Objects.requireNonNull(executor);
@@ -824,7 +824,7 @@ public class PackageInstaller {
                 executor.execute(new Runnable() { // from class: android.content.pm.PackageInstaller$Session$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PackageManager.OnChecksumsReadyListener.this.onChecksumsReady(list);
+                        onChecksumsReadyListener.onChecksumsReady(list);
                     }
                 });
             }
@@ -847,7 +847,7 @@ public class PackageInstaller {
             }
         }
 
-        public void transfer(String str) throws PackageManager.NameNotFoundException {
+        public void transfer(String str) throws Throwable {
             Preconditions.checkArgument(!TextUtils.isEmpty(str));
             try {
                 this.mSession.transfer(str);
@@ -932,14 +932,14 @@ public class PackageInstaller {
             }
         }
 
-        public PersistableBundle getAppMetadata() {
-            PersistableBundle persistableBundle = null;
+        public PersistableBundle getAppMetadata() throws IOException {
+            PersistableBundle fromStream = null;
             try {
                 ParcelFileDescriptor appMetadataFd = this.mSession.getAppMetadataFd();
                 if (appMetadataFd != null) {
                     ParcelFileDescriptor.AutoCloseInputStream autoCloseInputStream = new ParcelFileDescriptor.AutoCloseInputStream(appMetadataFd);
                     try {
-                        persistableBundle = PersistableBundle.readFromStream(autoCloseInputStream);
+                        fromStream = PersistableBundle.readFromStream(autoCloseInputStream);
                         autoCloseInputStream.close();
                     } finally {
                     }
@@ -949,10 +949,10 @@ public class PackageInstaller {
             } catch (IOException e2) {
                 throw new RuntimeException(e2);
             }
-            return persistableBundle != null ? persistableBundle : new PersistableBundle();
+            return fromStream != null ? fromStream : new PersistableBundle();
         }
 
-        private OutputStream openWriteAppMetadata() throws IOException {
+        private OutputStream openWriteAppMetadata() throws Throwable {
             try {
                 if (PackageInstaller.ENABLE_REVOCABLE_FD) {
                     return new ParcelFileDescriptor.AutoCloseOutputStream(this.mSession.openWriteAppMetadata());
@@ -966,7 +966,7 @@ public class PackageInstaller {
             }
         }
 
-        public void setAppMetadata(PersistableBundle persistableBundle) throws IOException {
+        public void setAppMetadata(PersistableBundle persistableBundle) throws Throwable {
             if (persistableBundle == null || persistableBundle.isEmpty()) {
                 try {
                     this.mSession.removeAppMetadata();
@@ -976,16 +976,16 @@ public class PackageInstaller {
                 }
             }
             Objects.requireNonNull(persistableBundle);
-            OutputStream openWriteAppMetadata = openWriteAppMetadata();
+            OutputStream outputStreamOpenWriteAppMetadata = openWriteAppMetadata();
             try {
-                persistableBundle.writeToStream(openWriteAppMetadata);
-                if (openWriteAppMetadata != null) {
-                    openWriteAppMetadata.close();
+                persistableBundle.writeToStream(outputStreamOpenWriteAppMetadata);
+                if (outputStreamOpenWriteAppMetadata != null) {
+                    outputStreamOpenWriteAppMetadata.close();
                 }
             } catch (Throwable th) {
-                if (openWriteAppMetadata != null) {
+                if (outputStreamOpenWriteAppMetadata != null) {
                     try {
-                        openWriteAppMetadata.close();
+                        outputStreamOpenWriteAppMetadata.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -1043,23 +1043,23 @@ public class PackageInstaller {
 
     @SystemApi
     public InstallInfo readInstallInfo(File file, int i) throws PackageParsingException {
-        ParseResult<PackageLite> parsePackageLite = ApkLiteParseUtils.parsePackageLite(ParseTypeImpl.forDefaultParsing().reset(), file, i);
-        if (parsePackageLite.isError()) {
-            throw new PackageParsingException(parsePackageLite.getErrorCode(), parsePackageLite.getErrorMessage());
+        ParseResult<PackageLite> packageLite = ApkLiteParseUtils.parsePackageLite(ParseTypeImpl.forDefaultParsing().reset(), file, i);
+        if (packageLite.isError()) {
+            throw new PackageParsingException(packageLite.getErrorCode(), packageLite.getErrorMessage());
         }
-        return new InstallInfo(parsePackageLite);
+        return new InstallInfo(packageLite);
     }
 
     @SystemApi
     public InstallInfo readInstallInfo(ParcelFileDescriptor parcelFileDescriptor, String str, int i) throws PackageParsingException {
-        ParseResult<PackageLite> parseMonolithicPackageLite = ApkLiteParseUtils.parseMonolithicPackageLite(ParseTypeImpl.forDefaultParsing(), parcelFileDescriptor.getFileDescriptor(), str, i);
-        if (parseMonolithicPackageLite.isError()) {
-            throw new PackageParsingException(parseMonolithicPackageLite.getErrorCode(), parseMonolithicPackageLite.getErrorMessage());
+        ParseResult<PackageLite> monolithicPackageLite = ApkLiteParseUtils.parseMonolithicPackageLite(ParseTypeImpl.forDefaultParsing(), parcelFileDescriptor.getFileDescriptor(), str, i);
+        if (monolithicPackageLite.isError()) {
+            throw new PackageParsingException(monolithicPackageLite.getErrorCode(), monolithicPackageLite.getErrorMessage());
         }
-        return new InstallInfo(parseMonolithicPackageLite);
+        return new InstallInfo(monolithicPackageLite);
     }
 
-    public void requestArchive(String str, IntentSender intentSender) throws PackageManager.NameNotFoundException {
+    public void requestArchive(String str, IntentSender intentSender) throws Throwable {
         try {
             this.mInstaller.requestArchive(str, this.mInstallerPackageName, 0, intentSender, new UserHandle(this.mUserId));
         } catch (ParcelableException e) {
@@ -1070,7 +1070,7 @@ public class PackageInstaller {
         }
     }
 
-    public void requestUnarchive(String str, IntentSender intentSender) throws IOException, PackageManager.NameNotFoundException {
+    public void requestUnarchive(String str, IntentSender intentSender) throws Throwable {
         try {
             this.mInstaller.requestUnarchive(str, this.mInstallerPackageName, intentSender, new UserHandle(this.mUserId));
         } catch (ParcelableException e) {
@@ -1082,7 +1082,7 @@ public class PackageInstaller {
         }
     }
 
-    public void reportUnarchivalStatus(int i, int i2, long j, PendingIntent pendingIntent) throws PackageManager.NameNotFoundException {
+    public void reportUnarchivalStatus(int i, int i2, long j, PendingIntent pendingIntent) throws Throwable {
         try {
             this.mInstaller.reportUnarchivalStatus(i, i2, j, pendingIntent, new UserHandle(this.mUserId));
         } catch (ParcelableException e) {
@@ -1093,7 +1093,7 @@ public class PackageInstaller {
         }
     }
 
-    public void reportUnarchivalState(UnarchivalState unarchivalState) throws PackageManager.NameNotFoundException {
+    public void reportUnarchivalState(UnarchivalState unarchivalState) throws Throwable {
         Objects.requireNonNull(unarchivalState);
         try {
             this.mInstaller.reportUnarchivalStatus(unarchivalState.getUnarchiveId(), unarchivalState.getStatus(), unarchivalState.getRequiredStorageBytes(), unarchivalState.getUserActionIntent(), new UserHandle(this.mUserId));
@@ -1247,7 +1247,7 @@ public class PackageInstaller {
             this.mPermissionStates = new ArrayMap<>();
         }
 
-        public SessionParams(Parcel parcel) {
+        public SessionParams(Parcel parcel) throws ClassNotFoundException, IOException {
             this.mode = -1;
             this.installFlags = 4194304;
             this.installLocation = 1;
@@ -1621,9 +1621,9 @@ public class PackageInstaller {
             }
             ArrayList arrayList = new ArrayList();
             for (int i = 0; i < this.mPermissionStates.size(); i++) {
-                String keyAt = this.mPermissionStates.keyAt(i);
+                String strKeyAt = this.mPermissionStates.keyAt(i);
                 if (this.mPermissionStates.valueAt(i).intValue() == 1) {
-                    arrayList.add(keyAt);
+                    arrayList.add(strKeyAt);
                 }
             }
             return (String[]) arrayList.toArray((String[]) ArrayUtils.emptyArray(String.class));
@@ -1855,9 +1855,9 @@ public class PackageInstaller {
             this.isStaged = parcel.readBoolean();
             this.forceQueryable = parcel.readBoolean();
             this.parentSessionId = parcel.readInt();
-            int[] createIntArray = parcel.createIntArray();
-            this.childSessionIds = createIntArray;
-            if (createIntArray == null) {
+            int[] iArrCreateIntArray = parcel.createIntArray();
+            this.childSessionIds = iArrCreateIntArray;
+            if (iArrCreateIntArray == null) {
                 this.childSessionIds = iArr;
             }
             this.isSessionApplied = parcel.readBoolean();
@@ -2260,18 +2260,18 @@ public class PackageInstaller {
         }
 
         PreapprovalDetails(Parcel parcel) {
-            Bitmap createFromParcel = (parcel.readByte() & 1) == 0 ? null : Bitmap.CREATOR.createFromParcel(parcel);
-            CharSequence readCharSequence = parcel.readCharSequence();
+            Bitmap bitmapCreateFromParcel = (parcel.readByte() & 1) == 0 ? null : Bitmap.CREATOR.createFromParcel(parcel);
+            CharSequence charSequence = parcel.readCharSequence();
             ULocale uLocale = new ULocale(parcel.readString8());
-            String readString8 = parcel.readString8();
-            this.mIcon = createFromParcel;
-            this.mLabel = readCharSequence;
-            Preconditions.checkArgument(!TextUtils.isEmpty(readCharSequence), "App label cannot be empty.");
+            String string8 = parcel.readString8();
+            this.mIcon = bitmapCreateFromParcel;
+            this.mLabel = charSequence;
+            Preconditions.checkArgument(!TextUtils.isEmpty(charSequence), "App label cannot be empty.");
             this.mLocale = uLocale;
             Objects.isNull(uLocale);
             Preconditions.checkArgument(true, "Locale cannot be null.");
-            this.mPackageName = readString8;
-            Preconditions.checkArgument(!TextUtils.isEmpty(readString8), "Package name cannot be empty.");
+            this.mPackageName = string8;
+            Preconditions.checkArgument(!TextUtils.isEmpty(string8), "Package name cannot be empty.");
         }
 
         public static final class Builder {
@@ -2517,12 +2517,12 @@ public class PackageInstaller {
         }
 
         InstallConstraints(Parcel parcel) {
-            byte readByte = parcel.readByte();
-            boolean z = (readByte & 1) != 0;
-            boolean z2 = (readByte & 2) != 0;
-            boolean z3 = (readByte & 4) != 0;
-            boolean z4 = (readByte & 8) != 0;
-            boolean z5 = (readByte & 16) != 0;
+            byte b = parcel.readByte();
+            boolean z = (b & 1) != 0;
+            boolean z2 = (b & 2) != 0;
+            boolean z3 = (b & 4) != 0;
+            boolean z4 = (b & 8) != 0;
+            boolean z5 = (b & 16) != 0;
             this.mDeviceIdleRequired = z;
             this.mAppNotForegroundRequired = z2;
             this.mAppNotInteractingRequired = z3;

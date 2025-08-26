@@ -209,7 +209,7 @@ public class ArrayAdapter<T> extends BaseAdapter implements Filterable, ThemedSp
         return createViewFromResource(this.mInflater, i, view, viewGroup, this.mResource);
     }
 
-    private View createViewFromResource(LayoutInflater layoutInflater, int i, View view, ViewGroup viewGroup, int i2) {
+    private View createViewFromResource(LayoutInflater layoutInflater, int i, View view, ViewGroup viewGroup, int i2) throws Resources.NotFoundException {
         TextView textView;
         if (view == null) {
             view = layoutInflater.inflate(i2, viewGroup, false);
@@ -333,14 +333,14 @@ public class ArrayAdapter<T> extends BaseAdapter implements Filterable, ThemedSp
                 if (lowerCase2.startsWith(lowerCase)) {
                     arrayList3.add(obj);
                 } else {
-                    String[] split = lowerCase2.split(" ");
-                    int length = split.length;
+                    String[] strArrSplit = lowerCase2.split(" ");
+                    int length = strArrSplit.length;
                     int i2 = 0;
                     while (true) {
                         if (i2 >= length) {
                             break;
                         }
-                        if (split[i2].startsWith(lowerCase)) {
+                        if (strArrSplit[i2].startsWith(lowerCase)) {
                             arrayList3.add(obj);
                             break;
                         }

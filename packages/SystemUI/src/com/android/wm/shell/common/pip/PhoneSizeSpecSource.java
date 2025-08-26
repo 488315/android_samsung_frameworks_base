@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import android.util.Size;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PhoneSizeSpecSource implements SizeSpecSource {
     public final Context context;
@@ -41,8 +40,8 @@ public final class PhoneSizeSpecSource implements SizeSpecSource {
         if (this.mOverrideMinSize != null) {
             return minSize;
         }
-        int max = Math.max(Math.round((getMIsSquareDisplay() ? this.mSystemPreferredDefaultSizePercentForSquareDisplay : this.mSystemPreferredDefaultSizePercent) * getMaxSize(f).getWidth()), minSize.getWidth());
-        return new Size(max, Math.round(max / f));
+        int iMax = Math.max(Math.round((getMIsSquareDisplay() ? this.mSystemPreferredDefaultSizePercentForSquareDisplay : this.mSystemPreferredDefaultSizePercent) * getMaxSize(f).getWidth()), minSize.getWidth());
+        return new Size(iMax, Math.round(iMax / f));
     }
 
     public final boolean getMIsSquareDisplay() {
@@ -50,52 +49,54 @@ public final class PhoneSizeSpecSource implements SizeSpecSource {
         return ((float) Math.min(pipDisplayLayoutState.getDisplayLayout().mWidth, pipDisplayLayoutState.getDisplayLayout().mHeight)) / ((float) Math.max(pipDisplayLayoutState.getDisplayLayout().mWidth, pipDisplayLayoutState.getDisplayLayout().mHeight)) > this.mSquareDisplayThresholdForSystemPreferredSize;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0052  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Size getMaxSize(float f) {
-        int i;
+        int iRound;
         PipDisplayLayoutState pipDisplayLayoutState = this.pipDisplayLayoutState;
         Rect insetBounds = pipDisplayLayoutState.getInsetBounds();
         Rect displayBounds = pipDisplayLayoutState.getDisplayBounds();
-        int min = Math.min(displayBounds.width() - ((displayBounds.width() - insetBounds.right) + insetBounds.left), displayBounds.height() - ((displayBounds.height() - insetBounds.bottom) + insetBounds.top));
+        int iMin = Math.min(displayBounds.width() - ((displayBounds.width() - insetBounds.right) + insetBounds.left), displayBounds.height() - ((displayBounds.height() - insetBounds.bottom) + insetBounds.top));
         float f2 = this.mOptimizedAspectRatio;
         if (f >= f2) {
             float f3 = 1;
             if (f <= f3 / f2) {
-                float f4 = min;
-                min = Math.min(Math.round((((f - f2) * f4) / (f3 + f)) + (f2 * f4)), min);
-                i = Math.round(min / f);
-                return new Size(min, i);
+                float f4 = iMin;
+                iMin = Math.min(Math.round((((f - f2) * f4) / (f3 + f)) + (f2 * f4)), iMin);
+                iRound = Math.round(iMin / f);
+            } else if (f > 1.0f) {
+                iRound = Math.round(iMin / f);
+            } else {
+                iMin = Math.round(iMin * f);
+                iRound = iMin;
             }
         }
-        if (f > 1.0f) {
-            i = Math.round(min / f);
-        } else {
-            min = Math.round(min * f);
-            i = min;
-        }
-        return new Size(min, i);
+        return new Size(iMin, iRound);
     }
 
     public final Size getMinSize(float f) {
-        int i;
-        int i2;
+        int iRound;
+        int iMax;
         if (this.mOverrideMinSize != null) {
-            Size adjustOverrideMinSizeToAspectRatio = adjustOverrideMinSizeToAspectRatio(f);
-            adjustOverrideMinSizeToAspectRatio.getClass();
-            return adjustOverrideMinSizeToAspectRatio;
+            Size sizeAdjustOverrideMinSizeToAspectRatio = adjustOverrideMinSizeToAspectRatio(f);
+            sizeAdjustOverrideMinSizeToAspectRatio.getClass();
+            return sizeAdjustOverrideMinSizeToAspectRatio;
         }
         Size maxSize = getMaxSize(f);
-        int round = Math.round((getMIsSquareDisplay() ? this.mSystemPreferredMinimumSizePercentForSquareDisplay : this.mSystemPreferredMinimumSizePercent) * maxSize.getWidth());
-        int round2 = Math.round((getMIsSquareDisplay() ? this.mSystemPreferredMinimumSizePercentForSquareDisplay : this.mSystemPreferredMinimumSizePercent) * maxSize.getHeight());
+        int iRound2 = Math.round((getMIsSquareDisplay() ? this.mSystemPreferredMinimumSizePercentForSquareDisplay : this.mSystemPreferredMinimumSizePercent) * maxSize.getWidth());
+        int iRound3 = Math.round((getMIsSquareDisplay() ? this.mSystemPreferredMinimumSizePercentForSquareDisplay : this.mSystemPreferredMinimumSizePercent) * maxSize.getHeight());
         if (f > 1.0f) {
-            i2 = Math.max(round2, this.mDefaultMinSize);
-            i = Math.round(i2 * f);
+            iMax = Math.max(iRound3, this.mDefaultMinSize);
+            iRound = Math.round(iMax * f);
         } else {
-            int max = Math.max(round, this.mDefaultMinSize);
-            int round3 = Math.round(max / f);
-            i = max;
-            i2 = round3;
+            int iMax2 = Math.max(iRound2, this.mDefaultMinSize);
+            int iRound4 = Math.round(iMax2 / f);
+            iRound = iMax2;
+            iMax = iRound4;
         }
-        return new Size(i, i2);
+        return new Size(iRound, iMax);
     }
 
     public final Size getOverrideMinSize() {
@@ -113,35 +114,35 @@ public final class PhoneSizeSpecSource implements SizeSpecSource {
     public final Size getSizeForAspectRatio(float f, Size size) {
         int i;
         if (size.equals(this.mOverrideMinSize)) {
-            Size adjustOverrideMinSizeToAspectRatio = adjustOverrideMinSizeToAspectRatio(f);
-            adjustOverrideMinSizeToAspectRatio.getClass();
-            return adjustOverrideMinSizeToAspectRatio;
+            Size sizeAdjustOverrideMinSizeToAspectRatio = adjustOverrideMinSizeToAspectRatio(f);
+            sizeAdjustOverrideMinSizeToAspectRatio.getClass();
+            return sizeAdjustOverrideMinSizeToAspectRatio;
         }
         float width = size.getWidth() / getMaxSize(size.getWidth() / size.getHeight()).getWidth();
         Size maxSize = getMaxSize(f);
-        int round = Math.round(maxSize.getWidth() * width);
-        int round2 = Math.round(maxSize.getHeight() * width);
+        int iRound = Math.round(maxSize.getWidth() * width);
+        int iRound2 = Math.round(maxSize.getHeight() * width);
         int overrideMinEdgeSize = this.mOverrideMinSize == null ? this.mDefaultMinSize : getOverrideMinEdgeSize();
-        if (round < overrideMinEdgeSize && f <= 1.0f) {
-            round2 = Math.round(overrideMinEdgeSize / f);
-            round = overrideMinEdgeSize;
-        } else if (round2 < overrideMinEdgeSize && f > 1.0f) {
-            round = Math.round(overrideMinEdgeSize * f);
-            round2 = overrideMinEdgeSize;
+        if (iRound < overrideMinEdgeSize && f <= 1.0f) {
+            iRound2 = Math.round(overrideMinEdgeSize / f);
+            iRound = overrideMinEdgeSize;
+        } else if (iRound2 < overrideMinEdgeSize && f > 1.0f) {
+            iRound = Math.round(overrideMinEdgeSize * f);
+            iRound2 = overrideMinEdgeSize;
         }
-        if (f <= 1.0f && round < (i = this.mDefaultMinWidth)) {
-            round2 = Math.round(i / f);
-            round = i;
+        if (f <= 1.0f && iRound < (i = this.mDefaultMinWidth)) {
+            iRound2 = Math.round(i / f);
+            iRound = i;
         }
         PipDisplayLayoutState pipDisplayLayoutState = this.pipDisplayLayoutState;
         Rect displayBounds = pipDisplayLayoutState.getDisplayBounds();
         Rect insetBounds = pipDisplayLayoutState.getInsetBounds();
-        int height = (displayBounds.height() - insetBounds.top) - (displayBounds.height() - insetBounds.bottom);
-        if (height > 0 && round2 > height) {
-            round2 = maxSize.getHeight();
-            round = maxSize.getWidth();
+        int iHeight = (displayBounds.height() - insetBounds.top) - (displayBounds.height() - insetBounds.bottom);
+        if (iHeight > 0 && iRound2 > iHeight) {
+            iRound2 = maxSize.getHeight();
+            iRound = maxSize.getWidth();
         }
-        return new Size(round, round2);
+        return new Size(iRound, iRound2);
     }
 
     public final void reloadResources() {

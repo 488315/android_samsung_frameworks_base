@@ -40,9 +40,9 @@ class ECUtils {
         if (str == null || str.length() < 1) {
             return null;
         }
-        int indexOf = str.indexOf(32);
-        if (indexOf > 0) {
-            str = str.substring(indexOf + 1);
+        int iIndexOf = str.indexOf(32);
+        if (iIndexOf > 0) {
+            str = str.substring(iIndexOf + 1);
         }
         ASN1ObjectIdentifier oid = getOID(str);
         if (oid == null) {
@@ -57,8 +57,8 @@ class ECUtils {
             if (eCParameterSpec == null) {
                 return new X962Parameters((ASN1Null) DERNull.INSTANCE);
             }
-            ECCurve convertCurve = EC5Util.convertCurve(eCParameterSpec.getCurve());
-            return new X962Parameters(new X9ECParameters(convertCurve, new X9ECPoint(EC5Util.convertPoint(convertCurve, eCParameterSpec.getGenerator()), z), eCParameterSpec.getOrder(), BigInteger.valueOf(eCParameterSpec.getCofactor()), eCParameterSpec.getCurve().getSeed()));
+            ECCurve eCCurveConvertCurve = EC5Util.convertCurve(eCParameterSpec.getCurve());
+            return new X962Parameters(new X9ECParameters(eCCurveConvertCurve, new X9ECPoint(EC5Util.convertPoint(eCCurveConvertCurve, eCParameterSpec.getGenerator()), z), eCParameterSpec.getOrder(), BigInteger.valueOf(eCParameterSpec.getCofactor()), eCParameterSpec.getCurve().getSeed()));
         }
         ECNamedCurveSpec eCNamedCurveSpec = (ECNamedCurveSpec) eCParameterSpec;
         ASN1ObjectIdentifier namedCurveOid = ECUtil.getNamedCurveOid(eCNamedCurveSpec.getName());
@@ -69,8 +69,8 @@ class ECUtils {
     }
 
     private static ASN1ObjectIdentifier getOID(String str) {
-        char charAt = str.charAt(0);
-        if (charAt < '0' || charAt > '2') {
+        char cCharAt = str.charAt(0);
+        if (cCharAt < '0' || cCharAt > '2') {
             return null;
         }
         try {

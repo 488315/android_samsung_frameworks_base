@@ -17,7 +17,6 @@ import com.android.internal.graphics.ColorUtils;
 import com.android.systemui.surfaceeffects.ripple.RippleShader;
 import kotlin.comparisons.ComparisonsKt___ComparisonsJvmKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AuthRippleView extends View {
     public boolean drawDwell;
@@ -89,42 +88,42 @@ public final class AuthRippleView extends View {
             if ((animator3 == null || !animator3.isRunning()) && ((animator = this.retractDwellAnimator) == null || !animator.isRunning())) {
                 return;
             }
-            ValueAnimator ofInt = ValueAnimator.ofInt(Color.alpha(this.dwellShader.color), 0);
-            ofInt.setInterpolator(Interpolators.LINEAR);
-            ofInt.setDuration(this.fadeDuration);
-            ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$fadeDwellRipple$1$1
+            ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(Color.alpha(this.dwellShader.color), 0);
+            valueAnimatorOfInt.setInterpolator(Interpolators.LINEAR);
+            valueAnimatorOfInt.setDuration(this.fadeDuration);
+            valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$fadeDwellRipple$1$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    DwellRippleShader dwellRippleShader = AuthRippleView.this.dwellShader;
+                    DwellRippleShader dwellRippleShader = this.this$0.dwellShader;
                     dwellRippleShader.setColor(ColorUtils.setAlphaComponent(dwellRippleShader.color, ((Integer) valueAnimator.getAnimatedValue()).intValue()));
-                    AuthRippleView.this.invalidate();
+                    this.this$0.invalidate();
                 }
             });
-            ofInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.biometrics.AuthRippleView$fadeDwellRipple$1$2
+            valueAnimatorOfInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.biometrics.AuthRippleView$fadeDwellRipple$1$2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator4) {
-                    AuthRippleView authRippleView = AuthRippleView.this;
+                    AuthRippleView authRippleView = this.this$0;
                     authRippleView.drawDwell = false;
                     DwellRippleShader dwellRippleShader = authRippleView.dwellShader;
                     dwellRippleShader.setColor(ColorUtils.setAlphaComponent(dwellRippleShader.color, 255));
-                    AuthRippleView.this.invalidate();
+                    this.this$0.invalidate();
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationStart(Animator animator4) {
-                    Animator animator5 = AuthRippleView.this.retractDwellAnimator;
+                    Animator animator5 = this.this$0.retractDwellAnimator;
                     if (animator5 != null) {
                         animator5.cancel();
                     }
-                    Animator animator6 = AuthRippleView.this.dwellPulseOutAnimator;
+                    Animator animator6 = this.this$0.dwellPulseOutAnimator;
                     if (animator6 != null) {
                         animator6.cancel();
                     }
-                    AuthRippleView.this.drawDwell = true;
+                    this.this$0.drawDwell = true;
                 }
             });
-            ofInt.start();
-            this.fadeDwellAnimator = ofInt;
+            valueAnimatorOfInt.start();
+            this.fadeDwellAnimator = valueAnimatorOfInt;
         }
     }
 
@@ -149,48 +148,48 @@ public final class AuthRippleView extends View {
         if (animator2 == null || !animator2.isRunning()) {
             Animator animator3 = this.fadeDwellAnimator;
             if ((animator3 == null || !animator3.isRunning()) && (animator = this.dwellPulseOutAnimator) != null && animator.isRunning()) {
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(this.dwellShader.progress, 0.0f);
-                ofFloat.setInterpolator(this.retractInterpolator);
-                ofFloat.setDuration(this.retractDuration);
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$retractDwellRipple$retractDwellRippleAnimator$1$1
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.dwellShader.progress, 0.0f);
+                valueAnimatorOfFloat.setInterpolator(this.retractInterpolator);
+                valueAnimatorOfFloat.setDuration(this.retractDuration);
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$retractDwellRipple$retractDwellRippleAnimator$1$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                         long currentPlayTime = valueAnimator.getCurrentPlayTime();
-                        AuthRippleView.this.dwellShader.setProgress(((Float) valueAnimator.getAnimatedValue()).floatValue());
-                        AuthRippleView.this.dwellShader.setTime(currentPlayTime);
-                        AuthRippleView.this.invalidate();
+                        this.this$0.dwellShader.setProgress(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                        this.this$0.dwellShader.setTime(currentPlayTime);
+                        this.this$0.invalidate();
                     }
                 });
-                ValueAnimator ofInt = ValueAnimator.ofInt(255, 0);
-                ofInt.setInterpolator(Interpolators.LINEAR);
-                ofInt.setDuration(this.retractDuration);
-                ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$retractDwellRipple$retractAlphaAnimator$1$1
+                ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(255, 0);
+                valueAnimatorOfInt.setInterpolator(Interpolators.LINEAR);
+                valueAnimatorOfInt.setDuration(this.retractDuration);
+                valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$retractDwellRipple$retractAlphaAnimator$1$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        DwellRippleShader dwellRippleShader = AuthRippleView.this.dwellShader;
+                        DwellRippleShader dwellRippleShader = this.this$0.dwellShader;
                         dwellRippleShader.setColor(ColorUtils.setAlphaComponent(dwellRippleShader.color, ((Integer) valueAnimator.getAnimatedValue()).intValue()));
-                        AuthRippleView.this.invalidate();
+                        this.this$0.invalidate();
                     }
                 });
                 AnimatorSet animatorSet = new AnimatorSet();
-                animatorSet.playTogether(ofFloat, ofInt);
+                animatorSet.playTogether(valueAnimatorOfFloat, valueAnimatorOfInt);
                 animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.biometrics.AuthRippleView$retractDwellRipple$1$1
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator4) {
-                        AuthRippleView authRippleView = AuthRippleView.this;
+                        AuthRippleView authRippleView = this.this$0;
                         authRippleView.drawDwell = false;
                         DwellRippleShader dwellRippleShader = authRippleView.dwellShader;
                         dwellRippleShader.setColor(ColorUtils.setAlphaComponent(dwellRippleShader.color, 255));
-                        AuthRippleView.this.invalidate();
+                        this.this$0.invalidate();
                     }
 
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationStart(Animator animator4) {
-                        Animator animator5 = AuthRippleView.this.dwellPulseOutAnimator;
+                        Animator animator5 = this.this$0.dwellPulseOutAnimator;
                         if (animator5 != null) {
                             animator5.cancel();
                         }
-                        AuthRippleView.this.drawDwell = true;
+                        this.this$0.drawDwell = true;
                     }
                 });
                 animatorSet.start();
@@ -203,9 +202,9 @@ public final class AuthRippleView extends View {
         this.rippleShader.setFloatUniform("in_center", point.x, point.y);
         this.origin = point;
         RippleShader.RippleSize rippleSize = this.rippleShader.rippleSize;
-        float maxOf = ComparisonsKt___ComparisonsJvmKt.maxOf(point.x, point.y, getWidth() - point.x, getHeight() - point.y) * 0.9f * 2.0f;
+        float fMaxOf = ComparisonsKt___ComparisonsJvmKt.maxOf(point.x, point.y, getWidth() - point.x, getHeight() - point.y) * 0.9f * 2.0f;
         rippleSize.getClass();
-        rippleSize.setSizeAtProgresses(rippleSize.initialSize, new RippleShader.SizeAtProgress(1.0f, maxOf, maxOf));
+        rippleSize.setSizeAtProgresses(rippleSize.initialSize, new RippleShader.SizeAtProgress(1.0f, fMaxOf, fMaxOf));
         DwellRippleShader dwellRippleShader = this.dwellShader;
         dwellRippleShader.getClass();
         dwellRippleShader.setFloatUniform("in_origin", point.x, point.y);
@@ -218,9 +217,9 @@ public final class AuthRippleView extends View {
     public final void setSensorLocation(Point point) {
         this.rippleShader.setFloatUniform("in_center", point.x, point.y);
         this.origin = point;
-        float maxOf = ComparisonsKt___ComparisonsJvmKt.maxOf(point.x, point.y, getWidth() - point.x, getHeight() - point.y) * 0.9f;
+        float fMaxOf = ComparisonsKt___ComparisonsJvmKt.maxOf(point.x, point.y, getWidth() - point.x, getHeight() - point.y) * 0.9f;
         RippleShader.RippleSize rippleSize = this.rippleShader.rippleSize;
-        float f = maxOf * 2.0f;
+        float f = fMaxOf * 2.0f;
         rippleSize.getClass();
         rippleSize.setSizeAtProgresses(rippleSize.initialSize, new RippleShader.SizeAtProgress(1.0f, f, f));
     }

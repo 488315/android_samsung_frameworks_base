@@ -50,7 +50,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ModesDndTile extends QSTileImpl {
     public final QSTileConfig config;
@@ -59,31 +58,29 @@ public final class ModesDndTile extends QSTileImpl {
     public QSTileState tileState;
     public final ModesDndTileUserActionInteractor userActionInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.ModesDndTile$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.tiles.ModesDndTile$1$1, reason: invalid class name and collision with other inner class name */
-        final class C02601 extends SuspendLambda implements Function2 {
+        final class C04161 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ ModesDndTile this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C02601(ModesDndTile modesDndTile, Continuation continuation) {
+            public C04161(ModesDndTile modesDndTile, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = modesDndTile;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C02601(this.this$0, continuation);
+                return new C04161(this.this$0, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C02601) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C04161) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -127,9 +124,9 @@ public final class ModesDndTile extends QSTileImpl {
                 ModesDndTile modesDndTile = ModesDndTile.this;
                 LifecycleRegistry lifecycleRegistry = modesDndTile.mLifecycle;
                 Lifecycle.State state = Lifecycle.State.CREATED;
-                C02601 c02601 = new C02601(modesDndTile, null);
+                C04161 c04161 = new C04161(modesDndTile, null);
                 this.label = 1;
-                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleRegistry, state, c02601, this) == coroutineSingletons) {
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleRegistry, state, c04161, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -142,13 +139,50 @@ public final class ModesDndTile extends QSTileImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.tiles.ModesDndTile$handleClick$1, reason: invalid class name and case insensitive filesystem */
+    final class C10071 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C10071(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ModesDndTile.this.new C10071(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C10071) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i != 0) {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            ResultKt.throwOnFailure(obj);
+            ModesDndTileUserActionInteractor modesDndTileUserActionInteractor = ModesDndTile.this.userActionInteractor;
+            this.label = 1;
+            modesDndTileUserActionInteractor.zenModeInteractor.getClass();
+            ZenModeInteractor.getDndMode();
+            throw null;
         }
     }
 
@@ -178,8 +212,8 @@ public final class ModesDndTile extends QSTileImpl {
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final void handleClick(Expandable expandable) {
-        BuildersKt.runBlocking(EmptyCoroutineContext.INSTANCE, new ModesDndTile$handleClick$1(this, null));
+    public final void handleClick(Expandable expandable) throws Throwable {
+        BuildersKt.runBlocking(EmptyCoroutineContext.INSTANCE, new C10071(null));
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
@@ -188,8 +222,8 @@ public final class ModesDndTile extends QSTileImpl {
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public void handleUpdateState(QSTile.BooleanState booleanState, Object obj) {
-        QSTile.Icon icon;
+    public void handleUpdateState(QSTile.BooleanState booleanState, Object obj) throws Resources.NotFoundException {
+        QSTile.Icon iconAsQSTileIcon;
         ModesDndTileModel modesDndTileModel = obj instanceof ModesDndTileModel ? (ModesDndTileModel) obj : null;
         if (modesDndTileModel == null) {
             ModesDndTileDataInteractor modesDndTileDataInteractor = this.dataInteractor;
@@ -223,25 +257,25 @@ public final class ModesDndTile extends QSTileImpl {
         QSTileUIConfig qSTileUIConfig = this.config.uiConfig;
         ModesDndTileMapper$$ExternalSyntheticLambda0 modesDndTileMapper$$ExternalSyntheticLambda0 = new ModesDndTileMapper$$ExternalSyntheticLambda0(modesDndTileModel, modesDndTileMapper);
         companion.getClass();
-        QSTileState build = QSTileState.Companion.build(resources, theme, qSTileUIConfig, modesDndTileMapper$$ExternalSyntheticLambda0);
-        this.tileState = build;
+        QSTileState qSTileStateBuild = QSTileState.Companion.build(resources, theme, qSTileUIConfig, modesDndTileMapper$$ExternalSyntheticLambda0);
+        this.tileState = qSTileStateBuild;
         if (booleanState != null) {
             boolean z2 = modesDndTileModel.isActivated;
             booleanState.value = z2;
-            booleanState.state = build.activationState.getLegacyState();
+            booleanState.state = qSTileStateBuild.activationState.getLegacyState();
             QSTileState qSTileState = this.tileState;
             if (qSTileState == null) {
                 qSTileState = null;
             }
-            Icon icon2 = qSTileState.icon;
-            if (icon2 != null) {
-                icon = QSTileIconKt.asQSTileIcon(icon2);
+            Icon icon = qSTileState.icon;
+            if (icon != null) {
+                iconAsQSTileIcon = QSTileIconKt.asQSTileIcon(icon);
             } else {
                 int i2 = z2 ? R.drawable.qs_dnd_icon_on : R.drawable.qs_dnd_icon_off;
                 int i3 = QsInCompose.$r8$clinit;
-                icon = QSTileImpl.ResourceIcon.get(i2);
+                iconAsQSTileIcon = QSTileImpl.ResourceIcon.get(i2);
             }
-            booleanState.icon = icon;
+            booleanState.icon = iconAsQSTileIcon;
             booleanState.label = getTileLabel();
             QSTileState qSTileState2 = this.tileState;
             booleanState.secondaryLabel = (qSTileState2 == null ? null : qSTileState2).secondaryLabel;

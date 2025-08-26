@@ -6,11 +6,9 @@ import androidx.compose.ui.geometry.RoundRectKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Outline {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Generic extends Outline {
         public final Path path;
 
@@ -25,7 +23,6 @@ public abstract class Outline {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Rectangle extends Outline {
         public final Rect rect;
 
@@ -54,21 +51,21 @@ public abstract class Outline {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Rounded extends Outline {
         public final RoundRect roundRect;
         public final AndroidPath roundRectPath;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        /* JADX WARN: Multi-variable type inference failed */
         public Rounded(RoundRect roundRect) {
             super(0 == true ? 1 : 0);
-            AndroidPath androidPath = null;
+            AndroidPath androidPathPath = null;
             this.roundRect = roundRect;
             if (!RoundRectKt.isSimple(roundRect)) {
-                androidPath = AndroidPath_androidKt.Path();
-                Path.addRoundRect$default(androidPath, roundRect);
+                androidPathPath = AndroidPath_androidKt.Path();
+                Path.addRoundRect$default(androidPathPath, roundRect);
             }
-            this.roundRectPath = androidPath;
+            this.roundRectPath = androidPathPath;
         }
 
         public final boolean equals(Object obj) {

@@ -22,7 +22,6 @@ import com.android.systemui.statusbar.NotificationInsetsController;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class WindowRootView extends FrameLayout {
     public NotificationInsetsController layoutInsetsController;
@@ -32,7 +31,6 @@ public class WindowRootView extends FrameLayout {
     public int rightInset;
     public WindowRootViewKeyEventHandler windowRootViewKeyEventHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LayoutParams extends FrameLayout.LayoutParams {
         public final boolean ignoreRightInset;
 
@@ -42,9 +40,9 @@ public class WindowRootView extends FrameLayout {
 
         public LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.StatusBarWindowView_Layout);
-            this.ignoreRightInset = obtainStyledAttributes.getBoolean(0, false);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.StatusBarWindowView_Layout);
+            this.ignoreRightInset = typedArrayObtainStyledAttributes.getBoolean(0, false);
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 

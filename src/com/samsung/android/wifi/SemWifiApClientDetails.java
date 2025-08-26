@@ -88,9 +88,9 @@ public class SemWifiApClientDetails implements Parcelable, Comparable<SemWifiApC
         }
 
         public static int getIpTypeInt(DeviceIpType deviceIpType) {
-            int ordinal = deviceIpType.ordinal();
-            if (ordinal != 1) {
-                return ordinal != 2 ? -1 : 0;
+            int iOrdinal = deviceIpType.ordinal();
+            if (iOrdinal != 1) {
+                return iOrdinal != 2 ? -1 : 0;
             }
             return 1;
         }

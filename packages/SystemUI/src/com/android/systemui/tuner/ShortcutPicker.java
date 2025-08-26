@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ShortcutPicker extends PreferenceFragment implements TunerService.Tunable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -29,7 +28,6 @@ public class ShortcutPicker extends PreferenceFragment implements TunerService.T
     public final ArrayList mSelectablePreferences = new ArrayList();
     public TunerService mTunerService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AppPreference extends SelectablePreference {
         public boolean mBinding;
         public final LauncherActivityInfo mInfo;
@@ -65,7 +63,6 @@ public class ShortcutPicker extends PreferenceFragment implements TunerService.T
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ShortcutPreference extends SelectablePreference {
         public boolean mBinding;
         public final ShortcutParser.Shortcut mShortcut;

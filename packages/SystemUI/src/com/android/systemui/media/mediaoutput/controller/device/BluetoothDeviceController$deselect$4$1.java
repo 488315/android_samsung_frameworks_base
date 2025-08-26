@@ -12,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class BluetoothDeviceController$deselect$4$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ LocalBluetoothManager $manager;
@@ -43,10 +42,10 @@ final class BluetoothDeviceController$deselect$4$1 extends SuspendLambda impleme
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             BluetoothDeviceController bluetoothDeviceController = this.this$0;
-            List sorted = CollectionsKt___CollectionsKt.sorted(this.$manager.mCachedDeviceManager.getCachedDevicesCopy());
+            List listSorted = CollectionsKt___CollectionsKt.sorted(this.$manager.mCachedDeviceManager.getCachedDevicesCopy());
             this.label = 1;
             BluetoothDeviceController.Companion companion = BluetoothDeviceController.Companion;
-            if (bluetoothDeviceController.updateDevices(sorted, false, this) == coroutineSingletons) {
+            if (bluetoothDeviceController.updateDevices(listSorted, false, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

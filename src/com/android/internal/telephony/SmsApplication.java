@@ -16,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,6 +27,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Telephony;
+import android.sec.enterprise.content.SecContentProviderURI;
 import android.telecom.Logging.Session;
 import android.telephony.Rlog;
 import android.telephony.TelephonyManager;
@@ -145,9 +147,9 @@ public final class SmsApplication {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int getIncomingUserId() {
-        int myUserId = UserHandle.myUserId();
+        int iMyUserId = UserHandle.myUserId();
         int callingUid = Binder.getCallingUid();
-        return UserHandle.getAppId(callingUid) < 10000 ? myUserId : UserHandle.getUserHandleForUid(callingUid).getIdentifier();
+        return UserHandle.getAppId(callingUid) < 10000 ? iMyUserId : UserHandle.getUserHandleForUid(callingUid).getIdentifier();
     }
 
     private static UserHandle getIncomingUserHandle() {
@@ -159,11 +161,11 @@ public final class SmsApplication {
     }
 
     public static Collection<SmsApplicationData> getApplicationCollectionAsUser(Context context, int i) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             return getApplicationCollectionInternal(context, i);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -175,19 +177,19 @@ public final class SmsApplication {
         SmsApplicationData smsApplicationData5;
         SmsApplicationData smsApplicationData6;
         PackageManager packageManager = context.getPackageManager();
-        UserHandle of = UserHandle.of(i);
-        List<ResolveInfo> queryBroadcastReceiversAsUser = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.SMS_DELIVER_ACTION), 786432, of);
-        HashMap hashMap = new HashMap();
-        Iterator<ResolveInfo> it = queryBroadcastReceiversAsUser.iterator();
+        UserHandle userHandleOf = UserHandle.of(i);
+        List<ResolveInfo> listQueryBroadcastReceiversAsUser = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.SMS_DELIVER_ACTION), 786432, userHandleOf);
+        HashMap map = new HashMap();
+        Iterator<ResolveInfo> it = listQueryBroadcastReceiversAsUser.iterator();
         while (it.hasNext()) {
             ActivityInfo activityInfo = it.next().activityInfo;
             if (activityInfo != null && Manifest.permission.BROADCAST_SMS.equals(activityInfo.permission)) {
                 String str = activityInfo.packageName;
-                if (!hashMap.containsKey(str)) {
+                if (!map.containsKey(str)) {
                     try {
                         SmsApplicationData smsApplicationData7 = new SmsApplicationData(str, activityInfo.applicationInfo.uid);
                         smsApplicationData7.mSmsReceiverClass = activityInfo.name;
-                        hashMap.put(str, smsApplicationData7);
+                        map.put(str, smsApplicationData7);
                     } catch (Exception unused) {
                         Rlog.e(LOG_TAG, "Error getting applicationName");
                     }
@@ -196,60 +198,60 @@ public final class SmsApplication {
         }
         Intent intent = new Intent(Telephony.Sms.Intents.WAP_PUSH_DELIVER_ACTION);
         intent.setDataAndType(null, ContentType.MMS_MESSAGE);
-        Iterator<ResolveInfo> it2 = packageManager.queryBroadcastReceiversAsUser(intent, 786432, of).iterator();
+        Iterator<ResolveInfo> it2 = packageManager.queryBroadcastReceiversAsUser(intent, 786432, userHandleOf).iterator();
         while (it2.hasNext()) {
             ActivityInfo activityInfo2 = it2.next().activityInfo;
-            if (activityInfo2 != null && Manifest.permission.BROADCAST_WAP_PUSH.equals(activityInfo2.permission) && (smsApplicationData6 = (SmsApplicationData) hashMap.get(activityInfo2.packageName)) != null) {
+            if (activityInfo2 != null && Manifest.permission.BROADCAST_WAP_PUSH.equals(activityInfo2.permission) && (smsApplicationData6 = (SmsApplicationData) map.get(activityInfo2.packageName)) != null) {
                 smsApplicationData6.mMmsReceiverClass = activityInfo2.name;
             }
         }
         Iterator<ResolveInfo> it3 = packageManager.queryIntentServicesAsUser(new Intent(TelephonyManager.ACTION_RESPOND_VIA_MESSAGE, Uri.fromParts(SCHEME_SMSTO, "", null)), 786432, UserHandle.of(i)).iterator();
         while (it3.hasNext()) {
             ServiceInfo serviceInfo = it3.next().serviceInfo;
-            if (serviceInfo != null && Manifest.permission.SEND_RESPOND_VIA_MESSAGE.equals(serviceInfo.permission) && (smsApplicationData5 = (SmsApplicationData) hashMap.get(serviceInfo.packageName)) != null) {
+            if (serviceInfo != null && Manifest.permission.SEND_RESPOND_VIA_MESSAGE.equals(serviceInfo.permission) && (smsApplicationData5 = (SmsApplicationData) map.get(serviceInfo.packageName)) != null) {
                 smsApplicationData5.mRespondViaMessageClass = serviceInfo.name;
             }
         }
-        Iterator<ResolveInfo> it4 = packageManager.queryIntentActivitiesAsUser(new Intent(Intent.ACTION_SENDTO, Uri.fromParts(SCHEME_SMSTO, "", null)), 786432, of).iterator();
+        Iterator<ResolveInfo> it4 = packageManager.queryIntentActivitiesAsUser(new Intent(Intent.ACTION_SENDTO, Uri.fromParts(SCHEME_SMSTO, "", null)), 786432, userHandleOf).iterator();
         while (it4.hasNext()) {
             ActivityInfo activityInfo3 = it4.next().activityInfo;
-            if (activityInfo3 != null && (smsApplicationData4 = (SmsApplicationData) hashMap.get(activityInfo3.packageName)) != null) {
+            if (activityInfo3 != null && (smsApplicationData4 = (SmsApplicationData) map.get(activityInfo3.packageName)) != null) {
                 smsApplicationData4.mSendToClass = activityInfo3.name;
             }
         }
-        Iterator<ResolveInfo> it5 = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.ACTION_DEFAULT_SMS_PACKAGE_CHANGED), 786432, of).iterator();
+        Iterator<ResolveInfo> it5 = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.ACTION_DEFAULT_SMS_PACKAGE_CHANGED), 786432, userHandleOf).iterator();
         while (it5.hasNext()) {
             ActivityInfo activityInfo4 = it5.next().activityInfo;
-            if (activityInfo4 != null && (smsApplicationData3 = (SmsApplicationData) hashMap.get(activityInfo4.packageName)) != null) {
+            if (activityInfo4 != null && (smsApplicationData3 = (SmsApplicationData) map.get(activityInfo4.packageName)) != null) {
                 smsApplicationData3.mSmsAppChangedReceiverClass = activityInfo4.name;
             }
         }
-        Iterator<ResolveInfo> it6 = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.ACTION_EXTERNAL_PROVIDER_CHANGE), 786432, of).iterator();
+        Iterator<ResolveInfo> it6 = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.ACTION_EXTERNAL_PROVIDER_CHANGE), 786432, userHandleOf).iterator();
         while (it6.hasNext()) {
             ActivityInfo activityInfo5 = it6.next().activityInfo;
-            if (activityInfo5 != null && (smsApplicationData2 = (SmsApplicationData) hashMap.get(activityInfo5.packageName)) != null) {
+            if (activityInfo5 != null && (smsApplicationData2 = (SmsApplicationData) map.get(activityInfo5.packageName)) != null) {
                 smsApplicationData2.mProviderChangedReceiverClass = activityInfo5.name;
             }
         }
-        Iterator<ResolveInfo> it7 = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.SIM_FULL_ACTION), 786432, of).iterator();
+        Iterator<ResolveInfo> it7 = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.SIM_FULL_ACTION), 786432, userHandleOf).iterator();
         while (it7.hasNext()) {
             ActivityInfo activityInfo6 = it7.next().activityInfo;
-            if (activityInfo6 != null && (smsApplicationData = (SmsApplicationData) hashMap.get(activityInfo6.packageName)) != null) {
+            if (activityInfo6 != null && (smsApplicationData = (SmsApplicationData) map.get(activityInfo6.packageName)) != null) {
                 smsApplicationData.mSimFullReceiverClass = activityInfo6.name;
             }
         }
-        Iterator<ResolveInfo> it8 = queryBroadcastReceiversAsUser.iterator();
+        Iterator<ResolveInfo> it8 = listQueryBroadcastReceiversAsUser.iterator();
         while (it8.hasNext()) {
             ActivityInfo activityInfo7 = it8.next().activityInfo;
             if (activityInfo7 != null) {
                 String str2 = activityInfo7.packageName;
-                SmsApplicationData smsApplicationData8 = (SmsApplicationData) hashMap.get(str2);
+                SmsApplicationData smsApplicationData8 = (SmsApplicationData) map.get(str2);
                 if (smsApplicationData8 != null && !smsApplicationData8.isComplete()) {
-                    hashMap.remove(str2);
+                    map.remove(str2);
                 }
             }
         }
-        return hashMap.values();
+        return map.values();
     }
 
     public static SmsApplicationData getApplicationForPackage(Collection<SmsApplicationData> collection, String str) {
@@ -264,7 +266,7 @@ public final class SmsApplication {
         return null;
     }
 
-    private static SmsApplicationData getApplication(Context context, boolean z, int i) {
+    private static SmsApplicationData getApplication(Context context, boolean z, int i) throws ExecutionException, InterruptedException, Resources.NotFoundException, TimeoutException {
         String string;
         if (context == null) {
             Rlog.e(LOG_TAG, "getApplication: context is null!");
@@ -344,7 +346,7 @@ public final class SmsApplication {
         return roleManager.getSmsRoleHolder(i);
     }
 
-    public static void grantPermissionsToSystemApps(Context context) {
+    public static void grantPermissionsToSystemApps(Context context) throws Resources.NotFoundException {
         PackageManager packageManager = context.getPackageManager();
         AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(AppOpsManager.class);
         String string = context.getResources().getString(17039427);
@@ -385,91 +387,48 @@ public final class SmsApplication {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0052  */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0058  */
     /* JADX WARN: Type inference failed for: r2v5 */
     /* JADX WARN: Type inference failed for: r2v6 */
     /* JADX WARN: Type inference failed for: r2v7 */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static void setDefaultApplicationAsUser(java.lang.String r9, android.content.Context r10, int r11) {
-        /*
-            java.lang.String r0 = "SmsApplication"
-            if (r10 != 0) goto La
-            java.lang.String r9 = "context in DefaultApplication is null"
-            android.telephony.Rlog.e(r0, r9)
-            return
-        La:
-            int r1 = android.os.Binder.getCallingUid()
-            int r1 = android.os.UserHandle.getUserId(r1)
-            java.lang.String r2 = "content://com.sec.knox.provider2/ApplicationPolicy"
-            android.net.Uri r4 = android.net.Uri.parse(r2)
-            java.lang.String r1 = java.lang.Integer.toString(r1)
-            java.lang.String[] r7 = new java.lang.String[]{r9, r1}
-            android.content.ContentResolver r3 = r10.getContentResolver()
-            java.lang.String r6 = "isChangeSmsDefaultAppAllowed"
-            r8 = 0
-            r5 = 0
-            android.database.Cursor r1 = r3.query(r4, r5, r6, r7, r8)
-            if (r1 == 0) goto L4f
-            r1.moveToFirst()     // Catch: java.lang.Throwable -> L46 java.lang.Exception -> L4c
-            java.lang.String r2 = "isChangeSmsDefaultAppAllowed"
-            int r2 = r1.getColumnIndex(r2)     // Catch: java.lang.Throwable -> L46 java.lang.Exception -> L4c
-            java.lang.String r2 = r1.getString(r2)     // Catch: java.lang.Throwable -> L46 java.lang.Exception -> L4c
-            java.lang.String r3 = "true"
-            boolean r2 = r2.equals(r3)     // Catch: java.lang.Throwable -> L46 java.lang.Exception -> L4c
-            r1.close()
-            goto L50
-        L46:
-            r0 = move-exception
-            r9 = r0
-            r1.close()
-            throw r9
-        L4c:
-            r1.close()
-        L4f:
-            r2 = -1
-        L50:
-            if (r2 != 0) goto L58
-            java.lang.String r9 = "Block setDefaultApplication by admin"
-            android.telephony.Rlog.e(r0, r9)
-            return
-        L58:
-            java.lang.String r0 = "phone"
-            java.lang.Object r0 = r10.getSystemService(r0)
-            android.telephony.TelephonyManager r0 = (android.telephony.TelephonyManager) r0
-            java.lang.String r1 = "role"
-            java.lang.Object r1 = r10.getSystemService(r1)
-            android.app.role.RoleManager r1 = (android.app.role.RoleManager) r1
-            boolean r0 = r0.isSmsCapable()
-            if (r0 != 0) goto L7b
-            if (r1 == 0) goto L85
-            java.lang.String r0 = "android.app.role.SMS"
-            boolean r0 = r1.isRoleAvailable(r0)
-            if (r0 != 0) goto L7b
-            goto L85
-        L7b:
-            long r1 = android.os.Binder.clearCallingIdentity()
-            setDefaultApplicationInternal(r9, r10, r11)     // Catch: java.lang.Throwable -> L86
-            android.os.Binder.restoreCallingIdentity(r1)
-        L85:
-            return
-        L86:
-            r0 = move-exception
-            r9 = r0
-            android.os.Binder.restoreCallingIdentity(r1)
-            throw r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.SmsApplication.setDefaultApplicationAsUser(java.lang.String, android.content.Context, int):void");
+    public static void setDefaultApplicationAsUser(String str, Context context, int i) {
+        ?? Equals;
+        if (context == null) {
+            Rlog.e(LOG_TAG, "context in DefaultApplication is null");
+            return;
+        }
+        int userId = UserHandle.getUserId(Binder.getCallingUid());
+        Cursor cursorQuery = context.getContentResolver().query(Uri.parse("content://com.sec.knox.provider2/ApplicationPolicy"), null, SecContentProviderURI.APPLICATIONPOLICY_DEFAULTSMSAPP_METHOD, new String[]{str, Integer.toString(userId)}, null);
+        if (cursorQuery != null) {
+            try {
+                cursorQuery.moveToFirst();
+            } catch (Exception unused) {
+            } finally {
+                cursorQuery.close();
+            }
+        } else {
+            Equals = -1;
+        }
+        if (Equals == 0) {
+            Rlog.e(LOG_TAG, "Block setDefaultApplication by admin");
+            return;
+        }
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService("phone");
+        RoleManager roleManager = (RoleManager) context.getSystemService(Context.ROLE_SERVICE);
+        if (telephonyManager.isSmsCapable() || (roleManager != null && roleManager.isRoleAvailable("android.app.role.SMS"))) {
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
+            try {
+                setDefaultApplicationInternal(str, context, i);
+            } finally {
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
+            }
+        }
     }
 
-    private static void setDefaultApplicationInternal(String str, Context context, int i) {
-        UserHandle of = UserHandle.of(i);
+    private static void setDefaultApplicationInternal(String str, Context context, int i) throws ExecutionException, InterruptedException, Resources.NotFoundException, TimeoutException {
+        UserHandle userHandleOf = UserHandle.of(i);
         String defaultSmsPackage = getDefaultSmsPackage(context, i);
         if (str == null || defaultSmsPackage == null || !str.equals(defaultSmsPackage)) {
-            PackageManager packageManager = context.createContextAsUser(of, 0).getPackageManager();
+            PackageManager packageManager = context.createContextAsUser(userHandleOf, 0).getPackageManager();
             Collection<SmsApplicationData> applicationCollectionInternal = getApplicationCollectionInternal(context, i);
             if (defaultSmsPackage != null) {
                 getApplicationForPackage(applicationCollectionInternal, defaultSmsPackage);
@@ -607,11 +566,11 @@ public final class SmsApplication {
             } catch (NullPointerException unused) {
                 identifier = UserHandle.SYSTEM.getIdentifier();
             }
-            final Context context = this.mContext;
+            final Context contextCreatePackageContextAsUser = this.mContext;
             if (identifier != UserHandle.SYSTEM.getIdentifier()) {
                 try {
-                    Context context2 = this.mContext;
-                    context = context2.createPackageContextAsUser(context2.getPackageName(), 0, UserHandle.of(identifier));
+                    Context context = this.mContext;
+                    contextCreatePackageContextAsUser = context.createPackageContextAsUser(context.getPackageName(), 0, UserHandle.of(identifier));
                 } catch (PackageManager.NameNotFoundException unused2) {
                 }
             }
@@ -619,8 +578,8 @@ public final class SmsApplication {
                 @Override // java.lang.Runnable
                 public void run() {
                     Rlog.d(SmsApplication.LOG_TAG, "onPackageChanged: run");
-                    PackageManager packageManager = context.getPackageManager();
-                    ComponentName defaultSendToApplication = SmsApplication.getDefaultSendToApplication(context, true);
+                    PackageManager packageManager = contextCreatePackageContextAsUser.getPackageManager();
+                    ComponentName defaultSendToApplication = SmsApplication.getDefaultSendToApplication(contextCreatePackageContextAsUser, true);
                     if (defaultSendToApplication != null) {
                         SmsApplication.configurePreferredActivity(packageManager, defaultSendToApplication);
                     }
@@ -710,12 +669,12 @@ public final class SmsApplication {
         if (userHandle == null) {
             userHandle = getIncomingUserHandle();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             SmsApplicationData application = getApplication(context, z, userHandle.getIdentifier());
             return application != null ? new ComponentName(application.mPackageName, application.mSmsReceiverClass) : null;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -727,12 +686,12 @@ public final class SmsApplication {
         if (userHandle == null) {
             userHandle = getIncomingUserHandle();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             SmsApplicationData application = getApplication(context, z, userHandle.getIdentifier());
             return application != null ? new ComponentName(application.mPackageName, application.mMmsReceiverClass) : null;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -744,23 +703,23 @@ public final class SmsApplication {
         if (userHandle == null) {
             userHandle = getIncomingUserHandle();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             SmsApplicationData application = getApplication(context, z, userHandle.getIdentifier());
             return application != null ? new ComponentName(application.mPackageName, application.mRespondViaMessageClass) : null;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
     public static ComponentName getDefaultSendToApplication(Context context, boolean z) {
         int incomingUserId = getIncomingUserId();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             SmsApplicationData application = getApplication(context, z, incomingUserId);
             return application != null ? new ComponentName(application.mPackageName, application.mSendToClass) : null;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -772,12 +731,12 @@ public final class SmsApplication {
         if (userHandle == null) {
             userHandle = getIncomingUserHandle();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             SmsApplicationData application = getApplication(context, z, userHandle.getIdentifier());
             return (application == null || application.mProviderChangedReceiverClass == null) ? null : new ComponentName(application.mPackageName, application.mProviderChangedReceiverClass);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -789,12 +748,12 @@ public final class SmsApplication {
         if (userHandle == null) {
             userHandle = getIncomingUserHandle();
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             SmsApplicationData application = getApplication(context, z, userHandle.getIdentifier());
             return (application == null || application.mSimFullReceiverClass == null) ? null : new ComponentName(application.mPackageName, application.mSimFullReceiverClass);
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -810,7 +769,7 @@ public final class SmsApplication {
         return isDefaultSmsApplicationAsUser(context, str, getIncomingUserHandle());
     }
 
-    public static boolean isDefaultSmsApplicationAsUser(Context context, String str, UserHandle userHandle) {
+    public static boolean isDefaultSmsApplicationAsUser(Context context, String str, UserHandle userHandle) throws Resources.NotFoundException {
         if (str == null) {
             return false;
         }
@@ -861,90 +820,33 @@ public final class SmsApplication {
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0086 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0087  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static boolean isShouldNotWriteMessage(android.content.Context r7, java.lang.String r8) {
-        /*
-            java.lang.String r0 = "SmsApplication"
-            java.lang.String r1 = "ro.csc.countryiso_code"
-            java.lang.String r1 = android.os.SemSystemProperties.get(r1)
-            java.lang.String r2 = getDefaultSmsApplicationPackageName(r7)
-            android.content.pm.PackageManager r3 = r7.getPackageManager()
-            r4 = 1
-            r5 = 0
-            java.lang.String r6 = "com.google.android.apps.messaging"
-            android.content.pm.ApplicationInfo r3 = r3.getApplicationInfo(r6, r5)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L25
-            int r3 = r3.flags     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L25
-            r3 = r3 & r4
-            if (r3 == 0) goto L25
-            java.lang.String r3 = "AM is preloaded"
-            android.telephony.Rlog.i(r0, r3)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> L25
-            r3 = r4
-            goto L26
-        L25:
-            r3 = r5
-        L26:
-            if (r2 == 0) goto L49
-            java.lang.String r6 = "com.samsung.android.messaging"
-            boolean r2 = r2.equals(r6)
-            if (r2 != 0) goto L49
-            if (r3 == 0) goto L49
-            boolean r2 = r6.equals(r8)
-            if (r2 == 0) goto L49
-            java.lang.String r2 = "KR"
-            boolean r2 = r2.equalsIgnoreCase(r1)
-            if (r2 != 0) goto L49
-            java.lang.String r2 = "KOREA"
-            boolean r1 = r2.equalsIgnoreCase(r1)
-            if (r1 != 0) goto L49
-            return r5
-        L49:
-            java.lang.String[] r1 = com.android.internal.telephony.SmsApplication.sPackageNamePattern
-            if (r1 != 0) goto L5a
-            android.content.res.Resources r1 = r7.getResources()
-            r2 = 17236488(0x1070208, float:2.479704E-38)
-            java.lang.String[] r1 = r1.getStringArray(r2)
-            com.android.internal.telephony.SmsApplication.sPackageNamePattern = r1
-        L5a:
-            java.lang.String[] r1 = com.android.internal.telephony.SmsApplication.sPackageNamePattern
-            int r2 = r1.length
-            r3 = r5
-        L5e:
-            if (r3 >= r2) goto L80
-            r6 = r1[r3]
-            boolean r6 = r8.equals(r6)
-            if (r6 == 0) goto L7d
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            r7.<init>()
-            r7.append(r8)
-            java.lang.String r8 = " is matched"
-            r7.append(r8)
-            java.lang.String r7 = r7.toString()
-            android.telephony.Rlog.d(r0, r7)
-            return r4
-        L7d:
-            int r3 = r3 + 1
-            goto L5e
-        L80:
-            boolean r7 = isVzwAuthorizedApp(r7, r8)
-            if (r7 == 0) goto L87
-            return r4
-        L87:
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            java.lang.String r1 = "No PackageName Pattern : "
-            r7.<init>(r1)
-            r7.append(r8)
-            java.lang.String r7 = r7.toString()
-            android.telephony.Rlog.d(r0, r7)
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.SmsApplication.isShouldNotWriteMessage(android.content.Context, java.lang.String):boolean");
+    public static boolean isShouldNotWriteMessage(Context context, String str) {
+        boolean z;
+        String str2 = SemSystemProperties.get("ro.csc.countryiso_code");
+        String defaultSmsApplicationPackageName = getDefaultSmsApplicationPackageName(context);
+        if ((context.getPackageManager().getApplicationInfo(GOOGLE_MESSAGE_PACKAGE, 0).flags & 1) != 0) {
+            Rlog.i(LOG_TAG, "AM is preloaded");
+            z = true;
+        } else {
+            z = false;
+        }
+        if (defaultSmsApplicationPackageName != null && !defaultSmsApplicationPackageName.equals(NEW_SEC_SMS_PACKAGE_NAME) && z && NEW_SEC_SMS_PACKAGE_NAME.equals(str) && !"KR".equalsIgnoreCase(str2) && !"KOREA".equalsIgnoreCase(str2)) {
+            return false;
+        }
+        if (sPackageNamePattern == null) {
+            sPackageNamePattern = context.getResources().getStringArray(R.array.shouldNotWriteMessage);
+        }
+        for (String str3 : sPackageNamePattern) {
+            if (str.equals(str3)) {
+                Rlog.d(LOG_TAG, str + " is matched");
+                return true;
+            }
+        }
+        if (isVzwAuthorizedApp(context, str)) {
+            return true;
+        }
+        Rlog.d(LOG_TAG, "No PackageName Pattern : " + str);
+        return false;
     }
 
     private static boolean isVzwAuthorizedApp(Context context, String str) {
@@ -987,7 +889,7 @@ public final class SmsApplication {
         context.sendBroadcast(intent);
     }
 
-    public static void setDefaultMessageAppConfig(Context context) {
+    public static void setDefaultMessageAppConfig(Context context) throws IOException {
         if (TelephonyFeatures.IS_WIFI_ONLY) {
             Log.i(LOG_TAG, "wifi-only tablet does not support default message app.");
             mLogStb.append("wifi-only tablet, skip default message app setting.");
@@ -1013,16 +915,16 @@ public final class SmsApplication {
         }
 
         private boolean isOperatorFixed() {
-            boolean isTssDevice = isTssDevice();
+            boolean zIsTssDevice = isTssDevice();
             boolean z = SemSystemProperties.getBoolean("mdc.singlesku.activated", false);
-            Log.i(SmsApplication.LOG_TAG, "isOperatorFixed()- isSupportTrueSingleSKU : " + isTssDevice + " isTSSActivated : " + z);
-            if (isTssDevice) {
+            Log.i(SmsApplication.LOG_TAG, "isOperatorFixed()- isSupportTrueSingleSKU : " + zIsTssDevice + " isTSSActivated : " + z);
+            if (zIsTssDevice) {
                 return z;
             }
             return true;
         }
 
-        private String getActiveOperatorIdByCountryiso(String str) {
+        private String getActiveOperatorIdByCountryiso(String str) throws IOException {
             String str2 = "NONE";
             try {
                 FileInputStream fileInputStream = new FileInputStream(new File(SmsApplication.COUNTRYISO_OPENBUYER_CONFIG_XML));
@@ -1032,22 +934,22 @@ public final class SmsApplication {
                         if (parser == null) {
                             Log.e(SmsApplication.LOG_TAG, "XmlPullParser is null");
                         } else {
-                            String str3 = "NONE";
+                            String strTrim = "NONE";
                             boolean z = false;
                             for (int eventType = parser.getEventType(); eventType != 1; eventType = parser.next()) {
                                 if (eventType != 2) {
                                     if (eventType == 4 && z) {
                                         try {
-                                            str3 = parser.getText().trim();
+                                            strTrim = parser.getText().trim();
                                             z = false;
                                         } catch (IOException | XmlPullParserException e) {
                                             e = e;
-                                            str2 = str3;
+                                            str2 = strTrim;
                                             Log.e(SmsApplication.LOG_TAG, "Error while parsing", e);
                                             closeFileInputStream(fileInputStream);
                                             return str2;
                                         } catch (Throwable unused) {
-                                            str2 = str3;
+                                            str2 = strTrim;
                                             closeFileInputStream(fileInputStream);
                                             return str2;
                                         }
@@ -1055,19 +957,19 @@ public final class SmsApplication {
                                 } else if (str.equals(parser.getName())) {
                                     z = true;
                                 }
-                                if (!"NONE".equals(str3)) {
+                                if (!"NONE".equals(strTrim)) {
                                     break;
                                 }
                             }
-                            str2 = str3;
+                            str2 = strTrim;
                         }
                         Log.d(SmsApplication.LOG_TAG, "xml parsing result- activeOperatorId: " + str2);
                         closeFileInputStream(fileInputStream);
                         return str2;
-                    } catch (IOException | XmlPullParserException e2) {
-                        e = e2;
+                    } catch (Throwable unused2) {
                     }
-                } catch (Throwable unused2) {
+                } catch (IOException | XmlPullParserException e2) {
+                    e = e2;
                 }
             } catch (FileNotFoundException e3) {
                 Log.e(SmsApplication.LOG_TAG, e3.getClass().getSimpleName() + "!! " + e3.getMessage());
@@ -1077,35 +979,37 @@ public final class SmsApplication {
 
         private boolean isWifiSkipCarrier() {
             String str = SemSystemProperties.get("ro.boot.carrierid", null);
-            List asList = Arrays.asList("XSG", "MID", "ILO", "XFA", "AFR", "M10", "M06", "M05");
-            if (TextUtils.isEmpty(str) || !asList.contains(str)) {
+            List listAsList = Arrays.asList("XSG", "MID", "ILO", "XFA", "AFR", "M10", "M06", "M05");
+            if (TextUtils.isEmpty(str) || !listAsList.contains(str)) {
                 return false;
             }
             Log.d(SmsApplication.LOG_TAG, "isWifiSkipCarrier return true");
             return true;
         }
 
-        private String getActiveOperatorId() {
-            boolean isTssDevice = isTssDevice();
+        private String getActiveOperatorId() throws IOException {
+            boolean zIsTssDevice = isTssDevice();
             boolean z = SemSystemProperties.getBoolean("mdc.singlesku.activated", false);
             String str = "NONE";
-            if (!isTssDevice) {
+            if (!zIsTssDevice) {
                 str = SystemProperties.get("ro.csc.sales_code", "NONE");
             } else if (z) {
-                String str2 = SemSystemProperties.get("ro.boot.activatedid", "NONE");
-                if ("EUX".equals(str2) || "EUY".equals(str2)) {
-                    String str3 = SemSystemProperties.get("ro.csc.countryiso_code", "NONE");
-                    Log.i(SmsApplication.LOG_TAG, "countryiso : " + str3);
-                    if (!"NONE".equals(str3)) {
-                        str2 = getActiveOperatorIdByCountryiso(str3);
+                String activeOperatorIdByCountryiso = SemSystemProperties.get("ro.boot.activatedid", "NONE");
+                if ("EUX".equals(activeOperatorIdByCountryiso) || "EUY".equals(activeOperatorIdByCountryiso)) {
+                    String str2 = SemSystemProperties.get("ro.csc.countryiso_code", "NONE");
+                    Log.i(SmsApplication.LOG_TAG, "countryiso : " + str2);
+                    if (!"NONE".equals(str2)) {
+                        activeOperatorIdByCountryiso = getActiveOperatorIdByCountryiso(str2);
+                        str = activeOperatorIdByCountryiso;
                     }
+                } else {
+                    str = activeOperatorIdByCountryiso;
                 }
-                str = str2;
             } else if (isWifiSkipCarrier()) {
                 str = SystemProperties.get("ro.csc.sales_code", "NONE");
             }
-            SmsApplication.mLogStb.append(" isSupportTrueSingleSKU : ").append(isTssDevice).append(", isTSSActivated : ").append(z).append(", isWifiSkipCarrier : ").append(isWifiSkipCarrier()).append(", activeOperatorId : ").append(str);
-            setDMACdataTssInfo(isTssDevice, z, str);
+            SmsApplication.mLogStb.append(" isSupportTrueSingleSKU : ").append(zIsTssDevice).append(", isTSSActivated : ").append(z).append(", isWifiSkipCarrier : ").append(isWifiSkipCarrier()).append(", activeOperatorId : ").append(str);
+            setDMACdataTssInfo(zIsTssDevice, z, str);
             return str;
         }
 
@@ -1140,17 +1044,17 @@ public final class SmsApplication {
             return -1;
         }
 
-        private static XmlPullParser getParser(FileInputStream fileInputStream) {
+        private static XmlPullParser getParser(FileInputStream fileInputStream) throws XmlPullParserException, IOException {
             if (fileInputStream == null) {
                 Log.d(SmsApplication.LOG_TAG, "no file");
                 return null;
             }
             try {
-                XmlPullParserFactory newInstance = XmlPullParserFactory.newInstance();
-                newInstance.setNamespaceAware(true);
-                XmlPullParser newPullParser = newInstance.newPullParser();
-                newPullParser.setInput(fileInputStream, null);
-                return newPullParser;
+                XmlPullParserFactory xmlPullParserFactoryNewInstance = XmlPullParserFactory.newInstance();
+                xmlPullParserFactoryNewInstance.setNamespaceAware(true);
+                XmlPullParser xmlPullParserNewPullParser = xmlPullParserFactoryNewInstance.newPullParser();
+                xmlPullParserNewPullParser.setInput(fileInputStream, null);
+                return xmlPullParserNewPullParser;
             } catch (XmlPullParserException e) {
                 e.printStackTrace();
                 closeFileInputStream(fileInputStream);
@@ -1158,7 +1062,7 @@ public final class SmsApplication {
             }
         }
 
-        private static void closeFileInputStream(FileInputStream fileInputStream) {
+        private static void closeFileInputStream(FileInputStream fileInputStream) throws IOException {
             if (fileInputStream != null) {
                 try {
                     fileInputStream.close();
@@ -1221,7 +1125,7 @@ public final class SmsApplication {
             }
         }
 
-        public void setDefaultMsgApp() {
+        public void setDefaultMsgApp() throws IOException {
             String activeOperatorId = getActiveOperatorId();
             Log.i(SmsApplication.LOG_TAG, "setDefaultMsgAppFromConfig");
             SmsApplication.mLogStb.append("setDefaultMsgApp Config Info =");
@@ -1255,127 +1159,55 @@ public final class SmsApplication {
             SmsApplication.sendBroadcast_SMS_BIG_DATA_INFO(this.mContext, defaultSmsPackage, SemSystemProperties.get(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY), SmsApplication.sDMACdata);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:18:0x005f, code lost:
-        
-            if (isPackageEnabled(r0, com.android.internal.telephony.SmsApplication.SOFTBANK_MESSAGES) != false) goto L25;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:19:0x0061, code lost:
-        
-            r2 = r1;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:21:0x006b, code lost:
-        
-            if (isPackageEnabled(r0, com.android.internal.telephony.SmsApplication.KDDI_MESSAGES) != false) goto L25;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:25:0x0061 A[PHI: r1
+          0x0061: PHI (r1v9 java.lang.String) = (r1v8 java.lang.String), (r1v10 java.lang.String) binds: [B:27:0x006b, B:24:0x005f] A[DONT_GENERATE, DONT_INLINE]] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         private void setSMorOperatorMessageApp() {
-            /*
-                r5 = this;
-                java.lang.String r0 = r5.getSalesCode()
-                android.content.Context r1 = r5.mContext
-                java.lang.String r2 = "phone"
-                java.lang.Object r1 = r1.getSystemService(r2)
-                android.telephony.TelephonyManager r1 = (android.telephony.TelephonyManager) r1
-                if (r1 == 0) goto La3
-                boolean r1 = r1.isSmsCapable()
-                if (r1 == 0) goto La3
-                com.samsung.android.feature.SemCscFeature r1 = com.samsung.android.feature.SemCscFeature.getInstance()
-                java.lang.String r2 = "CscFeature_Setting_ConfigDefSmsApp"
-                java.lang.String r1 = r1.getString(r2)
-                android.content.Context r2 = r5.mContext
-                java.lang.String r2 = r5.getMessagePackageName(r2)
-                r0.hashCode()
-                int r3 = r0.hashCode()
-                r4 = -1
-                switch(r3) {
-                    case 67502: goto L49;
-                    case 74256: goto L3e;
-                    case 81886: goto L33;
-                    default: goto L32;
-                }
-            L32:
-                goto L53
-            L33:
-                java.lang.String r3 = "SBM"
-                boolean r0 = r0.equals(r3)
-                if (r0 != 0) goto L3c
-                goto L53
-            L3c:
-                r4 = 2
-                goto L53
-            L3e:
-                java.lang.String r3 = "KDI"
-                boolean r0 = r0.equals(r3)
-                if (r0 != 0) goto L47
-                goto L53
-            L47:
-                r4 = 1
-                goto L53
-            L49:
-                java.lang.String r3 = "DCM"
-                boolean r0 = r0.equals(r3)
-                if (r0 != 0) goto L52
-                goto L53
-            L52:
-                r4 = 0
-            L53:
-                switch(r4) {
-                    case 0: goto L6e;
-                    case 1: goto L63;
-                    case 2: goto L57;
-                    default: goto L56;
-                }
-            L56:
-                goto L82
-            L57:
-                android.content.Context r0 = r5.mContext
-                java.lang.String r1 = "jp.softbank.mb.mail"
-                boolean r0 = r5.isPackageEnabled(r0, r1)
-                if (r0 == 0) goto L82
-            L61:
-                r2 = r1
-                goto L82
-            L63:
-                android.content.Context r0 = r5.mContext
-                java.lang.String r1 = "com.kddi.android.cmail"
-                boolean r0 = r5.isPackageEnabled(r0, r1)
-                if (r0 == 0) goto L82
-                goto L61
-            L6e:
-                android.content.Context r0 = r5.mContext
-                java.lang.String r3 = "com.nttdocomo.android.msg"
-                boolean r0 = r5.isPackageEnabled(r0, r3)
-                if (r0 == 0) goto L82
-                java.lang.String r0 = "samsung"
-                boolean r0 = r1.contains(r0)
-                if (r0 != 0) goto L82
-                r2 = r3
-            L82:
-                android.content.Context r0 = r5.mContext
-                boolean r0 = r5.isPackageEnabled(r0, r2)
-                if (r0 == 0) goto La3
-                java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                java.lang.String r1 = "setDefaultApplication messageAppName : "
-                r0.<init>(r1)
-                r0.append(r2)
-                java.lang.String r0 = r0.toString()
-                java.lang.String r1 = "SmsApplication"
-                android.util.Log.i(r1, r0)
-                android.content.Context r5 = r5.mContext
-                com.android.internal.telephony.SmsApplication.setDefaultApplication(r2, r5)
-            La3:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.SmsApplication.DefaultMessageAppConfig.setSMorOperatorMessageApp():void");
+            String string;
+            String messagePackageName;
+            String str;
+            String salesCode = getSalesCode();
+            TelephonyManager telephonyManager = (TelephonyManager) this.mContext.getSystemService("phone");
+            if (telephonyManager == null || !telephonyManager.isSmsCapable()) {
+                return;
+            }
+            string = SemCscFeature.getInstance().getString("CscFeature_Setting_ConfigDefSmsApp");
+            messagePackageName = getMessagePackageName(this.mContext);
+            salesCode.hashCode();
+            switch (salesCode) {
+                case "DCM":
+                    if (isPackageEnabled(this.mContext, SmsApplication.DOCOMO_MESSAGES) && !string.contains("samsung")) {
+                        messagePackageName = SmsApplication.DOCOMO_MESSAGES;
+                        break;
+                    }
+                    break;
+                case "KDI":
+                    Context context = this.mContext;
+                    str = SmsApplication.KDDI_MESSAGES;
+                    if (isPackageEnabled(context, SmsApplication.KDDI_MESSAGES)) {
+                        messagePackageName = str;
+                        break;
+                    }
+                    break;
+                case "SBM":
+                    Context context2 = this.mContext;
+                    str = SmsApplication.SOFTBANK_MESSAGES;
+                    if (isPackageEnabled(context2, SmsApplication.SOFTBANK_MESSAGES)) {
+                    }
+                    break;
+            }
+            if (isPackageEnabled(this.mContext, messagePackageName)) {
+                Log.i(SmsApplication.LOG_TAG, "setDefaultApplication messageAppName : " + messagePackageName);
+                SmsApplication.setDefaultApplication(messagePackageName, this.mContext);
+            }
         }
 
         private String updateChangeByOs(String str, String str2, boolean z) {
             if (!TextUtils.isEmpty(str)) {
-                String[] split = str.split("\\|");
-                for (String str3 : split) {
+                String[] strArrSplit = str.split("\\|");
+                for (String str3 : strArrSplit) {
                     if (z) {
                         if (str3.contains(str2)) {
                             return str3.replace(str2 + Session.SESSION_SEPARATION_CHAR_CHILD, "");
@@ -1397,32 +1229,32 @@ public final class SmsApplication {
             return true;
         }
 
-        private boolean setDefaultMsgApp_File(String str) {
-            String str2;
-            String str3;
-            String str4;
+        private boolean setDefaultMsgApp_File(String str) throws IOException {
+            String simOperatorNumericForPhone;
+            String strTrim;
+            String strTrim2;
             boolean z;
-            int findLoadedSimSlot = findLoadedSimSlot();
+            int iFindLoadedSimSlot = findLoadedSimSlot();
             boolean z2 = true;
-            boolean z3 = findLoadedSimSlot >= 0;
+            boolean z3 = iFindLoadedSimSlot >= 0;
             TelephonyManager telephonyManager = (TelephonyManager) this.mContext.getSystemService("phone");
-            String str5 = "FIRST_API_LEVEL_" + SemSystemProperties.getInt("ro.product.first_api_level", 0);
+            String str2 = "FIRST_API_LEVEL_" + SemSystemProperties.getInt("ro.product.first_api_level", 0);
             if ("SM-A136B".equals(SemSystemProperties.get("ro.product.model", LsConstants.TAG_UNKNOWN))) {
                 Log.i(SmsApplication.LOG_TAG, "in case of SM-A136B, modify the first api level from 30 to 31");
-                str5 = "FIRST_API_LEVEL_31";
+                str2 = "FIRST_API_LEVEL_31";
             }
             if (isNeedToModifyFirstApi()) {
                 Log.i(SmsApplication.LOG_TAG, "It is released before S24, so modify the first api level from 34 to 33");
-                str5 = "FIRST_API_LEVEL_33";
+                str2 = "FIRST_API_LEVEL_33";
             }
-            String str6 = "";
+            String strTrim3 = "";
             if (!z3 || telephonyManager == null) {
-                str2 = "";
+                simOperatorNumericForPhone = "";
             } else {
-                str2 = telephonyManager.getSimOperatorNumericForPhone(findLoadedSimSlot);
+                simOperatorNumericForPhone = telephonyManager.getSimOperatorNumericForPhone(iFindLoadedSimSlot);
             }
-            Log.i(SmsApplication.LOG_TAG, "activeOperatorId: " + str + " phoneId: " + findLoadedSimSlot + " isSimLoaded: " + z3 + " mccmnc: " + str2 + " firstApiLevel: " + str5);
-            SmsApplication.mLogStb.append(", phoneId : ").append(findLoadedSimSlot).append(", isSimLoaded : ").append(z3).append(", mccmnc : ").append(str2);
+            Log.i(SmsApplication.LOG_TAG, "activeOperatorId: " + str + " phoneId: " + iFindLoadedSimSlot + " isSimLoaded: " + z3 + " mccmnc: " + simOperatorNumericForPhone + " firstApiLevel: " + str2);
+            SmsApplication.mLogStb.append(", phoneId : ").append(iFindLoadedSimSlot).append(", isSimLoaded : ").append(z3).append(", mccmnc : ").append(simOperatorNumericForPhone);
             try {
                 FileInputStream fileInputStream = new FileInputStream(new File(SmsApplication.DEFAULT_MSG_CONFIG_XML));
                 try {
@@ -1432,9 +1264,9 @@ public final class SmsApplication {
                             boolean z4 = false;
                             boolean z5 = false;
                             boolean z6 = false;
-                            str3 = "";
+                            strTrim = "";
                             int eventType = parser.getEventType();
-                            str4 = str3;
+                            strTrim2 = strTrim;
                             while (true) {
                                 z = z2;
                                 if (eventType == z2) {
@@ -1447,20 +1279,20 @@ public final class SmsApplication {
                                     if (SmsApplication.SM_TAG.equals(parser.getName())) {
                                         z5 = z;
                                     }
-                                    if (str5.equals(parser.getName())) {
+                                    if (str2.equals(parser.getName())) {
                                         z6 = z;
                                     }
                                 } else if (eventType == 4) {
                                     if (z4) {
-                                        str6 = parser.getText().trim();
+                                        strTrim3 = parser.getText().trim();
                                         z4 = false;
                                     }
                                     if (z5) {
-                                        str4 = parser.getText().trim();
+                                        strTrim2 = parser.getText().trim();
                                         z5 = false;
                                     }
                                     if (z6) {
-                                        str3 = parser.getText().trim();
+                                        strTrim = parser.getText().trim();
                                         z6 = false;
                                     }
                                 }
@@ -1469,32 +1301,32 @@ public final class SmsApplication {
                             }
                         } else {
                             Log.e(SmsApplication.LOG_TAG, "XmlPullParser is null");
-                            str4 = "";
-                            str3 = str4;
+                            strTrim2 = "";
+                            strTrim = strTrim2;
                             z = true;
                         }
-                        Log.d(SmsApplication.LOG_TAG, "xml parsing result- smNetCodeOpen: " + str6 + " smCarrierCsc: " + str4 + " smChangeOs: " + str3);
+                        Log.d(SmsApplication.LOG_TAG, "xml parsing result- smNetCodeOpen: " + strTrim3 + " smCarrierCsc: " + strTrim2 + " smChangeOs: " + strTrim);
                         closeFileInputStream(fileInputStream);
-                        if (TextUtils.isEmpty(str6)) {
-                            setDMACdataConfigInfo(false, str2);
-                            String updateChangeByOs = updateChangeByOs(str3, str, false);
-                            if (TextUtils.isEmpty(updateChangeByOs)) {
+                        if (TextUtils.isEmpty(strTrim3)) {
+                            setDMACdataConfigInfo(false, simOperatorNumericForPhone);
+                            String strUpdateChangeByOs = updateChangeByOs(strTrim, str, false);
+                            if (TextUtils.isEmpty(strUpdateChangeByOs)) {
                                 Log.i(SmsApplication.LOG_TAG, "OS change is not shown");
                             } else {
-                                Log.i(SmsApplication.LOG_TAG, "OS change: first api:" + str5 + " smCarrierCsc is change from " + str4 + " to " + updateChangeByOs);
-                                str4 = updateChangeByOs;
+                                Log.i(SmsApplication.LOG_TAG, "OS change: first api:" + str2 + " smCarrierCsc is change from " + strTrim2 + " to " + strUpdateChangeByOs);
+                                strTrim2 = strUpdateChangeByOs;
                             }
-                            if (TextUtils.isEmpty(str4)) {
+                            if (TextUtils.isEmpty(strTrim2)) {
                                 Log.i(SmsApplication.LOG_TAG, "SM tag is empty  - AM select!!");
                                 return z;
                             }
-                            if (str4.contains(str)) {
+                            if (strTrim2.contains(str)) {
                                 Log.i(SmsApplication.LOG_TAG, "Carrier phone - SM select!!");
                                 return false;
                             }
-                            String str7 = SemSystemProperties.get("ro.csc.countryiso_code", "NONE");
-                            Log.i(SmsApplication.LOG_TAG, "activeOperatorId: " + str + ", countryiso: " + str7 + ", firstApiLevel: " + str5);
-                            if ("SUP".equals(str) && "US".equals(str7) && "FIRST_API_LEVEL_30".equals(str5)) {
+                            String str3 = SemSystemProperties.get("ro.csc.countryiso_code", "NONE");
+                            Log.i(SmsApplication.LOG_TAG, "activeOperatorId: " + str + ", countryiso: " + str3 + ", firstApiLevel: " + str2);
+                            if ("SUP".equals(str) && "US".equals(str3) && "FIRST_API_LEVEL_30".equals(str2)) {
                                 Log.i(SmsApplication.LOG_TAG, "Carrier phone - SM select!!");
                                 return false;
                             }
@@ -1502,42 +1334,42 @@ public final class SmsApplication {
                             return z;
                         }
                         boolean z7 = z;
-                        setDMACdataConfigInfo(z7, str2);
-                        boolean isEmpty = TextUtils.isEmpty(str2);
-                        String updateChangeByOs2 = updateChangeByOs(str3, str, z7);
-                        if (TextUtils.isEmpty(updateChangeByOs2)) {
+                        setDMACdataConfigInfo(z7, simOperatorNumericForPhone);
+                        boolean zIsEmpty = TextUtils.isEmpty(simOperatorNumericForPhone);
+                        String strUpdateChangeByOs2 = updateChangeByOs(strTrim, str, z7);
+                        if (TextUtils.isEmpty(strUpdateChangeByOs2)) {
                             Log.i(SmsApplication.LOG_TAG, "OS change is not shown");
                         } else {
-                            Log.i(SmsApplication.LOG_TAG, "OS change: first api:" + str5 + " smNetcodeOpen is change from " + str6 + " to " + updateChangeByOs2);
-                            str6 = updateChangeByOs2;
+                            Log.i(SmsApplication.LOG_TAG, "OS change: first api:" + str2 + " smNetcodeOpen is change from " + strTrim3 + " to " + strUpdateChangeByOs2);
+                            strTrim3 = strUpdateChangeByOs2;
                         }
-                        str6.hashCode();
-                        if (str6.equals("000000")) {
-                            if (!isEmpty) {
-                                Log.i(SmsApplication.LOG_TAG, "Unlocked phone, All selects AM. mccmnc: " + str2 + " - AM select!!");
+                        strTrim3.hashCode();
+                        if (strTrim3.equals("000000")) {
+                            if (!zIsEmpty) {
+                                Log.i(SmsApplication.LOG_TAG, "Unlocked phone, All selects AM. mccmnc: " + simOperatorNumericForPhone + " - AM select!!");
                                 return true;
                             }
                             Log.i(SmsApplication.LOG_TAG, "Unlocked phone, All selects AM. no sim! - AM select!!");
                             return true;
                         }
-                        if (str6.equals("111111")) {
-                            if (!isEmpty) {
-                                Log.i(SmsApplication.LOG_TAG, "Unlocked phone, All selects SM. mccmnc: " + str2 + " - SM select!!");
+                        if (strTrim3.equals("111111")) {
+                            if (!zIsEmpty) {
+                                Log.i(SmsApplication.LOG_TAG, "Unlocked phone, All selects SM. mccmnc: " + simOperatorNumericForPhone + " - SM select!!");
                                 return false;
                             }
                             Log.i(SmsApplication.LOG_TAG, "Unlocked phone, All selects SM. no sim! - SM select!!");
                             return false;
                         }
-                        if (!isEmpty) {
-                            Log.i(SmsApplication.LOG_TAG, "Unlocked phone, Some selects SM. mccmnc: " + str2);
-                            if (str6.contains(str2)) {
+                        if (!zIsEmpty) {
+                            Log.i(SmsApplication.LOG_TAG, "Unlocked phone, Some selects SM. mccmnc: " + simOperatorNumericForPhone);
+                            if (strTrim3.contains(simOperatorNumericForPhone)) {
                                 Log.i(SmsApplication.LOG_TAG, "Unlocked phone - contains mccmnc - SM select!!");
                                 return false;
                             }
                             Log.i(SmsApplication.LOG_TAG, "Unlocked phone - no matching mccmnc - AM select!!");
                             return true;
                         }
-                        if (str6.contains(SmsApplication.SM_TAG)) {
+                        if (strTrim3.contains(SmsApplication.SM_TAG)) {
                             Log.i(SmsApplication.LOG_TAG, "Unlocked phone, Some selects SM. no Sim! - SM select!!");
                             return false;
                         }

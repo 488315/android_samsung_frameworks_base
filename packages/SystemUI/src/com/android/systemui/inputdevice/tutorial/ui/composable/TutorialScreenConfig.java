@@ -2,6 +2,8 @@ package com.android.systemui.inputdevice.tutorial.ui.composable;
 
 import androidx.appcompat.util.SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0;
 import androidx.compose.ui.graphics.Color;
+import androidx.compose.ui.graphics.ColorKt;
+import androidx.core.graphics.ColorUtils;
 import com.airbnb.lottie.compose.LottieDynamicProperties;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
@@ -9,14 +11,12 @@ import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TutorialScreenConfig {
     public final Animations animations;
     public final Colors colors;
     public final Strings strings;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Animations {
         public final int educationResId;
 
@@ -40,7 +40,6 @@ public final class TutorialScreenConfig {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Colors {
         public static final Companion Companion = new Companion(null);
         public final LottieDynamicProperties animationColors;
@@ -48,7 +47,6 @@ public final class TutorialScreenConfig {
         public final long bodyText;
         public final long title;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -72,7 +70,7 @@ public final class TutorialScreenConfig {
             Colors colors = (Colors) obj;
             long j = colors.background;
             Color.Companion companion = Color.Companion;
-            return ULong.m3427equalsimpl0(this.background, j) && ULong.m3427equalsimpl0(this.title, colors.title) && ULong.m3427equalsimpl0(this.bodyText, colors.bodyText) && Intrinsics.areEqual(this.animationColors, colors.animationColors);
+            return ULong.m3447equalsimpl0(this.background, j) && ULong.m3447equalsimpl0(this.title, colors.title) && ULong.m3447equalsimpl0(this.bodyText, colors.bodyText) && Intrinsics.areEqual(this.animationColors, colors.animationColors);
         }
 
         public final int hashCode() {
@@ -82,15 +80,15 @@ public final class TutorialScreenConfig {
         }
 
         public final String toString() {
-            String m462toStringimpl = Color.m462toStringimpl(this.background);
-            String m462toStringimpl2 = Color.m462toStringimpl(this.title);
-            String m462toStringimpl3 = Color.m462toStringimpl(this.bodyText);
-            StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Colors(background=", m462toStringimpl, ", title=", m462toStringimpl2, ", bodyText=");
-            m.append(m462toStringimpl3);
-            m.append(", animationColors=");
-            m.append(this.animationColors);
-            m.append(")");
-            return m.toString();
+            String strM464toStringimpl = Color.m464toStringimpl(this.background);
+            String strM464toStringimpl2 = Color.m464toStringimpl(this.title);
+            String strM464toStringimpl3 = Color.m464toStringimpl(this.bodyText);
+            StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Colors(background=", strM464toStringimpl, ", title=", strM464toStringimpl2, ", bodyText=");
+            sbM.append(strM464toStringimpl3);
+            sbM.append(", animationColors=");
+            sbM.append(this.animationColors);
+            sbM.append(")");
+            return sbM.toString();
         }
 
         public /* synthetic */ Colors(long j, long j2, LottieDynamicProperties lottieDynamicProperties, DefaultConstructorMarker defaultConstructorMarker) {
@@ -105,44 +103,17 @@ public final class TutorialScreenConfig {
         }
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        private Colors(long r17, long r19, com.airbnb.lottie.compose.LottieDynamicProperties r21) {
-            /*
-                r16 = this;
-                int r0 = androidx.compose.ui.graphics.ColorKt.m467toArgb8_81llA(r17)
-                com.android.systemui.inputdevice.tutorial.ui.composable.TutorialScreenConfig$Colors$Companion r1 = com.android.systemui.inputdevice.tutorial.ui.composable.TutorialScreenConfig.Colors.Companion
-                r1.getClass()
-                androidx.compose.ui.graphics.Color$Companion r1 = androidx.compose.ui.graphics.Color.Companion
-                r1.getClass()
-                long r1 = androidx.compose.ui.graphics.Color.White
-                int r3 = androidx.compose.ui.graphics.ColorKt.m467toArgb8_81llA(r1)
-                double r3 = androidx.core.graphics.ColorUtils.calculateContrast(r3, r0)
-                long r5 = androidx.compose.ui.graphics.Color.Black
-                int r7 = androidx.compose.ui.graphics.ColorKt.m467toArgb8_81llA(r5)
-                double r7 = androidx.core.graphics.ColorUtils.calculateContrast(r7, r0)
-                int r0 = (r3 > r7 ? 1 : (r3 == r7 ? 0 : -1))
-                if (r0 < 0) goto L28
-                r12 = r1
-                goto L29
-            L28:
-                r12 = r5
-            L29:
-                r15 = 0
-                r7 = r16
-                r8 = r17
-                r10 = r19
-                r14 = r21
-                r7.<init>(r8, r10, r12, r14, r15)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputdevice.tutorial.ui.composable.TutorialScreenConfig.Colors.<init>(long, long, com.airbnb.lottie.compose.LottieDynamicProperties):void");
+        private Colors(long j, long j2, LottieDynamicProperties lottieDynamicProperties) {
+            int iM469toArgb8_81llA = ColorKt.m469toArgb8_81llA(j);
+            Companion.getClass();
+            Color.Companion.getClass();
+            long j3 = Color.White;
+            double dCalculateContrast = ColorUtils.calculateContrast(ColorKt.m469toArgb8_81llA(j3), iM469toArgb8_81llA);
+            long j4 = Color.Black;
+            this(j, j2, dCalculateContrast >= ColorUtils.calculateContrast(ColorKt.m469toArgb8_81llA(j4), iM469toArgb8_81llA) ? j3 : j4, lottieDynamicProperties, null);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Strings {
         public final int bodyErrorResId;
         public final int bodyResId;

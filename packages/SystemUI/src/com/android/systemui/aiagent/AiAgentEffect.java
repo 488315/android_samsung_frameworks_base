@@ -30,7 +30,6 @@ import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutli
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.aiagent.AiAgentEffect;
-import com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
@@ -42,7 +41,6 @@ import com.android.systemui.util.AnimHelper;
 import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.samsung.android.sesl.transparentvideo.TransparentVideoView;
-import com.samsung.android.sesl.transparentvideo.VideoRenderModel;
 import com.samsung.android.sesl.transparentvideo.mediaplayer.IMediaPlayer$MediaError;
 import com.sec.ims.volte2.data.VolteConstants;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
@@ -61,7 +59,6 @@ import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.scheduling.DefaultIoScheduler;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AiAgentEffect {
     public static final AnimHelper.AnimProperty HIDE_ANIM_ALPHA_PROPERTY;
@@ -105,7 +102,6 @@ public final class AiAgentEffect {
     public final ArrayList hideAnimList = new ArrayList();
     private final SettingsHelper settingsHelper = (SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -115,7 +111,6 @@ public final class AiAgentEffect {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HideAnimatorListener extends AnimHelper.BaseAnimatorListener {
         public HideAnimatorListener(String str) {
             super("AiAgentEffect", str, false);
@@ -139,7 +134,6 @@ public final class AiAgentEffect {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowAnimatorListener extends AnimHelper.BaseAnimatorListener {
         public ShowAnimatorListener(String str) {
             super("AiAgentEffect", str, false);
@@ -154,8 +148,8 @@ public final class AiAgentEffect {
                 AiAgentEffect aiAgentEffect = AiAgentEffect.this;
                 boolean z = aiAgentEffect.isAnimating;
                 AnimatorSet animatorSet2 = aiAgentEffect.showAnimSet;
-                Boolean valueOf = animatorSet2 != null ? Boolean.valueOf(animatorSet2.isRunning()) : null;
-                Log.d(tag, logPrefix + " onAnimationCancel isAnimating = " + z + ", isRunning = " + valueOf + ", isAttachedView = " + AiAgentEffect.this.isAttachedView);
+                Boolean boolValueOf = animatorSet2 != null ? Boolean.valueOf(animatorSet2.isRunning()) : null;
+                Log.d(tag, logPrefix + " onAnimationCancel isAnimating = " + z + ", isRunning = " + boolValueOf + ", isAttachedView = " + AiAgentEffect.this.isAttachedView);
             }
             setCanceled(true);
             AiAgentEffect aiAgentEffect2 = AiAgentEffect.this;
@@ -175,8 +169,6 @@ public final class AiAgentEffect {
             }
         }
 
-        /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.aiagent.AiAgentEffect$ShowAnimatorListener$onAnimationStart$1$1] */
         @Override // com.android.systemui.util.AnimHelper.BaseAnimatorListener, android.animation.Animator.AnimatorListener
         public final void onAnimationStart(Animator animator) {
             final TransparentVideoView transparentVideoView;
@@ -197,8 +189,8 @@ public final class AiAgentEffect {
             String tag2 = getTag();
             String logPrefix2 = getLogPrefix();
             View view2 = AiAgentEffect.this.layout;
-            Integer valueOf = view2 != null ? Integer.valueOf(view2.getVisibility()) : null;
-            Log.d(tag2, logPrefix2 + " onAnimationStart visible = " + valueOf + ", layout = " + AiAgentEffect.this.layout);
+            Integer numValueOf = view2 != null ? Integer.valueOf(view2.getVisibility()) : null;
+            Log.d(tag2, logPrefix2 + " onAnimationStart visible = " + numValueOf + ", layout = " + AiAgentEffect.this.layout);
             AiAgentEffect.this.initAnimProperties(false);
             setCanceled(false);
             AiAgentEffect aiAgentEffect3 = AiAgentEffect.this;
@@ -220,32 +212,26 @@ public final class AiAgentEffect {
                 EmergencyButton$$ExternalSyntheticOutline0.m("applyDrawWakeLock exception = ", e, "AiAgentEffect");
             }
             AiAgentEffect aiAgentEffect4 = AiAgentEffect.this;
-            if (aiAgentEffect4.isVideoPlaying || (transparentVideoView = aiAgentEffect4.videoView) == 0) {
+            if (aiAgentEffect4.isVideoPlaying || (transparentVideoView = aiAgentEffect4.videoView) == null) {
                 return;
             }
             aiAgentEffect4.isVideoPlaying = true;
             transparentVideoView.load(aiAgentEffect4.context.getResources().openRawResourceFd(R.raw.wave_mid), aiAgentEffect4.config, new Runnable() { // from class: com.android.systemui.aiagent.AiAgentEffect$ShowAnimatorListener$onAnimationStart$1$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TransparentVideoView transparentVideoView2 = TransparentVideoView.this;
-                    AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Play requested. isRunning=", "TransparentVideoView", transparentVideoView2.isRunning());
-                    VideoRenderModel videoRenderModel = transparentVideoView2.model;
-                    if (videoRenderModel != null) {
-                        videoRenderModel.play();
-                    }
+                    transparentVideoView.play();
                 }
             }, new Function1() { // from class: com.android.systemui.aiagent.AiAgentEffect$ShowAnimatorListener$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    Log.e(AiAgentEffect.ShowAnimatorListener.this.getTag(), "cannot load transparent video: " + ((IMediaPlayer$MediaError) obj));
+                public final Object mo781invoke(Object obj) {
+                    Log.e(this.f$0.getTag(), "cannot load transparent video: " + ((IMediaPlayer$MediaError) obj));
                     return Unit.INSTANCE;
                 }
             });
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class State {
         public final boolean isAODShown;
         public final boolean isDozing;
@@ -378,7 +364,7 @@ public final class AiAgentEffect {
         IForegroundServiceObserver.Stub stub = new IForegroundServiceObserver.Stub() { // from class: com.android.systemui.aiagent.AiAgentEffect$foregroundServiceObserver$1
             public final void onForegroundStateChanged(IBinder iBinder, String str, int i, boolean z2) {
                 if (Intrinsics.areEqual(str, "com.google.android.googlequicksearchbox")) {
-                    AiAgentEffect aiAgentEffect = AiAgentEffect.this;
+                    AiAgentEffect aiAgentEffect = this.this$0;
                     synchronized (aiAgentEffect.lock) {
                         aiAgentEffect.setState(AiAgentEffect.State.copy$default(aiAgentEffect.state, false, z2, false, false, false, false, false, false, IKnoxCustomManager.Stub.TRANSACTION_getDexForegroundModePackageList));
                         Unit unit = Unit.INSTANCE;
@@ -391,14 +377,12 @@ public final class AiAgentEffect {
         this.aodShowStateCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.aiagent.AiAgentEffect$aodShowStateCallback$1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                SettingsHelper settingsHelper;
                 if (uri != null) {
-                    AiAgentEffect aiAgentEffect = AiAgentEffect.this;
+                    AiAgentEffect aiAgentEffect = this.this$0;
                     if (Intrinsics.areEqual(Settings.System.getUriFor(SettingsHelper.INDEX_AOD_SHOW_STATE), uri)) {
-                        settingsHelper = aiAgentEffect.settingsHelper;
-                        boolean isAODShown = settingsHelper.isAODShown();
+                        boolean zIsAODShown = aiAgentEffect.settingsHelper.isAODShown();
                         synchronized (aiAgentEffect.lock) {
-                            aiAgentEffect.setState(AiAgentEffect.State.copy$default(aiAgentEffect.state, false, false, false, false, false, isAODShown, false, false, IKnoxCustomManager.Stub.TRANSACTION_getLockScreenShortcut));
+                            aiAgentEffect.setState(AiAgentEffect.State.copy$default(aiAgentEffect.state, false, false, false, false, false, zIsAODShown, false, false, IKnoxCustomManager.Stub.TRANSACTION_getLockScreenShortcut));
                             Unit unit = Unit.INSTANCE;
                         }
                     }
@@ -418,11 +402,11 @@ public final class AiAgentEffect {
 
             @Override // com.android.systemui.privacy.PrivacyItemController.Callback
             public final void onPrivacyItemsChanged(List list) {
-                Object obj;
+                Object next;
                 ListPopupWindow$$ExternalSyntheticOutline0.m(list.size(), "onPrivacyItemsChanged privacyItems.size = ", "AiAgentEffect");
                 AnimHelper.AnimationState animationState2 = AnimHelper.AnimationState.NONE;
                 AnimHelper.AnimationType[] animationTypeArr = AiAgentEffect.INIT_PROPERTY_FIELDS;
-                AiAgentEffect aiAgentEffect = AiAgentEffect.this;
+                AiAgentEffect aiAgentEffect = this.this$0;
                 aiAgentEffect.getClass();
                 if (list.isEmpty()) {
                     onPrivacyItemsChanged$resetEffect(aiAgentEffect);
@@ -431,16 +415,16 @@ public final class AiAgentEffect {
                 Iterator it = list.iterator();
                 while (true) {
                     if (!it.hasNext()) {
-                        obj = null;
+                        next = null;
                         break;
                     }
-                    obj = it.next();
-                    PrivacyItem privacyItem = (PrivacyItem) obj;
+                    next = it.next();
+                    PrivacyItem privacyItem = (PrivacyItem) next;
                     if (privacyItem.privacyType == PrivacyType.TYPE_MICROPHONE && Intrinsics.areEqual(privacyItem.application.packageName, "com.google.android.googlequicksearchbox")) {
                         break;
                     }
                 }
-                PrivacyItem privacyItem2 = (PrivacyItem) obj;
+                PrivacyItem privacyItem2 = (PrivacyItem) next;
                 if (privacyItem2 == null) {
                     onPrivacyItemsChanged$resetEffect(aiAgentEffect);
                 } else {
@@ -451,7 +435,7 @@ public final class AiAgentEffect {
         this.statusBarStateListener = new StatusBarStateController.StateListener() { // from class: com.android.systemui.aiagent.AiAgentEffect$statusBarStateListener$1
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
             public final void onDozingChanged(boolean z2) {
-                AiAgentEffect aiAgentEffect = AiAgentEffect.this;
+                AiAgentEffect aiAgentEffect = this.this$0;
                 synchronized (aiAgentEffect.lock) {
                     aiAgentEffect.setState(AiAgentEffect.State.copy$default(aiAgentEffect.state, false, false, false, false, false, false, z2, false, 191));
                     Unit unit = Unit.INSTANCE;
@@ -462,9 +446,9 @@ public final class AiAgentEffect {
         new DisplayLifecycle.Observer() { // from class: com.android.systemui.aiagent.AiAgentEffect$displayLifecycleObserver$1
             @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
             public final void onFolderStateChanged(boolean z2) {
-                AiAgentEffect aiAgentEffect = AiAgentEffect.this;
+                AiAgentEffect aiAgentEffect = this.this$0;
                 aiAgentEffect.lastDensityDpi = aiAgentEffect.context.getResources().getConfiguration().densityDpi;
-                AiAgentEffect aiAgentEffect2 = AiAgentEffect.this;
+                AiAgentEffect aiAgentEffect2 = this.this$0;
                 synchronized (aiAgentEffect2.lock) {
                     aiAgentEffect2.setState(AiAgentEffect.State.copy$default(aiAgentEffect2.state, false, false, false, false, z2, false, false, false, IKnoxCustomManager.Stub.TRANSACTION_getFavoriteAppsMaxCount));
                     Unit unit = Unit.INSTANCE;
@@ -482,7 +466,7 @@ public final class AiAgentEffect {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 PowerManager.WakeLock wakeLock;
-                AiAgentEffect aiAgentEffect = AiAgentEffect.this;
+                AiAgentEffect aiAgentEffect = this.f$0;
                 AiAgentEffect.State state2 = aiAgentEffect.currentState;
                 if ((state2.isUsingMicForEffect && state2.isGeminiForeground) || (wakeLock = aiAgentEffect.drawWakeLock) == null || !wakeLock.isHeld()) {
                     Log.d("AiAgentEffect", "releaseRunnable releaseIfNeed re-waiting");
@@ -525,12 +509,12 @@ public final class AiAgentEffect {
         boolean z2 = aiAgentEffect.isShowAnimating;
         boolean z3 = aiAgentEffect.isAnimating;
         AnimatorSet animatorSet = aiAgentEffect.showAnimSet;
-        Boolean valueOf = animatorSet != null ? Boolean.valueOf(animatorSet.isRunning()) : null;
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("hiding isVisibleView = ", ", isStartAnimating = ", ", isAnimating = ", z, z2);
-        m.append(z3);
-        m.append(", isShowRunning = ");
-        m.append(valueOf);
-        Log.d("AiAgentEffect", m.toString());
+        Boolean boolValueOf = animatorSet != null ? Boolean.valueOf(animatorSet.isRunning()) : null;
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("hiding isVisibleView = ", ", isStartAnimating = ", ", isAnimating = ", z, z2);
+        sbM.append(z3);
+        sbM.append(", isShowRunning = ");
+        sbM.append(boolValueOf);
+        Log.d("AiAgentEffect", sbM.toString());
         if (aiAgentEffect.settingsHelper.isRemoveAnimation() || !aiAgentEffect.isAttachedView) {
             return;
         }
@@ -660,9 +644,9 @@ public final class AiAgentEffect {
 
     public final void displayEffect(final AnimHelper.AnimationState animationState) {
         Log.d("AiAgentEffect", "displayEffect animState = " + animationState);
-        this.handler.post(new Runnable() { // from class: com.android.systemui.aiagent.AiAgentEffect$displayEffect$1
+        this.handler.post(new Runnable() { // from class: com.android.systemui.aiagent.AiAgentEffect.displayEffect.1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+            /* renamed from: com.android.systemui.aiagent.AiAgentEffect$displayEffect$1$WhenMappings */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -682,7 +666,7 @@ public final class AiAgentEffect {
 
             @Override // java.lang.Runnable
             public final void run() {
-                int i = WhenMappings.$EnumSwitchMapping$0[AnimHelper.AnimationState.this.ordinal()];
+                int i = WhenMappings.$EnumSwitchMapping$0[animationState.ordinal()];
                 if (i == 1) {
                     AiAgentEffect.access$showing(this);
                 } else {
@@ -731,8 +715,8 @@ public final class AiAgentEffect {
         }
     }
 
-    public final void setState(State state) {
-        State copy$default;
+    public final void setState(State state) throws SecurityException {
+        State stateCopy$default;
         ArrayList arrayList;
         boolean z;
         if (Intrinsics.areEqual(this.state, state)) {
@@ -740,7 +724,7 @@ public final class AiAgentEffect {
         }
         this.state = state;
         synchronized (this.lock) {
-            copy$default = State.copy$default(this.state, false, false, false, false, false, false, false, false, 255);
+            stateCopy$default = State.copy$default(this.state, false, false, false, false, false, false, false, false, 255);
             Unit unit = Unit.INSTANCE;
         }
         boolean z2 = this.currentState.isFolderOpened;
@@ -766,26 +750,28 @@ public final class AiAgentEffect {
                     break;
                 }
             }
+            z = false;
+        } else {
+            z = false;
         }
-        z = false;
-        State copy$default2 = State.copy$default(copy$default, z, false, false, false, false, false, false, false, 254);
+        State stateCopy$default2 = State.copy$default(stateCopy$default, z, false, false, false, false, false, false, false, 254);
         boolean z3 = this.isVisibleView;
         boolean z4 = this.isAttachedView;
         boolean z5 = this.isAnimating;
         boolean z6 = this.isShowAnimating;
         boolean z7 = this.isHideAnimating;
         boolean z8 = this.isVideoPlaying;
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("vis=", ", attached=", ", animating=", z3, z4);
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, z5, ", showing=", z6, ", hiding=");
-        Log.d("AiAgentEffect", "updateState: " + copy$default2 + ", " + KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, z7, ", playing=", z8));
-        if (shouldShowEffect(copy$default2)) {
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("vis=", ", attached=", ", animating=", z3, z4);
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z5, ", showing=", z6, ", hiding=");
+        Log.d("AiAgentEffect", "updateState: " + stateCopy$default2 + ", " + KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z7, ", playing=", z8));
+        if (shouldShowEffect(stateCopy$default2)) {
             if (!shouldShowEffect(this.currentState) || !this.isVisibleView || !this.isAnimating) {
                 displayEffect(AnimHelper.AnimationState.SHOWING);
             }
-        } else if (!shouldShowEffect(copy$default2) && (shouldShowEffect(this.currentState) || (this.isVisibleView && this.isAnimating && !this.isHideAnimating))) {
+        } else if (!shouldShowEffect(stateCopy$default2) && (shouldShowEffect(this.currentState) || (this.isVisibleView && this.isAnimating && !this.isHideAnimating))) {
             displayEffect(AnimHelper.AnimationState.HIDING);
         }
-        this.currentState = copy$default2;
+        this.currentState = stateCopy$default2;
     }
 
     public final void updateConfiguration(Configuration configuration) {

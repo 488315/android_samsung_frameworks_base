@@ -24,7 +24,8 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt__SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlinx.coroutines.BuildersKt;
@@ -32,7 +33,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLogController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -55,19 +55,18 @@ public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLo
         public final void accept(Object obj, Object obj2) {
             String str = (String) obj;
             String str2 = (String) obj2;
-            LooperSlowLogControllerImpl looperSlowLogControllerImpl = LooperSlowLogControllerImpl.this;
+            LooperSlowLogControllerImpl looperSlowLogControllerImpl = this.$tmp0;
             Function2 function2 = looperSlowLogControllerImpl.curLogHandler;
             if (function2 != null) {
                 function2.invoke(str, str2);
                 return;
             }
-            long currentTimeMillis = System.currentTimeMillis();
+            long jCurrentTimeMillis = System.currentTimeMillis();
             Log.w("LooperSlow", str);
-            BuildersKt.launch$default(looperSlowLogControllerImpl.scope, looperSlowLogControllerImpl.bgDispatcher, null, new LooperSlowLogControllerImpl$updateSlowDispatchOnChoreographer$2(looperSlowLogControllerImpl, currentTimeMillis, str, str2, null), 2);
+            BuildersKt.launch$default(looperSlowLogControllerImpl.scope, looperSlowLogControllerImpl.bgDispatcher, null, new LooperSlowLogControllerImpl$updateSlowDispatchOnChoreographer$2(looperSlowLogControllerImpl, jCurrentTimeMillis, str, str2, null), 2);
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -80,7 +79,6 @@ public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLo
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LogType {
         public boolean choreographerOnly;
         public long deliveryTime;
@@ -105,9 +103,9 @@ public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLo
         }
 
         public final int hashCode() {
-            int m = TransitionData$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(Integer.hashCode(this.type) * 31, 31, this.dispatchTime), 31, this.deliveryTime), 31, this.lastEnabledTime), 31, this.choreographerOnly);
+            int iM = TransitionData$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(Integer.hashCode(this.type) * 31, 31, this.dispatchTime), 31, this.deliveryTime), 31, this.lastEnabledTime), 31, this.choreographerOnly);
             Function2 function2 = this.logHandler;
-            return m + (function2 == null ? 0 : function2.hashCode());
+            return iM + (function2 == null ? 0 : function2.hashCode());
         }
 
         public final String toString() {
@@ -215,7 +213,7 @@ public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLo
                     }
                     this.jobs[i] = null;
                 }
-                update$5$1();
+                update$6$1();
                 Unit unit = Unit.INSTANCE;
             } catch (Throwable th) {
                 throw th;
@@ -256,38 +254,38 @@ public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLo
         synchronized (sparseArray2) {
             try {
                 sparseArray = sparseArray2;
-            } catch (Throwable th) {
-                th = th;
-                sparseArray = sparseArray2;
-            }
-            try {
-                LogType logType = (LogType) this.types.get(i, new LogType(i, 0L, 0L, 0L, false, null, 62, null));
-                logType.dispatchTime = Math.max(j, 0L);
-                logType.deliveryTime = Math.max(j2, 0L);
-                logType.lastEnabledTime = SystemClock.elapsedRealtime();
-                logType.choreographerOnly = z;
-                logType.logHandler = uiThreadMonitor$$ExternalSyntheticLambda3;
-                this.types.set(i, logType);
-                String str2 = "enable " + this.types.get(i);
-                if (this.debug) {
-                    Log.d("LooperSlow", str2);
-                }
-                Job job = this.jobs[i];
-                if (job != null) {
-                    if (job.isActive()) {
-                        job.cancel(null);
+                try {
+                    LogType logType = (LogType) this.types.get(i, new LogType(i, 0L, 0L, 0L, false, null, 62, null));
+                    logType.dispatchTime = Math.max(j, 0L);
+                    logType.deliveryTime = Math.max(j2, 0L);
+                    logType.lastEnabledTime = SystemClock.elapsedRealtime();
+                    logType.choreographerOnly = z;
+                    logType.logHandler = uiThreadMonitor$$ExternalSyntheticLambda3;
+                    this.types.set(i, logType);
+                    String str2 = "enable " + this.types.get(i);
+                    if (this.debug) {
+                        Log.d("LooperSlow", str2);
                     }
-                    this.jobs[i] = null;
+                    Job job = this.jobs[i];
+                    if (job != null) {
+                        if (job.isActive()) {
+                            job.cancel(null);
+                        }
+                        this.jobs[i] = null;
+                    }
+                    if (j3 > 0) {
+                        this.jobs[i] = BuildersKt.launch$default(this.scope, null, null, new LooperSlowLogControllerImpl$enable$1$3(j3, this, i, null), 3);
+                    }
+                    update$6$1();
+                    Unit unit = Unit.INSTANCE;
+                    return true;
+                } catch (Throwable th) {
+                    th = th;
+                    throw th;
                 }
-                if (j3 > 0) {
-                    this.jobs[i] = BuildersKt.launch$default(this.scope, null, null, new LooperSlowLogControllerImpl$enable$1$3(j3, this, i, null), 3);
-                }
-                update$5$1();
-                Unit unit = Unit.INSTANCE;
-                return true;
             } catch (Throwable th2) {
                 th = th2;
-                throw th;
+                sparseArray = sparseArray2;
             }
         }
     }
@@ -296,11 +294,11 @@ public final class LooperSlowLogControllerImpl implements Dumpable, LooperSlowLo
         return this.curSlowDispatchMs > 0 || this.curSlowDeliveryMs > 0;
     }
 
-    public final void update$5$1() {
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(SequencesKt__SequencesKt.asSequence(new SparseArrayKt$valueIterator$1(this.types)), new LooperSlowLogControllerImpl$$ExternalSyntheticLambda3()));
+    public final void update$6$1() {
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(SequencesKt__SequencesKt.asSequence(new SparseArrayKt$valueIterator$1(this.types)), new LooperSlowLogControllerImpl$$ExternalSyntheticLambda3()).new AnonymousClass1();
         LogType logType = null;
-        while (filteringSequence$iterator$1.hasNext()) {
-            LogType logType2 = (LogType) filteringSequence$iterator$1.next();
+        while (anonymousClass1.hasNext()) {
+            LogType logType2 = (LogType) anonymousClass1.next();
             if (logType == null || logType.lastEnabledTime < logType2.lastEnabledTime) {
                 logType = logType2;
             }

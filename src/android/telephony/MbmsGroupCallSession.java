@@ -55,15 +55,15 @@ public class MbmsGroupCallSession implements AutoCloseable {
             throw new IllegalStateException("Cannot create two instances of MbmsGroupCallSession");
         }
         MbmsGroupCallSession mbmsGroupCallSession = new MbmsGroupCallSession(context, executor, i, mbmsGroupCallSessionCallback);
-        final int bindAndInitialize = mbmsGroupCallSession.bindAndInitialize();
-        if (bindAndInitialize == 0) {
+        final int iBindAndInitialize = mbmsGroupCallSession.bindAndInitialize();
+        if (iBindAndInitialize == 0) {
             return mbmsGroupCallSession;
         }
         sIsInitialized.set(false);
         executor.execute(new Runnable() { // from class: android.telephony.MbmsGroupCallSession.2
             @Override // java.lang.Runnable
             public void run() {
-                MbmsGroupCallSessionCallback.this.onError(bindAndInitialize, null);
+                mbmsGroupCallSessionCallback.onError(iBindAndInitialize, null);
             }
         });
         return null;
@@ -104,15 +104,15 @@ public class MbmsGroupCallSession implements AutoCloseable {
         GroupCall groupCall = new GroupCall(this.mSubscriptionId, iMbmsGroupCallService, this, j, internalGroupCallCallback);
         this.mKnownActiveGroupCalls.add(groupCall);
         try {
-            int startGroupCall = iMbmsGroupCallService.startGroupCall(this.mSubscriptionId, j, list, list2, internalGroupCallCallback);
-            if (startGroupCall == -1) {
+            int iStartGroupCall = iMbmsGroupCallService.startGroupCall(this.mSubscriptionId, j, list, list2, internalGroupCallCallback);
+            if (iStartGroupCall == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
             }
-            if (startGroupCall == 0) {
+            if (iStartGroupCall == 0) {
                 return groupCall;
             }
-            this.mInternalCallback.onError(startGroupCall, null);
+            this.mInternalCallback.onError(iStartGroupCall, null);
             return null;
         } catch (RemoteException unused) {
             Log.w(LOG_TAG, "Remote process died");
@@ -131,21 +131,21 @@ public class MbmsGroupCallSession implements AutoCloseable {
         ServiceConnection serviceConnection = new ServiceConnection() { // from class: android.telephony.MbmsGroupCallSession.3
             @Override // android.content.ServiceConnection
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                IMbmsGroupCallService asInterface = IMbmsGroupCallService.Stub.asInterface(iBinder);
+                IMbmsGroupCallService iMbmsGroupCallServiceAsInterface = IMbmsGroupCallService.Stub.asInterface(iBinder);
                 try {
-                    int initialize = asInterface.initialize(MbmsGroupCallSession.this.mInternalCallback, MbmsGroupCallSession.this.mSubscriptionId);
-                    if (initialize == -1) {
+                    int iInitialize = iMbmsGroupCallServiceAsInterface.initialize(MbmsGroupCallSession.this.mInternalCallback, MbmsGroupCallSession.this.mSubscriptionId);
+                    if (iInitialize == -1) {
                         MbmsGroupCallSession.this.close();
                         throw new IllegalStateException("Middleware must not return an unknown error code");
                     }
-                    if (initialize != 0) {
-                        MbmsGroupCallSession.this.mInternalCallback.onError(initialize, "Error returned during initialization");
+                    if (iInitialize != 0) {
+                        MbmsGroupCallSession.this.mInternalCallback.onError(iInitialize, "Error returned during initialization");
                         MbmsGroupCallSession.sIsInitialized.set(false);
                         return;
                     }
                     try {
-                        asInterface.asBinder().linkToDeath(MbmsGroupCallSession.this.mDeathRecipient, 0);
-                        MbmsGroupCallSession.this.mService.set(asInterface);
+                        iMbmsGroupCallServiceAsInterface.asBinder().linkToDeath(MbmsGroupCallSession.this.mDeathRecipient, 0);
+                        MbmsGroupCallSession.this.mService.set(iMbmsGroupCallServiceAsInterface);
                     } catch (RemoteException unused) {
                         MbmsGroupCallSession.this.mInternalCallback.onError(3, "Middleware lost during initialization");
                         MbmsGroupCallSession.sIsInitialized.set(false);

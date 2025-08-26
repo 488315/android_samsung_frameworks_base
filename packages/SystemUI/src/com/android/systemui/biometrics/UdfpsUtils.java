@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import com.android.systemui.R;
 import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class UdfpsUtils {
     public static Point getPortraitTouch(int i, MotionEvent motionEvent, UdfpsOverlayParams udfpsOverlayParams) {
@@ -40,13 +39,13 @@ public class UdfpsUtils {
         }
         Resources resources = context.getResources();
         String[] strArr = {resources.getString(R.string.udfps_accessibility_touch_hints_left), resources.getString(R.string.udfps_accessibility_touch_hints_down), resources.getString(R.string.udfps_accessibility_touch_hints_right), resources.getString(R.string.udfps_accessibility_touch_hints_up)};
-        float centerX = udfpsOverlayParams.sensorBounds.centerX() / udfpsOverlayParams.scaleFactor;
-        double atan2 = Math.atan2((udfpsOverlayParams.sensorBounds.centerY() / r7) - i2, i - centerX);
-        if (atan2 < 0.0d) {
-            atan2 += 6.283185307179586d;
+        float fCenterX = udfpsOverlayParams.sensorBounds.centerX() / udfpsOverlayParams.scaleFactor;
+        double dAtan2 = Math.atan2((udfpsOverlayParams.sensorBounds.centerY() / r7) - i2, i - fCenterX);
+        if (dAtan2 < 0.0d) {
+            dAtan2 += 6.283185307179586d;
         }
         double d = 360.0d / 4;
-        int degrees = ((int) ((((d / 2.0d) + Math.toDegrees(atan2)) % 360.0d) / d)) % 4;
+        int degrees = ((int) ((((d / 2.0d) + Math.toDegrees(dAtan2)) % 360.0d) / d)) % 4;
         if (z2) {
             int i3 = udfpsOverlayParams.rotation;
             if (i3 == 1) {

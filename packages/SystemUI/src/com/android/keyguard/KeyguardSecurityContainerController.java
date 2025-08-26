@@ -78,7 +78,6 @@ import kotlin.Pair;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecurityContainerController extends ViewController implements KeyguardSecurityView {
     public final AdminSecondaryLockScreenController mAdminSecondaryLockScreenController;
@@ -121,7 +120,6 @@ public class KeyguardSecurityContainerController extends ViewController implemen
     public final ViewMediatorCallback mViewMediatorCallback;
     public boolean mWillRunDismissFromKeyguard;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecurityContainerController$8, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass8 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;
@@ -166,7 +164,7 @@ public class KeyguardSecurityContainerController extends ViewController implemen
         this.mOnKeyListener = new View.OnKeyListener() { // from class: com.android.keyguard.KeyguardSecurityContainerController$$ExternalSyntheticLambda3
             @Override // android.view.View.OnKeyListener
             public final boolean onKey(View view, int i, KeyEvent keyEvent) {
-                return KeyguardSecurityContainerController.this.interceptMediaKey(keyEvent);
+                return this.f$0.interceptMediaKey(keyEvent);
             }
         };
         this.mCurrentSecurityMode = KeyguardSecurityModel.SecurityMode.Invalid;
@@ -299,11 +297,10 @@ public class KeyguardSecurityContainerController extends ViewController implemen
             int i3 = AnonymousClass8.$SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode[this.mCurrentSecurityMode.ordinal()];
             if (!((i3 == 1 || i3 == 3 || i3 == 4 || i3 == 5) ? getResources().getBoolean(R.bool.can_use_one_handed_bouncer) : false)) {
                 i = 0;
-                ((KeyguardSecurityContainer) this.mView).initMode(i, this.mGlobalSettings, this.mFalsingManager, this.mUserSwitcherController, new KeyguardSecurityContainerController$$ExternalSyntheticLambda2(this), this.mFalsingA11yDelegate);
             }
-        } else {
-            i2 = 2;
+            ((KeyguardSecurityContainer) this.mView).initMode(i, this.mGlobalSettings, this.mFalsingManager, this.mUserSwitcherController, new KeyguardSecurityContainerController$$ExternalSyntheticLambda2(this), this.mFalsingA11yDelegate);
         }
+        i2 = 2;
         i = i2;
         ((KeyguardSecurityContainer) this.mView).initMode(i, this.mGlobalSettings, this.mFalsingManager, this.mUserSwitcherController, new KeyguardSecurityContainerController$$ExternalSyntheticLambda2(this), this.mFalsingA11yDelegate);
     }
@@ -327,18 +324,18 @@ public class KeyguardSecurityContainerController extends ViewController implemen
             public final void finish(int i) {
                 int i2 = SceneContainerFlag.$r8$clinit;
                 KeyguardSecurityContainerController keyguardSecurityContainerController = KeyguardSecurityContainerController.this;
-                boolean z = false;
+                boolean zOnDismiss = false;
                 keyguardSecurityContainerController.mWillRunDismissFromKeyguard = false;
                 ActivityStarter.OnDismissAction onDismissAction = keyguardSecurityContainerController.mDismissAction;
                 if (onDismissAction != null) {
-                    z = onDismissAction.onDismiss();
+                    zOnDismiss = onDismissAction.onDismiss();
                     keyguardSecurityContainerController.mWillRunDismissFromKeyguard = keyguardSecurityContainerController.mDismissAction.willRunAnimationOnKeyguard();
                     keyguardSecurityContainerController.mDismissAction = null;
                     keyguardSecurityContainerController.mCancelAction = null;
                 }
                 ViewMediatorCallback viewMediatorCallback = keyguardSecurityContainerController.mViewMediatorCallback;
                 if (viewMediatorCallback != null) {
-                    if (z) {
+                    if (zOnDismiss) {
                         viewMediatorCallback.keyguardDonePending(i);
                     } else {
                         viewMediatorCallback.keyguardDone(i);
@@ -366,7 +363,7 @@ public class KeyguardSecurityContainerController extends ViewController implemen
                     public final void onTick(long j4) {
                         BouncerMessageInteractor$onPrimaryAuthLockedOut$callback$1 bouncerMessageInteractor$onPrimaryAuthLockedOut$callback$12 = (BouncerMessageInteractor$onPrimaryAuthLockedOut$callback$1) bouncerMessageInteractor$onPrimaryAuthLockedOut$callback$1;
                         bouncerMessageInteractor$onPrimaryAuthLockedOut$callback$12.getClass();
-                        int roundToInt = MathKt__MathJVMKt.roundToInt(j4 / 1000.0d);
+                        int iRoundToInt = MathKt__MathJVMKt.roundToInt(j4 / 1000.0d);
                         BouncerMessageStrings bouncerMessageStrings = BouncerMessageStrings.INSTANCE;
                         BouncerMessageInteractor bouncerMessageInteractor2 = bouncerMessageInteractor$onPrimaryAuthLockedOut$callback$12.this$0;
                         AuthenticationMethodModel authModel = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor2.getCurrentSecurityMode());
@@ -377,7 +374,7 @@ public class KeyguardSecurityContainerController extends ViewController implemen
                             message2.animate = false;
                         }
                         if (message2 != null) {
-                            message2.formatterArgs = MapsKt__MapsKt.mutableMapOf(new Pair(SystemUIAnalytics.QPNE_KEY_COUNT, Integer.valueOf(roundToInt)));
+                            message2.formatterArgs = MapsKt__MapsKt.mutableMapOf(new Pair(SystemUIAnalytics.QPNE_KEY_COUNT, Integer.valueOf(iRoundToInt)));
                         }
                         BouncerMessageRepository.setMessage$default(bouncerMessageInteractor2.repository, message);
                     }
@@ -411,9 +408,9 @@ public class KeyguardSecurityContainerController extends ViewController implemen
                     bouncerMessageInteractor.getClass();
                     BouncerMessageStrings bouncerMessageStrings = BouncerMessageStrings.INSTANCE;
                     AuthenticationMethodModel authModel = BouncerMessageInteractorKt.toAuthModel(bouncerMessageInteractor.getCurrentSecurityMode());
-                    boolean booleanValue = ((Boolean) bouncerMessageInteractor.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue();
+                    boolean zBooleanValue = ((Boolean) bouncerMessageInteractor.isFingerprintAuthCurrentlyAllowedOnBouncer.$$delegate_0.getValue()).booleanValue();
                     bouncerMessageStrings.getClass();
-                    BouncerMessageRepository.setMessage$default(bouncerMessageInteractor.repository, BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.incorrectSecurityInput(authModel, booleanValue)));
+                    BouncerMessageRepository.setMessage$default(bouncerMessageInteractor.repository, BouncerMessageInteractorKt.toMessage(BouncerMessageStrings.incorrectSecurityInput(authModel, zBooleanValue)));
                 }
                 if (((KeyguardSecurityContainer) ((ViewController) keyguardSecurityContainerController).mView).mViewMode instanceof KeyguardSecurityContainer.SidedSecurityMode) {
                     KeyguardSecurityContainer.ViewMode viewMode = ((KeyguardSecurityContainer) ((ViewController) keyguardSecurityContainerController).mView).mViewMode;
@@ -559,9 +556,9 @@ public class KeyguardSecurityContainerController extends ViewController implemen
     }
 
     public final void prepareToShow() {
-        View findViewById = ((KeyguardSecurityContainer) this.mView).findViewById(R.id.keyguard_bouncer_user_switcher);
-        if (findViewById != null) {
-            findViewById.setAlpha(0.0f);
+        View viewFindViewById = ((KeyguardSecurityContainer) this.mView).findViewById(R.id.keyguard_bouncer_user_switcher);
+        if (viewFindViewById != null) {
+            viewFindViewById.setAlpha(0.0f);
         }
     }
 
@@ -648,9 +645,9 @@ public class KeyguardSecurityContainerController extends ViewController implemen
         }
         KeyguardSecurityContainer.BouncerUiEvent bouncerUiEvent2 = KeyguardSecurityContainer.BouncerUiEvent.UNKNOWN;
         KeyguardUpdateMonitor keyguardUpdateMonitor = this.mUpdateMonitor;
-        boolean forceIsDismissibleIsKeepingDeviceUnlocked = keyguardUpdateMonitor.forceIsDismissibleIsKeepingDeviceUnlocked();
+        boolean zForceIsDismissibleIsKeepingDeviceUnlocked = keyguardUpdateMonitor.forceIsDismissibleIsKeepingDeviceUnlocked();
         KeyguardSecurityModel keyguardSecurityModel = this.mSecurityModel;
-        if (forceIsDismissibleIsKeepingDeviceUnlocked) {
+        if (zForceIsDismissibleIsKeepingDeviceUnlocked) {
             bouncerUiEvent = bouncerUiEvent2;
             z3 = true;
             i2 = 5;
@@ -750,7 +747,7 @@ public class KeyguardSecurityContainerController extends ViewController implemen
         KeyguardSecurityModel.SecurityMode securityMode = (KeyguardSecurityModel.SecurityMode) DejankUtils.whitelistIpcs(new Supplier() { // from class: com.android.keyguard.KeyguardSecurityContainerController$$ExternalSyntheticLambda4
             @Override // java.util.function.Supplier
             public final Object get() {
-                KeyguardSecurityContainerController keyguardSecurityContainerController = KeyguardSecurityContainerController.this;
+                KeyguardSecurityContainerController keyguardSecurityContainerController = this.f$0;
                 return keyguardSecurityContainerController.mSecurityModel.getSecurityMode(keyguardSecurityContainerController.mSelectedUserInteractor.getSelectedUserId());
             }
         });
@@ -768,7 +765,7 @@ public class KeyguardSecurityContainerController extends ViewController implemen
         getCurrentSecurityController(new KeyguardSecurityViewFlipperController.OnViewInflatedCallback() { // from class: com.android.keyguard.KeyguardSecurityContainerController$$ExternalSyntheticLambda1
             @Override // com.android.keyguard.KeyguardSecurityViewFlipperController.OnViewInflatedCallback
             public final void onViewInflated(KeyguardInputViewController keyguardInputViewController) {
-                KeyguardSecurityContainerController keyguardSecurityContainerController = KeyguardSecurityContainerController.this;
+                KeyguardSecurityContainerController keyguardSecurityContainerController = this.f$0;
                 keyguardInputViewController.onResume(2);
                 keyguardSecurityContainerController.mSecurityViewFlipperController.show(keyguardInputViewController);
                 keyguardSecurityContainerController.configureMode();

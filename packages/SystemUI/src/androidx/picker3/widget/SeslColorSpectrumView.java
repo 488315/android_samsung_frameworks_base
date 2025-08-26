@@ -27,7 +27,6 @@ import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 class SeslColorSpectrumView extends View {
     public final int[] HUE_COLORS;
@@ -60,7 +59,7 @@ class SeslColorSpectrumView extends View {
     public static final Integer[] SATURATION_LEVELS = {20, 40, 60, 80, 100};
     public static final Integer[] BRIGHTNESS_LEVELS = {20, 40, 60, 80, 100};
 
-    public SeslColorSpectrumView(Context context, AttributeSet attributeSet) {
+    public SeslColorSpectrumView(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.HUE_COLORS = new int[]{-65281, -16776961, -16711681, -16711936, -256, -65536};
         this.ROUNDED_CORNER_RADIUS_IN_Px = 0;
@@ -105,12 +104,12 @@ class SeslColorSpectrumView extends View {
         int i2 = 0;
         int i3 = 0;
         while (i2 <= length) {
-            int m = AbsActionBarView$$ExternalSyntheticOutline0.m(length, i2, 2, i2);
-            if (numArr[m].intValue() >= i) {
-                length = m - 1;
-                i3 = m;
+            int iM = AbsActionBarView$$ExternalSyntheticOutline0.m(length, i2, 2, i2);
+            if (numArr[iM].intValue() >= i) {
+                length = iM - 1;
+                i3 = iM;
             } else {
-                i2 = m + 1;
+                i2 = iM + 1;
             }
         }
         return i3;
@@ -121,24 +120,24 @@ class SeslColorSpectrumView extends View {
         return this.mTouchHelper.dispatchHoverEvent(motionEvent) || super.dispatchHoverEvent(motionEvent);
     }
 
-    public final StringBuilder getTalkbackDescription(int i, int i2, int i3, int i4) {
-        String format;
+    public final StringBuilder getTalkbackDescription(int i, int i2, int i3, int i4) throws Resources.NotFoundException {
+        String string;
         StringBuilder sb = new StringBuilder();
-        String valueOf = String.valueOf(i4);
+        String strValueOf = String.valueOf(i4);
         if (i4 <= 1) {
-            format = this.mResources.getString(R.string.sesl_color_picker_black);
+            string = this.mResources.getString(R.string.sesl_color_picker_black);
         } else if (i4 >= 99) {
-            format = this.mResources.getString(R.string.sesl_color_picker_white);
+            string = this.mResources.getString(R.string.sesl_color_picker_white);
         } else if (i2 <= 3) {
-            format = i4 <= 35 ? this.mResources.getString(R.string.sesl_color_picker_dark_gray) : i4 <= 80 ? this.mResources.getString(R.string.sesl_color_picker_gray) : this.mResources.getString(R.string.sesl_color_picker_light_gray);
+            string = i4 <= 35 ? this.mResources.getString(R.string.sesl_color_picker_dark_gray) : i4 <= 80 ? this.mResources.getString(R.string.sesl_color_picker_gray) : this.mResources.getString(R.string.sesl_color_picker_light_gray);
         } else {
-            String string = i >= 343 ? this.mResources.getString(R.string.sesl_color_picker_red) : this.mHueColorDescriptions[getIndex(HUE_VALUES, i)];
+            String string2 = i >= 343 ? this.mResources.getString(R.string.sesl_color_picker_red) : this.mHueColorDescriptions[getIndex(HUE_VALUES, i)];
             String str = this.mSaturationBrightnessDescriptions[getIndex(SATURATION_LEVELS, i2)][getIndex(BRIGHTNESS_LEVELS, i3)];
-            format = str.equals(this.mResources.getString(R.string.sesl_color_picker_hue_name)) ? string : String.format(str, string);
+            string = str.equals(this.mResources.getString(R.string.sesl_color_picker_hue_name)) ? string2 : String.format(str, string2);
         }
-        sb.append(format);
+        sb.append(string);
         sb.append(" ");
-        sb.append(valueOf);
+        sb.append(strValueOf);
         return sb;
     }
 
@@ -253,14 +252,14 @@ class SeslColorSpectrumView extends View {
         this.mCursorPosX = x;
         this.mCursorPosY = y;
         Rect rect = this.mSpectrumRect;
-        float width = ((x - rect.left) / rect.width()) * 300.0f;
+        float fWidth = ((x - rect.left) / rect.width()) * 300.0f;
         float f = this.mCursorPosY;
         Rect rect2 = this.mSpectrumRect;
-        float height = (f - rect2.top) / rect2.height();
-        float f2 = width >= 0.0f ? width : 0.0f;
+        float fHeight = (f - rect2.top) / rect2.height();
+        float f2 = fWidth >= 0.0f ? fWidth : 0.0f;
         SeslColorPicker.AnonymousClass6 anonymousClass6 = this.mListener;
         if (anonymousClass6 != null) {
-            anonymousClass6.onSpectrumColorChanged(f2, height);
+            anonymousClass6.onSpectrumColorChanged(f2, fHeight);
         } else {
             Log.d("SeslColorSpectrumView", "Listener is not set.");
         }
@@ -273,12 +272,12 @@ class SeslColorSpectrumView extends View {
         float[] fArr = new float[3];
         Color.colorToHSV(i, fArr);
         if (this.mSpectrumRect != null) {
-            String substring = String.format("%08x", Integer.valueOf(i)).substring(2);
+            String strSubstring = String.format("%08x", Integer.valueOf(i)).substring(2);
             String string = getResources().getString(R.string.sesl_color_white_ffffff);
-            if (this.mFromSwatchTouch && substring.equals(string)) {
+            if (this.mFromSwatchTouch && strSubstring.equals(string)) {
                 this.mCursorPosY = 0.0f;
                 this.mCursorPosX = 0.0f;
-            } else if (substring.equals(string)) {
+            } else if (strSubstring.equals(string)) {
                 this.mCursorPosY = 0.0f;
                 this.mCursorPosX = this.mCurrentXPos;
             } else {
@@ -316,7 +315,6 @@ class SeslColorSpectrumView extends View {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SeslColorSpectrumViewTouchHelper extends ExploreByTouchHelper {
         public float mVirtualBrightness;
         public float mVirtualCurrentCursorX;
@@ -400,21 +398,21 @@ class SeslColorSpectrumView extends View {
         public final void setVirtualCursorIndexAt$1(float f, float f2) {
             SeslColorSpectrumView seslColorSpectrumView = SeslColorSpectrumView.this;
             this.mVirtualCurrentCursorX = MathUtils.clamp(f, 0.0f, seslColorSpectrumView.mSpectrumRect.width());
-            float clamp = MathUtils.clamp(f2, 0.0f, seslColorSpectrumView.mSpectrumRect.height());
-            this.mVirtualCurrentCursorY = clamp;
+            float fClamp = MathUtils.clamp(f2, 0.0f, seslColorSpectrumView.mSpectrumRect.height());
+            this.mVirtualCurrentCursorY = fClamp;
             float f3 = this.mVirtualCurrentCursorX;
             this.mVirtualCursorPosX = (int) (f3 / seslColorSpectrumView.mVirtualItemWidth);
-            this.mVirtualCursorPosY = (int) (clamp / seslColorSpectrumView.mVirtualItemHeight);
+            this.mVirtualCursorPosY = (int) (fClamp / seslColorSpectrumView.mVirtualItemHeight);
             Rect rect = seslColorSpectrumView.mSpectrumRect;
-            float width = (((f3 - rect.left) + seslColorSpectrumView.mStartMargin) / rect.width()) * 300.0f;
+            float fWidth = (((f3 - rect.left) + seslColorSpectrumView.mStartMargin) / rect.width()) * 300.0f;
             float f4 = this.mVirtualCurrentCursorY;
             Rect rect2 = seslColorSpectrumView.mSpectrumRect;
-            float height = ((f4 - rect2.top) + seslColorSpectrumView.mTopMargin) / rect2.height();
-            this.mVirtualHue = width >= 0.0f ? width : 0.0f;
+            float fHeight = ((f4 - rect2.top) + seslColorSpectrumView.mTopMargin) / rect2.height();
+            this.mVirtualHue = fWidth >= 0.0f ? fWidth : 0.0f;
             float f5 = seslColorSpectrumView.mSaturationProgress;
             this.mVirtualBrightness = f5;
-            this.mVirtualValue = f5 / (1.0f + height);
-            this.mVirtualSaturation = height * 100.0f;
+            this.mVirtualValue = f5 / (1.0f + fHeight);
+            this.mVirtualSaturation = fHeight * 100.0f;
         }
 
         public final void setVirtualCursorIndexAt$1(int i) {

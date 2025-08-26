@@ -8,7 +8,6 @@ import android.os.Parcel;
 import com.android.wm.shell.recents.RecentTasksController;
 import com.android.wm.shell.shared.GroupedTaskInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface IRecentTasksListener extends IInterface {
     void onRecentTasksChanged();
@@ -25,10 +24,8 @@ public interface IRecentTasksListener extends IInterface {
 
     void onVisibleTasksChanged(GroupedTaskInfo[] groupedTaskInfoArr);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IRecentTasksListener {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IRecentTasksListener {
             public final IBinder mRemote;
 
@@ -43,84 +40,84 @@ public interface IRecentTasksListener extends IInterface {
 
             @Override // com.android.wm.shell.recents.IRecentTasksListener
             public final void onRecentTasksChanged() {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.wm.shell.recents.IRecentTasksListener
             public final void onRunningTaskAppeared(ActivityManager.RunningTaskInfo runningTaskInfo) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.wm.shell.recents.IRecentTasksListener
             public final void onRunningTaskChanged(ActivityManager.RunningTaskInfo runningTaskInfo) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.wm.shell.recents.IRecentTasksListener
             public final void onRunningTaskVanished(ActivityManager.RunningTaskInfo runningTaskInfo) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.wm.shell.recents.IRecentTasksListener
             public final void onTaskInfoChanged(ActivityManager.RunningTaskInfo runningTaskInfo) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.wm.shell.recents.IRecentTasksListener
             public final void onTaskMovedToFront(GroupedTaskInfo groupedTaskInfo) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
-                    obtain.writeTypedObject(groupedTaskInfo, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
+                    parcelObtain.writeTypedObject(groupedTaskInfo, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.wm.shell.recents.IRecentTasksListener
             public final void onVisibleTasksChanged(GroupedTaskInfo[] groupedTaskInfoArr) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
-                    obtain.writeTypedArray(groupedTaskInfoArr, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.recents.IRecentTasksListener");
+                    parcelObtain.writeTypedArray(groupedTaskInfoArr, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

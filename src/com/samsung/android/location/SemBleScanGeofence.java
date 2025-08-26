@@ -22,10 +22,10 @@ public class SemBleScanGeofence {
     }
 
     private boolean isLatLonValid(double d, double d2) {
-        double abs = Math.abs(d);
-        double abs2 = Math.abs(d2);
-        if (90.0d >= abs && 180.0d >= abs2) {
-            return abs >= 1.0E-6d || abs2 >= 1.0E-6d;
+        double dAbs = Math.abs(d);
+        double dAbs2 = Math.abs(d2);
+        if (90.0d >= dAbs && 180.0d >= dAbs2) {
+            return dAbs >= 1.0E-6d || dAbs2 >= 1.0E-6d;
         }
         return false;
     }

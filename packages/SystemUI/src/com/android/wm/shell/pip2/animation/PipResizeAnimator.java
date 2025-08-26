@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import com.android.wm.shell.pip2.PipSurfaceTransactionHelper;
 import com.android.wm.shell.shared.animation.Interpolators;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipResizeAnimator extends ValueAnimator {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -32,13 +31,13 @@ public class PipResizeAnimator extends ValueAnimator {
     public PipSurfaceTransactionHelper.SurfaceControlTransactionFactory mSurfaceControlTransactionFactory;
 
     /* renamed from: -$$Nest$smsetBoundsAndRotation, reason: not valid java name */
-    public static void m3259$$Nest$smsetBoundsAndRotation(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, Rect rect, Rect rect2, float f, int i, int i2) {
+    public static void m3276$$Nest$smsetBoundsAndRotation(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, Rect rect, Rect rect2, float f, int i, int i2) {
         Matrix matrix = new Matrix();
-        float width = rect2.width() / rect.width();
-        matrix.setScale(width, rect2.height() / rect.height());
+        float fWidth = rect2.width() / rect.width();
+        matrix.setScale(fWidth, rect2.height() / rect.height());
         matrix.postTranslate(rect2.left, rect2.top);
         matrix.postRotate(f, rect2.centerX(), rect2.centerY());
-        transaction.setMatrix(surfaceControl, matrix, new float[9]).setCornerRadius(surfaceControl, i / width).setShadowRadius(surfaceControl, i2);
+        transaction.setMatrix(surfaceControl, matrix, new float[9]).setCornerRadius(surfaceControl, i / fWidth).setShadowRadius(surfaceControl, i2);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -60,7 +59,7 @@ public class PipResizeAnimator extends ValueAnimator {
                 PipResizeAnimator pipResizeAnimator = PipResizeAnimator.this;
                 SurfaceControl.Transaction transaction3 = pipResizeAnimator.mFinishTx;
                 if (transaction3 != null) {
-                    PipResizeAnimator.m3259$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator.mLeash, pipResizeAnimator.mBaseBounds, pipResizeAnimator.mEndBounds, 0.0f, pipResizeAnimator.mCornerRadius, pipResizeAnimator.mShadowRadius);
+                    PipResizeAnimator.m3276$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator.mLeash, pipResizeAnimator.mBaseBounds, pipResizeAnimator.mEndBounds, 0.0f, pipResizeAnimator.mCornerRadius, pipResizeAnimator.mShadowRadius);
                 }
                 Runnable runnable = PipResizeAnimator.this.mAnimationEndCallback;
                 if (runnable != null) {
@@ -77,7 +76,7 @@ public class PipResizeAnimator extends ValueAnimator {
                 PipResizeAnimator pipResizeAnimator2 = PipResizeAnimator.this;
                 SurfaceControl.Transaction transaction3 = pipResizeAnimator2.mStartTx;
                 if (transaction3 != null) {
-                    PipResizeAnimator.m3259$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator2.mLeash, pipResizeAnimator2.mBaseBounds, pipResizeAnimator2.mStartBounds, pipResizeAnimator2.mDelta, pipResizeAnimator2.mCornerRadius, pipResizeAnimator2.mShadowRadius);
+                    PipResizeAnimator.m3276$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator2.mLeash, pipResizeAnimator2.mBaseBounds, pipResizeAnimator2.mStartBounds, pipResizeAnimator2.mDelta, pipResizeAnimator2.mCornerRadius, pipResizeAnimator2.mShadowRadius);
                     PipResizeAnimator.this.mStartTx.apply();
                 }
             }
@@ -89,7 +88,7 @@ public class PipResizeAnimator extends ValueAnimator {
                 SurfaceControl.Transaction transaction3 = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) PipResizeAnimator.this.mSurfaceControlTransactionFactory).getTransaction();
                 float animatedFraction = 1.0f - PipResizeAnimator.this.getAnimatedFraction();
                 PipResizeAnimator pipResizeAnimator = PipResizeAnimator.this;
-                PipResizeAnimator.m3259$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator.mLeash, pipResizeAnimator.mBaseBounds, pipResizeAnimator.mAnimatedRect, animatedFraction * pipResizeAnimator.mDelta, pipResizeAnimator.mCornerRadius, pipResizeAnimator.mShadowRadius);
+                PipResizeAnimator.m3276$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator.mLeash, pipResizeAnimator.mBaseBounds, pipResizeAnimator.mAnimatedRect, animatedFraction * pipResizeAnimator.mDelta, pipResizeAnimator.mCornerRadius, pipResizeAnimator.mShadowRadius);
                 transaction3.apply();
             }
         };

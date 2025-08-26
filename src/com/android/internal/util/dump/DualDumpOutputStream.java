@@ -4,6 +4,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,6 +96,7 @@ public class DualDumpOutputStream {
         this.mIpw = null;
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public DualDumpOutputStream(IndentingPrintWriter indentingPrintWriter) {
         LinkedList<DumpObject> linkedList = new LinkedList<>();
         this.mDumpObjects = linkedList;
@@ -189,7 +191,8 @@ public class DualDumpOutputStream {
         this.mDumpObjects.removeLast();
     }
 
-    public void flush() {
+    /* JADX WARN: Multi-variable type inference failed */
+    public void flush() throws IOException {
         ProtoOutputStream protoOutputStream = this.mProtoStream;
         if (protoOutputStream != null) {
             protoOutputStream.flush();

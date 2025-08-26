@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileIconInteractorImpl$level$1 extends SuspendLambda implements Function5 {
     /* synthetic */ int I$0;
@@ -22,15 +21,15 @@ final class MobileIconInteractorImpl$level$1 extends SuspendLambda implements Fu
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        int intValue = ((Number) obj2).intValue();
-        int intValue2 = ((Number) obj3).intValue();
-        boolean booleanValue2 = ((Boolean) obj4).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        int iIntValue = ((Number) obj2).intValue();
+        int iIntValue2 = ((Number) obj3).intValue();
+        boolean zBooleanValue2 = ((Boolean) obj4).booleanValue();
         MobileIconInteractorImpl$level$1 mobileIconInteractorImpl$level$1 = new MobileIconInteractorImpl$level$1((Continuation) obj5);
-        mobileIconInteractorImpl$level$1.Z$0 = booleanValue;
-        mobileIconInteractorImpl$level$1.I$0 = intValue;
-        mobileIconInteractorImpl$level$1.I$1 = intValue2;
-        mobileIconInteractorImpl$level$1.Z$1 = booleanValue2;
+        mobileIconInteractorImpl$level$1.Z$0 = zBooleanValue;
+        mobileIconInteractorImpl$level$1.I$0 = iIntValue;
+        mobileIconInteractorImpl$level$1.I$1 = iIntValue2;
+        mobileIconInteractorImpl$level$1.Z$1 = zBooleanValue2;
         return mobileIconInteractorImpl$level$1.invokeSuspend(Unit.INSTANCE);
     }
 

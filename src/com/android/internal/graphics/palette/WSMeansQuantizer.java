@@ -61,26 +61,26 @@ public final class WSMeansQuantizer implements Quantizer {
         Iterator<Integer> it = this.mInputPixelToCount.keySet().iterator();
         int i2 = 0;
         while (it.hasNext()) {
-            int intValue = it.next().intValue();
-            this.mPixels[i2] = intValue;
-            this.mPoints[i2] = this.mPointProvider.fromInt(intValue);
+            int iIntValue = it.next().intValue();
+            this.mPixels[i2] = iIntValue;
+            this.mPoints[i2] = this.mPointProvider.fromInt(iIntValue);
             i2++;
         }
         float[][] fArr = this.mClusters;
         if (fArr.length > 0) {
             i = Math.min(i, fArr.length);
         }
-        int min = Math.min(i, this.mPoints.length);
-        initializeClusters(min);
+        int iMin = Math.min(i, this.mPoints.length);
+        initializeClusters(iMin);
         for (int i3 = 0; i3 < 10; i3++) {
-            calculateClusterDistances(min);
-            if (!reassignPoints(min)) {
+            calculateClusterDistances(iMin);
+            if (!reassignPoints(iMin)) {
                 break;
             }
-            recalculateClusterCenters(min);
+            recalculateClusterCenters(iMin);
         }
         ArrayList arrayList = new ArrayList();
-        for (int i4 = 0; i4 < min; i4++) {
+        for (int i4 = 0; i4 < iMin; i4++) {
             arrayList.add(new Palette.Swatch(this.mPointProvider.toInt(this.mClusters[i4]), this.mClusterPopulations[i4]));
         }
         this.mPalette = Palette.from(arrayList);
@@ -94,16 +94,16 @@ public final class WSMeansQuantizer implements Quantizer {
             ArrayList arrayList = new ArrayList(length);
             HashSet hashSet = new HashSet();
             for (int i2 = 0; i2 < length; i2++) {
-                int nextInt = random.nextInt(this.mPoints.length);
-                while (hashSet.contains(Integer.valueOf(nextInt))) {
+                int iNextInt = random.nextInt(this.mPoints.length);
+                while (hashSet.contains(Integer.valueOf(iNextInt))) {
                     int size = hashSet.size();
                     float[][] fArr2 = this.mPoints;
                     if (size < fArr2.length) {
-                        nextInt = random.nextInt(fArr2.length);
+                        iNextInt = random.nextInt(fArr2.length);
                     }
                 }
-                hashSet.add(Integer.valueOf(nextInt));
-                arrayList.add(this.mPoints[nextInt]);
+                hashSet.add(Integer.valueOf(iNextInt));
+                arrayList.add(this.mPoints[iNextInt]);
             }
             float[][] fArr3 = (float[][]) arrayList.toArray();
             float[][] fArr4 = (float[][]) Arrays.copyOf(this.mClusters, i);
@@ -130,10 +130,10 @@ public final class WSMeansQuantizer implements Quantizer {
             for (int i4 = i3; i4 < i; i4++) {
                 PointProvider pointProvider = this.mPointProvider;
                 float[][] fArr = this.mClusters;
-                float distance = pointProvider.distance(fArr[i2], fArr[i4]);
+                float fDistance = pointProvider.distance(fArr[i2], fArr[i4]);
                 float[][] fArr2 = this.mDistanceMatrix;
-                fArr2[i4][i2] = distance;
-                fArr2[i2][i4] = distance;
+                fArr2[i4][i2] = fDistance;
+                fArr2[i2][i4] = fDistance;
             }
             i2 = i3;
         }
@@ -148,9 +148,7 @@ public final class WSMeansQuantizer implements Quantizer {
             arrayList.sort(new Comparator() { // from class: com.android.internal.graphics.palette.WSMeansQuantizer$$ExternalSyntheticLambda0
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
-                    int compare;
-                    compare = Float.compare(((WSMeansQuantizer.Distance) obj).getDistance(), ((WSMeansQuantizer.Distance) obj2).getDistance());
-                    return compare;
+                    return Float.compare(((WSMeansQuantizer.Distance) obj).getDistance(), ((WSMeansQuantizer.Distance) obj2).getDistance());
                 }
             });
             for (int i7 = 0; i7 < i; i7++) {
@@ -169,21 +167,21 @@ public final class WSMeansQuantizer implements Quantizer {
             }
             float[] fArr2 = fArr[i2];
             int i3 = this.mClusterIndices[i2];
-            float distance = this.mPointProvider.distance(fArr2, this.mClusters[i3]);
-            float f = distance;
+            float fDistance = this.mPointProvider.distance(fArr2, this.mClusters[i3]);
+            float f = fDistance;
             int i4 = -1;
             for (int i5 = 1; i5 < i; i5++) {
                 int i6 = this.mIndexMatrix[i3][i5];
-                if (this.mDistanceMatrix[i3][i6] >= 4.0f * distance) {
+                if (this.mDistanceMatrix[i3][i6] >= 4.0f * fDistance) {
                     break;
                 }
-                float distance2 = this.mPointProvider.distance(fArr2, this.mClusters[i6]);
-                if (distance2 < f) {
+                float fDistance2 = this.mPointProvider.distance(fArr2, this.mClusters[i6]);
+                if (fDistance2 < f) {
                     i4 = i6;
-                    f = distance2;
+                    f = fDistance2;
                 }
             }
-            if (i4 != -1 && ((float) Math.abs(Math.sqrt(f) - Math.sqrt(distance))) > 3.0f) {
+            if (i4 != -1 && ((float) Math.abs(Math.sqrt(f) - Math.sqrt(fDistance))) > 3.0f) {
                 this.mClusterIndices[i2] = i4;
                 z = true;
             }
@@ -204,10 +202,10 @@ public final class WSMeansQuantizer implements Quantizer {
             }
             int i3 = this.mClusterIndices[i2];
             float[] fArr5 = fArr4[i2];
-            int intValue = this.mInputPixelToCount.get(Integer.valueOf(this.mPixels[i2])).intValue();
+            int iIntValue = this.mInputPixelToCount.get(Integer.valueOf(this.mPixels[i2])).intValue();
             int[] iArr = this.mClusterPopulations;
-            iArr[i3] = iArr[i3] + intValue;
-            float f = intValue;
+            iArr[i3] = iArr[i3] + iIntValue;
+            float f = iIntValue;
             fArr[i3] = fArr[i3] + (fArr5[0] * f);
             fArr2[i3] = fArr2[i3] + (fArr5[1] * f);
             fArr3[i3] = fArr3[i3] + (fArr5[2] * f);

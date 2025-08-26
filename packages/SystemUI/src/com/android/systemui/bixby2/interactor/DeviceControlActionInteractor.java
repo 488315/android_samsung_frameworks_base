@@ -3,9 +3,14 @@ package com.android.systemui.bixby2.interactor;
 import android.content.Context;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
+import com.android.systemui.bixby2.CommandActionResponse;
 import com.android.systemui.bixby2.controller.DeviceController;
 import com.samsung.android.sdk.command.Command;
+import com.samsung.android.sdk.command.action.BooleanAction;
 import com.samsung.android.sdk.command.action.CommandAction;
+import com.samsung.android.sdk.command.action.FloatAction;
+import com.samsung.android.sdk.command.provider.CommandProvider;
+import com.samsung.android.sdk.command.provider.ICommandActionCallback;
 import com.samsung.android.sdk.command.template.CommandTemplate;
 import com.samsung.android.sdk.command.template.SliderTemplate;
 import com.samsung.android.sdk.command.template.ToggleTemplate;
@@ -14,14 +19,12 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DeviceControlActionInteractor implements ActionInteractor {
     private final String TAG = "DeviceControlActionInteractor";
     private final Context mContext;
     private final DeviceController mDeviceController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Action {
         power_off,
         reboot,
@@ -47,9 +50,7 @@ public class DeviceControlActionInteractor implements ActionInteractor {
         return Arrays.stream(Action.values()).map(new DeviceControlActionInteractor$$ExternalSyntheticLambda0()).anyMatch(new Predicate() { // from class: com.android.systemui.bixby2.interactor.DeviceControlActionInteractor$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$matchAction$0;
-                lambda$matchAction$0 = DeviceControlActionInteractor.lambda$matchAction$0(str, (String) obj);
-                return lambda$matchAction$0;
+                return DeviceControlActionInteractor.lambda$matchAction$0(str, (String) obj);
             }
         });
     }
@@ -84,26 +85,26 @@ public class DeviceControlActionInteractor implements ActionInteractor {
             return statefulBuilder3.build();
         }
         if (Action.set_flashlight.toString().equals(str)) {
-            boolean hasFlashLight = this.mDeviceController.hasFlashLight();
-            boolean isFlashLightEnabled = this.mDeviceController.isFlashLightEnabled();
+            boolean zHasFlashLight = this.mDeviceController.hasFlashLight();
+            boolean zIsFlashLightEnabled = this.mDeviceController.isFlashLightEnabled();
             Command.StatefulBuilder statefulBuilder4 = new Command.StatefulBuilder(command.mCommandId);
-            statefulBuilder4.mStatus = hasFlashLight ? 1 : 2;
+            statefulBuilder4.mStatus = zHasFlashLight ? 1 : 2;
             statefulBuilder4.mLaunchIntent = this.mDeviceController.getFlashLightIntent();
-            statefulBuilder4.mTemplate = new ToggleTemplate(isFlashLightEnabled);
+            statefulBuilder4.mTemplate = new ToggleTemplate(zIsFlashLightEnabled);
             return statefulBuilder4.build();
         }
         if (Action.set_flashlight_level.toString().equals(str)) {
-            boolean hasFlashLight2 = this.mDeviceController.hasFlashLight();
+            boolean zHasFlashLight2 = this.mDeviceController.hasFlashLight();
             Command.StatefulBuilder statefulBuilder5 = new Command.StatefulBuilder(command.mCommandId);
-            statefulBuilder5.mStatus = hasFlashLight2 ? 1 : 2;
+            statefulBuilder5.mStatus = zHasFlashLight2 ? 1 : 2;
             statefulBuilder5.mTemplate = new SliderTemplate(1.0f, 5.0f, this.mDeviceController.getFlashLightLevel(), 1.0f, null);
             return statefulBuilder5.build();
         }
         if (Action.set_autorotate.toString().equals(str)) {
-            boolean isAutoRotationEnabled = this.mDeviceController.isAutoRotationEnabled();
+            boolean zIsAutoRotationEnabled = this.mDeviceController.isAutoRotationEnabled();
             Command.StatefulBuilder statefulBuilder6 = new Command.StatefulBuilder(command.mCommandId);
             statefulBuilder6.mStatus = 1;
-            statefulBuilder6.mTemplate = new ToggleTemplate(isAutoRotationEnabled);
+            statefulBuilder6.mTemplate = new ToggleTemplate(zIsAutoRotationEnabled);
             return statefulBuilder6.build();
         }
         if (Action.set_landscapemode.toString().equals(str)) {
@@ -121,19 +122,87 @@ public class DeviceControlActionInteractor implements ActionInteractor {
         return statefulBuilder8.build();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0098  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0089  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0098  */
     @Override // com.android.systemui.bixby2.interactor.ActionInteractor
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void performCommandActionInteractor(java.lang.String r4, com.samsung.android.sdk.command.action.CommandAction r5, com.samsung.android.sdk.command.provider.ICommandActionCallback r6) {
-        /*
-            Method dump skipped, instructions count: 270
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.bixby2.interactor.DeviceControlActionInteractor.performCommandActionInteractor(java.lang.String, com.samsung.android.sdk.command.action.CommandAction, com.samsung.android.sdk.command.provider.ICommandActionCallback):void");
+    public void performCommandActionInteractor(String str, CommandAction commandAction, ICommandActionCallback iCommandActionCallback) {
+        String str2;
+        if (!matchAction(str)) {
+            return;
+        }
+        int actionType = commandAction.getActionType();
+        if (actionType == 1) {
+            boolean zEquals = Action.set_flashlight.toString().equals(str);
+            boolean z = ((BooleanAction) commandAction).mNewState;
+            if (zEquals) {
+                CommandActionResponse flashlight = this.mDeviceController.setFlashlight(z);
+                if (iCommandActionCallback != null) {
+                    ((CommandProvider.AnonymousClass1) iCommandActionCallback).onActionFinished(flashlight.responseCode, flashlight.responseMessage);
+                }
+            } else if (Action.set_autorotate.toString().equals(str)) {
+                CommandActionResponse autoRotate = this.mDeviceController.setAutoRotate(z);
+                if (iCommandActionCallback != null) {
+                    ((CommandProvider.AnonymousClass1) iCommandActionCallback).onActionFinished(autoRotate.responseCode, autoRotate.responseMessage);
+                }
+            }
+        } else {
+            if (actionType != 2) {
+                str2 = "invalid_action";
+                if (!Action.power_off.toString().equals(str)) {
+                    this.mDeviceController.turnOffDevice(this.mContext);
+                    if (iCommandActionCallback != null) {
+                        ((CommandProvider.AnonymousClass1) iCommandActionCallback).onActionFinished(1, str2);
+                        return;
+                    }
+                    return;
+                }
+                if (Action.reboot.toString().equals(str)) {
+                    this.mDeviceController.restartDevice(this.mContext);
+                    if (iCommandActionCallback != null) {
+                        ((CommandProvider.AnonymousClass1) iCommandActionCallback).onActionFinished(1, str2);
+                        return;
+                    }
+                    return;
+                }
+                if (Action.turnoff_screen.toString().equals(str)) {
+                    this.mDeviceController.turnOffScreen(this.mContext);
+                    if (iCommandActionCallback != null) {
+                        ((CommandProvider.AnonymousClass1) iCommandActionCallback).onActionFinished(1, str2);
+                        return;
+                    }
+                    return;
+                }
+                if (Action.set_landscapemode.toString().equals(str)) {
+                    CommandActionResponse landscapeMode = this.mDeviceController.setLandscapeMode(this.mContext);
+                    if (iCommandActionCallback != null) {
+                        ((CommandProvider.AnonymousClass1) iCommandActionCallback).onActionFinished(landscapeMode.responseCode, landscapeMode.responseMessage);
+                        return;
+                    }
+                    return;
+                }
+                if (Action.set_portraitmode.toString().equals(str)) {
+                    CommandActionResponse portraitMode = this.mDeviceController.setPortraitMode(this.mContext);
+                    if (iCommandActionCallback != null) {
+                        ((CommandProvider.AnonymousClass1) iCommandActionCallback).onActionFinished(portraitMode.responseCode, portraitMode.responseMessage);
+                        return;
+                    }
+                    return;
+                }
+                return;
+            }
+            if (Action.set_flashlight_level.toString().equals(str)) {
+                CommandActionResponse flashlightWithLevel = this.mDeviceController.setFlashlightWithLevel((int) ((FloatAction) commandAction).mNewValue);
+                if (iCommandActionCallback != null) {
+                    ((CommandProvider.AnonymousClass1) iCommandActionCallback).onActionFinished(flashlightWithLevel.responseCode, flashlightWithLevel.responseMessage);
+                }
+            }
+        }
+        str2 = "success";
+        if (!Action.power_off.toString().equals(str)) {
+        }
     }
 
     @Override // com.android.systemui.bixby2.interactor.ActionInteractor
@@ -161,26 +230,26 @@ public class DeviceControlActionInteractor implements ActionInteractor {
             return statefulBuilder3.build();
         }
         if (Action.set_flashlight.toString().equals(str)) {
-            boolean hasFlashLight = this.mDeviceController.hasFlashLight();
-            boolean isFlashLightEnabled = this.mDeviceController.isFlashLightEnabled();
+            boolean zHasFlashLight = this.mDeviceController.hasFlashLight();
+            boolean zIsFlashLightEnabled = this.mDeviceController.isFlashLightEnabled();
             Command.StatefulBuilder statefulBuilder4 = new Command.StatefulBuilder(command.mCommandId);
-            statefulBuilder4.mStatus = hasFlashLight ? 1 : 2;
+            statefulBuilder4.mStatus = zHasFlashLight ? 1 : 2;
             statefulBuilder4.mLaunchIntent = this.mDeviceController.getFlashLightIntent();
-            statefulBuilder4.mTemplate = new ToggleTemplate(isFlashLightEnabled);
+            statefulBuilder4.mTemplate = new ToggleTemplate(zIsFlashLightEnabled);
             return statefulBuilder4.build();
         }
         if (Action.set_flashlight_level.toString().equals(str)) {
-            boolean hasFlashLight2 = this.mDeviceController.hasFlashLight();
+            boolean zHasFlashLight2 = this.mDeviceController.hasFlashLight();
             Command.StatefulBuilder statefulBuilder5 = new Command.StatefulBuilder(command.mCommandId);
-            statefulBuilder5.mStatus = hasFlashLight2 ? 1 : 2;
+            statefulBuilder5.mStatus = zHasFlashLight2 ? 1 : 2;
             statefulBuilder5.mTemplate = new SliderTemplate(1.0f, 5.0f, this.mDeviceController.getFlashLightLevel(), 1.0f, null);
             return statefulBuilder5.build();
         }
         if (Action.set_autorotate.toString().equals(str)) {
-            boolean isAutoRotationEnabled = this.mDeviceController.isAutoRotationEnabled();
+            boolean zIsAutoRotationEnabled = this.mDeviceController.isAutoRotationEnabled();
             Command.StatefulBuilder statefulBuilder6 = new Command.StatefulBuilder(command.mCommandId);
             statefulBuilder6.mStatus = 1;
-            statefulBuilder6.mTemplate = new ToggleTemplate(isAutoRotationEnabled);
+            statefulBuilder6.mTemplate = new ToggleTemplate(zIsAutoRotationEnabled);
             return statefulBuilder6.build();
         }
         if (Action.set_landscapemode.toString().equals(str)) {

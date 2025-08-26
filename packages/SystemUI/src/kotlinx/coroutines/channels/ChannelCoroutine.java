@@ -9,7 +9,6 @@ import kotlinx.coroutines.JobCancellationException;
 import kotlinx.coroutines.channels.BufferedChannel;
 import kotlinx.coroutines.selects.SelectClause1Impl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ChannelCoroutine extends AbstractCoroutine implements Channel {
     public final Channel _channel;
@@ -69,10 +68,10 @@ public class ChannelCoroutine extends AbstractCoroutine implements Channel {
 
     @Override // kotlinx.coroutines.channels.ReceiveChannel
     /* renamed from: receiveCatching-JP2dKIU */
-    public final Object mo3453receiveCatchingJP2dKIU(Continuation continuation) {
-        Object mo3453receiveCatchingJP2dKIU = this._channel.mo3453receiveCatchingJP2dKIU(continuation);
+    public final Object mo3473receiveCatchingJP2dKIU(Continuation continuation) {
+        Object objMo3473receiveCatchingJP2dKIU = this._channel.mo3473receiveCatchingJP2dKIU(continuation);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        return mo3453receiveCatchingJP2dKIU;
+        return objMo3473receiveCatchingJP2dKIU;
     }
 
     @Override // kotlinx.coroutines.channels.SendChannel
@@ -82,13 +81,13 @@ public class ChannelCoroutine extends AbstractCoroutine implements Channel {
 
     @Override // kotlinx.coroutines.channels.ReceiveChannel
     /* renamed from: tryReceive-PtdJZtk */
-    public final Object mo3455tryReceivePtdJZtk() {
-        return this._channel.mo3455tryReceivePtdJZtk();
+    public final Object mo3475tryReceivePtdJZtk() {
+        return this._channel.mo3475tryReceivePtdJZtk();
     }
 
     @Override // kotlinx.coroutines.channels.SendChannel
     /* renamed from: trySend-JP2dKIU */
-    public final Object mo3456trySendJP2dKIU(Object obj) {
-        return this._channel.mo3456trySendJP2dKIU(obj);
+    public final Object mo3476trySendJP2dKIU(Object obj) {
+        return this._channel.mo3476trySendJP2dKIU(obj);
     }
 }

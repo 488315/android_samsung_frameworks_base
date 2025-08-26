@@ -100,16 +100,16 @@ public final class PermissionUtils {
 
     private static int getAppUid(Context context, String str, UserHandle userHandle) {
         PackageManager packageManager = context.createContextAsUser(userHandle, 0).getPackageManager();
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             int packageUid = packageManager.getPackageUid(str, 0);
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return packageUid;
         } catch (PackageManager.NameNotFoundException unused) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return -1;
         } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             throw th;
         }
     }

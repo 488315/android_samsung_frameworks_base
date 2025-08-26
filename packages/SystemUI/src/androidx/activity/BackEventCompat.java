@@ -1,8 +1,8 @@
 package androidx.activity;
 
+import android.window.BackEvent;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BackEventCompat {
     public final float progress;
@@ -10,7 +10,6 @@ public final class BackEventCompat {
     public final float touchX;
     public final float touchY;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,25 +42,15 @@ public final class BackEventCompat {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public BackEventCompat(android.window.BackEvent r5) {
-        /*
-            r4 = this;
-            androidx.activity.Api34Impl r0 = androidx.activity.Api34Impl.INSTANCE
-            r0.getClass()
-            float r1 = r5.getTouchX()
-            r0.getClass()
-            float r2 = r5.getTouchY()
-            r0.getClass()
-            float r3 = r5.getProgress()
-            r0.getClass()
-            int r5 = r5.getSwipeEdge()
-            r4.<init>(r1, r2, r3, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.activity.BackEventCompat.<init>(android.window.BackEvent):void");
+    public BackEventCompat(BackEvent backEvent) {
+        Api34Impl api34Impl = Api34Impl.INSTANCE;
+        api34Impl.getClass();
+        float touchX = backEvent.getTouchX();
+        api34Impl.getClass();
+        float touchY = backEvent.getTouchY();
+        api34Impl.getClass();
+        float progress = backEvent.getProgress();
+        api34Impl.getClass();
+        this(touchX, touchY, progress, backEvent.getSwipeEdge());
     }
 }

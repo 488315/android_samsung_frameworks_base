@@ -8,7 +8,6 @@ import dalvik.annotation.optimization.NeverCompile;
 import java.io.PrintWriter;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SysUiStateImpl implements SysUiState {
     public long _flags;
@@ -17,7 +16,6 @@ public class SysUiStateImpl implements SysUiState {
     public final StateChange stateChange = new StateChange();
     public final SysUIStateDispatcher stateDispatcher;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -27,7 +25,6 @@ public class SysUiStateImpl implements SysUiState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         SysUiStateImpl create(int i);
     }

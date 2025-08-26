@@ -4,7 +4,6 @@ import com.android.systemui.dump.DumpManager;
 import dagger.internal.Provider;
 import dagger.internal.Providers;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LeakModule_ProvidesLeakDetectorFactory implements Provider {
     private final Provider collectionsProvider;
@@ -22,9 +21,9 @@ public final class LeakModule_ProvidesLeakDetectorFactory implements Provider {
     }
 
     public static LeakDetector providesLeakDetector(LeakModule leakModule, DumpManager dumpManager, TrackedCollections trackedCollections) {
-        LeakDetector providesLeakDetector = leakModule.providesLeakDetector(dumpManager, trackedCollections);
-        providesLeakDetector.getClass();
-        return providesLeakDetector;
+        LeakDetector leakDetectorProvidesLeakDetector = leakModule.providesLeakDetector(dumpManager, trackedCollections);
+        leakDetectorProvidesLeakDetector.getClass();
+        return leakDetectorProvidesLeakDetector;
     }
 
     public static LeakModule_ProvidesLeakDetectorFactory create(LeakModule leakModule, Provider provider, Provider provider2) {

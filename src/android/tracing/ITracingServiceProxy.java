@@ -51,9 +51,9 @@ public interface ITracingServiceProxy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITracingServiceProxy.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITracingServiceProxy)) {
-                return (ITracingServiceProxy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITracingServiceProxy.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITracingServiceProxy)) {
+                return (ITracingServiceProxy) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,9 +83,9 @@ public interface ITracingServiceProxy extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                notifyTraceSessionEnded(readBoolean);
+                notifyTraceSessionEnded(z);
             } else if (i == 2) {
                 TraceReportParams traceReportParams = (TraceReportParams) parcel.readTypedObject(TraceReportParams.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -114,25 +114,25 @@ public interface ITracingServiceProxy extends IInterface {
 
             @Override // android.tracing.ITracingServiceProxy
             public void notifyTraceSessionEnded(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITracingServiceProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITracingServiceProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.tracing.ITracingServiceProxy
             public void reportTrace(TraceReportParams traceReportParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITracingServiceProxy.DESCRIPTOR);
-                    obtain.writeTypedObject(traceReportParams, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITracingServiceProxy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(traceReportParams, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

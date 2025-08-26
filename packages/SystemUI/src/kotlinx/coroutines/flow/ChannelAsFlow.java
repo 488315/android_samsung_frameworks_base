@@ -16,7 +16,6 @@ import kotlinx.coroutines.channels.ReceiveChannel;
 import kotlinx.coroutines.flow.internal.ChannelFlow;
 import kotlinx.coroutines.flow.internal.SendingCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ChannelAsFlow extends ChannelFlow {
     public final ReceiveChannel channel;
@@ -33,20 +32,20 @@ public final class ChannelAsFlow extends ChannelFlow {
     }
 
     @Override // kotlinx.coroutines.flow.internal.ChannelFlow, kotlinx.coroutines.flow.Flow
-    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+    public final Object collect(FlowCollector flowCollector, Continuation continuation) throws Throwable {
         if (this.capacity != -3) {
-            Object collect = super.collect(flowCollector, continuation);
-            return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+            Object objCollect = super.collect(flowCollector, continuation);
+            return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
         }
         markConsumed();
-        Object emitAllImpl$FlowKt__ChannelsKt = FlowKt__ChannelsKt.emitAllImpl$FlowKt__ChannelsKt(flowCollector, this.channel, this.consume, continuation);
-        return emitAllImpl$FlowKt__ChannelsKt == CoroutineSingletons.COROUTINE_SUSPENDED ? emitAllImpl$FlowKt__ChannelsKt : Unit.INSTANCE;
+        Object objEmitAllImpl$FlowKt__ChannelsKt = FlowKt__ChannelsKt.emitAllImpl$FlowKt__ChannelsKt(flowCollector, this.channel, this.consume, continuation);
+        return objEmitAllImpl$FlowKt__ChannelsKt == CoroutineSingletons.COROUTINE_SUSPENDED ? objEmitAllImpl$FlowKt__ChannelsKt : Unit.INSTANCE;
     }
 
     @Override // kotlinx.coroutines.flow.internal.ChannelFlow
-    public final Object collectTo(ProducerScope producerScope, Continuation continuation) {
-        Object emitAllImpl$FlowKt__ChannelsKt = FlowKt__ChannelsKt.emitAllImpl$FlowKt__ChannelsKt(new SendingCollector(producerScope), this.channel, this.consume, continuation);
-        return emitAllImpl$FlowKt__ChannelsKt == CoroutineSingletons.COROUTINE_SUSPENDED ? emitAllImpl$FlowKt__ChannelsKt : Unit.INSTANCE;
+    public final Object collectTo(ProducerScope producerScope, Continuation continuation) throws Throwable {
+        Object objEmitAllImpl$FlowKt__ChannelsKt = FlowKt__ChannelsKt.emitAllImpl$FlowKt__ChannelsKt(new SendingCollector(producerScope), this.channel, this.consume, continuation);
+        return objEmitAllImpl$FlowKt__ChannelsKt == CoroutineSingletons.COROUTINE_SUSPENDED ? objEmitAllImpl$FlowKt__ChannelsKt : Unit.INSTANCE;
     }
 
     @Override // kotlinx.coroutines.flow.internal.ChannelFlow

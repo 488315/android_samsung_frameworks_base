@@ -31,16 +31,16 @@ public class CassATCmd implements IWorkOnAt {
     @Override // com.android.server.IWorkOnAt
     public String processCmd(String str) {
         String str2 = new String();
-        String[] parsingParam = parsingParam(str);
+        String[] strArrParsingParam = parsingParam(str);
         String[] strArr = {"0,0,0,0"};
-        if (parsingParam == null) {
+        if (strArrParsingParam == null) {
             return AT_RESPONSE_INVALID_PARAM;
         }
         if (this.mVkm == null) {
             return AT_RESPONSE_CONN_FAILED;
         }
         try {
-            String str3 = parsingParam[0] + ",";
+            String str3 = strArrParsingParam[0] + ",";
             if (strArr[0].equals(str)) {
                 if (this.mVkm.isInitialized()) {
                     if (this.mVkm.migrationStorage()) {

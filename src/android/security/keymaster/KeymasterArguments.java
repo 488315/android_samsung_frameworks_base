@@ -22,9 +22,9 @@ public class KeymasterArguments implements Parcelable {
     }
 
     static {
-        BigInteger shiftLeft = BigInteger.ONE.shiftLeft(64);
-        UINT64_RANGE = shiftLeft;
-        UINT64_MAX_VALUE = shiftLeft.subtract(BigInteger.ONE);
+        BigInteger bigIntegerShiftLeft = BigInteger.ONE.shiftLeft(64);
+        UINT64_RANGE = bigIntegerShiftLeft;
+        UINT64_MAX_VALUE = bigIntegerShiftLeft.subtract(BigInteger.ONE);
         CREATOR = new Parcelable.Creator<KeymasterArguments>() { // from class: android.security.keymaster.KeymasterArguments.1
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator

@@ -52,9 +52,9 @@ public interface ITransientNotification extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITransientNotification)) {
-                return (ITransientNotification) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITransientNotification)) {
+                return (ITransientNotification) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,9 +84,9 @@ public interface ITransientNotification extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                show(readStrongBinder);
+                show(strongBinder);
             } else if (i == 2) {
                 hide();
             } else {
@@ -113,24 +113,24 @@ public interface ITransientNotification extends IInterface {
 
             @Override // android.app.ITransientNotification
             public void show(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITransientNotification
             public void hide() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

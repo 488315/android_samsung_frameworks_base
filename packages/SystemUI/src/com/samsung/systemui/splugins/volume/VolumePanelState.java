@@ -1,6 +1,7 @@
 package com.samsung.systemui.splugins.volume;
 
 import com.samsung.systemui.splugins.extensions.VolumePanelStateExt;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,7 +14,6 @@ import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VolumePanelState {
     public static final int DIALOG_EXPAND_TIMEOUT_MILLIS = 5000;
@@ -35,7 +35,6 @@ public final class VolumePanelState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BooleanStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ BooleanStateKey[] $VALUES;
@@ -86,9 +85,9 @@ public final class VolumePanelState {
         }
 
         static {
-            BooleanStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            BooleanStateKey[] booleanStateKeyArr$values = $values();
+            $VALUES = booleanStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(booleanStateKeyArr$values);
         }
 
         private BooleanStateKey(String str, int i, String str2) {
@@ -112,7 +111,6 @@ public final class VolumePanelState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -124,7 +122,6 @@ public final class VolumePanelState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IntegerStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ IntegerStateKey[] $VALUES;
@@ -149,9 +146,9 @@ public final class VolumePanelState {
         }
 
         static {
-            IntegerStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            IntegerStateKey[] integerStateKeyArr$values = $values();
+            $VALUES = integerStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(integerStateKeyArr$values);
         }
 
         private IntegerStateKey(String str, int i, String str2) {
@@ -177,7 +174,6 @@ public final class VolumePanelState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LongStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ LongStateKey[] $VALUES;
@@ -189,9 +185,9 @@ public final class VolumePanelState {
         }
 
         static {
-            LongStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            LongStateKey[] longStateKeyArr$values = $values();
+            $VALUES = longStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(longStateKeyArr$values);
         }
 
         private LongStateKey(String str, int i, String str2) {
@@ -217,7 +213,6 @@ public final class VolumePanelState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StateType {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ StateType[] $VALUES;
@@ -285,9 +280,9 @@ public final class VolumePanelState {
         }
 
         static {
-            StateType[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            StateType[] stateTypeArr$values = $values();
+            $VALUES = stateTypeArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(stateTypeArr$values);
         }
 
         private StateType(String str, int i) {
@@ -308,7 +303,6 @@ public final class VolumePanelState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StringStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ StringStateKey[] $VALUES;
@@ -321,9 +315,9 @@ public final class VolumePanelState {
         }
 
         static {
-            StringStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            StringStateKey[] stringStateKeyArr$values = $values();
+            $VALUES = stringStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(stringStateKeyArr$values);
         }
 
         private StringStateKey(String str, int i, String str2) {
@@ -624,18 +618,18 @@ public final class VolumePanelState {
         this.volumeRowList = list;
     }
 
-    public String toString() {
+    public String toString() throws IOException {
         int activeStream = getActiveStream();
         VolumePanelStateExt volumePanelStateExt = VolumePanelStateExt.INSTANCE;
-        VolumePanelRow findRow = volumePanelStateExt.findRow(this, getActiveStream());
-        Integer valueOf = findRow != null ? Integer.valueOf(findRow.getRealLevel()) : null;
+        VolumePanelRow volumePanelRowFindRow = volumePanelStateExt.findRow(this, getActiveStream());
+        Integer numValueOf = volumePanelRowFindRow != null ? Integer.valueOf(volumePanelRowFindRow.getRealLevel()) : null;
         int stream = getStream();
-        VolumePanelRow findRow2 = volumePanelStateExt.findRow(this, getStream());
-        Integer valueOf2 = findRow2 != null ? Integer.valueOf(findRow2.getRealLevel()) : null;
+        VolumePanelRow volumePanelRowFindRow2 = volumePanelStateExt.findRow(this, getStream());
+        Integer numValueOf2 = volumePanelRowFindRow2 != null ? Integer.valueOf(volumePanelRowFindRow2.getRealLevel()) : null;
         List[] listArr = new List[4];
-        HashMap<BooleanStateKey, Boolean> hashMap = this.booleanState;
+        HashMap<BooleanStateKey, Boolean> map = this.booleanState;
         LinkedHashMap linkedHashMap = new LinkedHashMap();
-        for (Map.Entry<BooleanStateKey, Boolean> entry : hashMap.entrySet()) {
+        for (Map.Entry<BooleanStateKey, Boolean> entry : map.entrySet()) {
             if (entry.getValue().booleanValue()) {
                 linkedHashMap.put(entry.getKey(), entry.getValue());
             }
@@ -645,21 +639,21 @@ public final class VolumePanelState {
             arrayList.add(((BooleanStateKey) entry2.getKey()).getFieldName() + " : " + entry2.getValue());
         }
         listArr[0] = arrayList;
-        HashMap<IntegerStateKey, Integer> hashMap2 = this.integerState;
-        ArrayList arrayList2 = new ArrayList(hashMap2.size());
-        for (Map.Entry<IntegerStateKey, Integer> entry3 : hashMap2.entrySet()) {
+        HashMap<IntegerStateKey, Integer> map2 = this.integerState;
+        ArrayList arrayList2 = new ArrayList(map2.size());
+        for (Map.Entry<IntegerStateKey, Integer> entry3 : map2.entrySet()) {
             arrayList2.add(entry3.getKey().getFieldName() + " : " + entry3.getValue());
         }
         listArr[1] = arrayList2;
-        HashMap<LongStateKey, Long> hashMap3 = this.longState;
-        ArrayList arrayList3 = new ArrayList(hashMap3.size());
-        for (Map.Entry<LongStateKey, Long> entry4 : hashMap3.entrySet()) {
+        HashMap<LongStateKey, Long> map3 = this.longState;
+        ArrayList arrayList3 = new ArrayList(map3.size());
+        for (Map.Entry<LongStateKey, Long> entry4 : map3.entrySet()) {
             arrayList3.add(entry4.getKey().getFieldName() + " : " + entry4.getValue());
         }
         listArr[2] = arrayList3;
-        HashMap<StringStateKey, String> hashMap4 = this.stringState;
+        HashMap<StringStateKey, String> map4 = this.stringState;
         LinkedHashMap linkedHashMap2 = new LinkedHashMap();
-        for (Map.Entry<StringStateKey, String> entry5 : hashMap4.entrySet()) {
+        for (Map.Entry<StringStateKey, String> entry5 : map4.entrySet()) {
             String value = entry5.getValue();
             if (value != null && value.length() != 0) {
                 linkedHashMap2.put(entry5.getKey(), entry5.getValue());
@@ -670,10 +664,9 @@ public final class VolumePanelState {
             arrayList4.add(((StringStateKey) entry6.getKey()).getFieldName() + " : " + entry6.getValue());
         }
         listArr[3] = arrayList4;
-        return "activeStream=" + activeStream + "(vol=" + valueOf + "), stream=" + stream + "(vol=" + valueOf2 + ") } " + CollectionsKt___CollectionsKt.joinToString$default(CollectionsKt__IterablesKt.flatten(Arrays.asList(listArr)), null, null, null, null, 63);
+        return "activeStream=" + activeStream + "(vol=" + numValueOf + "), stream=" + stream + "(vol=" + numValueOf2 + ") } " + CollectionsKt___CollectionsKt.joinToString$default(CollectionsKt__IterablesKt.flatten(Arrays.asList(listArr)), null, null, null, null, 63);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public static final int $stable = 8;
         private VolumePanelState secVolumeState;

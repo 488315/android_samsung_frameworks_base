@@ -173,20 +173,20 @@ final class RemoteInputConnection implements InputConnection {
 
     @Override // android.view.inputmethod.InputConnection
     public boolean commitText(CharSequence charSequence, int i) {
-        boolean commitText = this.mInvoker.commitText(charSequence, i);
-        if (commitText) {
+        boolean zCommitText = this.mInvoker.commitText(charSequence, i);
+        if (zCommitText) {
             notifyUserActionIfNecessary();
         }
-        return commitText;
+        return zCommitText;
     }
 
     @Override // android.view.inputmethod.InputConnection
     public boolean commitText(CharSequence charSequence, int i, TextAttribute textAttribute) {
-        boolean commitText = this.mInvoker.commitText(charSequence, i, textAttribute);
-        if (commitText) {
+        boolean zCommitText = this.mInvoker.commitText(charSequence, i, textAttribute);
+        if (zCommitText) {
             notifyUserActionIfNecessary();
         }
-        return commitText;
+        return zCommitText;
     }
 
     private void notifyUserActionIfNecessary() {
@@ -267,11 +267,11 @@ final class RemoteInputConnection implements InputConnection {
 
     @Override // android.view.inputmethod.InputConnection
     public boolean sendKeyEvent(KeyEvent keyEvent) {
-        boolean sendKeyEvent = this.mInvoker.sendKeyEvent(keyEvent);
-        if (sendKeyEvent) {
+        boolean zSendKeyEvent = this.mInvoker.sendKeyEvent(keyEvent);
+        if (zSendKeyEvent) {
             notifyUserActionIfNecessary();
         }
-        return sendKeyEvent;
+        return zSendKeyEvent;
     }
 
     @Override // android.view.inputmethod.InputConnection

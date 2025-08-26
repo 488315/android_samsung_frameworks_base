@@ -1,6 +1,7 @@
 package com.android.systemui.shade;
 
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.FactoryTest;
 import android.os.Looper;
 import android.os.UserHandle;
@@ -52,7 +53,6 @@ import java.util.function.Consumer;
 import kotlin.Unit;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeControllerImpl extends BaseShadeControllerImpl {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -78,7 +78,6 @@ public final class ShadeControllerImpl extends BaseShadeControllerImpl {
     public final StatusBarWindowControllerStore mStatusBarWindowControllerStore;
     public final WindowRootViewVisibilityInteractor mWindowRootViewVisibilityInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.ShadeControllerImpl$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
@@ -187,7 +186,7 @@ public final class ShadeControllerImpl extends BaseShadeControllerImpl {
     }
 
     @Override // com.android.systemui.shade.ShadeController
-    public final void collapseWithDuration(int i) {
+    public final void collapseWithDuration(int i) throws Resources.NotFoundException {
         NotificationPanelViewController notificationPanelViewController = (NotificationPanelViewController) this.mNpvc.get();
         notificationPanelViewController.mFixedDuration = i;
         notificationPanelViewController.collapse(1.0f, false);
@@ -195,7 +194,7 @@ public final class ShadeControllerImpl extends BaseShadeControllerImpl {
     }
 
     @Override // com.android.systemui.shade.BaseShadeControllerImpl
-    public final void expandToNotifications() {
+    public final void expandToNotifications() throws Resources.NotFoundException {
         SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor = (SecPanelSAStatusLogInteractor) Dependency.sDependency.getDependencyInner(SecPanelSAStatusLogInteractor.class);
         secPanelSAStatusLogInteractor.getClass();
         SecPanelSplitHelper.Companion.getClass();
@@ -207,7 +206,7 @@ public final class ShadeControllerImpl extends BaseShadeControllerImpl {
     }
 
     @Override // com.android.systemui.shade.BaseShadeControllerImpl
-    public final void expandToQs() {
+    public final void expandToQs() throws Resources.NotFoundException {
         getNpvc().expandToQs();
     }
 
@@ -226,7 +225,7 @@ public final class ShadeControllerImpl extends BaseShadeControllerImpl {
     }
 
     @Override // com.android.systemui.shade.ShadeController
-    public final void instantExpandShade() {
+    public final void instantExpandShade() throws Resources.NotFoundException {
         makeExpandedVisible(true);
         getNpvc().expand(false);
         this.commandQueue.recomputeDisableFlags(this.mDisplayId, false);
@@ -253,7 +252,7 @@ public final class ShadeControllerImpl extends BaseShadeControllerImpl {
     }
 
     @Override // com.android.systemui.shade.ShadeController
-    public final void makeExpandedInvisible() {
+    public final void makeExpandedInvisible() throws Resources.NotFoundException {
         StringBuilder sb;
         boolean z = this.mExpandedVisible;
         QuickPanelLogger quickPanelLogger = this.mQuickPanelLogger;
@@ -435,23 +434,10 @@ public final class ShadeControllerImpl extends BaseShadeControllerImpl {
         JavaAdapterKt.collectFlow(getNotificationShadeWindowView$1(), secCapturedBlurCollapseShaderInteractor.collapseQsWhileScreenWakingUp, new Consumer() { // from class: com.android.systemui.shade.ShadeControllerImpl$$ExternalSyntheticLambda6
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ShadeControllerImpl shadeControllerImpl = ShadeControllerImpl.this;
-                int intValue = ((Integer) obj).intValue();
+                ShadeControllerImpl shadeControllerImpl = this.f$0;
+                int iIntValue = ((Integer) obj).intValue();
                 int i2 = ShadeControllerImpl.$r8$clinit;
-                if (intValue == 1) {
-                    shadeControllerImpl.getNpvc().animateCollapseQs(true);
-                } else {
-                    shadeControllerImpl.instantCollapseShade();
-                }
-            }
-        });
-        JavaAdapterKt.collectFlow(getNotificationShadeWindowView$1(), secCapturedBlurCollapseShaderInteractor.collapseQsWhileCapturedViewInvisible, new Consumer() { // from class: com.android.systemui.shade.ShadeControllerImpl$$ExternalSyntheticLambda6
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ShadeControllerImpl shadeControllerImpl = ShadeControllerImpl.this;
-                int intValue = ((Integer) obj).intValue();
-                int i2 = ShadeControllerImpl.$r8$clinit;
-                if (intValue == 1) {
+                if (iIntValue == 1) {
                     shadeControllerImpl.getNpvc().animateCollapseQs(true);
                 } else {
                     shadeControllerImpl.instantCollapseShade();

@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Deprecated
 /* loaded from: classes4.dex */
 public class FabTransformationSheetBehavior extends FabTransformationBehavior {
@@ -52,9 +51,9 @@ public class FabTransformationSheetBehavior extends FabTransformationBehavior {
                     } else {
                         Map map = this.importantForAccessibilityMap;
                         if (map != null && ((HashMap) map).containsKey(childAt)) {
-                            int intValue = ((Integer) ((HashMap) this.importantForAccessibilityMap).get(childAt)).intValue();
+                            int iIntValue = ((Integer) ((HashMap) this.importantForAccessibilityMap).get(childAt)).intValue();
                             WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
-                            childAt.setImportantForAccessibility(intValue);
+                            childAt.setImportantForAccessibility(iIntValue);
                         }
                     }
                 }

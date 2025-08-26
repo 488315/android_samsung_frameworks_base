@@ -78,12 +78,12 @@ public class HwAudioSource extends PlayerBase {
         }
         for (int i = 0; i < arrayList.size(); i++) {
             AudioPatch audioPatch = (AudioPatch) arrayList.get(i);
-            AudioPortConfig[] sources = audioPatch.sources();
-            AudioPortConfig[] sinks = audioPatch.sinks();
-            if (sources != null && sources.length > 0) {
-                for (int i2 = 0; i2 < sources.length; i2++) {
-                    if (sources[i2].port().id() == this.mAudioDeviceInfo.getId()) {
-                        return sinks[i2].port().id();
+            AudioPortConfig[] audioPortConfigArrSources = audioPatch.sources();
+            AudioPortConfig[] audioPortConfigArrSinks = audioPatch.sinks();
+            if (audioPortConfigArrSources != null && audioPortConfigArrSources.length > 0) {
+                for (int i2 = 0; i2 < audioPortConfigArrSources.length; i2++) {
+                    if (audioPortConfigArrSources[i2].port().id() == this.mAudioDeviceInfo.getId()) {
+                        return audioPortConfigArrSinks[i2].port().id();
                     }
                 }
             }

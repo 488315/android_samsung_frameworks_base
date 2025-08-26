@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.Dp;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class VolUpKt$$ExternalSyntheticLambda0 implements Function0 {
     @Override // kotlin.jvm.functions.Function0
@@ -28,10 +27,10 @@ public final /* synthetic */ class VolUpKt$$ExternalSyntheticLambda0 implements 
         int i2 = StrokeJoin.Round;
         PathFillType.Companion.getClass();
         int i3 = PathFillType.EvenOdd;
-        PathBuilder m = ExpandMoreKt$$ExternalSyntheticOutline0.m(12.0f, 20.375f, 12.0f, 3.625f);
-        m.moveTo(3.625f, 12.0f);
-        m.lineTo(20.375f, 12.0f);
-        builder.m565addPathoIyEayM("", m._nodes, i3, solidColor, 1.0f, solidColor2, 1.0f, 1.5f, i, i2, 4.0f, 0.0f, 1.0f, 0.0f);
+        PathBuilder pathBuilderM = ExpandMoreKt$$ExternalSyntheticOutline0.m(12.0f, 20.375f, 12.0f, 3.625f);
+        pathBuilderM.moveTo(3.625f, 12.0f);
+        pathBuilderM.lineTo(20.375f, 12.0f);
+        builder.m567addPathoIyEayM("", pathBuilderM._nodes, i3, solidColor, 1.0f, solidColor2, 1.0f, 1.5f, i, i2, 4.0f, 0.0f, 1.0f, 0.0f);
         return builder.build();
     }
 }

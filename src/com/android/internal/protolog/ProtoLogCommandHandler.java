@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Set;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class ProtoLogCommandHandler extends ShellCommand {
     private final PrintWriter mPrintWriter;
     private final ProtoLogConfigurationService mProtoLogConfigurationService;

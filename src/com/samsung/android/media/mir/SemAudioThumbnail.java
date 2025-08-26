@@ -57,9 +57,9 @@ public class SemAudioThumbnail {
     public boolean checkFile(String str) {
         if (isNativeLibraryReady && str != null) {
             try {
-                int init = init(str, 0);
-                if (init >= 0) {
-                    deinit(init);
+                int iInit = init(str, 0);
+                if (iInit >= 0) {
+                    deinit(iInit);
                     return true;
                 }
             } catch (Exception | UnsatisfiedLinkError unused) {
@@ -86,11 +86,11 @@ public class SemAudioThumbnail {
             return;
         }
         try {
-            int init = init(str, i);
-            this.mHandle = init;
+            int iInit = init(str, i);
+            this.mHandle = iInit;
             this.mListener = resultListener;
-            if (init >= 0) {
-                if (extract(init) == 0) {
+            if (iInit >= 0) {
+                if (extract(iInit) == 0) {
                     new Thread("SemAudioThumbnail thread") { // from class: com.samsung.android.media.mir.SemAudioThumbnail.1
                         @Override // java.lang.Thread, java.lang.Runnable
                         public void run() {
@@ -107,33 +107,37 @@ public class SemAudioThumbnail {
                                                 if (SemAudioThumbnail.this.mListener != null) {
                                                     SemAudioThumbnail.this.mListener.onDone(-1L);
                                                 }
-                                            } else if (stat == 5) {
-                                                SemAudioThumbnail semAudioThumbnail2 = SemAudioThumbnail.this;
-                                                long info = semAudioThumbnail2.getInfo(semAudioThumbnail2.mHandle);
-                                                SemAudioThumbnail semAudioThumbnail3 = SemAudioThumbnail.this;
-                                                semAudioThumbnail3.deinit(semAudioThumbnail3.mHandle);
-                                                if (SemAudioThumbnail.this.mListener != null) {
-                                                    SemAudioThumbnail.this.mListener.onDone(info);
-                                                }
-                                            } else if (stat != 6) {
                                                 i2 = stat;
+                                                z = true;
                                             } else {
-                                                SemAudioThumbnail semAudioThumbnail4 = SemAudioThumbnail.this;
-                                                semAudioThumbnail4.deinit(semAudioThumbnail4.mHandle);
-                                                if (SemAudioThumbnail.this.mListener != null) {
-                                                    SemAudioThumbnail.this.mListener.onDone(0L);
+                                                if (stat == 5) {
+                                                    SemAudioThumbnail semAudioThumbnail2 = SemAudioThumbnail.this;
+                                                    long info = semAudioThumbnail2.getInfo(semAudioThumbnail2.mHandle);
+                                                    SemAudioThumbnail semAudioThumbnail3 = SemAudioThumbnail.this;
+                                                    semAudioThumbnail3.deinit(semAudioThumbnail3.mHandle);
+                                                    if (SemAudioThumbnail.this.mListener != null) {
+                                                        SemAudioThumbnail.this.mListener.onDone(info);
+                                                    }
+                                                } else if (stat != 6) {
+                                                    i2 = stat;
+                                                } else {
+                                                    SemAudioThumbnail semAudioThumbnail4 = SemAudioThumbnail.this;
+                                                    semAudioThumbnail4.deinit(semAudioThumbnail4.mHandle);
+                                                    if (SemAudioThumbnail.this.mListener != null) {
+                                                        SemAudioThumbnail.this.mListener.onDone(0L);
+                                                    }
                                                 }
+                                                i2 = stat;
+                                                z = true;
                                             }
-                                            i2 = stat;
-                                            z = true;
                                         }
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                        SemAudioThumbnail semAudioThumbnail5 = SemAudioThumbnail.this;
-                                        semAudioThumbnail5.deinit(semAudioThumbnail5.mHandle);
+                                    } catch (NullPointerException | Exception unused) {
                                         return;
                                     }
-                                } catch (NullPointerException | Exception unused) {
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                    SemAudioThumbnail semAudioThumbnail5 = SemAudioThumbnail.this;
+                                    semAudioThumbnail5.deinit(semAudioThumbnail5.mHandle);
                                     return;
                                 }
                             }
@@ -145,10 +149,10 @@ public class SemAudioThumbnail {
                     return;
                 }
             }
-            this.lastError = init;
-            if (init == -7) {
+            this.lastError = iInit;
+            if (iInit == -7) {
                 sendErrorMessage(resultListener, -7);
-            } else if (init == -3) {
+            } else if (iInit == -3) {
                 sendErrorMessage(resultListener, -3);
             } else {
                 sendErrorMessage(resultListener, -1);
@@ -173,11 +177,11 @@ public class SemAudioThumbnail {
             return;
         }
         try {
-            int init = init(str, 0);
-            this.mHandle = init;
+            int iInit = init(str, 0);
+            this.mHandle = iInit;
             this.mListener = resultListener;
-            if (init >= 0) {
-                if (extract(init) == 0) {
+            if (iInit >= 0) {
+                if (extract(iInit) == 0) {
                     new Thread("SemAudioThumbnail thread") { // from class: com.samsung.android.media.mir.SemAudioThumbnail.2
                         @Override // java.lang.Thread, java.lang.Runnable
                         public void run() {
@@ -194,33 +198,37 @@ public class SemAudioThumbnail {
                                                 if (SemAudioThumbnail.this.mListener != null) {
                                                     SemAudioThumbnail.this.mListener.onDone(-1L);
                                                 }
-                                            } else if (stat == 5) {
-                                                SemAudioThumbnail semAudioThumbnail2 = SemAudioThumbnail.this;
-                                                long info = semAudioThumbnail2.getInfo(semAudioThumbnail2.mHandle);
-                                                SemAudioThumbnail semAudioThumbnail3 = SemAudioThumbnail.this;
-                                                semAudioThumbnail3.deinit(semAudioThumbnail3.mHandle);
-                                                if (SemAudioThumbnail.this.mListener != null) {
-                                                    SemAudioThumbnail.this.mListener.onDone(info);
-                                                }
-                                            } else if (stat != 6) {
                                                 i = stat;
+                                                z = true;
                                             } else {
-                                                SemAudioThumbnail semAudioThumbnail4 = SemAudioThumbnail.this;
-                                                semAudioThumbnail4.deinit(semAudioThumbnail4.mHandle);
-                                                if (SemAudioThumbnail.this.mListener != null) {
-                                                    SemAudioThumbnail.this.mListener.onDone(0L);
+                                                if (stat == 5) {
+                                                    SemAudioThumbnail semAudioThumbnail2 = SemAudioThumbnail.this;
+                                                    long info = semAudioThumbnail2.getInfo(semAudioThumbnail2.mHandle);
+                                                    SemAudioThumbnail semAudioThumbnail3 = SemAudioThumbnail.this;
+                                                    semAudioThumbnail3.deinit(semAudioThumbnail3.mHandle);
+                                                    if (SemAudioThumbnail.this.mListener != null) {
+                                                        SemAudioThumbnail.this.mListener.onDone(info);
+                                                    }
+                                                } else if (stat != 6) {
+                                                    i = stat;
+                                                } else {
+                                                    SemAudioThumbnail semAudioThumbnail4 = SemAudioThumbnail.this;
+                                                    semAudioThumbnail4.deinit(semAudioThumbnail4.mHandle);
+                                                    if (SemAudioThumbnail.this.mListener != null) {
+                                                        SemAudioThumbnail.this.mListener.onDone(0L);
+                                                    }
                                                 }
+                                                i = stat;
+                                                z = true;
                                             }
-                                            i = stat;
-                                            z = true;
                                         }
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                        SemAudioThumbnail semAudioThumbnail5 = SemAudioThumbnail.this;
-                                        semAudioThumbnail5.deinit(semAudioThumbnail5.mHandle);
+                                    } catch (NullPointerException | Exception unused) {
                                         return;
                                     }
-                                } catch (NullPointerException | Exception unused) {
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                    SemAudioThumbnail semAudioThumbnail5 = SemAudioThumbnail.this;
+                                    semAudioThumbnail5.deinit(semAudioThumbnail5.mHandle);
                                     return;
                                 }
                             }
@@ -232,10 +240,10 @@ public class SemAudioThumbnail {
                     return;
                 }
             }
-            this.lastError = init;
-            if (init == -7) {
+            this.lastError = iInit;
+            if (iInit == -7) {
                 sendErrorMessage(resultListener, -7);
-            } else if (init == -3) {
+            } else if (iInit == -3) {
                 sendErrorMessage(resultListener, -3);
             } else {
                 sendErrorMessage(resultListener, -1);
@@ -260,11 +268,11 @@ public class SemAudioThumbnail {
             return;
         }
         try {
-            int initialize = initialize(fileDescriptor, 0);
-            this.mHandle = initialize;
+            int iInitialize = initialize(fileDescriptor, 0);
+            this.mHandle = iInitialize;
             this.mListener = resultListener;
-            if (initialize >= 0) {
-                if (extract(initialize) == 0) {
+            if (iInitialize >= 0) {
+                if (extract(iInitialize) == 0) {
                     new Thread("SemAudioThumbnail thread") { // from class: com.samsung.android.media.mir.SemAudioThumbnail.3
                         @Override // java.lang.Thread, java.lang.Runnable
                         public void run() {
@@ -281,33 +289,37 @@ public class SemAudioThumbnail {
                                                 if (SemAudioThumbnail.this.mListener != null) {
                                                     SemAudioThumbnail.this.mListener.onDone(-1L);
                                                 }
-                                            } else if (stat == 5) {
-                                                SemAudioThumbnail semAudioThumbnail2 = SemAudioThumbnail.this;
-                                                long info = semAudioThumbnail2.getInfo(semAudioThumbnail2.mHandle);
-                                                SemAudioThumbnail semAudioThumbnail3 = SemAudioThumbnail.this;
-                                                semAudioThumbnail3.deinit(semAudioThumbnail3.mHandle);
-                                                if (SemAudioThumbnail.this.mListener != null) {
-                                                    SemAudioThumbnail.this.mListener.onDone(info);
-                                                }
-                                            } else if (stat != 6) {
                                                 i = stat;
+                                                z = true;
                                             } else {
-                                                SemAudioThumbnail semAudioThumbnail4 = SemAudioThumbnail.this;
-                                                semAudioThumbnail4.deinit(semAudioThumbnail4.mHandle);
-                                                if (SemAudioThumbnail.this.mListener != null) {
-                                                    SemAudioThumbnail.this.mListener.onDone(0L);
+                                                if (stat == 5) {
+                                                    SemAudioThumbnail semAudioThumbnail2 = SemAudioThumbnail.this;
+                                                    long info = semAudioThumbnail2.getInfo(semAudioThumbnail2.mHandle);
+                                                    SemAudioThumbnail semAudioThumbnail3 = SemAudioThumbnail.this;
+                                                    semAudioThumbnail3.deinit(semAudioThumbnail3.mHandle);
+                                                    if (SemAudioThumbnail.this.mListener != null) {
+                                                        SemAudioThumbnail.this.mListener.onDone(info);
+                                                    }
+                                                } else if (stat != 6) {
+                                                    i = stat;
+                                                } else {
+                                                    SemAudioThumbnail semAudioThumbnail4 = SemAudioThumbnail.this;
+                                                    semAudioThumbnail4.deinit(semAudioThumbnail4.mHandle);
+                                                    if (SemAudioThumbnail.this.mListener != null) {
+                                                        SemAudioThumbnail.this.mListener.onDone(0L);
+                                                    }
                                                 }
+                                                i = stat;
+                                                z = true;
                                             }
-                                            i = stat;
-                                            z = true;
                                         }
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                        SemAudioThumbnail semAudioThumbnail5 = SemAudioThumbnail.this;
-                                        semAudioThumbnail5.deinit(semAudioThumbnail5.mHandle);
+                                    } catch (NullPointerException | Exception unused) {
                                         return;
                                     }
-                                } catch (NullPointerException | Exception unused) {
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                    SemAudioThumbnail semAudioThumbnail5 = SemAudioThumbnail.this;
+                                    semAudioThumbnail5.deinit(semAudioThumbnail5.mHandle);
                                     return;
                                 }
                             }
@@ -319,10 +331,10 @@ public class SemAudioThumbnail {
                     return;
                 }
             }
-            this.lastError = initialize;
-            if (initialize == -7) {
+            this.lastError = iInitialize;
+            if (iInitialize == -7) {
                 sendErrorMessage(resultListener, -4);
-            } else if (initialize == -3) {
+            } else if (iInitialize == -3) {
                 sendErrorMessage(resultListener, -3);
             } else {
                 sendErrorMessage(resultListener, -1);

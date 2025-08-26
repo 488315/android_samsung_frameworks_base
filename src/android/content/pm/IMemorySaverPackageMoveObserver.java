@@ -51,9 +51,9 @@ public interface IMemorySaverPackageMoveObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMemorySaverPackageMoveObserver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMemorySaverPackageMoveObserver)) {
-                return (IMemorySaverPackageMoveObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMemorySaverPackageMoveObserver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMemorySaverPackageMoveObserver)) {
+                return (IMemorySaverPackageMoveObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,16 +83,16 @@ public interface IMemorySaverPackageMoveObserver extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onCreated(readString);
+                onCreated(string);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                long readLong = parcel.readLong();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                onStatusChanged(readInt, readInt2, readLong);
+                onStatusChanged(i3, i4, j);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -118,33 +118,33 @@ public interface IMemorySaverPackageMoveObserver extends IInterface {
 
             @Override // android.content.pm.IMemorySaverPackageMoveObserver
             public void onCreated(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMemorySaverPackageMoveObserver.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMemorySaverPackageMoveObserver.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IMemorySaverPackageMoveObserver
             public void onStatusChanged(int i, int i2, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMemorySaverPackageMoveObserver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMemorySaverPackageMoveObserver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

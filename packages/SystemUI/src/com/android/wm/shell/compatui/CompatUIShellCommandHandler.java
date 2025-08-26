@@ -6,7 +6,6 @@ import com.android.wm.shell.sysui.ShellCommandHandler;
 import java.io.PrintWriter;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CompatUIShellCommandHandler implements ShellCommandHandler.ShellCommandActionHandler {
     public final CompatUIConfiguration mCompatUIConfiguration;
@@ -18,10 +17,13 @@ public final class CompatUIShellCommandHandler implements ShellCommandHandler.Sh
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0059  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00a3  */
     @Override // com.android.wm.shell.sysui.ShellCommandHandler.ShellCommandActionHandler
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean onShellCommand(PrintWriter printWriter, String[] strArr) {
-        char c;
-        char c2;
         if (strArr.length != 2) {
             CarrierTextController$$ExternalSyntheticOutline0.m(new StringBuilder("Invalid command: "), strArr[0], printWriter);
             return false;
@@ -34,46 +36,13 @@ public final class CompatUIShellCommandHandler implements ShellCommandHandler.Sh
             String str2 = strArr[1];
             Objects.requireNonNull(compatUIConfiguration);
             str2.getClass();
-            switch (str2.hashCode()) {
-                case 48:
-                    if (str2.equals("0")) {
-                        c = 0;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case 49:
-                    if (str2.equals("1")) {
-                        c = 1;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case 3569038:
-                    if (str2.equals("true")) {
-                        c = 2;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                case 97196323:
-                    if (str2.equals("false")) {
-                        c = 3;
-                        break;
-                    }
-                    c = 65535;
-                    break;
-                default:
-                    c = 65535;
-                    break;
-            }
-            switch (c) {
-                case 0:
-                case 3:
+            switch (str2) {
+                case "0":
+                case "false":
                     bool = Boolean.FALSE;
                     break;
-                case 1:
-                case 2:
+                case "1":
+                case "true":
                     bool = Boolean.TRUE;
                     break;
             }
@@ -90,46 +59,13 @@ public final class CompatUIShellCommandHandler implements ShellCommandHandler.Sh
         String str3 = strArr[1];
         Objects.requireNonNull(compatUIConfiguration);
         str3.getClass();
-        switch (str3.hashCode()) {
-            case 48:
-                if (str3.equals("0")) {
-                    c2 = 0;
-                    break;
-                }
-                c2 = 65535;
-                break;
-            case 49:
-                if (str3.equals("1")) {
-                    c2 = 1;
-                    break;
-                }
-                c2 = 65535;
-                break;
-            case 3569038:
-                if (str3.equals("true")) {
-                    c2 = 2;
-                    break;
-                }
-                c2 = 65535;
-                break;
-            case 97196323:
-                if (str3.equals("false")) {
-                    c2 = 3;
-                    break;
-                }
-                c2 = 65535;
-                break;
-            default:
-                c2 = 65535;
-                break;
-        }
-        switch (c2) {
-            case 0:
-            case 3:
+        switch (str3) {
+            case "0":
+            case "false":
                 bool = Boolean.FALSE;
                 break;
-            case 1:
-            case 2:
+            case "1":
+            case "true":
                 bool = Boolean.TRUE;
                 break;
         }

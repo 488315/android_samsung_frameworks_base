@@ -4,7 +4,6 @@ import androidx.compose.ui.layout.HorizontalAlignmentLine;
 import androidx.compose.ui.layout.VerticalAlignmentLine;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BlueprintAlignmentLines$LockIcon {
     public static final HorizontalAlignmentLine Bottom;
@@ -21,25 +20,25 @@ public final class BlueprintAlignmentLines$LockIcon {
                 Integer num = (Integer) obj;
                 switch (i) {
                     case 0:
-                        int intValue = num.intValue();
-                        int intValue2 = ((Integer) obj2).intValue();
+                        int iIntValue = num.intValue();
+                        int iIntValue2 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.min(intValue, intValue2));
+                        return Integer.valueOf(Math.min(iIntValue, iIntValue2));
                     case 1:
-                        int intValue3 = num.intValue();
-                        int intValue4 = ((Integer) obj2).intValue();
+                        int iIntValue3 = num.intValue();
+                        int iIntValue4 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon2 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.min(intValue3, intValue4));
+                        return Integer.valueOf(Math.min(iIntValue3, iIntValue4));
                     case 2:
-                        int intValue5 = num.intValue();
-                        int intValue6 = ((Integer) obj2).intValue();
+                        int iIntValue5 = num.intValue();
+                        int iIntValue6 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon3 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.max(intValue5, intValue6));
+                        return Integer.valueOf(Math.max(iIntValue5, iIntValue6));
                     default:
-                        int intValue7 = num.intValue();
-                        int intValue8 = ((Integer) obj2).intValue();
+                        int iIntValue7 = num.intValue();
+                        int iIntValue8 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon4 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.max(intValue7, intValue8));
+                        return Integer.valueOf(Math.max(iIntValue7, iIntValue8));
                 }
             }
         });
@@ -50,25 +49,25 @@ public final class BlueprintAlignmentLines$LockIcon {
                 Integer num = (Integer) obj;
                 switch (i2) {
                     case 0:
-                        int intValue = num.intValue();
-                        int intValue2 = ((Integer) obj2).intValue();
+                        int iIntValue = num.intValue();
+                        int iIntValue2 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.min(intValue, intValue2));
+                        return Integer.valueOf(Math.min(iIntValue, iIntValue2));
                     case 1:
-                        int intValue3 = num.intValue();
-                        int intValue4 = ((Integer) obj2).intValue();
+                        int iIntValue3 = num.intValue();
+                        int iIntValue4 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon2 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.min(intValue3, intValue4));
+                        return Integer.valueOf(Math.min(iIntValue3, iIntValue4));
                     case 2:
-                        int intValue5 = num.intValue();
-                        int intValue6 = ((Integer) obj2).intValue();
+                        int iIntValue5 = num.intValue();
+                        int iIntValue6 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon3 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.max(intValue5, intValue6));
+                        return Integer.valueOf(Math.max(iIntValue5, iIntValue6));
                     default:
-                        int intValue7 = num.intValue();
-                        int intValue8 = ((Integer) obj2).intValue();
+                        int iIntValue7 = num.intValue();
+                        int iIntValue8 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon4 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.max(intValue7, intValue8));
+                        return Integer.valueOf(Math.max(iIntValue7, iIntValue8));
                 }
             }
         });
@@ -79,25 +78,25 @@ public final class BlueprintAlignmentLines$LockIcon {
                 Integer num = (Integer) obj;
                 switch (i3) {
                     case 0:
-                        int intValue = num.intValue();
-                        int intValue2 = ((Integer) obj2).intValue();
+                        int iIntValue = num.intValue();
+                        int iIntValue2 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.min(intValue, intValue2));
+                        return Integer.valueOf(Math.min(iIntValue, iIntValue2));
                     case 1:
-                        int intValue3 = num.intValue();
-                        int intValue4 = ((Integer) obj2).intValue();
+                        int iIntValue3 = num.intValue();
+                        int iIntValue4 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon2 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.min(intValue3, intValue4));
+                        return Integer.valueOf(Math.min(iIntValue3, iIntValue4));
                     case 2:
-                        int intValue5 = num.intValue();
-                        int intValue6 = ((Integer) obj2).intValue();
+                        int iIntValue5 = num.intValue();
+                        int iIntValue6 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon3 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.max(intValue5, intValue6));
+                        return Integer.valueOf(Math.max(iIntValue5, iIntValue6));
                     default:
-                        int intValue7 = num.intValue();
-                        int intValue8 = ((Integer) obj2).intValue();
+                        int iIntValue7 = num.intValue();
+                        int iIntValue8 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon4 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.max(intValue7, intValue8));
+                        return Integer.valueOf(Math.max(iIntValue7, iIntValue8));
                 }
             }
         });
@@ -108,25 +107,25 @@ public final class BlueprintAlignmentLines$LockIcon {
                 Integer num = (Integer) obj;
                 switch (i4) {
                     case 0:
-                        int intValue = num.intValue();
-                        int intValue2 = ((Integer) obj2).intValue();
+                        int iIntValue = num.intValue();
+                        int iIntValue2 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.min(intValue, intValue2));
+                        return Integer.valueOf(Math.min(iIntValue, iIntValue2));
                     case 1:
-                        int intValue3 = num.intValue();
-                        int intValue4 = ((Integer) obj2).intValue();
+                        int iIntValue3 = num.intValue();
+                        int iIntValue4 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon2 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.min(intValue3, intValue4));
+                        return Integer.valueOf(Math.min(iIntValue3, iIntValue4));
                     case 2:
-                        int intValue5 = num.intValue();
-                        int intValue6 = ((Integer) obj2).intValue();
+                        int iIntValue5 = num.intValue();
+                        int iIntValue6 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon3 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.max(intValue5, intValue6));
+                        return Integer.valueOf(Math.max(iIntValue5, iIntValue6));
                     default:
-                        int intValue7 = num.intValue();
-                        int intValue8 = ((Integer) obj2).intValue();
+                        int iIntValue7 = num.intValue();
+                        int iIntValue8 = ((Integer) obj2).intValue();
                         BlueprintAlignmentLines$LockIcon blueprintAlignmentLines$LockIcon4 = BlueprintAlignmentLines$LockIcon.INSTANCE;
-                        return Integer.valueOf(Math.max(intValue7, intValue8));
+                        return Integer.valueOf(Math.max(iIntValue7, iIntValue8));
                 }
             }
         });

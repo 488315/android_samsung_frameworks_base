@@ -14,7 +14,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Transformation;
 import com.android.internal.policy.ScreenDecorationsUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AffordanceAnimController {
     public final Animation mAnimation;
@@ -27,7 +26,6 @@ public class AffordanceAnimController {
     public final Rect mBounds = new Rect();
     public final float[][] mAnimSpecArray = {new float[]{0.0f, -4.5f, 3.375f, -2.25f, 1.125f, 0.0f}, new float[]{0.0f, -3.15f, 1.1025f, -0.735f, 0.3675f, 0.0f}, new float[]{0.0f, 4.5f, -3.375f, 2.25f, -1.125f, 0.0f}, new float[]{0.0f, 3.15f, -1.1025f, 0.735f, -0.3675f, 0.0f}};
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimTarget implements ValueAnimator.AnimatorUpdateListener {
         public static final AnonymousClass1 X = new FloatProperty("x") { // from class: com.android.wm.shell.fullscreen.AffordanceAnimController.AnimTarget.1
             @Override // android.util.Property
@@ -69,10 +67,10 @@ public class AffordanceAnimController {
     }
 
     public AffordanceAnimController(Context context, int i) {
-        Context createDisplayContext = context.createDisplayContext(((DisplayManager) context.getSystemService(DisplayManager.class)).getDisplay(i));
-        this.mDisplayContext = createDisplayContext;
+        Context contextCreateDisplayContext = context.createDisplayContext(((DisplayManager) context.getSystemService(DisplayManager.class)).getDisplay(i));
+        this.mDisplayContext = contextCreateDisplayContext;
         this.mAnimation = AnimationUtils.loadAnimation(context, R.anim.voice_activity_close_enter);
-        this.mRadius = ScreenDecorationsUtils.getWindowCornerRadius(createDisplayContext);
+        this.mRadius = ScreenDecorationsUtils.getWindowCornerRadius(contextCreateDisplayContext);
     }
 
     public final Keyframe[] getKeyFrames(float f, boolean z, boolean z2) {

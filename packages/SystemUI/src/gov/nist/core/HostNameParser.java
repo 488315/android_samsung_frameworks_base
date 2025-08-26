@@ -1,6 +1,8 @@
 package gov.nist.core;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
+import java.text.ParseException;
+
 /* loaded from: classes4.dex */
 public class HostNameParser extends ParserCore {
     public static final char[] VALID_DOMAIN_LABEL_CHAR = {65533, '-', '.'};
@@ -12,32 +14,119 @@ public class HostNameParser extends ParserCore {
         this.stripAddressScopeZones = Boolean.getBoolean("gov.nist.core.STRIP_ADDR_SCOPES");
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x0183, code lost:
-    
-        if (r9 != '?') goto L89;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:40:0x01bd, code lost:
-    
-        if (r17 == false) goto L91;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:42:0x01e7, code lost:
-    
-        throw new java.text.ParseException(r16.lexer.buffer + " Illegal character in hostname:" + r16.lexer.lookAhead(0), r16.lexer.ptr);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:55:0x01ba, code lost:
-    
-        if (r1 != false) goto L93;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:89:0x01bd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final gov.nist.core.HostPort hostPort(boolean r17) {
-        /*
-            Method dump skipped, instructions count: 520
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: gov.nist.core.HostNameParser.hostPort(boolean):gov.nist.core.HostPort");
+    public final HostPort hostPort(boolean z) throws ParseException {
+        String strSubstring;
+        char cLookAhead;
+        int iIndexOf;
+        boolean z2 = this.stripAddressScopeZones;
+        if (this.lexer.lookAhead(0) == '[') {
+            StringBuffer stringBuffer = new StringBuffer();
+            if (!z2) {
+                while (true) {
+                    if (!this.lexer.hasMoreChars()) {
+                        break;
+                    }
+                    char cLookAhead2 = this.lexer.lookAhead(0);
+                    if (StringTokenizer.isHexDigit(cLookAhead2) || cLookAhead2 == '.' || cLookAhead2 == ':' || cLookAhead2 == '[') {
+                        this.lexer.consume(1);
+                        stringBuffer.append(cLookAhead2);
+                    } else if (cLookAhead2 == ']') {
+                        this.lexer.consume(1);
+                        stringBuffer.append(cLookAhead2);
+                        strSubstring = stringBuffer.toString();
+                    }
+                }
+                throw new ParseException(TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), this.lexer.buffer, ": Illegal Host name "), this.lexer.ptr);
+            }
+            while (true) {
+                if (!this.lexer.hasMoreChars()) {
+                    break;
+                }
+                char cLookAhead3 = this.lexer.lookAhead(0);
+                if (StringTokenizer.isHexDigit(cLookAhead3) || cLookAhead3 == '.' || cLookAhead3 == ':' || cLookAhead3 == '[') {
+                    this.lexer.consume(1);
+                    stringBuffer.append(cLookAhead3);
+                } else if (cLookAhead3 == ']') {
+                    this.lexer.consume(1);
+                    stringBuffer.append(cLookAhead3);
+                    strSubstring = stringBuffer.toString();
+                } else if (cLookAhead3 == '%') {
+                    this.lexer.consume(1);
+                    String rest = this.lexer.getRest();
+                    if (rest != null && rest.length() != 0 && (iIndexOf = rest.indexOf(93)) != -1) {
+                        this.lexer.consume(iIndexOf + 1);
+                        stringBuffer.append("]");
+                        strSubstring = stringBuffer.toString();
+                    }
+                }
+            }
+            throw new ParseException(TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), this.lexer.buffer, ": Illegal Host name "), this.lexer.ptr);
+        }
+        String rest2 = this.lexer.getRest();
+        int iIndexOf2 = rest2.indexOf(63);
+        int iIndexOf3 = rest2.indexOf(59);
+        if (iIndexOf2 == -1 || (iIndexOf3 != -1 && iIndexOf2 > iIndexOf3)) {
+            iIndexOf2 = iIndexOf3;
+        }
+        if (iIndexOf2 == -1) {
+            iIndexOf2 = rest2.length();
+        }
+        String strSubstring2 = rest2.substring(0, iIndexOf2);
+        int iIndexOf4 = strSubstring2.indexOf(58);
+        if (iIndexOf4 == -1 || strSubstring2.indexOf(58, iIndexOf4 + 1) == -1) {
+            LexerCore lexerCore = this.lexer;
+            int i = lexerCore.ptr;
+            lexerCore.consumeValidChars(VALID_DOMAIN_LABEL_CHAR);
+            LexerCore lexerCore2 = this.lexer;
+            strSubstring = lexerCore2.buffer.substring(i, lexerCore2.ptr);
+        } else {
+            LexerCore lexerCore3 = this.lexer;
+            int i2 = lexerCore3.ptr;
+            lexerCore3.consumeValidChars(new char[]{65533, ':'});
+            StringBuffer stringBuffer2 = new StringBuffer("[");
+            LexerCore lexerCore4 = this.lexer;
+            stringBuffer2.append(lexerCore4.buffer.substring(i2, lexerCore4.ptr));
+            stringBuffer2.append("]");
+            strSubstring = stringBuffer2.toString();
+        }
+        if (strSubstring.length() == 0) {
+            throw new ParseException(TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), this.lexer.buffer, ": Missing host name"), this.lexer.ptr);
+        }
+        Host host = new Host(strSubstring);
+        HostPort hostPort = new HostPort();
+        hostPort.host = host;
+        if (z) {
+            this.lexer.SPorHT();
+        }
+        if (this.lexer.hasMoreChars() && (cLookAhead = this.lexer.lookAhead(0)) != '\t' && cLookAhead != '\n' && cLookAhead != '\r' && cLookAhead != ' ') {
+            if (cLookAhead != '%') {
+                if (cLookAhead != ',' && cLookAhead != '/') {
+                    if (cLookAhead == ':') {
+                        this.lexer.consume(1);
+                        if (z) {
+                            this.lexer.SPorHT();
+                        }
+                        try {
+                            hostPort.port = Integer.parseInt(this.lexer.number());
+                            return hostPort;
+                        } catch (NumberFormatException unused) {
+                            throw new ParseException(TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), this.lexer.buffer, " :Error parsing port "), this.lexer.ptr);
+                        }
+                    }
+                    if (cLookAhead != ';' && cLookAhead != '>' && cLookAhead != '?') {
+                        if (!z) {
+                            throw new ParseException(this.lexer.buffer + " Illegal character in hostname:" + this.lexer.lookAhead(0), this.lexer.ptr);
+                        }
+                    }
+                }
+            } else if (!z2) {
+            }
+        }
+        return hostPort;
     }
 
     public HostNameParser(LexerCore lexerCore) {

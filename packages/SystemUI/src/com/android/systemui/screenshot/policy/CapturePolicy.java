@@ -6,14 +6,11 @@ import com.android.systemui.screenshot.data.model.DisplayContentModel;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface CapturePolicy {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface PolicyResult {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Matched implements PolicyResult {
             public final LegacyCaptureParameters parameters;
             public final String policy;
@@ -45,7 +42,6 @@ public interface CapturePolicy {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class NotMatched implements PolicyResult {
             public final String policy;
             public final String reason;

@@ -3,4 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <View android:id="@id/blurView" android:layout_width="fill_parent" android:layout_height="fill_parent" />
     <View android:id="@id/targetView" android:background="@drawable/desktop_drag_area_blur_background_round" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.0" />
+    <LinearLayout android:id="@id/labelContainer" style="@style/VisualIndicatorLabelContainer">
+        <TextView android:id="@id/labelView" style="@style/VisualIndicatorLabel" />
+    </LinearLayout>
 </FrameLayout>

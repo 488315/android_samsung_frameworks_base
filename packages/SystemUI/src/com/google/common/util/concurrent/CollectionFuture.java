@@ -11,12 +11,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class CollectionFuture extends AggregateFuture {
     public List values;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ListFuture extends CollectionFuture {
         public ListFuture(ImmutableCollection<? extends ListenableFuture> immutableCollection, boolean z) {
             super(immutableCollection, z);
@@ -30,7 +28,7 @@ public abstract class CollectionFuture extends AggregateFuture {
                 Runnable runnable = new Runnable() { // from class: com.google.common.util.concurrent.AggregateFuture$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CollectionFuture.ListFuture listFuture = CollectionFuture.ListFuture.this;
+                        CollectionFuture.ListFuture listFuture = this.f$0;
                         ImmutableCollection immutableCollection3 = immutableCollection2;
                         LazyLogger lazyLogger = AggregateFuture.logger;
                         listFuture.decrementCountAndMaybeComplete(immutableCollection3);
@@ -58,7 +56,7 @@ public abstract class CollectionFuture extends AggregateFuture {
                     listenableFuture2.addListener(new Runnable() { // from class: com.google.common.util.concurrent.AggregateFuture$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            CollectionFuture.ListFuture listFuture = CollectionFuture.ListFuture.this;
+                            CollectionFuture.ListFuture listFuture = this.f$0;
                             int i3 = i;
                             ListenableFuture listenableFuture3 = listenableFuture2;
                             LazyLogger lazyLogger = AggregateFuture.logger;
@@ -84,7 +82,6 @@ public abstract class CollectionFuture extends AggregateFuture {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Present {
         public final Object value;
 
@@ -94,8 +91,8 @@ public abstract class CollectionFuture extends AggregateFuture {
     }
 
     public CollectionFuture(ImmutableCollection<? extends ListenableFuture> immutableCollection, boolean z) {
-        super(immutableCollection, z, true);
         List arrayList;
+        super(immutableCollection, z, true);
         if (immutableCollection.isEmpty()) {
             arrayList = Collections.EMPTY_LIST;
         } else {

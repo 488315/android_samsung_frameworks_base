@@ -36,16 +36,16 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
             if (sipDelegate == null) {
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 SipDelegateAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SipDelegate.this.sendMessage(sipMessage, j);
+                        sipDelegate.sendMessage(sipMessage, j);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -55,16 +55,16 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
             if (sipDelegate == null) {
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 SipDelegateAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SipDelegate.this.notifyMessageReceived(str);
+                        sipDelegate.notifyMessageReceived(str);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -74,16 +74,16 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
             if (sipDelegate == null) {
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 SipDelegateAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SipDelegate.this.notifyMessageReceiveError(str, i);
+                        sipDelegate.notifyMessageReceiveError(str, i);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -93,16 +93,16 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
             if (sipDelegate == null) {
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 SipDelegateAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SipDelegate.this.cleanupSession(str);
+                        sipDelegate.cleanupSession(str);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -204,7 +204,7 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateAidlWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SipDelegate.this.notifyMessageReceiveError(viaBranchParameter, i);
+                    sipDelegate.notifyMessageReceiveError(viaBranchParameter, i);
                 }
             });
         }

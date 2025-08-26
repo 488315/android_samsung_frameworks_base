@@ -40,7 +40,6 @@ import kotlin.ULong;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AndroidAccessibilitySpannableString_androidKt {
     /* JADX WARN: Multi-variable type inference failed */
@@ -49,7 +48,7 @@ public abstract class AndroidAccessibilitySpannableString_androidKt {
     /* JADX WARN: Type inference failed for: r5v5, types: [java.util.ArrayList] */
     /* JADX WARN: Type inference failed for: r5v6, types: [java.util.ArrayList] */
     public static final SpannableString toAccessibilitySpannableString(AnnotatedString annotatedString, Density density, FontFamily.Resolver resolver, URLSpanCache uRLSpanCache) {
-        Collection collection;
+        Collection arrayList;
         int i;
         EmptyList emptyList;
         int i2;
@@ -62,20 +61,20 @@ public abstract class AndroidAccessibilitySpannableString_androidKt {
             for (int i5 = 0; i5 < size; i5++) {
                 AnnotatedString.Range range = (AnnotatedString.Range) list.get(i5);
                 SpanStyle spanStyle = (SpanStyle) range.item;
-                long mo792getColor0d7_KjU = spanStyle.textForegroundStyle.mo792getColor0d7_KjU();
-                TextForegroundStyle textForegroundStyle = spanStyle.textForegroundStyle;
-                long mo792getColor0d7_KjU2 = textForegroundStyle.mo792getColor0d7_KjU();
+                long jMo794getColor0d7_KjU = spanStyle.textForegroundStyle.mo794getColor0d7_KjU();
+                TextForegroundStyle textForegroundStyleM812from8_81llA = spanStyle.textForegroundStyle;
+                long jMo794getColor0d7_KjU2 = textForegroundStyleM812from8_81llA.mo794getColor0d7_KjU();
                 Color.Companion companion = Color.Companion;
-                if (!ULong.m3427equalsimpl0(mo792getColor0d7_KjU, mo792getColor0d7_KjU2)) {
+                if (!ULong.m3447equalsimpl0(jMo794getColor0d7_KjU, jMo794getColor0d7_KjU2)) {
                     TextForegroundStyle.Companion.getClass();
-                    textForegroundStyle = TextForegroundStyle.Companion.m810from8_81llA(mo792getColor0d7_KjU);
+                    textForegroundStyleM812from8_81llA = TextForegroundStyle.Companion.m812from8_81llA(jMo794getColor0d7_KjU);
                 }
-                SpanStyle spanStyle2 = new SpanStyle(textForegroundStyle, spanStyle.fontSize, spanStyle.fontWeight, spanStyle.fontStyle, spanStyle.fontSynthesis, (FontFamily) null, spanStyle.fontFeatureSettings, spanStyle.letterSpacing, spanStyle.baselineShift, spanStyle.textGeometricTransform, spanStyle.localeList, spanStyle.background, spanStyle.textDecoration, spanStyle.shadow, spanStyle.platformStyle, spanStyle.drawStyle, (DefaultConstructorMarker) null);
-                long mo792getColor0d7_KjU3 = spanStyle2.textForegroundStyle.mo792getColor0d7_KjU();
+                SpanStyle spanStyle2 = new SpanStyle(textForegroundStyleM812from8_81llA, spanStyle.fontSize, spanStyle.fontWeight, spanStyle.fontStyle, spanStyle.fontSynthesis, (FontFamily) null, spanStyle.fontFeatureSettings, spanStyle.letterSpacing, spanStyle.baselineShift, spanStyle.textGeometricTransform, spanStyle.localeList, spanStyle.background, spanStyle.textDecoration, spanStyle.shadow, spanStyle.platformStyle, spanStyle.drawStyle, (DefaultConstructorMarker) null);
+                long jMo794getColor0d7_KjU3 = spanStyle2.textForegroundStyle.mo794getColor0d7_KjU();
                 int i6 = range.start;
                 int i7 = range.end;
-                SpannableExtensions_androidKt.m787setColorRPmYEkk(spannableString, mo792getColor0d7_KjU3, i6, i7);
-                SpannableExtensions_androidKt.m788setFontSizeKmRG4DE(spannableString, spanStyle2.fontSize, density, i6, i7);
+                SpannableExtensions_androidKt.m789setColorRPmYEkk(spannableString, jMo794getColor0d7_KjU3, i6, i7);
+                SpannableExtensions_androidKt.m790setFontSizeKmRG4DE(spannableString, spanStyle2.fontSize, density, i6, i7);
                 FontStyle fontStyle = spanStyle2.fontStyle;
                 FontWeight fontWeight = spanStyle2.fontWeight;
                 if (fontWeight != null || fontStyle != null) {
@@ -110,7 +109,7 @@ public abstract class AndroidAccessibilitySpannableString_androidKt {
                         FontWeight.Companion.getClass();
                         FontWeight fontWeight2 = FontWeight.Normal;
                         FontStyle.Companion.getClass();
-                        Typeface typeface = (Typeface) ((FontFamilyResolverImpl) resolver).m762resolveDPcqOEQ(fontFamily, fontWeight2, 0, i4).getValue();
+                        Typeface typeface = (Typeface) ((FontFamilyResolverImpl) resolver).m764resolveDPcqOEQ(fontFamily, fontWeight2, 0, i4).getValue();
                         Api28Impl.INSTANCE.getClass();
                         spannableString.setSpan(new TypefaceSpan(typeface), i6, i7, 33);
                     }
@@ -137,28 +136,28 @@ public abstract class AndroidAccessibilitySpannableString_androidKt {
                 SpannableExtensions_androidKt.setLocaleList(spannableString, spanStyle2.localeList, i6, i7);
                 long j = spanStyle2.background;
                 if (j != 16) {
-                    SpannableExtensions_androidKt.setSpan(spannableString, new BackgroundColorSpan(ColorKt.m467toArgb8_81llA(j)), i6, i7);
+                    SpannableExtensions_androidKt.setSpan(spannableString, new BackgroundColorSpan(ColorKt.m469toArgb8_81llA(j)), i6, i7);
                 }
             }
         }
         int length = annotatedString.text.length();
         List list2 = annotatedString.annotations;
         if (list2 != null) {
-            collection = new ArrayList(list2.size());
+            arrayList = new ArrayList(list2.size());
             int size2 = list2.size();
             for (int i8 = 0; i8 < size2; i8++) {
                 Object obj = list2.get(i8);
                 AnnotatedString.Range range2 = (AnnotatedString.Range) obj;
                 if ((range2.item instanceof TtsAnnotation) && AnnotatedStringKt.intersect(0, length, range2.start, range2.end)) {
-                    collection.add(obj);
+                    arrayList.add(obj);
                 }
             }
         } else {
-            collection = EmptyList.INSTANCE;
+            arrayList = EmptyList.INSTANCE;
         }
-        int size3 = collection.size();
+        int size3 = arrayList.size();
         for (int i9 = 0; i9 < size3; i9++) {
-            AnnotatedString.Range range3 = (AnnotatedString.Range) collection.get(i9);
+            AnnotatedString.Range range3 = (AnnotatedString.Range) arrayList.get(i9);
             TtsAnnotation ttsAnnotation = (TtsAnnotation) range3.item;
             if (!(ttsAnnotation instanceof VerbatimTtsAnnotation)) {
                 throw new NoWhenBranchMatchedException();
@@ -168,17 +167,17 @@ public abstract class AndroidAccessibilitySpannableString_androidKt {
         int length2 = annotatedString.text.length();
         List list3 = annotatedString.annotations;
         if (list3 != null) {
-            ?? arrayList = new ArrayList(list3.size());
+            ?? arrayList2 = new ArrayList(list3.size());
             int size4 = list3.size();
             for (int i10 = 0; i10 < size4; i10++) {
                 Object obj2 = list3.get(i10);
                 AnnotatedString.Range range4 = (AnnotatedString.Range) obj2;
                 if ((range4.item instanceof UrlAnnotation) && AnnotatedStringKt.intersect(0, length2, range4.start, range4.end)) {
-                    arrayList.add(obj2);
+                    arrayList2.add(obj2);
                 }
             }
             i = 0;
-            emptyList = arrayList;
+            emptyList = arrayList2;
         } else {
             i = 0;
             emptyList = EmptyList.INSTANCE;
@@ -188,12 +187,12 @@ public abstract class AndroidAccessibilitySpannableString_androidKt {
             AnnotatedString.Range range5 = (AnnotatedString.Range) emptyList.get(i11);
             UrlAnnotation urlAnnotation = (UrlAnnotation) range5.item;
             WeakHashMap weakHashMap = uRLSpanCache.spansByAnnotation;
-            Object obj3 = weakHashMap.get(urlAnnotation);
-            if (obj3 == null) {
-                obj3 = new URLSpan(urlAnnotation.url);
-                weakHashMap.put(urlAnnotation, obj3);
+            Object uRLSpan = weakHashMap.get(urlAnnotation);
+            if (uRLSpan == null) {
+                uRLSpan = new URLSpan(urlAnnotation.url);
+                weakHashMap.put(urlAnnotation, uRLSpan);
             }
-            spannableString.setSpan((URLSpan) obj3, range5.start, range5.end, 33);
+            spannableString.setSpan((URLSpan) uRLSpan, range5.start, range5.end, 33);
         }
         List linkAnnotations = annotatedString.getLinkAnnotations(annotatedString.text.length());
         int size6 = linkAnnotations.size();
@@ -202,26 +201,26 @@ public abstract class AndroidAccessibilitySpannableString_androidKt {
             int i13 = range6.start;
             int i14 = range6.end;
             if (i13 != i14) {
-                Object obj4 = range6.item;
-                LinkAnnotation linkAnnotation = (LinkAnnotation) obj4;
+                Object obj3 = range6.item;
+                LinkAnnotation linkAnnotation = (LinkAnnotation) obj3;
                 if (linkAnnotation instanceof LinkAnnotation.Url) {
                     linkAnnotation.getClass();
-                    AnnotatedString.Range range7 = new AnnotatedString.Range((LinkAnnotation.Url) obj4, i13, i14);
+                    AnnotatedString.Range range7 = new AnnotatedString.Range((LinkAnnotation.Url) obj3, i13, i14);
                     WeakHashMap weakHashMap2 = uRLSpanCache.urlSpansByAnnotation;
-                    Object obj5 = weakHashMap2.get(range7);
-                    if (obj5 == null) {
-                        obj5 = new URLSpan(((LinkAnnotation.Url) range7.item).url);
-                        weakHashMap2.put(range7, obj5);
+                    Object uRLSpan2 = weakHashMap2.get(range7);
+                    if (uRLSpan2 == null) {
+                        uRLSpan2 = new URLSpan(((LinkAnnotation.Url) range7.item).url);
+                        weakHashMap2.put(range7, uRLSpan2);
                     }
-                    spannableString.setSpan((URLSpan) obj5, i13, i14, 33);
+                    spannableString.setSpan((URLSpan) uRLSpan2, i13, i14, 33);
                 } else {
                     WeakHashMap weakHashMap3 = uRLSpanCache.linkSpansWithListenerByAnnotation;
-                    Object obj6 = weakHashMap3.get(range6);
-                    if (obj6 == null) {
-                        obj6 = new ComposeClickableSpan(linkAnnotation);
-                        weakHashMap3.put(range6, obj6);
+                    Object composeClickableSpan = weakHashMap3.get(range6);
+                    if (composeClickableSpan == null) {
+                        composeClickableSpan = new ComposeClickableSpan(linkAnnotation);
+                        weakHashMap3.put(range6, composeClickableSpan);
                     }
-                    spannableString.setSpan((ClickableSpan) obj6, i13, i14, 33);
+                    spannableString.setSpan((ClickableSpan) composeClickableSpan, i13, i14, 33);
                 }
             }
         }

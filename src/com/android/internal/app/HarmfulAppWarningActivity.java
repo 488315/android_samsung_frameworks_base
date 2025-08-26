@@ -53,10 +53,10 @@ public class HarmfulAppWarningActivity extends AlertActivity implements DialogIn
     }
 
     private View createView(ApplicationInfo applicationInfo) {
-        View inflate = getLayoutInflater().inflate(R.layout.harmful_app_warning_dialog, (ViewGroup) null);
-        ((TextView) inflate.findViewById(R.id.app_name_text)).lambda$setTextAsync$0(applicationInfo.loadSafeLabel(getPackageManager(), 1000.0f, 5));
-        ((TextView) inflate.findViewById(16908299)).lambda$setTextAsync$0(this.mHarmfulAppWarning);
-        return inflate;
+        View viewInflate = getLayoutInflater().inflate(R.layout.harmful_app_warning_dialog, (ViewGroup) null);
+        ((TextView) viewInflate.findViewById(R.id.app_name_text)).lambda$setTextAsync$0(applicationInfo.loadSafeLabel(getPackageManager(), 1000.0f, 5));
+        ((TextView) viewInflate.findViewById(16908299)).lambda$setTextAsync$0(this.mHarmfulAppWarning);
+        return viewInflate;
     }
 
     @Override // android.content.DialogInterface.OnClickListener

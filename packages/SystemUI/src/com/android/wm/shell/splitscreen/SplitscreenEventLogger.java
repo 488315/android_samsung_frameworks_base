@@ -7,7 +7,6 @@ import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplitscreenEventLogger {
     public int mDragEnterPosition;

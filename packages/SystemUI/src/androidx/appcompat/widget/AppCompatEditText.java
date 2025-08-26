@@ -14,7 +14,6 @@ import androidx.core.widget.TextViewCompat;
 import androidx.core.widget.TextViewOnReceiveContentListener;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatEditText extends EditText {
     public final AppCompatEmojiEditTextHelper mAppCompatEmojiEditTextHelper;
@@ -22,7 +21,6 @@ public class AppCompatEditText extends EditText {
     public SuperCaller mSuperCaller;
     public final AppCompatTextHelper mTextHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SuperCaller {
         public SuperCaller() {
         }
@@ -65,10 +63,10 @@ public class AppCompatEditText extends EditText {
 
     @Override // android.widget.TextView, android.view.View
     public InputConnection onCreateInputConnection(EditorInfo editorInfo) {
-        InputConnection onCreateInputConnection = super.onCreateInputConnection(editorInfo);
+        InputConnection inputConnectionOnCreateInputConnection = super.onCreateInputConnection(editorInfo);
         this.mTextHelper.getClass();
-        AppCompatHintHelper.onCreateInputConnection(onCreateInputConnection, editorInfo, this);
-        return this.mAppCompatEmojiEditTextHelper.onCreateInputConnection(onCreateInputConnection, editorInfo);
+        AppCompatHintHelper.onCreateInputConnection(inputConnectionOnCreateInputConnection, editorInfo, this);
+        return this.mAppCompatEmojiEditTextHelper.onCreateInputConnection(inputConnectionOnCreateInputConnection, editorInfo);
     }
 
     @Override // android.view.View
@@ -159,9 +157,9 @@ public class AppCompatEditText extends EditText {
         if (keyListener instanceof NumberKeyListener) {
             return;
         }
-        boolean isFocusable = super.isFocusable();
-        boolean isClickable = super.isClickable();
-        boolean isLongClickable = super.isLongClickable();
+        boolean zIsFocusable = super.isFocusable();
+        boolean zIsClickable = super.isClickable();
+        boolean zIsLongClickable = super.isLongClickable();
         int inputType = super.getInputType();
         KeyListener keyListener2 = appCompatEmojiEditTextHelper.getKeyListener(keyListener);
         if (keyListener2 == keyListener) {
@@ -169,8 +167,8 @@ public class AppCompatEditText extends EditText {
         }
         super.setKeyListener(keyListener2);
         super.setRawInputType(inputType);
-        super.setFocusable(isFocusable);
-        super.setClickable(isClickable);
-        super.setLongClickable(isLongClickable);
+        super.setFocusable(zIsFocusable);
+        super.setClickable(zIsClickable);
+        super.setLongClickable(zIsLongClickable);
     }
 }

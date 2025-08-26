@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.FileUtils;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +30,8 @@ import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.keyguard.KeyguardUnlockInfo;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.sec.ims.settings.ImsProfile;
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -39,7 +43,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardCarrierViewController extends KeyguardInputViewController {
     public AnonymousClass3 mBroadcastReceiver;
@@ -102,11 +105,11 @@ public class KeyguardCarrierViewController extends KeyguardInputViewController {
                 int phoneCount = TelephonyManager.getDefault().getPhoneCount();
                 String str = SystemProperties.get("gsm.sim.state", "");
                 if (str != null) {
-                    String[] split = str.split(",");
+                    String[] strArrSplit = str.split(",");
                     KeyguardCarrierViewController$2$$ExternalSyntheticOutline0.m(phoneCount, "isSimStateAbsentAll() : simSlotCount = ", ", simStates = ", str, "KeyguardCarrierView");
                     z = true;
-                    for (int i4 = 0; i4 < phoneCount && split.length > i4; i4++) {
-                        if (!split[i4].equalsIgnoreCase("ABSENT")) {
+                    for (int i4 = 0; i4 < phoneCount && strArrSplit.length > i4; i4++) {
+                        if (!strArrSplit[i4].equalsIgnoreCase("ABSENT")) {
                             z = false;
                         }
                     }
@@ -135,7 +138,7 @@ public class KeyguardCarrierViewController extends KeyguardInputViewController {
         this.mUnlockButton = (Button) ((KeyguardCarrierView) this.mView).findViewById(R.id.carrier_unlock_button);
     }
 
-    public static String decryptCarrierLockPlusMsg(String str) {
+    public static String decryptCarrierLockPlusMsg(String str) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, InvalidAlgorithmParameterException {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(2, getKey(), new IvParameterSpec("i_love_office_tg".getBytes("UTF-8")));
@@ -158,7 +161,7 @@ public class KeyguardCarrierViewController extends KeyguardInputViewController {
         }
     }
 
-    public static SecretKeySpec getKey() {
+    public static SecretKeySpec getKey() throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         messageDigest.update("SKT : Find lost phone plus !!!".getBytes("UTF-8"));
         return new SecretKeySpec(messageDigest.digest(), "AES");
@@ -319,124 +322,61 @@ public class KeyguardCarrierViewController extends KeyguardInputViewController {
         ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).removeCallback(this.mKeyguardUpdateMonitorCallback);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x007f A[Catch: IOException -> 0x008d, TryCatch #1 {IOException -> 0x008d, blocks: (B:13:0x0074, B:15:0x007f, B:16:0x009a, B:18:0x00a0, B:20:0x00b6, B:21:0x00bb, B:24:0x00c0, B:26:0x008f), top: B:12:0x0074 }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00a0 A[Catch: IOException -> 0x008d, TryCatch #1 {IOException -> 0x008d, blocks: (B:13:0x0074, B:15:0x007f, B:16:0x009a, B:18:0x00a0, B:20:0x00b6, B:21:0x00bb, B:24:0x00c0, B:26:0x008f), top: B:12:0x0074 }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00c0 A[Catch: IOException -> 0x008d, TRY_LEAVE, TryCatch #1 {IOException -> 0x008d, blocks: (B:13:0x0074, B:15:0x007f, B:16:0x009a, B:18:0x00a0, B:20:0x00b6, B:21:0x00bb, B:24:0x00c0, B:26:0x008f), top: B:12:0x0074 }] */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x008f A[Catch: IOException -> 0x008d, TryCatch #1 {IOException -> 0x008d, blocks: (B:13:0x0074, B:15:0x007f, B:16:0x009a, B:18:0x00a0, B:20:0x00b6, B:21:0x00bb, B:24:0x00c0, B:26:0x008f), top: B:12:0x0074 }] */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x007f A[Catch: IOException -> 0x008d, TryCatch #1 {IOException -> 0x008d, blocks: (B:22:0x0074, B:24:0x007f, B:28:0x009a, B:30:0x00a0, B:32:0x00b6, B:33:0x00bb, B:34:0x00c0, B:27:0x008f), top: B:39:0x0074 }] */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x008f A[Catch: IOException -> 0x008d, TryCatch #1 {IOException -> 0x008d, blocks: (B:22:0x0074, B:24:0x007f, B:28:0x009a, B:30:0x00a0, B:32:0x00b6, B:33:0x00bb, B:34:0x00c0, B:27:0x008f), top: B:39:0x0074 }] */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00a0 A[Catch: IOException -> 0x008d, TryCatch #1 {IOException -> 0x008d, blocks: (B:22:0x0074, B:24:0x007f, B:28:0x009a, B:30:0x00a0, B:32:0x00b6, B:33:0x00bb, B:34:0x00c0, B:27:0x008f), top: B:39:0x0074 }] */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00c0 A[Catch: IOException -> 0x008d, TRY_LEAVE, TryCatch #1 {IOException -> 0x008d, blocks: (B:22:0x0074, B:24:0x007f, B:28:0x009a, B:30:0x00a0, B:32:0x00b6, B:33:0x00bb, B:34:0x00c0, B:27:0x008f), top: B:39:0x0074 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void setCarrierLockPlusInfo() {
-        /*
-            r11 = this;
-            java.lang.String r0 = "/efs/sec_efs/sktdm_mem/enclawlockmsg.txt"
-            java.lang.String r1 = ":"
-            java.lang.String r2 = "KeyguardCarrierView"
-            com.android.internal.widget.LockPatternUtils r3 = r11.mLockPatternUtils
-            r4 = 0
-            r5 = 256(0x100, float:3.59E-43)
-            r6 = 0
-            java.io.File r7 = new java.io.File     // Catch: java.io.IOException -> L27
-            r7.<init>(r0)     // Catch: java.io.IOException -> L27
-            boolean r7 = r7.exists()     // Catch: java.io.IOException -> L27
-            if (r7 == 0) goto L29
-            java.io.File r7 = new java.io.File     // Catch: java.io.IOException -> L27
-            java.lang.String r8 = "/efs/sec_efs/sktdm_mem/encwlawp.txt"
-            r7.<init>(r8)     // Catch: java.io.IOException -> L27
-            java.lang.String r7 = android.os.FileUtils.readTextFile(r7, r5, r6)     // Catch: java.io.IOException -> L27
-            java.lang.String r7 = decryptCarrierLockPlusMsg(r7)     // Catch: java.io.IOException -> L27
-            goto L34
-        L27:
-            r7 = move-exception
-            goto L61
-        L29:
-            java.io.File r7 = new java.io.File     // Catch: java.io.IOException -> L27
-            java.lang.String r8 = "/efs/sec_efs/sktdm_mem/wlawp.txt"
-            r7.<init>(r8)     // Catch: java.io.IOException -> L27
-            java.lang.String r7 = android.os.FileUtils.readTextFile(r7, r5, r6)     // Catch: java.io.IOException -> L27
-        L34:
-            boolean r8 = android.text.TextUtils.isEmpty(r7)     // Catch: java.io.IOException -> L27
-            if (r8 != 0) goto L5b
-            java.lang.String[] r7 = r7.split(r1)     // Catch: java.io.IOException -> L27
-            r7 = r7[r4]     // Catch: java.io.IOException -> L27
-            if (r7 != 0) goto L44
-        L42:
-            r8 = r6
-            goto L6a
-        L44:
-            int r8 = r7.length()     // Catch: java.io.IOException -> L27
-            byte[] r8 = new byte[r8]     // Catch: java.io.IOException -> L27
-            r9 = r4
-        L4b:
-            int r10 = r7.length()     // Catch: java.io.IOException -> L27
-            if (r9 >= r10) goto L6a
-            char r10 = r7.charAt(r9)     // Catch: java.io.IOException -> L27
-            byte r10 = (byte) r10     // Catch: java.io.IOException -> L27
-            r8[r9] = r10     // Catch: java.io.IOException -> L27
-            int r9 = r9 + 1
-            goto L4b
-        L5b:
-            java.lang.String r7 = "getCarrierLockPlusPassword(), password is null"
-            android.util.Log.d(r2, r7)     // Catch: java.io.IOException -> L27
-            goto L42
-        L61:
-            java.lang.String r8 = "getCarrierLockPlusPassword(), IOException!!"
-            android.util.Log.d(r2, r8)
-            r7.printStackTrace()
-            goto L42
-        L6a:
-            com.android.systemui.user.domain.interactor.SelectedUserInteractor r7 = r11.mSelectedUserInteractor
-            int r7 = r7.getSelectedUserId()
-            r9 = 1
-            r3.saveRemoteLockPassword(r9, r8, r7)
-            java.io.File r3 = new java.io.File     // Catch: java.io.IOException -> L8d
-            r3.<init>(r0)     // Catch: java.io.IOException -> L8d
-            boolean r3 = r3.exists()     // Catch: java.io.IOException -> L8d
-            if (r3 == 0) goto L8f
-            java.io.File r3 = new java.io.File     // Catch: java.io.IOException -> L8d
-            r3.<init>(r0)     // Catch: java.io.IOException -> L8d
-            java.lang.String r0 = android.os.FileUtils.readTextFile(r3, r5, r6)     // Catch: java.io.IOException -> L8d
-            java.lang.String r0 = decryptCarrierLockPlusMsg(r0)     // Catch: java.io.IOException -> L8d
-            goto L9a
-        L8d:
-            r11 = move-exception
-            goto Lc7
-        L8f:
-            java.io.File r0 = new java.io.File     // Catch: java.io.IOException -> L8d
-            java.lang.String r3 = "/efs/sec_efs/sktdm_mem/lawlockmsg.txt"
-            r0.<init>(r3)     // Catch: java.io.IOException -> L8d
-            java.lang.String r0 = android.os.FileUtils.readTextFile(r0, r5, r6)     // Catch: java.io.IOException -> L8d
-        L9a:
-            boolean r3 = android.text.TextUtils.isEmpty(r0)     // Catch: java.io.IOException -> L8d
-            if (r3 != 0) goto Lc0
-            java.lang.String[] r0 = r0.split(r1)     // Catch: java.io.IOException -> L8d
-            r1 = r0[r9]     // Catch: java.io.IOException -> L8d
-            java.lang.String r3 = "1"
-            boolean r1 = r1.equals(r3)     // Catch: java.io.IOException -> L8d
-            r11.mIsShowingOwnerCallButton = r1     // Catch: java.io.IOException -> L8d
-            r11.setVisibleOwnerCallButton(r4)     // Catch: java.io.IOException -> L8d
-            android.widget.TextView r1 = r11.mOwnerInfo     // Catch: java.io.IOException -> L8d
-            r3 = 3
-            if (r1 == 0) goto Lbb
-            r4 = r0[r3]     // Catch: java.io.IOException -> L8d
-            r1.setText(r4)     // Catch: java.io.IOException -> L8d
-        Lbb:
-            r0 = r0[r3]     // Catch: java.io.IOException -> L8d
-            r11.mOwnerMessage = r0     // Catch: java.io.IOException -> L8d
-            goto Ld0
-        Lc0:
-            java.lang.String r11 = "updateCarrierLockPlusMessage(), message is null"
-            android.util.Log.d(r2, r11)     // Catch: java.io.IOException -> L8d
-            goto Ld0
-        Lc7:
-            java.lang.String r0 = "updateCarrierLockPlusMessage(), IOException"
-            android.util.Log.e(r2, r0)
-            r11.printStackTrace()
-        Ld0:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardCarrierViewController.setCarrierLockPlusInfo():void");
+        byte[] bArr;
+        String strDecryptCarrierLockPlusMsg;
+        String strDecryptCarrierLockPlusMsg2;
+        LockPatternUtils lockPatternUtils = this.mLockPatternUtils;
+        try {
+            strDecryptCarrierLockPlusMsg2 = new File("/efs/sec_efs/sktdm_mem/enclawlockmsg.txt").exists() ? decryptCarrierLockPlusMsg(FileUtils.readTextFile(new File("/efs/sec_efs/sktdm_mem/encwlawp.txt"), 256, null)) : FileUtils.readTextFile(new File("/efs/sec_efs/sktdm_mem/wlawp.txt"), 256, null);
+        } catch (IOException e) {
+            Log.d("KeyguardCarrierView", "getCarrierLockPlusPassword(), IOException!!");
+            e.printStackTrace();
+        }
+        try {
+            if (!TextUtils.isEmpty(strDecryptCarrierLockPlusMsg2)) {
+                String str = strDecryptCarrierLockPlusMsg2.split(":")[0];
+                if (str != null) {
+                    bArr = new byte[str.length()];
+                    for (int i = 0; i < str.length(); i++) {
+                        bArr[i] = (byte) str.charAt(i);
+                    }
+                }
+                lockPatternUtils.saveRemoteLockPassword(1, bArr, this.mSelectedUserInteractor.getSelectedUserId());
+                strDecryptCarrierLockPlusMsg = !new File("/efs/sec_efs/sktdm_mem/enclawlockmsg.txt").exists() ? decryptCarrierLockPlusMsg(FileUtils.readTextFile(new File("/efs/sec_efs/sktdm_mem/enclawlockmsg.txt"), 256, null)) : FileUtils.readTextFile(new File("/efs/sec_efs/sktdm_mem/lawlockmsg.txt"), 256, null);
+                if (!TextUtils.isEmpty(strDecryptCarrierLockPlusMsg)) {
+                    Log.d("KeyguardCarrierView", "updateCarrierLockPlusMessage(), message is null");
+                    return;
+                }
+                String[] strArrSplit = strDecryptCarrierLockPlusMsg.split(":");
+                this.mIsShowingOwnerCallButton = strArrSplit[1].equals("1");
+                setVisibleOwnerCallButton(false);
+                TextView textView = this.mOwnerInfo;
+                if (textView != null) {
+                    textView.setText(strArrSplit[3]);
+                }
+                this.mOwnerMessage = strArrSplit[3];
+                return;
+            }
+            Log.d("KeyguardCarrierView", "getCarrierLockPlusPassword(), password is null");
+            if (!new File("/efs/sec_efs/sktdm_mem/enclawlockmsg.txt").exists()) {
+            }
+            if (!TextUtils.isEmpty(strDecryptCarrierLockPlusMsg)) {
+            }
+        } catch (IOException e2) {
+            Log.e("KeyguardCarrierView", "updateCarrierLockPlusMessage(), IOException");
+            e2.printStackTrace();
+            return;
+        }
+        bArr = null;
+        lockPatternUtils.saveRemoteLockPassword(1, bArr, this.mSelectedUserInteractor.getSelectedUserId());
     }
 
     public final void setVisibleOwnerCallButton(boolean z) {
@@ -451,16 +391,18 @@ public class KeyguardCarrierViewController extends KeyguardInputViewController {
             String str = SystemProperties.get("gsm.sim.state", "");
             KeyguardCarrierViewController$2$$ExternalSyntheticOutline0.m(phoneCount, "isSimStateReadyOrLoaded() : simSlotCount = ", ", simStates = ", str, "KeyguardCarrierView");
             if (str != null) {
-                String[] split = str.split(",");
-                for (int i = 0; i < phoneCount && split.length > i; i++) {
-                    String str2 = split[i];
+                String[] strArrSplit = str.split(",");
+                for (int i = 0; i < phoneCount && strArrSplit.length > i; i++) {
+                    String str2 = strArrSplit[i];
                     z2 = true;
                     if (str2.equalsIgnoreCase("READY") || str2.equalsIgnoreCase("LOADED")) {
                         break;
                     }
                 }
+                z2 = false;
+            } else {
+                z2 = false;
             }
-            z2 = false;
             TelephonyManager telephonyManager = this.mTelephonyManager;
             ServiceState serviceState = telephonyManager != null ? telephonyManager.getServiceState() : null;
             if (serviceState != null) {

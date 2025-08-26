@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class WindowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1 extends SuspendLambda implements Function4 {
     /* synthetic */ boolean Z$0;
@@ -22,13 +21,13 @@ final class WindowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInte
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj3).booleanValue();
         WindowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1 windowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1 = new WindowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1((Continuation) obj4);
-        windowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1.Z$0 = booleanValue;
-        windowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1.Z$1 = booleanValue2;
-        windowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1.Z$2 = booleanValue3;
+        windowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1.Z$0 = zBooleanValue;
+        windowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1.Z$1 = zBooleanValue2;
+        windowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1.Z$2 = zBooleanValue3;
         return windowRootViewVisibilityInteractor$isLockscreenOrShadeVisibleAndInteractive$1.invokeSuspend(Unit.INSTANCE);
     }
 

@@ -32,7 +32,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FragmentActivity extends ComponentActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -42,7 +41,6 @@ public class FragmentActivity extends ComponentActivity {
     public boolean mResumed;
     public boolean mStopped;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HostCallbacks extends FragmentHostCallback implements OnConfigurationChangedProvider, OnTrimMemoryProvider, OnMultiWindowModeChangedProvider, OnPictureInPictureModeChangedProvider, ViewModelStoreOwner, OnBackPressedDispatcherOwner, ActivityResultRegistryOwner, SavedStateRegistryOwner, FragmentOnAttachListener, MenuHost {
         public HostCallbacks() {
             super(FragmentActivity.this);
@@ -169,28 +167,28 @@ public class FragmentActivity extends ComponentActivity {
     }
 
     public static boolean markState(FragmentManager fragmentManager, Lifecycle.State state) {
-        boolean z = false;
+        boolean zMarkState = false;
         for (Fragment fragment : fragmentManager.mFragmentStore.getFragments()) {
             if (fragment != null) {
                 FragmentHostCallback fragmentHostCallback = fragment.mHost;
                 if ((fragmentHostCallback == null ? null : fragmentHostCallback.onGetHost$1()) != null) {
-                    z |= markState(fragment.getChildFragmentManager(), state);
+                    zMarkState |= markState(fragment.getChildFragmentManager(), state);
                 }
                 FragmentViewLifecycleOwner fragmentViewLifecycleOwner = fragment.mViewLifecycleOwner;
                 if (fragmentViewLifecycleOwner != null) {
                     fragmentViewLifecycleOwner.initialize();
                     if (fragmentViewLifecycleOwner.mLifecycleRegistry.state.isAtLeast(Lifecycle.State.STARTED)) {
                         fragment.mViewLifecycleOwner.mLifecycleRegistry.setCurrentState(state);
-                        z = true;
+                        zMarkState = true;
                     }
                 }
                 if (fragment.mLifecycleRegistry.state.isAtLeast(Lifecycle.State.STARTED)) {
                     fragment.mLifecycleRegistry.setCurrentState(state);
-                    z = true;
+                    zMarkState = true;
                 }
             }
         }
-        return z;
+        return zMarkState;
     }
 
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
@@ -262,7 +260,7 @@ public class FragmentActivity extends ComponentActivity {
                 FragmentActivity fragmentActivity;
                 int i = FragmentActivity.$r8$clinit;
                 do {
-                    fragmentActivity = FragmentActivity.this;
+                    fragmentActivity = this.f$0;
                 } while (FragmentActivity.markState(fragmentActivity.getSupportFragmentManager(), Lifecycle.State.CREATED));
                 fragmentActivity.mFragmentLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
                 return new Bundle();
@@ -311,7 +309,7 @@ public class FragmentActivity extends ComponentActivity {
         addOnContextAvailableListener(new OnContextAvailableListener() { // from class: androidx.fragment.app.FragmentActivity$$ExternalSyntheticLambda3
             @Override // androidx.activity.contextaware.OnContextAvailableListener
             public final void onContextAvailable() {
-                FragmentHostCallback fragmentHostCallback = FragmentActivity.this.mFragments.mHost;
+                FragmentHostCallback fragmentHostCallback = this.f$0.mFragments.mHost;
                 fragmentHostCallback.fragmentManager.attachController(fragmentHostCallback, fragmentHostCallback, null);
             }
         });
@@ -348,8 +346,8 @@ public class FragmentActivity extends ComponentActivity {
 
     @Override // android.app.Activity, android.view.LayoutInflater.Factory2
     public final View onCreateView(View view, String str, Context context, AttributeSet attributeSet) {
-        View onCreateView = this.mFragments.mHost.fragmentManager.mLayoutInflaterFactory.onCreateView(view, str, context, attributeSet);
-        return onCreateView == null ? super.onCreateView(view, str, context, attributeSet) : onCreateView;
+        View viewOnCreateView = this.mFragments.mHost.fragmentManager.mLayoutInflaterFactory.onCreateView(view, str, context, attributeSet);
+        return viewOnCreateView == null ? super.onCreateView(view, str, context, attributeSet) : viewOnCreateView;
     }
 
     @Override // android.app.Activity
@@ -457,7 +455,7 @@ public class FragmentActivity extends ComponentActivity {
 
     @Override // android.app.Activity, android.view.LayoutInflater.Factory
     public final View onCreateView(String str, Context context, AttributeSet attributeSet) {
-        View onCreateView = this.mFragments.mHost.fragmentManager.mLayoutInflaterFactory.onCreateView(null, str, context, attributeSet);
-        return onCreateView == null ? super.onCreateView(str, context, attributeSet) : onCreateView;
+        View viewOnCreateView = this.mFragments.mHost.fragmentManager.mLayoutInflaterFactory.onCreateView(null, str, context, attributeSet);
+        return viewOnCreateView == null ? super.onCreateView(str, context, attributeSet) : viewOnCreateView;
     }
 }

@@ -1,6 +1,7 @@
 package android.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.SizeF;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,7 @@ public class RemoteViewsListAdapter extends BaseAdapter {
     }
 
     @Override // android.widget.Adapter
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
         if (i >= getCount()) {
             return null;
         }

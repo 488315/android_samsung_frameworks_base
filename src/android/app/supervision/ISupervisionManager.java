@@ -77,9 +77,9 @@ public interface ISupervisionManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISupervisionManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISupervisionManager)) {
-                return (ISupervisionManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISupervisionManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISupervisionManager)) {
+                return (ISupervisionManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -118,31 +118,31 @@ public interface ISupervisionManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                Intent createConfirmSupervisionCredentialsIntent = createConfirmSupervisionCredentialsIntent();
+                Intent intentCreateConfirmSupervisionCredentialsIntent = createConfirmSupervisionCredentialsIntent();
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(createConfirmSupervisionCredentialsIntent, 1);
+                parcel2.writeTypedObject(intentCreateConfirmSupervisionCredentialsIntent, 1);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean isSupervisionEnabledForUser = isSupervisionEnabledForUser(readInt);
+                boolean zIsSupervisionEnabledForUser = isSupervisionEnabledForUser(i3);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isSupervisionEnabledForUser);
+                parcel2.writeBoolean(zIsSupervisionEnabledForUser);
             } else if (i == 3) {
-                int readInt2 = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
+                int i4 = parcel.readInt();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setSupervisionEnabledForUser(readInt2, readBoolean);
+                setSupervisionEnabledForUser(i4, z);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                String activeSupervisionAppPackage = getActiveSupervisionAppPackage(readInt3);
+                String activeSupervisionAppPackage = getActiveSupervisionAppPackage(i5);
                 parcel2.writeNoException();
                 parcel2.writeString(activeSupervisionAppPackage);
             } else if (i == 5) {
-                boolean shouldAllowBypassingSupervisionRoleQualification = shouldAllowBypassingSupervisionRoleQualification();
+                boolean zShouldAllowBypassingSupervisionRoleQualification = shouldAllowBypassingSupervisionRoleQualification();
                 parcel2.writeNoException();
-                parcel2.writeBoolean(shouldAllowBypassingSupervisionRoleQualification);
+                parcel2.writeBoolean(zShouldAllowBypassingSupervisionRoleQualification);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -167,79 +167,79 @@ public interface ISupervisionManager extends IInterface {
 
             @Override // android.app.supervision.ISupervisionManager
             public Intent createConfirmSupervisionCredentialsIntent() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISupervisionManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Intent) obtain2.readTypedObject(Intent.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISupervisionManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Intent) parcelObtain2.readTypedObject(Intent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.supervision.ISupervisionManager
             public boolean isSupervisionEnabledForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISupervisionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISupervisionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.supervision.ISupervisionManager
             public void setSupervisionEnabledForUser(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISupervisionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISupervisionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.supervision.ISupervisionManager
             public String getActiveSupervisionAppPackage(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISupervisionManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISupervisionManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.supervision.ISupervisionManager
             public boolean shouldAllowBypassingSupervisionRoleQualification() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISupervisionManager.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISupervisionManager.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class StorageConnectionKt$readData$2 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -39,7 +38,7 @@ final class StorageConnectionKt$readData$2 extends SuspendLambda implements Func
         ResultKt.throwOnFailure(obj);
         ReadScope readScope = (ReadScope) this.L$0;
         this.label = 1;
-        Object readData = readScope.readData(this);
-        return readData == coroutineSingletons ? coroutineSingletons : readData;
+        Object data = readScope.readData(this);
+        return data == coroutineSingletons ? coroutineSingletons : data;
     }
 }

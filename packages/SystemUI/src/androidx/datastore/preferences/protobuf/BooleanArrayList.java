@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BooleanArrayList extends AbstractProtobufList implements RandomAccess, PrimitiveNonBoxingCollection {
     public boolean[] array;
@@ -25,12 +24,12 @@ public final class BooleanArrayList extends AbstractProtobufList implements Rand
     @Override // androidx.datastore.preferences.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
     public final void add(int i, Object obj) {
         int i2;
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         ensureIsMutable();
         if (i < 0 || i > (i2 = this.size)) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
-            m.append(this.size);
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
+            sbM.append(this.size);
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
         boolean[] zArr = this.array;
         if (i2 < zArr.length) {
@@ -41,7 +40,7 @@ public final class BooleanArrayList extends AbstractProtobufList implements Rand
             System.arraycopy(this.array, i, zArr2, i + 1, this.size - i);
             this.array = zArr2;
         }
-        this.array[i] = booleanValue;
+        this.array[i] = zBooleanValue;
         this.size++;
         ((AbstractList) this).modCount++;
     }
@@ -96,9 +95,9 @@ public final class BooleanArrayList extends AbstractProtobufList implements Rand
 
     public final void ensureIndexInRange(int i) {
         if (i < 0 || i >= this.size) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
-            m.append(this.size);
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
+            sbM.append(this.size);
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
     }
 
@@ -146,10 +145,10 @@ public final class BooleanArrayList extends AbstractProtobufList implements Rand
         if (!(obj instanceof Boolean)) {
             return -1;
         }
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         int i = this.size;
         for (int i2 = 0; i2 < i; i2++) {
-            if (this.array[i2] == booleanValue) {
+            if (this.array[i2] == zBooleanValue) {
                 return i2;
             }
         }
@@ -192,12 +191,12 @@ public final class BooleanArrayList extends AbstractProtobufList implements Rand
 
     @Override // androidx.datastore.preferences.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
     public final Object set(int i, Object obj) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         ensureIsMutable();
         ensureIndexInRange(i);
         boolean[] zArr = this.array;
         boolean z = zArr[i];
-        zArr[i] = booleanValue;
+        zArr[i] = zBooleanValue;
         return Boolean.valueOf(z);
     }
 

@@ -44,9 +44,9 @@ public interface IObbActionListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IObbActionListener)) {
-                return (IObbActionListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IObbActionListener)) {
+                return (IObbActionListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,11 +73,11 @@ public interface IObbActionListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onObbResult(readString, readInt, readInt2);
+                onObbResult(string, i3, i4);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,15 +101,15 @@ public interface IObbActionListener extends IInterface {
 
             @Override // android.os.storage.IObbActionListener
             public void onObbResult(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

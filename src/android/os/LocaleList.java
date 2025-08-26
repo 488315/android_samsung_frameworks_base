@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Locale;
 
 /* loaded from: classes3.dex */
@@ -103,15 +104,15 @@ public final class LocaleList implements Parcelable {
     }
 
     public int hashCode() {
-        int i = 1;
-        int i2 = 0;
+        int iHashCode = 1;
+        int i = 0;
         while (true) {
             Locale[] localeArr = this.mList;
-            if (i2 >= localeArr.length) {
-                return i;
+            if (i >= localeArr.length) {
+                return iHashCode;
             }
-            i = (i * 31) + localeArr[i2].hashCode();
-            i2++;
+            iHashCode = (iHashCode * 31) + localeArr[i].hashCode();
+            i++;
         }
     }
 
@@ -246,11 +247,11 @@ public final class LocaleList implements Parcelable {
         if (str == null || str.equals("")) {
             return getEmptyLocaleList();
         }
-        String[] split = str.split(",");
-        int length = split.length;
+        String[] strArrSplit = str.split(",");
+        int length = strArrSplit.length;
         Locale[] localeArr = new Locale[length];
         for (int i = 0; i < length; i++) {
-            localeArr[i] = Locale.forLanguageTag(split[i]);
+            localeArr[i] = Locale.forLanguageTag(strArrSplit[i]);
         }
         return new LocaleList(localeArr);
     }
@@ -301,70 +302,51 @@ public final class LocaleList implements Parcelable {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x001b, code lost:
-    
-        if (r6 < Integer.MAX_VALUE) goto L17;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x001e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int computeFirstMatchIndex(java.util.Collection<java.lang.String> r5, boolean r6) {
-        /*
-            r4 = this;
-            java.util.Locale[] r0 = r4.mList
-            int r1 = r0.length
-            r2 = 1
-            r3 = 0
-            if (r1 != r2) goto L8
-            return r3
-        L8:
-            int r0 = r0.length
-            if (r0 != 0) goto Ld
-            r4 = -1
-            return r4
-        Ld:
-            r0 = 2147483647(0x7fffffff, float:NaN)
-            if (r6 == 0) goto L1e
-            java.util.Locale r6 = android.os.LocaleList.EN_LATN
-            int r6 = r4.findFirstMatchIndex(r6)
-            if (r6 != 0) goto L1b
-            return r3
-        L1b:
-            if (r6 >= r0) goto L1e
-            goto L1f
-        L1e:
-            r6 = r0
-        L1f:
-            java.util.Iterator r5 = r5.iterator()
-        L23:
-            boolean r1 = r5.hasNext()
-            if (r1 == 0) goto L3e
-            java.lang.Object r1 = r5.next()
-            java.lang.String r1 = (java.lang.String) r1
-            java.util.Locale r1 = java.util.Locale.forLanguageTag(r1)
-            int r1 = r4.findFirstMatchIndex(r1)
-            if (r1 != 0) goto L3a
-            return r3
-        L3a:
-            if (r1 >= r6) goto L23
-            r6 = r1
-            goto L23
-        L3e:
-            if (r6 != r0) goto L41
-            return r3
-        L41:
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.LocaleList.computeFirstMatchIndex(java.util.Collection, boolean):int");
+    private int computeFirstMatchIndex(Collection<String> collection, boolean z) {
+        int iFindFirstMatchIndex;
+        Locale[] localeArr = this.mList;
+        if (localeArr.length == 1) {
+            return 0;
+        }
+        if (localeArr.length == 0) {
+            return -1;
+        }
+        if (z) {
+            iFindFirstMatchIndex = findFirstMatchIndex(EN_LATN);
+            if (iFindFirstMatchIndex == 0) {
+                return 0;
+            }
+            if (iFindFirstMatchIndex >= Integer.MAX_VALUE) {
+            }
+        } else {
+            iFindFirstMatchIndex = Integer.MAX_VALUE;
+        }
+        Iterator<String> it = collection.iterator();
+        while (it.hasNext()) {
+            int iFindFirstMatchIndex2 = findFirstMatchIndex(Locale.forLanguageTag(it.next()));
+            if (iFindFirstMatchIndex2 == 0) {
+                return 0;
+            }
+            if (iFindFirstMatchIndex2 < iFindFirstMatchIndex) {
+                iFindFirstMatchIndex = iFindFirstMatchIndex2;
+            }
+        }
+        if (iFindFirstMatchIndex == Integer.MAX_VALUE) {
+            return 0;
+        }
+        return iFindFirstMatchIndex;
     }
 
     private Locale computeFirstMatch(Collection<String> collection, boolean z) {
-        int computeFirstMatchIndex = computeFirstMatchIndex(collection, z);
-        if (computeFirstMatchIndex == -1) {
+        int iComputeFirstMatchIndex = computeFirstMatchIndex(collection, z);
+        if (iComputeFirstMatchIndex == -1) {
             return null;
         }
-        return this.mList[computeFirstMatchIndex];
+        return this.mList[iComputeFirstMatchIndex];
     }
 
     public Locale getFirstMatch(String[] strArr) {

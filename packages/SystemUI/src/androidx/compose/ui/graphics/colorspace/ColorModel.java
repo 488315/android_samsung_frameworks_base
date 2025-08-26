@@ -3,7 +3,6 @@ package androidx.compose.ui.graphics.colorspace;
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ColorModel {
     public static final long Cmyk;
@@ -13,7 +12,6 @@ public final class ColorModel {
     public static final long Xyz;
     public final long packedValue;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,13 +31,13 @@ public final class ColorModel {
     }
 
     /* renamed from: equals-impl0, reason: not valid java name */
-    public static final boolean m508equalsimpl0(long j, long j2) {
+    public static final boolean m510equalsimpl0(long j, long j2) {
         return j == j2;
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m509toStringimpl(long j) {
-        return m508equalsimpl0(j, Rgb) ? "Rgb" : m508equalsimpl0(j, Xyz) ? "Xyz" : m508equalsimpl0(j, Lab) ? "Lab" : m508equalsimpl0(j, Cmyk) ? "Cmyk" : C2paManifestList.UNKNOWN_VALUE;
+    public static String m511toStringimpl(long j) {
+        return m510equalsimpl0(j, Rgb) ? "Rgb" : m510equalsimpl0(j, Xyz) ? "Xyz" : m510equalsimpl0(j, Lab) ? "Lab" : m510equalsimpl0(j, Cmyk) ? "Cmyk" : C2paManifestList.UNKNOWN_VALUE;
     }
 
     public final boolean equals(Object obj) {
@@ -54,6 +52,6 @@ public final class ColorModel {
     }
 
     public final String toString() {
-        return m509toStringimpl(this.packedValue);
+        return m511toStringimpl(this.packedValue);
     }
 }

@@ -190,7 +190,7 @@ public abstract class AppPredictionService extends Service {
             arrayList.add(new CallbackWrapper(iPredictionCallback, new Consumer() { // from class: android.service.appprediction.AppPredictionService$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    AppPredictionService.this.lambda$doRegisterPredictionUpdates$1(arrayList, (AppPredictionService.CallbackWrapper) obj);
+                    this.f$0.lambda$doRegisterPredictionUpdates$1(arrayList, (AppPredictionService.CallbackWrapper) obj);
                 }
             }));
             if (arrayList.size() == 1) {
@@ -204,7 +204,7 @@ public abstract class AppPredictionService extends Service {
         this.mHandler.post(new Runnable() { // from class: android.service.appprediction.AppPredictionService$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                AppPredictionService.this.lambda$doRegisterPredictionUpdates$0(arrayList, callbackWrapper);
+                this.f$0.lambda$doRegisterPredictionUpdates$0(arrayList, callbackWrapper);
             }
         });
     }
@@ -243,9 +243,9 @@ public abstract class AppPredictionService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void doDestroyPredictionSession(AppPredictionSessionId appPredictionSessionId) {
-        ArrayList<CallbackWrapper> remove = this.mSessionCallbacks.remove(appPredictionSessionId);
-        if (remove != null) {
-            remove.forEach(new Consumer() { // from class: android.service.appprediction.AppPredictionService$$ExternalSyntheticLambda2
+        ArrayList<CallbackWrapper> arrayListRemove = this.mSessionCallbacks.remove(appPredictionSessionId);
+        if (arrayListRemove != null) {
+            arrayListRemove.forEach(new Consumer() { // from class: android.service.appprediction.AppPredictionService$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     ((AppPredictionService.CallbackWrapper) obj).destroy();

@@ -15,6 +15,7 @@ import android.view.autofill.Helper;
 import android.widget.RemoteViews;
 import com.android.internal.protolog.PerfettoProtoLogImpl;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -32,18 +33,18 @@ public final class Dataset implements Parcelable {
             RemoteViews remoteViews2 = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
             InlinePresentation inlinePresentation = (InlinePresentation) parcel.readParcelable(null, InlinePresentation.class);
             InlinePresentation inlinePresentation2 = (InlinePresentation) parcel.readParcelable(null, InlinePresentation.class);
-            ArrayList createTypedArrayList = parcel.createTypedArrayList(AutofillId.CREATOR);
-            ArrayList createTypedArrayList2 = parcel.createTypedArrayList(AutofillValue.CREATOR);
-            ArrayList createTypedArrayList3 = parcel.createTypedArrayList(RemoteViews.CREATOR);
-            ArrayList createTypedArrayList4 = parcel.createTypedArrayList(RemoteViews.CREATOR);
-            ArrayList createTypedArrayList5 = parcel.createTypedArrayList(InlinePresentation.CREATOR);
-            ArrayList createTypedArrayList6 = parcel.createTypedArrayList(InlinePresentation.CREATOR);
-            ArrayList createTypedArrayList7 = parcel.createTypedArrayList(DatasetFieldFilter.CREATOR);
-            ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+            ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AutofillId.CREATOR);
+            ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(AutofillValue.CREATOR);
+            ArrayList arrayListCreateTypedArrayList3 = parcel.createTypedArrayList(RemoteViews.CREATOR);
+            ArrayList arrayListCreateTypedArrayList4 = parcel.createTypedArrayList(RemoteViews.CREATOR);
+            ArrayList arrayListCreateTypedArrayList5 = parcel.createTypedArrayList(InlinePresentation.CREATOR);
+            ArrayList arrayListCreateTypedArrayList6 = parcel.createTypedArrayList(InlinePresentation.CREATOR);
+            ArrayList arrayListCreateTypedArrayList7 = parcel.createTypedArrayList(DatasetFieldFilter.CREATOR);
+            ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
             ClipData clipData = (ClipData) parcel.readParcelable(null, ClipData.class);
             IntentSender intentSender = (IntentSender) parcel.readParcelable(null, IntentSender.class);
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
+            String string = parcel.readString();
+            int i = parcel.readInt();
             Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
             if (remoteViews != null || inlinePresentation != null || remoteViews2 != null) {
                 Presentations.Builder builder2 = new Presentations.Builder();
@@ -63,21 +64,21 @@ public final class Dataset implements Parcelable {
             } else {
                 builder = new Builder();
             }
-            int i = 0;
+            int i2 = 0;
             if (clipData != null) {
-                builder.setContent((AutofillId) createTypedArrayList.get(0), clipData);
+                builder.setContent((AutofillId) arrayListCreateTypedArrayList.get(0), clipData);
             }
-            int size = createTypedArrayList5.size();
-            while (i < createTypedArrayList.size()) {
-                builder.createFromParcel((AutofillId) createTypedArrayList.get(i), createStringArrayList.get(i), (AutofillValue) createTypedArrayList2.get(i), (RemoteViews) createTypedArrayList3.get(i), i < size ? (InlinePresentation) createTypedArrayList5.get(i) : null, i < size ? (InlinePresentation) createTypedArrayList6.get(i) : null, (DatasetFieldFilter) createTypedArrayList7.get(i), (RemoteViews) createTypedArrayList4.get(i));
-                i++;
+            int size = arrayListCreateTypedArrayList5.size();
+            while (i2 < arrayListCreateTypedArrayList.size()) {
+                builder.createFromParcel((AutofillId) arrayListCreateTypedArrayList.get(i2), arrayListCreateStringArrayList.get(i2), (AutofillValue) arrayListCreateTypedArrayList2.get(i2), (RemoteViews) arrayListCreateTypedArrayList3.get(i2), i2 < size ? (InlinePresentation) arrayListCreateTypedArrayList5.get(i2) : null, i2 < size ? (InlinePresentation) arrayListCreateTypedArrayList6.get(i2) : null, (DatasetFieldFilter) arrayListCreateTypedArrayList7.get(i2), (RemoteViews) arrayListCreateTypedArrayList4.get(i2));
+                i2++;
             }
             builder.setAuthentication(intentSender);
             builder.setCredentialFillInIntent(intent);
-            builder.setId(readString);
-            Dataset build = builder.build();
-            build.mEligibleReason = readInt;
-            return build;
+            builder.setId(string);
+            Dataset datasetBuild = builder.build();
+            datasetBuild.mEligibleReason = i;
+            return datasetBuild;
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -482,9 +483,9 @@ public final class Dataset implements Parcelable {
             int lifeTheUniverseAndEverything;
             throwIfDestroyed();
             if (this.mFieldToIndexdMap.containsKey(field)) {
-                int intValue = this.mFieldToIndexdMap.get(field).intValue();
-                if (this.mFieldIds.get(intValue) == null) {
-                    this.mFieldIds.set(intValue, autofillId);
+                int iIntValue = this.mFieldToIndexdMap.get(field).intValue();
+                if (this.mFieldIds.get(iIntValue) == null) {
+                    this.mFieldIds.set(iIntValue, autofillId);
                     return this;
                 }
             }
@@ -510,9 +511,9 @@ public final class Dataset implements Parcelable {
             int lifeTheUniverseAndEverything;
             throwIfDestroyed();
             if (this.mFieldToIndexdMap.containsKey(field)) {
-                int intValue = this.mFieldToIndexdMap.get(field).intValue();
-                if (this.mAutofillDatatypes.get(intValue) == null) {
-                    this.mAutofillDatatypes.set(intValue, str);
+                int iIntValue = this.mFieldToIndexdMap.get(field).intValue();
+                if (this.mAutofillDatatypes.get(iIntValue) == null) {
+                    this.mAutofillDatatypes.set(iIntValue, str);
                     return this;
                 }
             }
@@ -544,16 +545,16 @@ public final class Dataset implements Parcelable {
 
         private int setLifeTheUniverseAndEverything(String str, AutofillValue autofillValue, RemoteViews remoteViews, InlinePresentation inlinePresentation, InlinePresentation inlinePresentation2, DatasetFieldFilter datasetFieldFilter, RemoteViews remoteViews2) {
             Objects.requireNonNull(str, "datatype cannot be null");
-            int indexOf = this.mAutofillDatatypes.indexOf(str);
-            if (indexOf >= 0) {
+            int iIndexOf = this.mAutofillDatatypes.indexOf(str);
+            if (iIndexOf >= 0) {
                 this.mAutofillDatatypes.add(str);
-                this.mFieldValues.set(indexOf, autofillValue);
-                this.mFieldPresentations.set(indexOf, remoteViews);
-                this.mFieldDialogPresentations.set(indexOf, remoteViews2);
-                this.mFieldInlinePresentations.set(indexOf, inlinePresentation);
-                this.mFieldInlineTooltipPresentations.set(indexOf, inlinePresentation2);
-                this.mFieldFilters.set(indexOf, datasetFieldFilter);
-                return indexOf;
+                this.mFieldValues.set(iIndexOf, autofillValue);
+                this.mFieldPresentations.set(iIndexOf, remoteViews);
+                this.mFieldDialogPresentations.set(iIndexOf, remoteViews2);
+                this.mFieldInlinePresentations.set(iIndexOf, inlinePresentation);
+                this.mFieldInlineTooltipPresentations.set(iIndexOf, inlinePresentation2);
+                this.mFieldFilters.set(iIndexOf, datasetFieldFilter);
+                return iIndexOf;
             }
             this.mFieldIds.add(null);
             this.mAutofillDatatypes.add(str);
@@ -568,15 +569,15 @@ public final class Dataset implements Parcelable {
 
         private int setLifeTheUniverseAndEverything(AutofillId autofillId, AutofillValue autofillValue, RemoteViews remoteViews, InlinePresentation inlinePresentation, InlinePresentation inlinePresentation2, DatasetFieldFilter datasetFieldFilter, RemoteViews remoteViews2) {
             Objects.requireNonNull(autofillId, "id cannot be null");
-            int indexOf = this.mFieldIds.indexOf(autofillId);
-            if (indexOf >= 0) {
-                this.mFieldValues.set(indexOf, autofillValue);
-                this.mFieldPresentations.set(indexOf, remoteViews);
-                this.mFieldDialogPresentations.set(indexOf, remoteViews2);
-                this.mFieldInlinePresentations.set(indexOf, inlinePresentation);
-                this.mFieldInlineTooltipPresentations.set(indexOf, inlinePresentation2);
-                this.mFieldFilters.set(indexOf, datasetFieldFilter);
-                return indexOf;
+            int iIndexOf = this.mFieldIds.indexOf(autofillId);
+            if (iIndexOf >= 0) {
+                this.mFieldValues.set(iIndexOf, autofillValue);
+                this.mFieldPresentations.set(iIndexOf, remoteViews);
+                this.mFieldDialogPresentations.set(iIndexOf, remoteViews2);
+                this.mFieldInlinePresentations.set(iIndexOf, inlinePresentation);
+                this.mFieldInlineTooltipPresentations.set(iIndexOf, inlinePresentation2);
+                this.mFieldFilters.set(iIndexOf, datasetFieldFilter);
+                return iIndexOf;
             }
             this.mFieldIds.add(autofillId);
             this.mAutofillDatatypes.add(null);
@@ -591,14 +592,14 @@ public final class Dataset implements Parcelable {
 
         /* JADX INFO: Access modifiers changed from: private */
         public void createFromParcel(AutofillId autofillId, String str, AutofillValue autofillValue, RemoteViews remoteViews, InlinePresentation inlinePresentation, InlinePresentation inlinePresentation2, DatasetFieldFilter datasetFieldFilter, RemoteViews remoteViews2) {
-            int indexOf;
-            if (autofillId != null && (indexOf = this.mFieldIds.indexOf(autofillId)) >= 0) {
-                this.mFieldValues.set(indexOf, autofillValue);
-                this.mFieldPresentations.set(indexOf, remoteViews);
-                this.mFieldDialogPresentations.set(indexOf, remoteViews2);
-                this.mFieldInlinePresentations.set(indexOf, inlinePresentation);
-                this.mFieldInlineTooltipPresentations.set(indexOf, inlinePresentation2);
-                this.mFieldFilters.set(indexOf, datasetFieldFilter);
+            int iIndexOf;
+            if (autofillId != null && (iIndexOf = this.mFieldIds.indexOf(autofillId)) >= 0) {
+                this.mFieldValues.set(iIndexOf, autofillValue);
+                this.mFieldPresentations.set(iIndexOf, remoteViews);
+                this.mFieldDialogPresentations.set(iIndexOf, remoteViews2);
+                this.mFieldInlinePresentations.set(iIndexOf, inlinePresentation);
+                this.mFieldInlineTooltipPresentations.set(iIndexOf, inlinePresentation2);
+                this.mFieldFilters.set(iIndexOf, datasetFieldFilter);
                 return;
             }
             this.mFieldIds.add(autofillId);
@@ -700,7 +701,7 @@ public final class Dataset implements Parcelable {
         }
 
         @Override // android.os.Parcelable
-        public void writeToParcel(Parcel parcel, int i) {
+        public void writeToParcel(Parcel parcel, int i) throws IOException {
             parcel.writeSerializable(this.pattern);
         }
     }

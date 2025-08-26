@@ -140,8 +140,8 @@ public final class BlobHandle implements Parcelable {
     }
 
     public static String safeDigest(byte[] bArr) {
-        String encodeDigest = encodeDigest(bArr);
-        return encodeDigest.substring(0, 2) + ".." + encodeDigest.substring(encodeDigest.length() - 2);
+        String strEncodeDigest = encodeDigest(bArr);
+        return strEncodeDigest.substring(0, 2) + ".." + strEncodeDigest.substring(strEncodeDigest.length() - 2);
     }
 
     private static String encodeDigest(byte[] bArr) {
@@ -153,7 +153,7 @@ public final class BlobHandle implements Parcelable {
         return j != 0 && j < System.currentTimeMillis();
     }
 
-    public void writeToXml(XmlSerializer xmlSerializer) throws IOException {
+    public void writeToXml(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         XmlUtils.writeStringAttribute(xmlSerializer, XmlTags.ATTR_ALGO, this.algorithm);
         XmlUtils.writeByteArrayAttribute(xmlSerializer, XmlTags.ATTR_DIGEST, this.digest);
         XmlUtils.writeStringAttribute(xmlSerializer, XmlTags.ATTR_LABEL, this.label);

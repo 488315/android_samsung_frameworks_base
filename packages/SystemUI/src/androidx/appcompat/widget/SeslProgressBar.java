@@ -54,7 +54,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @RemoteViews.RemoteView
 /* loaded from: classes.dex */
 public class SeslProgressBar extends View {
@@ -110,7 +109,6 @@ public class SeslProgressBar extends View {
     public final boolean mUseHorizontalProgress;
     public float mVisualProgress;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AccessibilityEventSender implements Runnable {
         private AccessibilityEventSender() {
         }
@@ -121,7 +119,6 @@ public class SeslProgressBar extends View {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CirCleProgressDrawable extends Drawable {
         public final AnonymousClass1 VISUAL_CIRCLE_PROGRESS;
         public int mAlpha;
@@ -133,7 +130,6 @@ public class SeslProgressBar extends View {
         public int mProgress;
         public final ProgressState mState;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class ProgressState extends Drawable.ConstantState {
             private ProgressState() {
             }
@@ -235,14 +231,14 @@ public class SeslProgressBar extends View {
 
         @Override // android.graphics.drawable.Drawable
         public final boolean onStateChange(int[] iArr) {
-            boolean onStateChange = super.onStateChange(iArr);
+            boolean zOnStateChange = super.onStateChange(iArr);
             int colorForState = this.mColorStateList.getColorForState(iArr, this.mColor);
             if (this.mColor != colorForState) {
                 this.mColor = colorForState;
                 this.mPaint.setColor(colorForState);
                 invalidateSelf();
             }
-            return onStateChange;
+            return zOnStateChange;
         }
 
         @Override // android.graphics.drawable.Drawable
@@ -270,7 +266,6 @@ public class SeslProgressBar extends View {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CircleAnimationCallback extends Animatable2.AnimationCallback {
         public final Handler mHandler = new Handler(Looper.getMainLooper());
         public final WeakReference mProgressBar;
@@ -294,7 +289,6 @@ public class SeslProgressBar extends View {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ProgressTintInfo {
         public boolean mHasIndeterminateTint;
         public boolean mHasIndeterminateTintMode;
@@ -317,7 +311,6 @@ public class SeslProgressBar extends View {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RefreshData {
         public static final Pools$SynchronizedPool sPool = new Pools$SynchronizedPool(24);
         public boolean animate;
@@ -341,7 +334,6 @@ public class SeslProgressBar extends View {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RefreshProgressRunnable implements Runnable {
         private RefreshProgressRunnable() {
         }
@@ -365,7 +357,6 @@ public class SeslProgressBar extends View {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends View.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: androidx.appcompat.widget.SeslProgressBar.SavedState.1
             @Override // android.os.Parcelable.Creator
@@ -427,10 +418,10 @@ public class SeslProgressBar extends View {
             return;
         }
         if (progressTintInfo.mHasIndeterminateTint || progressTintInfo.mHasIndeterminateTintMode) {
-            Drawable mutate = drawable.mutate();
-            this.mIndeterminateDrawable = mutate;
+            Drawable drawableMutate = drawable.mutate();
+            this.mIndeterminateDrawable = drawableMutate;
             if (progressTintInfo.mHasIndeterminateTint) {
-                mutate.setTintList(progressTintInfo.mIndeterminateTintList);
+                drawableMutate.setTintList(progressTintInfo.mIndeterminateTintList);
             }
             if (progressTintInfo.mHasIndeterminateTintMode) {
                 this.mIndeterminateDrawable.setTintMode(progressTintInfo.mIndeterminateTintMode);
@@ -512,13 +503,13 @@ public class SeslProgressBar extends View {
             if (drawable != null) {
                 int i6 = (int) (10000.0f * f);
                 if (drawable instanceof LayerDrawable) {
-                    Drawable findDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(i);
-                    if (findDrawableByLayerId != null && canResolveLayoutDirection()) {
+                    Drawable drawableFindDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(i);
+                    if (drawableFindDrawableByLayerId != null && canResolveLayoutDirection()) {
                         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                        findDrawableByLayerId.setLayoutDirection(getLayoutDirection());
+                        drawableFindDrawableByLayerId.setLayoutDirection(getLayoutDirection());
                     }
-                    if (findDrawableByLayerId != null) {
-                        drawable = findDrawableByLayerId;
+                    if (drawableFindDrawableByLayerId != null) {
+                        drawable = drawableFindDrawableByLayerId;
                     }
                     drawable.setLevel(i6);
                 } else if (drawable instanceof StateListDrawable) {
@@ -529,11 +520,11 @@ public class SeslProgressBar extends View {
                 invalidate();
             }
             if (z4 && z3) {
-                ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, this.VISUAL_PROGRESS, f2, f);
-                ofFloat.setAutoCancel(true);
-                ofFloat.setDuration(80L);
-                ofFloat.setInterpolator(PROGRESS_ANIM_INTERPOLATOR);
-                ofFloat.start();
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, this.VISUAL_PROGRESS, f2, f);
+                objectAnimatorOfFloat.setAutoCancel(true);
+                objectAnimatorOfFloat.setDuration(80L);
+                objectAnimatorOfFloat.setInterpolator(PROGRESS_ANIM_INTERPOLATOR);
+                objectAnimatorOfFloat.start();
             } else {
                 setVisualProgress(f, i);
             }
@@ -549,7 +540,7 @@ public class SeslProgressBar extends View {
     public void drawTrack(Canvas canvas) {
         Drawable drawable = this.mCurrentDrawable;
         if (drawable != 0) {
-            int save = canvas.save();
+            int iSave = canvas.save();
             if (this.mCurrentMode != 3 && this.mMirrorForRtl && getLayoutDirection() == 1) {
                 canvas.translate(getWidth() - SeslViewReflector.getField_mPaddingRight(this), getPaddingTop());
                 canvas.scale(-1.0f, 1.0f);
@@ -572,7 +563,7 @@ public class SeslProgressBar extends View {
                 }
             }
             drawable.draw(canvas);
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
             if (this.mShouldStartAnimationDrawable && (drawable instanceof Animatable)) {
                 ((Animatable) drawable).start();
                 this.mShouldStartAnimationDrawable = false;
@@ -630,12 +621,12 @@ public class SeslProgressBar extends View {
         Drawable drawable = this.mProgressDrawable;
         if (drawable != null) {
             this.mProgressDrawable = drawable.mutate();
-            r1 = drawable instanceof LayerDrawable ? ((LayerDrawable) drawable).findDrawableByLayerId(i) : null;
-            if (z && r1 == null) {
+            drawableFindDrawableByLayerId = drawable instanceof LayerDrawable ? ((LayerDrawable) drawable).findDrawableByLayerId(i) : null;
+            if (z && drawableFindDrawableByLayerId == null) {
                 return drawable;
             }
         }
-        return r1;
+        return drawableFindDrawableByLayerId;
     }
 
     public final void initCirCleStrokeWidth(int i) {
@@ -688,7 +679,7 @@ public class SeslProgressBar extends View {
     }
 
     @Override // android.view.View
-    public final void onAttachedToWindow() {
+    public final void onAttachedToWindow() throws Throwable {
         super.onAttachedToWindow();
         if (this.mIndeterminate) {
             startAnimation$1();
@@ -711,12 +702,12 @@ public class SeslProgressBar extends View {
                     seslProgressBar2.mAttached = true;
                 } catch (Throwable th) {
                     th = th;
-                    SeslProgressBar seslProgressBar3 = this;
                     Throwable th2 = th;
                     throw th2;
                 }
             } catch (Throwable th3) {
                 th = th3;
+                SeslProgressBar seslProgressBar3 = this;
                 Throwable th22 = th;
                 throw th22;
             }
@@ -782,10 +773,9 @@ public class SeslProgressBar extends View {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    accessibilityNodeInfo.setStateDescription(string);
-                    return;
+                } else {
+                    string = "";
                 }
-                string = "";
                 accessibilityNodeInfo.setStateDescription(string);
                 return;
             }
@@ -801,29 +791,29 @@ public class SeslProgressBar extends View {
 
     @Override // android.view.View
     public synchronized void onMeasure(int i, int i2) {
-        int i3;
-        int i4;
+        int iMax;
+        int iMax2;
         try {
             Drawable drawable = this.mCurrentDrawable;
             if (drawable != null) {
-                i4 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, drawable.getIntrinsicWidth()));
-                i3 = Math.max(this.mMinHeight, Math.min(this.mMaxHeight, drawable.getIntrinsicHeight()));
+                iMax2 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, drawable.getIntrinsicWidth()));
+                iMax = Math.max(this.mMinHeight, Math.min(this.mMaxHeight, drawable.getIntrinsicHeight()));
             } else {
-                i3 = 0;
-                i4 = 0;
+                iMax = 0;
+                iMax2 = 0;
             }
             updateDrawableState();
-            int field_mPaddingLeft = SeslViewReflector.getField_mPaddingLeft(this) + SeslViewReflector.getField_mPaddingRight(this) + i4;
-            int paddingTop = getPaddingTop() + getPaddingBottom() + i3;
-            int resolveSizeAndState = View.resolveSizeAndState(field_mPaddingLeft, i, 0);
-            int resolveSizeAndState2 = View.resolveSizeAndState(paddingTop, i2, 0);
+            int field_mPaddingLeft = SeslViewReflector.getField_mPaddingLeft(this) + SeslViewReflector.getField_mPaddingRight(this) + iMax2;
+            int paddingTop = getPaddingTop() + getPaddingBottom() + iMax;
+            int iResolveSizeAndState = View.resolveSizeAndState(field_mPaddingLeft, i, 0);
+            int iResolveSizeAndState2 = View.resolveSizeAndState(paddingTop, i2, 0);
             if (!this.mUseCustomWidthForCircleMode) {
-                initCirCleStrokeWidth((resolveSizeAndState - SeslViewReflector.getField_mPaddingLeft(this)) - SeslViewReflector.getField_mPaddingRight(this));
+                initCirCleStrokeWidth((iResolveSizeAndState - SeslViewReflector.getField_mPaddingLeft(this)) - SeslViewReflector.getField_mPaddingRight(this));
             }
             if (this.mUseHorizontalProgress && this.mIndeterminate) {
-                seslSetIndeterminateProgressDrawable((resolveSizeAndState - SeslViewReflector.getField_mPaddingLeft(this)) - SeslViewReflector.getField_mPaddingRight(this));
+                seslSetIndeterminateProgressDrawable((iResolveSizeAndState - SeslViewReflector.getField_mPaddingLeft(this)) - SeslViewReflector.getField_mPaddingRight(this));
             }
-            setMeasuredDimension(resolveSizeAndState, resolveSizeAndState2);
+            setMeasuredDimension(iResolveSizeAndState, iResolveSizeAndState2);
         } catch (Throwable th) {
             throw th;
         }
@@ -911,31 +901,31 @@ public class SeslProgressBar extends View {
         super.postInvalidate();
     }
 
-    public final synchronized void refreshProgress(int i, int i2, boolean z, boolean z2) {
+    public final synchronized void refreshProgress(int i, int i2, boolean z, boolean z2) throws Throwable {
         SeslProgressBar seslProgressBar;
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            if (this.mUiThreadId == Thread.currentThread().getId()) {
-                seslProgressBar = this;
-                seslProgressBar.doRefreshProgress(i, i2, z, true, z2);
-            } else {
-                seslProgressBar = this;
-                if (seslProgressBar.mRefreshProgressRunnable == null) {
-                    seslProgressBar.mRefreshProgressRunnable = new RefreshProgressRunnable();
+            try {
+                if (this.mUiThreadId == Thread.currentThread().getId()) {
+                    seslProgressBar = this;
+                    seslProgressBar.doRefreshProgress(i, i2, z, true, z2);
+                } else {
+                    seslProgressBar = this;
+                    if (seslProgressBar.mRefreshProgressRunnable == null) {
+                        seslProgressBar.mRefreshProgressRunnable = new RefreshProgressRunnable();
+                    }
+                    seslProgressBar.mRefreshData.add(RefreshData.obtain(i, i2, z, z2));
+                    if (seslProgressBar.mAttached && !seslProgressBar.mRefreshIsPosted) {
+                        seslProgressBar.post(seslProgressBar.mRefreshProgressRunnable);
+                        seslProgressBar.mRefreshIsPosted = true;
+                    }
                 }
-                seslProgressBar.mRefreshData.add(RefreshData.obtain(i, i2, z, z2));
-                if (seslProgressBar.mAttached && !seslProgressBar.mRefreshIsPosted) {
-                    seslProgressBar.post(seslProgressBar.mRefreshProgressRunnable);
-                    seslProgressBar.mRefreshIsPosted = true;
-                }
+                return;
+            } catch (Throwable th) {
+                th = th;
+                throw th;
             }
-            return;
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
         throw th;
     }
@@ -960,18 +950,16 @@ public class SeslProgressBar extends View {
 
     public final synchronized void setIndeterminate(boolean z) {
         try {
-            if (this.mOnlyIndeterminate) {
-                if (!this.mIndeterminate) {
-                }
-            }
-            if (z != this.mIndeterminate) {
-                this.mIndeterminate = z;
-                if (z) {
-                    swapCurrentDrawable(this.mIndeterminateDrawable);
-                    startAnimation$1();
-                } else {
-                    swapCurrentDrawable(this.mProgressDrawable);
-                    stopAnimation$1();
+            if (!this.mOnlyIndeterminate || !this.mIndeterminate) {
+                if (z != this.mIndeterminate) {
+                    this.mIndeterminate = z;
+                    if (z) {
+                        swapCurrentDrawable(this.mIndeterminateDrawable);
+                        startAnimation$1();
+                    } else {
+                        swapCurrentDrawable(this.mProgressDrawable);
+                        stopAnimation$1();
+                    }
                 }
             }
         } catch (Throwable th) {
@@ -1116,30 +1104,30 @@ public class SeslProgressBar extends View {
     }
 
     public synchronized boolean setProgressInternal(int i, boolean z, boolean z2) {
-        Drawable findDrawableByLayerId;
+        Drawable drawableFindDrawableByLayerId;
         try {
             if (this.mIndeterminate) {
                 return false;
             }
-            int clamp = MathUtils.clamp(i, this.mMin, this.mMax);
+            int iClamp = MathUtils.clamp(i, this.mMin, this.mMax);
             int i2 = this.mProgress;
-            if (clamp == i2) {
+            if (iClamp == i2) {
                 return false;
             }
             this.mVisualProgress = i2;
-            this.mProgress = clamp;
+            this.mProgress = iClamp;
             if (this.mCurrentMode == 7) {
                 Drawable drawable = this.mProgressDrawable;
-                if ((drawable instanceof LayerDrawable) && (findDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(R.id.progress)) != null && (findDrawableByLayerId instanceof CirCleProgressDrawable)) {
-                    CirCleProgressDrawable cirCleProgressDrawable = (CirCleProgressDrawable) findDrawableByLayerId;
+                if ((drawable instanceof LayerDrawable) && (drawableFindDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(R.id.progress)) != null && (drawableFindDrawableByLayerId instanceof CirCleProgressDrawable)) {
+                    CirCleProgressDrawable cirCleProgressDrawable = (CirCleProgressDrawable) drawableFindDrawableByLayerId;
                     if (z2) {
-                        ObjectAnimator ofInt = ObjectAnimator.ofInt(cirCleProgressDrawable, cirCleProgressDrawable.VISUAL_CIRCLE_PROGRESS, clamp);
-                        ofInt.setAutoCancel(true);
-                        ofInt.setDuration(80L);
-                        ofInt.setInterpolator(PROGRESS_ANIM_INTERPOLATOR);
-                        ofInt.start();
+                        ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(cirCleProgressDrawable, cirCleProgressDrawable.VISUAL_CIRCLE_PROGRESS, iClamp);
+                        objectAnimatorOfInt.setAutoCancel(true);
+                        objectAnimatorOfInt.setDuration(80L);
+                        objectAnimatorOfInt.setInterpolator(PROGRESS_ANIM_INTERPOLATOR);
+                        objectAnimatorOfInt.start();
                     } else {
-                        cirCleProgressDrawable.mProgress = clamp;
+                        cirCleProgressDrawable.mProgress = iClamp;
                         SeslProgressBar.this.invalidate();
                     }
                 }
@@ -1183,12 +1171,12 @@ public class SeslProgressBar extends View {
 
     public final void setVisualProgress(float f, int i) {
         this.mVisualProgress = f;
-        Drawable drawable = this.mCurrentDrawable;
-        if ((drawable instanceof LayerDrawable) && (drawable = ((LayerDrawable) drawable).findDrawableByLayerId(i)) == null) {
-            drawable = this.mCurrentDrawable;
+        Drawable drawableFindDrawableByLayerId = this.mCurrentDrawable;
+        if ((drawableFindDrawableByLayerId instanceof LayerDrawable) && (drawableFindDrawableByLayerId = ((LayerDrawable) drawableFindDrawableByLayerId).findDrawableByLayerId(i)) == null) {
+            drawableFindDrawableByLayerId = this.mCurrentDrawable;
         }
-        if (drawable != null) {
-            drawable.setLevel((int) (10000.0f * f));
+        if (drawableFindDrawableByLayerId != null) {
+            drawableFindDrawableByLayerId.setLevel((int) (10000.0f * f));
         } else {
             invalidate();
         }
@@ -1303,6 +1291,11 @@ public class SeslProgressBar extends View {
         return layerDrawable2;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0060  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0073  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void updateDrawableBounds(int i, int i2) {
         int i3;
         int i4;
@@ -1311,44 +1304,45 @@ public class SeslProgressBar extends View {
         int paddingBottom = i2 - (getPaddingBottom() + getPaddingTop());
         Drawable drawable = this.mIndeterminateDrawable;
         if (drawable != null) {
-            if (this.mOnlyIndeterminate && !(drawable instanceof AnimationDrawable)) {
+            if (!this.mOnlyIndeterminate || (drawable instanceof AnimationDrawable)) {
+                i3 = field_mPaddingLeft;
+                i4 = 0;
+                i5 = 0;
+                if (this.mMirrorForRtl || getLayoutDirection() != 1) {
+                    field_mPaddingLeft = i3;
+                } else {
+                    int i6 = field_mPaddingLeft - i3;
+                    field_mPaddingLeft -= i5;
+                    i5 = i6;
+                }
+                this.mIndeterminateDrawable.setBounds(i5, i4, field_mPaddingLeft, paddingBottom);
+            } else {
                 float intrinsicWidth = drawable.getIntrinsicWidth() / this.mIndeterminateDrawable.getIntrinsicHeight();
                 float f = field_mPaddingLeft;
                 float f2 = paddingBottom;
                 float f3 = f / f2;
                 if (Math.abs(intrinsicWidth - f3) < 1.0E-7d) {
                     if (f3 > intrinsicWidth) {
-                        int i6 = (int) (f2 * intrinsicWidth);
-                        int i7 = (field_mPaddingLeft - i6) / 2;
-                        i5 = i7;
-                        i3 = i6 + i7;
+                        int i7 = (int) (f2 * intrinsicWidth);
+                        int i8 = (field_mPaddingLeft - i7) / 2;
+                        i5 = i8;
+                        i3 = i7 + i8;
                         i4 = 0;
                     } else {
-                        int i8 = (int) ((1.0f / intrinsicWidth) * f);
-                        int i9 = (paddingBottom - i8) / 2;
-                        int i10 = i8 + i9;
-                        i4 = i9;
-                        paddingBottom = i10;
+                        int i9 = (int) ((1.0f / intrinsicWidth) * f);
+                        int i10 = (paddingBottom - i9) / 2;
+                        int i11 = i9 + i10;
+                        i4 = i10;
+                        paddingBottom = i11;
                         i3 = field_mPaddingLeft;
                         i5 = 0;
                     }
-                    if (this.mMirrorForRtl || getLayoutDirection() != 1) {
-                        field_mPaddingLeft = i3;
-                    } else {
-                        int i11 = field_mPaddingLeft - i3;
-                        field_mPaddingLeft -= i5;
-                        i5 = i11;
-                    }
+                }
+                if (this.mMirrorForRtl) {
+                    field_mPaddingLeft = i3;
                     this.mIndeterminateDrawable.setBounds(i5, i4, field_mPaddingLeft, paddingBottom);
                 }
             }
-            i3 = field_mPaddingLeft;
-            i4 = 0;
-            i5 = 0;
-            if (this.mMirrorForRtl) {
-            }
-            field_mPaddingLeft = i3;
-            this.mIndeterminateDrawable.setBounds(i5, i4, field_mPaddingLeft, paddingBottom);
         }
         Drawable drawable2 = this.mProgressDrawable;
         if (drawable2 != null) {
@@ -1419,11 +1413,11 @@ public class SeslProgressBar extends View {
         this.mMinHeight = 24;
         this.mMaxHeight = 48;
         int[] iArr = R$styleable.ProgressBar;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, i2);
         try {
-            saveAttributeDataForStyleable(context, iArr, attributeSet, obtainStyledAttributes, i, i2);
+            saveAttributeDataForStyleable(context, iArr, attributeSet, typedArrayObtainStyledAttributes, i, i2);
             this.mNoInvalidate = true;
-            Drawable drawable = obtainStyledAttributes.getDrawable(8);
+            Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(8);
             if (drawable != null) {
                 if (needsTileify(drawable)) {
                     setProgressDrawable(tileify(drawable, false));
@@ -1431,21 +1425,21 @@ public class SeslProgressBar extends View {
                     setProgressDrawable(drawable);
                 }
             }
-            this.mDuration = obtainStyledAttributes.getInt(9, this.mDuration);
-            this.mMinWidth = obtainStyledAttributes.getDimensionPixelSize(11, this.mMinWidth);
-            this.mMaxWidth = obtainStyledAttributes.getDimensionPixelSize(0, this.mMaxWidth);
-            this.mMinHeight = obtainStyledAttributes.getDimensionPixelSize(12, this.mMinHeight);
-            this.mMaxHeight = obtainStyledAttributes.getDimensionPixelSize(1, this.mMaxHeight);
-            this.mBehavior = obtainStyledAttributes.getInt(10, this.mBehavior);
-            int resourceId = obtainStyledAttributes.getResourceId(13, R.anim.linear_interpolator);
+            this.mDuration = typedArrayObtainStyledAttributes.getInt(9, this.mDuration);
+            this.mMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(11, this.mMinWidth);
+            this.mMaxWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, this.mMaxWidth);
+            this.mMinHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(12, this.mMinHeight);
+            this.mMaxHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, this.mMaxHeight);
+            this.mBehavior = typedArrayObtainStyledAttributes.getInt(10, this.mBehavior);
+            int resourceId = typedArrayObtainStyledAttributes.getResourceId(13, R.anim.linear_interpolator);
             if (resourceId > 0) {
                 this.mInterpolator = AnimationUtils.loadInterpolator(context, resourceId);
             }
-            setMin(obtainStyledAttributes.getInt(26, this.mMin));
-            setMax(obtainStyledAttributes.getInt(2, this.mMax));
-            setProgress(obtainStyledAttributes.getInt(3, this.mProgress));
-            setSecondaryProgress(obtainStyledAttributes.getInt(4, this.mSecondaryProgress));
-            Drawable drawable2 = obtainStyledAttributes.getDrawable(7);
+            setMin(typedArrayObtainStyledAttributes.getInt(26, this.mMin));
+            setMax(typedArrayObtainStyledAttributes.getInt(2, this.mMax));
+            setProgress(typedArrayObtainStyledAttributes.getInt(3, this.mProgress));
+            setSecondaryProgress(typedArrayObtainStyledAttributes.getInt(4, this.mSecondaryProgress));
+            Drawable drawable2 = typedArrayObtainStyledAttributes.getDrawable(7);
             if (drawable2 != null) {
                 if (needsTileify(drawable2)) {
                     if (drawable2 instanceof AnimationDrawable) {
@@ -1454,9 +1448,9 @@ public class SeslProgressBar extends View {
                         AnimationDrawable animationDrawable2 = new AnimationDrawable();
                         animationDrawable2.setOneShot(animationDrawable.isOneShot());
                         for (int i3 = 0; i3 < numberOfFrames; i3++) {
-                            Drawable tileify = tileify(animationDrawable.getFrame(i3), true);
-                            tileify.setLevel(10000);
-                            animationDrawable2.addFrame(tileify, animationDrawable.getDuration(i3));
+                            Drawable drawableTileify = tileify(animationDrawable.getFrame(i3), true);
+                            drawableTileify.setLevel(10000);
+                            animationDrawable2.addFrame(drawableTileify, animationDrawable.getDuration(i3));
                         }
                         animationDrawable2.setLevel(10000);
                         drawable2 = animationDrawable2;
@@ -1466,81 +1460,81 @@ public class SeslProgressBar extends View {
                     setIndeterminateDrawable(drawable2);
                 }
             }
-            boolean z = obtainStyledAttributes.getBoolean(6, this.mOnlyIndeterminate);
+            boolean z = typedArrayObtainStyledAttributes.getBoolean(6, this.mOnlyIndeterminate);
             this.mOnlyIndeterminate = z;
             this.mNoInvalidate = false;
-            setIndeterminate(z || obtainStyledAttributes.getBoolean(5, this.mIndeterminate));
-            this.mMirrorForRtl = obtainStyledAttributes.getBoolean(15, this.mMirrorForRtl);
-            if (obtainStyledAttributes.hasValue(17)) {
+            setIndeterminate(z || typedArrayObtainStyledAttributes.getBoolean(5, this.mIndeterminate));
+            this.mMirrorForRtl = typedArrayObtainStyledAttributes.getBoolean(15, this.mMirrorForRtl);
+            if (typedArrayObtainStyledAttributes.hasValue(17)) {
                 if (this.mProgressTintInfo == null) {
                     this.mProgressTintInfo = new ProgressTintInfo();
                 }
-                this.mProgressTintInfo.mProgressTintMode = DrawableUtils.parseTintMode(obtainStyledAttributes.getInt(17, -1), null);
+                this.mProgressTintInfo.mProgressTintMode = DrawableUtils.parseTintMode(typedArrayObtainStyledAttributes.getInt(17, -1), null);
                 this.mProgressTintInfo.mHasProgressTintMode = true;
             }
-            if (obtainStyledAttributes.hasValue(16)) {
+            if (typedArrayObtainStyledAttributes.hasValue(16)) {
                 if (this.mProgressTintInfo == null) {
                     this.mProgressTintInfo = new ProgressTintInfo();
                 }
-                this.mProgressTintInfo.mProgressTintList = obtainStyledAttributes.getColorStateList(16);
+                this.mProgressTintInfo.mProgressTintList = typedArrayObtainStyledAttributes.getColorStateList(16);
                 this.mProgressTintInfo.mHasProgressTint = true;
             }
-            if (obtainStyledAttributes.hasValue(19)) {
+            if (typedArrayObtainStyledAttributes.hasValue(19)) {
                 if (this.mProgressTintInfo == null) {
                     this.mProgressTintInfo = new ProgressTintInfo();
                 }
-                this.mProgressTintInfo.mProgressBackgroundTintMode = DrawableUtils.parseTintMode(obtainStyledAttributes.getInt(19, -1), null);
+                this.mProgressTintInfo.mProgressBackgroundTintMode = DrawableUtils.parseTintMode(typedArrayObtainStyledAttributes.getInt(19, -1), null);
                 this.mProgressTintInfo.mHasProgressBackgroundTintMode = true;
             }
-            if (obtainStyledAttributes.hasValue(18)) {
+            if (typedArrayObtainStyledAttributes.hasValue(18)) {
                 if (this.mProgressTintInfo == null) {
                     this.mProgressTintInfo = new ProgressTintInfo();
                 }
-                this.mProgressTintInfo.mProgressBackgroundTintList = obtainStyledAttributes.getColorStateList(18);
+                this.mProgressTintInfo.mProgressBackgroundTintList = typedArrayObtainStyledAttributes.getColorStateList(18);
                 this.mProgressTintInfo.mHasProgressBackgroundTint = true;
             }
-            if (obtainStyledAttributes.hasValue(21)) {
+            if (typedArrayObtainStyledAttributes.hasValue(21)) {
                 if (this.mProgressTintInfo == null) {
                     this.mProgressTintInfo = new ProgressTintInfo();
                 }
-                this.mProgressTintInfo.mSecondaryProgressTintMode = DrawableUtils.parseTintMode(obtainStyledAttributes.getInt(21, -1), null);
+                this.mProgressTintInfo.mSecondaryProgressTintMode = DrawableUtils.parseTintMode(typedArrayObtainStyledAttributes.getInt(21, -1), null);
                 this.mProgressTintInfo.mHasSecondaryProgressTintMode = true;
             }
-            if (obtainStyledAttributes.hasValue(20)) {
+            if (typedArrayObtainStyledAttributes.hasValue(20)) {
                 if (this.mProgressTintInfo == null) {
                     this.mProgressTintInfo = new ProgressTintInfo();
                 }
-                this.mProgressTintInfo.mSecondaryProgressTintList = obtainStyledAttributes.getColorStateList(20);
+                this.mProgressTintInfo.mSecondaryProgressTintList = typedArrayObtainStyledAttributes.getColorStateList(20);
                 this.mProgressTintInfo.mHasSecondaryProgressTint = true;
             }
-            if (obtainStyledAttributes.hasValue(23)) {
+            if (typedArrayObtainStyledAttributes.hasValue(23)) {
                 if (this.mProgressTintInfo == null) {
                     this.mProgressTintInfo = new ProgressTintInfo();
                 }
-                this.mProgressTintInfo.mIndeterminateTintMode = DrawableUtils.parseTintMode(obtainStyledAttributes.getInt(23, -1), null);
+                this.mProgressTintInfo.mIndeterminateTintMode = DrawableUtils.parseTintMode(typedArrayObtainStyledAttributes.getInt(23, -1), null);
                 this.mProgressTintInfo.mHasIndeterminateTintMode = true;
             }
-            if (obtainStyledAttributes.hasValue(22)) {
+            if (typedArrayObtainStyledAttributes.hasValue(22)) {
                 if (this.mProgressTintInfo == null) {
                     this.mProgressTintInfo = new ProgressTintInfo();
                 }
-                this.mProgressTintInfo.mIndeterminateTintList = obtainStyledAttributes.getColorStateList(22);
+                this.mProgressTintInfo.mIndeterminateTintList = typedArrayObtainStyledAttributes.getColorStateList(22);
                 this.mProgressTintInfo.mHasIndeterminateTint = true;
             }
-            boolean z2 = obtainStyledAttributes.getBoolean(29, this.mUseCustomWidthForCircleMode);
+            boolean z2 = typedArrayObtainStyledAttributes.getBoolean(29, this.mUseCustomWidthForCircleMode);
             this.mUseCustomWidthForCircleMode = z2;
             if (z2) {
-                this.mRoundStrokeWidth = obtainStyledAttributes.getDimensionPixelSize(28, getResources().getDimensionPixelSize(com.android.systemui.R.dimen.sesl_progress_circle_size_small_width));
-                this.mCirclePadding = obtainStyledAttributes.getDimensionPixelSize(27, getResources().getDimensionPixelOffset(com.android.systemui.R.dimen.sesl_progress_circle_size_small_padding));
+                this.mRoundStrokeWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(28, getResources().getDimensionPixelSize(com.android.systemui.R.dimen.sesl_progress_circle_size_small_width));
+                this.mCirclePadding = typedArrayObtainStyledAttributes.getDimensionPixelSize(27, getResources().getDimensionPixelOffset(com.android.systemui.R.dimen.sesl_progress_circle_size_small_padding));
             }
-            this.mUseHorizontalProgress = obtainStyledAttributes.getBoolean(30, this.mUseHorizontalProgress);
+            this.mUseHorizontalProgress = typedArrayObtainStyledAttributes.getBoolean(30, this.mUseHorizontalProgress);
             ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, 2132017465);
             this.mIndeterminateHorizontalXsmall = getResources().getDrawable(com.android.systemui.R.drawable.sesl_progress_bar_indeterminate_xsmall_transition, contextThemeWrapper.getTheme());
             this.mIndeterminateHorizontalSmall = getResources().getDrawable(com.android.systemui.R.drawable.sesl_progress_bar_indeterminate_small_transition, contextThemeWrapper.getTheme());
             this.mIndeterminateHorizontalMedium = getResources().getDrawable(com.android.systemui.R.drawable.sesl_progress_bar_indeterminate_medium_transition, contextThemeWrapper.getTheme());
             this.mIndeterminateHorizontalLarge = getResources().getDrawable(com.android.systemui.R.drawable.sesl_progress_bar_indeterminate_large_transition, contextThemeWrapper.getTheme());
             this.mIndeterminateHorizontalXlarge = getResources().getDrawable(com.android.systemui.R.drawable.sesl_progress_bar_indeterminate_xlarge_transition, contextThemeWrapper.getTheme());
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             applyProgressTints();
             applyIndeterminateTint();
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
@@ -1550,7 +1544,7 @@ public class SeslProgressBar extends View {
             this.mDensity = context.getResources().getDisplayMetrics().density;
             this.mCircleAnimationCallback = new CircleAnimationCallback(this);
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

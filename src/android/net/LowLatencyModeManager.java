@@ -135,7 +135,7 @@ public class LowLatencyModeManager {
         this.mContext = context;
     }
 
-    public void getLowLatencyMode(LatencyCallback latencyCallback) {
+    public void getLowLatencyMode(LatencyCallback latencyCallback) throws InterruptedException, IOException {
         int phoneId = SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId());
         if (!SubscriptionManager.isValidPhoneId(phoneId)) {
             loge("invalid default datat slotId id, " + phoneId);
@@ -144,7 +144,7 @@ public class LowLatencyModeManager {
         getLowLatencyMode(phoneId, latencyCallback);
     }
 
-    public void getLowLatencyMode(int i, LatencyCallback latencyCallback) {
+    public void getLowLatencyMode(int i, LatencyCallback latencyCallback) throws InterruptedException, IOException {
         if (!SubscriptionManager.isValidPhoneId(i)) {
             loge("invalid slotId id, " + i);
             return;
@@ -164,18 +164,18 @@ public class LowLatencyModeManager {
             Bundle bundle = new Bundle();
             bundle.putByteArray("request", byteArrayOutputStream.toByteArray());
             bundle.putInt("slotId", i);
-            Message obtainMessage = this.mReceiverHandler.obtainMessage(2);
-            obtainMessage.setData(bundle);
-            obtainMessage.replyTo = this.mSvcModeMessenger;
+            Message messageObtainMessage = this.mReceiverHandler.obtainMessage(2);
+            messageObtainMessage.setData(bundle);
+            messageObtainMessage.replyTo = this.mSvcModeMessenger;
             for (int i2 = 0; i2 < 10; i2++) {
                 try {
                     Messenger messenger = this.mServiceMessenger;
                     if (messenger != null && i == 0) {
-                        messenger.send(obtainMessage);
+                        messenger.send(messageObtainMessage);
                     } else {
                         Messenger messenger2 = this.mServiceMessenger2;
                         if (messenger2 != null && i == 1) {
-                            messenger2.send(obtainMessage);
+                            messenger2.send(messageObtainMessage);
                         } else {
                             loge("mServiceMessenger is null, wait more time for it is ready");
                             try {
@@ -199,7 +199,7 @@ public class LowLatencyModeManager {
         }
     }
 
-    public void setLowLatencyMode(int i, int i2, boolean z, boolean z2) {
+    public void setLowLatencyMode(int i, int i2, boolean z, boolean z2) throws InterruptedException, IOException {
         int phoneId = SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId());
         if (!SubscriptionManager.isValidPhoneId(phoneId)) {
             loge("invalid default datat slotId id, " + phoneId);
@@ -208,7 +208,7 @@ public class LowLatencyModeManager {
         setLowLatencyMode(phoneId, i, i2, z, z2);
     }
 
-    public void setLowLatencyMode(int i, int i2, int i3, boolean z, boolean z2) {
+    public void setLowLatencyMode(int i, int i2, int i3, boolean z, boolean z2) throws InterruptedException, IOException {
         if (!SubscriptionManager.isValidPhoneId(i)) {
             loge("invalid slotId id, " + i);
             return;
@@ -236,19 +236,19 @@ public class LowLatencyModeManager {
             Bundle bundle = new Bundle();
             bundle.putByteArray("request", byteArrayOutputStream.toByteArray());
             bundle.putInt("slotId", i);
-            Message obtainMessage = this.mReceiverHandler.obtainMessage(1);
-            obtainMessage.setData(bundle);
-            obtainMessage.replyTo = this.mSvcModeMessenger;
+            Message messageObtainMessage = this.mReceiverHandler.obtainMessage(1);
+            messageObtainMessage.setData(bundle);
+            messageObtainMessage.replyTo = this.mSvcModeMessenger;
             for (int i4 = 0; i4 < 10; i4++) {
                 try {
                     Messenger messenger = this.mServiceMessenger;
                     if (messenger != null && i == 0) {
-                        messenger.send(obtainMessage);
+                        messenger.send(messageObtainMessage);
                         return;
                     }
                     Messenger messenger2 = this.mServiceMessenger2;
                     if (messenger2 != null && i == 1) {
-                        messenger2.send(obtainMessage);
+                        messenger2.send(messageObtainMessage);
                         return;
                     }
                     loge("mServiceMessenger is null, wait more time for it is ready");

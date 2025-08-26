@@ -7,6 +7,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.drawable.Icon;
 import android.icu.text.DateFormat;
 import android.icu.text.DisplayContext;
@@ -52,7 +53,6 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyguardSliceProvider extends SliceProvider implements NextAlarmController.NextAlarmChangeCallback, ZenModeController.Callback, NotificationMediaManager.MediaListener, StatusBarStateController.StateListener, SystemUIAppComponentFactoryBase.ContextInitializer {
     static final int ALARM_VISIBILITY_HOURS = 12;
@@ -88,7 +88,7 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
     public final KeyguardSliceProvider$$ExternalSyntheticLambda2 mUpdateNextAlarm = new AlarmManager.OnAlarmListener() { // from class: com.android.systemui.keyguard.KeyguardSliceProvider$$ExternalSyntheticLambda2
         @Override // android.app.AlarmManager.OnAlarmListener
         public final void onAlarm() {
-            KeyguardSliceProvider keyguardSliceProvider = KeyguardSliceProvider.this;
+            KeyguardSliceProvider keyguardSliceProvider = this.f$0;
             Object obj = KeyguardSliceProvider.sInstanceLock;
             keyguardSliceProvider.updateNextAlarm();
         }
@@ -182,9 +182,9 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
                 }
             }).orElse(null);
         }
-        IconCompat createFromIcon = icon != null ? IconCompat.createFromIcon(getContext(), icon) : null;
-        if (createFromIcon != null) {
-            rowBuilder.addEndItem(createFromIcon);
+        IconCompat iconCompatCreateFromIcon = icon != null ? IconCompat.createFromIcon(getContext(), icon) : null;
+        if (iconCompatCreateFromIcon != null) {
+            rowBuilder.addEndItem(iconCompatCreateFromIcon);
         }
         listBuilder.mImpl.addRow(rowBuilder);
     }
@@ -210,7 +210,7 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
         this.mBgHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSliceProvider$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardSliceProvider keyguardSliceProvider = KeyguardSliceProvider.this;
+                KeyguardSliceProvider keyguardSliceProvider = this.f$0;
                 Object obj = KeyguardSliceProvider.sInstanceLock;
                 keyguardSliceProvider.getClass();
                 try {
@@ -224,7 +224,7 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
 
     @Override // androidx.slice.SliceProvider
     public final Slice onBindSlice() {
-        Slice slice = null;
+        Slice sliceBuild = null;
         try {
             Trace.beginSection("KeyguardSliceProvider#onBindSlice");
             synchronized (this) {
@@ -238,10 +238,10 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
                         listBuilder.mImpl.addRow(rowBuilder);
                     }
                     if (!TextUtils.isEmpty(this.mNextAlarm)) {
-                        IconCompat createWithResource = IconCompat.createWithResource(R.drawable.ic_access_alarms_big, getContext());
+                        IconCompat iconCompatCreateWithResource = IconCompat.createWithResource(R.drawable.ic_access_alarms_big, getContext());
                         ListBuilder.RowBuilder rowBuilder2 = new ListBuilder.RowBuilder(this.mAlarmUri);
                         rowBuilder2.mTitle = this.mNextAlarm;
-                        rowBuilder2.addEndItem(createWithResource);
+                        rowBuilder2.addEndItem(iconCompatCreateWithResource);
                         listBuilder.mImpl.addRow(rowBuilder2);
                     }
                     if (((ZenModeControllerImpl) this.mZenModeController).mZenMode != 0) {
@@ -255,14 +255,14 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
                     ListBuilder.RowBuilder rowBuilder4 = new ListBuilder.RowBuilder(Uri.parse("content://com.android.systemui.keyguard/action"));
                     rowBuilder4.mPrimaryAction = sliceAction;
                     listBuilder.mImpl.addRow(rowBuilder4);
-                    slice = ((TemplateBuilderImpl) listBuilder.mImpl).build();
+                    sliceBuild = ((TemplateBuilderImpl) listBuilder.mImpl).build();
                 } finally {
                 }
             }
-            return slice;
+            return sliceBuild;
         } catch (IllegalStateException e) {
             android.util.Log.w("KgdSliceProvider", "Could not initialize slice", e);
-            return slice;
+            return sliceBuild;
         } finally {
             Trace.endSection();
         }
@@ -328,9 +328,9 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
     public final void onDozingChanged(boolean z) {
         boolean z2;
         synchronized (this) {
-            boolean needsMediaLocked = needsMediaLocked();
+            boolean zNeedsMediaLocked = needsMediaLocked();
             this.mDozing = z;
-            z2 = needsMediaLocked != needsMediaLocked();
+            z2 = zNeedsMediaLocked != needsMediaLocked();
         }
         if (z2) {
             notifyChange();
@@ -358,9 +358,9 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
     public final void onPrimaryMetadataOrStateChanged(final MediaMetadata mediaMetadata, final int i) {
         synchronized (this) {
             try {
-                boolean isPlayingState = NotificationMediaManager.isPlayingState(i);
+                boolean zIsPlayingState = NotificationMediaManager.isPlayingState(i);
                 this.mMediaHandler.removeCallbacksAndMessages(null);
-                if (!this.mMediaIsVisible || isPlayingState || this.mStatusBarState == 0) {
+                if (!this.mMediaIsVisible || zIsPlayingState || this.mStatusBarState == 0) {
                     this.mMediaWakeLock.setAcquired(false);
                     updateMediaStateLocked(mediaMetadata, i);
                 } else {
@@ -368,7 +368,7 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
                     this.mMediaHandler.postDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSliceProvider$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            KeyguardSliceProvider keyguardSliceProvider = KeyguardSliceProvider.this;
+                            KeyguardSliceProvider keyguardSliceProvider = this.f$0;
                             MediaMetadata mediaMetadata2 = mediaMetadata;
                             int i2 = i;
                             Object obj = KeyguardSliceProvider.sInstanceLock;
@@ -389,9 +389,9 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
     public final void onStateChanged(int i) {
         boolean z;
         synchronized (this) {
-            boolean needsMediaLocked = needsMediaLocked();
+            boolean zNeedsMediaLocked = needsMediaLocked();
             this.mStatusBarState = i;
-            z = needsMediaLocked != needsMediaLocked();
+            z = zNeedsMediaLocked != needsMediaLocked();
         }
         if (z) {
             notifyChange();
@@ -415,7 +415,7 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
                 this.mBgHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSliceProvider$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardSliceProvider keyguardSliceProvider = KeyguardSliceProvider.this;
+                        KeyguardSliceProvider keyguardSliceProvider = this.f$0;
                         IntentFilter intentFilter2 = intentFilter;
                         Object obj = KeyguardSliceProvider.sInstanceLock;
                         keyguardSliceProvider.getContext().registerReceiver(keyguardSliceProvider.mIntentReceiver, intentFilter2, null, null);
@@ -441,32 +441,32 @@ public class KeyguardSliceProvider extends SliceProvider implements NextAlarmCon
             this.mDateFormat = instanceForSkeleton;
         }
         this.mCurrentTime.setTime(System.currentTimeMillis());
-        String format = this.mDateFormat.format(this.mCurrentTime);
-        if (format.equals(this.mLastText)) {
+        String str = this.mDateFormat.format(this.mCurrentTime);
+        if (str.equals(this.mLastText)) {
             return;
         }
-        this.mLastText = format;
+        this.mLastText = str;
         notifyChange();
     }
 
-    public final void updateMediaStateLocked(MediaMetadata mediaMetadata, int i) {
-        CharSequence charSequence;
-        boolean isPlayingState = NotificationMediaManager.isPlayingState(i);
+    public final void updateMediaStateLocked(MediaMetadata mediaMetadata, int i) throws Resources.NotFoundException {
+        CharSequence text;
+        boolean zIsPlayingState = NotificationMediaManager.isPlayingState(i);
         if (mediaMetadata != null) {
-            charSequence = mediaMetadata.getText("android.media.metadata.TITLE");
-            if (TextUtils.isEmpty(charSequence)) {
-                charSequence = getContext().getResources().getString(R.string.music_controls_no_title);
+            text = mediaMetadata.getText("android.media.metadata.TITLE");
+            if (TextUtils.isEmpty(text)) {
+                text = getContext().getResources().getString(R.string.music_controls_no_title);
             }
         } else {
-            charSequence = null;
+            text = null;
         }
-        CharSequence text = mediaMetadata != null ? mediaMetadata.getText("android.media.metadata.ARTIST") : null;
-        if (isPlayingState == this.mMediaIsVisible && TextUtils.equals(charSequence, this.mMediaTitle) && TextUtils.equals(text, this.mMediaArtist)) {
+        CharSequence text2 = mediaMetadata != null ? mediaMetadata.getText("android.media.metadata.ARTIST") : null;
+        if (zIsPlayingState == this.mMediaIsVisible && TextUtils.equals(text, this.mMediaTitle) && TextUtils.equals(text2, this.mMediaArtist)) {
             return;
         }
-        this.mMediaTitle = charSequence;
-        this.mMediaArtist = text;
-        this.mMediaIsVisible = isPlayingState;
+        this.mMediaTitle = text;
+        this.mMediaArtist = text2;
+        this.mMediaIsVisible = zIsPlayingState;
         notifyChange();
     }
 

@@ -641,11 +641,11 @@ public class ServiceState implements Parcelable {
     }
 
     public int hashCode() {
-        int hash;
+        int iHash;
         synchronized (this.mNetworkRegistrationInfos) {
-            hash = Objects.hash(Integer.valueOf(this.mVoiceRegState), Integer.valueOf(this.mDataRegState), Integer.valueOf(this.mChannelNumber), Integer.valueOf(Arrays.hashCode(this.mCellBandwidths)), this.mOperatorAlphaLong, this.mOperatorAlphaShort, this.mOperatorNumeric, Boolean.valueOf(this.mIsManualNetworkSelection), Boolean.valueOf(this.mCssIndicator), Integer.valueOf(this.mNetworkId), Integer.valueOf(this.mSystemId), Integer.valueOf(this.mCdmaRoamingIndicator), Integer.valueOf(this.mCdmaDefaultRoamingIndicator), Integer.valueOf(this.mCdmaEriIconIndex), Integer.valueOf(this.mCdmaEriIconMode), Boolean.valueOf(this.mIsNonCellularType), Integer.valueOf(this.mSnapshotStatus), Integer.valueOf(this.mIsPsOnlyReg ? 1 : 0), Integer.valueOf(this.mIsSprDisplayRoam ? 1 : 0), Integer.valueOf(this.mOptionalRadioTech), Integer.valueOf(this.mMsimSubmode), Integer.valueOf(this.mIsVoiceCallAvailable ? 1 : 0), Boolean.valueOf(this.mIsEmergencyOnly), Integer.valueOf(this.mArfcnRsrpBoost), this.mNetworkRegistrationInfos, Integer.valueOf(this.mNrFrequencyRange), this.mOperatorAlphaLongRaw, this.mOperatorAlphaShortRaw, Boolean.valueOf(this.mIsDataRoamingFromRegistration), Boolean.valueOf(this.mIsIwlanPreferred));
+            iHash = Objects.hash(Integer.valueOf(this.mVoiceRegState), Integer.valueOf(this.mDataRegState), Integer.valueOf(this.mChannelNumber), Integer.valueOf(Arrays.hashCode(this.mCellBandwidths)), this.mOperatorAlphaLong, this.mOperatorAlphaShort, this.mOperatorNumeric, Boolean.valueOf(this.mIsManualNetworkSelection), Boolean.valueOf(this.mCssIndicator), Integer.valueOf(this.mNetworkId), Integer.valueOf(this.mSystemId), Integer.valueOf(this.mCdmaRoamingIndicator), Integer.valueOf(this.mCdmaDefaultRoamingIndicator), Integer.valueOf(this.mCdmaEriIconIndex), Integer.valueOf(this.mCdmaEriIconMode), Boolean.valueOf(this.mIsNonCellularType), Integer.valueOf(this.mSnapshotStatus), Integer.valueOf(this.mIsPsOnlyReg ? 1 : 0), Integer.valueOf(this.mIsSprDisplayRoam ? 1 : 0), Integer.valueOf(this.mOptionalRadioTech), Integer.valueOf(this.mMsimSubmode), Integer.valueOf(this.mIsVoiceCallAvailable ? 1 : 0), Boolean.valueOf(this.mIsEmergencyOnly), Integer.valueOf(this.mArfcnRsrpBoost), this.mNetworkRegistrationInfos, Integer.valueOf(this.mNrFrequencyRange), this.mOperatorAlphaLongRaw, this.mOperatorAlphaShortRaw, Boolean.valueOf(this.mIsDataRoamingFromRegistration), Boolean.valueOf(this.mIsIwlanPreferred));
         }
-        return hash;
+        return iHash;
     }
 
     public boolean equals(Object obj) {
@@ -764,81 +764,81 @@ public class ServiceState implements Parcelable {
     }
 
     public String toString() {
-        String sb;
+        String string;
         synchronized (this.mNetworkRegistrationInfos) {
-            StringBuilder sb2 = new StringBuilder("{mVoiceRegState=");
-            sb2.append(this.mVoiceRegState);
-            sb2.append(NavigationBarInflaterView.KEY_CODE_START + rilServiceStateToString(this.mVoiceRegState) + NavigationBarInflaterView.KEY_CODE_END);
-            sb2.append(", mDataRegState=");
-            sb2.append(this.mDataRegState);
-            sb2.append(NavigationBarInflaterView.KEY_CODE_START + rilServiceStateToString(this.mDataRegState) + NavigationBarInflaterView.KEY_CODE_END);
-            sb2.append(", mChannelNumber=");
-            sb2.append(this.mChannelNumber);
-            sb2.append(", duplexMode()=");
-            sb2.append(getDuplexMode());
-            sb2.append(", mCellBandwidths=");
-            sb2.append(Arrays.toString(this.mCellBandwidths));
-            sb2.append(", mOperatorAlphaLong=");
-            sb2.append(this.mOperatorAlphaLong);
-            sb2.append(", mOperatorAlphaShort=");
-            sb2.append(this.mOperatorAlphaShort);
-            sb2.append(", isManualNetworkSelection=");
-            sb2.append(this.mIsManualNetworkSelection);
-            sb2.append(this.mIsManualNetworkSelection ? "(manual)" : "(automatic)");
-            sb2.append(", getRilVoiceRadioTechnology=");
-            sb2.append(getRilVoiceRadioTechnology());
-            sb2.append(NavigationBarInflaterView.KEY_CODE_START + rilRadioTechnologyToString(getRilVoiceRadioTechnology()) + NavigationBarInflaterView.KEY_CODE_END);
-            sb2.append(", getRilDataRadioTechnology=");
-            sb2.append(getRilDataRadioTechnology());
-            sb2.append(NavigationBarInflaterView.KEY_CODE_START + rilRadioTechnologyToString(getRilDataRadioTechnology()) + NavigationBarInflaterView.KEY_CODE_END);
-            sb2.append(", mCssIndicator=");
-            sb2.append(this.mCssIndicator ? "supported" : "unsupported");
-            sb2.append(", mNetworkId=");
-            sb2.append(SemTelephonyUtils.maskPiiFromCellIdentity(this.mNetworkId));
-            sb2.append(", mSystemId=");
-            sb2.append(SemTelephonyUtils.maskPiiFromCellIdentity(this.mSystemId));
-            sb2.append(", mCdmaRoamingIndicator=");
-            sb2.append(this.mCdmaRoamingIndicator);
-            sb2.append(", mCdmaDefaultRoamingIndicator=");
-            sb2.append(this.mCdmaDefaultRoamingIndicator);
-            sb2.append(", NonCellular=");
-            sb2.append(this.mIsNonCellularType);
-            sb2.append(", Snap=");
-            sb2.append(this.mSnapshotStatus);
-            sb2.append(", PsOnly=");
-            sb2.append(this.mIsPsOnlyReg);
-            sb2.append(", SprDisplayRoam=");
-            sb2.append(this.mIsSprDisplayRoam);
-            sb2.append(", OptRadioTech=");
-            sb2.append(this.mOptionalRadioTech);
-            sb2.append(", MsimSubmode=");
-            sb2.append(this.mMsimSubmode);
-            sb2.append(", IsVoiceCallAvailable=");
-            sb2.append(this.mIsVoiceCallAvailable);
-            sb2.append(", mIsEmergencyOnly=");
-            sb2.append(this.mIsEmergencyOnly);
-            sb2.append(", isUsingCarrierAggregation=");
-            sb2.append(isUsingCarrierAggregation());
-            sb2.append(", mArfcnRsrpBoost=");
-            sb2.append(this.mArfcnRsrpBoost);
-            sb2.append(", mNetworkRegistrationInfos=");
-            sb2.append(this.mNetworkRegistrationInfos);
-            sb2.append(", mNrFrequencyRange=");
-            sb2.append(Build.IS_DEBUGGABLE ? this.mNrFrequencyRange : 0);
-            sb2.append(", mOperatorAlphaLongRaw=");
-            sb2.append(this.mOperatorAlphaLongRaw);
-            sb2.append(", mOperatorAlphaShortRaw=");
-            sb2.append(this.mOperatorAlphaShortRaw);
-            sb2.append(", mIsDataRoamingFromRegistration=");
-            sb2.append(this.mIsDataRoamingFromRegistration);
-            sb2.append(", mIsIwlanPreferred=");
-            sb2.append(this.mIsIwlanPreferred);
-            sb2.append(", mIsUsingNonTerrestrialNetwork=");
-            sb2.append(isUsingNonTerrestrialNetwork());
-            sb2.append("}");
-            sb = sb2.toString();
+            StringBuilder sb = new StringBuilder("{mVoiceRegState=");
+            sb.append(this.mVoiceRegState);
+            sb.append(NavigationBarInflaterView.KEY_CODE_START + rilServiceStateToString(this.mVoiceRegState) + NavigationBarInflaterView.KEY_CODE_END);
+            sb.append(", mDataRegState=");
+            sb.append(this.mDataRegState);
+            sb.append(NavigationBarInflaterView.KEY_CODE_START + rilServiceStateToString(this.mDataRegState) + NavigationBarInflaterView.KEY_CODE_END);
+            sb.append(", mChannelNumber=");
+            sb.append(this.mChannelNumber);
+            sb.append(", duplexMode()=");
+            sb.append(getDuplexMode());
+            sb.append(", mCellBandwidths=");
+            sb.append(Arrays.toString(this.mCellBandwidths));
+            sb.append(", mOperatorAlphaLong=");
+            sb.append(this.mOperatorAlphaLong);
+            sb.append(", mOperatorAlphaShort=");
+            sb.append(this.mOperatorAlphaShort);
+            sb.append(", isManualNetworkSelection=");
+            sb.append(this.mIsManualNetworkSelection);
+            sb.append(this.mIsManualNetworkSelection ? "(manual)" : "(automatic)");
+            sb.append(", getRilVoiceRadioTechnology=");
+            sb.append(getRilVoiceRadioTechnology());
+            sb.append(NavigationBarInflaterView.KEY_CODE_START + rilRadioTechnologyToString(getRilVoiceRadioTechnology()) + NavigationBarInflaterView.KEY_CODE_END);
+            sb.append(", getRilDataRadioTechnology=");
+            sb.append(getRilDataRadioTechnology());
+            sb.append(NavigationBarInflaterView.KEY_CODE_START + rilRadioTechnologyToString(getRilDataRadioTechnology()) + NavigationBarInflaterView.KEY_CODE_END);
+            sb.append(", mCssIndicator=");
+            sb.append(this.mCssIndicator ? "supported" : "unsupported");
+            sb.append(", mNetworkId=");
+            sb.append(SemTelephonyUtils.maskPiiFromCellIdentity(this.mNetworkId));
+            sb.append(", mSystemId=");
+            sb.append(SemTelephonyUtils.maskPiiFromCellIdentity(this.mSystemId));
+            sb.append(", mCdmaRoamingIndicator=");
+            sb.append(this.mCdmaRoamingIndicator);
+            sb.append(", mCdmaDefaultRoamingIndicator=");
+            sb.append(this.mCdmaDefaultRoamingIndicator);
+            sb.append(", NonCellular=");
+            sb.append(this.mIsNonCellularType);
+            sb.append(", Snap=");
+            sb.append(this.mSnapshotStatus);
+            sb.append(", PsOnly=");
+            sb.append(this.mIsPsOnlyReg);
+            sb.append(", SprDisplayRoam=");
+            sb.append(this.mIsSprDisplayRoam);
+            sb.append(", OptRadioTech=");
+            sb.append(this.mOptionalRadioTech);
+            sb.append(", MsimSubmode=");
+            sb.append(this.mMsimSubmode);
+            sb.append(", IsVoiceCallAvailable=");
+            sb.append(this.mIsVoiceCallAvailable);
+            sb.append(", mIsEmergencyOnly=");
+            sb.append(this.mIsEmergencyOnly);
+            sb.append(", isUsingCarrierAggregation=");
+            sb.append(isUsingCarrierAggregation());
+            sb.append(", mArfcnRsrpBoost=");
+            sb.append(this.mArfcnRsrpBoost);
+            sb.append(", mNetworkRegistrationInfos=");
+            sb.append(this.mNetworkRegistrationInfos);
+            sb.append(", mNrFrequencyRange=");
+            sb.append(Build.IS_DEBUGGABLE ? this.mNrFrequencyRange : 0);
+            sb.append(", mOperatorAlphaLongRaw=");
+            sb.append(this.mOperatorAlphaLongRaw);
+            sb.append(", mOperatorAlphaShortRaw=");
+            sb.append(this.mOperatorAlphaShortRaw);
+            sb.append(", mIsDataRoamingFromRegistration=");
+            sb.append(this.mIsDataRoamingFromRegistration);
+            sb.append(", mIsIwlanPreferred=");
+            sb.append(this.mIsIwlanPreferred);
+            sb.append(", mIsUsingNonTerrestrialNetwork=");
+            sb.append(isUsingNonTerrestrialNetwork());
+            sb.append("}");
+            string = sb.toString();
         }
-        return sb;
+        return string;
     }
 
     public String toSimpleString() {
@@ -1262,46 +1262,46 @@ public class ServiceState implements Parcelable {
         return (convertNetworkTypeBitmaskToBearerBitmask(i) & RIL_RADIO_CDMA_TECHNOLOGY_BITMASK) != 0;
     }
 
-    public static int getBitmaskFromString(String str) {
-        int i = 0;
+    public static int getBitmaskFromString(String str) throws NumberFormatException {
+        int bitmaskForTech = 0;
         for (String str2 : str.split("\\|")) {
             try {
-                int parseInt = Integer.parseInt(str2.trim());
-                if (parseInt == 0) {
+                int i = Integer.parseInt(str2.trim());
+                if (i == 0) {
                     return 0;
                 }
-                i |= getBitmaskForTech(parseInt);
+                bitmaskForTech |= getBitmaskForTech(i);
             } catch (NumberFormatException unused) {
                 return 0;
             }
         }
-        return i;
+        return bitmaskForTech;
     }
 
     public static int convertNetworkTypeBitmaskToBearerBitmask(int i) {
         if (i == 0) {
             return 0;
         }
-        int i2 = 0;
-        for (int i3 = 0; i3 < 21; i3++) {
-            if (bitmaskHasTech(i, rilRadioTechnologyToNetworkType(i3))) {
-                i2 |= getBitmaskForTech(i3);
+        int bitmaskForTech = 0;
+        for (int i2 = 0; i2 < 21; i2++) {
+            if (bitmaskHasTech(i, rilRadioTechnologyToNetworkType(i2))) {
+                bitmaskForTech |= getBitmaskForTech(i2);
             }
         }
-        return i2;
+        return bitmaskForTech;
     }
 
     public static int convertBearerBitmaskToNetworkTypeBitmask(int i) {
         if (i == 0) {
             return 0;
         }
-        int i2 = 0;
-        for (int i3 = 0; i3 < 21; i3++) {
-            if (bitmaskHasTech(i, i3)) {
-                i2 |= getBitmaskForTech(rilRadioTechnologyToNetworkType(i3));
+        int bitmaskForTech = 0;
+        for (int i2 = 0; i2 < 21; i2++) {
+            if (bitmaskHasTech(i, i2)) {
+                bitmaskForTech |= getBitmaskForTech(rilRadioTechnologyToNetworkType(i2));
             }
         }
-        return i2;
+        return bitmaskForTech;
     }
 
     public static ServiceState mergeServiceStates(ServiceState serviceState, ServiceState serviceState2) {

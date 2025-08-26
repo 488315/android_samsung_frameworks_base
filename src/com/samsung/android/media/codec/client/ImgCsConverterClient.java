@@ -32,7 +32,7 @@ public class ImgCsConverterClient extends ClientImpl {
     }
 
     @Override // com.samsung.android.media.codec.client.ClientImpl
-    public void transcode() {
+    public void transcode() throws IOException {
         try {
             new ConverterThread().start();
         } catch (Exception e) {
@@ -86,23 +86,23 @@ public class ImgCsConverterClient extends ClientImpl {
                         }
                         ImgCsConverterClient.this.mIsRunning = false;
                         ImgCsConverterClient.this.mTranscodingService.stopTask(ImgCsConverterClient.this.mID);
-                    } catch (RemoteException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
-                    }
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                    Log.w(Context.SEM_VIDEO_TRANSCODING_SERVICE, "Task(" + ImgCsConverterClient.this.mID + ") has been terminated unexpectedly");
-                    if (ImgCsConverterClient.this.mIgnoreError) {
-                        Log.i(Context.SEM_VIDEO_TRANSCODING_SERVICE, "Client has stopped " + ImgCsConverterClient.this.mID + ", Ignore this error.");
-                    } else {
-                        try {
-                            ImgCsConverterClient.this.mProgressCallback.onError();
-                        } catch (RemoteException e3) {
-                            e3.printStackTrace();
+                        Log.w(Context.SEM_VIDEO_TRANSCODING_SERVICE, "Task(" + ImgCsConverterClient.this.mID + ") has been terminated unexpectedly");
+                        if (ImgCsConverterClient.this.mIgnoreError) {
+                            Log.i(Context.SEM_VIDEO_TRANSCODING_SERVICE, "Client has stopped " + ImgCsConverterClient.this.mID + ", Ignore this error.");
+                        } else {
+                            try {
+                                ImgCsConverterClient.this.mProgressCallback.onError();
+                            } catch (RemoteException e2) {
+                                e2.printStackTrace();
+                            }
                         }
+                        ImgCsConverterClient.this.mIsRunning = false;
+                        ImgCsConverterClient.this.mTranscodingService.stopTask(ImgCsConverterClient.this.mID);
                     }
-                    ImgCsConverterClient.this.mIsRunning = false;
-                    ImgCsConverterClient.this.mTranscodingService.stopTask(ImgCsConverterClient.this.mID);
+                } catch (RemoteException e3) {
+                    e3.printStackTrace();
                 }
             } catch (Throwable th) {
                 ImgCsConverterClient.this.mIsRunning = false;

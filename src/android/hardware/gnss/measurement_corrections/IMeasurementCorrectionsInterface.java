@@ -71,9 +71,9 @@ public interface IMeasurementCorrectionsInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMeasurementCorrectionsInterface)) {
-                return (IMeasurementCorrectionsInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMeasurementCorrectionsInterface)) {
+                return (IMeasurementCorrectionsInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -126,9 +126,9 @@ public interface IMeasurementCorrectionsInterface extends IInterface {
                 setCorrections(measurementCorrections);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IMeasurementCorrectionsCallback asInterface = IMeasurementCorrectionsCallback.Stub.asInterface(parcel.readStrongBinder());
+                IMeasurementCorrectionsCallback iMeasurementCorrectionsCallbackAsInterface = IMeasurementCorrectionsCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setCallback(asInterface);
+                setCallback(iMeasurementCorrectionsCallbackAsInterface);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -156,51 +156,51 @@ public interface IMeasurementCorrectionsInterface extends IInterface {
 
             @Override // android.hardware.gnss.measurement_corrections.IMeasurementCorrectionsInterface
             public void setCorrections(MeasurementCorrections measurementCorrections) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(measurementCorrections, 0);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(measurementCorrections, 0);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setCorrections is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.measurement_corrections.IMeasurementCorrectionsInterface
             public void setCallback(IMeasurementCorrectionsCallback iMeasurementCorrectionsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iMeasurementCorrectionsCallback);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMeasurementCorrectionsCallback);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setCallback is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.measurement_corrections.IMeasurementCorrectionsInterface
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -209,18 +209,18 @@ public interface IMeasurementCorrectionsInterface extends IInterface {
             @Override // android.hardware.gnss.measurement_corrections.IMeasurementCorrectionsInterface
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

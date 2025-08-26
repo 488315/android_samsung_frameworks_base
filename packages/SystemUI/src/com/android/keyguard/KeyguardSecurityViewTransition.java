@@ -4,6 +4,7 @@ import android.R;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.transition.Transition;
 import android.transition.TransitionValues;
@@ -20,13 +21,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Ref$IntRef;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class KeyguardSecurityViewTransition extends Transition {
     public final long SEC_SECURITY_SHIFT_ANIMATION_DURATION_MS = 450;
     public final PathInterpolator transitionPathInterpolator = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -66,18 +65,18 @@ public final class KeyguardSecurityViewTransition extends Transition {
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r6v2, types: [T, android.animation.ValueAnimator] */
     @Override // android.transition.Transition
-    public final Animator createAnimator(ViewGroup viewGroup, TransitionValues transitionValues, TransitionValues transitionValues2) {
+    public final Animator createAnimator(ViewGroup viewGroup, TransitionValues transitionValues, TransitionValues transitionValues2) throws Resources.NotFoundException {
         if (transitionValues == null || transitionValues2 == null) {
             return null;
         }
-        final Interpolator loadInterpolator = AnimationUtils.loadInterpolator(viewGroup.getContext(), R.interpolator.fast_out_extra_slow_in);
+        final Interpolator interpolatorLoadInterpolator = AnimationUtils.loadInterpolator(viewGroup.getContext(), R.interpolator.fast_out_extra_slow_in);
         final Interpolator interpolator = Interpolators.FAST_OUT_LINEAR_IN;
         final Interpolator interpolator2 = Interpolators.LINEAR_OUT_SLOW_IN;
         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
-        ?? ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ref$ObjectRef.element = ofFloat;
+        ?? OfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        ref$ObjectRef.element = OfFloat;
         boolean z = LsRune.SECURITY_ARROW_VIEW;
-        ofFloat.setDuration(z ? this.SEC_SECURITY_SHIFT_ANIMATION_DURATION_MS : 500L);
+        OfFloat.setDuration(z ? this.SEC_SECURITY_SHIFT_ANIMATION_DURATION_MS : 500L);
         ((ValueAnimator) ref$ObjectRef.element).setInterpolator(z ? this.transitionPathInterpolator : Interpolators.LINEAR);
         final Rect rect = (Rect) transitionValues.values.get("securityViewLocation:bounds");
         final Rect rect2 = (Rect) transitionValues2.values.get("securityViewLocation:bounds");
@@ -92,7 +91,7 @@ public final class KeyguardSecurityViewTransition extends Transition {
             view.setLayerType(2, null);
         }
         final float alpha = view.getAlpha();
-        ((ValueAnimator) ref$ObjectRef.element).addListener(new AnimatorListenerAdapter() { // from class: com.android.keyguard.KeyguardSecurityViewTransition$createAnimator$1
+        ((ValueAnimator) ref$ObjectRef.element).addListener(new AnimatorListenerAdapter() { // from class: com.android.keyguard.KeyguardSecurityViewTransition.createAnimator.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 ref$ObjectRef.element = null;
@@ -101,11 +100,11 @@ public final class KeyguardSecurityViewTransition extends Transition {
                 }
             }
         });
-        ((ValueAnimator) ref$ObjectRef.element).addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardSecurityViewTransition$createAnimator$2
+        ((ValueAnimator) ref$ObjectRef.element).addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardSecurityViewTransition.createAnimator.2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 boolean z3 = valueAnimator.getAnimatedFraction() < 0.2f;
-                float interpolation = loadInterpolator.getInterpolation(valueAnimator.getAnimatedFraction());
+                float interpolation = interpolatorLoadInterpolator.getInterpolation(valueAnimator.getAnimatedFraction());
                 int i = ref$IntRef.element;
                 int i2 = (int) (interpolation * i);
                 int i3 = i - i2;

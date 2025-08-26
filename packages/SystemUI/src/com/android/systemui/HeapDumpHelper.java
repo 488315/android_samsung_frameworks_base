@@ -12,10 +12,10 @@ import android.util.Slog;
 import com.android.systemui.HeapDumpHelper;
 import com.android.systemui.util.DeviceType;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HeapDumpHelper {
     public final Handler mBgHandler;
@@ -23,7 +23,6 @@ public class HeapDumpHelper {
     public boolean isDumped = false;
     public String mHeapDumpFilePath = "";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FileManager {
         public final File mHeapDumpDir;
 
@@ -37,15 +36,15 @@ public class HeapDumpHelper {
         }
 
         public final void deleteOldHeap() {
-            File[] listFiles = this.mHeapDumpDir.listFiles(new HeapDumpHelper$FileManager$$ExternalSyntheticLambda0());
-            if (listFiles == null) {
+            File[] fileArrListFiles = this.mHeapDumpDir.listFiles(new HeapDumpHelper$FileManager$$ExternalSyntheticLambda0());
+            if (fileArrListFiles == null) {
                 Slog.d("HeapDumpHelper", "mHeapDumpDir(" + this.mHeapDumpDir + ").listFiles result is null!!!");
                 StringBuilder sb = new StringBuilder("canWrite=");
                 sb.append(this.mHeapDumpDir.canWrite());
                 Slog.d("HeapDumpHelper", sb.toString());
                 return;
             }
-            for (File file : listFiles) {
+            for (File file : fileArrListFiles) {
                 if (file.exists() && !file.delete()) {
                     Slog.w("HeapDumpHelper", "Failed to delete heapdump file : " + file);
                 }
@@ -59,9 +58,9 @@ public class HeapDumpHelper {
     }
 
     public final void dump(final String str) {
-        boolean equals = "user".equals(Build.TYPE);
+        boolean zEquals = "user".equals(Build.TYPE);
         boolean z = DeviceType.getDebugLevel() == DeviceType.DEBUG_LEVEL_LOW;
-        if (equals && z && DeviceType.isShipBuild()) {
+        if (zEquals && z && DeviceType.isShipBuild()) {
             String[] strArr = {"com.salab.act", "com.salab.issuetracker"};
             for (int i = 0; i < 2; i++) {
                 String str2 = strArr[i];
@@ -102,7 +101,7 @@ public class HeapDumpHelper {
                         }
 
                         @Override // java.lang.Runnable
-                        public final void run() {
+                        public final void run() throws IOException {
                             switch (i2) {
                                 case 0:
                                     HeapDumpHelper heapDumpHelper = this.f$0;
@@ -124,9 +123,9 @@ public class HeapDumpHelper {
                                     heapDumpHelper2.getClass();
                                     try {
                                         new HeapDumpHelper.FileManager(str5).deleteOldHeap();
-                                        String concat = str5.concat(String.format("%s_%d_%s.hprof", "heap-systemui", Integer.valueOf(Process.myPid()), new SimpleDateFormat("yyMMdd_HHmmss").format(new Date())));
-                                        heapDumpHelper2.mHeapDumpFilePath = concat;
-                                        Debug.dumpHprofData(concat);
+                                        String strConcat = str5.concat(String.format("%s_%d_%s.hprof", "heap-systemui", Integer.valueOf(Process.myPid()), new SimpleDateFormat("yyMMdd_HHmmss").format(new Date())));
+                                        heapDumpHelper2.mHeapDumpFilePath = strConcat;
+                                        Debug.dumpHprofData(strConcat);
                                         heapDumpHelper2.isDumped = true;
                                         break;
                                     } catch (Exception e2) {
@@ -147,7 +146,7 @@ public class HeapDumpHelper {
                         }
 
                         @Override // java.lang.Runnable
-                        public final void run() {
+                        public final void run() throws IOException {
                             switch (i3) {
                                 case 0:
                                     HeapDumpHelper heapDumpHelper = this.f$0;
@@ -169,9 +168,9 @@ public class HeapDumpHelper {
                                     heapDumpHelper2.getClass();
                                     try {
                                         new HeapDumpHelper.FileManager(str5).deleteOldHeap();
-                                        String concat = str5.concat(String.format("%s_%d_%s.hprof", "heap-systemui", Integer.valueOf(Process.myPid()), new SimpleDateFormat("yyMMdd_HHmmss").format(new Date())));
-                                        heapDumpHelper2.mHeapDumpFilePath = concat;
-                                        Debug.dumpHprofData(concat);
+                                        String strConcat = str5.concat(String.format("%s_%d_%s.hprof", "heap-systemui", Integer.valueOf(Process.myPid()), new SimpleDateFormat("yyMMdd_HHmmss").format(new Date())));
+                                        heapDumpHelper2.mHeapDumpFilePath = strConcat;
+                                        Debug.dumpHprofData(strConcat);
                                         heapDumpHelper2.isDumped = true;
                                         break;
                                     } catch (Exception e2) {
@@ -200,7 +199,7 @@ public class HeapDumpHelper {
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws IOException {
                 switch (i4) {
                     case 0:
                         HeapDumpHelper heapDumpHelper = this.f$0;
@@ -222,9 +221,9 @@ public class HeapDumpHelper {
                         heapDumpHelper2.getClass();
                         try {
                             new HeapDumpHelper.FileManager(str5).deleteOldHeap();
-                            String concat = str5.concat(String.format("%s_%d_%s.hprof", "heap-systemui", Integer.valueOf(Process.myPid()), new SimpleDateFormat("yyMMdd_HHmmss").format(new Date())));
-                            heapDumpHelper2.mHeapDumpFilePath = concat;
-                            Debug.dumpHprofData(concat);
+                            String strConcat = str5.concat(String.format("%s_%d_%s.hprof", "heap-systemui", Integer.valueOf(Process.myPid()), new SimpleDateFormat("yyMMdd_HHmmss").format(new Date())));
+                            heapDumpHelper2.mHeapDumpFilePath = strConcat;
+                            Debug.dumpHprofData(strConcat);
                             heapDumpHelper2.isDumped = true;
                             break;
                         } catch (Exception e2) {

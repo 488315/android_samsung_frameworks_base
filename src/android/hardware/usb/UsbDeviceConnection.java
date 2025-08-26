@@ -49,15 +49,15 @@ public class UsbDeviceConnection {
     }
 
     boolean open(String str, ParcelFileDescriptor parcelFileDescriptor, Context context) {
-        boolean native_open;
+        boolean zNative_open;
         this.mContext = context.getApplicationContext();
         synchronized (this.mLock) {
-            native_open = native_open(str, parcelFileDescriptor.getFileDescriptor());
-            if (native_open) {
+            zNative_open = native_open(str, parcelFileDescriptor.getFileDescriptor());
+            if (zNative_open) {
                 this.mCloseGuard.open("UsbDeviceConnection.close");
             }
         }
-        return native_open;
+        return zNative_open;
     }
 
     boolean isOpen() {
@@ -155,24 +155,24 @@ public class UsbDeviceConnection {
     }
 
     public UsbRequest requestWait() {
-        UsbRequest usbRequest;
+        UsbRequest usbRequestNative_request_wait;
         try {
-            usbRequest = native_request_wait(-1L);
+            usbRequestNative_request_wait = native_request_wait(-1L);
         } catch (TimeoutException unused) {
-            usbRequest = null;
+            usbRequestNative_request_wait = null;
         }
-        if (usbRequest != null) {
-            usbRequest.dequeue(this.mContext.getApplicationInfo().targetSdkVersion >= 26);
+        if (usbRequestNative_request_wait != null) {
+            usbRequestNative_request_wait.dequeue(this.mContext.getApplicationInfo().targetSdkVersion >= 26);
         }
-        return usbRequest;
+        return usbRequestNative_request_wait;
     }
 
     public UsbRequest requestWait(long j) throws TimeoutException {
-        UsbRequest native_request_wait = native_request_wait(Preconditions.checkArgumentNonnegative(j, "timeout"));
-        if (native_request_wait != null) {
-            native_request_wait.dequeue(true);
+        UsbRequest usbRequestNative_request_wait = native_request_wait(Preconditions.checkArgumentNonnegative(j, "timeout"));
+        if (usbRequestNative_request_wait != null) {
+            usbRequestNative_request_wait.dequeue(true);
         }
-        return native_request_wait;
+        return usbRequestNative_request_wait;
     }
 
     public String getSerial() {

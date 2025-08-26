@@ -18,13 +18,11 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromDreamingTransitionInteractor$listenForDreamingToOccluded$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ FromDreamingTransitionInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.domain.interactor.FromDreamingTransitionInteractor$listenForDreamingToOccluded$1$3, reason: invalid class name */
     final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
         public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -69,13 +67,13 @@ final class FromDreamingTransitionInteractor$listenForDreamingToOccluded$1 exten
             KeyguardInteractor keyguardInteractor = fromDreamingTransitionInteractor.keyguardInteractor;
             FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(keyguardInteractor.isKeyguardOccluded, keyguardInteractor.isDreaming, AnonymousClass3.INSTANCE);
             Duration.Companion companion = Duration.Companion;
-            TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 transitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 = new TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1(FlowKt.m3462debounceHG0u8IE(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, DurationKt.toDuration(100, DurationUnit.MILLISECONDS)), fromDreamingTransitionInteractor, new FromDreamingTransitionInteractor$listenForDreamingToOccluded$1$$ExternalSyntheticLambda0(0));
+            TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 transitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 = new TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1(FlowKt.m3482debounceHG0u8IE(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, DurationKt.toDuration(100, DurationUnit.MILLISECONDS)), fromDreamingTransitionInteractor, new FromDreamingTransitionInteractor$listenForDreamingToOccluded$1$$ExternalSyntheticLambda0(0));
             final FromDreamingTransitionInteractor fromDreamingTransitionInteractor2 = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.FromDreamingTransitionInteractor$listenForDreamingToOccluded$1.5
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    Object startTransitionTo$default = TransitionInteractor.startTransitionTo$default(FromDreamingTransitionInteractor.this, KeyguardState.OCCLUDED, null, null, "Occluded but no longer dreaming", continuation, 6);
-                    return startTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default : Unit.INSTANCE;
+                    Object objStartTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromDreamingTransitionInteractor2, KeyguardState.OCCLUDED, null, null, "Occluded but no longer dreaming", continuation, 6);
+                    return objStartTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default : Unit.INSTANCE;
                 }
             };
             this.label = 1;

@@ -30,32 +30,32 @@ public class CpuScalingPolicyReader {
         this.mCpuFreqDir = str;
     }
 
-    public CpuScalingPolicies read() {
+    public CpuScalingPolicies read() throws NumberFormatException {
         SparseArray sparseArray = new SparseArray();
         SparseArray sparseArray2 = new SparseArray();
-        File[] listFiles = new File(this.mCpuFreqDir).listFiles();
-        if (listFiles != null) {
-            for (File file : listFiles) {
+        File[] fileArrListFiles = new File(this.mCpuFreqDir).listFiles();
+        if (fileArrListFiles != null) {
+            for (File file : fileArrListFiles) {
                 Matcher matcher = POLICY_PATTERN.matcher(file.getName());
                 if (matcher.matches()) {
-                    int[] readIntsFromFile = readIntsFromFile(new File(file, FILE_NAME_RELATED_CPUS));
-                    if (readIntsFromFile.length != 0) {
-                        int[] readIntsFromFile2 = readIntsFromFile(new File(file, FILE_NAME_SCALING_AVAILABLE_FREQUENCIES));
-                        int[] readIntsFromFile3 = readIntsFromFile(new File(file, FILE_NAME_SCALING_BOOST_FREQUENCIES));
-                        if (readIntsFromFile3.length != 0) {
-                            int[] copyOf = Arrays.copyOf(readIntsFromFile2, readIntsFromFile2.length + readIntsFromFile3.length);
-                            System.arraycopy(readIntsFromFile3, 0, copyOf, readIntsFromFile2.length, readIntsFromFile3.length);
-                            readIntsFromFile2 = copyOf;
+                    int[] intsFromFile = readIntsFromFile(new File(file, FILE_NAME_RELATED_CPUS));
+                    if (intsFromFile.length != 0) {
+                        int[] intsFromFile2 = readIntsFromFile(new File(file, FILE_NAME_SCALING_AVAILABLE_FREQUENCIES));
+                        int[] intsFromFile3 = readIntsFromFile(new File(file, FILE_NAME_SCALING_BOOST_FREQUENCIES));
+                        if (intsFromFile3.length != 0) {
+                            int[] iArrCopyOf = Arrays.copyOf(intsFromFile2, intsFromFile2.length + intsFromFile3.length);
+                            System.arraycopy(intsFromFile3, 0, iArrCopyOf, intsFromFile2.length, intsFromFile3.length);
+                            intsFromFile2 = iArrCopyOf;
                         }
-                        if (readIntsFromFile2.length == 0) {
-                            readIntsFromFile2 = readIntsFromFile(new File(file, FILE_NAME_CPUINFO_CUR_FREQ));
-                            if (readIntsFromFile2.length == 0) {
-                                readIntsFromFile2 = new int[]{0};
+                        if (intsFromFile2.length == 0) {
+                            intsFromFile2 = readIntsFromFile(new File(file, FILE_NAME_CPUINFO_CUR_FREQ));
+                            if (intsFromFile2.length == 0) {
+                                intsFromFile2 = new int[]{0};
                             }
                         }
-                        int parseInt = Integer.parseInt(matcher.group(1));
-                        sparseArray.put(parseInt, readIntsFromFile);
-                        sparseArray2.put(parseInt, readIntsFromFile2);
+                        int i = Integer.parseInt(matcher.group(1));
+                        sparseArray.put(i, intsFromFile);
+                        sparseArray2.put(i, intsFromFile2);
                     }
                 }
             }
@@ -78,16 +78,16 @@ public class CpuScalingPolicyReader {
         }
         IntArray intArray = new IntArray(16);
         try {
-            String trim = FileUtils.readTextFile(file, 0, null).trim();
-            Slog.i(TAG, "FILE CONTENTS: " + trim);
-            String[] split = trim.split(" ");
+            String strTrim = FileUtils.readTextFile(file, 0, null).trim();
+            Slog.i(TAG, "FILE CONTENTS: " + strTrim);
+            String[] strArrSplit = strTrim.split(" ");
             intArray.clear();
-            for (String str : split) {
+            for (String str : strArrSplit) {
                 if (!str.isBlank()) {
                     try {
                         intArray.add(Integer.parseInt(str));
                     } catch (NumberFormatException e) {
-                        Slog.e(TAG, "Unexpected file format " + file + ": " + trim, e);
+                        Slog.e(TAG, "Unexpected file format " + file + ": " + strTrim, e);
                     }
                 }
             }

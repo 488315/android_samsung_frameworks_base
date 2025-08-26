@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class GlobalActionsColumnLayout extends GlobalActionsLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -47,7 +46,7 @@ public class GlobalActionsColumnLayout extends GlobalActionsLayout {
         post(new Runnable() { // from class: com.android.systemui.globalactions.GlobalActionsColumnLayout$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                GlobalActionsColumnLayout globalActionsColumnLayout = GlobalActionsColumnLayout.this;
+                GlobalActionsColumnLayout globalActionsColumnLayout = this.f$0;
                 int i5 = GlobalActionsColumnLayout.$r8$clinit;
                 globalActionsColumnLayout.updateSnap();
             }
@@ -104,14 +103,14 @@ public class GlobalActionsColumnLayout extends GlobalActionsLayout {
     }
 
     public void updateSnap() {
-        boolean shouldSnapToPowerButton = shouldSnapToPowerButton();
-        if (shouldSnapToPowerButton != this.mLastSnap) {
-            if (shouldSnapToPowerButton) {
+        boolean zShouldSnapToPowerButton = shouldSnapToPowerButton();
+        if (zShouldSnapToPowerButton != this.mLastSnap) {
+            if (zShouldSnapToPowerButton) {
                 snapToPowerButton();
             } else {
                 centerAlongEdge();
             }
         }
-        this.mLastSnap = shouldSnapToPowerButton;
+        this.mLastSnap = zShouldSnapToPowerButton;
     }
 }

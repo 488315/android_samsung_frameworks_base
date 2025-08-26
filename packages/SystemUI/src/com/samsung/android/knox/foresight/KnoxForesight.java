@@ -18,7 +18,6 @@ import com.sec.ims.IMSParameter;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KnoxForesight {
     public static final String ERROR_DOWNLOAD = "ERROR_DOWNLOAD";
@@ -52,8 +51,8 @@ public class KnoxForesight {
 
     public boolean sendCommandAsync(String str) {
         try {
-            String sendCommand = sendCommand(str, true);
-            Log.d(this.TAG, "sendCommandAsync. msg : " + sendCommand + " / This message will be forwarded to the callback.");
+            String strSendCommand = sendCommand(str, true);
+            Log.d(this.TAG, "sendCommandAsync. msg : " + strSendCommand + " / This message will be forwarded to the callback.");
             return true;
         } catch (Exception e) {
             Log.d(this.TAG, "sendCommandAsync. error");
@@ -141,13 +140,13 @@ public class KnoxForesight {
             if (this.FS_APP_NAME.equals(installedApplications.get(i).packageName)) {
                 try {
                     Log.d(this.TAG, "send command.... " + str);
-                    String SendCommand = this.iBinder.SendCommand(str);
+                    String strSendCommand = this.iBinder.SendCommand(str);
                     if (z) {
                         Intent intent = new Intent("com.samsung.android.knox.containercore.action.FORESIGHT_RETURN");
-                        intent.putExtra("error", SendCommand);
+                        intent.putExtra("error", strSendCommand);
                         this.fsReturnReceiver.onReceive(null, intent);
                     }
-                    return SendCommand;
+                    return strSendCommand;
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }

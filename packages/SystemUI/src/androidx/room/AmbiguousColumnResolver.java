@@ -27,12 +27,10 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.ranges.IntProgressionIterator;
 import kotlin.ranges.IntRange;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AmbiguousColumnResolver {
     public static final AmbiguousColumnResolver INSTANCE = new AmbiguousColumnResolver();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Match {
         public final List resultIndices;
         public final IntRange resultRange;
@@ -43,7 +41,6 @@ public final class AmbiguousColumnResolver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ResultColumn {
         public final int index;
         public final String name;
@@ -76,7 +73,6 @@ public final class AmbiguousColumnResolver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Solution implements Comparable {
         public static final Companion Companion = new Companion(null);
         public static final Solution NO_SOLUTION = new Solution(EmptyList.INSTANCE, Integer.MAX_VALUE, Integer.MAX_VALUE);
@@ -84,7 +80,6 @@ public final class AmbiguousColumnResolver {
         public final List matches;
         public final int overlaps;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -103,8 +98,8 @@ public final class AmbiguousColumnResolver {
         @Override // java.lang.Comparable
         public final int compareTo(Object obj) {
             Solution solution = (Solution) obj;
-            int compare = Intrinsics.compare(this.overlaps, solution.overlaps);
-            return compare != 0 ? compare : Intrinsics.compare(this.coverageOffset, solution.coverageOffset);
+            int iCompare = Intrinsics.compare(this.overlaps, solution.overlaps);
+            return iCompare != 0 ? iCompare : Intrinsics.compare(this.coverageOffset, solution.coverageOffset);
         }
     }
 
@@ -114,7 +109,7 @@ public final class AmbiguousColumnResolver {
     public static void dfs(List list, List list2, int i, Function1 function1) {
         ArrayList arrayList = (ArrayList) list;
         if (i == arrayList.size()) {
-            function1.mo779invoke(CollectionsKt___CollectionsKt.toList(list2));
+            function1.mo781invoke(CollectionsKt___CollectionsKt.toList(list2));
             return;
         }
         Iterator it = ((Iterable) arrayList.get(i)).iterator();
@@ -135,11 +130,11 @@ public final class AmbiguousColumnResolver {
         String[] strArr3 = (String[]) list.toArray(new String[0]);
         int length = strArr3.length;
         for (int i2 = 0; i2 < length; i2++) {
-            String str = strArr3[i2];
-            if (str.charAt(0) == '`' && str.charAt(str.length() - 1) == '`') {
-                str = str.substring(1, str.length() - 1);
+            String strSubstring = strArr3[i2];
+            if (strSubstring.charAt(0) == '`' && strSubstring.charAt(strSubstring.length() - 1) == '`') {
+                strSubstring = strSubstring.substring(1, strSubstring.length() - 1);
             }
-            strArr3[i2] = str.toLowerCase(Locale.ROOT);
+            strArr3[i2] = strSubstring.toLowerCase(Locale.ROOT);
         }
         int length2 = strArr2.length;
         for (int i3 = 0; i3 < length2; i3++) {
@@ -153,21 +148,21 @@ public final class AmbiguousColumnResolver {
         for (String[] strArr5 : strArr2) {
             CollectionsKt__MutableCollectionsKt.addAll(setBuilder, strArr5);
         }
-        SetBuilder build = setBuilder.build();
-        ListBuilder createListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+        SetBuilder setBuilderBuild = setBuilder.build();
+        ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
         int length4 = strArr3.length;
         int i5 = 0;
         int i6 = 0;
         while (i5 < length4) {
-            String str2 = strArr3[i5];
+            String str = strArr3[i5];
             int i7 = i6 + 1;
-            if (build.contains(str2)) {
-                createListBuilder.add(new ResultColumn(str2, i6));
+            if (setBuilderBuild.contains(str)) {
+                listBuilderCreateListBuilder.add(new ResultColumn(str, i6));
             }
             i5++;
             i6 = i7;
         }
-        ListBuilder build2 = createListBuilder.build();
+        ListBuilder listBuilderBuild = listBuilderCreateListBuilder.build();
         int length5 = strArr2.length;
         final ArrayList arrayList = new ArrayList(length5);
         for (int i8 = 0; i8 < length5; i8++) {
@@ -198,56 +193,56 @@ public final class AmbiguousColumnResolver {
                     /* JADX WARN: Type inference failed for: r0v1, types: [T, androidx.room.AmbiguousColumnResolver$Solution] */
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         List list2 = (List) obj2;
                         AmbiguousColumnResolver ambiguousColumnResolver2 = AmbiguousColumnResolver.INSTANCE;
                         AmbiguousColumnResolver.Solution.Companion.getClass();
                         List<AmbiguousColumnResolver.Match> list3 = list2;
                         int i12 = 0;
-                        int i13 = 0;
+                        int size2 = 0;
                         for (AmbiguousColumnResolver.Match match : list3) {
                             IntRange intRange = match.resultRange;
-                            i13 += ((intRange.last - intRange.first) + 1) - match.resultIndices.size();
+                            size2 += ((intRange.last - intRange.first) + 1) - match.resultIndices.size();
                         }
                         Iterator it = list3.iterator();
                         if (!it.hasNext()) {
                             throw new NoSuchElementException();
                         }
-                        int i14 = ((AmbiguousColumnResolver.Match) it.next()).resultRange.first;
+                        int i13 = ((AmbiguousColumnResolver.Match) it.next()).resultRange.first;
                         while (it.hasNext()) {
-                            int i15 = ((AmbiguousColumnResolver.Match) it.next()).resultRange.first;
-                            if (i14 > i15) {
-                                i14 = i15;
+                            int i14 = ((AmbiguousColumnResolver.Match) it.next()).resultRange.first;
+                            if (i13 > i14) {
+                                i13 = i14;
                             }
                         }
                         Iterator it2 = list3.iterator();
                         if (!it2.hasNext()) {
                             throw new NoSuchElementException();
                         }
-                        int i16 = ((AmbiguousColumnResolver.Match) it2.next()).resultRange.last;
+                        int i15 = ((AmbiguousColumnResolver.Match) it2.next()).resultRange.last;
                         while (it2.hasNext()) {
-                            int i17 = ((AmbiguousColumnResolver.Match) it2.next()).resultRange.last;
-                            if (i16 < i17) {
-                                i16 = i17;
+                            int i16 = ((AmbiguousColumnResolver.Match) it2.next()).resultRange.last;
+                            if (i15 < i16) {
+                                i15 = i16;
                             }
                         }
-                        Iterable intRange2 = new IntRange(i14, i16);
+                        Iterable intRange2 = new IntRange(i13, i15);
                         if (!(intRange2 instanceof Collection) || !((Collection) intRange2).isEmpty()) {
                             IntProgressionIterator it3 = intRange2.iterator();
-                            int i18 = 0;
+                            int i17 = 0;
                             while (it3.hasNext) {
-                                int nextInt = it3.nextInt();
+                                int iNextInt = it3.nextInt();
                                 Iterator it4 = list3.iterator();
-                                int i19 = 0;
+                                int i18 = 0;
                                 while (true) {
                                     if (it4.hasNext()) {
                                         IntRange intRange3 = ((AmbiguousColumnResolver.Match) it4.next()).resultRange;
-                                        if (intRange3.first <= nextInt && nextInt <= intRange3.last) {
-                                            i19++;
-                                        }
-                                        if (i19 > 1) {
+                                        if (intRange3.first <= iNextInt && iNextInt <= intRange3.last) {
                                             i18++;
-                                            if (i18 < 0) {
+                                        }
+                                        if (i18 > 1) {
+                                            i17++;
+                                            if (i17 < 0) {
                                                 CollectionsKt__CollectionsKt.throwCountOverflow();
                                                 throw null;
                                             }
@@ -255,16 +250,16 @@ public final class AmbiguousColumnResolver {
                                     }
                                 }
                             }
-                            i12 = i18;
+                            i12 = i17;
                         }
-                        ?? solution = new AmbiguousColumnResolver.Solution(list2, i13, i12);
-                        Ref$ObjectRef ref$ObjectRef2 = Ref$ObjectRef.this;
+                        ?? solution = new AmbiguousColumnResolver.Solution(list2, size2, i12);
+                        Ref$ObjectRef ref$ObjectRef2 = ref$ObjectRef;
                         AmbiguousColumnResolver.Solution solution2 = (AmbiguousColumnResolver.Solution) ref$ObjectRef2.element;
-                        int compare = Intrinsics.compare(solution.overlaps, solution2.overlaps);
-                        if (compare == 0) {
-                            compare = Intrinsics.compare(solution.coverageOffset, solution2.coverageOffset);
+                        int iCompare = Intrinsics.compare(solution.overlaps, solution2.overlaps);
+                        if (iCompare == 0) {
+                            iCompare = Intrinsics.compare(solution.coverageOffset, solution2.coverageOffset);
                         }
-                        if (compare < 0) {
+                        if (iCompare < 0) {
                             ref$ObjectRef2.element = solution;
                         }
                         return Unit.INSTANCE;
@@ -286,93 +281,93 @@ public final class AmbiguousColumnResolver {
             Function3 function3 = new Function3() { // from class: androidx.room.AmbiguousColumnResolver$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function3
                 public final Object invoke(Object obj2, Object obj3, Object obj4) {
-                    Object obj5;
+                    Object next;
                     List list3 = arrayList;
-                    int intValue = ((Integer) obj2).intValue();
-                    int intValue2 = ((Integer) obj3).intValue();
+                    int iIntValue = ((Integer) obj2).intValue();
+                    int iIntValue2 = ((Integer) obj3).intValue();
                     List list4 = (List) obj4;
                     AmbiguousColumnResolver ambiguousColumnResolver2 = AmbiguousColumnResolver.INSTANCE;
                     String[] strArr7 = strArr6;
                     ArrayList arrayList4 = new ArrayList(strArr7.length);
-                    for (String str3 : strArr7) {
+                    for (String str2 : strArr7) {
                         Iterator it2 = list4.iterator();
                         while (true) {
                             if (!it2.hasNext()) {
-                                obj5 = null;
+                                next = null;
                                 break;
                             }
-                            obj5 = it2.next();
-                            if (Intrinsics.areEqual(str3, ((AmbiguousColumnResolver.ResultColumn) obj5).name)) {
+                            next = it2.next();
+                            if (Intrinsics.areEqual(str2, ((AmbiguousColumnResolver.ResultColumn) next).name)) {
                                 break;
                             }
                         }
-                        AmbiguousColumnResolver.ResultColumn resultColumn = (AmbiguousColumnResolver.ResultColumn) obj5;
+                        AmbiguousColumnResolver.ResultColumn resultColumn = (AmbiguousColumnResolver.ResultColumn) next;
                         if (resultColumn == null) {
                             return Unit.INSTANCE;
                         }
                         arrayList4.add(Integer.valueOf(resultColumn.index));
                     }
-                    ((List) list3.get(i10)).add(new AmbiguousColumnResolver.Match(new IntRange(intValue, intValue2 - 1), arrayList4));
+                    ((List) list3.get(i10)).add(new AmbiguousColumnResolver.Match(new IntRange(iIntValue, iIntValue2 - 1), arrayList4));
                     return Unit.INSTANCE;
                 }
             };
             ambiguousColumnResolver.getClass();
             int length7 = strArr6.length;
             int i13 = i;
-            int i14 = i13;
+            int iHashCode = i13;
             while (i13 < length7) {
-                i14 += strArr6[i13].hashCode();
+                iHashCode += strArr6[i13].hashCode();
                 i13++;
             }
             int length8 = strArr6.length;
-            ListIterator listIterator = ((ListBuilder.BuilderSubList) build2.subList(i, length8)).listIterator(i);
-            int i15 = i;
+            ListIterator listIterator = ((ListBuilder.BuilderSubList) listBuilderBuild.subList(i, length8)).listIterator(i);
+            int iHashCode2 = i;
             while (true) {
                 ListBuilder.BuilderSubList.Itr itr = (ListBuilder.BuilderSubList.Itr) listIterator;
                 if (!itr.hasNext()) {
                     break;
                 }
-                i15 += ((ResultColumn) itr.next()).name.hashCode();
+                iHashCode2 += ((ResultColumn) itr.next()).name.hashCode();
             }
-            int i16 = i;
+            int i14 = i;
             while (true) {
-                if (i14 == i15) {
-                    function3.invoke(Integer.valueOf(i16), Integer.valueOf(length8), build2.subList(i16, length8));
+                if (iHashCode == iHashCode2) {
+                    function3.invoke(Integer.valueOf(i14), Integer.valueOf(length8), listBuilderBuild.subList(i14, length8));
                 }
-                int i17 = i16 + 1;
-                int i18 = length8 + 1;
-                if (i18 > build2.getSize()) {
+                int i15 = i14 + 1;
+                int i16 = length8 + 1;
+                if (i16 > listBuilderBuild.getSize()) {
                     break;
                 }
-                i15 = (i15 - ((ResultColumn) build2.get(i16)).name.hashCode()) + ((ResultColumn) build2.get(length8)).name.hashCode();
-                i16 = i17;
-                length8 = i18;
+                iHashCode2 = (iHashCode2 - ((ResultColumn) listBuilderBuild.get(i14)).name.hashCode()) + ((ResultColumn) listBuilderBuild.get(length8)).name.hashCode();
+                i14 = i15;
+                length8 = i16;
             }
             if (((List) arrayList.get(i10)).isEmpty()) {
                 ArrayList arrayList4 = new ArrayList(strArr6.length);
-                for (String str3 : strArr6) {
-                    ListBuilder createListBuilder2 = CollectionsKt__CollectionsJVMKt.createListBuilder();
-                    ListIterator listIterator2 = build2.listIterator(0);
+                for (String str2 : strArr6) {
+                    ListBuilder listBuilderCreateListBuilder2 = CollectionsKt__CollectionsJVMKt.createListBuilder();
+                    ListIterator listIterator2 = listBuilderBuild.listIterator(0);
                     while (true) {
                         ListBuilder.Itr itr2 = (ListBuilder.Itr) listIterator2;
                         if (!itr2.hasNext()) {
                             break;
                         }
                         ResultColumn resultColumn = (ResultColumn) itr2.next();
-                        if (Intrinsics.areEqual(str3, resultColumn.name)) {
-                            createListBuilder2.add(Integer.valueOf(resultColumn.index));
+                        if (Intrinsics.areEqual(str2, resultColumn.name)) {
+                            listBuilderCreateListBuilder2.add(Integer.valueOf(resultColumn.index));
                         }
                     }
-                    ListBuilder build3 = createListBuilder2.build();
-                    if (build3.isEmpty()) {
-                        throw new IllegalStateException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Column ", str3, " not found in result").toString());
+                    ListBuilder listBuilderBuild2 = listBuilderCreateListBuilder2.build();
+                    if (listBuilderBuild2.isEmpty()) {
+                        throw new IllegalStateException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Column ", str2, " not found in result").toString());
                     }
-                    arrayList4.add(build3);
+                    arrayList4.add(listBuilderBuild2);
                 }
                 Function1 function12 = new Function1() { // from class: androidx.room.AmbiguousColumnResolver$$ExternalSyntheticLambda1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         List list3 = arrayList;
                         List list4 = (List) obj2;
                         AmbiguousColumnResolver ambiguousColumnResolver2 = AmbiguousColumnResolver.INSTANCE;
@@ -381,25 +376,25 @@ public final class AmbiguousColumnResolver {
                         if (!it2.hasNext()) {
                             throw new NoSuchElementException();
                         }
-                        int intValue = ((Number) it2.next()).intValue();
+                        int iIntValue = ((Number) it2.next()).intValue();
                         while (it2.hasNext()) {
-                            int intValue2 = ((Number) it2.next()).intValue();
-                            if (intValue > intValue2) {
-                                intValue = intValue2;
+                            int iIntValue2 = ((Number) it2.next()).intValue();
+                            if (iIntValue > iIntValue2) {
+                                iIntValue = iIntValue2;
                             }
                         }
                         Iterator it3 = list5.iterator();
                         if (!it3.hasNext()) {
                             throw new NoSuchElementException();
                         }
-                        int intValue3 = ((Number) it3.next()).intValue();
+                        int iIntValue3 = ((Number) it3.next()).intValue();
                         while (it3.hasNext()) {
-                            int intValue4 = ((Number) it3.next()).intValue();
-                            if (intValue3 < intValue4) {
-                                intValue3 = intValue4;
+                            int iIntValue4 = ((Number) it3.next()).intValue();
+                            if (iIntValue3 < iIntValue4) {
+                                iIntValue3 = iIntValue4;
                             }
                         }
-                        ((List) list3.get(i10)).add(new AmbiguousColumnResolver.Match(new IntRange(intValue, intValue3), list4));
+                        ((List) list3.get(i10)).add(new AmbiguousColumnResolver.Match(new IntRange(iIntValue, iIntValue3), list4));
                         return Unit.INSTANCE;
                     }
                 };

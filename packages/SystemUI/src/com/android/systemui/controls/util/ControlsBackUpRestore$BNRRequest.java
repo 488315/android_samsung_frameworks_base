@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsBackUpRestore$BNRRequest {
     public final ControlsBackUpRestore$BNRAction action;
@@ -35,11 +34,11 @@ public final class ControlsBackUpRestore$BNRRequest {
 
     public final int hashCode() {
         String str = this.intentAction;
-        int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+        int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
         String str2 = this.savePath;
-        int hashCode2 = (this.extraBackupItem.hashCode() + ((this.securityLevel.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((this.action.hashCode() + ((hashCode + (str2 == null ? 0 : str2.hashCode())) * 31)) * 31, 31, this.sessionKey), 31, this.source)) * 31)) * 31;
+        int iHashCode2 = (this.extraBackupItem.hashCode() + ((this.securityLevel.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((this.action.hashCode() + ((iHashCode + (str2 == null ? 0 : str2.hashCode())) * 31)) * 31, 31, this.sessionKey), 31, this.source)) * 31)) * 31;
         String str3 = this.exportSessionTime;
-        return hashCode2 + (str3 != null ? str3.hashCode() : 0);
+        return iHashCode2 + (str3 != null ? str3.hashCode() : 0);
     }
 
     public final String toString() {

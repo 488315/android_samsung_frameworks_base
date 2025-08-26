@@ -44,9 +44,9 @@ public interface IPackageDataObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPackageDataObserver)) {
-                return (IPackageDataObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPackageDataObserver)) {
+                return (IPackageDataObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IPackageDataObserver extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                boolean readBoolean = parcel.readBoolean();
+                String string = parcel.readString();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onRemoveCompleted(readString, readBoolean);
+                onRemoveCompleted(string, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IPackageDataObserver extends IInterface {
 
             @Override // android.content.pm.IPackageDataObserver
             public void onRemoveCompleted(String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

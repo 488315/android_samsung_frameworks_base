@@ -482,9 +482,9 @@ public class AlertDialog extends Dialog implements DialogInterface {
         }
 
         public AlertDialog show() {
-            AlertDialog create = create();
-            create.show();
-            return create;
+            AlertDialog alertDialogCreate = create();
+            alertDialogCreate.show();
+            return alertDialogCreate;
         }
     }
 }

@@ -76,9 +76,9 @@ public interface IIpConnectivityMetrics extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIpConnectivityMetrics)) {
-                return (IIpConnectivityMetrics) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIpConnectivityMetrics)) {
+                return (IIpConnectivityMetrics) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -119,40 +119,40 @@ public interface IIpConnectivityMetrics extends IInterface {
             if (i == 1) {
                 ConnectivityMetricsEvent connectivityMetricsEvent = (ConnectivityMetricsEvent) parcel.readTypedObject(ConnectivityMetricsEvent.CREATOR);
                 parcel.enforceNoDataAvail();
-                int logEvent = logEvent(connectivityMetricsEvent);
+                int iLogEvent = logEvent(connectivityMetricsEvent);
                 parcel2.writeNoException();
-                parcel2.writeInt(logEvent);
+                parcel2.writeInt(iLogEvent);
             } else if (i == 2) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                logDefaultNetworkValidity(readBoolean);
+                logDefaultNetworkValidity(z);
                 parcel2.writeNoException();
             } else if (i == 3) {
                 Network network = (Network) parcel.readTypedObject(Network.CREATOR);
-                int readInt = parcel.readInt();
-                boolean readBoolean2 = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                boolean z2 = parcel.readBoolean();
                 LinkProperties linkProperties = (LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR);
                 NetworkCapabilities networkCapabilities = (NetworkCapabilities) parcel.readTypedObject(NetworkCapabilities.CREATOR);
                 Network network2 = (Network) parcel.readTypedObject(Network.CREATOR);
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 LinkProperties linkProperties2 = (LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR);
                 NetworkCapabilities networkCapabilities2 = (NetworkCapabilities) parcel.readTypedObject(NetworkCapabilities.CREATOR);
                 parcel.enforceNoDataAvail();
-                logDefaultNetworkEvent(network, readInt, readBoolean2, linkProperties, networkCapabilities, network2, readInt2, linkProperties2, networkCapabilities2);
+                logDefaultNetworkEvent(network, i3, z2, linkProperties, networkCapabilities, network2, i4, linkProperties2, networkCapabilities2);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                int readInt3 = parcel.readInt();
-                INetdEventCallback asInterface = INetdEventCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i5 = parcel.readInt();
+                INetdEventCallback iNetdEventCallbackAsInterface = INetdEventCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                boolean addNetdEventCallback = addNetdEventCallback(readInt3, asInterface);
+                boolean zAddNetdEventCallback = addNetdEventCallback(i5, iNetdEventCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(addNetdEventCallback);
+                parcel2.writeBoolean(zAddNetdEventCallback);
             } else if (i == 5) {
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean removeNetdEventCallback = removeNetdEventCallback(readInt4);
+                boolean zRemoveNetdEventCallback = removeNetdEventCallback(i6);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(removeNetdEventCallback);
+                parcel2.writeBoolean(zRemoveNetdEventCallback);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -177,88 +177,88 @@ public interface IIpConnectivityMetrics extends IInterface {
 
             @Override // android.net.IIpConnectivityMetrics
             public int logEvent(ConnectivityMetricsEvent connectivityMetricsEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(connectivityMetricsEvent, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(connectivityMetricsEvent, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IIpConnectivityMetrics
             public void logDefaultNetworkValidity(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IIpConnectivityMetrics
             public void logDefaultNetworkEvent(Network network, int i, boolean z, LinkProperties linkProperties, NetworkCapabilities networkCapabilities, Network network2, int i2, LinkProperties linkProperties2, NetworkCapabilities networkCapabilities2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(network, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(linkProperties, 0);
-                    obtain.writeTypedObject(networkCapabilities, 0);
-                    obtain.writeTypedObject(network2, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(linkProperties2, 0);
-                    obtain.writeTypedObject(networkCapabilities2, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(network, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(linkProperties, 0);
+                    parcelObtain.writeTypedObject(networkCapabilities, 0);
+                    parcelObtain.writeTypedObject(network2, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(linkProperties2, 0);
+                    parcelObtain.writeTypedObject(networkCapabilities2, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IIpConnectivityMetrics
             public boolean addNetdEventCallback(int i, INetdEventCallback iNetdEventCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iNetdEventCallback);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iNetdEventCallback);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.IIpConnectivityMetrics
             public boolean removeNetdEventCallback(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

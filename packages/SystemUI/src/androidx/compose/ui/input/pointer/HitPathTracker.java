@@ -10,7 +10,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class HitPathTracker {
     public final LayoutCoordinates rootCoordinates;
@@ -22,7 +21,7 @@ public final class HitPathTracker {
     }
 
     /* renamed from: addHitPath-QJqDSyo, reason: not valid java name */
-    public final void m586addHitPathQJqDSyo(long j, List list, boolean z) {
+    public final void m588addHitPathQJqDSyo(long j, List list, boolean z) {
         long[] jArr;
         int i;
         Object obj;
@@ -43,7 +42,7 @@ public final class HitPathTracker {
 
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        HitPathTracker hitPathTracker = HitPathTracker.this;
+                        HitPathTracker hitPathTracker = this.this$0;
                         Modifier.Node node2 = node;
                         NodeParent nodeParent3 = hitPathTracker.root;
                         MutableObjectList mutableObjectList = nodeParent3.removeMatchingPointerInputModifierNodeList;
@@ -90,12 +89,12 @@ public final class HitPathTracker {
                     if (node2 != null) {
                         node2.isIn = true;
                         node2.pointerIds.add(j);
-                        Object obj2 = mutableLongObjectMap.get(j);
-                        if (obj2 == null) {
-                            obj2 = new MutableObjectList(0, 1, null);
-                            mutableLongObjectMap.set(j, obj2);
+                        Object mutableObjectList = mutableLongObjectMap.get(j);
+                        if (mutableObjectList == null) {
+                            mutableObjectList = new MutableObjectList(0, 1, null);
+                            mutableLongObjectMap.set(j, mutableObjectList);
                         }
-                        ((MutableObjectList) obj2).add(node2);
+                        ((MutableObjectList) mutableObjectList).add(node2);
                         nodeParent2 = node2;
                     } else {
                         z2 = false;
@@ -103,12 +102,12 @@ public final class HitPathTracker {
                 }
                 Node node3 = new Node(node);
                 node3.pointerIds.add(j);
-                Object obj3 = mutableLongObjectMap.get(j);
-                if (obj3 == null) {
-                    obj3 = new MutableObjectList(0, 1, null);
-                    mutableLongObjectMap.set(j, obj3);
+                Object mutableObjectList2 = mutableLongObjectMap.get(j);
+                if (mutableObjectList2 == null) {
+                    mutableObjectList2 = new MutableObjectList(0, 1, null);
+                    mutableLongObjectMap.set(j, mutableObjectList2);
                 }
-                ((MutableObjectList) obj3).add(node3);
+                ((MutableObjectList) mutableObjectList2).add(node3);
                 nodeParent2.children.add(node3);
                 nodeParent2 = node3;
             }
@@ -135,14 +134,14 @@ public final class HitPathTracker {
                     if ((255 & j2) < 128) {
                         int i10 = (i6 << 3) + i9;
                         long j3 = jArr2[i10];
-                        MutableObjectList mutableObjectList = (MutableObjectList) objArr2[i10];
+                        MutableObjectList mutableObjectList3 = (MutableObjectList) objArr2[i10];
                         MutableVector mutableVector2 = nodeParent.children;
                         Object[] objArr3 = mutableVector2.content;
                         int i11 = mutableVector2.size;
                         i = i7;
                         int i12 = 0;
                         while (i12 < i11) {
-                            ((Node) objArr3[i12]).removeInvalidPointerIdsAndChanges(j3, mutableObjectList);
+                            ((Node) objArr3[i12]).removeInvalidPointerIdsAndChanges(j3, mutableObjectList3);
                             i12++;
                             jArr2 = jArr2;
                         }

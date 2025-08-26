@@ -59,9 +59,9 @@ public interface IFieldClassificationService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFieldClassificationService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFieldClassificationService)) {
-                return (IFieldClassificationService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFieldClassificationService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFieldClassificationService)) {
+                return (IFieldClassificationService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,17 +94,17 @@ public interface IFieldClassificationService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
-                boolean readBoolean2 = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onConnected(readBoolean, readBoolean2);
+                onConnected(z, z2);
             } else if (i == 2) {
                 onDisconnected();
             } else if (i == 3) {
                 FieldClassificationRequest fieldClassificationRequest = (FieldClassificationRequest) parcel.readTypedObject(FieldClassificationRequest.CREATOR);
-                IFieldClassificationCallback asInterface = IFieldClassificationCallback.Stub.asInterface(parcel.readStrongBinder());
+                IFieldClassificationCallback iFieldClassificationCallbackAsInterface = IFieldClassificationCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onFieldClassificationRequest(fieldClassificationRequest, asInterface);
+                onFieldClassificationRequest(fieldClassificationRequest, iFieldClassificationCallbackAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -129,38 +129,38 @@ public interface IFieldClassificationService extends IInterface {
 
             @Override // android.service.assist.classification.IFieldClassificationService
             public void onConnected(boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFieldClassificationService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFieldClassificationService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.assist.classification.IFieldClassificationService
             public void onDisconnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFieldClassificationService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFieldClassificationService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.assist.classification.IFieldClassificationService
             public void onFieldClassificationRequest(FieldClassificationRequest fieldClassificationRequest, IFieldClassificationCallback iFieldClassificationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFieldClassificationService.DESCRIPTOR);
-                    obtain.writeTypedObject(fieldClassificationRequest, 0);
-                    obtain.writeStrongInterface(iFieldClassificationCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFieldClassificationService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(fieldClassificationRequest, 0);
+                    parcelObtain.writeStrongInterface(iFieldClassificationCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

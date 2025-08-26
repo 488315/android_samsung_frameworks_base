@@ -7,7 +7,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyGridIntervalContent extends LazyLayoutIntervalContent<LazyGridInterval> implements LazyGridScope {
     public static final Function2 DefaultSpan;
@@ -15,7 +14,6 @@ public final class LazyGridIntervalContent extends LazyLayoutIntervalContent<Laz
     public final LazyGridSpanLayoutProvider spanLayoutProvider = new LazyGridSpanLayoutProvider(this);
     public final MutableIntervalList intervals = new MutableIntervalList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -31,13 +29,13 @@ public final class LazyGridIntervalContent extends LazyLayoutIntervalContent<Laz
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 ((Number) obj2).intValue();
-                return GridItemSpan.m157boximpl(LazyGridSpanKt.GridItemSpan(1));
+                return GridItemSpan.m158boximpl(LazyGridSpanKt.GridItemSpan(1));
             }
         };
     }
 
     public LazyGridIntervalContent(Function1 function1) {
-        function1.mo779invoke(this);
+        function1.mo781invoke(this);
     }
 
     @Override // androidx.compose.foundation.lazy.layout.LazyLayoutIntervalContent

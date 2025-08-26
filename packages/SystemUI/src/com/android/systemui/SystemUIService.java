@@ -33,7 +33,6 @@ import java.lang.Thread;
 import java.util.Iterator;
 import java.util.TreeMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SystemUIService extends Service {
     public final BatteryStateNotifier mBatteryStateNotifier;
@@ -63,7 +62,7 @@ public class SystemUIService extends Service {
     }
 
     @Override // android.app.Service
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) throws Exception {
         if (strArr.length == 0) {
             strArr = new String[]{"--dump-priority", "CRITICAL"};
         }
@@ -85,7 +84,7 @@ public class SystemUIService extends Service {
         BroadcastDispatcher.registerReceiver$default(broadcastDispatcher, new BroadcastReceiver() { // from class: com.android.systemui.dump.LogBufferFreezer$attach$1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
-                final LogBufferFreezer logBufferFreezer2 = LogBufferFreezer.this;
+                final LogBufferFreezer logBufferFreezer2 = logBufferFreezer;
                 logBufferFreezer2.getClass();
                 Trace.instantForTrack(4096L, "bugreport", "BUGREPORT_STARTED broadcast received");
                 Runnable runnable = logBufferFreezer2.pendingToken;
@@ -104,7 +103,7 @@ public class SystemUIService extends Service {
                     @Override // java.lang.Runnable
                     public final void run() {
                         Log.i("LogBufferFreezer", "Unfreezing log buffers");
-                        LogBufferFreezer logBufferFreezer3 = LogBufferFreezer.this;
+                        LogBufferFreezer logBufferFreezer3 = logBufferFreezer2;
                         logBufferFreezer3.pendingToken = null;
                         DumpManager dumpManager2 = logBufferFreezer3.dumpManager;
                         synchronized (dumpManager2) {
@@ -120,7 +119,7 @@ public class SystemUIService extends Service {
         this.mUncaughtExceptionPreHandlerManager.registerHandler(new Thread.UncaughtExceptionHandler() { // from class: com.android.systemui.SystemUIService$$ExternalSyntheticLambda0
             @Override // java.lang.Thread.UncaughtExceptionHandler
             public final void uncaughtException(Thread thread, Throwable th) {
-                SystemUIService.this.mLogBufferEulogizer.record(th);
+                this.f$0.mLogBufferEulogizer.record(th);
             }
         });
         if (getResources().getBoolean(R.bool.config_showNotificationForUnknownBatteryState)) {
@@ -140,9 +139,9 @@ public class SystemUIService extends Service {
             BinderInternal.nSetBinderProxyCountWatermarks(5900, 5400, 5650);
             BinderInternal.setBinderProxyCountCallback(new BinderInternal.BinderProxyCountEventListener() { // from class: com.android.systemui.SystemUIService.1
                 public final void onLimitReached(int i) {
-                    StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "uid ", " sent too many Binder proxies to uid ");
-                    m.append(Process.myUid());
-                    Slog.w("SystemUIService", m.toString());
+                    StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "uid ", " sent too many Binder proxies to uid ");
+                    sbM.append(Process.myUid());
+                    Slog.w("SystemUIService", sbM.toString());
                     SystemUIService.this.mBinderProxyDumpHelper.getClass();
                     Log.d("BinderProxyDumpHelper", BinderProxyDumpHelper.dumpProxyInterfaceCounts());
                     Log.d("BinderProxyDumpHelper", BinderProxyDumpHelper.dumpPerUidProxyCounts());
@@ -153,9 +152,9 @@ public class SystemUIService extends Service {
             BinderInternal.nSetBinderProxyCountWatermarks(1000, 900, 950);
             BinderInternal.setBinderProxyCountCallback(new BinderInternal.BinderProxyCountEventListener(this) { // from class: com.android.systemui.SystemUIService.2
                 public final void onLimitReached(int i) {
-                    StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "uid ", " sent too many Binder proxies to uid ");
-                    m.append(Process.myUid());
-                    Slog.w("SystemUIService", m.toString());
+                    StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "uid ", " sent too many Binder proxies to uid ");
+                    sbM.append(Process.myUid());
+                    Slog.w("SystemUIService", sbM.toString());
                 }
             }, this.mMainHandler);
         }

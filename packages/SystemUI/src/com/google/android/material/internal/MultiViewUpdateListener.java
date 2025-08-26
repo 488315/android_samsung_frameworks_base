@@ -4,13 +4,11 @@ import android.animation.ValueAnimator;
 import android.view.View;
 import java.util.Collection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MultiViewUpdateListener implements ValueAnimator.AnimatorUpdateListener {
     public final Listener listener;
     public final View[] views;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Listener {
         void onAnimationUpdate(ValueAnimator valueAnimator, View view);
     }

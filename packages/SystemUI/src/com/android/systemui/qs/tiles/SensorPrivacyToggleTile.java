@@ -34,7 +34,6 @@ import com.android.systemui.statusbar.policy.IndividualSensorPrivacyControllerIm
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class SensorPrivacyToggleTile extends SQSTileImpl implements IndividualSensorPrivacyController.Callback {
     public SystemUIDialog mDialog;
@@ -43,7 +42,6 @@ public abstract class SensorPrivacyToggleTile extends SQSTileImpl implements Ind
     public final PanelInteractor mPanelInteractor;
     public final IndividualSensorPrivacyController mSensorPrivacyController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SensorPrivacyToggleDetailAdapter implements DetailAdapter {
         public TextView mDetailSummary;
 
@@ -52,11 +50,11 @@ public abstract class SensorPrivacyToggleTile extends SQSTileImpl implements Ind
 
         @Override // com.android.systemui.plugins.qs.DetailAdapter
         public final View createDetailView(Context context, View view, ViewGroup viewGroup) {
-            View inflate = LayoutInflater.from(SensorPrivacyToggleTile.this.mContext).inflate(R.layout.sec_qs_detail_text, viewGroup, false);
-            TextView textView = (TextView) inflate.findViewById(R.id.message);
+            View viewInflate = LayoutInflater.from(SensorPrivacyToggleTile.this.mContext).inflate(R.layout.sec_qs_detail_text, viewGroup, false);
+            TextView textView = (TextView) viewInflate.findViewById(R.id.message);
             this.mDetailSummary = textView;
             textView.setText(getDetailSummary());
-            return inflate;
+            return viewInflate;
         }
 
         public abstract String getDetailSummary();
@@ -120,11 +118,11 @@ public abstract class SensorPrivacyToggleTile extends SQSTileImpl implements Ind
     public final void handleClick(Expandable expandable) {
         int sensorId = getSensorId();
         IndividualSensorPrivacyControllerImpl individualSensorPrivacyControllerImpl = (IndividualSensorPrivacyControllerImpl) this.mSensorPrivacyController;
-        boolean isSensorBlocked = individualSensorPrivacyControllerImpl.isSensorBlocked(sensorId);
+        boolean zIsSensorBlocked = individualSensorPrivacyControllerImpl.isSensorBlocked(sensorId);
         if (individualSensorPrivacyControllerImpl.mSensorPrivacyManager.requiresAuthentication()) {
             KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.mKeyguard;
             if (keyguardStateControllerImpl.mSecure && keyguardStateControllerImpl.mShowing) {
-                this.mActivityStarter.postQSRunnableDismissingKeyguard(new SensorPrivacyToggleTile$$ExternalSyntheticLambda0(this, isSensorBlocked));
+                this.mActivityStarter.postQSRunnableDismissingKeyguard(new SensorPrivacyToggleTile$$ExternalSyntheticLambda0(this, zIsSensorBlocked));
                 return;
             }
         }
@@ -134,13 +132,13 @@ public abstract class SensorPrivacyToggleTile extends SQSTileImpl implements Ind
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleUpdateState(QSTile.State state, Object obj) {
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
-        boolean isSensorBlocked = obj == null ? ((IndividualSensorPrivacyControllerImpl) this.mSensorPrivacyController).isSensorBlocked(getSensorId()) : ((Boolean) obj).booleanValue();
+        boolean zIsSensorBlocked = obj == null ? ((IndividualSensorPrivacyControllerImpl) this.mSensorPrivacyController).isSensorBlocked(getSensorId()) : ((Boolean) obj).booleanValue();
         checkIfRestrictionEnforcedByAdminOnly(booleanState, getRestriction());
-        int iconRes = getIconRes(isSensorBlocked);
+        int iconRes = getIconRes(zIsSensorBlocked);
         int i = QsInCompose.$r8$clinit;
         booleanState.icon = QSTileImpl.ResourceIcon.get(iconRes);
-        booleanState.state = isSensorBlocked ? 1 : 2;
-        booleanState.value = !isSensorBlocked;
+        booleanState.state = zIsSensorBlocked ? 1 : 2;
+        booleanState.value = !zIsSensorBlocked;
         CharSequence tileLabel = getTileLabel();
         booleanState.label = tileLabel;
         booleanState.dualTarget = true;
@@ -161,8 +159,8 @@ public abstract class SensorPrivacyToggleTile extends SQSTileImpl implements Ind
     }
 
     public final void toggleTileState() {
-        String str;
-        String str2;
+        String string;
+        String string2;
         int sensorId = getSensorId();
         IndividualSensorPrivacyControllerImpl individualSensorPrivacyControllerImpl = (IndividualSensorPrivacyControllerImpl) this.mSensorPrivacyController;
         if (individualSensorPrivacyControllerImpl.isSensorBlocked(sensorId)) {
@@ -170,16 +168,16 @@ public abstract class SensorPrivacyToggleTile extends SQSTileImpl implements Ind
             return;
         }
         if (getSensorId() == 2) {
-            str = this.mContext.getString(R.string.block_access_camera_dialog_title);
-            str2 = this.mContext.getString(R.string.turn_off_camera_dialog_message);
+            string = this.mContext.getString(R.string.block_access_camera_dialog_title);
+            string2 = this.mContext.getString(R.string.turn_off_camera_dialog_message);
         } else if (getSensorId() == 1) {
-            str = this.mContext.getString(R.string.block_access_microphone_dialog_title);
-            str2 = this.mContext.getString(R.string.turn_off_microphone_dialog_message);
+            string = this.mContext.getString(R.string.block_access_microphone_dialog_title);
+            string2 = this.mContext.getString(R.string.turn_off_microphone_dialog_message);
         } else {
-            str = "";
-            str2 = str;
+            string = "";
+            string2 = string;
         }
-        if (str.equals("")) {
+        if (string.equals("")) {
             return;
         }
         final int i = 0;
@@ -199,16 +197,16 @@ public abstract class SensorPrivacyToggleTile extends SQSTileImpl implements Ind
                         int sensorId2 = sensorPrivacyToggleTile.getSensorId();
                         int sensorId3 = sensorPrivacyToggleTile.getSensorId();
                         ((IndividualSensorPrivacyControllerImpl) sensorPrivacyToggleTile.mSensorPrivacyController).setSensorBlocked(1, sensorId2, !r0.isSensorBlocked(sensorId3));
-                        String str3 = null;
+                        String string3 = null;
                         sensorPrivacyToggleTile.refreshState(null);
                         if (sensorPrivacyToggleTile.mDialog != null) {
                             if (sensorPrivacyToggleTile.getSensorId() == 2) {
-                                str3 = sensorPrivacyToggleTile.mContext.getString(R.string.sensor_privacy_start_use_camera_blocked_dialog_title);
+                                string3 = sensorPrivacyToggleTile.mContext.getString(R.string.sensor_privacy_start_use_camera_blocked_dialog_title);
                             } else if (sensorPrivacyToggleTile.getSensorId() == 1) {
-                                str3 = sensorPrivacyToggleTile.mContext.getString(R.string.sensor_privacy_start_use_mic_blocked_dialog_title);
+                                string3 = sensorPrivacyToggleTile.mContext.getString(R.string.sensor_privacy_start_use_mic_blocked_dialog_title);
                             }
-                            if (str3 != null) {
-                                sensorPrivacyToggleTile.mDialog.sendAnnouncementEvent(str3);
+                            if (string3 != null) {
+                                sensorPrivacyToggleTile.mDialog.sendAnnouncementEvent(string3);
                                 break;
                             }
                         }
@@ -236,16 +234,16 @@ public abstract class SensorPrivacyToggleTile extends SQSTileImpl implements Ind
                         int sensorId2 = sensorPrivacyToggleTile.getSensorId();
                         int sensorId3 = sensorPrivacyToggleTile.getSensorId();
                         ((IndividualSensorPrivacyControllerImpl) sensorPrivacyToggleTile.mSensorPrivacyController).setSensorBlocked(1, sensorId2, !r0.isSensorBlocked(sensorId3));
-                        String str3 = null;
+                        String string3 = null;
                         sensorPrivacyToggleTile.refreshState(null);
                         if (sensorPrivacyToggleTile.mDialog != null) {
                             if (sensorPrivacyToggleTile.getSensorId() == 2) {
-                                str3 = sensorPrivacyToggleTile.mContext.getString(R.string.sensor_privacy_start_use_camera_blocked_dialog_title);
+                                string3 = sensorPrivacyToggleTile.mContext.getString(R.string.sensor_privacy_start_use_camera_blocked_dialog_title);
                             } else if (sensorPrivacyToggleTile.getSensorId() == 1) {
-                                str3 = sensorPrivacyToggleTile.mContext.getString(R.string.sensor_privacy_start_use_mic_blocked_dialog_title);
+                                string3 = sensorPrivacyToggleTile.mContext.getString(R.string.sensor_privacy_start_use_mic_blocked_dialog_title);
                             }
-                            if (str3 != null) {
-                                sensorPrivacyToggleTile.mDialog.sendAnnouncementEvent(str3);
+                            if (string3 != null) {
+                                sensorPrivacyToggleTile.mDialog.sendAnnouncementEvent(string3);
                                 break;
                             }
                         }
@@ -258,15 +256,15 @@ public abstract class SensorPrivacyToggleTile extends SQSTileImpl implements Ind
         };
         SystemUIDialog systemUIDialog = new SystemUIDialog(this.mContext, R.style.Theme_SystemUI_Dialog_Alert);
         this.mDialog = systemUIDialog;
-        systemUIDialog.setTitle(str);
-        this.mDialog.setMessage(str2);
+        systemUIDialog.setTitle(string);
+        this.mDialog.setMessage(string2);
         this.mDialog.setPositiveButton(R.string.block_privacy_toggle_dialog_button, onClickListener);
         this.mDialog.setNegativeButton(R.string.qs_sensor_privacy_dialog_cancel, onClickListener2);
         ((PanelInteractorImpl) this.mPanelInteractor).collapsePanels();
         this.mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.qs.tiles.SensorPrivacyToggleTile$$ExternalSyntheticLambda3
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                SensorPrivacyToggleTile.this.refreshState(null);
+                this.f$0.refreshState(null);
             }
         });
         this.mDialog.show();

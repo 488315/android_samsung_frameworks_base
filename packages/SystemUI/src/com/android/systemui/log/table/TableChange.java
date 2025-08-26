@@ -11,7 +11,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 import kotlin.text.StringsKt___StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TableChange {
     public boolean bool;
@@ -25,7 +24,6 @@ public final class TableChange {
     public long timestamp;
     public DataType type;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,7 +41,6 @@ public final class TableChange {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DataType {
         public static final /* synthetic */ DataType[] $VALUES;
         public static final DataType BOOLEAN;
@@ -77,7 +74,6 @@ public final class TableChange {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -127,21 +123,21 @@ public final class TableChange {
     }
 
     public final String getVal() {
-        Object obj;
+        Object objValueOf;
         int i = WhenMappings.$EnumSwitchMapping$0[this.type.ordinal()];
         if (i == 1) {
-            obj = this.str;
+            objValueOf = this.str;
         } else if (i == 2) {
-            obj = this.f49int;
+            objValueOf = this.f49int;
         } else if (i == 3) {
-            obj = Boolean.valueOf(this.bool);
+            objValueOf = Boolean.valueOf(this.bool);
         } else {
             if (i != 4) {
                 throw new NoWhenBranchMatchedException();
             }
-            obj = null;
+            objValueOf = null;
         }
-        return (this.isInitial ? "**" : "").concat(String.valueOf(obj));
+        return (this.isInitial ? "**" : "").concat(String.valueOf(objValueOf));
     }
 
     public final boolean hasData() {
@@ -149,11 +145,11 @@ public final class TableChange {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m((this.type.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(Long.hashCode(this.timestamp) * 31, 31, this.columnPrefix), 31, this.columnName), 31, this.isInitial)) * 31, 31, this.bool);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m((this.type.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(Long.hashCode(this.timestamp) * 31, 31, this.columnPrefix), 31, this.columnName), 31, this.isInitial)) * 31, 31, this.bool);
         Integer num = this.f49int;
-        int hashCode = (m + (num == null ? 0 : num.hashCode())) * 31;
+        int iHashCode = (iM + (num == null ? 0 : num.hashCode())) * 31;
         String str = this.str;
-        return hashCode + (str != null ? str.hashCode() : 0);
+        return iHashCode + (str != null ? str.hashCode() : 0);
     }
 
     public final void reset(long j, String str, String str2, boolean z) {

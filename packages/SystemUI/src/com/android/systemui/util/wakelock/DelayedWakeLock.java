@@ -3,7 +3,6 @@ package com.android.systemui.util.wakelock;
 import android.content.Context;
 import android.os.Handler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DelayedWakeLock implements WakeLock {
     private static final long RELEASE_DELAY_MS = 100;
@@ -11,7 +10,6 @@ public class DelayedWakeLock implements WakeLock {
     private final Handler mHandler;
     private final WakeLock mInner;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         DelayedWakeLock create(String str);
     }
@@ -36,7 +34,7 @@ public class DelayedWakeLock implements WakeLock {
         this.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.util.wakelock.DelayedWakeLock$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                DelayedWakeLock.this.lambda$release$0(str);
+                this.f$0.lambda$release$0(str);
             }
         }, RELEASE_DELAY_MS);
     }

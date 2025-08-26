@@ -45,8 +45,8 @@ public class DualDarCache {
         bundle.putInt(DUAL_DAR_USER_ID, i);
         bundle.putString(DUAL_DAR_KEY, str);
         bundle.putString(DUAL_DAR_VALUE, str2);
-        Bundle relayMessage = KnoxProxyManager.getInstance(this.mContext).relayMessage("SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", SET_DATA_CMD, bundle);
-        if (relayMessage == null || relayMessage.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
+        Bundle bundleRelayMessage = KnoxProxyManager.getInstance(this.mContext).relayMessage("SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", SET_DATA_CMD, bundle);
+        if (bundleRelayMessage == null || bundleRelayMessage.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
             return;
         }
         Log.e(TAG, "Error: getData : failed");
@@ -56,20 +56,20 @@ public class DualDarCache {
         Bundle bundle = new Bundle();
         bundle.putInt(DUAL_DAR_USER_ID, i);
         bundle.putString(DUAL_DAR_KEY, str);
-        Bundle relayMessage = KnoxProxyManager.getInstance(this.mContext).relayMessage("SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", GET_DATA_CMD, bundle);
-        if (relayMessage == null || !relayMessage.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
+        Bundle bundleRelayMessage = KnoxProxyManager.getInstance(this.mContext).relayMessage("SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", GET_DATA_CMD, bundle);
+        if (bundleRelayMessage == null || !bundleRelayMessage.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
             Log.e(TAG, "Error: getData : failed");
             return null;
         }
-        return relayMessage.getString(DUAL_DAR_VALUE);
+        return bundleRelayMessage.getString(DUAL_DAR_VALUE);
     }
 
     public void remove(int i, String str) {
         Bundle bundle = new Bundle();
         bundle.putInt(DUAL_DAR_USER_ID, i);
         bundle.putString(DUAL_DAR_KEY, str);
-        Bundle relayMessage = KnoxProxyManager.getInstance(this.mContext).relayMessage("SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", DELETE_DATA_CMD, bundle);
-        if (relayMessage == null || relayMessage.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
+        Bundle bundleRelayMessage = KnoxProxyManager.getInstance(this.mContext).relayMessage("SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", DELETE_DATA_CMD, bundle);
+        if (bundleRelayMessage == null || bundleRelayMessage.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
             return;
         }
         Log.e(TAG, "Error: deleteData : failed");

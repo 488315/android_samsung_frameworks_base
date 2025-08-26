@@ -10,7 +10,6 @@ import androidx.constraintlayout.core.widgets.ConstraintAnchor;
 import androidx.constraintlayout.core.widgets.ConstraintWidget;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Barrier extends HelperWidget {
     public int mBarrierType = 0;
@@ -78,30 +77,30 @@ public class Barrier extends HelperWidget {
         while (i8 < this.mWidgetsCount) {
             ConstraintWidget constraintWidget2 = this.mWidgets[i8];
             if (this.mAllowsGoneWidget || constraintWidget2.allowedInBarrier()) {
-                SolverVariable createObjectVariable = linearSystem.createObjectVariable(constraintWidget2.mListAnchors[this.mBarrierType]);
+                SolverVariable solverVariableCreateObjectVariable = linearSystem.createObjectVariable(constraintWidget2.mListAnchors[this.mBarrierType]);
                 int i9 = this.mBarrierType;
                 ConstraintAnchor constraintAnchor7 = constraintWidget2.mListAnchors[i9];
-                constraintAnchor7.mSolverVariable = createObjectVariable;
+                constraintAnchor7.mSolverVariable = solverVariableCreateObjectVariable;
                 ConstraintAnchor constraintAnchor8 = constraintAnchor7.mTarget;
                 int i10 = (constraintAnchor8 == null || constraintAnchor8.mOwner != this) ? 0 : constraintAnchor7.mMargin;
                 if (i9 == 0 || i9 == i3) {
                     SolverVariable solverVariable = constraintAnchor6.mSolverVariable;
                     int i11 = this.mMargin - i10;
-                    ArrayRow createRow = linearSystem.createRow();
-                    SolverVariable createSlackVariable = linearSystem.createSlackVariable();
-                    createSlackVariable.strength = 0;
-                    createRow.createRowLowerThan(solverVariable, createObjectVariable, createSlackVariable, i11);
-                    linearSystem.addConstraint(createRow);
+                    ArrayRow arrayRowCreateRow = linearSystem.createRow();
+                    SolverVariable solverVariableCreateSlackVariable = linearSystem.createSlackVariable();
+                    solverVariableCreateSlackVariable.strength = 0;
+                    arrayRowCreateRow.createRowLowerThan(solverVariable, solverVariableCreateObjectVariable, solverVariableCreateSlackVariable, i11);
+                    linearSystem.addConstraint(arrayRowCreateRow);
                 } else {
                     SolverVariable solverVariable2 = constraintAnchor6.mSolverVariable;
                     int i12 = this.mMargin + i10;
-                    ArrayRow createRow2 = linearSystem.createRow();
-                    SolverVariable createSlackVariable2 = linearSystem.createSlackVariable();
-                    createSlackVariable2.strength = 0;
-                    createRow2.createRowGreaterThan(solverVariable2, createObjectVariable, createSlackVariable2, i12);
-                    linearSystem.addConstraint(createRow2);
+                    ArrayRow arrayRowCreateRow2 = linearSystem.createRow();
+                    SolverVariable solverVariableCreateSlackVariable2 = linearSystem.createSlackVariable();
+                    solverVariableCreateSlackVariable2.strength = 0;
+                    arrayRowCreateRow2.createRowGreaterThan(solverVariable2, solverVariableCreateObjectVariable, solverVariableCreateSlackVariable2, i12);
+                    linearSystem.addConstraint(arrayRowCreateRow2);
                 }
-                linearSystem.addEquality(constraintAnchor6.mSolverVariable, createObjectVariable, this.mMargin + i10, i7);
+                linearSystem.addEquality(constraintAnchor6.mSolverVariable, solverVariableCreateObjectVariable, this.mMargin + i10, i7);
             }
             i8++;
             i3 = 2;
@@ -148,42 +147,42 @@ public class Barrier extends HelperWidget {
         if (!z || i <= 0) {
             return false;
         }
-        int i5 = 0;
+        int iMax = 0;
         boolean z2 = false;
-        for (int i6 = 0; i6 < this.mWidgetsCount; i6++) {
-            ConstraintWidget constraintWidget2 = this.mWidgets[i6];
+        for (int i5 = 0; i5 < this.mWidgetsCount; i5++) {
+            ConstraintWidget constraintWidget2 = this.mWidgets[i5];
             if (this.mAllowsGoneWidget || constraintWidget2.allowedInBarrier()) {
                 if (!z2) {
-                    int i7 = this.mBarrierType;
-                    if (i7 == 0) {
-                        i5 = constraintWidget2.getAnchor(ConstraintAnchor.Type.LEFT).getFinalValue();
-                    } else if (i7 == 1) {
-                        i5 = constraintWidget2.getAnchor(ConstraintAnchor.Type.RIGHT).getFinalValue();
-                    } else if (i7 == 2) {
-                        i5 = constraintWidget2.getAnchor(ConstraintAnchor.Type.TOP).getFinalValue();
-                    } else if (i7 == 3) {
-                        i5 = constraintWidget2.getAnchor(ConstraintAnchor.Type.BOTTOM).getFinalValue();
+                    int i6 = this.mBarrierType;
+                    if (i6 == 0) {
+                        iMax = constraintWidget2.getAnchor(ConstraintAnchor.Type.LEFT).getFinalValue();
+                    } else if (i6 == 1) {
+                        iMax = constraintWidget2.getAnchor(ConstraintAnchor.Type.RIGHT).getFinalValue();
+                    } else if (i6 == 2) {
+                        iMax = constraintWidget2.getAnchor(ConstraintAnchor.Type.TOP).getFinalValue();
+                    } else if (i6 == 3) {
+                        iMax = constraintWidget2.getAnchor(ConstraintAnchor.Type.BOTTOM).getFinalValue();
                     }
                     z2 = true;
                 }
-                int i8 = this.mBarrierType;
-                if (i8 == 0) {
-                    i5 = Math.min(i5, constraintWidget2.getAnchor(ConstraintAnchor.Type.LEFT).getFinalValue());
-                } else if (i8 == 1) {
-                    i5 = Math.max(i5, constraintWidget2.getAnchor(ConstraintAnchor.Type.RIGHT).getFinalValue());
-                } else if (i8 == 2) {
-                    i5 = Math.min(i5, constraintWidget2.getAnchor(ConstraintAnchor.Type.TOP).getFinalValue());
-                } else if (i8 == 3) {
-                    i5 = Math.max(i5, constraintWidget2.getAnchor(ConstraintAnchor.Type.BOTTOM).getFinalValue());
+                int i7 = this.mBarrierType;
+                if (i7 == 0) {
+                    iMax = Math.min(iMax, constraintWidget2.getAnchor(ConstraintAnchor.Type.LEFT).getFinalValue());
+                } else if (i7 == 1) {
+                    iMax = Math.max(iMax, constraintWidget2.getAnchor(ConstraintAnchor.Type.RIGHT).getFinalValue());
+                } else if (i7 == 2) {
+                    iMax = Math.min(iMax, constraintWidget2.getAnchor(ConstraintAnchor.Type.TOP).getFinalValue());
+                } else if (i7 == 3) {
+                    iMax = Math.max(iMax, constraintWidget2.getAnchor(ConstraintAnchor.Type.BOTTOM).getFinalValue());
                 }
             }
         }
-        int i9 = i5 + this.mMargin;
-        int i10 = this.mBarrierType;
-        if (i10 == 0 || i10 == 1) {
-            setFinalHorizontal(i9, i9);
+        int i8 = iMax + this.mMargin;
+        int i9 = this.mBarrierType;
+        if (i9 == 0 || i9 == 1) {
+            setFinalHorizontal(i8, i8);
         } else {
-            setFinalVertical(i9, i9);
+            setFinalVertical(i8, i8);
         }
         this.mResolved = true;
         return true;
@@ -195,8 +194,8 @@ public class Barrier extends HelperWidget {
     }
 
     @Override // androidx.constraintlayout.core.widgets.HelperWidget, androidx.constraintlayout.core.widgets.ConstraintWidget
-    public final void copy(ConstraintWidget constraintWidget, HashMap hashMap) {
-        super.copy(constraintWidget, hashMap);
+    public final void copy(ConstraintWidget constraintWidget, HashMap map) {
+        super.copy(constraintWidget, map);
         Barrier barrier = (Barrier) constraintWidget;
         this.mBarrierType = barrier.mBarrierType;
         this.mAllowsGoneWidget = barrier.mAllowsGoneWidget;
@@ -223,17 +222,17 @@ public class Barrier extends HelperWidget {
 
     @Override // androidx.constraintlayout.core.widgets.ConstraintWidget
     public final String toString() {
-        String m = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("[Barrier] "), this.mDebugName, " {");
+        String strM = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("[Barrier] "), this.mDebugName, " {");
         for (int i = 0; i < this.mWidgetsCount; i++) {
             ConstraintWidget constraintWidget = this.mWidgets[i];
             if (i > 0) {
-                m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, ", ");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, ", ");
             }
-            StringBuilder m2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-            m2.append(constraintWidget.mDebugName);
-            m = m2.toString();
+            StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+            sbM.append(constraintWidget.mDebugName);
+            strM = sbM.toString();
         }
-        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "}");
+        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "}");
     }
 
     public Barrier(String str) {

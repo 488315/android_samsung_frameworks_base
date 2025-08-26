@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedWhileSubscribed;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalPrefsInteractor {
     public final CoroutineScope bgScope;
@@ -23,7 +22,6 @@ public final class CommunalPrefsInteractor {
     public final CommunalPrefsRepository repository;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,11 +39,11 @@ public final class CommunalPrefsInteractor {
         this.bgScope = coroutineScope;
         this.repository = communalPrefsRepository;
         this.userTracker = userTracker;
-        Flow logDiffsForTable = DiffableKt.logDiffsForTable((Flow) FlowKt.transformLatest(selectedUserInteractor.selectedUserInfo, new CommunalPrefsInteractor$special$$inlined$flatMapLatest$1(null, this)), tableLogBuffer, "", "isCtaDismissed", false);
+        Flow flowLogDiffsForTable = DiffableKt.logDiffsForTable((Flow) FlowKt.transformLatest(selectedUserInteractor.selectedUserInfo, new CommunalPrefsInteractor$special$$inlined$flatMapLatest$1(null, this)), tableLogBuffer, "", "isCtaDismissed", false);
         SharingStarted.Companion companion = SharingStarted.Companion;
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         Boolean bool = Boolean.FALSE;
-        this.isCtaDismissed = FlowKt.stateIn(logDiffsForTable, coroutineScope, WhileSubscribed$default, bool);
+        this.isCtaDismissed = FlowKt.stateIn(flowLogDiffsForTable, coroutineScope, startedWhileSubscribedWhileSubscribed$default, bool);
         CommunalPrefsInteractor$special$$inlined$flatMapLatest$2 communalPrefsInteractor$special$$inlined$flatMapLatest$2 = new CommunalPrefsInteractor$special$$inlined$flatMapLatest$2(null, this);
         UserRepositoryImpl$special$$inlined$map$2 userRepositoryImpl$special$$inlined$map$2 = selectedUserInteractor.selectedUserInfo;
         this.isHubOnboardingDismissed = FlowKt.stateIn(DiffableKt.logDiffsForTable((Flow) FlowKt.transformLatest(userRepositoryImpl$special$$inlined$map$2, communalPrefsInteractor$special$$inlined$flatMapLatest$2), tableLogBuffer, "", "isHubOnboardingDismissed", false), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);

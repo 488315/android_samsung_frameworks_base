@@ -2,17 +2,35 @@ package com.android.systemui.authentication.domain.interactor;
 
 import android.util.Log;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.internal.widget.LockPatternView;
+import com.android.internal.widget.LockscreenCredential;
 import com.android.systemui.authentication.data.repository.AuthenticationRepository;
 import com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl;
 import com.android.systemui.authentication.shared.model.AuthenticationMethodModel;
+import com.android.systemui.authentication.shared.model.AuthenticationPatternCoordinate;
+import com.android.systemui.authentication.shared.model.AuthenticationResultModel;
+import com.android.systemui.authentication.shared.model.AuthenticationWipeModel;
 import com.android.systemui.log.table.DiffableKt;
 import com.android.systemui.log.table.TableLogBuffer;
+import com.android.systemui.user.data.repository.UserRepositoryImpl;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+import kotlin.time.Duration;
+import kotlin.time.DurationKt;
+import kotlin.time.DurationUnit;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
@@ -25,7 +43,6 @@ import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AuthenticationInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -45,13 +62,149 @@ public final class AuthenticationInteractor {
     public final SelectedUserInteractor selectedUserInteractor;
     public final AuthenticationInteractor$special$$inlined$map$2 upcomingWipe;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$authenticate$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        boolean Z$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return AuthenticationInteractor.this.authenticate(null, false, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getPowerButtonInstantlyLocks$1, reason: invalid class name and case insensitive filesystem */
+    final class C08041 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C08041(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return AuthenticationInteractor.this.getPowerButtonInstantlyLocks(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$isInputTooShort$1, reason: invalid class name and case insensitive filesystem */
+    final class C08051 extends ContinuationImpl {
+        int I$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C08051(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            AuthenticationInteractor authenticationInteractor = AuthenticationInteractor.this;
+            int i = AuthenticationInteractor.$r8$clinit;
+            return authenticationInteractor.isInputTooShort(null, 0, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$reportUnlockAttempt$1, reason: invalid class name and case insensitive filesystem */
+    final class C08061 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $isMatched;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C08061(boolean z, Continuation continuation) {
+            super(2, continuation);
+            this.$isMatched = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return AuthenticationInteractor.this.new C08061(this.$isMatched, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C08061) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Code restructure failed: missing block: B:14:0x0040, code lost:
+        
+            if (r5.emit(r1, r4) == r0) goto L15;
+         */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                AuthenticationRepository authenticationRepository = AuthenticationInteractor.this.repository;
+                boolean z = this.$isMatched;
+                this.label = 1;
+                if (((AuthenticationRepositoryImpl) authenticationRepository).reportAuthenticationAttemptFromPrimaryBouncer(z, this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i != 1) {
+                if (i != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            ResultKt.throwOnFailure(obj);
+            SharedFlowImpl sharedFlowImpl = AuthenticationInteractor.this._onPrimaryBouncerAuthenticationResult;
+            Boolean boolValueOf = Boolean.valueOf(this.$isMatched);
+            this.label = 2;
+        }
+    }
+
+    /* renamed from: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$shouldSkipAuthenticationAttempt$1, reason: invalid class name and case insensitive filesystem */
+    final class C08071 extends ContinuationImpl {
+        int I$0;
+        Object L$0;
+        Object L$1;
+        boolean Z$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C08071(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            AuthenticationInteractor authenticationInteractor = AuthenticationInteractor.this;
+            int i = AuthenticationInteractor.$r8$clinit;
+            return authenticationInteractor.shouldSkipAuthenticationAttempt(null, false, 0, this);
         }
     }
 
@@ -68,11 +221,10 @@ public final class AuthenticationInteractor {
         this.authenticationMethod = DiffableKt.logDiffsForTable(authenticationRepositoryImpl.authenticationMethod, tableLogBuffer, "", AuthenticationMethodModel.None.INSTANCE);
         FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(authenticationRepositoryImpl.isAutoConfirmFeatureEnabled, authenticationRepositoryImpl.hasLockoutOccurred, new AuthenticationInteractor$isAutoConfirmEnabled$1(null));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        final ReadonlyStateFlow stateIn = FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Boolean.FALSE);
-        this.isAutoConfirmEnabled = stateIn;
+        final ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Boolean.FALSE);
+        this.isAutoConfirmEnabled = readonlyStateFlowStateIn;
         this.hintedPinLength = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -103,258 +255,427 @@ public final class AuthenticationInteractor {
                     this.this$0 = authenticationInteractor;
                 }
 
-                /* JADX WARN: Code restructure failed: missing block: B:20:0x0078, code lost:
-                
-                    if (r4 == 6) goto L26;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:22:0x0086, code lost:
+                /* JADX WARN: Code restructure failed: missing block: B:27:0x0086, code lost:
                 
                     if (r8.emit(r9, r0) != r1) goto L29;
                  */
-                /* JADX WARN: Removed duplicated region for block: B:19:0x006e  */
-                /* JADX WARN: Removed duplicated region for block: B:25:0x0040  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r8, kotlin.coroutines.Continuation r9) {
-                    /*
-                        r7 = this;
-                        boolean r0 = r9 instanceof com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r9
-                        com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$special$$inlined$map$1$2$1 r0 = (com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$special$$inlined$map$1$2$1 r0 = new com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$special$$inlined$map$1$2$1
-                        r0.<init>(r9)
-                    L18:
-                        java.lang.Object r9 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 2
-                        r4 = 1
-                        if (r2 == 0) goto L40
-                        if (r2 == r4) goto L32
-                        if (r2 != r3) goto L2a
-                        kotlin.ResultKt.throwOnFailure(r9)
-                        goto L89
-                    L2a:
-                        java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-                        java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-                        r7.<init>(r8)
-                        throw r7
-                    L32:
-                        boolean r7 = r0.Z$0
-                        java.lang.Object r8 = r0.L$1
-                        kotlinx.coroutines.flow.FlowCollector r8 = (kotlinx.coroutines.flow.FlowCollector) r8
-                        java.lang.Object r2 = r0.L$0
-                        com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$special$$inlined$map$1$2 r2 = (com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$special$$inlined$map$1.AnonymousClass2) r2
-                        kotlin.ResultKt.throwOnFailure(r9)
-                        goto L64
-                    L40:
-                        kotlin.ResultKt.throwOnFailure(r9)
-                        java.lang.Boolean r8 = (java.lang.Boolean) r8
-                        boolean r8 = r8.booleanValue()
-                        com.android.systemui.authentication.domain.interactor.AuthenticationInteractor r9 = r7.this$0
-                        com.android.systemui.authentication.data.repository.AuthenticationRepository r9 = r9.repository
-                        r0.L$0 = r7
-                        kotlinx.coroutines.flow.FlowCollector r2 = r7.$this_unsafeFlow
-                        r0.L$1 = r2
-                        r0.Z$0 = r8
-                        r0.label = r4
-                        com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl r9 = (com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl) r9
-                        java.lang.Object r9 = r9.getPinLength(r0)
-                        if (r9 != r1) goto L60
-                        goto L88
-                    L60:
-                        r6 = r2
-                        r2 = r7
-                        r7 = r8
-                        r8 = r6
-                    L64:
-                        r4 = r9
-                        java.lang.Number r4 = (java.lang.Number) r4
-                        int r4 = r4.intValue()
-                        r5 = 0
-                        if (r7 == 0) goto L7b
-                        com.android.systemui.authentication.domain.interactor.AuthenticationInteractor r7 = r2.this$0
-                        com.android.systemui.authentication.data.repository.AuthenticationRepository r7 = r7.repository
-                        com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl r7 = (com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl) r7
-                        r7.getClass()
-                        r7 = 6
-                        if (r4 != r7) goto L7b
-                        goto L7c
-                    L7b:
-                        r9 = r5
-                    L7c:
-                        r0.L$0 = r5
-                        r0.L$1 = r5
-                        r0.label = r3
-                        java.lang.Object r7 = r8.emit(r9, r0)
-                        if (r7 != r1) goto L89
-                    L88:
-                        return r1
-                    L89:
-                        kotlin.Unit r7 = kotlin.Unit.INSTANCE
-                        return r7
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    AnonymousClass2 anonymousClass2;
+                    boolean z;
+                    FlowCollector flowCollector;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object pinLength = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(pinLength);
+                        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+                        AuthenticationRepository authenticationRepository = this.this$0.repository;
+                        anonymousClass1.L$0 = this;
+                        FlowCollector flowCollector2 = this.$this_unsafeFlow;
+                        anonymousClass1.L$1 = flowCollector2;
+                        anonymousClass1.Z$0 = zBooleanValue;
+                        anonymousClass1.label = 1;
+                        pinLength = ((AuthenticationRepositoryImpl) authenticationRepository).getPinLength(anonymousClass1);
+                        if (pinLength != coroutineSingletons) {
+                            anonymousClass2 = this;
+                            z = zBooleanValue;
+                            flowCollector = flowCollector2;
+                        }
+                        return coroutineSingletons;
+                    }
+                    if (i2 != 1) {
+                        if (i2 != 2) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(pinLength);
+                        return Unit.INSTANCE;
+                    }
+                    z = anonymousClass1.Z$0;
+                    flowCollector = (FlowCollector) anonymousClass1.L$1;
+                    anonymousClass2 = (AnonymousClass2) anonymousClass1.L$0;
+                    ResultKt.throwOnFailure(pinLength);
+                    int iIntValue = ((Number) pinLength).intValue();
+                    if (z) {
+                        ((AuthenticationRepositoryImpl) anonymousClass2.this$0.repository).getClass();
+                        if (iIntValue != 6) {
+                        }
+                        anonymousClass1.L$0 = null;
+                        anonymousClass1.L$1 = null;
+                        anonymousClass1.label = 2;
+                    }
+                    pinLength = null;
+                    anonymousClass1.L$0 = null;
+                    anonymousClass1.L$1 = null;
+                    anonymousClass1.label = 2;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowStateIn.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
         this.isPatternVisible = authenticationRepositoryImpl.isPatternVisible;
-        SharedFlowImpl MutableSharedFlow$default = SharedFlowKt.MutableSharedFlow$default(0, 0, null, 7);
-        this._onPrimaryBouncerAuthenticationResult = MutableSharedFlow$default;
-        this.onPrimaryBouncerAuthenticationResult = FlowKt.asSharedFlow(MutableSharedFlow$default);
-        SharedFlowImpl MutableSharedFlow$default2 = SharedFlowKt.MutableSharedFlow$default(0, 0, null, 7);
-        this._onAuthenticationResult = MutableSharedFlow$default2;
-        this.onAuthenticationResult = FlowKt.asSharedFlow(MutableSharedFlow$default2);
+        SharedFlowImpl sharedFlowImplMutableSharedFlow$default = SharedFlowKt.MutableSharedFlow$default(0, 0, null, 7);
+        this._onPrimaryBouncerAuthenticationResult = sharedFlowImplMutableSharedFlow$default;
+        this.onPrimaryBouncerAuthenticationResult = FlowKt.asSharedFlow(sharedFlowImplMutableSharedFlow$default);
+        SharedFlowImpl sharedFlowImplMutableSharedFlow$default2 = SharedFlowKt.MutableSharedFlow$default(0, 0, null, 7);
+        this._onAuthenticationResult = sharedFlowImplMutableSharedFlow$default2;
+        this.onAuthenticationResult = FlowKt.asSharedFlow(sharedFlowImplMutableSharedFlow$default2);
         this.isPinEnhancedPrivacyEnabled = authenticationRepositoryImpl.isPinEnhancedPrivacyEnabled;
         ReadonlyStateFlow readonlyStateFlow = authenticationRepositoryImpl.failedAuthenticationAttempts;
         this.failedAuthenticationAttempts = readonlyStateFlow;
         this.upcomingWipe = new AuthenticationInteractor$special$$inlined$map$2(readonlyStateFlow, this);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0066  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$getWipeTarget(com.android.systemui.authentication.domain.interactor.AuthenticationInteractor r4, kotlin.coroutines.jvm.internal.ContinuationImpl r5) {
-        /*
-            r4.getClass()
-            boolean r0 = r5 instanceof com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getWipeTarget$1
-            if (r0 == 0) goto L16
-            r0 = r5
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getWipeTarget$1 r0 = (com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getWipeTarget$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getWipeTarget$1 r0 = new com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getWipeTarget$1
-            r0.<init>(r4, r5)
-        L1b:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L36
-            if (r2 != r3) goto L2e
-            java.lang.Object r4 = r0.L$0
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor r4 = (com.android.systemui.authentication.domain.interactor.AuthenticationInteractor) r4
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L48
-        L2e:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L36:
-            kotlin.ResultKt.throwOnFailure(r5)
-            r0.L$0 = r4
-            r0.label = r3
-            com.android.systemui.authentication.data.repository.AuthenticationRepository r5 = r4.repository
-            com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl r5 = (com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl) r5
-            java.lang.Object r5 = r5.getProfileWithMinFailedUnlockAttemptsForWipe(r0)
-            if (r5 != r1) goto L48
-            return r1
-        L48:
-            java.lang.Number r5 = (java.lang.Number) r5
-            int r5 = r5.intValue()
-            com.android.systemui.user.domain.interactor.SelectedUserInteractor r0 = r4.selectedUserInteractor
-            com.android.systemui.user.data.repository.UserRepository r0 = r0.repository
-            com.android.systemui.user.data.repository.UserRepositoryImpl r0 = (com.android.systemui.user.data.repository.UserRepositoryImpl) r0
-            int r0 = r0.mainUserId
-            com.android.systemui.user.domain.interactor.SelectedUserInteractor r4 = r4.selectedUserInteractor
-            int r4 = r4.getSelectedUserId()
-            if (r5 != r4) goto L66
-            if (r5 != r0) goto L63
-            com.android.systemui.authentication.shared.model.AuthenticationWipeModel$WipeTarget$WholeDevice r4 = com.android.systemui.authentication.shared.model.AuthenticationWipeModel.WipeTarget.WholeDevice.INSTANCE
-            return r4
-        L63:
-            com.android.systemui.authentication.shared.model.AuthenticationWipeModel$WipeTarget$User r4 = com.android.systemui.authentication.shared.model.AuthenticationWipeModel.WipeTarget.User.INSTANCE
-            return r4
-        L66:
-            r4 = -10000(0xffffffffffffd8f0, float:NaN)
-            if (r5 != r4) goto L6d
-            com.android.systemui.authentication.shared.model.AuthenticationWipeModel$WipeTarget$WholeDevice r4 = com.android.systemui.authentication.shared.model.AuthenticationWipeModel.WipeTarget.WholeDevice.INSTANCE
-            return r4
-        L6d:
-            com.android.systemui.authentication.shared.model.AuthenticationWipeModel$WipeTarget$ManagedProfile r4 = com.android.systemui.authentication.shared.model.AuthenticationWipeModel.WipeTarget.ManagedProfile.INSTANCE
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor.access$getWipeTarget(com.android.systemui.authentication.domain.interactor.AuthenticationInteractor, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$getWipeTarget(AuthenticationInteractor authenticationInteractor, ContinuationImpl continuationImpl) {
+        AuthenticationInteractor$getWipeTarget$1 authenticationInteractor$getWipeTarget$1;
+        authenticationInteractor.getClass();
+        if (continuationImpl instanceof AuthenticationInteractor$getWipeTarget$1) {
+            authenticationInteractor$getWipeTarget$1 = (AuthenticationInteractor$getWipeTarget$1) continuationImpl;
+            int i = authenticationInteractor$getWipeTarget$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                authenticationInteractor$getWipeTarget$1.label = i - Integer.MIN_VALUE;
+            } else {
+                authenticationInteractor$getWipeTarget$1 = new AuthenticationInteractor$getWipeTarget$1(authenticationInteractor, continuationImpl);
+            }
+        }
+        Object profileWithMinFailedUnlockAttemptsForWipe = authenticationInteractor$getWipeTarget$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = authenticationInteractor$getWipeTarget$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(profileWithMinFailedUnlockAttemptsForWipe);
+            authenticationInteractor$getWipeTarget$1.L$0 = authenticationInteractor;
+            authenticationInteractor$getWipeTarget$1.label = 1;
+            profileWithMinFailedUnlockAttemptsForWipe = ((AuthenticationRepositoryImpl) authenticationInteractor.repository).getProfileWithMinFailedUnlockAttemptsForWipe(authenticationInteractor$getWipeTarget$1);
+            if (profileWithMinFailedUnlockAttemptsForWipe == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            authenticationInteractor = (AuthenticationInteractor) authenticationInteractor$getWipeTarget$1.L$0;
+            ResultKt.throwOnFailure(profileWithMinFailedUnlockAttemptsForWipe);
+        }
+        int iIntValue = ((Number) profileWithMinFailedUnlockAttemptsForWipe).intValue();
+        return iIntValue == authenticationInteractor.selectedUserInteractor.getSelectedUserId() ? iIntValue == ((UserRepositoryImpl) authenticationInteractor.selectedUserInteractor.repository).mainUserId ? AuthenticationWipeModel.WipeTarget.WholeDevice.INSTANCE : AuthenticationWipeModel.WipeTarget.User.INSTANCE : iIntValue == -10000 ? AuthenticationWipeModel.WipeTarget.WholeDevice.INSTANCE : AuthenticationWipeModel.WipeTarget.ManagedProfile.INSTANCE;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x0240, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:76:0x01fe, code lost:
+    
+        if (kotlin.Unit.INSTANCE != r4) goto L78;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:92:0x0240, code lost:
     
         if (r0.emit(r1, r3) == r4) goto L93;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x01fe, code lost:
-    
-        if (kotlin.Unit.INSTANCE == r4) goto L93;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x01dd, code lost:
-    
-        if (r1.emit(r2, r3) != r4) goto L75;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:55:0x01b0, code lost:
-    
-        if (r1 == r4) goto L93;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:87:0x00cd, code lost:
-    
-        if (r10 == r4) goto L93;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0041  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x021d  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0072  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x011a  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x011d  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0088  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x009f  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x002b  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00ea  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x00f9  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x00fc  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x011a  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x011d  */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x01bd  */
+    /* JADX WARN: Removed duplicated region for block: B:75:0x01e0 A[PHI: r0
+      0x01e0: PHI (r0v39 com.android.systemui.authentication.domain.interactor.AuthenticationInteractor) = 
+      (r0v36 com.android.systemui.authentication.domain.interactor.AuthenticationInteractor)
+      (r0v43 com.android.systemui.authentication.domain.interactor.AuthenticationInteractor)
+     binds: [B:73:0x01dd, B:16:0x0053] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0018  */
+    /* JADX WARN: Removed duplicated region for block: B:80:0x0204  */
+    /* JADX WARN: Removed duplicated region for block: B:86:0x021d  */
+    /* JADX WARN: Removed duplicated region for block: B:91:0x0232 A[PHI: r2
+      0x0232: PHI (r2v7 com.android.systemui.authentication.domain.interactor.AuthenticationInteractor) = 
+      (r2v4 com.android.systemui.authentication.domain.interactor.AuthenticationInteractor)
+      (r2v8 com.android.systemui.authentication.domain.interactor.AuthenticationInteractor)
+     binds: [B:85:0x021b, B:90:0x0231] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object authenticate(java.util.List r19, boolean r20, kotlin.coroutines.jvm.internal.ContinuationImpl r21) {
-        /*
-            Method dump skipped, instructions count: 616
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor.authenticate(java.util.List, boolean, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object authenticate(List list, boolean z, ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        List list2;
+        boolean z2;
+        Object authenticationMethod;
+        Object objIsInputTooShort;
+        AuthenticationInteractor authenticationInteractor;
+        AuthenticationMethodModel authenticationMethodModel;
+        List list3;
+        AuthenticationInteractor authenticationInteractor2;
+        LockscreenCredential lockscreenCredentialCreatePattern;
+        AuthenticationResultModel authenticationResultModel;
+        AuthenticationResultModel authenticationResultModel2;
+        AuthenticationInteractor authenticationInteractor3;
+        AuthenticationInteractor authenticationInteractor4;
+        SharedFlowImpl sharedFlowImpl;
+        Boolean bool;
+        int i;
+        AuthenticationInteractor authenticationInteractor5;
+        AuthenticationInteractor authenticationInteractor6 = this;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i2 = anonymousClass1.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i2 - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = authenticationInteractor6.new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object objShouldSkipAuthenticationAttempt = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        switch (anonymousClass1.label) {
+            case 0:
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                if (list.isEmpty()) {
+                    throw new IllegalArgumentException("Input was empty!");
+                }
+                anonymousClass1.L$0 = authenticationInteractor6;
+                list2 = list;
+                anonymousClass1.L$1 = list2;
+                z2 = z;
+                anonymousClass1.Z$0 = z2;
+                anonymousClass1.label = 1;
+                authenticationMethod = authenticationInteractor6.getAuthenticationMethod(anonymousClass1);
+                if (authenticationMethod != coroutineSingletons) {
+                    AuthenticationMethodModel authenticationMethodModel2 = (AuthenticationMethodModel) authenticationMethod;
+                    int size = list2.size();
+                    anonymousClass1.L$0 = authenticationInteractor6;
+                    anonymousClass1.L$1 = list2;
+                    anonymousClass1.L$2 = authenticationMethodModel2;
+                    anonymousClass1.Z$0 = z2;
+                    anonymousClass1.label = 2;
+                    objIsInputTooShort = authenticationInteractor6.isInputTooShort(authenticationMethodModel2, size, anonymousClass1);
+                    if (objIsInputTooShort != coroutineSingletons) {
+                        authenticationInteractor = authenticationInteractor6;
+                        authenticationMethodModel = authenticationMethodModel2;
+                        list3 = list2;
+                        objShouldSkipAuthenticationAttempt = objIsInputTooShort;
+                        if (!((Boolean) objShouldSkipAuthenticationAttempt).booleanValue()) {
+                            return AuthenticationResult.SKIPPED;
+                        }
+                        int size2 = list3.size();
+                        anonymousClass1.L$0 = authenticationInteractor;
+                        anonymousClass1.L$1 = list3;
+                        anonymousClass1.L$2 = authenticationMethodModel;
+                        anonymousClass1.label = 3;
+                        objShouldSkipAuthenticationAttempt = authenticationInteractor.shouldSkipAuthenticationAttempt(authenticationMethodModel, z2, size2, anonymousClass1);
+                        if (objShouldSkipAuthenticationAttempt != coroutineSingletons) {
+                            authenticationInteractor2 = authenticationInteractor;
+                            if (!((Boolean) objShouldSkipAuthenticationAttempt).booleanValue()) {
+                                return AuthenticationResult.SKIPPED;
+                            }
+                            authenticationInteractor2.getClass();
+                            if (authenticationMethodModel instanceof AuthenticationMethodModel.Pin) {
+                                lockscreenCredentialCreatePattern = LockscreenCredential.createPin(CollectionsKt___CollectionsKt.joinToString$default(list3, "", null, null, null, 62));
+                            } else if (authenticationMethodModel instanceof AuthenticationMethodModel.Password) {
+                                lockscreenCredentialCreatePattern = LockscreenCredential.createPassword(CollectionsKt___CollectionsKt.joinToString$default(list3, "", null, null, null, 62));
+                            } else if (authenticationMethodModel instanceof AuthenticationMethodModel.Pattern) {
+                                List list4 = list3;
+                                ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list4, 10));
+                                Iterator it = list4.iterator();
+                                while (it.hasNext()) {
+                                    arrayList.add((AuthenticationPatternCoordinate) it.next());
+                                }
+                                ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList, 10));
+                                int size3 = arrayList.size();
+                                int i3 = 0;
+                                while (i3 < size3) {
+                                    Object obj = arrayList.get(i3);
+                                    i3++;
+                                    AuthenticationPatternCoordinate authenticationPatternCoordinate = (AuthenticationPatternCoordinate) obj;
+                                    arrayList2.add(LockPatternView.Cell.of(authenticationPatternCoordinate.y, authenticationPatternCoordinate.x));
+                                }
+                                lockscreenCredentialCreatePattern = LockscreenCredential.createPattern(arrayList2);
+                            } else {
+                                lockscreenCredentialCreatePattern = null;
+                            }
+                            if (lockscreenCredentialCreatePattern == null) {
+                                return AuthenticationResult.SKIPPED;
+                            }
+                            anonymousClass1.L$0 = authenticationInteractor2;
+                            anonymousClass1.L$1 = lockscreenCredentialCreatePattern;
+                            anonymousClass1.L$2 = null;
+                            anonymousClass1.label = 4;
+                            objShouldSkipAuthenticationAttempt = ((AuthenticationRepositoryImpl) authenticationInteractor2.repository).checkCredential(lockscreenCredentialCreatePattern, anonymousClass1);
+                            if (objShouldSkipAuthenticationAttempt != coroutineSingletons) {
+                                authenticationResultModel = (AuthenticationResultModel) objShouldSkipAuthenticationAttempt;
+                                lockscreenCredentialCreatePattern.zeroize();
+                                if (!authenticationResultModel.isSuccessful) {
+                                    AuthenticationRepository authenticationRepository = authenticationInteractor2.repository;
+                                    anonymousClass1.L$0 = authenticationInteractor2;
+                                    anonymousClass1.L$1 = null;
+                                    anonymousClass1.label = 5;
+                                    if (((AuthenticationRepositoryImpl) authenticationRepository).reportAuthenticationAttempt(true, anonymousClass1) != coroutineSingletons) {
+                                        authenticationInteractor4 = authenticationInteractor2;
+                                        sharedFlowImpl = authenticationInteractor4._onAuthenticationResult;
+                                        bool = Boolean.TRUE;
+                                        anonymousClass1.L$0 = authenticationInteractor4;
+                                        anonymousClass1.label = 6;
+                                        if (sharedFlowImpl.emit(bool, anonymousClass1) != coroutineSingletons) {
+                                            Duration.Companion companion = Duration.Companion;
+                                            long duration = DurationKt.toDuration(5, DurationUnit.SECONDS);
+                                            anonymousClass1.L$0 = null;
+                                            anonymousClass1.label = 7;
+                                            authenticationInteractor4.getClass();
+                                            CoroutineTracingKt.launchTraced$default(authenticationInteractor4.applicationScope, authenticationInteractor4.backgroundDispatcher, null, new AuthenticationInteractor$initiateGarbageCollection$2(duration, null), 5);
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    AuthenticationRepository authenticationRepository2 = authenticationInteractor2.repository;
+                                    anonymousClass1.L$0 = authenticationInteractor2;
+                                    anonymousClass1.L$1 = authenticationResultModel;
+                                    anonymousClass1.label = 8;
+                                    if (((AuthenticationRepositoryImpl) authenticationRepository2).reportAuthenticationAttempt(false, anonymousClass1) != coroutineSingletons) {
+                                        authenticationResultModel2 = authenticationResultModel;
+                                        authenticationInteractor3 = authenticationInteractor2;
+                                        i = authenticationResultModel2.lockoutDurationMs;
+                                        if (i <= 0) {
+                                            AuthenticationRepository authenticationRepository3 = authenticationInteractor3.repository;
+                                            anonymousClass1.L$0 = authenticationInteractor3;
+                                            anonymousClass1.L$1 = null;
+                                            anonymousClass1.label = 9;
+                                            if (((AuthenticationRepositoryImpl) authenticationRepository3).reportLockoutStarted(i, anonymousClass1) != coroutineSingletons) {
+                                                authenticationInteractor5 = authenticationInteractor3;
+                                                authenticationInteractor3 = authenticationInteractor5;
+                                                SharedFlowImpl sharedFlowImpl2 = authenticationInteractor3._onAuthenticationResult;
+                                                Boolean bool2 = Boolean.FALSE;
+                                                anonymousClass1.L$0 = null;
+                                                anonymousClass1.L$1 = null;
+                                                anonymousClass1.label = 10;
+                                                break;
+                                            }
+                                        } else {
+                                            SharedFlowImpl sharedFlowImpl22 = authenticationInteractor3._onAuthenticationResult;
+                                            Boolean bool22 = Boolean.FALSE;
+                                            anonymousClass1.L$0 = null;
+                                            anonymousClass1.L$1 = null;
+                                            anonymousClass1.label = 10;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return coroutineSingletons;
+            case 1:
+                boolean z3 = anonymousClass1.Z$0;
+                List list5 = (List) anonymousClass1.L$1;
+                AuthenticationInteractor authenticationInteractor7 = (AuthenticationInteractor) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                z2 = z3;
+                authenticationInteractor6 = authenticationInteractor7;
+                authenticationMethod = objShouldSkipAuthenticationAttempt;
+                list2 = list5;
+                AuthenticationMethodModel authenticationMethodModel22 = (AuthenticationMethodModel) authenticationMethod;
+                int size4 = list2.size();
+                anonymousClass1.L$0 = authenticationInteractor6;
+                anonymousClass1.L$1 = list2;
+                anonymousClass1.L$2 = authenticationMethodModel22;
+                anonymousClass1.Z$0 = z2;
+                anonymousClass1.label = 2;
+                objIsInputTooShort = authenticationInteractor6.isInputTooShort(authenticationMethodModel22, size4, anonymousClass1);
+                if (objIsInputTooShort != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            case 2:
+                boolean z4 = anonymousClass1.Z$0;
+                AuthenticationMethodModel authenticationMethodModel3 = (AuthenticationMethodModel) anonymousClass1.L$2;
+                list3 = (List) anonymousClass1.L$1;
+                authenticationInteractor = (AuthenticationInteractor) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                z2 = z4;
+                authenticationMethodModel = authenticationMethodModel3;
+                if (!((Boolean) objShouldSkipAuthenticationAttempt).booleanValue()) {
+                }
+                break;
+            case 3:
+                authenticationMethodModel = (AuthenticationMethodModel) anonymousClass1.L$2;
+                List list6 = (List) anonymousClass1.L$1;
+                AuthenticationInteractor authenticationInteractor8 = (AuthenticationInteractor) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                list3 = list6;
+                authenticationInteractor2 = authenticationInteractor8;
+                if (!((Boolean) objShouldSkipAuthenticationAttempt).booleanValue()) {
+                }
+                break;
+            case 4:
+                lockscreenCredentialCreatePattern = (LockscreenCredential) anonymousClass1.L$1;
+                authenticationInteractor2 = (AuthenticationInteractor) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                authenticationResultModel = (AuthenticationResultModel) objShouldSkipAuthenticationAttempt;
+                lockscreenCredentialCreatePattern.zeroize();
+                if (!authenticationResultModel.isSuccessful) {
+                }
+                return coroutineSingletons;
+            case 5:
+                authenticationInteractor4 = (AuthenticationInteractor) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                sharedFlowImpl = authenticationInteractor4._onAuthenticationResult;
+                bool = Boolean.TRUE;
+                anonymousClass1.L$0 = authenticationInteractor4;
+                anonymousClass1.label = 6;
+                if (sharedFlowImpl.emit(bool, anonymousClass1) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            case 6:
+                authenticationInteractor4 = (AuthenticationInteractor) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                Duration.Companion companion2 = Duration.Companion;
+                long duration2 = DurationKt.toDuration(5, DurationUnit.SECONDS);
+                anonymousClass1.L$0 = null;
+                anonymousClass1.label = 7;
+                authenticationInteractor4.getClass();
+                CoroutineTracingKt.launchTraced$default(authenticationInteractor4.applicationScope, authenticationInteractor4.backgroundDispatcher, null, new AuthenticationInteractor$initiateGarbageCollection$2(duration2, null), 5);
+                break;
+            case 7:
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                return AuthenticationResult.SUCCEEDED;
+            case 8:
+                authenticationResultModel2 = (AuthenticationResultModel) anonymousClass1.L$1;
+                authenticationInteractor3 = (AuthenticationInteractor) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                i = authenticationResultModel2.lockoutDurationMs;
+                if (i <= 0) {
+                }
+                return coroutineSingletons;
+            case 9:
+                authenticationInteractor5 = (AuthenticationInteractor) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                authenticationInteractor3 = authenticationInteractor5;
+                SharedFlowImpl sharedFlowImpl222 = authenticationInteractor3._onAuthenticationResult;
+                Boolean bool222 = Boolean.FALSE;
+                anonymousClass1.L$0 = null;
+                anonymousClass1.L$1 = null;
+                anonymousClass1.label = 10;
+                break;
+            case 10:
+                ResultKt.throwOnFailure(objShouldSkipAuthenticationAttempt);
+                return AuthenticationResult.FAILED;
+            default:
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
     }
 
     public final Object getAuthenticationMethod(ContinuationImpl continuationImpl) {
@@ -362,314 +683,182 @@ public final class AuthenticationInteractor {
         return authenticationRepositoryImpl.getAuthenticationMethod(authenticationRepositoryImpl.getSelectedUserId(), continuationImpl);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x0045, code lost:
-    
-        if (r6 == r1) goto L24;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object getPowerButtonInstantlyLocks(kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getPowerButtonInstantlyLocks$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getPowerButtonInstantlyLocks$1 r0 = (com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getPowerButtonInstantlyLocks$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getPowerButtonInstantlyLocks$1 r0 = new com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$getPowerButtonInstantlyLocks$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L3a
-            if (r2 == r4) goto L32
-            if (r2 != r3) goto L2a
-            kotlin.ResultKt.throwOnFailure(r6)
-            return r6
-        L2a:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L32:
-            java.lang.Object r5 = r0.L$0
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor r5 = (com.android.systemui.authentication.domain.interactor.AuthenticationInteractor) r5
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L48
-        L3a:
-            kotlin.ResultKt.throwOnFailure(r6)
-            r0.L$0 = r5
-            r0.label = r4
-            java.lang.Object r6 = r5.getAuthenticationMethod(r0)
-            if (r6 != r1) goto L48
-            goto L5d
-        L48:
-            com.android.systemui.authentication.shared.model.AuthenticationMethodModel r6 = (com.android.systemui.authentication.shared.model.AuthenticationMethodModel) r6
-            boolean r6 = r6.isSecure
-            if (r6 == 0) goto L5f
-            com.android.systemui.authentication.data.repository.AuthenticationRepository r5 = r5.repository
-            r6 = 0
-            r0.L$0 = r6
-            r0.label = r3
-            com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl r5 = (com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl) r5
-            java.lang.Object r5 = r5.getPowerButtonInstantlyLocks(r0)
-            if (r5 != r1) goto L5e
-        L5d:
-            return r1
-        L5e:
-            return r5
-        L5f:
-            java.lang.Boolean r5 = java.lang.Boolean.TRUE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor.getPowerButtonInstantlyLocks(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object getPowerButtonInstantlyLocks(ContinuationImpl continuationImpl) {
+        C08041 c08041;
+        if (continuationImpl instanceof C08041) {
+            c08041 = (C08041) continuationImpl;
+            int i = c08041.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c08041.label = i - Integer.MIN_VALUE;
+            } else {
+                c08041 = new C08041(continuationImpl);
+            }
+        }
+        Object authenticationMethod = c08041.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c08041.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(authenticationMethod);
+            c08041.L$0 = this;
+            c08041.label = 1;
+            authenticationMethod = getAuthenticationMethod(c08041);
+            if (authenticationMethod != coroutineSingletons) {
+            }
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(authenticationMethod);
+            return authenticationMethod;
+        }
+        this = (AuthenticationInteractor) c08041.L$0;
+        ResultKt.throwOnFailure(authenticationMethod);
+        if (!((AuthenticationMethodModel) authenticationMethod).isSecure) {
+            return Boolean.TRUE;
+        }
+        AuthenticationRepository authenticationRepository = this.repository;
+        c08041.L$0 = null;
+        c08041.label = 2;
+        Object powerButtonInstantlyLocks = ((AuthenticationRepositoryImpl) authenticationRepository).getPowerButtonInstantlyLocks(c08041);
+        return powerButtonInstantlyLocks == coroutineSingletons ? coroutineSingletons : powerButtonInstantlyLocks;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0071, code lost:
-    
-        if (r7 >= ((java.lang.Number) r8).intValue()) goto L32;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0045, code lost:
-    
-        r3 = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0043, code lost:
-    
-        if (r7 < ((com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl) r5).minPatternLength) goto L18;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x0053, code lost:
-    
-        if (r7 < ((com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl) r5).minPasswordLength) goto L18;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0032  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0045  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object isInputTooShort(com.android.systemui.authentication.shared.model.AuthenticationMethodModel r6, int r7, kotlin.coroutines.jvm.internal.ContinuationImpl r8) {
-        /*
-            r5 = this;
-            boolean r0 = r8 instanceof com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$isInputTooShort$1
-            if (r0 == 0) goto L13
-            r0 = r8
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$isInputTooShort$1 r0 = (com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$isInputTooShort$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$isInputTooShort$1 r0 = new com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$isInputTooShort$1
-            r0.<init>(r5, r8)
-        L18:
-            java.lang.Object r8 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 1
-            if (r2 == 0) goto L32
-            if (r2 != r4) goto L2a
-            int r7 = r0.I$0
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L6b
-        L2a:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L32:
-            kotlin.ResultKt.throwOnFailure(r8)
-            com.android.systemui.authentication.shared.model.AuthenticationMethodModel$Pattern r8 = com.android.systemui.authentication.shared.model.AuthenticationMethodModel.Pattern.INSTANCE
-            boolean r8 = kotlin.jvm.internal.Intrinsics.areEqual(r6, r8)
-            com.android.systemui.authentication.data.repository.AuthenticationRepository r5 = r5.repository
-            if (r8 == 0) goto L47
-            com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl r5 = (com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl) r5
-            int r5 = r5.minPatternLength
-            if (r7 >= r5) goto L74
-        L45:
-            r3 = r4
-            goto L74
-        L47:
-            com.android.systemui.authentication.shared.model.AuthenticationMethodModel$Password r8 = com.android.systemui.authentication.shared.model.AuthenticationMethodModel.Password.INSTANCE
-            boolean r8 = kotlin.jvm.internal.Intrinsics.areEqual(r6, r8)
-            if (r8 == 0) goto L56
-            com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl r5 = (com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl) r5
-            int r5 = r5.minPasswordLength
-            if (r7 >= r5) goto L74
-            goto L45
-        L56:
-            com.android.systemui.authentication.shared.model.AuthenticationMethodModel$Pin r8 = com.android.systemui.authentication.shared.model.AuthenticationMethodModel.Pin.INSTANCE
-            boolean r6 = kotlin.jvm.internal.Intrinsics.areEqual(r6, r8)
-            if (r6 == 0) goto L74
-            r0.I$0 = r7
-            r0.label = r4
-            com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl r5 = (com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl) r5
-            java.lang.Object r8 = r5.getPinLength(r0)
-            if (r8 != r1) goto L6b
-            return r1
-        L6b:
-            java.lang.Number r8 = (java.lang.Number) r8
-            int r5 = r8.intValue()
-            if (r7 >= r5) goto L74
-            goto L45
-        L74:
-            java.lang.Boolean r5 = java.lang.Boolean.valueOf(r3)
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor.isInputTooShort(com.android.systemui.authentication.shared.model.AuthenticationMethodModel, int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object isInputTooShort(AuthenticationMethodModel authenticationMethodModel, int i, ContinuationImpl continuationImpl) {
+        C08051 c08051;
+        if (continuationImpl instanceof C08051) {
+            c08051 = (C08051) continuationImpl;
+            int i2 = c08051.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                c08051.label = i2 - Integer.MIN_VALUE;
+            } else {
+                c08051 = new C08051(continuationImpl);
+            }
+        }
+        Object pinLength = c08051.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = c08051.label;
+        boolean z = false;
+        if (i3 == 0) {
+            ResultKt.throwOnFailure(pinLength);
+            boolean zAreEqual = Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pattern.INSTANCE);
+            AuthenticationRepository authenticationRepository = this.repository;
+            if (zAreEqual) {
+                if (i < ((AuthenticationRepositoryImpl) authenticationRepository).minPatternLength) {
+                    z = true;
+                }
+            } else if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Password.INSTANCE)) {
+                if (i < ((AuthenticationRepositoryImpl) authenticationRepository).minPasswordLength) {
+                }
+            } else if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE)) {
+                c08051.I$0 = i;
+                c08051.label = 1;
+                pinLength = ((AuthenticationRepositoryImpl) authenticationRepository).getPinLength(c08051);
+                if (pinLength == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            }
+            return Boolean.valueOf(z);
+        }
+        if (i3 != 1) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        i = c08051.I$0;
+        ResultKt.throwOnFailure(pinLength);
+        if (i < ((Number) pinLength).intValue()) {
+        }
+        return Boolean.valueOf(z);
     }
 
     public final void reportUnlockAttempt(boolean z) {
         Log.d("AuthenticationInteractor", "reportUnlockAttempt " + z);
-        CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new AuthenticationInteractor$reportUnlockAttempt$1(this, z, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new C08061(z, null), 7);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x00a9, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:29:0x0092, code lost:
     
         if (r14 == r1) goto L36;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x00ab, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x00a9, code lost:
     
-        return r1;
+        if (r14 != r1) goto L37;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x0092, code lost:
-    
-        if (r14 == r1) goto L36;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x009d  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0045  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object shouldSkipAuthenticationAttempt(com.android.systemui.authentication.shared.model.AuthenticationMethodModel r11, boolean r12, int r13, kotlin.coroutines.jvm.internal.ContinuationImpl r14) {
-        /*
-            r10 = this;
-            boolean r0 = r14 instanceof com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$shouldSkipAuthenticationAttempt$1
-            if (r0 == 0) goto L13
-            r0 = r14
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$shouldSkipAuthenticationAttempt$1 r0 = (com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$shouldSkipAuthenticationAttempt$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$shouldSkipAuthenticationAttempt$1 r0 = new com.android.systemui.authentication.domain.interactor.AuthenticationInteractor$shouldSkipAuthenticationAttempt$1
-            r0.<init>(r10, r14)
-        L18:
-            java.lang.Object r14 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 2
-            r5 = 1
-            if (r2 == 0) goto L45
-            if (r2 == r5) goto L34
-            if (r2 != r4) goto L2c
-            kotlin.ResultKt.throwOnFailure(r14)
-            goto Lac
-        L2c:
-            java.lang.IllegalStateException r10 = new java.lang.IllegalStateException
-            java.lang.String r11 = "call to 'resume' before 'invoke' with coroutine"
-            r10.<init>(r11)
-            throw r10
-        L34:
-            int r13 = r0.I$0
-            boolean r12 = r0.Z$0
-            java.lang.Object r10 = r0.L$1
-            r11 = r10
-            com.android.systemui.authentication.shared.model.AuthenticationMethodModel r11 = (com.android.systemui.authentication.shared.model.AuthenticationMethodModel) r11
-            java.lang.Object r10 = r0.L$0
-            com.android.systemui.authentication.domain.interactor.AuthenticationInteractor r10 = (com.android.systemui.authentication.domain.interactor.AuthenticationInteractor) r10
-            kotlin.ResultKt.throwOnFailure(r14)
-            goto L95
-        L45:
-            kotlin.ResultKt.throwOnFailure(r14)
-            com.android.systemui.authentication.data.repository.AuthenticationRepository r14 = r10.repository
-            com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl r14 = (com.android.systemui.authentication.data.repository.AuthenticationRepositoryImpl) r14
-            com.android.internal.widget.LockPatternUtils r2 = r14.lockPatternUtils
-            int r6 = r14.getSelectedUserId()
-            long r6 = r2.getLockoutAttemptDeadline(r6)
-            java.lang.Long r2 = java.lang.Long.valueOf(r6)
-            com.android.systemui.util.time.SystemClock r14 = r14.clock
-            long r8 = r14.elapsedRealtime()
-            int r14 = (r8 > r6 ? 1 : (r8 == r6 ? 0 : -1))
-            if (r14 >= 0) goto L65
-            goto L66
-        L65:
-            r2 = r3
-        L66:
-            if (r2 == 0) goto L69
-            goto Lb6
-        L69:
-            if (r12 == 0) goto L7c
-            kotlinx.coroutines.flow.ReadonlyStateFlow r14 = r10.isAutoConfirmEnabled
-            kotlinx.coroutines.flow.StateFlow r14 = r14.$$delegate_0
-            java.lang.Object r14 = r14.getValue()
-            java.lang.Boolean r14 = (java.lang.Boolean) r14
-            boolean r14 = r14.booleanValue()
-            if (r14 != 0) goto L7c
-            goto Lb6
-        L7c:
-            com.android.systemui.authentication.shared.model.AuthenticationMethodModel$Pin r14 = com.android.systemui.authentication.shared.model.AuthenticationMethodModel.Pin.INSTANCE
-            boolean r14 = kotlin.jvm.internal.Intrinsics.areEqual(r11, r14)
-            if (r14 == 0) goto L9f
-            r0.L$0 = r10
-            r0.L$1 = r11
-            r0.Z$0 = r12
-            r0.I$0 = r13
-            r0.label = r5
-            java.lang.Object r14 = r10.isInputTooShort(r11, r13, r0)
-            if (r14 != r1) goto L95
-            goto Lab
-        L95:
-            java.lang.Boolean r14 = (java.lang.Boolean) r14
-            boolean r14 = r14.booleanValue()
-            if (r14 == 0) goto L9f
-            r5 = r12
-            goto Lb6
-        L9f:
-            r0.L$0 = r3
-            r0.L$1 = r3
-            r0.label = r4
-            java.lang.Object r14 = r10.isInputTooShort(r11, r13, r0)
-            if (r14 != r1) goto Lac
-        Lab:
-            return r1
-        Lac:
-            java.lang.Boolean r14 = (java.lang.Boolean) r14
-            boolean r10 = r14.booleanValue()
-            if (r10 == 0) goto Lb5
-            goto Lb6
-        Lb5:
-            r5 = 0
-        Lb6:
-            java.lang.Boolean r10 = java.lang.Boolean.valueOf(r5)
-            return r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.authentication.domain.interactor.AuthenticationInteractor.shouldSkipAuthenticationAttempt(com.android.systemui.authentication.shared.model.AuthenticationMethodModel, boolean, int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object shouldSkipAuthenticationAttempt(AuthenticationMethodModel authenticationMethodModel, boolean z, int i, ContinuationImpl continuationImpl) {
+        C08071 c08071;
+        if (continuationImpl instanceof C08071) {
+            c08071 = (C08071) continuationImpl;
+            int i2 = c08071.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                c08071.label = i2 - Integer.MIN_VALUE;
+            } else {
+                c08071 = new C08071(continuationImpl);
+            }
+        }
+        Object objIsInputTooShort = c08071.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = c08071.label;
+        boolean z2 = true;
+        if (i3 == 0) {
+            ResultKt.throwOnFailure(objIsInputTooShort);
+            AuthenticationRepositoryImpl authenticationRepositoryImpl = (AuthenticationRepositoryImpl) this.repository;
+            long lockoutAttemptDeadline = authenticationRepositoryImpl.lockPatternUtils.getLockoutAttemptDeadline(authenticationRepositoryImpl.getSelectedUserId());
+            Long lValueOf = Long.valueOf(lockoutAttemptDeadline);
+            if (authenticationRepositoryImpl.clock.elapsedRealtime() >= lockoutAttemptDeadline) {
+                lValueOf = null;
+            }
+            if (lValueOf == null && (!z || ((Boolean) this.isAutoConfirmEnabled.$$delegate_0.getValue()).booleanValue())) {
+                if (Intrinsics.areEqual(authenticationMethodModel, AuthenticationMethodModel.Pin.INSTANCE)) {
+                    c08071.L$0 = this;
+                    c08071.L$1 = authenticationMethodModel;
+                    c08071.Z$0 = z;
+                    c08071.I$0 = i;
+                    c08071.label = 1;
+                    objIsInputTooShort = isInputTooShort(authenticationMethodModel, i, c08071);
+                } else {
+                    c08071.L$0 = null;
+                    c08071.L$1 = null;
+                    c08071.label = 2;
+                    objIsInputTooShort = this.isInputTooShort(authenticationMethodModel, i, c08071);
+                }
+                return coroutineSingletons;
+            }
+            return Boolean.valueOf(z2);
+        }
+        if (i3 != 1) {
+            if (i3 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(objIsInputTooShort);
+            if (!((Boolean) objIsInputTooShort).booleanValue()) {
+                z2 = false;
+            }
+            return Boolean.valueOf(z2);
+        }
+        i = c08071.I$0;
+        z = c08071.Z$0;
+        authenticationMethodModel = (AuthenticationMethodModel) c08071.L$1;
+        this = (AuthenticationInteractor) c08071.L$0;
+        ResultKt.throwOnFailure(objIsInputTooShort);
+        if (((Boolean) objIsInputTooShort).booleanValue()) {
+            z2 = z;
+            return Boolean.valueOf(z2);
+        }
+        c08071.L$0 = null;
+        c08071.L$1 = null;
+        c08071.label = 2;
+        objIsInputTooShort = this.isInputTooShort(authenticationMethodModel, i, c08071);
     }
 }

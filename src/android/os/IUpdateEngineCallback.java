@@ -45,9 +45,9 @@ public interface IUpdateEngineCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUpdateEngineCallback)) {
-                return (IUpdateEngineCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUpdateEngineCallback)) {
+                return (IUpdateEngineCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -77,14 +77,14 @@ public interface IUpdateEngineCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                float readFloat = parcel.readFloat();
+                int i3 = parcel.readInt();
+                float f = parcel.readFloat();
                 parcel.enforceNoDataAvail();
-                onStatusUpdate(readInt, readFloat);
+                onStatusUpdate(i3, f);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onPayloadApplicationComplete(readInt2);
+                onPayloadApplicationComplete(i4);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -109,26 +109,26 @@ public interface IUpdateEngineCallback extends IInterface {
 
             @Override // android.os.IUpdateEngineCallback
             public void onStatusUpdate(int i, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IUpdateEngineCallback
             public void onPayloadApplicationComplete(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

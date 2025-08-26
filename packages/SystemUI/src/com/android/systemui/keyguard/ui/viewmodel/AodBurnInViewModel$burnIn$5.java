@@ -11,7 +11,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class AodBurnInViewModel$burnIn$5 extends SuspendLambda implements Function3 {
     final /* synthetic */ BurnInParameters $params;
@@ -29,9 +28,9 @@ final class AodBurnInViewModel$burnIn$5 extends SuspendLambda implements Functio
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        float floatValue = ((Number) obj).floatValue();
+        float fFloatValue = ((Number) obj).floatValue();
         AodBurnInViewModel$burnIn$5 aodBurnInViewModel$burnIn$5 = new AodBurnInViewModel$burnIn$5(this.this$0, this.$params, (Continuation) obj3);
-        aodBurnInViewModel$burnIn$5.F$0 = floatValue;
+        aodBurnInViewModel$burnIn$5.F$0 = fFloatValue;
         aodBurnInViewModel$burnIn$5.L$0 = (BurnInModel) obj2;
         return aodBurnInViewModel$burnIn$5.invokeSuspend(Unit.INSTANCE);
     }
@@ -48,8 +47,8 @@ final class AodBurnInViewModel$burnIn$5 extends SuspendLambda implements Functio
         BurnInModel burnInModel = (BurnInModel) this.L$0;
         ClockController clockController = (ClockController) this.this$0.keyguardClockViewModel.currentClock.$$delegate_0.getValue();
         boolean z = (clockController == null || (config = clockController.getConfig()) == null || !config.getUseAlternateSmartspaceAODTransition()) && ((Boolean) this.this$0.keyguardClockViewModel.isLargeClockVisible.$$delegate_0.getValue()).booleanValue();
-        int lerp = (int) MathUtils.lerp(0, burnInModel.translationY, f);
+        int iLerp = (int) MathUtils.lerp(0, burnInModel.translationY, f);
         BurnInParameters burnInParameters = this.$params;
-        return new BurnInModel((int) MathUtils.lerp(0, burnInModel.translationX, f), Math.max(burnInParameters.topInset - burnInParameters.minViewY, lerp), MathUtils.lerp(burnInModel.scale, 1.0f, 1.0f - f), z);
+        return new BurnInModel((int) MathUtils.lerp(0, burnInModel.translationX, f), Math.max(burnInParameters.topInset - burnInParameters.minViewY, iLerp), MathUtils.lerp(burnInModel.scale, 1.0f, 1.0f - f), z);
     }
 }

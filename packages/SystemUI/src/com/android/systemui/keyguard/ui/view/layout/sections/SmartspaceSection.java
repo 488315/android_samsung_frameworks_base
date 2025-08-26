@@ -21,7 +21,7 @@ import com.android.systemui.keyguard.ui.binder.KeyguardSmartspaceViewBinder;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardClockViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardRootViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardSmartspaceViewModel;
-import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
+import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import com.android.systemui.plugins.BcSmartspaceConfigPlugin;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController;
@@ -30,13 +30,12 @@ import java.util.Arrays;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SmartspaceSection extends KeyguardSection {
     public final Lazy blueprintInteractor;
     public final Context context;
     public ViewGroup dateView;
-    public RepeatWhenAttachedKt$repeatWhenAttached$1 disposableHandle;
+    public RepeatWhenAttachedKt.C09181 disposableHandle;
     public final KeyguardClockViewModel keyguardClockViewModel;
     public final KeyguardRootViewModel keyguardRootViewModel;
     public final KeyguardSmartspaceInteractor keyguardSmartspaceInteractor;
@@ -45,7 +44,7 @@ public class SmartspaceSection extends KeyguardSection {
     public int pastVisibility = -1;
     public final LockscreenSmartspaceController smartspaceController;
     public View smartspaceView;
-    public SmartspaceSection$addViews$1 smartspaceVisibilityListener;
+    public AnonymousClass1 smartspaceVisibilityListener;
 
     public SmartspaceSection(Context context, KeyguardClockViewModel keyguardClockViewModel, KeyguardSmartspaceViewModel keyguardSmartspaceViewModel, KeyguardSmartspaceInteractor keyguardSmartspaceInteractor, LockscreenSmartspaceController lockscreenSmartspaceController, KeyguardUnlockAnimationController keyguardUnlockAnimationController, Lazy lazy, KeyguardRootViewModel keyguardRootViewModel) {
         this.context = context;
@@ -74,11 +73,11 @@ public class SmartspaceSection extends KeyguardSection {
             if (bcSmartspaceConfigPlugin != null && bcSmartspaceDataPlugin != null) {
                 bcSmartspaceDataPlugin.registerConfigProvider(bcSmartspaceConfigPlugin);
             }
-            View buildView = lockscreenSmartspaceController.buildView("general_view", constraintLayout, bcSmartspaceDataPlugin, bcSmartspaceConfigPlugin);
+            View viewBuildView = lockscreenSmartspaceController.buildView("general_view", constraintLayout, bcSmartspaceDataPlugin, bcSmartspaceConfigPlugin);
             lockscreenSmartspaceController.connectSession();
-            this.smartspaceView = buildView;
-            View buildAndConnectDateView = lockscreenSmartspaceController.buildAndConnectDateView(constraintLayout);
-            this.dateView = buildAndConnectDateView instanceof ViewGroup ? (ViewGroup) buildAndConnectDateView : null;
+            this.smartspaceView = viewBuildView;
+            View viewBuildAndConnectDateView = lockscreenSmartspaceController.buildAndConnectDateView(constraintLayout);
+            this.dateView = viewBuildAndConnectDateView instanceof ViewGroup ? (ViewGroup) viewBuildAndConnectDateView : null;
             lockscreenSmartspaceController.execution.assertIsMainThread();
             if (!lockscreenSmartspaceController.isEnabled) {
                 throw new RuntimeException("Cannot build view when not enabled");
@@ -86,7 +85,7 @@ public class SmartspaceSection extends KeyguardSection {
             if (!lockscreenSmartspaceController.isDateWeatherDecoupled) {
                 throw new RuntimeException("Cannot build weather view when not decoupled");
             }
-            View buildView2 = lockscreenSmartspaceController.buildView("weather_view", constraintLayout, lockscreenSmartspaceController.weatherPlugin, null);
+            View viewBuildView2 = lockscreenSmartspaceController.buildView("weather_view", constraintLayout, lockscreenSmartspaceController.weatherPlugin, null);
             lockscreenSmartspaceController.connectSession();
             View view = this.smartspaceView;
             this.pastVisibility = view != null ? view.getVisibility() : 8;
@@ -101,11 +100,11 @@ public class SmartspaceSection extends KeyguardSection {
                 int i2 = i ^ 1;
                 ViewGroup viewGroup2 = this.dateView;
                 if (viewGroup2 != null) {
-                    viewGroup2.addView(buildView2, i2);
+                    viewGroup2.addView(viewBuildView2, i2);
                 }
             }
             this.keyguardUnlockAnimationController.lockscreenSmartspace = this.smartspaceView;
-            this.smartspaceVisibilityListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.SmartspaceSection$addViews$1
+            this.smartspaceVisibilityListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.SmartspaceSection.addViews.1
                 @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
                 public final void onGlobalLayout() {
                     int visibility;
@@ -127,7 +126,7 @@ public class SmartspaceSection extends KeyguardSection {
     }
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
-    public final void applyConstraints(ConstraintSet constraintSet) {
+    public final void applyConstraints(ConstraintSet constraintSet) throws Resources.NotFoundException {
         KeyguardSmartspaceViewModel keyguardSmartspaceViewModel = this.keyguardSmartspaceViewModel;
         if (keyguardSmartspaceViewModel.isSmartspaceEnabled) {
             KeyguardSmartspaceViewModel.Companion companion = KeyguardSmartspaceViewModel.Companion;
@@ -138,7 +137,7 @@ public class SmartspaceSection extends KeyguardSection {
             int i = R$dimen.status_view_margin_horizontal;
             int dimensionPixelSize2 = resources.getDimensionPixelSize(i) + dimensionPixelSize;
             Context context2 = this.context;
-            int m = StrongAuthPopup$$ExternalSyntheticOutline0.m(context2, i, context2.getResources().getDimensionPixelSize(R.dimen.smartspace_padding_horizontal));
+            int iM = StrongAuthPopup$$ExternalSyntheticOutline0.m(context2, i, context2.getResources().getDimensionPixelSize(R.dimen.smartspace_padding_horizontal));
             this.context.getResources().getConfiguration();
             KeyguardClockViewModel keyguardClockViewModel = this.keyguardClockViewModel;
             ((Boolean) keyguardClockViewModel.hasCustomWeatherDataDisplay.$$delegate_0.getValue()).getClass();
@@ -147,8 +146,8 @@ public class SmartspaceSection extends KeyguardSection {
             constraintSet.connect(R.id.date_smartspace_view, 6, 0, 6, dimensionPixelSize2);
             constraintSet.constrainHeight(R.id.bc_smartspace_view, -2);
             constraintSet.constrainWidth(R.id.bc_smartspace_view, 0);
-            constraintSet.connect(R.id.bc_smartspace_view, 6, 0, 6, m);
-            constraintSet.connect(R.id.bc_smartspace_view, 7, ((Boolean) keyguardSmartspaceViewModel.isShadeLayoutWide.$$delegate_0.getValue()).booleanValue() ? R.id.split_shade_guideline : 0, 7, m);
+            constraintSet.connect(R.id.bc_smartspace_view, 6, 0, 6, iM);
+            constraintSet.connect(R.id.bc_smartspace_view, 7, ((Boolean) keyguardSmartspaceViewModel.isShadeLayoutWide.$$delegate_0.getValue()).booleanValue() ? R.id.split_shade_guideline : 0, 7, iM);
             ReadonlyStateFlow readonlyStateFlow = keyguardClockViewModel.hasCustomWeatherDataDisplay;
             if (((Boolean) readonlyStateFlow.$$delegate_0.getValue()).booleanValue()) {
                 constraintSet.clear(R.id.date_smartspace_view, 3);
@@ -164,12 +163,12 @@ public class SmartspaceSection extends KeyguardSection {
             if (smartspaceSession != null) {
                 smartspaceSession.requestSmartspaceUpdate();
             }
-            boolean booleanValue = ((Boolean) keyguardSmartspaceViewModel.isWeatherVisible.$$delegate_0.getValue()).booleanValue();
-            constraintSet.setVisibility(R.id.weather_smartspace_view, booleanValue ? 0 : 8);
-            constraintSet.setAlpha(R.id.weather_smartspace_view, booleanValue ? 1.0f : 0.0f);
-            boolean booleanValue2 = ((Boolean) readonlyStateFlow.$$delegate_0.getValue()).booleanValue();
-            constraintSet.setVisibility(R.id.date_smartspace_view, booleanValue2 ? 8 : 0);
-            constraintSet.setAlpha(R.id.date_smartspace_view, booleanValue2 ? 0.0f : 1.0f);
+            boolean zBooleanValue = ((Boolean) keyguardSmartspaceViewModel.isWeatherVisible.$$delegate_0.getValue()).booleanValue();
+            constraintSet.setVisibility(R.id.weather_smartspace_view, zBooleanValue ? 0 : 8);
+            constraintSet.setAlpha(R.id.weather_smartspace_view, zBooleanValue ? 1.0f : 0.0f);
+            boolean zBooleanValue2 = ((Boolean) readonlyStateFlow.$$delegate_0.getValue()).booleanValue();
+            constraintSet.setVisibility(R.id.date_smartspace_view, zBooleanValue2 ? 8 : 0);
+            constraintSet.setAlpha(R.id.date_smartspace_view, zBooleanValue2 ? 0.0f : 1.0f);
         }
     }
 
@@ -177,9 +176,9 @@ public class SmartspaceSection extends KeyguardSection {
     public final void bindData(ConstraintLayout constraintLayout) {
         KeyguardSmartspaceViewModel keyguardSmartspaceViewModel = this.keyguardSmartspaceViewModel;
         if (keyguardSmartspaceViewModel.isSmartspaceEnabled) {
-            RepeatWhenAttachedKt$repeatWhenAttached$1 repeatWhenAttachedKt$repeatWhenAttached$1 = this.disposableHandle;
-            if (repeatWhenAttachedKt$repeatWhenAttached$1 != null) {
-                repeatWhenAttachedKt$repeatWhenAttached$1.dispose();
+            RepeatWhenAttachedKt.C09181 c09181 = this.disposableHandle;
+            if (c09181 != null) {
+                c09181.dispose();
             }
             this.disposableHandle = KeyguardSmartspaceViewBinder.bind(constraintLayout, this.keyguardRootViewModel, this.keyguardClockViewModel, keyguardSmartspaceViewModel, (KeyguardBlueprintInteractor) this.blueprintInteractor.get());
         }
@@ -213,9 +212,9 @@ public class SmartspaceSection extends KeyguardSection {
                 viewTreeObserver.removeOnGlobalLayoutListener(this.smartspaceVisibilityListener);
             }
             this.smartspaceVisibilityListener = null;
-            RepeatWhenAttachedKt$repeatWhenAttached$1 repeatWhenAttachedKt$repeatWhenAttached$1 = this.disposableHandle;
-            if (repeatWhenAttachedKt$repeatWhenAttached$1 != null) {
-                repeatWhenAttachedKt$repeatWhenAttached$1.dispose();
+            RepeatWhenAttachedKt.C09181 c09181 = this.disposableHandle;
+            if (c09181 != null) {
+                c09181.dispose();
             }
         }
     }

@@ -15,14 +15,12 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.markers.KMutableCollection;
 import kotlin.jvm.internal.markers.KMutableSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ArraySet implements Collection, Set, KMutableCollection, KMutableSet {
     public int _size;
     public Object[] array;
     public int[] hashes;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ElementIterator extends IndexBasedArrayIterator {
         public ElementIterator() {
             super(ArraySet.this._size);
@@ -46,20 +44,20 @@ public final class ArraySet implements Collection, Set, KMutableCollection, KMut
     @Override // java.util.Collection, java.util.Set
     public final boolean add(Object obj) {
         int i;
-        int indexOf;
+        int iIndexOf;
         int i2 = this._size;
         if (obj == null) {
-            indexOf = ArraySetKt.indexOf(this, null, 0);
+            iIndexOf = ArraySetKt.indexOf(this, null, 0);
             i = 0;
         } else {
-            int hashCode = obj.hashCode();
-            i = hashCode;
-            indexOf = ArraySetKt.indexOf(this, obj, hashCode);
+            int iHashCode = obj.hashCode();
+            i = iHashCode;
+            iIndexOf = ArraySetKt.indexOf(this, obj, iHashCode);
         }
-        if (indexOf >= 0) {
+        if (iIndexOf >= 0) {
             return false;
         }
-        int i3 = ~indexOf;
+        int i3 = ~iIndexOf;
         int[] iArr = this.hashes;
         if (i2 >= iArr.length) {
             int i4 = 8;
@@ -207,22 +205,22 @@ public final class ArraySet implements Collection, Set, KMutableCollection, KMut
 
     @Override // java.util.Collection, java.util.Set
     public final boolean remove(Object obj) {
-        int indexOf = obj == null ? ArraySetKt.indexOf(this, null, 0) : ArraySetKt.indexOf(this, obj, obj.hashCode());
-        if (indexOf < 0) {
+        int iIndexOf = obj == null ? ArraySetKt.indexOf(this, null, 0) : ArraySetKt.indexOf(this, obj, obj.hashCode());
+        if (iIndexOf < 0) {
             return false;
         }
-        removeAt(indexOf);
+        removeAt(iIndexOf);
         return true;
     }
 
     @Override // java.util.Collection, java.util.Set
     public final boolean removeAll(Collection collection) {
         Iterator it = collection.iterator();
-        boolean z = false;
+        boolean zRemove = false;
         while (it.hasNext()) {
-            z |= remove(it.next());
+            zRemove |= remove(it.next());
         }
-        return z;
+        return zRemove;
     }
 
     public final Object removeAt(int i) {
@@ -366,10 +364,10 @@ public final class ArraySet implements Collection, Set, KMutableCollection, KMut
     public final boolean addAll(Collection collection) {
         ensureCapacity(collection.size() + this._size);
         Iterator it = collection.iterator();
-        boolean z = false;
+        boolean zAdd = false;
         while (it.hasNext()) {
-            z |= add(it.next());
+            zAdd |= add(it.next());
         }
-        return z;
+        return zAdd;
     }
 }

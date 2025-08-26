@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ReorderStructureModel implements StructureModel {
     public SecStructureAdapter adapter;
@@ -21,7 +20,6 @@ public final class ReorderStructureModel implements StructureModel {
     public boolean isDragging;
     public final ItemTouchHelper itemTouchHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -61,7 +59,7 @@ public final class ReorderStructureModel implements StructureModel {
                 float top = viewHolder.itemView.getTop() + f2;
                 float height = viewHolder.itemView.getHeight() + top;
                 LinearLayout linearLayout = (LinearLayout) viewHolder.itemView.requireViewById(R.id.reorder_structure_layout);
-                ReorderStructureModel reorderStructureModel = ReorderStructureModel.this;
+                ReorderStructureModel reorderStructureModel = this.this$0;
                 if (reorderStructureModel.isDragging && reorderStructureModel.dragPos == -1 && 0.0f < ((float) Math.hypot(f, f2))) {
                     reorderStructureModel.dragPos = viewHolder.getBindingAdapterPosition();
                     linearLayout.setPressed(true);
@@ -83,7 +81,7 @@ public final class ReorderStructureModel implements StructureModel {
             public final boolean onMove(RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder viewHolder2) {
                 int bindingAdapterPosition = viewHolder.getBindingAdapterPosition();
                 int bindingAdapterPosition2 = viewHolder2.getBindingAdapterPosition();
-                ReorderStructureModel reorderStructureModel = ReorderStructureModel.this;
+                ReorderStructureModel reorderStructureModel = this.this$0;
                 reorderStructureModel.getClass();
                 if (bindingAdapterPosition < bindingAdapterPosition2) {
                     int i = bindingAdapterPosition;
@@ -116,7 +114,7 @@ public final class ReorderStructureModel implements StructureModel {
             @Override // androidx.recyclerview.widget.ItemTouchHelper.Callback
             public final void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int i) {
                 super.onSelectedChanged(viewHolder, i);
-                ReorderStructureModel.this.isDragging = i == 2;
+                this.this$0.isDragging = i == 2;
             }
 
             @Override // androidx.recyclerview.widget.ItemTouchHelper.Callback

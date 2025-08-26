@@ -8,6 +8,7 @@ import java.util.List;
 /* loaded from: classes6.dex */
 public class ParceledListSlice<T extends Parcelable> extends BaseParceledListSlice<T> {
     public static final Parcelable.ClassLoaderCreator<ParceledListSlice> CREATOR = new Parcelable.ClassLoaderCreator<ParceledListSlice>() { // from class: com.android.modules.utils.ParceledListSlice.1
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.os.Parcelable.Creator
         public ParceledListSlice createFromParcel(Parcel parcel) {
             return new ParceledListSlice(parcel, null);
@@ -55,11 +56,11 @@ public class ParceledListSlice<T extends Parcelable> extends BaseParceledListSli
     @Override // android.os.Parcelable
     public int describeContents() {
         List list = getList();
-        int i = 0;
-        for (int i2 = 0; i2 < list.size(); i2++) {
-            i |= ((Parcelable) list.get(i2)).describeContents();
+        int iDescribeContents = 0;
+        for (int i = 0; i < list.size(); i++) {
+            iDescribeContents |= ((Parcelable) list.get(i)).describeContents();
         }
-        return i;
+        return iDescribeContents;
     }
 
     /* JADX INFO: Access modifiers changed from: protected */

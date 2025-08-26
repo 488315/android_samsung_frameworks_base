@@ -3,7 +3,6 @@ package androidx.compose.ui.input.key;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Key {
     public static final long AltLeft;
@@ -37,7 +36,6 @@ public final class Key {
     public static final long Tab;
     public final long keyCode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -154,12 +152,12 @@ public final class Key {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ Key m575boximpl(long j) {
+    public static final /* synthetic */ Key m577boximpl(long j) {
         return new Key(j);
     }
 
     /* renamed from: equals-impl0, reason: not valid java name */
-    public static final boolean m576equalsimpl0(long j, long j2) {
+    public static final boolean m578equalsimpl0(long j, long j2) {
         return j == j2;
     }
 

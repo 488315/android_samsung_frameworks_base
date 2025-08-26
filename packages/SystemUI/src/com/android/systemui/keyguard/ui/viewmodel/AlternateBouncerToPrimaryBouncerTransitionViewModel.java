@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.EmptyFlow;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AlternateBouncerToPrimaryBouncerTransitionViewModel implements DeviceEntryIconTransition, PrimaryBouncerTransition {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 alphaFlow;
@@ -36,30 +35,30 @@ public final class AlternateBouncerToPrimaryBouncerTransitionViewModel implement
         KeyguardState keyguardState = KeyguardState.ALTERNATE_BOUNCER;
         OverlayKey overlayKey = Overlays.Bouncer;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.PRIMARY_BOUNCER, keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, overlayKey)));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.PRIMARY_BOUNCER, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, overlayKey)));
         AlternateBouncerToPrimaryBouncerTransitionViewModel$$ExternalSyntheticLambda0 alternateBouncerToPrimaryBouncerTransitionViewModel$$ExternalSyntheticLambda0 = new AlternateBouncerToPrimaryBouncerTransitionViewModel$$ExternalSyntheticLambda0();
         this.alphaForAnimationStep = alternateBouncerToPrimaryBouncerTransitionViewModel$$ExternalSyntheticLambda0;
-        KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 m2599sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m, j, alternateBouncerToPrimaryBouncerTransitionViewModel$$ExternalSyntheticLambda0, 0L, null, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_setDexForegroundModePackageList);
-        this.alphaFlow = m2599sharedFlow74qcysc$default;
+        KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, j, alternateBouncerToPrimaryBouncerTransitionViewModel$$ExternalSyntheticLambda0, 0L, null, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_setDexForegroundModePackageList);
+        this.alphaFlow = keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default;
         EmptyFlow emptyFlow = EmptyFlow.INSTANCE;
         this.lockscreenAlpha = emptyFlow;
-        this.notificationAlpha = m2599sharedFlow74qcysc$default;
+        this.notificationAlpha = keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default;
         this.notificationBlurRadius = emptyFlow;
-        this.deviceEntryParentViewAlpha = m.immediatelyTransitionTo(0.0f);
-        this.windowBlurRadius = shadeDependentFlows.transitionFlow(m.immediatelyTransitionTo(blurConfig.minBlurRadiusPx), KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m, j, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.AlternateBouncerToPrimaryBouncerTransitionViewModel$$ExternalSyntheticLambda1
+        this.deviceEntryParentViewAlpha = flowBuilderM.immediatelyTransitionTo(0.0f);
+        this.windowBlurRadius = shadeDependentFlows.transitionFlow(flowBuilderM.immediatelyTransitionTo(blurConfig.minBlurRadiusPx), KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, j, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.AlternateBouncerToPrimaryBouncerTransitionViewModel$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                float floatValue = ((Float) obj).floatValue();
+            public final Object mo781invoke(Object obj) {
+                float fFloatValue = ((Float) obj).floatValue();
                 BlurConfig blurConfig2 = blurConfig;
                 float f = blurConfig2.minBlurRadiusPx;
-                AlternateBouncerToPrimaryBouncerTransitionViewModel.this.getClass();
-                return Float.valueOf(MathUtils.lerp(f, blurConfig2.maxBlurRadiusPx, floatValue));
+                this.f$0.getClass();
+                return Float.valueOf(MathUtils.lerp(f, blurConfig2.maxBlurRadiusPx, fFloatValue));
             }
         }, 0L, null, null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.AlternateBouncerToPrimaryBouncerTransitionViewModel$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Float.valueOf(BlurConfig.this.maxBlurRadiusPx);
+                return Float.valueOf(blurConfig.maxBlurRadiusPx);
             }
         }, null, null, 220));
     }

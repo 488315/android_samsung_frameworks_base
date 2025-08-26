@@ -287,10 +287,10 @@ public class Session {
                 if (i >= 25) {
                     sb.append(TRUNCATE_STRING);
                 } else {
-                    List reversed = session.getChildSessions().reversed();
-                    if (!reversed.isEmpty()) {
+                    List listReversed = session.getChildSessions().reversed();
+                    if (!listReversed.isEmpty()) {
                         i++;
-                        Iterator it = reversed.iterator();
+                        Iterator it = listReversed.iterator();
                         while (it.hasNext()) {
                             arrayDeque.addFirst((Session) it.next());
                         }
@@ -402,9 +402,9 @@ public class Session {
     }
 
     public int hashCode() {
-        int hashCode = ((((((((((((((((this.mSessionId.hashCode() * 31) + this.mShortMethodName.hashCode()) * 31) + Long.hashCode(this.mExecutionStartTimeMs)) * 31) + Long.hashCode(this.mExecutionEndTimeMs)) * 31) + (this.mParentSession != null ? this.mParentSession.hashCode() : 0)) * 31) + this.mChildSessions.hashCode()) * 31) + (this.mIsCompleted ? 1 : 0)) * 31) + this.mChildCounter.hashCode()) * 31) + (this.mIsStartedFromActiveSession ? 1 : 0)) * 31;
+        int iHashCode = ((((((((((((((((this.mSessionId.hashCode() * 31) + this.mShortMethodName.hashCode()) * 31) + Long.hashCode(this.mExecutionStartTimeMs)) * 31) + Long.hashCode(this.mExecutionEndTimeMs)) * 31) + (this.mParentSession != null ? this.mParentSession.hashCode() : 0)) * 31) + this.mChildSessions.hashCode()) * 31) + (this.mIsCompleted ? 1 : 0)) * 31) + this.mChildCounter.hashCode()) * 31) + (this.mIsStartedFromActiveSession ? 1 : 0)) * 31;
         String str = this.mOwnerInfo;
-        return hashCode + (str != null ? str.hashCode() : 0);
+        return iHashCode + (str != null ? str.hashCode() : 0);
     }
 
     public boolean equals(Object obj) {

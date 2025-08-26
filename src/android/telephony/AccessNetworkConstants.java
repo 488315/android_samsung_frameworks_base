@@ -493,104 +493,73 @@ public final class AccessNetworkConstants {
         }
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x003f A[FALL_THROUGH, RETURN] */
-        @android.annotation.SystemApi
+        /* JADX WARN: Removed duplicated region for block: B:35:0x003f A[FALL_THROUGH, RETURN] */
+        @SystemApi
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static int getFrequencyRangeGroup(int r3) {
-            /*
-                r0 = 1
-                if (r3 == r0) goto L3f
-                r1 = 2
-                if (r3 == r1) goto L3f
-                r2 = 3
-                if (r3 == r2) goto L3f
-                r2 = 7
-                if (r3 == r2) goto L3f
-                r2 = 8
-                if (r3 == r2) goto L3f
-                r2 = 25
-                if (r3 == r2) goto L3f
-                r2 = 26
-                if (r3 == r2) goto L3f
-                r2 = 50
-                if (r3 == r2) goto L3f
-                r2 = 51
-                if (r3 == r2) goto L3f
-                r2 = 65
-                if (r3 == r2) goto L3f
-                r2 = 66
-                if (r3 == r2) goto L3f
-                r2 = 70
-                if (r3 == r2) goto L3f
-                r2 = 71
-                if (r3 == r2) goto L3f
-                switch(r3) {
-                    case 5: goto L3f;
-                    case 12: goto L3f;
-                    case 14: goto L3f;
-                    case 18: goto L3f;
-                    case 20: goto L3f;
-                    case 34: goto L3f;
-                    case 46: goto L3f;
-                    case 48: goto L3f;
-                    case 53: goto L3f;
-                    case 74: goto L3f;
-                    case 75: goto L3f;
-                    case 76: goto L3f;
-                    case 77: goto L3f;
-                    case 78: goto L3f;
-                    case 79: goto L3f;
-                    case 80: goto L3f;
-                    case 81: goto L3f;
-                    case 82: goto L3f;
-                    case 83: goto L3f;
-                    case 84: goto L3f;
-                    case 86: goto L3f;
-                    case 257: goto L3e;
-                    case 258: goto L3e;
-                    case 260: goto L3e;
-                    case 261: goto L3e;
-                    default: goto L33;
+        public static int getFrequencyRangeGroup(int i) {
+            if (i != 1 && i != 2 && i != 3 && i != 7 && i != 8 && i != 25 && i != 26 && i != 50 && i != 51 && i != 65 && i != 66 && i != 70 && i != 71) {
+                switch (i) {
+                    case 5:
+                    case 12:
+                    case 14:
+                    case 18:
+                    case 20:
+                    case 34:
+                    case 46:
+                    case 48:
+                    case 53:
+                    case 74:
+                    case 75:
+                    case 76:
+                    case 77:
+                    case 78:
+                    case 79:
+                    case 80:
+                    case 81:
+                    case 82:
+                    case 83:
+                    case 84:
+                    case 86:
+                        break;
+                    case 257:
+                    case 258:
+                    case 260:
+                    case 261:
+                        return 2;
+                    default:
+                        switch (i) {
+                            default:
+                                switch (i) {
+                                    default:
+                                        switch (i) {
+                                            case 89:
+                                            case 90:
+                                            case 91:
+                                            case 92:
+                                            case 93:
+                                            case 94:
+                                            case 95:
+                                            case 96:
+                                                break;
+                                            default:
+                                                return 0;
+                                        }
+                                    case 38:
+                                    case 39:
+                                    case 40:
+                                    case 41:
+                                        return 1;
+                                }
+                            case 28:
+                            case 29:
+                            case 30:
+                                break;
+                        }
                 }
-            L33:
-                switch(r3) {
-                    case 28: goto L3f;
-                    case 29: goto L3f;
-                    case 30: goto L3f;
-                    default: goto L36;
-                }
-            L36:
-                switch(r3) {
-                    case 38: goto L3f;
-                    case 39: goto L3f;
-                    case 40: goto L3f;
-                    case 41: goto L3f;
-                    default: goto L39;
-                }
-            L39:
-                switch(r3) {
-                    case 89: goto L3f;
-                    case 90: goto L3f;
-                    case 91: goto L3f;
-                    case 92: goto L3f;
-                    case 93: goto L3f;
-                    case 94: goto L3f;
-                    case 95: goto L3f;
-                    case 96: goto L3f;
-                    default: goto L3c;
-                }
-            L3c:
-                r3 = 0
-                return r3
-            L3e:
-                return r1
-            L3f:
-                return r0
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.telephony.AccessNetworkConstants.NgranBands.getFrequencyRangeGroup(int):int");
+            }
+            return 1;
         }
 
         private NgranBands() {

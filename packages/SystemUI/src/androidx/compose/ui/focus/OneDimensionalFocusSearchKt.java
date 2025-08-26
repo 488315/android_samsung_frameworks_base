@@ -7,15 +7,18 @@ import androidx.compose.ui.internal.InlineClassHelperKt;
 import androidx.compose.ui.layout.BeyondBoundsLayout;
 import androidx.compose.ui.node.DelegatableNodeKt;
 import androidx.compose.ui.node.DelegatingNode;
+import androidx.compose.ui.node.LayoutNode;
+import androidx.compose.ui.node.NodeChain;
 import androidx.compose.ui.platform.AndroidComposeView;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.Intrinsics;
+import kotlin.ranges.IntRange;
+import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class OneDimensionalFocusSearchKt {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -41,97 +44,49 @@ public abstract class OneDimensionalFocusSearchKt {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x009b A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x009b A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final boolean backwardFocusSearch(androidx.compose.ui.focus.FocusTargetNode r9, kotlin.jvm.functions.Function1 r10) {
-        /*
-            androidx.compose.ui.focus.FocusStateImpl r0 = r9.getFocusState()
-            int[] r1 = androidx.compose.ui.focus.OneDimensionalFocusSearchKt.WhenMappings.$EnumSwitchMapping$0
-            int r0 = r0.ordinal()
-            r0 = r1[r0]
-            r2 = 4
-            r3 = 3
-            r4 = 2
-            r5 = 0
-            r6 = 1
-            if (r0 == r6) goto L41
-            if (r0 == r4) goto L3c
-            if (r0 == r3) goto L3c
-            if (r0 != r2) goto L36
-            boolean r0 = pickChildForBackwardSearch(r9, r10)
-            if (r0 != 0) goto L9c
-            androidx.compose.ui.focus.FocusPropertiesImpl r0 = r9.fetchFocusProperties$ui_release()
-            boolean r0 = r0.canFocus
-            if (r0 == 0) goto L32
-            java.lang.Object r9 = r10.mo779invoke(r9)
-            java.lang.Boolean r9 = (java.lang.Boolean) r9
-            boolean r9 = r9.booleanValue()
-            goto L33
-        L32:
-            r9 = r5
-        L33:
-            if (r9 == 0) goto L9b
-            goto L9c
-        L36:
-            kotlin.NoWhenBranchMatchedException r9 = new kotlin.NoWhenBranchMatchedException
-            r9.<init>()
-            throw r9
-        L3c:
-            boolean r9 = pickChildForBackwardSearch(r9, r10)
-            return r9
-        L41:
-            androidx.compose.ui.focus.FocusTargetNode r0 = androidx.compose.ui.focus.FocusTraversalKt.getActiveChild(r9)
-            java.lang.String r7 = "ActiveParent must have a focusedChild"
-            if (r0 == 0) goto L9d
-            androidx.compose.ui.focus.FocusStateImpl r8 = r0.getFocusState()
-            int r8 = r8.ordinal()
-            r1 = r1[r8]
-            if (r1 == r6) goto L73
-            if (r1 == r4) goto L67
-            if (r1 == r3) goto L67
-            if (r1 == r2) goto L61
-            kotlin.NoWhenBranchMatchedException r9 = new kotlin.NoWhenBranchMatchedException
-            r9.<init>()
-            throw r9
-        L61:
-            java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-            r9.<init>(r7)
-            throw r9
-        L67:
-            androidx.compose.ui.focus.FocusDirection$Companion r1 = androidx.compose.ui.focus.FocusDirection.Companion
-            r1.getClass()
-            int r1 = androidx.compose.ui.focus.FocusDirection.Previous
-            boolean r9 = m382generateAndSearchChildren4C6V_qg(r9, r0, r1, r10)
-            return r9
-        L73:
-            boolean r1 = backwardFocusSearch(r0, r10)
-            if (r1 != 0) goto L9c
-            androidx.compose.ui.focus.FocusDirection$Companion r1 = androidx.compose.ui.focus.FocusDirection.Companion
-            r1.getClass()
-            int r1 = androidx.compose.ui.focus.FocusDirection.Previous
-            boolean r9 = m382generateAndSearchChildren4C6V_qg(r9, r0, r1, r10)
-            if (r9 != 0) goto L9c
-            androidx.compose.ui.focus.FocusPropertiesImpl r9 = r0.fetchFocusProperties$ui_release()
-            boolean r9 = r9.canFocus
-            if (r9 == 0) goto L9b
-            java.lang.Object r9 = r10.mo779invoke(r0)
-            java.lang.Boolean r9 = (java.lang.Boolean) r9
-            boolean r9 = r9.booleanValue()
-            if (r9 == 0) goto L9b
-            goto L9c
-        L9b:
-            return r5
-        L9c:
-            return r6
-        L9d:
-            java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-            r9.<init>(r7)
-            throw r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.focus.OneDimensionalFocusSearchKt.backwardFocusSearch(androidx.compose.ui.focus.FocusTargetNode, kotlin.jvm.functions.Function1):boolean");
+    public static final boolean backwardFocusSearch(FocusTargetNode focusTargetNode, Function1 function1) {
+        FocusStateImpl focusState = focusTargetNode.getFocusState();
+        int[] iArr = WhenMappings.$EnumSwitchMapping$0;
+        int i = iArr[focusState.ordinal()];
+        if (i != 1) {
+            if (i == 2 || i == 3) {
+                return pickChildForBackwardSearch(focusTargetNode, function1);
+            }
+            if (i != 4) {
+                throw new NoWhenBranchMatchedException();
+            }
+            if (!pickChildForBackwardSearch(focusTargetNode, function1)) {
+                if (!(focusTargetNode.fetchFocusProperties$ui_release().canFocus ? ((Boolean) function1.mo781invoke(focusTargetNode)).booleanValue() : false)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        FocusTargetNode activeChild = FocusTraversalKt.getActiveChild(focusTargetNode);
+        if (activeChild == null) {
+            throw new IllegalStateException("ActiveParent must have a focusedChild");
+        }
+        int i2 = iArr[activeChild.getFocusState().ordinal()];
+        if (i2 == 1) {
+            if (!backwardFocusSearch(activeChild, function1)) {
+                FocusDirection.Companion.getClass();
+                if (m384generateAndSearchChildren4C6V_qg(focusTargetNode, activeChild, FocusDirection.Previous, function1) || (activeChild.fetchFocusProperties$ui_release().canFocus && ((Boolean) function1.mo781invoke(activeChild)).booleanValue())) {
+                }
+            }
+            return true;
+        }
+        if (i2 == 2 || i2 == 3) {
+            FocusDirection.Companion.getClass();
+            return m384generateAndSearchChildren4C6V_qg(focusTargetNode, activeChild, FocusDirection.Previous, function1);
+        }
+        if (i2 != 4) {
+            throw new NoWhenBranchMatchedException();
+        }
+        throw new IllegalStateException("ActiveParent must have a focusedChild");
     }
 
     public static final boolean forwardFocusSearch(FocusTargetNode focusTargetNode, Function1 function1) {
@@ -141,7 +96,7 @@ public abstract class OneDimensionalFocusSearchKt {
                 return pickChildForForwardSearch(focusTargetNode, function1);
             }
             if (i == 4) {
-                return focusTargetNode.fetchFocusProperties$ui_release().canFocus ? ((Boolean) function1.mo779invoke(focusTargetNode)).booleanValue() : pickChildForForwardSearch(focusTargetNode, function1);
+                return focusTargetNode.fetchFocusProperties$ui_release().canFocus ? ((Boolean) function1.mo781invoke(focusTargetNode)).booleanValue() : pickChildForForwardSearch(focusTargetNode, function1);
             }
             throw new NoWhenBranchMatchedException();
         }
@@ -151,7 +106,7 @@ public abstract class OneDimensionalFocusSearchKt {
         }
         if (!forwardFocusSearch(activeChild, function1)) {
             FocusDirection.Companion.getClass();
-            if (!m382generateAndSearchChildren4C6V_qg(focusTargetNode, activeChild, FocusDirection.Next, function1)) {
+            if (!m384generateAndSearchChildren4C6V_qg(focusTargetNode, activeChild, FocusDirection.Next, function1)) {
                 return false;
             }
         }
@@ -159,14 +114,14 @@ public abstract class OneDimensionalFocusSearchKt {
     }
 
     /* renamed from: generateAndSearchChildren-4C6V_qg, reason: not valid java name */
-    public static final boolean m382generateAndSearchChildren4C6V_qg(final FocusTargetNode focusTargetNode, final FocusTargetNode focusTargetNode2, final int i, final Function1 function1) {
-        if (m383searchChildren4C6V_qg(focusTargetNode, focusTargetNode2, i, function1)) {
+    public static final boolean m384generateAndSearchChildren4C6V_qg(final FocusTargetNode focusTargetNode, final FocusTargetNode focusTargetNode2, final int i, final Function1 function1) {
+        if (m385searchChildren4C6V_qg(focusTargetNode, focusTargetNode2, i, function1)) {
             return true;
         }
-        final FocusTransactionManager requireTransactionManager = FocusTargetNodeKt.requireTransactionManager(focusTargetNode);
-        final int i2 = requireTransactionManager.generation;
+        final FocusTransactionManager focusTransactionManagerRequireTransactionManager = FocusTargetNodeKt.requireTransactionManager(focusTargetNode);
+        final int i2 = focusTransactionManagerRequireTransactionManager.generation;
         final FocusTargetNode focusTargetNode3 = ((AndroidComposeView) DelegatableNodeKt.requireOwner(focusTargetNode)).focusOwner.activeFocusTargetNode;
-        Boolean bool = (Boolean) BeyondBoundsLayoutKt.m365searchBeyondBoundsOMvw8(focusTargetNode, i, new Function1() { // from class: androidx.compose.ui.focus.OneDimensionalFocusSearchKt$generateAndSearchChildren$1
+        Boolean bool = (Boolean) BeyondBoundsLayoutKt.m367searchBeyondBoundsOMvw8(focusTargetNode, i, new Function1() { // from class: androidx.compose.ui.focus.OneDimensionalFocusSearchKt$generateAndSearchChildren$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -174,15 +129,15 @@ public abstract class OneDimensionalFocusSearchKt {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BeyondBoundsLayout.BeyondBoundsScope beyondBoundsScope = (BeyondBoundsLayout.BeyondBoundsScope) obj;
-                if (i2 != requireTransactionManager.generation || (ComposeUiFlags.isTrackFocusEnabled && focusTargetNode3 != ((AndroidComposeView) DelegatableNodeKt.requireOwner(focusTargetNode)).focusOwner.activeFocusTargetNode)) {
+                if (i2 != focusTransactionManagerRequireTransactionManager.generation || (ComposeUiFlags.isTrackFocusEnabled && focusTargetNode3 != ((AndroidComposeView) DelegatableNodeKt.requireOwner(focusTargetNode)).focusOwner.activeFocusTargetNode)) {
                     return Boolean.TRUE;
                 }
-                boolean m383searchChildren4C6V_qg = OneDimensionalFocusSearchKt.m383searchChildren4C6V_qg(focusTargetNode, focusTargetNode2, i, function1);
-                Boolean valueOf = Boolean.valueOf(m383searchChildren4C6V_qg);
-                if (m383searchChildren4C6V_qg || !beyondBoundsScope.getHasMoreContent()) {
-                    return valueOf;
+                boolean zM385searchChildren4C6V_qg = OneDimensionalFocusSearchKt.m385searchChildren4C6V_qg(focusTargetNode, focusTargetNode2, i, function1);
+                Boolean boolValueOf = Boolean.valueOf(zM385searchChildren4C6V_qg);
+                if (zM385searchChildren4C6V_qg || !beyondBoundsScope.getHasMoreContent()) {
+                    return boolValueOf;
                 }
                 return null;
             }
@@ -211,45 +166,45 @@ public abstract class OneDimensionalFocusSearchKt {
             if (i == 0) {
                 break;
             }
-            Modifier.Node node3 = (Modifier.Node) mutableVector2.removeAt(i - 1);
-            if ((node3.aggregateChildKindSet & 1024) == 0) {
-                DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector2, node3);
+            Modifier.Node nodeAccess$pop = (Modifier.Node) mutableVector2.removeAt(i - 1);
+            if ((nodeAccess$pop.aggregateChildKindSet & 1024) == 0) {
+                DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector2, nodeAccess$pop);
             } else {
                 while (true) {
-                    if (node3 == null) {
+                    if (nodeAccess$pop == null) {
                         break;
                     }
-                    if ((node3.kindSet & 1024) != 0) {
+                    if ((nodeAccess$pop.kindSet & 1024) != 0) {
                         MutableVector mutableVector3 = null;
-                        while (node3 != null) {
-                            if (node3 instanceof FocusTargetNode) {
-                                mutableVector.add((FocusTargetNode) node3);
-                            } else if ((node3.kindSet & 1024) != 0 && (node3 instanceof DelegatingNode)) {
+                        while (nodeAccess$pop != null) {
+                            if (nodeAccess$pop instanceof FocusTargetNode) {
+                                mutableVector.add((FocusTargetNode) nodeAccess$pop);
+                            } else if ((nodeAccess$pop.kindSet & 1024) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                                 int i2 = 0;
-                                for (Modifier.Node node4 = ((DelegatingNode) node3).delegate; node4 != null; node4 = node4.child) {
-                                    if ((node4.kindSet & 1024) != 0) {
+                                for (Modifier.Node node3 = ((DelegatingNode) nodeAccess$pop).delegate; node3 != null; node3 = node3.child) {
+                                    if ((node3.kindSet & 1024) != 0) {
                                         i2++;
                                         if (i2 == 1) {
-                                            node3 = node4;
+                                            nodeAccess$pop = node3;
                                         } else {
                                             if (mutableVector3 == null) {
                                                 mutableVector3 = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (node3 != null) {
-                                                mutableVector3.add(node3);
-                                                node3 = null;
+                                            if (nodeAccess$pop != null) {
+                                                mutableVector3.add(nodeAccess$pop);
+                                                nodeAccess$pop = null;
                                             }
-                                            mutableVector3.add(node4);
+                                            mutableVector3.add(node3);
                                         }
                                     }
                                 }
                                 if (i2 == 1) {
                                 }
                             }
-                            node3 = DelegatableNodeKt.access$pop(mutableVector3);
+                            nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector3);
                         }
                     } else {
-                        node3 = node3.child;
+                        nodeAccess$pop = nodeAccess$pop.child;
                     }
                 }
             }
@@ -287,45 +242,45 @@ public abstract class OneDimensionalFocusSearchKt {
             if (i == 0) {
                 break;
             }
-            Modifier.Node node3 = (Modifier.Node) mutableVector2.removeAt(i - 1);
-            if ((node3.aggregateChildKindSet & 1024) == 0) {
-                DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector2, node3);
+            Modifier.Node nodeAccess$pop = (Modifier.Node) mutableVector2.removeAt(i - 1);
+            if ((nodeAccess$pop.aggregateChildKindSet & 1024) == 0) {
+                DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector2, nodeAccess$pop);
             } else {
                 while (true) {
-                    if (node3 == null) {
+                    if (nodeAccess$pop == null) {
                         break;
                     }
-                    if ((node3.kindSet & 1024) != 0) {
+                    if ((nodeAccess$pop.kindSet & 1024) != 0) {
                         MutableVector mutableVector3 = null;
-                        while (node3 != null) {
-                            if (node3 instanceof FocusTargetNode) {
-                                mutableVector.add((FocusTargetNode) node3);
-                            } else if ((node3.kindSet & 1024) != 0 && (node3 instanceof DelegatingNode)) {
+                        while (nodeAccess$pop != null) {
+                            if (nodeAccess$pop instanceof FocusTargetNode) {
+                                mutableVector.add((FocusTargetNode) nodeAccess$pop);
+                            } else if ((nodeAccess$pop.kindSet & 1024) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                                 int i2 = 0;
-                                for (Modifier.Node node4 = ((DelegatingNode) node3).delegate; node4 != null; node4 = node4.child) {
-                                    if ((node4.kindSet & 1024) != 0) {
+                                for (Modifier.Node node3 = ((DelegatingNode) nodeAccess$pop).delegate; node3 != null; node3 = node3.child) {
+                                    if ((node3.kindSet & 1024) != 0) {
                                         i2++;
                                         if (i2 == 1) {
-                                            node3 = node4;
+                                            nodeAccess$pop = node3;
                                         } else {
                                             if (mutableVector3 == null) {
                                                 mutableVector3 = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (node3 != null) {
-                                                mutableVector3.add(node3);
-                                                node3 = null;
+                                            if (nodeAccess$pop != null) {
+                                                mutableVector3.add(nodeAccess$pop);
+                                                nodeAccess$pop = null;
                                             }
-                                            mutableVector3.add(node4);
+                                            mutableVector3.add(node3);
                                         }
                                     }
                                 }
                                 if (i2 == 1) {
                                 }
                             }
-                            node3 = DelegatableNodeKt.access$pop(mutableVector3);
+                            nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector3);
                         }
                     } else {
-                        node3 = node3.child;
+                        nodeAccess$pop = nodeAccess$pop.child;
                     }
                 }
             }
@@ -342,20 +297,205 @@ public abstract class OneDimensionalFocusSearchKt {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:131:0x01a8  */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x01a5 A[EDGE_INSN: B:149:0x01a5->B:130:0x01a5 BREAK  A[LOOP:5: B:89:0x013a->B:144:0x013a], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x012c  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x013c  */
+    /* JADX WARN: Code restructure failed: missing block: B:71:0x0102, code lost:
+    
+        return true;
+     */
+    /* JADX WARN: Removed duplicated region for block: B:126:0x01a8  */
+    /* JADX WARN: Removed duplicated region for block: B:155:0x01a5 A[EDGE_INSN: B:155:0x01a5->B:124:0x01a5 BREAK  A[LOOP:5: B:86:0x013a->B:160:0x013a], SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:84:0x012c  */
+    /* JADX WARN: Removed duplicated region for block: B:87:0x013c  */
     /* renamed from: searchChildren-4C6V_qg, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final boolean m383searchChildren4C6V_qg(androidx.compose.ui.focus.FocusTargetNode r11, androidx.compose.ui.focus.FocusTargetNode r12, int r13, kotlin.jvm.functions.Function1 r14) {
-        /*
-            Method dump skipped, instructions count: 452
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.focus.OneDimensionalFocusSearchKt.m383searchChildren4C6V_qg(androidx.compose.ui.focus.FocusTargetNode, androidx.compose.ui.focus.FocusTargetNode, int, kotlin.jvm.functions.Function1):boolean");
+    public static final boolean m385searchChildren4C6V_qg(FocusTargetNode focusTargetNode, FocusTargetNode focusTargetNode2, int i, Function1 function1) {
+        Modifier.Node node;
+        LayoutNode layoutNodeRequireLayoutNode;
+        NodeChain nodeChain;
+        if (focusTargetNode.getFocusState() != FocusStateImpl.ActiveParent) {
+            throw new IllegalStateException("This function should only be used within a parent that has focus.");
+        }
+        MutableVector mutableVector = new MutableVector(new FocusTargetNode[16], 0);
+        if (!focusTargetNode.node.isAttached) {
+            InlineClassHelperKt.throwIllegalStateException("visitChildren called on an unattached node");
+        }
+        MutableVector mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
+        Modifier.Node node2 = focusTargetNode.node;
+        Modifier.Node node3 = node2.child;
+        if (node3 == null) {
+            DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector2, node2);
+        } else {
+            mutableVector2.add(node3);
+        }
+        while (true) {
+            int i2 = mutableVector2.size;
+            node = null;
+            if (i2 == 0) {
+                break;
+            }
+            Modifier.Node nodeAccess$pop = (Modifier.Node) mutableVector2.removeAt(i2 - 1);
+            if ((nodeAccess$pop.aggregateChildKindSet & 1024) == 0) {
+                DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector2, nodeAccess$pop);
+            } else {
+                while (true) {
+                    if (nodeAccess$pop == null) {
+                        break;
+                    }
+                    if ((nodeAccess$pop.kindSet & 1024) != 0) {
+                        MutableVector mutableVector3 = null;
+                        while (nodeAccess$pop != null) {
+                            if (nodeAccess$pop instanceof FocusTargetNode) {
+                                mutableVector.add((FocusTargetNode) nodeAccess$pop);
+                            } else if ((nodeAccess$pop.kindSet & 1024) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
+                                int i3 = 0;
+                                for (Modifier.Node node4 = ((DelegatingNode) nodeAccess$pop).delegate; node4 != null; node4 = node4.child) {
+                                    if ((node4.kindSet & 1024) != 0) {
+                                        i3++;
+                                        if (i3 == 1) {
+                                            nodeAccess$pop = node4;
+                                        } else {
+                                            if (mutableVector3 == null) {
+                                                mutableVector3 = new MutableVector(new Modifier.Node[16], 0);
+                                            }
+                                            if (nodeAccess$pop != null) {
+                                                mutableVector3.add(nodeAccess$pop);
+                                                nodeAccess$pop = null;
+                                            }
+                                            mutableVector3.add(node4);
+                                        }
+                                    }
+                                }
+                                if (i3 == 1) {
+                                }
+                            }
+                            nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector3);
+                        }
+                    } else {
+                        nodeAccess$pop = nodeAccess$pop.child;
+                    }
+                }
+            }
+        }
+        mutableVector.sortWith(FocusableChildrenComparator.INSTANCE);
+        FocusDirection.Companion.getClass();
+        if (i != FocusDirection.Next) {
+            if (i != FocusDirection.Previous) {
+                throw new IllegalStateException("This function should only be used for 1-D focus search");
+            }
+            IntRange intRangeUntil = RangesKt___RangesKt.until(0, mutableVector.size);
+            int i4 = intRangeUntil.first;
+            int i5 = intRangeUntil.last;
+            if (i4 <= i5) {
+                boolean z = false;
+                while (true) {
+                    if (z) {
+                        FocusTargetNode focusTargetNode3 = (FocusTargetNode) mutableVector.content[i5];
+                        if (FocusTraversalKt.isEligibleForFocusSearch(focusTargetNode3) && backwardFocusSearch(focusTargetNode3, function1)) {
+                            break;
+                        }
+                    }
+                    if (Intrinsics.areEqual(mutableVector.content[i5], focusTargetNode2)) {
+                        z = true;
+                    }
+                    if (i5 == i4) {
+                        break;
+                    }
+                    i5--;
+                }
+            }
+            FocusDirection.Companion.getClass();
+            if (i != FocusDirection.Next) {
+                if (!focusTargetNode.node.isAttached) {
+                }
+                Modifier.Node node5 = focusTargetNode.node.parent;
+                layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(focusTargetNode);
+                loop5: while (true) {
+                    if (layoutNodeRequireLayoutNode == null) {
+                    }
+                }
+                if (node != null) {
+                }
+            }
+            return false;
+        }
+        IntRange intRangeUntil2 = RangesKt___RangesKt.until(0, mutableVector.size);
+        int i6 = intRangeUntil2.first;
+        int i7 = intRangeUntil2.last;
+        if (i6 <= i7) {
+            boolean z2 = false;
+            while (true) {
+                if (z2) {
+                    FocusTargetNode focusTargetNode4 = (FocusTargetNode) mutableVector.content[i6];
+                    if (FocusTraversalKt.isEligibleForFocusSearch(focusTargetNode4) && forwardFocusSearch(focusTargetNode4, function1)) {
+                        break;
+                    }
+                }
+                if (Intrinsics.areEqual(mutableVector.content[i6], focusTargetNode2)) {
+                    z2 = true;
+                }
+                if (i6 == i7) {
+                    break;
+                }
+                i6++;
+            }
+        }
+        FocusDirection.Companion.getClass();
+        if (i != FocusDirection.Next && focusTargetNode.fetchFocusProperties$ui_release().canFocus) {
+            if (!focusTargetNode.node.isAttached) {
+                InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
+            }
+            Modifier.Node node52 = focusTargetNode.node.parent;
+            layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(focusTargetNode);
+            loop5: while (true) {
+                if (layoutNodeRequireLayoutNode == null) {
+                    break;
+                }
+                if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 1024) != 0) {
+                    while (node52 != null) {
+                        if ((node52.kindSet & 1024) != 0) {
+                            Modifier.Node nodeAccess$pop2 = node52;
+                            MutableVector mutableVector4 = null;
+                            while (nodeAccess$pop2 != null) {
+                                if (nodeAccess$pop2 instanceof FocusTargetNode) {
+                                    node = nodeAccess$pop2;
+                                    break loop5;
+                                }
+                                if ((nodeAccess$pop2.kindSet & 1024) != 0 && (nodeAccess$pop2 instanceof DelegatingNode)) {
+                                    int i8 = 0;
+                                    for (Modifier.Node node6 = ((DelegatingNode) nodeAccess$pop2).delegate; node6 != null; node6 = node6.child) {
+                                        if ((node6.kindSet & 1024) != 0) {
+                                            i8++;
+                                            if (i8 == 1) {
+                                                nodeAccess$pop2 = node6;
+                                            } else {
+                                                if (mutableVector4 == null) {
+                                                    mutableVector4 = new MutableVector(new Modifier.Node[16], 0);
+                                                }
+                                                if (nodeAccess$pop2 != null) {
+                                                    mutableVector4.add(nodeAccess$pop2);
+                                                    nodeAccess$pop2 = null;
+                                                }
+                                                mutableVector4.add(node6);
+                                            }
+                                        }
+                                    }
+                                    if (i8 == 1) {
+                                    }
+                                }
+                                nodeAccess$pop2 = DelegatableNodeKt.access$pop(mutableVector4);
+                            }
+                        }
+                        node52 = node52.parent;
+                    }
+                }
+                layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+                node52 = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            }
+            if (node != null) {
+                return ((Boolean) function1.mo781invoke(focusTargetNode)).booleanValue();
+            }
+        }
+        return false;
     }
 }

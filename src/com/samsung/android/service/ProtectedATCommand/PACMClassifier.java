@@ -65,7 +65,7 @@ public class PACMClassifier {
     }
 
     public static ATCommands getCommand(LinkedHashMap<String, LinkedHashSet<ATCommands>> linkedHashMap, String str) {
-        String str2;
+        String name;
         Slog.i(TAG, "getCommand() is called.");
         if (checkNullParameter(linkedHashMap, str)) {
             return new ATCommands();
@@ -75,35 +75,35 @@ public class PACMClassifier {
             int i = 0;
             while (true) {
                 if (i >= 4) {
-                    str2 = str;
+                    name = str;
                     break;
                 }
-                String str3 = strArr[i];
-                if (str.indexOf("AT" + str3) == 0) {
-                    str2 = getName(str, str3);
+                String str2 = strArr[i];
+                if (str.indexOf("AT" + str2) == 0) {
+                    name = getName(str, str2);
                     break;
                 }
                 i++;
             }
-            if (str2 == null) {
+            if (name == null) {
                 Slog.e(TAG, "Failed to get cmd name(" + str + NavigationBarInflaterView.KEY_CODE_END);
                 return new ATCommands();
             }
-            LinkedHashSet<ATCommands> linkedHashSet = linkedHashMap.get(str2);
+            LinkedHashSet<ATCommands> linkedHashSet = linkedHashMap.get(name);
             if (linkedHashSet == null) {
-                Slog.i(TAG, "This cmd(" + str2 + ") is not registered");
+                Slog.i(TAG, "This cmd(" + name + ") is not registered");
                 return new ATCommands();
             }
-            ATCommands aTCommands = new ATCommands(str2, str.getBytes());
+            ATCommands aTCommands = new ATCommands(name, str.getBytes());
             if (linkedHashSet.contains(aTCommands)) {
-                ATCommands findATCommands = findATCommands(linkedHashMap, str2, aTCommands);
-                if (findATCommands != null) {
-                    return findATCommands;
+                ATCommands aTCommandsFindATCommands = findATCommands(linkedHashMap, name, aTCommands);
+                if (aTCommandsFindATCommands != null) {
+                    return aTCommandsFindATCommands;
                 }
                 Slog.e(TAG, "Failed to find AT Commands");
                 return new ATCommands();
             }
-            Slog.i(TAG, "This cmd(" + str2 + ") is not registered.");
+            Slog.i(TAG, "This cmd(" + name + ") is not registered.");
             return new ATCommands();
         } catch (Exception e) {
             e.printStackTrace();

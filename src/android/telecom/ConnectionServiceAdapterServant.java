@@ -291,20 +291,20 @@ final class ConnectionServiceAdapterServant {
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void handleCreateConnectionComplete(String str, ConnectionRequest connectionRequest, ParcelableConnection parcelableConnection, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = connectionRequest;
-            obtain.arg3 = parcelableConnection;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(1, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = connectionRequest;
+            someArgsObtain.arg3 = parcelableConnection;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(1, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void handleCreateConferenceComplete(String str, ConnectionRequest connectionRequest, ParcelableConference parcelableConference, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = connectionRequest;
-            obtain.arg3 = parcelableConference;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(37, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = connectionRequest;
+            someArgsObtain.arg3 = parcelableConference;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(37, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
@@ -329,10 +329,10 @@ final class ConnectionServiceAdapterServant {
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void setDisconnected(String str, DisconnectCause disconnectCause, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = disconnectCause;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(5, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = disconnectCause;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(5, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
@@ -357,25 +357,25 @@ final class ConnectionServiceAdapterServant {
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void setConferenceMergeFailed(String str, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(23, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(23, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void setIsConferenced(String str, String str2, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = str2;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(9, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = str2;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(9, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void addConferenceCall(String str, ParcelableConference parcelableConference, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = parcelableConference;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(10, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = parcelableConference;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(10, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
@@ -385,26 +385,26 @@ final class ConnectionServiceAdapterServant {
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void onPostDialWait(String str, String str2, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = str2;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(12, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = str2;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(12, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void onPostDialChar(String str, char c, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.argi1 = c;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(22, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.argi1 = c;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(22, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void queryRemoteConnectionServices(RemoteServiceCallback remoteServiceCallback, String str, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = remoteServiceCallback;
-            obtain.arg2 = str;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(13, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = remoteServiceCallback;
+            someArgsObtain.arg2 = str;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(13, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
@@ -414,10 +414,10 @@ final class ConnectionServiceAdapterServant {
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void setVideoProvider(String str, IVideoProvider iVideoProvider, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = iVideoProvider;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(15, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = iVideoProvider;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(15, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
@@ -427,79 +427,79 @@ final class ConnectionServiceAdapterServant {
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public final void setStatusHints(String str, StatusHints statusHints, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = statusHints;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(17, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = statusHints;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(17, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public final void setAddress(String str, Uri uri, int i, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = uri;
-            obtain.argi1 = i;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(18, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = uri;
+            someArgsObtain.argi1 = i;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(18, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public final void setCallerDisplayName(String str, String str2, int i, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = str2;
-            obtain.argi1 = i;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(19, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = str2;
+            someArgsObtain.argi1 = i;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(19, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public final void setConferenceableConnections(String str, List<String> list, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = list;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(20, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = list;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(20, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public final void addExistingConnection(String str, ParcelableConnection parcelableConnection, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = parcelableConnection;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(21, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = parcelableConnection;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(21, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public final void putExtras(String str, Bundle bundle, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = bundle;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(24, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = bundle;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(24, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public final void removeExtras(String str, List<String> list, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = list;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(25, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = list;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(25, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public final void setAudioRoute(String str, int i, String str2, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.argi1 = i;
-            obtain.arg2 = str2;
-            obtain.arg3 = info;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(29, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.argi1 = i;
+            someArgsObtain.arg2 = str2;
+            someArgsObtain.arg3 = info;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(29, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public final void onConnectionEvent(String str, String str2, Bundle bundle, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = str2;
-            obtain.arg3 = bundle;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(26, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = str2;
+            someArgsObtain.arg3 = bundle;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(26, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
@@ -524,10 +524,10 @@ final class ConnectionServiceAdapterServant {
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void onPhoneAccountChanged(String str, PhoneAccountHandle phoneAccountHandle, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = phoneAccountHandle;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(34, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = phoneAccountHandle;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(34, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
@@ -537,31 +537,31 @@ final class ConnectionServiceAdapterServant {
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void setConferenceState(String str, boolean z, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = Boolean.valueOf(z);
-            obtain.arg3 = info;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(36, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = Boolean.valueOf(z);
+            someArgsObtain.arg3 = info;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(36, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void setCallDirection(String str, int i, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.argi1 = i;
-            obtain.arg2 = info;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(38, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.argi1 = i;
+            someArgsObtain.arg2 = info;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(38, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
         public void queryLocation(String str, long j, String str2, ResultReceiver resultReceiver, Session.Info info) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = Long.valueOf(j);
-            obtain.arg3 = str2;
-            obtain.arg4 = resultReceiver;
-            obtain.arg5 = info;
-            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(39, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = Long.valueOf(j);
+            someArgsObtain.arg3 = str2;
+            someArgsObtain.arg4 = resultReceiver;
+            someArgsObtain.arg5 = info;
+            ConnectionServiceAdapterServant.this.mHandler.obtainMessage(39, someArgsObtain).sendToTarget();
         }
     };
 

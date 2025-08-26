@@ -12,7 +12,6 @@ import gov.nist.javax.sip.address.TelURLImpl;
 import gov.nist.javax.sip.address.TelephoneNumber;
 import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class URLParser extends Parser {
     public URLParser(String str) {
@@ -34,20 +33,20 @@ public class URLParser extends Parser {
         }
     }
 
-    public final String base_phone_number() {
+    public final String base_phone_number() throws ParseException {
         StringBuffer stringBuffer = new StringBuffer();
         int i = 0;
         while (true) {
             if (!this.lexer.hasMoreChars()) {
                 break;
             }
-            char lookAhead = this.lexer.lookAhead(0);
-            if (StringTokenizer.isDigit(lookAhead) || lookAhead == '-' || lookAhead == '.' || lookAhead == '(' || lookAhead == ')') {
+            char cLookAhead = this.lexer.lookAhead(0);
+            if (StringTokenizer.isDigit(cLookAhead) || cLookAhead == '-' || cLookAhead == '.' || cLookAhead == '(' || cLookAhead == ')') {
                 this.lexer.consume(1);
-                stringBuffer.append(lookAhead);
+                stringBuffer.append(cLookAhead);
                 i++;
             } else if (i <= 0) {
-                throw createParseException("unexpected " + lookAhead);
+                throw createParseException("unexpected " + cLookAhead);
             }
         }
         return stringBuffer.toString();
@@ -68,8 +67,8 @@ public class URLParser extends Parser {
     public final String paramNameOrValue() {
         int i = this.lexer.ptr;
         while (this.lexer.hasMoreChars()) {
-            char lookAhead = this.lexer.lookAhead(0);
-            if (lookAhead != '$' && lookAhead != '&' && lookAhead != '+' && lookAhead != '/' && lookAhead != ':' && lookAhead != '[' && lookAhead != ']' && !isUnreserved(lookAhead)) {
+            char cLookAhead = this.lexer.lookAhead(0);
+            if (cLookAhead != '$' && cLookAhead != '&' && cLookAhead != '+' && cLookAhead != '/' && cLookAhead != ':' && cLookAhead != '[' && cLookAhead != ']' && !isUnreserved(cLookAhead)) {
                 if (!isEscaped()) {
                     break;
                 }
@@ -85,8 +84,8 @@ public class URLParser extends Parser {
     public final String password() {
         int i = this.lexer.ptr;
         while (true) {
-            char lookAhead = this.lexer.lookAhead(0);
-            if (lookAhead == '$' || lookAhead == '&' || lookAhead == '=' || lookAhead == '+' || lookAhead == ',' || isUnreserved(lookAhead)) {
+            char cLookAhead = this.lexer.lookAhead(0);
+            if (cLookAhead == '$' || cLookAhead == '&' || cLookAhead == '=' || cLookAhead == '+' || cLookAhead == ',' || isUnreserved(cLookAhead)) {
                 this.lexer.consume(1);
             } else {
                 if (!isEscaped()) {
@@ -98,43 +97,43 @@ public class URLParser extends Parser {
         }
     }
 
-    public final NameValue qheader() {
+    public final NameValue qheader() throws ParseException {
         String nextToken = this.lexer.getNextToken('=');
         this.lexer.consume(1);
         StringBuffer stringBuffer = new StringBuffer();
         while (this.lexer.hasMoreChars()) {
-            char lookAhead = this.lexer.lookAhead(0);
-            if (lookAhead != '!' && lookAhead != '\"' && lookAhead != '$' && lookAhead != ':' && lookAhead != '?' && lookAhead != '[' && lookAhead != ']' && lookAhead != '_' && lookAhead != '~') {
-                switch (lookAhead) {
+            char cLookAhead = this.lexer.lookAhead(0);
+            if (cLookAhead != '!' && cLookAhead != '\"' && cLookAhead != '$' && cLookAhead != ':' && cLookAhead != '?' && cLookAhead != '[' && cLookAhead != ']' && cLookAhead != '_' && cLookAhead != '~') {
+                switch (cLookAhead) {
                     case '(':
                     case ')':
                     case '*':
                     case '+':
                         break;
                     default:
-                        switch (lookAhead) {
+                        switch (cLookAhead) {
                             case '-':
                             case '.':
                             case '/':
                                 break;
                             default:
-                                if (StringTokenizer.isAlphaDigit(lookAhead)) {
+                                if (StringTokenizer.isAlphaDigit(cLookAhead)) {
                                     break;
                                 } else {
-                                    if (lookAhead != '%') {
+                                    if (cLookAhead != '%') {
                                         return new NameValue(nextToken, stringBuffer.toString(), false);
                                     }
                                     StringBuffer stringBuffer2 = new StringBuffer();
-                                    char lookAhead2 = this.lexer.lookAhead(0);
-                                    char lookAhead3 = this.lexer.lookAhead(1);
-                                    char lookAhead4 = this.lexer.lookAhead(2);
-                                    if (lookAhead2 != '%' || !StringTokenizer.isHexDigit(lookAhead3) || !StringTokenizer.isHexDigit(lookAhead4)) {
+                                    char cLookAhead2 = this.lexer.lookAhead(0);
+                                    char cLookAhead3 = this.lexer.lookAhead(1);
+                                    char cLookAhead4 = this.lexer.lookAhead(2);
+                                    if (cLookAhead2 != '%' || !StringTokenizer.isHexDigit(cLookAhead3) || !StringTokenizer.isHexDigit(cLookAhead4)) {
                                         throw createParseException("escaped");
                                     }
                                     this.lexer.consume(3);
-                                    stringBuffer2.append(lookAhead2);
-                                    stringBuffer2.append(lookAhead3);
-                                    stringBuffer2.append(lookAhead4);
+                                    stringBuffer2.append(cLookAhead2);
+                                    stringBuffer2.append(cLookAhead3);
+                                    stringBuffer2.append(cLookAhead4);
                                     stringBuffer.append(stringBuffer2.toString());
                                 }
                                 break;
@@ -142,14 +141,14 @@ public class URLParser extends Parser {
                 }
             }
             this.lexer.consume(1);
-            stringBuffer.append(lookAhead);
+            stringBuffer.append(cLookAhead);
         }
         return new NameValue(nextToken, stringBuffer.toString(), false);
     }
 
-    public final SipUri sipURL(boolean z) {
+    public final SipUri sipURL(boolean z) throws ParseException {
         String str;
-        String str2;
+        String strPassword;
         SipUri sipUri = new SipUri();
         int i = 2136;
         if (this.lexer.peekNextToken(1)[0].tokenType == 2136) {
@@ -163,18 +162,18 @@ public class URLParser extends Parser {
             this.lexer.match(58);
             sipUri.setScheme(str);
             int i2 = this.lexer.ptr;
-            String user = user();
+            String strUser = user();
             if (this.lexer.lookAhead(0) == ':') {
                 this.lexer.consume(1);
-                str2 = password();
+                strPassword = password();
             } else {
-                str2 = null;
+                strPassword = null;
             }
             if (this.lexer.lookAhead(0) == '@') {
                 this.lexer.consume(1);
-                sipUri.setUser(user);
-                if (str2 != null) {
-                    sipUri.setUserPassword(str2);
+                sipUri.setUser(strUser);
+                if (strPassword != null) {
+                    sipUri.setUserPassword(strPassword);
                 }
             } else {
                 this.lexer.ptr = i2;
@@ -183,9 +182,9 @@ public class URLParser extends Parser {
             this.lexer.selectLexer("charLexer");
             while (this.lexer.hasMoreChars() && this.lexer.lookAhead(0) == ';' && z) {
                 this.lexer.consume(1);
-                NameValue uriParam = uriParam();
-                if (uriParam != null) {
-                    sipUri.setUriParameter(uriParam);
+                NameValue nameValueUriParam = uriParam();
+                if (nameValueUriParam != null) {
+                    sipUri.setUriParameter(nameValueUriParam);
                 }
             }
             if (this.lexer.hasMoreChars() && this.lexer.lookAhead(0) == '?') {
@@ -204,13 +203,13 @@ public class URLParser extends Parser {
         }
     }
 
-    public final TelURLImpl telURL(boolean z) {
+    public final TelURLImpl telURL(boolean z) throws ParseException {
         TelephoneNumber telephoneNumber;
         this.lexer.match(2105);
         this.lexer.match(58);
         this.lexer.selectLexer("charLexer");
-        char lookAhead = this.lexer.lookAhead(0);
-        if (lookAhead == '+') {
+        char cLookAhead = this.lexer.lookAhead(0);
+        if (cLookAhead == '+') {
             telephoneNumber = new TelephoneNumber();
             telephoneNumber.setGlobal(true);
             this.lexer.match(43);
@@ -220,8 +219,8 @@ public class URLParser extends Parser {
                 telephoneNumber.setParameters(tel_parameters());
             }
         } else {
-            if (!StringTokenizer.isHexDigit(lookAhead) && lookAhead != '#' && lookAhead != '*' && lookAhead != '-' && lookAhead != '.' && lookAhead != '(' && lookAhead != ')') {
-                throw createParseException("unexpected char " + lookAhead);
+            if (!StringTokenizer.isHexDigit(cLookAhead) && cLookAhead != '#' && cLookAhead != '*' && cLookAhead != '-' && cLookAhead != '.' && cLookAhead != '(' && cLookAhead != ')') {
+                throw createParseException("unexpected char " + cLookAhead);
             }
             telephoneNumber = new TelephoneNumber();
             telephoneNumber.setGlobal(false);
@@ -231,13 +230,13 @@ public class URLParser extends Parser {
                 if (!this.lexer.hasMoreChars()) {
                     break;
                 }
-                char lookAhead2 = this.lexer.lookAhead(0);
-                if (lookAhead2 == '*' || lookAhead2 == '#' || lookAhead2 == '-' || lookAhead2 == '.' || lookAhead2 == '(' || lookAhead2 == ')' || StringTokenizer.isHexDigit(lookAhead2)) {
+                char cLookAhead2 = this.lexer.lookAhead(0);
+                if (cLookAhead2 == '*' || cLookAhead2 == '#' || cLookAhead2 == '-' || cLookAhead2 == '.' || cLookAhead2 == '(' || cLookAhead2 == ')' || StringTokenizer.isHexDigit(cLookAhead2)) {
                     this.lexer.consume(1);
-                    stringBuffer.append(lookAhead2);
+                    stringBuffer.append(cLookAhead2);
                     i++;
                 } else if (i <= 0) {
-                    throw createParseException("unexepcted " + lookAhead2);
+                    throw createParseException("unexepcted " + cLookAhead2);
                 }
             }
             telephoneNumber.setPhoneNumber(stringBuffer.toString());
@@ -251,30 +250,30 @@ public class URLParser extends Parser {
         return telURLImpl;
     }
 
-    public final NameValueList tel_parameters() {
+    public final NameValueList tel_parameters() throws ParseException {
         NameValue nameValue;
         String str;
         NameValueList nameValueList = new NameValueList();
         while (true) {
-            String paramNameOrValue = paramNameOrValue();
-            if (paramNameOrValue.equalsIgnoreCase("phone-context")) {
+            String strParamNameOrValue = paramNameOrValue();
+            if (strParamNameOrValue.equalsIgnoreCase("phone-context")) {
                 this.lexer.match(61);
-                char lookAhead = this.lexer.lookAhead(0);
-                if (lookAhead == '+') {
+                char cLookAhead = this.lexer.lookAhead(0);
+                if (cLookAhead == '+') {
                     this.lexer.consume(1);
                     str = "+" + base_phone_number();
                 } else {
-                    if (!StringTokenizer.isAlphaDigit(lookAhead)) {
-                        throw new ParseException("Invalid phone-context:" + lookAhead, -1);
+                    if (!StringTokenizer.isAlphaDigit(cLookAhead)) {
+                        throw new ParseException("Invalid phone-context:" + cLookAhead, -1);
                     }
                     str = this.lexer.match(4095).tokenValue;
                 }
                 nameValue = new NameValue("phone-context", str, false);
             } else if (this.lexer.lookAhead(0) == '=') {
                 this.lexer.consume(1);
-                nameValue = new NameValue(paramNameOrValue, paramNameOrValue(), false);
+                nameValue = new NameValue(strParamNameOrValue, paramNameOrValue(), false);
             } else {
-                nameValue = new NameValue(paramNameOrValue, "", true);
+                nameValue = new NameValue(strParamNameOrValue, "", true);
             }
             nameValueList.set(nameValue);
             if (this.lexer.lookAhead(0) != ';') {
@@ -285,25 +284,25 @@ public class URLParser extends Parser {
     }
 
     public final NameValue uriParam() {
-        String str = "";
-        String paramNameOrValue = paramNameOrValue();
+        String strParamNameOrValue = "";
+        String strParamNameOrValue2 = paramNameOrValue();
         boolean z = false;
         if (this.lexer.lookAhead(0) == '=') {
             this.lexer.consume(1);
-            str = paramNameOrValue();
+            strParamNameOrValue = paramNameOrValue();
         } else {
             z = true;
         }
-        if (paramNameOrValue.length() == 0 && (str == null || str.length() == 0)) {
+        if (strParamNameOrValue2.length() == 0 && (strParamNameOrValue == null || strParamNameOrValue.length() == 0)) {
             return null;
         }
-        return new NameValue(paramNameOrValue, str, z);
+        return new NameValue(strParamNameOrValue2, strParamNameOrValue, z);
     }
 
-    public final GenericURI uriReference(boolean z) {
-        Token[] peekNextToken = this.lexer.peekNextToken(2);
-        Token token = peekNextToken[0];
-        Token token2 = peekNextToken[1];
+    public final GenericURI uriReference(boolean z) throws ParseException {
+        Token[] tokenArrPeekNextToken = this.lexer.peekNextToken(2);
+        Token token = tokenArrPeekNextToken[0];
+        Token token2 = tokenArrPeekNextToken[1];
         int i = token.tokenType;
         if (i == 2051 || i == 2136) {
             if (token2.tokenType == 58) {
@@ -319,26 +318,23 @@ public class URLParser extends Parser {
         }
         StringBuffer stringBuffer = new StringBuffer();
         while (true) {
-            String str = null;
+            String strValueOf = null;
             try {
-                char lookAhead = this.lexer.lookAhead(0);
-                if (isUnreserved(lookAhead)) {
+                char cLookAhead = this.lexer.lookAhead(0);
+                if (isUnreserved(cLookAhead) || cLookAhead == '$' || cLookAhead == '&' || cLookAhead == '/' || cLookAhead == '=' || cLookAhead == '+' || cLookAhead == ',' || cLookAhead == ':' || cLookAhead == ';' || cLookAhead == '?' || cLookAhead == '@') {
                     this.lexer.consume(1);
-                    str = String.valueOf(lookAhead);
-                } else if (lookAhead == '$' || lookAhead == '&' || lookAhead == '/' || lookAhead == '=' || lookAhead == '+' || lookAhead == ',' || lookAhead == ':' || lookAhead == ';' || lookAhead == '?' || lookAhead == '@') {
-                    this.lexer.consume(1);
-                    str = String.valueOf(lookAhead);
+                    strValueOf = String.valueOf(cLookAhead);
                 } else if (isEscaped()) {
                     LexerCore lexerCore = this.lexer;
                     int i2 = lexerCore.ptr;
-                    String substring = lexerCore.buffer.substring(i2, i2 + 3);
+                    String strSubstring = lexerCore.buffer.substring(i2, i2 + 3);
                     this.lexer.consume(3);
-                    str = substring;
+                    strValueOf = strSubstring;
                 }
             } catch (Exception unused) {
             }
-            if (str != null) {
-                stringBuffer.append(str);
+            if (strValueOf != null) {
+                stringBuffer.append(strValueOf);
             } else {
                 if (this.lexer.lookAhead(0) != '[') {
                     try {
@@ -355,9 +351,9 @@ public class URLParser extends Parser {
     public final String user() {
         int i = this.lexer.ptr;
         while (this.lexer.hasMoreChars()) {
-            char lookAhead = this.lexer.lookAhead(0);
-            if (!isUnreserved(lookAhead)) {
-                if (!(lookAhead == '#' || lookAhead == '$' || lookAhead == '&' || lookAhead == '/' || lookAhead == ';' || lookAhead == '=' || lookAhead == '?' || lookAhead == '+' || lookAhead == ',')) {
+            char cLookAhead = this.lexer.lookAhead(0);
+            if (!isUnreserved(cLookAhead)) {
+                if (!(cLookAhead == '#' || cLookAhead == '$' || cLookAhead == '&' || cLookAhead == '/' || cLookAhead == ';' || cLookAhead == '=' || cLookAhead == '?' || cLookAhead == '+' || cLookAhead == ',')) {
                     if (!isEscaped()) {
                         break;
                     }

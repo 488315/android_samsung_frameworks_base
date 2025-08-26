@@ -8,14 +8,10 @@ public final class AccessibilityNodeIdManager {
     private WeakSparseArray<View> mIdsToViews = new WeakSparseArray<>();
 
     public static synchronized AccessibilityNodeIdManager getInstance() {
-        AccessibilityNodeIdManager accessibilityNodeIdManager;
-        synchronized (AccessibilityNodeIdManager.class) {
-            if (sIdManager == null) {
-                sIdManager = new AccessibilityNodeIdManager();
-            }
-            accessibilityNodeIdManager = sIdManager;
+        if (sIdManager == null) {
+            sIdManager = new AccessibilityNodeIdManager();
         }
-        return accessibilityNodeIdManager;
+        return sIdManager;
     }
 
     private AccessibilityNodeIdManager() {

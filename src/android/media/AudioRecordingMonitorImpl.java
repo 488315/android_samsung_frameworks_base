@@ -1,7 +1,6 @@
 package android.media;
 
 import android.media.AudioManager;
-import android.media.AudioRecordingMonitorImpl;
 import android.media.IAudioService;
 import android.media.IRecordingConfigDispatcher;
 import android.os.Binder;
@@ -142,7 +141,7 @@ public class AudioRecordingMonitorImpl implements AudioRecordingMonitor {
                         return;
                     }
                     LinkedList linkedList = new LinkedList(AudioRecordingMonitorImpl.this.mRecordCallbackList);
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                    long jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         Iterator it = linkedList.iterator();
                         while (it.hasNext()) {
@@ -150,13 +149,13 @@ public class AudioRecordingMonitorImpl implements AudioRecordingMonitor {
                             audioRecordingCallbackInfo.mExecutor.execute(new Runnable() { // from class: android.media.AudioRecordingMonitorImpl$2$$ExternalSyntheticLambda0
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    AudioRecordingMonitorImpl.AudioRecordingCallbackInfo.this.mCb.onRecordingConfigChanged(arrayList);
+                                    audioRecordingCallbackInfo.mCb.onRecordingConfigChanged(arrayList);
                                 }
                             });
                         }
                         return;
                     } finally {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                     }
                 }
             }
@@ -191,8 +190,8 @@ public class AudioRecordingMonitorImpl implements AudioRecordingMonitor {
         if (iAudioService != null) {
             return iAudioService;
         }
-        IAudioService asInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
-        sService = asInterface;
-        return asInterface;
+        IAudioService iAudioServiceAsInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
+        sService = iAudioServiceAsInterface;
+        return iAudioServiceAsInterface;
     }
 }

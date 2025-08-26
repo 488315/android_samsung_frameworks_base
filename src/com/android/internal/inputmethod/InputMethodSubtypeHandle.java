@@ -61,11 +61,11 @@ public final class InputMethodSubtypeHandle implements Parcelable {
             throw new InvalidParameterException("Invalid handle=" + str);
         }
         String next = simpleStringSplitter.next();
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(next);
-        if (unflattenFromString == null) {
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(next);
+        if (componentNameUnflattenFromString == null) {
             throw new InvalidParameterException("Invalid handle=" + str);
         }
-        if (!Objects.equals(unflattenFromString.flattenToShortString(), next)) {
+        if (!Objects.equals(componentNameUnflattenFromString.flattenToShortString(), next)) {
             throw new InvalidParameterException("Invalid handle=" + str);
         }
         if (!simpleStringSplitter.hasNext()) {

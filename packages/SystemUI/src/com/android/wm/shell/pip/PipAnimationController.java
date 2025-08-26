@@ -18,10 +18,10 @@ import com.android.wm.shell.pip.PipSurfaceTransactionHelper;
 import com.android.wm.shell.pip.PipTransition;
 import com.android.wm.shell.shared.animation.Interpolators;
 import com.android.wm.shell.shared.pip.PipContentOverlay;
+import com.android.wm.shell.transition.Transitions;
 import com.samsung.android.rune.CoreRune;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipAnimationController {
     public PipTransitionAnimator mCurrentAnimator;
@@ -29,14 +29,12 @@ public class PipAnimationController {
     public int mOneShotAnimationType = 0;
     public final PipSurfaceTransactionHelper mSurfaceTransactionHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipTransactionHandler {
         public boolean handlePipTransaction(SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, Rect rect, float f) {
             return this instanceof PipTransition.AnonymousClass1;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class PipTransitionAnimator extends ValueAnimator implements ValueAnimator.AnimatorUpdateListener, Animator.AnimatorListener {
         public static final float[] PIP_BACKGROUND_COLOR = {0.0f, 0.0f, 0.0f};
         public final int mAnimationType;
@@ -69,8 +67,8 @@ public class PipAnimationController {
             Rect rect8;
             Rect rect9;
             Rect rect10;
-            final boolean isOutPipDirection = PipAnimationController.isOutPipDirection(i);
-            final boolean isInPipDirection = PipAnimationController.isInPipDirection(i);
+            final boolean zIsOutPipDirection = PipAnimationController.isOutPipDirection(i);
+            final boolean zIsInPipDirection = PipAnimationController.isInPipDirection(i);
             Rect rect11 = taskInfo.topActivityMainWindowFrame;
             AppCompatTaskInfo appCompatTaskInfo = taskInfo.appCompatTaskInfo;
             boolean z2 = true;
@@ -81,32 +79,30 @@ public class PipAnimationController {
             Rect rect12 = new Rect(rect);
             Rect rect13 = new Rect(rect2);
             Rect rect14 = new Rect(rect3);
-            if (isOutPipDirection) {
+            if (zIsOutPipDirection) {
                 if (z3 && !z2) {
                     rect14.set(rect11);
                 }
                 rect5 = new Rect(rect14);
-            } else if (isInPipDirection) {
-                if (z3) {
+            } else {
+                if (zIsInPipDirection && z3) {
                     rect12.set(rect11);
                     if (rect2.equals(rect)) {
                         rect13.set(rect11);
                     }
                 }
                 rect5 = new Rect(rect12);
-            } else {
-                rect5 = new Rect(rect12);
             }
-            final Point point = isInPipDirection ? new Point(rect.left, rect.top) : isOutPipDirection ? new Point(rect3.left, rect3.top) : new Point(rect.left, rect.top);
+            final Point point = (!zIsInPipDirection && zIsOutPipDirection) ? new Point(rect3.left, rect3.top) : new Point(rect.left, rect.top);
             if (z2) {
                 Rect rect15 = new Rect(rect14);
                 rect6 = new Rect(rect14);
-                if (z3 && isOutPipDirection) {
+                if (z3 && zIsOutPipDirection) {
                     rect6.set(rect11);
                 } else {
                     RotationUtils.rotateBounds(rect6, rect5, i2);
                 }
-                rect8 = isOutPipDirection ? rect6 : rect5;
+                rect8 = zIsOutPipDirection ? rect6 : rect5;
                 rect7 = rect15;
             } else {
                 rect6 = null;
@@ -143,32 +139,212 @@ public class PipAnimationController {
                     int i3 = 0;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:23:0x00df  */
-                /* JADX WARN: Removed duplicated region for block: B:26:0x00e7  */
-                /* JADX WARN: Removed duplicated region for block: B:29:0x0101  */
-                /* JADX WARN: Removed duplicated region for block: B:33:0x0118  */
-                /* JADX WARN: Removed duplicated region for block: B:35:0x0120  */
-                /* JADX WARN: Removed duplicated region for block: B:38:? A[RETURN, SYNTHETIC] */
-                /* JADX WARN: Removed duplicated region for block: B:39:0x011d  */
+                /* JADX WARN: Removed duplicated region for block: B:100:0x0286  */
+                /* JADX WARN: Removed duplicated region for block: B:109:? A[RETURN, SYNTHETIC] */
+                /* JADX WARN: Removed duplicated region for block: B:31:0x00df  */
+                /* JADX WARN: Removed duplicated region for block: B:33:0x00e3  */
+                /* JADX WARN: Removed duplicated region for block: B:35:0x00e7  */
+                /* JADX WARN: Removed duplicated region for block: B:38:0x0101  */
                 /* JADX WARN: Removed duplicated region for block: B:40:0x0105  */
-                /* JADX WARN: Removed duplicated region for block: B:41:0x00e3  */
-                /* JADX WARN: Removed duplicated region for block: B:84:0x02a0  */
-                /* JADX WARN: Removed duplicated region for block: B:86:0x02a8  */
-                /* JADX WARN: Removed duplicated region for block: B:88:? A[RETURN, SYNTHETIC] */
-                /* JADX WARN: Removed duplicated region for block: B:89:0x02a5  */
-                /* JADX WARN: Removed duplicated region for block: B:97:0x023f  */
-                /* JADX WARN: Removed duplicated region for block: B:98:0x0269  */
+                /* JADX WARN: Removed duplicated region for block: B:43:0x0118  */
+                /* JADX WARN: Removed duplicated region for block: B:44:0x011d  */
+                /* JADX WARN: Removed duplicated region for block: B:46:0x0120  */
+                /* JADX WARN: Removed duplicated region for block: B:56:0x0144  */
                 @Override // com.android.wm.shell.pip.PipAnimationController.PipTransitionAnimator
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final void applySurfaceControlTransaction(android.view.SurfaceControl r17, android.view.SurfaceControl.Transaction r18, float r19) {
-                    /*
-                        Method dump skipped, instructions count: 684
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.pip.PipAnimationController.PipTransitionAnimator.AnonymousClass2.applySurfaceControlTransaction(android.view.SurfaceControl, android.view.SurfaceControl$Transaction, float):void");
+                public final void applySurfaceControlTransaction(SurfaceControl surfaceControl2, SurfaceControl.Transaction transaction, float f2) {
+                    boolean z4;
+                    float f3;
+                    boolean z5;
+                    float fMax;
+                    float fHeight;
+                    int iHeight;
+                    float fHeight2;
+                    int iHeight2;
+                    float f4;
+                    float fWidth;
+                    int i3;
+                    int i4;
+                    float fHeight3;
+                    Rect rect24;
+                    PipTransactionHandler pipTransactionHandler;
+                    Rect rect25 = (Rect) this.mBaseValue;
+                    Rect rect26 = (Rect) this.mStartValue;
+                    Rect rect27 = (Rect) getEndValue();
+                    Rect rectEvaluate = this.mRectEvaluator.evaluate(f2, rect26, rect27);
+                    PipContentOverlay pipContentOverlay = this.mContentOverlay;
+                    if (pipContentOverlay != null) {
+                        pipContentOverlay.onAnimationUpdate(transaction, rectEvaluate, f2);
+                    }
+                    if (rect6 == null) {
+                        float f5 = 1.0f - f2;
+                        float f6 = f * f5;
+                        this.mCurrentValue = rectEvaluate;
+                        if (this.mAnimationType != 0) {
+                            z4 = false;
+                        } else {
+                            int transitionDirection = getTransitionDirection();
+                            if (!PipAnimationController.isInPipDirection(transitionDirection) && !PipAnimationController.isOutPipDirection(transitionDirection)) {
+                                z4 = true;
+                            }
+                        }
+                        if (!z4 && !rect16.isEmpty()) {
+                            boolean z6 = zIsOutPipDirection;
+                            Rect rectEvaluate2 = this.mInsetsEvaluator.evaluate(f2, z6 ? rect17 : rect18, z6 ? rect18 : rect17);
+                            PipSurfaceTransactionHelper pipSurfaceTransactionHelper = this.mSurfaceTransactionHelper;
+                            Rect rect28 = rect16;
+                            Rect rect29 = rect23;
+                            boolean z7 = zIsInPipDirection;
+                            Point point2 = point;
+                            pipSurfaceTransactionHelper.mTmpDestinationRect.set(rect29);
+                            pipSurfaceTransactionHelper.mTmpDestinationRect.offset(-point2.x, -point2.y);
+                            pipSurfaceTransactionHelper.mTmpDestinationRect.inset(rectEvaluate2);
+                            if (!z7 || rect28 == null || rect28.width() >= rect29.width()) {
+                                fMax = Math.max(rectEvaluate.width() / rect29.width(), rectEvaluate.height() / rect29.height());
+                            } else {
+                                if (rect29.width() <= rect29.height()) {
+                                    fHeight = rectEvaluate.width();
+                                    iHeight = rect28.width();
+                                } else {
+                                    fHeight = rectEvaluate.height();
+                                    iHeight = rect28.height();
+                                }
+                                float f7 = fHeight / iHeight;
+                                if (rect29.width() <= rect29.height()) {
+                                    fHeight2 = rectEvaluate.width();
+                                    iHeight2 = rect29.width();
+                                } else {
+                                    fHeight2 = rectEvaluate.height();
+                                    iHeight2 = rect29.height();
+                                }
+                                fMax = (f2 * f7) + (f5 * (fHeight2 / iHeight2));
+                            }
+                            float f8 = rectEvaluate.left;
+                            Rect rect30 = pipSurfaceTransactionHelper.mTmpDestinationRect;
+                            float f9 = f8 - (rect30.left * fMax);
+                            float f10 = rectEvaluate.top - (rect30.top * fMax);
+                            if (fMax == 1.0f) {
+                                f9 = point2.x;
+                                f10 = point2.y;
+                            }
+                            pipSurfaceTransactionHelper.mTmpTransform.setScale(fMax, fMax);
+                            transaction.setMatrix(surfaceControl2, pipSurfaceTransactionHelper.mTmpTransform, pipSurfaceTransactionHelper.mTmpFloat9).setCrop(surfaceControl2, pipSurfaceTransactionHelper.mTmpDestinationRect).setPosition(surfaceControl2, f9, f10);
+                            Rect rect31 = new Rect(rect19);
+                            rect31.inset(rectEvaluate2);
+                            PipSurfaceTransactionHelper pipSurfaceTransactionHelper2 = this.mSurfaceTransactionHelper;
+                            pipSurfaceTransactionHelper2.round(transaction, surfaceControl2, rect31, rectEvaluate);
+                            pipSurfaceTransactionHelper2.shadow(transaction, surfaceControl2, shouldApplyShadowRadius());
+                        } else if (zIsOutPipDirection) {
+                            Rect rect32 = new Rect(rect27);
+                            Point point3 = new Point(this.mLeashOffset);
+                            rect32.offset(-point3.x, -point3.y);
+                            PipSurfaceTransactionHelper pipSurfaceTransactionHelper3 = this.mSurfaceTransactionHelper;
+                            pipSurfaceTransactionHelper3.getClass();
+                            transaction.setCrop(surfaceControl2, rect32);
+                            pipSurfaceTransactionHelper3.mTmpDestinationRectF.set(rectEvaluate);
+                            pipSurfaceTransactionHelper3.scale(transaction, surfaceControl2, rect32, pipSurfaceTransactionHelper3.mTmpDestinationRectF, 0.0f, false);
+                        } else {
+                            PipSurfaceTransactionHelper pipSurfaceTransactionHelper4 = this.mSurfaceTransactionHelper;
+                            pipSurfaceTransactionHelper4.cropAndPosition(rect25, transaction, surfaceControl2);
+                            if (this.mAnimationType != 0) {
+                                f3 = f6;
+                                z5 = false;
+                                pipSurfaceTransactionHelper4.mTmpDestinationRectF.set(rectEvaluate);
+                                pipSurfaceTransactionHelper4.scale(transaction, surfaceControl2, rect25, pipSurfaceTransactionHelper4.mTmpDestinationRectF, f3, z5);
+                                pipSurfaceTransactionHelper4.round(transaction, surfaceControl2, rect25, rectEvaluate);
+                                pipSurfaceTransactionHelper4.shadow(transaction, surfaceControl2, shouldApplyShadowRadius());
+                            } else {
+                                int transitionDirection2 = getTransitionDirection();
+                                if (!PipAnimationController.isInPipDirection(transitionDirection2) && !PipAnimationController.isOutPipDirection(transitionDirection2)) {
+                                    f3 = f6;
+                                    z5 = true;
+                                }
+                                pipSurfaceTransactionHelper4.mTmpDestinationRectF.set(rectEvaluate);
+                                pipSurfaceTransactionHelper4.scale(transaction, surfaceControl2, rect25, pipSurfaceTransactionHelper4.mTmpDestinationRectF, f3, z5);
+                                pipSurfaceTransactionHelper4.round(transaction, surfaceControl2, rect25, rectEvaluate);
+                                pipSurfaceTransactionHelper4.shadow(transaction, surfaceControl2, shouldApplyShadowRadius());
+                            }
+                        }
+                        PipTransactionHandler pipTransactionHandler2 = this.mPipTransactionHandler;
+                        if (pipTransactionHandler2 != null ? pipTransactionHandler2.handlePipTransaction(surfaceControl2, transaction, rectEvaluate, 1.0f) : false) {
+                            return;
+                        }
+                        transaction.apply();
+                        return;
+                    }
+                    if (!rect27.equals(rect7)) {
+                        rect6.set(rect3);
+                        RotationUtils.rotateBounds(rect6, rect23, i2);
+                        rect7.set(rect27);
+                    }
+                    Rect rectEvaluate3 = this.mRectEvaluator.evaluate(f2, rect26, rect6);
+                    this.mCurrentValue = rectEvaluate3;
+                    boolean z8 = zIsOutPipDirection;
+                    Rect rectEvaluate4 = this.mInsetsEvaluator.evaluate(f2, z8 ? rect17 : rect18, z8 ? rect18 : rect17);
+                    if (Transitions.SHELL_TRANSITIONS_ROTATION) {
+                        if (i2 != 1) {
+                            float f11 = 1.0f - f2;
+                            f4 = f11 * (-90.0f);
+                            int i5 = rect27.left;
+                            fWidth = rect26.left + ((i5 - r11) * f2);
+                            int i6 = rect27.top;
+                            fHeight3 = (f2 * (i6 - r9)) + rect26.top + (rect26.height() * f11);
+                            float f12 = fHeight3;
+                            float f13 = fWidth;
+                            Rect rect33 = new Rect(rect19);
+                            rect24 = !zIsOutPipDirection ? rect6 : null;
+                            if (rect24 != null) {
+                                Point point4 = point;
+                                rect24.offset(point4.x, point4.y);
+                            }
+                            rect33.inset(rectEvaluate4);
+                            PipSurfaceTransactionHelper pipSurfaceTransactionHelper5 = this.mSurfaceTransactionHelper;
+                            pipSurfaceTransactionHelper5.rotateAndScaleWithCrop(transaction, surfaceControl2, rect19, rectEvaluate3, rectEvaluate4, f4, f13, f12, zIsOutPipDirection, i2 != 3, rect24);
+                            pipSurfaceTransactionHelper5.round(transaction, surfaceControl2, rect33, rectEvaluate3);
+                            pipSurfaceTransactionHelper5.shadow(transaction, surfaceControl2, shouldApplyShadowRadius());
+                            pipTransactionHandler = this.mPipTransactionHandler;
+                            if (pipTransactionHandler == null ? pipTransactionHandler.handlePipTransaction(surfaceControl2, transaction, rectEvaluate3, 1.0f) : false) {
+                                transaction.apply();
+                                return;
+                            }
+                            return;
+                        }
+                        float f14 = 1.0f - f2;
+                        f4 = 90.0f * f14;
+                        int i7 = rect27.left;
+                        fWidth = (rect26.width() * f14) + ((i7 - r11) * f2) + rect26.left;
+                        i3 = rect27.top;
+                        i4 = rect26.top;
+                    } else if (i2 == 1) {
+                        f4 = 90.0f * f2;
+                        int i8 = rect27.right;
+                        fWidth = ((i8 - r9) * f2) + rect26.left;
+                        i3 = rect27.top;
+                        i4 = rect26.top;
+                    } else {
+                        f4 = f2 * (-90.0f);
+                        int i9 = rect27.left;
+                        fWidth = ((i9 - r9) * f2) + rect26.left;
+                        i3 = rect27.bottom;
+                        i4 = rect26.top;
+                    }
+                    fHeight3 = (f2 * (i3 - i4)) + i4;
+                    float f122 = fHeight3;
+                    float f132 = fWidth;
+                    Rect rect332 = new Rect(rect19);
+                    rect24 = !zIsOutPipDirection ? rect6 : null;
+                    if (rect24 != null) {
+                    }
+                    rect332.inset(rectEvaluate4);
+                    PipSurfaceTransactionHelper pipSurfaceTransactionHelper52 = this.mSurfaceTransactionHelper;
+                    pipSurfaceTransactionHelper52.rotateAndScaleWithCrop(transaction, surfaceControl2, rect19, rectEvaluate3, rectEvaluate4, f4, f132, f122, zIsOutPipDirection, i2 != 3, rect24);
+                    pipSurfaceTransactionHelper52.round(transaction, surfaceControl2, rect332, rectEvaluate3);
+                    pipSurfaceTransactionHelper52.shadow(transaction, surfaceControl2, shouldApplyShadowRadius());
+                    pipTransactionHandler = this.mPipTransactionHandler;
+                    if (pipTransactionHandler == null ? pipTransactionHandler.handlePipTransaction(surfaceControl2, transaction, rectEvaluate3, 1.0f) : false) {
+                    }
                 }
 
                 @Override // com.android.wm.shell.pip.PipAnimationController.PipTransitionAnimator
@@ -403,16 +579,16 @@ public class PipAnimationController {
 
                 @Override // com.android.wm.shell.pip.PipAnimationController.PipTransitionAnimator
                 public final void applySurfaceControlTransaction(SurfaceControl surfaceControl2, SurfaceControl.Transaction transaction, float f3) {
-                    float floatValue = (((Float) getEndValue()).floatValue() * f3) + ((1.0f - f3) * ((Float) this.mStartValue).floatValue());
-                    this.mCurrentValue = Float.valueOf(floatValue);
+                    float fFloatValue = (((Float) getEndValue()).floatValue() * f3) + ((1.0f - f3) * ((Float) this.mStartValue).floatValue());
+                    this.mCurrentValue = Float.valueOf(fFloatValue);
                     PipSurfaceTransactionHelper pipSurfaceTransactionHelper = this.mSurfaceTransactionHelper;
                     pipSurfaceTransactionHelper.getClass();
-                    transaction.setAlpha(surfaceControl2, floatValue);
+                    transaction.setAlpha(surfaceControl2, fFloatValue);
                     pipSurfaceTransactionHelper.round(transaction, surfaceControl2, true);
                     pipSurfaceTransactionHelper.shadow(transaction, surfaceControl2, shouldApplyShadowRadius());
                     Rect rect2 = rect;
                     PipTransactionHandler pipTransactionHandler = this.mPipTransactionHandler;
-                    if (pipTransactionHandler != null ? pipTransactionHandler.handlePipTransaction(surfaceControl2, transaction, rect2, floatValue) : false) {
+                    if (pipTransactionHandler != null ? pipTransactionHandler.handlePipTransaction(surfaceControl2, transaction, rect2, fFloatValue) : false) {
                         return;
                     }
                     transaction.apply();
@@ -451,16 +627,16 @@ public class PipAnimationController {
 
                 @Override // com.android.wm.shell.pip.PipAnimationController.PipTransitionAnimator
                 public final void applySurfaceControlTransaction(SurfaceControl surfaceControl2, SurfaceControl.Transaction transaction, float f3) {
-                    float floatValue = (((Float) getEndValue()).floatValue() * f3) + ((1.0f - f3) * ((Float) this.mStartValue).floatValue());
-                    this.mCurrentValue = Float.valueOf(floatValue);
+                    float fFloatValue = (((Float) getEndValue()).floatValue() * f3) + ((1.0f - f3) * ((Float) this.mStartValue).floatValue());
+                    this.mCurrentValue = Float.valueOf(fFloatValue);
                     PipSurfaceTransactionHelper pipSurfaceTransactionHelper = this.mSurfaceTransactionHelper;
                     pipSurfaceTransactionHelper.getClass();
-                    transaction.setAlpha(surfaceControl2, floatValue);
+                    transaction.setAlpha(surfaceControl2, fFloatValue);
                     pipSurfaceTransactionHelper.round(transaction, surfaceControl2, true);
                     pipSurfaceTransactionHelper.shadow(transaction, surfaceControl2, shouldApplyShadowRadius());
                     Rect rect2 = rect;
                     PipTransactionHandler pipTransactionHandler = this.mPipTransactionHandler;
-                    if (pipTransactionHandler != null ? pipTransactionHandler.handlePipTransaction(surfaceControl2, transaction, rect2, floatValue) : false) {
+                    if (pipTransactionHandler != null ? pipTransactionHandler.handlePipTransaction(surfaceControl2, transaction, rect2, fFloatValue) : false) {
                         return;
                     }
                     transaction.apply();
@@ -511,9 +687,9 @@ public class PipAnimationController {
         }
         PipTransitionAnimator pipTransitionAnimator = this.mCurrentAnimator;
         if (pipTransitionAnimator == null) {
-            PipTransitionAnimator.AnonymousClass2 ofBounds = PipTransitionAnimator.ofBounds(taskInfo, surfaceControl, rect2, rect2, rect3, rect4, i, 0.0f, i2, z);
-            setupPipTransitionAnimator(ofBounds);
-            this.mCurrentAnimator = ofBounds;
+            PipTransitionAnimator.AnonymousClass2 anonymousClass2OfBounds = PipTransitionAnimator.ofBounds(taskInfo, surfaceControl, rect2, rect2, rect3, rect4, i, 0.0f, i2, z);
+            setupPipTransitionAnimator(anonymousClass2OfBounds);
+            this.mCurrentAnimator = anonymousClass2OfBounds;
         } else if (pipTransitionAnimator.getAnimationType() == 1 && this.mCurrentAnimator.isRunning()) {
             this.mCurrentAnimator.setDestinationBounds(rect3);
         } else if (this.mCurrentAnimator.getAnimationType() == 0 && this.mCurrentAnimator.isRunning()) {
@@ -521,14 +697,13 @@ public class PipAnimationController {
             this.mCurrentAnimator.updateEndValue(new Rect(rect3));
         } else {
             this.mCurrentAnimator.cancel();
-            PipTransitionAnimator.AnonymousClass2 ofBounds2 = PipTransitionAnimator.ofBounds(taskInfo, surfaceControl, rect, rect2, rect3, rect4, i, f, i2, z);
-            setupPipTransitionAnimator(ofBounds2);
-            this.mCurrentAnimator = ofBounds2;
+            PipTransitionAnimator.AnonymousClass2 anonymousClass2OfBounds2 = PipTransitionAnimator.ofBounds(taskInfo, surfaceControl, rect, rect2, rect3, rect4, i, f, i2, z);
+            setupPipTransitionAnimator(anonymousClass2OfBounds2);
+            this.mCurrentAnimator = anonymousClass2OfBounds2;
         }
         return this.mCurrentAnimator;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipAnimationCallback {
         public void onPipAnimationStart(PipTransitionAnimator pipTransitionAnimator) {
         }

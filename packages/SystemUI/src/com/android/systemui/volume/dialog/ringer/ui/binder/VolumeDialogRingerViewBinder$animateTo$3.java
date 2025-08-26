@@ -19,7 +19,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogRingerViewBinder$animateTo$3 extends SuspendLambda implements Function2 {
     final /* synthetic */ SpringAnimation $colorAnimation;
@@ -33,7 +32,6 @@ final class VolumeDialogRingerViewBinder$animateTo$3 extends SuspendLambda imple
     int label;
     final /* synthetic */ VolumeDialogRingerViewBinder this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.dialog.ringer.ui.binder.VolumeDialogRingerViewBinder$animateTo$3$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ SpringAnimation $colorAnimation;
@@ -75,36 +73,36 @@ final class VolumeDialogRingerViewBinder$animateTo$3 extends SuspendLambda imple
                 Function1 function1 = new Function1() { // from class: com.android.systemui.volume.dialog.ringer.ui.binder.VolumeDialogRingerViewBinder$animateTo$3$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
-                        Integer num;
+                    public final Object mo781invoke(Object obj2) {
+                        Integer numValueOf;
                         int[] colors;
                         int[] colors2;
                         ImageButton imageButton2 = imageButton;
-                        float floatValue = ((Float) obj2).floatValue();
-                        VolumeDialogRingerViewBinder volumeDialogRingerViewBinder2 = VolumeDialogRingerViewBinder.this;
+                        float fFloatValue = ((Float) obj2).floatValue();
+                        VolumeDialogRingerViewBinder volumeDialogRingerViewBinder2 = volumeDialogRingerViewBinder;
                         ArgbEvaluator argbEvaluator = volumeDialogRingerViewBinder2.rgbEvaluator;
-                        float coerceIn = RangesKt___RangesKt.coerceIn(floatValue, 0.0f, 1.0f);
+                        float fCoerceIn = RangesKt___RangesKt.coerceIn(fFloatValue, 0.0f, 1.0f);
                         ColorStateList imageTintList = imageButton2.getImageTintList();
-                        Integer num2 = null;
+                        Integer numValueOf2 = null;
                         if (imageTintList == null || (colors2 = imageTintList.getColors()) == null) {
-                            num = null;
+                            numValueOf = null;
                         } else {
                             if (colors2.length == 0) {
                                 throw new NoSuchElementException("Array is empty.");
                             }
-                            num = Integer.valueOf(colors2[0]);
+                            numValueOf = Integer.valueOf(colors2[0]);
                         }
                         RingerButtonUiModel ringerButtonUiModel2 = ringerButtonUiModel;
-                        int intValue = ((Integer) argbEvaluator.evaluate(coerceIn, num, Integer.valueOf(ringerButtonUiModel2.tintColor))).intValue();
+                        int iIntValue = ((Integer) argbEvaluator.evaluate(fCoerceIn, numValueOf, Integer.valueOf(ringerButtonUiModel2.tintColor))).intValue();
                         ArgbEvaluator argbEvaluator2 = volumeDialogRingerViewBinder2.rgbEvaluator;
-                        float coerceIn2 = RangesKt___RangesKt.coerceIn(floatValue, 0.0f, 1.0f);
+                        float fCoerceIn2 = RangesKt___RangesKt.coerceIn(fFloatValue, 0.0f, 1.0f);
                         ColorStateList color = ((GradientDrawable) imageButton2.getBackground()).getColor();
                         if (color != null && (colors = color.getColors()) != null) {
-                            num2 = Integer.valueOf(colors[0]);
+                            numValueOf2 = Integer.valueOf(colors[0]);
                         }
-                        ((GradientDrawable) imageButton2.getBackground()).setColor(((Integer) argbEvaluator2.evaluate(coerceIn2, num2, Integer.valueOf(ringerButtonUiModel2.backgroundColor))).intValue());
+                        ((GradientDrawable) imageButton2.getBackground()).setColor(((Integer) argbEvaluator2.evaluate(fCoerceIn2, numValueOf2, Integer.valueOf(ringerButtonUiModel2.backgroundColor))).intValue());
                         imageButton2.getBackground().invalidateSelf();
-                        imageButton2.setColorFilter(intValue);
+                        imageButton2.setColorFilter(iIntValue);
                         return Unit.INSTANCE;
                     }
                 };
@@ -163,13 +161,13 @@ final class VolumeDialogRingerViewBinder$animateTo$3 extends SuspendLambda imple
             Function1 function1 = new Function1() { // from class: com.android.systemui.volume.dialog.ringer.ui.binder.VolumeDialogRingerViewBinder$animateTo$3$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     ImageButton imageButton2 = imageButton;
                     Float f3 = (Float) obj2;
-                    float floatValue = f3.floatValue();
+                    float fFloatValue = f3.floatValue();
                     float f4 = f;
-                    Function2.this.invoke(f3, Boolean.valueOf(f4 > 0.0f));
-                    ((GradientDrawable) imageButton2.getBackground()).setCornerRadius((floatValue * f4) + f2);
+                    function2.invoke(f3, Boolean.valueOf(f4 > 0.0f));
+                    ((GradientDrawable) imageButton2.getBackground()).setCornerRadius((fFloatValue * f4) + f2);
                     imageButton2.getBackground().invalidateSelf();
                     return Unit.INSTANCE;
                 }

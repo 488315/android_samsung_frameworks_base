@@ -10,7 +10,6 @@ import android.view.WindowManager;
 import com.android.internal.policy.PhoneWindow;
 import com.android.systemui.screenshot.FloatingWindowUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ClipboardOverlayWindow extends PhoneWindow implements ViewRootImpl.ActivityConfigCallback {
     public final Context mContext;
@@ -22,8 +21,8 @@ public class ClipboardOverlayWindow extends PhoneWindow implements ViewRootImpl.
     public final WindowManager mWindowManager;
 
     public ClipboardOverlayWindow(Context context, WindowManager windowManager) {
+        View viewPeekDecorView;
         super(context);
-        View peekDecorView;
         this.mContext = context;
         this.mOrientation = context.getResources().getConfiguration().orientation;
         requestFeature(1);
@@ -37,10 +36,10 @@ public class ClipboardOverlayWindow extends PhoneWindow implements ViewRootImpl.
         int i = floatingWindowParams.flags;
         int i2 = i | 8;
         floatingWindowParams.flags = i2;
-        if (i2 == i || (peekDecorView = peekDecorView()) == null || !peekDecorView.isAttachedToWindow()) {
+        if (i2 == i || (viewPeekDecorView = peekDecorView()) == null || !viewPeekDecorView.isAttachedToWindow()) {
             return;
         }
-        windowManager.updateViewLayout(peekDecorView, floatingWindowParams);
+        windowManager.updateViewLayout(viewPeekDecorView, floatingWindowParams);
     }
 
     public final void onConfigurationChanged(Configuration configuration, int i) {

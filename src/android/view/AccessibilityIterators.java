@@ -72,11 +72,11 @@ public final class AccessibilityIterators {
                     return null;
                 }
             }
-            int following = this.mImpl.following(i);
-            if (following == -1) {
+            int iFollowing = this.mImpl.following(i);
+            if (iFollowing == -1) {
                 return null;
             }
-            return getRange(i, following);
+            return getRange(i, iFollowing);
         }
 
         @Override // android.view.AccessibilityIterators.TextSegmentIterator
@@ -94,11 +94,11 @@ public final class AccessibilityIterators {
                     return null;
                 }
             }
-            int preceding = this.mImpl.preceding(i);
-            if (preceding == -1) {
+            int iPreceding = this.mImpl.preceding(i);
+            if (iPreceding == -1) {
                 return null;
             }
-            return getRange(preceding, i);
+            return getRange(iPreceding, i);
         }
 
         @Override // android.view.ViewRootImpl.ConfigChangedCallback
@@ -149,11 +149,11 @@ public final class AccessibilityIterators {
                     return null;
                 }
             }
-            int following = this.mImpl.following(i);
-            if (following == -1 || !isEndBoundary(following)) {
+            int iFollowing = this.mImpl.following(i);
+            if (iFollowing == -1 || !isEndBoundary(iFollowing)) {
                 return null;
             }
-            return getRange(i, following);
+            return getRange(i, iFollowing);
         }
 
         @Override // android.view.AccessibilityIterators.CharacterTextSegmentIterator, android.view.AccessibilityIterators.TextSegmentIterator
@@ -171,11 +171,11 @@ public final class AccessibilityIterators {
                     return null;
                 }
             }
-            int preceding = this.mImpl.preceding(i);
-            if (preceding == -1 || !isStartBoundary(preceding)) {
+            int iPreceding = this.mImpl.preceding(i);
+            if (iPreceding == -1 || !isStartBoundary(iPreceding)) {
                 return null;
             }
-            return getRange(preceding, i);
+            return getRange(iPreceding, i);
         }
 
         private boolean isStartBoundary(int i) {
@@ -213,107 +213,48 @@ public final class AccessibilityIterators {
             return sInstance;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:18:0x0027, code lost:
-        
-            return null;
-         */
         @Override // android.view.AccessibilityIterators.TextSegmentIterator
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public int[] following(int r5) {
-            /*
-                r4 = this;
-                java.lang.String r0 = r4.mText
-                int r0 = r0.length()
-                r1 = 0
-                if (r0 > 0) goto La
-                return r1
-            La:
-                if (r5 < r0) goto Ld
-                return r1
-            Ld:
-                if (r5 >= 0) goto L10
-                r5 = 0
-            L10:
-                if (r5 >= r0) goto L25
-                java.lang.String r2 = r4.mText
-                char r2 = r2.charAt(r5)
-                r3 = 10
-                if (r2 != r3) goto L25
-                boolean r2 = r4.isStartBoundary(r5)
-                if (r2 != 0) goto L25
-                int r5 = r5 + 1
-                goto L10
-            L25:
-                if (r5 < r0) goto L28
-                return r1
-            L28:
-                int r1 = r5 + 1
-            L2a:
-                if (r1 >= r0) goto L35
-                boolean r2 = r4.isEndBoundary(r1)
-                if (r2 != 0) goto L35
-                int r1 = r1 + 1
-                goto L2a
-            L35:
-                int[] r4 = r4.getRange(r5, r1)
-                return r4
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.view.AccessibilityIterators.ParagraphTextSegmentIterator.following(int):int[]");
+        public int[] following(int i) {
+            int length = this.mText.length();
+            if (length <= 0 || i >= length) {
+                return null;
+            }
+            if (i < 0) {
+                i = 0;
+            }
+            while (i < length && this.mText.charAt(i) == '\n' && !isStartBoundary(i)) {
+                i++;
+            }
+            if (i >= length) {
+                return null;
+            }
+            int i2 = i + 1;
+            while (i2 < length && !isEndBoundary(i2)) {
+                i2++;
+            }
+            return getRange(i, i2);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:18:0x0029, code lost:
-        
-            return null;
-         */
         @Override // android.view.AccessibilityIterators.TextSegmentIterator
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public int[] preceding(int r4) {
-            /*
-                r3 = this;
-                java.lang.String r0 = r3.mText
-                int r0 = r0.length()
-                r1 = 0
-                if (r0 > 0) goto La
-                return r1
-            La:
-                if (r4 > 0) goto Ld
-                return r1
-            Ld:
-                if (r4 <= r0) goto L10
-                r4 = r0
-            L10:
-                if (r4 <= 0) goto L27
-                java.lang.String r0 = r3.mText
-                int r2 = r4 + (-1)
-                char r0 = r0.charAt(r2)
-                r2 = 10
-                if (r0 != r2) goto L27
-                boolean r0 = r3.isEndBoundary(r4)
-                if (r0 != 0) goto L27
-                int r4 = r4 + (-1)
-                goto L10
-            L27:
-                if (r4 > 0) goto L2a
-                return r1
-            L2a:
-                int r0 = r4 + (-1)
-            L2c:
-                if (r0 <= 0) goto L37
-                boolean r1 = r3.isStartBoundary(r0)
-                if (r1 != 0) goto L37
-                int r0 = r0 + (-1)
-                goto L2c
-            L37:
-                int[] r3 = r3.getRange(r0, r4)
-                return r3
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.view.AccessibilityIterators.ParagraphTextSegmentIterator.preceding(int):int[]");
+        public int[] preceding(int i) {
+            int length = this.mText.length();
+            if (length <= 0 || i <= 0) {
+                return null;
+            }
+            if (i > length) {
+                i = length;
+            }
+            while (i > 0 && this.mText.charAt(i - 1) == '\n' && !isEndBoundary(i)) {
+                i--;
+            }
+            if (i <= 0) {
+                return null;
+            }
+            int i2 = i - 1;
+            while (i2 > 0 && !isStartBoundary(i2)) {
+                i2--;
+            }
+            return getRange(i2, i);
         }
 
         private boolean isStartBoundary(int i) {

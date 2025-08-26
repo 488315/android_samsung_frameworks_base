@@ -5,28 +5,12 @@ public class Rectangle extends Quad {
     public Rectangle() {
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Rectangle(float r4, float r5, float r6, float r7) {
-        /*
-            r3 = this;
-            android.filterfw.geometry.Point r0 = new android.filterfw.geometry.Point
-            r0.<init>(r4, r5)
-            android.filterfw.geometry.Point r1 = new android.filterfw.geometry.Point
-            float r6 = r6 + r4
-            r1.<init>(r6, r5)
-            android.filterfw.geometry.Point r2 = new android.filterfw.geometry.Point
-            float r5 = r5 + r7
-            r2.<init>(r4, r5)
-            android.filterfw.geometry.Point r4 = new android.filterfw.geometry.Point
-            r4.<init>(r6, r5)
-            r3.<init>(r0, r1, r2, r4)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.filterfw.geometry.Rectangle.<init>(float, float, float, float):void");
+    public Rectangle(float f, float f2, float f3, float f4) {
+        Point point = new Point(f, f2);
+        float f5 = f3 + f;
+        Point point2 = new Point(f5, f2);
+        float f6 = f2 + f4;
+        super(point, point2, new Point(f, f6), new Point(f5, f6));
     }
 
     public Rectangle(Point point, Point point2) {
@@ -42,9 +26,9 @@ public class Rectangle extends Quad {
     }
 
     public static Rectangle fromCenterVerticalAxis(Point point, Point point2, Point point3) {
-        Point scaledTo = point2.scaledTo(point3.y / 2.0f);
-        Point scaledTo2 = point2.rotated90(1).scaledTo(point3.x / 2.0f);
-        return new Rectangle(point.minus(scaledTo2).minus(scaledTo), point.plus(scaledTo2).minus(scaledTo), point.minus(scaledTo2).plus(scaledTo), point.plus(scaledTo2).plus(scaledTo));
+        Point pointScaledTo = point2.scaledTo(point3.y / 2.0f);
+        Point pointScaledTo2 = point2.rotated90(1).scaledTo(point3.x / 2.0f);
+        return new Rectangle(point.minus(pointScaledTo2).minus(pointScaledTo), point.plus(pointScaledTo2).minus(pointScaledTo), point.minus(pointScaledTo2).plus(pointScaledTo), point.plus(pointScaledTo2).plus(pointScaledTo));
     }
 
     public float getWidth() {

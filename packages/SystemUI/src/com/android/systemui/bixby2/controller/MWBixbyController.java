@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MWBixbyController {
     private static final float DEFAULT_SPLIT_RATIO = 0.5f;
@@ -59,7 +58,6 @@ public class MWBixbyController {
     protected MultiWindowManager mMultiWindowManager = MultiWindowManager.getInstance();
     protected IActivityTaskManager mIActivityTaskManager = ActivityTaskManager.getService();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public @interface SplitState {
     }
 
@@ -187,12 +185,12 @@ public class MWBixbyController {
     private boolean isSupportMultiWindow(Context context, String str) {
         Intent intent = new Intent("android.intent.action.MAIN");
         intent.setPackage(str);
-        List<ResolveInfo> queryIntentActivities = context.getPackageManager().queryIntentActivities(intent, 131072);
-        Log.d(TAG, "ris = " + queryIntentActivities);
-        if (queryIntentActivities == null) {
+        List<ResolveInfo> listQueryIntentActivities = context.getPackageManager().queryIntentActivities(intent, 131072);
+        Log.d(TAG, "ris = " + listQueryIntentActivities);
+        if (listQueryIntentActivities == null) {
             return false;
         }
-        Iterator<ResolveInfo> it = queryIntentActivities.iterator();
+        Iterator<ResolveInfo> it = listQueryIntentActivities.iterator();
         while (it.hasNext()) {
             int supportedMultiWindowModes = this.mMultiWindowManager.getSupportedMultiWindowModes(it.next());
             if ((supportedMultiWindowModes & 2) != 0) {
@@ -278,15 +276,15 @@ public class MWBixbyController {
     }
 
     private boolean startActivityByBixby(Context context, String str, String str2) {
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setForceLaunchWindowingMode(1);
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setForceLaunchWindowingMode(1);
         Intent intent = new Intent("android.intent.action.MAIN");
         intent.addCategory("android.intent.category.LAUNCHER");
         intent.setComponent(new ComponentName(str, str2));
         intent.putExtra("from-bixby", true);
         intent.setFlags(270532608);
         try {
-            context.startActivity(intent, makeBasic.toBundle());
+            context.startActivity(intent, activityOptionsMakeBasic.toBundle());
             return true;
         } catch (Exception unused) {
             return false;
@@ -310,10 +308,10 @@ public class MWBixbyController {
             return "success";
         }
         try {
-            Intent makeLaunchIntent = makeLaunchIntent(str, str2);
-            ActivityOptions makeBasic = ActivityOptions.makeBasic();
-            makeBasic.setLaunchWindowingMode(5);
-            context.startActivity(makeLaunchIntent, makeBasic.toBundle());
+            Intent intentMakeLaunchIntent = makeLaunchIntent(str, str2);
+            ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+            activityOptionsMakeBasic.setLaunchWindowingMode(5);
+            context.startActivity(intentMakeLaunchIntent, activityOptionsMakeBasic.toBundle());
             return "success";
         } catch (Exception unused) {
             return ActionResults.RESULT_NO_SUPPORT_POPUP;
@@ -324,7 +322,7 @@ public class MWBixbyController {
         this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.bixby2.controller.MWBixbyController$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
             public final void run() {
-                MWBixbyController.this.lambda$startIntent$3(intent, userHandle, i, i2);
+                this.f$0.lambda$startIntent$3(intent, userHandle, i, i2);
             }
         });
     }
@@ -333,7 +331,7 @@ public class MWBixbyController {
         this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.bixby2.controller.MWBixbyController$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                MWBixbyController.this.lambda$startIntents$4(intent, intent2, userHandle, userHandle2, i, f, i2);
+                this.f$0.lambda$startIntents$4(intent, intent2, userHandle, userHandle2, i, f, i2);
             }
         });
     }
@@ -349,25 +347,25 @@ public class MWBixbyController {
         if (!TextUtils.isEmpty(str3) && !isSupportMultiWindow(context, str3)) {
             return ActionResults.RESULT_NO_SUPPORT_SPLIT_SECOND_APP;
         }
-        Intent makeLaunchIntent = makeLaunchIntent(str, str2);
-        Intent makeLaunchIntent2 = makeLaunchIntent(str3, str4);
-        if (makeLaunchIntent != null && makeLaunchIntent2 != null) {
+        Intent intentMakeLaunchIntent = makeLaunchIntent(str, str2);
+        Intent intentMakeLaunchIntent2 = makeLaunchIntent(str3, str4);
+        if (intentMakeLaunchIntent != null && intentMakeLaunchIntent2 != null) {
             UserHandle userHandle = UserHandle.CURRENT;
-            startIntents(makeLaunchIntent, makeLaunchIntent2, userHandle, userHandle, 1, 0.5f, -1);
+            startIntents(intentMakeLaunchIntent, intentMakeLaunchIntent2, userHandle, userHandle, 1, 0.5f, -1);
             return "success";
         }
-        ActivityManager.RunningTaskInfo findTaskInfoByPackageName = str != null ? findTaskInfoByPackageName(str) : null;
-        if (findTaskInfoByPackageName != null && WindowConfiguration.isSplitScreenWindowingMode(findTaskInfoByPackageName.configuration.windowConfiguration)) {
-            moveTaskToFront(findTaskInfoByPackageName.taskId, context);
+        ActivityManager.RunningTaskInfo runningTaskInfoFindTaskInfoByPackageName = str != null ? findTaskInfoByPackageName(str) : null;
+        if (runningTaskInfoFindTaskInfoByPackageName != null && WindowConfiguration.isSplitScreenWindowingMode(runningTaskInfoFindTaskInfoByPackageName.configuration.windowConfiguration)) {
+            moveTaskToFront(runningTaskInfoFindTaskInfoByPackageName.taskId, context);
             return "success";
         }
         if (!isSplitScreenVisible()) {
-            String checkSupportsMultiWindow = checkSupportsMultiWindow(getTopVisibleFullscreenTaskInfo(), true);
-            if (!checkSupportsMultiWindow.equals("success")) {
-                return checkSupportsMultiWindow;
+            String strCheckSupportsMultiWindow = checkSupportsMultiWindow(getTopVisibleFullscreenTaskInfo(), true);
+            if (!strCheckSupportsMultiWindow.equals("success")) {
+                return strCheckSupportsMultiWindow;
             }
         }
-        return makeLaunchIntent != null ? startSplitScreenSingleIntent(context, makeLaunchIntent, str, str2, 0) : startSplitScreenSingleIntent(context, makeLaunchIntent2, str3, str4, 1);
+        return intentMakeLaunchIntent != null ? startSplitScreenSingleIntent(context, intentMakeLaunchIntent, str, str2, 0) : startSplitScreenSingleIntent(context, intentMakeLaunchIntent2, str3, str4, 1);
     }
 
     private String startSplitScreenSingleIntent(Context context, Intent intent, String str, String str2, int i) {
@@ -379,14 +377,14 @@ public class MWBixbyController {
     }
 
     private String startTargetTaskToFreeform(ActivityManager.RunningTaskInfo runningTaskInfo) {
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setLaunchWindowingMode(5);
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setLaunchWindowingMode(5);
         try {
             if (WindowConfiguration.isSplitScreenWindowingMode(runningTaskInfo.configuration.windowConfiguration)) {
                 this.mExecutor.execute(new MWBixbyController$$ExternalSyntheticLambda1(this, runningTaskInfo, 1));
                 return "success";
             }
-            this.mIActivityTaskManager.startActivityFromRecents(runningTaskInfo.taskId, makeBasic.toBundle());
+            this.mIActivityTaskManager.startActivityFromRecents(runningTaskInfo.taskId, activityOptionsMakeBasic.toBundle());
             return "success";
         } catch (RemoteException unused) {
             return ActionResults.RESULT_NO_SUPPORT_POPUP;
@@ -397,22 +395,22 @@ public class MWBixbyController {
         this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.bixby2.controller.MWBixbyController$$ExternalSyntheticLambda8
             @Override // java.lang.Runnable
             public final void run() {
-                MWBixbyController.this.lambda$startTasks$7(i, bundle, i2, bundle2, i3, f, remoteTransition);
+                this.f$0.lambda$startTasks$7(i, bundle, i2, bundle2, i3, f, remoteTransition);
             }
         });
     }
 
     private String startTopTaskToFreeform() {
         ActivityManager.RunningTaskInfo topRunningTaskInfo = getTopRunningTaskInfo();
-        String checkSupportsMultiWindow = checkSupportsMultiWindow(topRunningTaskInfo, false);
-        return !checkSupportsMultiWindow.equals("success") ? checkSupportsMultiWindow : startTargetTaskToFreeform(topRunningTaskInfo);
+        String strCheckSupportsMultiWindow = checkSupportsMultiWindow(topRunningTaskInfo, false);
+        return !strCheckSupportsMultiWindow.equals("success") ? strCheckSupportsMultiWindow : startTargetTaskToFreeform(topRunningTaskInfo);
     }
 
     private String startTopTaskToSplit() {
         ActivityManager.RunningTaskInfo topVisibleFullscreenTaskInfo = getTopVisibleFullscreenTaskInfo();
-        String checkSupportsMultiWindow = checkSupportsMultiWindow(topVisibleFullscreenTaskInfo, true);
-        if (!checkSupportsMultiWindow.equals("success")) {
-            return checkSupportsMultiWindow;
+        String strCheckSupportsMultiWindow = checkSupportsMultiWindow(topVisibleFullscreenTaskInfo, true);
+        if (!strCheckSupportsMultiWindow.equals("success")) {
+            return strCheckSupportsMultiWindow;
         }
         startTasks(topVisibleFullscreenTaskInfo.taskId, null, -1, null, -1, 0.0f, null);
         return "success";
@@ -504,12 +502,12 @@ public class MWBixbyController {
         String str2 = TAG;
         MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("getPackageInSplit position = ", str, str2);
         updateVisibleTasks();
-        ActivityManager.RunningTaskInfo findTopTaskInfoByStagePosition = findTopTaskInfoByStagePosition(convertToStagePosition(str));
-        if (findTopTaskInfoByStagePosition == null) {
+        ActivityManager.RunningTaskInfo runningTaskInfoFindTopTaskInfoByStagePosition = findTopTaskInfoByStagePosition(convertToStagePosition(str));
+        if (runningTaskInfoFindTopTaskInfoByStagePosition == null) {
             return new CommandActionResponse(1, "");
         }
-        ComponentName componentName = findTopTaskInfoByStagePosition.baseActivity;
-        String packageName = componentName != null ? componentName.getPackageName() : findTopTaskInfoByStagePosition.baseIntent.getComponent() != null ? findTopTaskInfoByStagePosition.baseIntent.getComponent().getPackageName() : null;
+        ComponentName componentName = runningTaskInfoFindTopTaskInfoByStagePosition.baseActivity;
+        String packageName = componentName != null ? componentName.getPackageName() : runningTaskInfoFindTopTaskInfoByStagePosition.baseIntent.getComponent() != null ? runningTaskInfoFindTopTaskInfoByStagePosition.baseIntent.getComponent().getPackageName() : null;
         Log.d(str2, "packageName = " + packageName);
         return new CommandActionResponse(1, packageName);
     }
@@ -575,32 +573,32 @@ public class MWBixbyController {
     }
 
     public String maximizeApp(Context context, PackageInfoBixby packageInfoBixby) {
-        ActivityManager.RunningTaskInfo findTaskInfoByPackageName;
+        ActivityManager.RunningTaskInfo runningTaskInfoFindTaskInfoByPackageName;
         String str = packageInfoBixby.Position;
         String str2 = packageInfoBixby.PackageName;
         String str3 = packageInfoBixby.ActivityName;
         int currentSplitState = getCurrentSplitState();
         String str4 = TAG;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("maximizeApp,  position=", str, ", packageName=", str2, ", activityName=");
-        m.append(str3);
-        m.append(", splitState=");
-        m.append(currentSplitState);
-        Log.d(str4, m.toString());
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("maximizeApp,  position=", str, ", packageName=", str2, ", activityName=");
+        sbM.append(str3);
+        sbM.append(", splitState=");
+        sbM.append(currentSplitState);
+        Log.d(str4, sbM.toString());
         updateVisibleTasks();
         if (str == null) {
-            findTaskInfoByPackageName = str2 != null ? findTaskInfoByPackageName(str2) : null;
+            runningTaskInfoFindTaskInfoByPackageName = str2 != null ? findTaskInfoByPackageName(str2) : null;
         } else {
             if (currentSplitState == 0) {
                 Log.d(str4, "current state is not split");
                 return ActionResults.RESULT_FAIL;
             }
-            findTaskInfoByPackageName = findTopTaskInfoByStagePosition(convertToStagePosition(str));
+            runningTaskInfoFindTaskInfoByPackageName = findTopTaskInfoByStagePosition(convertToStagePosition(str));
         }
-        Log.d(str4, "targetTaskInfo=" + findTaskInfoByPackageName);
-        if (findTaskInfoByPackageName == null) {
+        Log.d(str4, "targetTaskInfo=" + runningTaskInfoFindTaskInfoByPackageName);
+        if (runningTaskInfoFindTaskInfoByPackageName == null) {
             return startActivityByBixby(context, str2, str3) ? "success" : ActionResults.RESULT_FAIL;
         }
-        this.mMultiWindowManager.exitMultiWindow(findTaskInfoByPackageName.token.asBinder(), false);
+        this.mMultiWindowManager.exitMultiWindow(runningTaskInfoFindTaskInfoByPackageName.token.asBinder(), false);
         return "success";
     }
 
@@ -639,28 +637,28 @@ public class MWBixbyController {
         Log.d(str7, "position1 = " + str + ",  packageName1 = " + str2 + ", activityName1 = " + str3);
         ExifInterface$$ExternalSyntheticOutline0.m(SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("position2 = ", str4, ",  packageName2 = ", str5, ", activityName2 = "), str6, str7);
         if (str != null && str2 != null) {
-            Intent makeLaunchIntent = makeLaunchIntent(str2, str3);
-            Intent makeLaunchIntent2 = makeLaunchIntent(str5, str6);
+            Intent intentMakeLaunchIntent = makeLaunchIntent(str2, str3);
+            Intent intentMakeLaunchIntent2 = makeLaunchIntent(str5, str6);
             int i = (str.equals(STR_SPLIT_TOP) || str.equals(STR_SPLIT_BOTTOM)) ? 1 : 0;
-            if (makeLaunchIntent != null && makeLaunchIntent2 != null) {
+            if (intentMakeLaunchIntent != null && intentMakeLaunchIntent2 != null) {
                 if (str.equals(STR_SPLIT_TOP) || str.equals(STR_SPLIT_LEFT)) {
-                    startIntents(makeLaunchIntent, makeLaunchIntent2, null, null, 1, 0.5f, i);
+                    startIntents(intentMakeLaunchIntent, intentMakeLaunchIntent2, null, null, 1, 0.5f, i);
                 } else {
                     if (!str.equals(STR_SPLIT_BOTTOM) && !str.equals(STR_SPLIT_RIGHT)) {
                         return ActionResults.RESULT_FAIL;
                     }
-                    startIntents(makeLaunchIntent2, makeLaunchIntent, null, null, 1, 0.5f, i);
+                    startIntents(intentMakeLaunchIntent2, intentMakeLaunchIntent, null, null, 1, 0.5f, i);
                 }
                 return "success";
             }
-            if (makeLaunchIntent != null) {
+            if (intentMakeLaunchIntent != null) {
                 if (str.equals(STR_SPLIT_TOP) || str.equals(STR_SPLIT_LEFT)) {
-                    startIntent(makeLaunchIntent, null, 0, i);
+                    startIntent(intentMakeLaunchIntent, null, 0, i);
                 } else {
                     if (!str.equals(STR_SPLIT_BOTTOM) && !str.equals(STR_SPLIT_RIGHT)) {
                         return ActionResults.RESULT_FAIL;
                     }
-                    startIntent(makeLaunchIntent, null, 1, i);
+                    startIntent(intentMakeLaunchIntent, null, 1, i);
                 }
                 return "success";
             }
@@ -675,9 +673,9 @@ public class MWBixbyController {
         String str4 = packageInfoBixby.ActivityName2;
         String str5 = packageInfoBixby.Type;
         String str6 = TAG;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("startMultiWindow : type = ", str5, ", packageName1 = ", str, ", activityName1 = ");
-        MoveResult$$ExternalSyntheticOutline0.m(m, str2, ", packageName2 = ", str4, ", activityName2 = ");
-        ExifInterface$$ExternalSyntheticOutline0.m(m, str4, str6);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("startMultiWindow : type = ", str5, ", packageName1 = ", str, ", activityName1 = ");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, str2, ", packageName2 = ", str4, ", activityName2 = ");
+        ExifInterface$$ExternalSyntheticOutline0.m(sbM, str4, str6);
         return packageInfoBixby.Type == null ? ActionResults.RESULT_FAIL : str5.equals(MultiWindowType) ? startSplitScreen(context, str, str2, str3, str4) : str5.equals(PopupType) ? startFreeform(context, str, str2) : "success";
     }
 }

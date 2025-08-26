@@ -13,7 +13,6 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class HeadsUpCoordinatorLogger {
     public static final int $stable = 8;
@@ -35,9 +34,9 @@ public final class HeadsUpCoordinatorLogger {
         String str1 = logMessage.getStr1();
         boolean bool1 = logMessage.getBool1();
         String str2 = logMessage.getStr2();
-        StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("updating entry via ranking applied: ", str1, " updated shouldHeadsUp=", " because ", bool1);
-        m.append(str2);
-        return m.toString();
+        StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("updating entry via ranking applied: ", str1, " updated shouldHeadsUp=", " because ", bool1);
+        sbM.append(str2);
+        return sbM.toString();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -50,9 +49,9 @@ public final class HeadsUpCoordinatorLogger {
         String str1 = logMessage.getStr1();
         int int1 = logMessage.getInt1();
         int int2 = logMessage.getInt2();
-        StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(int1, "evaluating group for alert transfer: ", str1, " numPostedEntries=", " logicalGroupSize=");
-        m888m.append(int2);
-        return m888m.toString();
+        StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(int1, "evaluating group for alert transfer: ", str1, " numPostedEntries=", " logicalGroupSize=");
+        sbM890m.append(int2);
+        return sbM890m.toString();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -94,101 +93,101 @@ public final class HeadsUpCoordinatorLogger {
 
     public final void logEntryDisqualifiedFromFullScreen(String str, String str2) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(0), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        ((LogMessageImpl) obtain).str2 = str2;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(0), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        ((LogMessageImpl) logMessageObtain).str2 = str2;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logEntryUpdatedByRanking(String str, boolean z, String str2) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(3), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(3), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.bool1 = z;
         logMessageImpl.str2 = str2;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logEntryUpdatedToFullScreen(String str, String str2) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(5), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        ((LogMessageImpl) obtain).str2 = str2;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(5), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        ((LogMessageImpl) logMessageObtain).str2 = str2;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logEvaluatingGroup(String str, int i, int i2) {
         if (this.verbose) {
             LogBuffer logBuffer = this.buffer;
-            LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.VERBOSE, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(7), null);
-            ((LogMessageImpl) obtain).str1 = str;
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.VERBOSE, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(7), null);
+            ((LogMessageImpl) logMessageObtain).str1 = str;
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.int1 = i;
             logMessageImpl.int2 = i2;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
     }
 
     public final void logEvaluatingGroups(int i) {
         if (this.verbose) {
             LogBuffer logBuffer = this.buffer;
-            LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.VERBOSE, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(9), null);
-            ((LogMessageImpl) obtain).int1 = i;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.VERBOSE, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(9), null);
+            ((LogMessageImpl) logMessageObtain).int1 = i;
+            logBuffer.commit(logMessageObtain);
         }
     }
 
     public final void logHidePromotedNotificationHeadsUp(String str) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(6), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(6), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logPostedEntryWillEvaluate(HeadsUpCoordinator.PostedEntry postedEntry, String str) {
         if (this.verbose) {
             LogBuffer logBuffer = this.buffer;
-            LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.VERBOSE, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(8), null);
-            ((LogMessageImpl) obtain).str1 = postedEntry.getKey();
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.VERBOSE, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(8), null);
+            ((LogMessageImpl) logMessageObtain).str1 = postedEntry.getKey();
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str2 = str;
             logMessageImpl.bool1 = postedEntry.getShouldHeadsUpEver();
             logMessageImpl.bool2 = postedEntry.getShouldHeadsUpAgain();
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
     }
 
     public final void logPostedEntryWillNotEvaluate(HeadsUpCoordinator.PostedEntry postedEntry, String str) {
         if (this.verbose) {
             LogBuffer logBuffer = this.buffer;
-            LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.VERBOSE, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(4), null);
-            ((LogMessageImpl) obtain).str1 = postedEntry.getKey();
-            ((LogMessageImpl) obtain).str2 = str;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.VERBOSE, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(4), null);
+            ((LogMessageImpl) logMessageObtain).str1 = postedEntry.getKey();
+            ((LogMessageImpl) logMessageObtain).str2 = str;
+            logBuffer.commit(logMessageObtain);
         }
     }
 
     public final void logPromotedNotificationForHeadsUpNotFound(String str) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(2), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(2), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logShowPromotedNotificationHeadsUp(String str) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(1), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(1), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logSummaryMarkedInterrupted(String str, String str2) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(10), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        ((LogMessageImpl) obtain).str2 = str2;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpCoordinator", LogLevel.DEBUG, new HeadsUpCoordinatorLogger$$ExternalSyntheticLambda0(10), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        ((LogMessageImpl) logMessageObtain).str2 = str2;
+        logBuffer.commit(logMessageObtain);
     }
 
     public HeadsUpCoordinatorLogger(LogBuffer logBuffer) {

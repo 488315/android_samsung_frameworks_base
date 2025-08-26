@@ -17,7 +17,6 @@ import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.ExecutorsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ SatelliteManager $sm;
@@ -65,7 +64,7 @@ final class DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2 ext
         OutcomeReceiver outcomeReceiver = new OutcomeReceiver() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2$1$receiver$1
             @Override // android.os.OutcomeReceiver
             public final void onError(Throwable th) {
-                DeviceBasedSatelliteRepositoryImpl.Companion.access$e(DeviceBasedSatelliteRepositoryImpl.Companion, DeviceBasedSatelliteRepositoryImpl.this.logBuffer, "requestIsProvisioned.onError:", (SatelliteManager.SatelliteException) th);
+                DeviceBasedSatelliteRepositoryImpl.Companion.access$e(DeviceBasedSatelliteRepositoryImpl.Companion, deviceBasedSatelliteRepositoryImpl.logBuffer, "requestIsProvisioned.onError:", (SatelliteManager.SatelliteException) th);
                 CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                 int i2 = Result.$r8$clinit;
                 cancellableContinuation.resumeWith(Boolean.FALSE);
@@ -74,12 +73,12 @@ final class DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2 ext
             @Override // android.os.OutcomeReceiver
             public final void onResult(Object obj2) {
                 Boolean bool = (Boolean) obj2;
-                final boolean booleanValue = bool.booleanValue();
-                DeviceBasedSatelliteRepositoryImpl.Companion.i$default(DeviceBasedSatelliteRepositoryImpl.Companion, DeviceBasedSatelliteRepositoryImpl.this.logBuffer, new Function1() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2$1$receiver$1$onResult$1
+                final boolean zBooleanValue = bool.booleanValue();
+                DeviceBasedSatelliteRepositoryImpl.Companion.i$default(DeviceBasedSatelliteRepositoryImpl.Companion, deviceBasedSatelliteRepositoryImpl.logBuffer, new Function1() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2$1$receiver$1$onResult$1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj3) {
-                        return "requestIsProvisioned.onResult: " + booleanValue;
+                    public final Object mo781invoke(Object obj3) {
+                        return "requestIsProvisioned.onResult: " + zBooleanValue;
                     }
                 });
                 CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
@@ -90,7 +89,7 @@ final class DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2 ext
         DeviceBasedSatelliteRepositoryImpl.Companion.i$default(DeviceBasedSatelliteRepositoryImpl.Companion, deviceBasedSatelliteRepositoryImpl.logBuffer, new Function1() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$queryIsSatelliteProvisioned$2$1$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj2) {
+            public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj2) {
                 return "Query for current satellite provisioned state.";
             }
         });

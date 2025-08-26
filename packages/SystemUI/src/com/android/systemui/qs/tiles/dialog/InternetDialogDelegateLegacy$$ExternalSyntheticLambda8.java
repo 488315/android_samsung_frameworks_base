@@ -10,7 +10,6 @@ import com.android.wifitrackerlib.WifiEntry;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class InternetDialogDelegateLegacy$$ExternalSyntheticLambda8 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
@@ -43,19 +42,19 @@ public final /* synthetic */ class InternetDialogDelegateLegacy$$ExternalSynthet
                 }
                 break;
             case 2:
-                final boolean isChecked = internetDialogDelegateLegacy.mWiFiToggle.isChecked();
+                final boolean zIsChecked = internetDialogDelegateLegacy.mWiFiToggle.isChecked();
                 StandaloneCoroutine standaloneCoroutine = internetDialogDelegateLegacy.mClickJob;
                 if (standaloneCoroutine == null || standaloneCoroutine.isCompleted()) {
                     internetDialogDelegateLegacy.mClickJob = SatelliteDialogUtils.mayStartSatelliteWarningDialog(internetDialogDelegateLegacy.mDialog.getContext(), internetDialogDelegateLegacy.mCoroutineScope, new Function1() { // from class: com.android.systemui.qs.tiles.dialog.InternetDialogDelegateLegacy$$ExternalSyntheticLambda15
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             boolean z = InternetDialogDelegateLegacy.DEBUG;
-                            InternetDialogDelegateLegacy internetDialogDelegateLegacy2 = InternetDialogDelegateLegacy.this;
+                            InternetDialogDelegateLegacy internetDialogDelegateLegacy2 = internetDialogDelegateLegacy;
                             internetDialogDelegateLegacy2.getClass();
-                            boolean booleanValue = ((Boolean) obj).booleanValue();
-                            boolean z2 = isChecked;
-                            if (!booleanValue) {
+                            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+                            boolean z2 = zIsChecked;
+                            if (!zBooleanValue) {
                                 internetDialogDelegateLegacy2.mWiFiToggle.setChecked(!z2);
                                 return null;
                             }

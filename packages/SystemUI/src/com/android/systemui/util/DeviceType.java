@@ -25,7 +25,6 @@ import com.samsung.android.feature.SemFloatingFeature;
 import java.io.File;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceType {
     public static int DEBUG_LEVEL_HIGH = 2;
@@ -87,15 +86,15 @@ public final class DeviceType {
     }
 
     public static boolean hasSPenFeature(Context context) {
-        boolean hasSystemFeature = context.getPackageManager().hasSystemFeature("com.sec.feature.spen_usp");
-        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("isSupportActionMemoOnLockScreen FEATURE_SPEN : ", TAG, hasSystemFeature);
-        return hasSystemFeature;
+        boolean zHasSystemFeature = context.getPackageManager().hasSystemFeature("com.sec.feature.spen_usp");
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("isSupportActionMemoOnLockScreen FEATURE_SPEN : ", TAG, zHasSystemFeature);
+        return zHasSystemFeature;
     }
 
     public static boolean isCoverSupported() {
-        Application currentApplication;
-        if (supportCover == -1 && (currentApplication = ActivityThread.currentApplication()) != null) {
-            supportCover = currentApplication.getPackageManager().hasSystemFeature("com.sec.feature.cover") ? 1 : 0;
+        Application applicationCurrentApplication;
+        if (supportCover == -1 && (applicationCurrentApplication = ActivityThread.currentApplication()) != null) {
+            supportCover = applicationCurrentApplication.getPackageManager().hasSystemFeature("com.sec.feature.cover") ? 1 : 0;
         }
         return supportCover == 1;
     }
@@ -246,14 +245,14 @@ public final class DeviceType {
         return supportSideFingerprint == 1;
     }
 
-    public static boolean isSupport5G() {
+    public static boolean isSupport5G() throws NumberFormatException {
         if (!mIsSupport5GChecked) {
             try {
-                int parseInt = Integer.parseInt(SystemProperties.get("ro.telephony.default_network", "0"));
-                if (parseInt >= 23) {
+                int i = Integer.parseInt(SystemProperties.get("ro.telephony.default_network", "0"));
+                if (i >= 23) {
                     mIsSupport5G = true;
                 }
-                Log.i(TAG, "default network mode : " + parseInt);
+                Log.i(TAG, "default network mode : " + i);
             } catch (NumberFormatException unused) {
                 Log.i(TAG, "NumberFormatException in isSupport5GConcept");
             }
@@ -265,10 +264,10 @@ public final class DeviceType {
 
     public static boolean isSupportBrightnessControl() {
         try {
-            Application currentApplication = ActivityThread.currentApplication();
-            Log.i(TAG, "isSupportBrightnessControl: context : " + currentApplication);
-            if (currentApplication != null) {
-                if (currentApplication.getResources().getIntArray(R.array.config_mobile_tcp_buffers).length > 2) {
+            Application applicationCurrentApplication = ActivityThread.currentApplication();
+            Log.i(TAG, "isSupportBrightnessControl: context : " + applicationCurrentApplication);
+            if (applicationCurrentApplication != null) {
+                if (applicationCurrentApplication.getResources().getIntArray(R.array.config_networkNotifySwitches).length > 2) {
                     return true;
                 }
                 Log.e(TAG, "getBrightnessValues not matched!");
@@ -281,18 +280,18 @@ public final class DeviceType {
     }
 
     public static boolean isSupportESim() {
-        Application currentApplication;
-        if (supportESim == -1 && (currentApplication = ActivityThread.currentApplication()) != null) {
-            supportESim = currentApplication.getPackageManager().hasSystemFeature("android.hardware.telephony.euicc") ? 1 : 0;
+        Application applicationCurrentApplication;
+        if (supportESim == -1 && (applicationCurrentApplication = ActivityThread.currentApplication()) != null) {
+            supportESim = applicationCurrentApplication.getPackageManager().hasSystemFeature("android.hardware.telephony.euicc") ? 1 : 0;
         }
         return supportESim == 1;
     }
 
     public static boolean isSupportLightReveal() {
-        Application currentApplication;
-        if (supportLightReveal == -1 && (currentApplication = ActivityThread.currentApplication()) != null) {
-            supportLightReveal = currentApplication.getResources().getDimensionPixelSize(17105834) != 0 ? 1 : 0;
-            Log.i(TAG, "isSupportLightReveal: supportLightReveal=" + supportLightReveal + " context=" + currentApplication);
+        Application applicationCurrentApplication;
+        if (supportLightReveal == -1 && (applicationCurrentApplication = ActivityThread.currentApplication()) != null) {
+            supportLightReveal = applicationCurrentApplication.getResources().getDimensionPixelSize(17105835) != 0 ? 1 : 0;
+            Log.i(TAG, "isSupportLightReveal: supportLightReveal=" + supportLightReveal + " context=" + applicationCurrentApplication);
         }
         return supportLightReveal == 1;
     }
@@ -314,10 +313,10 @@ public final class DeviceType {
             return false;
         }
         for (String str : string.toLowerCase().replaceAll(" ", "").split(",")) {
-            String[] split = str.split("=");
-            if (split.length == 2) {
-                String str2 = split[0];
-                String str3 = split[1];
+            String[] strArrSplit = str.split("=");
+            if (strArrSplit.length == 2) {
+                String str2 = strArrSplit[0];
+                String str3 = strArrSplit[1];
                 if ("unbundled_spec".equals(str2) && str3.contains("remote")) {
                     return true;
                 }

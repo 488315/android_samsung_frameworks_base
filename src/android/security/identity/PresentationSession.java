@@ -6,7 +6,7 @@ import java.security.PublicKey;
 
 /* loaded from: classes3.dex */
 public abstract class PresentationSession {
-    public abstract CredentialDataResult getCredentialData(String str, CredentialDataRequest credentialDataRequest) throws NoAuthenticationKeyAvailableException, InvalidReaderSignatureException, InvalidRequestMessageException, EphemeralPublicKeyNotFoundException;
+    public abstract CredentialDataResult getCredentialData(String str, CredentialDataRequest credentialDataRequest) throws InvalidReaderSignatureException, EphemeralPublicKeyNotFoundException, InvalidRequestMessageException, NoAuthenticationKeyAvailableException;
 
     public abstract long getCredstoreOperationHandle();
 

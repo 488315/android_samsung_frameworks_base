@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 /* loaded from: classes5.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_DENSITY_BASED_COARSE_LOCATIONS, Flags.FLAG_DEPRECATE_PROVIDER_REQUEST_APIS, Flags.FLAG_DISABLE_STATIONARY_THROTTLING, Flags.FLAG_ENABLE_LOCATION_BYPASS, Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG, Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG_BUGFIX, Flags.FLAG_FIX_IS_IN_EMERGENCY_ANR, Flags.FLAG_FIX_SERVICE_WATCHER, Flags.FLAG_GEOID_HEIGHTS_VIA_ALTITUDE_HAL, Flags.FLAG_GNSS_API_MEASUREMENT_REQUEST_WORK_SOURCE, Flags.FLAG_GNSS_API_NAVIC_L1, Flags.FLAG_GNSS_ASSISTANCE_INTERFACE, Flags.FLAG_GNSS_ASSISTANCE_INTERFACE_JNI, Flags.FLAG_GNSS_CONFIGURATION_FROM_RESOURCE, Flags.FLAG_GNSS_LOCATION_PROVIDER_OVERLAY_2025_DEVICES, Flags.FLAG_KEEP_GNSS_STATIONARY_THROTTLING, Flags.FLAG_LIMIT_FUSED_GPS, Flags.FLAG_LOCATION_BYPASS, Flags.FLAG_LOCATION_VALIDATION, Flags.FLAG_MISSING_ATTRIBUTION_TAGS_IN_OVERLAY, Flags.FLAG_NEW_GEOCODER, Flags.FLAG_POPULATION_DENSITY_PROVIDER, Flags.FLAG_RELEASE_SUPL_CONNECTION_ON_TIMEOUT, Flags.FLAG_REPLACE_FUTURE_ELAPSED_REALTIME_JNI, Flags.FLAG_SERVICE_WATCHER_UNSTABLE_FALLBACK, Flags.FLAG_SUBSCRIPTIONS_CHANGED_LISTENER_THREAD, Flags.FLAG_UPDATE_MIN_LOCATION_REQUEST_INTERVAL, Flags.FLAG_USE_LEGACY_NTP_TIME, ""));
+    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_DENSITY_BASED_COARSE_LOCATIONS, Flags.FLAG_DEPRECATE_PROVIDER_REQUEST_APIS, Flags.FLAG_DISABLE_STATIONARY_THROTTLING, Flags.FLAG_ENABLE_LOCATION_BYPASS, Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG, Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG_BUGFIX, Flags.FLAG_FIX_IS_IN_EMERGENCY_ANR, Flags.FLAG_FIX_SERVICE_WATCHER, Flags.FLAG_GEOID_HEIGHTS_VIA_ALTITUDE_HAL, Flags.FLAG_GNSS_API_MEASUREMENT_REQUEST_WORK_SOURCE, Flags.FLAG_GNSS_API_NAVIC_L1, Flags.FLAG_GNSS_ASSISTANCE_INTERFACE, Flags.FLAG_GNSS_ASSISTANCE_INTERFACE_JNI, Flags.FLAG_GNSS_CONFIGURATION_FROM_RESOURCE, Flags.FLAG_GNSS_LOCATION_PROVIDER_OVERLAY_2025_DEVICES, Flags.FLAG_KEEP_GNSS_STATIONARY_THROTTLING, Flags.FLAG_LIMIT_FUSED_GPS, Flags.FLAG_LOCATION_BYPASS, Flags.FLAG_LOCATION_VALIDATION, Flags.FLAG_MISSING_ATTRIBUTION_TAGS_IN_OVERLAY, Flags.FLAG_NEW_GEOCODER, Flags.FLAG_POPULATION_DENSITY_PROVIDER, Flags.FLAG_RELEASE_SUPL_CONNECTION_ON_TIMEOUT, Flags.FLAG_REPLACE_FUTURE_ELAPSED_REALTIME_JNI, Flags.FLAG_SERVICE_WATCHER_UNSTABLE_FALLBACK, Flags.FLAG_SUBSCRIPTIONS_CHANGED_LISTENER_THREAD, Flags.FLAG_UPDATE_IS_IN_EMERGENCY_BEFORE_ON_REGISTER, Flags.FLAG_UPDATE_MIN_LOCATION_REQUEST_INTERVAL, Flags.FLAG_USE_LEGACY_NTP_TIME, ""));
 
     private boolean isOptimizationEnabled() {
         return false;
@@ -42,7 +42,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean disableStationaryThrottling() {
-        return getValue(Flags.FLAG_DISABLE_STATIONARY_THROTTLING, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda24
+        return getValue(Flags.FLAG_DISABLE_STATIONARY_THROTTLING, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda25
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).disableStationaryThrottling();
@@ -62,7 +62,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean enableNiSuplMessageInjectionByCarrierConfig() {
-        return getValue(Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda26
+        return getValue(Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda27
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).enableNiSuplMessageInjectionByCarrierConfig();
@@ -72,7 +72,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean enableNiSuplMessageInjectionByCarrierConfigBugfix() {
-        return getValue(Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG_BUGFIX, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda18
+        return getValue(Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG_BUGFIX, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda19
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).enableNiSuplMessageInjectionByCarrierConfigBugfix();
@@ -92,7 +92,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean fixServiceWatcher() {
-        return getValue(Flags.FLAG_FIX_SERVICE_WATCHER, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda27
+        return getValue(Flags.FLAG_FIX_SERVICE_WATCHER, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda28
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).fixServiceWatcher();
@@ -122,7 +122,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean gnssApiNavicL1() {
-        return getValue(Flags.FLAG_GNSS_API_NAVIC_L1, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda25
+        return getValue(Flags.FLAG_GNSS_API_NAVIC_L1, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda26
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).gnssApiNavicL1();
@@ -142,7 +142,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean gnssAssistanceInterfaceJni() {
-        return getValue(Flags.FLAG_GNSS_ASSISTANCE_INTERFACE_JNI, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda19
+        return getValue(Flags.FLAG_GNSS_ASSISTANCE_INTERFACE_JNI, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda20
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).gnssAssistanceInterfaceJni();
@@ -172,7 +172,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean keepGnssStationaryThrottling() {
-        return getValue(Flags.FLAG_KEEP_GNSS_STATIONARY_THROTTLING, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda17
+        return getValue(Flags.FLAG_KEEP_GNSS_STATIONARY_THROTTLING, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda18
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).keepGnssStationaryThrottling();
@@ -202,7 +202,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean locationValidation() {
-        return getValue(Flags.FLAG_LOCATION_VALIDATION, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda20
+        return getValue(Flags.FLAG_LOCATION_VALIDATION, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda21
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).locationValidation();
@@ -212,7 +212,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean missingAttributionTagsInOverlay() {
-        return getValue(Flags.FLAG_MISSING_ATTRIBUTION_TAGS_IN_OVERLAY, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda21
+        return getValue(Flags.FLAG_MISSING_ATTRIBUTION_TAGS_IN_OVERLAY, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda22
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).missingAttributionTagsInOverlay();
@@ -252,7 +252,7 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean replaceFutureElapsedRealtimeJni() {
-        return getValue(Flags.FLAG_REPLACE_FUTURE_ELAPSED_REALTIME_JNI, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda22
+        return getValue(Flags.FLAG_REPLACE_FUTURE_ELAPSED_REALTIME_JNI, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda23
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).replaceFutureElapsedRealtimeJni();
@@ -281,8 +281,18 @@ public class CustomFeatureFlags implements FeatureFlags {
     }
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
+    public boolean updateIsInEmergencyBeforeOnRegister() {
+        return getValue(Flags.FLAG_UPDATE_IS_IN_EMERGENCY_BEFORE_ON_REGISTER, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda17
+            @Override // java.util.function.Predicate
+            public final boolean test(Object obj) {
+                return ((FeatureFlags) obj).updateIsInEmergencyBeforeOnRegister();
+            }
+        });
+    }
+
+    @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean updateMinLocationRequestInterval() {
-        return getValue(Flags.FLAG_UPDATE_MIN_LOCATION_REQUEST_INTERVAL, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda23
+        return getValue(Flags.FLAG_UPDATE_MIN_LOCATION_REQUEST_INTERVAL, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.location.flags.CustomFeatureFlags$$ExternalSyntheticLambda24
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return ((FeatureFlags) obj).updateMinLocationRequestInterval();
@@ -309,6 +319,6 @@ public class CustomFeatureFlags implements FeatureFlags {
     }
 
     public List<String> getFlagNames() {
-        return Arrays.asList(Flags.FLAG_DENSITY_BASED_COARSE_LOCATIONS, Flags.FLAG_DEPRECATE_PROVIDER_REQUEST_APIS, Flags.FLAG_DISABLE_STATIONARY_THROTTLING, Flags.FLAG_ENABLE_LOCATION_BYPASS, Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG, Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG_BUGFIX, Flags.FLAG_FIX_IS_IN_EMERGENCY_ANR, Flags.FLAG_FIX_SERVICE_WATCHER, Flags.FLAG_GEOID_HEIGHTS_VIA_ALTITUDE_HAL, Flags.FLAG_GNSS_API_MEASUREMENT_REQUEST_WORK_SOURCE, Flags.FLAG_GNSS_API_NAVIC_L1, Flags.FLAG_GNSS_ASSISTANCE_INTERFACE, Flags.FLAG_GNSS_ASSISTANCE_INTERFACE_JNI, Flags.FLAG_GNSS_CONFIGURATION_FROM_RESOURCE, Flags.FLAG_GNSS_LOCATION_PROVIDER_OVERLAY_2025_DEVICES, Flags.FLAG_KEEP_GNSS_STATIONARY_THROTTLING, Flags.FLAG_LIMIT_FUSED_GPS, Flags.FLAG_LOCATION_BYPASS, Flags.FLAG_LOCATION_VALIDATION, Flags.FLAG_MISSING_ATTRIBUTION_TAGS_IN_OVERLAY, Flags.FLAG_NEW_GEOCODER, Flags.FLAG_POPULATION_DENSITY_PROVIDER, Flags.FLAG_RELEASE_SUPL_CONNECTION_ON_TIMEOUT, Flags.FLAG_REPLACE_FUTURE_ELAPSED_REALTIME_JNI, Flags.FLAG_SERVICE_WATCHER_UNSTABLE_FALLBACK, Flags.FLAG_SUBSCRIPTIONS_CHANGED_LISTENER_THREAD, Flags.FLAG_UPDATE_MIN_LOCATION_REQUEST_INTERVAL, Flags.FLAG_USE_LEGACY_NTP_TIME);
+        return Arrays.asList(Flags.FLAG_DENSITY_BASED_COARSE_LOCATIONS, Flags.FLAG_DEPRECATE_PROVIDER_REQUEST_APIS, Flags.FLAG_DISABLE_STATIONARY_THROTTLING, Flags.FLAG_ENABLE_LOCATION_BYPASS, Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG, Flags.FLAG_ENABLE_NI_SUPL_MESSAGE_INJECTION_BY_CARRIER_CONFIG_BUGFIX, Flags.FLAG_FIX_IS_IN_EMERGENCY_ANR, Flags.FLAG_FIX_SERVICE_WATCHER, Flags.FLAG_GEOID_HEIGHTS_VIA_ALTITUDE_HAL, Flags.FLAG_GNSS_API_MEASUREMENT_REQUEST_WORK_SOURCE, Flags.FLAG_GNSS_API_NAVIC_L1, Flags.FLAG_GNSS_ASSISTANCE_INTERFACE, Flags.FLAG_GNSS_ASSISTANCE_INTERFACE_JNI, Flags.FLAG_GNSS_CONFIGURATION_FROM_RESOURCE, Flags.FLAG_GNSS_LOCATION_PROVIDER_OVERLAY_2025_DEVICES, Flags.FLAG_KEEP_GNSS_STATIONARY_THROTTLING, Flags.FLAG_LIMIT_FUSED_GPS, Flags.FLAG_LOCATION_BYPASS, Flags.FLAG_LOCATION_VALIDATION, Flags.FLAG_MISSING_ATTRIBUTION_TAGS_IN_OVERLAY, Flags.FLAG_NEW_GEOCODER, Flags.FLAG_POPULATION_DENSITY_PROVIDER, Flags.FLAG_RELEASE_SUPL_CONNECTION_ON_TIMEOUT, Flags.FLAG_REPLACE_FUTURE_ELAPSED_REALTIME_JNI, Flags.FLAG_SERVICE_WATCHER_UNSTABLE_FALLBACK, Flags.FLAG_SUBSCRIPTIONS_CHANGED_LISTENER_THREAD, Flags.FLAG_UPDATE_IS_IN_EMERGENCY_BEFORE_ON_REGISTER, Flags.FLAG_UPDATE_MIN_LOCATION_REQUEST_INTERVAL, Flags.FLAG_USE_LEGACY_NTP_TIME);
     }
 }

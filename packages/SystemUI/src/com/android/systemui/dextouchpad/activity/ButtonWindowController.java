@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.systemui.dextouchpad.data.TouchpadGesturesGuideItems;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ButtonWindowController {
     public TouchpadGesturesGuideItems itemList;

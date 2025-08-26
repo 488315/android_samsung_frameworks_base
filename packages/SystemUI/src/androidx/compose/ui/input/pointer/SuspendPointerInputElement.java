@@ -6,7 +6,6 @@ import java.util.Arrays;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SuspendPointerInputElement extends ModifierNodeElement<SuspendingPointerInputModifierNodeImpl> {
     public final Object key1;
@@ -48,11 +47,11 @@ public final class SuspendPointerInputElement extends ModifierNodeElement<Suspen
 
     public final int hashCode() {
         Object obj = this.key1;
-        int hashCode = (obj != null ? obj.hashCode() : 0) * 31;
+        int iHashCode = (obj != null ? obj.hashCode() : 0) * 31;
         Object obj2 = this.key2;
-        int hashCode2 = (hashCode + (obj2 != null ? obj2.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (obj2 != null ? obj2.hashCode() : 0)) * 31;
         Object[] objArr = this.keys;
-        return this.pointerInputEventHandler.hashCode() + ((hashCode2 + (objArr != null ? Arrays.hashCode(objArr) : 0)) * 31);
+        return this.pointerInputEventHandler.hashCode() + ((iHashCode2 + (objArr != null ? Arrays.hashCode(objArr) : 0)) * 31);
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement

@@ -76,9 +76,9 @@ public interface ISecureElementService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISecureElementService)) {
-                return (ISecureElementService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISecureElementService)) {
+                return (ISecureElementService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,20 +108,20 @@ public interface ISecureElementService extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeStringArray(readers);
             } else if (i == 2) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                ISecureElementReader reader = getReader(readString);
+                ISecureElementReader reader = getReader(string);
                 parcel2.writeNoException();
                 parcel2.writeStrongInterface(reader);
             } else if (i == 3) {
-                String readString2 = parcel.readString();
-                byte[] createByteArray = parcel.createByteArray();
-                String[] createStringArray = parcel.createStringArray();
-                int readInt = parcel.readInt();
+                String string2 = parcel.readString();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
+                String[] strArrCreateStringArray = parcel.createStringArray();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean[] isNfcEventAllowed = isNfcEventAllowed(readString2, createByteArray, createStringArray, readInt);
+                boolean[] zArrIsNfcEventAllowed = isNfcEventAllowed(string2, bArrCreateByteArray, strArrCreateStringArray, i3);
                 parcel2.writeNoException();
-                parcel2.writeBooleanArray(isNfcEventAllowed);
+                parcel2.writeBooleanArray(zArrIsNfcEventAllowed);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -148,73 +148,73 @@ public interface ISecureElementService extends IInterface {
 
             @Override // android.se.omapi.ISecureElementService
             public String[] getReaders() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getReaders is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.se.omapi.ISecureElementService
             public ISecureElementReader getReader(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getReader is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ISecureElementReader.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ISecureElementReader.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.se.omapi.ISecureElementService
             public boolean[] isNfcEventAllowed(String str, byte[] bArr, String[] strArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method isNfcEventAllowed is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createBooleanArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createBooleanArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.se.omapi.ISecureElementService
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -223,18 +223,18 @@ public interface ISecureElementService extends IInterface {
             @Override // android.se.omapi.ISecureElementService
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

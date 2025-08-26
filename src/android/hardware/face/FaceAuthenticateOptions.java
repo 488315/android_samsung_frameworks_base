@@ -236,28 +236,28 @@ public class FaceAuthenticateOptions implements AuthenticateOptions, Parcelable 
     }
 
     protected FaceAuthenticateOptions(Parcel parcel) {
-        int readInt = parcel.readInt();
-        boolean z = (readInt & 128) != 0;
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        int readInt4 = parcel.readInt();
-        int readInt5 = parcel.readInt();
-        int readInt6 = parcel.readInt();
-        String readString = parcel.readString();
-        String readString2 = (readInt & 64) == 0 ? null : parcel.readString();
-        this.mUserId = readInt2;
-        this.mSensorId = readInt3;
-        this.mDisplayState = readInt4;
-        AnnotationValidations.validate((Class<? extends Annotation>) AuthenticateOptions.DisplayState.class, (Annotation) null, readInt4);
-        this.mAuthenticateReason = readInt5;
-        if (readInt5 != 0 && readInt5 != 1 && readInt5 != 2 && readInt5 != 3 && readInt5 != 4 && readInt5 != 5 && readInt5 != 6 && readInt5 != 7 && readInt5 != 8 && readInt5 != 9 && readInt5 != 10) {
-            throw new IllegalArgumentException("authenticateReason was " + readInt5 + " but must be one of: AUTHENTICATE_REASON_UNKNOWN(0), AUTHENTICATE_REASON_STARTED_WAKING_UP(1), AUTHENTICATE_REASON_PRIMARY_BOUNCER_SHOWN(2), AUTHENTICATE_REASON_ASSISTANT_VISIBLE(3), AUTHENTICATE_REASON_ALTERNATE_BIOMETRIC_BOUNCER_SHOWN(4), AUTHENTICATE_REASON_NOTIFICATION_PANEL_CLICKED(5), AUTHENTICATE_REASON_OCCLUDING_APP_REQUESTED(6), AUTHENTICATE_REASON_PICK_UP_GESTURE_TRIGGERED(7), AUTHENTICATE_REASON_QS_EXPANDED(8), AUTHENTICATE_REASON_SWIPE_UP_ON_BOUNCER(9), AUTHENTICATE_REASON_UDFPS_POINTER_DOWN(10)");
+        int i = parcel.readInt();
+        boolean z = (i & 128) != 0;
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        int i4 = parcel.readInt();
+        int i5 = parcel.readInt();
+        int i6 = parcel.readInt();
+        String string = parcel.readString();
+        String string2 = (i & 64) == 0 ? null : parcel.readString();
+        this.mUserId = i2;
+        this.mSensorId = i3;
+        this.mDisplayState = i4;
+        AnnotationValidations.validate((Class<? extends Annotation>) AuthenticateOptions.DisplayState.class, (Annotation) null, i4);
+        this.mAuthenticateReason = i5;
+        if (i5 != 0 && i5 != 1 && i5 != 2 && i5 != 3 && i5 != 4 && i5 != 5 && i5 != 6 && i5 != 7 && i5 != 8 && i5 != 9 && i5 != 10) {
+            throw new IllegalArgumentException("authenticateReason was " + i5 + " but must be one of: AUTHENTICATE_REASON_UNKNOWN(0), AUTHENTICATE_REASON_STARTED_WAKING_UP(1), AUTHENTICATE_REASON_PRIMARY_BOUNCER_SHOWN(2), AUTHENTICATE_REASON_ASSISTANT_VISIBLE(3), AUTHENTICATE_REASON_ALTERNATE_BIOMETRIC_BOUNCER_SHOWN(4), AUTHENTICATE_REASON_NOTIFICATION_PANEL_CLICKED(5), AUTHENTICATE_REASON_OCCLUDING_APP_REQUESTED(6), AUTHENTICATE_REASON_PICK_UP_GESTURE_TRIGGERED(7), AUTHENTICATE_REASON_QS_EXPANDED(8), AUTHENTICATE_REASON_SWIPE_UP_ON_BOUNCER(9), AUTHENTICATE_REASON_UDFPS_POINTER_DOWN(10)");
         }
-        this.mWakeReason = readInt6;
-        AnnotationValidations.validate((Class<? extends Annotation>) PowerManager.WakeReason.class, (Annotation) null, readInt6);
-        this.mOpPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mAttributionTag = readString2;
+        this.mWakeReason = i6;
+        AnnotationValidations.validate((Class<? extends Annotation>) PowerManager.WakeReason.class, (Annotation) null, i6);
+        this.mOpPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mAttributionTag = string2;
         this.mIsMandatoryBiometrics = z;
     }
 

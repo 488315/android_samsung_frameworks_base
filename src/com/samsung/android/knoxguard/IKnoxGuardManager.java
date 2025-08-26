@@ -370,9 +370,9 @@ public interface IKnoxGuardManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKnoxGuardManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKnoxGuardManager)) {
-                return (IKnoxGuardManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKnoxGuardManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKnoxGuardManager)) {
+                return (IKnoxGuardManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -484,57 +484,57 @@ public interface IKnoxGuardManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    String string = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    registerIntent(readString, createStringArrayList);
+                    registerIntent(string, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAirplaneMode(readBoolean);
+                    setAirplaneMode(z);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    String readString5 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    int readInt3 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
+                    String string5 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    long j = parcel.readLong();
+                    int i5 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setRemoteLockToLockscreen(readInt, readBoolean2, readString2, readString3, readString4, readBoolean3, readString5, readInt2, readLong, readInt3, readBoolean4, bundle);
+                    setRemoteLockToLockscreen(i3, z2, string2, string3, string4, z3, string5, i4, j, i5, z4, bundle);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    boolean readBoolean6 = parcel.readBoolean();
-                    String readString9 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    long readLong2 = parcel.readLong();
-                    int readInt6 = parcel.readInt();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    int i6 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    boolean z6 = parcel.readBoolean();
+                    String string9 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    long j2 = parcel.readLong();
+                    int i8 = parcel.readInt();
+                    boolean z7 = parcel.readBoolean();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setRemoteLockToLockscreenWithSkipSupport(readInt4, readBoolean5, readString6, readString7, readString8, readBoolean6, readString9, readInt5, readLong2, readInt6, readBoolean7, bundle2, readBoolean8);
+                    setRemoteLockToLockscreenWithSkipSupport(i6, z5, string6, string7, string8, z6, string9, i7, j2, i8, z7, bundle2, z8);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    boolean isSkipSupportContainerSupported = isSkipSupportContainerSupported();
+                    boolean zIsSkipSupportContainerSupported = isSkipSupportContainerSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSkipSupportContainerSupported);
+                    parcel2.writeBoolean(zIsSkipSupportContainerSupported);
                     break;
                 case 6:
                     String pBAUniqueNumber = getPBAUniqueNumber();
@@ -542,14 +542,14 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeString(pBAUniqueNumber);
                     break;
                 case 7:
-                    boolean showInstallmentStatus = showInstallmentStatus();
+                    boolean zShowInstallmentStatus = showInstallmentStatus();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(showInstallmentStatus);
+                    parcel2.writeBoolean(zShowInstallmentStatus);
                     break;
                 case 8:
-                    boolean shouldBlockCustomRom = shouldBlockCustomRom();
+                    boolean zShouldBlockCustomRom = shouldBlockCustomRom();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shouldBlockCustomRom);
+                    parcel2.writeBoolean(zShouldBlockCustomRom);
                     break;
                 case 9:
                     bindToLockScreen();
@@ -570,11 +570,11 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeString(kGPolicyCompany);
                     break;
                 case 13:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int verifyHOTPPin = verifyHOTPPin(readString10);
+                    int iVerifyHOTPPin = verifyHOTPPin(string10);
                     parcel2.writeNoException();
-                    parcel2.writeInt(verifyHOTPPin);
+                    parcel2.writeInt(iVerifyHOTPPin);
                     break;
                 case 14:
                     int tAState = getTAState();
@@ -582,9 +582,9 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeInt(tAState);
                     break;
                 case 15:
-                    boolean readBoolean9 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int tAStateSetError = getTAStateSetError(readBoolean9);
+                    int tAStateSetError = getTAStateSetError(z9);
                     parcel2.writeNoException();
                     parcel2.writeInt(tAStateSetError);
                     break;
@@ -594,25 +594,25 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeString(kGPolicy);
                     break;
                 case 17:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int verifyHOTPDHChallenge = verifyHOTPDHChallenge(readString11, readString12, readString13);
+                    int iVerifyHOTPDHChallenge = verifyHOTPDHChallenge(string11, string12, string13);
                     parcel2.writeNoException();
-                    parcel2.writeInt(verifyHOTPDHChallenge);
+                    parcel2.writeInt(iVerifyHOTPDHChallenge);
                     break;
                 case 18:
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int verifyCompleteToken = verifyCompleteToken(readString14);
+                    int iVerifyCompleteToken = verifyCompleteToken(string14);
                     parcel2.writeNoException();
-                    parcel2.writeInt(verifyCompleteToken);
+                    parcel2.writeInt(iVerifyCompleteToken);
                     break;
                 case 19:
-                    String generateHotpDHRequest = generateHotpDHRequest();
+                    String strGenerateHotpDHRequest = generateHotpDHRequest();
                     parcel2.writeNoException();
-                    parcel2.writeString(generateHotpDHRequest);
+                    parcel2.writeString(strGenerateHotpDHRequest);
                     break;
                 case 20:
                     String hotpChallenge = getHotpChallenge();
@@ -620,39 +620,39 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeString(hotpChallenge);
                     break;
                 case 21:
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String verifyRegistrationInfo = verifyRegistrationInfo(readString15, readString16);
+                    String strVerifyRegistrationInfo = verifyRegistrationInfo(string15, string16);
                     parcel2.writeNoException();
-                    parcel2.writeString(verifyRegistrationInfo);
+                    parcel2.writeString(strVerifyRegistrationInfo);
                     break;
                 case 22:
-                    String readString17 = parcel.readString();
-                    String readString18 = parcel.readString();
+                    String string17 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String verifyPolicy = verifyPolicy(readString17, readString18);
+                    String strVerifyPolicy = verifyPolicy(string17, string18);
                     parcel2.writeNoException();
-                    parcel2.writeString(verifyPolicy);
+                    parcel2.writeString(strVerifyPolicy);
                     break;
                 case 23:
-                    int unlockScreen = unlockScreen();
+                    int iUnlockScreen = unlockScreen();
                     parcel2.writeNoException();
-                    parcel2.writeInt(unlockScreen);
+                    parcel2.writeInt(iUnlockScreen);
                     break;
                 case 24:
-                    String readString19 = parcel.readString();
-                    String readString20 = parcel.readString();
-                    String readString21 = parcel.readString();
-                    String readString22 = parcel.readString();
-                    String readString23 = parcel.readString();
-                    boolean readBoolean10 = parcel.readBoolean();
-                    boolean readBoolean11 = parcel.readBoolean();
+                    String string19 = parcel.readString();
+                    String string20 = parcel.readString();
+                    String string21 = parcel.readString();
+                    String string22 = parcel.readString();
+                    String string23 = parcel.readString();
+                    boolean z10 = parcel.readBoolean();
+                    boolean z11 = parcel.readBoolean();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int lockScreen = lockScreen(readString19, readString20, readString21, readString22, readString23, readBoolean10, readBoolean11, bundle3);
+                    int iLockScreen = lockScreen(string19, string20, string21, string22, string23, z10, z11, bundle3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(lockScreen);
+                    parcel2.writeInt(iLockScreen);
                     break;
                 case 25:
                     String lockAction = getLockAction();
@@ -665,9 +665,9 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeString(clientData);
                     break;
                 case 27:
-                    String readString24 = parcel.readString();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int clientData2 = setClientData(readString24);
+                    int clientData2 = setClientData(string24);
                     parcel2.writeNoException();
                     parcel2.writeInt(clientData2);
                     break;
@@ -677,9 +677,9 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeString(kgid);
                     break;
                 case 29:
-                    int resetRPMB = resetRPMB();
+                    int iResetRPMB = resetRPMB();
                     parcel2.writeNoException();
-                    parcel2.writeInt(resetRPMB);
+                    parcel2.writeInt(iResetRPMB);
                     break;
                 case 30:
                     int checkingState = setCheckingState();
@@ -687,15 +687,15 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeInt(checkingState);
                     break;
                 case 31:
-                    String verifyKgRot = verifyKgRot();
+                    String strVerifyKgRot = verifyKgRot();
                     parcel2.writeNoException();
-                    parcel2.writeString(verifyKgRot);
+                    parcel2.writeString(strVerifyKgRot);
                     break;
                 case 32:
-                    String readString25 = parcel.readString();
-                    String readString26 = parcel.readString();
+                    String string25 = parcel.readString();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String stringSystemProperty = getStringSystemProperty(readString25, readString26);
+                    String stringSystemProperty = getStringSystemProperty(string25, string26);
                     parcel2.writeNoException();
                     parcel2.writeString(stringSystemProperty);
                     break;
@@ -705,34 +705,34 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeInt(tAError);
                     break;
                 case 34:
-                    String readString27 = parcel.readString();
-                    String readString28 = parcel.readString();
+                    String string27 = parcel.readString();
+                    String string28 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String nonce = getNonce(readString27, readString28);
+                    String nonce = getNonce(string27, string28);
                     parcel2.writeNoException();
                     parcel2.writeString(nonce);
                     break;
                 case 35:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String tAInfo = getTAInfo(readInt7);
+                    String tAInfo = getTAInfo(i9);
                     parcel2.writeNoException();
                     parcel2.writeString(tAInfo);
                     break;
                 case 36:
-                    String readString29 = parcel.readString();
-                    String readString30 = parcel.readString();
-                    String readString31 = parcel.readString();
-                    String readString32 = parcel.readString();
+                    String string29 = parcel.readString();
+                    String string30 = parcel.readString();
+                    String string31 = parcel.readString();
+                    String string32 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int provisionCert = provisionCert(readString29, readString30, readString31, readString32);
+                    int iProvisionCert = provisionCert(string29, string30, string31, string32);
                     parcel2.writeNoException();
-                    parcel2.writeInt(provisionCert);
+                    parcel2.writeInt(iProvisionCert);
                     break;
                 case 37:
-                    boolean isVpnExceptionRequired = isVpnExceptionRequired();
+                    boolean zIsVpnExceptionRequired = isVpnExceptionRequired();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVpnExceptionRequired);
+                    parcel2.writeBoolean(zIsVpnExceptionRequired);
                     break;
                 case 38:
                     Bundle kGServiceInfo = getKGServiceInfo();
@@ -740,12 +740,12 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeTypedObject(kGServiceInfo, 1);
                     break;
                 case 39:
-                    String readString33 = parcel.readString();
-                    String readString34 = parcel.readString();
+                    String string33 = parcel.readString();
+                    String string34 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int verifySfPolicy = verifySfPolicy(readString33, readString34);
+                    int iVerifySfPolicy = verifySfPolicy(string33, string34);
                     parcel2.writeNoException();
-                    parcel2.writeInt(verifySfPolicy);
+                    parcel2.writeInt(iVerifySfPolicy);
                     break;
                 case 40:
                     String sfPolicy = getSfPolicy();
@@ -753,14 +753,14 @@ public interface IKnoxGuardManager extends IInterface {
                     parcel2.writeString(sfPolicy);
                     break;
                 case 41:
-                    boolean isKGAllowDO = isKGAllowDO();
+                    boolean zIsKGAllowDO = isKGAllowDO();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isKGAllowDO);
+                    parcel2.writeBoolean(zIsKGAllowDO);
                     break;
                 case 42:
-                    boolean isKGAllowADB = isKGAllowADB();
+                    boolean zIsKGAllowADB = isKGAllowADB();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isKGAllowADB);
+                    parcel2.writeBoolean(zIsKGAllowADB);
                     break;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -786,683 +786,683 @@ public interface IKnoxGuardManager extends IInterface {
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public void registerIntent(String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public void setAirplaneMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public void setRemoteLockToLockscreen(int i, boolean z, String str, String str2, String str3, boolean z2, String str4, int i2, long j, int i3, boolean z3, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z2);
-                    obtain.writeString(str4);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z3);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z3);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public void setRemoteLockToLockscreenWithSkipSupport(int i, boolean z, String str, String str2, String str3, boolean z2, String str4, int i2, long j, int i3, boolean z3, Bundle bundle, boolean z4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z2);
-                    obtain.writeString(str4);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z3);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeBoolean(z4);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z3);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeBoolean(z4);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public boolean isSkipSupportContainerSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getPBAUniqueNumber() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public boolean showInstallmentStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public boolean shouldBlockCustomRom() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public void bindToLockScreen() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int getKGServiceVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public void unRegisterIntent() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getKGPolicyCompany() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int verifyHOTPPin(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int getTAState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int getTAStateSetError(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getKGPolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int verifyHOTPDHChallenge(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int verifyCompleteToken(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String generateHotpDHRequest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getHotpChallenge() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String verifyRegistrationInfo(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String verifyPolicy(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int unlockScreen() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int lockScreen(String str, String str2, String str3, String str4, String str5, boolean z, boolean z2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getLockAction() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getClientData() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int setClientData(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getKGID() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int resetRPMB() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int setCheckingState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String verifyKgRot() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getStringSystemProperty(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int getTAError() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getNonce(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getTAInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int provisionCert(String str, String str2, String str3, String str4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public boolean isVpnExceptionRequired() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public Bundle getKGServiceInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public int verifySfPolicy(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public String getSfPolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public boolean isKGAllowDO() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knoxguard.IKnoxGuardManager
             public boolean isKGAllowADB() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxGuardManager.DESCRIPTOR);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

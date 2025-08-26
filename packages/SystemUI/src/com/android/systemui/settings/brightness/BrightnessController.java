@@ -38,7 +38,6 @@ import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.concurrent.Executor;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BrightnessController implements ToggleSlider.Listener {
     public static final Uri BRIGHTNESS_MODE_URI = Settings.System.getUriFor("screen_brightness_mode");
@@ -162,7 +161,6 @@ public class BrightnessController implements ToggleSlider.Listener {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.settings.brightness.BrightnessController$10, reason: invalid class name */
     public class AnonymousClass10 implements Runnable {
         public AnonymousClass10() {
@@ -171,15 +169,14 @@ public class BrightnessController implements ToggleSlider.Listener {
         @Override // java.lang.Runnable
         public final void run() {
             int userId = ((UserTrackerImpl) BrightnessController.this.mUserTracker).getUserId();
-            RestrictedLockUtils.EnforcedAdmin checkIfRestrictionEnforced = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(BrightnessController.this.mContext, "no_config_brightness", userId);
-            if (checkIfRestrictionEnforced == null && RestrictedLockUtilsInternal.hasBaseUserRestriction(BrightnessController.this.mContext, "no_config_brightness", userId)) {
-                checkIfRestrictionEnforced = new RestrictedLockUtils.EnforcedAdmin();
+            RestrictedLockUtils.EnforcedAdmin enforcedAdminCheckIfRestrictionEnforced = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(BrightnessController.this.mContext, "no_config_brightness", userId);
+            if (enforcedAdminCheckIfRestrictionEnforced == null && RestrictedLockUtilsInternal.hasBaseUserRestriction(BrightnessController.this.mContext, "no_config_brightness", userId)) {
+                enforcedAdminCheckIfRestrictionEnforced = new RestrictedLockUtils.EnforcedAdmin();
             }
-            BrightnessController.this.mControl.setEnforcedAdmin(checkIfRestrictionEnforced);
+            BrightnessController.this.mControl.setEnforcedAdmin(enforcedAdminCheckIfRestrictionEnforced);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.settings.brightness.BrightnessController$4, reason: invalid class name */
     public class AnonymousClass4 implements Runnable {
         public AnonymousClass4() {
@@ -192,7 +189,6 @@ public class BrightnessController implements ToggleSlider.Listener {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.settings.brightness.BrightnessController$5, reason: invalid class name */
     public class AnonymousClass5 implements Runnable {
         public AnonymousClass5() {
@@ -214,7 +210,6 @@ public class BrightnessController implements ToggleSlider.Listener {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BrightnessObserver extends ContentObserver {
         public boolean mObserving;
 
@@ -242,7 +237,6 @@ public class BrightnessController implements ToggleSlider.Listener {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         BrightnessController create(ToggleSlider toggleSlider);
     }
@@ -314,14 +308,14 @@ public class BrightnessController implements ToggleSlider.Listener {
         LogLevel logLevel = LogLevel.DEBUG;
         BrightnessController$$ExternalSyntheticLambda1 brightnessController$$ExternalSyntheticLambda1 = new BrightnessController$$ExternalSyntheticLambda1();
         LogBuffer logBuffer = this.mLogBuffer;
-        LogMessage obtain = logBuffer.obtain("CentralSurfaces.BrightnessController", logLevel, brightnessController$$ExternalSyntheticLambda1, null);
-        ((LogMessageImpl) obtain).int1 = i;
+        LogMessage logMessageObtain = logBuffer.obtain("CentralSurfaces.BrightnessController", logLevel, brightnessController$$ExternalSyntheticLambda1, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
         double d = f;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.double1 = d;
         logMessageImpl.bool1 = z;
         Unit unit = Unit.INSTANCE;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void onChanged(int i, boolean z, boolean z2) {
@@ -338,13 +332,13 @@ public class BrightnessController implements ToggleSlider.Listener {
         float f = this.mBrightnessMin;
         float f2 = this.mBrightnessMax;
         SecBrightnessController secBrightnessController = this.mSecBrightnessController;
-        final float min = secBrightnessController != null ? (i + secBrightnessController.minimumBacklight) / secBrightnessController.maximumBacklight : MathUtils.min(BrightnessUtils.convertGammaToLinearFloat(f, f2, i), f2);
+        final float fMin = secBrightnessController != null ? (i + secBrightnessController.minimumBacklight) / secBrightnessController.maximumBacklight : MathUtils.min(BrightnessUtils.convertGammaToLinearFloat(f, f2, i), f2);
         if (z2) {
-            MetricsLogger.action(this.mContext, i2, BrightnessSynchronizer.brightnessFloatToInt(min));
+            MetricsLogger.action(this.mContext, i2, BrightnessSynchronizer.brightnessFloatToInt(fMin));
         }
-        this.mDisplayManager.setTemporaryBrightness(this.mDisplayId, min);
+        this.mDisplayManager.setTemporaryBrightness(this.mDisplayId, fMin);
         if (z3) {
-            logBrightnessChange(min, true, this.mDisplayId);
+            logBrightnessChange(fMin, true, this.mDisplayId);
         }
         if (z) {
             return;
@@ -354,9 +348,9 @@ public class BrightnessController implements ToggleSlider.Listener {
             public final void run() {
                 Settings.System.putIntForUser(BrightnessController.this.mSecBrightnessController.context.getContentResolver(), SettingsHelper.INDEX_AUTO_BRIGHTNESS_TRANSITION_TIME, -1, -2);
                 BrightnessController brightnessController = BrightnessController.this;
-                brightnessController.logBrightnessChange(min, false, brightnessController.mDisplayId);
+                brightnessController.logBrightnessChange(fMin, false, brightnessController.mDisplayId);
                 BrightnessController brightnessController2 = BrightnessController.this;
-                brightnessController2.mDisplayManager.setBrightness(brightnessController2.mDisplayId, min);
+                brightnessController2.mDisplayManager.setBrightness(brightnessController2.mDisplayId, fMin);
             }
         });
     }
@@ -405,23 +399,23 @@ public class BrightnessController implements ToggleSlider.Listener {
             }
         }
         SecBrightnessController secBrightnessController2 = this.mSecBrightnessController;
-        int convertLinearToGammaFloat = secBrightnessController2 != null ? (int) ((f * secBrightnessController2.maximumBacklight) - secBrightnessController2.minimumBacklight) : BrightnessUtils.convertLinearToGammaFloat(f, f2, f3);
+        int iConvertLinearToGammaFloat = secBrightnessController2 != null ? (int) ((f * secBrightnessController2.maximumBacklight) - secBrightnessController2.minimumBacklight) : BrightnessUtils.convertLinearToGammaFloat(f, f2, f3);
         if (!this.mControlValueInitialized || (!this.mAutomatic && !this.mTrackingTouch)) {
-            this.mControl.setValue(convertLinearToGammaFloat);
+            this.mControl.setValue(iConvertLinearToGammaFloat);
             this.mControlValueInitialized = true;
         }
-        ValueAnimator ofInt = ValueAnimator.ofInt(this.mControl.getValue(), convertLinearToGammaFloat);
-        this.mSliderAnimator = ofInt;
-        ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.settings.brightness.BrightnessController$$ExternalSyntheticLambda0
+        ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(this.mControl.getValue(), iConvertLinearToGammaFloat);
+        this.mSliderAnimator = valueAnimatorOfInt;
+        valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.settings.brightness.BrightnessController$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                BrightnessController brightnessController = BrightnessController.this;
+                BrightnessController brightnessController = this.f$0;
                 brightnessController.mExternalChange = true;
                 brightnessController.mControl.setValue(((Integer) valueAnimator2.getAnimatedValue()).intValue());
                 brightnessController.mExternalChange = false;
             }
         });
-        this.mSliderAnimator.setDuration((this.mSecBrightnessController != null ? r0.sliderAnimationDuration / this.mControl.getMax() : 0L) * Math.abs(this.mControl.getValue() - convertLinearToGammaFloat));
+        this.mSliderAnimator.setDuration((this.mSecBrightnessController != null ? r0.sliderAnimationDuration / this.mControl.getMax() : 0L) * Math.abs(this.mControl.getValue() - iConvertLinearToGammaFloat));
         this.mSliderAnimator.start();
     }
 }

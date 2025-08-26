@@ -31,7 +31,7 @@ public abstract class MusicRecognitionService extends Service {
             handler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.media.musicrecognition.MusicRecognitionService$1$$ExternalSyntheticLambda0
                 @Override // com.android.internal.util.function.TriConsumer
                 public final void accept(Object obj, Object obj2, Object obj3) {
-                    MusicRecognitionService.this.onRecognize((ParcelFileDescriptor) obj, (AudioFormat) obj2, (MusicRecognitionService.AnonymousClass1.C00051) obj3);
+                    musicRecognitionService.onRecognize((ParcelFileDescriptor) obj, (AudioFormat) obj2, (MusicRecognitionService.AnonymousClass1.C00051) obj3);
                 }
             }, parcelFileDescriptor, audioFormat, new Callback(this) { // from class: android.media.musicrecognition.MusicRecognitionService.1.1
                 @Override // android.media.musicrecognition.MusicRecognitionService.Callback

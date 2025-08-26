@@ -12,7 +12,6 @@ jadx.core.utils.exceptions.JadxRuntimeException: Init of enum field 'EF0' uses e
 	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
  */
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class FieldType {
     public static final /* synthetic */ FieldType[] $VALUES;
@@ -33,7 +32,6 @@ public final class FieldType {
     /* JADX INFO: Fake field, exist only in values array */
     FieldType EF0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.protobuf.FieldType$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$JavaType;
@@ -56,7 +54,6 @@ public final class FieldType {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum Collection {
         SCALAR(false),
         VECTOR(true),
@@ -147,9 +144,9 @@ public final class FieldType {
         MAP = fieldType51;
         $VALUES = new FieldType[]{fieldType, fieldType2, fieldType3, fieldType4, fieldType5, fieldType6, fieldType7, fieldType8, fieldType9, fieldType10, fieldType11, fieldType12, fieldType13, fieldType14, fieldType15, fieldType16, fieldType17, fieldType18, fieldType19, fieldType20, fieldType21, fieldType22, fieldType23, fieldType24, fieldType25, fieldType26, fieldType27, fieldType28, fieldType29, fieldType30, fieldType31, fieldType32, fieldType33, fieldType34, fieldType35, fieldType36, fieldType37, fieldType38, fieldType39, fieldType40, fieldType41, fieldType42, fieldType43, fieldType44, fieldType45, fieldType46, fieldType47, fieldType48, fieldType49, fieldType50, fieldType51};
         Type[] typeArr = new Type[0];
-        FieldType[] values = values();
-        VALUES = new FieldType[values.length];
-        for (FieldType fieldType52 : values) {
+        FieldType[] fieldTypeArrValues = values();
+        VALUES = new FieldType[fieldTypeArrValues.length];
+        for (FieldType fieldType52 : fieldTypeArrValues) {
             VALUES[fieldType52.id] = fieldType52;
         }
     }
@@ -159,13 +156,11 @@ public final class FieldType {
         this.id = i2;
         this.collection = collection;
         this.javaType = javaType;
-        int ordinal = collection.ordinal();
-        if (ordinal == 1) {
+        int iOrdinal = collection.ordinal();
+        if (iOrdinal == 1 || iOrdinal == 3) {
             this.elementType = javaType.getBoxedType();
-        } else if (ordinal != 3) {
-            this.elementType = null;
         } else {
-            this.elementType = javaType.getBoxedType();
+            this.elementType = null;
         }
         this.primitiveScalar = (collection != Collection.SCALAR || (i3 = AnonymousClass1.$SwitchMap$com$google$protobuf$JavaType[javaType.ordinal()]) == 1 || i3 == 2 || i3 == 3) ? false : true;
     }

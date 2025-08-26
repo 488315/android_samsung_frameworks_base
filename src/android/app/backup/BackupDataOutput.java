@@ -34,9 +34,9 @@ public class BackupDataOutput {
         fileDescriptor.getClass();
         this.mQuota = j;
         this.mTransportFlags = i;
-        long ctor = ctor(fileDescriptor);
-        this.mBackupWriter = ctor;
-        if (ctor != 0) {
+        long jCtor = ctor(fileDescriptor);
+        this.mBackupWriter = jCtor;
+        if (jCtor != 0) {
             return;
         }
         throw new RuntimeException("Native initialization failed with fd=" + fileDescriptor);
@@ -51,19 +51,19 @@ public class BackupDataOutput {
     }
 
     public int writeEntityHeader(String str, int i) throws IOException {
-        int writeEntityHeader_native = writeEntityHeader_native(this.mBackupWriter, str, i);
-        if (writeEntityHeader_native >= 0) {
-            return writeEntityHeader_native;
+        int iWriteEntityHeader_native = writeEntityHeader_native(this.mBackupWriter, str, i);
+        if (iWriteEntityHeader_native >= 0) {
+            return iWriteEntityHeader_native;
         }
-        throw new IOException("result=0x" + Integer.toHexString(writeEntityHeader_native));
+        throw new IOException("result=0x" + Integer.toHexString(iWriteEntityHeader_native));
     }
 
     public int writeEntityData(byte[] bArr, int i) throws IOException {
-        int writeEntityData_native = writeEntityData_native(this.mBackupWriter, bArr, i);
-        if (writeEntityData_native >= 0) {
-            return writeEntityData_native;
+        int iWriteEntityData_native = writeEntityData_native(this.mBackupWriter, bArr, i);
+        if (iWriteEntityData_native >= 0) {
+            return iWriteEntityData_native;
         }
-        throw new IOException("result=0x" + Integer.toHexString(writeEntityData_native));
+        throw new IOException("result=0x" + Integer.toHexString(iWriteEntityData_native));
     }
 
     public void setKeyPrefix(String str) {

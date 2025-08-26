@@ -11,7 +11,6 @@ import com.android.internal.jank.InteractionJankMonitor;
 import com.android.wm.shell.back.BackAnimationRunner;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BackAnimationRunner {
     public boolean mAnimationCancelled;
@@ -25,7 +24,6 @@ public class BackAnimationRunner {
     public final IRemoteAnimationRunner mRunner;
     public boolean mWaitingAnimation;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RemoteAnimationFinishedStub extends IRemoteAnimationFinishedCallback.Stub {
         public boolean mAbandoned;
         public final WeakReference mRunnerRef;
@@ -47,7 +45,7 @@ public class BackAnimationRunner {
                     backAnimationRunner.mHandler.post(new Runnable() { // from class: com.android.wm.shell.back.BackAnimationRunner$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            BackAnimationRunner backAnimationRunner2 = BackAnimationRunner.this;
+                            BackAnimationRunner backAnimationRunner2 = backAnimationRunner;
                             BackAnimationRunner.RemoteAnimationFinishedStub remoteAnimationFinishedStub = this;
                             BackAnimationRunner.RemoteAnimationFinishedStub remoteAnimationFinishedStub2 = backAnimationRunner2.mRemoteCallback;
                             if (remoteAnimationFinishedStub2 == null || remoteAnimationFinishedStub == remoteAnimationFinishedStub2) {

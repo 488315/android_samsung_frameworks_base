@@ -92,43 +92,43 @@ public class ASN1InputStream extends FilterInputStream implements BERTags {
     }
 
     public ASN1Primitive readObject() throws IOException {
-        int read = read();
-        if (read <= 0) {
-            if (read != 0) {
+        int i = read();
+        if (i <= 0) {
+            if (i != 0) {
                 return null;
             }
             throw new IOException("unexpected end-of-contents marker");
         }
-        int readTagNumber = readTagNumber(this, read);
-        int readLength = readLength();
-        if (readLength >= 0) {
+        int tagNumber = readTagNumber(this, i);
+        int length = readLength();
+        if (length >= 0) {
             try {
-                return buildObject(read, readTagNumber, readLength);
+                return buildObject(i, tagNumber, length);
             } catch (IllegalArgumentException e) {
                 throw new ASN1Exception("corrupted stream detected", e);
             }
         }
-        if ((read & 32) == 0) {
+        if ((i & 32) == 0) {
             throw new IOException("indefinite-length primitive encoding encountered");
         }
         ASN1StreamParser aSN1StreamParser = new ASN1StreamParser(new IndefiniteLengthInputStream(this, this.limit), this.limit, this.tmpBuffers);
-        int i = read & 192;
-        if (i != 0) {
-            return aSN1StreamParser.loadTaggedIL(i, readTagNumber);
+        int i2 = i & 192;
+        if (i2 != 0) {
+            return aSN1StreamParser.loadTaggedIL(i2, tagNumber);
         }
-        if (readTagNumber == 3) {
+        if (tagNumber == 3) {
             return BERBitStringParser.parse(aSN1StreamParser);
         }
-        if (readTagNumber == 4) {
+        if (tagNumber == 4) {
             return BEROctetStringParser.parse(aSN1StreamParser);
         }
-        if (readTagNumber == 8) {
+        if (tagNumber == 8) {
             return DERExternalParser.parse(aSN1StreamParser);
         }
-        if (readTagNumber == 16) {
+        if (tagNumber == 16) {
             return BERSequenceParser.parse(aSN1StreamParser);
         }
-        if (readTagNumber == 17) {
+        if (tagNumber == 17) {
             return BERSetParser.parse(aSN1StreamParser);
         }
         throw new IOException("unknown BER object encountered");
@@ -170,15 +170,15 @@ public class ASN1InputStream extends FilterInputStream implements BERTags {
     }
 
     ASN1EncodableVector readVector() throws IOException {
-        ASN1Primitive readObject = readObject();
-        if (readObject == null) {
+        ASN1Primitive object = readObject();
+        if (object == null) {
             return new ASN1EncodableVector(0);
         }
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector();
         do {
-            aSN1EncodableVector.add(readObject);
-            readObject = readObject();
-        } while (readObject != null);
+            aSN1EncodableVector.add(object);
+            object = readObject();
+        } while (object != null);
         return aSN1EncodableVector;
     }
 
@@ -195,64 +195,64 @@ public class ASN1InputStream extends FilterInputStream implements BERTags {
         if (i2 != 31) {
             return i2;
         }
-        int read = inputStream.read();
-        if (read < 31) {
-            if (read < 0) {
+        int i3 = inputStream.read();
+        if (i3 < 31) {
+            if (i3 < 0) {
                 throw new EOFException("EOF found inside tag value.");
             }
             throw new IOException("corrupted stream - high tag number < 31 found");
         }
-        int i3 = read & 127;
-        if (i3 == 0) {
+        int i4 = i3 & 127;
+        if (i4 == 0) {
             throw new IOException("corrupted stream - invalid high tag number found");
         }
-        while ((read & 128) != 0) {
-            if ((i3 >>> 24) != 0) {
+        while ((i3 & 128) != 0) {
+            if ((i4 >>> 24) != 0) {
                 throw new IOException("Tag number more than 31 bits");
             }
-            int i4 = i3 << 7;
-            int read2 = inputStream.read();
-            if (read2 < 0) {
+            int i5 = i4 << 7;
+            int i6 = inputStream.read();
+            if (i6 < 0) {
                 throw new EOFException("EOF found inside tag value.");
             }
-            i3 = i4 | (read2 & 127);
-            read = read2;
+            i4 = i5 | (i6 & 127);
+            i3 = i6;
         }
-        return i3;
+        return i4;
     }
 
     static int readLength(InputStream inputStream, int i, boolean z) throws IOException {
-        int read = inputStream.read();
-        if ((read >>> 7) == 0) {
-            return read;
+        int i2 = inputStream.read();
+        if ((i2 >>> 7) == 0) {
+            return i2;
         }
-        if (128 == read) {
+        if (128 == i2) {
             return -1;
         }
-        if (read < 0) {
+        if (i2 < 0) {
             throw new EOFException("EOF found when length expected");
         }
-        if (255 == read) {
+        if (255 == i2) {
             throw new IOException("invalid long form definite-length 0xFF");
         }
-        int i2 = read & 127;
-        int i3 = 0;
+        int i3 = i2 & 127;
         int i4 = 0;
+        int i5 = 0;
         do {
-            int read2 = inputStream.read();
-            if (read2 < 0) {
+            int i6 = inputStream.read();
+            if (i6 < 0) {
                 throw new EOFException("EOF found reading length");
             }
-            if ((i3 >>> 23) != 0) {
+            if ((i4 >>> 23) != 0) {
                 throw new IOException("long form definite-length more than 31 bits");
             }
-            i3 = (i3 << 8) + read2;
-            i4++;
-        } while (i4 < i2);
-        if (i3 < i || z) {
-            return i3;
+            i4 = (i4 << 8) + i6;
+            i5++;
+        } while (i5 < i3);
+        if (i4 < i || z) {
+            return i4;
         }
-        throw new IOException("corrupted stream - out of bounds length found: " + i3 + " >= " + i);
+        throw new IOException("corrupted stream - out of bounds length found: " + i4 + " >= " + i);
     }
 
     private static byte[] getBuffer(DefiniteLengthInputStream definiteLengthInputStream, byte[][] bArr) throws IOException {

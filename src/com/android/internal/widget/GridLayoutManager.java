@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityNodeInfo;
 import com.android.internal.widget.LinearLayoutManager;
 import com.android.internal.widget.RecyclerView;
+import java.util.Arrays;
 
 /* loaded from: classes6.dex */
 public class GridLayoutManager extends LinearLayoutManager {
@@ -208,23 +209,23 @@ public class GridLayoutManager extends LinearLayoutManager {
 
     @Override // com.android.internal.widget.RecyclerView.LayoutManager
     public void setMeasuredDimension(Rect rect, int i, int i2) {
-        int chooseSize;
-        int chooseSize2;
+        int iChooseSize;
+        int iChooseSize2;
         if (this.mCachedBorders == null) {
             super.setMeasuredDimension(rect, i, i2);
         }
         int paddingLeft = getPaddingLeft() + getPaddingRight();
         int paddingTop = getPaddingTop() + getPaddingBottom();
         if (this.mOrientation == 1) {
-            chooseSize2 = chooseSize(i2, rect.height() + paddingTop, getMinimumHeight());
+            iChooseSize2 = chooseSize(i2, rect.height() + paddingTop, getMinimumHeight());
             int[] iArr = this.mCachedBorders;
-            chooseSize = chooseSize(i, iArr[iArr.length - 1] + paddingLeft, getMinimumWidth());
+            iChooseSize = chooseSize(i, iArr[iArr.length - 1] + paddingLeft, getMinimumWidth());
         } else {
-            chooseSize = chooseSize(i, rect.width() + paddingLeft, getMinimumWidth());
+            iChooseSize = chooseSize(i, rect.width() + paddingLeft, getMinimumWidth());
             int[] iArr2 = this.mCachedBorders;
-            chooseSize2 = chooseSize(i2, iArr2[iArr2.length - 1] + paddingTop, getMinimumHeight());
+            iChooseSize2 = chooseSize(i2, iArr2[iArr2.length - 1] + paddingTop, getMinimumHeight());
         }
-        setMeasuredDimension(chooseSize, chooseSize2);
+        setMeasuredDimension(iChooseSize, iChooseSize2);
     }
 
     private void calculateItemBorders(int i) {
@@ -354,12 +355,12 @@ public class GridLayoutManager extends LinearLayoutManager {
         if (!state.isPreLayout()) {
             return this.mSpanSizeLookup.getSpanGroupIndex(i, this.mSpanCount);
         }
-        int convertPreLayoutPositionToPostLayout = recycler.convertPreLayoutPositionToPostLayout(i);
-        if (convertPreLayoutPositionToPostLayout == -1) {
+        int iConvertPreLayoutPositionToPostLayout = recycler.convertPreLayoutPositionToPostLayout(i);
+        if (iConvertPreLayoutPositionToPostLayout == -1) {
             Log.w(TAG, "Cannot find span size for pre layout position. " + i);
             return 0;
         }
-        return this.mSpanSizeLookup.getSpanGroupIndex(convertPreLayoutPositionToPostLayout, this.mSpanCount);
+        return this.mSpanSizeLookup.getSpanGroupIndex(iConvertPreLayoutPositionToPostLayout, this.mSpanCount);
     }
 
     private int getSpanIndex(RecyclerView.Recycler recycler, RecyclerView.State state, int i) {
@@ -370,12 +371,12 @@ public class GridLayoutManager extends LinearLayoutManager {
         if (i2 != -1) {
             return i2;
         }
-        int convertPreLayoutPositionToPostLayout = recycler.convertPreLayoutPositionToPostLayout(i);
-        if (convertPreLayoutPositionToPostLayout == -1) {
+        int iConvertPreLayoutPositionToPostLayout = recycler.convertPreLayoutPositionToPostLayout(i);
+        if (iConvertPreLayoutPositionToPostLayout == -1) {
             Log.w(TAG, "Cannot find span size for pre layout position. It is not cached, not in the adapter. Pos:" + i);
             return 0;
         }
-        return this.mSpanSizeLookup.getCachedSpanIndex(convertPreLayoutPositionToPostLayout, this.mSpanCount);
+        return this.mSpanSizeLookup.getCachedSpanIndex(iConvertPreLayoutPositionToPostLayout, this.mSpanCount);
     }
 
     private int getSpanSize(RecyclerView.Recycler recycler, RecyclerView.State state, int i) {
@@ -386,64 +387,201 @@ public class GridLayoutManager extends LinearLayoutManager {
         if (i2 != -1) {
             return i2;
         }
-        int convertPreLayoutPositionToPostLayout = recycler.convertPreLayoutPositionToPostLayout(i);
-        if (convertPreLayoutPositionToPostLayout == -1) {
+        int iConvertPreLayoutPositionToPostLayout = recycler.convertPreLayoutPositionToPostLayout(i);
+        if (iConvertPreLayoutPositionToPostLayout == -1) {
             Log.w(TAG, "Cannot find span size for pre layout position. It is not cached, not in the adapter. Pos:" + i);
             return 1;
         }
-        return this.mSpanSizeLookup.getSpanSize(convertPreLayoutPositionToPostLayout);
+        return this.mSpanSizeLookup.getSpanSize(iConvertPreLayoutPositionToPostLayout);
     }
 
     @Override // com.android.internal.widget.LinearLayoutManager
     void collectPrefetchPositionsForLayoutState(RecyclerView.State state, LinearLayoutManager.LayoutState layoutState, RecyclerView.LayoutManager.LayoutPrefetchRegistry layoutPrefetchRegistry) {
-        int i = this.mSpanCount;
-        for (int i2 = 0; i2 < this.mSpanCount && layoutState.hasMore(state) && i > 0; i2++) {
-            int i3 = layoutState.mCurrentPosition;
-            layoutPrefetchRegistry.addPosition(i3, Math.max(0, layoutState.mScrollingOffset));
-            i -= this.mSpanSizeLookup.getSpanSize(i3);
+        int spanSize = this.mSpanCount;
+        for (int i = 0; i < this.mSpanCount && layoutState.hasMore(state) && spanSize > 0; i++) {
+            int i2 = layoutState.mCurrentPosition;
+            layoutPrefetchRegistry.addPosition(i2, Math.max(0, layoutState.mScrollingOffset));
+            spanSize -= this.mSpanSizeLookup.getSpanSize(i2);
             layoutState.mCurrentPosition += layoutState.mItemDirection;
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x009e, code lost:
-    
-        r20.mFinished = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x00a0, code lost:
-    
-        return;
-     */
     @Override // com.android.internal.widget.LinearLayoutManager
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    void layoutChunk(com.android.internal.widget.RecyclerView.Recycler r17, com.android.internal.widget.RecyclerView.State r18, com.android.internal.widget.LinearLayoutManager.LayoutState r19, com.android.internal.widget.LinearLayoutManager.LayoutChunkResult r20) {
-        /*
-            Method dump skipped, instructions count: 550
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.GridLayoutManager.layoutChunk(com.android.internal.widget.RecyclerView$Recycler, com.android.internal.widget.RecyclerView$State, com.android.internal.widget.LinearLayoutManager$LayoutState, com.android.internal.widget.LinearLayoutManager$LayoutChunkResult):void");
+    void layoutChunk(RecyclerView.Recycler recycler, RecyclerView.State state, LinearLayoutManager.LayoutState layoutState, LinearLayoutManager.LayoutChunkResult layoutChunkResult) {
+        int decoratedMeasurementInOther;
+        int paddingLeft;
+        int decoratedMeasurementInOther2;
+        int paddingTop;
+        int childMeasureSpec;
+        int childMeasureSpec2;
+        boolean z;
+        View next;
+        int modeInOther = this.mOrientationHelper.getModeInOther();
+        boolean z2 = modeInOther != 1073741824;
+        int i = getChildCount() > 0 ? this.mCachedBorders[this.mSpanCount] : 0;
+        if (z2) {
+            updateMeasurements();
+        }
+        boolean z3 = layoutState.mItemDirection == 1;
+        int spanIndex = this.mSpanCount;
+        if (!z3) {
+            spanIndex = getSpanIndex(recycler, state, layoutState.mCurrentPosition) + getSpanSize(recycler, state, layoutState.mCurrentPosition);
+        }
+        int i2 = 0;
+        int i3 = 0;
+        while (i2 < this.mSpanCount && layoutState.hasMore(state) && spanIndex > 0) {
+            int i4 = layoutState.mCurrentPosition;
+            int spanSize = getSpanSize(recycler, state, i4);
+            if (spanSize > this.mSpanCount) {
+                throw new IllegalArgumentException("Item at position " + i4 + " requires " + spanSize + " spans but GridLayoutManager has only " + this.mSpanCount + " spans.");
+            }
+            spanIndex -= spanSize;
+            if (spanIndex < 0 || (next = layoutState.next(recycler)) == null) {
+                break;
+            }
+            i3 += spanSize;
+            this.mSet[i2] = next;
+            i2++;
+        }
+        if (i2 == 0) {
+            layoutChunkResult.mFinished = true;
+            return;
+        }
+        int i5 = i2;
+        assignSpans(recycler, state, i5, i3, z3);
+        float f = 0.0f;
+        int i6 = 0;
+        for (int i7 = 0; i7 < i5; i7++) {
+            View view = this.mSet[i7];
+            if (layoutState.mScrapList != null) {
+                z = false;
+                if (z3) {
+                    addDisappearingView(view);
+                } else {
+                    addDisappearingView(view, 0);
+                }
+            } else if (z3) {
+                addView(view);
+                z = false;
+            } else {
+                z = false;
+                addView(view, 0);
+            }
+            calculateItemDecorationsForChild(view, this.mDecorInsets);
+            measureChild(view, modeInOther, z);
+            int decoratedMeasurement = this.mOrientationHelper.getDecoratedMeasurement(view);
+            if (decoratedMeasurement > i6) {
+                i6 = decoratedMeasurement;
+            }
+            float decoratedMeasurementInOther3 = (this.mOrientationHelper.getDecoratedMeasurementInOther(view) * 1.0f) / ((LayoutParams) view.getLayoutParams()).mSpanSize;
+            if (decoratedMeasurementInOther3 > f) {
+                f = decoratedMeasurementInOther3;
+            }
+        }
+        if (z2) {
+            guessMeasurement(f, i);
+            i6 = 0;
+            for (int i8 = 0; i8 < i5; i8++) {
+                View view2 = this.mSet[i8];
+                measureChild(view2, 1073741824, true);
+                int decoratedMeasurement2 = this.mOrientationHelper.getDecoratedMeasurement(view2);
+                if (decoratedMeasurement2 > i6) {
+                    i6 = decoratedMeasurement2;
+                }
+            }
+        }
+        for (int i9 = 0; i9 < i5; i9++) {
+            View view3 = this.mSet[i9];
+            if (this.mOrientationHelper.getDecoratedMeasurement(view3) != i6) {
+                LayoutParams layoutParams = (LayoutParams) view3.getLayoutParams();
+                Rect rect = layoutParams.mDecorInsets;
+                int i10 = rect.top + rect.bottom + layoutParams.topMargin + layoutParams.bottomMargin;
+                int i11 = rect.left + rect.right + layoutParams.leftMargin + layoutParams.rightMargin;
+                int spaceForSpanRange = getSpaceForSpanRange(layoutParams.mSpanIndex, layoutParams.mSpanSize);
+                if (this.mOrientation == 1) {
+                    childMeasureSpec2 = getChildMeasureSpec(spaceForSpanRange, 1073741824, i11, layoutParams.width, false);
+                    childMeasureSpec = View.MeasureSpec.makeMeasureSpec(i6 - i10, 1073741824);
+                } else {
+                    int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i6 - i11, 1073741824);
+                    childMeasureSpec = getChildMeasureSpec(spaceForSpanRange, 1073741824, i10, layoutParams.height, false);
+                    childMeasureSpec2 = iMakeMeasureSpec;
+                }
+                measureChildWithDecorationsAndMargin(view3, childMeasureSpec2, childMeasureSpec, true);
+            }
+        }
+        layoutChunkResult.mConsumed = i6;
+        if (this.mOrientation == 1) {
+            if (layoutState.mLayoutDirection == -1) {
+                int i12 = layoutState.mOffset;
+                paddingTop = i12 - i6;
+                decoratedMeasurementInOther2 = i12;
+            } else {
+                paddingTop = layoutState.mOffset;
+                decoratedMeasurementInOther2 = paddingTop + i6;
+            }
+            paddingLeft = 0;
+            decoratedMeasurementInOther = 0;
+        } else {
+            if (layoutState.mLayoutDirection == -1) {
+                int i13 = layoutState.mOffset;
+                paddingLeft = i13 - i6;
+                decoratedMeasurementInOther = i13;
+            } else {
+                int i14 = layoutState.mOffset;
+                decoratedMeasurementInOther = i14 + i6;
+                paddingLeft = i14;
+            }
+            decoratedMeasurementInOther2 = 0;
+            paddingTop = 0;
+        }
+        for (int i15 = 0; i15 < i5; i15++) {
+            View view4 = this.mSet[i15];
+            LayoutParams layoutParams2 = (LayoutParams) view4.getLayoutParams();
+            if (this.mOrientation == 1) {
+                if (isLayoutRTL()) {
+                    decoratedMeasurementInOther = this.mCachedBorders[this.mSpanCount - layoutParams2.mSpanIndex] + getPaddingLeft();
+                    paddingLeft = decoratedMeasurementInOther - this.mOrientationHelper.getDecoratedMeasurementInOther(view4);
+                } else {
+                    paddingLeft = getPaddingLeft() + this.mCachedBorders[layoutParams2.mSpanIndex];
+                    decoratedMeasurementInOther = this.mOrientationHelper.getDecoratedMeasurementInOther(view4) + paddingLeft;
+                }
+            } else {
+                paddingTop = getPaddingTop() + this.mCachedBorders[layoutParams2.mSpanIndex];
+                decoratedMeasurementInOther2 = this.mOrientationHelper.getDecoratedMeasurementInOther(view4) + paddingTop;
+            }
+            int i16 = decoratedMeasurementInOther2;
+            int i17 = decoratedMeasurementInOther;
+            int i18 = paddingTop;
+            layoutDecoratedWithMargins(view4, paddingLeft, i18, i17, i16);
+            paddingTop = i18;
+            decoratedMeasurementInOther = i17;
+            decoratedMeasurementInOther2 = i16;
+            if (layoutParams2.isItemRemoved() || layoutParams2.isItemChanged()) {
+                layoutChunkResult.mIgnoreConsumed = true;
+            }
+            layoutChunkResult.mFocusable = view4.hasFocusable() | layoutChunkResult.mFocusable;
+        }
+        Arrays.fill(this.mSet, (Object) null);
     }
 
     private void measureChild(View view, int i, boolean z) {
-        int i2;
-        int i3;
+        int childMeasureSpec;
+        int childMeasureSpec2;
         LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
         Rect rect = layoutParams.mDecorInsets;
-        int i4 = rect.top + rect.bottom + layoutParams.topMargin + layoutParams.bottomMargin;
-        int i5 = rect.left + rect.right + layoutParams.leftMargin + layoutParams.rightMargin;
+        int i2 = rect.top + rect.bottom + layoutParams.topMargin + layoutParams.bottomMargin;
+        int i3 = rect.left + rect.right + layoutParams.leftMargin + layoutParams.rightMargin;
         int spaceForSpanRange = getSpaceForSpanRange(layoutParams.mSpanIndex, layoutParams.mSpanSize);
         if (this.mOrientation == 1) {
-            i3 = getChildMeasureSpec(spaceForSpanRange, i, i5, layoutParams.width, false);
-            i2 = getChildMeasureSpec(this.mOrientationHelper.getTotalSpace(), getHeightMode(), i4, layoutParams.height, true);
+            childMeasureSpec2 = getChildMeasureSpec(spaceForSpanRange, i, i3, layoutParams.width, false);
+            childMeasureSpec = getChildMeasureSpec(this.mOrientationHelper.getTotalSpace(), getHeightMode(), i2, layoutParams.height, true);
         } else {
-            int childMeasureSpec = getChildMeasureSpec(spaceForSpanRange, i, i4, layoutParams.height, false);
-            int childMeasureSpec2 = getChildMeasureSpec(this.mOrientationHelper.getTotalSpace(), getWidthMode(), i5, layoutParams.width, true);
-            i2 = childMeasureSpec;
-            i3 = childMeasureSpec2;
+            int childMeasureSpec3 = getChildMeasureSpec(spaceForSpanRange, i, i2, layoutParams.height, false);
+            int childMeasureSpec4 = getChildMeasureSpec(this.mOrientationHelper.getTotalSpace(), getWidthMode(), i3, layoutParams.width, true);
+            childMeasureSpec = childMeasureSpec3;
+            childMeasureSpec2 = childMeasureSpec4;
         }
-        measureChildWithDecorationsAndMargin(view, i3, i2, z);
+        measureChildWithDecorationsAndMargin(view, childMeasureSpec2, childMeasureSpec, z);
     }
 
     private void guessMeasurement(float f, int i) {
@@ -451,14 +589,14 @@ public class GridLayoutManager extends LinearLayoutManager {
     }
 
     private void measureChildWithDecorationsAndMargin(View view, int i, int i2, boolean z) {
-        boolean shouldMeasureChild;
+        boolean zShouldMeasureChild;
         RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
         if (z) {
-            shouldMeasureChild = shouldReMeasureChild(view, i, i2, layoutParams);
+            zShouldMeasureChild = shouldReMeasureChild(view, i, i2, layoutParams);
         } else {
-            shouldMeasureChild = shouldMeasureChild(view, i, i2, layoutParams);
+            zShouldMeasureChild = shouldMeasureChild(view, i, i2, layoutParams);
         }
-        if (shouldMeasureChild) {
+        if (zShouldMeasureChild) {
             view.measure(i, i2);
         }
     }
@@ -536,58 +674,45 @@ public class GridLayoutManager extends LinearLayoutManager {
         }
 
         /* JADX WARN: Removed duplicated region for block: B:14:0x002a  */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0039  */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:16:0x0031 -> B:12:0x0036). Please report as a decompilation issue!!! */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0033 -> B:12:0x0036). Please report as a decompilation issue!!! */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:18:0x0035 -> B:12:0x0036). Please report as a decompilation issue!!! */
+        /* JADX WARN: Removed duplicated region for block: B:20:0x0039  */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:16:0x0031 -> B:19:0x0036). Please report as a decompilation issue!!! */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0033 -> B:19:0x0036). Please report as a decompilation issue!!! */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:18:0x0035 -> B:19:0x0036). Please report as a decompilation issue!!! */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public int getSpanIndex(int r6, int r7) {
-            /*
-                r5 = this;
-                int r0 = r5.getSpanSize(r6)
-                r1 = 0
-                if (r0 != r7) goto L8
-                return r1
-            L8:
-                boolean r2 = r5.mCacheSpanIndices
-                if (r2 == 0) goto L26
-                android.util.SparseIntArray r2 = r5.mSpanIndexCache
-                int r2 = r2.size()
-                if (r2 <= 0) goto L26
-                int r2 = r5.findReferenceIndexFromCache(r6)
-                if (r2 < 0) goto L26
-                android.util.SparseIntArray r3 = r5.mSpanIndexCache
-                int r3 = r3.get(r2)
-                int r4 = r5.getSpanSize(r2)
-                int r3 = r3 + r4
-                goto L36
-            L26:
-                r2 = r1
-                r3 = r2
-            L28:
-                if (r2 >= r6) goto L39
-                int r4 = r5.getSpanSize(r2)
-                int r3 = r3 + r4
-                if (r3 != r7) goto L33
-                r3 = r1
-                goto L36
-            L33:
-                if (r3 <= r7) goto L36
-                r3 = r4
-            L36:
-                int r2 = r2 + 1
-                goto L28
-            L39:
-                int r0 = r0 + r3
-                if (r0 > r7) goto L3d
-                return r3
-            L3d:
-                return r1
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.GridLayoutManager.SpanSizeLookup.getSpanIndex(int, int):int");
+        public int getSpanIndex(int i, int i2) {
+            int iFindReferenceIndexFromCache;
+            int spanSize;
+            int spanSize2 = getSpanSize(i);
+            if (spanSize2 == i2) {
+                return 0;
+            }
+            if (!this.mCacheSpanIndices || this.mSpanIndexCache.size() <= 0 || (iFindReferenceIndexFromCache = findReferenceIndexFromCache(i)) < 0) {
+                iFindReferenceIndexFromCache = 0;
+                spanSize = 0;
+                if (iFindReferenceIndexFromCache >= i) {
+                    int spanSize3 = getSpanSize(iFindReferenceIndexFromCache);
+                    spanSize += spanSize3;
+                    if (spanSize == i2) {
+                        spanSize = 0;
+                    } else if (spanSize > i2) {
+                        spanSize = spanSize3;
+                    }
+                    iFindReferenceIndexFromCache++;
+                    if (iFindReferenceIndexFromCache >= i) {
+                        if (spanSize2 + spanSize <= i2) {
+                            return spanSize;
+                        }
+                        return 0;
+                    }
+                }
+            } else {
+                spanSize = this.mSpanIndexCache.get(iFindReferenceIndexFromCache) + getSpanSize(iFindReferenceIndexFromCache);
+                iFindReferenceIndexFromCache++;
+                if (iFindReferenceIndexFromCache >= i) {
+                }
+            }
         }
 
         int findReferenceIndexFromCache(int i) {

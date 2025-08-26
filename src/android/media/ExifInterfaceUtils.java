@@ -20,25 +20,25 @@ class ExifInterfaceUtils {
         byte[] bArr = new byte[8192];
         int i = 0;
         while (true) {
-            int read = inputStream.read(bArr);
-            if (read == -1) {
+            int i2 = inputStream.read(bArr);
+            if (i2 == -1) {
                 return i;
             }
-            i += read;
-            outputStream.write(bArr, 0, read);
+            i += i2;
+            outputStream.write(bArr, 0, i2);
         }
     }
 
     public static void copy(InputStream inputStream, OutputStream outputStream, int i) throws IOException {
         byte[] bArr = new byte[8192];
         while (i > 0) {
-            int min = Math.min(i, 8192);
-            int read = inputStream.read(bArr, 0, min);
-            if (read != min) {
+            int iMin = Math.min(i, 8192);
+            int i2 = inputStream.read(bArr, 0, iMin);
+            if (i2 != iMin) {
                 throw new IOException("Failed to copy the given amount of bytes from the inputstream to the output stream.");
             }
-            i -= read;
-            outputStream.write(bArr, 0, read);
+            i -= i2;
+            outputStream.write(bArr, 0, i2);
         }
     }
 
@@ -77,7 +77,7 @@ class ExifInterfaceUtils {
         return true;
     }
 
-    public static void closeQuietly(Closeable closeable) {
+    public static void closeQuietly(Closeable closeable) throws IOException {
         if (closeable != null) {
             try {
                 closeable.close();
@@ -88,7 +88,7 @@ class ExifInterfaceUtils {
         }
     }
 
-    public static void closeFileDescriptor(FileDescriptor fileDescriptor) {
+    public static void closeFileDescriptor(FileDescriptor fileDescriptor) throws ErrnoException {
         try {
             Os.close(fileDescriptor);
         } catch (ErrnoException e) {

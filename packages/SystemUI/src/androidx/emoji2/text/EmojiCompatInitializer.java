@@ -20,11 +20,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EmojiCompatInitializer implements Initializer {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BackgroundDefaultConfig extends EmojiCompat.Config {
         public BackgroundDefaultConfig(Context context) {
             super(new BackgroundDefaultLoader(context));
@@ -32,7 +30,6 @@ public class EmojiCompatInitializer implements Initializer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BackgroundDefaultLoader implements EmojiCompat.MetadataRepoLoader {
         public final Context mContext;
 
@@ -47,20 +44,20 @@ public class EmojiCompatInitializer implements Initializer {
             threadPoolExecutor.execute(new Runnable() { // from class: androidx.emoji2.text.EmojiCompatInitializer$BackgroundDefaultLoader$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    EmojiCompatInitializer.BackgroundDefaultLoader backgroundDefaultLoader = EmojiCompatInitializer.BackgroundDefaultLoader.this;
+                    EmojiCompatInitializer.BackgroundDefaultLoader backgroundDefaultLoader = this.f$0;
                     EmojiCompat.MetadataRepoLoaderCallback metadataRepoLoaderCallback2 = metadataRepoLoaderCallback;
                     ThreadPoolExecutor threadPoolExecutor2 = threadPoolExecutor;
                     backgroundDefaultLoader.getClass();
                     try {
-                        FontRequestEmojiCompatConfig create = DefaultEmojiCompatConfig.create(backgroundDefaultLoader.mContext);
-                        if (create == null) {
+                        FontRequestEmojiCompatConfig fontRequestEmojiCompatConfigCreate = DefaultEmojiCompatConfig.create(backgroundDefaultLoader.mContext);
+                        if (fontRequestEmojiCompatConfigCreate == null) {
                             throw new RuntimeException("EmojiCompat font provider not available on this device.");
                         }
-                        FontRequestEmojiCompatConfig.FontRequestMetadataLoader fontRequestMetadataLoader = (FontRequestEmojiCompatConfig.FontRequestMetadataLoader) create.mMetadataLoader;
+                        FontRequestEmojiCompatConfig.FontRequestMetadataLoader fontRequestMetadataLoader = (FontRequestEmojiCompatConfig.FontRequestMetadataLoader) fontRequestEmojiCompatConfigCreate.mMetadataLoader;
                         synchronized (fontRequestMetadataLoader.mLock) {
                             fontRequestMetadataLoader.mExecutor = threadPoolExecutor2;
                         }
-                        create.mMetadataLoader.load(new EmojiCompat.MetadataRepoLoaderCallback(backgroundDefaultLoader, metadataRepoLoaderCallback2, threadPoolExecutor2) { // from class: androidx.emoji2.text.EmojiCompatInitializer.BackgroundDefaultLoader.1
+                        fontRequestEmojiCompatConfigCreate.mMetadataLoader.load(new EmojiCompat.MetadataRepoLoaderCallback(backgroundDefaultLoader, metadataRepoLoaderCallback2, threadPoolExecutor2) { // from class: androidx.emoji2.text.EmojiCompatInitializer.BackgroundDefaultLoader.1
                             public final /* synthetic */ ThreadPoolExecutor val$executor;
                             public final /* synthetic */ EmojiCompat.MetadataRepoLoaderCallback val$loaderCallback;
 
@@ -96,7 +93,6 @@ public class EmojiCompatInitializer implements Initializer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LoadEmojiCompatRunnable implements Runnable {
         @Override // java.lang.Runnable
         public final void run() {
@@ -113,21 +109,21 @@ public class EmojiCompatInitializer implements Initializer {
 
     @Override // androidx.startup.Initializer
     public final Object create(Context context) {
-        Object obj;
+        Object objDoInitialize;
         EmojiCompat.init(new BackgroundDefaultConfig(context));
         AppInitializer appInitializer = AppInitializer.getInstance(context);
         appInitializer.getClass();
         synchronized (AppInitializer.sLock) {
             try {
-                obj = ((HashMap) appInitializer.mInitialized).get(ProcessLifecycleInitializer.class);
-                if (obj == null) {
-                    obj = appInitializer.doInitialize(ProcessLifecycleInitializer.class, new HashSet());
+                objDoInitialize = ((HashMap) appInitializer.mInitialized).get(ProcessLifecycleInitializer.class);
+                if (objDoInitialize == null) {
+                    objDoInitialize = appInitializer.doInitialize(ProcessLifecycleInitializer.class, new HashSet());
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
-        final Lifecycle lifecycle = ((LifecycleOwner) obj).getLifecycle();
+        final Lifecycle lifecycle = ((LifecycleOwner) objDoInitialize).getLifecycle();
         lifecycle.addObserver(new DefaultLifecycleObserver() { // from class: androidx.emoji2.text.EmojiCompatInitializer.1
             @Override // androidx.lifecycle.DefaultLifecycleObserver
             public final void onResume$1() {

@@ -7,7 +7,6 @@ import com.android.systemui.util.time.SystemClock;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FoldStateLoggingProviderImpl implements FoldStateLoggingProvider, FoldStateProvider.FoldUpdatesListener {
     public Long actionStartMillis;
@@ -27,11 +26,11 @@ public final class FoldStateLoggingProviderImpl implements FoldStateLoggingProvi
     }
 
     public final void dispatchState(int i) {
-        long elapsedRealtime = this.clock.elapsedRealtime();
+        long jElapsedRealtime = this.clock.elapsedRealtime();
         Integer num = this.lastState;
         Long l = this.actionStartMillis;
         if (num != null && num.intValue() != i && l != null) {
-            FoldStateChange foldStateChange = new FoldStateChange(num.intValue(), i, elapsedRealtime - l.longValue());
+            FoldStateChange foldStateChange = new FoldStateChange(num.intValue(), i, jElapsedRealtime - l.longValue());
             ArrayList arrayList = (ArrayList) this.outputListeners;
             int size = arrayList.size();
             int i2 = 0;
@@ -48,14 +47,14 @@ public final class FoldStateLoggingProviderImpl implements FoldStateLoggingProvi
 
     @Override // com.android.systemui.unfold.updates.FoldStateProvider.FoldUpdatesListener
     public final void onFoldUpdate(int i) {
-        long elapsedRealtime = this.clock.elapsedRealtime();
+        long jElapsedRealtime = this.clock.elapsedRealtime();
         if (i == 0) {
             this.lastState = 2;
-            this.actionStartMillis = Long.valueOf(elapsedRealtime);
+            this.actionStartMillis = Long.valueOf(jElapsedRealtime);
             return;
         }
         if (i == 1) {
-            this.actionStartMillis = Long.valueOf(elapsedRealtime);
+            this.actionStartMillis = Long.valueOf(jElapsedRealtime);
             return;
         }
         if (i == 2) {

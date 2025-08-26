@@ -95,9 +95,9 @@ public class JDKDSAPublicKey implements DSAPublicKey {
 
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("DSA Public Key");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(lineSeparator);
-        stringBuffer.append("            y: ").append(getY().toString(16)).append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(strLineSeparator);
+        stringBuffer.append("            y: ").append(getY().toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 

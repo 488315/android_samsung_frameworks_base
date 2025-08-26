@@ -2,7 +2,6 @@ package androidx.constraintlayout.core.widgets.analyzer;
 
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RunGroup {
     public final WidgetRun mFirstRun;
@@ -19,22 +18,22 @@ public class RunGroup {
             return j;
         }
         int size = ((ArrayList) dependencyNode.mDependencies).size();
-        long j2 = j;
+        long jMin = j;
         for (int i = 0; i < size; i++) {
             Dependency dependency = (Dependency) ((ArrayList) dependencyNode.mDependencies).get(i);
             if (dependency instanceof DependencyNode) {
                 DependencyNode dependencyNode2 = (DependencyNode) dependency;
                 if (dependencyNode2.mRun != widgetRun) {
-                    j2 = Math.min(j2, traverseEnd(dependencyNode2, dependencyNode2.mMargin + j));
+                    jMin = Math.min(jMin, traverseEnd(dependencyNode2, dependencyNode2.mMargin + j));
                 }
             }
         }
         if (dependencyNode != widgetRun.end) {
-            return j2;
+            return jMin;
         }
         long wrapDimension = widgetRun.getWrapDimension();
-        long j3 = j - wrapDimension;
-        return Math.min(Math.min(j2, traverseEnd(widgetRun.start, j3)), j3 - r8.mMargin);
+        long j2 = j - wrapDimension;
+        return Math.min(Math.min(jMin, traverseEnd(widgetRun.start, j2)), j2 - r8.mMargin);
     }
 
     public static long traverseStart(DependencyNode dependencyNode, long j) {
@@ -43,21 +42,21 @@ public class RunGroup {
             return j;
         }
         int size = ((ArrayList) dependencyNode.mDependencies).size();
-        long j2 = j;
+        long jMax = j;
         for (int i = 0; i < size; i++) {
             Dependency dependency = (Dependency) ((ArrayList) dependencyNode.mDependencies).get(i);
             if (dependency instanceof DependencyNode) {
                 DependencyNode dependencyNode2 = (DependencyNode) dependency;
                 if (dependencyNode2.mRun != widgetRun) {
-                    j2 = Math.max(j2, traverseStart(dependencyNode2, dependencyNode2.mMargin + j));
+                    jMax = Math.max(jMax, traverseStart(dependencyNode2, dependencyNode2.mMargin + j));
                 }
             }
         }
         if (dependencyNode != widgetRun.start) {
-            return j2;
+            return jMax;
         }
         long wrapDimension = widgetRun.getWrapDimension();
-        long j3 = j + wrapDimension;
-        return Math.max(Math.max(j2, traverseStart(widgetRun.end, j3)), j3 - r8.mMargin);
+        long j2 = j + wrapDimension;
+        return Math.max(Math.max(jMax, traverseStart(widgetRun.end, j2)), j2 - r8.mMargin);
     }
 }

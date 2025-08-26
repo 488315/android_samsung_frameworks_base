@@ -10,7 +10,6 @@ import com.samsung.android.knox.container.RCPPolicy$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import com.samsung.android.knox.profile.IProfilePolicy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ProfilePolicy {
     public static final String KNOX_PROFILE_POLICY_UPDATE = "com.samsung.android.knox.profilepolicy.intent.action.update";

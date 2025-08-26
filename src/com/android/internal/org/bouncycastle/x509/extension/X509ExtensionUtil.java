@@ -32,7 +32,7 @@ public class X509ExtensionUtil {
         return getAlternativeNames(x509Certificate.getExtensionValue(Extension.subjectAlternativeName.getId()));
     }
 
-    private static Collection getAlternativeNames(byte[] bArr) throws CertificateParsingException {
+    private static Collection getAlternativeNames(byte[] bArr) throws CertificateParsingException, IOException {
         if (bArr == null) {
             return Collections.EMPTY_LIST;
         }

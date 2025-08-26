@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PreferencesProto$StringSet extends GeneratedMessageLite implements MessageLiteOrBuilder {
     private static final PreferencesProto$StringSet DEFAULT_INSTANCE;
@@ -24,7 +23,6 @@ public final class PreferencesProto$StringSet extends GeneratedMessageLite imple
     public static final int STRINGS_FIELD_NUMBER = 1;
     private Internal.ProtobufList strings_ = ProtobufArrayList.EMPTY_LIST;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends GeneratedMessageLite.Builder {
         public /* synthetic */ Builder(PreferencesProto$1 preferencesProto$1) {
             this();
@@ -107,7 +105,7 @@ public final class PreferencesProto$StringSet extends GeneratedMessageLite imple
 
     @Override // androidx.datastore.preferences.protobuf.GeneratedMessageLite
     public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-        Parser parser;
+        Parser defaultInstanceBasedParser;
         int i = PreferencesProto$1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()];
         PreferencesProto$1 preferencesProto$1 = null;
         switch (i) {
@@ -120,22 +118,22 @@ public final class PreferencesProto$StringSet extends GeneratedMessageLite imple
             case 4:
                 return DEFAULT_INSTANCE;
             case 5:
-                Parser parser2 = PARSER;
-                if (parser2 != null) {
-                    return parser2;
+                Parser parser = PARSER;
+                if (parser != null) {
+                    return parser;
                 }
                 synchronized (PreferencesProto$StringSet.class) {
                     try {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                return parser;
+                return defaultInstanceBasedParser;
             case 6:
                 return (byte) 1;
             case 7:

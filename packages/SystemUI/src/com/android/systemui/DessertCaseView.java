@@ -31,7 +31,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DessertCaseView extends FrameLayout {
     public static final float[] ALPHA_MASK;
@@ -55,7 +54,6 @@ public class DessertCaseView extends FrameLayout {
     public int mWidth;
     public final HashSet tmpSet;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RescalingContainer extends FrameLayout {
         public DessertCaseView mView;
 
@@ -95,16 +93,16 @@ public class DessertCaseView extends FrameLayout {
     }
 
     public static Point[] getOccupied(View view) {
-        int intValue = ((Integer) view.getTag(33554434)).intValue();
+        int iIntValue = ((Integer) view.getTag(33554434)).intValue();
         Point point = (Point) view.getTag(33554433);
-        if (point == null || intValue == 0) {
+        if (point == null || iIntValue == 0) {
             return new Point[0];
         }
-        Point[] pointArr = new Point[intValue * intValue];
+        Point[] pointArr = new Point[iIntValue * iIntValue];
         int i = 0;
-        for (int i2 = 0; i2 < intValue; i2++) {
+        for (int i2 = 0; i2 < iIntValue; i2++) {
             int i3 = 0;
-            while (i3 < intValue) {
+            while (i3 < iIntValue) {
                 pointArr[i] = new Point(point.x + i2, point.y + i3);
                 i3++;
                 i++;
@@ -145,8 +143,8 @@ public class DessertCaseView extends FrameLayout {
                     });
                     this.hsv[0] = irand(12) * 30.0f;
                     imageView.setBackgroundColor(Color.HSVToColor(this.hsv));
-                    float random = (float) Math.random();
-                    Drawable drawable = random < 5.0E-4f ? (Drawable) this.mDrawables.get(XXRARE_PASTRIES[(int) (Math.random() * 3)]) : random < 0.005f ? (Drawable) this.mDrawables.get(XRARE_PASTRIES[(int) (Math.random() * 4)]) : random < 0.5f ? (Drawable) this.mDrawables.get(RARE_PASTRIES[(int) (Math.random() * 8)]) : random < 0.7f ? (Drawable) this.mDrawables.get(PASTRIES[(int) (Math.random() * 2)]) : null;
+                    float fRandom = (float) Math.random();
+                    Drawable drawable = fRandom < 5.0E-4f ? (Drawable) this.mDrawables.get(XXRARE_PASTRIES[(int) (Math.random() * 3)]) : fRandom < 0.005f ? (Drawable) this.mDrawables.get(XRARE_PASTRIES[(int) (Math.random() * 4)]) : fRandom < 0.5f ? (Drawable) this.mDrawables.get(RARE_PASTRIES[(int) (Math.random() * 8)]) : fRandom < 0.7f ? (Drawable) this.mDrawables.get(PASTRIES[(int) (Math.random() * 2)]) : null;
                     if (drawable != null) {
                         imageView.getOverlay().add(drawable);
                     }
@@ -156,12 +154,12 @@ public class DessertCaseView extends FrameLayout {
                     addView(imageView, layoutParams);
                     place(imageView, point, false);
                     if (i > 0) {
-                        float intValue = ((Integer) imageView.getTag(33554434)).intValue();
-                        float f = 0.5f * intValue;
+                        float fIntValue = ((Integer) imageView.getTag(33554434)).intValue();
+                        float f = 0.5f * fIntValue;
                         imageView.setScaleX(f);
                         imageView.setScaleY(f);
                         imageView.setAlpha(0.0f);
-                        imageView.animate().withLayer().scaleX(intValue).scaleY(intValue).alpha(1.0f).setDuration(i);
+                        imageView.animate().withLayer().scaleX(fIntValue).scaleY(fIntValue).alpha(1.0f).setDuration(i);
                     }
                 }
             }
@@ -212,6 +210,10 @@ public class DessertCaseView extends FrameLayout {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:32:0x007c  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final synchronized void place(final View view, Point point, boolean z) {
         int i;
         char c;
@@ -220,28 +222,21 @@ public class DessertCaseView extends FrameLayout {
             try {
                 int i3 = point.x;
                 int i4 = point.y;
-                float random = (float) Math.random();
+                float fRandom = (float) Math.random();
                 if (view.getTag(33554433) != null) {
                     for (Point point2 : getOccupied(view)) {
                         ((HashSet) this.mFreeList).add(point2);
                         this.mCells[(point2.y * this.mColumns) + point2.x] = null;
                     }
                 }
-                if (random < 0.01f) {
-                    if (i3 < this.mColumns - 3 && i4 < this.mRows - 3) {
-                        i = 4;
-                    }
-                    i = 1;
-                } else if (random < 0.1f) {
+                if (fRandom < 0.01f) {
+                    i = (i3 >= this.mColumns - 3 || i4 >= this.mRows - 3) ? 1 : 4;
+                } else if (fRandom < 0.1f) {
                     if (i3 < this.mColumns - 2 && i4 < this.mRows - 2) {
                         i = 3;
                     }
-                    i = 1;
-                } else {
-                    if (random < 0.33f && i3 != this.mColumns - 1 && i4 != this.mRows - 1) {
-                        i = 2;
-                    }
-                    i = 1;
+                } else if (fRandom < 0.33f && i3 != this.mColumns - 1 && i4 != this.mRows - 1) {
+                    i = 2;
                 }
                 view.setTag(33554433, point);
                 view.setTag(33554434, Integer.valueOf(i));
@@ -296,7 +291,7 @@ public class DessertCaseView extends FrameLayout {
                     this.mCells[(point5.y * this.mColumns) + point5.x] = view;
                     ((HashSet) this.mFreeList).remove(point5);
                 }
-                float irand = irand(4) * 90.0f;
+                float fIrand = irand(4) * 90.0f;
                 if (z) {
                     view.bringToFront();
                     AnimatorSet animatorSet = new AnimatorSet();
@@ -315,7 +310,7 @@ public class DessertCaseView extends FrameLayout {
                     animatorSet.setDuration(500L);
                     AnimatorSet animatorSet2 = new AnimatorSet();
                     Property property3 = View.ROTATION;
-                    float[] fArr3 = {irand};
+                    float[] fArr3 = {fIrand};
                     Property property4 = View.X;
                     int i7 = this.mCellSize;
                     int i8 = i - 1;
@@ -348,7 +343,7 @@ public class DessertCaseView extends FrameLayout {
                     float f2 = i;
                     view.setScaleX(f2);
                     view.setScaleY(f2);
-                    view.setRotation(irand);
+                    view.setRotation(fIrand);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -370,7 +365,7 @@ public class DessertCaseView extends FrameLayout {
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.DessertCaseView$1] */
-    public DessertCaseView(Context context, AttributeSet attributeSet, int i) {
+    public DessertCaseView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         boolean z = true;
         this.mDrawables = new SparseArray(NUM_PASTRIES);
@@ -403,22 +398,22 @@ public class DessertCaseView extends FrameLayout {
         }
         options.inMutable = true;
         int[][] iArr = {PASTRIES, RARE_PASTRIES, XRARE_PASTRIES, XXRARE_PASTRIES};
-        Bitmap bitmap = null;
+        Bitmap bitmapDecodeResource = null;
         for (int i3 = 0; i3 < 4; i3++) {
             int[] iArr2 = iArr[i3];
             int length = iArr2.length;
             int i4 = i2;
             while (i4 < length) {
                 int i5 = iArr2[i4];
-                options.inBitmap = bitmap;
-                bitmap = BitmapFactory.decodeResource(resources, i5, options);
+                options.inBitmap = bitmapDecodeResource;
+                bitmapDecodeResource = BitmapFactory.decodeResource(resources, i5, options);
                 boolean z2 = z;
-                Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ALPHA_8);
-                Canvas canvas = new Canvas(createBitmap);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeResource.getWidth(), bitmapDecodeResource.getHeight(), Bitmap.Config.ALPHA_8);
+                Canvas canvas = new Canvas(bitmapCreateBitmap);
                 Paint paint = new Paint();
                 paint.setColorFilter(new ColorMatrixColorFilter(MASK));
-                canvas.drawBitmap(bitmap, 0.0f, 0.0f, paint);
-                BitmapDrawable bitmapDrawable = new BitmapDrawable(resources, createBitmap);
+                canvas.drawBitmap(bitmapDecodeResource, 0.0f, 0.0f, paint);
+                BitmapDrawable bitmapDrawable = new BitmapDrawable(resources, bitmapCreateBitmap);
                 bitmapDrawable.setColorFilter(new ColorMatrixColorFilter(ALPHA_MASK));
                 int i6 = this.mCellSize;
                 i2 = 0;

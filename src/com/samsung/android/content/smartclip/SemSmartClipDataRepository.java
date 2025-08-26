@@ -137,14 +137,14 @@ public class SemSmartClipDataRepository implements Parcelable {
     public boolean determineContentType() {
         String str;
         boolean z;
-        SmartClipDataElementImpl smartClipDataElementImpl = this.mRootElement;
+        SmartClipDataElementImpl smartClipDataElementImplTraverseNextElement = this.mRootElement;
         boolean z2 = false;
         boolean z3 = false;
         boolean z4 = false;
         boolean z5 = false;
         boolean z6 = false;
-        while (smartClipDataElementImpl != null) {
-            View view = smartClipDataElementImpl.getView();
+        while (smartClipDataElementImplTraverseNextElement != null) {
+            View view = smartClipDataElementImplTraverseNextElement.getView();
             if (view != null) {
                 Iterator<SemSmartClipMetaTag> it = getMetaTag("url").iterator();
                 while (true) {
@@ -181,7 +181,7 @@ public class SemSmartClipDataRepository implements Parcelable {
                     z6 = true;
                 }
             }
-            smartClipDataElementImpl = smartClipDataElementImpl.traverseNextElement(this.mRootElement);
+            smartClipDataElementImplTraverseNextElement = smartClipDataElementImplTraverseNextElement.traverseNextElement(this.mRootElement);
         }
         if (z2) {
             str = CONTENT_TYPE_AUDIO;
@@ -234,12 +234,12 @@ public class SemSmartClipDataRepository implements Parcelable {
         if (rect != null) {
             return rect;
         }
-        SmartClipDataElementImpl smartClipDataElementImpl = this.mRootElement;
+        SmartClipDataElementImpl smartClipDataElementImplTraverseNextElement = this.mRootElement;
         Rect rect2 = new Rect(Process.LAST_ISOLATED_UID, Process.LAST_ISOLATED_UID, 0, 0);
-        while (smartClipDataElementImpl != null) {
-            if (smartClipDataElementImpl.getChildCount() != 1) {
-                if (smartClipDataElementImpl.getChildCount() > 1) {
-                    for (SmartClipDataElementImpl firstChild = smartClipDataElementImpl.getFirstChild(); firstChild != null; firstChild = firstChild.getNextSibling()) {
+        while (smartClipDataElementImplTraverseNextElement != null) {
+            if (smartClipDataElementImplTraverseNextElement.getChildCount() != 1) {
+                if (smartClipDataElementImplTraverseNextElement.getChildCount() > 1) {
+                    for (SmartClipDataElementImpl firstChild = smartClipDataElementImplTraverseNextElement.getFirstChild(); firstChild != null; firstChild = firstChild.getNextSibling()) {
                         Rect metaAreaRect = firstChild.getMetaAreaRect();
                         if (metaAreaRect != null) {
                             if (rect2.left > metaAreaRect.left && metaAreaRect.width() > 0) {
@@ -257,7 +257,7 @@ public class SemSmartClipDataRepository implements Parcelable {
                         }
                     }
                 } else {
-                    Rect metaAreaRect2 = smartClipDataElementImpl.getMetaAreaRect();
+                    Rect metaAreaRect2 = smartClipDataElementImplTraverseNextElement.getMetaAreaRect();
                     if (metaAreaRect2 != null) {
                         if (rect2.left > metaAreaRect2.left && metaAreaRect2.width() > 0) {
                             rect2.left = metaAreaRect2.left;
@@ -274,20 +274,20 @@ public class SemSmartClipDataRepository implements Parcelable {
                     }
                 }
             }
-            smartClipDataElementImpl = smartClipDataElementImpl.traverseNextElement(this.mRootElement);
+            smartClipDataElementImplTraverseNextElement = smartClipDataElementImplTraverseNextElement.traverseNextElement(this.mRootElement);
         }
         if (rect2.left > rect2.right) {
             return new Rect();
         }
         if (this.mScaleRect.width() != 1.0f || this.mScaleRect.height() != 1.0f) {
-            float width = this.mScaleRect.width();
-            float height = this.mScaleRect.height();
-            if (width != 0.0f && height != 0.0f) {
+            float fWidth = this.mScaleRect.width();
+            float fHeight = this.mScaleRect.height();
+            if (fWidth != 0.0f && fHeight != 0.0f) {
                 Rect rect3 = new Rect();
                 rect3.left = this.mWinFrameRect.left;
                 rect3.top = this.mWinFrameRect.top;
-                rect3.right = (int) (this.mWinFrameRect.left + (this.mWinFrameRect.width() / width) + 0.5f);
-                rect3.bottom = (int) (this.mWinFrameRect.top + (this.mWinFrameRect.height() / height) + 0.5f);
+                rect3.right = (int) (this.mWinFrameRect.left + (this.mWinFrameRect.width() / fWidth) + 0.5f);
+                rect3.bottom = (int) (this.mWinFrameRect.top + (this.mWinFrameRect.height() / fHeight) + 0.5f);
                 if (this.mPenWindowBorder > 0) {
                     if (rect2.left < this.mPenWindowBorder) {
                         rect2.left += this.mPenWindowBorder;
@@ -302,12 +302,12 @@ public class SemSmartClipDataRepository implements Parcelable {
                         rect2.bottom -= this.mPenWindowBorder;
                     }
                 }
-                int width2 = rect2.width();
-                int height2 = rect2.height();
-                rect2.left = rect3.left + ((int) (rect2.left * width));
-                rect2.top = rect3.top + ((int) (rect2.top * height));
-                rect2.right = rect2.left + ((int) (width2 * width));
-                rect2.bottom = rect2.top + ((int) (height2 * height));
+                int iWidth = rect2.width();
+                int iHeight = rect2.height();
+                rect2.left = rect3.left + ((int) (rect2.left * fWidth));
+                rect2.top = rect3.top + ((int) (rect2.top * fHeight));
+                rect2.right = rect2.left + ((int) (iWidth * fWidth));
+                rect2.bottom = rect2.top + ((int) (iHeight * fHeight));
             }
         }
         return rect2;
@@ -319,8 +319,8 @@ public class SemSmartClipDataRepository implements Parcelable {
             return smartClipMetaTagArrayImpl;
         }
         SmartClipMetaTagArrayImpl smartClipMetaTagArrayImpl2 = new SmartClipMetaTagArrayImpl();
-        for (SmartClipDataElementImpl smartClipDataElementImpl = this.mRootElement; smartClipDataElementImpl != null; smartClipDataElementImpl = smartClipDataElementImpl.traverseNextElement(null)) {
-            SmartClipMetaTagArrayImpl smartClipMetaTagArrayImpl3 = (SmartClipMetaTagArrayImpl) smartClipDataElementImpl.getTagTable();
+        for (SmartClipDataElementImpl smartClipDataElementImplTraverseNextElement = this.mRootElement; smartClipDataElementImplTraverseNextElement != null; smartClipDataElementImplTraverseNextElement = smartClipDataElementImplTraverseNextElement.traverseNextElement(null)) {
+            SmartClipMetaTagArrayImpl smartClipMetaTagArrayImpl3 = (SmartClipMetaTagArrayImpl) smartClipDataElementImplTraverseNextElement.getTagTable();
             if (smartClipMetaTagArrayImpl3 != null) {
                 int size = smartClipMetaTagArrayImpl3.size();
                 for (int i = 0; i < size; i++) {
@@ -352,8 +352,8 @@ public class SemSmartClipDataRepository implements Parcelable {
                 return smartClipMetaTagArrayImpl;
             }
         } else {
-            for (SmartClipDataElementImpl smartClipDataElementImpl = this.mRootElement; smartClipDataElementImpl != null; smartClipDataElementImpl = smartClipDataElementImpl.traverseNextElement(null)) {
-                SmartClipMetaTagArrayImpl smartClipMetaTagArrayImpl3 = (SmartClipMetaTagArrayImpl) smartClipDataElementImpl.getTagTable();
+            for (SmartClipDataElementImpl smartClipDataElementImplTraverseNextElement = this.mRootElement; smartClipDataElementImplTraverseNextElement != null; smartClipDataElementImplTraverseNextElement = smartClipDataElementImplTraverseNextElement.traverseNextElement(null)) {
+                SmartClipMetaTagArrayImpl smartClipMetaTagArrayImpl3 = (SmartClipMetaTagArrayImpl) smartClipDataElementImplTraverseNextElement.getTagTable();
                 if (smartClipMetaTagArrayImpl3 != null) {
                     int size2 = smartClipMetaTagArrayImpl3.size();
                     for (int i2 = 0; i2 < size2; i2++) {

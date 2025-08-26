@@ -9,7 +9,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ChargerAnimationUtils {
     public static final ChargerAnimationUtils INSTANCE = new ChargerAnimationUtils();
@@ -36,8 +35,8 @@ public final class ChargerAnimationUtils {
     }
 
     public static boolean isWhiteWallpaper(boolean z) {
-        boolean isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(256L, z);
-        Slog.d("PowerUI.ChargerAnimationUtil", "isWhiteWallpaper in NAVIBAR : " + isWhiteKeyguardWallpaper + " / CoverScreen : " + z);
-        return isWhiteKeyguardWallpaper;
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(256L, z);
+        Slog.d("PowerUI.ChargerAnimationUtil", "isWhiteWallpaper in NAVIBAR : " + zIsWhiteKeyguardWallpaper + " / CoverScreen : " + z);
+        return zIsWhiteKeyguardWallpaper;
     }
 }

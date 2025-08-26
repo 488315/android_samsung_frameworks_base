@@ -2,6 +2,7 @@ package com.android.internal.widget;
 
 import android.app.Flags;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.RippleDrawable;
 import android.util.AttributeSet;
@@ -60,9 +61,9 @@ public class NotificationActionListLayout extends LinearLayout {
         this.mMeasureOrderTextViews = new ArrayList<>();
         this.mMeasureOrderOther = new ArrayList<>();
         this.mCollapsibleIndentDimen = Flags.notificationsRedesignTemplates() ? R.dimen.notification_2025_actions_margin_start : R.dimen.notification_actions_padding_start;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, new int[]{16842927}, i, i2);
-        this.mGravity = obtainStyledAttributes.getInt(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, new int[]{16842927}, i, i2);
+        this.mGravity = typedArrayObtainStyledAttributes.getInt(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -98,15 +99,17 @@ public class NotificationActionListLayout extends LinearLayout {
             i++;
         }
         boolean z2 = (i2 == this.mMeasureOrderTextViews.size() && i3 == this.mMeasureOrderOther.size()) ? false : true;
-        if (!z2) {
+        if (z2) {
+            z = z2;
+        } else {
             int size = this.mMeasureOrderTextViews.size();
             for (int i4 = 0; i4 < size; i4++) {
                 if (this.mMeasureOrderTextViews.get(i4).needsRebuild()) {
                     break;
                 }
             }
+            z = z2;
         }
-        z = z2;
         if (z) {
             rebuildMeasureOrder(i2, i3);
         }
@@ -124,34 +127,34 @@ public class NotificationActionListLayout extends LinearLayout {
         }
         int i5 = i2 - i3;
         int i6 = i5 / this.mNumNotGoneChildren;
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i6, 1073741824);
-        Log.v(TAG, "measuring evenly divided width: numChildren = " + childCount + ", innerWidth = " + i2 + "px, childMarginSum = " + i3 + "px, innerWidthMinusChildMargins = " + i5 + "px, childWidth = " + i6 + "px, childWidthMeasureSpec = " + View.MeasureSpec.toString(makeMeasureSpec));
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i6, 1073741824);
+        Log.v(TAG, "measuring evenly divided width: numChildren = " + childCount + ", innerWidth = " + i2 + "px, childMarginSum = " + i3 + "px, innerWidthMinusChildMargins = " + i5 + "px, childWidth = " + i6 + "px, childWidthMeasureSpec = " + View.MeasureSpec.toString(iMakeMeasureSpec));
         for (int i7 = 0; i7 < childCount; i7++) {
             View childAt2 = getChildAt(i7);
             if (childAt2.getVisibility() != 8) {
-                childAt2.measure(makeMeasureSpec, i);
+                childAt2.measure(iMakeMeasureSpec, i);
             }
         }
         return i2;
     }
 
-    private int measureAndGetUsedWidth(int i, int i2, int i3, boolean z) {
+    private int measureAndGetUsedWidth(int i, int i2, int i3, boolean z) throws Resources.NotFoundException {
         boolean z2;
         View view;
         int i4;
         int childCount = getChildCount();
         boolean z3 = View.MeasureSpec.getMode(i) != 0;
         int size = this.mMeasureOrderOther.size();
+        int dimensionPixelSize = 0;
+        int measuredWidth = 0;
         int i5 = 0;
         int i6 = 0;
-        int i7 = 0;
-        int i8 = 0;
-        for (int i9 = 0; i9 < childCount; i9++) {
-            if (i9 < size) {
-                view = this.mMeasureOrderOther.get(i9);
+        for (int i7 = 0; i7 < childCount; i7++) {
+            if (i7 < size) {
+                view = this.mMeasureOrderOther.get(i7);
                 z2 = false;
             } else {
-                TextViewInfo textViewInfo = this.mMeasureOrderTextViews.get(i9 - size);
+                TextViewInfo textViewInfo = this.mMeasureOrderTextViews.get(i7 - size);
                 TextView textView = textViewInfo.mTextView;
                 z2 = textViewInfo.mIsPriority;
                 view = textView;
@@ -159,35 +162,35 @@ public class NotificationActionListLayout extends LinearLayout {
             if (view.getVisibility() != 8) {
                 ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
                 if (z3) {
-                    int i10 = i3 - i6;
-                    int i11 = this.mNumNotGoneChildren - i7;
-                    int i12 = i10 / i11;
+                    int i8 = i3 - measuredWidth;
+                    int i9 = this.mNumNotGoneChildren - i5;
+                    int i10 = i8 / i9;
                     if (z2 && z) {
-                        if (i5 == 0) {
-                            i5 = getResources().getDimensionPixelSize(R.dimen.notification_actions_collapsed_priority_width);
+                        if (dimensionPixelSize == 0) {
+                            dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.notification_actions_collapsed_priority_width);
                         }
-                        i12 = marginLayoutParams.leftMargin + i5 + marginLayoutParams.rightMargin;
+                        i10 = marginLayoutParams.leftMargin + dimensionPixelSize + marginLayoutParams.rightMargin;
                     } else if (z2) {
-                        int i13 = this.mNumPriorityChildren - i8;
-                        i12 = (i10 - (((i11 - i13) * i3) / 4)) / i13;
+                        int i11 = this.mNumPriorityChildren - i6;
+                        i10 = (i8 - (((i9 - i11) * i3) / 4)) / i11;
                     }
-                    i4 = i3 - i12;
+                    i4 = i3 - i10;
                 } else {
-                    i4 = i6;
+                    i4 = measuredWidth;
                 }
-                int i14 = i5;
+                int i12 = dimensionPixelSize;
                 View view2 = view;
                 measureChildWithMargins(view2, i, i4, i2, 0);
-                i6 += view2.getMeasuredWidth() + marginLayoutParams.rightMargin + marginLayoutParams.leftMargin;
-                i7++;
+                measuredWidth += view2.getMeasuredWidth() + marginLayoutParams.rightMargin + marginLayoutParams.leftMargin;
+                i5++;
                 if (z2) {
-                    i8++;
+                    i6++;
                 }
-                i5 = i14;
+                dimensionPixelSize = i12;
             }
         }
         int dimensionPixelOffset = this.mCollapsibleIndentDimen == 0 ? 0 : getResources().getDimensionPixelOffset(this.mCollapsibleIndentDimen);
-        if (i3 - i6 > dimensionPixelOffset) {
+        if (i3 - measuredWidth > dimensionPixelOffset) {
             this.mExtraStartPadding = dimensionPixelOffset;
         } else {
             this.mExtraStartPadding = 0;
@@ -195,24 +198,28 @@ public class NotificationActionListLayout extends LinearLayout {
         if (this.mEmphasizedMode) {
             this.mExtraStartPadding = 0;
         }
-        return i6;
+        return measuredWidth;
     }
 
     @Override // android.widget.LinearLayout, android.view.View
-    protected void onMeasure(int i, int i2) {
-        int measureAndGetUsedWidth;
+    protected void onMeasure(int i, int i2) throws Resources.NotFoundException {
+        int iMeasureAndGetUsedWidth;
         countAndRebuildMeasureOrder();
         int size = (View.MeasureSpec.getSize(i) - this.mPaddingLeft) - this.mPaddingRight;
         if (this.mEvenlyDividedMode) {
-            measureAndGetUsedWidth = measureAndReturnEvenlyDividedWidth(i2, size);
+            iMeasureAndGetUsedWidth = measureAndReturnEvenlyDividedWidth(i2, size);
         } else {
-            int measureAndGetUsedWidth2 = measureAndGetUsedWidth(i, i2, size, false);
-            measureAndGetUsedWidth = (this.mNumPriorityChildren == 0 || measureAndGetUsedWidth2 < size) ? measureAndGetUsedWidth2 : measureAndGetUsedWidth(i, i2, size, true);
+            int iMeasureAndGetUsedWidth2 = measureAndGetUsedWidth(i, i2, size, false);
+            iMeasureAndGetUsedWidth = (this.mNumPriorityChildren == 0 || iMeasureAndGetUsedWidth2 < size) ? iMeasureAndGetUsedWidth2 : measureAndGetUsedWidth(i, i2, size, true);
         }
-        this.mTotalWidth = measureAndGetUsedWidth + this.mPaddingRight + this.mPaddingLeft + this.mExtraStartPadding;
+        this.mTotalWidth = iMeasureAndGetUsedWidth + this.mPaddingRight + this.mPaddingLeft + this.mExtraStartPadding;
         setMeasuredDimension(resolveSize(getSuggestedMinimumWidth(), i), resolveSize(getSuggestedMinimumHeight(), i2));
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0034  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void rebuildMeasureOrder(int i, int i2) {
         clearMeasureOrder();
         this.mMeasureOrderTextViews.ensureCapacity(i);
@@ -224,9 +231,10 @@ public class NotificationActionListLayout extends LinearLayout {
                 TextView textView = (TextView) childAt;
                 if (textView.getText().length() > 0) {
                     this.mMeasureOrderTextViews.add(new TextViewInfo(textView));
+                } else {
+                    this.mMeasureOrderOther.add(childAt);
                 }
             }
-            this.mMeasureOrderOther.add(childAt);
         }
         this.mMeasureOrderTextViews.sort(MEASURE_ORDER_COMPARATOR);
     }
@@ -252,10 +260,10 @@ public class NotificationActionListLayout extends LinearLayout {
     }
 
     @Override // android.widget.LinearLayout, android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         int i5;
         int i6;
-        boolean isLayoutRtl = isLayoutRtl();
+        boolean zIsLayoutRtl = isLayoutRtl();
         int i7 = this.mPaddingTop;
         int i8 = 1;
         if ((this.mGravity & 1) != 0) {
@@ -270,7 +278,7 @@ public class NotificationActionListLayout extends LinearLayout {
         }
         int i10 = ((i4 - i2) - i7) - this.mPaddingBottom;
         int childCount = getChildCount();
-        if (isLayoutRtl) {
+        if (zIsLayoutRtl) {
             i6 = childCount - 1;
             i8 = -1;
             i5 = 0;
@@ -292,7 +300,7 @@ public class NotificationActionListLayout extends LinearLayout {
     }
 
     @Override // android.view.View
-    protected void onFinishInflate() {
+    protected void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         if (Flags.notificationsRedesignTemplates()) {
             return;
@@ -302,7 +310,7 @@ public class NotificationActionListLayout extends LinearLayout {
         updateHeights();
     }
 
-    private void updateHeights() {
+    private void updateHeights() throws Resources.NotFoundException {
         if (Flags.notificationsRedesignTemplates()) {
             return;
         }

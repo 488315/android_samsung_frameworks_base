@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import com.android.systemui.R;
 import com.android.systemui.qs.customize.CustomizerTileViewPager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecPageIndicator extends LinearLayout {
     public CustomizerTileViewPager.AnonymousClass4 mCallback;
@@ -71,9 +70,9 @@ public class SecPageIndicator extends LinearLayout {
             }
             ViewParent parent = imageView.getParent();
             if (parent instanceof LinearLayout) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ", ");
-                m.append(this.mContext.getString(R.string.accessibility_quick_settings_page, Integer.valueOf(imageView.getId() + 1), Integer.valueOf(this.mNumPages)));
-                ((LinearLayout) parent).setContentDescription(m.toString());
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ", ");
+                sbM.append(this.mContext.getString(R.string.accessibility_quick_settings_page, Integer.valueOf(imageView.getId() + 1), Integer.valueOf(this.mNumPages)));
+                ((LinearLayout) parent).setContentDescription(sbM.toString());
             }
         }
     }
@@ -91,25 +90,25 @@ public class SecPageIndicator extends LinearLayout {
     }
 
     public final void setLocation(float f) {
-        int round = Math.round(f);
+        int iRound = Math.round(f);
         if (getLayoutDirection() == 1) {
-            round = (this.mNumPages - 1) - round;
+            iRound = (this.mNumPages - 1) - iRound;
         }
-        if (round == this.mPosition) {
+        if (iRound == this.mPosition) {
             return;
         }
-        if (isVisibleToUser() && Math.abs(this.mPosition - round) == 1) {
+        if (isVisibleToUser() && Math.abs(this.mPosition - iRound) == 1) {
             int i = this.mPosition;
-            if (getChildAt(i) != null && getChildAt(round) != null) {
+            if (getChildAt(i) != null && getChildAt(iRound) != null) {
                 View childAt = ((LinearLayout) getChildAt(i)).getChildAt(0);
-                View childAt2 = ((LinearLayout) getChildAt(round)).getChildAt(0);
+                View childAt2 = ((LinearLayout) getChildAt(iRound)).getChildAt(0);
                 playAnimation((ImageView) childAt, false, false);
                 playAnimation((ImageView) childAt2, true, false);
             }
         } else {
-            reset(round);
+            reset(iRound);
         }
-        this.mPosition = round;
+        this.mPosition = iRound;
     }
 
     public final void setNumPages(int i) {
@@ -133,7 +132,7 @@ public class SecPageIndicator extends LinearLayout {
             linearLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.SecPageIndicator$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    SecPageIndicator secPageIndicator = SecPageIndicator.this;
+                    SecPageIndicator secPageIndicator = this.f$0;
                     int i4 = i2;
                     CustomizerTileViewPager.AnonymousClass4 anonymousClass4 = secPageIndicator.mCallback;
                     if (anonymousClass4 == null || secPageIndicator.mQsExpansion != 1.0f) {

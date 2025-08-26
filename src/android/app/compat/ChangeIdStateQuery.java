@@ -50,11 +50,11 @@ final class ChangeIdStateQuery {
     public int hashCode() {
         int i = (this.type + 31) * 31;
         long j = this.changeId;
-        int i2 = i + ((int) (j ^ (j >>> 32)));
+        int iHashCode = i + ((int) (j ^ (j >>> 32)));
         String str = this.packageName;
         if (str != null) {
-            i2 = (i2 * 31) + str.hashCode();
+            iHashCode = (iHashCode * 31) + str.hashCode();
         }
-        return (((i2 * 31) + this.uid) * 31) + this.userId;
+        return (((iHashCode * 31) + this.uid) * 31) + this.userId;
     }
 }

@@ -69,24 +69,31 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import kotlin.KotlinNothingValueException;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.collections.EmptyList;
 import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.FilteringSequence;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt$sortedWith$1;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.ReadonlySharedFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class HeadsUpCoordinator implements Coordinator {
@@ -123,19 +130,16 @@ public final class HeadsUpCoordinator implements Coordinator {
     private final Consumer<NotificationEntry> mActionPressListener = new Consumer() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mActionPressListener$1
         @Override // java.util.function.Consumer
         public final void accept(final NotificationEntry notificationEntry) {
-            HeadsUpManager headsUpManager;
-            DelayableExecutor delayableExecutor;
-            headsUpManager = HeadsUpCoordinator.this.mHeadsUpManager;
-            HeadsUpManagerImpl.HeadsUpEntry headsUpEntry = ((HeadsUpManagerImpl) headsUpManager).getHeadsUpEntry(notificationEntry.mKey);
+            HeadsUpManagerImpl.HeadsUpEntry headsUpEntry = ((HeadsUpManagerImpl) this.this$0.mHeadsUpManager).getHeadsUpEntry(notificationEntry.mKey);
             if (headsUpEntry != null) {
                 headsUpEntry.mUserActionMayIndirectlyRemove = true;
             }
-            delayableExecutor = HeadsUpCoordinator.this.mExecutor;
-            final HeadsUpCoordinator headsUpCoordinator = HeadsUpCoordinator.this;
+            DelayableExecutor delayableExecutor = this.this$0.mExecutor;
+            final HeadsUpCoordinator headsUpCoordinator = this.this$0;
             delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mActionPressListener$1.1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    HeadsUpCoordinator headsUpCoordinator2 = HeadsUpCoordinator.this;
+                    HeadsUpCoordinator headsUpCoordinator2 = headsUpCoordinator;
                     NotificationEntry notificationEntry2 = notificationEntry;
                     notificationEntry2.getClass();
                     headsUpCoordinator2.endNotifLifetimeExtensionIfExtended(notificationEntry2);
@@ -146,9 +150,7 @@ public final class HeadsUpCoordinator implements Coordinator {
     private final HeadsUpCoordinator$mLifetimeExtender$1 mLifetimeExtender = new NotifLifetimeExtender() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mLifetimeExtender$1
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifLifetimeExtender
         public void cancelLifetimeExtension(NotificationEntry notificationEntry) {
-            ArrayMap arrayMap;
-            arrayMap = HeadsUpCoordinator.this.mNotifsExtendingLifetime;
-            Runnable runnable = (Runnable) arrayMap.remove(notificationEntry);
+            Runnable runnable = (Runnable) this.this$0.mNotifsExtendingLifetime.remove(notificationEntry);
             if (runnable != null) {
                 runnable.run();
             }
@@ -161,47 +163,29 @@ public final class HeadsUpCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifLifetimeExtender
         public boolean maybeExtendLifetime(final NotificationEntry notificationEntry, final int i) {
-            HeadsUpManager headsUpManager;
-            boolean isSticky;
-            DelayableExecutor delayableExecutor;
-            ArrayMap arrayMap;
-            HeadsUpManager headsUpManager2;
-            ArrayMap arrayMap2;
-            DelayableExecutor delayableExecutor2;
-            headsUpManager = HeadsUpCoordinator.this.mHeadsUpManager;
-            if (((HeadsUpManagerImpl) headsUpManager).canRemoveImmediately(notificationEntry.mKey)) {
+            if (((HeadsUpManagerImpl) this.this$0.mHeadsUpManager).canRemoveImmediately(notificationEntry.mKey)) {
                 return false;
             }
-            isSticky = HeadsUpCoordinator.this.isSticky(notificationEntry);
-            if (!isSticky) {
-                delayableExecutor = HeadsUpCoordinator.this.mExecutor;
-                final HeadsUpCoordinator headsUpCoordinator = HeadsUpCoordinator.this;
+            if (!this.this$0.isSticky(notificationEntry)) {
+                DelayableExecutor delayableExecutor = this.this$0.mExecutor;
+                final HeadsUpCoordinator headsUpCoordinator = this.this$0;
                 delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mLifetimeExtender$1$maybeExtendLifetime$2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NotificationRemoteInputManager notificationRemoteInputManager;
-                        HeadsUpManager headsUpManager3;
-                        notificationRemoteInputManager = HeadsUpCoordinator.this.mRemoteInputManager;
-                        boolean z = notificationRemoteInputManager.isSpinning(notificationEntry.mKey) && !NotificationRemoteInputManager.FORCE_REMOTE_INPUT_HISTORY;
-                        headsUpManager3 = HeadsUpCoordinator.this.mHeadsUpManager;
-                        ((HeadsUpManagerImpl) headsUpManager3).removeNotification(notificationEntry.mKey, ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "lifetime extension - extended for reason: ", ", isSticky: false"), z);
+                        ((HeadsUpManagerImpl) headsUpCoordinator.mHeadsUpManager).removeNotification(notificationEntry.mKey, ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "lifetime extension - extended for reason: ", ", isSticky: false"), headsUpCoordinator.mRemoteInputManager.isSpinning(notificationEntry.mKey) && !NotificationRemoteInputManager.FORCE_REMOTE_INPUT_HISTORY);
                     }
                 });
-                arrayMap = HeadsUpCoordinator.this.mNotifsExtendingLifetime;
-                arrayMap.put(notificationEntry, null);
+                this.this$0.mNotifsExtendingLifetime.put(notificationEntry, null);
                 return true;
             }
-            headsUpManager2 = HeadsUpCoordinator.this.mHeadsUpManager;
-            long earliestRemovalTime = ((HeadsUpManagerImpl) headsUpManager2).getEarliestRemovalTime(notificationEntry.mKey);
-            arrayMap2 = HeadsUpCoordinator.this.mNotifsExtendingLifetime;
-            delayableExecutor2 = HeadsUpCoordinator.this.mExecutor;
-            final HeadsUpCoordinator headsUpCoordinator2 = HeadsUpCoordinator.this;
-            arrayMap2.put(notificationEntry, delayableExecutor2.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mLifetimeExtender$1$maybeExtendLifetime$1
+            long earliestRemovalTime = ((HeadsUpManagerImpl) this.this$0.mHeadsUpManager).getEarliestRemovalTime(notificationEntry.mKey);
+            ArrayMap arrayMap = this.this$0.mNotifsExtendingLifetime;
+            DelayableExecutor delayableExecutor2 = this.this$0.mExecutor;
+            final HeadsUpCoordinator headsUpCoordinator2 = this.this$0;
+            arrayMap.put(notificationEntry, delayableExecutor2.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mLifetimeExtender$1$maybeExtendLifetime$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    HeadsUpManager headsUpManager3;
-                    headsUpManager3 = HeadsUpCoordinator.this.mHeadsUpManager;
-                    ((HeadsUpManagerImpl) headsUpManager3).removeNotification(notificationEntry.mKey, ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "cancel lifetime extension - extended for reason: ", ", isSticky: true"), true);
+                    ((HeadsUpManagerImpl) headsUpCoordinator2.mHeadsUpManager).removeNotification(notificationEntry.mKey, ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "cancel lifetime extension - extended for reason: ", ", isSticky: true"), true);
                 }
             }, earliestRemovalTime));
             return true;
@@ -209,7 +193,7 @@ public final class HeadsUpCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifLifetimeExtender
         public void setCallback(NotifLifetimeExtender.OnEndLifetimeExtensionCallback onEndLifetimeExtensionCallback) {
-            HeadsUpCoordinator.this.mEndLifetimeExtension = onEndLifetimeExtensionCallback;
+            this.this$0.mEndLifetimeExtension = onEndLifetimeExtensionCallback;
         }
     };
     private final HeadsUpCoordinator$mNotifPromoter$1 mNotifPromoter = new NotifPromoter() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mNotifPromoter$1
@@ -219,9 +203,7 @@ public final class HeadsUpCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifPromoter
         public boolean shouldPromoteToTopLevel(NotificationEntry notificationEntry) {
-            boolean isGoingToShowHunNoRetract;
-            isGoingToShowHunNoRetract = HeadsUpCoordinator.this.isGoingToShowHunNoRetract(notificationEntry);
-            return isGoingToShowHunNoRetract;
+            return this.this$0.isGoingToShowHunNoRetract(notificationEntry);
         }
     };
     private final NotifSectioner sectioner = new NotifSectioner() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$sectioner$1
@@ -231,7 +213,7 @@ public final class HeadsUpCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public NotifComparator getComparator() {
-            final HeadsUpCoordinator headsUpCoordinator = HeadsUpCoordinator.this;
+            final HeadsUpCoordinator headsUpCoordinator = this.this$0;
             return new NotifComparator() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$sectioner$1$getComparator$1
                 {
                     super("HeadsUp");
@@ -239,8 +221,7 @@ public final class HeadsUpCoordinator implements Coordinator {
 
                 @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifComparator, java.util.Comparator
                 public int compare(PipelineEntry pipelineEntry, PipelineEntry pipelineEntry2) {
-                    HeadsUpManager headsUpManager;
-                    headsUpManager = HeadsUpCoordinator.this.mHeadsUpManager;
+                    HeadsUpManager headsUpManager = headsUpCoordinator.mHeadsUpManager;
                     NotificationEntry representativeEntry = pipelineEntry.getRepresentativeEntry();
                     NotificationEntry representativeEntry2 = pipelineEntry2.getRepresentativeEntry();
                     HeadsUpManagerImpl headsUpManagerImpl = (HeadsUpManagerImpl) headsUpManager;
@@ -265,47 +246,36 @@ public final class HeadsUpCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public boolean isInSection(PipelineEntry pipelineEntry) {
-            boolean isGoingToShowHunNoRetract;
             if (BundleUtil.Companion.isClassified(pipelineEntry)) {
                 return false;
             }
-            isGoingToShowHunNoRetract = HeadsUpCoordinator.this.isGoingToShowHunNoRetract(pipelineEntry);
-            return isGoingToShowHunNoRetract;
+            return this.this$0.isGoingToShowHunNoRetract(pipelineEntry);
         }
     };
     private final HeadsUpCoordinator$mOnHeadsUpChangedListener$1 mOnHeadsUpChangedListener = new OnHeadsUpChangedListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$mOnHeadsUpChangedListener$1
         @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
         public void onHeadsUpAnimatingAwayEnded(NotificationEntry notificationEntry) {
-            HeadsUpCoordinator$mNotifPromoter$1 headsUpCoordinator$mNotifPromoter$1;
-            headsUpCoordinator$mNotifPromoter$1 = HeadsUpCoordinator.this.mNotifPromoter;
-            headsUpCoordinator$mNotifPromoter$1.invalidateList("headsUpAnimatingAwayEnded: " + NotificationUtilsKt.getLogKey(notificationEntry));
+            invalidateList("headsUpAnimatingAwayEnded: " + NotificationUtilsKt.getLogKey(notificationEntry));
         }
 
         @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
         public void onHeadsUpPinned(NotificationEntry notificationEntry) {
-            LinkedHashMap linkedHashMap;
-            HeadsUpCoordinator$mNotifPromoter$1 headsUpCoordinator$mNotifPromoter$1;
             if (notificationEntry != null ? notificationEntry.mIsHeadsUpByBriefExpanding : false) {
-                linkedHashMap = HeadsUpCoordinator.this.mPostedEntries;
-                HeadsUpCoordinator.PostedEntry postedEntry = (HeadsUpCoordinator.PostedEntry) linkedHashMap.get(notificationEntry != null ? notificationEntry.mKey : null);
+                HeadsUpCoordinator.PostedEntry postedEntry = (HeadsUpCoordinator.PostedEntry) this.this$0.mPostedEntries.get(notificationEntry != null ? notificationEntry.mKey : null);
                 if (postedEntry != null) {
                     postedEntry.setHeadsUpByBriefExpanding(true);
                 }
-                headsUpCoordinator$mNotifPromoter$1 = HeadsUpCoordinator.this.mNotifPromoter;
-                headsUpCoordinator$mNotifPromoter$1.invalidateList("headsUpFromBrief: " + NotificationUtilsKt.getLogKey(notificationEntry));
+                invalidateList("headsUpFromBrief: " + NotificationUtilsKt.getLogKey(notificationEntry));
             }
         }
 
         @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
         public void onHeadsUpStateChanged(NotificationEntry notificationEntry, boolean z) {
-            HeadsUpCoordinator$mNotifPromoter$1 headsUpCoordinator$mNotifPromoter$1;
-            final HeadsUpViewBinder headsUpViewBinder;
             if (z) {
                 return;
             }
-            headsUpCoordinator$mNotifPromoter$1 = HeadsUpCoordinator.this.mNotifPromoter;
-            headsUpCoordinator$mNotifPromoter$1.invalidateList("headsUpEnded: " + NotificationUtilsKt.getLogKey(notificationEntry));
-            headsUpViewBinder = HeadsUpCoordinator.this.mHeadsUpViewBinder;
+            invalidateList("headsUpEnded: " + NotificationUtilsKt.getLogKey(notificationEntry));
+            final HeadsUpViewBinder headsUpViewBinder = this.this$0.mHeadsUpViewBinder;
             headsUpViewBinder.abortBindCallback(notificationEntry);
             RowContentBindStage rowContentBindStage = headsUpViewBinder.mStage;
             RowContentBindParams rowContentBindParams = (RowContentBindParams) ((ArrayMap) rowContentBindStage.mContentParams).get(notificationEntry);
@@ -315,40 +285,38 @@ public final class HeadsUpCoordinator implements Coordinator {
                 LogLevel logLevel = LogLevel.INFO;
                 HeadsUpViewBinderLogger$$ExternalSyntheticLambda0 headsUpViewBinderLogger$$ExternalSyntheticLambda0 = new HeadsUpViewBinderLogger$$ExternalSyntheticLambda0(2);
                 LogBuffer logBuffer = headsUpViewBinderLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("HeadsUpViewBinder", logLevel, headsUpViewBinderLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("HeadsUpViewBinder", logLevel, headsUpViewBinderLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+                logBuffer.commit(logMessageObtain);
             } else {
                 rowContentBindParams.markContentViewsFreeable(4);
                 headsUpViewBinderLogger.getClass();
                 LogLevel logLevel2 = LogLevel.INFO;
                 HeadsUpViewBinderLogger$$ExternalSyntheticLambda0 headsUpViewBinderLogger$$ExternalSyntheticLambda02 = new HeadsUpViewBinderLogger$$ExternalSyntheticLambda0(3);
                 LogBuffer logBuffer2 = headsUpViewBinderLogger.buffer;
-                LogMessage obtain2 = logBuffer2.obtain("HeadsUpViewBinder", logLevel2, headsUpViewBinderLogger$$ExternalSyntheticLambda02, null);
-                ((LogMessageImpl) obtain2).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-                logBuffer2.commit(obtain2);
+                LogMessage logMessageObtain2 = logBuffer2.obtain("HeadsUpViewBinder", logLevel2, headsUpViewBinderLogger$$ExternalSyntheticLambda02, null);
+                ((LogMessageImpl) logMessageObtain2).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+                logBuffer2.commit(logMessageObtain2);
                 rowContentBindStage.requestRebind(notificationEntry, new NotifBindPipeline.BindCallback() { // from class: com.android.systemui.statusbar.notification.interruption.HeadsUpViewBinder$$ExternalSyntheticLambda1
                     @Override // com.android.systemui.statusbar.notification.row.NotifBindPipeline.BindCallback
                     public final void onBindFinished(NotificationEntry notificationEntry2) {
-                        HeadsUpViewBinderLogger headsUpViewBinderLogger2 = HeadsUpViewBinder.this.mLogger;
+                        HeadsUpViewBinderLogger headsUpViewBinderLogger2 = headsUpViewBinder.mLogger;
                         headsUpViewBinderLogger2.getClass();
                         LogLevel logLevel3 = LogLevel.INFO;
                         HeadsUpViewBinderLogger$$ExternalSyntheticLambda0 headsUpViewBinderLogger$$ExternalSyntheticLambda03 = new HeadsUpViewBinderLogger$$ExternalSyntheticLambda0(5);
                         LogBuffer logBuffer3 = headsUpViewBinderLogger2.buffer;
-                        LogMessage obtain3 = logBuffer3.obtain("HeadsUpViewBinder", logLevel3, headsUpViewBinderLogger$$ExternalSyntheticLambda03, null);
-                        ((LogMessageImpl) obtain3).str1 = NotificationUtilsKt.getLogKey(notificationEntry2);
-                        logBuffer3.commit(obtain3);
+                        LogMessage logMessageObtain3 = logBuffer3.obtain("HeadsUpViewBinder", logLevel3, headsUpViewBinderLogger$$ExternalSyntheticLambda03, null);
+                        ((LogMessageImpl) logMessageObtain3).str1 = NotificationUtilsKt.getLogKey(notificationEntry2);
+                        logBuffer3.commit(logMessageObtain3);
                     }
                 });
             }
-            HeadsUpCoordinator.this.endNotifLifetimeExtensionIfExtended(notificationEntry);
+            this.this$0.endNotifLifetimeExtensionIfExtended(notificationEntry);
         }
 
         @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
         public void onHeadsUpUnPinned(NotificationEntry notificationEntry) {
-            LinkedHashMap linkedHashMap;
-            linkedHashMap = HeadsUpCoordinator.this.mPostedEntries;
-            HeadsUpCoordinator.PostedEntry postedEntry = (HeadsUpCoordinator.PostedEntry) linkedHashMap.get(notificationEntry != null ? notificationEntry.mKey : null);
+            HeadsUpCoordinator.PostedEntry postedEntry = (HeadsUpCoordinator.PostedEntry) this.this$0.mPostedEntries.get(notificationEntry != null ? notificationEntry.mKey : null);
             if (postedEntry != null) {
                 postedEntry.setHeadsUpByBriefExpanding(false);
             }
@@ -359,13 +327,86 @@ public final class HeadsUpCoordinator implements Coordinator {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$attach$3, reason: invalid class name */
+    final class AnonymousClass3 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass3(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return HeadsUpCoordinator.this.new AnonymousClass3(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                ReadonlySharedFlow readonlySharedFlow = HeadsUpCoordinator.this.statusBarNotificationChipsInteractor.promotedNotificationChipTapEvent;
+                final HeadsUpCoordinator headsUpCoordinator = HeadsUpCoordinator.this;
+                FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator.attach.3.1
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    public final Object emit(String str, Continuation continuation) {
+                        headsUpCoordinator.onPromotedNotificationChipTapEvent(str);
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (readonlySharedFlow.$$delegate_0.collect(flowCollector, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            throw new KotlinNothingValueException();
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(CoroutineScope coroutineScope, Continuation continuation) {
+            return ((AnonymousClass3) create(coroutineScope, continuation)).invokeSuspend(Unit.INSTANCE);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$attach$4, reason: invalid class name */
+    public final class AnonymousClass4 {
+        public AnonymousClass4() {
+        }
+
+        public void turnToHeadsUp(NotificationEntry notificationEntry) {
+            HeadsUpCoordinator.this.bindForAsyncHeadsUp(notificationEntry);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$onPromotedNotificationChipTapEvent$1, reason: invalid class name and case insensitive filesystem */
+    final class RunnableC10681 implements Runnable {
+        final /* synthetic */ NotificationEntry $entry;
+        final /* synthetic */ PostedEntry $posted;
+
+        public RunnableC10681(NotificationEntry notificationEntry, PostedEntry postedEntry) {
+            this.$entry = notificationEntry;
+            this.$posted = postedEntry;
+        }
+
+        @Override // java.lang.Runnable
+        public final void run() {
+            HeadsUpCoordinator.this.mPostedEntries.put(this.$entry.mKey, this.$posted);
+            invalidateList("onPromotedNotificationChipTapEvent: " + NotificationUtilsKt.getLogKey(this.$entry));
         }
     }
 
@@ -398,12 +439,12 @@ public final class HeadsUpCoordinator implements Coordinator {
     }
 
     private final void cleanUpEntryTimes() {
-        long currentTimeMillis = this.mSystemClock.currentTimeMillis() - 2000;
+        long jCurrentTimeMillis = this.mSystemClock.currentTimeMillis() - 2000;
         ArraySet arraySet = new ArraySet();
         for (Map.Entry<String, Long> entry : this.mEntriesUpdateTimes.entrySet()) {
             String key = entry.getKey();
             Long value = entry.getValue();
-            if (value == null || currentTimeMillis > value.longValue()) {
+            if (value == null || jCurrentTimeMillis > value.longValue()) {
                 arraySet.add(key);
             }
         }
@@ -412,7 +453,7 @@ public final class HeadsUpCoordinator implements Coordinator {
         for (Map.Entry<String, Long> entry2 : this.mFSIUpdateCandidates.entrySet()) {
             String key2 = entry2.getKey();
             Long value2 = entry2.getValue();
-            if (value2 == null || currentTimeMillis > value2.longValue()) {
+            if (value2 == null || jCurrentTimeMillis > value2.longValue()) {
                 arraySet2.add(key2);
             }
         }
@@ -422,9 +463,9 @@ public final class HeadsUpCoordinator implements Coordinator {
     /* JADX INFO: Access modifiers changed from: private */
     public final void endNotifLifetimeExtensionIfExtended(NotificationEntry notificationEntry) {
         if (this.mNotifsExtendingLifetime.containsKey(notificationEntry)) {
-            Runnable remove = this.mNotifsExtendingLifetime.remove(notificationEntry);
-            if (remove != null) {
-                remove.run();
+            Runnable runnableRemove = this.mNotifsExtendingLifetime.remove(notificationEntry);
+            if (runnableRemove != null) {
+                runnableRemove.run();
             }
             NotifLifetimeExtender.OnEndLifetimeExtensionCallback onEndLifetimeExtensionCallback = this.mEndLifetimeExtension;
             if (onEndLifetimeExtensionCallback != null) {
@@ -444,7 +485,7 @@ public final class HeadsUpCoordinator implements Coordinator {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static final boolean findBestTransferChild$lambda$22(Function1 function1, NotificationEntry notificationEntry) {
-        return function1.mo779invoke(notificationEntry.mKey) != GroupLocation.Detached;
+        return function1.mo781invoke(notificationEntry.mKey) != GroupLocation.Detached;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -469,7 +510,7 @@ public final class HeadsUpCoordinator implements Coordinator {
             return null;
         }
         NotificationEntry entry = postedEntry.getEntry();
-        if (function1.mo779invoke(entry.mKey) == GroupLocation.Isolated && entry.mSbn.getNotification().getGroupAlertBehavior() == 1) {
+        if (function1.mo781invoke(entry.mKey) == GroupLocation.Isolated && entry.mSbn.getNotification().getGroupAlertBehavior() == 1) {
             return entry;
         }
         return null;
@@ -607,7 +648,7 @@ public final class HeadsUpCoordinator implements Coordinator {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static final Unit onBeforeFinalizeFilter$lambda$16(final HeadsUpCoordinator headsUpCoordinator, final List list, HunMutator hunMutator) {
-        Object obj;
+        Object next;
         boolean z;
         boolean z2;
         PostedEntry postedEntry;
@@ -615,41 +656,39 @@ public final class HeadsUpCoordinator implements Coordinator {
         if (headsUpCoordinator.mPostedEntries.isEmpty()) {
             return Unit.INSTANCE;
         }
-        Collection<PostedEntry> values = headsUpCoordinator.mPostedEntries.values();
+        Collection<PostedEntry> collectionValues = headsUpCoordinator.mPostedEntries.values();
         LinkedHashMap linkedHashMap = new LinkedHashMap();
-        for (Object obj2 : values) {
-            String groupKey = ((PostedEntry) obj2).getEntry().mSbn.getGroupKey();
-            Object obj3 = linkedHashMap.get(groupKey);
-            if (obj3 == null) {
-                obj3 = new ArrayList();
-                linkedHashMap.put(groupKey, obj3);
+        for (Object obj : collectionValues) {
+            String groupKey = ((PostedEntry) obj).getEntry().mSbn.getGroupKey();
+            Object arrayList = linkedHashMap.get(groupKey);
+            if (arrayList == null) {
+                arrayList = new ArrayList();
+                linkedHashMap.put(groupKey, arrayList);
             }
-            ((List) obj3).add(obj2);
+            ((List) arrayList).add(obj);
         }
         NotifPipeline notifPipeline = headsUpCoordinator.mNotifPipeline;
         Throwable th = null;
         if (notifPipeline == null) {
             notifPipeline = null;
         }
-        FilteringSequence filter = SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(notifPipeline.getAllNotifs()), new HeadsUpCoordinator$$ExternalSyntheticLambda2(linkedHashMap, 1));
+        FilteringSequence filteringSequenceFilter = SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(notifPipeline.getAllNotifs()), new HeadsUpCoordinator$$ExternalSyntheticLambda2(linkedHashMap, 1));
         LinkedHashMap linkedHashMap2 = new LinkedHashMap();
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(filter);
-        while (filteringSequence$iterator$1.hasNext()) {
-            Object next = filteringSequence$iterator$1.next();
-            String groupKey2 = ((NotificationEntry) next).mSbn.getGroupKey();
-            Object obj4 = linkedHashMap2.get(groupKey2);
-            if (obj4 == null) {
-                obj4 = new ArrayList();
-                linkedHashMap2.put(groupKey2, obj4);
+        FilteringSequence.AnonymousClass1 anonymousClass1 = filteringSequenceFilter.new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            Object next2 = anonymousClass1.next();
+            String groupKey2 = ((NotificationEntry) next2).mSbn.getGroupKey();
+            Object arrayList2 = linkedHashMap2.get(groupKey2);
+            if (arrayList2 == null) {
+                arrayList2 = new ArrayList();
+                linkedHashMap2.put(groupKey2, arrayList2);
             }
-            ((List) obj4).add(next);
+            ((List) arrayList2).add(next2);
         }
         Lazy lazy = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$$ExternalSyntheticLambda7
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Map groupLocationsByKey;
-                groupLocationsByKey = HeadsUpCoordinator.this.getGroupLocationsByKey(list);
-                return groupLocationsByKey;
+                return this.f$0.getGroupLocationsByKey(list);
             }
         });
         headsUpCoordinator.mLogger.logEvaluatingGroups(linkedHashMap.size());
@@ -663,15 +702,15 @@ public final class HeadsUpCoordinator implements Coordinator {
             Iterator it = list3.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj = th;
+                    next = th;
                     break;
                 }
-                obj = it.next();
-                if (((NotificationEntry) obj).mSbn.getNotification().isGroupSummary()) {
+                next = it.next();
+                if (((NotificationEntry) next).mSbn.getNotification().isGroupSummary()) {
                     break;
                 }
             }
-            NotificationEntry notificationEntry = (NotificationEntry) obj;
+            NotificationEntry notificationEntry = (NotificationEntry) next;
             HeadsUpCoordinatorLogger headsUpCoordinatorLogger = headsUpCoordinator.mLogger;
             str.getClass();
             headsUpCoordinatorLogger.logEvaluatingGroup(str, list2.size(), list3.size());
@@ -681,33 +720,33 @@ public final class HeadsUpCoordinator implements Coordinator {
                     headsUpCoordinator.handlePostedEntry(postedEntry2, hunMutator, "logical-summary-missing");
                 }
             } else if (headsUpCoordinator.isGoingToShowHunStrict(notificationEntry)) {
-                NotificationEntry findHeadsUpOverride = headsUpCoordinator.findHeadsUpOverride(list2, new HeadsUpCoordinator$onBeforeFinalizeFilter$1$1$3(onBeforeFinalizeFilter$lambda$16$lambda$6(lazy)));
-                String str2 = findHeadsUpOverride != null ? "headsUpOverride" : "undefined";
-                Map<String, GroupLocation> onBeforeFinalizeFilter$lambda$16$lambda$6 = onBeforeFinalizeFilter$lambda$16$lambda$6(lazy);
+                NotificationEntry notificationEntryFindHeadsUpOverride = headsUpCoordinator.findHeadsUpOverride(list2, new HeadsUpCoordinator$onBeforeFinalizeFilter$1$1$3(onBeforeFinalizeFilter$lambda$16$lambda$6(lazy)));
+                String str2 = notificationEntryFindHeadsUpOverride != null ? "headsUpOverride" : "undefined";
+                Map<String, GroupLocation> mapOnBeforeFinalizeFilter$lambda$16$lambda$6 = onBeforeFinalizeFilter$lambda$16$lambda$6(lazy);
                 String str3 = notificationEntry.mKey;
-                boolean containsKey = onBeforeFinalizeFilter$lambda$16$lambda$6.containsKey(str3);
-                if (!containsKey && findHeadsUpOverride == null && (findHeadsUpOverride = headsUpCoordinator.findBestTransferChild(list3, new HeadsUpCoordinator$onBeforeFinalizeFilter$1$1$4(onBeforeFinalizeFilter$lambda$16$lambda$6(lazy)))) != null) {
+                boolean zContainsKey = mapOnBeforeFinalizeFilter$lambda$16$lambda$6.containsKey(str3);
+                if (!zContainsKey && notificationEntryFindHeadsUpOverride == null && (notificationEntryFindHeadsUpOverride = headsUpCoordinator.findBestTransferChild(list3, new HeadsUpCoordinator$onBeforeFinalizeFilter$1$1$4(onBeforeFinalizeFilter$lambda$16$lambda$6(lazy)))) != null) {
                     str2 = "bestChild";
                 }
-                if (findHeadsUpOverride == null) {
+                if (notificationEntryFindHeadsUpOverride == null) {
                     for (PostedEntry postedEntry3 : list2) {
                         postedEntry3.getClass();
                         headsUpCoordinator.handlePostedEntry(postedEntry3, hunMutator, "no-transfer-target");
                     }
-                } else if (headsUpCoordinator.isDisqualifiedChild(findHeadsUpOverride)) {
+                } else if (headsUpCoordinator.isDisqualifiedChild(notificationEntryFindHeadsUpOverride)) {
                     VisualInterruptionDecisionLogger visualInterruptionDecisionLogger = headsUpCoordinator.mInterruptLogger;
                     VisualInterruptionDecisionProviderImpl.DecisionImpl decisionImpl = new VisualInterruptionDecisionProviderImpl.DecisionImpl(false, "disqualified-transfer-target");
                     visualInterruptionDecisionLogger.getClass();
                     LogLevel logLevel = LogLevel.DEBUG;
                     VisualInterruptionDecisionLogger$$ExternalSyntheticLambda0 visualInterruptionDecisionLogger$$ExternalSyntheticLambda0 = new VisualInterruptionDecisionLogger$$ExternalSyntheticLambda0(0);
                     LogBuffer logBuffer = visualInterruptionDecisionLogger.buffer;
-                    LogMessage obtain = logBuffer.obtain("VisualInterruptionDecisionProvider", logLevel, visualInterruptionDecisionLogger$$ExternalSyntheticLambda0, th);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                    LogMessage logMessageObtain = logBuffer.obtain("VisualInterruptionDecisionProvider", logLevel, visualInterruptionDecisionLogger$$ExternalSyntheticLambda0, th);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                     logMessageImpl.str1 = "PEEK";
                     logMessageImpl.bool1 = decisionImpl.shouldInterrupt;
                     logMessageImpl.str2 = decisionImpl.logReason;
-                    logMessageImpl.str3 = NotificationUtils.logKey(findHeadsUpOverride);
-                    logBuffer.commit(obtain);
+                    logMessageImpl.str3 = NotificationUtils.logKey(notificationEntryFindHeadsUpOverride);
+                    logBuffer.commit(logMessageObtain);
                     for (PostedEntry postedEntry4 : list2) {
                         postedEntry4.setShouldHeadsUpEver(false);
                         postedEntry4.setShouldHeadsUpAgain(false);
@@ -717,9 +756,9 @@ public final class HeadsUpCoordinator implements Coordinator {
                     PostedEntry postedEntry5 = headsUpCoordinator.mPostedEntries.get(str3);
                     notificationEntry.interruption = true;
                     HeadsUpCoordinatorLogger headsUpCoordinatorLogger2 = headsUpCoordinator.mLogger;
-                    String str4 = findHeadsUpOverride.mKey;
+                    String str4 = notificationEntryFindHeadsUpOverride.mKey;
                     headsUpCoordinatorLogger2.logSummaryMarkedInterrupted(str3, str4);
-                    if (containsKey) {
+                    if (zContainsKey) {
                         z = false;
                         z2 = true;
                         if (postedEntry5 != null) {
@@ -739,10 +778,10 @@ public final class HeadsUpCoordinator implements Coordinator {
                         headsUpCoordinator.handlePostedEntry(postedEntry, hunMutator, "detached-summary-remove-heads-up");
                         z2 = z3;
                     }
-                    FilteringSequence$iterator$1 filteringSequence$iterator$12 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list2), new HeadsUpCoordinator$$ExternalSyntheticLambda2(notificationEntry, 2)));
+                    FilteringSequence.AnonymousClass1 anonymousClass12 = SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list2), new HeadsUpCoordinator$$ExternalSyntheticLambda2(notificationEntry, 2)).new AnonymousClass1();
                     boolean z4 = z;
-                    while (filteringSequence$iterator$12.hasNext()) {
-                        PostedEntry postedEntry6 = (PostedEntry) filteringSequence$iterator$12.next();
+                    while (anonymousClass12.hasNext()) {
+                        PostedEntry postedEntry6 = (PostedEntry) anonymousClass12.next();
                         if (Intrinsics.areEqual(str4, postedEntry6.getKey())) {
                             postedEntry6.setShouldHeadsUpEver(z2);
                             postedEntry6.setShouldHeadsUpAgain(z2);
@@ -753,7 +792,7 @@ public final class HeadsUpCoordinator implements Coordinator {
                         }
                     }
                     if (!z4) {
-                        headsUpCoordinator.handlePostedEntry(new PostedEntry(findHeadsUpOverride, false, false, true, true, false, ((HeadsUpManagerImpl) headsUpCoordinator.mHeadsUpManager).isHeadsUpEntry(str4), headsUpCoordinator.isEntryBinding(findHeadsUpOverride), 32, null), hunMutator, "non-posted-child-heads-up-transfer-target-" + ((Object) str2));
+                        headsUpCoordinator.handlePostedEntry(new PostedEntry(notificationEntryFindHeadsUpOverride, false, false, true, true, false, ((HeadsUpManagerImpl) headsUpCoordinator.mHeadsUpManager).isHeadsUpEntry(str4), headsUpCoordinator.isEntryBinding(notificationEntryFindHeadsUpOverride), 32, null), hunMutator, "non-posted-child-heads-up-transfer-target-" + ((Object) str2));
                     }
                 }
             } else {
@@ -797,25 +836,25 @@ public final class HeadsUpCoordinator implements Coordinator {
     /* JADX INFO: Access modifiers changed from: private */
     public final void onHeadsUpViewBound(NotificationEntry notificationEntry, boolean z) {
         HeadsUpManagerImpl headsUpManagerImpl = (HeadsUpManagerImpl) this.mHeadsUpManager;
-        HeadsUpManagerImpl.HeadsUpEntry createHeadsUpEntry = headsUpManagerImpl.createHeadsUpEntry(notificationEntry);
+        HeadsUpManagerImpl.HeadsUpEntry headsUpEntryCreateHeadsUpEntry = headsUpManagerImpl.createHeadsUpEntry(notificationEntry);
         HeadsUpManagerLogger headsUpManagerLogger = headsUpManagerImpl.mLogger;
         headsUpManagerLogger.getClass();
         LogLevel logLevel = LogLevel.INFO;
         HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = headsUpManagerLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry);
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         PinnedStatus pinnedStatus = z ? PinnedStatus.PinnedByUser : PinnedStatus.PinnedBySystem;
-        createHeadsUpEntry.getClass();
+        headsUpEntryCreateHeadsUpEntry.getClass();
         int i = StatusBarNotifChips.$r8$clinit;
         if (pinnedStatus == PinnedStatus.PinnedByUser) {
             Log.w("BaseHeadsUpManager", "PinnedByUser status not allowed if StatusBarNotifChips is disabled");
             PinnedStatus pinnedStatus2 = PinnedStatus.NotPinned;
         }
-        headsUpManagerImpl.mAvalancheController.update(createHeadsUpEntry, new HeadsUpManagerImpl$$ExternalSyntheticLambda1(headsUpManagerImpl, notificationEntry, z, createHeadsUpEntry, pinnedStatus), "showNotification");
+        headsUpManagerImpl.mAvalancheController.update(headsUpEntryCreateHeadsUpEntry, new HeadsUpManagerImpl$$ExternalSyntheticLambda1(headsUpManagerImpl, notificationEntry, z, headsUpEntryCreateHeadsUpEntry, pinnedStatus), "showNotification");
         this.mEntriesBindingUntil.remove(notificationEntry.mKey);
     }
 
@@ -840,7 +879,7 @@ public final class HeadsUpCoordinator implements Coordinator {
         this.mNotifPipeline = notifPipeline;
         ((HeadsUpManagerImpl) this.mHeadsUpManager).addListener(this.mOnHeadsUpChangedListener);
         notifPipeline.addCollectionListener(this.mNotifCollectionListener);
-        OnBeforeTransformGroupsListener onBeforeTransformGroupsListener = new OnBeforeTransformGroupsListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$attach$1
+        OnBeforeTransformGroupsListener onBeforeTransformGroupsListener = new OnBeforeTransformGroupsListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeTransformGroupsListener
             public final void onBeforeTransformGroups(List<PipelineEntry> list) {
                 HeadsUpCoordinator.this.onBeforeTransformGroups();
@@ -851,7 +890,7 @@ public final class HeadsUpCoordinator implements Coordinator {
         Assert.isMainThread();
         shadeListBuilder.mPipelineState.requireState();
         shadeListBuilder.mOnBeforeTransformGroupsListeners.addIfAbsent(onBeforeTransformGroupsListener);
-        notifPipeline.addOnBeforeFinalizeFilterListener(new OnBeforeFinalizeFilterListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$attach$2
+        notifPipeline.addOnBeforeFinalizeFilterListener(new OnBeforeFinalizeFilterListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator.attach.2
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeFinalizeFilterListener
             public final void onBeforeFinalizeFilter(List<? extends PipelineEntry> list) {
                 HeadsUpCoordinator.this.onBeforeFinalizeFilter(list);
@@ -866,7 +905,7 @@ public final class HeadsUpCoordinator implements Coordinator {
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
         notificationRemoteInputManager.mActionPressListeners.addIfAbsent(consumer);
         HeadsUpManager headsUpManager = this.mHeadsUpManager;
-        ((ArrayList) ((HeadsUpManagerImpl) headsUpManager).mCallbacks).add(new HeadsUpCoordinator$attach$4(this));
+        ((ArrayList) ((HeadsUpManagerImpl) headsUpManager).mCallbacks).add(new AnonymousClass4());
     }
 
     public final void bindForAsyncHeadsUp(NotificationEntry notificationEntry) {
@@ -891,10 +930,8 @@ public final class HeadsUpCoordinator implements Coordinator {
         HeadsUpCoordinatorKt.modifyHuns(this.mHeadsUpManager, new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$$ExternalSyntheticLambda9
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Unit onBeforeFinalizeFilter$lambda$16;
-                onBeforeFinalizeFilter$lambda$16 = HeadsUpCoordinator.onBeforeFinalizeFilter$lambda$16(HeadsUpCoordinator.this, list, (HunMutator) obj);
-                return onBeforeFinalizeFilter$lambda$16;
+            public final Object mo781invoke(Object obj) {
+                return HeadsUpCoordinator.onBeforeFinalizeFilter$lambda$16(this.f$0, list, (HunMutator) obj);
             }
         });
     }
@@ -915,7 +952,7 @@ public final class HeadsUpCoordinator implements Coordinator {
         this.mEntriesBindingUntil.put(postedEntry.getKey(), Long.valueOf(this.mNow + 1000));
         final HeadsUpViewBinder headsUpViewBinder = this.mHeadsUpViewBinder;
         final NotificationEntry entry = postedEntry.getEntry();
-        final HeadsUpViewBinder.HeadsUpBindCallback headsUpBindCallback = new HeadsUpViewBinder.HeadsUpBindCallback() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$bindForAsyncHeadsUp$2
+        final HeadsUpViewBinder.HeadsUpBindCallback headsUpBindCallback = new HeadsUpViewBinder.HeadsUpBindCallback() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator.bindForAsyncHeadsUp.2
             @Override // com.android.systemui.statusbar.notification.interruption.HeadsUpViewBinder.HeadsUpBindCallback
             public final void onHeadsUpBindFinished(NotificationEntry notificationEntry, boolean z) {
                 HeadsUpCoordinator.this.onHeadsUpViewBound(notificationEntry, z);
@@ -923,19 +960,19 @@ public final class HeadsUpCoordinator implements Coordinator {
         };
         RowContentBindStage rowContentBindStage = headsUpViewBinder.mStage;
         ((RowContentBindParams) rowContentBindStage.getStageParams(entry)).requireContentViews(4);
-        CancellationSignal requestRebind = rowContentBindStage.requestRebind(entry, new NotifBindPipeline.BindCallback() { // from class: com.android.systemui.statusbar.notification.interruption.HeadsUpViewBinder$$ExternalSyntheticLambda0
+        CancellationSignal cancellationSignalRequestRebind = rowContentBindStage.requestRebind(entry, new NotifBindPipeline.BindCallback() { // from class: com.android.systemui.statusbar.notification.interruption.HeadsUpViewBinder$$ExternalSyntheticLambda0
             @Override // com.android.systemui.statusbar.notification.row.NotifBindPipeline.BindCallback
             public final void onBindFinished(NotificationEntry notificationEntry) {
-                HeadsUpViewBinder headsUpViewBinder2 = HeadsUpViewBinder.this;
+                HeadsUpViewBinder headsUpViewBinder2 = headsUpViewBinder;
                 HeadsUpViewBinderLogger headsUpViewBinderLogger = headsUpViewBinder2.mLogger;
                 headsUpViewBinderLogger.getClass();
                 LogLevel logLevel = LogLevel.INFO;
                 HeadsUpViewBinderLogger$$ExternalSyntheticLambda0 headsUpViewBinderLogger$$ExternalSyntheticLambda0 = new HeadsUpViewBinderLogger$$ExternalSyntheticLambda0(4);
                 LogBuffer logBuffer = headsUpViewBinderLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("HeadsUpViewBinder", logLevel, headsUpViewBinderLogger$$ExternalSyntheticLambda0, null);
+                LogMessage logMessageObtain = logBuffer.obtain("HeadsUpViewBinder", logLevel, headsUpViewBinderLogger$$ExternalSyntheticLambda0, null);
                 NotificationEntry notificationEntry2 = entry;
-                ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry2);
-                logBuffer.commit(obtain);
+                ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry2);
+                logBuffer.commit(logMessageObtain);
                 ((ArrayMap) headsUpViewBinder2.mOngoingBindCallbacks).remove(notificationEntry2);
                 headsUpBindCallback.onHeadsUpBindFinished(notificationEntry, false);
             }
@@ -946,15 +983,14 @@ public final class HeadsUpCoordinator implements Coordinator {
         LogLevel logLevel = LogLevel.INFO;
         HeadsUpViewBinderLogger$$ExternalSyntheticLambda0 headsUpViewBinderLogger$$ExternalSyntheticLambda0 = new HeadsUpViewBinderLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = headsUpViewBinderLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpViewBinder", logLevel, headsUpViewBinderLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpViewBinder", logLevel, headsUpViewBinderLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtilsKt.getLogKey(entry);
         logMessageImpl.bool1 = false;
-        logBuffer.commit(obtain);
-        ((ArrayMap) headsUpViewBinder.mOngoingBindCallbacks).put(entry, requestRebind);
+        logBuffer.commit(logMessageObtain);
+        ((ArrayMap) headsUpViewBinder.mOngoingBindCallbacks).put(entry, cancellationSignalRequestRebind);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PostedEntry {
         public static final int $stable = 8;
         private final NotificationEntry entry;

@@ -162,11 +162,11 @@ public abstract class OrientationEventListener {
             float f2 = -fArr[1];
             float f3 = -fArr[2];
             if (((f * f) + (f2 * f2)) * 4.0f >= f3 * f3) {
-                int round = 90 - Math.round(((float) Math.atan2(-f2, f)) * 57.29578f);
-                while (round >= 360) {
-                    round -= 360;
+                int iRound = 90 - Math.round(((float) Math.atan2(-f2, f)) * 57.29578f);
+                while (iRound >= 360) {
+                    iRound -= 360;
                 }
-                i = round;
+                i = iRound;
                 while (i < 0) {
                     i += 360;
                 }

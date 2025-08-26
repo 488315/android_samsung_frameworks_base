@@ -1,12 +1,20 @@
 package com.android.systemui.user.data.repository;
 
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.systemui.common.coroutine.ChannelExt;
+import com.android.systemui.statusbar.policy.UserSwitcherController;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.channels.ProducerScope;
+import kotlinx.coroutines.channels.SendChannel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class UserSwitcherRepositoryImpl$currentUserName$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -21,73 +29,53 @@ final class UserSwitcherRepositoryImpl$currentUserName$1 extends SuspendLambda i
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0037  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r5v5, types: [kotlinx.coroutines.channels.SendChannel] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object invokeSuspend$updateState(kotlinx.coroutines.channels.ProducerScope r5, com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            boolean r0 = r7 instanceof com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1$updateState$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1$updateState$1 r0 = (com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1$updateState$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1$updateState$1 r0 = new com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1$updateState$1
-            r0.<init>(r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L37
-            if (r2 != r3) goto L2f
-            java.lang.Object r5 = r0.L$1
-            kotlinx.coroutines.channels.SendChannel r5 = (kotlinx.coroutines.channels.SendChannel) r5
-            java.lang.Object r6 = r0.L$0
-            com.android.systemui.common.coroutine.ChannelExt r6 = (com.android.systemui.common.coroutine.ChannelExt) r6
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L59
-        L2f:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L37:
-            kotlin.ResultKt.throwOnFailure(r7)
-            com.android.systemui.common.coroutine.ChannelExt r7 = com.android.systemui.common.coroutine.ChannelExt.INSTANCE
-            r0.L$0 = r7
-            r0.L$1 = r5
-            r0.label = r3
-            int r2 = com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl.$r8$clinit
-            r6.getClass()
-            com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$getCurrentUser$2 r2 = new com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$getCurrentUser$2
-            r3 = 0
-            r2.<init>(r6, r3)
-            kotlinx.coroutines.CoroutineDispatcher r6 = r6.bgDispatcher
-            java.lang.Object r6 = kotlinx.coroutines.BuildersKt.withContext(r6, r2, r0)
-            if (r6 != r1) goto L56
-            return r1
-        L56:
-            r4 = r7
-            r7 = r6
-            r6 = r4
-        L59:
-            java.lang.String r0 = "UserSwitcherRepositoryImpl"
-            com.android.systemui.common.coroutine.ChannelExt.trySendWithFailureLogging$default(r6, r5, r7, r0)
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1.invokeSuspend$updateState(kotlinx.coroutines.channels.ProducerScope, com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object invokeSuspend$updateState(ProducerScope producerScope, UserSwitcherRepositoryImpl userSwitcherRepositoryImpl, ContinuationImpl continuationImpl) throws Throwable {
+        UserSwitcherRepositoryImpl$currentUserName$1$updateState$1 userSwitcherRepositoryImpl$currentUserName$1$updateState$1;
+        ChannelExt channelExt;
+        ProducerScope producerScope2;
+        if (continuationImpl instanceof UserSwitcherRepositoryImpl$currentUserName$1$updateState$1) {
+            userSwitcherRepositoryImpl$currentUserName$1$updateState$1 = (UserSwitcherRepositoryImpl$currentUserName$1$updateState$1) continuationImpl;
+            int i = userSwitcherRepositoryImpl$currentUserName$1$updateState$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                userSwitcherRepositoryImpl$currentUserName$1$updateState$1.label = i - Integer.MIN_VALUE;
+            } else {
+                userSwitcherRepositoryImpl$currentUserName$1$updateState$1 = new UserSwitcherRepositoryImpl$currentUserName$1$updateState$1(continuationImpl);
+            }
+        }
+        Object obj = userSwitcherRepositoryImpl$currentUserName$1$updateState$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = userSwitcherRepositoryImpl$currentUserName$1$updateState$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            ChannelExt channelExt2 = ChannelExt.INSTANCE;
+            userSwitcherRepositoryImpl$currentUserName$1$updateState$1.L$0 = channelExt2;
+            userSwitcherRepositoryImpl$currentUserName$1$updateState$1.L$1 = producerScope;
+            userSwitcherRepositoryImpl$currentUserName$1$updateState$1.label = 1;
+            int i3 = UserSwitcherRepositoryImpl.$r8$clinit;
+            userSwitcherRepositoryImpl.getClass();
+            Object objWithContext = BuildersKt.withContext(userSwitcherRepositoryImpl.bgDispatcher, new UserSwitcherRepositoryImpl$getCurrentUser$2(userSwitcherRepositoryImpl, null), userSwitcherRepositoryImpl$currentUserName$1$updateState$1);
+            if (objWithContext == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+            obj = objWithContext;
+            channelExt = channelExt2;
+            producerScope2 = producerScope;
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ?? r5 = (SendChannel) userSwitcherRepositoryImpl$currentUserName$1$updateState$1.L$1;
+            channelExt = (ChannelExt) userSwitcherRepositoryImpl$currentUserName$1$updateState$1.L$0;
+            ResultKt.throwOnFailure(obj);
+            producerScope2 = r5;
+        }
+        ChannelExt.trySendWithFailureLogging$default(channelExt, producerScope2, obj, "UserSwitcherRepositoryImpl");
+        return Unit.INSTANCE;
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -102,75 +90,99 @@ final class UserSwitcherRepositoryImpl$currentUserName$1 extends SuspendLambda i
         return ((UserSwitcherRepositoryImpl$currentUserName$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x005c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:15:0x005c, code lost:
     
         if (kotlinx.coroutines.channels.ProduceKt.awaitClose(r3, r4, r6) == r0) goto L16;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r7) {
-        /*
-            r6 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r6.label
-            r2 = 2
-            r3 = 1
-            if (r1 == 0) goto L24
-            if (r1 == r3) goto L18
-            if (r1 != r2) goto L10
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L5f
-        L10:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L18:
-            java.lang.Object r1 = r6.L$1
-            com.android.systemui.statusbar.policy.UserSwitcherController$UserSwitchCallback r1 = (com.android.systemui.statusbar.policy.UserSwitcherController.UserSwitchCallback) r1
-            java.lang.Object r3 = r6.L$0
-            kotlinx.coroutines.channels.ProducerScope r3 = (kotlinx.coroutines.channels.ProducerScope) r3
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L49
-        L24:
-            kotlin.ResultKt.throwOnFailure(r7)
-            java.lang.Object r7 = r6.L$0
-            kotlinx.coroutines.channels.ProducerScope r7 = (kotlinx.coroutines.channels.ProducerScope) r7
-            com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1$callback$1 r1 = new com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1$callback$1
-            com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl r4 = r6.this$0
-            r1.<init>()
-            com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl r4 = r6.this$0
-            com.android.systemui.statusbar.policy.UserSwitcherController r4 = r4.userSwitcherController
-            r4.addUserSwitchCallback(r1)
-            com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl r4 = r6.this$0
-            r6.L$0 = r7
-            r6.L$1 = r1
-            r6.label = r3
-            java.lang.Object r3 = invokeSuspend$updateState(r7, r4, r6)
-            if (r3 != r0) goto L48
-            goto L5e
-        L48:
-            r3 = r7
-        L49:
-            com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl r7 = r6.this$0
-            com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserInfo$1$$ExternalSyntheticLambda0 r4 = new com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserInfo$1$$ExternalSyntheticLambda0
-            r5 = 1
-            r4.<init>(r7, r1, r5)
-            r7 = 0
-            r6.L$0 = r7
-            r6.L$1 = r7
-            r6.label = r2
-            java.lang.Object r6 = kotlinx.coroutines.channels.ProduceKt.awaitClose(r3, r4, r6)
-            if (r6 != r0) goto L5f
-        L5e:
-            return r0
-        L5f:
-            kotlin.Unit r6 = kotlin.Unit.INSTANCE
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        UserSwitcherController.UserSwitchCallback userSwitchCallback;
+        ProducerScope producerScope;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            final ProducerScope producerScope2 = (ProducerScope) this.L$0;
+            final UserSwitcherRepositoryImpl userSwitcherRepositoryImpl = this.this$0;
+            userSwitchCallback = new UserSwitcherController.UserSwitchCallback() { // from class: com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1$callback$1
+
+                /* renamed from: com.android.systemui.user.data.repository.UserSwitcherRepositoryImpl$currentUserName$1$callback$1$1, reason: invalid class name */
+                final class AnonymousClass1 extends SuspendLambda implements Function2 {
+                    final /* synthetic */ ProducerScope $$this$conflatedCallbackFlow;
+                    int label;
+                    final /* synthetic */ UserSwitcherRepositoryImpl this$0;
+
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    public AnonymousClass1(ProducerScope producerScope, UserSwitcherRepositoryImpl userSwitcherRepositoryImpl, Continuation continuation) {
+                        super(2, continuation);
+                        this.$$this$conflatedCallbackFlow = producerScope;
+                        this.this$0 = userSwitcherRepositoryImpl;
+                    }
+
+                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                    public final Continuation create(Object obj, Continuation continuation) {
+                        return new AnonymousClass1(this.$$this$conflatedCallbackFlow, this.this$0, continuation);
+                    }
+
+                    @Override // kotlin.jvm.functions.Function2
+                    public final Object invoke(Object obj, Object obj2) {
+                        return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                    }
+
+                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                    public final Object invokeSuspend(Object obj) {
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i = this.label;
+                        if (i == 0) {
+                            ResultKt.throwOnFailure(obj);
+                            ProducerScope producerScope = this.$$this$conflatedCallbackFlow;
+                            UserSwitcherRepositoryImpl userSwitcherRepositoryImpl = this.this$0;
+                            this.label = 1;
+                            if (UserSwitcherRepositoryImpl$currentUserName$1.invokeSuspend$updateState(producerScope, userSwitcherRepositoryImpl, this) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        } else {
+                            if (i != 1) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj);
+                        }
+                        return Unit.INSTANCE;
+                    }
+                }
+
+                @Override // com.android.systemui.statusbar.policy.UserSwitcherController.UserSwitchCallback
+                public final void onUserSwitched() {
+                    ProducerScope producerScope3 = producerScope2;
+                    CoroutineTracingKt.launchTraced$default(producerScope3, null, null, new AnonymousClass1(producerScope3, userSwitcherRepositoryImpl, null), 7);
+                }
+            };
+            this.this$0.userSwitcherController.addUserSwitchCallback(userSwitchCallback);
+            UserSwitcherRepositoryImpl userSwitcherRepositoryImpl2 = this.this$0;
+            this.L$0 = producerScope2;
+            this.L$1 = userSwitchCallback;
+            this.label = 1;
+            if (invokeSuspend$updateState(producerScope2, userSwitcherRepositoryImpl2, this) != coroutineSingletons) {
+                producerScope = producerScope2;
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        userSwitchCallback = (UserSwitcherController.UserSwitchCallback) this.L$1;
+        producerScope = (ProducerScope) this.L$0;
+        ResultKt.throwOnFailure(obj);
+        UserSwitcherRepositoryImpl$currentUserInfo$1$$ExternalSyntheticLambda0 userSwitcherRepositoryImpl$currentUserInfo$1$$ExternalSyntheticLambda0 = new UserSwitcherRepositoryImpl$currentUserInfo$1$$ExternalSyntheticLambda0(this.this$0, userSwitchCallback, 1);
+        this.L$0 = null;
+        this.L$1 = null;
+        this.label = 2;
     }
 }

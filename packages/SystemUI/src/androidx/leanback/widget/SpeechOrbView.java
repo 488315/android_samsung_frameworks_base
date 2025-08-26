@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import androidx.leanback.widget.SearchOrbView;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SpeechOrbView extends SearchOrbView {
     public final SearchOrbView.Colors mListeningOrbColors;
@@ -25,7 +24,7 @@ public class SpeechOrbView extends SearchOrbView {
         this(context, attributeSet, 0);
     }
 
-    public SpeechOrbView(Context context, AttributeSet attributeSet, int i) {
+    public SpeechOrbView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         Resources resources = context.getResources();
         resources.getFraction(R.fraction.lb_search_bar_speech_orb_max_level_zoom, 1, 1);

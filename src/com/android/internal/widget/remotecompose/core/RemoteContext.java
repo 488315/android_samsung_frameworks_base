@@ -308,35 +308,35 @@ public abstract class RemoteContext {
     }
 
     public static boolean isTime(float f) {
-        int idFromNan = Utils.idFromNan(f);
-        return idFromNan >= 1 && idFromNan <= 12;
+        int iIdFromNan = Utils.idFromNan(f);
+        return iIdFromNan >= 1 && iIdFromNan <= 12;
     }
 
     /* JADX WARN: Type inference failed for: r0v2, types: [java.time.ZonedDateTime] */
     public static float getTime(float f) {
-        LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
-        int idFromNan = Utils.idFromNan(f);
-        int value = now.getMonth().getValue();
-        int hour = now.getHour();
-        int minute = now.getMinute();
+        LocalDateTime localDateTimeNow = LocalDateTime.now(ZoneId.systemDefault());
+        int iIdFromNan = Utils.idFromNan(f);
+        int value = localDateTimeNow.getMonth().getValue();
+        int hour = localDateTimeNow.getHour();
+        int minute = localDateTimeNow.getMinute();
         int i = (hour * 60) + minute;
-        float second = (minute * 60) + now.getSecond();
-        float nano = (now.getNano() * 1.0E-9f) + second;
-        int value2 = now.getDayOfWeek().getValue();
-        ZoneOffset offset = now.atZone(ZoneId.systemDefault()).toOffsetDateTime().getOffset();
-        if (idFromNan == 1) {
+        float second = (minute * 60) + localDateTimeNow.getSecond();
+        float nano = (localDateTimeNow.getNano() * 1.0E-9f) + second;
+        int value2 = localDateTimeNow.getDayOfWeek().getValue();
+        ZoneOffset offset = localDateTimeNow.atZone(ZoneId.systemDefault()).toOffsetDateTime().getOffset();
+        if (iIdFromNan == 1) {
             return nano;
         }
-        if (idFromNan == 2) {
+        if (iIdFromNan == 2) {
             return second;
         }
-        if (idFromNan == 3) {
+        if (iIdFromNan == 3) {
             return i;
         }
-        if (idFromNan == 4) {
+        if (iIdFromNan == 4) {
             return hour;
         }
-        switch (idFromNan) {
+        switch (iIdFromNan) {
             case 9:
             case 12:
                 return value;

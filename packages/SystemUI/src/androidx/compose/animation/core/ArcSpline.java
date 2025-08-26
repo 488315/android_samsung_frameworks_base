@@ -3,12 +3,10 @@ package androidx.compose.animation.core;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable$$ExternalSyntheticOutline0;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ArcSpline {
     public final Arc[][] arcs;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Arc {
         public final float arcDistance;
         public final float arcVelocity;
@@ -51,9 +49,9 @@ public final class ArcSpline {
             this.lut = new float[101];
             boolean z3 = i == 3;
             if (z3 || Math.abs(f8) < 0.001f || Math.abs(f9) < 0.001f) {
-                float hypot = (float) Math.hypot(f9, f8);
-                this.arcDistance = hypot;
-                this.arcVelocity = hypot * f12;
+                float fHypot = (float) Math.hypot(f9, f8);
+                this.arcDistance = fHypot;
+                this.arcVelocity = fHypot * f12;
                 this.ellipseCenterX = f8 * f12;
                 this.ellipseCenterY = f9 * f12;
                 this.ellipseA = Float.NaN;
@@ -69,31 +67,31 @@ public final class ArcSpline {
                 float[] fArr = ArcSplineKt.OurPercentCache;
                 float f15 = 90;
                 float f16 = f14;
+                float fHypot2 = 0.0f;
                 float f17 = 0.0f;
-                float f18 = 0.0f;
                 int i4 = 1;
                 while (true) {
                     i2 = i3;
-                    float f19 = f16;
+                    float f18 = f16;
                     double radians = (float) Math.toRadians((i4 * 90.0d) / 90);
-                    float sin = ((float) Math.sin(radians)) * f13;
-                    float cos = ((float) Math.cos(radians)) * f14;
+                    float fSin = ((float) Math.sin(radians)) * f13;
+                    float fCos = ((float) Math.cos(radians)) * f14;
                     f7 = f10;
-                    f17 += (float) Math.hypot(sin - f18, cos - f19);
-                    fArr[i4] = f17;
+                    fHypot2 += (float) Math.hypot(fSin - f17, fCos - f18);
+                    fArr[i4] = fHypot2;
                     if (i4 == 90) {
                         break;
                     }
                     i4++;
-                    f18 = sin;
+                    f17 = fSin;
                     f10 = f7;
-                    f16 = cos;
+                    f16 = fCos;
                     i3 = i2;
                 }
-                this.arcDistance = f17;
+                this.arcDistance = fHypot2;
                 int i5 = i2;
                 while (true) {
-                    fArr[i5] = fArr[i5] / f17;
+                    fArr[i5] = fArr[i5] / fHypot2;
                     if (i5 == 90) {
                         break;
                     } else {
@@ -103,18 +101,18 @@ public final class ArcSpline {
                 float[] fArr2 = this.lut;
                 int length = fArr2.length;
                 for (int i6 = 0; i6 < length; i6++) {
-                    float f20 = i6 / 100.0f;
-                    int binarySearch = Arrays.binarySearch(fArr, 0, 91, f20);
-                    if (binarySearch >= 0) {
-                        fArr2[i6] = binarySearch / f15;
-                    } else if (binarySearch == -1) {
+                    float f19 = i6 / 100.0f;
+                    int iBinarySearch = Arrays.binarySearch(fArr, 0, 91, f19);
+                    if (iBinarySearch >= 0) {
+                        fArr2[i6] = iBinarySearch / f15;
+                    } else if (iBinarySearch == -1) {
                         fArr2[i6] = f7;
                     } else {
-                        int i7 = -binarySearch;
+                        int i7 = -iBinarySearch;
                         int i8 = i7 - 2;
-                        float f21 = i8;
-                        float f22 = fArr[i8];
-                        fArr2[i6] = (((f20 - f22) / (fArr[i7 - 1] - f22)) + f21) / f15;
+                        float f20 = i8;
+                        float f21 = fArr[i8];
+                        fArr2[i6] = (((f19 - f21) / (fArr[i7 - 1] - f21)) + f20) / f15;
                     }
                 }
                 this.arcVelocity = this.arcDistance * this.oneOverDeltaTime;
@@ -136,121 +134,84 @@ public final class ArcSpline {
 
         public final void setPoint(float f) {
             float f2 = (this.vertical == -1.0f ? this.time2 - f : f - this.time1) * this.oneOverDeltaTime;
-            float f3 = 0.0f;
+            float fM$1 = 0.0f;
             if (f2 > 0.0f) {
-                f3 = 1.0f;
+                fM$1 = 1.0f;
                 if (f2 < 1.0f) {
-                    float f4 = f2 * 100;
-                    int i = (int) f4;
+                    float f3 = f2 * 100;
+                    int i = (int) f3;
                     float[] fArr = this.lut;
-                    float f5 = fArr[i];
-                    f3 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(fArr[i + 1], f5, f4 - i, f5);
+                    float f4 = fArr[i];
+                    fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(fArr[i + 1], f4, f3 - i, f4);
                 }
             }
-            double d = f3 * 1.5707964f;
+            double d = fM$1 * 1.5707964f;
             this.tmpSinAngle = (float) Math.sin(d);
             this.tmpCosAngle = (float) Math.cos(d);
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0026, code lost:
-    
-        if (r6 == 1) goto L18;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0044 A[LOOP:1: B:14:0x0042->B:15:0x0044, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0024 A[PHI: r10
+      0x0024: PHI (r10v1 int) = (r10v0 int), (r10v8 int), (r10v9 int) binds: [B:5:0x0014, B:10:0x001d, B:12:0x0020] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x002d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public ArcSpline(int[] r23, float[] r24, float[][] r25) {
-        /*
-            r22 = this;
-            r0 = r24
-            r22.<init>()
-            int r1 = r0.length
-            r2 = 1
-            int r1 = r1 - r2
-            androidx.compose.animation.core.ArcSpline$Arc[][] r3 = new androidx.compose.animation.core.ArcSpline.Arc[r1][]
-            r4 = 0
-            r6 = r2
-            r7 = r6
-            r5 = r4
-        Le:
-            if (r5 >= r1) goto L73
-            r8 = r23[r5]
-            r9 = 2
-            r10 = 3
-            if (r8 == 0) goto L24
-            if (r8 == r2) goto L2d
-            if (r8 == r9) goto L2b
-            if (r8 == r10) goto L26
-            r10 = 4
-            if (r8 == r10) goto L24
-            r10 = 5
-            if (r8 == r10) goto L24
-            r11 = r7
-            goto L2f
-        L24:
-            r11 = r10
-            goto L2f
-        L26:
-            if (r6 != r2) goto L2d
-            goto L2b
-        L29:
-            r11 = r6
-            goto L2f
-        L2b:
-            r6 = r9
-            goto L29
-        L2d:
-            r6 = r2
-            goto L29
-        L2f:
-            r7 = r25[r5]
-            int r8 = r5 + 1
-            r18 = r25[r8]
-            r12 = r0[r5]
-            r13 = r0[r8]
-            int r10 = r7.length
-            int r10 = r10 / r9
-            int r14 = r7.length
-            int r14 = r14 % r9
-            int r9 = r14 + r10
-            androidx.compose.animation.core.ArcSpline$Arc[] r10 = new androidx.compose.animation.core.ArcSpline.Arc[r9]
-            r14 = r4
-        L42:
-            if (r14 >= r9) goto L6c
-            int r15 = r14 * 2
-            r16 = r10
-            androidx.compose.animation.core.ArcSpline$Arc r10 = new androidx.compose.animation.core.ArcSpline$Arc
-            r17 = r14
-            r14 = r7[r15]
-            int r19 = r15 + 1
-            r20 = r15
-            r15 = r7[r19]
-            r20 = r18[r20]
-            r19 = r18[r19]
-            r21 = r19
-            r19 = r16
-            r16 = r20
-            r20 = r17
-            r17 = r21
-            r10.<init>(r11, r12, r13, r14, r15, r16, r17)
-            r19[r20] = r10
-            int r14 = r20 + 1
-            r10 = r19
-            goto L42
-        L6c:
-            r19 = r10
-            r3[r5] = r19
-            r5 = r8
-            r7 = r11
-            goto Le
-        L73:
-            r5 = r22
-            r5.arcs = r3
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.animation.core.ArcSpline.<init>(int[], float[], float[][]):void");
+    public ArcSpline(int[] iArr, float[] fArr, float[][] fArr2) {
+        int i;
+        int length = fArr.length - 1;
+        Arc[][] arcArr = new Arc[length][];
+        int i2 = 1;
+        int i3 = 1;
+        int i4 = 0;
+        while (i4 < length) {
+            int i5 = iArr[i4];
+            int i6 = 3;
+            if (i5 == 0) {
+                i = i6;
+            } else if (i5 == 1) {
+                i2 = 1;
+                i = i2;
+            } else {
+                if (i5 != 2) {
+                    if (i5 != 3) {
+                        i6 = 4;
+                        if (i5 != 4) {
+                            i6 = 5;
+                            if (i5 != 5) {
+                                i = i3;
+                            }
+                        }
+                    } else {
+                        if (i2 == 1) {
+                        }
+                        i = i2;
+                    }
+                }
+                i2 = 2;
+                i = i2;
+            }
+            float[] fArr3 = fArr2[i4];
+            int i7 = i4 + 1;
+            float[] fArr4 = fArr2[i7];
+            float f = fArr[i4];
+            float f2 = fArr[i7];
+            int length2 = (fArr3.length % 2) + (fArr3.length / 2);
+            Arc[] arcArr2 = new Arc[length2];
+            int i8 = 0;
+            while (i8 < length2) {
+                int i9 = i8 * 2;
+                Arc[] arcArr3 = arcArr2;
+                int i10 = i8;
+                int i11 = i9 + 1;
+                arcArr3[i10] = new Arc(i, f, f2, fArr3[i9], fArr3[i11], fArr4[i9], fArr4[i11]);
+                i8 = i10 + 1;
+                arcArr2 = arcArr3;
+            }
+            arcArr[i4] = arcArr2;
+            i4 = i7;
+            i3 = i;
+        }
+        this.arcs = arcArr;
     }
 }

@@ -8,7 +8,6 @@ import android.widget.RemoteViews;
 import com.android.systemui.R;
 import com.android.systemui.shared.navigationbar.SamsungKeyButtonRipple;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavBarRemoteView {
     public final int priority;
@@ -21,11 +20,11 @@ public final class NavBarRemoteView {
         this.requestClass = str;
         this.remoteViews = remoteViews;
         this.priority = i;
-        View apply = remoteViews.apply(context, null);
-        this.view = apply;
-        SamsungKeyButtonRipple samsungKeyButtonRipple = new SamsungKeyButtonRipple(context, apply, R.dimen.key_button_ripple_max_width, 0.0f, 8, null);
+        View viewApply = remoteViews.apply(context, null);
+        this.view = viewApply;
+        SamsungKeyButtonRipple samsungKeyButtonRipple = new SamsungKeyButtonRipple(context, viewApply, R.dimen.key_button_ripple_max_width, 0.0f, 8, null);
         this.ripple = samsungKeyButtonRipple;
-        apply.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.systemui.navigationbar.remoteview.NavBarRemoteView.1
+        viewApply.setOnHoverListener(new View.OnHoverListener() { // from class: com.android.systemui.navigationbar.remoteview.NavBarRemoteView.1
             @Override // android.view.View.OnHoverListener
             public final boolean onHover(View view, MotionEvent motionEvent) {
                 SamsungKeyButtonRipple samsungKeyButtonRipple2;
@@ -49,7 +48,7 @@ public final class NavBarRemoteView {
                 return false;
             }
         });
-        apply.setBackground(samsungKeyButtonRipple);
-        apply.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
+        viewApply.setBackground(samsungKeyButtonRipple);
+        viewApply.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
     }
 }

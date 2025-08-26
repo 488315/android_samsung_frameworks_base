@@ -7,14 +7,14 @@ import java.util.List;
 public final class QuickSelect {
     private static <T> int selectImpl(List<T> list, int i, int i2, int i3, Comparator<? super T> comparator) {
         while (i != i2) {
-            int partition = partition(list, i, i2, (i + i2) >> 1, comparator);
-            if (i3 == partition) {
+            int iPartition = partition(list, i, i2, (i + i2) >> 1, comparator);
+            if (i3 == iPartition) {
                 return i3;
             }
-            if (i3 < partition) {
-                i2 = partition - 1;
+            if (i3 < iPartition) {
+                i2 = iPartition - 1;
             } else {
-                i = partition + 1;
+                i = iPartition + 1;
             }
         }
         return i;
@@ -22,14 +22,14 @@ public final class QuickSelect {
 
     private static int selectImpl(int[] iArr, int i, int i2, int i3) {
         while (i != i2) {
-            int partition = partition(iArr, i, i2, (i + i2) >> 1);
-            if (i3 == partition) {
+            int iPartition = partition(iArr, i, i2, (i + i2) >> 1);
+            if (i3 == iPartition) {
                 return i3;
             }
-            if (i3 < partition) {
-                i2 = partition - 1;
+            if (i3 < iPartition) {
+                i2 = iPartition - 1;
             } else {
-                i = partition + 1;
+                i = iPartition + 1;
             }
         }
         return i;
@@ -37,14 +37,14 @@ public final class QuickSelect {
 
     private static int selectImpl(long[] jArr, int i, int i2, int i3) {
         while (i != i2) {
-            int partition = partition(jArr, i, i2, (i + i2) >> 1);
-            if (i3 == partition) {
+            int iPartition = partition(jArr, i, i2, (i + i2) >> 1);
+            if (i3 == iPartition) {
                 return i3;
             }
-            if (i3 < partition) {
-                i2 = partition - 1;
+            if (i3 < iPartition) {
+                i2 = iPartition - 1;
             } else {
-                i = partition + 1;
+                i = iPartition + 1;
             }
         }
         return i;
@@ -52,14 +52,14 @@ public final class QuickSelect {
 
     private static <T> int selectImpl(T[] tArr, int i, int i2, int i3, Comparator<? super T> comparator) {
         while (i != i2) {
-            int partition = partition(tArr, i, i2, (i + i2) >> 1, comparator);
-            if (i3 == partition) {
+            int iPartition = partition(tArr, i, i2, (i + i2) >> 1, comparator);
+            if (i3 == iPartition) {
                 return i3;
             }
-            if (i3 < partition) {
-                i2 = partition - 1;
+            if (i3 < iPartition) {
+                i2 = iPartition - 1;
             } else {
-                i = partition + 1;
+                i = iPartition + 1;
             }
         }
         return i;

@@ -39,7 +39,6 @@ import dagger.Lazy;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusBarRemoteInputCallback implements NotificationRemoteInputManager.Callback, CommandQueue.Callbacks, StatusBarStateController.StateListener {
     public final ActionClickLogger mActionClickLogger;
@@ -60,7 +59,6 @@ public class StatusBarRemoteInputCallback implements NotificationRemoteInputMana
     public final StatusBarKeyguardViewManager mStatusBarKeyguardViewManager;
     public final SysuiStatusBarStateController mStatusBarStateController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ChallengeReceiver extends BroadcastReceiver {
         public ChallengeReceiver() {
         }
@@ -127,11 +125,11 @@ public class StatusBarRemoteInputCallback implements NotificationRemoteInputMana
         LogLevel logLevel = LogLevel.DEBUG;
         ActionClickLogger$$ExternalSyntheticLambda0 actionClickLogger$$ExternalSyntheticLambda0 = new ActionClickLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer = actionClickLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("ActionClickLogger", logLevel, actionClickLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("ActionClickLogger", logLevel, actionClickLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = pendingIntent.toString();
         logMessageImpl.int1 = num != null ? num.intValue() : Integer.MIN_VALUE;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         boolean z2 = this.mActivityIntentHelper.getPendingTargetActivityInfo(((NotificationLockscreenUserManagerImpl) this.mLockscreenUserManager).mCurrentUserId, pendingIntent) == null;
         if (LsRune.SECURITY_SWIPE_BOUNCER) {
             this.mStatusBarKeyguardViewManager.setShowSwipeBouncer(true);
@@ -140,18 +138,18 @@ public class StatusBarRemoteInputCallback implements NotificationRemoteInputMana
             @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
             public final boolean onDismiss() {
                 PendingIntent pendingIntent2 = pendingIntent;
-                StatusBarRemoteInputCallback statusBarRemoteInputCallback = StatusBarRemoteInputCallback.this;
+                StatusBarRemoteInputCallback statusBarRemoteInputCallback = this.f$0;
                 ActionClickLogger actionClickLogger2 = statusBarRemoteInputCallback.mActionClickLogger;
                 actionClickLogger2.getClass();
                 LogLevel logLevel2 = LogLevel.DEBUG;
                 ActionClickLogger$$ExternalSyntheticLambda0 actionClickLogger$$ExternalSyntheticLambda02 = new ActionClickLogger$$ExternalSyntheticLambda0(2);
                 LogBuffer logBuffer2 = actionClickLogger2.buffer;
-                LogMessage obtain2 = logBuffer2.obtain("ActionClickLogger", logLevel2, actionClickLogger$$ExternalSyntheticLambda02, null);
-                LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                LogMessage logMessageObtain2 = logBuffer2.obtain("ActionClickLogger", logLevel2, actionClickLogger$$ExternalSyntheticLambda02, null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                 logMessageImpl2.str1 = pendingIntent2.toString();
                 Integer num2 = num;
                 logMessageImpl2.int1 = num2 != null ? num2.intValue() : Integer.MIN_VALUE;
-                logBuffer2.commit(obtain2);
+                logBuffer2.commit(logMessageObtain2);
                 try {
                     ActivityManager.getService().resumeAppSwitches();
                 } catch (RemoteException unused) {
@@ -171,7 +169,11 @@ public class StatusBarRemoteInputCallback implements NotificationRemoteInputMana
             ((StatusBarStateControllerImpl) this.mStatusBarStateController).setLeaveOpenOnKeyguardHide(true);
         }
         KeyguardUnlockInfo.setUnlockTrigger(KeyguardUnlockInfo.UnlockTrigger.TRIGGER_REMOTE_INPUT);
-        this.mStatusBarKeyguardViewManager.showBouncer("StatusBarRemoteInputCallback#onLockedRemoteInput");
+        StatusBarKeyguardViewManager statusBarKeyguardViewManager = this.mStatusBarKeyguardViewManager;
+        statusBarKeyguardViewManager.getClass();
+        int i = SceneContainerFlag.$r8$clinit;
+        statusBarKeyguardViewManager.mAlternateBouncerInteractor.getClass();
+        statusBarKeyguardViewManager.showPrimaryBouncer("StatusBarRemoteInputCallback#onLockedRemoteInput", true);
         this.mPendingRemoteInputView = view;
     }
 
@@ -192,17 +194,17 @@ public class StatusBarRemoteInputCallback implements NotificationRemoteInputMana
 
     public final boolean startWorkChallengeIfNecessary(int i, IntentSender intentSender, String str) {
         this.mPendingWorkRemoteInputView = null;
-        Intent createConfirmDeviceCredentialIntent = this.mKeyguardManager.createConfirmDeviceCredentialIntent(null, null, i);
-        if (createConfirmDeviceCredentialIntent == null) {
+        Intent intentCreateConfirmDeviceCredentialIntent = this.mKeyguardManager.createConfirmDeviceCredentialIntent(null, null, i);
+        if (intentCreateConfirmDeviceCredentialIntent == null) {
             return false;
         }
         Intent intent = new Intent("com.android.systemui.statusbar.work_challenge_unlocked_notification_action");
         intent.putExtra("android.intent.extra.INTENT", intentSender);
         intent.putExtra("android.intent.extra.INDEX", str);
         intent.setPackage(this.mContext.getPackageName());
-        createConfirmDeviceCredentialIntent.putExtra("android.intent.extra.INTENT", PendingIntent.getBroadcast(this.mContext, 0, intent, 1409286144).getIntentSender());
+        intentCreateConfirmDeviceCredentialIntent.putExtra("android.intent.extra.INTENT", PendingIntent.getBroadcast(this.mContext, 0, intent, 1409286144).getIntentSender());
         try {
-            ActivityManager.getService().startConfirmDeviceCredentialIntent(createConfirmDeviceCredentialIntent, (Bundle) null);
+            ActivityManager.getService().startConfirmDeviceCredentialIntent(intentCreateConfirmDeviceCredentialIntent, (Bundle) null);
             return true;
         } catch (RemoteException unused) {
             return true;

@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.app.PendingIntent$$ExternalSyntheticLambda0;
 import android.os.RemoteException;
 import android.telephony.ims.ImsExternalCallState;
-import android.telephony.ims.stub.ImsMultiEndpointImplBase;
 import android.util.Log;
 import com.android.ims.internal.IImsExternalCallStateListener;
 import com.android.ims.internal.IImsMultiEndpoint;
@@ -35,7 +34,7 @@ public class ImsMultiEndpointImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsMultiEndpointImplBase$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsMultiEndpointImplBase.AnonymousClass1.this.lambda$setListener$0(iImsExternalCallStateListener);
+                    this.f$0.lambda$setListener$0(iImsExternalCallStateListener);
                 }
             }, "setListener");
         }
@@ -68,7 +67,7 @@ public class ImsMultiEndpointImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsMultiEndpointImplBase$1$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsMultiEndpointImplBase.AnonymousClass1.this.lambda$requestImsExternalCallStateInfo$1();
+                    this.f$0.lambda$requestImsExternalCallStateInfo$1();
                 }
             }, "requestImsExternalCallStateInfo");
         }

@@ -9,7 +9,6 @@ import kotlin.ranges.IntRange;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlinx.coroutines.CancellableContinuation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BringIntoViewRequestPriorityQueue {
     public final MutableVector requests = new MutableVector(new ContentInViewNode.Request[16], 0);
@@ -32,9 +31,9 @@ public final class BringIntoViewRequestPriorityQueue {
 
     public final void resumeAndRemoveAll() {
         MutableVector mutableVector = this.requests;
-        IntRange until = RangesKt___RangesKt.until(0, mutableVector.size);
-        int i = until.first;
-        int i2 = until.last;
+        IntRange intRangeUntil = RangesKt___RangesKt.until(0, mutableVector.size);
+        int i = intRangeUntil.first;
+        int i2 = intRangeUntil.last;
         if (i <= i2) {
             while (true) {
                 CancellableContinuation cancellableContinuation = ((ContentInViewNode.Request) mutableVector.content[i]).continuation;

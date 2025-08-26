@@ -17,7 +17,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class HoverIconModifierNode extends Modifier.Node implements TraversableNode, PointerInputModifierNode, CompositionLocalConsumerModifierNode {
     public boolean cursorInBoundsOfNode;
@@ -42,7 +41,7 @@ public abstract class HoverIconModifierNode extends Modifier.Node implements Tra
             /* JADX WARN: Type inference failed for: r2v1, types: [T, androidx.compose.ui.input.pointer.HoverIconModifierNode] */
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ?? r2 = (HoverIconModifierNode) obj;
                 if (r2.overrideDescendants && r2.cursorInBoundsOfNode) {
                     ref$ObjectRef.element = r2;
@@ -63,18 +62,18 @@ public abstract class HoverIconModifierNode extends Modifier.Node implements Tra
         final Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
         ref$BooleanRef.element = true;
         if (!this.overrideDescendants) {
-            TraversableNodeKt.traverseDescendants(this, new Function1() { // from class: androidx.compose.ui.input.pointer.HoverIconModifierNode$displayIconIfDescendantsDoNotHavePriority$1
+            TraversableNodeKt.traverseDescendants(this, new Function1() { // from class: androidx.compose.ui.input.pointer.HoverIconModifierNode.displayIconIfDescendantsDoNotHavePriority.1
                 {
                     super(1);
                 }
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     if (!((HoverIconModifierNode) obj).cursorInBoundsOfNode) {
                         return TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal;
                     }
-                    Ref$BooleanRef.this.element = false;
+                    ref$BooleanRef.element = false;
                     return TraversableNode$Companion$TraverseDescendantsAction.CancelTraversal;
                 }
             });
@@ -86,7 +85,7 @@ public abstract class HoverIconModifierNode extends Modifier.Node implements Tra
 
     @Override // androidx.compose.ui.node.PointerInputModifierNode
     /* renamed from: getTouchBoundsExpansion-RZrCHBk */
-    public final long mo212getTouchBoundsExpansionRZrCHBk() {
+    public final long mo213getTouchBoundsExpansionRZrCHBk() {
         DpTouchBoundsExpansion dpTouchBoundsExpansion = this.dpTouchBoundsExpansion;
         if (dpTouchBoundsExpansion == null) {
             TouchBoundsExpansion.Companion.getClass();
@@ -94,16 +93,16 @@ public abstract class HoverIconModifierNode extends Modifier.Node implements Tra
         }
         Density density = DelegatableNodeKt.requireLayoutNode(this).density;
         TouchBoundsExpansion.Companion companion = TouchBoundsExpansion.Companion;
-        int mo51roundToPx0680j_4 = density.mo51roundToPx0680j_4(dpTouchBoundsExpansion.start);
-        int mo51roundToPx0680j_42 = density.mo51roundToPx0680j_4(dpTouchBoundsExpansion.top);
-        int mo51roundToPx0680j_43 = density.mo51roundToPx0680j_4(dpTouchBoundsExpansion.end);
-        int mo51roundToPx0680j_44 = density.mo51roundToPx0680j_4(dpTouchBoundsExpansion.bottom);
+        int iMo52roundToPx0680j_4 = density.mo52roundToPx0680j_4(dpTouchBoundsExpansion.start);
+        int iMo52roundToPx0680j_42 = density.mo52roundToPx0680j_4(dpTouchBoundsExpansion.top);
+        int iMo52roundToPx0680j_43 = density.mo52roundToPx0680j_4(dpTouchBoundsExpansion.end);
+        int iMo52roundToPx0680j_44 = density.mo52roundToPx0680j_4(dpTouchBoundsExpansion.bottom);
         companion.getClass();
-        return TouchBoundsExpansion.Companion.pack$ui_release(dpTouchBoundsExpansion.isLayoutDirectionAware, mo51roundToPx0680j_4, mo51roundToPx0680j_42, mo51roundToPx0680j_43, mo51roundToPx0680j_44);
+        return TouchBoundsExpansion.Companion.pack$ui_release(dpTouchBoundsExpansion.isLayoutDirectionAware, iMo52roundToPx0680j_4, iMo52roundToPx0680j_42, iMo52roundToPx0680j_43, iMo52roundToPx0680j_44);
     }
 
     /* renamed from: isRelevantPointerType-uerMTgs, reason: not valid java name */
-    public abstract boolean mo587isRelevantPointerTypeuerMTgs(int i);
+    public abstract boolean mo589isRelevantPointerTypeuerMTgs(int i);
 
     @Override // androidx.compose.ui.node.PointerInputModifierNode
     public final void onCancelPointerInput() {
@@ -131,7 +130,7 @@ public abstract class HoverIconModifierNode extends Modifier.Node implements Tra
                     /* JADX WARN: Type inference failed for: r3v1, types: [T, androidx.compose.ui.input.pointer.HoverIconModifierNode] */
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         ?? r3 = (HoverIconModifierNode) obj;
                         Ref$ObjectRef<HoverIconModifierNode> ref$ObjectRef2 = ref$ObjectRef;
                         HoverIconModifierNode hoverIconModifierNode = ref$ObjectRef2.element;
@@ -164,7 +163,7 @@ public abstract class HoverIconModifierNode extends Modifier.Node implements Tra
             List list = pointerEvent.changes;
             int size = list.size();
             for (int i = 0; i < size; i++) {
-                if (mo587isRelevantPointerTypeuerMTgs(((PointerInputChange) list.get(i)).type)) {
+                if (mo589isRelevantPointerTypeuerMTgs(((PointerInputChange) list.get(i)).type)) {
                     int i2 = pointerEvent.type;
                     PointerEventType.Companion.getClass();
                     if (i2 == PointerEventType.Enter) {
@@ -207,7 +206,7 @@ public abstract class HoverIconModifierNode extends Modifier.Node implements Tra
                         /* JADX WARN: Type inference failed for: r3v1, types: [T, androidx.compose.ui.input.pointer.HoverIconModifierNode] */
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             ?? r3 = (HoverIconModifierNode) obj;
                             TraversableNode$Companion$TraverseDescendantsAction traversableNode$Companion$TraverseDescendantsAction = TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal;
                             if (r3.cursorInBoundsOfNode) {

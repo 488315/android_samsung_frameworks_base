@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class UdfpsHapticsSimulator implements Command {
     public final AudioAttributes sonificationEffects = new AudioAttributes.Builder().setContentType(4).setUsage(13).build();
@@ -23,7 +22,7 @@ public final class UdfpsHapticsSimulator implements Command {
         commandRegistry.registerCommand("udfps-haptic", new Function0() { // from class: com.android.systemui.biometrics.UdfpsHapticsSimulator$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return UdfpsHapticsSimulator.this;
+                return this.f$0;
             }
         });
     }
@@ -41,11 +40,11 @@ public final class UdfpsHapticsSimulator implements Command {
             return;
         }
         String str = (String) list.get(0);
-        int hashCode = str.hashCode();
+        int iHashCode = str.hashCode();
         VibratorHelper vibratorHelper = this.vibrator;
-        if (hashCode != -1867169789) {
-            if (hashCode != 96784904) {
-                if (hashCode == 109757538 && str.equals(NetworkAnalyticsConstants.DataPoints.OPEN_TIME)) {
+        if (iHashCode != -1867169789) {
+            if (iHashCode != 96784904) {
+                if (iHashCode == 109757538 && str.equals(NetworkAnalyticsConstants.DataPoints.OPEN_TIME)) {
                     UdfpsController udfpsController = this.udfpsController;
                     if (udfpsController != null) {
                         udfpsController.playStartHaptic();

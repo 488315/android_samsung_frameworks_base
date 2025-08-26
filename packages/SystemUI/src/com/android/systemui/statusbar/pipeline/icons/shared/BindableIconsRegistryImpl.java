@@ -5,7 +5,6 @@ import com.android.systemui.statusbar.pipeline.satellite.ui.DeviceBasedSatellite
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BindableIconsRegistryImpl implements BindableIconsRegistry {
     public final List bindableIcons;

@@ -34,7 +34,6 @@ import com.android.systemui.statusbar.notification.row.wrapper.NotificationTempl
 import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapper {
     public NotificationActionListLayout mActions;
@@ -53,7 +52,6 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
     public TextView mText;
     public TextView mTitle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class ActionPendingIntentCancellationHandler implements View.OnAttachStateChangeListener {
         public static UiOffloadThread sUiOffloadThread;
         public final AnonymousClass1 mCancelListener = new AnonymousClass1();
@@ -61,7 +59,6 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
         public final PendingIntent mPendingIntent;
         public final View mView;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.notification.row.wrapper.NotificationTemplateViewWrapper$ActionPendingIntentCancellationHandler$1, reason: invalid class name */
         public class AnonymousClass1 implements PendingIntent.CancelListener {
             public AnonymousClass1() {
@@ -71,7 +68,7 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
                 ActionPendingIntentCancellationHandler.this.mView.post(new Runnable() { // from class: com.android.systemui.statusbar.notification.row.wrapper.NotificationTemplateViewWrapper$ActionPendingIntentCancellationHandler$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NotificationTemplateViewWrapper.ActionPendingIntentCancellationHandler.AnonymousClass1 anonymousClass1 = NotificationTemplateViewWrapper.ActionPendingIntentCancellationHandler.AnonymousClass1.this;
+                        NotificationTemplateViewWrapper.ActionPendingIntentCancellationHandler.AnonymousClass1 anonymousClass1 = this.f$0;
                         NotificationTemplateViewWrapper.ActionPendingIntentCancellationHandler.this.mOnCancelledCallback.accept(pendingIntent);
                         NotificationTemplateViewWrapper.ActionPendingIntentCancellationHandler.this.remove();
                     }
@@ -160,7 +157,7 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
                 return true;
             }
         }, 2);
-        this.mFullHeaderTranslation = context.getResources().getDimensionPixelSize(android.R.dimen.toast_elevation) - context.getResources().getDimensionPixelSize(android.R.dimen.toast_y_offset);
+        this.mFullHeaderTranslation = context.getResources().getDimensionPixelSize(android.R.dimen.toast_text_size) - context.getResources().getDimensionPixelSize(android.R.dimen.tooltip_corner_radius);
     }
 
     public final void disableActionView(Button button) {
@@ -169,7 +166,7 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
             ColorStateList textColors = button.getTextColors();
             int[] colors = textColors.getColors();
             int[] iArr = new int[colors.length];
-            float f = this.mView.getResources().getFloat(android.R.dimen.text_size_subtitle_material_toolbar);
+            float f = this.mView.getResources().getFloat(android.R.dimen.text_size_title_material);
             for (int i = 0; i < colors.length; i++) {
                 int i2 = colors[i];
                 iArr[i] = ContrastColorUtil.compositeColors(Color.argb((int) (255.0f * f), Color.red(i2), Color.green(i2), Color.blue(i2)), resolveBackgroundColor());
@@ -216,7 +213,7 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
         boolean z = true;
         int i = NotificationBundleUi.$r8$clinit;
         StatusBarNotification statusBarNotification = expandableNotificationRow.getEntryLegacy().mSbn;
-        ImageView imageView2 = (ImageView) this.mView.findViewById(android.R.id.tag_top_animator);
+        ImageView imageView2 = (ImageView) this.mView.findViewById(android.R.id.tag_top_override);
         this.mRightIcon = imageView2;
         if (imageView2 != null) {
             Pools.SimplePool simplePool = ImageTransformState.sInstancePool;
@@ -241,14 +238,14 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
             imageView4.setTag(R.id.image_icon_tag, largeIcon2);
         }
         this.mTitle = (TextView) this.mView.findViewById(android.R.id.title);
-        this.mText = (TextView) this.mView.findViewById(16909931);
-        View findViewById = this.mView.findViewById(android.R.id.progress);
-        if (findViewById instanceof ProgressBar) {
-            this.mProgressBar = (ProgressBar) findViewById;
+        this.mText = (TextView) this.mView.findViewById(16909932);
+        View viewFindViewById = this.mView.findViewById(android.R.id.progress);
+        if (viewFindViewById instanceof ProgressBar) {
+            this.mProgressBar = (ProgressBar) viewFindViewById;
         } else {
             this.mProgressBar = null;
         }
-        this.mSmartReplyContainer = this.mView.findViewById(16909845);
+        this.mSmartReplyContainer = this.mView.findViewById(16909846);
         this.mActionsContainer = this.mView.findViewById(android.R.id.animator);
         this.mActions = this.mView.findViewById(android.R.id.animation);
         this.mRemoteInputHistory = this.mView.findViewById(android.R.id.remote_input_text);
@@ -261,11 +258,11 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
             ArraySet arraySet = new ArraySet(childCount);
             for (int i3 = 0; i3 < childCount; i3++) {
                 Button button = (Button) this.mActions.getChildAt(i3);
-                PendingIntent pendingIntent = (PendingIntent) button.getTag(android.R.id.search_src_text);
+                PendingIntent pendingIntent = (PendingIntent) button.getTag(android.R.id.search_view);
                 if (pendingIntent != null) {
-                    int identityHashCode = System.identityHashCode(pendingIntent.getTarget().asBinder());
-                    arraySet.add(Integer.valueOf(identityHashCode));
-                    if (this.mCancelledPendingIntents.contains(Integer.valueOf(identityHashCode))) {
+                    int iIdentityHashCode = System.identityHashCode(pendingIntent.getTarget().asBinder());
+                    arraySet.add(Integer.valueOf(iIdentityHashCode));
+                    if (this.mCancelledPendingIntents.contains(Integer.valueOf(iIdentityHashCode))) {
                         disableActionView(button);
                     }
                 }
@@ -273,7 +270,7 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
                     ActionPendingIntentCancellationHandler actionPendingIntentCancellationHandler2 = new ActionPendingIntentCancellationHandler(pendingIntent, button, new Consumer() { // from class: com.android.systemui.statusbar.notification.row.wrapper.NotificationTemplateViewWrapper$$ExternalSyntheticLambda0
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            NotificationTemplateViewWrapper notificationTemplateViewWrapper = NotificationTemplateViewWrapper.this;
+                            NotificationTemplateViewWrapper notificationTemplateViewWrapper = this.f$0;
                             PendingIntent pendingIntent2 = (PendingIntent) obj;
                             notificationTemplateViewWrapper.mCancelledPendingIntents.add(Integer.valueOf(System.identityHashCode(pendingIntent2.getTarget().asBinder())));
                             NotificationActionListLayout notificationActionListLayout2 = notificationTemplateViewWrapper.mActions;
@@ -281,7 +278,7 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
                                 int childCount2 = notificationActionListLayout2.getChildCount();
                                 for (int i4 = 0; i4 < childCount2; i4++) {
                                     Button button2 = (Button) notificationTemplateViewWrapper.mActions.getChildAt(i4);
-                                    if (pendingIntent2.equals((PendingIntent) button2.getTag(android.R.id.search_src_text))) {
+                                    if (pendingIntent2.equals((PendingIntent) button2.getTag(android.R.id.search_view))) {
                                         notificationTemplateViewWrapper.disableActionView(button2);
                                     }
                                 }
@@ -356,7 +353,7 @@ public class NotificationTemplateViewWrapper extends NotificationHeaderViewWrapp
     public final void updateRightIconEndMargin() {
         ImageView imageView = this.mRightIcon;
         if (imageView != null) {
-            ((ViewGroup.MarginLayoutParams) imageView.getLayoutParams()).setMarginEnd(this.mView.getContext().getResources().getDimensionPixelSize(android.R.dimen.toast_text_size));
+            ((ViewGroup.MarginLayoutParams) imageView.getLayoutParams()).setMarginEnd(this.mView.getContext().getResources().getDimensionPixelSize(android.R.dimen.toast_width));
         }
     }
 

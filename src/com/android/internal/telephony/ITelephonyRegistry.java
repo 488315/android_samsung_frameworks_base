@@ -553,9 +553,9 @@ public interface ITelephonyRegistry extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITelephonyRegistry)) {
-                return (ITelephonyRegistry) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITelephonyRegistry)) {
+                return (ITelephonyRegistry) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -723,179 +723,179 @@ public interface ITelephonyRegistry extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    IOnSubscriptionsChangedListener asInterface = IOnSubscriptionsChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    IOnSubscriptionsChangedListener iOnSubscriptionsChangedListenerAsInterface = IOnSubscriptionsChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addOnSubscriptionsChangedListener(readString, readString2, asInterface);
+                    addOnSubscriptionsChangedListener(string, string2, iOnSubscriptionsChangedListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    IOnSubscriptionsChangedListener asInterface2 = IOnSubscriptionsChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    IOnSubscriptionsChangedListener iOnSubscriptionsChangedListenerAsInterface2 = IOnSubscriptionsChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addOnOpportunisticSubscriptionsChangedListener(readString3, readString4, asInterface2);
+                    addOnOpportunisticSubscriptionsChangedListener(string3, string4, iOnSubscriptionsChangedListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString5 = parcel.readString();
-                    IOnSubscriptionsChangedListener asInterface3 = IOnSubscriptionsChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string5 = parcel.readString();
+                    IOnSubscriptionsChangedListener iOnSubscriptionsChangedListenerAsInterface3 = IOnSubscriptionsChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeOnSubscriptionsChangedListener(readString5, asInterface3);
+                    removeOnSubscriptionsChangedListener(string5, iOnSubscriptionsChangedListenerAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt = parcel.readInt();
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    IPhoneStateListener asInterface4 = IPhoneStateListener.Stub.asInterface(parcel.readStrongBinder());
-                    int[] createIntArray = parcel.createIntArray();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    IPhoneStateListener iPhoneStateListenerAsInterface = IPhoneStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    listenWithEventList(readBoolean, readBoolean2, readInt, readString6, readString7, asInterface4, createIntArray, readBoolean3);
+                    listenWithEventList(z, z2, i3, string6, string7, iPhoneStateListenerAsInterface, iArrCreateIntArray, z3);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt2 = parcel.readInt();
-                    String readString8 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyCallStateForAllSubs(readInt2, readString8);
+                    notifyCallStateForAllSubs(i4, string8);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    String readString9 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyCallState(readInt3, readInt4, readInt5, readString9);
+                    notifyCallState(i5, i6, i7, string9);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     ServiceState serviceState = (ServiceState) parcel.readTypedObject(ServiceState.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyServiceStateForPhoneId(readInt6, readInt7, serviceState);
+                    notifyServiceStateForPhoneId(i8, i9, serviceState);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     SignalStrength signalStrength = (SignalStrength) parcel.readTypedObject(SignalStrength.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifySignalStrengthForPhoneId(readInt8, readInt9, signalStrength);
+                    notifySignalStrengthForPhoneId(i10, i11, signalStrength);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyMessageWaitingChangedForPhoneId(readInt10, readInt11, readBoolean4);
+                    notifyMessageWaitingChangedForPhoneId(i12, i13, z4);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyCallForwardingChanged(readBoolean5);
+                    notifyCallForwardingChanged(z5);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    int readInt12 = parcel.readInt();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    int i14 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyCallForwardingChangedForSubscriber(readInt12, readBoolean6);
+                    notifyCallForwardingChangedForSubscriber(i14, z6);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyDataActivityForSubscriber(readInt13, readInt14);
+                    notifyDataActivityForSubscriber(i15, i16);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyDataActivityForSubscriberWithSlot(readInt15, readInt16, readInt17);
+                    notifyDataActivityForSubscriberWithSlot(i17, i18, i19);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     PreciseDataConnectionState preciseDataConnectionState = (PreciseDataConnectionState) parcel.readTypedObject(PreciseDataConnectionState.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyDataConnectionForSubscriber(readInt18, readInt19, preciseDataConnectionState);
+                    notifyDataConnectionForSubscriber(i20, i21, preciseDataConnectionState);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     CellIdentity cellIdentity = (CellIdentity) parcel.readTypedObject(CellIdentity.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyCellLocationForSubscriber(readInt20, cellIdentity);
+                    notifyCellLocationForSubscriber(i22, cellIdentity);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(CellInfo.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(CellInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyCellInfo(createTypedArrayList);
+                    notifyCellInfo(arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    int readInt21 = parcel.readInt();
-                    int readInt22 = parcel.readInt();
-                    int[] createIntArray2 = parcel.createIntArray();
-                    String[] createStringArray = parcel.createStringArray();
-                    int[] createIntArray3 = parcel.createIntArray();
-                    int[] createIntArray4 = parcel.createIntArray();
+                    int i23 = parcel.readInt();
+                    int i24 = parcel.readInt();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    int[] iArrCreateIntArray3 = parcel.createIntArray();
+                    int[] iArrCreateIntArray4 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    notifyPreciseCallState(readInt21, readInt22, createIntArray2, createStringArray, createIntArray3, createIntArray4);
+                    notifyPreciseCallState(i23, i24, iArrCreateIntArray2, strArrCreateStringArray, iArrCreateIntArray3, iArrCreateIntArray4);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    int readInt23 = parcel.readInt();
-                    int readInt24 = parcel.readInt();
-                    int readInt25 = parcel.readInt();
-                    int readInt26 = parcel.readInt();
+                    int i25 = parcel.readInt();
+                    int i26 = parcel.readInt();
+                    int i27 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyDisconnectCause(readInt23, readInt24, readInt25, readInt26);
+                    notifyDisconnectCause(i25, i26, i27, i28);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    int readInt27 = parcel.readInt();
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(CellInfo.CREATOR);
+                    int i29 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(CellInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyCellInfoForSubscriber(readInt27, createTypedArrayList2);
+                    notifyCellInfoForSubscriber(i29, arrayListCreateTypedArrayList2);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    int readInt28 = parcel.readInt();
-                    int readInt29 = parcel.readInt();
+                    int i30 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifySrvccStateChanged(readInt28, readInt29);
+                    notifySrvccStateChanged(i30, i31);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    int readInt30 = parcel.readInt();
-                    int readInt31 = parcel.readInt();
-                    int readInt32 = parcel.readInt();
-                    int readInt33 = parcel.readInt();
+                    int i32 = parcel.readInt();
+                    int i33 = parcel.readInt();
+                    int i34 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifySimActivationStateChangedForPhoneId(readInt30, readInt31, readInt32, readInt33);
+                    notifySimActivationStateChangedForPhoneId(i32, i33, i34, i35);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt34 = parcel.readInt();
-                    int readInt35 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i36 = parcel.readInt();
+                    int i37 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    notifyOemHookRawEventForSubscriber(readInt34, readInt35, createByteArray);
+                    notifyOemHookRawEventForSubscriber(i36, i37, bArrCreateByteArray);
                     parcel2.writeNoException();
                     return true;
                 case 23:
@@ -907,32 +907,32 @@ public interface ITelephonyRegistry extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    boolean readBoolean7 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyCarrierNetworkChange(readBoolean7);
+                    notifyCarrierNetworkChange(z7);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    int readInt36 = parcel.readInt();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    int i38 = parcel.readInt();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyCarrierNetworkChangeWithSubId(readInt36, readBoolean8);
+                    notifyCarrierNetworkChangeWithSubId(i38, z8);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    int readInt37 = parcel.readInt();
-                    int readInt38 = parcel.readInt();
-                    boolean readBoolean9 = parcel.readBoolean();
+                    int i39 = parcel.readInt();
+                    int i40 = parcel.readInt();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyUserMobileDataStateChangedForPhoneId(readInt37, readInt38, readBoolean9);
+                    notifyUserMobileDataStateChangedForPhoneId(i39, i40, z9);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    int readInt39 = parcel.readInt();
-                    int readInt40 = parcel.readInt();
+                    int i41 = parcel.readInt();
+                    int i42 = parcel.readInt();
                     TelephonyDisplayInfo telephonyDisplayInfo = (TelephonyDisplayInfo) parcel.readTypedObject(TelephonyDisplayInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyDisplayInfoChanged(readInt39, readInt40, telephonyDisplayInfo);
+                    notifyDisplayInfoChanged(i41, i42, telephonyDisplayInfo);
                     parcel2.writeNoException();
                     return true;
                 case 29:
@@ -942,325 +942,325 @@ public interface ITelephonyRegistry extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    int readInt41 = parcel.readInt();
+                    int i43 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyActiveDataSubIdChanged(readInt41);
+                    notifyActiveDataSubIdChanged(i43);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    int readInt42 = parcel.readInt();
-                    int readInt43 = parcel.readInt();
-                    int readInt44 = parcel.readInt();
+                    int i44 = parcel.readInt();
+                    int i45 = parcel.readInt();
+                    int i46 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyRadioPowerStateChanged(readInt42, readInt43, readInt44);
+                    notifyRadioPowerStateChanged(i44, i45, i46);
                     parcel2.writeNoException();
                     return true;
                 case 32:
-                    int readInt45 = parcel.readInt();
-                    int readInt46 = parcel.readInt();
+                    int i47 = parcel.readInt();
+                    int i48 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyEmergencyNumberList(readInt45, readInt46);
+                    notifyEmergencyNumberList(i47, i48);
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    int readInt47 = parcel.readInt();
-                    int readInt48 = parcel.readInt();
+                    int i49 = parcel.readInt();
+                    int i50 = parcel.readInt();
                     EmergencyNumber emergencyNumber = (EmergencyNumber) parcel.readTypedObject(EmergencyNumber.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyOutgoingEmergencyCall(readInt47, readInt48, emergencyNumber);
+                    notifyOutgoingEmergencyCall(i49, i50, emergencyNumber);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    int readInt49 = parcel.readInt();
-                    int readInt50 = parcel.readInt();
+                    int i51 = parcel.readInt();
+                    int i52 = parcel.readInt();
                     EmergencyNumber emergencyNumber2 = (EmergencyNumber) parcel.readTypedObject(EmergencyNumber.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyOutgoingEmergencySms(readInt49, readInt50, emergencyNumber2);
+                    notifyOutgoingEmergencySms(i51, i52, emergencyNumber2);
                     parcel2.writeNoException();
                     return true;
                 case 35:
                     CallQuality callQuality = (CallQuality) parcel.readTypedObject(CallQuality.CREATOR);
-                    int readInt51 = parcel.readInt();
-                    int readInt52 = parcel.readInt();
-                    int readInt53 = parcel.readInt();
+                    int i53 = parcel.readInt();
+                    int i54 = parcel.readInt();
+                    int i55 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyCallQualityChanged(callQuality, readInt51, readInt52, readInt53);
+                    notifyCallQualityChanged(callQuality, i53, i54, i55);
                     parcel2.writeNoException();
                     return true;
                 case 36:
-                    int readInt54 = parcel.readInt();
-                    int readInt55 = parcel.readInt();
+                    int i56 = parcel.readInt();
+                    int i57 = parcel.readInt();
                     MediaQualityStatus mediaQualityStatus = (MediaQualityStatus) parcel.readTypedObject(MediaQualityStatus.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyMediaQualityStatusChanged(readInt54, readInt55, mediaQualityStatus);
+                    notifyMediaQualityStatusChanged(i56, i57, mediaQualityStatus);
                     parcel2.writeNoException();
                     return true;
                 case 37:
-                    int readInt56 = parcel.readInt();
+                    int i58 = parcel.readInt();
                     ImsReasonInfo imsReasonInfo = (ImsReasonInfo) parcel.readTypedObject(ImsReasonInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyImsDisconnectCause(readInt56, imsReasonInfo);
+                    notifyImsDisconnectCause(i58, imsReasonInfo);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    int readInt57 = parcel.readInt();
-                    int readInt58 = parcel.readInt();
+                    int i59 = parcel.readInt();
+                    int i60 = parcel.readInt();
                     CellIdentity cellIdentity2 = (CellIdentity) parcel.readTypedObject(CellIdentity.CREATOR);
-                    String readString10 = parcel.readString();
-                    int readInt59 = parcel.readInt();
-                    int readInt60 = parcel.readInt();
-                    int readInt61 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i61 = parcel.readInt();
+                    int i62 = parcel.readInt();
+                    int i63 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyRegistrationFailed(readInt57, readInt58, cellIdentity2, readString10, readInt59, readInt60, readInt61);
+                    notifyRegistrationFailed(i59, i60, cellIdentity2, string10, i61, i62, i63);
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    int readInt62 = parcel.readInt();
-                    int readInt63 = parcel.readInt();
+                    int i64 = parcel.readInt();
+                    int i65 = parcel.readInt();
                     BarringInfo barringInfo = (BarringInfo) parcel.readTypedObject(BarringInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyBarringInfoChanged(readInt62, readInt63, barringInfo);
+                    notifyBarringInfoChanged(i64, i65, barringInfo);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    int readInt64 = parcel.readInt();
-                    int readInt65 = parcel.readInt();
-                    ArrayList createTypedArrayList3 = parcel.createTypedArrayList(PhysicalChannelConfig.CREATOR);
+                    int i66 = parcel.readInt();
+                    int i67 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList3 = parcel.createTypedArrayList(PhysicalChannelConfig.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyPhysicalChannelConfigForSubscriber(readInt64, readInt65, createTypedArrayList3);
+                    notifyPhysicalChannelConfigForSubscriber(i66, i67, arrayListCreateTypedArrayList3);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    int readInt66 = parcel.readInt();
-                    int readInt67 = parcel.readInt();
-                    boolean readBoolean10 = parcel.readBoolean();
-                    int readInt68 = parcel.readInt();
+                    int i68 = parcel.readInt();
+                    int i69 = parcel.readInt();
+                    boolean z10 = parcel.readBoolean();
+                    int i70 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyDataEnabled(readInt66, readInt67, readBoolean10, readInt68);
+                    notifyDataEnabled(i68, i69, z10, i70);
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    int readInt69 = parcel.readInt();
-                    int readInt70 = parcel.readInt();
-                    int readInt71 = parcel.readInt();
-                    long readLong = parcel.readLong();
+                    int i71 = parcel.readInt();
+                    int i72 = parcel.readInt();
+                    int i73 = parcel.readInt();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    notifyAllowedNetworkTypesChanged(readInt69, readInt70, readInt71, readLong);
+                    notifyAllowedNetworkTypesChanged(i71, i72, i73, j);
                     parcel2.writeNoException();
                     return true;
                 case 43:
-                    int readInt72 = parcel.readInt();
-                    int readInt73 = parcel.readInt();
-                    ArrayList createTypedArrayList4 = parcel.createTypedArrayList(LinkCapacityEstimate.CREATOR);
+                    int i74 = parcel.readInt();
+                    int i75 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList4 = parcel.createTypedArrayList(LinkCapacityEstimate.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyLinkCapacityEstimateChanged(readInt72, readInt73, createTypedArrayList4);
+                    notifyLinkCapacityEstimateChanged(i74, i75, arrayListCreateTypedArrayList4);
                     parcel2.writeNoException();
                     return true;
                 case 44:
-                    int[] createIntArray5 = parcel.createIntArray();
+                    int[] iArrCreateIntArray5 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    notifySimultaneousCellularCallingSubscriptionsChanged(createIntArray5);
+                    notifySimultaneousCellularCallingSubscriptionsChanged(iArrCreateIntArray5);
                     parcel2.writeNoException();
                     return true;
                 case 45:
-                    int readInt74 = parcel.readInt();
-                    ICarrierPrivilegesCallback asInterface5 = ICarrierPrivilegesCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
+                    int i76 = parcel.readInt();
+                    ICarrierPrivilegesCallback iCarrierPrivilegesCallbackAsInterface = ICarrierPrivilegesCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addCarrierPrivilegesCallback(readInt74, asInterface5, readString11, readString12);
+                    addCarrierPrivilegesCallback(i76, iCarrierPrivilegesCallbackAsInterface, string11, string12);
                     parcel2.writeNoException();
                     return true;
                 case 46:
-                    ICarrierPrivilegesCallback asInterface6 = ICarrierPrivilegesCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString13 = parcel.readString();
+                    ICarrierPrivilegesCallback iCarrierPrivilegesCallbackAsInterface2 = ICarrierPrivilegesCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeCarrierPrivilegesCallback(asInterface6, readString13);
+                    removeCarrierPrivilegesCallback(iCarrierPrivilegesCallbackAsInterface2, string13);
                     parcel2.writeNoException();
                     return true;
                 case 47:
-                    int readInt75 = parcel.readInt();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    int[] createIntArray6 = parcel.createIntArray();
+                    int i77 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    int[] iArrCreateIntArray6 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    notifyCarrierPrivilegesChanged(readInt75, createStringArrayList, createIntArray6);
+                    notifyCarrierPrivilegesChanged(i77, arrayListCreateStringArrayList, iArrCreateIntArray6);
                     parcel2.writeNoException();
                     return true;
                 case 48:
-                    int readInt76 = parcel.readInt();
-                    String readString14 = parcel.readString();
-                    int readInt77 = parcel.readInt();
+                    int i78 = parcel.readInt();
+                    String string14 = parcel.readString();
+                    int i79 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyCarrierServiceChanged(readInt76, readString14, readInt77);
+                    notifyCarrierServiceChanged(i78, string14, i79);
                     parcel2.writeNoException();
                     return true;
                 case 49:
-                    ICarrierConfigChangeListener asInterface7 = ICarrierConfigChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
+                    ICarrierConfigChangeListener iCarrierConfigChangeListenerAsInterface = ICarrierConfigChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addCarrierConfigChangeListener(asInterface7, readString15, readString16);
+                    addCarrierConfigChangeListener(iCarrierConfigChangeListenerAsInterface, string15, string16);
                     parcel2.writeNoException();
                     return true;
                 case 50:
-                    ICarrierConfigChangeListener asInterface8 = ICarrierConfigChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString17 = parcel.readString();
+                    ICarrierConfigChangeListener iCarrierConfigChangeListenerAsInterface2 = ICarrierConfigChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeCarrierConfigChangeListener(asInterface8, readString17);
+                    removeCarrierConfigChangeListener(iCarrierConfigChangeListenerAsInterface2, string17);
                     parcel2.writeNoException();
                     return true;
                 case 51:
-                    int readInt78 = parcel.readInt();
-                    int readInt79 = parcel.readInt();
-                    int readInt80 = parcel.readInt();
-                    int readInt81 = parcel.readInt();
+                    int i80 = parcel.readInt();
+                    int i81 = parcel.readInt();
+                    int i82 = parcel.readInt();
+                    int i83 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyCarrierConfigChanged(readInt78, readInt79, readInt80, readInt81);
+                    notifyCarrierConfigChanged(i80, i81, i82, i83);
                     parcel2.writeNoException();
                     return true;
                 case 52:
-                    int readInt82 = parcel.readInt();
-                    int readInt83 = parcel.readInt();
-                    int readInt84 = parcel.readInt();
-                    long readLong2 = parcel.readLong();
+                    int i84 = parcel.readInt();
+                    int i85 = parcel.readInt();
+                    int i86 = parcel.readInt();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    notifyCallbackModeStarted(readInt82, readInt83, readInt84, readLong2);
+                    notifyCallbackModeStarted(i84, i85, i86, j2);
                     parcel2.writeNoException();
                     return true;
                 case 53:
-                    int readInt85 = parcel.readInt();
-                    int readInt86 = parcel.readInt();
-                    int readInt87 = parcel.readInt();
-                    long readLong3 = parcel.readLong();
+                    int i87 = parcel.readInt();
+                    int i88 = parcel.readInt();
+                    int i89 = parcel.readInt();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    notifyCallbackModeRestarted(readInt85, readInt86, readInt87, readLong3);
+                    notifyCallbackModeRestarted(i87, i88, i89, j3);
                     parcel2.writeNoException();
                     return true;
                 case 54:
-                    int readInt88 = parcel.readInt();
-                    int readInt89 = parcel.readInt();
-                    int readInt90 = parcel.readInt();
-                    int readInt91 = parcel.readInt();
+                    int i90 = parcel.readInt();
+                    int i91 = parcel.readInt();
+                    int i92 = parcel.readInt();
+                    int i93 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyCallbackModeStopped(readInt88, readInt89, readInt90, readInt91);
+                    notifyCallbackModeStopped(i90, i91, i92, i93);
                     parcel2.writeNoException();
                     return true;
                 case 55:
-                    int readInt92 = parcel.readInt();
-                    boolean readBoolean11 = parcel.readBoolean();
+                    int i94 = parcel.readInt();
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyCarrierRoamingNtnModeChanged(readInt92, readBoolean11);
+                    notifyCarrierRoamingNtnModeChanged(i94, z11);
                     parcel2.writeNoException();
                     return true;
                 case 56:
-                    int readInt93 = parcel.readInt();
-                    boolean readBoolean12 = parcel.readBoolean();
+                    int i95 = parcel.readInt();
+                    boolean z12 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyCarrierRoamingNtnEligibleStateChanged(readInt93, readBoolean12);
+                    notifyCarrierRoamingNtnEligibleStateChanged(i95, z12);
                     parcel2.writeNoException();
                     return true;
                 case 57:
-                    int readInt94 = parcel.readInt();
-                    int[] createIntArray7 = parcel.createIntArray();
+                    int i96 = parcel.readInt();
+                    int[] iArrCreateIntArray7 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    notifyCarrierRoamingNtnAvailableServicesChanged(readInt94, createIntArray7);
+                    notifyCarrierRoamingNtnAvailableServicesChanged(i96, iArrCreateIntArray7);
                     parcel2.writeNoException();
                     return true;
                 case 58:
-                    int readInt95 = parcel.readInt();
+                    int i97 = parcel.readInt();
                     NtnSignalStrength ntnSignalStrength = (NtnSignalStrength) parcel.readTypedObject(NtnSignalStrength.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyCarrierRoamingNtnSignalStrengthChanged(readInt95, ntnSignalStrength);
+                    notifyCarrierRoamingNtnSignalStrengthChanged(i97, ntnSignalStrength);
                     parcel2.writeNoException();
                     return true;
                 case 59:
-                    ISatelliteStateChangeListener asInterface9 = ISatelliteStateChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString18 = parcel.readString();
-                    String readString19 = parcel.readString();
+                    ISatelliteStateChangeListener iSatelliteStateChangeListenerAsInterface = ISatelliteStateChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addSatelliteStateChangeListener(asInterface9, readString18, readString19);
+                    addSatelliteStateChangeListener(iSatelliteStateChangeListenerAsInterface, string18, string19);
                     parcel2.writeNoException();
                     return true;
                 case 60:
-                    ISatelliteStateChangeListener asInterface10 = ISatelliteStateChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString20 = parcel.readString();
+                    ISatelliteStateChangeListener iSatelliteStateChangeListenerAsInterface2 = ISatelliteStateChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeSatelliteStateChangeListener(asInterface10, readString20);
+                    removeSatelliteStateChangeListener(iSatelliteStateChangeListenerAsInterface2, string20);
                     parcel2.writeNoException();
                     return true;
                 case 61:
-                    boolean readBoolean13 = parcel.readBoolean();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifySatelliteStateChanged(readBoolean13);
+                    notifySatelliteStateChanged(z13);
                     parcel2.writeNoException();
                     return true;
                 case 62:
-                    int readInt96 = parcel.readInt();
-                    int readInt97 = parcel.readInt();
+                    int i98 = parcel.readInt();
+                    int i99 = parcel.readInt();
                     SecurityAlgorithmUpdate securityAlgorithmUpdate = (SecurityAlgorithmUpdate) parcel.readTypedObject(SecurityAlgorithmUpdate.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifySecurityAlgorithmsChanged(readInt96, readInt97, securityAlgorithmUpdate);
+                    notifySecurityAlgorithmsChanged(i98, i99, securityAlgorithmUpdate);
                     parcel2.writeNoException();
                     return true;
                 case 63:
-                    int readInt98 = parcel.readInt();
-                    int readInt99 = parcel.readInt();
+                    int i100 = parcel.readInt();
+                    int i101 = parcel.readInt();
                     CellularIdentifierDisclosure cellularIdentifierDisclosure = (CellularIdentifierDisclosure) parcel.readTypedObject(CellularIdentifierDisclosure.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyCellularIdentifierDisclosedChanged(readInt98, readInt99, cellularIdentifierDisclosure);
+                    notifyCellularIdentifierDisclosedChanged(i100, i101, cellularIdentifierDisclosure);
                     parcel2.writeNoException();
                     return true;
                 case 64:
-                    int readInt100 = parcel.readInt();
+                    int i102 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearPreciseDataConnectionStates(readInt100);
+                    clearPreciseDataConnectionStates(i102);
                     parcel2.writeNoException();
                     return true;
                 case 65:
-                    int readInt101 = parcel.readInt();
-                    int readInt102 = parcel.readInt();
+                    int i103 = parcel.readInt();
+                    int i104 = parcel.readInt();
                     SemSatelliteServiceState semSatelliteServiceState = (SemSatelliteServiceState) parcel.readTypedObject(SemSatelliteServiceState.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifySemSatelliteServiceStateChanged(readInt101, readInt102, semSatelliteServiceState);
+                    notifySemSatelliteServiceStateChanged(i103, i104, semSatelliteServiceState);
                     parcel2.writeNoException();
                     return true;
                 case 66:
-                    int readInt103 = parcel.readInt();
-                    int readInt104 = parcel.readInt();
+                    int i105 = parcel.readInt();
+                    int i106 = parcel.readInt();
                     SemSatelliteSignalStrength semSatelliteSignalStrength = (SemSatelliteSignalStrength) parcel.readTypedObject(SemSatelliteSignalStrength.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifySemSatelliteSignalStrengthChanged(readInt103, readInt104, semSatelliteSignalStrength);
+                    notifySemSatelliteSignalStrengthChanged(i105, i106, semSatelliteSignalStrength);
                     parcel2.writeNoException();
                     return true;
                 case 67:
-                    int readInt105 = parcel.readInt();
-                    int readInt106 = parcel.readInt();
+                    int i107 = parcel.readInt();
+                    int i108 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyCpaiModelUpdate(readInt105, readInt106);
+                    notifyCpaiModelUpdate(i107, i108);
                     parcel2.writeNoException();
                     return true;
                 case 68:
-                    int readInt107 = parcel.readInt();
-                    int readInt108 = parcel.readInt();
+                    int i109 = parcel.readInt();
+                    int i110 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyCpaiFeatureInfo(readInt107, readInt108);
+                    notifyCpaiFeatureInfo(i109, i110);
                     parcel2.writeNoException();
                     return true;
                 case 69:
-                    int readInt109 = parcel.readInt();
-                    int readInt110 = parcel.readInt();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    int i111 = parcel.readInt();
+                    int i112 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    notifyCpaiDataGathering(readInt109, readInt110, createByteArray2);
+                    notifyCpaiDataGathering(i111, i112, bArrCreateByteArray2);
                     parcel2.writeNoException();
                     return true;
                 case 70:
-                    int readInt111 = parcel.readInt();
-                    int readInt112 = parcel.readInt();
-                    int readInt113 = parcel.readInt();
-                    byte[] createByteArray3 = parcel.createByteArray();
+                    int i113 = parcel.readInt();
+                    int i114 = parcel.readInt();
+                    int i115 = parcel.readInt();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    notifyCpaiDevAppMessage(readInt111, readInt112, readInt113, createByteArray3);
+                    notifyCpaiDevAppMessage(i113, i114, i115, bArrCreateByteArray3);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -1286,1174 +1286,1174 @@ public interface ITelephonyRegistry extends IInterface {
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void addOnSubscriptionsChangedListener(String str, String str2, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iOnSubscriptionsChangedListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iOnSubscriptionsChangedListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void addOnOpportunisticSubscriptionsChangedListener(String str, String str2, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iOnSubscriptionsChangedListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iOnSubscriptionsChangedListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void removeOnSubscriptionsChangedListener(String str, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iOnSubscriptionsChangedListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iOnSubscriptionsChangedListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void listenWithEventList(boolean z, boolean z2, int i, String str, String str2, IPhoneStateListener iPhoneStateListener, int[] iArr, boolean z3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iPhoneStateListener);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeBoolean(z3);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iPhoneStateListener);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeBoolean(z3);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCallStateForAllSubs(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCallState(int i, int i2, int i3, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyServiceStateForPhoneId(int i, int i2, ServiceState serviceState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(serviceState, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(serviceState, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifySignalStrengthForPhoneId(int i, int i2, SignalStrength signalStrength) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(signalStrength, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(signalStrength, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyMessageWaitingChangedForPhoneId(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCallForwardingChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCallForwardingChangedForSubscriber(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyDataActivityForSubscriber(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyDataActivityForSubscriberWithSlot(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyDataConnectionForSubscriber(int i, int i2, PreciseDataConnectionState preciseDataConnectionState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(preciseDataConnectionState, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(preciseDataConnectionState, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCellLocationForSubscriber(int i, CellIdentity cellIdentity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(cellIdentity, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(cellIdentity, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCellInfo(List<CellInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyPreciseCallState(int i, int i2, int[] iArr, String[] strArr, int[] iArr2, int[] iArr3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeIntArray(iArr2);
-                    obtain.writeIntArray(iArr3);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeIntArray(iArr2);
+                    parcelObtain.writeIntArray(iArr3);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyDisconnectCause(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCellInfoForSubscriber(int i, List<CellInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifySrvccStateChanged(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifySimActivationStateChangedForPhoneId(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyOemHookRawEventForSubscriber(int i, int i2, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifySubscriptionInfoChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyOpportunisticSubscriptionInfoChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCarrierNetworkChange(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCarrierNetworkChangeWithSubId(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyUserMobileDataStateChangedForPhoneId(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyDisplayInfoChanged(int i, int i2, TelephonyDisplayInfo telephonyDisplayInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(telephonyDisplayInfo, 0);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(telephonyDisplayInfo, 0);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyPhoneCapabilityChanged(PhoneCapability phoneCapability) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(phoneCapability, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(phoneCapability, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyActiveDataSubIdChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyRadioPowerStateChanged(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyEmergencyNumberList(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyOutgoingEmergencyCall(int i, int i2, EmergencyNumber emergencyNumber) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(emergencyNumber, 0);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(emergencyNumber, 0);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyOutgoingEmergencySms(int i, int i2, EmergencyNumber emergencyNumber) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(emergencyNumber, 0);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(emergencyNumber, 0);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCallQualityChanged(CallQuality callQuality, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(callQuality, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(callQuality, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyMediaQualityStatusChanged(int i, int i2, MediaQualityStatus mediaQualityStatus) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(mediaQualityStatus, 0);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(mediaQualityStatus, 0);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyImsDisconnectCause(int i, ImsReasonInfo imsReasonInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(imsReasonInfo, 0);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(imsReasonInfo, 0);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyRegistrationFailed(int i, int i2, CellIdentity cellIdentity, String str, int i3, int i4, int i5) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(cellIdentity, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(cellIdentity, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyBarringInfoChanged(int i, int i2, BarringInfo barringInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(barringInfo, 0);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(barringInfo, 0);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyPhysicalChannelConfigForSubscriber(int i, int i2, List<PhysicalChannelConfig> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyDataEnabled(int i, int i2, boolean z, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyAllowedNetworkTypesChanged(int i, int i2, int i3, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyLinkCapacityEstimateChanged(int i, int i2, List<LinkCapacityEstimate> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifySimultaneousCellularCallingSubscriptionsChanged(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void addCarrierPrivilegesCallback(int i, ICarrierPrivilegesCallback iCarrierPrivilegesCallback, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iCarrierPrivilegesCallback);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iCarrierPrivilegesCallback);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void removeCarrierPrivilegesCallback(ICarrierPrivilegesCallback iCarrierPrivilegesCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCarrierPrivilegesCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCarrierPrivilegesCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCarrierPrivilegesChanged(int i, List<String> list, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCarrierServiceChanged(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void addCarrierConfigChangeListener(ICarrierConfigChangeListener iCarrierConfigChangeListener, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCarrierConfigChangeListener);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCarrierConfigChangeListener);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void removeCarrierConfigChangeListener(ICarrierConfigChangeListener iCarrierConfigChangeListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCarrierConfigChangeListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCarrierConfigChangeListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCarrierConfigChanged(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCallbackModeStarted(int i, int i2, int i3, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCallbackModeRestarted(int i, int i2, int i3, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCallbackModeStopped(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCarrierRoamingNtnModeChanged(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCarrierRoamingNtnEligibleStateChanged(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCarrierRoamingNtnAvailableServicesChanged(int i, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCarrierRoamingNtnSignalStrengthChanged(int i, NtnSignalStrength ntnSignalStrength) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(ntnSignalStrength, 0);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(ntnSignalStrength, 0);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void addSatelliteStateChangeListener(ISatelliteStateChangeListener iSatelliteStateChangeListener, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSatelliteStateChangeListener);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSatelliteStateChangeListener);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void removeSatelliteStateChangeListener(ISatelliteStateChangeListener iSatelliteStateChangeListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSatelliteStateChangeListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSatelliteStateChangeListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifySatelliteStateChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifySecurityAlgorithmsChanged(int i, int i2, SecurityAlgorithmUpdate securityAlgorithmUpdate) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(securityAlgorithmUpdate, 0);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(securityAlgorithmUpdate, 0);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCellularIdentifierDisclosedChanged(int i, int i2, CellularIdentifierDisclosure cellularIdentifierDisclosure) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(cellularIdentifierDisclosure, 0);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(cellularIdentifierDisclosure, 0);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void clearPreciseDataConnectionStates(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifySemSatelliteServiceStateChanged(int i, int i2, SemSatelliteServiceState semSatelliteServiceState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(semSatelliteServiceState, 0);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(semSatelliteServiceState, 0);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifySemSatelliteSignalStrengthChanged(int i, int i2, SemSatelliteSignalStrength semSatelliteSignalStrength) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(semSatelliteSignalStrength, 0);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(semSatelliteSignalStrength, 0);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCpaiModelUpdate(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCpaiFeatureInfo(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCpaiDataGathering(int i, int i2, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
             public void notifyCpaiDevAppMessage(int i, int i2, int i3, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

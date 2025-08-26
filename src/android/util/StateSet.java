@@ -71,74 +71,54 @@ public class StateSet {
         return iArr.length == 0 || iArr[0] == 0;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x0033, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:29:0x0033, code lost:
     
         r5 = false;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean stateSetMatches(int[] r9, int[] r10) {
-        /*
-            r0 = 1
-            r1 = 0
-            if (r10 != 0) goto Lf
-            if (r9 == 0) goto Le
-            boolean r9 = isWildCard(r9)
-            if (r9 == 0) goto Ld
-            goto Le
-        Ld:
-            return r1
-        Le:
-            return r0
-        Lf:
-            int r2 = r9.length
-            int r3 = r10.length
-            r4 = r1
-        L12:
-            if (r4 >= r2) goto L3c
-            r5 = r9[r4]
-            if (r5 != 0) goto L19
-            return r0
-        L19:
-            if (r5 <= 0) goto L1d
-            r6 = r0
-            goto L1f
-        L1d:
-            int r5 = -r5
-            r6 = r1
-        L1f:
-            r7 = r1
-        L20:
-            if (r7 >= r3) goto L33
-            r8 = r10[r7]
-            if (r8 != 0) goto L29
-            if (r6 == 0) goto L33
-            return r1
-        L29:
-            if (r8 != r5) goto L30
-            if (r6 == 0) goto L2f
-            r5 = r0
-            goto L34
-        L2f:
-            return r1
-        L30:
-            int r7 = r7 + 1
-            goto L20
-        L33:
-            r5 = r1
-        L34:
-            if (r6 == 0) goto L39
-            if (r5 != 0) goto L39
-            return r1
-        L39:
-            int r4 = r4 + 1
-            goto L12
-        L3c:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.StateSet.stateSetMatches(int[], int[]):boolean");
+    public static boolean stateSetMatches(int[] iArr, int[] iArr2) {
+        boolean z;
+        boolean z2;
+        if (iArr2 == null) {
+            return iArr == null || isWildCard(iArr);
+        }
+        int length = iArr2.length;
+        for (int i : iArr) {
+            if (i == 0) {
+                return true;
+            }
+            if (i > 0) {
+                z = true;
+            } else {
+                i = -i;
+                z = false;
+            }
+            int i2 = 0;
+            while (true) {
+                if (i2 >= length) {
+                    break;
+                }
+                int i3 = iArr2[i2];
+                if (i3 == 0) {
+                    if (z) {
+                        return false;
+                    }
+                } else if (i3 != i) {
+                    i2++;
+                } else {
+                    if (!z) {
+                        return false;
+                    }
+                    z2 = true;
+                }
+            }
+            if (z && !z2) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static boolean stateSetMatches(int[] iArr, int i) {

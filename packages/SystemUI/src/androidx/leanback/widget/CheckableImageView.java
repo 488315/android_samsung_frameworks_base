@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.widget.Checkable;
 import android.widget.ImageView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 class CheckableImageView extends ImageView implements Checkable {
     public static final int[] CHECKED_STATE_SET = {R.attr.state_checked};
@@ -23,11 +22,11 @@ class CheckableImageView extends ImageView implements Checkable {
 
     @Override // android.widget.ImageView, android.view.View
     public final int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
         if (this.mChecked) {
-            ImageView.mergeDrawableStates(onCreateDrawableState, CHECKED_STATE_SET);
+            ImageView.mergeDrawableStates(iArrOnCreateDrawableState, CHECKED_STATE_SET);
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     @Override // android.widget.Checkable

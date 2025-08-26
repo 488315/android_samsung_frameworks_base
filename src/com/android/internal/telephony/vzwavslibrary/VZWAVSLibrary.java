@@ -6,6 +6,7 @@ import android.content.pm.ProviderInfo;
 import android.content.pm.Signature;
 import android.database.Cursor;
 import android.net.Uri;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -32,12 +33,12 @@ public class VZWAVSLibrary {
     }
 
     static {
-        List<String> asList = Arrays.asList(CERT_FP_MVS, CERT_FP_MVS_BYOD);
-        MVS_CERTS = asList;
-        List<String> singletonList = Collections.singletonList(CERT_FP_STANDALONE);
-        STANDALONE_CERTS = singletonList;
+        List<String> listAsList = Arrays.asList(CERT_FP_MVS, CERT_FP_MVS_BYOD);
+        MVS_CERTS = listAsList;
+        List<String> listSingletonList = Collections.singletonList(CERT_FP_STANDALONE);
+        STANDALONE_CERTS = listSingletonList;
         EN = Locale.ENGLISH;
-        AVS_INSTANCES = new AvsInstance[]{new AvsInstance("MvsAvs", AVS_AUTHORITY_MVS, asList, new String[0]), new AvsInstance("StandaloneAvs", AVS_AUTHORITY_STD, singletonList, new String[0])};
+        AVS_INSTANCES = new AvsInstance[]{new AvsInstance("MvsAvs", AVS_AUTHORITY_MVS, listAsList, new String[0]), new AvsInstance("StandaloneAvs", AVS_AUTHORITY_STD, listSingletonList, new String[0])};
     }
 
     public static boolean isPackageAuthorized(Context context, String str, String str2) {
@@ -45,39 +46,38 @@ public class VZWAVSLibrary {
             return false;
         }
         for (AvsInstance avsInstance : AVS_INSTANCES) {
-            int ordinal = queryAvsInstance(context, str, str2, avsInstance).ordinal();
-            if (ordinal == 0) {
+            int iOrdinal = queryAvsInstance(context, str, str2, avsInstance).ordinal();
+            if (iOrdinal == 0) {
                 return true;
             }
-            if (ordinal == 1) {
+            if (iOrdinal == 1) {
                 return false;
             }
         }
         return false;
     }
 
-    private static AvsResult queryAvsInstance(Context context, String str, String str2, AvsInstance avsInstance) {
+    private static AvsResult queryAvsInstance(Context context, String str, String str2, AvsInstance avsInstance) throws IOException {
         AvsResult avsResult;
         if (!avsInstance.isAvailable) {
-            AvsResult checkAvsInstance = checkAvsInstance(context, avsInstance);
-            if (checkAvsInstance != AvsResult.GRANTED) {
-                return checkAvsInstance;
+            AvsResult avsResultCheckAvsInstance = checkAvsInstance(context, avsInstance);
+            if (avsResultCheckAvsInstance != AvsResult.GRANTED) {
+                return avsResultCheckAvsInstance;
             }
             avsInstance.isAvailable = true;
         }
         try {
-            Cursor query = context.getContentResolver().query(avsInstance.contentProviderUri, null, str, null, null);
+            Cursor cursorQuery = context.getContentResolver().query(avsInstance.contentProviderUri, null, str, null, null);
             try {
-                if (query == null) {
+                if (cursorQuery == null) {
                     avsResult = AvsResult.NOT_FOUND;
-                } else {
-                    if (query.moveToFirst() && query.getString(0) != null) {
-                        avsResult = query.getString(0).contains(str2) ? AvsResult.GRANTED : AvsResult.DENIED;
-                    }
+                } else if (!cursorQuery.moveToFirst() || cursorQuery.getString(0) == null) {
                     avsResult = AvsResult.DENIED;
+                } else {
+                    avsResult = cursorQuery.getString(0).contains(str2) ? AvsResult.GRANTED : AvsResult.DENIED;
                 }
-                if (query != null) {
-                    query.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
                 return avsResult;
             } finally {
@@ -87,13 +87,13 @@ public class VZWAVSLibrary {
         }
     }
 
-    private static AvsResult checkAvsInstance(Context context, AvsInstance avsInstance) {
-        ProviderInfo resolveContentProvider = context.getPackageManager().resolveContentProvider(avsInstance.authority, 0);
-        if (resolveContentProvider == null) {
+    private static AvsResult checkAvsInstance(Context context, AvsInstance avsInstance) throws IOException {
+        ProviderInfo providerInfoResolveContentProvider = context.getPackageManager().resolveContentProvider(avsInstance.authority, 0);
+        if (providerInfoResolveContentProvider == null) {
             return AvsResult.NOT_FOUND;
         }
         try {
-            for (Signature signature : Utils.getSigningCertificates(context, resolveContentProvider.packageName)) {
+            for (Signature signature : Utils.getSigningCertificates(context, providerInfoResolveContentProvider.packageName)) {
                 String certFingerprint = Utils.getCertFingerprint(signature);
                 if (certFingerprint != null && avsInstance.fingerprints.contains(certFingerprint)) {
                     return AvsResult.GRANTED;

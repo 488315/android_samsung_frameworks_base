@@ -44,9 +44,9 @@ public interface ISemWifiApDataUsageCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemWifiApDataUsageCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemWifiApDataUsageCallback)) {
-                return (ISemWifiApDataUsageCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemWifiApDataUsageCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemWifiApDataUsageCallback)) {
+                return (ISemWifiApDataUsageCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ISemWifiApDataUsageCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onDataUsageChanged(readString);
+                onDataUsageChanged(string);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface ISemWifiApDataUsageCallback extends IInterface {
 
             @Override // com.samsung.android.wifi.ISemWifiApDataUsageCallback
             public void onDataUsageChanged(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemWifiApDataUsageCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemWifiApDataUsageCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

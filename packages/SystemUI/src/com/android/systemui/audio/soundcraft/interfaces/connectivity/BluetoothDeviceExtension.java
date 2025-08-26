@@ -7,7 +7,6 @@ import com.samsung.android.knox.custom.CustomDeviceManager;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BluetoothDeviceExtension {
     public static final BluetoothDeviceExtension INSTANCE = new BluetoothDeviceExtension();
@@ -19,11 +18,11 @@ public final class BluetoothDeviceExtension {
 
     public static String getBattery(BluetoothDevice bluetoothDevice, BluetoothStateEnum bluetoothStateEnum) {
         int tag = bluetoothStateEnum.getTag();
-        byte[] semGetMetadata = bluetoothDevice.semGetMetadata(new byte[]{(byte) tag, (byte) (tag >> 8)});
-        if (semGetMetadata != null) {
-            String valueOf = semGetMetadata.length > 3 ? String.valueOf((int) semGetMetadata[3]) : "";
-            if (valueOf != null) {
-                return valueOf;
+        byte[] bArrSemGetMetadata = bluetoothDevice.semGetMetadata(new byte[]{(byte) tag, (byte) (tag >> 8)});
+        if (bArrSemGetMetadata != null) {
+            String strValueOf = bArrSemGetMetadata.length > 3 ? String.valueOf((int) bArrSemGetMetadata[3]) : "";
+            if (strValueOf != null) {
+                return strValueOf;
             }
         }
         return "";
@@ -31,30 +30,30 @@ public final class BluetoothDeviceExtension {
 
     public static boolean getState(BluetoothDevice bluetoothDevice, BluetoothStateEnum bluetoothStateEnum) {
         int tag = bluetoothStateEnum.getTag();
-        byte[] semGetMetadata = bluetoothDevice.semGetMetadata(new byte[]{(byte) tag, (byte) (tag >> 8)});
-        return semGetMetadata != null && semGetMetadata.length > 3 && semGetMetadata[3] == 1;
+        byte[] bArrSemGetMetadata = bluetoothDevice.semGetMetadata(new byte[]{(byte) tag, (byte) (tag >> 8)});
+        return bArrSemGetMetadata != null && bArrSemGetMetadata.length > 3 && bArrSemGetMetadata[3] == 1;
     }
 
     public static boolean isSupported(BluetoothDevice bluetoothDevice, BluetoothStateEnum bluetoothStateEnum) {
         SmepTag smepTag = SmepTag.SUPPORTED_FEATURES;
         int tag = smepTag.getTag();
-        byte[] semGetMetadata = bluetoothDevice.semGetMetadata(new byte[]{(byte) tag, (byte) (tag >> 8)});
-        if (semGetMetadata != null && semGetMetadata.length >= 5) {
+        byte[] bArrSemGetMetadata = bluetoothDevice.semGetMetadata(new byte[]{(byte) tag, (byte) (tag >> 8)});
+        if (bArrSemGetMetadata != null && bArrSemGetMetadata.length >= 5) {
             INSTANCE.getClass();
-            if (semGetMetadata.length < 5) {
+            if (bArrSemGetMetadata.length < 5) {
                 Log.e("SoundCraft.BluetoothDeviceExtension", "parseSupportedFeatures :: DataPacket is too short.");
                 return false;
             }
-            if ((((semGetMetadata[0] & 255) | ((semGetMetadata[1] & 255) << 8)) & CustomDeviceManager.QUICK_PANEL_ALL) == smepTag.getTag()) {
+            if ((((bArrSemGetMetadata[0] & 255) | ((bArrSemGetMetadata[1] & 255) << 8)) & CustomDeviceManager.QUICK_PANEL_ALL) == smepTag.getTag()) {
                 int i = 2;
                 while (true) {
-                    if (i >= semGetMetadata.length) {
+                    if (i >= bArrSemGetMetadata.length) {
                         break;
                     }
-                    int i2 = ((semGetMetadata[i] & 255) | ((semGetMetadata[i + 1] & 255) << 8)) & CustomDeviceManager.QUICK_PANEL_ALL;
-                    int i3 = semGetMetadata[i + 2] & 255;
+                    int i2 = ((bArrSemGetMetadata[i] & 255) | ((bArrSemGetMetadata[i + 1] & 255) << 8)) & CustomDeviceManager.QUICK_PANEL_ALL;
+                    int i3 = bArrSemGetMetadata[i + 2] & 255;
                     byte[] bArr = new byte[i3];
-                    System.arraycopy(semGetMetadata, i + 3, bArr, 0, i3);
+                    System.arraycopy(bArrSemGetMetadata, i + 3, bArr, 0, i3);
                     i += i3 + 3;
                     if (SmepTag.getSmepKey(i2) == bluetoothStateEnum.getSupportedTag()) {
                         if (bArr[0] == 1) {
@@ -68,23 +67,23 @@ public final class BluetoothDeviceExtension {
     }
 
     public static void setState(BluetoothDevice bluetoothDevice, BluetoothStateEnum bluetoothStateEnum, boolean z) {
-        byte[] bArr;
+        byte[] byteArray;
         Log.d("SoundCraft.BluetoothDeviceExtension", bluetoothStateEnum.getTitle() + " set " + z);
         int tag = bluetoothStateEnum.getTag();
-        byte[] bArr2 = z ? ON : OFF;
-        if (!SmepTag.isValidConstantKey(tag) || bArr2 == null || bArr2.length == 0) {
-            bArr = null;
+        byte[] bArr = z ? ON : OFF;
+        if (!SmepTag.isValidConstantKey(tag) || bArr == null || bArr.length == 0) {
+            byteArray = null;
         } else {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             try {
                 byteArrayOutputStream.write(new byte[]{(byte) tag, (byte) (tag >> 8)});
-                byteArrayOutputStream.write((byte) bArr2.length);
-                byteArrayOutputStream.write(bArr2);
+                byteArrayOutputStream.write((byte) bArr.length);
+                byteArrayOutputStream.write(bArr);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            bArr = byteArrayOutputStream.toByteArray();
+            byteArray = byteArrayOutputStream.toByteArray();
         }
-        bluetoothDevice.semSetMetadata(bArr);
+        bluetoothDevice.semSetMetadata(byteArray);
     }
 }

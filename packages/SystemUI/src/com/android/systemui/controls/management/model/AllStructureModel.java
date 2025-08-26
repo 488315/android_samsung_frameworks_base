@@ -19,7 +19,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AllStructureModel implements StructureModel {
     public final List controls;
@@ -31,8 +30,12 @@ public final class AllStructureModel implements StructureModel {
     public final String removedString;
     public final Resources resources;
 
+    /* JADX WARN: Removed duplicated region for block: B:96:0x02be  */
     /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.controls.management.model.AllStructureModel$favoriteControlChangeCallback$1] */
-    public AllStructureModel(Resources resources, List<ControlStatus> list, List<String> list2, StructureModel.StructureModelCallback structureModelCallback, boolean z) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public AllStructureModel(Resources resources, List<ControlStatus> list, List<String> list2, StructureModel.StructureModelCallback structureModelCallback, boolean z) throws Resources.NotFoundException {
         ArrayList arrayList;
         this.resources = resources;
         this.controls = list;
@@ -49,12 +52,12 @@ public final class AllStructureModel implements StructureModel {
             Object next = it.next();
             CharSequence structure = ((ControlStatus) next).control.getStructure();
             CharSequence charSequence = structure != null ? structure : "";
-            Object obj = linkedHashMap2.get(charSequence);
-            if (obj == null) {
-                obj = new ArrayList();
-                linkedHashMap2.put(charSequence, obj);
+            Object arrayList2 = linkedHashMap2.get(charSequence);
+            if (arrayList2 == null) {
+                arrayList2 = new ArrayList();
+                linkedHashMap2.put(charSequence, arrayList2);
             }
-            ((List) obj).add(next);
+            ((List) arrayList2).add(next);
         }
         for (Map.Entry entry : linkedHashMap2.entrySet()) {
             CharSequence charSequence2 = (CharSequence) entry.getKey();
@@ -64,19 +67,19 @@ public final class AllStructureModel implements StructureModel {
             while (it2.hasNext()) {
                 hashSet.add(((ControlStatus) it2.next()).control.getControlId());
             }
-            Object obj2 = linkedHashMap.get(charSequence2);
-            if (obj2 == null) {
-                obj2 = new ArrayList();
-                linkedHashMap.put(charSequence2, obj2);
+            Object arrayList3 = linkedHashMap.get(charSequence2);
+            if (arrayList3 == null) {
+                arrayList3 = new ArrayList();
+                linkedHashMap.put(charSequence2, arrayList3);
             }
-            List list4 = (List) obj2;
-            ArrayList arrayList2 = new ArrayList();
-            for (Object obj3 : list2) {
-                if (hashSet.contains((String) obj3)) {
-                    arrayList2.add(obj3);
+            List list4 = (List) arrayList3;
+            ArrayList arrayList4 = new ArrayList();
+            for (Object obj : list2) {
+                if (hashSet.contains((String) obj)) {
+                    arrayList4.add(obj);
                 }
             }
-            list4.addAll(arrayList2);
+            list4.addAll(arrayList4);
         }
         this.favoriteIds = linkedHashMap;
         this.favoriteControlChangeCallback = new StructureModel.StructureModelCallback() { // from class: com.android.systemui.controls.management.model.AllStructureModel$favoriteControlChangeCallback$1
@@ -85,7 +88,7 @@ public final class AllStructureModel implements StructureModel {
                 CharSequence charSequence3 = controlInfoForStructure.structureName;
                 String str = controlInfoForStructure.controlId;
                 boolean z2 = controlInfoForStructure.favorite;
-                AllStructureModel allStructureModel = AllStructureModel.this;
+                AllStructureModel allStructureModel = this.this$0;
                 if (z2) {
                     if (!((LinkedHashMap) allStructureModel.favoriteIds).keySet().contains(charSequence3)) {
                         allStructureModel.favoriteIds.put(charSequence3, new ArrayList());
@@ -104,46 +107,46 @@ public final class AllStructureModel implements StructureModel {
             }
         };
         List list5 = this.controls;
-        ArrayList arrayList3 = new ArrayList();
+        ArrayList arrayList5 = new ArrayList();
         int dimensionPixelSize = this.resources.getDimensionPixelSize(R.dimen.control_management_list_padding);
         String string = this.resources.getString(R.string.controls_favorite_other_structure_zone_header);
         String string2 = this.resources.getString(R.string.controls_add_controls_sub_title);
         List list6 = list5;
-        ArrayList arrayList4 = new ArrayList();
-        for (Object obj4 : list6) {
-            if (((ControlStatus) obj4).removed) {
-                arrayList4.add(obj4);
+        ArrayList arrayList6 = new ArrayList();
+        for (Object obj2 : list6) {
+            if (((ControlStatus) obj2).removed) {
+                arrayList6.add(obj2);
             }
         }
-        List minus = CollectionsKt___CollectionsKt.minus((Iterable) list6, (Iterable) CollectionsKt___CollectionsKt.toSet(arrayList4));
+        List listMinus = CollectionsKt___CollectionsKt.minus((Iterable) list6, (Iterable) CollectionsKt___CollectionsKt.toSet(arrayList6));
         LinkedHashMap linkedHashMap3 = new LinkedHashMap();
-        for (Object obj5 : minus) {
-            String structure2 = ((ControlStatus) obj5).control.getStructure();
+        for (Object obj3 : listMinus) {
+            String structure2 = ((ControlStatus) obj3).control.getStructure();
             structure2 = structure2 == null ? "" : structure2;
-            Object obj6 = linkedHashMap3.get(structure2);
-            if (obj6 == null) {
-                obj6 = new ArrayList();
-                linkedHashMap3.put(structure2, obj6);
+            Object arrayList7 = linkedHashMap3.get(structure2);
+            if (arrayList7 == null) {
+                arrayList7 = new ArrayList();
+                linkedHashMap3.put(structure2, arrayList7);
             }
-            ((List) obj6).add(obj5);
+            ((List) arrayList7).add(obj3);
         }
         if (this.isLoading) {
-            arrayList3.add(new LoadingWrapper(string2));
+            arrayList5.add(new LoadingWrapper(string2));
         } else {
-            arrayList3.add(new SubtitleWrapper(string2));
+            arrayList5.add(new SubtitleWrapper(string2));
             int i = 0;
-            if (!arrayList4.isEmpty()) {
-                ArrayList arrayList5 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList4, 10));
-                int size = arrayList4.size();
+            if (!arrayList6.isEmpty()) {
+                ArrayList arrayList8 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList6, 10));
+                int size = arrayList6.size();
                 int i2 = 0;
                 while (i2 < size) {
-                    Object obj7 = arrayList4.get(i2);
+                    Object obj4 = arrayList6.get(i2);
                     i2++;
-                    arrayList5.add(((ControlStatus) obj7).control.getControlId());
+                    arrayList8.add(((ControlStatus) obj4).control.getControlId());
                 }
-                AllControlsModel allControlsModel = new AllControlsModel(this.resources, this.removedString, arrayList4, arrayList5, string, true, this.favoriteControlChangeCallback);
-                arrayList3.add(new PaddingWrapper(dimensionPixelSize));
-                arrayList3.add(new ControlWrapper(this.removedString, allControlsModel, null, false, 12, null));
+                AllControlsModel allControlsModel = new AllControlsModel(this.resources, this.removedString, arrayList6, arrayList8, string, true, this.favoriteControlChangeCallback);
+                arrayList5.add(new PaddingWrapper(dimensionPixelSize));
+                arrayList5.add(new ControlWrapper(this.removedString, allControlsModel, null, false, 12, null));
             }
             AllControlsModel allControlsModel2 = null;
             for (CharSequence charSequence3 : linkedHashMap3.keySet()) {
@@ -163,38 +166,41 @@ public final class AllStructureModel implements StructureModel {
                 if (TextUtils.isEmpty(charSequence3)) {
                     allControlsModel2 = allControlsModel3;
                 } else {
-                    arrayList3.add(new PaddingWrapper(dimensionPixelSize));
-                    arrayList3.add(new ControlWrapper(charSequence3, allControlsModel3, null, false, 12, null));
+                    arrayList5.add(new PaddingWrapper(dimensionPixelSize));
+                    arrayList5.add(new ControlWrapper(charSequence3, allControlsModel3, null, false, 12, null));
                 }
             }
             if (allControlsModel2 != null) {
                 int dimensionPixelSize2 = this.resources.getDimensionPixelSize(R.dimen.control_management_list_first_top_padding);
-                ArrayList arrayList6 = new ArrayList();
-                int size2 = arrayList3.size();
+                ArrayList arrayList9 = new ArrayList();
+                int size2 = arrayList5.size();
                 while (i < size2) {
-                    Object obj8 = arrayList3.get(i);
+                    Object obj5 = arrayList5.get(i);
                     i++;
-                    if (obj8 instanceof ControlWrapper) {
-                        arrayList6.add(obj8);
+                    if (obj5 instanceof ControlWrapper) {
+                        arrayList9.add(obj5);
                     }
                 }
-                if (arrayList6.isEmpty()) {
+                if (arrayList9.isEmpty()) {
                     List list10 = allControlsModel2.controls;
-                    if (!(list10 instanceof Collection) || !list10.isEmpty()) {
+                    if ((list10 instanceof Collection) && list10.isEmpty()) {
+                        arrayList5.add(new PaddingWrapper(dimensionPixelSize));
+                        arrayList5.add(new ControlWrapper(allControlsModel2.categoryHeader, allControlsModel2, string, allControlsModel2.needCategoryHeader));
+                    } else {
                         Iterator it4 = list10.iterator();
                         while (it4.hasNext()) {
                             if (((ControlStatus) it4.next()).control.getZone() != null) {
-                                arrayList3.add(new PaddingWrapper(dimensionPixelSize2));
+                                arrayList5.add(new PaddingWrapper(dimensionPixelSize2));
                                 break;
                             }
                         }
+                        arrayList5.add(new PaddingWrapper(dimensionPixelSize));
+                        arrayList5.add(new ControlWrapper(allControlsModel2.categoryHeader, allControlsModel2, string, allControlsModel2.needCategoryHeader));
                     }
                 }
-                arrayList3.add(new PaddingWrapper(dimensionPixelSize));
-                arrayList3.add(new ControlWrapper(allControlsModel2.categoryHeader, allControlsModel2, string, allControlsModel2.needCategoryHeader));
             }
         }
-        this.elements = arrayList3;
+        this.elements = arrayList5;
     }
 
     @Override // com.android.systemui.controls.management.model.StructureModel
@@ -203,37 +209,37 @@ public final class AllStructureModel implements StructureModel {
     }
 
     public final List getFavorites() {
-        ControlInfo controlInfo;
-        Object obj;
-        List flatten = CollectionsKt__IterablesKt.flatten(((LinkedHashMap) this.favoriteIds).values());
+        ControlInfo controlInfoFromControl;
+        Object next;
+        List listFlatten = CollectionsKt__IterablesKt.flatten(((LinkedHashMap) this.favoriteIds).values());
         ArrayList arrayList = new ArrayList();
-        ArrayList arrayList2 = (ArrayList) flatten;
+        ArrayList arrayList2 = (ArrayList) listFlatten;
         int size = arrayList2.size();
         int i = 0;
         while (i < size) {
-            Object obj2 = arrayList2.get(i);
+            Object obj = arrayList2.get(i);
             i++;
-            String str = (String) obj2;
+            String str = (String) obj;
             Iterator it = this.controls.iterator();
             while (true) {
-                controlInfo = null;
+                controlInfoFromControl = null;
                 if (!it.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 }
-                obj = it.next();
-                if (Intrinsics.areEqual(((ControlStatus) obj).control.getControlId(), str)) {
+                next = it.next();
+                if (Intrinsics.areEqual(((ControlStatus) next).control.getControlId(), str)) {
                     break;
                 }
             }
-            ControlStatus controlStatus = (ControlStatus) obj;
+            ControlStatus controlStatus = (ControlStatus) next;
             Control control = controlStatus != null ? controlStatus.control : null;
             if (control != null) {
                 ControlInfo.Companion.getClass();
-                controlInfo = ControlInfo.Companion.fromControl(control);
+                controlInfoFromControl = ControlInfo.Companion.fromControl(control);
             }
-            if (controlInfo != null) {
-                arrayList.add(controlInfo);
+            if (controlInfoFromControl != null) {
+                arrayList.add(controlInfoFromControl);
             }
         }
         return arrayList;

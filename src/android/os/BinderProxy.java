@@ -1,7 +1,9 @@
 package android.os;
 
 import android.app.ActivityManager;
+import android.app.AppOpsManager;
 import android.location.ILocationManager;
+import android.media.MediaMetrics;
 import android.os.Binder;
 import android.os.BinderProxy;
 import android.os.IBinder;
@@ -103,13 +105,13 @@ public final class BinderProxy implements IBinder {
 
         /* JADX INFO: Access modifiers changed from: private */
         public int size() {
-            int i = 0;
+            int size = 0;
             for (ArrayList<WeakReference<BinderProxy>> arrayList : this.mMainIndexValues) {
                 if (arrayList != null) {
-                    i += arrayList.size();
+                    size += arrayList.size();
                 }
             }
-            return i;
+            return size;
         }
 
         private int unclearedSize() {
@@ -139,12 +141,12 @@ public final class BinderProxy implements IBinder {
         }
 
         BinderProxy get(long j) {
-            int hash = hash(j);
-            Long[] lArr = this.mMainIndexKeys[hash];
+            int iHash = hash(j);
+            Long[] lArr = this.mMainIndexKeys[iHash];
             if (lArr == null) {
                 return null;
             }
-            ArrayList<WeakReference<BinderProxy>> arrayList = this.mMainIndexValues[hash];
+            ArrayList<WeakReference<BinderProxy>> arrayList = this.mMainIndexValues[iHash];
             int size = arrayList.size();
             for (int i = 0; i < size; i++) {
                 if (j == lArr[i].longValue()) {
@@ -152,7 +154,7 @@ public final class BinderProxy implements IBinder {
                     if (binderProxy != null) {
                         return binderProxy;
                     }
-                    remove(hash, i);
+                    remove(iHash, i);
                     return null;
                 }
             }
@@ -160,27 +162,27 @@ public final class BinderProxy implements IBinder {
         }
 
         void set(long j, BinderProxy binderProxy) {
-            int hash = hash(j);
+            int iHash = hash(j);
             ArrayList<WeakReference<BinderProxy>>[] arrayListArr = this.mMainIndexValues;
-            ArrayList<WeakReference<BinderProxy>> arrayList = arrayListArr[hash];
+            ArrayList<WeakReference<BinderProxy>> arrayList = arrayListArr[iHash];
             if (arrayList == null) {
                 arrayList = new ArrayList<>();
-                arrayListArr[hash] = arrayList;
-                this.mMainIndexKeys[hash] = new Long[1];
+                arrayListArr[iHash] = arrayList;
+                this.mMainIndexKeys[iHash] = new Long[1];
             }
             int size = arrayList.size();
             WeakReference<BinderProxy> weakReference = new WeakReference<>(binderProxy);
             for (int i = 0; i < size; i++) {
                 if (arrayList.get(i).refersTo(null)) {
                     arrayList.set(i, weakReference);
-                    this.mMainIndexKeys[hash][i] = Long.valueOf(j);
+                    this.mMainIndexKeys[iHash][i] = Long.valueOf(j);
                     if (i < size - 1) {
                         int i2 = this.mRandom + 1;
                         this.mRandom = i2;
                         int i3 = i + 1;
-                        int floorMod = i3 + Math.floorMod(i2, size - i3);
-                        if (arrayList.get(floorMod).refersTo(null)) {
-                            remove(hash, floorMod);
+                        int iFloorMod = i3 + Math.floorMod(i2, size - i3);
+                        if (arrayList.get(iFloorMod).refersTo(null)) {
+                            remove(iHash, iFloorMod);
                             return;
                         }
                         return;
@@ -189,12 +191,12 @@ public final class BinderProxy implements IBinder {
                 }
             }
             arrayList.add(size, weakReference);
-            Long[] lArr = this.mMainIndexKeys[hash];
+            Long[] lArr = this.mMainIndexKeys[iHash];
             if (lArr.length == size) {
                 Long[] lArr2 = new Long[(size / 2) + size + 2];
                 System.arraycopy(lArr, 0, lArr2, 0, size);
                 lArr2[size] = Long.valueOf(j);
-                this.mMainIndexKeys[hash] = lArr2;
+                this.mMainIndexKeys[iHash] = lArr2;
             } else {
                 lArr[size] = Long.valueOf(j);
             }
@@ -203,15 +205,15 @@ public final class BinderProxy implements IBinder {
                 Log.v("Binder", "BinderProxy map growth! bucket size = " + size + " total = " + size2);
                 this.mWarnBucketSize = this.mWarnBucketSize + 10;
                 if (size2 >= 25000) {
-                    int unclearedSize = unclearedSize();
-                    if (unclearedSize >= 25000) {
+                    int iUnclearedSize = unclearedSize();
+                    if (iUnclearedSize >= 25000) {
                         dumpProxyInterfaceCounts();
                         dumpPerUidProxyCounts();
                         Runtime.getRuntime().gc();
-                        throw new BinderProxyMapSizeException("Binder ProxyMap has too many entries: " + size2 + " (total), " + unclearedSize + " (uncleared), " + unclearedSize() + " (uncleared after GC). BinderProxy leak?");
+                        throw new BinderProxyMapSizeException("Binder ProxyMap has too many entries: " + size2 + " (total), " + iUnclearedSize + " (uncleared), " + unclearedSize() + " (uncleared after GC). BinderProxy leak?");
                     }
-                    if (size2 > (unclearedSize * 3) / 2) {
-                        Log.v("Binder", "BinderProxy map has many cleared entries: " + (size2 - unclearedSize) + " of " + size2 + " are cleared");
+                    if (size2 > (iUnclearedSize * 3) / 2) {
+                        Log.v("Binder", "BinderProxy map has many cleared entries: " + (size2 - iUnclearedSize) + " of " + size2 + " are cleared");
                     }
                 }
             }
@@ -223,7 +225,7 @@ public final class BinderProxy implements IBinder {
             if (i < 0) {
                 throw new IllegalArgumentException("negative interface count");
             }
-            final HashMap hashMap = new HashMap();
+            final HashMap map = new HashMap();
             final ArrayList arrayList = new ArrayList();
             synchronized (BinderProxy.sProxyMap) {
                 for (ArrayList<WeakReference<BinderProxy>> arrayList2 : this.mMainIndexValues) {
@@ -237,16 +239,16 @@ public final class BinderProxy implements IBinder {
             } catch (RemoteException unused) {
                 Log.e("Binder", "RemoteException while disabling app freezer");
             }
-            ExecutorService newSingleThreadExecutor = Executors.newSingleThreadExecutor();
-            newSingleThreadExecutor.submit(new Runnable() { // from class: android.os.BinderProxy$ProxyMap$$ExternalSyntheticLambda0
+            ExecutorService executorServiceNewSingleThreadExecutor = Executors.newSingleThreadExecutor();
+            executorServiceNewSingleThreadExecutor.submit(new Runnable() { // from class: android.os.BinderProxy$ProxyMap$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BinderProxy.ProxyMap.lambda$getSortedInterfaceCounts$0(arrayList, hashMap);
+                    BinderProxy.ProxyMap.lambda$getSortedInterfaceCounts$0(arrayList, map);
                 }
             });
             try {
-                newSingleThreadExecutor.shutdown();
-                if (!newSingleThreadExecutor.awaitTermination(20L, TimeUnit.SECONDS)) {
+                executorServiceNewSingleThreadExecutor.shutdown();
+                if (!executorServiceNewSingleThreadExecutor.awaitTermination(20L, TimeUnit.SECONDS)) {
                     Log.e("Binder", "Failed to complete binder proxy dump, dumping what we have so far.");
                 }
             } catch (InterruptedException unused2) {
@@ -256,18 +258,16 @@ public final class BinderProxy implements IBinder {
             } catch (RemoteException unused3) {
                 Log.e("Binder", "RemoteException while re-enabling app freezer");
             }
-            Map.Entry[] entryArr = (Map.Entry[]) hashMap.entrySet().toArray(new Map.Entry[hashMap.size()]);
+            Map.Entry[] entryArr = (Map.Entry[]) map.entrySet().toArray(new Map.Entry[map.size()]);
             Arrays.sort(entryArr, new Comparator() { // from class: android.os.BinderProxy$ProxyMap$$ExternalSyntheticLambda1
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
-                    int compareTo;
-                    compareTo = ((Integer) ((Map.Entry) obj2).getValue()).compareTo((Integer) ((Map.Entry) obj).getValue());
-                    return compareTo;
+                    return ((Integer) ((Map.Entry) obj2).getValue()).compareTo((Integer) ((Map.Entry) obj).getValue());
                 }
             });
-            int min = Math.min(i, entryArr.length);
-            InterfaceCount[] interfaceCountArr = new InterfaceCount[min];
-            for (i2 = 0; i2 < min; i2++) {
+            int iMin = Math.min(i, entryArr.length);
+            InterfaceCount[] interfaceCountArr = new InterfaceCount[iMin];
+            for (i2 = 0; i2 < iMin; i2++) {
                 interfaceCountArr[i2] = new InterfaceCount((String) entryArr[i2].getKey(), ((Integer) entryArr[i2].getValue()).intValue());
             }
             return interfaceCountArr;
@@ -315,13 +315,13 @@ public final class BinderProxy implements IBinder {
 
         /* JADX INFO: Access modifiers changed from: private */
         public void dumpPerUidProxyCounts() {
-            SparseIntArray nGetBinderProxyPerUidCounts = BinderInternal.nGetBinderProxyPerUidCounts();
-            if (nGetBinderProxyPerUidCounts.size() == 0) {
+            SparseIntArray sparseIntArrayNGetBinderProxyPerUidCounts = BinderInternal.nGetBinderProxyPerUidCounts();
+            if (sparseIntArrayNGetBinderProxyPerUidCounts.size() == 0) {
                 return;
             }
             Log.d("Binder", "Per Uid Binder Proxy Counts:");
-            for (int i = 0; i < nGetBinderProxyPerUidCounts.size(); i++) {
-                Log.d("Binder", "UID : " + nGetBinderProxyPerUidCounts.keyAt(i) + "  count = " + nGetBinderProxyPerUidCounts.valueAt(i));
+            for (int i = 0; i < sparseIntArrayNGetBinderProxyPerUidCounts.size(); i++) {
+                Log.d("Binder", "UID : " + sparseIntArrayNGetBinderProxyPerUidCounts.keyAt(i) + "  count = " + sparseIntArrayNGetBinderProxyPerUidCounts.valueAt(i));
             }
         }
     }
@@ -398,19 +398,148 @@ public final class BinderProxy implements IBinder {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:75:0x013a  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x013f  */
+    /* JADX WARN: Removed duplicated region for block: B:82:0x013a  */
+    /* JADX WARN: Removed duplicated region for block: B:84:0x013f  */
     @Override // android.os.IBinder
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean transact(int r28, android.os.Parcel r29, android.os.Parcel r30, int r31) throws android.os.RemoteException {
-        /*
-            Method dump skipped, instructions count: 398
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.BinderProxy.transact(int, android.os.Parcel, android.os.Parcel, int):boolean");
+    public boolean transact(int i, Parcel parcel, Parcel parcel2, int i2) throws Throwable {
+        Throwable th;
+        boolean z;
+        long jCurrentTimeMillis;
+        boolean zTransactNative;
+        int i3 = i2;
+        Binder.checkParcel(this, i, parcel, "Unreasonably large binder buffer");
+        boolean z2 = this.mWarnOnBlocking;
+        if (z2 && (i3 & 1) == 0 && Binder.sWarnOnBlockingOnCurrentThread.get().booleanValue()) {
+            this.mWarnOnBlocking = false;
+            if (Build.IS_USERDEBUG || Build.IS_ENG) {
+                Log.wtf("Binder", "Outgoing transactions from this process must be FLAG_ONEWAY", new Throwable());
+            } else {
+                Log.w("Binder", "Outgoing transactions from this process must be FLAG_ONEWAY", new Throwable());
+            }
+            z2 = false;
+        }
+        boolean zIsStackTrackingEnabled = Binder.isStackTrackingEnabled();
+        Object obj = null;
+        if (zIsStackTrackingEnabled) {
+            th = new Throwable();
+            if (!Binder.isSystemServerBinderTrackerEnabled) {
+                Binder.getTransactionTracker().addTrace(th);
+            }
+            StackTraceElement stackTraceElement = th.getStackTrace()[1];
+            Trace.traceBegin(1L, stackTraceElement.getClassName() + MediaMetrics.SEPARATOR + stackTraceElement.getMethodName());
+        } else {
+            th = null;
+        }
+        if (isMsgForGoogleLocation(parcel)) {
+            sendInfoToNSFLP(i, parcel);
+        }
+        Binder.ProxyTransactListener proxyTransactListener = sTransactListener;
+        if (proxyTransactListener != null) {
+            int callingWorkSourceUid = Binder.getCallingWorkSourceUid();
+            Object objOnTransactStarted = proxyTransactListener.onTransactStarted(this, i, i3);
+            int callingWorkSourceUid2 = Binder.getCallingWorkSourceUid();
+            if (callingWorkSourceUid != callingWorkSourceUid2) {
+                parcel.replaceCallingWorkSourceUid(callingWorkSourceUid2);
+            }
+            obj = objOnTransactStarted;
+        }
+        AppOpsManager.PausedNotedAppOpsCollection pausedNotedAppOpsCollectionPauseNotedAppOpsCollection = AppOpsManager.pauseNotedAppOpsCollection();
+        if ((i3 & 1) == 0 && AppOpsManager.isListeningForOpNoted()) {
+            i3 |= 2;
+        }
+        if (Binder.isSystemServerBinderTrackerEnabled && !Binder.isSystemServer) {
+            Parcel parcelObtain = Parcel.obtain();
+            Parcel parcelObtain2 = Parcel.obtain();
+            long jElapsedRealtimeNanos = 0;
+            try {
+                String interfaceName = parcel.getInterfaceName();
+                if (interfaceName != null) {
+                    parcelObtain.writeInterfaceToken(interfaceName);
+                }
+                try {
+                    zTransactNative = transactNative(IBinder.ISSYSTEMSERVER_TRANSACTION, parcelObtain, parcelObtain2, 0);
+                } catch (SecurityException unused) {
+                    zTransactNative = false;
+                }
+                z = zTransactNative ? parcelObtain2.readBoolean() : false;
+                try {
+                    jCurrentTimeMillis = System.currentTimeMillis();
+                    try {
+                        jElapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos();
+                        boolean zTransactNative2 = transactNative(i, parcel, parcel2, i3);
+                        if (parcel2 != null && !z2) {
+                            parcel2.addFlags(1);
+                        }
+                        parcelObtain.recycle();
+                        parcelObtain2.recycle();
+                        if (proxyTransactListener != null) {
+                            proxyTransactListener.onTransactEnded(obj);
+                        }
+                        if (zIsStackTrackingEnabled) {
+                            if (th == null) {
+                                th = new Throwable();
+                            }
+                            Throwable th2 = th;
+                            if (z) {
+                                Binder.getTransactionTracker().addTimeStamp(th2, jCurrentTimeMillis, SystemClock.elapsedRealtimeNanos() - jElapsedRealtimeNanos, (i3 & 1) != 0);
+                            }
+                            Trace.traceEnd(1L);
+                        }
+                        return zTransactNative2;
+                    } catch (Throwable th3) {
+                        th = th3;
+                        parcelObtain.recycle();
+                        parcelObtain2.recycle();
+                        if (proxyTransactListener != null) {
+                            proxyTransactListener.onTransactEnded(obj);
+                        }
+                        if (zIsStackTrackingEnabled) {
+                            if (th == null) {
+                                th = new Throwable();
+                            }
+                            Throwable th4 = th;
+                            if (z) {
+                                Binder.getTransactionTracker().addTimeStamp(th4, jCurrentTimeMillis, SystemClock.elapsedRealtimeNanos() - jElapsedRealtimeNanos, (i3 & 1) != 0);
+                            }
+                            Trace.traceEnd(1L);
+                        }
+                        throw th;
+                    }
+                } catch (Throwable th5) {
+                    th = th5;
+                    jCurrentTimeMillis = 0;
+                    parcelObtain.recycle();
+                    parcelObtain2.recycle();
+                    if (proxyTransactListener != null) {
+                    }
+                    if (zIsStackTrackingEnabled) {
+                    }
+                    throw th;
+                }
+            } catch (Throwable th6) {
+                th = th6;
+                z = false;
+            }
+        } else {
+            try {
+                boolean zTransactNative3 = transactNative(i, parcel, parcel2, i3);
+                if (parcel2 != null && !z2) {
+                    parcel2.addFlags(1);
+                }
+                return zTransactNative3;
+            } finally {
+                AppOpsManager.resumeNotedAppOpsCollection(pausedNotedAppOpsCollectionPauseNotedAppOpsCollection);
+                if (proxyTransactListener != null) {
+                    proxyTransactListener.onTransactEnded(obj);
+                }
+                if (zIsStackTrackingEnabled) {
+                    Trace.traceEnd(1L);
+                }
+            }
+        }
     }
 
     @Override // android.os.IBinder
@@ -433,7 +562,7 @@ public final class BinderProxy implements IBinder {
                 executor.execute(new Runnable() { // from class: android.os.BinderProxy$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        IBinder.FrozenStateChangeCallback.this.onFrozenStateChanged(iBinder, i);
+                        frozenStateChangeCallback.onFrozenStateChanged(iBinder, i);
                     }
                 });
             }
@@ -444,11 +573,11 @@ public final class BinderProxy implements IBinder {
 
     @Override // android.os.IBinder
     public boolean removeFrozenStateChangeCallback(IBinder.FrozenStateChangeCallback frozenStateChangeCallback) throws IllegalArgumentException {
-        IBinder.FrozenStateChangeCallback remove = this.mFrozenStateChangeCallbacks.remove(frozenStateChangeCallback);
-        if (remove == null) {
+        IBinder.FrozenStateChangeCallback frozenStateChangeCallbackRemove = this.mFrozenStateChangeCallbacks.remove(frozenStateChangeCallback);
+        if (frozenStateChangeCallbackRemove == null) {
             throw new IllegalArgumentException("callback not found");
         }
-        return removeFrozenStateChangeCallbackNative(remove);
+        return removeFrozenStateChangeCallbackNative(frozenStateChangeCallbackRemove);
     }
 
     public static boolean isFrozenStateChangeCallbackSupported() {
@@ -457,49 +586,49 @@ public final class BinderProxy implements IBinder {
 
     @Override // android.os.IBinder
     public void dump(FileDescriptor fileDescriptor, String[] strArr) throws RemoteException {
-        Parcel obtain = Parcel.obtain();
-        Parcel obtain2 = Parcel.obtain();
-        obtain.writeFileDescriptor(fileDescriptor);
-        obtain.writeStringArray(strArr);
+        Parcel parcelObtain = Parcel.obtain();
+        Parcel parcelObtain2 = Parcel.obtain();
+        parcelObtain.writeFileDescriptor(fileDescriptor);
+        parcelObtain.writeStringArray(strArr);
         try {
-            transact(IBinder.DUMP_TRANSACTION, obtain, obtain2, 0);
-            obtain2.readException();
+            transact(IBinder.DUMP_TRANSACTION, parcelObtain, parcelObtain2, 0);
+            parcelObtain2.readException();
         } finally {
-            obtain.recycle();
-            obtain2.recycle();
+            parcelObtain.recycle();
+            parcelObtain2.recycle();
         }
     }
 
     @Override // android.os.IBinder
     public void dumpAsync(FileDescriptor fileDescriptor, String[] strArr) throws RemoteException {
-        Parcel obtain = Parcel.obtain();
-        Parcel obtain2 = Parcel.obtain();
-        obtain.writeFileDescriptor(fileDescriptor);
-        obtain.writeStringArray(strArr);
+        Parcel parcelObtain = Parcel.obtain();
+        Parcel parcelObtain2 = Parcel.obtain();
+        parcelObtain.writeFileDescriptor(fileDescriptor);
+        parcelObtain.writeStringArray(strArr);
         try {
-            transact(IBinder.DUMP_TRANSACTION, obtain, obtain2, 1);
+            transact(IBinder.DUMP_TRANSACTION, parcelObtain, parcelObtain2, 1);
         } finally {
-            obtain.recycle();
-            obtain2.recycle();
+            parcelObtain.recycle();
+            parcelObtain2.recycle();
         }
     }
 
     @Override // android.os.IBinder
     public void shellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) throws RemoteException {
-        Parcel obtain = Parcel.obtain();
-        Parcel obtain2 = Parcel.obtain();
-        obtain.writeFileDescriptor(fileDescriptor);
-        obtain.writeFileDescriptor(fileDescriptor2);
-        obtain.writeFileDescriptor(fileDescriptor3);
-        obtain.writeStringArray(strArr);
-        ShellCallback.writeToParcel(shellCallback, obtain);
-        resultReceiver.writeToParcel(obtain, 0);
+        Parcel parcelObtain = Parcel.obtain();
+        Parcel parcelObtain2 = Parcel.obtain();
+        parcelObtain.writeFileDescriptor(fileDescriptor);
+        parcelObtain.writeFileDescriptor(fileDescriptor2);
+        parcelObtain.writeFileDescriptor(fileDescriptor3);
+        parcelObtain.writeStringArray(strArr);
+        ShellCallback.writeToParcel(shellCallback, parcelObtain);
+        resultReceiver.writeToParcel(parcelObtain, 0);
         try {
-            transact(IBinder.SHELL_COMMAND_TRANSACTION, obtain, obtain2, 0);
-            obtain2.readException();
+            transact(IBinder.SHELL_COMMAND_TRANSACTION, parcelObtain, parcelObtain2, 0);
+            parcelObtain2.readException();
         } finally {
-            obtain.recycle();
-            obtain2.recycle();
+            parcelObtain.recycle();
+            parcelObtain2.recycle();
         }
     }
 
@@ -548,16 +677,16 @@ public final class BinderProxy implements IBinder {
     }
 
     private void sendInfoToNSFLP(int i, Parcel parcel) {
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            ILocationManager asInterface = ILocationManager.Stub.asInterface(ServiceManager.getService("location"));
-            if (asInterface != null) {
-                obtain.writeInt(parcel.dataSize());
-                obtain.appendFrom(parcel, 0, parcel.dataSize());
-                obtain.setDataPosition(0);
-                ParcelableParcel createFromParcel = ParcelableParcel.CREATOR.createFromParcel(obtain);
+            ILocationManager iLocationManagerAsInterface = ILocationManager.Stub.asInterface(ServiceManager.getService("location"));
+            if (iLocationManagerAsInterface != null) {
+                parcelObtain.writeInt(parcel.dataSize());
+                parcelObtain.appendFrom(parcel, 0, parcel.dataSize());
+                parcelObtain.setDataPosition(0);
+                ParcelableParcel parcelableParcelCreateFromParcel = ParcelableParcel.CREATOR.createFromParcel(parcelObtain);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("pp", createFromParcel);
+                bundle.putParcelable("pp", parcelableParcelCreateFromParcel);
                 bundle.putString("interfaceName", parcel.getInterfaceName());
                 bundle.putInt("uid", Binder.getCallingUid());
                 bundle.putInt("pid", Binder.getCallingPid());
@@ -565,13 +694,13 @@ public final class BinderProxy implements IBinder {
                 message.what = 200;
                 message.arg1 = i;
                 message.setData(bundle);
-                asInterface.notifyNSFLP(message);
+                iLocationManagerAsInterface.notifyNSFLP(message);
             }
         } catch (Exception e) {
             Log.w("Binder_FLP", "failed to send info to nsflp");
             e.printStackTrace();
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 }

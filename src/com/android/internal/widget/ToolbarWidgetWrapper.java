@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
@@ -77,7 +78,7 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
         this(toolbar, z, R.string.action_bar_up_description);
     }
 
-    public ToolbarWidgetWrapper(Toolbar toolbar, boolean z, int i) {
+    public ToolbarWidgetWrapper(Toolbar toolbar, boolean z, int i) throws Resources.NotFoundException {
         Drawable drawable;
         this.mNavigationMode = 0;
         this.mDefaultNavigationContentDescription = 0;
@@ -86,63 +87,63 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
         this.mSubtitle = toolbar.getSubtitle();
         this.mTitleSet = this.mTitle != null;
         this.mNavIcon = this.mToolbar.getNavigationIcon();
-        TypedArray obtainStyledAttributes = toolbar.getContext().obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
-        this.mDefaultNavigationIcon = obtainStyledAttributes.getDrawable(13);
+        TypedArray typedArrayObtainStyledAttributes = toolbar.getContext().obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
+        this.mDefaultNavigationIcon = typedArrayObtainStyledAttributes.getDrawable(13);
         if (z) {
-            CharSequence text = obtainStyledAttributes.getText(5);
+            CharSequence text = typedArrayObtainStyledAttributes.getText(5);
             if (!TextUtils.isEmpty(text)) {
                 setTitle(text);
             }
-            CharSequence text2 = obtainStyledAttributes.getText(9);
+            CharSequence text2 = typedArrayObtainStyledAttributes.getText(9);
             if (!TextUtils.isEmpty(text2)) {
                 setSubtitle(text2);
             }
-            Drawable drawable2 = obtainStyledAttributes.getDrawable(6);
+            Drawable drawable2 = typedArrayObtainStyledAttributes.getDrawable(6);
             if (drawable2 != null) {
                 setLogo(drawable2);
             }
-            Drawable drawable3 = obtainStyledAttributes.getDrawable(0);
+            Drawable drawable3 = typedArrayObtainStyledAttributes.getDrawable(0);
             if (drawable3 != null) {
                 setIcon(drawable3);
             }
             if (this.mNavIcon == null && (drawable = this.mDefaultNavigationIcon) != null) {
                 setNavigationIcon(drawable);
             }
-            setDisplayOptions(obtainStyledAttributes.getInt(8, 0));
-            int resourceId = obtainStyledAttributes.getResourceId(10, 0);
+            setDisplayOptions(typedArrayObtainStyledAttributes.getInt(8, 0));
+            int resourceId = typedArrayObtainStyledAttributes.getResourceId(10, 0);
             if (resourceId != 0) {
                 setCustomView(LayoutInflater.from(this.mToolbar.getContext()).inflate(resourceId, (ViewGroup) this.mToolbar, false));
                 setDisplayOptions(this.mDisplayOpts | 16);
             }
-            int layoutDimension = obtainStyledAttributes.getLayoutDimension(4, 0);
+            int layoutDimension = typedArrayObtainStyledAttributes.getLayoutDimension(4, 0);
             if (layoutDimension > 0) {
                 ViewGroup.LayoutParams layoutParams = this.mToolbar.getLayoutParams();
                 layoutParams.height = layoutDimension;
                 this.mToolbar.setLayoutParams(layoutParams);
             }
-            int dimensionPixelOffset = obtainStyledAttributes.getDimensionPixelOffset(22, -1);
-            int dimensionPixelOffset2 = obtainStyledAttributes.getDimensionPixelOffset(23, -1);
+            int dimensionPixelOffset = typedArrayObtainStyledAttributes.getDimensionPixelOffset(22, -1);
+            int dimensionPixelOffset2 = typedArrayObtainStyledAttributes.getDimensionPixelOffset(23, -1);
             if (dimensionPixelOffset >= 0 || dimensionPixelOffset2 >= 0) {
                 this.mToolbar.setContentInsetsRelative(Math.max(dimensionPixelOffset, 0), Math.max(dimensionPixelOffset2, 0));
             }
-            int resourceId2 = obtainStyledAttributes.getResourceId(11, 0);
+            int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(11, 0);
             if (resourceId2 != 0) {
                 Toolbar toolbar2 = this.mToolbar;
                 toolbar2.setTitleTextAppearance(toolbar2.getContext(), resourceId2);
             }
-            int resourceId3 = obtainStyledAttributes.getResourceId(12, 0);
+            int resourceId3 = typedArrayObtainStyledAttributes.getResourceId(12, 0);
             if (resourceId3 != 0) {
                 Toolbar toolbar3 = this.mToolbar;
                 toolbar3.setSubtitleTextAppearance(toolbar3.getContext(), resourceId3);
             }
-            int resourceId4 = obtainStyledAttributes.getResourceId(26, 0);
+            int resourceId4 = typedArrayObtainStyledAttributes.getResourceId(26, 0);
             if (resourceId4 != 0) {
                 this.mToolbar.setPopupTheme(resourceId4);
             }
         } else {
             this.mDisplayOpts = detectDisplayOptions();
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         setDefaultNavigationContentDescription(i);
         this.mHomeDescription = this.mToolbar.getNavigationContentDescription();
         this.mToolbar.setNavigationOnClickListener(new View.OnClickListener() { // from class: com.android.internal.widget.ToolbarWidgetWrapper.1
@@ -207,7 +208,7 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setWindowTitle(CharSequence charSequence) {
+    public void setWindowTitle(CharSequence charSequence) throws Resources.NotFoundException {
         if (this.mTitleSet) {
             return;
         }
@@ -220,12 +221,12 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setTitle(CharSequence charSequence) {
+    public void setTitle(CharSequence charSequence) throws Resources.NotFoundException {
         this.mTitleSet = true;
         setTitleInt(charSequence);
     }
 
-    private void setTitleInt(CharSequence charSequence) {
+    private void setTitleInt(CharSequence charSequence) throws Resources.NotFoundException {
         this.mTitle = charSequence;
         if ((this.mDisplayOpts & 8) != 0) {
             this.mToolbar.setTitle(charSequence);
@@ -238,7 +239,7 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setSubtitle(CharSequence charSequence) {
+    public void setSubtitle(CharSequence charSequence) throws Resources.NotFoundException {
         this.mSubtitle = charSequence;
         if ((this.mDisplayOpts & 8) != 0) {
             this.mToolbar.setSubtitle(charSequence);
@@ -299,12 +300,7 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
         int i = this.mDisplayOpts;
         if ((i & 2) == 0) {
             drawable = null;
-        } else if ((i & 1) != 0) {
-            drawable = this.mLogo;
-            if (drawable == null) {
-                drawable = this.mIcon;
-            }
-        } else {
+        } else if ((i & 1) == 0 || (drawable = this.mLogo) == null) {
             drawable = this.mIcon;
         }
         this.mToolbar.setLogo(drawable);
@@ -362,7 +358,7 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setDisplayOptions(int i) {
+    public void setDisplayOptions(int i) throws Resources.NotFoundException {
         View view;
         int i2 = this.mDisplayOpts ^ i;
         this.mDisplayOpts = i;
@@ -553,9 +549,9 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     @Override // com.android.internal.widget.DecorToolbar
     public Animator setupAnimatorToVisibility(int i, long j) {
         if (i == 8) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mToolbar, (Property<Toolbar, Float>) View.ALPHA, 1.0f, 0.0f);
-            ofFloat.setDuration(j);
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.ToolbarWidgetWrapper.2
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mToolbar, (Property<Toolbar, Float>) View.ALPHA, 1.0f, 0.0f);
+            objectAnimatorOfFloat.setDuration(j);
+            objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.ToolbarWidgetWrapper.2
                 private boolean mCanceled = false;
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -571,20 +567,20 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
                     this.mCanceled = true;
                 }
             });
-            return ofFloat;
+            return objectAnimatorOfFloat;
         }
         if (i != 0) {
             return null;
         }
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mToolbar, (Property<Toolbar, Float>) View.ALPHA, 0.0f, 1.0f);
-        ofFloat2.setDuration(j);
-        ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.ToolbarWidgetWrapper.3
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mToolbar, (Property<Toolbar, Float>) View.ALPHA, 0.0f, 1.0f);
+        objectAnimatorOfFloat2.setDuration(j);
+        objectAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.ToolbarWidgetWrapper.3
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public void onAnimationStart(Animator animator) {
                 ToolbarWidgetWrapper.this.mToolbar.setVisibility(0);
             }
         });
-        return ofFloat2;
+        return objectAnimatorOfFloat2;
     }
 
     @Override // com.android.internal.widget.DecorToolbar

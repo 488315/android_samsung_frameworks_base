@@ -91,7 +91,7 @@ public class DvrPlayback implements AutoCloseable {
                 executor.execute(new Runnable() { // from class: android.media.tv.tuner.dvr.DvrPlayback$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DvrPlayback.this.lambda$onPlaybackStatusChanged$0(i);
+                        this.f$0.lambda$onPlaybackStatusChanged$0(i);
                     }
                 });
             }
@@ -140,9 +140,9 @@ public class DvrPlayback implements AutoCloseable {
 
     @Override // java.lang.AutoCloseable
     public void close() {
-        int nativeClose = nativeClose();
-        if (nativeClose != 0) {
-            TunerUtils.throwExceptionForResult(nativeClose, "failed to close DVR playback");
+        int iNativeClose = nativeClose();
+        if (iNativeClose != 0) {
+            TunerUtils.throwExceptionForResult(iNativeClose, "failed to close DVR playback");
         }
     }
 

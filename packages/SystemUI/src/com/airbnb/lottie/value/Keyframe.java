@@ -5,7 +5,6 @@ import android.view.animation.Interpolator;
 import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.model.content.GradientColor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Keyframe {
     public final LottieComposition composition;

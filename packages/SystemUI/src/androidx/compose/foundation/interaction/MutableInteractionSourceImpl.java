@@ -7,15 +7,14 @@ import kotlinx.coroutines.channels.BufferOverflow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class MutableInteractionSourceImpl implements MutableInteractionSource {
     public final SharedFlowImpl interactions = SharedFlowKt.MutableSharedFlow$default(0, 16, BufferOverflow.DROP_OLDEST, 1);
 
     @Override // androidx.compose.foundation.interaction.MutableInteractionSource
-    public final Object emit(Interaction interaction, Continuation continuation) {
-        Object emit = this.interactions.emit(interaction, continuation);
-        return emit == CoroutineSingletons.COROUTINE_SUSPENDED ? emit : Unit.INSTANCE;
+    public final Object emit(Interaction interaction, Continuation continuation) throws Throwable {
+        Object objEmit = this.interactions.emit(interaction, continuation);
+        return objEmit == CoroutineSingletons.COROUTINE_SUSPENDED ? objEmit : Unit.INSTANCE;
     }
 
     @Override // androidx.compose.foundation.interaction.InteractionSource

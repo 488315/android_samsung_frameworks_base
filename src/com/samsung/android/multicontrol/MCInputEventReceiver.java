@@ -97,16 +97,16 @@ public class MCInputEventReceiver extends InputEventReceiver {
 
     private boolean isValidMove(float f, float f2, Direction direction) {
         Rect bounds = this.mWindowManager.getMaximumWindowMetrics().getBounds();
-        int ordinal = direction.ordinal();
-        return ordinal != 0 ? ordinal != 1 ? ordinal != 2 ? ordinal == 3 && f2 >= ((float) (bounds.bottom + (-5))) : f2 <= ((float) bounds.top) : f <= ((float) bounds.left) : f >= ((float) (bounds.right + (-5)));
+        int iOrdinal = direction.ordinal();
+        return iOrdinal != 0 ? iOrdinal != 1 ? iOrdinal != 2 ? iOrdinal == 3 && f2 >= ((float) (bounds.bottom + (-5))) : f2 <= ((float) bounds.top) : f <= ((float) bounds.left) : f >= ((float) (bounds.right + (-5)));
     }
 
     private boolean isValidTrigger(float f, float f2, Direction direction) {
-        int ordinal = direction.ordinal();
-        if (ordinal != 0) {
-            if (ordinal != 1) {
-                if (ordinal != 2) {
-                    if (ordinal == 3 && f2 > 0.0f) {
+        int iOrdinal = direction.ordinal();
+        if (iOrdinal != 0) {
+            if (iOrdinal != 1) {
+                if (iOrdinal != 2) {
+                    if (iOrdinal == 3 && f2 > 0.0f) {
                         this.countY += 1.0f;
                     }
                 } else if (f2 < 0.0f) {

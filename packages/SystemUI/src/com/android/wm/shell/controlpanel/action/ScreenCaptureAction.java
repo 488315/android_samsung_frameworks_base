@@ -20,7 +20,6 @@ import com.samsung.android.content.clipboard.SemClipboardManager;
 import com.samsung.android.content.clipboard.data.SemClipData;
 import com.samsung.android.emergencymode.SemEmergencyManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ScreenCaptureAction extends MenuActionType {
     public final Context context;
@@ -72,7 +71,7 @@ public class ScreenCaptureAction extends MenuActionType {
             new Handler().postDelayed(new Runnable() { // from class: com.android.wm.shell.controlpanel.action.ScreenCaptureAction$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ScreenCaptureAction screenCaptureAction = ScreenCaptureAction.this;
+                    ScreenCaptureAction screenCaptureAction = this.f$0;
                     screenCaptureAction.getClass();
                     Point point = new Point();
                     ((WindowManager) screenCaptureAction.context.getSystemService("window")).getDefaultDisplay().getRealSize(point);

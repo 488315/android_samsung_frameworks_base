@@ -14,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalSceneInteractor$currentScene$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -50,11 +49,11 @@ final class CommunalSceneInteractor$currentScene$1 extends SuspendLambda impleme
         LogLevel logLevel = LogLevel.INFO;
         CommunalSceneLogger$$ExternalSyntheticLambda0 communalSceneLogger$$ExternalSyntheticLambda0 = new CommunalSceneLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = communalSceneLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("CommunalSceneLogger", logLevel, communalSceneLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("CommunalSceneLogger", logLevel, communalSceneLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = sceneKey.toString();
         logMessageImpl.str2 = sceneKey2.toString();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         return sceneKey2;
     }
 }

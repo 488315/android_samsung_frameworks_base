@@ -96,28 +96,28 @@ public final class BidiFormatter {
     }
 
     public String markAfter(CharSequence charSequence, TextDirectionHeuristic textDirectionHeuristic) {
-        boolean isRtl = textDirectionHeuristic.isRtl(charSequence, 0, charSequence.length());
-        if (!this.mIsRtlContext && (isRtl || getExitDir(charSequence) == 1)) {
+        boolean zIsRtl = textDirectionHeuristic.isRtl(charSequence, 0, charSequence.length());
+        if (!this.mIsRtlContext && (zIsRtl || getExitDir(charSequence) == 1)) {
             return LRM_STRING;
         }
         if (!this.mIsRtlContext) {
             return "";
         }
-        if (!isRtl || getExitDir(charSequence) == -1) {
+        if (!zIsRtl || getExitDir(charSequence) == -1) {
             return RLM_STRING;
         }
         return "";
     }
 
     public String markBefore(CharSequence charSequence, TextDirectionHeuristic textDirectionHeuristic) {
-        boolean isRtl = textDirectionHeuristic.isRtl(charSequence, 0, charSequence.length());
-        if (!this.mIsRtlContext && (isRtl || getEntryDir(charSequence) == 1)) {
+        boolean zIsRtl = textDirectionHeuristic.isRtl(charSequence, 0, charSequence.length());
+        if (!this.mIsRtlContext && (zIsRtl || getEntryDir(charSequence) == 1)) {
             return LRM_STRING;
         }
         if (!this.mIsRtlContext) {
             return "";
         }
-        if (!isRtl || getEntryDir(charSequence) == -1) {
+        if (!zIsRtl || getEntryDir(charSequence) == -1) {
             return RLM_STRING;
         }
         return "";
@@ -142,20 +142,20 @@ public final class BidiFormatter {
         if (charSequence == null) {
             return null;
         }
-        boolean isRtl = textDirectionHeuristic.isRtl(charSequence, 0, charSequence.length());
+        boolean zIsRtl = textDirectionHeuristic.isRtl(charSequence, 0, charSequence.length());
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
         if (getStereoReset() && z) {
-            spannableStringBuilder.append((CharSequence) markBefore(charSequence, isRtl ? TextDirectionHeuristics.RTL : TextDirectionHeuristics.LTR));
+            spannableStringBuilder.append((CharSequence) markBefore(charSequence, zIsRtl ? TextDirectionHeuristics.RTL : TextDirectionHeuristics.LTR));
         }
-        if (isRtl != this.mIsRtlContext) {
-            spannableStringBuilder.append(isRtl ? RLE : LRE);
+        if (zIsRtl != this.mIsRtlContext) {
+            spannableStringBuilder.append(zIsRtl ? RLE : LRE);
             spannableStringBuilder.append(charSequence);
             spannableStringBuilder.append(PDF);
         } else {
             spannableStringBuilder.append(charSequence);
         }
         if (z) {
-            spannableStringBuilder.append((CharSequence) markAfter(charSequence, isRtl ? TextDirectionHeuristics.RTL : TextDirectionHeuristics.LTR));
+            spannableStringBuilder.append((CharSequence) markAfter(charSequence, zIsRtl ? TextDirectionHeuristics.RTL : TextDirectionHeuristics.LTR));
         }
         return spannableStringBuilder;
     }
@@ -233,14 +233,14 @@ public final class BidiFormatter {
             int i2 = 0;
             int i3 = 0;
             while (this.charIndex < this.length && i == 0) {
-                byte dirTypeForward = dirTypeForward();
-                if (dirTypeForward != 0) {
-                    if (dirTypeForward == 1 || dirTypeForward == 2) {
+                byte bDirTypeForward = dirTypeForward();
+                if (bDirTypeForward != 0) {
+                    if (bDirTypeForward == 1 || bDirTypeForward == 2) {
                         if (i3 == 0) {
                             return 1;
                         }
-                    } else if (dirTypeForward != 9) {
-                        switch (dirTypeForward) {
+                    } else if (bDirTypeForward != 9) {
+                        switch (bDirTypeForward) {
                             case 14:
                             case 15:
                                 i3++;
@@ -297,17 +297,17 @@ public final class BidiFormatter {
             while (true) {
                 int i2 = i;
                 while (this.charIndex > 0) {
-                    byte dirTypeBackward = dirTypeBackward();
-                    if (dirTypeBackward != 0) {
-                        if (dirTypeBackward == 1 || dirTypeBackward == 2) {
+                    byte bDirTypeBackward = dirTypeBackward();
+                    if (bDirTypeBackward != 0) {
+                        if (bDirTypeBackward == 1 || bDirTypeBackward == 2) {
                             if (i == 0) {
                                 return 1;
                             }
                             if (i2 == 0) {
                                 break;
                             }
-                        } else if (dirTypeBackward != 9) {
-                            switch (dirTypeBackward) {
+                        } else if (bDirTypeBackward != 9) {
+                            switch (bDirTypeBackward) {
                                 case 14:
                                 case 15:
                                     if (i2 == i) {
@@ -353,12 +353,12 @@ public final class BidiFormatter {
         }
 
         byte dirTypeForward() {
-            char charAt = this.text.charAt(this.charIndex);
-            this.lastChar = charAt;
-            if (Character.isHighSurrogate(charAt)) {
-                int codePointAt = Character.codePointAt(this.text, this.charIndex);
-                this.charIndex += Character.charCount(codePointAt);
-                return getDirectionality(codePointAt);
+            char cCharAt = this.text.charAt(this.charIndex);
+            this.lastChar = cCharAt;
+            if (Character.isHighSurrogate(cCharAt)) {
+                int iCodePointAt = Character.codePointAt(this.text, this.charIndex);
+                this.charIndex += Character.charCount(iCodePointAt);
+                return getDirectionality(iCodePointAt);
             }
             this.charIndex++;
             byte cachedDirectionality = getCachedDirectionality(this.lastChar);
@@ -375,12 +375,12 @@ public final class BidiFormatter {
         }
 
         byte dirTypeBackward() {
-            char charAt = this.text.charAt(this.charIndex - 1);
-            this.lastChar = charAt;
-            if (Character.isLowSurrogate(charAt)) {
-                int codePointBefore = Character.codePointBefore(this.text, this.charIndex);
-                this.charIndex -= Character.charCount(codePointBefore);
-                return getDirectionality(codePointBefore);
+            char cCharAt = this.text.charAt(this.charIndex - 1);
+            this.lastChar = cCharAt;
+            if (Character.isLowSurrogate(cCharAt)) {
+                int iCodePointBefore = Character.codePointBefore(this.text, this.charIndex);
+                this.charIndex -= Character.charCount(iCodePointBefore);
+                return getDirectionality(iCodePointBefore);
             }
             this.charIndex--;
             byte cachedDirectionality = getCachedDirectionality(this.lastChar);
@@ -397,28 +397,28 @@ public final class BidiFormatter {
         }
 
         private byte skipTagForward() {
-            char charAt;
+            char cCharAt;
             int i = this.charIndex;
             while (true) {
                 int i2 = this.charIndex;
                 if (i2 < this.length) {
                     CharSequence charSequence = this.text;
                     this.charIndex = i2 + 1;
-                    char charAt2 = charSequence.charAt(i2);
-                    this.lastChar = charAt2;
-                    if (charAt2 == '>') {
+                    char cCharAt2 = charSequence.charAt(i2);
+                    this.lastChar = cCharAt2;
+                    if (cCharAt2 == '>') {
                         return (byte) 12;
                     }
-                    if (charAt2 == '\"' || charAt2 == '\'') {
+                    if (cCharAt2 == '\"' || cCharAt2 == '\'') {
                         do {
                             int i3 = this.charIndex;
                             if (i3 < this.length) {
                                 CharSequence charSequence2 = this.text;
                                 this.charIndex = i3 + 1;
-                                charAt = charSequence2.charAt(i3);
-                                this.lastChar = charAt;
+                                cCharAt = charSequence2.charAt(i3);
+                                this.lastChar = cCharAt;
                             }
-                        } while (charAt != charAt2);
+                        } while (cCharAt != cCharAt2);
                     }
                 } else {
                     this.charIndex = i;
@@ -429,7 +429,7 @@ public final class BidiFormatter {
         }
 
         private byte skipTagBackward() {
-            char charAt;
+            char cCharAt;
             int i = this.charIndex;
             while (true) {
                 int i2 = this.charIndex;
@@ -439,25 +439,25 @@ public final class BidiFormatter {
                 CharSequence charSequence = this.text;
                 int i3 = i2 - 1;
                 this.charIndex = i3;
-                char charAt2 = charSequence.charAt(i3);
-                this.lastChar = charAt2;
-                if (charAt2 == '<') {
+                char cCharAt2 = charSequence.charAt(i3);
+                this.lastChar = cCharAt2;
+                if (cCharAt2 == '<') {
                     return (byte) 12;
                 }
-                if (charAt2 == '>') {
+                if (cCharAt2 == '>') {
                     break;
                 }
-                if (charAt2 == '\"' || charAt2 == '\'') {
+                if (cCharAt2 == '\"' || cCharAt2 == '\'') {
                     do {
                         int i4 = this.charIndex;
                         if (i4 > 0) {
                             CharSequence charSequence2 = this.text;
                             int i5 = i4 - 1;
                             this.charIndex = i5;
-                            charAt = charSequence2.charAt(i5);
-                            this.lastChar = charAt;
+                            cCharAt = charSequence2.charAt(i5);
+                            this.lastChar = cCharAt;
                         }
-                    } while (charAt != charAt2);
+                    } while (cCharAt != cCharAt2);
                 }
             }
             this.charIndex = i;
@@ -466,7 +466,7 @@ public final class BidiFormatter {
         }
 
         private byte skipEntityForward() {
-            char charAt;
+            char cCharAt;
             do {
                 int i = this.charIndex;
                 if (i >= this.length) {
@@ -474,14 +474,14 @@ public final class BidiFormatter {
                 }
                 CharSequence charSequence = this.text;
                 this.charIndex = i + 1;
-                charAt = charSequence.charAt(i);
-                this.lastChar = charAt;
-            } while (charAt != ';');
+                cCharAt = charSequence.charAt(i);
+                this.lastChar = cCharAt;
+            } while (cCharAt != ';');
             return (byte) 12;
         }
 
         private byte skipEntityBackward() {
-            char charAt;
+            char cCharAt;
             int i = this.charIndex;
             do {
                 int i2 = this.charIndex;
@@ -491,12 +491,12 @@ public final class BidiFormatter {
                 CharSequence charSequence = this.text;
                 int i3 = i2 - 1;
                 this.charIndex = i3;
-                charAt = charSequence.charAt(i3);
-                this.lastChar = charAt;
-                if (charAt == '&') {
+                cCharAt = charSequence.charAt(i3);
+                this.lastChar = cCharAt;
+                if (cCharAt == '&') {
                     return (byte) 12;
                 }
-            } while (charAt != ';');
+            } while (cCharAt != ';');
             this.charIndex = i;
             this.lastChar = ';';
             return (byte) 13;

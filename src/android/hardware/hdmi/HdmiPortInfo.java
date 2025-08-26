@@ -14,11 +14,11 @@ public final class HdmiPortInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public HdmiPortInfo createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
             boolean z = parcel.readInt() == 1;
-            return new Builder(readInt, readInt2, readInt3).setCecSupported(z).setArcSupported(parcel.readInt() == 1).setEarcSupported(parcel.readInt() == 1).setMhlSupported(parcel.readInt() == 1).build();
+            return new Builder(i, i2, i3).setCecSupported(z).setArcSupported(parcel.readInt() == 1).setEarcSupported(parcel.readInt() == 1).setMhlSupported(parcel.readInt() == 1).build();
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

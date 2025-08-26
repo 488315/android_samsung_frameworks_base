@@ -28,7 +28,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftViewModelFactory implements ViewModelProvider.Factory {
     public final Map creators;
@@ -61,21 +60,21 @@ public final class SoundCraftViewModelFactory implements ViewModelProvider.Facto
 
     @Override // androidx.lifecycle.ViewModelProvider.Factory
     public final ViewModel create(Class cls) {
-        Object obj;
+        Object next;
         Lazy lazy = (Lazy) ((LinkedHashMap) this.creators).get(cls);
         if (lazy == null) {
             Iterator it = ((LinkedHashMap) this.creators).entrySet().iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 }
-                obj = it.next();
-                if (cls.isAssignableFrom((Class) ((Map.Entry) obj).getKey())) {
+                next = it.next();
+                if (cls.isAssignableFrom((Class) ((Map.Entry) next).getKey())) {
                     break;
                 }
             }
-            Map.Entry entry = (Map.Entry) obj;
+            Map.Entry entry = (Map.Entry) next;
             lazy = entry != null ? (Lazy) entry.getValue() : null;
             if (lazy == null) {
                 throw new IllegalArgumentException("unknown model class " + cls);

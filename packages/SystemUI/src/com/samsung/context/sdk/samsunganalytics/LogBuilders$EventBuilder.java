@@ -6,7 +6,6 @@ import com.samsung.context.sdk.samsunganalytics.internal.util.Utils;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LogBuilders$EventBuilder extends LogBuilders$LogBuilder {
     public final Map build() {
@@ -30,7 +29,7 @@ public class LogBuilders$EventBuilder extends LogBuilders$LogBuilder {
     }
 
     public final void setPersonalizedData(Map map) {
-        HashMap hashMap = new HashMap();
+        HashMap map2 = new HashMap();
         StringBuilder sb = new StringBuilder();
         for (Map.Entry entry : ((HashMap) map).entrySet()) {
             sb.setLength(0);
@@ -40,9 +39,9 @@ public class LogBuilders$EventBuilder extends LogBuilders$LogBuilder {
                 }
                 sb.append(str);
             }
-            hashMap.put((String) entry.getKey(), sb.toString());
+            map2.put((String) entry.getKey(), sb.toString());
         }
-        set("pd", Utils.makeDelimiterString(hashMap, Utils.Depth.TWO_DEPTH));
+        set("pd", Utils.makeDelimiterString(map2, Utils.Depth.TWO_DEPTH));
     }
 
     public final void setScreenView(String str) {

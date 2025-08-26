@@ -5,7 +5,6 @@ import android.support.v4.media.session.MediaSessionCompat$QueueItem$$ExternalSy
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class HelpFaceAuthenticationStatus extends FaceAuthenticationStatus {
     public final long createdAt;
@@ -28,9 +27,9 @@ public final class HelpFaceAuthenticationStatus extends FaceAuthenticationStatus
     }
 
     public final int hashCode() {
-        int hashCode = Integer.hashCode(this.msgId) * 31;
+        int iHashCode = Integer.hashCode(this.msgId) * 31;
         String str = this.msg;
-        return Long.hashCode(this.createdAt) + ((hashCode + (str == null ? 0 : str.hashCode())) * 31);
+        return Long.hashCode(this.createdAt) + ((iHashCode + (str == null ? 0 : str.hashCode())) * 31);
     }
 
     public final String toString() {

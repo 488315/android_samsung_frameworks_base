@@ -7,7 +7,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TvConnectedDevice implements AudioDevice {
     public static final Companion Companion = new Companion(null);
@@ -21,7 +20,6 @@ public final class TvConnectedDevice implements AudioDevice {
     public final int volume;
     public final int volumeMax;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -100,11 +98,11 @@ public final class TvConnectedDevice implements AudioDevice {
     }
 
     public final int hashCode() {
-        int m = ControlInfo$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name);
+        int iM = ControlInfo$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name);
         String str = this.description;
-        int hashCode = (this.icon.hashCode() + ((m + (str == null ? 0 : str.hashCode())) * 31)) * 31;
+        int iM2 = AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.icon, (iM + (str == null ? 0 : str.hashCode())) * 31, 31);
         Painter painter = this.badge;
-        return Integer.hashCode(this.volumeMax) + ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (this.state.hashCode() + ((hashCode + (painter != null ? painter.hashCode() : 0)) * 31)) * 31, 31);
+        return Integer.hashCode(this.volumeMax) + ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (this.state.hashCode() + ((iM2 + (painter != null ? painter.hashCode() : 0)) * 31)) * 31, 31);
     }
 
     public final String toString() {

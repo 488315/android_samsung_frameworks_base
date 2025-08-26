@@ -16,7 +16,6 @@ import java.util.concurrent.locks.LockSupport;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AbstractResolvableFuture implements ListenableFuture {
     public static final AtomicHelper ATOMIC_HELPER;
@@ -27,7 +26,6 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
     public static final boolean GENERATE_CANCELLATION_CAUSES = Boolean.parseBoolean(System.getProperty("guava.concurrent.generate_cancellation_cause", "false"));
     public static final Logger log = Logger.getLogger(AbstractResolvableFuture.class.getName());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class AtomicHelper {
         private AtomicHelper() {
         }
@@ -43,7 +41,6 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
         public abstract void putThread(Waiter waiter, Thread thread);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Cancellation {
         public static final Cancellation CAUSELESS_CANCELLED;
         public static final Cancellation CAUSELESS_INTERRUPTED;
@@ -66,7 +63,6 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Failure {
         public final Throwable exception;
 
@@ -86,7 +82,6 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Listener {
         public static final Listener TOMBSTONE = new Listener(null, null);
         public final Executor executor;
@@ -99,7 +94,6 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SafeAtomicHelper extends AtomicHelper {
         public final AtomicReferenceFieldUpdater listenersUpdater;
         public final AtomicReferenceFieldUpdater valueUpdater;
@@ -142,7 +136,6 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SetFuture implements Runnable {
         public final ListenableFuture future;
         public final AbstractResolvableFuture owner;
@@ -163,7 +156,6 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SynchronizedHelper extends AtomicHelper {
         public SynchronizedHelper() {
             super();
@@ -225,7 +217,6 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Waiter {
         public static final Waiter TOMBSTONE = new Waiter(false);
         public volatile Waiter next;
@@ -313,7 +304,7 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
         }
     }
 
-    public static Object getDoneValue$1(Object obj) {
+    public static Object getDoneValue$1(Object obj) throws ExecutionException {
         if (obj instanceof Cancellation) {
             Throwable th = ((Cancellation) obj).cause;
             CancellationException cancellationException = new CancellationException("Task was cancelled.");
@@ -338,15 +329,15 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
             Cancellation cancellation = (Cancellation) obj;
             return cancellation.wasInterrupted ? cancellation.cause != null ? new Cancellation(false, cancellation.cause) : Cancellation.CAUSELESS_CANCELLED : obj;
         }
-        boolean isCancelled = listenableFuture.isCancelled();
-        if ((!GENERATE_CANCELLATION_CAUSES) && isCancelled) {
+        boolean zIsCancelled = listenableFuture.isCancelled();
+        if ((!GENERATE_CANCELLATION_CAUSES) && zIsCancelled) {
             return Cancellation.CAUSELESS_CANCELLED;
         }
         try {
             Object uninterruptibly = getUninterruptibly(listenableFuture);
             return uninterruptibly == null ? NULL : uninterruptibly;
         } catch (CancellationException e) {
-            if (isCancelled) {
+            if (zIsCancelled) {
                 return new Cancellation(false, e);
             }
             return new Failure(new IllegalArgumentException("get() threw CancellationException, despite reporting isCancelled() == false: " + listenableFuture, e));
@@ -416,7 +407,14 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
         executeListener(runnable, executor);
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:29:0x0051, code lost:
+    
+        return true;
+     */
     @Override // java.util.concurrent.Future
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean cancel(boolean z) {
         Object obj = this.value;
         if (!(obj == null) && !(obj instanceof SetFuture)) {
@@ -448,11 +446,10 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
                 }
             }
         }
-        return true;
     }
 
     @Override // java.util.concurrent.Future
-    public final Object get(long j, TimeUnit timeUnit) {
+    public final Object get(long j, TimeUnit timeUnit) throws InterruptedException, TimeoutException {
         long nanos = timeUnit.toNanos(j);
         if (Thread.interrupted()) {
             throw new InterruptedException();
@@ -461,7 +458,7 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
         if ((obj != null) && (!(obj instanceof SetFuture))) {
             return getDoneValue$1(obj);
         }
-        long nanoTime = nanos > 0 ? System.nanoTime() + nanos : 0L;
+        long jNanoTime = nanos > 0 ? System.nanoTime() + nanos : 0L;
         if (nanos >= 1000) {
             Waiter waiter = this.waiters;
             if (waiter != Waiter.TOMBSTONE) {
@@ -480,7 +477,7 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
                             if ((obj2 != null) && (!(obj2 instanceof SetFuture))) {
                                 return getDoneValue$1(obj2);
                             }
-                            nanos = nanoTime - System.nanoTime();
+                            nanos = jNanoTime - System.nanoTime();
                         } while (nanos >= 1000);
                         removeWaiter(waiter2);
                     } else {
@@ -498,37 +495,37 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
             if (Thread.interrupted()) {
                 throw new InterruptedException();
             }
-            nanos = nanoTime - System.nanoTime();
+            nanos = jNanoTime - System.nanoTime();
         }
-        String abstractResolvableFuture = toString();
-        String timeUnit2 = timeUnit.toString();
+        String string = toString();
+        String string2 = timeUnit.toString();
         Locale locale = Locale.ROOT;
-        String lowerCase = timeUnit2.toLowerCase(locale);
-        StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("Waited ", j, " ");
-        m.append(timeUnit.toString().toLowerCase(locale));
-        String sb = m.toString();
+        String lowerCase = string2.toLowerCase(locale);
+        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("Waited ", j, " ");
+        sbM.append(timeUnit.toString().toLowerCase(locale));
+        String string3 = sbM.toString();
         if (nanos + 1000 < 0) {
-            String m2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sb, " (plus ");
+            String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string3, " (plus ");
             long j2 = -nanos;
-            long convert = timeUnit.convert(j2, TimeUnit.NANOSECONDS);
-            long nanos2 = j2 - timeUnit.toNanos(convert);
-            boolean z = convert == 0 || nanos2 > 1000;
-            if (convert > 0) {
-                String str = m2 + convert + " " + lowerCase;
+            long jConvert = timeUnit.convert(j2, TimeUnit.NANOSECONDS);
+            long nanos2 = j2 - timeUnit.toNanos(jConvert);
+            boolean z = jConvert == 0 || nanos2 > 1000;
+            if (jConvert > 0) {
+                String strM2 = strM + jConvert + " " + lowerCase;
                 if (z) {
-                    str = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, ",");
+                    strM2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, ",");
                 }
-                m2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, " ");
+                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, " ");
             }
             if (z) {
-                m2 = m2 + nanos2 + " nanoseconds ";
+                strM = strM + nanos2 + " nanoseconds ";
             }
-            sb = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "delay)");
+            string3 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "delay)");
         }
         if (isDone()) {
-            throw new TimeoutException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sb, " but future completed as timeout expired"));
+            throw new TimeoutException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string3, " but future completed as timeout expired"));
         }
-        throw new TimeoutException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sb, " for ", abstractResolvableFuture));
+        throw new TimeoutException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string3, " for ", string));
     }
 
     @Override // java.util.concurrent.Future
@@ -590,7 +587,7 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
     }
 
     public final String toString() {
-        String str;
+        String strPendingToString;
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString());
         sb.append("[status=");
@@ -600,13 +597,13 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
             addDoneString$1(sb);
         } else {
             try {
-                str = pendingToString();
+                strPendingToString = pendingToString();
             } catch (RuntimeException e) {
-                str = "Exception thrown from implementation: " + e.getClass();
+                strPendingToString = "Exception thrown from implementation: " + e.getClass();
             }
-            if (str != null && !str.isEmpty()) {
+            if (strPendingToString != null && !strPendingToString.isEmpty()) {
                 sb.append("PENDING, info=[");
-                sb.append(str);
+                sb.append(strPendingToString);
                 sb.append("]");
             } else if (isDone()) {
                 addDoneString$1(sb);
@@ -619,7 +616,7 @@ public abstract class AbstractResolvableFuture implements ListenableFuture {
     }
 
     @Override // java.util.concurrent.Future
-    public final Object get() {
+    public final Object get() throws InterruptedException {
         Object obj;
         if (!Thread.interrupted()) {
             Object obj2 = this.value;

@@ -6,7 +6,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaButton {
     public final MediaAction custom0;
@@ -53,15 +52,15 @@ public final class MediaButton {
 
     public final int hashCode() {
         MediaAction mediaAction = this.playOrPause;
-        int hashCode = (mediaAction == null ? 0 : mediaAction.hashCode()) * 31;
+        int iHashCode = (mediaAction == null ? 0 : mediaAction.hashCode()) * 31;
         MediaAction mediaAction2 = this.nextOrCustom;
-        int hashCode2 = (hashCode + (mediaAction2 == null ? 0 : mediaAction2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (mediaAction2 == null ? 0 : mediaAction2.hashCode())) * 31;
         MediaAction mediaAction3 = this.prevOrCustom;
-        int hashCode3 = (hashCode2 + (mediaAction3 == null ? 0 : mediaAction3.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (mediaAction3 == null ? 0 : mediaAction3.hashCode())) * 31;
         MediaAction mediaAction4 = this.custom0;
-        int hashCode4 = (hashCode3 + (mediaAction4 == null ? 0 : mediaAction4.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (mediaAction4 == null ? 0 : mediaAction4.hashCode())) * 31;
         MediaAction mediaAction5 = this.custom1;
-        return Boolean.hashCode(this.reservePrev) + TransitionData$$ExternalSyntheticOutline0.m((hashCode4 + (mediaAction5 != null ? mediaAction5.hashCode() : 0)) * 31, 31, this.reserveNext);
+        return Boolean.hashCode(this.reservePrev) + TransitionData$$ExternalSyntheticOutline0.m((iHashCode4 + (mediaAction5 != null ? mediaAction5.hashCode() : 0)) * 31, 31, this.reserveNext);
     }
 
     public final String toString() {

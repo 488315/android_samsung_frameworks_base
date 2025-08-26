@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ColorDrawable;
@@ -28,7 +29,6 @@ import com.samsung.android.core.CoreSaLogger;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DropResolverActivity extends ResolverActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,7 +38,6 @@ public class DropResolverActivity extends ResolverActivity {
     public UserHandle mUserHandle;
     public int mWindowingMode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TargetInfoWrapper implements TargetInfo {
         public final Bundle mOverrideActivityOptions;
         public final TargetInfo mTargetInfo;
@@ -133,7 +132,7 @@ public class DropResolverActivity extends ResolverActivity {
         return R.style.Theme.Material.Settings.Dialog.Alert;
     }
 
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         Intent[] intentArr;
         Intent intent = getIntent();
         Parcelable parcelableExtra = intent.getParcelableExtra("android.intent.extra.INTENT");
@@ -155,16 +154,16 @@ public class DropResolverActivity extends ResolverActivity {
         } else {
             intentArr = null;
         }
-        String string = getResources().getString(17043687);
+        String string = getResources().getString(17043691);
         Parcelable[] parcelableArrayExtra = intent.getParcelableArrayExtra("android.intent.extra.ALTERNATE_INTENTS");
         if (parcelableArrayExtra != null) {
             Intent[] intentArr3 = new Intent[parcelableArrayExtra.length];
             for (int i = 0; i < parcelableArrayExtra.length; i++) {
                 Parcelable parcelable = parcelableArrayExtra[i];
                 if (!(parcelable instanceof Intent)) {
-                    StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "EXTRA_ALTERNATE_INTENTS array entry #", " is not an Intent: ");
-                    m.append(parcelableArrayExtra[i]);
-                    Log.w("DropResolverActivity", m.toString());
+                    StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "EXTRA_ALTERNATE_INTENTS array entry #", " is not an Intent: ");
+                    sbM.append(parcelableArrayExtra[i]);
+                    Log.w("DropResolverActivity", sbM.toString());
                     finish();
                     super.onCreate((Bundle) null);
                     return;
@@ -185,9 +184,9 @@ public class DropResolverActivity extends ResolverActivity {
             }
         }
         this.mWindowingMode = getResources().getConfiguration().windowConfiguration.getWindowingMode();
-        UserHandle of = UserHandle.of(intent.getIntExtra("dropResolverActivity.extra.userid", getUserId()));
-        this.mUserHandle = of;
-        if (of.getIdentifier() != getUserId()) {
+        UserHandle userHandleOf = UserHandle.of(intent.getIntExtra("dropResolverActivity.extra.userid", getUserId()));
+        this.mUserHandle = userHandleOf;
+        if (userHandleOf.getIdentifier() != getUserId()) {
             intent2.prepareToLeaveUser(this.mUserHandle.getIdentifier());
         }
         if (intent.getBooleanExtra("dropResolverActivity.extra.wallpaper", false)) {
@@ -222,14 +221,14 @@ public class DropResolverActivity extends ResolverActivity {
     }
 
     public final void safelyStartActivity(TargetInfo targetInfo) {
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setStartedFromWindowTypeLauncher(true);
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setStartedFromWindowTypeLauncher(true);
         int i = this.mWindowingMode;
         if (i == 5) {
-            makeBasic.setForceLaunchWindowingMode(i);
+            activityOptionsMakeBasic.setForceLaunchWindowingMode(i);
         }
         try {
-            super.safelyStartActivity(TargetInfoWrapper.create(targetInfo, makeBasic.toBundle(), this.mUserHandle));
+            super.safelyStartActivity(TargetInfoWrapper.create(targetInfo, activityOptionsMakeBasic.toBundle(), this.mUserHandle));
             Intent resolvedIntent = targetInfo.getResolvedIntent();
             ComponentName component = resolvedIntent.getComponent();
             CoreSaLogger.logForAdvanced("1042", this.mContentType + "," + this.mCallingPackage + "," + (component != null ? component.getPackageName() : resolvedIntent.getPackage()));

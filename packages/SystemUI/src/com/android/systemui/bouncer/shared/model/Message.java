@@ -5,7 +5,6 @@ import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Message {
     public boolean animate;
@@ -31,13 +30,13 @@ public final class Message {
 
     public final int hashCode() {
         String str = this.message;
-        int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+        int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
         Integer num = this.messageResId;
-        int hashCode2 = (hashCode + (num == null ? 0 : num.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (num == null ? 0 : num.hashCode())) * 31;
         ColorStateList colorStateList = this.colorState;
-        int hashCode3 = (hashCode2 + (colorStateList == null ? 0 : colorStateList.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (colorStateList == null ? 0 : colorStateList.hashCode())) * 31;
         Map map = this.formatterArgs;
-        return Boolean.hashCode(this.animate) + ((hashCode3 + (map != null ? map.hashCode() : 0)) * 31);
+        return Boolean.hashCode(this.animate) + ((iHashCode3 + (map != null ? map.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

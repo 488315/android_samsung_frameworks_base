@@ -21,7 +21,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PrivacyItemController implements Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -41,8 +40,8 @@ public final class PrivacyItemController implements Dumpable {
     public final PrivacyItemController$notifyChanges$1 notifyChanges = new Runnable() { // from class: com.android.systemui.privacy.PrivacyItemController$notifyChanges$1
         @Override // java.lang.Runnable
         public final void run() {
-            List privacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core = PrivacyItemController.this.getPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
-            Iterator it = PrivacyItemController.this.callbacks.iterator();
+            List privacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core = this.this$0.getPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
+            Iterator it = this.this$0.callbacks.iterator();
             while (it.hasNext()) {
                 PrivacyItemController.Callback callback = (PrivacyItemController.Callback) ((WeakReference) it.next()).get();
                 if (callback != null) {
@@ -52,12 +51,10 @@ public final class PrivacyItemController implements Dumpable {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback extends PrivacyConfig.Callback {
         void onPrivacyItemsChanged(List list);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -70,7 +67,6 @@ public final class PrivacyItemController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MyExecutor implements Executor {
         public final DelayableExecutor delegate;
         public Runnable listeningCanceller;
@@ -85,7 +81,6 @@ public final class PrivacyItemController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotifyChangesToCallback implements Runnable {
         public final Callback callback;
         public final List list;
@@ -122,7 +117,7 @@ public final class PrivacyItemController implements Dumpable {
         ?? r1 = new PrivacyConfig.Callback() { // from class: com.android.systemui.privacy.PrivacyItemController$optionsCallback$1
             @Override // com.android.systemui.privacy.PrivacyConfig.Callback
             public final void onFlagLocationChanged(boolean z) {
-                Iterator it = PrivacyItemController.this.callbacks.iterator();
+                Iterator it = this.this$0.callbacks.iterator();
                 while (it.hasNext()) {
                     PrivacyItemController.Callback callback = (PrivacyItemController.Callback) ((WeakReference) it.next()).get();
                     if (callback != null) {
@@ -133,7 +128,7 @@ public final class PrivacyItemController implements Dumpable {
 
             @Override // com.android.systemui.privacy.PrivacyConfig.Callback
             public final void onFlagMediaProjectionChanged() {
-                ArrayList arrayList = (ArrayList) PrivacyItemController.this.callbacks;
+                ArrayList arrayList = (ArrayList) this.this$0.callbacks;
                 int size = arrayList.size();
                 int i = 0;
                 while (i < size) {
@@ -144,7 +139,7 @@ public final class PrivacyItemController implements Dumpable {
 
             @Override // com.android.systemui.privacy.PrivacyConfig.Callback
             public final void onFlagMicCameraChanged(boolean z) {
-                Iterator it = PrivacyItemController.this.callbacks.iterator();
+                Iterator it = this.this$0.callbacks.iterator();
                 while (it.hasNext()) {
                     PrivacyItemController.Callback callback = (PrivacyItemController.Callback) ((WeakReference) it.next()).get();
                     if (callback != null) {
@@ -162,9 +157,9 @@ public final class PrivacyItemController implements Dumpable {
     public final void addCallback(Callback callback) {
         WeakReference weakReference = new WeakReference(callback);
         ((ArrayList) this.callbacks).add(weakReference);
-        boolean isEmpty = ((ArrayList) this.callbacks).isEmpty();
+        boolean zIsEmpty = ((ArrayList) this.callbacks).isEmpty();
         MyExecutor myExecutor = this.internalUiExecutor;
-        if (isEmpty || this.listening) {
+        if (zIsEmpty || this.listening) {
             if (this.listening) {
                 myExecutor.execute(new NotifyChangesToCallback((Callback) weakReference.get(), getPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core()));
             }
@@ -179,39 +174,39 @@ public final class PrivacyItemController implements Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        PrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.println("PrivacyItemController state:");
-        asIndenting.increaseIndent();
+        PrintWriter printWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        printWriterAsIndenting.println("PrivacyItemController state:");
+        printWriterAsIndenting.increaseIndent();
         try {
-            asIndenting.println("Listening: " + this.listening);
-            asIndenting.println("Privacy Items:");
-            asIndenting.increaseIndent();
+            printWriterAsIndenting.println("Listening: " + this.listening);
+            printWriterAsIndenting.println("Privacy Items:");
+            printWriterAsIndenting.increaseIndent();
             try {
                 Iterator it = getPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core().iterator();
                 while (it.hasNext()) {
-                    asIndenting.println(((PrivacyItem) it.next()).toString());
+                    printWriterAsIndenting.println(((PrivacyItem) it.next()).toString());
                 }
-                asIndenting.decreaseIndent();
-                asIndenting.println("Callbacks:");
-                asIndenting.increaseIndent();
+                printWriterAsIndenting.decreaseIndent();
+                printWriterAsIndenting.println("Callbacks:");
+                printWriterAsIndenting.increaseIndent();
                 try {
                     Iterator it2 = this.callbacks.iterator();
                     while (it2.hasNext()) {
                         Callback callback = (Callback) ((WeakReference) it2.next()).get();
                         if (callback != null) {
-                            asIndenting.println(callback.toString());
+                            printWriterAsIndenting.println(callback.toString());
                         }
                     }
-                    asIndenting.decreaseIndent();
-                    asIndenting.println("PrivacyItemMonitors:");
-                    asIndenting.increaseIndent();
+                    printWriterAsIndenting.decreaseIndent();
+                    printWriterAsIndenting.println("PrivacyItemMonitors:");
+                    printWriterAsIndenting.increaseIndent();
                     try {
                         Iterator it3 = this.privacyItemMonitors.iterator();
                         while (it3.hasNext()) {
-                            ((AppOpsPrivacyItemMonitor) ((PrivacyItemMonitor) it3.next())).dump(asIndenting, strArr);
+                            ((AppOpsPrivacyItemMonitor) ((PrivacyItemMonitor) it3.next())).dump(printWriterAsIndenting, strArr);
                         }
-                        asIndenting.decreaseIndent();
-                        asIndenting.flush();
+                        printWriterAsIndenting.decreaseIndent();
+                        printWriterAsIndenting.flush();
                     } finally {
                     }
                 } finally {
@@ -233,7 +228,7 @@ public final class PrivacyItemController implements Dumpable {
         final Function1 function1 = new Function1() { // from class: com.android.systemui.privacy.PrivacyItemController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 WeakReference weakReference2 = weakReference;
                 int i = PrivacyItemController.$r8$clinit;
                 PrivacyItemController.Callback callback2 = (PrivacyItemController.Callback) ((WeakReference) obj).get();
@@ -243,7 +238,7 @@ public final class PrivacyItemController implements Dumpable {
         ((ArrayList) list).removeIf(new Predicate() { // from class: com.android.systemui.privacy.PrivacyItemController$sam$java_util_function_Predicate$0
             @Override // java.util.function.Predicate
             public final /* synthetic */ boolean test(Object obj) {
-                return ((Boolean) Function1.this.mo779invoke(obj)).booleanValue();
+                return ((Boolean) function1.mo781invoke(obj)).booleanValue();
             }
         });
         if (((ArrayList) this.callbacks).isEmpty()) {
@@ -256,11 +251,11 @@ public final class PrivacyItemController implements Dumpable {
         }
     }
 
-    public final void update$4$1() {
+    public final void update$5$1() {
         this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.privacy.PrivacyItemController$update$1
             @Override // java.lang.Runnable
             public final void run() {
-                PrivacyItemController.this.updateListAndNotifyChanges.run();
+                this.this$0.updateListAndNotifyChanges.run();
             }
         });
     }

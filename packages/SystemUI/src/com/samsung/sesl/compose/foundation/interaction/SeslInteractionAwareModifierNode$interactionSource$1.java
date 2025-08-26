@@ -10,7 +10,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class SeslInteractionAwareModifierNode$interactionSource$1 extends SuspendLambda implements Function2 {
     int label;
@@ -40,12 +39,12 @@ final class SeslInteractionAwareModifierNode$interactionSource$1 extends Suspend
         }
         ResultKt.throwOnFailure(obj);
         SeslInteractionAwareModifierNode seslInteractionAwareModifierNode = this.this$0;
-        StandaloneCoroutine launch$default = BuildersKt.launch$default(seslInteractionAwareModifierNode.getCoroutineScope(), null, null, new SeslInteractionAwareModifierNode$collectInteractionEvents$1(seslInteractionAwareModifierNode.interactionSource, seslInteractionAwareModifierNode, null), 3);
+        StandaloneCoroutine standaloneCoroutineLaunch$default = BuildersKt.launch$default(seslInteractionAwareModifierNode.getCoroutineScope(), null, null, new SeslInteractionAwareModifierNode$collectInteractionEvents$1(seslInteractionAwareModifierNode.interactionSource, seslInteractionAwareModifierNode, null), 3);
         StandaloneCoroutine standaloneCoroutine = seslInteractionAwareModifierNode.observeInteractionsJob;
         if (standaloneCoroutine != null) {
             standaloneCoroutine.cancel(null);
         }
-        seslInteractionAwareModifierNode.observeInteractionsJob = launch$default;
+        seslInteractionAwareModifierNode.observeInteractionsJob = standaloneCoroutineLaunch$default;
         return Unit.INSTANCE;
     }
 }

@@ -5,7 +5,6 @@ import androidx.compose.ui.graphics.layer.GraphicsLayer;
 import androidx.compose.ui.unit.Density;
 import androidx.compose.ui.unit.LayoutDirection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CanvasDrawScope$drawContext$1 implements DrawContext {
     public GraphicsLayer graphicsLayer;
@@ -29,7 +28,7 @@ public final class CanvasDrawScope$drawContext$1 implements DrawContext {
     }
 
     /* renamed from: getSize-NH-jbRc, reason: not valid java name */
-    public final long m526getSizeNHjbRc() {
+    public final long m528getSizeNHjbRc() {
         return this.this$0.drawParams.size;
     }
 
@@ -46,7 +45,7 @@ public final class CanvasDrawScope$drawContext$1 implements DrawContext {
     }
 
     /* renamed from: setSize-uvyYCjk, reason: not valid java name */
-    public final void m527setSizeuvyYCjk(long j) {
+    public final void m529setSizeuvyYCjk(long j) {
         this.this$0.drawParams.size = j;
     }
 }

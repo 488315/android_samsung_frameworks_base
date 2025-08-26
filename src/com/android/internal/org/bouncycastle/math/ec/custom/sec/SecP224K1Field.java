@@ -38,11 +38,11 @@ public class SecP224K1Field {
     }
 
     public static int[] fromBigInteger(BigInteger bigInteger) {
-        int[] fromBigInteger = Nat224.fromBigInteger(bigInteger);
-        if (fromBigInteger[6] == -1 && Nat224.gte(fromBigInteger, P)) {
-            Nat.add33To(7, PInv33, fromBigInteger);
+        int[] iArrFromBigInteger = Nat224.fromBigInteger(bigInteger);
+        if (iArrFromBigInteger[6] == -1 && Nat224.gte(iArrFromBigInteger, P)) {
+            Nat.add33To(7, PInv33, iArrFromBigInteger);
         }
-        return fromBigInteger;
+        return iArrFromBigInteger;
     }
 
     public static void half(int[] iArr, int[] iArr2) {
@@ -66,9 +66,9 @@ public class SecP224K1Field {
     }
 
     public static void multiply(int[] iArr, int[] iArr2, int[] iArr3) {
-        int[] createExt = Nat224.createExt();
-        Nat224.mul(iArr, iArr2, createExt);
-        reduce(createExt, iArr3);
+        int[] iArrCreateExt = Nat224.createExt();
+        Nat224.mul(iArr, iArr2, iArrCreateExt);
+        reduce(iArrCreateExt, iArr3);
     }
 
     public static void multiplyAddToExt(int[] iArr, int[] iArr2, int[] iArr3) {
@@ -117,22 +117,22 @@ public class SecP224K1Field {
     }
 
     public static void square(int[] iArr, int[] iArr2) {
-        int[] createExt = Nat224.createExt();
-        Nat224.square(iArr, createExt);
-        reduce(createExt, iArr2);
+        int[] iArrCreateExt = Nat224.createExt();
+        Nat224.square(iArr, iArrCreateExt);
+        reduce(iArrCreateExt, iArr2);
     }
 
     public static void squareN(int[] iArr, int i, int[] iArr2) {
-        int[] createExt = Nat224.createExt();
-        Nat224.square(iArr, createExt);
-        reduce(createExt, iArr2);
+        int[] iArrCreateExt = Nat224.createExt();
+        Nat224.square(iArr, iArrCreateExt);
+        reduce(iArrCreateExt, iArr2);
         while (true) {
             i--;
             if (i <= 0) {
                 return;
             }
-            Nat224.square(iArr2, createExt);
-            reduce(createExt, iArr2);
+            Nat224.square(iArr2, iArrCreateExt);
+            reduce(iArrCreateExt, iArr2);
         }
     }
 

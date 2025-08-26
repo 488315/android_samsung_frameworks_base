@@ -2,6 +2,7 @@ package com.android.systemui.qs.bar;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
@@ -18,7 +19,6 @@ import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.qs.SecSTQuickControlRequestReceiver;
 import com.android.systemui.util.ViewUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QuickControlBar extends BarItemImpl {
     public int mCurrentOrientation;
@@ -69,9 +69,9 @@ public class QuickControlBar extends BarItemImpl {
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void inflateViews(ViewGroup viewGroup) {
         if (this.mBarRootView == null) {
-            View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.qs_quick_control_bar, viewGroup, false);
-            this.mBarRootView = inflate;
-            this.mRemoteViews = (FrameLayout) inflate.findViewById(R.id.quick_control_container);
+            View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.qs_quick_control_bar, viewGroup, false);
+            this.mBarRootView = viewInflate;
+            this.mRemoteViews = (FrameLayout) viewInflate.findViewById(R.id.quick_control_container);
             ColoredBGHelper coloredBGHelper = this.mBGColorHelper;
             if (coloredBGHelper != null) {
                 coloredBGHelper.addBarBackground(this.mBarRootView, false);
@@ -103,12 +103,12 @@ public class QuickControlBar extends BarItemImpl {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void makeCloneBar() {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.qs_quick_control_bar, (ViewGroup) null);
-        this.mClonedBarView = inflate;
+    public final void makeCloneBar() throws Resources.NotFoundException {
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.qs_quick_control_bar, (ViewGroup) null);
+        this.mClonedBarView = viewInflate;
         ColoredBGHelper coloredBGHelper = this.mBGColorHelper;
         if (coloredBGHelper != null) {
-            coloredBGHelper.addBarBackground(inflate, false);
+            coloredBGHelper.addBarBackground(viewInflate, false);
         }
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) this.mClonedBarView.getLayoutParams();
         if (layoutParams == null) {
@@ -119,10 +119,10 @@ public class QuickControlBar extends BarItemImpl {
         layoutParams.width = -1;
         this.mClonedBarView.setLayoutParams(layoutParams);
         if (this.mBarRootView.getMeasuredWidth() > 0) {
-            Bitmap createBitmap = Bitmap.createBitmap(this.mBarRootView.getMeasuredWidth(), dimensionPixelSize, Bitmap.Config.ARGB_8888);
-            this.mRemoteViews.draw(new Canvas(createBitmap));
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(this.mBarRootView.getMeasuredWidth(), dimensionPixelSize, Bitmap.Config.ARGB_8888);
+            this.mRemoteViews.draw(new Canvas(bitmapCreateBitmap));
             ImageView imageView = new ImageView(this.mContext);
-            imageView.setImageBitmap(createBitmap);
+            imageView.setImageBitmap(bitmapCreateBitmap);
             ((FrameLayout) this.mClonedBarView.findViewById(R.id.quick_control_container)).addView(imageView);
         }
     }

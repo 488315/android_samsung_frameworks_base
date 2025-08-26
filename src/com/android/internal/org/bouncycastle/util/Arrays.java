@@ -107,15 +107,15 @@ public final class Arrays {
             if (cArr == cArr2) {
                 return true;
             }
-            int min = Math.min(cArr.length, cArr2.length);
+            int iMin = Math.min(cArr.length, cArr2.length);
             int length = cArr.length ^ cArr2.length;
-            for (int i = 0; i != min; i++) {
+            for (int i = 0; i != iMin; i++) {
                 length |= cArr[i] ^ cArr2[i];
             }
-            while (min < cArr2.length) {
-                char c = cArr2[min];
+            while (iMin < cArr2.length) {
+                char c = cArr2[iMin];
                 length |= ((byte) (~c)) ^ ((byte) c);
-                min++;
+                iMin++;
             }
             if (length == 0) {
                 return true;
@@ -134,8 +134,8 @@ public final class Arrays {
         if (bArr2 == null) {
             return 1;
         }
-        int min = Math.min(bArr.length, bArr2.length);
-        for (int i = 0; i < min; i++) {
+        int iMin = Math.min(bArr.length, bArr2.length);
+        for (int i = 0; i < iMin; i++) {
             int i2 = bArr[i] & 255;
             int i3 = bArr2[i] & 255;
             if (i2 < i3) {
@@ -306,11 +306,11 @@ public final class Arrays {
     }
 
     public static int hashCode(int[][] iArr) {
-        int i = 0;
-        for (int i2 = 0; i2 != iArr.length; i2++) {
-            i = (i * 257) + hashCode(iArr[i2]);
+        int iHashCode = 0;
+        for (int i = 0; i != iArr.length; i++) {
+            iHashCode = (iHashCode * 257) + hashCode(iArr[i]);
         }
-        return i;
+        return iHashCode;
     }
 
     public static int hashCode(int[] iArr) {
@@ -374,19 +374,19 @@ public final class Arrays {
     }
 
     public static int hashCode(short[][][] sArr) {
-        int i = 0;
-        for (int i2 = 0; i2 != sArr.length; i2++) {
-            i = (i * 257) + hashCode(sArr[i2]);
+        int iHashCode = 0;
+        for (int i = 0; i != sArr.length; i++) {
+            iHashCode = (iHashCode * 257) + hashCode(sArr[i]);
         }
-        return i;
+        return iHashCode;
     }
 
     public static int hashCode(short[][] sArr) {
-        int i = 0;
-        for (int i2 = 0; i2 != sArr.length; i2++) {
-            i = (i * 257) + hashCode(sArr[i2]);
+        int iHashCode = 0;
+        for (int i = 0; i != sArr.length; i++) {
+            iHashCode = (iHashCode * 257) + hashCode(sArr[i]);
         }
-        return i;
+        return iHashCode;
     }
 
     public static int hashCode(short[] sArr) {
@@ -409,13 +409,13 @@ public final class Arrays {
             return 0;
         }
         int length = objArr.length;
-        int i = length + 1;
+        int iHashCode = length + 1;
         while (true) {
             length--;
             if (length < 0) {
-                return i;
+                return iHashCode;
             }
-            i = (i * 257) ^ Objects.hashCode(objArr[length]);
+            iHashCode = (iHashCode * 257) ^ Objects.hashCode(objArr[length]);
         }
     }
 
@@ -725,16 +725,16 @@ public final class Arrays {
     }
 
     public static byte[] concatenate(byte[][] bArr) {
-        int i = 0;
-        for (int i2 = 0; i2 != bArr.length; i2++) {
-            i += bArr[i2].length;
+        int length = 0;
+        for (int i = 0; i != bArr.length; i++) {
+            length += bArr[i].length;
         }
-        byte[] bArr2 = new byte[i];
-        int i3 = 0;
-        for (int i4 = 0; i4 != bArr.length; i4++) {
-            byte[] bArr3 = bArr[i4];
-            System.arraycopy(bArr3, 0, bArr2, i3, bArr3.length);
-            i3 += bArr[i4].length;
+        byte[] bArr2 = new byte[length];
+        int length2 = 0;
+        for (int i2 = 0; i2 != bArr.length; i2++) {
+            byte[] bArr3 = bArr[i2];
+            System.arraycopy(bArr3, 0, bArr2, length2, bArr3.length);
+            length2 += bArr[i2].length;
         }
         return bArr2;
     }

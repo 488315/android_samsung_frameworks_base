@@ -1,7 +1,6 @@
 package android.app;
 
 import android.app.ActivityOptions;
-import android.app.ActivityTransitionState;
 import android.app.ExitTransitionCoordinator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -200,7 +199,7 @@ class ActivityTransitionState {
                 ActivityTransitionState.this.mEnterTransitionCoordinator.runAfterTransitionsComplete(new Runnable() { // from class: android.app.ActivityTransitionState$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ActivityTransitionState.AnonymousClass1.this.lambda$run$0();
+                        this.f$0.lambda$run$0();
                     }
                 });
             }
@@ -259,14 +258,14 @@ class ActivityTransitionState {
             if (enterTransitionCoordinator != null) {
                 Transition enterViewsTransition = enterTransitionCoordinator.getEnterViewsTransition();
                 ViewGroup decor = this.mEnterTransitionCoordinator.getDecor();
-                boolean cancelEnter = this.mEnterTransitionCoordinator.cancelEnter();
+                boolean zCancelEnter = this.mEnterTransitionCoordinator.cancelEnter();
                 this.mEnterTransitionCoordinator = null;
                 if (enterViewsTransition != null && decor != null) {
                     enterViewsTransition.pause(decor);
                 }
                 transition = enterViewsTransition;
                 viewGroup = decor;
-                z = cancelEnter;
+                z = zCancelEnter;
             } else {
                 z = false;
                 transition = null;
@@ -280,7 +279,7 @@ class ActivityTransitionState {
                 OneShotPreDrawListener.add(viewGroup, new Runnable() { // from class: android.app.ActivityTransitionState$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ActivityTransitionState.this.lambda$startExitBackTransition$0(activity);
+                        this.f$0.lambda$startExitBackTransition$0(activity);
                     }
                 });
             } else {
@@ -318,10 +317,10 @@ class ActivityTransitionState {
         if (!activity.getWindow().hasFeature(13) || this.mExitTransitionCoordinators == null || (sceneTransitionInfo = new ActivityOptions(bundle).getSceneTransitionInfo()) == null) {
             return;
         }
-        int indexOfKey = this.mExitTransitionCoordinators.indexOfKey(sceneTransitionInfo.getExitCoordinatorKey());
-        if (indexOfKey >= 0) {
-            this.mCalledExitCoordinator = this.mExitTransitionCoordinators.valueAt(indexOfKey).get();
-            this.mExitTransitionCoordinators.removeAt(indexOfKey);
+        int iIndexOfKey = this.mExitTransitionCoordinators.indexOfKey(sceneTransitionInfo.getExitCoordinatorKey());
+        if (iIndexOfKey >= 0) {
+            this.mCalledExitCoordinator = this.mExitTransitionCoordinators.valueAt(iIndexOfKey).get();
+            this.mExitTransitionCoordinators.removeAt(iIndexOfKey);
             ExitTransitionCoordinator exitTransitionCoordinator = this.mCalledExitCoordinator;
             if (exitTransitionCoordinator != null) {
                 this.mExitingFrom = exitTransitionCoordinator.getAcceptedNames();

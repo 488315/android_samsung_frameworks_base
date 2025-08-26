@@ -38,9 +38,9 @@ public interface IStatsBootstrapAtomService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IStatsBootstrapAtomService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStatsBootstrapAtomService)) {
-                return (IStatsBootstrapAtomService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IStatsBootstrapAtomService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStatsBootstrapAtomService)) {
+                return (IStatsBootstrapAtomService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -93,13 +93,13 @@ public interface IStatsBootstrapAtomService extends IInterface {
 
             @Override // android.os.IStatsBootstrapAtomService
             public void reportBootstrapAtom(StatsBootstrapAtom statsBootstrapAtom) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStatsBootstrapAtomService.DESCRIPTOR);
-                    obtain.writeTypedObject(statsBootstrapAtom, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStatsBootstrapAtomService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(statsBootstrapAtom, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

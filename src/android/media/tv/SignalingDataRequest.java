@@ -96,10 +96,10 @@ public final class SignalingDataRequest extends BroadcastInfoRequest implements 
 
     SignalingDataRequest(Parcel parcel) {
         super(9, parcel);
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         ArrayList arrayList = new ArrayList();
         parcel.readStringList(arrayList);
-        this.mGroup = readInt;
+        this.mGroup = i;
         this.mSignalingDataTypes = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
     }

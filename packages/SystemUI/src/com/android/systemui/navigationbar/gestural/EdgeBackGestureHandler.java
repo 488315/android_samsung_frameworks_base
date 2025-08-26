@@ -111,7 +111,6 @@ import javax.inject.Provider;
 import kotlin.Unit;
 import kotlinx.coroutines.Job;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeBackGestureHandler implements PluginListener {
     public static final int MAX_LONG_PRESS_TIMEOUT;
@@ -255,7 +254,6 @@ public class EdgeBackGestureHandler implements PluginListener {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$1, reason: invalid class name */
     public class AnonymousClass1 extends ISystemGestureExclusionListener.Stub {
         public AnonymousClass1() {
@@ -267,7 +265,7 @@ public class EdgeBackGestureHandler implements PluginListener {
                 edgeBackGestureHandler.mUiThreadContext.getExecutor().execute(new Runnable() { // from class: com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EdgeBackGestureHandler.AnonymousClass1 anonymousClass1 = EdgeBackGestureHandler.AnonymousClass1.this;
+                        EdgeBackGestureHandler.AnonymousClass1 anonymousClass1 = this.f$0;
                         Region region3 = region;
                         Region region4 = region2;
                         EdgeBackGestureHandler.this.mExcludeRegion.set(region3);
@@ -287,12 +285,10 @@ public class EdgeBackGestureHandler implements PluginListener {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         EdgeBackGestureHandler create(Context context, WindowManager windowManager);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InputMonitorResource {
         public final int mDisplayId;
         public final InputChannelCompat$InputEventReceiver mInputEventReceiver;
@@ -313,13 +309,12 @@ public class EdgeBackGestureHandler implements PluginListener {
             this.mInputEventReceiver = inputMonitorCompat.getInputReceiver(edgeBackGestureHandler.mUiThreadContext.getLooper(), edgeBackGestureHandler.mUiThreadContext.getChoreographer(), new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$InputMonitorResource$$ExternalSyntheticLambda0
                 @Override // com.android.systemui.shared.system.InputChannelCompat$InputEventListener
                 public final void onInputEvent(InputEvent inputEvent) {
-                    EdgeBackGestureHandler.m2623$$Nest$monInputEvent(EdgeBackGestureHandler.this, inputEvent);
+                    EdgeBackGestureHandler.m2641$$Nest$monInputEvent(edgeBackGestureHandler, inputEvent);
                 }
             });
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class LogArray extends ArrayDeque<String> {
         private final int mLength;
 
@@ -335,8 +330,12 @@ public class EdgeBackGestureHandler implements PluginListener {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:73:0x0131  */
     /* renamed from: -$$Nest$monInputEvent, reason: not valid java name */
-    public static void m2623$$Nest$monInputEvent(EdgeBackGestureHandler edgeBackGestureHandler, InputEvent inputEvent) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public static void m2641$$Nest$monInputEvent(EdgeBackGestureHandler edgeBackGestureHandler, InputEvent inputEvent) {
         boolean z;
         if (inputEvent instanceof MotionEvent) {
             MotionEvent motionEvent = (MotionEvent) inputEvent;
@@ -366,7 +365,7 @@ public class EdgeBackGestureHandler implements PluginListener {
                 edgeBackGestureHandler.mMLResults = 0.0f;
                 edgeBackGestureHandler.mLogGesture = false;
                 edgeBackGestureHandler.mInRejectedExclusion = false;
-                boolean isWithinInsets = edgeBackGestureHandler.isWithinInsets((int) motionEvent.getX(), (int) motionEvent.getY());
+                boolean zIsWithinInsets = edgeBackGestureHandler.isWithinInsets((int) motionEvent.getX(), (int) motionEvent.getY());
                 boolean z4 = !edgeBackGestureHandler.mDisabledForQuickstep && edgeBackGestureHandler.mIsBackGestureAllowed && !edgeBackGestureHandler.mGestureBlockingActivityRunning.get() && ((BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN && edgeBackGestureHandler.mIsLargeCoverBackGestureEnabled) || !QuickStepContract.isBackGestureDisabled(edgeBackGestureHandler.mSysUiFlags, edgeBackGestureHandler.mIsTrackpadThreeFingerSwipe)) && z3 && motionEvent.getPalm() <= 0.0f && !edgeBackGestureHandler.isMultiWindowCornerGesture(motionEvent);
                 if (z3) {
                     z4 &= (edgeBackGestureHandler.mOneHandOpGestureHandler.isGestureBlockedByPolicy(motionEvent) || edgeBackGestureHandler.isBlockSPenGesture(motionEvent)) ? false : true;
@@ -387,13 +386,14 @@ public class EdgeBackGestureHandler implements PluginListener {
                         Point point = edgeBackGestureHandler.mDisplaySize;
                         if (!bounds.contains(i, i2, point.x - insets.right, point.y - insets.bottom)) {
                             z = true;
-                            edgeBackGestureHandler.mAllowGesture = z;
                         }
+                        edgeBackGestureHandler.mAllowGesture = z;
+                    } else {
+                        z = false;
+                        edgeBackGestureHandler.mAllowGesture = z;
                     }
-                    z = false;
-                    edgeBackGestureHandler.mAllowGesture = z;
                 } else {
-                    edgeBackGestureHandler.mAllowGesture = z4 && ((BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN && edgeBackGestureHandler.mIsLargeCoverBackGestureEnabled) || !edgeBackGestureHandler.mUsingThreeButtonNav) && isWithinInsets && edgeBackGestureHandler.isWithinTouchRegion(motionEvent) && !(motionEvent.getSource() == 1056778 && motionEvent.getToolType(motionEvent.getActionIndex()) == 1);
+                    edgeBackGestureHandler.mAllowGesture = z4 && ((BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN && edgeBackGestureHandler.mIsLargeCoverBackGestureEnabled) || !edgeBackGestureHandler.mUsingThreeButtonNav) && z3 && !edgeBackGestureHandler.mSettingsHelper.isAccessControlEnabled() && zIsWithinInsets && edgeBackGestureHandler.isWithinTouchRegion(motionEvent) && !(motionEvent.getSource() == 1056778 && motionEvent.getToolType(motionEvent.getActionIndex()) == 1);
                 }
                 if (BasicRune.NAVBAR_REMOTEVIEW) {
                     edgeBackGestureHandler.mIsBlockGestureOnGame = false;
@@ -413,21 +413,21 @@ public class EdgeBackGestureHandler implements PluginListener {
                     edgeBackGestureHandler.mEndPoint.set(-1.0f, -1.0f);
                     edgeBackGestureHandler.mThresholdCrossed = false;
                 }
-                long currentTimeMillis = System.currentTimeMillis();
-                edgeBackGestureHandler.mTmpLogDate.setTime(currentTimeMillis);
-                Object format = edgeBackGestureHandler.mLogDateFormat.format(edgeBackGestureHandler.mTmpLogDate);
-                LogArray logArray = isWithinInsets ? edgeBackGestureHandler.mGestureLogInsideInsets : edgeBackGestureHandler.mGestureLogOutsideInsets;
-                Long valueOf = Long.valueOf(currentTimeMillis);
+                long jCurrentTimeMillis = System.currentTimeMillis();
+                edgeBackGestureHandler.mTmpLogDate.setTime(jCurrentTimeMillis);
+                Object date = edgeBackGestureHandler.mLogDateFormat.format(edgeBackGestureHandler.mTmpLogDate);
+                LogArray logArray = zIsWithinInsets ? edgeBackGestureHandler.mGestureLogInsideInsets : edgeBackGestureHandler.mGestureLogOutsideInsets;
+                Long lValueOf = Long.valueOf(jCurrentTimeMillis);
                 if (z3) {
-                    format = new Date(currentTimeMillis);
+                    date = new Date(jCurrentTimeMillis);
                 }
-                logArray.log(String.format("Gesture [%d [%s],alw=%B, t3fs=%B, left=%B, defLeft=%B, backAlw=%B, disbld=%B, qsDisbld=%b, blkdAct=%B, pip=%B, disp=%s, wl=%d, il=%d, wr=%d, ir=%d, excl=%s]", valueOf, format, Boolean.valueOf(edgeBackGestureHandler.mAllowGesture), Boolean.valueOf(edgeBackGestureHandler.mIsTrackpadThreeFingerSwipe), Boolean.valueOf(edgeBackGestureHandler.mIsOnLeftEdge), Boolean.valueOf(edgeBackGestureHandler.mDeferSetIsOnLeftEdge), Boolean.valueOf(edgeBackGestureHandler.mIsBackGestureAllowed), Boolean.valueOf(QuickStepContract.isBackGestureDisabled(edgeBackGestureHandler.mSysUiFlags, edgeBackGestureHandler.mIsTrackpadThreeFingerSwipe)), Boolean.valueOf(edgeBackGestureHandler.mDisabledForQuickstep), Boolean.valueOf(edgeBackGestureHandler.mGestureBlockingActivityRunning.get()), Boolean.valueOf(edgeBackGestureHandler.mIsInPip), edgeBackGestureHandler.mDisplaySize, Integer.valueOf(edgeBackGestureHandler.mEdgeWidthLeft), Integer.valueOf(edgeBackGestureHandler.mLeftInset), Integer.valueOf(edgeBackGestureHandler.mEdgeWidthRight), Integer.valueOf(edgeBackGestureHandler.mRightInset), edgeBackGestureHandler.mExcludeRegion));
+                logArray.log(String.format("Gesture [%d [%s],alw=%B, t3fs=%B, left=%B, defLeft=%B, backAlw=%B, disbld=%B, qsDisbld=%b, blkdAct=%B, pip=%B, disp=%s, wl=%d, il=%d, wr=%d, ir=%d, excl=%s]", lValueOf, date, Boolean.valueOf(edgeBackGestureHandler.mAllowGesture), Boolean.valueOf(edgeBackGestureHandler.mIsTrackpadThreeFingerSwipe), Boolean.valueOf(edgeBackGestureHandler.mIsOnLeftEdge), Boolean.valueOf(edgeBackGestureHandler.mDeferSetIsOnLeftEdge), Boolean.valueOf(edgeBackGestureHandler.mIsBackGestureAllowed), Boolean.valueOf(QuickStepContract.isBackGestureDisabled(edgeBackGestureHandler.mSysUiFlags, edgeBackGestureHandler.mIsTrackpadThreeFingerSwipe)), Boolean.valueOf(edgeBackGestureHandler.mDisabledForQuickstep), Boolean.valueOf(edgeBackGestureHandler.mGestureBlockingActivityRunning.get()), Boolean.valueOf(edgeBackGestureHandler.mIsInPip), edgeBackGestureHandler.mDisplaySize, Integer.valueOf(edgeBackGestureHandler.mEdgeWidthLeft), Integer.valueOf(edgeBackGestureHandler.mLeftInset), Integer.valueOf(edgeBackGestureHandler.mEdgeWidthRight), Integer.valueOf(edgeBackGestureHandler.mRightInset), edgeBackGestureHandler.mExcludeRegion));
                 return;
             }
             if (!edgeBackGestureHandler.mAllowGesture && !edgeBackGestureHandler.mLogGesture) {
                 if (BasicRune.NAVBAR_GESTURE && edgeBackGestureHandler.mIsBlockGestureOnGame) {
-                    float abs = Math.abs(motionEvent.getX() - edgeBackGestureHandler.mDownPoint.x);
-                    if (abs <= Math.abs(motionEvent.getY() - edgeBackGestureHandler.mDownPoint.y) || abs <= edgeBackGestureHandler.mTouchSlop) {
+                    float fAbs = Math.abs(motionEvent.getX() - edgeBackGestureHandler.mDownPoint.x);
+                    if (fAbs <= Math.abs(motionEvent.getY() - edgeBackGestureHandler.mDownPoint.y) || fAbs <= edgeBackGestureHandler.mTouchSlop) {
                         return;
                     }
                     edgeBackGestureHandler.mSettingsHelper.setGameToolsEnabled(true);
@@ -479,9 +479,9 @@ public class EdgeBackGestureHandler implements PluginListener {
                         edgeBackGestureHandler.mLogGesture = false;
                         return;
                     }
-                    float abs2 = Math.abs(motionEvent.getX() - edgeBackGestureHandler.mDownPoint.x);
-                    float abs3 = Math.abs(motionEvent.getY() - edgeBackGestureHandler.mDownPoint.y);
-                    if (abs3 > abs2 && abs3 > edgeBackGestureHandler.mTouchSlop) {
+                    float fAbs2 = Math.abs(motionEvent.getX() - edgeBackGestureHandler.mDownPoint.x);
+                    float fAbs3 = Math.abs(motionEvent.getY() - edgeBackGestureHandler.mDownPoint.y);
+                    if (fAbs3 > fAbs2 && fAbs3 > edgeBackGestureHandler.mTouchSlop) {
                         if (edgeBackGestureHandler.mAllowGesture) {
                             edgeBackGestureHandler.logGesture(8);
                             edgeBackGestureHandler.cancelGesture(motionEvent);
@@ -492,7 +492,7 @@ public class EdgeBackGestureHandler implements PluginListener {
                         edgeBackGestureHandler.mLogGesture = false;
                         return;
                     }
-                    if (abs2 > abs3 && abs2 > edgeBackGestureHandler.mTouchSlop) {
+                    if (fAbs2 > fAbs3 && fAbs2 > edgeBackGestureHandler.mTouchSlop) {
                         if (edgeBackGestureHandler.mAllowGesture) {
                             BackAnimationController.BackAnimationImpl backAnimationImpl = edgeBackGestureHandler.mBackAnimation;
                             if (backAnimationImpl != null) {
@@ -516,13 +516,13 @@ public class EdgeBackGestureHandler implements PluginListener {
     }
 
     /* renamed from: -$$Nest$msendEvent, reason: not valid java name */
-    public static void m2624$$Nest$msendEvent(EdgeBackGestureHandler edgeBackGestureHandler, int i) {
+    public static void m2642$$Nest$msendEvent(EdgeBackGestureHandler edgeBackGestureHandler, int i) {
         edgeBackGestureHandler.getClass();
         if (BasicRune.NAVBAR_GESTURE) {
             edgeBackGestureHandler.mMetricsLogger.write(new LogMaker(1931).setType(4).setSubtype(4).addTaggedData(933, Integer.valueOf(i)).addTaggedData(932, 0));
         }
-        long uptimeMillis = SystemClock.uptimeMillis();
-        KeyEvent keyEvent = new KeyEvent(uptimeMillis, uptimeMillis, i, 4, 0, 0, -1, 0, 8, 257);
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        KeyEvent keyEvent = new KeyEvent(jUptimeMillis, jUptimeMillis, i, 4, 0, 0, -1, 0, 8, 257);
         keyEvent.setDisplayId(edgeBackGestureHandler.mContext.getDisplay().getDisplayId());
         ((InputManager) edgeBackGestureHandler.mContext.getSystemService(InputManager.class)).injectInputEvent(keyEvent, 0);
     }
@@ -536,7 +536,7 @@ public class EdgeBackGestureHandler implements PluginListener {
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$4] */
     /* JADX WARN: Type inference failed for: r3v7, types: [com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$5] */
     /* JADX WARN: Type inference failed for: r3v8, types: [com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$6] */
-    public EdgeBackGestureHandler(Context context, LauncherProxyService launcherProxyService, SysUiState sysUiState, PluginManager pluginManager, @BackPanelUiThread UiThreadContext uiThreadContext, Executor executor, Handler handler, UserTracker userTracker, NavigationModeController navigationModeController, BackPanelController.Factory factory, ViewConfiguration viewConfiguration, WindowManager windowManager, IWindowManager iWindowManager, InputManager inputManager, Optional<Pip> optional, Optional<DesktopMode> optional2, FalsingManager falsingManager, Provider provider, Provider provider2, NotificationShadeWindowController notificationShadeWindowController, GestureInteractor gestureInteractor, JavaAdapter javaAdapter, BackAnimationPilferPointerCallbackManager backAnimationPilferPointerCallbackManager) {
+    public EdgeBackGestureHandler(Context context, LauncherProxyService launcherProxyService, SysUiState sysUiState, PluginManager pluginManager, @BackPanelUiThread UiThreadContext uiThreadContext, Executor executor, Handler handler, UserTracker userTracker, NavigationModeController navigationModeController, BackPanelController.Factory factory, ViewConfiguration viewConfiguration, WindowManager windowManager, IWindowManager iWindowManager, InputManager inputManager, Optional<Pip> optional, Optional<DesktopMode> optional2, FalsingManager falsingManager, Provider provider, Provider provider2, NotificationShadeWindowController notificationShadeWindowController, GestureInteractor gestureInteractor, JavaAdapter javaAdapter, BackAnimationPilferPointerCallbackManager backAnimationPilferPointerCallbackManager) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         Configuration configuration = new Configuration();
         this.mLastReportedConfig = configuration;
         this.mDisplaySize = new Point();
@@ -593,8 +593,8 @@ public class EdgeBackGestureHandler implements PluginListener {
                 edgeBackGestureHandler.mFalsingManager.isFalseTouch(16);
                 BackAnimationController.BackAnimationImpl backAnimationImpl = edgeBackGestureHandler.mBackAnimation;
                 if (backAnimationImpl == null) {
-                    EdgeBackGestureHandler.m2624$$Nest$msendEvent(edgeBackGestureHandler, 0);
-                    EdgeBackGestureHandler.m2624$$Nest$msendEvent(edgeBackGestureHandler, 1);
+                    EdgeBackGestureHandler.m2642$$Nest$msendEvent(edgeBackGestureHandler, 0);
+                    EdgeBackGestureHandler.m2642$$Nest$msendEvent(edgeBackGestureHandler, 1);
                 } else {
                     backAnimationImpl.setTriggerBack(true);
                 }
@@ -662,9 +662,9 @@ public class EdgeBackGestureHandler implements PluginListener {
         if (BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN) {
             this.mPilferPointerCallbackManager = backAnimationPilferPointerCallbackManager;
         }
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(context.getString(R.string.face_acquired_roll_too_extreme));
-        if (unflattenFromString != null) {
-            String packageName = unflattenFromString.getPackageName();
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(context.getString(R.string.face_acquired_tilt_too_extreme));
+        if (componentNameUnflattenFromString != null) {
+            String packageName = componentNameUnflattenFromString.getPackageName();
             PackageManager packageManager = context.getPackageManager();
             try {
                 Resources resourcesForApplication = packageManager.getResourcesForApplication(packageManager.getApplicationInfo(packageName, 9728));
@@ -673,9 +673,9 @@ public class EdgeBackGestureHandler implements PluginListener {
                     Log.e("EdgeBackGestureHandler", "No resource found for gesture-blocking activities");
                 } else {
                     for (String str : resourcesForApplication.getStringArray(identifier)) {
-                        ComponentName unflattenFromString2 = ComponentName.unflattenFromString(str);
-                        if (unflattenFromString2 != null) {
-                            this.mGestureInteractor.addGestureBlockedMatcher(new TaskMatcher.TopActivityComponent(unflattenFromString2), GestureInteractor.Scope.Local);
+                        ComponentName componentNameUnflattenFromString2 = ComponentName.unflattenFromString(str);
+                        if (componentNameUnflattenFromString2 != null) {
+                            this.mGestureInteractor.addGestureBlockedMatcher(new TaskMatcher.TopActivityComponent(componentNameUnflattenFromString2), GestureInteractor.Scope.Local);
                         }
                     }
                 }
@@ -707,11 +707,11 @@ public class EdgeBackGestureHandler implements PluginListener {
         this.mAllowGesture = false;
         this.mLogGesture = false;
         this.mInRejectedExclusion = false;
-        MotionEvent obtain = MotionEvent.obtain(motionEvent);
-        obtain.setAction(3);
-        this.mEdgeBackPlugin.onMotionEvent(obtain);
-        dispatchToBackAnimation(obtain);
-        obtain.recycle();
+        MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
+        motionEventObtain.setAction(3);
+        this.mEdgeBackPlugin.onMotionEvent(motionEventObtain);
+        dispatchToBackAnimation(motionEventObtain);
+        motionEventObtain.recycle();
     }
 
     public final WindowManager.LayoutParams createLayoutParams() {
@@ -734,21 +734,21 @@ public class EdgeBackGestureHandler implements PluginListener {
     }
 
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "EdgeBackGestureHandler:", "  mIsEnabled="), this.mIsEnabled, printWriter, "  mIsAttached="), this.mIsAttached, printWriter, "  mIsBackGestureAllowed="), this.mIsBackGestureAllowed, printWriter, "  mIsGestureHandlingEnabled="), this.mIsGestureHandlingEnabled, printWriter, "  mIsNavBarShownTransiently="), this.mIsNavBarShownTransiently, printWriter, "  mGestureBlockingActivityRunning=");
-        m.append(this.mGestureBlockingActivityRunning.get());
-        printWriter.println(m.toString());
-        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mAllowGesture="), this.mAllowGesture, printWriter, "  mUseMLModel="), this.mUseMLModel, printWriter, "  mDisabledForQuickstep="), this.mDisabledForQuickstep, printWriter, "  mStartingQuickstepRotation="), this.mStartingQuickstepRotation, printWriter, "  mInRejectedExclusion="), this.mInRejectedExclusion, printWriter, "  mExcludeRegion=");
-        m2.append(this.mExcludeRegion);
-        printWriter.println(m2.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "EdgeBackGestureHandler:", "  mIsEnabled="), this.mIsEnabled, printWriter, "  mIsAttached="), this.mIsAttached, printWriter, "  mIsBackGestureAllowed="), this.mIsBackGestureAllowed, printWriter, "  mIsGestureHandlingEnabled="), this.mIsGestureHandlingEnabled, printWriter, "  mIsNavBarShownTransiently="), this.mIsNavBarShownTransiently, printWriter, "  mGestureBlockingActivityRunning=");
+        sbM.append(this.mGestureBlockingActivityRunning.get());
+        printWriter.println(sbM.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mAllowGesture="), this.mAllowGesture, printWriter, "  mUseMLModel="), this.mUseMLModel, printWriter, "  mDisabledForQuickstep="), this.mDisabledForQuickstep, printWriter, "  mStartingQuickstepRotation="), this.mStartingQuickstepRotation, printWriter, "  mInRejectedExclusion="), this.mInRejectedExclusion, printWriter, "  mExcludeRegion=");
+        sbM2.append(this.mExcludeRegion);
+        printWriter.println(sbM2.toString());
         printWriter.println("  mUnrestrictedExcludeRegion=" + this.mUnrestrictedExcludeRegion);
-        StringBuilder m3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mIsInPip="), this.mIsInPip, printWriter, "  mPipExcludedBounds=");
-        m3.append(this.mPipExcludedBounds);
-        printWriter.println(m3.toString());
+        StringBuilder sbM3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mIsInPip="), this.mIsInPip, printWriter, "  mPipExcludedBounds=");
+        sbM3.append(this.mPipExcludedBounds);
+        printWriter.println(sbM3.toString());
         printWriter.println("  mDesktopModeExclusionRegion=" + this.mDesktopModeExcludeRegion);
         printWriter.println("  mNavBarOverlayExcludedBounds=" + this.mNavBarOverlayExcludedBounds);
-        StringBuilder m4 = MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mEdgeWidthLeft="), this.mEdgeWidthLeft, printWriter, "  mEdgeWidthRight="), this.mEdgeWidthRight, printWriter, "  mLeftInset="), this.mLeftInset, printWriter, "  mRightInset="), this.mRightInset, printWriter, "  mMLEnableWidth="), this.mMLEnableWidth, printWriter, "  mMLModelThreshold="), this.mMLModelThreshold, printWriter, "  mTouchSlop="), this.mTouchSlop, printWriter, "  mBottomGestureHeight="), this.mBottomGestureHeight, printWriter, "  mPredictionLog=");
-        m4.append(String.join("\n", this.mPredictionLog));
-        printWriter.println(m4.toString());
+        StringBuilder sbM4 = MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mEdgeWidthLeft="), this.mEdgeWidthLeft, printWriter, "  mEdgeWidthRight="), this.mEdgeWidthRight, printWriter, "  mLeftInset="), this.mLeftInset, printWriter, "  mRightInset="), this.mRightInset, printWriter, "  mMLEnableWidth="), this.mMLEnableWidth, printWriter, "  mMLModelThreshold="), this.mMLModelThreshold, printWriter, "  mTouchSlop="), this.mTouchSlop, printWriter, "  mBottomGestureHeight="), this.mBottomGestureHeight, printWriter, "  mPredictionLog=");
+        sbM4.append(String.join("\n", this.mPredictionLog));
+        printWriter.println(sbM4.toString());
         printWriter.println("  mGestureLogInsideInsets=" + String.join("\n", this.mGestureLogInsideInsets));
         printWriter.println("  mGestureLogOutsideInsets=" + String.join("\n", this.mGestureLogOutsideInsets));
         printWriter.println("  mTrackpadsConnected=" + ((String) this.mTrackpadsConnected.stream().map(new EdgeBackGestureHandler$$ExternalSyntheticLambda3()).collect(Collectors.joining())));
@@ -844,17 +844,17 @@ public class EdgeBackGestureHandler implements PluginListener {
         boolean z2 = this.mDesktopModeExcludeRegion.contains(x, y) && DragResizeWindowGeometry.isEdgeResizePermitted(motionEvent);
         if (!z && !z2 && !this.mNavBarOverlayExcludedBounds.contains(x, y) && motionEvent.getDisplayId() == this.mDisplayId) {
             Map map = this.mVocab;
-            int intValue = map != null ? ((Integer) map.getOrDefault(this.mPackageName, -1)).intValue() : -1;
+            int iIntValue = map != null ? ((Integer) map.getOrDefault(this.mPackageName, -1)).intValue() : -1;
             int i = this.mEdgeWidthLeft;
             int i2 = this.mLeftInset;
             ?? r7 = (x < i + i2 || x >= (this.mDisplaySize.x - this.mEdgeWidthRight) - this.mRightInset) ? 1 : 0;
             if (r7 != 0) {
                 int i3 = this.mMLEnableWidth;
-                if (x >= i2 + i3 && x < (this.mDisplaySize.x - i3) - this.mRightInset && this.mUseMLModel && !this.mMLModelIsLoading && this.mBackGestureTfClassifierProvider != null && intValue != -1) {
+                if (x >= i2 + i3 && x < (this.mDisplaySize.x - i3) - this.mRightInset && this.mUseMLModel && !this.mMLModelIsLoading && this.mBackGestureTfClassifierProvider != null && iIntValue != -1) {
                     this.mMLResults = -1.0f;
                 }
             }
-            this.mPredictionLog.log(String.format("Prediction [%d,%d,%d,%d,%f,%d]", Long.valueOf(System.currentTimeMillis()), Integer.valueOf(x), Integer.valueOf(y), Integer.valueOf(intValue), Float.valueOf(this.mMLResults), Integer.valueOf((int) r7)));
+            this.mPredictionLog.log(String.format("Prediction [%d,%d,%d,%d,%f,%d]", Long.valueOf(System.currentTimeMillis()), Integer.valueOf(x), Integer.valueOf(y), Integer.valueOf(iIntValue), Float.valueOf(this.mMLResults), Integer.valueOf((int) r7)));
             if (!BasicRune.NAVBAR_GESTURE && this.mIsNavBarShownTransiently) {
                 this.mLogGesture = true;
                 return r7;
@@ -892,22 +892,22 @@ public class EdgeBackGestureHandler implements PluginListener {
             int i8 = this.mDisplaySize.x - (this.mEdgeWidthRight + this.mRightInset);
             float f = this.mUseMLModel ? this.mMLResults : -2.0f;
             int i9 = this.mIsTrackpadThreeFingerSwipe ? 2 : 1;
-            StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
-            newBuilder.setAtomId(IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType);
-            newBuilder.writeInt(i);
-            newBuilder.writeInt(i2);
-            newBuilder.writeInt(i3);
-            newBuilder.writeInt(i4);
-            newBuilder.writeInt(i2);
-            newBuilder.writeInt(i5);
-            newBuilder.writeInt(i6);
-            newBuilder.writeInt(i7);
-            newBuilder.writeInt(i8);
-            newBuilder.writeFloat(f);
-            newBuilder.writeString(str);
-            newBuilder.writeInt(i9);
-            newBuilder.usePooledBuffer();
-            StatsLog.write(newBuilder.build());
+            StatsEvent.Builder builderNewBuilder = StatsEvent.newBuilder();
+            builderNewBuilder.setAtomId(IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType);
+            builderNewBuilder.writeInt(i);
+            builderNewBuilder.writeInt(i2);
+            builderNewBuilder.writeInt(i3);
+            builderNewBuilder.writeInt(i4);
+            builderNewBuilder.writeInt(i2);
+            builderNewBuilder.writeInt(i5);
+            builderNewBuilder.writeInt(i6);
+            builderNewBuilder.writeInt(i7);
+            builderNewBuilder.writeInt(i8);
+            builderNewBuilder.writeFloat(f);
+            builderNewBuilder.writeString(str);
+            builderNewBuilder.writeInt(i9);
+            builderNewBuilder.usePooledBuffer();
+            StatsLog.write(builderNewBuilder.build());
         }
     }
 
@@ -918,8 +918,8 @@ public class EdgeBackGestureHandler implements PluginListener {
             this.mDisabledForQuickstep = i > -1 && i != rotation;
         }
         Log.i("NoBackGesture", "Config changed: newConfig=" + configuration + " lastReportedConfig=" + this.mLastReportedConfig);
-        int diff = configuration.diff(this.mLastReportedConfig);
-        if ((1073741824 & diff) != 0 || (diff & 4096) != 0) {
+        int iDiff = configuration.diff(this.mLastReportedConfig);
+        if ((1073741824 & iDiff) != 0 || (iDiff & 4096) != 0) {
             updateCurrentUserResources();
         }
         this.mLastReportedConfig.updateFrom(configuration);
@@ -984,9 +984,9 @@ public class EdgeBackGestureHandler implements PluginListener {
         try {
             boolean z = QuickStepContract.SYSUI_FORCE_SET_BACK_GESTURE_BY_SPLUGIN;
             this.mUsingThreeButtonNav = i == 0;
-            boolean isGesturalMode = QuickStepContract.isGesturalMode(i);
-            this.mInGestureNavMode = isGesturalMode;
-            if (BasicRune.NAVBAR_GESTURE && isGesturalMode) {
+            boolean zIsGesturalMode = QuickStepContract.isGesturalMode(i);
+            this.mInGestureNavMode = zIsGesturalMode;
+            if (BasicRune.NAVBAR_GESTURE && zIsGesturalMode) {
                 NavigationModeUtil navigationModeUtil = NavigationModeUtil.INSTANCE;
                 this.mInGestureNavMode = i == 2;
                 updateDisablePolicy(((NavBarStateManagerImpl) this.mNavBarStateManager).states.gestureDisablePolicy);
@@ -1005,9 +1005,9 @@ public class EdgeBackGestureHandler implements PluginListener {
 
     @Override // com.android.systemui.plugins.PluginListener
     public final void onPluginDisconnected(Plugin plugin) {
-        BackPanelController create = this.mBackPanelControllerFactory.create(this.mContext, this.mWindowManager, this.mUiThreadContext.getHandler());
-        create.init();
-        setEdgeBackPlugin(create);
+        BackPanelController backPanelControllerCreate = this.mBackPanelControllerFactory.create(this.mContext, this.mWindowManager, this.mUiThreadContext.getHandler());
+        backPanelControllerCreate.init();
+        setEdgeBackPlugin(backPanelControllerCreate);
     }
 
     public final void pilferPointers() {
@@ -1033,10 +1033,10 @@ public class EdgeBackGestureHandler implements PluginListener {
             BackAnimationController backAnimationController = BackAnimationController.this;
             if (z) {
                 EdgeBackGestureHandler$$ExternalSyntheticLambda6 edgeBackGestureHandler$$ExternalSyntheticLambda6 = new EdgeBackGestureHandler$$ExternalSyntheticLambda6(this, executor, 0);
-                Integer valueOf = Integer.valueOf(i);
+                Integer numValueOf = Integer.valueOf(i);
                 BackAnimationPilferPointerCallbackManager backAnimationPilferPointerCallbackManager = this.mPilferPointerCallbackManager;
                 BackAnimationPilferPointerCallbackManager.CompositeRunnable compositeRunnable = backAnimationPilferPointerCallbackManager.callbacks;
-                compositeRunnable.runnables.put(valueOf, edgeBackGestureHandler$$ExternalSyntheticLambda6);
+                compositeRunnable.runnables.put(numValueOf, edgeBackGestureHandler$$ExternalSyntheticLambda6);
                 BackAnimationController.BackAnimationImpl backAnimationImpl2 = (BackAnimationController.BackAnimationImpl) backAnimationPilferPointerCallbackManager.backAnimation.orElse(null);
                 if (backAnimationImpl2 != null) {
                     BackAnimationController.this.mShellExecutor.execute(new BackAnimationController$1$$ExternalSyntheticLambda0(1, backAnimationImpl2, compositeRunnable));
@@ -1076,14 +1076,14 @@ public class EdgeBackGestureHandler implements PluginListener {
             return;
         }
         final float f = this.mDisplaySize.x;
-        final float min = Math.min(f, this.mBackSwipeLinearThreshold);
+        final float fMin = Math.min(f, this.mBackSwipeLinearThreshold);
         final BackAnimationController.BackAnimationImpl backAnimationImpl = this.mBackAnimation;
         final float f2 = this.mNonLinearFactor;
         BackAnimationController.this.mShellExecutor.execute(new Runnable() { // from class: com.android.wm.shell.back.BackAnimationController$BackAnimationImpl$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                BackAnimationController.BackAnimationImpl backAnimationImpl2 = BackAnimationController.BackAnimationImpl.this;
-                float f3 = min;
+                BackAnimationController.BackAnimationImpl backAnimationImpl2 = backAnimationImpl;
+                float f3 = fMin;
                 float f4 = f;
                 float f5 = f2;
                 BackAnimationController backAnimationController = BackAnimationController.this;
@@ -1103,23 +1103,23 @@ public class EdgeBackGestureHandler implements PluginListener {
         this.mEdgeWidthLeft = this.mGestureNavigationSettingsObserver.getLeftSensitivity(resources);
         this.mEdgeWidthRight = this.mGestureNavigationSettingsObserver.getRightSensitivity(resources);
         boolean z2 = this.mIsButtonForcedVisible;
-        boolean areNavigationButtonForcedVisible = this.mGestureNavigationSettingsObserver.areNavigationButtonForcedVisible();
-        this.mIsButtonForcedVisible = areNavigationButtonForcedVisible;
-        this.mIsBackGestureAllowed = !areNavigationButtonForcedVisible;
-        if (z2 != areNavigationButtonForcedVisible && (navigationBar$$ExternalSyntheticLambda1 = this.mButtonForcedVisibleCallback) != null) {
-            navigationBar$$ExternalSyntheticLambda1.accept(Boolean.valueOf(areNavigationButtonForcedVisible));
+        boolean zAreNavigationButtonForcedVisible = this.mGestureNavigationSettingsObserver.areNavigationButtonForcedVisible();
+        this.mIsButtonForcedVisible = zAreNavigationButtonForcedVisible;
+        this.mIsBackGestureAllowed = !zAreNavigationButtonForcedVisible;
+        if (z2 != zAreNavigationButtonForcedVisible && (navigationBar$$ExternalSyntheticLambda1 = this.mButtonForcedVisibleCallback) != null) {
+            navigationBar$$ExternalSyntheticLambda1.accept(Boolean.valueOf(zAreNavigationButtonForcedVisible));
         }
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        float f = DeviceConfig.getFloat("systemui", "back_gesture_bottom_height", resources.getDimension(R.dimen.seekbar_thumb_exclusion_max_size) / displayMetrics.density);
+        float f = DeviceConfig.getFloat("systemui", "back_gesture_bottom_height", resources.getDimension(R.dimen.seekbar_track_background_height_material) / displayMetrics.density);
         if (BasicRune.NAVBAR_BOTTOM_GESTURE_SENSITIVITY) {
             this.mBottomGestureHeight = this.mGestureNavigationSettingsObserver.getBottomSensitivity(resources);
         } else {
             this.mBottomGestureHeight = TypedValue.applyDimension(1, f, displayMetrics);
         }
-        int applyDimension = (int) TypedValue.applyDimension(1, 12.0f, displayMetrics);
-        this.mMLEnableWidth = applyDimension;
+        int iApplyDimension = (int) TypedValue.applyDimension(1, 12.0f, displayMetrics);
+        this.mMLEnableWidth = iApplyDimension;
         int i4 = this.mEdgeWidthRight;
-        if (applyDimension > i4) {
+        if (iApplyDimension > i4) {
             this.mMLEnableWidth = i4;
         }
         int i5 = this.mMLEnableWidth;
@@ -1128,7 +1128,7 @@ public class EdgeBackGestureHandler implements PluginListener {
             this.mMLEnableWidth = i6;
         }
         this.mTouchSlop = this.mViewConfiguration.getScaledTouchSlop() * DeviceConfig.getFloat("systemui", "back_gesture_slop_multiplier", 0.75f);
-        this.mBackSwipeLinearThreshold = resources.getDimension(R.dimen.spot_shadow_alpha);
+        this.mBackSwipeLinearThreshold = resources.getDimension(R.dimen.starting_surface_default_icon_size);
         TypedValue typedValue = new TypedValue();
         resources.getValue(R.dimen.car_double_line_list_item_height, typedValue, true);
         this.mNonLinearFactor = typedValue.getFloat();
@@ -1216,7 +1216,6 @@ public class EdgeBackGestureHandler implements PluginListener {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$8, reason: invalid class name */
     public class AnonymousClass8 implements InputManager.InputDeviceListener {
         public AnonymousClass8() {

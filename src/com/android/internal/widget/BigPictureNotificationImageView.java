@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.flags.Flags;
 import com.android.internal.R;
+import java.io.IOException;
 
 @RemoteViews.RemoteView
 /* loaded from: classes6.dex */
@@ -36,9 +37,9 @@ public class BigPictureNotificationImageView extends ImageView implements Notifi
 
     public BigPictureNotificationImageView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        boolean isLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
-        this.mMaximumDrawableWidth = context.getResources().getDimensionPixelSize(isLowRamDeviceStatic ? R.dimen.notification_big_picture_max_width_low_ram : R.dimen.notification_big_picture_max_width);
-        this.mMaximumDrawableHeight = context.getResources().getDimensionPixelSize(isLowRamDeviceStatic ? R.dimen.notification_big_picture_max_height_low_ram : R.dimen.notification_big_picture_max_height);
+        boolean zIsLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
+        this.mMaximumDrawableWidth = context.getResources().getDimensionPixelSize(zIsLowRamDeviceStatic ? R.dimen.notification_big_picture_max_width_low_ram : R.dimen.notification_big_picture_max_width);
+        this.mMaximumDrawableHeight = context.getResources().getDimensionPixelSize(zIsLowRamDeviceStatic ? R.dimen.notification_big_picture_max_height_low_ram : R.dimen.notification_big_picture_max_height);
     }
 
     public void setIconManager(NotificationIconManager notificationIconManager) {
@@ -53,11 +54,11 @@ public class BigPictureNotificationImageView extends ImageView implements Notifi
 
     @Override // android.widget.ImageView
     public Runnable setImageURIAsync(Uri uri) {
-        final Drawable loadImage = loadImage(uri);
+        final Drawable drawableLoadImage = loadImage(uri);
         return new Runnable() { // from class: com.android.internal.widget.BigPictureNotificationImageView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                BigPictureNotificationImageView.this.lambda$setImageURIAsync$0(loadImage);
+                this.f$0.lambda$setImageURIAsync$0(drawableLoadImage);
             }
         };
     }
@@ -74,16 +75,16 @@ public class BigPictureNotificationImageView extends ImageView implements Notifi
     }
 
     @Override // android.widget.ImageView
-    public Runnable setImageIconAsync(Icon icon) {
+    public Runnable setImageIconAsync(Icon icon) throws IOException {
         NotificationIconManager notificationIconManager = this.mIconManager;
         if (notificationIconManager != null) {
             return notificationIconManager.updateIcon(this, icon);
         }
-        final Drawable loadImage = loadImage(icon);
+        final Drawable drawableLoadImage = loadImage(icon);
         return new Runnable() { // from class: com.android.internal.widget.BigPictureNotificationImageView$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                BigPictureNotificationImageView.this.lambda$setImageIconAsync$1(loadImage);
+                this.f$0.lambda$setImageIconAsync$1(drawableLoadImage);
             }
         };
     }
@@ -109,22 +110,22 @@ public class BigPictureNotificationImageView extends ImageView implements Notifi
         return LocalImageResolver.resolveImage(uri, this.mContext, this.mMaximumDrawableWidth, this.mMaximumDrawableHeight);
     }
 
-    private Drawable loadImage(Icon icon) {
-        Drawable resolveImage;
+    private Drawable loadImage(Icon icon) throws IOException {
+        Drawable drawableResolveImage;
         if (icon == null) {
             return null;
         }
         if ((icon.getType() == 1 || icon.getType() == 5) && icon.getBitmap() != null) {
-            resolveImage = LocalImageResolver.resolveImage(icon, this.mContext, icon.getBitmap().getWidth(), icon.getBitmap().getHeight());
+            drawableResolveImage = LocalImageResolver.resolveImage(icon, this.mContext, icon.getBitmap().getWidth(), icon.getBitmap().getHeight());
         } else {
-            resolveImage = LocalImageResolver.resolveImage(icon, this.mContext, this.mMaximumDrawableWidth, this.mMaximumDrawableHeight);
+            drawableResolveImage = LocalImageResolver.resolveImage(icon, this.mContext, this.mMaximumDrawableWidth, this.mMaximumDrawableHeight);
         }
-        if (resolveImage != null) {
-            return resolveImage;
+        if (drawableResolveImage != null) {
+            return drawableResolveImage;
         }
-        Drawable loadDrawable = icon.loadDrawable(this.mContext);
-        if (loadDrawable != null) {
-            return loadDrawable;
+        Drawable drawableLoadDrawable = icon.loadDrawable(this.mContext);
+        if (drawableLoadDrawable != null) {
+            return drawableLoadDrawable;
         }
         Log.e(TAG, "Couldn't load drawable for icon: " + icon);
         return null;

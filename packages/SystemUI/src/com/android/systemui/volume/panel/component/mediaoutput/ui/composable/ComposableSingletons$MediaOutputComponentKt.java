@@ -17,7 +17,6 @@ import com.android.systemui.volume.panel.component.mediaoutput.ui.viewmodel.Devi
 import kotlin.Unit;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ComposableSingletons$MediaOutputComponentKt {
     public static final ComposableSingletons$MediaOutputComponentKt INSTANCE = new ComposableSingletons$MediaOutputComponentKt();
@@ -32,10 +31,10 @@ public final class ComposableSingletons$MediaOutputComponentKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.mediaoutput.ui.composable.ComposableSingletons$MediaOutputComponentKt.lambda-1.<anonymous> (MediaOutputComponent.kt:166)");
             }
-            Modifier fillMaxSize = SizeKt.fillMaxSize(Modifier.Companion, 1.0f);
+            Modifier modifierFillMaxSize = SizeKt.fillMaxSize(Modifier.Companion, 1.0f);
             long color = ColorKt.toColor(deviceIconViewModel.getBackgroundColor(), composer);
             Dp.Companion companion = Dp.Companion;
-            SpacerKt.Spacer(composer, BackgroundKt.m26backgroundbw27NRU(fillMaxSize, color, RoundedCornerShapeKt.m186RoundedCornerShape0680j_4(12)));
+            SpacerKt.Spacer(composer, BackgroundKt.m26backgroundbw27NRU(modifierFillMaxSize, color, RoundedCornerShapeKt.m187RoundedCornerShape0680j_4(12)));
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -56,7 +55,7 @@ public final class ComposableSingletons$MediaOutputComponentKt {
             Icon icon = deviceIconViewModel.getIcon();
             long color = ColorKt.toColor(deviceIconViewModel.getIconColor(), composer);
             Dp.Companion companion = Dp.Companion;
-            IconKt.m1072IconFNF3uiM(icon, SizeKt.fillMaxSize(PaddingKt.m124padding3ABfNKs(Modifier.Companion, 12), 1.0f), color, composer, 48, 0);
+            IconKt.m1074IconFNF3uiM(icon, SizeKt.fillMaxSize(PaddingKt.m125padding3ABfNKs(Modifier.Companion, 12), 1.0f), color, composer, 48, 0);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }

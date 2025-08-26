@@ -11,12 +11,10 @@ import com.android.systemui.scene.ui.viewmodel.SceneContainerArea;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SceneContainerSwipeDetector implements SwipeSourceDetector {
     public final FixedSizeEdgeDetector fixedEdgeDetector;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -48,9 +46,9 @@ public final class SceneContainerSwipeDetector implements SwipeSourceDetector {
 
     @Override // com.android.compose.animation.scene.SwipeSourceDetector
     /* renamed from: source-NDhlJko */
-    public final SwipeSource.Resolved mo924sourceNDhlJko(long j, long j2, Density density, Orientation orientation) {
-        Edge.Resolved mo924sourceNDhlJko = this.fixedEdgeDetector.mo924sourceNDhlJko(j, j2, density, orientation);
-        int i = mo924sourceNDhlJko == null ? -1 : WhenMappings.$EnumSwitchMapping$0[mo924sourceNDhlJko.ordinal()];
+    public final SwipeSource.Resolved mo926sourceNDhlJko(long j, long j2, Density density, Orientation orientation) {
+        Edge.Resolved resolvedMo926sourceNDhlJko = this.fixedEdgeDetector.mo926sourceNDhlJko(j, j2, density, orientation);
+        int i = resolvedMo926sourceNDhlJko == null ? -1 : WhenMappings.$EnumSwitchMapping$0[resolvedMo926sourceNDhlJko.ordinal()];
         if (i == -1) {
             IntOffset.Companion companion = IntOffset.Companion;
             return ((float) ((int) (j2 >> 32))) < ((float) ((int) (j >> 32))) * 0.5f ? SceneContainerArea.Resolved.LeftHalf.INSTANCE : SceneContainerArea.Resolved.RightHalf.INSTANCE;

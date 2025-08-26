@@ -5,14 +5,12 @@ import android.util.LruCache;
 import com.android.systemui.animation.TypefaceVariantCache;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TypefaceVariantCacheImpl implements TypefaceVariantCache {
     public final Typeface baseTypeface;
     public final LruCache cache = new LruCache(5);
     public final FontCacheImpl fontCache;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -47,8 +45,8 @@ public final class TypefaceVariantCacheImpl implements TypefaceVariantCache {
         }
         Typeface typeface2 = this.baseTypeface;
         TypefaceVariantCache.Companion.getClass();
-        Typeface createVariantTypeface = TypefaceVariantCache.Companion.createVariantTypeface(typeface2, str);
-        this.cache.put(str, createVariantTypeface);
-        return createVariantTypeface;
+        Typeface typefaceCreateVariantTypeface = TypefaceVariantCache.Companion.createVariantTypeface(typeface2, str);
+        this.cache.put(str, typefaceCreateVariantTypeface);
+        return typefaceCreateVariantTypeface;
     }
 }

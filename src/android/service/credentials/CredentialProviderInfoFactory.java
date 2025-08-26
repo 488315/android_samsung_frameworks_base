@@ -12,12 +12,15 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.content.res.XmlResourceParser;
 import android.credentials.CredentialProviderInfo;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Slog;
+import android.util.Xml;
+import com.android.internal.R;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,7 +86,7 @@ public final class CredentialProviderInfoFactory {
     }
 
     private static CredentialProviderInfo.Builder populateMetadata(Context context, ServiceInfo serviceInfo) throws NullPointerException {
-        Resources resources;
+        Resources resourcesForApplication;
         Objects.requireNonNull(context, "context must not be null");
         PackageManager packageManager = context.getPackageManager();
         CredentialProviderInfo.Builder builder = new CredentialProviderInfo.Builder(serviceInfo);
@@ -92,101 +95,56 @@ public final class CredentialProviderInfoFactory {
             return builder;
         }
         try {
-            resources = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
+            resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
         } catch (PackageManager.NameNotFoundException e) {
             Slog.e("CredentialManager", "Failed to get app resources", e);
-            resources = null;
+            resourcesForApplication = null;
         }
-        if (resources == null) {
+        if (resourcesForApplication == null) {
             Slog.w("CredentialManager", "Resources are null for the serviceInfo being processed: " + serviceInfo.getComponentName());
             return builder;
         }
         try {
-            return extractXmlMetadata(context, serviceInfo, packageManager, resources);
+            return extractXmlMetadata(context, serviceInfo, packageManager, resourcesForApplication);
         } catch (Exception e2) {
             Slog.e("CredentialManager", "Failed to get XML metadata", e2);
             return builder;
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0053, code lost:
-    
-        r5.addCapabilities(parseXmlProviderOuterCapabilities(r6, r8));
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x0050, code lost:
-    
-        if (r3 == null) goto L25;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private static android.credentials.CredentialProviderInfo.Builder extractXmlMetadata(android.content.Context r5, android.content.pm.ServiceInfo r6, android.content.pm.PackageManager r7, android.content.res.Resources r8) {
-        /*
-            android.credentials.CredentialProviderInfo$Builder r5 = new android.credentials.CredentialProviderInfo$Builder
-            r5.<init>(r6)
-            java.lang.String r0 = "android.credentials.provider"
-            android.content.res.XmlResourceParser r6 = r6.loadXmlMetaData(r7, r0)
-            if (r6 != 0) goto Le
-            goto L6d
-        Le:
-            r7 = 0
-            r0 = r7
-        L10:
-            r1 = 1
-            java.lang.String r2 = "CredentialManager"
-            if (r0 == r1) goto L1d
-            r3 = 2
-            if (r0 == r3) goto L1d
-            int r0 = r6.next()     // Catch: java.lang.Throwable -> L67
-            goto L10
-        L1d:
-            java.lang.String r0 = "credential-provider"
-            java.lang.String r3 = r6.getName()     // Catch: java.lang.Throwable -> L67
-            boolean r0 = r0.equals(r3)     // Catch: java.lang.Throwable -> L67
-            if (r0 == 0) goto L61
-            android.util.AttributeSet r0 = android.util.Xml.asAttributeSet(r6)     // Catch: java.lang.Throwable -> L67
-            r3 = 0
-            int[] r4 = com.android.internal.R.styleable.CredentialProvider     // Catch: java.lang.Throwable -> L48 java.lang.Exception -> L4a
-            android.content.res.TypedArray r3 = r8.obtainAttributes(r0, r4)     // Catch: java.lang.Throwable -> L48 java.lang.Exception -> L4a
-            java.lang.String r0 = getAfsAttributeSafe(r3, r1)     // Catch: java.lang.Throwable -> L48 java.lang.Exception -> L4a
-            r5.setSettingsSubtitle(r0)     // Catch: java.lang.Throwable -> L48 java.lang.Exception -> L4a
-            java.lang.String r7 = getAfsAttributeSafe(r3, r7)     // Catch: java.lang.Throwable -> L48 java.lang.Exception -> L4a
-            r5.setSettingsActivity(r7)     // Catch: java.lang.Throwable -> L48 java.lang.Exception -> L4a
-            if (r3 == 0) goto L53
-        L44:
-            r3.recycle()     // Catch: java.lang.Throwable -> L67 java.lang.Throwable -> L67
-            goto L53
-        L48:
-            r6 = move-exception
-            goto L5b
-        L4a:
-            r7 = move-exception
-            java.lang.String r0 = "Failed to get XML attr for metadata"
-            android.util.Slog.w(r2, r0, r7)     // Catch: java.lang.Throwable -> L48
-            if (r3 == 0) goto L53
-            goto L44
-        L53:
-            java.util.List r6 = parseXmlProviderOuterCapabilities(r6, r8)     // Catch: java.lang.Throwable -> L67 java.lang.Throwable -> L67
-            r5.addCapabilities(r6)     // Catch: java.lang.Throwable -> L67 java.lang.Throwable -> L67
-            goto L6d
-        L5b:
-            if (r3 == 0) goto L60
-            r3.recycle()     // Catch: java.lang.Throwable -> L67 java.lang.Throwable -> L67
-        L60:
-            throw r6     // Catch: java.lang.Throwable -> L67 java.lang.Throwable -> L67
-        L61:
-            java.lang.String r6 = "Meta-data does not start with credential-provider-service tag"
-            android.util.Slog.w(r2, r6)     // Catch: java.lang.Throwable -> L67 java.lang.Throwable -> L67
-            goto L6d
-        L67:
-            r6 = move-exception
-            java.lang.String r7 = "Error parsing credential provider service meta-data"
-            android.util.Slog.e(r2, r7, r6)
-        L6d:
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.service.credentials.CredentialProviderInfoFactory.extractXmlMetadata(android.content.Context, android.content.pm.ServiceInfo, android.content.pm.PackageManager, android.content.res.Resources):android.credentials.CredentialProviderInfo$Builder");
+    private static CredentialProviderInfo.Builder extractXmlMetadata(Context context, ServiceInfo serviceInfo, PackageManager packageManager, Resources resources) {
+        CredentialProviderInfo.Builder builder = new CredentialProviderInfo.Builder(serviceInfo);
+        XmlResourceParser xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, CredentialProviderService.SERVICE_META_DATA);
+        if (xmlResourceParserLoadXmlMetaData != null) {
+            for (int next = 0; next != 1 && next != 2; next = xmlResourceParserLoadXmlMetaData.next()) {
+                try {
+                } catch (IOException | XmlPullParserException e) {
+                    Slog.e("CredentialManager", "Error parsing credential provider service meta-data", e);
+                }
+            }
+            if (!TAG_CREDENTIAL_PROVIDER.equals(xmlResourceParserLoadXmlMetaData.getName())) {
+                Slog.w("CredentialManager", "Meta-data does not start with credential-provider-service tag");
+            } else {
+                TypedArray typedArrayObtainAttributes = null;
+                try {
+                    try {
+                        typedArrayObtainAttributes = resources.obtainAttributes(Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData), R.styleable.CredentialProvider);
+                        builder.setSettingsSubtitle(getAfsAttributeSafe(typedArrayObtainAttributes, 1));
+                        builder.setSettingsActivity(getAfsAttributeSafe(typedArrayObtainAttributes, 0));
+                    } catch (Exception e2) {
+                        Slog.w("CredentialManager", "Failed to get XML attr for metadata", e2);
+                        if (typedArrayObtainAttributes != null) {
+                        }
+                    }
+                    builder.addCapabilities(parseXmlProviderOuterCapabilities(xmlResourceParserLoadXmlMetaData, resources));
+                } finally {
+                    if (typedArrayObtainAttributes != null) {
+                        typedArrayObtainAttributes.recycle();
+                    }
+                }
+            }
+        }
+        return builder;
     }
 
     private static String getAfsAttributeSafe(TypedArray typedArray, int i) {
@@ -201,7 +159,7 @@ public final class CredentialProviderInfoFactory {
         }
     }
 
-    private static List<String> parseXmlProviderOuterCapabilities(XmlPullParser xmlPullParser, Resources resources) throws IOException, XmlPullParserException {
+    private static List<String> parseXmlProviderOuterCapabilities(XmlPullParser xmlPullParser, Resources resources) throws XmlPullParserException, IOException {
         ArrayList arrayList = new ArrayList();
         int depth = xmlPullParser.getDepth();
         while (true) {
@@ -216,7 +174,7 @@ public final class CredentialProviderInfoFactory {
         return arrayList;
     }
 
-    private static List<String> parseXmlProviderInnerCapabilities(XmlPullParser xmlPullParser, Resources resources) throws IOException, XmlPullParserException {
+    private static List<String> parseXmlProviderInnerCapabilities(XmlPullParser xmlPullParser, Resources resources) throws XmlPullParserException, IOException {
         String attributeValue;
         ArrayList arrayList = new ArrayList();
         int depth = xmlPullParser.getDepth();
@@ -267,7 +225,7 @@ public final class CredentialProviderInfoFactory {
         return arrayList;
     }
 
-    public static List<CredentialProviderInfo> getAvailableSystemServices(Context context, int i, boolean z, Set<ComponentName> set) {
+    public static List<CredentialProviderInfo> getAvailableSystemServices(Context context, int i, boolean z, Set<ComponentName> set) throws NullPointerException {
         Context context2;
         boolean z2;
         Objects.requireNonNull(context, "context must not be null");
@@ -276,23 +234,23 @@ public final class CredentialProviderInfoFactory {
             try {
                 context2 = context;
                 z2 = z;
-            } catch (SecurityException e) {
-                e = e;
-                context2 = context;
-                z2 = z;
-            }
-            try {
-                CredentialProviderInfo create = create(context2, serviceInfo, true, z2, set.contains(serviceInfo.getComponentName()), false);
-                if (!create.isSystemProvider()) {
-                    Slog.e("CredentialManager", "Non system provider was in system provider list.");
-                } else {
-                    arrayList.add(create);
+                try {
+                    CredentialProviderInfo credentialProviderInfoCreate = create(context2, serviceInfo, true, z2, set.contains(serviceInfo.getComponentName()), false);
+                    if (!credentialProviderInfoCreate.isSystemProvider()) {
+                        Slog.e("CredentialManager", "Non system provider was in system provider list.");
+                    } else {
+                        arrayList.add(credentialProviderInfoCreate);
+                    }
+                } catch (SecurityException e) {
+                    e = e;
+                    Slog.e("CredentialManager", "Failed to create CredentialProviderInfo: " + e);
+                    context = context2;
+                    z = z2;
                 }
             } catch (SecurityException e2) {
                 e = e2;
-                Slog.e("CredentialManager", "Failed to create CredentialProviderInfo: " + e);
-                context = context2;
-                z = z2;
+                context2 = context;
+                z2 = z;
             }
             context = context2;
             z = z2;
@@ -382,9 +340,9 @@ public final class CredentialProviderInfoFactory {
         }
 
         private void addProvider(CredentialProviderInfo credentialProviderInfo) {
-            String flattenToString = credentialProviderInfo.getServiceInfo().getComponentName().flattenToString();
+            String strFlattenToString = credentialProviderInfo.getServiceInfo().getComponentName().flattenToString();
             if (isProviderAllowedWithFilter(credentialProviderInfo) && isPackageAllowed(credentialProviderInfo.isSystemProvider(), credentialProviderInfo.getServiceInfo().packageName)) {
-                this.mServices.put(flattenToString, credentialProviderInfo);
+                this.mServices.put(strFlattenToString, credentialProviderInfo);
             }
         }
     }
@@ -402,21 +360,21 @@ public final class CredentialProviderInfoFactory {
                 try {
                     context2 = context;
                     z2 = z;
-                    try {
-                        CredentialProviderInfo create = create(context2, serviceInfo, false, z2, set.contains(serviceInfo.getComponentName()), set2.contains(serviceInfo.getComponentName()));
-                        if (!create.isSystemProvider()) {
-                            arrayList.add(create);
-                        }
-                    } catch (Exception e) {
-                        e = e;
-                        Slog.e("CredentialManager", "Error getting info for " + serviceInfo, e);
-                        context = context2;
-                        z = z2;
+                } catch (Exception e) {
+                    e = e;
+                    context2 = context;
+                    z2 = z;
+                }
+                try {
+                    CredentialProviderInfo credentialProviderInfoCreate = create(context2, serviceInfo, false, z2, set.contains(serviceInfo.getComponentName()), set2.contains(serviceInfo.getComponentName()));
+                    if (!credentialProviderInfoCreate.isSystemProvider()) {
+                        arrayList.add(credentialProviderInfoCreate);
                     }
                 } catch (Exception e2) {
                     e = e2;
-                    context2 = context;
-                    z2 = z;
+                    Slog.e("CredentialManager", "Error getting info for " + serviceInfo, e);
+                    context = context2;
+                    z = z2;
                 }
                 context = context2;
                 z = z2;

@@ -25,7 +25,6 @@ import com.android.systemui.R;
 import com.android.systemui.util.SettingsHelper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable {
     public static final PathInterpolator ALPHA_INTERPOLATOR;
@@ -40,7 +39,6 @@ public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable 
     public ValueAnimator shockValueAnimator;
     public int startColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -50,7 +48,6 @@ public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable 
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RoundedCornerState extends Drawable.ConstantState {
         public final Drawable.ConstantState wrappedState;
 
@@ -85,6 +82,7 @@ public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable 
         LINEAR_INTERPOLATOR = new LinearInterpolator();
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public SoundCraftRoundedCornerSeekBarDrawable() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -107,28 +105,28 @@ public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable 
         Drawable drawable = getDrawable();
         Rect bounds = drawable != null ? drawable.getBounds() : null;
         bounds.getClass();
-        float height = getBounds().height() / 2.0f;
-        int width = getBounds().width();
-        int height2 = width != 0 ? (bounds.height() * 10000) / width : 0;
+        float fHeight = getBounds().height() / 2.0f;
+        int iWidth = getBounds().width();
+        int iHeight = iWidth != 0 ? (bounds.height() * 10000) / iWidth : 0;
         Paint paint = new Paint();
         paint.setColor(this.buttonColor);
         paint.setStyle(Paint.Style.FILL);
-        if (this.level > height2 || height2 == 0) {
+        if (this.level > iHeight || iHeight == 0) {
             super.draw(canvas);
             Drawable drawable2 = getDrawable();
             (drawable2 != null ? drawable2.getBounds() : null).getClass();
-            canvas.drawCircle(r1.right - (getBounds().height() / 2.0f), height, getBounds().height() / 2.0f, paint);
+            canvas.drawCircle(r1.right - (getBounds().height() / 2.0f), fHeight, getBounds().height() / 2.0f, paint);
             return;
         }
         Paint paint2 = new Paint();
-        float height3 = ((((bounds.height() * 2) * this.level) / height2) - bounds.height()) / 2.0f;
-        paint2.setShader(new LinearGradient(height3 - (bounds.height() / 2.0f), 0.0f, (bounds.height() / 2.0f) + height3, 0.0f, this.startColor, this.endColor, Shader.TileMode.CLAMP));
+        float fHeight2 = ((((bounds.height() * 2) * this.level) / iHeight) - bounds.height()) / 2.0f;
+        paint2.setShader(new LinearGradient(fHeight2 - (bounds.height() / 2.0f), 0.0f, (bounds.height() / 2.0f) + fHeight2, 0.0f, this.startColor, this.endColor, Shader.TileMode.CLAMP));
         Path path = new Path();
-        path.addCircle(getBounds().height() / 2.0f, height, getBounds().height() / 2.0f, Path.Direction.CW);
+        path.addCircle(getBounds().height() / 2.0f, fHeight, getBounds().height() / 2.0f, Path.Direction.CW);
         canvas.clipPath(path);
-        RectF rectF = new RectF(height3 - (getBounds().height() / 2.0f), (getBounds().height() / 2.0f) + height, (getBounds().height() / 2.0f) + height3, height - (getBounds().height() / 2.0f));
-        canvas.drawRoundRect(rectF, height3, height3, paint2);
-        canvas.drawRoundRect(rectF, height3, height3, paint);
+        RectF rectF = new RectF(fHeight2 - (getBounds().height() / 2.0f), (getBounds().height() / 2.0f) + fHeight, (getBounds().height() / 2.0f) + fHeight2, fHeight - (getBounds().height() / 2.0f));
+        canvas.drawRoundRect(rectF, fHeight2, fHeight2, paint2);
+        canvas.drawRoundRect(rectF, fHeight2, fHeight2, paint);
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
@@ -162,12 +160,12 @@ public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable 
         bounds.getClass();
         ((GradientDrawable) ((LayerDrawable) getDrawable()).findDrawableByLayerId(R.id.volume_seekbar_progress)).setColors(new int[]{this.gradientColor, this.endColor});
         this.level = i;
-        int width = getBounds().width();
-        if (i >= (width != 0 ? (bounds.height() * 10000) / width : 0)) {
-            int width2 = (getBounds().width() * i) / 10000;
+        int iWidth = getBounds().width();
+        if (i >= (iWidth != 0 ? (bounds.height() * 10000) / iWidth : 0)) {
+            int iWidth2 = (getBounds().width() * i) / 10000;
             Drawable drawable2 = getDrawable();
             if (drawable2 != null) {
-                drawable2.setBounds(getBounds().left, bounds.top, getBounds().left + width2, bounds.bottom);
+                drawable2.setBounds(getBounds().left, bounds.top, getBounds().left + iWidth2, bounds.bottom);
             }
         }
         return super.onLevelChange(i);
@@ -216,7 +214,7 @@ public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable 
                 this.shockValueAnimator.start();
             }
         }
-        this.shockValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftRoundedCornerSeekBarDrawable$setShockColor$1
+        this.shockValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.audio.soundcraft.view.volume.SoundCraftRoundedCornerSeekBarDrawable.setShockColor.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                 SoundCraftRoundedCornerSeekBarDrawable.this.gradientColor = ((Integer) valueAnimator2.getAnimatedValue()).intValue();
@@ -232,10 +230,10 @@ public final class SoundCraftRoundedCornerSeekBarDrawable extends InsetDrawable 
 
     public SoundCraftRoundedCornerSeekBarDrawable(Drawable drawable) {
         super(drawable, 0);
-        int parseColor = Color.parseColor("#FFFFFF");
-        this.endColor = parseColor;
+        int color = Color.parseColor("#FFFFFF");
+        this.endColor = color;
         float f = 255;
-        this.startColor = ColorUtils.setAlphaComponent(parseColor, (int) ((isBlurEnable() ? 0.5f : 0.4f) * f));
+        this.startColor = ColorUtils.setAlphaComponent(color, (int) ((isBlurEnable() ? 0.5f : 0.4f) * f));
         this.gradientColor = ColorUtils.setAlphaComponent(this.endColor, (int) (f * (isBlurEnable() ? 0.5f : 0.4f)));
         this.shockValueAnimator = ValueAnimator.ofArgb(this.startColor, this.endColor).setDuration(450L);
         this.buttonStartColor = ColorUtils.setAlphaComponent(this.endColor, 0);

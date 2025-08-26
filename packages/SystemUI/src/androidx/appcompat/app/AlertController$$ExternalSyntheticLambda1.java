@@ -5,7 +5,6 @@ import android.widget.LinearLayout;
 import androidx.core.util.Consumer;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class AlertController$$ExternalSyntheticLambda1 implements Consumer {
     public final /* synthetic */ AlertController f$0;

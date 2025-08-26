@@ -7,18 +7,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IEnterpriseContainerCallback extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.IEnterpriseContainerCallback";
 
     void updateStatus(int i, Bundle bundle) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IEnterpriseContainerCallback {
         public static final int TRANSACTION_updateStatus = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IEnterpriseContainerCallback {
             public IBinder mRemote;
 
@@ -37,14 +34,14 @@ public interface IEnterpriseContainerCallback extends IInterface {
 
             @Override // com.samsung.android.knox.IEnterpriseContainerCallback
             public void updateStatus(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseContainerCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEnterpriseContainerCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -57,8 +54,8 @@ public interface IEnterpriseContainerCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEnterpriseContainerCallback.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IEnterpriseContainerCallback)) ? new Proxy(iBinder) : (IEnterpriseContainerCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEnterpriseContainerCallback.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IEnterpriseContainerCallback)) ? new Proxy(iBinder) : (IEnterpriseContainerCallback) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -73,10 +70,10 @@ public interface IEnterpriseContainerCallback extends IInterface {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            int readInt = parcel.readInt();
+            int i3 = parcel.readInt();
             Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
             parcel.enforceNoDataAvail();
-            updateStatus(readInt, bundle);
+            updateStatus(i3, bundle);
             return true;
         }
 
@@ -86,7 +83,6 @@ public interface IEnterpriseContainerCallback extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IEnterpriseContainerCallback {
         @Override // android.os.IInterface
         public IBinder asBinder() {

@@ -3,13 +3,12 @@ package com.samsung.android.nexus.base;
 import com.samsung.android.nexus.base.utils.Log;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DrawRequester {
     public final Method mInvalidateMethod;
     public final Object mInvalidatorInstance;
 
-    public DrawRequester(Object obj) {
+    public DrawRequester(Object obj) throws NoSuchMethodException, SecurityException {
         this.mInvalidateMethod = null;
         this.mInvalidatorInstance = obj;
         try {
@@ -17,13 +16,13 @@ public class DrawRequester {
                 Class[] clsArr = new Class[0];
                 this.mInvalidateMethod = obj.getClass().getMethod("invalidate", null);
             } catch (NoSuchMethodException unused) {
-                Class[] clsArr2 = new Class[0];
-                Method declaredMethod = obj.getClass().getDeclaredMethod("invalidate", null);
-                this.mInvalidateMethod = declaredMethod;
-                declaredMethod.setAccessible(true);
+                Log.e("DrawRequester", "There's no invalidate() method in you Engine. You should implement it.");
             }
         } catch (NoSuchMethodException unused2) {
-            Log.e("DrawRequester", "There's no invalidate() method in you Engine. You should implement it.");
+            Class[] clsArr2 = new Class[0];
+            Method declaredMethod = obj.getClass().getDeclaredMethod("invalidate", null);
+            this.mInvalidateMethod = declaredMethod;
+            declaredMethod.setAccessible(true);
         }
     }
 }

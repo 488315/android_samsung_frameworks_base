@@ -76,7 +76,7 @@ public class SemKernelWakelockInfo implements Cloneable, Parcelable, Comparable<
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SemKernelWakelockInfo m3616clone() {
+    public SemKernelWakelockInfo m3623clone() {
         try {
             return (SemKernelWakelockInfo) super.clone();
         } catch (CloneNotSupportedException unused) {

@@ -13,13 +13,13 @@ import androidx.compose.animation.core.EasingKt$$ExternalSyntheticLambda0;
 import androidx.compose.animation.graphics.vector.Animator;
 import androidx.compose.animation.graphics.vector.compat.XmlAnimatorParser_androidKt;
 import androidx.compose.animation.graphics.vector.compat.XmlPullParserUtils_androidKt;
+import java.io.IOException;
 import java.util.HashMap;
 import kotlin.Pair;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.Intrinsics;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AnimatorResources_androidKt {
     public static final AnimatorResources_androidKt$$ExternalSyntheticLambda3 AccelerateDecelerateEasing;
@@ -86,31 +86,31 @@ public abstract class AnimatorResources_androidKt {
                 }
             }
         };
-        Integer valueOf = Integer.valueOf(R.anim.linear_interpolator);
+        Integer numValueOf = Integer.valueOf(R.anim.linear_interpolator);
         EasingKt$$ExternalSyntheticLambda0 easingKt$$ExternalSyntheticLambda0 = EasingKt.LinearEasing;
-        Pair pair = new Pair(valueOf, easingKt$$ExternalSyntheticLambda0);
-        Integer valueOf2 = Integer.valueOf(R.interpolator.fast_out_linear_in);
+        Pair pair = new Pair(numValueOf, easingKt$$ExternalSyntheticLambda0);
+        Integer numValueOf2 = Integer.valueOf(R.interpolator.fast_out_linear_in);
         CubicBezierEasing cubicBezierEasing = EasingKt.FastOutLinearInEasing;
-        Pair pair2 = new Pair(valueOf2, cubicBezierEasing);
-        Integer valueOf3 = Integer.valueOf(R.interpolator.fast_out_slow_in);
+        Pair pair2 = new Pair(numValueOf2, cubicBezierEasing);
+        Integer numValueOf3 = Integer.valueOf(R.interpolator.fast_out_slow_in);
         CubicBezierEasing cubicBezierEasing2 = EasingKt.FastOutSlowInEasing;
-        Pair pair3 = new Pair(valueOf3, cubicBezierEasing2);
+        Pair pair3 = new Pair(numValueOf3, cubicBezierEasing2);
         Pair pair4 = new Pair(Integer.valueOf(R.interpolator.linear), easingKt$$ExternalSyntheticLambda0);
-        Integer valueOf4 = Integer.valueOf(R.interpolator.linear_out_slow_in);
+        Integer numValueOf4 = Integer.valueOf(R.interpolator.linear_out_slow_in);
         CubicBezierEasing cubicBezierEasing3 = EasingKt.LinearOutSlowInEasing;
-        builtinInterpolators = MapsKt__MapsKt.hashMapOf(pair, pair2, pair3, pair4, new Pair(valueOf4, cubicBezierEasing3), new Pair(Integer.valueOf(R.interpolator.fast_out_linear_in), cubicBezierEasing), new Pair(Integer.valueOf(R.interpolator.fast_out_slow_in), cubicBezierEasing2), new Pair(Integer.valueOf(R.interpolator.linear_out_slow_in), cubicBezierEasing3));
+        builtinInterpolators = MapsKt__MapsKt.hashMapOf(pair, pair2, pair3, pair4, new Pair(numValueOf4, cubicBezierEasing3), new Pair(Integer.valueOf(R.interpolator.fast_out_linear_in), cubicBezierEasing), new Pair(Integer.valueOf(R.interpolator.fast_out_slow_in), cubicBezierEasing2), new Pair(Integer.valueOf(R.interpolator.linear_out_slow_in), cubicBezierEasing3));
     }
 
-    public static final Animator loadAnimatorResource(int i, Resources.Theme theme, Resources resources) {
+    public static final Animator loadAnimatorResource(int i, Resources.Theme theme, Resources resources) throws XmlPullParserException, Resources.NotFoundException, IOException {
         XmlResourceParser xml = resources.getXml(i);
-        AttributeSet asAttributeSet = Xml.asAttributeSet(xml);
+        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xml);
         XmlPullParserUtils_androidKt.seekToStartTag(xml);
         String name = xml.getName();
         if (Intrinsics.areEqual(name, "set")) {
-            return XmlAnimatorParser_androidKt.parseAnimatorSet(resources, theme, asAttributeSet, xml);
+            return XmlAnimatorParser_androidKt.parseAnimatorSet(resources, theme, attributeSetAsAttributeSet, xml);
         }
         if (Intrinsics.areEqual(name, "objectAnimator")) {
-            return XmlAnimatorParser_androidKt.parseObjectAnimator(resources, theme, asAttributeSet, xml);
+            return XmlAnimatorParser_androidKt.parseObjectAnimator(resources, theme, attributeSetAsAttributeSet, xml);
         }
         throw new XmlPullParserException("Unknown tag: " + xml.getName());
     }

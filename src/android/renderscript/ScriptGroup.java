@@ -183,11 +183,11 @@ public final class ScriptGroup extends BaseObj {
             if (future != null) {
                 return future;
             }
-            Object obj = this.mBindings.get(fieldID);
-            if (obj instanceof Future) {
-                obj = ((Future) obj).getValue();
+            Object value = this.mBindings.get(fieldID);
+            if (value instanceof Future) {
+                value = ((Future) value).getValue();
             }
-            Future future2 = new Future(this, fieldID, obj);
+            Future future2 = new Future(this, fieldID, value);
             this.mGlobalFuture.put(fieldID, future2);
             return future2;
         }
@@ -405,18 +405,18 @@ public final class ScriptGroup extends BaseObj {
             for (int i = 0; i < node.mOutputs.size(); i++) {
                 ConnectLine connectLine = node.mOutputs.get(i);
                 if (connectLine.mToK != null) {
-                    Node findNode = findNode(connectLine.mToK.mScript);
-                    if (findNode.equals(node2)) {
+                    Node nodeFindNode = findNode(connectLine.mToK.mScript);
+                    if (nodeFindNode.equals(node2)) {
                         throw new RSInvalidStateException("Loops in group not allowed.");
                     }
-                    validateCycle(findNode, node2);
+                    validateCycle(nodeFindNode, node2);
                 }
                 if (connectLine.mToF != null) {
-                    Node findNode2 = findNode(connectLine.mToF.mScript);
-                    if (findNode2.equals(node2)) {
+                    Node nodeFindNode2 = findNode(connectLine.mToF.mScript);
+                    if (nodeFindNode2.equals(node2)) {
                         throw new RSInvalidStateException("Loops in group not allowed.");
                     }
-                    validateCycle(findNode2, node2);
+                    validateCycle(nodeFindNode2, node2);
                 }
             }
         }
@@ -493,50 +493,50 @@ public final class ScriptGroup extends BaseObj {
                 return this;
             }
             this.mKernelCount++;
-            Node findNode = findNode(kernelID.mScript);
-            if (findNode == null) {
-                findNode = new Node(kernelID.mScript);
-                this.mNodes.add(findNode);
+            Node nodeFindNode = findNode(kernelID.mScript);
+            if (nodeFindNode == null) {
+                nodeFindNode = new Node(kernelID.mScript);
+                this.mNodes.add(nodeFindNode);
             }
-            findNode.mKernels.add(kernelID);
+            nodeFindNode.mKernels.add(kernelID);
             return this;
         }
 
         public Builder addConnection(Type type, Script.KernelID kernelID, Script.FieldID fieldID) {
-            Node findNode = findNode(kernelID);
-            if (findNode == null) {
+            Node nodeFindNode = findNode(kernelID);
+            if (nodeFindNode == null) {
                 throw new RSInvalidStateException("From script not found.");
             }
-            Node findNode2 = findNode(fieldID.mScript);
-            if (findNode2 == null) {
+            Node nodeFindNode2 = findNode(fieldID.mScript);
+            if (nodeFindNode2 == null) {
                 throw new RSInvalidStateException("To script not found.");
             }
             ConnectLine connectLine = new ConnectLine(type, kernelID, fieldID);
             this.mLines.add(new ConnectLine(type, kernelID, fieldID));
-            findNode.mOutputs.add(connectLine);
-            findNode2.mInputs.add(connectLine);
-            validateCycle(findNode, findNode);
+            nodeFindNode.mOutputs.add(connectLine);
+            nodeFindNode2.mInputs.add(connectLine);
+            validateCycle(nodeFindNode, nodeFindNode);
             return this;
         }
 
         public Builder addConnection(Type type, Script.KernelID kernelID, Script.KernelID kernelID2) {
-            Node findNode = findNode(kernelID);
-            if (findNode == null) {
+            Node nodeFindNode = findNode(kernelID);
+            if (nodeFindNode == null) {
                 throw new RSInvalidStateException("From script not found.");
             }
-            Node findNode2 = findNode(kernelID2);
-            if (findNode2 == null) {
+            Node nodeFindNode2 = findNode(kernelID2);
+            if (nodeFindNode2 == null) {
                 throw new RSInvalidStateException("To script not found.");
             }
             ConnectLine connectLine = new ConnectLine(type, kernelID, kernelID2);
             this.mLines.add(new ConnectLine(type, kernelID, kernelID2));
-            findNode.mOutputs.add(connectLine);
-            findNode2.mInputs.add(connectLine);
-            validateCycle(findNode, findNode);
+            nodeFindNode.mOutputs.add(connectLine);
+            nodeFindNode2.mInputs.add(connectLine);
+            validateCycle(nodeFindNode, nodeFindNode);
             return this;
         }
 
-        public ScriptGroup create() {
+        public ScriptGroup create() throws Throwable {
             if (this.mNodes.size() == 0) {
                 throw new RSInvalidStateException("Empty script groups are not allowed");
             }
@@ -595,11 +595,11 @@ public final class ScriptGroup extends BaseObj {
                 }
                 jArr5[i8] = connectLine.mAllocationType.getID(this.mRS);
             }
-            long nScriptGroupCreate = this.mRS.nScriptGroupCreate(jArr, jArr2, jArr3, jArr4, jArr5);
-            if (nScriptGroupCreate == 0) {
+            long jNScriptGroupCreate = this.mRS.nScriptGroupCreate(jArr, jArr2, jArr3, jArr4, jArr5);
+            if (jNScriptGroupCreate == 0) {
                 throw new RSRuntimeException("Object creation error, should not happen.");
             }
-            ScriptGroup scriptGroup = new ScriptGroup(nScriptGroupCreate, this.mRS);
+            ScriptGroup scriptGroup = new ScriptGroup(jNScriptGroupCreate, this.mRS);
             scriptGroup.mOutputs = new IO[arrayList2.size()];
             for (int i9 = 0; i9 < arrayList2.size(); i9++) {
                 scriptGroup.mOutputs[i9] = (IO) arrayList2.get(i9);
@@ -660,18 +660,18 @@ public final class ScriptGroup extends BaseObj {
 
         public Closure addKernel(Script.KernelID kernelID, Type type, Object... objArr) {
             ArrayList<Object> arrayList = new ArrayList<>();
-            HashMap hashMap = new HashMap();
-            if (seperateArgsAndBindings(objArr, arrayList, hashMap)) {
-                return addKernelInternal(kernelID, type, arrayList.toArray(), hashMap);
+            HashMap map = new HashMap();
+            if (seperateArgsAndBindings(objArr, arrayList, map)) {
+                return addKernelInternal(kernelID, type, arrayList.toArray(), map);
             }
             return null;
         }
 
         public Closure addInvoke(Script.InvokeID invokeID, Object... objArr) {
             ArrayList<Object> arrayList = new ArrayList<>();
-            HashMap hashMap = new HashMap();
-            if (seperateArgsAndBindings(objArr, arrayList, hashMap)) {
-                return addInvokeInternal(invokeID, arrayList.toArray(), hashMap);
+            HashMap map = new HashMap();
+            if (seperateArgsAndBindings(objArr, arrayList, map)) {
+                return addInvokeInternal(invokeID, arrayList.toArray(), map);
             }
             return null;
         }

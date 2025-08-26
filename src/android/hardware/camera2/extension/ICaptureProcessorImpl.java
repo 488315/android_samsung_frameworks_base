@@ -76,9 +76,9 @@ public interface ICaptureProcessorImpl extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICaptureProcessorImpl.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICaptureProcessorImpl)) {
-                return (ICaptureProcessorImpl) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICaptureProcessorImpl.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICaptureProcessorImpl)) {
+                return (ICaptureProcessorImpl) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -118,9 +118,9 @@ public interface ICaptureProcessorImpl extends IInterface {
             }
             if (i == 1) {
                 Surface surface = (Surface) parcel.readTypedObject(Surface.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onOutputSurface(surface, readInt);
+                onOutputSurface(surface, i3);
                 parcel2.writeNoException();
             } else if (i == 2) {
                 Surface surface2 = (Surface) parcel.readTypedObject(Surface.CREATOR);
@@ -134,16 +134,16 @@ public interface ICaptureProcessorImpl extends IInterface {
                 onResolutionUpdate(size, size2);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onImageFormatUpdate(readInt2);
+                onImageFormatUpdate(i4);
                 parcel2.writeNoException();
             } else if (i == 5) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(CaptureBundle.CREATOR);
-                IProcessResultImpl asInterface = IProcessResultImpl.Stub.asInterface(parcel.readStrongBinder());
-                boolean readBoolean = parcel.readBoolean();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(CaptureBundle.CREATOR);
+                IProcessResultImpl iProcessResultImplAsInterface = IProcessResultImpl.Stub.asInterface(parcel.readStrongBinder());
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                process(createTypedArrayList, asInterface, readBoolean);
+                process(arrayListCreateTypedArrayList, iProcessResultImplAsInterface, z);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -169,80 +169,80 @@ public interface ICaptureProcessorImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
             public void onOutputSurface(Surface surface, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICaptureProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(surface, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICaptureProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(surface, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
             public void onPostviewOutputSurface(Surface surface) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICaptureProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(surface, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICaptureProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(surface, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
             public void onResolutionUpdate(Size size, Size size2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICaptureProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(size, 0);
-                    obtain.writeTypedObject(size2, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICaptureProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(size, 0);
+                    parcelObtain.writeTypedObject(size2, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
             public void onImageFormatUpdate(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICaptureProcessorImpl.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICaptureProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
             public void process(List<CaptureBundle> list, IProcessResultImpl iProcessResultImpl, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICaptureProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeStrongInterface(iProcessResultImpl);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICaptureProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeStrongInterface(iProcessResultImpl);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

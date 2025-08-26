@@ -5,7 +5,6 @@ import androidx.viewpager.widget.ViewPager$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationMemoryDumper$dumpNotificationViewUsage$Totals {
     public int customViews;
@@ -43,9 +42,9 @@ public final class NotificationMemoryDumper$dumpNotificationViewUsage$Totals {
         int i3 = this.style;
         int i4 = this.customViews;
         int i5 = this.softwareBitmapsPenalty;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Totals(smallIcon=", ", largeIcon=", ", style=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i3, ", customViews=", i4, ", softwareBitmapsPenalty=");
-        return ReorderTile$$ExternalSyntheticOutline0.m(i5, ")", m);
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Totals(smallIcon=", ", largeIcon=", ", style=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i3, ", customViews=", i4, ", softwareBitmapsPenalty=");
+        return ReorderTile$$ExternalSyntheticOutline0.m(i5, ")", sbM);
     }
 
     public /* synthetic */ NotificationMemoryDumper$dumpNotificationViewUsage$Totals(int i, int i2, int i3, int i4, int i5, int i6, DefaultConstructorMarker defaultConstructorMarker) {

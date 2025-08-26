@@ -54,11 +54,11 @@ public class EditorInfo implements InputType, Parcelable {
             if (parcel.readBoolean()) {
                 editorInfo.mInitialSurroundingText = SurroundingText.CREATOR.createFromParcel(parcel);
             }
-            LocaleList createFromParcel = LocaleList.CREATOR.createFromParcel(parcel);
-            if (createFromParcel.isEmpty()) {
-                createFromParcel = null;
+            LocaleList localeListCreateFromParcel = LocaleList.CREATOR.createFromParcel(parcel);
+            if (localeListCreateFromParcel.isEmpty()) {
+                localeListCreateFromParcel = null;
             }
-            editorInfo.hintLocales = createFromParcel;
+            editorInfo.hintLocales = localeListCreateFromParcel;
             editorInfo.contentMimeTypes = parcel.readStringArray();
             editorInfo.targetInputMethodUser = UserHandle.readFromParcel(parcel);
             editorInfo.mWritingToolsEnabled = parcel.readBoolean();
@@ -294,27 +294,27 @@ public class EditorInfo implements InputType, Parcelable {
     }
 
     private void trimLongSurroundingText(CharSequence charSequence, int i, int i2, int i3) {
-        CharSequence subSequence;
+        CharSequence charSequenceSubSequence;
         int i4 = i2 - i;
         int i5 = i4 > 1024 ? 0 : i4;
         int i6 = 2048 - i5;
-        int min = Math.min(charSequence.length() - i2, i6 - Math.min(i, (int) (i6 * 0.8d)));
-        int min2 = Math.min(i, i6 - min);
-        int i7 = i - min2;
+        int iMin = Math.min(charSequence.length() - i2, i6 - Math.min(i, (int) (i6 * 0.8d)));
+        int iMin2 = Math.min(i, i6 - iMin);
+        int i7 = i - iMin2;
         if (isCutOnSurrogate(charSequence, i7, 0)) {
             i7++;
-            min2--;
+            iMin2--;
         }
-        if (isCutOnSurrogate(charSequence, (i2 + min) - 1, 1)) {
-            min--;
+        if (isCutOnSurrogate(charSequence, (i2 + iMin) - 1, 1)) {
+            iMin--;
         }
-        int i8 = min2 + i5 + min;
+        int i8 = iMin2 + i5 + iMin;
         if (i5 != i4) {
-            subSequence = TextUtils.concat(charSequence.subSequence(i7, i7 + min2), charSequence.subSequence(i2, min + i2));
+            charSequenceSubSequence = TextUtils.concat(charSequence.subSequence(i7, i7 + iMin2), charSequence.subSequence(i2, iMin + i2));
         } else {
-            subSequence = charSequence.subSequence(i7, i8 + i7);
+            charSequenceSubSequence = charSequence.subSequence(i7, i8 + i7);
         }
-        this.mInitialSurroundingText = new SurroundingText(subSequence, min2, i5 + min2, (i3 + i) - min2);
+        this.mInitialSurroundingText = new SurroundingText(charSequenceSubSequence, iMin2, i5 + iMin2, (i3 + i) - iMin2);
     }
 
     public CharSequence getInitialTextBeforeCursor(int i, int i2) {
@@ -322,12 +322,12 @@ public class EditorInfo implements InputType, Parcelable {
         if (surroundingText == null) {
             return null;
         }
-        int min = Math.min(surroundingText.getSelectionStart(), this.mInitialSurroundingText.getSelectionEnd());
-        int min2 = Math.min(i, min);
+        int iMin = Math.min(surroundingText.getSelectionStart(), this.mInitialSurroundingText.getSelectionEnd());
+        int iMin2 = Math.min(i, iMin);
         if ((i2 & 1) != 0) {
-            return this.mInitialSurroundingText.getText().subSequence(min - min2, min);
+            return this.mInitialSurroundingText.getText().subSequence(iMin - iMin2, iMin);
         }
-        return TextUtils.substring(this.mInitialSurroundingText.getText(), min - min2, min);
+        return TextUtils.substring(this.mInitialSurroundingText.getText(), iMin - iMin2, iMin);
     }
 
     public CharSequence getInitialSelectedText(int i) {
@@ -364,16 +364,16 @@ public class EditorInfo implements InputType, Parcelable {
             return null;
         }
         int length = surroundingText.getText().length();
-        int max = Math.max(this.mInitialSurroundingText.getSelectionStart(), this.mInitialSurroundingText.getSelectionEnd());
-        int min = Math.min(i, length - max);
+        int iMax = Math.max(this.mInitialSurroundingText.getSelectionStart(), this.mInitialSurroundingText.getSelectionEnd());
+        int iMin = Math.min(i, length - iMax);
         if ((i2 & 1) != 0) {
-            return this.mInitialSurroundingText.getText().subSequence(max, min + max);
+            return this.mInitialSurroundingText.getText().subSequence(iMax, iMin + iMax);
         }
-        return TextUtils.substring(this.mInitialSurroundingText.getText(), max, min + max);
+        return TextUtils.substring(this.mInitialSurroundingText.getText(), iMax, iMin + iMax);
     }
 
     public SurroundingText getInitialSurroundingText(int i, int i2, int i3) {
-        CharSequence substring;
+        CharSequence charSequenceSubstring;
         Preconditions.checkArgumentNonnegative(i);
         Preconditions.checkArgumentNonnegative(i2);
         SurroundingText surroundingText = this.mInitialSurroundingText;
@@ -387,15 +387,15 @@ public class EditorInfo implements InputType, Parcelable {
             selectionEnd = selectionStart;
             selectionStart = selectionEnd;
         }
-        int min = Math.min(i, selectionStart);
-        int min2 = Math.min(i2 + selectionEnd, length);
-        int i4 = selectionStart - min;
+        int iMin = Math.min(i, selectionStart);
+        int iMin2 = Math.min(i2 + selectionEnd, length);
+        int i4 = selectionStart - iMin;
         if ((i3 & 1) != 0) {
-            substring = this.mInitialSurroundingText.getText().subSequence(i4, min2);
+            charSequenceSubstring = this.mInitialSurroundingText.getText().subSequence(i4, iMin2);
         } else {
-            substring = TextUtils.substring(this.mInitialSurroundingText.getText(), i4, min2);
+            charSequenceSubstring = TextUtils.substring(this.mInitialSurroundingText.getText(), i4, iMin2);
         }
-        return new SurroundingText(substring, min, Math.min(selectionEnd - i4, length), this.mInitialSurroundingText.getOffset() + i4);
+        return new SurroundingText(charSequenceSubstring, iMin, Math.min(selectionEnd - i4, length), this.mInitialSurroundingText.getOffset() + i4);
     }
 
     private static boolean isCutOnSurrogate(CharSequence charSequence, int i, int i2) {
@@ -442,7 +442,7 @@ public class EditorInfo implements InputType, Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, this.inputType);
         protoOutputStream.write(1120986464258L, this.imeOptions);
         protoOutputStream.write(1138166333443L, this.privateImeOptions);
@@ -452,7 +452,7 @@ public class EditorInfo implements InputType, Parcelable {
         if (userHandle != null) {
             protoOutputStream.write(1120986464262L, userHandle.getIdentifier());
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public void dump(Printer printer, String str) {

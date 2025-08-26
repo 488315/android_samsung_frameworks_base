@@ -147,9 +147,9 @@ public final class ApfProgramEvent implements IpConnectivityLog.Event {
 
     private static String namesOf(int i) {
         ArrayList arrayList = new ArrayList(Integer.bitCount(i));
-        BitSet valueOf = BitSet.valueOf(new long[]{i & Integer.MAX_VALUE});
-        for (int nextSetBit = valueOf.nextSetBit(0); nextSetBit >= 0; nextSetBit = valueOf.nextSetBit(nextSetBit + 1)) {
-            arrayList.add(Decoder.constants.get(nextSetBit));
+        BitSet bitSetValueOf = BitSet.valueOf(new long[]{i & Integer.MAX_VALUE});
+        for (int iNextSetBit = bitSetValueOf.nextSetBit(0); iNextSetBit >= 0; iNextSetBit = bitSetValueOf.nextSetBit(iNextSetBit + 1)) {
+            arrayList.add(Decoder.constants.get(iNextSetBit));
         }
         return TextUtils.join(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER, arrayList);
     }

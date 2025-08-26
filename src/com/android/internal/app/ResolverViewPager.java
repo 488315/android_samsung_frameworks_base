@@ -36,20 +36,20 @@ public class ResolverViewPager extends ViewPager {
         if (View.MeasureSpec.getMode(i2) != Integer.MIN_VALUE) {
             return;
         }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 1073741824);
         int measuredHeight = getMeasuredHeight();
-        int i3 = 0;
-        for (int i4 = 0; i4 < getChildCount(); i4++) {
-            View childAt = getChildAt(i4);
-            childAt.measure(makeMeasureSpec, View.MeasureSpec.makeMeasureSpec(measuredHeight, Integer.MIN_VALUE));
-            if (i3 < childAt.getMeasuredHeight()) {
-                i3 = childAt.getMeasuredHeight();
+        int measuredHeight2 = 0;
+        for (int i3 = 0; i3 < getChildCount(); i3++) {
+            View childAt = getChildAt(i3);
+            childAt.measure(iMakeMeasureSpec, View.MeasureSpec.makeMeasureSpec(measuredHeight, Integer.MIN_VALUE));
+            if (measuredHeight2 < childAt.getMeasuredHeight()) {
+                measuredHeight2 = childAt.getMeasuredHeight();
             }
         }
-        if (i3 > 0) {
-            measuredHeight = i3;
+        if (measuredHeight2 > 0) {
+            measuredHeight = measuredHeight2;
         }
-        super.onMeasure(makeMeasureSpec, View.MeasureSpec.makeMeasureSpec(measuredHeight, 1073741824));
+        super.onMeasure(iMakeMeasureSpec, View.MeasureSpec.makeMeasureSpec(measuredHeight, 1073741824));
     }
 
     void setSwipingEnabled(boolean z) {

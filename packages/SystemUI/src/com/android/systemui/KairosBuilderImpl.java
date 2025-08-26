@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class KairosBuilderImpl implements KairosBuilder {
     public List _builds = new ArrayList();
@@ -48,12 +47,13 @@ public final class KairosBuilderImpl implements KairosBuilder {
         ((ArrayList) list).add(new KairosActivatable() { // from class: com.android.systemui.KairosBuilderImpl$buildEvents$1$1
             @Override // com.android.systemui.KairosActivatable
             public final void activate(BuildScope buildScope) {
-                EventsLoop.this.setLoopback((Events) function1.mo779invoke(buildScope));
+                eventsLoop.setLoopback((Events) function1.mo781invoke(buildScope));
             }
         });
         return eventsLoop;
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public final Incremental buildIncremental(final Function1 function1) {
         final IncrementalLoop incrementalLoop = new IncrementalLoop(null, 1, 0 == true ? 1 : 0);
         List list = this._builds;
@@ -63,8 +63,8 @@ public final class KairosBuilderImpl implements KairosBuilder {
         ((ArrayList) list).add(new KairosActivatable() { // from class: com.android.systemui.KairosBuilderImpl$buildIncremental$1$1
             @Override // com.android.systemui.KairosActivatable
             public final void activate(BuildScope buildScope) {
-                Incremental incremental = (Incremental) function1.mo779invoke(buildScope);
-                IncrementalLoop incrementalLoop2 = IncrementalLoop.this;
+                Incremental incremental = (Incremental) function1.mo781invoke(buildScope);
+                IncrementalLoop incrementalLoop2 = incrementalLoop;
                 if (incremental == null) {
                     incrementalLoop2.getClass();
                     return;
@@ -88,8 +88,8 @@ public final class KairosBuilderImpl implements KairosBuilder {
         ((ArrayList) list).add(new KairosActivatable() { // from class: com.android.systemui.KairosBuilderImpl$buildState$1$1
             @Override // com.android.systemui.KairosActivatable
             public final void activate(BuildScope buildScope) {
-                State state = (State) function1.mo779invoke(buildScope);
-                StateLoop stateLoop2 = StateLoop.this;
+                State state = (State) function1.mo781invoke(buildScope);
+                StateLoop stateLoop2 = stateLoop;
                 if (state == null) {
                     stateLoop2.getClass();
                     return;
@@ -110,10 +110,10 @@ public final class KairosBuilderImpl implements KairosBuilder {
         if (list == null) {
             throw new IllegalStateException("Kairos network has already been initialized");
         }
-        ((ArrayList) list).add(new KairosActivatable() { // from class: com.android.systemui.KairosBuilderImpl$onActivated$1
+        ((ArrayList) list).add(new KairosActivatable() { // from class: com.android.systemui.KairosBuilderImpl.onActivated.1
             @Override // com.android.systemui.KairosActivatable
             public final void activate(BuildScope buildScope) {
-                Function1.this.mo779invoke(buildScope);
+                function1.mo781invoke(buildScope);
             }
         });
     }

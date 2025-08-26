@@ -8,7 +8,6 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeLogger {
     public final LogBuffer buffer;
@@ -25,12 +24,12 @@ public final class ShadeLogger {
         LogLevel logLevel = LogLevel.VERBOSE;
         ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(7);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.bool1 = z;
         logMessageImpl.bool2 = z2;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logExpansionChanged(String str, float f, boolean z, boolean z2, final float f2) {
@@ -38,7 +37,7 @@ public final class ShadeLogger {
         Function1 function1 = new Function1() { // from class: com.android.systemui.shade.ShadeLogger$$ExternalSyntheticLambda18
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LogMessage logMessage = (LogMessage) obj;
                 String str1 = logMessage.getStr1();
                 double double1 = logMessage.getDouble1();
@@ -55,55 +54,55 @@ public final class ShadeLogger {
             }
         };
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("systemui.shade", logLevel, function1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, function1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.double1 = f;
         logMessageImpl.bool1 = z;
         logMessageImpl.bool2 = z2;
         logMessageImpl.long1 = (long) f2;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logMotionEvent(MotionEvent motionEvent, String str) {
         LogLevel logLevel = LogLevel.VERBOSE;
         ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(17);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.long1 = motionEvent.getEventTime();
         logMessageImpl.long2 = motionEvent.getDownTime();
         logMessageImpl.int1 = motionEvent.getAction();
         logMessageImpl.int2 = motionEvent.getClassification();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logMotionEventStatusBarState(MotionEvent motionEvent, int i, String str) {
         LogLevel logLevel = LogLevel.VERBOSE;
         ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(15);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.long1 = motionEvent.getEventTime();
         logMessageImpl.long2 = motionEvent.getDownTime();
         logMessageImpl.int1 = motionEvent.getAction();
         logMessageImpl.int2 = i;
         logMessageImpl.double1 = motionEvent.getY();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logPanelClosedOnDown(String str, boolean z, float f) {
         LogLevel logLevel = LogLevel.VERBOSE;
         ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.bool1 = z;
         logMessageImpl.double1 = f;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void v(String str) {

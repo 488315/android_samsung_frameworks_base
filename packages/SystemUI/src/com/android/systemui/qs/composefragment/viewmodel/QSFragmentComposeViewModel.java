@@ -23,6 +23,7 @@ import com.android.systemui.lifecycle.ExclusiveActivatable;
 import com.android.systemui.lifecycle.Hydrator;
 import com.android.systemui.log.table.TableLogBuffer;
 import com.android.systemui.media.controls.ui.view.MediaHost;
+import com.android.systemui.media.controls.ui.view.MediaHost$$ExternalSyntheticLambda0;
 import com.android.systemui.qs.FooterActionsController;
 import com.android.systemui.qs.footer.ui.viewmodel.FooterActionsViewModel;
 import com.android.systemui.qs.panels.domain.interactor.TileSquishinessInteractor;
@@ -43,9 +44,11 @@ import com.android.systemui.statusbar.SysuiStatusBarStateController;
 import com.android.systemui.statusbar.disableflags.domain.interactor.DisableFlagsInteractor;
 import com.android.systemui.statusbar.disableflags.shared.model.DisableFlagsModel;
 import com.android.systemui.util.DumpUtilsKt;
-import com.android.systemui.util.kotlin.FlowKt$emitOnStart$1;
+import com.android.systemui.util.LargeScreenUtils;
+import com.android.systemui.util.kotlin.FlowKt;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
 import java.io.PrintWriter;
+import kotlin.KotlinNothingValueException;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -57,6 +60,8 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
@@ -64,7 +69,6 @@ import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSFragmentComposeViewModel extends ExclusiveActivatable implements Dumpable {
     public final State alphaProgress$delegate;
@@ -130,7 +134,6 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
     public final State viewAlpha$delegate;
     public final State viewTranslationY$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         Object L$0;
@@ -164,15 +167,15 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
                 final PanelTransitionStateListener panelTransitionStateListener = new PanelTransitionStateListener() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$1$1$listener$1
                     @Override // com.android.systemui.shade.PanelTransitionStateListener
                     public final void onPanelTransitionStateChanged(PanelTransitionStateChangeEvent panelTransitionStateChangeEvent) {
-                        ((SnapshotMutableStateImpl) QSFragmentComposeViewModel.this.panelState$delegate).setValue(Integer.valueOf(panelTransitionStateChangeEvent.state));
+                        ((SnapshotMutableStateImpl) qSFragmentComposeViewModel.panelState$delegate).setValue(Integer.valueOf(panelTransitionStateChangeEvent.state));
                     }
                 };
                 qSFragmentComposeViewModel.secPanelSplitHelper.addListener(panelTransitionStateListener);
                 cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$1$1$1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
-                        QSFragmentComposeViewModel.this.secPanelSplitHelper.removeListener(panelTransitionStateListener);
+                    public final Object mo781invoke(Object obj2) {
+                        qSFragmentComposeViewModel.secPanelSplitHelper.removeListener(panelTransitionStateListener);
                         return Unit.INSTANCE;
                     }
                 });
@@ -189,12 +192,10 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         QSFragmentComposeViewModel create(LifecycleCoroutineScope lifecycleCoroutineScope);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class QSExpansionState {
         public final float progress;
 
@@ -218,6 +219,501 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
         }
     }
 
+    /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$1, reason: invalid class name and case insensitive filesystem */
+    final class C09741 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C09741(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return QSFragmentComposeViewModel.this.onActivated(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2$1, reason: invalid class name */
+        final class AnonymousClass1 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ QSFragmentComposeViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass1(QSFragmentComposeViewModel qSFragmentComposeViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = qSFragmentComposeViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass1(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) throws Throwable {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    final QSFragmentComposeViewModel qSFragmentComposeViewModel = this.this$0;
+                    this.label = 1;
+                    qSFragmentComposeViewModel.getClass();
+                    Object objCollect = SnapshotStateKt.snapshotFlow(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(qSFragmentComposeViewModel, 6)).collect(new FlowCollector() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$hydrateSquishinessInteractor$3
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) {
+                            qSFragmentComposeViewModel.squishinessInteractor.repository._squishiness.updateState(null, Float.valueOf(((Number) obj2).floatValue()));
+                            return Unit.INSTANCE;
+                        }
+                    }, this);
+                    if (objCollect != coroutineSingletons) {
+                        objCollect = Unit.INSTANCE;
+                    }
+                    if (objCollect == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2$2, reason: invalid class name and collision with other inner class name */
+        final class C03882 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ QSFragmentComposeViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C03882(QSFragmentComposeViewModel qSFragmentComposeViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = qSFragmentComposeViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new C03882(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C03882) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) throws Throwable {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    final QSFragmentComposeViewModel qSFragmentComposeViewModel = this.this$0;
+                    this.label = 1;
+                    qSFragmentComposeViewModel.getClass();
+                    Object objCollect = SnapshotStateKt.snapshotFlow(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(qSFragmentComposeViewModel, 0)).collect(new FlowCollector() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$hydrateQqsMediaExpansion$3
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) {
+                            qSFragmentComposeViewModel.qqsMediaHost.setExpansion(((Number) obj2).floatValue());
+                            return Unit.INSTANCE;
+                        }
+                    }, this);
+                    if (objCollect != coroutineSingletons) {
+                        objCollect = Unit.INSTANCE;
+                    }
+                    if (objCollect == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2$3, reason: invalid class name */
+        final class AnonymousClass3 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ QSFragmentComposeViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass3(QSFragmentComposeViewModel qSFragmentComposeViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = qSFragmentComposeViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass3(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass3) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) throws Throwable {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    final QSFragmentComposeViewModel qSFragmentComposeViewModel = this.this$0;
+                    this.label = 1;
+                    qSFragmentComposeViewModel.getClass();
+                    Object objCollect = SnapshotStateKt.snapshotFlow(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(qSFragmentComposeViewModel, 7)).collect(new FlowCollector() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$hydrateMediaSquishiness$3
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        public final Object emit(Object obj2, Continuation continuation) {
+                            float fFloatValue = ((Number) obj2).floatValue();
+                            MediaHost.MediaHostStateHolder mediaHostStateHolder = qSFragmentComposeViewModel.qsMediaHost.state;
+                            if (!Float.valueOf(fFloatValue).equals(Float.valueOf(mediaHostStateHolder.squishFraction))) {
+                                mediaHostStateHolder.squishFraction = fFloatValue;
+                                MediaHost$$ExternalSyntheticLambda0 mediaHost$$ExternalSyntheticLambda0 = mediaHostStateHolder.changedListener;
+                                if (mediaHost$$ExternalSyntheticLambda0 != null) {
+                                    mediaHost$$ExternalSyntheticLambda0.invoke();
+                                }
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }, this);
+                    if (objCollect != coroutineSingletons) {
+                        objCollect = Unit.INSTANCE;
+                    }
+                    if (objCollect == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2$4, reason: invalid class name */
+        final class AnonymousClass4 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ QSFragmentComposeViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass4(QSFragmentComposeViewModel qSFragmentComposeViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = qSFragmentComposeViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass4(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass4) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    QSFragmentComposeViewModel qSFragmentComposeViewModel = this.this$0;
+                    this.label = 1;
+                    qSFragmentComposeViewModel.getClass();
+                    Object objCoroutineScope = CoroutineScopeKt.coroutineScope(new QSFragmentComposeViewModel$hydrateMediaDisappearParameters$2(qSFragmentComposeViewModel, null), this);
+                    if (objCoroutineScope != obj2) {
+                        objCoroutineScope = Unit.INSTANCE;
+                    }
+                    if (objCoroutineScope == obj2) {
+                        return obj2;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2$5, reason: invalid class name */
+        final class AnonymousClass5 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ QSFragmentComposeViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass5(QSFragmentComposeViewModel qSFragmentComposeViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = qSFragmentComposeViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass5(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass5) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    Hydrator hydrator = this.this$0.hydrator;
+                    this.label = 1;
+                    if (hydrator.activate(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                throw new KotlinNothingValueException();
+            }
+        }
+
+        /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2$6, reason: invalid class name */
+        final class AnonymousClass6 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ QSFragmentComposeViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass6(QSFragmentComposeViewModel qSFragmentComposeViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = qSFragmentComposeViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass6(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass6) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    QuickSettingsContainerViewModel quickSettingsContainerViewModel = this.this$0.containerViewModel;
+                    this.label = 1;
+                    if (quickSettingsContainerViewModel.activate(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                throw new KotlinNothingValueException();
+            }
+        }
+
+        /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2$7, reason: invalid class name */
+        final class AnonymousClass7 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ QSFragmentComposeViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass7(QSFragmentComposeViewModel qSFragmentComposeViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = qSFragmentComposeViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass7(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass7) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    QuickQuickSettingsViewModel quickQuickSettingsViewModel = this.this$0.quickQuickSettingsViewModel;
+                    this.label = 1;
+                    if (quickQuickSettingsViewModel.activate(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                throw new KotlinNothingValueException();
+            }
+        }
+
+        /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2$8, reason: invalid class name */
+        final class AnonymousClass8 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ QSFragmentComposeViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass8(QSFragmentComposeViewModel qSFragmentComposeViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = qSFragmentComposeViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass8(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass8) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    MediaInRowInLandscapeViewModel mediaInRowInLandscapeViewModel = this.this$0.qqsMediaInRowViewModel;
+                    this.label = 1;
+                    if (mediaInRowInLandscapeViewModel.activate(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                throw new KotlinNothingValueException();
+            }
+        }
+
+        /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2$9, reason: invalid class name */
+        final class AnonymousClass9 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ QSFragmentComposeViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass9(QSFragmentComposeViewModel qSFragmentComposeViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = qSFragmentComposeViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass9(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass9) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    MediaInRowInLandscapeViewModel mediaInRowInLandscapeViewModel = this.this$0.qsMediaInRowViewModel;
+                    this.label = 1;
+                    if (mediaInRowInLandscapeViewModel.activate(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                throw new KotlinNothingValueException();
+            }
+        }
+
+        public AnonymousClass2(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass2 anonymousClass2 = QSFragmentComposeViewModel.this.new AnonymousClass2(continuation);
+            anonymousClass2.L$0 = obj;
+            return anonymousClass2;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(QSFragmentComposeViewModel.this, null), 7);
+                QSFragmentComposeViewModel qSFragmentComposeViewModel = QSFragmentComposeViewModel.this;
+                if (qSFragmentComposeViewModel.usingMedia) {
+                    CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C03882(qSFragmentComposeViewModel, null), 7);
+                    CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(QSFragmentComposeViewModel.this, null), 7);
+                    CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass4(QSFragmentComposeViewModel.this, null), 7);
+                }
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass5(QSFragmentComposeViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass6(QSFragmentComposeViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass7(QSFragmentComposeViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass8(QSFragmentComposeViewModel.this, null), 7);
+                CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass9(QSFragmentComposeViewModel.this, null), 7);
+                this.label = 1;
+                if (DelayKt.awaitCancellation(this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            throw new KotlinNothingValueException();
+        }
+    }
+
     public QSFragmentComposeViewModel(QuickSettingsContainerViewModel.Factory factory, Resources resources, QuickQuickSettingsViewModel.Factory factory2, FooterActionsViewModel.Factory factory3, FooterActionsController footerActionsController, SysuiStatusBarStateController sysuiStatusBarStateController, DeviceEntryInteractor deviceEntryInteractor, DisableFlagsInteractor disableFlagsInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, LargeScreenShadeInterpolator largeScreenShadeInterpolator, ShadeInteractor shadeInteractor, ConfigurationInteractor configurationInteractor, LargeScreenHeaderHelper largeScreenHeaderHelper, TileSquishinessInteractor tileSquishinessInteractor, FalsingInteractor falsingInteractor, InFirstPageViewModel inFirstPageViewModel, TableLogBuffer tableLogBuffer, MediaInRowInLandscapeViewModel.Factory factory4, MediaHost mediaHost, MediaHost mediaHost2, boolean z, UiEventLogger uiEventLogger, LifecycleCoroutineScope lifecycleCoroutineScope, SecPanelSplitHelper secPanelSplitHelper) {
         Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
         Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$22;
@@ -234,16 +730,16 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
         this.usingMedia = z;
         this.uiEventLogger = uiEventLogger;
         this.secPanelSplitHelper = secPanelSplitHelper;
-        QuickSettingsContainerViewModel create = factory.create(true, null);
-        this.containerViewModel = create;
+        QuickSettingsContainerViewModel quickSettingsContainerViewModelCreate = factory.create(true, null);
+        this.containerViewModel = quickSettingsContainerViewModelCreate;
         this.quickQuickSettingsViewModel = factory2.create();
         this.qqsMediaInRowViewModel = factory4.create(1);
         this.qsMediaInRowViewModel = factory4.create(0);
         Hydrator hydrator = new Hydrator("QSFragmentComposeViewModel.hydrator", tableLogBuffer);
         this.hydrator = hydrator;
-        FooterActionsViewModel create2 = factory3.create(lifecycleCoroutineScope);
+        FooterActionsViewModel footerActionsViewModelCreate = factory3.create(lifecycleCoroutineScope);
         CoroutineTracingKt.launchTraced$default(lifecycleCoroutineScope, null, null, new QSFragmentComposeViewModel$footerActionsViewModel$1$1(this, null), 7);
-        this.footerActionsViewModel = create2;
+        this.footerActionsViewModel = footerActionsViewModelCreate;
         Boolean bool = Boolean.FALSE;
         this.isQsExpanded$delegate = SnapshotStateKt.mutableStateOf$default(bool);
         this.isQsVisible$delegate = SnapshotStateKt.mutableStateOf$default(bool);
@@ -257,7 +753,6 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
         final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = configurationInteractorImpl.onAnyConfigurationChange;
         this.qqsHeaderHeight$delegate = hydrator.hydratedStateOf("qqsHeaderHeight", 0, new Flow() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -286,76 +781,47 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
                     this.this$0 = qSFragmentComposeViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L56
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Unit r5 = (kotlin.Unit) r5
-                        com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel r5 = r4.this$0
-                        android.content.res.Resources r6 = r5.resources
-                        boolean r6 = com.android.systemui.util.LargeScreenUtils.shouldUseLargeScreenShadeHeader(r6)
-                        if (r6 == 0) goto L40
-                        r5 = 0
-                        goto L46
-                    L40:
-                        com.android.systemui.shade.LargeScreenHeaderHelper r5 = r5.largeScreenHeaderHelper
-                        int r5 = r5.getLargeScreenHeaderHeight()
-                    L46:
-                        java.lang.Integer r6 = new java.lang.Integer
-                        r6.<init>(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L56
-                        return r1
-                    L56:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        QSFragmentComposeViewModel qSFragmentComposeViewModel = this.this$0;
+                        Integer num = new Integer(LargeScreenUtils.shouldUseLargeScreenShadeHeader(qSFragmentComposeViewModel.resources) ? 0 : qSFragmentComposeViewModel.largeScreenHeaderHelper.getLargeScreenHeaderHeight());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(num, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         this.qqsBottomPadding$delegate = hydrator.hydratedStateOf("qqsBottomPadding", Integer.valueOf(resources.getDimensionPixelSize(R.dimen.qqs_layout_padding_bottom)), configurationInteractorImpl.dimensionPixelSize(R.dimen.qqs_layout_padding_bottom));
@@ -363,11 +829,10 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
         this.qsScrollHeight$delegate = SnapshotStateKt.mutableStateOf$default(0);
         this.isStackScrollerOverscrolling$delegate = SnapshotStateKt.mutableStateOf$default(bool);
         this.proposedTranslation$delegate = SnapshotStateKt.mutableStateOf$default(Float.valueOf(0.0f));
-        Boolean valueOf = Boolean.valueOf(((DisableFlagsModel) disableFlagsInteractor.disableFlags.$$delegate_0.getValue()).isQuickSettingsEnabled());
+        Boolean boolValueOf = Boolean.valueOf(((DisableFlagsModel) disableFlagsInteractor.disableFlags.$$delegate_0.getValue()).isQuickSettingsEnabled());
         final ReadonlyStateFlow readonlyStateFlow = disableFlagsInteractor.disableFlags;
-        this.isQsEnabled$delegate = hydrator.hydratedStateOf("isQsEnabled", valueOf, new Flow() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$2
+        this.isQsEnabled$delegate = hydrator.hydratedStateOf("isQsEnabled", boolValueOf, new Flow() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -394,66 +859,46 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$2$2$1 r0 = (com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$2$2$1 r0 = new com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L47
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.statusbar.disableflags.shared.model.DisableFlagsModel r5 = (com.android.systemui.statusbar.disableflags.shared.model.DisableFlagsModel) r5
-                        boolean r5 = r5.isQuickSettingsEnabled()
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L47
-                        return r1
-                    L47:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((DisableFlagsModel) obj).isQuickSettingsEnabled());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         this.isInSplitShade$delegate = SnapshotStateKt.mutableStateOf$default(bool);
@@ -467,29 +912,28 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
         this.viewTranslationY$delegate = SnapshotStateKt.derivedStateOf(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(this, 15));
         this.qsScrollTranslationY$delegate = SnapshotStateKt.derivedStateOf(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(this, 16));
         this.viewAlpha$delegate = SnapshotStateKt.derivedStateOf(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(this, 1));
-        Boolean valueOf2 = Boolean.valueOf(z);
+        Boolean boolValueOf2 = Boolean.valueOf(z);
         if (z) {
             flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new QSFragmentComposeViewModelKt$mediaHostVisible$2(mediaHost, null), FlowKt.callbackFlow(new QSFragmentComposeViewModelKt$mediaHostVisible$1(mediaHost, null)));
         } else {
             flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(bool);
         }
-        this.qqsMediaVisible$delegate = hydrator.hydratedStateOf("qqsMediaVisible", valueOf2, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2);
-        Boolean valueOf3 = Boolean.valueOf(z);
+        this.qqsMediaVisible$delegate = hydrator.hydratedStateOf("qqsMediaVisible", boolValueOf2, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2);
+        Boolean boolValueOf3 = Boolean.valueOf(z);
         if (z) {
             flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$22 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new QSFragmentComposeViewModelKt$mediaHostVisible$2(mediaHost2, null), FlowKt.callbackFlow(new QSFragmentComposeViewModelKt$mediaHostVisible$1(mediaHost2, null)));
         } else {
             flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$22 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(bool);
         }
-        this.qsMediaVisible$delegate = hydrator.hydratedStateOf("qsMediaVisible", valueOf3, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$22);
+        this.qsMediaVisible$delegate = hydrator.hydratedStateOf("qsMediaVisible", boolValueOf3, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$22);
         this.shouldUpdateSquishinessOnMedia$delegate = SnapshotStateKt.mutableStateOf$default(bool);
         this.qsMediaTranslationY$delegate = SnapshotStateKt.derivedStateOf(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(this, 2));
-        this.isEditing$delegate = hydrator.hydratedStateOf(create.editModeViewModel.isEditing, "isEditing");
+        this.isEditing$delegate = hydrator.hydratedStateOf(quickSettingsContainerViewModelCreate.editModeViewModel.isEditing, "isEditing");
         this.isNotTransitioning$delegate = SnapshotStateKt.derivedStateOf(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(this, 3));
-        Boolean valueOf4 = Boolean.valueOf(resources.getBoolean(R.bool.config_quickSettingsMediaLandscapeCollapsed));
-        final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$12 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new FlowKt$emitOnStart$1(null), configurationInteractorImpl.onAnyConfigurationChange);
-        this.collapsedLandscapeMedia$delegate = hydrator.hydratedStateOf("collapsedLandscapeMedia", valueOf4, new Flow() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$3
+        Boolean boolValueOf4 = Boolean.valueOf(resources.getBoolean(R.bool.config_quickSettingsMediaLandscapeCollapsed));
+        final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$12 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new FlowKt.AnonymousClass1(null), configurationInteractorImpl.onAnyConfigurationChange);
+        this.collapsedLandscapeMedia$delegate = hydrator.hydratedStateOf("collapsedLandscapeMedia", boolValueOf4, new Flow() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -518,69 +962,46 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
                     this.this$0 = qSFragmentComposeViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$3$2$1 r0 = (com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$3$2$1 r0 = new com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4e
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Unit r5 = (kotlin.Unit) r5
-                        com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel r5 = r4.this$0
-                        android.content.res.Resources r5 = r5.resources
-                        r6 = 2131034168(0x7f050038, float:1.7678846E38)
-                        boolean r5 = r5.getBoolean(r6)
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4e
-                        return r1
-                    L4e:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(this.this$0.resources.getBoolean(R.bool.config_quickSettingsMediaLandscapeCollapsed));
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__EmittersKt$onStart$$inlined$unsafeFlow$12.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         this.shouldApplySquishinessToMedia$delegate = SnapshotStateKt.derivedStateOf(new QSFragmentComposeViewModel$$ExternalSyntheticLambda0(this, 4));
@@ -601,86 +1022,86 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.append("Quick Settings state").println(":");
-        asIndenting.increaseIndent();
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.append("Quick Settings state").println(":");
+        indentingPrintWriterAsIndenting.increaseIndent();
         try {
             Boolean bool = (Boolean) ((SnapshotMutableStateImpl) this.isQsExpanded$delegate).getValue();
             bool.booleanValue();
-            DumpUtilsKt.println(asIndenting, "isQSExpanded", bool);
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "isQSExpanded", bool);
             Boolean bool2 = (Boolean) ((SnapshotMutableStateImpl) this.isQsVisible$delegate).getValue();
             bool2.booleanValue();
-            DumpUtilsKt.println(asIndenting, "isQSVisible", bool2);
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "isQSVisible", bool2);
             Boolean bool3 = (Boolean) ((SnapshotMutableStateImpl) this.anyShadeExpanded$delegate).getValue();
             bool3.booleanValue();
-            DumpUtilsKt.println(asIndenting, "anyShadeExpanded", bool3);
-            DumpUtilsKt.println(asIndenting, "isQSVisibleAndAnyShadeExpanded", Boolean.valueOf(isQsVisibleAndAnyShadeExpanded()));
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "anyShadeExpanded", bool3);
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "isQSVisibleAndAnyShadeExpanded", Boolean.valueOf(isQsVisibleAndAnyShadeExpanded()));
             Boolean bool4 = (Boolean) ((SnapshotMutableStateImpl) this.isQsEnabled$delegate).getValue();
             bool4.booleanValue();
-            DumpUtilsKt.println(asIndenting, "isQSEnabled", bool4);
-            DumpUtilsKt.println(asIndenting, "isCustomizing", this.containerViewModel.editModeViewModel.isEditing.$$delegate_0.getValue());
-            DumpUtilsKt.println(asIndenting, "inFirstPage", Boolean.valueOf(this.inFirstPageViewModel.inFirstPage));
-            asIndenting.decreaseIndent();
-            asIndenting.append("Expansion state").println(":");
-            asIndenting.increaseIndent();
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "isQSEnabled", bool4);
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "isCustomizing", this.containerViewModel.editModeViewModel.isEditing.$$delegate_0.getValue());
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "inFirstPage", Boolean.valueOf(this.inFirstPageViewModel.inFirstPage));
+            indentingPrintWriterAsIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.append("Expansion state").println(":");
+            indentingPrintWriterAsIndenting.increaseIndent();
             try {
-                DumpUtilsKt.println(asIndenting, "qsExpansion", Float.valueOf(getQsExpansion()));
-                DumpUtilsKt.println(asIndenting, "panelExpansionFraction", Float.valueOf(((Number) ((SnapshotMutableStateImpl) this.panelExpansionFraction$delegate).getValue()).floatValue()));
-                DumpUtilsKt.println(asIndenting, "squishinessFraction", Float.valueOf(((Number) ((SnapshotMutableStateImpl) this.squishinessFraction$delegate).getValue()).floatValue()));
-                DumpUtilsKt.println(asIndenting, "proposedTranslation", Float.valueOf(((Number) ((SnapshotMutableStateImpl) this.proposedTranslation$delegate).getValue()).floatValue()));
-                DumpUtilsKt.println(asIndenting, "expansionState", (QSExpansionState) this.expansionState$delegate.getValue());
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qsExpansion", Float.valueOf(getQsExpansion$1()));
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "panelExpansionFraction", Float.valueOf(((Number) ((SnapshotMutableStateImpl) this.panelExpansionFraction$delegate).getValue()).floatValue()));
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "squishinessFraction", Float.valueOf(((Number) ((SnapshotMutableStateImpl) this.squishinessFraction$delegate).getValue()).floatValue()));
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "proposedTranslation", Float.valueOf(((Number) ((SnapshotMutableStateImpl) this.proposedTranslation$delegate).getValue()).floatValue()));
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "expansionState", (QSExpansionState) this.expansionState$delegate.getValue());
                 Boolean bool5 = (Boolean) this.forceQs$delegate.getValue();
                 bool5.booleanValue();
-                DumpUtilsKt.println(asIndenting, "forceQS", bool5);
-                asIndenting.append("Derived values").println(":");
-                asIndenting.increaseIndent();
-                DumpUtilsKt.println(asIndenting, "headerTranslation", Float.valueOf(((Number) this.headerTranslation$delegate.getValue()).floatValue()));
-                DumpUtilsKt.println(asIndenting, "translationScaleY", Float.valueOf(getTranslationScaleY()));
-                DumpUtilsKt.println(asIndenting, "viewTranslationY", Float.valueOf(((Number) this.viewTranslationY$delegate.getValue()).floatValue()));
-                DumpUtilsKt.println(asIndenting, "qsScrollTranslationY", Float.valueOf(((Number) this.qsScrollTranslationY$delegate.getValue()).floatValue()));
-                DumpUtilsKt.println(asIndenting, "viewAlpha", Float.valueOf(((Number) this.viewAlpha$delegate.getValue()).floatValue()));
-                asIndenting.decreaseIndent();
-                asIndenting.decreaseIndent();
-                asIndenting.append("Shade state").println(":");
-                asIndenting.increaseIndent();
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "forceQS", bool5);
+                indentingPrintWriterAsIndenting.append("Derived values").println(":");
+                indentingPrintWriterAsIndenting.increaseIndent();
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "headerTranslation", Float.valueOf(((Number) this.headerTranslation$delegate.getValue()).floatValue()));
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "translationScaleY", Float.valueOf(getTranslationScaleY()));
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "viewTranslationY", Float.valueOf(((Number) this.viewTranslationY$delegate.getValue()).floatValue()));
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qsScrollTranslationY", Float.valueOf(((Number) this.qsScrollTranslationY$delegate.getValue()).floatValue()));
+                DumpUtilsKt.println(indentingPrintWriterAsIndenting, "viewAlpha", Float.valueOf(((Number) this.viewAlpha$delegate.getValue()).floatValue()));
+                indentingPrintWriterAsIndenting.decreaseIndent();
+                indentingPrintWriterAsIndenting.decreaseIndent();
+                indentingPrintWriterAsIndenting.append("Shade state").println(":");
+                indentingPrintWriterAsIndenting.increaseIndent();
                 try {
                     Boolean bool6 = (Boolean) ((SnapshotMutableStateImpl) this.isStackScrollerOverscrolling$delegate).getValue();
                     bool6.booleanValue();
-                    DumpUtilsKt.println(asIndenting, "stackOverscrolling", bool6);
-                    DumpUtilsKt.println(asIndenting, "overscrollAmount", Integer.valueOf(((Number) ((SnapshotMutableStateImpl) this.overScrollAmount$delegate).getValue()).intValue()));
-                    DumpUtilsKt.println(asIndenting, "statusBarState", StatusBarState.toString(getStatusBarState()));
-                    DumpUtilsKt.println(asIndenting, "isKeyguardState", Boolean.valueOf(isKeyguardState$1()));
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "stackOverscrolling", bool6);
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "overscrollAmount", Integer.valueOf(((Number) ((SnapshotMutableStateImpl) this.overScrollAmount$delegate).getValue()).intValue()));
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "statusBarState", StatusBarState.toString(getStatusBarState()));
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "isKeyguardState", Boolean.valueOf(isKeyguardState$1()));
                     Boolean bool7 = (Boolean) ((SnapshotMutableStateImpl) this.isSmallScreen$delegate).getValue();
                     bool7.booleanValue();
-                    DumpUtilsKt.println(asIndenting, "isSmallScreen", bool7);
-                    DumpUtilsKt.println(asIndenting, "heightOverride", ((Number) ((SnapshotMutableStateImpl) this.heightOverride$delegate).getValue()).intValue() + "px");
-                    DumpUtilsKt.println(asIndenting, "qqsHeaderHeight", ((Number) ((SnapshotMutableStateImpl) this.qqsHeaderHeight$delegate).getValue()).intValue() + "px");
-                    DumpUtilsKt.println(asIndenting, "qqsBottomPadding", ((Number) ((SnapshotMutableStateImpl) this.qqsBottomPadding$delegate).getValue()).intValue() + "px");
-                    DumpUtilsKt.println(asIndenting, "isSplitShade", Boolean.valueOf(isInSplitShade()));
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "isSmallScreen", bool7);
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "heightOverride", ((Number) ((SnapshotMutableStateImpl) this.heightOverride$delegate).getValue()).intValue() + "px");
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qqsHeaderHeight", ((Number) ((SnapshotMutableStateImpl) this.qqsHeaderHeight$delegate).getValue()).intValue() + "px");
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qqsBottomPadding", ((Number) ((SnapshotMutableStateImpl) this.qqsBottomPadding$delegate).getValue()).intValue() + "px");
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "isSplitShade", Boolean.valueOf(isInSplitShade()));
                     Boolean bool8 = (Boolean) this.showCollapsedOnKeyguard$delegate.getValue();
                     bool8.booleanValue();
-                    DumpUtilsKt.println(asIndenting, "showCollapsedOnKeyguard", bool8);
-                    DumpUtilsKt.println(asIndenting, "qqsHeight", ((Number) ((SnapshotMutableStateImpl) this.qqsHeight$delegate).getValue()).intValue() + "px");
-                    DumpUtilsKt.println(asIndenting, "qsScrollHeight", ((Number) ((SnapshotMutableStateImpl) this.qsScrollHeight$delegate).getValue()).intValue() + "px");
-                    asIndenting.decreaseIndent();
-                    asIndenting.append("Media").println(":");
-                    asIndenting.increaseIndent();
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "showCollapsedOnKeyguard", bool8);
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qqsHeight", ((Number) ((SnapshotMutableStateImpl) this.qqsHeight$delegate).getValue()).intValue() + "px");
+                    DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qsScrollHeight", ((Number) ((SnapshotMutableStateImpl) this.qsScrollHeight$delegate).getValue()).intValue() + "px");
+                    indentingPrintWriterAsIndenting.decreaseIndent();
+                    indentingPrintWriterAsIndenting.append("Media").println(":");
+                    indentingPrintWriterAsIndenting.increaseIndent();
                     try {
-                        DumpUtilsKt.println(asIndenting, "qqsMediaVisible", Boolean.valueOf(getQqsMediaVisible()));
-                        DumpUtilsKt.println(asIndenting, "qqsMediaInRow", Boolean.valueOf(this.qqsMediaInRowViewModel.getShouldMediaShowInRow()));
+                        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qqsMediaVisible", Boolean.valueOf(getQqsMediaVisible()));
+                        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qqsMediaInRow", Boolean.valueOf(this.qqsMediaInRowViewModel.getShouldMediaShowInRow()));
                         Boolean bool9 = (Boolean) ((SnapshotMutableStateImpl) this.qsMediaVisible$delegate).getValue();
                         bool9.booleanValue();
-                        DumpUtilsKt.println(asIndenting, "qsMediaVisible", bool9);
-                        DumpUtilsKt.println(asIndenting, "qsMediaInRow", Boolean.valueOf(this.qsMediaInRowViewModel.getShouldMediaShowInRow()));
+                        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qsMediaVisible", bool9);
+                        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qsMediaInRow", Boolean.valueOf(this.qsMediaInRowViewModel.getShouldMediaShowInRow()));
                         Boolean bool10 = (Boolean) ((SnapshotMutableStateImpl) this.collapsedLandscapeMedia$delegate).getValue();
                         bool10.booleanValue();
-                        DumpUtilsKt.println(asIndenting, "collapsedLandscapeMedia", bool10);
-                        DumpUtilsKt.println(asIndenting, "qqsMediaExpansion", Float.valueOf(getQqsMediaExpansion()));
+                        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "collapsedLandscapeMedia", bool10);
+                        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qqsMediaExpansion", Float.valueOf(getQqsMediaExpansion()));
                         Boolean bool11 = (Boolean) ((SnapshotMutableStateImpl) this.shouldUpdateSquishinessOnMedia$delegate).getValue();
                         bool11.booleanValue();
-                        DumpUtilsKt.println(asIndenting, "shouldUpdateSquishinessOnMedia", bool11);
-                        DumpUtilsKt.println(asIndenting, "mediaSquishiness", Float.valueOf(((Number) this.mediaSquishiness$delegate.getValue()).floatValue()));
-                        DumpUtilsKt.println(asIndenting, "qsMediaTranslationY", Float.valueOf(((Number) this.qsMediaTranslationY$delegate.getValue()).floatValue()));
+                        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "shouldUpdateSquishinessOnMedia", bool11);
+                        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "mediaSquishiness", Float.valueOf(((Number) this.mediaSquishiness$delegate.getValue()).floatValue()));
+                        DumpUtilsKt.println(indentingPrintWriterAsIndenting, "qsMediaTranslationY", Float.valueOf(((Number) this.qsMediaTranslationY$delegate.getValue()).floatValue()));
                     } finally {
                     }
                 } finally {
@@ -701,7 +1122,7 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
         return ((Boolean) ((SnapshotMutableStateImpl) this.qqsMediaVisible$delegate).getValue()).booleanValue();
     }
 
-    public final float getQsExpansion() {
+    public final float getQsExpansion$1() {
         return ((Number) ((SnapshotMutableStateImpl) this.qsExpansion$delegate).getValue()).floatValue();
     }
 
@@ -710,7 +1131,7 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
     }
 
     public final float getTranslationScaleY() {
-        return (getQsExpansion() - 1) * (isInSplitShade() ? 1.0f : 0.1f);
+        return (getQsExpansion$1() - 1) * (isInSplitShade() ? 1.0f : 0.1f);
     }
 
     public final boolean isInSplitShade() {
@@ -722,74 +1143,52 @@ public final class QSFragmentComposeViewModel extends ExclusiveActivatable imple
     }
 
     public final boolean isQsVisibleAndAnyShadeExpanded() {
-        boolean booleanValue = ((Boolean) ((SnapshotMutableStateImpl) this.anyShadeExpanded$delegate).getValue()).booleanValue();
+        boolean zBooleanValue = ((Boolean) ((SnapshotMutableStateImpl) this.anyShadeExpanded$delegate).getValue()).booleanValue();
         MutableState mutableState = this.panelState$delegate;
-        return (booleanValue && ((Boolean) ((SnapshotMutableStateImpl) this.isQsVisible$delegate).getValue()).booleanValue() && ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).intValue() == 0) || ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).intValue() == 3;
+        return (zBooleanValue && ((Boolean) ((SnapshotMutableStateImpl) this.isQsVisible$delegate).getValue()).booleanValue() && ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).intValue() == 0) || ((Number) ((SnapshotMutableStateImpl) mutableState).getValue()).intValue() == 3;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.ExclusiveActivatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onActivated(kotlin.coroutines.Continuation r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$1 r0 = (com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$1 r0 = new com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L5e
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r5)
-            float r5 = r4.getQqsMediaExpansion()
-            com.android.systemui.media.controls.ui.view.MediaHost r2 = r4.qqsMediaHost
-            r2.setExpansion(r5)
-            r2.setShowsOnlyActiveMedia(r3)
-            r2.init(r3)
-            r5 = 1065353216(0x3f800000, float:1.0)
-            com.android.systemui.media.controls.ui.view.MediaHost r2 = r4.qsMediaHost
-            r2.setExpansion(r5)
-            r5 = 0
-            r2.setShowsOnlyActiveMedia(r5)
-            r2.init(r5)
-            com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2 r5 = new com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$onActivated$2
-            r2 = 0
-            r5.<init>(r4, r2)
-            r0.label = r3
-            java.lang.Object r4 = kotlinx.coroutines.CoroutineScopeKt.coroutineScope(r5, r0)
-            if (r4 != r1) goto L5e
-            return r1
-        L5e:
-            kotlin.KotlinNothingValueException r4 = new kotlin.KotlinNothingValueException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel.onActivated(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onActivated(Continuation continuation) {
+        C09741 c09741;
+        if (continuation instanceof C09741) {
+            c09741 = (C09741) continuation;
+            int i = c09741.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c09741.label = i - Integer.MIN_VALUE;
+            } else {
+                c09741 = new C09741(continuation);
+            }
+        }
+        Object obj = c09741.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c09741.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            float qqsMediaExpansion = getQqsMediaExpansion();
+            MediaHost mediaHost = this.qqsMediaHost;
+            mediaHost.setExpansion(qqsMediaExpansion);
+            mediaHost.setShowsOnlyActiveMedia(true);
+            mediaHost.init(1);
+            MediaHost mediaHost2 = this.qsMediaHost;
+            mediaHost2.setExpansion(1.0f);
+            mediaHost2.setShowsOnlyActiveMedia(false);
+            mediaHost2.init(0);
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2(null);
+            c09741.label = 1;
+            if (CoroutineScopeKt.coroutineScope(anonymousClass2, c09741) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 }

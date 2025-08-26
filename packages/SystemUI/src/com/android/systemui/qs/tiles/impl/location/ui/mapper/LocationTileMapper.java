@@ -12,7 +12,6 @@ import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LocationTileMapper implements QSTileDataToStateMapper {
     public final Resources resources;
@@ -33,7 +32,7 @@ public final class LocationTileMapper implements QSTileDataToStateMapper {
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.location.ui.mapper.LocationTileMapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 QSTileState.Builder builder = (QSTileState.Builder) obj2;
                 boolean z2 = z;
                 int i = z2 ? R.drawable.qs_location_icon_on : R.drawable.qs_location_icon_off;

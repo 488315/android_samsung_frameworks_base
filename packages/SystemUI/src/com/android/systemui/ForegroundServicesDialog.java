@@ -1,6 +1,5 @@
 package com.android.systemui;
 
-import android.R;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,7 +22,6 @@ import com.android.internal.app.AlertController;
 import com.android.internal.logging.MetricsLogger;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ForegroundServicesDialog extends AlertActivity implements AdapterView.OnItemSelectedListener, DialogInterface.OnClickListener, AlertController.AlertParams.OnPrepareListViewListener {
     public PackageItemAdapter mAdapter;
@@ -41,7 +39,6 @@ public final class ForegroundServicesDialog extends AlertActivity implements Ada
     public final MetricsLogger mMetricsLogger;
     public String[] mPackages;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PackageItemAdapter extends ArrayAdapter {
         public final IconDrawableFactory mIconDrawableFactory;
         public final LayoutInflater mInflater;
@@ -87,7 +84,7 @@ public final class ForegroundServicesDialog extends AlertActivity implements Ada
         alertParams.mCustomTitleView = this.mInflater.inflate(R.layout.foreground_service_title, (ViewGroup) null);
         alertParams.mIsSingleChoice = true;
         alertParams.mOnItemSelectedListener = this;
-        alertParams.mPositiveButtonText = getString(R.string.indeterminate_progress_27);
+        alertParams.mPositiveButtonText = getString(android.R.string.indeterminate_progress_29);
         alertParams.mPositiveButtonListener = this;
         alertParams.mOnPrepareListViewListener = this;
         updateApps(getIntent());

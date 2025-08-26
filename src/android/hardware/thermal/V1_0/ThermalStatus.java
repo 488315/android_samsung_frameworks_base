@@ -36,13 +36,13 @@ public final class ThermalStatus {
 
     public static final ArrayList<ThermalStatus> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<ThermalStatus> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             ThermalStatus thermalStatus = new ThermalStatus();
-            thermalStatus.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+            thermalStatus.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
             arrayList.add(thermalStatus);
         }
         return arrayList;

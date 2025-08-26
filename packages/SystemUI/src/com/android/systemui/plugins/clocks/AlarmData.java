@@ -2,7 +2,6 @@ package com.android.systemui.plugins.clocks;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AlarmData {
     public static final int $stable = 0;
@@ -57,9 +56,9 @@ public final class AlarmData {
 
     public int hashCode() {
         Long l = this.nextAlarmMillis;
-        int hashCode = (l == null ? 0 : l.hashCode()) * 31;
+        int iHashCode = (l == null ? 0 : l.hashCode()) * 31;
         String str = this.descriptionId;
-        return hashCode + (str != null ? str.hashCode() : 0);
+        return iHashCode + (str != null ? str.hashCode() : 0);
     }
 
     public String toString() {

@@ -94,16 +94,16 @@ public class NotificationChannelGroupsHelper {
         if (!map.containsKey(str)) {
             return null;
         }
-        NotificationChannelGroup m473clone = map.get(str).m473clone();
-        m473clone.setChannels(new ArrayList());
+        NotificationChannelGroup notificationChannelGroupM477clone = map.get(str).m477clone();
+        notificationChannelGroupM477clone.setChannels(new ArrayList());
         for (NotificationChannel notificationChannel : collection) {
             if (z || !notificationChannel.isDeleted()) {
                 if (str.equals(notificationChannel.getGroup())) {
-                    m473clone.addChannel(notificationChannel);
+                    notificationChannelGroupM477clone.addChannel(notificationChannel);
                 }
             }
         }
-        return m473clone;
+        return notificationChannelGroupM477clone;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -116,13 +116,13 @@ public class NotificationChannelGroupsHelper {
                     if (!Flags.notificationClassification() || !NotificationChannel.SYSTEM_RESERVED_IDS.contains(notificationChannel.getId())) {
                         if (notificationChannel.getGroup() != null) {
                             if (map.get(notificationChannel.getGroup()) != null) {
-                                NotificationChannelGroup notificationChannelGroup2 = (NotificationChannelGroup) arrayMap.get(notificationChannel.getGroup());
-                                if (notificationChannelGroup2 == null) {
-                                    notificationChannelGroup2 = map.get(notificationChannel.getGroup()).m473clone();
-                                    notificationChannelGroup2.setChannels(new ArrayList());
-                                    arrayMap.put(notificationChannel.getGroup(), notificationChannelGroup2);
+                                NotificationChannelGroup notificationChannelGroupM477clone = (NotificationChannelGroup) arrayMap.get(notificationChannel.getGroup());
+                                if (notificationChannelGroupM477clone == null) {
+                                    notificationChannelGroupM477clone = map.get(notificationChannel.getGroup()).m477clone();
+                                    notificationChannelGroupM477clone.setChannels(new ArrayList());
+                                    arrayMap.put(notificationChannel.getGroup(), notificationChannelGroupM477clone);
                                 }
-                                notificationChannelGroup2.addChannel(notificationChannel);
+                                notificationChannelGroupM477clone.addChannel(notificationChannel);
                             }
                         } else {
                             notificationChannelGroup.addChannel(notificationChannel);
@@ -135,9 +135,9 @@ public class NotificationChannelGroupsHelper {
             arrayMap.put(null, notificationChannelGroup);
         }
         if (params.includeEmpty) {
-            for (NotificationChannelGroup notificationChannelGroup3 : map.values()) {
-                if (!arrayMap.containsKey(notificationChannelGroup3.getId())) {
-                    arrayMap.put(notificationChannelGroup3.getId(), notificationChannelGroup3);
+            for (NotificationChannelGroup notificationChannelGroup2 : map.values()) {
+                if (!arrayMap.containsKey(notificationChannelGroup2.getId())) {
+                    arrayMap.put(notificationChannelGroup2.getId(), notificationChannelGroup2);
                 }
             }
         }

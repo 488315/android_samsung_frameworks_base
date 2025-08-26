@@ -84,9 +84,9 @@ public interface IDeviceInjectorCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDeviceInjectorCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDeviceInjectorCallback)) {
-                return (IDeviceInjectorCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDeviceInjectorCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDeviceInjectorCallback)) {
+                return (IDeviceInjectorCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -126,40 +126,40 @@ public interface IDeviceInjectorCallback extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IDeviceInjectorSession asInterface = IDeviceInjectorSession.Stub.asInterface(parcel.readStrongBinder());
+                    IDeviceInjectorSession iDeviceInjectorSessionAsInterface = IDeviceInjectorSession.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onSessionCreated(asInterface);
+                    onSessionCreated(iDeviceInjectorSessionAsInterface);
                     return true;
                 case 2:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onInjectionStarted(readString, readString2, readString3);
+                    onInjectionStarted(string, string2, string3);
                     return true;
                 case 3:
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onInjectionStopped(readString4, readString5, readString6);
+                    onInjectionStopped(string4, string5, string6);
                     return true;
                 case 4:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onInjectionPendingStarted(readString7, readString8);
+                    onInjectionPendingStarted(string7, string8);
                     return true;
                 case 5:
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onInjectionPendingStopped(readString9, readString10);
+                    onInjectionPendingStopped(string9, string10);
                     return true;
                 case 6:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onError(readInt);
+                    onError(i3);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -184,79 +184,79 @@ public interface IDeviceInjectorCallback extends IInterface {
 
             @Override // android.hardware.IDeviceInjectorCallback
             public void onSessionCreated(IDeviceInjectorSession iDeviceInjectorSession) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDeviceInjectorSession);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDeviceInjectorSession);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IDeviceInjectorCallback
             public void onInjectionStarted(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IDeviceInjectorCallback
             public void onInjectionStopped(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IDeviceInjectorCallback
             public void onInjectionPendingStarted(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IDeviceInjectorCallback
             public void onInjectionPendingStopped(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IDeviceInjectorCallback
             public void onError(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

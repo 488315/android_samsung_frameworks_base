@@ -6,11 +6,9 @@ import com.android.systemui.statusbar.pipeline.shared.ui.model.InternetTileIconM
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface InternetTileModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Active implements InternetTileModel {
         public final ContentDescription contentDescription;
         public final InternetTileIconModel icon;
@@ -60,13 +58,13 @@ public interface InternetTileModel {
 
         public final int hashCode() {
             CharSequence charSequence = this.secondaryTitle;
-            int hashCode = (charSequence == null ? 0 : charSequence.hashCode()) * 31;
+            int iHashCode = (charSequence == null ? 0 : charSequence.hashCode()) * 31;
             Text text = this.secondaryLabel;
-            int hashCode2 = (this.icon.hashCode() + ((hashCode + (text == null ? 0 : text.hashCode())) * 31)) * 31;
+            int iHashCode2 = (this.icon.hashCode() + ((iHashCode + (text == null ? 0 : text.hashCode())) * 31)) * 31;
             ContentDescription contentDescription = this.stateDescription;
-            int hashCode3 = (hashCode2 + (contentDescription == null ? 0 : contentDescription.hashCode())) * 31;
+            int iHashCode3 = (iHashCode2 + (contentDescription == null ? 0 : contentDescription.hashCode())) * 31;
             ContentDescription contentDescription2 = this.contentDescription;
-            return hashCode3 + (contentDescription2 != null ? contentDescription2.hashCode() : 0);
+            return iHashCode3 + (contentDescription2 != null ? contentDescription2.hashCode() : 0);
         }
 
         public final String toString() {
@@ -86,7 +84,6 @@ public interface InternetTileModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Inactive implements InternetTileModel {
         public final ContentDescription contentDescription;
         public final InternetTileIconModel icon;
@@ -136,13 +133,13 @@ public interface InternetTileModel {
 
         public final int hashCode() {
             CharSequence charSequence = this.secondaryTitle;
-            int hashCode = (charSequence == null ? 0 : charSequence.hashCode()) * 31;
+            int iHashCode = (charSequence == null ? 0 : charSequence.hashCode()) * 31;
             Text text = this.secondaryLabel;
-            int hashCode2 = (this.icon.hashCode() + ((hashCode + (text == null ? 0 : text.hashCode())) * 31)) * 31;
+            int iHashCode2 = (this.icon.hashCode() + ((iHashCode + (text == null ? 0 : text.hashCode())) * 31)) * 31;
             ContentDescription contentDescription = this.stateDescription;
-            int hashCode3 = (hashCode2 + (contentDescription == null ? 0 : contentDescription.hashCode())) * 31;
+            int iHashCode3 = (iHashCode2 + (contentDescription == null ? 0 : contentDescription.hashCode())) * 31;
             ContentDescription contentDescription2 = this.contentDescription;
-            return hashCode3 + (contentDescription2 != null ? contentDescription2.hashCode() : 0);
+            return iHashCode3 + (contentDescription2 != null ? contentDescription2.hashCode() : 0);
         }
 
         public final String toString() {

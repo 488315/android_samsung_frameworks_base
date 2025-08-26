@@ -3,6 +3,7 @@ package android.inputmethodservice.navigationbar;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
@@ -31,7 +32,7 @@ final class ButtonDispatcher {
     private final ValueAnimator.AnimatorUpdateListener mAlphaListener = new ValueAnimator.AnimatorUpdateListener() { // from class: android.inputmethodservice.navigationbar.ButtonDispatcher$$ExternalSyntheticLambda0
         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
         public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-            ButtonDispatcher.this.lambda$new$0(valueAnimator);
+            this.f$0.lambda$new$0(valueAnimator);
         }
     };
     private final AnimatorListenerAdapter mFadeListener = new AnimatorListenerAdapter() { // from class: android.inputmethodservice.navigationbar.ButtonDispatcher.1
@@ -60,7 +61,7 @@ final class ButtonDispatcher {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public void addView(View view) {
+    public void addView(View view) throws Resources.NotFoundException {
         this.mViews.add(view);
         view.setOnClickListener(this.mClickListener);
         view.setOnTouchListener(this.mTouchListener);
@@ -165,9 +166,9 @@ final class ButtonDispatcher {
         }
         if (z) {
             setVisibility(0);
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(getAlpha(), f);
-            this.mFadeAnimator = ofFloat;
-            ofFloat.setDuration(j);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(getAlpha(), f);
+            this.mFadeAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setDuration(j);
             this.mFadeAnimator.setInterpolator(LINEAR);
             this.mFadeAnimator.addListener(this.mFadeListener);
             this.mFadeAnimator.addUpdateListener(this.mAlphaListener);
@@ -271,11 +272,11 @@ final class ButtonDispatcher {
     }
 
     public void setCurrentView(View view) {
-        View findViewById = view.findViewById(this.mId);
-        this.mCurrentView = findViewById;
+        View viewFindViewById = view.findViewById(this.mId);
+        this.mCurrentView = viewFindViewById;
         KeyButtonDrawable keyButtonDrawable = this.mImageDrawable;
         if (keyButtonDrawable != null) {
-            keyButtonDrawable.setCallback(findViewById);
+            keyButtonDrawable.setCallback(viewFindViewById);
         }
         View view2 = this.mCurrentView;
         if (view2 != null) {

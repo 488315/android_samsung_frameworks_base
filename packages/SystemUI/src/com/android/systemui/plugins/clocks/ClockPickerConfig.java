@@ -9,7 +9,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClockPickerConfig {
     public static final int $stable = 8;
@@ -122,9 +121,9 @@ public final class ClockPickerConfig {
     }
 
     public int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.axes, TransitionData$$ExternalSyntheticOutline0.m((this.thumbnail.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name), 31, this.description)) * 31, 31, this.isReactiveToTone), 31);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.axes, TransitionData$$ExternalSyntheticOutline0.m((this.thumbnail.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name), 31, this.description)) * 31, 31, this.isReactiveToTone), 31);
         AxisPresetConfig axisPresetConfig = this.presetConfig;
-        return m + (axisPresetConfig == null ? 0 : axisPresetConfig.hashCode());
+        return iM + (axisPresetConfig == null ? 0 : axisPresetConfig.hashCode());
     }
 
     public final boolean isReactiveToTone() {
@@ -139,18 +138,18 @@ public final class ClockPickerConfig {
         boolean z = this.isReactiveToTone;
         List<ClockFontAxis> list = this.axes;
         AxisPresetConfig axisPresetConfig = this.presetConfig;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("ClockPickerConfig(id=", str, ", name=", str2, ", description=");
-        m.append(str3);
-        m.append(", thumbnail=");
-        m.append(drawable);
-        m.append(", isReactiveToTone=");
-        m.append(z);
-        m.append(", axes=");
-        m.append(list);
-        m.append(", presetConfig=");
-        m.append(axisPresetConfig);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("ClockPickerConfig(id=", str, ", name=", str2, ", description=");
+        sbM.append(str3);
+        sbM.append(", thumbnail=");
+        sbM.append(drawable);
+        sbM.append(", isReactiveToTone=");
+        sbM.append(z);
+        sbM.append(", axes=");
+        sbM.append(list);
+        sbM.append(", presetConfig=");
+        sbM.append(axisPresetConfig);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     public ClockPickerConfig(String str, String str2, String str3, Drawable drawable, boolean z) {

@@ -4,11 +4,12 @@ import android.content.Context;
 import android.view.WindowManager;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.window.layout.util.DensityCompatHelper;
+import androidx.window.layout.util.DensityCompatHelperApi34Impl;
 import androidx.window.layout.util.WindowMetricsCompatHelper;
 import androidx.window.layout.util.WindowMetricsCompatHelperApi34Impl;
 import kotlin.collections.CollectionsKt__CollectionsKt;
+import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class WindowMetricsCalculatorCompat implements WindowMetricsCalculator {
     public WindowMetricsCalculatorCompat() {
@@ -27,22 +28,11 @@ public final class WindowMetricsCalculatorCompat implements WindowMetricsCalcula
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public WindowMetricsCalculatorCompat(androidx.window.layout.util.DensityCompatHelper r1, int r2, kotlin.jvm.internal.DefaultConstructorMarker r3) {
-        /*
-            r0 = this;
-            r2 = r2 & 1
-            if (r2 == 0) goto Lb
-            androidx.window.layout.util.DensityCompatHelper$Companion r1 = androidx.window.layout.util.DensityCompatHelper.Companion
-            r1.getClass()
-            androidx.window.layout.util.DensityCompatHelperApi34Impl r1 = androidx.window.layout.util.DensityCompatHelperApi34Impl.INSTANCE
-        Lb:
-            r0.<init>(r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.window.layout.WindowMetricsCalculatorCompat.<init>(androidx.window.layout.util.DensityCompatHelper, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public WindowMetricsCalculatorCompat(DensityCompatHelper densityCompatHelper, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i & 1) != 0) {
+            DensityCompatHelper.Companion.getClass();
+            densityCompatHelper = DensityCompatHelperApi34Impl.INSTANCE;
+        }
+        this(densityCompatHelper);
     }
 }

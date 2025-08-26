@@ -12,7 +12,6 @@ import com.google.protobuf.Schema;
 import com.google.protobuf.UninitializedMessageException;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MotionToolsRequest extends GeneratedMessageLite implements MessageLiteOrBuilder {
     public static final int BEGIN_TRACE_FIELD_NUMBER = 2;
@@ -25,7 +24,6 @@ public final class MotionToolsRequest extends GeneratedMessageLite implements Me
     private int typeCase_ = 0;
     private Object type_;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.app.motiontool.MotionToolsRequest$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke;
@@ -64,7 +62,6 @@ public final class MotionToolsRequest extends GeneratedMessageLite implements Me
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends GeneratedMessageLite.Builder {
         public /* synthetic */ Builder(AnonymousClass1 anonymousClass1) {
             this();
@@ -75,7 +72,6 @@ public final class MotionToolsRequest extends GeneratedMessageLite implements Me
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum TypeCase {
         HANDSHAKE(1),
         BEGIN_TRACE(2),
@@ -103,49 +99,49 @@ public final class MotionToolsRequest extends GeneratedMessageLite implements Me
     private MotionToolsRequest() {
     }
 
-    public static MotionToolsRequest parseFrom(byte[] bArr) {
+    public static MotionToolsRequest parseFrom(byte[] bArr) throws InvalidProtocolBufferException {
         MotionToolsRequest motionToolsRequest = DEFAULT_INSTANCE;
         int length = bArr.length;
         ExtensionRegistryLite emptyRegistry = ExtensionRegistryLite.getEmptyRegistry();
-        GeneratedMessageLite newMutableInstance$1 = motionToolsRequest.newMutableInstance$1();
+        GeneratedMessageLite generatedMessageLiteNewMutableInstance$1 = motionToolsRequest.newMutableInstance$1();
         try {
-            Schema schemaFor = Protobuf.INSTANCE.schemaFor(newMutableInstance$1);
-            schemaFor.mergeFrom(newMutableInstance$1, bArr, 0, length, new ArrayDecoders.Registers(emptyRegistry));
-            schemaFor.makeImmutable(newMutableInstance$1);
-            if (GeneratedMessageLite.isInitialized(newMutableInstance$1, true)) {
-                return (MotionToolsRequest) newMutableInstance$1;
+            Schema schemaSchemaFor = Protobuf.INSTANCE.schemaFor(generatedMessageLiteNewMutableInstance$1);
+            schemaSchemaFor.mergeFrom(generatedMessageLiteNewMutableInstance$1, bArr, 0, length, new ArrayDecoders.Registers(emptyRegistry));
+            schemaSchemaFor.makeImmutable(generatedMessageLiteNewMutableInstance$1);
+            if (GeneratedMessageLite.isInitialized(generatedMessageLiteNewMutableInstance$1, true)) {
+                return (MotionToolsRequest) generatedMessageLiteNewMutableInstance$1;
             }
-            InvalidProtocolBufferException invalidProtocolBufferException = new InvalidProtocolBufferException(new UninitializedMessageException(newMutableInstance$1).getMessage());
-            invalidProtocolBufferException.setUnfinishedMessage(newMutableInstance$1);
+            InvalidProtocolBufferException invalidProtocolBufferException = new InvalidProtocolBufferException(new UninitializedMessageException(generatedMessageLiteNewMutableInstance$1).getMessage());
+            invalidProtocolBufferException.setUnfinishedMessage(generatedMessageLiteNewMutableInstance$1);
             throw invalidProtocolBufferException;
         } catch (InvalidProtocolBufferException e) {
             InvalidProtocolBufferException invalidProtocolBufferException2 = e;
             if (invalidProtocolBufferException2.getThrownFromInputStream()) {
                 invalidProtocolBufferException2 = new InvalidProtocolBufferException((IOException) invalidProtocolBufferException2);
             }
-            invalidProtocolBufferException2.setUnfinishedMessage(newMutableInstance$1);
+            invalidProtocolBufferException2.setUnfinishedMessage(generatedMessageLiteNewMutableInstance$1);
             throw invalidProtocolBufferException2;
         } catch (UninitializedMessageException e2) {
             InvalidProtocolBufferException invalidProtocolBufferException3 = new InvalidProtocolBufferException(e2.getMessage());
-            invalidProtocolBufferException3.setUnfinishedMessage(newMutableInstance$1);
+            invalidProtocolBufferException3.setUnfinishedMessage(generatedMessageLiteNewMutableInstance$1);
             throw invalidProtocolBufferException3;
         } catch (IOException e3) {
             if (e3.getCause() instanceof InvalidProtocolBufferException) {
                 throw ((InvalidProtocolBufferException) e3.getCause());
             }
             InvalidProtocolBufferException invalidProtocolBufferException4 = new InvalidProtocolBufferException(e3);
-            invalidProtocolBufferException4.setUnfinishedMessage(newMutableInstance$1);
+            invalidProtocolBufferException4.setUnfinishedMessage(generatedMessageLiteNewMutableInstance$1);
             throw invalidProtocolBufferException4;
         } catch (IndexOutOfBoundsException unused) {
-            InvalidProtocolBufferException truncatedMessage = InvalidProtocolBufferException.truncatedMessage();
-            truncatedMessage.setUnfinishedMessage(newMutableInstance$1);
-            throw truncatedMessage;
+            InvalidProtocolBufferException invalidProtocolBufferExceptionTruncatedMessage = InvalidProtocolBufferException.truncatedMessage();
+            invalidProtocolBufferExceptionTruncatedMessage.setUnfinishedMessage(generatedMessageLiteNewMutableInstance$1);
+            throw invalidProtocolBufferExceptionTruncatedMessage;
         }
     }
 
     @Override // com.google.protobuf.GeneratedMessageLite
     public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-        Parser parser;
+        Parser defaultInstanceBasedParser;
         int i = AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()];
         AnonymousClass1 anonymousClass1 = null;
         switch (i) {
@@ -158,22 +154,22 @@ public final class MotionToolsRequest extends GeneratedMessageLite implements Me
             case 4:
                 return DEFAULT_INSTANCE;
             case 5:
-                Parser parser2 = PARSER;
-                if (parser2 != null) {
-                    return parser2;
+                Parser parser = PARSER;
+                if (parser != null) {
+                    return parser;
                 }
                 synchronized (MotionToolsRequest.class) {
                     try {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                return parser;
+                return defaultInstanceBasedParser;
             case 6:
                 return (byte) 1;
             case 7:

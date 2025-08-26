@@ -7,7 +7,6 @@ import com.android.internal.dynamicanimation.animation.SpringAnimation;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PropertyData {
     public SpringAnimation animator;
@@ -33,13 +32,13 @@ public final class PropertyData {
     }
 
     public final int hashCode() {
-        int m = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.offset, Float.hashCode(this.finalValue) * 31, 31);
+        int iM = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.offset, Float.hashCode(this.finalValue) * 31, 31);
         SpringAnimation springAnimation = this.animator;
-        int hashCode = (m + (springAnimation == null ? 0 : springAnimation.hashCode())) * 31;
+        int iHashCode = (iM + (springAnimation == null ? 0 : springAnimation.hashCode())) * 31;
         Runnable runnable = this.delayRunnable;
-        int m2 = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.startOffset, (hashCode + (runnable == null ? 0 : runnable.hashCode())) * 31, 31);
+        int iM2 = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.startOffset, (iHashCode + (runnable == null ? 0 : runnable.hashCode())) * 31, 31);
         DynamicAnimation.OnAnimationUpdateListener onAnimationUpdateListener = this.doubleOvershootAvoidingListener;
-        return m2 + (onAnimationUpdateListener != null ? onAnimationUpdateListener.hashCode() : 0);
+        return iM2 + (onAnimationUpdateListener != null ? onAnimationUpdateListener.hashCode() : 0);
     }
 
     public final String toString() {
@@ -49,16 +48,16 @@ public final class PropertyData {
         Runnable runnable = this.delayRunnable;
         float f3 = this.startOffset;
         DynamicAnimation.OnAnimationUpdateListener onAnimationUpdateListener = this.doubleOvershootAvoidingListener;
-        StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("PropertyData(finalValue=", f, ", offset=", f2, ", animator=");
-        m.append(springAnimation);
-        m.append(", delayRunnable=");
-        m.append(runnable);
-        m.append(", startOffset=");
-        m.append(f3);
-        m.append(", doubleOvershootAvoidingListener=");
-        m.append(onAnimationUpdateListener);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("PropertyData(finalValue=", f, ", offset=", f2, ", animator=");
+        sbM.append(springAnimation);
+        sbM.append(", delayRunnable=");
+        sbM.append(runnable);
+        sbM.append(", startOffset=");
+        sbM.append(f3);
+        sbM.append(", doubleOvershootAvoidingListener=");
+        sbM.append(onAnimationUpdateListener);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     public PropertyData(float f, float f2, SpringAnimation springAnimation, Runnable runnable, float f3, DynamicAnimation.OnAnimationUpdateListener onAnimationUpdateListener) {

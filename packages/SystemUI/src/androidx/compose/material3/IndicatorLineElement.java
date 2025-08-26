@@ -13,7 +13,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class IndicatorLineElement extends ModifierNodeElement<IndicatorLineNode> {
     public final TextFieldColors colors;
@@ -41,17 +40,17 @@ public final class IndicatorLineElement extends ModifierNodeElement<IndicatorLin
             return false;
         }
         IndicatorLineElement indicatorLineElement = (IndicatorLineElement) obj;
-        return this.enabled == indicatorLineElement.enabled && this.isError == indicatorLineElement.isError && Intrinsics.areEqual(this.interactionSource, indicatorLineElement.interactionSource) && Intrinsics.areEqual(this.colors, indicatorLineElement.colors) && Intrinsics.areEqual(this.textFieldShape, indicatorLineElement.textFieldShape) && Dp.m836equalsimpl0(this.focusedIndicatorLineThickness, indicatorLineElement.focusedIndicatorLineThickness) && Dp.m836equalsimpl0(this.unfocusedIndicatorLineThickness, indicatorLineElement.unfocusedIndicatorLineThickness);
+        return this.enabled == indicatorLineElement.enabled && this.isError == indicatorLineElement.isError && Intrinsics.areEqual(this.interactionSource, indicatorLineElement.interactionSource) && Intrinsics.areEqual(this.colors, indicatorLineElement.colors) && Intrinsics.areEqual(this.textFieldShape, indicatorLineElement.textFieldShape) && Dp.m838equalsimpl0(this.focusedIndicatorLineThickness, indicatorLineElement.focusedIndicatorLineThickness) && Dp.m838equalsimpl0(this.unfocusedIndicatorLineThickness, indicatorLineElement.unfocusedIndicatorLineThickness);
     }
 
     public final int hashCode() {
-        int hashCode = (this.interactionSource.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.enabled) * 31, 31, this.isError)) * 31;
+        int iHashCode = (this.interactionSource.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.enabled) * 31, 31, this.isError)) * 31;
         TextFieldColors textFieldColors = this.colors;
-        int hashCode2 = (hashCode + (textFieldColors == null ? 0 : textFieldColors.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (textFieldColors == null ? 0 : textFieldColors.hashCode())) * 31;
         Shape shape = this.textFieldShape;
-        int hashCode3 = (hashCode2 + (shape != null ? shape.hashCode() : 0)) * 31;
+        int iHashCode3 = (iHashCode2 + (shape != null ? shape.hashCode() : 0)) * 31;
         Dp.Companion companion = Dp.Companion;
-        return Float.hashCode(this.unfocusedIndicatorLineThickness) + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.focusedIndicatorLineThickness, hashCode3, 31);
+        return Float.hashCode(this.unfocusedIndicatorLineThickness) + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.focusedIndicatorLineThickness, iHashCode3, 31);
     }
 
     public final String toString() {
@@ -67,7 +66,7 @@ public final class IndicatorLineElement extends ModifierNodeElement<IndicatorLin
         sb.append(this.textFieldShape);
         sb.append(", focusedIndicatorLineThickness=");
         BorderModifierNodeElement$$ExternalSyntheticOutline0.m(this.focusedIndicatorLineThickness, ", unfocusedIndicatorLineThickness=", sb);
-        sb.append((Object) Dp.m837toStringimpl(this.unfocusedIndicatorLineThickness));
+        sb.append((Object) Dp.m839toStringimpl(this.unfocusedIndicatorLineThickness));
         sb.append(')');
         return sb.toString();
     }
@@ -118,13 +117,13 @@ public final class IndicatorLineElement extends ModifierNodeElement<IndicatorLin
         }
         float f = indicatorLineNode.focusedIndicatorWidth;
         float f2 = this.focusedIndicatorLineThickness;
-        if (!Dp.m836equalsimpl0(f, f2)) {
+        if (!Dp.m838equalsimpl0(f, f2)) {
             indicatorLineNode.focusedIndicatorWidth = f2;
             z = true;
         }
         float f3 = indicatorLineNode.unfocusedIndicatorWidth;
         float f4 = this.unfocusedIndicatorLineThickness;
-        if (Dp.m836equalsimpl0(f3, f4)) {
+        if (Dp.m838equalsimpl0(f3, f4)) {
             z4 = z;
         } else {
             indicatorLineNode.unfocusedIndicatorWidth = f4;

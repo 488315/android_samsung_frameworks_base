@@ -4,7 +4,6 @@ import androidx.collection.MutableObjectIntMap;
 import androidx.collection.ObjectIntMapKt;
 import androidx.compose.ui.internal.InlineClassHelperKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DepthSortedSet {
     public final boolean extraAssertions;
@@ -25,8 +24,8 @@ public final class DepthSortedSet {
             }
             MutableObjectIntMap mutableObjectIntMap = this.mapOfOriginalDepth;
             mutableObjectIntMap.getClass();
-            int findKeyIndex = mutableObjectIntMap.findKeyIndex(layoutNode);
-            int i = findKeyIndex >= 0 ? mutableObjectIntMap.values[findKeyIndex] : Integer.MAX_VALUE;
+            int iFindKeyIndex = mutableObjectIntMap.findKeyIndex(layoutNode);
+            int i = iFindKeyIndex >= 0 ? mutableObjectIntMap.values[iFindKeyIndex] : Integer.MAX_VALUE;
             if (i == Integer.MAX_VALUE) {
                 mutableObjectIntMap.set(layoutNode.depth, layoutNode);
             } else if (i != layoutNode.depth) {
@@ -37,26 +36,26 @@ public final class DepthSortedSet {
     }
 
     public final boolean contains(LayoutNode layoutNode) {
-        boolean contains = this.set.contains(layoutNode);
+        boolean zContains = this.set.contains(layoutNode);
         if (this.extraAssertions) {
             if (this.mapOfOriginalDepth == null) {
                 this.mapOfOriginalDepth = ObjectIntMapKt.mutableObjectIntMapOf();
             }
             MutableObjectIntMap mutableObjectIntMap = this.mapOfOriginalDepth;
             mutableObjectIntMap.getClass();
-            if (contains == (mutableObjectIntMap.findKeyIndex(layoutNode) >= 0)) {
-                return contains;
+            if (zContains == (mutableObjectIntMap.findKeyIndex(layoutNode) >= 0)) {
+                return zContains;
             }
             InlineClassHelperKt.throwIllegalStateException("inconsistency in TreeSet");
         }
-        return contains;
+        return zContains;
     }
 
     public final boolean remove(LayoutNode layoutNode) {
         if (!layoutNode.isAttached()) {
             InlineClassHelperKt.throwIllegalStateException("DepthSortedSet.remove called on an unattached node");
         }
-        boolean remove = this.set.remove(layoutNode);
+        boolean zRemove = this.set.remove(layoutNode);
         if (this.extraAssertions) {
             if (this.mapOfOriginalDepth == null) {
                 this.mapOfOriginalDepth = ObjectIntMapKt.mutableObjectIntMapOf();
@@ -65,17 +64,17 @@ public final class DepthSortedSet {
             mutableObjectIntMap.getClass();
             if (mutableObjectIntMap.findKeyIndex(layoutNode) >= 0) {
                 int i = mutableObjectIntMap.get(layoutNode);
-                int findKeyIndex = mutableObjectIntMap.findKeyIndex(layoutNode);
-                if (findKeyIndex >= 0) {
-                    mutableObjectIntMap.removeValueAt(findKeyIndex);
+                int iFindKeyIndex = mutableObjectIntMap.findKeyIndex(layoutNode);
+                if (iFindKeyIndex >= 0) {
+                    mutableObjectIntMap.removeValueAt(iFindKeyIndex);
                 }
-                if (i == (remove ? layoutNode.depth : Integer.MAX_VALUE)) {
-                    return remove;
+                if (i == (zRemove ? layoutNode.depth : Integer.MAX_VALUE)) {
+                    return zRemove;
                 }
                 InlineClassHelperKt.throwIllegalStateException("invalid node depth");
             }
         }
-        return remove;
+        return zRemove;
     }
 
     public final String toString() {

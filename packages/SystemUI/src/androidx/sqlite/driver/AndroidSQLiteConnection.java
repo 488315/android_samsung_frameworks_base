@@ -8,7 +8,6 @@ import androidx.sqlite.driver.AndroidSQLiteStatement;
 import java.util.Locale;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidSQLiteConnection implements SQLiteConnection {
     public final SQLiteDatabase db;
@@ -25,7 +24,7 @@ public final class AndroidSQLiteConnection implements SQLiteConnection {
     @Override // androidx.sqlite.SQLiteConnection
     public final SQLiteStatement prepare(String str) {
         String upperCase;
-        int hashCode;
+        int iHashCode;
         if (!this.db.isOpen()) {
             SQLite.throwSQLiteException(21, "connection is closed");
             throw null;
@@ -33,7 +32,7 @@ public final class AndroidSQLiteConnection implements SQLiteConnection {
         AndroidSQLiteStatement.Companion companion = AndroidSQLiteStatement.Companion;
         SQLiteDatabase sQLiteDatabase = this.db;
         companion.getClass();
-        String obj = StringsKt__StringsKt.trim(str).toString();
-        return (obj.length() >= 3 && ((hashCode = (upperCase = obj.substring(0, 3).toUpperCase(Locale.ROOT)).hashCode()) == 79487 ? upperCase.equals("PRA") : !(hashCode == 81978 ? !upperCase.equals("SEL") : !(hashCode == 85954 && upperCase.equals("WIT"))))) ? new AndroidSQLiteStatement.SelectAndroidSQLiteStatement(sQLiteDatabase, str) : new AndroidSQLiteStatement.OtherAndroidSQLiteStatement(sQLiteDatabase, str);
+        String string = StringsKt__StringsKt.trim(str).toString();
+        return (string.length() >= 3 && ((iHashCode = (upperCase = string.substring(0, 3).toUpperCase(Locale.ROOT)).hashCode()) == 79487 ? upperCase.equals("PRA") : !(iHashCode == 81978 ? !upperCase.equals("SEL") : !(iHashCode == 85954 && upperCase.equals("WIT"))))) ? new AndroidSQLiteStatement.SelectAndroidSQLiteStatement(sQLiteDatabase, str) : new AndroidSQLiteStatement.OtherAndroidSQLiteStatement(sQLiteDatabase, str);
     }
 }

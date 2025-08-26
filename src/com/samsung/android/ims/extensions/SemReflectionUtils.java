@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 
 /* loaded from: classes6.dex */
 public class SemReflectionUtils {
-    public static Field getField(Class<?> cls, String str) {
+    public static Field getField(Class<?> cls, String str) throws NoSuchFieldException {
         Class<? super Object> superclass = cls.getSuperclass();
         try {
             Field declaredField = cls.getDeclaredField(str);
@@ -41,7 +41,7 @@ public class SemReflectionUtils {
         }
     }
 
-    public static <T> T getValueOf(String str, Class<?> cls) {
+    public static <T> T getValueOf(String str, Class<?> cls) throws NoSuchFieldException {
         Field field = getField(cls, str);
         if (field != null) {
             return (T) getValueOf(field, (Object) null);
@@ -49,7 +49,7 @@ public class SemReflectionUtils {
         return null;
     }
 
-    public static void invoke(Method method, Object obj, Object... objArr) {
+    public static void invoke(Method method, Object obj, Object... objArr) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (method == null) {
             return;
         }

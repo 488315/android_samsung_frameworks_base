@@ -27,24 +27,24 @@ public class IntentFactory {
         return createCredentialSelectorIntentInternal(context, requestInfo, arrayList, resultReceiver, i);
     }
 
-    public static IntentCreationResult createCredentialSelectorIntentForCredMan(Context context, RequestInfo requestInfo, ArrayList<ProviderData> arrayList, ArrayList<DisabledProviderData> arrayList2, ResultReceiver resultReceiver, int i) {
-        IntentCreationResult createCredentialSelectorIntentInternal = createCredentialSelectorIntentInternal(context, requestInfo, arrayList2, resultReceiver, i);
-        createCredentialSelectorIntentInternal.getIntent().putParcelableArrayListExtra(ProviderData.EXTRA_ENABLED_PROVIDER_DATA_LIST, arrayList);
-        return createCredentialSelectorIntentInternal;
+    public static IntentCreationResult createCredentialSelectorIntentForCredMan(Context context, RequestInfo requestInfo, ArrayList<ProviderData> arrayList, ArrayList<DisabledProviderData> arrayList2, ResultReceiver resultReceiver, int i) throws Resources.NotFoundException {
+        IntentCreationResult intentCreationResultCreateCredentialSelectorIntentInternal = createCredentialSelectorIntentInternal(context, requestInfo, arrayList2, resultReceiver, i);
+        intentCreationResultCreateCredentialSelectorIntentInternal.getIntent().putParcelableArrayListExtra(ProviderData.EXTRA_ENABLED_PROVIDER_DATA_LIST, arrayList);
+        return intentCreationResultCreateCredentialSelectorIntentInternal;
     }
 
     public static Intent createCredentialSelectorIntent(Context context, RequestInfo requestInfo, ArrayList<ProviderData> arrayList, ArrayList<DisabledProviderData> arrayList2, ResultReceiver resultReceiver, int i) {
         return createCredentialSelectorIntentForCredMan(context, requestInfo, arrayList, arrayList2, resultReceiver, i).getIntent();
     }
 
-    public static Intent createCancelUiIntent(Context context, IBinder iBinder, boolean z, String str, int i) {
+    public static Intent createCancelUiIntent(Context context, IBinder iBinder, boolean z, String str, int i) throws Resources.NotFoundException {
         Intent intent = new Intent();
         setCredentialSelectorUiComponentName(context, intent, new IntentCreationResult.Builder(intent), i);
         intent.putExtra(CancelSelectionRequest.EXTRA_CANCEL_UI_REQUEST, new CancelSelectionRequest(new RequestToken(iBinder), z, str));
         return intent;
     }
 
-    private static IntentCreationResult createCredentialSelectorIntentInternal(Context context, RequestInfo requestInfo, ArrayList<DisabledProviderData> arrayList, ResultReceiver resultReceiver, int i) {
+    private static IntentCreationResult createCredentialSelectorIntentInternal(Context context, RequestInfo requestInfo, ArrayList<DisabledProviderData> arrayList, ResultReceiver resultReceiver, int i) throws Resources.NotFoundException {
         Intent intent = new Intent();
         IntentCreationResult.Builder builder = new IntentCreationResult.Builder(intent);
         setCredentialSelectorUiComponentName(context, intent, builder, i);
@@ -54,18 +54,18 @@ public class IntentFactory {
         return builder.build();
     }
 
-    private static void setCredentialSelectorUiComponentName(Context context, Intent intent, IntentCreationResult.Builder builder, int i) {
+    private static void setCredentialSelectorUiComponentName(Context context, Intent intent, IntentCreationResult.Builder builder, int i) throws Resources.NotFoundException {
         if (Flags.configurableSelectorUiEnabled()) {
             ComponentName oemOverrideComponentName = getOemOverrideComponentName(context, builder, i);
-            ComponentName componentName = null;
+            ComponentName componentNameUnflattenFromString = null;
             try {
-                componentName = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.config_fallbackCredentialManagerDialogComponent));
-                builder.setFallbackUiPackageName(componentName.getPackageName());
+                componentNameUnflattenFromString = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.config_fallbackCredentialManagerDialogComponent));
+                builder.setFallbackUiPackageName(componentNameUnflattenFromString.getPackageName());
             } catch (Exception e) {
                 Slog.w(TAG, "Fallback CredMan IU not found: " + e);
             }
             if (oemOverrideComponentName == null) {
-                oemOverrideComponentName = componentName;
+                oemOverrideComponentName = componentNameUnflattenFromString;
             }
             intent.setComponent(oemOverrideComponentName);
             return;
@@ -73,30 +73,30 @@ public class IntentFactory {
         intent.setComponent(ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.config_fallbackCredentialManagerDialogComponent)));
     }
 
-    private static ComponentName getOemOverrideComponentName(Context context, IntentCreationResult.Builder builder, int i) {
-        ComponentName componentName;
+    private static ComponentName getOemOverrideComponentName(Context context, IntentCreationResult.Builder builder, int i) throws Resources.NotFoundException {
+        ComponentName componentNameUnflattenFromString;
         ActivityInfo activityInfo;
         String string = Resources.getSystem().getString(R.string.config_oemCredentialManagerDialogComponent);
         if (!TextUtils.isEmpty(string)) {
             try {
-                componentName = ComponentName.unflattenFromString(string);
+                componentNameUnflattenFromString = ComponentName.unflattenFromString(string);
             } catch (Exception e) {
                 Slog.i(TAG, "Failed to parse OEM component name " + string + ": " + e);
-                componentName = null;
+                componentNameUnflattenFromString = null;
             }
-            if (componentName != null) {
+            if (componentNameUnflattenFromString != null) {
                 try {
-                    builder.setOemUiPackageName(componentName.getPackageName());
+                    builder.setOemUiPackageName(componentNameUnflattenFromString.getPackageName());
                     if (Flags.propagateUserContextForIntentCreation()) {
-                        activityInfo = context.getPackageManager().getActivityInfo(componentName, PackageManager.ComponentInfoFlags.of(1048576L));
+                        activityInfo = context.getPackageManager().getActivityInfo(componentNameUnflattenFromString, PackageManager.ComponentInfoFlags.of(1048576L));
                     } else {
-                        activityInfo = AppGlobals.getPackageManager().getActivityInfo(componentName, 0L, i);
+                        activityInfo = AppGlobals.getPackageManager().getActivityInfo(componentNameUnflattenFromString, 0L, i);
                     }
                     if (activityInfo == null) {
                         return null;
                     }
                     boolean z = activityInfo.enabled;
-                    int componentEnabledSetting = context.getPackageManager().getComponentEnabledSetting(componentName);
+                    int componentEnabledSetting = context.getPackageManager().getComponentEnabledSetting(componentNameUnflattenFromString);
                     if (componentEnabledSetting == 1) {
                         z = true;
                     } else if (componentEnabledSetting == 2) {
@@ -105,7 +105,7 @@ public class IntentFactory {
                     if (z && activityInfo.exported) {
                         builder.setOemUiUsageStatus(IntentCreationResult.OemUiUsageStatus.SUCCESS);
                         Slog.i(TAG, "Found enabled oem CredMan UI component." + string);
-                        return componentName;
+                        return componentNameUnflattenFromString;
                     }
                     builder.setOemUiUsageStatus(IntentCreationResult.OemUiUsageStatus.OEM_UI_CONFIG_SPECIFIED_FOUND_BUT_NOT_ENABLED);
                     Slog.i(TAG, "Found enabled oem CredMan UI component but it was not enabled.");
@@ -126,12 +126,12 @@ public class IntentFactory {
     }
 
     private static <T extends ResultReceiver> ResultReceiver toIpcFriendlyResultReceiver(T t) {
-        Parcel obtain = Parcel.obtain();
-        t.writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        ResultReceiver createFromParcel = ResultReceiver.CREATOR.createFromParcel(obtain);
-        obtain.recycle();
-        return createFromParcel;
+        Parcel parcelObtain = Parcel.obtain();
+        t.writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        ResultReceiver resultReceiverCreateFromParcel = ResultReceiver.CREATOR.createFromParcel(parcelObtain);
+        parcelObtain.recycle();
+        return resultReceiverCreateFromParcel;
     }
 
     private IntentFactory() {

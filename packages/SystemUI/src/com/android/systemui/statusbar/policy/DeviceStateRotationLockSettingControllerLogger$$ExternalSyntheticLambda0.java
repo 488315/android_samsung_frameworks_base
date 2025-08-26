@@ -8,7 +8,6 @@ import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -21,7 +20,7 @@ public final /* synthetic */ class DeviceStateRotationLockSettingControllerLogge
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -34,9 +33,9 @@ public final /* synthetic */ class DeviceStateRotationLockSettingControllerLogge
                 String str = int2 != 0 ? int2 != 1 ? int2 != 2 ? C2paManifestList.UNKNOWN_VALUE : "UNLOCKED" : "LOCKED" : "IGNORED";
                 boolean bool1 = logMessage.getBool1();
                 boolean bool2 = logMessage.getBool2();
-                StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(int1, "readPersistedSetting: caller=", str1, ", state=", " [");
-                MoveResult$$ExternalSyntheticOutline0.m(m888m, devicePostureString, "], rotationLockSettingForState: ", str, ", shouldBeLocked=");
-                return KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m888m, bool1, ", isLocked=", bool2);
+                StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(int1, "readPersistedSetting: caller=", str1, ", state=", " [");
+                MoveResult$$ExternalSyntheticOutline0.m(sbM890m, devicePostureString, "], rotationLockSettingForState: ", str, ", shouldBeLocked=");
+                return KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM890m, bool1, ", isLocked=", bool2);
             default:
                 int int12 = logMessage.getInt1();
                 int int13 = logMessage.getInt1();
@@ -44,12 +43,12 @@ public final /* synthetic */ class DeviceStateRotationLockSettingControllerLogge
                 String devicePostureString2 = deviceStateRotationLockSettingControllerLogger.toDevicePostureString(int13);
                 int int22 = logMessage.getInt2();
                 String devicePostureString3 = deviceStateRotationLockSettingControllerLogger.toDevicePostureString(logMessage.getInt2());
-                StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int12, "updateDeviceState: current=", " [", devicePostureString2, "], new=");
-                m.append(int22);
-                m.append(" [");
-                m.append(devicePostureString3);
-                m.append("]");
-                return m.toString();
+                StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(int12, "updateDeviceState: current=", " [", devicePostureString2, "], new=");
+                sbM.append(int22);
+                sbM.append(" [");
+                sbM.append(devicePostureString3);
+                sbM.append("]");
+                return sbM.toString();
         }
     }
 }

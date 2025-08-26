@@ -107,16 +107,16 @@ public final class BasicPwleSegment extends VibrationEffectSegment {
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public BasicPwleSegment scale(float f) {
-        float scale = VibrationEffect.scale(this.mStartIntensity, f);
-        float scale2 = VibrationEffect.scale(this.mEndIntensity, f);
-        return (Float.compare(this.mStartIntensity, scale) == 0 && Float.compare(this.mEndIntensity, scale2) == 0) ? this : new BasicPwleSegment(scale, scale2, this.mStartSharpness, this.mEndSharpness, this.mDuration);
+        float fScale = VibrationEffect.scale(this.mStartIntensity, f);
+        float fScale2 = VibrationEffect.scale(this.mEndIntensity, f);
+        return (Float.compare(this.mStartIntensity, fScale) == 0 && Float.compare(this.mEndIntensity, fScale2) == 0) ? this : new BasicPwleSegment(fScale, fScale2, this.mStartSharpness, this.mEndSharpness, this.mDuration);
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public BasicPwleSegment scaleLinearly(float f) {
-        float scaleLinearly = VibrationEffect.scaleLinearly(this.mStartIntensity, f);
-        float scaleLinearly2 = VibrationEffect.scaleLinearly(this.mEndIntensity, f);
-        return (Float.compare(this.mStartIntensity, scaleLinearly) == 0 && Float.compare(this.mEndIntensity, scaleLinearly2) == 0) ? this : new BasicPwleSegment(scaleLinearly, scaleLinearly2, this.mStartSharpness, this.mEndSharpness, this.mDuration);
+        float fScaleLinearly = VibrationEffect.scaleLinearly(this.mStartIntensity, f);
+        float fScaleLinearly2 = VibrationEffect.scaleLinearly(this.mEndIntensity, f);
+        return (Float.compare(this.mStartIntensity, fScaleLinearly) == 0 && Float.compare(this.mEndIntensity, fScaleLinearly2) == 0) ? this : new BasicPwleSegment(fScaleLinearly, fScaleLinearly2, this.mStartSharpness, this.mEndSharpness, this.mDuration);
     }
 
     public int hashCode() {

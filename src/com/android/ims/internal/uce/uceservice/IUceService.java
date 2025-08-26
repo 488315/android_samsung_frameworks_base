@@ -157,9 +157,9 @@ public interface IUceService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUceService)) {
-                return (IUceService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUceService)) {
+                return (IUceService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -215,70 +215,70 @@ public interface IUceService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IUceListener asInterface = IUceListener.Stub.asInterface(parcel.readStrongBinder());
+                    IUceListener iUceListenerAsInterface = IUceListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean startService = startService(asInterface);
+                    boolean zStartService = startService(iUceListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(startService);
+                    parcel2.writeBoolean(zStartService);
                     return true;
                 case 2:
-                    boolean stopService = stopService();
+                    boolean zStopService = stopService();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(stopService);
+                    parcel2.writeBoolean(zStopService);
                     return true;
                 case 3:
-                    boolean isServiceStarted = isServiceStarted();
+                    boolean zIsServiceStarted = isServiceStarted();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isServiceStarted);
+                    parcel2.writeBoolean(zIsServiceStarted);
                     return true;
                 case 4:
-                    IOptionsListener asInterface2 = IOptionsListener.Stub.asInterface(parcel.readStrongBinder());
+                    IOptionsListener iOptionsListenerAsInterface = IOptionsListener.Stub.asInterface(parcel.readStrongBinder());
                     UceLong uceLong = (UceLong) parcel.readTypedObject(UceLong.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int createOptionsService = createOptionsService(asInterface2, uceLong);
+                    int iCreateOptionsService = createOptionsService(iOptionsListenerAsInterface, uceLong);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createOptionsService);
+                    parcel2.writeInt(iCreateOptionsService);
                     parcel2.writeTypedObject(uceLong, 1);
                     return true;
                 case 5:
-                    IOptionsListener asInterface3 = IOptionsListener.Stub.asInterface(parcel.readStrongBinder());
+                    IOptionsListener iOptionsListenerAsInterface2 = IOptionsListener.Stub.asInterface(parcel.readStrongBinder());
                     UceLong uceLong2 = (UceLong) parcel.readTypedObject(UceLong.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int createOptionsServiceForSubscription = createOptionsServiceForSubscription(asInterface3, uceLong2, readString);
+                    int iCreateOptionsServiceForSubscription = createOptionsServiceForSubscription(iOptionsListenerAsInterface2, uceLong2, string);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createOptionsServiceForSubscription);
+                    parcel2.writeInt(iCreateOptionsServiceForSubscription);
                     parcel2.writeTypedObject(uceLong2, 1);
                     return true;
                 case 6:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    destroyOptionsService(readInt);
+                    destroyOptionsService(i3);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    IPresenceListener asInterface4 = IPresenceListener.Stub.asInterface(parcel.readStrongBinder());
+                    IPresenceListener iPresenceListenerAsInterface = IPresenceListener.Stub.asInterface(parcel.readStrongBinder());
                     UceLong uceLong3 = (UceLong) parcel.readTypedObject(UceLong.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int createPresenceService = createPresenceService(asInterface4, uceLong3);
+                    int iCreatePresenceService = createPresenceService(iPresenceListenerAsInterface, uceLong3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createPresenceService);
+                    parcel2.writeInt(iCreatePresenceService);
                     parcel2.writeTypedObject(uceLong3, 1);
                     return true;
                 case 8:
-                    IPresenceListener asInterface5 = IPresenceListener.Stub.asInterface(parcel.readStrongBinder());
+                    IPresenceListener iPresenceListenerAsInterface2 = IPresenceListener.Stub.asInterface(parcel.readStrongBinder());
                     UceLong uceLong4 = (UceLong) parcel.readTypedObject(UceLong.CREATOR);
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int createPresenceServiceForSubscription = createPresenceServiceForSubscription(asInterface5, uceLong4, readString2);
+                    int iCreatePresenceServiceForSubscription = createPresenceServiceForSubscription(iPresenceListenerAsInterface2, uceLong4, string2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createPresenceServiceForSubscription);
+                    parcel2.writeInt(iCreatePresenceServiceForSubscription);
                     parcel2.writeTypedObject(uceLong4, 1);
                     return true;
                 case 9:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    destroyPresenceService(readInt2);
+                    destroyPresenceService(i4);
                     parcel2.writeNoException();
                     return true;
                 case 10:
@@ -292,9 +292,9 @@ public interface IUceService extends IInterface {
                     parcel2.writeStrongInterface(presenceService);
                     return true;
                 case 12:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IPresenceService presenceServiceForSubscription = getPresenceServiceForSubscription(readString3);
+                    IPresenceService presenceServiceForSubscription = getPresenceServiceForSubscription(string3);
                     parcel2.writeNoException();
                     parcel2.writeStrongInterface(presenceServiceForSubscription);
                     return true;
@@ -304,9 +304,9 @@ public interface IUceService extends IInterface {
                     parcel2.writeStrongInterface(optionsService);
                     return true;
                 case 14:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IOptionsService optionsServiceForSubscription = getOptionsServiceForSubscription(readString4);
+                    IOptionsService optionsServiceForSubscription = getOptionsServiceForSubscription(string4);
                     parcel2.writeNoException();
                     parcel2.writeStrongInterface(optionsServiceForSubscription);
                     return true;
@@ -333,240 +333,240 @@ public interface IUceService extends IInterface {
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public boolean startService(IUceListener iUceListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iUceListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iUceListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public boolean stopService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public boolean isServiceStarted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public int createOptionsService(IOptionsListener iOptionsListener, UceLong uceLong) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOptionsListener);
-                    obtain.writeTypedObject(uceLong, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    if (obtain2.readInt() != 0) {
-                        uceLong.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOptionsListener);
+                    parcelObtain.writeTypedObject(uceLong, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    if (parcelObtain2.readInt() != 0) {
+                        uceLong.readFromParcel(parcelObtain2);
                     }
-                    return readInt;
+                    return i;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public int createOptionsServiceForSubscription(IOptionsListener iOptionsListener, UceLong uceLong, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOptionsListener);
-                    obtain.writeTypedObject(uceLong, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    if (obtain2.readInt() != 0) {
-                        uceLong.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOptionsListener);
+                    parcelObtain.writeTypedObject(uceLong, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    if (parcelObtain2.readInt() != 0) {
+                        uceLong.readFromParcel(parcelObtain2);
                     }
-                    return readInt;
+                    return i;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public void destroyOptionsService(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public int createPresenceService(IPresenceListener iPresenceListener, UceLong uceLong) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPresenceListener);
-                    obtain.writeTypedObject(uceLong, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    if (obtain2.readInt() != 0) {
-                        uceLong.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPresenceListener);
+                    parcelObtain.writeTypedObject(uceLong, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    if (parcelObtain2.readInt() != 0) {
+                        uceLong.readFromParcel(parcelObtain2);
                     }
-                    return readInt;
+                    return i;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public int createPresenceServiceForSubscription(IPresenceListener iPresenceListener, UceLong uceLong, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPresenceListener);
-                    obtain.writeTypedObject(uceLong, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    if (obtain2.readInt() != 0) {
-                        uceLong.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPresenceListener);
+                    parcelObtain.writeTypedObject(uceLong, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    if (parcelObtain2.readInt() != 0) {
+                        uceLong.readFromParcel(parcelObtain2);
                     }
-                    return readInt;
+                    return i;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public void destroyPresenceService(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public boolean getServiceStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public IPresenceService getPresenceService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IPresenceService.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IPresenceService.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public IPresenceService getPresenceServiceForSubscription(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IPresenceService.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IPresenceService.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public IOptionsService getOptionsService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IOptionsService.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IOptionsService.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.uceservice.IUceService
             public IOptionsService getOptionsServiceForSubscription(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IOptionsService.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IOptionsService.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

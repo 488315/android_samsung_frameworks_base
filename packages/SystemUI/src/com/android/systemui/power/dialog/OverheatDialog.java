@@ -8,7 +8,6 @@ import com.android.systemui.R;
 import com.android.systemui.power.SecBatterySnapshot;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class OverheatDialog extends PowerUiDialog {
     public OverheatDialog(Context context) {
@@ -29,9 +28,9 @@ public class OverheatDialog extends PowerUiDialog {
         alertParams.mTitle = z ? this.mContext.getString(R.string.cooling_title_vzw) : this.mContext.getString(R.string.cooling_popup_title);
         alertParams.mMessage = z ? DeviceType.isTablet() ? this.mContext.getString(R.string.cooling_body_tablet_vzw) : this.mContext.getString(R.string.cooling_body_vzw) : this.mContext.getString(R.string.cooling_body);
         builder.setPositiveButton(this.mContext.getString(R.string.dialog_button_text_ok), null);
-        AlertDialog create = builder.create();
-        create.getWindow().setType(2009);
-        return create;
+        AlertDialog alertDialogCreate = builder.create();
+        alertDialogCreate.getWindow().setType(2009);
+        return alertDialogCreate;
     }
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog

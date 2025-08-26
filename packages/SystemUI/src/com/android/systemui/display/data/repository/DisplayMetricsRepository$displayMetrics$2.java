@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DisplayMetricsRepository$displayMetrics$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ LogBuffer $logBuffer;
@@ -46,9 +45,9 @@ final class DisplayMetricsRepository$displayMetrics$2 extends SuspendLambda impl
         ResultKt.throwOnFailure(obj);
         DisplayMetrics displayMetrics = (DisplayMetrics) this.L$0;
         LogBuffer logBuffer = this.$logBuffer;
-        LogMessage obtain = logBuffer.obtain("DisplayMetrics", LogLevel.INFO, new DisplayMetricsRepository$displayMetrics$2$$ExternalSyntheticLambda0(), null);
-        ((LogMessageImpl) obtain).str1 = displayMetrics.toString();
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("DisplayMetrics", LogLevel.INFO, new DisplayMetricsRepository$displayMetrics$2$$ExternalSyntheticLambda0(), null);
+        ((LogMessageImpl) logMessageObtain).str1 = displayMetrics.toString();
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

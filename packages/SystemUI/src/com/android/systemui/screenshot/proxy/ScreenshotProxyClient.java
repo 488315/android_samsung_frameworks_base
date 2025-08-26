@@ -8,7 +8,6 @@ import com.android.internal.infra.ServiceConnector;
 import com.android.systemui.screenshot.proxy.IScreenshotProxy;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenshotProxyClient implements ScreenshotProxy {
     public final ServiceConnector proxyConnector;
@@ -22,8 +21,8 @@ public final class ScreenshotProxyClient implements ScreenshotProxy {
                 if (iBinder == null) {
                     return null;
                 }
-                IInterface queryLocalInterface = iBinder.queryLocalInterface("com.android.systemui.screenshot.proxy.IScreenshotProxy");
-                return (queryLocalInterface == null || !(queryLocalInterface instanceof IScreenshotProxy)) ? new IScreenshotProxy.Stub.Proxy(iBinder) : (IScreenshotProxy) queryLocalInterface;
+                IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.android.systemui.screenshot.proxy.IScreenshotProxy");
+                return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IScreenshotProxy)) ? new IScreenshotProxy.Stub.Proxy(iBinder) : (IScreenshotProxy) iInterfaceQueryLocalInterface;
             }
         });
     }

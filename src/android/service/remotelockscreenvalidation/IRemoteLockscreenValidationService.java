@@ -45,9 +45,9 @@ public interface IRemoteLockscreenValidationService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteLockscreenValidationService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteLockscreenValidationService)) {
-                return (IRemoteLockscreenValidationService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteLockscreenValidationService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteLockscreenValidationService)) {
+                return (IRemoteLockscreenValidationService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IRemoteLockscreenValidationService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte[] createByteArray = parcel.createByteArray();
-                IRemoteLockscreenValidationCallback asInterface = IRemoteLockscreenValidationCallback.Stub.asInterface(parcel.readStrongBinder());
+                byte[] bArrCreateByteArray = parcel.createByteArray();
+                IRemoteLockscreenValidationCallback iRemoteLockscreenValidationCallbackAsInterface = IRemoteLockscreenValidationCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                validateLockscreenGuess(createByteArray, asInterface);
+                validateLockscreenGuess(bArrCreateByteArray, iRemoteLockscreenValidationCallbackAsInterface);
                 parcel2.writeNoException();
                 return true;
             }
@@ -102,17 +102,17 @@ public interface IRemoteLockscreenValidationService extends IInterface {
 
             @Override // android.service.remotelockscreenvalidation.IRemoteLockscreenValidationService
             public void validateLockscreenGuess(byte[] bArr, IRemoteLockscreenValidationCallback iRemoteLockscreenValidationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteLockscreenValidationService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeStrongInterface(iRemoteLockscreenValidationCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteLockscreenValidationService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeStrongInterface(iRemoteLockscreenValidationCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

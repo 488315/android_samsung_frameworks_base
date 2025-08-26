@@ -9,8 +9,10 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Slog;
 import android.view.SurfaceControl;
 import com.android.internal.util.GcUtils;
+import com.samsung.android.rune.CoreRune;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -35,7 +37,9 @@ public class SurfaceControlRegistry {
     private static final Object sLock = new Object();
     static boolean sLogAllTxCallsOnApply;
     private static volatile SurfaceControlRegistry sProcessRegistry;
+    public final int INSETS_LEASH_MAX;
     private boolean mHasReportedExceedingMaxThreshold;
+    private int mInsetsLeashNum;
     private int mMaxLayersReportingThreshold;
     private Reporter mReporter;
     private int mResetReportingThreshold;
@@ -52,7 +56,7 @@ public class SurfaceControlRegistry {
 
         @Override // android.view.SurfaceControlRegistry.Reporter
         public void onMaxLayersExceeded(WeakHashMap<SurfaceControl, Long> weakHashMap, int i, PrintWriter printWriter) {
-            long elapsedRealtime = SystemClock.elapsedRealtime();
+            long jElapsedRealtime = SystemClock.elapsedRealtime();
             ArrayList arrayList = new ArrayList();
             Iterator<Map.Entry<SurfaceControl, Long>> it = weakHashMap.entrySet().iterator();
             while (it.hasNext()) {
@@ -61,24 +65,22 @@ public class SurfaceControlRegistry {
             arrayList.sort(new Comparator() { // from class: android.view.SurfaceControlRegistry$DefaultReporter$$ExternalSyntheticLambda0
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
-                    int compare;
-                    compare = Long.compare(((Long) ((Map.Entry) obj).getValue()).longValue(), ((Long) ((Map.Entry) obj2).getValue()).longValue());
-                    return compare;
+                    return Long.compare(((Long) ((Map.Entry) obj).getValue()).longValue(), ((Long) ((Map.Entry) obj2).getValue()).longValue());
                 }
             });
-            int min = Math.min(arrayList.size(), i);
+            int iMin = Math.min(arrayList.size(), i);
             printWriter.println(SurfaceControlRegistry.TAG);
             printWriter.println("----------------------");
-            printWriter.println("Listing oldest " + min + " of " + weakHashMap.size());
-            for (int i2 = 0; i2 < min; i2++) {
+            printWriter.println("Listing oldest " + iMin + " of " + weakHashMap.size());
+            for (int i2 = 0; i2 < iMin; i2++) {
                 Map.Entry entry = (Map.Entry) arrayList.get(i2);
                 SurfaceControl surfaceControl = (SurfaceControl) entry.getKey();
                 if (surfaceControl != null) {
-                    long longValue = ((Long) entry.getValue()).longValue();
+                    long jLongValue = ((Long) entry.getValue()).longValue();
                     printWriter.print("  ");
                     printWriter.print(surfaceControl.getName());
                     printWriter.print(" (" + surfaceControl.getCallsite() + NavigationBarInflaterView.KEY_CODE_END);
-                    printWriter.println(" [" + ((elapsedRealtime - longValue) / 1000) + "s ago]");
+                    printWriter.println(" [" + ((jElapsedRealtime - jLongValue) / 1000) + "s ago]");
                 }
             }
         }
@@ -94,6 +96,8 @@ public class SurfaceControlRegistry {
         this.mResetReportingThreshold = 256;
         this.mHasReportedExceedingMaxThreshold = false;
         this.mReporter = sDefaultReporter;
+        this.INSETS_LEASH_MAX = SystemProperties.getInt("persist.wm.debug.shell.insets_leash.max", 20);
+        this.mInsetsLeashNum = 0;
         this.mSurfaceControls = new WeakHashMap<>(256);
     }
 
@@ -147,10 +151,36 @@ public class SurfaceControlRegistry {
         return surfaceControlRegistry;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0051 A[Catch: all -> 0x0073, TryCatch #1 {, blocks: (B:4:0x0005, B:7:0x0019, B:9:0x001f, B:11:0x0028, B:15:0x0036, B:14:0x002f, B:16:0x0051, B:18:0x0055, B:20:0x005f, B:21:0x0071), top: B:28:0x0005, inners: #0 }] */
+    /* JADX WARN: Type inference failed for: r0v6, types: [android.view.SurfaceControlRegistry$1] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     void add(SurfaceControl surfaceControl) {
         synchronized (sLock) {
             this.mSurfaceControls.put(surfaceControl, Long.valueOf(SystemClock.elapsedRealtime()));
-            if (!this.mHasReportedExceedingMaxThreshold && this.mSurfaceControls.size() >= this.mMaxLayersReportingThreshold) {
+            if (CoreRune.FW_TEMP_TOO_MANY_INSETS_LEASH_BUG_FIX && surfaceControl != null && surfaceControl.isInsetsLeash()) {
+                int i = this.mInsetsLeashNum + 1;
+                this.mInsetsLeashNum = i;
+                if (i > this.INSETS_LEASH_MAX) {
+                    try {
+                        Debug.dumpHprofData("/data/log/core/systemui_insets-leash.hprof");
+                    } catch (Exception e) {
+                        Slog.w(TAG, "Cannot dump for java heapdump: ", e);
+                    }
+                    final Throwable th = new Throwable("Max of insets leash, num=" + this.mInsetsLeashNum);
+                    new Thread(this) { // from class: android.view.SurfaceControlRegistry.1
+                        @Override // java.lang.Thread, java.lang.Runnable
+                        public void run() {
+                            throw new IllegalStateException("SurfaceControlRegistry#add, Max of insets leash", th);
+                        }
+                    }.start();
+                    if (!this.mHasReportedExceedingMaxThreshold) {
+                        this.mReporter.onMaxLayersExceeded(this.mSurfaceControls, 256, new PrintWriter((OutputStream) System.out, true));
+                        this.mHasReportedExceedingMaxThreshold = true;
+                    }
+                }
+            } else if (!this.mHasReportedExceedingMaxThreshold && this.mSurfaceControls.size() >= this.mMaxLayersReportingThreshold) {
                 this.mReporter.onMaxLayersExceeded(this.mSurfaceControls, 256, new PrintWriter((OutputStream) System.out, true));
                 this.mHasReportedExceedingMaxThreshold = true;
             }
@@ -160,6 +190,13 @@ public class SurfaceControlRegistry {
     void remove(SurfaceControl surfaceControl) {
         synchronized (sLock) {
             this.mSurfaceControls.remove(surfaceControl);
+            if (CoreRune.FW_TEMP_TOO_MANY_INSETS_LEASH_BUG_FIX && surfaceControl != null && surfaceControl.isInsetsLeash()) {
+                int i = this.mInsetsLeashNum - 1;
+                this.mInsetsLeashNum = i;
+                if (i < 0) {
+                    this.mInsetsLeashNum = 0;
+                }
+            }
             if (this.mHasReportedExceedingMaxThreshold && this.mSurfaceControls.size() <= this.mResetReportingThreshold) {
                 this.mHasReportedExceedingMaxThreshold = false;
             }
@@ -167,11 +204,11 @@ public class SurfaceControlRegistry {
     }
 
     public int hashCode() {
-        int hashCode;
+        int iHashCode;
         synchronized (sLock) {
-            hashCode = this.mSurfaceControls.keySet().hashCode();
+            iHashCode = this.mSurfaceControls.keySet().hashCode();
         }
-        return hashCode;
+        return iHashCode;
     }
 
     static final void initializeCallStackDebugging() {
@@ -262,9 +299,9 @@ public class SurfaceControlRegistry {
     }
 
     private static void runGcAndFinalizers() {
-        long elapsedRealtime = SystemClock.elapsedRealtime();
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
         GcUtils.runGcAndFinalizersSync();
-        Log.i(TAG, "Ran gc and finalizers (" + (SystemClock.elapsedRealtime() - elapsedRealtime) + "ms)");
+        Log.i(TAG, "Ran gc and finalizers (" + (SystemClock.elapsedRealtime() - jElapsedRealtime) + "ms)");
     }
 
     public static void dump(int i, boolean z, PrintWriter printWriter) {

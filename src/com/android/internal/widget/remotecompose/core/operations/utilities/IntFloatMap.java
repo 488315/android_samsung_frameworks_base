@@ -43,11 +43,11 @@ public class IntFloatMap {
     }
 
     public float get(int i) {
-        int findKey = findKey(i);
-        if (findKey == -1) {
+        int iFindKey = findKey(i);
+        if (iFindKey == -1) {
             return 0.0f;
         }
-        return this.mValues[findKey];
+        return this.mValues[iFindKey];
     }
 
     public int size() {
@@ -59,16 +59,16 @@ public class IntFloatMap {
         int[] iArr;
         int i3;
         float f2;
-        int hash = hash(i);
+        int iHash = hash(i);
         int length = this.mKeys.length;
         while (true) {
-            i2 = hash % length;
+            i2 = iHash % length;
             iArr = this.mKeys;
             i3 = iArr[i2];
             if (i3 == Integer.MIN_VALUE || i3 == i) {
                 break;
             }
-            hash = i2 + 1;
+            iHash = i2 + 1;
             length = iArr.length;
         }
         if (i3 == Integer.MIN_VALUE) {
@@ -83,10 +83,10 @@ public class IntFloatMap {
     }
 
     private int findKey(int i) {
-        int hash = hash(i);
+        int iHash = hash(i);
         int length = this.mKeys.length;
         while (true) {
-            int i2 = hash % length;
+            int i2 = iHash % length;
             int[] iArr = this.mKeys;
             int i3 = iArr[i2];
             if (i3 == Integer.MIN_VALUE) {
@@ -95,7 +95,7 @@ public class IntFloatMap {
             if (i3 == i) {
                 return i2;
             }
-            hash = i2 + 1;
+            iHash = i2 + 1;
             length = iArr.length;
         }
     }

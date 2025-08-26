@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
-import android.telephony.ims.RegistrationManager;
 import android.telephony.ims.aidl.IImsRegistrationCallback;
 import android.util.Log;
 import java.lang.annotation.Retention;
@@ -111,16 +110,16 @@ public interface RegistrationManager {
                 if (this.mLocalCallback == null) {
                     return;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.RegistrationManager$RegistrationCallback$RegistrationBinder$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RegistrationManager.RegistrationCallback.RegistrationBinder.this.lambda$onRegistered$0(imsRegistrationAttributes);
+                            this.f$0.lambda$onRegistered$0(imsRegistrationAttributes);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -134,16 +133,16 @@ public interface RegistrationManager {
                 if (this.mLocalCallback == null) {
                     return;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.RegistrationManager$RegistrationCallback$RegistrationBinder$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RegistrationManager.RegistrationCallback.RegistrationBinder.this.lambda$onRegistering$1(imsRegistrationAttributes);
+                            this.f$0.lambda$onRegistering$1(imsRegistrationAttributes);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -157,16 +156,16 @@ public interface RegistrationManager {
                 if (this.mLocalCallback == null) {
                     return;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.RegistrationManager$RegistrationCallback$RegistrationBinder$$ExternalSyntheticLambda6
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RegistrationManager.RegistrationCallback.RegistrationBinder.this.lambda$onDeregistered$2(imsReasonInfo, i, i2);
+                            this.f$0.lambda$onDeregistered$2(imsReasonInfo, i, i2);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -180,22 +179,22 @@ public interface RegistrationManager {
                 if (this.mLocalCallback == null) {
                     return;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.RegistrationManager$RegistrationCallback$RegistrationBinder$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RegistrationManager.RegistrationCallback.RegistrationBinder.this.lambda$onDeregisteredWithDetails$3(imsReasonInfo, i, i2);
+                            this.f$0.lambda$onDeregisteredWithDetails$3(imsReasonInfo, i, i2);
                         }
                     });
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.RegistrationManager$RegistrationCallback$RegistrationBinder$$ExternalSyntheticLambda5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RegistrationManager.RegistrationCallback.RegistrationBinder.this.lambda$onDeregisteredWithDetails$4(imsReasonInfo, sipDetails);
+                            this.f$0.lambda$onDeregisteredWithDetails$4(imsReasonInfo, sipDetails);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -214,16 +213,16 @@ public interface RegistrationManager {
                 if (this.mLocalCallback == null) {
                     return;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.RegistrationManager$RegistrationCallback$RegistrationBinder$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RegistrationManager.RegistrationCallback.RegistrationBinder.this.lambda$onTechnologyChangeFailed$5(i, imsReasonInfo);
+                            this.f$0.lambda$onTechnologyChangeFailed$5(i, imsReasonInfo);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -237,16 +236,16 @@ public interface RegistrationManager {
                 if (this.mLocalCallback == null) {
                     return;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.RegistrationManager$RegistrationCallback$RegistrationBinder$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RegistrationManager.RegistrationCallback.RegistrationBinder.this.lambda$onSubscriberAssociatedUriChanged$6(uriArr);
+                            this.f$0.lambda$onSubscriberAssociatedUriChanged$6(uriArr);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 

@@ -87,11 +87,11 @@ public class DataModeActionViewModel implements ActionViewModel {
         }
         if (isNeedSecureConfirm()) {
             Iterator<SecureConfirmStrategy> it2 = this.mFeatureFactory.createSecureConfirmStrategy(this.mGlobalActions, this.mInfo.getName()).iterator();
-            boolean z = true;
+            boolean zDoActionBeforeSecureConfirm = true;
             while (it2.hasNext()) {
-                z &= it2.next().doActionBeforeSecureConfirm(this, this.mGlobalActions);
+                zDoActionBeforeSecureConfirm &= it2.next().doActionBeforeSecureConfirm(this, this.mGlobalActions);
             }
-            if (z) {
+            if (zDoActionBeforeSecureConfirm) {
                 this.mGlobalActions.registerSecureConfirmAction(this);
                 this.mKeyguardManagerWrapper.setPendingIntentAfterUnlock("");
                 this.mGlobalActions.hideDialogOnSecureConfirm();

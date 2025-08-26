@@ -37,31 +37,31 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
             semMobileWipsScanResultAdapter.operatorFriendlyName = parcel.readString();
             semMobileWipsScanResultAdapter.flags = parcel.readLong();
             semMobileWipsScanResultAdapter.informationElements = (InformationElement[]) parcel.createTypedArray(InformationElement.CREATOR);
-            int readInt = parcel.readInt();
-            if (readInt != 0) {
+            int i = parcel.readInt();
+            if (i != 0) {
                 semMobileWipsScanResultAdapter.anqpLines = new ArrayList();
-                for (int i = 0; i < readInt; i++) {
+                for (int i2 = 0; i2 < i; i2++) {
                     semMobileWipsScanResultAdapter.anqpLines.add(parcel.readString());
                 }
             }
-            int readInt2 = parcel.readInt();
-            if (readInt2 != 0) {
-                semMobileWipsScanResultAdapter.anqpElements = new AnqpInformationElement[readInt2];
-                for (int i2 = 0; i2 < readInt2; i2++) {
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+            int i3 = parcel.readInt();
+            if (i3 != 0) {
+                semMobileWipsScanResultAdapter.anqpElements = new AnqpInformationElement[i3];
+                for (int i4 = 0; i4 < i3; i4++) {
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     byte[] bArr = new byte[parcel.readInt()];
                     parcel.readByteArray(bArr);
-                    semMobileWipsScanResultAdapter.anqpElements[i2] = new AnqpInformationElement(readInt3, readInt4, bArr);
+                    semMobileWipsScanResultAdapter.anqpElements[i4] = new AnqpInformationElement(i5, i6, bArr);
                 }
             }
-            int readInt5 = parcel.readInt();
-            if (readInt5 != 0) {
-                semMobileWipsScanResultAdapter.radioChainInfos = new RadioChainInfo[readInt5];
-                for (int i3 = 0; i3 < readInt5; i3++) {
-                    semMobileWipsScanResultAdapter.radioChainInfos[i3] = new RadioChainInfo();
-                    semMobileWipsScanResultAdapter.radioChainInfos[i3].id = parcel.readInt();
-                    semMobileWipsScanResultAdapter.radioChainInfos[i3].level = parcel.readInt();
+            int i7 = parcel.readInt();
+            if (i7 != 0) {
+                semMobileWipsScanResultAdapter.radioChainInfos = new RadioChainInfo[i7];
+                for (int i8 = 0; i8 < i7; i8++) {
+                    semMobileWipsScanResultAdapter.radioChainInfos[i8] = new RadioChainInfo();
+                    semMobileWipsScanResultAdapter.radioChainInfos[i8].id = parcel.readInt();
+                    semMobileWipsScanResultAdapter.radioChainInfos[i8].level = parcel.readInt();
                 }
             }
             semMobileWipsScanResultAdapter.ifaceName = parcel.readString();
@@ -336,17 +336,17 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
         if (obj == null) {
             obj = "<unknown ssid>";
         }
-        StringBuffer append = stringBuffer.append(obj).append(", BSSID: ");
+        StringBuffer stringBufferAppend = stringBuffer.append(obj).append(", BSSID: ");
         String str = this.BSSID;
         if (str == null) {
             str = "<none>";
         }
-        StringBuffer append2 = append.append(str).append(", capabilities: ");
+        StringBuffer stringBufferAppend2 = stringBufferAppend.append(str).append(", capabilities: ");
         String str2 = this.capabilities;
-        append2.append(str2 != null ? str2 : "<none>").append(", level: ").append(this.level).append(", frequency: ").append(this.frequency).append(", timestamp: ").append(this.timestamp);
-        StringBuffer append3 = stringBuffer.append(", distance: ");
+        stringBufferAppend2.append(str2 != null ? str2 : "<none>").append(", level: ").append(this.level).append(", frequency: ").append(this.frequency).append(", timestamp: ").append(this.timestamp);
+        StringBuffer stringBufferAppend3 = stringBuffer.append(", distance: ");
         int i = this.distanceCm;
-        append3.append(i != -1 ? Integer.valueOf(i) : "?").append("(cm), distanceSd: ");
+        stringBufferAppend3.append(i != -1 ? Integer.valueOf(i) : "?").append("(cm), distanceSd: ");
         int i2 = this.distanceSdCm;
         stringBuffer.append(i2 != -1 ? Integer.valueOf(i2) : "?").append("(cm), passpoint: ");
         stringBuffer.append((this.flags & 1) != 0 ? "yes" : "no");
@@ -359,9 +359,9 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
         stringBuffer.append(", Radio Chain Infos: ").append(Arrays.toString(this.radioChainInfos));
         stringBuffer.append(", interface name: ").append(this.ifaceName);
         if (this.mApMldMacAddress != null) {
-            StringBuffer append4 = stringBuffer.append(", MLO Info:  AP MLD MAC Address: ").append(this.mApMldMacAddress.toString()).append(", AP MLO Link-Id: ");
+            StringBuffer stringBufferAppend4 = stringBuffer.append(", MLO Info:  AP MLD MAC Address: ").append(this.mApMldMacAddress.toString()).append(", AP MLO Link-Id: ");
             int i3 = this.mApMloLinkId;
-            append4.append(i3 == -1 ? "Unspecified" : Integer.valueOf(i3)).append(", AP MLO Affiliated Links: ").append(this.mAffiliatedMloLinks);
+            stringBufferAppend4.append(i3 == -1 ? "Unspecified" : Integer.valueOf(i3)).append(", AP MLO Affiliated Links: ").append(this.mAffiliatedMloLinks);
         }
         return stringBuffer.toString();
     }

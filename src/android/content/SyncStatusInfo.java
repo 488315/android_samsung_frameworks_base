@@ -129,9 +129,9 @@ public class SyncStatusInfo implements Parcelable {
     }
 
     public int getLastFailureMesgAsInt(int i) {
-        int syncErrorStringToInt = ContentResolver.syncErrorStringToInt(this.lastFailureMesg);
-        if (syncErrorStringToInt > 0) {
-            return syncErrorStringToInt;
+        int iSyncErrorStringToInt = ContentResolver.syncErrorStringToInt(this.lastFailureMesg);
+        if (iSyncErrorStringToInt > 0) {
+            return iSyncErrorStringToInt;
         }
         Log.d(TAG, "Unknown lastFailureMesg:" + this.lastFailureMesg);
         return i;
@@ -190,9 +190,9 @@ public class SyncStatusInfo implements Parcelable {
         this.perSourceLastFailureTimes = new long[6];
         this.mLastEventTimes = new ArrayList<>();
         this.mLastEvents = new ArrayList<>();
-        int readInt = parcel.readInt();
-        if (readInt != 6 && readInt != 1) {
-            Log.w("SyncStatusInfo", "Unknown version: " + readInt);
+        int i = parcel.readInt();
+        if (i != 6 && i != 1) {
+            Log.w("SyncStatusInfo", "Unknown version: " + i);
         }
         this.authorityId = parcel.readInt();
         stats.totalElapsedTime = parcel.readLong();
@@ -209,29 +209,29 @@ public class SyncStatusInfo implements Parcelable {
         this.initialFailureTime = parcel.readLong();
         this.pending = parcel.readInt() != 0;
         this.initialize = parcel.readInt() != 0;
-        if (readInt == 1) {
+        if (i == 1) {
             this.periodicSyncTimes = null;
         } else {
-            int readInt2 = parcel.readInt();
-            if (readInt2 < 0) {
+            int i2 = parcel.readInt();
+            if (i2 < 0) {
                 this.periodicSyncTimes = null;
             } else {
                 this.periodicSyncTimes = new ArrayList<>();
-                for (int i = 0; i < readInt2; i++) {
+                for (int i3 = 0; i3 < i2; i3++) {
                     this.periodicSyncTimes.add(Long.valueOf(parcel.readLong()));
                 }
             }
-            if (readInt >= 3) {
+            if (i >= 3) {
                 this.mLastEventTimes.clear();
                 this.mLastEvents.clear();
-                int readInt3 = parcel.readInt();
-                for (int i2 = 0; i2 < readInt3; i2++) {
+                int i4 = parcel.readInt();
+                for (int i5 = 0; i5 < i4; i5++) {
                     this.mLastEventTimes.add(Long.valueOf(parcel.readLong()));
                     this.mLastEvents.add(parcel.readString());
                 }
             }
         }
-        if (readInt < 4) {
+        if (i < 4) {
             Stats stats2 = this.totalStats;
             stats2.numSourcePeriodic = (((stats2.numSyncs - this.totalStats.numSourceLocal) - this.totalStats.numSourcePoll) - this.totalStats.numSourceOther) - this.totalStats.numSourceUser;
             if (this.totalStats.numSourcePeriodic < 0) {
@@ -240,7 +240,7 @@ public class SyncStatusInfo implements Parcelable {
         } else {
             this.totalStats.numSourcePeriodic = parcel.readInt();
         }
-        if (readInt >= 5) {
+        if (i >= 5) {
             this.totalStats.numSourceFeed = parcel.readInt();
             this.totalStats.numFailures = parcel.readInt();
             this.totalStats.numCancels = parcel.readInt();
@@ -248,7 +248,7 @@ public class SyncStatusInfo implements Parcelable {
             this.todayStats.readFromParcel(parcel);
             this.yesterdayStats.readFromParcel(parcel);
         }
-        if (readInt >= 6) {
+        if (i >= 6) {
             parcel.readLongArray(this.perSourceLastSuccessTimes);
             parcel.readLongArray(this.perSourceLastFailureTimes);
         }
@@ -412,16 +412,16 @@ public class SyncStatusInfo implements Parcelable {
     }
 
     public void maybeResetTodayStats(boolean z, boolean z2) {
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         if (!z2) {
-            if (areSameDates(currentTimeMillis, this.lastTodayResetTime)) {
+            if (areSameDates(jCurrentTimeMillis, this.lastTodayResetTime)) {
                 return;
             }
-            if (currentTimeMillis < this.lastTodayResetTime && !z) {
+            if (jCurrentTimeMillis < this.lastTodayResetTime && !z) {
                 return;
             }
         }
-        this.lastTodayResetTime = currentTimeMillis;
+        this.lastTodayResetTime = jCurrentTimeMillis;
         this.todayStats.copyTo(this.yesterdayStats);
         this.todayStats.clear();
     }

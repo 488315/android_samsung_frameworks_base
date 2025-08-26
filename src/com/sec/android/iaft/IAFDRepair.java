@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import java.io.IOException;
 
 /* loaded from: classes6.dex */
 class IAFDRepair {
@@ -26,8 +27,8 @@ class IAFDRepair {
         int i = bundle.getInt("type");
         String string = bundle.getString(SmLib_IafdConstant.KEY_PACKAGE_NAME);
         try {
-            boolean hotfix = IAFDHotfix.hotfix(context, i, string);
-            if (!hotfix) {
+            boolean zHotfix = IAFDHotfix.hotfix(context, i, string);
+            if (!zHotfix) {
                 try {
                     if (i == 19) {
                         return repair_WebView(context, i, string);
@@ -42,10 +43,10 @@ class IAFDRepair {
                         return repair_NoSettingsProvidersForDual(context, bundle.getInt("dualUserId"));
                     }
                 } catch (Exception unused) {
-                    return hotfix;
+                    return zHotfix;
                 }
             }
-            return hotfix;
+            return zHotfix;
         } catch (Exception unused2) {
             return false;
         }
@@ -76,7 +77,7 @@ class IAFDRepair {
         }
     }
 
-    private boolean repair_NoSettingsProvidersForDual(Context context, int i) {
+    private boolean repair_NoSettingsProvidersForDual(Context context, int i) throws IOException {
         try {
             Runtime.getRuntime().exec("pm install-existing --user " + String.valueOf(i) + " com.android.providers.settings");
             return true;

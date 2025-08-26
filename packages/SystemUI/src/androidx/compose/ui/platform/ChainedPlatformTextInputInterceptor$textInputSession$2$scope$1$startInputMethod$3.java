@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ChainedPlatformTextInputInterceptor$textInputSession$2$scope$1$startInputMethod$3 extends SuspendLambda implements Function2 {
     final /* synthetic */ PlatformTextInputSessionScope $parentSession;
@@ -22,7 +21,6 @@ final class ChainedPlatformTextInputInterceptor$textInputSession$2$scope$1$start
     int label;
     final /* synthetic */ ChainedPlatformTextInputInterceptor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.compose.ui.platform.ChainedPlatformTextInputInterceptor$textInputSession$2$scope$1$startInputMethod$3$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         final /* synthetic */ PlatformTextInputSessionScope $parentSession;
@@ -97,19 +95,19 @@ final class ChainedPlatformTextInputInterceptor$textInputSession$2$scope$1$start
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             final ChainedPlatformTextInputInterceptor chainedPlatformTextInputInterceptor = this.this$0;
-            SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: androidx.compose.ui.platform.ChainedPlatformTextInputInterceptor$textInputSession$2$scope$1$startInputMethod$3.1
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: androidx.compose.ui.platform.ChainedPlatformTextInputInterceptor$textInputSession$2$scope$1$startInputMethod$3.1
                 {
                     super(0);
                 }
 
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    return (PlatformTextInputInterceptor) ((SnapshotMutableStateImpl) ChainedPlatformTextInputInterceptor.this.interceptor$delegate).getValue();
+                    return (PlatformTextInputInterceptor) ((SnapshotMutableStateImpl) chainedPlatformTextInputInterceptor.interceptor$delegate).getValue();
                 }
             });
             AnonymousClass2 anonymousClass2 = new AnonymousClass2(this.$request, this.$parentSession, null);
             this.label = 1;
-            if (FlowKt.collectLatest(snapshotFlow, anonymousClass2, this) == coroutineSingletons) {
+            if (FlowKt.collectLatest(safeFlowSnapshotFlow, anonymousClass2, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

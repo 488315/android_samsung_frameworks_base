@@ -11,7 +11,6 @@ import com.android.wm.shell.desktopmode.DesktopTasksController;
 import com.android.wm.shell.desktopmode.DesktopUserRepositories;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class FreeformTaskListener$$ExternalSyntheticLambda2 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -32,9 +31,9 @@ public final /* synthetic */ class FreeformTaskListener$$ExternalSyntheticLambda
                 DesktopTasksController desktopTasksController = (DesktopTasksController) obj;
                 desktopTasksController.getClass();
                 if (DesktopModeFlags.ENABLE_FULLY_IMMERSIVE_IN_DESKTOP.isTrue()) {
-                    boolean isTaskInFullImmersiveState = desktopTasksController.taskRepository.isTaskInFullImmersiveState(runningTaskInfo.taskId);
+                    boolean zIsTaskInFullImmersiveState = desktopTasksController.taskRepository.isTaskInFullImmersiveState(runningTaskInfo.taskId);
                     boolean z = (((TaskInfo) runningTaskInfo).requestedVisibleTypes & WindowInsets.Type.statusBars()) == 0;
-                    if (isTaskInFullImmersiveState && !z && desktopTasksController.recentsTransitionState < 2) {
+                    if (zIsTaskInFullImmersiveState && !z && desktopTasksController.recentsTransitionState < 2) {
                         desktopTasksController.desktopImmersiveController.moveTaskToNonImmersive(runningTaskInfo, DesktopImmersiveController.ExitReason.APP_NOT_IMMERSIVE);
                         break;
                     }

@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function6;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardRootViewModel$alphaOnShadeExpansion$1 extends SuspendLambda implements Function6 {
     /* synthetic */ float F$0;
@@ -25,16 +24,16 @@ final class KeyguardRootViewModel$alphaOnShadeExpansion$1 extends SuspendLambda 
 
     @Override // kotlin.jvm.functions.Function6
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
-        float floatValue = ((Number) obj4).floatValue();
-        float floatValue2 = ((Number) obj5).floatValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
+        float fFloatValue = ((Number) obj4).floatValue();
+        float fFloatValue2 = ((Number) obj5).floatValue();
         KeyguardRootViewModel$alphaOnShadeExpansion$1 keyguardRootViewModel$alphaOnShadeExpansion$1 = new KeyguardRootViewModel$alphaOnShadeExpansion$1((Continuation) obj6);
         keyguardRootViewModel$alphaOnShadeExpansion$1.L$0 = (FlowCollector) obj;
-        keyguardRootViewModel$alphaOnShadeExpansion$1.Z$0 = booleanValue;
-        keyguardRootViewModel$alphaOnShadeExpansion$1.Z$1 = booleanValue2;
-        keyguardRootViewModel$alphaOnShadeExpansion$1.F$0 = floatValue;
-        keyguardRootViewModel$alphaOnShadeExpansion$1.F$1 = floatValue2;
+        keyguardRootViewModel$alphaOnShadeExpansion$1.Z$0 = zBooleanValue;
+        keyguardRootViewModel$alphaOnShadeExpansion$1.Z$1 = zBooleanValue2;
+        keyguardRootViewModel$alphaOnShadeExpansion$1.F$0 = fFloatValue;
+        keyguardRootViewModel$alphaOnShadeExpansion$1.F$1 = fFloatValue2;
         return keyguardRootViewModel$alphaOnShadeExpansion$1.invokeSuspend(Unit.INSTANCE);
     }
 

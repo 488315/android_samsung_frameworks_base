@@ -31,13 +31,11 @@ import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SALogger {
     public static final Companion Companion = new Companion(null);
     public final SystemUIAnalyticsWrapper systemUIAnalyticsWrapper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppStatus {
 
         @SerializedName(SystemUIAnalytics.CONTROL_KEY_APP_NAME)
@@ -71,7 +69,6 @@ public final class SALogger {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppStatusList {
 
         @SerializedName("AppList")
@@ -97,7 +94,6 @@ public final class SALogger {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -107,10 +103,8 @@ public final class SALogger {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Event {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class AddDevices extends Event {
             public static final AddDevices INSTANCE = new AddDevices();
 
@@ -139,7 +133,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ChooseAppOnOff extends Event {
             public final boolean checked;
 
@@ -153,15 +146,14 @@ public final class SALogger {
                 SystemUIAnalyticsWrapper.ScreenId.Intro intro = SystemUIAnalyticsWrapper.ScreenId.Intro.INSTANCE;
                 SystemUIAnalyticsWrapper.EventId.ChooseAppsOnOff chooseAppsOnOff = SystemUIAnalyticsWrapper.EventId.ChooseAppsOnOff.INSTANCE;
                 SALogger.Companion.getClass();
-                String valueOf = String.valueOf(Boolean.compare(this.checked, false));
+                String strValueOf = String.valueOf(Boolean.compare(this.checked, false));
                 systemUIAnalyticsWrapper.getClass();
                 intro.getClass();
                 chooseAppsOnOff.getClass();
-                SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_CONTROL_INTRO, SystemUIAnalytics.EID_CONTROL_CHOOSE_APPS_ON_OFF, valueOf);
+                SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_CONTROL_INTRO, SystemUIAnalytics.EID_CONTROL_CHOOSE_APPS_ON_OFF, strValueOf);
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ChooseAppOnOffOnManageApps extends Event {
             public final boolean checked;
 
@@ -175,15 +167,14 @@ public final class SALogger {
                 SystemUIAnalyticsWrapper.ScreenId.ManageApps manageApps = SystemUIAnalyticsWrapper.ScreenId.ManageApps.INSTANCE;
                 SystemUIAnalyticsWrapper.EventId.ChooseAppsOnOffOnManageApps chooseAppsOnOffOnManageApps = SystemUIAnalyticsWrapper.EventId.ChooseAppsOnOffOnManageApps.INSTANCE;
                 SALogger.Companion.getClass();
-                String valueOf = String.valueOf(Boolean.compare(this.checked, false));
+                String strValueOf = String.valueOf(Boolean.compare(this.checked, false));
                 systemUIAnalyticsWrapper.getClass();
                 manageApps.getClass();
                 chooseAppsOnOffOnManageApps.getClass();
-                SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_CONTROL_MANAGE_APPS, SystemUIAnalytics.EID_CONTROL_CHOOSE_APPS_ON_OFF_ON_MANAGE_APPS, valueOf);
+                SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_CONTROL_MANAGE_APPS, SystemUIAnalytics.EID_CONTROL_CHOOSE_APPS_ON_OFF_ON_MANAGE_APPS, strValueOf);
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class IntroStart extends Event {
             public final int selectedApps;
             public final int totalApps;
@@ -199,19 +190,18 @@ public final class SALogger {
                 SystemUIAnalyticsWrapper.ScreenId.Intro intro = SystemUIAnalyticsWrapper.ScreenId.Intro.INSTANCE;
                 SystemUIAnalyticsWrapper.EventId.IntroStart introStart = SystemUIAnalyticsWrapper.EventId.IntroStart.INSTANCE;
                 SystemUIAnalyticsWrapper.KeyId.NumberOfSelectedApps numberOfSelectedApps = SystemUIAnalyticsWrapper.KeyId.NumberOfSelectedApps.INSTANCE;
-                String valueOf = String.valueOf(this.selectedApps);
+                String strValueOf = String.valueOf(this.selectedApps);
                 SystemUIAnalyticsWrapper.KeyId.NumberOfTotalApps numberOfTotalApps = SystemUIAnalyticsWrapper.KeyId.NumberOfTotalApps.INSTANCE;
-                String valueOf2 = String.valueOf(this.totalApps);
+                String strValueOf2 = String.valueOf(this.totalApps);
                 systemUIAnalyticsWrapper.getClass();
                 intro.getClass();
                 introStart.getClass();
                 numberOfSelectedApps.getClass();
                 numberOfTotalApps.getClass();
-                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_CONTROL_INTRO, SystemUIAnalytics.EID_CONTROL_INTRO_START, SystemUIAnalytics.CONTROL_KEY_NUM_OF_SELECTED_APPS, valueOf, SystemUIAnalytics.CONTROL_KEY_NUM_OF_TOTAL_APPS, valueOf2);
+                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_CONTROL_INTRO, SystemUIAnalytics.EID_CONTROL_INTRO_START, SystemUIAnalytics.CONTROL_KEY_NUM_OF_SELECTED_APPS, strValueOf, SystemUIAnalytics.CONTROL_KEY_NUM_OF_TOTAL_APPS, strValueOf2);
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class LaunchDevices extends Event {
             public static final LaunchDevices INSTANCE = new LaunchDevices();
 
@@ -241,7 +231,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class LaunchFullController extends Event {
             public static final LaunchFullController INSTANCE = new LaunchFullController();
 
@@ -270,7 +259,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class LaunchSmartThings extends Event {
             public static final LaunchSmartThings INSTANCE = new LaunchSmartThings();
 
@@ -299,7 +287,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class LeftChooseDevices extends Event {
             public final String appName;
             public final int numberOfSelectedControls;
@@ -320,23 +307,23 @@ public final class SALogger {
             public final void sendEvent(SystemUIAnalyticsWrapper systemUIAnalyticsWrapper) {
                 SystemUIAnalyticsWrapper.ScreenId.ChooseDevices chooseDevices = SystemUIAnalyticsWrapper.ScreenId.ChooseDevices.INSTANCE;
                 SystemUIAnalyticsWrapper.EventId.LeftChooseDevices leftChooseDevices = SystemUIAnalyticsWrapper.EventId.LeftChooseDevices.INSTANCE;
-                HashMap hashMap = new HashMap();
-                hashMap.put(SystemUIAnalyticsWrapper.KeyId.AppName.INSTANCE, this.appName);
-                hashMap.put(SystemUIAnalyticsWrapper.KeyId.SelectedControl.INSTANCE, String.valueOf(this.numberOfSelectedControls));
-                hashMap.put(SystemUIAnalyticsWrapper.KeyId.AllControls.INSTANCE, String.valueOf(this.numberOfTotalControls));
-                hashMap.put(SystemUIAnalyticsWrapper.KeyId.Structure.INSTANCE, String.valueOf(this.numberOfStructures));
-                hashMap.put(SystemUIAnalyticsWrapper.KeyId.Zone.INSTANCE, String.valueOf(this.numberOfZones));
+                HashMap map = new HashMap();
+                map.put(SystemUIAnalyticsWrapper.KeyId.AppName.INSTANCE, this.appName);
+                map.put(SystemUIAnalyticsWrapper.KeyId.SelectedControl.INSTANCE, String.valueOf(this.numberOfSelectedControls));
+                map.put(SystemUIAnalyticsWrapper.KeyId.AllControls.INSTANCE, String.valueOf(this.numberOfTotalControls));
+                map.put(SystemUIAnalyticsWrapper.KeyId.Structure.INSTANCE, String.valueOf(this.numberOfStructures));
+                map.put(SystemUIAnalyticsWrapper.KeyId.Zone.INSTANCE, String.valueOf(this.numberOfZones));
                 Unit unit = Unit.INSTANCE;
                 systemUIAnalyticsWrapper.getClass();
                 chooseDevices.getClass();
                 leftChooseDevices.getClass();
-                Set<Map.Entry> entrySet = hashMap.entrySet();
-                int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(entrySet, 10));
-                if (mapCapacity < 16) {
-                    mapCapacity = 16;
+                Set<Map.Entry> setEntrySet = map.entrySet();
+                int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(setEntrySet, 10));
+                if (iMapCapacity < 16) {
+                    iMapCapacity = 16;
                 }
-                LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
-                for (Map.Entry entry : entrySet) {
+                LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
+                for (Map.Entry entry : setEntrySet) {
                     Pair pair = new Pair(((SystemUIAnalyticsWrapper.KeyId) entry.getKey()).getKeyId(), entry.getValue());
                     linkedHashMap.put(pair.getFirst(), pair.getSecond());
                 }
@@ -344,7 +331,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class MoveCard extends Event {
             public static final MoveCard INSTANCE = new MoveCard();
 
@@ -373,7 +359,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class OpenSpinner extends Event {
             public static final OpenSpinner INSTANCE = new OpenSpinner();
 
@@ -402,7 +387,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class QuitDevices extends Event {
             public final Screen screen;
 
@@ -420,7 +404,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Reorder extends Event {
             public static final Reorder INSTANCE = new Reorder();
 
@@ -449,7 +432,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class SettingsControlDevicesOnOff extends Event {
             public final boolean checked;
 
@@ -463,15 +445,14 @@ public final class SALogger {
                 SystemUIAnalyticsWrapper.ScreenId.Settings settings = SystemUIAnalyticsWrapper.ScreenId.Settings.INSTANCE;
                 SystemUIAnalyticsWrapper.EventId.SettingsControlDevicesOnOff settingsControlDevicesOnOff = SystemUIAnalyticsWrapper.EventId.SettingsControlDevicesOnOff.INSTANCE;
                 SALogger.Companion.getClass();
-                String valueOf = String.valueOf(Boolean.compare(this.checked, false));
+                String strValueOf = String.valueOf(Boolean.compare(this.checked, false));
                 systemUIAnalyticsWrapper.getClass();
                 settings.getClass();
                 settingsControlDevicesOnOff.getClass();
-                SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_CONTROL_SETTINGS, SystemUIAnalytics.EID_CONTROL_CONTROL_DEVICES_ON_OFF, valueOf);
+                SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_CONTROL_SETTINGS, SystemUIAnalytics.EID_CONTROL_CONTROL_DEVICES_ON_OFF, strValueOf);
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class SettingsShowDevicesOnOff extends Event {
             public final boolean checked;
 
@@ -485,15 +466,14 @@ public final class SALogger {
                 SystemUIAnalyticsWrapper.ScreenId.Settings settings = SystemUIAnalyticsWrapper.ScreenId.Settings.INSTANCE;
                 SystemUIAnalyticsWrapper.EventId.SettingsShowDevicesOnOff settingsShowDevicesOnOff = SystemUIAnalyticsWrapper.EventId.SettingsShowDevicesOnOff.INSTANCE;
                 SALogger.Companion.getClass();
-                String valueOf = String.valueOf(Boolean.compare(this.checked, false));
+                String strValueOf = String.valueOf(Boolean.compare(this.checked, false));
                 systemUIAnalyticsWrapper.getClass();
                 settings.getClass();
                 settingsShowDevicesOnOff.getClass();
-                SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_CONTROL_SETTINGS, SystemUIAnalytics.EID_CONTROL_SHOW_DEVICES_ON_OFF, valueOf);
+                SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_CONTROL_SETTINGS, SystemUIAnalytics.EID_CONTROL_SHOW_DEVICES_ON_OFF, strValueOf);
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TapAppList extends Event {
             public static final TapAppList INSTANCE = new TapAppList();
 
@@ -522,7 +502,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TapAppListOnManageApps extends Event {
             public static final TapAppListOnManageApps INSTANCE = new TapAppListOnManageApps();
 
@@ -551,7 +530,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TapCardLayout extends Event {
             public final ControlViewHolder cvh;
 
@@ -571,20 +549,19 @@ public final class SALogger {
                 Behavior behavior = controlViewHolder.behavior;
                 String templateType = behavior != null ? Event.getTemplateType(behavior) : "";
                 SystemUIAnalyticsWrapper.KeyId.DeviceName deviceName = SystemUIAnalyticsWrapper.KeyId.DeviceName.INSTANCE;
-                String obj = controlViewHolder.title.getText().toString();
+                String string = controlViewHolder.title.getText().toString();
                 SystemUIAnalyticsWrapper.KeyId.DeviceType deviceType = SystemUIAnalyticsWrapper.KeyId.DeviceType.INSTANCE;
-                String valueOf = String.valueOf(controlViewHolder.getDeviceType());
+                String strValueOf = String.valueOf(controlViewHolder.getDeviceType());
                 systemUIAnalyticsWrapper.getClass();
                 mainScreen.getClass();
                 String eventId2 = eventId.getEventId();
                 template.getClass();
                 deviceName.getClass();
                 deviceType.getClass();
-                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_CONTROL_MAIN_SCREEN, eventId2, SystemUIAnalytics.CONTROL_KEY_TEMPLATE, templateType, SystemUIAnalytics.CONTROL_KEY_DEVICE_NAME, obj, SystemUIAnalytics.CONTROL_KEY_DEVICE_TYPE, valueOf);
+                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_CONTROL_MAIN_SCREEN, eventId2, SystemUIAnalytics.CONTROL_KEY_TEMPLATE, templateType, SystemUIAnalytics.CONTROL_KEY_DEVICE_NAME, string, SystemUIAnalytics.CONTROL_KEY_DEVICE_TYPE, strValueOf);
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TapMainActionButton extends Event {
             public final ControlViewHolder cvh;
 
@@ -602,20 +579,19 @@ public final class SALogger {
                 Behavior behavior = controlViewHolder.behavior;
                 String templateType = behavior != null ? Event.getTemplateType(behavior) : "";
                 SystemUIAnalyticsWrapper.KeyId.DeviceName deviceName = SystemUIAnalyticsWrapper.KeyId.DeviceName.INSTANCE;
-                String obj = controlViewHolder.title.getText().toString();
+                String string = controlViewHolder.title.getText().toString();
                 SystemUIAnalyticsWrapper.KeyId.DeviceType deviceType = SystemUIAnalyticsWrapper.KeyId.DeviceType.INSTANCE;
-                String valueOf = String.valueOf(controlViewHolder.getDeviceType());
+                String strValueOf = String.valueOf(controlViewHolder.getDeviceType());
                 systemUIAnalyticsWrapper.getClass();
                 mainScreen.getClass();
                 tapMainActionButton.getClass();
                 template.getClass();
                 deviceName.getClass();
                 deviceType.getClass();
-                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_CONTROL_MAIN_SCREEN, SystemUIAnalytics.EID_CONTROL_TAP_MAIN_ACTION_BTN, SystemUIAnalytics.CONTROL_KEY_TEMPLATE, templateType, SystemUIAnalytics.CONTROL_KEY_DEVICE_NAME, obj, SystemUIAnalytics.CONTROL_KEY_DEVICE_TYPE, valueOf);
+                SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_CONTROL_MAIN_SCREEN, SystemUIAnalytics.EID_CONTROL_TAP_MAIN_ACTION_BTN, SystemUIAnalytics.CONTROL_KEY_TEMPLATE, templateType, SystemUIAnalytics.CONTROL_KEY_DEVICE_NAME, string, SystemUIAnalytics.CONTROL_KEY_DEVICE_TYPE, strValueOf);
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TapMenuDevicesToShow extends Event {
             public final Screen screen;
 
@@ -633,7 +609,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TapMenuManageApp extends Event {
             public final Screen screen;
 
@@ -651,7 +626,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TapMenuSetting extends Event {
             public final Screen screen;
 
@@ -669,7 +643,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TapSmallTypeCard extends Event {
             public final String deviceName;
             public final String deviceType;
@@ -695,7 +668,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TapSpinnerApp extends Event {
             public final String selectedApp;
 
@@ -752,10 +724,8 @@ public final class SALogger {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Screen {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ChooseDevices extends Screen {
             public static final ChooseDevices INSTANCE = new ChooseDevices();
 
@@ -781,7 +751,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class CustomPanel extends Screen {
             public static final CustomPanel INSTANCE = new CustomPanel();
 
@@ -807,7 +776,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Intro extends Screen {
             public static final Intro INSTANCE = new Intro();
 
@@ -833,7 +801,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class IntroNoAppsToShow extends Screen {
             public static final IntroNoAppsToShow INSTANCE = new IntroNoAppsToShow();
 
@@ -859,7 +826,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class MainScreen extends Screen {
             public static final MainScreen INSTANCE = new MainScreen();
 
@@ -885,7 +851,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ManageApps extends Screen {
             public static final ManageApps INSTANCE = new ManageApps();
 
@@ -911,7 +876,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class NoDeviceSelected extends Screen {
             public static final NoDeviceSelected INSTANCE = new NoDeviceSelected();
 
@@ -937,7 +901,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Settings extends Screen {
             public static final Settings INSTANCE = new Settings();
 
@@ -973,10 +936,8 @@ public final class SALogger {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class StatusEvent {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class DeviceAppStatus extends StatusEvent {
             public final AppStatusList appList;
 
@@ -996,7 +957,6 @@ public final class SALogger {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class NumberOfApps extends StatusEvent {
             public final int selectedApps;
             public final int totalApps;

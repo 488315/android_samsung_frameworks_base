@@ -95,11 +95,11 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
             return false;
         }
         Log.d(TAG, "checkStartDnd : canDrag #1 itemPosition = " + i3);
-        boolean canDrag = this.mDndController.canDrag(i3);
-        if (!canDrag) {
+        boolean zCanDrag = this.mDndController.canDrag(i3);
+        if (!zCanDrag) {
             speakNotDraggableForAccessibility(i3);
         }
-        return canDrag;
+        return zCanDrag;
     }
 
     private boolean checkDndGrabHandle(int i, int i2, int i3) {
@@ -120,102 +120,48 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
         return initDragIfNecessary(this.mListView.pointToPosition((int) this.mTempEvent.getX(), (int) this.mTempEvent.getY()));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x000e, code lost:
-    
-        if (r0 != 3) goto L49;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x002b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onInterceptTouchEvent(android.view.MotionEvent r5) {
-        /*
-            r4 = this;
-            int r0 = r5.getAction()
-            r1 = 0
-            r2 = 1
-            if (r0 == 0) goto L39
-            if (r0 == r2) goto L2b
-            r3 = 2
-            if (r0 == r3) goto L12
-            r2 = 3
-            if (r0 == r2) goto L2b
-            goto Laa
-        L12:
-            boolean r5 = r4.isDraggable()
-            if (r5 == 0) goto Laa
-            int r5 = r4.mDndTouchMode
-            if (r5 != r2) goto Laa
-            android.widget.ListView r5 = r4.mListView
-            int r5 = r5.getCount()
-            if (r5 <= r2) goto Laa
-            boolean r4 = r4.activatedByLongPress()
-            if (r4 == 0) goto Laa
-            return r2
-        L2b:
-            boolean r0 = r4.isDraggable()
-            if (r0 == 0) goto Laa
-            int r0 = r4.mDndTouchMode
-            if (r0 == 0) goto Laa
-            r4.onTouchUpCancel(r5)
-            goto Laa
-        L39:
-            android.widget.ListView r0 = r4.mListView
-            boolean r0 = r0.isEnabled()
-            if (r0 != 0) goto L42
-            return r1
-        L42:
-            android.view.MotionEvent r0 = r4.mTempEvent
-            if (r0 == 0) goto L4b
-            android.view.MotionEvent r0 = r4.mTempEvent
-            r0.recycle()
-        L4b:
-            android.view.MotionEvent r0 = android.view.MotionEvent.obtain(r5)
-            r4.mTempEvent = r0
-            int r0 = r5.getPointerId(r1)
-            r4.mActivePointerId = r0
-            float r0 = r5.getX()
-            int r0 = (int) r0
-            r4.mDndTouchX = r0
-            float r5 = r5.getY()
-            int r5 = (int) r5
-            r4.mDndTouchY = r5
-            int r5 = r4.mDndTouchY
-            r4.mFirstTouchY = r5
-            boolean r5 = r4.isDraggable()
-            if (r5 == 0) goto Laa
-            android.widget.ListView r5 = r4.mListView
-            int r5 = r5.getCount()
-            if (r5 <= r2) goto Laa
-            android.widget.ListView r5 = r4.mListView
-            int r0 = r4.mDndTouchX
-            int r3 = r4.mDndTouchY
-            int r5 = r5.pointToPosition(r0, r3)
-            r0 = -1
-            if (r5 != r0) goto L85
-            return r1
-        L85:
-            boolean r0 = r4.activatedByLongPress()
-            if (r0 == 0) goto L8c
-            return r1
-        L8c:
-            if (r5 < 0) goto La7
-            android.widget.ListView r0 = r4.mListView
-            int r0 = r0.getCount()
-            if (r5 >= r0) goto La7
-            int r0 = r4.mDndTouchX
-            int r3 = r4.mDndTouchY
-            boolean r0 = r4.checkStartDnd(r0, r3, r5)
-            if (r0 == 0) goto La7
-            boolean r4 = r4.initDrag(r5)
-            if (r4 == 0) goto Laa
-            return r2
-        La7:
-            r4.resetDndState()
-        Laa:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.animation.SemDragAndDropListAnimator.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onInterceptTouchEvent(MotionEvent motionEvent) {
+        int iPointToPosition;
+        int action = motionEvent.getAction();
+        if (action != 0) {
+            if (action == 1) {
+                if (isDraggable() && this.mDndTouchMode != 0) {
+                    onTouchUpCancel(motionEvent);
+                }
+            } else if (action != 2) {
+                if (action == 3) {
+                }
+            } else if (isDraggable() && this.mDndTouchMode == 1 && this.mListView.getCount() > 1 && activatedByLongPress()) {
+                return true;
+            }
+        } else {
+            if (!this.mListView.isEnabled()) {
+                return false;
+            }
+            if (this.mTempEvent != null) {
+                this.mTempEvent.recycle();
+            }
+            this.mTempEvent = MotionEvent.obtain(motionEvent);
+            this.mActivePointerId = motionEvent.getPointerId(0);
+            this.mDndTouchX = (int) motionEvent.getX();
+            this.mDndTouchY = (int) motionEvent.getY();
+            this.mFirstTouchY = this.mDndTouchY;
+            if (!isDraggable() || this.mListView.getCount() <= 1 || (iPointToPosition = this.mListView.pointToPosition(this.mDndTouchX, this.mDndTouchY)) == -1 || activatedByLongPress()) {
+                return false;
+            }
+            if (iPointToPosition >= 0 && iPointToPosition < this.mListView.getCount() && checkStartDnd(this.mDndTouchX, this.mDndTouchY, iPointToPosition)) {
+                if (initDrag(iPointToPosition)) {
+                    return true;
+                }
+            } else {
+                resetDndState();
+            }
+        }
+        return false;
     }
 
     public AdapterView.OnItemLongClickListener getDragAndDropOnItemLongClickListener() {
@@ -251,14 +197,14 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
             if (this.mDragViewBitmap != null) {
                 this.mDragViewBitmap.recycle();
             }
-            int semGetRoundedCorners = this.mDragView.semGetRoundedCorners();
-            this.mDragViewRoundCorner = semGetRoundedCorners;
-            if (semGetRoundedCorners != 0) {
+            int iSemGetRoundedCorners = this.mDragView.semGetRoundedCorners();
+            this.mDragViewRoundCorner = iSemGetRoundedCorners;
+            if (iSemGetRoundedCorners != 0) {
                 this.mDragView.semSetRoundedCorners(0);
                 this.mDragView.invalidate();
             }
             TypedValue typedValue = new TypedValue();
-            int round = Math.round(this.mListView.getContext().getResources().getDisplayMetrics().density);
+            int iRound = Math.round(this.mListView.getContext().getResources().getDisplayMetrics().density);
             if (this.mDragView.getContext().getTheme().resolveAttribute(16843828, typedValue, true)) {
                 i2 = typedValue.data;
             } else {
@@ -270,7 +216,7 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
             Paint paint = new Paint();
             paint.setStyle(Paint.Style.STROKE);
             paint.setColor(i2);
-            paint.setStrokeWidth(round);
+            paint.setStrokeWidth(iRound);
             canvas.drawRect(new Rect(0, 0, this.mDragViewBitmap.getWidth() - 1, this.mDragViewBitmap.getHeight() - 1), paint);
         }
         setDragViewAlpha(255);
@@ -296,37 +242,39 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
         this.mItemAnimator.start();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:22:0x003b  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean onTouchEvent(MotionEvent motionEvent) {
         if (!isDraggable() || this.mDndTouchMode == 0) {
             return false;
         }
         int action = motionEvent.getAction();
         int i = action & 255;
-        if (i != 1) {
-            if (i == 2) {
-                onTouchMove(motionEvent);
-            } else if (i != 3) {
-                if (i == 6) {
-                    int i2 = (action & 65280) >> 8;
-                    if (motionEvent.getPointerId(i2) == this.mActivePointerId) {
-                        this.mActivePointerId = motionEvent.getPointerId(i2 == 0 ? 1 : 0);
-                    }
+        if (i == 1) {
+            onTouchUpCancel(motionEvent);
+        } else if (i == 2) {
+            onTouchMove(motionEvent);
+        } else if (i != 3) {
+            if (i == 6) {
+                int i2 = (action & 65280) >> 8;
+                if (motionEvent.getPointerId(i2) == this.mActivePointerId) {
+                    this.mActivePointerId = motionEvent.getPointerId(i2 == 0 ? 1 : 0);
                 }
             }
-            return true;
         }
-        onTouchUpCancel(motionEvent);
         return true;
     }
 
     private void onTouchMove(MotionEvent motionEvent) {
-        int findPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
-        if (findPointerIndex == -1) {
+        int iFindPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
+        if (iFindPointerIndex == -1) {
             this.mActivePointerId = motionEvent.getPointerId(0);
-            findPointerIndex = 0;
+            iFindPointerIndex = 0;
         }
-        this.mDndTouchX = (int) motionEvent.getX(findPointerIndex);
-        this.mDndTouchY = (int) motionEvent.getY(findPointerIndex);
+        this.mDndTouchX = (int) motionEvent.getX(iFindPointerIndex);
+        this.mDndTouchY = (int) motionEvent.getY(iFindPointerIndex);
         if (this.mDndTouchY > (this.mListView.getBottom() - this.mListView.getPaddingBottom()) - this.mListView.getTop()) {
             this.mDndTouchY = (this.mListView.getBottom() - this.mListView.getPaddingBottom()) - this.mListView.getTop();
         } else if (this.mDndTouchY < this.mListView.getPaddingTop()) {
@@ -369,10 +317,10 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
     @Override // com.samsung.android.animation.SemAbsDragAndDropAnimator
     void reorderIfNeeded() {
         int i = this.mDragPos;
-        int findDragItemPosition = findDragItemPosition((this.mDndTouchY - this.mDndTouchOffsetY) + (this.mDragViewRect.height() / 2));
-        Log.d(TAG, "reorderIfNeeded : canDrop #1 mFirstDragPos = " + this.mFirstDragPos + ", dragPos = " + findDragItemPosition);
-        if (findDragItemPosition != -1 && this.mDndController.canDrop(this.mFirstDragPos, findDragItemPosition)) {
-            this.mDragPos = findDragItemPosition;
+        int iFindDragItemPosition = findDragItemPosition((this.mDndTouchY - this.mDndTouchOffsetY) + (this.mDragViewRect.height() / 2));
+        Log.d(TAG, "reorderIfNeeded : canDrop #1 mFirstDragPos = " + this.mFirstDragPos + ", dragPos = " + iFindDragItemPosition);
+        if (iFindDragItemPosition != -1 && this.mDndController.canDrop(this.mFirstDragPos, iFindDragItemPosition)) {
+            this.mDragPos = iFindDragItemPosition;
         }
         if (i != this.mDragPos && !this.mListItemSelectionAnimating) {
             recalculateOffset(i, this.mDragPos);
@@ -412,15 +360,15 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
             } else if (this.mDragPos < firstVisiblePosition) {
                 i = -((i2 - this.mListView.getChildAt(0).getTop()) + this.mDragViewRect.height());
                 Log.v(TAG, "dndListener.onTouchUp() dragView == null, distance=" + i);
-                ValueAnimator ofInt = ValueAnimator.ofInt(0, i);
-                ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemDragAndDropListAnimator.3
+                ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(0, i);
+                valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemDragAndDropListAnimator.3
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public void onAnimationUpdate(ValueAnimator valueAnimator) {
                         SemDragAndDropListAnimator.this.mDragViewBitmapTranslateY = ((Integer) valueAnimator.getAnimatedValue()).intValue();
                         SemDragAndDropListAnimator.this.mListView.invalidate();
                     }
                 });
-                ofInt.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemDragAndDropListAnimator.4
+                valueAnimatorOfInt.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemDragAndDropListAnimator.4
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public void onAnimationEnd(Animator animator) {
                         if (SemDragAndDropListAnimator.this.mFirstDragPos != SemDragAndDropListAnimator.this.mDragPos) {
@@ -437,24 +385,24 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
                         }
                     }
                 });
-                ofInt.setDuration(210L);
-                ofInt.setInterpolator(SINE_IN_OUT_70);
-                ofInt.start();
+                valueAnimatorOfInt.setDuration(210L);
+                valueAnimatorOfInt.setInterpolator(SINE_IN_OUT_70);
+                valueAnimatorOfInt.start();
             } else {
                 ListView listView = this.mListView;
                 bottom = listView.getChildAt(listView.getChildCount() - 1).getBottom();
             }
             i = bottom - i2;
             Log.v(TAG, "dndListener.onTouchUp() dragView == null, distance=" + i);
-            ValueAnimator ofInt2 = ValueAnimator.ofInt(0, i);
-            ofInt2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemDragAndDropListAnimator.3
+            ValueAnimator valueAnimatorOfInt2 = ValueAnimator.ofInt(0, i);
+            valueAnimatorOfInt2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemDragAndDropListAnimator.3
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     SemDragAndDropListAnimator.this.mDragViewBitmapTranslateY = ((Integer) valueAnimator.getAnimatedValue()).intValue();
                     SemDragAndDropListAnimator.this.mListView.invalidate();
                 }
             });
-            ofInt2.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemDragAndDropListAnimator.4
+            valueAnimatorOfInt2.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemDragAndDropListAnimator.4
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animator) {
                     if (SemDragAndDropListAnimator.this.mFirstDragPos != SemDragAndDropListAnimator.this.mDragPos) {
@@ -471,9 +419,9 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
                     }
                 }
             });
-            ofInt2.setDuration(210L);
-            ofInt2.setInterpolator(SINE_IN_OUT_70);
-            ofInt2.start();
+            valueAnimatorOfInt2.setDuration(210L);
+            valueAnimatorOfInt2.setInterpolator(SINE_IN_OUT_70);
+            valueAnimatorOfInt2.start();
         } else if (this.mListItemSelectionAnimating) {
             resetDndState();
             if (this.mDndListener != null) {
@@ -576,14 +524,14 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
     }
 
     private void updateRoundCorner(int i) {
-        int semGetRoundedCorners;
+        int iSemGetRoundedCorners;
         int i2;
         View childAt = this.mListView.getChildAt(i - this.mListView.getFirstVisiblePosition());
-        if (childAt == null || (i2 = this.mDragViewRoundCorner) == (semGetRoundedCorners = childAt.semGetRoundedCorners())) {
+        if (childAt == null || (i2 = this.mDragViewRoundCorner) == (iSemGetRoundedCorners = childAt.semGetRoundedCorners())) {
             return;
         }
         childAt.semSetRoundedCorners(i2);
-        this.mDragViewRoundCorner = semGetRoundedCorners;
+        this.mDragViewRoundCorner = iSemGetRoundedCorners;
         childAt.invalidate();
     }
 
@@ -591,14 +539,14 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
         View childAt;
         int dividerHeight = this.mListView.getDividerHeight();
         int firstVisiblePosition = this.mListView.getFirstVisiblePosition();
-        int height = this.mDragViewRect.height() + dividerHeight;
+        int iHeight = this.mDragViewRect.height() + dividerHeight;
         if (i2 <= i) {
             for (int i3 = i - 1; i3 >= i2; i3--) {
                 if (i3 < this.mFirstDragPos) {
                     Log.d(TAG, "recalculateOffset : canDrop #3 mFirstDragPos = " + this.mFirstDragPos + ", i = " + i3);
                     if (this.mDndController.canDrop(this.mFirstDragPos, i3)) {
                         int i4 = i3;
-                        int i5 = height;
+                        int i5 = iHeight;
                         while (true) {
                             i4++;
                             if (this.mNonMovableItems.indexOfKey(i4) < 0) {
@@ -617,9 +565,9 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
                     if (childAt2 == null) {
                         Log.e(TAG, "recalculateOffset('dragging up') no such item, i=" + i3);
                     } else {
-                        int findMovedItemPosition = findMovedItemPosition(SemAnimatorUtils.getViewCenterY(childAt2));
-                        updateRoundCorner(findMovedItemPosition);
-                        addReturningTranslation(findMovedItemPosition);
+                        int iFindMovedItemPosition = findMovedItemPosition(SemAnimatorUtils.getViewCenterY(childAt2));
+                        updateRoundCorner(iFindMovedItemPosition);
+                        addReturningTranslation(iFindMovedItemPosition);
                     }
                 }
             }
@@ -634,7 +582,7 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
                 Log.d(TAG, "recalculateOffset : canDrop #2 mFirstDragPos = " + this.mFirstDragPos + ", i = " + i);
                 if (this.mDndController.canDrop(this.mFirstDragPos, i)) {
                     int i6 = i;
-                    int i7 = height;
+                    int i7 = iHeight;
                     while (true) {
                         i6--;
                         if (this.mNonMovableItems.indexOfKey(i6) < 0) {
@@ -656,9 +604,9 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
                 if (childAt4 == null) {
                     Log.e(TAG, "recalculateOffset('dragging down') no such item, i=" + i);
                 } else {
-                    int findMovedItemPosition2 = findMovedItemPosition(SemAnimatorUtils.getViewCenterY(childAt4));
-                    updateRoundCorner(findMovedItemPosition2);
-                    addReturningTranslation(findMovedItemPosition2);
+                    int iFindMovedItemPosition2 = findMovedItemPosition(SemAnimatorUtils.getViewCenterY(childAt4));
+                    updateRoundCorner(iFindMovedItemPosition2);
+                    addReturningTranslation(iFindMovedItemPosition2);
                 }
             }
         }
@@ -702,11 +650,11 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
     }
 
     public boolean preDrawChild(Canvas canvas, View view, long j) {
-        int indexOfChild = this.mListView.indexOfChild(view) + this.mListView.getFirstVisiblePosition();
-        if (isDraggable() && indexOfChild == this.mFirstDragPos && !this.mDropDonePending && !this.mListItemSelectionAnimating) {
+        int iIndexOfChild = this.mListView.indexOfChild(view) + this.mListView.getFirstVisiblePosition();
+        if (isDraggable() && iIndexOfChild == this.mFirstDragPos && !this.mDropDonePending && !this.mListItemSelectionAnimating) {
             return false;
         }
-        SemDragAndDropAnimationCore.ItemAnimation itemAnimation = this.mItemAnimator.getItemAnimation(indexOfChild);
+        SemDragAndDropAnimationCore.ItemAnimation itemAnimation = this.mItemAnimator.getItemAnimation(iIndexOfChild);
         this.mCanvasSaveCount = 0;
         if (itemAnimation == null) {
             return true;
@@ -727,13 +675,13 @@ public class SemDragAndDropListAnimator extends SemAbsDragAndDropAnimator {
 
     private void drawDragHandlerIfNeeded(Canvas canvas, View view, long j) {
         if (isDraggable()) {
-            int indexOfChild = this.mListView.indexOfChild(view) + this.mListView.getFirstVisiblePosition();
-            if (!this.mListView.getAdapter().isEnabled(indexOfChild) || isHeaderOrFooterViewPos(indexOfChild)) {
+            int iIndexOfChild = this.mListView.indexOfChild(view) + this.mListView.getFirstVisiblePosition();
+            if (!this.mListView.getAdapter().isEnabled(iIndexOfChild) || isHeaderOrFooterViewPos(iIndexOfChild)) {
                 return;
             }
             view.getHitRect(this.mTempRect);
-            Log.d(TAG, "drawDragHandlerIfNeeded : canDrag #2 pos = " + indexOfChild);
-            drawDragHandle(canvas, this.mTempRect, false, this.mDndController.canDrag(indexOfChild));
+            Log.d(TAG, "drawDragHandlerIfNeeded : canDrag #2 pos = " + iIndexOfChild);
+            drawDragHandle(canvas, this.mTempRect, false, this.mDndController.canDrag(iIndexOfChild));
         }
     }
 

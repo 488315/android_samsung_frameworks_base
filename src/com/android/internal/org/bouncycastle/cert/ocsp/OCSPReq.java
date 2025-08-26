@@ -127,7 +127,7 @@ public class OCSPReq {
         return this.req.getOptionalSignature() != null;
     }
 
-    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws OCSPException {
+    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws OCSPException, IOException {
         if (!isSigned()) {
             throw new OCSPException("attempt to verify signature on unsigned object");
         }

@@ -3,7 +3,6 @@ package androidx.compose.ui.text;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextLinkStyles {
     public final SpanStyle focusedStyle;
@@ -28,13 +27,13 @@ public final class TextLinkStyles {
 
     public final int hashCode() {
         SpanStyle spanStyle = this.style;
-        int hashCode = (spanStyle != null ? spanStyle.hashCode() : 0) * 31;
+        int iHashCode = (spanStyle != null ? spanStyle.hashCode() : 0) * 31;
         SpanStyle spanStyle2 = this.focusedStyle;
-        int hashCode2 = (hashCode + (spanStyle2 != null ? spanStyle2.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (spanStyle2 != null ? spanStyle2.hashCode() : 0)) * 31;
         SpanStyle spanStyle3 = this.hoveredStyle;
-        int hashCode3 = (hashCode2 + (spanStyle3 != null ? spanStyle3.hashCode() : 0)) * 31;
+        int iHashCode3 = (iHashCode2 + (spanStyle3 != null ? spanStyle3.hashCode() : 0)) * 31;
         SpanStyle spanStyle4 = this.pressedStyle;
-        return hashCode3 + (spanStyle4 != null ? spanStyle4.hashCode() : 0);
+        return iHashCode3 + (spanStyle4 != null ? spanStyle4.hashCode() : 0);
     }
 
     public TextLinkStyles(SpanStyle spanStyle, SpanStyle spanStyle2, SpanStyle spanStyle3, SpanStyle spanStyle4) {

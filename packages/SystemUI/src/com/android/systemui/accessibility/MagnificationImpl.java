@@ -28,7 +28,6 @@ import java.io.PrintWriter;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MagnificationImpl implements Magnification, CommandQueue.Callbacks {
     static final int DELAY_SHOW_MAGNIFICATION_TIMEOUT_MS = 300;
@@ -49,21 +48,18 @@ public class MagnificationImpl implements Magnification, CommandQueue.Callbacks 
     DisplayIdIndexSupplier mWindowMagnificationControllerSupplier;
     final WindowMagnifierCallback mWindowMagnifierCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.accessibility.MagnificationImpl$3, reason: invalid class name */
     public class AnonymousClass3 implements WindowMagnifierCallback {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.accessibility.MagnificationImpl$4, reason: invalid class name */
     public class AnonymousClass4 implements MagnificationSettingsController.Callback {
         public AnonymousClass4() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FullscreenMagnificationControllerSupplier extends DisplayIdIndexSupplier {
         public final Context mContext;
         public final DisplayManager mDisplayManager;
@@ -84,18 +80,17 @@ public class MagnificationImpl implements Magnification, CommandQueue.Callbacks 
 
         @Override // com.android.systemui.accessibility.DisplayIdIndexSupplier
         public final Object createInstance(Display display) {
-            Context createWindowContext = this.mContext.createWindowContext(display, 2032, null);
+            Context contextCreateWindowContext = this.mContext.createWindowContext(display, 2032, null);
             MagnificationImpl$WindowMagnificationControllerSupplier$$ExternalSyntheticLambda0 magnificationImpl$WindowMagnificationControllerSupplier$$ExternalSyntheticLambda0 = new MagnificationImpl$WindowMagnificationControllerSupplier$$ExternalSyntheticLambda0(this, display, 1);
-            createWindowContext.setTheme(R.style.Theme_SystemUI);
+            contextCreateWindowContext.setTheme(R.style.Theme_SystemUI);
             Executor executor = this.mExecutor;
             DisplayManager displayManager = this.mDisplayManager;
-            AccessibilityManager accessibilityManager = (AccessibilityManager) createWindowContext.getSystemService(AccessibilityManager.class);
+            AccessibilityManager accessibilityManager = (AccessibilityManager) contextCreateWindowContext.getSystemService(AccessibilityManager.class);
             ((WindowManagerProviderImpl) this.mWindowManagerProvider).getClass();
-            return new FullscreenMagnificationController(createWindowContext, this.mHandler, executor, displayManager, accessibilityManager, WindowManagerUtils.getWindowManager(createWindowContext), this.mIWindowManager, magnificationImpl$WindowMagnificationControllerSupplier$$ExternalSyntheticLambda0);
+            return new FullscreenMagnificationController(contextCreateWindowContext, this.mHandler, executor, displayManager, accessibilityManager, WindowManagerUtils.getWindowManager(contextCreateWindowContext), this.mIWindowManager, magnificationImpl$WindowMagnificationControllerSupplier$$ExternalSyntheticLambda0);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SettingsSupplier extends DisplayIdIndexSupplier {
         public final Context mContext;
         public final SecureSettings mSecureSettings;
@@ -112,13 +107,12 @@ public class MagnificationImpl implements Magnification, CommandQueue.Callbacks 
 
         @Override // com.android.systemui.accessibility.DisplayIdIndexSupplier
         public final Object createInstance(Display display) {
-            Context createWindowContext = this.mContext.createWindowContext(display, 2032, null);
-            createWindowContext.setTheme(R.style.Theme_SystemUI);
-            return new MagnificationSettingsController(createWindowContext, new SfVsyncFrameCallbackProvider(), this.mSettingsControllerCallback, this.mSecureSettings, this.mWindowManagerProvider);
+            Context contextCreateWindowContext = this.mContext.createWindowContext(display, 2032, null);
+            contextCreateWindowContext.setTheme(R.style.Theme_SystemUI);
+            return new MagnificationSettingsController(contextCreateWindowContext, new SfVsyncFrameCallbackProvider(), this.mSettingsControllerCallback, this.mSecureSettings, this.mWindowManagerProvider);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WindowMagnificationControllerSupplier extends DisplayIdIndexSupplier {
         public final Context mContext;
         public final Handler mHandler;
@@ -139,12 +133,12 @@ public class MagnificationImpl implements Magnification, CommandQueue.Callbacks 
 
         @Override // com.android.systemui.accessibility.DisplayIdIndexSupplier
         public final Object createInstance(Display display) {
-            Context createWindowContext = this.mContext.createWindowContext(display, 2032, null);
+            Context contextCreateWindowContext = this.mContext.createWindowContext(display, 2032, null);
             ((WindowManagerProviderImpl) this.mWindowManagerProvider).getClass();
-            WindowManager windowManager = WindowManagerUtils.getWindowManager(createWindowContext);
-            createWindowContext.setTheme(R.style.Theme_SystemUI);
+            WindowManager windowManager = WindowManagerUtils.getWindowManager(contextCreateWindowContext);
+            contextCreateWindowContext.setTheme(R.style.Theme_SystemUI);
             MagnificationImpl$WindowMagnificationControllerSupplier$$ExternalSyntheticLambda0 magnificationImpl$WindowMagnificationControllerSupplier$$ExternalSyntheticLambda0 = new MagnificationImpl$WindowMagnificationControllerSupplier$$ExternalSyntheticLambda0(this, display, 0);
-            return new WindowMagnificationController(createWindowContext, this.mHandler, new WindowMagnificationAnimationController(createWindowContext), null, new SurfaceControl.Transaction(), this.mWindowMagnifierCallback, this.mSysUiState, this.mSecureSettings, magnificationImpl$WindowMagnificationControllerSupplier$$ExternalSyntheticLambda0, windowManager);
+            return new WindowMagnificationController(contextCreateWindowContext, this.mHandler, new WindowMagnificationAnimationController(contextCreateWindowContext), null, new SurfaceControl.Transaction(), this.mWindowMagnifierCallback, this.mSysUiState, this.mSecureSettings, magnificationImpl$WindowMagnificationControllerSupplier$$ExternalSyntheticLambda0, windowManager);
         }
     }
 
@@ -163,9 +157,9 @@ public class MagnificationImpl implements Magnification, CommandQueue.Callbacks 
                 WindowMagnificationController windowMagnificationController = (WindowMagnificationController) obj;
                 int i = MagnificationImpl.DELAY_SHOW_MAGNIFICATION_TIMEOUT_MS;
                 printWriter2.println("WindowMagnificationController (displayId=" + windowMagnificationController.mDisplayId + "):");
-                StringBuilder m = MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("      mOverlapWithGestureInsets:"), windowMagnificationController.mOverlapWithGestureInsets, printWriter2, "      mScale:"), windowMagnificationController.mScale, printWriter2, "      mWindowBounds:");
-                m.append(windowMagnificationController.mWindowBounds);
-                printWriter2.println(m.toString());
+                StringBuilder sbM = MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("      mOverlapWithGestureInsets:"), windowMagnificationController.mOverlapWithGestureInsets, printWriter2, "      mScale:"), windowMagnificationController.mScale, printWriter2, "      mWindowBounds:");
+                sbM.append(windowMagnificationController.mWindowBounds);
+                printWriter2.println(sbM.toString());
                 StringBuilder sb = new StringBuilder("      mMirrorViewBounds:");
                 sb.append(windowMagnificationController.isActivated() ? windowMagnificationController.mMirrorViewBounds : "empty");
                 printWriter2.println(sb.toString());

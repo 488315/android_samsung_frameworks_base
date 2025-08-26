@@ -207,9 +207,9 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
         }
         KeyButtonDrawable keyButtonDrawable = (KeyButtonDrawable) drawable;
         keyButtonDrawable.setDarkIntensity(this.mDarkIntensity);
-        boolean hasOvalBg = keyButtonDrawable.hasOvalBg();
-        this.mHasOvalBg = hasOvalBg;
-        if (hasOvalBg) {
+        boolean zHasOvalBg = keyButtonDrawable.hasOvalBg();
+        this.mHasOvalBg = zHasOvalBg;
+        if (zHasOvalBg) {
             this.mOvalBgPaint.setColor(keyButtonDrawable.getDrawableBackgroundColor());
         }
         this.mRipple.setType(keyButtonDrawable.hasOvalBg() ? KeyButtonRipple.Type.OVAL : KeyButtonRipple.Type.ROUNDED_RECT);
@@ -229,7 +229,7 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
     private void sendEvent(int i, int i2, long j) {
         InputConnection currentInputConnection;
         if (this.mContext instanceof InputMethodService) {
-            boolean z = false;
+            boolean zOnKeyUp = false;
             KeyEvent keyEvent = new KeyEvent(this.mDownTime, j, i, this.mCode, (i2 & 128) != 0 ? 1 : 0, 0, -1, 0, i2 | 66, 257);
             int displayId = getDisplay() != null ? getDisplay().getDisplayId() : -1;
             if (displayId != -1) {
@@ -237,13 +237,13 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
             }
             InputMethodService inputMethodService = (InputMethodService) this.mContext;
             if (i == 0) {
-                boolean onKeyDown = inputMethodService.onKeyDown(keyEvent.getKeyCode(), keyEvent);
-                this.mTracking = onKeyDown && keyEvent.getRepeatCount() == 0 && (keyEvent.getFlags() & 1073741824) != 0;
-                z = onKeyDown;
+                boolean zOnKeyDown = inputMethodService.onKeyDown(keyEvent.getKeyCode(), keyEvent);
+                this.mTracking = zOnKeyDown && keyEvent.getRepeatCount() == 0 && (keyEvent.getFlags() & 1073741824) != 0;
+                zOnKeyUp = zOnKeyDown;
             } else if (i == 1) {
-                z = inputMethodService.onKeyUp(keyEvent.getKeyCode(), keyEvent);
+                zOnKeyUp = inputMethodService.onKeyUp(keyEvent.getKeyCode(), keyEvent);
             }
-            if (z || (currentInputConnection = inputMethodService.getCurrentInputConnection()) == null) {
+            if (zOnKeyUp || (currentInputConnection = inputMethodService.getCurrentInputConnection()) == null) {
                 return;
             }
             currentInputConnection.sendKeyEvent(keyEvent);
@@ -270,9 +270,9 @@ public class KeyButtonView extends ImageView implements ButtonInterface {
     public void draw(Canvas canvas) {
         Canvas canvas2;
         if (this.mHasOvalBg) {
-            float min = Math.min(getWidth(), getHeight());
+            float fMin = Math.min(getWidth(), getHeight());
             canvas2 = canvas;
-            canvas2.drawOval(0.0f, 0.0f, min, min, this.mOvalBgPaint);
+            canvas2.drawOval(0.0f, 0.0f, fMin, fMin, this.mOvalBgPaint);
         } else {
             canvas2 = canvas;
         }

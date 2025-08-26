@@ -19,7 +19,6 @@ import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class RouteDeviceController$Companion$routeDeviceChanges$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ MediaRouter2Manager $this_routeDeviceChanges;
@@ -59,41 +58,41 @@ final class RouteDeviceController$Companion$routeDeviceChanges$1 extends Suspend
             MediaRouter2Manager.Callback callback = new MediaRouter2Manager.Callback() { // from class: com.android.systemui.media.mediaoutput.controller.device.RouteDeviceController$Companion$routeDeviceChanges$1$callback$1
                 public final void onPreferredFeaturesChanged(String str, List list) {
                     Log.d("RouteDeviceController", "onPreferredFeaturesChanged() - " + str + ", " + list);
-                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(ProducerScope.this, mediaRouter2Manager);
+                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(producerScope, mediaRouter2Manager);
                 }
 
                 public final void onRequestFailed(int i2) {
                     ListPopupWindow$$ExternalSyntheticOutline0.m(i2, "onRequestFailed() - ", "RouteDeviceController");
-                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(ProducerScope.this, mediaRouter2Manager);
+                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(producerScope, mediaRouter2Manager);
                 }
 
                 public final void onRouteListingPreferenceUpdated(String str, RouteListingPreference routeListingPreference) {
                     Log.d("RouteDeviceController", "onRouteListingPreferenceUpdated() - " + str + ", " + routeListingPreference);
-                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(ProducerScope.this, mediaRouter2Manager);
+                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(producerScope, mediaRouter2Manager);
                 }
 
                 public final void onRoutesUpdated() {
-                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(ProducerScope.this, mediaRouter2Manager);
+                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(producerScope, mediaRouter2Manager);
                 }
 
                 public final void onSessionReleased(RoutingSessionInfo routingSessionInfo) {
                     Log.d("RouteDeviceController", "onSessionReleased() - " + routingSessionInfo);
-                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(ProducerScope.this, mediaRouter2Manager);
+                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(producerScope, mediaRouter2Manager);
                 }
 
                 public final void onSessionUpdated(RoutingSessionInfo routingSessionInfo) {
                     Log.d("RouteDeviceController", "onSessionUpdated() - " + routingSessionInfo);
-                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(ProducerScope.this, mediaRouter2Manager);
+                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(producerScope, mediaRouter2Manager);
                 }
 
                 public final void onTransferFailed(RoutingSessionInfo routingSessionInfo, MediaRoute2Info mediaRoute2Info) {
                     Log.d("RouteDeviceController", "onTransferFailed() - " + routingSessionInfo + " - " + mediaRoute2Info);
-                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(ProducerScope.this, mediaRouter2Manager);
+                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(producerScope, mediaRouter2Manager);
                 }
 
                 public final void onTransferred(RoutingSessionInfo routingSessionInfo, RoutingSessionInfo routingSessionInfo2) {
                     Log.d("RouteDeviceController", "onTransferred() - " + routingSessionInfo2);
-                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(ProducerScope.this, mediaRouter2Manager);
+                    RouteDeviceController$Companion$routeDeviceChanges$1.invokeSuspend$updateRoutes(producerScope, mediaRouter2Manager);
                 }
             };
             invokeSuspend$updateRoutes(producerScope, this.$this_routeDeviceChanges);

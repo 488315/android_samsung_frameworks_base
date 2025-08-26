@@ -6,7 +6,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.serialization.KSerializer;
 import kotlinx.serialization.encoding.AbstractEncoder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class MapLikeSerializer extends AbstractCollectionSerializer {
     public final KSerializer keySerializer;
@@ -20,10 +19,10 @@ public abstract class MapLikeSerializer extends AbstractCollectionSerializer {
     public final void serialize(AbstractEncoder abstractEncoder, Object obj) {
         collectionSize(obj);
         getDescriptor();
-        Iterator collectionIterator = collectionIterator(obj);
+        Iterator itCollectionIterator = collectionIterator(obj);
         int i = 0;
-        while (collectionIterator.hasNext()) {
-            Map.Entry entry = (Map.Entry) collectionIterator.next();
+        while (itCollectionIterator.hasNext()) {
+            Map.Entry entry = (Map.Entry) itCollectionIterator.next();
             Object key = entry.getKey();
             Object value = entry.getValue();
             int i2 = i + 1;

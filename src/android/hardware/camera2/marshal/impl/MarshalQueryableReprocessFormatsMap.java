@@ -19,9 +19,9 @@ public class MarshalQueryableReprocessFormatsMap implements MarshalQueryable<Rep
         public void marshal(ReprocessFormatsMap reprocessFormatsMap, ByteBuffer byteBuffer) {
             for (int i : StreamConfigurationMap.imageFormatToInternal(reprocessFormatsMap.getInputs())) {
                 byteBuffer.putInt(i);
-                int[] imageFormatToInternal = StreamConfigurationMap.imageFormatToInternal(reprocessFormatsMap.getOutputs(i));
-                byteBuffer.putInt(imageFormatToInternal.length);
-                for (int i2 : imageFormatToInternal) {
+                int[] iArrImageFormatToInternal = StreamConfigurationMap.imageFormatToInternal(reprocessFormatsMap.getOutputs(i));
+                byteBuffer.putInt(iArrImageFormatToInternal.length);
+                for (int i2 : iArrImageFormatToInternal) {
                     byteBuffer.putInt(i2);
                 }
             }
@@ -30,11 +30,11 @@ public class MarshalQueryableReprocessFormatsMap implements MarshalQueryable<Rep
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.hardware.camera2.marshal.Marshaler
         public ReprocessFormatsMap unmarshal(ByteBuffer byteBuffer) {
-            int remaining = byteBuffer.remaining() / 4;
+            int iRemaining = byteBuffer.remaining() / 4;
             if (byteBuffer.remaining() % 4 != 0) {
                 throw new AssertionError("ReprocessFormatsMap was not TYPE_INT32");
             }
-            int[] iArr = new int[remaining];
+            int[] iArr = new int[iRemaining];
             byteBuffer.asIntBuffer().get(iArr);
             return new ReprocessFormatsMap(iArr);
         }
@@ -46,11 +46,11 @@ public class MarshalQueryableReprocessFormatsMap implements MarshalQueryable<Rep
 
         @Override // android.hardware.camera2.marshal.Marshaler
         public int calculateMarshalSize(ReprocessFormatsMap reprocessFormatsMap) {
-            int i = 0;
-            for (int i2 : reprocessFormatsMap.getInputs()) {
-                i = i + 2 + reprocessFormatsMap.getOutputs(i2).length;
+            int length = 0;
+            for (int i : reprocessFormatsMap.getInputs()) {
+                length = length + 2 + reprocessFormatsMap.getOutputs(i).length;
             }
-            return i * 4;
+            return length * 4;
         }
     }
 

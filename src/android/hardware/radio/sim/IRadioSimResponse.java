@@ -309,9 +309,9 @@ public interface IRadioSimResponse extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRadioSimResponse)) {
-                return (IRadioSimResponse) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRadioSimResponse)) {
+                return (IRadioSimResponse) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -338,27 +338,27 @@ public interface IRadioSimResponse extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    acknowledgeRequest(readInt);
+                    acknowledgeRequest(i3);
                     return true;
                 case 2:
                     RadioResponseInfo radioResponseInfo = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    areUiccApplicationsEnabledResponse(radioResponseInfo, readBoolean);
+                    areUiccApplicationsEnabledResponse(radioResponseInfo, z);
                     return true;
                 case 3:
                     RadioResponseInfo radioResponseInfo2 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    changeIccPin2ForAppResponse(radioResponseInfo2, readInt2);
+                    changeIccPin2ForAppResponse(radioResponseInfo2, i4);
                     return true;
                 case 4:
                     RadioResponseInfo radioResponseInfo3 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    changeIccPinForAppResponse(radioResponseInfo3, readInt3);
+                    changeIccPinForAppResponse(radioResponseInfo3, i5);
                     return true;
                 case 5:
                     RadioResponseInfo radioResponseInfo4 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
@@ -368,31 +368,31 @@ public interface IRadioSimResponse extends IInterface {
                 case 6:
                     RadioResponseInfo radioResponseInfo5 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
                     CarrierRestrictions carrierRestrictions = (CarrierRestrictions) parcel.readTypedObject(CarrierRestrictions.CREATOR);
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getAllowedCarriersResponse(radioResponseInfo5, carrierRestrictions, readInt4);
+                    getAllowedCarriersResponse(radioResponseInfo5, carrierRestrictions, i6);
                     return true;
                 case 7:
                     RadioResponseInfo radioResponseInfo6 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    getCdmaSubscriptionResponse(radioResponseInfo6, readString, readString2, readString3, readString4, readString5);
+                    getCdmaSubscriptionResponse(radioResponseInfo6, string, string2, string3, string4, string5);
                     return true;
                 case 8:
                     RadioResponseInfo radioResponseInfo7 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getCdmaSubscriptionSourceResponse(radioResponseInfo7, readInt5);
+                    getCdmaSubscriptionSourceResponse(radioResponseInfo7, i7);
                     return true;
                 case 9:
                     RadioResponseInfo radioResponseInfo8 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getFacilityLockForAppResponse(radioResponseInfo8, readInt6);
+                    getFacilityLockForAppResponse(radioResponseInfo8, i8);
                     return true;
                 case 10:
                     RadioResponseInfo radioResponseInfo9 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
@@ -402,9 +402,9 @@ public interface IRadioSimResponse extends IInterface {
                     return true;
                 case 11:
                     RadioResponseInfo radioResponseInfo10 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    getImsiForAppResponse(radioResponseInfo10, readString6);
+                    getImsiForAppResponse(radioResponseInfo10, string6);
                     return true;
                 case 12:
                     RadioResponseInfo radioResponseInfo11 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
@@ -430,10 +430,10 @@ public interface IRadioSimResponse extends IInterface {
                     return true;
                 case 16:
                     RadioResponseInfo radioResponseInfo15 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt7 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i9 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    iccOpenLogicalChannelResponse(radioResponseInfo15, readInt7, createByteArray);
+                    iccOpenLogicalChannelResponse(radioResponseInfo15, i9, bArrCreateByteArray);
                     return true;
                 case 17:
                     RadioResponseInfo radioResponseInfo16 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
@@ -460,9 +460,9 @@ public interface IRadioSimResponse extends IInterface {
                     return true;
                 case 21:
                     RadioResponseInfo radioResponseInfo20 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sendEnvelopeResponse(radioResponseInfo20, readString7);
+                    sendEnvelopeResponse(radioResponseInfo20, string7);
                     return true;
                 case 22:
                     RadioResponseInfo radioResponseInfo21 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
@@ -492,9 +492,9 @@ public interface IRadioSimResponse extends IInterface {
                     return true;
                 case 27:
                     RadioResponseInfo radioResponseInfo26 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setFacilityLockForAppResponse(radioResponseInfo26, readInt8);
+                    setFacilityLockForAppResponse(radioResponseInfo26, i10);
                     return true;
                 case 28:
                     RadioResponseInfo radioResponseInfo27 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
@@ -508,40 +508,40 @@ public interface IRadioSimResponse extends IInterface {
                     return true;
                 case 30:
                     RadioResponseInfo radioResponseInfo29 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    supplyIccPin2ForAppResponse(radioResponseInfo29, readInt9);
+                    supplyIccPin2ForAppResponse(radioResponseInfo29, i11);
                     return true;
                 case 31:
                     RadioResponseInfo radioResponseInfo30 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    supplyIccPinForAppResponse(radioResponseInfo30, readInt10);
+                    supplyIccPinForAppResponse(radioResponseInfo30, i12);
                     return true;
                 case 32:
                     RadioResponseInfo radioResponseInfo31 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    supplyIccPuk2ForAppResponse(radioResponseInfo31, readInt11);
+                    supplyIccPuk2ForAppResponse(radioResponseInfo31, i13);
                     return true;
                 case 33:
                     RadioResponseInfo radioResponseInfo32 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    supplyIccPukForAppResponse(radioResponseInfo32, readInt12);
+                    supplyIccPukForAppResponse(radioResponseInfo32, i14);
                     return true;
                 case 34:
                     RadioResponseInfo radioResponseInfo33 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    supplySimDepersonalizationResponse(radioResponseInfo33, readInt13, readInt14);
+                    supplySimDepersonalizationResponse(radioResponseInfo33, i15, i16);
                     return true;
                 case 35:
                     RadioResponseInfo radioResponseInfo34 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateSimPhonebookRecordsResponse(radioResponseInfo34, readInt15);
+                    updateSimPhonebookRecordsResponse(radioResponseInfo34, i17);
                     return true;
                 case 36:
                     RadioResponseInfo radioResponseInfo35 = (RadioResponseInfo) parcel.readTypedObject(RadioResponseInfo.CREATOR);
@@ -573,588 +573,588 @@ public interface IRadioSimResponse extends IInterface {
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void acknowledgeRequest(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(1, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(1, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method acknowledgeRequest is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void areUiccApplicationsEnabledResponse(RadioResponseInfo radioResponseInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeBoolean(z);
-                    if (this.mRemote.transact(2, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    if (this.mRemote.transact(2, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method areUiccApplicationsEnabledResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void changeIccPin2ForAppResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(3, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(3, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method changeIccPin2ForAppResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void changeIccPinForAppResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(4, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(4, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method changeIccPinForAppResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void enableUiccApplicationsResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(5, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(5, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method enableUiccApplicationsResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void getAllowedCarriersResponse(RadioResponseInfo radioResponseInfo, CarrierRestrictions carrierRestrictions, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeTypedObject(carrierRestrictions, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(6, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeTypedObject(carrierRestrictions, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(6, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getAllowedCarriersResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void getCdmaSubscriptionResponse(RadioResponseInfo radioResponseInfo, String str, String str2, String str3, String str4, String str5) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    if (this.mRemote.transact(7, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    if (this.mRemote.transact(7, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCdmaSubscriptionResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void getCdmaSubscriptionSourceResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(8, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(8, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getCdmaSubscriptionSourceResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void getFacilityLockForAppResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(9, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(9, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getFacilityLockForAppResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void getIccCardStatusResponse(RadioResponseInfo radioResponseInfo, CardStatus cardStatus) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeTypedObject(cardStatus, 0);
-                    if (this.mRemote.transact(10, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeTypedObject(cardStatus, 0);
+                    if (this.mRemote.transact(10, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getIccCardStatusResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void getImsiForAppResponse(RadioResponseInfo radioResponseInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeString(str);
-                    if (this.mRemote.transact(11, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeString(str);
+                    if (this.mRemote.transact(11, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getImsiForAppResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void getSimPhonebookCapacityResponse(RadioResponseInfo radioResponseInfo, PhonebookCapacity phonebookCapacity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeTypedObject(phonebookCapacity, 0);
-                    if (this.mRemote.transact(12, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeTypedObject(phonebookCapacity, 0);
+                    if (this.mRemote.transact(12, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getSimPhonebookCapacityResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void getSimPhonebookRecordsResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(13, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(13, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method getSimPhonebookRecordsResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void iccCloseLogicalChannelResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(14, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(14, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method iccCloseLogicalChannelResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void iccIoForAppResponse(RadioResponseInfo radioResponseInfo, IccIoResult iccIoResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeTypedObject(iccIoResult, 0);
-                    if (this.mRemote.transact(15, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeTypedObject(iccIoResult, 0);
+                    if (this.mRemote.transact(15, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method iccIoForAppResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void iccOpenLogicalChannelResponse(RadioResponseInfo radioResponseInfo, int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    if (this.mRemote.transact(16, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    if (this.mRemote.transact(16, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method iccOpenLogicalChannelResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void iccTransmitApduBasicChannelResponse(RadioResponseInfo radioResponseInfo, IccIoResult iccIoResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeTypedObject(iccIoResult, 0);
-                    if (this.mRemote.transact(17, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeTypedObject(iccIoResult, 0);
+                    if (this.mRemote.transact(17, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method iccTransmitApduBasicChannelResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void iccTransmitApduLogicalChannelResponse(RadioResponseInfo radioResponseInfo, IccIoResult iccIoResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeTypedObject(iccIoResult, 0);
-                    if (this.mRemote.transact(18, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeTypedObject(iccIoResult, 0);
+                    if (this.mRemote.transact(18, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method iccTransmitApduLogicalChannelResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void reportStkServiceIsRunningResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(19, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(19, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method reportStkServiceIsRunningResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void requestIccSimAuthenticationResponse(RadioResponseInfo radioResponseInfo, IccIoResult iccIoResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeTypedObject(iccIoResult, 0);
-                    if (this.mRemote.transact(20, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeTypedObject(iccIoResult, 0);
+                    if (this.mRemote.transact(20, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method requestIccSimAuthenticationResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void sendEnvelopeResponse(RadioResponseInfo radioResponseInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeString(str);
-                    if (this.mRemote.transact(21, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeString(str);
+                    if (this.mRemote.transact(21, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendEnvelopeResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void sendEnvelopeWithStatusResponse(RadioResponseInfo radioResponseInfo, IccIoResult iccIoResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeTypedObject(iccIoResult, 0);
-                    if (this.mRemote.transact(22, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeTypedObject(iccIoResult, 0);
+                    if (this.mRemote.transact(22, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendEnvelopeWithStatusResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void sendTerminalResponseToSimResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(23, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(23, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method sendTerminalResponseToSimResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void setAllowedCarriersResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(24, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(24, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setAllowedCarriersResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void setCarrierInfoForImsiEncryptionResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(25, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(25, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCarrierInfoForImsiEncryptionResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void setCdmaSubscriptionSourceResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(26, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(26, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setCdmaSubscriptionSourceResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void setFacilityLockForAppResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(27, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(27, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setFacilityLockForAppResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void setSimCardPowerResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(28, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(28, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setSimCardPowerResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void setUiccSubscriptionResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(29, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(29, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method setUiccSubscriptionResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void supplyIccPin2ForAppResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(30, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(30, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method supplyIccPin2ForAppResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void supplyIccPinForAppResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(31, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(31, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method supplyIccPinForAppResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void supplyIccPuk2ForAppResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(32, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(32, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method supplyIccPuk2ForAppResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void supplyIccPukForAppResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(33, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(33, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method supplyIccPukForAppResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void supplySimDepersonalizationResponse(RadioResponseInfo radioResponseInfo, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    if (this.mRemote.transact(34, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    if (this.mRemote.transact(34, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method supplySimDepersonalizationResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void updateSimPhonebookRecordsResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    obtain.writeInt(i);
-                    if (this.mRemote.transact(35, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    parcelObtain.writeInt(i);
+                    if (this.mRemote.transact(35, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method updateSimPhonebookRecordsResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public void iccCloseLogicalChannelWithSessionInfoResponse(RadioResponseInfo radioResponseInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(radioResponseInfo, 0);
-                    if (this.mRemote.transact(36, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(radioResponseInfo, 0);
+                    if (this.mRemote.transact(36, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method iccCloseLogicalChannelWithSessionInfoResponse is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -1163,18 +1163,18 @@ public interface IRadioSimResponse extends IInterface {
             @Override // android.hardware.radio.sim.IRadioSimResponse
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

@@ -33,12 +33,12 @@ public class FrameworkParsingPackageUtils {
         boolean z3 = false;
         boolean z4 = true;
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if ((charAt >= 'a' && charAt <= 'z') || (charAt >= 'A' && charAt <= 'Z')) {
+            char cCharAt = str.charAt(i);
+            if ((cCharAt >= 'a' && cCharAt <= 'z') || (cCharAt >= 'A' && cCharAt <= 'Z')) {
                 z4 = false;
-            } else if (z4 || ((charAt < '0' || charAt > '9') && charAt != '_')) {
-                if (charAt != '.') {
-                    return "bad character '" + charAt + "'";
+            } else if (z4 || ((cCharAt < '0' || cCharAt > '9') && cCharAt != '_')) {
+                if (cCharAt != '.') {
+                    return "bad character '" + cCharAt + "'";
                 }
                 z3 = true;
                 z4 = true;
@@ -59,9 +59,9 @@ public class FrameworkParsingPackageUtils {
     }
 
     public static ParseResult validateName(ParseInput parseInput, String str, boolean z, boolean z2) {
-        String validateName = validateName(str, z, z2);
-        if (validateName != null) {
-            return parseInput.error(validateName);
+        String strValidateName = validateName(str, z, z2);
+        if (strValidateName != null) {
+            return parseInput.error(strValidateName);
         }
         return parseInput.success(null);
     }
@@ -122,14 +122,14 @@ public class FrameworkParsingPackageUtils {
             Slog.w(TAG, "Disabling overlay - incomplete property :'" + str + "=" + str2 + "' - require both requiredSystemPropertyName AND requiredSystemPropertyValue to be specified.");
             return false;
         }
-        String[] split = str.split(",");
-        String[] split2 = str2.split(",");
-        if (split.length != split2.length) {
+        String[] strArrSplit = str.split(",");
+        String[] strArrSplit2 = str2.split(",");
+        if (strArrSplit.length != strArrSplit2.length) {
             Slog.w(TAG, "Disabling overlay - property :'" + str + "=" + str2 + "' - require both requiredSystemPropertyName AND requiredSystemPropertyValue lists to have the same size.");
             return false;
         }
-        for (int i = 0; i < split.length; i++) {
-            if (!TextUtils.equals(SystemProperties.get(split[i]), split2[i])) {
+        for (int i = 0; i < strArrSplit.length; i++) {
+            if (!TextUtils.equals(SystemProperties.get(strArrSplit[i]), strArrSplit2[i])) {
                 return false;
             }
         }
@@ -137,23 +137,23 @@ public class FrameworkParsingPackageUtils {
     }
 
     public static ParseResult<SigningDetails> getSigningDetails(ParseInput parseInput, String str, boolean z, boolean z2, SigningDetails signingDetails, int i) {
-        ParseResult<SigningDetails> verify;
+        ParseResult<SigningDetails> parseResultVerify;
         int minimumSignatureSchemeVersionForTargetSdk = ApkSignatureVerifier.getMinimumSignatureSchemeVersionForTargetSdk(i);
         if (z2) {
             minimumSignatureSchemeVersionForTargetSdk = 2;
         }
         if (z) {
-            verify = ApkSignatureVerifier.unsafeGetCertsWithoutVerification(parseInput, str, 1);
+            parseResultVerify = ApkSignatureVerifier.unsafeGetCertsWithoutVerification(parseInput, str, 1);
         } else {
-            verify = ApkSignatureVerifier.verify(parseInput, str, minimumSignatureSchemeVersionForTargetSdk);
+            parseResultVerify = ApkSignatureVerifier.verify(parseInput, str, minimumSignatureSchemeVersionForTargetSdk);
         }
-        if (verify.isError()) {
-            return parseInput.error(verify);
+        if (parseResultVerify.isError()) {
+            return parseInput.error(parseResultVerify);
         }
         if (signingDetails == SigningDetails.UNKNOWN) {
-            return verify;
+            return parseResultVerify;
         }
-        if (!Signature.areExactMatch(signingDetails, verify.getResult())) {
+        if (!Signature.areExactMatch(signingDetails, parseResultVerify.getResult())) {
             return parseInput.error(-104, str + " has mismatched certificates");
         }
         return parseInput.success(signingDetails);
@@ -205,9 +205,9 @@ public class FrameworkParsingPackageUtils {
     }
 
     private static boolean matchTargetCode(String[] strArr, String str) {
-        int indexOf = str.indexOf(46);
-        if (indexOf != -1) {
-            str = str.substring(0, indexOf);
+        int iIndexOf = str.indexOf(46);
+        if (iIndexOf != -1) {
+            str = str.substring(0, iIndexOf);
         }
         return ArrayUtils.contains(strArr, str);
     }

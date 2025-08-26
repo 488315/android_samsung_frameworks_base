@@ -12,7 +12,6 @@ import dagger.Lazy;
 import java.util.List;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UnfoldAnimationController implements ShellUnfoldProgressProvider.UnfoldListener {
     public final List mAnimators;
@@ -41,14 +40,14 @@ public class UnfoldAnimationController implements ShellUnfoldProgressProvider.Un
             return;
         }
         TransactionPool transactionPool = this.mTransactionPool;
-        SurfaceControl.Transaction acquire = transactionPool.acquire();
+        SurfaceControl.Transaction transactionAcquire = transactionPool.acquire();
         for (int i = 0; i < this.mAnimators.size(); i++) {
             UnfoldTaskAnimator unfoldTaskAnimator = (UnfoldTaskAnimator) this.mAnimators.get(i);
-            unfoldTaskAnimator.resetAllSurfaces(acquire);
-            unfoldTaskAnimator.prepareFinishTransaction(acquire);
+            unfoldTaskAnimator.resetAllSurfaces(transactionAcquire);
+            unfoldTaskAnimator.prepareFinishTransaction(transactionAcquire);
         }
-        acquire.apply();
-        transactionPool.release(acquire);
+        transactionAcquire.apply();
+        transactionPool.release(transactionAcquire);
         this.mIsInStageChange = false;
     }
 
@@ -58,7 +57,7 @@ public class UnfoldAnimationController implements ShellUnfoldProgressProvider.Un
         if (((UnfoldTransitionHandler) ((Optional) this.mUnfoldTransitionHandler.get()).get()).mTransition != null) {
             return;
         }
-        SurfaceControl.Transaction transaction = null;
+        SurfaceControl.Transaction transactionAcquire = null;
         int i = 0;
         while (true) {
             int size = this.mAnimators.size();
@@ -68,16 +67,16 @@ public class UnfoldAnimationController implements ShellUnfoldProgressProvider.Un
             }
             UnfoldTaskAnimator unfoldTaskAnimator = (UnfoldTaskAnimator) this.mAnimators.get(i);
             if (unfoldTaskAnimator.hasActiveTasks()) {
-                if (transaction == null) {
-                    transaction = transactionPool.acquire();
+                if (transactionAcquire == null) {
+                    transactionAcquire = transactionPool.acquire();
                 }
-                unfoldTaskAnimator.applyAnimationProgress(f, transaction);
+                unfoldTaskAnimator.applyAnimationProgress(f, transactionAcquire);
             }
             i++;
         }
-        if (transaction != null) {
-            transaction.apply();
-            transactionPool.release(transaction);
+        if (transactionAcquire != null) {
+            transactionAcquire.apply();
+            transactionPool.release(transactionAcquire);
         }
     }
 
@@ -88,7 +87,7 @@ public class UnfoldAnimationController implements ShellUnfoldProgressProvider.Un
             return;
         }
         this.mIsInStageChange = true;
-        SurfaceControl.Transaction transaction = null;
+        SurfaceControl.Transaction transactionAcquire = null;
         int i = 0;
         while (true) {
             int size = this.mAnimators.size();
@@ -98,16 +97,16 @@ public class UnfoldAnimationController implements ShellUnfoldProgressProvider.Un
             }
             UnfoldTaskAnimator unfoldTaskAnimator = (UnfoldTaskAnimator) this.mAnimators.get(i);
             if (unfoldTaskAnimator.hasActiveTasks()) {
-                if (transaction == null) {
-                    transaction = transactionPool.acquire();
+                if (transactionAcquire == null) {
+                    transactionAcquire = transactionPool.acquire();
                 }
-                unfoldTaskAnimator.prepareStartTransaction(transaction);
+                unfoldTaskAnimator.prepareStartTransaction(transactionAcquire);
             }
             i++;
         }
-        if (transaction != null) {
-            transaction.apply();
-            transactionPool.release(transaction);
+        if (transactionAcquire != null) {
+            transactionAcquire.apply();
+            transactionPool.release(transactionAcquire);
         }
     }
 
@@ -130,10 +129,10 @@ public class UnfoldAnimationController implements ShellUnfoldProgressProvider.Un
         }
         if (this.mIsInStageChange) {
             TransactionPool transactionPool = this.mTransactionPool;
-            SurfaceControl.Transaction acquire = transactionPool.acquire();
-            unfoldTaskAnimator.resetSurface(runningTaskInfo, acquire);
-            acquire.apply();
-            transactionPool.release(acquire);
+            SurfaceControl.Transaction transactionAcquire = transactionPool.acquire();
+            unfoldTaskAnimator.resetSurface(runningTaskInfo, transactionAcquire);
+            transactionAcquire.apply();
+            transactionPool.release(transactionAcquire);
         }
         unfoldTaskAnimator.onTaskVanished(runningTaskInfo);
         this.mAnimatorsByTaskId.remove(runningTaskInfo.taskId);

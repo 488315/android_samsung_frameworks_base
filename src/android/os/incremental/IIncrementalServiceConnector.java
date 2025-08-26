@@ -45,9 +45,9 @@ public interface IIncrementalServiceConnector extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIncrementalServiceConnector.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIncrementalServiceConnector)) {
-                return (IIncrementalServiceConnector) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIncrementalServiceConnector.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIncrementalServiceConnector)) {
+                return (IIncrementalServiceConnector) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IIncrementalServiceConnector extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                int storageParams = setStorageParams(readBoolean);
+                int storageParams = setStorageParams(z);
                 parcel2.writeNoException();
                 parcel2.writeInt(storageParams);
                 return true;
@@ -102,17 +102,17 @@ public interface IIncrementalServiceConnector extends IInterface {
 
             @Override // android.os.incremental.IIncrementalServiceConnector
             public int setStorageParams(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalServiceConnector.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalServiceConnector.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

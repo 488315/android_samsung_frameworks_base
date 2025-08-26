@@ -13,9 +13,19 @@ import com.android.systemui.animation.Expandable;
 import com.android.systemui.animation.TransitionAnimator;
 import com.android.systemui.lifecycle.ExclusiveActivatable;
 import com.android.systemui.qs.panels.ui.viewmodel.TileViewModel;
+import com.google.android.msdl.data.model.MSDLToken;
 import com.google.android.msdl.domain.MSDLPlayer;
+import kotlin.KotlinNothingValueException;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.internal.FunctionReferenceImpl;
+import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.SafeFlow;
@@ -23,7 +33,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileHapticsViewModel extends ExclusiveActivatable {
     public final ChannelLimitedFlowMerge hapticsState;
@@ -31,13 +40,11 @@ public final class TileHapticsViewModel extends ExclusiveActivatable {
     public final StateFlowImpl tileAnimationState;
     public final StateFlowImpl tileInteractionState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
     }
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TileAnimationState {
         public static final /* synthetic */ TileAnimationState[] $VALUES;
         public static final TileAnimationState ACTIVITY_LAUNCH;
@@ -70,7 +77,6 @@ public final class TileHapticsViewModel extends ExclusiveActivatable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TileHapticsState {
         public static final /* synthetic */ TileHapticsState[] $VALUES;
         public static final TileHapticsState LONG_PRESS;
@@ -106,7 +112,6 @@ public final class TileHapticsViewModel extends ExclusiveActivatable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TileInteractionState {
         public static final /* synthetic */ TileInteractionState[] $VALUES;
         public static final TileInteractionState CLICKED;
@@ -137,35 +142,105 @@ public final class TileHapticsViewModel extends ExclusiveActivatable {
         }
     }
 
+    /* renamed from: com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$createStateAwareExpandable$1, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function0 {
+        public AnonymousClass1(Object obj) {
+            super(0, obj, TileHapticsViewModel.class, "onDialogDrawingStart", "onDialogDrawingStart()V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function0
+        public final Object invoke() {
+            ((TileHapticsViewModel) this.receiver).tileAnimationState.setValue(TileAnimationState.DIALOG_LAUNCH);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$createStateAwareExpandable$2, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass2 extends FunctionReferenceImpl implements Function0 {
+        public AnonymousClass2(Object obj) {
+            super(0, obj, TileHapticsViewModel.class, "onDialogDrawingEnd", "onDialogDrawingEnd()V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function0
+        public final Object invoke() {
+            ((TileHapticsViewModel) this.receiver).tileAnimationState.setValue(TileAnimationState.IDLE);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$createStateAwareExpandable$3, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass3 extends FunctionReferenceImpl implements Function0 {
+        public AnonymousClass3(Object obj) {
+            super(0, obj, TileHapticsViewModel.class, "onActivityLaunchTransitionStart", "onActivityLaunchTransitionStart()V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function0
+        public final Object invoke() {
+            ((TileHapticsViewModel) this.receiver).tileAnimationState.setValue(TileAnimationState.ACTIVITY_LAUNCH);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$createStateAwareExpandable$4, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass4 extends FunctionReferenceImpl implements Function0 {
+        public AnonymousClass4(Object obj) {
+            super(0, obj, TileHapticsViewModel.class, "onActivityLaunchTransitionEnd", "onActivityLaunchTransitionEnd()V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function0
+        public final Object invoke() {
+            ((TileHapticsViewModel) this.receiver).tileAnimationState.setValue(TileAnimationState.IDLE);
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$onActivated$1, reason: invalid class name and case insensitive filesystem */
+    final class C08681 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C08681(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return TileHapticsViewModel.this.onActivated(this);
+        }
+    }
+
     public TileHapticsViewModel(MSDLPlayer mSDLPlayer, TileViewModel tileViewModel) {
         this.msdlPlayer = mSDLPlayer;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(TileInteractionState.IDLE);
-        this.tileInteractionState = MutableStateFlow;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(TileAnimationState.IDLE);
-        this.tileAnimationState = MutableStateFlow2;
-        this.hapticsState = FlowKt.merge(FlowKt.distinctUntilChanged(new SafeFlow(new TileHapticsViewModel$special$$inlined$transform$1(com.android.systemui.util.kotlin.FlowKt.pairwise(FlowKt.mapLatest(tileViewModel.state, new TileHapticsViewModel$toggleHapticsState$1(null))), null, this))), FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(MutableStateFlow, MutableStateFlow2, new TileHapticsViewModel$interactionHapticsState$1(null))));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(TileInteractionState.IDLE);
+        this.tileInteractionState = stateFlowImplMutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(TileAnimationState.IDLE);
+        this.tileAnimationState = stateFlowImplMutableStateFlow2;
+        this.hapticsState = FlowKt.merge(FlowKt.distinctUntilChanged(new SafeFlow(new TileHapticsViewModel$special$$inlined$transform$1(com.android.systemui.util.kotlin.FlowKt.pairwise(FlowKt.mapLatest(tileViewModel.state, new TileHapticsViewModel$toggleHapticsState$1(null))), null, this))), FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlowImplMutableStateFlow, stateFlowImplMutableStateFlow2, new TileHapticsViewModel$interactionHapticsState$1(null))));
     }
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.haptics.msdl.qs.StateAwareExpandableKt$withStateAwareness$3] */
     public final StateAwareExpandableKt$withStateAwareness$3 createStateAwareExpandable(final Expandable expandable) {
-        final TileHapticsViewModel$createStateAwareExpandable$1 tileHapticsViewModel$createStateAwareExpandable$1 = new TileHapticsViewModel$createStateAwareExpandable$1(this);
-        final TileHapticsViewModel$createStateAwareExpandable$2 tileHapticsViewModel$createStateAwareExpandable$2 = new TileHapticsViewModel$createStateAwareExpandable$2(this);
-        final TileHapticsViewModel$createStateAwareExpandable$3 tileHapticsViewModel$createStateAwareExpandable$3 = new TileHapticsViewModel$createStateAwareExpandable$3(this);
-        final TileHapticsViewModel$createStateAwareExpandable$4 tileHapticsViewModel$createStateAwareExpandable$4 = new TileHapticsViewModel$createStateAwareExpandable$4(this);
+        final AnonymousClass1 anonymousClass1 = new AnonymousClass1(this);
+        final AnonymousClass2 anonymousClass2 = new AnonymousClass2(this);
+        final AnonymousClass3 anonymousClass3 = new AnonymousClass3(this);
+        final AnonymousClass4 anonymousClass4 = new AnonymousClass4(this);
         return new Expandable() { // from class: com.android.systemui.haptics.msdl.qs.StateAwareExpandableKt$withStateAwareness$3
             @Override // com.android.systemui.animation.Expandable
             public final ActivityTransitionAnimator.Controller activityTransitionController(Integer num, ActivityTransitionAnimator.TransitionCookie transitionCookie, ComponentName componentName, Integer num2, boolean z) {
-                ActivityTransitionAnimator.Controller activityTransitionController = Expandable.this.activityTransitionController(num, transitionCookie, componentName, num2, z);
-                if (activityTransitionController != null) {
-                    return new ActivityTransitionAnimator.Controller(tileHapticsViewModel$createStateAwareExpandable$3, tileHapticsViewModel$createStateAwareExpandable$4) { // from class: com.android.systemui.haptics.msdl.qs.StateAwareExpandableKt$withStateAwareness$1
+                ActivityTransitionAnimator.Controller controllerActivityTransitionController = expandable.activityTransitionController(num, transitionCookie, componentName, num2, z);
+                if (controllerActivityTransitionController != null) {
+                    return new ActivityTransitionAnimator.Controller(anonymousClass3, anonymousClass4) { // from class: com.android.systemui.haptics.msdl.qs.StateAwareExpandableKt$withStateAwareness$1
                         public final /* synthetic */ ActivityTransitionAnimator.Controller $$delegate_0;
                         public final /* synthetic */ Function0 $onActivityLaunchTransitionEnd;
                         public final /* synthetic */ Function0 $onActivityLaunchTransitionStart;
 
                         {
-                            this.$onActivityLaunchTransitionStart = r2;
-                            this.$onActivityLaunchTransitionEnd = r3;
-                            this.$$delegate_0 = ActivityTransitionAnimator.Controller.this;
+                            this.$onActivityLaunchTransitionStart = function0;
+                            this.$onActivityLaunchTransitionEnd = function0;
+                            this.$$delegate_0 = this.$delegate;
                         }
 
                         @Override // com.android.systemui.animation.TransitionAnimator.Controller
@@ -226,13 +301,13 @@ public final class TileHapticsViewModel extends ExclusiveActivatable {
                         @Override // com.android.systemui.animation.ActivityTransitionAnimator.Controller
                         public final void onTransitionAnimationCancelled() {
                             this.$onActivityLaunchTransitionEnd.invoke();
-                            ActivityTransitionAnimator.Controller.this.onTransitionAnimationCancelled();
+                            this.$delegate.onTransitionAnimationCancelled();
                         }
 
                         @Override // com.android.systemui.animation.TransitionAnimator.Controller
                         public final void onTransitionAnimationEnd(boolean z2) {
                             this.$onActivityLaunchTransitionEnd.invoke();
-                            ActivityTransitionAnimator.Controller.this.onTransitionAnimationEnd(z2);
+                            this.$delegate.onTransitionAnimationEnd(z2);
                         }
 
                         @Override // com.android.systemui.animation.TransitionAnimator.Controller
@@ -243,7 +318,7 @@ public final class TileHapticsViewModel extends ExclusiveActivatable {
                         @Override // com.android.systemui.animation.TransitionAnimator.Controller
                         public final void onTransitionAnimationStart(boolean z2) {
                             this.$onActivityLaunchTransitionStart.invoke();
-                            ActivityTransitionAnimator.Controller.this.onTransitionAnimationStart(z2);
+                            this.$delegate.onTransitionAnimationStart(z2);
                         }
 
                         @Override // com.android.systemui.animation.TransitionAnimator.Controller
@@ -257,17 +332,17 @@ public final class TileHapticsViewModel extends ExclusiveActivatable {
 
             @Override // com.android.systemui.animation.Expandable
             public final DialogTransitionAnimator.Controller dialogTransitionController(DialogCuj dialogCuj) {
-                DialogTransitionAnimator.Controller dialogTransitionController = Expandable.this.dialogTransitionController(dialogCuj);
-                if (dialogTransitionController != null) {
-                    return new DialogTransitionAnimator.Controller(tileHapticsViewModel$createStateAwareExpandable$1, tileHapticsViewModel$createStateAwareExpandable$2) { // from class: com.android.systemui.haptics.msdl.qs.StateAwareExpandableKt$withStateAwareness$2
+                DialogTransitionAnimator.Controller controllerDialogTransitionController = expandable.dialogTransitionController(dialogCuj);
+                if (controllerDialogTransitionController != null) {
+                    return new DialogTransitionAnimator.Controller(anonymousClass1, anonymousClass2) { // from class: com.android.systemui.haptics.msdl.qs.StateAwareExpandableKt$withStateAwareness$2
                         public final /* synthetic */ DialogTransitionAnimator.Controller $$delegate_0;
                         public final /* synthetic */ Function0 $onDialogDrawingEnd;
                         public final /* synthetic */ Function0 $onDialogDrawingStart;
 
                         {
-                            this.$onDialogDrawingStart = r2;
-                            this.$onDialogDrawingEnd = r3;
-                            this.$$delegate_0 = DialogTransitionAnimator.Controller.this;
+                            this.$onDialogDrawingStart = function0;
+                            this.$onDialogDrawingEnd = function0;
+                            this.$$delegate_0 = this.$delegate;
                         }
 
                         @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
@@ -313,13 +388,13 @@ public final class TileHapticsViewModel extends ExclusiveActivatable {
                         @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
                         public final void startDrawingInOverlayOf(ViewGroup viewGroup) {
                             this.$onDialogDrawingStart.invoke();
-                            DialogTransitionAnimator.Controller.this.startDrawingInOverlayOf(viewGroup);
+                            this.$delegate.startDrawingInOverlayOf(viewGroup);
                         }
 
                         @Override // com.android.systemui.animation.DialogTransitionAnimator.Controller
                         public final void stopDrawingInOverlay() {
                             this.$onDialogDrawingEnd.invoke();
-                            DialogTransitionAnimator.Controller.this.stopDrawingInOverlay();
+                            this.$delegate.stopDrawingInOverlay();
                         }
                     };
                 }
@@ -328,90 +403,110 @@ public final class TileHapticsViewModel extends ExclusiveActivatable {
         };
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x005d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:27:0x005d, code lost:
     
-        if (kotlinx.coroutines.DelayKt.awaitCancellation(r0) != r1) goto L29;
+        if (kotlinx.coroutines.DelayKt.awaitCancellation(r0) == r1) goto L28;
      */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.ExclusiveActivatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onActivated(kotlin.coroutines.Continuation r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$onActivated$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$onActivated$1 r0 = (com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$onActivated$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$onActivated$1 r0 = new com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$onActivated$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L40
-            if (r2 == r4) goto L38
-            if (r2 == r3) goto L2e
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L2e:
-            java.lang.Object r5 = r0.L$0
-            com.android.systemui.haptics.msdl.qs.TileHapticsViewModel r5 = (com.android.systemui.haptics.msdl.qs.TileHapticsViewModel) r5
-            kotlin.ResultKt.throwOnFailure(r6)     // Catch: java.lang.Throwable -> L36
-            goto L60
-        L36:
-            r6 = move-exception
-            goto L66
-        L38:
-            java.lang.Object r5 = r0.L$0
-            com.android.systemui.haptics.msdl.qs.TileHapticsViewModel r5 = (com.android.systemui.haptics.msdl.qs.TileHapticsViewModel) r5
-            kotlin.ResultKt.throwOnFailure(r6)     // Catch: java.lang.Throwable -> L36
-            goto L55
-        L40:
-            kotlin.ResultKt.throwOnFailure(r6)
-            kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge r6 = r5.hapticsState     // Catch: java.lang.Throwable -> L36
-            com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$onActivated$2 r2 = new com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$onActivated$2     // Catch: java.lang.Throwable -> L36
-            r2.<init>()     // Catch: java.lang.Throwable -> L36
-            r0.L$0 = r5     // Catch: java.lang.Throwable -> L36
-            r0.label = r4     // Catch: java.lang.Throwable -> L36
-            java.lang.Object r6 = r6.collect(r2, r0)     // Catch: java.lang.Throwable -> L36
-            if (r6 != r1) goto L55
-            goto L5f
-        L55:
-            r0.L$0 = r5     // Catch: java.lang.Throwable -> L36
-            r0.label = r3     // Catch: java.lang.Throwable -> L36
-            kotlin.coroutines.intrinsics.CoroutineSingletons r6 = kotlinx.coroutines.DelayKt.awaitCancellation(r0)     // Catch: java.lang.Throwable -> L36
-            if (r6 != r1) goto L60
-        L5f:
-            return r1
-        L60:
-            kotlin.KotlinNothingValueException r6 = new kotlin.KotlinNothingValueException     // Catch: java.lang.Throwable -> L36
-            r6.<init>()     // Catch: java.lang.Throwable -> L36
-            throw r6     // Catch: java.lang.Throwable -> L36
-        L66:
-            kotlinx.coroutines.flow.StateFlowImpl r0 = r5.tileInteractionState
-            com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$TileInteractionState r1 = com.android.systemui.haptics.msdl.qs.TileHapticsViewModel.TileInteractionState.IDLE
-            r0.setValue(r1)
-            kotlinx.coroutines.flow.StateFlowImpl r5 = r5.tileAnimationState
-            com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$TileAnimationState r0 = com.android.systemui.haptics.msdl.qs.TileHapticsViewModel.TileAnimationState.IDLE
-            r5.setValue(r0)
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.haptics.msdl.qs.TileHapticsViewModel.onActivated(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onActivated(Continuation continuation) {
+        C08681 c08681;
+        if (continuation instanceof C08681) {
+            c08681 = (C08681) continuation;
+            int i = c08681.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c08681.label = i - Integer.MIN_VALUE;
+            } else {
+                c08681 = new C08681(continuation);
+            }
+        }
+        Object obj = c08681.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c08681.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj);
+                ChannelLimitedFlowMerge channelLimitedFlowMerge = this.hapticsState;
+                FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.haptics.msdl.qs.TileHapticsViewModel.onActivated.2
+
+                    /* renamed from: com.android.systemui.haptics.msdl.qs.TileHapticsViewModel$onActivated$2$WhenMappings */
+                    public abstract /* synthetic */ class WhenMappings {
+                        public static final /* synthetic */ int[] $EnumSwitchMapping$0;
+
+                        static {
+                            int[] iArr = new int[TileHapticsState.values().length];
+                            try {
+                                iArr[TileHapticsState.TOGGLE_ON.ordinal()] = 1;
+                            } catch (NoSuchFieldError unused) {
+                            }
+                            try {
+                                iArr[TileHapticsState.TOGGLE_OFF.ordinal()] = 2;
+                            } catch (NoSuchFieldError unused2) {
+                            }
+                            try {
+                                iArr[TileHapticsState.LONG_PRESS.ordinal()] = 3;
+                            } catch (NoSuchFieldError unused3) {
+                            }
+                            try {
+                                iArr[TileHapticsState.NO_HAPTICS.ordinal()] = 4;
+                            } catch (NoSuchFieldError unused4) {
+                            }
+                            $EnumSwitchMapping$0 = iArr;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    public final Object emit(Object obj2, Continuation continuation2) {
+                        MSDLToken mSDLToken;
+                        int i3 = WhenMappings.$EnumSwitchMapping$0[((TileHapticsState) obj2).ordinal()];
+                        if (i3 == 1) {
+                            mSDLToken = MSDLToken.SWITCH_ON;
+                        } else if (i3 == 2) {
+                            mSDLToken = MSDLToken.SWITCH_OFF;
+                        } else if (i3 == 3) {
+                            mSDLToken = MSDLToken.LONG_PRESS;
+                        } else {
+                            if (i3 != 4) {
+                                throw new NoWhenBranchMatchedException();
+                            }
+                            mSDLToken = null;
+                        }
+                        if (mSDLToken != null) {
+                            TileHapticsViewModel tileHapticsViewModel = TileHapticsViewModel.this;
+                            MSDLPlayer mSDLPlayer = tileHapticsViewModel.msdlPlayer;
+                            MSDLPlayer.Companion companion = MSDLPlayer.Companion;
+                            mSDLPlayer.playToken(mSDLToken, null);
+                            tileHapticsViewModel.tileInteractionState.setValue(TileInteractionState.IDLE);
+                            tileHapticsViewModel.tileAnimationState.setValue(TileAnimationState.IDLE);
+                        }
+                        return Unit.INSTANCE;
+                    }
+                };
+                c08681.L$0 = this;
+                c08681.label = 1;
+                if (channelLimitedFlowMerge.collect(flowCollector, c08681) == coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i2 != 1) {
+                if (i2 != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                this = (TileHapticsViewModel) c08681.L$0;
+                ResultKt.throwOnFailure(obj);
+                throw new KotlinNothingValueException();
+            }
+            this = (TileHapticsViewModel) c08681.L$0;
+            ResultKt.throwOnFailure(obj);
+            c08681.L$0 = this;
+            c08681.label = 2;
+        } catch (Throwable th) {
+            this.tileInteractionState.setValue(TileInteractionState.IDLE);
+            this.tileAnimationState.setValue(TileAnimationState.IDLE);
+            throw th;
+        }
     }
 }

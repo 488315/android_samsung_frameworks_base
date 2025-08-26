@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RootTaskDisplayAreaOrganizer extends DisplayAreaOrganizer {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,7 +33,6 @@ public class RootTaskDisplayAreaOrganizer extends DisplayAreaOrganizer {
     public final SparseArray mPendingDisplayAdded;
     public final SystemPerformanceHinter.DisplayRootProvider mPerfRootProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisplayAreaContext extends ContextWrapper {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final ResourcesManager mResourcesManager;
@@ -49,7 +47,6 @@ public class RootTaskDisplayAreaOrganizer extends DisplayAreaOrganizer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface RootTaskDisplayAreaListener {
     }
 
@@ -70,11 +67,11 @@ public class RootTaskDisplayAreaOrganizer extends DisplayAreaOrganizer {
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.RootTaskDisplayAreaOrganizer$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer = RootTaskDisplayAreaOrganizer.this;
+                RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer = this.f$0;
                 int i = RootTaskDisplayAreaOrganizer.$r8$clinit;
-                List registerOrganizer = rootTaskDisplayAreaOrganizer.registerOrganizer(1);
-                for (int size = registerOrganizer.size() - 1; size >= 0; size--) {
-                    rootTaskDisplayAreaOrganizer.onDisplayAreaAppeared(((DisplayAreaAppearedInfo) registerOrganizer.get(size)).getDisplayAreaInfo(), ((DisplayAreaAppearedInfo) registerOrganizer.get(size)).getLeash());
+                List listRegisterOrganizer = rootTaskDisplayAreaOrganizer.registerOrganizer(1);
+                for (int size = listRegisterOrganizer.size() - 1; size >= 0; size--) {
+                    rootTaskDisplayAreaOrganizer.onDisplayAreaAppeared(((DisplayAreaAppearedInfo) listRegisterOrganizer.get(size)).getDisplayAreaInfo(), ((DisplayAreaAppearedInfo) listRegisterOrganizer.get(size)).getLeash());
                 }
             }
         }, this);

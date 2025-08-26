@@ -2,6 +2,7 @@ package com.android.systemui.edgelighting.utils;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Debug;
 import android.util.Slog;
 import com.android.systemui.R;
@@ -14,7 +15,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class EdgeLightingAnalytics {
     public static boolean sConfigured = false;
@@ -22,7 +22,7 @@ public final class EdgeLightingAnalytics {
     public static String sCurrentScreenID = "";
     public static final Map sIDMap = new HashMap();
 
-    public static void initEdgeLightingAnalyticsStates(Application application) {
+    public static void initEdgeLightingAnalyticsStates(Application application) throws Resources.NotFoundException {
         Slog.d("EdgeLightingAnalytics", "initEdgeLightingAnalyticsStates");
         Configuration configuration = new Configuration();
         configuration.trackingId = "472-399-5110257";
@@ -60,10 +60,10 @@ public final class EdgeLightingAnalytics {
         if (sConfigured) {
             StringBuilder sb = new StringBuilder("sendEventLog ");
             StringBuilder sb2 = new StringBuilder();
-            HashMap hashMap = (HashMap) sIDMap;
-            sb2.append(hashMap.containsKey(str) ? (String) hashMap.get(str) : "");
+            HashMap map = (HashMap) sIDMap;
+            sb2.append(map.containsKey(str) ? (String) map.get(str) : "");
             sb2.append(", ");
-            sb2.append(hashMap.containsKey(str2) ? (String) hashMap.get(str2) : "");
+            sb2.append(map.containsKey(str2) ? (String) map.get(str2) : "");
             sb.append(sb2.toString());
             Slog.d("EdgeLightingAnalytics", sb.toString());
             try {
@@ -92,8 +92,8 @@ public final class EdgeLightingAnalytics {
         }
         if (sConfigured && !sCurrentScreenID.equals(str)) {
             StringBuilder sb = new StringBuilder("sendScreenViewLog ");
-            HashMap hashMap = (HashMap) sIDMap;
-            sb.append(hashMap.containsKey(str) ? (String) hashMap.get(str) : "");
+            HashMap map = (HashMap) sIDMap;
+            sb.append(map.containsKey(str) ? (String) map.get(str) : "");
             Slog.d("EdgeLightingAnalytics", sb.toString());
             try {
                 SamsungAnalytics samsungAnalytics = SamsungAnalytics.getInstance();

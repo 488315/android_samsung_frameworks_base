@@ -1,6 +1,7 @@
 package com.android.systemui.volume.dialog.ui.viewmodel;
 
 import android.content.Context;
+import android.content.res.Resources;
 import com.android.systemui.R;
 import com.android.systemui.communal.data.repository.CommunalWidgetRepositoryLocalImpl$restoreWidgets$1$$ExternalSyntheticOutline0;
 import com.android.systemui.volume.dialog.shared.model.VolumeDialogStateModel;
@@ -13,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogViewModel$dialogTitle$2 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -36,7 +36,7 @@ final class VolumeDialogViewModel$dialogTitle$2 extends SuspendLambda implements
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Resources.NotFoundException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -48,11 +48,11 @@ final class VolumeDialogViewModel$dialogTitle$2 extends SuspendLambda implements
             return "";
         }
         Context context = this.this$0.context;
-        String str = volumeDialogStreamModel.remoteLabel;
-        if (str == null) {
-            str = context.getResources().getString(volumeDialogStreamModel.name);
+        String string = volumeDialogStreamModel.remoteLabel;
+        if (string == null) {
+            string = context.getResources().getString(volumeDialogStreamModel.name);
         }
-        String string = context.getString(R.string.volume_dialog_title, str);
-        return string == null ? "" : string;
+        String string2 = context.getString(R.string.volume_dialog_title, string);
+        return string2 == null ? "" : string2;
     }
 }

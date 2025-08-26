@@ -7,7 +7,6 @@ import com.google.protobuf.nano.MessageNano;
 import com.google.protobuf.nano.WireFormatNano;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SystemUIProtoDump extends MessageNano {
     public QsTileState[] tiles;
@@ -29,15 +28,15 @@ public final class SystemUIProtoDump extends MessageNano {
         if (qsTileStateArr == null || qsTileStateArr.length <= 0) {
             return 0;
         }
-        int i2 = 0;
+        int iComputeMessageSize = 0;
         while (true) {
             QsTileState[] qsTileStateArr2 = this.tiles;
             if (i >= qsTileStateArr2.length) {
-                return i2;
+                return iComputeMessageSize;
             }
             QsTileState qsTileState = qsTileStateArr2[i];
             if (qsTileState != null) {
-                i2 = CodedOutputByteBufferNano.computeMessageSize(1, qsTileState) + i2;
+                iComputeMessageSize = CodedOutputByteBufferNano.computeMessageSize(1, qsTileState) + iComputeMessageSize;
             }
             i++;
         }
@@ -66,11 +65,11 @@ public final class SystemUIProtoDump extends MessageNano {
     @Override // com.google.protobuf.nano.MessageNano
     public SystemUIProtoDump mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == 10) {
+            if (tag == 10) {
                 int repeatedFieldArrayLength = WireFormatNano.getRepeatedFieldArrayLength(codedInputByteBufferNano, 10);
                 QsTileState[] qsTileStateArr = this.tiles;
                 int length = qsTileStateArr == null ? 0 : qsTileStateArr.length;
@@ -90,7 +89,7 @@ public final class SystemUIProtoDump extends MessageNano {
                 qsTileStateArr2[length] = qsTileState2;
                 codedInputByteBufferNano.readMessage(qsTileState2);
                 this.tiles = qsTileStateArr2;
-            } else if (!codedInputByteBufferNano.skipField(readTag)) {
+            } else if (!codedInputByteBufferNano.skipField(tag)) {
                 break;
             }
         }

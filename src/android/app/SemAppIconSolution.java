@@ -26,6 +26,7 @@ import android.graphics.drawable.DrawableWrapper;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.audio.Enums;
 import android.provider.SearchIndexablesContract;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.Pair;
 import android.util.SparseArray;
@@ -98,7 +99,7 @@ public class SemAppIconSolution {
         MATRIX_POINT_THEMECROP = new int[][]{new int[]{22, 29}, new int[]{96, 3}, new int[]{170, 29}, new int[]{187, 94}, new int[]{170, 163}, new int[]{96, 186}, new int[]{22, 163}, new int[]{5, 94}};
     }
 
-    private SemAppIconSolution(Context context) {
+    private SemAppIconSolution(Context context) throws Resources.NotFoundException {
         this.mIgnoreAppIconThemeHost = false;
         if (context != null) {
             int identifier = context.getResources().getIdentifier("sem_appicon_layer_color_for_night", "color", "android");
@@ -112,143 +113,108 @@ public class SemAppIconSolution {
     }
 
     public static synchronized SemAppIconSolution getInstance(Context context) {
-        SemAppIconSolution semAppIconSolution;
-        synchronized (SemAppIconSolution.class) {
-            if (sUniqueInstance == null) {
-                sUniqueInstance = new SemAppIconSolution(context);
-            }
-            semAppIconSolution = sUniqueInstance;
+        if (sUniqueInstance == null) {
+            sUniqueInstance = new SemAppIconSolution(context);
         }
-        return semAppIconSolution;
+        return sUniqueInstance;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00ac A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0087 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0036  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0036  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00a7  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00ac A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x00ad  */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x0087 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int checkAppIconThemePackage(android.content.Context r9) {
-        /*
-            r8 = this;
-            java.lang.String r0 = "AppIconSolution"
-            java.lang.String r1 = ""
-            android.content.ContentResolver r2 = r9.getContentResolver()     // Catch: java.lang.SecurityException -> L1b
-            java.lang.String r3 = "current_sec_active_themepackage"
-            java.lang.String r2 = android.provider.Settings.System.getString(r2, r3)     // Catch: java.lang.SecurityException -> L1b
-            android.content.ContentResolver r3 = r9.getContentResolver()     // Catch: java.lang.SecurityException -> L19
-            java.lang.String r4 = "current_sec_appicon_theme_package"
-            java.lang.String r3 = android.provider.Settings.System.getString(r3, r4)     // Catch: java.lang.SecurityException -> L19
-            goto L2f
-        L19:
-            r3 = move-exception
-            goto L1d
-        L1b:
-            r3 = move-exception
-            r2 = r1
-        L1d:
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            java.lang.String r5 = "couldn't access setting property, just keep appIconPackageName empty, ex = "
-            r4.<init>(r5)
-            r4.append(r3)
-            java.lang.String r3 = r4.toString()
-            android.util.Log.i(r0, r3)
-            r3 = r1
-        L2f:
-            boolean r1 = r1.equals(r3)
-            r4 = 0
-            if (r1 == 0) goto L37
-            r3 = r4
-        L37:
-            boolean r1 = r8.mIgnoreAppIconThemeHost
-            r5 = 1
-            r6 = 0
-            if (r1 == 0) goto L49
-            if (r3 == 0) goto L49
-            java.util.ArrayList<java.lang.String> r1 = android.content.om.SamsungThemeConstants.ignoreAppIconThemeList
-            boolean r1 = r1.contains(r3)
-            if (r1 == 0) goto L49
-            r1 = r5
-            goto L4b
-        L49:
-            r4 = r3
-            r1 = r6
-        L4b:
-            java.lang.String r3 = r8.mAppIconPackageName
-            r7 = 3
-            if (r3 == 0) goto L56
-            boolean r3 = r3.equals(r4)
-            if (r3 == 0) goto L65
-        L56:
-            if (r4 == 0) goto L60
-            java.lang.String r3 = r8.mAppIconPackageName
-            boolean r3 = r4.equals(r3)
-            if (r3 == 0) goto L65
-        L60:
-            int r3 = r8.mSamsungThemeAppIconRange
-            if (r3 == r7) goto L65
-            goto L6d
-        L65:
-            android.app.ApplicationPackageManager.configurationChanged()
-            r8.mAppIconPackageName = r4
-            r8.registerAppIconInfo(r9)
-        L6d:
-            java.lang.String r3 = r8.mThemePackageName
-            if (r3 == 0) goto L77
-            boolean r3 = r3.equals(r2)
-            if (r3 == 0) goto L81
-        L77:
-            if (r2 == 0) goto L83
-            java.lang.String r3 = r8.mThemePackageName
-            boolean r3 = r2.equals(r3)
-            if (r3 != 0) goto L83
-        L81:
-            r8.mThemePackageName = r2
-        L83:
-            java.lang.String r2 = r8.mAppIconPackageName
-            if (r2 != 0) goto La7
-            android.content.ContentResolver r2 = r9.getContentResolver()     // Catch: java.lang.SecurityException -> L95
-            java.lang.String r3 = "colortheme_app_icon"
-            int r0 = android.provider.Settings.Global.getInt(r2, r3, r6)     // Catch: java.lang.SecurityException -> L95
-            if (r0 != r5) goto La7
-            r0 = r5
-            goto La8
-        L95:
-            r2 = move-exception
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder
-            java.lang.String r4 = "couldn't access setting property, just keep colortheme icon disabled, ex = "
-            r3.<init>(r4)
-            r3.append(r2)
-            java.lang.String r2 = r3.toString()
-            android.util.Log.i(r0, r2)
-        La7:
-            r0 = r6
-        La8:
-            java.lang.String r8 = r8.mAppIconPackageName
-            if (r8 == 0) goto Lad
-            return r6
-        Lad:
-            if (r0 == 0) goto Lb8
-            int r8 = r9.getUserId()
-            r9 = 77
-            if (r8 == r9) goto Lb8
-            return r7
-        Lb8:
-            if (r1 == 0) goto Lbc
-            r8 = 2
-            return r8
-        Lbc:
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.SemAppIconSolution.checkAppIconThemePackage(android.content.Context):int");
+    public int checkAppIconThemePackage(Context context) {
+        String string;
+        String string2;
+        String str;
+        boolean z;
+        String str2;
+        String str3;
+        boolean z2;
+        try {
+            string = Settings.System.getString(context.getContentResolver(), "current_sec_active_themepackage");
+            try {
+                string2 = Settings.System.getString(context.getContentResolver(), "current_sec_appicon_theme_package");
+            } catch (SecurityException e) {
+                e = e;
+                Log.i(TAG, "couldn't access setting property, just keep appIconPackageName empty, ex = " + e);
+                string2 = "";
+                str = null;
+                if ("".equals(string2)) {
+                }
+                if (this.mIgnoreAppIconThemeHost) {
+                    str = string2;
+                    z = false;
+                }
+                str2 = this.mAppIconPackageName;
+                if (str2 == null) {
+                    ApplicationPackageManager.configurationChanged();
+                    this.mAppIconPackageName = str;
+                    registerAppIconInfo(context);
+                } else {
+                    ApplicationPackageManager.configurationChanged();
+                    this.mAppIconPackageName = str;
+                    registerAppIconInfo(context);
+                }
+                str3 = this.mThemePackageName;
+                if (str3 == null) {
+                    this.mThemePackageName = string;
+                } else {
+                    this.mThemePackageName = string;
+                }
+                if (this.mAppIconPackageName != null) {
+                }
+                if (this.mAppIconPackageName == null) {
+                }
+            }
+        } catch (SecurityException e2) {
+            e = e2;
+            string = "";
+        }
+        str = null;
+        if ("".equals(string2)) {
+            string2 = null;
+        }
+        if (this.mIgnoreAppIconThemeHost || string2 == null || !SamsungThemeConstants.ignoreAppIconThemeList.contains(string2)) {
+            str = string2;
+            z = false;
+        } else {
+            z = true;
+        }
+        str2 = this.mAppIconPackageName;
+        if ((str2 == null && !str2.equals(str)) || ((str != null && !str.equals(this.mAppIconPackageName)) || this.mSamsungThemeAppIconRange == 3)) {
+            ApplicationPackageManager.configurationChanged();
+            this.mAppIconPackageName = str;
+            registerAppIconInfo(context);
+        }
+        str3 = this.mThemePackageName;
+        if ((str3 == null && !str3.equals(string)) || (string != null && !string.equals(this.mThemePackageName))) {
+            this.mThemePackageName = string;
+        }
+        if (this.mAppIconPackageName != null) {
+            try {
+            } catch (SecurityException e3) {
+                Log.i(TAG, "couldn't access setting property, just keep colortheme icon disabled, ex = " + e3);
+            }
+            z2 = Settings.Global.getInt(context.getContentResolver(), "colortheme_app_icon", 0) == 1;
+        }
+        if (this.mAppIconPackageName == null) {
+            return 0;
+        }
+        if (!z2 || context.getUserId() == 77) {
+            return z ? 2 : 1;
+        }
+        return 3;
     }
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:27:0x0088
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:24:0x0088
+        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1178)
         	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
         	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
         	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
@@ -357,15 +323,15 @@ public class SemAppIconSolution {
             str = ".png";
         }
         sb.append(str);
-        String sb2 = sb.toString();
-        if (!new File(sb2).exists()) {
-            sb2 = SamsungThemeConstants.PATH_THEMEPARK_ICON + str2 + ".png";
-            if (!new File(sb2).exists()) {
+        String string = sb.toString();
+        if (!new File(string).exists()) {
+            string = SamsungThemeConstants.PATH_THEMEPARK_ICON + str2 + ".png";
+            if (!new File(string).exists()) {
                 return null;
             }
         }
         try {
-            return new BitmapDrawable(context.getResources(), BitmapFactory.decodeFile(sb2));
+            return new BitmapDrawable(context.getResources(), BitmapFactory.decodeFile(string));
         } catch (Exception e) {
             Log.e(TAG, e.toString());
             return null;
@@ -376,6 +342,10 @@ public class SemAppIconSolution {
         return getThemeAppIcon(context, packageItemInfo, z, false, i);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:26:0x005b  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private Drawable getThemeAppIcon(Context context, PackageItemInfo packageItemInfo, boolean z, boolean z2, int i) {
         String str;
         HashMap<String, String> themeAppIconMap = getThemeAppIconMap(context);
@@ -387,16 +357,13 @@ public class SemAppIconSolution {
                 str = themeAppIconMap.get("3rd_party_icon");
             } else if (z2) {
                 str = themeAppIconMap.get("mask_for_crop");
-            } else {
-                if (packageItemInfo != null) {
-                    if (packageItemInfo.name != null) {
-                        String str3 = themeAppIconMap.get(packageItemInfo.name);
-                        str = (str3 == null && (packageItemInfo instanceof ApplicationInfo)) ? themeAppIconMap.get(packageItemInfo.packageName) : str3;
-                    } else if (packageItemInfo.packageName != null) {
-                        str = themeAppIconMap.get(packageItemInfo.packageName);
-                    }
-                }
+            } else if (packageItemInfo == null) {
                 str = null;
+            } else if (packageItemInfo.name != null) {
+                String str3 = themeAppIconMap.get(packageItemInfo.name);
+                str = (str3 == null && (packageItemInfo instanceof ApplicationInfo)) ? themeAppIconMap.get(packageItemInfo.packageName) : str3;
+            } else if (packageItemInfo.packageName != null) {
+                str = themeAppIconMap.get(packageItemInfo.packageName);
             }
             if (str != null) {
                 return getDrawableFromAppIconPackage(context, str, "[getThemeAppIcon]", i);
@@ -452,24 +419,24 @@ public class SemAppIconSolution {
 
     private Drawable getDrawableFromAppIconPackage(Context context, String str, String str2, int i) {
         Resources appIconPackageResources;
-        Resources resources;
+        Resources resourcesForApplicationAsUser;
         if ((i & 256) != 0) {
             try {
                 try {
-                    resources = context.getPackageManager().getResourcesForApplicationAsUser("com.android.systemui", 0);
-                } catch (PackageManager.NameNotFoundException unused) {
-                    resources = null;
+                    resourcesForApplicationAsUser = context.getPackageManager().getResourcesForApplicationAsUser("com.android.systemui", 0);
+                } catch (Exception e) {
+                    Log.e(TAG, str2 + ", Failed to get LockScreen Shorcut Icon=" + str + ", Exception=" + e.toString());
                 }
-            } catch (Exception e) {
-                Log.e(TAG, str2 + ", Failed to get LockScreen Shorcut Icon=" + str + ", Exception=" + e.toString());
+            } catch (PackageManager.NameNotFoundException unused) {
+                resourcesForApplicationAsUser = null;
             }
-            if (resources == null) {
+            if (resourcesForApplicationAsUser == null) {
                 Log.e(TAG, "SystemUI package doesn't have resources");
                 return null;
             }
-            int identifier = resources.getIdentifier(str, TYPE_DRAWABLE, "com.android.systemui");
+            int identifier = resourcesForApplicationAsUser.getIdentifier(str, TYPE_DRAWABLE, "com.android.systemui");
             if (identifier != 0) {
-                return resources.getDrawable(identifier);
+                return resourcesForApplicationAsUser.getDrawable(identifier);
             }
             return null;
         }
@@ -508,12 +475,12 @@ public class SemAppIconSolution {
             if (new File(currentThemePackagePath).exists()) {
                 Pair<String, APKContents> pair = this.mCachedAPKContents;
                 APKContents aPKContents = (pair == null || !currentThemePackagePath.equals(pair.first)) ? null : this.mCachedAPKContents.second;
-                if (aPKContents != null && aPKContents.getResources() != null) {
+                if (aPKContents == null || aPKContents.getResources() == null) {
+                    aPKContents = new APKContents(currentThemePackagePath);
+                    this.mCachedAPKContents = new Pair<>(currentThemePackagePath, aPKContents);
+                } else {
                     Log.e(TAG, "Using cached contents available for " + this.mAppIconPackageName);
-                    return aPKContents.getResources();
                 }
-                aPKContents = new APKContents(currentThemePackagePath);
-                this.mCachedAPKContents = new Pair<>(currentThemePackagePath, aPKContents);
                 return aPKContents.getResources();
             }
             if (!str.equals(this.mAppIconPackageName)) {
@@ -567,7 +534,7 @@ public class SemAppIconSolution {
 
     private IconScale getAppIconAlphaRelativeScaleForIconUnification(Bitmap bitmap, int i, int i2, float f) {
         int i3;
-        int min = Math.min(i, i2) / 2;
+        int iMin = Math.min(i, i2) / 2;
         boolean z = false;
         int i4 = i - 1;
         int i5 = i2 - 1;
@@ -582,7 +549,7 @@ public class SemAppIconSolution {
         int i8 = 0;
         while (true) {
             int i9 = 3;
-            if (min <= i8 || i7 != -1) {
+            if (iMin <= i8 || i7 != -1) {
                 break;
             }
             int i10 = 0;
@@ -658,7 +625,7 @@ public class SemAppIconSolution {
         float f2;
         boolean z;
         int i4;
-        int min = Math.min(i, i2) / 2;
+        int iMin = Math.min(i, i2) / 2;
         int i5 = 0;
         int i6 = i - 1;
         int i7 = i2 - 1;
@@ -674,7 +641,7 @@ public class SemAppIconSolution {
         int i11 = 0;
         while (true) {
             int i12 = 3;
-            if (min <= i11 || i10 != -1) {
+            if (iMin <= i11 || i10 != -1) {
                 break;
             }
             int i13 = i5;
@@ -781,77 +748,77 @@ public class SemAppIconSolution {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public Drawable getThemeIconWithBG(Context context, PackageItemInfo packageItemInfo, Drawable drawable, Boolean bool, Boolean bool2, int i, String str, int i2) {
+    public Drawable getThemeIconWithBG(Context context, PackageItemInfo packageItemInfo, Drawable drawable, Boolean bool, Boolean bool2, int i, String str, int i2) throws Throwable {
         String str2;
         int i3;
         int i4;
-        int i5;
+        int intrinsicHeight;
         Bitmap bitmap;
-        int i6;
+        int intrinsicWidth;
         boolean z;
-        int i7;
+        int i5;
         Bitmap bitmap2;
-        int i8;
-        int i9;
+        int i6;
+        int i7;
         Bitmap bitmap3;
-        int i10;
+        int i8;
         Bitmap bitmap4;
         String str3;
         String str4;
-        int i11;
+        int i9;
         Bitmap bitmap5;
-        int i12;
+        int i10;
         String str5;
         boolean z2;
         String str6;
-        int i13;
+        int i11;
         String str7;
         String str8;
         IconScale appIconAlphaRelativeScale;
+        int i12;
+        int i13;
         int i14;
-        int i15;
-        int i16;
         Bitmap bitmap6;
         IconScale iconScale;
         float f;
         float f2;
-        int i17;
+        int height;
         boolean z3;
         float alpha;
-        int i18;
+        int i15;
         float f3;
-        int i19;
+        int i16;
         Bitmap bitmap7;
         boolean z4;
-        int i20;
-        Bitmap createBitmap;
+        int i17;
+        Bitmap bitmapCreateBitmap;
         boolean z5;
         Canvas canvas;
-        int i21;
+        int i18;
         int alpha2;
         Bitmap bitmap8;
-        Bitmap bitmap9;
+        Bitmap bitmapCreateBitmap2;
         boolean z6;
-        int i22;
-        Bitmap bitmap10;
+        int i19;
+        Bitmap bitmap9;
         SemAppIconSolution semAppIconSolution = this;
-        Drawable drawable2 = drawable;
+        Drawable bitmapDrawable = drawable;
         if (packageItemInfo != null) {
             if (packageItemInfo.packageName != null && !SamsungThemeConstants.PACKAGE_NAME_FOR_SKIP_THEME_APPICON.equals(packageItemInfo.packageName)) {
                 str2 = packageItemInfo.packageName;
             }
-            return drawable2;
+            return bitmapDrawable;
         }
         str2 = str;
         Configuration configuration = context.getResources().getConfiguration();
         if (bool.booleanValue()) {
-            if (drawable2 instanceof AdaptiveIconDrawable) {
+            if (bitmapDrawable instanceof AdaptiveIconDrawable) {
                 Log.i(TAG, "return adaptive icon for " + str2 + ", isNight = " + configuration.isNightModeActive());
-                return semAppIconSolution.wrapIconShadowAndNight(context, drawable2, i2);
+                return semAppIconSolution.wrapIconShadowAndNight(context, bitmapDrawable, i2);
             }
         } else if (semAppIconSolution.mSamsungThemeAppIconRange == 2) {
             Log.i(TAG, "return the original icon because tray option is set to None for " + str2 + ", isNight = " + configuration.isNightModeActive());
-            return semAppIconSolution.applyNightLayer(context, drawable2, i2);
+            return semAppIconSolution.applyNightLayer(context, bitmapDrawable, i2);
         }
         if (bool.booleanValue() || (semAppIconSolution.mAppIconPackageName != null && semAppIconSolution.mSamsungThemeAppIconRange >= 2)) {
             i3 = 2;
@@ -860,102 +827,102 @@ public class SemAppIconSolution {
             options.inScaled = false;
             Resources system = Resources.getSystem();
             i4 = R.drawable.ic_bg_container_onedot;
-            Bitmap decodeResource = BitmapFactory.decodeResource(system, R.drawable.ic_bg_container_onedot, options);
-            int i23 = options.outWidth;
-            i5 = options.outHeight;
-            bitmap = decodeResource;
-            i6 = i23;
+            Bitmap bitmapDecodeResource = BitmapFactory.decodeResource(system, R.drawable.ic_bg_container_onedot, options);
+            int i20 = options.outWidth;
+            intrinsicHeight = options.outHeight;
+            bitmap = bitmapDecodeResource;
+            intrinsicWidth = i20;
         } else {
             Drawable themeAppIcon = semAppIconSolution.getThemeAppIcon(context, packageItemInfo, true, i2);
             if (themeAppIcon != null) {
                 if (themeAppIcon instanceof BitmapDrawable) {
-                    bitmap10 = ((BitmapDrawable) themeAppIcon).getBitmap();
+                    bitmap9 = ((BitmapDrawable) themeAppIcon).getBitmap();
                     i3 = 2;
                 } else {
                     i3 = 2;
-                    Bitmap createBitmap2 = Bitmap.createBitmap(themeAppIcon.getIntrinsicWidth(), themeAppIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                    Canvas canvas2 = new Canvas(createBitmap2);
+                    Bitmap bitmapCreateBitmap3 = Bitmap.createBitmap(themeAppIcon.getIntrinsicWidth(), themeAppIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                    Canvas canvas2 = new Canvas(bitmapCreateBitmap3);
                     themeAppIcon.setBounds(0, 0, canvas2.getWidth(), canvas2.getHeight());
                     themeAppIcon.draw(canvas2);
-                    bitmap10 = createBitmap2;
+                    bitmap9 = bitmapCreateBitmap3;
                 }
-                bitmap10.setDensity(0);
-                i6 = bitmap10.getWidth();
-                bitmap = bitmap10;
-                i5 = bitmap10.getHeight();
+                bitmap9.setDensity(0);
+                intrinsicWidth = bitmap9.getWidth();
+                bitmap = bitmap9;
+                intrinsicHeight = bitmap9.getHeight();
             } else {
                 i3 = 2;
-                i6 = -1;
+                intrinsicWidth = -1;
                 bitmap = null;
-                i5 = -1;
+                intrinsicHeight = -1;
             }
             i4 = R.drawable.ic_bg_container_onedot;
         }
-        if (i6 >= 0 || semAppIconSolution.mAppIconPackageName == null || semAppIconSolution.mSamsungThemeAppIconRange > 1) {
+        if (intrinsicWidth >= 0 || semAppIconSolution.mAppIconPackageName == null || semAppIconSolution.mSamsungThemeAppIconRange > 1) {
             z = false;
         } else {
-            Drawable drawable3 = Resources.getSystem().getDrawable(i4);
-            i6 = drawable3.getIntrinsicWidth();
-            i5 = drawable3.getIntrinsicHeight();
+            Drawable drawable2 = Resources.getSystem().getDrawable(i4);
+            intrinsicWidth = drawable2.getIntrinsicWidth();
+            intrinsicHeight = drawable2.getIntrinsicHeight();
             z = true;
         }
-        if (i6 > 0 && i5 > 0) {
-            int intrinsicWidth = drawable2.getIntrinsicWidth();
-            int intrinsicHeight = drawable2.getIntrinsicHeight();
-            if (intrinsicWidth > 0 && intrinsicHeight > 0) {
+        if (intrinsicWidth > 0 && intrinsicHeight > 0) {
+            int intrinsicWidth2 = bitmapDrawable.getIntrinsicWidth();
+            int intrinsicHeight2 = bitmapDrawable.getIntrinsicHeight();
+            if (intrinsicWidth2 > 0 && intrinsicHeight2 > 0) {
                 StringBuilder sb = new StringBuilder("start to load, pkg=");
                 sb.append(str2);
                 sb.append(", bg=");
-                sb.append(i6);
-                int i24 = i6;
-                sb.append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
-                sb.append(i5);
-                sb.append(", dr=");
                 sb.append(intrinsicWidth);
+                int i21 = intrinsicWidth;
                 sb.append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
                 sb.append(intrinsicHeight);
-                int i25 = i5;
+                sb.append(", dr=");
+                sb.append(intrinsicWidth2);
+                sb.append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+                sb.append(intrinsicHeight2);
+                int i22 = intrinsicHeight;
                 sb.append(", forDefault=");
                 sb.append(bool);
                 sb.append(", density=");
                 sb.append(i);
                 Log.i(TAG, sb.toString());
-                if (drawable2 instanceof BitmapDrawable) {
-                    bitmap2 = ((BitmapDrawable) drawable2).getBitmap();
-                    i7 = 0;
+                if (bitmapDrawable instanceof BitmapDrawable) {
+                    bitmap2 = ((BitmapDrawable) bitmapDrawable).getBitmap();
+                    i5 = 0;
                 } else {
-                    Bitmap createBitmap3 = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888);
-                    Canvas canvas3 = new Canvas(createBitmap3);
-                    i7 = 0;
-                    drawable2.setBounds(0, 0, canvas3.getWidth(), canvas3.getHeight());
-                    drawable2.draw(canvas3);
-                    bitmap2 = createBitmap3;
+                    Bitmap bitmapCreateBitmap4 = Bitmap.createBitmap(intrinsicWidth2, intrinsicHeight2, Bitmap.Config.ARGB_8888);
+                    Canvas canvas3 = new Canvas(bitmapCreateBitmap4);
+                    i5 = 0;
+                    bitmapDrawable.setBounds(0, 0, canvas3.getWidth(), canvas3.getHeight());
+                    bitmapDrawable.draw(canvas3);
+                    bitmap2 = bitmapCreateBitmap4;
                 }
-                bitmap2.setDensity(i7);
+                bitmap2.setDensity(i5);
                 int width = bitmap2.getWidth();
-                int height = bitmap2.getHeight();
-                int max = Math.max(width, height);
-                int i26 = 216;
-                if (216 < max) {
-                    float f4 = 216.0f / max;
+                int height2 = bitmap2.getHeight();
+                int iMax = Math.max(width, height2);
+                int i23 = 216;
+                if (216 < iMax) {
+                    float f4 = 216.0f / iMax;
                     width = (int) (width * f4);
-                    height = (int) (height * f4);
-                    Bitmap createScaledBitmap = Bitmap.createScaledBitmap(bitmap2, width, height, true);
-                    int max2 = Math.max(width, height);
+                    height2 = (int) (height2 * f4);
+                    Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmap2, width, height2, true);
+                    int iMax2 = Math.max(width, height2);
                     if (bool.booleanValue()) {
-                        i22 = 216;
+                        i19 = 216;
                     } else {
-                        i22 = i24;
-                        i26 = i25;
+                        i19 = i21;
+                        i23 = i22;
                     }
-                    Log.i(TAG, "scale down, pkg=" + str2 + ", dr=" + width + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + height + ", bg=" + i22 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + i26);
-                    i9 = max2;
-                    i8 = i22;
-                    bitmap2 = createScaledBitmap;
+                    Log.i(TAG, "scale down, pkg=" + str2 + ", dr=" + width + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + height2 + ", bg=" + i19 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + i23);
+                    i7 = iMax2;
+                    i6 = i19;
+                    bitmap2 = bitmapCreateScaledBitmap;
                 } else {
-                    i8 = i24;
-                    i26 = i25;
-                    i9 = max;
+                    i6 = i21;
+                    i23 = i22;
+                    i7 = iMax;
                 }
                 if (semAppIconSolution.mPaint == null) {
                     Paint paint = new Paint();
@@ -963,168 +930,168 @@ public class SemAppIconSolution {
                     bitmap3 = bitmap2;
                     paint.setAntiAlias(true);
                     semAppIconSolution.mPaint.setFilterBitmap(true);
-                    i10 = 0;
+                    i8 = 0;
                     semAppIconSolution.mPaint.setDither(false);
                 } else {
                     bitmap3 = bitmap2;
-                    i10 = 0;
+                    i8 = 0;
                 }
                 if (bool.booleanValue()) {
-                    boolean z7 = i10;
-                    Bitmap bitmap11 = bitmap3;
-                    IconScale appIconAlphaRelativeScale2 = semAppIconSolution.getAppIconAlphaRelativeScale(bitmap11, width, height, 1.2f, 2);
-                    Log.i(TAG, "getIconScale, pkg=" + str2 + ", size=" + Math.max(width, height) + ", iconScale=" + appIconAlphaRelativeScale2);
+                    boolean z7 = i8;
+                    Bitmap bitmap10 = bitmap3;
+                    IconScale appIconAlphaRelativeScale2 = semAppIconSolution.getAppIconAlphaRelativeScale(bitmap10, width, height2, 1.2f, 2);
+                    Log.i(TAG, "getIconScale, pkg=" + str2 + ", size=" + Math.max(width, height2) + ", iconScale=" + appIconAlphaRelativeScale2);
                     if (appIconAlphaRelativeScale2.isCrop()) {
                         BitmapFactory.Options options2 = new BitmapFactory.Options();
                         options2.inScaled = z7;
-                        Bitmap decodeResource2 = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_bg_container_onedot_mask, options2);
-                        decodeResource2.setDensity(z7 ? 1 : 0);
-                        alpha2 = i9 - (appIconAlphaRelativeScale2.getAlpha() * 2);
-                        if (alpha2 != decodeResource2.getWidth()) {
-                            decodeResource2 = Bitmap.createScaledBitmap(decodeResource2, alpha2, alpha2, true);
+                        Bitmap bitmapDecodeResource2 = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_bg_container_onedot_mask, options2);
+                        bitmapDecodeResource2.setDensity(z7 ? 1 : 0);
+                        alpha2 = i7 - (appIconAlphaRelativeScale2.getAlpha() * 2);
+                        if (alpha2 != bitmapDecodeResource2.getWidth()) {
+                            bitmapDecodeResource2 = Bitmap.createScaledBitmap(bitmapDecodeResource2, alpha2, alpha2, true);
                         }
-                        bitmap9 = Bitmap.createBitmap(alpha2, alpha2, Bitmap.Config.ARGB_8888);
-                        canvas = new Canvas(bitmap9);
-                        canvas.drawBitmap(decodeResource2, 0.0f, 0.0f, semAppIconSolution.mPaint);
-                        Log.i(TAG, "default container[CROP], pkg=" + str2 + ", bg=" + alpha2 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + alpha2 + ", dr=" + width + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + height + ", isNight = " + configuration.isNightModeActive());
-                        bitmap8 = bitmap11;
+                        bitmapCreateBitmap2 = Bitmap.createBitmap(alpha2, alpha2, Bitmap.Config.ARGB_8888);
+                        canvas = new Canvas(bitmapCreateBitmap2);
+                        canvas.drawBitmap(bitmapDecodeResource2, 0.0f, 0.0f, semAppIconSolution.mPaint);
+                        Log.i(TAG, "default container[CROP], pkg=" + str2 + ", bg=" + alpha2 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + alpha2 + ", dr=" + width + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + height2 + ", isNight = " + configuration.isNightModeActive());
+                        bitmap8 = bitmap10;
                         z6 = true;
                     } else {
-                        alpha2 = (int) ((i9 - (appIconAlphaRelativeScale2.getAlpha() * 2)) / appIconAlphaRelativeScale2.getScale());
+                        alpha2 = (int) ((i7 - (appIconAlphaRelativeScale2.getAlpha() * 2)) / appIconAlphaRelativeScale2.getScale());
                         if (alpha2 % 2 != 0) {
                             alpha2++;
                         }
                         BitmapFactory.Options options3 = new BitmapFactory.Options();
                         options3.inScaled = false;
-                        Bitmap decodeResource3 = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_bg_container_onedot, options3);
-                        decodeResource3.setDensity(0);
-                        Bitmap createScaledBitmap2 = Bitmap.createScaledBitmap(decodeResource3, alpha2, alpha2, true);
-                        Bitmap createBitmap4 = Bitmap.createBitmap(alpha2, alpha2, Bitmap.Config.ARGB_8888);
-                        canvas = new Canvas(createBitmap4);
-                        bitmap8 = bitmap11;
-                        canvas.drawBitmap(createScaledBitmap2, 0.0f, 0.0f, semAppIconSolution.mPaint);
-                        Log.i(TAG, "default container[Contain], pkg=" + str2 + ", bg=" + alpha2 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + alpha2 + ", dr=" + width + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + height + ", isNight = " + configuration.isNightModeActive());
-                        bitmap9 = createBitmap4;
+                        Bitmap bitmapDecodeResource3 = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_bg_container_onedot, options3);
+                        bitmapDecodeResource3.setDensity(0);
+                        Bitmap bitmapCreateScaledBitmap2 = Bitmap.createScaledBitmap(bitmapDecodeResource3, alpha2, alpha2, true);
+                        Bitmap bitmapCreateBitmap5 = Bitmap.createBitmap(alpha2, alpha2, Bitmap.Config.ARGB_8888);
+                        canvas = new Canvas(bitmapCreateBitmap5);
+                        bitmap8 = bitmap10;
+                        canvas.drawBitmap(bitmapCreateScaledBitmap2, 0.0f, 0.0f, semAppIconSolution.mPaint);
+                        Log.i(TAG, "default container[Contain], pkg=" + str2 + ", bg=" + alpha2 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + alpha2 + ", dr=" + width + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + height2 + ", isNight = " + configuration.isNightModeActive());
+                        bitmapCreateBitmap2 = bitmapCreateBitmap5;
                         z6 = false;
                     }
                     float f5 = alpha2 / 2.0f;
                     canvas.translate(f5, f5);
-                    i14 = i2;
+                    i12 = i2;
                     z5 = z6;
-                    i18 = height;
-                    createBitmap = bitmap9;
-                    i21 = 0;
+                    i15 = height2;
+                    bitmapCreateBitmap = bitmapCreateBitmap2;
+                    i18 = 0;
                     bitmap6 = bitmap8;
                 } else {
-                    int i27 = i10;
+                    int i24 = i8;
                     if (bool2.booleanValue()) {
                         float f6 = semAppIconSolution.mSamsungThemeAppIconScale;
-                        float f7 = (i8 * f6) / width;
+                        float f7 = (i6 * f6) / width;
                         bitmap4 = bitmap;
-                        Log.i(TAG, "fromTheme, pkg=" + str2 + ", bg=" + i8 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + i26 + ", dr=" + width + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + height + ", relScale=" + f7 + ", Scale = " + semAppIconSolution.mSamsungThemeAppIconScale + ", isNight = " + configuration.isNightModeActive());
-                        f3 = (((float) i26) * f6) / ((float) height);
+                        Log.i(TAG, "fromTheme, pkg=" + str2 + ", bg=" + i6 + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + i23 + ", dr=" + width + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + height2 + ", relScale=" + f7 + ", Scale = " + semAppIconSolution.mSamsungThemeAppIconScale + ", isNight = " + configuration.isNightModeActive());
+                        f3 = (((float) i23) * f6) / ((float) height2);
                         bitmap6 = bitmap3;
-                        i14 = i2;
+                        i12 = i2;
                         z4 = z;
-                        i15 = width;
+                        i13 = width;
                         alpha = f7;
-                        i18 = height;
-                        i20 = i27;
+                        i15 = height2;
+                        i17 = i24;
                     } else {
                         bitmap4 = bitmap;
                         float f8 = semAppIconSolution.mSamsungThemeAppIconScale;
                         if (semAppIconSolution.mSamsungThemeAppIconRange == i3 || z) {
                             str3 = ", iconScale=";
                             str4 = ", isNight = ";
-                            i11 = i27;
+                            i9 = i24;
                             bitmap5 = bitmap3;
-                            i12 = i8;
+                            i10 = i6;
                             str5 = ", size=";
                             z2 = z;
                             str6 = "getIconScale, pkg=";
-                            i13 = i26;
+                            i11 = i23;
                             str7 = NativeLibraryHelper.CLEAR_ABI_OVERRIDE;
                             str8 = ", relScale=";
-                            appIconAlphaRelativeScale = getAppIconAlphaRelativeScale(bitmap5, width, height, f8, 1);
+                            appIconAlphaRelativeScale = getAppIconAlphaRelativeScale(bitmap5, width, height2, f8, 1);
                         } else {
                             str3 = ", iconScale=";
                             str4 = ", isNight = ";
-                            i11 = i27;
+                            i9 = i24;
                             bitmap5 = bitmap3;
-                            i12 = i8;
+                            i10 = i6;
                             str5 = ", size=";
                             z2 = z;
                             str6 = "getIconScale, pkg=";
-                            i13 = i26;
+                            i11 = i23;
                             str7 = NativeLibraryHelper.CLEAR_ABI_OVERRIDE;
                             str8 = ", relScale=";
-                            appIconAlphaRelativeScale = getAppIconAlphaRelativeScale(bitmap5, width, height, f8, 0);
+                            appIconAlphaRelativeScale = getAppIconAlphaRelativeScale(bitmap5, width, height2, f8, 0);
                         }
-                        int i28 = width;
-                        Bitmap bitmap12 = bitmap5;
-                        int i29 = height;
+                        int i25 = width;
+                        Bitmap bitmap11 = bitmap5;
+                        int i26 = height2;
                         IconScale iconScale2 = appIconAlphaRelativeScale;
-                        Log.i(TAG, str6 + str2 + str5 + Math.max(i28, i29) + str3 + iconScale2);
+                        Log.i(TAG, str6 + str2 + str5 + Math.max(i25, i26) + str3 + iconScale2);
                         float scale = iconScale2.getScale();
                         if (iconScale2.isCrop()) {
-                            i15 = i28;
-                            i16 = i29;
+                            i13 = i25;
+                            i14 = i26;
                             iconScale = iconScale2;
                             f = f8;
                             semAppIconSolution = this;
-                            i14 = i2;
-                            bitmap6 = bitmap12;
-                            Drawable themeAppIcon2 = semAppIconSolution.getThemeAppIcon(context, packageItemInfo, false, true, i14);
+                            i12 = i2;
+                            bitmap6 = bitmap11;
+                            Drawable themeAppIcon2 = semAppIconSolution.getThemeAppIcon(context, packageItemInfo, false, true, i12);
                             if (themeAppIcon2 != null) {
                                 if (themeAppIcon2 instanceof BitmapDrawable) {
                                     bitmap7 = ((BitmapDrawable) themeAppIcon2).getBitmap();
                                     f2 = scale;
-                                    i19 = i11;
+                                    i16 = i9;
                                 } else {
-                                    Bitmap createBitmap5 = Bitmap.createBitmap(themeAppIcon2.getIntrinsicWidth(), themeAppIcon2.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                                    Canvas canvas4 = new Canvas(createBitmap5);
+                                    Bitmap bitmapCreateBitmap6 = Bitmap.createBitmap(themeAppIcon2.getIntrinsicWidth(), themeAppIcon2.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                                    Canvas canvas4 = new Canvas(bitmapCreateBitmap6);
                                     f2 = scale;
-                                    i19 = 0;
+                                    i16 = 0;
                                     themeAppIcon2.setBounds(0, 0, canvas4.getWidth(), canvas4.getHeight());
                                     themeAppIcon2.draw(canvas4);
-                                    bitmap7 = createBitmap5;
+                                    bitmap7 = bitmapCreateBitmap6;
                                 }
-                                bitmap7.setDensity(i19);
+                                bitmap7.setDensity(i16);
                                 int width2 = bitmap7.getWidth();
-                                i17 = bitmap7.getHeight();
+                                height = bitmap7.getHeight();
                                 bitmap4 = bitmap7;
-                                i8 = width2;
+                                i6 = width2;
                             } else {
                                 f2 = scale;
-                                i8 = i12;
-                                i17 = i13;
+                                i6 = i10;
+                                height = i11;
                             }
                             z3 = 1;
                         } else {
-                            i14 = i2;
-                            i15 = i28;
-                            i16 = i29;
-                            bitmap6 = bitmap12;
+                            i12 = i2;
+                            i13 = i25;
+                            i14 = i26;
+                            bitmap6 = bitmap11;
                             iconScale = iconScale2;
                             f = f8;
                             f2 = scale;
                             semAppIconSolution = this;
-                            i8 = i12;
-                            i17 = i13;
+                            i6 = i10;
+                            height = i11;
                             z3 = 0;
                         }
-                        alpha = (i8 * f2) / (i9 - (iconScale.getAlpha() * 2));
+                        alpha = (i6 * f2) / (i7 - (iconScale.getAlpha() * 2));
                         StringBuilder sb2 = new StringBuilder("fromTheme2, pkg=");
                         sb2.append(str2);
                         sb2.append(", bg=");
-                        sb2.append(i8);
+                        sb2.append(i6);
                         sb2.append(str7);
-                        sb2.append(i17);
+                        sb2.append(height);
                         sb2.append(", dr=");
-                        sb2.append(i15);
+                        sb2.append(i13);
                         sb2.append(str7);
-                        i18 = i16;
-                        sb2.append(i18);
+                        i15 = i14;
+                        sb2.append(i15);
                         sb2.append(", tarScale=");
                         sb2.append(f);
                         sb2.append(str8);
@@ -1137,38 +1104,38 @@ public class SemAppIconSolution {
                         sb2.append(configuration.isNightModeActive());
                         Log.i(TAG, sb2.toString());
                         f3 = alpha;
-                        i26 = i17;
-                        i20 = z3;
+                        i23 = height;
+                        i17 = z3;
                         z4 = z2;
                     }
-                    Bitmap bitmap13 = bitmap4;
-                    createBitmap = Bitmap.createBitmap(i8, i26, Bitmap.Config.ARGB_8888);
-                    Canvas canvas5 = new Canvas(createBitmap);
+                    Bitmap bitmap12 = bitmap4;
+                    bitmapCreateBitmap = Bitmap.createBitmap(i6, i23, Bitmap.Config.ARGB_8888);
+                    Canvas canvas5 = new Canvas(bitmapCreateBitmap);
                     if (semAppIconSolution.mAppIconPackageName != null && semAppIconSolution.mSamsungThemeAppIconRange <= 1 && !z4) {
-                        if (bitmap13 != null) {
-                            canvas5.drawBitmap(bitmap13, 0.0f, 0.0f, semAppIconSolution.mPaint);
+                        if (bitmap12 != null) {
+                            canvas5.drawBitmap(bitmap12, 0.0f, 0.0f, semAppIconSolution.mPaint);
                         } else {
                             Log.i(TAG, "bgBitmap is null, so can't draw bg.");
                         }
                     }
-                    if (i20 != 0) {
-                        width = (int) (alpha * i15);
-                        i18 = (int) (f3 * i18);
-                        canvas5.translate(i8 / 2.0f, i26 / 2.0f);
+                    if (i17 != 0) {
+                        width = (int) (alpha * i13);
+                        i15 = (int) (f3 * i15);
+                        canvas5.translate(i6 / 2.0f, i23 / 2.0f);
                         canvas = canvas5;
                         z5 = false;
-                        i21 = i20;
+                        i18 = i17;
                     } else {
-                        canvas5.translate(i8 / 2.0f, i26 / 2.0f);
+                        canvas5.translate(i6 / 2.0f, i23 / 2.0f);
                         canvas5.scale(alpha, f3);
-                        width = i15;
+                        width = i13;
                         z5 = false;
                         canvas = canvas5;
-                        i21 = i20;
+                        i18 = i17;
                     }
                 }
-                if (i21 != 0 && semAppIconSolution.mAppIconPackageName != null && semAppIconSolution.mSamsungThemeAppIconRange <= 1) {
-                    Bitmap createScaledBitmap3 = Bitmap.createScaledBitmap(bitmap6, width, i18, true);
+                if (i18 != 0 && semAppIconSolution.mAppIconPackageName != null && semAppIconSolution.mSamsungThemeAppIconRange <= 1) {
+                    Bitmap bitmapCreateScaledBitmap3 = Bitmap.createScaledBitmap(bitmap6, width, i15, true);
                     if (semAppIconSolution.mPaintForCrop == null) {
                         Paint paint2 = new Paint();
                         semAppIconSolution.mPaintForCrop = paint2;
@@ -1177,7 +1144,7 @@ public class SemAppIconSolution {
                         semAppIconSolution.mPaintForCrop.setDither(false);
                         semAppIconSolution.mPaintForCrop.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
                     }
-                    canvas.drawBitmap(createScaledBitmap3, (-width) / 2.0f, (-i18) / 2.0f, semAppIconSolution.mPaintForCrop);
+                    canvas.drawBitmap(bitmapCreateScaledBitmap3, (-width) / 2.0f, (-i15) / 2.0f, semAppIconSolution.mPaintForCrop);
                 } else if (z5) {
                     if (semAppIconSolution.mPaintForCrop == null) {
                         Paint paint3 = new Paint();
@@ -1187,35 +1154,134 @@ public class SemAppIconSolution {
                         semAppIconSolution.mPaintForCrop.setDither(false);
                         semAppIconSolution.mPaintForCrop.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
                     }
-                    canvas.drawBitmap(bitmap6, (-width) / 2.0f, (-i18) / 2.0f, semAppIconSolution.mPaintForCrop);
+                    canvas.drawBitmap(bitmap6, (-width) / 2.0f, (-i15) / 2.0f, semAppIconSolution.mPaintForCrop);
                 } else {
-                    canvas.drawBitmap(bitmap6, (-width) / 2.0f, (-i18) / 2.0f, semAppIconSolution.mPaint);
+                    canvas.drawBitmap(bitmap6, (-width) / 2.0f, (-i15) / 2.0f, semAppIconSolution.mPaint);
                 }
-                drawable2 = new BitmapDrawable(Resources.getSystem(), createBitmap);
+                bitmapDrawable = new BitmapDrawable(Resources.getSystem(), bitmapCreateBitmap);
                 if (bool.booleanValue()) {
-                    return semAppIconSolution.wrapIconShadowAndNight(context, drawable2, i14);
+                    return semAppIconSolution.wrapIconShadowAndNight(context, bitmapDrawable, i12);
                 }
             }
         }
-        return drawable2;
+        return bitmapDrawable;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00dc  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00fd A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x005d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00b2 A[Catch: Exception -> 0x00bb, TRY_LEAVE, TryCatch #3 {Exception -> 0x00bb, blocks: (B:37:0x0072, B:43:0x00ac, B:45:0x00b2, B:47:0x0089, B:48:0x009b, B:50:0x007a), top: B:33:0x006a }] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x009b A[Catch: Exception -> 0x00bb, TryCatch #3 {Exception -> 0x00bb, blocks: (B:37:0x0072, B:43:0x00ac, B:45:0x00b2, B:47:0x0089, B:48:0x009b, B:50:0x007a), top: B:33:0x006a }] */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0083  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0086  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x009b A[Catch: Exception -> 0x00bb, TryCatch #3 {Exception -> 0x00bb, blocks: (B:29:0x0072, B:41:0x00ac, B:43:0x00b2, B:39:0x0089, B:40:0x009b, B:32:0x007a), top: B:71:0x006a }] */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x00b2 A[Catch: Exception -> 0x00bb, TRY_LEAVE, TryCatch #3 {Exception -> 0x00bb, blocks: (B:29:0x0072, B:41:0x00ac, B:43:0x00b2, B:39:0x0089, B:40:0x009b, B:32:0x007a), top: B:71:0x006a }] */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00dc  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x00fd A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:69:0x005d A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.graphics.drawable.Drawable checkAndDrawLiveIconFromTheme(android.content.Context r18, android.content.pm.PackageItemInfo r19, android.graphics.drawable.Drawable r20, boolean r21, boolean r22, int r23) {
-        /*
-            Method dump skipped, instructions count: 286
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.SemAppIconSolution.checkAndDrawLiveIconFromTheme(android.content.Context, android.content.pm.PackageItemInfo, android.graphics.drawable.Drawable, boolean, boolean, int):android.graphics.drawable.Drawable");
+    public Drawable checkAndDrawLiveIconFromTheme(Context context, PackageItemInfo packageItemInfo, Drawable drawable, boolean z, boolean z2, int i) {
+        String str;
+        int identifier;
+        boolean z3;
+        boolean z4;
+        String str2;
+        String str3;
+        int iHashCode;
+        char c;
+        Resources themePackageResources;
+        int i2;
+        Resources appIconPackageResources;
+        if (packageItemInfo.packageName != null) {
+            String str4 = packageItemInfo.packageName;
+            str4.hashCode();
+            if (str4.equals(CALENDAR_PACKAGE_NAME)) {
+                str = "calendar_liveicon_from_theme";
+            } else {
+                str = !str4.equals(CLOCK_PACKAGE_NAME) ? LIVEICON_BOOLEAN_NAME : "clock_liveicon_from_theme";
+            }
+            try {
+                appIconPackageResources = getAppIconPackageResources(context);
+            } catch (Resources.NotFoundException unused) {
+                identifier = -1;
+            }
+            if (appIconPackageResources != null) {
+                identifier = appIconPackageResources.getIdentifier(str, TYPE_BOOL, this.mAppIconPackageName);
+                try {
+                    z3 = appIconPackageResources.getBoolean(identifier);
+                } catch (Resources.NotFoundException unused2) {
+                    Log.e(TAG, "app icon package doesn't have 'liveicon_from_theme', pkg : " + packageItemInfo.packageName);
+                    z3 = false;
+                    if (identifier == 0) {
+                    }
+                    Log.i(TAG, "load= live icon for " + packageItemInfo.packageName + ", from overlay = " + z3);
+                    i2 = this.mSamsungThemeAppIconRange;
+                    if (i2 != 0) {
+                    }
+                    return getThemeIconWithBG(context, packageItemInfo, drawable, Boolean.valueOf(z4), Boolean.valueOf(z3), i);
+                }
+                if (identifier == 0) {
+                    try {
+                        str2 = this.mThemePackageName;
+                        str3 = packageItemInfo.packageName;
+                        iHashCode = str3.hashCode();
+                        z4 = false;
+                    } catch (Exception e) {
+                        e = e;
+                        z4 = false;
+                    }
+                    try {
+                        if (iHashCode != -1955351778) {
+                            c = (iHashCode == 138102030 && str3.equals(CLOCK_PACKAGE_NAME)) ? (char) 1 : (char) 65535;
+                            if (c != 0) {
+                                str2 = str2 + ".calendar";
+                            } else if (c == 1) {
+                                str2 = str2 + ".clockpackage";
+                            }
+                            themePackageResources = getThemePackageResources(context, str2);
+                            if (themePackageResources != null) {
+                                z3 = themePackageResources.getBoolean(themePackageResources.getIdentifier(LIVEICON_BOOLEAN_NAME, TYPE_BOOL, str2));
+                            }
+                        } else {
+                            if (str3.equals(CALENDAR_PACKAGE_NAME)) {
+                                c = 0;
+                            }
+                            if (c != 0) {
+                            }
+                            themePackageResources = getThemePackageResources(context, str2);
+                            if (themePackageResources != null) {
+                            }
+                        }
+                    } catch (Exception e2) {
+                        e = e2;
+                        Log.e(TAG, "Failed at get liveicon boolean on overlay pkg : " + packageItemInfo.packageName + ", e : " + e);
+                        Log.i(TAG, "load= live icon for " + packageItemInfo.packageName + ", from overlay = " + z3);
+                        i2 = this.mSamsungThemeAppIconRange;
+                        if (i2 != 0) {
+                        }
+                        return getThemeIconWithBG(context, packageItemInfo, drawable, Boolean.valueOf(z4), Boolean.valueOf(z3), i);
+                    }
+                } else {
+                    z4 = false;
+                }
+                Log.i(TAG, "load= live icon for " + packageItemInfo.packageName + ", from overlay = " + z3);
+                i2 = this.mSamsungThemeAppIconRange;
+                if (i2 != 0 || (!z3 && i2 <= 1)) {
+                    return getThemeIconWithBG(context, packageItemInfo, drawable, Boolean.valueOf(z4), Boolean.valueOf(z3), i);
+                }
+                if (z) {
+                    return z2 ? applyNightLayer(context, drawable, i) : wrapIconShadowAndNight(context, drawable, i);
+                }
+            } else {
+                identifier = -1;
+                z3 = false;
+                if (identifier == 0) {
+                }
+                Log.i(TAG, "load= live icon for " + packageItemInfo.packageName + ", from overlay = " + z3);
+                i2 = this.mSamsungThemeAppIconRange;
+                if (i2 != 0) {
+                }
+                return getThemeIconWithBG(context, packageItemInfo, drawable, Boolean.valueOf(z4), Boolean.valueOf(z3), i);
+            }
+        }
+        return drawable;
     }
 
     public Drawable applyPrimaryColorToIcon(Context context, Drawable drawable) {
@@ -1292,24 +1358,24 @@ public class SemAppIconSolution {
                 Log.i(TAG, "skip applying night layer bitmap because of abnormal icon size = " + intrinsicHeight);
                 return drawable;
             }
-            boolean z = true;
-            boolean z2 = (i & 64) != 0;
-            boolean z3 = (i & 128) != 0;
+            boolean zIsNightModeActive = true;
+            boolean z = (i & 64) != 0;
+            boolean z2 = (i & 128) != 0;
             Configuration configuration = context.getResources().getConfiguration();
-            if (!z3) {
-                z = z2 ? false : configuration.isNightModeActive();
+            if (!z2) {
+                zIsNightModeActive = z ? false : configuration.isNightModeActive();
             }
             if (drawable instanceof AdaptiveIconDrawable) {
-                ((AdaptiveIconDrawable) drawable).setNightModeLayer(z);
+                ((AdaptiveIconDrawable) drawable).setNightModeLayer(zIsNightModeActive);
                 return drawable;
             }
-            if (z) {
-                Bitmap createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(createBitmap);
+            if (zIsNightModeActive) {
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmapCreateBitmap);
                 drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
                 drawable.draw(canvas);
                 canvas.drawPaint(PAINT_FOR_NIGHT_LAYER);
-                return new BitmapDrawable(Resources.getSystem(), createBitmap);
+                return new BitmapDrawable(Resources.getSystem(), bitmapCreateBitmap);
             }
         }
         return drawable;
@@ -1348,8 +1414,8 @@ public class SemAppIconSolution {
             float f2 = ICON_SIZE_FACTOR_AMBIENT * f;
             float f3 = ICON_SIZE_FACTOR_AMBIENT2 * f;
             int i = (int) (f + (2.0f * f3));
-            Bitmap createBitmap = Bitmap.createBitmap(i, i, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(createBitmap);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             canvas.translate(f3, f3);
             Paint paint = new Paint(1);
             paint.setColor(0);
@@ -1359,9 +1425,9 @@ public class SemAppIconSolution {
             canvas.drawPath(iconMask, paint);
             canvas.setBitmap(null);
             synchronized (this.mShadowCache) {
-                this.mShadowCache.put(intrinsicHeight, new WeakReference<>(createBitmap));
+                this.mShadowCache.put(intrinsicHeight, new WeakReference<>(bitmapCreateBitmap));
             }
-            return createBitmap;
+            return bitmapCreateBitmap;
         }
     }
 
@@ -1417,38 +1483,42 @@ public class SemAppIconSolution {
 
     public Drawable getColorThemeIcon(Context context, Drawable drawable, String str, int i) {
         Drawable drawable2;
+        Resources resourcesForApplicationAsUser;
+        int identifier;
         boolean z = (i & 4) != 0;
         boolean z2 = (i & 8) != 0;
-        if (!(drawable instanceof AdaptiveIconDrawable)) {
-            if (z && str != null) {
-                try {
-                    Resources resourcesForApplicationAsUser = context.getPackageManager().getResourcesForApplicationAsUser(str, 0);
-                    int identifier = resourcesForApplicationAsUser.getIdentifier("sep_monochrome_icon", TYPE_DRAWABLE, str);
-                    if (identifier != 0) {
-                        drawable2 = resourcesForApplicationAsUser.getDrawable(identifier);
-                    } else {
-                        Log.w(TAG, "Monochrome image is not existed, Pkg=" + str);
-                    }
-                } catch (Exception e) {
-                    Log.w(TAG, "Failed to find monochrome, Pkg=" + str + ", Exception=" + e.toString());
-                }
+        if (drawable instanceof AdaptiveIconDrawable) {
+            if (z2) {
+                drawable2 = ((AdaptiveIconDrawable) drawable).getForeground();
+            } else {
+                drawable2 = ((AdaptiveIconDrawable) drawable).getMonochrome();
             }
+        } else if (!z || str == null) {
             drawable2 = null;
-        } else if (z2) {
-            drawable2 = ((AdaptiveIconDrawable) drawable).getForeground();
         } else {
-            drawable2 = ((AdaptiveIconDrawable) drawable).getMonochrome();
+            try {
+                resourcesForApplicationAsUser = context.getPackageManager().getResourcesForApplicationAsUser(str, 0);
+                identifier = resourcesForApplicationAsUser.getIdentifier("sep_monochrome_icon", TYPE_DRAWABLE, str);
+            } catch (Exception e) {
+                Log.w(TAG, "Failed to find monochrome, Pkg=" + str + ", Exception=" + e.toString());
+            }
+            if (identifier != 0) {
+                drawable2 = resourcesForApplicationAsUser.getDrawable(identifier);
+            } else {
+                Log.w(TAG, "Monochrome image is not existed, Pkg=" + str);
+                drawable2 = null;
+            }
         }
         if (drawable2 == null) {
             return null;
         }
-        Drawable mutate = drawable2.mutate();
+        Drawable drawableMutate = drawable2.mutate();
         int[] colorsForIcon = getColorsForIcon(context);
         if (!z2) {
-            mutate.setTint(colorsForIcon[1]);
+            drawableMutate.setTint(colorsForIcon[1]);
         }
         Log.i(TAG, "ColorTheme icon has returned, color = #" + Integer.toHexString(colorsForIcon[0]) + ", isNoAdaptive = " + z + ", isOnlyBG = " + z2);
-        return new AdaptiveIconDrawable(new ColorDrawable(colorsForIcon[0]), mutate);
+        return new AdaptiveIconDrawable(new ColorDrawable(colorsForIcon[0]), drawableMutate);
     }
 
     private int[] getColorsForIcon(Context context) {

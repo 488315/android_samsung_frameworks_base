@@ -2,7 +2,7 @@
 <LinearLayout android:orientation="vertical" android:id="@id/parentPanel" android:paddingTop="@dimen/sesl_suggestive_dialog_title_padding_top" android:layout_width="fill_parent" android:layout_height="wrap_content"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout android:orientation="vertical" android:id="@id/topPanel" android:layout_width="fill_parent" android:layout_height="wrap_content">
-        <LinearLayout android:gravity="start|bottom|center" android:orientation="horizontal" android:id="@id/title_template" android:paddingLeft="@dimen/sesl_suggestive_dialog_padding_horizontal" android:paddingRight="@dimen/sesl_suggestive_dialog_padding_horizontal" android:paddingBottom="@dimen/sesl_suggestive_dialog_title_padding_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="start|bottom" android:orientation="horizontal" android:id="@id/title_template" android:paddingLeft="@dimen/sesl_suggestive_dialog_padding_horizontal" android:paddingRight="@dimen/sesl_suggestive_dialog_padding_horizontal" android:paddingBottom="@dimen/sesl_suggestive_dialog_title_padding_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content">
             <ImageView android:id="@android:id/icon" android:layout_width="32.0dip" android:layout_height="32.0dip" android:src="@null" android:scaleType="fitCenter" style="@style/RtlOverlay.Widget.AppCompat.DialogTitle.Icon" />
             <androidx.appcompat.widget.DialogTitle android:ellipsize="end" android:id="@id/alertTitle" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" android:textAlignment="viewStart" style="?android:windowTitleStyle" />
         </LinearLayout>

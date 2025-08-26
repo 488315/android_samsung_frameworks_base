@@ -4,6 +4,9 @@ import com.android.settingslib.notification.domain.interactor.NotificationsSound
 import com.android.settingslib.volume.data.repository.AudioRepository;
 import com.android.settingslib.volume.data.repository.AudioRepositoryImpl;
 import com.android.settingslib.volume.shared.model.AudioStream;
+import com.android.settingslib.volume.shared.model.AudioStreamModel;
+import com.android.settingslib.volume.shared.model.RingerMode;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -15,7 +18,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$Flow
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AudioVolumeInteractor {
     public final AudioRepository audioRepository;
@@ -27,13 +29,12 @@ public final class AudioVolumeInteractor {
     }
 
     /* renamed from: canChangeVolume-tLTdkI8, reason: not valid java name */
-    public final Flow m983canChangeVolumetLTdkI8(int i) {
+    public final Flow m985canChangeVolumetLTdkI8(int i) {
         NotificationsSoundPolicyInteractor notificationsSoundPolicyInteractor = this.notificationsSoundPolicyInteractor;
         if (i != 5) {
-            final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3 m974isZenMutedtLTdkI8 = notificationsSoundPolicyInteractor.m974isZenMutedtLTdkI8(i);
+            final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3M976isZenMutedtLTdkI8 = notificationsSoundPolicyInteractor.m976isZenMutedtLTdkI8(i);
             return new Flow() { // from class: com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$2
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$2$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -60,76 +61,54 @@ public final class AudioVolumeInteractor {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
                     */
-                    public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                        /*
-                            r4 = this;
-                            boolean r0 = r6 instanceof com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolumetLTdkI8$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                            if (r0 == 0) goto L13
-                            r0 = r6
-                            com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$2$2$1 r0 = (com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolumetLTdkI8$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                            int r1 = r0.label
-                            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                            r3 = r1 & r2
-                            if (r3 == 0) goto L13
-                            int r1 = r1 - r2
-                            r0.label = r1
-                            goto L18
-                        L13:
-                            com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$2$2$1 r0 = new com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$2$2$1
-                            r0.<init>(r6)
-                        L18:
-                            java.lang.Object r6 = r0.result
-                            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                            int r2 = r0.label
-                            r3 = 1
-                            if (r2 == 0) goto L2f
-                            if (r2 != r3) goto L27
-                            kotlin.ResultKt.throwOnFailure(r6)
-                            goto L48
-                        L27:
-                            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                            r4.<init>(r5)
-                            throw r4
-                        L2f:
-                            kotlin.ResultKt.throwOnFailure(r6)
-                            java.lang.Boolean r5 = (java.lang.Boolean) r5
-                            boolean r5 = r5.booleanValue()
-                            r5 = r5 ^ r3
-                            java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                            r0.label = r3
-                            kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                            java.lang.Object r4 = r4.emit(r5, r0)
-                            if (r4 != r1) goto L48
-                            return r1
-                        L48:
-                            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                            return r4
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolumetLTdkI8$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                    public final Object emit(Object obj, Continuation continuation) {
+                        AnonymousClass1 anonymousClass1;
+                        if (continuation instanceof AnonymousClass1) {
+                            anonymousClass1 = (AnonymousClass1) continuation;
+                            int i = anonymousClass1.label;
+                            if ((i & Integer.MIN_VALUE) != 0) {
+                                anonymousClass1.label = i - Integer.MIN_VALUE;
+                            } else {
+                                anonymousClass1 = new AnonymousClass1(continuation);
+                            }
+                        }
+                        Object obj2 = anonymousClass1.result;
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i2 = anonymousClass1.label;
+                        if (i2 == 0) {
+                            ResultKt.throwOnFailure(obj2);
+                            Boolean boolValueOf = Boolean.valueOf(!((Boolean) obj).booleanValue());
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        } else {
+                            if (i2 != 1) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                        }
+                        return Unit.INSTANCE;
                     }
                 }
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                    Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                    return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                    Object objCollect = flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3M976isZenMutedtLTdkI8.collect(new AnonymousClass2(flowCollector), continuation);
+                    return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             };
         }
-        FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3 m974isZenMutedtLTdkI82 = notificationsSoundPolicyInteractor.m974isZenMutedtLTdkI8(i);
-        AudioStream.m989constructorimpl(2);
-        final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 m984getAudioStreamtLTdkI8 = m984getAudioStreamtLTdkI8(2);
-        return new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(m974isZenMutedtLTdkI82, new Flow() { // from class: com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$1
+        FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3M976isZenMutedtLTdkI82 = notificationsSoundPolicyInteractor.m976isZenMutedtLTdkI8(i);
+        AudioStream.m991constructorimpl(2);
+        final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI8 = m986getAudioStreamtLTdkI8(2);
+        return new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3M976isZenMutedtLTdkI82, new Flow() { // from class: com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -156,131 +135,324 @@ public final class AudioVolumeInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolumetLTdkI8$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$1$2$1 r0 = (com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolumetLTdkI8$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$1$2$1 r0 = new com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolume-tLTdkI8$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.settingslib.volume.shared.model.AudioStreamModel r5 = (com.android.settingslib.volume.shared.model.AudioStreamModel) r5
-                        boolean r5 = r5.isMuted
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor$canChangeVolumetLTdkI8$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((AudioStreamModel) obj).isMuted);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI8.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, new AudioVolumeInteractor$canChangeVolume$2(null));
     }
 
     /* renamed from: getAudioStream-tLTdkI8, reason: not valid java name */
-    public final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 m984getAudioStreamtLTdkI8(int i) {
+    public final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 m986getAudioStreamtLTdkI8(int i) {
         AudioRepositoryImpl audioRepositoryImpl = (AudioRepositoryImpl) this.audioRepository;
-        return FlowKt.combine(audioRepositoryImpl.m978getAudioStreamtLTdkI8(i), audioRepositoryImpl.ringerMode, this.notificationsSoundPolicyInteractor.m974isZenMutedtLTdkI8(i), new AudioVolumeInteractor$getAudioStream$1(this, null));
+        return FlowKt.combine(audioRepositoryImpl.m980getAudioStreamtLTdkI8(i), audioRepositoryImpl.ringerMode, this.notificationsSoundPolicyInteractor.m976isZenMutedtLTdkI8(i), new AudioVolumeInteractor$getAudioStream$1(this, null));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x00f4, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:52:0x00f4, code lost:
     
-        if (r10.m986setVolumeZdW0WiI(r9, r12 + 1, r0) == r1) goto L53;
+        if (r10.m988setVolumeZdW0WiI(r9, r12 + 1, r0) == r1) goto L53;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:50:0x007f, code lost:
-    
-        if (r11 == r1) goto L53;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00ea  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00c2  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0089  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x00c2  */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x00e0  */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x00ea  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* renamed from: setMuted-ZdW0WiI, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object m985setMutedZdW0WiI(int r10, kotlin.coroutines.jvm.internal.ContinuationImpl r11, boolean r12) {
-        /*
-            Method dump skipped, instructions count: 250
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor.m985setMutedZdW0WiI(int, kotlin.coroutines.jvm.internal.ContinuationImpl, boolean):java.lang.Object");
+    public final Object m987setMutedZdW0WiI(int i, ContinuationImpl continuationImpl, boolean z) {
+        AudioVolumeInteractor$setMuted$1 audioVolumeInteractor$setMuted$1;
+        AudioVolumeInteractor audioVolumeInteractor;
+        boolean z2;
+        AudioVolumeInteractor audioVolumeInteractor2;
+        boolean z3;
+        int i2;
+        AudioVolumeInteractor audioVolumeInteractor3;
+        AudioStreamModel audioStreamModel;
+        int i3;
+        if (continuationImpl instanceof AudioVolumeInteractor$setMuted$1) {
+            audioVolumeInteractor$setMuted$1 = (AudioVolumeInteractor$setMuted$1) continuationImpl;
+            int i4 = audioVolumeInteractor$setMuted$1.label;
+            if ((i4 & Integer.MIN_VALUE) != 0) {
+                audioVolumeInteractor$setMuted$1.label = i4 - Integer.MIN_VALUE;
+            } else {
+                audioVolumeInteractor$setMuted$1 = new AudioVolumeInteractor$setMuted$1(this, continuationImpl);
+            }
+        }
+        Object objFirst = audioVolumeInteractor$setMuted$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i5 = audioVolumeInteractor$setMuted$1.label;
+        if (i5 == 0) {
+            ResultKt.throwOnFailure(objFirst);
+            FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI8 = m986getAudioStreamtLTdkI8(i);
+            audioVolumeInteractor$setMuted$1.L$0 = this;
+            audioVolumeInteractor$setMuted$1.I$0 = i;
+            audioVolumeInteractor$setMuted$1.Z$0 = z;
+            audioVolumeInteractor$setMuted$1.label = 1;
+            objFirst = FlowKt.first(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI8, audioVolumeInteractor$setMuted$1);
+            if (objFirst != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i5 != 1) {
+            if (i5 == 2) {
+                z2 = audioVolumeInteractor$setMuted$1.Z$0;
+                i = audioVolumeInteractor$setMuted$1.I$0;
+                audioVolumeInteractor = (AudioVolumeInteractor) audioVolumeInteractor$setMuted$1.L$0;
+                ResultKt.throwOnFailure(objFirst);
+                AudioVolumeInteractor audioVolumeInteractor4 = audioVolumeInteractor;
+                z = z2;
+                this = audioVolumeInteractor4;
+                AudioRepository audioRepository = this.audioRepository;
+                audioVolumeInteractor$setMuted$1.L$0 = this;
+                audioVolumeInteractor$setMuted$1.I$0 = i;
+                audioVolumeInteractor$setMuted$1.Z$0 = z;
+                audioVolumeInteractor$setMuted$1.label = 3;
+                objFirst = ((AudioRepositoryImpl) audioRepository).m982setMutedZdW0WiI(i, z, audioVolumeInteractor$setMuted$1);
+                if (objFirst != coroutineSingletons) {
+                    boolean z4 = z;
+                    audioVolumeInteractor2 = this;
+                    z3 = z4;
+                    if (((Boolean) objFirst).booleanValue()) {
+                        FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI82 = audioVolumeInteractor2.m986getAudioStreamtLTdkI8(i);
+                        audioVolumeInteractor$setMuted$1.L$0 = audioVolumeInteractor2;
+                        audioVolumeInteractor$setMuted$1.I$0 = i;
+                        audioVolumeInteractor$setMuted$1.label = 4;
+                        objFirst = FlowKt.first(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI82, audioVolumeInteractor$setMuted$1);
+                        if (objFirst != coroutineSingletons) {
+                        }
+                    }
+                    return Unit.INSTANCE;
+                }
+                return coroutineSingletons;
+            }
+            if (i5 != 3) {
+                if (i5 != 4) {
+                    if (i5 != 5) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(objFirst);
+                    return Unit.INSTANCE;
+                }
+                i2 = audioVolumeInteractor$setMuted$1.I$0;
+                audioVolumeInteractor3 = (AudioVolumeInteractor) audioVolumeInteractor$setMuted$1.L$0;
+                ResultKt.throwOnFailure(objFirst);
+                audioStreamModel = (AudioStreamModel) objFirst;
+                i3 = audioStreamModel.volume;
+                if (i3 == audioStreamModel.minVolume) {
+                    audioVolumeInteractor$setMuted$1.L$0 = null;
+                    audioVolumeInteractor$setMuted$1.label = 5;
+                }
+                return Unit.INSTANCE;
+            }
+            z3 = audioVolumeInteractor$setMuted$1.Z$0;
+            i = audioVolumeInteractor$setMuted$1.I$0;
+            audioVolumeInteractor2 = (AudioVolumeInteractor) audioVolumeInteractor$setMuted$1.L$0;
+            ResultKt.throwOnFailure(objFirst);
+            if (((Boolean) objFirst).booleanValue() && !z3) {
+                FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI822 = audioVolumeInteractor2.m986getAudioStreamtLTdkI8(i);
+                audioVolumeInteractor$setMuted$1.L$0 = audioVolumeInteractor2;
+                audioVolumeInteractor$setMuted$1.I$0 = i;
+                audioVolumeInteractor$setMuted$1.label = 4;
+                objFirst = FlowKt.first(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI822, audioVolumeInteractor$setMuted$1);
+                if (objFirst != coroutineSingletons) {
+                    i2 = i;
+                    audioVolumeInteractor3 = audioVolumeInteractor2;
+                    audioStreamModel = (AudioStreamModel) objFirst;
+                    i3 = audioStreamModel.volume;
+                    if (i3 == audioStreamModel.minVolume) {
+                    }
+                }
+                return coroutineSingletons;
+            }
+            return Unit.INSTANCE;
+        }
+        z = audioVolumeInteractor$setMuted$1.Z$0;
+        i = audioVolumeInteractor$setMuted$1.I$0;
+        this = (AudioVolumeInteractor) audioVolumeInteractor$setMuted$1.L$0;
+        ResultKt.throwOnFailure(objFirst);
+        if (!((AudioStreamModel) objFirst).isAffectedByMute) {
+            return Unit.INSTANCE;
+        }
+        if (i != 2) {
+            AudioRepository audioRepository2 = this.audioRepository;
+            audioVolumeInteractor$setMuted$1.L$0 = this;
+            audioVolumeInteractor$setMuted$1.I$0 = i;
+            audioVolumeInteractor$setMuted$1.Z$0 = z;
+            audioVolumeInteractor$setMuted$1.label = 3;
+            objFirst = ((AudioRepositoryImpl) audioRepository2).m982setMutedZdW0WiI(i, z, audioVolumeInteractor$setMuted$1);
+            if (objFirst != coroutineSingletons) {
+            }
+        } else {
+            int i6 = z ? 1 : 2;
+            AudioRepository audioRepository3 = this.audioRepository;
+            RingerMode.m993constructorimpl(i6);
+            audioVolumeInteractor$setMuted$1.L$0 = this;
+            audioVolumeInteractor$setMuted$1.I$0 = i;
+            audioVolumeInteractor$setMuted$1.Z$0 = z;
+            audioVolumeInteractor$setMuted$1.label = 2;
+            if (((AudioRepositoryImpl) audioRepository3).m983setRingerModeInternal2JRsiQU(i6, audioVolumeInteractor$setMuted$1) != coroutineSingletons) {
+                boolean z5 = z;
+                audioVolumeInteractor = this;
+                z2 = z5;
+                AudioVolumeInteractor audioVolumeInteractor42 = audioVolumeInteractor;
+                z = z2;
+                this = audioVolumeInteractor42;
+                AudioRepository audioRepository22 = this.audioRepository;
+                audioVolumeInteractor$setMuted$1.L$0 = this;
+                audioVolumeInteractor$setMuted$1.I$0 = i;
+                audioVolumeInteractor$setMuted$1.Z$0 = z;
+                audioVolumeInteractor$setMuted$1.label = 3;
+                objFirst = ((AudioRepositoryImpl) audioRepository22).m982setMutedZdW0WiI(i, z, audioVolumeInteractor$setMuted$1);
+                if (objFirst != coroutineSingletons) {
+                }
+            }
+        }
+        return coroutineSingletons;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x00a4, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:32:0x00a4, code lost:
     
-        if (r5.m985setMutedZdW0WiI(r10, r0, true) == r1) goto L40;
+        if (r5.m987setMutedZdW0WiI(r10, r0, true) == r1) goto L40;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x00b9, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:39:0x00b9, code lost:
     
-        if (r5.m985setMutedZdW0WiI(r10, r0, false) == r1) goto L40;
+        if (r5.m987setMutedZdW0WiI(r10, r0, false) == r1) goto L40;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:40:0x006f, code lost:
-    
-        if (r11 == r1) goto L40;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0079  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x009a  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00aa  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* renamed from: setVolume-ZdW0WiI, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object m986setVolumeZdW0WiI(int r9, int r10, kotlin.coroutines.jvm.internal.ContinuationImpl r11) {
-        /*
-            Method dump skipped, instructions count: 194
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.volume.domain.interactor.AudioVolumeInteractor.m986setVolumeZdW0WiI(int, int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object m988setVolumeZdW0WiI(int i, int i2, ContinuationImpl continuationImpl) {
+        AudioVolumeInteractor$setVolume$1 audioVolumeInteractor$setVolume$1;
+        AudioStreamModel audioStreamModel;
+        int i3;
+        int i4;
+        AudioVolumeInteractor audioVolumeInteractor;
+        int i5;
+        int i6;
+        if (continuationImpl instanceof AudioVolumeInteractor$setVolume$1) {
+            audioVolumeInteractor$setVolume$1 = (AudioVolumeInteractor$setVolume$1) continuationImpl;
+            int i7 = audioVolumeInteractor$setVolume$1.label;
+            if ((i7 & Integer.MIN_VALUE) != 0) {
+                audioVolumeInteractor$setVolume$1.label = i7 - Integer.MIN_VALUE;
+            } else {
+                audioVolumeInteractor$setVolume$1 = new AudioVolumeInteractor$setVolume$1(this, continuationImpl);
+            }
+        }
+        Object objFirst = audioVolumeInteractor$setVolume$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i8 = audioVolumeInteractor$setVolume$1.label;
+        if (i8 == 0) {
+            ResultKt.throwOnFailure(objFirst);
+            FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI8 = m986getAudioStreamtLTdkI8(i);
+            audioVolumeInteractor$setVolume$1.L$0 = this;
+            audioVolumeInteractor$setVolume$1.I$0 = i;
+            audioVolumeInteractor$setVolume$1.I$1 = i2;
+            audioVolumeInteractor$setVolume$1.label = 1;
+            objFirst = FlowKt.first(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1M986getAudioStreamtLTdkI8, audioVolumeInteractor$setVolume$1);
+            if (objFirst != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i8 != 1) {
+            if (i8 != 2) {
+                if (i8 == 3) {
+                    ResultKt.throwOnFailure(objFirst);
+                    return Unit.INSTANCE;
+                }
+                if (i8 != 4) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(objFirst);
+                return Unit.INSTANCE;
+            }
+            i5 = audioVolumeInteractor$setVolume$1.I$2;
+            i4 = audioVolumeInteractor$setVolume$1.I$1;
+            i3 = audioVolumeInteractor$setVolume$1.I$0;
+            audioStreamModel = (AudioStreamModel) audioVolumeInteractor$setVolume$1.L$1;
+            audioVolumeInteractor = (AudioVolumeInteractor) audioVolumeInteractor$setVolume$1.L$0;
+            ResultKt.throwOnFailure(objFirst);
+            i6 = audioStreamModel.minVolume;
+            if (i4 == i6) {
+                if (i5 == i6 && i4 > i6) {
+                    audioVolumeInteractor$setVolume$1.L$0 = null;
+                    audioVolumeInteractor$setVolume$1.L$1 = null;
+                    audioVolumeInteractor$setVolume$1.label = 4;
+                }
+                return Unit.INSTANCE;
+            }
+            audioVolumeInteractor$setVolume$1.L$0 = null;
+            audioVolumeInteractor$setVolume$1.L$1 = null;
+            audioVolumeInteractor$setVolume$1.label = 3;
+            return coroutineSingletons;
+        }
+        i2 = audioVolumeInteractor$setVolume$1.I$1;
+        i = audioVolumeInteractor$setVolume$1.I$0;
+        this = (AudioVolumeInteractor) audioVolumeInteractor$setVolume$1.L$0;
+        ResultKt.throwOnFailure(objFirst);
+        audioStreamModel = (AudioStreamModel) objFirst;
+        int i9 = audioStreamModel.volume;
+        if (i2 != i9) {
+            AudioRepository audioRepository = this.audioRepository;
+            audioVolumeInteractor$setVolume$1.L$0 = this;
+            audioVolumeInteractor$setVolume$1.L$1 = audioStreamModel;
+            audioVolumeInteractor$setVolume$1.I$0 = i;
+            audioVolumeInteractor$setVolume$1.I$1 = i2;
+            audioVolumeInteractor$setVolume$1.I$2 = i9;
+            audioVolumeInteractor$setVolume$1.label = 2;
+            if (((AudioRepositoryImpl) audioRepository).m984setVolumeZdW0WiI(i, i2, audioVolumeInteractor$setVolume$1) != coroutineSingletons) {
+                int i10 = i2;
+                i3 = i;
+                i4 = i10;
+                audioVolumeInteractor = this;
+                i5 = i9;
+                i6 = audioStreamModel.minVolume;
+                if (i4 == i6) {
+                }
+            }
+            return coroutineSingletons;
+        }
+        return Unit.INSTANCE;
     }
 }

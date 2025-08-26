@@ -37,12 +37,12 @@ class CredstoreIdentityCredentialStore extends IdentityCredentialStore {
     }
 
     static CredstoreIdentityCredentialStore getInstanceForType(Context context, int i) {
-        ICredentialStoreFactory asInterface = ICredentialStoreFactory.Stub.asInterface(ServiceManager.getService("android.security.identity"));
-        if (asInterface == null) {
+        ICredentialStoreFactory iCredentialStoreFactoryAsInterface = ICredentialStoreFactory.Stub.asInterface(ServiceManager.getService("android.security.identity"));
+        if (iCredentialStoreFactoryAsInterface == null) {
             return null;
         }
         try {
-            ICredentialStore credentialStore = asInterface.getCredentialStore(i);
+            ICredentialStore credentialStore = iCredentialStoreFactoryAsInterface.getCredentialStore(i);
             if (credentialStore == null) {
                 return null;
             }
@@ -83,7 +83,7 @@ class CredstoreIdentityCredentialStore extends IdentityCredentialStore {
     }
 
     @Override // android.security.identity.IdentityCredentialStore
-    public WritableIdentityCredential createCredential(String str, String str2) throws AlreadyPersonalizedException, DocTypeNotSupportedException {
+    public WritableIdentityCredential createCredential(String str, String str2) throws DocTypeNotSupportedException, AlreadyPersonalizedException {
         try {
             return new CredstoreWritableIdentityCredential(this.mContext, str, str2, this.mStore.createCredential(str, str2));
         } catch (RemoteException e) {
@@ -118,24 +118,24 @@ class CredstoreIdentityCredentialStore extends IdentityCredentialStore {
 
     @Override // android.security.identity.IdentityCredentialStore
     public byte[] deleteCredentialByName(String str) {
-        ICredential iCredential;
+        ICredential credentialByName;
         try {
             try {
-                iCredential = this.mStore.getCredentialByName(str, 1);
-            } catch (RemoteException e) {
-                throw new RuntimeException("Unexpected RemoteException ", e);
-            }
-        } catch (ServiceSpecificException e2) {
-            try {
-                if (e2.errorCode == 3) {
-                    return null;
+                credentialByName = this.mStore.getCredentialByName(str, 1);
+            } catch (ServiceSpecificException e) {
+                try {
+                    if (e.errorCode == 3) {
+                        return null;
+                    }
+                    credentialByName = null;
+                } catch (ServiceSpecificException e2) {
+                    throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
                 }
-                iCredential = null;
-            } catch (ServiceSpecificException e3) {
-                throw new RuntimeException("Unexpected ServiceSpecificException with code " + e3.errorCode, e3);
             }
+            return credentialByName.deleteCredential();
+        } catch (RemoteException e3) {
+            throw new RuntimeException("Unexpected RemoteException ", e3);
         }
-        return iCredential.deleteCredential();
     }
 
     @Override // android.security.identity.IdentityCredentialStore

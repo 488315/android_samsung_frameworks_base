@@ -1,16 +1,28 @@
 package com.android.systemui.accessibility.hearingaid;
 
 import android.content.Context;
+import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
+import android.util.Log;
+import androidx.collection.ArraySet;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HapClientProfile;
 import com.android.settingslib.bluetooth.HearingAidAudioRoutingHelper;
+import com.android.settingslib.bluetooth.LocalBluetoothProfile;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import kotlin.ResultKt;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingDevicesInputRoutingController {
     public static final Companion Companion = new Companion(null);
@@ -20,7 +32,6 @@ public class HearingDevicesInputRoutingController {
     public final ContextScope bgCoroutineScope;
     public CachedBluetoothDevice cachedDevice;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -30,19 +41,16 @@ public class HearingDevicesInputRoutingController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         HearingDevicesInputRoutingController create(Context context);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface InputRoutingControlAvailableCallback {
         void onResult(boolean z);
     }
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InputRoutingValue {
         public static final /* synthetic */ InputRoutingValue[] $VALUES;
         public static final InputRoutingValue BUILTIN_MIC;
@@ -77,21 +85,95 @@ public class HearingDevicesInputRoutingController {
         this.bgCoroutineScope = CoroutineScopeKt.CoroutineScope(coroutineDispatcher);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x009e  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00cf  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00af A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$isInputRoutingControlAvailableInternal(com.android.systemui.accessibility.hearingaid.HearingDevicesInputRoutingController r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            Method dump skipped, instructions count: 240
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.accessibility.hearingaid.HearingDevicesInputRoutingController.access$isInputRoutingControlAvailableInternal(com.android.systemui.accessibility.hearingaid.HearingDevicesInputRoutingController, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$isInputRoutingControlAvailableInternal(HearingDevicesInputRoutingController hearingDevicesInputRoutingController, ContinuationImpl continuationImpl) throws Throwable {
+        HearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1 hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1;
+        CachedBluetoothDevice cachedBluetoothDevice;
+        Set set;
+        boolean z;
+        boolean z2;
+        hearingDevicesInputRoutingController.getClass();
+        if (continuationImpl instanceof HearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1) {
+            hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1 = (HearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1) continuationImpl;
+            int i = hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1.label = i - Integer.MIN_VALUE;
+            } else {
+                hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1 = new HearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1(hearingDevicesInputRoutingController, continuationImpl);
+            }
+        }
+        Object obj = hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            CachedBluetoothDevice cachedBluetoothDevice2 = hearingDevicesInputRoutingController.cachedDevice;
+            if (cachedBluetoothDevice2 == null) {
+                return Boolean.FALSE;
+            }
+            Set set2 = cachedBluetoothDevice2.mMemberDevices;
+            HearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$inputInfos$1 hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$inputInfos$1 = new HearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$inputInfos$1(hearingDevicesInputRoutingController, null);
+            hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1.L$0 = cachedBluetoothDevice2;
+            hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1.L$1 = set2;
+            hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1.label = 1;
+            Object objWithContext = BuildersKt.withContext(hearingDevicesInputRoutingController.backgroundDispatcher, hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$inputInfos$1, hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1);
+            if (objWithContext == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+            cachedBluetoothDevice = cachedBluetoothDevice2;
+            obj = objWithContext;
+            set = set2;
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            set = (Set) hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1.L$1;
+            cachedBluetoothDevice = (CachedBluetoothDevice) hearingDevicesInputRoutingController$isInputRoutingControlAvailableInternal$1.L$0;
+            ResultKt.throwOnFailure(obj);
+        }
+        AudioDeviceInfo[] audioDeviceInfoArr = (AudioDeviceInfo[]) obj;
+        ArraySet arraySet = new ArraySet(0, 1, null);
+        arraySet.add(cachedBluetoothDevice.mDevice.getAddress());
+        set.getClass();
+        if (!set.isEmpty()) {
+            Iterator it = set.iterator();
+            while (it.hasNext()) {
+                arraySet.add(((CachedBluetoothDevice) it.next()).mDevice.getAddress());
+            }
+        }
+        audioDeviceInfoArr.getClass();
+        int length = audioDeviceInfoArr.length;
+        int i3 = 0;
+        while (true) {
+            if (i3 >= length) {
+                z = false;
+                break;
+            }
+            if (arraySet.contains(audioDeviceInfoArr[i3].getAddress())) {
+                z = true;
+                break;
+            }
+            i3++;
+        }
+        List profiles = cachedBluetoothDevice.getProfiles();
+        if ((profiles instanceof Collection) && profiles.isEmpty()) {
+            z2 = false;
+        } else {
+            Iterator it2 = profiles.iterator();
+            while (it2.hasNext()) {
+                if (((LocalBluetoothProfile) it2.next()) instanceof HapClientProfile) {
+                    z2 = true;
+                    break;
+                }
+            }
+            z2 = false;
+        }
+        if (z2 && !z) {
+            Log.d("HearingDevicesInputRoutingController", "Not supported input type hearing device.");
+        }
+        return Boolean.valueOf(z2 && z);
     }
 }

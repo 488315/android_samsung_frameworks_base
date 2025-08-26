@@ -3,6 +3,7 @@ package com.android.systemui.controls.ui.view;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -20,7 +21,6 @@ import com.android.systemui.controls.controller.util.BadgeProviderImpl;
 import com.android.systemui.controls.ui.view.ControlsSpinner.SelectionItem;
 import com.android.systemui.controls.util.ControlsUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout {
     public BadgeProvider badgeProvider;
@@ -33,7 +33,6 @@ public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout
     public SpinnerItemSelectionChangedCallback spinnerItemSelectedChangedCallback;
     public SpinnerTouchCallback spinnerTouchCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ItemAdapter extends ArrayAdapter {
         public final BadgeProvider badgeProvider;
         public final int dropDownLayout;
@@ -53,7 +52,7 @@ public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout
         }
 
         @Override // android.widget.ArrayAdapter, android.widget.BaseAdapter, android.widget.SpinnerAdapter
-        public final View getDropDownView(int i, View view, ViewGroup viewGroup) {
+        public final View getDropDownView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
             BadgeProvider badgeProvider;
             SelectionItem selectionItem = (SelectionItem) getItem(i);
             if (view == null) {
@@ -64,12 +63,12 @@ public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout
             textView.setText(selectionItem != null ? selectionItem.getAppName() : null);
             if (selectionItem != null && (badgeProvider = this.badgeProvider) != null) {
                 ComponentName componentName = selectionItem.getComponentName();
-                View requireViewById = view.requireViewById(R.id.badge);
+                View viewRequireViewById = view.requireViewById(R.id.badge);
                 BadgeProviderImpl badgeProviderImpl = (BadgeProviderImpl) badgeProvider;
                 if (badgeProviderImpl.badgeRequiredSet.contains(componentName.getPackageName())) {
-                    requireViewById.setVisibility(0);
+                    viewRequireViewById.setVisibility(0);
                 } else {
-                    requireViewById.setVisibility(8);
+                    viewRequireViewById.setVisibility(8);
                 }
                 badgeProviderImpl.setDescription(selectionItem.getComponentName(), view, selectionItem.getAppName());
             }
@@ -97,7 +96,6 @@ public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SelectionItem {
         public final CharSequence appName;
         public final ComponentName componentName;
@@ -122,11 +120,9 @@ public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SpinnerItemSelectionChangedCallback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SpinnerTouchCallback {
     }
 
@@ -136,10 +132,10 @@ public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout
     }
 
     public final void initView() {
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.sec_controls_spinner_item, (ViewGroup) this, false);
-        addView(inflate);
-        this.spinner = (ControlsAppCompatSpinner) inflate.requireViewById(R.id.controls_app_spinner);
-        this.noSpinner = (TextView) inflate.requireViewById(R.id.controls_spinner_item);
+        View viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.sec_controls_spinner_item, (ViewGroup) this, false);
+        addView(viewInflate);
+        this.spinner = (ControlsAppCompatSpinner) viewInflate.requireViewById(R.id.controls_app_spinner);
+        this.noSpinner = (TextView) viewInflate.requireViewById(R.id.controls_spinner_item);
         AccessibilityManager accessibilityManager = (AccessibilityManager) getContext().getSystemService("accessibility");
         TextView textView = this.noSpinner;
         if (textView == null) {
@@ -152,8 +148,8 @@ public final class ControlsSpinner<T extends SelectionItem> extends LinearLayout
             textView2 = null;
         }
         ControlsUtil.Companion.updateFontSize$default(companion, textView2, R.dimen.control_spinner_text_size);
-        this.launchButtonLayout = (LinearLayout) inflate.requireViewById(R.id.launch_button_layout);
-        Button button = (Button) inflate.requireViewById(R.id.launch_button);
+        this.launchButtonLayout = (LinearLayout) viewInflate.requireViewById(R.id.launch_button_layout);
+        Button button = (Button) viewInflate.requireViewById(R.id.launch_button);
         this.launchButton = button;
         ControlsUtil.Companion.updateFontSize(button != null ? button : null, R.dimen.control_launch_button_text_size, 1.3f);
     }

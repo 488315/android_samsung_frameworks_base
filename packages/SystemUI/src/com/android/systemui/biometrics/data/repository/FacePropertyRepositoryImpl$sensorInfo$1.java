@@ -1,23 +1,29 @@
 package com.android.systemui.biometrics.data.repository;
 
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
+import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
+import com.android.systemui.biometrics.shared.model.SensorStrengthKt;
+import com.android.systemui.common.coroutine.ChannelExt;
+import java.util.List;
 import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class FacePropertyRepositoryImpl$sensorInfo$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
     int label;
     final /* synthetic */ FacePropertyRepositoryImpl this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$sensorInfo$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ FacePropertyRepositoryImpl$sensorInfo$1$callback$1 $callback;
@@ -75,76 +81,54 @@ final class FacePropertyRepositoryImpl$sensorInfo$1 extends SuspendLambda implem
         return ((FacePropertyRepositoryImpl$sensorInfo$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x004f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:14:0x004f, code lost:
     
         if (kotlinx.coroutines.channels.ProduceKt.awaitClose(r1, r9, r8) == r0) goto L15;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0051, code lost:
-    
-        return r0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x003f, code lost:
-    
-        if (kotlinx.coroutines.BuildersKt.withContext(r6, r7, r8) == r0) goto L15;
      */
     /* JADX WARN: Type inference failed for: r9v2, types: [com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$sensorInfo$1$callback$1] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r9) {
-        /*
-            r8 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r8.label
-            r2 = 0
-            r3 = 2
-            r4 = 1
-            if (r1 == 0) goto L21
-            if (r1 == r4) goto L19
-            if (r1 != r3) goto L11
-            kotlin.ResultKt.throwOnFailure(r9)
-            goto L52
-        L11:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-            r8.<init>(r9)
-            throw r8
-        L19:
-            java.lang.Object r1 = r8.L$0
-            kotlinx.coroutines.channels.ProducerScope r1 = (kotlinx.coroutines.channels.ProducerScope) r1
-            kotlin.ResultKt.throwOnFailure(r9)
-            goto L42
-        L21:
-            kotlin.ResultKt.throwOnFailure(r9)
-            java.lang.Object r9 = r8.L$0
-            r1 = r9
-            kotlinx.coroutines.channels.ProducerScope r1 = (kotlinx.coroutines.channels.ProducerScope) r1
-            com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$sensorInfo$1$callback$1 r9 = new com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$sensorInfo$1$callback$1
-            r9.<init>()
-            com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl r5 = r8.this$0
-            kotlinx.coroutines.CoroutineDispatcher r6 = r5.backgroundDispatcher
-            com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$sensorInfo$1$1 r7 = new com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$sensorInfo$1$1
-            r7.<init>(r5, r9, r2)
-            r8.L$0 = r1
-            r8.label = r4
-            java.lang.Object r9 = kotlinx.coroutines.BuildersKt.withContext(r6, r7, r8)
-            if (r9 != r0) goto L42
-            goto L51
-        L42:
-            com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$sensorInfo$1$$ExternalSyntheticLambda0 r9 = new com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$sensorInfo$1$$ExternalSyntheticLambda0
-            r9.<init>()
-            r8.L$0 = r2
-            r8.label = r3
-            java.lang.Object r8 = kotlinx.coroutines.channels.ProduceKt.awaitClose(r1, r9, r8)
-            if (r8 != r0) goto L52
-        L51:
-            return r0
-        L52:
-            kotlin.Unit r8 = kotlin.Unit.INSTANCE
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$sensorInfo$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        final ProducerScope producerScope;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            producerScope = (ProducerScope) this.L$0;
+            ?? r9 = new IFaceAuthenticatorsRegisteredCallback.Stub() { // from class: com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$sensorInfo$1$callback$1
+                public final void onAllAuthenticatorsRegistered(List list) {
+                    if (list.isEmpty()) {
+                        return;
+                    }
+                    ChannelExt channelExt = ChannelExt.INSTANCE;
+                    ProducerScope producerScope2 = producerScope;
+                    FaceSensorInfo faceSensorInfo = new FaceSensorInfo(((FaceSensorPropertiesInternal) CollectionsKt___CollectionsKt.first(list)).sensorId, SensorStrengthKt.toSensorStrength(((FaceSensorPropertiesInternal) CollectionsKt___CollectionsKt.first(list)).sensorStrength));
+                    channelExt.getClass();
+                    ChannelExt.trySendWithFailureLogging(producerScope2, faceSensorInfo, "FaceSensorPropertyRepositoryImpl", "onAllAuthenticatorsRegistered");
+                }
+            };
+            FacePropertyRepositoryImpl facePropertyRepositoryImpl = this.this$0;
+            CoroutineDispatcher coroutineDispatcher = facePropertyRepositoryImpl.backgroundDispatcher;
+            AnonymousClass1 anonymousClass1 = new AnonymousClass1(facePropertyRepositoryImpl, r9, null);
+            this.L$0 = producerScope;
+            this.label = 1;
+            if (BuildersKt.withContext(coroutineDispatcher, anonymousClass1, this) != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        producerScope = (ProducerScope) this.L$0;
+        ResultKt.throwOnFailure(obj);
+        FacePropertyRepositoryImpl$sensorInfo$1$$ExternalSyntheticLambda0 facePropertyRepositoryImpl$sensorInfo$1$$ExternalSyntheticLambda0 = new FacePropertyRepositoryImpl$sensorInfo$1$$ExternalSyntheticLambda0();
+        this.L$0 = null;
+        this.label = 2;
     }
 }

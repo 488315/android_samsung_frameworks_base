@@ -19,7 +19,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class EditTileKt$DefaultEditTileGrid$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ EditTileListState $listState;
@@ -47,8 +46,8 @@ final class EditTileKt$DefaultEditTileGrid$1$1 extends SuspendLambda implements 
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Object obj2;
-        int indexOf;
+        Object next;
+        int iIndexOf;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -58,9 +57,9 @@ final class EditTileKt$DefaultEditTileGrid$1$1 extends SuspendLambda implements 
         if (placementEvent != null) {
             EditTileListState editTileListState = this.$listState;
             Function2 function2 = this.$onAddTile;
-            List tileSpecs = editTileListState.tileSpecs();
+            List listTileSpecs = editTileListState.tileSpecs();
             if (placementEvent instanceof PlacementEvent.PlaceToTileSpec) {
-                indexOf = ((ArrayList) tileSpecs).indexOf(((PlacementEvent.PlaceToTileSpec) placementEvent).targetSpec);
+                iIndexOf = ((ArrayList) listTileSpecs).indexOf(((PlacementEvent.PlaceToTileSpec) placementEvent).targetSpec);
             } else {
                 if (!(placementEvent instanceof PlacementEvent.PlaceToIndex)) {
                     throw new NoWhenBranchMatchedException();
@@ -70,34 +69,34 @@ final class EditTileKt$DefaultEditTileGrid$1$1 extends SuspendLambda implements 
                 int size = snapshotStateList.size();
                 int i = placeToIndex.targetIndex;
                 if (i >= size) {
-                    indexOf = ((ArrayList) tileSpecs).size();
+                    iIndexOf = ((ArrayList) listTileSpecs).size();
                 } else if (i <= 0) {
-                    indexOf = 0;
+                    iIndexOf = 0;
                 } else {
                     Iterator it = snapshotStateList.subList(i, snapshotStateList.size()).iterator();
                     while (true) {
                         if (!it.hasNext()) {
-                            obj2 = null;
+                            next = null;
                             break;
                         }
-                        obj2 = it.next();
-                        if (((GridCell) obj2) instanceof TileGridCell) {
+                        next = it.next();
+                        if (((GridCell) next) instanceof TileGridCell) {
                             break;
                         }
                     }
-                    TileGridCell tileGridCell = obj2 instanceof TileGridCell ? (TileGridCell) obj2 : null;
+                    TileGridCell tileGridCell = next instanceof TileGridCell ? (TileGridCell) next : null;
                     if (tileGridCell == null) {
-                        indexOf = ((ArrayList) tileSpecs).size();
+                        iIndexOf = ((ArrayList) listTileSpecs).size();
                     } else {
-                        ArrayList arrayList = (ArrayList) tileSpecs;
-                        indexOf = arrayList.indexOf(tileGridCell.tile.tileSpec);
-                        if (arrayList.indexOf(placeToIndex.movingSpec) < indexOf) {
-                            indexOf--;
+                        ArrayList arrayList = (ArrayList) listTileSpecs;
+                        iIndexOf = arrayList.indexOf(tileGridCell.tile.tileSpec);
+                        if (arrayList.indexOf(placeToIndex.movingSpec) < iIndexOf) {
+                            iIndexOf--;
                         }
                     }
                 }
             }
-            Integer num = new Integer(indexOf);
+            Integer num = new Integer(iIndexOf);
             Integer num2 = num.intValue() != -1 ? num : null;
             if (num2 != null) {
                 function2.invoke(placementEvent.getMovingSpec(), new Integer(num2.intValue()));

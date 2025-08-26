@@ -180,12 +180,12 @@ public class SemImsManager {
         return SemImsService.Stub.asInterface(getSystemService(SERVICE_NAME));
     }
 
-    private IBinder getSystemService(String str) {
+    private IBinder getSystemService(String str) throws IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException {
         try {
             Class<?> cls = Class.forName("android.os.ServiceManager");
-            Object invoke = cls.getMethod("getService", String.class).invoke(cls, str);
-            if (invoke != null) {
-                return (IBinder) invoke;
+            Object objInvoke = cls.getMethod("getService", String.class).invoke(cls, str);
+            if (objInvoke != null) {
+                return (IBinder) objInvoke;
             }
             Log.d(LOG_TAG, "Failed to getService " + str);
             return null;
@@ -356,11 +356,11 @@ public class SemImsManager {
         }
         ImsRegistrationListenerDelegate imsRegistrationListenerDelegate = new ImsRegistrationListenerDelegate(semImsRegistrationListener);
         try {
-            String registerImsRegistrationListenerForSlot = imsService.registerImsRegistrationListenerForSlot(imsRegistrationListenerDelegate, this.mPhoneId);
-            if (TextUtils.isEmpty(registerImsRegistrationListenerForSlot)) {
+            String strRegisterImsRegistrationListenerForSlot = imsService.registerImsRegistrationListenerForSlot(imsRegistrationListenerDelegate, this.mPhoneId);
+            if (TextUtils.isEmpty(strRegisterImsRegistrationListenerForSlot)) {
                 return;
             }
-            imsRegistrationListenerDelegate.mToken = registerImsRegistrationListenerForSlot;
+            imsRegistrationListenerDelegate.mToken = strRegisterImsRegistrationListenerForSlot;
             this.mRegListeners.put(semImsRegistrationListener, imsRegistrationListenerDelegate);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -373,8 +373,8 @@ public class SemImsManager {
             Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "unregisterImsRegistrationListener : listener is null");
             return;
         }
-        ImsRegistrationListenerDelegate remove = this.mRegListeners.remove(semImsRegistrationListener);
-        if (remove == null) {
+        ImsRegistrationListenerDelegate imsRegistrationListenerDelegateRemove = this.mRegListeners.remove(semImsRegistrationListener);
+        if (imsRegistrationListenerDelegateRemove == null) {
             Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "unregisterImsRegistrationListener : cannot find the listener");
             return;
         }
@@ -384,7 +384,7 @@ public class SemImsManager {
             return;
         }
         try {
-            imsService.unregisterImsRegistrationListenerForSlot(remove.mToken, this.mPhoneId);
+            imsService.unregisterImsRegistrationListenerForSlot(imsRegistrationListenerDelegateRemove.mToken, this.mPhoneId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -406,9 +406,9 @@ public class SemImsManager {
         }
         SemEpdgListenerDelegate semEpdgListenerDelegate = new SemEpdgListenerDelegate(semEpdgListener);
         try {
-            String registerEpdgListener = imsService.registerEpdgListener(semEpdgListenerDelegate);
-            if (!TextUtils.isEmpty(registerEpdgListener)) {
-                semEpdgListenerDelegate.mToken = registerEpdgListener;
+            String strRegisterEpdgListener = imsService.registerEpdgListener(semEpdgListenerDelegate);
+            if (!TextUtils.isEmpty(strRegisterEpdgListener)) {
+                semEpdgListenerDelegate.mToken = strRegisterEpdgListener;
                 this.mEpdgListeners.put(semEpdgListener, semEpdgListenerDelegate);
                 return true;
             }
@@ -433,11 +433,11 @@ public class SemImsManager {
         }
         SimMobilityStatusListenerDelegate simMobilityStatusListenerDelegate = new SimMobilityStatusListenerDelegate(semSimMobilityStatusListener);
         try {
-            String registerSimMobilityStatusListener = imsService.registerSimMobilityStatusListener(simMobilityStatusListenerDelegate, this.mPhoneId);
-            if (TextUtils.isEmpty(registerSimMobilityStatusListener)) {
+            String strRegisterSimMobilityStatusListener = imsService.registerSimMobilityStatusListener(simMobilityStatusListenerDelegate, this.mPhoneId);
+            if (TextUtils.isEmpty(strRegisterSimMobilityStatusListener)) {
                 return;
             }
-            simMobilityStatusListenerDelegate.mToken = registerSimMobilityStatusListener;
+            simMobilityStatusListenerDelegate.mToken = strRegisterSimMobilityStatusListener;
             this.mSimMobilityStatusListeners.put(semSimMobilityStatusListener, simMobilityStatusListenerDelegate);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -449,8 +449,8 @@ public class SemImsManager {
             Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "unregisterSimMobilityStatusListener : listener is null");
             return;
         }
-        SimMobilityStatusListenerDelegate remove = this.mSimMobilityStatusListeners.remove(semSimMobilityStatusListener);
-        if (remove == null) {
+        SimMobilityStatusListenerDelegate simMobilityStatusListenerDelegateRemove = this.mSimMobilityStatusListeners.remove(semSimMobilityStatusListener);
+        if (simMobilityStatusListenerDelegateRemove == null) {
             Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "unregisterSimMobilityStatusListener : cannot find the listener");
             return;
         }
@@ -460,7 +460,7 @@ public class SemImsManager {
             return;
         }
         try {
-            imsService.unregisterSimMobilityStatusListener(remove.mToken, this.mPhoneId);
+            imsService.unregisterSimMobilityStatusListener(simMobilityStatusListenerDelegateRemove.mToken, this.mPhoneId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -471,8 +471,8 @@ public class SemImsManager {
         if (semEpdgListener == null) {
             return false;
         }
-        SemEpdgListenerDelegate remove = this.mEpdgListeners.remove(semEpdgListener);
-        if (remove == null) {
+        SemEpdgListenerDelegate semEpdgListenerDelegateRemove = this.mEpdgListeners.remove(semEpdgListener);
+        if (semEpdgListenerDelegateRemove == null) {
             Log.d(LOG_TAG, "unRegisterEpdgListener : cannot find the listener");
             return false;
         }
@@ -482,7 +482,7 @@ public class SemImsManager {
             return false;
         }
         try {
-            imsService.unRegisterEpdgListener(remove.mToken);
+            imsService.unRegisterEpdgListener(semEpdgListenerDelegateRemove.mToken);
             return true;
         } catch (RemoteException e) {
             e.printStackTrace();

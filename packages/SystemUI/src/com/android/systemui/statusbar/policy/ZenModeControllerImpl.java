@@ -37,7 +37,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ZenModeControllerImpl implements ZenModeController, Dumpable {
     public final AlarmManager mAlarmManager;
@@ -58,7 +57,6 @@ public class ZenModeControllerImpl implements ZenModeController, Dumpable {
     public volatile int mZenMode;
     public long mZenUpdateTime;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SetupObserver extends ContentObserver {
         public boolean mRegistered;
         public final ContentResolver mResolver;
@@ -201,9 +199,9 @@ public class ZenModeControllerImpl implements ZenModeController, Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "ZenModeControllerImpl:", "  mZenMode="), this.mZenMode, printWriter, "  mConfig=");
-        m.append(this.mConfig);
-        printWriter.println(m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "ZenModeControllerImpl:", "  mZenMode="), this.mZenMode, printWriter, "  mConfig=");
+        sbM.append(this.mConfig);
+        printWriter.println(sbM.toString());
         printWriter.println("  mConsolidatedNotificationPolicy=" + this.mConsolidatedNotificationPolicy);
         printWriter.println("  mZenUpdateTime=" + ((Object) DateFormat.format("MM-dd HH:mm:ss", this.mZenUpdateTime)));
     }

@@ -6,7 +6,6 @@ import com.android.keyguard.KeyguardViewController;
 import dagger.Lazy;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SurfaceVisibilityController implements VisibilityController {
     public final Lazy keyguardSurfaceControllerLazy;
@@ -24,9 +23,9 @@ public final class SurfaceVisibilityController implements VisibilityController {
 
     @Override // com.android.systemui.keyguard.VisibilityController
     public final void registerFrameUpdateCallback(final Function0 function0) {
-        ((KeyguardViewController) this.keyguardViewControllerLazy.get()).getViewRootImpl().registerRtFrameCallback(new HardwareRenderer.FrameDrawingCallback() { // from class: com.android.systemui.keyguard.SurfaceVisibilityController$registerFrameUpdateCallback$1
+        ((KeyguardViewController) this.keyguardViewControllerLazy.get()).getViewRootImpl().registerRtFrameCallback(new HardwareRenderer.FrameDrawingCallback() { // from class: com.android.systemui.keyguard.SurfaceVisibilityController.registerFrameUpdateCallback.1
             public final void onFrameDraw(long j) {
-                Function0.this.invoke();
+                function0.invoke();
             }
         });
     }

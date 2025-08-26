@@ -16,7 +16,6 @@ import androidx.slice.core.SliceActionImpl;
 import com.android.systemui.R;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ShortcutView extends SliceChildView {
     public SliceItem mActionItem;
@@ -85,19 +84,19 @@ public class ShortcutView extends SliceChildView {
         this.mIcon = sliceActionImpl.mIcon;
         boolean z = sliceActionImpl.mImageMode == 0;
         SliceItem sliceItem = this.mListContent.mColorItem;
-        int i = sliceItem != null ? sliceItem.getInt() : -1;
-        if (i == -1) {
-            i = SliceViewUtil.getColorAttr(android.R.attr.colorAccent, getContext());
+        int colorAttr = sliceItem != null ? sliceItem.getInt() : -1;
+        if (colorAttr == -1) {
+            colorAttr = SliceViewUtil.getColorAttr(android.R.attr.colorAccent, getContext());
         }
         ShapeDrawable shapeDrawable = new ShapeDrawable(new OvalShape());
-        shapeDrawable.setTint(i);
+        shapeDrawable.setTint(colorAttr);
         ImageView imageView = new ImageView(getContext());
         if (this.mIcon != null && z) {
             imageView.setBackground(shapeDrawable);
         }
         addView(imageView);
         if (this.mIcon != null) {
-            int i2 = z ? this.mSmallIconSize : this.mLargeIconSize;
+            int i = z ? this.mSmallIconSize : this.mLargeIconSize;
             Context context = getContext();
             IconCompat iconCompat = this.mIcon;
             ImageView imageView2 = new ImageView(context);
@@ -108,14 +107,14 @@ public class ShortcutView extends SliceChildView {
             if (z) {
                 imageView2.setColorFilter(-1);
             } else {
-                Bitmap createBitmap = Bitmap.createBitmap(i2, i2, Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(createBitmap);
-                imageView2.layout(0, 0, i2, i2);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmapCreateBitmap);
+                imageView2.layout(0, 0, i, i);
                 imageView2.draw(canvas);
-                imageView2.setImageBitmap(SliceViewUtil.getCircularBitmap(createBitmap));
+                imageView2.setImageBitmap(SliceViewUtil.getCircularBitmap(bitmapCreateBitmap));
             }
-            layoutParams.width = i2;
-            layoutParams.height = i2;
+            layoutParams.width = i;
+            layoutParams.height = i;
             layoutParams.gravity = 17;
             setClickable(true);
         } else {

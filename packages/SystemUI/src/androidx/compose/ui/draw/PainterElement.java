@@ -14,7 +14,6 @@ import androidx.compose.ui.node.ModifierNodeElement;
 import kotlin.jvm.internal.Intrinsics;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PainterElement extends ModifierNodeElement<PainterNode> {
     public final Alignment alignment;
@@ -50,9 +49,9 @@ public final class PainterElement extends ModifierNodeElement<PainterNode> {
     }
 
     public final int hashCode() {
-        int m = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.alpha, (this.contentScale.hashCode() + ((this.alignment.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(this.painter.hashCode() * 31, 31, this.sizeToIntrinsics)) * 31)) * 31, 31);
+        int iM = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.alpha, (this.contentScale.hashCode() + ((this.alignment.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(this.painter.hashCode() * 31, 31, this.sizeToIntrinsics)) * 31)) * 31, 31);
         ColorFilter colorFilter = this.colorFilter;
-        return m + (colorFilter == null ? 0 : colorFilter.hashCode());
+        return iM + (colorFilter == null ? 0 : colorFilter.hashCode());
     }
 
     public final String toString() {
@@ -65,7 +64,7 @@ public final class PainterElement extends ModifierNodeElement<PainterNode> {
         boolean z = painterNode.sizeToIntrinsics;
         Painter painter = this.painter;
         boolean z2 = this.sizeToIntrinsics;
-        boolean z3 = z != z2 || (z2 && !Size.m414equalsimpl0(painterNode.painter.mo561getIntrinsicSizeNHjbRc(), painter.mo561getIntrinsicSizeNHjbRc()));
+        boolean z3 = z != z2 || (z2 && !Size.m416equalsimpl0(painterNode.painter.mo563getIntrinsicSizeNHjbRc(), painter.mo563getIntrinsicSizeNHjbRc()));
         painterNode.painter = painter;
         painterNode.sizeToIntrinsics = z2;
         painterNode.alignment = this.alignment;

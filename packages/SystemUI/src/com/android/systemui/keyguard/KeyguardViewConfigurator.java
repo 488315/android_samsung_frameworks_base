@@ -18,7 +18,7 @@ import com.android.systemui.keyguard.ui.viewmodel.KeyguardRootViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardSmartspaceViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.LightRevealScrimViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.OccludingAppDeviceEntryMessageViewModel;
-import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
+import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.shade.domain.interactor.ShadeInteractor;
@@ -36,7 +36,6 @@ import com.google.android.msdl.domain.MSDLPlayer;
 import java.util.Optional;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardViewConfigurator implements CoreStartable {
     public final LogBuffer blueprintLog;
@@ -48,7 +47,7 @@ public final class KeyguardViewConfigurator implements CoreStartable {
     public final Optional deviceEntryUnlockTrackerViewBinder;
     public final FalsingManager falsingManager;
     public final InteractionJankMonitor interactionJankMonitor;
-    public RepeatWhenAttachedKt$repeatWhenAttached$1 jankHandle;
+    public RepeatWhenAttachedKt.C09181 jankHandle;
     public final KeyguardBlueprintViewModel keyguardBlueprintViewModel;
     public final KeyguardClockViewModel keyguardClockViewModel;
     public final KeyguardIndicationController keyguardIndicationController;
@@ -100,9 +99,9 @@ public final class KeyguardViewConfigurator implements CoreStartable {
             disposableHandles.dispose();
         }
         this.rootViewHandle = KeyguardRootViewBinder.bind(this.keyguardRootView, this.keyguardRootViewModel, this.keyguardBlueprintViewModel, this.configuration, this.occludingAppDeviceEntryMessageViewModel, this.chipbarCoordinator, this.shadeInteractor, this.smartspaceViewModel, this.deviceEntryHapticsInteractor, this.vibratorHelper, this.falsingManager, this.mainDispatcher, this.msdlPlayer, this.blueprintLog, this.wallpaperFocalAreaViewModel);
-        RepeatWhenAttachedKt$repeatWhenAttached$1 repeatWhenAttachedKt$repeatWhenAttached$1 = this.jankHandle;
-        if (repeatWhenAttachedKt$repeatWhenAttached$1 != null) {
-            repeatWhenAttachedKt$repeatWhenAttached$1.dispose();
+        RepeatWhenAttachedKt.C09181 c09181 = this.jankHandle;
+        if (c09181 != null) {
+            c09181.dispose();
         }
         this.jankHandle = KeyguardJankBinder.bind(this.keyguardRootView, this.keyguardJankViewModel, this.interactionJankMonitor, this.clockInteractor, this.keyguardViewMediator, this.mainDispatcher);
         this.keyguardIndicationController.setIndicationArea(new KeyguardIndicationArea(this.context, null));

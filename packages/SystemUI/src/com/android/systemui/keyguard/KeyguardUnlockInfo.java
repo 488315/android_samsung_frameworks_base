@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardUnlockInfo {
     public static final boolean DEBUG;
@@ -24,7 +23,6 @@ public final class KeyguardUnlockInfo {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class AuthType {
         public static final /* synthetic */ AuthType[] $VALUES;
         public static final AuthType AUTH_BIOMETRICS;
@@ -61,7 +59,6 @@ public final class KeyguardUnlockInfo {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SkipBouncerReason {
         public static final /* synthetic */ SkipBouncerReason[] $VALUES;
         public static final SkipBouncerReason BIOMETRICS_UNLOCK_LOCK_STAY;
@@ -92,7 +89,6 @@ public final class KeyguardUnlockInfo {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UnlockTrigger {
         public static final /* synthetic */ UnlockTrigger[] $VALUES;
         public static final UnlockTrigger TRIGGER_BIO_UNLOCK;
@@ -188,7 +184,6 @@ public final class KeyguardUnlockInfo {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -222,13 +217,13 @@ public final class KeyguardUnlockInfo {
     }
 
     public static void leaveHistory(String str, boolean z) {
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(LogUtil.makeDateTimeStr(System.currentTimeMillis()), " ", str);
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(LogUtil.makeDateTimeStr(System.currentTimeMillis()), " ", str);
         Queue queue = history;
         synchronized (queue) {
             if (((LinkedList) queue).size() > HISTORY_MAX) {
                 ((LinkedList) queue).poll();
             }
-            ((LinkedList) queue).offer(m);
+            ((LinkedList) queue).offer(strM);
         }
         if (DEBUG || z) {
             LogUtil.d("KeyguardUnlockInfo", str, new Object[0]);

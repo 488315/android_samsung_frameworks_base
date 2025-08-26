@@ -36,8 +36,8 @@ final class SmartSelectSprite {
             	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
             	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
             	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
-            	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
-            	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
+            	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:468)
+            	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:97)
             */
         @Override // java.util.function.ToDoubleFunction
         public final double applyAsDouble(java.lang.Object r1) {
@@ -57,8 +57,8 @@ final class SmartSelectSprite {
             	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
             	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
             	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
-            	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
-            	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
+            	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:468)
+            	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:97)
             */
         @Override // java.util.function.ToDoubleFunction
         public final double applyAsDouble(java.lang.Object r1) {
@@ -259,11 +259,11 @@ final class SmartSelectSprite {
         /* JADX INFO: Access modifiers changed from: private */
         public int getTotalWidth() {
             Iterator<RoundedRectangleShape> it = this.mRectangles.iterator();
-            int i = 0;
+            int boundingWidth = 0;
             while (it.hasNext()) {
-                i = (int) (i + it.next().getBoundingWidth());
+                boundingWidth = (int) (boundingWidth + it.next().getBoundingWidth());
             }
-            return i;
+            return boundingWidth;
         }
 
         @Override // android.graphics.drawable.shapes.Shape
@@ -304,39 +304,39 @@ final class SmartSelectSprite {
     }
 
     public void startAnimation(PointF pointF, List<RectangleWithTextSelectionLayout> list, Runnable runnable) {
-        RectangleWithTextSelectionLayout rectangleWithTextSelectionLayout;
+        RectangleWithTextSelectionLayout next;
         cancelAnimation();
         ValueAnimator.AnimatorUpdateListener animatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SmartSelectSprite$$ExternalSyntheticLambda2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SmartSelectSprite.this.lambda$startAnimation$2(valueAnimator);
+                this.f$0.lambda$startAnimation$2(valueAnimator);
             }
         };
         int size = list.size();
         ArrayList arrayList = new ArrayList(size);
         Iterator<RectangleWithTextSelectionLayout> it = list.iterator();
-        int i = 0;
+        int iWidth = 0;
         while (true) {
             if (!it.hasNext()) {
-                rectangleWithTextSelectionLayout = null;
+                next = null;
                 break;
             }
-            rectangleWithTextSelectionLayout = it.next();
-            RectF rectangle = rectangleWithTextSelectionLayout.getRectangle();
+            next = it.next();
+            RectF rectangle = next.getRectangle();
             if (contains(rectangle, pointF)) {
                 break;
             } else {
-                i = (int) (i + rectangle.width());
+                iWidth = (int) (iWidth + rectangle.width());
             }
         }
-        if (rectangleWithTextSelectionLayout == null) {
+        if (next == null) {
             throw new IllegalArgumentException("Center point is not inside any of the rectangles!");
         }
-        int i2 = (int) (i + (pointF.x - rectangleWithTextSelectionLayout.getRectangle().left));
-        int[] generateDirections = generateDirections(rectangleWithTextSelectionLayout, list);
-        for (int i3 = 0; i3 < size; i3++) {
-            RectangleWithTextSelectionLayout rectangleWithTextSelectionLayout2 = list.get(i3);
-            arrayList.add(new RoundedRectangleShape(rectangleWithTextSelectionLayout2.getRectangle(), generateDirections[i3], rectangleWithTextSelectionLayout2.getTextSelectionLayout() == 0));
+        int i = (int) (iWidth + (pointF.x - next.getRectangle().left));
+        int[] iArrGenerateDirections = generateDirections(next, list);
+        for (int i2 = 0; i2 < size; i2++) {
+            RectangleWithTextSelectionLayout rectangleWithTextSelectionLayout = list.get(i2);
+            arrayList.add(new RoundedRectangleShape(rectangleWithTextSelectionLayout.getRectangle(), iArrGenerateDirections[i2], rectangleWithTextSelectionLayout.getTextSelectionLayout() == 0));
         }
         RectangleList rectangleList = new RectangleList(arrayList);
         ShapeDrawable shapeDrawable = new ShapeDrawable(rectangleList);
@@ -345,10 +345,10 @@ final class SmartSelectSprite {
         paint.setStyle(Paint.Style.FILL);
         this.mExistingRectangleList = rectangleList;
         this.mExistingDrawable = shapeDrawable;
-        float f = i2;
-        Animator createAnimator = createAnimator(rectangleList, f, f, animatorUpdateListener, runnable);
-        this.mActiveAnimator = createAnimator;
-        createAnimator.start();
+        float f = i;
+        Animator animatorCreateAnimator = createAnimator(rectangleList, f, f, animatorUpdateListener, runnable);
+        this.mActiveAnimator = animatorCreateAnimator;
+        animatorCreateAnimator.start();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -362,16 +362,16 @@ final class SmartSelectSprite {
     }
 
     private Animator createAnimator(RectangleList rectangleList, float f, float f2, ValueAnimator.AnimatorUpdateListener animatorUpdateListener, Runnable runnable) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(rectangleList, "rightBoundary", f2, rectangleList.getTotalWidth());
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(rectangleList, "leftBoundary", f, 0.0f);
-        ofFloat.setDuration(200L);
-        ofFloat2.setDuration(200L);
-        ofFloat.addUpdateListener(animatorUpdateListener);
-        ofFloat2.addUpdateListener(animatorUpdateListener);
-        ofFloat.setInterpolator(this.mExpandInterpolator);
-        ofFloat2.setInterpolator(this.mExpandInterpolator);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(rectangleList, "rightBoundary", f2, rectangleList.getTotalWidth());
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(rectangleList, "leftBoundary", f, 0.0f);
+        objectAnimatorOfFloat.setDuration(200L);
+        objectAnimatorOfFloat2.setDuration(200L);
+        objectAnimatorOfFloat.addUpdateListener(animatorUpdateListener);
+        objectAnimatorOfFloat2.addUpdateListener(animatorUpdateListener);
+        objectAnimatorOfFloat.setInterpolator(this.mExpandInterpolator);
+        objectAnimatorOfFloat2.setInterpolator(this.mExpandInterpolator);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat2, ofFloat);
+        animatorSet.playTogether(objectAnimatorOfFloat2, objectAnimatorOfFloat);
         setUpAnimatorListener(animatorSet, runnable);
         return animatorSet;
     }
@@ -402,20 +402,20 @@ final class SmartSelectSprite {
     private static int[] generateDirections(RectangleWithTextSelectionLayout rectangleWithTextSelectionLayout, List<RectangleWithTextSelectionLayout> list) {
         int size = list.size();
         int[] iArr = new int[size];
-        int indexOf = list.indexOf(rectangleWithTextSelectionLayout);
-        for (int i = 0; i < indexOf - 1; i++) {
+        int iIndexOf = list.indexOf(rectangleWithTextSelectionLayout);
+        for (int i = 0; i < iIndexOf - 1; i++) {
             iArr[i] = -1;
         }
         if (list.size() == 1) {
-            iArr[indexOf] = 0;
-        } else if (indexOf == 0) {
-            iArr[indexOf] = -1;
-        } else if (indexOf == list.size() - 1) {
-            iArr[indexOf] = 1;
+            iArr[iIndexOf] = 0;
+        } else if (iIndexOf == 0) {
+            iArr[iIndexOf] = -1;
+        } else if (iIndexOf == list.size() - 1) {
+            iArr[iIndexOf] = 1;
         } else {
-            iArr[indexOf] = 0;
+            iArr[iIndexOf] = 0;
         }
-        for (int i2 = indexOf + 1; i2 < size; i2++) {
+        for (int i2 = iIndexOf + 1; i2 < size; i2++) {
             iArr[i2] = 1;
         }
         return iArr;

@@ -7,7 +7,6 @@ import android.util.Log;
 import android.widget.CheckBox;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UsbPermissionActivity extends UsbDialogActivity {
     public boolean mPermissionGranted = false;
@@ -38,7 +37,7 @@ public class UsbPermissionActivity extends UsbDialogActivity {
     }
 
     @Override // com.android.systemui.usb.UsbDialogActivity
-    public final void onPause() {
+    public final void onPause() throws PendingIntent.CanceledException {
         if (isFinishing()) {
             UsbDialogHelper usbDialogHelper = this.mDialogHelper;
             boolean z = this.mPermissionGranted;
@@ -63,21 +62,21 @@ public class UsbPermissionActivity extends UsbDialogActivity {
 
     @Override // com.android.systemui.usb.UsbDialogActivity
     public final void onResume() {
-        String str;
+        String string;
         super.onResume();
         UsbDialogHelper usbDialogHelper = this.mDialogHelper;
         boolean z = usbDialogHelper.mIsUsbDevice && usbDialogHelper.deviceHasAudioCapture() && !this.mDialogHelper.packageHasAudioRecordingPermission();
         int i = this.mUsbPermissionMessageHandler.mDialogType == 0 ? R.string.usb_audio_device_permission_prompt_title : R.string.usb_audio_device_confirm_prompt_title;
         UsbDialogHelper usbDialogHelper2 = this.mDialogHelper;
-        String string = getString(i, new Object[]{usbDialogHelper2.mAppName, usbDialogHelper2.getDeviceDescription()});
+        String string2 = getString(i, new Object[]{usbDialogHelper2.mAppName, usbDialogHelper2.getDeviceDescription()});
         int messageId = this.mUsbPermissionMessageHandler.getMessageId();
         if (messageId != 0) {
             UsbDialogHelper usbDialogHelper3 = this.mDialogHelper;
-            str = getString(messageId, new Object[]{usbDialogHelper3.mAppName, usbDialogHelper3.getDeviceDescription()});
+            string = getString(messageId, new Object[]{usbDialogHelper3.mAppName, usbDialogHelper3.getDeviceDescription()});
         } else {
-            str = null;
+            string = null;
         }
-        setAlertParams(string, str);
+        setAlertParams(string2, string);
         if (!z && this.mDialogHelper.mCanBeDefault) {
             addAlwaysUseCheckbox();
         }

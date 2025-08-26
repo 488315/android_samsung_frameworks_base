@@ -19,10 +19,8 @@ import java.util.stream.Stream;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
-import kotlin.jvm.functions.Function1;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FaceWakeUpTriggersConfigImpl implements Dumpable, FaceWakeUpTriggersConfig {
     public final Set defaultTriggerFaceAuthOnWakeUpFrom;
@@ -39,7 +37,7 @@ public final class FaceWakeUpTriggersConfigImpl implements Dumpable, FaceWakeUpT
             Set set2 = (Set) stream.map(new Function() { // from class: com.android.systemui.deviceentry.data.repository.FaceWakeUpTriggersConfigImpl$sam$java_util_function_Function$0
                 @Override // java.util.function.Function
                 public final /* synthetic */ Object apply(Object obj) {
-                    return Function1.this.mo779invoke(obj);
+                    return faceWakeUpTriggersConfigImpl$processStringArray$1$1.mo781invoke(obj);
                 }
             }).collect(Collectors.toSet());
             if (set2 != null) {
@@ -51,9 +49,9 @@ public final class FaceWakeUpTriggersConfigImpl implements Dumpable, FaceWakeUpT
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(set3, 10));
         Iterator it = set3.iterator();
         while (it.hasNext()) {
-            int intValue = ((Number) it.next()).intValue();
+            int iIntValue = ((Number) it.next()).intValue();
             WakeSleepReason.Companion.getClass();
-            arrayList.add(WakeSleepReason.Companion.fromPowerManagerWakeReason(intValue));
+            arrayList.add(WakeSleepReason.Companion.fromPowerManagerWakeReason(iIntValue));
         }
         this.wakeSleepReasonsToTriggerFaceAuth = CollectionsKt___CollectionsKt.toSet(arrayList);
         dumpManager.registerDumpable(this);

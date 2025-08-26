@@ -2,6 +2,7 @@ package com.android.systemui.qs.ui.adapter;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.view.View;
 import androidx.asynclayoutinflater.view.AsyncLayoutInflater;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
@@ -57,7 +58,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSSceneAdapterImpl implements QSContainerController, QSSceneAdapter, Dumpable {
     public final StateFlowImpl _customizingState;
@@ -77,7 +77,6 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
     public final ReadonlyStateFlow qsView;
     public final StateFlowImpl state;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function1 {
         public static final AnonymousClass1 INSTANCE = new AnonymousClass1();
@@ -88,12 +87,11 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             return new AsyncLayoutInflater((Context) obj);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         final /* synthetic */ DisplayStateInteractor $displayStateInteractor;
@@ -101,13 +99,11 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$2$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ QSSceneAdapterImpl this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$2$1$3, reason: invalid class name */
             final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
                 public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -145,15 +141,15 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
                 if (i == 0) {
                     ResultKt.throwOnFailure(obj);
                     QSSceneAdapterImpl qSSceneAdapterImpl = this.this$0;
-                    Flow sample = FlowKt.sample(qSSceneAdapterImpl.state, qSSceneAdapterImpl._customizingState, AnonymousClass3.INSTANCE);
+                    Flow flowSample = FlowKt.sample(qSSceneAdapterImpl.state, qSSceneAdapterImpl._customizingState, AnonymousClass3.INSTANCE);
                     final QSSceneAdapterImpl qSSceneAdapterImpl2 = this.this$0;
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl.2.1.4
                         @Override // kotlinx.coroutines.flow.FlowCollector
-                        public final Object emit(Object obj2, Continuation continuation) {
+                        public final Object emit(Object obj2, Continuation continuation) throws Resources.NotFoundException {
                             Pair pair = (Pair) obj2;
                             QSSceneAdapter.State state = (QSSceneAdapter.State) pair.component1();
                             CustomizerState customizerState = (CustomizerState) pair.component2();
-                            QSSceneAdapterImpl qSSceneAdapterImpl3 = QSSceneAdapterImpl.this;
+                            QSSceneAdapterImpl qSSceneAdapterImpl3 = qSSceneAdapterImpl2;
                             QSImpl qSImpl = (QSImpl) qSSceneAdapterImpl3.qsImpl.$$delegate_0.getValue();
                             if (qSImpl != null) {
                                 QSSceneAdapter.State.Companion.getClass();
@@ -166,7 +162,7 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
                         }
                     };
                     this.label = 1;
-                    if (sample.collect(flowCollector, this) == coroutineSingletons) {
+                    if (flowSample.collect(flowCollector, this) == coroutineSingletons) {
                         return coroutineSingletons;
                     }
                 } else {
@@ -179,26 +175,25 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$2$2, reason: invalid class name and collision with other inner class name */
-        final class C02682 extends SuspendLambda implements Function2 {
+        final class C04242 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ QSSceneAdapterImpl this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C02682(QSSceneAdapterImpl qSSceneAdapterImpl, Continuation continuation) {
+            public C04242(QSSceneAdapterImpl qSSceneAdapterImpl, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = qSSceneAdapterImpl;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C02682(this.this$0, continuation);
+                return new C04242(this.this$0, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C02682) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C04242) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -211,11 +206,11 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
                     Flow flow = ((ConfigurationInteractorImpl) qSSceneAdapterImpl.configurationInteractor).configurationValues;
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl.2.2.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
-                        public final Object emit(Object obj2, Continuation continuation) {
+                        public final Object emit(Object obj2, Continuation continuation) throws Throwable {
                             View view;
                             View view2;
                             Configuration configuration = (Configuration) obj2;
-                            QSSceneAdapterImpl qSSceneAdapterImpl2 = QSSceneAdapterImpl.this;
+                            QSSceneAdapterImpl qSSceneAdapterImpl2 = qSSceneAdapterImpl;
                             InterestingConfigChanges interestingConfigChanges = qSSceneAdapterImpl2.interestingChanges;
                             Configuration configuration2 = interestingConfigChanges.mLastConfiguration;
                             boolean z = (interestingConfigChanges.mFlags & configuration2.updateFrom(Configuration.generateDelta(configuration2, configuration))) != 0;
@@ -225,12 +220,12 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
                                 if (qSImpl != null && (view2 = qSImpl.mRootView) != null) {
                                     Context context = view2.getContext();
                                     qSSceneAdapterImpl2.getClass();
-                                    Object withContext = BuildersKt.withContext(qSSceneAdapterImpl2.mainDispatcher, new QSSceneAdapterImpl$inflate$2(qSSceneAdapterImpl2, context, null), continuation);
-                                    if (withContext != CoroutineSingletons.COROUTINE_SUSPENDED) {
-                                        withContext = Unit.INSTANCE;
+                                    Object objWithContext = BuildersKt.withContext(qSSceneAdapterImpl2.mainDispatcher, new QSSceneAdapterImpl$inflate$2(qSSceneAdapterImpl2, context, null), continuation);
+                                    if (objWithContext != CoroutineSingletons.COROUTINE_SUSPENDED) {
+                                        objWithContext = Unit.INSTANCE;
                                     }
-                                    if (withContext == CoroutineSingletons.COROUTINE_SUSPENDED) {
-                                        return withContext;
+                                    if (objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                                        return objWithContext;
                                     }
                                 }
                             } else {
@@ -260,18 +255,16 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$2$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ QSSceneAdapterImpl this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$2$3$3, reason: invalid class name and collision with other inner class name */
-            final /* synthetic */ class C02693 extends AdaptedFunctionReference implements Function3 {
-                public static final C02693 INSTANCE = new C02693();
+            final /* synthetic */ class C04253 extends AdaptedFunctionReference implements Function3 {
+                public static final C04253 INSTANCE = new C04253();
 
-                public C02693() {
+                public C04253() {
                     super(3, Pair.class, "<init>", "<init>(Ljava/lang/Object;Ljava/lang/Object;)V", 4);
                 }
 
@@ -304,7 +297,7 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
                 if (i == 0) {
                     ResultKt.throwOnFailure(obj);
                     QSSceneAdapterImpl qSSceneAdapterImpl = this.this$0;
-                    FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(qSSceneAdapterImpl.bottomNavBarSize, new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(qSSceneAdapterImpl.qsImpl), C02693.INSTANCE);
+                    FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(qSSceneAdapterImpl.bottomNavBarSize, new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(qSSceneAdapterImpl.qsImpl), C04253.INSTANCE);
                     AnonymousClass4 anonymousClass4 = new FlowCollector() { // from class: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl.2.3.4
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
@@ -328,7 +321,6 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$2$4, reason: invalid class name */
         final class AnonymousClass4 extends SuspendLambda implements Function2 {
             final /* synthetic */ ShadeModeInteractor $shadeModeInteractor;
@@ -362,9 +354,9 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
                     final QSSceneAdapterImpl qSSceneAdapterImpl = this.this$0;
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl.2.4.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
-                        public final Object emit(Object obj2, Continuation continuation) {
+                        public final Object emit(Object obj2, Continuation continuation) throws Resources.NotFoundException {
                             ShadeMode shadeMode = (ShadeMode) obj2;
-                            QSImpl qSImpl = (QSImpl) QSSceneAdapterImpl.this.qsImpl.$$delegate_0.getValue();
+                            QSImpl qSImpl = (QSImpl) qSSceneAdapterImpl.qsImpl.$$delegate_0.getValue();
                             if (qSImpl != null) {
                                 qSImpl.setInSplitShade(shadeMode instanceof ShadeMode.Split);
                             }
@@ -385,14 +377,12 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$2$5, reason: invalid class name */
         final class AnonymousClass5 extends SuspendLambda implements Function2 {
             final /* synthetic */ DisplayStateInteractor $displayStateInteractor;
             int label;
             final /* synthetic */ QSSceneAdapterImpl this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$2$5$3, reason: invalid class name */
             final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
                 public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -482,7 +472,7 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(QSSceneAdapterImpl.this, null), 7);
-            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C02682(QSSceneAdapterImpl.this, null), 7);
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C04242(QSSceneAdapterImpl.this, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(QSSceneAdapterImpl.this, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass4(this.$shadeModeInteractor, QSSceneAdapterImpl.this, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass5(this.$displayStateInteractor, QSSceneAdapterImpl.this, null), 7);
@@ -498,13 +488,12 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
         this.asyncLayoutInflaterFactory = function1;
         this.bottomNavBarSize = SharedFlowKt.MutableSharedFlow$default(0, 1, BufferOverflow.DROP_OLDEST, 1);
         this.state = StateFlowKt.MutableStateFlow(QSSceneAdapter.State.CLOSED.INSTANCE);
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(CustomizerState.Hidden.INSTANCE);
-        this._customizingState = MutableStateFlow;
-        final ReadonlyStateFlow asStateFlow = kotlinx.coroutines.flow.FlowKt.asStateFlow(MutableStateFlow);
-        this.customizerState = asStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(CustomizerState.Hidden.INSTANCE);
+        this._customizingState = stateFlowImplMutableStateFlow;
+        final ReadonlyStateFlow readonlyStateFlowAsStateFlow = kotlinx.coroutines.flow.FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        this.customizerState = readonlyStateFlowAsStateFlow;
         Flow flow = new Flow() { // from class: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -531,75 +520,54 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L47
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.qs.ui.adapter.CustomizerState r5 = (com.android.systemui.qs.ui.adapter.CustomizerState) r5
-                        boolean r5 = r5.isCustomizing()
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L47
-                        return r1
-                    L47:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((CustomizerState) obj).isCustomizing());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowAsStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         SharingStarted.Companion companion = SharingStarted.Companion;
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
-        StateFlow stateFlow = asStateFlow.$$delegate_0;
-        this.isCustomizing = kotlinx.coroutines.flow.FlowKt.stateIn(flow, coroutineScope, WhileSubscribed$default, Boolean.valueOf(((CustomizerState) stateFlow.getValue()).isCustomizing()));
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        StateFlow stateFlow = readonlyStateFlowAsStateFlow.$$delegate_0;
+        this.isCustomizing = kotlinx.coroutines.flow.FlowKt.stateIn(flow, coroutineScope, startedWhileSubscribedWhileSubscribed$default, Boolean.valueOf(((CustomizerState) stateFlow.getValue()).isCustomizing()));
         this.isCustomizerShowing = kotlinx.coroutines.flow.FlowKt.stateIn(new Flow() { // from class: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -626,71 +594,50 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$2$2$1 r0 = (com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$2$2$1 r0 = new com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L47
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.qs.ui.adapter.CustomizerState r5 = (com.android.systemui.qs.ui.adapter.CustomizerState) r5
-                        boolean r5 = r5.isShowing()
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L47
-                        return r1
-                    L47:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((CustomizerState) obj).isShowing());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowAsStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Boolean.valueOf(((CustomizerState) stateFlow.getValue()).isShowing()));
         Flow flow2 = new Flow() { // from class: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -717,92 +664,59 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$3$2$1 r0 = (com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$3$2$1 r0 = new com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L55
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.qs.ui.adapter.CustomizerState r5 = (com.android.systemui.qs.ui.adapter.CustomizerState) r5
-                        boolean r6 = r5 instanceof com.android.systemui.qs.ui.adapter.CustomizerState.Animating
-                        if (r6 == 0) goto L3b
-                        com.android.systemui.qs.ui.adapter.CustomizerState$Animating r5 = (com.android.systemui.qs.ui.adapter.CustomizerState.Animating) r5
-                        goto L3c
-                    L3b:
-                        r5 = 0
-                    L3c:
-                        if (r5 == 0) goto L44
-                        long r5 = r5.getAnimationDuration()
-                        int r5 = (int) r5
-                        goto L45
-                    L44:
-                        r5 = 0
-                    L45:
-                        java.lang.Integer r6 = new java.lang.Integer
-                        r6.<init>(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L55
-                        return r1
-                    L55:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        CustomizerState customizerState = (CustomizerState) obj;
+                        CustomizerState.Animating animating = customizerState instanceof CustomizerState.Animating ? (CustomizerState.Animating) customizerState : null;
+                        Integer num = new Integer(animating != null ? (int) animating.getAnimationDuration() : 0);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(num, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlowAsStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
-        StartedWhileSubscribed WhileSubscribed$default2 = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default2 = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         Object value = stateFlow.getValue();
         CustomizerState.Animating animating = value instanceof CustomizerState.Animating ? (CustomizerState.Animating) value : null;
-        this.customizerAnimationDuration = kotlinx.coroutines.flow.FlowKt.stateIn(flow2, coroutineScope, WhileSubscribed$default2, Integer.valueOf(animating != null ? (int) animating.getAnimationDuration() : 0));
-        final StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(null);
-        this._qsImpl = MutableStateFlow2;
-        this.qsImpl = kotlinx.coroutines.flow.FlowKt.asStateFlow(MutableStateFlow2);
+        this.customizerAnimationDuration = kotlinx.coroutines.flow.FlowKt.stateIn(flow2, coroutineScope, startedWhileSubscribedWhileSubscribed$default2, Integer.valueOf(animating != null ? (int) animating.getAnimationDuration() : 0));
+        final StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(null);
+        this._qsImpl = stateFlowImplMutableStateFlow2;
+        this.qsImpl = kotlinx.coroutines.flow.FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
         Flow flow3 = new Flow() { // from class: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$4
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -829,81 +743,58 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$4.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$4$2$1 r0 = (com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$4.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$4$2$1 r0 = new com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$4$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.qs.QSImpl r5 = (com.android.systemui.qs.QSImpl) r5
-                        if (r5 == 0) goto L39
-                        android.view.View r5 = r5.mRootView
-                        goto L3a
-                    L39:
-                        r5 = 0
-                    L3a:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.ui.adapter.QSSceneAdapterImpl$special$$inlined$map$4.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        QSImpl qSImpl = (QSImpl) obj;
+                        View view = qSImpl != null ? qSImpl.mRootView : null;
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(view, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = stateFlowImplMutableStateFlow2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
-        StartedWhileSubscribed WhileSubscribed$default3 = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
-        QSImpl qSImpl = (QSImpl) MutableStateFlow2.getValue();
-        this.qsView = kotlinx.coroutines.flow.FlowKt.stateIn(flow3, coroutineScope, WhileSubscribed$default3, qSImpl != null ? qSImpl.mRootView : null);
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default3 = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        QSImpl qSImpl = (QSImpl) stateFlowImplMutableStateFlow2.getValue();
+        this.qsView = kotlinx.coroutines.flow.FlowKt.stateIn(flow3, coroutineScope, startedWhileSubscribedWhileSubscribed$default3, qSImpl != null ? qSImpl.mRootView : null);
         this.interestingChanges = new InterestingConfigChanges(-1073741820);
         dumpManager.registerDumpable(this);
         CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(shadeModeInteractor, displayStateInteractor, null), 7);
     }
 
-    public static final void access$applyState(QSSceneAdapterImpl qSSceneAdapterImpl, QSImpl qSImpl, QSSceneAdapter.State state) {
+    public static final void access$applyState(QSSceneAdapterImpl qSSceneAdapterImpl, QSImpl qSImpl, QSSceneAdapter.State state) throws Resources.NotFoundException {
         qSSceneAdapterImpl.getClass();
         qSImpl.setQsVisible(state.isVisible());
         qSImpl.setExpanded(state.isVisible() && ((Number) state.getExpansion().invoke()).floatValue() > 0.0f);
@@ -912,7 +803,7 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        int i;
+        int measuredHeight;
         DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("Last state: ", this.state.getValue(), printWriter);
         printWriter.println("CustomizerState: " + this._customizingState.getValue());
         QSImpl qSImpl = (QSImpl) this.qsImpl.$$delegate_0.getValue();
@@ -926,11 +817,11 @@ public final class QSSceneAdapterImpl implements QSContainerController, QSSceneA
         if (qSImpl2 != null) {
             QSContainerImpl qSContainerImpl = qSImpl2.mContainer;
             qSContainerImpl.mQSCustomizer.getClass();
-            i = qSContainerImpl.mQSPanel.getMeasuredHeight();
+            measuredHeight = qSContainerImpl.mQSPanel.getMeasuredHeight();
         } else {
-            i = 0;
+            measuredHeight = 0;
         }
-        DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("QS height: ", i, printWriter);
+        DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("QS height: ", measuredHeight, printWriter);
     }
 
     @Override // com.android.systemui.plugins.qs.QSContainerController

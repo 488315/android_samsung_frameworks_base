@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Shape;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ShapesKt {
     public static final StaticProvidableCompositionLocal LocalShapes = new StaticProvidableCompositionLocal(new Function0() { // from class: androidx.compose.material3.ShapesKt$LocalShapes$1
@@ -22,7 +21,6 @@ public abstract class ShapesKt {
         }
     });
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -113,11 +111,11 @@ public abstract class ShapesKt {
             ComposerKt.traceEventStart("androidx.compose.material3.<get-value> (Shapes.kt:398)");
         }
         MaterialTheme.INSTANCE.getClass();
-        Shape fromToken = fromToken(MaterialTheme.getShapes(composer), shapeKeyTokens);
+        Shape shapeFromToken = fromToken(MaterialTheme.getShapes(composer), shapeKeyTokens);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return fromToken;
+        return shapeFromToken;
     }
 
     public static CornerBasedShape top$default(CornerBasedShape cornerBasedShape) {

@@ -26,7 +26,6 @@ import java.util.Objects;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaHost implements MediaHostState {
     public final MediaCarouselControllerLogger debugLogger;
@@ -46,7 +45,7 @@ public final class MediaHost implements MediaHostState {
     public final MediaHost$listener$1 listener = new MediaDataManager.Listener() { // from class: com.android.systemui.media.controls.ui.view.MediaHost$listener$1
         @Override // com.android.systemui.media.controls.domain.pipeline.MediaDataManager.Listener
         public final void onMediaDataRemoved(String str, boolean z) {
-            MediaHost.this.updateViewVisibility();
+            this.this$0.updateViewVisibility();
         }
 
         @Override // com.android.systemui.media.controls.domain.pipeline.MediaDataManager.Listener
@@ -54,7 +53,6 @@ public final class MediaHost implements MediaHostState {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaHostStateHolder implements MediaHostState {
         public MediaHost$$ExternalSyntheticLambda0 changedListener;
         public boolean disableScrolling;
@@ -112,11 +110,11 @@ public final class MediaHost implements MediaHostState {
                     mediaHost$$ExternalSyntheticLambda04.invoke();
                 }
             }
-            DisappearParameters deepCopy = this.disappearParameters.deepCopy();
-            int hashCode = deepCopy.hashCode();
-            if (!Integer.valueOf(mediaHostStateHolder.lastDisappearHash).equals(Integer.valueOf(hashCode))) {
-                mediaHostStateHolder.disappearParameters = deepCopy;
-                mediaHostStateHolder.lastDisappearHash = hashCode;
+            DisappearParameters disappearParametersDeepCopy = this.disappearParameters.deepCopy();
+            int iHashCode = disappearParametersDeepCopy.hashCode();
+            if (!Integer.valueOf(mediaHostStateHolder.lastDisappearHash).equals(Integer.valueOf(iHashCode))) {
+                mediaHostStateHolder.disappearParameters = disappearParametersDeepCopy;
+                mediaHostStateHolder.lastDisappearHash = iHashCode;
                 MediaHost$$ExternalSyntheticLambda0 mediaHost$$ExternalSyntheticLambda05 = mediaHostStateHolder.changedListener;
                 if (mediaHost$$ExternalSyntheticLambda05 != null) {
                     mediaHost$$ExternalSyntheticLambda05.invoke();
@@ -345,10 +343,10 @@ public final class MediaHost implements MediaHostState {
         uniqueObjectHostView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$createUniqueObjectHost$1
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view) {
-                MediaHierarchyManager mediaHierarchyManager2 = MediaHierarchyManager.this;
+                MediaHierarchyManager mediaHierarchyManager2 = mediaHierarchyManager;
                 if (mediaHierarchyManager2.rootOverlay == null) {
                     mediaHierarchyManager2.rootView = uniqueObjectHostView.getViewRootImpl().getView();
-                    MediaHierarchyManager mediaHierarchyManager3 = MediaHierarchyManager.this;
+                    MediaHierarchyManager mediaHierarchyManager3 = mediaHierarchyManager;
                     View view2 = mediaHierarchyManager3.rootView;
                     view2.getClass();
                     mediaHierarchyManager3.rootOverlay = (ViewGroupOverlay) view2.getOverlay();
@@ -364,9 +362,9 @@ public final class MediaHost implements MediaHostState {
         this.visibleChangedListeners.add(new Function1() { // from class: com.android.systemui.media.controls.ui.controller.MediaHierarchyManager$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ((Boolean) obj).getClass();
-                MediaHierarchyManager.updateDesiredLocation$default(MediaHierarchyManager.this, true, 2);
+                MediaHierarchyManager.updateDesiredLocation$default(mediaHierarchyManager, true, 2);
                 return Unit.INSTANCE;
             }
         });
@@ -385,7 +383,7 @@ public final class MediaHost implements MediaHostState {
         if (uniqueObjectHostView2 == null) {
             uniqueObjectHostView2 = null;
         }
-        uniqueObjectHostView2.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.systemui.media.controls.ui.view.MediaHost$init$1
+        uniqueObjectHostView2.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.systemui.media.controls.ui.view.MediaHost.init.1
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view) {
                 MediaHost.this.setListeningToMediaData(true);
@@ -398,7 +396,7 @@ public final class MediaHost implements MediaHostState {
             }
         });
         UniqueObjectHostView uniqueObjectHostView3 = this.hostView;
-        (uniqueObjectHostView3 != null ? uniqueObjectHostView3 : null).setMeasurementManager(new UniqueObjectHostView.MeasurementManager() { // from class: com.android.systemui.media.controls.ui.view.MediaHost$init$2
+        (uniqueObjectHostView3 != null ? uniqueObjectHostView3 : null).setMeasurementManager(new UniqueObjectHostView.MeasurementManager() { // from class: com.android.systemui.media.controls.ui.view.MediaHost.init.2
             @Override // com.android.systemui.util.animation.UniqueObjectHostView.MeasurementManager
             public final MeasurementOutput onMeasure(MeasurementInput measurementInput) {
                 if (View.MeasureSpec.getMode(measurementInput.getWidthMeasureSpec()) == Integer.MIN_VALUE) {
@@ -431,9 +429,9 @@ public final class MediaHost implements MediaHostState {
     }
 
     public final void setShowsOnlyActiveMedia(boolean z) {
-        Boolean valueOf = Boolean.valueOf(z);
+        Boolean boolValueOf = Boolean.valueOf(z);
         MediaHostStateHolder mediaHostStateHolder = this.state;
-        if (valueOf.equals(Boolean.valueOf(mediaHostStateHolder.showsOnlyActiveMedia))) {
+        if (boolValueOf.equals(Boolean.valueOf(mediaHostStateHolder.showsOnlyActiveMedia))) {
             return;
         }
         mediaHostStateHolder.showsOnlyActiveMedia = z;
@@ -444,19 +442,19 @@ public final class MediaHost implements MediaHostState {
     }
 
     public final void updateViewVisibility() {
-        boolean hasActiveMediaOrRecommendation;
+        boolean zHasActiveMediaOrRecommendation;
         MediaHostStateHolder mediaHostStateHolder = this.state;
         boolean z = mediaHostStateHolder.visible;
         MediaCarouselController mediaCarouselController = this.mediaCarouselController;
         if (!mediaCarouselController.allowMediaPlayerOnLockScreen && (!((Boolean) mediaCarouselController.isOnGone.$$delegate_0.getValue()).booleanValue() || ((Boolean) mediaCarouselController.isGoingToDozing.$$delegate_0.getValue()).booleanValue())) {
-            hasActiveMediaOrRecommendation = false;
+            zHasActiveMediaOrRecommendation = false;
         } else {
             boolean z2 = mediaHostStateHolder.showsOnlyActiveMedia;
             MediaDataManager mediaDataManager = this.mediaDataManager;
-            hasActiveMediaOrRecommendation = z2 ? mediaDataManager.hasActiveMediaOrRecommendation() : mediaDataManager.hasAnyMediaOrRecommendation();
+            zHasActiveMediaOrRecommendation = z2 ? mediaDataManager.hasActiveMediaOrRecommendation() : mediaDataManager.hasAnyMediaOrRecommendation();
         }
-        if (mediaHostStateHolder.visible != hasActiveMediaOrRecommendation) {
-            mediaHostStateHolder.visible = hasActiveMediaOrRecommendation;
+        if (mediaHostStateHolder.visible != zHasActiveMediaOrRecommendation) {
+            mediaHostStateHolder.visible = zHasActiveMediaOrRecommendation;
             MediaHost$$ExternalSyntheticLambda0 mediaHost$$ExternalSyntheticLambda0 = mediaHostStateHolder.changedListener;
             if (mediaHost$$ExternalSyntheticLambda0 != null) {
                 mediaHost$$ExternalSyntheticLambda0.invoke();
@@ -485,15 +483,15 @@ public final class MediaHost implements MediaHostState {
         LogLevel logLevel = LogLevel.DEBUG;
         MediaCarouselControllerLogger$$ExternalSyntheticLambda0 mediaCarouselControllerLogger$$ExternalSyntheticLambda0 = new MediaCarouselControllerLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = mediaCarouselControllerLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MediaCarouselCtlrLog", logLevel, mediaCarouselControllerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MediaCarouselCtlrLog", logLevel, mediaCarouselControllerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i2;
         logMessageImpl.bool1 = z4;
         logMessageImpl.bool2 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         Iterator it = this.visibleChangedListeners.iterator();
         while (it.hasNext()) {
-            ((Function1) it.next()).mo779invoke(Boolean.valueOf(mediaHostStateHolder.visible));
+            ((Function1) it.next()).mo781invoke(Boolean.valueOf(mediaHostStateHolder.visible));
         }
     }
 }

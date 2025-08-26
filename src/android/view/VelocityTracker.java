@@ -72,8 +72,8 @@ public final class VelocityTracker {
     }
 
     public static VelocityTracker obtain() {
-        VelocityTracker acquire = sPool.acquire();
-        return acquire != null ? acquire : new VelocityTracker(-1);
+        VelocityTracker velocityTrackerAcquire = sPool.acquire();
+        return velocityTrackerAcquire != null ? velocityTrackerAcquire : new VelocityTracker(-1);
     }
 
     @Deprecated
@@ -103,15 +103,11 @@ public final class VelocityTracker {
     }
 
     private VelocityTracker(int i) {
-        if (i == -1) {
-            String velocityTrackerStrategy = InputManagerGlobal.getInstance().getVelocityTrackerStrategy();
-            if (velocityTrackerStrategy == null || velocityTrackerStrategy.isEmpty()) {
-                this.mStrategy = i;
-            } else {
-                this.mStrategy = toStrategyId(velocityTrackerStrategy);
-            }
-        } else {
+        String velocityTrackerStrategy;
+        if (i != -1 || (velocityTrackerStrategy = InputManagerGlobal.getInstance().getVelocityTrackerStrategy()) == null || velocityTrackerStrategy.isEmpty()) {
             this.mStrategy = i;
+        } else {
+            this.mStrategy = toStrategyId(velocityTrackerStrategy);
         }
         this.mPtr = nativeInitialize(this.mStrategy);
     }

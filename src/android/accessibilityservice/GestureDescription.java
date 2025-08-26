@@ -93,11 +93,11 @@ public final class GestureDescription {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static long getTotalDuration(List<StrokeDescription> list) {
-        long j = Long.MIN_VALUE;
+        long jMax = Long.MIN_VALUE;
         for (int i = 0; i < list.size(); i++) {
-            j = Math.max(j, list.get(i).mEndTime);
+            jMax = Math.max(jMax, list.get(i).mEndTime);
         }
-        return Math.max(j, 0L);
+        return Math.max(jMax, 0L);
     }
 
     public static class Builder {
@@ -269,9 +269,9 @@ public final class GestureDescription {
         public TouchPoint(Parcel parcel) {
             this.mStrokeId = parcel.readInt();
             this.mContinuedStrokeId = parcel.readInt();
-            int readInt = parcel.readInt();
-            this.mIsStartOfPath = (readInt & 1) != 0;
-            this.mIsEndOfPath = (readInt & 2) != 0;
+            int i = parcel.readInt();
+            this.mIsStartOfPath = (i & 1) != 0;
+            this.mIsEndOfPath = (i & 2) != 0;
             this.mX = parcel.readFloat();
             this.mY = parcel.readFloat();
         }
@@ -356,15 +356,15 @@ public final class GestureDescription {
             ArrayList arrayList = new ArrayList();
             TouchPoint[] currentTouchPoints = getCurrentTouchPoints(gestureDescription.getStrokeCount());
             long nextKeyPointAtLeast = gestureDescription.getNextKeyPointAtLeast(0L);
-            int i2 = 0;
+            int pointsForTime = 0;
             long j = 0;
             while (nextKeyPointAtLeast >= 0) {
-                if (i2 != 0) {
+                if (pointsForTime != 0) {
                     nextKeyPointAtLeast = Math.min(nextKeyPointAtLeast, j + i);
                 }
                 j = nextKeyPointAtLeast;
-                i2 = gestureDescription.getPointsForTime(j, currentTouchPoints);
-                arrayList.add(new GestureStep(j, i2, currentTouchPoints));
+                pointsForTime = gestureDescription.getPointsForTime(j, currentTouchPoints);
+                arrayList.add(new GestureStep(j, pointsForTime, currentTouchPoints));
                 nextKeyPointAtLeast = gestureDescription.getNextKeyPointAtLeast(1 + j);
             }
             return arrayList;

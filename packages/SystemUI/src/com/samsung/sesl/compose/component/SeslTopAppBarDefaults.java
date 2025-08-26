@@ -30,7 +30,6 @@ import com.samsung.sesl.compose.theme.SeslColorScheme;
 import com.samsung.sesl.compose.theme.SeslTheme;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslTopAppBarDefaults {
     public static final SeslTopAppBarDefaults INSTANCE = new SeslTopAppBarDefaults();
@@ -47,8 +46,8 @@ public final class SeslTopAppBarDefaults {
         titleTextStyle = new TextStyle(0L, sp, SeslFontWeight.Bold, (FontStyle) null, (FontSynthesis) null, (FontFamily) null, (String) null, 0L, (BaselineShift) null, (TextGeometricTransform) null, (LocaleList) null, 0L, (TextDecoration) null, (Shadow) null, (DrawStyle) null, 0, 0, sp2, (TextIndent) null, (PlatformTextStyle) null, (LineHeightStyle) null, 0, 0, (TextMotion) null, 16646137, (DefaultConstructorMarker) null);
         float f = 8;
         float f2 = 0;
-        PaddingKt.m122PaddingValuesa9UjIt4(f, f2, f, f2);
-        PaddingKt.m122PaddingValuesa9UjIt4(6, f2, 20, f2);
+        PaddingKt.m123PaddingValuesa9UjIt4(f, f2, f, f2);
+        PaddingKt.m123PaddingValuesa9UjIt4(6, f2, 20, f2);
         TextUnitKt.getSp(34);
         TopAppBarTitleSlotInsetStart = 28;
     }
@@ -57,7 +56,7 @@ public final class SeslTopAppBarDefaults {
     }
 
     /* renamed from: topAppBarColors-5tl4gsc, reason: not valid java name */
-    public static SeslTopAppBarColors m3327topAppBarColors5tl4gsc(long j, Composer composer) {
+    public static SeslTopAppBarColors m3345topAppBarColors5tl4gsc(long j, Composer composer) {
         long j2;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(2117422296);

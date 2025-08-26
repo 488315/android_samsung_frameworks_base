@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CameraSensorPrivacyRepositoryImpl implements CameraSensorPrivacyRepository {
     public final CoroutineContext bgCoroutineContext;
@@ -28,14 +27,14 @@ public final class CameraSensorPrivacyRepositoryImpl implements CameraSensorPriv
 
     public final StateFlow isEnabled(UserHandle userHandle) {
         Map map = this.userMap;
-        Integer valueOf = Integer.valueOf(userHandle.getIdentifier());
+        Integer numValueOf = Integer.valueOf(userHandle.getIdentifier());
         LinkedHashMap linkedHashMap = (LinkedHashMap) map;
-        Object obj = linkedHashMap.get(valueOf);
-        if (obj == null) {
+        Object objStateIn = linkedHashMap.get(numValueOf);
+        if (objStateIn == null) {
             SensorPrivacyManager sensorPrivacyManager = this.privacyManager;
-            obj = FlowKt.stateIn(FlowKt.flowOn(FlowKt.distinctUntilChanged(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new CameraSensorPrivacyRepositoryKt$isEnabled$2(sensorPrivacyManager, null), FlowConflatedKt.conflatedCallbackFlow(new CameraSensorPrivacyRepositoryKt$isEnabled$1(sensorPrivacyManager, userHandle, null)))), this.bgCoroutineContext), this.scope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Boolean.FALSE);
-            linkedHashMap.put(valueOf, obj);
+            objStateIn = FlowKt.stateIn(FlowKt.flowOn(FlowKt.distinctUntilChanged(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new CameraSensorPrivacyRepositoryKt$isEnabled$2(sensorPrivacyManager, null), FlowConflatedKt.conflatedCallbackFlow(new CameraSensorPrivacyRepositoryKt$isEnabled$1(sensorPrivacyManager, userHandle, null)))), this.bgCoroutineContext), this.scope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Boolean.FALSE);
+            linkedHashMap.put(numValueOf, objStateIn);
         }
-        return (StateFlow) obj;
+        return (StateFlow) objStateIn;
     }
 }

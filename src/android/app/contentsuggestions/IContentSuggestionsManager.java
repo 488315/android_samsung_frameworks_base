@@ -105,9 +105,9 @@ public interface IContentSuggestionsManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContentSuggestionsManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContentSuggestionsManager)) {
-                return (IContentSuggestionsManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContentSuggestionsManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContentSuggestionsManager)) {
+                return (IContentSuggestionsManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -153,63 +153,63 @@ public interface IContentSuggestionsManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    provideContextImage(readInt, readInt2, bundle);
+                    provideContextImage(i3, i4, bundle);
                     return true;
                 case 2:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     Bitmap bitmap = (Bitmap) parcel.readTypedObject(Bitmap.CREATOR);
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    provideContextBitmap(readInt3, bitmap, bundle2);
+                    provideContextBitmap(i5, bitmap, bundle2);
                     return true;
                 case 3:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     SelectionsRequest selectionsRequest = (SelectionsRequest) parcel.readTypedObject(SelectionsRequest.CREATOR);
-                    ISelectionsCallback asInterface = ISelectionsCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISelectionsCallback iSelectionsCallbackAsInterface = ISelectionsCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    suggestContentSelections(readInt4, selectionsRequest, asInterface);
+                    suggestContentSelections(i6, selectionsRequest, iSelectionsCallbackAsInterface);
                     return true;
                 case 4:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     ClassificationsRequest classificationsRequest = (ClassificationsRequest) parcel.readTypedObject(ClassificationsRequest.CREATOR);
-                    IClassificationsCallback asInterface2 = IClassificationsCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IClassificationsCallback iClassificationsCallbackAsInterface = IClassificationsCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    classifyContentSelections(readInt5, classificationsRequest, asInterface2);
+                    classifyContentSelections(i7, classificationsRequest, iClassificationsCallbackAsInterface);
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i8 = parcel.readInt();
+                    String string = parcel.readString();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyInteraction(readInt6, readString, bundle3);
+                    notifyInteraction(i8, string, bundle3);
                     return true;
                 case 6:
-                    int readInt7 = parcel.readInt();
-                    IResultReceiver asInterface3 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    int i9 = parcel.readInt();
+                    IResultReceiver iResultReceiverAsInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    isEnabled(readInt7, asInterface3);
+                    isEnabled(i9, iResultReceiverAsInterface);
                     return true;
                 case 7:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    resetTemporaryService(readInt8);
+                    resetTemporaryService(i10);
                     return true;
                 case 8:
-                    int readInt9 = parcel.readInt();
-                    String readString2 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setTemporaryService(readInt9, readString2, readInt10);
+                    setTemporaryService(i11, string2, i12);
                     return true;
                 case 9:
-                    int readInt11 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i13 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDefaultServiceEnabled(readInt11, readBoolean);
+                    setDefaultServiceEnabled(i13, z);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -234,123 +234,123 @@ public interface IContentSuggestionsManager extends IInterface {
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
             public void provideContextImage(int i, int i2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
             public void provideContextBitmap(int i, Bitmap bitmap, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bitmap, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bitmap, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
             public void suggestContentSelections(int i, SelectionsRequest selectionsRequest, ISelectionsCallback iSelectionsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(selectionsRequest, 0);
-                    obtain.writeStrongInterface(iSelectionsCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(selectionsRequest, 0);
+                    parcelObtain.writeStrongInterface(iSelectionsCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
             public void classifyContentSelections(int i, ClassificationsRequest classificationsRequest, IClassificationsCallback iClassificationsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(classificationsRequest, 0);
-                    obtain.writeStrongInterface(iClassificationsCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(classificationsRequest, 0);
+                    parcelObtain.writeStrongInterface(iClassificationsCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
             public void notifyInteraction(int i, String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
             public void isEnabled(int i, IResultReceiver iResultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
             public void resetTemporaryService(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
             public void setTemporaryService(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
             public void setDefaultServiceEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

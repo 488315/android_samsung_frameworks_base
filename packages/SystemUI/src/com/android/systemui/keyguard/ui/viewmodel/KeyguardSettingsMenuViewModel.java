@@ -9,7 +9,6 @@ import com.android.systemui.keyguard.domain.interactor.KeyguardTouchHandlingInte
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardSettingsMenuViewModel {
     public final KeyguardTouchHandlingInteractor interactor;
@@ -23,6 +22,6 @@ public final class KeyguardSettingsMenuViewModel {
         this.interactor = keyguardTouchHandlingInteractor;
         this.isVisible = keyguardTouchHandlingInteractor.isMenuVisible;
         this.shouldOpenSettings = keyguardTouchHandlingInteractor.shouldOpenSettings;
-        this.textSize = ((ConfigurationInteractorImpl) configurationInteractor).dimensionPixelSize(17106416);
+        this.textSize = ((ConfigurationInteractorImpl) configurationInteractor).dimensionPixelSize(17106417);
     }
 }

@@ -39,9 +39,9 @@ public interface IConfirmationCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IConfirmationCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IConfirmationCallback)) {
-                return (IConfirmationCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IConfirmationCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IConfirmationCallback)) {
+                return (IConfirmationCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -56,10 +56,10 @@ public interface IConfirmationCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                byte[] createByteArray = parcel.createByteArray();
+                int i3 = parcel.readInt();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                onCompleted(readInt, createByteArray);
+                onCompleted(i3, bArrCreateByteArray);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -83,14 +83,14 @@ public interface IConfirmationCallback extends IInterface {
 
             @Override // android.security.apc.IConfirmationCallback
             public void onCompleted(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IConfirmationCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IConfirmationCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -145,9 +145,9 @@ public interface IRCPInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRCPInterface.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRCPInterface)) {
-                return (IRCPInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRCPInterface.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRCPInterface)) {
+                return (IRCPInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -201,127 +201,127 @@ public interface IRCPInterface extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    int readInt2 = parcel.readInt();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                    SemIRCPCallback asInterface = SemIRCPCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    int i4 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                    SemIRCPCallback semIRCPCallbackAsInterface = SemIRCPCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    long copyFiles = copyFiles(readInt, createStringArrayList, readInt2, createStringArrayList2, asInterface);
+                    long jCopyFiles = copyFiles(i3, arrayListCreateStringArrayList, i4, arrayListCreateStringArrayList2, semIRCPCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeLong(copyFiles);
+                    parcel2.writeLong(jCopyFiles);
                     return true;
                 case 2:
-                    int readInt3 = parcel.readInt();
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
-                    int readInt4 = parcel.readInt();
-                    ArrayList<String> createStringArrayList4 = parcel.createStringArrayList();
-                    SemIRCPCallback asInterface2 = SemIRCPCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
+                    int i6 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList4 = parcel.createStringArrayList();
+                    SemIRCPCallback semIRCPCallbackAsInterface2 = SemIRCPCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    long moveFiles = moveFiles(readInt3, createStringArrayList3, readInt4, createStringArrayList4, asInterface2);
+                    long jMoveFiles = moveFiles(i5, arrayListCreateStringArrayList3, i6, arrayListCreateStringArrayList4, semIRCPCallbackAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeLong(moveFiles);
+                    parcel2.writeLong(jMoveFiles);
                     return true;
                 case 3:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long moveUnlimitedFilesForApp = moveUnlimitedFilesForApp(readInt5, uri, readInt6, readInt7);
+                    long jMoveUnlimitedFilesForApp = moveUnlimitedFilesForApp(i7, uri, i8, i9);
                     parcel2.writeNoException();
-                    parcel2.writeLong(moveUnlimitedFilesForApp);
+                    parcel2.writeLong(jMoveUnlimitedFilesForApp);
                     return true;
                 case 4:
-                    int readInt8 = parcel.readInt();
-                    String readString = parcel.readString();
-                    int readInt9 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i11 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int copyFile = copyFile(readInt8, readString, readInt9, readString2);
+                    int iCopyFile = copyFile(i10, string, i11, string2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(copyFile);
+                    parcel2.writeInt(iCopyFile);
                     return true;
                 case 5:
-                    int readInt10 = parcel.readInt();
-                    String readString3 = parcel.readString();
-                    int readInt11 = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    int i12 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int moveFile = moveFile(readInt10, readString3, readInt11, readString4);
+                    int iMoveFile = moveFile(i12, string3, i13, string4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(moveFile);
+                    parcel2.writeInt(iMoveFile);
                     return true;
                 case 6:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String errorMessage = getErrorMessage(readInt12);
+                    String errorMessage = getErrorMessage(i14);
                     parcel2.writeNoException();
                     parcel2.writeString(errorMessage);
                     return true;
                 case 7:
-                    String readString5 = parcel.readString();
-                    int readInt13 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isFileExist = isFileExist(readString5, readInt13);
+                    boolean zIsFileExist = isFileExist(string5, i15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFileExist);
+                    parcel2.writeBoolean(zIsFileExist);
                     return true;
                 case 8:
-                    String readString6 = parcel.readString();
-                    int readInt14 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> files = getFiles(readString6, readInt14);
+                    List<String> files = getFiles(string6, i16);
                     parcel2.writeNoException();
                     parcel2.writeStringList(files);
                     return true;
                 case 9:
-                    String readString7 = parcel.readString();
-                    int readInt15 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle fileInfo = getFileInfo(readString7, readInt15);
+                    Bundle fileInfo = getFileInfo(string7, i17);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(fileInfo, 1);
                     return true;
                 case 10:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    cancel(readLong);
+                    cancel(j);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    int readInt16 = parcel.readInt();
-                    ArrayList<String> createStringArrayList5 = parcel.createStringArrayList();
-                    ArrayList<String> createStringArrayList6 = parcel.createStringArrayList();
-                    int readInt17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList5 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList6 = parcel.createStringArrayList();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long moveFilesForAppEx = moveFilesForAppEx(readInt16, createStringArrayList5, createStringArrayList6, readInt17);
+                    long jMoveFilesForAppEx = moveFilesForAppEx(i18, arrayListCreateStringArrayList5, arrayListCreateStringArrayList6, i19);
                     parcel2.writeNoException();
-                    parcel2.writeLong(moveFilesForAppEx);
+                    parcel2.writeLong(jMoveFilesForAppEx);
                     return true;
                 case 12:
-                    int readInt18 = parcel.readInt();
-                    ArrayList<String> createStringArrayList7 = parcel.createStringArrayList();
-                    int readInt19 = parcel.readInt();
-                    ArrayList<String> createStringArrayList8 = parcel.createStringArrayList();
-                    SemIRCPCallback asInterface3 = SemIRCPCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString8 = parcel.readString();
+                    int i20 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList7 = parcel.createStringArrayList();
+                    int i21 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList8 = parcel.createStringArrayList();
+                    SemIRCPCallback semIRCPCallbackAsInterface3 = SemIRCPCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long copyFiles2 = copyFiles2(readInt18, createStringArrayList7, readInt19, createStringArrayList8, asInterface3, readString8);
+                    long jCopyFiles2 = copyFiles2(i20, arrayListCreateStringArrayList7, i21, arrayListCreateStringArrayList8, semIRCPCallbackAsInterface3, string8);
                     parcel2.writeNoException();
-                    parcel2.writeLong(copyFiles2);
+                    parcel2.writeLong(jCopyFiles2);
                     return true;
                 case 13:
-                    int readInt20 = parcel.readInt();
-                    ArrayList<String> createStringArrayList9 = parcel.createStringArrayList();
-                    int readInt21 = parcel.readInt();
-                    ArrayList<String> createStringArrayList10 = parcel.createStringArrayList();
-                    SemIRCPCallback asInterface4 = SemIRCPCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString9 = parcel.readString();
+                    int i22 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList9 = parcel.createStringArrayList();
+                    int i23 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList10 = parcel.createStringArrayList();
+                    SemIRCPCallback semIRCPCallbackAsInterface4 = SemIRCPCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long moveFiles2 = moveFiles2(readInt20, createStringArrayList9, readInt21, createStringArrayList10, asInterface4, readString9);
+                    long jMoveFiles2 = moveFiles2(i22, arrayListCreateStringArrayList9, i23, arrayListCreateStringArrayList10, semIRCPCallbackAsInterface4, string9);
                     parcel2.writeNoException();
-                    parcel2.writeLong(moveFiles2);
+                    parcel2.writeLong(jMoveFiles2);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -346,241 +346,241 @@ public interface IRCPInterface extends IInterface {
 
             @Override // android.content.IRCPInterface
             public long copyFiles(int i, List<String> list, int i2, List<String> list2, SemIRCPCallback semIRCPCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i2);
-                    obtain.writeStringList(list2);
-                    obtain.writeStrongInterface(semIRCPCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeStrongInterface(semIRCPCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public long moveFiles(int i, List<String> list, int i2, List<String> list2, SemIRCPCallback semIRCPCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i2);
-                    obtain.writeStringList(list2);
-                    obtain.writeStrongInterface(semIRCPCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeStrongInterface(semIRCPCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public long moveUnlimitedFilesForApp(int i, Uri uri, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public int copyFile(int i, String str, int i2, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public int moveFile(int i, String str, int i2, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public String getErrorMessage(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public boolean isFileExist(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public List<String> getFiles(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public Bundle getFileInfo(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public void cancel(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public long moveFilesForAppEx(int i, List<String> list, List<String> list2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    obtain.writeStringList(list2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public long copyFiles2(int i, List<String> list, int i2, List<String> list2, SemIRCPCallback semIRCPCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i2);
-                    obtain.writeStringList(list2);
-                    obtain.writeStrongInterface(semIRCPCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeStrongInterface(semIRCPCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRCPInterface
             public long moveFiles2(int i, List<String> list, int i2, List<String> list2, SemIRCPCallback semIRCPCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i2);
-                    obtain.writeStringList(list2);
-                    obtain.writeStrongInterface(semIRCPCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IRCPInterface.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeStrongInterface(semIRCPCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

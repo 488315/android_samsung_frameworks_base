@@ -11,11 +11,11 @@ public final class TaskFragmentOrganizerToken implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public TaskFragmentOrganizerToken createFromParcel(Parcel parcel) {
-            ITaskFragmentOrganizer asInterface = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
-            if (asInterface == null) {
+            ITaskFragmentOrganizer iTaskFragmentOrganizerAsInterface = ITaskFragmentOrganizer.Stub.asInterface(parcel.readStrongBinder());
+            if (iTaskFragmentOrganizerAsInterface == null) {
                 return null;
             }
-            return new TaskFragmentOrganizerToken(asInterface);
+            return new TaskFragmentOrganizerToken(iTaskFragmentOrganizerAsInterface);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

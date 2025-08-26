@@ -9,7 +9,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslLazyListState extends SeslScrollableState {
     public final LazyListState scrollState;
@@ -42,7 +41,7 @@ public final class SeslLazyListState extends SeslScrollableState {
 
     @Override // com.samsung.sesl.compose.foundation.scroll.SeslScrollableState
     public final Object scrollTo(float f, Continuation continuation) {
-        Object scrollToItem = this.scrollState.scrollToItem((int) (f * (((LazyListMeasureResult) r1.getLayoutInfo()).totalItemsCount - 1)), 0, (SuspendLambda) continuation);
-        return scrollToItem == CoroutineSingletons.COROUTINE_SUSPENDED ? scrollToItem : Unit.INSTANCE;
+        Object objScrollToItem = this.scrollState.scrollToItem((int) (f * (((LazyListMeasureResult) r1.getLayoutInfo()).totalItemsCount - 1)), 0, (SuspendLambda) continuation);
+        return objScrollToItem == CoroutineSingletons.COROUTINE_SUSPENDED ? objScrollToItem : Unit.INSTANCE;
     }
 }

@@ -33,7 +33,7 @@ public class ImageUtil {
         return sampleSize;
     }
 
-    public static ImageInfo parseImage(String str) {
+    public static ImageInfo parseImage(String str) throws Throwable {
         Log.e(TAG, "filepath : " + str);
         ExifInterface exif = getExif(str);
         if (exif != null) {
@@ -55,11 +55,11 @@ public class ImageUtil {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    public static Bitmap decodeImage(String str, int i, int i2) {
-        Bitmap createBitmap;
+    public static Bitmap decodeImage(String str, int i, int i2) throws Throwable {
+        Bitmap bitmapCreateBitmap;
         Log.e(TAG, "filePath : " + str + ", targetWidth : " + i + ", targetHeight :" + i2);
-        Bitmap decodeImageBySkia = decodeImageBySkia(str, i, i2);
-        if (decodeImageBySkia == null) {
+        Bitmap bitmapDecodeImageBySkia = decodeImageBySkia(str, i, i2);
+        if (bitmapDecodeImageBySkia == null) {
             Log.e(TAG, "can't decode image file");
             return null;
         }
@@ -67,64 +67,64 @@ public class ImageUtil {
         switch (orientation) {
             case 0:
             case 1:
-                createBitmap = decodeImageBySkia;
+                bitmapCreateBitmap = bitmapDecodeImageBySkia;
                 break;
             case 2:
                 matrix.setScale(-1.0f, 1.0f);
-                createBitmap = Bitmap.createBitmap(decodeImageBySkia, 0, 0, decodeImageBySkia.getWidth(), decodeImageBySkia.getHeight(), matrix, true);
-                decodeImageBySkia.recycle();
+                bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeImageBySkia, 0, 0, bitmapDecodeImageBySkia.getWidth(), bitmapDecodeImageBySkia.getHeight(), matrix, true);
+                bitmapDecodeImageBySkia.recycle();
                 break;
             case 3:
                 matrix.postRotate(180.0f);
-                createBitmap = Bitmap.createBitmap(decodeImageBySkia, 0, 0, decodeImageBySkia.getWidth(), decodeImageBySkia.getHeight(), matrix, true);
-                decodeImageBySkia.recycle();
+                bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeImageBySkia, 0, 0, bitmapDecodeImageBySkia.getWidth(), bitmapDecodeImageBySkia.getHeight(), matrix, true);
+                bitmapDecodeImageBySkia.recycle();
                 break;
             case 4:
                 matrix.setScale(1.0f, -1.0f);
-                createBitmap = Bitmap.createBitmap(decodeImageBySkia, 0, 0, decodeImageBySkia.getWidth(), decodeImageBySkia.getHeight(), matrix, true);
-                decodeImageBySkia.recycle();
+                bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeImageBySkia, 0, 0, bitmapDecodeImageBySkia.getWidth(), bitmapDecodeImageBySkia.getHeight(), matrix, true);
+                bitmapDecodeImageBySkia.recycle();
                 break;
             case 5:
                 matrix.setScale(1.0f, -1.0f);
                 matrix.postRotate(90.0f);
-                createBitmap = Bitmap.createBitmap(decodeImageBySkia, 0, 0, decodeImageBySkia.getWidth(), decodeImageBySkia.getHeight(), matrix, true);
-                decodeImageBySkia.recycle();
+                bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeImageBySkia, 0, 0, bitmapDecodeImageBySkia.getWidth(), bitmapDecodeImageBySkia.getHeight(), matrix, true);
+                bitmapDecodeImageBySkia.recycle();
                 break;
             case 6:
                 matrix.postRotate(90.0f);
-                createBitmap = Bitmap.createBitmap(decodeImageBySkia, 0, 0, decodeImageBySkia.getWidth(), decodeImageBySkia.getHeight(), matrix, true);
-                decodeImageBySkia.recycle();
+                bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeImageBySkia, 0, 0, bitmapDecodeImageBySkia.getWidth(), bitmapDecodeImageBySkia.getHeight(), matrix, true);
+                bitmapDecodeImageBySkia.recycle();
                 break;
             case 7:
                 matrix.setScale(1.0f, -1.0f);
                 matrix.postRotate(270.0f);
-                createBitmap = Bitmap.createBitmap(decodeImageBySkia, 0, 0, decodeImageBySkia.getWidth(), decodeImageBySkia.getHeight(), matrix, true);
-                decodeImageBySkia.recycle();
+                bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeImageBySkia, 0, 0, bitmapDecodeImageBySkia.getWidth(), bitmapDecodeImageBySkia.getHeight(), matrix, true);
+                bitmapDecodeImageBySkia.recycle();
                 break;
             case 8:
                 matrix.postRotate(270.0f);
-                createBitmap = Bitmap.createBitmap(decodeImageBySkia, 0, 0, decodeImageBySkia.getWidth(), decodeImageBySkia.getHeight(), matrix, true);
-                decodeImageBySkia.recycle();
+                bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeImageBySkia, 0, 0, bitmapDecodeImageBySkia.getWidth(), bitmapDecodeImageBySkia.getHeight(), matrix, true);
+                bitmapDecodeImageBySkia.recycle();
                 break;
             default:
-                createBitmap = Bitmap.createBitmap(decodeImageBySkia, 0, 0, decodeImageBySkia.getWidth(), decodeImageBySkia.getHeight(), matrix, true);
-                decodeImageBySkia.recycle();
+                bitmapCreateBitmap = Bitmap.createBitmap(bitmapDecodeImageBySkia, 0, 0, bitmapDecodeImageBySkia.getWidth(), bitmapDecodeImageBySkia.getHeight(), matrix, true);
+                bitmapDecodeImageBySkia.recycle();
                 break;
         }
-        if (createBitmap == null) {
-            return convert(decodeImageBySkia, decodeImageBySkia.getConfig());
+        if (bitmapCreateBitmap == null) {
+            return convert(bitmapDecodeImageBySkia, bitmapDecodeImageBySkia.getConfig());
         }
-        return convert(createBitmap, createBitmap.getConfig());
+        return convert(bitmapCreateBitmap, bitmapCreateBitmap.getConfig());
     }
 
     private static Bitmap convert(Bitmap bitmap, Bitmap.Config config) {
         Log.e(TAG, ": " + bitmap);
-        Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), config);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), config);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         Paint paint = new Paint();
         paint.setColor(-16777216);
         canvas.drawBitmap(bitmap, 0.0f, 0.0f, paint);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     private static ExifInterface getExif(String str) {
@@ -143,13 +143,13 @@ public class ImageUtil {
         return null;
     }
 
-    private static Bitmap decodeImageBySkia(String str, int i, int i2) {
+    private static Bitmap decodeImageBySkia(String str, int i, int i2) throws Throwable {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(str, options);
-        int calculateInSampleSize = calculateInSampleSize(options.outWidth, options.outHeight, i, i2);
-        options.inSampleSize = calculateInSampleSize;
-        sampleSize = calculateInSampleSize;
+        int iCalculateInSampleSize = calculateInSampleSize(options.outWidth, options.outHeight, i, i2);
+        options.inSampleSize = iCalculateInSampleSize;
+        sampleSize = iCalculateInSampleSize;
         Log.e(TAG, "decodeImageBySkia: inSampleSize = " + options.inSampleSize);
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(str, options);

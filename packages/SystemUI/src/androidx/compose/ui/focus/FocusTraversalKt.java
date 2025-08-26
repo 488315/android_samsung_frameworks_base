@@ -1,16 +1,22 @@
 package androidx.compose.ui.focus;
 
+import androidx.compose.runtime.collection.MutableVector;
+import androidx.compose.ui.ComposeUiFlags;
+import androidx.compose.ui.Modifier;
 import androidx.compose.ui.geometry.Rect;
+import androidx.compose.ui.internal.InlineClassHelperKt;
 import androidx.compose.ui.layout.LayoutCoordinatesKt;
+import androidx.compose.ui.node.DelegatableNodeKt;
+import androidx.compose.ui.node.DelegatingNode;
 import androidx.compose.ui.node.LayoutNode;
 import androidx.compose.ui.node.NodeCoordinator;
+import androidx.compose.ui.platform.AndroidComposeView;
 import androidx.compose.ui.unit.LayoutDirection;
+import kotlin.NoWhenBranchMatchedException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class FocusTraversalKt {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -47,265 +53,184 @@ public abstract class FocusTraversalKt {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:77:0x0059, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:71:0x0059, code lost:
     
         continue;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final androidx.compose.ui.focus.FocusTargetNode findActiveFocusNode(androidx.compose.ui.focus.FocusTargetNode r9) {
-        /*
-            boolean r0 = androidx.compose.ui.ComposeUiFlags.isTrackFocusEnabled
-            r1 = 0
-            if (r0 == 0) goto L16
-            androidx.compose.ui.node.Owner r9 = androidx.compose.ui.node.DelegatableNodeKt.requireOwner(r9)
-            androidx.compose.ui.platform.AndroidComposeView r9 = (androidx.compose.ui.platform.AndroidComposeView) r9
-            androidx.compose.ui.focus.FocusOwnerImpl r9 = r9.focusOwner
-            androidx.compose.ui.focus.FocusTargetNode r9 = r9.activeFocusTargetNode
-            if (r9 == 0) goto Lc5
-            boolean r0 = r9.isAttached
-            if (r0 == 0) goto Lc5
-            return r9
-        L16:
-            androidx.compose.ui.focus.FocusStateImpl r0 = r9.getFocusState()
-            int[] r2 = androidx.compose.ui.focus.FocusTraversalKt.WhenMappings.$EnumSwitchMapping$1
-            int r0 = r0.ordinal()
-            r0 = r2[r0]
-            r2 = 1
-            if (r0 == r2) goto Lc6
-            r3 = 2
-            if (r0 == r3) goto L36
-            r2 = 3
-            if (r0 == r2) goto Lc6
-            r9 = 4
-            if (r0 != r9) goto L30
-            goto Lc5
-        L30:
-            kotlin.NoWhenBranchMatchedException r9 = new kotlin.NoWhenBranchMatchedException
-            r9.<init>()
-            throw r9
-        L36:
-            androidx.compose.ui.Modifier$Node r0 = r9.node
-            boolean r0 = r0.isAttached
-            if (r0 != 0) goto L42
-            java.lang.String r0 = "visitChildren called on an unattached node"
-            androidx.compose.ui.internal.InlineClassHelperKt.throwIllegalStateException(r0)
-        L42:
-            androidx.compose.runtime.collection.MutableVector r0 = new androidx.compose.runtime.collection.MutableVector
-            r3 = 16
-            androidx.compose.ui.Modifier$Node[] r4 = new androidx.compose.ui.Modifier.Node[r3]
-            r5 = 0
-            r0.<init>(r4, r5)
-            androidx.compose.ui.Modifier$Node r9 = r9.node
-            androidx.compose.ui.Modifier$Node r4 = r9.child
-            if (r4 != 0) goto L56
-            androidx.compose.ui.node.DelegatableNodeKt.access$addLayoutNodeChildren(r0, r9)
-            goto L59
-        L56:
-            r0.add(r4)
-        L59:
-            int r9 = r0.size
-            if (r9 == 0) goto Lc5
-            int r9 = r9 + (-1)
-            java.lang.Object r9 = r0.removeAt(r9)
-            androidx.compose.ui.Modifier$Node r9 = (androidx.compose.ui.Modifier.Node) r9
-            int r4 = r9.aggregateChildKindSet
-            r4 = r4 & 1024(0x400, float:1.435E-42)
-            if (r4 != 0) goto L6f
-            androidx.compose.ui.node.DelegatableNodeKt.access$addLayoutNodeChildren(r0, r9)
-            goto L59
-        L6f:
-            if (r9 == 0) goto L59
-            int r4 = r9.kindSet
-            r4 = r4 & 1024(0x400, float:1.435E-42)
-            if (r4 == 0) goto Lc2
-            r4 = r1
-        L78:
-            if (r9 == 0) goto L59
-            boolean r6 = r9 instanceof androidx.compose.ui.focus.FocusTargetNode
-            if (r6 == 0) goto L87
-            androidx.compose.ui.focus.FocusTargetNode r9 = (androidx.compose.ui.focus.FocusTargetNode) r9
-            androidx.compose.ui.focus.FocusTargetNode r9 = findActiveFocusNode(r9)
-            if (r9 == 0) goto Lbd
-            return r9
-        L87:
-            int r6 = r9.kindSet
-            r6 = r6 & 1024(0x400, float:1.435E-42)
-            if (r6 == 0) goto Lbd
-            boolean r6 = r9 instanceof androidx.compose.ui.node.DelegatingNode
-            if (r6 == 0) goto Lbd
-            r6 = r9
-            androidx.compose.ui.node.DelegatingNode r6 = (androidx.compose.ui.node.DelegatingNode) r6
-            androidx.compose.ui.Modifier$Node r6 = r6.delegate
-            r7 = r5
-        L97:
-            if (r6 == 0) goto Lba
-            int r8 = r6.kindSet
-            r8 = r8 & 1024(0x400, float:1.435E-42)
-            if (r8 == 0) goto Lb7
-            int r7 = r7 + 1
-            if (r7 != r2) goto La5
-            r9 = r6
-            goto Lb7
-        La5:
-            if (r4 != 0) goto Lae
-            androidx.compose.runtime.collection.MutableVector r4 = new androidx.compose.runtime.collection.MutableVector
-            androidx.compose.ui.Modifier$Node[] r8 = new androidx.compose.ui.Modifier.Node[r3]
-            r4.<init>(r8, r5)
-        Lae:
-            if (r9 == 0) goto Lb4
-            r4.add(r9)
-            r9 = r1
-        Lb4:
-            r4.add(r6)
-        Lb7:
-            androidx.compose.ui.Modifier$Node r6 = r6.child
-            goto L97
-        Lba:
-            if (r7 != r2) goto Lbd
-            goto L78
-        Lbd:
-            androidx.compose.ui.Modifier$Node r9 = androidx.compose.ui.node.DelegatableNodeKt.access$pop(r4)
-            goto L78
-        Lc2:
-            androidx.compose.ui.Modifier$Node r9 = r9.child
-            goto L6f
-        Lc5:
-            return r1
-        Lc6:
-            return r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.focus.FocusTraversalKt.findActiveFocusNode(androidx.compose.ui.focus.FocusTargetNode):androidx.compose.ui.focus.FocusTargetNode");
+    public static final FocusTargetNode findActiveFocusNode(FocusTargetNode focusTargetNode) {
+        if (!ComposeUiFlags.isTrackFocusEnabled) {
+            int i = WhenMappings.$EnumSwitchMapping$1[focusTargetNode.getFocusState().ordinal()];
+            if (i != 1) {
+                if (i == 2) {
+                    if (!focusTargetNode.node.isAttached) {
+                        InlineClassHelperKt.throwIllegalStateException("visitChildren called on an unattached node");
+                    }
+                    MutableVector mutableVector = new MutableVector(new Modifier.Node[16], 0);
+                    Modifier.Node node = focusTargetNode.node;
+                    Modifier.Node node2 = node.child;
+                    if (node2 == null) {
+                        DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector, node);
+                    } else {
+                        mutableVector.add(node2);
+                    }
+                    while (true) {
+                        int i2 = mutableVector.size;
+                        if (i2 == 0) {
+                            break;
+                        }
+                        Modifier.Node nodeAccess$pop = (Modifier.Node) mutableVector.removeAt(i2 - 1);
+                        if ((nodeAccess$pop.aggregateChildKindSet & 1024) == 0) {
+                            DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector, nodeAccess$pop);
+                        } else {
+                            while (true) {
+                                if (nodeAccess$pop == null) {
+                                    break;
+                                }
+                                if ((nodeAccess$pop.kindSet & 1024) != 0) {
+                                    MutableVector mutableVector2 = null;
+                                    while (nodeAccess$pop != null) {
+                                        if (nodeAccess$pop instanceof FocusTargetNode) {
+                                            FocusTargetNode focusTargetNodeFindActiveFocusNode = findActiveFocusNode((FocusTargetNode) nodeAccess$pop);
+                                            if (focusTargetNodeFindActiveFocusNode != null) {
+                                                return focusTargetNodeFindActiveFocusNode;
+                                            }
+                                        } else if ((nodeAccess$pop.kindSet & 1024) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
+                                            int i3 = 0;
+                                            for (Modifier.Node node3 = ((DelegatingNode) nodeAccess$pop).delegate; node3 != null; node3 = node3.child) {
+                                                if ((node3.kindSet & 1024) != 0) {
+                                                    i3++;
+                                                    if (i3 == 1) {
+                                                        nodeAccess$pop = node3;
+                                                    } else {
+                                                        if (mutableVector2 == null) {
+                                                            mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
+                                                        }
+                                                        if (nodeAccess$pop != null) {
+                                                            mutableVector2.add(nodeAccess$pop);
+                                                            nodeAccess$pop = null;
+                                                        }
+                                                        mutableVector2.add(node3);
+                                                    }
+                                                }
+                                            }
+                                            if (i3 == 1) {
+                                            }
+                                        }
+                                        nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector2);
+                                    }
+                                } else {
+                                    nodeAccess$pop = nodeAccess$pop.child;
+                                }
+                            }
+                        }
+                    }
+                } else if (i != 3) {
+                    if (i != 4) {
+                        throw new NoWhenBranchMatchedException();
+                    }
+                }
+            }
+            return focusTargetNode;
+        }
+        FocusTargetNode focusTargetNode2 = ((AndroidComposeView) DelegatableNodeKt.requireOwner(focusTargetNode)).focusOwner.activeFocusTargetNode;
+        if (focusTargetNode2 != null && focusTargetNode2.isAttached) {
+            return focusTargetNode2;
+        }
+        return null;
     }
 
     public static final Rect focusRect(FocusTargetNode focusTargetNode) {
-        Rect localBoundingBoxOf;
+        Rect rectLocalBoundingBoxOf;
         NodeCoordinator nodeCoordinator = focusTargetNode.coordinator;
-        if (nodeCoordinator != null && (localBoundingBoxOf = LayoutCoordinatesKt.findRootCoordinates(nodeCoordinator).localBoundingBoxOf(nodeCoordinator, false)) != null) {
-            return localBoundingBoxOf;
+        if (nodeCoordinator != null && (rectLocalBoundingBoxOf = LayoutCoordinatesKt.findRootCoordinates(nodeCoordinator).localBoundingBoxOf(nodeCoordinator, false)) != null) {
+            return rectLocalBoundingBoxOf;
         }
         Rect.Companion.getClass();
         return Rect.Zero;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:68:0x0028, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:63:0x0028, code lost:
     
         continue;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final androidx.compose.ui.focus.FocusTargetNode getActiveChild(androidx.compose.ui.focus.FocusTargetNode r9) {
-        /*
-            androidx.compose.ui.Modifier$Node r0 = r9.node
-            boolean r0 = r0.isAttached
-            r1 = 0
-            if (r0 != 0) goto L9
-            goto Laa
-        L9:
-            if (r0 != 0) goto L11
-            java.lang.String r0 = "visitChildren called on an unattached node"
-            androidx.compose.ui.internal.InlineClassHelperKt.throwIllegalStateException(r0)
-        L11:
-            androidx.compose.runtime.collection.MutableVector r0 = new androidx.compose.runtime.collection.MutableVector
-            r2 = 16
-            androidx.compose.ui.Modifier$Node[] r3 = new androidx.compose.ui.Modifier.Node[r2]
-            r4 = 0
-            r0.<init>(r3, r4)
-            androidx.compose.ui.Modifier$Node r9 = r9.node
-            androidx.compose.ui.Modifier$Node r3 = r9.child
-            if (r3 != 0) goto L25
-            androidx.compose.ui.node.DelegatableNodeKt.access$addLayoutNodeChildren(r0, r9)
-            goto L28
-        L25:
-            r0.add(r3)
-        L28:
-            int r9 = r0.size
-            if (r9 == 0) goto Laa
-            int r9 = r9 + (-1)
-            java.lang.Object r9 = r0.removeAt(r9)
-            androidx.compose.ui.Modifier$Node r9 = (androidx.compose.ui.Modifier.Node) r9
-            int r3 = r9.aggregateChildKindSet
-            r3 = r3 & 1024(0x400, float:1.435E-42)
-            if (r3 != 0) goto L3e
-            androidx.compose.ui.node.DelegatableNodeKt.access$addLayoutNodeChildren(r0, r9)
-            goto L28
-        L3e:
-            if (r9 == 0) goto L28
-            int r3 = r9.kindSet
-            r3 = r3 & 1024(0x400, float:1.435E-42)
-            if (r3 == 0) goto La7
-            r3 = r1
-        L47:
-            if (r9 == 0) goto L28
-            boolean r5 = r9 instanceof androidx.compose.ui.focus.FocusTargetNode
-            r6 = 1
-            if (r5 == 0) goto L6c
-            androidx.compose.ui.focus.FocusTargetNode r9 = (androidx.compose.ui.focus.FocusTargetNode) r9
-            androidx.compose.ui.Modifier$Node r5 = r9.node
-            boolean r5 = r5.isAttached
-            if (r5 == 0) goto La2
-            androidx.compose.ui.focus.FocusStateImpl r5 = r9.getFocusState()
-            int[] r7 = androidx.compose.ui.focus.FocusTraversalKt.WhenMappings.$EnumSwitchMapping$1
-            int r5 = r5.ordinal()
-            r5 = r7[r5]
-            if (r5 == r6) goto L6b
-            r6 = 2
-            if (r5 == r6) goto L6b
-            r6 = 3
-            if (r5 == r6) goto L6b
-            goto La2
-        L6b:
-            return r9
-        L6c:
-            int r5 = r9.kindSet
-            r5 = r5 & 1024(0x400, float:1.435E-42)
-            if (r5 == 0) goto La2
-            boolean r5 = r9 instanceof androidx.compose.ui.node.DelegatingNode
-            if (r5 == 0) goto La2
-            r5 = r9
-            androidx.compose.ui.node.DelegatingNode r5 = (androidx.compose.ui.node.DelegatingNode) r5
-            androidx.compose.ui.Modifier$Node r5 = r5.delegate
-            r7 = r4
-        L7c:
-            if (r5 == 0) goto L9f
-            int r8 = r5.kindSet
-            r8 = r8 & 1024(0x400, float:1.435E-42)
-            if (r8 == 0) goto L9c
-            int r7 = r7 + 1
-            if (r7 != r6) goto L8a
-            r9 = r5
-            goto L9c
-        L8a:
-            if (r3 != 0) goto L93
-            androidx.compose.runtime.collection.MutableVector r3 = new androidx.compose.runtime.collection.MutableVector
-            androidx.compose.ui.Modifier$Node[] r8 = new androidx.compose.ui.Modifier.Node[r2]
-            r3.<init>(r8, r4)
-        L93:
-            if (r9 == 0) goto L99
-            r3.add(r9)
-            r9 = r1
-        L99:
-            r3.add(r5)
-        L9c:
-            androidx.compose.ui.Modifier$Node r5 = r5.child
-            goto L7c
-        L9f:
-            if (r7 != r6) goto La2
-            goto L47
-        La2:
-            androidx.compose.ui.Modifier$Node r9 = androidx.compose.ui.node.DelegatableNodeKt.access$pop(r3)
-            goto L47
-        La7:
-            androidx.compose.ui.Modifier$Node r9 = r9.child
-            goto L3e
-        Laa:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.focus.FocusTraversalKt.getActiveChild(androidx.compose.ui.focus.FocusTargetNode):androidx.compose.ui.focus.FocusTargetNode");
+    public static final FocusTargetNode getActiveChild(FocusTargetNode focusTargetNode) {
+        FocusTargetNode focusTargetNode2;
+        boolean z = focusTargetNode.node.isAttached;
+        if (z) {
+            if (!z) {
+                InlineClassHelperKt.throwIllegalStateException("visitChildren called on an unattached node");
+            }
+            MutableVector mutableVector = new MutableVector(new Modifier.Node[16], 0);
+            Modifier.Node node = focusTargetNode.node;
+            Modifier.Node node2 = node.child;
+            if (node2 == null) {
+                DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector, node);
+            } else {
+                mutableVector.add(node2);
+            }
+            loop0: while (true) {
+                int i = mutableVector.size;
+                if (i == 0) {
+                    break;
+                }
+                Modifier.Node nodeAccess$pop = (Modifier.Node) mutableVector.removeAt(i - 1);
+                if ((nodeAccess$pop.aggregateChildKindSet & 1024) == 0) {
+                    DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector, nodeAccess$pop);
+                } else {
+                    while (true) {
+                        if (nodeAccess$pop == null) {
+                            break;
+                        }
+                        if ((nodeAccess$pop.kindSet & 1024) != 0) {
+                            MutableVector mutableVector2 = null;
+                            while (nodeAccess$pop != null) {
+                                if (nodeAccess$pop instanceof FocusTargetNode) {
+                                    focusTargetNode2 = (FocusTargetNode) nodeAccess$pop;
+                                    if (focusTargetNode2.node.isAttached) {
+                                        int i2 = WhenMappings.$EnumSwitchMapping$1[focusTargetNode2.getFocusState().ordinal()];
+                                        if (i2 == 1 || i2 == 2 || i2 == 3) {
+                                            break loop0;
+                                        }
+                                    }
+                                } else if ((nodeAccess$pop.kindSet & 1024) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
+                                    int i3 = 0;
+                                    for (Modifier.Node node3 = ((DelegatingNode) nodeAccess$pop).delegate; node3 != null; node3 = node3.child) {
+                                        if ((node3.kindSet & 1024) != 0) {
+                                            i3++;
+                                            if (i3 == 1) {
+                                                nodeAccess$pop = node3;
+                                            } else {
+                                                if (mutableVector2 == null) {
+                                                    mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
+                                                }
+                                                if (nodeAccess$pop != null) {
+                                                    mutableVector2.add(nodeAccess$pop);
+                                                    nodeAccess$pop = null;
+                                                }
+                                                mutableVector2.add(node3);
+                                            }
+                                        }
+                                    }
+                                    if (i3 == 1) {
+                                    }
+                                }
+                                nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector2);
+                            }
+                        } else {
+                            nodeAccess$pop = nodeAccess$pop.child;
+                        }
+                    }
+                }
+            }
+            return focusTargetNode2;
+        }
+        return null;
     }
 
     public static final boolean isEligibleForFocusSearch(FocusTargetNode focusTargetNode) {

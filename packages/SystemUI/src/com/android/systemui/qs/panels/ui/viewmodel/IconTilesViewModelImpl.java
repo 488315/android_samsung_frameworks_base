@@ -11,7 +11,6 @@ import kotlin.collections.SetsKt___SetsKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class IconTilesViewModelImpl implements IconTilesViewModel {
     public final IconTilesInteractor interactor;
@@ -44,14 +43,14 @@ public final class IconTilesViewModelImpl implements IconTilesViewModel {
         IconTilesInteractor iconTilesInteractor = this.interactor;
         if (((ArrayList) iconTilesInteractor.currentTilesInteractor.getCurrentTilesSpecs()).contains(tileSpec)) {
             ReadonlyStateFlow readonlyStateFlow = iconTilesInteractor.largeTilesSpecs;
-            boolean contains = ((Set) readonlyStateFlow.$$delegate_0.getValue()).contains(tileSpec);
+            boolean zContains = ((Set) readonlyStateFlow.$$delegate_0.getValue()).contains(tileSpec);
             StateFlow stateFlow = readonlyStateFlow.$$delegate_0;
             QSPreferencesInteractor qSPreferencesInteractor = iconTilesInteractor.preferencesInteractor;
-            if (z && contains) {
+            if (z && zContains) {
                 qSPreferencesInteractor.setLargeTilesSpecs(SetsKt___SetsKt.minus((Set) stateFlow.getValue(), tileSpec));
                 iconTilesInteractor.uiEventLogger.log(QSEditEvent.QS_EDIT_RESIZE_SMALL, 0, TileSpecKt.getMetricSpec(tileSpec));
             } else {
-                if (z || contains) {
+                if (z || zContains) {
                     return;
                 }
                 qSPreferencesInteractor.setLargeTilesSpecs(SetsKt___SetsKt.plus((Set) stateFlow.getValue(), tileSpec));

@@ -3,16 +3,13 @@ package androidx.emoji2.viewsintegration;
 import android.widget.EditText;
 import androidx.core.util.Preconditions;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EmojiEditTextHelper {
     public final HelperInternal19 mHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HelperInternal {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HelperInternal19 extends HelperInternal {
         public final EditText mEditText;
         public final EmojiTextWatcher mTextWatcher;

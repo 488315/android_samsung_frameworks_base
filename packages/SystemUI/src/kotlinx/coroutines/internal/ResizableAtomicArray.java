@@ -3,7 +3,6 @@ package kotlinx.coroutines.internal;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import kotlinx.coroutines.scheduling.CoroutineScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ResizableAtomicArray {
     private volatile AtomicReferenceArray<Object> array;

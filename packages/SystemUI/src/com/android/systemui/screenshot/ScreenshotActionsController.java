@@ -15,7 +15,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenshotActionsController {
     public final ActionExecutor actionExecutor;
@@ -24,7 +23,6 @@ public final class ScreenshotActionsController {
     public UUID currentScreenshotId;
     public final ScreenshotViewModel viewModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ActionsCallback {
         public final UUID screenshotId;
 
@@ -45,7 +43,6 @@ public final class ScreenshotActionsController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         ScreenshotActionsController getController(ActionExecutor actionExecutor);
     }

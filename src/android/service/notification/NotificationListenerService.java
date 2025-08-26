@@ -520,7 +520,7 @@ public abstract class NotificationListenerService extends Service {
     }
 
     public final void createLegacyIconExtras(Notification notification) {
-        Drawable loadDrawable;
+        Drawable drawableLoadDrawable;
         if (getContext().getApplicationInfo().targetSdkVersion < 23) {
             Icon smallIcon = notification.getSmallIcon();
             Icon largeIcon = notification.getLargeIcon();
@@ -528,10 +528,10 @@ public abstract class NotificationListenerService extends Service {
                 notification.extras.putInt(Notification.EXTRA_SMALL_ICON, smallIcon.getResId());
                 notification.icon = smallIcon.getResId();
             }
-            if (largeIcon == null || (loadDrawable = largeIcon.loadDrawable(getContext())) == null || !(loadDrawable instanceof BitmapDrawable)) {
+            if (largeIcon == null || (drawableLoadDrawable = largeIcon.loadDrawable(getContext())) == null || !(drawableLoadDrawable instanceof BitmapDrawable)) {
                 return;
             }
-            Bitmap bitmap = ((BitmapDrawable) loadDrawable).getBitmap();
+            Bitmap bitmap = ((BitmapDrawable) drawableLoadDrawable).getBitmap();
             notification.extras.putParcelable(Notification.EXTRA_LARGE_ICON, bitmap);
             notification.largeIcon = bitmap;
         }
@@ -540,13 +540,13 @@ public abstract class NotificationListenerService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void maybePopulateRemoteViews(Notification notification) {
         if (getContext().getApplicationInfo().targetSdkVersion < 24) {
-            Notification.Builder recoverBuilder = Notification.Builder.recoverBuilder(getContext(), notification);
-            RemoteViews createContentView = recoverBuilder.createContentView();
-            RemoteViews createBigContentView = recoverBuilder.createBigContentView();
-            RemoteViews createHeadsUpContentView = recoverBuilder.createHeadsUpContentView();
-            notification.contentView = createContentView;
-            notification.bigContentView = createBigContentView;
-            notification.headsUpContentView = createHeadsUpContentView;
+            Notification.Builder builderRecoverBuilder = Notification.Builder.recoverBuilder(getContext(), notification);
+            RemoteViews remoteViewsCreateContentView = builderRecoverBuilder.createContentView();
+            RemoteViews remoteViewsCreateBigContentView = builderRecoverBuilder.createBigContentView();
+            RemoteViews remoteViewsCreateHeadsUpContentView = builderRecoverBuilder.createHeadsUpContentView();
+            notification.contentView = remoteViewsCreateContentView;
+            notification.bigContentView = remoteViewsCreateBigContentView;
+            notification.headsUpContentView = remoteViewsCreateHeadsUpContentView;
         }
     }
 
@@ -640,10 +640,10 @@ public abstract class NotificationListenerService extends Service {
             synchronized (NotificationListenerService.this.mLock) {
                 NotificationListenerService.this.applyUpdateLocked(notificationRankingUpdate);
                 if (statusBarNotification != null) {
-                    SomeArgs obtain = SomeArgs.obtain();
-                    obtain.arg1 = statusBarNotification;
-                    obtain.arg2 = NotificationListenerService.this.mRankingMap;
-                    NotificationListenerService.this.mHandler.obtainMessage(1, obtain).sendToTarget();
+                    SomeArgs someArgsObtain = SomeArgs.obtain();
+                    someArgsObtain.arg1 = statusBarNotification;
+                    someArgsObtain.arg2 = NotificationListenerService.this.mRankingMap;
+                    NotificationListenerService.this.mHandler.obtainMessage(1, someArgsObtain).sendToTarget();
                 } else {
                     NotificationListenerService.this.mHandler.obtainMessage(4, NotificationListenerService.this.mRankingMap).sendToTarget();
                 }
@@ -667,12 +667,12 @@ public abstract class NotificationListenerService extends Service {
             }
             synchronized (NotificationListenerService.this.mLock) {
                 NotificationListenerService.this.applyUpdateLocked(notificationRankingUpdate);
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = statusBarNotification;
-                obtain.arg2 = NotificationListenerService.this.mRankingMap;
-                obtain.arg3 = Integer.valueOf(i);
-                obtain.arg4 = notificationStats;
-                NotificationListenerService.this.mHandler.obtainMessage(2, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = statusBarNotification;
+                someArgsObtain.arg2 = NotificationListenerService.this.mRankingMap;
+                someArgsObtain.arg3 = Integer.valueOf(i);
+                someArgsObtain.arg4 = notificationStats;
+                NotificationListenerService.this.mHandler.obtainMessage(2, someArgsObtain).sendToTarget();
             }
         }
 
@@ -723,22 +723,22 @@ public abstract class NotificationListenerService extends Service {
 
         @Override // android.service.notification.INotificationListener
         public void onNotificationChannelModification(String str, UserHandle userHandle, NotificationChannel notificationChannel, int i) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = userHandle;
-            obtain.arg3 = notificationChannel;
-            obtain.arg4 = Integer.valueOf(i);
-            NotificationListenerService.this.mHandler.obtainMessage(7, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = userHandle;
+            someArgsObtain.arg3 = notificationChannel;
+            someArgsObtain.arg4 = Integer.valueOf(i);
+            NotificationListenerService.this.mHandler.obtainMessage(7, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.INotificationListener
         public void onNotificationChannelGroupModification(String str, UserHandle userHandle, NotificationChannelGroup notificationChannelGroup, int i) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = userHandle;
-            obtain.arg3 = notificationChannelGroup;
-            obtain.arg4 = Integer.valueOf(i);
-            NotificationListenerService.this.mHandler.obtainMessage(8, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = userHandle;
+            someArgsObtain.arg3 = notificationChannelGroup;
+            someArgsObtain.arg4 = Integer.valueOf(i);
+            NotificationListenerService.this.mHandler.obtainMessage(8, someArgsObtain).sendToTarget();
         }
 
         @Override // android.service.notification.INotificationListener
@@ -848,9 +848,9 @@ public abstract class NotificationListenerService extends Service {
             this.mRank = -1;
             this.mUserSentiment = 0;
             ClassLoader classLoader = getClass().getClassLoader();
-            int readInt = parcel.readInt();
-            if (readInt != 2) {
-                throw new IllegalArgumentException("malformed Ranking parcel: " + parcel + " version " + readInt + ", expected 2");
+            int i = parcel.readInt();
+            if (i != 2) {
+                throw new IllegalArgumentException("malformed Ranking parcel: " + parcel + " version " + i + ", expected 2");
             }
             this.mKey = parcel.readString();
             this.mRank = parcel.readInt();
@@ -1172,10 +1172,10 @@ public abstract class NotificationListenerService extends Service {
         private RankingMap(Parcel parcel) {
             this.mOrderedKeys = new ArrayList<>();
             this.mRankings = new ArrayMap<>();
-            int readInt = parcel.readInt();
-            this.mOrderedKeys.ensureCapacity(readInt);
-            this.mRankings.ensureCapacity(readInt);
-            for (int i = 0; i < readInt; i++) {
+            int i = parcel.readInt();
+            this.mOrderedKeys.ensureCapacity(i);
+            this.mRankings.ensureCapacity(i);
+            for (int i2 = 0; i2 < i; i2++) {
                 Ranking ranking = new Ranking(parcel);
                 String key = ranking.getKey();
                 this.mOrderedKeys.add(key);
@@ -1252,10 +1252,10 @@ public abstract class NotificationListenerService extends Service {
                         SomeArgs someArgs2 = (SomeArgs) message.obj;
                         StatusBarNotification statusBarNotification2 = (StatusBarNotification) someArgs2.arg1;
                         RankingMap rankingMap2 = (RankingMap) someArgs2.arg2;
-                        int intValue = ((Integer) someArgs2.arg3).intValue();
+                        int iIntValue = ((Integer) someArgs2.arg3).intValue();
                         NotificationStats notificationStats = (NotificationStats) someArgs2.arg4;
                         someArgs2.recycle();
-                        NotificationListenerService.this.onNotificationRemoved(statusBarNotification2, rankingMap2, notificationStats, intValue);
+                        NotificationListenerService.this.onNotificationRemoved(statusBarNotification2, rankingMap2, notificationStats, iIntValue);
                         break;
                     case 3:
                         NotificationListenerService.this.onListenerConnected();
@@ -1274,18 +1274,18 @@ public abstract class NotificationListenerService extends Service {
                         String str = (String) someArgs3.arg1;
                         UserHandle userHandle = (UserHandle) someArgs3.arg2;
                         NotificationChannel notificationChannel = (NotificationChannel) someArgs3.arg3;
-                        int intValue2 = ((Integer) someArgs3.arg4).intValue();
+                        int iIntValue2 = ((Integer) someArgs3.arg4).intValue();
                         someArgs3.recycle();
-                        NotificationListenerService.this.onNotificationChannelModified(str, userHandle, notificationChannel, intValue2);
+                        NotificationListenerService.this.onNotificationChannelModified(str, userHandle, notificationChannel, iIntValue2);
                         break;
                     case 8:
                         SomeArgs someArgs4 = (SomeArgs) message.obj;
                         String str2 = (String) someArgs4.arg1;
                         UserHandle userHandle2 = (UserHandle) someArgs4.arg2;
                         NotificationChannelGroup notificationChannelGroup = (NotificationChannelGroup) someArgs4.arg3;
-                        int intValue3 = ((Integer) someArgs4.arg4).intValue();
+                        int iIntValue3 = ((Integer) someArgs4.arg4).intValue();
                         someArgs4.recycle();
-                        NotificationListenerService.this.onNotificationChannelGroupModified(str2, userHandle2, notificationChannelGroup, intValue3);
+                        NotificationListenerService.this.onNotificationChannelGroupModified(str2, userHandle2, notificationChannelGroup, iIntValue3);
                         break;
                     case 9:
                         NotificationListenerService.this.onSilentStatusBarIconsVisibilityChanged(((Boolean) message.obj).booleanValue());

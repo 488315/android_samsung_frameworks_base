@@ -2,23 +2,25 @@ package com.android.systemui.util;
 
 import android.util.SparseArray;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import kotlin.jvm.internal.CollectionToArray;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.sequences.Sequence;
 import kotlin.sequences.SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1;
+import kotlin.sequences.TransformingSequence;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SparseArrayMapWrapper<T> implements Map<Integer, T>, KMappedMarker {
     private final Sequence entrySequence = new SequencesKt__SequenceBuilderKt$sequence$$inlined$Sequence$1(new SparseArrayMapWrapper$entrySequence$1(this, null));
     private final Set<Integer> keys = new SparseArrayMapWrapper$keys$1(this);
     private final SparseArray<T> sparseArray;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Entry<T> implements Map.Entry<Integer, T>, KMappedMarker {
         private final int key;
         private final T value;
@@ -76,9 +78,9 @@ final class SparseArrayMapWrapper<T> implements Map<Integer, T>, KMappedMarker {
 
         @Override // java.util.Map.Entry
         public int hashCode() {
-            int hashCode = Integer.hashCode(this.key) * 31;
+            int iHashCode = Integer.hashCode(this.key) * 31;
             T t = this.value;
-            return hashCode + (t == null ? 0 : t.hashCode());
+            return iHashCode + (t == null ? 0 : t.hashCode());
         }
 
         @Override // java.util.Map.Entry
@@ -88,6 +90,101 @@ final class SparseArrayMapWrapper<T> implements Map<Integer, T>, KMappedMarker {
 
         public String toString() {
             return "Entry(key=" + this.key + ", value=" + this.value + ")";
+        }
+    }
+
+    /* renamed from: com.android.systemui.util.SparseArrayMapWrapper$values$1, reason: invalid class name */
+    public final class AnonymousClass1 implements Collection<Object>, KMappedMarker {
+        final /* synthetic */ SparseArrayMapWrapper<Object> this$0;
+        private final Sequence valueSequence;
+
+        public AnonymousClass1(SparseArrayMapWrapper<Object> sparseArrayMapWrapper) {
+            this.this$0 = sparseArrayMapWrapper;
+            this.valueSequence = new TransformingSequence(((SparseArrayMapWrapper) sparseArrayMapWrapper).entrySequence, new SparseArrayMapWrapper$keys$1$$ExternalSyntheticLambda0(1));
+        }
+
+        @Override // java.util.Collection
+        public boolean add(Object obj) {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+
+        @Override // java.util.Collection
+        public boolean addAll(Collection<? extends Object> collection) {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+
+        @Override // java.util.Collection
+        public void clear() {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+
+        @Override // java.util.Collection
+        public boolean contains(Object obj) {
+            return this.this$0.containsValue(obj);
+        }
+
+        @Override // java.util.Collection
+        public boolean containsAll(Collection<? extends Object> collection) {
+            Collection<? extends Object> collection2 = collection;
+            if (collection2.isEmpty()) {
+                return true;
+            }
+            Iterator<T> it = collection2.iterator();
+            while (it.hasNext()) {
+                if (!contains(it.next())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public int getSize() {
+            return this.this$0.size();
+        }
+
+        @Override // java.util.Collection
+        public boolean isEmpty() {
+            return this.this$0.isEmpty();
+        }
+
+        @Override // java.util.Collection, java.lang.Iterable
+        public Iterator<Object> iterator() {
+            return this.valueSequence.iterator();
+        }
+
+        @Override // java.util.Collection
+        public boolean remove(Object obj) {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+
+        @Override // java.util.Collection
+        public boolean removeAll(Collection<? extends Object> collection) {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+
+        @Override // java.util.Collection
+        public boolean removeIf(Predicate<? super Object> predicate) {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+
+        @Override // java.util.Collection
+        public boolean retainAll(Collection<? extends Object> collection) {
+            throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        }
+
+        @Override // java.util.Collection
+        public final /* bridge */ int size() {
+            return getSize();
+        }
+
+        @Override // java.util.Collection
+        public Object[] toArray() {
+            return CollectionToArray.toArray(this);
+        }
+
+        @Override // java.util.Collection
+        public <T> T[] toArray(T[] tArr) {
+            return (T[]) CollectionToArray.toArray(this, tArr);
         }
     }
 
@@ -154,7 +251,7 @@ final class SparseArrayMapWrapper<T> implements Map<Integer, T>, KMappedMarker {
     }
 
     public Collection<T> getValues() {
-        return new SparseArrayMapWrapper$values$1(this);
+        return new AnonymousClass1(this);
     }
 
     @Override // java.util.Map

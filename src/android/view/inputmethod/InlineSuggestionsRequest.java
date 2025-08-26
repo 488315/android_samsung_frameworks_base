@@ -228,27 +228,27 @@ public final class InlineSuggestionsRequest implements Parcelable {
     }
 
     InlineSuggestionsRequest(Parcel parcel) {
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
         ArrayList arrayList = new ArrayList();
         parcel.readParcelableList(arrayList, InlinePresentationSpec.class.getClassLoader());
-        String readString = parcel.readString();
+        String string = parcel.readString();
         LocaleList localeList = (LocaleList) parcel.readTypedObject(LocaleList.CREATOR);
-        Bundle readBundle = parcel.readBundle();
-        IBinder unparcelHostInputToken = unparcelHostInputToken(parcel);
-        int readInt3 = parcel.readInt();
-        InlinePresentationSpec inlinePresentationSpec = (readInt & 128) == 0 ? null : (InlinePresentationSpec) parcel.readTypedObject(InlinePresentationSpec.CREATOR);
-        this.mMaxSuggestionCount = readInt2;
+        Bundle bundle = parcel.readBundle();
+        IBinder iBinderUnparcelHostInputToken = unparcelHostInputToken(parcel);
+        int i3 = parcel.readInt();
+        InlinePresentationSpec inlinePresentationSpec = (i & 128) == 0 ? null : (InlinePresentationSpec) parcel.readTypedObject(InlinePresentationSpec.CREATOR);
+        this.mMaxSuggestionCount = i2;
         this.mInlinePresentationSpecs = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
-        this.mHostPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
+        this.mHostPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
         this.mSupportedLocales = localeList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) localeList);
-        this.mExtras = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
-        this.mHostInputToken = unparcelHostInputToken;
-        this.mHostDisplayId = readInt3;
+        this.mExtras = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
+        this.mHostInputToken = iBinderUnparcelHostInputToken;
+        this.mHostDisplayId = i3;
         this.mInlineTooltipPresentationSpec = inlinePresentationSpec;
         onConstructed();
     }

@@ -4,12 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LSOImageView extends ImageView {
     public LSOImageView(Context context, LSOItemImage lSOItemImage) {
-        super(context);
         Bitmap maxBitmap;
+        super(context);
         int maxImageSize = LSOUtils.getMaxImageSize(context);
         int maxImageSize2 = LSOUtils.getMaxImageSize(context);
         if (lSOItemImage.isFieldUpdated(64)) {

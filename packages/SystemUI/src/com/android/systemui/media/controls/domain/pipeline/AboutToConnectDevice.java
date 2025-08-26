@@ -5,12 +5,12 @@ import com.android.systemui.media.controls.shared.model.MediaDeviceData;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AboutToConnectDevice {
     public final MediaDeviceData backupMediaDeviceData;
     public final MediaDevice fullMediaDevice;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public AboutToConnectDevice() {
         this(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
     }
@@ -28,9 +28,9 @@ public final class AboutToConnectDevice {
 
     public final int hashCode() {
         MediaDevice mediaDevice = this.fullMediaDevice;
-        int hashCode = (mediaDevice == null ? 0 : mediaDevice.hashCode()) * 31;
+        int iHashCode = (mediaDevice == null ? 0 : mediaDevice.hashCode()) * 31;
         MediaDeviceData mediaDeviceData = this.backupMediaDeviceData;
-        return hashCode + (mediaDeviceData != null ? mediaDeviceData.hashCode() : 0);
+        return iHashCode + (mediaDeviceData != null ? mediaDeviceData.hashCode() : 0);
     }
 
     public final String toString() {

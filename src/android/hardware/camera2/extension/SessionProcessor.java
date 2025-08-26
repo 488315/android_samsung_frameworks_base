@@ -79,15 +79,15 @@ public abstract class SessionProcessor {
             this.mPreviewSurface = outputSurface;
             this.mPostviewSurface = outputSurface3;
             this.mImageCaptureSurface = outputSurface2;
-            ExtensionConfiguration initSession = SessionProcessor.this.initSession(iBinder, str, new CharacteristicsMap(map), new CameraOutputSurface(outputSurface), new CameraOutputSurface(outputSurface2));
-            if (initSession == null) {
+            ExtensionConfiguration extensionConfigurationInitSession = SessionProcessor.this.initSession(iBinder, str, new CharacteristicsMap(map), new CameraOutputSurface(outputSurface), new CameraOutputSurface(outputSurface2));
+            if (extensionConfigurationInitSession == null) {
                 throw new IllegalArgumentException("Invalid extension configuration");
             }
             ArrayList allVendorKeys = map.get(str).getAllVendorKeys(CameraCharacteristics.Key.class);
             if (allVendorKeys != null && !allVendorKeys.isEmpty()) {
                 this.mVendorId = ((CameraCharacteristics.Key) allVendorKeys.get(0)).getVendorId();
             }
-            return initSession.getCameraSessionConfig();
+            return extensionConfigurationInitSession.getCameraSessionConfig();
         }
 
         @Override // android.hardware.camera2.extension.ISessionProcessorImpl

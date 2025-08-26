@@ -24,7 +24,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__IndentKt;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CarrierMergedConnectionRepositoryKairos implements MobileConnectionRepositoryKairos, KairosBuilder {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -58,7 +57,6 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
     public final TelephonyManager telephonyManager;
     public final WifiRepository wifiRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -68,7 +66,6 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory {
         public final TelephonyManager telephonyManager;
         public final WifiRepository wifiRepository;
@@ -95,7 +92,7 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
             throw new IllegalStateException(StringsKt__IndentKt.trimMargin$default("CarrierMergedRepo: TelephonyManager should be created with subId(" + i + ").\n                    | Found " + telephonyManager.getSubscriptionId() + " instead.").toString());
         }
         final int i2 = 0;
-        State buildState = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda0
+        State stateBuildState = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda0
             public final /* synthetic */ CarrierMergedConnectionRepositoryKairos f$0;
 
             {
@@ -104,19 +101,19 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i2) {
                     case 0:
-                        StateFlow isWifiEnabled = this.f$0.wifiRepository.isWifiEnabled();
+                        StateFlow stateFlowIsWifiEnabled = this.f$0.wifiRepository.isWifiEnabled();
                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope;
                         buildScopeImpl.getClass();
-                        return BuildScope.DefaultImpls.toState(buildScopeImpl, isWifiEnabled);
+                        return BuildScope.DefaultImpls.toState(buildScopeImpl, stateFlowIsWifiEnabled);
                     case 1:
-                        StateFlow isWifiDefault = this.f$0.wifiRepository.isWifiDefault();
+                        StateFlow stateFlowIsWifiDefault = this.f$0.wifiRepository.isWifiDefault();
                         BuildScopeImpl buildScopeImpl2 = (BuildScopeImpl) buildScope;
                         buildScopeImpl2.getClass();
-                        return BuildScope.DefaultImpls.toState(buildScopeImpl2, isWifiDefault);
+                        return BuildScope.DefaultImpls.toState(buildScopeImpl2, stateFlowIsWifiDefault);
                     case 2:
                         StateFlow wifiNetwork = this.f$0.wifiRepository.getWifiNetwork();
                         BuildScopeImpl buildScopeImpl3 = (BuildScopeImpl) buildScope;
@@ -130,9 +127,9 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
                 }
             }
         });
-        this.isWifiEnabled = buildState;
+        this.isWifiEnabled = stateBuildState;
         final int i3 = 1;
-        State buildState2 = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda0
+        State stateBuildState2 = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda0
             public final /* synthetic */ CarrierMergedConnectionRepositoryKairos f$0;
 
             {
@@ -141,19 +138,19 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i3) {
                     case 0:
-                        StateFlow isWifiEnabled = this.f$0.wifiRepository.isWifiEnabled();
+                        StateFlow stateFlowIsWifiEnabled = this.f$0.wifiRepository.isWifiEnabled();
                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope;
                         buildScopeImpl.getClass();
-                        return BuildScope.DefaultImpls.toState(buildScopeImpl, isWifiEnabled);
+                        return BuildScope.DefaultImpls.toState(buildScopeImpl, stateFlowIsWifiEnabled);
                     case 1:
-                        StateFlow isWifiDefault = this.f$0.wifiRepository.isWifiDefault();
+                        StateFlow stateFlowIsWifiDefault = this.f$0.wifiRepository.isWifiDefault();
                         BuildScopeImpl buildScopeImpl2 = (BuildScopeImpl) buildScope;
                         buildScopeImpl2.getClass();
-                        return BuildScope.DefaultImpls.toState(buildScopeImpl2, isWifiDefault);
+                        return BuildScope.DefaultImpls.toState(buildScopeImpl2, stateFlowIsWifiDefault);
                     case 2:
                         StateFlow wifiNetwork = this.f$0.wifiRepository.getWifiNetwork();
                         BuildScopeImpl buildScopeImpl3 = (BuildScopeImpl) buildScope;
@@ -168,7 +165,7 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
             }
         });
         final int i4 = 2;
-        State buildState3 = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda0
+        State stateBuildState3 = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda0
             public final /* synthetic */ CarrierMergedConnectionRepositoryKairos f$0;
 
             {
@@ -177,19 +174,19 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i4) {
                     case 0:
-                        StateFlow isWifiEnabled = this.f$0.wifiRepository.isWifiEnabled();
+                        StateFlow stateFlowIsWifiEnabled = this.f$0.wifiRepository.isWifiEnabled();
                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope;
                         buildScopeImpl.getClass();
-                        return BuildScope.DefaultImpls.toState(buildScopeImpl, isWifiEnabled);
+                        return BuildScope.DefaultImpls.toState(buildScopeImpl, stateFlowIsWifiEnabled);
                     case 1:
-                        StateFlow isWifiDefault = this.f$0.wifiRepository.isWifiDefault();
+                        StateFlow stateFlowIsWifiDefault = this.f$0.wifiRepository.isWifiDefault();
                         BuildScopeImpl buildScopeImpl2 = (BuildScopeImpl) buildScope;
                         buildScopeImpl2.getClass();
-                        return BuildScope.DefaultImpls.toState(buildScopeImpl2, isWifiDefault);
+                        return BuildScope.DefaultImpls.toState(buildScopeImpl2, stateFlowIsWifiDefault);
                     case 2:
                         StateFlow wifiNetwork = this.f$0.wifiRepository.getWifiNetwork();
                         BuildScopeImpl buildScopeImpl3 = (BuildScopeImpl) buildScope;
@@ -203,19 +200,19 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
                 }
             }
         });
-        StateInit combine = CombineKt.combine(buildState, buildState2, buildState3, new Function4() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda4
+        StateInit stateInitCombine = CombineKt.combine(stateBuildState, stateBuildState2, stateBuildState3, new Function4() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda4
             @Override // kotlin.jvm.functions.Function4
             public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-                boolean booleanValue = ((Boolean) obj2).booleanValue();
-                boolean booleanValue2 = ((Boolean) obj3).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
                 WifiNetworkModel wifiNetworkModel = (WifiNetworkModel) obj4;
                 int i5 = CarrierMergedConnectionRepositoryKairos.$r8$clinit;
-                if (!booleanValue || !booleanValue2 || !(wifiNetworkModel instanceof WifiNetworkModel.CarrierMerged)) {
+                if (!zBooleanValue || !zBooleanValue2 || !(wifiNetworkModel instanceof WifiNetworkModel.CarrierMerged)) {
                     return null;
                 }
                 WifiNetworkModel.CarrierMerged carrierMerged = (WifiNetworkModel.CarrierMerged) wifiNetworkModel;
                 int i6 = carrierMerged.subscriptionId;
-                int i7 = CarrierMergedConnectionRepositoryKairos.this.subId;
+                int i7 = this.f$0.subId;
                 if (i6 == i7) {
                     return carrierMerged;
                 }
@@ -223,17 +220,17 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
                 return null;
             }
         });
-        this.network = combine;
+        this.network = stateInitCombine;
         Boolean bool = Boolean.FALSE;
         this.cdmaRoaming = StateKt.stateOf(bool);
-        this.networkName = StateKt.map(combine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda5
+        this.networkName = StateKt.map(stateInitCombine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda5
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return new NetworkNameModel.SimDerived(CarrierMergedConnectionRepositoryKairos.this.telephonyManager.getSimOperatorName());
+                return new NetworkNameModel.SimDerived(this.f$0.telephonyManager.getSimOperatorName());
             }
         });
         final int i5 = 2;
-        this.numberOfLevels = StateKt.map(buildState3, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.numberOfLevels = StateKt.map(stateBuildState3, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 int i6;
@@ -268,7 +265,7 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
             }
         });
         final int i6 = 3;
-        this.primaryLevel = StateKt.map(combine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.primaryLevel = StateKt.map(stateInitCombine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 int i62;
@@ -303,7 +300,7 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
             }
         });
         final int i7 = 4;
-        this.cdmaLevel = StateKt.map(combine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.cdmaLevel = StateKt.map(stateInitCombine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 int i62;
@@ -347,19 +344,19 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i8) {
                     case 0:
-                        StateFlow isWifiEnabled = this.f$0.wifiRepository.isWifiEnabled();
+                        StateFlow stateFlowIsWifiEnabled = this.f$0.wifiRepository.isWifiEnabled();
                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope;
                         buildScopeImpl.getClass();
-                        return BuildScope.DefaultImpls.toState(buildScopeImpl, isWifiEnabled);
+                        return BuildScope.DefaultImpls.toState(buildScopeImpl, stateFlowIsWifiEnabled);
                     case 1:
-                        StateFlow isWifiDefault = this.f$0.wifiRepository.isWifiDefault();
+                        StateFlow stateFlowIsWifiDefault = this.f$0.wifiRepository.isWifiDefault();
                         BuildScopeImpl buildScopeImpl2 = (BuildScopeImpl) buildScope;
                         buildScopeImpl2.getClass();
-                        return BuildScope.DefaultImpls.toState(buildScopeImpl2, isWifiDefault);
+                        return BuildScope.DefaultImpls.toState(buildScopeImpl2, stateFlowIsWifiDefault);
                     case 2:
                         StateFlow wifiNetwork = this.f$0.wifiRepository.getWifiNetwork();
                         BuildScopeImpl buildScopeImpl3 = (BuildScopeImpl) buildScope;
@@ -374,7 +371,7 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
             }
         });
         final int i9 = 1;
-        this.resolvedNetworkType = StateKt.map(combine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.resolvedNetworkType = StateKt.map(stateInitCombine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 int i62;
@@ -409,7 +406,7 @@ public final class CarrierMergedConnectionRepositoryKairos implements MobileConn
             }
         });
         final int i10 = 0;
-        this.dataConnectionState = StateKt.map(combine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.dataConnectionState = StateKt.map(stateInitCombine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CarrierMergedConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 int i62;

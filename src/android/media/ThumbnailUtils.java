@@ -70,9 +70,9 @@ public class ThumbnailUtils {
                 cancellationSignal.throwIfCanceled();
             }
             imageDecoder.setAllocator(1);
-            int max = Math.max(imageInfo.getSize().getWidth() / this.size.getWidth(), imageInfo.getSize().getHeight() / this.size.getHeight());
-            if (max > 1) {
-                imageDecoder.setTargetSampleSize(max);
+            int iMax = Math.max(imageInfo.getSize().getWidth() / this.size.getWidth(), imageInfo.getSize().getHeight() / this.size.getHeight());
+            if (iMax > 1) {
+                imageDecoder.setTargetSampleSize(iMax);
             }
         }
     }
@@ -98,9 +98,9 @@ public class ThumbnailUtils {
                 mediaMetadataRetriever.setDataSource(file.getAbsolutePath());
                 byte[] embeddedPicture = mediaMetadataRetriever.getEmbeddedPicture();
                 if (embeddedPicture != null) {
-                    Bitmap decodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(embeddedPicture), resizer);
+                    Bitmap bitmapDecodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(embeddedPicture), resizer);
                     mediaMetadataRetriever.close();
-                    return decodeBitmap;
+                    return bitmapDecodeBitmap;
                 }
                 mediaMetadataRetriever.close();
                 if ("unknown".equals(Environment.getExternalStorageState(file))) {
@@ -114,7 +114,7 @@ public class ThumbnailUtils {
                 if (parentFile2 != null && "unknown".equals(Environment.getExternalStorageState(parentFile2))) {
                     throw new IOException("No thumbnails in top-level directories");
                 }
-                File[] defeatNullable = ArrayUtils.defeatNullable(file.getParentFile().listFiles(new FilenameFilter() { // from class: android.media.ThumbnailUtils$$ExternalSyntheticLambda0
+                File[] fileArrDefeatNullable = ArrayUtils.defeatNullable(file.getParentFile().listFiles(new FilenameFilter() { // from class: android.media.ThumbnailUtils$$ExternalSyntheticLambda0
                     @Override // java.io.FilenameFilter
                     public final boolean accept(File file2, String str) {
                         return ThumbnailUtils.lambda$createAudioThumbnail$0(file2, str);
@@ -126,7 +126,7 @@ public class ThumbnailUtils {
                         return ThumbnailUtils.lambda$createAudioThumbnail$1((File) obj);
                     }
                 };
-                File file2 = (File) Arrays.asList(defeatNullable).stream().max(new Comparator() { // from class: android.media.ThumbnailUtils$$ExternalSyntheticLambda2
+                File file2 = (File) Arrays.asList(fileArrDefeatNullable).stream().max(new Comparator() { // from class: android.media.ThumbnailUtils$$ExternalSyntheticLambda2
                     @Override // java.util.Comparator
                     public final int compare(Object obj, Object obj2) {
                         return ThumbnailUtils.lambda$createAudioThumbnail$2(toIntFunction, (File) obj, (File) obj2);
@@ -188,7 +188,7 @@ public class ThumbnailUtils {
         Resizer resizer = new Resizer(size, cancellationSignal);
         String mimeTypeForFile = MediaFile.getMimeTypeForFile(file.getName());
         int i = 0;
-        Bitmap bitmap = null;
+        Bitmap bitmapDecodeBitmap = null;
         if (MediaFile.isExifMimeType(mimeTypeForFile)) {
             exifInterface = new ExifInterface(file);
             int attributeInt = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0);
@@ -209,35 +209,35 @@ public class ThumbnailUtils {
                     mediaMetadataRetriever.setDataSource(file.getAbsolutePath());
                     Bitmap thumbnailImageAtIndex = mediaMetadataRetriever.getThumbnailImageAtIndex(-1, new MediaMetadataRetriever.BitmapParams(), size.getWidth(), size.getWidth() * size.getHeight());
                     mediaMetadataRetriever.close();
-                    bitmap = thumbnailImageAtIndex;
+                    bitmapDecodeBitmap = thumbnailImageAtIndex;
                 } finally {
                 }
             } catch (RuntimeException e) {
                 throw new IOException("Failed to create thumbnail", e);
             }
         }
-        if (bitmap == null && exifInterface != null && (thumbnailBytes = exifInterface.getThumbnailBytes()) != null) {
+        if (bitmapDecodeBitmap == null && exifInterface != null && (thumbnailBytes = exifInterface.getThumbnailBytes()) != null) {
             try {
-                bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(thumbnailBytes), resizer);
+                bitmapDecodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(thumbnailBytes), resizer);
             } catch (ImageDecoder.DecodeException e2) {
                 Log.w(TAG, e2);
             }
         }
-        Bitmap bitmap2 = bitmap;
+        Bitmap bitmap = bitmapDecodeBitmap;
         if (cancellationSignal != null) {
             cancellationSignal.throwIfCanceled();
         }
-        if (bitmap2 == null) {
+        if (bitmap == null) {
             return ImageDecoder.decodeBitmap(ImageDecoder.createSource(file), resizer);
         }
-        if (i == 0 || bitmap2 == null) {
-            return bitmap2;
+        if (i == 0 || bitmap == null) {
+            return bitmap;
         }
-        int width = bitmap2.getWidth();
-        int height = bitmap2.getHeight();
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
         Matrix matrix = new Matrix();
         matrix.setRotate(i, width / 2, height / 2);
-        return Bitmap.createBitmap(bitmap2, 0, 0, width, height, matrix, false);
+        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, false);
     }
 
     @Deprecated
@@ -251,7 +251,7 @@ public class ThumbnailUtils {
     }
 
     public static Bitmap createVideoThumbnail(File file, Size size, CancellationSignal cancellationSignal) throws IOException {
-        Bitmap bitmap;
+        Bitmap bitmapDecodeBitmap;
         if (cancellationSignal != null) {
             cancellationSignal.throwIfCanceled();
         }
@@ -262,21 +262,21 @@ public class ThumbnailUtils {
                 mediaMetadataRetriever.setDataSource(file.getAbsolutePath());
                 byte[] embeddedPicture = mediaMetadataRetriever.getEmbeddedPicture();
                 if (embeddedPicture != null) {
-                    bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(embeddedPicture), resizer);
+                    bitmapDecodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(embeddedPicture), resizer);
                 } else {
                     MediaMetadataRetriever.BitmapParams bitmapParams = new MediaMetadataRetriever.BitmapParams();
                     bitmapParams.setPreferredConfig(Bitmap.Config.ARGB_8888);
-                    int parseInt = Integer.parseInt(mediaMetadataRetriever.extractMetadata(18));
-                    int parseInt2 = Integer.parseInt(mediaMetadataRetriever.extractMetadata(19));
-                    long parseLong = (Long.parseLong(mediaMetadataRetriever.extractMetadata(9)) * 1000) / 2;
-                    if (size.getWidth() > parseInt && size.getHeight() > parseInt2) {
-                        bitmap = (Bitmap) Objects.requireNonNull(mediaMetadataRetriever.getFrameAtTime(parseLong, 2, bitmapParams));
+                    int i = Integer.parseInt(mediaMetadataRetriever.extractMetadata(18));
+                    int i2 = Integer.parseInt(mediaMetadataRetriever.extractMetadata(19));
+                    long j = (Long.parseLong(mediaMetadataRetriever.extractMetadata(9)) * 1000) / 2;
+                    if (size.getWidth() > i && size.getHeight() > i2) {
+                        bitmapDecodeBitmap = (Bitmap) Objects.requireNonNull(mediaMetadataRetriever.getFrameAtTime(j, 2, bitmapParams));
                     } else {
-                        bitmap = (Bitmap) Objects.requireNonNull(mediaMetadataRetriever.getScaledFrameAtTime(parseLong, 2, size.getWidth(), size.getHeight(), bitmapParams));
+                        bitmapDecodeBitmap = (Bitmap) Objects.requireNonNull(mediaMetadataRetriever.getScaledFrameAtTime(j, 2, size.getWidth(), size.getHeight(), bitmapParams));
                     }
                 }
                 mediaMetadataRetriever.close();
-                return bitmap;
+                return bitmapDecodeBitmap;
             } finally {
             }
         } catch (RuntimeException e) {
@@ -330,26 +330,26 @@ public class ThumbnailUtils {
         int height = bitmap.getHeight() - i2;
         Matrix matrix3 = null;
         if (!z && (width < 0 || height < 0)) {
-            Bitmap createBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(createBitmap);
-            int max = Math.max(0, width / 2);
-            int max2 = Math.max(0, height / 2);
-            Rect rect = new Rect(max, max2, Math.min(i, bitmap.getWidth()) + max, Math.min(i2, bitmap.getHeight()) + max2);
-            int width2 = (i - rect.width()) / 2;
-            int height2 = (i2 - rect.height()) / 2;
-            canvas.drawBitmap(bitmap, rect, new Rect(width2, height2, i - width2, i2 - height2), (Paint) null);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
+            int iMax = Math.max(0, width / 2);
+            int iMax2 = Math.max(0, height / 2);
+            Rect rect = new Rect(iMax, iMax2, Math.min(i, bitmap.getWidth()) + iMax, Math.min(i2, bitmap.getHeight()) + iMax2);
+            int iWidth = (i - rect.width()) / 2;
+            int iHeight = (i2 - rect.height()) / 2;
+            canvas.drawBitmap(bitmap, rect, new Rect(iWidth, iHeight, i - iWidth, i2 - iHeight), (Paint) null);
             if (z2) {
                 bitmap.recycle();
             }
             canvas.setBitmap(null);
-            return createBitmap;
+            return bitmapCreateBitmap;
         }
-        float width3 = bitmap.getWidth();
-        float height3 = bitmap.getHeight();
+        float width2 = bitmap.getWidth();
+        float height2 = bitmap.getHeight();
         float f = i;
         float f2 = i2;
-        if (width3 / height3 > f / f2) {
-            float f3 = f2 / height3;
+        if (width2 / height2 > f / f2) {
+            float f3 = f2 / height2;
             if (f3 < 0.9f || f3 > 1.0f) {
                 matrix.setScale(f3, f3);
                 matrix2 = matrix;
@@ -358,21 +358,21 @@ public class ThumbnailUtils {
             }
             matrix3 = matrix2;
         } else {
-            float f4 = f / width3;
+            float f4 = f / width2;
             if (f4 < 0.9f || f4 > 1.0f) {
                 matrix.setScale(f4, f4);
                 matrix3 = matrix;
             }
         }
-        Bitmap createBitmap2 = matrix3 != null ? Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix3, true) : bitmap;
-        if (z2 && createBitmap2 != bitmap) {
+        Bitmap bitmapCreateBitmap2 = matrix3 != null ? Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix3, true) : bitmap;
+        if (z2 && bitmapCreateBitmap2 != bitmap) {
             bitmap.recycle();
         }
-        Bitmap createBitmap3 = Bitmap.createBitmap(createBitmap2, Math.max(0, createBitmap2.getWidth() - i) / 2, Math.max(0, createBitmap2.getHeight() - i2) / 2, i, i2);
-        if (createBitmap3 != createBitmap2 && (z2 || createBitmap2 != bitmap)) {
-            createBitmap2.recycle();
+        Bitmap bitmapCreateBitmap3 = Bitmap.createBitmap(bitmapCreateBitmap2, Math.max(0, bitmapCreateBitmap2.getWidth() - i) / 2, Math.max(0, bitmapCreateBitmap2.getHeight() - i2) / 2, i, i2);
+        if (bitmapCreateBitmap3 != bitmapCreateBitmap2 && (z2 || bitmapCreateBitmap2 != bitmap)) {
+            bitmapCreateBitmap2.recycle();
         }
-        return createBitmap3;
+        return bitmapCreateBitmap3;
     }
 
     @Deprecated

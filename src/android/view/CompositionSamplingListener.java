@@ -60,7 +60,7 @@ public abstract class CompositionSamplingListener {
         compositionSamplingListener.mExecutor.execute(new Runnable() { // from class: android.view.CompositionSamplingListener$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                CompositionSamplingListener.this.onSampleCollected(f);
+                this.f$0.onSampleCollected(f);
             }
         });
     }

@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.ColorKt;
 import androidx.compose.ui.util.MathHelpersKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Oklab extends ColorSpace {
     public static final float[] InverseM1;
@@ -12,7 +11,6 @@ public final class Oklab extends ColorSpace {
     public static final float[] M1;
     public static final float[] M2;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -27,11 +25,11 @@ public final class Oklab extends ColorSpace {
         Adaptation.Companion.getClass();
         float[] fArr = Adaptation.Bradford.transform;
         Illuminant.INSTANCE.getClass();
-        float[] mul3x3 = ColorSpaceKt.mul3x3(new float[]{0.818933f, 0.032984544f, 0.0482003f, 0.36186674f, 0.9293119f, 0.26436627f, -0.12885971f, 0.03614564f, 0.6338517f}, ColorSpaceKt.chromaticAdaptation(fArr, Illuminant.D50.toXyz$ui_graphics_release(), Illuminant.D65.toXyz$ui_graphics_release()));
-        M1 = mul3x3;
+        float[] fArrMul3x3 = ColorSpaceKt.mul3x3(new float[]{0.818933f, 0.032984544f, 0.0482003f, 0.36186674f, 0.9293119f, 0.26436627f, -0.12885971f, 0.03614564f, 0.6338517f}, ColorSpaceKt.chromaticAdaptation(fArr, Illuminant.D50.toXyz$ui_graphics_release(), Illuminant.D65.toXyz$ui_graphics_release()));
+        M1 = fArrMul3x3;
         float[] fArr2 = {0.21045426f, 1.9779985f, 0.025904037f, 0.7936178f, -2.4285922f, 0.78277177f, -0.004072047f, 0.4505937f, -0.80867577f};
         M2 = fArr2;
-        InverseM1 = ColorSpaceKt.inverse3x3(mul3x3);
+        InverseM1 = ColorSpaceKt.inverse3x3(fArrMul3x3);
         InverseM2 = ColorSpaceKt.inverse3x3(fArr2);
     }
 
@@ -153,15 +151,15 @@ public final class Oklab extends ColorSpace {
 
     @Override // androidx.compose.ui.graphics.colorspace.ColorSpace
     /* renamed from: xyzaToColor-JlNiLsg$ui_graphics_release */
-    public final long mo510xyzaToColorJlNiLsg$ui_graphics_release(float f, float f2, float f3, float f4, ColorSpace colorSpace) {
+    public final long mo512xyzaToColorJlNiLsg$ui_graphics_release(float f, float f2, float f3, float f4, ColorSpace colorSpace) {
         float[] fArr = M1;
         float f5 = (fArr[6] * f3) + (fArr[3] * f2) + (fArr[0] * f);
         float f6 = (fArr[7] * f3) + (fArr[4] * f2) + (fArr[1] * f);
         float f7 = (fArr[8] * f3) + (fArr[5] * f2) + (fArr[2] * f);
-        float fastCbrt = MathHelpersKt.fastCbrt(f5);
-        float fastCbrt2 = MathHelpersKt.fastCbrt(f6);
-        float fastCbrt3 = MathHelpersKt.fastCbrt(f7);
+        float fFastCbrt = MathHelpersKt.fastCbrt(f5);
+        float fFastCbrt2 = MathHelpersKt.fastCbrt(f6);
+        float fFastCbrt3 = MathHelpersKt.fastCbrt(f7);
         float[] fArr2 = M2;
-        return ColorKt.Color((fArr2[6] * fastCbrt3) + (fArr2[3] * fastCbrt2) + (fArr2[0] * fastCbrt), (fArr2[7] * fastCbrt3) + (fArr2[4] * fastCbrt2) + (fArr2[1] * fastCbrt), (fArr2[8] * fastCbrt3) + (fArr2[5] * fastCbrt2) + (fArr2[2] * fastCbrt), f4, colorSpace);
+        return ColorKt.Color((fArr2[6] * fFastCbrt3) + (fArr2[3] * fFastCbrt2) + (fArr2[0] * fFastCbrt), (fArr2[7] * fFastCbrt3) + (fArr2[4] * fFastCbrt2) + (fArr2[1] * fFastCbrt), (fArr2[8] * fFastCbrt3) + (fArr2[5] * fFastCbrt2) + (fArr2[2] * fFastCbrt), f4, colorSpace);
     }
 }

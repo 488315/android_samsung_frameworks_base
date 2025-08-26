@@ -35,7 +35,7 @@ public class LogoutActionViewModel implements ActionViewModel {
         this.mHandler.postDelayed(new Runnable() { // from class: com.samsung.android.globalactions.presentation.viewmodel.LogoutActionViewModel$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                LogoutActionViewModel.this.lambda$onPress$0();
+                this.f$0.lambda$onPress$0();
             }
         }, 500L);
         this.mGlobalActions.dismissDialog(true);

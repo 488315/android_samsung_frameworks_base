@@ -23,7 +23,7 @@ public final class DumpableContainerImpl implements DumpableContainer {
         Objects.requireNonNull(dumpableName, (Supplier<String>) new Supplier() { // from class: com.android.internal.util.dump.DumpableContainerImpl$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                return DumpableContainerImpl.lambda$addDumpable$0(Dumpable.this);
+                return DumpableContainerImpl.lambda$addDumpable$0(dumpable);
             }
         });
         if (this.mDumpables.containsKey(dumpableName)) {
@@ -66,15 +66,15 @@ public final class DumpableContainerImpl implements DumpableContainer {
 
     public void listDumpables(String str, PrintWriter printWriter) {
         IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, str, str);
-        int dumpNumberDumpables = dumpNumberDumpables(indentingPrintWriter);
-        if (dumpNumberDumpables == 0) {
+        int iDumpNumberDumpables = dumpNumberDumpables(indentingPrintWriter);
+        if (iDumpNumberDumpables == 0) {
             indentingPrintWriter.println();
             return;
         }
         indentingPrintWriter.print(": ");
-        for (int i = 0; i < dumpNumberDumpables; i++) {
+        for (int i = 0; i < iDumpNumberDumpables; i++) {
             indentingPrintWriter.print(this.mDumpables.keyAt(i));
-            if (i < dumpNumberDumpables - 1) {
+            if (i < iDumpNumberDumpables - 1) {
                 indentingPrintWriter.print(' ');
             }
         }
@@ -83,18 +83,18 @@ public final class DumpableContainerImpl implements DumpableContainer {
 
     public void dumpAllDumpables(String str, PrintWriter printWriter, String[] strArr) {
         IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, str, str);
-        int dumpNumberDumpables = dumpNumberDumpables(indentingPrintWriter);
-        if (dumpNumberDumpables == 0) {
+        int iDumpNumberDumpables = dumpNumberDumpables(indentingPrintWriter);
+        if (iDumpNumberDumpables == 0) {
             indentingPrintWriter.println();
             return;
         }
         indentingPrintWriter.println(":");
-        for (int i = 0; i < dumpNumberDumpables; i++) {
-            String keyAt = this.mDumpables.keyAt(i);
+        for (int i = 0; i < iDumpNumberDumpables; i++) {
+            String strKeyAt = this.mDumpables.keyAt(i);
             indentingPrintWriter.print('#');
             indentingPrintWriter.print(i);
             indentingPrintWriter.print(": ");
-            indentingPrintWriter.println(keyAt);
+            indentingPrintWriter.println(strKeyAt);
             indentAndDump(indentingPrintWriter, this.mDumpables.valueAt(i), strArr);
         }
     }

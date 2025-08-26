@@ -15,7 +15,6 @@ import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 import com.samsung.android.globalactions.presentation.viewmodel.ViewType;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SideCoverContentItemView {
     public final Context mContext;
@@ -58,7 +57,7 @@ public class SideCoverContentItemView {
             view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.globalactions.presentation.view.SideCoverContentItemView$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view2) {
-                    SideCoverContentItemView.this.mViewModel.onPress();
+                    this.f$0.mViewModel.onPress();
                 }
             });
         }

@@ -21,7 +21,6 @@ import com.samsung.android.knox.net.vpn.IKnoxVpnPolicy;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class GenericVpnPolicy {
     public static final float ERROR_SUPPORTED_VERSION = 2.4f;
@@ -65,42 +64,40 @@ public class GenericVpnPolicy {
     public static synchronized GenericVpnPolicy getInstance(Context context, KnoxVpnContext knoxVpnContext) {
         GenericVpnPolicy genericVpnPolicy;
         GenericVpnPolicy genericVpnPolicy2;
-        synchronized (GenericVpnPolicy.class) {
-            String str = knoxVpnContext.vendorName;
-            String transformedVendorName = getTransformedVendorName(str, knoxVpnContext.personaId);
-            boolean z = DBG;
-            if (z) {
-                Log.d(TAG, "GenericVpnPolicy getInstance : vendorName = " + transformedVendorName);
-            }
-            genericVpnPolicy = null;
-            if (transformedVendorName != null) {
-                try {
-                    synchronized (GenericVpnPolicy.class) {
-                        try {
-                            if (genericVpnObjectMap.containsKey(transformedVendorName)) {
-                                genericVpnPolicy2 = genericVpnObjectMap.get(transformedVendorName);
-                            } else {
-                                GenericVpnPolicy genericVpnPolicy3 = new GenericVpnPolicy(context, knoxVpnContext);
-                                genericVpnObjectMap.put(transformedVendorName, genericVpnPolicy3);
-                                genericVpnPolicy2 = genericVpnPolicy3;
-                            }
-                            if (genericVpnPolicy2 != null && !KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG.equals(str)) {
-                                boolean bindKnoxVpnInterface = getKnoxVpnPolicyService().bindKnoxVpnInterface(knoxVpnContext);
-                                if (z) {
-                                    Log.d(TAG, "GenericVpnPolicy getInstance : bindSuccess = " + bindKnoxVpnInterface);
-                                }
-                                if (!bindKnoxVpnInterface) {
-                                    genericVpnObjectMap.remove(transformedVendorName);
-                                    genericVpnPolicy2 = null;
-                                }
-                            }
-                            genericVpnPolicy = genericVpnPolicy2;
-                        } finally {
+        String str = knoxVpnContext.vendorName;
+        String transformedVendorName = getTransformedVendorName(str, knoxVpnContext.personaId);
+        boolean z = DBG;
+        if (z) {
+            Log.d(TAG, "GenericVpnPolicy getInstance : vendorName = " + transformedVendorName);
+        }
+        genericVpnPolicy = null;
+        if (transformedVendorName != null) {
+            try {
+                synchronized (GenericVpnPolicy.class) {
+                    try {
+                        if (genericVpnObjectMap.containsKey(transformedVendorName)) {
+                            genericVpnPolicy2 = genericVpnObjectMap.get(transformedVendorName);
+                        } else {
+                            GenericVpnPolicy genericVpnPolicy3 = new GenericVpnPolicy(context, knoxVpnContext);
+                            genericVpnObjectMap.put(transformedVendorName, genericVpnPolicy3);
+                            genericVpnPolicy2 = genericVpnPolicy3;
                         }
+                        if (genericVpnPolicy2 != null && !KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG.equals(str)) {
+                            boolean zBindKnoxVpnInterface = getKnoxVpnPolicyService().bindKnoxVpnInterface(knoxVpnContext);
+                            if (z) {
+                                Log.d(TAG, "GenericVpnPolicy getInstance : bindSuccess = " + zBindKnoxVpnInterface);
+                            }
+                            if (!zBindKnoxVpnInterface) {
+                                genericVpnObjectMap.remove(transformedVendorName);
+                                genericVpnPolicy2 = null;
+                            }
+                        }
+                        genericVpnPolicy = genericVpnPolicy2;
+                    } finally {
                     }
-                } catch (RemoteException e) {
-                    Log.e(TAG, "GenericVpnPolicy getInstance : returning null for vendorName = " + str + "; Exception = " + Log.getStackTraceString(e));
                 }
+            } catch (RemoteException e) {
+                Log.e(TAG, "GenericVpnPolicy getInstance : returning null for vendorName = " + str + "; Exception = " + Log.getStackTraceString(e));
             }
         }
         return genericVpnPolicy;
@@ -127,13 +124,13 @@ public class GenericVpnPolicy {
                 return -1;
             }
             EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.activateVpnProfile");
-            EnterpriseResponseData activateVpnProfile = mKnoxVpnPolicyService.activateVpnProfile(this.vpnContext, str, z);
-            if (activateVpnProfile == null) {
+            EnterpriseResponseData enterpriseResponseDataActivateVpnProfile = mKnoxVpnPolicyService.activateVpnProfile(this.vpnContext, str, z);
+            if (enterpriseResponseDataActivateVpnProfile == null) {
                 Log.e(TAG, "activateVpnProfile >> mEnterpriseResponseData == null");
                 return -1;
             }
-            int intValue = ((Integer) activateVpnProfile.getData()).intValue();
-            if (intValue == 0 && z) {
+            int iIntValue = ((Integer) enterpriseResponseDataActivateVpnProfile.getData()).intValue();
+            if (iIntValue == 0 && z) {
                 Intent intent = new Intent();
                 int userId = UserHandle.getUserId(Binder.getCallingUid());
                 intent.setClassName("com.android.vpndialogs", "com.android.vpndialogs.KnoxVpnPPDialog");
@@ -141,10 +138,10 @@ public class GenericVpnPolicy {
                 if (mContext != null) {
                     Log.d(TAG, "startActivityAsUser  KnoxVpnPPDialog userId = " + userId);
                     mContext.startActivityAsUser(intent, new UserHandle(userId));
-                    return intValue;
+                    return iIntValue;
                 }
             }
-            return intValue;
+            return iIntValue;
         } catch (RemoteException e) {
             RCPPolicy$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed at GenericVpnPolicy API activateVpnProfile-Exception"), TAG);
             return -1;
@@ -158,13 +155,13 @@ public class GenericVpnPolicy {
                 return -1;
             }
             EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.addAllContainerPackagesToVpn");
-            EnterpriseResponseData addAllContainerPackagesToVpn = mKnoxVpnPolicyService.addAllContainerPackagesToVpn(this.vpnContext, i, str);
-            if (addAllContainerPackagesToVpn == null) {
+            EnterpriseResponseData enterpriseResponseDataAddAllContainerPackagesToVpn = mKnoxVpnPolicyService.addAllContainerPackagesToVpn(this.vpnContext, i, str);
+            if (enterpriseResponseDataAddAllContainerPackagesToVpn == null) {
                 Log.e(TAG, "addAllContainerPackagesToVpn > mEnterpriseResponseData == null");
                 return -1;
             }
-            if (addAllContainerPackagesToVpn.getFailureState() != 11) {
-                return ((Integer) addAllContainerPackagesToVpn.getData()).intValue();
+            if (enterpriseResponseDataAddAllContainerPackagesToVpn.getFailureState() != 11) {
+                return ((Integer) enterpriseResponseDataAddAllContainerPackagesToVpn.getData()).intValue();
             }
             Log.d(TAG, "The container id entered is invalid and throwing an exception");
             throw new IllegalArgumentException();
@@ -181,9 +178,9 @@ public class GenericVpnPolicy {
                 return -1;
             }
             EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.addAllPackagesToVpn");
-            EnterpriseResponseData addAllPackagesToVpn = mKnoxVpnPolicyService.addAllPackagesToVpn(this.vpnContext, str);
-            if (addAllPackagesToVpn != null) {
-                return ((Integer) addAllPackagesToVpn.getData()).intValue();
+            EnterpriseResponseData enterpriseResponseDataAddAllPackagesToVpn = mKnoxVpnPolicyService.addAllPackagesToVpn(this.vpnContext, str);
+            if (enterpriseResponseDataAddAllPackagesToVpn != null) {
+                return ((Integer) enterpriseResponseDataAddAllPackagesToVpn.getData()).intValue();
             }
             Log.e(TAG, "addAllPackagesToVpn > mEnterpriseResponseData == null");
             return -1;
@@ -200,13 +197,13 @@ public class GenericVpnPolicy {
                 return -1;
             }
             EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.addContainerPackagesToVpn");
-            EnterpriseResponseData addContainerPackagesToVpn = mKnoxVpnPolicyService.addContainerPackagesToVpn(this.vpnContext, i, strArr, str);
-            if (addContainerPackagesToVpn == null) {
+            EnterpriseResponseData enterpriseResponseDataAddContainerPackagesToVpn = mKnoxVpnPolicyService.addContainerPackagesToVpn(this.vpnContext, i, strArr, str);
+            if (enterpriseResponseDataAddContainerPackagesToVpn == null) {
                 Log.e(TAG, "addContainerPackageToVpn > mEnterpriseResponseData == null");
                 return -1;
             }
-            if (addContainerPackagesToVpn.getFailureState() != 11) {
-                return ((Integer) addContainerPackagesToVpn.getData()).intValue();
+            if (enterpriseResponseDataAddContainerPackagesToVpn.getFailureState() != 11) {
+                return ((Integer) enterpriseResponseDataAddContainerPackagesToVpn.getData()).intValue();
             }
             Log.d(TAG, "The container id entered is invalid and throwing an exception");
             throw new IllegalArgumentException();
@@ -223,9 +220,9 @@ public class GenericVpnPolicy {
                 return -1;
             }
             EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.addPackagesToVpn");
-            EnterpriseResponseData addPackagesToVpn = mKnoxVpnPolicyService.addPackagesToVpn(this.vpnContext, strArr, str);
-            if (addPackagesToVpn != null) {
-                return ((Integer) addPackagesToVpn.getData()).intValue();
+            EnterpriseResponseData enterpriseResponseDataAddPackagesToVpn = mKnoxVpnPolicyService.addPackagesToVpn(this.vpnContext, strArr, str);
+            if (enterpriseResponseDataAddPackagesToVpn != null) {
+                return ((Integer) enterpriseResponseDataAddPackagesToVpn.getData()).intValue();
             }
             Log.e(TAG, "addPackageToVpn > mEnterpriseResponseData == null");
             return -1;
@@ -236,43 +233,36 @@ public class GenericVpnPolicy {
     }
 
     public int allowUsbTetheringOverVpn(String str, boolean z, Bundle bundle) {
-        int i;
+        int iAllowNoAuthUsbTetheringOverVpn;
         try {
             if (getKnoxVpnPolicyService() != null) {
                 EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.allowUsbTetheringOverVpn");
-                if (z) {
-                    if (bundle != null && !bundle.isEmpty()) {
-                        i = !bundle.isEmpty() ? mKnoxVpnPolicyService.allowAuthUsbTetheringOverVpn(this.vpnContext, str, bundle) : 100;
-                    }
-                    i = mKnoxVpnPolicyService.allowNoAuthUsbTetheringOverVpn(this.vpnContext, str);
-                } else {
-                    i = mKnoxVpnPolicyService.disallowUsbTetheringOverVpn(this.vpnContext, str);
-                }
+                iAllowNoAuthUsbTetheringOverVpn = z ? (bundle == null || bundle.isEmpty()) ? mKnoxVpnPolicyService.allowNoAuthUsbTetheringOverVpn(this.vpnContext, str) : !bundle.isEmpty() ? mKnoxVpnPolicyService.allowAuthUsbTetheringOverVpn(this.vpnContext, str, bundle) : 100 : mKnoxVpnPolicyService.disallowUsbTetheringOverVpn(this.vpnContext, str);
             } else {
                 Log.e(TAG, "KVES not started");
-                i = 110;
+                iAllowNoAuthUsbTetheringOverVpn = 110;
             }
         } catch (RemoteException e) {
             RCPPolicy$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at GenericVpnPolicy API allowUsbTetheringOverVpn:"), TAG);
-            i = 101;
+            iAllowNoAuthUsbTetheringOverVpn = 101;
         }
-        if (i == 100) {
-            i = VPN_RETURN_INT_SUCCESS;
+        if (iAllowNoAuthUsbTetheringOverVpn == 100) {
+            iAllowNoAuthUsbTetheringOverVpn = VPN_RETURN_INT_SUCCESS;
         }
-        if (i != 141) {
-            return i;
+        if (iAllowNoAuthUsbTetheringOverVpn != 141) {
+            return iAllowNoAuthUsbTetheringOverVpn;
         }
         throw new SecurityException();
     }
 
     public int createVpnProfile(String str) {
-        int i = VPN_RETURN_INT_ERROR;
+        int iIntValue = VPN_RETURN_INT_ERROR;
         try {
             if (getKnoxVpnPolicyService() != null) {
                 EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.createVpnProfile");
-                EnterpriseResponseData createVpnProfile = mKnoxVpnPolicyService.createVpnProfile(this.vpnContext, str);
-                if (createVpnProfile != null) {
-                    i = ((Integer) createVpnProfile.getData()).intValue();
+                EnterpriseResponseData enterpriseResponseDataCreateVpnProfile = mKnoxVpnPolicyService.createVpnProfile(this.vpnContext, str);
+                if (enterpriseResponseDataCreateVpnProfile != null) {
+                    iIntValue = ((Integer) enterpriseResponseDataCreateVpnProfile.getData()).intValue();
                 } else {
                     Log.e(TAG, "createVpnProfile Error> mEnterpriseResponseData == null");
                 }
@@ -282,8 +272,8 @@ public class GenericVpnPolicy {
         } catch (RemoteException e) {
             RCPPolicy$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed at GenericVpnPolicy API createVpnProfile-Exception"), TAG);
         }
-        if (i != 141) {
-            return i;
+        if (iIntValue != 141) {
+            return iIntValue;
         }
         throw new SecurityException();
     }
@@ -488,24 +478,24 @@ public class GenericVpnPolicy {
     }
 
     public int isUsbTetheringOverVpnEnabled(String str) {
-        int i;
+        int iIsUsbTetheringOverVpnEnabled;
         try {
             if (getKnoxVpnPolicyService() != null) {
                 EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.isUsbTetheringOverVpnEnabled");
-                i = mKnoxVpnPolicyService.isUsbTetheringOverVpnEnabled(this.vpnContext, str);
+                iIsUsbTetheringOverVpnEnabled = mKnoxVpnPolicyService.isUsbTetheringOverVpnEnabled(this.vpnContext, str);
             } else {
                 Log.e(TAG, "KVES not started");
-                i = 110;
+                iIsUsbTetheringOverVpnEnabled = 110;
             }
         } catch (RemoteException e) {
             RCPPolicy$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception at GenericVpnPolicy API isUsbTetheringOverVpnEnabled:"), TAG);
-            i = 101;
+            iIsUsbTetheringOverVpnEnabled = 101;
         }
-        if (i == 100) {
-            i = VPN_RETURN_INT_SUCCESS;
+        if (iIsUsbTetheringOverVpnEnabled == 100) {
+            iIsUsbTetheringOverVpnEnabled = VPN_RETURN_INT_SUCCESS;
         }
-        if (i != 141) {
-            return i;
+        if (iIsUsbTetheringOverVpnEnabled != 141) {
+            return iIsUsbTetheringOverVpnEnabled;
         }
         throw new SecurityException();
     }
@@ -517,13 +507,13 @@ public class GenericVpnPolicy {
                 return -1;
             }
             EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.removeAllContainerPackagesFromVpn");
-            EnterpriseResponseData removeAllContainerPackagesFromVpn = mKnoxVpnPolicyService.removeAllContainerPackagesFromVpn(this.vpnContext, i, str);
-            if (removeAllContainerPackagesFromVpn == null) {
+            EnterpriseResponseData enterpriseResponseDataRemoveAllContainerPackagesFromVpn = mKnoxVpnPolicyService.removeAllContainerPackagesFromVpn(this.vpnContext, i, str);
+            if (enterpriseResponseDataRemoveAllContainerPackagesFromVpn == null) {
                 Log.e(TAG, "removeAllContainerPackagesFromVpn > mEnterpriseResponseData == null");
                 return -1;
             }
-            if (removeAllContainerPackagesFromVpn.getFailureState() != 11) {
-                return ((Integer) removeAllContainerPackagesFromVpn.getData()).intValue();
+            if (enterpriseResponseDataRemoveAllContainerPackagesFromVpn.getFailureState() != 11) {
+                return ((Integer) enterpriseResponseDataRemoveAllContainerPackagesFromVpn.getData()).intValue();
             }
             Log.d(TAG, "The container id entered is invalid and throwing an exception");
             throw new IllegalArgumentException();
@@ -540,9 +530,9 @@ public class GenericVpnPolicy {
                 return -1;
             }
             EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.removeAllPackagesFromVpn");
-            EnterpriseResponseData removeAllPackagesFromVpn = mKnoxVpnPolicyService.removeAllPackagesFromVpn(this.vpnContext, str);
-            if (removeAllPackagesFromVpn != null) {
-                return ((Integer) removeAllPackagesFromVpn.getData()).intValue();
+            EnterpriseResponseData enterpriseResponseDataRemoveAllPackagesFromVpn = mKnoxVpnPolicyService.removeAllPackagesFromVpn(this.vpnContext, str);
+            if (enterpriseResponseDataRemoveAllPackagesFromVpn != null) {
+                return ((Integer) enterpriseResponseDataRemoveAllPackagesFromVpn.getData()).intValue();
             }
             Log.e(TAG, "removeAllPackagesFromVpn > mEnterpriseResponseData == null");
             return -1;
@@ -559,13 +549,13 @@ public class GenericVpnPolicy {
                 return -1;
             }
             EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.removeContainerPackagesFromVpn");
-            EnterpriseResponseData removeContainerPackagesFromVpn = mKnoxVpnPolicyService.removeContainerPackagesFromVpn(this.vpnContext, i, strArr, str);
-            if (removeContainerPackagesFromVpn == null) {
+            EnterpriseResponseData enterpriseResponseDataRemoveContainerPackagesFromVpn = mKnoxVpnPolicyService.removeContainerPackagesFromVpn(this.vpnContext, i, strArr, str);
+            if (enterpriseResponseDataRemoveContainerPackagesFromVpn == null) {
                 Log.e(TAG, "removeContainerPackageFromVpn > mEnterpriseResponseData == null");
                 return -1;
             }
-            if (removeContainerPackagesFromVpn.getFailureState() != 11) {
-                return ((Integer) removeContainerPackagesFromVpn.getData()).intValue();
+            if (enterpriseResponseDataRemoveContainerPackagesFromVpn.getFailureState() != 11) {
+                return ((Integer) enterpriseResponseDataRemoveContainerPackagesFromVpn.getData()).intValue();
             }
             Log.d(TAG, "The container id entered is invalid and throwing an exception");
             throw new IllegalArgumentException();
@@ -582,9 +572,9 @@ public class GenericVpnPolicy {
                 return -1;
             }
             EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.removePackagesFromVpn");
-            EnterpriseResponseData removePackagesFromVpn = mKnoxVpnPolicyService.removePackagesFromVpn(this.vpnContext, strArr, str);
-            if (removePackagesFromVpn != null) {
-                return ((Integer) removePackagesFromVpn.getData()).intValue();
+            EnterpriseResponseData enterpriseResponseDataRemovePackagesFromVpn = mKnoxVpnPolicyService.removePackagesFromVpn(this.vpnContext, strArr, str);
+            if (enterpriseResponseDataRemovePackagesFromVpn != null) {
+                return ((Integer) enterpriseResponseDataRemovePackagesFromVpn.getData()).intValue();
             }
             Log.e(TAG, "removePackageFromVpn > mEnterpriseResponseData == null");
             return -1;
@@ -602,9 +592,9 @@ public class GenericVpnPolicy {
                 return i;
             }
             EnterpriseLicenseManager.log(new ContextInfo(Process.myUid()), "GenericVpnPolicy.removeVpnProfile");
-            EnterpriseResponseData removeVpnProfile = mKnoxVpnPolicyService.removeVpnProfile(this.vpnContext, str);
-            if (removeVpnProfile != null) {
-                return ((Integer) removeVpnProfile.getData()).intValue();
+            EnterpriseResponseData enterpriseResponseDataRemoveVpnProfile = mKnoxVpnPolicyService.removeVpnProfile(this.vpnContext, str);
+            if (enterpriseResponseDataRemoveVpnProfile != null) {
+                return ((Integer) enterpriseResponseDataRemoveVpnProfile.getData()).intValue();
             }
             Log.e(TAG, "removeVpnProfile  Error> mEnterpriseResponseData == null");
             return i;

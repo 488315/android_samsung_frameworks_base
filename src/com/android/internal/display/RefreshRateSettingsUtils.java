@@ -12,39 +12,39 @@ public class RefreshRateSettingsUtils {
 
     public static float findHighestRefreshRateForDefaultDisplay(Context context) {
         Display display = ((DisplayManager) context.getSystemService(DisplayManager.class)).getDisplay(0);
-        float f = 60.0f;
+        float refreshRate = 60.0f;
         if (display == null) {
             Log.w(TAG, "No valid default display device");
             return 60.0f;
         }
         for (Display.Mode mode : display.getSupportedModes()) {
-            if (mode.getRefreshRate() > f) {
-                f = mode.getRefreshRate();
+            if (mode.getRefreshRate() > refreshRate) {
+                refreshRate = mode.getRefreshRate();
             }
         }
-        return f;
+        return refreshRate;
     }
 
     public static float findHighestRefreshRateAmongAllDisplays(Context context) {
         Display[] displays = ((DisplayManager) context.getSystemService(DisplayManager.class)).getDisplays(DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED);
-        float f = 60.0f;
+        float refreshRate = 60.0f;
         if (displays.length == 0) {
             Log.w(TAG, "No valid display devices");
             return 60.0f;
         }
         for (Display display : displays) {
             for (Display.Mode mode : display.getSupportedModes()) {
-                if (mode.getRefreshRate() > f) {
-                    f = mode.getRefreshRate();
+                if (mode.getRefreshRate() > refreshRate) {
+                    refreshRate = mode.getRefreshRate();
                 }
             }
         }
-        return f;
+        return refreshRate;
     }
 
     public static float findHighestRefreshRateAmongAllBuiltInDisplays(Context context) {
         Display[] displays = ((DisplayManager) context.getSystemService(DisplayManager.class)).getDisplays(DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED);
-        float f = 60.0f;
+        float refreshRate = 60.0f;
         if (displays.length == 0) {
             Log.w(TAG, "No valid display devices");
             return 60.0f;
@@ -52,12 +52,12 @@ public class RefreshRateSettingsUtils {
         for (Display display : displays) {
             if (display.getType() == 1) {
                 for (Display.Mode mode : display.getSupportedModes()) {
-                    if (mode.getRefreshRate() > f) {
-                        f = mode.getRefreshRate();
+                    if (mode.getRefreshRate() > refreshRate) {
+                        refreshRate = mode.getRefreshRate();
                     }
                 }
             }
         }
-        return f;
+        return refreshRate;
     }
 }

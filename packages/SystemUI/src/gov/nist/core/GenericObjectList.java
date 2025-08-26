@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class GenericObjectList extends LinkedList<GenericObject> implements Serializable, Cloneable {
     public static final /* synthetic */ int $r8$clinit = 0;

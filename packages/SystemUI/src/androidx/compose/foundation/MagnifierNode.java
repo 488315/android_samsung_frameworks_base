@@ -19,22 +19,29 @@ import androidx.compose.ui.node.ObserverModifierNode;
 import androidx.compose.ui.node.ObserverModifierNodeKt;
 import androidx.compose.ui.node.SemanticsModifierNode;
 import androidx.compose.ui.semantics.SemanticsConfiguration;
+import androidx.compose.ui.semantics.SemanticsPropertyKey;
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver;
 import androidx.compose.ui.unit.Density;
+import androidx.compose.ui.unit.Dp;
 import androidx.compose.ui.unit.DpSize;
 import androidx.compose.ui.unit.IntSize;
 import androidx.compose.ui.unit.IntSizeKt;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineStart;
 import kotlinx.coroutines.channels.BufferedChannel;
 import kotlinx.coroutines.channels.ChannelKt;
 import kotlinx.coroutines.channels.ChannelResult;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MagnifierNode extends Modifier.Node implements GlobalPositionAwareModifierNode, DrawModifierNode, SemanticsModifierNode, ObserverModifierNode {
     public State anchorPositionInRootState;
@@ -56,20 +63,104 @@ public final class MagnifierNode extends Modifier.Node implements GlobalPosition
     public View view;
     public float zoom;
 
+    /* renamed from: androidx.compose.foundation.MagnifierNode$onAttach$1, reason: invalid class name and case insensitive filesystem */
+    final class C06821 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C06821(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return MagnifierNode.this.new C06821(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C06821) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Code restructure failed: missing block: B:19:0x0049, code lost:
+        
+            if (androidx.compose.runtime.MonotonicFrameClockKt.getMonotonicFrameClock(getContext()).withFrameNanos(new androidx.compose.runtime.MonotonicFrameClockKt$withFrameMillis$2(r6), r5) == r0) goto L20;
+         */
+        /* JADX WARN: Path cross not found for [B:13:0x0025, B:16:0x002e], limit reached: 23 */
+        /* JADX WARN: Path cross not found for [B:16:0x002e, B:13:0x0025], limit reached: 23 */
+        /* JADX WARN: Removed duplicated region for block: B:11:0x001f  */
+        /* JADX WARN: Removed duplicated region for block: B:13:0x0025  */
+        /* JADX WARN: Removed duplicated region for block: B:18:0x0034  */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0032 -> B:11:0x001f). Please report as a decompilation issue!!! */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:19:0x0049 -> B:21:0x004c). Please report as a decompilation issue!!! */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) {
+            BufferedChannel bufferedChannel;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                bufferedChannel = MagnifierNode.this.drawSignalChannel;
+                if (bufferedChannel != null) {
+                }
+                if (MagnifierNode.this.magnifier == null) {
+                }
+                return coroutineSingletons;
+            }
+            if (i == 1) {
+                ResultKt.throwOnFailure(obj);
+                if (MagnifierNode.this.magnifier == null) {
+                }
+                return coroutineSingletons;
+            }
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            PlatformMagnifier platformMagnifier = MagnifierNode.this.magnifier;
+            if (platformMagnifier != null) {
+                ((PlatformMagnifierFactoryApi28Impl$PlatformMagnifierImpl) platformMagnifier).magnifier.update();
+            }
+            bufferedChannel = MagnifierNode.this.drawSignalChannel;
+            if (bufferedChannel != null) {
+                this.label = 1;
+                if (bufferedChannel.receive(this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (MagnifierNode.this.magnifier == null) {
+                C00031 c00031 = new Function1() { // from class: androidx.compose.foundation.MagnifierNode.onAttach.1.1
+                    @Override // kotlin.jvm.functions.Function1
+                    /* renamed from: invoke */
+                    public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj2) {
+                        ((Number) obj2).longValue();
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 2;
+            } else {
+                bufferedChannel = MagnifierNode.this.drawSignalChannel;
+                if (bufferedChannel != null) {
+                }
+                if (MagnifierNode.this.magnifier == null) {
+                }
+            }
+            return coroutineSingletons;
+        }
+    }
+
     public /* synthetic */ MagnifierNode(Function1 function1, Function1 function12, Function1 function13, float f, boolean z, long j, float f2, float f3, boolean z2, PlatformMagnifierFactory platformMagnifierFactory, DefaultConstructorMarker defaultConstructorMarker) {
         this(function1, function12, function13, f, z, j, f2, f3, z2, platformMagnifierFactory);
     }
 
     @Override // androidx.compose.ui.node.SemanticsModifierNode
     public final void applySemantics(SemanticsPropertyReceiver semanticsPropertyReceiver) {
-        ((SemanticsConfiguration) semanticsPropertyReceiver).set(Magnifier_androidKt.MagnifierPositionInRoot, new Function0() { // from class: androidx.compose.foundation.MagnifierNode$applySemantics$1
-            {
-                super(0);
-            }
-
+        ((SemanticsConfiguration) semanticsPropertyReceiver).set(Magnifier_androidKt.MagnifierPositionInRoot, new Function0() { // from class: androidx.compose.foundation.MagnifierNode.applySemantics.1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Offset.m393boximpl(MagnifierNode.this.sourceCenterInRoot);
+                return Offset.m395boximpl(MagnifierNode.this.sourceCenterInRoot);
             }
         });
     }
@@ -79,12 +170,12 @@ public final class MagnifierNode extends Modifier.Node implements GlobalPosition
         layoutNodeDrawScope.drawContent();
         BufferedChannel bufferedChannel = this.drawSignalChannel;
         if (bufferedChannel != null) {
-            ChannelResult.m3457boximpl(bufferedChannel.mo3456trySendJP2dKIU(Unit.INSTANCE));
+            ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(Unit.INSTANCE));
         }
     }
 
     /* renamed from: getAnchorPositionInRoot-F1C5BW0, reason: not valid java name */
-    public final long m42getAnchorPositionInRootF1C5BW0() {
+    public final long m43getAnchorPositionInRootF1C5BW0() {
         if (this.anchorPositionInRootState == null) {
             this.anchorPositionInRootState = SnapshotStateKt.derivedStateOf(new Function0() { // from class: androidx.compose.foundation.MagnifierNode$anchorPositionInRoot$1
                 {
@@ -93,15 +184,15 @@ public final class MagnifierNode extends Modifier.Node implements GlobalPosition
 
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    long j;
-                    LayoutCoordinates layoutCoordinates = (LayoutCoordinates) ((SnapshotMutableStateImpl) MagnifierNode.this.layoutCoordinates$delegate).getValue();
+                    long jPositionInRoot;
+                    LayoutCoordinates layoutCoordinates = (LayoutCoordinates) ((SnapshotMutableStateImpl) this.this$0.layoutCoordinates$delegate).getValue();
                     if (layoutCoordinates != null) {
-                        j = LayoutCoordinatesKt.positionInRoot(layoutCoordinates);
+                        jPositionInRoot = LayoutCoordinatesKt.positionInRoot(layoutCoordinates);
                     } else {
                         Offset.Companion.getClass();
-                        j = Offset.Unspecified;
+                        jPositionInRoot = Offset.Unspecified;
                     }
-                    return Offset.m393boximpl(j);
+                    return Offset.m395boximpl(jPositionInRoot);
                 }
             });
         }
@@ -117,7 +208,7 @@ public final class MagnifierNode extends Modifier.Node implements GlobalPosition
     public final void onAttach() {
         onObservedReadsChanged();
         this.drawSignalChannel = ChannelKt.Channel$default(0, null, null, 7);
-        BuildersKt.launch$default(getCoroutineScope(), null, CoroutineStart.UNDISPATCHED, new MagnifierNode$onAttach$1(this, null), 1);
+        BuildersKt.launch$default(getCoroutineScope(), null, CoroutineStart.UNDISPATCHED, new C06821(null), 1);
     }
 
     @Override // androidx.compose.ui.Modifier.Node
@@ -136,11 +227,7 @@ public final class MagnifierNode extends Modifier.Node implements GlobalPosition
 
     @Override // androidx.compose.ui.node.ObserverModifierNode
     public final void onObservedReadsChanged() {
-        ObserverModifierNodeKt.observeReads(this, new Function0() { // from class: androidx.compose.foundation.MagnifierNode$onObservedReadsChanged$1
-            {
-                super(0);
-            }
-
+        ObserverModifierNodeKt.observeReads(this, new Function0() { // from class: androidx.compose.foundation.MagnifierNode.onObservedReadsChanged.1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 MagnifierNode.this.updateMagnifier();
@@ -154,106 +241,67 @@ public final class MagnifierNode extends Modifier.Node implements GlobalPosition
         if (platformMagnifier != null) {
             ((PlatformMagnifierFactoryApi28Impl$PlatformMagnifierImpl) platformMagnifier).magnifier.dismiss();
         }
-        View view = this.view;
-        if (view == null) {
-            view = DelegatableNode_androidKt.requireView(this);
+        View viewRequireView = this.view;
+        if (viewRequireView == null) {
+            viewRequireView = DelegatableNode_androidKt.requireView(this);
         }
-        View view2 = view;
-        this.view = view2;
+        View view = viewRequireView;
+        this.view = view;
         Density density = this.density;
         if (density == null) {
             density = DelegatableNodeKt.requireLayoutNode(this).density;
         }
         Density density2 = density;
         this.density = density2;
-        this.magnifier = this.platformMagnifierFactory.mo46createnHHXs2Y(view2, this.useTextDefault, this.size, this.cornerRadius, this.elevation, this.clippingEnabled, density2, this.zoom);
+        this.magnifier = this.platformMagnifierFactory.mo47createnHHXs2Y(view, this.useTextDefault, this.size, this.cornerRadius, this.elevation, this.clippingEnabled, density2, this.zoom);
         updateSizeIfNecessary();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0073  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0060  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateMagnifier() {
-        /*
-            r9 = this;
-            androidx.compose.ui.unit.Density r0 = r9.density
-            if (r0 != 0) goto Lc
-            androidx.compose.ui.node.LayoutNode r0 = androidx.compose.ui.node.DelegatableNodeKt.requireLayoutNode(r9)
-            androidx.compose.ui.unit.Density r0 = r0.density
-            r9.density = r0
-        Lc:
-            kotlin.jvm.functions.Function1 r1 = r9.sourceCenter
-            java.lang.Object r1 = r1.mo779invoke(r0)
-            androidx.compose.ui.geometry.Offset r1 = (androidx.compose.ui.geometry.Offset) r1
-            long r1 = r1.packedValue
-            r3 = 9223372034707292159(0x7fffffff7fffffff, double:NaN)
-            long r5 = r1 & r3
-            r7 = 9205357640488583168(0x7fc000007fc00000, double:2.247117487993712E307)
-            int r5 = (r5 > r7 ? 1 : (r5 == r7 ? 0 : -1))
-            if (r5 == 0) goto L7e
-            long r5 = r9.m42getAnchorPositionInRootF1C5BW0()
-            long r5 = r5 & r3
-            int r5 = (r5 > r7 ? 1 : (r5 == r7 ? 0 : -1))
-            if (r5 == 0) goto L7e
-            long r5 = r9.m42getAnchorPositionInRootF1C5BW0()
-            long r1 = androidx.compose.ui.geometry.Offset.m401plusMKHz9U(r5, r1)
-            r9.sourceCenterInRoot = r1
-            kotlin.jvm.functions.Function1 r1 = r9.magnifierCenter
-            if (r1 == 0) goto L60
-            java.lang.Object r0 = r1.mo779invoke(r0)
-            androidx.compose.ui.geometry.Offset r0 = (androidx.compose.ui.geometry.Offset) r0
-            long r0 = r0.packedValue
-            androidx.compose.ui.geometry.Offset r0 = androidx.compose.ui.geometry.Offset.m393boximpl(r0)
-            long r1 = r0.packedValue
-            long r1 = r1 & r3
-            int r1 = (r1 > r7 ? 1 : (r1 == r7 ? 0 : -1))
-            if (r1 == 0) goto L51
-            goto L52
-        L51:
-            r0 = 0
-        L52:
-            if (r0 == 0) goto L60
-            long r1 = r9.m42getAnchorPositionInRootF1C5BW0()
-            long r3 = r0.packedValue
-            long r0 = androidx.compose.ui.geometry.Offset.m401plusMKHz9U(r1, r3)
-        L5e:
-            r5 = r0
-            goto L68
-        L60:
-            androidx.compose.ui.geometry.Offset$Companion r0 = androidx.compose.ui.geometry.Offset.Companion
-            r0.getClass()
-            long r0 = androidx.compose.ui.geometry.Offset.Unspecified
-            goto L5e
-        L68:
-            androidx.compose.foundation.PlatformMagnifier r0 = r9.magnifier
-            if (r0 != 0) goto L6f
-            r9.recreateMagnifier()
-        L6f:
-            androidx.compose.foundation.PlatformMagnifier r2 = r9.magnifier
-            if (r2 == 0) goto L7a
-            long r3 = r9.sourceCenterInRoot
-            float r7 = r9.zoom
-            r2.mo45updateWko1d7g(r3, r5, r7)
-        L7a:
-            r9.updateSizeIfNecessary()
-            return
-        L7e:
-            androidx.compose.ui.geometry.Offset$Companion r0 = androidx.compose.ui.geometry.Offset.Companion
-            r0.getClass()
-            long r0 = androidx.compose.ui.geometry.Offset.Unspecified
-            r9.sourceCenterInRoot = r0
-            androidx.compose.foundation.PlatformMagnifier r9 = r9.magnifier
-            if (r9 == 0) goto L92
-            androidx.compose.foundation.PlatformMagnifierFactoryApi28Impl$PlatformMagnifierImpl r9 = (androidx.compose.foundation.PlatformMagnifierFactoryApi28Impl$PlatformMagnifierImpl) r9
-            android.widget.Magnifier r9 = r9.magnifier
-            r9.dismiss()
-        L92:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.MagnifierNode.updateMagnifier():void");
+        long jM403plusMKHz9U;
+        Density density = this.density;
+        if (density == null) {
+            density = DelegatableNodeKt.requireLayoutNode(this).density;
+            this.density = density;
+        }
+        long j = ((Offset) this.sourceCenter.mo781invoke(density)).packedValue;
+        if ((j & 9223372034707292159L) == 9205357640488583168L || (m43getAnchorPositionInRootF1C5BW0() & 9223372034707292159L) == 9205357640488583168L) {
+            Offset.Companion.getClass();
+            this.sourceCenterInRoot = Offset.Unspecified;
+            PlatformMagnifier platformMagnifier = this.magnifier;
+            if (platformMagnifier != null) {
+                ((PlatformMagnifierFactoryApi28Impl$PlatformMagnifierImpl) platformMagnifier).magnifier.dismiss();
+                return;
+            }
+            return;
+        }
+        this.sourceCenterInRoot = Offset.m403plusMKHz9U(m43getAnchorPositionInRootF1C5BW0(), j);
+        Function1 function1 = this.magnifierCenter;
+        if (function1 != null) {
+            Offset offsetM395boximpl = Offset.m395boximpl(((Offset) function1.mo781invoke(density)).packedValue);
+            if ((offsetM395boximpl.packedValue & 9223372034707292159L) == 9205357640488583168L) {
+                offsetM395boximpl = null;
+            }
+            if (offsetM395boximpl != null) {
+                jM403plusMKHz9U = Offset.m403plusMKHz9U(m43getAnchorPositionInRootF1C5BW0(), offsetM395boximpl.packedValue);
+            } else {
+                Offset.Companion.getClass();
+                jM403plusMKHz9U = Offset.Unspecified;
+            }
+        }
+        long j2 = jM403plusMKHz9U;
+        if (this.magnifier == null) {
+            recreateMagnifier();
+        }
+        PlatformMagnifier platformMagnifier2 = this.magnifier;
+        if (platformMagnifier2 != null) {
+            platformMagnifier2.mo46updateWko1d7g(this.sourceCenterInRoot, j2, this.zoom);
+        }
+        updateSizeIfNecessary();
     }
 
     public final void updateSizeIfNecessary() {
@@ -263,75 +311,41 @@ public final class MagnifierNode extends Modifier.Node implements GlobalPosition
             return;
         }
         PlatformMagnifierFactoryApi28Impl$PlatformMagnifierImpl platformMagnifierFactoryApi28Impl$PlatformMagnifierImpl = (PlatformMagnifierFactoryApi28Impl$PlatformMagnifierImpl) platformMagnifier;
-        if (IntSize.m860equalsimpl(platformMagnifierFactoryApi28Impl$PlatformMagnifierImpl.m47getSizeYbymL2g(), this.previousSize)) {
+        if (IntSize.m862equalsimpl(platformMagnifierFactoryApi28Impl$PlatformMagnifierImpl.m48getSizeYbymL2g(), this.previousSize)) {
             return;
         }
         Function1 function1 = this.onSizeChanged;
         if (function1 != null) {
-            function1.mo779invoke(DpSize.m842boximpl(density.mo55toDpSizekrfVVM(IntSizeKt.m864toSizeozmzZPI(platformMagnifierFactoryApi28Impl$PlatformMagnifierImpl.m47getSizeYbymL2g()))));
+            function1.mo781invoke(DpSize.m844boximpl(density.mo56toDpSizekrfVVM(IntSizeKt.m866toSizeozmzZPI(platformMagnifierFactoryApi28Impl$PlatformMagnifierImpl.m48getSizeYbymL2g()))));
         }
-        this.previousSize = IntSize.m859boximpl(platformMagnifierFactoryApi28Impl$PlatformMagnifierImpl.m47getSizeYbymL2g());
+        this.previousSize = IntSize.m861boximpl(platformMagnifierFactoryApi28Impl$PlatformMagnifierImpl.m48getSizeYbymL2g());
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public MagnifierNode(kotlin.jvm.functions.Function1 r2, kotlin.jvm.functions.Function1 r3, kotlin.jvm.functions.Function1 r4, float r5, boolean r6, long r7, float r9, float r10, boolean r11, androidx.compose.foundation.PlatformMagnifierFactory r12, int r13, kotlin.jvm.internal.DefaultConstructorMarker r14) {
-        /*
-            r1 = this;
-            r14 = r13 & 2
-            r0 = 0
-            if (r14 == 0) goto L6
-            r3 = r0
-        L6:
-            r14 = r13 & 4
-            if (r14 == 0) goto Lb
-            r4 = r0
-        Lb:
-            r14 = r13 & 8
-            if (r14 == 0) goto L11
-            r5 = 2143289344(0x7fc00000, float:NaN)
-        L11:
-            r14 = r13 & 16
-            if (r14 == 0) goto L16
-            r6 = 0
-        L16:
-            r14 = r13 & 32
-            if (r14 == 0) goto L21
-            androidx.compose.ui.unit.DpSize$Companion r7 = androidx.compose.ui.unit.DpSize.Companion
-            r7.getClass()
-            long r7 = androidx.compose.ui.unit.DpSize.Unspecified
-        L21:
-            r14 = r13 & 64
-            if (r14 == 0) goto L2c
-            androidx.compose.ui.unit.Dp$Companion r9 = androidx.compose.ui.unit.Dp.Companion
-            r9.getClass()
-            float r9 = androidx.compose.ui.unit.Dp.Unspecified
-        L2c:
-            r14 = r13 & 128(0x80, float:1.8E-43)
-            if (r14 == 0) goto L37
-            androidx.compose.ui.unit.Dp$Companion r10 = androidx.compose.ui.unit.Dp.Companion
-            r10.getClass()
-            float r10 = androidx.compose.ui.unit.Dp.Unspecified
-        L37:
-            r14 = r13 & 256(0x100, float:3.59E-43)
-            if (r14 == 0) goto L3c
-            r11 = 1
-        L3c:
-            r13 = r13 & 512(0x200, float:7.17E-43)
-            if (r13 == 0) goto L49
-            androidx.compose.foundation.PlatformMagnifierFactory$Companion r12 = androidx.compose.foundation.PlatformMagnifierFactory.Companion
-            r12.getClass()
-            androidx.compose.ui.semantics.SemanticsPropertyKey r12 = androidx.compose.foundation.Magnifier_androidKt.MagnifierPositionInRoot
-            androidx.compose.foundation.PlatformMagnifierFactoryApi29Impl r12 = androidx.compose.foundation.PlatformMagnifierFactoryApi29Impl.INSTANCE
-        L49:
-            r13 = 0
-            r1.<init>(r2, r3, r4, r5, r6, r7, r9, r10, r11, r12, r13)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.MagnifierNode.<init>(kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function1, float, boolean, long, float, float, boolean, androidx.compose.foundation.PlatformMagnifierFactory, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public MagnifierNode(Function1 function1, Function1 function12, Function1 function13, float f, boolean z, long j, float f2, float f3, boolean z2, PlatformMagnifierFactory platformMagnifierFactory, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        function12 = (i & 2) != 0 ? null : function12;
+        function13 = (i & 4) != 0 ? null : function13;
+        f = (i & 8) != 0 ? Float.NaN : f;
+        z = (i & 16) != 0 ? false : z;
+        if ((i & 32) != 0) {
+            DpSize.Companion.getClass();
+            j = DpSize.Unspecified;
+        }
+        if ((i & 64) != 0) {
+            Dp.Companion.getClass();
+            f2 = Dp.Unspecified;
+        }
+        if ((i & 128) != 0) {
+            Dp.Companion.getClass();
+            f3 = Dp.Unspecified;
+        }
+        z2 = (i & 256) != 0 ? true : z2;
+        if ((i & 512) != 0) {
+            PlatformMagnifierFactory.Companion.getClass();
+            SemanticsPropertyKey semanticsPropertyKey = Magnifier_androidKt.MagnifierPositionInRoot;
+            platformMagnifierFactory = PlatformMagnifierFactoryApi29Impl.INSTANCE;
+        }
+        this(function1, function12, function13, f, z, j, f2, f3, z2, platformMagnifierFactory, null);
     }
 
     private MagnifierNode(Function1 function1, Function1 function12, Function1 function13, float f, boolean z, long j, float f2, float f3, boolean z2, PlatformMagnifierFactory platformMagnifierFactory) {

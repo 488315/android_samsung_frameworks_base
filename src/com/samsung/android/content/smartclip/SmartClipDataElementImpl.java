@@ -176,21 +176,21 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
             SmartClipMetaTagArrayImpl smartClipMetaTagArrayImpl = this.mTags;
             return smartClipMetaTagArrayImpl == null || smartClipMetaTagArrayImpl.size() <= 0;
         }
-        SmartClipDataElementImpl smartClipDataElementImpl = this;
-        while (smartClipDataElementImpl != null) {
-            SmartClipMetaTagArrayImpl smartClipMetaTagArrayImpl2 = smartClipDataElementImpl.mTags;
+        SmartClipDataElementImpl smartClipDataElementImplTraverseNextElement = this;
+        while (smartClipDataElementImplTraverseNextElement != null) {
+            SmartClipMetaTagArrayImpl smartClipMetaTagArrayImpl2 = smartClipDataElementImplTraverseNextElement.mTags;
             if (smartClipMetaTagArrayImpl2 != null && smartClipMetaTagArrayImpl2.size() > 0) {
                 return false;
             }
-            smartClipDataElementImpl = smartClipDataElementImpl.traverseNextElement(this);
+            smartClipDataElementImplTraverseNextElement = smartClipDataElementImplTraverseNextElement.traverseNextElement(this);
         }
         return true;
     }
 
     public SemSmartClipDataElement createChildInstance() {
-        SemSmartClipDataElement newInstance = newInstance();
-        addChild(newInstance);
-        return newInstance;
+        SemSmartClipDataElement semSmartClipDataElementNewInstance = newInstance();
+        addChild(semSmartClipDataElementNewInstance);
+        return semSmartClipDataElementNewInstance;
     }
 
     public SemSmartClipDataElement newInstance() {
@@ -281,7 +281,7 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
 
     public int getChildCount() {
         int i = 0;
-        for (SmartClipDataElementImpl smartClipDataElementImpl = this.mFirstChild; smartClipDataElementImpl != null; smartClipDataElementImpl = smartClipDataElementImpl.getNextSibling()) {
+        for (SmartClipDataElementImpl nextSibling = this.mFirstChild; nextSibling != null; nextSibling = nextSibling.getNextSibling()) {
             i++;
         }
         return i;
@@ -295,46 +295,25 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
         return i;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0021, code lost:
-    
-        return r2.mNextSibling;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public com.samsung.android.content.smartclip.SmartClipDataElementImpl traverseNextElement(com.samsung.android.content.smartclip.SmartClipDataElementImpl r3) {
-        /*
-            r2 = this;
-            com.samsung.android.content.smartclip.SmartClipDataElementImpl r0 = r2.mFirstChild
-            if (r0 == 0) goto L5
-            return r0
-        L5:
-            r0 = 0
-            if (r2 != r3) goto L9
-            return r0
-        L9:
-            com.samsung.android.content.smartclip.SmartClipDataElementImpl r1 = r2.mNextSibling
-            if (r1 == 0) goto Le
-            return r1
-        Le:
-            if (r2 == 0) goto L1d
-            com.samsung.android.content.smartclip.SmartClipDataElementImpl r1 = r2.mNextSibling
-            if (r1 != 0) goto L1d
-            if (r3 == 0) goto L1a
-            com.samsung.android.content.smartclip.SmartClipDataElementImpl r1 = r2.mParent
-            if (r1 == r3) goto L1d
-        L1a:
-            com.samsung.android.content.smartclip.SmartClipDataElementImpl r2 = r2.mParent
-            goto Le
-        L1d:
-            if (r2 == 0) goto L22
-            com.samsung.android.content.smartclip.SmartClipDataElementImpl r2 = r2.mNextSibling
-            return r2
-        L22:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.content.smartclip.SmartClipDataElementImpl.traverseNextElement(com.samsung.android.content.smartclip.SmartClipDataElementImpl):com.samsung.android.content.smartclip.SmartClipDataElementImpl");
+    public SmartClipDataElementImpl traverseNextElement(SmartClipDataElementImpl smartClipDataElementImpl) {
+        SmartClipDataElementImpl smartClipDataElementImpl2 = this.mFirstChild;
+        if (smartClipDataElementImpl2 != null) {
+            return smartClipDataElementImpl2;
+        }
+        if (this == smartClipDataElementImpl) {
+            return null;
+        }
+        SmartClipDataElementImpl smartClipDataElementImpl3 = this.mNextSibling;
+        if (smartClipDataElementImpl3 != null) {
+            return smartClipDataElementImpl3;
+        }
+        while (this != null && this.mNextSibling == null && (smartClipDataElementImpl == null || this.mParent != smartClipDataElementImpl)) {
+            this = this.mParent;
+        }
+        if (this != null) {
+            return this.mNextSibling;
+        }
+        return null;
     }
 
     public String getDumpString(boolean z, boolean z2) {

@@ -13,7 +13,6 @@ import com.android.systemui.qs.tiles.UserDetailView;
 import com.android.systemui.res.R$styleable;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PseudoGridView extends ViewGroup {
     public final int mFixedChildWidth;
@@ -21,7 +20,6 @@ public class PseudoGridView extends ViewGroup {
     public final int mNumColumns;
     public final int mVerticalSpacing;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewGroupAdapterBridge extends DataSetObserver {
         public final BaseAdapter mAdapter;
         public boolean mReleased = false;
@@ -67,9 +65,9 @@ public class PseudoGridView extends ViewGroup {
             }
             int childCount = viewGroup.getChildCount();
             int count = this.mAdapter.getCount();
-            int max = Math.max(childCount, count);
+            int iMax = Math.max(childCount, count);
             int i = 0;
-            while (i < max) {
+            while (i < iMax) {
                 if (i < count) {
                     View childAt = i < childCount ? viewGroup.getChildAt(i) : null;
                     View view = this.mAdapter.getView(i, childAt, viewGroup);
@@ -91,21 +89,21 @@ public class PseudoGridView extends ViewGroup {
         super(context, attributeSet);
         this.mNumColumns = 3;
         this.mFixedChildWidth = -1;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.PseudoGridView);
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.PseudoGridView);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
-            int index = obtainStyledAttributes.getIndex(i);
+            int index = typedArrayObtainStyledAttributes.getIndex(i);
             if (index == 2) {
-                this.mNumColumns = obtainStyledAttributes.getInt(index, 3);
+                this.mNumColumns = typedArrayObtainStyledAttributes.getInt(index, 3);
             } else if (index == 3) {
-                this.mVerticalSpacing = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                this.mVerticalSpacing = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
             } else if (index == 1) {
-                this.mHorizontalSpacing = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                this.mHorizontalSpacing = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
             } else if (index == 0) {
-                this.mFixedChildWidth = obtainStyledAttributes.getDimensionPixelSize(index, -1);
+                this.mFixedChildWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, -1);
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         if (QpRune.QUICK_MUM_TWO_PHONE && UserManager.supportsMultipleUsers()) {
             this.mNumColumns = 2;
         }
@@ -113,29 +111,29 @@ public class PseudoGridView extends ViewGroup {
 
     @Override // android.view.ViewGroup, android.view.View
     public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
-        boolean isLayoutRtl = isLayoutRtl();
+        boolean zIsLayoutRtl = isLayoutRtl();
         int childCount = getChildCount();
         int i5 = ((childCount + r13) - 1) / this.mNumColumns;
         int i6 = 0;
         for (int i7 = 0; i7 < i5; i7++) {
-            int width = isLayoutRtl ? getWidth() : 0;
+            int width = zIsLayoutRtl ? getWidth() : 0;
             int i8 = this.mNumColumns;
             int i9 = i7 * i8;
-            int min = Math.min(i8 + i9, childCount);
-            int i10 = 0;
-            while (i9 < min) {
+            int iMin = Math.min(i8 + i9, childCount);
+            int iMax = 0;
+            while (i9 < iMin) {
                 View childAt = getChildAt(i9);
                 int measuredWidth = childAt.getMeasuredWidth();
                 int measuredHeight = childAt.getMeasuredHeight();
-                if (isLayoutRtl) {
+                if (zIsLayoutRtl) {
                     width -= measuredWidth;
                 }
                 childAt.layout(width, i6, width + measuredWidth, i6 + measuredHeight);
-                i10 = Math.max(i10, measuredHeight);
-                width = isLayoutRtl ? width - this.mHorizontalSpacing : measuredWidth + this.mHorizontalSpacing + width;
+                iMax = Math.max(iMax, measuredHeight);
+                width = zIsLayoutRtl ? width - this.mHorizontalSpacing : measuredWidth + this.mHorizontalSpacing + width;
                 i9++;
             }
-            i6 += i10 + this.mVerticalSpacing;
+            i6 += iMax + this.mVerticalSpacing;
         }
     }
 
@@ -154,29 +152,29 @@ public class PseudoGridView extends ViewGroup {
         } else {
             size = (i3 * i4) + ((i4 - 1) * i5);
         }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i3, 1073741824);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i3, 1073741824);
         int childCount = getChildCount();
         int i7 = ((childCount + r3) - 1) / this.mNumColumns;
         int i8 = 0;
         for (int i9 = 0; i9 < i7; i9++) {
             int i10 = this.mNumColumns;
             int i11 = i9 * i10;
-            int min = Math.min(i10 + i11, childCount);
-            int i12 = 0;
-            for (int i13 = i11; i13 < min; i13++) {
-                View childAt = getChildAt(i13);
-                childAt.measure(makeMeasureSpec, 0);
-                i12 = Math.max(i12, childAt.getMeasuredHeight());
+            int iMin = Math.min(i10 + i11, childCount);
+            int iMax = 0;
+            for (int i12 = i11; i12 < iMin; i12++) {
+                View childAt = getChildAt(i12);
+                childAt.measure(iMakeMeasureSpec, 0);
+                iMax = Math.max(iMax, childAt.getMeasuredHeight());
             }
-            int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(i12, 1073741824);
-            while (i11 < min) {
+            int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(iMax, 1073741824);
+            while (i11 < iMin) {
                 View childAt2 = getChildAt(i11);
-                if (childAt2.getMeasuredHeight() != i12) {
-                    childAt2.measure(makeMeasureSpec, makeMeasureSpec2);
+                if (childAt2.getMeasuredHeight() != iMax) {
+                    childAt2.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
                 }
                 i11++;
             }
-            i8 += i12;
+            i8 += iMax;
             if (i9 > 0) {
                 i8 += this.mVerticalSpacing;
             }

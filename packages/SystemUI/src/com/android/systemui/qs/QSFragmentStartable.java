@@ -5,7 +5,6 @@ import com.android.systemui.fragments.FragmentService;
 import com.android.systemui.qs.composefragment.QSFragmentCompose;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSFragmentStartable implements CoreStartable {
     public final FragmentService fragmentService;

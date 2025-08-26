@@ -17,7 +17,6 @@ import com.android.wm.shell.shared.animation.Interpolators;
 import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DividerHandleView extends View {
     public static final AnonymousClass2 HEIGHT_PROPERTY;
@@ -78,18 +77,18 @@ public class DividerHandleView extends View {
         this.mOutsideCirclePaint = paint;
         Paint paint2 = new Paint();
         this.mPaint = paint2;
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R.styleable.DividerHandleView, 0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R.styleable.DividerHandleView, 0, 0);
         try {
-            int i = obtainStyledAttributes.getInt(0, 0);
+            int i = typedArrayObtainStyledAttributes.getInt(0, 0);
             this.mHandleType = i;
             boolean z = true;
             if (i != 0) {
-                z = obtainStyledAttributes.getBoolean(1, true);
+                z = typedArrayObtainStyledAttributes.getBoolean(1, true);
             } else if (getResources().getConfiguration().orientation != 1) {
                 z = false;
             }
             this.mIsHorizontalDivision = z;
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             if (!CoreRune.MW_MULTI_SPLIT_CELL_DIVIDER || i != 2) {
                 this.mWidth = getResources().getDimensionPixelSize(com.android.systemui.R.dimen.split_divider_handle_width);
                 this.mHeight = getResources().getDimensionPixelSize(com.android.systemui.R.dimen.split_divider_handle_height);
@@ -115,7 +114,7 @@ public class DividerHandleView extends View {
                 this.mHorizontalHandlerTopMargin = z ? getResources().getDimensionPixelSize(com.android.systemui.R.dimen.multi_split_docked_divider_horizontal_handler_margin_top) : 0;
             }
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }
@@ -202,11 +201,11 @@ public class DividerHandleView extends View {
         if (!z) {
             i2 = this.mHeight;
         }
-        ObjectAnimator ofInt = ObjectAnimator.ofInt(this, WIDTH_PROPERTY, this.mCurrentWidth, i);
-        ObjectAnimator ofInt2 = ObjectAnimator.ofInt(this, HEIGHT_PROPERTY, this.mCurrentHeight, i2);
+        ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(this, WIDTH_PROPERTY, this.mCurrentWidth, i);
+        ObjectAnimator objectAnimatorOfInt2 = ObjectAnimator.ofInt(this, HEIGHT_PROPERTY, this.mCurrentHeight, i2);
         AnimatorSet animatorSet2 = new AnimatorSet();
         this.mAnimator = animatorSet2;
-        animatorSet2.playTogether(ofInt, ofInt2);
+        animatorSet2.playTogether(objectAnimatorOfInt, objectAnimatorOfInt2);
         this.mAnimator.setDuration(z ? 150L : 200L);
         this.mAnimator.setInterpolator(z ? Interpolators.TOUCH_RESPONSE : Interpolators.FAST_OUT_SLOW_IN);
         this.mAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.common.split.DividerHandleView.3
@@ -219,7 +218,7 @@ public class DividerHandleView extends View {
         this.mHovering = z;
     }
 
-    public final void setIsLeftRightSplit(boolean z) {
+    public final void setIsLeftRightSplit(boolean z) throws Resources.NotFoundException {
         this.mIsLeftRightSplit = z;
         Resources resources = getResources();
         boolean z2 = this.mIsLeftRightSplit;

@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.StartedWhileSubscribed;
 import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileRepositorySwitcher implements MobileConnectionsRepository {
     public final ReadonlyStateFlow activeMobileDataRepository;
@@ -41,29 +40,29 @@ public final class MobileRepositorySwitcher implements MobileConnectionsReposito
     public MobileRepositorySwitcher(CoroutineScope coroutineScope, MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl, DemoMobileConnectionsRepository demoMobileConnectionsRepository, DemoModeController demoModeController) {
         this.realRepository = mobileConnectionsRepositoryImpl;
         this.demoMobileConnectionsRepository = demoMobileConnectionsRepository;
-        Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new MobileRepositorySwitcher$isDemoMode$1(demoModeController, this, null));
+        Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new MobileRepositorySwitcher$isDemoMode$1(demoModeController, this, null));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         demoModeController.getClass();
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(conflatedCallbackFlow, coroutineScope, WhileSubscribed$default, Boolean.FALSE);
-        this.isDemoMode = stateIn;
-        ReadonlyStateFlow stateIn2 = FlowKt.stateIn(FlowKt.mapLatest(stateIn, new MobileRepositorySwitcher$activeRepo$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl);
-        this.activeRepo = stateIn2;
-        this.subscriptions = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.subscriptions.$$delegate_0.getValue());
-        this.activeMobileDataSubscriptionId = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$2(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.activeMobileDataSubscriptionId.$$delegate_0.getValue());
-        this.activeMobileDataRepository = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$3(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.activeMobileDataRepository.$$delegate_0.getValue());
-        this.activeSubChangedInGroupEvent = FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$4(null));
-        this.defaultDataSubRatConfig = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$5(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.defaultDataSubRatConfig.$$delegate_0.getValue());
-        this.defaultMobileIconMappingTable = FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$6(null));
-        this.defaultMobileIconMapping = FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$7(null));
-        this.defaultMobileIconGroup = FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$8(null));
-        this.isDeviceEmergencyCallCapable = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$9(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.isDeviceEmergencyCallCapable.$$delegate_0.getValue());
-        this.isAnySimSecure = FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$10(null));
-        this.defaultDataSubId = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$11(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.defaultDataSubId.$$delegate_0.getValue());
-        this.mobileIsDefault = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$12(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.mobileIsDefault.$$delegate_0.getValue());
-        this.hasCarrierMergedConnection = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$13(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.hasCarrierMergedConnection.$$delegate_0.getValue());
-        this.defaultConnectionIsValidated = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$14(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.defaultConnectionIsValidated.$$delegate_0.getValue());
-        this.deviceOnTheCall = FlowKt.stateIn(FlowKt.transformLatest(stateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$15(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.deviceOnTheCall.$$delegate_0.getValue());
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowConflatedCallbackFlow, coroutineScope, startedWhileSubscribedWhileSubscribed$default, Boolean.FALSE);
+        this.isDemoMode = readonlyStateFlowStateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(FlowKt.mapLatest(readonlyStateFlowStateIn, new MobileRepositorySwitcher$activeRepo$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl);
+        this.activeRepo = readonlyStateFlowStateIn2;
+        this.subscriptions = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.subscriptions.$$delegate_0.getValue());
+        this.activeMobileDataSubscriptionId = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$2(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.activeMobileDataSubscriptionId.$$delegate_0.getValue());
+        this.activeMobileDataRepository = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$3(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.activeMobileDataRepository.$$delegate_0.getValue());
+        this.activeSubChangedInGroupEvent = FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$4(null));
+        this.defaultDataSubRatConfig = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$5(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.defaultDataSubRatConfig.$$delegate_0.getValue());
+        this.defaultMobileIconMappingTable = FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$6(null));
+        this.defaultMobileIconMapping = FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$7(null));
+        this.defaultMobileIconGroup = FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$8(null));
+        this.isDeviceEmergencyCallCapable = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$9(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.isDeviceEmergencyCallCapable.$$delegate_0.getValue());
+        this.isAnySimSecure = FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$10(null));
+        this.defaultDataSubId = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$11(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.defaultDataSubId.$$delegate_0.getValue());
+        this.mobileIsDefault = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$12(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.mobileIsDefault.$$delegate_0.getValue());
+        this.hasCarrierMergedConnection = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$13(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.hasCarrierMergedConnection.$$delegate_0.getValue());
+        this.defaultConnectionIsValidated = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$14(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.defaultConnectionIsValidated.$$delegate_0.getValue());
+        this.deviceOnTheCall = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn2, new MobileRepositorySwitcher$special$$inlined$flatMapLatest$15(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), mobileConnectionsRepositoryImpl.deviceOnTheCall.$$delegate_0.getValue());
     }
 
     @Override // com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileConnectionsRepository

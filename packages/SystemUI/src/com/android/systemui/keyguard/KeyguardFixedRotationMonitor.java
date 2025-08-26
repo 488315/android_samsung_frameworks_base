@@ -16,7 +16,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardFixedRotationMonitor {
     public static final boolean DEBUG;
@@ -29,21 +28,21 @@ public final class KeyguardFixedRotationMonitor {
     public final kotlin.Lazy notificationShadeView$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.keyguard.KeyguardFixedRotationMonitor$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            return ((NotificationShadeWindowControllerImpl) ((NotificationShadeWindowController) KeyguardFixedRotationMonitor.this.notificationShadeWindowController.get())).mWindowRootView;
+            return ((NotificationShadeWindowControllerImpl) ((NotificationShadeWindowController) this.f$0.notificationShadeWindowController.get())).mWindowRootView;
         }
     });
     public final KeyguardFixedRotationMonitor$preDrawListener$1 preDrawListener = new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.systemui.keyguard.KeyguardFixedRotationMonitor$preDrawListener$1
         @Override // android.view.ViewTreeObserver.OnPreDrawListener
         public final boolean onPreDraw() {
-            KeyguardFixedRotationMonitor keyguardFixedRotationMonitor = KeyguardFixedRotationMonitor.this;
+            KeyguardFixedRotationMonitor keyguardFixedRotationMonitor = this.this$0;
             boolean z = KeyguardFixedRotationMonitor.DEBUG;
             ViewGroup viewGroup = (ViewGroup) keyguardFixedRotationMonitor.notificationShadeView$delegate.getValue();
-            boolean hasWindowFocus = viewGroup != null ? viewGroup.hasWindowFocus() : false;
-            if (!hasWindowFocus) {
+            boolean zHasWindowFocus = viewGroup != null ? viewGroup.hasWindowFocus() : false;
+            if (!zHasWindowFocus) {
                 android.util.Log.d("KeyguardFixedRotation", "onPreDraw no window focus");
             }
             KeyguardViewMediatorHelperImpl$showForegroundImmediatelyIfNeeded$1$1 keyguardViewMediatorHelperImpl$showForegroundImmediatelyIfNeeded$1$1 = keyguardFixedRotationMonitor.pendingRunnable;
-            if (keyguardViewMediatorHelperImpl$showForegroundImmediatelyIfNeeded$1$1 == null || hasWindowFocus) {
+            if (keyguardViewMediatorHelperImpl$showForegroundImmediatelyIfNeeded$1$1 == null || zHasWindowFocus) {
                 return true;
             }
             keyguardViewMediatorHelperImpl$showForegroundImmediatelyIfNeeded$1$1.run();
@@ -54,17 +53,17 @@ public final class KeyguardFixedRotationMonitor {
     public final KeyguardFixedRotationMonitor$safeRunnable$1 safeRunnable = new KeyguardFixedRotationMonitor$safeRunnable$1(this);
     public final KeyguardFixedRotationMonitor$displayWindowListener$1 displayWindowListener = new IDisplayWindowListener.Stub() { // from class: com.android.systemui.keyguard.KeyguardFixedRotationMonitor$displayWindowListener$1
         public final void onFixedRotationStarted(int i, final int i2) {
-            KeyguardFixedRotationMonitor keyguardFixedRotationMonitor = KeyguardFixedRotationMonitor.this;
-            String m = ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "onFixedRotationStarted ", ", ");
+            KeyguardFixedRotationMonitor keyguardFixedRotationMonitor = this.this$0;
+            String strM = ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "onFixedRotationStarted ", ", ");
             boolean z = KeyguardFixedRotationMonitor.DEBUG;
             keyguardFixedRotationMonitor.getClass();
             if (KeyguardFixedRotationMonitor.DEBUG) {
-                android.util.Log.d("KeyguardFixedRotation", m);
+                android.util.Log.d("KeyguardFixedRotation", strM);
             }
             if (i != 0) {
                 return;
             }
-            final KeyguardFixedRotationMonitor keyguardFixedRotationMonitor2 = KeyguardFixedRotationMonitor.this;
+            final KeyguardFixedRotationMonitor keyguardFixedRotationMonitor2 = this.this$0;
             keyguardFixedRotationMonitor2.handler.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardFixedRotationMonitor$displayWindowListener$1$onFixedRotationStarted$1
                 @Override // java.lang.Runnable
                 public final void run() {
@@ -93,7 +92,6 @@ public final class KeyguardFixedRotationMonitor {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

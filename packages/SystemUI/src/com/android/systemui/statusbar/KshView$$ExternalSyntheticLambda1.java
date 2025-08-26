@@ -1,8 +1,8 @@
 package com.android.systemui.statusbar;
 
+import android.content.res.Resources;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class KshView$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ KshView f$0;
@@ -14,7 +14,7 @@ public final /* synthetic */ class KshView$$ExternalSyntheticLambda1 implements 
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Resources.NotFoundException {
         this.f$0.showKshDialog(this.f$1);
     }
 }

@@ -6,7 +6,6 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MobileApplication extends Content {
     public static final Parcelable.Creator<MobileApplication> CREATOR = new Creator();
@@ -15,7 +14,6 @@ public final class MobileApplication extends Content {
     private final String name;
     private final String packageId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {

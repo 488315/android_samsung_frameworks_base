@@ -7,12 +7,10 @@ import androidx.constraintlayout.core.widgets.analyzer.DependencyNode;
 import androidx.constraintlayout.core.widgets.analyzer.WidgetRun;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HorizontalWidgetRun extends WidgetRun {
     public static final int[] sTempDimensions = new int[2];
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.constraintlayout.core.widgets.analyzer.HorizontalWidgetRun$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$androidx$constraintlayout$core$widgets$analyzer$WidgetRun$RunType;
@@ -299,20 +297,193 @@ public class HorizontalWidgetRun extends WidgetRun {
         return "HorizontalRun " + this.mWidget.mDebugName;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:107:0x0259, code lost:
-    
-        if (r15 != 1) goto L124;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:115:0x027c  */
     @Override // androidx.constraintlayout.core.widgets.analyzer.WidgetRun, androidx.constraintlayout.core.widgets.analyzer.Dependency
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void update(androidx.constraintlayout.core.widgets.analyzer.Dependency r23) {
-        /*
-            Method dump skipped, instructions count: 946
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.constraintlayout.core.widgets.analyzer.HorizontalWidgetRun.update(androidx.constraintlayout.core.widgets.analyzer.Dependency):void");
+    public final void update(Dependency dependency) {
+        float f;
+        float f2;
+        float f3;
+        int i;
+        if (AnonymousClass1.$SwitchMap$androidx$constraintlayout$core$widgets$analyzer$WidgetRun$RunType[this.mRunType.ordinal()] == 3) {
+            ConstraintWidget constraintWidget = this.mWidget;
+            updateRunCenter(constraintWidget.mLeft, constraintWidget.mRight, 0);
+            return;
+        }
+        DimensionDependency dimensionDependency = this.mDimension;
+        boolean z = dimensionDependency.resolved;
+        DependencyNode dependencyNode = this.start;
+        DependencyNode dependencyNode2 = this.end;
+        if (!z && this.mDimensionBehavior == ConstraintWidget.DimensionBehaviour.MATCH_CONSTRAINT) {
+            ConstraintWidget constraintWidget2 = this.mWidget;
+            int i2 = constraintWidget2.mMatchConstraintDefaultWidth;
+            if (i2 == 2) {
+                ConstraintWidget constraintWidget3 = constraintWidget2.mParent;
+                if (constraintWidget3 != null) {
+                    if (constraintWidget3.mHorizontalRun.mDimension.resolved) {
+                        dimensionDependency.resolve((int) ((r3.value * constraintWidget2.mMatchConstraintPercentWidth) + 0.5f));
+                    }
+                }
+            } else if (i2 == 3) {
+                int i3 = constraintWidget2.mMatchConstraintDefaultHeight;
+                if (i3 == 0 || i3 == 3) {
+                    VerticalWidgetRun verticalWidgetRun = constraintWidget2.mVerticalRun;
+                    DependencyNode dependencyNode3 = verticalWidgetRun.start;
+                    DependencyNode dependencyNode4 = verticalWidgetRun.end;
+                    boolean z2 = constraintWidget2.mLeft.mTarget != null;
+                    boolean z3 = constraintWidget2.mTop.mTarget != null;
+                    boolean z4 = constraintWidget2.mRight.mTarget != null;
+                    boolean z5 = constraintWidget2.mBottom.mTarget != null;
+                    int i4 = constraintWidget2.mDimensionRatioSide;
+                    if (z2 && z3 && z4 && z5) {
+                        float f4 = constraintWidget2.mDimensionRatio;
+                        boolean z6 = dependencyNode3.resolved;
+                        int[] iArr = sTempDimensions;
+                        if (z6 && dependencyNode4.resolved) {
+                            if (dependencyNode.readyToSolve && dependencyNode2.readyToSolve) {
+                                computeInsetRatio(iArr, ((DependencyNode) ((ArrayList) dependencyNode.mTargets).get(0)).value + dependencyNode.mMargin, ((DependencyNode) ((ArrayList) dependencyNode2.mTargets).get(0)).value - dependencyNode2.mMargin, dependencyNode3.value + dependencyNode3.mMargin, dependencyNode4.value - dependencyNode4.mMargin, f4, i4);
+                                dimensionDependency.resolve(iArr[0]);
+                                this.mWidget.mVerticalRun.mDimension.resolve(iArr[1]);
+                                return;
+                            }
+                            return;
+                        }
+                        if (dependencyNode.resolved && dependencyNode2.resolved) {
+                            if (!dependencyNode3.readyToSolve || !dependencyNode4.readyToSolve) {
+                                return;
+                            }
+                            computeInsetRatio(iArr, dependencyNode.value + dependencyNode.mMargin, dependencyNode2.value - dependencyNode2.mMargin, ((DependencyNode) ((ArrayList) dependencyNode3.mTargets).get(0)).value + dependencyNode3.mMargin, ((DependencyNode) ((ArrayList) dependencyNode4.mTargets).get(0)).value - dependencyNode4.mMargin, f4, i4);
+                            dimensionDependency.resolve(iArr[0]);
+                            this.mWidget.mVerticalRun.mDimension.resolve(iArr[1]);
+                        }
+                        if (!dependencyNode.readyToSolve || !dependencyNode2.readyToSolve || !dependencyNode3.readyToSolve || !dependencyNode4.readyToSolve) {
+                            return;
+                        }
+                        computeInsetRatio(iArr, ((DependencyNode) ((ArrayList) dependencyNode.mTargets).get(0)).value + dependencyNode.mMargin, ((DependencyNode) ((ArrayList) dependencyNode2.mTargets).get(0)).value - dependencyNode2.mMargin, ((DependencyNode) ((ArrayList) dependencyNode3.mTargets).get(0)).value + dependencyNode3.mMargin, ((DependencyNode) ((ArrayList) dependencyNode4.mTargets).get(0)).value - dependencyNode4.mMargin, f4, i4);
+                        dimensionDependency.resolve(iArr[0]);
+                        this.mWidget.mVerticalRun.mDimension.resolve(iArr[1]);
+                    } else if (z2 && z4) {
+                        if (!dependencyNode.readyToSolve || !dependencyNode2.readyToSolve) {
+                            return;
+                        }
+                        float f5 = constraintWidget2.mDimensionRatio;
+                        int i5 = ((DependencyNode) ((ArrayList) dependencyNode.mTargets).get(0)).value + dependencyNode.mMargin;
+                        int i6 = ((DependencyNode) ((ArrayList) dependencyNode2.mTargets).get(0)).value - dependencyNode2.mMargin;
+                        if (i4 == -1 || i4 == 0) {
+                            int limitedDimension = getLimitedDimension(i6 - i5, 0);
+                            int i7 = (int) ((limitedDimension * f5) + 0.5f);
+                            int limitedDimension2 = getLimitedDimension(i7, 1);
+                            if (i7 != limitedDimension2) {
+                                limitedDimension = (int) ((limitedDimension2 / f5) + 0.5f);
+                            }
+                            dimensionDependency.resolve(limitedDimension);
+                            this.mWidget.mVerticalRun.mDimension.resolve(limitedDimension2);
+                        } else if (i4 == 1) {
+                            int limitedDimension3 = getLimitedDimension(i6 - i5, 0);
+                            int i8 = (int) ((limitedDimension3 / f5) + 0.5f);
+                            int limitedDimension4 = getLimitedDimension(i8, 1);
+                            if (i8 != limitedDimension4) {
+                                limitedDimension3 = (int) ((limitedDimension4 * f5) + 0.5f);
+                            }
+                            dimensionDependency.resolve(limitedDimension3);
+                            this.mWidget.mVerticalRun.mDimension.resolve(limitedDimension4);
+                        }
+                    } else if (z3 && z5) {
+                        if (!dependencyNode3.readyToSolve || !dependencyNode4.readyToSolve) {
+                            return;
+                        }
+                        float f6 = constraintWidget2.mDimensionRatio;
+                        int i9 = ((DependencyNode) ((ArrayList) dependencyNode3.mTargets).get(0)).value + dependencyNode3.mMargin;
+                        int i10 = ((DependencyNode) ((ArrayList) dependencyNode4.mTargets).get(0)).value - dependencyNode4.mMargin;
+                        if (i4 == -1) {
+                            int limitedDimension5 = getLimitedDimension(i10 - i9, 1);
+                            int i11 = (int) ((limitedDimension5 / f6) + 0.5f);
+                            int limitedDimension6 = getLimitedDimension(i11, 0);
+                            if (i11 != limitedDimension6) {
+                                limitedDimension5 = (int) ((limitedDimension6 * f6) + 0.5f);
+                            }
+                            dimensionDependency.resolve(limitedDimension6);
+                            this.mWidget.mVerticalRun.mDimension.resolve(limitedDimension5);
+                        } else if (i4 == 0) {
+                            int limitedDimension7 = getLimitedDimension(i10 - i9, 1);
+                            int i12 = (int) ((limitedDimension7 * f6) + 0.5f);
+                            int limitedDimension8 = getLimitedDimension(i12, 0);
+                            if (i12 != limitedDimension8) {
+                                limitedDimension7 = (int) ((limitedDimension8 / f6) + 0.5f);
+                            }
+                            dimensionDependency.resolve(limitedDimension8);
+                            this.mWidget.mVerticalRun.mDimension.resolve(limitedDimension7);
+                        } else if (i4 == 1) {
+                        }
+                    }
+                } else {
+                    int i13 = constraintWidget2.mDimensionRatioSide;
+                    if (i13 == -1) {
+                        f = constraintWidget2.mVerticalRun.mDimension.value;
+                        f2 = constraintWidget2.mDimensionRatio;
+                    } else if (i13 == 0) {
+                        f3 = constraintWidget2.mVerticalRun.mDimension.value / constraintWidget2.mDimensionRatio;
+                        i = (int) (f3 + 0.5f);
+                        dimensionDependency.resolve(i);
+                    } else if (i13 != 1) {
+                        i = 0;
+                        dimensionDependency.resolve(i);
+                    } else {
+                        f = constraintWidget2.mVerticalRun.mDimension.value;
+                        f2 = constraintWidget2.mDimensionRatio;
+                    }
+                    f3 = f * f2;
+                    i = (int) (f3 + 0.5f);
+                    dimensionDependency.resolve(i);
+                }
+            }
+        }
+        if (dependencyNode.readyToSolve && dependencyNode2.readyToSolve) {
+            if (dependencyNode.resolved && dependencyNode2.resolved && dimensionDependency.resolved) {
+                return;
+            }
+            if (!dimensionDependency.resolved && this.mDimensionBehavior == ConstraintWidget.DimensionBehaviour.MATCH_CONSTRAINT) {
+                ConstraintWidget constraintWidget4 = this.mWidget;
+                if (constraintWidget4.mMatchConstraintDefaultWidth == 0 && !constraintWidget4.isInHorizontalChain()) {
+                    DependencyNode dependencyNode5 = (DependencyNode) ((ArrayList) dependencyNode.mTargets).get(0);
+                    DependencyNode dependencyNode6 = (DependencyNode) ((ArrayList) dependencyNode2.mTargets).get(0);
+                    int i14 = dependencyNode5.value + dependencyNode.mMargin;
+                    int i15 = dependencyNode6.value + dependencyNode2.mMargin;
+                    dependencyNode.resolve(i14);
+                    dependencyNode2.resolve(i15);
+                    dimensionDependency.resolve(i15 - i14);
+                    return;
+                }
+            }
+            if (!dimensionDependency.resolved && this.mDimensionBehavior == ConstraintWidget.DimensionBehaviour.MATCH_CONSTRAINT && this.matchConstraintsType == 1 && ((ArrayList) dependencyNode.mTargets).size() > 0 && ((ArrayList) dependencyNode2.mTargets).size() > 0) {
+                int iMin = Math.min((((DependencyNode) ((ArrayList) dependencyNode2.mTargets).get(0)).value + dependencyNode2.mMargin) - (((DependencyNode) ((ArrayList) dependencyNode.mTargets).get(0)).value + dependencyNode.mMargin), dimensionDependency.wrapValue);
+                ConstraintWidget constraintWidget5 = this.mWidget;
+                int i16 = constraintWidget5.mMatchConstraintMaxWidth;
+                int iMax = Math.max(constraintWidget5.mMatchConstraintMinWidth, iMin);
+                if (i16 > 0) {
+                    iMax = Math.min(i16, iMax);
+                }
+                dimensionDependency.resolve(iMax);
+            }
+            if (dimensionDependency.resolved) {
+                DependencyNode dependencyNode7 = (DependencyNode) ((ArrayList) dependencyNode.mTargets).get(0);
+                DependencyNode dependencyNode8 = (DependencyNode) ((ArrayList) dependencyNode2.mTargets).get(0);
+                int i17 = dependencyNode7.value;
+                int i18 = dependencyNode.mMargin + i17;
+                int i19 = dependencyNode8.value;
+                int i20 = dependencyNode2.mMargin + i19;
+                float f7 = this.mWidget.mHorizontalBiasPercent;
+                if (dependencyNode7 == dependencyNode8) {
+                    f7 = 0.5f;
+                } else {
+                    i17 = i18;
+                    i19 = i20;
+                }
+                dependencyNode.resolve((int) ((((i19 - i17) - dimensionDependency.value) * f7) + i17 + 0.5f));
+                dependencyNode2.resolve(dependencyNode.value + dimensionDependency.value);
+            }
+        }
     }
 }

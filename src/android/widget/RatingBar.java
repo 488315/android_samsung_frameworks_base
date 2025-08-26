@@ -60,13 +60,13 @@ public class RatingBar extends AbsSeekBar {
     public RatingBar(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mNumStars = 5;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RatingBar, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.RatingBar, attributeSet, obtainStyledAttributes, i, i2);
-        int i3 = obtainStyledAttributes.getInt(0, this.mNumStars);
-        setIsIndicator(obtainStyledAttributes.getBoolean(3, !this.mIsUserSeekable));
-        float f = obtainStyledAttributes.getFloat(1, -1.0f);
-        float f2 = obtainStyledAttributes.getFloat(2, -1.0f);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RatingBar, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.RatingBar, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        int i3 = typedArrayObtainStyledAttributes.getInt(0, this.mNumStars);
+        setIsIndicator(typedArrayObtainStyledAttributes.getBoolean(3, !this.mIsUserSeekable));
+        float f = typedArrayObtainStyledAttributes.getFloat(1, -1.0f);
+        float f2 = typedArrayObtainStyledAttributes.getFloat(2, -1.0f);
+        typedArrayObtainStyledAttributes.recycle();
         if (i3 > 0 && i3 != this.mNumStars) {
             setNumStars(i3);
         }
@@ -156,7 +156,7 @@ public class RatingBar extends AbsSeekBar {
     }
 
     @Override // android.widget.AbsSeekBar, android.widget.ProgressBar
-    void onProgressRefresh(float f, boolean z, int i) {
+    void onProgressRefresh(float f, boolean z, int i) throws Throwable {
         super.onProgressRefresh(f, z, i);
         updateSecondaryProgress(i);
         if (z) {
@@ -227,10 +227,10 @@ public class RatingBar extends AbsSeekBar {
             accessibilityNodeInfo.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_PROGRESS);
         }
         float max = getMax() * getStepSize();
-        HashMap hashMap = new HashMap();
-        hashMap.put(PLURALS_RATING, Float.valueOf(getRating()));
-        hashMap.put("max", Float.valueOf(max));
-        accessibilityNodeInfo.setStateDescription(PluralsMessageFormatter.format(getContext().getResources(), hashMap, R.string.rating_label));
+        HashMap map = new HashMap();
+        map.put(PLURALS_RATING, Float.valueOf(getRating()));
+        map.put("max", Float.valueOf(max));
+        accessibilityNodeInfo.setStateDescription(PluralsMessageFormatter.format(getContext().getResources(), map, R.string.rating_label));
     }
 
     @Override // android.widget.AbsSeekBar

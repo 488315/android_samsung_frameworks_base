@@ -8,7 +8,6 @@ import com.android.systemui.qs.panelresource.SecQSPanelResourceCommon;
 import com.android.systemui.util.DeviceState;
 import kotlin.Pair;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecQSPanelResourceWidePicker extends SecQSPanelResourceNormalPicker {
     public final SecQSPanelResourceCommon common;
@@ -19,32 +18,32 @@ public final class SecQSPanelResourceWidePicker extends SecQSPanelResourceNormal
     }
 
     public static int getFoldPanelPadding(Context context) {
-        float m;
+        float fM;
         SecQSPanelResourceCommon.Companion.getClass();
         int displayWidth = DeviceState.getDisplayWidth(context);
         if (SecQSPanelResourceCommon.Companion.isLandscape(context)) {
             float f = displayWidth;
-            float m2 = SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_panel_width_landscape_ratio_fold, f);
+            float fM2 = SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_panel_width_landscape_ratio_fold, f);
             if (!DeviceState.isSmartViewFitToActiveDisplay()) {
                 f *= 0.5597f;
             }
-            m = (m2 - f) / 2.0f;
+            fM = (fM2 - f) / 2.0f;
         } else {
-            m = SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.notification_side_padding_portrait_ratio_fold, displayWidth);
+            fM = SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.notification_side_padding_portrait_ratio_fold, displayWidth);
         }
-        return (int) m;
+        return (int) fM;
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
     public final int getBrightnessTileLayoutBetweenMargin(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.sec_brightness_tile_between_margin_fold, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.sec_brightness_tile_between_margin_fold, context) * DeviceState.getDisplayWidth(context));
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
     public final int getButtonsWidth(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return Math.max((int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.qs_button_container_width_ratio_fold, context) * DeviceState.getDisplayWidth(context)), context.getResources().getDimensionPixelSize(R.dimen.sec_qs_button_container_size));
+        return Math.max((int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_button_container_width_ratio_fold, context) * DeviceState.getDisplayWidth(context)), context.getResources().getDimensionPixelSize(R.dimen.sec_qs_button_container_size));
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
@@ -68,7 +67,7 @@ public final class SecQSPanelResourceWidePicker extends SecQSPanelResourceNormal
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
     public final int getLabelHeight(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) Math.max(SecQSPanelResourceCommon.Companion.m2886float(R.dimen.qs_label_height_ratio_fold, context) * DeviceState.getDisplayHeight(context), context.getResources().getDimensionPixelSize(R.dimen.sec_qs_label_height_fold));
+        return (int) Math.max(SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_label_height_ratio_fold, context) * DeviceState.getDisplayHeight(context), context.getResources().getDimensionPixelSize(R.dimen.sec_qs_label_height_fold));
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
@@ -114,17 +113,17 @@ public final class SecQSPanelResourceWidePicker extends SecQSPanelResourceNormal
         float f2;
         SecQSPanelResourceCommon.Companion.getClass();
         Pair pair = new Pair(Boolean.valueOf(SecQSPanelResourceCommon.Companion.isLandscape(context)), Integer.valueOf(DeviceState.getDisplayWidth(context)));
-        boolean booleanValue = ((Boolean) pair.component1()).booleanValue();
-        int intValue = ((Number) pair.component2()).intValue();
+        boolean zBooleanValue = ((Boolean) pair.component1()).booleanValue();
+        int iIntValue = ((Number) pair.component2()).intValue();
         if (DeviceState.isSmartViewFitToActiveDisplay()) {
-            return booleanValue ? (int) (intValue * 0.735f) : intValue;
+            return zBooleanValue ? (int) (iIntValue * 0.735f) : iIntValue;
         }
         int quickSettingExtraSidePadding = getQuickSettingExtraSidePadding(context) * 2;
-        if (booleanValue) {
-            f = intValue;
+        if (zBooleanValue) {
+            f = iIntValue;
             f2 = 0.8097f;
         } else {
-            f = intValue;
+            f = iIntValue;
             f2 = 0.7f;
         }
         return quickSettingExtraSidePadding + ((int) (f * f2));
@@ -132,16 +131,16 @@ public final class SecQSPanelResourceWidePicker extends SecQSPanelResourceNormal
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
     public final int getQQSPanelSidePadding(Context context) {
-        float m;
+        float fM;
         SecQSPanelResourceCommon.Companion.getClass();
         int displayWidth = DeviceState.getDisplayWidth(context);
         if (SecQSPanelResourceCommon.Companion.isLandscape(context)) {
             float f = displayWidth;
-            m = SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(f, 0.6204f, SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_panel_width_landscape_ratio_fold, f), 2.0f);
+            fM = SeslRecoilAnimator$Holder$$ExternalSyntheticOutline0.m(f, 0.6204f, SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.qs_panel_width_landscape_ratio_fold, f), 2.0f);
         } else {
-            m = SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.notification_side_padding_portrait_ratio_fold, displayWidth * (-1));
+            fM = SecurityUtils$$ExternalSyntheticOutline0.m(context, R.dimen.notification_side_padding_portrait_ratio_fold, displayWidth * (-1));
         }
-        return (int) m;
+        return (int) fM;
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
@@ -158,35 +157,35 @@ public final class SecQSPanelResourceWidePicker extends SecQSPanelResourceNormal
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
     public final int getQSGuideContainerMargin(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.qs_guide_dialog_fold_container_margin, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_fold_container_margin, context) * DeviceState.getDisplayWidth(context));
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
     public final int getQSGuideImageHeight(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.qs_guide_dialog_fold_image_height_ratio, context) * DeviceState.getDisplayHeight(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_fold_image_height_ratio, context) * DeviceState.getDisplayHeight(context));
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
     public final int getQSGuideImageWidth(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.qs_guide_dialog_fold_image_width_ratio, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_fold_image_width_ratio, context) * DeviceState.getDisplayWidth(context));
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
-    public final int getQSGuideWidth(Context context, boolean z) {
+    public final int getQSGuideWidth(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2886float(R.dimen.qs_guide_dialog_fold_width_ratio, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_fold_width_ratio, context) * DeviceState.getDisplayWidth(context));
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
     public final int getQsTileColumn(Context context) {
         if (this.common.isEmergencyMode) {
             SecQSPanelResourceCommon.Companion.getClass();
-            return Math.max(1, SecQSPanelResourceCommon.Companion.m2887int(R.integer.sec_quick_settings_num_columns_power_saving, context));
+            return Math.max(1, SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_settings_num_columns_power_saving, context));
         }
         SecQSPanelResourceCommon.Companion.getClass();
-        return SecQSPanelResourceCommon.Companion.m2887int(R.integer.sec_quick_settings_num_columns_fold, context);
+        return SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_settings_num_columns_fold, context);
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker

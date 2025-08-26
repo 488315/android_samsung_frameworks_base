@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.pipeline.shared.ui.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
@@ -12,7 +13,6 @@ import com.android.systemui.statusbar.pipeline.shared.ui.binder.ModernStatusBarV
 import java.util.ArrayList;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ModernStatusBarView extends BaseStatusBarFrameLayout {
     public ModernStatusBarViewBinding binding;
@@ -49,7 +49,7 @@ public class ModernStatusBarView extends BaseStatusBarFrameLayout {
         return this.iconVisibleState;
     }
 
-    public void initView(String str, Function0 function0) {
+    public void initView(String str, Function0 function0) throws Resources.NotFoundException {
         this.slot = str;
         Context context = ((FrameLayout) this).mContext;
         String str2 = this.slot;

@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScrollableNode$setScrollSemanticsActions$2 extends SuspendLambda implements Function2 {
     /* synthetic */ long J$0;
@@ -30,7 +29,7 @@ final class ScrollableNode$setScrollSemanticsActions$2 extends SuspendLambda imp
 
     @Override // kotlin.jvm.functions.Function2
     public final Object invoke(Object obj, Object obj2) {
-        return ((ScrollableNode$setScrollSemanticsActions$2) create(Offset.m393boximpl(((Offset) obj).packedValue), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        return ((ScrollableNode$setScrollSemanticsActions$2) create(Offset.m395boximpl(((Offset) obj).packedValue), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -48,7 +47,7 @@ final class ScrollableNode$setScrollSemanticsActions$2 extends SuspendLambda imp
         long j = this.J$0;
         ScrollingLogic scrollingLogic = this.this$0.scrollingLogic;
         this.label = 1;
-        Object m76access$semanticsScrollByd4ec7I = ScrollableKt.m76access$semanticsScrollByd4ec7I(scrollingLogic, j, this);
-        return m76access$semanticsScrollByd4ec7I == coroutineSingletons ? coroutineSingletons : m76access$semanticsScrollByd4ec7I;
+        Object objM77access$semanticsScrollByd4ec7I = ScrollableKt.m77access$semanticsScrollByd4ec7I(scrollingLogic, j, this);
+        return objM77access$semanticsScrollByd4ec7I == coroutineSingletons ? coroutineSingletons : objM77access$semanticsScrollByd4ec7I;
     }
 }

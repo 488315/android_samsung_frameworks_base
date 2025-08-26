@@ -27,42 +27,42 @@ public class HealthStats {
 
     public HealthStats(Parcel parcel) {
         this.mDataType = parcel.readString();
-        int readInt = parcel.readInt();
-        this.mTimerKeys = new int[readInt];
-        this.mTimerCounts = new int[readInt];
-        this.mTimerTimes = new long[readInt];
-        for (int i = 0; i < readInt; i++) {
-            this.mTimerKeys[i] = parcel.readInt();
-            this.mTimerCounts[i] = parcel.readInt();
-            this.mTimerTimes[i] = parcel.readLong();
+        int i = parcel.readInt();
+        this.mTimerKeys = new int[i];
+        this.mTimerCounts = new int[i];
+        this.mTimerTimes = new long[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            this.mTimerKeys[i2] = parcel.readInt();
+            this.mTimerCounts[i2] = parcel.readInt();
+            this.mTimerTimes[i2] = parcel.readLong();
         }
-        int readInt2 = parcel.readInt();
-        this.mMeasurementKeys = new int[readInt2];
-        this.mMeasurementValues = new long[readInt2];
-        for (int i2 = 0; i2 < readInt2; i2++) {
-            this.mMeasurementKeys[i2] = parcel.readInt();
-            this.mMeasurementValues[i2] = parcel.readLong();
+        int i3 = parcel.readInt();
+        this.mMeasurementKeys = new int[i3];
+        this.mMeasurementValues = new long[i3];
+        for (int i4 = 0; i4 < i3; i4++) {
+            this.mMeasurementKeys[i4] = parcel.readInt();
+            this.mMeasurementValues[i4] = parcel.readLong();
         }
-        int readInt3 = parcel.readInt();
-        this.mStatsKeys = new int[readInt3];
-        this.mStatsValues = new ArrayMap[readInt3];
-        for (int i3 = 0; i3 < readInt3; i3++) {
-            this.mStatsKeys[i3] = parcel.readInt();
-            this.mStatsValues[i3] = createHealthStatsMap(parcel);
+        int i5 = parcel.readInt();
+        this.mStatsKeys = new int[i5];
+        this.mStatsValues = new ArrayMap[i5];
+        for (int i6 = 0; i6 < i5; i6++) {
+            this.mStatsKeys[i6] = parcel.readInt();
+            this.mStatsValues[i6] = createHealthStatsMap(parcel);
         }
-        int readInt4 = parcel.readInt();
-        this.mTimersKeys = new int[readInt4];
-        this.mTimersValues = new ArrayMap[readInt4];
-        for (int i4 = 0; i4 < readInt4; i4++) {
-            this.mTimersKeys[i4] = parcel.readInt();
-            this.mTimersValues[i4] = createParcelableMap(parcel, TimerStat.CREATOR);
+        int i7 = parcel.readInt();
+        this.mTimersKeys = new int[i7];
+        this.mTimersValues = new ArrayMap[i7];
+        for (int i8 = 0; i8 < i7; i8++) {
+            this.mTimersKeys[i8] = parcel.readInt();
+            this.mTimersValues[i8] = createParcelableMap(parcel, TimerStat.CREATOR);
         }
-        int readInt5 = parcel.readInt();
-        this.mMeasurementsKeys = new int[readInt5];
-        this.mMeasurementsValues = new ArrayMap[readInt5];
-        for (int i5 = 0; i5 < readInt5; i5++) {
-            this.mMeasurementsKeys[i5] = parcel.readInt();
-            this.mMeasurementsValues[i5] = createLongsMap(parcel);
+        int i9 = parcel.readInt();
+        this.mMeasurementsKeys = new int[i9];
+        this.mMeasurementsValues = new ArrayMap[i9];
+        for (int i10 = 0; i10 < i9; i10++) {
+            this.mMeasurementsKeys[i10] = parcel.readInt();
+            this.mMeasurementsValues[i10] = createLongsMap(parcel);
         }
     }
 
@@ -191,27 +191,27 @@ public class HealthStats {
     }
 
     private static ArrayMap<String, HealthStats> createHealthStatsMap(Parcel parcel) {
-        int readInt = parcel.readInt();
-        ArrayMap<String, HealthStats> arrayMap = new ArrayMap<>(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        ArrayMap<String, HealthStats> arrayMap = new ArrayMap<>(i);
+        for (int i2 = 0; i2 < i; i2++) {
             arrayMap.put(parcel.readString(), new HealthStats(parcel));
         }
         return arrayMap;
     }
 
     private static <T extends Parcelable> ArrayMap<String, T> createParcelableMap(Parcel parcel, Parcelable.Creator<T> creator) {
-        int readInt = parcel.readInt();
-        ArrayMap<String, T> arrayMap = new ArrayMap<>(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        ArrayMap<String, T> arrayMap = new ArrayMap<>(i);
+        for (int i2 = 0; i2 < i; i2++) {
             arrayMap.put(parcel.readString(), creator.createFromParcel(parcel));
         }
         return arrayMap;
     }
 
     private static ArrayMap<String, Long> createLongsMap(Parcel parcel) {
-        int readInt = parcel.readInt();
-        ArrayMap<String, Long> arrayMap = new ArrayMap<>(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        ArrayMap<String, Long> arrayMap = new ArrayMap<>(i);
+        for (int i2 = 0; i2 < i; i2++) {
             arrayMap.put(parcel.readString(), Long.valueOf(parcel.readLong()));
         }
         return arrayMap;

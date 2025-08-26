@@ -7,10 +7,6 @@
             <KeyPosition motion:curveFit="linear" motion:framePosition="50" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/date" motion:percentX="1.0" motion:percentY="0.5" motion:sizePercent="1.0" />
             <KeyAttribute android:alpha="0.0" motion:framePosition="14" motion:motionTarget="@id/date" />
             <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_in_start_frame" motion:motionTarget="@id/date" />
-            <KeyPosition motion:curveFit="linear" motion:framePosition="@integer/fade_out_complete_frame" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/quick_qs_network_speed_container" motion:percentX="0.0" motion:percentY="@dimen/percent_displacement_at_fade_out" motion:sizePercent="0.0" />
-            <KeyPosition motion:curveFit="linear" motion:framePosition="50" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/quick_qs_network_speed_container" motion:percentX="1.0" motion:percentY="0.5" motion:sizePercent="1.0" />
-            <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_out_complete_frame" motion:motionTarget="@id/quick_qs_network_speed_container" />
-            <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_in_start_frame" motion:motionTarget="@id/quick_qs_network_speed_container" />
             <KeyPosition motion:curveFit="linear" motion:framePosition="@integer/fade_out_complete_frame" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/shade_header_system_icons" motion:percentX="0.0" motion:percentY="@dimen/percent_displacement_at_fade_out" motion:sizePercent="0.0" />
             <KeyPosition motion:curveFit="linear" motion:framePosition="50" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/shade_header_system_icons" motion:percentX="1.0" motion:percentY="0.5" motion:sizePercent="1.0" />
             <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_out_complete_frame" motion:motionTarget="@id/shade_header_system_icons" />

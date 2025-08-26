@@ -600,10 +600,10 @@ public abstract class Conference extends Conferenceable {
                 }
             }
         }
-        List<String> unmodifiableList = Collections.unmodifiableList(list);
+        List<String> listUnmodifiableList = Collections.unmodifiableList(list);
         Iterator<Listener> it2 = this.mListeners.iterator();
         while (it2.hasNext()) {
-            it2.next().onExtrasRemoved(this, unmodifiableList);
+            it2.next().onExtrasRemoved(this, listUnmodifiableList);
         }
     }
 

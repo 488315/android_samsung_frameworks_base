@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IEpdgListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.IEpdgListener";
@@ -29,7 +28,6 @@ public interface IEpdgListener extends IInterface {
 
     void onEpdgShowPopup(int i, int i2) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IEpdgListener {
         static final int TRANSACTION_onEpdgAvailable = 1;
         static final int TRANSACTION_onEpdgDeregister = 4;
@@ -41,7 +39,6 @@ public interface IEpdgListener extends IInterface {
         static final int TRANSACTION_onEpdgReleaseCall = 8;
         static final int TRANSACTION_onEpdgShowPopup = 7;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IEpdgListener {
             private IBinder mRemote;
 
@@ -60,121 +57,121 @@ public interface IEpdgListener extends IInterface {
 
             @Override // com.sec.ims.IEpdgListener
             public void onEpdgAvailable(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IEpdgListener
             public void onEpdgDeregister(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IEpdgListener
             public void onEpdgHandoverEnableChanged(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IEpdgListener
             public void onEpdgHandoverResult(int i, int i2, int i3, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IEpdgListener
             public void onEpdgIpsecConnection(int i, String str, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IEpdgListener
             public void onEpdgIpsecDisconnection(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IEpdgListener
             public void onEpdgRegister(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IEpdgListener
             public void onEpdgReleaseCall(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IEpdgListener
             public void onEpdgShowPopup(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IEpdgListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -187,8 +184,8 @@ public interface IEpdgListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEpdgListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IEpdgListener)) ? new Proxy(iBinder) : (IEpdgListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEpdgListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IEpdgListener)) ? new Proxy(iBinder) : (IEpdgListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -202,61 +199,61 @@ public interface IEpdgListener extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEpdgAvailable(readInt, readInt2, readInt3);
+                    onEpdgAvailable(i3, i4, i5);
                     return true;
                 case 2:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onEpdgHandoverResult(readInt4, readInt5, readInt6, readString);
+                    onEpdgHandoverResult(i6, i7, i8, string);
                     return true;
                 case 3:
-                    int readInt7 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i9 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onEpdgRegister(readInt7, readBoolean);
+                    onEpdgRegister(i9, z);
                     return true;
                 case 4:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEpdgDeregister(readInt8);
+                    onEpdgDeregister(i10);
                     return true;
                 case 5:
-                    int readInt9 = parcel.readInt();
-                    String readString2 = parcel.readString();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEpdgIpsecConnection(readInt9, readString2, readInt10, readInt11);
+                    onEpdgIpsecConnection(i11, string2, i12, i13);
                     return true;
                 case 6:
-                    int readInt12 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    int i14 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onEpdgIpsecDisconnection(readInt12, readString3);
+                    onEpdgIpsecDisconnection(i14, string3);
                     return true;
                 case 7:
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEpdgShowPopup(readInt13, readInt14);
+                    onEpdgShowPopup(i15, i16);
                     return true;
                 case 8:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEpdgReleaseCall(readInt15);
+                    onEpdgReleaseCall(i17);
                     return true;
                 case 9:
-                    int readInt16 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i18 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onEpdgHandoverEnableChanged(readInt16, readBoolean2);
+                    onEpdgHandoverEnableChanged(i18, z2);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -269,7 +266,6 @@ public interface IEpdgListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IEpdgListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

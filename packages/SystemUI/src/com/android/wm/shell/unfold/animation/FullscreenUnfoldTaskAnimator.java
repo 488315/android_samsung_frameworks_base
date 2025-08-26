@@ -22,7 +22,6 @@ import com.android.wm.shell.sysui.ConfigurationChangeListener;
 import com.android.wm.shell.sysui.ShellController;
 import com.android.wm.shell.unfold.UnfoldBackgroundController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FullscreenUnfoldTaskAnimator implements UnfoldTaskAnimator, DisplayInsetsController.OnInsetsChangedListener, ConfigurationChangeListener {
     public static final float[] FLOAT_9 = new float[9];
@@ -35,7 +34,6 @@ public class FullscreenUnfoldTaskAnimator implements UnfoldTaskAnimator, Display
     public final ShellController mShellController;
     public float mWindowCornerRadiusPx;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationContext {
         public final Rect mCurrentCropRect;
         public final Rect mEndCropRect;
@@ -56,16 +54,16 @@ public class FullscreenUnfoldTaskAnimator implements UnfoldTaskAnimator, Display
                 rect.inset(insetsSource.calculateVisibleInsets(rect));
             }
             this.mEndCropRect.set(this.mStartCropRect);
-            int width = (int) (this.mEndCropRect.width() * 0.08f);
+            int iWidth = (int) (this.mEndCropRect.width() * 0.08f);
             Rect rect2 = this.mStartCropRect;
             Rect rect3 = this.mEndCropRect;
-            rect2.left = rect3.left + width;
-            rect2.right = rect3.right - width;
-            int height = (int) (rect3.height() * 0.03f);
+            rect2.left = rect3.left + iWidth;
+            rect2.right = rect3.right - iWidth;
+            int iHeight = (int) (rect3.height() * 0.03f);
             Rect rect4 = this.mStartCropRect;
             Rect rect5 = this.mEndCropRect;
-            rect4.top = rect5.top + height;
-            rect4.bottom = rect5.bottom - height;
+            rect4.top = rect5.top + iHeight;
+            rect4.bottom = rect5.bottom - iHeight;
         }
 
         private AnimationContext(FullscreenUnfoldTaskAnimator fullscreenUnfoldTaskAnimator, SurfaceControl surfaceControl, InsetsSource insetsSource, TaskInfo taskInfo) {
@@ -96,8 +94,8 @@ public class FullscreenUnfoldTaskAnimator implements UnfoldTaskAnimator, Display
         for (int size = this.mAnimationContextByTaskId.size() - 1; size >= 0; size--) {
             AnimationContext animationContext = (AnimationContext) this.mAnimationContextByTaskId.valueAt(size);
             animationContext.mCurrentCropRect.set((Rect) RECT_EVALUATOR.evaluate(f, animationContext.mStartCropRect, animationContext.mEndCropRect));
-            float lerp = MathUtils.lerp(0.94f, 1.0f, f);
-            animationContext.mMatrix.setScale(lerp, lerp, animationContext.mCurrentCropRect.exactCenterX(), animationContext.mCurrentCropRect.exactCenterY());
+            float fLerp = MathUtils.lerp(0.94f, 1.0f, f);
+            animationContext.mMatrix.setScale(fLerp, fLerp, animationContext.mCurrentCropRect.exactCenterX(), animationContext.mCurrentCropRect.exactCenterY());
             transaction.setWindowCrop(animationContext.mLeash, animationContext.mCurrentCropRect).setMatrix(animationContext.mLeash, animationContext.mMatrix, FLOAT_9).setCornerRadius(animationContext.mLeash, this.mWindowCornerRadiusPx).show(animationContext.mLeash);
         }
     }
@@ -120,21 +118,21 @@ public class FullscreenUnfoldTaskAnimator implements UnfoldTaskAnimator, Display
 
     @Override // com.android.wm.shell.common.DisplayInsetsController.OnInsetsChangedListener
     public final void insetsChanged(InsetsState insetsState) {
-        InsetsSource insetsSource;
-        int sourceSize = insetsState.sourceSize() - 1;
+        InsetsSource insetsSourceSourceAt;
+        int iSourceSize = insetsState.sourceSize() - 1;
         while (true) {
-            if (sourceSize < 0) {
-                insetsSource = null;
+            if (iSourceSize < 0) {
+                insetsSourceSourceAt = null;
                 break;
             }
-            insetsSource = insetsState.sourceAt(sourceSize);
-            if (insetsSource.getType() == WindowInsets.Type.navigationBars() && insetsSource.hasFlags(2)) {
+            insetsSourceSourceAt = insetsState.sourceAt(iSourceSize);
+            if (insetsSourceSourceAt.getType() == WindowInsets.Type.navigationBars() && insetsSourceSourceAt.hasFlags(2)) {
                 break;
             } else {
-                sourceSize--;
+                iSourceSize--;
             }
         }
-        this.mExpandedTaskbarInsetsSource = insetsSource;
+        this.mExpandedTaskbarInsetsSource = insetsSourceSourceAt;
         for (int size = this.mAnimationContextByTaskId.size() - 1; size >= 0; size--) {
             AnimationContext animationContext = (AnimationContext) this.mAnimationContextByTaskId.valueAt(size);
             animationContext.update(this.mExpandedTaskbarInsetsSource, animationContext.mTaskInfo);

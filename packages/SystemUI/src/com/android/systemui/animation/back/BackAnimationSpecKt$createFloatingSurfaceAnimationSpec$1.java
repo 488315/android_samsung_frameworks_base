@@ -6,7 +6,6 @@ import android.window.BackEvent;
 import com.android.systemui.util.DimensionKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BackAnimationSpecKt$createFloatingSurfaceAnimationSpec$1 implements BackAnimationSpec {
     public final /* synthetic */ Function0 $displayMetricsProvider;
@@ -32,14 +31,14 @@ public final class BackAnimationSpecKt$createFloatingSurfaceAnimationSpec$1 impl
         DisplayMetrics displayMetrics = (DisplayMetrics) this.$displayMetricsProvider.invoke();
         int i = displayMetrics.widthPixels;
         int i2 = displayMetrics.heightPixels;
-        float dpToPx = DimensionKt.dpToPx(Float.valueOf(this.$maxMarginXdp), displayMetrics);
-        float dpToPx2 = DimensionKt.dpToPx(Float.valueOf(this.$maxMarginYdp), displayMetrics);
+        float fDpToPx = DimensionKt.dpToPx(Float.valueOf(this.$maxMarginXdp), displayMetrics);
+        float fDpToPx2 = DimensionKt.dpToPx(Float.valueOf(this.$maxMarginYdp), displayMetrics);
         float f2 = i;
         float f3 = this.$minScale;
         float f4 = 2;
-        float f5 = ((f2 - (f2 * f3)) / f4) - dpToPx;
+        float f5 = ((f2 - (f2 * f3)) / f4) - fDpToPx;
         float f6 = i2;
-        float f7 = ((f6 - (f6 * f3)) / f4) - dpToPx2;
+        float f7 = ((f6 - (f6 * f3)) / f4) - fDpToPx2;
         float f8 = 1.0f - f3;
         int swipeEdge = backEvent.getSwipeEdge();
         int i3 = swipeEdge != 0 ? swipeEdge != 1 ? 0 : -1 : 1;

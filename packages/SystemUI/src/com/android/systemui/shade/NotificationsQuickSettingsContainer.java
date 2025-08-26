@@ -3,6 +3,7 @@ package com.android.systemui.shade;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -12,16 +13,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.android.systemui.R;
 import com.android.systemui.fragments.FragmentHostManager;
 import com.android.systemui.plugins.qs.QS;
+import com.android.systemui.shade.NotificationsQSContainerController;
 import com.android.systemui.shade.TouchLogger;
 import com.android.systemui.statusbar.notification.AboveShelfObserver;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationsQuickSettingsContainer extends ConstraintLayout implements FragmentHostManager.FragmentListener, AboveShelfObserver.HasViewAboveShelfChangedListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Rect mBoundingBoxRect;
-    public NotificationsQSContainerController$onViewAttached$2 mConfigurationChangedListener;
+    public NotificationsQSContainerController.C10362 mConfigurationChangedListener;
     public Consumer mInsetsChangedListener;
     public View mQSContainer;
     public Consumer mQSFragmentAttachedListener;
@@ -41,10 +42,10 @@ public class NotificationsQuickSettingsContainer extends ConstraintLayout implem
 
     @Override // android.view.ViewGroup, android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         TouchLogger.Companion.getClass();
-        TouchLogger.Companion.logDispatchTouch(motionEvent, "NotificationsQuickSettingsContainer", dispatchTouchEvent);
-        return dispatchTouchEvent;
+        TouchLogger.Companion.logDispatchTouch(motionEvent, "NotificationsQuickSettingsContainer", zDispatchTouchEvent);
+        return zDispatchTouchEvent;
     }
 
     @Override // android.view.View
@@ -54,11 +55,11 @@ public class NotificationsQuickSettingsContainer extends ConstraintLayout implem
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
-        NotificationsQSContainerController$onViewAttached$2 notificationsQSContainerController$onViewAttached$2 = this.mConfigurationChangedListener;
-        if (notificationsQSContainerController$onViewAttached$2 != null) {
-            notificationsQSContainerController$onViewAttached$2.accept(configuration);
+        NotificationsQSContainerController.C10362 c10362 = this.mConfigurationChangedListener;
+        if (c10362 != null) {
+            c10362.accept(configuration);
         }
     }
 
@@ -74,10 +75,10 @@ public class NotificationsQuickSettingsContainer extends ConstraintLayout implem
         QS qs = (QS) fragment;
         this.mQs = qs;
         this.mQSFragmentAttachedListener.accept(qs);
-        View findViewById = this.mQs.getView().findViewById(R.id.quick_settings_container);
-        this.mQSContainer = findViewById;
-        if (findViewById != null) {
-            findViewById.setPadding(findViewById.getPaddingLeft(), this.mQSContainer.getPaddingTop(), this.mQSContainer.getPaddingRight(), 0);
+        View viewFindViewById = this.mQs.getView().findViewById(R.id.quick_settings_container);
+        this.mQSContainer = viewFindViewById;
+        if (viewFindViewById != null) {
+            viewFindViewById.setPadding(viewFindViewById.getPaddingLeft(), this.mQSContainer.getPaddingTop(), this.mQSContainer.getPaddingRight(), 0);
         }
     }
 }

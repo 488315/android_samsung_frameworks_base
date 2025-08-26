@@ -99,23 +99,23 @@ public final class VerificationToken implements Parcelable {
 
     VerificationToken(Parcel parcel) {
         AttestationProfile attestationProfile = (AttestationProfile) parcel.readTypedObject(AttestationProfile.CREATOR);
-        int readInt = parcel.readInt();
-        Bundle readBundle = parcel.readBundle();
-        int readInt2 = parcel.readInt();
-        Instant unparcel = sParcellingForVerificationTime.unparcel(parcel);
-        byte[] createByteArray = parcel.createByteArray();
+        int i = parcel.readInt();
+        Bundle bundle = parcel.readBundle();
+        int i2 = parcel.readInt();
+        Instant instantUnparcel = sParcellingForVerificationTime.unparcel(parcel);
+        byte[] bArrCreateByteArray = parcel.createByteArray();
         this.mAttestationProfile = attestationProfile;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) attestationProfile);
-        this.mLocalBindingType = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) AttestationVerificationManager.LocalBindingType.class, (Annotation) null, readInt);
-        this.mRequirements = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
-        this.mVerificationResult = readInt2;
-        AnnotationValidations.validate((Class<? extends Annotation>) AttestationVerificationManager.VerificationResultFlags.class, (Annotation) null, readInt2);
-        this.mVerificationTime = unparcel;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcel);
-        this.mHmac = createByteArray;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) createByteArray);
+        this.mLocalBindingType = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) AttestationVerificationManager.LocalBindingType.class, (Annotation) null, i);
+        this.mRequirements = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
+        this.mVerificationResult = i2;
+        AnnotationValidations.validate((Class<? extends Annotation>) AttestationVerificationManager.VerificationResultFlags.class, (Annotation) null, i2);
+        this.mVerificationTime = instantUnparcel;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) instantUnparcel);
+        this.mHmac = bArrCreateByteArray;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bArrCreateByteArray);
     }
 
     public static final class Builder {

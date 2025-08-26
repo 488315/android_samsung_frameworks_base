@@ -7,7 +7,6 @@ import androidx.compose.ui.unit.InlineClassHelperKt;
 import java.util.List;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LazyGridMeasuredLineProvider {
     public final int gridItemsCount;
@@ -27,7 +26,7 @@ public abstract class LazyGridMeasuredLineProvider {
     }
 
     /* renamed from: childConstraints-JhjzzOo$foundation_release, reason: not valid java name */
-    public final long m163childConstraintsJhjzzOo$foundation_release(int i, int i2) {
+    public final long m164childConstraintsJhjzzOo$foundation_release(int i, int i2) {
         int i3;
         LazyGridSlots lazyGridSlots = this.slots;
         if (i2 == 1) {
@@ -42,7 +41,7 @@ public abstract class LazyGridMeasuredLineProvider {
         }
         if (this.isVertical) {
             Constraints.Companion.getClass();
-            return Constraints.Companion.m828fixedWidthOenEA2s(i3);
+            return Constraints.Companion.m830fixedWidthOenEA2s(i3);
         }
         Constraints.Companion.getClass();
         if (i3 < 0) {
@@ -62,10 +61,10 @@ public abstract class LazyGridMeasuredLineProvider {
         int i4 = 0;
         for (int i5 = 0; i5 < size; i5++) {
             int i6 = (int) ((GridItemSpan) lineConfiguration.spans.get(i5)).packedValue;
-            LazyGridMeasuredItem m162getAndMeasurem8Kt_7k = this.measuredItemProvider.m162getAndMeasurem8Kt_7k(i2 + i5, m163childConstraintsJhjzzOo$foundation_release(i4, i6), i4, i6, i3);
+            LazyGridMeasuredItem lazyGridMeasuredItemM163getAndMeasurem8Kt_7k = this.measuredItemProvider.m163getAndMeasurem8Kt_7k(i2 + i5, m164childConstraintsJhjzzOo$foundation_release(i4, i6), i4, i6, i3);
             i4 += i6;
             Unit unit = Unit.INSTANCE;
-            lazyGridMeasuredItemArr[i5] = m162getAndMeasurem8Kt_7k;
+            lazyGridMeasuredItemArr[i5] = lazyGridMeasuredItemM163getAndMeasurem8Kt_7k;
         }
         return createLine(i, lazyGridMeasuredItemArr, lineConfiguration.spans, i3);
     }

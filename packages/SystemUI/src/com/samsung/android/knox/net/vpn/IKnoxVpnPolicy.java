@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IKnoxVpnPolicy extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.net.vpn.IKnoxVpnPolicy";
@@ -116,7 +115,6 @@ public interface IKnoxVpnPolicy extends IInterface {
 
     EnterpriseResponseData stopConnection(KnoxVpnContext knoxVpnContext, String str) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IKnoxVpnPolicy {
         @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
         public EnterpriseResponseData activateVpnProfile(KnoxVpnContext knoxVpnContext, String str, boolean z) throws RemoteException {
@@ -376,7 +374,6 @@ public interface IKnoxVpnPolicy extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IKnoxVpnPolicy {
         public static final int TRANSACTION_activateVpnProfile = 5;
         public static final int TRANSACTION_addAllContainerPackagesToVpn = 24;
@@ -430,7 +427,6 @@ public interface IKnoxVpnPolicy extends IInterface {
         public static final int TRANSACTION_startConnection = 10;
         public static final int TRANSACTION_stopConnection = 11;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IKnoxVpnPolicy {
             public IBinder mRemote;
 
@@ -440,145 +436,145 @@ public interface IKnoxVpnPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData activateVpnProfile(KnoxVpnContext knoxVpnContext, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData addAllContainerPackagesToVpn(KnoxVpnContext knoxVpnContext, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData addAllPackagesToVpn(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData addContainerPackagesToVpn(KnoxVpnContext knoxVpnContext, int i, String[] strArr, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData addPackagesToVpn(KnoxVpnContext knoxVpnContext, String[] strArr, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public void addVpnUidRanges(String str, int i, String str2, String str3, String str4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public int allowAuthUsbTetheringOverVpn(KnoxVpnContext knoxVpnContext, String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public int allowNoAuthUsbTetheringOverVpn(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -589,234 +585,234 @@ public interface IKnoxVpnPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public boolean bindKnoxVpnInterface(KnoxVpnContext knoxVpnContext) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public boolean checkIfCallerIsVpnVendor(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public boolean checkIfLocalProxyPortExists(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public boolean checkIfUidIsExempted(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public boolean checkIfVendorCreatedKnoxProfile(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData createVpnProfile(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public int disallowUsbTetheringOverVpn(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData getAllContainerPackagesInVpnProfile(KnoxVpnContext knoxVpnContext, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData getAllPackagesInVpnProfile(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData getAllVpnProfiles(KnoxVpnContext knoxVpnContext) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData getCACertificate(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public int getChainingEnabledForProfile(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public List<String> getDomainsByProfileName(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData getErrorString(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -826,496 +822,496 @@ public interface IKnoxVpnPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public String getInterfaceNameForUid(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public int getKnoxVpnProfileType(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public int getNotificationDismissibleFlag(KnoxVpnContext knoxVpnContext, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public int getNotificationDismissibleFlagInternal(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public List<String> getProfilesByDomain(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public String[] getProxyInfoForUid(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData getState(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public int getUidPidEnabled(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData getUserCertificate(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public String getVendorNameForProfile(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData getVpnModeOfOperation(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData getVpnProfile(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public boolean isProxyConfiguredForKnoxVpn(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public int isUsbTetheringOverVpnEnabled(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData removeAllContainerPackagesFromVpn(KnoxVpnContext knoxVpnContext, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData removeAllPackagesFromVpn(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData removeContainerPackagesFromVpn(KnoxVpnContext knoxVpnContext, int i, String[] strArr, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData removePackagesFromVpn(KnoxVpnContext knoxVpnContext, String[] strArr, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData removeVpnProfile(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public void removeVpnUidRanges(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData setAutoRetryOnConnectionError(KnoxVpnContext knoxVpnContext, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData setCACertificate(KnoxVpnContext knoxVpnContext, String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public int setNotificationDismissibleFlag(KnoxVpnContext knoxVpnContext, String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData setServerCertValidationUserAcceptanceCriteria(KnoxVpnContext knoxVpnContext, String str, boolean z, List list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeList(list);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeList(list);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData setUserCertificate(KnoxVpnContext knoxVpnContext, String str, byte[] bArr, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData setVpnModeOfOperation(KnoxVpnContext knoxVpnContext, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public void showToastVpnEULA() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData startConnection(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.vpn.IKnoxVpnPolicy
             public EnterpriseResponseData stopConnection(KnoxVpnContext knoxVpnContext, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(knoxVpnContext, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseResponseData) obtain2.readTypedObject(EnterpriseResponseData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKnoxVpnPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knoxVpnContext, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseResponseData) parcelObtain2.readTypedObject(EnterpriseResponseData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -1328,8 +1324,8 @@ public interface IKnoxVpnPolicy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKnoxVpnPolicy.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IKnoxVpnPolicy)) ? new Proxy(iBinder) : (IKnoxVpnPolicy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKnoxVpnPolicy.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IKnoxVpnPolicy)) ? new Proxy(iBinder) : (IKnoxVpnPolicy) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -1344,27 +1340,27 @@ public interface IKnoxVpnPolicy extends IInterface {
             switch (i) {
                 case 1:
                     KnoxVpnContext knoxVpnContext = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData createVpnProfile = createVpnProfile(knoxVpnContext, readString);
+                    EnterpriseResponseData enterpriseResponseDataCreateVpnProfile = createVpnProfile(knoxVpnContext, string);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createVpnProfile, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataCreateVpnProfile, 1);
                     return true;
                 case 2:
                     KnoxVpnContext knoxVpnContext2 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData vpnProfile = getVpnProfile(knoxVpnContext2, readString2);
+                    EnterpriseResponseData vpnProfile = getVpnProfile(knoxVpnContext2, string2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(vpnProfile, 1);
                     return true;
                 case 3:
                     KnoxVpnContext knoxVpnContext3 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData removeVpnProfile = removeVpnProfile(knoxVpnContext3, readString3);
+                    EnterpriseResponseData enterpriseResponseDataRemoveVpnProfile = removeVpnProfile(knoxVpnContext3, string3);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(removeVpnProfile, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataRemoveVpnProfile, 1);
                     return true;
                 case 4:
                     KnoxVpnContext knoxVpnContext4 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
@@ -1375,337 +1371,337 @@ public interface IKnoxVpnPolicy extends IInterface {
                     return true;
                 case 5:
                     KnoxVpnContext knoxVpnContext5 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString4 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string4 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData activateVpnProfile = activateVpnProfile(knoxVpnContext5, readString4, readBoolean);
+                    EnterpriseResponseData enterpriseResponseDataActivateVpnProfile = activateVpnProfile(knoxVpnContext5, string4, z);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(activateVpnProfile, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataActivateVpnProfile, 1);
                     return true;
                 case 6:
                     KnoxVpnContext knoxVpnContext6 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString5 = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
-                    String readString6 = parcel.readString();
+                    String string5 = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData userCertificate = setUserCertificate(knoxVpnContext6, readString5, createByteArray, readString6);
+                    EnterpriseResponseData userCertificate = setUserCertificate(knoxVpnContext6, string5, bArrCreateByteArray, string6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(userCertificate, 1);
                     return true;
                 case 7:
                     KnoxVpnContext knoxVpnContext7 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData userCertificate2 = getUserCertificate(knoxVpnContext7, readString7);
+                    EnterpriseResponseData userCertificate2 = getUserCertificate(knoxVpnContext7, string7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(userCertificate2, 1);
                     return true;
                 case 8:
                     KnoxVpnContext knoxVpnContext8 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString8 = parcel.readString();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    String string8 = parcel.readString();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData cACertificate = setCACertificate(knoxVpnContext8, readString8, createByteArray2);
+                    EnterpriseResponseData cACertificate = setCACertificate(knoxVpnContext8, string8, bArrCreateByteArray2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(cACertificate, 1);
                     return true;
                 case 9:
                     KnoxVpnContext knoxVpnContext9 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData cACertificate2 = getCACertificate(knoxVpnContext9, readString9);
+                    EnterpriseResponseData cACertificate2 = getCACertificate(knoxVpnContext9, string9);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(cACertificate2, 1);
                     return true;
                 case 10:
                     KnoxVpnContext knoxVpnContext10 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData startConnection = startConnection(knoxVpnContext10, readString10);
+                    EnterpriseResponseData enterpriseResponseDataStartConnection = startConnection(knoxVpnContext10, string10);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(startConnection, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataStartConnection, 1);
                     return true;
                 case 11:
                     KnoxVpnContext knoxVpnContext11 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData stopConnection = stopConnection(knoxVpnContext11, readString11);
+                    EnterpriseResponseData enterpriseResponseDataStopConnection = stopConnection(knoxVpnContext11, string11);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(stopConnection, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataStopConnection, 1);
                     return true;
                 case 12:
                     KnoxVpnContext knoxVpnContext12 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString12 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData state = getState(knoxVpnContext12, readString12);
+                    EnterpriseResponseData state = getState(knoxVpnContext12, string12);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(state, 1);
                     return true;
                 case 13:
                     KnoxVpnContext knoxVpnContext13 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData errorString = getErrorString(knoxVpnContext13, readString13);
+                    EnterpriseResponseData errorString = getErrorString(knoxVpnContext13, string13);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(errorString, 1);
                     return true;
                 case 14:
                     KnoxVpnContext knoxVpnContext14 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString14 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string14 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData vpnModeOfOperation = setVpnModeOfOperation(knoxVpnContext14, readString14, readInt);
+                    EnterpriseResponseData vpnModeOfOperation = setVpnModeOfOperation(knoxVpnContext14, string14, i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(vpnModeOfOperation, 1);
                     return true;
                 case 15:
                     KnoxVpnContext knoxVpnContext15 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData vpnModeOfOperation2 = getVpnModeOfOperation(knoxVpnContext15, readString15);
+                    EnterpriseResponseData vpnModeOfOperation2 = getVpnModeOfOperation(knoxVpnContext15, string15);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(vpnModeOfOperation2, 1);
                     return true;
                 case 16:
                     KnoxVpnContext knoxVpnContext16 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String[] createStringArray = parcel.createStringArray();
-                    String readString16 = parcel.readString();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData addPackagesToVpn = addPackagesToVpn(knoxVpnContext16, createStringArray, readString16);
+                    EnterpriseResponseData enterpriseResponseDataAddPackagesToVpn = addPackagesToVpn(knoxVpnContext16, strArrCreateStringArray, string16);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(addPackagesToVpn, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataAddPackagesToVpn, 1);
                     return true;
                 case 17:
                     KnoxVpnContext knoxVpnContext17 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String[] createStringArray2 = parcel.createStringArray();
-                    String readString17 = parcel.readString();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData removePackagesFromVpn = removePackagesFromVpn(knoxVpnContext17, createStringArray2, readString17);
+                    EnterpriseResponseData enterpriseResponseDataRemovePackagesFromVpn = removePackagesFromVpn(knoxVpnContext17, strArrCreateStringArray2, string17);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(removePackagesFromVpn, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataRemovePackagesFromVpn, 1);
                     return true;
                 case 18:
                     KnoxVpnContext knoxVpnContext18 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString18 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData allPackagesInVpnProfile = getAllPackagesInVpnProfile(knoxVpnContext18, readString18);
+                    EnterpriseResponseData allPackagesInVpnProfile = getAllPackagesInVpnProfile(knoxVpnContext18, string18);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(allPackagesInVpnProfile, 1);
                     return true;
                 case 19:
                     KnoxVpnContext knoxVpnContext19 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData addAllPackagesToVpn = addAllPackagesToVpn(knoxVpnContext19, readString19);
+                    EnterpriseResponseData enterpriseResponseDataAddAllPackagesToVpn = addAllPackagesToVpn(knoxVpnContext19, string19);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(addAllPackagesToVpn, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataAddAllPackagesToVpn, 1);
                     return true;
                 case 20:
                     KnoxVpnContext knoxVpnContext20 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData removeAllPackagesFromVpn = removeAllPackagesFromVpn(knoxVpnContext20, readString20);
+                    EnterpriseResponseData enterpriseResponseDataRemoveAllPackagesFromVpn = removeAllPackagesFromVpn(knoxVpnContext20, string20);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(removeAllPackagesFromVpn, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataRemoveAllPackagesFromVpn, 1);
                     return true;
                 case 21:
                     KnoxVpnContext knoxVpnContext21 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    int readInt2 = parcel.readInt();
-                    String[] createStringArray3 = parcel.createStringArray();
-                    String readString21 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData addContainerPackagesToVpn = addContainerPackagesToVpn(knoxVpnContext21, readInt2, createStringArray3, readString21);
+                    EnterpriseResponseData enterpriseResponseDataAddContainerPackagesToVpn = addContainerPackagesToVpn(knoxVpnContext21, i4, strArrCreateStringArray3, string21);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(addContainerPackagesToVpn, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataAddContainerPackagesToVpn, 1);
                     return true;
                 case 22:
                     KnoxVpnContext knoxVpnContext22 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    int readInt3 = parcel.readInt();
-                    String[] createStringArray4 = parcel.createStringArray();
-                    String readString22 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String[] strArrCreateStringArray4 = parcel.createStringArray();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData removeContainerPackagesFromVpn = removeContainerPackagesFromVpn(knoxVpnContext22, readInt3, createStringArray4, readString22);
+                    EnterpriseResponseData enterpriseResponseDataRemoveContainerPackagesFromVpn = removeContainerPackagesFromVpn(knoxVpnContext22, i5, strArrCreateStringArray4, string22);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(removeContainerPackagesFromVpn, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataRemoveContainerPackagesFromVpn, 1);
                     return true;
                 case 23:
                     KnoxVpnContext knoxVpnContext23 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    int readInt4 = parcel.readInt();
-                    String readString23 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData allContainerPackagesInVpnProfile = getAllContainerPackagesInVpnProfile(knoxVpnContext23, readInt4, readString23);
+                    EnterpriseResponseData allContainerPackagesInVpnProfile = getAllContainerPackagesInVpnProfile(knoxVpnContext23, i6, string23);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(allContainerPackagesInVpnProfile, 1);
                     return true;
                 case 24:
                     KnoxVpnContext knoxVpnContext24 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    int readInt5 = parcel.readInt();
-                    String readString24 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData addAllContainerPackagesToVpn = addAllContainerPackagesToVpn(knoxVpnContext24, readInt5, readString24);
+                    EnterpriseResponseData enterpriseResponseDataAddAllContainerPackagesToVpn = addAllContainerPackagesToVpn(knoxVpnContext24, i7, string24);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(addAllContainerPackagesToVpn, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataAddAllContainerPackagesToVpn, 1);
                     return true;
                 case 25:
                     KnoxVpnContext knoxVpnContext25 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    int readInt6 = parcel.readInt();
-                    String readString25 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData removeAllContainerPackagesFromVpn = removeAllContainerPackagesFromVpn(knoxVpnContext25, readInt6, readString25);
+                    EnterpriseResponseData enterpriseResponseDataRemoveAllContainerPackagesFromVpn = removeAllContainerPackagesFromVpn(knoxVpnContext25, i8, string25);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(removeAllContainerPackagesFromVpn, 1);
+                    parcel2.writeTypedObject(enterpriseResponseDataRemoveAllContainerPackagesFromVpn, 1);
                     return true;
                 case 26:
                     KnoxVpnContext knoxVpnContext26 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString26 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    ArrayList readArrayList = parcel.readArrayList(getClass().getClassLoader());
-                    int readInt7 = parcel.readInt();
+                    String string26 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
+                    ArrayList arrayList = parcel.readArrayList(getClass().getClassLoader());
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData serverCertValidationUserAcceptanceCriteria = setServerCertValidationUserAcceptanceCriteria(knoxVpnContext26, readString26, readBoolean2, readArrayList, readInt7);
+                    EnterpriseResponseData serverCertValidationUserAcceptanceCriteria = setServerCertValidationUserAcceptanceCriteria(knoxVpnContext26, string26, z2, arrayList, i9);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(serverCertValidationUserAcceptanceCriteria, 1);
                     return true;
                 case 27:
                     KnoxVpnContext knoxVpnContext27 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString27 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    String string27 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    EnterpriseResponseData autoRetryOnConnectionError = setAutoRetryOnConnectionError(knoxVpnContext27, readString27, readBoolean3);
+                    EnterpriseResponseData autoRetryOnConnectionError = setAutoRetryOnConnectionError(knoxVpnContext27, string27, z3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(autoRetryOnConnectionError, 1);
                     return true;
                 case 28:
                     KnoxVpnContext knoxVpnContext28 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString28 = parcel.readString();
+                    String string28 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int allowNoAuthUsbTetheringOverVpn = allowNoAuthUsbTetheringOverVpn(knoxVpnContext28, readString28);
+                    int iAllowNoAuthUsbTetheringOverVpn = allowNoAuthUsbTetheringOverVpn(knoxVpnContext28, string28);
                     parcel2.writeNoException();
-                    parcel2.writeInt(allowNoAuthUsbTetheringOverVpn);
+                    parcel2.writeInt(iAllowNoAuthUsbTetheringOverVpn);
                     return true;
                 case 29:
                     KnoxVpnContext knoxVpnContext29 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString29 = parcel.readString();
+                    String string29 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int allowAuthUsbTetheringOverVpn = allowAuthUsbTetheringOverVpn(knoxVpnContext29, readString29, bundle);
+                    int iAllowAuthUsbTetheringOverVpn = allowAuthUsbTetheringOverVpn(knoxVpnContext29, string29, bundle);
                     parcel2.writeNoException();
-                    parcel2.writeInt(allowAuthUsbTetheringOverVpn);
+                    parcel2.writeInt(iAllowAuthUsbTetheringOverVpn);
                     return true;
                 case 30:
                     KnoxVpnContext knoxVpnContext30 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString30 = parcel.readString();
+                    String string30 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int disallowUsbTetheringOverVpn = disallowUsbTetheringOverVpn(knoxVpnContext30, readString30);
+                    int iDisallowUsbTetheringOverVpn = disallowUsbTetheringOverVpn(knoxVpnContext30, string30);
                     parcel2.writeNoException();
-                    parcel2.writeInt(disallowUsbTetheringOverVpn);
+                    parcel2.writeInt(iDisallowUsbTetheringOverVpn);
                     return true;
                 case 31:
                     KnoxVpnContext knoxVpnContext31 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString31 = parcel.readString();
+                    String string31 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int isUsbTetheringOverVpnEnabled = isUsbTetheringOverVpnEnabled(knoxVpnContext31, readString31);
+                    int iIsUsbTetheringOverVpnEnabled = isUsbTetheringOverVpnEnabled(knoxVpnContext31, string31);
                     parcel2.writeNoException();
-                    parcel2.writeInt(isUsbTetheringOverVpnEnabled);
+                    parcel2.writeInt(iIsUsbTetheringOverVpnEnabled);
                     return true;
                 case 32:
                     KnoxVpnContext knoxVpnContext32 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    String readString32 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    String string32 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int notificationDismissibleFlag = setNotificationDismissibleFlag(knoxVpnContext32, readString32, readInt8, readInt9);
+                    int notificationDismissibleFlag = setNotificationDismissibleFlag(knoxVpnContext32, string32, i10, i11);
                     parcel2.writeNoException();
                     parcel2.writeInt(notificationDismissibleFlag);
                     return true;
                 case 33:
                     KnoxVpnContext knoxVpnContext33 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int notificationDismissibleFlag2 = getNotificationDismissibleFlag(knoxVpnContext33, readInt10);
+                    int notificationDismissibleFlag2 = getNotificationDismissibleFlag(knoxVpnContext33, i12);
                     parcel2.writeNoException();
                     parcel2.writeInt(notificationDismissibleFlag2);
                     return true;
                 case 34:
                     KnoxVpnContext knoxVpnContext34 = (KnoxVpnContext) parcel.readTypedObject(KnoxVpnContext.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean bindKnoxVpnInterface = bindKnoxVpnInterface(knoxVpnContext34);
+                    boolean zBindKnoxVpnInterface = bindKnoxVpnInterface(knoxVpnContext34);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(bindKnoxVpnInterface);
+                    parcel2.writeBoolean(zBindKnoxVpnInterface);
                     return true;
                 case 35:
-                    int readInt11 = parcel.readInt();
-                    String readString33 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    String string33 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int uidPidEnabled = getUidPidEnabled(readInt11, readString33);
+                    int uidPidEnabled = getUidPidEnabled(i13, string33);
                     parcel2.writeNoException();
                     parcel2.writeInt(uidPidEnabled);
                     return true;
                 case 36:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int chainingEnabledForProfile = getChainingEnabledForProfile(readInt12);
+                    int chainingEnabledForProfile = getChainingEnabledForProfile(i14);
                     parcel2.writeNoException();
                     parcel2.writeInt(chainingEnabledForProfile);
                     return true;
                 case 37:
-                    String readString34 = parcel.readString();
+                    String string34 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int knoxVpnProfileType = getKnoxVpnProfileType(readString34);
+                    int knoxVpnProfileType = getKnoxVpnProfileType(string34);
                     parcel2.writeNoException();
                     parcel2.writeInt(knoxVpnProfileType);
                     return true;
                 case 38:
-                    String readString35 = parcel.readString();
+                    String string35 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> domainsByProfileName = getDomainsByProfileName(readString35);
+                    List<String> domainsByProfileName = getDomainsByProfileName(string35);
                     parcel2.writeNoException();
                     parcel2.writeStringList(domainsByProfileName);
                     return true;
                 case 39:
-                    String readString36 = parcel.readString();
+                    String string36 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> profilesByDomain = getProfilesByDomain(readString36);
+                    List<String> profilesByDomain = getProfilesByDomain(string36);
                     parcel2.writeNoException();
                     parcel2.writeStringList(profilesByDomain);
                     return true;
                 case 40:
-                    String readString37 = parcel.readString();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    String string37 = parcel.readString();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkIfVendorCreatedKnoxProfile = checkIfVendorCreatedKnoxProfile(readString37, readInt13, readInt14);
+                    boolean zCheckIfVendorCreatedKnoxProfile = checkIfVendorCreatedKnoxProfile(string37, i15, i16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkIfVendorCreatedKnoxProfile);
+                    parcel2.writeBoolean(zCheckIfVendorCreatedKnoxProfile);
                     return true;
                 case 41:
-                    String readString38 = parcel.readString();
+                    String string38 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String vendorNameForProfile = getVendorNameForProfile(readString38);
+                    String vendorNameForProfile = getVendorNameForProfile(string38);
                     parcel2.writeNoException();
                     parcel2.writeString(vendorNameForProfile);
                     return true;
                 case 42:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String interfaceNameForUid = getInterfaceNameForUid(readInt15);
+                    String interfaceNameForUid = getInterfaceNameForUid(i17);
                     parcel2.writeNoException();
                     parcel2.writeString(interfaceNameForUid);
                     return true;
                 case 43:
-                    String readString39 = parcel.readString();
-                    int readInt16 = parcel.readInt();
-                    String readString40 = parcel.readString();
-                    String readString41 = parcel.readString();
-                    String readString42 = parcel.readString();
+                    String string39 = parcel.readString();
+                    int i18 = parcel.readInt();
+                    String string40 = parcel.readString();
+                    String string41 = parcel.readString();
+                    String string42 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addVpnUidRanges(readString39, readInt16, readString40, readString41, readString42);
+                    addVpnUidRanges(string39, i18, string40, string41, string42);
                     parcel2.writeNoException();
                     return true;
                 case 44:
-                    String readString43 = parcel.readString();
+                    String string43 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeVpnUidRanges(readString43);
+                    removeVpnUidRanges(string43);
                     parcel2.writeNoException();
                     return true;
                 case 45:
@@ -1713,44 +1709,44 @@ public interface IKnoxVpnPolicy extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 46:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkIfUidIsExempted = checkIfUidIsExempted(readInt17);
+                    boolean zCheckIfUidIsExempted = checkIfUidIsExempted(i19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkIfUidIsExempted);
+                    parcel2.writeBoolean(zCheckIfUidIsExempted);
                     return true;
                 case 47:
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String[] proxyInfoForUid = getProxyInfoForUid(readInt18);
+                    String[] proxyInfoForUid = getProxyInfoForUid(i20);
                     parcel2.writeNoException();
                     parcel2.writeStringArray(proxyInfoForUid);
                     return true;
                 case 48:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkIfLocalProxyPortExists = checkIfLocalProxyPortExists(readInt19);
+                    boolean zCheckIfLocalProxyPortExists = checkIfLocalProxyPortExists(i21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkIfLocalProxyPortExists);
+                    parcel2.writeBoolean(zCheckIfLocalProxyPortExists);
                     return true;
                 case 49:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isProxyConfiguredForKnoxVpn = isProxyConfiguredForKnoxVpn(readInt20);
+                    boolean zIsProxyConfiguredForKnoxVpn = isProxyConfiguredForKnoxVpn(i22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isProxyConfiguredForKnoxVpn);
+                    parcel2.writeBoolean(zIsProxyConfiguredForKnoxVpn);
                     return true;
                 case 50:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkIfCallerIsVpnVendor = checkIfCallerIsVpnVendor(readInt21);
+                    boolean zCheckIfCallerIsVpnVendor = checkIfCallerIsVpnVendor(i23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkIfCallerIsVpnVendor);
+                    parcel2.writeBoolean(zCheckIfCallerIsVpnVendor);
                     return true;
                 case 51:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int notificationDismissibleFlagInternal = getNotificationDismissibleFlagInternal(readInt22);
+                    int notificationDismissibleFlagInternal = getNotificationDismissibleFlagInternal(i24);
                     parcel2.writeNoException();
                     parcel2.writeInt(notificationDismissibleFlagInternal);
                     return true;

@@ -2,13 +2,12 @@ package kotlinx.coroutines.internal;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SegmentOrClosed {
     public final Object value;
 
     /* renamed from: getSegment-impl, reason: not valid java name */
-    public static final Segment m3465getSegmentimpl(Object obj) {
+    public static final Segment m3485getSegmentimpl(Object obj) {
         if (obj != ConcurrentLinkedListKt.CLOSED) {
             return (Segment) obj;
         }
@@ -16,7 +15,7 @@ public final class SegmentOrClosed {
     }
 
     /* renamed from: isClosed-impl, reason: not valid java name */
-    public static final boolean m3466isClosedimpl(Object obj) {
+    public static final boolean m3486isClosedimpl(Object obj) {
         return obj == ConcurrentLinkedListKt.CLOSED;
     }
 

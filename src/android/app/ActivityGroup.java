@@ -34,9 +34,9 @@ public class ActivityGroup extends Activity {
     @Override // android.app.Activity
     protected void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
-        Bundle saveInstanceState = this.mLocalActivityManager.saveInstanceState();
-        if (saveInstanceState != null) {
-            bundle.putBundle(STATES_KEY, saveInstanceState);
+        Bundle bundleSaveInstanceState = this.mLocalActivityManager.saveInstanceState();
+        if (bundleSaveInstanceState != null) {
+            bundle.putBundle(STATES_KEY, bundleSaveInstanceState);
         }
     }
 

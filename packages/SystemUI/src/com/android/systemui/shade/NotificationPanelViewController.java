@@ -2,6 +2,7 @@ package com.android.systemui.shade;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
 import android.app.PendingIntent;
 import android.app.SemWallpaperColors;
@@ -13,13 +14,16 @@ import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.graphics.Region;
+import android.metrics.LogMaker;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.PowerManager;
 import android.os.Trace;
 import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.MathUtils;
 import android.util.Property;
@@ -36,6 +40,7 @@ import android.view.ViewRootImpl;
 import android.view.ViewStub;
 import android.view.ViewTreeObserver;
 import android.view.WindowInsets;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.animation.Interpolator;
@@ -46,6 +51,7 @@ import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.TooltipPopup$$ExternalSyntheticOutline0;
 import androidx.cardview.widget.CardView;
+import androidx.compose.animation.core.CubicBezierEasing$$ExternalSyntheticOutline0;
 import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import androidx.picker3.widget.SeslColorSpectrumView$$ExternalSyntheticOutline0;
@@ -89,17 +95,20 @@ import com.android.systemui.QpRune;
 import com.android.systemui.R;
 import com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0;
 import com.android.systemui.blur.SecQSBlurShadowView;
+import com.android.systemui.blur.SecQSNewBlurView;
 import com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.classifier.FalsingCollector;
 import com.android.systemui.common.buffer.RingBuffer;
-import com.android.systemui.common.buffer.RingBuffer$iterator$1;
+import com.android.systemui.common.buffer.RingBuffer.AnonymousClass1;
 import com.android.systemui.common.domain.interactor.SysUIStateDisplaysInteractor;
 import com.android.systemui.communal.ui.viewmodel.CommunalTransitionViewModel;
 import com.android.systemui.dagger.DaggerReferenceGlobalRootComponent;
 import com.android.systemui.deviceentry.domain.interactor.DeviceEntryFaceAuthInteractor;
 import com.android.systemui.display.data.repository.DisplayRepositoryImpl;
 import com.android.systemui.doze.DozeLog;
+import com.android.systemui.doze.DozeLogger;
+import com.android.systemui.doze.DozeLogger$$ExternalSyntheticLambda0;
 import com.android.systemui.doze.PluginAODManager;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.dump.DumpsysTableLogger;
@@ -122,6 +131,7 @@ import com.android.systemui.keyguard.KeyguardFastBioUnlockController;
 import com.android.systemui.keyguard.KeyguardFoldController;
 import com.android.systemui.keyguard.KeyguardFoldControllerImpl;
 import com.android.systemui.keyguard.KeyguardUnlockAnimationController;
+import com.android.systemui.keyguard.animator.KeyguardEditModeAnimatorController;
 import com.android.systemui.keyguard.animator.KeyguardTouchAnimator;
 import com.android.systemui.keyguard.animator.KeyguardTouchSwipeCallback;
 import com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl;
@@ -138,6 +148,8 @@ import com.android.systemui.keyguard.ui.transitions.BlurConfig;
 import com.android.systemui.keyguard.ui.viewmodel.DreamingToLockscreenTransitionViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardTouchHandlingViewModel;
 import com.android.systemui.keyguardimage.WallpaperImageInjectCreator;
+import com.android.systemui.knox.CustomSdkMonitor;
+import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.lockstar.PluginLockStarManager;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.LogMessageImpl;
@@ -154,6 +166,7 @@ import com.android.systemui.model.SysUiState;
 import com.android.systemui.model.SysUiStateImpl;
 import com.android.systemui.navigationbar.NavigationBarController;
 import com.android.systemui.navigationbar.NavigationModeController;
+import com.android.systemui.navigationbar.gestural.Utilities;
 import com.android.systemui.navigationbar.views.NavigationBarView;
 import com.android.systemui.pluginlock.PluginLockData;
 import com.android.systemui.pluginlock.PluginLockMediator;
@@ -171,15 +184,17 @@ import com.android.systemui.power.domain.interactor.PowerInteractor;
 import com.android.systemui.power.shared.model.WakeSleepReason;
 import com.android.systemui.power.shared.model.WakefulnessModel;
 import com.android.systemui.privacy.PrivacyDialogController;
+import com.android.systemui.qs.NonInterceptingScrollView;
 import com.android.systemui.qs.QSFragmentLegacy;
 import com.android.systemui.qs.QSImpl;
 import com.android.systemui.qs.SecQSImpl;
 import com.android.systemui.qs.SecQSPanel;
 import com.android.systemui.qs.SecQSPanelController;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
+import com.android.systemui.qs.TileChunkLayoutBarExpandHelper;
 import com.android.systemui.qs.animator.QsAnimatorState;
 import com.android.systemui.qs.animator.SecQSImplAnimatorManager;
-import com.android.systemui.qs.bar.domain.interactor.BarOrderInteractor;
+import com.android.systemui.qs.bar.TileChunkLayoutBar;
 import com.android.systemui.qs.flags.QSComposeFragment;
 import com.android.systemui.qs.panelresource.SecQSPanelResourceCommon;
 import com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker;
@@ -193,6 +208,7 @@ import com.android.systemui.shade.PanelSlideEventHandler;
 import com.android.systemui.shade.QuickSettingsControllerImpl;
 import com.android.systemui.shade.QuickSettingsControllerImpl.QsFragmentListener;
 import com.android.systemui.shade.ShadeControllerImpl;
+import com.android.systemui.shade.data.repository.FlingInfo;
 import com.android.systemui.shade.data.repository.ShadeDisplaysRepository;
 import com.android.systemui.shade.data.repository.ShadeDisplaysRepositoryImpl;
 import com.android.systemui.shade.data.repository.ShadeRepository;
@@ -251,7 +267,7 @@ import com.android.systemui.statusbar.notification.stack.StackScrollAlgorithm;
 import com.android.systemui.statusbar.notification.stack.StackStateAnimator;
 import com.android.systemui.statusbar.notification.stack.domain.interactor.SharedNotificationContainerInteractor;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda29;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda30;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.phone.DcmMascotViewContainer;
 import com.android.systemui.statusbar.phone.DcmMascotViewContainer$broadcastReceiver$1;
@@ -261,6 +277,7 @@ import com.android.systemui.statusbar.phone.HeadsUpAppearanceController;
 import com.android.systemui.statusbar.phone.HeadsUpAppearanceController$$ExternalSyntheticLambda0;
 import com.android.systemui.statusbar.phone.IndicatorCutoutUtil;
 import com.android.systemui.statusbar.phone.IndicatorTouchHandler;
+import com.android.systemui.statusbar.phone.IndicatorTouchHandler$doubleTapTimeoutRunnable$1;
 import com.android.systemui.statusbar.phone.KeyguardBypassController;
 import com.android.systemui.statusbar.phone.KeyguardClockPositionAlgorithm;
 import com.android.systemui.statusbar.phone.KeyguardIndicationTextView;
@@ -321,6 +338,7 @@ import dalvik.annotation.optimization.NeverCompile;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -343,7 +361,7 @@ import kotlin.jvm.internal.TypeIntrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.jvm.internal.markers.KMutableSet;
 import kotlin.sequences.FilteringSequence;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3;
@@ -351,7 +369,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationPanelViewController implements ShadeSurface, Dumpable, BrightnessMirrorShowingInteractor, PluginLockListener.State, PanelScreenShotLogger.LogProvider {
     public View.OnTouchListener mAODDoubleTouchListener;
@@ -433,7 +450,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     public HeadsUpTouchHelper mHeadsUpTouchHelper;
     public boolean mHeadsUpVisibleOnDown;
     public ValueAnimator mHeightAnimator;
-    public CentralSurfacesImpl$$ExternalSyntheticLambda29 mHideExpandedRunnable;
+    public CentralSurfacesImpl$$ExternalSyntheticLambda30 mHideExpandedRunnable;
     public boolean mHintAnimationRunning;
     public float mHintDistance;
     public boolean mIgnoreXTouchSlop;
@@ -514,6 +531,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     public ShadeControllerImpl.AnonymousClass2 mOpenCloseListener;
     public float mOverExpansion;
     public float mOverStretchAmount;
+    public final PanelAgent mPanelAgent;
     public int mPanelAlpha;
     public final AnimatableProperty.AnonymousClass6 mPanelAlphaAnimator;
     public BrightnessMirrorController$$ExternalSyntheticLambda0 mPanelAlphaEndAction;
@@ -573,6 +591,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     public int mSplitShadeFullTransitionDistance;
     public int mSplitShadeScrimTransitionDistance;
     public final SplitShadeStateController mSplitShadeStateController;
+    public ValueAnimator mStackScrollerAlphaAnimator;
     public int mStackScrollerMeasuringPass;
     public int mStatusBarHeaderHeightKeyguard;
     public final StatusBarKeyguardViewManager mStatusBarKeyguardViewManager;
@@ -618,8 +637,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     public final VelocityTracker mVelocityTracker = VelocityTracker.obtain();
     public final NotificationPanelViewController$$ExternalSyntheticLambda11 mFalsingTapListener = new FalsingManager.FalsingTapListener() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda11
         @Override // com.android.systemui.plugins.FalsingManager.FalsingTapListener
-        public final void onAdditionalTapRequired() {
-            NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+        public final void onAdditionalTapRequired() throws Resources.NotFoundException {
+            NotificationPanelViewController notificationPanelViewController = this.f$0;
             SysuiStatusBarStateController sysuiStatusBarStateController = notificationPanelViewController.mStatusBarStateController;
             if (sysuiStatusBarStateController.getState() == 2) {
                 notificationPanelViewController.mTapAgainViewController.show();
@@ -660,7 +679,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     public final ArrayList mTrackingHeadsUpListeners = new ArrayList();
     public final StateFlowImpl mIsBrightnessMirrorShowing = StateFlowKt.MutableStateFlow(Boolean.FALSE);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.NotificationPanelViewController$10, reason: invalid class name */
     public class AnonymousClass10 {
         public AnonymousClass10() {
@@ -693,10 +711,10 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 }
             } else {
                 notificationPanelViewController.setAlpha(z ? 0 : 255, true);
-                notificationPanelView.animate().alpha(f).setDuration(j).setInterpolator(Interpolators.ACCELERATE).setListener(animatorListener).withEndAction(new Runnable() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda52
+                notificationPanelView.animate().alpha(f).setDuration(j).setInterpolator(Interpolators.ACCELERATE).setListener(animatorListener).withEndAction(new Runnable() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda60
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NotificationPanelViewController notificationPanelViewController2 = NotificationPanelViewController.this;
+                        NotificationPanelViewController notificationPanelViewController2 = notificationPanelViewController;
                         boolean z2 = z;
                         Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
                         notificationPanelViewController2.getClass();
@@ -735,7 +753,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.NotificationPanelViewController$4, reason: invalid class name */
     public class AnonymousClass4 implements KeyguardTouchSwipeCallback {
         public AnonymousClass4() {
@@ -752,14 +769,12 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.NotificationPanelViewController$9, reason: invalid class name */
     public class AnonymousClass9 {
         public AnonymousClass9() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ConfigurationListener implements ConfigurationController.ConfigurationListener {
         public /* synthetic */ ConfigurationListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -778,16 +793,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                     int i = configuration.orientation;
                     if (i != tabletHorizontalPanelPositionHelper.currentOrientation) {
                         tabletHorizontalPanelPositionHelper.currentOrientation = i;
-                        float displayWidth = DeviceState.getDisplayWidth(((NotificationPanelView) tabletHorizontalPanelPositionHelper.viewSupplier.get()).getContext());
-                        float width = tabletHorizontalPanelPositionHelper.notificationStackScrollLayoutController.getWidth();
-                        float f = 2;
-                        tabletHorizontalPanelPositionHelper.panelCenter = displayWidth / f;
-                        tabletHorizontalPanelPositionHelper.controllerCenter = width / f;
-                        float asInt = tabletHorizontalPanelPositionHelper.positionMinSideMarginSupplier.getAsInt() + tabletHorizontalPanelPositionHelper.controllerCenter;
-                        tabletHorizontalPanelPositionHelper.leftMost = asInt;
-                        float f2 = displayWidth - asInt;
-                        tabletHorizontalPanelPositionHelper.rightMost = f2;
-                        tabletHorizontalPanelPositionHelper.setHorizontalPanelTranslation((f2 - tabletHorizontalPanelPositionHelper.panelCenter) * tabletHorizontalPanelPositionHelper.posRatio, true);
+                        tabletHorizontalPanelPositionHelper.updateResources();
+                        tabletHorizontalPanelPositionHelper.setHorizontalPanelTranslation((tabletHorizontalPanelPositionHelper.rightMost - tabletHorizontalPanelPositionHelper.panelCenter) * tabletHorizontalPanelPositionHelper.posRatio, true);
                     }
                 }
                 secQuickSettingsControllerImpl.updateScrollViewLocationDelta();
@@ -847,7 +854,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HeadsUpNotificationViewControllerImpl implements HeadsUpTouchHelper.HeadsUpNotificationViewController {
         public /* synthetic */ HeadsUpNotificationViewControllerImpl(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -873,14 +879,13 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
 
         @Override // com.android.systemui.statusbar.notification.headsup.HeadsUpTouchHelper.HeadsUpNotificationViewController
         public final void startExpand(float f, float f2, float f3) {
-            NotificationPanelViewController.m2929$$Nest$mstartExpandMotion(NotificationPanelViewController.this, f, f2, true, f3);
+            NotificationPanelViewController.m2946$$Nest$mstartExpandMotion(NotificationPanelViewController.this, f, f2, true, f3);
         }
 
         private HeadsUpNotificationViewControllerImpl() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class KeyguardAffordanceHelperCallback implements KeyguardSecAffordanceHelper.Callback {
         public /* synthetic */ KeyguardAffordanceHelperCallback(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -890,12 +895,10 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface NewNotifReadListener {
         void onNewNotificationRead();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NsslHeightChangedListener {
         public /* synthetic */ NsslHeightChangedListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -905,7 +908,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShadeAccessibilityDelegate extends View.AccessibilityDelegate {
         public /* synthetic */ ShadeAccessibilityDelegate(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -931,14 +933,13 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShadeAttachStateChangeListener implements View.OnAttachStateChangeListener {
         public /* synthetic */ ShadeAttachStateChangeListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
         }
 
         @Override // android.view.View.OnAttachStateChangeListener
-        public final void onViewAttachedToWindow(View view) {
+        public final void onViewAttachedToWindow(View view) throws Resources.NotFoundException {
             final int i = 0;
             final int i2 = 1;
             NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
@@ -1092,13 +1093,11 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShadeFoldAnimatorImpl implements ShadeFoldAnimator {
         public ShadeFoldAnimatorImpl() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShadeHeadsUpChangedListener implements OnHeadsUpChangedListener {
         public /* synthetic */ ShadeHeadsUpChangedListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -1170,7 +1169,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ShadeHeadsUpTrackerImpl implements ShadeHeadsUpTracker {
         public /* synthetic */ ShadeHeadsUpTrackerImpl(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -1200,14 +1198,13 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShadeLayoutChangeListener implements View.OnLayoutChangeListener {
         public /* synthetic */ ShadeLayoutChangeListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
         }
 
         @Override // android.view.View.OnLayoutChangeListener
-        public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
+        public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) throws Resources.NotFoundException {
             DejankUtils.startDetectingBlockingIpcs("NVP#onLayout");
             NotificationPanelViewController.this.updateExpandedHeightToMaxHeight();
             NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
@@ -1221,7 +1218,10 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             NotificationPanelViewController notificationPanelViewController3 = NotificationPanelViewController.this;
             notificationPanelViewController3.mRecomputedMaxCountCallStack = "onLayoutChange";
             NotificationStackScrollLayoutController notificationStackScrollLayoutController = notificationPanelViewController3.mNotificationStackScrollLayoutController;
-            boolean z = notificationStackScrollLayoutController.getWidth() == ((float) NotificationPanelViewController.this.mView.getWidth());
+            notificationStackScrollLayoutController.getClass();
+            int i9 = SceneContainerFlag.$r8$clinit;
+            RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+            boolean z = ((float) notificationStackScrollLayoutController.mView.getWidth()) == ((float) NotificationPanelViewController.this.mView.getWidth());
             notificationPanelViewController3.mIsFullWidth = z;
             notificationPanelViewController3.mScrimController.getClass();
             notificationStackScrollLayoutController.mView.mAmbientState.mIsSmallScreen = z;
@@ -1232,15 +1232,13 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 qs.setIsNotificationPanelFullWidth(z);
             }
             QuickSettingsControllerImpl quickSettingsControllerImpl2 = NotificationPanelViewController.this.mQsController;
-            int i9 = quickSettingsControllerImpl2.mMaxExpansionHeight;
+            int iIntValue = quickSettingsControllerImpl2.mMaxExpansionHeight;
             if (quickSettingsControllerImpl2.isQsFragmentCreated()) {
                 quickSettingsControllerImpl2.updateMinHeight();
                 int desiredHeight = quickSettingsControllerImpl2.mQs.getDesiredHeight();
                 quickSettingsControllerImpl2.mMaxExpansionHeight = desiredHeight;
                 NotificationStackScrollLayoutController notificationStackScrollLayoutController2 = quickSettingsControllerImpl2.mNotificationStackScrollLayoutController;
                 notificationStackScrollLayoutController2.getClass();
-                int i10 = SceneContainerFlag.$r8$clinit;
-                RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
                 NotificationStackScrollLayout notificationStackScrollLayout = notificationStackScrollLayoutController2.mView;
                 notificationStackScrollLayout.getClass();
                 notificationStackScrollLayout.mMaxTopPadding = desiredHeight;
@@ -1253,33 +1251,33 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 if (notificationPanelViewController$$ExternalSyntheticLambda0 != null) {
                     notificationPanelViewController$$ExternalSyntheticLambda0.onExpansionHeightSetToMax(true);
                 }
-                final int i11 = quickSettingsControllerImpl3.mMaxExpansionHeight;
-                if (i11 != i9) {
+                final int i10 = quickSettingsControllerImpl3.mMaxExpansionHeight;
+                if (i10 != iIntValue) {
                     ValueAnimator valueAnimator = quickSettingsControllerImpl3.mSizeChangeAnimator;
                     if (valueAnimator != null) {
-                        i9 = ((Integer) valueAnimator.getAnimatedValue()).intValue();
+                        iIntValue = ((Integer) valueAnimator.getAnimatedValue()).intValue();
                         quickSettingsControllerImpl3.mSizeChangeAnimator.cancel();
                     }
-                    ValueAnimator ofInt = ValueAnimator.ofInt(i9, i11);
-                    quickSettingsControllerImpl3.mSizeChangeAnimator = ofInt;
-                    ofInt.setDuration(300L);
+                    ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(iIntValue, i10);
+                    quickSettingsControllerImpl3.mSizeChangeAnimator = valueAnimatorOfInt;
+                    valueAnimatorOfInt.setDuration(300L);
                     quickSettingsControllerImpl3.mSizeChangeAnimator.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
                     quickSettingsControllerImpl3.mSizeChangeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.shade.QuickSettingsControllerImpl$$ExternalSyntheticLambda36
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                            QuickSettingsControllerImpl quickSettingsControllerImpl4 = QuickSettingsControllerImpl.this;
-                            int i12 = i11;
+                            QuickSettingsControllerImpl quickSettingsControllerImpl4 = quickSettingsControllerImpl3;
+                            int iIntValue2 = i10;
                             NotificationPanelViewController$$ExternalSyntheticLambda0 notificationPanelViewController$$ExternalSyntheticLambda02 = quickSettingsControllerImpl4.mExpansionHeightSetToMaxListener;
                             if (notificationPanelViewController$$ExternalSyntheticLambda02 != null) {
                                 notificationPanelViewController$$ExternalSyntheticLambda02.onExpansionHeightSetToMax(true);
                             }
                             ValueAnimator valueAnimator3 = quickSettingsControllerImpl4.mSizeChangeAnimator;
                             if (valueAnimator3 != null) {
-                                i12 = ((Integer) valueAnimator3.getAnimatedValue()).intValue();
+                                iIntValue2 = ((Integer) valueAnimator3.getAnimatedValue()).intValue();
                             } else {
-                                RecordingInputConnection$$ExternalSyntheticOutline0.m(i12, "animator is null. So force set height as ", "QuickSettingsController");
+                                RecordingInputConnection$$ExternalSyntheticOutline0.m(iIntValue2, "animator is null. So force set height as ", "QuickSettingsController");
                             }
-                            quickSettingsControllerImpl4.mQs.setHeightOverride(i12);
+                            quickSettingsControllerImpl4.mQs.setHeightOverride(iIntValue2);
                         }
                     });
                     quickSettingsControllerImpl3.mSizeChangeAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shade.QuickSettingsControllerImpl.1
@@ -1321,7 +1319,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StatusBarStateListener implements StatusBarStateController.StateListener {
         public /* synthetic */ StatusBarStateListener(NotificationPanelViewController notificationPanelViewController, int i) {
             this();
@@ -1353,30 +1350,192 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
 
         @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
-        public final void onStateChanged(int i) {
+        public final void onStateChanged(int i) throws Resources.NotFoundException {
             onStateChanged(i, false);
         }
 
         private StatusBarStateListener() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:48:0x01c0  */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x020a  */
-        /* JADX WARN: Removed duplicated region for block: B:77:0x0219  */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public final void onStateChanged(int r20, boolean r21) {
-            /*
-                Method dump skipped, instructions count: 608
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationPanelViewController.StatusBarStateListener.onStateChanged(int, boolean):void");
+        public final void onStateChanged(int i, boolean z) throws Resources.NotFoundException {
+            boolean z2;
+            NotificationStackScrollLayout notificationStackScrollLayout;
+            int i2;
+            SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor;
+            long j;
+            long j2;
+            QS qs;
+            int i3 = 1;
+            NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+            StatusBarStateControllerImpl statusBarStateControllerImpl = (StatusBarStateControllerImpl) notificationPanelViewController.mStatusBarStateController;
+            boolean z3 = statusBarStateControllerImpl.mState == 0 && statusBarStateControllerImpl.mLeaveOpenOnKeyguardHide;
+            int i4 = notificationPanelViewController.mBarState;
+            boolean z4 = i == 1;
+            notificationPanelViewController.setKeyguardSecBottomAreaVisibility(i, z3);
+            KeyguardStateControllerImpl keyguardStateControllerImpl = notificationPanelViewController.mKeyguardStateController;
+            notificationPanelViewController.mKeyguardStatusBase.setKeyguardStatusViewVisibility(i, notificationPanelViewController.mBarState, keyguardStateControllerImpl.mKeyguardFadingAway, z3);
+            if (i == 1) {
+                Log.d("NotificationPanelView", "resetClockViewAlpha");
+                FaceWidgetContainerWrapper faceWidgetContainerWrapper = notificationPanelViewController.mKeyguardStatusBase;
+                View view = faceWidgetContainerWrapper.mClockContainer;
+                if (view == null) {
+                    view = faceWidgetContainerWrapper.mFaceWidgetContainer;
+                }
+                if (view instanceof ViewGroup) {
+                    ((ViewGroup) view).getChildAt(0).setAlpha(1.0f);
+                }
+                View viewProvideComplication = notificationPanelViewController.provideComplication();
+                if (viewProvideComplication != null) {
+                    viewProvideComplication.setAlpha(1.0f);
+                }
+            }
+            int i5 = notificationPanelViewController.mMediaNowBarExpandState;
+            NotificationStackScrollLayoutController notificationStackScrollLayoutController = notificationPanelViewController.mNotificationStackScrollLayoutController;
+            if (i5 == 1 && z4 && notificationStackScrollLayoutController != null) {
+                notificationStackScrollLayoutController.mMaxAlphaForKeyguard = 0.0f;
+                notificationStackScrollLayoutController.mMaxAlphaForKeyguardSource = "MediaNowBar keyguardShowing";
+                notificationStackScrollLayoutController.updateAlpha$1$1();
+            }
+            notificationPanelViewController.mBarState = i;
+            QuickSettingsControllerImpl quickSettingsControllerImpl = notificationPanelViewController.mQsController;
+            quickSettingsControllerImpl.mBarState = i;
+            SecQuickSettingsControllerImpl secQuickSettingsControllerImpl = quickSettingsControllerImpl.mSecQuickSettingsControllerImpl;
+            if (secQuickSettingsControllerImpl != null) {
+                ((SecQSPanelResourcePicker) secQuickSettingsControllerImpl.resourcePicker$delegate.getValue()).resourcePickHelper.getTargetPicker().getClass();
+                secQuickSettingsControllerImpl.barState = i;
+                if (i == 2 && (qs = quickSettingsControllerImpl.mQs) != null) {
+                    qs.setListening(true);
+                }
+            }
+            PluginFaceWidgetManager pluginFaceWidgetManager = (PluginFaceWidgetManager) Dependency.sDependency.getDependencyInner(PluginFaceWidgetManager.class);
+            if (pluginFaceWidgetManager == null) {
+                Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
+                Log.e("NotificationPanelView", "Failed to get PluginFaceWidgetManager");
+            } else {
+                PluginKeyguardStatusView pluginKeyguardStatusView = pluginFaceWidgetManager.mFaceWidgetPlugin;
+                if (pluginKeyguardStatusView != null) {
+                    pluginKeyguardStatusView.updateBarState(i);
+                }
+            }
+            NotificationPanelView notificationPanelView = notificationPanelViewController.mView;
+            if (i4 == 1 && (z3 || i == 2)) {
+                if (keyguardStateControllerImpl.mKeyguardFadingAway) {
+                    z2 = z4;
+                    j = keyguardStateControllerImpl.mKeyguardFadingAwayDelay;
+                    keyguardStateControllerImpl.getClass();
+                    j2 = keyguardStateControllerImpl.mKeyguardFadingAwayDuration / 2;
+                } else {
+                    z2 = z4;
+                    j = 0;
+                    j2 = 360;
+                }
+                notificationPanelViewController.mKeyguardStatusBarViewController.animateKeyguardStatusBarOut(j, j2);
+                quickSettingsControllerImpl.updateMinHeight();
+                quickSettingsControllerImpl.updateNightMode(notificationPanelView.getVisibility());
+                if (CscRune.KEYGUARD_DCM_LIVE_UX) {
+                    notificationPanelViewController.mMascotViewContainer.setMascotViewVisible(4);
+                }
+            } else {
+                z2 = z4;
+                KeyguardTouchAnimator keyguardTouchAnimator = notificationPanelViewController.mKeyguardTouchAnimator;
+                if (i4 == 2 && i == 1) {
+                    notificationPanelViewController.mKeyguardStatusBarViewController.animateKeyguardStatusBarIn();
+                    notificationStackScrollLayoutController.mView.resetScrollPosition();
+                    quickSettingsControllerImpl.updateNightMode(notificationPanelView.getVisibility());
+                    keyguardTouchAnimator.reset(false);
+                    if (CscRune.KEYGUARD_DCM_LIVE_UX) {
+                        notificationPanelViewController.mMascotViewContainer.setMascotViewVisible(notificationPanelViewController.mDozing ? 8 : 0);
+                    }
+                } else {
+                    if (i4 != 0 || i != 1 || !notificationPanelViewController.mScreenOffAnimationController.isKeyguardShowDelayed() || z) {
+                        boolean zIsOnAod = notificationPanelViewController.isOnAod();
+                        ShadeLogger shadeLogger = notificationPanelViewController.mShadeLog;
+                        shadeLogger.getClass();
+                        LogLevel logLevel = LogLevel.VERBOSE;
+                        ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(i3);
+                        LogBuffer logBuffer = shadeLogger.buffer;
+                        LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                        logMessageImpl.bool1 = z2;
+                        logMessageImpl.bool2 = zIsOnAod;
+                        logMessageImpl.bool3 = z;
+                        logMessageImpl.int1 = i4;
+                        logMessageImpl.int2 = i;
+                        logBuffer.commit(logMessageObtain);
+                        notificationPanelViewController.mKeyguardStatusBarViewController.updateViewState(1.0f, z2 ? 0 : 4);
+                    }
+                    if (z2 && i4 != notificationPanelViewController.mBarState) {
+                        QS qs2 = quickSettingsControllerImpl.mQs;
+                        if (qs2 != null) {
+                            qs2.hideImmediately();
+                        }
+                        if (((KeyguardEditModeControllerImpl) notificationPanelViewController.mKeyguardEditModeController).isEditMode) {
+                            KeyguardEditModeAnimatorController keyguardEditModeAnimatorController = keyguardTouchAnimator.editModeAnimatorController;
+                            Log.d("KeyguardEditModeAnimatorController", "dismissEditActivity " + keyguardEditModeAnimatorController.isEditMode());
+                            if (keyguardEditModeAnimatorController.isEditMode()) {
+                                keyguardEditModeAnimatorController.animate(false);
+                            }
+                        }
+                    } else if (i4 == 1 && i == 0) {
+                        notificationPanelViewController.cancelHeightAnimator();
+                    }
+                    if (i4 == 1 && i == 0 && (notificationStackScrollLayout = notificationStackScrollLayoutController.mView) != null) {
+                        HashSet hashSet = notificationStackScrollLayout.mAnimationFinishedRunnables;
+                        NotificationPanelViewController$$ExternalSyntheticLambda18 notificationPanelViewController$$ExternalSyntheticLambda18 = notificationPanelViewController.mHeadsUpExistenceChangedRunnable;
+                        if (hashSet.contains(notificationPanelViewController$$ExternalSyntheticLambda18)) {
+                            notificationPanelViewController$$ExternalSyntheticLambda18.run();
+                        }
+                    }
+                }
+            }
+            KeyguardStatusBarViewController keyguardStatusBarViewController = notificationPanelViewController.mKeyguardStatusBarViewController;
+            keyguardStatusBarViewController.getClass();
+            int i6 = SceneContainerFlag.$r8$clinit;
+            RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+            keyguardStatusBarViewController.updateForHeadsUp(true);
+            if (z2) {
+                notificationPanelViewController.updateDozingVisibilities(false);
+            }
+            notificationPanelViewController.mRecomputedMaxCountCallStack = "onStateChanged";
+            quickSettingsControllerImpl.updateQsState$2();
+            if (QpRune.QUICK_PANEL_CODE_FOR_POP_OVER && (secQsUiDisplayModeInteractor = notificationPanelViewController.mSecQsUiDisplayModeInteractor) != null && secQsUiDisplayModeInteractor.isTablet() && i == 1) {
+                quickSettingsControllerImpl.mSecQuickSettingsControllerImpl.getTabletHorizontalPanelPositionHelper().resetHorizontalPanelPosition(true);
+            }
+            notificationPanelViewController.onBarStateChanged(notificationPanelViewController.mBarState);
+            if (i4 == i && i == 1 && (i2 = notificationPanelViewController.mPluginLockViewMode) != 0) {
+                notificationPanelViewController.setViewMode(i2);
+            }
+            if (notificationPanelViewController.mBarState == 0 && notificationPanelViewController.mPluginLockMediator.isWindowSecured()) {
+                notificationPanelViewController.mPluginLockMediator.updateWindowSecureState(false);
+            }
+            View view2 = notificationPanelViewController.mPluginLockStarContainer;
+            if (view2 != null) {
+                view2.setVisibility(notificationPanelViewController.mBarState == 1 ? 0 : 8);
+            }
+            SecNotificationPanelViewController secNotificationPanelViewController = notificationPanelViewController.mSecNotificationPanelViewController;
+            if (secNotificationPanelViewController != null) {
+                SecPanelSplitHelper.Companion.getClass();
+                if (SecPanelSplitHelper.isEnabled) {
+                    if (i == 1) {
+                        SecPanelSplitHelper secPanelSplitHelper = secNotificationPanelViewController.panelSplitHelper;
+                        if (secPanelSplitHelper != null) {
+                            secPanelSplitHelper.slide$1(1);
+                        }
+                    } else if (i == 2) {
+                        secNotificationPanelViewController.quickSettingsController.setExpansionHeight(r4.mMaxExpansionHeight);
+                    }
+                    if (((i4 == 1 && i == 0) || (i4 == 0 && i == 1)) && secNotificationPanelViewController.isTrackingSupplier.getAsBoolean()) {
+                        Log.d("SecNotificationPanelViewController", "legacyShadeTracking true -> false by force in onStateChanged()");
+                        secNotificationPanelViewController.onTrackingStoppedConsumer.accept(Boolean.FALSE);
+                    }
+                }
+            }
+            if (i == 0 && notificationPanelViewController.mInstantExpanding) {
+                notificationPanelViewController.mInstantExpanding = false;
+            }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TouchHandler implements View.OnTouchListener, Gefingerpoken {
         public long mLastTouchDownTime = -1;
 
@@ -1384,55 +1543,1104 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Removed duplicated region for block: B:182:0x0413  */
-        /* JADX WARN: Removed duplicated region for block: B:187:0x0452  */
+        /* JADX WARN: Removed duplicated region for block: B:198:0x040d  */
+        /* JADX WARN: Removed duplicated region for block: B:200:0x0413  */
+        /* JADX WARN: Removed duplicated region for block: B:205:0x0452  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final boolean handleTouch$1(android.view.MotionEvent r13) {
-            /*
-                Method dump skipped, instructions count: 1134
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationPanelViewController.TouchHandler.handleTouch$1(android.view.MotionEvent):boolean");
+        public final boolean handleTouch$1(MotionEvent motionEvent) throws Resources.NotFoundException {
+            boolean z;
+            NotificationPanelViewController notificationPanelViewController;
+            NotificationPanelViewController notificationPanelViewController2;
+            StringBuilder sb;
+            int pointerId;
+            QuickPanelLogger quickPanelLogger = NotificationPanelViewController.this.mQuickPanelLogger;
+            if (quickPanelLogger != null) {
+                quickPanelLogger.quickPanelLoggerHelper.handleTouchLogger.log(motionEvent, quickPanelLogger.tag, "");
+            }
+            NotificationPanelViewController notificationPanelViewController3 = NotificationPanelViewController.this;
+            SecNotificationPanelViewController secNotificationPanelViewController = notificationPanelViewController3.mSecNotificationPanelViewController;
+            if (secNotificationPanelViewController == null || !notificationPanelViewController3.isFullyCollapsed() || !motionEvent.isFromSource(8194) || secNotificationPanelViewController.isTrackingSupplier.getAsBoolean()) {
+                NotificationPanelViewController notificationPanelViewController4 = NotificationPanelViewController.this;
+                if (notificationPanelViewController4.mInstantExpanding) {
+                    notificationPanelViewController4.mShadeLog.logMotionEvent(motionEvent, "handleTouch: touch ignored due to instant expanding");
+                    QuickPanelLogger quickPanelLogger2 = NotificationPanelViewController.this.mQuickPanelLogger;
+                    if (quickPanelLogger2 != null) {
+                        quickPanelLogger2.handleTouch(motionEvent, "mInstantExpanding", false);
+                        return false;
+                    }
+                } else if (notificationPanelViewController4.mTouchDisabled && motionEvent.getActionMasked() != 3) {
+                    NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "handleTouch: non-cancel action, touch disabled");
+                    QuickPanelLogger quickPanelLogger3 = NotificationPanelViewController.this.mQuickPanelLogger;
+                    if (quickPanelLogger3 != null) {
+                        quickPanelLogger3.handleTouch(motionEvent, "mTouchDisabled && event.getActionMasked() != ACTION_CANCEL", false);
+                        return false;
+                    }
+                } else if (!NotificationPanelViewController.this.mMotionAborted || motionEvent.getActionMasked() == 0) {
+                    NotificationPanelViewController notificationPanelViewController5 = NotificationPanelViewController.this;
+                    if (notificationPanelViewController5.mNotificationsDragEnabled) {
+                        int iFindPointerIndex = motionEvent.findPointerIndex(notificationPanelViewController5.mTrackingPointer);
+                        if (iFindPointerIndex < 0) {
+                            NotificationPanelViewController.this.mTrackingPointer = motionEvent.getPointerId(0);
+                            iFindPointerIndex = 0;
+                        }
+                        float x = motionEvent.getX(iFindPointerIndex);
+                        float y = motionEvent.getY(iFindPointerIndex);
+                        if (motionEvent.getActionMasked() == 0 || motionEvent.getActionMasked() == 2) {
+                            NotificationPanelViewController notificationPanelViewController6 = NotificationPanelViewController.this;
+                            if (notificationPanelViewController6.mExpectingSynthesizedDown) {
+                                Log.d("NotificationPanelView", "shouldGestureWaitForTouchSlop set mExpectingSynthesizedDown to false");
+                                notificationPanelViewController6.mExpectingSynthesizedDown = false;
+                            } else {
+                                if (notificationPanelViewController6.isFullyCollapsed() || notificationPanelViewController6.mBarState != 0) {
+                                    z = true;
+                                }
+                                notificationPanelViewController6.mGestureWaitForTouchSlop = z;
+                                NotificationPanelViewController.this.mIgnoreXTouchSlop = true;
+                            }
+                            z = false;
+                            notificationPanelViewController6.mGestureWaitForTouchSlop = z;
+                            NotificationPanelViewController.this.mIgnoreXTouchSlop = true;
+                        }
+                        boolean zIsTrackpadThreeFingerSwipe = Utilities.isTrackpadThreeFingerSwipe(motionEvent);
+                        switch (motionEvent.getActionMasked()) {
+                            case 0:
+                                if (QuickStepContract.ALLOW_BACK_GESTURE_IN_SHADE) {
+                                    NotificationPanelViewController.this.getClass();
+                                }
+                                NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "onTouch: down action");
+                                NotificationPanelViewController notificationPanelViewController7 = NotificationPanelViewController.this;
+                                NotificationPanelViewController.m2946$$Nest$mstartExpandMotion(notificationPanelViewController7, x, y, false, notificationPanelViewController7.mExpandedHeight);
+                                NotificationPanelViewController notificationPanelViewController8 = NotificationPanelViewController.this;
+                                notificationPanelViewController8.getClass();
+                                notificationPanelViewController8.mPanelClosedOnDown = notificationPanelViewController8.isFullyCollapsed();
+                                NotificationPanelViewController notificationPanelViewController9 = NotificationPanelViewController.this;
+                                notificationPanelViewController9.mShadeLog.logPanelClosedOnDown("handle down touch", notificationPanelViewController9.mPanelClosedOnDown, notificationPanelViewController9.mExpandedFraction);
+                                NotificationPanelViewController notificationPanelViewController10 = NotificationPanelViewController.this;
+                                notificationPanelViewController10.mHasLayoutedSinceDown = false;
+                                notificationPanelViewController10.mUpdateFlingOnLayout = false;
+                                notificationPanelViewController10.mMotionAborted = false;
+                                notificationPanelViewController10.mDownTime = notificationPanelViewController10.mSystemClock.uptimeMillis();
+                                NotificationPanelViewController notificationPanelViewController11 = NotificationPanelViewController.this;
+                                notificationPanelViewController11.getClass();
+                                notificationPanelViewController11.mTouchAboveFalsingThreshold = false;
+                                notificationPanelViewController11.mCollapsedAndHeadsUpOnDown = notificationPanelViewController11.isFullyCollapsed() && ((HeadsUpManagerImpl) NotificationPanelViewController.this.mHeadsUpManager).mHasPinnedNotification;
+                                NotificationPanelViewController.m2943$$Nest$maddMovement(NotificationPanelViewController.this, motionEvent);
+                                NotificationPanelViewController notificationPanelViewController12 = NotificationPanelViewController.this;
+                                boolean z2 = (notificationPanelViewController12.mHeightAnimator == null || notificationPanelViewController12.mIsSpringBackAnimation) ? false : true;
+                                if (!notificationPanelViewController12.mGestureWaitForTouchSlop || z2) {
+                                    notificationPanelViewController12.mTouchSlopExceeded = z2 || notificationPanelViewController12.mTouchSlopExceededBeforeDown;
+                                    notificationPanelViewController12.cancelHeightAnimator();
+                                    NotificationPanelViewController.this.onTrackingStarted();
+                                }
+                                if (NotificationPanelViewController.this.isFullyCollapsed()) {
+                                    NotificationPanelViewController notificationPanelViewController13 = NotificationPanelViewController.this;
+                                    if (!((HeadsUpManagerImpl) notificationPanelViewController13.mHeadsUpManager).mHasPinnedNotification && !notificationPanelViewController13.mCentralSurfaces.mBouncerShowing) {
+                                        notificationPanelViewController13.updateExpansionAndVisibility();
+                                        CentralSurfacesImpl centralSurfacesImpl = notificationPanelViewController13.mCentralSurfaces;
+                                        DisplayMetrics displayMetrics = centralSurfacesImpl.mDisplayMetrics;
+                                        notificationPanelViewController13.mLockscreenGestureLogger.mMetricsLogger.write(new LogMaker(1328).setType(4).addTaggedData(1326, Integer.valueOf((int) ((motionEvent.getX() / displayMetrics.widthPixels) * 100.0f))).addTaggedData(1327, Integer.valueOf((int) ((motionEvent.getY() / displayMetrics.heightPixels) * 100.0f))).addTaggedData(1329, Integer.valueOf(centralSurfacesImpl.mDisplay.getRotation())));
+                                        new UiEventLoggerImpl().log(LockscreenGestureLogger.LockscreenUiEvent.LOCKSCREEN_UNLOCKED_NOTIFICATION_PANEL_EXPAND);
+                                    }
+                                }
+                                notificationPanelViewController = NotificationPanelViewController.this;
+                                if (notificationPanelViewController.mQuickPanelLogger != null && (sb = notificationPanelViewController.mQuickPanelLogBuilder) != null) {
+                                    sb.setLength(0);
+                                    StringBuilder sb2 = NotificationPanelViewController.this.mQuickPanelLogBuilder;
+                                    sb2.append("FINAL: !mGestureWaitForTouchSlop: ");
+                                    sb2.append(!NotificationPanelViewController.this.mGestureWaitForTouchSlop);
+                                    sb2.append(" || isTracking(): ");
+                                    sb2.append(NotificationPanelViewController.this.isTracking());
+                                    NotificationPanelViewController notificationPanelViewController14 = NotificationPanelViewController.this;
+                                    QuickPanelLogger quickPanelLogger4 = notificationPanelViewController14.mQuickPanelLogger;
+                                    quickPanelLogger4.quickPanelLoggerHelper.handleTouchLogger.log(motionEvent, quickPanelLogger4.tag, notificationPanelViewController14.mQuickPanelLogBuilder.toString());
+                                }
+                                notificationPanelViewController2 = NotificationPanelViewController.this;
+                                if (notificationPanelViewController2.mGestureWaitForTouchSlop || notificationPanelViewController2.isTracking()) {
+                                }
+                                break;
+                            case 1:
+                            case 3:
+                            case 4:
+                                NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "onTouch: up/cancel action");
+                                NotificationPanelViewController.m2943$$Nest$maddMovement(NotificationPanelViewController.this, motionEvent);
+                                NotificationPanelViewController.m2944$$Nest$mendMotionEvent(NotificationPanelViewController.this, motionEvent, x, y, false);
+                                if (NotificationPanelViewController.this.mHeightAnimator == null) {
+                                    if (motionEvent.getActionMasked() == 1) {
+                                        InteractionJankMonitor interactionJankMonitor = (InteractionJankMonitor) NotificationPanelViewController.this.mQsController.mInteractionJankMonitorLazy.get();
+                                        if (interactionJankMonitor != null) {
+                                            interactionJankMonitor.end(0);
+                                        }
+                                    } else {
+                                        InteractionJankMonitor interactionJankMonitor2 = (InteractionJankMonitor) NotificationPanelViewController.this.mQsController.mInteractionJankMonitorLazy.get();
+                                        if (interactionJankMonitor2 != null) {
+                                            interactionJankMonitor2.cancel(0);
+                                        }
+                                    }
+                                }
+                                notificationPanelViewController = NotificationPanelViewController.this;
+                                if (notificationPanelViewController.mQuickPanelLogger != null) {
+                                    sb.setLength(0);
+                                    StringBuilder sb22 = NotificationPanelViewController.this.mQuickPanelLogBuilder;
+                                    sb22.append("FINAL: !mGestureWaitForTouchSlop: ");
+                                    sb22.append(!NotificationPanelViewController.this.mGestureWaitForTouchSlop);
+                                    sb22.append(" || isTracking(): ");
+                                    sb22.append(NotificationPanelViewController.this.isTracking());
+                                    NotificationPanelViewController notificationPanelViewController142 = NotificationPanelViewController.this;
+                                    QuickPanelLogger quickPanelLogger42 = notificationPanelViewController142.mQuickPanelLogger;
+                                    quickPanelLogger42.quickPanelLoggerHelper.handleTouchLogger.log(motionEvent, quickPanelLogger42.tag, notificationPanelViewController142.mQuickPanelLogBuilder.toString());
+                                    break;
+                                }
+                                notificationPanelViewController2 = NotificationPanelViewController.this;
+                                if (notificationPanelViewController2.mGestureWaitForTouchSlop) {
+                                    break;
+                                }
+                                break;
+                            case 2:
+                                if (QuickStepContract.ALLOW_BACK_GESTURE_IN_SHADE) {
+                                    NotificationPanelViewController.this.getClass();
+                                }
+                                if (NotificationPanelViewController.this.isFullyCollapsed()) {
+                                    NotificationPanelViewController notificationPanelViewController15 = NotificationPanelViewController.this;
+                                    notificationPanelViewController15.mHasVibratedOnOpen = false;
+                                    float f = notificationPanelViewController15.mExpandedFraction;
+                                    ShadeLogger shadeLogger = notificationPanelViewController15.mShadeLog;
+                                    shadeLogger.getClass();
+                                    LogLevel logLevel = LogLevel.VERBOSE;
+                                    ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(6);
+                                    LogBuffer logBuffer = shadeLogger.buffer;
+                                    LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+                                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                                    logMessageImpl.bool1 = false;
+                                    logMessageImpl.double1 = f;
+                                    logBuffer.commit(logMessageObtain);
+                                }
+                                NotificationPanelViewController.m2943$$Nest$maddMovement(NotificationPanelViewController.this, motionEvent);
+                                if (!NotificationPanelViewController.this.isFullyCollapsed()) {
+                                    NotificationPanelViewController.this.maybeVibrateOnOpening(true);
+                                }
+                                float f2 = y - NotificationPanelViewController.this.mInitialExpandY;
+                                if (Math.abs(f2) > NotificationPanelViewController.this.getTouchSlop$1(motionEvent) && (Math.abs(f2) > Math.abs(x - NotificationPanelViewController.this.mInitialExpandX) || NotificationPanelViewController.this.mIgnoreXTouchSlop)) {
+                                    NotificationPanelViewController notificationPanelViewController16 = NotificationPanelViewController.this;
+                                    notificationPanelViewController16.mTouchSlopExceeded = true;
+                                    if (notificationPanelViewController16.mGestureWaitForTouchSlop && !notificationPanelViewController16.isTracking() && !NotificationPanelViewController.this.mCollapsedAndHeadsUpOnDown && (motionEvent.getSource() != 8194 || motionEvent.getToolType(0) != 1 || motionEvent.getClassification() != 3)) {
+                                        NotificationPanelViewController notificationPanelViewController17 = NotificationPanelViewController.this;
+                                        if (notificationPanelViewController17.mInitialOffsetOnTouch != 0.0f) {
+                                            NotificationPanelViewController.m2946$$Nest$mstartExpandMotion(notificationPanelViewController17, x, y, false, notificationPanelViewController17.mExpandedHeight);
+                                            f2 = 0.0f;
+                                        }
+                                        NotificationPanelViewController.this.cancelHeightAnimator();
+                                        NotificationPanelViewController.this.onTrackingStarted();
+                                    }
+                                }
+                                float fMax = Math.max(0.0f, NotificationPanelViewController.this.mInitialOffsetOnTouch + f2);
+                                NotificationPanelViewController.this.getClass();
+                                float fMax2 = Math.max(fMax, 0.0f);
+                                if ((-f2) >= NotificationPanelViewController.this.getFalsingThreshold()) {
+                                    NotificationPanelViewController notificationPanelViewController18 = NotificationPanelViewController.this;
+                                    notificationPanelViewController18.mTouchAboveFalsingThreshold = true;
+                                    float f3 = x - notificationPanelViewController18.mInitialExpandX;
+                                    float f4 = y - notificationPanelViewController18.mInitialExpandY;
+                                    notificationPanelViewController18.mUpwardsWhenThresholdReached = f4 < 0.0f && Math.abs(f4) >= Math.abs(f3);
+                                }
+                                NotificationPanelViewController notificationPanelViewController19 = NotificationPanelViewController.this;
+                                if (!notificationPanelViewController19.mGestureWaitForTouchSlop || notificationPanelViewController19.isTracking()) {
+                                    NotificationPanelViewController notificationPanelViewController20 = NotificationPanelViewController.this;
+                                    if (!notificationPanelViewController20.mBlockingExpansionForCurrentTouch) {
+                                        QuickSettingsControllerImpl quickSettingsControllerImpl = notificationPanelViewController20.mQsController;
+                                        if (!quickSettingsControllerImpl.mConflictingExpansionGesture || !quickSettingsControllerImpl.getExpanded()) {
+                                            NotificationPanelViewController.this.mAmbientState.setSwipingUp(f2 <= 0.0f);
+                                            NotificationPanelViewController.this.setExpandedHeightInternal(fMax2);
+                                        }
+                                    }
+                                }
+                                notificationPanelViewController = NotificationPanelViewController.this;
+                                if (notificationPanelViewController.mQuickPanelLogger != null) {
+                                }
+                                notificationPanelViewController2 = NotificationPanelViewController.this;
+                                if (notificationPanelViewController2.mGestureWaitForTouchSlop) {
+                                }
+                                break;
+                            case 5:
+                                NotificationPanelViewController notificationPanelViewController21 = NotificationPanelViewController.this;
+                                notificationPanelViewController21.mShadeLog.logMotionEventStatusBarState(motionEvent, notificationPanelViewController21.mStatusBarStateController.getState(), "handleTouch: pointer down action");
+                                if (!zIsTrackpadThreeFingerSwipe && NotificationPanelViewController.this.mStatusBarStateController.getState() == 1) {
+                                    NotificationPanelViewController notificationPanelViewController22 = NotificationPanelViewController.this;
+                                    notificationPanelViewController22.mMotionAborted = true;
+                                    NotificationPanelViewController.m2944$$Nest$mendMotionEvent(notificationPanelViewController22, motionEvent, x, y, true);
+                                    QuickPanelLogger quickPanelLogger5 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                    if (quickPanelLogger5 != null) {
+                                        quickPanelLogger5.handleTouch(motionEvent, "!isTrackpadTwoOrThreeFingerSwipe && mStatusBarStateController.getState() == KEYGUARD)", false);
+                                        break;
+                                    }
+                                } else {
+                                    notificationPanelViewController = NotificationPanelViewController.this;
+                                    if (notificationPanelViewController.mQuickPanelLogger != null) {
+                                    }
+                                    notificationPanelViewController2 = NotificationPanelViewController.this;
+                                    if (notificationPanelViewController2.mGestureWaitForTouchSlop) {
+                                    }
+                                }
+                                break;
+                            case 6:
+                                if (!zIsTrackpadThreeFingerSwipe && NotificationPanelViewController.this.mTrackingPointer == (pointerId = motionEvent.getPointerId(motionEvent.getActionIndex()))) {
+                                    int i = motionEvent.getPointerId(0) != pointerId ? 0 : 1;
+                                    float y2 = motionEvent.getY(i);
+                                    float x2 = motionEvent.getX(i);
+                                    NotificationPanelViewController.this.mTrackingPointer = motionEvent.getPointerId(i);
+                                    NotificationPanelViewController notificationPanelViewController23 = NotificationPanelViewController.this;
+                                    notificationPanelViewController23.mHandlingPointerUp = true;
+                                    NotificationPanelViewController.m2946$$Nest$mstartExpandMotion(notificationPanelViewController23, x2, y2, true, notificationPanelViewController23.mExpandedHeight);
+                                    NotificationPanelViewController.this.mHandlingPointerUp = false;
+                                }
+                                notificationPanelViewController = NotificationPanelViewController.this;
+                                if (notificationPanelViewController.mQuickPanelLogger != null) {
+                                }
+                                notificationPanelViewController2 = NotificationPanelViewController.this;
+                                if (notificationPanelViewController2.mGestureWaitForTouchSlop) {
+                                }
+                                break;
+                        }
+                        return true;
+                    }
+                    if (notificationPanelViewController5.isTracking()) {
+                        NotificationPanelViewController.this.onTrackingStopped(true);
+                    }
+                    NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "handleTouch: drag not enabled");
+                    QuickPanelLogger quickPanelLogger6 = NotificationPanelViewController.this.mQuickPanelLogger;
+                    if (quickPanelLogger6 != null) {
+                        quickPanelLogger6.handleTouch(motionEvent, "!mNotificationsDragEnabled", false);
+                        return false;
+                    }
+                } else {
+                    NotificationPanelViewController notificationPanelViewController24 = NotificationPanelViewController.this;
+                    notificationPanelViewController24.mShadeLog.logMotionEventStatusBarState(motionEvent, notificationPanelViewController24.mStatusBarStateController.getState(), "handleTouch: non-down action, motion was aborted");
+                    QuickPanelLogger quickPanelLogger7 = NotificationPanelViewController.this.mQuickPanelLogger;
+                    if (quickPanelLogger7 != null) {
+                        quickPanelLogger7.handleTouch(motionEvent, "mMotionAborted && event.getActionMasked() != ACTION_DOWN", false);
+                        return false;
+                    }
+                }
+                return false;
+            }
+            int action = motionEvent.getAction();
+            if (action == 0) {
+                NotificationPanelViewController.this.mMotionAborted = false;
+            } else if (action == 1) {
+                notificationPanelViewController3.expand(true);
+            }
+            NotificationPanelViewController notificationPanelViewController25 = NotificationPanelViewController.this;
+            QuickPanelLogger quickPanelLogger8 = notificationPanelViewController25.mQuickPanelLogger;
+            if (quickPanelLogger8 != null) {
+                if (notificationPanelViewController25.mMotionAborted) {
+                    quickPanelLogger8.handleTouch(motionEvent, "On expanding, single mouse click expands the panel instead of dragging", true);
+                    return true;
+                }
+                quickPanelLogger8.handleTouch(motionEvent, "!isFullyCollapsed and from mouse", true);
+                return true;
+            }
+            return true;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:290:0x0586, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:342:0x0588, code lost:
         
             if (r5.mUpdateMonitor.getUserHasTrust(r5.mSelectedUserInteractor.getSelectedUserId()) != false) goto L343;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:302:0x05f1, code lost:
-        
-            if (r10 < (r12.getHeight() + r14)) goto L369;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:519:0x05bc, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:355:0x05be, code lost:
         
             if (r10 < (r14 + r12.getHeight())) goto L369;
          */
-        /* JADX WARN: Removed duplicated region for block: B:152:0x0304  */
-        /* JADX WARN: Removed duplicated region for block: B:164:0x0330  */
-        /* JADX WARN: Removed duplicated region for block: B:171:0x0367  */
-        /* JADX WARN: Removed duplicated region for block: B:319:0x06a3  */
-        /* JADX WARN: Removed duplicated region for block: B:325:0x06d5  */
-        /* JADX WARN: Removed duplicated region for block: B:328:0x0702  */
-        /* JADX WARN: Removed duplicated region for block: B:332:0x070c  */
-        /* JADX WARN: Removed duplicated region for block: B:352:0x0746  */
-        /* JADX WARN: Removed duplicated region for block: B:426:0x0a50  */
-        /* JADX WARN: Removed duplicated region for block: B:530:0x033c  */
-        /* JADX WARN: Removed duplicated region for block: B:54:0x00b7  */
-        /* JADX WARN: Removed duplicated region for block: B:58:0x00c3  */
+        /* JADX WARN: Code restructure failed: missing block: B:368:0x05f3, code lost:
+        
+            if (r10 < (r12.getHeight() + r14)) goto L369;
+         */
+        /* JADX WARN: Removed duplicated region for block: B:183:0x02e8  */
+        /* JADX WARN: Removed duplicated region for block: B:190:0x0306  */
+        /* JADX WARN: Removed duplicated region for block: B:191:0x0308  */
+        /* JADX WARN: Removed duplicated region for block: B:194:0x030f  */
+        /* JADX WARN: Removed duplicated region for block: B:196:0x0315  */
+        /* JADX WARN: Removed duplicated region for block: B:203:0x032a  */
+        /* JADX WARN: Removed duplicated region for block: B:206:0x0332  */
+        /* JADX WARN: Removed duplicated region for block: B:207:0x033e  */
+        /* JADX WARN: Removed duplicated region for block: B:227:0x03a9  */
+        /* JADX WARN: Removed duplicated region for block: B:235:0x03d8  */
+        /* JADX WARN: Removed duplicated region for block: B:243:0x0404  */
+        /* JADX WARN: Removed duplicated region for block: B:406:0x06a5  */
+        /* JADX WARN: Removed duplicated region for block: B:414:0x06d7  */
+        /* JADX WARN: Removed duplicated region for block: B:417:0x0704  */
+        /* JADX WARN: Removed duplicated region for block: B:421:0x070e  */
+        /* JADX WARN: Removed duplicated region for block: B:42:0x0099  */
+        /* JADX WARN: Removed duplicated region for block: B:443:0x0748  */
+        /* JADX WARN: Removed duplicated region for block: B:51:0x00b4  */
+        /* JADX WARN: Removed duplicated region for block: B:547:0x09a3  */
+        /* JADX WARN: Removed duplicated region for block: B:572:0x0a52  */
+        /* JADX WARN: Removed duplicated region for block: B:573:0x0a59  */
+        /* JADX WARN: Removed duplicated region for block: B:66:0x00de  */
+        /* JADX WARN: Removed duplicated region for block: B:99:0x0179  */
         @Override // com.android.systemui.Gefingerpoken
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final boolean onInterceptTouchEvent(android.view.MotionEvent r19) {
-            /*
-                Method dump skipped, instructions count: 2757
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationPanelViewController.TouchHandler.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+        public final boolean onInterceptTouchEvent(MotionEvent motionEvent) {
+            float f;
+            NotificationPanelViewController notificationPanelViewController;
+            NotificationPanelViewController notificationPanelViewController2;
+            boolean z;
+            NotificationPanelViewController notificationPanelViewController3;
+            StringBuilder sb;
+            int i;
+            NotificationPanelViewController notificationPanelViewController4;
+            QuickPanelLogger quickPanelLogger;
+            StringBuilder sb2;
+            int pointerId;
+            boolean z2;
+            SecPanelSplitHelper secPanelSplitHelper;
+            SecQuickSettingsControllerImpl secQuickSettingsControllerImpl;
+            NonInterceptingScrollView nonInterceptingScrollView;
+            boolean z3;
+            KeyguardSecBottomAreaView keyguardSecBottomAreaView;
+            boolean z4;
+            LockscreenNotificationIconsOnlyController lockscreenNotificationIconsOnlyController;
+            boolean z5;
+            SecQuickTileChunkLayoutBarTouchHelper secQuickTileChunkLayoutBarTouchHelper;
+            boolean z6;
+            boolean z7;
+            QuickPanelLogger quickPanelLogger2;
+            SecNotificationPanelViewController secNotificationPanelViewController = NotificationPanelViewController.this.mSecNotificationPanelViewController;
+            if (secNotificationPanelViewController == null || !secNotificationPanelViewController.isStatusBarWindowViewTouched()) {
+                if (NotificationPanelViewController.this.mStatusBarStateController.getState() == 0) {
+                    NotificationPanelViewController notificationPanelViewController5 = NotificationPanelViewController.this;
+                    if (!notificationPanelViewController5.mUseExternalTouch) {
+                        QuickPanelLogger quickPanelLogger3 = notificationPanelViewController5.mQuickPanelLogger;
+                        if (quickPanelLogger3 == null) {
+                            return false;
+                        }
+                        quickPanelLogger3.onInterceptTouchEvent(motionEvent, "!mUseExternalTouch", false);
+                        return false;
+                    }
+                }
+                NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "NPVC onInterceptTouchEvent");
+                QuickPanelLogger quickPanelLogger4 = NotificationPanelViewController.this.mQuickPanelLogger;
+                if (quickPanelLogger4 != null) {
+                    quickPanelLogger4.onInterceptTouchEvent(motionEvent);
+                }
+                QS qs = NotificationPanelViewController.this.mQsController.mQs;
+                if (qs != null ? qs.disallowPanelTouches() : false) {
+                    NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "NPVC not intercepting touch, panel touches disallowed");
+                    NotificationPanelViewController notificationPanelViewController6 = NotificationPanelViewController.this;
+                    float f2 = notificationPanelViewController6.mExpandedFraction;
+                    QuickPanelLogger quickPanelLogger5 = notificationPanelViewController6.mQuickPanelLogger;
+                    if (f2 == 1.0f) {
+                        if (quickPanelLogger5 == null) {
+                            return false;
+                        }
+                        quickPanelLogger5.onInterceptTouchEvent(motionEvent, "mQsController.disallowTouches()", false);
+                        return false;
+                    }
+                    if (quickPanelLogger5 != null) {
+                        quickPanelLogger5.onInterceptTouchEvent(motionEvent, "mQsController.disallowTouches()", true);
+                        return true;
+                    }
+                } else if (LsRune.AOD_FULLSCREEN) {
+                    NotificationPanelViewController notificationPanelViewController7 = NotificationPanelViewController.this;
+                    if (notificationPanelViewController7.mUnlockedScreenOffAnimationController.lightRevealAnimationPlaying) {
+                        QuickPanelLogger quickPanelLogger6 = notificationPanelViewController7.mQuickPanelLogger;
+                        if (quickPanelLogger6 != null) {
+                            quickPanelLogger6.onInterceptTouchEvent(motionEvent, "unlockedScreenOff animation playing", true);
+                            return true;
+                        }
+                    } else {
+                        SecNotificationPanelViewController secNotificationPanelViewController2 = NotificationPanelViewController.this.mSecNotificationPanelViewController;
+                        if (secNotificationPanelViewController2 == null) {
+                            SecNotificationPanelViewController secNotificationPanelViewController3 = NotificationPanelViewController.this.mSecNotificationPanelViewController;
+                            if (secNotificationPanelViewController3 != null) {
+                                SecPanelSplitHelper secPanelSplitHelper2 = secNotificationPanelViewController3.panelSplitHelper;
+                                if ((secPanelSplitHelper2 != null ? Boolean.valueOf(secPanelSplitHelper2.panelSlideEventHandler.panelSliderIntercepted) : null).booleanValue()) {
+                                    QuickPanelLogger quickPanelLogger7 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                    if (quickPanelLogger7 == null) {
+                                        return false;
+                                    }
+                                    quickPanelLogger7.onInterceptTouchEvent(motionEvent, "PanelSplit intercepted. No need to intercept from here", false);
+                                    return false;
+                                }
+                            }
+                            NotificationPanelViewController.m2945$$Nest$minitDownStates(NotificationPanelViewController.this, motionEvent);
+                            NotificationPanelViewController notificationPanelViewController8 = NotificationPanelViewController.this;
+                            if (notificationPanelViewController8.mCentralSurfaces.mBouncerShowing) {
+                                notificationPanelViewController8.mShadeLog.v("NotificationPanelViewController MotionEvent intercepted: bouncer is showing");
+                                QuickPanelLogger quickPanelLogger8 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                if (quickPanelLogger8 != null) {
+                                    quickPanelLogger8.onInterceptTouchEvent(motionEvent, "mCentralSurfaces.isBouncerShowing()", true);
+                                    return true;
+                                }
+                            } else if (notificationPanelViewController8.mCommandQueue.panelsEnabled()) {
+                                NotificationStackScrollLayoutController notificationStackScrollLayoutController = NotificationPanelViewController.this.mNotificationStackScrollLayoutController;
+                                notificationStackScrollLayoutController.getClass();
+                                int i2 = SceneContainerFlag.$r8$clinit;
+                                RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+                                if ((!(notificationStackScrollLayoutController.mLongPressedView != null) || motionEvent.getAction() == 0) && NotificationPanelViewController.this.mHeadsUpTouchHelper.onInterceptTouchEvent(motionEvent)) {
+                                    NotificationPanelViewController.this.mMetricsLogger.count("panel_open", 1);
+                                    NotificationPanelViewController.this.mMetricsLogger.count("panel_open_peek", 1);
+                                    NotificationPanelViewController.this.mShadeLog.v("NotificationPanelViewController MotionEvent intercepted: HeadsUpTouchHelper");
+                                    QuickPanelLogger quickPanelLogger9 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                    if (quickPanelLogger9 != null) {
+                                        quickPanelLogger9.onInterceptTouchEvent(motionEvent, "mCommandQueue.panelsEnabled() && !mNotificationStackScrollLayoutController.isLongPressInProgress() && mHeadsUpTouchHelper.onInterceptTouchEvent()", true);
+                                        return true;
+                                    }
+                                } else {
+                                    NotificationPanelViewController notificationPanelViewController9 = NotificationPanelViewController.this;
+                                    if (notificationPanelViewController9.mHeadsUpTouchHelper.mTouchingHeadsUpView) {
+                                        NotificationStackScrollLayoutController notificationStackScrollLayoutController2 = notificationPanelViewController9.mNotificationStackScrollLayoutController;
+                                        notificationStackScrollLayoutController2.getClass();
+                                        int i3 = SceneContainerFlag.$r8$clinit;
+                                        RefactorFlagUtils refactorFlagUtils2 = RefactorFlagUtils.INSTANCE;
+                                        if ((notificationStackScrollLayoutController2.mLongPressedView != null) && motionEvent.getAction() == 2 && (quickPanelLogger2 = NotificationPanelViewController.this.mQuickPanelLogger) != null) {
+                                            quickPanelLogger2.onInterceptTouchEvent(motionEvent, "NotiRune.NOTI_AOSP_BUGFIX_NOT_REFER_DELTAY_TOUCH_FOR_DRAG_AND_DROP_HEADS_UP", false);
+                                            return false;
+                                        }
+                                    }
+                                    NotificationPanelViewController notificationPanelViewController10 = NotificationPanelViewController.this;
+                                    if (notificationPanelViewController10.mSecNotificationPanelViewController == null || notificationPanelViewController10.mPanelSplitHelper.isShadeState()) {
+                                        f = 0.0f;
+                                        if (motionEvent.getAction() != 0) {
+                                            NotificationPanelViewController notificationPanelViewController11 = NotificationPanelViewController.this;
+                                            notificationPanelViewController11.shouldScrollViewIntercept = false;
+                                            notificationPanelViewController11.mInitialExpandY = motionEvent.getY();
+                                        } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
+                                            NotificationPanelViewController.this.shouldScrollViewIntercept = false;
+                                        }
+                                        if (NotificationPanelViewController.this.isFullyExpanded() || NotificationPanelViewController.this.mPanelSplitHelper.isShadeState()) {
+                                            notificationPanelViewController = NotificationPanelViewController.this;
+                                            if (notificationPanelViewController.mQsController.shouldQuickSettingsIntercept(notificationPanelViewController.mDownX, notificationPanelViewController.mDownY, f) && NotificationPanelViewController.this.mPulseExpansionHandler.onInterceptTouchEvent(motionEvent)) {
+                                                NotificationPanelViewController.this.mShadeLog.v("NotificationPanelViewController MotionEvent intercepted: PulseExpansionHandler");
+                                                QuickPanelLogger quickPanelLogger10 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                if (quickPanelLogger10 != null) {
+                                                    quickPanelLogger10.onInterceptTouchEvent(motionEvent, "!mQsController.shouldQuickSettingsIntercept() && mPulseExpansionHandler.onInterceptTouchEvent()", true);
+                                                    return true;
+                                                }
+                                            } else {
+                                                if (!NotificationPanelViewController.this.isFullyCollapsed() || !NotificationPanelViewController.this.mQsController.onIntercept(motionEvent)) {
+                                                    notificationPanelViewController2 = NotificationPanelViewController.this;
+                                                    z = notificationPanelViewController2.mInstantExpanding;
+                                                    if (!z || !notificationPanelViewController2.mNotificationsDragEnabled || notificationPanelViewController2.mTouchDisabled) {
+                                                        boolean z8 = !notificationPanelViewController2.mNotificationsDragEnabled;
+                                                        boolean z9 = notificationPanelViewController2.mTouchDisabled;
+                                                        ShadeLogger shadeLogger = notificationPanelViewController2.mShadeLog;
+                                                        shadeLogger.getClass();
+                                                        LogLevel logLevel = LogLevel.VERBOSE;
+                                                        ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(3);
+                                                        LogBuffer logBuffer = shadeLogger.buffer;
+                                                        LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+                                                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                                                        logMessageImpl.bool1 = z;
+                                                        logMessageImpl.bool2 = z8;
+                                                        logMessageImpl.bool3 = z9;
+                                                        logBuffer.commit(logMessageObtain);
+                                                        notificationPanelViewController3 = NotificationPanelViewController.this;
+                                                        if (notificationPanelViewController3.mQuickPanelLogger != null && (sb = notificationPanelViewController3.mQuickPanelLogBuilder) != null) {
+                                                            sb.setLength(0);
+                                                            StringBuilder sb3 = NotificationPanelViewController.this.mQuickPanelLogBuilder;
+                                                            sb3.append("mInstantExpanding: ");
+                                                            sb3.append(NotificationPanelViewController.this.mInstantExpanding);
+                                                            sb3.append(" || !mNotificationsDragEnabled: ");
+                                                            sb3.append(!NotificationPanelViewController.this.mNotificationsDragEnabled);
+                                                            sb3.append(" || mTouchDisabled: ");
+                                                            sb3.append(NotificationPanelViewController.this.mTouchDisabled);
+                                                            NotificationPanelViewController notificationPanelViewController12 = NotificationPanelViewController.this;
+                                                            notificationPanelViewController12.mQuickPanelLogger.onInterceptTouchEvent(motionEvent, notificationPanelViewController12.mQuickPanelLogBuilder.toString(), false);
+                                                            return false;
+                                                        }
+                                                    } else if (!notificationPanelViewController2.mMotionAborted || motionEvent.getActionMasked() == 0) {
+                                                        if (NotificationPanelViewController.this.mCommandQueue.panelsEnabled() && !NotificationPanelViewController.this.mQsController.getExpanded() && (lockscreenNotificationIconsOnlyController = NotificationPanelViewController.this.mLockscreenNotificationIconsOnlyController) != null) {
+                                                            PluginNotificationController pluginNotificationController = lockscreenNotificationIconsOnlyController.mNotificationControllerWrapper.mNotificationController;
+                                                            if (pluginNotificationController != null ? pluginNotificationController.isIconsOnlyInterceptTouchEvent(motionEvent) : false) {
+                                                                QuickPanelLogger quickPanelLogger11 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                if (quickPanelLogger11 != null) {
+                                                                    quickPanelLogger11.onInterceptTouchEvent(motionEvent, "LsRune.LOCKUI_NOTI_ICON_TYPE", true);
+                                                                    return true;
+                                                                }
+                                                            }
+                                                        }
+                                                        PluginLock pluginLock = NotificationPanelViewController.this.mPluginLock;
+                                                        if (pluginLock != null && pluginLock.getTouchManager() != null && !NotificationPanelViewController.this.mQsController.getExpanded() && NotificationPanelViewController.this.mStatusBarStateController.getState() == 1) {
+                                                            NotificationPanelViewController notificationPanelViewController13 = NotificationPanelViewController.this;
+                                                            if (!notificationPanelViewController13.mMediaOutputDetailShowing) {
+                                                                if (notificationPanelViewController13.mPluginLock.getTouchManager().isTouchOnItemViewArea(motionEvent)) {
+                                                                    NotificationPanelViewController.this.onUserActivity();
+                                                                    if (motionEvent.getActionMasked() == 0) {
+                                                                        NotificationPanelViewController.this.mPluginLock.getTouchManager().setIntercept(true);
+                                                                    }
+                                                                    QuickPanelLogger quickPanelLogger12 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                    if (quickPanelLogger12 != null) {
+                                                                        quickPanelLogger12.onInterceptTouchEvent(motionEvent, "LsRune.PLUGIN_LOCK", false);
+                                                                        return false;
+                                                                    }
+                                                                } else {
+                                                                    NotificationPanelViewController notificationPanelViewController14 = NotificationPanelViewController.this;
+                                                                    if ((notificationPanelViewController14.mPluginLockViewMode == 0) && notificationPanelViewController14.mPluginLock.getTouchManager().isIntercepting()) {
+                                                                        NotificationPanelViewController.this.mPluginLock.getTouchManager().setIntercept(false);
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        if (NotificationPanelViewController.this.mMediaOutputDetailShowing) {
+                                                            Log.i("NotificationPanelView", "mMediaOutputDetailShowing is true");
+                                                        }
+                                                        if (CscRune.LOCKUI_BOTTOM_USIM_TEXT && !NotificationPanelViewController.this.mQsController.getExpanded() && NotificationPanelViewController.this.mBarState == 1 && motionEvent.getActionMasked() == 0 && (keyguardSecBottomAreaView = NotificationPanelViewController.this.mKeyguardSecBottomArea) != null && keyguardSecBottomAreaView.isInEmergencyButtonArea(motionEvent)) {
+                                                            QuickPanelLogger quickPanelLogger13 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                            if (quickPanelLogger13 != null) {
+                                                                z4 = false;
+                                                                quickPanelLogger13.onInterceptTouchEvent(motionEvent, "CscRune.LOCKUI_BOTTOM_USIM_TEXT", false);
+                                                            } else {
+                                                                z4 = false;
+                                                            }
+                                                            NotificationPanelViewController.this.setMotionAborted();
+                                                            return z4;
+                                                        }
+                                                        int actionMasked = motionEvent.getActionMasked();
+                                                        NotificationPanelViewController notificationPanelViewController15 = NotificationPanelViewController.this;
+                                                        notificationPanelViewController15.mQsExpandedOnTouchDown = notificationPanelViewController15.mQsController.getExpanded() || NotificationPanelViewController.this.mQsController.mFullyExpanded;
+                                                        if (!NotificationPanelViewController.this.mQsController.getExpanded()) {
+                                                            NotificationPanelViewController notificationPanelViewController16 = NotificationPanelViewController.this;
+                                                            if (notificationPanelViewController16.mBarState == 1) {
+                                                                Lazy lazy = notificationPanelViewController16.mPluginLockStarManagerLazy;
+                                                                float x = motionEvent.getX();
+                                                                float y = motionEvent.getY();
+                                                                PluginKeyguardStatusView pluginKeyguardStatusView = notificationPanelViewController16.mKeyguardStatusBase.mPluginKeyguardStatusView;
+                                                                if (!(pluginKeyguardStatusView != null ? pluginKeyguardStatusView.isInContentBounds(x, y) : false)) {
+                                                                    if (!notificationPanelViewController16.mAccessibilityManager.isEnabled()) {
+                                                                    }
+                                                                    View viewFindViewById = notificationPanelViewController16.mView.findViewById(R.id.sec_lock_icon_view);
+                                                                    if (viewFindViewById != null) {
+                                                                        float x2 = viewFindViewById.getX();
+                                                                        float y2 = viewFindViewById.getY();
+                                                                        if (viewFindViewById.getVisibility() == 0) {
+                                                                            if (x2 < x) {
+                                                                                if (x < x2 + viewFindViewById.getWidth()) {
+                                                                                    if (y2 < y) {
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    if (CscRune.KEYGUARD_DCM_LIVE_UX) {
+                                                                        DcmMascotViewContainer dcmMascotViewContainer = notificationPanelViewController16.mMascotViewContainer;
+                                                                        if (dcmMascotViewContainer.getVisibility() == 0) {
+                                                                            int x3 = (int) dcmMascotViewContainer.getX();
+                                                                            int y3 = (int) dcmMascotViewContainer.getY();
+                                                                            if (x3 < x) {
+                                                                                if (x < dcmMascotViewContainer.getWidth() + x3) {
+                                                                                    if (y3 < y) {
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    try {
+                                                                        if (notificationPanelViewController16.mLockStarEnabled && lazy.get() != null && ((PluginLockStarManager) lazy.get()).isTouchable(motionEvent)) {
+                                                                            LogUtil.dm("NotificationPanelView", "isTouchOnEmptyArea on lockstar item", new Object[0]);
+                                                                        }
+                                                                    } catch (Throwable unused) {
+                                                                        Log.e("NotificationPanelView", "isTouchOnEmptyArea() error in Lockstar");
+                                                                    }
+                                                                    if (notificationPanelViewController16.mLockStarEnabled) {
+                                                                        LogUtil.dm("NotificationPanelView", "isTouchOnEmptyArea belowClock false", new Object[0]);
+                                                                    }
+                                                                    if (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isShowNotificationOnKeyguard()) {
+                                                                        NotificationStackScrollLayoutController notificationStackScrollLayoutController3 = notificationPanelViewController16.mNotificationStackScrollLayoutController;
+                                                                        boolean z10 = true;
+                                                                        for (int childCount = notificationStackScrollLayoutController3.mView.getChildCount() - 1; childCount >= 0; childCount--) {
+                                                                            ExpandableView expandableView = (ExpandableView) notificationStackScrollLayoutController3.mView.getChildAt(childCount);
+                                                                            if (expandableView instanceof ExpandableNotificationRow) {
+                                                                                ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) expandableView;
+                                                                                if (expandableNotificationRow.getVisibility() != 8 && expandableNotificationRow.getY() < y) {
+                                                                                    z10 = false;
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        i = 8;
+                                                                        int notGoneChildCount = notificationStackScrollLayoutController3.getNotGoneChildCount();
+                                                                        boolean zIsInContentBounds$1 = notificationPanelViewController16.isInContentBounds$1(x, y);
+                                                                        z3 = notGoneChildCount <= 0 || !zIsInContentBounds$1 || z10;
+                                                                        if (!z3) {
+                                                                            LogUtil.d("NotificationPanelView", "isTouchOnEmptyArea return %s: notGoneChildCount() %s, isInContentBounds %s", Boolean.valueOf(z3), Integer.valueOf(notGoneChildCount), Boolean.valueOf(zIsInContentBounds$1));
+                                                                        }
+                                                                    } else {
+                                                                        LogUtil.dm("NotificationPanelView", "isTouchOnEmptyArea returns true", new Object[0]);
+                                                                        z3 = true;
+                                                                        i = 8;
+                                                                    }
+                                                                    if (z3) {
+                                                                        ExpandableView childAtRawPosition = NotificationPanelViewController.this.mNotificationStackScrollLayoutController.mView.getChildAtRawPosition(motionEvent.getX(), motionEvent.getY());
+                                                                        NotificationPanelViewController notificationPanelViewController17 = NotificationPanelViewController.this;
+                                                                        if (childAtRawPosition != notificationPanelViewController17.mShelfManager.shelf) {
+                                                                            if (actionMasked == 0) {
+                                                                                notificationPanelViewController17.mKeyguardTouchAnimator.setIntercept(true);
+                                                                            }
+                                                                        }
+                                                                        if (motionEvent.getAction() != 2) {
+                                                                            LogUtil.d("KeyguardTouchAnimator", "intercepted: action=%d mQsExpanded=%b, mQsFullyExpanded=%b", Integer.valueOf(actionMasked), Boolean.valueOf(NotificationPanelViewController.this.mQsController.getExpanded()), Boolean.valueOf(NotificationPanelViewController.this.mQsController.mFullyExpanded));
+                                                                        }
+                                                                        notificationPanelViewController4 = NotificationPanelViewController.this;
+                                                                        if (notificationPanelViewController4.mKeyguardTouchAnimator.intercepting) {
+                                                                            QuickPanelLogger quickPanelLogger14 = notificationPanelViewController4.mQuickPanelLogger;
+                                                                            if (quickPanelLogger14 != null) {
+                                                                                quickPanelLogger14.onInterceptTouchEvent(motionEvent, "LsRune.KEYGUARD_ALL_DIRECTIONS_SWIPE_UNLOCK", true);
+                                                                                return true;
+                                                                            }
+                                                                        } else {
+                                                                            SecNotificationPanelViewController secNotificationPanelViewController4 = notificationPanelViewController4.mSecNotificationPanelViewController;
+                                                                            if (secNotificationPanelViewController4 != null) {
+                                                                                SecPanelSplitHelper.Companion.getClass();
+                                                                                if (SecPanelSplitHelper.isEnabled && (secPanelSplitHelper = secNotificationPanelViewController4.panelSplitHelper) != null && secPanelSplitHelper.isQSState() && (secQuickSettingsControllerImpl = secNotificationPanelViewController4.secQuickSettingsControllerImpl) != null && (nonInterceptingScrollView = secQuickSettingsControllerImpl.getNonInterceptingScrollView()) != null && nonInterceptingScrollView.getScrollRange() > 0) {
+                                                                                    NonInterceptingScrollView nonInterceptingScrollView2 = secQuickSettingsControllerImpl.getNonInterceptingScrollView();
+                                                                                    z2 = nonInterceptingScrollView2 != null ? nonInterceptingScrollView2.canScrollVertically(1) : false;
+                                                                                    if (!z2) {
+                                                                                        QuickPanelLogger quickPanelLogger15 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                                        if (quickPanelLogger15 != null) {
+                                                                                            quickPanelLogger15.onInterceptTouchEvent(motionEvent, "canQsScrollUp()", false);
+                                                                                            return false;
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                if (!z2) {
+                                                                                }
+                                                                            }
+                                                                            NotificationPanelViewController notificationPanelViewController18 = NotificationPanelViewController.this;
+                                                                            if (notificationPanelViewController18.mFullScreenModeEnabled) {
+                                                                                QuickPanelLogger quickPanelLogger16 = notificationPanelViewController18.mQuickPanelLogger;
+                                                                                if (quickPanelLogger16 != null) {
+                                                                                    quickPanelLogger16.onInterceptTouchEvent(motionEvent, "LsRune.LOCKUI_FACE_WIDGET", false);
+                                                                                    return false;
+                                                                                }
+                                                                            } else {
+                                                                                if (notificationPanelViewController18.isInFaceWidgetContainer(motionEvent) && !NotificationPanelViewController.this.mQsController.getExpanded()) {
+                                                                                    NotificationPanelViewController notificationPanelViewController19 = NotificationPanelViewController.this;
+                                                                                    if (notificationPanelViewController19.mBarState == 1) {
+                                                                                        View view = notificationPanelViewController19.mKeyguardStatusBase.mFaceWidgetContainer;
+                                                                                        if ((view != null ? view.getVisibility() : i) == 0) {
+                                                                                            View view2 = NotificationPanelViewController.this.mKeyguardStatusBase.mFaceWidgetContainer;
+                                                                                            boolean zOnInterceptTouchEvent = (view2 == null || !(view2 instanceof ViewGroup)) ? false : ((ViewGroup) view2).onInterceptTouchEvent(motionEvent);
+                                                                                            QuickPanelLogger quickPanelLogger17 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                                            if (quickPanelLogger17 != null) {
+                                                                                                quickPanelLogger17.onInterceptTouchEvent(motionEvent, "LsRune.LOCKUI_FACE_WIDGET", zOnInterceptTouchEvent);
+                                                                                            }
+                                                                                            return zOnInterceptTouchEvent;
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                try {
+                                                                                    StringBuilder sb4 = new StringBuilder("onInterceptTouchEvent: mLockStarEnabled=");
+                                                                                    sb4.append(NotificationPanelViewController.this.mLockStarEnabled);
+                                                                                    sb4.append(", isInLockStarContainer(event) = ");
+                                                                                    sb4.append(NotificationPanelViewController.this.isInLockStarContainer(motionEvent));
+                                                                                    sb4.append(", pand = ");
+                                                                                    sb4.append(!NotificationPanelViewController.this.mQsController.getExpanded());
+                                                                                    Log.i("NotificationPanelView", sb4.toString());
+                                                                                    NotificationPanelViewController notificationPanelViewController20 = NotificationPanelViewController.this;
+                                                                                    if (notificationPanelViewController20.mLockStarEnabled && notificationPanelViewController20.isInLockStarContainer(motionEvent) && !NotificationPanelViewController.this.mQsController.getExpanded()) {
+                                                                                        NotificationPanelViewController notificationPanelViewController21 = NotificationPanelViewController.this;
+                                                                                        if (notificationPanelViewController21.mBarState == 1 && notificationPanelViewController21.mPluginLockStarContainer.getVisibility() == 0 && NotificationPanelViewController.this.mPluginLockStarManagerLazy.get() != null) {
+                                                                                            boolean zOnInterceptTouchEvent2 = ((PluginLockStarManager) NotificationPanelViewController.this.mPluginLockStarManagerLazy.get()).onInterceptTouchEvent(motionEvent);
+                                                                                            QuickPanelLogger quickPanelLogger18 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                                            if (quickPanelLogger18 == null) {
+                                                                                                return zOnInterceptTouchEvent2;
+                                                                                            }
+                                                                                            quickPanelLogger18.onInterceptTouchEvent(motionEvent, "LsRune.PLUGIN_LOCK_STAR", zOnInterceptTouchEvent2);
+                                                                                            return zOnInterceptTouchEvent2;
+                                                                                        }
+                                                                                    }
+                                                                                } catch (Throwable th) {
+                                                                                    Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
+                                                                                    Log.e("NotificationPanelView", "onInterceptTouchEvent() error in LockStar - " + th.getMessage());
+                                                                                }
+                                                                                int iFindPointerIndex = motionEvent.findPointerIndex(NotificationPanelViewController.this.mTrackingPointer);
+                                                                                if (iFindPointerIndex < 0) {
+                                                                                    NotificationPanelViewController.this.mTrackingPointer = motionEvent.getPointerId(0);
+                                                                                    iFindPointerIndex = 0;
+                                                                                }
+                                                                                float x4 = motionEvent.getX(iFindPointerIndex);
+                                                                                float y4 = motionEvent.getY(iFindPointerIndex);
+                                                                                boolean zCanCollapsePanelOnTouch = NotificationPanelViewController.this.canCollapsePanelOnTouch();
+                                                                                boolean zIsTrackpadThreeFingerSwipe = Utilities.isTrackpadThreeFingerSwipe(motionEvent);
+                                                                                int actionMasked2 = motionEvent.getActionMasked();
+                                                                                if (actionMasked2 == 0) {
+                                                                                    NotificationPanelViewController notificationPanelViewController22 = NotificationPanelViewController.this;
+                                                                                    notificationPanelViewController22.mAnimatingOnDown = (notificationPanelViewController22.mHeightAnimator == null || notificationPanelViewController22.mIsSpringBackAnimation) ? false : true;
+                                                                                    notificationPanelViewController22.getClass();
+                                                                                    NotificationPanelViewController notificationPanelViewController23 = NotificationPanelViewController.this;
+                                                                                    notificationPanelViewController23.mDownTime = notificationPanelViewController23.mSystemClock.uptimeMillis();
+                                                                                    NotificationPanelViewController notificationPanelViewController24 = NotificationPanelViewController.this;
+                                                                                    if (notificationPanelViewController24.mAnimatingOnDown && notificationPanelViewController24.isClosing()) {
+                                                                                        NotificationPanelViewController.this.cancelHeightAnimator();
+                                                                                        NotificationPanelViewController notificationPanelViewController25 = NotificationPanelViewController.this;
+                                                                                        notificationPanelViewController25.mTouchSlopExceeded = true;
+                                                                                        notificationPanelViewController25.mShadeLog.v("NotificationPanelViewController MotionEvent intercepted: mAnimatingOnDown: true, isClosing(): true");
+                                                                                        QuickPanelLogger quickPanelLogger19 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                                        if (quickPanelLogger19 != null) {
+                                                                                            quickPanelLogger19.onInterceptTouchEvent(motionEvent, "mAnimationOnDown && isClosing()", true);
+                                                                                        }
+                                                                                    } else {
+                                                                                        if (!NotificationPanelViewController.this.isTracking() || NotificationPanelViewController.this.isFullyCollapsed()) {
+                                                                                            NotificationPanelViewController notificationPanelViewController26 = NotificationPanelViewController.this;
+                                                                                            notificationPanelViewController26.mInitialExpandY = y4;
+                                                                                            notificationPanelViewController26.mInitialExpandX = x4;
+                                                                                        } else {
+                                                                                            NotificationPanelViewController.this.mShadeLog.d("not setting mInitialExpandY in onInterceptTouch");
+                                                                                        }
+                                                                                        NotificationPanelViewController.this.mTouchStartedInEmptyArea = !r4.isInContentBounds$1(x4, y4);
+                                                                                        NotificationPanelViewController notificationPanelViewController27 = NotificationPanelViewController.this;
+                                                                                        notificationPanelViewController27.mTouchSlopExceeded = notificationPanelViewController27.mTouchSlopExceededBeforeDown;
+                                                                                        notificationPanelViewController27.mMotionAborted = false;
+                                                                                        notificationPanelViewController27.mPanelClosedOnDown = notificationPanelViewController27.isFullyCollapsed();
+                                                                                        NotificationPanelViewController notificationPanelViewController28 = NotificationPanelViewController.this;
+                                                                                        notificationPanelViewController28.mShadeLog.logPanelClosedOnDown("intercept down touch", notificationPanelViewController28.mPanelClosedOnDown, notificationPanelViewController28.mExpandedFraction);
+                                                                                        NotificationPanelViewController notificationPanelViewController29 = NotificationPanelViewController.this;
+                                                                                        notificationPanelViewController29.mCollapsedAndHeadsUpOnDown = false;
+                                                                                        notificationPanelViewController29.mHasLayoutedSinceDown = false;
+                                                                                        notificationPanelViewController29.mUpdateFlingOnLayout = false;
+                                                                                        notificationPanelViewController29.mTouchAboveFalsingThreshold = false;
+                                                                                        notificationPanelViewController29.mHeadsUpVisibleOnDown = ((HeadsUpManagerImpl) notificationPanelViewController29.mHeadsUpManager).mHasPinnedNotification;
+                                                                                        NotificationPanelViewController.m2943$$Nest$maddMovement(notificationPanelViewController29, motionEvent);
+                                                                                        quickPanelLogger = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                                        if (quickPanelLogger != null) {
+                                                                                        }
+                                                                                    }
+                                                                                } else if (actionMasked2 == 1) {
+                                                                                    NotificationPanelViewController.this.mVelocityTracker.clear();
+                                                                                    quickPanelLogger = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                                    if (quickPanelLogger != null) {
+                                                                                        quickPanelLogger.onInterceptTouchEvent(motionEvent, "FINAL", false);
+                                                                                        return false;
+                                                                                    }
+                                                                                } else {
+                                                                                    if (actionMasked2 == 2) {
+                                                                                        NotificationPanelViewController notificationPanelViewController30 = NotificationPanelViewController.this;
+                                                                                        float f3 = y4 - notificationPanelViewController30.mInitialExpandY;
+                                                                                        NotificationPanelViewController.m2943$$Nest$maddMovement(notificationPanelViewController30, motionEvent);
+                                                                                        NotificationPanelViewController notificationPanelViewController31 = NotificationPanelViewController.this;
+                                                                                        boolean z11 = notificationPanelViewController31.mPanelClosedOnDown && !notificationPanelViewController31.mCollapsedAndHeadsUpOnDown;
+                                                                                        if (zCanCollapsePanelOnTouch || notificationPanelViewController31.mTouchStartedInEmptyArea || notificationPanelViewController31.mAnimatingOnDown || z11) {
+                                                                                            float fAbs = Math.abs(f3);
+                                                                                            float touchSlop$1 = NotificationPanelViewController.this.getTouchSlop$1(motionEvent);
+                                                                                            float f4 = -touchSlop$1;
+                                                                                            if ((f3 < f4 || ((z11 || NotificationPanelViewController.this.mAnimatingOnDown) && fAbs > touchSlop$1)) && fAbs > Math.abs(x4 - NotificationPanelViewController.this.mInitialExpandX)) {
+                                                                                                NotificationPanelViewController.this.cancelHeightAnimator();
+                                                                                                NotificationPanelViewController notificationPanelViewController32 = NotificationPanelViewController.this;
+                                                                                                NotificationPanelViewController.m2946$$Nest$mstartExpandMotion(notificationPanelViewController32, x4, y4, true, notificationPanelViewController32.mExpandedHeight);
+                                                                                                NotificationPanelViewController.this.mShadeLog.v("NotificationPanelViewController MotionEvent intercepted: startExpandMotion");
+                                                                                                NotificationPanelViewController notificationPanelViewController33 = NotificationPanelViewController.this;
+                                                                                                if (notificationPanelViewController33.mQuickPanelLogger != null && (sb2 = notificationPanelViewController33.mQuickPanelLogBuilder) != null) {
+                                                                                                    sb2.setLength(0);
+                                                                                                    StringBuilder sb5 = NotificationPanelViewController.this.mQuickPanelLogBuilder;
+                                                                                                    sb5.append("(h: ");
+                                                                                                    sb5.append(f3);
+                                                                                                    sb5.append(" < -touchSlop: ");
+                                                                                                    sb5.append(f4);
+                                                                                                    sb5.append(" || ((openShadeWithoutHun: ");
+                                                                                                    sb5.append(z11);
+                                                                                                    sb5.append(" || mAnimatingOnDown: ");
+                                                                                                    sb5.append(NotificationPanelViewController.this.mAnimatingOnDown);
+                                                                                                    sb5.append(") && hAbs: ");
+                                                                                                    sb5.append(fAbs);
+                                                                                                    sb5.append(" > touchSlop: ");
+                                                                                                    sb5.append(touchSlop$1);
+                                                                                                    sb5.append(")) && hAbs: ");
+                                                                                                    sb5.append(fAbs);
+                                                                                                    sb5.append(" > abs(x-mInitialExpandX): ");
+                                                                                                    sb5.append(Math.abs(x4 - NotificationPanelViewController.this.mInitialExpandX));
+                                                                                                    sb5.append("))");
+                                                                                                    NotificationPanelViewController notificationPanelViewController34 = NotificationPanelViewController.this;
+                                                                                                    notificationPanelViewController34.mQuickPanelLogger.onInterceptTouchEvent(motionEvent, notificationPanelViewController34.mQuickPanelLogBuilder.toString(), true);
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    } else if (actionMasked2 != 3) {
+                                                                                        if (actionMasked2 == 5) {
+                                                                                            NotificationPanelViewController notificationPanelViewController35 = NotificationPanelViewController.this;
+                                                                                            notificationPanelViewController35.mShadeLog.logMotionEventStatusBarState(motionEvent, notificationPanelViewController35.mStatusBarStateController.getState(), "onInterceptTouchEvent: pointer down action");
+                                                                                            if (!zIsTrackpadThreeFingerSwipe && NotificationPanelViewController.this.mStatusBarStateController.getState() == 1) {
+                                                                                                NotificationPanelViewController notificationPanelViewController36 = NotificationPanelViewController.this;
+                                                                                                notificationPanelViewController36.mMotionAborted = true;
+                                                                                                notificationPanelViewController36.mVelocityTracker.clear();
+                                                                                            }
+                                                                                        } else if (actionMasked2 == 6 && !zIsTrackpadThreeFingerSwipe && NotificationPanelViewController.this.mTrackingPointer == (pointerId = motionEvent.getPointerId(motionEvent.getActionIndex()))) {
+                                                                                            int i4 = motionEvent.getPointerId(0) != pointerId ? 0 : 1;
+                                                                                            NotificationPanelViewController.this.mTrackingPointer = motionEvent.getPointerId(i4);
+                                                                                            NotificationPanelViewController.this.mInitialExpandX = motionEvent.getX(i4);
+                                                                                            NotificationPanelViewController.this.mInitialExpandY = motionEvent.getY(i4);
+                                                                                        }
+                                                                                    }
+                                                                                    quickPanelLogger = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                                    if (quickPanelLogger != null) {
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                i = 8;
+                                                                z3 = false;
+                                                                if (z3) {
+                                                                }
+                                                            }
+                                                            NotificationPanelViewController.this.mKeyguardTouchAnimator.setIntercept(false);
+                                                            if (motionEvent.getAction() != 2) {
+                                                            }
+                                                            notificationPanelViewController4 = NotificationPanelViewController.this;
+                                                            if (notificationPanelViewController4.mKeyguardTouchAnimator.intercepting) {
+                                                            }
+                                                        }
+                                                        i = 8;
+                                                        NotificationPanelViewController.this.mKeyguardTouchAnimator.setIntercept(false);
+                                                        if (motionEvent.getAction() != 2) {
+                                                        }
+                                                        notificationPanelViewController4 = NotificationPanelViewController.this;
+                                                        if (notificationPanelViewController4.mKeyguardTouchAnimator.intercepting) {
+                                                        }
+                                                    } else {
+                                                        NotificationPanelViewController notificationPanelViewController37 = NotificationPanelViewController.this;
+                                                        notificationPanelViewController37.mShadeLog.logMotionEventStatusBarState(motionEvent, notificationPanelViewController37.mStatusBarStateController.getState(), "NPVC MotionEvent not intercepted: non-down action, motion was aborted");
+                                                        QuickPanelLogger quickPanelLogger20 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                        if (quickPanelLogger20 != null) {
+                                                            quickPanelLogger20.onInterceptTouchEvent(motionEvent, "mMotionAborted && event.getActionMasked() != ACTION_DOWN", false);
+                                                            return false;
+                                                        }
+                                                    }
+                                                    return false;
+                                                }
+                                                NotificationPanelViewController.this.getClass();
+                                                NotificationPanelViewController.this.mShadeLog.v("NotificationPanelViewController MotionEvent intercepted: QsIntercept");
+                                                QuickPanelLogger quickPanelLogger21 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                if (quickPanelLogger21 != null) {
+                                                    quickPanelLogger21.onInterceptTouchEvent(motionEvent, "!isFullyCollapsed() && mQsController.onIntercept()", true);
+                                                    return true;
+                                                }
+                                            }
+                                        } else {
+                                            QuickSettingsControllerImpl quickSettingsControllerImpl = NotificationPanelViewController.this.mQsController;
+                                            if (quickSettingsControllerImpl.mFullyExpanded) {
+                                                if (quickSettingsControllerImpl.mSecQuickSettingsControllerImpl.checkIfScrollEnabled(motionEvent.getY() - NotificationPanelViewController.this.mInitialExpandY, r8.mTouchSlop)) {
+                                                    NotificationPanelViewController notificationPanelViewController38 = NotificationPanelViewController.this;
+                                                    notificationPanelViewController38.shouldScrollViewIntercept = true;
+                                                    SecQuickSettingsControllerImpl secQuickSettingsControllerImpl2 = notificationPanelViewController38.mQsController.mSecQuickSettingsControllerImpl;
+                                                    secQuickSettingsControllerImpl2.updateScrollViewLocationDelta();
+                                                    MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
+                                                    motionEventObtain.offsetLocation(secQuickSettingsControllerImpl2.deltaX, secQuickSettingsControllerImpl2.deltaY);
+                                                    NonInterceptingScrollView nonInterceptingScrollView3 = secQuickSettingsControllerImpl2.getNonInterceptingScrollView();
+                                                    if (nonInterceptingScrollView3 != null) {
+                                                        nonInterceptingScrollView3.dispatchTouchEvent(motionEventObtain);
+                                                    }
+                                                    QuickPanelLogger quickPanelLogger22 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                    if (quickPanelLogger22 != null) {
+                                                        quickPanelLogger22.onInterceptTouchEvent(motionEvent, "shouldScrollViewIntercept true", true);
+                                                        return true;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        NotificationPanelViewController notificationPanelViewController39 = NotificationPanelViewController.this;
+                                        if (notificationPanelViewController39.mQsController.mFullyExpanded) {
+                                            SecQuickSettingsControllerImpl secQuickSettingsControllerImpl3 = notificationPanelViewController39.mSecNotificationPanelViewController.secQuickSettingsControllerImpl;
+                                            if (secQuickSettingsControllerImpl3 == null || (secQuickTileChunkLayoutBarTouchHelper = secQuickSettingsControllerImpl3.tileChunkLayoutBarTouchHelper) == null) {
+                                                f = 0.0f;
+                                                z5 = false;
+                                            } else {
+                                                secQuickTileChunkLayoutBarTouchHelper.updateChunkLayoutBar(motionEvent);
+                                                if (motionEvent.getActionMasked() == 0) {
+                                                    float x5 = motionEvent.getX();
+                                                    float y5 = motionEvent.getY();
+                                                    TileChunkLayoutBar tileChunkLayoutBar = secQuickTileChunkLayoutBarTouchHelper.tileChunkLayoutBar;
+                                                    if (tileChunkLayoutBar != null) {
+                                                        TileChunkLayoutBarExpandHelper tileChunkLayoutBarExpandHelper = secQuickTileChunkLayoutBarTouchHelper.expandHelper;
+                                                        View view3 = (tileChunkLayoutBarExpandHelper == null || !tileChunkLayoutBarExpandHelper.tileChunkLayoutBar.mIsExpanded) ? tileChunkLayoutBar.mBarRootView : tileChunkLayoutBar.mScrollIndicatorClickContainer;
+                                                        int[] iArr = new int[2];
+                                                        f = 0.0f;
+                                                        notificationPanelViewController39.mView.getLocationOnScreen(iArr);
+                                                        int[] iArr2 = new int[2];
+                                                        view3.getLocationOnScreen(iArr2);
+                                                        int i5 = iArr2[0] - iArr[0];
+                                                        int[] iArr3 = new int[2];
+                                                        view3.getLocationOnScreen(iArr3);
+                                                        int i6 = iArr3[1] - iArr[1];
+                                                        if (secQuickTileChunkLayoutBarTouchHelper.qsExpandedSupplier.getAsBoolean()) {
+                                                            float f5 = i5;
+                                                            if (x5 <= i5 + view3.getWidth() && f5 <= x5) {
+                                                                float f6 = i6;
+                                                                if (y5 <= i6 + view3.getHeight() && f6 <= y5) {
+                                                                    z7 = true;
+                                                                }
+                                                                secQuickTileChunkLayoutBarTouchHelper.actionDownStartInChunkBar = z7;
+                                                            }
+                                                        }
+                                                    } else {
+                                                        f = 0.0f;
+                                                    }
+                                                    z7 = false;
+                                                    secQuickTileChunkLayoutBarTouchHelper.actionDownStartInChunkBar = z7;
+                                                } else {
+                                                    f = 0.0f;
+                                                }
+                                                if (secQuickTileChunkLayoutBarTouchHelper.actionDownStartInChunkBar) {
+                                                    Rect rect2 = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
+                                                    if (notificationPanelViewController39.isOnKeyguard()) {
+                                                        z6 = false;
+                                                        z5 = z6;
+                                                        if (motionEvent.getActionMasked() == 3 || motionEvent.getActionMasked() == 1) {
+                                                            secQuickTileChunkLayoutBarTouchHelper.actionDownStartInChunkBar = false;
+                                                        }
+                                                    } else {
+                                                        int iPreparePointerIndex = secQuickTileChunkLayoutBarTouchHelper.preparePointerIndex(motionEvent);
+                                                        float x6 = motionEvent.getX(iPreparePointerIndex);
+                                                        float y6 = motionEvent.getY(iPreparePointerIndex);
+                                                        secQuickTileChunkLayoutBarTouchHelper.trackMovementConsumer.accept(motionEvent);
+                                                        int actionMasked3 = motionEvent.getActionMasked();
+                                                        if (actionMasked3 == 0) {
+                                                            TileChunkLayoutBarExpandHelper tileChunkLayoutBarExpandHelper2 = secQuickTileChunkLayoutBarTouchHelper.expandHelper;
+                                                            if (tileChunkLayoutBarExpandHelper2 != null) {
+                                                                tileChunkLayoutBarExpandHelper2.setTracking((float) secQuickTileChunkLayoutBarTouchHelper.currentQsVelocitySupplier.getAsDouble(), true);
+                                                            }
+                                                            secQuickTileChunkLayoutBarTouchHelper.initVelocityTrackerRunnable.run();
+                                                        } else if (actionMasked3 == 1) {
+                                                            secQuickTileChunkLayoutBarTouchHelper.isExpanding = false;
+                                                            TileChunkLayoutBarExpandHelper tileChunkLayoutBarExpandHelper3 = secQuickTileChunkLayoutBarTouchHelper.expandHelper;
+                                                            z6 = tileChunkLayoutBarExpandHelper3 == null && tileChunkLayoutBarExpandHelper3.setTracking((float) secQuickTileChunkLayoutBarTouchHelper.currentQsVelocitySupplier.getAsDouble(), false);
+                                                            secQuickTileChunkLayoutBarTouchHelper.clearVelocityTrackerRunnable.run();
+                                                            if (z6) {
+                                                            }
+                                                            if (motionEvent.getActionMasked() == 3) {
+                                                                secQuickTileChunkLayoutBarTouchHelper.actionDownStartInChunkBar = false;
+                                                            }
+                                                        } else if (actionMasked3 != 2) {
+                                                            if (actionMasked3 != 3) {
+                                                                if (actionMasked3 == 6) {
+                                                                    if (secQuickTileChunkLayoutBarTouchHelper.trackingPointerSupplier.getAsInt() == motionEvent.getPointerId(motionEvent.getActionIndex())) {
+                                                                        motionEvent.getPointerId(0);
+                                                                    }
+                                                                }
+                                                            }
+                                                            secQuickTileChunkLayoutBarTouchHelper.isExpanding = false;
+                                                            TileChunkLayoutBarExpandHelper tileChunkLayoutBarExpandHelper32 = secQuickTileChunkLayoutBarTouchHelper.expandHelper;
+                                                            if (tileChunkLayoutBarExpandHelper32 == null) {
+                                                                secQuickTileChunkLayoutBarTouchHelper.clearVelocityTrackerRunnable.run();
+                                                                if (z6) {
+                                                                }
+                                                                if (motionEvent.getActionMasked() == 3) {
+                                                                }
+                                                            }
+                                                        } else {
+                                                            float asDouble = y6 - ((float) secQuickTileChunkLayoutBarTouchHelper.initialTouchYSupplier.getAsDouble());
+                                                            secQuickTileChunkLayoutBarTouchHelper.draggedHeight = asDouble;
+                                                            if (Math.abs(asDouble) > notificationPanelViewController39.getTouchSlop$1(motionEvent) && Math.abs(secQuickTileChunkLayoutBarTouchHelper.draggedHeight) > Math.abs(x6 - ((float) secQuickTileChunkLayoutBarTouchHelper.initialTouchXSupplier.getAsDouble()))) {
+                                                                int iPreparePointerIndex2 = secQuickTileChunkLayoutBarTouchHelper.preparePointerIndex(motionEvent);
+                                                                motionEvent.getX(iPreparePointerIndex2);
+                                                                motionEvent.getY(iPreparePointerIndex2);
+                                                                TileChunkLayoutBarExpandHelper tileChunkLayoutBarExpandHelper4 = secQuickTileChunkLayoutBarTouchHelper.expandHelper;
+                                                                if (tileChunkLayoutBarExpandHelper4 == null || !tileChunkLayoutBarExpandHelper4.tileChunkLayoutBar.mIsExpanded ? secQuickTileChunkLayoutBarTouchHelper.draggedHeight > f : secQuickTileChunkLayoutBarTouchHelper.draggedHeight <= f) {
+                                                                    secQuickTileChunkLayoutBarTouchHelper.isExpanding = true;
+                                                                    z6 = true;
+                                                                }
+                                                                if (z6) {
+                                                                }
+                                                                if (motionEvent.getActionMasked() == 3) {
+                                                                }
+                                                            }
+                                                        }
+                                                        z6 = false;
+                                                        if (z6) {
+                                                        }
+                                                        if (motionEvent.getActionMasked() == 3) {
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (z5) {
+                                                QuickPanelLogger quickPanelLogger23 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                if (quickPanelLogger23 != null) {
+                                                    quickPanelLogger23.onInterceptTouchEvent(motionEvent, "onInterceptTouchEventForTileChunkLayoutBar()", true);
+                                                    return true;
+                                                }
+                                            }
+                                        }
+                                        if (motionEvent.getAction() != 0) {
+                                        }
+                                        if (NotificationPanelViewController.this.isFullyExpanded()) {
+                                            notificationPanelViewController = NotificationPanelViewController.this;
+                                            if (notificationPanelViewController.mQsController.shouldQuickSettingsIntercept(notificationPanelViewController.mDownX, notificationPanelViewController.mDownY, f)) {
+                                                if (!NotificationPanelViewController.this.isFullyCollapsed()) {
+                                                    notificationPanelViewController2 = NotificationPanelViewController.this;
+                                                    z = notificationPanelViewController2.mInstantExpanding;
+                                                    if (!z) {
+                                                        boolean z82 = !notificationPanelViewController2.mNotificationsDragEnabled;
+                                                        boolean z92 = notificationPanelViewController2.mTouchDisabled;
+                                                        ShadeLogger shadeLogger2 = notificationPanelViewController2.mShadeLog;
+                                                        shadeLogger2.getClass();
+                                                        LogLevel logLevel2 = LogLevel.VERBOSE;
+                                                        ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda02 = new ShadeLogger$$ExternalSyntheticLambda0(3);
+                                                        LogBuffer logBuffer2 = shadeLogger2.buffer;
+                                                        LogMessage logMessageObtain2 = logBuffer2.obtain("systemui.shade", logLevel2, shadeLogger$$ExternalSyntheticLambda02, null);
+                                                        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
+                                                        logMessageImpl2.bool1 = z;
+                                                        logMessageImpl2.bool2 = z82;
+                                                        logMessageImpl2.bool3 = z92;
+                                                        logBuffer2.commit(logMessageObtain2);
+                                                        notificationPanelViewController3 = NotificationPanelViewController.this;
+                                                        if (notificationPanelViewController3.mQuickPanelLogger != null) {
+                                                            sb.setLength(0);
+                                                            StringBuilder sb32 = NotificationPanelViewController.this.mQuickPanelLogBuilder;
+                                                            sb32.append("mInstantExpanding: ");
+                                                            sb32.append(NotificationPanelViewController.this.mInstantExpanding);
+                                                            sb32.append(" || !mNotificationsDragEnabled: ");
+                                                            sb32.append(!NotificationPanelViewController.this.mNotificationsDragEnabled);
+                                                            sb32.append(" || mTouchDisabled: ");
+                                                            sb32.append(NotificationPanelViewController.this.mTouchDisabled);
+                                                            NotificationPanelViewController notificationPanelViewController122 = NotificationPanelViewController.this;
+                                                            notificationPanelViewController122.mQuickPanelLogger.onInterceptTouchEvent(motionEvent, notificationPanelViewController122.mQuickPanelLogBuilder.toString(), false);
+                                                            return false;
+                                                        }
+                                                    }
+                                                    return false;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            SecPanelSplitHelper secPanelSplitHelper3 = secNotificationPanelViewController2.panelSplitHelper;
+                            if (secPanelSplitHelper3 != null) {
+                                SecPanelSplitHelper.Companion.getClass();
+                                boolean z12 = SecPanelSplitHelper.isEnabled && secPanelSplitHelper3.panelSlideEventHandler.sliderAnimator != null;
+                                if (z12) {
+                                    QuickPanelLogger quickPanelLogger24 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                    if (quickPanelLogger24 != null) {
+                                        quickPanelLogger24.onInterceptTouchEvent(motionEvent, "isSlideAnimating()", true);
+                                        return true;
+                                    }
+                                } else {
+                                    NotificationPanelViewController notificationPanelViewController40 = NotificationPanelViewController.this;
+                                    if (notificationPanelViewController40.mSecNotificationPanelViewController.lockscreenShadeTransitionController.touchHelper.maxDragDownAnimator != null) {
+                                        QuickPanelLogger quickPanelLogger25 = notificationPanelViewController40.mQuickPanelLogger;
+                                        if (quickPanelLogger25 != null) {
+                                            quickPanelLogger25.onInterceptTouchEvent(motionEvent, "isDragDownAnimating()", true);
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                QuickPanelLogger quickPanelLogger26 = NotificationPanelViewController.this.mQuickPanelLogger;
+                if (quickPanelLogger26 != null) {
+                    quickPanelLogger26.onInterceptTouchEvent(motionEvent, "StatusBarWindowView Touched", true);
+                    return true;
+                }
+            }
+            return true;
         }
 
         @Override // android.view.View.OnTouchListener
@@ -1449,44 +2657,712 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             return true;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:224:0x0399, code lost:
-        
-            if (r9.mQsController.shouldQuickSettingsIntercept(r9.mDownX, r9.mDownY, 0.0f) != false) goto L244;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:289:0x0663, code lost:
-        
-            if (r0 != 6) goto L428;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:531:0x04ce, code lost:
-        
-            if (((com.android.keyguard.KeyguardUpdateMonitor) com.android.systemui.Dependency.sDependency.getDependencyInner(com.android.keyguard.KeyguardUpdateMonitor.class)).isIccBlockedPermanently() != false) goto L327;
-         */
-        /* JADX WARN: Removed duplicated region for block: B:131:0x0201  */
-        /* JADX WARN: Removed duplicated region for block: B:135:0x0216  */
-        /* JADX WARN: Removed duplicated region for block: B:162:0x02ee  */
-        /* JADX WARN: Removed duplicated region for block: B:237:0x0416  */
-        /* JADX WARN: Removed duplicated region for block: B:241:0x0429  */
-        /* JADX WARN: Removed duplicated region for block: B:263:0x05ef  */
-        /* JADX WARN: Removed duplicated region for block: B:267:0x05f9  */
-        /* JADX WARN: Removed duplicated region for block: B:444:0x09ca  */
-        /* JADX WARN: Removed duplicated region for block: B:558:0x055a  */
-        /* JADX WARN: Removed duplicated region for block: B:57:0x00c5  */
-        /* JADX WARN: Removed duplicated region for block: B:70:0x00ee  */
+        /* JADX WARN: Removed duplicated region for block: B:10:0x0027  */
+        /* JADX WARN: Removed duplicated region for block: B:161:0x0262  */
+        /* JADX WARN: Removed duplicated region for block: B:215:0x0344  */
+        /* JADX WARN: Removed duplicated region for block: B:217:0x034c  */
+        /* JADX WARN: Removed duplicated region for block: B:271:0x041a  */
+        /* JADX WARN: Removed duplicated region for block: B:307:0x04e5  */
+        /* JADX WARN: Removed duplicated region for block: B:377:0x05e5  */
+        /* JADX WARN: Removed duplicated region for block: B:382:0x0601  */
+        /* JADX WARN: Removed duplicated region for block: B:452:0x0757  */
+        /* JADX WARN: Removed duplicated region for block: B:501:0x0826  */
+        /* JADX WARN: Removed duplicated region for block: B:605:0x0a04  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final boolean onTouchEvent(android.view.MotionEvent r20) {
-            /*
-                Method dump skipped, instructions count: 2607
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationPanelViewController.TouchHandler.onTouchEvent(android.view.MotionEvent):boolean");
+        public final boolean onTouchEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
+            KeyguardSecAffordanceHelper keyguardSecAffordanceHelper;
+            KeyguardSecAffordanceView keyguardSecAffordanceView;
+            KeyguardSecAffordanceView keyguardSecAffordanceView2;
+            boolean zOnTouchEvent;
+            boolean zOnTouchEvent2;
+            float f;
+            boolean z;
+            boolean zHandleTouch$1;
+            SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor;
+            StringBuilder sb;
+            SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor2;
+            PluginLock pluginLock;
+            SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor3;
+            View view;
+            boolean zStartExpansion;
+            StringBuilder sb2;
+            MultiWindowEdgeDetector multiWindowEdgeDetector;
+            final SecQuickSettingsControllerImpl secQuickSettingsControllerImpl;
+            SecQuickTileChunkLayoutBarTouchHelper secQuickTileChunkLayoutBarTouchHelper;
+            int pointerId;
+            SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor4;
+            PanelPopOverManager panelPopOverManager;
+            NotificationPanelView notificationPanelView;
+            if (NotificationPanelViewController.this.mStatusBarStateController.getState() == 0) {
+                NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                if (notificationPanelViewController.mUseExternalTouch) {
+                    boolean z2 = QpRune.QUICK_PANEL_CODE_FOR_POP_OVER;
+                    if (z2 && (panelPopOverManager = NotificationPanelViewController.this.mPanelPopOverManager) != null) {
+                        int actionMasked = motionEvent.getActionMasked();
+                        if (panelPopOverManager.getNeedToPopOver() && ((actionMasked == 4 || ((QsAnimatorState.isDetailShowing || QsAnimatorState.isCustomizerShowing) && actionMasked == 1)) && (notificationPanelView = panelPopOverManager.mView) != null)) {
+                            notificationPanelView.post(panelPopOverManager.collapseRunnable);
+                        }
+                    }
+                    if (!NotificationPanelViewController.this.mAlternateBouncerInteractor.isVisibleState()) {
+                        QuickPanelLogger quickPanelLogger = NotificationPanelViewController.this.mQuickPanelLogger;
+                        if (quickPanelLogger != null) {
+                            quickPanelLogger.onTouchEvent(motionEvent);
+                        }
+                        SecNotificationPanelViewController secNotificationPanelViewController = NotificationPanelViewController.this.mSecNotificationPanelViewController;
+                        if (secNotificationPanelViewController != null) {
+                            SecPanelSplitHelper secPanelSplitHelper = secNotificationPanelViewController.panelSplitHelper;
+                            if (secPanelSplitHelper != null) {
+                                SecPanelSplitHelper.Companion.getClass();
+                                if (SecPanelSplitHelper.isEnabled && secPanelSplitHelper.panelSlideEventHandler.sliderAnimator != null) {
+                                    QuickPanelLogger quickPanelLogger2 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                    if (quickPanelLogger2 != null) {
+                                        quickPanelLogger2.onTouchEvent(motionEvent, "isSlideAnimating()", true);
+                                    }
+                                    if (z2 && (secQsUiDisplayModeInteractor4 = NotificationPanelViewController.this.mSecQsUiDisplayModeInteractor) != null && secQsUiDisplayModeInteractor4.isTablet() && motionEvent.getActionMasked() == 0) {
+                                        NotificationPanelViewController.this.mQsController.mSecQuickSettingsControllerImpl.onTouch(motionEvent);
+                                        return true;
+                                    }
+                                }
+                                return true;
+                            }
+                            NotificationPanelViewController notificationPanelViewController2 = NotificationPanelViewController.this;
+                            if (notificationPanelViewController2.mSecNotificationPanelViewController.lockscreenShadeTransitionController.touchHelper.maxDragDownAnimator != null && !notificationPanelViewController2.mHeadsUpVisibleOnDown) {
+                                QuickPanelLogger quickPanelLogger3 = notificationPanelViewController2.mQuickPanelLogger;
+                                if (quickPanelLogger3 != null) {
+                                    quickPanelLogger3.onTouchEvent(motionEvent, "shouldScrollViewIntercept & isDragDownAnimating() & !mHeadsUpVisibleOnDown", true);
+                                    return true;
+                                }
+                            }
+                            return true;
+                        }
+                        NotificationPanelViewController notificationPanelViewController3 = NotificationPanelViewController.this;
+                        boolean z3 = notificationPanelViewController3.shouldScrollViewIntercept;
+                        QuickSettingsControllerImpl quickSettingsControllerImpl = notificationPanelViewController3.mQsController;
+                        if (z3) {
+                            SecQuickSettingsControllerImpl secQuickSettingsControllerImpl2 = quickSettingsControllerImpl.mSecQuickSettingsControllerImpl;
+                            secQuickSettingsControllerImpl2.updateScrollViewLocationDelta();
+                            MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
+                            motionEventObtain.offsetLocation(secQuickSettingsControllerImpl2.deltaX, secQuickSettingsControllerImpl2.deltaY);
+                            NonInterceptingScrollView nonInterceptingScrollView = secQuickSettingsControllerImpl2.getNonInterceptingScrollView();
+                            if (nonInterceptingScrollView != null) {
+                                nonInterceptingScrollView.dispatchTouchEvent(motionEventObtain);
+                            }
+                            if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
+                                NotificationPanelViewController.this.shouldScrollViewIntercept = false;
+                            }
+                            QuickPanelLogger quickPanelLogger4 = NotificationPanelViewController.this.mQuickPanelLogger;
+                            if (quickPanelLogger4 != null) {
+                                quickPanelLogger4.onTouchEvent(motionEvent, "shouldScrollViewIntercept", true);
+                                return true;
+                            }
+                        } else if (LsRune.AOD_FULLSCREEN && notificationPanelViewController3.mUnlockedScreenOffAnimationController.lightRevealAnimationPlaying) {
+                            QuickPanelLogger quickPanelLogger5 = notificationPanelViewController3.mQuickPanelLogger;
+                            if (quickPanelLogger5 != null) {
+                                quickPanelLogger5.onTouchEvent(motionEvent, "unlockedScreenOff animation playing", true);
+                                return true;
+                            }
+                        } else {
+                            QS qs = quickSettingsControllerImpl.mQs;
+                            if (qs != null ? qs.disallowPanelTouches() : false) {
+                                QuickPanelLogger quickPanelLogger6 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                if (quickPanelLogger6 != null) {
+                                    quickPanelLogger6.onTouchEvent(motionEvent, "qs touch is disallowed", true);
+                                    return true;
+                                }
+                            } else {
+                                if (motionEvent.getAction() == 0) {
+                                    if (motionEvent.getDownTime() == this.mLastTouchDownTime) {
+                                        NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "onTouch: duplicate down event detected... ignoring");
+                                        QuickPanelLogger quickPanelLogger7 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                        if (quickPanelLogger7 != null) {
+                                            quickPanelLogger7.onTouchEvent(motionEvent, "event.getDownTime() == mLastTouchDownTime", true);
+                                            return true;
+                                        }
+                                    } else {
+                                        this.mLastTouchDownTime = motionEvent.getDownTime();
+                                        NotificationPanelViewController notificationPanelViewController4 = NotificationPanelViewController.this;
+                                        notificationPanelViewController4.mHeadsUpVisibleOnDown = ((HeadsUpManagerImpl) notificationPanelViewController4.mHeadsUpManager).mHasPinnedNotification;
+                                    }
+                                } else if (motionEvent.getAction() == 1 && ((NotificationPanelViewController.this.mStatusBarStateController.getState() == 1 || NotificationPanelViewController.this.mStatusBarStateController.getState() == 2) && !NotificationPanelViewController.this.mKeyguardTouchAnimator.isViRunning())) {
+                                    NotificationPanelViewController notificationPanelViewController5 = NotificationPanelViewController.this;
+                                    if (!notificationPanelViewController5.mQsController.mFullyExpanded) {
+                                        notificationPanelViewController5.mKeyguardTouchAnimator.setIntercept(false);
+                                    }
+                                }
+                                QuickSettingsControllerImpl quickSettingsControllerImpl2 = NotificationPanelViewController.this.mQsController;
+                                if (quickSettingsControllerImpl2.isQsFragmentCreated() && quickSettingsControllerImpl2.mFullyExpanded) {
+                                    QS qs2 = quickSettingsControllerImpl2.mQs;
+                                    if (qs2 != null ? qs2.disallowPanelTouches() : false) {
+                                        NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "onTouch: ignore touch, panel touches disallowed and qs fully expanded");
+                                        QuickPanelLogger quickPanelLogger8 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                        if (quickPanelLogger8 != null) {
+                                            quickPanelLogger8.onTouchEvent(motionEvent, "mQsController.isFullyExpandedAndTouchesDisallowed()", false);
+                                            return false;
+                                        }
+                                    }
+                                }
+                                SecNotificationPanelViewController secNotificationPanelViewController2 = NotificationPanelViewController.this.mSecNotificationPanelViewController;
+                                if (secNotificationPanelViewController2 != null && (secQuickSettingsControllerImpl = secNotificationPanelViewController2.secQuickSettingsControllerImpl) != null && (secQuickTileChunkLayoutBarTouchHelper = secQuickSettingsControllerImpl.tileChunkLayoutBarTouchHelper) != null) {
+                                    Consumer consumer = new Consumer() { // from class: com.android.systemui.shade.SecQuickSettingsControllerImpl$onTouchEventForTileChunkLayoutBar$1
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            secQuickSettingsControllerImpl.touchAboveFalsingThresholdConsumer.accept((Boolean) obj);
+                                        }
+                                    };
+                                    secQuickTileChunkLayoutBarTouchHelper.updateChunkLayoutBar(motionEvent);
+                                    if (secQuickTileChunkLayoutBarTouchHelper.isExpanding) {
+                                        int iPreparePointerIndex = secQuickTileChunkLayoutBarTouchHelper.preparePointerIndex(motionEvent);
+                                        float y = motionEvent.getY(iPreparePointerIndex);
+                                        motionEvent.getX(iPreparePointerIndex);
+                                        float asDouble = y - ((float) secQuickTileChunkLayoutBarTouchHelper.initialTouchYSupplier.getAsDouble());
+                                        secQuickTileChunkLayoutBarTouchHelper.trackMovementConsumer.accept(motionEvent);
+                                        int actionMasked2 = motionEvent.getActionMasked();
+                                        if (actionMasked2 == 0) {
+                                            TileChunkLayoutBarExpandHelper tileChunkLayoutBarExpandHelper = secQuickTileChunkLayoutBarTouchHelper.expandHelper;
+                                            if (tileChunkLayoutBarExpandHelper != null) {
+                                                tileChunkLayoutBarExpandHelper.setTracking((float) secQuickTileChunkLayoutBarTouchHelper.currentQsVelocitySupplier.getAsDouble(), true);
+                                            }
+                                            secQuickTileChunkLayoutBarTouchHelper.initVelocityTrackerRunnable.run();
+                                        } else if (actionMasked2 == 1) {
+                                            secQuickTileChunkLayoutBarTouchHelper.trackingPointerConsumer.accept(-1);
+                                            TileChunkLayoutBarExpandHelper tileChunkLayoutBarExpandHelper2 = secQuickTileChunkLayoutBarTouchHelper.expandHelper;
+                                            if (tileChunkLayoutBarExpandHelper2 != null) {
+                                                tileChunkLayoutBarExpandHelper2.setTracking((float) secQuickTileChunkLayoutBarTouchHelper.currentQsVelocitySupplier.getAsDouble(), false);
+                                            }
+                                            secQuickTileChunkLayoutBarTouchHelper.clearVelocityTrackerRunnable.run();
+                                        } else if (actionMasked2 == 2) {
+                                            TileChunkLayoutBarExpandHelper tileChunkLayoutBarExpandHelper3 = secQuickTileChunkLayoutBarTouchHelper.expandHelper;
+                                            if (tileChunkLayoutBarExpandHelper3 != null) {
+                                                float f2 = tileChunkLayoutBarExpandHelper3.initialBarHeight + asDouble;
+                                                TileChunkLayoutBar tileChunkLayoutBar = tileChunkLayoutBarExpandHelper3.tileChunkLayoutBar;
+                                                float f3 = tileChunkLayoutBar.mContainerCollapsedHeight;
+                                                if (f2 < f3) {
+                                                    f2 = f3;
+                                                }
+                                                float f4 = tileChunkLayoutBar.mContainerExpandedHeight;
+                                                if (f2 > f4) {
+                                                    f2 = f4;
+                                                }
+                                                tileChunkLayoutBar.setContainerHeight((int) f2);
+                                            }
+                                            if (asDouble >= r11.getFalsingThreshold()) {
+                                                consumer.accept(Boolean.TRUE);
+                                            }
+                                        } else if (actionMasked2 != 3) {
+                                            if (actionMasked2 == 6 && secQuickTileChunkLayoutBarTouchHelper.trackingPointerSupplier.getAsInt() == (pointerId = motionEvent.getPointerId(motionEvent.getActionIndex()))) {
+                                                secQuickTileChunkLayoutBarTouchHelper.trackingPointerConsumer.accept(motionEvent.getPointerId(motionEvent.getPointerId(0) != pointerId ? 0 : 1));
+                                            }
+                                        }
+                                        if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
+                                            secQuickTileChunkLayoutBarTouchHelper.isExpanding = false;
+                                        }
+                                        QuickPanelLogger quickPanelLogger9 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                        if (quickPanelLogger9 != null) {
+                                            quickPanelLogger9.onTouchEvent(motionEvent, "onTouchEventForTileChunkLayoutBar()", true);
+                                            return true;
+                                        }
+                                    }
+                                }
+                                NotificationPanelViewController notificationPanelViewController6 = NotificationPanelViewController.this;
+                                if (notificationPanelViewController6.mKeyguardStateController.mShowing || notificationPanelViewController6.isPanelExpanded() || (multiWindowEdgeDetector = NotificationPanelViewController.this.mMultiWindowEdgeDetector) == null || !multiWindowEdgeDetector.interceptTouchForCornerGesture(motionEvent)) {
+                                    CentralSurfacesImpl centralSurfacesImpl = NotificationPanelViewController.this.mCentralSurfaces;
+                                    if (centralSurfacesImpl.mBouncerShowing && centralSurfacesImpl.mStatusBarKeyguardViewManager.primaryBouncerNeedsScrimming()) {
+                                        NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "onTouch: ignore touch, bouncer scrimmed or showing over dream");
+                                        QuickPanelLogger quickPanelLogger10 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                        if (quickPanelLogger10 != null) {
+                                            quickPanelLogger10.onTouchEvent(motionEvent, "mCentralSurfaces.isBouncerShowingScrimmed()", false);
+                                        }
+                                    } else {
+                                        if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
+                                            NotificationPanelViewController.this.mBlockingExpansionForCurrentTouch = false;
+                                        }
+                                        if (NotificationPanelViewController.this.mLastEventSynthesizedDown && motionEvent.getAction() == 1) {
+                                            NotificationPanelViewController.this.expand(true);
+                                        }
+                                        NotificationPanelViewController.m2945$$Nest$minitDownStates(NotificationPanelViewController.this, motionEvent);
+                                        NotificationPanelViewController notificationPanelViewController7 = NotificationPanelViewController.this;
+                                        if (!notificationPanelViewController7.mIsExpandingOrCollapsing) {
+                                            if (notificationPanelViewController7.mQsController.shouldQuickSettingsIntercept(notificationPanelViewController7.mDownX, notificationPanelViewController7.mDownY, 0.0f)) {
+                                                if (NotificationPanelViewController.this.mPulseExpansionHandler.isExpanding) {
+                                                    PulseExpansionHandler pulseExpansionHandler = NotificationPanelViewController.this.mPulseExpansionHandler;
+                                                    pulseExpansionHandler.getClass();
+                                                    boolean z4 = (motionEvent.getAction() == 3 || motionEvent.getAction() == 1) && pulseExpansionHandler.isExpanding;
+                                                    ExpandableView expandableView = pulseExpansionHandler.mStartingChild;
+                                                    boolean z5 = (expandableView != null && expandableView.showingPulsing()) || pulseExpansionHandler.bypassController.canBypass();
+                                                    if ((!pulseExpansionHandler.canHandleMotionEvent() || !z5) && !z4) {
+                                                        zStartExpansion = false;
+                                                    } else if (pulseExpansionHandler.velocityTracker == null || !pulseExpansionHandler.isExpanding || motionEvent.getActionMasked() == 0) {
+                                                        zStartExpansion = pulseExpansionHandler.startExpansion(motionEvent);
+                                                    } else {
+                                                        VelocityTracker velocityTracker = pulseExpansionHandler.velocityTracker;
+                                                        velocityTracker.getClass();
+                                                        velocityTracker.addMovement(motionEvent);
+                                                        float y2 = motionEvent.getY() - pulseExpansionHandler.mInitialTouchY;
+                                                        int actionMasked3 = motionEvent.getActionMasked();
+                                                        NotificationWakeUpCoordinator notificationWakeUpCoordinator = pulseExpansionHandler.wakeUpCoordinator;
+                                                        LockscreenShadeTransitionController lockscreenShadeTransitionController = pulseExpansionHandler.lockscreenShadeTransitionController;
+                                                        if (actionMasked3 == 1) {
+                                                            VelocityTracker velocityTracker2 = pulseExpansionHandler.velocityTracker;
+                                                            velocityTracker2.getClass();
+                                                            velocityTracker2.computeCurrentVelocity(1000);
+                                                            StatusBarStateController statusBarStateController = pulseExpansionHandler.statusBarStateController;
+                                                            if (y2 > 0.0f) {
+                                                                VelocityTracker velocityTracker3 = pulseExpansionHandler.velocityTracker;
+                                                                velocityTracker3.getClass();
+                                                                boolean z6 = velocityTracker3.getYVelocity() > -1000.0f && statusBarStateController.getState() != 0;
+                                                                FalsingManager falsingManager = pulseExpansionHandler.falsingManager;
+                                                                if (falsingManager.isUnlockingDisabled() || falsingManager.isFalseTouch(2) || !z6) {
+                                                                    pulseExpansionHandler.cancelExpansion();
+                                                                } else {
+                                                                    ExpandableView expandableView2 = pulseExpansionHandler.mStartingChild;
+                                                                    if (expandableView2 != null) {
+                                                                        if (expandableView2 instanceof ExpandableNotificationRow) {
+                                                                            ((ExpandableNotificationRow) expandableView2).setUserLocked(false);
+                                                                        }
+                                                                        pulseExpansionHandler.mStartingChild = null;
+                                                                    }
+                                                                    if (statusBarStateController.isDozing()) {
+                                                                        if (notificationWakeUpCoordinator.outputLinearDozeAmount != 0.0f) {
+                                                                            notificationWakeUpCoordinator.willWakeUp = true;
+                                                                        }
+                                                                        PowerManager powerManager = pulseExpansionHandler.mPowerManager;
+                                                                        powerManager.getClass();
+                                                                        powerManager.wakeUp(android.os.SystemClock.uptimeMillis(), 4, "com.android.systemui:PULSEDRAG");
+                                                                    }
+                                                                    lockscreenShadeTransitionController.goToLockedShade(expandableView2, false);
+                                                                    lockscreenShadeTransitionController.finishPulseAnimation(false);
+                                                                    pulseExpansionHandler.leavingLockscreen = true;
+                                                                    pulseExpansionHandler.setExpanding(false);
+                                                                    ExpandableView expandableView3 = pulseExpansionHandler.mStartingChild;
+                                                                    if (expandableView3 instanceof ExpandableNotificationRow) {
+                                                                        ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) expandableView3;
+                                                                        expandableNotificationRow.getClass();
+                                                                        expandableNotificationRow.onExpandedByGesture(true);
+                                                                    }
+                                                                }
+                                                                VelocityTracker velocityTracker4 = pulseExpansionHandler.velocityTracker;
+                                                                if (velocityTracker4 != null) {
+                                                                    velocityTracker4.recycle();
+                                                                }
+                                                                pulseExpansionHandler.velocityTracker = null;
+                                                            }
+                                                        } else if (actionMasked3 == 2) {
+                                                            float fMax = Math.max(y2, 0.0f);
+                                                            ExpandableView expandableView4 = pulseExpansionHandler.mStartingChild;
+                                                            if (expandableView4 != null) {
+                                                                expandableView4.setActualHeight(Math.min((int) (expandableView4.getCollapsedHeight() + fMax), expandableView4.getMaxContentHeight()), true);
+                                                            } else {
+                                                                notificationWakeUpCoordinator.setNotificationsVisibleForExpansion(y2 > ((float) lockscreenShadeTransitionController.fullTransitionDistance), true, true);
+                                                            }
+                                                            lockscreenShadeTransitionController.setPulseHeight(fMax, false);
+                                                        } else if (actionMasked3 == 3) {
+                                                            pulseExpansionHandler.cancelExpansion();
+                                                            VelocityTracker velocityTracker5 = pulseExpansionHandler.velocityTracker;
+                                                            if (velocityTracker5 != null) {
+                                                                velocityTracker5.recycle();
+                                                            }
+                                                            pulseExpansionHandler.velocityTracker = null;
+                                                        }
+                                                        zStartExpansion = pulseExpansionHandler.isExpanding;
+                                                    }
+                                                    if (zStartExpansion) {
+                                                        NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "onTouch: PulseExpansionHandler handled event");
+                                                        NotificationPanelViewController notificationPanelViewController8 = NotificationPanelViewController.this;
+                                                        if (notificationPanelViewController8.mQuickPanelLogger != null && (sb2 = notificationPanelViewController8.mQuickPanelLogBuilder) != null) {
+                                                            sb2.setLength(0);
+                                                            StringBuilder sb3 = NotificationPanelViewController.this.mQuickPanelLogBuilder;
+                                                            sb3.append("pulseShouldGetTouch && mPulseExpansionHandler.onTouchEvent()");
+                                                            sb3.append(" (!mIsExpandingOrCollapsing: ");
+                                                            sb3.append(!NotificationPanelViewController.this.mIsExpandingOrCollapsing);
+                                                            sb3.append(" && !mQsController.shouldQuickSettingsIntercept(): ");
+                                                            NotificationPanelViewController notificationPanelViewController9 = NotificationPanelViewController.this;
+                                                            sb3.append(!notificationPanelViewController9.mQsController.shouldQuickSettingsIntercept(notificationPanelViewController9.mDownX, notificationPanelViewController9.mDownY, 0.0f));
+                                                            sb3.append(") || mPulseExpansionHandler.isExpanding(): ");
+                                                            sb3.append(NotificationPanelViewController.this.mPulseExpansionHandler.isExpanding);
+                                                            NotificationPanelViewController notificationPanelViewController10 = NotificationPanelViewController.this;
+                                                            notificationPanelViewController10.mQuickPanelLogger.onTouchEvent(motionEvent, notificationPanelViewController10.mQuickPanelLogBuilder.toString(), true);
+                                                            return true;
+                                                        }
+                                                    } else {
+                                                        NotificationPanelViewController notificationPanelViewController11 = NotificationPanelViewController.this;
+                                                        if (notificationPanelViewController11.mPulsing) {
+                                                            notificationPanelViewController11.mShadeLog.logMotionEvent(motionEvent, "onTouch: eat touch, device pulsing");
+                                                            QuickPanelLogger quickPanelLogger11 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                            if (quickPanelLogger11 != null) {
+                                                                quickPanelLogger11.onTouchEvent(motionEvent, "mPulsing", true);
+                                                                return true;
+                                                            }
+                                                        } else {
+                                                            if (notificationPanelViewController11.mListenForHeadsUp && !notificationPanelViewController11.mHeadsUpTouchHelper.mTrackingHeadsUp) {
+                                                                NotificationStackScrollLayoutController notificationStackScrollLayoutController = notificationPanelViewController11.mNotificationStackScrollLayoutController;
+                                                                notificationStackScrollLayoutController.getClass();
+                                                                int i = SceneContainerFlag.$r8$clinit;
+                                                                RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+                                                                if (!(notificationStackScrollLayoutController.mLongPressedView != null) && NotificationPanelViewController.this.mHeadsUpTouchHelper.onInterceptTouchEvent(motionEvent)) {
+                                                                    NotificationPanelViewController.this.mMetricsLogger.count("panel_open_peek", 1);
+                                                                }
+                                                            }
+                                                            boolean zOnTouchEvent3 = NotificationPanelViewController.this.mHeadsUpTouchHelper.onTouchEvent(motionEvent);
+                                                            int i2 = ShadeExpandsOnStatusBarLongPress.$r8$clinit;
+                                                            NotificationPanelViewController notificationPanelViewController12 = NotificationPanelViewController.this;
+                                                            if ((!notificationPanelViewController12.mIsExpandingOrCollapsing || notificationPanelViewController12.mHintAnimationRunning) && !notificationPanelViewController12.mQsController.getExpanded()) {
+                                                                NotificationPanelViewController notificationPanelViewController13 = NotificationPanelViewController.this;
+                                                                if (notificationPanelViewController13.mBarState != 0 && !notificationPanelViewController13.mDozing && notificationPanelViewController13.mKeyguardSecBottomArea.getVisibility() == 0 && (keyguardSecAffordanceHelper = NotificationPanelViewController.this.mSecAffordanceHelper) != null) {
+                                                                    int actionMasked4 = motionEvent.getActionMasked();
+                                                                    if ((!keyguardSecAffordanceHelper.mMotionCancelled || actionMasked4 == 0) && !(CscRune.SECURITY_SIM_PERM_DISABLED && ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isIccBlockedPermanently())) {
+                                                                        float y3 = motionEvent.getY();
+                                                                        float x = motionEvent.getX();
+                                                                        if (actionMasked4 != 0) {
+                                                                            if (actionMasked4 == 1 || actionMasked4 == 3) {
+                                                                                KeyguardSecAffordanceView keyguardSecAffordanceView3 = keyguardSecAffordanceHelper.mTargetedView;
+                                                                                if (keyguardSecAffordanceView3 != null) {
+                                                                                    zOnTouchEvent2 = keyguardSecAffordanceView3.onTouchEvent(motionEvent);
+                                                                                    if (keyguardSecAffordanceHelper.mTargetedView != null) {
+                                                                                        keyguardSecAffordanceHelper.endMotion();
+                                                                                    }
+                                                                                    zOnTouchEvent = zOnTouchEvent2;
+                                                                                }
+                                                                                zOnTouchEvent = false;
+                                                                            } else {
+                                                                                if (actionMasked4 != 5) {
+                                                                                    KeyguardSecAffordanceView keyguardSecAffordanceView4 = keyguardSecAffordanceHelper.mTargetedView;
+                                                                                    if (keyguardSecAffordanceView4 != null) {
+                                                                                        zOnTouchEvent = keyguardSecAffordanceView4.onTouchEvent(motionEvent);
+                                                                                    }
+                                                                                } else {
+                                                                                    keyguardSecAffordanceHelper.mMotionCancelled = true;
+                                                                                    KeyguardSecAffordanceView keyguardSecAffordanceView5 = keyguardSecAffordanceHelper.mTargetedView;
+                                                                                    if (keyguardSecAffordanceView5 != null) {
+                                                                                        zOnTouchEvent2 = keyguardSecAffordanceView5.onTouchEvent(motionEvent);
+                                                                                        if (keyguardSecAffordanceHelper.mTargetedView != null) {
+                                                                                            keyguardSecAffordanceHelper.endMotion();
+                                                                                        }
+                                                                                        zOnTouchEvent = zOnTouchEvent2;
+                                                                                    }
+                                                                                }
+                                                                                zOnTouchEvent = false;
+                                                                            }
+                                                                            zOnTouchEvent3 |= zOnTouchEvent;
+                                                                        } else {
+                                                                            KeyguardSecAffordanceView keyguardSecAffordanceView6 = keyguardSecAffordanceHelper.mLeftIcon;
+                                                                            keyguardSecAffordanceView6.getClass();
+                                                                            if (keyguardSecAffordanceView6.getVisibility() == 0) {
+                                                                                KeyguardSecAffordanceView keyguardSecAffordanceView7 = keyguardSecAffordanceHelper.mLeftIcon;
+                                                                                keyguardSecAffordanceView7.getClass();
+                                                                                if (keyguardSecAffordanceHelper.isOnIcon(keyguardSecAffordanceView7, x, y3)) {
+                                                                                    keyguardSecAffordanceView = keyguardSecAffordanceHelper.mLeftIcon;
+                                                                                    keyguardSecAffordanceView.getClass();
+                                                                                } else {
+                                                                                    KeyguardSecAffordanceView keyguardSecAffordanceView8 = keyguardSecAffordanceHelper.mRightIcon;
+                                                                                    keyguardSecAffordanceView8.getClass();
+                                                                                    if (keyguardSecAffordanceView8.getVisibility() == 0) {
+                                                                                        KeyguardSecAffordanceView keyguardSecAffordanceView9 = keyguardSecAffordanceHelper.mRightIcon;
+                                                                                        keyguardSecAffordanceView9.getClass();
+                                                                                        if (keyguardSecAffordanceHelper.isOnIcon(keyguardSecAffordanceView9, x, y3)) {
+                                                                                            keyguardSecAffordanceView = keyguardSecAffordanceHelper.mRightIcon;
+                                                                                            keyguardSecAffordanceView.getClass();
+                                                                                        } else {
+                                                                                            keyguardSecAffordanceView = null;
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                Log.d("KeyguardSecAffordanceHelper", "onTouchEvent: After selecting target view");
+                                                                                if (keyguardSecAffordanceView == null || !((keyguardSecAffordanceView2 = keyguardSecAffordanceHelper.mTargetedView) == null || keyguardSecAffordanceView2 == keyguardSecAffordanceView)) {
+                                                                                    keyguardSecAffordanceHelper.mMotionCancelled = true;
+                                                                                    zOnTouchEvent = false;
+                                                                                    zOnTouchEvent3 |= zOnTouchEvent;
+                                                                                } else {
+                                                                                    keyguardSecAffordanceHelper.mMotionCancelled = false;
+                                                                                    if (keyguardSecAffordanceHelper.context.getResources().getConfiguration().orientation != 1 || DeviceState.isMultiFoldMain()) {
+                                                                                        WindowManager.LayoutParams layoutParams = keyguardSecAffordanceHelper.layoutParams;
+                                                                                        if (layoutParams == null) {
+                                                                                            layoutParams = null;
+                                                                                        }
+                                                                                        layoutParams.semClearExtensionFlags(8);
+                                                                                    } else {
+                                                                                        WindowManager.LayoutParams layoutParams2 = keyguardSecAffordanceHelper.layoutParams;
+                                                                                        if (layoutParams2 == null) {
+                                                                                            layoutParams2 = null;
+                                                                                        }
+                                                                                        layoutParams2.semAddExtensionFlags(8);
+                                                                                        Log.d("KeyguardSecAffordanceHelper", "updateBlurPanelOrientation Fixed Portrait");
+                                                                                    }
+                                                                                    WindowManager windowManager = (WindowManager) keyguardSecAffordanceHelper.context.getSystemService("window");
+                                                                                    FrameLayout frameLayout = keyguardSecAffordanceHelper.mBlurPanelView;
+                                                                                    WindowManager.LayoutParams layoutParams3 = keyguardSecAffordanceHelper.layoutParams;
+                                                                                    if (layoutParams3 == null) {
+                                                                                        layoutParams3 = null;
+                                                                                    }
+                                                                                    windowManager.updateViewLayout(frameLayout, layoutParams3);
+                                                                                    keyguardSecAffordanceHelper.mTargetedView = keyguardSecAffordanceView;
+                                                                                    KeyguardSecAffordanceView keyguardSecAffordanceView10 = keyguardSecAffordanceHelper.mLeftIcon;
+                                                                                    if (keyguardSecAffordanceView == keyguardSecAffordanceView10) {
+                                                                                        KeyguardSecAffordanceView keyguardSecAffordanceView11 = keyguardSecAffordanceHelper.mRightIcon;
+                                                                                        keyguardSecAffordanceView11.getClass();
+                                                                                        keyguardSecAffordanceView11.mIsTargetView = false;
+                                                                                        KeyguardSecAffordanceView keyguardSecAffordanceView12 = keyguardSecAffordanceHelper.mLeftIcon;
+                                                                                        keyguardSecAffordanceView12.getClass();
+                                                                                        keyguardSecAffordanceView12.mIsTargetView = true;
+                                                                                    } else if (keyguardSecAffordanceView == keyguardSecAffordanceHelper.mRightIcon) {
+                                                                                        keyguardSecAffordanceView10.getClass();
+                                                                                        keyguardSecAffordanceView10.mIsTargetView = false;
+                                                                                        KeyguardSecAffordanceView keyguardSecAffordanceView13 = keyguardSecAffordanceHelper.mRightIcon;
+                                                                                        keyguardSecAffordanceView13.getClass();
+                                                                                        keyguardSecAffordanceView13.mIsTargetView = true;
+                                                                                    }
+                                                                                    KeyguardSecAffordanceView keyguardSecAffordanceView14 = keyguardSecAffordanceHelper.mTargetedView;
+                                                                                    keyguardSecAffordanceView14.getClass();
+                                                                                    keyguardSecAffordanceHelper.startPreviewAnimation(keyguardSecAffordanceView14, true);
+                                                                                    ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).setShortcutLaunchInProgress(true);
+                                                                                    KeyguardSecAffordanceView keyguardSecAffordanceView15 = keyguardSecAffordanceHelper.mTargetedView;
+                                                                                    keyguardSecAffordanceView15.getClass();
+                                                                                    zOnTouchEvent = keyguardSecAffordanceView15.onTouchEvent(motionEvent);
+                                                                                    zOnTouchEvent3 |= zOnTouchEvent;
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    } else {
+                                                                        zOnTouchEvent = false;
+                                                                        zOnTouchEvent3 |= zOnTouchEvent;
+                                                                    }
+                                                                }
+                                                            }
+                                                            NotificationPanelViewController notificationPanelViewController14 = NotificationPanelViewController.this;
+                                                            if (notificationPanelViewController14.mOnlyAffordanceInThisMotion) {
+                                                                QuickPanelLogger quickPanelLogger12 = notificationPanelViewController14.mQuickPanelLogger;
+                                                                if (quickPanelLogger12 != null) {
+                                                                    quickPanelLogger12.onTouchEvent(motionEvent, "mOnlyAffordanceInThisMotion", true);
+                                                                    return true;
+                                                                }
+                                                            } else {
+                                                                IndicatorTouchHandler indicatorTouchHandler = ((StatusBarNotificationPanelViewControllerExt) notificationPanelViewController14.mSamsungBarExt.get()).indicatorTouchHandler;
+                                                                CustomSdkMonitor customSdkMonitor = ((KnoxStateMonitorImpl) indicatorTouchHandler.knoxStateMonitor).mCustomSdkMonitor;
+                                                                if (customSdkMonitor != null && customSdkMonitor.mKnoxCustomDoubleTapState && ((indicatorTouchHandler.doubleTapCount == 0 && motionEvent.getActionMasked() == 0) || motionEvent.getActionMasked() == 1 || motionEvent.getActionMasked() == 3)) {
+                                                                    int i3 = indicatorTouchHandler.doubleTapCount + 1;
+                                                                    indicatorTouchHandler.doubleTapCount = i3;
+                                                                    IndicatorTouchHandler$doubleTapTimeoutRunnable$1 indicatorTouchHandler$doubleTapTimeoutRunnable$1 = indicatorTouchHandler.doubleTapTimeoutRunnable;
+                                                                    Handler handler = indicatorTouchHandler.mainHandler;
+                                                                    if (i3 == 1) {
+                                                                        handler.removeCallbacks(indicatorTouchHandler$doubleTapTimeoutRunnable$1);
+                                                                        f = 0.0f;
+                                                                        z = zOnTouchEvent3;
+                                                                        handler.postDelayed(indicatorTouchHandler$doubleTapTimeoutRunnable$1, 500L);
+                                                                        Log.d("IndicatorTouchHandler", "Post double tap timeout runnable");
+                                                                    } else {
+                                                                        f = 0.0f;
+                                                                        z = zOnTouchEvent3;
+                                                                        if (i3 >= 3) {
+                                                                            Log.d("IndicatorTouchHandler", "Go to sleep by knox double tap");
+                                                                            indicatorTouchHandler.doubleTapCount = 0;
+                                                                            handler.removeCallbacks(indicatorTouchHandler$doubleTapTimeoutRunnable$1);
+                                                                            indicatorTouchHandler.powerManager.goToSleep(android.os.SystemClock.uptimeMillis());
+                                                                        }
+                                                                    }
+                                                                } else {
+                                                                    f = 0.0f;
+                                                                    z = zOnTouchEvent3;
+                                                                }
+                                                                int actionMasked5 = motionEvent.getActionMasked();
+                                                                KeyguardStateController keyguardStateController = indicatorTouchHandler.keyguardStateController;
+                                                                if (actionMasked5 == 0) {
+                                                                    indicatorTouchHandler.touchDownX = motionEvent.getRawX();
+                                                                    indicatorTouchHandler.touchDownY = motionEvent.getRawY();
+                                                                    if ((((KeyguardStateControllerImpl) keyguardStateController).mShowing ? indicatorTouchHandler.keyguardCallChipRect : indicatorTouchHandler.callChipRect).contains((int) motionEvent.getX(), (int) motionEvent.getY())) {
+                                                                        indicatorTouchHandler.isTouchOnCallChip = true;
+                                                                        ActionBarContextView$$ExternalSyntheticOutline0.m(CubicBezierEasing$$ExternalSyntheticOutline0.m("ACTION_DOWN x=", indicatorTouchHandler.touchDownX, ", y=", indicatorTouchHandler.touchDownY, ", on the callChip=true, keyguardShowing="), ((KeyguardStateControllerImpl) keyguardStateController).mShowing, "IndicatorTouchHandler");
+                                                                    }
+                                                                } else if (actionMasked5 == 1) {
+                                                                    if (indicatorTouchHandler.isTouchOnCallChip) {
+                                                                        if ((((KeyguardStateControllerImpl) keyguardStateController).mShowing ? indicatorTouchHandler.keyguardCallChipRect : indicatorTouchHandler.callChipRect).contains((int) motionEvent.getX(), (int) motionEvent.getY()) && (view = indicatorTouchHandler.ongoingCallController.chipView) != null) {
+                                                                            view.performClick();
+                                                                        }
+                                                                    }
+                                                                    indicatorTouchHandler.isTouchOnCallChip = false;
+                                                                } else if (actionMasked5 == 3) {
+                                                                    if (indicatorTouchHandler.isTouchOnCallChip) {
+                                                                        Log.d("IndicatorTouchHandler", "cancel or pointer up -> block to jump to call in multi touch");
+                                                                    }
+                                                                    indicatorTouchHandler.isTouchOnCallChip = false;
+                                                                } else if (actionMasked5 == 5) {
+                                                                    if (indicatorTouchHandler.isTouchOnCallChip) {
+                                                                        Log.d("IndicatorTouchHandler", "pointer down x=" + motionEvent + ".rawX ,y=" + motionEvent + ".rawY");
+                                                                    }
+                                                                    indicatorTouchHandler.isTouchOnCallChip = false;
+                                                                } else if (actionMasked5 == 6) {
+                                                                }
+                                                                if (SecPanelSplitHelper.isEnabled() && (motionEvent.getAction() == 1 || motionEvent.getAction() == 3)) {
+                                                                    NotificationPanelViewController.this.setOnStatusBarDownEvent(null);
+                                                                }
+                                                                NotificationPanelViewController notificationPanelViewController15 = NotificationPanelViewController.this;
+                                                                if (notificationPanelViewController15.mBarState == 1 || notificationPanelViewController15.mHeadsUpTouchHelper.mTrackingHeadsUp) {
+                                                                    if (motionEvent.getActionMasked() == 0 && NotificationPanelViewController.this.isFullyCollapsed()) {
+                                                                        NotificationPanelViewController.this.mMetricsLogger.count("panel_open", 1);
+                                                                        if (z2 && (secQsUiDisplayModeInteractor3 = NotificationPanelViewController.this.mSecQsUiDisplayModeInteractor) != null && secQsUiDisplayModeInteractor3.isTablet()) {
+                                                                            NotificationPanelViewController.this.mQsController.mSecQuickSettingsControllerImpl.onTouch(motionEvent);
+                                                                        }
+                                                                        zHandleTouch$1 = true;
+                                                                    } else {
+                                                                        if (z2 && (secQsUiDisplayModeInteractor = NotificationPanelViewController.this.mSecQsUiDisplayModeInteractor) != null && secQsUiDisplayModeInteractor.isTablet() && motionEvent.getActionMasked() == 0 && (NotificationPanelViewController.this.isFullyCollapsed() || NotificationPanelViewController.this.mBarState == 1)) {
+                                                                            NotificationPanelViewController.this.mQsController.mSecQuickSettingsControllerImpl.onTouch(motionEvent);
+                                                                        }
+                                                                        zHandleTouch$1 = z;
+                                                                    }
+                                                                    try {
+                                                                        NotificationPanelViewController notificationPanelViewController16 = NotificationPanelViewController.this;
+                                                                        if (notificationPanelViewController16.mLockStarEnabled && notificationPanelViewController16.isInLockStarContainer(motionEvent) && !NotificationPanelViewController.this.mQsController.getExpanded()) {
+                                                                            NotificationPanelViewController notificationPanelViewController17 = NotificationPanelViewController.this;
+                                                                            if (notificationPanelViewController17.mBarState == 1 && notificationPanelViewController17.mPluginLockStarContainer.getVisibility() == 0 && NotificationPanelViewController.this.mPluginLockStarManagerLazy.get() != null) {
+                                                                                boolean zOnInterceptTouchEvent = ((PluginLockStarManager) NotificationPanelViewController.this.mPluginLockStarManagerLazy.get()).onInterceptTouchEvent(motionEvent);
+                                                                                QuickPanelLogger quickPanelLogger13 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                                if (quickPanelLogger13 == null) {
+                                                                                    return zOnInterceptTouchEvent;
+                                                                                }
+                                                                                quickPanelLogger13.onTouchEvent(motionEvent, "LsRune.PLUGIN_LOCK_STAR", zOnInterceptTouchEvent);
+                                                                                return zOnInterceptTouchEvent;
+                                                                            }
+                                                                        }
+                                                                    } catch (Throwable th) {
+                                                                        Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
+                                                                        Log.e("NotificationPanelView", "onTouchEvent() error in LockStar - " + th.getMessage());
+                                                                    }
+                                                                    if (motionEvent.getActionMasked() == 0 && NotificationPanelViewController.this.isFullyExpanded()) {
+                                                                        NotificationPanelViewController notificationPanelViewController18 = NotificationPanelViewController.this;
+                                                                        if (notificationPanelViewController18.mKeyguardStateController.mShowing) {
+                                                                            notificationPanelViewController18.mStatusBarKeyguardViewManager.updateKeyguardPosition(motionEvent.getX());
+                                                                        }
+                                                                    }
+                                                                    PluginLock pluginLock2 = NotificationPanelViewController.this.mPluginLock;
+                                                                    if (pluginLock2 != null && pluginLock2.getTouchManager() != null && !NotificationPanelViewController.this.mQsController.getExpanded() && NotificationPanelViewController.this.mStatusBarStateController.getState() == 1 && NotificationPanelViewController.this.mPluginLock.getTouchManager().isIntercepting()) {
+                                                                        Log.e("NotificationPanelView", "onTouch() event.getAction() : " + motionEvent.getAction());
+                                                                        if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
+                                                                            NotificationPanelViewController notificationPanelViewController19 = NotificationPanelViewController.this;
+                                                                            if (notificationPanelViewController19.mPluginLockViewMode == 0) {
+                                                                                notificationPanelViewController19.mPluginLock.getTouchManager().setIntercept(false);
+                                                                            }
+                                                                        }
+                                                                        boolean zOnTouchEvent4 = NotificationPanelViewController.this.mPluginLock.getTouchManager().onTouchEvent(motionEvent);
+                                                                        QuickPanelLogger quickPanelLogger14 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                        if (quickPanelLogger14 != null) {
+                                                                            quickPanelLogger14.onTouchEvent(motionEvent, "LsRune.PLUGIN_LOCK", zOnTouchEvent4);
+                                                                        }
+                                                                        return zOnTouchEvent4;
+                                                                    }
+                                                                    NotificationPanelViewController notificationPanelViewController20 = NotificationPanelViewController.this;
+                                                                    if (notificationPanelViewController20.mQsExpandedOnTouchDown || notificationPanelViewController20.mLockscreenShadeTransitionController.getFractionToShade() > f) {
+                                                                        NotificationPanelViewController notificationPanelViewController21 = NotificationPanelViewController.this;
+                                                                        if (notificationPanelViewController21.mSecNotificationPanelViewController != null) {
+                                                                            if (QpRune.QUICK_PANEL_CODE_FOR_POP_OVER && (secQsUiDisplayModeInteractor2 = notificationPanelViewController21.mSecQsUiDisplayModeInteractor) != null && secQsUiDisplayModeInteractor2.isTablet() && (motionEvent.getActionMasked() == 0 || motionEvent.getActionMasked() == 4)) {
+                                                                                NotificationPanelViewController.this.mQsController.mSecQuickSettingsControllerImpl.onTouch(motionEvent);
+                                                                            }
+                                                                            if (NotificationPanelViewController.this.mSecNotificationPanelViewController.onTouchEvent(motionEvent, NotificationPanelViewController.this.mMotionAborted && motionEvent.getActionMasked() != 0)) {
+                                                                                QuickPanelLogger quickPanelLogger15 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                                if (quickPanelLogger15 != null) {
+                                                                                    quickPanelLogger15.onTouchEvent(motionEvent, "PanelSliding ", true);
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        NotificationPanelViewController notificationPanelViewController22 = NotificationPanelViewController.this;
+                                                                        if (notificationPanelViewController22.mBarState == 1) {
+                                                                            QuickPanelLogger quickPanelLogger16 = notificationPanelViewController22.mQuickPanelLogger;
+                                                                            if (quickPanelLogger16 != null) {
+                                                                                quickPanelLogger16.onTouchEvent(motionEvent, "No handleTouch() in KEYGUARD state", zHandleTouch$1);
+                                                                            }
+                                                                        } else {
+                                                                            zHandleTouch$1 |= handleTouch$1(motionEvent);
+                                                                        }
+                                                                        NotificationPanelViewController notificationPanelViewController23 = NotificationPanelViewController.this;
+                                                                        if (notificationPanelViewController23.mQuickPanelLogger != null && (sb = notificationPanelViewController23.mQuickPanelLogBuilder) != null) {
+                                                                            sb.setLength(0);
+                                                                            StringBuilder sb4 = NotificationPanelViewController.this.mQuickPanelLogBuilder;
+                                                                            sb4.append("FINAL: !mDozing: ");
+                                                                            sb4.append(!NotificationPanelViewController.this.mDozing);
+                                                                            sb4.append(" || handled: ");
+                                                                            sb4.append(zHandleTouch$1);
+                                                                            NotificationPanelViewController notificationPanelViewController24 = NotificationPanelViewController.this;
+                                                                            QuickPanelLogger quickPanelLogger17 = notificationPanelViewController24.mQuickPanelLogger;
+                                                                            quickPanelLogger17.quickPanelLoggerHelper.onTouchEventLogger.log(motionEvent, quickPanelLogger17.tag, notificationPanelViewController24.mQuickPanelLogBuilder.toString());
+                                                                        }
+                                                                        return !NotificationPanelViewController.this.mDozing || zHandleTouch$1;
+                                                                    }
+                                                                    NotificationPanelViewController notificationPanelViewController25 = NotificationPanelViewController.this;
+                                                                    boolean zOnAnimatorTouchEvent = (notificationPanelViewController25.mBarState != 1 || (pluginLock = notificationPanelViewController25.mPluginLock) == null || pluginLock.getTouchManager() == null) ? false : NotificationPanelViewController.this.mPluginLock.getTouchManager().onAnimatorTouchEvent(motionEvent);
+                                                                    if (NotificationPanelViewController.this.mBarState != 1) {
+                                                                        Log.w("KeyguardTouchAnimator", "NPVC touch is canceled on not KEYGUARD STATE = " + NotificationPanelViewController.this.mBarState);
+                                                                        NotificationPanelViewController.this.mKeyguardTouchAnimator.setIntercept(false);
+                                                                    }
+                                                                    if (!zOnAnimatorTouchEvent) {
+                                                                        NotificationPanelViewController notificationPanelViewController26 = NotificationPanelViewController.this;
+                                                                        if (notificationPanelViewController26.mBarState == 1 && notificationPanelViewController26.mKeyguardTouchAnimator.onTouchEvent(motionEvent)) {
+                                                                            KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = NotificationPanelViewController.this.mKeyguardSecBottomAreaViewController;
+                                                                            AnimatorSet animatorSet = keyguardSecBottomAreaViewController.helpTextAnimSet;
+                                                                            if (animatorSet != null && animatorSet.isRunning()) {
+                                                                                AnimatorSet animatorSet2 = keyguardSecBottomAreaViewController.helpTextAnimSet;
+                                                                                animatorSet2.getClass();
+                                                                                animatorSet2.cancel();
+                                                                            }
+                                                                            QuickPanelLogger quickPanelLogger18 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                            if (quickPanelLogger18 != null) {
+                                                                                quickPanelLogger18.onTouchEvent(motionEvent, "LsRune.KEYGUARD_ALL_DIRECTIONS_SWIPE_UNLOCK", true);
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                } else {
+                                                                    boolean zIsFullyCollapsed = notificationPanelViewController15.isFullyCollapsed();
+                                                                    NotificationPanelViewController notificationPanelViewController27 = NotificationPanelViewController.this;
+                                                                    if (notificationPanelViewController15.mQsController.handleTouch(motionEvent, zIsFullyCollapsed, (notificationPanelViewController27.mHeightAnimator == null || notificationPanelViewController27.mIsSpringBackAnimation) ? false : true)) {
+                                                                        if (motionEvent.getActionMasked() != 2) {
+                                                                            NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "onTouch: handleQsTouch handled event");
+                                                                        }
+                                                                        QuickPanelLogger quickPanelLogger19 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                                                        if (quickPanelLogger19 != null) {
+                                                                            quickPanelLogger19.onTouchEvent(motionEvent, "!mHeadsUpTouchHelper.isTrackingHeadsUp() && mQsController.handleTouch()", true);
+                                                                            return true;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    if (NotificationPanelViewController.this.mMultiWindowEdgeDetector.isGestureDetected()) {
+                                        NotificationPanelViewController.this.setMotionAborted();
+                                    }
+                                    NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "MultiWindowEdgeDetector - motion aborted.");
+                                    QuickPanelLogger quickPanelLogger20 = NotificationPanelViewController.this.mQuickPanelLogger;
+                                    if (quickPanelLogger20 != null) {
+                                        quickPanelLogger20.onTouchEvent(motionEvent, "CoreRune.MW_FREEFORM_CORNER_GESTURE", true);
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                    QuickPanelLogger quickPanelLogger21 = NotificationPanelViewController.this.mQuickPanelLogger;
+                    if (quickPanelLogger21 != null) {
+                        quickPanelLogger21.onTouchEvent(motionEvent, "DeviceEntryUdfpsRefactor.isEnabled() && mAlternateBouncerInteractor.isVisibleState()", false);
+                        return false;
+                    }
+                } else {
+                    QuickPanelLogger quickPanelLogger22 = notificationPanelViewController.mQuickPanelLogger;
+                    if (quickPanelLogger22 != null) {
+                        quickPanelLogger22.onTouchEvent(motionEvent, "!mUseExternalTouch", false);
+                        return false;
+                    }
+                }
+            }
+            return false;
         }
     }
 
     /* renamed from: -$$Nest$maddMovement, reason: not valid java name */
-    public static void m2926$$Nest$maddMovement(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent) {
+    public static void m2943$$Nest$maddMovement(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent) {
         notificationPanelViewController.getClass();
         float rawX = motionEvent.getRawX() - motionEvent.getX();
         float rawY = motionEvent.getRawY() - motionEvent.getY();
@@ -1495,23 +3371,145 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         motionEvent.offsetLocation(-rawX, -rawY);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x013b  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x023d  */
+    /* JADX WARN: Removed duplicated region for block: B:73:0x0164  */
+    /* JADX WARN: Removed duplicated region for block: B:98:0x01dd  */
     /* renamed from: -$$Nest$mendMotionEvent, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m2927$$Nest$mendMotionEvent(com.android.systemui.shade.NotificationPanelViewController r17, android.view.MotionEvent r18, float r19, float r20, boolean r21) {
-        /*
-            Method dump skipped, instructions count: 581
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationPanelViewController.m2927$$Nest$mendMotionEvent(com.android.systemui.shade.NotificationPanelViewController, android.view.MotionEvent, float, float, boolean):void");
+    public static void m2944$$Nest$mendMotionEvent(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent, float f, float f2, boolean z) throws Resources.NotFoundException {
+        boolean z2;
+        float f3;
+        boolean z3;
+        ShadeLogger shadeLogger = notificationPanelViewController.mShadeLog;
+        shadeLogger.logEndMotionEvent("endMotionEvent called", z, false);
+        notificationPanelViewController.mTrackingPointer = -1;
+        notificationPanelViewController.mAmbientState.setSwipingUp(false);
+        boolean zIsTracking = notificationPanelViewController.isTracking();
+        KeyguardStateControllerImpl keyguardStateControllerImpl = notificationPanelViewController.mKeyguardStateController;
+        if ((zIsTracking && notificationPanelViewController.mTouchSlopExceeded) || Math.abs(f - notificationPanelViewController.mInitialExpandX) > notificationPanelViewController.mTouchSlop || Math.abs(f2 - notificationPanelViewController.mInitialExpandY) > notificationPanelViewController.mTouchSlop || ((notificationPanelViewController.mExpandedFraction <= 0.98f && !notificationPanelViewController.isFullyCollapsed()) || motionEvent.getActionMasked() == 3 || z)) {
+            notificationPanelViewController.mVelocityTracker.computeCurrentVelocity(1000);
+            float yVelocity = notificationPanelViewController.mVelocityTracker.getYVelocity();
+            float fHypot = (float) Math.hypot(notificationPanelViewController.mVelocityTracker.getXVelocity(), notificationPanelViewController.mVelocityTracker.getYVelocity());
+            boolean z4 = keyguardStateControllerImpl.mShowing;
+            if (keyguardStateControllerImpl.mKeyguardFadingAway || (notificationPanelViewController.mInitialTouchFromKeyguard && !z4)) {
+                z2 = z4;
+                f3 = 0.0f;
+                z3 = false;
+            } else if (motionEvent.getActionMasked() == 3 || z) {
+                z2 = z4;
+                f3 = 0.0f;
+                if (z2) {
+                    shadeLogger.logEndMotionEvent("endMotionEvent: cancel while on keyguard", z, true);
+                    z3 = true;
+                } else {
+                    if (notificationPanelViewController.mCollapsedAndHeadsUpOnDown) {
+                        shadeLogger.logEndMotionEvent("endMotionEvent: cancel But should expand panel with heads up", z, true);
+                        Log.d("NotificationPanelView", "endMotionEvent: cancel But should expand panel with heads up: force: " + z + ", returned without onTrackingStopped()");
+                        return;
+                    }
+                    z3 = !notificationPanelViewController.mPanelClosedOnDown;
+                    shadeLogger.logEndMotionEvent("endMotionEvent: cancel", z, z3);
+                }
+            } else {
+                int i = 4;
+                if (NotiRune.NOTI_STYLE_POP_OVER_COLLAPSE && ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() && motionEvent.getActionMasked() == 4 && notificationPanelViewController.mBarState != 1 && notificationPanelViewController.isFullyExpanded()) {
+                    z3 = true;
+                    z2 = z4;
+                    f3 = 0.0f;
+                } else {
+                    if (notificationPanelViewController.mFalsingManager.isUnlockingDisabled()) {
+                        z2 = z4;
+                        f3 = 0.0f;
+                    } else {
+                        if (f2 - notificationPanelViewController.mInitialExpandY > 0.0f) {
+                            i = 0;
+                        } else if (!keyguardStateControllerImpl.mCanDismissLockScreen) {
+                            i = 8;
+                        }
+                        float f4 = notificationPanelViewController.mFlingAnimationUtils.mMinVelocityPxPerSecond;
+                        boolean z5 = notificationPanelViewController.mExpandedFraction > 0.5f;
+                        boolean z6 = notificationPanelViewController.mAllowExpandForSmallExpansion;
+                        LogLevel logLevel = LogLevel.VERBOSE;
+                        f3 = 0.0f;
+                        ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(8);
+                        LogBuffer logBuffer = shadeLogger.buffer;
+                        LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                        logMessageImpl.int1 = i;
+                        z2 = z4;
+                        logMessageImpl.long1 = (long) yVelocity;
+                        logMessageImpl.long2 = (long) fHypot;
+                        logMessageImpl.double1 = f4;
+                        logMessageImpl.bool1 = z5;
+                        logMessageImpl.bool2 = z6;
+                        logBuffer.commit(logMessageObtain);
+                        z3 = Math.abs(fHypot) >= notificationPanelViewController.mFlingAnimationUtils.mMinVelocityPxPerSecond ? yVelocity > 0.0f : notificationPanelViewController.mExpandedFraction > 0.5f;
+                        if (notificationPanelViewController.mQsController.mExpansionAnimator != null) {
+                            z3 = true;
+                        }
+                    }
+                    if (notificationPanelViewController.mQsController.mExpansionAnimator != null) {
+                    }
+                }
+                if (notificationPanelViewController.mBarState != 1 && z3 && !notificationPanelViewController.isFullyExpanded() && notificationPanelViewController.mListenForHeadsUp) {
+                    Log.d("NotificationPanelView", "previous heightAnimator cancel due to headsup");
+                    notificationPanelViewController.cancelHeightAnimator();
+                }
+                shadeLogger.logEndMotionEvent("endMotionEvent: flingExpands", z, z3);
+            }
+            boolean z7 = notificationPanelViewController.mTouchAboveFalsingThreshold;
+            WakefulnessModel wakefulnessModel = (WakefulnessModel) notificationPanelViewController.mPowerInteractor.detailedWakefulness.$$delegate_0.getValue();
+            if (wakefulnessModel.isAwake()) {
+                WakeSleepReason wakeSleepReason = WakeSleepReason.TAP;
+                WakeSleepReason wakeSleepReason2 = wakefulnessModel.lastWakeReason;
+                boolean z8 = wakeSleepReason2 == wakeSleepReason || wakeSleepReason2 == WakeSleepReason.GESTURE;
+                DozeLogger dozeLogger = notificationPanelViewController.mDozeLog.mLogger;
+                dozeLogger.getClass();
+                LogLevel logLevel2 = LogLevel.DEBUG;
+                DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(20);
+                LogBuffer logBuffer2 = dozeLogger.buffer;
+                LogMessage logMessageObtain2 = logBuffer2.obtain("DozeLog", logLevel2, dozeLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
+                logMessageImpl2.bool1 = z3;
+                logMessageImpl2.bool2 = z7;
+                logMessageImpl2.bool4 = z8;
+                logBuffer2.commit(logMessageObtain2);
+                if (!z3 && z2) {
+                    float displayDensity = notificationPanelViewController.getDisplayDensity();
+                    notificationPanelViewController.mLockscreenGestureLogger.write(186, (int) Math.abs((f2 - notificationPanelViewController.mInitialExpandY) / displayDensity), (int) Math.abs(yVelocity / displayDensity));
+                    new UiEventLoggerImpl().log(LockscreenGestureLogger.LockscreenUiEvent.LOCKSCREEN_UNLOCK);
+                }
+                if (notificationPanelViewController.mBarState != 1 || notificationPanelViewController.mExpandedFraction < 1.0d) {
+                    notificationPanelViewController.fling(yVelocity, 1.0f, z3);
+                } else {
+                    shadeLogger.d("NPVC endMotionEvent - skipping fling on keyguard");
+                    if (notificationPanelViewController.mUseExternalTouch) {
+                        notificationPanelViewController.mNotificationStackScrollLayoutController.setOverExpansion(f3);
+                    }
+                }
+                notificationPanelViewController.onTrackingStopped(z3);
+                boolean z9 = z3 && notificationPanelViewController.mPanelClosedOnDown && !notificationPanelViewController.mHasLayoutedSinceDown;
+                notificationPanelViewController.mUpdateFlingOnLayout = z9;
+                if (z9) {
+                    notificationPanelViewController.mUpdateFlingVelocity = yVelocity;
+                }
+            }
+        } else if (notificationPanelViewController.mCentralSurfaces.mBouncerShowing || notificationPanelViewController.mAlternateBouncerInteractor.isVisibleState() || keyguardStateControllerImpl.mKeyguardGoingAway) {
+            Log.d("NotificationPanelView", "endMotionEvent: ELSE: returned without onTrackingStopped()");
+        } else {
+            notificationPanelViewController.onEmptySpaceClick(f, f2);
+            notificationPanelViewController.onTrackingStopped(true);
+        }
+        notificationPanelViewController.mVelocityTracker.clear();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:28:0x008a  */
     /* renamed from: -$$Nest$minitDownStates, reason: not valid java name */
-    public static void m2928$$Nest$minitDownStates(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public static void m2945$$Nest$minitDownStates(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent) {
         boolean z;
         int bottom;
         notificationPanelViewController.getClass();
@@ -1528,16 +3526,19 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
         notificationPanelViewController.mDownX = motionEvent.getX();
         notificationPanelViewController.mDownY = motionEvent.getY();
-        boolean isFullyCollapsed = notificationPanelViewController.isFullyCollapsed();
-        notificationPanelViewController.mCollapsedOnDown = isFullyCollapsed;
+        boolean zIsFullyCollapsed = notificationPanelViewController.isFullyCollapsed();
+        notificationPanelViewController.mCollapsedOnDown = zIsFullyCollapsed;
         QuickSettingsControllerImpl quickSettingsControllerImpl = notificationPanelViewController.mQsController;
-        quickSettingsControllerImpl.mCollapsedOnDown = isFullyCollapsed;
+        quickSettingsControllerImpl.mCollapsedOnDown = zIsFullyCollapsed;
         if (notificationPanelViewController.mNotificationStackScrollLayoutController.mView.getOwnScrollY() >= quickSettingsControllerImpl.mMinExpansionHeight - notificationPanelViewController.mQuickQsOffsetHeight) {
             notificationPanelViewController.mIsPanelCollapseOnQQS = false;
         } else {
             float f = notificationPanelViewController.mDownX;
             float f2 = notificationPanelViewController.mDownY;
-            if (!quickSettingsControllerImpl.mCollapsedOnDown && quickSettingsControllerImpl.mBarState != 1 && !quickSettingsControllerImpl.getExpanded()) {
+            if (quickSettingsControllerImpl.mCollapsedOnDown || quickSettingsControllerImpl.mBarState == 1 || quickSettingsControllerImpl.getExpanded()) {
+                z = false;
+                notificationPanelViewController.mIsPanelCollapseOnQQS = z;
+            } else {
                 QS qs = quickSettingsControllerImpl.mQs;
                 if (qs == null) {
                     bottom = quickSettingsControllerImpl.mKeyguardStatusBar.getBottom();
@@ -1547,11 +3548,9 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 }
                 if (f >= quickSettingsControllerImpl.mQsFrame.getX() && f <= quickSettingsControllerImpl.mQsFrame.getX() + quickSettingsControllerImpl.mQsFrame.getWidth() && f2 <= bottom) {
                     z = true;
-                    notificationPanelViewController.mIsPanelCollapseOnQQS = z;
                 }
+                notificationPanelViewController.mIsPanelCollapseOnQQS = z;
             }
-            z = false;
-            notificationPanelViewController.mIsPanelCollapseOnQQS = z;
         }
         if (notificationPanelViewController.mCollapsedOnDown && ((HeadsUpManagerImpl) notificationPanelViewController.mHeadsUpManager).mHasPinnedNotification) {
             z2 = true;
@@ -1588,7 +3587,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     /* renamed from: -$$Nest$mstartExpandMotion, reason: not valid java name */
-    public static void m2929$$Nest$mstartExpandMotion(NotificationPanelViewController notificationPanelViewController, float f, float f2, boolean z, float f3) {
+    public static void m2946$$Nest$mstartExpandMotion(NotificationPanelViewController notificationPanelViewController, float f, float f2, boolean z, float f3) {
         if (!notificationPanelViewController.mHandlingPointerUp && !notificationPanelViewController.mStatusBarStateController.isDozing()) {
             notificationPanelViewController.mQsController.beginJankMonitoring(notificationPanelViewController.isFullyCollapsed());
         }
@@ -1612,11 +3611,10 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     /* JADX WARN: Type inference failed for: r11v3, types: [com.android.systemui.shade.NotificationPanelViewController$2] */
     /* JADX WARN: Type inference failed for: r15v5, types: [com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda11] */
     /* JADX WARN: Type inference failed for: r15v9, types: [com.android.systemui.shade.NotificationPanelViewController$1] */
-    /* JADX WARN: Type inference failed for: r7v10, types: [com.android.systemui.shade.NotificationPanelViewController$17] */
-    /* JADX WARN: Type inference failed for: r7v11, types: [com.android.systemui.shade.NotificationPanelViewController$18] */
-    /* JADX WARN: Type inference failed for: r7v9, types: [com.android.systemui.shade.NotificationPanelViewController$11] */
-    public NotificationPanelViewController(DcmMascotViewContainer dcmMascotViewContainer, PluginLockMediator pluginLockMediator, NotificationPanelView notificationPanelView, KeyguardTouchAnimator keyguardTouchAnimator, Lazy lazy, NotificationWakeUpCoordinator notificationWakeUpCoordinator, PulseExpansionHandler pulseExpansionHandler, DynamicPrivacyController dynamicPrivacyController, KeyguardBypassController keyguardBypassController, FalsingManager falsingManager, FalsingCollector falsingCollector, KeyguardStateController keyguardStateController, StatusBarStateController statusBarStateController, NotificationShadeWindowController notificationShadeWindowController, DozeLog dozeLog, DozeParameters dozeParameters, CommandQueue commandQueue, VibratorHelper vibratorHelper, LatencyTracker latencyTracker, AccessibilityManager accessibilityManager, int i, KeyguardUpdateMonitor keyguardUpdateMonitor, MetricsLogger metricsLogger, ShadeLogger shadeLogger, ConfigurationController configurationController, Provider provider, ShadeTouchableRegionManager shadeTouchableRegionManager, ConversationNotificationManager conversationNotificationManager, MediaHierarchyManager mediaHierarchyManager, StatusBarKeyguardViewManager statusBarKeyguardViewManager, NotificationGutsManager notificationGutsManager, NotificationsQSContainerController notificationsQSContainerController, NotificationStackScrollLayoutController notificationStackScrollLayoutController, KeyguardStatusBarViewComponent.Factory factory, LockscreenShadeTransitionController lockscreenShadeTransitionController, ScrimController scrimController, MediaDataManager mediaDataManager, NotificationShadeDepthController notificationShadeDepthController, AmbientState ambientState, SecLockIconViewController secLockIconViewController, KeyguardMediaController keyguardMediaController, TapAgainViewController tapAgainViewController, NavigationModeController navigationModeController, NavigationBarController navigationBarController, QuickSettingsControllerImpl quickSettingsControllerImpl, FragmentService fragmentService, IStatusBarService iStatusBarService, ShadeHeaderController shadeHeaderController, ScreenOffAnimationController screenOffAnimationController, LockscreenGestureLogger lockscreenGestureLogger, ShadeExpansionStateManager shadeExpansionStateManager, ShadeRepository shadeRepository, Optional<SysUIUnfoldComponent> optional, SysUiState sysUiState, SysUIStateDisplaysInteractor sysUIStateDisplaysInteractor, Provider provider2, KeyguardWallpaperController keyguardWallpaperController, WallpaperImageInjectCreator wallpaperImageInjectCreator, EmergencyButtonController.Factory factory2, KeyguardUnlockAnimationController keyguardUnlockAnimationController, KeyguardIndicationController keyguardIndicationController, NotificationListContainer notificationListContainer, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, SystemClock systemClock, KeyguardClockInteractor keyguardClockInteractor, AlternateBouncerInteractor alternateBouncerInteractor, DreamingToLockscreenTransitionViewModel dreamingToLockscreenTransitionViewModel, CoroutineDispatcher coroutineDispatcher, KeyguardTransitionInteractor keyguardTransitionInteractor, DumpManager dumpManager, KeyguardTouchHandlingViewModel keyguardTouchHandlingViewModel, WallpaperFocalAreaViewModel wallpaperFocalAreaViewModel, KeyguardInteractor keyguardInteractor, ActivityStarter activityStarter, SharedNotificationContainerInteractor sharedNotificationContainerInteractor, ActiveNotificationsInteractor activeNotificationsInteractor, ShadeAnimationInteractor shadeAnimationInteractor, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor, SplitShadeStateController splitShadeStateController, PowerInteractor powerInteractor, KeyguardClockPositionAlgorithm keyguardClockPositionAlgorithm, MSDLPlayer mSDLPlayer, BrightnessMirrorShowingRepository brightnessMirrorShowingRepository, BlurConfig blurConfig, Lazy lazy2, PrivacyDialogController privacyDialogController, KeyguardPunchHoleVIViewController.Factory factory3, NotificationShelfManager notificationShelfManager, KeyguardEditModeController keyguardEditModeController, KeyguardClickController keyguardClickController, PluginLockData pluginLockData, Lazy lazy3, Lazy lazy4, LockscreenNotificationManager lockscreenNotificationManager, LockscreenNotificationIconsOnlyController lockscreenNotificationIconsOnlyController, Lazy lazy5, QsStatusEventLog qsStatusEventLog, SelectedUserInteractor selectedUserInteractor, SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor, SecQSPanelComposeAdapter secQSPanelComposeAdapter, SecHideNotificationShadeInMirrorInteractor secHideNotificationShadeInMirrorInteractor, PanelPopOverManager panelPopOverManager, SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor) {
-        KeyguardEditModeControllerImpl keyguardEditModeControllerImpl;
+    /* JADX WARN: Type inference failed for: r9v10, types: [com.android.systemui.shade.NotificationPanelViewController$17] */
+    /* JADX WARN: Type inference failed for: r9v11, types: [com.android.systemui.shade.NotificationPanelViewController$18] */
+    /* JADX WARN: Type inference failed for: r9v9, types: [com.android.systemui.shade.NotificationPanelViewController$11] */
+    public NotificationPanelViewController(DcmMascotViewContainer dcmMascotViewContainer, PluginLockMediator pluginLockMediator, NotificationPanelView notificationPanelView, KeyguardTouchAnimator keyguardTouchAnimator, Lazy lazy, NotificationWakeUpCoordinator notificationWakeUpCoordinator, PulseExpansionHandler pulseExpansionHandler, DynamicPrivacyController dynamicPrivacyController, KeyguardBypassController keyguardBypassController, FalsingManager falsingManager, FalsingCollector falsingCollector, KeyguardStateController keyguardStateController, StatusBarStateController statusBarStateController, NotificationShadeWindowController notificationShadeWindowController, DozeLog dozeLog, DozeParameters dozeParameters, CommandQueue commandQueue, VibratorHelper vibratorHelper, LatencyTracker latencyTracker, AccessibilityManager accessibilityManager, int i, KeyguardUpdateMonitor keyguardUpdateMonitor, MetricsLogger metricsLogger, ShadeLogger shadeLogger, ConfigurationController configurationController, Provider provider, ShadeTouchableRegionManager shadeTouchableRegionManager, ConversationNotificationManager conversationNotificationManager, MediaHierarchyManager mediaHierarchyManager, StatusBarKeyguardViewManager statusBarKeyguardViewManager, NotificationGutsManager notificationGutsManager, NotificationsQSContainerController notificationsQSContainerController, NotificationStackScrollLayoutController notificationStackScrollLayoutController, KeyguardStatusBarViewComponent.Factory factory, LockscreenShadeTransitionController lockscreenShadeTransitionController, ScrimController scrimController, MediaDataManager mediaDataManager, NotificationShadeDepthController notificationShadeDepthController, AmbientState ambientState, SecLockIconViewController secLockIconViewController, KeyguardMediaController keyguardMediaController, TapAgainViewController tapAgainViewController, NavigationModeController navigationModeController, NavigationBarController navigationBarController, QuickSettingsControllerImpl quickSettingsControllerImpl, FragmentService fragmentService, IStatusBarService iStatusBarService, ShadeHeaderController shadeHeaderController, ScreenOffAnimationController screenOffAnimationController, LockscreenGestureLogger lockscreenGestureLogger, ShadeExpansionStateManager shadeExpansionStateManager, ShadeRepository shadeRepository, Optional<SysUIUnfoldComponent> optional, SysUiState sysUiState, SysUIStateDisplaysInteractor sysUIStateDisplaysInteractor, Provider provider2, KeyguardWallpaperController keyguardWallpaperController, WallpaperImageInjectCreator wallpaperImageInjectCreator, EmergencyButtonController.Factory factory2, KeyguardUnlockAnimationController keyguardUnlockAnimationController, KeyguardIndicationController keyguardIndicationController, NotificationListContainer notificationListContainer, UnlockedScreenOffAnimationController unlockedScreenOffAnimationController, SystemClock systemClock, KeyguardClockInteractor keyguardClockInteractor, AlternateBouncerInteractor alternateBouncerInteractor, DreamingToLockscreenTransitionViewModel dreamingToLockscreenTransitionViewModel, CoroutineDispatcher coroutineDispatcher, KeyguardTransitionInteractor keyguardTransitionInteractor, DumpManager dumpManager, KeyguardTouchHandlingViewModel keyguardTouchHandlingViewModel, WallpaperFocalAreaViewModel wallpaperFocalAreaViewModel, KeyguardInteractor keyguardInteractor, ActivityStarter activityStarter, SharedNotificationContainerInteractor sharedNotificationContainerInteractor, ActiveNotificationsInteractor activeNotificationsInteractor, ShadeAnimationInteractor shadeAnimationInteractor, DeviceEntryFaceAuthInteractor deviceEntryFaceAuthInteractor, SplitShadeStateController splitShadeStateController, PowerInteractor powerInteractor, KeyguardClockPositionAlgorithm keyguardClockPositionAlgorithm, MSDLPlayer mSDLPlayer, BrightnessMirrorShowingRepository brightnessMirrorShowingRepository, BlurConfig blurConfig, Lazy lazy2, PrivacyDialogController privacyDialogController, KeyguardPunchHoleVIViewController.Factory factory3, NotificationShelfManager notificationShelfManager, KeyguardEditModeController keyguardEditModeController, KeyguardClickController keyguardClickController, PluginLockData pluginLockData, Lazy lazy3, Lazy lazy4, LockscreenNotificationManager lockscreenNotificationManager, LockscreenNotificationIconsOnlyController lockscreenNotificationIconsOnlyController, Lazy lazy5, QsStatusEventLog qsStatusEventLog, SelectedUserInteractor selectedUserInteractor, SecQuickSettingsAffordanceInteractor secQuickSettingsAffordanceInteractor, SecQSPanelComposeAdapter secQSPanelComposeAdapter, SecHideNotificationShadeInMirrorInteractor secHideNotificationShadeInMirrorInteractor, PanelPopOverManager panelPopOverManager, SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor) throws Resources.NotFoundException {
         ImageView imageView;
         FrameLayout frameLayout;
         int i2 = 0;
@@ -1626,14 +3624,14 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         this.mStatusBarStateListener = new StatusBarStateListener(this, i2);
         this.mAccessibilityDelegate = new ShadeAccessibilityDelegate(this, i2);
         this.mShadeHeadsUpTracker = new ShadeHeadsUpTrackerImpl(this, i2);
-        BiConsumer biConsumer = new BiConsumer() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda22
+        BiConsumer biConsumer = new BiConsumer() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda21
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                NotificationPanelViewController notificationPanelViewController = this.f$0;
                 Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
-                float floatValue = ((Float) obj2).floatValue();
-                ((KeyguardRepositoryImpl) notificationPanelViewController.mKeyguardInteractor.repository).panelAlpha.updateState(null, Float.valueOf(floatValue / 255.0f));
-                int i3 = (int) floatValue;
+                float fFloatValue = ((Float) obj2).floatValue();
+                ((KeyguardRepositoryImpl) notificationPanelViewController.mKeyguardInteractor.repository).panelAlpha.updateState(null, Float.valueOf(fFloatValue / 255.0f));
+                int i3 = (int) fFloatValue;
                 NotificationPanelView notificationPanelView2 = notificationPanelViewController.mView;
                 notificationPanelView2.mCurrentPanelAlpha = i3;
                 notificationPanelView2.mAlphaPaint.setARGB(i3, 255, 255, 255);
@@ -1664,10 +3662,10 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         this.mNextCollapseSpeedUpFactor = 1.0f;
         this.mUseExternalTouch = false;
         this.mIsOcclusionTransitionRunning = false;
-        this.mFlingCollapseRunnable = new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 2);
-        this.mAnimateKeyguardBottomAreaInvisibleEndRunnable = new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 3);
-        this.mHeadsUpExistenceChangedRunnable = new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 4);
-        this.mMaybeHideExpandedRunnable = new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 5);
+        this.mFlingCollapseRunnable = new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 5);
+        this.mAnimateKeyguardBottomAreaInvisibleEndRunnable = new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 6);
+        this.mHeadsUpExistenceChangedRunnable = new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 7);
+        this.mMaybeHideExpandedRunnable = new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 8);
         this.mIsFaceWidgetOnTouchDown = false;
         this.mFullScreenModeEnabled = false;
         this.mPanelInVisibleReason = -1;
@@ -1684,7 +3682,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 if (i3 != i4) {
                     this.mPanelState = i4;
                     NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
-                    notificationPanelViewController.mView.setAccessibilityPaneTitle(notificationPanelViewController.determineAccessibilityPaneTitle());
+                    notificationPanelViewController.mView.getRootView().setAccessibilityPaneTitle(notificationPanelViewController.determineAccessibilityPaneTitle());
                     if (this.mPanelState == 1 && notificationPanelViewController.isPanelExpanded() && !notificationPanelViewController.isOnKeyguard()) {
                         notificationPanelViewController.updateEntrySetRead();
                     }
@@ -1697,7 +3695,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         this.mLockscreenShadeTransitonCallback = new LockscreenShadeTransitionController.Callback() { // from class: com.android.systemui.shade.NotificationPanelViewController.11
             @Override // com.android.systemui.statusbar.LockscreenShadeTransitionController.Callback
             public final void setTransitionToFullShadeAmount(float f) {
-                List list;
                 Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
                 Log.d("NotificationPanelView", "setTransitionToFullShadeAmount  " + f);
                 NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
@@ -1715,16 +3712,13 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                             childAt.setAlpha(1.0f - f);
                         }
                     }
-                    View view2 = null;
-                    if (DeviceState.isTablet() && (list = notificationPanelViewController.mKeyguardStatusBase.mContentsContainerList) != null && list.size() > 2) {
-                        view2 = (View) list.get(2);
-                    }
-                    if (view2 == null || view2.getVisibility() != 0) {
+                    View viewProvideComplication = notificationPanelViewController.provideComplication();
+                    if (viewProvideComplication == null || viewProvideComplication.getVisibility() != 0) {
                         return;
                     }
-                    view2.setTranslationY(f2);
+                    viewProvideComplication.setTranslationY(f2);
                     if (notificationPanelViewController.mBarState == 1) {
-                        view2.setAlpha(1.0f - f);
+                        viewProvideComplication.setAlpha(1.0f - f);
                     }
                 }
             }
@@ -1759,10 +3753,10 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
                 Log.d("NotificationPanelView", "updateStyle, onNavigationColorUpdateRequired");
                 CentralSurfacesImpl centralSurfacesImpl = NotificationPanelViewController.this.mCentralSurfaces;
-                boolean isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper("navibar");
+                boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper("navibar");
                 StatusBarWindowView statusBarWindowView = ((StatusBarWindowControllerImpl) ((StatusBarWindowController) centralSurfacesImpl.mStatusBarWindowControllerStore.getDefaultDisplay())).mStatusBarWindowView;
                 int systemUiVisibility = statusBarWindowView.getSystemUiVisibility();
-                statusBarWindowView.setSystemUiVisibility(isWhiteKeyguardWallpaper ? systemUiVisibility | 16 : systemUiVisibility & (-17));
+                statusBarWindowView.setSystemUiVisibility(zIsWhiteKeyguardWallpaper ? systemUiVisibility | 16 : systemUiVisibility & (-17));
             }
         };
         int i3 = SceneContainerFlag.$r8$clinit;
@@ -1875,7 +3869,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         this.mWakeUpCoordinator = notificationWakeUpCoordinator;
         this.mMainDispatcher = coroutineDispatcher;
         this.mAccessibilityManager = accessibilityManager;
-        notificationPanelView.setAccessibilityPaneTitle(determineAccessibilityPaneTitle());
+        notificationPanelView.getRootView().setAccessibilityPaneTitle(determineAccessibilityPaneTitle());
         setAlpha(255, false);
         this.mCommandQueue = commandQueue;
         this.mDisplayId = i;
@@ -1893,7 +3887,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         dynamicPrivacyController.mListeners.add(new DynamicPrivacyController.Listener() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda1
             @Override // com.android.systemui.statusbar.notification.DynamicPrivacyController.Listener
             public final void onDynamicPrivacyChanged() {
-                NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                NotificationPanelViewController notificationPanelViewController = this.f$0;
                 if (notificationPanelViewController.mLinearDarkAmount != 0.0f) {
                     return;
                 }
@@ -1906,18 +3900,18 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         quickSettingsControllerImpl.mExpansionHeightSetToMaxListener = new NotificationPanelViewController$$ExternalSyntheticLambda0(this);
         shadeExpansionStateManager.stateListeners.add(new ShadeStateListener() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda6
             @Override // com.android.systemui.shade.ShadeStateListener
-            public final void onPanelStateChanged$1(int i4) {
+            public final void onPanelStateChanged$2(int i4) {
                 ShadeControllerImpl.AnonymousClass2 anonymousClass2;
                 Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
-                NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                NotificationPanelViewController notificationPanelViewController = this.f$0;
                 ShadeLogger shadeLogger2 = notificationPanelViewController.mShadeLog;
                 shadeLogger2.getClass();
                 LogLevel logLevel = LogLevel.VERBOSE;
                 ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(14);
                 LogBuffer logBuffer = shadeLogger2.buffer;
-                LogMessage obtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = ShadeExpansionStateManagerKt.panelStateToString(i4);
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = ShadeExpansionStateManagerKt.panelStateToString(i4);
+                logBuffer.commit(logMessageObtain);
                 QuickSettingsControllerImpl quickSettingsControllerImpl2 = notificationPanelViewController.mQsController;
                 quickSettingsControllerImpl2.updateExpansionEnabledAmbient();
                 if (LsRune.KEYGUARD_SUB_DISPLAY_LOCK && i4 == 1 && !((KeyguardFoldControllerImpl) ((KeyguardFoldController) Dependency.sDependency.getDependencyInner(KeyguardFoldController.class))).isFoldOpened() && notificationPanelViewController.mScrimController.mState == ScrimState.AOD) {
@@ -1951,11 +3945,11 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 notificationPanelViewController.mCurrentPanelState = i4;
             }
         });
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-        this.mBottomAreaShadeAlphaAnimator = ofFloat;
-        ofFloat.addUpdateListener(new NotificationPanelViewController$$ExternalSyntheticLambda7(this, 0));
-        ofFloat.setDuration(160L);
-        ofFloat.setInterpolator(interpolator);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+        this.mBottomAreaShadeAlphaAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.addUpdateListener(new NotificationPanelViewController$$ExternalSyntheticLambda7(this, 0));
+        valueAnimatorOfFloat.setDuration(160L);
+        valueAnimatorOfFloat.setInterpolator(interpolator);
         this.mConversationNotificationManager = conversationNotificationManager;
         this.mLockIconViewController = secLockIconViewController;
         this.mScreenOffAnimationController = screenOffAnimationController;
@@ -1966,7 +3960,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
             public final void onNavigationModeChanged(int i4) {
                 Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
-                NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                NotificationPanelViewController notificationPanelViewController = this.f$0;
                 notificationPanelViewController.getClass();
                 notificationPanelViewController.mIsGestureNavigation = QuickStepContract.isGesturalMode(i4);
             }
@@ -1982,7 +3976,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
                 PanelPopOverManager panelPopOverManager2;
                 SecQSPanel.QSTileLayout qSTileLayout;
-                NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                NotificationPanelViewController notificationPanelViewController = this.f$0;
                 Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
                 if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD_HID_BUT_UDC_CUTOUT) {
                     IndicatorCutoutUtil.Companion.getClass();
@@ -2001,7 +3995,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 quickSettingsControllerImpl2.mDisplayLeftInset = i5;
                 quickSettingsControllerImpl2.mDisplayRightInset = i4;
                 SecNotificationPanelViewController secNotificationPanelViewController = notificationPanelViewController.mSecNotificationPanelViewController;
-                notificationPanelViewController.mNavigationBarBottomHeight = secNotificationPanelViewController != null ? notificationPanelViewController.mBarState == 0 ? windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom : windowInsets.getStableInsetBottom() : windowInsets.getStableInsetBottom();
+                int stableInsetBottom = (secNotificationPanelViewController == null || notificationPanelViewController.mBarState != 0) ? windowInsets.getStableInsetBottom() : windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom;
+                notificationPanelViewController.mNavigationBarBottomHeight = stableInsetBottom;
                 notificationPanelViewController.updateMaxHeadsUpTranslation();
                 if (secNotificationPanelViewController != null) {
                     Context context = notificationPanelViewController.mView.getContext();
@@ -2041,7 +4036,20 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                     }
                 }
                 if (QpRune.QUICK_PANEL_CODE_FOR_POP_OVER && (panelPopOverManager2 = notificationPanelViewController.mPanelPopOverManager) != null) {
-                    panelPopOverManager2.navigationBarTop = DeviceState.getScreenHeight(panelPopOverManager2.context) - notificationPanelViewController.mNavigationBarBottomHeight;
+                    panelPopOverManager2.navBarHeight = notificationPanelViewController.mNavigationBarBottomHeight;
+                    if (!QpRune.QUICK_PANEL_CODE_FOR_POP_OVER_NOT_SET_TOUCHABLE_AREA) {
+                        Insets insetsIgnoringVisibility2 = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemGestures());
+                        int iWidth = panelPopOverManager2.context.getResources().getConfiguration().windowConfiguration.getBounds().width();
+                        int iHeight = panelPopOverManager2.context.getResources().getConfiguration().windowConfiguration.getBounds().height();
+                        int i8 = insetsIgnoringVisibility2.left;
+                        int i9 = insetsIgnoringVisibility2.right;
+                        int i10 = insetsIgnoringVisibility2.top;
+                        int i11 = insetsIgnoringVisibility2.bottom;
+                        Log.d("PanelPopOverManager", "setGestureArea gestureInsets: " + insetsIgnoringVisibility2);
+                        int i12 = iHeight - i11;
+                        panelPopOverManager2.leftGestureArea = new Rect(0, i10, i8, i12);
+                        panelPopOverManager2.rightGestureArea = new Rect(iWidth - i9, i10, iWidth, i12);
+                    }
                 }
                 notificationPanelViewController.updateNsslMargin();
                 notificationPanelViewController.updateNsslWidth();
@@ -2079,7 +4087,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             }
 
             @Override // com.android.systemui.keyguard.KeyguardUnlockAnimationController.KeyguardUnlockAnimationListener
-            public final void onUnlockAnimationStarted(boolean z, boolean z2) {
+            public final void onUnlockAnimationStarted(boolean z, boolean z2) throws Resources.NotFoundException {
                 PluginKeyguardStatusView pluginKeyguardStatusView;
                 Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
                 NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
@@ -2088,10 +4096,10 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 if (pluginFaceWidgetManager2 != null && (pluginKeyguardStatusView = pluginFaceWidgetManager2.mFaceWidgetPlugin) != null) {
                     pluginKeyguardStatusView.dismissFaceWidgetDashBoard();
                 }
-                boolean isTracking = notificationPanelViewController.isTracking();
+                boolean zIsTracking = notificationPanelViewController.isTracking();
                 NotificationShadeDepthController notificationShadeDepthController2 = notificationPanelViewController.mDepthController;
-                if (notificationShadeDepthController2.blursDisabledForUnlock != isTracking) {
-                    notificationShadeDepthController2.blursDisabledForUnlock = isTracking;
+                if (notificationShadeDepthController2.blursDisabledForUnlock != zIsTracking) {
+                    notificationShadeDepthController2.blursDisabledForUnlock = zIsTracking;
                     notificationShadeDepthController2.scheduleUpdate();
                 }
                 if (!z || z2) {
@@ -2109,36 +4117,35 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         this.mQuickPanelLogBuilder = new StringBuilder();
         int i4 = 0;
         int i5 = 1;
-        this.mSecNotificationPanelViewController = new SecNotificationPanelViewController(lockscreenShadeTransitionController, notificationsQSContainerController, quickSettingsControllerImpl, shadeHeaderController, shadeRepository, new NotificationPanelViewController$$ExternalSyntheticLambda12(this, i4), new NotificationPanelViewController$$ExternalSyntheticLambda13(this, i4), new NotificationPanelViewController$$ExternalSyntheticLambda12(this, i5), new NotificationPanelViewController$$ExternalSyntheticLambda15(this, i4), new NotificationPanelViewController$$ExternalSyntheticLambda16(this, i4), new NotificationPanelViewController$$ExternalSyntheticLambda16(this, i5), new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 0), secHideNotificationShadeInMirrorInteractor);
+        this.mSecNotificationPanelViewController = new SecNotificationPanelViewController(lockscreenShadeTransitionController, notificationsQSContainerController, quickSettingsControllerImpl, shadeHeaderController, shadeRepository, new NotificationPanelViewController$$ExternalSyntheticLambda12(this, i4), new NotificationPanelViewController$$ExternalSyntheticLambda13(this, i4), new NotificationPanelViewController$$ExternalSyntheticLambda12(this, i5), new NotificationPanelViewController$$ExternalSyntheticLambda15(this, i4), new NotificationPanelViewController$$ExternalSyntheticLambda16(this, i4), new NotificationPanelViewController$$ExternalSyntheticLambda16(this, i5), new NotificationPanelViewController$$ExternalSyntheticLambda18(this, i4), secHideNotificationShadeInMirrorInteractor);
+        int i6 = 2;
+        this.mPanelAgent = new PanelAgent(new NotificationPanelViewController$$ExternalSyntheticLambda16(this, i5), new NotificationPanelViewController$$ExternalSyntheticLambda18(this, i5), new NotificationPanelViewController$$ExternalSyntheticLambda13(this, i5), new NotificationPanelViewController$$ExternalSyntheticLambda13(this, i4), new NotificationPanelViewController$$ExternalSyntheticLambda18(this, i6), new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 3), new NotificationPanelViewController$$ExternalSyntheticLambda13(this, i6), new NotificationPanelViewController$$ExternalSyntheticLambda25(this, i4), new NotificationPanelViewController$$ExternalSyntheticLambda25(this, 1));
         this.mPluginAODManagerLazy = lazy;
         this.mShelfManager = notificationShelfManager;
         notificationShelfManager.getClass();
         this.mMultiWindowEdgeDetector = new MultiWindowEdgeDetector(this.mView.getContext(), "QuickPannel");
         this.mSamsungBarExt = lazy4;
-        lockscreenNotificationIconsOnlyController.getClass();
+        LockscreenNotificationIconsOnlyController lockscreenNotificationIconsOnlyController2 = this.mLockscreenNotificationIconsOnlyController;
+        lockscreenNotificationIconsOnlyController2.getClass();
         Log.d("LockscreenNotificationIconsOnlyController", "setNPVController() controller = " + this);
-        lockscreenNotificationIconsOnlyController.mNPVController = this;
-        NotificationPanelViewController$$ExternalSyntheticLambda18 notificationPanelViewController$$ExternalSyntheticLambda18 = new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 1);
+        lockscreenNotificationIconsOnlyController2.mNPVController = this;
+        NotificationPanelViewController$$ExternalSyntheticLambda18 notificationPanelViewController$$ExternalSyntheticLambda18 = new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 4);
         this.mPostCollapseRunnable = notificationPanelViewController$$ExternalSyntheticLambda18;
         if (QpRune.QUICK_DATA_USAGE_LABEL) {
             this.mDataUsageLabelManagerLazy = lazy5;
         }
         this.mKeyguardEditModeController = keyguardEditModeController;
         NotificationPanelView notificationPanelView2 = this.mView;
-        KeyguardEditModeControllerImpl keyguardEditModeControllerImpl2 = (KeyguardEditModeControllerImpl) keyguardEditModeController;
-        keyguardEditModeControllerImpl2.getClass();
+        KeyguardEditModeControllerImpl keyguardEditModeControllerImpl = (KeyguardEditModeControllerImpl) keyguardEditModeController;
+        keyguardEditModeControllerImpl.getClass();
         ImageView imageView2 = (ImageView) notificationPanelView2.findViewById(R.id.keyguard_edit_mode_blur_effect);
-        if (imageView2 == null || (imageView = (ImageView) notificationPanelView2.findViewById(R.id.keyguard_edit_mode_wallpaper)) == null || (frameLayout = (FrameLayout) notificationPanelView2.findViewById(R.id.keyguard_edit_mode_container)) == null) {
-            keyguardEditModeControllerImpl = keyguardEditModeControllerImpl2;
-        } else {
-            keyguardEditModeControllerImpl2.wallpaperCardView = (CardView) notificationPanelView2.findViewById(R.id.keyguard_edit_round_layout);
-            keyguardEditModeControllerImpl2.refreshRadius();
-            KeyguardEditModeControllerImpl$$ExternalSyntheticLambda2 keyguardEditModeControllerImpl$$ExternalSyntheticLambda2 = new KeyguardEditModeControllerImpl$$ExternalSyntheticLambda2(keyguardEditModeControllerImpl2, notificationPanelView2, imageView2, imageView, frameLayout);
-            keyguardEditModeControllerImpl = keyguardEditModeControllerImpl2;
-            keyguardEditModeControllerImpl.updateViewsFunction = keyguardEditModeControllerImpl$$ExternalSyntheticLambda2;
+        if (imageView2 != null && (imageView = (ImageView) notificationPanelView2.findViewById(R.id.keyguard_edit_mode_wallpaper)) != null && (frameLayout = (FrameLayout) notificationPanelView2.findViewById(R.id.keyguard_edit_mode_container)) != null) {
+            keyguardEditModeControllerImpl.wallpaperCardView = (CardView) notificationPanelView2.findViewById(R.id.keyguard_edit_round_layout);
+            keyguardEditModeControllerImpl.refreshRadius();
+            keyguardEditModeControllerImpl.updateViewsFunction = new KeyguardEditModeControllerImpl$$ExternalSyntheticLambda2(keyguardEditModeControllerImpl, notificationPanelView2, imageView2, imageView, frameLayout);
             keyguardEditModeControllerImpl.initPreviewValues(notificationPanelView2.getContext());
         }
-        keyguardEditModeControllerImpl.onStartActivityListener = new NotificationPanelViewController$$ExternalSyntheticLambda20(this);
+        keyguardEditModeControllerImpl.onStartActivityListener = new NotificationPanelViewController$$ExternalSyntheticLambda25(this, 2);
         ((ArrayList) keyguardEditModeControllerImpl.listeners).add(new KeyguardEditModeController.Listener() { // from class: com.android.systemui.shade.NotificationPanelViewController.7
             @Override // com.android.systemui.keyguard.KeyguardEditModeController.Listener
             public final void onAnimationStarted(boolean z) {
@@ -2151,13 +4158,13 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             public final void onAnimationEnded() {
             }
         });
-        ((KeyguardClickControllerImpl) keyguardClickController).isClickContainerArea = new Function2() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda21
+        ((KeyguardClickControllerImpl) keyguardClickController).isClickContainerArea = new Function2() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda29
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                boolean z;
-                int intValue = ((Integer) obj).intValue();
-                int intValue2 = ((Integer) obj2).intValue();
-                NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                boolean zContains;
+                int iIntValue = ((Integer) obj).intValue();
+                int iIntValue2 = ((Integer) obj2).intValue();
+                NotificationPanelViewController notificationPanelViewController = this.f$0;
                 FaceWidgetContainerWrapper faceWidgetContainerWrapper = notificationPanelViewController.mKeyguardStatusBase;
                 if (faceWidgetContainerWrapper == null) {
                     return Boolean.FALSE;
@@ -2170,16 +4177,16 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 if (view != null) {
                     Rect rect = new Rect();
                     view.getGlobalVisibleRect(rect);
-                    z = rect.contains(intValue, intValue2);
+                    zContains = rect.contains(iIntValue, iIntValue2);
                 } else {
-                    z = false;
+                    zContains = false;
                 }
                 if (iconContainer != null) {
                     Rect rect2 = new Rect();
                     iconContainer.getGlobalVisibleRect(rect2);
-                    z |= rect2.contains(intValue, intValue2);
+                    zContains |= rect2.contains(iIntValue, iIntValue2);
                 }
-                return Boolean.valueOf(z);
+                return Boolean.valueOf(zContains);
             }
         };
         this.mPluginLockData = pluginLockData;
@@ -2188,7 +4195,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         updateLockStarContainer();
         ((PluginLockStarManager) lazy3.get()).mShortcutController.bottomAreaCallback = keyguardSecBottomAreaViewController;
         this.mQuickQsOffsetHeight = SystemBarUtils.getQuickQsOffsetHeight(this.mView.getContext());
-        PanelScreenShotLogger.INSTANCE.addLogProvider("NotificationPanelView", this);
+        PanelScreenShotLogger panelScreenShotLogger = PanelScreenShotLogger.INSTANCE;
+        panelScreenShotLogger.addLogProvider("NotificationPanelView", this);
         this.mKeyguardWallpaperController = keyguardWallpaperController;
         this.mWallpaperImageCreator = wallpaperImageInjectCreator;
         this.mQsStatusEventLog = qsStatusEventLog;
@@ -2203,6 +4211,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             panelPopOverManager.mView = this.mView;
             panelPopOverManager.collapseRunnable = notificationPanelViewController$$ExternalSyntheticLambda18;
             panelPopOverManager.shadeExpansionStateManager.stateListeners.add(new PanelPopOverManager$setPanelController$1(panelPopOverManager));
+            panelScreenShotLogger.addLogProvider("PanelPopOverManager", panelPopOverManager);
+            lockscreenShadeTransitionController.addCallback(panelPopOverManager);
         }
     }
 
@@ -2251,7 +4261,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
         NotificationStackScrollLayout notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
         notificationStackScrollLayout.getClass();
-        int height = notificationStackScrollLayoutController.mView.getHeight() - Math.max(notificationStackScrollLayout.mMaxLayoutHeight - notificationStackScrollLayout.mContentHeight, 0);
+        int height = notificationStackScrollLayoutController.mView.getHeight() - Math.max(notificationStackScrollLayout.mMaxLayoutHeight - notificationStackScrollLayout.getContentHeight(), 0);
         if (this.mBarState != 1) {
             return height;
         }
@@ -2317,7 +4327,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     @Override // com.android.systemui.shade.ShadeViewController
-    public final void cancelInputFocusTransfer() {
+    public final void cancelInputFocusTransfer() throws Resources.NotFoundException {
         if (!this.mCommandQueue.panelsEnabled()) {
             Log.d("NotificationPanelView", "cancelInputFocusTransfer: failed by !panelsEnabled()");
             return;
@@ -2362,7 +4372,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         this.mQsController.closeQs();
     }
 
-    public final void collapse(float f, boolean z, boolean z2) {
+    public final void collapse(float f, boolean z, boolean z2) throws Resources.NotFoundException {
         if (!z || isFullyCollapsed()) {
             resetViews(false, false);
             setExpandedFraction(0.0f);
@@ -2405,8 +4415,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         Lazy lazy;
         ViewGroup parentViewGroup;
         printWriter.println("NotificationPanelView:");
-        PrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.increaseIndent();
+        PrintWriter printWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        printWriterAsIndenting.increaseIndent();
         if (QpRune.QUICK_DATA_USAGE_LABEL && (lazy = this.mDataUsageLabelManagerLazy) != null) {
             DataUsageLabelManager dataUsageLabelManager = (DataUsageLabelManager) lazy.get();
             StringBuilder sb = new StringBuilder("DataUsageLabelManager");
@@ -2433,194 +4443,194 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             }
             printWriter.println(sb.toString());
         }
-        asIndenting.print("mDownTime=");
-        asIndenting.println(this.mDownTime);
-        asIndenting.print("mTouchSlopExceededBeforeDown=");
-        asIndenting.println(this.mTouchSlopExceededBeforeDown);
-        asIndenting.print("mIsLaunchAnimationRunning=");
-        asIndenting.println(isLaunchingActivity$1());
-        asIndenting.print("mOverExpansion=");
-        asIndenting.println(this.mOverExpansion);
-        asIndenting.print("mExpandedHeight=");
-        asIndenting.println(this.mExpandedHeight);
-        asIndenting.print("isTracking()=");
-        asIndenting.println(isTracking());
-        asIndenting.print("mExpanding=");
-        asIndenting.println(this.mExpanding);
-        asIndenting.print("mSplitShadeEnabled=");
-        asIndenting.println(false);
-        asIndenting.print("mAnimateNextPositionUpdate=");
-        asIndenting.println(this.mAnimateNextPositionUpdate);
-        asIndenting.print("isPanelExpanded()=");
-        asIndenting.println(isPanelExpanded());
-        asIndenting.print("mDozing=");
-        asIndenting.println(this.mDozing);
-        asIndenting.print("mDozingOnDown=");
-        asIndenting.println(this.mDozingOnDown);
-        asIndenting.print("mBouncerShowing=");
-        asIndenting.println(this.mBouncerShowing);
-        asIndenting.print("mBarState=");
-        asIndenting.println(this.mBarState);
-        asIndenting.print("mStatusBarMinHeight=");
-        asIndenting.println(this.mStatusBarMinHeight);
-        asIndenting.print("mStatusBarHeaderHeightKeyguard=");
-        asIndenting.println(this.mStatusBarHeaderHeightKeyguard);
-        asIndenting.print("mOverStretchAmount=");
-        asIndenting.println(this.mOverStretchAmount);
-        asIndenting.print("mDownX=");
-        asIndenting.println(this.mDownX);
-        asIndenting.print("mDownY=");
-        asIndenting.println(this.mDownY);
-        asIndenting.print("mDisplayTopInset=");
-        asIndenting.println(this.mDisplayTopInset);
-        asIndenting.print("mDisplayRightInset=");
-        asIndenting.println(this.mDisplayRightInset);
-        asIndenting.print("mDisplayLeftInset=");
-        asIndenting.println(this.mDisplayLeftInset);
-        asIndenting.print("mIsExpandingOrCollapsing=");
-        asIndenting.println(this.mIsExpandingOrCollapsing);
-        asIndenting.print("mHeadsUpStartHeight=");
-        asIndenting.println(this.mHeadsUpStartHeight);
-        asIndenting.print("mListenForHeadsUp=");
-        asIndenting.println(this.mListenForHeadsUp);
-        asIndenting.print("mNavigationBarBottomHeight=");
-        asIndenting.println(this.mNavigationBarBottomHeight);
-        asIndenting.print("mExpandingFromHeadsUp=");
-        asIndenting.println(this.mExpandingFromHeadsUp);
-        asIndenting.print("mCollapsedOnDown=");
-        asIndenting.println(this.mCollapsedOnDown);
-        asIndenting.print("mClosingWithAlphaFadeOut=");
-        asIndenting.println(this.mClosingWithAlphaFadeOut);
-        asIndenting.print("mHeadsUpAnimatingAway=");
-        asIndenting.println(this.mHeadsUpAnimatingAway);
-        asIndenting.print("mShowIconsWhenExpanded=");
-        asIndenting.println(this.mShowIconsWhenExpanded);
-        asIndenting.print("mIsFullWidth=");
-        asIndenting.println(this.mIsFullWidth);
-        asIndenting.print("mBlockingExpansionForCurrentTouch=");
-        asIndenting.println(this.mBlockingExpansionForCurrentTouch);
-        asIndenting.print("mExpectingSynthesizedDown=");
-        asIndenting.println(this.mExpectingSynthesizedDown);
-        asIndenting.print("mLastEventSynthesizedDown=");
-        asIndenting.println(this.mLastEventSynthesizedDown);
-        asIndenting.print("mInterpolatedDarkAmount=");
-        asIndenting.println(this.mInterpolatedDarkAmount);
-        asIndenting.print("mLinearDarkAmount=");
-        asIndenting.println(this.mLinearDarkAmount);
-        asIndenting.print("mPulsing=");
-        asIndenting.println(this.mPulsing);
-        asIndenting.print("mStackScrollerMeasuringPass=");
-        asIndenting.println(this.mStackScrollerMeasuringPass);
-        asIndenting.print("mPanelAlpha=");
-        asIndenting.println(this.mPanelAlpha);
-        asIndenting.print("mBottomAreaShadeAlpha=");
-        asIndenting.println(this.mBottomAreaShadeAlpha);
-        asIndenting.print("mHeadsUpInset=");
-        asIndenting.println(this.mHeadsUpInset);
-        asIndenting.print("mHeadsUpPinnedMode=");
-        asIndenting.println(this.mHeadsUpPinnedMode);
-        asIndenting.print("mAllowExpandForSmallExpansion=");
-        asIndenting.println(this.mAllowExpandForSmallExpansion);
-        asIndenting.print("mMaxOverscrollAmountForPulse=");
-        asIndenting.println(this.mMaxOverscrollAmountForPulse);
-        asIndenting.print("mIsPanelCollapseOnQQS=");
-        asIndenting.println(this.mIsPanelCollapseOnQQS);
-        asIndenting.print("mIsGestureNavigation=");
-        asIndenting.println(this.mIsGestureNavigation);
-        asIndenting.print("mOldLayoutDirection=");
-        asIndenting.println(this.mOldLayoutDirection);
-        asIndenting.print("mMinFraction=");
-        asIndenting.println(this.mMinFraction);
-        asIndenting.print("mSplitShadeFullTransitionDistance=");
-        asIndenting.println(this.mSplitShadeFullTransitionDistance);
-        asIndenting.print("mSplitShadeScrimTransitionDistance=");
-        asIndenting.println(this.mSplitShadeScrimTransitionDistance);
-        asIndenting.print("mMinExpandHeight=");
-        asIndenting.println(0.0f);
-        asIndenting.print("mPanelUpdateWhenAnimatorEnds=");
-        asIndenting.println(this.mPanelUpdateWhenAnimatorEnds);
-        asIndenting.print("mHasVibratedOnOpen=");
-        asIndenting.println(this.mHasVibratedOnOpen);
-        asIndenting.print("mFixedDuration=");
-        asIndenting.println(this.mFixedDuration);
-        asIndenting.print("mPanelFlingOvershootAmount=");
-        asIndenting.println(this.mPanelFlingOvershootAmount);
-        asIndenting.print("mLastGesturedOverExpansion=");
-        asIndenting.println(this.mLastGesturedOverExpansion);
-        asIndenting.print("mIsSpringBackAnimation=");
-        asIndenting.println(this.mIsSpringBackAnimation);
-        asIndenting.print("mHintDistance=");
-        asIndenting.println(this.mHintDistance);
-        asIndenting.print("mInitialOffsetOnTouch=");
-        asIndenting.println(this.mInitialOffsetOnTouch);
-        asIndenting.print("mCollapsedAndHeadsUpOnDown=");
-        asIndenting.println(this.mCollapsedAndHeadsUpOnDown);
-        asIndenting.print("mExpandedFraction=");
-        asIndenting.println(this.mExpandedFraction);
-        asIndenting.print("mExpansionDragDownAmountPx=");
-        asIndenting.println(this.mExpansionDragDownAmountPx);
-        asIndenting.print("mPanelClosedOnDown=");
-        asIndenting.println(this.mPanelClosedOnDown);
-        asIndenting.print("mHasLayoutedSinceDown=");
-        asIndenting.println(this.mHasLayoutedSinceDown);
-        asIndenting.print("mUpdateFlingVelocity=");
-        asIndenting.println(this.mUpdateFlingVelocity);
-        asIndenting.print("mUpdateFlingOnLayout=");
-        asIndenting.println(this.mUpdateFlingOnLayout);
-        asIndenting.print("isClosing()=");
-        asIndenting.println(isClosing());
-        asIndenting.print("mTouchSlopExceeded=");
-        asIndenting.println(this.mTouchSlopExceeded);
-        asIndenting.print("mTrackingPointer=");
-        asIndenting.println(this.mTrackingPointer);
-        asIndenting.print("mTouchSlop=");
-        asIndenting.println(this.mTouchSlop);
-        asIndenting.print("mSlopMultiplier=");
-        asIndenting.println(this.mSlopMultiplier);
-        asIndenting.print("mTouchAboveFalsingThreshold=");
-        asIndenting.println(this.mTouchAboveFalsingThreshold);
-        asIndenting.print("mTouchStartedInEmptyArea=");
-        asIndenting.println(this.mTouchStartedInEmptyArea);
-        asIndenting.print("mMotionAborted=");
-        asIndenting.println(this.mMotionAborted);
-        asIndenting.print("mUpwardsWhenThresholdReached=");
-        asIndenting.println(this.mUpwardsWhenThresholdReached);
-        asIndenting.print("mAnimatingOnDown=");
-        asIndenting.println(this.mAnimatingOnDown);
-        asIndenting.print("mHandlingPointerUp=");
-        asIndenting.println(this.mHandlingPointerUp);
-        asIndenting.print("mInstantExpanding=");
-        asIndenting.println(this.mInstantExpanding);
-        asIndenting.print("mAnimateAfterExpanding=");
-        asIndenting.println(this.mAnimateAfterExpanding);
-        asIndenting.print("mIsFlinging=");
-        asIndenting.println(this.mIsFlinging);
-        asIndenting.print("mViewName=");
-        asIndenting.println(this.mViewName);
-        asIndenting.print("mInitialExpandY=");
-        asIndenting.println(this.mInitialExpandY);
-        asIndenting.print("mInitialExpandX=");
-        asIndenting.println(this.mInitialExpandX);
-        asIndenting.print("mTouchDisabled=");
-        asIndenting.println(this.mTouchDisabled);
-        asIndenting.print("mInitialTouchFromKeyguard=");
-        asIndenting.println(this.mInitialTouchFromKeyguard);
-        asIndenting.print("mNextCollapseSpeedUpFactor=");
-        asIndenting.println(this.mNextCollapseSpeedUpFactor);
-        asIndenting.print("mGestureWaitForTouchSlop=");
-        asIndenting.println(this.mGestureWaitForTouchSlop);
-        asIndenting.print("mIgnoreXTouchSlop=");
-        asIndenting.println(this.mIgnoreXTouchSlop);
-        asIndenting.print("mExpandLatencyTracking=");
-        asIndenting.println(this.mExpandLatencyTracking);
+        printWriterAsIndenting.print("mDownTime=");
+        printWriterAsIndenting.println(this.mDownTime);
+        printWriterAsIndenting.print("mTouchSlopExceededBeforeDown=");
+        printWriterAsIndenting.println(this.mTouchSlopExceededBeforeDown);
+        printWriterAsIndenting.print("mIsLaunchAnimationRunning=");
+        printWriterAsIndenting.println(isLaunchingActivity$1());
+        printWriterAsIndenting.print("mOverExpansion=");
+        printWriterAsIndenting.println(this.mOverExpansion);
+        printWriterAsIndenting.print("mExpandedHeight=");
+        printWriterAsIndenting.println(this.mExpandedHeight);
+        printWriterAsIndenting.print("isTracking()=");
+        printWriterAsIndenting.println(isTracking());
+        printWriterAsIndenting.print("mExpanding=");
+        printWriterAsIndenting.println(this.mExpanding);
+        printWriterAsIndenting.print("mSplitShadeEnabled=");
+        printWriterAsIndenting.println(false);
+        printWriterAsIndenting.print("mAnimateNextPositionUpdate=");
+        printWriterAsIndenting.println(this.mAnimateNextPositionUpdate);
+        printWriterAsIndenting.print("isPanelExpanded()=");
+        printWriterAsIndenting.println(isPanelExpanded());
+        printWriterAsIndenting.print("mDozing=");
+        printWriterAsIndenting.println(this.mDozing);
+        printWriterAsIndenting.print("mDozingOnDown=");
+        printWriterAsIndenting.println(this.mDozingOnDown);
+        printWriterAsIndenting.print("mBouncerShowing=");
+        printWriterAsIndenting.println(this.mBouncerShowing);
+        printWriterAsIndenting.print("mBarState=");
+        printWriterAsIndenting.println(this.mBarState);
+        printWriterAsIndenting.print("mStatusBarMinHeight=");
+        printWriterAsIndenting.println(this.mStatusBarMinHeight);
+        printWriterAsIndenting.print("mStatusBarHeaderHeightKeyguard=");
+        printWriterAsIndenting.println(this.mStatusBarHeaderHeightKeyguard);
+        printWriterAsIndenting.print("mOverStretchAmount=");
+        printWriterAsIndenting.println(this.mOverStretchAmount);
+        printWriterAsIndenting.print("mDownX=");
+        printWriterAsIndenting.println(this.mDownX);
+        printWriterAsIndenting.print("mDownY=");
+        printWriterAsIndenting.println(this.mDownY);
+        printWriterAsIndenting.print("mDisplayTopInset=");
+        printWriterAsIndenting.println(this.mDisplayTopInset);
+        printWriterAsIndenting.print("mDisplayRightInset=");
+        printWriterAsIndenting.println(this.mDisplayRightInset);
+        printWriterAsIndenting.print("mDisplayLeftInset=");
+        printWriterAsIndenting.println(this.mDisplayLeftInset);
+        printWriterAsIndenting.print("mIsExpandingOrCollapsing=");
+        printWriterAsIndenting.println(this.mIsExpandingOrCollapsing);
+        printWriterAsIndenting.print("mHeadsUpStartHeight=");
+        printWriterAsIndenting.println(this.mHeadsUpStartHeight);
+        printWriterAsIndenting.print("mListenForHeadsUp=");
+        printWriterAsIndenting.println(this.mListenForHeadsUp);
+        printWriterAsIndenting.print("mNavigationBarBottomHeight=");
+        printWriterAsIndenting.println(this.mNavigationBarBottomHeight);
+        printWriterAsIndenting.print("mExpandingFromHeadsUp=");
+        printWriterAsIndenting.println(this.mExpandingFromHeadsUp);
+        printWriterAsIndenting.print("mCollapsedOnDown=");
+        printWriterAsIndenting.println(this.mCollapsedOnDown);
+        printWriterAsIndenting.print("mClosingWithAlphaFadeOut=");
+        printWriterAsIndenting.println(this.mClosingWithAlphaFadeOut);
+        printWriterAsIndenting.print("mHeadsUpAnimatingAway=");
+        printWriterAsIndenting.println(this.mHeadsUpAnimatingAway);
+        printWriterAsIndenting.print("mShowIconsWhenExpanded=");
+        printWriterAsIndenting.println(this.mShowIconsWhenExpanded);
+        printWriterAsIndenting.print("mIsFullWidth=");
+        printWriterAsIndenting.println(this.mIsFullWidth);
+        printWriterAsIndenting.print("mBlockingExpansionForCurrentTouch=");
+        printWriterAsIndenting.println(this.mBlockingExpansionForCurrentTouch);
+        printWriterAsIndenting.print("mExpectingSynthesizedDown=");
+        printWriterAsIndenting.println(this.mExpectingSynthesizedDown);
+        printWriterAsIndenting.print("mLastEventSynthesizedDown=");
+        printWriterAsIndenting.println(this.mLastEventSynthesizedDown);
+        printWriterAsIndenting.print("mInterpolatedDarkAmount=");
+        printWriterAsIndenting.println(this.mInterpolatedDarkAmount);
+        printWriterAsIndenting.print("mLinearDarkAmount=");
+        printWriterAsIndenting.println(this.mLinearDarkAmount);
+        printWriterAsIndenting.print("mPulsing=");
+        printWriterAsIndenting.println(this.mPulsing);
+        printWriterAsIndenting.print("mStackScrollerMeasuringPass=");
+        printWriterAsIndenting.println(this.mStackScrollerMeasuringPass);
+        printWriterAsIndenting.print("mPanelAlpha=");
+        printWriterAsIndenting.println(this.mPanelAlpha);
+        printWriterAsIndenting.print("mBottomAreaShadeAlpha=");
+        printWriterAsIndenting.println(this.mBottomAreaShadeAlpha);
+        printWriterAsIndenting.print("mHeadsUpInset=");
+        printWriterAsIndenting.println(this.mHeadsUpInset);
+        printWriterAsIndenting.print("mHeadsUpPinnedMode=");
+        printWriterAsIndenting.println(this.mHeadsUpPinnedMode);
+        printWriterAsIndenting.print("mAllowExpandForSmallExpansion=");
+        printWriterAsIndenting.println(this.mAllowExpandForSmallExpansion);
+        printWriterAsIndenting.print("mMaxOverscrollAmountForPulse=");
+        printWriterAsIndenting.println(this.mMaxOverscrollAmountForPulse);
+        printWriterAsIndenting.print("mIsPanelCollapseOnQQS=");
+        printWriterAsIndenting.println(this.mIsPanelCollapseOnQQS);
+        printWriterAsIndenting.print("mIsGestureNavigation=");
+        printWriterAsIndenting.println(this.mIsGestureNavigation);
+        printWriterAsIndenting.print("mOldLayoutDirection=");
+        printWriterAsIndenting.println(this.mOldLayoutDirection);
+        printWriterAsIndenting.print("mMinFraction=");
+        printWriterAsIndenting.println(this.mMinFraction);
+        printWriterAsIndenting.print("mSplitShadeFullTransitionDistance=");
+        printWriterAsIndenting.println(this.mSplitShadeFullTransitionDistance);
+        printWriterAsIndenting.print("mSplitShadeScrimTransitionDistance=");
+        printWriterAsIndenting.println(this.mSplitShadeScrimTransitionDistance);
+        printWriterAsIndenting.print("mMinExpandHeight=");
+        printWriterAsIndenting.println(0.0f);
+        printWriterAsIndenting.print("mPanelUpdateWhenAnimatorEnds=");
+        printWriterAsIndenting.println(this.mPanelUpdateWhenAnimatorEnds);
+        printWriterAsIndenting.print("mHasVibratedOnOpen=");
+        printWriterAsIndenting.println(this.mHasVibratedOnOpen);
+        printWriterAsIndenting.print("mFixedDuration=");
+        printWriterAsIndenting.println(this.mFixedDuration);
+        printWriterAsIndenting.print("mPanelFlingOvershootAmount=");
+        printWriterAsIndenting.println(this.mPanelFlingOvershootAmount);
+        printWriterAsIndenting.print("mLastGesturedOverExpansion=");
+        printWriterAsIndenting.println(this.mLastGesturedOverExpansion);
+        printWriterAsIndenting.print("mIsSpringBackAnimation=");
+        printWriterAsIndenting.println(this.mIsSpringBackAnimation);
+        printWriterAsIndenting.print("mHintDistance=");
+        printWriterAsIndenting.println(this.mHintDistance);
+        printWriterAsIndenting.print("mInitialOffsetOnTouch=");
+        printWriterAsIndenting.println(this.mInitialOffsetOnTouch);
+        printWriterAsIndenting.print("mCollapsedAndHeadsUpOnDown=");
+        printWriterAsIndenting.println(this.mCollapsedAndHeadsUpOnDown);
+        printWriterAsIndenting.print("mExpandedFraction=");
+        printWriterAsIndenting.println(this.mExpandedFraction);
+        printWriterAsIndenting.print("mExpansionDragDownAmountPx=");
+        printWriterAsIndenting.println(this.mExpansionDragDownAmountPx);
+        printWriterAsIndenting.print("mPanelClosedOnDown=");
+        printWriterAsIndenting.println(this.mPanelClosedOnDown);
+        printWriterAsIndenting.print("mHasLayoutedSinceDown=");
+        printWriterAsIndenting.println(this.mHasLayoutedSinceDown);
+        printWriterAsIndenting.print("mUpdateFlingVelocity=");
+        printWriterAsIndenting.println(this.mUpdateFlingVelocity);
+        printWriterAsIndenting.print("mUpdateFlingOnLayout=");
+        printWriterAsIndenting.println(this.mUpdateFlingOnLayout);
+        printWriterAsIndenting.print("isClosing()=");
+        printWriterAsIndenting.println(isClosing());
+        printWriterAsIndenting.print("mTouchSlopExceeded=");
+        printWriterAsIndenting.println(this.mTouchSlopExceeded);
+        printWriterAsIndenting.print("mTrackingPointer=");
+        printWriterAsIndenting.println(this.mTrackingPointer);
+        printWriterAsIndenting.print("mTouchSlop=");
+        printWriterAsIndenting.println(this.mTouchSlop);
+        printWriterAsIndenting.print("mSlopMultiplier=");
+        printWriterAsIndenting.println(this.mSlopMultiplier);
+        printWriterAsIndenting.print("mTouchAboveFalsingThreshold=");
+        printWriterAsIndenting.println(this.mTouchAboveFalsingThreshold);
+        printWriterAsIndenting.print("mTouchStartedInEmptyArea=");
+        printWriterAsIndenting.println(this.mTouchStartedInEmptyArea);
+        printWriterAsIndenting.print("mMotionAborted=");
+        printWriterAsIndenting.println(this.mMotionAborted);
+        printWriterAsIndenting.print("mUpwardsWhenThresholdReached=");
+        printWriterAsIndenting.println(this.mUpwardsWhenThresholdReached);
+        printWriterAsIndenting.print("mAnimatingOnDown=");
+        printWriterAsIndenting.println(this.mAnimatingOnDown);
+        printWriterAsIndenting.print("mHandlingPointerUp=");
+        printWriterAsIndenting.println(this.mHandlingPointerUp);
+        printWriterAsIndenting.print("mInstantExpanding=");
+        printWriterAsIndenting.println(this.mInstantExpanding);
+        printWriterAsIndenting.print("mAnimateAfterExpanding=");
+        printWriterAsIndenting.println(this.mAnimateAfterExpanding);
+        printWriterAsIndenting.print("mIsFlinging=");
+        printWriterAsIndenting.println(this.mIsFlinging);
+        printWriterAsIndenting.print("mViewName=");
+        printWriterAsIndenting.println(this.mViewName);
+        printWriterAsIndenting.print("mInitialExpandY=");
+        printWriterAsIndenting.println(this.mInitialExpandY);
+        printWriterAsIndenting.print("mInitialExpandX=");
+        printWriterAsIndenting.println(this.mInitialExpandX);
+        printWriterAsIndenting.print("mTouchDisabled=");
+        printWriterAsIndenting.println(this.mTouchDisabled);
+        printWriterAsIndenting.print("mInitialTouchFromKeyguard=");
+        printWriterAsIndenting.println(this.mInitialTouchFromKeyguard);
+        printWriterAsIndenting.print("mNextCollapseSpeedUpFactor=");
+        printWriterAsIndenting.println(this.mNextCollapseSpeedUpFactor);
+        printWriterAsIndenting.print("mGestureWaitForTouchSlop=");
+        printWriterAsIndenting.println(this.mGestureWaitForTouchSlop);
+        printWriterAsIndenting.print("mIgnoreXTouchSlop=");
+        printWriterAsIndenting.println(this.mIgnoreXTouchSlop);
+        printWriterAsIndenting.print("mExpandLatencyTracking=");
+        printWriterAsIndenting.println(this.mExpandLatencyTracking);
         StringBuilder sb5 = new StringBuilder("gestureExclusionRect:");
-        Region calculateTouchableRegion = this.mShadeTouchableRegionManager.calculateTouchableRegion();
-        Rect bounds = (!isFullyCollapsed() || calculateTouchableRegion == null) ? null : calculateTouchableRegion.getBounds();
+        Region regionCalculateTouchableRegion = this.mShadeTouchableRegionManager.calculateTouchableRegion();
+        Rect bounds = (!isFullyCollapsed() || regionCalculateTouchableRegion == null) ? null : regionCalculateTouchableRegion.getBounds();
         if (bounds == null) {
             bounds = EMPTY_RECT;
         }
         sb5.append(bounds);
-        asIndenting.println(sb5.toString());
+        printWriterAsIndenting.println(sb5.toString());
         Trace.beginSection("Table<DownEvents>");
         List list = NPVCDownEventState.TABLE_HEADERS;
         NPVCDownEventState.Buffer buffer = this.mLastDownEvents;
@@ -2628,11 +4638,11 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         RingBuffer ringBuffer = buffer.buffer;
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(ringBuffer, 10));
         ringBuffer.getClass();
-        RingBuffer$iterator$1 ringBuffer$iterator$1 = new RingBuffer$iterator$1(ringBuffer);
-        while (ringBuffer$iterator$1.hasNext()) {
-            arrayList.add((List) ((NPVCDownEventState) ringBuffer$iterator$1.next()).asStringList$delegate.getValue());
+        RingBuffer.AnonymousClass1 anonymousClass1 = ringBuffer.new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            arrayList.add((List) ((NPVCDownEventState) anonymousClass1.next()).asStringList$delegate.getValue());
         }
-        new DumpsysTableLogger("NotificationPanelView", list, arrayList).printTableData(asIndenting);
+        new DumpsysTableLogger("NotificationPanelView", list, arrayList).printTableData(printWriterAsIndenting);
         Trace.endSection();
     }
 
@@ -2658,7 +4668,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    public final void expand(boolean z) {
+    public final void expand(boolean z) throws Resources.NotFoundException {
         StringBuilder sb;
         if (isFullyCollapsed() || isCollapsing()) {
             QuickPanelLogger quickPanelLogger = this.mQuickPanelLogger;
@@ -2694,7 +4704,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             NotificationPanelView notificationPanelView = this.mView;
             notificationPanelView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.shade.NotificationPanelViewController.15
                 @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-                public final void onGlobalLayout() {
+                public final void onGlobalLayout() throws Resources.NotFoundException {
                     NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
                     if (!notificationPanelViewController.mInstantExpanding) {
                         notificationPanelViewController.mView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -2731,8 +4741,13 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         setListening$1(true);
     }
 
+    @Override // com.android.systemui.shade.ShadeSurface
+    public final void expandQSForOpenDetail() throws Resources.NotFoundException {
+        expandToQs();
+    }
+
     @Override // com.android.systemui.shade.domain.interactor.ShadeLockscreenInteractor
-    public final void expandToNotifications() {
+    public final void expandToNotifications() throws Resources.NotFoundException {
         if (this.mSecNotificationPanelViewController != null) {
             if (SecPanelSplitHelper.isEnabled()) {
                 this.mPanelSplitHelper.stateOnDown = 0;
@@ -2740,9 +4755,9 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             CentralSurfacesImpl centralSurfacesImpl = this.mCentralSurfaces;
             Objects.requireNonNull(centralSurfacesImpl);
             if (isOnKeyguard() && !centralSurfacesImpl.mBouncerShowing && !this.mFullScreenModeEnabled) {
-                boolean isNeedsToExpandLocksNoti = ((AmbientState) Dependency.sDependency.getDependencyInner(AmbientState.class)).isNeedsToExpandLocksNoti();
+                boolean zIsNeedsToExpandLocksNoti = ((AmbientState) Dependency.sDependency.getDependencyInner(AmbientState.class)).isNeedsToExpandLocksNoti();
                 LockscreenShadeTransitionController lockscreenShadeTransitionController = this.mLockscreenShadeTransitionController;
-                if (!isNeedsToExpandLocksNoti) {
+                if (!zIsNeedsToExpandLocksNoti) {
                     lockscreenShadeTransitionController.goToLockedShade(null, true);
                     return;
                 }
@@ -2764,7 +4779,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    public final void expandToQs() {
+    public final void expandToQs() throws Resources.NotFoundException {
         SecNotificationPanelViewController secNotificationPanelViewController = this.mSecNotificationPanelViewController;
         if (secNotificationPanelViewController != null) {
             CentralSurfacesImpl centralSurfacesImpl = this.mCentralSurfaces;
@@ -2774,26 +4789,32 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             }
             SecPanelSplitHelper.Companion.getClass();
             if (SecPanelSplitHelper.isEnabled) {
-                if (isOnKeyguard()) {
-                    this.mLockscreenShadeTransitionController.goToLockedShade(null, true);
-                } else if (isFullyCollapsed()) {
-                    expand(true);
-                }
                 SecPanelSplitHelper secPanelSplitHelper = secNotificationPanelViewController.panelSplitHelper;
                 if (secPanelSplitHelper != null) {
-                    SecPanelSplitHelper secPanelSplitHelper2 = secPanelSplitHelper.isQSState() ? null : secPanelSplitHelper;
-                    if (secPanelSplitHelper2 != null) {
-                        secPanelSplitHelper2.slide$1(0);
+                    if (secPanelSplitHelper.isQSState()) {
+                        secPanelSplitHelper = null;
+                    }
+                    if (secPanelSplitHelper != null) {
+                        secPanelSplitHelper.slide$1(0);
+                    }
+                }
+                if (isOnKeyguard()) {
+                    this.mLockscreenShadeTransitionController.goToLockedShade(null, true);
+                    return;
+                } else {
+                    if (isFullyCollapsed()) {
+                        expand(true);
                         return;
                     }
                     return;
                 }
-                return;
             }
         }
         QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
         if (quickSettingsControllerImpl.isExpansionEnabled()) {
-            quickSettingsControllerImpl.setExpandImmediate(true);
+            if (isFullyCollapsed() || SecPanelSplitHelper.isEnabled()) {
+                quickSettingsControllerImpl.setExpandImmediate(true);
+            }
             setShowShelfOnly(true);
         }
         if (isFullyCollapsed()) {
@@ -2805,7 +4826,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     @Override // com.android.systemui.shade.ShadeViewController
-    public final void finishInputFocusTransfer(float f) {
+    public final void finishInputFocusTransfer(float f) throws Resources.NotFoundException {
         MotionEvent motionEvent;
         if (!this.mCommandQueue.panelsEnabled()) {
             Log.d("NotificationPanelView", "finishInputFocusTransfer: failed by !panelsEnabled()");
@@ -2834,25 +4855,371 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    public final void fling(float f) {
+    public final void fling(float f) throws Resources.NotFoundException {
         fling(f, 1.0f, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:110:0x0197  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x017c  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x01c8  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x0284  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0209  */
+    /* JADX WARN: Removed duplicated region for block: B:115:0x0284  */
+    /* JADX WARN: Removed duplicated region for block: B:64:0x016b  */
+    /* JADX WARN: Removed duplicated region for block: B:71:0x0179  */
+    /* JADX WARN: Removed duplicated region for block: B:73:0x017c  */
+    /* JADX WARN: Removed duplicated region for block: B:74:0x0197  */
+    /* JADX WARN: Removed duplicated region for block: B:81:0x01c8  */
+    /* JADX WARN: Removed duplicated region for block: B:95:0x0209  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void flingToHeight(float r24, boolean r25, final float r26, float r27, boolean r28) {
-        /*
-            Method dump skipped, instructions count: 659
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationPanelViewController.flingToHeight(float, boolean, float, float, boolean):void");
+    public void flingToHeight(float f, boolean z, final float f2, float f3, boolean z2) throws Resources.NotFoundException {
+        KeyguardStateControllerImpl keyguardStateControllerImpl;
+        boolean z3;
+        final ValueAnimator valueAnimatorOfFloat;
+        Set<Animator> set;
+        float fPow;
+        PanelPopOverManager panelPopOverManager;
+        StringBuilder sb;
+        int i = 0;
+        QuickPanelLogger quickPanelLogger = this.mQuickPanelLogger;
+        if (quickPanelLogger != null && (sb = this.mQuickPanelLogBuilder) != null) {
+            sb.setLength(0);
+            sb.append("flingToHeight: ");
+            sb.append("vel: ");
+            sb.append(f);
+            sb.append(", expand: ");
+            sb.append(z);
+            sb.append(", target: ");
+            sb.append(f2);
+            sb.append(", collapseSpeedUpFactor: ");
+            sb.append(f3);
+            sb.append(", expandBecauseOfFalsing: ");
+            sb.append(z2);
+            sb.append(", mExpandedHeight: ");
+            sb.append(this.mExpandedHeight);
+            sb.append(", mOverExpansion: ");
+            sb.append(this.mOverExpansion);
+            sb.append(", mIsFling: ");
+            sb.append(this.mIsFlinging);
+            quickPanelLogger.logPanelState(sb.toString());
+        }
+        Animator animator = this.mFlingAnimator;
+        if (animator != null && (animator.isRunning() || this.mFlingAnimator.isStarted())) {
+            if (!SecPanelSplitHelper.isEnabled()) {
+                return;
+            } else {
+                this.mFlingAnimator.cancel();
+            }
+        }
+        if (QpRune.QUICK_PANEL_CODE_FOR_POP_OVER && (panelPopOverManager = this.mPanelPopOverManager) != null && !z) {
+            panelPopOverManager.removePopOverAreaListener();
+        }
+        QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
+        quickSettingsControllerImpl.mLastShadeFlingWasExpanding = z;
+        ShadeLogger shadeLogger = quickSettingsControllerImpl.mShadeLog;
+        shadeLogger.getClass();
+        LogLevel logLevel = LogLevel.VERBOSE;
+        ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(i);
+        LogBuffer logBuffer = shadeLogger.buffer;
+        LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
+        HeadsUpTouchHelper headsUpTouchHelper = this.mHeadsUpTouchHelper;
+        HeadsUpManager headsUpManager = headsUpTouchHelper.mHeadsUpManager;
+        if (!z && headsUpTouchHelper.mCollapseSnoozes) {
+            ((HeadsUpManagerImpl) headsUpManager).snooze();
+        }
+        headsUpTouchHelper.mCollapseSnoozes = false;
+        headsUpTouchHelper.mAmbientState.mIsCollapsingHeadsup = false;
+        if (z) {
+            Log.d("HeadsUpTouchHelper", "unpinAll because of notifyFling expand");
+            ((HeadsUpManagerImpl) headsUpManager).unpinAll();
+            headsUpTouchHelper.mTrackingPointer = -1;
+            headsUpTouchHelper.mPickedChild = null;
+            headsUpTouchHelper.mTouchingHeadsUpView = false;
+        }
+        boolean z4 = isOnKeyguard() && !z;
+        KeyguardStateControllerImpl keyguardStateControllerImpl2 = this.mKeyguardStateController;
+        keyguardStateControllerImpl2.mFlingingToDismissKeyguard = z4;
+        keyguardStateControllerImpl2.mFlingingToDismissKeyguardDuringSwipeGesture = false;
+        keyguardStateControllerImpl2.mSnappingKeyguardBackAfterSwipe = !z4;
+        if (!z && !isKeyguardShowing$1()) {
+            if (quickSettingsControllerImpl.mMinExpansionHeight == 0) {
+                keyguardStateControllerImpl = keyguardStateControllerImpl2;
+                fPow = 1.0f;
+            } else {
+                keyguardStateControllerImpl = keyguardStateControllerImpl2;
+                fPow = (float) Math.pow(Math.max(0.0f, Math.min(this.mExpandedHeight / r0, 1.0f)), 0.75d);
+            }
+            if (fPow == 1.0f) {
+                z3 = true;
+            }
+            this.mClosingWithAlphaFadeOut = z3;
+            NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.mNotificationStackScrollLayoutController;
+            notificationStackScrollLayoutController.mView.mForceNoOverlappingRendering = z3;
+            notificationStackScrollLayoutController.setPanelFlinging(true);
+            ((ShadeRepositoryImpl) this.mShadeRepository).setCurrentFling(new FlingInfo(z, f));
+            if (f2 != this.mExpandedHeight && this.mOverExpansion == 0.0f) {
+                onFlingEnd(false);
+                return;
+            }
+            this.mIsFlinging = true;
+            boolean z5 = !z && this.mStatusBarStateController.getState() != 1 && this.mOverExpansion == 0.0f && f >= 0.0f;
+            final boolean z6 = !z5 || (this.mOverExpansion != 0.0f && z);
+            final float fLerp = !z5 ? (this.mOverExpansion / this.mPanelFlingOvershootAmount) + MathUtils.lerp(0.2f, 1.0f, MathUtils.saturate(f / (this.mFlingAnimationUtils.mHighVelocityPxPerSecond * 0.5f))) : 0.0f;
+            final float f4 = this.mOverExpansion;
+            valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mExpandedHeight, f2);
+            set = this.mTestSetOfAnimatorsUsed;
+            if (set != null && valueAnimatorOfFloat != null) {
+                set.add(valueAnimatorOfFloat);
+            }
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda50
+                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    NotificationPanelViewController notificationPanelViewController = this.f$0;
+                    float f5 = fLerp;
+                    float f6 = f2;
+                    float f7 = f4;
+                    ValueAnimator valueAnimator2 = valueAnimatorOfFloat;
+                    Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
+                    notificationPanelViewController.getClass();
+                    if (f5 > 0.0f || (f6 == 0.0f && f7 != 0.0f)) {
+                        notificationPanelViewController.setOverExpansionInternal(MathUtils.lerp(f7, notificationPanelViewController.mPanelFlingOvershootAmount * f5, ((PathInterpolator) Interpolators.FAST_OUT_SLOW_IN).getInterpolation(valueAnimator2.getAnimatedFraction())), false);
+                    }
+                    notificationPanelViewController.setExpandedHeightInternal(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                }
+            });
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shade.NotificationPanelViewController.12
+                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                public final void onAnimationEnd(Animator animator2) {
+                    NotificationPanelViewController.this.mFlingAnimator = null;
+                }
+            });
+            this.mFlingAnimator = valueAnimatorOfFloat;
+            NotificationPanelView notificationPanelView = this.mView;
+            if (z) {
+                this.mHasVibratedOnOpen = false;
+                if (this.mBarState == 0 || (!keyguardStateControllerImpl.mCanDismissLockScreen && isTracking())) {
+                    this.mFlingAnimationUtilsClosing.apply(valueAnimatorOfFloat, this.mExpandedHeight, f2, f, notificationPanelView.getHeight());
+                } else if (f == 0.0f) {
+                    valueAnimatorOfFloat.setInterpolator(Interpolators.PANEL_CLOSE_ACCELERATED);
+                    valueAnimatorOfFloat.setDuration((long) (((this.mExpandedHeight / notificationPanelView.getHeight()) * 100.0f) + 200.0f));
+                } else {
+                    this.mFlingAnimationUtilsDismissing.apply(valueAnimatorOfFloat, this.mExpandedHeight, f2, f, notificationPanelView.getHeight());
+                }
+                if (f == 0.0f) {
+                    valueAnimatorOfFloat.setDuration((long) (valueAnimatorOfFloat.getDuration() / f3));
+                }
+                int i2 = this.mFixedDuration;
+                if (i2 != -1) {
+                    valueAnimatorOfFloat.setDuration(i2);
+                }
+                valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shade.NotificationPanelViewController.13
+                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                    public final void onAnimationEnd(Animator animator2) {
+                        View view;
+                        NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                        notificationPanelViewController.getClass();
+                        if (notificationPanelViewController.mNotificationContainerParent == null) {
+                            return;
+                        }
+                        float fLerp2 = MathUtils.lerp(1.0f, 0.9f, 0.0f);
+                        NotificationsQuickSettingsContainer notificationsQuickSettingsContainer = notificationPanelViewController.mNotificationContainerParent;
+                        if (notificationsQuickSettingsContainer.mStackScroller != null && (view = notificationsQuickSettingsContainer.mQSContainer) != null) {
+                            view.getBoundsOnScreen(notificationsQuickSettingsContainer.mUpperRect);
+                            notificationsQuickSettingsContainer.mStackScroller.getBoundsOnScreen(notificationsQuickSettingsContainer.mBoundingBoxRect);
+                            notificationsQuickSettingsContainer.mBoundingBoxRect.union(notificationsQuickSettingsContainer.mUpperRect);
+                            float fCenterX = notificationsQuickSettingsContainer.mBoundingBoxRect.centerX();
+                            float fCenterY = notificationsQuickSettingsContainer.mBoundingBoxRect.centerY();
+                            notificationsQuickSettingsContainer.mQSContainer.setPivotX(fCenterX);
+                            notificationsQuickSettingsContainer.mQSContainer.setPivotY(fCenterY);
+                            notificationsQuickSettingsContainer.mQSContainer.setScaleX(fLerp2);
+                            notificationsQuickSettingsContainer.mQSContainer.setScaleY(fLerp2);
+                            notificationsQuickSettingsContainer.mStackScroller.setPivotX(fCenterX);
+                            notificationsQuickSettingsContainer.mStackScroller.setPivotY(fCenterY);
+                            notificationsQuickSettingsContainer.mStackScroller.setScaleX(fLerp2);
+                            notificationsQuickSettingsContainer.mStackScroller.setScaleY(fLerp2);
+                        }
+                        ScrimController scrimController = notificationPanelViewController.mScrimController;
+                        scrimController.mNotificationsScrim.setScaleX(fLerp2);
+                        scrimController.mNotificationsScrim.setScaleY(fLerp2);
+                    }
+                });
+            } else {
+                maybeVibrateOnOpening(true);
+                float f5 = (!z2 || f >= 0.0f) ? f : 0.0f;
+                this.mFlingAnimationUtils.apply(valueAnimatorOfFloat, this.mExpandedHeight, (fLerp * this.mPanelFlingOvershootAmount) + f2, f5, notificationPanelView.getHeight());
+                if (z && this.mExpandedFraction == 1.0f) {
+                    valueAnimatorOfFloat.setDuration(0L);
+                } else if (f5 == 0.0f) {
+                    valueAnimatorOfFloat.setDuration(350L);
+                }
+            }
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shade.NotificationPanelViewController.14
+                public boolean mCancelled;
+
+                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                public final void onAnimationCancel(Animator animator2) {
+                    this.mCancelled = true;
+                }
+
+                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                public final void onAnimationEnd(Animator animator2) throws Resources.NotFoundException {
+                    int i3 = 1;
+                    if (!z6 || this.mCancelled) {
+                        NotificationPanelViewController.this.onFlingEnd(this.mCancelled);
+                        return;
+                    }
+                    final NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                    float f6 = notificationPanelViewController.mOverExpansion;
+                    if (f6 == 0.0f) {
+                        notificationPanelViewController.onFlingEnd(false);
+                        return;
+                    }
+                    notificationPanelViewController.mIsSpringBackAnimation = true;
+                    ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(f6, 0.0f);
+                    valueAnimatorOfFloat2.addUpdateListener(new NotificationPanelViewController$$ExternalSyntheticLambda7(notificationPanelViewController, i3));
+                    valueAnimatorOfFloat2.setDuration(250L);
+                    valueAnimatorOfFloat2.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+                    valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shade.NotificationPanelViewController.16
+                        public boolean mCancelled;
+
+                        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                        public final void onAnimationCancel(Animator animator3) {
+                            this.mCancelled = true;
+                        }
+
+                        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                        public final void onAnimationEnd(Animator animator3) throws Resources.NotFoundException {
+                            NotificationPanelViewController notificationPanelViewController2 = NotificationPanelViewController.this;
+                            notificationPanelViewController2.mIsSpringBackAnimation = false;
+                            notificationPanelViewController2.onFlingEnd(this.mCancelled);
+                        }
+                    });
+                    notificationPanelViewController.setAnimator(valueAnimatorOfFloat2);
+                    valueAnimatorOfFloat2.start();
+                }
+
+                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                public final void onAnimationStart(Animator animator2) {
+                    if (NotificationPanelViewController.this.mStatusBarStateController.isDozing()) {
+                        return;
+                    }
+                    NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                    notificationPanelViewController.mQsController.beginJankMonitoring(notificationPanelViewController.isFullyCollapsed());
+                }
+            });
+            if (!this.mScrimController.mScreenOn) {
+                valueAnimatorOfFloat.setDuration(1L);
+            }
+            setAnimator(valueAnimatorOfFloat);
+            valueAnimatorOfFloat.start();
+            setMotionAborted();
+        }
+        keyguardStateControllerImpl = keyguardStateControllerImpl2;
+        z3 = false;
+        this.mClosingWithAlphaFadeOut = z3;
+        NotificationStackScrollLayoutController notificationStackScrollLayoutController2 = this.mNotificationStackScrollLayoutController;
+        notificationStackScrollLayoutController2.mView.mForceNoOverlappingRendering = z3;
+        notificationStackScrollLayoutController2.setPanelFlinging(true);
+        ((ShadeRepositoryImpl) this.mShadeRepository).setCurrentFling(new FlingInfo(z, f));
+        if (f2 != this.mExpandedHeight) {
+        }
+        this.mIsFlinging = true;
+        if (z) {
+        }
+        if (z5) {
+        }
+        if (!z5) {
+        }
+        final float f42 = this.mOverExpansion;
+        valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mExpandedHeight, f2);
+        set = this.mTestSetOfAnimatorsUsed;
+        if (set != null) {
+            set.add(valueAnimatorOfFloat);
+        }
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda50
+            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                NotificationPanelViewController notificationPanelViewController = this.f$0;
+                float f52 = fLerp;
+                float f6 = f2;
+                float f7 = f42;
+                ValueAnimator valueAnimator2 = valueAnimatorOfFloat;
+                Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
+                notificationPanelViewController.getClass();
+                if (f52 > 0.0f || (f6 == 0.0f && f7 != 0.0f)) {
+                    notificationPanelViewController.setOverExpansionInternal(MathUtils.lerp(f7, notificationPanelViewController.mPanelFlingOvershootAmount * f52, ((PathInterpolator) Interpolators.FAST_OUT_SLOW_IN).getInterpolation(valueAnimator2.getAnimatedFraction())), false);
+                }
+                notificationPanelViewController.setExpandedHeightInternal(((Float) valueAnimator.getAnimatedValue()).floatValue());
+            }
+        });
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shade.NotificationPanelViewController.12
+            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+            public final void onAnimationEnd(Animator animator2) {
+                NotificationPanelViewController.this.mFlingAnimator = null;
+            }
+        });
+        this.mFlingAnimator = valueAnimatorOfFloat;
+        NotificationPanelView notificationPanelView2 = this.mView;
+        if (z) {
+        }
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shade.NotificationPanelViewController.14
+            public boolean mCancelled;
+
+            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+            public final void onAnimationCancel(Animator animator2) {
+                this.mCancelled = true;
+            }
+
+            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+            public final void onAnimationEnd(Animator animator2) throws Resources.NotFoundException {
+                int i3 = 1;
+                if (!z6 || this.mCancelled) {
+                    NotificationPanelViewController.this.onFlingEnd(this.mCancelled);
+                    return;
+                }
+                final NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                float f6 = notificationPanelViewController.mOverExpansion;
+                if (f6 == 0.0f) {
+                    notificationPanelViewController.onFlingEnd(false);
+                    return;
+                }
+                notificationPanelViewController.mIsSpringBackAnimation = true;
+                ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(f6, 0.0f);
+                valueAnimatorOfFloat2.addUpdateListener(new NotificationPanelViewController$$ExternalSyntheticLambda7(notificationPanelViewController, i3));
+                valueAnimatorOfFloat2.setDuration(250L);
+                valueAnimatorOfFloat2.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+                valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shade.NotificationPanelViewController.16
+                    public boolean mCancelled;
+
+                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                    public final void onAnimationCancel(Animator animator3) {
+                        this.mCancelled = true;
+                    }
+
+                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                    public final void onAnimationEnd(Animator animator3) throws Resources.NotFoundException {
+                        NotificationPanelViewController notificationPanelViewController2 = NotificationPanelViewController.this;
+                        notificationPanelViewController2.mIsSpringBackAnimation = false;
+                        notificationPanelViewController2.onFlingEnd(this.mCancelled);
+                    }
+                });
+                notificationPanelViewController.setAnimator(valueAnimatorOfFloat2);
+                valueAnimatorOfFloat2.start();
+            }
+
+            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+            public final void onAnimationStart(Animator animator2) {
+                if (NotificationPanelViewController.this.mStatusBarStateController.isDozing()) {
+                    return;
+                }
+                NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                notificationPanelViewController.mQsController.beginJankMonitoring(notificationPanelViewController.isFullyCollapsed());
+            }
+        });
+        if (!this.mScrimController.mScreenOn) {
+        }
+        setAnimator(valueAnimatorOfFloat);
+        valueAnimatorOfFloat.start();
+        setMotionAborted();
     }
 
     @Override // com.android.systemui.logging.PanelScreenShotLogger.LogProvider
@@ -2908,32 +5275,39 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         return ShadeWindowGoesAround.isEnabled() ? this.mView.getContext().getResources().getConfiguration().densityDpi : this.mCentralSurfaces.mDisplayMetrics.density;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0059  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final float getFaceWidgetAlpha() {
-        float f;
+        float fInterpolate;
         if (this.mKeyguardTouchAnimator.isViRunning() || this.mCentralSurfaces.mBouncerShowing) {
-            f = -1.0f;
+            fInterpolate = -1.0f;
         } else {
             LockscreenShadeTransitionController lockscreenShadeTransitionController = this.mLockscreenShadeTransitionController;
             if (lockscreenShadeTransitionController.getFractionToShade() > 0.0f) {
                 float fractionToShade = lockscreenShadeTransitionController.getFractionToShade();
-                f = NotificationUtils.interpolate(1.0f, 0.0f, ((double) fractionToShade) > 0.5d ? 1.0f : fractionToShade * 2.0f);
-            } else {
-                if (this.mClockPositionAlgorithm.isPanelExpanded()) {
-                    QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
-                    if (quickSettingsControllerImpl.getExpanded()) {
-                        float computeExpansionFraction = quickSettingsControllerImpl.computeExpansionFraction();
-                        f = NotificationUtils.interpolate(1.0f, 0.0f, ((double) computeExpansionFraction) > 0.3d ? 1.0f : computeExpansionFraction * 3.0f);
-                    }
+                fInterpolate = NotificationUtils.interpolate(1.0f, 0.0f, ((double) fractionToShade) > 0.5d ? 1.0f : fractionToShade * 2.0f);
+            } else if (this.mClockPositionAlgorithm.isPanelExpanded()) {
+                QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
+                if (quickSettingsControllerImpl.getExpanded()) {
+                    float fComputeExpansionFraction = quickSettingsControllerImpl.computeExpansionFraction();
+                    fInterpolate = NotificationUtils.interpolate(1.0f, 0.0f, ((double) fComputeExpansionFraction) > 0.3d ? 1.0f : fComputeExpansionFraction * 3.0f);
+                } else {
+                    fInterpolate = 1.0f;
                 }
-                f = 1.0f;
             }
         }
         if (((KeyguardEditModeControllerImpl) this.mKeyguardEditModeController).getVIRunning()) {
             return 1.0f;
         }
-        return f;
+        return fInterpolate;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0024  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final int getFalsingThreshold() {
         float f;
         WakefulnessModel wakefulnessModel = (WakefulnessModel) this.mPowerInteractor.detailedWakefulness.$$delegate_0.getValue();
@@ -2941,19 +5315,15 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         if (wakefulnessModel.isAwake()) {
             WakeSleepReason wakeSleepReason = WakeSleepReason.TAP;
             WakeSleepReason wakeSleepReason2 = wakefulnessModel.lastWakeReason;
-            if (wakeSleepReason2 == wakeSleepReason || wakeSleepReason2 == WakeSleepReason.GESTURE) {
-                f = 1.5f;
-                return (int) (this.mQsController.mFalsingThreshold * f);
-            }
+            f = (wakeSleepReason2 == wakeSleepReason || wakeSleepReason2 == WakeSleepReason.GESTURE) ? 1.5f : 1.0f;
         }
-        f = 1.0f;
         return (int) (this.mQsController.mFalsingThreshold * f);
     }
 
     public final int getKeyguardNotificationStaticPadding() {
         int i = SceneContainerFlag.$r8$clinit;
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
-        int i2 = 0;
+        int height = 0;
         if (!isKeyguardShowing$1()) {
             return 0;
         }
@@ -2964,26 +5334,26 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 int lockscreenNotifPadding = this.mClockPositionAlgorithm.getLockscreenNotifPadding();
                 return lockscreenNotifPadding != 0 ? lockscreenNotifPadding : result.stackScrollerPadding;
             }
-            int i3 = result.stackScrollerPadding;
+            int i2 = result.stackScrollerPadding;
             int lockscreenNotifPadding2 = this.mClockPositionAlgorithm.getLockscreenNotifPadding();
             if (lockscreenNotifPadding2 == 0) {
                 lockscreenNotifPadding2 = result.stackScrollerPadding;
             }
             LockscreenNotificationIconsOnlyController lockscreenNotificationIconsOnlyController = this.mLockscreenNotificationIconsOnlyController;
             if (lockscreenNotificationIconsOnlyController != null && lockscreenNotificationIconsOnlyController.getIconContainer() != null) {
-                i2 = lockscreenNotificationIconsOnlyController.getIconContainer().getHeight();
+                height = lockscreenNotificationIconsOnlyController.getIconContainer().getHeight();
             }
-            return this.mMascotViewContainer.updatePosition(lockscreenNotifPadding2, i2) + lockscreenNotifPadding2;
+            return this.mMascotViewContainer.updatePosition(lockscreenNotifPadding2, height) + lockscreenNotifPadding2;
         }
-        int i4 = this.mHeadsUpInset;
+        int i3 = this.mHeadsUpInset;
         NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.mNotificationStackScrollLayoutController;
         if (!notificationStackScrollLayoutController.mView.mAmbientState.isPulseExpanding()) {
-            return i4;
+            return i3;
         }
-        int i5 = result.stackScrollerPadding;
+        int i4 = result.stackScrollerPadding;
         int lockscreenNotifPadding3 = this.mClockPositionAlgorithm.getLockscreenNotifPadding();
         if (lockscreenNotifPadding3 != 0) {
-            i5 = lockscreenNotifPadding3;
+            i4 = lockscreenNotifPadding3;
         }
         NotificationStackScrollLayout notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
         notificationStackScrollLayout.getClass();
@@ -2991,7 +5361,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         if (f == 100000.0f) {
             f = 0.0f;
         }
-        return (int) MathUtils.lerp(i4, i5, MathUtils.smoothStep(0.0f, notificationStackScrollLayout.mIntrinsicPadding, f));
+        return (int) MathUtils.lerp(i3, i4, MathUtils.smoothStep(0.0f, notificationStackScrollLayout.mIntrinsicPadding, f));
     }
 
     @Override // com.android.systemui.pluginlock.listener.PluginLockListener.State
@@ -3001,28 +5371,28 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     public final int getMaxPanelHeight() {
-        int i = this.mStatusBarMinHeight;
-        int i2 = this.mBarState;
+        int iMax = this.mStatusBarMinHeight;
+        int i = this.mBarState;
         QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
-        if (i2 != 1 && this.mNotificationStackScrollLayoutController.getNotGoneChildCount() == 0) {
-            i = Math.max(i, quickSettingsControllerImpl.mMinExpansionHeight);
+        if (i != 1 && this.mNotificationStackScrollLayoutController.getNotGoneChildCount() == 0) {
+            iMax = Math.max(iMax, quickSettingsControllerImpl.mMinExpansionHeight);
         }
-        boolean isEnabled = SecPanelSplitHelper.isEnabled();
+        boolean zIsEnabled = SecPanelSplitHelper.isEnabled();
         KeyguardClockPositionAlgorithm.Result result = this.mClockPositionResult;
-        int calculatePanelHeightExpanded = (isEnabled || quickSettingsControllerImpl.isExpandImmediate() || quickSettingsControllerImpl.getExpanded() || (this.mIsExpandingOrCollapsing && quickSettingsControllerImpl.mExpandedWhenExpandingStarted) || this.mPulsing) ? quickSettingsControllerImpl.calculatePanelHeightExpanded(result.stackScrollerPadding) : calculatePanelHeightShade();
+        int iCalculatePanelHeightExpanded = (zIsEnabled || quickSettingsControllerImpl.isExpandImmediate() || quickSettingsControllerImpl.getExpanded() || (this.mIsExpandingOrCollapsing && quickSettingsControllerImpl.mExpandedWhenExpandingStarted) || this.mPulsing) ? quickSettingsControllerImpl.calculatePanelHeightExpanded(result.stackScrollerPadding) : calculatePanelHeightShade();
         if (this.mSecNotificationPanelViewController != null) {
-            int calculatePanelHeightExpanded2 = quickSettingsControllerImpl.calculatePanelHeightExpanded(result.stackScrollerPadding);
-            int i3 = this.mBarState;
+            int iCalculatePanelHeightExpanded2 = quickSettingsControllerImpl.calculatePanelHeightExpanded(result.stackScrollerPadding);
+            int i2 = this.mBarState;
             SecPanelSplitHelper.Companion.getClass();
-            if (SecPanelSplitHelper.isEnabled && i3 == 0) {
-                calculatePanelHeightExpanded = calculatePanelHeightExpanded2 / 2;
+            if (SecPanelSplitHelper.isEnabled && i2 == 0) {
+                iCalculatePanelHeightExpanded = iCalculatePanelHeightExpanded2 / 2;
             }
         }
-        int max = Math.max(i, calculatePanelHeightExpanded);
-        if (max == 0) {
+        int iMax2 = Math.max(iMax, iCalculatePanelHeightExpanded);
+        if (iMax2 == 0) {
             Log.wtf("NotificationPanelView", "maxPanelHeight is invalid. mOverExpansion: " + this.mOverExpansion + ", calculatePanelHeightQsExpanded: " + quickSettingsControllerImpl.calculatePanelHeightExpanded(result.stackScrollerPadding) + ", calculatePanelHeightShade: " + calculatePanelHeightShade() + ", mStatusBarMinHeight = " + this.mStatusBarMinHeight + ", mQsMinExpansionHeight = " + quickSettingsControllerImpl.mMinExpansionHeight);
         }
-        return max;
+        return iMax2;
     }
 
     public int getMaxPanelTransitionDistance() {
@@ -3108,16 +5478,16 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     @Override // com.android.systemui.shade.ShadeSurface
-    public final void initDependencies(CentralSurfacesImpl centralSurfacesImpl, CentralSurfacesImpl$$ExternalSyntheticLambda29 centralSurfacesImpl$$ExternalSyntheticLambda29, HeadsUpManager headsUpManager) {
+    public final void initDependencies(CentralSurfacesImpl centralSurfacesImpl, CentralSurfacesImpl$$ExternalSyntheticLambda30 centralSurfacesImpl$$ExternalSyntheticLambda30, HeadsUpManager headsUpManager) {
         this.mHeadsUpManager = headsUpManager;
         ((HeadsUpManagerImpl) headsUpManager).addListener(this.mOnHeadsUpChangedListener);
         this.mHeadsUpTouchHelper = new HeadsUpTouchHelper(headsUpManager, this.mStatusBarService, this.mNotificationStackScrollLayoutController.mView.mHeadsUpCallback, new HeadsUpNotificationViewControllerImpl(this, 0));
         this.mCentralSurfaces = centralSurfacesImpl;
-        this.mHideExpandedRunnable = centralSurfacesImpl$$ExternalSyntheticLambda29;
+        this.mHideExpandedRunnable = centralSurfacesImpl$$ExternalSyntheticLambda30;
         this.mNowBarContainer = centralSurfacesImpl.getNotificationShadeWindowViewController().mView.findViewById(R.id.now_bar_rootview);
     }
 
-    public final void instantCollapse() {
+    public final void instantCollapse() throws Resources.NotFoundException {
         QuickPanelLogger quickPanelLogger = this.mQuickPanelLogger;
         if (quickPanelLogger != null) {
             quickPanelLogger.logPanelState("instantCollapse");
@@ -3159,11 +5529,11 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     public final boolean isExpandingOrCollapsing() {
-        float computeExpansionFraction = this.mQsController.computeExpansionFraction();
+        float fComputeExpansionFraction = this.mQsController.computeExpansionFraction();
         if (this.mIsExpandingOrCollapsing) {
             return true;
         }
-        return 0.0f < computeExpansionFraction && computeExpansionFraction < 1.0f;
+        return 0.0f < fComputeExpansionFraction && fComputeExpansionFraction < 1.0f;
     }
 
     public boolean isFlinging() {
@@ -3187,7 +5557,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         int i = SceneContainerFlag.$r8$clinit;
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
         float x = notificationStackScrollLayout.getX() + f3;
-        return !notificationStackScrollLayoutController.mView.isBelowLastNotification(f - x, f2) && x < f && f < (notificationStackScrollLayoutController.getWidth() + x) - (f3 * 2.0f);
+        return !notificationStackScrollLayoutController.mView.isBelowLastNotification(f - x, f2) && x < f && f < (((float) notificationStackScrollLayoutController.mView.getWidth()) + x) - (f3 * 2.0f);
     }
 
     @Override // com.android.systemui.shade.ShadeViewController
@@ -3322,7 +5692,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         return this.mView.isEnabled();
     }
 
-    public void loadDimens() {
+    public void loadDimens() throws Resources.NotFoundException {
         NotificationPanelView notificationPanelView = this.mView;
         ViewConfiguration viewConfiguration = ViewConfiguration.get(notificationPanelView.getContext());
         this.mTouchSlop = viewConfiguration.getScaledTouchSlop();
@@ -3354,6 +5724,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         } else {
             quickSettingsControllerImpl.mResources.getDimensionPixelSize(R.dimen.sec_notification_shelf_height);
         }
+        quickSettingsControllerImpl.mNSSLTopPadding = quickSettingsControllerImpl.mResources.getDimensionPixelSize(R.dimen.pop_over_style_top_padding);
     }
 
     @Override // com.android.systemui.pluginlock.listener.PluginLockListener.State
@@ -3375,13 +5746,14 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         this.mShadeLog.v("Vibrating on opening, mHasVibratedOnOpen=true");
     }
 
-    public final void notifyExpandingFinished() {
+    /* JADX WARN: Multi-variable type inference failed */
+    public final void notifyExpandingFinished() throws Resources.NotFoundException {
         SecPanelSAStatusLogInteractor secPanelSAStatusLogInteractor;
         QSImpl qSImpl;
         SecQSImpl secQSImpl;
         SecQSImplAnimatorManager secQSImplAnimatorManager;
         int i = 2;
-        byte b = 0;
+        Object[] objArr = 0;
         endClosing();
         if (this.mExpanding) {
             this.mExpanding = false;
@@ -3433,29 +5805,29 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 }
             }
             headsUpManagerImpl.mEntriesToRemoveAfterExpand.clear();
-            boolean isFullyCollapsed = isFullyCollapsed();
+            boolean zIsFullyCollapsed = isFullyCollapsed();
             ConversationNotificationManager conversationNotificationManager = this.mConversationNotificationManager;
-            conversationNotificationManager.notifPanelCollapsed = isFullyCollapsed;
-            if (!isFullyCollapsed) {
-                FilteringSequence mapNotNull = SequencesKt___SequencesKt.mapNotNull(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(conversationNotificationManager.states.entrySet()), new ConversationNotificationManager$$ExternalSyntheticLambda4(conversationNotificationManager, b == true ? 1 : 0));
+            conversationNotificationManager.notifPanelCollapsed = zIsFullyCollapsed;
+            if (!zIsFullyCollapsed) {
+                FilteringSequence filteringSequenceMapNotNull = SequencesKt___SequencesKt.mapNotNull(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(conversationNotificationManager.states.entrySet()), new ConversationNotificationManager$$ExternalSyntheticLambda4(conversationNotificationManager, objArr == true ? 1 : 0));
                 LinkedHashMap linkedHashMap = new LinkedHashMap();
-                FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(mapNotNull);
-                while (filteringSequence$iterator$1.hasNext()) {
-                    Pair pair = (Pair) filteringSequence$iterator$1.next();
+                FilteringSequence.AnonymousClass1 anonymousClass1 = filteringSequenceMapNotNull.new AnonymousClass1();
+                while (anonymousClass1.hasNext()) {
+                    Pair pair = (Pair) anonymousClass1.next();
                     linkedHashMap.put(pair.component1(), pair.component2());
                 }
-                final Map optimizeReadOnlyMap = MapsKt__MapsKt.optimizeReadOnlyMap(linkedHashMap);
+                final Map mapOptimizeReadOnlyMap = MapsKt__MapsKt.optimizeReadOnlyMap(linkedHashMap);
                 conversationNotificationManager.states.replaceAll(new ConversationNotificationManager$sam$java_util_function_BiFunction$0(new Function2() { // from class: com.android.systemui.statusbar.notification.ConversationNotificationManager$$ExternalSyntheticLambda5
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj, Object obj2) {
                         ConversationNotificationManager.ConversationState conversationState = (ConversationNotificationManager.ConversationState) obj2;
                         int i5 = ConversationNotificationManager.$r8$clinit;
-                        return optimizeReadOnlyMap.containsKey((String) obj) ? new ConversationNotificationManager.ConversationState(0, conversationState.f133notification) : conversationState;
+                        return mapOptimizeReadOnlyMap.containsKey((String) obj) ? new ConversationNotificationManager.ConversationState(0, conversationState.f134notification) : conversationState;
                     }
                 }));
-                FilteringSequence$iterator$1 filteringSequence$iterator$12 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(optimizeReadOnlyMap.values()), new ConversationNotificationManager$$ExternalSyntheticLambda1(i)));
-                while (filteringSequence$iterator$12.hasNext()) {
-                    ConversationNotificationManager.resetBadgeUi((ExpandableNotificationRow) filteringSequence$iterator$12.next());
+                FilteringSequence.AnonymousClass1 anonymousClass12 = SequencesKt___SequencesKt.mapNotNull(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(mapOptimizeReadOnlyMap.values()), new ConversationNotificationManager$$ExternalSyntheticLambda1(i)).new AnonymousClass1();
+                while (anonymousClass12.hasNext()) {
+                    ConversationNotificationManager.resetBadgeUi((ExpandableNotificationRow) anonymousClass12.next());
                 }
             }
             this.mIsExpandingOrCollapsing = false;
@@ -3482,11 +5854,11 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 mediaHierarchyManager.mediaCarouselController.mediaCarouselScrollHandler.getClass();
             }
             mediaHierarchyManager.updateUserVisibility();
-            boolean isFullyCollapsed2 = isFullyCollapsed();
+            boolean zIsFullyCollapsed2 = isFullyCollapsed();
             NotificationPanelView notificationPanelView = this.mView;
-            if (isFullyCollapsed2) {
-                DejankUtils.postAfterTraversal(new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 6));
-                notificationPanelView.postOnAnimation(new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 7));
+            if (zIsFullyCollapsed2) {
+                DejankUtils.postAfterTraversal(new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 9));
+                notificationPanelView.postOnAnimation(new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 10));
             } else {
                 setListening$1(true);
             }
@@ -3506,11 +5878,11 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             setKeyguardStatusBarAlpha();
             SecNotificationPanelViewController secNotificationPanelViewController = this.mSecNotificationPanelViewController;
             if (secNotificationPanelViewController != null) {
-                boolean isKeyguardShowing$1 = isKeyguardShowing$1();
+                boolean zIsKeyguardShowing$1 = isKeyguardShowing$1();
                 SecQuickSettingsControllerImpl secQuickSettingsControllerImpl = secNotificationPanelViewController.secQuickSettingsControllerImpl;
                 if (secQuickSettingsControllerImpl != null) {
-                    boolean booleanValue = ((Boolean) ((ShadeRepositoryImpl) secNotificationPanelViewController.shadeRepository).legacyExpandedOrAwaitingInputTransfer.$$delegate_0.getValue()).booleanValue();
-                    if (!booleanValue) {
+                    boolean zBooleanValue = ((Boolean) ((ShadeRepositoryImpl) secNotificationPanelViewController.shadeRepository).legacyExpandedOrAwaitingInputTransfer.$$delegate_0.getValue()).booleanValue();
+                    if (!zBooleanValue) {
                         Object obj = secQuickSettingsControllerImpl.qsSupplier.get();
                         QSFragmentLegacy qSFragmentLegacy = obj instanceof QSFragmentLegacy ? (QSFragmentLegacy) obj : null;
                         if (qSFragmentLegacy != null && (qSImpl = qSFragmentLegacy.mQsImpl) != null && (secQSImpl = qSImpl.mSecQSImpl) != null && (secQSImplAnimatorManager = secQSImpl.secQSImplAnimatorManager) != null) {
@@ -3519,17 +5891,17 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                         setMotionAborted();
                     }
                     SecPanelSplitHelper.Companion.getClass();
-                    if (!SecPanelSplitHelper.isEnabled && !isKeyguardShowing$1 && booleanValue && secNotificationPanelViewController.quickSettingsController.getExpanded() && (secPanelSAStatusLogInteractor = secNotificationPanelViewController.panelSAStatusLogInteractor) != null) {
+                    if (!SecPanelSplitHelper.isEnabled && !zIsKeyguardShowing$1 && zBooleanValue && secNotificationPanelViewController.quickSettingsController.getExpanded() && (secPanelSAStatusLogInteractor = secNotificationPanelViewController.panelSAStatusLogInteractor) != null) {
                         StateFlowImpl stateFlowImpl = secPanelSAStatusLogInteractor.repository._openQuickPanelFrom2Depth;
                         LauncherProxyService$1$$ExternalSyntheticOutline0.m((Number) stateFlowImpl.getValue(), 1L, stateFlowImpl, null);
                     }
                 }
                 this.mHeadsUpVisibleOnDown = false;
-                boolean isPanelExpanded = isPanelExpanded();
+                boolean zIsPanelExpanded = isPanelExpanded();
                 ViewRootImpl viewRootImpl = notificationPanelView.getRootView().getViewRootImpl();
                 int i6 = this.mBarState;
                 if (viewRootImpl != null) {
-                    viewRootImpl.setDisableSuperHdr(new SurfaceControl.Transaction(), i6 == 0 ? isPanelExpanded : false);
+                    viewRootImpl.setDisableSuperHdr(new SurfaceControl.Transaction(), i6 == 0 ? zIsPanelExpanded : false);
                 }
             }
         }
@@ -3622,12 +5994,12 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
 
     public final void onEmptySpaceClick(float f, float f2) {
         NotificationPanelViewController$$ExternalSyntheticLambda18 notificationPanelViewController$$ExternalSyntheticLambda18 = this.mPostCollapseRunnable;
-        boolean isEnabled = SecPanelSplitHelper.isEnabled();
+        boolean zIsEnabled = SecPanelSplitHelper.isEnabled();
         QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
         NotificationPanelView notificationPanelView = this.mView;
         NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.mNotificationStackScrollLayoutController;
-        if (!isEnabled) {
-            if (this.mBarState == 0) {
+        if (!zIsEnabled) {
+            if (this.mBarState != 1) {
                 notificationStackScrollLayoutController.getClass();
                 int i = SceneContainerFlag.$r8$clinit;
                 RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
@@ -3656,7 +6028,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    public void onFinishInflate() {
+    public void onFinishInflate() throws Resources.NotFoundException {
         FaceWidgetContainerWrapper faceWidgetContainerWrapper;
         FaceWidgetKeyguardStatusCallbackWrapper faceWidgetKeyguardStatusCallbackWrapper;
         EmergencyButton emergencyButton;
@@ -3673,9 +6045,9 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.mKeyguardSecBottomAreaViewController;
         KeyguardSecBottomAreaView view = keyguardSecBottomAreaViewController.getView();
         this.mKeyguardSecBottomArea = view;
-        NotificationPanelViewController$$ExternalSyntheticLambda36 notificationPanelViewController$$ExternalSyntheticLambda36 = new NotificationPanelViewController$$ExternalSyntheticLambda36(keyguardSecBottomAreaViewController, 1);
+        NotificationPanelViewController$$ExternalSyntheticLambda43 notificationPanelViewController$$ExternalSyntheticLambda43 = new NotificationPanelViewController$$ExternalSyntheticLambda43(keyguardSecBottomAreaViewController, 1);
         KeyguardIndicationController keyguardIndicationController = this.mKeyguardIndicationController;
-        keyguardIndicationController.mUpdatePosition = notificationPanelViewController$$ExternalSyntheticLambda36;
+        keyguardIndicationController.mUpdatePosition = notificationPanelViewController$$ExternalSyntheticLambda43;
         keyguardIndicationController.setIndicationArea((ViewGroup) view.findViewById(R.id.keyguard_indication_area));
         keyguardIndicationController.setUpperTextView((KeyguardIndicationTextView) this.mKeyguardSecBottomArea.findViewById(R.id.keyguard_upper_fingerprint_indication));
         if (CscRune.LOCKUI_BOTTOM_USIM_TEXT && (emergencyButton = this.mKeyguardSecBottomArea.emergencyButton) != null) {
@@ -3750,7 +6122,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         JavaAdapter javaAdapter = quickSettingsControllerImpl.mJavaAdapter;
         javaAdapter.alwaysCollectFlow(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$3, quickSettingsControllerImpl$$ExternalSyntheticLambda18);
         javaAdapter.alwaysCollectFlow(((CommunalTransitionViewModel) quickSettingsControllerImpl.mCommunalTransitionViewModelLazy.get()).isUmoOnCommunal, new QuickSettingsControllerImpl$$ExternalSyntheticLambda18(quickSettingsControllerImpl, 3));
-        this.mShadeHeadsUpTracker.addTrackingHeadsUpListener(new NotificationPanelViewController$$ExternalSyntheticLambda36(notificationStackScrollLayoutController, i3));
+        this.mShadeHeadsUpTracker.addTrackingHeadsUpListener(new NotificationPanelViewController$$ExternalSyntheticLambda43(notificationStackScrollLayoutController, i3));
         if (LsRune.SECURITY_FINGERPRINT_GUIDE_POPUP) {
             ViewStub viewStub2 = (ViewStub) notificationPanelView.findViewById(R.id.keyguard_fingerprint_guide_popup_stub);
             viewStub2.setLayoutResource(R.layout.keyguard_fingerprint_guide_popup);
@@ -3808,9 +6180,9 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         NotificationPanelViewController$$ExternalSyntheticLambda16 notificationPanelViewController$$ExternalSyntheticLambda16 = new NotificationPanelViewController$$ExternalSyntheticLambda16(this, 6);
         CoroutineDispatcher coroutineDispatcher = this.mMainDispatcher;
         JavaAdapterKt.collectFlow(notificationPanelView, keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1, notificationPanelViewController$$ExternalSyntheticLambda16, coroutineDispatcher);
-        Edge.StateToState m = KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.AOD, KeyguardState.LOCKSCREEN);
+        Edge.StateToState stateToStateM = KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.AOD, KeyguardState.LOCKSCREEN);
         KeyguardTransitionInteractor keyguardTransitionInteractor = this.mKeyguardTransitionInteractor;
-        JavaAdapterKt.collectFlow(notificationPanelView, keyguardTransitionInteractor.transition(m), new NotificationPanelViewController$$ExternalSyntheticLambda16(this, i4), coroutineDispatcher);
+        JavaAdapterKt.collectFlow(notificationPanelView, keyguardTransitionInteractor.transition(stateToStateM), new NotificationPanelViewController$$ExternalSyntheticLambda16(this, i4), coroutineDispatcher);
         JavaAdapterKt.collectFlow(notificationPanelView, keyguardTransitionInteractor.currentKeyguardState, new NotificationPanelViewController$$ExternalSyntheticLambda16(this, i2), coroutineDispatcher);
         JavaAdapterKt.collectFlow(notificationPanelView, this.mShadeAnimationInteractor.isLaunchingActivity, new NotificationPanelViewController$$ExternalSyntheticLambda16(this, i), coroutineDispatcher);
         int i6 = QSComposeFragment.$r8$clinit;
@@ -3823,14 +6195,27 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    public void onFlingEnd(boolean z) {
-        SecPanelSplitHelper secPanelSplitHelper;
+    public void onFlingEnd(boolean z) throws Resources.NotFoundException {
         this.mIsFlinging = false;
         this.mExpectingSynthesizedDown = false;
         setOverExpansionInternal(0.0f, false);
         SecNotificationPanelViewController secNotificationPanelViewController = this.mSecNotificationPanelViewController;
-        if (secNotificationPanelViewController != null && (secPanelSplitHelper = secNotificationPanelViewController.panelSplitHelper) != null) {
-            secPanelSplitHelper.isOnceOverExpanded = false;
+        if (secNotificationPanelViewController != null) {
+            SecPanelSplitHelper secPanelSplitHelper = secNotificationPanelViewController.panelSplitHelper;
+            if (secPanelSplitHelper != null) {
+                secPanelSplitHelper.isOnceOverExpanded = false;
+            }
+            if (z) {
+                boolean z2 = !isCollapsing() && isPanelExpanded();
+                ValueAnimator valueAnimator = this.mHeightAnimator;
+                if (valueAnimator != null) {
+                    float animatedFraction = valueAnimator.getAnimatedFraction();
+                    if (z2 && animatedFraction != 1.0f) {
+                        valueAnimator.end();
+                        Log.d("QuickPanelLog", "height animator fraction is " + animatedFraction + " while expanded, so make it end force");
+                    }
+                }
+            }
         }
         setAnimator(null);
         KeyguardStateControllerImpl keyguardStateControllerImpl = this.mKeyguardStateController;
@@ -3887,7 +6272,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         this.mKeyguardClockInteractor.getClass();
     }
 
-    public void onQsSetExpansionHeightCalled(boolean z) {
+    public void onQsSetExpansionHeightCalled(boolean z) throws Resources.NotFoundException {
         requestScrollerTopPaddingUpdate();
         this.mKeyguardStatusBarViewController.updateViewState();
         int i = this.mBarState;
@@ -3896,7 +6281,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             positionClockAndNotifications(false);
         }
         if (this.mAccessibilityManager.isEnabled()) {
-            this.mView.setAccessibilityPaneTitle(determineAccessibilityPaneTitle());
+            this.mView.getRootView().setAccessibilityPaneTitle(determineAccessibilityPaneTitle());
         }
         if (!this.mFalsingManager.isUnlockingDisabled() && z) {
             this.mFalsingCollector.getClass();
@@ -3998,17 +6383,17 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     @Override // com.android.systemui.pluginlock.listener.PluginLockListener.State
     public final Bundle onUiInfoRequested(boolean z) {
         new Bundle();
-        Bundle onUiInfoRequested = this.mKeyguardSecBottomAreaViewController.onUiInfoRequested(z);
+        Bundle bundleOnUiInfoRequested = this.mKeyguardSecBottomAreaViewController.onUiInfoRequested(z);
         NotificationPanelView notificationPanelView = this.mView;
         int i = Settings.System.getInt(notificationPanelView.getContext().getContentResolver(), SettingsHelper.INDEX_LOCKSCREEN_MINIMIZING_NOTIFICATION, 1);
-        onUiInfoRequested.putInt("noti_type", i);
-        onUiInfoRequested.putInt("noti_visibility", Settings.Secure.getInt(notificationPanelView.getContext().getContentResolver(), SettingsHelper.INDEX_LOCK_SCREEN_SHOW_NOTIFICATIONS, 1));
-        onUiInfoRequested.putInt("noti_top", getNotificationTopMargin(z));
+        bundleOnUiInfoRequested.putInt("noti_type", i);
+        bundleOnUiInfoRequested.putInt("noti_visibility", Settings.Secure.getInt(notificationPanelView.getContext().getContentResolver(), SettingsHelper.INDEX_LOCK_SCREEN_SHOW_NOTIFICATIONS, 1));
+        bundleOnUiInfoRequested.putInt("noti_top", getNotificationTopMargin(z));
         if (i != 0) {
-            onUiInfoRequested.putInt("noti_bottom", getNotificationTopMargin(z) + (z ? this.mResources.getDimensionPixelSize(R.dimen.keyguard_indication_dls_default_notification_height_land) : this.mResources.getDimensionPixelSize(R.dimen.keyguard_indication_dls_default_notification_height)));
+            bundleOnUiInfoRequested.putInt("noti_bottom", getNotificationTopMargin(z) + (z ? this.mResources.getDimensionPixelSize(R.dimen.keyguard_indication_dls_default_notification_height_land) : this.mResources.getDimensionPixelSize(R.dimen.keyguard_indication_dls_default_notification_height)));
         }
-        Log.d("NotificationPanelView", "onUiInfoRequested bottom: " + onUiInfoRequested.toString());
-        return onUiInfoRequested;
+        Log.d("NotificationPanelView", "onUiInfoRequested bottom: " + bundleOnUiInfoRequested.toString());
+        return bundleOnUiInfoRequested;
     }
 
     @Override // com.android.systemui.pluginlock.listener.PluginLockListener.State
@@ -4032,17 +6417,17 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     public final void positionClockAndNotifications(boolean z) {
-        int i;
+        int iUpdatePosition;
         PluginNotificationController pluginNotificationController;
         KeyguardClockPositionAlgorithm.Result result = this.mClockPositionResult;
         QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
-        boolean isKeyguardShowing$1 = isKeyguardShowing$1();
-        if (isKeyguardShowing$1 || z) {
+        boolean zIsKeyguardShowing$1 = isKeyguardShowing$1();
+        if (zIsKeyguardShowing$1 || z) {
             ClockSize clockSize = (this.mActiveNotificationsInteractor.getAreAnyNotificationsPresentValue() || this.mMediaDataManager.hasActiveMediaOrRecommendation()) ? ClockSize.SMALL : ClockSize.LARGE;
             KeyguardClockInteractor keyguardClockInteractor = this.mKeyguardClockInteractor;
             keyguardClockInteractor.getClass();
             RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
-            int i2 = SceneContainerFlag.$r8$clinit;
+            int i = SceneContainerFlag.$r8$clinit;
             KeyguardClockRepositoryImpl keyguardClockRepositoryImpl = (KeyguardClockRepositoryImpl) keyguardClockInteractor.keyguardClockRepository;
             keyguardClockRepositoryImpl.getClass();
             keyguardClockRepositoryImpl._clockSize.setValue(clockSize);
@@ -4052,26 +6437,26 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             updateClock$1();
         }
         LockscreenNotificationIconsOnlyController lockscreenNotificationIconsOnlyController = this.mLockscreenNotificationIconsOnlyController;
-        if (isKeyguardShowing$1) {
-            int i3 = result.stackScrollerPaddingExpanded;
+        if (zIsKeyguardShowing$1) {
+            int i2 = result.stackScrollerPaddingExpanded;
             boolean z2 = CscRune.KEYGUARD_DCM_LIVE_UX;
-            i = z2 ? result.stackScrollerPadding : i3;
+            iUpdatePosition = z2 ? result.stackScrollerPadding : i2;
             if (z2) {
-                i += this.mMascotViewContainer.updatePosition(i, (lockscreenNotificationIconsOnlyController == null || lockscreenNotificationIconsOnlyController.getIconContainer() == null) ? 0 : lockscreenNotificationIconsOnlyController.getIconContainer().getHeight());
+                iUpdatePosition += this.mMascotViewContainer.updatePosition(iUpdatePosition, (lockscreenNotificationIconsOnlyController == null || lockscreenNotificationIconsOnlyController.getIconContainer() == null) ? 0 : lockscreenNotificationIconsOnlyController.getIconContainer().getHeight());
             }
         } else {
-            i = quickSettingsControllerImpl.getHeaderHeight();
+            iUpdatePosition = quickSettingsControllerImpl.getHeaderHeight();
         }
         NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.mNotificationStackScrollLayoutController;
         notificationStackScrollLayoutController.getClass();
-        int i4 = SceneContainerFlag.$r8$clinit;
+        int i3 = SceneContainerFlag.$r8$clinit;
         RefactorFlagUtils refactorFlagUtils2 = RefactorFlagUtils.INSTANCE;
         NotificationStackScrollLayout notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
         notificationStackScrollLayout.getClass();
-        notificationStackScrollLayout.mIntrinsicPadding = i;
-        int i5 = this.mStackScrollerMeasuringPass + 1;
-        this.mStackScrollerMeasuringPass = i5;
-        if (i5 > 2) {
+        notificationStackScrollLayout.mIntrinsicPadding = iUpdatePosition;
+        int i4 = this.mStackScrollerMeasuringPass + 1;
+        this.mStackScrollerMeasuringPass = i4;
+        if (i4 > 2) {
             RecyclerView$$ExternalSyntheticOutline0.m(this.mStackScrollerMeasuringPass, "NotificationPanelView", new StringBuilder("increased StackScrollerMeasuringPass : "));
         }
         requestScrollerTopPaddingUpdate();
@@ -4084,7 +6469,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             if (!isOnAod()) {
                 LockscreenNotificationManager lockscreenNotificationManager = this.mLockscreenNotificationManager;
                 lockscreenNotificationManager.getClass();
-                if (!LockscreenNotificationManager.isNotificationIconsOnlyShowing() && (LockscreenNotificationManager.mCurrentNotificationType != 0 || lockscreenNotificationManager.mSettingNotificationType != 1)) {
+                int i5 = LockscreenNotificationManager.mCurrentNotificationType;
+                if (i5 != 1 && i5 != 3 && i5 != 2 && i5 != 4 && (i5 != 0 || lockscreenNotificationManager.mSettingNotificationType != 1)) {
                     return;
                 }
             }
@@ -4094,6 +6480,14 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             }
             pluginNotificationController.updateNotificationIconsOnlyPosition();
         }
+    }
+
+    public final View provideComplication() {
+        List list;
+        if (!DeviceState.isTablet() || (list = this.mKeyguardStatusBase.mContentsContainerList) == null || list.size() <= 2) {
+            return null;
+        }
+        return (View) list.get(2);
     }
 
     public void reInflateViews() {
@@ -4118,7 +6512,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     public final void requestScrollerTopPaddingUpdate() {
-        float max;
+        float fMax;
         int i = SceneContainerFlag.$r8$clinit;
         int keyguardNotificationStaticPadding = getKeyguardNotificationStaticPadding();
         QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
@@ -4126,16 +6520,16 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
         boolean z = quickSettingsControllerImpl.mBarState == 1;
         if (quickSettingsControllerImpl.mSizeChangeAnimator != null && !SecPanelSplitHelper.isEnabled()) {
-            max = Math.max(((Integer) quickSettingsControllerImpl.mSizeChangeAnimator.getAnimatedValue()).intValue(), keyguardNotificationStaticPadding);
+            fMax = Math.max(((Integer) quickSettingsControllerImpl.mSizeChangeAnimator.getAnimatedValue()).intValue(), keyguardNotificationStaticPadding);
         } else if (!z || quickSettingsControllerImpl.mAmbientState.mDragDownOnKeyguard) {
-            max = SecPanelSplitHelper.isEnabled() ? ((float) Math.max(r2.getNotificationsTopPadding((float) quickSettingsControllerImpl.mSecQuickSettingsControllerImpl.minExpansionHeightSupplier.getAsDouble()), quickSettingsControllerImpl.mQuickQsHeaderHeight)) + quickSettingsControllerImpl.mLastOverscroll : Math.max(quickSettingsControllerImpl.mQsFrameTranslateController.getNotificationsTopPadding(quickSettingsControllerImpl.mExpansionHeight), quickSettingsControllerImpl.mQuickQsHeaderHeight);
+            fMax = SecPanelSplitHelper.isEnabled() ? ((float) Math.max(r2.getNotificationsTopPadding((float) quickSettingsControllerImpl.mSecQuickSettingsControllerImpl.minExpansionHeightSupplier.getAsDouble()), quickSettingsControllerImpl.mQuickQsHeaderHeight)) + quickSettingsControllerImpl.mLastOverscroll : Math.max(quickSettingsControllerImpl.mQsFrameTranslateController.getNotificationsTopPadding(quickSettingsControllerImpl.mExpansionHeight), quickSettingsControllerImpl.mQuickQsHeaderHeight);
         } else {
-            max = MathUtils.lerp(keyguardNotificationStaticPadding, quickSettingsControllerImpl.mMaxExpansionHeight, quickSettingsControllerImpl.computeExpansionFraction());
+            fMax = MathUtils.lerp(keyguardNotificationStaticPadding, quickSettingsControllerImpl.mMaxExpansionHeight, quickSettingsControllerImpl.computeExpansionFraction());
         }
-        boolean isKeyguardShowing$1 = isKeyguardShowing$1();
+        boolean zIsKeyguardShowing$1 = isKeyguardShowing$1();
         SharedNotificationContainerInteractor sharedNotificationContainerInteractor = this.mSharedNotificationContainerInteractor;
         NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.mNotificationStackScrollLayoutController;
-        if (isKeyguardShowing$1) {
+        if (zIsKeyguardShowing$1) {
             int dimensionPixelSize = this.mView.getResources().getDimensionPixelSize(R.dimen.keyguard_margin_between_noti_indication);
             KeyguardClockPositionAlgorithm keyguardClockPositionAlgorithm = this.mClockPositionAlgorithm;
             if (keyguardClockPositionAlgorithm instanceof FaceWidgetPositionAlgorithmWrapper) {
@@ -4159,7 +6553,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         notificationStackScrollLayoutController.getClass();
         NotificationStackScrollLayout notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
         notificationStackScrollLayout.getClass();
-        int i2 = (int) max;
+        int i2 = (int) fMax;
         if (notificationStackScrollLayout.getLayoutMinHeightInternal() + i2 > notificationStackScrollLayout.getHeight()) {
             notificationStackScrollLayout.mTopPaddingOverflow = r7 - notificationStackScrollLayout.getHeight();
         } else {
@@ -4184,7 +6578,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             }
         }
         notificationStackScrollLayout.setExpandedHeight(notificationStackScrollLayout.mExpandedHeight);
-        sharedNotificationContainerInteractor._topPosition.updateState(null, Float.valueOf(max));
+        sharedNotificationContainerInteractor._topPosition.updateState(null, Float.valueOf(fMax));
         if (isKeyguardShowing$1() && this.mKeyguardBypassController.getBypassEnabled()) {
             quickSettingsControllerImpl.updateExpansion();
         }
@@ -4288,7 +6682,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     public final void setBouncerShowing(boolean z) {
         this.mBouncerShowing = z;
         if (z && this.mMediaNowBarExpandState == 1) {
-            new Handler(Looper.getMainLooper()).postDelayed(new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 10), 100L);
+            new Handler(Looper.getMainLooper()).postDelayed(new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 13), 100L);
         } else {
             updateVisibility();
         }
@@ -4299,8 +6693,14 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         this.mAmbientState.mIsClosing = z;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:39:0x009e  */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x00c8  */
     @Override // com.android.systemui.shade.ShadeSurface
-    public final void setDozing(boolean z, boolean z2) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void setDozing(boolean z, boolean z2) throws Resources.NotFoundException {
+        View view;
         if (z == this.mDozing) {
             return;
         }
@@ -4337,28 +6737,38 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         StatusBarStateControllerImpl statusBarStateControllerImpl = (StatusBarStateControllerImpl) this.mStatusBarStateController;
         statusBarStateControllerImpl.getClass();
         ValueAnimator valueAnimator = statusBarStateControllerImpl.mDarkAnimator;
-        if (valueAnimator != null && valueAnimator.isRunning()) {
-            if (!z2 || statusBarStateControllerImpl.mDozeAmountTarget != f) {
-                statusBarStateControllerImpl.mDarkAnimator.cancel();
+        if (valueAnimator == null || !valueAnimator.isRunning()) {
+            view = statusBarStateControllerImpl.mView;
+            if ((view != null || !view.isAttachedToWindow()) && notificationPanelView.isAttachedToWindow()) {
+                statusBarStateControllerImpl.mView = notificationPanelView;
             }
-            updateKeyguardStatusViewAlignment();
-        }
-        View view = statusBarStateControllerImpl.mView;
-        if ((view == null || !view.isAttachedToWindow()) && notificationPanelView.isAttachedToWindow()) {
-            statusBarStateControllerImpl.mView = notificationPanelView;
-        }
-        statusBarStateControllerImpl.mDozeAmountTarget = f;
-        if (z2) {
-            float f2 = statusBarStateControllerImpl.mDozeAmount;
-            if (f2 == 0.0f || f2 == 1.0f) {
-                statusBarStateControllerImpl.mDozeInterpolator = statusBarStateControllerImpl.mIsDozing ? Interpolators.FAST_OUT_SLOW_IN : Interpolators.TOUCH_RESPONSE_REVERSE;
+            statusBarStateControllerImpl.mDozeAmountTarget = f;
+            if (z2) {
+                float f2 = statusBarStateControllerImpl.mDozeAmount;
+                if (f2 == 0.0f || f2 == 1.0f) {
+                    statusBarStateControllerImpl.mDozeInterpolator = statusBarStateControllerImpl.mIsDozing ? Interpolators.FAST_OUT_SLOW_IN : Interpolators.TOUCH_RESPONSE_REVERSE;
+                }
+                if (f2 == 1.0f && !statusBarStateControllerImpl.mIsDozing) {
+                    statusBarStateControllerImpl.setDozeAmountInternal(0.99f);
+                }
+                statusBarStateControllerImpl.mDarkAnimator = statusBarStateControllerImpl.createDarkAnimator();
+            } else {
+                statusBarStateControllerImpl.setDozeAmountInternal(f);
             }
-            if (f2 == 1.0f && !statusBarStateControllerImpl.mIsDozing) {
-                statusBarStateControllerImpl.setDozeAmountInternal(0.99f);
+        } else if (!z2 || statusBarStateControllerImpl.mDozeAmountTarget != f) {
+            statusBarStateControllerImpl.mDarkAnimator.cancel();
+            view = statusBarStateControllerImpl.mView;
+            if (view != null) {
+                statusBarStateControllerImpl.mView = notificationPanelView;
+                statusBarStateControllerImpl.mDozeAmountTarget = f;
+                if (z2) {
+                }
+            } else {
+                statusBarStateControllerImpl.mView = notificationPanelView;
+                statusBarStateControllerImpl.mDozeAmountTarget = f;
+                if (z2) {
+                }
             }
-            statusBarStateControllerImpl.mDarkAnimator = statusBarStateControllerImpl.createDarkAnimator();
-        } else {
-            statusBarStateControllerImpl.setDozeAmountInternal(f);
         }
         updateKeyguardStatusViewAlignment();
     }
@@ -4368,9 +6778,9 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         if (str == null || str.isEmpty()) {
             return;
         }
-        DynamicLockData fromJSon = DynamicLockData.fromJSon(str);
-        if (fromJSon != null) {
-            this.mNotiCardCount = fromJSon.getNotificationData().getCardData().getNotiCardNumbers().intValue();
+        DynamicLockData dynamicLockDataFromJSon = DynamicLockData.fromJSon(str);
+        if (dynamicLockDataFromJSon != null) {
+            this.mNotiCardCount = dynamicLockDataFromJSon.getNotificationData().getCardData().getNotiCardNumbers().intValue();
         }
         LogUtil.d("NotificationPanelView", "setDynamicLockData card numbers: " + this.mNotiCardCount, new Object[0]);
     }
@@ -4387,24 +6797,24 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         if (Float.isNaN(f)) {
             Log.wtf("NotificationPanelView", "ExpandedHeight set to NaN");
         }
-        ((NotificationShadeWindowControllerImpl) this.mNotificationShadeWindowController).batchApplyWindowLayoutParams(new Runnable() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda41
+        ((NotificationShadeWindowControllerImpl) this.mNotificationShadeWindowController).batchApplyWindowLayoutParams(new Runnable() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda48
             @Override // java.lang.Runnable
-            public final void run() {
-                float calculatePanelHeightExpanded;
+            public final void run() throws Resources.NotFoundException {
+                float fCalculatePanelHeightExpanded;
                 StringBuilder sb;
-                NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
+                NotificationPanelViewController notificationPanelViewController = this.f$0;
                 float f2 = f;
                 if (notificationPanelViewController.mExpandLatencyTracking && f2 != 0.0f) {
-                    DejankUtils.postAfterTraversal(new NotificationPanelViewController$$ExternalSyntheticLambda18(notificationPanelViewController, 8));
+                    DejankUtils.postAfterTraversal(new NotificationPanelViewController$$ExternalSyntheticLambda18(notificationPanelViewController, 12));
                     notificationPanelViewController.mExpandLatencyTracking = false;
                 }
                 float maxPanelTransitionDistance = notificationPanelViewController.getMaxPanelTransitionDistance();
                 if (SecPanelSplitHelper.isEnabled() && notificationPanelViewController.mHeightAnimator == null && notificationPanelViewController.isTracking()) {
                     notificationPanelViewController.setOverExpansionInternal(Math.max(0.0f, f2 - maxPanelTransitionDistance), true);
                 }
-                float min = Math.min(f2, maxPanelTransitionDistance);
-                notificationPanelViewController.mExpandedHeight = min;
-                if (min < 1.0f && min != 0.0f && notificationPanelViewController.isClosing()) {
+                float fMin = Math.min(f2, maxPanelTransitionDistance);
+                notificationPanelViewController.mExpandedHeight = fMin;
+                if (fMin < 1.0f && fMin != 0.0f && notificationPanelViewController.isClosing()) {
                     notificationPanelViewController.mExpandedHeight = 0.0f;
                     ValueAnimator valueAnimator = notificationPanelViewController.mHeightAnimator;
                     if (valueAnimator != null) {
@@ -4414,7 +6824,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 boolean z = notificationPanelViewController.mHeightAnimator == null;
                 float f3 = notificationPanelViewController.mExpandedHeight;
                 float f4 = notificationPanelViewController.mExpandedFraction;
-                float min2 = Math.min(1.0f, maxPanelTransitionDistance == 0.0f ? 0.0f : f3 / maxPanelTransitionDistance);
+                float fMin2 = Math.min(1.0f, maxPanelTransitionDistance == 0.0f ? 0.0f : f3 / maxPanelTransitionDistance);
                 QuickPanelLogger quickPanelLogger = notificationPanelViewController.mQuickPanelLogger;
                 if (quickPanelLogger != null && (sb = notificationPanelViewController.mQuickPanelLogBuilder) != null && ((Float.compare(f4, 0.0f) == 0 && Float.compare(notificationPanelViewController.mExpandedFraction, 0.0f) > 0) || (Float.compare(f4, 0.0f) > 0 && Float.compare(notificationPanelViewController.mExpandedFraction, 0.0f) == 0))) {
                     sb.setLength(0);
@@ -4434,20 +6844,20 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                     sb.append(", expandedFraction: ");
                     sb.append(f4);
                     sb.append(" -> ");
-                    sb.append(min2);
+                    sb.append(fMin2);
                     quickPanelLogger.logPanelState(sb.toString());
                 }
-                float min3 = Math.min(1.0f, maxPanelTransitionDistance == 0.0f ? 0.0f : notificationPanelViewController.mExpandedHeight / maxPanelTransitionDistance);
-                notificationPanelViewController.mExpandedFraction = min3;
-                if (min3 > 0.0f && notificationPanelViewController.mExpectingSynthesizedDown) {
+                float fMin3 = Math.min(1.0f, maxPanelTransitionDistance == 0.0f ? 0.0f : notificationPanelViewController.mExpandedHeight / maxPanelTransitionDistance);
+                notificationPanelViewController.mExpandedFraction = fMin3;
+                if (fMin3 > 0.0f && notificationPanelViewController.mExpectingSynthesizedDown) {
                     notificationPanelViewController.mExpectingSynthesizedDown = false;
                 }
                 float f5 = notificationPanelViewController.mExpandedHeight;
                 QuickSettingsControllerImpl quickSettingsControllerImpl = notificationPanelViewController.mQsController;
                 quickSettingsControllerImpl.mShadeExpandedHeight = f5;
-                quickSettingsControllerImpl.mShadeExpandedFraction = min3;
+                quickSettingsControllerImpl.mShadeExpandedFraction = fMin3;
                 quickSettingsControllerImpl.mMediaHierarchyManager.getClass();
-                ((ShadeRepositoryImpl) notificationPanelViewController.mShadeRepository)._legacyShadeExpansion.updateState(null, Float.valueOf(min3));
+                ((ShadeRepositoryImpl) notificationPanelViewController.mShadeRepository)._legacyShadeExpansion.updateState(null, Float.valueOf(fMin3));
                 notificationPanelViewController.mExpansionDragDownAmountPx = f2;
                 int i = SceneContainerFlag.$r8$clinit;
                 float f6 = notificationPanelViewController.mExpandedFraction;
@@ -4463,7 +6873,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 }
                 if (quickSettingsControllerImpl.isExpandImmediate() || (quickSettingsControllerImpl.getExpanded() && !quickSettingsControllerImpl.isTracking() && quickSettingsControllerImpl.mExpansionAnimator == null && !quickSettingsControllerImpl.mExpansionFromOverscroll)) {
                     if (notificationPanelViewController.isKeyguardShowing$1()) {
-                        calculatePanelHeightExpanded = f7 / notificationPanelViewController.getMaxPanelHeight();
+                        fCalculatePanelHeightExpanded = f7 / notificationPanelViewController.getMaxPanelHeight();
                     } else {
                         NotificationStackScrollLayoutController notificationStackScrollLayoutController = notificationPanelViewController.mNotificationStackScrollLayoutController;
                         notificationStackScrollLayoutController.getClass();
@@ -4473,22 +6883,22 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                         float f8 = notificationStackScrollLayout.mIntrinsicPadding;
                         notificationStackScrollLayoutController.mView.getClass();
                         float layoutMinHeightInternal = r1.getLayoutMinHeightInternal() + f8;
-                        calculatePanelHeightExpanded = (f7 - layoutMinHeightInternal) / (quickSettingsControllerImpl.calculatePanelHeightExpanded(notificationPanelViewController.mClockPositionResult.stackScrollerPadding) - layoutMinHeightInternal);
+                        fCalculatePanelHeightExpanded = (f7 - layoutMinHeightInternal) / (quickSettingsControllerImpl.calculatePanelHeightExpanded(notificationPanelViewController.mClockPositionResult.stackScrollerPadding) - layoutMinHeightInternal);
                     }
-                    quickSettingsControllerImpl.setExpansionHeight((calculatePanelHeightExpanded * (quickSettingsControllerImpl.mMaxExpansionHeight - r4)) + quickSettingsControllerImpl.mMinExpansionHeight);
+                    quickSettingsControllerImpl.setExpansionHeight((fCalculatePanelHeightExpanded * (quickSettingsControllerImpl.mMaxExpansionHeight - r4)) + quickSettingsControllerImpl.mMinExpansionHeight);
                 }
                 if (QpRune.QUICK_DATA_USAGE_LABEL) {
                     DataUsageLabelManager dataUsageLabelManager = (DataUsageLabelManager) notificationPanelViewController.mDataUsageLabelManagerLazy.get();
                     DataUsageLabelParent dataUsageLabelParent = dataUsageLabelManager.mDataUsageLabelParent;
-                    float min4 = Math.min(1.0f, f7 / dataUsageLabelParent.mMaxPanelHeightSupplier.getAsInt());
+                    float fMin4 = Math.min(1.0f, f7 / dataUsageLabelParent.mMaxPanelHeightSupplier.getAsInt());
                     ViewGroup parentViewGroup = dataUsageLabelParent.getParentViewGroup();
-                    if (Float.compare(min4, 1.0f) == 0 && !dataUsageLabelManager.mLabelAlphaAnimStarted) {
+                    if (Float.compare(fMin4, 1.0f) == 0 && !dataUsageLabelManager.mLabelAlphaAnimStarted) {
                         dataUsageLabelManager.mLabelAlphaAnimStarted = true;
                         dataUsageLabelManager.animateLabelAlpha(parentViewGroup, true);
-                    } else if (min4 < 1.0f && dataUsageLabelManager.mLabelAlphaAnimStarted) {
+                    } else if (fMin4 < 1.0f && dataUsageLabelManager.mLabelAlphaAnimStarted) {
                         dataUsageLabelManager.mLabelAlphaAnimStarted = false;
                         dataUsageLabelManager.animateLabelAlpha(parentViewGroup, false);
-                    } else if (min4 == 0.0f) {
+                    } else if (fMin4 == 0.0f) {
                         dataUsageLabelManager.mLabelAlphaAnimStarted = false;
                     }
                 }
@@ -4523,9 +6933,9 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     public final void setKeyguardSecBottomAreaVisibility(int i, boolean z) {
         this.mKeyguardSecBottomArea.animate().cancel();
         if (z) {
-            ViewPropertyAnimator alpha = this.mKeyguardSecBottomArea.animate().alpha(0.0f);
+            ViewPropertyAnimator viewPropertyAnimatorAlpha = this.mKeyguardSecBottomArea.animate().alpha(0.0f);
             KeyguardStateControllerImpl keyguardStateControllerImpl = this.mKeyguardStateController;
-            ViewPropertyAnimator startDelay = alpha.setStartDelay(keyguardStateControllerImpl.mKeyguardFadingAwayDelay);
+            ViewPropertyAnimator startDelay = viewPropertyAnimatorAlpha.setStartDelay(keyguardStateControllerImpl.mKeyguardFadingAwayDelay);
             keyguardStateControllerImpl.getClass();
             startDelay.setDuration(keyguardStateControllerImpl.mKeyguardFadingAwayDuration / 2).setInterpolator(Interpolators.ALPHA_OUT).withEndAction(this.mAnimateKeyguardBottomAreaInvisibleEndRunnable).start();
             return;
@@ -4557,7 +6967,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     @Override // com.android.systemui.shade.domain.interactor.ShadeLockscreenInteractor
-    public final void setKeyguardStatusBarAlpha() {
+    public final void setKeyguardStatusBarAlpha() throws Resources.NotFoundException {
         this.mKeyguardStatusBarViewController.setAlpha(-1.0f);
     }
 
@@ -4612,7 +7022,6 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
 
     public void setOverExpansion(float f) {
         PanelPopOverManager panelPopOverManager;
-        int i;
         SecPanelSplitHelper secPanelSplitHelper;
         if (!SecPanelSplitHelper.isEnabled()) {
             this.mOverExpansion = 0.0f;
@@ -4623,17 +7032,17 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
         this.mOverExpansion = f;
         QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
-        int i2 = ((NotificationPanelViewController) quickSettingsControllerImpl.mPanelViewControllerLazy.get()).mNavigationBarBottomHeight;
-        int i3 = quickSettingsControllerImpl.mAmbientState.mStackTopMargin;
+        int i = ((NotificationPanelViewController) quickSettingsControllerImpl.mPanelViewControllerLazy.get()).mNavigationBarBottomHeight;
+        int i2 = quickSettingsControllerImpl.mAmbientState.mStackTopMargin;
         quickSettingsControllerImpl.mQsFrameTranslateController.getClass();
         this.mNotificationStackScrollLayoutController.setOverExpansion(f);
         SecNotificationPanelViewController secNotificationPanelViewController = this.mSecNotificationPanelViewController;
         if (secNotificationPanelViewController != null) {
             float f2 = (int) f;
-            int i4 = (int) f2;
+            int i3 = (int) f2;
             QS qs = secNotificationPanelViewController.quickSettingsController.mQs;
             if (qs != null) {
-                qs.setOverScrollAmount(i4);
+                qs.setOverScrollAmount(i3);
             }
             if (f2 > 15.0f && (secPanelSplitHelper = secNotificationPanelViewController.panelSplitHelper) != null) {
                 secPanelSplitHelper.isOnceOverExpanded = true;
@@ -4642,21 +7051,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         if (!QpRune.QUICK_PANEL_CODE_FOR_POP_OVER || (panelPopOverManager = this.mPanelPopOverManager) == null) {
             return;
         }
-        float dimension = ((int) f) / (panelPopOverManager.context.getResources().getDimension(R.dimen.panel_overshoot_amount) * 1.5f);
-        boolean isTablet = ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
-        BarOrderInteractor barOrderInteractor = panelPopOverManager.barOrderInteractor;
-        panelPopOverManager.overExpansionAmount = (int) (dimension * (isTablet ? barOrderInteractor.getBarViewsByOrder() : panelPopOverManager.context.getResources().getConfiguration().orientation == 2 ? barOrderInteractor.landscapeBars : barOrderInteractor.getBarViewsByOrder()).size() * 20);
-        SecPanelSplitHelper secPanelSplitHelper2 = panelPopOverManager.panelSplitHelper;
-        if (secPanelSplitHelper2.enabled) {
-            int i5 = secPanelSplitHelper2.currentState;
-            i = i5 != 2 ? i5 : secPanelSplitHelper2.draggedFraction < 0.5f ? secPanelSplitHelper2.stateOnDown : secPanelSplitHelper2.stateToChange;
-        } else {
-            i = 3;
-        }
-        if (i == 0) {
-            View view = panelPopOverManager.qsPanelView;
-            panelPopOverManager.setBlurArea(view != null ? view.getWidth() : 0, panelPopOverManager.getPopOverHeight());
-        }
+        panelPopOverManager.setOverScrollAmount((int) f);
     }
 
     public final void setOverExpansionInternal(float f, boolean z) {
@@ -4665,13 +7060,13 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             setOverExpansion(f);
         } else if (this.mLastGesturedOverExpansion != f) {
             this.mLastGesturedOverExpansion = f;
-            float saturate = MathUtils.saturate(f / (this.mView.getHeight() / 3.0f));
+            float fSaturate = MathUtils.saturate(f / (this.mView.getHeight() / 3.0f));
             Interpolator interpolator = Interpolators.EMPHASIZED;
-            float exp = (float) (1.0d - Math.exp(saturate * (-4.0f)));
-            if (0.0f > exp) {
-                exp = 0.0f;
+            float fExp = (float) (1.0d - Math.exp(fSaturate * (-4.0f)));
+            if (0.0f > fExp) {
+                fExp = 0.0f;
             }
-            setOverExpansion(exp * this.mPanelFlingOvershootAmount * 1.5f);
+            setOverExpansion(fExp * this.mPanelFlingOvershootAmount * 1.5f);
         }
     }
 
@@ -4679,11 +7074,11 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     public final void setOverStretchAmount(float f) {
         float height = f / this.mView.getHeight();
         Interpolator interpolator = Interpolators.EMPHASIZED;
-        float exp = (float) (1.0d - Math.exp(height * (-4.0f)));
-        if (0.0f > exp) {
-            exp = 0.0f;
+        float fExp = (float) (1.0d - Math.exp(height * (-4.0f)));
+        if (0.0f > fExp) {
+            fExp = 0.0f;
         }
-        this.mOverStretchAmount = exp * this.mMaxOverscrollAmountForPulse;
+        this.mOverStretchAmount = fExp * this.mMaxOverscrollAmountForPulse;
         positionClockAndNotifications(true);
     }
 
@@ -4747,7 +7142,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     @Override // com.android.systemui.shade.ShadeSurface
-    public final void setTouchAndAnimationDisabled(boolean z) {
+    public final void setTouchAndAnimationDisabled(boolean z) throws Resources.NotFoundException {
         QuickPanelLogger quickPanelLogger = this.mQuickPanelLogger;
         if (quickPanelLogger != null) {
             quickPanelLogger.logPanelState("setTouchAndAnimationDisabled: " + this.mTouchDisabled + " -> " + z);
@@ -4801,7 +7196,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                         dcmMascotViewContainer.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.DcmMascotViewContainer$updateDelayed$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                DcmMascotViewContainer.this.setMascotViewVisible(0);
+                                dcmMascotViewContainer.setMascotViewVisible(0);
                             }
                         }, IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, TimeUnit.MILLISECONDS);
                     }
@@ -4849,114 +7244,49 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x007d  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0071  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final boolean shouldPanelBeVisible() {
-        /*
-            r7 = this;
-            boolean r0 = r7.mHeadsUpAnimatingAway
-            r1 = 1
-            r2 = 0
-            if (r0 != 0) goto Ld
-            boolean r0 = r7.mHeadsUpPinnedMode
-            if (r0 == 0) goto Lb
-            goto Ld
-        Lb:
-            r0 = r2
-            goto Le
-        Ld:
-            r0 = r1
-        Le:
-            int r3 = r7.mPanelInVisibleReason
-            r4 = -1
-            r7.mPanelInVisibleReason = r4
-            if (r0 != 0) goto L71
-            r7.mPanelInVisibleReason = r4
-            boolean r4 = r7.isExpanded()
-            if (r4 != 0) goto L1f
-            r7.mPanelInVisibleReason = r2
-        L1f:
-            boolean r5 = r7.mBouncerShowing
-            if (r5 == 0) goto L26
-            r7.mPanelInVisibleReason = r1
-            r4 = r2
-        L26:
-            boolean r5 = com.android.systemui.LsRune.KEYGUARD_SUB_DISPLAY_LOCK
-            if (r5 == 0) goto L42
-            if (r4 == 0) goto L42
-            com.android.systemui.Dependency r5 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.android.systemui.keyguard.KeyguardFoldController> r6 = com.android.systemui.keyguard.KeyguardFoldController.class
-            java.lang.Object r5 = r5.getDependencyInner(r6)
-            com.android.systemui.keyguard.KeyguardFoldController r5 = (com.android.systemui.keyguard.KeyguardFoldController) r5
-            com.android.systemui.keyguard.KeyguardFoldControllerImpl r5 = (com.android.systemui.keyguard.KeyguardFoldControllerImpl) r5
-            boolean r5 = r5.isUnlockOnFoldOpened()
-            if (r5 == 0) goto L42
-            r4 = 2
-            r7.mPanelInVisibleReason = r4
-            r4 = r2
-        L42:
-            boolean r5 = com.android.systemui.LsRune.SECURITY_SWIPE_BOUNCER
-            if (r5 == 0) goto L5e
-            if (r4 == 0) goto L5e
-            com.android.systemui.Dependency r5 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.android.systemui.statusbar.policy.KeyguardStateController> r6 = com.android.systemui.statusbar.policy.KeyguardStateController.class
-            java.lang.Object r5 = r5.getDependencyInner(r6)
-            com.android.systemui.statusbar.policy.KeyguardStateController r5 = (com.android.systemui.statusbar.policy.KeyguardStateController) r5
-            com.android.systemui.statusbar.policy.KeyguardStateControllerImpl r5 = (com.android.systemui.statusbar.policy.KeyguardStateControllerImpl) r5
-            boolean r5 = r5.isShownSwipeBouncer()
-            if (r5 == 0) goto L5e
-            r4 = 3
-            r7.mPanelInVisibleReason = r4
-            r4 = r2
-        L5e:
-            boolean r5 = r7.isKeyguardShowing$1()
-            if (r5 == 0) goto L6c
-            boolean r5 = r7.mFullScreenModeEnabled
-            if (r5 == 0) goto L6c
-            r4 = 5
-            r7.mPanelInVisibleReason = r4
-            r4 = r2
-        L6c:
-            if (r4 == 0) goto L6f
-            goto L71
-        L6f:
-            r4 = r2
-            goto L72
-        L71:
-            r4 = r1
-        L72:
-            int r5 = r7.mPanelInVisibleReason
-            com.android.systemui.shade.NotificationPanelView r7 = r7.mView
-            int r7 = r7.getVisibility()
-            if (r7 != 0) goto L7d
-            goto L7e
-        L7d:
-            r1 = r2
-        L7e:
-            if (r1 != r4) goto L86
-            if (r4 != 0) goto L85
-            if (r3 == r5) goto L85
-            goto L86
-        L85:
-            return r4
-        L86:
-            java.lang.Boolean r7 = java.lang.Boolean.valueOf(r4)
-            java.lang.Boolean r0 = java.lang.Boolean.valueOf(r0)
-            java.lang.Integer r1 = java.lang.Integer.valueOf(r5)
-            java.lang.Object[] r7 = new java.lang.Object[]{r7, r0, r1}
-            java.lang.String r0 = "KeyguardVisible"
-            java.lang.String r1 = "shouldPanelBeVisible %b / headUpVisible=%b, why=%d"
-            com.android.systemui.keyguard.Log.d(r0, r1, r7)
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.NotificationPanelViewController.shouldPanelBeVisible():boolean");
+        boolean z;
+        boolean z2 = this.mHeadsUpAnimatingAway || this.mHeadsUpPinnedMode;
+        int i = this.mPanelInVisibleReason;
+        this.mPanelInVisibleReason = -1;
+        if (!z2) {
+            this.mPanelInVisibleReason = -1;
+            boolean zIsExpanded = isExpanded();
+            if (!zIsExpanded) {
+                this.mPanelInVisibleReason = 0;
+            }
+            if (this.mBouncerShowing) {
+                this.mPanelInVisibleReason = 1;
+                zIsExpanded = false;
+            }
+            if (LsRune.KEYGUARD_SUB_DISPLAY_LOCK && zIsExpanded && ((KeyguardFoldControllerImpl) ((KeyguardFoldController) Dependency.sDependency.getDependencyInner(KeyguardFoldController.class))).isUnlockOnFoldOpened()) {
+                this.mPanelInVisibleReason = 2;
+                zIsExpanded = false;
+            }
+            if (LsRune.SECURITY_SWIPE_BOUNCER && zIsExpanded && ((KeyguardStateControllerImpl) ((KeyguardStateController) Dependency.sDependency.getDependencyInner(KeyguardStateController.class))).isShownSwipeBouncer()) {
+                this.mPanelInVisibleReason = 3;
+                zIsExpanded = false;
+            }
+            if (isKeyguardShowing$1() && this.mFullScreenModeEnabled) {
+                this.mPanelInVisibleReason = 5;
+                zIsExpanded = false;
+            }
+            z = zIsExpanded;
+        }
+        int i2 = this.mPanelInVisibleReason;
+        if ((this.mView.getVisibility() == 0) == z && (z || i == i2)) {
+            return z;
+        }
+        com.android.systemui.keyguard.Log.d("KeyguardVisible", "shouldPanelBeVisible %b / headUpVisible=%b, why=%d", Boolean.valueOf(z), Boolean.valueOf(z2), Integer.valueOf(i2));
+        return z;
     }
 
     @Override // com.android.systemui.shade.domain.interactor.ShadeLockscreenInteractor
-    public final void showAodUi() {
+    public final void showAodUi() throws Resources.NotFoundException {
         setDozing(true, false);
         SysuiStatusBarStateController sysuiStatusBarStateController = this.mStatusBarStateController;
         StatusBarStateControllerImpl statusBarStateControllerImpl = (StatusBarStateControllerImpl) sysuiStatusBarStateController;
@@ -5077,22 +7407,22 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
         FaceWidgetContainerWrapper faceWidgetContainerWrapper2 = this.mKeyguardStatusBase;
         float fractionToShade = lockscreenShadeTransitionController.getFractionToShade();
-        float interpolate = NotificationUtils.interpolate(1.0f, 0.0f, ((double) fractionToShade) > 0.5d ? 1.0f : fractionToShade * 2.0f);
+        float fInterpolate = NotificationUtils.interpolate(1.0f, 0.0f, ((double) fractionToShade) > 0.5d ? 1.0f : fractionToShade * 2.0f);
         KeyguardSecVisibilityHelper keyguardSecVisibilityHelper2 = faceWidgetContainerWrapper2.mKeyguardSecVisibilityHelper;
         if (keyguardSecVisibilityHelper2 == null || keyguardSecVisibilityHelper2.isVisibilityAnimating) {
             return;
         }
         View view2 = faceWidgetContainerWrapper2.mFaceWidgetContainer;
         if (view2 != null) {
-            view2.setAlpha(interpolate);
+            view2.setAlpha(fInterpolate);
         }
         KeyguardStatusViewAlphaChangeControllerWrapper keyguardStatusViewAlphaChangeControllerWrapper2 = faceWidgetContainerWrapper2.mKeyguardStatusViewAlphaChangeControllerWrapper;
         if (keyguardStatusViewAlphaChangeControllerWrapper2 != null) {
-            keyguardStatusViewAlphaChangeControllerWrapper2.updateAlpha(interpolate);
+            keyguardStatusViewAlphaChangeControllerWrapper2.updateAlpha(fInterpolate);
         }
     }
 
-    public final void updateDozingVisibilities(boolean z) {
+    public final void updateDozingVisibilities(boolean z) throws Resources.NotFoundException {
         ((KeyguardRepositoryImpl) this.mKeyguardInteractor.repository)._animateBottomAreaDozingTransitions.updateState(null, Boolean.valueOf(z));
         this.mKeyguardSecBottomArea.setVisibility(0);
         PluginFaceWidgetManager pluginFaceWidgetManager = (PluginFaceWidgetManager) Dependency.sDependency.getDependencyInner(PluginFaceWidgetManager.class);
@@ -5155,9 +7485,9 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         int height;
         int i;
         EmptyShadeView emptyShadeView;
-        boolean isTracking = isTracking();
+        boolean zIsTracking = isTracking();
         NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.mNotificationStackScrollLayoutController;
-        if (isTracking) {
+        if (zIsTracking) {
             this.mVelocityTracker.computeCurrentVelocity(1000);
             float yVelocity = this.mVelocityTracker.getYVelocity();
             NotificationStackScrollLayout notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
@@ -5235,8 +7565,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         StringBuilder sb;
         int i = SceneContainerFlag.$r8$clinit;
         float f = this.mExpandedFraction;
-        boolean isExpanded = isExpanded();
-        boolean isTracking = isTracking();
+        boolean zIsExpanded = isExpanded();
+        boolean zIsTracking = isTracking();
         ShadeExpansionStateManager shadeExpansionStateManager = this.mShadeExpansionStateManager;
         shadeExpansionStateManager.getClass();
         if (Float.isNaN(f)) {
@@ -5244,9 +7574,9 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
         int i2 = shadeExpansionStateManager.state;
         shadeExpansionStateManager.fraction = f;
-        shadeExpansionStateManager.expanded = isExpanded;
-        shadeExpansionStateManager.tracking = isTracking;
-        if (isExpanded) {
+        shadeExpansionStateManager.expanded = zIsExpanded;
+        shadeExpansionStateManager.tracking = zIsTracking;
+        if (zIsExpanded) {
             if (i2 == 0) {
                 shadeExpansionStateManager.updateStateInternal(1);
             }
@@ -5256,9 +7586,9 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             z = false;
             z2 = true;
         }
-        if (z && !isTracking) {
+        if (z && !zIsTracking) {
             shadeExpansionStateManager.updateStateInternal(2);
-        } else if (z2 && !isTracking && shadeExpansionStateManager.state != 0) {
+        } else if (z2 && !zIsTracking && shadeExpansionStateManager.state != 0) {
             shadeExpansionStateManager.updateStateInternal(0);
         }
         ShadeExpansionStateManagerKt.panelStateToString(i2);
@@ -5271,7 +7601,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             TrackTracer.Companion.instantForGroup((int) (100 * f), "shade", "panel_expansion");
             shadeExpansionStateManager.stateLogger.log(ShadeExpansionStateManagerKt.panelStateToString(shadeExpansionStateManager.state));
         }
-        ShadeExpansionChangeEvent shadeExpansionChangeEvent = new ShadeExpansionChangeEvent(f, isExpanded, isTracking);
+        ShadeExpansionChangeEvent shadeExpansionChangeEvent = new ShadeExpansionChangeEvent(f, zIsExpanded, zIsTracking);
         ShadeExpansionChangeEvent shadeExpansionChangeEvent2 = shadeExpansionStateManager.oldFraction == f ? null : shadeExpansionChangeEvent;
         if (shadeExpansionChangeEvent2 != null) {
             shadeExpansionStateManager.oldFraction = f;
@@ -5312,8 +7642,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     public final void updateGestureExclusionRect() {
-        Region calculateTouchableRegion = this.mShadeTouchableRegionManager.calculateTouchableRegion();
-        Rect bounds = (!isFullyCollapsed() || calculateTouchableRegion == null) ? null : calculateTouchableRegion.getBounds();
+        Region regionCalculateTouchableRegion = this.mShadeTouchableRegionManager.calculateTouchableRegion();
+        Rect bounds = (!isFullyCollapsed() || regionCalculateTouchableRegion == null) ? null : regionCalculateTouchableRegion.getBounds();
         if (bounds == null) {
             bounds = EMPTY_RECT;
         }
@@ -5327,9 +7657,9 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         if (this.mBarState != 1 || this.mKeyguardTouchAnimator.isViRunning() || this.mIsOcclusionTransitionRunning) {
             return;
         }
-        float constrainedMap = MathUtils.constrainedMap(0.0f, 1.0f, 0.95f, 1.0f, this.mExpandedFraction);
+        float fConstrainedMap = MathUtils.constrainedMap(0.0f, 1.0f, 0.95f, 1.0f, this.mExpandedFraction);
         LockscreenShadeTransitionController lockscreenShadeTransitionController = this.mLockscreenShadeTransitionController;
-        float min = Math.min(constrainedMap, 1.0f - lockscreenShadeTransitionController.getFractionToShade());
+        float fMin = Math.min(fConstrainedMap, 1.0f - lockscreenShadeTransitionController.getFractionToShade());
         KeyguardSecAffordanceHelper keyguardSecAffordanceHelper = this.mSecAffordanceHelper;
         if (!keyguardSecAffordanceHelper.mPreviewAnimationStarted) {
             KeyguardSecAffordanceView keyguardSecAffordanceView = keyguardSecAffordanceHelper.mLeftIcon;
@@ -5341,12 +7671,12 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                     KeyguardSecAffordanceHelper keyguardSecAffordanceHelper2 = this.mSecAffordanceHelper;
                     KeyguardSecAffordanceView leftView = this.mKeyguardSecBottomArea.getLeftView();
                     keyguardSecAffordanceHelper2.getClass();
-                    leftView.setImageAlpha(Math.min(1.0f, min), false);
+                    leftView.setImageAlpha(Math.min(1.0f, fMin), false);
                     leftView.setImageScale(1.0f, false);
                     KeyguardSecAffordanceHelper keyguardSecAffordanceHelper3 = this.mSecAffordanceHelper;
                     KeyguardSecAffordanceView rightView = this.mKeyguardSecBottomArea.getRightView();
                     keyguardSecAffordanceHelper3.getClass();
-                    rightView.setImageAlpha(Math.min(1.0f, min), false);
+                    rightView.setImageAlpha(Math.min(1.0f, fMin), false);
                     rightView.setImageScale(1.0f, false);
                 }
             }
@@ -5380,7 +7710,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
 
     public final void updateKeyguardStatusViewAlignment() {
         final boolean z = true;
-        this.mKeyguardUnfoldTransition.ifPresent(new Consumer() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda42
+        this.mKeyguardUnfoldTransition.ifPresent(new Consumer() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda49
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
@@ -5460,7 +7790,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                 this.mQsController.closeQsCustomizer();
             }
         }
-        if (QpRune.QUICK_PANEL_CODE_FOR_POP_OVER && (panelPopOverManager = this.mPanelPopOverManager) != null && z && panelPopOverManager.getNeedToPopOver() && !panelPopOverManager.isPopOverAreaListenerAdded) {
+        if (QpRune.QUICK_PANEL_CODE_FOR_POP_OVER && (panelPopOverManager = this.mPanelPopOverManager) != null && z && panelPopOverManager.getNeedToPopOver() && !panelPopOverManager.isPopOverAreaListenerAdded && panelPopOverManager.currentPanelState != 0) {
             Log.d("PanelPopOverManager", "addPopoverAreaListener");
             NotificationPanelView notificationPanelView = panelPopOverManager.mView;
             PanelPopOverManager$popOverInsetsListener$1 panelPopOverManager$popOverInsetsListener$1 = panelPopOverManager.popOverInsetsListener;
@@ -5475,16 +7805,22 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             NotificationPanelView notificationPanelView3 = panelPopOverManager.mView;
             panelPopOverManager.qsPanelView = notificationPanelView3 != null ? notificationPanelView3.findViewById(R.id.quick_settings_panel) : null;
             NotificationPanelView notificationPanelView4 = panelPopOverManager.mView;
-            panelPopOverManager.customizerView = notificationPanelView4 != null ? notificationPanelView4.findViewById(R.id.main_content) : null;
+            panelPopOverManager.qqsPanelView = notificationPanelView4 != null ? notificationPanelView4.findViewById(R.id.qs_container) : null;
             NotificationPanelView notificationPanelView5 = panelPopOverManager.mView;
-            panelPopOverManager.detailView = notificationPanelView5 != null ? notificationPanelView5.findViewById(R.id.qs_detail_container) : null;
+            panelPopOverManager.customizerView = notificationPanelView5 != null ? notificationPanelView5.findViewById(R.id.main_content) : null;
             NotificationPanelView notificationPanelView6 = panelPopOverManager.mView;
-            panelPopOverManager.blurView = notificationPanelView6 != null ? notificationPanelView6.findViewById(R.id.qs_new_blur_view) : null;
+            panelPopOverManager.detailView = notificationPanelView6 != null ? notificationPanelView6.findViewById(R.id.qs_detail_container) : null;
             NotificationPanelView notificationPanelView7 = panelPopOverManager.mView;
-            panelPopOverManager.largeShadowView = notificationPanelView7 != null ? (SecQSBlurShadowView) notificationPanelView7.findViewById(R.id.qs_large_shadow_view) : null;
+            panelPopOverManager.blurView = notificationPanelView7 != null ? notificationPanelView7.findViewById(R.id.qs_new_blur_view) : null;
             NotificationPanelView notificationPanelView8 = panelPopOverManager.mView;
-            panelPopOverManager.smallShadowView = notificationPanelView8 != null ? (SecQSBlurShadowView) notificationPanelView8.findViewById(R.id.qs_small_shadow_view) : null;
-            panelPopOverManager.notificationShelf = panelPopOverManager.notificationStackScrollLayoutController.mView.mShelf;
+            panelPopOverManager.blur = notificationPanelView8 != null ? (SecQSNewBlurView) notificationPanelView8.findViewById(R.id.qs_new_blur) : null;
+            NotificationPanelView notificationPanelView9 = panelPopOverManager.mView;
+            panelPopOverManager.largeShadowView = notificationPanelView9 != null ? (SecQSBlurShadowView) notificationPanelView9.findViewById(R.id.qs_large_shadow_view) : null;
+            NotificationPanelView notificationPanelView10 = panelPopOverManager.mView;
+            panelPopOverManager.smallShadowView = notificationPanelView10 != null ? (SecQSBlurShadowView) notificationPanelView10.findViewById(R.id.qs_small_shadow_view) : null;
+            NotificationStackScrollLayout notificationStackScrollLayout = panelPopOverManager.notificationStackScrollLayoutController.mView;
+            panelPopOverManager.notificationShelf = notificationStackScrollLayout.mShelf;
+            panelPopOverManager.nssl = notificationStackScrollLayout;
             panelPopOverManager.largeShadowViewDistanceFromBlur = panelPopOverManager.context.getResources().getDimensionPixelSize(R.dimen.qs_pop_over_large_shadow_distance_from_blur);
             panelPopOverManager.smallShadowViewDistanceFromBlur = panelPopOverManager.context.getResources().getDimensionPixelSize(R.dimen.qs_pop_over_small_shadow_distance_from_blur);
             View view = panelPopOverManager.blurView;
@@ -5527,12 +7863,12 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
 
     @Override // com.android.systemui.shade.ShadeViewController
     public final void updateSystemUiStateFlags() {
-        boolean isEnabled = ShadeWindowGoesAround.isEnabled();
+        boolean zIsEnabled = ShadeWindowGoesAround.isEnabled();
         QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
         boolean z = false;
         int i = 0;
         z = false;
-        if (!isEnabled) {
+        if (!zIsEnabled) {
             SysUiState flag = this.mSysUiState.setFlag(1073741824L, isPanelExpanded() && !isCollapsing()).setFlag(4L, isFullyExpanded() && !quickSettingsControllerImpl.getExpanded());
             if (isFullyExpanded() && quickSettingsControllerImpl.getExpanded()) {
                 z = true;
@@ -5540,7 +7876,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             ((SysUiStateImpl) flag.setFlag(2048L, z)).commitUpdate();
             return;
         }
-        int intValue = ShadeWindowGoesAround.isEnabled() ? ((Integer) ((ShadeDisplaysRepositoryImpl) ((ShadeDisplaysRepository) this.mShadeDisplaysRepository.get())).pendingDisplayId.$$delegate_0.getValue()).intValue() : 0;
+        int iIntValue = ShadeWindowGoesAround.isEnabled() ? ((Integer) ((ShadeDisplaysRepositoryImpl) ((ShadeDisplaysRepository) this.mShadeDisplaysRepository.get())).pendingDisplayId.$$delegate_0.getValue()).intValue() : 0;
         StateChange stateChange = new StateChange();
         stateChange.setFlag(1073741824L, isPanelExpanded() && !isCollapsing());
         stateChange.setFlag(4L, isFullyExpanded() && !quickSettingsControllerImpl.getExpanded());
@@ -5562,7 +7898,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             i2++;
             SysUiState sysUiState2 = (SysUiState) obj;
             long j = 0;
-            if (sysUiState2.getDisplayId() == intValue) {
+            if (sysUiState2.getDisplayId() == iIntValue) {
                 long j2 = stateChange.flagsToSet | stateChange.flagsToClear;
                 while (j2 != j) {
                     long j3 = (-j2) & j2;
@@ -5596,12 +7932,13 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         NotificationShadeWindowState notificationShadeWindowState = notificationShadeWindowControllerImpl.mCurrentState;
         notificationShadeWindowState.forceWindowCollapsed = true;
         notificationShadeWindowControllerImpl.apply(notificationShadeWindowState);
-        notificationPanelView.post(new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 11));
+        notificationPanelView.post(new NotificationPanelViewController$$ExternalSyntheticLambda18(this, 14));
     }
 
     public final void updateVisibility() {
         int i = 4;
         this.mView.setVisibility(shouldPanelBeVisible() ? 0 : 4);
+        this.mNotificationStackScrollLayoutController.updateVisibility(shouldPanelBeVisible());
         PluginFaceWidgetManager pluginFaceWidgetManager = (PluginFaceWidgetManager) Dependency.sDependency.getDependencyInner(PluginFaceWidgetManager.class);
         if (pluginFaceWidgetManager == null) {
             Log.e("NotificationPanelView", "Failed to get PluginFaceWidgetManager");
@@ -5613,7 +7950,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         pluginFaceWidgetManager.updateNowBarVisibility(i);
     }
 
-    public final void fling(float f, float f2, boolean z) {
+    public final void fling(float f, float f2, boolean z) throws Resources.NotFoundException {
         float maxPanelTransitionDistance = z ? getMaxPanelTransitionDistance() : 0.0f;
         if (!z) {
             setClosing(true);
@@ -5654,7 +7991,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
         }
     }
 
-    public final void collapse(float f, boolean z) {
+    public final void collapse(float f, boolean z) throws Resources.NotFoundException {
         if (canBeCollapsed()) {
             QuickSettingsControllerImpl quickSettingsControllerImpl = this.mQsController;
             if (quickSettingsControllerImpl.getExpanded()) {

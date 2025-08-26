@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationIconContainerStatusBarViewModel$isolatedIcon$2 extends SuspendLambda implements Function3 {
     /* synthetic */ float F$0;
@@ -23,10 +22,10 @@ final class NotificationIconContainerStatusBarViewModel$isolatedIcon$2 extends S
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        float floatValue = ((Number) obj2).floatValue();
+        float fFloatValue = ((Number) obj2).floatValue();
         NotificationIconContainerStatusBarViewModel$isolatedIcon$2 notificationIconContainerStatusBarViewModel$isolatedIcon$2 = new NotificationIconContainerStatusBarViewModel$isolatedIcon$2((Continuation) obj3);
         notificationIconContainerStatusBarViewModel$isolatedIcon$2.L$0 = (WithPrev) obj;
-        notificationIconContainerStatusBarViewModel$isolatedIcon$2.F$0 = floatValue;
+        notificationIconContainerStatusBarViewModel$isolatedIcon$2.F$0 = fFloatValue;
         return notificationIconContainerStatusBarViewModel$isolatedIcon$2.invokeSuspend(Unit.INSTANCE);
     }
 

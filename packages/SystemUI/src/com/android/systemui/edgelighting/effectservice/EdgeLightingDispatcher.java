@@ -25,7 +25,6 @@ import com.android.systemui.edgelighting.reflection.AbsEdgeLightingEffectReflect
 import com.android.systemui.edgelighting.reflection.EffectInfoReflection;
 import com.android.systemui.edgelighting.reflection.IEdgeLightingEffectCallbackReflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingDispatcher implements IEdgeLightingController {
     public final Context mContext;
@@ -83,7 +82,7 @@ public class EdgeLightingDispatcher implements IEdgeLightingController {
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.edgelighting.effectservice.EdgeLightingDispatcher$1] */
     @Override // com.android.systemui.edgelighting.effect.interfaces.IEdgeLightingController
-    public final void registerEdgeWindowCallback(IEdgeLightingWindowCallback iEdgeLightingWindowCallback) {
+    public final void registerEdgeWindowCallback(IEdgeLightingWindowCallback iEdgeLightingWindowCallback) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         Class<?> cls;
         EdgeLightingDialog edgeLightingDialog = this.mDialog;
         if (edgeLightingDialog != null) {
@@ -171,7 +170,7 @@ public class EdgeLightingDispatcher implements IEdgeLightingController {
     }
 
     @Override // com.android.systemui.edgelighting.effect.interfaces.IEdgeLightingController
-    public final void showPreview(EdgeEffectInfo edgeEffectInfo, boolean z) {
+    public final void showPreview(EdgeEffectInfo edgeEffectInfo, boolean z) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         EdgeLightingDialog edgeLightingDialog = this.mDialog;
         if (edgeLightingDialog != null) {
             edgeLightingDialog.showPreview(edgeEffectInfo, z);
@@ -198,9 +197,9 @@ public class EdgeLightingDispatcher implements IEdgeLightingController {
                 relativeLayout.removeView(notificationEffect);
                 edgeLightingDialog.mNotificationEffect = null;
             }
-            NotificationEffect makeEffectType = edgeLightingDialog.makeEffectType(edgeEffectInfo, true);
-            edgeLightingDialog.mNotificationEffect = makeEffectType;
-            edgeLightingDialog.mDialogMain.addView(makeEffectType, -1, -1);
+            NotificationEffect notificationEffectMakeEffectType = edgeLightingDialog.makeEffectType(edgeEffectInfo, true);
+            edgeLightingDialog.mNotificationEffect = notificationEffectMakeEffectType;
+            edgeLightingDialog.mDialogMain.addView(notificationEffectMakeEffectType, -1, -1);
             edgeLightingDialog.mNotificationEffect.mEdgeListener = edgeLightingDialog.mEdgeAnimationListener;
         }
         edgeLightingDialog.mNotificationEffect.setEdgeEffectInfo(edgeEffectInfo);
@@ -240,7 +239,7 @@ public class EdgeLightingDispatcher implements IEdgeLightingController {
     }
 
     @Override // com.android.systemui.edgelighting.effect.interfaces.IEdgeLightingController
-    public final void updatePreview(EdgeEffectInfo edgeEffectInfo) {
+    public final void updatePreview(EdgeEffectInfo edgeEffectInfo) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         Class<?> cls;
         EdgeLightingDialog edgeLightingDialog = this.mDialog;
         if (edgeLightingDialog != null) {
@@ -250,7 +249,7 @@ public class EdgeLightingDispatcher implements IEdgeLightingController {
         EffectServiceController effectServiceController = this.mEffectServiceConrtroller;
         effectServiceController.getClass();
         Slog.i("EffectServiceController", "dispatchUpdate");
-        EffectInfoReflection convertEffectInfo = effectServiceController.convertEffectInfo(edgeEffectInfo);
+        EffectInfoReflection effectInfoReflectionConvertEffectInfo = effectServiceController.convertEffectInfo(edgeEffectInfo);
         AbsEdgeLightingEffectReflection absEdgeLightingEffectReflection = effectServiceController.mAbsEdgeLightingEffectReflection;
         try {
             cls = Class.forName("com.samsung.android.sdk.edgelighting.AbsEdgeLightingEffect$EffectInfo", true, absEdgeLightingEffectReflection.mClassLoader);
@@ -258,7 +257,7 @@ public class EdgeLightingDispatcher implements IEdgeLightingController {
             e.printStackTrace();
             cls = null;
         }
-        absEdgeLightingEffectReflection.invokeNormalMethod(absEdgeLightingEffectReflection.mInstance, "update", new Class[]{cls}, convertEffectInfo.mInstance);
+        absEdgeLightingEffectReflection.invokeNormalMethod(absEdgeLightingEffectReflection.mInstance, "update", new Class[]{cls}, effectInfoReflectionConvertEffectInfo.mInstance);
     }
 
     public final void updateSetting(String str) {

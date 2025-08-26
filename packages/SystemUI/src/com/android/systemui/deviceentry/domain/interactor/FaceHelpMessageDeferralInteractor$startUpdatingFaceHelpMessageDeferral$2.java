@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FaceHelpMessageDeferralInteractor$startUpdatingFaceHelpMessageDeferral$2 extends SuspendLambda implements Function2 {
     int label;
@@ -41,7 +40,7 @@ final class FaceHelpMessageDeferralInteractor$startUpdatingFaceHelpMessageDeferr
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FaceHelpMessageDeferralInteractor faceHelpMessageDeferralInteractor = this.this$0;
-            ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(faceHelpMessageDeferralInteractor.biometricSettingsInteractor.isFaceAuthEnrolledAndEnabled, new FaceHelpMessageDeferralInteractor$startUpdatingFaceHelpMessageDeferral$2$invokeSuspend$$inlined$flatMapLatest$1(null, faceHelpMessageDeferralInteractor));
+            ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(faceHelpMessageDeferralInteractor.biometricSettingsInteractor.isFaceAuthEnrolledAndEnabled, new FaceHelpMessageDeferralInteractor$startUpdatingFaceHelpMessageDeferral$2$invokeSuspend$$inlined$flatMapLatest$1(null, faceHelpMessageDeferralInteractor));
             final FaceHelpMessageDeferralInteractor faceHelpMessageDeferralInteractor2 = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.deviceentry.domain.interactor.FaceHelpMessageDeferralInteractor$startUpdatingFaceHelpMessageDeferral$2.2
                 @Override // kotlinx.coroutines.flow.FlowCollector
@@ -49,13 +48,13 @@ final class FaceHelpMessageDeferralInteractor$startUpdatingFaceHelpMessageDeferr
                     HelpFaceAuthenticationStatus helpFaceAuthenticationStatus = (HelpFaceAuthenticationStatus) obj2;
                     String str = helpFaceAuthenticationStatus.msg;
                     if (str != null) {
-                        FaceHelpMessageDeferralInteractor.this.faceHelpMessageDeferral.updateMessage(helpFaceAuthenticationStatus.msgId, str);
+                        faceHelpMessageDeferralInteractor2.faceHelpMessageDeferral.updateMessage(helpFaceAuthenticationStatus.msgId, str);
                     }
                     return Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (transformLatest.collect(flowCollector, this) == coroutineSingletons) {
+            if (channelFlowTransformLatestTransformLatest.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

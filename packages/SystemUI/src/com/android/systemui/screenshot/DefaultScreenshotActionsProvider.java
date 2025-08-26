@@ -17,7 +17,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DefaultScreenshotActionsProvider implements ScreenshotActionsProvider {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,7 +33,6 @@ public final class DefaultScreenshotActionsProvider implements ScreenshotActions
     public final UiEventLogger uiEventLogger;
     public Uri webUri;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

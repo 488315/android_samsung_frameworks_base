@@ -22,6 +22,10 @@ public class X509NameTokenizer {
         return this.index != this.value.length();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0062  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public String nextToken() {
         if (this.index == this.value.length()) {
             return null;
@@ -31,33 +35,31 @@ public class X509NameTokenizer {
         boolean z = false;
         boolean z2 = false;
         while (i != this.value.length()) {
-            char charAt = this.value.charAt(i);
-            if (charAt == '\"') {
+            char cCharAt = this.value.charAt(i);
+            if (cCharAt == '\"') {
                 if (!z) {
                     z2 = !z2;
                 }
-                this.buf.append(charAt);
+                this.buf.append(cCharAt);
             } else if (z || z2) {
-                this.buf.append(charAt);
+                this.buf.append(cCharAt);
             } else {
-                if (charAt == '\\') {
-                    this.buf.append(charAt);
+                if (cCharAt == '\\') {
+                    this.buf.append(cCharAt);
                     z = true;
                 } else {
-                    if (charAt == this.separator) {
+                    if (cCharAt == this.separator) {
                         break;
                     }
-                    if (charAt == '#') {
+                    if (cCharAt == '#') {
                         StringBuffer stringBuffer = this.buf;
                         if (stringBuffer.charAt(stringBuffer.length() - 1) == '=') {
                             this.buf.append('\\');
-                            this.buf.append(charAt);
+                        } else if (cCharAt == '+' && this.separator != '+') {
+                            this.buf.append('\\');
                         }
+                        this.buf.append(cCharAt);
                     }
-                    if (charAt == '+' && this.separator != '+') {
-                        this.buf.append('\\');
-                    }
-                    this.buf.append(charAt);
                 }
                 i++;
             }

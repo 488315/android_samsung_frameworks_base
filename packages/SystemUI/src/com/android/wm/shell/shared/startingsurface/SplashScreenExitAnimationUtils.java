@@ -14,14 +14,12 @@ import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 import com.android.wm.shell.shared.TransactionPool;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplashScreenExitAnimationUtils {
     public static final Interpolator ICON_INTERPOLATOR = new PathInterpolator(0.15f, 0.0f, 1.0f, 1.0f);
     public static final Interpolator MASK_RADIUS_INTERPOLATOR = new PathInterpolator(0.0f, 0.0f, 0.4f, 1.0f);
     public static final Interpolator SHIFT_UP_INTERPOLATOR = new PathInterpolator(0.0f, 0.0f, 0.0f, 1.0f);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RadialVanishAnimation extends View {
         public final Point mCircleCenter;
         public int mFinishRadius;
@@ -50,7 +48,6 @@ public class SplashScreenExitAnimationUtils {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShiftUpAnimation {
         public final SyncRtSurfaceTransactionApplier mApplier;
         public final Rect mFirstWindowFrame;

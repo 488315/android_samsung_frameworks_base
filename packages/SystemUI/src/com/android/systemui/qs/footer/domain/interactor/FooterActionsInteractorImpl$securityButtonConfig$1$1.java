@@ -21,7 +21,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FooterActionsInteractorImpl$securityButtonConfig$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SecurityModel $security;
@@ -45,7 +44,11 @@ final class FooterActionsInteractorImpl$securityButtonConfig$1$1 extends Suspend
         return ((FooterActionsInteractorImpl$securityButtonConfig$1$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:71:0x013c  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object invokeSuspend(Object obj) {
         String string;
         Drawable drawable;
@@ -91,39 +94,26 @@ final class FooterActionsInteractorImpl$securityButtonConfig$1$1 extends Suspend
         } else {
             String str5 = securityModel.workProfileOrganizationName;
             if (z7 || (z4 && z10)) {
-                if (z4 && z10) {
-                    string = str5 == null ? qSSecurityFooterUtils.mDpm.getResources().getString("SystemUi.QS_MSG_WORK_PROFILE_MONITORING", qSSecurityFooterUtils.mWorkProfileMonitoringStringSupplier) : qSSecurityFooterUtils.mDpm.getResources().getString("SystemUi.QS_MSG_NAMED_WORK_PROFILE_MONITORING", new QSSecurityFooterUtils$$ExternalSyntheticLambda0(qSSecurityFooterUtils, str5, 2), str5);
-                } else {
-                    if (z7) {
-                        string = qSSecurityFooterUtils.mContext.getString(R.string.quick_settings_disclosure_monitoring);
-                    }
-                    string = null;
-                }
+                string = (z4 && z10) ? str5 == null ? qSSecurityFooterUtils.mDpm.getResources().getString("SystemUi.QS_MSG_WORK_PROFILE_MONITORING", qSSecurityFooterUtils.mWorkProfileMonitoringStringSupplier) : qSSecurityFooterUtils.mDpm.getResources().getString("SystemUi.QS_MSG_NAMED_WORK_PROFILE_MONITORING", new QSSecurityFooterUtils$$ExternalSyntheticLambda0(qSSecurityFooterUtils, str5, 2), str5) : z7 ? qSSecurityFooterUtils.mContext.getString(R.string.quick_settings_disclosure_monitoring) : null;
             } else if (str2 != null || (str != null && z10)) {
                 if (str2 != null && str != null) {
                     string = qSSecurityFooterUtils.mContext.getString(R.string.quick_settings_disclosure_vpns);
-                } else if (str == null || !z10) {
-                    if (str2 != null) {
-                        string = z3 ? qSSecurityFooterUtils.mDpm.getResources().getString("SystemUi.QS_MSG_PERSONAL_PROFILE_NAMED_VPN", new QSSecurityFooterUtils$$ExternalSyntheticLambda1(qSSecurityFooterUtils, str2, 5), str2) : qSSecurityFooterUtils.mContext.getString(R.string.quick_settings_disclosure_named_vpn, str2);
-                    }
-                    string = null;
-                } else {
+                } else if (str != null && z10) {
                     string = qSSecurityFooterUtils.mDpm.getResources().getString("SystemUi.QS_MSG_WORK_PROFILE_NAMED_VPN", new QSSecurityFooterUtils$$ExternalSyntheticLambda1(qSSecurityFooterUtils, str, 4), str);
+                } else if (str2 != null) {
+                    string = z3 ? qSSecurityFooterUtils.mDpm.getResources().getString("SystemUi.QS_MSG_PERSONAL_PROFILE_NAMED_VPN", new QSSecurityFooterUtils$$ExternalSyntheticLambda1(qSSecurityFooterUtils, str2, 5), str2) : qSSecurityFooterUtils.mContext.getString(R.string.quick_settings_disclosure_named_vpn, str2);
                 }
             } else if (z3 && z5 && z10) {
                 string = qSSecurityFooterUtils.mDpm.getResources().getString("SystemUi.QS_MSG_WORK_PROFILE_NETWORK", qSSecurityFooterUtils.mWorkProfileNetworkStringSupplier);
-            } else {
-                if (z8) {
-                    string = qSSecurityFooterUtils.getMangedDeviceGeneralText(str5);
-                }
-                string = null;
+            } else if (z8) {
+                string = qSSecurityFooterUtils.getMangedDeviceGeneralText(str5);
             }
         }
-        String str6 = string.toString();
+        String string2 = string.toString();
         Icon resource = (!z9 || (drawable = securityModel.deviceAdminIcon) == null) ? (str2 == null && str == null) ? new Icon.Resource(R.drawable.ic_info_outline, null) : securityModel.isVpnBranded ? new Icon.Resource(R.drawable.stat_sys_branded_vpn, null) : new Icon.Resource(R.drawable.stat_sys_vpn_ic, null) : new Icon.Loaded(drawable, null);
         if (((SecurityControllerImpl) qSSecurityFooterUtils.mSecurityController).isSecureWifiEnabled()) {
             resource = new Icon.Resource(R.drawable.stat_sys_securewifi_ic, null);
         }
-        return new SecurityButtonConfig(resource, str6, z11);
+        return new SecurityButtonConfig(resource, string2, z11);
     }
 }

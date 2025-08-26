@@ -46,9 +46,9 @@ public interface IMediaHTTPService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaHTTPService)) {
-                return (IMediaHTTPService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMediaHTTPService)) {
+                return (IMediaHTTPService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IMediaHTTPService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IMediaHTTPConnection makeHTTPConnection = makeHTTPConnection();
+                IMediaHTTPConnection iMediaHTTPConnectionMakeHTTPConnection = makeHTTPConnection();
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(makeHTTPConnection);
+                parcel2.writeStrongInterface(iMediaHTTPConnectionMakeHTTPConnection);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,16 +101,16 @@ public interface IMediaHTTPService extends IInterface {
 
             @Override // android.media.IMediaHTTPService
             public IMediaHTTPConnection makeHTTPConnection() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IMediaHTTPConnection.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IMediaHTTPConnection.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

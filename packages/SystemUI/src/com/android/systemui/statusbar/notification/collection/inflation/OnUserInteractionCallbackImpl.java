@@ -14,7 +14,6 @@ import com.android.systemui.statusbar.notification.collection.render.Notificatio
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManager;
 import com.android.systemui.statusbar.notification.row.OnUserInteractionCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OnUserInteractionCallbackImpl implements OnUserInteractionCallback {
     public final HeadsUpManager mHeadsUpManager;
@@ -41,9 +40,9 @@ public class OnUserInteractionCallbackImpl implements OnUserInteractionCallback 
             LogLevel logLevel = LogLevel.INFO;
             NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda3 = new NotifCollectionLogger$$ExternalSyntheticLambda3(10);
             LogBuffer logBuffer = notifCollectionLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda3, null);
-            ((LogMessageImpl) obtain).str1 = futureDismissal.mLabel;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda3, null);
+            ((LogMessageImpl) logMessageObtain).str1 = futureDismissal.mLabel;
+            logBuffer.commit(logMessageObtain);
             return futureDismissal;
         }
         NotifCollection.FutureDismissal futureDismissal2 = new NotifCollection.FutureDismissal(notifCollection, notificationEntry, i, onUserInteractionCallbackImpl$$ExternalSyntheticLambda0);
@@ -52,9 +51,9 @@ public class OnUserInteractionCallbackImpl implements OnUserInteractionCallback 
         LogLevel logLevel2 = LogLevel.DEBUG;
         NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda32 = new NotifCollectionLogger$$ExternalSyntheticLambda3(11);
         LogBuffer logBuffer2 = notifCollectionLogger.buffer;
-        LogMessage obtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda32, null);
-        ((LogMessageImpl) obtain2).str1 = futureDismissal2.mLabel;
-        logBuffer2.commit(obtain2);
+        LogMessage logMessageObtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda32, null);
+        ((LogMessageImpl) logMessageObtain2).str1 = futureDismissal2.mLabel;
+        logBuffer2.commit(logMessageObtain2);
         return futureDismissal2;
     }
 }

@@ -2,7 +2,6 @@ package com.google.ux.material.libmonet.contrast;
 
 import com.google.ux.material.libmonet.utils.ColorUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Contrast {
     private Contrast() {
@@ -12,42 +11,42 @@ public final class Contrast {
         if (d < 0.0d || d > 100.0d) {
             return -1.0d;
         }
-        double yFromLstar = ColorUtils.yFromLstar(d);
-        double d3 = ((yFromLstar + 5.0d) / d2) - 5.0d;
+        double dYFromLstar = ColorUtils.yFromLstar(d);
+        double d3 = ((dYFromLstar + 5.0d) / d2) - 5.0d;
         if (d3 < 0.0d || d3 > 100.0d) {
             return -1.0d;
         }
-        double ratioOfYs = ratioOfYs(yFromLstar, d3);
-        double abs = Math.abs(ratioOfYs - d2);
-        if (ratioOfYs < d2 && abs > 0.04d) {
+        double dRatioOfYs = ratioOfYs(dYFromLstar, d3);
+        double dAbs = Math.abs(dRatioOfYs - d2);
+        if (dRatioOfYs < d2 && dAbs > 0.04d) {
             return -1.0d;
         }
-        double labF = ((ColorUtils.labF(d3 / 100.0d) * 116.0d) - 16.0d) - 0.4d;
-        if (labF < 0.0d || labF > 100.0d) {
+        double dLabF = ((ColorUtils.labF(d3 / 100.0d) * 116.0d) - 16.0d) - 0.4d;
+        if (dLabF < 0.0d || dLabF > 100.0d) {
             return -1.0d;
         }
-        return labF;
+        return dLabF;
     }
 
     public static double lighter(double d, double d2) {
         if (d < 0.0d || d > 100.0d) {
             return -1.0d;
         }
-        double yFromLstar = ColorUtils.yFromLstar(d);
-        double d3 = ((yFromLstar + 5.0d) * d2) - 5.0d;
+        double dYFromLstar = ColorUtils.yFromLstar(d);
+        double d3 = ((dYFromLstar + 5.0d) * d2) - 5.0d;
         if (d3 < 0.0d || d3 > 100.0d) {
             return -1.0d;
         }
-        double ratioOfYs = ratioOfYs(d3, yFromLstar);
-        double abs = Math.abs(ratioOfYs - d2);
-        if (ratioOfYs < d2 && abs > 0.04d) {
+        double dRatioOfYs = ratioOfYs(d3, dYFromLstar);
+        double dAbs = Math.abs(dRatioOfYs - d2);
+        if (dRatioOfYs < d2 && dAbs > 0.04d) {
             return -1.0d;
         }
-        double labF = ((ColorUtils.labF(d3 / 100.0d) * 116.0d) - 16.0d) + 0.4d;
-        if (labF < 0.0d || labF > 100.0d) {
+        double dLabF = ((ColorUtils.labF(d3 / 100.0d) * 116.0d) - 16.0d) + 0.4d;
+        if (dLabF < 0.0d || dLabF > 100.0d) {
             return -1.0d;
         }
-        return labF;
+        return dLabF;
     }
 
     public static double ratioOfTones(double d, double d2) {
@@ -55,10 +54,10 @@ public final class Contrast {
     }
 
     public static double ratioOfYs(double d, double d2) {
-        double max = Math.max(d, d2);
-        if (max != d2) {
+        double dMax = Math.max(d, d2);
+        if (dMax != d2) {
             d = d2;
         }
-        return (max + 5.0d) / (d + 5.0d);
+        return (dMax + 5.0d) / (d + 5.0d);
     }
 }

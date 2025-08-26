@@ -96,9 +96,9 @@ public interface IAdvancedProtectionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAdvancedProtectionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAdvancedProtectionService)) {
-                return (IAdvancedProtectionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAdvancedProtectionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAdvancedProtectionService)) {
+                return (IAdvancedProtectionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -138,26 +138,26 @@ public interface IAdvancedProtectionService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean isAdvancedProtectionEnabled = isAdvancedProtectionEnabled();
+                    boolean zIsAdvancedProtectionEnabled = isAdvancedProtectionEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAdvancedProtectionEnabled);
+                    parcel2.writeBoolean(zIsAdvancedProtectionEnabled);
                     return true;
                 case 2:
-                    IAdvancedProtectionCallback asInterface = IAdvancedProtectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAdvancedProtectionCallback iAdvancedProtectionCallbackAsInterface = IAdvancedProtectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerAdvancedProtectionCallback(asInterface);
+                    registerAdvancedProtectionCallback(iAdvancedProtectionCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    IAdvancedProtectionCallback asInterface2 = IAdvancedProtectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAdvancedProtectionCallback iAdvancedProtectionCallbackAsInterface2 = IAdvancedProtectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterAdvancedProtectionCallback(asInterface2);
+                    unregisterAdvancedProtectionCallback(iAdvancedProtectionCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAdvancedProtectionEnabled(readBoolean);
+                    setAdvancedProtectionEnabled(z);
                     parcel2.writeNoException();
                     return true;
                 case 5:
@@ -166,11 +166,11 @@ public interface IAdvancedProtectionService extends IInterface {
                     parcel2.writeTypedList(advancedProtectionFeatures, 1);
                     return true;
                 case 6:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    logDialogShown(readInt, readInt2, readBoolean2);
+                    logDialogShown(i3, i4, z2);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -196,93 +196,93 @@ public interface IAdvancedProtectionService extends IInterface {
 
             @Override // android.security.advancedprotection.IAdvancedProtectionService
             public boolean isAdvancedProtectionEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.advancedprotection.IAdvancedProtectionService
             public void registerAdvancedProtectionCallback(IAdvancedProtectionCallback iAdvancedProtectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAdvancedProtectionCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAdvancedProtectionCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.advancedprotection.IAdvancedProtectionService
             public void unregisterAdvancedProtectionCallback(IAdvancedProtectionCallback iAdvancedProtectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAdvancedProtectionCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAdvancedProtectionCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.advancedprotection.IAdvancedProtectionService
             public void setAdvancedProtectionEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.advancedprotection.IAdvancedProtectionService
             public List<AdvancedProtectionFeature> getAdvancedProtectionFeatures() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AdvancedProtectionFeature.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AdvancedProtectionFeature.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.advancedprotection.IAdvancedProtectionService
             public void logDialogShown(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAdvancedProtectionService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

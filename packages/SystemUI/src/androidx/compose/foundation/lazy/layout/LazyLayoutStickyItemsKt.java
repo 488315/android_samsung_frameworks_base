@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.ranges.IntRange;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LazyLayoutStickyItemsKt {
     public static final List applyStickyItems(StickyItemsPlacement stickyItemsPlacement, List list, MutableIntList mutableIntList, int i, int i2, int i3, Function1 function1) {
@@ -33,9 +32,9 @@ public abstract class LazyLayoutStickyItemsKt {
         if (((LazyLayoutMeasuredItem) CollectionsKt___CollectionsKt.last(list)).getIndex() - index < 0 || (i6 = mutableIntList._size) == 0) {
             mutableIntList2 = IntListKt.EmptyIntList;
         } else {
-            IntRange until = RangesKt___RangesKt.until(0, i6);
-            int i8 = until.first;
-            int i9 = until.last;
+            IntRange intRangeUntil = RangesKt___RangesKt.until(0, i6);
+            int i8 = intRangeUntil.first;
+            int i9 = intRangeUntil.last;
             int i10 = -1;
             if (i8 <= i9) {
                 while (mutableIntList.get(i8) <= index) {
@@ -101,21 +100,21 @@ public abstract class LazyLayoutStickyItemsKt {
                 }
                 i17++;
             }
-            LazyLayoutMeasuredItem lazyLayoutMeasuredItem = i17 == i7 ? (LazyLayoutMeasuredItem) function1.mo779invoke(Integer.valueOf(i16)) : (LazyLayoutMeasuredItem) arrayList2.remove(i17);
+            LazyLayoutMeasuredItem lazyLayoutMeasuredItem = i17 == i7 ? (LazyLayoutMeasuredItem) function1.mo781invoke(Integer.valueOf(i16)) : (LazyLayoutMeasuredItem) arrayList2.remove(i17);
             int mainAxisSizeWithSpacings = lazyLayoutMeasuredItem.getMainAxisSizeWithSpacings();
             if (i17 == i7) {
                 c = ' ';
                 i4 = Integer.MIN_VALUE;
             } else {
-                long mo154getOffsetBjo55l4 = lazyLayoutMeasuredItem.mo154getOffsetBjo55l4(0);
+                long jMo155getOffsetBjo55l4 = lazyLayoutMeasuredItem.mo155getOffsetBjo55l4(0);
                 if (lazyLayoutMeasuredItem.isVertical()) {
                     IntOffset.Companion companion = IntOffset.Companion;
                     c = ' ';
-                    j = mo154getOffsetBjo55l4 & 4294967295L;
+                    j = jMo155getOffsetBjo55l4 & 4294967295L;
                 } else {
                     c = ' ';
                     IntOffset.Companion companion2 = IntOffset.Companion;
-                    j = mo154getOffsetBjo55l4 >> 32;
+                    j = jMo155getOffsetBjo55l4 >> 32;
                 }
                 i4 = (int) j;
             }
@@ -134,24 +133,24 @@ public abstract class LazyLayoutStickyItemsKt {
             }
             LazyLayoutMeasuredItem lazyLayoutMeasuredItem2 = (LazyLayoutMeasuredItem) obj;
             if (lazyLayoutMeasuredItem2 != null) {
-                long mo154getOffsetBjo55l42 = lazyLayoutMeasuredItem2.mo154getOffsetBjo55l4(0);
+                long jMo155getOffsetBjo55l42 = lazyLayoutMeasuredItem2.mo155getOffsetBjo55l4(0);
                 if (lazyLayoutMeasuredItem2.isVertical()) {
                     IntOffset.Companion companion3 = IntOffset.Companion;
-                    j2 = mo154getOffsetBjo55l42 & 4294967295L;
+                    j2 = jMo155getOffsetBjo55l42 & 4294967295L;
                 } else {
                     IntOffset.Companion companion4 = IntOffset.Companion;
-                    j2 = mo154getOffsetBjo55l42 >> c;
+                    j2 = jMo155getOffsetBjo55l42 >> c;
                 }
                 i5 = (int) j2;
             } else {
                 i5 = Integer.MIN_VALUE;
             }
-            int max = i4 == Integer.MIN_VALUE ? -i : Math.max(-i, i4);
+            int iMax = i4 == Integer.MIN_VALUE ? -i : Math.max(-i, i4);
             if (i5 != Integer.MIN_VALUE) {
-                max = Math.min(max, i5 - mainAxisSizeWithSpacings);
+                iMax = Math.min(iMax, i5 - mainAxisSizeWithSpacings);
             }
             lazyLayoutMeasuredItem.setNonScrollableItem();
-            lazyLayoutMeasuredItem.position(max, 0, i2, i3);
+            lazyLayoutMeasuredItem.position(iMax, 0, i2, i3);
             arrayList.add(lazyLayoutMeasuredItem);
             i15++;
             i7 = -1;

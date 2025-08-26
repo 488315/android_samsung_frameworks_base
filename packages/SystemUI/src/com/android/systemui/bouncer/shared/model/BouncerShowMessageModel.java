@@ -3,7 +3,6 @@ package com.android.systemui.bouncer.shared.model;
 import android.content.res.ColorStateList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BouncerShowMessageModel {
     public final ColorStateList colorStateList;
@@ -27,9 +26,9 @@ public final class BouncerShowMessageModel {
 
     public final int hashCode() {
         String str = this.message;
-        int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+        int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
         ColorStateList colorStateList = this.colorStateList;
-        return hashCode + (colorStateList != null ? colorStateList.hashCode() : 0);
+        return iHashCode + (colorStateList != null ? colorStateList.hashCode() : 0);
     }
 
     public final String toString() {

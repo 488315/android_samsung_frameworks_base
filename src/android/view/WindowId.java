@@ -16,9 +16,9 @@ public class WindowId implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public WindowId createFromParcel(Parcel parcel) {
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            if (readStrongBinder != null) {
-                return new WindowId(readStrongBinder);
+            IBinder strongBinder = parcel.readStrongBinder();
+            if (strongBinder != null) {
+                return new WindowId(strongBinder);
             }
             return null;
         }

@@ -79,6 +79,10 @@ public interface ITaskStackListener extends IInterface {
         }
 
         @Override // android.app.ITaskStackListener
+        public void onRecentTaskRemoved(int i) throws RemoteException {
+        }
+
+        @Override // android.app.ITaskStackListener
         public void onRecentTaskRemovedForAddTask(int i) throws RemoteException {
         }
 
@@ -171,6 +175,8 @@ public interface ITaskStackListener extends IInterface {
 
     void onRecentTaskListUpdated() throws RemoteException;
 
+    void onRecentTaskRemoved(int i) throws RemoteException;
+
     void onRecentTaskRemovedForAddTask(int i) throws RemoteException;
 
     void onTaskCreated(int i, ComponentName componentName) throws RemoteException;
@@ -205,36 +211,37 @@ public interface ITaskStackListener extends IInterface {
 
     public static abstract class Stub extends Binder implements ITaskStackListener {
         public static final String DESCRIPTOR = "android.app.ITaskStackListener";
-        static final int TRANSACTION_onActivityDismissingDockedTask = 6;
-        static final int TRANSACTION_onActivityDismissingSplitTask = 30;
-        static final int TRANSACTION_onActivityForcedResizable = 5;
-        static final int TRANSACTION_onActivityLaunchOnSecondaryDisplayFailed = 7;
-        static final int TRANSACTION_onActivityLaunchOnSecondaryDisplayRerouted = 8;
-        static final int TRANSACTION_onActivityPinned = 2;
-        static final int TRANSACTION_onActivityRequestedOrientationChanged = 13;
-        static final int TRANSACTION_onActivityRestartAttempt = 4;
-        static final int TRANSACTION_onActivityRotation = 25;
-        static final int TRANSACTION_onActivityUnpinned = 3;
-        static final int TRANSACTION_onBackPressedOnTaskRoot = 18;
-        static final int TRANSACTION_onLockTaskModeChanged = 27;
-        static final int TRANSACTION_onRecentTaskListFrozenChanged = 21;
-        static final int TRANSACTION_onRecentTaskListUpdated = 20;
-        static final int TRANSACTION_onRecentTaskRemovedForAddTask = 22;
-        static final int TRANSACTION_onTaskCreated = 9;
-        static final int TRANSACTION_onTaskDescriptionChanged = 12;
-        static final int TRANSACTION_onTaskDisplayChanged = 19;
-        static final int TRANSACTION_onTaskFocusChanged = 23;
-        static final int TRANSACTION_onTaskMovedToBack = 26;
-        static final int TRANSACTION_onTaskMovedToFront = 11;
-        static final int TRANSACTION_onTaskProfileLocked = 15;
-        static final int TRANSACTION_onTaskRemovalStarted = 14;
-        static final int TRANSACTION_onTaskRemoved = 10;
-        static final int TRANSACTION_onTaskRequestedOrientationChanged = 24;
-        static final int TRANSACTION_onTaskSnapshotChanged = 16;
-        static final int TRANSACTION_onTaskSnapshotInvalidated = 17;
-        static final int TRANSACTION_onTaskStackChanged = 1;
-        static final int TRANSACTION_onTaskWindowingModeChanged = 29;
-        static final int TRANSACTION_onTaskbarIconVisibleChangeRequest = 28;
+        static final int TRANSACTION_onActivityDismissingDockedTask = 7;
+        static final int TRANSACTION_onActivityDismissingSplitTask = 31;
+        static final int TRANSACTION_onActivityForcedResizable = 6;
+        static final int TRANSACTION_onActivityLaunchOnSecondaryDisplayFailed = 8;
+        static final int TRANSACTION_onActivityLaunchOnSecondaryDisplayRerouted = 9;
+        static final int TRANSACTION_onActivityPinned = 3;
+        static final int TRANSACTION_onActivityRequestedOrientationChanged = 14;
+        static final int TRANSACTION_onActivityRestartAttempt = 5;
+        static final int TRANSACTION_onActivityRotation = 26;
+        static final int TRANSACTION_onActivityUnpinned = 4;
+        static final int TRANSACTION_onBackPressedOnTaskRoot = 19;
+        static final int TRANSACTION_onLockTaskModeChanged = 28;
+        static final int TRANSACTION_onRecentTaskListFrozenChanged = 22;
+        static final int TRANSACTION_onRecentTaskListUpdated = 21;
+        static final int TRANSACTION_onRecentTaskRemoved = 1;
+        static final int TRANSACTION_onRecentTaskRemovedForAddTask = 23;
+        static final int TRANSACTION_onTaskCreated = 10;
+        static final int TRANSACTION_onTaskDescriptionChanged = 13;
+        static final int TRANSACTION_onTaskDisplayChanged = 20;
+        static final int TRANSACTION_onTaskFocusChanged = 24;
+        static final int TRANSACTION_onTaskMovedToBack = 27;
+        static final int TRANSACTION_onTaskMovedToFront = 12;
+        static final int TRANSACTION_onTaskProfileLocked = 16;
+        static final int TRANSACTION_onTaskRemovalStarted = 15;
+        static final int TRANSACTION_onTaskRemoved = 11;
+        static final int TRANSACTION_onTaskRequestedOrientationChanged = 25;
+        static final int TRANSACTION_onTaskSnapshotChanged = 17;
+        static final int TRANSACTION_onTaskSnapshotInvalidated = 18;
+        static final int TRANSACTION_onTaskStackChanged = 2;
+        static final int TRANSACTION_onTaskWindowingModeChanged = 30;
+        static final int TRANSACTION_onTaskbarIconVisibleChangeRequest = 29;
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -243,7 +250,7 @@ public interface ITaskStackListener extends IInterface {
 
         @Override // android.os.Binder
         public int getMaxTransactionId() {
-            return 29;
+            return 30;
         }
 
         public Stub() {
@@ -254,9 +261,9 @@ public interface ITaskStackListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITaskStackListener)) {
-                return (ITaskStackListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITaskStackListener)) {
+                return (ITaskStackListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -264,64 +271,66 @@ public interface ITaskStackListener extends IInterface {
         public static String getDefaultTransactionName(int i) {
             switch (i) {
                 case 1:
-                    return "onTaskStackChanged";
+                    return "onRecentTaskRemoved";
                 case 2:
-                    return "onActivityPinned";
+                    return "onTaskStackChanged";
                 case 3:
-                    return "onActivityUnpinned";
+                    return "onActivityPinned";
                 case 4:
-                    return "onActivityRestartAttempt";
+                    return "onActivityUnpinned";
                 case 5:
-                    return "onActivityForcedResizable";
+                    return "onActivityRestartAttempt";
                 case 6:
-                    return "onActivityDismissingDockedTask";
+                    return "onActivityForcedResizable";
                 case 7:
-                    return "onActivityLaunchOnSecondaryDisplayFailed";
+                    return "onActivityDismissingDockedTask";
                 case 8:
-                    return "onActivityLaunchOnSecondaryDisplayRerouted";
+                    return "onActivityLaunchOnSecondaryDisplayFailed";
                 case 9:
-                    return "onTaskCreated";
+                    return "onActivityLaunchOnSecondaryDisplayRerouted";
                 case 10:
-                    return "onTaskRemoved";
+                    return "onTaskCreated";
                 case 11:
-                    return "onTaskMovedToFront";
+                    return "onTaskRemoved";
                 case 12:
-                    return "onTaskDescriptionChanged";
+                    return "onTaskMovedToFront";
                 case 13:
-                    return "onActivityRequestedOrientationChanged";
+                    return "onTaskDescriptionChanged";
                 case 14:
-                    return "onTaskRemovalStarted";
+                    return "onActivityRequestedOrientationChanged";
                 case 15:
-                    return "onTaskProfileLocked";
+                    return "onTaskRemovalStarted";
                 case 16:
-                    return "onTaskSnapshotChanged";
+                    return "onTaskProfileLocked";
                 case 17:
-                    return "onTaskSnapshotInvalidated";
+                    return "onTaskSnapshotChanged";
                 case 18:
-                    return "onBackPressedOnTaskRoot";
+                    return "onTaskSnapshotInvalidated";
                 case 19:
-                    return "onTaskDisplayChanged";
+                    return "onBackPressedOnTaskRoot";
                 case 20:
-                    return "onRecentTaskListUpdated";
+                    return "onTaskDisplayChanged";
                 case 21:
-                    return "onRecentTaskListFrozenChanged";
+                    return "onRecentTaskListUpdated";
                 case 22:
-                    return "onRecentTaskRemovedForAddTask";
+                    return "onRecentTaskListFrozenChanged";
                 case 23:
-                    return "onTaskFocusChanged";
+                    return "onRecentTaskRemovedForAddTask";
                 case 24:
-                    return "onTaskRequestedOrientationChanged";
+                    return "onTaskFocusChanged";
                 case 25:
-                    return "onActivityRotation";
+                    return "onTaskRequestedOrientationChanged";
                 case 26:
-                    return "onTaskMovedToBack";
+                    return "onActivityRotation";
                 case 27:
-                    return "onLockTaskModeChanged";
+                    return "onTaskMovedToBack";
                 case 28:
-                    return "onTaskbarIconVisibleChangeRequest";
+                    return "onLockTaskModeChanged";
                 case 29:
-                    return "onTaskWindowingModeChanged";
+                    return "onTaskbarIconVisibleChangeRequest";
                 case 30:
+                    return "onTaskWindowingModeChanged";
+                case 31:
                     return "onActivityDismissingSplitTask";
                 default:
                     return null;
@@ -344,164 +353,169 @@ public interface ITaskStackListener extends IInterface {
             }
             switch (i) {
                 case 1:
-                    onTaskStackChanged();
+                    int i3 = parcel.readInt();
+                    parcel.enforceNoDataAvail();
+                    onRecentTaskRemoved(i3);
                     return true;
                 case 2:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
-                    parcel.enforceNoDataAvail();
-                    onActivityPinned(readString, readInt, readInt2, readInt3);
+                    onTaskStackChanged();
                     return true;
                 case 3:
-                    onActivityUnpinned();
+                    String string = parcel.readString();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    parcel.enforceNoDataAvail();
+                    onActivityPinned(string, i4, i5, i6);
                     return true;
                 case 4:
-                    ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    parcel.enforceNoDataAvail();
-                    onActivityRestartAttempt(runningTaskInfo, readBoolean, readBoolean2, readBoolean3);
+                    onActivityUnpinned();
                     return true;
                 case 5:
-                    String readString2 = parcel.readString();
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onActivityForcedResizable(readString2, readInt4, readInt5);
+                    onActivityRestartAttempt(runningTaskInfo, z, z2, z3);
                     return true;
                 case 6:
-                    onActivityDismissingDockedTask();
+                    String string2 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    parcel.enforceNoDataAvail();
+                    onActivityForcedResizable(string2, i7, i8);
                     return true;
                 case 7:
-                    ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
-                    int readInt6 = parcel.readInt();
-                    parcel.enforceNoDataAvail();
-                    onActivityLaunchOnSecondaryDisplayFailed(runningTaskInfo2, readInt6);
+                    onActivityDismissingDockedTask();
                     return true;
                 case 8:
-                    ActivityManager.RunningTaskInfo runningTaskInfo3 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
-                    int readInt7 = parcel.readInt();
+                    ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onActivityLaunchOnSecondaryDisplayRerouted(runningTaskInfo3, readInt7);
+                    onActivityLaunchOnSecondaryDisplayFailed(runningTaskInfo2, i9);
                     return true;
                 case 9:
-                    int readInt8 = parcel.readInt();
-                    ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
+                    ActivityManager.RunningTaskInfo runningTaskInfo3 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onTaskCreated(readInt8, componentName);
+                    onActivityLaunchOnSecondaryDisplayRerouted(runningTaskInfo3, i10);
                     return true;
                 case 10:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onTaskRemoved(readInt9);
+                    onTaskCreated(i11, componentName);
                     return true;
                 case 11:
+                    int i12 = parcel.readInt();
+                    parcel.enforceNoDataAvail();
+                    onTaskRemoved(i12);
+                    return true;
+                case 12:
                     ActivityManager.RunningTaskInfo runningTaskInfo4 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     parcel.enforceNoDataAvail();
                     onTaskMovedToFront(runningTaskInfo4);
                     return true;
-                case 12:
+                case 13:
                     ActivityManager.RunningTaskInfo runningTaskInfo5 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     parcel.enforceNoDataAvail();
                     onTaskDescriptionChanged(runningTaskInfo5);
                     return true;
-                case 13:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    parcel.enforceNoDataAvail();
-                    onActivityRequestedOrientationChanged(readInt10, readInt11);
-                    return true;
                 case 14:
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    parcel.enforceNoDataAvail();
+                    onActivityRequestedOrientationChanged(i13, i14);
+                    return true;
+                case 15:
                     ActivityManager.RunningTaskInfo runningTaskInfo6 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     parcel.enforceNoDataAvail();
                     onTaskRemovalStarted(runningTaskInfo6);
                     return true;
-                case 15:
-                    ActivityManager.RunningTaskInfo runningTaskInfo7 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
-                    int readInt12 = parcel.readInt();
-                    parcel.enforceNoDataAvail();
-                    onTaskProfileLocked(runningTaskInfo7, readInt12);
-                    return true;
                 case 16:
-                    int readInt13 = parcel.readInt();
-                    TaskSnapshot taskSnapshot = (TaskSnapshot) parcel.readTypedObject(TaskSnapshot.CREATOR);
+                    ActivityManager.RunningTaskInfo runningTaskInfo7 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onTaskSnapshotChanged(readInt13, taskSnapshot);
+                    onTaskProfileLocked(runningTaskInfo7, i15);
                     return true;
                 case 17:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    TaskSnapshot taskSnapshot = (TaskSnapshot) parcel.readTypedObject(TaskSnapshot.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onTaskSnapshotInvalidated(readInt14);
+                    onTaskSnapshotChanged(i16, taskSnapshot);
                     return true;
                 case 18:
+                    int i17 = parcel.readInt();
+                    parcel.enforceNoDataAvail();
+                    onTaskSnapshotInvalidated(i17);
+                    return true;
+                case 19:
                     ActivityManager.RunningTaskInfo runningTaskInfo8 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     parcel.enforceNoDataAvail();
                     onBackPressedOnTaskRoot(runningTaskInfo8);
                     return true;
-                case 19:
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    parcel.enforceNoDataAvail();
-                    onTaskDisplayChanged(readInt15, readInt16);
-                    return true;
                 case 20:
-                    onRecentTaskListUpdated();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    parcel.enforceNoDataAvail();
+                    onTaskDisplayChanged(i18, i19);
                     return true;
                 case 21:
-                    boolean readBoolean4 = parcel.readBoolean();
-                    parcel.enforceNoDataAvail();
-                    onRecentTaskListFrozenChanged(readBoolean4);
+                    onRecentTaskListUpdated();
                     return true;
                 case 22:
-                    int readInt17 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onRecentTaskRemovedForAddTask(readInt17);
+                    onRecentTaskListFrozenChanged(z4);
                     return true;
                 case 23:
-                    int readInt18 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onTaskFocusChanged(readInt18, readBoolean5);
+                    onRecentTaskRemovedForAddTask(i20);
                     return true;
                 case 24:
-                    int readInt19 = parcel.readInt();
-                    int readInt20 = parcel.readInt();
+                    int i21 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onTaskRequestedOrientationChanged(readInt19, readInt20);
+                    onTaskFocusChanged(i21, z5);
                     return true;
                 case 25:
-                    int readInt21 = parcel.readInt();
+                    int i22 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onActivityRotation(readInt21);
+                    onTaskRequestedOrientationChanged(i22, i23);
                     return true;
                 case 26:
+                    int i24 = parcel.readInt();
+                    parcel.enforceNoDataAvail();
+                    onActivityRotation(i24);
+                    return true;
+                case 27:
                     ActivityManager.RunningTaskInfo runningTaskInfo9 = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     parcel.enforceNoDataAvail();
                     onTaskMovedToBack(runningTaskInfo9);
                     return true;
-                case 27:
-                    int readInt22 = parcel.readInt();
-                    parcel.enforceNoDataAvail();
-                    onLockTaskModeChanged(readInt22);
-                    return true;
                 case 28:
-                    ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean6 = parcel.readBoolean();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onTaskbarIconVisibleChangeRequest(componentName2, readBoolean6);
+                    onLockTaskModeChanged(i25);
                     return true;
                 case 29:
-                    int readInt23 = parcel.readInt();
+                    ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onTaskWindowingModeChanged(readInt23);
+                    onTaskbarIconVisibleChangeRequest(componentName2, z6);
                     return true;
                 case 30:
-                    String readString3 = parcel.readString();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onActivityDismissingSplitTask(readString3);
+                    onTaskWindowingModeChanged(i26);
+                    return true;
+                case 31:
+                    String string3 = parcel.readString();
+                    parcel.enforceNoDataAvail();
+                    onActivityDismissingSplitTask(string3);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -525,376 +539,388 @@ public interface ITaskStackListener extends IInterface {
             }
 
             @Override // android.app.ITaskStackListener
-            public void onTaskStackChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+            public void onRecentTaskRemoved(int i) throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
+                }
+            }
+
+            @Override // android.app.ITaskStackListener
+            public void onTaskStackChanged() throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                try {
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
+                } finally {
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onActivityPinned(String str, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onActivityUnpinned() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onActivityRestartAttempt(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, boolean z2, boolean z3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onActivityForcedResizable(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onActivityDismissingDockedTask() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onActivityLaunchOnSecondaryDisplayFailed(ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onActivityLaunchOnSecondaryDisplayRerouted(ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskCreated(int i, ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskRemoved(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskMovedToFront(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskDescriptionChanged(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onActivityRequestedOrientationChanged(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskRemovalStarted(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskProfileLocked(ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskSnapshotChanged(int i, TaskSnapshot taskSnapshot) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(taskSnapshot, 0);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(taskSnapshot, 0);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskSnapshotInvalidated(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskDisplayChanged(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onRecentTaskListUpdated() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onRecentTaskListFrozenChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onRecentTaskRemovedForAddTask(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskFocusChanged(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskRequestedOrientationChanged(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(24, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(25, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onActivityRotation(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskMovedToBack(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(runningTaskInfo, 0);
-                    this.mRemote.transact(26, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(runningTaskInfo, 0);
+                    this.mRemote.transact(27, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onLockTaskModeChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(27, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(28, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskbarIconVisibleChangeRequest(ComponentName componentName, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(28, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(29, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onTaskWindowingModeChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(29, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ITaskStackListener
             public void onActivityDismissingSplitTask(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(30, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(31, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

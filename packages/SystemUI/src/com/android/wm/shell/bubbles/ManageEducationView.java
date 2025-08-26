@@ -20,7 +20,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ManageEducationView extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -32,7 +31,6 @@ public final class ManageEducationView extends LinearLayout {
     public final BubblePositioner positioner;
     public final Rect realManageButtonRect;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -147,12 +145,12 @@ public final class ManageEducationView extends LinearLayout {
         if (getVisibility() != 0 || this.isHiding) {
             return;
         }
-        animate().withStartAction(new Runnable() { // from class: com.android.wm.shell.bubbles.ManageEducationView$hide$1
+        animate().withStartAction(new Runnable() { // from class: com.android.wm.shell.bubbles.ManageEducationView.hide.1
             @Override // java.lang.Runnable
             public final void run() {
                 ManageEducationView.this.isHiding = true;
             }
-        }).alpha(0.0f).setDuration(200L).withEndAction(new Runnable() { // from class: com.android.wm.shell.bubbles.ManageEducationView$hide$2
+        }).alpha(0.0f).setDuration(200L).withEndAction(new Runnable() { // from class: com.android.wm.shell.bubbles.ManageEducationView.hide.2
             @Override // java.lang.Runnable
             public final void run() {
                 ManageEducationView manageEducationView = ManageEducationView.this;
@@ -176,9 +174,9 @@ public final class ManageEducationView extends LinearLayout {
 
     public final void show(final BubbleExpandedView bubbleExpandedView, boolean z) {
         int dimensionPixelSize;
-        TypedArray obtainStyledAttributes = ((LinearLayout) this).mContext.obtainStyledAttributes(new int[]{android.R.^attr-private.closeItemLayout});
-        int color = obtainStyledAttributes.getColor(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = ((LinearLayout) this).mContext.obtainStyledAttributes(new int[]{android.R.^attr-private.closeItemLayout});
+        int color = typedArrayObtainStyledAttributes.getColor(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
         getManageButton().setTextColor(((LinearLayout) this).mContext.getColor(android.R.color.system_neutral1_900));
         getManageButton().setBackgroundDrawable(new ColorDrawable(color));
         ((Button) this.gotItButton$delegate.getValue()).setBackgroundDrawable(new ColorDrawable(color));
@@ -226,7 +224,7 @@ public final class ManageEducationView extends LinearLayout {
             dimensionPixelSize2 = (this.positioner.mScreenRect.right - rect.right) - marginStart;
         }
         viewGroup.setPadding(i, viewGroup.getPaddingTop(), dimensionPixelSize2, viewGroup.getPaddingBottom());
-        post(new Runnable() { // from class: com.android.wm.shell.bubbles.ManageEducationView$show$1
+        post(new Runnable() { // from class: com.android.wm.shell.bubbles.ManageEducationView.show.1
             @Override // java.lang.Runnable
             public final void run() {
                 ManageEducationView manageEducationView = ManageEducationView.this;
@@ -234,26 +232,26 @@ public final class ManageEducationView extends LinearLayout {
                 Button manageButton = manageEducationView.getManageButton();
                 final ManageEducationView manageEducationView2 = ManageEducationView.this;
                 final BubbleExpandedView bubbleExpandedView2 = bubbleExpandedView;
-                manageButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.ManageEducationView$show$1.1
+                manageButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.ManageEducationView.show.1.1
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
-                        ManageEducationView.this.hide();
+                        manageEducationView2.hide();
                         bubbleExpandedView2.requireViewById(R.id.settings_button).performClick();
                     }
                 });
                 Button button = (Button) ManageEducationView.this.gotItButton$delegate.getValue();
                 final ManageEducationView manageEducationView3 = ManageEducationView.this;
-                button.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.ManageEducationView$show$1.2
+                button.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.ManageEducationView.show.1.2
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
-                        ManageEducationView.this.hide();
+                        manageEducationView3.hide();
                     }
                 });
                 final ManageEducationView manageEducationView4 = ManageEducationView.this;
-                manageEducationView4.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.ManageEducationView$show$1.3
+                manageEducationView4.setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.ManageEducationView.show.1.3
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
-                        ManageEducationView.this.hide();
+                        manageEducationView4.hide();
                     }
                 });
                 Rect rect2 = new Rect();

@@ -46,9 +46,9 @@ public interface IGameSessionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGameSessionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGameSessionService)) {
-                return (IGameSessionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGameSessionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGameSessionService)) {
+                return (IGameSessionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,12 +75,12 @@ public interface IGameSessionService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IGameSessionController asInterface = IGameSessionController.Stub.asInterface(parcel.readStrongBinder());
+                IGameSessionController iGameSessionControllerAsInterface = IGameSessionController.Stub.asInterface(parcel.readStrongBinder());
                 CreateGameSessionRequest createGameSessionRequest = (CreateGameSessionRequest) parcel.readTypedObject(CreateGameSessionRequest.CREATOR);
                 GameSessionViewHostConfiguration gameSessionViewHostConfiguration = (GameSessionViewHostConfiguration) parcel.readTypedObject(GameSessionViewHostConfiguration.CREATOR);
                 AndroidFuture androidFuture = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                 parcel.enforceNoDataAvail();
-                create(asInterface, createGameSessionRequest, gameSessionViewHostConfiguration, androidFuture);
+                create(iGameSessionControllerAsInterface, createGameSessionRequest, gameSessionViewHostConfiguration, androidFuture);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -104,16 +104,16 @@ public interface IGameSessionService extends IInterface {
 
             @Override // android.service.games.IGameSessionService
             public void create(IGameSessionController iGameSessionController, CreateGameSessionRequest createGameSessionRequest, GameSessionViewHostConfiguration gameSessionViewHostConfiguration, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGameSessionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iGameSessionController);
-                    obtain.writeTypedObject(createGameSessionRequest, 0);
-                    obtain.writeTypedObject(gameSessionViewHostConfiguration, 0);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGameSessionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iGameSessionController);
+                    parcelObtain.writeTypedObject(createGameSessionRequest, 0);
+                    parcelObtain.writeTypedObject(gameSessionViewHostConfiguration, 0);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

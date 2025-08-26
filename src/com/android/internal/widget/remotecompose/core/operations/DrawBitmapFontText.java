@@ -109,21 +109,21 @@ public class DrawBitmapFontText extends PaintOperation implements VariableSuppor
             return;
         }
         float f = this.mX;
-        int i3 = 0;
-        while (i3 < text.length()) {
-            BitmapFontData.Glyph lookupGlyph = bitmapFontData.lookupGlyph(text, i3);
-            if (lookupGlyph == null) {
-                i3++;
+        int length = 0;
+        while (length < text.length()) {
+            BitmapFontData.Glyph glyphLookupGlyph = bitmapFontData.lookupGlyph(text, length);
+            if (glyphLookupGlyph == null) {
+                length++;
             } else {
-                i3 += lookupGlyph.mChars.length();
-                if (lookupGlyph.mBitmapId == -1) {
-                    f += lookupGlyph.mMarginLeft + lookupGlyph.mMarginRight;
+                length += glyphLookupGlyph.mChars.length();
+                if (glyphLookupGlyph.mBitmapId == -1) {
+                    f += glyphLookupGlyph.mMarginLeft + glyphLookupGlyph.mMarginRight;
                 } else {
-                    float f2 = f + lookupGlyph.mMarginLeft;
-                    float f3 = f2 + lookupGlyph.mBitmapWidth;
+                    float f2 = f + glyphLookupGlyph.mMarginLeft;
+                    float f3 = f2 + glyphLookupGlyph.mBitmapWidth;
                     PaintContext paintContext2 = paintContext;
-                    paintContext2.drawBitmap(lookupGlyph.mBitmapId, f2, this.mY + lookupGlyph.mMarginTop, f3, this.mY + lookupGlyph.mBitmapHeight + lookupGlyph.mMarginTop);
-                    f = f3 + lookupGlyph.mMarginRight;
+                    paintContext2.drawBitmap(glyphLookupGlyph.mBitmapId, f2, this.mY + glyphLookupGlyph.mMarginTop, f3, this.mY + glyphLookupGlyph.mBitmapHeight + glyphLookupGlyph.mMarginTop);
+                    f = f3 + glyphLookupGlyph.mMarginRight;
                     paintContext = paintContext2;
                 }
             }

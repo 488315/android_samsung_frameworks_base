@@ -5,11 +5,9 @@ import com.android.systemui.log.table.Diffable;
 import com.android.systemui.log.table.TableLogBuffer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ShadeMode implements Diffable {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -19,7 +17,6 @@ public abstract class ShadeMode implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Dual extends ShadeMode {
         public static final Dual INSTANCE = new Dual();
 
@@ -40,7 +37,6 @@ public abstract class ShadeMode implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Single extends ShadeMode {
         public static final Single INSTANCE = new Single();
 
@@ -61,7 +57,6 @@ public abstract class ShadeMode implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Split extends ShadeMode {
         public static final Split INSTANCE = new Split();
 

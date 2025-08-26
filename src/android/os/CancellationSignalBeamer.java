@@ -69,9 +69,9 @@ public class CancellationSignalBeamer {
             if (pair == null) {
                 return null;
             }
-            CloseableToken beam = pair.first.beam(cancellationSignal);
-            pair.second.add(beam);
-            return beam;
+            CloseableToken closeableTokenBeam = pair.first.beam(cancellationSignal);
+            pair.second.add(closeableTokenBeam);
+            return closeableTokenBeam;
         }
 
         private static class Token extends Binder implements CloseableToken, Runnable {

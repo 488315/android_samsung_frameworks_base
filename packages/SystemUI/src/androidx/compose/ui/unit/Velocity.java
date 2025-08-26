@@ -2,13 +2,11 @@ package androidx.compose.ui.unit;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Velocity {
     public static final Companion Companion = new Companion(null);
     public final long packedValue;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -23,12 +21,12 @@ public final class Velocity {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ Velocity m876boximpl(long j) {
+    public static final /* synthetic */ Velocity m878boximpl(long j) {
         return new Velocity(j);
     }
 
     /* renamed from: copy-OhffZ5M$default, reason: not valid java name */
-    public static long m877copyOhffZ5M$default(float f, float f2, long j, int i) {
+    public static long m879copyOhffZ5M$default(float f, float f2, long j, int i) {
         if ((i & 1) != 0) {
             f = Float.intBitsToFloat((int) (j >> 32));
         }
@@ -39,39 +37,39 @@ public final class Velocity {
     }
 
     /* renamed from: getX-impl, reason: not valid java name */
-    public static final float m878getXimpl(long j) {
+    public static final float m880getXimpl(long j) {
         return Float.intBitsToFloat((int) (j >> 32));
     }
 
     /* renamed from: getY-impl, reason: not valid java name */
-    public static final float m879getYimpl(long j) {
+    public static final float m881getYimpl(long j) {
         return Float.intBitsToFloat((int) (j & 4294967295L));
     }
 
     /* renamed from: minus-AH228Gc, reason: not valid java name */
-    public static final long m880minusAH228Gc(long j, long j2) {
-        float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32)) - Float.intBitsToFloat((int) (j2 >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L)) - Float.intBitsToFloat((int) (j2 & 4294967295L));
-        return (Float.floatToRawIntBits(intBitsToFloat) << 32) | (Float.floatToRawIntBits(intBitsToFloat2) & 4294967295L);
+    public static final long m882minusAH228Gc(long j, long j2) {
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32)) - Float.intBitsToFloat((int) (j2 >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L)) - Float.intBitsToFloat((int) (j2 & 4294967295L));
+        return (Float.floatToRawIntBits(fIntBitsToFloat) << 32) | (Float.floatToRawIntBits(fIntBitsToFloat2) & 4294967295L);
     }
 
     /* renamed from: plus-AH228Gc, reason: not valid java name */
-    public static final long m881plusAH228Gc(long j, long j2) {
-        float intBitsToFloat = Float.intBitsToFloat((int) (j2 >> 32)) + Float.intBitsToFloat((int) (j >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (j2 & 4294967295L)) + Float.intBitsToFloat((int) (j & 4294967295L));
-        return (Float.floatToRawIntBits(intBitsToFloat2) & 4294967295L) | (Float.floatToRawIntBits(intBitsToFloat) << 32);
+    public static final long m883plusAH228Gc(long j, long j2) {
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j2 >> 32)) + Float.intBitsToFloat((int) (j >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (j2 & 4294967295L)) + Float.intBitsToFloat((int) (j & 4294967295L));
+        return (Float.floatToRawIntBits(fIntBitsToFloat2) & 4294967295L) | (Float.floatToRawIntBits(fIntBitsToFloat) << 32);
     }
 
     /* renamed from: times-adjELrA, reason: not valid java name */
-    public static final long m882timesadjELrA(float f, long j) {
-        float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32)) * f;
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L)) * f;
-        return (Float.floatToRawIntBits(intBitsToFloat2) & 4294967295L) | (Float.floatToRawIntBits(intBitsToFloat) << 32);
+    public static final long m884timesadjELrA(float f, long j) {
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32)) * f;
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L)) * f;
+        return (Float.floatToRawIntBits(fIntBitsToFloat2) & 4294967295L) | (Float.floatToRawIntBits(fIntBitsToFloat) << 32);
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m883toStringimpl(long j) {
-        return "(" + m878getXimpl(j) + ", " + m879getYimpl(j) + ") px/sec";
+    public static String m885toStringimpl(long j) {
+        return "(" + m880getXimpl(j) + ", " + m881getYimpl(j) + ") px/sec";
     }
 
     public final boolean equals(Object obj) {
@@ -86,6 +84,6 @@ public final class Velocity {
     }
 
     public final String toString() {
-        return m883toStringimpl(this.packedValue);
+        return m885toStringimpl(this.packedValue);
     }
 }

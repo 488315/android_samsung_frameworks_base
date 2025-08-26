@@ -169,71 +169,71 @@ public class SerializedFrame extends Frame {
     }
 
     @Override // android.filterfw.core.Frame
-    public void setInts(int[] iArr) {
+    public void setInts(int[] iArr) throws IOException {
         assertFrameMutable();
         setGenericObjectValue(iArr);
     }
 
     @Override // android.filterfw.core.Frame
     public int[] getInts() {
-        Object deserializeObjectValue = deserializeObjectValue();
-        if (deserializeObjectValue instanceof int[]) {
-            return (int[]) deserializeObjectValue;
+        Object objDeserializeObjectValue = deserializeObjectValue();
+        if (objDeserializeObjectValue instanceof int[]) {
+            return (int[]) objDeserializeObjectValue;
         }
         return null;
     }
 
     @Override // android.filterfw.core.Frame
-    public void setFloats(float[] fArr) {
+    public void setFloats(float[] fArr) throws IOException {
         assertFrameMutable();
         setGenericObjectValue(fArr);
     }
 
     @Override // android.filterfw.core.Frame
     public float[] getFloats() {
-        Object deserializeObjectValue = deserializeObjectValue();
-        if (deserializeObjectValue instanceof float[]) {
-            return (float[]) deserializeObjectValue;
+        Object objDeserializeObjectValue = deserializeObjectValue();
+        if (objDeserializeObjectValue instanceof float[]) {
+            return (float[]) objDeserializeObjectValue;
         }
         return null;
     }
 
     @Override // android.filterfw.core.Frame
-    public void setData(ByteBuffer byteBuffer, int i, int i2) {
+    public void setData(ByteBuffer byteBuffer, int i, int i2) throws IOException {
         assertFrameMutable();
         setGenericObjectValue(ByteBuffer.wrap(byteBuffer.array(), i, i2));
     }
 
     @Override // android.filterfw.core.Frame
     public ByteBuffer getData() {
-        Object deserializeObjectValue = deserializeObjectValue();
-        if (deserializeObjectValue instanceof ByteBuffer) {
-            return (ByteBuffer) deserializeObjectValue;
+        Object objDeserializeObjectValue = deserializeObjectValue();
+        if (objDeserializeObjectValue instanceof ByteBuffer) {
+            return (ByteBuffer) objDeserializeObjectValue;
         }
         return null;
     }
 
     @Override // android.filterfw.core.Frame
-    public void setBitmap(Bitmap bitmap) {
+    public void setBitmap(Bitmap bitmap) throws IOException {
         assertFrameMutable();
         setGenericObjectValue(bitmap);
     }
 
     @Override // android.filterfw.core.Frame
     public Bitmap getBitmap() {
-        Object deserializeObjectValue = deserializeObjectValue();
-        if (deserializeObjectValue instanceof Bitmap) {
-            return (Bitmap) deserializeObjectValue;
+        Object objDeserializeObjectValue = deserializeObjectValue();
+        if (objDeserializeObjectValue instanceof Bitmap) {
+            return (Bitmap) objDeserializeObjectValue;
         }
         return null;
     }
 
     @Override // android.filterfw.core.Frame
-    protected void setGenericObjectValue(Object obj) {
+    protected void setGenericObjectValue(Object obj) throws IOException {
         serializeObjectValue(obj);
     }
 
-    private final void serializeObjectValue(Object obj) {
+    private final void serializeObjectValue(Object obj) throws IOException {
         try {
             this.mByteOutputStream.reset();
             this.mObjectOut.writeObject(obj);

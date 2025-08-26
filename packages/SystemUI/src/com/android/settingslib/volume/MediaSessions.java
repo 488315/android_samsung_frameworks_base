@@ -3,6 +3,7 @@ package com.android.settingslib.volume;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.MediaMetadata;
+import android.media.MediaRoute2Info;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.media.session.MediaSessionManager;
@@ -12,10 +13,14 @@ import android.os.Handler;
 import android.os.HandlerExecutor;
 import android.os.Looper;
 import android.os.Message;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
 import android.util.Slog;
+import androidx.activity.result.ActivityResultRegistry$register$3$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
+import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
+import com.android.systemui.plugins.VolumeDialogController;
 import com.android.systemui.volume.VolumeDialogControllerImpl;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.io.PrintWriter;
@@ -28,7 +33,6 @@ import java.util.Objects;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MediaSessions {
     public static final String TAG;
@@ -42,11 +46,9 @@ public final class MediaSessions {
     public final MediaSessions$mRemoteSessionCallback$1 mRemoteSessionCallback;
     public final MediaSessions$mSessionsListener$1 mSessionsListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callbacks {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -56,7 +58,6 @@ public final class MediaSessions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -64,7 +65,7 @@ public final class MediaSessions {
 
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
-            int intValue;
+            int iIntValue;
             int i = message.what;
             if (i == 1) {
                 MediaSessions mediaSessions = MediaSessions.this;
@@ -104,31 +105,30 @@ public final class MediaSessions {
             VolumeDialogControllerImpl.MediaSessionsCallbacks mediaSessionsCallbacks = (VolumeDialogControllerImpl.MediaSessionsCallbacks) callbacks;
             mediaSessionsCallbacks.addStream(media, "onRemoteVolumeChanged");
             synchronized (mediaSessionsCallbacks.mRemoteStreams) {
-                intValue = ((Integer) mediaSessionsCallbacks.mRemoteStreams.get(media)).intValue();
+                iIntValue = ((Integer) mediaSessionsCallbacks.mRemoteStreams.get(media)).intValue();
             }
             VolumeDialogControllerImpl volumeDialogControllerImpl = VolumeDialogControllerImpl.this;
             String str3 = VolumeDialogControllerImpl.TAG;
-            boolean shouldShowUI = volumeDialogControllerImpl.shouldShowUI(i2);
+            boolean zShouldShowUI = volumeDialogControllerImpl.shouldShowUI(i2);
             String str4 = VolumeDialogControllerImpl.TAG;
-            Slog.d(str4, "onRemoteVolumeChanged: stream: " + intValue + " showui? " + shouldShowUI);
-            VolumeDialogControllerImpl.m3196$$Nest$mupdateRemoteFixedVolumeSession(VolumeDialogControllerImpl.this, intValue, VolumeDialogControllerImpl.m3195$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPlaybackInfo());
-            boolean updateActiveStreamW = VolumeDialogControllerImpl.this.updateActiveStreamW(intValue);
-            if (shouldShowUI) {
-                updateActiveStreamW |= VolumeDialogControllerImpl.this.checkRoutedToBluetoothW(3);
+            Slog.d(str4, "onRemoteVolumeChanged: stream: " + iIntValue + " showui? " + zShouldShowUI);
+            VolumeDialogControllerImpl.m3213$$Nest$mupdateRemoteFixedVolumeSession(VolumeDialogControllerImpl.this, iIntValue, VolumeDialogControllerImpl.m3212$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPlaybackInfo());
+            boolean zUpdateActiveStreamW = VolumeDialogControllerImpl.this.updateActiveStreamW(iIntValue);
+            if (zShouldShowUI) {
+                zUpdateActiveStreamW |= VolumeDialogControllerImpl.this.checkRoutedToBluetoothW(3);
             }
-            if (updateActiveStreamW) {
+            if (zUpdateActiveStreamW) {
                 Slog.d(str4, "onRemoteChanged: updatingState");
                 VolumeDialogControllerImpl volumeDialogControllerImpl2 = VolumeDialogControllerImpl.this;
                 volumeDialogControllerImpl2.mCallbacks.onStateChanged(volumeDialogControllerImpl2.mState);
             }
-            if (shouldShowUI) {
+            if (zShouldShowUI) {
                 VolumeDialogControllerImpl volumeDialogControllerImpl3 = VolumeDialogControllerImpl.this;
                 volumeDialogControllerImpl3.mCallbacks.onShowRequested(2, volumeDialogControllerImpl3.mKeyguardManager.isKeyguardLocked(), volumeDialogControllerImpl3.mActivityManager.getLockTaskModeState());
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaControllerRecord extends MediaController.Callback {
         public final MediaController controller;
         public String name;
@@ -217,11 +217,9 @@ public final class MediaSessions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SessionId {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -229,7 +227,6 @@ public final class MediaSessions {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Media implements SessionId {
             public final MediaSession.Token token;
 
@@ -254,13 +251,11 @@ public final class MediaSessions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VolumeInfo {
         public static final Companion Companion = new Companion(null);
         public final int currentVolume;
         public final int maxVolume;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -300,11 +295,11 @@ public final class MediaSessions {
 
     static {
         new Companion(null);
-        String concat = "vol.".concat("MediaSessions");
-        if (concat.length() >= 23) {
-            concat = concat.substring(0, 23);
+        String strConcat = "vol.".concat("MediaSessions");
+        if (strConcat.length() >= 23) {
+            strConcat = strConcat.substring(0, 23);
         }
-        TAG = concat;
+        TAG = strConcat;
     }
 
     /* JADX WARN: Type inference failed for: r2v4, types: [com.android.settingslib.volume.MediaSessions$mSessionsListener$1] */
@@ -320,24 +315,24 @@ public final class MediaSessions {
         this.mSessionsListener = new MediaSessionManager.OnActiveSessionsChangedListener() { // from class: com.android.settingslib.volume.MediaSessions$mSessionsListener$1
             @Override // android.media.session.MediaSessionManager.OnActiveSessionsChangedListener
             public final void onActiveSessionsChanged(List list) {
-                MediaSessions mediaSessions = MediaSessions.this;
+                MediaSessions mediaSessions = this.this$0;
                 list.getClass();
                 MediaSessions.access$onActiveSessionsUpdatedH(mediaSessions, list);
             }
         };
         this.mRemoteSessionCallback = new MediaSessionManager.RemoteSessionCallback() { // from class: com.android.settingslib.volume.MediaSessions$mRemoteSessionCallback$1
             public final void onDefaultRemoteSessionChanged(MediaSession.Token token) {
-                MediaSessions.this.mHandler.obtainMessage(3, token).sendToTarget();
+                this.this$0.mHandler.obtainMessage(3, token).sendToTarget();
             }
 
             public final void onVolumeChanged(MediaSession.Token token, int i) {
-                MediaSessions.this.mHandler.obtainMessage(2, i, 0, token).sendToTarget();
+                this.this$0.mHandler.obtainMessage(2, i, 0, token).sendToTarget();
             }
         };
     }
 
     public static final void access$onActiveSessionsUpdatedH(MediaSessions mediaSessions, List list) {
-        String obj;
+        String string;
         mediaSessions.getClass();
         boolean z = D.BUG;
         String str = TAG;
@@ -356,12 +351,12 @@ public final class MediaSessions {
                 PackageManager packageManager = mediaSessions.mContext.getPackageManager();
                 String packageName = mediaController.getPackageName();
                 try {
-                    String objects = Objects.toString(packageManager.getApplicationInfo(packageName, 0).loadLabel(packageManager), "");
-                    int length = objects.length() - 1;
+                    String string2 = Objects.toString(packageManager.getApplicationInfo(packageName, 0).loadLabel(packageManager), "");
+                    int length = string2.length() - 1;
                     int i = 0;
                     boolean z2 = false;
                     while (i <= length) {
-                        boolean z3 = Intrinsics.compare(objects.charAt(!z2 ? i : length), 32) <= 0;
+                        boolean z3 = Intrinsics.compare(string2.charAt(!z2 ? i : length), 32) <= 0;
                         if (z2) {
                             if (!z3) {
                                 break;
@@ -374,16 +369,14 @@ public final class MediaSessions {
                             z2 = true;
                         }
                     }
-                    obj = objects.subSequence(i, length + 1).toString();
+                    string = string2.subSequence(i, length + 1).toString();
                 } catch (PackageManager.NameNotFoundException unused) {
                 }
-                if (obj.length() > 0) {
-                    packageName = obj;
-                    mediaControllerRecord.name = packageName;
-                    ((HashMap) mediaSessions.mRecords).put(sessionToken, mediaControllerRecord);
-                    mediaController.registerCallback(mediaControllerRecord, mediaSessions.mHandler);
+                if (string.length() > 0) {
+                    packageName = string;
+                } else {
+                    packageName.getClass();
                 }
-                packageName.getClass();
                 mediaControllerRecord.name = packageName;
                 ((HashMap) mediaSessions.mRecords).put(sessionToken, mediaControllerRecord);
                 mediaController.registerCallback(mediaControllerRecord, mediaSessions.mHandler);
@@ -398,9 +391,9 @@ public final class MediaSessions {
         Iterator it2 = hashSet.iterator();
         while (it2.hasNext()) {
             MediaSession.Token token = (MediaSession.Token) it2.next();
-            Object obj2 = ((HashMap) mediaSessions.mRecords).get(token);
-            obj2.getClass();
-            MediaControllerRecord mediaControllerRecord3 = (MediaControllerRecord) obj2;
+            Object obj = ((HashMap) mediaSessions.mRecords).get(token);
+            obj.getClass();
+            MediaControllerRecord mediaControllerRecord3 = (MediaControllerRecord) obj;
             mediaControllerRecord3.controller.unregisterCallback(mediaControllerRecord3);
             ((HashMap) mediaSessions.mRecords).remove(token);
             if (D.BUG) {
@@ -426,9 +419,9 @@ public final class MediaSessions {
             i++;
             MediaController mediaController = ((MediaControllerRecord) it.next()).controller;
             printWriter.println("  Controller " + i + ": " + mediaController.getPackageName());
-            String playbackStateToString = Util.playbackStateToString(mediaController.getPlaybackState());
+            String strPlaybackStateToString = Util.playbackStateToString(mediaController.getPlaybackState());
             StringBuilder sb = new StringBuilder("    PlaybackState: ");
-            sb.append(playbackStateToString);
+            sb.append(strPlaybackStateToString);
             printWriter.println(sb.toString());
             printWriter.println("    PlaybackInfo: " + Util.playbackInfoToString(mediaController.getPlaybackInfo()));
             MediaMetadata metadata = mediaController.getMetadata();
@@ -473,22 +466,80 @@ public final class MediaSessions {
         this.mMgr.registerRemoteSessionCallback(this.mHandlerExecutor, this.mRemoteSessionCallback);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00ab  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00d9  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00fb  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0103  */
-    /* JADX WARN: Removed duplicated region for block: B:46:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00db  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x00a5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateRemoteH(android.media.session.MediaSession.Token r11, java.lang.String r12, android.media.session.MediaController.PlaybackInfo r13) {
-        /*
-            Method dump skipped, instructions count: 334
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.volume.MediaSessions.updateRemoteH(android.media.session.MediaSession$Token, java.lang.String, android.media.session.MediaController$PlaybackInfo):void");
+    public final void updateRemoteH(MediaSession.Token token, String str, MediaController.PlaybackInfo playbackInfo) {
+        int iIntValue;
+        MediaRoute2Info mediaRoute2Info;
+        boolean z;
+        Callbacks callbacks = this.mCallbacks;
+        SessionId.Companion.getClass();
+        SessionId.Media media = new SessionId.Media(token);
+        VolumeInfo.Companion.getClass();
+        VolumeInfo volumeInfo = new VolumeInfo(playbackInfo.getCurrentVolume(), playbackInfo.getMaxVolume());
+        VolumeDialogControllerImpl.MediaSessionsCallbacks mediaSessionsCallbacks = (VolumeDialogControllerImpl.MediaSessionsCallbacks) callbacks;
+        mediaSessionsCallbacks.addStream(media, "onRemoteUpdate");
+        synchronized (mediaSessionsCallbacks.mRemoteStreams) {
+            iIntValue = ((Integer) mediaSessionsCallbacks.mRemoteStreams.get(media)).intValue();
+        }
+        String str2 = VolumeDialogControllerImpl.TAG;
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iIntValue, "onRemoteUpdate: stream: ", " volume: ");
+        sbM.append(volumeInfo.currentVolume);
+        Slog.d(str2, sbM.toString());
+        VolumeDialogControllerImpl.m3213$$Nest$mupdateRemoteFixedVolumeSession(VolumeDialogControllerImpl.this, iIntValue, VolumeDialogControllerImpl.m3212$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPlaybackInfo());
+        VolumeDialogControllerImpl volumeDialogControllerImpl = VolumeDialogControllerImpl.this;
+        VolumeDialogController.StreamState streamStateStreamStateW = volumeDialogControllerImpl.streamStateW(iIntValue);
+        Iterator it = volumeDialogControllerImpl.mRouter2Manager.getAllRoutes().iterator();
+        while (true) {
+            if (!it.hasNext()) {
+                mediaRoute2Info = null;
+                break;
+            }
+            mediaRoute2Info = (MediaRoute2Info) it.next();
+            if (mediaRoute2Info.getConnectionState() == 2 && !mediaRoute2Info.getFeatures().contains("android.media.route.feature.LOCAL_PLAYBACK")) {
+                break;
+            }
+        }
+        if (mediaRoute2Info != null) {
+            List<String> features = mediaRoute2Info.getFeatures();
+            z = features.contains("android.media.route.feature.REMOTE_PLAYBACK") || features.contains("android.media.route.feature.REMOTE_AUDIO_PLAYBACK");
+        }
+        if (streamStateStreamStateW.remoteSpeaker != z) {
+            streamStateStreamStateW.remoteSpeaker = z;
+            if (com.android.systemui.volume.D.BUG) {
+                Log.d(VolumeDialogControllerImpl.TAG, "updateStreamRoutedToRemoteSpeaker stream=" + iIntValue + " remoteSpeaker=" + z);
+            }
+        }
+        boolean z2 = VolumeDialogControllerImpl.this.mState.states.indexOfKey(iIntValue) < 0;
+        VolumeDialogController.StreamState streamStateStreamStateW2 = VolumeDialogControllerImpl.this.streamStateW(iIntValue);
+        streamStateStreamStateW2.dynamic = true;
+        streamStateStreamStateW2.levelMin = 0;
+        streamStateStreamStateW2.levelMax = volumeInfo.maxVolume;
+        int i = streamStateStreamStateW2.level;
+        int i2 = volumeInfo.currentVolume;
+        if (i != i2) {
+            streamStateStreamStateW2.level = i2;
+            z2 = true;
+        }
+        if (!Objects.equals(streamStateStreamStateW2.remoteLabel, str)) {
+            streamStateStreamStateW2.name = -1;
+            streamStateStreamStateW2.remoteLabel = str;
+            z2 = true;
+        }
+        if (z2) {
+            String str3 = VolumeDialogControllerImpl.TAG;
+            StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("onRemoteUpdate: ", str, ": ");
+            sbM2.append(streamStateStreamStateW2.level);
+            sbM2.append(" of ");
+            RecyclerView$$ExternalSyntheticOutline0.m(streamStateStreamStateW2.levelMax, str3, sbM2);
+            boolean z3 = VolumeDialogControllerImpl.this.mState.states.indexOfKey(iIntValue) > 0;
+            if (!streamStateStreamStateW2.remoteFixedVolume) {
+                VolumeDialogControllerImpl.this.mVolumeManager.updateRemoteVolume(z3, iIntValue, streamStateStreamStateW2.levelMin, streamStateStreamStateW2.levelMax, streamStateStreamStateW2.level, media.token, streamStateStreamStateW2.remoteSpeaker);
+            }
+            VolumeDialogControllerImpl volumeDialogControllerImpl2 = VolumeDialogControllerImpl.this;
+            volumeDialogControllerImpl2.mCallbacks.onStateChanged(volumeDialogControllerImpl2.mState);
+        }
     }
 }

@@ -5,11 +5,9 @@ import android.os.RemoteException;
 import android.util.Slog;
 import com.android.wm.shell.recents.GroupedRecentTaskSaveController;
 import com.android.wm.shell.recents.RecentTasksController;
-import com.android.wm.shell.recents.RecentTasksController$$ExternalSyntheticLambda6;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class ShellTaskOrganizer$$ExternalSyntheticLambda1 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -63,8 +61,8 @@ public final /* synthetic */ class ShellTaskOrganizer$$ExternalSyntheticLambda1 
                     synchronized (groupedRecentTaskSaveController.mGroupedRecentTaskSaveMap) {
                         ((HashMap) groupedRecentTaskSaveController.mGroupedRecentTaskSaveMap).clear();
                     }
+                    return;
                 }
-                recentTasksController.mDesktopUserRepositories.ifPresent(new RecentTasksController$$ExternalSyntheticLambda6(runningTaskInfo, 1));
                 return;
         }
     }

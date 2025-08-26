@@ -52,9 +52,9 @@ public interface IOnClipboardEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOnClipboardEventListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOnClipboardEventListener)) {
-                return (IOnClipboardEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOnClipboardEventListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOnClipboardEventListener)) {
+                return (IOnClipboardEventListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,14 +84,14 @@ public interface IOnClipboardEventListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 SemClipData semClipData = (SemClipData) parcel.readTypedObject(SemClipData.CREATOR);
                 parcel.enforceNoDataAvail();
-                onClipboardEvent(readInt, semClipData);
+                onClipboardEvent(i3, semClipData);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onUpdateFilter(readInt2);
+                onUpdateFilter(i4);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -116,26 +116,26 @@ public interface IOnClipboardEventListener extends IInterface {
 
             @Override // com.samsung.android.content.clipboard.IOnClipboardEventListener
             public void onClipboardEvent(int i, SemClipData semClipData) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnClipboardEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(semClipData, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnClipboardEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(semClipData, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.clipboard.IOnClipboardEventListener
             public void onUpdateFilter(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnClipboardEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnClipboardEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

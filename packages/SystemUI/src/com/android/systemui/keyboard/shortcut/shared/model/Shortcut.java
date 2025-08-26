@@ -8,7 +8,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class Shortcut {
     public final List commands;
@@ -52,9 +51,9 @@ public final class Shortcut {
     }
 
     public final int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.commands, this.label.hashCode() * 31, 31);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.commands, this.label.hashCode() * 31, 31);
         ShortcutIcon shortcutIcon = this.icon;
-        return Boolean.hashCode(this.isCustomizable) + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((m + (shortcutIcon == null ? 0 : shortcutIcon.hashCode())) * 31, 31, this.contentDescription);
+        return Boolean.hashCode(this.isCustomizable) + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((iM + (shortcutIcon == null ? 0 : shortcutIcon.hashCode())) * 31, 31, this.contentDescription);
     }
 
     public final String toString() {

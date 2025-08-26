@@ -25,7 +25,6 @@ import com.android.systemui.R;
 import com.android.systemui.util.SettingsHelper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecRoundedCornerSeekBarDrawable extends InsetDrawable {
     public static final PathInterpolator ALPHA_INTERPOLATOR;
@@ -41,7 +40,6 @@ public final class SecRoundedCornerSeekBarDrawable extends InsetDrawable {
     public ValueAnimator shockValueAnimator;
     public int startColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -51,7 +49,6 @@ public final class SecRoundedCornerSeekBarDrawable extends InsetDrawable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RoundedCornerState extends Drawable.ConstantState {
         public final Drawable.ConstantState wrappedState;
 
@@ -86,6 +83,7 @@ public final class SecRoundedCornerSeekBarDrawable extends InsetDrawable {
         LINEAR_INTERPOLATOR = new LinearInterpolator();
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public SecRoundedCornerSeekBarDrawable() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -119,7 +117,7 @@ public final class SecRoundedCornerSeekBarDrawable extends InsetDrawable {
                 duration2.start();
             }
         }
-        this.buttonAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.SecRoundedCornerSeekBarDrawable$animateButton$1
+        this.buttonAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.SecRoundedCornerSeekBarDrawable.animateButton.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 SecRoundedCornerSeekBarDrawable.this.buttonColor = ((Integer) valueAnimator.getAnimatedValue()).intValue();
@@ -136,28 +134,28 @@ public final class SecRoundedCornerSeekBarDrawable extends InsetDrawable {
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
     public final void draw(Canvas canvas) {
-        float width = getBounds().width() / 2.0f;
+        float fWidth = getBounds().width() / 2.0f;
         Paint paint = new Paint();
         paint.setColor(this.buttonColor);
         paint.setStyle(Paint.Style.FILL);
-        int width2 = getBounds().width();
-        int height = width2 != 0 ? (getBounds().height() * 10000) / width2 : 0;
-        if (this.level > height || height == 0) {
+        int iWidth = getBounds().width();
+        int iHeight = iWidth != 0 ? (getBounds().height() * 10000) / iWidth : 0;
+        if (this.level > iHeight || iHeight == 0) {
             super.draw(canvas);
             Drawable drawable = getDrawable();
             (drawable != null ? drawable.getBounds() : null).getClass();
-            canvas.drawCircle(r3.right - (getBounds().height() / 2.0f), width, getBounds().height() / 2.0f, paint);
+            canvas.drawCircle(r3.right - (getBounds().height() / 2.0f), fWidth, getBounds().height() / 2.0f, paint);
             return;
         }
         Paint paint2 = new Paint();
-        float height2 = ((((getBounds().height() * 2) * this.level) / height) - getBounds().height()) / 2.0f;
-        paint2.setShader(new LinearGradient(height2 - (getBounds().height() / 2.0f), 0.0f, (getBounds().height() / 2.0f) + height2, 0.0f, this.startColor, this.endColor, Shader.TileMode.CLAMP));
+        float fHeight = ((((getBounds().height() * 2) * this.level) / iHeight) - getBounds().height()) / 2.0f;
+        paint2.setShader(new LinearGradient(fHeight - (getBounds().height() / 2.0f), 0.0f, (getBounds().height() / 2.0f) + fHeight, 0.0f, this.startColor, this.endColor, Shader.TileMode.CLAMP));
         Path path = new Path();
-        path.addCircle(getBounds().height() / 2.0f, width, getBounds().height() / 2.0f, Path.Direction.CW);
+        path.addCircle(getBounds().height() / 2.0f, fWidth, getBounds().height() / 2.0f, Path.Direction.CW);
         canvas.clipPath(path);
-        RectF rectF = new RectF(height2 - (getBounds().height() / 2.0f), (getBounds().height() / 2.0f) + width, (getBounds().height() / 2.0f) + height2, width - (getBounds().height() / 2.0f));
-        canvas.drawRoundRect(rectF, height2, height2, paint2);
-        canvas.drawRoundRect(rectF, height2, height2, paint);
+        RectF rectF = new RectF(fHeight - (getBounds().height() / 2.0f), (getBounds().height() / 2.0f) + fWidth, (getBounds().height() / 2.0f) + fHeight, fWidth - (getBounds().height() / 2.0f));
+        canvas.drawRoundRect(rectF, fHeight, fHeight, paint2);
+        canvas.drawRoundRect(rectF, fHeight, fHeight, paint);
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
@@ -191,12 +189,12 @@ public final class SecRoundedCornerSeekBarDrawable extends InsetDrawable {
         bounds.getClass();
         ((GradientDrawable) ((LayerDrawable) getDrawable()).findDrawableByLayerId(R.id.volume_seekbar_progress)).setColors(new int[]{this.gradientColor, this.endColor});
         this.level = i;
-        int width = getBounds().width();
-        if (i >= (width != 0 ? (bounds.height() * 10000) / width : 0)) {
-            int width2 = (getBounds().width() * i) / 10000;
+        int iWidth = getBounds().width();
+        if (i >= (iWidth != 0 ? (bounds.height() * 10000) / iWidth : 0)) {
+            int iWidth2 = (getBounds().width() * i) / 10000;
             Drawable drawable2 = getDrawable();
             if (drawable2 != null) {
-                drawable2.setBounds(getBounds().left, bounds.top, getBounds().left + width2, bounds.bottom);
+                drawable2.setBounds(getBounds().left, bounds.top, getBounds().left + iWidth2, bounds.bottom);
             }
         }
         return super.onLevelChange(i);
@@ -247,7 +245,7 @@ public final class SecRoundedCornerSeekBarDrawable extends InsetDrawable {
                 this.shockValueAnimator.start();
             }
         }
-        this.shockValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.SecRoundedCornerSeekBarDrawable$setShockColor$1
+        this.shockValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.SecRoundedCornerSeekBarDrawable.setShockColor.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                 SecRoundedCornerSeekBarDrawable.this.gradientColor = ((Integer) valueAnimator2.getAnimatedValue()).intValue();

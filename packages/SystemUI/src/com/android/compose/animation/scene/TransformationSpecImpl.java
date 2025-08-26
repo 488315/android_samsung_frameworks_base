@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import kotlin.NoWhenBranchMatchedException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TransformationSpecImpl implements TransformationSpec {
     public final Map cache = new LinkedHashMap();
@@ -36,14 +35,14 @@ public final class TransformationSpecImpl implements TransformationSpec {
 
     public final ElementTransformations transformations$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(ContentKey contentKey, ElementKey elementKey) {
         LinkedHashMap linkedHashMap = (LinkedHashMap) this.cache;
-        Object obj = linkedHashMap.get(elementKey);
-        if (obj == null) {
-            obj = new LinkedHashMap();
-            linkedHashMap.put(elementKey, obj);
+        Object linkedHashMap2 = linkedHashMap.get(elementKey);
+        if (linkedHashMap2 == null) {
+            linkedHashMap2 = new LinkedHashMap();
+            linkedHashMap.put(elementKey, linkedHashMap2);
         }
-        Map map = (Map) obj;
-        Object obj2 = map.get(contentKey);
-        if (obj2 == null) {
+        Map map = (Map) linkedHashMap2;
+        Object elementTransformations = map.get(contentKey);
+        if (elementTransformations == null) {
             List list = this.transformationMatchers;
             int size = list.size();
             TransformationWithRange transformationWithRange = null;
@@ -54,17 +53,17 @@ public final class TransformationSpecImpl implements TransformationSpec {
             for (int i = 0; i < size; i++) {
                 TransformationMatcher transformationMatcher = (TransformationMatcher) list.get(i);
                 if (transformationMatcher.matcher.matches(contentKey, elementKey)) {
-                    Transformation create = transformationMatcher.factory.create();
-                    boolean z = create instanceof SharedElementTransformation;
+                    Transformation transformationCreate = transformationMatcher.factory.create();
+                    boolean z = transformationCreate instanceof SharedElementTransformation;
                     TransformationRange transformationRange = transformationMatcher.range;
                     if (z) {
                         throwIfNotNull(transformationWithRange, elementKey, "shared");
-                        transformationWithRange = new TransformationWithRange(create, transformationRange);
+                        transformationWithRange = new TransformationWithRange(transformationCreate, transformationRange);
                     } else {
-                        if (!(create instanceof PropertyTransformation)) {
+                        if (!(transformationCreate instanceof PropertyTransformation)) {
                             throw new NoWhenBranchMatchedException();
                         }
-                        PropertyTransformation propertyTransformation = (PropertyTransformation) create;
+                        PropertyTransformation propertyTransformation = (PropertyTransformation) transformationCreate;
                         PropertyTransformation.Property property = propertyTransformation.getProperty();
                         if (property instanceof PropertyTransformation.Property.Offset) {
                             throwIfNotNull(transformationWithRange2, elementKey, MoveFromCurrentPositionController.OFFSET);
@@ -85,9 +84,9 @@ public final class TransformationSpecImpl implements TransformationSpec {
                     }
                 }
             }
-            obj2 = (transformationWithRange == null && transformationWithRange2 == null && transformationWithRange3 == null && transformationWithRange4 == null && transformationWithRange5 == null) ? null : new ElementTransformations(transformationWithRange, transformationWithRange2, transformationWithRange3, transformationWithRange4, transformationWithRange5);
-            map.put(contentKey, obj2);
+            elementTransformations = (transformationWithRange == null && transformationWithRange2 == null && transformationWithRange3 == null && transformationWithRange4 == null && transformationWithRange5 == null) ? null : new ElementTransformations(transformationWithRange, transformationWithRange2, transformationWithRange3, transformationWithRange4, transformationWithRange5);
+            map.put(contentKey, elementTransformations);
         }
-        return (ElementTransformations) obj2;
+        return (ElementTransformations) elementTransformations;
     }
 }

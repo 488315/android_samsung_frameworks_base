@@ -23,12 +23,12 @@ import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.shared.TransactionPool;
 import com.android.wm.shell.shared.TransitionUtil;
 import com.android.wm.shell.transition.MultiTaskingTransitionProvider;
+import com.android.wm.shell.transition.MultiTaskingTransitions;
 import com.android.wm.shell.transition.Transitions;
 import com.samsung.android.multiwindow.MultiWindowManager;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ChangeTransitionProvider {
     public ChangeTransitionSpec mChangeTransitionSpec;
@@ -90,13 +90,13 @@ public class ChangeTransitionProvider {
     }
 
     public final boolean buildChangeTransitionAnimators(ArrayList arrayList, TransitionInfo.Change change, Runnable runnable, SurfaceControl.Transaction transaction, TransitionInfo transitionInfo) {
-        ChangeTransitionSpec createChangeTransitionSpecIfNeeded = createChangeTransitionSpecIfNeeded(change, transitionInfo);
-        if (createChangeTransitionSpecIfNeeded == null) {
+        ChangeTransitionSpec changeTransitionSpecCreateChangeTransitionSpecIfNeeded = createChangeTransitionSpecIfNeeded(change, transitionInfo);
+        if (changeTransitionSpecCreateChangeTransitionSpecIfNeeded == null) {
             return false;
         }
         Log.d("ChangeTransitionProvider", "buildChangeTransitionAnimators");
-        buildSurfaceAnimator(arrayList, createChangeTransitionSpecIfNeeded.mBoundsChangeAnimation, change.getLeash(), runnable);
-        Animation animation = createChangeTransitionSpecIfNeeded.mSnapshotAnimation;
+        buildSurfaceAnimator(arrayList, changeTransitionSpecCreateChangeTransitionSpecIfNeeded.mBoundsChangeAnimation, change.getLeash(), runnable);
+        Animation animation = changeTransitionSpecCreateChangeTransitionSpecIfNeeded.mSnapshotAnimation;
         SurfaceControl snapshot = change.getSnapshot();
         Objects.requireNonNull(snapshot);
         buildSurfaceAnimator(arrayList, animation, snapshot, runnable);
@@ -105,7 +105,7 @@ public class ChangeTransitionProvider {
     }
 
     public final void buildSurfaceAnimator(final ArrayList arrayList, final Animation animation, final SurfaceControl surfaceControl, final Runnable runnable) {
-        final SurfaceControl.Transaction acquire = this.mTransactionPool.acquire();
+        final SurfaceControl.Transaction transactionAcquire = this.mTransactionPool.acquire();
         final MultiTaskingTransitionProvider.SurfaceValueAnimator surfaceValueAnimator = new MultiTaskingTransitionProvider.SurfaceValueAnimator(surfaceControl, 0.0f, 1.0f);
         final Transformation transformation = new Transformation();
         final float[] fArr = new float[9];
@@ -116,17 +116,17 @@ public class ChangeTransitionProvider {
         final ValueAnimator.AnimatorUpdateListener animatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.transition.change.ChangeTransitionProvider$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                MultiTaskingTransitionProvider.SurfaceValueAnimator surfaceValueAnimator2 = MultiTaskingTransitionProvider.SurfaceValueAnimator.this;
-                ChangeTransitionProvider.applyTransformation(Math.min(surfaceValueAnimator2.getDuration(), surfaceValueAnimator2.getCurrentPlayTime()), acquire, surfaceControl, animation, transformation, fArr, fArr2, rect);
+                MultiTaskingTransitionProvider.SurfaceValueAnimator surfaceValueAnimator2 = surfaceValueAnimator;
+                ChangeTransitionProvider.applyTransformation(Math.min(surfaceValueAnimator2.getDuration(), surfaceValueAnimator2.getCurrentPlayTime()), transactionAcquire, surfaceControl, animation, transformation, fArr, fArr2, rect);
             }
         };
         surfaceValueAnimator.addUpdateListener(animatorUpdateListener);
         final Runnable runnable2 = new Runnable() { // from class: com.android.wm.shell.transition.change.ChangeTransitionProvider$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                ChangeTransitionProvider changeTransitionProvider = ChangeTransitionProvider.this;
+                ChangeTransitionProvider changeTransitionProvider = this.f$0;
                 final MultiTaskingTransitionProvider.SurfaceValueAnimator surfaceValueAnimator2 = surfaceValueAnimator;
-                SurfaceControl.Transaction transaction = acquire;
+                SurfaceControl.Transaction transaction = transactionAcquire;
                 SurfaceControl surfaceControl2 = surfaceControl;
                 Animation animation2 = animation;
                 Transformation transformation2 = transformation;
@@ -191,15 +191,15 @@ public class ChangeTransitionProvider {
             Slog.w("ChangeTransitionProvider", "canCreateChangeTransitionSpec: failed, changeLeash is null, " + change);
             return null;
         }
-        int endDisplayId = change.getTaskInfo() != null ? change.getTaskInfo().displayId : change.getEndDisplayId();
+        int displayId = MultiTaskingTransitions.getDisplayId(change);
         DisplayController displayController = this.mDisplayController;
-        if (displayController.getDisplayLayout(endDisplayId) == null) {
-            Log.w("ChangeTransitionProvider", "canCreateChangeTransitionSpec: failed, cannot find display #" + endDisplayId + ", change=" + change);
+        if (displayController.getDisplayLayout(displayId) == null) {
+            Log.w("ChangeTransitionProvider", "canCreateChangeTransitionSpec: failed, cannot find display #" + displayId + ", change=" + change);
             return null;
         }
         int changeTransitMode = change.getChangeTransitMode();
-        int endDisplayId2 = change.getTaskInfo() != null ? change.getTaskInfo().displayId : change.getEndDisplayId();
-        DisplayLayout displayLayout = displayController.getDisplayLayout(endDisplayId2);
+        int displayId2 = MultiTaskingTransitions.getDisplayId(change);
+        DisplayLayout displayLayout = displayController.getDisplayLayout(displayId2);
         if (changeTransitMode == 1) {
             dismissChangeTransitionSpec = new StandardChangeTransitionSpec();
         } else if (changeTransitMode == 2 || changeTransitMode == 6) {
@@ -216,7 +216,7 @@ public class ChangeTransitionProvider {
         float f = isDisplayRotating(transitionInfo) ? 0.0f : this.mDurationScale;
         this.mChangeTransitionSpec = dismissChangeTransitionSpec;
         Objects.requireNonNull(displayLayout);
-        Context displayContext = displayController.getDisplayContext(endDisplayId2);
+        Context displayContext = displayController.getDisplayContext(displayId2);
         Objects.requireNonNull(displayContext);
         dismissChangeTransitionSpec.mChange = change;
         dismissChangeTransitionSpec.mTransitionInfo = transitionInfo;

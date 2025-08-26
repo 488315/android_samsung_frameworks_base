@@ -8,6 +8,7 @@ import android.telephony.DataFailCause;
 import android.telephony.PreciseDataConnectionState;
 import com.android.internal.util.Preconditions;
 import com.android.internal.vibrator.persistence.XmlConstants;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.net.InetAddress;
@@ -111,7 +112,7 @@ public final class DataCallResponse implements Parcelable {
         }
     }
 
-    public DataCallResponse(Parcel parcel) {
+    public DataCallResponse(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mCause = parcel.readInt();
         this.mSuggestedRetryTime = parcel.readLong();
         this.mId = parcel.readInt();

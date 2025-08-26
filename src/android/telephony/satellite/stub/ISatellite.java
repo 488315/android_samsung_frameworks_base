@@ -198,9 +198,9 @@ public interface ISatellite extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISatellite.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISatellite)) {
-                return (ISatellite) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISatellite.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISatellite)) {
+                return (ISatellite) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -272,135 +272,135 @@ public interface ISatellite extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ISatelliteListener asInterface = ISatelliteListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISatelliteListener iSatelliteListenerAsInterface = ISatelliteListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setSatelliteListener(asInterface);
+                    setSatelliteListener(iSatelliteListenerAsInterface);
                     return true;
                 case 2:
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt = parcel.readInt();
-                    IIntegerConsumer asInterface2 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    IIntegerConsumer iIntegerConsumerAsInterface = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestSatelliteListeningEnabled(readBoolean, readInt, asInterface2);
+                    requestSatelliteListeningEnabled(z, i3, iIntegerConsumerAsInterface);
                     return true;
                 case 3:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    IIntegerConsumer asInterface3 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z2 = parcel.readBoolean();
+                    IIntegerConsumer iIntegerConsumerAsInterface2 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    enableTerrestrialNetworkScanWhileSatelliteModeIsOn(readBoolean2, asInterface3);
+                    enableTerrestrialNetworkScanWhileSatelliteModeIsOn(z2, iIntegerConsumerAsInterface2);
                     return true;
                 case 4:
                     SatelliteModemEnableRequestAttributes satelliteModemEnableRequestAttributes = (SatelliteModemEnableRequestAttributes) parcel.readTypedObject(SatelliteModemEnableRequestAttributes.CREATOR);
-                    IIntegerConsumer asInterface4 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface3 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestSatelliteEnabled(satelliteModemEnableRequestAttributes, asInterface4);
+                    requestSatelliteEnabled(satelliteModemEnableRequestAttributes, iIntegerConsumerAsInterface3);
                     return true;
                 case 5:
-                    IIntegerConsumer asInterface5 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
-                    IBooleanConsumer asInterface6 = IBooleanConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface4 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IBooleanConsumer iBooleanConsumerAsInterface = IBooleanConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestIsSatelliteEnabled(asInterface5, asInterface6);
+                    requestIsSatelliteEnabled(iIntegerConsumerAsInterface4, iBooleanConsumerAsInterface);
                     return true;
                 case 6:
-                    IIntegerConsumer asInterface7 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
-                    IBooleanConsumer asInterface8 = IBooleanConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface5 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IBooleanConsumer iBooleanConsumerAsInterface2 = IBooleanConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestIsSatelliteSupported(asInterface7, asInterface8);
+                    requestIsSatelliteSupported(iIntegerConsumerAsInterface5, iBooleanConsumerAsInterface2);
                     return true;
                 case 7:
-                    IIntegerConsumer asInterface9 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
-                    ISatelliteCapabilitiesConsumer asInterface10 = ISatelliteCapabilitiesConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface6 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    ISatelliteCapabilitiesConsumer iSatelliteCapabilitiesConsumerAsInterface = ISatelliteCapabilitiesConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestSatelliteCapabilities(asInterface9, asInterface10);
+                    requestSatelliteCapabilities(iIntegerConsumerAsInterface6, iSatelliteCapabilitiesConsumerAsInterface);
                     return true;
                 case 8:
-                    IIntegerConsumer asInterface11 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface7 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startSendingSatellitePointingInfo(asInterface11);
+                    startSendingSatellitePointingInfo(iIntegerConsumerAsInterface7);
                     return true;
                 case 9:
-                    IIntegerConsumer asInterface12 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface8 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    stopSendingSatellitePointingInfo(asInterface12);
+                    stopSendingSatellitePointingInfo(iIntegerConsumerAsInterface8);
                     return true;
                 case 10:
-                    IIntegerConsumer asInterface13 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface9 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    pollPendingSatelliteDatagrams(asInterface13);
+                    pollPendingSatelliteDatagrams(iIntegerConsumerAsInterface9);
                     return true;
                 case 11:
                     SatelliteDatagram satelliteDatagram = (SatelliteDatagram) parcel.readTypedObject(SatelliteDatagram.CREATOR);
-                    boolean readBoolean3 = parcel.readBoolean();
-                    IIntegerConsumer asInterface14 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z3 = parcel.readBoolean();
+                    IIntegerConsumer iIntegerConsumerAsInterface10 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    sendSatelliteDatagram(satelliteDatagram, readBoolean3, asInterface14);
+                    sendSatelliteDatagram(satelliteDatagram, z3, iIntegerConsumerAsInterface10);
                     return true;
                 case 12:
-                    IIntegerConsumer asInterface15 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
-                    IIntegerConsumer asInterface16 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface11 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface12 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestSatelliteModemState(asInterface15, asInterface16);
+                    requestSatelliteModemState(iIntegerConsumerAsInterface11, iIntegerConsumerAsInterface12);
                     return true;
                 case 13:
-                    IIntegerConsumer asInterface17 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
-                    IIntegerConsumer asInterface18 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface13 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface14 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestTimeForNextSatelliteVisibility(asInterface17, asInterface18);
+                    requestTimeForNextSatelliteVisibility(iIntegerConsumerAsInterface13, iIntegerConsumerAsInterface14);
                     return true;
                 case 14:
-                    int readInt2 = parcel.readInt();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                    IIntegerConsumer asInterface19 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                    IIntegerConsumer iIntegerConsumerAsInterface15 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setSatellitePlmn(readInt2, createStringArrayList, createStringArrayList2, asInterface19);
+                    setSatellitePlmn(i4, arrayListCreateStringArrayList, arrayListCreateStringArrayList2, iIntegerConsumerAsInterface15);
                     return true;
                 case 15:
-                    int readInt3 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
-                    IIntegerConsumer asInterface20 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
+                    IIntegerConsumer iIntegerConsumerAsInterface16 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setSatelliteEnabledForCarrier(readInt3, readBoolean4, asInterface20);
+                    setSatelliteEnabledForCarrier(i5, z4, iIntegerConsumerAsInterface16);
                     return true;
                 case 16:
-                    int readInt4 = parcel.readInt();
-                    IIntegerConsumer asInterface21 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
-                    IBooleanConsumer asInterface22 = IBooleanConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    int i6 = parcel.readInt();
+                    IIntegerConsumer iIntegerConsumerAsInterface17 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IBooleanConsumer iBooleanConsumerAsInterface3 = IBooleanConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestIsSatelliteEnabledForCarrier(readInt4, asInterface21, asInterface22);
+                    requestIsSatelliteEnabledForCarrier(i6, iIntegerConsumerAsInterface17, iBooleanConsumerAsInterface3);
                     return true;
                 case 17:
-                    IIntegerConsumer asInterface23 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
-                    INtnSignalStrengthConsumer asInterface24 = INtnSignalStrengthConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface18 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    INtnSignalStrengthConsumer iNtnSignalStrengthConsumerAsInterface = INtnSignalStrengthConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestSignalStrength(asInterface23, asInterface24);
+                    requestSignalStrength(iIntegerConsumerAsInterface18, iNtnSignalStrengthConsumerAsInterface);
                     return true;
                 case 18:
-                    IIntegerConsumer asInterface25 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface19 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startSendingNtnSignalStrength(asInterface25);
+                    startSendingNtnSignalStrength(iIntegerConsumerAsInterface19);
                     return true;
                 case 19:
-                    IIntegerConsumer asInterface26 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface20 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    stopSendingNtnSignalStrength(asInterface26);
+                    stopSendingNtnSignalStrength(iIntegerConsumerAsInterface20);
                     return true;
                 case 20:
-                    IIntegerConsumer asInterface27 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    IIntegerConsumer iIntegerConsumerAsInterface21 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    abortSendingSatelliteDatagrams(asInterface27);
+                    abortSendingSatelliteDatagrams(iIntegerConsumerAsInterface21);
                     return true;
                 case 21:
-                    String readString = parcel.readString();
-                    IIntegerConsumer asInterface28 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    IIntegerConsumer iIntegerConsumerAsInterface22 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    updateSatelliteSubscription(readString, asInterface28);
+                    updateSatelliteSubscription(string, iIntegerConsumerAsInterface22);
                     return true;
                 case 22:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(SystemSelectionSpecifier.CREATOR);
-                    IIntegerConsumer asInterface29 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SystemSelectionSpecifier.CREATOR);
+                    IIntegerConsumer iIntegerConsumerAsInterface23 = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    updateSystemSelectionChannels(createTypedArrayList, asInterface29);
+                    updateSystemSelectionChannels(arrayListCreateTypedArrayList, iIntegerConsumerAsInterface23);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -425,286 +425,286 @@ public interface ISatellite extends IInterface {
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void setSatelliteListener(ISatelliteListener iSatelliteListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSatelliteListener);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSatelliteListener);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void requestSatelliteListeningEnabled(boolean z, int i, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void enableTerrestrialNetworkScanWhileSatelliteModeIsOn(boolean z, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void requestSatelliteEnabled(SatelliteModemEnableRequestAttributes satelliteModemEnableRequestAttributes, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeTypedObject(satelliteModemEnableRequestAttributes, 0);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(satelliteModemEnableRequestAttributes, 0);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void requestIsSatelliteEnabled(IIntegerConsumer iIntegerConsumer, IBooleanConsumer iBooleanConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    obtain.writeStrongInterface(iBooleanConsumer);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    parcelObtain.writeStrongInterface(iBooleanConsumer);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void requestIsSatelliteSupported(IIntegerConsumer iIntegerConsumer, IBooleanConsumer iBooleanConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    obtain.writeStrongInterface(iBooleanConsumer);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    parcelObtain.writeStrongInterface(iBooleanConsumer);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void requestSatelliteCapabilities(IIntegerConsumer iIntegerConsumer, ISatelliteCapabilitiesConsumer iSatelliteCapabilitiesConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    obtain.writeStrongInterface(iSatelliteCapabilitiesConsumer);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    parcelObtain.writeStrongInterface(iSatelliteCapabilitiesConsumer);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void startSendingSatellitePointingInfo(IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void stopSendingSatellitePointingInfo(IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void pollPendingSatelliteDatagrams(IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void sendSatelliteDatagram(SatelliteDatagram satelliteDatagram, boolean z, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeTypedObject(satelliteDatagram, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(satelliteDatagram, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void requestSatelliteModemState(IIntegerConsumer iIntegerConsumer, IIntegerConsumer iIntegerConsumer2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    obtain.writeStrongInterface(iIntegerConsumer2);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer2);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void requestTimeForNextSatelliteVisibility(IIntegerConsumer iIntegerConsumer, IIntegerConsumer iIntegerConsumer2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    obtain.writeStrongInterface(iIntegerConsumer2);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer2);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void setSatellitePlmn(int i, List<String> list, List<String> list2, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringList(list);
-                    obtain.writeStringList(list2);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void setSatelliteEnabledForCarrier(int i, boolean z, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void requestIsSatelliteEnabledForCarrier(int i, IIntegerConsumer iIntegerConsumer, IBooleanConsumer iBooleanConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    obtain.writeStrongInterface(iBooleanConsumer);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    parcelObtain.writeStrongInterface(iBooleanConsumer);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void requestSignalStrength(IIntegerConsumer iIntegerConsumer, INtnSignalStrengthConsumer iNtnSignalStrengthConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    obtain.writeStrongInterface(iNtnSignalStrengthConsumer);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    parcelObtain.writeStrongInterface(iNtnSignalStrengthConsumer);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void startSendingNtnSignalStrength(IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void stopSendingNtnSignalStrength(IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void abortSendingSatelliteDatagrams(IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void updateSatelliteSubscription(String str, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.stub.ISatellite
             public void updateSystemSelectionChannels(List<SystemSelectionSpecifier> list, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatellite.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

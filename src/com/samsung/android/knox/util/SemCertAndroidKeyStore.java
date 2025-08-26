@@ -2,6 +2,7 @@ package com.samsung.android.knox.util;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.security.cert.Certificate;
 
 /* loaded from: classes6.dex */
@@ -40,7 +41,7 @@ public class SemCertAndroidKeyStore implements Parcelable {
     /* JADX WARN: Type inference failed for: r0v1, types: [java.io.Serializable, java.security.cert.Certificate[]] */
     @Override // android.os.Parcelable
     @Deprecated(forRemoval = true, since = "16.0")
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeSerializable(this.certs);
     }
 }

@@ -44,9 +44,9 @@ public interface IFeatureFlagsCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFeatureFlagsCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFeatureFlagsCallback)) {
-                return (IFeatureFlagsCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFeatureFlagsCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFeatureFlagsCallback)) {
+                return (IFeatureFlagsCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface IFeatureFlagsCallback extends IInterface {
 
             @Override // android.flags.IFeatureFlagsCallback
             public void onFlagChange(SyncableFlag syncableFlag) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFeatureFlagsCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(syncableFlag, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFeatureFlagsCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(syncableFlag, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

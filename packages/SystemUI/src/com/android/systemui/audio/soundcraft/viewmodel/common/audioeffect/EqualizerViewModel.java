@@ -21,7 +21,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EqualizerViewModel extends BaseSingleChoiceViewModel {
     public final Context context;
@@ -30,7 +29,6 @@ public final class EqualizerViewModel extends BaseSingleChoiceViewModel {
     public final SoundAliveManager soundAliveManager;
     public final WearableManager wearableManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -75,7 +73,7 @@ public final class EqualizerViewModel extends BaseSingleChoiceViewModel {
 
     @Override // com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseViewModel
     public final void notifyChange() {
-        Object obj;
+        Object next;
         List list = this.modelProvider.effectModel.equalizerList;
         MutableLiveData optionNames = getOptionNames();
         List list2 = list;
@@ -89,16 +87,16 @@ public final class EqualizerViewModel extends BaseSingleChoiceViewModel {
         Iterator it2 = list2.iterator();
         while (true) {
             if (!it2.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             } else {
-                obj = it2.next();
-                if (((Equalizer) obj).getState()) {
+                next = it2.next();
+                if (((Equalizer) next).getState()) {
                     break;
                 }
             }
         }
-        Equalizer equalizer = (Equalizer) obj;
+        Equalizer equalizer = (Equalizer) next;
         mutableLiveData.setValue(equalizer != null ? equalizer.getName() : null);
     }
 
@@ -110,23 +108,23 @@ public final class EqualizerViewModel extends BaseSingleChoiceViewModel {
 
     @Override // com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseSingleChoiceViewModel
     public final void onItemSelected(int i) {
-        Object obj;
+        Object next;
         Log.d("SoundCraft.EqualizerViewModel", "onItemSelected : position=" + i);
         ModelProvider modelProvider = this.modelProvider;
         List list = modelProvider.effectModel.equalizerList;
         Iterator it = list.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             } else {
-                obj = it.next();
-                if (((Equalizer) obj).getState()) {
+                next = it.next();
+                if (((Equalizer) next).getState()) {
                     break;
                 }
             }
         }
-        Equalizer equalizer = (Equalizer) obj;
+        Equalizer equalizer = (Equalizer) next;
         if (equalizer != null) {
             equalizer.setState(false);
         }

@@ -7,7 +7,6 @@ import com.sec.ims.scab.CABContract;
 import kotlin.collections.AbstractList;
 import kotlin.text.HexFormat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class HexExtensionsKt {
     public static final int[] BYTE_TO_LOWER_CASE_HEX_DIGITS;
@@ -65,18 +64,18 @@ public abstract class HexExtensionsKt {
     public static final void checkNumberOfDigits(int i, int i2, String str) {
         int i3 = i2 - i;
         if (i3 < 1) {
-            StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(i, "Expected at least 1 hexadecimal digits at index ", ", but was \"", str.substring(i, i2), "\" of length ");
-            m.append(i3);
-            throw new NumberFormatException(m.toString());
+            StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(i, "Expected at least 1 hexadecimal digits at index ", ", but was \"", str.substring(i, i2), "\" of length ");
+            sbM.append(i3);
+            throw new NumberFormatException(sbM.toString());
         }
         if (i3 > 8) {
             int i4 = (i3 + i) - 8;
             while (i < i4) {
                 if (str.charAt(i) != '0') {
-                    StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Expected the hexadecimal digit '0' at index ", ", but was '");
-                    m2.append(str.charAt(i));
-                    m2.append("'.\nThe result won't fit the type being parsed.");
-                    throw new NumberFormatException(m2.toString());
+                    StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Expected the hexadecimal digit '0' at index ", ", but was '");
+                    sbM2.append(str.charAt(i));
+                    sbM2.append("'.\nThe result won't fit the type being parsed.");
+                    throw new NumberFormatException(sbM2.toString());
                 }
                 i++;
             }
@@ -101,10 +100,10 @@ public abstract class HexExtensionsKt {
         int length4 = length2 - str2.length();
         String str3 = numberHexFormat.suffix;
         if (length4 <= str3.length()) {
-            String substring = str.substring(0, length2);
-            StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Expected a hexadecimal number with prefix \"", str2, "\" and suffix \"", str3, "\", but was ");
-            m.append(substring);
-            throw new NumberFormatException(m.toString());
+            String strSubstring = str.substring(0, length2);
+            StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Expected a hexadecimal number with prefix \"", str2, "\" and suffix \"", str3, "\", but was ");
+            sbM.append(strSubstring);
+            throw new NumberFormatException(sbM.toString());
         }
         int length5 = str2.length();
         boolean z = numberHexFormat.ignoreCase;
@@ -139,11 +138,11 @@ public abstract class HexExtensionsKt {
         int i4 = 0;
         while (i < i2) {
             int i5 = i4 << 4;
-            char charAt = str.charAt(i);
-            if ((charAt >>> '\b') != 0 || (i3 = HEX_DIGITS_TO_DECIMAL[charAt]) < 0) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Expected a hexadecimal digit at index ", ", but was ");
-                m.append(str.charAt(i));
-                throw new NumberFormatException(m.toString());
+            char cCharAt = str.charAt(i);
+            if ((cCharAt >>> '\b') != 0 || (i3 = HEX_DIGITS_TO_DECIMAL[cCharAt]) < 0) {
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Expected a hexadecimal digit at index ", ", but was ");
+                sbM.append(str.charAt(i));
+                throw new NumberFormatException(sbM.toString());
             }
             i4 = i5 | i3;
             i++;
@@ -156,11 +155,11 @@ public abstract class HexExtensionsKt {
         if (length <= i2) {
             i2 = length;
         }
-        String substring = str.substring(i, i2);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Expected ", str3, " \"", str2, "\" at index ");
-        m.append(i);
-        m.append(", but was ");
-        m.append(substring);
-        throw new NumberFormatException(m.toString());
+        String strSubstring = str.substring(i, i2);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Expected ", str3, " \"", str2, "\" at index ");
+        sbM.append(i);
+        sbM.append(", but was ");
+        sbM.append(strSubstring);
+        throw new NumberFormatException(sbM.toString());
     }
 }

@@ -1,27 +1,39 @@
 package com.android.systemui.qs.pipeline.data.repository;
 
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.LogMessageImpl;
+import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.qs.pipeline.data.model.RestoreData;
 import com.android.systemui.qs.pipeline.shared.TileSpec;
 import com.android.systemui.qs.pipeline.shared.logging.QSPipelineLogger;
+import com.android.systemui.qs.pipeline.shared.logging.QSPipelineLogger$$ExternalSyntheticLambda0;
 import com.android.systemui.util.settings.SecureSettings;
 import java.util.ArrayList;
 import java.util.Set;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.SetsKt___SetsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.PropertyReference1Impl;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__TransformKt$runningFold$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class UserAutoAddRepository {
     public static final Companion Companion = new Companion(null);
@@ -33,12 +45,10 @@ public final class UserAutoAddRepository {
     public final SecureSettings secureSettings;
     public final int userId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ChangeAction {
         Set apply(Set set);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,12 +58,10 @@ public final class UserAutoAddRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         UserAutoAddRepository create(int i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MarkTile implements ChangeAction {
         public final TileSpec tileSpec;
 
@@ -84,7 +92,6 @@ public final class UserAutoAddRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RestoreTiles implements ChangeAction {
         public final RestoreData restoredData;
 
@@ -113,7 +120,6 @@ public final class UserAutoAddRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UnmarkTile implements ChangeAction {
         public final TileSpec tileSpec;
 
@@ -144,6 +150,71 @@ public final class UserAutoAddRepository {
         }
     }
 
+    /* renamed from: com.android.systemui.qs.pipeline.data.repository.UserAutoAddRepository$autoAdded$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return UserAutoAddRepository.this.autoAdded(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.pipeline.data.repository.UserAutoAddRepository$autoAdded$3, reason: invalid class name */
+    final class AnonymousClass3 extends SuspendLambda implements Function3 {
+        /* synthetic */ Object L$0;
+        /* synthetic */ Object L$1;
+        int label;
+
+        public AnonymousClass3(Continuation continuation) {
+            super(3, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            AnonymousClass3 anonymousClass3 = UserAutoAddRepository.this.new AnonymousClass3((Continuation) obj3);
+            anonymousClass3.L$0 = (Set) obj;
+            anonymousClass3.L$1 = (ChangeAction) obj2;
+            return anonymousClass3.invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            Set set = (Set) this.L$0;
+            ChangeAction changeAction = (ChangeAction) this.L$1;
+            Set setApply = changeAction.apply(set);
+            UserAutoAddRepository userAutoAddRepository = UserAutoAddRepository.this;
+            if (changeAction instanceof RestoreTiles) {
+                QSPipelineLogger qSPipelineLogger = userAutoAddRepository.logger;
+                qSPipelineLogger.getClass();
+                LogLevel logLevel = LogLevel.DEBUG;
+                QSPipelineLogger$$ExternalSyntheticLambda0 qSPipelineLogger$$ExternalSyntheticLambda0 = new QSPipelineLogger$$ExternalSyntheticLambda0(10);
+                LogBuffer logBuffer = qSPipelineLogger.tileAutoAddLogBuffer;
+                LogMessage logMessageObtain = logBuffer.obtain("QSAutoAddableLog", logLevel, qSPipelineLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                logMessageImpl.str1 = setApply.toString();
+                logMessageImpl.int1 = userAutoAddRepository.userId;
+                logBuffer.commit(logMessageObtain);
+            }
+            return setApply;
+        }
+    }
+
     public UserAutoAddRepository(int i, SecureSettings secureSettings, QSPipelineLogger qSPipelineLogger, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher) {
         this.userId = i;
         this.secureSettings = secureSettings;
@@ -152,7 +223,7 @@ public final class UserAutoAddRepository {
         this.bgDispatcher = coroutineDispatcher;
     }
 
-    public static final Object access$store(UserAutoAddRepository userAutoAddRepository, Set set, Continuation continuation) {
+    public static final Object access$store(UserAutoAddRepository userAutoAddRepository, Set set, Continuation continuation) throws Throwable {
         userAutoAddRepository.getClass();
         ArrayList arrayList = new ArrayList();
         for (Object obj : set) {
@@ -160,29 +231,113 @@ public final class UserAutoAddRepository {
                 arrayList.add(obj);
             }
         }
-        Object withContext = BuildersKt.withContext(userAutoAddRepository.bgDispatcher, new UserAutoAddRepository$store$2(userAutoAddRepository, CollectionsKt___CollectionsKt.joinToString$default(arrayList, ",", null, null, new PropertyReference1Impl() { // from class: com.android.systemui.qs.pipeline.data.repository.UserAutoAddRepository$store$toStore$2
+        Object objWithContext = BuildersKt.withContext(userAutoAddRepository.bgDispatcher, new UserAutoAddRepository$store$2(userAutoAddRepository, CollectionsKt___CollectionsKt.joinToString$default(arrayList, ",", null, null, new PropertyReference1Impl() { // from class: com.android.systemui.qs.pipeline.data.repository.UserAutoAddRepository$store$toStore$2
             @Override // kotlin.jvm.internal.PropertyReference1Impl, kotlin.reflect.KProperty1
             public final Object get(Object obj2) {
                 return ((TileSpec) obj2).getSpec();
             }
         }, 30), null), continuation);
-        return withContext == CoroutineSingletons.COROUTINE_SUSPENDED ? withContext : Unit.INSTANCE;
+        return objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED ? objWithContext : Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x00d4 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00d5 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00b9  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x00d4 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00d5 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object autoAdded(kotlin.coroutines.jvm.internal.ContinuationImpl r12) {
-        /*
-            Method dump skipped, instructions count: 214
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.pipeline.data.repository.UserAutoAddRepository.autoAdded(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object autoAdded(ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        UserAutoAddRepository userAutoAddRepository;
+        Flow flow;
+        UserAutoAddRepository userAutoAddRepository2;
+        UserAutoAddRepository userAutoAddRepository3;
+        UserAutoAddRepository userAutoAddRepository4;
+        StateFlow stateFlow;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object objStateIn = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objStateIn);
+            if (this._autoAdded == null) {
+                SharedFlowImpl sharedFlowImpl = this.changeEvents;
+                anonymousClass1.L$0 = this;
+                anonymousClass1.L$1 = this;
+                anonymousClass1.L$2 = sharedFlowImpl;
+                anonymousClass1.label = 1;
+                Object objWithContext = BuildersKt.withContext(this.bgDispatcher, new UserAutoAddRepository$load$2(this, null), anonymousClass1);
+                if (objWithContext != coroutineSingletons) {
+                    userAutoAddRepository = this;
+                    flow = sharedFlowImpl;
+                    objStateIn = objWithContext;
+                    userAutoAddRepository2 = userAutoAddRepository;
+                }
+                return coroutineSingletons;
+            }
+            stateFlow = this._autoAdded;
+            if (stateFlow == null) {
+            }
+        } else {
+            if (i2 != 1) {
+                if (i2 != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                userAutoAddRepository3 = (UserAutoAddRepository) anonymousClass1.L$1;
+                userAutoAddRepository4 = (UserAutoAddRepository) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(objStateIn);
+                StateFlow stateFlow2 = (StateFlow) objStateIn;
+                userAutoAddRepository4.getClass();
+                CoroutineTracingKt.launchTraced$default(userAutoAddRepository4.applicationScope, userAutoAddRepository4.bgDispatcher, null, new UserAutoAddRepository$startFlowCollections$1(stateFlow2, userAutoAddRepository4, null), 5);
+                userAutoAddRepository3._autoAdded = stateFlow2;
+                this = userAutoAddRepository4;
+                stateFlow = this._autoAdded;
+                if (stateFlow == null) {
+                    return null;
+                }
+                return stateFlow;
+            }
+            flow = (Flow) anonymousClass1.L$2;
+            userAutoAddRepository2 = (UserAutoAddRepository) anonymousClass1.L$1;
+            userAutoAddRepository = (UserAutoAddRepository) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(objStateIn);
+        }
+        QSPipelineLogger qSPipelineLogger = userAutoAddRepository.logger;
+        qSPipelineLogger.getClass();
+        LogLevel logLevel = LogLevel.DEBUG;
+        QSPipelineLogger$$ExternalSyntheticLambda0 qSPipelineLogger$$ExternalSyntheticLambda0 = new QSPipelineLogger$$ExternalSyntheticLambda0(14);
+        LogBuffer logBuffer = qSPipelineLogger.tileAutoAddLogBuffer;
+        LogMessage logMessageObtain = logBuffer.obtain("QSAutoAddableLog", logLevel, qSPipelineLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+        logMessageImpl.str1 = ((Set) objStateIn).toString();
+        logMessageImpl.int1 = userAutoAddRepository.userId;
+        logBuffer.commit(logMessageObtain);
+        Flow flowFlowOn = FlowKt.flowOn(new FlowKt__TransformKt$runningFold$$inlined$unsafeFlow$1(objStateIn, flow, userAutoAddRepository.new AnonymousClass3(null)), userAutoAddRepository.bgDispatcher);
+        anonymousClass1.L$0 = userAutoAddRepository;
+        anonymousClass1.L$1 = userAutoAddRepository2;
+        anonymousClass1.L$2 = null;
+        anonymousClass1.label = 2;
+        objStateIn = FlowKt.stateIn(flowFlowOn, userAutoAddRepository.applicationScope, anonymousClass1);
+        if (objStateIn != coroutineSingletons) {
+            userAutoAddRepository3 = userAutoAddRepository2;
+            userAutoAddRepository4 = userAutoAddRepository;
+            StateFlow stateFlow22 = (StateFlow) objStateIn;
+            userAutoAddRepository4.getClass();
+            CoroutineTracingKt.launchTraced$default(userAutoAddRepository4.applicationScope, userAutoAddRepository4.bgDispatcher, null, new UserAutoAddRepository$startFlowCollections$1(stateFlow22, userAutoAddRepository4, null), 5);
+            userAutoAddRepository3._autoAdded = stateFlow22;
+            this = userAutoAddRepository4;
+            stateFlow = this._autoAdded;
+            if (stateFlow == null) {
+            }
+        }
+        return coroutineSingletons;
     }
 }

@@ -14,14 +14,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslTouchTargetDelegate extends TouchDelegate {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final View mAnchorView;
     public final HashSet mTouchDelegateSet;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public final View mAnchorView;
         public final Queue mQueue = new LinkedList();
@@ -31,7 +29,6 @@ public class SeslTouchTargetDelegate extends TouchDelegate {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CapturedTouchDelegate extends TouchDelegate {
         public final View mView;
 
@@ -41,7 +38,6 @@ public class SeslTouchTargetDelegate extends TouchDelegate {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ExtraInsets {
         public static final ExtraInsets NONE = new ExtraInsets(0, 0, 0, 0);
         public final int bottom;
@@ -87,7 +83,6 @@ public class SeslTouchTargetDelegate extends TouchDelegate {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InvalidDelegateViewException extends RuntimeException {
         public InvalidDelegateViewException() {
             super("TouchTargetDelegate's delegateView must be child of anchorView");
@@ -123,14 +118,14 @@ public class SeslTouchTargetDelegate extends TouchDelegate {
 
     public final void addTouchDelegate(View view, ExtraInsets extraInsets) {
         try {
-            Rect calculateViewBounds = calculateViewBounds(this.mAnchorView, view);
+            Rect rectCalculateViewBounds = calculateViewBounds(this.mAnchorView, view);
             if (extraInsets != null) {
-                calculateViewBounds.left -= extraInsets.left;
-                calculateViewBounds.top -= extraInsets.top;
-                calculateViewBounds.right += extraInsets.right;
-                calculateViewBounds.bottom += extraInsets.bottom;
+                rectCalculateViewBounds.left -= extraInsets.left;
+                rectCalculateViewBounds.top -= extraInsets.top;
+                rectCalculateViewBounds.right += extraInsets.right;
+                rectCalculateViewBounds.bottom += extraInsets.bottom;
             }
-            this.mTouchDelegateSet.add(new CapturedTouchDelegate(calculateViewBounds, view));
+            this.mTouchDelegateSet.add(new CapturedTouchDelegate(rectCalculateViewBounds, view));
         } catch (InvalidDelegateViewException e) {
             Log.w("SeslTouchTargetDelegate", "delegateView must be child of anchorView");
             e.printStackTrace();

@@ -90,8 +90,8 @@ public class AudioItem extends Item implements AudioSegmentInterface<AudioItem>,
     }
 
     @Override // com.samsung.vekit.Interface.SpeakerIDInfoInterface
-    public void setSpeakerIDInfoMap(HashMap<String, SpeakerIDInfo> hashMap) {
-        this.speakerIDInfoMap = hashMap;
+    public void setSpeakerIDInfoMap(HashMap<String, SpeakerIDInfo> map) {
+        this.speakerIDInfoMap = map;
     }
 
     @Override // com.samsung.vekit.Interface.SpeakerIDInfoInterface
@@ -179,15 +179,15 @@ public class AudioItem extends Item implements AudioSegmentInterface<AudioItem>,
         ((Audio) this.content).getAudioSegmentMap().forEach(new BiConsumer() { // from class: com.samsung.vekit.Item.AudioItem$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                AudioItem.this.m9807lambda$loadAudioSegment$0$comsamsungvekitItemAudioItem((String) obj, (AudioSegment) obj2);
+                this.f$0.m9820lambda$loadAudioSegment$0$comsamsungvekitItemAudioItem((String) obj, (AudioSegment) obj2);
             }
         });
         return true;
     }
 
     /* renamed from: lambda$loadAudioSegment$0$com-samsung-vekit-Item-AudioItem, reason: not valid java name */
-    /* synthetic */ void m9807lambda$loadAudioSegment$0$comsamsungvekitItemAudioItem(String str, AudioSegment audioSegment) {
-        this.audioSegmentMap.put(str, audioSegment.m9804clone());
+    /* synthetic */ void m9820lambda$loadAudioSegment$0$comsamsungvekitItemAudioItem(String str, AudioSegment audioSegment) {
+        this.audioSegmentMap.put(str, audioSegment.m9817clone());
     }
 
     @Override // com.samsung.vekit.Interface.AudioSegmentInterface
@@ -196,8 +196,8 @@ public class AudioItem extends Item implements AudioSegmentInterface<AudioItem>,
     }
 
     @Override // com.samsung.vekit.Interface.AudioSegmentInterface
-    public void setAudioSegmentMap(HashMap<String, AudioSegment> hashMap) {
-        this.audioSegmentMap = hashMap;
+    public void setAudioSegmentMap(HashMap<String, AudioSegment> map) {
+        this.audioSegmentMap = map;
     }
 
     @Override // com.samsung.vekit.Interface.AudioSegmentInterface

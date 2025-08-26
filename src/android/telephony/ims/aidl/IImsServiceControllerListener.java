@@ -45,9 +45,9 @@ public interface IImsServiceControllerListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsServiceControllerListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsServiceControllerListener)) {
-                return (IImsServiceControllerListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsServiceControllerListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsServiceControllerListener)) {
+                return (IImsServiceControllerListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface IImsServiceControllerListener extends IInterface {
 
             @Override // android.telephony.ims.aidl.IImsServiceControllerListener
             public void onUpdateSupportedImsFeatures(ImsFeatureConfiguration imsFeatureConfiguration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsServiceControllerListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsFeatureConfiguration, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsServiceControllerListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsFeatureConfiguration, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

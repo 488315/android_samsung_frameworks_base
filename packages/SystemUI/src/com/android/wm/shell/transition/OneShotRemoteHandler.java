@@ -11,14 +11,15 @@ import android.window.TransitionRequestInfo;
 import android.window.WindowAnimationState;
 import android.window.WindowContainerTransaction;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
+import com.android.systemui.animation.RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
+import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.splitscreen.SplitScreenTransitions$TransitSession$$ExternalSyntheticLambda0;
 import com.android.wm.shell.transition.OneShotRemoteHandler;
 import com.android.wm.shell.transition.Transitions;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OneShotRemoteHandler implements Transitions.TransitionHandler {
     public ShellExecutor mAnimExecutor;
@@ -29,7 +30,6 @@ public class OneShotRemoteHandler implements Transitions.TransitionHandler {
     public SplitScreenTransitions$TransitSession$$ExternalSyntheticLambda0 mStartedCallbackForSplitScreen;
     public IBinder mTransition = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.transition.OneShotRemoteHandler$1, reason: invalid class name */
     public class AnonymousClass1 extends IRemoteTransitionFinishedCallback.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -53,7 +53,7 @@ public class OneShotRemoteHandler implements Transitions.TransitionHandler {
             shellExecutor.execute(new Runnable() { // from class: com.android.wm.shell.transition.OneShotRemoteHandler$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Transitions.TransitionFinishCallback transitionFinishCallback2 = Transitions.TransitionFinishCallback.this;
+                    Transitions.TransitionFinishCallback transitionFinishCallback2 = transitionFinishCallback;
                     WindowContainerTransaction windowContainerTransaction2 = windowContainerTransaction;
                     int i = OneShotRemoteHandler.AnonymousClass1.$r8$clinit;
                     transitionFinishCallback2.onTransitionFinished(windowContainerTransaction2);
@@ -62,7 +62,6 @@ public class OneShotRemoteHandler implements Transitions.TransitionHandler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.transition.OneShotRemoteHandler$2, reason: invalid class name */
     public class AnonymousClass2 extends IRemoteTransitionFinishedCallback.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -94,7 +93,7 @@ public class OneShotRemoteHandler implements Transitions.TransitionHandler {
             shellExecutor.execute(new Runnable() { // from class: com.android.wm.shell.transition.OneShotRemoteHandler$2$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OneShotRemoteHandler.AnonymousClass2 anonymousClass2 = OneShotRemoteHandler.AnonymousClass2.this;
+                    OneShotRemoteHandler.AnonymousClass2 anonymousClass2 = this.f$0;
                     Transitions.TransitionFinishCallback transitionFinishCallback2 = transitionFinishCallback;
                     WindowContainerTransaction windowContainerTransaction2 = windowContainerTransaction;
                     int i = OneShotRemoteHandler.AnonymousClass2.$r8$clinit;
@@ -138,11 +137,11 @@ public class OneShotRemoteHandler implements Transitions.TransitionHandler {
         }
         AnonymousClass1 anonymousClass1 = new AnonymousClass1(transitionInfo, transaction, transitionFinishCallback);
         try {
-            SurfaceControl.Transaction copyIfLocal = RemoteTransitionHandler.copyIfLocal(transaction, this.mRemote.getRemoteTransition());
-            if (copyIfLocal != transaction) {
+            SurfaceControl.Transaction transactionCopyIfLocal = RemoteTransitionHandler.copyIfLocal(transaction, this.mRemote.getRemoteTransition());
+            if (transactionCopyIfLocal != transaction) {
                 transitionInfo = transitionInfo.localRemoteCopy();
             }
-            this.mRemote.getRemoteTransition().mergeAnimation(iBinder, transitionInfo, copyIfLocal, iBinder2, anonymousClass1);
+            this.mRemote.getRemoteTransition().mergeAnimation(iBinder, transitionInfo, transactionCopyIfLocal, iBinder2, anonymousClass1);
         } catch (RemoteException e) {
             Log.e("ShellTransitions", "Error merging remote transition.", e);
         }
@@ -162,6 +161,17 @@ public class OneShotRemoteHandler implements Transitions.TransitionHandler {
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     public final boolean startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback) {
+        for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
+            if (change.getMode() == 6 && change.hasFlags(32)) {
+                int endDisplayId = change.getEndDisplayId();
+                DesktopStateImpl.Companion.getClass();
+                if (DesktopStateImpl.Companion.inDesktopWindowing(endDisplayId)) {
+                    Log.d("ShellTransitions", "Skip OnShotRemoteHandler by display change.");
+                    return false;
+                }
+            }
+        }
         if (this.mTransition != iBinder) {
             return false;
         }
@@ -177,23 +187,23 @@ public class OneShotRemoteHandler implements Transitions.TransitionHandler {
                 splitScreenTransitions$TransitSession$$ExternalSyntheticLambda0.run();
                 this.mStartedCallbackForSplitScreen = null;
             }
-            if (CoreRune.MW_FREEFORM_FORCE_HIDING_TRANSITION) {
+            if (CoreRune.MW_FREEFORM_FORCE_HIDING_TRANSITION && this.mMultiTaskingTransitions != null) {
                 for (int size = transitionInfo.getChanges().size() - 1; size >= 0; size--) {
-                    TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(size);
-                    if (MultiTaskingTransitionProvider.buildForceHideAnimationIfNeeded("ShellTransitions", change, this.mMultiTaskingTransitions)) {
-                        transitionInfo.getChanges().remove(change);
-                        Log.d("ShellTransitions", "startAnimation: remove from remoteInfo, " + change);
+                    TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(size);
+                    if (MultiTaskingTransitionProvider.buildForceHideAnimationIfNeeded("ShellTransitions", change2, this.mMultiTaskingTransitions)) {
+                        transitionInfo.getChanges().remove(change2);
+                        Log.d("ShellTransitions", "startAnimation: remove from remoteInfo, " + change2);
                     }
                 }
             }
             if (this.mRemote.asBinder() != null) {
                 this.mRemote.asBinder().linkToDeath(oneShotRemoteHandler$$ExternalSyntheticLambda0, 0);
             }
-            SurfaceControl.Transaction copyIfLocal = RemoteTransitionHandler.copyIfLocal(transaction, this.mRemote.getRemoteTransition());
-            if (copyIfLocal != transaction) {
+            SurfaceControl.Transaction transactionCopyIfLocal = RemoteTransitionHandler.copyIfLocal(transaction, this.mRemote.getRemoteTransition());
+            if (transactionCopyIfLocal != transaction) {
                 transitionInfo = transitionInfo.localRemoteCopy();
             }
-            this.mRemote.getRemoteTransition().startAnimation(iBinder, transitionInfo, copyIfLocal, anonymousClass2);
+            this.mRemote.getRemoteTransition().startAnimation(iBinder, transitionInfo, transactionCopyIfLocal, anonymousClass2);
             transaction.clear();
             return true;
         } catch (RemoteException e) {
@@ -208,7 +218,7 @@ public class OneShotRemoteHandler implements Transitions.TransitionHandler {
     }
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
-    public final boolean takeOverAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, Transitions.TransitionFinishCallback transitionFinishCallback, WindowAnimationState[] windowAnimationStateArr) {
+    public final boolean takeOverAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, Transitions.TransitionFinishCallback transitionFinishCallback, WindowAnimationState[] windowAnimationStateArr) throws RemoteException {
         if (this.mTransition != iBinder) {
             return false;
         }
@@ -222,8 +232,8 @@ public class OneShotRemoteHandler implements Transitions.TransitionHandler {
             if (this.mRemote.asBinder() != null) {
                 this.mRemote.asBinder().linkToDeath(oneShotRemoteHandler$$ExternalSyntheticLambda0, 0);
             }
-            SurfaceControl.Transaction copyIfLocal = RemoteTransitionHandler.copyIfLocal(transaction, this.mRemote.getRemoteTransition());
-            this.mRemote.getRemoteTransition().takeOverAnimation(iBinder, copyIfLocal == transaction ? transitionInfo : transitionInfo.localRemoteCopy(), copyIfLocal, anonymousClass2, windowAnimationStateArr);
+            SurfaceControl.Transaction transactionCopyIfLocal = RemoteTransitionHandler.copyIfLocal(transaction, this.mRemote.getRemoteTransition());
+            this.mRemote.getRemoteTransition().takeOverAnimation(iBinder, transactionCopyIfLocal == transaction ? transitionInfo : transitionInfo.localRemoteCopy(), transactionCopyIfLocal, anonymousClass2, windowAnimationStateArr);
             transaction.clear();
             return true;
         } catch (RemoteException e) {

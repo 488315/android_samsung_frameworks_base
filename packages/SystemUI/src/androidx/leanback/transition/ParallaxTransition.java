@@ -17,7 +17,6 @@ import androidx.leanback.widget.ParallaxTarget;
 import com.android.systemui.R;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ParallaxTransition extends Visibility {
     public static final Interpolator sInterpolator = new LinearInterpolator();
@@ -30,9 +29,9 @@ public class ParallaxTransition extends Visibility {
         if (parallax == null) {
             return null;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setInterpolator(sInterpolator);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: androidx.leanback.transition.ParallaxTransition.1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setInterpolator(sInterpolator);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: androidx.leanback.transition.ParallaxTransition.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 Parallax parallax2 = parallax;
@@ -47,10 +46,10 @@ public class ParallaxTransition extends Visibility {
                                 while (i3 < ((ArrayList) parallax2.mProperties).size()) {
                                     int i4 = iArr[i3];
                                     if (i4 < i2) {
-                                        Integer valueOf = Integer.valueOf(i3);
+                                        Integer numValueOf = Integer.valueOf(i3);
                                         String name = ((Property) ((ArrayList) parallax2.mProperties).get(i3)).getName();
                                         int i5 = i3 - 1;
-                                        throw new IllegalStateException(String.format("Parallax Property[%d]\"%s\" is smaller than Property[%d]\"%s\"", valueOf, name, Integer.valueOf(i5), ((Property) ((ArrayList) parallax2.mProperties).get(i5)).getName()));
+                                        throw new IllegalStateException(String.format("Parallax Property[%d]\"%s\" is smaller than Property[%d]\"%s\"", numValueOf, name, Integer.valueOf(i5), ((Property) ((ArrayList) parallax2.mProperties).get(i5)).getName()));
                                     }
                                     if (i2 == Integer.MIN_VALUE && i4 == Integer.MAX_VALUE) {
                                         int i6 = i3 - 1;
@@ -67,10 +66,10 @@ public class ParallaxTransition extends Visibility {
                             while (i7 < ((ArrayList) parallax2.mProperties).size()) {
                                 float f2 = fArr[i7];
                                 if (f2 < f) {
-                                    Integer valueOf2 = Integer.valueOf(i7);
+                                    Integer numValueOf2 = Integer.valueOf(i7);
                                     String name2 = ((Property) ((ArrayList) parallax2.mProperties).get(i7)).getName();
                                     int i8 = i7 - 1;
-                                    throw new IllegalStateException(String.format("Parallax Property[%d]\"%s\" is smaller than Property[%d]\"%s\"", valueOf2, name2, Integer.valueOf(i8), ((Property) ((ArrayList) parallax2.mProperties).get(i8)).getName()));
+                                    throw new IllegalStateException(String.format("Parallax Property[%d]\"%s\" is smaller than Property[%d]\"%s\"", numValueOf2, name2, Integer.valueOf(i8), ((Property) ((ArrayList) parallax2.mProperties).get(i8)).getName()));
                                 }
                                 if (f == -3.4028235E38f && f2 == Float.MAX_VALUE) {
                                     int i9 = i7 - 1;
@@ -92,7 +91,7 @@ public class ParallaxTransition extends Visibility {
                 }
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
     @Override // android.transition.Visibility

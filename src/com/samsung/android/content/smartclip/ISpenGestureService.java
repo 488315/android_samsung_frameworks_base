@@ -384,9 +384,9 @@ public interface ISpenGestureService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISpenGestureService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISpenGestureService)) {
-                return (ISpenGestureService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISpenGestureService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISpenGestureService)) {
+                return (ISpenGestureService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -507,11 +507,11 @@ public interface ISpenGestureService extends IInterface {
             switch (i) {
                 case 1:
                     Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    SemSmartClipDataRepository smartClipDataByScreenRect = getSmartClipDataByScreenRect(rect, readStrongBinder, readInt, readInt2);
+                    SemSmartClipDataRepository smartClipDataByScreenRect = getSmartClipDataByScreenRect(rect, strongBinder, i3, i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(smartClipDataByScreenRect, 1);
                     return true;
@@ -522,90 +522,90 @@ public interface ISpenGestureService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     InputEvent[] inputEventArr = (InputEvent[]) parcel.createTypedArray(InputEvent.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    boolean z = parcel.readBoolean();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    injectInputEvent(readInt3, readInt4, inputEventArr, readBoolean, readStrongBinder2);
+                    injectInputEvent(i5, i6, inputEventArr, z, strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
                     Rect rect2 = (Rect) parcel.readTypedObject(Rect.CREATOR);
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    Bundle scrollableAreaInfo = getScrollableAreaInfo(rect2, readStrongBinder3);
+                    Bundle scrollableAreaInfo = getScrollableAreaInfo(rect2, strongBinder3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(scrollableAreaInfo, 1);
                     return true;
                 case 5:
                     Rect rect3 = (Rect) parcel.readTypedObject(Rect.CREATOR);
-                    int readInt5 = parcel.readInt();
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
+                    int i7 = parcel.readInt();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    Bundle scrollableViewInfo = getScrollableViewInfo(rect3, readInt5, readStrongBinder4);
+                    Bundle scrollableViewInfo = getScrollableViewInfo(rect3, i7, strongBinder4);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(scrollableViewInfo, 1);
                     return true;
                 case 6:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setHoverStayDetectEnabled(readBoolean2);
+                    setHoverStayDetectEnabled(z2);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setHoverStayValues(readInt6, readInt7, readInt8);
+                    setHoverStayValues(i8, i9, i10);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    ISpenGestureHoverListener asInterface = ISpenGestureHoverListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISpenGestureHoverListener iSpenGestureHoverListenerAsInterface = ISpenGestureHoverListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerHoverListener(asInterface);
+                    registerHoverListener(iSpenGestureHoverListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    ISpenGestureHoverListener asInterface2 = ISpenGestureHoverListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISpenGestureHoverListener iSpenGestureHoverListenerAsInterface2 = ISpenGestureHoverListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterHoverListener(asInterface2);
+                    unregisterHoverListener(iSpenGestureHoverListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSpenPowerSavingModeEnabled(readBoolean3);
+                    setSpenPowerSavingModeEnabled(z3);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    showTouchPointer(readBoolean4);
+                    showTouchPointer(z4);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSpenInsertionState(readBoolean5);
+                    setSpenInsertionState(z5);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    boolean isSpenInserted = isSpenInserted();
+                    boolean zIsSpenInserted = isSpenInserted();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSpenInserted);
+                    parcel2.writeBoolean(zIsSpenInserted);
                     return true;
                 case 14:
-                    boolean isSpenReversed = isSpenReversed();
+                    boolean zIsSpenReversed = isSpenReversed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSpenReversed);
+                    parcel2.writeBoolean(zIsSpenReversed);
                     return true;
                 case 15:
-                    boolean isSupportBleSpen = isSupportBleSpen();
+                    boolean zIsSupportBleSpen = isSupportBleSpen();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSupportBleSpen);
+                    parcel2.writeBoolean(zIsSupportBleSpen);
                     return true;
                 case 16:
                     String bleSpenAddress = getBleSpenAddress();
@@ -613,9 +613,9 @@ public interface ISpenGestureService extends IInterface {
                     parcel2.writeString(bleSpenAddress);
                     return true;
                 case 17:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setBleSpenAddress(readString);
+                    setBleSpenAddress(string);
                     parcel2.writeNoException();
                     return true;
                 case 18:
@@ -624,15 +624,15 @@ public interface ISpenGestureService extends IInterface {
                     parcel2.writeString(bleSpenCmfCode);
                     return true;
                 case 19:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setBleSpenCmfCode(readString2);
+                    setBleSpenCmfCode(string2);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    writeBleSpenCommand(readString3);
+                    writeBleSpenCommand(string3);
                     parcel2.writeNoException();
                     return true;
                 case 21:
@@ -640,45 +640,45 @@ public interface ISpenGestureService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    byte[] createByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    saveBleSpenLogFile(createByteArray);
+                    saveBleSpenLogFile(bArrCreateByteArray);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyBleSpenChargeLockState(readBoolean6);
+                    notifyBleSpenChargeLockState(z6);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    IBleSpenChargeLockStateChangedListener asInterface3 = IBleSpenChargeLockStateChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    IBleSpenChargeLockStateChangedListener iBleSpenChargeLockStateChangedListenerAsInterface = IBleSpenChargeLockStateChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerBleSpenChargeLockStateChangedListener(asInterface3);
+                    registerBleSpenChargeLockStateChangedListener(iBleSpenChargeLockStateChangedListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    IBleSpenChargeLockStateChangedListener asInterface4 = IBleSpenChargeLockStateChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    IBleSpenChargeLockStateChangedListener iBleSpenChargeLockStateChangedListenerAsInterface2 = IBleSpenChargeLockStateChangedListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterBleSpenChargeLockStateChangedListener(asInterface4);
+                    unregisterBleSpenChargeLockStateChangedListener(iBleSpenChargeLockStateChangedListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    IAirGestureListener asInterface5 = IAirGestureListener.Stub.asInterface(parcel.readStrongBinder());
+                    IAirGestureListener iAirGestureListenerAsInterface = IAirGestureListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerAirGestureListener(asInterface5);
+                    registerAirGestureListener(iAirGestureListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    IAirGestureListener asInterface6 = IAirGestureListener.Stub.asInterface(parcel.readStrongBinder());
+                    IAirGestureListener iAirGestureListenerAsInterface2 = IAirGestureListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterAirGestureListener(asInterface6);
+                    unregisterAirGestureListener(iAirGestureListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyAirGesture(readString4);
+                    notifyAirGesture(string4);
                     parcel2.writeNoException();
                     return true;
                 case 29:
@@ -687,29 +687,29 @@ public interface ISpenGestureService extends IInterface {
                     parcel2.writeInt(screenOffReason);
                     return true;
                 case 30:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setScreenOffReason(readInt9);
+                    setScreenOffReason(i11);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    IInputMethodInfoChangeListener asInterface7 = IInputMethodInfoChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    IInputMethodInfoChangeListener iInputMethodInfoChangeListenerAsInterface = IInputMethodInfoChangeListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerInputMethodInfoChangeListener(asInterface7);
+                    registerInputMethodInfoChangeListener(iInputMethodInfoChangeListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 32:
-                    IInputMethodInfoChangeListener asInterface8 = IInputMethodInfoChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    IInputMethodInfoChangeListener iInputMethodInfoChangeListenerAsInterface2 = IInputMethodInfoChangeListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterInputMethodInfoChangeListener(asInterface8);
+                    unregisterInputMethodInfoChangeListener(iInputMethodInfoChangeListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    IRemoteInputConnection asInterface9 = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteInputConnection iRemoteInputConnectionAsInterface = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
                     EditorInfo editorInfo = (EditorInfo) parcel.readTypedObject(EditorInfo.CREATOR);
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setCurrentInputInfo(asInterface9, editorInfo, readInt10);
+                    setCurrentInputInfo(iRemoteInputConnectionAsInterface, editorInfo, i12);
                     parcel2.writeNoException();
                     return true;
                 case 34:
@@ -732,57 +732,57 @@ public interface ISpenGestureService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    boolean z7 = parcel.readBoolean();
                     Rect rect4 = (Rect) parcel.readTypedObject(Rect.CREATOR);
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    Bitmap screenshot = screenshot(readInt11, readInt12, readBoolean7, rect4, readInt13, readInt14, readBoolean8);
+                    Bitmap bitmapScreenshot = screenshot(i13, i14, z7, rect4, i15, i16, z8);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(screenshot, 1);
+                    parcel2.writeTypedObject(bitmapScreenshot, 1);
                     return true;
                 case 39:
-                    String readString5 = parcel.readString();
-                    FileDescriptor readRawFileDescriptor = parcel.readRawFileDescriptor();
-                    float readFloat = parcel.readFloat();
-                    float readFloat2 = parcel.readFloat();
+                    String string5 = parcel.readString();
+                    FileDescriptor rawFileDescriptor = parcel.readRawFileDescriptor();
+                    float f = parcel.readFloat();
+                    float f2 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setPenHoverIcon(readString5, readRawFileDescriptor, readFloat, readFloat2);
+                    setPenHoverIcon(string5, rawFileDescriptor, f, f2);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    resetPenHoverIcon(readString6);
+                    resetPenHoverIcon(string6);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    String readString7 = parcel.readString();
-                    FileDescriptor readRawFileDescriptor2 = parcel.readRawFileDescriptor();
+                    String string7 = parcel.readString();
+                    FileDescriptor rawFileDescriptor2 = parcel.readRawFileDescriptor();
                     parcel.enforceNoDataAvail();
-                    setPenAttachSound(readString7, readRawFileDescriptor2);
+                    setPenAttachSound(string7, rawFileDescriptor2);
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    resetPenAttachSound(readString8);
+                    resetPenAttachSound(string8);
                     parcel2.writeNoException();
                     return true;
                 case 43:
-                    String readString9 = parcel.readString();
-                    FileDescriptor readRawFileDescriptor3 = parcel.readRawFileDescriptor();
+                    String string9 = parcel.readString();
+                    FileDescriptor rawFileDescriptor3 = parcel.readRawFileDescriptor();
                     parcel.enforceNoDataAvail();
-                    setPenDetachSound(readString9, readRawFileDescriptor3);
+                    setPenDetachSound(string9, rawFileDescriptor3);
                     parcel2.writeNoException();
                     return true;
                 case 44:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    resetPenDetachSound(readString10);
+                    resetPenDetachSound(string10);
                     parcel2.writeNoException();
                     return true;
                 case 45:
@@ -817,717 +817,717 @@ public interface ISpenGestureService extends IInterface {
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public SemSmartClipDataRepository getSmartClipDataByScreenRect(Rect rect, IBinder iBinder, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemSmartClipDataRepository) obtain2.readTypedObject(SemSmartClipDataRepository.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemSmartClipDataRepository) parcelObtain2.readTypedObject(SemSmartClipDataRepository.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void sendSmartClipRemoteRequestResult(SmartClipRemoteRequestResult smartClipRemoteRequestResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeTypedObject(smartClipRemoteRequestResult, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(smartClipRemoteRequestResult, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void injectInputEvent(int i, int i2, InputEvent[] inputEventArr, boolean z, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedArray(inputEventArr, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedArray(inputEventArr, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public Bundle getScrollableAreaInfo(Rect rect, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public Bundle getScrollableViewInfo(Rect rect, int i, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setHoverStayDetectEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setHoverStayValues(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void registerHoverListener(ISpenGestureHoverListener iSpenGestureHoverListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpenGestureHoverListener);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpenGestureHoverListener);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void unregisterHoverListener(ISpenGestureHoverListener iSpenGestureHoverListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpenGestureHoverListener);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpenGestureHoverListener);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setSpenPowerSavingModeEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void showTouchPointer(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setSpenInsertionState(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public boolean isSpenInserted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public boolean isSpenReversed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public boolean isSupportBleSpen() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public String getBleSpenAddress() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setBleSpenAddress(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public String getBleSpenCmfCode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setBleSpenCmfCode(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void writeBleSpenCommand(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setSpenPdctLowSensitivityEnable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void saveBleSpenLogFile(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void notifyBleSpenChargeLockState(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void registerBleSpenChargeLockStateChangedListener(IBleSpenChargeLockStateChangedListener iBleSpenChargeLockStateChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iBleSpenChargeLockStateChangedListener);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iBleSpenChargeLockStateChangedListener);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void unregisterBleSpenChargeLockStateChangedListener(IBleSpenChargeLockStateChangedListener iBleSpenChargeLockStateChangedListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iBleSpenChargeLockStateChangedListener);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iBleSpenChargeLockStateChangedListener);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void registerAirGestureListener(IAirGestureListener iAirGestureListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAirGestureListener);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAirGestureListener);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void unregisterAirGestureListener(IAirGestureListener iAirGestureListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAirGestureListener);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAirGestureListener);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void notifyAirGesture(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public int getScreenOffReason() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setScreenOffReason(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void registerInputMethodInfoChangeListener(IInputMethodInfoChangeListener iInputMethodInfoChangeListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodInfoChangeListener);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodInfoChangeListener);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void unregisterInputMethodInfoChangeListener(IInputMethodInfoChangeListener iInputMethodInfoChangeListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodInfoChangeListener);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodInfoChangeListener);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setCurrentInputInfo(IRemoteInputConnection iRemoteInputConnection, EditorInfo editorInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteInputConnection);
-                    obtain.writeTypedObject(editorInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteInputConnection);
+                    parcelObtain.writeTypedObject(editorInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public EditorInfo getCurrentEditorInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EditorInfo) obtain2.readTypedObject(EditorInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EditorInfo) parcelObtain2.readTypedObject(EditorInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public IRemoteInputConnection getCurrentInputContext() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IRemoteInputConnection.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IRemoteInputConnection.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public int getCurrentMissingMethodFlags() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void notifyKeyboardClosed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public Bitmap screenshot(int i, int i2, boolean z, Rect rect, int i3, int i4, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bitmap) obtain2.readTypedObject(Bitmap.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bitmap) parcelObtain2.readTypedObject(Bitmap.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setPenHoverIcon(String str, FileDescriptor fileDescriptor, float f, float f2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeRawFileDescriptor(fileDescriptor);
-                    obtain.writeFloat(f);
-                    obtain.writeFloat(f2);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeRawFileDescriptor(fileDescriptor);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeFloat(f2);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void resetPenHoverIcon(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setPenAttachSound(String str, FileDescriptor fileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeRawFileDescriptor(fileDescriptor);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeRawFileDescriptor(fileDescriptor);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void resetPenAttachSound(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setPenDetachSound(String str, FileDescriptor fileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeRawFileDescriptor(fileDescriptor);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeRawFileDescriptor(fileDescriptor);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void resetPenDetachSound(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public void setScreenOffDoubleTabTime() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
             public long getScreenOffDoubleTabTime() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

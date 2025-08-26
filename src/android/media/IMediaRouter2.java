@@ -88,9 +88,9 @@ public interface IMediaRouter2 extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMediaRouter2.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaRouter2)) {
-                return (IMediaRouter2) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMediaRouter2.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMediaRouter2)) {
+                return (IMediaRouter2) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -132,21 +132,21 @@ public interface IMediaRouter2 extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(MediaRoute2Info.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(MediaRoute2Info.CREATOR);
                     RoutingSessionInfo routingSessionInfo = (RoutingSessionInfo) parcel.readTypedObject(RoutingSessionInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyRouterRegistered(createTypedArrayList, routingSessionInfo);
+                    notifyRouterRegistered(arrayListCreateTypedArrayList, routingSessionInfo);
                     return true;
                 case 2:
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(MediaRoute2Info.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(MediaRoute2Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyRoutesUpdated(createTypedArrayList2);
+                    notifyRoutesUpdated(arrayListCreateTypedArrayList2);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     RoutingSessionInfo routingSessionInfo2 = (RoutingSessionInfo) parcel.readTypedObject(RoutingSessionInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifySessionCreated(readInt, routingSessionInfo2);
+                    notifySessionCreated(i3, routingSessionInfo2);
                     return true;
                 case 4:
                     RoutingSessionInfo routingSessionInfo3 = (RoutingSessionInfo) parcel.readTypedObject(RoutingSessionInfo.CREATOR);
@@ -159,17 +159,17 @@ public interface IMediaRouter2 extends IInterface {
                     notifySessionReleased(routingSessionInfo4);
                     return true;
                 case 6:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     RoutingSessionInfo routingSessionInfo5 = (RoutingSessionInfo) parcel.readTypedObject(RoutingSessionInfo.CREATOR);
                     MediaRoute2Info mediaRoute2Info = (MediaRoute2Info) parcel.readTypedObject(MediaRoute2Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestCreateSessionByManager(readLong, routingSessionInfo5, mediaRoute2Info);
+                    requestCreateSessionByManager(j, routingSessionInfo5, mediaRoute2Info);
                     return true;
                 case 7:
-                    String readString = parcel.readString();
-                    ArrayList createTypedArrayList3 = parcel.createTypedArrayList(SuggestedDeviceInfo.CREATOR);
+                    String string = parcel.readString();
+                    ArrayList arrayListCreateTypedArrayList3 = parcel.createTypedArrayList(SuggestedDeviceInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyDeviceSuggestionsUpdated(readString, createTypedArrayList3);
+                    notifyDeviceSuggestionsUpdated(string, arrayListCreateTypedArrayList3);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -194,90 +194,90 @@ public interface IMediaRouter2 extends IInterface {
 
             @Override // android.media.IMediaRouter2
             public void notifyRouterRegistered(List<MediaRoute2Info> list, RoutingSessionInfo routingSessionInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedObject(routingSessionInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedObject(routingSessionInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRouter2
             public void notifyRoutesUpdated(List<MediaRoute2Info> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRouter2
             public void notifySessionCreated(int i, RoutingSessionInfo routingSessionInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(routingSessionInfo, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(routingSessionInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRouter2
             public void notifySessionInfoChanged(RoutingSessionInfo routingSessionInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
-                    obtain.writeTypedObject(routingSessionInfo, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(routingSessionInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRouter2
             public void notifySessionReleased(RoutingSessionInfo routingSessionInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
-                    obtain.writeTypedObject(routingSessionInfo, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(routingSessionInfo, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRouter2
             public void requestCreateSessionByManager(long j, RoutingSessionInfo routingSessionInfo, MediaRoute2Info mediaRoute2Info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(routingSessionInfo, 0);
-                    obtain.writeTypedObject(mediaRoute2Info, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(routingSessionInfo, 0);
+                    parcelObtain.writeTypedObject(mediaRoute2Info, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRouter2
             public void notifyDeviceSuggestionsUpdated(String str, List<SuggestedDeviceInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRouter2.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -8,10 +8,12 @@ import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
 import com.android.internal.widget.remotecompose.core.documentation.DocumentationBuilder;
 import com.android.internal.widget.remotecompose.core.operations.layout.Component;
+import com.android.internal.widget.remotecompose.core.operations.layout.LayoutComponent;
 import com.android.internal.widget.remotecompose.core.operations.layout.measure.ComponentMeasure;
 import com.android.internal.widget.remotecompose.core.operations.layout.measure.MeasurePass;
 import com.android.internal.widget.remotecompose.core.operations.layout.measure.Size;
 import com.android.internal.widget.remotecompose.core.operations.layout.modifiers.ScrollModifierOperation;
+import com.android.internal.widget.remotecompose.core.operations.layout.modifiers.WidthInModifierOperation;
 import com.android.internal.widget.remotecompose.core.operations.layout.utils.DebugLog;
 import com.android.internal.widget.remotecompose.core.operations.layout.utils.StringValueSupplier;
 import com.android.internal.widget.remotecompose.core.serialize.MapSerializer;
@@ -72,29 +74,27 @@ public class RowLayout extends LayoutManager {
         DebugLog.s(new StringValueSupplier() { // from class: com.android.internal.widget.remotecompose.core.operations.layout.managers.RowLayout$$ExternalSyntheticLambda0
             @Override // com.android.internal.widget.remotecompose.core.operations.layout.utils.StringValueSupplier
             public final String getString() {
-                String lambda$computeWrapSize$0;
-                lambda$computeWrapSize$0 = RowLayout.this.lambda$computeWrapSize$0();
-                return lambda$computeWrapSize$0;
+                return this.f$0.lambda$computeWrapSize$0();
             }
         });
         Iterator<Component> it = this.mChildrenComponents.iterator();
         int i = 0;
-        float f3 = f;
+        float w = f;
         while (it.hasNext()) {
             Component next = it.next();
             PaintContext paintContext2 = paintContext;
-            float f4 = f2;
+            float f3 = f2;
             MeasurePass measurePass2 = measurePass;
-            next.measure(paintContext2, 0.0f, f3, 0.0f, f4, measurePass2);
+            next.measure(paintContext2, 0.0f, w, 0.0f, f3, measurePass2);
             ComponentMeasure componentMeasure = measurePass2.get(next);
             if (!componentMeasure.isGone()) {
                 size.setWidth(size.getWidth() + componentMeasure.getW());
                 size.setHeight(Math.max(size.getHeight(), componentMeasure.getH()));
                 i++;
-                f3 -= componentMeasure.getW();
+                w -= componentMeasure.getW();
             }
             paintContext = paintContext2;
-            f2 = f4;
+            f2 = f3;
             measurePass = measurePass2;
         }
         if (!this.mChildrenComponents.isEmpty()) {
@@ -113,29 +113,27 @@ public class RowLayout extends LayoutManager {
         DebugLog.s(new StringValueSupplier() { // from class: com.android.internal.widget.remotecompose.core.operations.layout.managers.RowLayout$$ExternalSyntheticLambda2
             @Override // com.android.internal.widget.remotecompose.core.operations.layout.utils.StringValueSupplier
             public final String getString() {
-                String lambda$computeSize$1;
-                lambda$computeSize$1 = RowLayout.this.lambda$computeSize$1();
-                return lambda$computeSize$1;
+                return this.f$0.lambda$computeSize$1();
             }
         });
         Iterator<Component> it = this.mChildrenComponents.iterator();
-        float f5 = f2;
+        float w = f2;
         while (it.hasNext()) {
             Component next = it.next();
             PaintContext paintContext2 = paintContext;
-            float f6 = f;
-            float f7 = f3;
-            float f8 = f4;
+            float f5 = f;
+            float f6 = f3;
+            float f7 = f4;
             MeasurePass measurePass2 = measurePass;
-            next.measure(paintContext2, f6, f5, f7, f8, measurePass2);
+            next.measure(paintContext2, f5, w, f6, f7, measurePass2);
             ComponentMeasure componentMeasure = measurePass2.get(next);
             if (!componentMeasure.isGone()) {
-                f5 -= componentMeasure.getW();
+                w -= componentMeasure.getW();
             }
             paintContext = paintContext2;
-            f = f6;
-            f3 = f7;
-            f4 = f8;
+            f = f5;
+            f3 = f6;
+            f4 = f7;
             measurePass = measurePass2;
         }
         DebugLog.e();
@@ -143,38 +141,200 @@ public class RowLayout extends LayoutManager {
 
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.managers.LayoutManager, com.android.internal.widget.remotecompose.core.operations.layout.Component
     public float minIntrinsicWidth(RemoteContext remoteContext) {
-        float computeModifierDefinedWidth = computeModifierDefinedWidth(remoteContext);
+        float fComputeModifierDefinedWidth = computeModifierDefinedWidth(remoteContext);
         Iterator<Component> it = this.mChildrenComponents.iterator();
-        float f = 0.0f;
+        float fMinIntrinsicWidth = 0.0f;
         while (it.hasNext()) {
-            f += it.next().minIntrinsicWidth(remoteContext);
+            fMinIntrinsicWidth += it.next().minIntrinsicWidth(remoteContext);
         }
-        return Math.max(computeModifierDefinedWidth, f);
+        return Math.max(fComputeModifierDefinedWidth, fMinIntrinsicWidth);
     }
 
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.managers.LayoutManager, com.android.internal.widget.remotecompose.core.operations.layout.Component
     public float minIntrinsicHeight(RemoteContext remoteContext) {
-        float computeModifierDefinedHeight = computeModifierDefinedHeight(remoteContext);
+        float fComputeModifierDefinedHeight = computeModifierDefinedHeight(remoteContext);
         Iterator<Component> it = this.mChildrenComponents.iterator();
-        float f = 0.0f;
+        float fMax = 0.0f;
         while (it.hasNext()) {
-            f = Math.max(f, it.next().minIntrinsicHeight(remoteContext));
+            fMax = Math.max(fMax, it.next().minIntrinsicHeight(remoteContext));
         }
-        return Math.max(computeModifierDefinedHeight, f);
+        return Math.max(fComputeModifierDefinedHeight, fMax);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:106:0x020d  */
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.managers.LayoutManager
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public void internalLayoutMeasure(com.android.internal.widget.remotecompose.core.PaintContext r18, com.android.internal.widget.remotecompose.core.operations.layout.measure.MeasurePass r19) {
-        /*
-            Method dump skipped, instructions count: 597
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.remotecompose.core.operations.layout.managers.RowLayout.internalLayoutMeasure(com.android.internal.widget.remotecompose.core.PaintContext, com.android.internal.widget.remotecompose.core.operations.layout.measure.MeasurePass):void");
+    public void internalLayoutMeasure(PaintContext paintContext, MeasurePass measurePass) {
+        int i;
+        float f;
+        float f2;
+        final ComponentMeasure componentMeasure = measurePass.get(this);
+        DebugLog.s(new StringValueSupplier() { // from class: com.android.internal.widget.remotecompose.core.operations.layout.managers.RowLayout$$ExternalSyntheticLambda1
+            @Override // com.android.internal.widget.remotecompose.core.operations.layout.utils.StringValueSupplier
+            public final String getString() {
+                return this.f$0.lambda$internalLayoutMeasure$2(componentMeasure);
+            }
+        });
+        if (this.mChildrenComponents.isEmpty()) {
+            DebugLog.e();
+            return;
+        }
+        float w = (componentMeasure.getW() - this.mPaddingLeft) - this.mPaddingRight;
+        float h = (componentMeasure.getH() - this.mPaddingTop) - this.mPaddingBottom;
+        if (this.mComponentModifiers.hasHorizontalScroll()) {
+            w = (this.mComponentModifiers.getHorizontalScrollDimension() - this.mPaddingLeft) - this.mPaddingRight;
+        }
+        float f3 = w;
+        if (this.mComponentModifiers.hasVerticalScroll()) {
+            h = (this.mComponentModifiers.getVerticalScrollDimension() - this.mPaddingTop) - this.mPaddingBottom;
+        }
+        float f4 = h;
+        loop0: while (true) {
+            boolean z = true;
+            while (true) {
+                i = 0;
+                if (!z) {
+                    break loop0;
+                }
+                Iterator<Component> it = this.mChildrenComponents.iterator();
+                boolean z2 = false;
+                float w2 = 0.0f;
+                float value = 0.0f;
+                while (it.hasNext()) {
+                    Component next = it.next();
+                    ComponentMeasure componentMeasure2 = measurePass.get(next);
+                    if (!componentMeasure2.isGone()) {
+                        if (next instanceof LayoutComponent) {
+                            LayoutComponent layoutComponent = (LayoutComponent) next;
+                            if (layoutComponent.getWidthModifier().hasWeight()) {
+                                value += layoutComponent.getWidthModifier().getValue();
+                                z2 = true;
+                            }
+                        }
+                        w2 += componentMeasure2.getW();
+                    }
+                }
+                if (z2) {
+                    float f5 = f3 - w2;
+                    Iterator<Component> it2 = this.mChildrenComponents.iterator();
+                    while (it2.hasNext()) {
+                        Component next2 = it2.next();
+                        if (next2 instanceof LayoutComponent) {
+                            LayoutComponent layoutComponent2 = (LayoutComponent) next2;
+                            if (layoutComponent2.getWidthModifier().hasWeight()) {
+                                ComponentMeasure componentMeasure3 = measurePass.get(next2);
+                                if (!componentMeasure3.isGone()) {
+                                    float value2 = (layoutComponent2.getWidthModifier().getValue() * f5) / value;
+                                    WidthInModifierOperation widthIn = layoutComponent2.getWidthModifier().getWidthIn();
+                                    if (widthIn != null) {
+                                        float min = widthIn.getMin();
+                                        float max = widthIn.getMax();
+                                        if (min != -1.0f) {
+                                            value2 = Math.max(min, value2);
+                                        }
+                                        if (max != -1.0f) {
+                                            value2 = Math.min(max, value2);
+                                        }
+                                    }
+                                    componentMeasure3.setW(value2);
+                                    next2.measure(paintContext, componentMeasure3.getW(), componentMeasure3.getW(), componentMeasure3.getH(), componentMeasure3.getH(), measurePass);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!applyVisibility(f3, f4, measurePass) || !z2) {
+                    z = false;
+                }
+            }
+        }
+        Iterator<Component> it3 = this.mChildrenComponents.iterator();
+        float w3 = 0.0f;
+        float fMax = 0.0f;
+        while (it3.hasNext()) {
+            ComponentMeasure componentMeasure4 = measurePass.get(it3.next());
+            if (!componentMeasure4.isGone()) {
+                w3 += componentMeasure4.getW();
+                fMax = Math.max(fMax, componentMeasure4.getH());
+                i++;
+            }
+        }
+        float f6 = i - 1;
+        float f7 = w3 + (this.mSpacedBy * f6);
+        int i2 = this.mHorizontalPositioning;
+        if (i2 == 1) {
+            f = 0.0f;
+            f2 = 0.0f;
+        } else if (i2 == 2) {
+            f = (f3 - f7) / 2.0f;
+            f2 = 0.0f;
+        } else if (i2 == 3) {
+            f = f3 - f7;
+            f2 = 0.0f;
+        } else if (i2 == 6) {
+            Iterator<Component> it4 = this.mChildrenComponents.iterator();
+            float w4 = 0.0f;
+            while (it4.hasNext()) {
+                ComponentMeasure componentMeasure5 = measurePass.get(it4.next());
+                if (!componentMeasure5.isGone()) {
+                    w4 += componentMeasure5.getW();
+                }
+            }
+            if (i > 1) {
+                f2 = (f3 - w4) / f6;
+                f = 0.0f;
+            }
+            f = (f3 - f7) / 2.0f;
+            f2 = 0.0f;
+        } else if (i2 != 7) {
+            if (i2 == 8) {
+                Iterator<Component> it5 = this.mChildrenComponents.iterator();
+                float w5 = 0.0f;
+                while (it5.hasNext()) {
+                    ComponentMeasure componentMeasure6 = measurePass.get(it5.next());
+                    if (!componentMeasure6.isGone()) {
+                        w5 += componentMeasure6.getW();
+                    }
+                }
+                f2 = (f3 - w5) / i;
+                f = f2 / 2.0f;
+            }
+            f = 0.0f;
+            f2 = 0.0f;
+        } else {
+            Iterator<Component> it6 = this.mChildrenComponents.iterator();
+            float w6 = 0.0f;
+            while (it6.hasNext()) {
+                ComponentMeasure componentMeasure7 = measurePass.get(it6.next());
+                if (!componentMeasure7.isGone()) {
+                    w6 += componentMeasure7.getW();
+                }
+            }
+            f2 = (f3 - w6) / (i + 1);
+            f = f2;
+        }
+        Iterator<Component> it7 = this.mChildrenComponents.iterator();
+        float h2 = 0.0f;
+        while (it7.hasNext()) {
+            ComponentMeasure componentMeasure8 = measurePass.get(it7.next());
+            int i3 = this.mVerticalPositioning;
+            if (i3 == 2) {
+                h2 = (f4 - componentMeasure8.getH()) / 2.0f;
+            } else if (i3 == 4) {
+                h2 = 0.0f;
+            } else if (i3 == 5) {
+                h2 = f4 - componentMeasure8.getH();
+            }
+            componentMeasure8.setX(f);
+            componentMeasure8.setY(h2);
+            if (!componentMeasure8.isGone()) {
+                float w7 = f + componentMeasure8.getW();
+                int i4 = this.mHorizontalPositioning;
+                if (i4 == 6 || i4 == 8 || i4 == 7) {
+                    w7 += f2;
+                }
+                f = w7 + this.mSpacedBy;
+            }
+        }
+        DebugLog.e();
     }
 
     /* JADX INFO: Access modifiers changed from: private */

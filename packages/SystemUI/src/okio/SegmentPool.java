@@ -2,7 +2,6 @@ package okio;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SegmentPool {
     public static final int HASH_BUCKET_COUNT;
@@ -12,10 +11,10 @@ public final class SegmentPool {
     public static final Segment LOCK = new Segment(new byte[0], 0, 0, false, false);
 
     static {
-        int highestOneBit = Integer.highestOneBit((Runtime.getRuntime().availableProcessors() * 2) - 1);
-        HASH_BUCKET_COUNT = highestOneBit;
-        AtomicReference[] atomicReferenceArr = new AtomicReference[highestOneBit];
-        for (int i = 0; i < highestOneBit; i++) {
+        int iHighestOneBit = Integer.highestOneBit((Runtime.getRuntime().availableProcessors() * 2) - 1);
+        HASH_BUCKET_COUNT = iHighestOneBit;
+        AtomicReference[] atomicReferenceArr = new AtomicReference[iHighestOneBit];
+        for (int i = 0; i < iHighestOneBit; i++) {
             atomicReferenceArr[i] = new AtomicReference();
         }
         hashBuckets = atomicReferenceArr;

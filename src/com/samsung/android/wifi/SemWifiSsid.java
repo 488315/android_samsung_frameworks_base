@@ -19,10 +19,10 @@ public final class SemWifiSsid implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public SemWifiSsid createFromParcel(Parcel parcel) {
             SemWifiSsid semWifiSsid = new SemWifiSsid();
-            int readInt = parcel.readInt();
-            byte[] bArr = new byte[readInt];
+            int i = parcel.readInt();
+            byte[] bArr = new byte[i];
             parcel.readByteArray(bArr);
-            semWifiSsid.octets.write(bArr, 0, readInt);
+            semWifiSsid.octets.write(bArr, 0, i);
             return semWifiSsid;
         }
 
@@ -54,13 +54,13 @@ public final class SemWifiSsid implements Parcelable {
         return semWifiSsid;
     }
 
-    public static SemWifiSsid createFromAsciiEncoded(String str) {
+    public static SemWifiSsid createFromAsciiEncoded(String str) throws NumberFormatException {
         SemWifiSsid semWifiSsid = new SemWifiSsid();
         semWifiSsid.convertToBytes(str);
         return semWifiSsid;
     }
 
-    public static SemWifiSsid createFromHex(String str) {
+    public static SemWifiSsid createFromHex(String str) throws NumberFormatException {
         int i;
         SemWifiSsid semWifiSsid = new SemWifiSsid();
         if (str != null) {
@@ -82,26 +82,26 @@ public final class SemWifiSsid implements Parcelable {
         return semWifiSsid;
     }
 
-    private void convertToBytes(String str) {
+    private void convertToBytes(String str) throws NumberFormatException {
         int i = 0;
         while (i < str.length()) {
-            char charAt = str.charAt(i);
-            if (charAt == '\\') {
+            char cCharAt = str.charAt(i);
+            if (cCharAt == '\\') {
                 int i2 = i + 1;
-                char charAt2 = str.charAt(i2);
-                if (charAt2 == '\"') {
+                char cCharAt2 = str.charAt(i2);
+                if (cCharAt2 == '\"') {
                     this.octets.write(34);
-                } else if (charAt2 == '\\') {
+                } else if (cCharAt2 == '\\') {
                     this.octets.write(92);
-                } else if (charAt2 == 'e') {
+                } else if (cCharAt2 == 'e') {
                     this.octets.write(27);
-                } else if (charAt2 == 'n') {
+                } else if (cCharAt2 == 'n') {
                     this.octets.write(10);
-                } else if (charAt2 == 'r') {
+                } else if (cCharAt2 == 'r') {
                     this.octets.write(13);
-                } else if (charAt2 == 't') {
+                } else if (cCharAt2 == 't') {
                     this.octets.write(9);
-                } else if (charAt2 == 'x') {
+                } else if (cCharAt2 == 'x') {
                     i2 = i + 2;
                     int i3 = i + 4;
                     int i4 = -1;
@@ -110,11 +110,11 @@ public final class SemWifiSsid implements Parcelable {
                     } catch (NumberFormatException | StringIndexOutOfBoundsException unused) {
                     }
                     if (i4 < 0) {
-                        int digit = Character.digit(str.charAt(i2), 16);
-                        if (digit < 0) {
+                        int iDigit = Character.digit(str.charAt(i2), 16);
+                        if (iDigit < 0) {
                             i = i2;
                         } else {
-                            this.octets.write(digit);
+                            this.octets.write(iDigit);
                             i += 3;
                         }
                     } else {
@@ -122,7 +122,7 @@ public final class SemWifiSsid implements Parcelable {
                         i = i3;
                     }
                 } else {
-                    switch (charAt2) {
+                    switch (cCharAt2) {
                         case '0':
                         case '1':
                         case '2':
@@ -131,17 +131,17 @@ public final class SemWifiSsid implements Parcelable {
                         case '5':
                         case '6':
                         case '7':
-                            int charAt3 = str.charAt(i2) - '0';
+                            int iCharAt = str.charAt(i2) - '0';
                             int i5 = i + 2;
                             if (str.charAt(i5) >= '0' && str.charAt(i5) <= '7') {
-                                charAt3 = ((charAt3 * 8) + str.charAt(i5)) - 48;
+                                iCharAt = ((iCharAt * 8) + str.charAt(i5)) - 48;
                                 i5 = i + 3;
                             }
                             if (str.charAt(i5) >= '0' && str.charAt(i5) <= '7') {
-                                charAt3 = ((charAt3 * 8) + str.charAt(i5)) - 48;
+                                iCharAt = ((iCharAt * 8) + str.charAt(i5)) - 48;
                                 i5++;
                             }
-                            this.octets.write(charAt3);
+                            this.octets.write(iCharAt);
                             i = i5;
                             continue;
                     }
@@ -149,7 +149,7 @@ public final class SemWifiSsid implements Parcelable {
                 }
                 i += 2;
             } else {
-                this.octets.write(charAt);
+                this.octets.write(cCharAt);
                 i++;
             }
         }
@@ -160,14 +160,14 @@ public final class SemWifiSsid implements Parcelable {
         if (this.octets.size() <= 0 || isArrayAllZeroes(byteArray)) {
             return "";
         }
-        CharsetDecoder onUnmappableCharacter = StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPLACE).onUnmappableCharacter(CodingErrorAction.REPLACE);
-        CharBuffer allocate = CharBuffer.allocate(32);
-        CoderResult decode = onUnmappableCharacter.decode(ByteBuffer.wrap(byteArray), allocate, true);
-        allocate.flip();
-        if (decode.isError()) {
+        CharsetDecoder charsetDecoderOnUnmappableCharacter = StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPLACE).onUnmappableCharacter(CodingErrorAction.REPLACE);
+        CharBuffer charBufferAllocate = CharBuffer.allocate(32);
+        CoderResult coderResultDecode = charsetDecoderOnUnmappableCharacter.decode(ByteBuffer.wrap(byteArray), charBufferAllocate, true);
+        charBufferAllocate.flip();
+        if (coderResultDecode.isError()) {
             return "<unknown ssid>";
         }
-        return allocate.toString();
+        return charBufferAllocate.toString();
     }
 
     public boolean equals(Object obj) {

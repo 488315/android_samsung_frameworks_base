@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LastEndedImsCallInfo implements Parcelable {
     public static final Parcelable.Creator<LastEndedImsCallInfo> CREATOR = new Parcelable.Creator<LastEndedImsCallInfo>() { // from class: com.sec.ims.LastEndedImsCallInfo.1
@@ -24,7 +23,6 @@ public class LastEndedImsCallInfo implements Parcelable {
     private String mErrorMessage;
     private boolean mIsCallDrop;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         protected boolean mIsCallDrop = false;
         protected int mErrorCode = 0;

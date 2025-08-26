@@ -7,7 +7,6 @@ import com.android.systemui.log.LogMessageImpl;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class DozeScreenState$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -35,9 +34,9 @@ public final /* synthetic */ class DozeScreenState$$ExternalSyntheticLambda0 imp
                     LogLevel logLevel = LogLevel.INFO;
                     DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(9);
                     LogBuffer logBuffer = dozeLogger.buffer;
-                    LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-                    ((LogMessageImpl) obtain).str1 = Display.stateToString(i2);
-                    logBuffer.commit(obtain);
+                    LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+                    ((LogMessageImpl) logMessageObtain).str1 = Display.stateToString(i2);
+                    logBuffer.commit(logMessageObtain);
                     dozeScreenState.mHandler.postDelayed(dozeScreenState.mApplyPendingScreenState, 1200L);
                     break;
                 } else {

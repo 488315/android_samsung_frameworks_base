@@ -26,7 +26,6 @@ import kotlin.jvm.functions.Function4;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ShelfToolTipManager {
     public boolean alreadyToolTipShown;
@@ -44,7 +43,6 @@ public final class ShelfToolTipManager {
     public int panelExpandedCount = -1;
     public final ShelfToolTipManager$stateListener$1 stateListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.ShelfToolTipManager$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function4 {
         /* synthetic */ boolean Z$0;
@@ -58,13 +56,13 @@ public final class ShelfToolTipManager {
 
         @Override // kotlin.jvm.functions.Function4
         public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-            boolean booleanValue = ((Boolean) obj).booleanValue();
-            boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-            boolean booleanValue3 = ((Boolean) obj3).booleanValue();
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+            boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+            boolean zBooleanValue3 = ((Boolean) obj3).booleanValue();
             AnonymousClass1 anonymousClass1 = ShelfToolTipManager.this.new AnonymousClass1((Continuation) obj4);
-            anonymousClass1.Z$0 = booleanValue;
-            anonymousClass1.Z$1 = booleanValue2;
-            anonymousClass1.Z$2 = booleanValue3;
+            anonymousClass1.Z$0 = zBooleanValue;
+            anonymousClass1.Z$1 = zBooleanValue2;
+            anonymousClass1.Z$2 = zBooleanValue3;
             return anonymousClass1.invokeSuspend(Unit.INSTANCE);
         }
 
@@ -108,7 +106,7 @@ public final class ShelfToolTipManager {
         ?? r0 = new StatusBarStateController.StateListener() { // from class: com.android.systemui.ShelfToolTipManager$stateListener$1
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
             public final void onStateChanged(int i) {
-                ShelfToolTipManager shelfToolTipManager = ShelfToolTipManager.this;
+                ShelfToolTipManager shelfToolTipManager = this.this$0;
                 if (shelfToolTipManager.mStatusBarState != i) {
                     shelfToolTipManager.mStatusBarState = i;
                 }
@@ -211,7 +209,7 @@ public final class ShelfToolTipManager {
         }
         SemTipPopup semTipPopup6 = this.mNotiSettingTip;
         if (semTipPopup6 != null) {
-            semTipPopup6.setOnStateChangeListener(new SemTipPopup.OnStateChangeListener() { // from class: com.android.systemui.ShelfToolTipManager$getToolTip$2
+            semTipPopup6.setOnStateChangeListener(new SemTipPopup.OnStateChangeListener() { // from class: com.android.systemui.ShelfToolTipManager.getToolTip.2
                 public final void onStateChanged(int i) {
                     if (i == 0) {
                         ShelfToolTipManager shelfToolTipManager = ShelfToolTipManager.this;

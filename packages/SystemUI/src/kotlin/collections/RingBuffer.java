@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.RandomAccess;
 import kotlin.collections.AbstractList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RingBuffer extends AbstractList implements RandomAccess {
     public final Object[] buffer;
@@ -23,9 +22,9 @@ public final class RingBuffer extends AbstractList implements RandomAccess {
             this.capacity = objArr.length;
             this.size = i;
         } else {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "ring buffer filled size: ", " cannot be larger than the buffer size: ");
-            m.append(objArr.length);
-            throw new IllegalArgumentException(m.toString().toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "ring buffer filled size: ", " cannot be larger than the buffer size: ");
+            sbM.append(objArr.length);
+            throw new IllegalArgumentException(sbM.toString().toString());
         }
     }
 
@@ -45,7 +44,7 @@ public final class RingBuffer extends AbstractList implements RandomAccess {
 
     @Override // kotlin.collections.AbstractList, java.util.Collection, java.lang.Iterable, java.util.List
     public final Iterator iterator() {
-        return new AbstractIterator() { // from class: kotlin.collections.RingBuffer$iterator$1
+        return new AbstractIterator() { // from class: kotlin.collections.RingBuffer.iterator.1
             public int count;
             public int index;
 
@@ -77,9 +76,9 @@ public final class RingBuffer extends AbstractList implements RandomAccess {
             throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "n shouldn't be negative but it is ").toString());
         }
         if (i > this.size) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "n shouldn't be greater than the buffer size: n = ", ", size = ");
-            m.append(this.size);
-            throw new IllegalArgumentException(m.toString().toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "n shouldn't be greater than the buffer size: n = ", ", size = ");
+            sbM.append(this.size);
+            throw new IllegalArgumentException(sbM.toString().toString());
         }
         if (i > 0) {
             int i2 = this.startIndex;

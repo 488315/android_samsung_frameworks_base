@@ -80,9 +80,9 @@ public interface IGnssMeasurementInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGnssMeasurementInterface)) {
-                return (IGnssMeasurementInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGnssMeasurementInterface)) {
+                return (IGnssMeasurementInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -133,20 +133,20 @@ public interface IGnssMeasurementInterface extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IGnssMeasurementCallback asInterface = IGnssMeasurementCallback.Stub.asInterface(parcel.readStrongBinder());
-                boolean readBoolean = parcel.readBoolean();
-                boolean readBoolean2 = parcel.readBoolean();
+                IGnssMeasurementCallback iGnssMeasurementCallbackAsInterface = IGnssMeasurementCallback.Stub.asInterface(parcel.readStrongBinder());
+                boolean z = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setCallback(asInterface, readBoolean, readBoolean2);
+                setCallback(iGnssMeasurementCallbackAsInterface, z, z2);
                 parcel2.writeNoException();
             } else if (i == 2) {
                 close();
                 parcel2.writeNoException();
             } else if (i == 3) {
-                IGnssMeasurementCallback asInterface2 = IGnssMeasurementCallback.Stub.asInterface(parcel.readStrongBinder());
+                IGnssMeasurementCallback iGnssMeasurementCallbackAsInterface2 = IGnssMeasurementCallback.Stub.asInterface(parcel.readStrongBinder());
                 Options options = (Options) parcel.readTypedObject(Options.CREATOR);
                 parcel.enforceNoDataAvail();
-                setCallbackWithOptions(asInterface2, options);
+                setCallbackWithOptions(iGnssMeasurementCallbackAsInterface2, options);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -174,70 +174,70 @@ public interface IGnssMeasurementInterface extends IInterface {
 
             @Override // android.hardware.gnss.IGnssMeasurementInterface
             public void setCallback(IGnssMeasurementCallback iGnssMeasurementCallback, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iGnssMeasurementCallback);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iGnssMeasurementCallback);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setCallback is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssMeasurementInterface
             public void close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method close is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssMeasurementInterface
             public void setCallbackWithOptions(IGnssMeasurementCallback iGnssMeasurementCallback, Options options) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iGnssMeasurementCallback);
-                    obtain.writeTypedObject(options, 0);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iGnssMeasurementCallback);
+                    parcelObtain.writeTypedObject(options, 0);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setCallbackWithOptions is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssMeasurementInterface
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -246,18 +246,18 @@ public interface IGnssMeasurementInterface extends IInterface {
             @Override // android.hardware.gnss.IGnssMeasurementInterface
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }
@@ -298,48 +298,48 @@ public interface IGnssMeasurementInterface extends IInterface {
 
         @Override // android.os.Parcelable
         public final void writeToParcel(Parcel parcel, int i) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
             parcel.writeBoolean(this.enableFullTracking);
             parcel.writeBoolean(this.enableCorrVecOutputs);
             parcel.writeInt(this.intervalMs);
-            int dataPosition2 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition2 - dataPosition);
-            parcel.setDataPosition(dataPosition2);
+            int iDataPosition2 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition2 - iDataPosition);
+            parcel.setDataPosition(iDataPosition2);
         }
 
         public final void readFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
             try {
-                if (readInt < 4) {
+                if (i < 4) {
                     throw new BadParcelableException("Parcelable too small");
                 }
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.enableFullTracking = parcel.readBoolean();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.enableCorrVecOutputs = parcel.readBoolean();
-                        if (parcel.dataPosition() - dataPosition < readInt) {
+                        if (parcel.dataPosition() - iDataPosition < i) {
                             this.intervalMs = parcel.readInt();
-                            if (dataPosition > Integer.MAX_VALUE - readInt) {
+                            if (iDataPosition > Integer.MAX_VALUE - i) {
                                 throw new BadParcelableException("Overflow in the size of parcelable");
                             }
-                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }

@@ -24,31 +24,31 @@ public class ContentManager extends Manager<Content> {
     public Content create(ContentType contentType, String str) {
         Content audio;
         try {
-            int generateUniqueId = generateUniqueId();
+            int iGenerateUniqueId = generateUniqueId();
             switch (AnonymousClass1.$SwitchMap$com$samsung$vekit$Common$Type$ContentType[contentType.ordinal()]) {
                 case 1:
-                    audio = new Audio(this.context, generateUniqueId, str);
+                    audio = new Audio(this.context, iGenerateUniqueId, str);
                     break;
                 case 2:
-                    audio = new Doodle(this.context, generateUniqueId, str);
+                    audio = new Doodle(this.context, iGenerateUniqueId, str);
                     break;
                 case 3:
-                    audio = new Image(this.context, generateUniqueId, str);
+                    audio = new Image(this.context, iGenerateUniqueId, str);
                     break;
                 case 4:
-                    audio = new AnimatedImage(this.context, generateUniqueId, str);
+                    audio = new AnimatedImage(this.context, iGenerateUniqueId, str);
                     break;
                 case 5:
-                    audio = new Video(this.context, generateUniqueId, str);
+                    audio = new Video(this.context, iGenerateUniqueId, str);
                     break;
                 case 6:
-                    audio = new Caption(this.context, generateUniqueId, str);
+                    audio = new Caption(this.context, iGenerateUniqueId, str);
                     break;
                 case 7:
-                    audio = new FragmentAudio(this.context, generateUniqueId, str);
+                    audio = new FragmentAudio(this.context, iGenerateUniqueId, str);
                     break;
                 case 8:
-                    audio = new PortraitVideo(this.context, generateUniqueId, str);
+                    audio = new PortraitVideo(this.context, iGenerateUniqueId, str);
                     break;
                 default:
                     return null;

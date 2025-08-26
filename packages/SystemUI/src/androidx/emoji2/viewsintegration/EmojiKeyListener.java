@@ -7,13 +7,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import androidx.emoji2.text.EmojiProcessor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EmojiKeyListener implements KeyListener {
     public final EmojiCompatHandleKeyDownHelper mEmojiCompatHandleKeyDownHelper;
     public final KeyListener mKeyListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EmojiCompatHandleKeyDownHelper {
     }
 

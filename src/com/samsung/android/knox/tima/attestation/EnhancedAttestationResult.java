@@ -138,15 +138,15 @@ public class EnhancedAttestationResult implements Parcelable {
         return bundle.getString(DATA_FIELD_SERVER_RESPONSE_ID);
     }
 
-    int getRetryAfterTime() {
+    int getRetryAfterTime() throws NumberFormatException {
         try {
             String str = this.reason;
             if (str == null || !str.contains(ERROR_RETRY_AFTER)) {
                 return -1;
             }
-            int parseInt = Integer.parseInt(this.reason.replace(ERROR_RETRY_AFTER, ""));
-            if (parseInt > 0) {
-                return parseInt;
+            int i = Integer.parseInt(this.reason.replace(ERROR_RETRY_AFTER, ""));
+            if (i > 0) {
+                return i;
             }
             return -1;
         } catch (Exception e) {

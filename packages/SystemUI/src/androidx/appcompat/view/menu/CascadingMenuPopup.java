@@ -2,9 +2,13 @@ package androidx.appcompat.view.menu;
 
 import android.R;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.util.TypedValue;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.HeaderViewListAdapter;
@@ -18,7 +22,6 @@ import androidx.appcompat.widget.MenuPopupWindow;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CascadingMenuPopup extends MenuPopup implements View.OnKeyListener, PopupWindow.OnDismissListener {
     public final View mAnchorView;
@@ -38,7 +41,7 @@ public final class CascadingMenuPopup extends MenuPopup implements View.OnKeyLis
     public final List mShowingMenus = new ArrayList();
     public final AnonymousClass1 mGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: androidx.appcompat.view.menu.CascadingMenuPopup.1
         @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-        public final void onGlobalLayout() {
+        public final void onGlobalLayout() throws Resources.NotFoundException {
             if (!CascadingMenuPopup.this.isShowing() || ((ArrayList) CascadingMenuPopup.this.mShowingMenus).size() <= 0) {
                 return;
             }
@@ -81,14 +84,12 @@ public final class CascadingMenuPopup extends MenuPopup implements View.OnKeyLis
     public final AnonymousClass3 mMenuItemHoverListener = new AnonymousClass3();
     public final int mDropDownGravity = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.view.menu.CascadingMenuPopup$3, reason: invalid class name */
     public class AnonymousClass3 {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CascadingMenuInfo {
         public final MenuBuilder menu;
         public final int position;
@@ -145,7 +146,7 @@ public final class CascadingMenuPopup extends MenuPopup implements View.OnKeyLis
         if (((ArrayList) this.mShowingMenus).isEmpty()) {
             return null;
         }
-        return ((CascadingMenuInfo) AlertController$$ExternalSyntheticOutline0.m((ArrayList) this.mShowingMenus, 1)).window.mDropDownList;
+        return ((CascadingMenuInfo) AlertController$$ExternalSyntheticOutline0.m(1, (ArrayList) this.mShowingMenus)).window.mDropDownList;
     }
 
     @Override // androidx.appcompat.view.menu.ShowableListMenu
@@ -245,7 +246,7 @@ public final class CascadingMenuPopup extends MenuPopup implements View.OnKeyLis
     }
 
     @Override // androidx.appcompat.view.menu.MenuPresenter
-    public final boolean onSubMenuSelected(SubMenuBuilder subMenuBuilder) {
+    public final boolean onSubMenuSelected(SubMenuBuilder subMenuBuilder) throws Resources.NotFoundException {
         ArrayList arrayList = (ArrayList) this.mShowingMenus;
         int size = arrayList.size();
         int i = 0;
@@ -275,7 +276,7 @@ public final class CascadingMenuPopup extends MenuPopup implements View.OnKeyLis
     }
 
     @Override // androidx.appcompat.view.menu.ShowableListMenu
-    public final void show() {
+    public final void show() throws Resources.NotFoundException {
         if (isShowing()) {
             return;
         }
@@ -301,34 +302,131 @@ public final class CascadingMenuPopup extends MenuPopup implements View.OnKeyLis
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x0141, code lost:
-    
-        if (((r5.getWidth() + r6[0]) + r0) > r7.right) goto L56;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x0143, code lost:
-    
-        r5 = 0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:59:0x0145, code lost:
-    
-        r5 = 1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:61:0x014a, code lost:
-    
-        if ((r6[0] - r0) < 0) goto L57;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x010c  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0179  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x0109  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x0143  */
+    /* JADX WARN: Removed duplicated region for block: B:57:0x0145  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void showMenu(androidx.appcompat.view.menu.MenuBuilder r15) {
-        /*
-            Method dump skipped, instructions count: 411
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.view.menu.CascadingMenuPopup.showMenu(androidx.appcompat.view.menu.MenuBuilder):void");
+    public final void showMenu(MenuBuilder menuBuilder) throws Resources.NotFoundException {
+        MenuAdapter menuAdapter;
+        View childAt;
+        int i;
+        MenuItem item;
+        MenuAdapter menuAdapter2;
+        int headersCount;
+        int firstVisiblePosition;
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this.mContext);
+        int size = menuBuilder.mItems.size();
+        int i2 = 0;
+        while (true) {
+            if (i2 >= size) {
+                menuAdapter = new MenuAdapter(menuBuilder, layoutInflaterFrom, this.mOverflowOnly, com.android.systemui.R.layout.sesl_cascading_menu_item_layout);
+                break;
+            } else {
+                if ((((MenuItemImpl) menuBuilder.getItem(i2)).mFlags & 4) != 0) {
+                    menuAdapter = new MenuAdapter(menuBuilder, layoutInflaterFrom, this.mOverflowOnly, com.android.systemui.R.layout.sesl_popup_sub_menu_item_layout);
+                    break;
+                }
+                i2++;
+            }
+        }
+        if (!isShowing() && this.mForceShowIcon) {
+            menuAdapter.mForceShowIcon = true;
+        } else if (isShowing()) {
+            menuAdapter.mForceShowIcon = MenuPopup.shouldPreserveIconSpacing(menuBuilder);
+        }
+        int iMeasureIndividualMenuWidth = MenuPopup.measureIndividualMenuWidth(menuAdapter, this.mContext, this.mMenuMaxWidth);
+        MenuPopupWindow menuPopupWindow = new MenuPopupWindow(this.mContext, null, this.mPopupStyleAttr, this.mPopupStyleRes);
+        menuPopupWindow.mHoverListener = this.mMenuItemHoverListener;
+        menuPopupWindow.mItemClickListener = this;
+        menuPopupWindow.mPopup.setOnDismissListener(this);
+        menuPopupWindow.mDropDownAnchorView = this.mAnchorView;
+        menuPopupWindow.mDropDownGravity = this.mDropDownGravity;
+        menuPopupWindow.mModal = true;
+        menuPopupWindow.mPopup.setFocusable(true);
+        menuPopupWindow.mPopup.setInputMethodMode(2);
+        menuPopupWindow.setAdapter(menuAdapter);
+        menuPopupWindow.setContentWidth(iMeasureIndividualMenuWidth);
+        menuPopupWindow.mDropDownGravity = this.mDropDownGravity;
+        if (((ArrayList) this.mShowingMenus).size() > 0) {
+            CascadingMenuInfo cascadingMenuInfo = (CascadingMenuInfo) AlertController$$ExternalSyntheticOutline0.m(1, (ArrayList) this.mShowingMenus);
+            MenuBuilder menuBuilder2 = cascadingMenuInfo.menu;
+            int size2 = menuBuilder2.mItems.size();
+            int i3 = 0;
+            while (true) {
+                if (i3 >= size2) {
+                    item = null;
+                    break;
+                }
+                item = menuBuilder2.getItem(i3);
+                if (item.hasSubMenu() && menuBuilder == item.getSubMenu()) {
+                    break;
+                } else {
+                    i3++;
+                }
+            }
+            if (item == null) {
+                childAt = null;
+            } else {
+                DropDownListView dropDownListView = cascadingMenuInfo.window.mDropDownList;
+                ListAdapter adapter = dropDownListView.getAdapter();
+                if (adapter instanceof HeaderViewListAdapter) {
+                    HeaderViewListAdapter headerViewListAdapter = (HeaderViewListAdapter) adapter;
+                    headersCount = headerViewListAdapter.getHeadersCount();
+                    menuAdapter2 = (MenuAdapter) headerViewListAdapter.getWrappedAdapter();
+                } else {
+                    menuAdapter2 = (MenuAdapter) adapter;
+                    headersCount = 0;
+                }
+                int count = menuAdapter2.getCount();
+                int i4 = 0;
+                while (true) {
+                    if (i4 >= count) {
+                        i4 = -1;
+                        break;
+                    } else if (item == menuAdapter2.getItem(i4)) {
+                        break;
+                    } else {
+                        i4++;
+                    }
+                }
+                if (i4 != -1 && (firstVisiblePosition = (i4 + headersCount) - dropDownListView.getFirstVisiblePosition()) >= 0 && firstVisiblePosition < dropDownListView.getChildCount()) {
+                    childAt = dropDownListView.getChildAt(firstVisiblePosition);
+                }
+            }
+        }
+        if (childAt != null) {
+            menuPopupWindow.mPopup.setTouchModal(false);
+            menuPopupWindow.mPopup.setEnterTransition(null);
+            DropDownListView dropDownListView2 = ((CascadingMenuInfo) AlertController$$ExternalSyntheticOutline0.m(1, (ArrayList) this.mShowingMenus)).window.mDropDownList;
+            int[] iArr = new int[2];
+            dropDownListView2.getLocationOnScreen(iArr);
+            Rect rect = new Rect();
+            this.mShownAnchorView.getWindowVisibleDisplayFrame(rect);
+            if (this.mLastPosition == 1) {
+                i = (dropDownListView2.getWidth() + iArr[0]) + iMeasureIndividualMenuWidth > rect.right ? 0 : 1;
+            } else if (iArr[0] - iMeasureIndividualMenuWidth < 0) {
+            }
+            boolean z = i == 1;
+            this.mLastPosition = i;
+            menuPopupWindow.mDropDownAnchorView = childAt;
+            if ((this.mDropDownGravity & 5) != 5) {
+                iMeasureIndividualMenuWidth = z ? childAt.getWidth() : 0 - iMeasureIndividualMenuWidth;
+            } else if (!z) {
+                iMeasureIndividualMenuWidth = 0 - childAt.getWidth();
+            }
+            menuPopupWindow.mDropDownHorizontalOffset = iMeasureIndividualMenuWidth;
+            menuPopupWindow.mOverlapAnchorSet = true;
+            menuPopupWindow.mOverlapAnchor = true;
+            menuPopupWindow.setVerticalOffset(0);
+        } else {
+            Rect rect2 = this.mEpicenterBounds;
+            menuPopupWindow.mEpicenterBounds = rect2 != null ? new Rect(rect2) : null;
+        }
+        ((ArrayList) this.mShowingMenus).add(new CascadingMenuInfo(menuPopupWindow, menuBuilder, this.mLastPosition));
+        menuPopupWindow.show();
+        menuPopupWindow.mDropDownList.setOnKeyListener(this);
     }
 
     @Override // androidx.appcompat.view.menu.MenuPresenter

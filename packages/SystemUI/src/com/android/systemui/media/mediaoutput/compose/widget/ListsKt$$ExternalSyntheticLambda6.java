@@ -7,7 +7,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ListsKt$$ExternalSyntheticLambda6 implements Function2 {
     public final /* synthetic */ int $r8$classId = 0;
@@ -30,15 +29,15 @@ public final /* synthetic */ class ListsKt$$ExternalSyntheticLambda6 implements 
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
                 String str = this.f$2;
-                ListsKt.TwoLineListItem(this.f$0, (Modifier) this.f$1, str, (Composer) obj, updateChangedFlags, this.f$4);
+                ListsKt.TwoLineListItem(this.f$0, (Modifier) this.f$1, str, (Composer) obj, iUpdateChangedFlags, this.f$4);
                 break;
             default:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
+                int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$3 | 1);
                 String str2 = this.f$2;
-                ListsKt.SecListItem((Function0) this.f$1, this.f$0, str2, (Composer) obj, updateChangedFlags2, this.f$4);
+                ListsKt.SecListItem((Function0) this.f$1, this.f$0, str2, (Composer) obj, iUpdateChangedFlags2, this.f$4);
                 break;
         }
         return Unit.INSTANCE;

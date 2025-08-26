@@ -7,7 +7,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslTabTokens {
     public static final Companion Companion = new Companion(null);
@@ -23,7 +22,6 @@ public final class SeslTabTokens {
     public final long subTabTwoLineTextColor;
     public final long textColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,7 +31,6 @@ public final class SeslTabTokens {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -125,7 +122,7 @@ public final class SeslTabTokens {
         SeslTabTokens seslTabTokens = (SeslTabTokens) obj;
         long j = seslTabTokens.textColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.textColor, j) && ULong.m3427equalsimpl0(this.selectedTextColor, seslTabTokens.selectedTextColor) && ULong.m3427equalsimpl0(this.subTabTextColor, seslTabTokens.subTabTextColor) && ULong.m3427equalsimpl0(this.subTabSelectedTextColor, seslTabTokens.subTabSelectedTextColor) && ULong.m3427equalsimpl0(this.subTabTwoLineTextColor, seslTabTokens.subTabTwoLineTextColor) && ULong.m3427equalsimpl0(this.subTabTwoLineSelectedTextColor, seslTabTokens.subTabTwoLineSelectedTextColor) && ULong.m3427equalsimpl0(this.subTabTwoLineSubTextColor, seslTabTokens.subTabTwoLineSubTextColor) && ULong.m3427equalsimpl0(this.subTabTwoLineSubSelectedTextColor, seslTabTokens.subTabTwoLineSubSelectedTextColor) && ULong.m3427equalsimpl0(this.subTabIndicatorBackgroundColor, seslTabTokens.subTabIndicatorBackgroundColor);
+        return ULong.m3447equalsimpl0(this.textColor, j) && ULong.m3447equalsimpl0(this.selectedTextColor, seslTabTokens.selectedTextColor) && ULong.m3447equalsimpl0(this.subTabTextColor, seslTabTokens.subTabTextColor) && ULong.m3447equalsimpl0(this.subTabSelectedTextColor, seslTabTokens.subTabSelectedTextColor) && ULong.m3447equalsimpl0(this.subTabTwoLineTextColor, seslTabTokens.subTabTwoLineTextColor) && ULong.m3447equalsimpl0(this.subTabTwoLineSelectedTextColor, seslTabTokens.subTabTwoLineSelectedTextColor) && ULong.m3447equalsimpl0(this.subTabTwoLineSubTextColor, seslTabTokens.subTabTwoLineSubTextColor) && ULong.m3447equalsimpl0(this.subTabTwoLineSubSelectedTextColor, seslTabTokens.subTabTwoLineSubSelectedTextColor) && ULong.m3447equalsimpl0(this.subTabIndicatorBackgroundColor, seslTabTokens.subTabIndicatorBackgroundColor);
     }
 
     public final int hashCode() {
@@ -135,20 +132,20 @@ public final class SeslTabTokens {
     }
 
     public final String toString() {
-        String m462toStringimpl = Color.m462toStringimpl(this.textColor);
-        String m462toStringimpl2 = Color.m462toStringimpl(this.selectedTextColor);
-        String m462toStringimpl3 = Color.m462toStringimpl(this.subTabTextColor);
-        String m462toStringimpl4 = Color.m462toStringimpl(this.subTabSelectedTextColor);
-        String m462toStringimpl5 = Color.m462toStringimpl(this.subTabTwoLineTextColor);
-        String m462toStringimpl6 = Color.m462toStringimpl(this.subTabTwoLineSelectedTextColor);
-        String m462toStringimpl7 = Color.m462toStringimpl(this.subTabTwoLineSubTextColor);
-        String m462toStringimpl8 = Color.m462toStringimpl(this.subTabTwoLineSubSelectedTextColor);
-        String m462toStringimpl9 = Color.m462toStringimpl(this.subTabIndicatorBackgroundColor);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslTabTokens(textColor=", m462toStringimpl, ", selectedTextColor=", m462toStringimpl2, ", subTabTextColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl3, ", subTabSelectedTextColor=", m462toStringimpl4, ", subTabTwoLineTextColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl5, ", subTabTwoLineSelectedTextColor=", m462toStringimpl6, ", subTabTwoLineSubTextColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl7, ", subTabTwoLineSubSelectedTextColor=", m462toStringimpl8, ", subTabIndicatorBackgroundColor=");
-        return TransitionKt$$ExternalSyntheticOutline0.m(m, m462toStringimpl9, ")");
+        String strM464toStringimpl = Color.m464toStringimpl(this.textColor);
+        String strM464toStringimpl2 = Color.m464toStringimpl(this.selectedTextColor);
+        String strM464toStringimpl3 = Color.m464toStringimpl(this.subTabTextColor);
+        String strM464toStringimpl4 = Color.m464toStringimpl(this.subTabSelectedTextColor);
+        String strM464toStringimpl5 = Color.m464toStringimpl(this.subTabTwoLineTextColor);
+        String strM464toStringimpl6 = Color.m464toStringimpl(this.subTabTwoLineSelectedTextColor);
+        String strM464toStringimpl7 = Color.m464toStringimpl(this.subTabTwoLineSubTextColor);
+        String strM464toStringimpl8 = Color.m464toStringimpl(this.subTabTwoLineSubSelectedTextColor);
+        String strM464toStringimpl9 = Color.m464toStringimpl(this.subTabIndicatorBackgroundColor);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslTabTokens(textColor=", strM464toStringimpl, ", selectedTextColor=", strM464toStringimpl2, ", subTabTextColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl3, ", subTabSelectedTextColor=", strM464toStringimpl4, ", subTabTwoLineTextColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl5, ", subTabTwoLineSelectedTextColor=", strM464toStringimpl6, ", subTabTwoLineSubTextColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl7, ", subTabTwoLineSubSelectedTextColor=", strM464toStringimpl8, ", subTabIndicatorBackgroundColor=");
+        return TransitionKt$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl9, ")");
     }
 
     private SeslTabTokens(long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9) {

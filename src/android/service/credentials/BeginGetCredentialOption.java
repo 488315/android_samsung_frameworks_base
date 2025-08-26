@@ -69,13 +69,13 @@ public final class BeginGetCredentialOption implements Parcelable {
     }
 
     private BeginGetCredentialOption(Parcel parcel) {
-        String readString8 = parcel.readString8();
-        Bundle readBundle = parcel.readBundle();
-        String readString82 = parcel.readString8();
-        this.mType = readString8;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
-        this.mCandidateQueryData = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
-        this.mId = readString82;
+        String string8 = parcel.readString8();
+        Bundle bundle = parcel.readBundle();
+        String string82 = parcel.readString8();
+        this.mType = string8;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
+        this.mCandidateQueryData = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
+        this.mId = string82;
     }
 }

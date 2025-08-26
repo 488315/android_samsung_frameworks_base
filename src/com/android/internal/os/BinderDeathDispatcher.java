@@ -47,14 +47,14 @@ public class BinderDeathDispatcher<T extends IInterface> {
 
     public int linkToDeath(T t, IBinder.DeathRecipient deathRecipient) {
         int size;
-        IBinder asBinder = t.asBinder();
+        IBinder iBinderAsBinder = t.asBinder();
         synchronized (this.mLock) {
-            BinderDeathDispatcher<T>.RecipientsInfo recipientsInfo = this.mTargets.get(asBinder);
+            BinderDeathDispatcher<T>.RecipientsInfo recipientsInfo = this.mTargets.get(iBinderAsBinder);
             if (recipientsInfo == null) {
-                recipientsInfo = new RecipientsInfo(asBinder);
+                recipientsInfo = new RecipientsInfo(iBinderAsBinder);
                 try {
-                    asBinder.linkToDeath(recipientsInfo, 0);
-                    this.mTargets.put(asBinder, recipientsInfo);
+                    iBinderAsBinder.linkToDeath(recipientsInfo, 0);
+                    this.mTargets.put(iBinderAsBinder, recipientsInfo);
                 } catch (RemoteException unused) {
                     return -1;
                 }
@@ -66,9 +66,9 @@ public class BinderDeathDispatcher<T extends IInterface> {
     }
 
     public void unlinkToDeath(T t, IBinder.DeathRecipient deathRecipient) {
-        IBinder asBinder = t.asBinder();
+        IBinder iBinderAsBinder = t.asBinder();
         synchronized (this.mLock) {
-            BinderDeathDispatcher<T>.RecipientsInfo recipientsInfo = this.mTargets.get(asBinder);
+            BinderDeathDispatcher<T>.RecipientsInfo recipientsInfo = this.mTargets.get(iBinderAsBinder);
             if (recipientsInfo == null) {
                 return;
             }
@@ -85,11 +85,11 @@ public class BinderDeathDispatcher<T extends IInterface> {
             indentingPrintWriter.println(this.mTargets.size());
             indentingPrintWriter.print("# of death recipients: ");
             Iterator<BinderDeathDispatcher<T>.RecipientsInfo> it = this.mTargets.values().iterator();
-            int i = 0;
+            int size = 0;
             while (it.hasNext()) {
-                i += it.next().mRecipients.size();
+                size += it.next().mRecipients.size();
             }
-            indentingPrintWriter.println(i);
+            indentingPrintWriter.println(size);
         }
     }
 

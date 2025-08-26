@@ -30,9 +30,9 @@ public class FilterGraphEffect extends FilterEffect {
 
     private void createGraph(String str) {
         try {
-            FilterGraph readGraphString = new TextGraphReader().readGraphString(str);
-            this.mGraph = readGraphString;
-            if (readGraphString == null) {
+            FilterGraph graphString = new TextGraphReader().readGraphString(str);
+            this.mGraph = graphString;
+            if (graphString == null) {
                 throw new RuntimeException("Could not setup effect");
             }
             this.mRunner = new SyncRunner(getFilterContext(), this.mGraph, this.mSchedulerClass);

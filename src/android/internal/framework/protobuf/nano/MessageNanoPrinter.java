@@ -17,7 +17,7 @@ public final class MessageNanoPrinter {
     private MessageNanoPrinter() {
     }
 
-    public static <T extends MessageNano> String print(T t) {
+    public static <T extends MessageNano> String print(T t) throws SecurityException, IllegalArgumentException {
         if (t == null) {
             return "";
         }
@@ -32,7 +32,7 @@ public final class MessageNanoPrinter {
         }
     }
 
-    private static void print(String str, Object obj, StringBuffer stringBuffer, StringBuffer stringBuffer2) throws IllegalAccessException, InvocationTargetException {
+    private static void print(String str, Object obj, StringBuffer stringBuffer, StringBuffer stringBuffer2) throws IllegalAccessException, SecurityException, IllegalArgumentException, InvocationTargetException {
         if (obj == null) {
             return;
         }
@@ -66,12 +66,12 @@ public final class MessageNanoPrinter {
             for (Method method : cls.getMethods()) {
                 String name2 = method.getName();
                 if (name2.startsWith("set")) {
-                    String substring = name2.substring(3);
+                    String strSubstring = name2.substring(3);
                     try {
                         Class[] clsArr = new Class[0];
-                        if (((Boolean) cls.getMethod("has" + substring, null).invoke(obj, null)).booleanValue()) {
+                        if (((Boolean) cls.getMethod("has" + strSubstring, null).invoke(obj, null)).booleanValue()) {
                             Class[] clsArr2 = new Class[0];
-                            print(substring, cls.getMethod("get" + substring, null).invoke(obj, null), stringBuffer, stringBuffer2);
+                            print(strSubstring, cls.getMethod("get" + strSubstring, null).invoke(obj, null), stringBuffer, stringBuffer2);
                         }
                     } catch (NoSuchMethodException unused) {
                     }
@@ -85,9 +85,9 @@ public final class MessageNanoPrinter {
             return;
         }
         if (obj instanceof Map) {
-            String deCamelCaseify = deCamelCaseify(str);
+            String strDeCamelCaseify = deCamelCaseify(str);
             for (Map.Entry entry : ((Map) obj).entrySet()) {
-                stringBuffer2.append(stringBuffer).append(deCamelCaseify).append(" <\n");
+                stringBuffer2.append(stringBuffer).append(strDeCamelCaseify).append(" <\n");
                 int length3 = stringBuffer.length();
                 stringBuffer.append(INDENT);
                 print("key", entry.getKey(), stringBuffer, stringBuffer2);
@@ -111,13 +111,13 @@ public final class MessageNanoPrinter {
     private static String deCamelCaseify(String str) {
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
+            char cCharAt = str.charAt(i);
             if (i == 0) {
-                stringBuffer.append(Character.toLowerCase(charAt));
-            } else if (Character.isUpperCase(charAt)) {
-                stringBuffer.append('_').append(Character.toLowerCase(charAt));
+                stringBuffer.append(Character.toLowerCase(cCharAt));
+            } else if (Character.isUpperCase(cCharAt)) {
+                stringBuffer.append('_').append(Character.toLowerCase(cCharAt));
             } else {
-                stringBuffer.append(charAt);
+                stringBuffer.append(cCharAt);
             }
         }
         return stringBuffer.toString();
@@ -134,11 +134,11 @@ public final class MessageNanoPrinter {
         int length = str.length();
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (charAt >= ' ' && charAt <= '~' && charAt != '\"' && charAt != '\'') {
-                sb.append(charAt);
+            char cCharAt = str.charAt(i);
+            if (cCharAt >= ' ' && cCharAt <= '~' && cCharAt != '\"' && cCharAt != '\'') {
+                sb.append(cCharAt);
             } else {
-                sb.append(String.format("\\u%04x", Integer.valueOf(charAt)));
+                sb.append(String.format("\\u%04x", Integer.valueOf(cCharAt)));
             }
         }
         return sb.toString();

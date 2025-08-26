@@ -248,23 +248,23 @@ public class CutoutSpecification {
         }
 
         private Rect onSetEdgeCutout(boolean z, boolean z2, Rect rect) {
-            int decideWhichEdge;
+            int iDecideWhichEdge;
             if (z2) {
-                decideWhichEdge = CutoutSpecification.decideWhichEdge(this.mIsShortEdgeOnTop, true, z);
+                iDecideWhichEdge = CutoutSpecification.decideWhichEdge(this.mIsShortEdgeOnTop, true, z);
             } else {
                 boolean z3 = this.mIsTouchShortEdgeStart;
                 if (z3 && this.mIsTouchShortEdgeEnd) {
-                    decideWhichEdge = CutoutSpecification.decideWhichEdge(this.mIsShortEdgeOnTop, false, z);
+                    iDecideWhichEdge = CutoutSpecification.decideWhichEdge(this.mIsShortEdgeOnTop, false, z);
                 } else if (z3 || this.mIsTouchShortEdgeEnd) {
-                    decideWhichEdge = CutoutSpecification.decideWhichEdge(this.mIsShortEdgeOnTop, true, this.mIsCloserToStartSide);
+                    iDecideWhichEdge = CutoutSpecification.decideWhichEdge(this.mIsShortEdgeOnTop, true, this.mIsCloserToStartSide);
                 } else {
-                    decideWhichEdge = CutoutSpecification.decideWhichEdge(this.mIsShortEdgeOnTop, z2, z);
+                    iDecideWhichEdge = CutoutSpecification.decideWhichEdge(this.mIsShortEdgeOnTop, z2, z);
                 }
             }
-            int safeInset = getSafeInset(decideWhichEdge);
-            int computeSafeInsets = computeSafeInsets(decideWhichEdge, rect);
-            if (safeInset < computeSafeInsets) {
-                setSafeInset(decideWhichEdge, computeSafeInsets);
+            int safeInset = getSafeInset(iDecideWhichEdge);
+            int iComputeSafeInsets = computeSafeInsets(iDecideWhichEdge, rect);
+            if (safeInset < iComputeSafeInsets) {
+                setSafeInset(iDecideWhichEdge, iComputeSafeInsets);
             }
             return new Rect(rect);
         }
@@ -302,9 +302,9 @@ public class CutoutSpecification {
                 return;
             }
             translateMatrix();
-            Path createPathFromPathData = PathParser.createPathFromPathData(str);
-            createPathFromPathData.transform(this.mMatrix);
-            computeBoundsRectAndAddToRegion(createPathFromPathData, region, this.mTmpRect);
+            Path pathCreatePathFromPathData = PathParser.createPathFromPathData(str);
+            pathCreatePathFromPathData.transform(this.mMatrix);
+            computeBoundsRectAndAddToRegion(pathCreatePathFromPathData, region, this.mTmpRect);
             if (this.mTmpRect.isEmpty()) {
                 return;
             }
@@ -317,78 +317,78 @@ public class CutoutSpecification {
                 this.mIsTouchShortEdgeEnd = this.mTmpRect.right >= this.mPhysicalDisplayWidth;
                 this.mIsCloserToStartSide = this.mTmpRect.centerX() < this.mPhysicalDisplayWidth / 2;
             }
-            setEdgeCutout(createPathFromPathData);
+            setEdgeCutout(pathCreatePathFromPathData);
         }
 
         private void parseSpecWithoutDp(String str) {
             int i;
-            Region obtain = Region.obtain();
+            Region regionObtain = Region.obtain();
             StringBuilder sb = null;
             int i2 = 0;
             while (true) {
-                int indexOf = str.indexOf(64, i2);
-                if (indexOf == -1) {
+                int iIndexOf = str.indexOf(64, i2);
+                if (iIndexOf == -1) {
                     break;
                 }
                 if (sb == null) {
                     sb = new StringBuilder(str.length());
                 }
-                sb.append((CharSequence) str, i2, indexOf);
-                if (str.startsWith(CutoutSpecification.LEFT_MARKER, indexOf)) {
+                sb.append((CharSequence) str, i2, iIndexOf);
+                if (str.startsWith(CutoutSpecification.LEFT_MARKER, iIndexOf)) {
                     if (!this.mPositionFromRight) {
                         this.mPositionFromLeft = true;
                     }
-                    i = indexOf + 5;
-                } else if (str.startsWith(CutoutSpecification.RIGHT_MARKER, indexOf)) {
+                    i = iIndexOf + 5;
+                } else if (str.startsWith(CutoutSpecification.RIGHT_MARKER, iIndexOf)) {
                     if (!this.mPositionFromLeft) {
                         this.mPositionFromRight = true;
                     }
-                    i = indexOf + 6;
-                } else if (str.startsWith(CutoutSpecification.BOTTOM_MARKER, indexOf)) {
-                    parseSvgPathSpec(obtain, sb.toString());
-                    i = indexOf + 7;
+                    i = iIndexOf + 6;
+                } else if (str.startsWith(CutoutSpecification.BOTTOM_MARKER, iIndexOf)) {
+                    parseSvgPathSpec(regionObtain, sb.toString());
+                    i = iIndexOf + 7;
                     resetStatus(sb);
                     this.mBindBottomCutout = true;
                     this.mPositionFromBottom = true;
-                } else if (str.startsWith(CutoutSpecification.CENTER_VERTICAL_MARKER, indexOf)) {
-                    parseSvgPathSpec(obtain, sb.toString());
-                    i = indexOf + 16;
+                } else if (str.startsWith(CutoutSpecification.CENTER_VERTICAL_MARKER, iIndexOf)) {
+                    parseSvgPathSpec(regionObtain, sb.toString());
+                    i = iIndexOf + 16;
                     resetStatus(sb);
                     this.mPositionFromCenterVertical = true;
-                } else if (str.startsWith(CutoutSpecification.CUTOUT_MARKER, indexOf)) {
-                    parseSvgPathSpec(obtain, sb.toString());
-                    i = indexOf + 7;
+                } else if (str.startsWith(CutoutSpecification.CUTOUT_MARKER, iIndexOf)) {
+                    parseSvgPathSpec(regionObtain, sb.toString());
+                    i = iIndexOf + 7;
                     resetStatus(sb);
-                } else if (str.startsWith(CutoutSpecification.BIND_LEFT_CUTOUT_MARKER, indexOf)) {
+                } else if (str.startsWith(CutoutSpecification.BIND_LEFT_CUTOUT_MARKER, iIndexOf)) {
                     this.mBindBottomCutout = false;
                     this.mBindRightCutout = false;
                     this.mBindLeftCutout = true;
-                    i = indexOf + 17;
-                } else if (str.startsWith(CutoutSpecification.BIND_RIGHT_CUTOUT_MARKER, indexOf)) {
+                    i = iIndexOf + 17;
+                } else if (str.startsWith(CutoutSpecification.BIND_RIGHT_CUTOUT_MARKER, iIndexOf)) {
                     this.mBindBottomCutout = false;
                     this.mBindLeftCutout = false;
                     this.mBindRightCutout = true;
-                    i = indexOf + 18;
+                    i = iIndexOf + 18;
                 } else {
-                    i = indexOf + 1;
+                    i = iIndexOf + 1;
                 }
                 i2 = i;
             }
             if (sb == null) {
-                parseSvgPathSpec(obtain, str);
+                parseSvgPathSpec(regionObtain, str);
             } else {
                 sb.append((CharSequence) str, i2, str.length());
-                parseSvgPathSpec(obtain, sb.toString());
+                parseSvgPathSpec(regionObtain, sb.toString());
             }
-            obtain.recycle();
+            regionObtain.recycle();
         }
 
         public CutoutSpecification parse(String str) {
             Objects.requireNonNull(str);
-            int lastIndexOf = str.lastIndexOf(CutoutSpecification.DP_MARKER);
-            this.mInDp = lastIndexOf != -1;
-            if (lastIndexOf != -1) {
-                str = str.substring(0, lastIndexOf) + str.substring(lastIndexOf + 3);
+            int iLastIndexOf = str.lastIndexOf(CutoutSpecification.DP_MARKER);
+            this.mInDp = iLastIndexOf != -1;
+            if (iLastIndexOf != -1) {
+                str = str.substring(0, iLastIndexOf) + str.substring(iLastIndexOf + 3);
             }
             parseSpecWithoutDp(str);
             this.mInsets = Insets.of(this.mSafeInsetLeft, this.mSafeInsetTop, this.mSafeInsetRight, this.mSafeInsetBottom);

@@ -14,6 +14,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.Extensions;
 import com.android.internal.org.bouncycastle.asn1.x509.GeneralName;
 import com.android.internal.org.bouncycastle.cert.X509CertificateHolder;
 import com.android.internal.org.bouncycastle.operator.ContentSigner;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -64,7 +65,7 @@ public class OCSPReqBuilder {
         return this;
     }
 
-    private OCSPReq generateRequest(ContentSigner contentSigner, X509CertificateHolder[] x509CertificateHolderArr) throws OCSPException {
+    private OCSPReq generateRequest(ContentSigner contentSigner, X509CertificateHolder[] x509CertificateHolderArr) throws OCSPException, IOException {
         Signature signature;
         Iterator it = this.list.iterator();
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector();

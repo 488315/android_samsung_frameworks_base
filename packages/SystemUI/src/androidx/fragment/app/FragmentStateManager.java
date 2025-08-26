@@ -32,7 +32,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FragmentStateManager {
     public final FragmentLifecycleCallbacksDispatcher mDispatcher;
@@ -41,7 +40,6 @@ public class FragmentStateManager {
     public boolean mMovingToState = false;
     public int mFragmentManagerState = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.fragment.app.FragmentStateManager$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$androidx$lifecycle$Lifecycle$State;
@@ -75,9 +73,9 @@ public class FragmentStateManager {
     }
 
     public final void activityCreated() {
-        boolean isLoggingEnabled = FragmentManager.isLoggingEnabled(3);
+        boolean zIsLoggingEnabled = FragmentManager.isLoggingEnabled(3);
         Fragment fragment = this.mFragment;
-        if (isLoggingEnabled) {
+        if (zIsLoggingEnabled) {
             Log.d("FragmentManager", "moveto ACTIVITY_CREATED: " + fragment);
         }
         Bundle bundle = fragment.mSavedFragmentState;
@@ -122,7 +120,7 @@ public class FragmentStateManager {
         Fragment fragment;
         View view;
         View view2;
-        int i = -1;
+        int iIndexOfChild = -1;
         Fragment fragment2 = this.mFragment;
         View view3 = fragment2.mContainer;
         while (true) {
@@ -142,9 +140,9 @@ public class FragmentStateManager {
         }
         Fragment fragment4 = fragment2.mParentFragment;
         if (fragment != null && !fragment.equals(fragment4)) {
-            int i2 = fragment2.mContainerId;
+            int i = fragment2.mContainerId;
             FragmentStrictMode fragmentStrictMode = FragmentStrictMode.INSTANCE;
-            WrongNestedHierarchyViolation wrongNestedHierarchyViolation = new WrongNestedHierarchyViolation(fragment2, fragment, i2);
+            WrongNestedHierarchyViolation wrongNestedHierarchyViolation = new WrongNestedHierarchyViolation(fragment2, fragment, i);
             FragmentStrictMode.INSTANCE.getClass();
             FragmentStrictMode.logIfDebuggingEnabled(wrongNestedHierarchyViolation);
             FragmentStrictMode.Policy nearestPolicy = FragmentStrictMode.getNearestPolicy(fragment2);
@@ -156,38 +154,38 @@ public class FragmentStateManager {
         fragmentStore.getClass();
         ViewGroup viewGroup = fragment2.mContainer;
         if (viewGroup != null) {
-            int indexOf = fragmentStore.mAdded.indexOf(fragment2);
-            int i3 = indexOf - 1;
+            int iIndexOf = fragmentStore.mAdded.indexOf(fragment2);
+            int i2 = iIndexOf - 1;
             while (true) {
-                if (i3 < 0) {
+                if (i2 < 0) {
                     while (true) {
-                        indexOf++;
-                        if (indexOf >= fragmentStore.mAdded.size()) {
+                        iIndexOf++;
+                        if (iIndexOf >= fragmentStore.mAdded.size()) {
                             break;
                         }
-                        Fragment fragment5 = (Fragment) fragmentStore.mAdded.get(indexOf);
+                        Fragment fragment5 = (Fragment) fragmentStore.mAdded.get(iIndexOf);
                         if (fragment5.mContainer == viewGroup && (view = fragment5.mView) != null) {
-                            i = viewGroup.indexOfChild(view);
+                            iIndexOfChild = viewGroup.indexOfChild(view);
                             break;
                         }
                     }
                 } else {
-                    Fragment fragment6 = (Fragment) fragmentStore.mAdded.get(i3);
+                    Fragment fragment6 = (Fragment) fragmentStore.mAdded.get(i2);
                     if (fragment6.mContainer == viewGroup && (view2 = fragment6.mView) != null) {
-                        i = viewGroup.indexOfChild(view2) + 1;
+                        iIndexOfChild = viewGroup.indexOfChild(view2) + 1;
                         break;
                     }
-                    i3--;
+                    i2--;
                 }
             }
         }
-        fragment2.mContainer.addView(fragment2.mView, i);
+        fragment2.mContainer.addView(fragment2.mView, iIndexOfChild);
     }
 
     public final void attach() {
-        boolean isLoggingEnabled = FragmentManager.isLoggingEnabled(3);
+        boolean zIsLoggingEnabled = FragmentManager.isLoggingEnabled(3);
         Fragment fragment = this.mFragment;
-        if (isLoggingEnabled) {
+        if (zIsLoggingEnabled) {
             Log.d("FragmentManager", "moveto ATTACHED: " + fragment);
         }
         Fragment fragment2 = fragment.mTarget;
@@ -251,64 +249,64 @@ public class FragmentStateManager {
         if (fragment.mFragmentManager == null) {
             return fragment.mState;
         }
-        int i = this.mFragmentManagerState;
-        int i2 = AnonymousClass2.$SwitchMap$androidx$lifecycle$Lifecycle$State[fragment.mMaxState.ordinal()];
-        if (i2 != 1) {
-            i = i2 != 2 ? i2 != 3 ? i2 != 4 ? Math.min(i, -1) : Math.min(i, 0) : Math.min(i, 1) : Math.min(i, 5);
+        int iMin = this.mFragmentManagerState;
+        int i = AnonymousClass2.$SwitchMap$androidx$lifecycle$Lifecycle$State[fragment.mMaxState.ordinal()];
+        if (i != 1) {
+            iMin = i != 2 ? i != 3 ? i != 4 ? Math.min(iMin, -1) : Math.min(iMin, 0) : Math.min(iMin, 1) : Math.min(iMin, 5);
         }
         if (fragment.mFromLayout) {
             if (fragment.mInLayout) {
-                i = Math.max(this.mFragmentManagerState, 2);
+                iMin = Math.max(this.mFragmentManagerState, 2);
                 View view = fragment.mView;
                 if (view != null && view.getParent() == null) {
-                    i = Math.min(i, 2);
+                    iMin = Math.min(iMin, 2);
                 }
             } else {
-                i = this.mFragmentManagerState < 4 ? Math.min(i, fragment.mState) : Math.min(i, 1);
+                iMin = this.mFragmentManagerState < 4 ? Math.min(iMin, fragment.mState) : Math.min(iMin, 1);
             }
         }
         if (fragment.mInDynamicContainer && fragment.mContainer == null) {
-            i = Math.min(i, 4);
+            iMin = Math.min(iMin, 4);
         }
         if (!fragment.mAdded) {
-            i = Math.min(i, 1);
+            iMin = Math.min(iMin, 1);
         }
         ViewGroup viewGroup = fragment.mContainer;
         if (viewGroup != null) {
             SpecialEffectsController orCreateController = SpecialEffectsController.getOrCreateController(viewGroup, fragment.getParentFragmentManager());
             orCreateController.getClass();
-            SpecialEffectsController.Operation findPendingOperation = orCreateController.findPendingOperation(fragment);
-            SpecialEffectsController.Operation.LifecycleImpact lifecycleImpact = findPendingOperation != null ? findPendingOperation.lifecycleImpact : null;
-            SpecialEffectsController.Operation findRunningOperation = orCreateController.findRunningOperation(fragment);
-            r2 = findRunningOperation != null ? findRunningOperation.lifecycleImpact : null;
-            int i3 = lifecycleImpact == null ? -1 : SpecialEffectsController.WhenMappings.$EnumSwitchMapping$0[lifecycleImpact.ordinal()];
-            if (i3 != -1 && i3 != 1) {
-                r2 = lifecycleImpact;
+            SpecialEffectsController.Operation operationFindPendingOperation = orCreateController.findPendingOperation(fragment);
+            SpecialEffectsController.Operation.LifecycleImpact lifecycleImpact = operationFindPendingOperation != null ? operationFindPendingOperation.lifecycleImpact : null;
+            SpecialEffectsController.Operation operationFindRunningOperation = orCreateController.findRunningOperation(fragment);
+            lifecycleImpact = operationFindRunningOperation != null ? operationFindRunningOperation.lifecycleImpact : null;
+            int i2 = lifecycleImpact == null ? -1 : SpecialEffectsController.WhenMappings.$EnumSwitchMapping$0[lifecycleImpact.ordinal()];
+            if (i2 != -1 && i2 != 1) {
+                lifecycleImpact = lifecycleImpact;
             }
         }
-        if (r2 == SpecialEffectsController.Operation.LifecycleImpact.ADDING) {
-            i = Math.min(i, 6);
-        } else if (r2 == SpecialEffectsController.Operation.LifecycleImpact.REMOVING) {
-            i = Math.max(i, 3);
+        if (lifecycleImpact == SpecialEffectsController.Operation.LifecycleImpact.ADDING) {
+            iMin = Math.min(iMin, 6);
+        } else if (lifecycleImpact == SpecialEffectsController.Operation.LifecycleImpact.REMOVING) {
+            iMin = Math.max(iMin, 3);
         } else if (fragment.mRemoving) {
-            i = fragment.isInBackStack() ? Math.min(i, 1) : Math.min(i, -1);
+            iMin = fragment.isInBackStack() ? Math.min(iMin, 1) : Math.min(iMin, -1);
         }
         if (fragment.mDeferStart && fragment.mState < 5) {
-            i = Math.min(i, 4);
+            iMin = Math.min(iMin, 4);
         }
         if (fragment.mTransitioning) {
-            i = Math.max(i, 3);
+            iMin = Math.max(iMin, 3);
         }
         if (FragmentManager.isLoggingEnabled(2)) {
             Objects.toString(fragment);
         }
-        return i;
+        return iMin;
     }
 
     public final void create() {
-        boolean isLoggingEnabled = FragmentManager.isLoggingEnabled(3);
+        boolean zIsLoggingEnabled = FragmentManager.isLoggingEnabled(3);
         final Fragment fragment = this.mFragment;
-        if (isLoggingEnabled) {
+        if (zIsLoggingEnabled) {
             Log.d("FragmentManager", "moveto CREATED: " + fragment);
         }
         Bundle bundle = fragment.mSavedFragmentState;
@@ -346,8 +344,8 @@ public class FragmentStateManager {
         }
     }
 
-    public final void createView() {
-        String str;
+    public final void createView() throws Resources.NotFoundException {
+        String resourceName;
         Fragment fragment = this.mFragment;
         if (fragment.mFromLayout) {
             return;
@@ -357,8 +355,8 @@ public class FragmentStateManager {
         }
         Bundle bundle = fragment.mSavedFragmentState;
         Bundle bundle2 = bundle != null ? bundle.getBundle("savedInstanceState") : null;
-        LayoutInflater onGetLayoutInflater = fragment.onGetLayoutInflater(bundle2);
-        fragment.mLayoutInflater = onGetLayoutInflater;
+        LayoutInflater layoutInflaterOnGetLayoutInflater = fragment.onGetLayoutInflater(bundle2);
+        fragment.mLayoutInflater = layoutInflaterOnGetLayoutInflater;
         ViewGroup viewGroup = fragment.mContainer;
         if (viewGroup == null) {
             int i = fragment.mContainerId;
@@ -372,11 +370,11 @@ public class FragmentStateManager {
                 if (viewGroup == null) {
                     if (!fragment.mRestored && !fragment.mInDynamicContainer) {
                         try {
-                            str = fragment.getResources().getResourceName(fragment.mContainerId);
+                            resourceName = fragment.getResources().getResourceName(fragment.mContainerId);
                         } catch (Resources.NotFoundException unused) {
-                            str = "unknown";
+                            resourceName = "unknown";
                         }
-                        throw new IllegalArgumentException("No view found for id 0x" + Integer.toHexString(fragment.mContainerId) + " (" + str + ") for fragment " + fragment);
+                        throw new IllegalArgumentException("No view found for id 0x" + Integer.toHexString(fragment.mContainerId) + " (" + resourceName + ") for fragment " + fragment);
                     }
                 } else if (!(viewGroup instanceof FragmentContainerView)) {
                     FragmentStrictMode fragmentStrictMode = FragmentStrictMode.INSTANCE;
@@ -391,7 +389,7 @@ public class FragmentStateManager {
             }
         }
         fragment.mContainer = viewGroup;
-        fragment.performCreateView(onGetLayoutInflater, viewGroup, bundle2);
+        fragment.performCreateView(layoutInflaterOnGetLayoutInflater, viewGroup, bundle2);
         if (fragment.mView != null) {
             if (FragmentManager.isLoggingEnabled(3)) {
                 Log.d("FragmentManager", "moveto VIEW_CREATED: " + fragment);
@@ -431,11 +429,11 @@ public class FragmentStateManager {
             int visibility = fragment.mView.getVisibility();
             fragment.ensureAnimationInfo().mPostOnViewCreatedAlpha = fragment.mView.getAlpha();
             if (fragment.mContainer != null && visibility == 0) {
-                View findFocus = fragment.mView.findFocus();
-                if (findFocus != null) {
-                    fragment.ensureAnimationInfo().mFocusedView = findFocus;
+                View viewFindFocus = fragment.mView.findFocus();
+                if (viewFindFocus != null) {
+                    fragment.ensureAnimationInfo().mFocusedView = viewFindFocus;
                     if (FragmentManager.isLoggingEnabled(2)) {
-                        findFocus.toString();
+                        viewFindFocus.toString();
                         Objects.toString(fragment);
                     }
                 }
@@ -446,25 +444,25 @@ public class FragmentStateManager {
     }
 
     public final void destroy() {
-        Fragment findActiveFragment;
-        boolean isLoggingEnabled = FragmentManager.isLoggingEnabled(3);
+        Fragment fragmentFindActiveFragment;
+        boolean zIsLoggingEnabled = FragmentManager.isLoggingEnabled(3);
         Fragment fragment = this.mFragment;
-        if (isLoggingEnabled) {
+        if (zIsLoggingEnabled) {
             Log.d("FragmentManager", "movefrom CREATED: " + fragment);
         }
-        boolean z = true;
+        boolean zIsChangingConfigurations = true;
         int i = 0;
-        boolean z2 = fragment.mRemoving && !fragment.isInBackStack();
+        boolean z = fragment.mRemoving && !fragment.isInBackStack();
         FragmentStore fragmentStore = this.mFragmentStore;
-        if (z2) {
+        if (z) {
             fragmentStore.setSavedState(null, fragment.mWho);
         }
-        if (!z2) {
+        if (!z) {
             FragmentManagerViewModel fragmentManagerViewModel = fragmentStore.mNonConfig;
             if (!((fragmentManagerViewModel.mRetainedFragments.containsKey(fragment.mWho) && fragmentManagerViewModel.mStateAutomaticallySaved) ? fragmentManagerViewModel.mHasBeenCleared : true)) {
                 String str = fragment.mTargetWho;
-                if (str != null && (findActiveFragment = fragmentStore.findActiveFragment(str)) != null && findActiveFragment.mRetainInstance) {
-                    fragment.mTarget = findActiveFragment;
+                if (str != null && (fragmentFindActiveFragment = fragmentStore.findActiveFragment(str)) != null && fragmentFindActiveFragment.mRetainInstance) {
+                    fragment.mTarget = fragmentFindActiveFragment;
                 }
                 fragment.mState = 0;
                 return;
@@ -472,14 +470,14 @@ public class FragmentStateManager {
         }
         FragmentHostCallback fragmentHostCallback = fragment.mHost;
         if (fragmentHostCallback instanceof ViewModelStoreOwner) {
-            z = fragmentStore.mNonConfig.mHasBeenCleared;
+            zIsChangingConfigurations = fragmentStore.mNonConfig.mHasBeenCleared;
         } else {
             Context context = fragmentHostCallback.context;
             if (context instanceof Activity) {
-                z = true ^ ((Activity) context).isChangingConfigurations();
+                zIsChangingConfigurations = true ^ ((Activity) context).isChangingConfigurations();
             }
         }
-        if (z2 || z) {
+        if (z || zIsChangingConfigurations) {
             fragmentStore.mNonConfig.clearNonConfigState(fragment, false);
         }
         fragment.mChildFragmentManager.dispatchDestroy();
@@ -516,9 +514,9 @@ public class FragmentStateManager {
 
     public final void destroyFragmentView() {
         View view;
-        boolean isLoggingEnabled = FragmentManager.isLoggingEnabled(3);
+        boolean zIsLoggingEnabled = FragmentManager.isLoggingEnabled(3);
         Fragment fragment = this.mFragment;
-        if (isLoggingEnabled) {
+        if (zIsLoggingEnabled) {
             Log.d("FragmentManager", "movefrom CREATE_VIEW: " + fragment);
         }
         ViewGroup viewGroup = fragment.mContainer;
@@ -556,9 +554,9 @@ public class FragmentStateManager {
     }
 
     public final void detach() {
-        boolean isLoggingEnabled = FragmentManager.isLoggingEnabled(3);
+        boolean zIsLoggingEnabled = FragmentManager.isLoggingEnabled(3);
         Fragment fragment = this.mFragment;
-        if (isLoggingEnabled) {
+        if (zIsLoggingEnabled) {
             Log.d("FragmentManager", "movefrom ATTACHED: " + fragment);
         }
         fragment.mState = -1;
@@ -598,9 +596,9 @@ public class FragmentStateManager {
             }
             Bundle bundle = fragment.mSavedFragmentState;
             Bundle bundle2 = bundle != null ? bundle.getBundle("savedInstanceState") : null;
-            LayoutInflater onGetLayoutInflater = fragment.onGetLayoutInflater(bundle2);
-            fragment.mLayoutInflater = onGetLayoutInflater;
-            fragment.performCreateView(onGetLayoutInflater, null, bundle2);
+            LayoutInflater layoutInflaterOnGetLayoutInflater = fragment.onGetLayoutInflater(bundle2);
+            fragment.mLayoutInflater = layoutInflaterOnGetLayoutInflater;
+            fragment.performCreateView(layoutInflaterOnGetLayoutInflater, null, bundle2);
             View view = fragment.mView;
             if (view != null) {
                 view.setSaveFromParentEnabled(false);
@@ -634,10 +632,10 @@ public class FragmentStateManager {
             this.mMovingToState = true;
             boolean z2 = false;
             while (true) {
-                int computeExpectedState = computeExpectedState();
+                int iComputeExpectedState = computeExpectedState();
                 int i = fragment.mState;
                 FragmentStore fragmentStore = this.mFragmentStore;
-                if (computeExpectedState == i) {
+                if (iComputeExpectedState == i) {
                     if (!z2 && i == -1 && fragment.mRemoving && !fragment.isInBackStack()) {
                         if (FragmentManager.isLoggingEnabled(3)) {
                             Log.d("FragmentManager", "Cleaning up state of never attached fragment: " + fragment);
@@ -676,7 +674,7 @@ public class FragmentStateManager {
                     this.mMovingToState = false;
                     return;
                 }
-                if (computeExpectedState <= i) {
+                if (iComputeExpectedState <= i) {
                     switch (i - 1) {
                         case -1:
                             detach();
@@ -739,12 +737,12 @@ public class FragmentStateManager {
                                 SpecialEffectsController orCreateController3 = SpecialEffectsController.getOrCreateController(viewGroup3, fragment.getParentFragmentManager());
                                 int visibility = fragment.mView.getVisibility();
                                 SpecialEffectsController.Operation.State.Companion.getClass();
-                                SpecialEffectsController.Operation.State from = SpecialEffectsController.Operation.State.Companion.from(visibility);
+                                SpecialEffectsController.Operation.State stateFrom = SpecialEffectsController.Operation.State.Companion.from(visibility);
                                 orCreateController3.getClass();
                                 if (FragmentManager.isLoggingEnabled(2)) {
                                     Objects.toString(fragment);
                                 }
-                                orCreateController3.enqueue(from, SpecialEffectsController.Operation.LifecycleImpact.ADDING, this);
+                                orCreateController3.enqueue(stateFrom, SpecialEffectsController.Operation.LifecycleImpact.ADDING, this);
                             }
                             fragment.mState = 4;
                             break;
@@ -768,9 +766,9 @@ public class FragmentStateManager {
     }
 
     public final void pause() {
-        boolean isLoggingEnabled = FragmentManager.isLoggingEnabled(3);
+        boolean zIsLoggingEnabled = FragmentManager.isLoggingEnabled(3);
         Fragment fragment = this.mFragment;
-        if (isLoggingEnabled) {
+        if (zIsLoggingEnabled) {
             Log.d("FragmentManager", "movefrom RESUMED: " + fragment);
         }
         fragment.mChildFragmentManager.dispatchStateChange(5);
@@ -811,26 +809,34 @@ public class FragmentStateManager {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0040  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void resume() {
-        boolean isLoggingEnabled = FragmentManager.isLoggingEnabled(3);
+        boolean zIsLoggingEnabled = FragmentManager.isLoggingEnabled(3);
         Fragment fragment = this.mFragment;
-        if (isLoggingEnabled) {
+        if (zIsLoggingEnabled) {
             Log.d("FragmentManager", "moveto RESUMED: " + fragment);
         }
         Fragment.AnimationInfo animationInfo = fragment.mAnimationInfo;
         View view = animationInfo == null ? null : animationInfo.mFocusedView;
         if (view != null) {
-            if (view != fragment.mView) {
+            if (view == fragment.mView) {
+                view.requestFocus();
+                if (FragmentManager.isLoggingEnabled(2)) {
+                    view.toString();
+                    Objects.toString(fragment);
+                    Objects.toString(fragment.mView.findFocus());
+                }
+            } else {
                 for (ViewParent parent = view.getParent(); parent != null; parent = parent.getParent()) {
-                    if (parent != fragment.mView) {
+                    if (parent == fragment.mView) {
+                        view.requestFocus();
+                        if (FragmentManager.isLoggingEnabled(2)) {
+                        }
                     }
                 }
-            }
-            view.requestFocus();
-            if (FragmentManager.isLoggingEnabled(2)) {
-                view.toString();
-                Objects.toString(fragment);
-                Objects.toString(fragment.mView.findFocus());
             }
         }
         fragment.ensureAnimationInfo().mFocusedView = null;
@@ -883,9 +889,9 @@ public class FragmentStateManager {
     }
 
     public final void start() {
-        boolean isLoggingEnabled = FragmentManager.isLoggingEnabled(3);
+        boolean zIsLoggingEnabled = FragmentManager.isLoggingEnabled(3);
         Fragment fragment = this.mFragment;
-        if (isLoggingEnabled) {
+        if (zIsLoggingEnabled) {
             Log.d("FragmentManager", "moveto STARTED: " + fragment);
         }
         fragment.mChildFragmentManager.noteStateNotSaved();
@@ -911,9 +917,9 @@ public class FragmentStateManager {
     }
 
     public final void stop() {
-        boolean isLoggingEnabled = FragmentManager.isLoggingEnabled(3);
+        boolean zIsLoggingEnabled = FragmentManager.isLoggingEnabled(3);
         Fragment fragment = this.mFragment;
-        if (isLoggingEnabled) {
+        if (zIsLoggingEnabled) {
             Log.d("FragmentManager", "movefrom STARTED: " + fragment);
         }
         FragmentManagerImpl fragmentManagerImpl = fragment.mChildFragmentManager;
@@ -938,31 +944,31 @@ public class FragmentStateManager {
         this.mDispatcher = fragmentLifecycleCallbacksDispatcher;
         this.mFragmentStore = fragmentStore;
         FragmentState fragmentState = (FragmentState) bundle.getParcelable("state");
-        Fragment instantiate = fragmentFactory.instantiate(classLoader, fragmentState.mClassName);
-        instantiate.mWho = fragmentState.mWho;
-        instantiate.mFromLayout = fragmentState.mFromLayout;
-        instantiate.mInDynamicContainer = fragmentState.mInDynamicContainer;
-        instantiate.mRestored = true;
-        instantiate.mFragmentId = fragmentState.mFragmentId;
-        instantiate.mContainerId = fragmentState.mContainerId;
-        instantiate.mTag = fragmentState.mTag;
-        instantiate.mRetainInstance = fragmentState.mRetainInstance;
-        instantiate.mRemoving = fragmentState.mRemoving;
-        instantiate.mDetached = fragmentState.mDetached;
-        instantiate.mHidden = fragmentState.mHidden;
-        instantiate.mMaxState = Lifecycle.State.values()[fragmentState.mMaxLifecycleState];
-        instantiate.mTargetWho = fragmentState.mTargetWho;
-        instantiate.mTargetRequestCode = fragmentState.mTargetRequestCode;
-        instantiate.mUserVisibleHint = fragmentState.mUserVisibleHint;
-        this.mFragment = instantiate;
-        instantiate.mSavedFragmentState = bundle;
+        Fragment fragmentInstantiate = fragmentFactory.instantiate(classLoader, fragmentState.mClassName);
+        fragmentInstantiate.mWho = fragmentState.mWho;
+        fragmentInstantiate.mFromLayout = fragmentState.mFromLayout;
+        fragmentInstantiate.mInDynamicContainer = fragmentState.mInDynamicContainer;
+        fragmentInstantiate.mRestored = true;
+        fragmentInstantiate.mFragmentId = fragmentState.mFragmentId;
+        fragmentInstantiate.mContainerId = fragmentState.mContainerId;
+        fragmentInstantiate.mTag = fragmentState.mTag;
+        fragmentInstantiate.mRetainInstance = fragmentState.mRetainInstance;
+        fragmentInstantiate.mRemoving = fragmentState.mRemoving;
+        fragmentInstantiate.mDetached = fragmentState.mDetached;
+        fragmentInstantiate.mHidden = fragmentState.mHidden;
+        fragmentInstantiate.mMaxState = Lifecycle.State.values()[fragmentState.mMaxLifecycleState];
+        fragmentInstantiate.mTargetWho = fragmentState.mTargetWho;
+        fragmentInstantiate.mTargetRequestCode = fragmentState.mTargetRequestCode;
+        fragmentInstantiate.mUserVisibleHint = fragmentState.mUserVisibleHint;
+        this.mFragment = fragmentInstantiate;
+        fragmentInstantiate.mSavedFragmentState = bundle;
         Bundle bundle2 = bundle.getBundle("arguments");
         if (bundle2 != null) {
             bundle2.setClassLoader(classLoader);
         }
-        instantiate.setArguments(bundle2);
+        fragmentInstantiate.setArguments(bundle2);
         if (FragmentManager.isLoggingEnabled(2)) {
-            Objects.toString(instantiate);
+            Objects.toString(fragmentInstantiate);
         }
     }
 

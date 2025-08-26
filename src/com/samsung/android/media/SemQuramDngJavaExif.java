@@ -196,28 +196,28 @@ public class SemQuramDngJavaExif {
     }
 
     void convertString2Rational(String str, SemQuramDngUrational semQuramDngUrational) {
-        String[] split = str.split("/");
-        if (split.length >= 1 && !split[0].equals("")) {
-            semQuramDngUrational.n = Long.valueOf(split[0]).longValue();
+        String[] strArrSplit = str.split("/");
+        if (strArrSplit.length >= 1 && !strArrSplit[0].equals("")) {
+            semQuramDngUrational.n = Long.valueOf(strArrSplit[0]).longValue();
         } else {
             semQuramDngUrational.n = 0L;
         }
-        if (split.length >= 2 && !split[1].equals("")) {
-            semQuramDngUrational.d = Long.valueOf(split[1]).longValue();
+        if (strArrSplit.length >= 2 && !strArrSplit[1].equals("")) {
+            semQuramDngUrational.d = Long.valueOf(strArrSplit[1]).longValue();
         } else {
             semQuramDngUrational.d = 0L;
         }
     }
 
     void convertString2Rational(String str, SemQuramDngSrational semQuramDngSrational) {
-        String[] split = str.split("/");
-        if (split.length >= 1 && !split[0].equals("")) {
-            semQuramDngSrational.n = Long.valueOf(split[0]).longValue();
+        String[] strArrSplit = str.split("/");
+        if (strArrSplit.length >= 1 && !strArrSplit[0].equals("")) {
+            semQuramDngSrational.n = Long.valueOf(strArrSplit[0]).longValue();
         } else {
             semQuramDngSrational.n = 0L;
         }
-        if (split.length >= 2 && !split[1].equals("")) {
-            semQuramDngSrational.d = Long.valueOf(split[1]).longValue();
+        if (strArrSplit.length >= 2 && !strArrSplit[1].equals("")) {
+            semQuramDngSrational.d = Long.valueOf(strArrSplit[1]).longValue();
         } else {
             semQuramDngSrational.d = 0L;
         }

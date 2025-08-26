@@ -17,8 +17,8 @@ public class ListViewCaptureHelper implements ScrollCaptureViewHelper<ListView> 
     private int mScrollDelta;
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
-    public /* bridge */ /* synthetic */ void onScrollRequested(ListView listView, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
-        onScrollRequested2(listView, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
+    public /* bridge */ /* synthetic */ void onScrollRequested(View view, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
+        onScrollRequested((ListView) view, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
     }
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
@@ -38,8 +38,7 @@ public class ListViewCaptureHelper implements ScrollCaptureViewHelper<ListView> 
         listView.setVerticalScrollBarEnabled(false);
     }
 
-    /* renamed from: onScrollRequested, reason: avoid collision after fix types in other method */
-    public void onScrollRequested2(ListView listView, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer<ScrollCaptureViewHelper.ScrollResult> consumer) {
+    public void onScrollRequested(ListView listView, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer<ScrollCaptureViewHelper.ScrollResult> consumer) {
         Log.d(TAG, "-----------------------------------------------------------");
         Log.d(TAG, "onScrollRequested(scrollBounds=" + rect + ", requestRect=" + rect2 + NavigationBarInflaterView.KEY_CODE_END);
         ScrollCaptureViewHelper.ScrollResult scrollResult = new ScrollCaptureViewHelper.ScrollResult();
@@ -51,25 +50,25 @@ public class ListViewCaptureHelper implements ScrollCaptureViewHelper<ListView> 
             consumer.accept(scrollResult);
             return;
         }
-        Rect transformFromRequestToContainer = ScrollCaptureViewSupport.transformFromRequestToContainer(this.mScrollDelta, rect, rect2);
+        Rect rectTransformFromRequestToContainer = ScrollCaptureViewSupport.transformFromRequestToContainer(this.mScrollDelta, rect, rect2);
         Rect rect3 = new Rect();
         listView.getLocalVisibleRect(rect3);
-        Rect rect4 = new Rect(transformFromRequestToContainer);
-        int height = rect3.height() - transformFromRequestToContainer.height();
-        if (height > 0) {
-            rect4.inset(0, (-height) / 2);
+        Rect rect4 = new Rect(rectTransformFromRequestToContainer);
+        int iHeight = rect3.height() - rectTransformFromRequestToContainer.height();
+        if (iHeight > 0) {
+            rect4.inset(0, (-iHeight) / 2);
         }
-        int computeScrollAmount = ScrollCaptureViewSupport.computeScrollAmount(rect3, rect4);
-        if (computeScrollAmount < 0) {
+        int iComputeScrollAmount = ScrollCaptureViewSupport.computeScrollAmount(rect3, rect4);
+        if (iComputeScrollAmount < 0) {
             Log.d(TAG, "About to scroll UP (content moves down within parent)");
-        } else if (computeScrollAmount > 0) {
+        } else if (iComputeScrollAmount > 0) {
             Log.d(TAG, "About to scroll DOWN (content moves up within parent)");
         }
-        Log.d(TAG, "scrollAmount: " + computeScrollAmount);
-        View findScrollingReferenceView = ScrollCaptureViewSupport.findScrollingReferenceView(listView, computeScrollAmount);
-        int top = findScrollingReferenceView.getTop();
-        listView.scrollListBy(computeScrollAmount);
-        int top2 = top - findScrollingReferenceView.getTop();
+        Log.d(TAG, "scrollAmount: " + iComputeScrollAmount);
+        View viewFindScrollingReferenceView = ScrollCaptureViewSupport.findScrollingReferenceView(listView, iComputeScrollAmount);
+        int top = viewFindScrollingReferenceView.getTop();
+        listView.scrollListBy(iComputeScrollAmount);
+        int top2 = top - viewFindScrollingReferenceView.getTop();
         Log.d(TAG, "Parent view has scrolled vertically by " + top2 + " px");
         int i = this.mScrollDelta + top2;
         this.mScrollDelta = i;

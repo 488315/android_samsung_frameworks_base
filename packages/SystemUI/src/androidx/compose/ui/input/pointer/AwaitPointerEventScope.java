@@ -6,7 +6,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.jvm.internal.BaseContinuationImpl;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface AwaitPointerEventScope extends Density {
     Object awaitPointerEvent(PointerEventPass pointerEventPass, Continuation continuation);
@@ -14,10 +13,10 @@ public interface AwaitPointerEventScope extends Density {
     PointerEvent getCurrentEvent();
 
     /* renamed from: getExtendedTouchPadding-NH-jbRc, reason: not valid java name */
-    long mo584getExtendedTouchPaddingNHjbRc();
+    long mo586getExtendedTouchPaddingNHjbRc();
 
     /* renamed from: getSize-YbymL2g, reason: not valid java name */
-    long mo585getSizeYbymL2g();
+    long mo587getSizeYbymL2g();
 
     ViewConfiguration getViewConfiguration();
 

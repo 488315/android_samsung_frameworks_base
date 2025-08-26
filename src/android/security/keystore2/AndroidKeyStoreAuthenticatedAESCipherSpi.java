@@ -124,7 +124,7 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase, javax.crypto.CipherSpi
-        protected final AlgorithmParameters engineGetParameters() {
+        protected final AlgorithmParameters engineGetParameters() throws NoSuchAlgorithmException, InvalidParameterSpecException {
             byte[] iv = getIv();
             if (iv == null || iv.length <= 0) {
                 return null;
@@ -237,21 +237,23 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
 
     @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
     protected final void loadAlgorithmSpecificParametersFromBeginResult(KeyParameter[] keyParameterArr) {
-        byte[] bArr;
+        byte[] blob;
         this.mIvHasBeenUsed = true;
         if (keyParameterArr != null) {
             for (KeyParameter keyParameter : keyParameterArr) {
                 if (keyParameter.tag == -1879047191) {
-                    bArr = keyParameter.value.getBlob();
+                    blob = keyParameter.value.getBlob();
                     break;
                 }
             }
+            blob = null;
+        } else {
+            blob = null;
         }
-        bArr = null;
-        byte[] bArr2 = this.mIv;
-        if (bArr2 == null) {
-            this.mIv = bArr;
-        } else if (bArr != null && !Arrays.equals(bArr, bArr2)) {
+        byte[] bArr = this.mIv;
+        if (bArr == null) {
+            this.mIv = blob;
+        } else if (blob != null && !Arrays.equals(blob, bArr)) {
             throw new ProviderException("IV in use differs from provided IV");
         }
     }
@@ -281,10 +283,10 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
 
         @Override // android.security.keystore2.KeyStoreCryptoOperationStreamer
         public byte[] update(byte[] bArr, int i, int i2) throws KeyStoreException {
-            byte[] update = this.mDelegate.update(bArr, i, i2);
-            if (update != null) {
+            byte[] bArrUpdate = this.mDelegate.update(bArr, i, i2);
+            if (bArrUpdate != null) {
                 try {
-                    this.mBufferedOutput.write(update);
+                    this.mBufferedOutput.write(bArrUpdate);
                 } catch (IOException e) {
                     throw new ProviderException("Failed to buffer output", e);
                 }
@@ -294,10 +296,10 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
 
         @Override // android.security.keystore2.KeyStoreCryptoOperationStreamer
         public byte[] doFinal(byte[] bArr, int i, int i2, byte[] bArr2) throws KeyStoreException {
-            byte[] doFinal = this.mDelegate.doFinal(bArr, i, i2, bArr2);
-            if (doFinal != null) {
+            byte[] bArrDoFinal = this.mDelegate.doFinal(bArr, i, i2, bArr2);
+            if (bArrDoFinal != null) {
                 try {
-                    this.mBufferedOutput.write(doFinal);
+                    this.mBufferedOutput.write(bArrDoFinal);
                 } catch (IOException e) {
                     throw new ProviderException("Failed to buffer output", e);
                 }

@@ -12,11 +12,9 @@ import kotlin.Unit;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.coroutines.Continuation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BouncerUserActionsViewModel extends UserActionsViewModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         BouncerUserActionsViewModel create();
     }
@@ -27,7 +25,7 @@ public final class BouncerUserActionsViewModel extends UserActionsViewModel {
         OverlayKey overlayKey = Overlays.Bouncer;
         Pair pair = new Pair(back, new UserActionResult.HideOverlay(overlayKey, null, false, 6, null));
         Swipe.Companion.getClass();
-        userActionsViewModel$$ExternalSyntheticLambda0.mo779invoke(MapsKt__MapsKt.mapOf(pair, new Pair(Swipe.Down, new UserActionResult.HideOverlay(overlayKey, null, false, 6, null))));
+        userActionsViewModel$$ExternalSyntheticLambda0.mo781invoke(MapsKt__MapsKt.mapOf(pair, new Pair(Swipe.Down, new UserActionResult.HideOverlay(overlayKey, null, false, 6, null))));
         return Unit.INSTANCE;
     }
 }

@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaRouterRepositoryImpl$castDevices$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -51,7 +50,7 @@ final class MediaRouterRepositoryImpl$castDevices$1 extends SuspendLambda implem
             final ?? r1 = new CastController.Callback() { // from class: com.android.systemui.mediarouter.data.repository.MediaRouterRepositoryImpl$castDevices$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.CastController.Callback
                 public final void onCastDevicesChanged() {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(((CastControllerImpl) mediaRouterRepositoryImpl.castController).getCastDevices());
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(((CastControllerImpl) mediaRouterRepositoryImpl.castController).getCastDevices());
                 }
             };
             ((CastControllerImpl) this.this$0.castController).addCallback(r1);
@@ -59,7 +58,7 @@ final class MediaRouterRepositoryImpl$castDevices$1 extends SuspendLambda implem
             Function0 function0 = new Function0() { // from class: com.android.systemui.mediarouter.data.repository.MediaRouterRepositoryImpl$castDevices$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((CastControllerImpl) MediaRouterRepositoryImpl.this.castController).removeCallback(r1);
+                    ((CastControllerImpl) mediaRouterRepositoryImpl2.castController).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

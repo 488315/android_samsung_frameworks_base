@@ -65,11 +65,11 @@ final class DoubleArrayList extends AbstractProtobufList<Double> implements Inte
 
     @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
     public int hashCode() {
-        int i = 1;
-        for (int i2 = 0; i2 < this.size; i2++) {
-            i = (i * 31) + Internal.hashLong(Double.doubleToLongBits(this.array[i2]));
+        int iHashLong = 1;
+        for (int i = 0; i < this.size; i++) {
+            iHashLong = (iHashLong * 31) + Internal.hashLong(Double.doubleToLongBits(this.array[i]));
         }
-        return i;
+        return iHashLong;
     }
 
     @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
@@ -97,10 +97,10 @@ final class DoubleArrayList extends AbstractProtobufList<Double> implements Inte
         if (!(obj instanceof Double)) {
             return -1;
         }
-        double doubleValue = ((Double) obj).doubleValue();
+        double dDoubleValue = ((Double) obj).doubleValue();
         int size = size();
         for (int i = 0; i < size; i++) {
-            if (this.array[i] == doubleValue) {
+            if (this.array[i] == dDoubleValue) {
                 return i;
             }
         }

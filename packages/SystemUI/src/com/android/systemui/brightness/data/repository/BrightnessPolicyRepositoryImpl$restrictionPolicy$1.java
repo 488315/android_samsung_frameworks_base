@@ -13,7 +13,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BrightnessPolicyRepositoryImpl$restrictionPolicy$1 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -51,9 +50,9 @@ final class BrightnessPolicyRepositoryImpl$restrictionPolicy$1 extends SuspendLa
         Context context = brightnessPolicyRepositoryImpl.applicationContext;
         int i = userInfo.id;
         userRestrictionChecker.getClass();
-        RestrictedLockUtils.EnforcedAdmin checkIfRestrictionEnforced = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context, "no_config_brightness", i);
-        if (checkIfRestrictionEnforced != null) {
-            return new PolicyRestriction.Restricted(checkIfRestrictionEnforced);
+        RestrictedLockUtils.EnforcedAdmin enforcedAdminCheckIfRestrictionEnforced = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context, "no_config_brightness", i);
+        if (enforcedAdminCheckIfRestrictionEnforced != null) {
+            return new PolicyRestriction.Restricted(enforcedAdminCheckIfRestrictionEnforced);
         }
         BrightnessPolicyRepositoryImpl brightnessPolicyRepositoryImpl2 = this.this$0;
         UserRestrictionChecker userRestrictionChecker2 = brightnessPolicyRepositoryImpl2.userRestrictionChecker;

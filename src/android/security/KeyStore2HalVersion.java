@@ -13,9 +13,7 @@ class KeyStore2HalVersion {
         return (byte[]) keyStore2.handleRemoteExceptionWithRetry(new KeyStore2.CheckedRemoteRequest() { // from class: android.security.KeyStore2HalVersion$$ExternalSyntheticLambda0
             @Override // android.security.KeyStore2.CheckedRemoteRequest
             public final Object execute(IKeystoreService iKeystoreService) {
-                byte[] supplementaryAttestationInfo;
-                supplementaryAttestationInfo = iKeystoreService.getSupplementaryAttestationInfo(i);
-                return supplementaryAttestationInfo;
+                return iKeystoreService.getSupplementaryAttestationInfo(i);
             }
         });
     }

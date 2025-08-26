@@ -61,8 +61,8 @@ public class Rfc822Token {
     public static String quoteNameIfNecessary(String str) {
         int length = str.length();
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if ((charAt < 'A' || charAt > 'Z') && ((charAt < 'a' || charAt > 'z') && charAt != ' ' && (charAt < '0' || charAt > '9'))) {
+            char cCharAt = str.charAt(i);
+            if ((cCharAt < 'A' || cCharAt > 'Z') && ((cCharAt < 'a' || cCharAt > 'z') && cCharAt != ' ' && (cCharAt < '0' || cCharAt > '9'))) {
                 return "\"" + quoteName(str) + '\"';
             }
         }
@@ -73,11 +73,11 @@ public class Rfc822Token {
         StringBuilder sb = new StringBuilder();
         int length = str.length();
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (charAt == '\\' || charAt == '\"') {
+            char cCharAt = str.charAt(i);
+            if (cCharAt == '\\' || cCharAt == '\"') {
                 sb.append('\\');
             }
-            sb.append(charAt);
+            sb.append(cCharAt);
         }
         return sb.toString();
     }
@@ -86,24 +86,24 @@ public class Rfc822Token {
         int length = str.length();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (charAt == '(' || charAt == ')' || charAt == '\\') {
+            char cCharAt = str.charAt(i);
+            if (cCharAt == '(' || cCharAt == ')' || cCharAt == '\\') {
                 sb.append('\\');
             }
-            sb.append(charAt);
+            sb.append(cCharAt);
         }
         return sb.toString();
     }
 
     public int hashCode() {
         String str = this.mName;
-        int hashCode = str != null ? 527 + str.hashCode() : 17;
+        int iHashCode = str != null ? 527 + str.hashCode() : 17;
         String str2 = this.mAddress;
         if (str2 != null) {
-            hashCode = (hashCode * 31) + str2.hashCode();
+            iHashCode = (iHashCode * 31) + str2.hashCode();
         }
         String str3 = this.mComment;
-        return str3 != null ? (hashCode * 31) + str3.hashCode() : hashCode;
+        return str3 != null ? (iHashCode * 31) + str3.hashCode() : iHashCode;
     }
 
     private static boolean stringEquals(String str, String str2) {

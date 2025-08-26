@@ -17,11 +17,11 @@ public final class HashCodeHelpers {
         if (fArr == null) {
             return 0;
         }
-        int i = 1;
+        int iFloatToIntBits = 1;
         for (float f : fArr) {
-            i = ((i << 5) - i) ^ Float.floatToIntBits(f);
+            iFloatToIntBits = ((iFloatToIntBits << 5) - iFloatToIntBits) ^ Float.floatToIntBits(f);
         }
-        return i;
+        return iFloatToIntBits;
     }
 
     public static <T> int hashCodeGeneric(T... tArr) {
@@ -29,11 +29,11 @@ public final class HashCodeHelpers {
             return 0;
         }
         int length = tArr.length;
-        int i = 1;
-        for (int i2 = 0; i2 < length; i2++) {
-            T t = tArr[i2];
-            i = ((i << 5) - i) ^ (t == null ? 0 : t.hashCode());
+        int iHashCode = 1;
+        for (int i = 0; i < length; i++) {
+            T t = tArr[i];
+            iHashCode = ((iHashCode << 5) - iHashCode) ^ (t == null ? 0 : t.hashCode());
         }
-        return i;
+        return iHashCode;
     }
 }

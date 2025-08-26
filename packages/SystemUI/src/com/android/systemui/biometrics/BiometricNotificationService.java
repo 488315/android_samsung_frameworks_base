@@ -23,7 +23,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BiometricNotificationService implements CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -174,9 +173,9 @@ public class BiometricNotificationService implements CoreStartable {
         intent.putExtra("is_reenroll_forced", z);
         Context context = this.mContext;
         UserHandle userHandle = UserHandle.CURRENT;
-        Notification build = new Notification.Builder(this.mContext, "BiometricHiPriNotificationChannel").setCategory("sys").setSmallIcon(android.R.drawable.ic_media_route_connected_light_10_mtrl).setContentTitle(charSequence).setContentText(charSequence2).setSubText(charSequence3).setContentIntent(PendingIntent.getBroadcastAsUser(context, 0, intent, 201326592, userHandle)).setAutoCancel(true).setLocalOnly(true).setOnlyAlertOnce(true).setVisibility(-1).build();
+        Notification notificationBuild = new Notification.Builder(this.mContext, "BiometricHiPriNotificationChannel").setCategory("sys").setSmallIcon(android.R.drawable.ic_media_route_connected_light_10_mtrl).setContentTitle(charSequence).setContentText(charSequence2).setSubText(charSequence3).setContentIntent(PendingIntent.getBroadcastAsUser(context, 0, intent, 201326592, userHandle)).setAutoCancel(true).setLocalOnly(true).setOnlyAlertOnce(true).setVisibility(-1).build();
         this.mNotificationManager.createNotificationChannel(this.mNotificationChannel);
-        this.mNotificationManager.notifyAsUser("BiometricNotificationService", i, build, userHandle);
+        this.mNotificationManager.notifyAsUser("BiometricNotificationService", i, notificationBuild, userHandle);
     }
 
     @Override // com.android.systemui.CoreStartable

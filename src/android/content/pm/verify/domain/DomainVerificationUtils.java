@@ -3,6 +3,7 @@ package android.content.pm.verify.domain;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.util.ArraySet;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,15 +15,15 @@ public class DomainVerificationUtils {
 
     public static void writeHostMap(Parcel parcel, Map<String, ?> map) {
         boolean z;
-        int dataSize = parcel.dataSize();
+        int iDataSize = parcel.dataSize();
         Iterator<String> it = map.keySet().iterator();
         while (true) {
             if (!it.hasNext()) {
                 z = false;
                 break;
             }
-            dataSize += estimatedByteSizeOf(it.next());
-            if (dataSize > STRINGS_TARGET_BYTE_SIZE) {
+            iDataSize += estimatedByteSizeOf(it.next());
+            if (iDataSize > STRINGS_TARGET_BYTE_SIZE) {
                 z = true;
                 break;
             }
@@ -32,43 +33,43 @@ public class DomainVerificationUtils {
             parcel.writeMap(map);
             return;
         }
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            obtain.writeMap(map);
-            parcel.writeBlob(obtain.marshall());
+            parcelObtain.writeMap(map);
+            parcel.writeBlob(parcelObtain.marshall());
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
-    public static <T extends Map> T readHostMap(Parcel parcel, T t, ClassLoader classLoader) {
+    public static <T extends Map> T readHostMap(Parcel parcel, T t, ClassLoader classLoader) throws ClassNotFoundException, IOException {
         if (!parcel.readBoolean()) {
             parcel.readMap(t, classLoader);
             return t;
         }
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            byte[] readBlob = parcel.readBlob();
-            obtain.unmarshall(readBlob, 0, readBlob.length);
-            obtain.setDataPosition(0);
-            obtain.readMap(t, classLoader);
+            byte[] blob = parcel.readBlob();
+            parcelObtain.unmarshall(blob, 0, blob.length);
+            parcelObtain.setDataPosition(0);
+            parcelObtain.readMap(t, classLoader);
             return t;
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
     public static void writeHostSet(Parcel parcel, Set<String> set) {
         boolean z;
-        int dataSize = parcel.dataSize();
+        int iDataSize = parcel.dataSize();
         Iterator<String> it = set.iterator();
         while (true) {
             if (!it.hasNext()) {
                 z = false;
                 break;
             }
-            dataSize += estimatedByteSizeOf(it.next());
-            if (dataSize > STRINGS_TARGET_BYTE_SIZE) {
+            iDataSize += estimatedByteSizeOf(it.next());
+            if (iDataSize > STRINGS_TARGET_BYTE_SIZE) {
                 z = true;
                 break;
             }
@@ -78,12 +79,12 @@ public class DomainVerificationUtils {
             writeSet(parcel, set);
             return;
         }
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            writeSet(obtain, set);
-            parcel.writeBlob(obtain.marshall());
+            writeSet(parcelObtain, set);
+            parcel.writeBlob(parcelObtain.marshall());
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
@@ -91,14 +92,14 @@ public class DomainVerificationUtils {
         if (!parcel.readBoolean()) {
             return readSet(parcel);
         }
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            byte[] readBlob = parcel.readBlob();
-            obtain.unmarshall(readBlob, 0, readBlob.length);
-            obtain.setDataPosition(0);
-            return readSet(obtain);
+            byte[] blob = parcel.readBlob();
+            parcelObtain.unmarshall(blob, 0, blob.length);
+            parcelObtain.setDataPosition(0);
+            return readSet(parcelObtain);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
@@ -115,12 +116,12 @@ public class DomainVerificationUtils {
     }
 
     private static Set<String> readSet(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == -1) {
+        int i = parcel.readInt();
+        if (i == -1) {
             return Collections.EMPTY_SET;
         }
-        ArraySet arraySet = new ArraySet(readInt);
-        for (int i = 0; i < readInt; i++) {
+        ArraySet arraySet = new ArraySet(i);
+        for (int i2 = 0; i2 < i; i2++) {
             arraySet.add(parcel.readString());
         }
         return arraySet;

@@ -17,7 +17,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardQuickAffordanceRemoteUserSelectionManager$userId$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -54,7 +53,7 @@ final class KeyguardQuickAffordanceRemoteUserSelectionManager$userId$1 extends S
             final ?? r1 = new UserTracker.Callback() { // from class: com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceRemoteUserSelectionManager$userId$1$callback$1
                 @Override // com.android.systemui.settings.UserTracker.Callback
                 public final void onUserChanged(int i2, Context context) {
-                    ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, ProducerScope.this, Integer.valueOf(i2), "KeyguardQuickAffordanceMultiUserSelectionManager");
+                    ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, producerScope, Integer.valueOf(i2), "KeyguardQuickAffordanceMultiUserSelectionManager");
                 }
             };
             ((UserTrackerImpl) this.this$0.userTracker).addCallback(r1, new Executor() { // from class: com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceRemoteUserSelectionManager$userId$1.1
@@ -69,17 +68,17 @@ final class KeyguardQuickAffordanceRemoteUserSelectionManager$userId$1 extends S
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceRemoteUserSelectionManager$userId$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((UserTrackerImpl) KeyguardQuickAffordanceRemoteUserSelectionManager.this.userTracker).removeCallback(r1);
+                    ((UserTrackerImpl) keyguardQuickAffordanceRemoteUserSelectionManager.userTracker).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };
             this.label = 1;
             flowTracing.getClass();
-            Object awaitClose = ProduceKt.awaitClose(producerScope, new FlowTracing$$ExternalSyntheticLambda1("userId", function0), this);
-            if (awaitClose != obj2) {
-                awaitClose = Unit.INSTANCE;
+            Object objAwaitClose = ProduceKt.awaitClose(producerScope, new FlowTracing$$ExternalSyntheticLambda1("userId", function0), this);
+            if (objAwaitClose != obj2) {
+                objAwaitClose = Unit.INSTANCE;
             }
-            if (awaitClose == obj2) {
+            if (objAwaitClose == obj2) {
                 return obj2;
             }
         } else {

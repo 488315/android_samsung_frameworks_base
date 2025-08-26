@@ -61,7 +61,7 @@ public final class HdmiTvClient extends HdmiClient {
         return new IHdmiControlCallback.Stub() { // from class: android.hardware.hdmi.HdmiTvClient.1
             @Override // android.hardware.hdmi.IHdmiControlCallback
             public void onComplete(int i) {
-                SelectCallback.this.onComplete(i);
+                selectCallback.onComplete(i);
             }
         };
     }
@@ -92,7 +92,7 @@ public final class HdmiTvClient extends HdmiClient {
         return new IHdmiInputChangeListener.Stub() { // from class: android.hardware.hdmi.HdmiTvClient.2
             @Override // android.hardware.hdmi.IHdmiInputChangeListener
             public void onChanged(HdmiDeviceInfo hdmiDeviceInfo) {
-                InputChangeListener.this.onChanged(hdmiDeviceInfo);
+                inputChangeListener.onChanged(hdmiDeviceInfo);
             }
         };
     }
@@ -154,28 +154,28 @@ public final class HdmiTvClient extends HdmiClient {
         return new IHdmiRecordListener.Stub() { // from class: android.hardware.hdmi.HdmiTvClient.3
             @Override // android.hardware.hdmi.IHdmiRecordListener
             public byte[] getOneTouchRecordSource(int i) {
-                HdmiRecordSources.RecordSource onOneTouchRecordSourceRequested = HdmiRecordListener.this.onOneTouchRecordSourceRequested(i);
-                if (onOneTouchRecordSourceRequested == null) {
+                HdmiRecordSources.RecordSource recordSourceOnOneTouchRecordSourceRequested = hdmiRecordListener.onOneTouchRecordSourceRequested(i);
+                if (recordSourceOnOneTouchRecordSourceRequested == null) {
                     return EmptyArray.BYTE;
                 }
-                byte[] bArr = new byte[onOneTouchRecordSourceRequested.getDataSize(true)];
-                onOneTouchRecordSourceRequested.toByteArray(true, bArr, 0);
+                byte[] bArr = new byte[recordSourceOnOneTouchRecordSourceRequested.getDataSize(true)];
+                recordSourceOnOneTouchRecordSourceRequested.toByteArray(true, bArr, 0);
                 return bArr;
             }
 
             @Override // android.hardware.hdmi.IHdmiRecordListener
             public void onOneTouchRecordResult(int i, int i2) {
-                HdmiRecordListener.this.onOneTouchRecordResult(i, i2);
+                hdmiRecordListener.onOneTouchRecordResult(i, i2);
             }
 
             @Override // android.hardware.hdmi.IHdmiRecordListener
             public void onTimerRecordingResult(int i, int i2) {
-                HdmiRecordListener.this.onTimerRecordingResult(i, HdmiRecordListener.TimerStatusData.parseFrom(i2));
+                hdmiRecordListener.onTimerRecordingResult(i, HdmiRecordListener.TimerStatusData.parseFrom(i2));
             }
 
             @Override // android.hardware.hdmi.IHdmiRecordListener
             public void onClearTimerRecordingResult(int i, int i2) {
-                HdmiRecordListener.this.onClearTimerRecordingResult(i, i2);
+                hdmiRecordListener.onClearTimerRecordingResult(i, i2);
             }
         };
     }

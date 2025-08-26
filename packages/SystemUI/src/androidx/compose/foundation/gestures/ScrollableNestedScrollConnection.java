@@ -1,9 +1,13 @@
 package androidx.compose.foundation.gestures;
 
+import androidx.compose.foundation.ComposeFoundationFlags;
 import androidx.compose.ui.geometry.Offset;
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection;
+import androidx.compose.ui.unit.Velocity;
+import kotlin.ResultKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScrollableNestedScrollConnection implements NestedScrollConnection {
     public boolean enabled;
@@ -14,116 +18,83 @@ final class ScrollableNestedScrollConnection implements NestedScrollConnection {
         this.enabled = z;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x005b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:24:0x005b, code lost:
     
         if (r7 == r10) goto L29;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x006b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:28:0x006b, code lost:
     
         if (r7 == r10) goto L29;
      */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // androidx.compose.ui.input.nestedscroll.NestedScrollConnection
     /* renamed from: onPostFling-RZ2iAVY, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object mo77onPostFlingRZ2iAVY(long r6, long r8, kotlin.coroutines.Continuation r10) {
-        /*
-            r5 = this;
-            boolean r6 = r10 instanceof androidx.compose.foundation.gestures.ScrollableNestedScrollConnection$onPostFling$1
-            if (r6 == 0) goto L13
-            r6 = r10
-            androidx.compose.foundation.gestures.ScrollableNestedScrollConnection$onPostFling$1 r6 = (androidx.compose.foundation.gestures.ScrollableNestedScrollConnection$onPostFling$1) r6
-            int r7 = r6.label
-            r0 = -2147483648(0xffffffff80000000, float:-0.0)
-            r1 = r7 & r0
-            if (r1 == 0) goto L13
-            int r7 = r7 - r0
-            r6.label = r7
-            goto L18
-        L13:
-            androidx.compose.foundation.gestures.ScrollableNestedScrollConnection$onPostFling$1 r6 = new androidx.compose.foundation.gestures.ScrollableNestedScrollConnection$onPostFling$1
-            r6.<init>(r5, r10)
-        L18:
-            java.lang.Object r7 = r6.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r10 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r0 = r6.label
-            r1 = 2
-            r2 = 1
-            if (r0 == 0) goto L3a
-            if (r0 == r2) goto L34
-            if (r0 != r1) goto L2c
-            long r8 = r6.J$0
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L6e
-        L2c:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L34:
-            long r8 = r6.J$0
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L5e
-        L3a:
-            kotlin.ResultKt.throwOnFailure(r7)
-            boolean r7 = r5.enabled
-            r3 = 0
-            if (r7 == 0) goto L77
-            boolean r7 = androidx.compose.foundation.ComposeFoundationFlags.NewNestedFlingPropagationEnabled
-            androidx.compose.foundation.gestures.ScrollingLogic r5 = r5.scrollingLogic
-            if (r7 == 0) goto L63
-            boolean r7 = r5.isFlinging
-            if (r7 == 0) goto L53
-            androidx.compose.ui.unit.Velocity$Companion r5 = androidx.compose.ui.unit.Velocity.Companion
-            r5.getClass()
-            goto L72
-        L53:
-            r6.J$0 = r8
-            r6.label = r2
-            java.lang.Object r7 = r5.m81doFlingAnimationQWom1Mo(r8, r6)
-            if (r7 != r10) goto L5e
-            goto L6d
-        L5e:
-            androidx.compose.ui.unit.Velocity r7 = (androidx.compose.ui.unit.Velocity) r7
-            long r3 = r7.packedValue
-            goto L72
-        L63:
-            r6.J$0 = r8
-            r6.label = r1
-            java.lang.Object r7 = r5.m81doFlingAnimationQWom1Mo(r8, r6)
-            if (r7 != r10) goto L6e
-        L6d:
-            return r10
-        L6e:
-            androidx.compose.ui.unit.Velocity r7 = (androidx.compose.ui.unit.Velocity) r7
-            long r3 = r7.packedValue
-        L72:
-            long r3 = androidx.compose.ui.unit.Velocity.m880minusAH228Gc(r8, r3)
-            goto L7c
-        L77:
-            androidx.compose.ui.unit.Velocity$Companion r5 = androidx.compose.ui.unit.Velocity.Companion
-            r5.getClass()
-        L7c:
-            androidx.compose.ui.unit.Velocity r5 = androidx.compose.ui.unit.Velocity.m876boximpl(r3)
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.ScrollableNestedScrollConnection.mo77onPostFlingRZ2iAVY(long, long, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object mo78onPostFlingRZ2iAVY(long j, long j2, Continuation continuation) throws Throwable {
+        ScrollableNestedScrollConnection$onPostFling$1 scrollableNestedScrollConnection$onPostFling$1;
+        long jM882minusAH228Gc;
+        if (continuation instanceof ScrollableNestedScrollConnection$onPostFling$1) {
+            scrollableNestedScrollConnection$onPostFling$1 = (ScrollableNestedScrollConnection$onPostFling$1) continuation;
+            int i = scrollableNestedScrollConnection$onPostFling$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                scrollableNestedScrollConnection$onPostFling$1.label = i - Integer.MIN_VALUE;
+            } else {
+                scrollableNestedScrollConnection$onPostFling$1 = new ScrollableNestedScrollConnection$onPostFling$1(this, continuation);
+            }
+        }
+        Object objM82doFlingAnimationQWom1Mo = scrollableNestedScrollConnection$onPostFling$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = scrollableNestedScrollConnection$onPostFling$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objM82doFlingAnimationQWom1Mo);
+            jM882minusAH228Gc = 0;
+            if (!this.enabled) {
+                Velocity.Companion.getClass();
+                return Velocity.m878boximpl(jM882minusAH228Gc);
+            }
+            boolean z = ComposeFoundationFlags.NewNestedFlingPropagationEnabled;
+            ScrollingLogic scrollingLogic = this.scrollingLogic;
+            if (!z) {
+                scrollableNestedScrollConnection$onPostFling$1.J$0 = j2;
+                scrollableNestedScrollConnection$onPostFling$1.label = 2;
+                objM82doFlingAnimationQWom1Mo = scrollingLogic.m82doFlingAnimationQWom1Mo(j2, scrollableNestedScrollConnection$onPostFling$1);
+            } else if (scrollingLogic.isFlinging) {
+                Velocity.Companion.getClass();
+            } else {
+                scrollableNestedScrollConnection$onPostFling$1.J$0 = j2;
+                scrollableNestedScrollConnection$onPostFling$1.label = 1;
+                objM82doFlingAnimationQWom1Mo = scrollingLogic.m82doFlingAnimationQWom1Mo(j2, scrollableNestedScrollConnection$onPostFling$1);
+            }
+            return coroutineSingletons;
+        }
+        if (i2 == 1) {
+            j2 = scrollableNestedScrollConnection$onPostFling$1.J$0;
+            ResultKt.throwOnFailure(objM82doFlingAnimationQWom1Mo);
+            jM882minusAH228Gc = ((Velocity) objM82doFlingAnimationQWom1Mo).packedValue;
+        } else {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            j2 = scrollableNestedScrollConnection$onPostFling$1.J$0;
+            ResultKt.throwOnFailure(objM82doFlingAnimationQWom1Mo);
+            jM882minusAH228Gc = ((Velocity) objM82doFlingAnimationQWom1Mo).packedValue;
+        }
+        jM882minusAH228Gc = Velocity.m882minusAH228Gc(j2, jM882minusAH228Gc);
+        return Velocity.m878boximpl(jM882minusAH228Gc);
     }
 
     @Override // androidx.compose.ui.input.nestedscroll.NestedScrollConnection
     /* renamed from: onPostScroll-DzOQY0M, reason: not valid java name */
-    public final long mo78onPostScrollDzOQY0M(int i, long j, long j2) {
+    public final long mo79onPostScrollDzOQY0M(int i, long j, long j2) {
         if (!this.enabled) {
             Offset.Companion.getClass();
             return 0L;
         }
         ScrollingLogic scrollingLogic = this.scrollingLogic;
         if (!scrollingLogic.scrollableState.isScrollInProgress()) {
-            return scrollingLogic.m85toOffsettuRUvjQ(scrollingLogic.reverseIfNeeded(scrollingLogic.scrollableState.dispatchRawDelta(scrollingLogic.reverseIfNeeded(scrollingLogic.m84toFloatk4lQ0M(j2)))));
+            return scrollingLogic.m86toOffsettuRUvjQ(scrollingLogic.reverseIfNeeded(scrollingLogic.scrollableState.dispatchRawDelta(scrollingLogic.reverseIfNeeded(scrollingLogic.m85toFloatk4lQ0M(j2)))));
         }
         Offset.Companion.getClass();
         return 0L;

@@ -1,5 +1,6 @@
 package com.android.systemui.statusbar.notification.collection.coordinator;
 
+import android.app.NotificationChannel;
 import com.android.systemui.flags.RefactorFlagUtils;
 import com.android.systemui.statusbar.notification.collection.GroupEntry;
 import com.android.systemui.statusbar.notification.collection.NotifPipeline;
@@ -28,7 +29,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class ConversationCoordinator implements Coordinator {
@@ -41,12 +41,13 @@ public final class ConversationCoordinator implements Coordinator {
     public static final int $stable = 8;
     private final Map<NotificationEntry, NotificationEntry> promotedEntriesToSummaryOfSameChannel = new LinkedHashMap();
     private final OnBeforeRenderListListener onBeforeRenderListListener = new OnBeforeRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.ConversationCoordinator$onBeforeRenderListListener$1
+        /* JADX WARN: Removed duplicated region for block: B:16:0x004b  */
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeRenderListListener
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final void onBeforeRenderList(List<PipelineEntry> list) {
-            Map map;
-            ConversationIconManager conversationIconManager;
-            Map map2;
-            map = ConversationCoordinator.this.promotedEntriesToSummaryOfSameChannel;
+            Map map = this.this$0.promotedEntriesToSummaryOfSameChannel;
             ArrayList arrayList = new ArrayList();
             for (Map.Entry entry : map.entrySet()) {
                 NotificationEntry notificationEntry = (NotificationEntry) entry.getKey();
@@ -67,26 +68,26 @@ public final class ConversationCoordinator implements Coordinator {
                                         break;
                                     }
                                 }
+                                str = str2;
                             }
                         }
+                    } else {
+                        str = str2;
                     }
-                    str = str2;
                 }
                 if (str != null) {
                     arrayList.add(str);
                 }
             }
-            conversationIconManager = ConversationCoordinator.this.conversationIconManager;
-            IconManager iconManager = (IconManager) conversationIconManager;
+            IconManager iconManager = (IconManager) this.this$0.conversationIconManager;
             iconManager.getClass();
             Set set = CollectionsKt___CollectionsKt.toSet(arrayList);
-            boolean areEqual = Intrinsics.areEqual(iconManager.unimportantConversationKeys, set);
+            boolean zAreEqual = Intrinsics.areEqual(iconManager.unimportantConversationKeys, set);
             iconManager.unimportantConversationKeys = set;
-            if (!areEqual) {
+            if (!zAreEqual) {
                 iconManager.recalculateForImportantConversationChange();
             }
-            map2 = ConversationCoordinator.this.promotedEntriesToSummaryOfSameChannel;
-            map2.clear();
+            this.this$0.promotedEntriesToSummaryOfSameChannel.clear();
         }
     };
     private final ConversationCoordinator$notificationPromoter$1 notificationPromoter = new NotifPromoter() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.ConversationCoordinator$notificationPromoter$1
@@ -94,58 +95,26 @@ public final class ConversationCoordinator implements Coordinator {
             super("ConversationCoordinator");
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:6:0x0013, code lost:
-        
-            if (r5.isInsignificant() == false) goto L10;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:9:0x0016  */
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifPromoter
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public boolean shouldPromoteToTopLevel(com.android.systemui.statusbar.notification.collection.NotificationEntry r5) {
-            /*
-                r4 = this;
-                android.service.notification.NotificationListenerService$Ranking r0 = r5.mRanking
-                android.app.NotificationChannel r0 = r0.getChannel()
-                if (r0 == 0) goto L16
-                boolean r0 = r0.isImportantConversation()
-                r1 = 1
-                if (r0 != r1) goto L16
-                boolean r0 = r5.isInsignificant()
-                if (r0 != 0) goto L16
-                goto L17
-            L16:
-                r1 = 0
-            L17:
-                if (r1 == 0) goto L47
-                com.android.systemui.statusbar.notification.collection.ListAttachState r0 = r5.mAttachState
-                com.android.systemui.statusbar.notification.collection.PipelineEntry r0 = r0.parent
-                boolean r2 = r0 instanceof com.android.systemui.statusbar.notification.collection.GroupEntry
-                r3 = 0
-                if (r2 == 0) goto L25
-                com.android.systemui.statusbar.notification.collection.GroupEntry r0 = (com.android.systemui.statusbar.notification.collection.GroupEntry) r0
-                goto L26
-            L25:
-                r0 = r3
-            L26:
-                if (r0 == 0) goto L2a
-                com.android.systemui.statusbar.notification.collection.NotificationEntry r3 = r0.mSummary
-            L2a:
-                if (r3 == 0) goto L47
-                android.service.notification.NotificationListenerService$Ranking r0 = r5.mRanking
-                android.app.NotificationChannel r0 = r0.getChannel()
-                android.service.notification.NotificationListenerService$Ranking r2 = r3.mRanking
-                android.app.NotificationChannel r2 = r2.getChannel()
-                boolean r0 = kotlin.jvm.internal.Intrinsics.areEqual(r0, r2)
-                if (r0 == 0) goto L47
-                com.android.systemui.statusbar.notification.collection.coordinator.ConversationCoordinator r4 = com.android.systemui.statusbar.notification.collection.coordinator.ConversationCoordinator.this
-                java.util.Map r4 = com.android.systemui.statusbar.notification.collection.coordinator.ConversationCoordinator.access$getPromotedEntriesToSummaryOfSameChannel$p(r4)
-                r4.put(r5, r3)
-            L47:
-                return r1
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.ConversationCoordinator$notificationPromoter$1.shouldPromoteToTopLevel(com.android.systemui.statusbar.notification.collection.NotificationEntry):boolean");
+        public boolean shouldPromoteToTopLevel(NotificationEntry notificationEntry) {
+            boolean z;
+            NotificationChannel channel = notificationEntry.mRanking.getChannel();
+            if (channel != null) {
+                z = channel.isImportantConversation() && !notificationEntry.isInsignificant();
+            }
+            if (z) {
+                PipelineEntry pipelineEntry = notificationEntry.mAttachState.parent;
+                GroupEntry groupEntry = pipelineEntry instanceof GroupEntry ? (GroupEntry) pipelineEntry : null;
+                NotificationEntry notificationEntry2 = groupEntry != null ? groupEntry.mSummary : null;
+                if (notificationEntry2 != null && Intrinsics.areEqual(notificationEntry.mRanking.getChannel(), notificationEntry2.mRanking.getChannel())) {
+                    this.this$0.promotedEntriesToSummaryOfSameChannel.put(notificationEntry, notificationEntry2);
+                }
+            }
+            return z;
         }
     };
     private final NotifSectioner priorityPeopleSectioner = new NotifSectioner() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.ConversationCoordinator$priorityPeopleSectioner$1
@@ -155,16 +124,11 @@ public final class ConversationCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public boolean isInSection(PipelineEntry pipelineEntry) {
-            int peopleType;
             if (BundleUtil.Companion.isClassified(pipelineEntry)) {
                 return false;
             }
             NotificationEntry representativeEntry = pipelineEntry.getRepresentativeEntry();
-            if (representativeEntry != null && representativeEntry.isInsignificant()) {
-                return false;
-            }
-            peopleType = ConversationCoordinator.this.getPeopleType(pipelineEntry);
-            return peopleType == 3;
+            return (representativeEntry == null || !representativeEntry.isInsignificant()) && this.this$0.getPeopleType(pipelineEntry) == 3;
         }
     };
     private final NotifSectioner peopleAlertingSectioner = new NotifSectioner() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.ConversationCoordinator$peopleAlertingSectioner$1
@@ -179,28 +143,19 @@ public final class ConversationCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public NodeController getHeaderNodeController() {
-            NodeController nodeController;
-            nodeController = ConversationCoordinator.this.conversationHeaderNodeController;
-            return nodeController;
+            return this.this$0.conversationHeaderNodeController;
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public boolean isInSection(PipelineEntry pipelineEntry) {
-            HighPriorityProvider highPriorityProvider;
-            boolean isConversation;
             if (BundleUtil.Companion.isClassified(pipelineEntry)) {
                 return false;
             }
             NotificationEntry representativeEntry = pipelineEntry.getRepresentativeEntry();
-            if (representativeEntry != null && representativeEntry.isInsignificant()) {
-                return false;
+            if (representativeEntry == null || !representativeEntry.isInsignificant()) {
+                return this.this$0.highPriorityProvider.isHighPriorityConversation(pipelineEntry) || this.this$0.isConversation(pipelineEntry);
             }
-            highPriorityProvider = ConversationCoordinator.this.highPriorityProvider;
-            if (highPriorityProvider.isHighPriorityConversation(pipelineEntry)) {
-                return true;
-            }
-            isConversation = ConversationCoordinator.this.isConversation(pipelineEntry);
-            return isConversation;
+            return false;
         }
     };
     private final NotifSectioner peopleSilentSectioner = new NotifSectioner() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.ConversationCoordinator$peopleSilentSectioner$1
@@ -236,16 +191,11 @@ public final class ConversationCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifComparator, java.util.Comparator
         public int compare(PipelineEntry pipelineEntry, PipelineEntry pipelineEntry2) {
-            int peopleType;
-            int peopleType2;
-            peopleType = ConversationCoordinator.this.getPeopleType(pipelineEntry);
-            peopleType2 = ConversationCoordinator.this.getPeopleType(pipelineEntry2);
-            return Intrinsics.compare(peopleType2, peopleType);
+            return Intrinsics.compare(this.this$0.getPeopleType(pipelineEntry2), this.this$0.getPeopleType(pipelineEntry));
         }
     };
     private final NodeController conversationHeaderNodeController = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

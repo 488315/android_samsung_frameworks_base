@@ -41,9 +41,9 @@ public interface ICameraClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICameraClient)) {
-                return (ICameraClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICameraClient)) {
+                return (ICameraClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

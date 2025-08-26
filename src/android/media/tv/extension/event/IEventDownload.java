@@ -47,9 +47,9 @@ public interface IEventDownload extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.event.IEventDownload");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEventDownload)) {
-                return (IEventDownload) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.event.IEventDownload");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEventDownload)) {
+                return (IEventDownload) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -77,11 +77,11 @@ public interface IEventDownload extends IInterface {
             }
             if (i == 1) {
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                IEventDownloadListener asInterface = IEventDownloadListener.Stub.asInterface(parcel.readStrongBinder());
+                IEventDownloadListener iEventDownloadListenerAsInterface = IEventDownloadListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                IBinder createSession = createSession(bundle, asInterface);
+                IBinder iBinderCreateSession = createSession(bundle, iEventDownloadListenerAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongBinder(createSession);
+                parcel2.writeStrongBinder(iBinderCreateSession);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -105,18 +105,18 @@ public interface IEventDownload extends IInterface {
 
             @Override // android.media.tv.extension.event.IEventDownload
             public IBinder createSession(Bundle bundle, IEventDownloadListener iEventDownloadListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.event.IEventDownload");
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iEventDownloadListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.event.IEventDownload");
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iEventDownloadListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

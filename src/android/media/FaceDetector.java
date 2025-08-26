@@ -87,18 +87,18 @@ public class FaceDetector {
         if (faceArr.length < this.mMaxFaces) {
             throw new IllegalArgumentException("faces[] smaller than maxFaces");
         }
-        int fft_detect = fft_detect(bitmap);
+        int iFft_detect = fft_detect(bitmap);
         int i = this.mMaxFaces;
-        if (fft_detect >= i) {
-            fft_detect = i;
+        if (iFft_detect >= i) {
+            iFft_detect = i;
         }
-        for (int i2 = 0; i2 < fft_detect; i2++) {
+        for (int i2 = 0; i2 < iFft_detect; i2++) {
             if (faceArr[i2] == null) {
                 faceArr[i2] = new Face();
             }
             fft_get_face(faceArr[i2], i2);
         }
-        return fft_detect;
+        return iFft_detect;
     }
 
     protected void finalize() throws Throwable {

@@ -106,9 +106,9 @@ public interface IImsConfig extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsConfig)) {
-                return (IImsConfig) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsConfig)) {
+                return (IImsConfig) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -154,49 +154,49 @@ public interface IImsConfig extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int provisionedValue = getProvisionedValue(readInt);
+                    int provisionedValue = getProvisionedValue(i3);
                     parcel2.writeNoException();
                     parcel2.writeInt(provisionedValue);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String provisionedStringValue = getProvisionedStringValue(readInt2);
+                    String provisionedStringValue = getProvisionedStringValue(i4);
                     parcel2.writeNoException();
                     parcel2.writeString(provisionedStringValue);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int provisionedValue2 = setProvisionedValue(readInt3, readInt4);
+                    int provisionedValue2 = setProvisionedValue(i5, i6);
                     parcel2.writeNoException();
                     parcel2.writeInt(provisionedValue2);
                     return true;
                 case 4:
-                    int readInt5 = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i7 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int provisionedStringValue2 = setProvisionedStringValue(readInt5, readString);
+                    int provisionedStringValue2 = setProvisionedStringValue(i7, string);
                     parcel2.writeNoException();
                     parcel2.writeInt(provisionedStringValue2);
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    ImsConfigListener asInterface = ImsConfigListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    ImsConfigListener imsConfigListenerAsInterface = ImsConfigListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getFeatureValue(readInt6, readInt7, asInterface);
+                    getFeatureValue(i8, i9, imsConfigListenerAsInterface);
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
-                    ImsConfigListener asInterface2 = ImsConfigListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    ImsConfigListener imsConfigListenerAsInterface2 = ImsConfigListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setFeatureValue(readInt8, readInt9, readInt10, asInterface2);
+                    setFeatureValue(i10, i11, i12, imsConfigListenerAsInterface2);
                     return true;
                 case 7:
                     boolean volteProvisioned = getVolteProvisioned();
@@ -204,15 +204,15 @@ public interface IImsConfig extends IInterface {
                     parcel2.writeBoolean(volteProvisioned);
                     return true;
                 case 8:
-                    ImsConfigListener asInterface3 = ImsConfigListener.Stub.asInterface(parcel.readStrongBinder());
+                    ImsConfigListener imsConfigListenerAsInterface3 = ImsConfigListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getVideoQuality(asInterface3);
+                    getVideoQuality(imsConfigListenerAsInterface3);
                     return true;
                 case 9:
-                    int readInt11 = parcel.readInt();
-                    ImsConfigListener asInterface4 = ImsConfigListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i13 = parcel.readInt();
+                    ImsConfigListener imsConfigListenerAsInterface4 = ImsConfigListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setVideoQuality(readInt11, asInterface4);
+                    setVideoQuality(i13, imsConfigListenerAsInterface4);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -237,136 +237,136 @@ public interface IImsConfig extends IInterface {
 
             @Override // com.android.ims.internal.IImsConfig
             public int getProvisionedValue(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsConfig
             public String getProvisionedStringValue(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsConfig
             public int setProvisionedValue(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsConfig
             public int setProvisionedStringValue(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsConfig
             public void getFeatureValue(int i, int i2, ImsConfigListener imsConfigListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(imsConfigListener);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(imsConfigListener);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsConfig
             public void setFeatureValue(int i, int i2, int i3, ImsConfigListener imsConfigListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeStrongInterface(imsConfigListener);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeStrongInterface(imsConfigListener);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsConfig
             public boolean getVolteProvisioned() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsConfig
             public void getVideoQuality(ImsConfigListener imsConfigListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(imsConfigListener);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(imsConfigListener);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsConfig
             public void setVideoQuality(int i, ImsConfigListener imsConfigListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(imsConfigListener);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(imsConfigListener);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

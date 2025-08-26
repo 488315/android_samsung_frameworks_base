@@ -13,19 +13,17 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SysUICutoutProviderImpl implements SysUICutoutProvider {
     public final Lazy cameraProtectionList$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.SysUICutoutProviderImpl$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            return ((CameraProtectionLoaderImpl) SysUICutoutProviderImpl.this.cameraProtectionLoader).loadCameraProtectionInfoList();
+            return ((CameraProtectionLoaderImpl) this.f$0.cameraProtectionLoader).loadCameraProtectionInfoList();
         }
     });
     public final CameraProtectionLoader cameraProtectionLoader;
     public final Context context;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         SysUICutoutProviderImpl create(Context context, CameraProtectionLoader cameraProtectionLoader);
     }
@@ -36,7 +34,7 @@ public final class SysUICutoutProviderImpl implements SysUICutoutProvider {
     }
 
     public final SysUICutoutInformation cutoutInfoForCurrentDisplayAndRotation() {
-        Object obj;
+        Object next;
         Display display = this.context.getDisplay();
         DisplayCutout cutout = display.getCutout();
         CameraProtectionInfo cameraProtectionInfo = null;
@@ -48,15 +46,15 @@ public final class SysUICutoutProviderImpl implements SysUICutoutProvider {
             Iterator it = ((List) this.cameraProtectionList$delegate.getValue()).iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 }
-                obj = it.next();
-                if (Intrinsics.areEqual(((CameraProtectionInfo) obj).displayUniqueId, uniqueId)) {
+                next = it.next();
+                if (Intrinsics.areEqual(((CameraProtectionInfo) next).displayUniqueId, uniqueId)) {
                     break;
                 }
             }
-            CameraProtectionInfo cameraProtectionInfo2 = (CameraProtectionInfo) obj;
+            CameraProtectionInfo cameraProtectionInfo2 = (CameraProtectionInfo) next;
             if (cameraProtectionInfo2 != null) {
                 Rect rect = cameraProtectionInfo2.bounds;
                 DisplayInfo displayInfo = new DisplayInfo();

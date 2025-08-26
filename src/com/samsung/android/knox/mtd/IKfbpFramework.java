@@ -69,9 +69,9 @@ public interface IKfbpFramework extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKfbpFramework.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKfbpFramework)) {
-                return (IKfbpFramework) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKfbpFramework.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKfbpFramework)) {
+                return (IKfbpFramework) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -107,31 +107,31 @@ public interface IKfbpFramework extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                int readInt = parcel.readInt();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                int i3 = parcel.readInt();
                 Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                analyzeUrl(readString, readString2, readInt, intent, readInt2);
+                analyzeUrl(string, string2, i3, intent, i4);
             } else if (i == 2) {
-                String readString3 = parcel.readString();
-                String readString4 = parcel.readString();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                String string3 = parcel.readString();
+                String string4 = parcel.readString();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                analyzeContent(readString3, readString4, readInt3, readInt4);
+                analyzeContent(string3, string4, i5, i6);
             } else if (i == 3) {
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                IMtdCallback asInterface = IMtdCallback.Stub.asInterface(parcel.readStrongBinder());
-                String readString5 = parcel.readString();
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                IMtdCallback iMtdCallbackAsInterface = IMtdCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string5 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                analyzeUrls(createStringArrayList, asInterface, readString5);
+                analyzeUrls(arrayListCreateStringArrayList, iMtdCallbackAsInterface, string5);
             } else if (i == 4) {
-                ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                IMtdCallback asInterface2 = IMtdCallback.Stub.asInterface(parcel.readStrongBinder());
+                ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                IMtdCallback iMtdCallbackAsInterface2 = IMtdCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                analyzeContents(createStringArrayList2, asInterface2);
+                analyzeContents(arrayListCreateStringArrayList2, iMtdCallbackAsInterface2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -156,59 +156,59 @@ public interface IKfbpFramework extends IInterface {
 
             @Override // com.samsung.android.knox.mtd.IKfbpFramework
             public void analyzeUrl(String str, String str2, int i, Intent intent, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mtd.IKfbpFramework
             public void analyzeContent(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mtd.IKfbpFramework
             public void analyzeUrls(List<String> list, IMtdCallback iMtdCallback, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iMtdCallback);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iMtdCallback);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.mtd.IKfbpFramework
             public void analyzeContents(List<String> list, IMtdCallback iMtdCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iMtdCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IKfbpFramework.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iMtdCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -11,7 +11,6 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import com.samsung.android.knox.ex.knoxAI.IDeathNotifier;
 import com.samsung.android.knox.ex.knoxAI.IKeyProvisioningCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IDecryptFramework extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.ex.knoxAI.IDecryptFramework";
@@ -30,7 +29,6 @@ public interface IDecryptFramework extends IInterface {
 
     int open(long j, KfaOptions kfaOptions) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IDecryptFramework {
         public static final int TRANSACTION_close = 6;
         public static final int TRANSACTION_createKnoxAiSession = 1;
@@ -40,7 +38,6 @@ public interface IDecryptFramework extends IInterface {
         public static final int TRANSACTION_getModelInputShape = 3;
         public static final int TRANSACTION_open = 4;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IDecryptFramework {
             public IBinder mRemote;
 
@@ -55,69 +52,69 @@ public interface IDecryptFramework extends IInterface {
 
             @Override // com.samsung.android.knox.ex.knoxAI.IDecryptFramework
             public int close(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.knoxAI.IDecryptFramework
             public long createKnoxAiSession(IDeathNotifier iDeathNotifier) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDeathNotifier);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDeathNotifier);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.knoxAI.IDecryptFramework
             public int destroyKnoxAiSession(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.knoxAI.IDecryptFramework
             public int execute(long j, DataBuffer[] dataBufferArr, DataBuffer[] dataBufferArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedArray(dataBufferArr, 0);
-                    obtain.writeTypedArray(dataBufferArr2, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readTypedArray(dataBufferArr2, DataBuffer.CREATOR);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedArray(dataBufferArr, 0);
+                    parcelObtain.writeTypedArray(dataBufferArr2, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i = parcelObtain2.readInt();
+                    parcelObtain2.readTypedArray(dataBufferArr2, DataBuffer.CREATOR);
+                    return i;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -127,53 +124,53 @@ public interface IDecryptFramework extends IInterface {
 
             @Override // com.samsung.android.knox.ex.knoxAI.IDecryptFramework
             public void getKeyProvisioning(IKeyProvisioningCallback iKeyProvisioningCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
-                    obtain.writeStrongInterface(iKeyProvisioningCallback);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iKeyProvisioningCallback);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.knoxAI.IDecryptFramework
             public int getModelInputShape(long j, int i, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeInt(iArr.length);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.readIntArray(iArr);
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(iArr.length);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    parcelObtain2.readIntArray(iArr);
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.knoxAI.IDecryptFramework
             public int open(long j, KfaOptions kfaOptions) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(kfaOptions, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDecryptFramework.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(kfaOptions, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -186,8 +183,8 @@ public interface IDecryptFramework extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDecryptFramework.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IDecryptFramework)) ? new Proxy(iBinder) : (IDecryptFramework) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDecryptFramework.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IDecryptFramework)) ? new Proxy(iBinder) : (IDecryptFramework) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -201,63 +198,63 @@ public interface IDecryptFramework extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IDeathNotifier asInterface = IDeathNotifier.Stub.asInterface(parcel.readStrongBinder());
+                    IDeathNotifier iDeathNotifierAsInterface = IDeathNotifier.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    long createKnoxAiSession = createKnoxAiSession(asInterface);
+                    long jCreateKnoxAiSession = createKnoxAiSession(iDeathNotifierAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeLong(createKnoxAiSession);
+                    parcel2.writeLong(jCreateKnoxAiSession);
                     return true;
                 case 2:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    int destroyKnoxAiSession = destroyKnoxAiSession(readLong);
+                    int iDestroyKnoxAiSession = destroyKnoxAiSession(j);
                     parcel2.writeNoException();
-                    parcel2.writeInt(destroyKnoxAiSession);
+                    parcel2.writeInt(iDestroyKnoxAiSession);
                     return true;
                 case 3:
-                    long readLong2 = parcel.readLong();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    if (readInt2 > 1000000) {
-                        throw new BadParcelableException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(readInt2, "Array too large: "));
+                    long j2 = parcel.readLong();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    if (i4 > 1000000) {
+                        throw new BadParcelableException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i4, "Array too large: "));
                     }
-                    int[] iArr = readInt2 < 0 ? null : new int[readInt2];
+                    int[] iArr = i4 < 0 ? null : new int[i4];
                     parcel.enforceNoDataAvail();
-                    int modelInputShape = getModelInputShape(readLong2, readInt, iArr);
+                    int modelInputShape = getModelInputShape(j2, i3, iArr);
                     parcel2.writeNoException();
                     parcel2.writeInt(modelInputShape);
                     parcel2.writeIntArray(iArr);
                     return true;
                 case 4:
-                    long readLong3 = parcel.readLong();
+                    long j3 = parcel.readLong();
                     KfaOptions kfaOptions = (KfaOptions) parcel.readTypedObject(KfaOptions.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int open = open(readLong3, kfaOptions);
+                    int iOpen = open(j3, kfaOptions);
                     parcel2.writeNoException();
-                    parcel2.writeInt(open);
+                    parcel2.writeInt(iOpen);
                     return true;
                 case 5:
-                    long readLong4 = parcel.readLong();
+                    long j4 = parcel.readLong();
                     Parcelable.Creator<DataBuffer> creator = DataBuffer.CREATOR;
                     DataBuffer[] dataBufferArr = (DataBuffer[]) parcel.createTypedArray(creator);
                     DataBuffer[] dataBufferArr2 = (DataBuffer[]) parcel.createTypedArray(creator);
                     parcel.enforceNoDataAvail();
-                    int execute = execute(readLong4, dataBufferArr, dataBufferArr2);
+                    int iExecute = execute(j4, dataBufferArr, dataBufferArr2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(execute);
+                    parcel2.writeInt(iExecute);
                     parcel2.writeTypedArray(dataBufferArr2, 1);
                     return true;
                 case 6:
-                    long readLong5 = parcel.readLong();
+                    long j5 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    int close = close(readLong5);
+                    int iClose = close(j5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(close);
+                    parcel2.writeInt(iClose);
                     return true;
                 case 7:
-                    IKeyProvisioningCallback asInterface2 = IKeyProvisioningCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IKeyProvisioningCallback iKeyProvisioningCallbackAsInterface = IKeyProvisioningCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getKeyProvisioning(asInterface2);
+                    getKeyProvisioning(iKeyProvisioningCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -271,7 +268,6 @@ public interface IDecryptFramework extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IDecryptFramework {
         @Override // android.os.IInterface
         public IBinder asBinder() {

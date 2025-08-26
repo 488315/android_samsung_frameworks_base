@@ -219,10 +219,10 @@ public final class CellIdentityWcdma extends CellIdentity {
 
     @Override // android.telephony.CellIdentity
     public boolean isSameCell(CellIdentity cellIdentity) {
-        boolean isSameCell = super.isSameCell(cellIdentity);
-        if (isSameCell && (cellIdentity instanceof CellIdentityWcdma) && this.mPsc != ((CellIdentityWcdma) cellIdentity).getPsc()) {
+        boolean zIsSameCell = super.isSameCell(cellIdentity);
+        if (zIsSameCell && (cellIdentity instanceof CellIdentityWcdma) && this.mPsc != ((CellIdentityWcdma) cellIdentity).getPsc()) {
             return false;
         }
-        return isSameCell;
+        return zIsSameCell;
     }
 }

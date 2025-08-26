@@ -7,7 +7,6 @@ import androidx.compose.ui.draganddrop.DragAndDropTargetModifierNode;
 import androidx.compose.ui.node.DelegatingNode;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DragAndDropTargetNode extends DelegatingNode {
     public DragAndDropTargetModifierNode dragAndDropNode;
@@ -21,9 +20,9 @@ final class DragAndDropTargetNode extends DelegatingNode {
 
     @Override // androidx.compose.ui.Modifier.Node
     public final void onAttach() {
-        DragAndDropNode DragAndDropTargetModifierNode = DragAndDropNodeKt.DragAndDropTargetModifierNode(new DragAndDropTargetNode$createAndAttachDragAndDropModifierNode$1(this), this.target);
-        delegate(DragAndDropTargetModifierNode);
-        this.dragAndDropNode = DragAndDropTargetModifierNode;
+        DragAndDropNode dragAndDropNodeDragAndDropTargetModifierNode = DragAndDropNodeKt.DragAndDropTargetModifierNode(new DragAndDropTargetNode$createAndAttachDragAndDropModifierNode$1(this), this.target);
+        delegate(dragAndDropNodeDragAndDropTargetModifierNode);
+        this.dragAndDropNode = dragAndDropNodeDragAndDropTargetModifierNode;
     }
 
     @Override // androidx.compose.ui.Modifier.Node

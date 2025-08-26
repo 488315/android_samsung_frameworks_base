@@ -92,11 +92,11 @@ public abstract class ASN1NumericString extends ASN1Primitive implements ASN1Str
 
     public static boolean isNumericString(String str) {
         for (int length = str.length() - 1; length >= 0; length--) {
-            char charAt = str.charAt(length);
-            if (charAt > 127) {
+            char cCharAt = str.charAt(length);
+            if (cCharAt > 127) {
                 return false;
             }
-            if (('0' > charAt || charAt > '9') && charAt != ' ') {
+            if (('0' > cCharAt || cCharAt > '9') && cCharAt != ' ') {
                 return false;
             }
         }

@@ -1,6 +1,5 @@
 package com.caverock.androidsvg;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class IntegerParser {
     public final int pos;
@@ -18,11 +17,11 @@ public class IntegerParser {
         long j = 0;
         int i3 = i;
         while (i3 < i2) {
-            char charAt = str.charAt(i3);
-            if (charAt < '0' || charAt > '9') {
+            char cCharAt = str.charAt(i3);
+            if (cCharAt < '0' || cCharAt > '9') {
                 break;
             }
-            j = (j * 10) + (charAt - '0');
+            j = (j * 10) + (cCharAt - '0');
             if (j > 2147483647L) {
                 return null;
             }

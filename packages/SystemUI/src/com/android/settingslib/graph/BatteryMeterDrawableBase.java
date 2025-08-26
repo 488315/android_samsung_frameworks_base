@@ -15,7 +15,6 @@ import androidx.appcompat.graphics.drawable.DrawerArrowDrawable$$ExternalSynthet
 import com.android.settingslib.Utils;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BatteryMeterDrawableBase extends Drawable {
     public final Paint mBatteryPaint;
@@ -41,7 +40,7 @@ public class BatteryMeterDrawableBase extends Drawable {
     public int mLevel = -1;
     public final int mIconTint = -1;
 
-    public BatteryMeterDrawableBase(Context context, int i) {
+    public BatteryMeterDrawableBase(Context context, int i) throws Resources.NotFoundException {
         new Path();
         new Path();
         this.mPadding = new Rect();
@@ -54,21 +53,21 @@ public class BatteryMeterDrawableBase extends Drawable {
         new Path();
         this.mContext = context;
         Resources resources = context.getResources();
-        TypedArray obtainTypedArray = resources.obtainTypedArray(R.array.batterymeter_color_levels);
-        TypedArray obtainTypedArray2 = resources.obtainTypedArray(R.array.batterymeter_color_values);
-        int length = obtainTypedArray.length();
+        TypedArray typedArrayObtainTypedArray = resources.obtainTypedArray(R.array.batterymeter_color_levels);
+        TypedArray typedArrayObtainTypedArray2 = resources.obtainTypedArray(R.array.batterymeter_color_values);
+        int length = typedArrayObtainTypedArray.length();
         this.mColors = new int[length * 2];
         for (int i2 = 0; i2 < length; i2++) {
             int i3 = i2 * 2;
-            this.mColors[i3] = obtainTypedArray.getInt(i2, 0);
-            if (obtainTypedArray2.getType(i2) == 2) {
-                this.mColors[i3 + 1] = Utils.getColorAttrDefaultColor(context, obtainTypedArray2.getThemeAttributeId(i2, 0), 0);
+            this.mColors[i3] = typedArrayObtainTypedArray.getInt(i2, 0);
+            if (typedArrayObtainTypedArray2.getType(i2) == 2) {
+                this.mColors[i3 + 1] = Utils.getColorAttrDefaultColor(context, typedArrayObtainTypedArray2.getThemeAttributeId(i2, 0), 0);
             } else {
-                this.mColors[i3 + 1] = obtainTypedArray2.getColor(i2, 0);
+                this.mColors[i3 + 1] = typedArrayObtainTypedArray2.getColor(i2, 0);
             }
         }
-        obtainTypedArray.recycle();
-        obtainTypedArray2.recycle();
+        typedArrayObtainTypedArray.recycle();
+        typedArrayObtainTypedArray2.recycle();
         this.mWarningString = context.getString(R.string.battery_meter_very_low_overlay_symbol);
         this.mCriticalLevel = this.mContext.getResources().getInteger(android.R.integer.config_displayWhiteBalanceBrightnessFilterHorizon);
         this.mButtonHeightFraction = context.getResources().getFraction(R.fraction.battery_button_height_fraction, 1, 1);
@@ -115,25 +114,25 @@ public class BatteryMeterDrawableBase extends Drawable {
         this.mIntrinsicHeight = context.getResources().getDimensionPixelSize(R.dimen.battery_height);
     }
 
-    public static float[] loadPoints(Resources resources, int i) {
+    public static float[] loadPoints(Resources resources, int i) throws Resources.NotFoundException {
         int[] intArray = resources.getIntArray(i);
-        int i2 = 0;
-        int i3 = 0;
-        for (int i4 = 0; i4 < intArray.length; i4 += 2) {
-            i2 = Math.max(i2, intArray[i4]);
-            i3 = Math.max(i3, intArray[i4 + 1]);
+        int iMax = 0;
+        int iMax2 = 0;
+        for (int i2 = 0; i2 < intArray.length; i2 += 2) {
+            iMax = Math.max(iMax, intArray[i2]);
+            iMax2 = Math.max(iMax2, intArray[i2 + 1]);
         }
         float[] fArr = new float[intArray.length];
-        for (int i5 = 0; i5 < intArray.length; i5 += 2) {
-            fArr[i5] = intArray[i5] / i2;
-            fArr[i5 + 1] = intArray[r3] / i3;
+        for (int i3 = 0; i3 < intArray.length; i3 += 2) {
+            fArr[i3] = intArray[i3] / iMax;
+            fArr[i3 + 1] = intArray[r3] / iMax2;
         }
         return fArr;
     }
 
     @Override // android.graphics.drawable.Drawable
     public final void draw(Canvas canvas) {
-        float m$1;
+        float fM$1;
         int i = this.mLevel;
         Rect bounds = getBounds();
         if (i == -1) {
@@ -143,7 +142,7 @@ public class BatteryMeterDrawableBase extends Drawable {
         int i2 = this.mHeight;
         int aspectRatio = (int) (getAspectRatio() * this.mHeight);
         int i3 = (this.mWidth - aspectRatio) / 2;
-        int round = Math.round(i2 * this.mButtonHeightFraction);
+        int iRound = Math.round(i2 * this.mButtonHeightFraction);
         Rect rect = this.mPadding;
         int i4 = rect.left + bounds.left;
         float f2 = i4;
@@ -152,10 +151,10 @@ public class BatteryMeterDrawableBase extends Drawable {
         this.mFrame.offset(i3, 0.0f);
         RectF rectF = this.mButtonFrame;
         float f4 = aspectRatio * 0.28f;
-        float round2 = this.mFrame.left + Math.round(f4);
+        float fRound = this.mFrame.left + Math.round(f4);
         RectF rectF2 = this.mFrame;
-        float f5 = round;
-        rectF.set(round2, rectF2.top, rectF2.right - Math.round(f4), this.mFrame.top + f5);
+        float f5 = iRound;
+        rectF.set(fRound, rectF2.top, rectF2.right - Math.round(f4), this.mFrame.top + f5);
         this.mFrame.top += f5;
         Paint paint = this.mBatteryPaint;
         int i5 = 0;
@@ -181,26 +180,26 @@ public class BatteryMeterDrawableBase extends Drawable {
             f = 0.0f;
         }
         if (f == 1.0f) {
-            m$1 = this.mButtonFrame.top;
+            fM$1 = this.mButtonFrame.top;
         } else {
             RectF rectF3 = this.mFrame;
-            m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f, rectF3.height(), rectF3.top);
+            fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f, rectF3.height(), rectF3.top);
         }
         this.mShapePath.reset();
         this.mOutlinePath.reset();
-        float height = (this.mFrame.height() + f5) * getRadiusRatio();
+        float fHeight = (this.mFrame.height() + f5) * getRadiusRatio();
         this.mShapePath.setFillType(Path.FillType.WINDING);
         Path path = this.mShapePath;
         RectF rectF4 = this.mFrame;
         Path.Direction direction = Path.Direction.CW;
-        path.addRoundRect(rectF4, height, height, direction);
+        path.addRoundRect(rectF4, fHeight, fHeight, direction);
         this.mShapePath.addRect(this.mButtonFrame, direction);
-        this.mOutlinePath.addRoundRect(this.mFrame, height, height, direction);
+        this.mOutlinePath.addRoundRect(this.mFrame, fHeight, fHeight, direction);
         Path path2 = new Path();
         path2.addRect(this.mButtonFrame, direction);
         this.mOutlinePath.op(path2, Path.Op.XOR);
         canvas.drawPath(this.mShapePath, this.mFramePaint);
-        this.mFrame.top = m$1;
+        this.mFrame.top = fM$1;
         canvas.save();
         canvas.clipRect(this.mFrame);
         canvas.drawPath(this.mShapePath, this.mBatteryPaint);

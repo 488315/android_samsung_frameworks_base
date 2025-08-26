@@ -1258,6 +1258,7 @@
     <string name="delete_blob_text">공유 데이터 삭제</string>
     <string name="demo_mode">시스템 UI 데모 모드</string>
     <string name="demote_explain_text">%1$s에서 더 이상 실시간 소식을 표시하지 않습니다. 설정에서 언제든지 변경할 수 있습니다.</string>
+    <string name="desktop_label">데스크톱 %d</string>
     <string name="desktop_mode_a11y_action_maximize_restore">창 최대화 또는 크기 복원</string>
     <string name="desktop_mode_a11y_action_snap_left">앱 창 크기 왼쪽으로 조절</string>
     <string name="desktop_mode_a11y_action_snap_right">앱 창 크기 오른쪽으로 조절</string>
@@ -1312,6 +1313,17 @@
     <string name="dex_touchpad_dialog_how_to_start_touchpad_tablet">태블릿 터치패드 실행 방법</string>
     <string name="dex_touchpad_dialog_pinch">두 손가락으로 확대/축소</string>
     <string name="dex_touchpad_dialog_pinch_desc">확대하거나 축소합니다.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content">좋아하는 앱에서 무언가를 쓰거나 그림을 그릴 때 S펜을 사용해 보세요. 모니터에서 커서 위치도 S펜으로 이동시킬 수 있습니다. 휴대전화 화면에서 이동하고 싶은 위치에 S펜을 꼭 찍어 보세요.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content_tablet">좋아하는 앱에서 무언가를 쓰거나 그림을 그릴 때 S펜을 사용해 보세요. 모니터에서 커서 위치도 S펜으로 이동시킬 수 있습니다. 태블릿 화면에서 이동하고 싶은 위치에 S펜을 꼭 찍어 보세요.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_content">마우스 좌클릭처럼 대상 선택, 앱 열기, 버튼 누르기 등의 동작입니다.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_content">원하는 방향으로 화면을 스크롤합니다.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_title">화면을 누른 상태에서 움직이기</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_title">누르기</string>
+    <string name="dex_touchpad_dialog_spen_gesture_title">S펜 커서</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_and_hold_title">화면을 길게 누르기</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_content">화면에서 항목을 선택합니다.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_content">화면 안에서 항목을 이동하거나 텍스트를 선택합니다.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_title">화면을 길게 누른 상태에서 움직이기</string>
     <string name="dex_touchpad_dialog_swipe">두 손가락으로 밀기</string>
     <string name="dex_touchpad_dialog_swipe_desc">원하는 방향으로 화면을 스크롤합니다.</string>
     <string name="dex_touchpad_dialog_swipe_left_right">세 손가락으로 왼쪽이나 오른쪽으로 밀기</string>
@@ -1353,6 +1365,7 @@
     <string name="disconnect_smart_view">Smart View 연결을 해제할까요?</string>
     <string name="dismiss_dialog">닫기</string>
     <string name="dismissible_keyguard_swipe">위로 스와이프하여 계속</string>
+    <string name="display_disconnected_to_change_user">사용자 전환을 위해 디스플레이 연결이 해제되었어요.</string>
     <string name="divider_panel_app_pair_to_edge">Edge 패널에 앱 조합 추가</string>
     <string name="divider_panel_change_layout">레이아웃 변경</string>
     <string name="divider_panel_rotate_clockwise">시계 방향으로 회전</string>
@@ -1410,6 +1423,7 @@
     <string name="drop_now_to_open_in_fullscreen_view">전체화면으로 열려면 지금 손을 떼세요</string>
     <string name="dropdown_menu">드롭다운 메뉴</string>
     <string name="durationMinutes">%d분</string>
+    <string name="dw_desktop_disabled_while_smart_view_is_in_use">Smart View 사용 중에는 데스크톱 작업 공간이 숨겨져요.</string>
     <string name="edge_feeds_preview_not_selected_tts">%s 항목을 선택하지 않았습니다.</string>
     <string name="edge_feeds_preview_selected_tts">%s 항목을 선택했습니다.</string>
     <string name="edge_lighting_action_description">Edge lighting 효과 한 번</string>
@@ -2628,6 +2642,7 @@ LG유플러스 홈페이지 또는 매장에서 정확한 번호를 확인하세
     <string name="ksh_group_system_notifications">알림</string>
     <string name="ksh_group_system_popup_view">팝업 화면</string>
     <string name="ksh_group_system_recents">최근 앱</string>
+    <string name="ksh_group_system_running_apps">최근 앱</string>
     <string name="ksh_group_system_screen_off">화면 꺼짐</string>
     <string name="ksh_group_system_show_emojis">이모지 표시</string>
     <string name="ksh_group_system_show_hanja_input">한자 입력 표시</string>
@@ -3179,9 +3194,13 @@ IT 관리자가 설정, 기업 액세스, 앱, 기기와 연결된 데이터, �
     <string name="music_share_description_second_line">친구의 Galaxy Buds와 내 Galaxy Buds에서 음악을 함께 들을 수 있습니다.</string>
     <string name="mw_caption_button_text_open_in_browser">브라우저에서 열기</string>
     <string name="mw_caption_button_text_remove_from_workspace">DeX 작업 공간에서 나가기</string>
+    <string name="mw_caption_button_text_restart_app">앱을 다시 시작하여 레이아웃 최적화</string>
     <string name="mw_caption_button_text_send_to_other_display">다른 디스플레이로 보내기</string>
     <string name="mw_caption_button_text_snap_to_left">왼쪽에 붙이기</string>
     <string name="mw_caption_button_text_snap_to_right">오른쪽에 붙이기</string>
+    <string name="mw_desktop_drag_handle_blocked_overheat">휴대전화가 과열되어 데스크톱 작업 공간이 숨겨졌어요. 기기가 식으면 다시 사용할 수 있어요.</string>
+    <string name="mw_desktop_drag_handle_blocked_sw_600">화면 확대 비율이 너무 커서 이 앱을 데스크톱 작업 공간으로 전환할 수 없어요. 확대 비율을 변경하고 다시 해보세요.</string>
+    <string name="mw_desktop_drag_handle_blocked_using_smart_view">Smart View 사용 중에는 앱을 데스크톱 보기로 전환할 수 없어요.</string>
     <string name="nav_bar">탐색 메뉴</string>
     <string name="nav_bar_layout">레이아웃</string>
     <string name="navigation_menu">탐색 메뉴</string>
@@ -3528,6 +3547,7 @@ IT 관리자가 설정, 기업 액세스, 앱, 기기와 연결된 데이터, �
     <string name="qs_custom_action_move_to_bottom">맨 아래로 이동</string>
     <string name="qs_custom_action_move_to_top">맨 위로 이동</string>
     <string name="qs_custom_action_move_up">위로 이동</string>
+    <string name="qs_custom_action_radio_button">라디오 버튼</string>
     <string name="qs_custom_action_removed_done">%s 버튼 삭제됨</string>
     <string name="qs_customizer_settings">빠른 설정창 설정</string>
     <string name="qs_detail_flashlight_title">손전등</string>
@@ -3622,6 +3642,7 @@ IT 관리자가 설정, 기업 액세스, 앱, 기기와 연결된 데이터, �
     <string name="qs_record_issue_label">문제 기록</string>
     <string name="qs_record_issue_start">시작</string>
     <string name="qs_record_issue_stop">중지</string>
+    <string name="qs_reset_complete">초기화되었습니다.</string>
     <string name="qs_sensor_privacy_dialog_cancel">취소</string>
     <string name="qs_sensor_privacy_dialog_turn_on">켜기</string>
     <string name="qs_sensor_privacy_dialog_unblock">차단 해제</string>
@@ -3904,7 +3925,6 @@ IT 관리자가 설정, 기업 액세스, 앱, 기기와 연결된 데이터, �
     <string name="retail_demo_reset_title">비밀번호 입력 필요</string>
     <string name="retry_face">얼굴 인증 다시 시도</string>
     <string name="reverse_folding_alert_view_warning_text">휴대전화를 열고 왼쪽부터 접으세요.</string>
-    <string name="reverse_folding_order_guide_text">왼쪽부터 먼저 접으세요.</string>
     <string name="right_icon">오른쪽 아이콘</string>
     <string name="right_keycode">오른쪽 키 코드</string>
     <string name="right_nav_bar_button_type">추가 오른쪽 버튼 유형</string>
@@ -4124,6 +4144,7 @@ IT 관리자가 설정, 기업 액세스, 앱, 기기와 연결된 데이터, �
     <string name="sec_decor_button_text_caption_pin">상단에 옵션 메뉴 고정</string>
     <string name="sec_decor_button_text_caption_unpin">옵션 메뉴 고정 해제</string>
     <string name="sec_decor_button_text_close">종료</string>
+    <string name="sec_decor_button_text_enter_full_screen">전체 화면</string>
     <string name="sec_decor_button_text_exit_full_screen">전체화면 종료</string>
     <string name="sec_decor_button_text_freeform">팝업 화면으로 열기</string>
     <string name="sec_decor_button_text_maximize">창 최대화</string>
@@ -4139,6 +4160,7 @@ IT 관리자가 설정, 기업 액세스, 앱, 기기와 연결된 데이터, �
     <string name="sec_decor_button_text_window_pin">맨 위에 고정</string>
     <string name="sec_decor_button_text_window_unpin">창 고정 해제</string>
     <string name="sec_decor_handle_text">빠른 옵션</string>
+    <string name="sec_decor_window_handle">창 핸들</string>
     <string name="sec_default_app">기본으로 설정됨</string>
     <string name="sec_devices_and_media_control">기기 제어 및 미디어 출력 버튼</string>
     <string name="sec_dlg_turn_on">켜기</string>

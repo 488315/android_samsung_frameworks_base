@@ -190,12 +190,12 @@ public class AutofillPopupWindow extends PopupWindow {
         setShowing(true);
         setDropDown(true);
         attachToAnchor(view, i, i2, i3);
-        WindowManager.LayoutParams createPopupLayoutParams = createPopupLayoutParams(view.getWindowToken());
-        this.mWindowLayoutParams = createPopupLayoutParams;
-        updateAboveAnchor(findDropDownPosition(view, createPopupLayoutParams, i, i2, createPopupLayoutParams.width, createPopupLayoutParams.height, i3, getAllowScrollingAnchorParent()));
-        createPopupLayoutParams.accessibilityIdOfAnchor = view.getAccessibilityViewId();
-        createPopupLayoutParams.packageName = view.getContext().getPackageName();
-        this.mWindowPresenter.show(createPopupLayoutParams, getTransitionEpicenter(), isLayoutInsetDecor(), view.getLayoutDirection());
+        WindowManager.LayoutParams layoutParamsCreatePopupLayoutParams = createPopupLayoutParams(view.getWindowToken());
+        this.mWindowLayoutParams = layoutParamsCreatePopupLayoutParams;
+        updateAboveAnchor(findDropDownPosition(view, layoutParamsCreatePopupLayoutParams, i, i2, layoutParamsCreatePopupLayoutParams.width, layoutParamsCreatePopupLayoutParams.height, i3, getAllowScrollingAnchorParent()));
+        layoutParamsCreatePopupLayoutParams.accessibilityIdOfAnchor = view.getAccessibilityViewId();
+        layoutParamsCreatePopupLayoutParams.packageName = view.getContext().getPackageName();
+        this.mWindowPresenter.show(layoutParamsCreatePopupLayoutParams, getTransitionEpicenter(), isLayoutInsetDecor(), view.getLayoutDirection());
     }
 
     @Override // android.widget.PopupWindow

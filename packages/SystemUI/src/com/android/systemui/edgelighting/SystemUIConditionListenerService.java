@@ -19,7 +19,7 @@ import com.android.systemui.statusbar.notification.NotificationClicker;
 import com.android.systemui.statusbar.notification.SubscreenNotificationController;
 import com.android.systemui.statusbar.notification.collection.NotifLiveDataImpl;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
-import com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator$attach$4;
+import com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManager;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
@@ -34,14 +34,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SystemUIConditionListenerService extends Service {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AnonymousClass1 mBinder = new AnonymousClass1();
     public NotifLiveDataImpl mEntries;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.SystemUIConditionListenerService$1, reason: invalid class name */
     public class AnonymousClass1 extends ISystemUIConditionListener.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -200,7 +198,7 @@ public class SystemUIConditionListenerService extends Service {
             ((Handler) Dependency.sDependency.getDependencyInner(Dependency.MAIN_HANDLER)).post(new Runnable() { // from class: com.android.systemui.edgelighting.SystemUIConditionListenerService$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SystemUIConditionListenerService.AnonymousClass1 anonymousClass1 = SystemUIConditionListenerService.AnonymousClass1.this;
+                    SystemUIConditionListenerService.AnonymousClass1 anonymousClass1 = this.f$0;
                     String str2 = str;
                     int i = SystemUIConditionListenerService.AnonymousClass1.$r8$clinit;
                     anonymousClass1.getClass();
@@ -212,7 +210,7 @@ public class SystemUIConditionListenerService extends Service {
                     while (i2 < size) {
                         Object obj = arrayList.get(i2);
                         i2++;
-                        ((HeadsUpCoordinator$attach$4) obj).turnToHeadsUp(entry);
+                        ((HeadsUpCoordinator.AnonymousClass4) obj).turnToHeadsUp(entry);
                     }
                 }
             });

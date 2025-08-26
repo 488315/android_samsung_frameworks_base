@@ -91,6 +91,11 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
+        public int getModeForSameAssistantActivity(Intent intent) throws RemoteException {
+            return 0;
+        }
+
+        @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public int getMultiSplitFlags() throws RemoteException {
             return 0;
         }
@@ -226,6 +231,10 @@ public interface IMultiTaskingBinder extends IInterface {
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public void notifyDragSplitAppIconHasDrawable(boolean z) throws RemoteException {
+        }
+
+        @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
+        public void notifyDragTaskToMoveStarted() throws RemoteException {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
@@ -394,6 +403,8 @@ public interface IMultiTaskingBinder extends IInterface {
 
     ParceledListSlice getMinimizedFreeformTasksForCurrentUser() throws RemoteException;
 
+    int getModeForSameAssistantActivity(Intent intent) throws RemoteException;
+
     int getMultiSplitFlags() throws RemoteException;
 
     StringParceledListSlice getMultiWindowBlockListApp() throws RemoteException;
@@ -449,6 +460,8 @@ public interface IMultiTaskingBinder extends IInterface {
     boolean minimizeTaskToSpecificPosition(int i, boolean z, int i2, int i3) throws RemoteException;
 
     void notifyDragSplitAppIconHasDrawable(boolean z) throws RemoteException;
+
+    void notifyDragTaskToMoveStarted() throws RemoteException;
 
     void notifyFreeformMinimizeAnimationEnd(int i, PointF pointF) throws RemoteException;
 
@@ -521,7 +534,7 @@ public interface IMultiTaskingBinder extends IInterface {
         static final int TRANSACTION_changeToHorizontalSplitLayout = 63;
         static final int TRANSACTION_clearAllDockingTasks = 68;
         static final int TRANSACTION_dismissSplitTask = 62;
-        static final int TRANSACTION_enableHighResolutionsForExternalDesktop = 74;
+        static final int TRANSACTION_enableHighResolutionsForExternalDesktop = 75;
         static final int TRANSACTION_exitMultiWindow = 1;
         static final int TRANSACTION_finishNaturalSwitching = 59;
         static final int TRANSACTION_getAllowedMultiWindowPackageList = 6;
@@ -530,6 +543,7 @@ public interface IMultiTaskingBinder extends IInterface {
         static final int TRANSACTION_getFreeformContainerPoint = 18;
         static final int TRANSACTION_getMWDisableRequesters = 9;
         static final int TRANSACTION_getMinimizedFreeformTasksForCurrentUser = 19;
+        static final int TRANSACTION_getModeForSameAssistantActivity = 71;
         static final int TRANSACTION_getMultiSplitFlags = 21;
         static final int TRANSACTION_getMultiWindowBlockListApp = 8;
         static final int TRANSACTION_getMultiWindowModeStates = 2;
@@ -541,7 +555,7 @@ public interface IMultiTaskingBinder extends IInterface {
         static final int TRANSACTION_getTaskInfoFromPackageName = 31;
         static final int TRANSACTION_getVisibleTasks = 20;
         static final int TRANSACTION_hasMinimizedToggleTasks = 46;
-        static final int TRANSACTION_inDesktopWindowing = 73;
+        static final int TRANSACTION_inDesktopWindowing = 74;
         static final int TRANSACTION_initDockingBounds = 64;
         static final int TRANSACTION_isAllTasksResizable = 13;
         static final int TRANSACTION_isAllowedMultiWindowPackage = 5;
@@ -558,9 +572,10 @@ public interface IMultiTaskingBinder extends IInterface {
         static final int TRANSACTION_minimizeTaskById = 33;
         static final int TRANSACTION_minimizeTaskToSpecificPosition = 36;
         static final int TRANSACTION_notifyDragSplitAppIconHasDrawable = 56;
+        static final int TRANSACTION_notifyDragTaskToMoveStarted = 76;
         static final int TRANSACTION_notifyFreeformMinimizeAnimationEnd = 16;
         static final int TRANSACTION_preventNaturalSwitching = 60;
-        static final int TRANSACTION_registerDexTransientDelayListener = 71;
+        static final int TRANSACTION_registerDexTransientDelayListener = 72;
         static final int TRANSACTION_registerFreeformCallback = 14;
         static final int TRANSACTION_registerRemoteAppTransitionListener = 11;
         static final int TRANSACTION_removeFocusedTask = 32;
@@ -574,7 +589,7 @@ public interface IMultiTaskingBinder extends IInterface {
         static final int TRANSACTION_setCustomDensityEnabled = 54;
         static final int TRANSACTION_setEmbedActivityPackageEnabled = 23;
         static final int TRANSACTION_setEnsureLaunchSplitEnabled = 55;
-        static final int TRANSACTION_setInDesktopWindowing = 72;
+        static final int TRANSACTION_setInDesktopWindowing = 73;
         static final int TRANSACTION_setMultiWindowEnabledForUser = 10;
         static final int TRANSACTION_setNaviStarSplitImmersiveMode = 40;
         static final int TRANSACTION_setSplitActivityPackageEnabled = 27;
@@ -599,7 +614,7 @@ public interface IMultiTaskingBinder extends IInterface {
 
         @Override // android.os.Binder
         public int getMaxTransactionId() {
-            return 73;
+            return 75;
         }
 
         public Stub() {
@@ -610,9 +625,9 @@ public interface IMultiTaskingBinder extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMultiTaskingBinder.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMultiTaskingBinder)) {
-                return (IMultiTaskingBinder) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMultiTaskingBinder.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMultiTaskingBinder)) {
+                return (IMultiTaskingBinder) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -760,13 +775,17 @@ public interface IMultiTaskingBinder extends IInterface {
                 case 70:
                     return "startAssistantActivityToSplit";
                 case 71:
-                    return "registerDexTransientDelayListener";
+                    return "getModeForSameAssistantActivity";
                 case 72:
-                    return "setInDesktopWindowing";
+                    return "registerDexTransientDelayListener";
                 case 73:
-                    return "inDesktopWindowing";
+                    return "setInDesktopWindowing";
                 case 74:
+                    return "inDesktopWindowing";
+                case 75:
                     return "enableHighResolutionsForExternalDesktop";
+                case 76:
+                    return "notifyDragTaskToMoveStarted";
                 default:
                     return null;
             }
@@ -788,26 +807,26 @@ public interface IMultiTaskingBinder extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    boolean readBoolean = parcel.readBoolean();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean exitMultiWindow = exitMultiWindow(readStrongBinder, readBoolean);
+                    boolean zExitMultiWindow = exitMultiWindow(strongBinder, z);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(exitMultiWindow);
+                    parcel2.writeBoolean(zExitMultiWindow);
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int multiWindowModeStates = getMultiWindowModeStates(readInt);
+                    int multiWindowModeStates = getMultiWindowModeStates(i3);
                     parcel2.writeNoException();
                     parcel2.writeInt(multiWindowModeStates);
                     return true;
                 case 3:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean supportsMultiWindow = supportsMultiWindow(readStrongBinder2);
+                    boolean zSupportsMultiWindow = supportsMultiWindow(strongBinder2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(supportsMultiWindow);
+                    parcel2.writeBoolean(zSupportsMultiWindow);
                     return true;
                 case 4:
                     ActivityInfo activityInfo = (ActivityInfo) parcel.readTypedObject(ActivityInfo.CREATOR);
@@ -817,11 +836,11 @@ public interface IMultiTaskingBinder extends IInterface {
                     parcel2.writeInt(resizeMode);
                     return true;
                 case 5:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isAllowedMultiWindowPackage = isAllowedMultiWindowPackage(readString);
+                    boolean zIsAllowedMultiWindowPackage = isAllowedMultiWindowPackage(string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAllowedMultiWindowPackage);
+                    parcel2.writeBoolean(zIsAllowedMultiWindowPackage);
                     return true;
                 case 6:
                     List<String> allowedMultiWindowPackageList = getAllowedMultiWindowPackageList();
@@ -829,11 +848,11 @@ public interface IMultiTaskingBinder extends IInterface {
                     parcel2.writeStringList(allowedMultiWindowPackageList);
                     return true;
                 case 7:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isMultiWindowBlockListApp = isMultiWindowBlockListApp(readString2);
+                    boolean zIsMultiWindowBlockListApp = isMultiWindowBlockListApp(string2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMultiWindowBlockListApp);
+                    parcel2.writeBoolean(zIsMultiWindowBlockListApp);
                     return true;
                 case 8:
                     StringParceledListSlice multiWindowBlockListApp = getMultiWindowBlockListApp();
@@ -846,52 +865,52 @@ public interface IMultiTaskingBinder extends IInterface {
                     parcel2.writeTypedObject(mWDisableRequesters, 1);
                     return true;
                 case 10:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt2 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setMultiWindowEnabledForUser(readString3, readString4, readBoolean2, readInt2);
+                    setMultiWindowEnabledForUser(string3, string4, z2, i4);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    IRemoteAppTransitionListener asInterface = IRemoteAppTransitionListener.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteAppTransitionListener iRemoteAppTransitionListenerAsInterface = IRemoteAppTransitionListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerRemoteAppTransitionListener(asInterface);
+                    registerRemoteAppTransitionListener(iRemoteAppTransitionListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    IRemoteAppTransitionListener asInterface2 = IRemoteAppTransitionListener.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteAppTransitionListener iRemoteAppTransitionListenerAsInterface2 = IRemoteAppTransitionListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterRemoteAppTransitionListener(asInterface2);
+                    unregisterRemoteAppTransitionListener(iRemoteAppTransitionListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAllTasksResizable = isAllTasksResizable(readInt3, readInt4, readInt5);
+                    boolean zIsAllTasksResizable = isAllTasksResizable(i5, i6, i7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAllTasksResizable);
+                    parcel2.writeBoolean(zIsAllTasksResizable);
                     return true;
                 case 14:
-                    IFreeformCallback asInterface3 = IFreeformCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IFreeformCallback iFreeformCallbackAsInterface = IFreeformCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerFreeformCallback(asInterface3);
+                    registerFreeformCallback(iFreeformCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    IFreeformCallback asInterface4 = IFreeformCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IFreeformCallback iFreeformCallbackAsInterface2 = IFreeformCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterFreeformCallback(asInterface4);
+                    unregisterFreeformCallback(iFreeformCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     PointF pointF = (PointF) parcel.readTypedObject(PointF.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyFreeformMinimizeAnimationEnd(readInt6, pointF);
+                    notifyFreeformMinimizeAnimationEnd(i8, pointF);
                     parcel2.writeNoException();
                     return true;
                 case 17:
@@ -911,9 +930,9 @@ public interface IMultiTaskingBinder extends IInterface {
                     parcel2.writeTypedObject(minimizedFreeformTasksForCurrentUser, 1);
                     return true;
                 case 20:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice visibleTasks = getVisibleTasks(readInt7);
+                    ParceledListSlice visibleTasks = getVisibleTasks(i9);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(visibleTasks, 1);
                     return true;
@@ -923,19 +942,19 @@ public interface IMultiTaskingBinder extends IInterface {
                     parcel2.writeInt(multiSplitFlags);
                     return true;
                 case 22:
-                    String readString5 = parcel.readString();
-                    int readInt8 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean embedActivityPackageEnabled = getEmbedActivityPackageEnabled(readString5, readInt8);
+                    boolean embedActivityPackageEnabled = getEmbedActivityPackageEnabled(string5, i10);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(embedActivityPackageEnabled);
                     return true;
                 case 23:
-                    String readString6 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    int readInt9 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setEmbedActivityPackageEnabled(readString6, readBoolean3, readInt9);
+                    setEmbedActivityPackageEnabled(string6, z3, i11);
                     parcel2.writeNoException();
                     return true;
                 case 24:
@@ -949,159 +968,159 @@ public interface IMultiTaskingBinder extends IInterface {
                     parcel2.writeStringList(splitActivityAllowPackages);
                     return true;
                 case 26:
-                    String readString7 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int splitActivityPackageEnabled = getSplitActivityPackageEnabled(readString7, readInt10);
+                    int splitActivityPackageEnabled = getSplitActivityPackageEnabled(string7, i12);
                     parcel2.writeNoException();
                     parcel2.writeInt(splitActivityPackageEnabled);
                     return true;
                 case 27:
-                    String readString8 = parcel.readString();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setSplitActivityPackageEnabled(readString8, readInt11, readInt12);
+                    setSplitActivityPackageEnabled(string8, i13, i14);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCornerGestureEnabledWithSettings(readBoolean4);
+                    setCornerGestureEnabledWithSettings(z4);
                     parcel2.writeNoException();
                     return true;
                 case 29:
                     MotionEvent motionEvent = (MotionEvent) parcel.readTypedObject(MotionEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isValidCornerGesture = isValidCornerGesture(motionEvent);
+                    boolean zIsValidCornerGesture = isValidCornerGesture(motionEvent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isValidCornerGesture);
+                    parcel2.writeBoolean(zIsValidCornerGesture);
                     return true;
                 case 30:
-                    boolean isCornerGestureRunning = isCornerGestureRunning();
+                    boolean zIsCornerGestureRunning = isCornerGestureRunning();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCornerGestureRunning);
+                    parcel2.writeBoolean(zIsCornerGestureRunning);
                     return true;
                 case 31:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice taskInfoFromPackageName = getTaskInfoFromPackageName(readString9);
+                    ParceledListSlice taskInfoFromPackageName = getTaskInfoFromPackageName(string9);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(taskInfoFromPackageName, 1);
                     return true;
                 case 32:
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean removeFocusedTask = removeFocusedTask(readInt13);
+                    boolean zRemoveFocusedTask = removeFocusedTask(i15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeFocusedTask);
+                    parcel2.writeBoolean(zRemoveFocusedTask);
                     return true;
                 case 33:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean minimizeTaskById = minimizeTaskById(readInt14);
+                    boolean zMinimizeTaskById = minimizeTaskById(i16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(minimizeTaskById);
+                    parcel2.writeBoolean(zMinimizeTaskById);
                     return true;
                 case 34:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean minimizeAllTasks = minimizeAllTasks(readInt15);
+                    boolean zMinimizeAllTasks = minimizeAllTasks(i17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(minimizeAllTasks);
+                    parcel2.writeBoolean(zMinimizeAllTasks);
                     return true;
                 case 35:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean minimizeAllTasksByRecents = minimizeAllTasksByRecents(readInt16);
+                    boolean zMinimizeAllTasksByRecents = minimizeAllTasksByRecents(i18);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(minimizeAllTasksByRecents);
+                    parcel2.writeBoolean(zMinimizeAllTasksByRecents);
                     return true;
                 case 36:
-                    int readInt17 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean minimizeTaskToSpecificPosition = minimizeTaskToSpecificPosition(readInt17, readBoolean5, readInt18, readInt19);
+                    boolean zMinimizeTaskToSpecificPosition = minimizeTaskToSpecificPosition(i19, z5, i20, i21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(minimizeTaskToSpecificPosition);
+                    parcel2.writeBoolean(zMinimizeTaskToSpecificPosition);
                     return true;
                 case 37:
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSplitImmersiveMode(readBoolean6);
+                    setSplitImmersiveMode(z6);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    boolean isSplitImmersiveModeEnabled = isSplitImmersiveModeEnabled();
+                    boolean zIsSplitImmersiveModeEnabled = isSplitImmersiveModeEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSplitImmersiveModeEnabled);
+                    parcel2.writeBoolean(zIsSplitImmersiveModeEnabled);
                     return true;
                 case 39:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    saveFreeformBounds(readInt20);
+                    saveFreeformBounds(i22);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    boolean readBoolean7 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setNaviStarSplitImmersiveMode(readBoolean7);
+                    setNaviStarSplitImmersiveMode(z7);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setStayFocusActivityEnabled(readBoolean8);
+                    setStayFocusActivityEnabled(z8);
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    boolean readBoolean9 = parcel.readBoolean();
-                    boolean readBoolean10 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setStayFocusAndTopResumedActivityEnabled(readBoolean9, readBoolean10);
+                    setStayFocusAndTopResumedActivityEnabled(z9, z10);
                     parcel2.writeNoException();
                     return true;
                 case 43:
                     PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isVisibleTaskInDexDisplay = isVisibleTaskInDexDisplay(pendingIntent);
+                    boolean zIsVisibleTaskInDexDisplay = isVisibleTaskInDexDisplay(pendingIntent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVisibleTaskInDexDisplay);
+                    parcel2.writeBoolean(zIsVisibleTaskInDexDisplay);
                     return true;
                 case 44:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isVisibleTaskByTaskIdInDexDisplay = isVisibleTaskByTaskIdInDexDisplay(readInt21);
+                    boolean zIsVisibleTaskByTaskIdInDexDisplay = isVisibleTaskByTaskIdInDexDisplay(i23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVisibleTaskByTaskIdInDexDisplay);
+                    parcel2.writeBoolean(zIsVisibleTaskByTaskIdInDexDisplay);
                     return true;
                 case 45:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(PendingIntent.CREATOR);
-                    ArrayList readArrayList = parcel.readArrayList(getClass().getClassLoader());
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(PendingIntent.CREATOR);
+                    ArrayList arrayList = parcel.readArrayList(getClass().getClassLoader());
                     parcel.enforceNoDataAvail();
-                    boolean shouldDeferEnterSplit = shouldDeferEnterSplit(createTypedArrayList, readArrayList);
+                    boolean zShouldDeferEnterSplit = shouldDeferEnterSplit(arrayListCreateTypedArrayList, arrayList);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shouldDeferEnterSplit);
+                    parcel2.writeBoolean(zShouldDeferEnterSplit);
                     return true;
                 case 46:
-                    boolean hasMinimizedToggleTasks = hasMinimizedToggleTasks();
+                    boolean zHasMinimizedToggleTasks = hasMinimizedToggleTasks();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasMinimizedToggleTasks);
+                    parcel2.writeBoolean(zHasMinimizedToggleTasks);
                     return true;
                 case 47:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    int dexTaskInfoFlags = getDexTaskInfoFlags(readStrongBinder3);
+                    int dexTaskInfoFlags = getDexTaskInfoFlags(strongBinder3);
                     parcel2.writeNoException();
                     parcel2.writeInt(dexTaskInfoFlags);
                     return true;
                 case 48:
-                    int readInt22 = parcel.readInt();
-                    boolean readBoolean11 = parcel.readBoolean();
+                    int i24 = parcel.readInt();
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBoostFreeformTaskLayer(readInt22, readBoolean11);
+                    setBoostFreeformTaskLayer(i24, z11);
                     parcel2.writeNoException();
                     return true;
                 case 49:
@@ -1111,157 +1130,167 @@ public interface IMultiTaskingBinder extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 50:
-                    boolean supportMultiSplitAppMinimumSize = supportMultiSplitAppMinimumSize();
+                    boolean zSupportMultiSplitAppMinimumSize = supportMultiSplitAppMinimumSize();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(supportMultiSplitAppMinimumSize);
+                    parcel2.writeBoolean(zSupportMultiSplitAppMinimumSize);
                     return true;
                 case 51:
                     updateMultiSplitAppMinimumSize();
                     parcel2.writeNoException();
                     return true;
                 case 52:
-                    boolean isDismissedFlexPanelMode = isDismissedFlexPanelMode();
+                    boolean zIsDismissedFlexPanelMode = isDismissedFlexPanelMode();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDismissedFlexPanelMode);
+                    parcel2.writeBoolean(zIsDismissedFlexPanelMode);
                     return true;
                 case 53:
-                    boolean readBoolean12 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBlockedMinimizeFreeformEnable(readBoolean12);
+                    setBlockedMinimizeFreeformEnable(z12);
                     return true;
                 case 54:
-                    int readInt23 = parcel.readInt();
-                    boolean readBoolean13 = parcel.readBoolean();
+                    int i25 = parcel.readInt();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCustomDensityEnabled(readInt23, readBoolean13);
+                    setCustomDensityEnabled(i25, z13);
                     parcel2.writeNoException();
                     return true;
                 case 55:
-                    boolean readBoolean14 = parcel.readBoolean();
+                    boolean z14 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setEnsureLaunchSplitEnabled(readBoolean14);
+                    setEnsureLaunchSplitEnabled(z14);
                     parcel2.writeNoException();
                     return true;
                 case 56:
-                    boolean readBoolean15 = parcel.readBoolean();
+                    boolean z15 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyDragSplitAppIconHasDrawable(readBoolean15);
+                    notifyDragSplitAppIconHasDrawable(z15);
                     parcel2.writeNoException();
                     return true;
                 case 57:
-                    int readInt24 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    SurfaceFreezerSnapshot surfaceFreezerSnapshot = getSurfaceFreezerSnapshot(readInt24);
+                    SurfaceFreezerSnapshot surfaceFreezerSnapshot = getSurfaceFreezerSnapshot(i26);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(surfaceFreezerSnapshot, 1);
                     return true;
                 case 58:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean startNaturalSwitching = startNaturalSwitching(readStrongBinder4, readStrongBinder5);
+                    boolean zStartNaturalSwitching = startNaturalSwitching(strongBinder4, strongBinder5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(startNaturalSwitching);
+                    parcel2.writeBoolean(zStartNaturalSwitching);
                     return true;
                 case 59:
                     finishNaturalSwitching();
                     parcel2.writeNoException();
                     return true;
                 case 60:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean preventNaturalSwitching = preventNaturalSwitching(readInt25);
+                    boolean zPreventNaturalSwitching = preventNaturalSwitching(i27);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(preventNaturalSwitching);
+                    parcel2.writeBoolean(zPreventNaturalSwitching);
                     return true;
                 case 61:
-                    boolean isFlexPanelRunning = isFlexPanelRunning();
+                    boolean zIsFlexPanelRunning = isFlexPanelRunning();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFlexPanelRunning);
+                    parcel2.writeBoolean(zIsFlexPanelRunning);
                     return true;
                 case 62:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    boolean readBoolean16 = parcel.readBoolean();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    boolean z16 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    dismissSplitTask(readStrongBinder6, readBoolean16);
+                    dismissSplitTask(strongBinder6, z16);
                     parcel2.writeNoException();
                     return true;
                 case 63:
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    changeToHorizontalSplitLayout(readStrongBinder7);
+                    changeToHorizontalSplitLayout(strongBinder7);
                     parcel2.writeNoException();
                     return true;
                 case 64:
                     Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
                     Rect rect2 = (Rect) parcel.readTypedObject(Rect.CREATOR);
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    initDockingBounds(rect, rect2, readInt26);
+                    initDockingBounds(rect, rect2, i28);
                     parcel2.writeNoException();
                     return true;
                 case 65:
-                    int readInt27 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setCandidateTask(readInt27);
+                    setCandidateTask(i29);
                     parcel2.writeNoException();
                     return true;
                 case 66:
-                    int readInt28 = parcel.readInt();
-                    int readInt29 = parcel.readInt();
-                    int readInt30 = parcel.readInt();
+                    int i30 = parcel.readInt();
+                    int i31 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int calculateMaxWidth = calculateMaxWidth(readInt28, readInt29, readInt30);
+                    int iCalculateMaxWidth = calculateMaxWidth(i30, i31, i32);
                     parcel2.writeNoException();
-                    parcel2.writeInt(calculateMaxWidth);
+                    parcel2.writeInt(iCalculateMaxWidth);
                     return true;
                 case 67:
-                    int readInt31 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     Rect rect3 = (Rect) parcel.readTypedObject(Rect.CREATOR);
                     parcel.enforceNoDataAvail();
-                    resizeOtherTaskIfNeeded(readInt31, rect3);
+                    resizeOtherTaskIfNeeded(i33, rect3);
                     parcel2.writeNoException();
                     return true;
                 case 68:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearAllDockingTasks(readString10);
+                    clearAllDockingTasks(string10);
                     parcel2.writeNoException();
                     return true;
                 case 69:
-                    boolean z = toggleFreeformWindowingMode();
+                    boolean z17 = toggleFreeformWindowingMode();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(z);
+                    parcel2.writeBoolean(z17);
                     return true;
                 case 70:
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    float readFloat = parcel.readFloat();
+                    float f = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    startAssistantActivityToSplit(intent, readFloat);
+                    startAssistantActivityToSplit(intent, f);
                     parcel2.writeNoException();
                     return true;
                 case 71:
-                    IDexTransientCaptionDelayListener asInterface5 = IDexTransientCaptionDelayListener.Stub.asInterface(parcel.readStrongBinder());
+                    Intent intent2 = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    registerDexTransientDelayListener(asInterface5);
+                    int modeForSameAssistantActivity = getModeForSameAssistantActivity(intent2);
                     parcel2.writeNoException();
+                    parcel2.writeInt(modeForSameAssistantActivity);
                     return true;
                 case 72:
-                    boolean readBoolean17 = parcel.readBoolean();
+                    IDexTransientCaptionDelayListener iDexTransientCaptionDelayListenerAsInterface = IDexTransientCaptionDelayListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setInDesktopWindowing(readBoolean17);
+                    registerDexTransientDelayListener(iDexTransientCaptionDelayListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 73:
-                    boolean inDesktopWindowing = inDesktopWindowing();
+                    boolean z18 = parcel.readBoolean();
+                    parcel.enforceNoDataAvail();
+                    setInDesktopWindowing(z18);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(inDesktopWindowing);
                     return true;
                 case 74:
-                    boolean readBoolean18 = parcel.readBoolean();
-                    parcel.enforceNoDataAvail();
-                    enableHighResolutionsForExternalDesktop(readBoolean18);
+                    boolean zInDesktopWindowing = inDesktopWindowing();
                     parcel2.writeNoException();
+                    parcel2.writeBoolean(zInDesktopWindowing);
+                    return true;
+                case 75:
+                    boolean z19 = parcel.readBoolean();
+                    parcel.enforceNoDataAvail();
+                    enableHighResolutionsForExternalDesktop(z19);
+                    parcel2.writeNoException();
+                    return true;
+                case 76:
+                    notifyDragTaskToMoveStarted();
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -1286,1159 +1315,1186 @@ public interface IMultiTaskingBinder extends IInterface {
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean exitMultiWindow(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public int getMultiWindowModeStates(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean supportsMultiWindow(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public int getResizeMode(ActivityInfo activityInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeTypedObject(activityInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(activityInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean isAllowedMultiWindowPackage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public List<String> getAllowedMultiWindowPackageList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean isMultiWindowBlockListApp(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public StringParceledListSlice getMultiWindowBlockListApp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StringParceledListSlice) obtain2.readTypedObject(StringParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StringParceledListSlice) parcelObtain2.readTypedObject(StringParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public StringParceledListSlice getMWDisableRequesters() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StringParceledListSlice) obtain2.readTypedObject(StringParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StringParceledListSlice) parcelObtain2.readTypedObject(StringParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setMultiWindowEnabledForUser(String str, String str2, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void registerRemoteAppTransitionListener(IRemoteAppTransitionListener iRemoteAppTransitionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteAppTransitionListener);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteAppTransitionListener);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void unregisterRemoteAppTransitionListener(IRemoteAppTransitionListener iRemoteAppTransitionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteAppTransitionListener);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteAppTransitionListener);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean isAllTasksResizable(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void registerFreeformCallback(IFreeformCallback iFreeformCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongInterface(iFreeformCallback);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFreeformCallback);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void unregisterFreeformCallback(IFreeformCallback iFreeformCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongInterface(iFreeformCallback);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFreeformCallback);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void notifyFreeformMinimizeAnimationEnd(int i, PointF pointF) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pointF, 0);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pointF, 0);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void reportFreeformContainerPoint(PointF pointF) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeTypedObject(pointF, 0);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pointF, 0);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public PointF getFreeformContainerPoint() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PointF) obtain2.readTypedObject(PointF.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PointF) parcelObtain2.readTypedObject(PointF.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public ParceledListSlice getMinimizedFreeformTasksForCurrentUser() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public ParceledListSlice getVisibleTasks(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public int getMultiSplitFlags() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean getEmbedActivityPackageEnabled(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setEmbedActivityPackageEnabled(String str, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public List<String> getSupportEmbedActivityPackages() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public List<String> getSplitActivityAllowPackages() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public int getSplitActivityPackageEnabled(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setSplitActivityPackageEnabled(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setCornerGestureEnabledWithSettings(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean isValidCornerGesture(MotionEvent motionEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeTypedObject(motionEvent, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(motionEvent, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean isCornerGestureRunning() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public ParceledListSlice getTaskInfoFromPackageName(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean removeFocusedTask(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean minimizeTaskById(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean minimizeAllTasks(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean minimizeAllTasksByRecents(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean minimizeTaskToSpecificPosition(int i, boolean z, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setSplitImmersiveMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean isSplitImmersiveModeEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void saveFreeformBounds(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setNaviStarSplitImmersiveMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setStayFocusActivityEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setStayFocusAndTopResumedActivityEnabled(boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean isVisibleTaskInDexDisplay(PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean isVisibleTaskByTaskIdInDexDisplay(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean shouldDeferEnterSplit(List<PendingIntent> list, List list2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeList(list2);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeList(list2);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean hasMinimizedToggleTasks() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public int getDexTaskInfoFlags(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setBoostFreeformTaskLayer(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void toggleFreeformWindowingModeForDex(WindowContainerToken windowContainerToken) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeTypedObject(windowContainerToken, 0);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(windowContainerToken, 0);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean supportMultiSplitAppMinimumSize() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void updateMultiSplitAppMinimumSize() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean isDismissedFlexPanelMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setBlockedMinimizeFreeformEnable(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(53, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(53, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setCustomDensityEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setEnsureLaunchSplitEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void notifyDragSplitAppIconHasDrawable(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public SurfaceFreezerSnapshot getSurfaceFreezerSnapshot(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SurfaceFreezerSnapshot) obtain2.readTypedObject(SurfaceFreezerSnapshot.CREATOR);
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SurfaceFreezerSnapshot) parcelObtain2.readTypedObject(SurfaceFreezerSnapshot.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean startNaturalSwitching(IBinder iBinder, IBinder iBinder2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongBinder(iBinder2);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void finishNaturalSwitching() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean preventNaturalSwitching(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean isFlexPanelRunning() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void dismissSplitTask(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void changeToHorizontalSplitLayout(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void initDockingBounds(Rect rect, Rect rect2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeTypedObject(rect2, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeTypedObject(rect2, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setCandidateTask(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public int calculateMaxWidth(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void resizeOtherTaskIfNeeded(int i, Rect rect) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(rect, 0);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void clearAllDockingTasks(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean toggleFreeformWindowingMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void startAssistantActivityToSplit(Intent intent, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
+                }
+            }
+
+            @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
+            public int getModeForSameAssistantActivity(Intent intent) throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
+                try {
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
+                } finally {
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void registerDexTransientDelayListener(IDexTransientCaptionDelayListener iDexTransientCaptionDelayListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDexTransientCaptionDelayListener);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDexTransientCaptionDelayListener);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void setInDesktopWindowing(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public boolean inDesktopWindowing() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
             public void enableHighResolutionsForExternalDesktop(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
+                }
+            }
+
+            @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
+            public void notifyDragTaskToMoveStarted() throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                try {
+                    parcelObtain.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
+                    this.mRemote.transact(76, parcelObtain, null, 1);
+                } finally {
+                    parcelObtain.recycle();
                 }
             }
         }

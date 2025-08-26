@@ -12,12 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.TextView;
-import androidx.compose.runtime.OpaqueKey$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.android.systemui.bouncer.ui.helper.BouncerHapticPlayer;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NumPadKey extends ViewGroup implements NumPadAnimationListener {
     public static String[] sKlondike;
@@ -104,36 +102,27 @@ public class NumPadKey extends ViewGroup implements NumPadAnimationListener {
         ?? r1 = new View.OnClickListener() { // from class: com.android.keyguard.NumPadKey.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                View findViewById;
+                View viewFindViewById;
                 NumPadKey numPadKey = NumPadKey.this;
-                if (numPadKey.mTextView == null && numPadKey.mTextViewResId > 0 && (findViewById = numPadKey.getRootView().findViewById(NumPadKey.this.mTextViewResId)) != null && (findViewById instanceof PasswordTextView)) {
-                    NumPadKey.this.mTextView = (PasswordTextView) findViewById;
+                if (numPadKey.mTextView == null && numPadKey.mTextViewResId > 0 && (viewFindViewById = numPadKey.getRootView().findViewById(NumPadKey.this.mTextViewResId)) != null && (viewFindViewById instanceof PasswordTextView)) {
+                    NumPadKey.this.mTextView = (PasswordTextView) viewFindViewById;
                 }
                 PasswordTextView passwordTextView = NumPadKey.this.mTextView;
                 if (passwordTextView != null && passwordTextView.isEnabled()) {
                     NumPadKey numPadKey2 = NumPadKey.this;
-                    PasswordTextView passwordTextView2 = numPadKey2.mTextView;
-                    char forDigit = Character.forDigit(numPadKey2.mDigit, 10);
-                    CharSequence transformedText = passwordTextView2.getTransformedText();
-                    if (passwordTextView2.mText.length() < passwordTextView2.mMaxLength && passwordTextView2.getTextCharsSize() < passwordTextView2.mMaxLength) {
-                        String m = OpaqueKey$$ExternalSyntheticOutline0.m(new StringBuilder(), passwordTextView2.mText, forDigit);
-                        passwordTextView2.mText = m;
-                        passwordTextView2.onAppend(forDigit, m.length());
-                        passwordTextView2.onUserActivity();
-                        passwordTextView2.sendAccessibilityEventTypeViewTextChanged(transformedText, ((StringBuilder) transformedText).length(), 0, 1);
-                    }
+                    numPadKey2.mTextView.append(Character.forDigit(numPadKey2.mDigit, 10));
                 }
                 NumPadKey.this.mPM.userActivity(SystemClock.uptimeMillis(), false);
             }
         };
         this.mListener = r1;
         setFocusable(true);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.NumPadKey, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.NumPadKey, i, i2);
         try {
-            int i3 = obtainStyledAttributes.getInt(0, -1);
+            int i3 = typedArrayObtainStyledAttributes.getInt(0, -1);
             this.mDigit = i3;
-            this.mTextViewResId = obtainStyledAttributes.getResourceId(1, 0);
-            obtainStyledAttributes.recycle();
+            this.mTextViewResId = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+            typedArrayObtainStyledAttributes.recycle();
             setOnClickListener(r1);
             this.mPM = (PowerManager) ((ViewGroup) this).mContext.getSystemService("power");
             ((LayoutInflater) getContext().getSystemService("layout_inflater")).inflate(i2, (ViewGroup) this, true);
@@ -157,7 +146,7 @@ public class NumPadKey extends ViewGroup implements NumPadAnimationListener {
             }
             setContentDescription(this.mDigitText.getText().toString());
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

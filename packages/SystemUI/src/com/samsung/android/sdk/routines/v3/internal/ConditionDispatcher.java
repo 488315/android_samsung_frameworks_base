@@ -29,11 +29,9 @@ import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ConditionDispatcher extends Dispatcher {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.samsung.android.sdk.routines.v3.internal.ConditionDispatcher$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] a;
@@ -85,13 +83,13 @@ public class ConditionDispatcher extends Dispatcher {
         return "ConditionDispatcher";
     }
 
-    public final Bundle a(final Context context, String str, Bundle bundle) {
+    public final Bundle a(final Context context, String str, Bundle bundle) throws NumberFormatException {
         ConditionMethod conditionMethod;
         final Bundle bundle2;
-        Bundle c$2;
+        Bundle bundleC$2;
         Bundle bundle3;
         Bundle bundle4;
-        Object obj;
+        Object next;
         final String string = bundle.getString(ExtraKey.TAG.a);
         if (string == null) {
             Log.a("ConditionDispatcher", "callConditionHandler - tag is null");
@@ -103,11 +101,11 @@ public class ConditionDispatcher extends Dispatcher {
             return null;
         }
         Log.b("ConditionDispatcher", "callConditionHandler start - tag=" + string + ", method=" + str);
-        final ParameterValues fromJsonString = ParameterValues.fromJsonString(bundle.getString(ExtraKey.PARAMETER_VALUES.a, ""));
+        final ParameterValues parameterValuesFromJsonString = ParameterValues.fromJsonString(bundle.getString(ExtraKey.PARAMETER_VALUES.a, ""));
         final long j = bundle.getLong(ExtraKey.INSTANCE_ID.a, 0L);
         int[] iArr = AnonymousClass1.a;
-        ConditionMethod[] values = ConditionMethod.values();
-        int length = values.length;
+        ConditionMethod[] conditionMethodArrValues = ConditionMethod.values();
+        int length = conditionMethodArrValues.length;
         int i = 0;
         while (true) {
             if (i >= length) {
@@ -115,7 +113,7 @@ public class ConditionDispatcher extends Dispatcher {
                 conditionMethod = ConditionMethod.UNKNOWN;
                 break;
             }
-            conditionMethod = values[i];
+            conditionMethod = conditionMethodArrValues[i];
             if (conditionMethod.a.equals(str)) {
                 break;
             }
@@ -124,8 +122,8 @@ public class ConditionDispatcher extends Dispatcher {
         switch (iArr[conditionMethod.ordinal()]) {
             case 1:
                 bundle2 = new Bundle();
-                final Object obj2 = new Object();
-                new Thread(new Runnable(context, string, fromJsonString, j, bundle2, obj2) { // from class: com.samsung.android.sdk.routines.v3.internal.ConditionDispatcher$$ExternalSyntheticLambda0
+                final Object obj = new Object();
+                new Thread(new Runnable(context, string, parameterValuesFromJsonString, j, bundle2, obj) { // from class: com.samsung.android.sdk.routines.v3.internal.ConditionDispatcher$$ExternalSyntheticLambda0
                     public final /* synthetic */ Context f$1;
                     public final /* synthetic */ String f$2;
                     public final /* synthetic */ ParameterValues f$3;
@@ -134,53 +132,53 @@ public class ConditionDispatcher extends Dispatcher {
 
                     {
                         this.f$5 = bundle2;
-                        this.f$6 = obj2;
+                        this.f$6 = obj;
                     }
 
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        RoutineConditionHandler routineConditionHandler2 = RoutineConditionHandler.this;
+                    public final void run() throws NumberFormatException {
+                        RoutineConditionHandler routineConditionHandler2 = this.f$0;
                         Context context2 = this.f$1;
                         String str2 = this.f$2;
                         ParameterValues parameterValues = this.f$3;
                         ConditionDispatcher$$ExternalSyntheticLambda3 conditionDispatcher$$ExternalSyntheticLambda3 = new ConditionDispatcher$$ExternalSyntheticLambda3(this.f$5, this.f$6, 0);
                         PlayingAudioConditionHandler playingAudioConditionHandler = (PlayingAudioConditionHandler) routineConditionHandler2;
                         if (str2.equals("playing_audio")) {
-                            int parseInt = Integer.parseInt(parameterValues.getString("playing_audio_app_uid", "-1"));
-                            boolean booleanValue = parameterValues.getBoolean().booleanValue();
+                            int i2 = Integer.parseInt(parameterValues.getString("playing_audio_app_uid", "-1"));
+                            boolean zBooleanValue = parameterValues.getBoolean().booleanValue();
                             SoundCraftSettingConstants.INSTANCE.getClass();
                             if (!(Settings.System.getInt(context2.getContentResolver(), "audio_soundcraft_app_setting", 1) == 1)) {
-                                MediaSessions$H$$ExternalSyntheticOutline0.m("isSatisfied : (setting off) tag=", str2, ", app=", playingAudioConditionHandler.uidPackageName(parseInt), "SoundCraft.PlayingAudioConditionHandler");
+                                MediaSessions$H$$ExternalSyntheticOutline0.m("isSatisfied : (setting off) tag=", str2, ", app=", playingAudioConditionHandler.uidPackageName(i2), "SoundCraft.PlayingAudioConditionHandler");
                                 conditionDispatcher$$ExternalSyntheticLambda3.setResponse(SatisfactionStatus.NOT_SATISFIED);
                                 return;
                             }
-                            if (booleanValue && !playingAudioConditionHandler.isBudsPluginCanAction()) {
-                                MediaSessions$H$$ExternalSyntheticOutline0.m("isSatisfied : false (isBudsAction, plugin disconnected) tag=", str2, ", app=", playingAudioConditionHandler.uidPackageName(parseInt), "SoundCraft.PlayingAudioConditionHandler");
+                            if (zBooleanValue && !playingAudioConditionHandler.isBudsPluginCanAction()) {
+                                MediaSessions$H$$ExternalSyntheticOutline0.m("isSatisfied : false (isBudsAction, plugin disconnected) tag=", str2, ", app=", playingAudioConditionHandler.uidPackageName(i2), "SoundCraft.PlayingAudioConditionHandler");
                                 conditionDispatcher$$ExternalSyntheticLambda3.setResponse(SatisfactionStatus.NOT_SATISFIED);
                                 return;
                             }
-                            if (!booleanValue && playingAudioConditionHandler.isBudsPluginCanAction()) {
-                                MediaSessions$H$$ExternalSyntheticOutline0.m("isSatisfied : false (isPhoneAction, buds connected) tag=", str2, ", app=", playingAudioConditionHandler.uidPackageName(parseInt), "SoundCraft.PlayingAudioConditionHandler");
+                            if (!zBooleanValue && playingAudioConditionHandler.isBudsPluginCanAction()) {
+                                MediaSessions$H$$ExternalSyntheticOutline0.m("isSatisfied : false (isPhoneAction, buds connected) tag=", str2, ", app=", playingAudioConditionHandler.uidPackageName(i2), "SoundCraft.PlayingAudioConditionHandler");
                                 conditionDispatcher$$ExternalSyntheticLambda3.setResponse(SatisfactionStatus.NOT_SATISFIED);
                                 return;
                             }
-                            boolean z = playingAudioConditionHandler.lastStartedUid == parseInt;
-                            boolean isBudsPluginCanAction = playingAudioConditionHandler.isBudsPluginCanAction();
-                            String uidPackageName = playingAudioConditionHandler.uidPackageName(parseInt);
-                            StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("isSatisfied: tag=", str2, ", isBudsAction=", ", isBudsPluginCanAction=", booleanValue);
-                            m.append(isBudsPluginCanAction);
-                            m.append(" app=");
-                            m.append(uidPackageName);
-                            m.append(", isSatisfied=");
-                            ActionBarContextView$$ExternalSyntheticOutline0.m(m, z, "SoundCraft.PlayingAudioConditionHandler");
+                            boolean z = playingAudioConditionHandler.lastStartedUid == i2;
+                            boolean zIsBudsPluginCanAction = playingAudioConditionHandler.isBudsPluginCanAction();
+                            String strUidPackageName = playingAudioConditionHandler.uidPackageName(i2);
+                            StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("isSatisfied: tag=", str2, ", isBudsAction=", ", isBudsPluginCanAction=", zBooleanValue);
+                            sbM.append(zIsBudsPluginCanAction);
+                            sbM.append(" app=");
+                            sbM.append(strUidPackageName);
+                            sbM.append(", isSatisfied=");
+                            ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, z, "SoundCraft.PlayingAudioConditionHandler");
                             conditionDispatcher$$ExternalSyntheticLambda3.setResponse(z ? SatisfactionStatus.SATISFIED : SatisfactionStatus.NOT_SATISFIED);
                         }
                     }
                 }).start();
-                if (!a(obj2)) {
+                if (!a(obj)) {
                     Log.a("ConditionDispatcher", "isSatisfied: timeout");
-                    c$2 = Dispatcher.c$2();
-                    bundle4 = c$2;
+                    bundleC$2 = Dispatcher.c$2();
+                    bundle4 = bundleC$2;
                     break;
                 }
                 bundle4 = bundle2;
@@ -189,9 +187,9 @@ public class ConditionDispatcher extends Dispatcher {
                 bundle3 = null;
                 PlayingAudioConditionHandler playingAudioConditionHandler = (PlayingAudioConditionHandler) routineConditionHandler;
                 if (string.equals("playing_audio")) {
-                    int parseInt = Integer.parseInt(fromJsonString.getString("playing_audio_app_uid", "-1"));
-                    playingAudioConditionHandler.enableList.add(Integer.valueOf(parseInt));
-                    RecyclerView$$ExternalSyntheticOutline0.m(playingAudioConditionHandler.enableList.size(), "SoundCraft.PlayingAudioConditionHandler", SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("onEnabled : tag=", string, ", app=", playingAudioConditionHandler.uidPackageName(parseInt), ", enableCount="));
+                    int i2 = Integer.parseInt(parameterValuesFromJsonString.getString("playing_audio_app_uid", "-1"));
+                    playingAudioConditionHandler.enableList.add(Integer.valueOf(i2));
+                    RecyclerView$$ExternalSyntheticOutline0.m(playingAudioConditionHandler.enableList.size(), "SoundCraft.PlayingAudioConditionHandler", SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("onEnabled : tag=", string, ", app=", playingAudioConditionHandler.uidPackageName(i2), ", enableCount="));
                 }
                 bundle4 = bundle3;
                 break;
@@ -199,26 +197,26 @@ public class ConditionDispatcher extends Dispatcher {
                 bundle3 = null;
                 PlayingAudioConditionHandler playingAudioConditionHandler2 = (PlayingAudioConditionHandler) routineConditionHandler;
                 if (string.equals("playing_audio")) {
-                    int parseInt2 = Integer.parseInt(fromJsonString.getString("playing_audio_app_uid", "-1"));
+                    int i3 = Integer.parseInt(parameterValuesFromJsonString.getString("playing_audio_app_uid", "-1"));
                     Iterator it = playingAudioConditionHandler2.enableList.iterator();
                     while (true) {
                         if (it.hasNext()) {
-                            obj = it.next();
-                            if (((Number) obj).intValue() == parseInt2) {
+                            next = it.next();
+                            if (((Number) next).intValue() == i3) {
                             }
                         } else {
-                            obj = null;
+                            next = null;
                         }
                     }
-                    TypeIntrinsics.asMutableCollection(playingAudioConditionHandler2.enableList).remove((Integer) obj);
-                    RecyclerView$$ExternalSyntheticOutline0.m(playingAudioConditionHandler2.enableList.size(), "SoundCraft.PlayingAudioConditionHandler", SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("onDisabled : tag=", string, ", app=", playingAudioConditionHandler2.uidPackageName(parseInt2), ", enableCount="));
+                    TypeIntrinsics.asMutableCollection(playingAudioConditionHandler2.enableList).remove((Integer) next);
+                    RecyclerView$$ExternalSyntheticOutline0.m(playingAudioConditionHandler2.enableList.size(), "SoundCraft.PlayingAudioConditionHandler", SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("onDisabled : tag=", string, ", app=", playingAudioConditionHandler2.uidPackageName(i3), ", enableCount="));
                 }
                 bundle4 = bundle3;
                 break;
             case 4:
                 bundle2 = new Bundle();
-                final Object obj3 = new Object();
-                new Thread(new Runnable(context, string, fromJsonString, j, bundle2, obj3) { // from class: com.samsung.android.sdk.routines.v3.internal.ConditionDispatcher$$ExternalSyntheticLambda2
+                final Object obj2 = new Object();
+                new Thread(new Runnable(context, string, parameterValuesFromJsonString, j, bundle2, obj2) { // from class: com.samsung.android.sdk.routines.v3.internal.ConditionDispatcher$$ExternalSyntheticLambda2
                     public final /* synthetic */ String f$2;
                     public final /* synthetic */ ParameterValues f$3;
                     public final /* synthetic */ Bundle f$5;
@@ -226,41 +224,41 @@ public class ConditionDispatcher extends Dispatcher {
 
                     {
                         this.f$2 = string;
-                        this.f$3 = fromJsonString;
+                        this.f$3 = parameterValuesFromJsonString;
                         this.f$5 = bundle2;
-                        this.f$6 = obj3;
+                        this.f$6 = obj2;
                     }
 
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RoutineConditionHandler routineConditionHandler2 = RoutineConditionHandler.this;
+                        RoutineConditionHandler routineConditionHandler2 = this.f$0;
                         String str2 = this.f$2;
                         ParameterValues parameterValues = this.f$3;
                         Bundle bundle5 = this.f$5;
-                        Object obj4 = this.f$6;
+                        Object obj3 = this.f$6;
                         ((PlayingAudioConditionHandler) routineConditionHandler2).getClass();
                         if (Intrinsics.areEqual(str2, "playing_audio")) {
                             String string2 = parameterValues.getString("playing_audio_app_package_name", "");
                             MediaSessions$H$$ExternalSyntheticOutline0.m("getParameterLabel : tag=", str2, ", packageName=", string2, "SoundCraft.PlayingAudioConditionHandler");
                             bundle5.putString(ExtraKey.CONFIG_LABEL_PARAMS.a, string2);
-                            synchronized (obj4) {
-                                obj4.notify();
+                            synchronized (obj3) {
+                                obj3.notify();
                             }
                         }
                     }
                 }).start();
-                if (!a(obj3)) {
+                if (!a(obj2)) {
                     Log.a("ConditionDispatcher", "getParameterLabel: timeout");
-                    c$2 = Dispatcher.c$2();
-                    bundle4 = c$2;
+                    bundleC$2 = Dispatcher.c$2();
+                    bundle4 = bundleC$2;
                     break;
                 }
                 bundle4 = bundle2;
                 break;
             case 5:
                 bundle2 = new Bundle();
-                final Object obj4 = new Object();
-                new Thread(new Runnable(context, string, fromJsonString, j, bundle2, obj4) { // from class: com.samsung.android.sdk.routines.v3.internal.ConditionDispatcher$$ExternalSyntheticLambda1
+                final Object obj3 = new Object();
+                new Thread(new Runnable(context, string, parameterValuesFromJsonString, j, bundle2, obj3) { // from class: com.samsung.android.sdk.routines.v3.internal.ConditionDispatcher$$ExternalSyntheticLambda1
                     public final /* synthetic */ String f$2;
                     public final /* synthetic */ Bundle f$5;
                     public final /* synthetic */ Object f$6;
@@ -268,7 +266,7 @@ public class ConditionDispatcher extends Dispatcher {
                     {
                         this.f$2 = string;
                         this.f$5 = bundle2;
-                        this.f$6 = obj4;
+                        this.f$6 = obj3;
                     }
 
                     @Override // java.lang.Runnable
@@ -282,10 +280,10 @@ public class ConditionDispatcher extends Dispatcher {
                         }
                     }
                 }).start();
-                if (!a(obj4)) {
+                if (!a(obj3)) {
                     Log.a("ConditionDispatcher", "checkValidity: timeout");
-                    c$2 = Dispatcher.c$2();
-                    bundle4 = c$2;
+                    bundleC$2 = Dispatcher.c$2();
+                    bundle4 = bundleC$2;
                     break;
                 }
                 bundle4 = bundle2;
@@ -295,21 +293,21 @@ public class ConditionDispatcher extends Dispatcher {
                 bundle4.putInt(ExtraKey.RESULT_INT.a, SupportStatus.SUPPORTED.a);
                 break;
             case 7:
-                c$2 = new Bundle();
+                bundleC$2 = new Bundle();
                 String str2 = ExtraKey.CONFIG_TEMPLATE.a;
                 android.util.Log.d("SoundCraft.PlayingAudioConditionHandler", "onRequestTemplateContents : tag=" + string + ", lastStartedPackageName=" + ((PlayingAudioConditionHandler) routineConditionHandler).lastStartedPackageName);
-                c$2.putBundle(str2, new UiTemplate(new Bundle()).a);
-                bundle4 = c$2;
+                bundleC$2.putBundle(str2, new UiTemplate(new Bundle()).a);
+                bundle4 = bundleC$2;
                 break;
             case 8:
-                int i2 = bundle.getInt(ExtraKey.RESULT_INT.a, 0);
+                int i4 = bundle.getInt(ExtraKey.RESULT_INT.a, 0);
                 Bundle bundle5 = new Bundle();
                 String str3 = ExtraKey.ERROR_DIALOG_CONTENTS.a;
                 String str4 = ((PlayingAudioConditionHandler) routineConditionHandler).lastStartedPackageName;
-                StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i2, "onRequestErrorDialogContents: tag=", string, ", errorCode=", ", lastStartedPackageName=");
-                m888m.append(str4);
-                android.util.Log.d("SoundCraft.PlayingAudioConditionHandler", m888m.toString());
-                ErrorContents.Builder builder = new ErrorContents.Builder(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "Not handled error code:"));
+                StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i4, "onRequestErrorDialogContents: tag=", string, ", errorCode=", ", lastStartedPackageName=");
+                sbM890m.append(str4);
+                android.util.Log.d("SoundCraft.PlayingAudioConditionHandler", sbM890m.toString());
+                ErrorContents.Builder builder = new ErrorContents.Builder(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i4, "Not handled error code:"));
                 builder.a = "Condition Error";
                 bundle5.putBundle(str3, new ErrorContents("Condition Error", builder.b, null).toBundle());
                 bundle4 = bundle5;
@@ -325,10 +323,10 @@ public class ConditionDispatcher extends Dispatcher {
                     ArrayList arrayList = new ArrayList();
                     Gson gson = new Gson();
                     int size = stringArrayList.size();
-                    int i3 = 0;
-                    while (i3 < size) {
-                        String str6 = stringArrayList.get(i3);
-                        i3++;
+                    int i5 = 0;
+                    while (i5 < size) {
+                        String str6 = stringArrayList.get(i5);
+                        i5++;
                         arrayList.add((TargetInstanceInfo) gson.fromJson(str6, TargetInstanceInfo.class));
                     }
                 }

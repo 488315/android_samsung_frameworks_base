@@ -63,7 +63,7 @@ public abstract class BasicShellCommandHandler {
         init(binder, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, i);
         this.mCmd = str;
         try {
-            int onCommand = onCommand(str);
+            int iOnCommand = onCommand(str);
             PrintWriter printWriter = this.mOutPrintWriter;
             if (printWriter != null) {
                 printWriter.flush();
@@ -72,7 +72,7 @@ public abstract class BasicShellCommandHandler {
             if (printWriter2 != null) {
                 printWriter2.flush();
             }
-            return onCommand;
+            return iOnCommand;
         } catch (Throwable th) {
             try {
                 PrintWriter errPrintWriter = getErrPrintWriter();

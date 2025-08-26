@@ -92,19 +92,19 @@ public final class SmsCbEtwsInfo implements Parcelable {
     public long getPrimaryNotificationTimestamp() {
         byte[] bArr = this.mWarningSecurityInformation;
         if (bArr != null && bArr.length >= 7) {
-            int gsmBcdByteToInt = IccUtils.gsmBcdByteToInt(bArr[0]);
-            int gsmBcdByteToInt2 = IccUtils.gsmBcdByteToInt(this.mWarningSecurityInformation[1]);
-            int gsmBcdByteToInt3 = IccUtils.gsmBcdByteToInt(this.mWarningSecurityInformation[2]);
-            int gsmBcdByteToInt4 = IccUtils.gsmBcdByteToInt(this.mWarningSecurityInformation[3]);
-            int gsmBcdByteToInt5 = IccUtils.gsmBcdByteToInt(this.mWarningSecurityInformation[4]);
-            int gsmBcdByteToInt6 = IccUtils.gsmBcdByteToInt(this.mWarningSecurityInformation[5]);
+            int iGsmBcdByteToInt = IccUtils.gsmBcdByteToInt(bArr[0]);
+            int iGsmBcdByteToInt2 = IccUtils.gsmBcdByteToInt(this.mWarningSecurityInformation[1]);
+            int iGsmBcdByteToInt3 = IccUtils.gsmBcdByteToInt(this.mWarningSecurityInformation[2]);
+            int iGsmBcdByteToInt4 = IccUtils.gsmBcdByteToInt(this.mWarningSecurityInformation[3]);
+            int iGsmBcdByteToInt5 = IccUtils.gsmBcdByteToInt(this.mWarningSecurityInformation[4]);
+            int iGsmBcdByteToInt6 = IccUtils.gsmBcdByteToInt(this.mWarningSecurityInformation[5]);
             byte b = this.mWarningSecurityInformation[6];
-            int gsmBcdByteToInt7 = IccUtils.gsmBcdByteToInt((byte) (b & (-9)));
+            int iGsmBcdByteToInt7 = IccUtils.gsmBcdByteToInt((byte) (b & (-9)));
             if ((b & 8) != 0) {
-                gsmBcdByteToInt7 = -gsmBcdByteToInt7;
+                iGsmBcdByteToInt7 = -iGsmBcdByteToInt7;
             }
             try {
-                return (LocalDateTime.of(gsmBcdByteToInt + 2000, gsmBcdByteToInt2, gsmBcdByteToInt3, gsmBcdByteToInt4, gsmBcdByteToInt5, gsmBcdByteToInt6).toEpochSecond(ZoneOffset.UTC) - (gsmBcdByteToInt7 * 900)) * 1000;
+                return (LocalDateTime.of(iGsmBcdByteToInt + 2000, iGsmBcdByteToInt2, iGsmBcdByteToInt3, iGsmBcdByteToInt4, iGsmBcdByteToInt5, iGsmBcdByteToInt6).toEpochSecond(ZoneOffset.UTC) - (iGsmBcdByteToInt7 * 900)) * 1000;
             } catch (DateTimeException unused) {
             }
         }

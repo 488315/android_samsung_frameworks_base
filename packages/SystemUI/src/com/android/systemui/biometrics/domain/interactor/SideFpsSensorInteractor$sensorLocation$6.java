@@ -14,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SideFpsSensorInteractor$sensorLocation$6 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -53,13 +52,13 @@ final class SideFpsSensorInteractor$sensorLocation$6 extends SuspendLambda imple
         LogLevel logLevel = LogLevel.DEBUG;
         SideFpsLogger$$ExternalSyntheticLambda0 sideFpsLogger$$ExternalSyntheticLambda0 = new SideFpsLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = sideFpsLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("SideFpsLogger", logLevel, sideFpsLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("SideFpsLogger", logLevel, sideFpsLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.int2 = sideFpsSensorLocation.top;
         logMessageImpl.str2 = String.valueOf(sideFpsSensorLocation.length);
         logMessageImpl.bool1 = sideFpsSensorLocation.isSensorVerticalInDefaultOrientation;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

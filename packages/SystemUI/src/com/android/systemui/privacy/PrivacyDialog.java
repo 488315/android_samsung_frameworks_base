@@ -3,6 +3,7 @@ package com.android.systemui.privacy;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -52,7 +53,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PrivacyDialog extends SystemUIDialog {
     public final PrivacyDialog$clickListener$1 clickListener;
@@ -67,7 +67,6 @@ public final class PrivacyDialog extends SystemUIDialog {
     public boolean qsExpanded;
     public ViewGroup rootView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PrivacyElement {
         public final boolean active;
         public final CharSequence applicationName;
@@ -144,15 +143,15 @@ public final class PrivacyDialog extends SystemUIDialog {
         }
 
         public final int hashCode() {
-            int m = ControlInfo$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.userId, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.type.hashCode() * 31, 31, this.packageName), 31), 31, this.applicationName);
+            int iM = ControlInfo$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.userId, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.type.hashCode() * 31, 31, this.packageName), 31), 31, this.applicationName);
             CharSequence charSequence = this.attributionTag;
-            int hashCode = (m + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
+            int iHashCode = (iM + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
             CharSequence charSequence2 = this.attributionLabel;
-            int hashCode2 = (hashCode + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
+            int iHashCode2 = (iHashCode + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
             CharSequence charSequence3 = this.proxyLabel;
-            int m2 = ControlInfo$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m((hashCode2 + (charSequence3 == null ? 0 : charSequence3.hashCode())) * 31, 31, this.lastActiveTimestamp), 31, this.active), 31, this.enterprise), 31, this.phoneCall), 31, this.permGroupName);
+            int iM2 = ControlInfo$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m((iHashCode2 + (charSequence3 == null ? 0 : charSequence3.hashCode())) * 31, 31, this.lastActiveTimestamp), 31, this.active), 31, this.enterprise), 31, this.phoneCall), 31, this.permGroupName);
             Intent intent = this.navigationIntent;
-            return Boolean.hashCode(this.isSystem) + ((m2 + (intent != null ? intent.hashCode() : 0)) * 31);
+            return Boolean.hashCode(this.isSystem) + ((iM2 + (intent != null ? intent.hashCode() : 0)) * 31);
         }
 
         public final String toString() {
@@ -160,7 +159,6 @@ public final class PrivacyDialog extends SystemUIDialog {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -203,7 +201,7 @@ public final class PrivacyDialog extends SystemUIDialog {
                 Object tag = view.getTag();
                 if (tag != null) {
                     PrivacyDialog.PrivacyElement privacyElement = (PrivacyDialog.PrivacyElement) tag;
-                    Function4.this.invoke(privacyElement.packageName, Integer.valueOf(privacyElement.userId), privacyElement.attributionTag, privacyElement.navigationIntent);
+                    function4.invoke(privacyElement.packageName, Integer.valueOf(privacyElement.userId), privacyElement.attributionTag, privacyElement.navigationIntent);
                 }
             }
         };
@@ -211,13 +209,13 @@ public final class PrivacyDialog extends SystemUIDialog {
 
     public final View createView(PrivacyElement privacyElement) {
         int i;
-        LayoutInflater from = LayoutInflater.from(getContext());
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(getContext());
         ViewGroup viewGroup = this.rootView;
-        String str = null;
+        String string = null;
         if (viewGroup == null) {
             viewGroup = null;
         }
-        ViewGroup viewGroup2 = (ViewGroup) from.inflate(R.layout.sec_privacy_dialog_item, viewGroup, false);
+        ViewGroup viewGroup2 = (ViewGroup) layoutInflaterFrom.inflate(R.layout.sec_privacy_dialog_item, viewGroup, false);
         PrivacyType privacyType = privacyElement.type;
         Context context = getContext();
         int i2 = WhenMappings.$EnumSwitchMapping$0[privacyType.ordinal()];
@@ -240,39 +238,39 @@ public final class PrivacyDialog extends SystemUIDialog {
         imageView.setContentDescription(privacyElement.type.getName(imageView.getContext()));
         int i3 = privacyElement.active ? R.string.sec_ongoing_privacy_dialog_using_op : R.string.sec_ongoing_privacy_dialog_recent_op;
         boolean z = privacyElement.phoneCall;
-        CharSequence charSequence = z ? this.phonecall : privacyElement.applicationName;
+        CharSequence charSequenceConcat = z ? this.phonecall : privacyElement.applicationName;
         int i4 = privacyElement.userId;
-        boolean isDualAppId = SemDualAppManager.isDualAppId(i4);
+        boolean zIsDualAppId = SemDualAppManager.isDualAppId(i4);
         boolean z2 = ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP;
         boolean z3 = privacyElement.isSystem;
         if (z2 && z3) {
-            charSequence = getContext().getString(R.string.sec_ongoing_privacy_dialog_system_app);
-        } else if (privacyElement.enterprise || isDualAppId) {
+            charSequenceConcat = getContext().getString(R.string.sec_ongoing_privacy_dialog_system_app);
+        } else if (privacyElement.enterprise || zIsDualAppId) {
             SemPersonaManager semPersonaManager = this.mPersonaManager;
             if (semPersonaManager == null) {
                 semPersonaManager = null;
             }
             String containerName = semPersonaManager.getContainerName(i4, getContext());
             if (containerName != null) {
-                charSequence = TextUtils.concat(charSequence, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("(", containerName, ")"));
+                charSequenceConcat = TextUtils.concat(charSequenceConcat, ContentInViewNode$Request$$ExternalSyntheticOutline0.m("(", containerName, ")"));
             }
         }
-        CharSequence string = getContext().getString(i3, charSequence);
-        CharSequence charSequence2 = privacyElement.attributionLabel;
-        CharSequence charSequence3 = privacyElement.proxyLabel;
+        CharSequence string2 = getContext().getString(i3, charSequenceConcat);
+        CharSequence charSequence = privacyElement.attributionLabel;
+        CharSequence charSequence2 = privacyElement.proxyLabel;
         if (!z2 || !z3) {
-            if (charSequence2 != null && charSequence3 != null) {
-                str = getContext().getString(R.string.ongoing_privacy_dialog_attribution_proxy_label, charSequence2, charSequence3);
+            if (charSequence != null && charSequence2 != null) {
+                string = getContext().getString(R.string.ongoing_privacy_dialog_attribution_proxy_label, charSequence, charSequence2);
+            } else if (charSequence != null) {
+                string = getContext().getString(R.string.ongoing_privacy_dialog_attribution_label, charSequence);
             } else if (charSequence2 != null) {
-                str = getContext().getString(R.string.ongoing_privacy_dialog_attribution_label, charSequence2);
-            } else if (charSequence3 != null) {
-                str = getContext().getString(R.string.ongoing_privacy_dialog_attribution_text, charSequence3);
+                string = getContext().getString(R.string.ongoing_privacy_dialog_attribution_text, charSequence2);
             }
         }
-        if (str != null) {
-            string = TextUtils.concat(string, " ", str);
+        if (string != null) {
+            string2 = TextUtils.concat(string2, " ", string);
         }
-        ((TextView) viewGroup2.requireViewById(R.id.text)).setText(string);
+        ((TextView) viewGroup2.requireViewById(R.id.text)).setText(string2);
         viewGroup2.setTag(privacyElement);
         if (!z) {
             viewGroup2.setOnClickListener(this.clickListener);
@@ -280,8 +278,12 @@ public final class PrivacyDialog extends SystemUIDialog {
         return viewGroup2;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0090  */
     @Override // com.android.systemui.statusbar.phone.SystemUIDialog, android.app.AlertDialog, android.app.Dialog
-    public final void onCreate(Bundle bundle) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         int dimensionPixelSize;
         WindowManager windowManager;
         WindowMetrics currentWindowMetrics;
@@ -297,15 +299,9 @@ public final class PrivacyDialog extends SystemUIDialog {
             dimensionPixelSize = getContext().getResources().getDimensionPixelSize(R.dimen.status_bar_height) + ((int) (context.getResources().getFloat(R.dimen.qs_header_top_margin_ratio) * availableDisplayHeight));
         } else if (getContext().getResources().getConfiguration().orientation == 1) {
             Window window = getWindow();
-            if (window != null && (windowManager = window.getWindowManager()) != null && (currentWindowMetrics = windowManager.getCurrentWindowMetrics()) != null && (windowInsets = currentWindowMetrics.getWindowInsets()) != null) {
-                dimensionPixelSize = windowInsets.getStableInsetTop();
-            }
-            dimensionPixelSize = 0;
-        } else {
-            if (getContext().getResources().getConfiguration().orientation == 2) {
-                dimensionPixelSize = getContext().getResources().getDimensionPixelSize(R.dimen.shade_header_no_cutout_top_margin);
-            }
-            dimensionPixelSize = 0;
+            dimensionPixelSize = (window == null || (windowManager = window.getWindowManager()) == null || (currentWindowMetrics = windowManager.getCurrentWindowMetrics()) == null || (windowInsets = currentWindowMetrics.getWindowInsets()) == null) ? 0 : windowInsets.getStableInsetTop();
+        } else if (getContext().getResources().getConfiguration().orientation == 2) {
+            dimensionPixelSize = getContext().getResources().getDimensionPixelSize(R.dimen.shade_header_no_cutout_top_margin);
         }
         this.mDialogTopMargin = dimensionPixelSize2 + dimensionPixelSize;
         Window window2 = getWindow();
@@ -372,47 +368,47 @@ public final class PrivacyDialog extends SystemUIDialog {
         }
         ViewGroup viewGroup4 = this.rootView;
         (viewGroup4 != null ? viewGroup4 : null).setClipToOutline(true);
-        setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.privacy.PrivacyDialog$onCreate$8
+        setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.privacy.PrivacyDialog.onCreate.8
             @Override // android.content.DialogInterface.OnShowListener
-            public final void onShow(DialogInterface dialogInterface) {
-                Bitmap bitmap;
+            public final void onShow(DialogInterface dialogInterface) throws Resources.NotFoundException {
+                Bitmap bitmapScreenshot;
                 PrivacyDialog privacyDialog = PrivacyDialog.this;
                 ImageView imageView = privacyDialog.mBlurView;
-                SemBlurInfo.Builder builder = null;
+                SemBlurInfo.Builder bitmap = null;
                 if (imageView == null) {
                     imageView = null;
                 }
                 float dimensionPixelSize3 = privacyDialog.getContext().getResources().getDimensionPixelSize(R.dimen.sec_privacy_dialog_corner_radius);
                 int color = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isReduceTransparencyEnabled() ? privacyDialog.getContext().getResources().getColor(R.color.sec_privacy_dialog_bg_reduce_transparency) : privacyDialog.getContext().getResources().getColor(R.color.sec_privacy_dialog_bg);
-                int i2 = 0;
+                int qQSPanelSidePadding = 0;
                 if (QpRune.QUICK_PANEL_BLUR_DEFAULT) {
-                    builder = new SemBlurInfo.Builder(0).setRadius(120).setBackgroundColor(color).setBackgroundCornerRadius(dimensionPixelSize3);
+                    bitmap = new SemBlurInfo.Builder(0).setRadius(120).setBackgroundColor(color).setBackgroundCornerRadius(dimensionPixelSize3);
                 } else if (QpRune.QUICK_PANEL_BLUR_MASSIVE) {
                     if (privacyDialog.getContext().getResources().getConfiguration().orientation == 1) {
-                        i2 = privacyDialog.getContext().getResources().getDimensionPixelSize(R.dimen.sec_ongoing_appops_dialog_side_margins);
+                        qQSPanelSidePadding = privacyDialog.getContext().getResources().getDimensionPixelSize(R.dimen.sec_ongoing_appops_dialog_side_margins);
                     } else if (!privacyDialog.qsExpanded) {
-                        i2 = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getQQSPanelSidePadding(privacyDialog.getContext());
+                        qQSPanelSidePadding = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getQQSPanelSidePadding(privacyDialog.getContext());
                     }
-                    int panelWidth = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelWidth(privacyDialog.getContext()) - (i2 * 2);
+                    int panelWidth = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelWidth(privacyDialog.getContext()) - (qQSPanelSidePadding * 2);
                     int dimensionPixelSize4 = privacyDialog.getContext().getResources().getDimensionPixelSize(R.dimen.sec_privacy_dialog_item_height) * privacyDialog.list.size();
                     Point point = new Point();
                     Display display = privacyDialog.getContext().getDisplay();
                     display.getClass();
                     display.getRealSize(point);
-                    int i3 = (point.x - panelWidth) / 2;
-                    int i4 = privacyDialog.mDialogTopMargin;
+                    int i2 = (point.x - panelWidth) / 2;
+                    int i3 = privacyDialog.mDialogTopMargin;
                     try {
-                        bitmap = SemWindowManager.getInstance().screenshot(((WindowManager) privacyDialog.getContext().getSystemService("window")).getDefaultDisplay().getDisplayId(), 2036, true, new Rect(i3, i4, i3 + panelWidth, i4 + dimensionPixelSize4), panelWidth, dimensionPixelSize4, false, 0, true);
+                        bitmapScreenshot = SemWindowManager.getInstance().screenshot(((WindowManager) privacyDialog.getContext().getSystemService("window")).getDefaultDisplay().getDisplayId(), 2036, true, new Rect(i2, i3, i2 + panelWidth, i3 + dimensionPixelSize4), panelWidth, dimensionPixelSize4, false, 0, true);
                     } catch (SecurityException e) {
                         e.printStackTrace();
-                        bitmap = null;
+                        bitmapScreenshot = null;
                     }
-                    if (bitmap != null) {
-                        builder = new SemBlurInfo.Builder(1).setRadius(120).setBitmap(bitmap);
+                    if (bitmapScreenshot != null) {
+                        bitmap = new SemBlurInfo.Builder(1).setRadius(120).setBitmap(bitmapScreenshot);
                     }
                 }
-                if (builder != null) {
-                    imageView.semSetBlurInfo(builder.build());
+                if (bitmap != null) {
+                    imageView.semSetBlurInfo(bitmap.build());
                 }
                 imageView.setClipToOutline(true);
             }

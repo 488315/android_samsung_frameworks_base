@@ -56,20 +56,20 @@ public class ApplicationLoaders {
                     return classLoader3;
                 }
                 Trace.traceBegin(64L, str);
-                ClassLoader createClassLoader = ClassLoaderFactory.createClassLoader(str, str2, str3, classLoader2, i, z, str5, list, list2, list3);
+                ClassLoader classLoaderCreateClassLoader = ClassLoaderFactory.createClassLoader(str, str2, str3, classLoader2, i, z, str5, list, list2, list3);
                 Trace.traceEnd(64L);
                 Trace.traceBegin(64L, "setLayerPaths");
-                GraphicsEnvironment.getInstance().setLayerPaths(createClassLoader, str2, str3);
+                GraphicsEnvironment.getInstance().setLayerPaths(classLoaderCreateClassLoader, str2, str3);
                 Trace.traceEnd(64L);
                 if (str4 != null) {
-                    this.mLoaders.put(str4, createClassLoader);
+                    this.mLoaders.put(str4, classLoaderCreateClassLoader);
                 }
-                return createClassLoader;
+                return classLoaderCreateClassLoader;
             }
             Trace.traceBegin(64L, str);
-            ClassLoader createClassLoader2 = ClassLoaderFactory.createClassLoader(str, null, classLoader2, str5, list, null);
+            ClassLoader classLoaderCreateClassLoader2 = ClassLoaderFactory.createClassLoader(str, null, classLoader2, str5, list, null);
             Trace.traceEnd(64L);
-            return createClassLoader2;
+            return classLoaderCreateClassLoader2;
         }
     }
 

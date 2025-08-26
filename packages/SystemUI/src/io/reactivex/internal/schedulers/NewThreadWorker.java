@@ -15,7 +15,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NewThreadWorker extends Scheduler.Worker {
     public volatile boolean disposed;
@@ -23,11 +22,11 @@ public class NewThreadWorker extends Scheduler.Worker {
 
     public NewThreadWorker(ThreadFactory threadFactory) {
         boolean z = SchedulerPoolFactory.PURGE_ENABLED;
-        ScheduledExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(1, threadFactory);
-        if (SchedulerPoolFactory.PURGE_ENABLED && (newScheduledThreadPool instanceof ScheduledThreadPoolExecutor)) {
-            ((ConcurrentHashMap) SchedulerPoolFactory.POOLS).put((ScheduledThreadPoolExecutor) newScheduledThreadPool, newScheduledThreadPool);
+        ScheduledExecutorService scheduledExecutorServiceNewScheduledThreadPool = Executors.newScheduledThreadPool(1, threadFactory);
+        if (SchedulerPoolFactory.PURGE_ENABLED && (scheduledExecutorServiceNewScheduledThreadPool instanceof ScheduledThreadPoolExecutor)) {
+            ((ConcurrentHashMap) SchedulerPoolFactory.POOLS).put((ScheduledThreadPoolExecutor) scheduledExecutorServiceNewScheduledThreadPool, scheduledExecutorServiceNewScheduledThreadPool);
         }
-        this.executor = newScheduledThreadPool;
+        this.executor = scheduledExecutorServiceNewScheduledThreadPool;
     }
 
     @Override // io.reactivex.disposables.Disposable

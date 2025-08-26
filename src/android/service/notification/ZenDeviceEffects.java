@@ -80,11 +80,11 @@ public final class ZenDeviceEffects implements Parcelable {
 
     public void validate() {
         Iterator<String> it = this.mExtraEffects.iterator();
-        int i = 0;
+        int length = 0;
         while (it.hasNext()) {
-            i += it.next().length();
+            length += it.next().length();
         }
-        if (i > 2000) {
+        if (length > 2000) {
             throw new IllegalArgumentException("Total size of extra effects must be at most 2000 characters");
         }
     }

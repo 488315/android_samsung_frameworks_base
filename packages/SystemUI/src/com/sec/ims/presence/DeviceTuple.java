@@ -3,7 +3,6 @@ package com.sec.ims.presence;
 import android.util.Pair;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DeviceTuple {
     public List<Pair<String, String>> mDescriptions;
@@ -49,15 +48,15 @@ public class DeviceTuple {
 
     public int hashCode() {
         String str = this.mDeviceId;
-        int hashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
+        int iHashCode = ((str == null ? 0 : str.hashCode()) + 31) * 31;
         List<String> list = this.mDeviceCapabilities;
-        int hashCode2 = (hashCode + (list == null ? 0 : list.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (list == null ? 0 : list.hashCode())) * 31;
         List<Pair<String, String>> list2 = this.mDescriptions;
-        int hashCode3 = (hashCode2 + (list2 == null ? 0 : list2.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (list2 == null ? 0 : list2.hashCode())) * 31;
         List<Pair<String, String>> list3 = this.mNotes;
-        int hashCode4 = (hashCode3 + (list3 == null ? 0 : list3.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (list3 == null ? 0 : list3.hashCode())) * 31;
         String str2 = this.mTimestamp;
-        return hashCode4 + (str2 != null ? str2.hashCode() : 0);
+        return iHashCode4 + (str2 != null ? str2.hashCode() : 0);
     }
 
     public DeviceTuple(String str, List<String> list) {

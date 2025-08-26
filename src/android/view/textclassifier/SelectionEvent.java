@@ -174,46 +174,46 @@ public final class SelectionEvent implements Parcelable {
     }
 
     public static SelectionEvent createSelectionModifiedEvent(int i, int i2, TextClassification textClassification) {
-        String str;
+        String entity;
         Preconditions.checkArgument(i2 >= i, "end cannot be less than start");
         Objects.requireNonNull(textClassification);
         if (textClassification.getEntityCount() > 0) {
-            str = textClassification.getEntity(0);
+            entity = textClassification.getEntity(0);
         } else {
-            str = "";
+            entity = "";
         }
-        return new SelectionEvent(i, i2, 2, str, 0, textClassification.getId());
+        return new SelectionEvent(i, i2, 2, entity, 0, textClassification.getId());
     }
 
     public static SelectionEvent createSelectionModifiedEvent(int i, int i2, TextSelection textSelection) {
-        String str;
+        String entity;
         Preconditions.checkArgument(i2 >= i, "end cannot be less than start");
         Objects.requireNonNull(textSelection);
         if (textSelection.getEntityCount() > 0) {
-            str = textSelection.getEntity(0);
+            entity = textSelection.getEntity(0);
         } else {
-            str = "";
+            entity = "";
         }
-        return new SelectionEvent(i, i2, 5, str, 0, textSelection.getId());
+        return new SelectionEvent(i, i2, 5, entity, 0, textSelection.getId());
     }
 
-    public static SelectionEvent createSelectionActionEvent(int i, int i2, int i3) {
+    public static SelectionEvent createSelectionActionEvent(int i, int i2, int i3) throws IllegalArgumentException {
         Preconditions.checkArgument(i2 >= i, "end cannot be less than start");
         checkActionType(i3);
         return new SelectionEvent(i, i2, i3, "", 0, "");
     }
 
-    public static SelectionEvent createSelectionActionEvent(int i, int i2, int i3, TextClassification textClassification) {
-        String str;
+    public static SelectionEvent createSelectionActionEvent(int i, int i2, int i3, TextClassification textClassification) throws IllegalArgumentException {
+        String entity;
         Preconditions.checkArgument(i2 >= i, "end cannot be less than start");
         Objects.requireNonNull(textClassification);
         checkActionType(i3);
         if (textClassification.getEntityCount() > 0) {
-            str = textClassification.getEntity(0);
+            entity = textClassification.getEntity(0);
         } else {
-            str = "";
+            entity = "";
         }
-        return new SelectionEvent(i, i2, i3, str, 0, textClassification.getId());
+        return new SelectionEvent(i, i2, i3, entity, 0, textClassification.getId());
     }
 
     private static void checkActionType(int i) throws IllegalArgumentException {

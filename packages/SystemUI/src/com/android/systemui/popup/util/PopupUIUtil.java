@@ -4,7 +4,6 @@ import android.os.SystemProperties;
 import com.android.systemui.BasicRune;
 import com.android.systemui.util.DeviceState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PopupUIUtil {
     public static final String ACTION_AIRPLANE_MODE_SETTINGS = "com.samsung.settings.AIRPLANE_MODE";
@@ -41,6 +40,7 @@ public class PopupUIUtil {
     public static final boolean SIM_CARD_TRAY_STYLE_FOLD_TYPE;
     public static final int SIM_CARD_TRAY_STYLE_NORMAL_TYPE = 1;
     public static final boolean SIM_CARD_TRAY_STYLE_Q6_JAPAN_MODEL;
+    public static final boolean SIM_CARD_TRAY_STYLE_Q7M_MODEL;
     public static final boolean SIM_CARD_TRAY_WATERPROOF_FALSE = false;
     public static final boolean SIM_CARD_TRAY_WATERPROOF_TRUE = true;
     public static final int SIM_CARD_TRAY_WATER_PROTECTION_POPUP = 1;
@@ -52,6 +52,7 @@ public class PopupUIUtil {
         SIM_CARD_TRAY_STYLE_FOLD_A_TYPE = z3;
         boolean z4 = SystemProperties.get("ro.product.name", "").startsWith("SC-55E") || SystemProperties.get("ro.product.name", "").startsWith("SCG28");
         SIM_CARD_TRAY_STYLE_Q6_JAPAN_MODEL = z4;
+        SIM_CARD_TRAY_STYLE_Q7M_MODEL = z && SystemProperties.get("ro.product.name", "").startsWith("q7mq");
         SIM_CARD_TRAY_STYLE_FOLD_TYPE = z && (SystemProperties.get("ro.product.name", "").startsWith("q6q") || z4) && !z3;
         boolean z5 = SystemProperties.get("ro.product.name", "").startsWith("b6qzcx") || SystemProperties.get("ro.product.name", "").startsWith("b6qzhx") || SystemProperties.get("ro.product.name", "").startsWith("b6qctcx");
         SIM_CARD_TRAY_STYLE_FLIP_CHC_MODEL_B6 = z5;

@@ -44,9 +44,9 @@ public interface IInputDeviceBatteryListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInputDeviceBatteryListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInputDeviceBatteryListener)) {
-                return (IInputDeviceBatteryListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInputDeviceBatteryListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInputDeviceBatteryListener)) {
+                return (IInputDeviceBatteryListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface IInputDeviceBatteryListener extends IInterface {
 
             @Override // android.hardware.input.IInputDeviceBatteryListener
             public void onBatteryStateChanged(IInputDeviceBatteryState iInputDeviceBatteryState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputDeviceBatteryListener.DESCRIPTOR);
-                    obtain.writeTypedObject(iInputDeviceBatteryState, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputDeviceBatteryListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(iInputDeviceBatteryState, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

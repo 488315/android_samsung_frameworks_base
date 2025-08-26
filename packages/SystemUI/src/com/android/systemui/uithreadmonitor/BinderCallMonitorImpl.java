@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BinderCallMonitorImpl implements BinderCallMonitor {
     public static int sSkipCallCount = -1;
@@ -25,7 +24,6 @@ public class BinderCallMonitorImpl implements BinderCallMonitor {
     public final SparseArray mMonitorInfo = new SparseArray();
     public long mDuration = 1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Item {
         public final long compareDuration;
         public String stackTrace;
@@ -41,7 +39,6 @@ public class BinderCallMonitorImpl implements BinderCallMonitor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MonitorInfo {
         public long duration;
         public boolean enabled;
@@ -74,17 +71,18 @@ public class BinderCallMonitorImpl implements BinderCallMonitor {
     /* JADX WARN: Type inference failed for: r1v7, types: [java.io.FileWriter] */
     /* JADX WARN: Type inference failed for: r1v8 */
     /* JADX WARN: Type inference failed for: r1v9 */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:63:0x0068 -> B:25:0x0087). Please report as a decompilation issue!!! */
-    public static void $r8$lambda$YnL46qd_6WOhuhaXmSdyADsAPU8(BinderCallMonitorImpl binderCallMonitorImpl) {
-        ?? hasNext;
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:29:0x0068 -> B:58:0x0087). Please report as a decompilation issue!!! */
+    public static void $r8$lambda$YnL46qd_6WOhuhaXmSdyADsAPU8(BinderCallMonitorImpl binderCallMonitorImpl) throws Throwable {
+        BufferedWriter bufferedWriter;
+        ?? HasNext;
         int binderCallMonitor = binderCallMonitorImpl.mSettingsHelper.getBinderCallMonitor();
         if (binderCallMonitor == binderCallMonitorImpl.mBinderCallMonitorState) {
             Log.d("BinderCallMonitor", "Nothing to do for BinderCallMonitor");
             return;
         }
         binderCallMonitorImpl.mBinderCallMonitorState = binderCallMonitor;
-        ?? r1 = 1;
-        r1 = 1;
+        ?? fileWriter = 1;
+        fileWriter = 1;
         if (binderCallMonitor == 1) {
             binderCallMonitorImpl.mBinderCallHistory.clear();
             new Handler().postDelayed(new Runnable() { // from class: com.android.systemui.uithreadmonitor.BinderCallMonitorImpl.1
@@ -97,94 +95,94 @@ public class BinderCallMonitorImpl implements BinderCallMonitor {
             return;
         }
         Log.d("BinderCallMonitor", "writeBinderCallHistory started");
-        BufferedWriter bufferedWriter = null;
-        bufferedWriter = null;
-        bufferedWriter = null;
-        bufferedWriter = null;
-        bufferedWriter = null;
+        BufferedWriter bufferedWriter2 = null;
+        bufferedWriter2 = null;
+        bufferedWriter2 = null;
+        bufferedWriter2 = null;
+        bufferedWriter2 = null;
         try {
             try {
                 try {
-                    r1 = new FileWriter("/mnt/sdcard/binder_call_history.txt");
+                    fileWriter = new FileWriter("/mnt/sdcard/binder_call_history.txt");
                     try {
-                        BufferedWriter bufferedWriter2 = new BufferedWriter(r1);
-                        try {
-                            Iterator it = binderCallMonitorImpl.mBinderCallHistory.iterator();
-                            while (true) {
-                                hasNext = it.hasNext();
-                                if (hasNext != 0) {
-                                    bufferedWriter2.write((String) it.next());
-                                } else {
-                                    try {
-                                        break;
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-                            bufferedWriter2.close();
-                            r1.close();
-                            bufferedWriter = hasNext;
-                            r1 = r1;
-                        } catch (IOException e2) {
-                            e = e2;
-                            bufferedWriter = bufferedWriter2;
-                            e.printStackTrace();
-                            if (bufferedWriter != null) {
-                                try {
-                                    bufferedWriter.close();
-                                } catch (IOException e3) {
-                                    e3.printStackTrace();
-                                }
-                            }
-                            if (r1 != 0) {
-                                r1.close();
-                                bufferedWriter = bufferedWriter;
-                                r1 = r1;
-                            }
-                        } catch (Throwable th) {
-                            th = th;
-                            bufferedWriter = bufferedWriter2;
-                            if (bufferedWriter != null) {
-                                try {
-                                    bufferedWriter.close();
-                                } catch (IOException e4) {
-                                    e4.printStackTrace();
-                                }
-                            }
-                            if (r1 == 0) {
-                                throw th;
-                            }
-                            try {
-                                r1.close();
-                                throw th;
-                            } catch (IOException e5) {
-                                e5.printStackTrace();
-                                throw th;
-                            }
-                        }
-                    } catch (IOException e6) {
-                        e = e6;
+                        bufferedWriter = new BufferedWriter(fileWriter);
+                    } catch (IOException e) {
+                        e = e;
                     }
-                } catch (IOException e7) {
-                    e = e7;
-                    r1 = 0;
-                } catch (Throwable th2) {
-                    th = th2;
-                    r1 = 0;
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                    bufferedWriter2 = bufferedWriter2;
+                    fileWriter = fileWriter;
                 }
-            } catch (IOException e8) {
-                e8.printStackTrace();
-                bufferedWriter = bufferedWriter;
-                r1 = r1;
+            } catch (IOException e3) {
+                e = e3;
+                fileWriter = 0;
+            } catch (Throwable th) {
+                th = th;
+                fileWriter = 0;
+            }
+        } catch (Throwable th2) {
+            th = th2;
+        }
+        try {
+            Iterator it = binderCallMonitorImpl.mBinderCallHistory.iterator();
+            while (true) {
+                HasNext = it.hasNext();
+                if (HasNext != 0) {
+                    bufferedWriter.write((String) it.next());
+                } else {
+                    try {
+                        break;
+                    } catch (IOException e4) {
+                        e4.printStackTrace();
+                    }
+                }
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+            bufferedWriter2 = HasNext;
+            fileWriter = fileWriter;
+        } catch (IOException e5) {
+            e = e5;
+            bufferedWriter2 = bufferedWriter;
+            e.printStackTrace();
+            if (bufferedWriter2 != null) {
+                try {
+                    bufferedWriter2.close();
+                } catch (IOException e6) {
+                    e6.printStackTrace();
+                }
+            }
+            if (fileWriter != 0) {
+                fileWriter.close();
+                bufferedWriter2 = bufferedWriter2;
+                fileWriter = fileWriter;
             }
         } catch (Throwable th3) {
             th = th3;
+            bufferedWriter2 = bufferedWriter;
+            if (bufferedWriter2 != null) {
+                try {
+                    bufferedWriter2.close();
+                } catch (IOException e7) {
+                    e7.printStackTrace();
+                }
+            }
+            if (fileWriter == 0) {
+                throw th;
+            }
+            try {
+                fileWriter.close();
+                throw th;
+            } catch (IOException e8) {
+                e8.printStackTrace();
+                throw th;
+            }
         }
     }
 
     /* renamed from: -$$Nest$smgetCallers, reason: not valid java name */
-    public static String m3110$$Nest$smgetCallers(Item item) {
+    public static String m3127$$Nest$smgetCallers(Item item) {
         String str;
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         StringBuilder sb = new StringBuilder();
@@ -234,8 +232,8 @@ public class BinderCallMonitorImpl implements BinderCallMonitor {
     public BinderCallMonitorImpl(SettingsHelper settingsHelper) {
         SettingsHelper.OnChangedCallback onChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.uithreadmonitor.BinderCallMonitorImpl$$ExternalSyntheticLambda0
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
-            public final void onChanged(Uri uri) {
-                BinderCallMonitorImpl.$r8$lambda$YnL46qd_6WOhuhaXmSdyADsAPU8(BinderCallMonitorImpl.this);
+            public final void onChanged(Uri uri) throws Throwable {
+                BinderCallMonitorImpl.$r8$lambda$YnL46qd_6WOhuhaXmSdyADsAPU8(this.f$0);
             }
         };
         this.mBinderCallMonitorCallback = onChangedCallback;

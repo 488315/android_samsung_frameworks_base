@@ -20,6 +20,7 @@ public class TextDirectionHeuristics {
         int checkRtl(CharSequence charSequence, int i, int i2);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     static {
         boolean z = false;
         LTR = new TextDirectionHeuristicInternal(null, z);
@@ -71,11 +72,11 @@ public class TextDirectionHeuristics {
         }
 
         private boolean doCheck(CharSequence charSequence, int i, int i2) {
-            int checkRtl = this.mAlgorithm.checkRtl(charSequence, i, i2);
-            if (checkRtl == 0) {
+            int iCheckRtl = this.mAlgorithm.checkRtl(charSequence, i, i2);
+            if (iCheckRtl == 0) {
                 return true;
             }
-            if (checkRtl != 1) {
+            if (iCheckRtl != 1) {
                 return defaultIsRtl();
             }
             return false;
@@ -103,21 +104,21 @@ public class TextDirectionHeuristics {
         public int checkRtl(CharSequence charSequence, int i, int i2) {
             int i3 = i2 + i;
             int i4 = 0;
-            int i5 = 2;
-            while (i < i3 && i5 == 2) {
-                int codePointAt = Character.codePointAt(charSequence, i);
-                if (8294 <= codePointAt && codePointAt <= 8296) {
+            int iIsRtlCodePoint = 2;
+            while (i < i3 && iIsRtlCodePoint == 2) {
+                int iCodePointAt = Character.codePointAt(charSequence, i);
+                if (8294 <= iCodePointAt && iCodePointAt <= 8296) {
                     i4++;
-                } else if (codePointAt == 8297) {
+                } else if (iCodePointAt == 8297) {
                     if (i4 > 0) {
                         i4--;
                     }
                 } else if (i4 == 0) {
-                    i5 = TextDirectionHeuristics.isRtlCodePoint(codePointAt);
+                    iIsRtlCodePoint = TextDirectionHeuristics.isRtlCodePoint(iCodePointAt);
                 }
-                i += Character.charCount(codePointAt);
+                i += Character.charCount(iCodePointAt);
             }
-            return i5;
+            return iIsRtlCodePoint;
         }
 
         private FirstStrong() {
@@ -135,19 +136,19 @@ public class TextDirectionHeuristics {
             boolean z = false;
             int i4 = 0;
             while (i < i3) {
-                int codePointAt = Character.codePointAt(charSequence, i);
-                if (8294 <= codePointAt && codePointAt <= 8296) {
+                int iCodePointAt = Character.codePointAt(charSequence, i);
+                if (8294 <= iCodePointAt && iCodePointAt <= 8296) {
                     i4++;
-                } else if (codePointAt == 8297) {
+                } else if (iCodePointAt == 8297) {
                     if (i4 > 0) {
                         i4--;
                     }
                 } else if (i4 != 0) {
                     continue;
                 } else {
-                    int isRtlCodePoint = TextDirectionHeuristics.isRtlCodePoint(codePointAt);
-                    if (isRtlCodePoint != 0) {
-                        if (isRtlCodePoint != 1) {
+                    int iIsRtlCodePoint = TextDirectionHeuristics.isRtlCodePoint(iCodePointAt);
+                    if (iIsRtlCodePoint != 0) {
+                        if (iIsRtlCodePoint != 1) {
                             continue;
                         } else if (!this.mLookForRtl) {
                             return 1;
@@ -157,7 +158,7 @@ public class TextDirectionHeuristics {
                     }
                     z = true;
                 }
-                i += Character.charCount(codePointAt);
+                i += Character.charCount(iCodePointAt);
                 z = z;
             }
             if (z) {

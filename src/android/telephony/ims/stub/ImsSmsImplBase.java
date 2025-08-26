@@ -99,9 +99,9 @@ public class ImsSmsImplBase {
             iImsSmsListener.onSmsReceived(i, str, bArr);
         } catch (RemoteException e) {
             Log.e(LOG_TAG, "Can not deliver sms: " + e.getMessage());
-            SmsMessage createFromPdu = SmsMessage.createFromPdu(bArr, str);
-            if (createFromPdu != null && createFromPdu.mWrappedSmsMessage != null) {
-                acknowledgeSms(i, createFromPdu.mWrappedSmsMessage.mMessageRef, 2);
+            SmsMessage smsMessageCreateFromPdu = SmsMessage.createFromPdu(bArr, str);
+            if (smsMessageCreateFromPdu != null && smsMessageCreateFromPdu.mWrappedSmsMessage != null) {
+                acknowledgeSms(i, smsMessageCreateFromPdu.mWrappedSmsMessage.mMessageRef, 2);
             } else {
                 Log.w(LOG_TAG, "onSmsReceived: Invalid pdu entered.");
                 acknowledgeSms(i, 0, 2);
@@ -229,9 +229,9 @@ public class ImsSmsImplBase {
             iImsSmsListener.onSmsStatusReportReceived(i, str, bArr);
         } catch (RemoteException e) {
             Log.e(LOG_TAG, "Can not process sms status report: " + e.getMessage());
-            SmsMessage createFromPdu = SmsMessage.createFromPdu(bArr, str);
-            if (createFromPdu != null && createFromPdu.mWrappedSmsMessage != null) {
-                acknowledgeSmsReport(i, createFromPdu.mWrappedSmsMessage.mMessageRef, 2);
+            SmsMessage smsMessageCreateFromPdu = SmsMessage.createFromPdu(bArr, str);
+            if (smsMessageCreateFromPdu != null && smsMessageCreateFromPdu.mWrappedSmsMessage != null) {
+                acknowledgeSmsReport(i, smsMessageCreateFromPdu.mWrappedSmsMessage.mMessageRef, 2);
             } else {
                 Log.w(LOG_TAG, "onSmsStatusReportReceived: Invalid pdu entered.");
                 acknowledgeSmsReport(i, 0, 2);

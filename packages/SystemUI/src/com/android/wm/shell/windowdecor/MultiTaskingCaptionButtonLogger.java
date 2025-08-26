@@ -2,17 +2,16 @@ package com.android.wm.shell.windowdecor;
 
 import android.util.Slog;
 import com.samsung.android.rune.CoreRune;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MultiTaskingCaptionButtonLogger {
     public static final HashMap sLoggerMethods = new HashMap();
     public static boolean sInitialized = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CaptionLoggerPairKey {
         public final int mBehavior;
         public final int mInteraction;
@@ -44,7 +43,7 @@ public class MultiTaskingCaptionButtonLogger {
         }
     }
 
-    public MultiTaskingCaptionButtonLogger() {
+    public MultiTaskingCaptionButtonLogger() throws SecurityException {
         MultiTaskingCaptionButtonLogger multiTaskingCaptionButtonLogger;
         if (sInitialized || !CoreRune.MW_SA_LOGGING) {
             return;
@@ -67,7 +66,7 @@ public class MultiTaskingCaptionButtonLogger {
         }
     }
 
-    public void invokeLog(Method method, String str) {
+    public void invokeLog(Method method, String str) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (CoreRune.MW_SA_LOGGING && method != null) {
             try {
                 Slog.d("MultiTaskingCaptionButtonLogger", "invoke logger=" + method.getName());

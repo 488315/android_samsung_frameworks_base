@@ -26,14 +26,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PhysicsAnimationLayout extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public PhysicsAnimationController mController;
     public final HashMap mEndActionForProperty;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AllAnimationsForPropertyFinishedEndListener implements DynamicAnimation.OnAnimationEndListener {
         public final DynamicAnimation.ViewProperty mProperty;
 
@@ -65,11 +63,9 @@ public class PhysicsAnimationLayout extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class PhysicsAnimationController {
         public PhysicsAnimationLayout mLayout;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface ChildAnimationConfigurator {
             void configureAnimationForChildAtIndex(int i, PhysicsPropertyAnimator physicsPropertyAnimator);
         }
@@ -88,19 +84,19 @@ public class PhysicsAnimationLayout extends FrameLayout {
         }
 
         public final PhysicsAnimationLayout$PhysicsAnimationController$$ExternalSyntheticLambda1 animationsForChildrenFromIndex(boolean z, ChildAnimationConfigurator childAnimationConfigurator) {
-            PhysicsPropertyAnimator animationForChild;
+            PhysicsPropertyAnimator physicsPropertyAnimatorAnimationForChild;
             HashSet hashSet = new HashSet();
             ArrayList arrayList = new ArrayList();
             for (int i = 0; i < this.mLayout.getChildCount(); i++) {
                 if (z) {
-                    animationForChild = animationForChild(this.mLayout.getChildAt(i));
-                    animationForChild.property(DynamicAnimation.ALPHA, 0.0f, new Runnable[0]);
+                    physicsPropertyAnimatorAnimationForChild = animationForChild(this.mLayout.getChildAt(i));
+                    physicsPropertyAnimatorAnimationForChild.property(DynamicAnimation.ALPHA, 0.0f, new Runnable[0]);
                 } else {
-                    animationForChild = animationForChild(this.mLayout.getChildAt(i));
+                    physicsPropertyAnimatorAnimationForChild = animationForChild(this.mLayout.getChildAt(i));
                 }
-                childAnimationConfigurator.configureAnimationForChildAtIndex(i, animationForChild);
-                hashSet.addAll(animationForChild.getAnimatedProperties());
-                arrayList.add(animationForChild);
+                childAnimationConfigurator.configureAnimationForChildAtIndex(i, physicsPropertyAnimatorAnimationForChild);
+                hashSet.addAll(physicsPropertyAnimatorAnimationForChild.getAnimatedProperties());
+                arrayList.add(physicsPropertyAnimatorAnimationForChild);
             }
             return new PhysicsAnimationLayout$PhysicsAnimationController$$ExternalSyntheticLambda1(this, hashSet, arrayList);
         }
@@ -127,7 +123,6 @@ public class PhysicsAnimationLayout extends FrameLayout {
         public abstract void onChildReordered();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PhysicsPropertyAnimator {
         public PhysicsAnimationController mAssociatedController;
         public ObjectAnimator mPathAnimator;
@@ -196,7 +191,7 @@ public class PhysicsAnimationLayout extends FrameLayout {
                 Runnable runnable = new Runnable() { // from class: com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout$PhysicsPropertyAnimator$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SpringForce springForce2 = SpringForce.this;
+                        SpringForce springForce2 = springForce;
                         float f5 = f3;
                         float f6 = f4;
                         float f7 = f2;
@@ -273,7 +268,7 @@ public class PhysicsAnimationLayout extends FrameLayout {
                 Runnable runnable = new Runnable() { // from class: com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout$PhysicsPropertyAnimator$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimator = PhysicsAnimationLayout.PhysicsPropertyAnimator.this;
+                        PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimator = this.f$0;
                         SpringAnimation springAnimation = springAnimationFromView;
                         SpringAnimation springAnimation2 = springAnimationFromView2;
                         SpringAnimation springAnimation3 = springAnimationFromView3;
@@ -306,7 +301,7 @@ public class PhysicsAnimationLayout extends FrameLayout {
                 this.mPathAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout$PhysicsPropertyAnimator$$ExternalSyntheticLambda4
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        PhysicsAnimationLayout$PhysicsPropertyAnimator$$ExternalSyntheticLambda0.this.run();
+                        physicsAnimationLayout$PhysicsPropertyAnimator$$ExternalSyntheticLambda02.run();
                     }
                 });
                 this.mPathAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout.PhysicsPropertyAnimator.5
@@ -359,15 +354,15 @@ public class PhysicsAnimationLayout extends FrameLayout {
                 }
                 SpringForce springForce3 = physicsAnimationLayout.mController.getSpringForce(this.mView);
                 View view2 = this.mView;
-                float floatValue = ((Float) ((HashMap) this.mAnimatedProperties).get(viewProperty2)).floatValue();
-                float floatValue2 = ((Float) ((HashMap) this.mPositionStartVelocities).getOrDefault(viewProperty2, Float.valueOf(-3.4028235E38f))).floatValue();
+                float fFloatValue = ((Float) ((HashMap) this.mAnimatedProperties).get(viewProperty2)).floatValue();
+                float fFloatValue2 = ((Float) ((HashMap) this.mPositionStartVelocities).getOrDefault(viewProperty2, Float.valueOf(-3.4028235E38f))).floatValue();
                 long j2 = this.mStartDelay;
                 float f = this.mStiffness;
                 if (f < 0.0f) {
                     double d = springForce3.mNaturalFreq;
                     f = (float) (d * d);
                 }
-                animateValueForChild(viewProperty2, view2, floatValue, floatValue2, j2, f, (float) springForce3.mDampingRatio, (Runnable[]) ((HashMap) this.mEndActionsForProperty).get(viewProperty2));
+                animateValueForChild(viewProperty2, view2, fFloatValue, fFloatValue2, j2, f, (float) springForce3.mDampingRatio, (Runnable[]) ((HashMap) this.mEndActionsForProperty).get(viewProperty2));
             }
             clearAnimator();
         }
@@ -497,9 +492,9 @@ public class PhysicsAnimationLayout extends FrameLayout {
             super.removeView(view);
             return;
         }
-        int indexOfChild = indexOfChild(view);
+        int iIndexOfChild = indexOfChild(view);
         super.removeView(view);
-        addTransientView(view, indexOfChild);
+        addTransientView(view, iIndexOfChild);
         this.mController.onChildRemoved(view, new PhysicsAnimationLayout$$ExternalSyntheticLambda0(this, view));
     }
 
@@ -552,12 +547,12 @@ public class PhysicsAnimationLayout extends FrameLayout {
                 SpringAnimation springAnimationFromView;
                 View view2 = view;
                 int i = PhysicsAnimationLayout.$r8$clinit;
-                PhysicsAnimationLayout physicsAnimationLayout = PhysicsAnimationLayout.this;
-                int indexOfChild = physicsAnimationLayout.indexOfChild(view2);
+                PhysicsAnimationLayout physicsAnimationLayout = this.f$0;
+                int iIndexOfChild = physicsAnimationLayout.indexOfChild(view2);
                 PhysicsAnimationLayout.PhysicsAnimationController physicsAnimationController = physicsAnimationLayout.mController;
                 DynamicAnimation.ViewProperty viewProperty2 = viewProperty;
-                int nextAnimationInChain = physicsAnimationController.getNextAnimationInChain(viewProperty2, indexOfChild);
-                if (nextAnimationInChain == -1 || indexOfChild < 0) {
+                int nextAnimationInChain = physicsAnimationController.getNextAnimationInChain(viewProperty2, iIndexOfChild);
+                if (nextAnimationInChain == -1 || iIndexOfChild < 0) {
                     return;
                 }
                 float offsetForChainedPropertyAnimation = physicsAnimationLayout.mController.getOffsetForChainedPropertyAnimation(viewProperty2, nextAnimationInChain);

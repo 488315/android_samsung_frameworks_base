@@ -2,8 +2,10 @@ package android.hardware;
 
 import android.graphics.GraphicBuffer;
 import android.os.BadParcelableException;
+import android.os.Debug;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.SystemClock;
 import android.provider.Telephony;
 import com.android.libcore.readonly.Flags;
 import dalvik.annotation.optimization.CriticalNative;
@@ -23,9 +25,9 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
             if (parcel == null) {
                 throw new NullPointerException("null passed to createFromParcel");
             }
-            long nReadHardwareBufferFromParcel = HardwareBuffer.nReadHardwareBufferFromParcel(parcel);
-            if (nReadHardwareBufferFromParcel != 0) {
-                return new HardwareBuffer(nReadHardwareBufferFromParcel);
+            long jNReadHardwareBufferFromParcel = HardwareBuffer.nReadHardwareBufferFromParcel(parcel);
+            if (jNReadHardwareBufferFromParcel != 0) {
+                return new HardwareBuffer(jNReadHardwareBufferFromParcel);
             }
             throw new BadParcelableException("Failed to read hardware buffer");
         }
@@ -120,6 +122,28 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
         return 1;
     }
 
+    public class Info {
+        String mCallStack;
+        long mCreatedTime = SystemClock.elapsedRealtime();
+        int mHeight;
+        long mId;
+        long mNativeObject;
+        int mWidth;
+
+        Info(HardwareBuffer hardwareBuffer, String str) {
+            this.mCallStack = str;
+        }
+    }
+
+    private Info makeInfo(String str) {
+        Info info = new Info(this, str);
+        info.mNativeObject = this.mNativeObject;
+        info.mId = getId();
+        info.mWidth = getWidth();
+        info.mHeight = getHeight();
+        return info;
+    }
+
     public static HardwareBuffer create(int i, int i2, int i3, int i4, long j) {
         if (i <= 0) {
             throw new IllegalArgumentException("Invalid width " + i);
@@ -133,11 +157,11 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
         if (i3 == 33 && i2 != 1) {
             throw new IllegalArgumentException("Height must be 1 when using the BLOB format");
         }
-        long nCreateHardwareBuffer = nCreateHardwareBuffer(i, i2, i3, i4, j);
-        if (nCreateHardwareBuffer == 0) {
+        long jNCreateHardwareBuffer = nCreateHardwareBuffer(i, i2, i3, i4, j);
+        if (jNCreateHardwareBuffer == 0) {
             throw new IllegalArgumentException("Unable to create a HardwareBuffer, either the dimensions passed were too large, too many image layers were requested, or an invalid set of usage flags or invalid format was passed");
         }
-        return new HardwareBuffer(nCreateHardwareBuffer);
+        return new HardwareBuffer(jNCreateHardwareBuffer);
     }
 
     public static boolean isSupported(int i, int i2, int i3, int i4, long j) {
@@ -161,11 +185,11 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
     }
 
     private static NativeAllocationRegistry getRegistry(long j) {
-        long nGetNativeFinalizer = nGetNativeFinalizer();
+        long jNGetNativeFinalizer = nGetNativeFinalizer();
         if (Flags.nativeMetrics()) {
-            return NativeAllocationRegistry.createNonmalloced(HardwareBuffer.class, nGetNativeFinalizer, j);
+            return NativeAllocationRegistry.createNonmalloced(HardwareBuffer.class, jNGetNativeFinalizer, j);
         }
-        return NativeAllocationRegistry.createNonmalloced(HardwareBuffer.class.getClassLoader(), nGetNativeFinalizer, j);
+        return NativeAllocationRegistry.createNonmalloced(HardwareBuffer.class.getClassLoader(), jNGetNativeFinalizer, j);
     }
 
     private HardwareBuffer(long j) {
@@ -174,6 +198,10 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
         this.mNativeObject = j;
         this.mCleaner = getRegistry(nEstimateSize(j)).registerNativeAllocation(this, this.mNativeObject);
         closeGuard.open("HardwareBuffer.close");
+        if (!HardwareBufferInfoRegistry.getInstance().isEnabled() || this.mNativeObject == 0) {
+            return;
+        }
+        HardwareBufferInfoRegistry.getInstance().add(makeInfo(Debug.getCallers(11)));
     }
 
     protected void finalize() throws Throwable {
@@ -225,6 +253,9 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
     public void close() {
         if (isClosed()) {
             return;
+        }
+        if (HardwareBufferInfoRegistry.getInstance().isEnabled()) {
+            HardwareBufferInfoRegistry.getInstance().remove(this.mNativeObject);
         }
         this.mCloseGuard.close();
         this.mNativeObject = 0L;

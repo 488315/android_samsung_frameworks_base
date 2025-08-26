@@ -58,11 +58,11 @@ public class ViewRootRectTracker {
         ArrayList arrayList = new ArrayList(this.mRootRects);
         while (it.hasNext()) {
             ViewInfo next = it.next();
-            int update = next.update();
-            if (update == 0) {
+            int iUpdate = next.update();
+            if (iUpdate == 0) {
                 z = true;
-            } else if (update != 1) {
-                if (update == 2) {
+            } else if (iUpdate != 1) {
+                if (iUpdate == 2) {
                     this.mViewsChanged = true;
                     it.remove();
                 }
@@ -101,8 +101,8 @@ public class ViewRootRectTracker {
 
     /* JADX INFO: Access modifiers changed from: private */
     public List<Rect> getTrackedRectsForView(View view) {
-        List<Rect> apply = this.mRectCollector.apply(view);
-        return apply == null ? Collections.EMPTY_LIST : apply;
+        List<Rect> listApply = this.mRectCollector.apply(view);
+        return listApply == null ? Collections.EMPTY_LIST : listApply;
     }
 
     private class ViewInfo {

@@ -84,8 +84,8 @@ public final class ObjectAnimator extends ValueAnimator {
     }
 
     public static ObjectAnimator ofInt(Object obj, String str, String str2, Path path) {
-        PathKeyframes ofPath = KeyframeSet.ofPath(path);
-        return ofPropertyValuesHolder(obj, PropertyValuesHolder.ofKeyframes(str, ofPath.createXIntKeyframes()), PropertyValuesHolder.ofKeyframes(str2, ofPath.createYIntKeyframes()));
+        PathKeyframes pathKeyframesOfPath = KeyframeSet.ofPath(path);
+        return ofPropertyValuesHolder(obj, PropertyValuesHolder.ofKeyframes(str, pathKeyframesOfPath.createXIntKeyframes()), PropertyValuesHolder.ofKeyframes(str2, pathKeyframesOfPath.createYIntKeyframes()));
     }
 
     public static <T> ObjectAnimator ofInt(T t, Property<T, Integer> property, int... iArr) {
@@ -95,8 +95,8 @@ public final class ObjectAnimator extends ValueAnimator {
     }
 
     public static <T> ObjectAnimator ofInt(T t, Property<T, Integer> property, Property<T, Integer> property2, Path path) {
-        PathKeyframes ofPath = KeyframeSet.ofPath(path);
-        return ofPropertyValuesHolder(t, PropertyValuesHolder.ofKeyframes(property, ofPath.createXIntKeyframes()), PropertyValuesHolder.ofKeyframes(property2, ofPath.createYIntKeyframes()));
+        PathKeyframes pathKeyframesOfPath = KeyframeSet.ofPath(path);
+        return ofPropertyValuesHolder(t, PropertyValuesHolder.ofKeyframes(property, pathKeyframesOfPath.createXIntKeyframes()), PropertyValuesHolder.ofKeyframes(property2, pathKeyframesOfPath.createYIntKeyframes()));
     }
 
     public static ObjectAnimator ofMultiInt(Object obj, String str, int[][] iArr) {
@@ -113,15 +113,15 @@ public final class ObjectAnimator extends ValueAnimator {
     }
 
     public static ObjectAnimator ofArgb(Object obj, String str, int... iArr) {
-        ObjectAnimator ofInt = ofInt(obj, str, iArr);
-        ofInt.setEvaluator(ArgbEvaluator.getInstance());
-        return ofInt;
+        ObjectAnimator objectAnimatorOfInt = ofInt(obj, str, iArr);
+        objectAnimatorOfInt.setEvaluator(ArgbEvaluator.getInstance());
+        return objectAnimatorOfInt;
     }
 
     public static <T> ObjectAnimator ofArgb(T t, Property<T, Integer> property, int... iArr) {
-        ObjectAnimator ofInt = ofInt(t, property, iArr);
-        ofInt.setEvaluator(ArgbEvaluator.getInstance());
-        return ofInt;
+        ObjectAnimator objectAnimatorOfInt = ofInt(t, property, iArr);
+        objectAnimatorOfInt.setEvaluator(ArgbEvaluator.getInstance());
+        return objectAnimatorOfInt;
     }
 
     public static ObjectAnimator ofFloat(Object obj, String str, float... fArr) {
@@ -131,8 +131,8 @@ public final class ObjectAnimator extends ValueAnimator {
     }
 
     public static ObjectAnimator ofFloat(Object obj, String str, String str2, Path path) {
-        PathKeyframes ofPath = KeyframeSet.ofPath(path);
-        return ofPropertyValuesHolder(obj, PropertyValuesHolder.ofKeyframes(str, ofPath.createXFloatKeyframes()), PropertyValuesHolder.ofKeyframes(str2, ofPath.createYFloatKeyframes()));
+        PathKeyframes pathKeyframesOfPath = KeyframeSet.ofPath(path);
+        return ofPropertyValuesHolder(obj, PropertyValuesHolder.ofKeyframes(str, pathKeyframesOfPath.createXFloatKeyframes()), PropertyValuesHolder.ofKeyframes(str2, pathKeyframesOfPath.createYFloatKeyframes()));
     }
 
     public static <T> ObjectAnimator ofFloat(T t, Property<T, Float> property, float... fArr) {
@@ -142,8 +142,8 @@ public final class ObjectAnimator extends ValueAnimator {
     }
 
     public static <T> ObjectAnimator ofFloat(T t, Property<T, Float> property, Property<T, Float> property2, Path path) {
-        PathKeyframes ofPath = KeyframeSet.ofPath(path);
-        return ofPropertyValuesHolder(t, PropertyValuesHolder.ofKeyframes(property, ofPath.createXFloatKeyframes()), PropertyValuesHolder.ofKeyframes(property2, ofPath.createYFloatKeyframes()));
+        PathKeyframes pathKeyframesOfPath = KeyframeSet.ofPath(path);
+        return ofPropertyValuesHolder(t, PropertyValuesHolder.ofKeyframes(property, pathKeyframesOfPath.createXFloatKeyframes()), PropertyValuesHolder.ofKeyframes(property2, pathKeyframesOfPath.createYFloatKeyframes()));
     }
 
     public static ObjectAnimator ofMultiFloat(Object obj, String str, float[][] fArr) {

@@ -28,10 +28,10 @@ class ToggleAccessibilityServiceTarget extends AccessibilityServiceTarget {
     @Override // com.android.internal.accessibility.dialog.AccessibilityServiceTarget, com.android.internal.accessibility.dialog.AccessibilityTarget, com.android.internal.accessibility.dialog.TargetOperations
     public void updateActionItem(TargetAdapter.ViewHolder viewHolder, int i) {
         super.updateActionItem(viewHolder, i);
-        boolean isAccessibilityTargetAllowed = AccessibilityTargetHelper.isAccessibilityTargetAllowed(getContext(), getComponentName().getPackageName(), getUid());
+        boolean zIsAccessibilityTargetAllowed = AccessibilityTargetHelper.isAccessibilityTargetAllowed(getContext(), getComponentName().getPackageName(), getUid());
         viewHolder.mStatusView.setVisibility(i == 1 ? 8 : 0);
         viewHolder.mStatusView.lambda$setTextAsync$0(getStateDescription());
-        viewHolder.mStatusView.setAlpha(isAccessibilityTargetAllowed ? 1.0f : 0.5f);
+        viewHolder.mStatusView.setAlpha(zIsAccessibilityTargetAllowed ? 1.0f : 0.5f);
         if (AccessibilityUtils.isAccessibilityServiceEnabled(getContext(), getId())) {
             viewHolder.mStatusView.setTextColor(ShortcutUtils.getPrimaryDarkColorId(this.mContext));
         } else {

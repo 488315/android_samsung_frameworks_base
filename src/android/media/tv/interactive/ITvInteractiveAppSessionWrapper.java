@@ -99,7 +99,7 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
         if (this.mSessionImpl == null) {
             return;
         }
-        long nanoTime = System.nanoTime();
+        long jNanoTime = System.nanoTime();
         switch (message.what) {
             case 1:
                 this.mSessionImpl.release();
@@ -308,9 +308,9 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
                 Log.w(TAG, "Unhandled message code: " + message.what);
                 break;
         }
-        long nanoTime2 = (System.nanoTime() - nanoTime) / 1000000;
-        if (nanoTime2 > 1000) {
-            Log.w(TAG, "Handling message (" + message.what + ") took too long time (duration=" + nanoTime2 + "ms)");
+        long jNanoTime2 = (System.nanoTime() - jNanoTime) / 1000000;
+        if (jNanoTime2 > 1000) {
+            Log.w(TAG, "Handling message (" + message.what + ") took too long time (duration=" + jNanoTime2 + "ms)");
         }
     }
 
@@ -626,9 +626,9 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
                 finishInputEvent(inputEvent, false);
                 return;
             }
-            int dispatchInputEvent = ITvInteractiveAppSessionWrapper.this.mSessionImpl.dispatchInputEvent(inputEvent, this);
-            if (dispatchInputEvent != -1) {
-                finishInputEvent(inputEvent, dispatchInputEvent == 1);
+            int iDispatchInputEvent = ITvInteractiveAppSessionWrapper.this.mSessionImpl.dispatchInputEvent(inputEvent, this);
+            if (iDispatchInputEvent != -1) {
+                finishInputEvent(inputEvent, iDispatchInputEvent == 1);
             }
         }
     }

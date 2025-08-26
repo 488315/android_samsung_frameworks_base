@@ -25,7 +25,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper {
     public final boolean allowDataLossOnRecovery;
@@ -36,7 +35,6 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
     public final boolean useNoBackupDirectory;
     public boolean writeAheadLoggingEnabled;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,7 +44,6 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DBRefHolder {
         public FrameworkSQLiteDatabase db;
 
@@ -55,7 +52,6 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OpenHelper extends SQLiteOpenHelper {
         public static final Companion Companion = new Companion(null);
         public final boolean allowDataLossOnRecovery;
@@ -66,7 +62,6 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
         public boolean migrated;
         public boolean opened;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class CallbackException extends RuntimeException {
             private final CallbackName callbackName;
             private final Throwable cause;
@@ -89,7 +84,6 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
 
         /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
         /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class CallbackName {
             public static final /* synthetic */ CallbackName[] $VALUES;
             public static final CallbackName ON_CONFIGURE;
@@ -126,7 +120,6 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -136,7 +129,6 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -188,31 +180,31 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
                         }
                         return;
                     }
-                    List<Pair<String, String>> list = null;
+                    List<Pair<String, String>> attachedDbs = null;
                     try {
                         try {
-                            list = frameworkSQLiteDatabase.delegate.getAttachedDbs();
-                        } catch (SQLiteException unused) {
-                        }
-                        try {
-                            frameworkSQLiteDatabase.close();
-                        } catch (IOException unused2) {
-                        }
-                        if (list != null) {
-                            return;
-                        }
-                    } finally {
-                        if (list != null) {
-                            Iterator<T> it = list.iterator();
-                            while (it.hasNext()) {
-                                SupportSQLiteOpenHelper.Callback.deleteDatabaseFile((String) ((Pair) it.next()).second);
-                            }
-                        } else {
-                            String path2 = frameworkSQLiteDatabase.delegate.getPath();
-                            if (path2 != null) {
-                                SupportSQLiteOpenHelper.Callback.deleteDatabaseFile(path2);
+                            attachedDbs = frameworkSQLiteDatabase.delegate.getAttachedDbs();
+                        } finally {
+                            if (attachedDbs != null) {
+                                Iterator<T> it = attachedDbs.iterator();
+                                while (it.hasNext()) {
+                                    SupportSQLiteOpenHelper.Callback.deleteDatabaseFile((String) ((Pair) it.next()).second);
+                                }
+                            } else {
+                                String path2 = frameworkSQLiteDatabase.delegate.getPath();
+                                if (path2 != null) {
+                                    SupportSQLiteOpenHelper.Callback.deleteDatabaseFile(path2);
+                                }
                             }
                         }
+                    } catch (SQLiteException unused) {
+                    }
+                    try {
+                        frameworkSQLiteDatabase.close();
+                    } catch (IOException unused2) {
+                    }
+                    if (attachedDbs != null) {
+                        return;
                     }
                 }
             });
@@ -241,12 +233,12 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
             try {
                 this.lock.lock((this.opened || getDatabaseName() == null) ? false : true);
                 this.migrated = false;
-                SQLiteDatabase innerGetDatabase = innerGetDatabase(z);
+                SQLiteDatabase sQLiteDatabaseInnerGetDatabase = innerGetDatabase(z);
                 if (this.migrated) {
                     close();
                     wrappedDb = getSupportDatabase(z);
                 } else {
-                    wrappedDb = getWrappedDb(innerGetDatabase);
+                    wrappedDb = getWrappedDb(sQLiteDatabaseInnerGetDatabase);
                 }
                 this.lock.unlock();
                 return wrappedDb;
@@ -269,7 +261,7 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
             return frameworkSQLiteDatabase2;
         }
 
-        public final SQLiteDatabase innerGetDatabase(boolean z) {
+        public final SQLiteDatabase innerGetDatabase(boolean z) throws Throwable {
             SQLiteDatabase readableDatabase;
             SQLiteDatabase readableDatabase2;
             File parentFile;
@@ -310,16 +302,7 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
                         CallbackException callbackException = (CallbackException) th;
                         Throwable cause = callbackException.getCause();
                         int i = WhenMappings.$EnumSwitchMapping$0[callbackException.getCallbackName().ordinal()];
-                        if (i == 1) {
-                            throw cause;
-                        }
-                        if (i == 2) {
-                            throw cause;
-                        }
-                        if (i == 3) {
-                            throw cause;
-                        }
-                        if (i == 4) {
+                        if (i == 1 || i == 2 || i == 3 || i == 4) {
                             throw cause;
                         }
                         if (i != 5) {
@@ -453,7 +436,7 @@ public final class FrameworkSQLiteOpenHelper implements SupportSQLiteOpenHelper 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 FrameworkSQLiteOpenHelper.OpenHelper openHelper;
-                FrameworkSQLiteOpenHelper frameworkSQLiteOpenHelper = FrameworkSQLiteOpenHelper.this;
+                FrameworkSQLiteOpenHelper frameworkSQLiteOpenHelper = this.f$0;
                 if (frameworkSQLiteOpenHelper.name == null || !frameworkSQLiteOpenHelper.useNoBackupDirectory) {
                     openHelper = new FrameworkSQLiteOpenHelper.OpenHelper(frameworkSQLiteOpenHelper.context, frameworkSQLiteOpenHelper.name, new FrameworkSQLiteOpenHelper.DBRefHolder(null), frameworkSQLiteOpenHelper.callback, frameworkSQLiteOpenHelper.allowDataLossOnRecovery);
                 } else {

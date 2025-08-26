@@ -12,7 +12,6 @@ import android.util.Log;
 import com.android.internal.util.CallbackRegistry;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TiledImageDrawable extends Drawable {
     public RenderNode mNode;
@@ -45,13 +44,13 @@ public class TiledImageDrawable extends Drawable {
                 this.mNode = new RenderNode("TiledImageDrawable");
             }
             this.mNode.setPosition(0, 0, this.mTiles.getWidth(), this.mTiles.getHeight());
-            RecordingCanvas beginRecording = this.mNode.beginRecording();
-            beginRecording.translate(-this.mTiles.mRegion.getBounds().left, -this.mTiles.getTop());
+            RecordingCanvas recordingCanvasBeginRecording = this.mNode.beginRecording();
+            recordingCanvasBeginRecording.translate(-this.mTiles.mRegion.getBounds().left, -this.mTiles.getTop());
             for (int i = 0; i < ((ArrayList) this.mTiles.mTiles).size(); i++) {
                 ImageTile imageTile = (ImageTile) ((ArrayList) this.mTiles.mTiles).get(i);
-                beginRecording.save();
+                recordingCanvasBeginRecording.save();
                 Rect rect = imageTile.mLocation;
-                beginRecording.translate(rect.left, rect.top);
+                recordingCanvasBeginRecording.translate(rect.left, rect.top);
                 synchronized (imageTile) {
                     try {
                         if (imageTile.mNode == null) {
@@ -60,14 +59,14 @@ public class TiledImageDrawable extends Drawable {
                         if (imageTile.mNode.hasDisplayList()) {
                             renderNode = imageTile.mNode;
                         } else {
-                            int min = Math.min(imageTile.mImage.getWidth(), imageTile.mLocation.width());
-                            int min2 = Math.min(imageTile.mImage.getHeight(), imageTile.mLocation.height());
-                            imageTile.mNode.setPosition(0, 0, min, min2);
-                            RecordingCanvas beginRecording2 = imageTile.mNode.beginRecording(min, min2);
-                            beginRecording2.save();
-                            beginRecording2.clipRect(0, 0, imageTile.mLocation.width(), imageTile.mLocation.height());
-                            beginRecording2.drawBitmap(Bitmap.wrapHardwareBuffer(imageTile.mImage.getHardwareBuffer(), ImageTile.COLOR_SPACE), 0.0f, 0.0f, (Paint) null);
-                            beginRecording2.restore();
+                            int iMin = Math.min(imageTile.mImage.getWidth(), imageTile.mLocation.width());
+                            int iMin2 = Math.min(imageTile.mImage.getHeight(), imageTile.mLocation.height());
+                            imageTile.mNode.setPosition(0, 0, iMin, iMin2);
+                            RecordingCanvas recordingCanvasBeginRecording2 = imageTile.mNode.beginRecording(iMin, iMin2);
+                            recordingCanvasBeginRecording2.save();
+                            recordingCanvasBeginRecording2.clipRect(0, 0, imageTile.mLocation.width(), imageTile.mLocation.height());
+                            recordingCanvasBeginRecording2.drawBitmap(Bitmap.wrapHardwareBuffer(imageTile.mImage.getHardwareBuffer(), ImageTile.COLOR_SPACE), 0.0f, 0.0f, (Paint) null);
+                            recordingCanvasBeginRecording2.restore();
                             imageTile.mNode.endRecording();
                             renderNode = imageTile.mNode;
                         }
@@ -75,8 +74,8 @@ public class TiledImageDrawable extends Drawable {
                         throw th;
                     }
                 }
-                beginRecording.drawRenderNode(renderNode);
-                beginRecording.restore();
+                recordingCanvasBeginRecording.drawRenderNode(renderNode);
+                recordingCanvasBeginRecording.restore();
             }
             this.mNode.endRecording();
         }

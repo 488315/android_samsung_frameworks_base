@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Ref$IntRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SchedulerImpl {
     public final Function1 enqueue;
@@ -32,13 +31,13 @@ public final class SchedulerImpl {
             if (pair == null) {
                 throw new IllegalStateException("Unexpected empty scheduler");
             }
-            new SchedulerImpl$drain$1(((Number) pair.getFirst()).intValue(), this, ref$IntRef).invoke(LogIndent.m2570boximpl(), new Function2() { // from class: com.android.systemui.kairos.internal.SchedulerImpl$drainCompact$1$1
+            new SchedulerImpl$drain$1(((Number) pair.getFirst()).intValue(), this, ref$IntRef).invoke(LogIndent.m2587boximpl(), new Function2() { // from class: com.android.systemui.kairos.internal.SchedulerImpl$drainCompact$1$1
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     int i = ((LogIndent) obj).currentLogIndent;
                     MuxNode muxNode = (MuxNode) obj2;
                     muxNode.markedForCompaction = false;
-                    SchedulerImpl schedulerImpl = SchedulerImpl.this;
+                    SchedulerImpl schedulerImpl = this.this$0;
                     DepthTracker depthTracker = muxNode.depthTracker;
                     if (depthTracker.isDirty()) {
                         depthTracker.applyChanges(schedulerImpl, muxNode.downstreamSet, muxNode);

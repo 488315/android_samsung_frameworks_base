@@ -106,55 +106,167 @@ class ReflectionUtils {
     }
 
     protected static String extractClassNameFromFullClassPath(String str) {
-        String[] split = str.split("\\.");
-        if (split.length == 0) {
+        String[] strArrSplit = str.split("\\.");
+        if (strArrSplit.length == 0) {
             return "";
         }
-        return split[split.length - 1];
+        return strArrSplit[strArrSplit.length - 1];
     }
 
-    public static void dumpObjectFieldsWithClassTypeFilter(Object obj, String str, int i, String str2) {
+    public static void dumpObjectFieldsWithClassTypeFilter(Object obj, String str, int i, String str2) throws IllegalAccessException, IllegalArgumentException {
         ArrayList arrayList = new ArrayList();
         Log.e(TAG, "-------- Field list dump start : " + obj.toString() + " / Object type filter : " + str2 + " ----------");
         dumpObjectFields(obj, arrayList, str, null, "", 0, i, str2, null);
         Log.e(TAG, "-------- Field list dump finished ----------");
     }
 
-    public static void dumpObjectFieldsWithValueFilter(Object obj, String str, int i, String str2) {
+    public static void dumpObjectFieldsWithValueFilter(Object obj, String str, int i, String str2) throws IllegalAccessException, IllegalArgumentException {
         ArrayList arrayList = new ArrayList();
         Log.e(TAG, "-------- Field list dump start : " + obj.toString() + " / Value filter : " + str2 + " ----------");
         dumpObjectFields(obj, arrayList, str, null, "", 0, i, null, str2);
         Log.e(TAG, "-------- Field list dump finished ----------");
     }
 
-    public static void dumpObjectFields(Object obj, String str, int i) {
+    public static void dumpObjectFields(Object obj, String str, int i) throws IllegalAccessException, IllegalArgumentException {
         ArrayList arrayList = new ArrayList();
         Log.e(TAG, "-------- Field list dump start : " + obj.toString() + " ----------");
         dumpObjectFields(obj, arrayList, str, null, "", 0, i, null, null);
         Log.e(TAG, "-------- Field list dump finished ----------");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:78:0x020d  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x0218  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x021a  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x020f  */
+    /* JADX WARN: Removed duplicated region for block: B:100:0x021a  */
+    /* JADX WARN: Removed duplicated region for block: B:95:0x020d  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x020f  */
+    /* JADX WARN: Removed duplicated region for block: B:99:0x0218  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected static void dumpObjectFields(java.lang.Object r20, java.util.ArrayList<java.lang.Object> r21, java.lang.String r22, java.lang.reflect.Field r23, java.lang.String r24, int r25, int r26, java.lang.String r27, java.lang.String r28) {
-        /*
-            Method dump skipped, instructions count: 578
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.content.smartclip.ReflectionUtils.dumpObjectFields(java.lang.Object, java.util.ArrayList, java.lang.String, java.lang.reflect.Field, java.lang.String, int, int, java.lang.String, java.lang.String):void");
+    protected static void dumpObjectFields(Object obj, ArrayList<Object> arrayList, String str, Field field, String str2, int i, int i2, String str3, String str4) throws IllegalAccessException, IllegalArgumentException {
+        String string;
+        boolean z;
+        CharSequence charSequence;
+        boolean z2;
+        Object obj2;
+        ArrayList<Object> arrayList2 = arrayList;
+        int i3 = i2;
+        if (obj == null) {
+            return;
+        }
+        Class<?> cls = obj.getClass();
+        String name = cls.getName();
+        boolean z3 = findObjFromArrayList(arrayList2, obj) != -1;
+        if (cls.isPrimitive() || name.contains("java.lang.")) {
+            string = obj.toString();
+        } else {
+            string = "@" + Integer.toHexString(obj.hashCode());
+        }
+        if (cls.isArray()) {
+            string = string + " [arraySize = " + getArraySize(obj, name) + NavigationBarInflaterView.SIZE_MOD_END;
+        }
+        String indentString = getIndentString(i);
+        String strReplace = (field != null ? field.getType().getName() : "").replace("[L", "");
+        String str5 = str == null ? "" : str;
+        boolean z4 = true;
+        StringBuilder sb = new StringBuilder();
+        sb.append(str5);
+        sb.append(field != null ? field.getName() : "");
+        String string2 = sb.toString();
+        String str6 = str2 == null ? "" : str2;
+        Class<?> superclass = cls;
+        if ((str3 == null || str3.equals(name)) && (str4 == null || str4.equals(string))) {
+            z = z3;
+            if (superclass.isPrimitive() || strReplace.equals(name)) {
+                charSequence = "java.lang.";
+                Log.e(TAG, indentString + string2 + " = " + string + " (" + strReplace + ") : " + str6);
+            } else {
+                charSequence = "java.lang.";
+                Log.e(TAG, indentString + string2 + " = " + string + " (" + strReplace + " / " + name + ") : " + str6);
+            }
+        } else {
+            z = z3;
+            charSequence = "java.lang.";
+        }
+        if (!str6.equals("")) {
+            str6 = str6 + MediaMetrics.SEPARATOR;
+        }
+        String str7 = str6 + string2 + NavigationBarInflaterView.KEY_CODE_START + extractClassNameFromFullClassPath(name) + NavigationBarInflaterView.KEY_CODE_END;
+        if (z) {
+            return;
+        }
+        int i4 = i + 1;
+        if (i4 < i3) {
+            arrayList2.add(obj);
+        }
+        if (superclass.isArray()) {
+            int arraySize = getArraySize(obj, name);
+            int i5 = 0;
+            while (i5 < arraySize && i5 < 100) {
+                Object arrayValueObject = getArrayValueObject(obj, i5);
+                if (arrayValueObject != null && (!arrayValueObject.getClass().isPrimitive() || !arrayValueObject.toString().equals("0"))) {
+                    dumpObjectFields(arrayValueObject, arrayList2, NavigationBarInflaterView.SIZE_MOD_START + i5 + NavigationBarInflaterView.SIZE_MOD_END, null, str7, i4, i3, str3, str4);
+                }
+                i5++;
+                arrayList2 = arrayList;
+            }
+            if (arraySize > 100) {
+                Log.e(TAG, indentString + "\t[Dumped until index 100]");
+                return;
+            }
+            return;
+        }
+        if (isPrimitiveDataType(name) || name.contains(charSequence)) {
+            return;
+        }
+        while (superclass != null) {
+            Field[] declaredFields = superclass.getDeclaredFields();
+            int length = declaredFields.length;
+            int i6 = 0;
+            while (i6 < length) {
+                Field field2 = declaredFields[i6];
+                try {
+                    boolean zIsAccessible = field2.isAccessible();
+                    z2 = z4;
+                    try {
+                        field2.setAccessible(z2);
+                        obj2 = field2.get(obj);
+                        field2.setAccessible(zIsAccessible);
+                    } catch (IllegalAccessException | IllegalArgumentException e) {
+                        e = e;
+                        e.printStackTrace();
+                        obj2 = null;
+                        if ((field2.getModifiers() & 16) == 0) {
+                        }
+                        if ((field2.getModifiers() & 8) == 0) {
+                        }
+                        if (field2.isEnumConstant()) {
+                        }
+                        i6++;
+                        i3 = i2;
+                        z4 = z2;
+                    }
+                } catch (IllegalAccessException | IllegalArgumentException e2) {
+                    e = e2;
+                    z2 = z4;
+                }
+                boolean z5 = (field2.getModifiers() & 16) == 0 ? z2 : false;
+                boolean z6 = (field2.getModifiers() & 8) == 0 ? z2 : false;
+                if (field2.isEnumConstant() && ((!z6 || !z5) && i4 < i3)) {
+                    dumpObjectFields(obj2, arrayList, null, field2, str7, i4, i3, str3, str4);
+                }
+                i6++;
+                i3 = i2;
+                z4 = z2;
+            }
+            superclass = superclass.getSuperclass();
+            i3 = i2;
+        }
     }
 
-    public static void dumpObjectMethods(Object obj) {
+    public static void dumpObjectMethods(Object obj) throws SecurityException {
         Log.d(TAG, "-------- Method list dump start : " + obj.toString() + " ----------");
-        for (Class<?> cls = obj.getClass(); cls != null; cls = cls.getSuperclass()) {
-            Log.d(TAG, " -- Methods of " + cls.getName() + " class --");
-            for (Method method : cls.getDeclaredMethods()) {
+        for (Class<?> superclass = obj.getClass(); superclass != null; superclass = superclass.getSuperclass()) {
+            Log.d(TAG, " -- Methods of " + superclass.getName() + " class --");
+            for (Method method : superclass.getDeclaredMethods()) {
                 Log.d(TAG, method.toGenericString());
             }
         }
@@ -163,48 +275,48 @@ class ReflectionUtils {
 
     public static void dumpClassHierarchy(Object obj) {
         Log.d(TAG, "-------- Class hierarchy dump start : " + obj.toString() + " ----------");
-        for (Class<?> cls = obj.getClass(); cls != null; cls = cls.getSuperclass()) {
-            Log.d(TAG, "-- Class name : " + cls.getName());
-            for (Class<?> cls2 : cls.getInterfaces()) {
-                Log.d(TAG, "   + interfaces : " + cls2.getName());
+        for (Class<?> superclass = obj.getClass(); superclass != null; superclass = superclass.getSuperclass()) {
+            Log.d(TAG, "-- Class name : " + superclass.getName());
+            for (Class<?> cls : superclass.getInterfaces()) {
+                Log.d(TAG, "   + interfaces : " + cls.getName());
             }
         }
         Log.d(TAG, "-------- Class hierarchy dump finished ----------");
     }
 
-    protected static void getFieldObjectByObjectType(Object obj, int i, String str, int i2, ArrayList<Object> arrayList, int i3, int i4, boolean z) {
+    protected static void getFieldObjectByObjectType(Object obj, int i, String str, int i2, ArrayList<Object> arrayList, int i3, int i4, boolean z) throws IllegalAccessException, IllegalArgumentException {
         int i5;
-        boolean endsWith;
+        boolean zEndsWith;
         int i6;
         String name;
         String str2 = str;
         if (obj == null || str2 == null || i3 == (i5 = i4)) {
             return;
         }
-        Class<?> cls = obj.getClass();
-        while (cls != null) {
-            if (z && (name = cls.getName()) != null && (name.startsWith("android.view.") || name.startsWith("java."))) {
+        Class<?> superclass = obj.getClass();
+        while (superclass != null) {
+            if (z && (name = superclass.getName()) != null && (name.startsWith("android.view.") || name.startsWith("java."))) {
                 return;
             }
-            Field[] declaredFields = cls.getDeclaredFields();
+            Field[] declaredFields = superclass.getDeclaredFields();
             int length = declaredFields.length;
             int i7 = 0;
             while (i7 < length) {
                 Field field = declaredFields[i7];
                 String name2 = field.getType().getName();
                 try {
-                    boolean isAccessible = field.isAccessible();
+                    boolean zIsAccessible = field.isAccessible();
                     boolean z2 = true;
                     field.setAccessible(true);
                     Object obj2 = field.get(obj);
-                    field.setAccessible(isAccessible);
+                    field.setAccessible(zIsAccessible);
                     if (obj2 != null) {
                         if (i == 1) {
-                            endsWith = name2.endsWith(MediaMetrics.SEPARATOR + str2);
+                            zEndsWith = name2.endsWith(MediaMetrics.SEPARATOR + str2);
                         } else {
-                            endsWith = name2.equals(str2);
+                            zEndsWith = name2.equals(str2);
                         }
-                        if (endsWith) {
+                        if (zEndsWith) {
                             try {
                                 Iterator<Object> it = arrayList.iterator();
                                 while (true) {
@@ -253,7 +365,7 @@ class ReflectionUtils {
                 str2 = str;
                 i5 = i4;
             }
-            cls = cls.getSuperclass();
+            superclass = superclass.getSuperclass();
             str2 = str;
             i5 = i4;
         }
@@ -263,7 +375,7 @@ class ReflectionUtils {
         return getFieldObjectByObjectType(obj, i, str, i2, 1, z);
     }
 
-    public static Object[] getFieldObjectByObjectType(Object obj, int i, String str, int i2, int i3, boolean z) {
+    public static Object[] getFieldObjectByObjectType(Object obj, int i, String str, int i2, int i3, boolean z) throws IllegalAccessException, IllegalArgumentException {
         ArrayList arrayList = new ArrayList();
         if (obj == null || str == null) {
             return arrayList.toArray();
@@ -272,16 +384,16 @@ class ReflectionUtils {
         return arrayList.toArray();
     }
 
-    public static Object getFieldObjectByFieldName(Object obj, String str) {
+    public static Object getFieldObjectByFieldName(Object obj, String str) throws IllegalAccessException, IllegalArgumentException {
         if (obj != null && str != null) {
-            for (Class<?> cls = obj.getClass(); cls != null; cls = cls.getSuperclass()) {
-                for (Field field : cls.getDeclaredFields()) {
+            for (Class<?> superclass = obj.getClass(); superclass != null; superclass = superclass.getSuperclass()) {
+                for (Field field : superclass.getDeclaredFields()) {
                     if (str.equals(field.getName())) {
                         try {
-                            boolean isAccessible = field.isAccessible();
+                            boolean zIsAccessible = field.isAccessible();
                             field.setAccessible(true);
                             Object obj2 = field.get(obj);
-                            field.setAccessible(isAccessible);
+                            field.setAccessible(zIsAccessible);
                             return obj2;
                         } catch (IllegalAccessException | IllegalArgumentException e) {
                             Log.e(TAG, "Exception occurred in getFieldObjectByFieldName : " + e.toString());

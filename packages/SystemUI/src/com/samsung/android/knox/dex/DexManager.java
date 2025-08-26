@@ -21,7 +21,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DexManager {
     public static final int DEX_APP_ALREADY_SET_POLICY = 3;
@@ -39,7 +38,6 @@ public class DexManager {
     public IKnoxCustomManager mKnoxCustomService;
     public IDexPolicy mService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Retention(RetentionPolicy.SOURCE)
     public @interface SetWallpaperFlags {
     }
@@ -49,18 +47,14 @@ public class DexManager {
     }
 
     public static synchronized DexManager getInstance() {
-        DexManager dexManager;
-        synchronized (DexManager.class) {
-            try {
-                if (sDexManager == null) {
-                    sDexManager = new DexManager();
-                }
-                dexManager = sDexManager;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sDexManager == null) {
+                sDexManager = new DexManager();
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return dexManager;
+        return sDexManager;
     }
 
     public int addPackageToDisableList(String str) {
@@ -193,9 +187,9 @@ public class DexManager {
             } catch (RemoteException e) {
                 Log.w(TAG, "Failed talking with KnoxCustomManager service", e);
             }
-            return dexScreenTimeout / 1000;
+        } else {
+            dexScreenTimeout = 0;
         }
-        dexScreenTimeout = 0;
         return dexScreenTimeout / 1000;
     }
 
@@ -386,9 +380,9 @@ public class DexManager {
         }
         if (getKnoxCustomService() != null) {
             try {
-                Bitmap decodeStream = BitmapFactory.decodeStream(inputStream);
+                Bitmap bitmapDecodeStream = BitmapFactory.decodeStream(inputStream);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("bitmapData", decodeStream);
+                bundle.putParcelable("bitmapData", bitmapDecodeStream);
                 return this.mKnoxCustomService.setWallpaper(bundle, rect, z, i);
             } catch (RemoteException e) {
                 Log.w(TAG, "Failed talking with EnterpriseDeviceManager service", e);

@@ -1,6 +1,7 @@
 package com.android.systemui.util;
 
 import android.content.res.ColorStateList;
+import android.graphics.BlendMode;
 import android.graphics.BlendModeColorFilter;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
@@ -9,17 +10,18 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.util.Log;
 import androidx.vectordrawable.graphics.drawable.AnimatorInflaterCompat$$ExternalSyntheticOutline0;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DrawableDumpKt {
     private static final String TAG = "DrawableDump";
 
-    private static final void appendColorFilter(Appendable appendable, ColorFilter colorFilter) {
+    private static final void appendColorFilter(Appendable appendable, ColorFilter colorFilter) throws IOException {
         if (colorFilter == null) {
             appendable.append("null");
             return;
@@ -50,7 +52,7 @@ public final class DrawableDumpKt {
         appendable.append(">");
     }
 
-    private static final void appendColors(Appendable appendable, ColorStateList colorStateList) {
+    private static final void appendColors(Appendable appendable, ColorStateList colorStateList) throws IOException {
         if (colorStateList == null) {
             appendable.append("null");
             return;
@@ -67,26 +69,203 @@ public final class DrawableDumpKt {
         appendable.append(">");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0162  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x01af  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x01c0  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x01ed  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x01fd  */
-    /* JADX WARN: Removed duplicated region for block: B:98:0x0182  */
+    /* JADX WARN: Removed duplicated region for block: B:66:0x0162  */
+    /* JADX WARN: Removed duplicated region for block: B:74:0x0180  */
+    /* JADX WARN: Removed duplicated region for block: B:75:0x0182  */
+    /* JADX WARN: Removed duplicated region for block: B:81:0x01af  */
+    /* JADX WARN: Removed duplicated region for block: B:85:0x01c0  */
+    /* JADX WARN: Removed duplicated region for block: B:91:0x01ed  */
+    /* JADX WARN: Removed duplicated region for block: B:94:0x01fd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static final java.lang.StringBuilder appendDrawable(java.lang.StringBuilder r11, android.graphics.drawable.Drawable r12) {
-        /*
-            Method dump skipped, instructions count: 551
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.util.DrawableDumpKt.appendDrawable(java.lang.StringBuilder, android.graphics.drawable.Drawable):java.lang.StringBuilder");
+    private static final StringBuilder appendDrawable(StringBuilder sb, Drawable drawable) throws NoSuchFieldException, IOException {
+        ColorStateList colorStateList;
+        Integer num;
+        Drawable.ConstantState constantState;
+        ColorStateList colorStateList2;
+        Drawable.ConstantState constantState2;
+        int[] colors;
+        BlendMode blendMode;
+        if (drawable == null) {
+            sb.append("null");
+            return sb;
+        }
+        sb.append("<");
+        sb.append(drawable.getClass().getSimpleName());
+        Drawable.ConstantState constantState3 = drawable.getConstantState();
+        ColorStateList colorStateList3 = null;
+        if (constantState3 == null) {
+            colorStateList = null;
+        } else {
+            try {
+                Field declaredField = constantState3.getClass().getDeclaredField("mTint");
+                declaredField.setAccessible(true);
+                colorStateList = (ColorStateList) declaredField.get(constantState3);
+            } catch (Exception unused) {
+            }
+        }
+        if (colorStateList != null) {
+            sb.append(" tint=");
+            appendColors(sb, colorStateList);
+            sb.append(" blendMode=");
+            Drawable.ConstantState constantState4 = drawable.getConstantState();
+            if (constantState4 == null) {
+                blendMode = null;
+                sb.append(blendMode);
+            } else {
+                Class<?> cls = constantState4.getClass();
+                try {
+                    Field declaredField2 = cls.getDeclaredField("mBlendMode");
+                    declaredField2.setAccessible(true);
+                    blendMode = (BlendMode) declaredField2.get(constantState4);
+                } catch (Exception e) {
+                    Log.w(TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("Missing ", cls.getSimpleName(), ".mBlendMode: ", Reflection.getOrCreateKotlinClass(BlendMode.class).getSimpleName()), e);
+                }
+                sb.append(blendMode);
+            }
+        }
+        ColorFilter colorFilter = drawable.getColorFilter();
+        if (colorFilter != null) {
+            if (drawable instanceof DrawableWrapper) {
+                colorFilter = null;
+            }
+            if (colorFilter != null) {
+                sb.append(" colorFilter=");
+                appendColorFilter(sb, colorFilter);
+            }
+        }
+        if (drawable instanceof DrawableWrapper) {
+            sb.append(" wrapped=");
+            appendDrawable(sb, ((DrawableWrapper) drawable).getDrawable());
+        } else {
+            int i = 0;
+            if (drawable instanceof LayerDrawable) {
+                if (drawable instanceof RippleDrawable) {
+                    Drawable.ConstantState constantState5 = drawable.getConstantState();
+                    if (constantState5 != null) {
+                        Class<?> cls2 = constantState5.getClass();
+                        try {
+                            Field declaredField3 = cls2.getDeclaredField("mColor");
+                            declaredField3.setAccessible(true);
+                            colorStateList3 = (ColorStateList) declaredField3.get(constantState5);
+                        } catch (Exception e2) {
+                            Log.w(TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("Missing ", cls2.getSimpleName(), ".mColor: ", Reflection.getOrCreateKotlinClass(ColorStateList.class).getSimpleName()), e2);
+                        }
+                    }
+                    if (colorStateList3 != null) {
+                        sb.append(" color=");
+                        appendColors(sb, colorStateList3);
+                    }
+                    ColorStateList effectColor = ((RippleDrawable) drawable).getEffectColor();
+                    if (effectColor != null) {
+                        sb.append(" effectColor=");
+                        appendColors(sb, effectColor);
+                    }
+                }
+                sb.append(" layers=[");
+                LayerDrawable layerDrawable = (LayerDrawable) drawable;
+                int numberOfLayers = layerDrawable.getNumberOfLayers();
+                while (i < numberOfLayers) {
+                    if (i != 0) {
+                        sb.append(", ");
+                    }
+                    appendDrawable(sb, layerDrawable.getDrawable(i));
+                    i++;
+                }
+                sb.append("]");
+            } else if (drawable instanceof GradientDrawable) {
+                Drawable.ConstantState constantState6 = drawable.getConstantState();
+                if (constantState6 == null) {
+                    num = null;
+                    if (num != null) {
+                        if (num.intValue() == 0) {
+                            num = null;
+                        }
+                        if (num != null) {
+                            int iIntValue = num.intValue();
+                            sb.append(" shape=");
+                            sb.append(iIntValue);
+                        }
+                    }
+                    constantState = drawable.getConstantState();
+                    if (constantState != null) {
+                        colorStateList2 = null;
+                        if (colorStateList2 != null) {
+                            sb.append(" solidColors=");
+                            appendColors(sb, colorStateList2);
+                        }
+                        constantState2 = drawable.getConstantState();
+                        if (constantState2 != null) {
+                            Class<?> cls3 = constantState2.getClass();
+                            try {
+                                Field declaredField4 = cls3.getDeclaredField("mStrokeColors");
+                                declaredField4.setAccessible(true);
+                                colorStateList3 = (ColorStateList) declaredField4.get(constantState2);
+                            } catch (Exception e3) {
+                                Log.w(TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("Missing ", cls3.getSimpleName(), ".mStrokeColors: ", Reflection.getOrCreateKotlinClass(ColorStateList.class).getSimpleName()), e3);
+                            }
+                        }
+                        if (colorStateList3 != null) {
+                            sb.append(" strokeColors=");
+                            appendColors(sb, colorStateList3);
+                        }
+                        colors = ((GradientDrawable) drawable).getColors();
+                        if (colors != null) {
+                            sb.append(" gradientColors=[");
+                            int length = colors.length;
+                            int i2 = 0;
+                            while (i < length) {
+                                int i3 = colors[i];
+                                int i4 = i2 + 1;
+                                if (i2 != 0) {
+                                    sb.append(", ");
+                                }
+                                sb.append(ColorUtilKt.hexColorString(Integer.valueOf(i3)));
+                                i++;
+                                i2 = i4;
+                            }
+                            sb.append("]");
+                        }
+                    } else {
+                        Class<?> cls4 = constantState.getClass();
+                        try {
+                            Field declaredField5 = cls4.getDeclaredField("mSolidColors");
+                            declaredField5.setAccessible(true);
+                            colorStateList2 = (ColorStateList) declaredField5.get(constantState);
+                        } catch (Exception e4) {
+                            Log.w(TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("Missing ", cls4.getSimpleName(), ".mSolidColors: ", Reflection.getOrCreateKotlinClass(ColorStateList.class).getSimpleName()), e4);
+                        }
+                        if (colorStateList2 != null) {
+                        }
+                        constantState2 = drawable.getConstantState();
+                        if (constantState2 != null) {
+                        }
+                        if (colorStateList3 != null) {
+                        }
+                        colors = ((GradientDrawable) drawable).getColors();
+                        if (colors != null) {
+                        }
+                    }
+                } else {
+                    Class<?> cls5 = constantState6.getClass();
+                    try {
+                        Field declaredField6 = cls5.getDeclaredField("mShape");
+                        declaredField6.setAccessible(true);
+                        num = (Integer) declaredField6.get(constantState6);
+                    } catch (Exception e5) {
+                        Log.w(TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("Missing ", cls5.getSimpleName(), ".mShape: ", Reflection.getOrCreateKotlinClass(Integer.class).getSimpleName()), e5);
+                    }
+                    if (num != null) {
+                    }
+                    constantState = drawable.getConstantState();
+                    if (constantState != null) {
+                    }
+                }
+            }
+        }
+        sb.append(">");
+        return sb;
     }
 
     public static final String dumpToString(Drawable drawable) {
@@ -97,7 +276,7 @@ public final class DrawableDumpKt {
         return drawable == null ? "null" : "?";
     }
 
-    private static final ColorStateList getSolidColors(Drawable drawable) {
+    private static final ColorStateList getSolidColors(Drawable drawable) throws NoSuchFieldException {
         if (drawable instanceof GradientDrawable) {
             Drawable.ConstantState constantState = drawable.getConstantState();
             if (constantState == null) {
@@ -130,7 +309,7 @@ public final class DrawableDumpKt {
         return null;
     }
 
-    private static final <T> T getStateField(Drawable drawable, String str, boolean z) {
+    private static final <T> T getStateField(Drawable drawable, String str, boolean z) throws IllegalAccessException, NoSuchFieldException, IllegalArgumentException {
         Drawable.ConstantState constantState = drawable.getConstantState();
         if (constantState == null) {
             return null;
@@ -148,7 +327,7 @@ public final class DrawableDumpKt {
         }
     }
 
-    public static Object getStateField$default(Drawable drawable, String str, boolean z, int i, Object obj) {
+    public static Object getStateField$default(Drawable drawable, String str, boolean z, int i, Object obj) throws IllegalAccessException, NoSuchFieldException, IllegalArgumentException {
         if ((i & 2) != 0) {
             z = true;
         }

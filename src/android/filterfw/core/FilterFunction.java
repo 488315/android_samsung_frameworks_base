@@ -48,11 +48,11 @@ public class FilterFunction {
             this.mFilter.openOutputs();
         }
         this.mFilter.performProcess(this.mFilterContext);
-        Frame pullFrame = (numberOfOutputs == 1 && this.mResultHolders[0].hasFrame()) ? this.mResultHolders[0].pullFrame() : null;
+        Frame framePullFrame = (numberOfOutputs == 1 && this.mResultHolders[0].hasFrame()) ? this.mResultHolders[0].pullFrame() : null;
         if (z) {
             gLEnvironment.deactivate();
         }
-        return pullFrame;
+        return framePullFrame;
     }
 
     public Frame executeWithArgList(Object... objArr) {

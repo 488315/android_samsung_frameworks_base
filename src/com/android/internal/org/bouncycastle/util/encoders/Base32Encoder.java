@@ -133,11 +133,11 @@ public class Base32Encoder implements Encoder {
         int i3 = i;
         int i4 = i2;
         while (i4 > 0) {
-            int min = Math.min(45, i4);
+            int iMin = Math.min(45, i4);
             Base32Encoder base32Encoder = this;
-            outputStream.write(bArr2, 0, base32Encoder.encode(bArr, i3, min, bArr2, 0));
-            i3 += min;
-            i4 -= min;
+            outputStream.write(bArr2, 0, base32Encoder.encode(bArr, i3, iMin, bArr2, 0));
+            i3 += iMin;
+            i4 -= iMin;
             this = base32Encoder;
         }
         return ((i2 + 2) / 3) * 4;
@@ -161,33 +161,33 @@ public class Base32Encoder implements Encoder {
             }
             i4--;
         }
-        int nextI = nextI(bArr, i, i4);
+        int iNextI = nextI(bArr, i, i4);
         int i6 = 0;
         int i7 = 0;
-        while (nextI < i4) {
-            int i8 = nextI + 1;
-            byte b = this.decodingTable[bArr[nextI]];
-            int nextI2 = nextI(bArr, i8, i4);
-            int i9 = nextI2 + 1;
-            byte b2 = this.decodingTable[bArr[nextI2]];
-            int nextI3 = nextI(bArr, i9, i4);
-            int i10 = nextI3 + 1;
-            byte b3 = this.decodingTable[bArr[nextI3]];
-            int nextI4 = nextI(bArr, i10, i4);
-            int i11 = nextI4 + 1;
-            byte b4 = this.decodingTable[bArr[nextI4]];
-            int nextI5 = nextI(bArr, i11, i4);
-            int i12 = nextI5 + 1;
-            byte b5 = this.decodingTable[bArr[nextI5]];
-            int nextI6 = nextI(bArr, i12, i4);
-            int i13 = nextI6 + 1;
-            byte b6 = this.decodingTable[bArr[nextI6]];
-            int nextI7 = nextI(bArr, i13, i4);
-            int i14 = nextI7 + 1;
-            byte b7 = this.decodingTable[bArr[nextI7]];
-            int nextI8 = nextI(bArr, i14, i4);
-            int i15 = nextI8 + 1;
-            byte b8 = this.decodingTable[bArr[nextI8]];
+        while (iNextI < i4) {
+            int i8 = iNextI + 1;
+            byte b = this.decodingTable[bArr[iNextI]];
+            int iNextI2 = nextI(bArr, i8, i4);
+            int i9 = iNextI2 + 1;
+            byte b2 = this.decodingTable[bArr[iNextI2]];
+            int iNextI3 = nextI(bArr, i9, i4);
+            int i10 = iNextI3 + 1;
+            byte b3 = this.decodingTable[bArr[iNextI3]];
+            int iNextI4 = nextI(bArr, i10, i4);
+            int i11 = iNextI4 + 1;
+            byte b4 = this.decodingTable[bArr[iNextI4]];
+            int iNextI5 = nextI(bArr, i11, i4);
+            int i12 = iNextI5 + 1;
+            byte b5 = this.decodingTable[bArr[iNextI5]];
+            int iNextI6 = nextI(bArr, i12, i4);
+            int i13 = iNextI6 + 1;
+            byte b6 = this.decodingTable[bArr[iNextI6]];
+            int iNextI7 = nextI(bArr, i13, i4);
+            int i14 = iNextI7 + 1;
+            byte b7 = this.decodingTable[bArr[iNextI7]];
+            int iNextI8 = nextI(bArr, i14, i4);
+            int i15 = iNextI8 + 1;
+            byte b8 = this.decodingTable[bArr[iNextI8]];
             if ((b | b2 | b3 | b4 | b5 | b6 | b7 | b8) < 0) {
                 throw new IOException("invalid characters encountered in base32 data");
             }
@@ -203,19 +203,19 @@ public class Base32Encoder implements Encoder {
                 i6 = 0;
             }
             i7 += 5;
-            nextI = nextI(bArr, i15, i4);
+            iNextI = nextI(bArr, i15, i4);
         }
         if (i6 > 0) {
             outputStream.write(bArr2, 0, i6);
         }
-        int nextI9 = nextI(bArr, nextI, i3);
-        int nextI10 = nextI(bArr, nextI9 + 1, i3);
-        int nextI11 = nextI(bArr, nextI10 + 1, i3);
-        int nextI12 = nextI(bArr, nextI11 + 1, i3);
-        int nextI13 = nextI(bArr, nextI12 + 1, i3);
-        int nextI14 = nextI(bArr, nextI13 + 1, i3);
-        int nextI15 = nextI(bArr, nextI14 + 1, i3);
-        return i7 + decodeLastBlock(outputStream, (char) bArr[nextI9], (char) bArr[nextI10], (char) bArr[nextI11], (char) bArr[nextI12], (char) bArr[nextI13], (char) bArr[nextI14], (char) bArr[nextI15], (char) bArr[nextI(bArr, nextI15 + 1, i3)]);
+        int iNextI9 = nextI(bArr, iNextI, i3);
+        int iNextI10 = nextI(bArr, iNextI9 + 1, i3);
+        int iNextI11 = nextI(bArr, iNextI10 + 1, i3);
+        int iNextI12 = nextI(bArr, iNextI11 + 1, i3);
+        int iNextI13 = nextI(bArr, iNextI12 + 1, i3);
+        int iNextI14 = nextI(bArr, iNextI13 + 1, i3);
+        int iNextI15 = nextI(bArr, iNextI14 + 1, i3);
+        return i7 + decodeLastBlock(outputStream, (char) bArr[iNextI9], (char) bArr[iNextI10], (char) bArr[iNextI11], (char) bArr[iNextI12], (char) bArr[iNextI13], (char) bArr[iNextI14], (char) bArr[iNextI15], (char) bArr[nextI(bArr, iNextI15 + 1, i3)]);
     }
 
     private int nextI(byte[] bArr, int i, int i2) {

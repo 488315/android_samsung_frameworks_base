@@ -26,20 +26,20 @@ public class TeeInputStream extends InputStream {
 
     @Override // java.io.InputStream
     public int read(byte[] bArr, int i, int i2) throws IOException {
-        int read = this.input.read(bArr, i, i2);
-        if (read > 0) {
-            this.output.write(bArr, i, read);
+        int i3 = this.input.read(bArr, i, i2);
+        if (i3 > 0) {
+            this.output.write(bArr, i, i3);
         }
-        return read;
+        return i3;
     }
 
     @Override // java.io.InputStream
     public int read() throws IOException {
-        int read = this.input.read();
-        if (read >= 0) {
-            this.output.write(read);
+        int i = this.input.read();
+        if (i >= 0) {
+            this.output.write(i);
         }
-        return read;
+        return i;
     }
 
     @Override // java.io.InputStream, java.io.Closeable, java.lang.AutoCloseable

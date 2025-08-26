@@ -111,9 +111,9 @@ public class CursorWindow extends SQLiteClosable implements Parcelable {
         this.mTotalRows = 0;
         str = (str == null || str.length() == 0) ? "<unnamed>" : str;
         this.mName = str;
-        long nativeCreate = nativeCreate(str, (int) j);
-        this.mWindowPtr = nativeCreate;
-        if (nativeCreate == 0) {
+        long jNativeCreate = nativeCreate(str, (int) j);
+        this.mWindowPtr = jNativeCreate;
+        if (jNativeCreate == 0) {
             throw new AssertionError();
         }
         this.mCloseGuard = createCloseGuard();
@@ -127,12 +127,12 @@ public class CursorWindow extends SQLiteClosable implements Parcelable {
 
     private CursorWindow(Parcel parcel) {
         this.mStartPos = parcel.readInt();
-        long nativeCreateFromParcel = nativeCreateFromParcel(parcel);
-        this.mWindowPtr = nativeCreateFromParcel;
-        if (nativeCreateFromParcel == 0) {
+        long jNativeCreateFromParcel = nativeCreateFromParcel(parcel);
+        this.mWindowPtr = jNativeCreateFromParcel;
+        if (jNativeCreateFromParcel == 0) {
             throw new AssertionError();
         }
-        this.mName = nativeGetName(nativeCreateFromParcel);
+        this.mName = nativeGetName(jNativeCreateFromParcel);
         this.mCloseGuard = createCloseGuard();
     }
 

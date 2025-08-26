@@ -15,7 +15,6 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /* loaded from: classes6.dex */
 public class ImgpPlugin extends PluginFixture<ImgpPlugin> {
@@ -51,20 +50,18 @@ public class ImgpPlugin extends PluginFixture<ImgpPlugin> {
         return (Operator) this.processorMap.keySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.plugin.ImgpPlugin$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((Enum) obj).name().equals(str);
-                return equals;
+                return ((Enum) obj).name().equals(str);
             }
         }).findFirst().map(new Function() { // from class: com.samsung.android.sume.core.plugin.ImgpPlugin$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return ImgpPlugin.this.m9598x24c2933((Enum) obj);
+                return this.f$0.m9611x24c2933((Enum) obj);
             }
         }).orElse(null);
     }
 
     /* renamed from: lambda$getImgProcessor$1$com-samsung-android-sume-core-plugin-ImgpPlugin, reason: not valid java name */
-    /* synthetic */ Operator m9598x24c2933(Enum r1) {
+    /* synthetic */ Operator m9611x24c2933(Enum r1) {
         return OperatorWrapper.of(r1, this.processorMap.get(r1));
     }
 
@@ -93,9 +90,7 @@ public class ImgpPlugin extends PluginFixture<ImgpPlugin> {
             this.processorMap = (Map) Arrays.stream(imgpPluginArr).flatMap(new Function() { // from class: com.samsung.android.sume.core.plugin.ImgpPlugin$ImgpPluginGroup$$ExternalSyntheticLambda0
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    Stream stream;
-                    stream = ((ImgpPlugin) obj).processorMap.entrySet().stream();
-                    return stream;
+                    return ((ImgpPlugin) obj).processorMap.entrySet().stream();
                 }
             }).collect(Collectors.toMap(new OperatorWrapper$$ExternalSyntheticLambda3(), new OperatorMap$$ExternalSyntheticLambda4(), new BinaryOperator() { // from class: com.samsung.android.sume.core.plugin.ImgpPlugin$ImgpPluginGroup$$ExternalSyntheticLambda1
                 @Override // java.util.function.BiFunction

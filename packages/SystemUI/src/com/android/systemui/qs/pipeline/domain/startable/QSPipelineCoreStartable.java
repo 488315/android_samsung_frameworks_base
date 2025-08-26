@@ -19,11 +19,12 @@ import com.android.systemui.qs.pipeline.shared.QSPipelineFlagsRepository;
 import com.android.systemui.qs.pipeline.shared.TileSpec;
 import com.android.systemui.qs.shared.QSSettingsPackageRepository;
 import com.android.systemui.util.settings.SecureSettings;
+import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import java.util.Iterator;
 import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSPipelineCoreStartable implements CoreStartable {
     public final AccessibilityTilesInteractor accessibilityTilesInteractor;
@@ -62,7 +63,7 @@ public final class QSPipelineCoreStartable implements CoreStartable {
 
             @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
             public final String onBackup(boolean z) {
-                TilesBackUpRestoreInteractorImpl tilesBackUpRestoreInteractorImpl2 = TilesBackUpRestoreInteractorImpl.this;
+                TilesBackUpRestoreInteractorImpl tilesBackUpRestoreInteractorImpl2 = tilesBackUpRestoreInteractorImpl;
                 int userId = tilesBackUpRestoreInteractorImpl2.context.getUserId();
                 SecureSettings secureSettings = tilesBackUpRestoreInteractorImpl2.secureSettings;
                 String stringForUser = secureSettings.getStringForUser("sysui_qs_tiles", userId);
@@ -78,14 +79,24 @@ public final class QSPipelineCoreStartable implements CoreStartable {
                 }
                 String stringForUser2 = secureSettings.getStringForUser("sysui_quick_qs_tiles", tilesBackUpRestoreInteractorImpl2.context.getUserId());
                 String str = stringForUser2 != null ? stringForUser2 : "";
-                String str2 = "TAG::sep_version::" + Build.VERSION.SEM_PLATFORM_INT + "::TAG::has_edited::" + z2 + "::TAG::removed_tile_list::" + arrayList + "::TAG::tile_list::" + stringForUser + "::TAG::qqs_has_edited::" + Prefs.getBoolean(tilesBackUpRestoreInteractorImpl2.context, "QQsHasEditedQuickTileList", false) + "::TAG::qqs_tile_list::" + str;
-                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("getBackUpData: ", str2, "TileBackUpRestoreInteractor");
-                return str2;
+                boolean z3 = Prefs.getBoolean(tilesBackUpRestoreInteractorImpl2.context, "QQsHasEditedQuickTileList", false);
+                StringBuilder sb = new StringBuilder("TAG::sep_version::");
+                sb.append(Build.VERSION.SEM_PLATFORM_INT);
+                sb.append("::TAG::has_edited::");
+                sb.append(z2);
+                sb.append("::TAG::removed_tile_list::");
+                MoveResult$$ExternalSyntheticOutline0.m(sb, CollectionsKt___CollectionsKt.joinToString$default(arrayList, ",", null, null, null, 62), "::TAG::tile_list::", stringForUser, "::TAG::qqs_has_edited::");
+                sb.append(z3);
+                sb.append("::TAG::qqs_tile_list::");
+                sb.append(str);
+                String string = sb.toString();
+                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("getBackUpData: ", string, "TileBackUpRestoreInteractor");
+                return string;
             }
 
             @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
-            public final void onRestore(String str) {
-                TilesBackUpRestoreInteractorImpl.this.setRestoreData(str);
+            public final void onRestore(String str) throws NumberFormatException {
+                tilesBackUpRestoreInteractorImpl.setRestoreData(str);
             }
         });
         this.tileOrderLoggingInteractor.start();

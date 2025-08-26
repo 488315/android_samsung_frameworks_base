@@ -186,7 +186,7 @@ public class RuntimeInit {
         });
     }
 
-    protected static final void commonInit() {
+    protected static final void commonInit() throws SecurityException {
         LoggingHandler loggingHandler = new LoggingHandler();
         RuntimeHooks.setUncaughtExceptionPreHandler(loggingHandler);
         Thread.setDefaultUncaughtExceptionHandler(new KillApplicationHandler(loggingHandler));
@@ -194,9 +194,7 @@ public class RuntimeInit {
         RuntimeHooks.setTimeZoneIdSupplier(new Supplier() { // from class: com.android.internal.os.RuntimeInit$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                String str;
-                str = SystemProperties.get("persist.sys.timezone");
-                return str;
+                return SystemProperties.get("persist.sys.timezone");
             }
         });
         LogManager.getLogManager().reset();
@@ -232,7 +230,7 @@ public class RuntimeInit {
         return sb.toString();
     }
 
-    protected static Runnable findStaticMain(String str, String[] strArr, ClassLoader classLoader) {
+    protected static Runnable findStaticMain(String str, String[] strArr, ClassLoader classLoader) throws NoSuchMethodException, SecurityException {
         try {
             try {
                 Method method = Class.forName(str, true, classLoader).getMethod("main", String[].class);
@@ -251,7 +249,7 @@ public class RuntimeInit {
         }
     }
 
-    public static final void main(String[] strArr) {
+    public static final void main(String[] strArr) throws SecurityException {
         preForkInit();
         if (strArr.length == 2 && strArr[1].equals("application")) {
             redirectLogStreams();
@@ -291,21 +289,21 @@ public class RuntimeInit {
     }
 
     public static void wtf(String str, Throwable th, boolean z) {
-        boolean z2;
+        boolean zHandleApplicationWtf;
         try {
             IActivityManager service = ActivityManager.getService();
             if (service != null) {
-                z2 = service.handleApplicationWtf(mApplicationObject, str, z, new ApplicationErrorReport.ParcelableCrashInfo(th), Process.myPid());
+                zHandleApplicationWtf = service.handleApplicationWtf(mApplicationObject, str, z, new ApplicationErrorReport.ParcelableCrashInfo(th), Process.myPid());
             } else {
                 ApplicationWtfHandler applicationWtfHandler = sDefaultApplicationWtfHandler;
                 if (applicationWtfHandler != null) {
-                    z2 = applicationWtfHandler.handleApplicationWtf(mApplicationObject, str, z, new ApplicationErrorReport.ParcelableCrashInfo(th), Process.myPid());
+                    zHandleApplicationWtf = applicationWtfHandler.handleApplicationWtf(mApplicationObject, str, z, new ApplicationErrorReport.ParcelableCrashInfo(th), Process.myPid());
                 } else {
                     Slog.e(TAG, "Original WTF:", th);
-                    z2 = false;
+                    zHandleApplicationWtf = false;
                 }
             }
-            if (z2) {
+            if (zHandleApplicationWtf) {
                 Process.killProcess(Process.myPid());
                 System.exit(10);
             }
@@ -379,7 +377,7 @@ public class RuntimeInit {
         }
 
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             try {
                 this.mMethod.invoke(null, this.mArgs);
             } catch (IllegalAccessException e) {

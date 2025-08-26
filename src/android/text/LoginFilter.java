@@ -29,15 +29,15 @@ public abstract class LoginFilter implements InputFilter {
         onStart();
         int i5 = 0;
         for (int i6 = 0; i6 < i3; i6++) {
-            char charAt = spanned.charAt(i6);
-            if (!isAllowed(charAt)) {
-                onInvalidCharacter(charAt);
+            char cCharAt = spanned.charAt(i6);
+            if (!isAllowed(cCharAt)) {
+                onInvalidCharacter(cCharAt);
             }
         }
         SpannableStringBuilder spannableStringBuilder = null;
         for (int i7 = i; i7 < i2; i7++) {
-            char charAt2 = charSequence.charAt(i7);
-            if (isAllowed(charAt2)) {
+            char cCharAt2 = charSequence.charAt(i7);
+            if (isAllowed(cCharAt2)) {
                 i5++;
             } else {
                 if (this.mAppendInvalid) {
@@ -49,13 +49,13 @@ public abstract class LoginFilter implements InputFilter {
                     }
                     spannableStringBuilder.delete(i5, i5 + 1);
                 }
-                onInvalidCharacter(charAt2);
+                onInvalidCharacter(cCharAt2);
             }
         }
         while (i4 < spanned.length()) {
-            char charAt3 = spanned.charAt(i4);
-            if (!isAllowed(charAt3)) {
-                onInvalidCharacter(charAt3);
+            char cCharAt3 = spanned.charAt(i4);
+            if (!isAllowed(cCharAt3)) {
+                onInvalidCharacter(cCharAt3);
             }
             i4++;
         }

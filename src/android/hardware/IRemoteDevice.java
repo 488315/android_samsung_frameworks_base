@@ -108,9 +108,9 @@ public interface IRemoteDevice extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteDevice.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteDevice)) {
-                return (IRemoteDevice) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteDevice.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteDevice)) {
+                return (IRemoteDevice) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -156,12 +156,12 @@ public interface IRemoteDevice extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String open = open(readString, readInt);
+                    String strOpen = open(string, i3);
                     parcel2.writeNoException();
-                    parcel2.writeString(open);
+                    parcel2.writeString(strOpen);
                     return true;
                 case 2:
                     CameraMetadataNative cameraCharacteristic = getCameraCharacteristic();
@@ -171,27 +171,27 @@ public interface IRemoteDevice extends IInterface {
                 case 3:
                     OutputConfiguration outputConfiguration = (OutputConfiguration) parcel.readTypedObject(OutputConfiguration.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int createStream = createStream(outputConfiguration);
+                    int iCreateStream = createStream(outputConfiguration);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createStream);
+                    parcel2.writeInt(iCreateStream);
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    deleteStream(readInt2);
+                    deleteStream(i4);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    CameraMetadataNative createDefaultRequest = createDefaultRequest();
+                    CameraMetadataNative cameraMetadataNativeCreateDefaultRequest = createDefaultRequest();
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createDefaultRequest, 1);
+                    parcel2.writeTypedObject(cameraMetadataNativeCreateDefaultRequest, 1);
                     return true;
                 case 6:
                     CameraMetadataNative cameraMetadataNative = (CameraMetadataNative) parcel.readTypedObject(CameraMetadataNative.CREATOR);
-                    int[] createIntArray = parcel.createIntArray();
-                    boolean readBoolean = parcel.readBoolean();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    submitRequest(cameraMetadataNative, createIntArray, readBoolean);
+                    submitRequest(cameraMetadataNative, iArrCreateIntArray, z);
                     parcel2.writeNoException();
                     return true;
                 case 7:
@@ -199,9 +199,9 @@ public interface IRemoteDevice extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IRemoteDeviceCallback asInterface = IRemoteDeviceCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteDeviceCallback iRemoteDeviceCallbackAsInterface = IRemoteDeviceCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setCallback(asInterface);
+                    setCallback(iRemoteDeviceCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 9:
@@ -231,139 +231,139 @@ public interface IRemoteDevice extends IInterface {
 
             @Override // android.hardware.IRemoteDevice
             public String open(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IRemoteDevice
             public CameraMetadataNative getCameraCharacteristic() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraMetadataNative) obtain2.readTypedObject(CameraMetadataNative.CREATOR);
+                    parcelObtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraMetadataNative) parcelObtain2.readTypedObject(CameraMetadataNative.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IRemoteDevice
             public int createStream(OutputConfiguration outputConfiguration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(outputConfiguration, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(outputConfiguration, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IRemoteDevice
             public void deleteStream(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IRemoteDevice
             public CameraMetadataNative createDefaultRequest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraMetadataNative) obtain2.readTypedObject(CameraMetadataNative.CREATOR);
+                    parcelObtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraMetadataNative) parcelObtain2.readTypedObject(CameraMetadataNative.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IRemoteDevice
             public void submitRequest(CameraMetadataNative cameraMetadataNative, int[] iArr, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(cameraMetadataNative, 0);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cameraMetadataNative, 0);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IRemoteDevice
             public void clearRequest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IRemoteDevice
             public void setCallback(IRemoteDeviceCallback iRemoteDeviceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteDeviceCallback);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteDeviceCallback);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.IRemoteDevice
             public void close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

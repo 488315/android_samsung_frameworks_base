@@ -12,11 +12,9 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface KeyguardQuickAffordanceConfig {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -28,7 +26,6 @@ public interface KeyguardQuickAffordanceConfig {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LaunchingFromTriggeredResult {
         public final String configKey;
         public final boolean launched;
@@ -58,10 +55,8 @@ public interface KeyguardQuickAffordanceConfig {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class LockScreenState {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Hidden extends LockScreenState {
             public static final Hidden INSTANCE = new Hidden();
 
@@ -74,7 +69,6 @@ public interface KeyguardQuickAffordanceConfig {
             this();
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Visible extends LockScreenState {
             public final ActivationState activationState;
             public final Icon icon;
@@ -113,10 +107,8 @@ public interface KeyguardQuickAffordanceConfig {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class OnTriggeredResult {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Handled extends OnTriggeredResult {
             public final boolean actionLaunched;
 
@@ -141,7 +133,6 @@ public interface KeyguardQuickAffordanceConfig {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ShowDialog extends OnTriggeredResult {
             public final AlertDialog dialog;
             public final Expandable expandable;
@@ -164,9 +155,9 @@ public interface KeyguardQuickAffordanceConfig {
             }
 
             public final int hashCode() {
-                int hashCode = this.dialog.hashCode() * 31;
+                int iHashCode = this.dialog.hashCode() * 31;
                 Expandable expandable = this.expandable;
-                return hashCode + (expandable == null ? 0 : expandable.hashCode());
+                return iHashCode + (expandable == null ? 0 : expandable.hashCode());
             }
 
             public final String toString() {
@@ -174,7 +165,6 @@ public interface KeyguardQuickAffordanceConfig {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class StartActivity extends OnTriggeredResult {
             public final boolean canShowWhileLocked;
             public final Intent intent;
@@ -213,13 +203,12 @@ public interface KeyguardQuickAffordanceConfig {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class PickerScreenState {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Default extends PickerScreenState {
             public final Intent configureIntent;
 
+            /* JADX WARN: Multi-variable type inference failed */
             public Default() {
                 this(null, 1, 0 == true ? 1 : 0);
             }
@@ -253,7 +242,6 @@ public interface KeyguardQuickAffordanceConfig {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Disabled extends PickerScreenState {
             public final Intent actionIntent;
             public final String actionText;
@@ -275,11 +263,11 @@ public interface KeyguardQuickAffordanceConfig {
             }
 
             public final int hashCode() {
-                int hashCode = this.explanation.hashCode() * 31;
+                int iHashCode = this.explanation.hashCode() * 31;
                 String str = this.actionText;
-                int hashCode2 = (hashCode + (str == null ? 0 : str.hashCode())) * 31;
+                int iHashCode2 = (iHashCode + (str == null ? 0 : str.hashCode())) * 31;
                 Intent intent = this.actionIntent;
-                return hashCode2 + (intent != null ? intent.hashCode() : 0);
+                return iHashCode2 + (intent != null ? intent.hashCode() : 0);
             }
 
             public final String toString() {
@@ -303,7 +291,6 @@ public interface KeyguardQuickAffordanceConfig {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class UnavailableOnDevice extends PickerScreenState {
             public static final UnavailableOnDevice INSTANCE = new UnavailableOnDevice();
 
@@ -338,6 +325,7 @@ public interface KeyguardQuickAffordanceConfig {
 
     int getPickerIconResourceId();
 
+    /* JADX WARN: Multi-variable type inference failed */
     default Object getPickerScreenState(Continuation continuation) {
         return new PickerScreenState.Default(null, 1, 0 == true ? 1 : 0);
     }

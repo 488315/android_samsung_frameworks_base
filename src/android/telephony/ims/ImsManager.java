@@ -18,17 +18,13 @@ public class ImsManager {
     private static final BinderCacheManager<ITelephony> sTelephonyCache = new BinderCacheManager<>(new BinderCacheManager.BinderInterfaceFactory() { // from class: android.telephony.ims.ImsManager$$ExternalSyntheticLambda0
         @Override // android.telephony.BinderCacheManager.BinderInterfaceFactory
         public final Object create() {
-            ITelephony iTelephonyInterface;
-            iTelephonyInterface = ImsManager.getITelephonyInterface();
-            return iTelephonyInterface;
+            return ImsManager.getITelephonyInterface();
         }
     });
     private static final BinderCacheManager<IImsRcsController> sRcsCache = new BinderCacheManager<>(new BinderCacheManager.BinderInterfaceFactory() { // from class: android.telephony.ims.ImsManager$$ExternalSyntheticLambda1
         @Override // android.telephony.BinderCacheManager.BinderInterfaceFactory
         public final Object create() {
-            IImsRcsController iImsRcsControllerInterface;
-            iImsRcsControllerInterface = ImsManager.getIImsRcsControllerInterface();
-            return iImsRcsControllerInterface;
+            return ImsManager.getIImsRcsControllerInterface();
         }
     });
 

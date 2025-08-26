@@ -183,10 +183,10 @@ public final class CellIdentityNr extends CellIdentity {
 
     @Override // android.telephony.CellIdentity
     public boolean isSameCell(CellIdentity cellIdentity) {
-        boolean isSameCell = super.isSameCell(cellIdentity);
-        if (isSameCell && (cellIdentity instanceof CellIdentityNr) && this.mTac != ((CellIdentityNr) cellIdentity).getTac()) {
+        boolean zIsSameCell = super.isSameCell(cellIdentity);
+        if (zIsSameCell && (cellIdentity instanceof CellIdentityNr) && this.mTac != ((CellIdentityNr) cellIdentity).getTac()) {
             return false;
         }
-        return isSameCell;
+        return zIsSameCell;
     }
 }

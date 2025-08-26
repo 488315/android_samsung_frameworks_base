@@ -9,7 +9,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ShortcutHelperKt$$ExternalSyntheticLambda10 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -24,9 +23,9 @@ public final /* synthetic */ class ShortcutHelperKt$$ExternalSyntheticLambda10 i
 
     @Override // kotlin.jvm.functions.Function0
     public final Object invoke() {
+        Object next;
         Object obj;
-        Object obj2;
-        Object obj3;
+        Object next2;
         switch (this.$r8$classId) {
             case 0:
                 Shortcut shortcut = (Shortcut) this.f$1;
@@ -34,43 +33,43 @@ public final /* synthetic */ class ShortcutHelperKt$$ExternalSyntheticLambda10 i
                 Iterator it = shortcut.commands.iterator();
                 while (true) {
                     if (it.hasNext()) {
-                        obj = it.next();
-                        if (!((ShortcutCommand) obj).isCustom) {
+                        next = it.next();
+                        if (!((ShortcutCommand) next).isCustom) {
                         }
                     } else {
-                        obj = null;
+                        next = null;
                     }
                 }
-                this.f$0.mo779invoke(new ShortcutCustomizationRequestInfo.SingleShortcutCustomization.Add(str, null, null, (ShortcutCommand) obj, 6, null));
+                this.f$0.mo781invoke(new ShortcutCustomizationRequestInfo.SingleShortcutCustomization.Add(str, null, null, (ShortcutCommand) next, 6, null));
                 break;
             case 1:
                 Shortcut shortcut2 = (Shortcut) this.f$1;
                 String str2 = shortcut2.label;
                 Iterator it2 = shortcut2.commands.iterator();
                 while (true) {
-                    obj2 = null;
+                    obj = null;
                     if (it2.hasNext()) {
-                        obj3 = it2.next();
-                        if (!((ShortcutCommand) obj3).isCustom) {
+                        next2 = it2.next();
+                        if (!((ShortcutCommand) next2).isCustom) {
                         }
                     } else {
-                        obj3 = null;
+                        next2 = null;
                     }
                 }
-                ShortcutCommand shortcutCommand = (ShortcutCommand) obj3;
+                ShortcutCommand shortcutCommand = (ShortcutCommand) next2;
                 Iterator it3 = shortcut2.commands.iterator();
                 while (true) {
                     if (it3.hasNext()) {
-                        Object next = it3.next();
-                        if (((ShortcutCommand) next).isCustom) {
-                            obj2 = next;
+                        Object next3 = it3.next();
+                        if (((ShortcutCommand) next3).isCustom) {
+                            obj = next3;
                         }
                     }
                 }
-                this.f$0.mo779invoke(new ShortcutCustomizationRequestInfo.SingleShortcutCustomization.Delete(str2, null, null, shortcutCommand, (ShortcutCommand) obj2, 6, null));
+                this.f$0.mo781invoke(new ShortcutCustomizationRequestInfo.SingleShortcutCustomization.Delete(str2, null, null, shortcutCommand, (ShortcutCommand) obj, 6, null));
                 break;
             default:
-                this.f$0.mo779invoke((ShortcutCategoryUi) this.f$1);
+                this.f$0.mo781invoke((ShortcutCategoryUi) this.f$1);
                 break;
         }
         return Unit.INSTANCE;

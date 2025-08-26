@@ -8,13 +8,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Matrix {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final float[] values;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,17 +31,17 @@ public final class Matrix {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ Matrix m480boximpl(float[] fArr) {
+    public static final /* synthetic */ Matrix m482boximpl(float[] fArr) {
         return new Matrix(fArr);
     }
 
     /* renamed from: constructor-impl$default, reason: not valid java name */
-    public static float[] m481constructorimpl$default() {
+    public static float[] m483constructorimpl$default() {
         return new float[]{1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
     }
 
     /* renamed from: map-MK-Hz9U, reason: not valid java name */
-    public static final long m482mapMKHz9U(long j, float[] fArr) {
+    public static final long m484mapMKHz9U(long j, float[] fArr) {
         if (fArr.length < 16) {
             return j;
         }
@@ -56,20 +54,20 @@ public final class Matrix {
         float f7 = fArr[12];
         float f8 = fArr[13];
         float f9 = fArr[15];
-        float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L));
-        float m = 1 / DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f6, intBitsToFloat2, f3 * intBitsToFloat, f9);
-        if ((Float.floatToRawIntBits(m) & Integer.MAX_VALUE) >= 2139095040) {
-            m = 0.0f;
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L));
+        float fM = 1 / DrawerArrowDrawable$$ExternalSyntheticOutline0.m(f6, fIntBitsToFloat2, f3 * fIntBitsToFloat, f9);
+        if ((Float.floatToRawIntBits(fM) & Integer.MAX_VALUE) >= 2139095040) {
+            fM = 0.0f;
         }
-        float f10 = f5 * intBitsToFloat2;
-        long floatToRawIntBits = (Float.floatToRawIntBits((((f4 * intBitsToFloat2) + (f * intBitsToFloat)) + f7) * m) << 32) | (Float.floatToRawIntBits((f10 + (f2 * intBitsToFloat) + f8) * m) & 4294967295L);
+        float f10 = f5 * fIntBitsToFloat2;
+        long jFloatToRawIntBits = (Float.floatToRawIntBits((((f4 * fIntBitsToFloat2) + (f * fIntBitsToFloat)) + f7) * fM) << 32) | (Float.floatToRawIntBits((f10 + (f2 * fIntBitsToFloat) + f8) * fM) & 4294967295L);
         Offset.Companion companion = Offset.Companion;
-        return floatToRawIntBits;
+        return jFloatToRawIntBits;
     }
 
     /* renamed from: map-impl, reason: not valid java name */
-    public static final void m483mapimpl(float[] fArr, MutableRect mutableRect) {
+    public static final void m485mapimpl(float[] fArr, MutableRect mutableRect) {
         if (fArr.length < 16) {
             return;
         }
@@ -127,7 +125,7 @@ public final class Matrix {
     }
 
     /* renamed from: reset-impl, reason: not valid java name */
-    public static final void m484resetimpl(float[] fArr) {
+    public static final void m486resetimpl(float[] fArr) {
         if (fArr.length < 16) {
             return;
         }
@@ -150,37 +148,37 @@ public final class Matrix {
     }
 
     /* renamed from: rotateZ-impl, reason: not valid java name */
-    public static final void m485rotateZimpl(float f, float[] fArr) {
+    public static final void m487rotateZimpl(float f, float[] fArr) {
         if (fArr.length < 16) {
             return;
         }
         double d = f * 0.017453292519943295d;
-        float sin = (float) Math.sin(d);
-        float cos = (float) Math.cos(d);
+        float fSin = (float) Math.sin(d);
+        float fCos = (float) Math.cos(d);
         float f2 = fArr[0];
         float f3 = fArr[4];
-        float f4 = (sin * f3) + (cos * f2);
-        float f5 = -sin;
+        float f4 = (fSin * f3) + (fCos * f2);
+        float f5 = -fSin;
         float f6 = fArr[1];
         float f7 = fArr[5];
-        float f8 = (sin * f7) + (cos * f6);
+        float f8 = (fSin * f7) + (fCos * f6);
         float f9 = fArr[2];
         float f10 = fArr[6];
-        float f11 = (sin * f10) + (cos * f9);
+        float f11 = (fSin * f10) + (fCos * f9);
         float f12 = fArr[3];
         float f13 = fArr[7];
         fArr[0] = f4;
         fArr[1] = f8;
         fArr[2] = f11;
-        fArr[3] = (sin * f13) + (cos * f12);
-        fArr[4] = (f3 * cos) + (f2 * f5);
-        fArr[5] = (f7 * cos) + (f6 * f5);
-        fArr[6] = (f10 * cos) + (f9 * f5);
-        fArr[7] = (cos * f13) + (f5 * f12);
+        fArr[3] = (fSin * f13) + (fCos * f12);
+        fArr[4] = (f3 * fCos) + (f2 * f5);
+        fArr[5] = (f7 * fCos) + (f6 * f5);
+        fArr[6] = (f10 * fCos) + (f9 * f5);
+        fArr[7] = (fCos * f13) + (f5 * f12);
     }
 
     /* renamed from: scale-impl, reason: not valid java name */
-    public static final void m486scaleimpl(float f, float f2, float[] fArr) {
+    public static final void m488scaleimpl(float f, float f2, float[] fArr) {
         if (fArr.length < 16) {
             return;
         }
@@ -199,7 +197,7 @@ public final class Matrix {
     }
 
     /* renamed from: timesAssign-58bKbWc, reason: not valid java name */
-    public static final void m487timesAssign58bKbWc(float[] fArr, float[] fArr2) {
+    public static final void m489timesAssign58bKbWc(float[] fArr, float[] fArr2) {
         if (fArr.length >= 16 && fArr2.length >= 16) {
             float f = fArr[0];
             float f2 = fArr2[0];
@@ -290,7 +288,7 @@ public final class Matrix {
     }
 
     /* renamed from: translate-impl, reason: not valid java name */
-    public static final void m488translateimpl(float f, float f2, float[] fArr) {
+    public static final void m490translateimpl(float f, float f2, float[] fArr) {
         if (fArr.length < 16) {
             return;
         }

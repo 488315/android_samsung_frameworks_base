@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.widget.SeekBar;
 import androidx.core.graphics.ColorUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 class SeslOpacitySeekBar extends SeekBar {
     public final int[] mColors;
@@ -36,9 +35,9 @@ class SeslOpacitySeekBar extends SeekBar {
     public final void initColor(int i) {
         float[] fArr = new float[3];
         Color.colorToHSV(i, fArr);
-        int alpha = Color.alpha(i);
+        int iAlpha = Color.alpha(i);
         this.mColors[0] = Color.HSVToColor(0, fArr);
         this.mColors[1] = Color.HSVToColor(255, fArr);
-        setProgress(alpha);
+        setProgress(iAlpha);
     }
 }

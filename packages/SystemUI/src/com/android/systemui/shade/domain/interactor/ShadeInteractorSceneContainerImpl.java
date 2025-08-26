@@ -15,7 +15,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeInteractorSceneContainerImpl implements BaseShadeInteractor {
     public final SceneInteractor sceneInteractor;
@@ -37,9 +36,9 @@ public final class ShadeInteractorSceneContainerImpl implements BaseShadeInterac
     @Override // com.android.systemui.shade.domain.interactor.BaseShadeInteractor
     public final void collapseNotificationsShade(String str, TransitionKey transitionKey) {
         ShadeModeInteractor shadeModeInteractor = this.shadeModeInteractor;
-        boolean isDualShade = shadeModeInteractor.isDualShade();
+        boolean zIsDualShade = shadeModeInteractor.isDualShade();
         SceneInteractor sceneInteractor = this.sceneInteractor;
-        if (isDualShade) {
+        if (zIsDualShade) {
             TransitionKeys.INSTANCE.getClass();
             if (Intrinsics.areEqual(transitionKey, TransitionKeys.Instant)) {
                 sceneInteractor.instantlyHideOverlay(Overlays.NotificationsShade, str);
@@ -55,22 +54,22 @@ public final class ShadeInteractorSceneContainerImpl implements BaseShadeInterac
             return;
         }
         SceneKey sceneKey = SceneFamilies.Home;
-        String concat = str.concat(" (collapseNotificationsShade)");
+        String strConcat = str.concat(" (collapseNotificationsShade)");
         if (transitionKey == null) {
             transitionKey = TransitionKeys.ToSplitShade;
             if (!shadeModeInteractor.isSplitShade()) {
                 transitionKey = null;
             }
         }
-        SceneInteractor.changeScene$default(this.sceneInteractor, sceneKey, concat, transitionKey, null, false, 24);
+        SceneInteractor.changeScene$default(this.sceneInteractor, sceneKey, strConcat, transitionKey, null, false, 24);
     }
 
     @Override // com.android.systemui.shade.domain.interactor.BaseShadeInteractor
     public final void collapseQuickSettingsShade(String str, TransitionKey transitionKey, boolean z) {
         ShadeModeInteractor shadeModeInteractor = this.shadeModeInteractor;
-        boolean isDualShade = shadeModeInteractor.isDualShade();
+        boolean zIsDualShade = shadeModeInteractor.isDualShade();
         SceneInteractor sceneInteractor = this.sceneInteractor;
-        if (isDualShade) {
+        if (zIsDualShade) {
             TransitionKeys.INSTANCE.getClass();
             if (Intrinsics.areEqual(transitionKey, TransitionKeys.Instant)) {
                 sceneInteractor.instantlyHideOverlay(Overlays.QuickSettingsShade, str);
@@ -80,21 +79,21 @@ public final class ShadeInteractorSceneContainerImpl implements BaseShadeInterac
                 return;
             }
         }
-        boolean isSplitShade = shadeModeInteractor.isSplitShade();
-        SceneKey sceneKey = (z || isSplitShade) ? SceneFamilies.Home : Scenes.Shade;
+        boolean zIsSplitShade = shadeModeInteractor.isSplitShade();
+        SceneKey sceneKey = (z || zIsSplitShade) ? SceneFamilies.Home : Scenes.Shade;
         TransitionKeys.INSTANCE.getClass();
         if (Intrinsics.areEqual(transitionKey, TransitionKeys.Instant)) {
             sceneInteractor.snapToScene(sceneKey, str.concat(" (collapseQuickSettingsShade)"));
             return;
         }
-        String concat = str.concat(" (collapseQuickSettingsShade)");
+        String strConcat = str.concat(" (collapseQuickSettingsShade)");
         if (transitionKey == null) {
             transitionKey = TransitionKeys.ToSplitShade;
-            if (!isSplitShade) {
+            if (!zIsSplitShade) {
                 transitionKey = null;
             }
         }
-        SceneInteractor.changeScene$default(this.sceneInteractor, sceneKey, concat, transitionKey, null, false, 24);
+        SceneInteractor.changeScene$default(this.sceneInteractor, sceneKey, strConcat, transitionKey, null, false, 24);
     }
 
     @Override // com.android.systemui.shade.domain.interactor.BaseShadeInteractor
@@ -122,10 +121,10 @@ public final class ShadeInteractorSceneContainerImpl implements BaseShadeInterac
             sceneInteractor.showOverlay(Overlays.QuickSettingsShade, str);
             return;
         }
-        boolean isSplitShade = shadeModeInteractor.isSplitShade();
-        SceneKey sceneKey = isSplitShade ? Scenes.Shade : Scenes.QuickSettings;
+        boolean zIsSplitShade = shadeModeInteractor.isSplitShade();
+        SceneKey sceneKey = zIsSplitShade ? Scenes.Shade : Scenes.QuickSettings;
         TransitionKeys.INSTANCE.getClass();
-        SceneInteractor.changeScene$default(this.sceneInteractor, sceneKey, str, isSplitShade ? TransitionKeys.ToSplitShade : null, null, false, 24);
+        SceneInteractor.changeScene$default(this.sceneInteractor, sceneKey, str, zIsSplitShade ? TransitionKeys.ToSplitShade : null, null, false, 24);
     }
 
     @Override // com.android.systemui.shade.domain.interactor.BaseShadeInteractor

@@ -133,20 +133,20 @@ public final class PositionedGlyphs {
 
     public float getWeightOverride(int i) {
         Preconditions.checkArgumentInRange(i, 0, glyphCount() - 1, "index");
-        float nGetWeightOverride = nGetWeightOverride(this.mLayoutPtr, i);
-        if (nGetWeightOverride == -1.0f) {
+        float fNGetWeightOverride = nGetWeightOverride(this.mLayoutPtr, i);
+        if (fNGetWeightOverride == -1.0f) {
             return Float.MIN_VALUE;
         }
-        return nGetWeightOverride;
+        return fNGetWeightOverride;
     }
 
     public float getItalicOverride(int i) {
         Preconditions.checkArgumentInRange(i, 0, glyphCount() - 1, "index");
-        float nGetItalicOverride = nGetItalicOverride(this.mLayoutPtr, i);
-        if (nGetItalicOverride == -1.0f) {
+        float fNGetItalicOverride = nGetItalicOverride(this.mLayoutPtr, i);
+        if (fNGetItalicOverride == -1.0f) {
             return Float.MIN_VALUE;
         }
-        return nGetItalicOverride;
+        return fNGetItalicOverride;
     }
 
     public PositionedGlyphs(long j, float f, float f2) {
@@ -155,22 +155,22 @@ public final class PositionedGlyphs {
         this.mYOffset = f2;
         int i = 0;
         if (Flags.typefaceRedesignReadonly()) {
-            int nGetFontCount = nGetFontCount(j);
-            this.mFonts = new ArrayList<>(nGetFontCount);
-            while (i < nGetFontCount) {
+            int iNGetFontCount = nGetFontCount(j);
+            this.mFonts = new ArrayList<>(iNGetFontCount);
+            while (i < iNGetFontCount) {
                 this.mFonts.add(new Font(nGetFontRef(j, i)));
                 i++;
             }
         } else {
-            int nGetGlyphCount = nGetGlyphCount(j);
-            this.mFonts = new ArrayList<>(nGetGlyphCount);
+            int iNGetGlyphCount = nGetGlyphCount(j);
+            this.mFonts = new ArrayList<>(iNGetGlyphCount);
             long j2 = 0;
             Font font = null;
-            while (i < nGetGlyphCount) {
-                long nGetFont = nGetFont(j, i);
-                if (j2 != nGetFont) {
-                    font = new Font(nGetFont);
-                    j2 = nGetFont;
+            while (i < iNGetGlyphCount) {
+                long jNGetFont = nGetFont(j, i);
+                if (j2 != jNGetFont) {
+                    font = new Font(jNGetFont);
+                    j2 = jNGetFont;
                 }
                 this.mFonts.add(font);
                 i++;
@@ -199,11 +199,11 @@ public final class PositionedGlyphs {
     }
 
     public int hashCode() {
-        int hash = Objects.hash(Float.valueOf(this.mXOffset), Float.valueOf(this.mYOffset));
+        int iHash = Objects.hash(Float.valueOf(this.mXOffset), Float.valueOf(this.mYOffset));
         for (int i = 0; i < glyphCount(); i++) {
-            hash = Objects.hash(Integer.valueOf(hash), Integer.valueOf(getGlyphId(i)), Float.valueOf(getGlyphX(i)), Float.valueOf(getGlyphY(i)), getFont(i));
+            iHash = Objects.hash(Integer.valueOf(iHash), Integer.valueOf(getGlyphId(i)), Float.valueOf(getGlyphX(i)), Float.valueOf(getGlyphY(i)), getFont(i));
         }
-        return hash;
+        return iHash;
     }
 
     public String toString() {

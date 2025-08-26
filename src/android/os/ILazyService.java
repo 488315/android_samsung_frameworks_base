@@ -39,9 +39,9 @@ public interface ILazyService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILazyService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILazyService)) {
-                return (ILazyService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILazyService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILazyService)) {
+                return (ILazyService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -68,9 +68,9 @@ public interface ILazyService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                IBinder service = getService(readString);
+                IBinder service = getService(string);
                 parcel2.writeNoException();
                 parcel2.writeStrongBinder(service);
                 return true;
@@ -96,17 +96,17 @@ public interface ILazyService extends IInterface {
 
             @Override // android.os.ILazyService
             public IBinder getService(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILazyService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(ILazyService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

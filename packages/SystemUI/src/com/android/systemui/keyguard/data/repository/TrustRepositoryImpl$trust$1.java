@@ -24,7 +24,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class TrustRepositoryImpl$trust$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -68,19 +67,19 @@ final class TrustRepositoryImpl$trust$1 extends SuspendLambda implements Functio
                 }
 
                 public final void onTrustChanged(boolean z, boolean z2, int i2, int i3, List list) {
-                    TrustRepositoryLogger trustRepositoryLogger = TrustRepositoryImpl.this.logger;
+                    TrustRepositoryLogger trustRepositoryLogger = trustRepositoryImpl.logger;
                     trustRepositoryLogger.getClass();
                     LogLevel logLevel = LogLevel.DEBUG;
                     TrustRepositoryLogger$$ExternalSyntheticLambda0 trustRepositoryLogger$$ExternalSyntheticLambda0 = new TrustRepositoryLogger$$ExternalSyntheticLambda0(7);
                     LogBuffer logBuffer = trustRepositoryLogger.logBuffer;
-                    LogMessage obtain = logBuffer.obtain("TrustRepositoryLog", logLevel, trustRepositoryLogger$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                    LogMessage logMessageObtain = logBuffer.obtain("TrustRepositoryLog", logLevel, trustRepositoryLogger$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                     logMessageImpl.bool1 = z;
                     logMessageImpl.bool2 = z2;
                     logMessageImpl.int1 = i2;
                     logMessageImpl.int2 = i3;
                     logMessageImpl.str1 = list != null ? CollectionsKt___CollectionsKt.joinToString$default(list, null, null, null, null, 63) : null;
-                    logBuffer.commit(obtain);
+                    logBuffer.commit(logMessageObtain);
                     ChannelExt channelExt = ChannelExt.INSTANCE;
                     ProducerScope producerScope2 = producerScope;
                     TrustModel trustModel = new TrustModel(z, i2, new TrustGrantFlags(i3));
@@ -89,16 +88,16 @@ final class TrustRepositoryImpl$trust$1 extends SuspendLambda implements Functio
                 }
 
                 public final void onTrustManagedChanged(boolean z, int i2) {
-                    TrustRepositoryLogger trustRepositoryLogger = TrustRepositoryImpl.this.logger;
+                    TrustRepositoryLogger trustRepositoryLogger = trustRepositoryImpl.logger;
                     trustRepositoryLogger.getClass();
                     LogLevel logLevel = LogLevel.DEBUG;
                     TrustRepositoryLogger$$ExternalSyntheticLambda0 trustRepositoryLogger$$ExternalSyntheticLambda0 = new TrustRepositoryLogger$$ExternalSyntheticLambda0(6);
                     LogBuffer logBuffer = trustRepositoryLogger.logBuffer;
-                    LogMessage obtain = logBuffer.obtain("TrustRepositoryLog", logLevel, trustRepositoryLogger$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                    LogMessage logMessageObtain = logBuffer.obtain("TrustRepositoryLog", logLevel, trustRepositoryLogger$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                     logMessageImpl.bool1 = z;
                     logMessageImpl.int1 = i2;
-                    logBuffer.commit(obtain);
+                    logBuffer.commit(logMessageObtain);
                     ChannelExt channelExt = ChannelExt.INSTANCE;
                     ProducerScope producerScope2 = producerScope;
                     TrustManagedModel trustManagedModel = new TrustManagedModel(i2, z);
@@ -120,7 +119,7 @@ final class TrustRepositoryImpl$trust$1 extends SuspendLambda implements Functio
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.TrustRepositoryImpl$trust$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    TrustRepositoryImpl trustRepositoryImpl3 = TrustRepositoryImpl.this;
+                    TrustRepositoryImpl trustRepositoryImpl3 = trustRepositoryImpl2;
                     TrustRepositoryLogger trustRepositoryLogger2 = trustRepositoryImpl3.logger;
                     trustRepositoryLogger2.getClass();
                     LogBuffer.log$default(trustRepositoryLogger2.logBuffer, "TrustRepositoryLog", LogLevel.VERBOSE, "TrustRepository#unregisterTrustListener");

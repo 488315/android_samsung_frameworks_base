@@ -11,7 +11,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LocalBluetoothManagerExtKt$headsetAudioModeChanges$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ LocalBluetoothManager $this_headsetAudioModeChanges;
@@ -48,7 +47,7 @@ final class LocalBluetoothManagerExtKt$headsetAudioModeChanges$1 extends Suspend
             final ?? r1 = new BluetoothCallback() { // from class: com.android.settingslib.bluetooth.LocalBluetoothManagerExtKt$headsetAudioModeChanges$1$callback$1
                 @Override // com.android.settingslib.bluetooth.BluetoothCallback
                 public final void onAudioModeChanged() {
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     BuildersKt.launch$default(producerScope2, null, null, new LocalBluetoothManagerExtKt$headsetAudioModeChanges$1$callback$1$onAudioModeChanged$1(producerScope2, null), 3);
                 }
             };
@@ -57,7 +56,7 @@ final class LocalBluetoothManagerExtKt$headsetAudioModeChanges$1 extends Suspend
             Function0 function0 = new Function0() { // from class: com.android.settingslib.bluetooth.LocalBluetoothManagerExtKt$headsetAudioModeChanges$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    LocalBluetoothManager.this.mEventManager.unregisterCallback(r1);
+                    localBluetoothManager.mEventManager.unregisterCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

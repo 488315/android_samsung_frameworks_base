@@ -66,9 +66,9 @@ public interface IDataShareWriteAdapter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDataShareWriteAdapter.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDataShareWriteAdapter)) {
-                return (IDataShareWriteAdapter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDataShareWriteAdapter.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDataShareWriteAdapter)) {
+                return (IDataShareWriteAdapter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,9 +108,9 @@ public interface IDataShareWriteAdapter extends IInterface {
                 parcel.enforceNoDataAvail();
                 write(parcelFileDescriptor);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                error(readInt);
+                error(i3);
             } else if (i == 3) {
                 rejected();
             } else if (i == 4) {
@@ -139,47 +139,47 @@ public interface IDataShareWriteAdapter extends IInterface {
 
             @Override // android.view.contentcapture.IDataShareWriteAdapter
             public void write(ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataShareWriteAdapter.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataShareWriteAdapter.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IDataShareWriteAdapter
             public void error(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataShareWriteAdapter.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataShareWriteAdapter.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IDataShareWriteAdapter
             public void rejected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataShareWriteAdapter.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataShareWriteAdapter.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.contentcapture.IDataShareWriteAdapter
             public void finish() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataShareWriteAdapter.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataShareWriteAdapter.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

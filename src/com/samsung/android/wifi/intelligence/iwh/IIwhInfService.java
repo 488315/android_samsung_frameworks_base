@@ -44,9 +44,9 @@ public interface IIwhInfService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIwhInfService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIwhInfService)) {
-                return (IIwhInfService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIwhInfService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIwhInfService)) {
+                return (IIwhInfService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,12 +73,12 @@ public interface IIwhInfService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                String readString2 = parcel.readString();
-                int readInt2 = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                String string2 = parcel.readString();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                iwhInfResult(readString, readInt, readString2, readInt2);
+                iwhInfResult(string, i3, string2, i4);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,16 +102,16 @@ public interface IIwhInfService extends IInterface {
 
             @Override // com.samsung.android.wifi.intelligence.iwh.IIwhInfService
             public void iwhInfResult(String str, int i, String str2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIwhInfService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIwhInfService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

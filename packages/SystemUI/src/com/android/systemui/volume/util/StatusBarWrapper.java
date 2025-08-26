@@ -15,14 +15,12 @@ import kotlin.Result;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarWrapper {
     public final Context context;
     public final KeyguardManagerWrapper keyguardManagerWrapper;
     public final LogWrapper logWrapper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -54,15 +52,15 @@ public final class StatusBarWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            this.logWrapper.e("StatusBarWrapper", "startDoNotDisturbActivity : Exception = " + m3422exceptionOrNullimpl);
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            this.logWrapper.e("StatusBarWrapper", "startDoNotDisturbActivity : Exception = " + thM3442exceptionOrNullimpl);
         }
     }
 
     public final void startHearingEnhancementsActivity() {
         Object failure;
-        Intent intent = new Intent();
+        Intent intent = new Intent("android.intent.action.MAIN");
         intent.setComponent(new ComponentName(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG, "com.android.settings.Settings$AccessibilityHearingEnhancementsActivity"));
         intent.addFlags(335544320);
         Bundle bundle = new Bundle();
@@ -77,9 +75,9 @@ public final class StatusBarWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            this.logWrapper.e("StatusBarWrapper", "startHearingEnhancementsActivity : Exception = " + m3422exceptionOrNullimpl);
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            this.logWrapper.e("StatusBarWrapper", "startHearingEnhancementsActivity : Exception = " + thM3442exceptionOrNullimpl);
         }
     }
 
@@ -96,9 +94,9 @@ public final class StatusBarWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            this.logWrapper.e("StatusBarWrapper", "startLeBroadcastActivity : Exception = " + m3422exceptionOrNullimpl);
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            this.logWrapper.e("StatusBarWrapper", "startLeBroadcastActivity : Exception = " + thM3442exceptionOrNullimpl);
         }
     }
 
@@ -115,9 +113,9 @@ public final class StatusBarWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            this.logWrapper.e("StatusBarWrapper", "startSettingsActivity : Exception = " + m3422exceptionOrNullimpl);
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            this.logWrapper.e("StatusBarWrapper", "startSettingsActivity : Exception = " + thM3442exceptionOrNullimpl);
         }
     }
 
@@ -145,9 +143,9 @@ public final class StatusBarWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            this.logWrapper.e("StatusBarWrapper", "startVolumeSettingsActivity : Exception = " + m3422exceptionOrNullimpl);
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            this.logWrapper.e("StatusBarWrapper", "startVolumeSettingsActivity : Exception = " + thM3442exceptionOrNullimpl);
         }
     }
 }

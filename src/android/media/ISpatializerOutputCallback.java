@@ -44,9 +44,9 @@ public interface ISpatializerOutputCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISpatializerOutputCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISpatializerOutputCallback)) {
-                return (ISpatializerOutputCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISpatializerOutputCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISpatializerOutputCallback)) {
+                return (ISpatializerOutputCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ISpatializerOutputCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                dispatchSpatializerOutputChanged(readInt);
+                dispatchSpatializerOutputChanged(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface ISpatializerOutputCallback extends IInterface {
 
             @Override // android.media.ISpatializerOutputCallback
             public void dispatchSpatializerOutputChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISpatializerOutputCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISpatializerOutputCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

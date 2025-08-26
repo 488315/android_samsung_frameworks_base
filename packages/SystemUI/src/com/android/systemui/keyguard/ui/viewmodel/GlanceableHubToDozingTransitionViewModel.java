@@ -11,7 +11,6 @@ import com.android.systemui.keyguard.ui.KeyguardTransitionAnimationFlow$FlowBuil
 import com.android.systemui.keyguard.ui.transitions.GlanceableHubTransition;
 import com.android.systemui.scene.shared.model.Scenes;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GlanceableHubToDozingTransitionViewModel implements GlanceableHubTransition {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 windowBlurRadius;
@@ -23,6 +22,6 @@ public final class GlanceableHubToDozingTransitionViewModel implements Glanceabl
         KeyguardState keyguardState = KeyguardState.DOZING;
         SceneKey sceneKey = Scenes.Communal;
         companion.getClass();
-        this.windowBlurRadius = ((DaggerReferenceGlobalRootComponent.GlanceableHubBlurComponentImpl) factory.create(keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, sceneKey)).setupWithoutSceneContainer(new Edge.StateToState(KeyguardState.GLANCEABLE_HUB, keyguardState)))).getBlurProvider().exitBlurRadius;
+        this.windowBlurRadius = ((DaggerReferenceGlobalRootComponent.GlanceableHubBlurComponentImpl) factory.create(keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, sceneKey)).setupWithoutSceneContainer(new Edge.StateToState(KeyguardState.GLANCEABLE_HUB, keyguardState)))).getBlurProvider().exitBlurRadius;
     }
 }

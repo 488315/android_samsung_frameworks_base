@@ -44,7 +44,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ AccessibilityManager $accessibilityManager;
@@ -68,7 +67,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.ui.binder.BiometricViewSizeBinder$bind$2$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ View $iconHolderView;
@@ -173,7 +171,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.ui.binder.BiometricViewSizeBinder$bind$2$1$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         final /* synthetic */ View $iconHolderView;
@@ -214,9 +211,9 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
                         Pair pair = (Pair) obj2;
                         view.getLayoutParams().width = ((Number) pair.getFirst()).intValue();
                         view.getLayoutParams().height = ((Number) pair.getSecond()).intValue();
-                        int intValue = ((Number) pair.getFirst()).intValue();
+                        int iIntValue = ((Number) pair.getFirst()).intValue();
                         ConstraintSet constraintSet2 = constraintSet;
-                        constraintSet2.constrainWidth(R.id.biometric_icon, intValue);
+                        constraintSet2.constrainWidth(R.id.biometric_icon, iIntValue);
                         constraintSet2.constrainHeight(R.id.biometric_icon, ((Number) pair.getSecond()).intValue());
                         return Unit.INSTANCE;
                     }
@@ -235,7 +232,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.ui.binder.BiometricViewSizeBinder$bind$2$1$3, reason: invalid class name */
     final class AnonymousClass3 extends SuspendLambda implements Function2 {
         final /* synthetic */ Guideline $leftGuideline;
@@ -326,9 +322,9 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
                         Guideline guideline8 = guideline4;
                         if (guideline8 != null) {
                             int i6 = rect.left;
-                            int abs = i6 >= 0 ? Math.abs(i6) : ((ConstraintLayout) view).getWidth() - Math.abs(rect.left);
+                            int iAbs = i6 >= 0 ? Math.abs(i6) : ((ConstraintLayout) view).getWidth() - Math.abs(rect.left);
                             int i7 = rect.right;
-                            constraintSet3.setGuidelineBegin(guideline8.getId(), (abs + (i7 >= 0 ? ((ConstraintLayout) view).getWidth() - Math.abs(rect.right) : Math.abs(i7))) / 2);
+                            constraintSet3.setGuidelineBegin(guideline8.getId(), (iAbs + (i7 >= 0 ? ((ConstraintLayout) view).getWidth() - Math.abs(rect.right) : Math.abs(i7))) / 2);
                         }
                         return Unit.INSTANCE;
                     }
@@ -347,7 +343,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.ui.binder.BiometricViewSizeBinder$bind$2$1$4, reason: invalid class name */
     final class AnonymousClass4 extends SuspendLambda implements Function2 {
         final /* synthetic */ View $iconHolderView;
@@ -358,7 +353,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
         final /* synthetic */ List<View> $viewsToHideWhenSmall;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.biometrics.ui.binder.BiometricViewSizeBinder$bind$2$1$4$3, reason: invalid class name */
         final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
             public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -414,7 +408,7 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
                         Pair pair = (Pair) obj2;
-                        boolean booleanValue = ((Boolean) pair.component1()).booleanValue();
+                        boolean zBooleanValue = ((Boolean) pair.component1()).booleanValue();
                         PromptSize promptSize = (PromptSize) pair.component2();
                         List list2 = list;
                         View view2 = view;
@@ -426,10 +420,10 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
                                 break;
                             }
                             View view3 = (View) it.next();
-                            boolean isSmall = PromptSizeKt.isSmall(promptSize);
+                            boolean zIsSmall = PromptSizeKt.isSmall(promptSize);
                             boolean z = (view3 instanceof TextView) && StringsKt__StringsKt.isBlank(((TextView) view3).getText());
                             boolean z2 = (view3 instanceof ImageView) && ((ImageView) view3).getDrawable() == null;
-                            if (!isSmall && !z && !z2) {
+                            if (!zIsSmall && !z && !z2) {
                                 i2 = 0;
                             }
                             view3.setVisibility(i2);
@@ -439,7 +433,7 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
                         constraintSet4.setVisibility(id, 8);
                         constraintSet4.setVisibility(R.id.indicator, 8);
                         constraintSet4.setVisibility(R.id.scrollView, 8);
-                        if (booleanValue) {
+                        if (zBooleanValue) {
                             int id2 = view2.getId();
                             ConstraintSet constraintSet5 = constraintSet2;
                             constraintSet5.setVisibility(id2, 8);
@@ -466,7 +460,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.ui.binder.BiometricViewSizeBinder$bind$2$1$5, reason: invalid class name */
     final class AnonymousClass5 extends SuspendLambda implements Function2 {
         final /* synthetic */ AccessibilityManager $accessibilityManager;
@@ -482,7 +475,6 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
         final /* synthetic */ PromptViewModel $viewModel;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.biometrics.ui.binder.BiometricViewSizeBinder$bind$2$1$5$3, reason: invalid class name */
         final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
             public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -552,7 +544,7 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
                         ?? r10 = (PromptSize) pair.component2();
                         boolean z = r11 != 0 && r11 == PromptPosition.Left;
                         ConstraintSet constraintSet5 = constraintSet2;
-                        ConstraintSet constraintSet6 = ConstraintSet.this;
+                        ConstraintSet constraintSet6 = constraintSet;
                         ConstraintSet constraintSet7 = constraintSet3;
                         if (z) {
                             if (PromptSizeKt.isSmall(r10)) {
@@ -569,9 +561,9 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
                             constraintSet7.setMargin(R.id.panel, 3, (int) ((-24) * f));
                             constraintSet7.setVerticalBias(R.id.scrollView, 0.0f);
                         }
-                        boolean isSmall = PromptSizeKt.isSmall(r10);
+                        boolean zIsSmall = PromptSizeKt.isSmall(r10);
                         Ref$ObjectRef ref$ObjectRef3 = ref$ObjectRef;
-                        if (!isSmall) {
+                        if (!zIsSmall) {
                             if (PromptSizeKt.isMedium(r10) && PromptSizeKt.isSmall((PromptSize) ref$ObjectRef3.element)) {
                                 AutoTransition autoTransition = new AutoTransition();
                                 autoTransition.setDuration(150L);
@@ -606,10 +598,10 @@ final class BiometricViewSizeBinder$bind$2$1 extends SuspendLambda implements Fu
                         ViewGroup viewGroup = (ViewGroup) view3;
                         int i2 = Utils.$r8$clinit;
                         if (accessibilityManager2.isEnabled()) {
-                            AccessibilityEvent obtain = AccessibilityEvent.obtain();
-                            obtain.setEventType(2048);
-                            obtain.setContentChangeTypes(1);
-                            viewGroup.sendAccessibilityEventUnchecked(obtain);
+                            AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain();
+                            accessibilityEventObtain.setEventType(2048);
+                            accessibilityEventObtain.setContentChangeTypes(1);
+                            viewGroup.sendAccessibilityEventUnchecked(accessibilityEventObtain);
                             viewGroup.notifySubtreeAccessibilityStateChanged(viewGroup, viewGroup, 1);
                         }
                         view2.invalidateOutline();

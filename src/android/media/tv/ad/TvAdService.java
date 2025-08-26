@@ -68,12 +68,12 @@ public abstract class TvAdService extends Service {
                 if (iTvAdSessionCallback == null) {
                     return;
                 }
-                SomeArgs obtain = SomeArgs.obtain();
-                obtain.arg1 = inputChannel;
-                obtain.arg2 = iTvAdSessionCallback;
-                obtain.arg3 = str;
-                obtain.arg4 = str2;
-                TvAdService.this.mServiceHandler.obtainMessage(1, obtain).sendToTarget();
+                SomeArgs someArgsObtain = SomeArgs.obtain();
+                someArgsObtain.arg1 = inputChannel;
+                someArgsObtain.arg2 = iTvAdSessionCallback;
+                someArgsObtain.arg3 = str;
+                someArgsObtain.arg4 = str2;
+                TvAdService.this.mServiceHandler.obtainMessage(1, someArgsObtain).sendToTarget();
             }
 
             @Override // android.media.tv.ad.ITvAdService
@@ -440,9 +440,9 @@ public abstract class TvAdService extends Service {
             this.mMediaFrame = rect;
             onMediaViewSizeChanged(rect.right - rect.left, rect.bottom - rect.top);
             if (this.mMediaViewEnabled) {
-                View onCreateMediaView = onCreateMediaView();
-                this.mMediaView = onCreateMediaView;
-                if (onCreateMediaView == null) {
+                View viewOnCreateMediaView = onCreateMediaView();
+                this.mMediaView = viewOnCreateMediaView;
+                if (viewOnCreateMediaView == null) {
                     return;
                 }
                 MediaViewCleanUpTask mediaViewCleanUpTask = this.mMediaViewCleanUpTask;
@@ -509,7 +509,7 @@ public abstract class TvAdService extends Service {
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
-        public Void doInBackground(View... viewArr) {
+        public Void doInBackground(View... viewArr) throws InterruptedException {
             View view = viewArr[0];
             try {
                 Thread.sleep(5000L);
@@ -559,8 +559,8 @@ public abstract class TvAdService extends Service {
             String str = (String) someArgs2.arg3;
             String str2 = (String) someArgs2.arg4;
             someArgs2.recycle();
-            Session onCreateSession = TvAdService.this.onCreateSession(str, str2);
-            if (onCreateSession == null) {
+            Session sessionOnCreateSession = TvAdService.this.onCreateSession(str, str2);
+            if (sessionOnCreateSession == null) {
                 try {
                     iTvAdSessionCallback2.onSessionCreated(null);
                     return;
@@ -569,12 +569,12 @@ public abstract class TvAdService extends Service {
                     return;
                 }
             }
-            ITvAdSessionWrapper iTvAdSessionWrapper = new ITvAdSessionWrapper(TvAdService.this, onCreateSession, inputChannel);
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = onCreateSession;
-            obtain.arg2 = iTvAdSessionWrapper;
-            obtain.arg3 = iTvAdSessionCallback2;
-            TvAdService.this.mServiceHandler.obtainMessage(2, obtain).sendToTarget();
+            ITvAdSessionWrapper iTvAdSessionWrapper = new ITvAdSessionWrapper(TvAdService.this, sessionOnCreateSession, inputChannel);
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = sessionOnCreateSession;
+            someArgsObtain.arg2 = iTvAdSessionWrapper;
+            someArgsObtain.arg3 = iTvAdSessionCallback2;
+            TvAdService.this.mServiceHandler.obtainMessage(2, someArgsObtain).sendToTarget();
         }
     }
 }

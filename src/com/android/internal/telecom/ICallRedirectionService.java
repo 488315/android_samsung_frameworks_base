@@ -54,9 +54,9 @@ public interface ICallRedirectionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICallRedirectionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICallRedirectionService)) {
-                return (ICallRedirectionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICallRedirectionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICallRedirectionService)) {
+                return (ICallRedirectionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,12 +86,12 @@ public interface ICallRedirectionService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ICallRedirectionAdapter asInterface = ICallRedirectionAdapter.Stub.asInterface(parcel.readStrongBinder());
+                ICallRedirectionAdapter iCallRedirectionAdapterAsInterface = ICallRedirectionAdapter.Stub.asInterface(parcel.readStrongBinder());
                 Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
                 PhoneAccountHandle phoneAccountHandle = (PhoneAccountHandle) parcel.readTypedObject(PhoneAccountHandle.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                placeCall(asInterface, uri, phoneAccountHandle, readBoolean);
+                placeCall(iCallRedirectionAdapterAsInterface, uri, phoneAccountHandle, z);
             } else if (i == 2) {
                 notifyTimeout();
             } else {
@@ -118,27 +118,27 @@ public interface ICallRedirectionService extends IInterface {
 
             @Override // com.android.internal.telecom.ICallRedirectionService
             public void placeCall(ICallRedirectionAdapter iCallRedirectionAdapter, Uri uri, PhoneAccountHandle phoneAccountHandle, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallRedirectionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCallRedirectionAdapter);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(phoneAccountHandle, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallRedirectionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCallRedirectionAdapter);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(phoneAccountHandle, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallRedirectionService
             public void notifyTimeout() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallRedirectionService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallRedirectionService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

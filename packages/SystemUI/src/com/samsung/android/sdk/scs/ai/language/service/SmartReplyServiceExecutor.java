@@ -12,7 +12,6 @@ import com.samsung.android.sivs.ai.sdkcommon.language.ISmartReplyService;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SmartReplyServiceExecutor extends ServiceExecutor {
     public final Context context;
@@ -40,15 +39,15 @@ public class SmartReplyServiceExecutor extends ServiceExecutor {
     }
 
     @Override // com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener
-    public final void onConnected(ComponentName componentName, IBinder iBinder) {
+    public final void onConnected(ComponentName componentName, IBinder iBinder) throws RemoteException {
         ISmartReplyService proxy;
         Log.d("SmartReplyServiceExecutor", "onServiceConnected");
         int i = ISmartReplyService.Stub.$r8$clinit;
         if (iBinder == null) {
             proxy = null;
         } else {
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.sivs.ai.sdkcommon.language.ISmartReplyService");
-            proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof ISmartReplyService)) ? new ISmartReplyService.Stub.Proxy(iBinder) : (ISmartReplyService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.sivs.ai.sdkcommon.language.ISmartReplyService");
+            proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ISmartReplyService)) ? new ISmartReplyService.Stub.Proxy(iBinder) : (ISmartReplyService) iInterfaceQueryLocalInterface;
         }
         this.service = proxy;
         try {

@@ -96,9 +96,9 @@ public interface IKerykeion extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKerykeion.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKerykeion)) {
-                return (IKerykeion) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKerykeion.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKerykeion)) {
+                return (IKerykeion) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -142,17 +142,17 @@ public interface IKerykeion extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     KerykeionRequest kerykeionRequest = (KerykeionRequest) parcel.readTypedObject(KerykeionRequest.CREATOR);
                     Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
                     parcel.enforceNoDataAvail();
-                    start(readInt, kerykeionRequest, rect);
+                    start(i3, kerykeionRequest, rect);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stop(readInt2);
+                    stop(i4);
                     parcel2.writeNoException();
                     return true;
                 case 3:
@@ -160,17 +160,17 @@ public interface IKerykeion extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt3 = parcel.readInt();
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    int i5 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    setInfoExtractionListener(readInt3, readStrongBinder);
+                    setInfoExtractionListener(i5, strongBinder);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     Rect rect2 = (Rect) parcel.readTypedObject(Rect.CREATOR);
                     parcel.enforceNoDataAvail();
-                    show(readString, rect2);
+                    show(string, rect2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
@@ -178,16 +178,16 @@ public interface IKerykeion extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    training(readString2);
+                    training(string2);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    int readInt4 = parcel.readInt();
-                    String readString3 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addResultRule(readInt4, readString3);
+                    addResultRule(i6, string3);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -213,124 +213,124 @@ public interface IKerykeion extends IInterface {
 
             @Override // com.samsung.android.infoextraction.IKerykeion
             public void start(int i, KerykeionRequest kerykeionRequest, Rect rect) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(kerykeionRequest, 0);
-                    obtain.writeTypedObject(rect, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(kerykeionRequest, 0);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.infoextraction.IKerykeion
             public void stop(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.infoextraction.IKerykeion
             public void restart() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.infoextraction.IKerykeion
             public void setInfoExtractionListener(int i, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.infoextraction.IKerykeion
             public void show(String str, Rect rect) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(rect, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.infoextraction.IKerykeion
             public void dismiss() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.infoextraction.IKerykeion
             public void training(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.infoextraction.IKerykeion
             public void addResultRule(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKerykeion.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

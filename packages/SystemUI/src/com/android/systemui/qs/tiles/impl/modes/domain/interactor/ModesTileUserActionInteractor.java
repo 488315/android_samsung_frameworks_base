@@ -18,14 +18,12 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ModesTileUserActionInteractor implements QSTileUserActionInteractor {
     public final ModesDialogDelegate dialogDelegate;
     public final Intent longClickIntent = new Intent("android.settings.ZEN_MODE_SETTINGS");
     public final QSTileIntentUserInputHandler qsTileIntentUserInputHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,13 +46,13 @@ public final class ModesTileUserActionInteractor implements QSTileUserActionInte
     public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) {
         QSTileUserAction qSTileUserAction = qSTileInput.action;
         if (qSTileUserAction instanceof QSTileUserAction.Click) {
-            Object showDialog = this.dialogDelegate.showDialog(((QSTileUserAction.Click) qSTileUserAction).expandable, (SuspendLambda) continuation);
+            Object objShowDialog = this.dialogDelegate.showDialog(((QSTileUserAction.Click) qSTileUserAction).expandable, (SuspendLambda) continuation);
             CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-            if (showDialog != coroutineSingletons) {
-                showDialog = Unit.INSTANCE;
+            if (objShowDialog != coroutineSingletons) {
+                objShowDialog = Unit.INSTANCE;
             }
-            if (showDialog == coroutineSingletons) {
-                return showDialog;
+            if (objShowDialog == coroutineSingletons) {
+                return objShowDialog;
             }
         } else if (qSTileUserAction instanceof QSTileUserAction.ToggleClick) {
             RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;

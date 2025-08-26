@@ -3,7 +3,6 @@ package com.android.systemui.navigationbar.gestural;
 import android.util.ArraySet;
 import com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class EdgeBackGestureHandler$8$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -35,9 +34,9 @@ public final /* synthetic */ class EdgeBackGestureHandler$8$$ExternalSyntheticLa
             default:
                 EdgeBackGestureHandler.AnonymousClass8 anonymousClass82 = this.f$0;
                 int i2 = this.f$1;
-                boolean isEmpty = ((ArraySet) anonymousClass82.this$0.mTrackpadsConnected).isEmpty();
+                boolean zIsEmpty = ((ArraySet) anonymousClass82.this$0.mTrackpadsConnected).isEmpty();
                 ((ArraySet) anonymousClass82.this$0.mTrackpadsConnected).add(Integer.valueOf(i2));
-                if (isEmpty) {
+                if (zIsEmpty) {
                     EdgeBackGestureHandler edgeBackGestureHandler2 = anonymousClass82.this$0;
                     if (!edgeBackGestureHandler2.mIsEnabled || ((ArraySet) edgeBackGestureHandler2.mTrackpadsConnected).isEmpty()) {
                         anonymousClass82.this$0.updateIsEnabled();

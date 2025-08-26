@@ -6,7 +6,6 @@ import kotlin.jvm.internal.ClassBasedDeclarationContainer;
 import kotlin.reflect.KClass;
 import kotlinx.serialization.KSerializer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ConcurrentHashMapCache implements SerializerCache {
     public final ConcurrentHashMap cache = new ConcurrentHashMap();
@@ -18,13 +17,13 @@ public final class ConcurrentHashMapCache implements SerializerCache {
 
     @Override // kotlinx.serialization.internal.SerializerCache
     public final KSerializer get(KClass kClass) {
-        Object putIfAbsent;
+        Object objPutIfAbsent;
         ConcurrentHashMap concurrentHashMap = this.cache;
         Class jClass = ((ClassBasedDeclarationContainer) kClass).getJClass();
-        Object obj = concurrentHashMap.get(jClass);
-        if (obj == null && (putIfAbsent = concurrentHashMap.putIfAbsent(jClass, (obj = new CacheEntry((KSerializer) this.compute.mo779invoke(kClass))))) != null) {
-            obj = putIfAbsent;
+        Object cacheEntry = concurrentHashMap.get(jClass);
+        if (cacheEntry == null && (objPutIfAbsent = concurrentHashMap.putIfAbsent(jClass, (cacheEntry = new CacheEntry((KSerializer) this.compute.mo781invoke(kClass))))) != null) {
+            cacheEntry = objPutIfAbsent;
         }
-        return ((CacheEntry) obj).serializer;
+        return ((CacheEntry) cacheEntry).serializer;
     }
 }

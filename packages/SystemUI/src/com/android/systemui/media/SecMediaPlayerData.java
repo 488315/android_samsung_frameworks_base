@@ -16,7 +16,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecMediaPlayerData implements Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -25,7 +24,6 @@ public final class SecMediaPlayerData implements Dumpable {
     public final Lazy sortedMediaPlayers$delegate = LazyKt__LazyJVMKt.lazy(SecMediaPlayerData$sortedMediaPlayers$2.INSTANCE);
     public int currentPosition = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,7 +40,7 @@ public final class SecMediaPlayerData implements Dumpable {
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
         printWriter.println("mediaPlayers: " + getMediaPlayers());
-        printWriter.println("mediaData: " + m2612getMediaData());
+        printWriter.println("mediaData: " + m2629getMediaData());
         printWriter.println("sortedMediaPlayers: " + getSortedMediaPlayers());
     }
 
@@ -59,25 +57,25 @@ public final class SecMediaPlayerData implements Dumpable {
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     SecMediaPlayerData secMediaPlayerData = this.f$0;
                     Map.Entry entry = (Map.Entry) obj;
                     switch (i) {
                         case 0:
                             int i2 = SecMediaPlayerData.$r8$clinit;
                             entry.getClass();
-                            return Boolean.valueOf(secMediaPlayerData.m2612getMediaData().containsKey((String) entry.getKey()) && secMediaPlayerData.getSortedMediaPlayers().get(secMediaPlayerData.currentPosition) == ((SecMediaControlPanel) entry.getValue()));
+                            return Boolean.valueOf(secMediaPlayerData.m2629getMediaData().containsKey((String) entry.getKey()) && secMediaPlayerData.getSortedMediaPlayers().get(secMediaPlayerData.currentPosition) == ((SecMediaControlPanel) entry.getValue()));
                         default:
                             int i3 = SecMediaPlayerData.$r8$clinit;
                             entry.getClass();
-                            return (MediaData) secMediaPlayerData.m2612getMediaData().get((String) entry.getKey());
+                            return (MediaData) secMediaPlayerData.m2629getMediaData().get((String) entry.getKey());
                     }
                 }
             };
-            Stream filter = stream.filter(new Predicate() { // from class: com.android.systemui.media.SecMediaPlayerData$sam$java_util_function_Predicate$0
+            Stream streamFilter = stream.filter(new Predicate() { // from class: com.android.systemui.media.SecMediaPlayerData$sam$java_util_function_Predicate$0
                 @Override // java.util.function.Predicate
                 public final /* synthetic */ boolean test(Object obj) {
-                    return ((Boolean) Function1.this.mo779invoke(obj)).booleanValue();
+                    return ((Boolean) function1.mo781invoke(obj)).booleanValue();
                 }
             });
             final int i2 = 1;
@@ -90,39 +88,39 @@ public final class SecMediaPlayerData implements Dumpable {
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     SecMediaPlayerData secMediaPlayerData = this.f$0;
                     Map.Entry entry = (Map.Entry) obj;
                     switch (i2) {
                         case 0:
                             int i22 = SecMediaPlayerData.$r8$clinit;
                             entry.getClass();
-                            return Boolean.valueOf(secMediaPlayerData.m2612getMediaData().containsKey((String) entry.getKey()) && secMediaPlayerData.getSortedMediaPlayers().get(secMediaPlayerData.currentPosition) == ((SecMediaControlPanel) entry.getValue()));
+                            return Boolean.valueOf(secMediaPlayerData.m2629getMediaData().containsKey((String) entry.getKey()) && secMediaPlayerData.getSortedMediaPlayers().get(secMediaPlayerData.currentPosition) == ((SecMediaControlPanel) entry.getValue()));
                         default:
                             int i3 = SecMediaPlayerData.$r8$clinit;
                             entry.getClass();
-                            return (MediaData) secMediaPlayerData.m2612getMediaData().get((String) entry.getKey());
+                            return (MediaData) secMediaPlayerData.m2629getMediaData().get((String) entry.getKey());
                     }
                 }
             };
-            Optional findFirst = filter.map(new Function() { // from class: com.android.systemui.media.SecMediaPlayerData$sam$java_util_function_Function$0
+            Optional optionalFindFirst = streamFilter.map(new Function() { // from class: com.android.systemui.media.SecMediaPlayerData$sam$java_util_function_Function$0
                 @Override // java.util.function.Function
                 public final /* synthetic */ Object apply(Object obj) {
-                    return Function1.this.mo779invoke(obj);
+                    return function12.mo781invoke(obj);
                 }
             }).findFirst();
-            if (!findFirst.isPresent()) {
-                findFirst = null;
+            if (!optionalFindFirst.isPresent()) {
+                optionalFindFirst = null;
             }
-            if (findFirst != null) {
-                return (MediaData) findFirst.get();
+            if (optionalFindFirst != null) {
+                return (MediaData) optionalFindFirst.get();
             }
         }
         return null;
     }
 
     /* renamed from: getMediaData, reason: collision with other method in class */
-    public final ConcurrentHashMap m2612getMediaData() {
+    public final ConcurrentHashMap m2629getMediaData() {
         return (ConcurrentHashMap) this.mediaData$delegate.getValue();
     }
 
@@ -147,6 +145,6 @@ public final class SecMediaPlayerData implements Dumpable {
     }
 
     public final Iterable getMediaData() {
-        return m2612getMediaData().entrySet();
+        return m2629getMediaData().entrySet();
     }
 }

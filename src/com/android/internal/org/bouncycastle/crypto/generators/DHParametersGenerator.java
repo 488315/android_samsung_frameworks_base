@@ -18,10 +18,10 @@ public class DHParametersGenerator {
         this.random = secureRandom;
     }
 
-    public DHParameters generateParameters() {
-        BigInteger[] generateSafePrimes = DHParametersHelper.generateSafePrimes(this.size, this.certainty, this.random);
-        BigInteger bigInteger = generateSafePrimes[0];
-        BigInteger bigInteger2 = generateSafePrimes[1];
+    public DHParameters generateParameters() throws IllegalArgumentException {
+        BigInteger[] bigIntegerArrGenerateSafePrimes = DHParametersHelper.generateSafePrimes(this.size, this.certainty, this.random);
+        BigInteger bigInteger = bigIntegerArrGenerateSafePrimes[0];
+        BigInteger bigInteger2 = bigIntegerArrGenerateSafePrimes[1];
         return new DHParameters(bigInteger, DHParametersHelper.selectGenerator(bigInteger, bigInteger2, this.random), bigInteger2, TWO, (DHValidationParameters) null);
     }
 }

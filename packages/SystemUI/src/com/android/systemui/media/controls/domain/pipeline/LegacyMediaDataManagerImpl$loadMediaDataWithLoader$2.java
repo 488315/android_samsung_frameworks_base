@@ -1,16 +1,22 @@
 package com.android.systemui.media.controls.domain.pipeline;
 
+import android.media.session.MediaController;
+import android.media.session.MediaSession;
 import android.service.notification.StatusBarNotification;
+import android.util.Log;
+import com.android.internal.logging.InstanceId;
+import com.android.systemui.media.controls.domain.pipeline.MediaDataLoader;
 import com.android.systemui.media.controls.shared.model.MediaData;
+import com.android.systemui.media.controls.util.MediaControllerFactory;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class LegacyMediaDataManagerImpl$loadMediaDataWithLoader$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ boolean $isConvertingToActive;
@@ -22,7 +28,6 @@ final class LegacyMediaDataManagerImpl$loadMediaDataWithLoader$2 extends Suspend
     int label;
     final /* synthetic */ LegacyMediaDataManagerImpl this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$loadMediaDataWithLoader$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ String $key;
@@ -83,28 +88,80 @@ final class LegacyMediaDataManagerImpl$loadMediaDataWithLoader$2 extends Suspend
         return ((LegacyMediaDataManagerImpl$loadMediaDataWithLoader$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x0174, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:55:0x0174, code lost:
     
         if (kotlinx.coroutines.BuildersKt.withContext(r2, r7, r38) == r1) goto L56;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x0176, code lost:
-    
-        return r1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:55:0x0048, code lost:
-    
-        if (r2 == r1) goto L56;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r39) {
-        /*
-            Method dump skipped, instructions count: 378
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$loadMediaDataWithLoader$2.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        long jElapsedRealtime;
+        Object objLoadMediaData;
+        InstanceId instanceIdNewInstanceId;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            jElapsedRealtime = this.this$0.systemClock.elapsedRealtime();
+            MediaDataLoader mediaDataLoader = (MediaDataLoader) this.this$0.mediaDataLoader.get();
+            String str = this.$key;
+            StatusBarNotification statusBarNotification = this.$sbn;
+            boolean z = this.$isConvertingToActive;
+            this.J$0 = jElapsedRealtime;
+            this.label = 1;
+            objLoadMediaData = mediaDataLoader.loadMediaData(str, statusBarNotification, z, this);
+            if (objLoadMediaData != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        jElapsedRealtime = this.J$0;
+        ResultKt.throwOnFailure(obj);
+        objLoadMediaData = obj;
+        long j = jElapsedRealtime;
+        MediaDataLoader.MediaDataLoaderResult mediaDataLoaderResult = (MediaDataLoader.MediaDataLoaderResult) objLoadMediaData;
+        if (mediaDataLoaderResult == null) {
+            Log.d("MediaDataManager", "No result from loadMediaData");
+            return Unit.INSTANCE;
+        }
+        MediaData mediaData = (MediaData) this.this$0.mediaEntries.get(this.$key);
+        if (mediaData == null || (instanceIdNewInstanceId = mediaData.instanceId) == null) {
+            instanceIdNewInstanceId = this.this$0.logger.instanceIdSequence.newInstanceId();
+        }
+        InstanceId instanceId = instanceIdNewInstanceId;
+        long j2 = mediaData != null ? mediaData.createdTimestampMillis : 0L;
+        Runnable runnable = mediaData != null ? mediaData.resumeAction : null;
+        boolean z2 = mediaData != null && mediaData.hasCheckedForResume;
+        boolean z3 = mediaData != null ? mediaData.active : true;
+        MediaControllerFactory mediaControllerFactory = this.this$0.mediaControllerFactory;
+        MediaSession.Token token = mediaDataLoaderResult.token;
+        token.getClass();
+        MediaController mediaControllerCreate = mediaControllerFactory.create(token);
+        MediaData mediaData2 = new MediaData(this.$sbn.getNormalizedUserId(), true, mediaDataLoaderResult.appName, mediaDataLoaderResult.appIcon, mediaDataLoaderResult.artist, mediaDataLoaderResult.song, mediaDataLoaderResult.artworkIcon, mediaDataLoaderResult.actionIcons, mediaDataLoaderResult.actionsToShowInCompact, mediaDataLoaderResult.semanticActions, this.$sbn.getPackageName(), mediaDataLoaderResult.token, mediaDataLoaderResult.clickIntent, mediaDataLoaderResult.device, z3, runnable, mediaDataLoaderResult.playbackLocation, false, this.$key, z2, mediaDataLoaderResult.isPlaying, !this.$sbn.isOngoing(), j, j2, instanceId, mediaDataLoaderResult.appUid, mediaDataLoaderResult.isExplicit, null, 134348800, null);
+        if (MediaProcessingHelperKt.isSameMediaData(this.this$0.context, mediaControllerCreate, mediaData2, mediaData)) {
+            this.this$0.mediaLogger.logDuplicateMediaNotification(this.$key);
+            return Unit.INSTANCE;
+        }
+        boolean z4 = this.$isNewlyActiveEntry;
+        int i2 = mediaDataLoaderResult.playbackLocation;
+        int i3 = mediaDataLoaderResult.appUid;
+        if (z4) {
+            this.this$0.logSingleVsMultipleMediaAdded$1(i3, this.$sbn.getPackageName(), instanceId);
+            this.this$0.logger.logActiveMediaAdded(i3, i2, instanceId, this.$sbn.getPackageName());
+        } else if (mediaData == null || i2 != mediaData.playbackLocation) {
+            this.this$0.logger.logPlaybackLocationChange(i3, i2, instanceId, this.$sbn.getPackageName());
+        }
+        LegacyMediaDataManagerImpl legacyMediaDataManagerImpl = this.this$0;
+        CoroutineDispatcher coroutineDispatcher = legacyMediaDataManagerImpl.mainDispatcher;
+        AnonymousClass1 anonymousClass1 = new AnonymousClass1(legacyMediaDataManagerImpl, this.$key, this.$oldKey, mediaData2, null);
+        this.label = 2;
     }
 }

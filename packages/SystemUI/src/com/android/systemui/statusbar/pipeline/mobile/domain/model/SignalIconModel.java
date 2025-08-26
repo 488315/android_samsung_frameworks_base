@@ -9,11 +9,9 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface SignalIconModel extends Diffable {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -25,7 +23,6 @@ public interface SignalIconModel extends Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Satellite implements SignalIconModel {
         public final Icon.Resource icon;
         public final int level;
@@ -100,7 +97,6 @@ public interface SignalIconModel extends Diffable {
 
     void logPartial(SignalIconModel signalIconModel, TableLogBuffer.TableRowLoggerImpl tableRowLoggerImpl);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Cellular implements SignalIconModel {
         public final boolean carrierNetworkChange;
         public final int iconId;

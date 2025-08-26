@@ -77,33 +77,33 @@ final class VideoCallbackServant {
 
         @Override // com.android.internal.telecom.IVideoCallback
         public void receiveSessionModifyResponse(int i, VideoProfile videoProfile, VideoProfile videoProfile2) throws RemoteException {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.arg1 = videoProfile;
-            obtain.arg2 = videoProfile2;
-            VideoCallbackServant.this.mHandler.obtainMessage(1, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.arg1 = videoProfile;
+            someArgsObtain.arg2 = videoProfile2;
+            VideoCallbackServant.this.mHandler.obtainMessage(1, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IVideoCallback
         public void handleCallSessionEvent(int i) throws RemoteException {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            VideoCallbackServant.this.mHandler.obtainMessage(2, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            VideoCallbackServant.this.mHandler.obtainMessage(2, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IVideoCallback
         public void changePeerDimensions(int i, int i2) throws RemoteException {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = i2;
-            VideoCallbackServant.this.mHandler.obtainMessage(3, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = i2;
+            VideoCallbackServant.this.mHandler.obtainMessage(3, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IVideoCallback
         public void changeCallDataUsage(long j) throws RemoteException {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = Long.valueOf(j);
-            VideoCallbackServant.this.mHandler.obtainMessage(4, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = Long.valueOf(j);
+            VideoCallbackServant.this.mHandler.obtainMessage(4, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IVideoCallback

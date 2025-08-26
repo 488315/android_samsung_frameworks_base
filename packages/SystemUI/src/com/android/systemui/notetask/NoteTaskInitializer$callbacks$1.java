@@ -16,7 +16,6 @@ import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NoteTaskInitializer$callbacks$1 extends KeyguardUpdateMonitorCallback implements CommandQueue.Callbacks, UserTracker.Callback, OnRoleHoldersChangedListener, InputManager.KeyGestureEventHandler {
     public final /* synthetic */ NoteTaskInitializer this$0;
@@ -39,7 +38,7 @@ public final class NoteTaskInitializer$callbacks$1 extends KeyguardUpdateMonitor
             noteTaskInitializer.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.notetask.NoteTaskInitializer$handleKeyGestureEvent$2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NoteTaskController noteTaskController = NoteTaskInitializer.this.controller;
+                    NoteTaskController noteTaskController = noteTaskInitializer.controller;
                     NoteTaskEntryPoint noteTaskEntryPoint = NoteTaskEntryPoint.TAIL_BUTTON;
                     if (noteTaskController.isEnabled) {
                         noteTaskController.showNoteTaskAsUser(noteTaskEntryPoint, noteTaskController.getUserForHandlingNotesTaking(noteTaskEntryPoint));
@@ -50,7 +49,7 @@ public final class NoteTaskInitializer$callbacks$1 extends KeyguardUpdateMonitor
             noteTaskInitializer.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.notetask.NoteTaskInitializer$handleKeyGestureEvent$3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NoteTaskController noteTaskController = NoteTaskInitializer.this.controller;
+                    NoteTaskController noteTaskController = noteTaskInitializer.controller;
                     NoteTaskEntryPoint noteTaskEntryPoint = NoteTaskEntryPoint.KEYBOARD_SHORTCUT;
                     if (noteTaskController.isEnabled) {
                         noteTaskController.showNoteTaskAsUser(noteTaskEntryPoint, noteTaskController.getUserForHandlingNotesTaking(noteTaskEntryPoint));

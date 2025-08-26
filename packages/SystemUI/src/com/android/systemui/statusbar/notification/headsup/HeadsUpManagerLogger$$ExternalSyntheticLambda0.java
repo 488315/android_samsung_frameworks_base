@@ -12,7 +12,6 @@ import com.android.systemui.globalactions.presentation.features.FakeFeatures$$Ex
 import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class HeadsUpManagerLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -23,7 +22,7 @@ public final /* synthetic */ class HeadsUpManagerLogger$$ExternalSyntheticLambda
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -91,9 +90,9 @@ public final /* synthetic */ class HeadsUpManagerLogger$$ExternalSyntheticLambda
                 String str14 = logMessage.getStr1();
                 boolean bool13 = logMessage.getBool1();
                 String str24 = logMessage.getStr2();
-                StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("update entry ", str14, " updatePostTime: ", " reason: ", bool13);
-                m.append(str24);
-                return m.toString();
+                StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("update entry ", str14, " updatePostTime: ", " reason: ", bool13);
+                sbM.append(str24);
+                return sbM.toString();
             case 18:
                 String str15 = logMessage.getStr1();
                 long long12 = logMessage.getLong1();
@@ -105,26 +104,26 @@ public final /* synthetic */ class HeadsUpManagerLogger$$ExternalSyntheticLambda
                 return TransitionKt$$ExternalSyntheticOutline0.m(sb4, " ms reason: ", str25);
             case 19:
                 String str16 = logMessage.getStr1();
-                return MutablePreferences$$ExternalSyntheticOutline0.m(ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(logMessage.getInt1(), "[AC] ", str16, " | ", " ms | "), logMessage.getStr2(), " ", logMessage.getStr3());
+                return MutablePreferences$$ExternalSyntheticOutline0.m(ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(logMessage.getInt1(), "[AC] ", str16, " | ", " ms | "), logMessage.getStr2(), " ", logMessage.getStr3());
             case 20:
                 String str17 = logMessage.getStr1();
                 boolean bool14 = logMessage.getBool1();
                 boolean bool2 = logMessage.getBool2();
                 String str26 = logMessage.getStr2();
-                StringBuilder m2 = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("remove notification ", str17, " releaseImmediately: ", " isWaiting: ", bool14);
-                m2.append(bool2);
-                m2.append(" reason: ");
-                m2.append(str26);
-                return m2.toString();
+                StringBuilder sbM2 = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("remove notification ", str17, " releaseImmediately: ", " isWaiting: ", bool14);
+                sbM2.append(bool2);
+                sbM2.append(" reason: ");
+                sbM2.append(str26);
+                return sbM2.toString();
             case 21:
                 return AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("remove notification ", logMessage.getStr1(), " when headsUpEntry is null, reason: ", logMessage.getStr2());
             case 22:
                 String str18 = logMessage.getStr1();
                 boolean bool22 = logMessage.getBool2();
                 String str27 = logMessage.getStr2();
-                StringBuilder m3 = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("update notification ", str18, ". hasEntry: ", ". requestedPinnedStatus: ", bool22);
-                m3.append(str27);
-                return m3.toString();
+                StringBuilder sbM3 = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("update notification ", str18, ". hasEntry: ", ". requestedPinnedStatus: ", bool22);
+                sbM3.append(str27);
+                return sbM3.toString();
             case 23:
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("package unsnoozed ", logMessage.getStr1());
             case 24:
@@ -135,9 +134,9 @@ public final /* synthetic */ class HeadsUpManagerLogger$$ExternalSyntheticLambda
                 String str19 = logMessage.getStr1();
                 boolean bool15 = logMessage.getBool1();
                 String str28 = logMessage.getStr2();
-                StringBuilder m4 = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("request: update notification ", str19, ". hasEntry: ", ". requestedPinnedStatus: ", bool15);
-                m4.append(str28);
-                return m4.toString();
+                StringBuilder sbM4 = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("request: update notification ", str19, ". hasEntry: ", ". requestedPinnedStatus: ", bool15);
+                sbM4.append(str28);
+                return sbM4.toString();
             default:
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("request: unpin entry ", logMessage.getStr1());
         }

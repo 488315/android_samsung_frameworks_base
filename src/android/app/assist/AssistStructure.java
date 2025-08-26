@@ -134,13 +134,13 @@ public class AssistStructure implements Parcelable {
                     return true;
                 }
                 parcel.enforceInterface(AssistStructure.DESCRIPTOR);
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                if (readStrongBinder != null) {
-                    if (readStrongBinder instanceof ParcelTransferWriter) {
-                        ((ParcelTransferWriter) readStrongBinder).writeToParcel(assistStructure, parcel2);
+                IBinder strongBinder = parcel.readStrongBinder();
+                if (strongBinder != null) {
+                    if (strongBinder instanceof ParcelTransferWriter) {
+                        ((ParcelTransferWriter) strongBinder).writeToParcel(assistStructure, parcel2);
                         return true;
                     }
-                    Log.w(AssistStructure.TAG, "Caller supplied bad token type: " + readStrongBinder);
+                    Log.w(AssistStructure.TAG, "Caller supplied bad token type: " + strongBinder);
                     return true;
                 }
                 new ParcelTransferWriter(assistStructure, parcel2).writeToParcel(assistStructure, parcel2);
@@ -173,15 +173,15 @@ public class AssistStructure implements Parcelable {
 
         ParcelTransferWriter(AssistStructure assistStructure, Parcel parcel) {
             this.mSanitizeOnWrite = assistStructure.mSanitizeOnWrite;
-            boolean waitForReady = assistStructure.waitForReady();
-            this.mWriteStructure = waitForReady;
+            boolean zWaitForReady = assistStructure.waitForReady();
+            this.mWriteStructure = zWaitForReady;
             parcel.writeInt(assistStructure.mFlags);
             parcel.writeInt(assistStructure.mAutofillFlags);
             parcel.writeLong(assistStructure.mAcquisitionStartTime);
             parcel.writeLong(assistStructure.mAcquisitionEndTime);
             int size = assistStructure.mWindowNodes.size();
             this.mNumWindows = size;
-            if (waitForReady && size > 0) {
+            if (zWaitForReady && size > 0) {
                 parcel.writeInt(size);
             } else {
                 parcel.writeInt(0);
@@ -189,14 +189,14 @@ public class AssistStructure implements Parcelable {
         }
 
         void writeToParcel(AssistStructure assistStructure, Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             this.mNumWrittenWindows = 0;
             this.mNumWrittenViews = 0;
-            boolean writeToParcelInner = writeToParcelInner(assistStructure, parcel);
+            boolean zWriteToParcelInner = writeToParcelInner(assistStructure, parcel);
             StringBuilder sb = new StringBuilder("Flattened ");
-            sb.append(writeToParcelInner ? Slice.HINT_PARTIAL : "final");
+            sb.append(zWriteToParcelInner ? Slice.HINT_PARTIAL : "final");
             sb.append(" assist data: ");
-            sb.append(parcel.dataPosition() - dataPosition);
+            sb.append(parcel.dataPosition() - iDataPosition);
             sb.append(" bytes, containing ");
             sb.append(this.mNumWrittenWindows);
             sb.append(" windows, ");
@@ -243,9 +243,9 @@ public class AssistStructure implements Parcelable {
                 viewNode = new ViewNode();
             }
             ViewNode viewNode2 = viewNode;
-            int writeSelfToParcel = viewNode2.writeSelfToParcel(parcel, pooledStringWriter, this.mSanitizeOnWrite, this.mTmpMatrix, true);
+            int iWriteSelfToParcel = viewNode2.writeSelfToParcel(parcel, pooledStringWriter, this.mSanitizeOnWrite, this.mTmpMatrix, true);
             this.mNumWrittenViews++;
-            if ((writeSelfToParcel & 1048576) != 0) {
+            if ((iWriteSelfToParcel & 1048576) != 0) {
                 parcel.writeInt(viewNode2.mChildren.length);
                 int i2 = this.mCurViewStackPos + 1;
                 this.mCurViewStackPos = i2;
@@ -312,10 +312,10 @@ public class AssistStructure implements Parcelable {
             AssistStructure.this.mAutofillFlags = this.mCurParcel.readInt();
             AssistStructure.this.mAcquisitionStartTime = this.mCurParcel.readLong();
             AssistStructure.this.mAcquisitionEndTime = this.mCurParcel.readLong();
-            int readInt = this.mCurParcel.readInt();
-            if (readInt > 0) {
+            int i = this.mCurParcel.readInt();
+            if (i > 0) {
                 this.mStringReader = new PooledStringReader(this.mCurParcel);
-                for (int i = 0; i < readInt; i++) {
+                for (int i2 = 0; i2 < i; i2++) {
                     AssistStructure.this.mWindowNodes.add(new WindowNode(this));
                 }
             }
@@ -324,16 +324,16 @@ public class AssistStructure implements Parcelable {
         }
 
         Parcel readParcel(int i, int i2) {
-            int readInt = this.mCurParcel.readInt();
-            if (readInt != 0) {
-                if (readInt != i) {
-                    throw new BadParcelableException("Got token " + Integer.toHexString(readInt) + ", expected token " + Integer.toHexString(i));
+            int i3 = this.mCurParcel.readInt();
+            if (i3 != 0) {
+                if (i3 != i) {
+                    throw new BadParcelableException("Got token " + Integer.toHexString(i3) + ", expected token " + Integer.toHexString(i));
                 }
                 return this.mCurParcel;
             }
-            IBinder readStrongBinder = this.mCurParcel.readStrongBinder();
-            this.mTransferToken = readStrongBinder;
-            if (readStrongBinder == null) {
+            IBinder strongBinder = this.mCurParcel.readStrongBinder();
+            this.mTransferToken = strongBinder;
+            if (strongBinder == null) {
                 throw new IllegalStateException("Reached end of partial data without transfer token");
             }
             fetchData();
@@ -343,19 +343,19 @@ public class AssistStructure implements Parcelable {
         }
 
         private void fetchData() {
-            Parcel obtain = Parcel.obtain();
+            Parcel parcelObtain = Parcel.obtain();
             try {
-                obtain.writeInterfaceToken(AssistStructure.DESCRIPTOR);
-                obtain.writeStrongBinder(this.mTransferToken);
+                parcelObtain.writeInterfaceToken(AssistStructure.DESCRIPTOR);
+                parcelObtain.writeStrongBinder(this.mTransferToken);
                 Parcel parcel = this.mCurParcel;
                 if (parcel != null) {
                     parcel.recycle();
                 }
-                Parcel obtain2 = Parcel.obtain();
-                this.mCurParcel = obtain2;
+                Parcel parcelObtain2 = Parcel.obtain();
+                this.mCurParcel = parcelObtain2;
                 try {
-                    this.mChannel.transact(2, obtain, obtain2, 0);
-                    obtain.recycle();
+                    this.mChannel.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain.recycle();
                     this.mNumReadViews = 0;
                     this.mNumReadWindows = 0;
                 } catch (RemoteException e) {
@@ -363,7 +363,7 @@ public class AssistStructure implements Parcelable {
                     throw new IllegalStateException("Failure reading AssistStructure data: " + e);
                 }
             } catch (Throwable th) {
-                obtain.recycle();
+                parcelObtain.recycle();
                 throw th;
             }
         }
@@ -464,14 +464,14 @@ public class AssistStructure implements Parcelable {
         }
 
         WindowNode(ParcelTransferReader parcelTransferReader) {
-            Parcel readParcel = parcelTransferReader.readParcel(AssistStructure.VALIDATE_WINDOW_TOKEN, 0);
+            Parcel parcel = parcelTransferReader.readParcel(AssistStructure.VALIDATE_WINDOW_TOKEN, 0);
             parcelTransferReader.mNumReadWindows++;
-            this.mX = readParcel.readInt();
-            this.mY = readParcel.readInt();
-            this.mWidth = readParcel.readInt();
-            this.mHeight = readParcel.readInt();
-            this.mTitle = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(readParcel);
-            this.mDisplayId = readParcel.readInt();
+            this.mX = parcel.readInt();
+            this.mY = parcel.readInt();
+            this.mWidth = parcel.readInt();
+            this.mHeight = parcel.readInt();
+            this.mTitle = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
+            this.mDisplayId = parcel.readInt();
             this.mRoot = new ViewNode(parcelTransferReader, 0);
         }
 
@@ -620,14 +620,14 @@ public class AssistStructure implements Parcelable {
         }
 
         ViewNode(ParcelTransferReader parcelTransferReader, int i) {
-            Parcel readParcel = parcelTransferReader.readParcel(AssistStructure.VALIDATE_VIEW_TOKEN, i);
+            Parcel parcel = parcelTransferReader.readParcel(AssistStructure.VALIDATE_VIEW_TOKEN, i);
             parcelTransferReader.mNumReadViews++;
-            initializeFromParcelWithoutChildren(readParcel, (PooledStringReader) Objects.requireNonNull(parcelTransferReader.mStringReader), (float[]) Objects.requireNonNull(parcelTransferReader.mTmpMatrix));
+            initializeFromParcelWithoutChildren(parcel, (PooledStringReader) Objects.requireNonNull(parcelTransferReader.mStringReader), (float[]) Objects.requireNonNull(parcelTransferReader.mTmpMatrix));
             if ((this.mFlags & 1048576) != 0) {
-                int readInt = readParcel.readInt();
-                this.mChildren = new ViewNode[readInt];
-                for (int i2 = 0; i2 < readInt; i2++) {
-                    this.mChildren[i2] = new ViewNode(parcelTransferReader, i + 1);
+                int i2 = parcel.readInt();
+                this.mChildren = new ViewNode[i2];
+                for (int i3 = 0; i3 < i2; i3++) {
+                    this.mChildren[i3] = new ViewNode(parcelTransferReader, i + 1);
                 }
             }
         }
@@ -649,86 +649,86 @@ public class AssistStructure implements Parcelable {
 
         void initializeFromParcelWithoutChildren(Parcel parcel, PooledStringReader pooledStringReader, float[] fArr) {
             this.mClassName = readString(parcel, pooledStringReader);
-            int readInt = parcel.readInt();
-            this.mFlags = readInt;
-            int readInt2 = parcel.readInt();
-            this.mAutofillFlags = readInt2;
-            if ((2097152 & readInt) != 0) {
-                int readInt3 = parcel.readInt();
-                this.mId = readInt3;
-                if (readInt3 != -1) {
-                    String readString = readString(parcel, pooledStringReader);
-                    this.mIdEntry = readString;
-                    if (readString != null) {
+            int i = parcel.readInt();
+            this.mFlags = i;
+            int i2 = parcel.readInt();
+            this.mAutofillFlags = i2;
+            if ((2097152 & i) != 0) {
+                int i3 = parcel.readInt();
+                this.mId = i3;
+                if (i3 != -1) {
+                    String string = readString(parcel, pooledStringReader);
+                    this.mIdEntry = string;
+                    if (string != null) {
                         this.mIdType = readString(parcel, pooledStringReader);
                         this.mIdPackage = readString(parcel, pooledStringReader);
                     }
                 }
             }
-            if (readInt2 != 0) {
+            if (i2 != 0) {
                 this.mSanitized = parcel.readInt() == 1;
                 this.mIsCredential = parcel.readInt() == 1;
                 this.mImportantForAutofill = parcel.readInt();
-                if ((readInt2 & 1) != 0) {
-                    int readInt4 = parcel.readInt();
-                    if ((readInt2 & 2) != 0) {
-                        this.mAutofillId = new AutofillId(readInt4, parcel.readInt());
+                if ((i2 & 1) != 0) {
+                    int i4 = parcel.readInt();
+                    if ((i2 & 2) != 0) {
+                        this.mAutofillId = new AutofillId(i4, parcel.readInt());
                     } else {
-                        this.mAutofillId = new AutofillId(readInt4);
+                        this.mAutofillId = new AutofillId(i4);
                     }
-                    if ((readInt2 & 2048) != 0) {
+                    if ((i2 & 2048) != 0) {
                         this.mAutofillId.setSessionId(parcel.readInt());
                     }
                 }
-                if ((readInt2 & 8) != 0) {
+                if ((i2 & 8) != 0) {
                     this.mAutofillType = parcel.readInt();
                 }
-                if ((readInt2 & 16) != 0) {
+                if ((i2 & 16) != 0) {
                     this.mAutofillHints = parcel.readStringArray();
                 }
-                if ((readInt2 & 4) != 0) {
+                if ((i2 & 4) != 0) {
                     this.mAutofillValue = (AutofillValue) parcel.readParcelable(null, AutofillValue.class);
                 }
-                if ((readInt2 & 32) != 0) {
+                if ((i2 & 32) != 0) {
                     this.mAutofillOptions = parcel.readCharSequenceArray();
                 }
-                if ((readInt2 & 64) != 0) {
+                if ((i2 & 64) != 0) {
                     this.mHtmlInfo = (ViewStructure.HtmlInfo) parcel.readParcelable(null, ViewStructure.HtmlInfo.class);
                 }
-                if ((readInt2 & 256) != 0) {
+                if ((i2 & 256) != 0) {
                     this.mMinEms = parcel.readInt();
                 }
-                if ((readInt2 & 512) != 0) {
+                if ((i2 & 512) != 0) {
                     this.mMaxEms = parcel.readInt();
                 }
-                if ((readInt2 & 1024) != 0) {
+                if ((i2 & 1024) != 0) {
                     this.mMaxLength = parcel.readInt();
                 }
-                if ((readInt2 & 128) != 0) {
+                if ((i2 & 128) != 0) {
                     this.mTextIdEntry = readString(parcel, pooledStringReader);
                 }
-                if ((readInt2 & 4096) != 0) {
+                if ((i2 & 4096) != 0) {
                     this.mHintIdEntry = readString(parcel, pooledStringReader);
                 }
             }
-            if ((67108864 & readInt) != 0) {
+            if ((67108864 & i) != 0) {
                 this.mX = parcel.readInt();
                 this.mY = parcel.readInt();
                 this.mWidth = parcel.readInt();
                 this.mHeight = parcel.readInt();
             } else {
-                int readInt5 = parcel.readInt();
-                this.mX = readInt5 & 32767;
-                this.mY = (readInt5 >> 16) & 32767;
-                int readInt6 = parcel.readInt();
-                this.mWidth = readInt6 & 32767;
-                this.mHeight = (readInt6 >> 16) & 32767;
+                int i5 = parcel.readInt();
+                this.mX = i5 & 32767;
+                this.mY = (i5 >> 16) & 32767;
+                int i6 = parcel.readInt();
+                this.mWidth = i6 & 32767;
+                this.mHeight = (i6 >> 16) & 32767;
             }
-            if ((134217728 & readInt) != 0) {
+            if ((134217728 & i) != 0) {
                 this.mScrollX = parcel.readInt();
                 this.mScrollY = parcel.readInt();
             }
-            if ((1073741824 & readInt) != 0) {
+            if ((1073741824 & i) != 0) {
                 this.mMatrix = new Matrix();
                 if (fArr == null) {
                     fArr = new float[9];
@@ -736,55 +736,263 @@ public class AssistStructure implements Parcelable {
                 parcel.readFloatArray(fArr);
                 this.mMatrix.setValues(fArr);
             }
-            if ((268435456 & readInt) != 0) {
+            if ((268435456 & i) != 0) {
                 this.mElevation = parcel.readFloat();
             }
-            if ((536870912 & readInt) != 0) {
+            if ((536870912 & i) != 0) {
                 this.mAlpha = parcel.readFloat();
             }
-            if ((33554432 & readInt) != 0) {
+            if ((33554432 & i) != 0) {
                 this.mContentDescription = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
             }
-            if ((16777216 & readInt) != 0) {
-                this.mText = new ViewNodeText(parcel, (8388608 & readInt) == 0);
+            if ((16777216 & i) != 0) {
+                this.mText = new ViewNodeText(parcel, (8388608 & i) == 0);
             }
-            if ((262144 & readInt) != 0) {
+            if ((262144 & i) != 0) {
                 this.mInputType = parcel.readInt();
             }
-            if ((131072 & readInt) != 0) {
+            if ((131072 & i) != 0) {
                 this.mWebScheme = parcel.readString();
             }
-            if ((524288 & readInt) != 0) {
+            if ((524288 & i) != 0) {
                 this.mWebDomain = parcel.readString();
             }
-            if ((65536 & readInt) != 0) {
+            if ((65536 & i) != 0) {
                 this.mLocaleList = (LocaleList) parcel.readParcelable(null, LocaleList.class);
             }
-            if ((Integer.MIN_VALUE & readInt) != 0) {
+            if ((Integer.MIN_VALUE & i) != 0) {
                 this.mReceiveContentMimeTypes = parcel.readStringArray();
             }
-            if ((4194304 & readInt) != 0) {
+            if ((4194304 & i) != 0) {
                 this.mExtras = parcel.readBundle();
             }
             this.mGetCredentialRequest = (GetCredentialRequest) parcel.readTypedObject(GetCredentialRequest.CREATOR);
             this.mGetCredentialResultReceiver = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:15:0x0037, code lost:
-        
-            if ((((r24.mWidth & (-32768)) != 0) | ((r24.mHeight & (-32768)) != 0)) != false) goto L19;
-         */
         /* JADX WARN: Multi-variable type inference failed */
+        /* JADX WARN: Removed duplicated region for block: B:19:0x0039  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        int writeSelfToParcel(android.os.Parcel r25, android.os.PooledStringWriter r26, boolean r27, float[] r28, boolean r29) {
-            /*
-                Method dump skipped, instructions count: 707
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.assist.AssistStructure.ViewNode.writeSelfToParcel(android.os.Parcel, android.os.PooledStringWriter, boolean, float[], boolean):int");
+        int writeSelfToParcel(Parcel parcel, PooledStringWriter pooledStringWriter, boolean z, float[] fArr, boolean z2) {
+            int i;
+            int i2;
+            boolean z3;
+            AutofillValue autofillValue;
+            int i3 = this.mFlags & 65535;
+            if (this.mId != -1) {
+                i3 |= 2097152;
+            }
+            if ((this.mX & (-32768)) == 0 && (this.mY & (-32768)) == 0) {
+                if (((this.mWidth & (-32768)) != 0) | ((this.mHeight & (-32768)) != 0)) {
+                }
+            } else {
+                i3 |= 67108864;
+            }
+            if (this.mScrollX != 0 || this.mScrollY != 0) {
+                i3 |= 134217728;
+            }
+            if (this.mMatrix != null) {
+                i3 |= 1073741824;
+            }
+            if (this.mElevation != 0.0f) {
+                i3 |= 268435456;
+            }
+            if (this.mAlpha != 1.0f) {
+                i3 |= 536870912;
+            }
+            if (this.mContentDescription != null) {
+                i3 |= 33554432;
+            }
+            ViewNodeText viewNodeText = this.mText;
+            if (viewNodeText != null) {
+                i3 = !viewNodeText.isSimple() ? i3 | 25165824 : i3 | 16777216;
+            }
+            if (this.mInputType != 0) {
+                i3 |= 262144;
+            }
+            if (this.mWebScheme != null) {
+                i3 |= 131072;
+            }
+            if (this.mWebDomain != null) {
+                i3 |= 524288;
+            }
+            if (this.mLocaleList != null) {
+                i3 |= 65536;
+            }
+            if (this.mReceiveContentMimeTypes != null) {
+                i3 |= Integer.MIN_VALUE;
+            }
+            if (this.mExtras != null) {
+                i3 |= 4194304;
+            }
+            if (this.mChildren != null && z2) {
+                i3 |= 1048576;
+            }
+            AutofillId autofillId = this.mAutofillId;
+            if (autofillId != null) {
+                i2 = autofillId.isVirtualInt() ? 3 : 1;
+                i = 2097152;
+                if (this.mAutofillId.hasSession()) {
+                    i2 |= 2048;
+                }
+            } else {
+                i = 2097152;
+                i2 = 0;
+            }
+            if (this.mAutofillValue != null) {
+                i2 |= 4;
+            }
+            if (this.mAutofillType != 0) {
+                i2 |= 8;
+            }
+            if (this.mAutofillHints != null) {
+                i2 |= 16;
+            }
+            if (this.mAutofillOptions != null) {
+                i2 |= 32;
+            }
+            if (this.mHtmlInfo instanceof Parcelable) {
+                i2 |= 64;
+            }
+            if (this.mMinEms > -1) {
+                i2 |= 256;
+            }
+            if (this.mMaxEms > -1) {
+                i2 |= 512;
+            }
+            if (this.mMaxLength > -1) {
+                i2 |= 1024;
+            }
+            if (this.mTextIdEntry != null) {
+                i2 |= 128;
+            }
+            if (this.mHintIdEntry != null) {
+                i2 |= 4096;
+            }
+            writeString(parcel, pooledStringWriter, this.mClassName);
+            int i4 = (i2 == 0 || (!this.mSanitized && z)) ? i3 : i3 & (-513);
+            AutofillOverlay autofillOverlay = this.mAutofillOverlay;
+            if (autofillOverlay != null) {
+                i4 = autofillOverlay.focused ? i4 | 32 : i4 & (-33);
+            }
+            parcel.writeInt(i4);
+            parcel.writeInt(i2);
+            if ((i3 & i) != 0) {
+                parcel.writeInt(this.mId);
+                if (this.mId != -1) {
+                    writeString(parcel, pooledStringWriter, this.mIdEntry);
+                    if (this.mIdEntry != null) {
+                        writeString(parcel, pooledStringWriter, this.mIdType);
+                        writeString(parcel, pooledStringWriter, this.mIdPackage);
+                    }
+                }
+            }
+            if (i2 != 0) {
+                parcel.writeInt(this.mSanitized ? 1 : 0);
+                parcel.writeInt(this.mIsCredential ? 1 : 0);
+                parcel.writeInt(this.mImportantForAutofill);
+                z3 = this.mSanitized || !z;
+                if ((i2 & 1) != 0) {
+                    parcel.writeInt(this.mAutofillId.getViewId());
+                    if ((i2 & 2) != 0) {
+                        parcel.writeInt(this.mAutofillId.getVirtualChildIntId());
+                    }
+                    if ((i2 & 2048) != 0) {
+                        parcel.writeInt(this.mAutofillId.getSessionId());
+                    }
+                }
+                if ((i2 & 8) != 0) {
+                    parcel.writeInt(this.mAutofillType);
+                }
+                if ((i2 & 16) != 0) {
+                    parcel.writeStringArray(this.mAutofillHints);
+                }
+                if ((i2 & 4) != 0) {
+                    if (z3) {
+                        autofillValue = this.mAutofillValue;
+                    } else {
+                        AutofillOverlay autofillOverlay2 = this.mAutofillOverlay;
+                        autofillValue = (autofillOverlay2 == null || autofillOverlay2.value == null) ? null : this.mAutofillOverlay.value;
+                    }
+                    parcel.writeParcelable(autofillValue, 0);
+                }
+                if ((i2 & 32) != 0) {
+                    parcel.writeCharSequenceArray(this.mAutofillOptions);
+                }
+                if ((i2 & 64) != 0) {
+                    parcel.writeParcelable((Parcelable) this.mHtmlInfo, 0);
+                }
+                if ((i2 & 256) != 0) {
+                    parcel.writeInt(this.mMinEms);
+                }
+                if ((i2 & 512) != 0) {
+                    parcel.writeInt(this.mMaxEms);
+                }
+                if ((i2 & 1024) != 0) {
+                    parcel.writeInt(this.mMaxLength);
+                }
+                if ((i2 & 128) != 0) {
+                    writeString(parcel, pooledStringWriter, this.mTextIdEntry);
+                }
+                if ((i2 & 4096) != 0) {
+                    writeString(parcel, pooledStringWriter, this.mHintIdEntry);
+                }
+            } else {
+                z3 = true;
+            }
+            if ((i3 & 67108864) != 0) {
+                parcel.writeInt(this.mX);
+                parcel.writeInt(this.mY);
+                parcel.writeInt(this.mWidth);
+                parcel.writeInt(this.mHeight);
+            } else {
+                parcel.writeInt((this.mY << 16) | this.mX);
+                parcel.writeInt((this.mHeight << 16) | this.mWidth);
+            }
+            if ((i3 & 134217728) != 0) {
+                parcel.writeInt(this.mScrollX);
+                parcel.writeInt(this.mScrollY);
+            }
+            if ((i3 & 1073741824) != 0) {
+                float[] fArr2 = fArr == null ? new float[9] : fArr;
+                this.mMatrix.getValues(fArr2);
+                parcel.writeFloatArray(fArr2);
+            }
+            if ((i3 & 268435456) != 0) {
+                parcel.writeFloat(this.mElevation);
+            }
+            if ((i3 & 536870912) != 0) {
+                parcel.writeFloat(this.mAlpha);
+            }
+            if ((i3 & 33554432) != 0) {
+                TextUtils.writeToParcel(this.mContentDescription, parcel, 0);
+            }
+            if ((i3 & 16777216) != 0) {
+                this.mText.writeToParcel(parcel, (8388608 & i3) == 0, z3);
+            }
+            if ((i3 & 262144) != 0) {
+                parcel.writeInt(this.mInputType);
+            }
+            if ((i3 & 131072) != 0) {
+                parcel.writeString(this.mWebScheme);
+            }
+            if ((i3 & 524288) != 0) {
+                parcel.writeString(this.mWebDomain);
+            }
+            if ((i3 & 65536) != 0) {
+                parcel.writeParcelable(this.mLocaleList, 0);
+            }
+            if ((i3 & Integer.MIN_VALUE) != 0) {
+                parcel.writeStringArray(this.mReceiveContentMimeTypes);
+            }
+            if ((i3 & 4194304) != 0) {
+                parcel.writeBundle(this.mExtras);
+            }
+            parcel.writeTypedObject(this.mGetCredentialRequest, i3);
+            parcel.writeTypedObject(this.mGetCredentialResultReceiver, i3);
+            return i3;
         }
 
         public int getId() {
@@ -965,17 +1173,17 @@ public class AssistStructure implements Parcelable {
             if (str == null) {
                 return;
             }
-            Uri parse = Uri.parse(str);
-            if (parse == null) {
+            Uri uri = Uri.parse(str);
+            if (uri == null) {
                 Log.w(AssistStructure.TAG, "Failed to parse web domain");
                 return;
             }
-            String scheme = parse.getScheme();
+            String scheme = uri.getScheme();
             this.mWebScheme = scheme;
             if (scheme == null) {
-                parse = Uri.parse("http://" + str);
+                uri = Uri.parse("http://" + str);
             }
-            this.mWebDomain = parse.getHost();
+            this.mWebDomain = uri.getHost();
         }
 
         public String getWebScheme() {
@@ -1570,12 +1778,12 @@ public class AssistStructure implements Parcelable {
         }
 
         private ResultReceiver toIpcFriendlyResultReceiver(ResultReceiver resultReceiver) {
-            Parcel obtain = Parcel.obtain();
-            resultReceiver.writeToParcel(obtain, 0);
-            obtain.setDataPosition(0);
-            ResultReceiver createFromParcel = ResultReceiver.CREATOR.createFromParcel(obtain);
-            obtain.recycle();
-            return createFromParcel;
+            Parcel parcelObtain = Parcel.obtain();
+            resultReceiver.writeToParcel(parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
+            ResultReceiver resultReceiverCreateFromParcel = ResultReceiver.CREATOR.createFromParcel(parcelObtain);
+            parcelObtain.recycle();
+            return resultReceiverCreateFromParcel;
         }
 
         @Override // android.view.ViewStructure
@@ -1639,14 +1847,14 @@ public class AssistStructure implements Parcelable {
             @Override // android.os.Parcelable.Creator
             public HtmlInfoNode createFromParcel(Parcel parcel) {
                 HtmlInfoNodeBuilder htmlInfoNodeBuilder = new HtmlInfoNodeBuilder(parcel.readString());
-                String[] readStringArray = parcel.readStringArray();
-                String[] readStringArray2 = parcel.readStringArray();
-                if (readStringArray != null && readStringArray2 != null) {
-                    if (readStringArray.length != readStringArray2.length) {
-                        Log.w(AssistStructure.TAG, "HtmlInfo attributes mismatch: names=" + readStringArray.length + ", values=" + readStringArray2.length);
+                String[] stringArray = parcel.readStringArray();
+                String[] stringArray2 = parcel.readStringArray();
+                if (stringArray != null && stringArray2 != null) {
+                    if (stringArray.length != stringArray2.length) {
+                        Log.w(AssistStructure.TAG, "HtmlInfo attributes mismatch: names=" + stringArray.length + ", values=" + stringArray2.length);
                     } else {
-                        for (int i = 0; i < readStringArray.length; i++) {
-                            htmlInfoNodeBuilder.addAttribute(readStringArray[i], readStringArray2[i]);
+                        for (int i = 0; i < stringArray.length; i++) {
+                            htmlInfoNodeBuilder.addAttribute(stringArray[i], stringArray2[i]);
                         }
                     }
                 }
@@ -1964,14 +2172,14 @@ public class AssistStructure implements Parcelable {
     boolean waitForReady() {
         boolean z;
         synchronized (this) {
-            long uptimeMillis = SystemClock.uptimeMillis() + 5000;
+            long jUptimeMillis = SystemClock.uptimeMillis() + 5000;
             while (this.mPendingAsyncChildren.size() > 0) {
-                long uptimeMillis2 = SystemClock.uptimeMillis();
-                if (uptimeMillis2 >= uptimeMillis) {
+                long jUptimeMillis2 = SystemClock.uptimeMillis();
+                if (jUptimeMillis2 >= jUptimeMillis) {
                     break;
                 }
                 try {
-                    wait(uptimeMillis - uptimeMillis2);
+                    wait(jUptimeMillis - jUptimeMillis2);
                 } catch (InterruptedException unused) {
                 }
             }
@@ -2032,8 +2240,8 @@ public class AssistStructure implements Parcelable {
         sb.append(i & 15);
         sb.append(')');
         for (Integer num : INPUT_TYPE_VARIATIONS.keySet()) {
-            int intValue = num.intValue();
-            if ((intValue & i) == intValue) {
+            int iIntValue = num.intValue();
+            if ((iIntValue & i) == iIntValue) {
                 sb.append('|');
                 sb.append(INPUT_TYPE_VARIATIONS.get(num));
             }

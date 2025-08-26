@@ -159,9 +159,9 @@ public interface IGnssCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGnssCallback)) {
-                return (IGnssCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGnssCallback)) {
+                return (IGnssCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -227,15 +227,15 @@ public interface IGnssCallback extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    gnssSetCapabilitiesCb(readInt);
+                    gnssSetCapabilitiesCb(i3);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    gnssStatusCb(readInt2);
+                    gnssStatusCb(i4);
                     parcel2.writeNoException();
                     return true;
                 case 3:
@@ -251,10 +251,10 @@ public interface IGnssCallback extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    long readLong = parcel.readLong();
-                    String readString = parcel.readString();
+                    long j = parcel.readLong();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    gnssNmeaCb(readLong, readString);
+                    gnssNmeaCb(j, string);
                     parcel2.writeNoException();
                     return true;
                 case 6:
@@ -276,10 +276,10 @@ public interface IGnssCallback extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    gnssRequestLocationCb(readBoolean, readBoolean2);
+                    gnssRequestLocationCb(z, z2);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -307,186 +307,186 @@ public interface IGnssCallback extends IInterface {
 
             @Override // android.hardware.gnss.IGnssCallback
             public void gnssSetCapabilitiesCb(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method gnssSetCapabilitiesCb is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssCallback
             public void gnssStatusCb(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method gnssStatusCb is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssCallback
             public void gnssSvStatusCb(GnssSvInfo[] gnssSvInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedArray(gnssSvInfoArr, 0);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedArray(gnssSvInfoArr, 0);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method gnssSvStatusCb is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssCallback
             public void gnssLocationCb(GnssLocation gnssLocation) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(gnssLocation, 0);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(gnssLocation, 0);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method gnssLocationCb is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssCallback
             public void gnssNmeaCb(long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method gnssNmeaCb is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssCallback
             public void gnssAcquireWakelockCb() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(6, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method gnssAcquireWakelockCb is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssCallback
             public void gnssReleaseWakelockCb() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(7, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(7, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method gnssReleaseWakelockCb is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssCallback
             public void gnssSetSystemInfoCb(GnssSystemInfo gnssSystemInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(gnssSystemInfo, 0);
-                    if (!this.mRemote.transact(8, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(gnssSystemInfo, 0);
+                    if (!this.mRemote.transact(8, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method gnssSetSystemInfoCb is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssCallback
             public void gnssRequestTimeCb() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(9, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(9, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method gnssRequestTimeCb is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssCallback
             public void gnssRequestLocationCb(boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    if (!this.mRemote.transact(10, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    if (!this.mRemote.transact(10, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method gnssRequestLocationCb is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.gnss.IGnssCallback
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -495,18 +495,18 @@ public interface IGnssCallback extends IInterface {
             @Override // android.hardware.gnss.IGnssCallback
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }
@@ -552,7 +552,7 @@ public interface IGnssCallback extends IInterface {
 
         @Override // android.os.Parcelable
         public final void writeToParcel(Parcel parcel, int i) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
             parcel.writeInt(this.svid);
             parcel.writeInt(this.constellation);
@@ -562,68 +562,68 @@ public interface IGnssCallback extends IInterface {
             parcel.writeFloat(this.azimuthDegrees);
             parcel.writeLong(this.carrierFrequencyHz);
             parcel.writeInt(this.svFlag);
-            int dataPosition2 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition2 - dataPosition);
-            parcel.setDataPosition(dataPosition2);
+            int iDataPosition2 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition2 - iDataPosition);
+            parcel.setDataPosition(iDataPosition2);
         }
 
         public final void readFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
             try {
-                if (readInt < 4) {
+                if (i < 4) {
                     throw new BadParcelableException("Parcelable too small");
                 }
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.svid = parcel.readInt();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.constellation = parcel.readInt();
-                        if (parcel.dataPosition() - dataPosition < readInt) {
+                        if (parcel.dataPosition() - iDataPosition < i) {
                             this.cN0Dbhz = parcel.readFloat();
-                            if (parcel.dataPosition() - dataPosition < readInt) {
+                            if (parcel.dataPosition() - iDataPosition < i) {
                                 this.basebandCN0DbHz = parcel.readFloat();
-                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                if (parcel.dataPosition() - iDataPosition < i) {
                                     this.elevationDegrees = parcel.readFloat();
-                                    if (parcel.dataPosition() - dataPosition < readInt) {
+                                    if (parcel.dataPosition() - iDataPosition < i) {
                                         this.azimuthDegrees = parcel.readFloat();
-                                        if (parcel.dataPosition() - dataPosition < readInt) {
+                                        if (parcel.dataPosition() - iDataPosition < i) {
                                             this.carrierFrequencyHz = parcel.readLong();
-                                            if (parcel.dataPosition() - dataPosition < readInt) {
+                                            if (parcel.dataPosition() - iDataPosition < i) {
                                                 this.svFlag = parcel.readInt();
-                                                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                if (iDataPosition > Integer.MAX_VALUE - i) {
                                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                                 }
-                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                 throw new BadParcelableException("Overflow in the size of parcelable");
                                             }
-                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                             throw new BadParcelableException("Overflow in the size of parcelable");
                                         }
-                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                         throw new BadParcelableException("Overflow in the size of parcelable");
                                     }
-                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                 }
-                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                 throw new BadParcelableException("Overflow in the size of parcelable");
                             }
-                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }
@@ -660,42 +660,42 @@ public interface IGnssCallback extends IInterface {
 
         @Override // android.os.Parcelable
         public final void writeToParcel(Parcel parcel, int i) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
             parcel.writeInt(this.yearOfHw);
             parcel.writeString(this.name);
-            int dataPosition2 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition2 - dataPosition);
-            parcel.setDataPosition(dataPosition2);
+            int iDataPosition2 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition2 - iDataPosition);
+            parcel.setDataPosition(iDataPosition2);
         }
 
         public final void readFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
             try {
-                if (readInt < 4) {
+                if (i < 4) {
                     throw new BadParcelableException("Parcelable too small");
                 }
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.yearOfHw = parcel.readInt();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.name = parcel.readString();
-                        if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }

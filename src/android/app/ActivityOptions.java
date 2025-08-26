@@ -82,6 +82,7 @@ public class ActivityOptions extends ComponentOptions {
     private static final String KEY_APPLY_BIG_FREEFORM_SIZE = "android:activity.applyBigFreeformSize";
     private static final String KEY_APPLY_MULTIPLE_TASK_FLAG_FOR_SHORTCUT = "android:activity.applyMultipleTaskFlagForShortcut";
     private static final String KEY_APPLY_NO_USER_ACTION_FLAG_FOR_SHORTCUT = "android:activity.applyNoUserActionFlagForShortcut";
+    public static final String KEY_APPLY_SYSTEM_MODAL_POLICY = "android.activity.applySystemModalPolicy";
     private static final String KEY_AVOID_MOVE_TO_FRONT = "android.activity.avoidMoveToFront";
     private static final String KEY_CALLER_DISPLAY_ID = "android.activity.callerDisplayId";
     private static final String KEY_CUSTOMIZED_COVER_DENSITY = "android.activity.customizedCoverDensity";
@@ -90,6 +91,7 @@ public class ActivityOptions extends ComponentOptions {
     private static final String KEY_DISALLOW_ENTER_PICTURE_IN_PICTURE_WHILE_LAUNCHING = "android:activity.disallowEnterPictureInPictureWhileLaunching";
     private static final String KEY_DISMISS_KEYGUARD_IF_INSECURE = "android.activity.dismissKeyguardIfInsecure";
     private static final String KEY_ENTER_SPLIT_SIDE_WITH_ADJACENT_FLAG = "android:activity.enterSplitSideWithAdjacentFlag";
+    public static final String KEY_EXTENDED_DESKTOP_MODE_LAUNCH_POLICY_TYPE = "android.activity.extendedDesktopModeLaunchPolicyType";
     private static final String KEY_FLEXIBLE_LAUNCH_SIZE = "android.activity.flexibleLaunchSize";
     private static final String KEY_FORCE_LAUNCH_TASK_ON_HOME = "android.activity.forceLaunchTaskOnHome";
     private static final String KEY_FORCE_LAUNCH_WINDOWING_MODE = "android.activity.forceWindowingMode";
@@ -178,6 +180,8 @@ public class ActivityOptions extends ComponentOptions {
     public static final int SEM_POP_OVER_POSITION_VERTICAL_CENTER = 4;
     public static final int SEM_POP_OVER_POSITION_VERTICAL_TOP = 1;
     private static final String TAG = "ActivityOptions";
+    public static final int TYPE_EXTENDED_DESKTOP_MODE_LAUNCH_POLICY_HOME = 1;
+    public static final int TYPE_EXTENDED_DESKTOP_MODE_LAUNCH_POLICY_UNDEFINED = 0;
     private boolean mAllowEnterPipWhileLaunching;
     private boolean mAllowPassThroughOnTouchOutside;
     private AppTransitionAnimationSpec[] mAnimSpecs;
@@ -202,6 +206,7 @@ public class ActivityOptions extends ComponentOptions {
     private boolean mDisallowEnterPictureInPictureWhileLaunching;
     private boolean mDismissKeyguardIfInsecure;
     private int mEnterSplitSideWithAdjacentFlag;
+    private int mExtendedDesktopModeLaunchType;
     private boolean mFlexibleLaunchSize;
     private boolean mForceLaunchTaskOnHome;
     private int mForceLaunchWindowingMode;
@@ -229,6 +234,7 @@ public class ActivityOptions extends ComponentOptions {
     private boolean mLaunchedFromDnD;
     private boolean mLaunchedFromHome;
     private boolean mLockTaskMode;
+    private boolean mNeedSystemModalPolicy;
     private boolean mOverrideTaskTransition;
     private String mPackageName;
     private int mPendingIntentCreatorBackgroundActivityStartMode;
@@ -301,15 +307,15 @@ public class ActivityOptions extends ComponentOptions {
     }
 
     public static ActivityOptions makeCustomAnimation(Context context, int i, int i2, int i3, Handler handler, OnAnimationStartedListener onAnimationStartedListener, OnAnimationFinishedListener onAnimationFinishedListener) {
-        ActivityOptions makeCustomAnimation = makeCustomAnimation(context, i, i2, i3, handler, onAnimationStartedListener);
-        makeCustomAnimation.setOnAnimationFinishedListener(handler, onAnimationFinishedListener);
-        return makeCustomAnimation;
+        ActivityOptions activityOptionsMakeCustomAnimation = makeCustomAnimation(context, i, i2, i3, handler, onAnimationStartedListener);
+        activityOptionsMakeCustomAnimation.setOnAnimationFinishedListener(handler, onAnimationFinishedListener);
+        return activityOptionsMakeCustomAnimation;
     }
 
     public static ActivityOptions makeCustomTaskAnimation(Context context, int i, int i2, Handler handler, OnAnimationStartedListener onAnimationStartedListener, OnAnimationFinishedListener onAnimationFinishedListener) {
-        ActivityOptions makeCustomAnimation = makeCustomAnimation(context, i, i2, 0, handler, onAnimationStartedListener, onAnimationFinishedListener);
-        makeCustomAnimation.mOverrideTaskTransition = true;
-        return makeCustomAnimation;
+        ActivityOptions activityOptionsMakeCustomAnimation = makeCustomAnimation(context, i, i2, 0, handler, onAnimationStartedListener, onAnimationFinishedListener);
+        activityOptionsMakeCustomAnimation.mOverrideTaskTransition = true;
+        return activityOptionsMakeCustomAnimation;
     }
 
     public static ActivityOptions makeCustomInPlaceAnimation(Context context, int i) {
@@ -328,11 +334,11 @@ public class ActivityOptions extends ComponentOptions {
             this.mAnimationStartedListener = new IRemoteCallback.Stub(this) { // from class: android.app.ActivityOptions.1
                 @Override // android.os.IRemoteCallback
                 public void sendResult(Bundle bundle) throws RemoteException {
-                    final long elapsedRealtime = SystemClock.elapsedRealtime();
+                    final long jElapsedRealtime = SystemClock.elapsedRealtime();
                     handler.post(new Runnable() { // from class: android.app.ActivityOptions.1.1
                         @Override // java.lang.Runnable
                         public void run() {
-                            onAnimationStartedListener.onAnimationStarted(elapsedRealtime);
+                            onAnimationStartedListener.onAnimationStarted(jElapsedRealtime);
                         }
                     });
                 }
@@ -345,11 +351,11 @@ public class ActivityOptions extends ComponentOptions {
             this.mAnimationFinishedListener = new IRemoteCallback.Stub(this) { // from class: android.app.ActivityOptions.2
                 @Override // android.os.IRemoteCallback
                 public void sendResult(Bundle bundle) throws RemoteException {
-                    final long elapsedRealtime = SystemClock.elapsedRealtime();
+                    final long jElapsedRealtime = SystemClock.elapsedRealtime();
                     handler.post(new Runnable() { // from class: android.app.ActivityOptions.2.1
                         @Override // java.lang.Runnable
                         public void run() {
-                            onAnimationFinishedListener.onAnimationFinished(elapsedRealtime);
+                            onAnimationFinishedListener.onAnimationFinished(jElapsedRealtime);
                         }
                     });
                 }
@@ -462,10 +468,10 @@ public class ActivityOptions extends ComponentOptions {
     @SafeVarargs
     public static ActivityOptions makeSceneTransitionAnimation(Activity activity, Pair<View, String>... pairArr) {
         ActivityOptions activityOptions = new ActivityOptions();
-        ExitTransitionCoordinator makeSceneTransitionAnimation = makeSceneTransitionAnimation(new ExitTransitionCoordinator.ActivityExitTransitionCallbacks(activity), activity.mExitTransitionListener, activity.getWindow(), activityOptions, pairArr);
+        ExitTransitionCoordinator exitTransitionCoordinatorMakeSceneTransitionAnimation = makeSceneTransitionAnimation(new ExitTransitionCoordinator.ActivityExitTransitionCallbacks(activity), activity.mExitTransitionListener, activity.getWindow(), activityOptions, pairArr);
         SceneTransitionInfo sceneTransitionInfo = activityOptions.getSceneTransitionInfo();
         if (sceneTransitionInfo != null) {
-            sceneTransitionInfo.setExitCoordinatorKey(activity.mActivityTransitionState.addExitTransitionCoordinator(makeSceneTransitionAnimation));
+            sceneTransitionInfo.setExitCoordinatorKey(activity.mActivityTransitionState.addExitTransitionCoordinator(exitTransitionCoordinatorMakeSceneTransitionAnimation));
         }
         Slog.d(TAG, "makeSceneTransitionAnimation is called, activity=" + activity + ", caller=" + Debug.getCallers(3));
         return activityOptions;
@@ -474,12 +480,12 @@ public class ActivityOptions extends ComponentOptions {
     @SafeVarargs
     public static Pair<ActivityOptions, ExitTransitionCoordinator> startSharedElementAnimation(Window window, ExitTransitionCoordinator.ExitTransitionCallbacks exitTransitionCallbacks, SharedElementCallback sharedElementCallback, Pair<View, String>... pairArr) {
         ActivityOptions activityOptions = new ActivityOptions();
-        ExitTransitionCoordinator makeSceneTransitionAnimation = makeSceneTransitionAnimation(exitTransitionCallbacks, sharedElementCallback, window, activityOptions, pairArr);
+        ExitTransitionCoordinator exitTransitionCoordinatorMakeSceneTransitionAnimation = makeSceneTransitionAnimation(exitTransitionCallbacks, sharedElementCallback, window, activityOptions, pairArr);
         SceneTransitionInfo sceneTransitionInfo = activityOptions.getSceneTransitionInfo();
         if (sceneTransitionInfo != null) {
             sceneTransitionInfo.setExitCoordinatorKey(-1);
         }
-        return Pair.create(activityOptions, makeSceneTransitionAnimation);
+        return Pair.create(activityOptions, exitTransitionCoordinatorMakeSceneTransitionAnimation);
     }
 
     public static void stopSharedElementAnimation(Window window) {
@@ -616,6 +622,7 @@ public class ActivityOptions extends ComponentOptions {
         this.mLaunchedFromDnD = false;
         this.mAllowEnterPipWhileLaunching = false;
         this.mForceLaunchTaskOnHome = false;
+        this.mNeedSystemModalPolicy = false;
         this.mPopOverWidthDp = new int[2];
         this.mPopOverHeightDp = new int[2];
         this.mPopOverAnchorMarginDp = new Point[2];
@@ -651,6 +658,7 @@ public class ActivityOptions extends ComponentOptions {
         this.mLaunchedFromDnD = false;
         this.mAllowEnterPipWhileLaunching = false;
         this.mForceLaunchTaskOnHome = false;
+        this.mNeedSystemModalPolicy = false;
         this.mPopOverWidthDp = new int[2];
         this.mPopOverHeightDp = new int[2];
         this.mPopOverAnchorMarginDp = new Point[2];
@@ -816,6 +824,12 @@ public class ActivityOptions extends ComponentOptions {
         }
         if (bundle.containsKey(KEY_START_ASSISTANT_ACTIVITY)) {
             this.mStartAssistantActivity = bundle.getBoolean(KEY_START_ASSISTANT_ACTIVITY);
+        }
+        if (bundle.containsKey(KEY_APPLY_SYSTEM_MODAL_POLICY)) {
+            this.mNeedSystemModalPolicy = bundle.getBoolean(KEY_APPLY_SYSTEM_MODAL_POLICY);
+        }
+        if (bundle.containsKey(KEY_EXTENDED_DESKTOP_MODE_LAUNCH_POLICY_TYPE)) {
+            this.mExtendedDesktopModeLaunchType = bundle.getInt(KEY_EXTENDED_DESKTOP_MODE_LAUNCH_POLICY_TYPE);
         }
     }
 
@@ -1249,11 +1263,11 @@ public class ActivityOptions extends ComponentOptions {
         }
 
         public static LaunchCookie readFromParcel(Parcel parcel) {
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            if (readStrongBinder == null) {
+            IBinder strongBinder = parcel.readStrongBinder();
+            if (strongBinder == null) {
                 return null;
             }
-            return new LaunchCookie(readStrongBinder);
+            return new LaunchCookie(strongBinder);
         }
 
         public static void writeToParcel(LaunchCookie launchCookie, Parcel parcel) {
@@ -1495,9 +1509,9 @@ public class ActivityOptions extends ComponentOptions {
             case 9:
                 Bitmap bitmap = this.mThumbnail;
                 if (bitmap != null) {
-                    Bitmap copy = bitmap.copy(Bitmap.Config.HARDWARE, false);
-                    if (copy != null) {
-                        bundle.putParcelable(KEY_ANIM_THUMBNAIL, copy.getHardwareBuffer());
+                    Bitmap bitmapCopy = bitmap.copy(Bitmap.Config.HARDWARE, false);
+                    if (bitmapCopy != null) {
+                        bundle.putParcelable(KEY_ANIM_THUMBNAIL, bitmapCopy.getHardwareBuffer());
                     } else {
                         Slog.w(TAG, "Failed to copy thumbnail");
                     }
@@ -1737,6 +1751,11 @@ public class ActivityOptions extends ComponentOptions {
             bundle.putBoolean(KEY_LAUNCHED_FROM_HOME, this.mLaunchedFromHome);
         }
         bundle.putBoolean(KEY_START_ASSISTANT_ACTIVITY, this.mStartAssistantActivity);
+        bundle.putBoolean(KEY_APPLY_SYSTEM_MODAL_POLICY, this.mNeedSystemModalPolicy);
+        int i13 = this.mExtendedDesktopModeLaunchType;
+        if (i13 != 0) {
+            bundle.putInt(KEY_EXTENDED_DESKTOP_MODE_LAUNCH_POLICY_TYPE, i13);
+        }
         return bundle;
     }
 
@@ -2062,6 +2081,14 @@ public class ActivityOptions extends ComponentOptions {
         return this.mEnterSplitSideWithAdjacentFlag == 4;
     }
 
+    public boolean getNeedApplySystemModalPolicy() {
+        return this.mNeedSystemModalPolicy;
+    }
+
+    public void setNeedApplySystemModalPolicy(boolean z) {
+        this.mNeedSystemModalPolicy = z;
+    }
+
     public void setDisableSplashScreen() {
         this.mDisableSplashScreen = true;
     }
@@ -2096,5 +2123,13 @@ public class ActivityOptions extends ComponentOptions {
 
     public boolean getLaunchedFromHome() {
         return this.mLaunchedFromHome;
+    }
+
+    public void setExtendedDesktopModeLaunchPolicy(int i) {
+        this.mExtendedDesktopModeLaunchType = i;
+    }
+
+    public boolean useExtendedDesktopModeLaunchPolicy() {
+        return this.mExtendedDesktopModeLaunchType != 0;
     }
 }

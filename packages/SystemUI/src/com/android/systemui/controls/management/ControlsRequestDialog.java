@@ -38,7 +38,6 @@ import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ControlsRequestDialog extends ComponentActivity implements DialogInterface.OnClickListener, DialogInterface.OnCancelListener {
     public Control control;
@@ -58,20 +57,19 @@ public class ControlsRequestDialog extends ComponentActivity implements DialogIn
         public final int startingUser;
 
         {
-            this.startingUser = ControlsRequestDialog.this.controller.getCurrentUserId();
+            this.startingUser = this.this$0.controller.getCurrentUserId();
         }
 
         @Override // com.android.systemui.settings.UserTracker.Callback
         public final void onUserChanged(int i, Context context) {
             if (i != this.startingUser) {
-                ControlsRequestDialog controlsRequestDialog = ControlsRequestDialog.this;
+                ControlsRequestDialog controlsRequestDialog = this.this$0;
                 ((UserTrackerImpl) controlsRequestDialog.userTracker).removeCallback(this);
                 controlsRequestDialog.finish();
             }
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -251,32 +249,32 @@ public class ControlsRequestDialog extends ComponentActivity implements DialogIn
         }
         int deviceType = control3.getDeviceType();
         companion.getClass();
-        RenderInfo lookup = RenderInfo.Companion.lookup(this, componentName4, deviceType, 0);
-        View inflate = LayoutInflater.from(this).inflate(R.layout.controls_add_dialog, (ViewGroup) null);
-        ImageView imageView = (ImageView) inflate.requireViewById(R.id.icon);
-        imageView.setImageDrawable(lookup.icon);
-        imageView.setImageTintList(imageView.getContext().getResources().getColorStateList(lookup.foreground, imageView.getContext().getTheme()));
-        TextView textView = (TextView) inflate.requireViewById(R.id.title);
+        RenderInfo renderInfoLookup = RenderInfo.Companion.lookup(this, componentName4, deviceType, 0);
+        View viewInflate = LayoutInflater.from(this).inflate(R.layout.controls_add_dialog, (ViewGroup) null);
+        ImageView imageView = (ImageView) viewInflate.requireViewById(R.id.icon);
+        imageView.setImageDrawable(renderInfoLookup.icon);
+        imageView.setImageTintList(imageView.getContext().getResources().getColorStateList(renderInfoLookup.foreground, imageView.getContext().getTheme()));
+        TextView textView = (TextView) viewInflate.requireViewById(R.id.title);
         Control control4 = this.control;
         if (control4 == null) {
             control4 = null;
         }
         textView.setText(control4.getTitle());
-        TextView textView2 = (TextView) inflate.requireViewById(R.id.subtitle);
+        TextView textView2 = (TextView) viewInflate.requireViewById(R.id.subtitle);
         Control control5 = this.control;
         textView2.setText((control5 != null ? control5 : null).getSubtitle());
-        View requireViewById = inflate.requireViewById(R.id.control);
-        requireViewById.setBackground(requireViewById.getResources().getDrawable(R.drawable.control_add_dialog_bg));
+        View viewRequireViewById = viewInflate.requireViewById(R.id.control);
+        viewRequireViewById.setBackground(viewRequireViewById.getResources().getDrawable(R.drawable.control_add_dialog_bg));
         ControlsUtil controlsUtil = this.controlsUtil;
-        Context context = requireViewById.getContext();
-        LayerDrawable layerDrawable = (LayerDrawable) requireViewById.getBackground();
+        Context context = viewRequireViewById.getContext();
+        LayerDrawable layerDrawable = (LayerDrawable) viewRequireViewById.getBackground();
         controlsUtil.getClass();
         layerDrawable.mutate();
         ((GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.background)).setColor(context.getResources().getColor(R.color.control_favorite_default_background, context.getTheme()));
-        AlertDialog create = new AlertDialog.Builder(this, R.style.Theme_SystemUI_Dialog_Alert).setTitle(getString(R.string.controls_add_devices_panel_title)).setPositiveButton(R.string.controls_dialog_add, this).setNegativeButton(R.string.controls_dialog_cancel, this).setOnCancelListener(this).setView(inflate).create();
-        SystemUIDialog.registerDismissListener(create);
-        create.setCanceledOnTouchOutside(true);
-        this.dialog = create;
-        create.show();
+        AlertDialog alertDialogCreate = new AlertDialog.Builder(this, R.style.Theme_SystemUI_Dialog_Alert).setTitle(getString(R.string.controls_add_devices_panel_title)).setPositiveButton(R.string.controls_dialog_add, this).setNegativeButton(R.string.controls_dialog_cancel, this).setOnCancelListener(this).setView(viewInflate).create();
+        SystemUIDialog.registerDismissListener(alertDialogCreate);
+        alertDialogCreate.setCanceledOnTouchOutside(true);
+        this.dialog = alertDialogCreate;
+        alertDialogCreate.show();
     }
 }

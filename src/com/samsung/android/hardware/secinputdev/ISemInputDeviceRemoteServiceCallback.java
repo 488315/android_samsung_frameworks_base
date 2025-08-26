@@ -51,9 +51,9 @@ public interface ISemInputDeviceRemoteServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemInputDeviceRemoteServiceCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemInputDeviceRemoteServiceCallback)) {
-                return (ISemInputDeviceRemoteServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemInputDeviceRemoteServiceCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemInputDeviceRemoteServiceCallback)) {
+                return (ISemInputDeviceRemoteServiceCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,14 +83,14 @@ public interface ISemInputDeviceRemoteServiceCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int[] createIntArray = parcel.createIntArray();
+                int[] iArrCreateIntArray = parcel.createIntArray();
                 parcel.enforceNoDataAvail();
-                deliveryRawdata(createIntArray);
+                deliveryRawdata(iArrCreateIntArray);
             } else if (i == 2) {
-                int[] createIntArray2 = parcel.createIntArray();
-                float readFloat = parcel.readFloat();
+                int[] iArrCreateIntArray2 = parcel.createIntArray();
+                float f = parcel.readFloat();
                 parcel.enforceNoDataAvail();
-                deliveryLastData(createIntArray2, readFloat);
+                deliveryLastData(iArrCreateIntArray2, f);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,26 +115,26 @@ public interface ISemInputDeviceRemoteServiceCallback extends IInterface {
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceRemoteServiceCallback
             public void deliveryRawdata(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceRemoteServiceCallback.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceRemoteServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceRemoteServiceCallback
             public void deliveryLastData(int[] iArr, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceRemoteServiceCallback.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceRemoteServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

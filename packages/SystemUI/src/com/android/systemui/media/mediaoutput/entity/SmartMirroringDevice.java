@@ -2,14 +2,19 @@ package com.android.systemui.media.mediaoutput.entity;
 
 import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$ExternalSyntheticOutline0;
 import androidx.compose.ui.graphics.painter.Painter;
+import androidx.compose.ui.graphics.vector.ImageVector;
+import com.android.systemui.R;
 import com.android.systemui.controls.controller.ControlInfo$$ExternalSyntheticOutline0;
+import com.android.systemui.media.mediaoutput.compose.ext.ImageVectorConverterPainter;
 import com.android.systemui.media.mediaoutput.controller.device.ControllerType;
 import com.android.systemui.media.mediaoutput.controller.device.DeviceInfo;
+import com.android.systemui.media.mediaoutput.ext.ResourceString;
+import com.android.systemui.media.mediaoutput.icons.Icons;
+import com.android.systemui.media.mediaoutput.icons.badge.SmartViewKt;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SmartMirroringDevice implements AudioDevice {
     public static final Companion Companion = new Companion(null);
@@ -25,7 +30,6 @@ public final class SmartMirroringDevice implements AudioDevice {
     public final int volume;
     public final int volumeMax;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -121,9 +125,9 @@ public final class SmartMirroringDevice implements AudioDevice {
     }
 
     public final int hashCode() {
-        int hashCode = (this.icon.hashCode() + ControlInfo$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name), 31, this.description)) * 31;
+        int iM = AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.icon, ControlInfo$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name), 31, this.description), 31);
         Painter painter = this.badge;
-        return Boolean.hashCode(this.cancelable) + ((this.state.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (hashCode + (painter == null ? 0 : painter.hashCode())) * 31, 31), 31)) * 31);
+        return Boolean.hashCode(this.cancelable) + ((this.state.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (iM + (painter == null ? 0 : painter.hashCode())) * 31, 31), 31)) * 31);
     }
 
     public final String toString() {
@@ -131,79 +135,18 @@ public final class SmartMirroringDevice implements AudioDevice {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public SmartMirroringDevice(java.lang.String r16, java.lang.String r17, java.lang.CharSequence r18, androidx.compose.ui.graphics.painter.Painter r19, androidx.compose.ui.graphics.painter.Painter r20, int r21, int r22, com.android.systemui.media.mediaoutput.entity.State r23, boolean r24, int r25, kotlin.jvm.internal.DefaultConstructorMarker r26) {
-        /*
-            r15 = this;
-            r0 = r25
-            r1 = r0 & 4
-            if (r1 == 0) goto L12
-            com.android.systemui.media.mediaoutput.ext.ResourceString r1 = new com.android.systemui.media.mediaoutput.ext.ResourceString
-            r2 = 2
-            r3 = 0
-            r4 = 2131955010(0x7f130d42, float:1.9546535E38)
-            r1.<init>(r4, r3, r2, r3)
-            r8 = r1
-            goto L14
-        L12:
-            r8 = r18
-        L14:
-            r1 = r0 & 16
-            if (r1 == 0) goto L2d
-            com.android.systemui.media.mediaoutput.compose.ext.ImageVectorConverterPainter$Companion r1 = com.android.systemui.media.mediaoutput.compose.ext.ImageVectorConverterPainter.Companion
-            com.android.systemui.media.mediaoutput.icons.Icons$Badge r2 = com.android.systemui.media.mediaoutput.icons.Icons.Badge.INSTANCE
-            kotlin.Lazy r2 = com.android.systemui.media.mediaoutput.icons.badge.SmartViewKt.SmartView$delegate
-            java.lang.Object r2 = r2.getValue()
-            androidx.compose.ui.graphics.vector.ImageVector r2 = (androidx.compose.ui.graphics.vector.ImageVector) r2
-            r1.getClass()
-            com.android.systemui.media.mediaoutput.compose.ext.ImageVectorConverterPainter r1 = com.android.systemui.media.mediaoutput.compose.ext.ImageVectorConverterPainter.Companion.toConverter(r2)
-            r10 = r1
-            goto L2f
-        L2d:
-            r10 = r20
-        L2f:
-            r1 = r0 & 32
-            r2 = 0
-            if (r1 == 0) goto L36
-            r11 = r2
-            goto L38
-        L36:
-            r11 = r21
-        L38:
-            r1 = r0 & 64
-            if (r1 == 0) goto L3e
-            r12 = r2
-            goto L40
-        L3e:
-            r12 = r22
-        L40:
-            r1 = r0 & 128(0x80, float:1.8E-43)
-            if (r1 == 0) goto L48
-            com.android.systemui.media.mediaoutput.entity.State r1 = com.android.systemui.media.mediaoutput.entity.State.DISCONNECTED
-            r13 = r1
-            goto L4a
-        L48:
-            r13 = r23
-        L4a:
-            r0 = r0 & 256(0x100, float:3.59E-43)
-            if (r0 == 0) goto L57
-            r14 = r2
-        L4f:
-            r5 = r15
-            r6 = r16
-            r7 = r17
-            r9 = r19
-            goto L5a
-        L57:
-            r14 = r24
-            goto L4f
-        L5a:
-            r5.<init>(r6, r7, r8, r9, r10, r11, r12, r13, r14)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.entity.SmartMirroringDevice.<init>(java.lang.String, java.lang.String, java.lang.CharSequence, androidx.compose.ui.graphics.painter.Painter, androidx.compose.ui.graphics.painter.Painter, int, int, com.android.systemui.media.mediaoutput.entity.State, boolean, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public SmartMirroringDevice(String str, String str2, CharSequence charSequence, Painter painter, Painter painter2, int i, int i2, State state, boolean z, int i3, DefaultConstructorMarker defaultConstructorMarker) {
+        Painter converter;
+        CharSequence resourceString = (i3 & 4) != 0 ? new ResourceString(R.string.mirror_screen, null, 2, null) : charSequence;
+        if ((i3 & 16) != 0) {
+            ImageVectorConverterPainter.Companion companion = ImageVectorConverterPainter.Companion;
+            Icons.Badge badge = Icons.Badge.INSTANCE;
+            ImageVector imageVector = (ImageVector) SmartViewKt.SmartView$delegate.getValue();
+            companion.getClass();
+            converter = ImageVectorConverterPainter.Companion.toConverter(imageVector);
+        } else {
+            converter = painter2;
+        }
+        this(str, str2, resourceString, painter, converter, (i3 & 32) != 0 ? 0 : i, (i3 & 64) != 0 ? 0 : i2, (i3 & 128) != 0 ? State.DISCONNECTED : state, (i3 & 256) != 0 ? false : z);
     }
 }

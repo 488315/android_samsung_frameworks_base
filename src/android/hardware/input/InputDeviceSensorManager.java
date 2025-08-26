@@ -257,10 +257,10 @@ public class InputDeviceSensorManager {
             }
             int i2 = message.arg1;
             int i3 = message.arg2;
-            int intValue = ((Integer) message.obj).intValue();
+            int iIntValue = ((Integer) message.obj).intValue();
             for (Sensor sensor : this.mSensors) {
                 if (sensor.getId() == i2 && sensor.getType() == i3) {
-                    this.mListener.onAccuracyChanged(sensor, intValue);
+                    this.mListener.onAccuracyChanged(sensor, iIntValue);
                 }
             }
         }
@@ -340,11 +340,11 @@ public class InputDeviceSensorManager {
                     return false;
                 }
             }
-            int findSensorEventListenerLocked = findSensorEventListenerLocked(sensorEventListener);
-            if (findSensorEventListenerLocked < 0) {
+            int iFindSensorEventListenerLocked = findSensorEventListenerLocked(sensorEventListener);
+            if (iFindSensorEventListenerLocked < 0) {
                 this.mInputSensorEventListeners.add(new InputSensorEventListenerDelegate(sensorEventListener, sensor, getLooperForListenerLocked(handler)));
             } else {
-                this.mInputSensorEventListeners.get(findSensorEventListenerLocked).addSensor(sensor);
+                this.mInputSensorEventListeners.get(iFindSensorEventListenerLocked).addSensor(sensor);
             }
             return true;
         }
@@ -368,13 +368,13 @@ public class InputDeviceSensorManager {
             throw new IllegalArgumentException("listener must not be null");
         }
         synchronized (this.mInputSensorLock) {
-            int findSensorEventListenerLocked = findSensorEventListenerLocked(sensorEventListener);
-            if (findSensorEventListenerLocked >= 0) {
-                InputSensorEventListenerDelegate inputSensorEventListenerDelegate = this.mInputSensorEventListeners.get(findSensorEventListenerLocked);
+            int iFindSensorEventListenerLocked = findSensorEventListenerLocked(sensorEventListener);
+            if (iFindSensorEventListenerLocked >= 0) {
+                InputSensorEventListenerDelegate inputSensorEventListenerDelegate = this.mInputSensorEventListeners.get(iFindSensorEventListenerLocked);
                 ArrayList<Sensor> arrayList = new ArrayList(inputSensorEventListenerDelegate.getSensors());
                 inputSensorEventListenerDelegate.removeSensor(sensor);
                 if (inputSensorEventListenerDelegate.isEmpty()) {
-                    this.mInputSensorEventListeners.remove(findSensorEventListenerLocked);
+                    this.mInputSensorEventListeners.remove(iFindSensorEventListenerLocked);
                 }
                 if (this.mInputServiceSensorListener != null && this.mInputSensorEventListeners.isEmpty()) {
                     this.mGlobal.unregisterSensorListener(this.mInputServiceSensorListener);
@@ -406,11 +406,11 @@ public class InputDeviceSensorManager {
     /* JADX INFO: Access modifiers changed from: private */
     public boolean flushInternal(SensorEventListener sensorEventListener) {
         synchronized (this.mInputSensorLock) {
-            int findSensorEventListenerLocked = findSensorEventListenerLocked(sensorEventListener);
-            if (findSensorEventListenerLocked < 0) {
+            int iFindSensorEventListenerLocked = findSensorEventListenerLocked(sensorEventListener);
+            if (iFindSensorEventListenerLocked < 0) {
                 return false;
             }
-            for (Sensor sensor : this.mInputSensorEventListeners.get(findSensorEventListenerLocked).getSensors()) {
+            for (Sensor sensor : this.mInputSensorEventListeners.get(iFindSensorEventListenerLocked).getSensors()) {
                 if (!this.mGlobal.flushSensor(sensor.getId(), sensor.getType())) {
                     return false;
                 }

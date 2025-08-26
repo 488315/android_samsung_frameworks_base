@@ -7,7 +7,6 @@ import android.util.Slog;
 import com.android.wm.shell.common.SingleInstanceRemoteListener;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SingleInstanceRemoteListener {
     public final RemoteCallable mCallableController;
@@ -16,7 +15,6 @@ public class SingleInstanceRemoteListener {
     public final Consumer mOnRegisterCallback;
     public final Consumer mOnUnregisterCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.common.SingleInstanceRemoteListener$1, reason: invalid class name */
     public class AnonymousClass1 implements IBinder.DeathRecipient {
         public AnonymousClass1() {
@@ -28,7 +26,7 @@ public class SingleInstanceRemoteListener {
             remoteCallable.getRemoteCallExecutor().execute(new Runnable() { // from class: com.android.wm.shell.common.SingleInstanceRemoteListener$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SingleInstanceRemoteListener.AnonymousClass1 anonymousClass1 = SingleInstanceRemoteListener.AnonymousClass1.this;
+                    SingleInstanceRemoteListener.AnonymousClass1 anonymousClass1 = this.f$0;
                     RemoteCallable remoteCallable2 = remoteCallable;
                     SingleInstanceRemoteListener singleInstanceRemoteListener = SingleInstanceRemoteListener.this;
                     singleInstanceRemoteListener.mListener = null;
@@ -38,7 +36,6 @@ public class SingleInstanceRemoteListener {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface RemoteCall {
         void accept(Object obj);
     }
@@ -62,7 +59,7 @@ public class SingleInstanceRemoteListener {
         }
     }
 
-    public final void register(IInterface iInterface) {
+    public final void register(IInterface iInterface) throws RemoteException {
         IInterface iInterface2 = this.mListener;
         AnonymousClass1 anonymousClass1 = this.mListenerDeathRecipient;
         if (iInterface2 != null) {

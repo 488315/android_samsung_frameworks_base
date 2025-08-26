@@ -8,7 +8,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import com.samsung.android.knox.ContextInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IAuditLog extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.log.IAuditLog";
@@ -39,7 +38,6 @@ public interface IAuditLog extends IInterface {
 
     boolean setMaximumLogSize(ContextInfo contextInfo, int i) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IAuditLog {
         public static final int TRANSACTION_disableAuditLog = 2;
         public static final int TRANSACTION_dumpLogFile = 10;
@@ -55,7 +53,6 @@ public interface IAuditLog extends IInterface {
         public static final int TRANSACTION_setCriticalLogSize = 5;
         public static final int TRANSACTION_setMaximumLogSize = 7;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IAuditLog {
             public IBinder mRemote;
 
@@ -70,101 +67,101 @@ public interface IAuditLog extends IInterface {
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public boolean disableAuditLog(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public boolean dumpLogFile(ContextInfo contextInfo, long j, long j2, String str, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public boolean enableAuditLog(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public AuditLogRulesInfo getAuditLogRules(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AuditLogRulesInfo) obtain2.readTypedObject(AuditLogRulesInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AuditLogRulesInfo) parcelObtain2.readTypedObject(AuditLogRulesInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public int getCriticalLogSize(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public int getCurrentLogFileSize(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -174,115 +171,115 @@ public interface IAuditLog extends IInterface {
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public int getMaximumLogSize(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public boolean isAuditLogEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public boolean isAuditServiceRunning() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public void logEventForLegacyComponents(int i, LegacyEvent legacyEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(legacyEvent, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(legacyEvent, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public boolean setAuditLogRules(ContextInfo contextInfo, AuditLogRulesInfo auditLogRulesInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(auditLogRulesInfo, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(auditLogRulesInfo, 0);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public boolean setCriticalLogSize(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.log.IAuditLog
             public boolean setMaximumLogSize(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IAuditLog.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -295,8 +292,8 @@ public interface IAuditLog extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAuditLog.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IAuditLog)) ? new Proxy(iBinder) : (IAuditLog) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAuditLog.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IAuditLog)) ? new Proxy(iBinder) : (IAuditLog) iInterfaceQueryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -353,23 +350,23 @@ public interface IAuditLog extends IInterface {
                 case 1:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean enableAuditLog = enableAuditLog(contextInfo);
+                    boolean zEnableAuditLog = enableAuditLog(contextInfo);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableAuditLog);
+                    parcel2.writeBoolean(zEnableAuditLog);
                     return true;
                 case 2:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean disableAuditLog = disableAuditLog(contextInfo2);
+                    boolean zDisableAuditLog = disableAuditLog(contextInfo2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disableAuditLog);
+                    parcel2.writeBoolean(zDisableAuditLog);
                     return true;
                 case 3:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isAuditLogEnabled = isAuditLogEnabled(contextInfo3);
+                    boolean zIsAuditLogEnabled = isAuditLogEnabled(contextInfo3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAuditLogEnabled);
+                    parcel2.writeBoolean(zIsAuditLogEnabled);
                     return true;
                 case 4:
                     ContextInfo contextInfo4 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -380,9 +377,9 @@ public interface IAuditLog extends IInterface {
                     return true;
                 case 5:
                     ContextInfo contextInfo5 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean criticalLogSize = setCriticalLogSize(contextInfo5, readInt);
+                    boolean criticalLogSize = setCriticalLogSize(contextInfo5, i3);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(criticalLogSize);
                     return true;
@@ -395,9 +392,9 @@ public interface IAuditLog extends IInterface {
                     return true;
                 case 7:
                     ContextInfo contextInfo7 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean maximumLogSize = setMaximumLogSize(contextInfo7, readInt2);
+                    boolean maximumLogSize = setMaximumLogSize(contextInfo7, i4);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(maximumLogSize);
                     return true;
@@ -409,27 +406,27 @@ public interface IAuditLog extends IInterface {
                     parcel2.writeInt(maximumLogSize2);
                     return true;
                 case 9:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     LegacyEvent legacyEvent = (LegacyEvent) parcel.readTypedObject(LegacyEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    logEventForLegacyComponents(readInt3, legacyEvent);
+                    logEventForLegacyComponents(i5, legacyEvent);
                     parcel2.writeNoException();
                     return true;
                 case 10:
                     ContextInfo contextInfo9 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong = parcel.readLong();
-                    long readLong2 = parcel.readLong();
-                    String readString = parcel.readString();
+                    long j = parcel.readLong();
+                    long j2 = parcel.readLong();
+                    String string = parcel.readString();
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean dumpLogFile = dumpLogFile(contextInfo9, readLong, readLong2, readString, parcelFileDescriptor);
+                    boolean zDumpLogFile = dumpLogFile(contextInfo9, j, j2, string, parcelFileDescriptor);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(dumpLogFile);
+                    parcel2.writeBoolean(zDumpLogFile);
                     return true;
                 case 11:
-                    boolean isAuditServiceRunning = isAuditServiceRunning();
+                    boolean zIsAuditServiceRunning = isAuditServiceRunning();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAuditServiceRunning);
+                    parcel2.writeBoolean(zIsAuditServiceRunning);
                     return true;
                 case 12:
                     ContextInfo contextInfo10 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -457,7 +454,6 @@ public interface IAuditLog extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IAuditLog {
         @Override // android.os.IInterface
         public IBinder asBinder() {

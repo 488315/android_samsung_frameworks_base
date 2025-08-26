@@ -291,18 +291,18 @@ public class PropertyInvalidatedCache<Query, Result> {
         }
 
         Result get(Query query) {
-            int callerUid = callerUid();
+            int iCallerUid = callerUid();
             if (this.mStatistics) {
                 if (this.mShadowCache.contains(query)) {
                     this.mShadowHits++;
-                    if (callerUid == this.mSelfUid) {
+                    if (iCallerUid == this.mSelfUid) {
                         this.mShadowSelfHits++;
                     }
                 } else {
                     this.mShadowMisses++;
                 }
             }
-            LinkedHashMap<Query, Result> linkedHashMap = this.mCache.get(callerUid);
+            LinkedHashMap<Query, Result> linkedHashMap = this.mCache.get(iCallerUid);
             if (linkedHashMap != null) {
                 return linkedHashMap.get(query);
             }
@@ -318,36 +318,36 @@ public class PropertyInvalidatedCache<Query, Result> {
         }
 
         void remove(Query query) {
-            int callerUid = callerUid();
+            int iCallerUid = callerUid();
             if (this.mStatistics) {
                 this.mShadowCache.remove(query);
             }
-            LinkedHashMap<Query, Result> linkedHashMap = this.mCache.get(callerUid);
+            LinkedHashMap<Query, Result> linkedHashMap = this.mCache.get(iCallerUid);
             if (linkedHashMap != null) {
                 linkedHashMap.remove(query);
             }
         }
 
         void put(Query query, Result result) {
-            int callerUid = callerUid();
+            int iCallerUid = callerUid();
             if (this.mStatistics) {
                 this.mShadowCache.add(query);
-                this.mUidSeen.put(callerUid, true);
+                this.mUidSeen.put(iCallerUid, true);
             }
-            LinkedHashMap<Query, Result> linkedHashMap = this.mCache.get(callerUid);
-            if (linkedHashMap == null) {
-                linkedHashMap = createMap();
-                this.mCache.put(callerUid, linkedHashMap);
+            LinkedHashMap<Query, Result> linkedHashMapCreateMap = this.mCache.get(iCallerUid);
+            if (linkedHashMapCreateMap == null) {
+                linkedHashMapCreateMap = createMap();
+                this.mCache.put(iCallerUid, linkedHashMapCreateMap);
             }
-            linkedHashMap.put(query, result);
+            linkedHashMapCreateMap.put(query, result);
         }
 
         int size() {
-            int i = 0;
-            for (int i2 = 0; i2 < this.mCache.size(); i2++) {
-                i += this.mCache.valueAt(i2).size();
+            int size = 0;
+            for (int i = 0; i < this.mCache.size(); i++) {
+                size += this.mCache.valueAt(i).size();
             }
-            return i;
+            return size;
         }
 
         void clear() {
@@ -366,14 +366,14 @@ public class PropertyInvalidatedCache<Query, Result> {
 
         void dumpDetailed(PrintWriter printWriter) {
             for (int i = 0; i < this.mCache.size(); i++) {
-                int keyAt = this.mCache.keyAt(i);
-                Set<Map.Entry<Query, Result>> entrySet = this.mCache.valueAt(i).entrySet();
-                if (entrySet.size() == 0) {
+                int iKeyAt = this.mCache.keyAt(i);
+                Set<Map.Entry<Query, Result>> setEntrySet = this.mCache.valueAt(i).entrySet();
+                if (setEntrySet.size() == 0) {
                     return;
                 }
                 printWriter.println("    Contents:");
-                printWriter.println(TextUtils.formatSimple("      Uid: %d\n", Integer.valueOf(keyAt)));
-                for (Map.Entry<Query, Result> entry : entrySet) {
+                printWriter.println(TextUtils.formatSimple("      Uid: %d\n", Integer.valueOf(iKeyAt)));
+                for (Map.Entry<Query, Result> entry : setEntrySet) {
                     printWriter.println(TextUtils.formatSimple("      Key: %s\n      Value: %s\n", Objects.toString(entry.getKey()), Objects.toString(entry.getValue())));
                 }
             }
@@ -589,7 +589,7 @@ public class PropertyInvalidatedCache<Query, Result> {
         }
 
         @Override // android.app.PropertyInvalidatedCache.NonceHandler
-        void setNonceInternal(long j) {
+        void setNonceInternal(long j) throws InterruptedException {
             SystemPropertySetter.setWithRetry(this.mName, Long.toString(j));
         }
     }
@@ -611,8 +611,8 @@ public class PropertyInvalidatedCache<Query, Result> {
 
         private int initialize(boolean z) {
             synchronized (this.mLock) {
-                int i = this.mHandle;
-                if (i == -1) {
+                int handleForName = this.mHandle;
+                if (handleForName == -1) {
                     if (this.mStore == null) {
                         this.mStore = NonceStore.getInstance();
                         if (this.mStore == null) {
@@ -622,32 +622,32 @@ public class PropertyInvalidatedCache<Query, Result> {
                     if (z) {
                         this.mStore.storeName(this.mShortName);
                     }
-                    i = this.mStore.getHandleForName(this.mShortName);
-                    if (i == -1) {
+                    handleForName = this.mStore.getHandleForName(this.mShortName);
+                    if (handleForName == -1) {
                         return -1;
                     }
-                    this.mHandle = i;
+                    this.mHandle = handleForName;
                 }
-                return i;
+                return handleForName;
             }
         }
 
         @Override // android.app.PropertyInvalidatedCache.NonceHandler
         long getNonceInternal() {
-            int i = this.mHandle;
-            if (i == -1 && (i = initialize(false)) == -1) {
+            int iInitialize = this.mHandle;
+            if (iInitialize == -1 && (iInitialize = initialize(false)) == -1) {
                 return 0L;
             }
-            return this.mStore.getNonce(i);
+            return this.mStore.getNonce(iInitialize);
         }
 
         @Override // android.app.PropertyInvalidatedCache.NonceHandler
         void setNonceInternal(long j) {
-            int i = this.mHandle;
-            if (i == -1 && (i = initialize(true)) == -1) {
+            int iInitialize = this.mHandle;
+            if (iInitialize == -1 && (iInitialize = initialize(true)) == -1) {
                 throw new IllegalStateException("unable to assign nonce handle: " + this.mName);
             }
-            this.mStore.setNonce(i, j);
+            this.mStore.setNonce(iInitialize, j);
         }
     }
 
@@ -747,27 +747,27 @@ public class PropertyInvalidatedCache<Query, Result> {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static NonceHandler getNonceHandler(String str) {
-        NonceHandler nonceHandler;
+        NonceHandler nonceSysprop;
         ConcurrentHashMap<String, NonceHandler> concurrentHashMap = sHandlers;
-        NonceHandler nonceHandler2 = concurrentHashMap.get(str);
-        if (nonceHandler2 != null) {
-            return nonceHandler2;
+        NonceHandler nonceHandler = concurrentHashMap.get(str);
+        if (nonceHandler != null) {
+            return nonceHandler;
         }
         synchronized (sGlobalLock) {
             throwIfInvalidCacheKey(str);
-            nonceHandler = concurrentHashMap.get(str);
-            if (nonceHandler == null) {
+            nonceSysprop = concurrentHashMap.get(str);
+            if (nonceSysprop == null) {
                 if (sharedMemoryOkay(str)) {
-                    nonceHandler = new NonceSharedMem(str, PREFIX_SYSTEM);
+                    nonceSysprop = new NonceSharedMem(str, PREFIX_SYSTEM);
                 } else if (str.startsWith(PREFIX_TEST)) {
-                    nonceHandler = new NonceLocal(str);
+                    nonceSysprop = new NonceLocal(str);
                 } else {
-                    nonceHandler = new NonceSysprop(str);
+                    nonceSysprop = new NonceSysprop(str);
                 }
-                concurrentHashMap.put(str, nonceHandler);
+                concurrentHashMap.put(str, nonceSysprop);
             }
         }
-        return nonceHandler;
+        return nonceSysprop;
     }
 
     public static final class Args extends Record {
@@ -879,11 +879,11 @@ public class PropertyInvalidatedCache<Query, Result> {
         this.mClears = 0L;
         this.mLastSeenNonce = 0L;
         this.mDisabled = false;
-        String createPropertyName = createPropertyName(args.mModule, args.mApi);
-        this.mPropertyName = createPropertyName;
+        String strCreatePropertyName = createPropertyName(args.mModule, args.mApi);
+        this.mPropertyName = strCreatePropertyName;
         this.mCacheName = str;
         this.mCacheNullResults = args.mCacheNulls;
-        this.mNonce = getNonceHandler(createPropertyName);
+        this.mNonce = getNonceHandler(strCreatePropertyName);
         this.mMaxEntries = args.mMaxEntries;
         this.mCache = new CacheMap<>(args.mIsolateUids, args.mTestMode);
         this.mComputer = queryHandler == null ? new DefaultComputer<>(this) : queryHandler;
@@ -892,10 +892,10 @@ public class PropertyInvalidatedCache<Query, Result> {
 
     private static Args argsFromProperty(String str) {
         throwIfInvalidCacheKey(str);
-        String substring = str.substring(10);
-        int indexOf = substring.indexOf(MediaMetrics.SEPARATOR);
-        String substring2 = substring.substring(0, indexOf);
-        return new Args(substring2).api(substring.substring(indexOf + 1));
+        String strSubstring = str.substring(10);
+        int iIndexOf = strSubstring.indexOf(MediaMetrics.SEPARATOR);
+        String strSubstring2 = strSubstring.substring(0, iIndexOf);
+        return new Args(strSubstring2).api(strSubstring.substring(iIndexOf + 1));
     }
 
     public static String apiFromProperty(String str) {
@@ -927,8 +927,8 @@ public class PropertyInvalidatedCache<Query, Result> {
 
     private static void throwIfNotTest() {
         Instrumentation instrumentation;
-        ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-        if (currentActivityThread != null && (instrumentation = currentActivityThread.getInstrumentation()) != null && !instrumentation.isInstrumenting() && Flags.enforcePicTestmodeProtocol()) {
+        ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+        if (activityThreadCurrentActivityThread != null && (instrumentation = activityThreadCurrentActivityThread.getInstrumentation()) != null && !instrumentation.isInstrumenting() && Flags.enforcePicTestmodeProtocol()) {
             throw new IllegalStateException("Test-only API called not from a test.");
         }
     }
@@ -951,9 +951,9 @@ public class PropertyInvalidatedCache<Query, Result> {
     }
 
     private static void setTestModeLocked(boolean z) {
-        Iterator<String> asIterator = sHandlers.keys().asIterator();
-        while (asIterator.hasNext()) {
-            sHandlers.get(asIterator.next()).setTestMode(z);
+        Iterator<String> itAsIterator = sHandlers.keys().asIterator();
+        while (itAsIterator.hasNext()) {
+            sHandlers.get(itAsIterator.next()).setTestMode(z);
         }
     }
 
@@ -1037,7 +1037,7 @@ public class PropertyInvalidatedCache<Query, Result> {
     }
 
     public Result query(Query query) {
-        boolean z;
+        boolean zContainsKey;
         Result result;
         long currentNonce = !isDisabled() ? getCurrentNonce() : 1L;
         if (!isReservedNonce(currentNonce) && bypass(query)) {
@@ -1045,15 +1045,15 @@ public class PropertyInvalidatedCache<Query, Result> {
         }
         while (!isReservedNonce(currentNonce)) {
             synchronized (this.mLock) {
-                z = false;
+                zContainsKey = false;
                 if (currentNonce == this.mLastSeenNonce) {
                     result = this.mCache.get(query);
                     if (result != null) {
-                        z = true;
+                        zContainsKey = true;
                     } else if (this.mCacheNullResults) {
-                        z = this.mCache.containsKey(query);
+                        zContainsKey = this.mCache.containsKey(query);
                     }
-                    if (z) {
+                    if (zContainsKey) {
                         this.mHits++;
                     }
                 } else {
@@ -1062,40 +1062,39 @@ public class PropertyInvalidatedCache<Query, Result> {
                     result = null;
                 }
             }
-            if (z) {
-                Result refresh = refresh(result, query);
-                if (refresh != result) {
+            if (zContainsKey) {
+                Result resultRefresh = refresh(result, query);
+                if (resultRefresh != result) {
                     long currentNonce2 = getCurrentNonce();
                     if (currentNonce == currentNonce2) {
                         synchronized (this.mLock) {
                             if (currentNonce == this.mLastSeenNonce) {
-                                if (refresh == null) {
+                                if (resultRefresh == null) {
                                     this.mCache.remove(query);
                                 } else {
-                                    ((PropertyInvalidatedCache<Query, Result>.CacheMap<Query, Result>) this.mCache).put(query, refresh);
+                                    ((PropertyInvalidatedCache<Query, Result>.CacheMap<Query, Result>) this.mCache).put(query, resultRefresh);
                                 }
                             }
                         }
-                        return maybeCheckConsistency(query, refresh);
+                        return maybeCheckConsistency(query, resultRefresh);
                     }
                     currentNonce = currentNonce2;
                 } else {
                     return maybeCheckConsistency(query, result);
                 }
             } else {
-                Result recompute = recompute(query);
+                Result resultRecompute = recompute(query);
                 synchronized (this.mLock) {
                     if (this.mLastSeenNonce == currentNonce) {
-                        if (recompute == null && !this.mCacheNullResults) {
-                            if (recompute == null) {
-                                this.mNulls++;
-                            }
+                        if (resultRecompute != null || this.mCacheNullResults) {
+                            ((PropertyInvalidatedCache<Query, Result>.CacheMap<Query, Result>) this.mCache).put(query, resultRecompute);
+                        } else if (resultRecompute == null) {
+                            this.mNulls++;
                         }
-                        ((PropertyInvalidatedCache<Query, Result>.CacheMap<Query, Result>) this.mCache).put(query, recompute);
                     }
                     this.mMisses++;
                 }
-                return maybeCheckConsistency(query, recompute);
+                return maybeCheckConsistency(query, resultRecompute);
             }
         }
         if (!this.mDisabled) {
@@ -1211,9 +1210,9 @@ public class PropertyInvalidatedCache<Query, Result> {
                 if (this.mUncorkDeadlineMs < 0) {
                     return;
                 }
-                long uptimeMillis = SystemClock.uptimeMillis();
-                if (this.mUncorkDeadlineMs > uptimeMillis) {
-                    this.mUncorkDeadlineMs = uptimeMillis + this.mAutoCorkDelayMs;
+                long jUptimeMillis = SystemClock.uptimeMillis();
+                if (this.mUncorkDeadlineMs > jUptimeMillis) {
+                    this.mUncorkDeadlineMs = jUptimeMillis + this.mAutoCorkDelayMs;
                     getHandlerLocked().sendEmptyMessageAtTime(0, this.mUncorkDeadlineMs);
                 } else {
                     this.mUncorkDeadlineMs = -1L;
@@ -1289,11 +1288,11 @@ public class PropertyInvalidatedCache<Query, Result> {
         if (!str.startsWith(str2)) {
             return false;
         }
-        String substring = str.substring(str2.length());
+        String strSubstring = str.substring(str2.length());
         if (z) {
-            return str3.contains(substring);
+            return str3.contains(strSubstring);
         }
-        return str3.matches(substring);
+        return str3.matches(strSubstring);
     }
 
     private boolean showDetailed(String[] strArr) {
@@ -1329,13 +1328,13 @@ public class PropertyInvalidatedCache<Query, Result> {
     @NeverCompile
     private void dumpContents(PrintWriter printWriter, boolean z, String[] strArr) {
         if (!z || showDetailed(strArr)) {
-            boolean z2 = false;
+            boolean zEquals = false;
             for (String str : strArr) {
-                z2 |= str.equals(BRIEF);
+                zEquals |= str.equals(BRIEF);
             }
             NonceHandler.Stats stats = this.mNonce.getStats();
             synchronized (this.mLock) {
-                if (z2) {
+                if (zEquals) {
                     if (!isActive(stats)) {
                         return;
                     }
@@ -1372,22 +1371,22 @@ public class PropertyInvalidatedCache<Query, Result> {
             printWriter.println("  Caching is disabled in this process.");
             return;
         }
-        boolean anyDetailed = anyDetailed(strArr);
+        boolean zAnyDetailed = anyDetailed(strArr);
         if (sSharedMemoryAvailable) {
             printWriter.println("  SharedMemory: enabled");
-            NonceStore.getInstance().dump(printWriter, "    ", anyDetailed);
+            NonceStore.getInstance().dump(printWriter, "    ", zAnyDetailed);
         } else {
             printWriter.println("  SharedMemory: disabled");
         }
         printWriter.println();
         ArrayList<PropertyInvalidatedCache> activeCaches = getActiveCaches();
         for (int i = 0; i < activeCaches.size(); i++) {
-            activeCaches.get(i).dumpContents(printWriter, anyDetailed, strArr);
+            activeCaches.get(i).dumpContents(printWriter, zAnyDetailed, strArr);
         }
     }
 
     @NeverCompile
-    public static void dumpCacheInfo(ParcelFileDescriptor parcelFileDescriptor, String[] strArr) {
+    public static void dumpCacheInfo(ParcelFileDescriptor parcelFileDescriptor, String[] strArr) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         PrintWriter printWriter = new PrintWriter(byteArrayOutputStream);
         dumpCacheInfo(printWriter, strArr);
@@ -1482,13 +1481,13 @@ public class PropertyInvalidatedCache<Query, Result> {
                 return;
             }
             byte[] bArr = new byte[this.mMaxByte];
-            int nativeGetByteBlock = PropertyInvalidatedCache.nativeGetByteBlock(this.mPtr, this.mBlockHash, bArr);
-            if (nativeGetByteBlock != Arrays.hashCode(bArr)) {
+            int iNativeGetByteBlock = PropertyInvalidatedCache.nativeGetByteBlock(this.mPtr, this.mBlockHash, bArr);
+            if (iNativeGetByteBlock != Arrays.hashCode(bArr)) {
                 this.mBlockHash = 0;
                 this.mPartialReads++;
             } else {
                 this.mStringUpdated++;
-                this.mBlockHash = nativeGetByteBlock;
+                this.mBlockHash = iNativeGetByteBlock;
                 updateStringMapLocked(bArr);
             }
         }
@@ -1515,7 +1514,7 @@ public class PropertyInvalidatedCache<Query, Result> {
         }
 
         public int storeName(String str) {
-            int intValue;
+            int iIntValue;
             synchronized (this.mLock) {
                 Integer num = this.mStringHandle.get(str);
                 if (num == null) {
@@ -1531,41 +1530,41 @@ public class PropertyInvalidatedCache<Query, Result> {
                     updateStringMapLocked(bArr);
                     num = this.mStringHandle.get(str);
                 }
-                intValue = num.intValue();
+                iIntValue = num.intValue();
             }
-            return intValue;
+            return iIntValue;
         }
 
         public int getHandleForName(String str) {
-            int intValue;
+            int iIntValue;
             synchronized (this.mLock) {
                 Integer num = this.mStringHandle.get(str);
                 if (num == null) {
                     refreshStringBlockLocked();
                     num = this.mStringHandle.get(str);
                 }
-                intValue = num != null ? num.intValue() : -1;
+                iIntValue = num != null ? num.intValue() : -1;
             }
-            return intValue;
+            return iIntValue;
         }
 
         public boolean setNonce(int i, long j) {
-            boolean nativeSetNonce;
+            boolean zNativeSetNonce;
             synchronized (this.mLock) {
                 throwIfBadHandle(i);
                 throwIfImmutable();
-                nativeSetNonce = PropertyInvalidatedCache.nativeSetNonce(this.mPtr, i, j);
+                zNativeSetNonce = PropertyInvalidatedCache.nativeSetNonce(this.mPtr, i, j);
             }
-            return nativeSetNonce;
+            return zNativeSetNonce;
         }
 
         public long getNonce(int i) {
-            long nativeGetNonce;
+            long jNativeGetNonce;
             synchronized (this.mLock) {
                 throwIfBadHandle(i);
-                nativeGetNonce = PropertyInvalidatedCache.nativeGetNonce(this.mPtr, i);
+                jNativeGetNonce = PropertyInvalidatedCache.nativeGetNonce(this.mPtr, i);
             }
-            return nativeGetNonce;
+            return jNativeGetNonce;
         }
 
         public void dump(PrintWriter printWriter, String str, boolean z) {

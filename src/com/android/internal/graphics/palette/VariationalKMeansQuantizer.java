@@ -98,11 +98,11 @@ public class VariationalKMeansQuantizer implements Quantizer {
         List<KMeans.Mean> list = null;
         double d = -1.7976931348623157E308d;
         for (int i2 = this.mInitializations; i2 > 0; i2--) {
-            List<KMeans.Mean> predict = this.mKMeans.predict(i, fArr);
-            double score = KMeans.score(predict);
-            if (list == null || score > d) {
-                list = predict;
-                d = score;
+            List<KMeans.Mean> listPredict = this.mKMeans.predict(i, fArr);
+            double dScore = KMeans.score(listPredict);
+            if (list == null || dScore > d) {
+                list = listPredict;
+                d = dScore;
             }
         }
         return list;

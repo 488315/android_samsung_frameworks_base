@@ -79,9 +79,9 @@ public class ShaderProgram extends Program {
     }
 
     public static ShaderProgram createIdentity(FilterContext filterContext) {
-        ShaderProgram nativeCreateIdentity = nativeCreateIdentity(getGLEnvironment(filterContext));
-        nativeCreateIdentity.setTimer();
-        return nativeCreateIdentity;
+        ShaderProgram shaderProgramNativeCreateIdentity = nativeCreateIdentity(getGLEnvironment(filterContext));
+        shaderProgramNativeCreateIdentity.setTimer();
+        return shaderProgramNativeCreateIdentity;
     }
 
     protected void finalize() throws Throwable {

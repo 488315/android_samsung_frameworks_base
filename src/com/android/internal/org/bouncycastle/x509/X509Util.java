@@ -112,10 +112,10 @@ class X509Util {
     }
 
     static Iterator getAlgNames() {
-        Enumeration keys = algorithms.keys();
+        Enumeration enumerationKeys = algorithms.keys();
         ArrayList arrayList = new ArrayList();
-        while (keys.hasMoreElements()) {
-            arrayList.add(keys.nextElement());
+        while (enumerationKeys.hasMoreElements()) {
+            arrayList.add(enumerationKeys.nextElement());
         }
         return arrayList.iterator();
     }
@@ -124,14 +124,14 @@ class X509Util {
         return Signature.getInstance(str);
     }
 
-    static Signature getSignatureInstance(String str, String str2) throws NoSuchProviderException, NoSuchAlgorithmException {
+    static Signature getSignatureInstance(String str, String str2) throws NoSuchAlgorithmException, NoSuchProviderException {
         if (str2 != null) {
             return Signature.getInstance(str, str2);
         }
         return Signature.getInstance(str);
     }
 
-    static byte[] calculateSignature(ASN1ObjectIdentifier aSN1ObjectIdentifier, String str, PrivateKey privateKey, SecureRandom secureRandom, ASN1Encodable aSN1Encodable) throws IOException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    static byte[] calculateSignature(ASN1ObjectIdentifier aSN1ObjectIdentifier, String str, PrivateKey privateKey, SecureRandom secureRandom, ASN1Encodable aSN1Encodable) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, IOException {
         if (aSN1ObjectIdentifier == null) {
             throw new IllegalStateException("no signature algorithm specified");
         }
@@ -145,7 +145,7 @@ class X509Util {
         return signatureInstance.sign();
     }
 
-    static byte[] calculateSignature(ASN1ObjectIdentifier aSN1ObjectIdentifier, String str, String str2, PrivateKey privateKey, SecureRandom secureRandom, ASN1Encodable aSN1Encodable) throws IOException, NoSuchProviderException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    static byte[] calculateSignature(ASN1ObjectIdentifier aSN1ObjectIdentifier, String str, String str2, PrivateKey privateKey, SecureRandom secureRandom, ASN1Encodable aSN1Encodable) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, IOException, NoSuchProviderException {
         if (aSN1ObjectIdentifier == null) {
             throw new IllegalStateException("no signature algorithm specified");
         }
@@ -185,7 +185,7 @@ class X509Util {
         }
     }
 
-    static Implementation getImplementation(String str, String str2, Provider provider) throws NoSuchAlgorithmException {
+    static Implementation getImplementation(String str, String str2, Provider provider) throws NoSuchAlgorithmException, ClassNotFoundException {
         Class<?> cls;
         String upperCase = Strings.toUpperCase(str2);
         while (true) {
@@ -214,7 +214,7 @@ class X509Util {
         throw new NoSuchAlgorithmException("cannot find implementation " + upperCase + " for provider " + provider.getName());
     }
 
-    static Implementation getImplementation(String str, String str2) throws NoSuchAlgorithmException {
+    static Implementation getImplementation(String str, String str2) throws NoSuchAlgorithmException, ClassNotFoundException {
         Provider[] providers = Security.getProviders();
         for (int i = 0; i != providers.length; i++) {
             Implementation implementation = getImplementation(str, Strings.toUpperCase(str2), providers[i]);

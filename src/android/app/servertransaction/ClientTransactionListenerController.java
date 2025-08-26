@@ -82,9 +82,9 @@ public class ClientTransactionListenerController {
             int size = this.mContextToPreChangedConfigMap.size();
             for (int i = 0; i < size; i++) {
                 try {
-                    Context keyAt = this.mContextToPreChangedConfigMap.keyAt(i);
-                    if (shouldReportDisplayChange(keyAt, this.mContextToPreChangedConfigMap.valueAt(i))) {
-                        arraySet.add(Integer.valueOf(keyAt.getDisplayId()));
+                    Context contextKeyAt = this.mContextToPreChangedConfigMap.keyAt(i);
+                    if (shouldReportDisplayChange(contextKeyAt, this.mContextToPreChangedConfigMap.valueAt(i))) {
+                        arraySet.add(Integer.valueOf(contextKeyAt.getDisplayId()));
                     }
                 } finally {
                     this.mContextToPreChangedConfigMap.clear();
@@ -121,8 +121,8 @@ public class ClientTransactionListenerController {
             if (this.mIsClientTransactionExecuting) {
                 return;
             }
-            Configuration remove = this.mContextToPreChangedConfigMap.remove(context);
-            int displayId = (remove == null || !shouldReportDisplayChange(context, remove)) ? -1 : context.getDisplayId();
+            Configuration configurationRemove = this.mContextToPreChangedConfigMap.remove(context);
+            int displayId = (configurationRemove == null || !shouldReportDisplayChange(context, configurationRemove)) ? -1 : context.getDisplayId();
             if (displayId != -1) {
                 try {
                     onDisplayChanged(displayId);

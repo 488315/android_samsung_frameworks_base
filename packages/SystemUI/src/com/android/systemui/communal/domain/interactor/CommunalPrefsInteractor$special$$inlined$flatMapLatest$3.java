@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalPrefsInteractor$special$$inlined$flatMapLatest$3 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -41,9 +40,9 @@ public final class CommunalPrefsInteractor$special$$inlined$flatMapLatest$3 exte
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            Flow readKeyForUser = ((CommunalPrefsRepositoryImpl) this.this$0.repository).readKeyForUser((UserInfo) this.L$1, "dream_button_tooltip_dismissed_state");
+            Flow keyForUser = ((CommunalPrefsRepositoryImpl) this.this$0.repository).readKeyForUser((UserInfo) this.L$1, "dream_button_tooltip_dismissed_state");
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, readKeyForUser, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, keyForUser, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

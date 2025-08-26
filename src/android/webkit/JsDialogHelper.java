@@ -65,7 +65,7 @@ public class JsDialogHelper {
 
     public void showDialog(Context context) {
         String jsDialogTitle;
-        String str;
+        String string;
         int i;
         int i2;
         if (!canShowAlertDialog(context)) {
@@ -75,12 +75,12 @@ public class JsDialogHelper {
         }
         if (this.mType == 4) {
             jsDialogTitle = context.getString(R.string.js_dialog_before_unload_title);
-            str = context.getString(R.string.js_dialog_before_unload, this.mMessage);
+            string = context.getString(R.string.js_dialog_before_unload, this.mMessage);
             i = R.string.js_dialog_before_unload_positive_button;
             i2 = R.string.js_dialog_before_unload_negative_button;
         } else {
             jsDialogTitle = getJsDialogTitle(context);
-            str = this.mMessage;
+            string = this.mMessage;
             i = 17039370;
             i2 = 17039360;
         }
@@ -88,15 +88,15 @@ public class JsDialogHelper {
         builder.setTitle(jsDialogTitle);
         builder.setOnCancelListener(new CancelListener());
         if (this.mType != 3) {
-            builder.setMessage(str);
+            builder.setMessage(string);
             builder.setPositiveButton(i, new PositiveListener(null));
         } else {
-            View inflate = LayoutInflater.from(context).inflate(R.layout.js_prompt, (ViewGroup) null);
-            EditText editText = (EditText) inflate.findViewById(R.id.value);
+            View viewInflate = LayoutInflater.from(context).inflate(R.layout.js_prompt, (ViewGroup) null);
+            EditText editText = (EditText) viewInflate.findViewById(R.id.value);
             editText.lambda$setTextAsync$0(this.mDefaultValue);
             builder.setPositiveButton(i, new PositiveListener(editText));
-            ((TextView) inflate.findViewById(16908299)).lambda$setTextAsync$0(this.mMessage);
-            builder.setView(inflate);
+            ((TextView) viewInflate.findViewById(16908299)).lambda$setTextAsync$0(this.mMessage);
+            builder.setView(viewInflate);
         }
         if (this.mType != 1) {
             builder.setNegativeButton(i2, new CancelListener());

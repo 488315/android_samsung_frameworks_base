@@ -81,6 +81,7 @@ public final class AppOpEnums {
     public static final int APP_OP_PICTURE_IN_PICTURE = 67;
     public static final int APP_OP_PLAY_AUDIO = 28;
     public static final int APP_OP_POST_NOTIFICATION = 11;
+    public static final int APP_OP_POST_PROMOTED_NOTIFICATIONS = 163;
     public static final int APP_OP_PROCESS_OUTGOING_CALLS = 54;
     public static final int APP_OP_PROJECT_MEDIA = 46;
     public static final int APP_OP_QUERY_ALL_PACKAGES = 91;
@@ -134,6 +135,7 @@ public final class AppOpEnums {
     public static final int APP_OP_SMS_FINANCIAL_TRANSACTIONS = 80;
     public static final int APP_OP_START_FOREGROUND = 76;
     public static final int APP_OP_SYSTEM_ALERT_WINDOW = 24;
+    public static final int APP_OP_SYSTEM_APPLICATION_OVERLAY = 164;
     public static final int APP_OP_SYSTEM_EXEMPT_FROM_ACTIVITY_BG_START_RESTRICTION = 130;
     public static final int APP_OP_SYSTEM_EXEMPT_FROM_DISMISSIBLE_NOTIFICATIONS = 125;
     public static final int APP_OP_SYSTEM_EXEMPT_FROM_HIBERNATION = 129;

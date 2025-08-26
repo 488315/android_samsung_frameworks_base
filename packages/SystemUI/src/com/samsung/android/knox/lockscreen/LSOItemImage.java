@@ -3,7 +3,6 @@ package com.samsung.android.knox.lockscreen;
 import android.os.Parcel;
 import android.widget.ImageView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LSOItemImage extends LSOItemData {
     public static final int LSO_FIELD_IMAGE_PATH = 128;
@@ -28,9 +27,9 @@ public class LSOItemImage extends LSOItemData {
     }
 
     public ImageView.ScaleType getScaleType() {
-        ImageView.ScaleType[] values = ImageView.ScaleType.values();
+        ImageView.ScaleType[] scaleTypeArrValues = ImageView.ScaleType.values();
         int i = this.scaleType;
-        return (i < 0 || i >= values.length) ? ImageView.ScaleType.CENTER : values[i];
+        return (i < 0 || i >= scaleTypeArrValues.length) ? ImageView.ScaleType.CENTER : scaleTypeArrValues[i];
     }
 
     public int getScaleTypeAsInteger() {

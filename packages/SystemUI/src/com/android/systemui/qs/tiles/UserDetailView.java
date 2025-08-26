@@ -31,11 +31,9 @@ import com.android.systemui.user.ui.dialog.DialogShowerImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class UserDetailView extends PseudoGridView {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Adapter extends BaseUserSwitcherAdapter implements View.OnClickListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final Context mContext;
@@ -81,20 +79,20 @@ public class UserDetailView extends PseudoGridView {
             }
             userDetailItemView.setClickable(true);
             String userRecordName = LegacyUserUiHelper.getUserRecordName(this.mContext, userRecord, this.controller.getMUserSwitcherInteractor().isGuestUserAutoCreated, this.controller.getMUserSwitcherInteractor().isGuestUserResetting);
-            boolean supportsMultipleUsers = UserManager.supportsMultipleUsers();
+            boolean zSupportsMultipleUsers = UserManager.supportsMultipleUsers();
             int i3 = -10000;
             boolean z3 = userRecord.isSwitchToEnabled;
             boolean z4 = userRecord.isCurrent;
-            if (supportsMultipleUsers) {
+            if (zSupportsMultipleUsers) {
                 Bitmap bitmap = userRecord.picture;
                 if (bitmap == null) {
-                    Bitmap convertToBitmap = UserIcons.convertToBitmap(BaseUserSwitcherAdapter.getIconDrawable(this.mContext, userRecord));
+                    Bitmap bitmapConvertToBitmap = UserIcons.convertToBitmap(BaseUserSwitcherAdapter.getIconDrawable(this.mContext, userRecord));
                     if (!z2 && (userInfo2 = userRecord.info) != null) {
                         i3 = userInfo2.id;
                     }
                     userDetailItemView.mName.setText(userRecordName);
                     UserAvatarView userAvatarView = userDetailItemView.mAvatar;
-                    userAvatarView.mDrawable.setIcon(convertToBitmap);
+                    userAvatarView.mDrawable.setIcon(bitmapConvertToBitmap);
                     userAvatarView.mDrawable.setBadgeIfManagedUser(i3, userAvatarView.getContext());
                 } else {
                     int i4 = userRecord.info.id;
@@ -107,11 +105,11 @@ public class UserDetailView extends PseudoGridView {
                 Context context2 = this.mContext;
                 Drawable iconDrawable = BaseUserSwitcherAdapter.getIconDrawable(context2, userRecord);
                 iconDrawable.setTint(context2.getResources().getColor(z4 ? R.color.qs_user_switcher_selected_avatar_icon_color : !z3 ? R.color.GM2_grey_600 : R.color.qs_user_switcher_avatar_icon_color, context2.getTheme()));
-                Drawable mutate = new LayerDrawable(new Drawable[]{context2.getDrawable(z4 ? R.drawable.bg_avatar_selected : R.drawable.qs_bg_avatar), iconDrawable}).mutate();
+                Drawable drawableMutate = new LayerDrawable(new Drawable[]{context2.getDrawable(z4 ? R.drawable.bg_avatar_selected : R.drawable.qs_bg_avatar), iconDrawable}).mutate();
                 if (!z2 && (userInfo = userRecord.info) != null) {
                     i3 = userInfo.id;
                 }
-                userDetailItemView.bind(userRecordName, mutate, i3);
+                userDetailItemView.bind(userRecordName, drawableMutate, i3);
             } else {
                 CircleFramedDrawable circleFramedDrawable = new CircleFramedDrawable(userRecord.picture, (int) this.mContext.getResources().getDimension(R.dimen.qs_framed_avatar_size));
                 if (!z3) {

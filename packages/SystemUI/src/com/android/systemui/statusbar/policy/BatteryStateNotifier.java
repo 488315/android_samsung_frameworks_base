@@ -13,7 +13,6 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BatteryStateNotifier implements BatteryController.BatteryStateChangeCallback {
     public final Context context;
@@ -36,7 +35,7 @@ public final class BatteryStateNotifier implements BatteryController.BatteryStat
             final Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.policy.BatteryStateNotifier$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    BatteryStateNotifier batteryStateNotifier = BatteryStateNotifier.this;
+                    BatteryStateNotifier batteryStateNotifier = this.f$0;
                     if (!batteryStateNotifier.stateUnknown) {
                         batteryStateNotifier.noMan.cancel(666);
                     }
@@ -46,7 +45,7 @@ public final class BatteryStateNotifier implements BatteryController.BatteryStat
             this.delayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.policy.BatteryStateNotifierKt$sam$java_lang_Runnable$0
                 @Override // java.lang.Runnable
                 public final /* synthetic */ void run() {
-                    Function0.this.invoke();
+                    function0.invoke();
                 }
             }, 14400000L);
         } else {

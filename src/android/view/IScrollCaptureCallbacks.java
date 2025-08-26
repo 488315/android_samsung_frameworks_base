@@ -59,9 +59,9 @@ public interface IScrollCaptureCallbacks extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IScrollCaptureCallbacks.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IScrollCaptureCallbacks)) {
-                return (IScrollCaptureCallbacks) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IScrollCaptureCallbacks.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IScrollCaptureCallbacks)) {
+                return (IScrollCaptureCallbacks) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,10 +96,10 @@ public interface IScrollCaptureCallbacks extends IInterface {
             if (i == 1) {
                 onCaptureStarted();
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
                 parcel.enforceNoDataAvail();
-                onImageRequestCompleted(readInt, rect);
+                onImageRequestCompleted(i3, rect);
             } else if (i == 3) {
                 onCaptureEnded();
             } else {
@@ -126,36 +126,36 @@ public interface IScrollCaptureCallbacks extends IInterface {
 
             @Override // android.view.IScrollCaptureCallbacks
             public void onCaptureStarted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IScrollCaptureCallbacks.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IScrollCaptureCallbacks.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IScrollCaptureCallbacks
             public void onImageRequestCompleted(int i, Rect rect) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IScrollCaptureCallbacks.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(rect, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IScrollCaptureCallbacks.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IScrollCaptureCallbacks
             public void onCaptureEnded() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IScrollCaptureCallbacks.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IScrollCaptureCallbacks.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

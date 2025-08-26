@@ -15,7 +15,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.reflect.KProperty;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ParseableCommand implements Command {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
@@ -25,7 +24,6 @@ public abstract class ParseableCommand implements Command {
     public final String name;
     public final CommandParser parser;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -56,7 +54,7 @@ public abstract class ParseableCommand implements Command {
         KProperty[] kPropertyArr;
         CommandParser commandParser = this.parser;
         try {
-            boolean parse = commandParser.parse(list);
+            boolean z = commandParser.parse(list);
             List list2 = commandParser.subCommands;
             ArrayList arrayList = new ArrayList();
             ArrayList arrayList2 = (ArrayList) list2;
@@ -99,7 +97,7 @@ public abstract class ParseableCommand implements Command {
                 }
                 return;
             }
-            if (parse) {
+            if (z) {
                 execute(printWriter);
                 return;
             }
@@ -166,18 +164,18 @@ public abstract class ParseableCommand implements Command {
         if (str.startsWith("-")) {
             throw new IllegalArgumentException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Flags must not start with '-'. Got $(", str, ")"));
         }
-        String concat = str2 != null ? "-".concat(str2) : null;
-        String concat2 = "--".concat(str);
+        String strConcat = str2 != null ? "-".concat(str2) : null;
+        String strConcat2 = "--".concat(str);
         CommandParser commandParser = this.parser;
-        String checkCliNames = commandParser.checkCliNames(concat, concat2);
-        if (checkCliNames != null) {
-            throw new IllegalArgumentException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Detected reused flag name (", checkCliNames, ")"));
+        String strCheckCliNames = commandParser.checkCliNames(strConcat, strConcat2);
+        if (strCheckCliNames != null) {
+            throw new IllegalArgumentException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Detected reused flag name (", strCheckCliNames, ")"));
         }
-        if (concat != null) {
-            commandParser.tokenSet.add(concat);
+        if (strConcat != null) {
+            commandParser.tokenSet.add(strConcat);
         }
-        commandParser.tokenSet.add(concat2);
-        Flag flag = new Flag(concat, concat2, str3);
+        commandParser.tokenSet.add(strConcat2);
+        Flag flag = new Flag(strConcat, strConcat2, str3);
         ((ArrayList) commandParser._flags).add(flag);
         return flag;
     }
@@ -234,9 +232,9 @@ public abstract class ParseableCommand implements Command {
         Pair pair = new Pair(arrayList2, arrayList3);
         List list2 = (List) pair.component1();
         List list3 = (List) pair.component2();
-        boolean isEmpty = list2.isEmpty();
+        boolean zIsEmpty = list2.isEmpty();
         Companion companion = Companion;
-        if (!isEmpty) {
+        if (!zIsEmpty) {
             indentingPrintWriter.println("REQUIRED PARAMS:");
             companion.getClass();
             indentingPrintWriter.increaseIndent();
@@ -315,18 +313,18 @@ public abstract class ParseableCommand implements Command {
         if (str.startsWith("-")) {
             throw new IllegalArgumentException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Parameters must not start with '-'. Got $(", str, ")"));
         }
-        String concat = str2 != null ? "-".concat(str2) : null;
-        String concat2 = "--".concat(str);
+        String strConcat = str2 != null ? "-".concat(str2) : null;
+        String strConcat2 = "--".concat(str);
         CommandParser commandParser = this.parser;
-        String checkCliNames = commandParser.checkCliNames(concat, concat2);
-        if (checkCliNames != null) {
-            throw new IllegalArgumentException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Detected reused param name (", checkCliNames, ")"));
+        String strCheckCliNames = commandParser.checkCliNames(strConcat, strConcat2);
+        if (strCheckCliNames != null) {
+            throw new IllegalArgumentException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Detected reused param name (", strCheckCliNames, ")"));
         }
-        if (concat != null) {
-            commandParser.tokenSet.add(concat);
+        if (strConcat != null) {
+            commandParser.tokenSet.add(strConcat);
         }
-        commandParser.tokenSet.add(concat2);
-        SingleArgParamOptional singleArgParamOptional = new SingleArgParamOptional(concat2, concat, str3, valueParser);
+        commandParser.tokenSet.add(strConcat2);
+        SingleArgParamOptional singleArgParamOptional = new SingleArgParamOptional(strConcat2, strConcat, str3, valueParser);
         ((ArrayList) commandParser._params).add(singleArgParamOptional);
         return singleArgParamOptional;
     }
@@ -345,9 +343,9 @@ public abstract class ParseableCommand implements Command {
         CommandParser commandParser = this.parser;
         commandParser.getClass();
         String str = parseableCommand.name;
-        String checkCliNames = commandParser.checkCliNames(null, str);
-        if (checkCliNames != null) {
-            throw new IllegalArgumentException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Cannot re-use name for subcommand (", checkCliNames, ")"));
+        String strCheckCliNames = commandParser.checkCliNames(null, str);
+        if (strCheckCliNames != null) {
+            throw new IllegalArgumentException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Cannot re-use name for subcommand (", strCheckCliNames, ")"));
         }
         if (!((ArrayList) parseableCommand.parser.subCommands).isEmpty()) {
             throw new IllegalArgumentException("SubCommands may not contain other SubCommands. " + parseableCommand);

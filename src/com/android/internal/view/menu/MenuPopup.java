@@ -70,8 +70,8 @@ public abstract class MenuPopup implements ShowableListMenu, MenuPresenter, Adap
     }
 
     protected static int measureIndividualMenuWidth(ListAdapter listAdapter, ViewGroup viewGroup, Context context, int i) {
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-        int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(0, 0);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+        int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(0, 0);
         int count = listAdapter.getCount();
         int i2 = 0;
         int i3 = 0;
@@ -86,7 +86,7 @@ public abstract class MenuPopup implements ShowableListMenu, MenuPresenter, Adap
                 viewGroup = new FrameLayout(context);
             }
             view = listAdapter.getView(i4, view, viewGroup);
-            view.measure(makeMeasureSpec, makeMeasureSpec2);
+            view.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
             int measuredWidth = view.getMeasuredWidth();
             if (measuredWidth >= i) {
                 return i;

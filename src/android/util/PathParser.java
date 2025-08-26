@@ -69,9 +69,9 @@ public class PathParser {
 
         public PathData(String str) {
             this.mNativePathData = 0L;
-            long nCreatePathDataFromString = PathParser.nCreatePathDataFromString(str, str.length());
-            this.mNativePathData = nCreatePathDataFromString;
-            if (nCreatePathDataFromString != 0) {
+            long jNCreatePathDataFromString = PathParser.nCreatePathDataFromString(str, str.length());
+            this.mNativePathData = jNCreatePathDataFromString;
+            if (jNCreatePathDataFromString != 0) {
                 return;
             }
             throw new IllegalArgumentException("Invalid pathData: " + str);

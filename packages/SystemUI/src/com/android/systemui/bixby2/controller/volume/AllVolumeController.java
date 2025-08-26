@@ -10,7 +10,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AllVolumeController extends VolumeType {
     public static final int $stable = 8;
@@ -23,43 +22,33 @@ public final class AllVolumeController extends VolumeType {
         this.audioManagerWrapper$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.bixby2.controller.volume.AllVolumeController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                AudioManagerWrapper audioManagerWrapper_delegate$lambda$0;
-                SharedPreferences.Editor editor_delegate$lambda$2;
                 int i2 = i;
                 Object obj = context;
                 switch (i2) {
                     case 0:
-                        audioManagerWrapper_delegate$lambda$0 = AllVolumeController.audioManagerWrapper_delegate$lambda$0((Context) obj);
-                        return audioManagerWrapper_delegate$lambda$0;
+                        return AllVolumeController.audioManagerWrapper_delegate$lambda$0((Context) obj);
                     default:
-                        editor_delegate$lambda$2 = AllVolumeController.editor_delegate$lambda$2((AllVolumeController) obj);
-                        return editor_delegate$lambda$2;
+                        return AllVolumeController.editor_delegate$lambda$2((AllVolumeController) obj);
                 }
             }
         });
         this.preferences$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.bixby2.controller.volume.AllVolumeController$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                SharedPreferences sharedPreferences;
-                sharedPreferences = AllVolumeController.this.getSharedPreferences(context);
-                return sharedPreferences;
+                return this.f$0.getSharedPreferences(context);
             }
         });
         final int i2 = 1;
         this.editor$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.bixby2.controller.volume.AllVolumeController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                AudioManagerWrapper audioManagerWrapper_delegate$lambda$0;
-                SharedPreferences.Editor editor_delegate$lambda$2;
                 int i22 = i2;
                 Object obj = this;
                 switch (i22) {
                     case 0:
-                        audioManagerWrapper_delegate$lambda$0 = AllVolumeController.audioManagerWrapper_delegate$lambda$0((Context) obj);
-                        return audioManagerWrapper_delegate$lambda$0;
+                        return AllVolumeController.audioManagerWrapper_delegate$lambda$0((Context) obj);
                     default:
-                        editor_delegate$lambda$2 = AllVolumeController.editor_delegate$lambda$2((AllVolumeController) obj);
-                        return editor_delegate$lambda$2;
+                        return AllVolumeController.editor_delegate$lambda$2((AllVolumeController) obj);
                 }
             }
         });
@@ -97,13 +86,13 @@ public final class AllVolumeController extends VolumeType {
     }
 
     private final int loadStreamVolume(String str) {
-        int i = getPreferences().getInt(str, 0);
-        if (i == 0) {
-            i = (int) (getMaxVolume() * 0.3f);
+        int maxVolume = getPreferences().getInt(str, 0);
+        if (maxVolume == 0) {
+            maxVolume = (int) (getMaxVolume() * 0.3f);
         }
         getEditor().putInt(str, 0);
         getEditor().apply();
-        return i;
+        return maxVolume;
     }
 
     private final void saveStreamVolume(String str, int i) {

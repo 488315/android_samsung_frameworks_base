@@ -11,7 +11,6 @@ import kotlin.Unit;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BringIntoViewOnScreenResponderNode extends Modifier.Node implements BringIntoViewModifierNode {
     public ViewGroup view;
@@ -22,11 +21,11 @@ final class BringIntoViewOnScreenResponderNode extends Modifier.Node implements 
 
     @Override // androidx.compose.ui.relocation.BringIntoViewModifierNode
     public final Object bringIntoView(NodeCoordinator nodeCoordinator, Function0 function0, ContinuationImpl continuationImpl) {
-        long positionInRoot = LayoutCoordinatesKt.positionInRoot(nodeCoordinator);
+        long jPositionInRoot = LayoutCoordinatesKt.positionInRoot(nodeCoordinator);
         Rect rect = (Rect) function0.invoke();
-        Rect m410translatek4lQ0M = rect != null ? rect.m410translatek4lQ0M(positionInRoot) : null;
-        if (m410translatek4lQ0M != null) {
-            this.view.requestRectangleOnScreen(RectHelper_androidKt.toAndroidRect(m410translatek4lQ0M), false);
+        Rect rectM412translatek4lQ0M = rect != null ? rect.m412translatek4lQ0M(jPositionInRoot) : null;
+        if (rectM412translatek4lQ0M != null) {
+            this.view.requestRectangleOnScreen(RectHelper_androidKt.toAndroidRect(rectM412translatek4lQ0M), false);
         }
         return Unit.INSTANCE;
     }

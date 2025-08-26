@@ -3,5 +3,5 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <ImageView android:gravity="center" android:layout_gravity="center" android:id="@id/icon" android:layout_width="48.0dip" android:layout_height="48.0dip" />
-    <ImageView android:layout_gravity="bottom|center|right" android:id="@id/work_widget_badge_icon" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:layout_marginBottom="12.0dip" android:src="@drawable/ic_corp_badge_off" />
+    <ImageView android:layout_gravity="right|bottom" android:id="@id/work_widget_badge_icon" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:layout_marginBottom="12.0dip" android:src="@drawable/ic_corp_badge_off" />
 </FrameLayout>

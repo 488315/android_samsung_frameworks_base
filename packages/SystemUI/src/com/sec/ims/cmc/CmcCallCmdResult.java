@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CmcCallCmdResult implements Parcelable {
     public static final Parcelable.Creator<CmcCallCmdResult> CREATOR = new Parcelable.Creator<CmcCallCmdResult>() { // from class: com.sec.ims.cmc.CmcCallCmdResult.1
@@ -30,7 +29,6 @@ public class CmcCallCmdResult implements Parcelable {
     private int mCallId;
     private int mCmdResult;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         protected int mCallId;
         protected int mCmdResult;

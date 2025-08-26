@@ -44,9 +44,9 @@ public interface IServiceListSetChannelListListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.servicedb.IServiceListSetChannelListListener");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IServiceListSetChannelListListener)) {
-                return (IServiceListSetChannelListListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.servicedb.IServiceListSetChannelListListener");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IServiceListSetChannelListListener)) {
+                return (IServiceListSetChannelListListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IServiceListSetChannelListListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCompleted(readInt);
+                onCompleted(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface IServiceListSetChannelListListener extends IInterface {
 
             @Override // android.media.tv.extension.servicedb.IServiceListSetChannelListListener
             public void onCompleted(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListSetChannelListListener");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListSetChannelListListener");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

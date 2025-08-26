@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class TakeScreenshotExecutorImpl$executeScreenshotsAsync$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Consumer<Uri> $onSaved;
@@ -55,7 +54,7 @@ final class TakeScreenshotExecutorImpl$executeScreenshotsAsync$1 extends Suspend
             ?? r4 = new Function1() { // from class: com.android.systemui.screenshot.TakeScreenshotExecutorImpl$executeScreenshotsAsync$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     consumer.accept((Uri) obj2);
                     return Unit.INSTANCE;
                 }

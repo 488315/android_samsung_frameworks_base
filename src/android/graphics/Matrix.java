@@ -329,15 +329,15 @@ public class Matrix {
     }
 
     public Matrix() {
-        long nCreate = ExtraNatives.nCreate(0L);
-        this.native_instance = nCreate;
-        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, nCreate);
+        long jNCreate = ExtraNatives.nCreate(0L);
+        this.native_instance = jNCreate;
+        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, jNCreate);
     }
 
     public Matrix(Matrix matrix) {
-        long nCreate = ExtraNatives.nCreate(matrix != null ? matrix.native_instance : 0L);
-        this.native_instance = nCreate;
-        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, nCreate);
+        long jNCreate = ExtraNatives.nCreate(matrix != null ? matrix.native_instance : 0L);
+        this.native_instance = jNCreate;
+        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, jNCreate);
     }
 
     public boolean isIdentity() {

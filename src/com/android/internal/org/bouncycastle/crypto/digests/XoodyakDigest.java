@@ -75,10 +75,10 @@ public class XoodyakDigest implements Digest {
             if (this.phase != 2) {
                 Up(null, 0, 0, 0);
             }
-            int min = Math.min(size, this.Rabsorb);
-            Down(byteArray, i3, min, i2);
-            i3 += min;
-            size -= min;
+            int iMin = Math.min(size, this.Rabsorb);
+            Down(byteArray, i3, iMin, i2);
+            i3 += iMin;
+            size -= iMin;
             if (size == 0) {
                 Up(bArr, i, 16, 64);
                 Down(null, 0, 0, 0);
@@ -126,8 +126,8 @@ public class XoodyakDigest implements Digest {
             }
             for (int i10 = 0; i10 < 4; i10++) {
                 for (int i11 = 0; i11 < 3; i11++) {
-                    int index = index(i10, i11);
-                    iArr[index] = iArr[index] ^ iArr4[i10];
+                    int iIndex = index(i10, i11);
+                    iArr[iIndex] = iArr[iIndex] ^ iArr4[i10];
                 }
             }
             for (int i12 = 0; i12 < 4; i12++) {

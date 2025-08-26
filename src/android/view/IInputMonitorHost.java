@@ -51,9 +51,9 @@ public interface IInputMonitorHost extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInputMonitorHost.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInputMonitorHost)) {
-                return (IInputMonitorHost) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInputMonitorHost.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInputMonitorHost)) {
+                return (IInputMonitorHost) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -110,23 +110,23 @@ public interface IInputMonitorHost extends IInterface {
 
             @Override // android.view.IInputMonitorHost
             public void pilferPointers() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMonitorHost.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMonitorHost.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IInputMonitorHost
             public void dispose() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMonitorHost.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMonitorHost.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

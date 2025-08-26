@@ -74,9 +74,9 @@ public interface IIAFTManagerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIAFTManagerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIAFTManagerService)) {
-                return (IIAFTManagerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIAFTManagerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIAFTManagerService)) {
+                return (IIAFTManagerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -115,11 +115,11 @@ public interface IIAFTManagerService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                startAtraceAndAnalyze(readInt, readString, readInt2);
+                startAtraceAndAnalyze(i3, string, i4);
                 parcel2.writeNoException();
             } else if (i == 2) {
                 startAtrace();
@@ -128,14 +128,14 @@ public interface IIAFTManagerService extends IInterface {
                 stopTrace();
                 parcel2.writeNoException();
             } else if (i == 4) {
-                IIAFTCallback asInterface = IIAFTCallback.Stub.asInterface(parcel.readStrongBinder());
+                IIAFTCallback iIAFTCallbackAsInterface = IIAFTCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerCallback(asInterface);
+                registerCallback(iIAFTCallbackAsInterface);
                 parcel2.writeNoException();
             } else if (i == 5) {
-                boolean traceLogSupported = traceLogSupported();
+                boolean zTraceLogSupported = traceLogSupported();
                 parcel2.writeNoException();
-                parcel2.writeBoolean(traceLogSupported);
+                parcel2.writeBoolean(zTraceLogSupported);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -160,76 +160,76 @@ public interface IIAFTManagerService extends IInterface {
 
             @Override // com.sec.android.iaft.IIAFTManagerService
             public void startAtraceAndAnalyze(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIAFTManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIAFTManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.iaft.IIAFTManagerService
             public void startAtrace() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIAFTManagerService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIAFTManagerService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.iaft.IIAFTManagerService
             public void stopTrace() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIAFTManagerService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIAFTManagerService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.iaft.IIAFTManagerService
             public void registerCallback(IIAFTCallback iIAFTCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIAFTManagerService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iIAFTCallback);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIAFTManagerService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iIAFTCallback);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.android.iaft.IIAFTManagerService
             public boolean traceLogSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIAFTManagerService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIAFTManagerService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

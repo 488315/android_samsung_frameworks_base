@@ -85,7 +85,7 @@ public class CaptureFrameThread extends Thread {
 
     @Override // java.lang.Thread, java.lang.Runnable
     public void run() {
-        CaptureFrameTask poll;
+        CaptureFrameTask captureFrameTaskPoll;
         while (this.isRunning) {
             synchronized (this.queue) {
                 while (this.queue.isEmpty()) {
@@ -96,22 +96,22 @@ public class CaptureFrameThread extends Thread {
                         return;
                     }
                 }
-                poll = this.queue.poll();
+                captureFrameTaskPoll = this.queue.poll();
             }
-            if (poll != null) {
-                if (poll.getCaptureType() == CaptureFrameTask.CaptureType.ORIGINAL_FRAME) {
-                    this.handler.sendMessage(this.handler.obtainMessage(-1, new CaptureInfo(poll.getOutputWidth(), poll.getOutputHeight(), poll.getListener(), this.context.getNativeInterface().captureLatestFrame(poll.getOutputWidth(), poll.getOutputHeight()))));
-                } else if (poll.getCaptureType() == CaptureFrameTask.CaptureType.RENDERED_FRAME) {
-                    this.handler.sendMessage(this.handler.obtainMessage(poll.getItem().getId(), new CaptureInfo(poll.getOutputWidth(), poll.getOutputHeight(), poll.getListener(), this.context.getNativeInterface().captureAnimatedFrame(poll.getItem(), poll.getOutputWidth(), poll.getOutputHeight()))));
+            if (captureFrameTaskPoll != null) {
+                if (captureFrameTaskPoll.getCaptureType() == CaptureFrameTask.CaptureType.ORIGINAL_FRAME) {
+                    this.handler.sendMessage(this.handler.obtainMessage(-1, new CaptureInfo(captureFrameTaskPoll.getOutputWidth(), captureFrameTaskPoll.getOutputHeight(), captureFrameTaskPoll.getListener(), this.context.getNativeInterface().captureLatestFrame(captureFrameTaskPoll.getOutputWidth(), captureFrameTaskPoll.getOutputHeight()))));
+                } else if (captureFrameTaskPoll.getCaptureType() == CaptureFrameTask.CaptureType.RENDERED_FRAME) {
+                    this.handler.sendMessage(this.handler.obtainMessage(captureFrameTaskPoll.getItem().getId(), new CaptureInfo(captureFrameTaskPoll.getOutputWidth(), captureFrameTaskPoll.getOutputHeight(), captureFrameTaskPoll.getListener(), this.context.getNativeInterface().captureAnimatedFrame(captureFrameTaskPoll.getItem(), captureFrameTaskPoll.getOutputWidth(), captureFrameTaskPoll.getOutputHeight()))));
                 } else {
-                    Bitmap captureSuperHDRFrame = this.context.getNativeInterface().captureSuperHDRFrame(poll.getItem(), poll.getOutputWidth(), poll.getOutputHeight(), poll.getOutputCenterX(), poll.getOutputCenterY());
-                    int id = poll.getItem() != null ? poll.getItem().getId() : -1;
-                    if (captureSuperHDRFrame != null && !captureSuperHDRFrame.isRecycled()) {
+                    Bitmap bitmapCaptureSuperHDRFrame = this.context.getNativeInterface().captureSuperHDRFrame(captureFrameTaskPoll.getItem(), captureFrameTaskPoll.getOutputWidth(), captureFrameTaskPoll.getOutputHeight(), captureFrameTaskPoll.getOutputCenterX(), captureFrameTaskPoll.getOutputCenterY());
+                    int id = captureFrameTaskPoll.getItem() != null ? captureFrameTaskPoll.getItem().getId() : -1;
+                    if (bitmapCaptureSuperHDRFrame != null && !bitmapCaptureSuperHDRFrame.isRecycled()) {
                         Matrix matrix = new Matrix();
-                        matrix.postScale(1.0f, -1.0f, captureSuperHDRFrame.getWidth() / 2.0f, captureSuperHDRFrame.getHeight() / 2.0f);
-                        captureSuperHDRFrame = Bitmap.createBitmap(captureSuperHDRFrame, 0, 0, captureSuperHDRFrame.getWidth(), captureSuperHDRFrame.getHeight(), matrix, true);
+                        matrix.postScale(1.0f, -1.0f, bitmapCaptureSuperHDRFrame.getWidth() / 2.0f, bitmapCaptureSuperHDRFrame.getHeight() / 2.0f);
+                        bitmapCaptureSuperHDRFrame = Bitmap.createBitmap(bitmapCaptureSuperHDRFrame, 0, 0, bitmapCaptureSuperHDRFrame.getWidth(), bitmapCaptureSuperHDRFrame.getHeight(), matrix, true);
                     }
-                    this.handler.sendMessage(this.handler.obtainMessage(id, new CaptureInfo(poll.getOutputWidth(), poll.getOutputHeight(), poll.getListener(), captureSuperHDRFrame)));
+                    this.handler.sendMessage(this.handler.obtainMessage(id, new CaptureInfo(captureFrameTaskPoll.getOutputWidth(), captureFrameTaskPoll.getOutputHeight(), captureFrameTaskPoll.getListener(), bitmapCaptureSuperHDRFrame)));
                 }
             }
         }

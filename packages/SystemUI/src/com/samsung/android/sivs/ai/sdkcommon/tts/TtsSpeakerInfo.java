@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TtsSpeakerInfo implements Parcelable {
     public static final Parcelable.Creator<TtsSpeakerInfo> CREATOR = new Parcelable.Creator<TtsSpeakerInfo>() { // from class: com.samsung.android.sivs.ai.sdkcommon.tts.TtsSpeakerInfo.1

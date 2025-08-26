@@ -11,7 +11,6 @@ import com.android.wm.shell.common.pip.PipAppOpsListener;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PipAppOpsListener {
     public final AppOpsManager mAppOpsManager;
@@ -25,33 +24,32 @@ public final class PipAppOpsListener {
             PipAppOpsListener pipAppOpsListener;
             final PipAppOpsListener.Callback callback;
             try {
-                PipAppOpsListener pipAppOpsListener2 = PipAppOpsListener.this;
-                Pair pair = (Pair) pipAppOpsListener2.mTopPipActivityInfoSupplier.mo779invoke(pipAppOpsListener2.mContext);
+                PipAppOpsListener pipAppOpsListener2 = this.this$0;
+                Pair pair = (Pair) pipAppOpsListener2.mTopPipActivityInfoSupplier.mo781invoke(pipAppOpsListener2.mContext);
                 ComponentName componentName = (ComponentName) pair.first;
                 if (componentName == null) {
                     return;
                 }
                 Integer num = (Integer) pair.second;
-                PackageManager packageManager = PipAppOpsListener.this.mContext.getPackageManager();
+                PackageManager packageManager = this.this$0.mContext.getPackageManager();
                 num.getClass();
                 ApplicationInfo applicationInfoAsUser = packageManager.getApplicationInfoAsUser(str2, 0, num.intValue());
-                if (!Intrinsics.areEqual(applicationInfoAsUser.packageName, componentName.getPackageName()) || PipAppOpsListener.this.mAppOpsManager.checkOpNoThrow(67, applicationInfoAsUser.uid, str2) == 0 || (callback = (pipAppOpsListener = PipAppOpsListener.this).mCallback) == null) {
+                if (!Intrinsics.areEqual(applicationInfoAsUser.packageName, componentName.getPackageName()) || this.this$0.mAppOpsManager.checkOpNoThrow(67, applicationInfoAsUser.uid, str2) == 0 || (callback = (pipAppOpsListener = this.this$0).mCallback) == null) {
                     return;
                 }
                 pipAppOpsListener.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.common.pip.PipAppOpsListener$mAppOpsChangedListener$1$1$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PipAppOpsListener.Callback.this.dismissPip();
+                        callback.dismissPip();
                     }
                 });
             } catch (PackageManager.NameNotFoundException unused) {
-                PipAppOpsListener pipAppOpsListener3 = PipAppOpsListener.this;
+                PipAppOpsListener pipAppOpsListener3 = this.this$0;
                 pipAppOpsListener3.mAppOpsManager.stopWatchingMode(pipAppOpsListener3.mAppOpsChangedListener);
             }
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void dismissPip();
     }

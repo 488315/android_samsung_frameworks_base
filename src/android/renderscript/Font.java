@@ -73,17 +73,17 @@ public class Font extends BaseObj {
     static String getFontFileName(String str, Style style) {
         FontFamily fontFamily = sFontFamilyMap.get(str);
         if (fontFamily != null) {
-            int ordinal = style.ordinal();
-            if (ordinal == 0) {
+            int iOrdinal = style.ordinal();
+            if (iOrdinal == 0) {
                 return fontFamily.mNormalFileName;
             }
-            if (ordinal == 1) {
+            if (iOrdinal == 1) {
                 return fontFamily.mBoldFileName;
             }
-            if (ordinal == 2) {
+            if (iOrdinal == 2) {
                 return fontFamily.mItalicFileName;
             }
-            if (ordinal == 3) {
+            if (iOrdinal == 3) {
                 return fontFamily.mBoldItalicFileName;
             }
             return "DroidSans.ttf";
@@ -96,40 +96,40 @@ public class Font extends BaseObj {
         this.guard.open("destroy");
     }
 
-    public static Font createFromFile(RenderScript renderScript, Resources resources, String str, float f) {
+    public static Font createFromFile(RenderScript renderScript, Resources resources, String str, float f) throws Throwable {
         renderScript.validate();
-        long nFontCreateFromFile = renderScript.nFontCreateFromFile(str, f, resources.getDisplayMetrics().densityDpi);
-        if (nFontCreateFromFile == 0) {
+        long jNFontCreateFromFile = renderScript.nFontCreateFromFile(str, f, resources.getDisplayMetrics().densityDpi);
+        if (jNFontCreateFromFile == 0) {
             throw new RSRuntimeException("Unable to create font from file " + str);
         }
-        return new Font(nFontCreateFromFile, renderScript);
+        return new Font(jNFontCreateFromFile, renderScript);
     }
 
     public static Font createFromFile(RenderScript renderScript, Resources resources, File file, float f) {
         return createFromFile(renderScript, resources, file.getAbsolutePath(), f);
     }
 
-    public static Font createFromAsset(RenderScript renderScript, Resources resources, String str, float f) {
+    public static Font createFromAsset(RenderScript renderScript, Resources resources, String str, float f) throws Throwable {
         renderScript.validate();
-        long nFontCreateFromAsset = renderScript.nFontCreateFromAsset(resources.getAssets(), str, f, resources.getDisplayMetrics().densityDpi);
-        if (nFontCreateFromAsset == 0) {
+        long jNFontCreateFromAsset = renderScript.nFontCreateFromAsset(resources.getAssets(), str, f, resources.getDisplayMetrics().densityDpi);
+        if (jNFontCreateFromAsset == 0) {
             throw new RSRuntimeException("Unable to create font from asset " + str);
         }
-        return new Font(nFontCreateFromAsset, renderScript);
+        return new Font(jNFontCreateFromAsset, renderScript);
     }
 
-    public static Font createFromResource(RenderScript renderScript, Resources resources, int i, float f) {
+    public static Font createFromResource(RenderScript renderScript, Resources resources, int i, float f) throws Throwable {
         String str = "R." + Integer.toString(i);
         renderScript.validate();
         try {
-            InputStream openRawResource = resources.openRawResource(i);
+            InputStream inputStreamOpenRawResource = resources.openRawResource(i);
             int i2 = resources.getDisplayMetrics().densityDpi;
-            if (openRawResource instanceof AssetManager.AssetInputStream) {
-                long nFontCreateFromAssetStream = renderScript.nFontCreateFromAssetStream(str, f, i2, ((AssetManager.AssetInputStream) openRawResource).getNativeAsset());
-                if (nFontCreateFromAssetStream == 0) {
+            if (inputStreamOpenRawResource instanceof AssetManager.AssetInputStream) {
+                long jNFontCreateFromAssetStream = renderScript.nFontCreateFromAssetStream(str, f, i2, ((AssetManager.AssetInputStream) inputStreamOpenRawResource).getNativeAsset());
+                if (jNFontCreateFromAssetStream == 0) {
                     throw new RSRuntimeException("Unable to create font from resource " + i);
                 }
-                return new Font(nFontCreateFromAssetStream, renderScript);
+                return new Font(jNFontCreateFromAssetStream, renderScript);
             }
             throw new RSRuntimeException("Unsupported asset stream created");
         } catch (Exception unused) {

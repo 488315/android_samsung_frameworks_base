@@ -7,7 +7,6 @@ import android.os.UserHandle;
 import com.android.systemui.shared.system.ActivityManagerWrapper;
 import dagger.internal.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaProjectionDevicePolicyModule_PersonalUserHandleFactory implements Provider {
     public final Provider activityManagerWrapperProvider;
@@ -23,9 +22,9 @@ public final class MediaProjectionDevicePolicyModule_PersonalUserHandleFactory i
         activityManagerWrapper.getClass();
         try {
             UserInfo currentUser = ActivityManager.getService().getCurrentUser();
-            UserHandle of = UserHandle.of(currentUser != null ? currentUser.id : 0);
-            of.getClass();
-            return of;
+            UserHandle userHandleOf = UserHandle.of(currentUser != null ? currentUser.id : 0);
+            userHandleOf.getClass();
+            return userHandleOf;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

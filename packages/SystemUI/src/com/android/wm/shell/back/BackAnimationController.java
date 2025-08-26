@@ -3,6 +3,8 @@ package com.android.wm.shell.back;
 import android.app.ActivityManager;
 import android.app.ActivityTaskManager;
 import android.app.IActivityTaskManager;
+import android.app.TaskInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
@@ -32,6 +34,7 @@ import android.window.IOnBackInvokedCallback;
 import android.window.TransitionInfo;
 import android.window.TransitionRequestInfo;
 import android.window.WindowAnimationState;
+import android.window.WindowContainerToken;
 import android.window.WindowContainerTransaction;
 import com.android.internal.jank.InteractionJankMonitor;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
@@ -58,7 +61,6 @@ import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BackAnimationController implements RemoteCallable, ConfigurationChangeListener {
     public IOnBackInvokedCallback mActiveCallback;
@@ -100,7 +102,6 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
     public boolean mTrackingLatency;
     public final WindowManager mWindowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.back.BackAnimationController$1, reason: invalid class name */
     public class AnonymousClass1 implements RemoteCallback.OnResultListener {
         public AnonymousClass1() {
@@ -111,7 +112,6 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.back.BackAnimationController$3, reason: invalid class name */
     public class AnonymousClass3 extends IBackAnimationRunner.Stub {
         public AnonymousClass3() {
@@ -125,7 +125,7 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
             BackAnimationController.this.mShellExecutor.execute(new Runnable() { // from class: com.android.wm.shell.back.BackAnimationController$3$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BackAnimationController.AnonymousClass3 anonymousClass3 = BackAnimationController.AnonymousClass3.this;
+                    BackAnimationController.AnonymousClass3 anonymousClass3 = this.f$0;
                     RemoteAnimationTarget[] remoteAnimationTargetArr2 = remoteAnimationTargetArr;
                     IBackAnimationFinishedCallback iBackAnimationFinishedCallback2 = iBackAnimationFinishedCallback;
                     IBinder iBinder2 = iBinder;
@@ -154,7 +154,6 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BackAnimationImpl {
         public /* synthetic */ BackAnimationImpl(BackAnimationController backAnimationController, int i) {
             this();
@@ -164,7 +163,7 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
             BackAnimationController.this.mShellExecutor.execute(new Runnable() { // from class: com.android.wm.shell.back.BackAnimationController$BackAnimationImpl$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BackAnimationController.BackAnimationImpl backAnimationImpl = BackAnimationController.BackAnimationImpl.this;
+                    BackAnimationController.BackAnimationImpl backAnimationImpl = this.f$0;
                     float f3 = f;
                     float f4 = f2;
                     int i4 = i;
@@ -308,7 +307,7 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
             BackAnimationController.this.mShellExecutor.execute(new Runnable() { // from class: com.android.wm.shell.back.BackAnimationController$BackAnimationImpl$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BackAnimationController.BackAnimationImpl backAnimationImpl = BackAnimationController.BackAnimationImpl.this;
+                    BackAnimationController.BackAnimationImpl backAnimationImpl = this.f$0;
                     BackAnimationController.this.setTriggerBack(z);
                 }
             });
@@ -318,7 +317,6 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BackTransitionHandler implements Transitions.TransitionHandler {
         public IBinder mClosePrepareTransition;
         public boolean mCloseTransitionRequested;
@@ -391,8 +389,8 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
                 }
             }
             if (surfaceControl != null && surfaceControl2 != null) {
-                for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-                    TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+                for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+                    TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
                     if (change.hasFlags(2)) {
                         transaction.setAlpha(change.getLeash(), 1.0f);
                     } else if (TransitionUtil.isOpeningMode(change.getMode())) {
@@ -409,7 +407,7 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
             this.mOnAnimationFinishCallback = new Runnable() { // from class: com.android.wm.shell.back.BackAnimationController$BackTransitionHandler$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BackAnimationController.BackTransitionHandler backTransitionHandler = BackAnimationController.BackTransitionHandler.this;
+                    BackAnimationController.BackTransitionHandler backTransitionHandler = this.f$0;
                     SurfaceControl.Transaction transaction3 = transaction2;
                     Transitions.TransitionFinishCallback transitionFinishCallback2 = transitionFinishCallback;
                     backTransitionHandler.getClass();
@@ -444,23 +442,23 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
                 surfaceControl = null;
             }
             if (surfaceControl2 != null && surfaceControl != null) {
-                int i2 = -1;
-                for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-                    TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+                int iRootIndexFor = -1;
+                for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+                    TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
                     if (!CoreRune.FW_REMOTE_WALLPAPER_ANIM || !TransitionUtil.isWallpaper(change)) {
                         if (TransitionUtil.isOpeningMode(change.getMode())) {
                             Point endRelOffset = change.getEndRelOffset();
                             transaction.setPosition(change.getLeash(), endRelOffset.x, endRelOffset.y);
                             transaction.reparent(change.getLeash(), surfaceControl2);
                             transaction.setAlpha(change.getLeash(), 1.0f);
-                            i2 = TransitionUtil.rootIndexFor(change, transitionInfo);
+                            iRootIndexFor = TransitionUtil.rootIndexFor(change, transitionInfo);
                         } else if (change.hasFlags(131072) && change.getMode() == 6) {
                             transaction.reparent(change.getLeash(), surfaceControl);
                         }
                     }
                 }
-                if (i2 >= 0 && transitionInfo.getRootCount() > 0) {
-                    transaction.setLayer(transitionInfo.getRoot(i2).getLeash(), -1);
+                if (iRootIndexFor >= 0 && transitionInfo.getRootCount() > 0) {
+                    transaction.setLayer(transitionInfo.getRoot(iRootIndexFor).getLeash(), -1);
                 }
             }
             transaction.apply();
@@ -487,19 +485,187 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
             return null;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:133:0x01f2  */
-        /* JADX WARN: Removed duplicated region for block: B:136:0x0200 A[SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:115:0x01ef  */
+        /* JADX WARN: Removed duplicated region for block: B:117:0x01f2  */
+        /* JADX WARN: Removed duplicated region for block: B:193:0x0200 A[SYNTHETIC] */
         @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void mergeAnimation(android.os.IBinder r18, android.window.TransitionInfo r19, android.view.SurfaceControl.Transaction r20, android.view.SurfaceControl.Transaction r21, android.os.IBinder r22, com.android.wm.shell.transition.Transitions.TransitionFinishCallback r23) {
-            /*
-                Method dump skipped, instructions count: 701
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.back.BackAnimationController.BackTransitionHandler.mergeAnimation(android.os.IBinder, android.window.TransitionInfo, android.view.SurfaceControl$Transaction, android.view.SurfaceControl$Transaction, android.os.IBinder, com.android.wm.shell.transition.Transitions$TransitionFinishCallback):void");
+        public final void mergeAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, IBinder iBinder2, Transitions.TransitionFinishCallback transitionFinishCallback) {
+            int i;
+            boolean z;
+            int i2;
+            if (this.mClosePrepareTransition == iBinder) {
+                this.mClosePrepareTransition = null;
+            }
+            TransitionInfo transitionInfo2 = this.mOpenTransitionInfo;
+            if (transitionInfo2 != null) {
+                ArrayList arrayList = new ArrayList();
+                boolean z2 = false;
+                for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo2, 1); iM >= 0; iM--) {
+                    TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo2.getChanges().get(iM);
+                    if (change.hasFlags(131072) && TransitionUtil.isOpeningMode(change.getMode())) {
+                        ComponentName activityComponent = change.getActivityComponent();
+                        if (activityComponent == null) {
+                            ActivityManager.RunningTaskInfo taskInfo = change.getTaskInfo();
+                            activityComponent = taskInfo != null ? ((TaskInfo) taskInfo).topActivity : null;
+                        }
+                        ActivityManager.RunningTaskInfo taskInfo2 = change.getTaskInfo();
+                        int i3 = taskInfo2 != null ? ((TaskInfo) taskInfo2).taskId : -1;
+                        WindowContainerToken container = change.getContainer();
+                        if (activityComponent != null || i3 != -1 || container != null) {
+                            arrayList.add(change.getLeash());
+                            if (change.hasFlags(1)) {
+                                z2 = true;
+                            }
+                        }
+                    }
+                }
+                if (arrayList.isEmpty()) {
+                    Log.e("ShellBackPreview", "Unable to merge following transition, cannot find the gesture animated target from the open transition=" + this.mOpenTransitionInfo);
+                    this.mOpenTransitionInfo = null;
+                } else {
+                    int size = transitionInfo.getChanges().size();
+                    int i4 = 0;
+                    boolean zIsOpeningMode = false;
+                    while (true) {
+                        if (i4 >= size) {
+                            break;
+                        }
+                        TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(i4);
+                        if (BackAnimationController.isOpenSurfaceMatched(arrayList, change2)) {
+                            if (!change2.hasFlags(131072)) {
+                                zIsOpeningMode = TransitionUtil.isOpeningMode(change2.getMode());
+                                break;
+                            }
+                            zIsOpeningMode = !TransitionUtil.isClosingMode(change2.getMode());
+                        }
+                        i4++;
+                    }
+                    if (zIsOpeningMode) {
+                        i = 0;
+                        int size2 = transitionInfo.getChanges().size();
+                        boolean zIsClosingMode = false;
+                        boolean zIsOpeningMode2 = false;
+                        for (int i5 = 0; i5 < size2; i5++) {
+                            TransitionInfo.Change change3 = (TransitionInfo.Change) transitionInfo.getChanges().get(i5);
+                            if (!change3.hasFlags(131072)) {
+                                ComponentName activityComponent2 = change3.getActivityComponent();
+                                if (activityComponent2 == null) {
+                                    ActivityManager.RunningTaskInfo taskInfo3 = change3.getTaskInfo();
+                                    activityComponent2 = taskInfo3 != null ? ((TaskInfo) taskInfo3).topActivity : null;
+                                }
+                                if (activityComponent2 != null) {
+                                    z = true;
+                                    if (!z) {
+                                        int mode = change3.getMode();
+                                        zIsOpeningMode2 |= TransitionUtil.isOpeningMode(mode);
+                                        zIsClosingMode |= TransitionUtil.isClosingMode(mode);
+                                    }
+                                } else {
+                                    ActivityManager.RunningTaskInfo taskInfo4 = change3.getTaskInfo();
+                                    if ((taskInfo4 != null ? ((TaskInfo) taskInfo4).taskId : -1) == -1) {
+                                        z = false;
+                                    }
+                                    if (!z) {
+                                    }
+                                }
+                            }
+                        }
+                        if (zIsClosingMode && zIsOpeningMode2) {
+                            for (int iM2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM2 >= 0; iM2--) {
+                                TransitionInfo.Change change4 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM2);
+                                if (BackAnimationController.isOpenSurfaceMatched(arrayList, change4)) {
+                                    transitionInfo.getChanges().remove(iM2);
+                                } else if (z2 && change4.hasFlags(2)) {
+                                    transitionInfo.getChanges().remove(iM2);
+                                }
+                            }
+                        }
+                    } else {
+                        int iM3 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
+                        boolean z3 = false;
+                        boolean z4 = false;
+                        boolean zHasFlags = false;
+                        while (true) {
+                            i2 = 1048576;
+                            if (iM3 < 0) {
+                                break;
+                            }
+                            TransitionInfo.Change change5 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM3);
+                            if (BackAnimationController.isOpenSurfaceMatched(arrayList, change5)) {
+                                if (TransitionUtil.isClosingMode(change5.getMode())) {
+                                    z4 = true;
+                                }
+                                zHasFlags = change5.hasFlags(1048576);
+                                transitionInfo.getChanges().remove(iM3);
+                            } else if (z2 && change5.hasFlags(2)) {
+                                transitionInfo.getChanges().remove(iM3);
+                            } else if (!z3 && TransitionUtil.isClosingMode(change5.getMode())) {
+                                z3 = true;
+                            }
+                            iM3--;
+                        }
+                        if (!transitionInfo.getChanges().isEmpty() && z3) {
+                            int size3 = transitionInfo2.getChanges().size();
+                            int i6 = 0;
+                            while (i6 < size3) {
+                                TransitionInfo.Change change6 = (TransitionInfo.Change) transitionInfo2.getChanges().get(i6);
+                                if (!change6.hasFlags(2)) {
+                                    if (BackAnimationController.isOpenSurfaceMatched(arrayList, change6)) {
+                                        if (!z4) {
+                                            if (zHasFlags) {
+                                                change6.setFlags(change6.getFlags() | i2);
+                                            }
+                                        }
+                                    } else if (change6.hasFlags(131072) && change6.getMode() == 6) {
+                                        for (int iM4 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM4 >= 0; iM4--) {
+                                            TransitionInfo.Change change7 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM4);
+                                            if (!TransitionUtil.isClosingMode(change7.getMode()) || !change6.getLeash().isSameSurface(change7.getLeash())) {
+                                            }
+                                        }
+                                    }
+                                    transitionInfo.getChanges().add(i6, change6);
+                                }
+                                i6++;
+                                i2 = 1048576;
+                            }
+                        }
+                        i = 0;
+                    }
+                    if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BACK_PREVIEW_enabled[i]) {
+                        ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BACK_PREVIEW, -3009748146244340534L, i, String.valueOf(transitionInfo));
+                    }
+                    this.mOpenTransitionInfo = null;
+                }
+            }
+            int type = transitionInfo.getType();
+            BackAnimationController backAnimationController = BackAnimationController.this;
+            if (type == 14 && !this.mCloseTransitionRequested && transitionInfo.getChanges().isEmpty() && backAnimationController.mApps == null) {
+                transitionFinishCallback.onTransitionFinished(null);
+                transaction.apply();
+                applyFinishOpenTransition();
+                return;
+            }
+            if (!BackAnimationController.hasAnimationInMode(transitionInfo, new BackAnimationController$$ExternalSyntheticLambda6(0)) || shouldCancelAnimation(transitionInfo) || !this.mCloseTransitionRequested) {
+                if (this.mPrepareOpenTransition != null) {
+                    applyFinishOpenTransition();
+                    return;
+                }
+                return;
+            }
+            transitionFinishCallback.onTransitionFinished(null);
+            transaction.apply();
+            if (this.mCloseTransitionRequested) {
+                RemoteAnimationTarget[] remoteAnimationTargetArr = backAnimationController.mApps;
+                if (remoteAnimationTargetArr == null || remoteAnimationTargetArr.length == 0) {
+                    applyFinishOpenTransition();
+                    this.mCloseTransitionRequested = false;
+                } else {
+                    this.mOnAnimationFinishCallback = new BackAnimationController$3$$ExternalSyntheticLambda1(this, 1);
+                }
+            }
         }
 
         @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
@@ -517,35 +683,35 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
         }
 
         public final boolean shouldCancelAnimation(TransitionInfo transitionInfo) {
-            boolean z = false;
-            boolean z2 = !this.mCloseTransitionRequested && transitionInfo.getType() == 13;
+            boolean zHasFlags = false;
+            boolean z = !this.mCloseTransitionRequested && transitionInfo.getType() == 13;
+            boolean z2 = false;
             boolean z3 = false;
-            boolean z4 = false;
-            for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-                TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
-                boolean hasFlags = change.hasFlags(131072);
-                if (!hasFlags && !change.hasFlags(2)) {
+            for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+                TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
+                boolean zHasFlags2 = change.hasFlags(131072);
+                if (!zHasFlags2 && !change.hasFlags(2)) {
+                    z2 = true;
                     z3 = true;
-                    z4 = true;
-                } else if (z2 && hasFlags && TransitionUtil.isClosingMode(change.getMode())) {
-                    z3 = true;
+                } else if (z && zHasFlags2 && TransitionUtil.isClosingMode(change.getMode())) {
+                    z2 = true;
                 }
             }
-            if (!z3) {
+            if (!z2) {
                 return false;
             }
-            if (z4 && (TransitionUtil.isOpeningType(transitionInfo.getType()) || TransitionUtil.isClosingType(transitionInfo.getType()))) {
-                for (int m2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m2 >= 0; m2--) {
-                    TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(m2);
+            if (z3 && (TransitionUtil.isOpeningType(transitionInfo.getType()) || TransitionUtil.isClosingType(transitionInfo.getType()))) {
+                for (int iM2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM2 >= 0; iM2--) {
+                    TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM2);
                     if (change2.hasFlags(131072) && TransitionUtil.isOpeningMode(change2.getMode())) {
-                        transitionInfo.getChanges().remove(m2);
-                        z |= change2.hasFlags(1);
+                        transitionInfo.getChanges().remove(iM2);
+                        zHasFlags |= change2.hasFlags(1);
                     }
                 }
-                if (z) {
-                    for (int m3 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m3 >= 0; m3--) {
-                        if (((TransitionInfo.Change) transitionInfo.getChanges().get(m3)).hasFlags(2)) {
-                            transitionInfo.getChanges().remove(m3);
+                if (zHasFlags) {
+                    for (int iM3 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM3 >= 0; iM3--) {
+                        if (((TransitionInfo.Change) transitionInfo.getChanges().get(iM3)).hasFlags(2)) {
+                            transitionInfo.getChanges().remove(iM3);
                         }
                     }
                 }
@@ -609,7 +775,6 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BackTransitionObserver implements Transitions.TransitionObserver {
         public BackTransitionHandler mBackTransitionHandler;
         public IBinder mFocusTaskMonitorToken;
@@ -642,17 +807,17 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
             if (this.mFocusedTaskId == -1) {
                 return;
             }
-            int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
+            int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
             while (true) {
-                if (m < 0) {
+                if (iM < 0) {
                     break;
                 }
-                TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+                TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
                 if (change.getTaskInfo() != null && change.getTaskInfo().taskId == this.mFocusedTaskId) {
                     this.mFocusTaskMonitorToken = iBinder;
                     break;
                 }
-                m--;
+                iM--;
             }
             if (this.mFocusTaskMonitorToken == null) {
                 this.mFocusedTaskId = -1;
@@ -660,7 +825,6 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IBackAnimationImpl extends IBackAnimation$Stub implements ExternalInterfaceBinder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public BackAnimationController mController;
@@ -694,8 +858,8 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
     }
 
     public static boolean hasAnimationInMode(TransitionInfo transitionInfo, Predicate predicate) {
-        for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+        for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
             if (change.hasFlags(131072) && predicate.test(Integer.valueOf(change.getMode()))) {
                 return true;
             }
@@ -904,9 +1068,9 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
         this.mActiveCallback = this.mBackNavigationInfo.getOnBackInvokedCallback();
         cancelLatencyTracking();
         IOnBackInvokedCallback iOnBackInvokedCallback = this.mActiveCallback;
-        BackMotionEvent createStartEvent = backTouchTracker.createStartEvent((RemoteAnimationTarget) null);
+        BackMotionEvent backMotionEventCreateStartEvent = backTouchTracker.createStartEvent((RemoteAnimationTarget) null);
         if (!this.mOnBackStartDispatched && iOnBackInvokedCallback != null && (this.mThresholdCrossed || !this.mRequirePointerPilfer)) {
-            dispatchOnBackStarted(iOnBackInvokedCallback, createStartEvent);
+            dispatchOnBackStarted(iOnBackInvokedCallback, backMotionEventCreateStartEvent);
         }
         if (isAppProgressGenerationAllowed()) {
             return;
@@ -976,9 +1140,9 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
                     backAnimationAdapter.updateSupportedAnimators(shellBackAnimationRegistry.mSupportedAnimators);
                 }
             }
-            BackNavigationInfo startBackNavigation = this.mActivityTaskManager.startBackNavigation(this.mNavigationObserver, this.mBackAnimationAdapter);
-            this.mBackNavigationInfo = startBackNavigation;
-            onBackNavigationInfoReceived(startBackNavigation, backTouchTracker);
+            BackNavigationInfo backNavigationInfoStartBackNavigation = this.mActivityTaskManager.startBackNavigation(this.mNavigationObserver, this.mBackAnimationAdapter);
+            this.mBackNavigationInfo = backNavigationInfoStartBackNavigation;
+            onBackNavigationInfoReceived(backNavigationInfoStartBackNavigation, backTouchTracker);
         } catch (RemoteException e) {
             Log.e("ShellBackPreview", "Failed to initAnimation", e);
             finishBackNavigation(backTouchTracker.getTriggerBack());
@@ -992,9 +1156,9 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
             tryPilferPointers();
             return;
         }
-        boolean shouldDispatchToAnimator = shouldDispatchToAnimator();
-        if (shouldDispatchToAnimator || this.mActiveCallback == null) {
-            if (shouldDispatchToAnimator) {
+        boolean zShouldDispatchToAnimator = shouldDispatchToAnimator();
+        if (zShouldDispatchToAnimator || this.mActiveCallback == null) {
+            if (zShouldDispatchToAnimator) {
                 tryPilferPointers();
                 return;
             }
@@ -1002,9 +1166,9 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
         }
         this.mCurrentTracker.updateStartLocation();
         IOnBackInvokedCallback iOnBackInvokedCallback = this.mActiveCallback;
-        BackMotionEvent createStartEvent = this.mCurrentTracker.createStartEvent((RemoteAnimationTarget) null);
+        BackMotionEvent backMotionEventCreateStartEvent = this.mCurrentTracker.createStartEvent((RemoteAnimationTarget) null);
         if (!this.mOnBackStartDispatched && iOnBackInvokedCallback != null && (this.mThresholdCrossed || !this.mRequirePointerPilfer)) {
-            dispatchOnBackStarted(iOnBackInvokedCallback, createStartEvent);
+            dispatchOnBackStarted(iOnBackInvokedCallback, backMotionEventCreateStartEvent);
         }
         if (this.mBackNavigationInfo == null || isAppProgressGenerationAllowed()) {
             return;
@@ -1064,8 +1228,8 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
     }
 
     public final void sendBackEvent(int i, int i2) {
-        long uptimeMillis = SystemClock.uptimeMillis();
-        KeyEvent keyEvent = new KeyEvent(uptimeMillis, uptimeMillis, i, 4, 0, 0, -1, 0, 8, 257);
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        KeyEvent keyEvent = new KeyEvent(jUptimeMillis, jUptimeMillis, i, 4, 0, 0, -1, 0, 8, 257);
         if (DesktopExperienceFlags.ENABLE_INDEPENDENT_BACK_IN_PROJECTED.isTrue()) {
             keyEvent.setDisplayId(i2);
         }
@@ -1205,10 +1369,10 @@ public class BackAnimationController implements RemoteCallable, ConfigurationCha
         }
         RemoteAnimationTarget[] remoteAnimationTargetArr2 = this.mApps;
         if (remoteAnimationTargetArr2.length >= 1) {
-            BackMotionEvent createStartEvent = this.mCurrentTracker.createStartEvent(remoteAnimationTargetArr2[0]);
-            dispatchOnBackStarted(this.mActiveCallback, createStartEvent);
-            if (createStartEvent.getSwipeEdge() == 2) {
-                dispatchOnBackStarted(this.mBackNavigationInfo.getOnBackInvokedCallback(), createStartEvent);
+            BackMotionEvent backMotionEventCreateStartEvent = this.mCurrentTracker.createStartEvent(remoteAnimationTargetArr2[0]);
+            dispatchOnBackStarted(this.mActiveCallback, backMotionEventCreateStartEvent);
+            if (backMotionEventCreateStartEvent.getSwipeEdge() == 2) {
+                dispatchOnBackStarted(this.mBackNavigationInfo.getOnBackInvokedCallback(), backMotionEventCreateStartEvent);
             }
         }
     }

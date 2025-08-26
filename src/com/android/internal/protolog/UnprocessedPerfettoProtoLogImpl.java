@@ -6,7 +6,7 @@ import com.android.internal.protolog.PerfettoProtoLogImpl;
 import com.android.internal.protolog.common.IProtoLog;
 import com.android.internal.protolog.common.IProtoLogGroup;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class UnprocessedPerfettoProtoLogImpl extends PerfettoProtoLogImpl {
     static /* synthetic */ void lambda$new$0(IProtoLog iProtoLog) {
     }

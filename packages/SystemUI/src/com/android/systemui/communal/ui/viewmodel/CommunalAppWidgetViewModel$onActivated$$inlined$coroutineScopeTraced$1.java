@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.ChannelAsFlow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalAppWidgetViewModel$onActivated$$inlined$coroutineScopeTraced$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ String $traceName$inlined;
@@ -45,29 +44,29 @@ public final class CommunalAppWidgetViewModel$onActivated$$inlined$coroutineScop
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            ChannelAsFlow receiveAsFlow = FlowKt.receiveAsFlow(this.this$0.requests);
+            ChannelAsFlow channelAsFlowReceiveAsFlow = FlowKt.receiveAsFlow(this.this$0.requests);
             final CommunalAppWidgetViewModel communalAppWidgetViewModel = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalAppWidgetViewModel$onActivated$2$1
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     Request request = (Request) obj2;
                     boolean z = request instanceof SetListener;
-                    CommunalAppWidgetViewModel communalAppWidgetViewModel2 = CommunalAppWidgetViewModel.this;
+                    CommunalAppWidgetViewModel communalAppWidgetViewModel2 = communalAppWidgetViewModel;
                     if (z) {
                         SetListener setListener = (SetListener) request;
-                        Object access$handleSetListener = CommunalAppWidgetViewModel.access$handleSetListener(communalAppWidgetViewModel2, setListener.appWidgetId, setListener.listener, continuation);
-                        return access$handleSetListener == CoroutineSingletons.COROUTINE_SUSPENDED ? access$handleSetListener : Unit.INSTANCE;
+                        Object objAccess$handleSetListener = CommunalAppWidgetViewModel.access$handleSetListener(communalAppWidgetViewModel2, setListener.appWidgetId, setListener.listener, continuation);
+                        return objAccess$handleSetListener == CoroutineSingletons.COROUTINE_SUSPENDED ? objAccess$handleSetListener : Unit.INSTANCE;
                     }
                     if (!(request instanceof UpdateSize)) {
                         throw new NoWhenBranchMatchedException();
                     }
                     UpdateSize updateSize = (UpdateSize) request;
-                    Object access$handleUpdateSize = CommunalAppWidgetViewModel.access$handleUpdateSize(communalAppWidgetViewModel2, updateSize.size, updateSize.view, continuation);
-                    return access$handleUpdateSize == CoroutineSingletons.COROUTINE_SUSPENDED ? access$handleUpdateSize : Unit.INSTANCE;
+                    Object objAccess$handleUpdateSize = CommunalAppWidgetViewModel.access$handleUpdateSize(communalAppWidgetViewModel2, updateSize.size, updateSize.view, continuation);
+                    return objAccess$handleUpdateSize == CoroutineSingletons.COROUTINE_SUSPENDED ? objAccess$handleUpdateSize : Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (receiveAsFlow.collect(flowCollector, this) == coroutineSingletons) {
+            if (channelAsFlowReceiveAsFlow.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

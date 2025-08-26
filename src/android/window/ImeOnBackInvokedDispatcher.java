@@ -10,7 +10,6 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.ViewRootImpl;
 import android.window.IOnBackInvokedCallback;
-import android.window.ImeOnBackInvokedDispatcher;
 import com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -69,8 +68,8 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
 
     public void updateReceivingDispatcher(WindowOnBackInvokedDispatcher windowOnBackInvokedDispatcher) {
         while (!this.mQueuedReceive.isEmpty()) {
-            Pair<Integer, Bundle> poll = this.mQueuedReceive.poll();
-            receive(poll.first.intValue(), poll.second, windowOnBackInvokedDispatcher);
+            Pair<Integer, Bundle> pairPoll = this.mQueuedReceive.poll();
+            receive(pairPoll.first.intValue(), pairPoll.second, windowOnBackInvokedDispatcher);
         }
     }
 
@@ -128,24 +127,24 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
     }
 
     private void unregisterReceivedCallback(int i, OnBackInvokedDispatcher onBackInvokedDispatcher) {
-        ImeOnBackInvokedCallback imeOnBackInvokedCallback;
+        ImeOnBackInvokedCallback next;
         Iterator<ImeOnBackInvokedCallback> it = this.mImeCallbacks.iterator();
         while (true) {
             if (!it.hasNext()) {
-                imeOnBackInvokedCallback = null;
+                next = null;
                 break;
             } else {
-                imeOnBackInvokedCallback = it.next();
-                if (imeOnBackInvokedCallback.getId() == i) {
+                next = it.next();
+                if (next.getId() == i) {
                     break;
                 }
             }
         }
-        if (imeOnBackInvokedCallback == null) {
+        if (next == null) {
             Log.e(TAG, "Ime callback not found. Ignoring unregisterReceivedCallback. callbackId: " + i);
         } else {
-            onBackInvokedDispatcher.unregisterOnBackInvokedCallback(imeOnBackInvokedCallback);
-            this.mImeCallbacks.remove(imeOnBackInvokedCallback);
+            onBackInvokedDispatcher.unregisterOnBackInvokedCallback(next);
+            this.mImeCallbacks.remove(next);
         }
     }
 
@@ -276,7 +275,7 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
             maybeRunOnAnimationCallback(new Consumer() { // from class: android.window.ImeOnBackInvokedDispatcher$ImeOnBackInvokedCallbackWrapper$$ExternalSyntheticLambda3
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ((OnBackAnimationCallback) obj).onBackStarted(BackEvent.fromBackMotionEvent(BackMotionEvent.this));
+                    ((OnBackAnimationCallback) obj).onBackStarted(BackEvent.fromBackMotionEvent(backMotionEvent));
                 }
             });
         }
@@ -286,7 +285,7 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
             maybeRunOnAnimationCallback(new Consumer() { // from class: android.window.ImeOnBackInvokedDispatcher$ImeOnBackInvokedCallbackWrapper$$ExternalSyntheticLambda4
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ((OnBackAnimationCallback) obj).onBackProgressed(BackEvent.fromBackMotionEvent(BackMotionEvent.this));
+                    ((OnBackAnimationCallback) obj).onBackProgressed(BackEvent.fromBackMotionEvent(backMotionEvent));
                 }
             });
         }
@@ -309,7 +308,7 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
             handler.post(new Runnable() { // from class: android.window.ImeOnBackInvokedDispatcher$ImeOnBackInvokedCallbackWrapper$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    OnBackInvokedCallback.this.onBackInvoked();
+                    onBackInvokedCallback.onBackInvoked();
                 }
             });
         }
@@ -319,7 +318,7 @@ public class ImeOnBackInvokedDispatcher implements OnBackInvokedDispatcher, Parc
                 ImeOnBackInvokedDispatcher.this.mHandler.post(new Runnable() { // from class: android.window.ImeOnBackInvokedDispatcher$ImeOnBackInvokedCallbackWrapper$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ImeOnBackInvokedDispatcher.ImeOnBackInvokedCallbackWrapper.this.lambda$maybeRunOnAnimationCallback$2(consumer);
+                        this.f$0.lambda$maybeRunOnAnimationCallback$2(consumer);
                     }
                 });
             }

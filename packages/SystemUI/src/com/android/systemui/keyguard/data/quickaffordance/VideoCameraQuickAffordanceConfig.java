@@ -11,13 +11,15 @@ import com.android.systemui.camera.CameraIntentsWrapper;
 import com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
+import kotlin.ResultKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class VideoCameraQuickAffordanceConfig implements KeyguardQuickAffordanceConfig {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -27,6 +29,24 @@ public final class VideoCameraQuickAffordanceConfig implements KeyguardQuickAffo
     public final Context context;
     public final DevicePolicyManager devicePolicyManager;
     public final UserTracker userTracker;
+
+    /* renamed from: com.android.systemui.keyguard.data.quickaffordance.VideoCameraQuickAffordanceConfig$getPickerScreenState$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return VideoCameraQuickAffordanceConfig.this.getPickerScreenState(this);
+        }
+    }
 
     public VideoCameraQuickAffordanceConfig(Context context, CameraIntentsWrapper cameraIntentsWrapper, ActivityIntentHelper activityIntentHelper, UserTracker userTracker, DevicePolicyManager devicePolicyManager, CoroutineDispatcher coroutineDispatcher) {
         this.context = context;
@@ -61,82 +81,49 @@ public final class VideoCameraQuickAffordanceConfig implements KeyguardQuickAffo
         return R.drawable.ic_videocam;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x0045, code lost:
-    
-        if (r6 == r1) goto L24;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x005d  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object getPickerScreenState(kotlin.coroutines.Continuation r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.keyguard.data.quickaffordance.VideoCameraQuickAffordanceConfig$getPickerScreenState$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.keyguard.data.quickaffordance.VideoCameraQuickAffordanceConfig$getPickerScreenState$1 r0 = (com.android.systemui.keyguard.data.quickaffordance.VideoCameraQuickAffordanceConfig$getPickerScreenState$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.keyguard.data.quickaffordance.VideoCameraQuickAffordanceConfig$getPickerScreenState$1 r0 = new com.android.systemui.keyguard.data.quickaffordance.VideoCameraQuickAffordanceConfig$getPickerScreenState$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L3a
-            if (r2 == r4) goto L32
-            if (r2 != r3) goto L2a
-            kotlin.ResultKt.throwOnFailure(r6)
-            return r6
-        L2a:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L32:
-            java.lang.Object r5 = r0.L$0
-            com.android.systemui.keyguard.data.quickaffordance.VideoCameraQuickAffordanceConfig r5 = (com.android.systemui.keyguard.data.quickaffordance.VideoCameraQuickAffordanceConfig) r5
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L48
-        L3a:
-            kotlin.ResultKt.throwOnFailure(r6)
-            r0.L$0 = r5
-            r0.label = r4
-            java.lang.Object r6 = r5.isLaunchable$1(r0)
-            if (r6 != r1) goto L48
-            goto L5b
-        L48:
-            java.lang.Boolean r6 = (java.lang.Boolean) r6
-            boolean r6 = r6.booleanValue()
-            if (r6 == 0) goto L5d
-            r6 = 0
-            r0.L$0 = r6
-            r0.label = r3
-            java.lang.Object r5 = super.getPickerScreenState(r0)
-            if (r5 != r1) goto L5c
-        L5b:
-            return r1
-        L5c:
-            return r5
-        L5d:
-            com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig$PickerScreenState$UnavailableOnDevice r5 = com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig.PickerScreenState.UnavailableOnDevice.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.quickaffordance.VideoCameraQuickAffordanceConfig.getPickerScreenState(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object getPickerScreenState(Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object objIsLaunchable$1 = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objIsLaunchable$1);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.label = 1;
+            objIsLaunchable$1 = isLaunchable$1(anonymousClass1);
+            if (objIsLaunchable$1 != coroutineSingletons) {
+            }
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(objIsLaunchable$1);
+            return objIsLaunchable$1;
+        }
+        this = (VideoCameraQuickAffordanceConfig) anonymousClass1.L$0;
+        ResultKt.throwOnFailure(objIsLaunchable$1);
+        if (!((Boolean) objIsLaunchable$1).booleanValue()) {
+            return KeyguardQuickAffordanceConfig.PickerScreenState.UnavailableOnDevice.INSTANCE;
+        }
+        anonymousClass1.L$0 = null;
+        anonymousClass1.label = 2;
+        Object pickerScreenState = super.getPickerScreenState(anonymousClass1);
+        return pickerScreenState == coroutineSingletons ? coroutineSingletons : pickerScreenState;
     }
 
     public final Object isLaunchable$1(ContinuationImpl continuationImpl) {

@@ -3,7 +3,6 @@ package android.app.smartspace;
 import android.annotation.SystemApi;
 import android.app.smartspace.ISmartspaceCallback;
 import android.app.smartspace.ISmartspaceManager;
-import android.app.smartspace.SmartspaceSession;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.os.Binder;
@@ -36,12 +35,12 @@ public final class SmartspaceSession implements AutoCloseable {
     }
 
     SmartspaceSession(Context context, SmartspaceConfig smartspaceConfig) {
-        ISmartspaceManager asInterface = ISmartspaceManager.Stub.asInterface(ServiceManager.getService(Context.SMARTSPACE_SERVICE));
-        this.mInterface = asInterface;
+        ISmartspaceManager iSmartspaceManagerAsInterface = ISmartspaceManager.Stub.asInterface(ServiceManager.getService(Context.SMARTSPACE_SERVICE));
+        this.mInterface = iSmartspaceManagerAsInterface;
         SmartspaceSessionId smartspaceSessionId = new SmartspaceSessionId(context.getPackageName() + ":" + UUID.randomUUID().toString(), context.getUser());
         this.mSessionId = smartspaceSessionId;
         try {
-            asInterface.createSmartspaceSession(smartspaceConfig, smartspaceSessionId, getToken());
+            iSmartspaceManagerAsInterface.createSmartspaceSession(smartspaceConfig, smartspaceSessionId, getToken());
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to create Smartspace session", e);
             e.rethrowFromSystemServer();
@@ -85,7 +84,7 @@ public final class SmartspaceSession implements AutoCloseable {
             CallbackWrapper callbackWrapper = new CallbackWrapper(executor, new Consumer() { // from class: android.app.smartspace.SmartspaceSession$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    SmartspaceSession.OnTargetsAvailableListener.this.onTargetsAvailable((List) obj);
+                    onTargetsAvailableListener.onTargetsAvailable((List) obj);
                 }
             });
             this.mRegisteredCallbacks.put(onTargetsAvailableListener, callbackWrapper);
@@ -165,16 +164,16 @@ public final class SmartspaceSession implements AutoCloseable {
 
         @Override // android.app.smartspace.ISmartspaceCallback
         public void onResult(final ParceledListSlice parceledListSlice) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.app.smartspace.SmartspaceSession$CallbackWrapper$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SmartspaceSession.CallbackWrapper.this.lambda$onResult$0(parceledListSlice);
+                        this.f$0.lambda$onResult$0(parceledListSlice);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

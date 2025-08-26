@@ -27,15 +27,15 @@ public class PackageTable {
         }
         ByteBufferReader byteBufferReader = new ByteBufferReader(this.mBuffer);
         byteBufferReader.position(bucketIndex);
-        int readInt = byteBufferReader.readInt();
-        if (readInt >= this.mHeader.mNodeOffset && readInt < this.mHeader.mFileSize) {
-            while (readInt != -1) {
-                byteBufferReader.position(readInt);
-                Node fromBytes = Node.fromBytes(byteBufferReader, this.mHeader.mVersion);
-                if (Objects.equals(str, fromBytes.mPackageName)) {
-                    return fromBytes;
+        int i = byteBufferReader.readInt();
+        if (i >= this.mHeader.mNodeOffset && i < this.mHeader.mFileSize) {
+            while (i != -1) {
+                byteBufferReader.position(i);
+                Node nodeFromBytes = Node.fromBytes(byteBufferReader, this.mHeader.mVersion);
+                if (Objects.equals(str, nodeFromBytes.mPackageName)) {
+                    return nodeFromBytes;
                 }
-                readInt = fromBytes.mNextOffset;
+                i = nodeFromBytes.mNextOffset;
             }
         }
         return null;
@@ -135,12 +135,12 @@ public class PackageTable {
             node.mPackageName = byteBufferReader.readString();
             node.mPackageId = byteBufferReader.readInt();
             node.mBooleanStartIndex = byteBufferReader.readInt();
-            int readInt = byteBufferReader.readInt();
-            node.mNextOffset = readInt;
-            if (readInt == 0) {
-                readInt = -1;
+            int i = byteBufferReader.readInt();
+            node.mNextOffset = i;
+            if (i == 0) {
+                i = -1;
             }
-            node.mNextOffset = readInt;
+            node.mNextOffset = i;
             return node;
         }
 
@@ -150,12 +150,12 @@ public class PackageTable {
             node.mPackageId = byteBufferReader.readInt();
             node.mPackageFingerprint = byteBufferReader.readLong();
             node.mBooleanStartIndex = byteBufferReader.readInt();
-            int readInt = byteBufferReader.readInt();
-            node.mNextOffset = readInt;
-            if (readInt == 0) {
-                readInt = -1;
+            int i = byteBufferReader.readInt();
+            node.mNextOffset = i;
+            if (i == 0) {
+                i = -1;
             }
-            node.mNextOffset = readInt;
+            node.mNextOffset = i;
             node.mHasPackageFingerprint = true;
             return node;
         }

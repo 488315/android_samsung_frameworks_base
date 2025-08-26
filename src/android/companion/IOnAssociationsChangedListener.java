@@ -46,9 +46,9 @@ public interface IOnAssociationsChangedListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOnAssociationsChangedListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOnAssociationsChangedListener)) {
-                return (IOnAssociationsChangedListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOnAssociationsChangedListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOnAssociationsChangedListener)) {
+                return (IOnAssociationsChangedListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IOnAssociationsChangedListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(AssociationInfo.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AssociationInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                onAssociationsChanged(createTypedArrayList);
+                onAssociationsChanged(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,13 +101,13 @@ public interface IOnAssociationsChangedListener extends IInterface {
 
             @Override // android.companion.IOnAssociationsChangedListener
             public void onAssociationsChanged(List<AssociationInfo> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOnAssociationsChangedListener.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOnAssociationsChangedListener.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

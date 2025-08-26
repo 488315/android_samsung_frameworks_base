@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface SubRoom {
     public static final String EXTRA_FOCUS_REQUIRED = "focusRequired";
@@ -30,7 +29,6 @@ public interface SubRoom {
     public static final String STATE_UNREAD_NOTIFICATION = "STATE_UNREAD_NOTIFICATION";
     public static final String STATE_WINDOW_INSETS_DISPLAY_CUTOUT = "STATE_WINDOW_INSETS_DISPLAY_CUTOUT";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface StateChangeListener {
         void onStateChanged(Bundle bundle);
 

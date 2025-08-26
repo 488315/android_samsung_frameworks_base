@@ -77,11 +77,11 @@ public class CFBBlockCipher extends StreamBlockCipher implements CFBModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.StreamBlockCipher
-    protected byte calculateByte(byte b) throws DataLengthException, IllegalStateException {
+    protected byte calculateByte(byte b) throws IllegalStateException, DataLengthException {
         return this.encrypting ? encryptByte(b) : decryptByte(b);
     }
 
-    private byte encryptByte(byte b) {
+    private byte encryptByte(byte b) throws IllegalStateException, DataLengthException {
         if (this.byteCount == 0) {
             this.cipher.processBlock(this.cfbV, 0, this.cfbOutV, 0);
         }
@@ -106,7 +106,7 @@ public class CFBBlockCipher extends StreamBlockCipher implements CFBModeCipher {
         return b2;
     }
 
-    private byte decryptByte(byte b) {
+    private byte decryptByte(byte b) throws IllegalStateException, DataLengthException {
         if (this.byteCount == 0) {
             this.cipher.processBlock(this.cfbV, 0, this.cfbOutV, 0);
         }
@@ -137,17 +137,17 @@ public class CFBBlockCipher extends StreamBlockCipher implements CFBModeCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BlockCipher
-    public int processBlock(byte[] bArr, int i, byte[] bArr2, int i2) throws DataLengthException, IllegalStateException {
+    public int processBlock(byte[] bArr, int i, byte[] bArr2, int i2) throws IllegalStateException, DataLengthException {
         processBytes(bArr, i, this.blockSize, bArr2, i2);
         return this.blockSize;
     }
 
-    public int encryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) throws DataLengthException, IllegalStateException {
+    public int encryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) throws IllegalStateException, DataLengthException {
         processBytes(bArr, i, this.blockSize, bArr2, i2);
         return this.blockSize;
     }
 
-    public int decryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) throws DataLengthException, IllegalStateException {
+    public int decryptBlock(byte[] bArr, int i, byte[] bArr2, int i2) throws IllegalStateException, DataLengthException {
         processBytes(bArr, i, this.blockSize, bArr2, i2);
         return this.blockSize;
     }

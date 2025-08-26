@@ -1,7 +1,7 @@
 package com.android.systemui.navigationbar.bandaid.pack;
 
 import android.content.Context;
-import com.android.systemui.BasicRune;
+import android.content.res.Resources;
 import com.android.systemui.Prefs;
 import com.android.systemui.navigationbar.NavigationModeController;
 import com.android.systemui.navigationbar.bandaid.Band;
@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.function.Function;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MiscPack implements BandAidPack {
     public final List allBands;
@@ -31,30 +30,15 @@ public final class MiscPack implements BandAidPack {
         this.allBands = arrayList;
         int i = Band.$r8$clinit;
         Band.Builder builder = new Band.Builder();
-        builder.runeDependency = BasicRune.NAVBAR_DESKTOP;
-        builder.bandAidDependency = BandAid.MISC_PACK_CONTROL_NAVBAR_IN_DEX_STANDALONE;
-        builder.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnDesktopModeChanged.class);
-        builder.targetModules = Collections.singletonList(NavBarStoreImpl.class);
+        builder.bandAidDependency = BandAid.MISC_PACK_SHOW_A11Y_SWIPE_UP_TIP_POPUP;
+        builder.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnShowA11YSwipeUpTipPopup.class);
+        builder.targetModules = Collections.singletonList(NavigationBar.class);
         builder.moduleDependencies = Collections.singletonList(NavigationBarView.class);
         builder.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.MiscPack$1$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) NavBarStore.this;
-                navBarStoreImpl.apply(kit, new NavBarStoreAction.SetNavBarVisibility(new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, ((EventTypeFactory.EventType.OnDesktopModeChanged) kit.event).enabled ? 8 : 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8384511, null)));
-                return navBarStoreImpl;
-            }
-        };
-        Band.Builder m = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
-        m.bandAidDependency = BandAid.MISC_PACK_SHOW_A11Y_SWIPE_UP_TIP_POPUP;
-        m.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnShowA11YSwipeUpTipPopup.class);
-        m.targetModules = Collections.singletonList(NavigationBar.class);
-        m.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.MiscPack$3$1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Band.Kit kit = (Band.Kit) obj;
-                NavBarStore navBarStore2 = NavBarStore.this;
+                NavBarStore navBarStore2 = navBarStore;
                 NavBarStateManagerImpl navBarStateManagerImpl = (NavBarStateManagerImpl) kit.manager;
                 boolean z = false;
                 if (navBarStateManagerImpl.isGestureMode()) {
@@ -72,20 +56,20 @@ public final class MiscPack implements BandAidPack {
                 return Unit.INSTANCE;
             }
         };
-        Band.Builder m2 = ColorPack$$ExternalSyntheticOutline0.m(m, arrayList);
-        m2.bandAidDependency = BandAid.MISC_PACK_UPDATE_A11Y_STATE_ON_USER_SWITCHED;
-        m2.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnUserSwitched.class);
-        m2.targetModules = Collections.singletonList(NavigationModeController.class);
-        m2.moduleDependencies = Collections.singletonList(NavigationBar.class);
-        m2.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.MiscPack$5$1
+        Band.Builder builderM = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
+        builderM.bandAidDependency = BandAid.MISC_PACK_UPDATE_A11Y_STATE_ON_USER_SWITCHED;
+        builderM.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnUserSwitched.class);
+        builderM.targetModules = Collections.singletonList(NavigationModeController.class);
+        builderM.moduleDependencies = Collections.singletonList(NavigationBar.class);
+        builderM.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.MiscPack$3$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) NavBarStore.this;
+            public final Object apply(Object obj) throws Resources.NotFoundException {
+                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) navBarStore;
                 navBarStoreImpl.apply((Band.Kit) obj, new NavBarStoreAction.UpdateA11YStatus(null, 1, null));
                 return navBarStoreImpl;
             }
         };
-        arrayList.add(m2.build());
+        arrayList.add(builderM.build());
     }
 
     @Override // com.android.systemui.navigationbar.bandaid.BandAidPack

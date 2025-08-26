@@ -6,7 +6,6 @@ import androidx.collection.CollectionPlatformUtils;
 import androidx.leanback.widget.Grid;
 import androidx.leanback.widget.GridLayoutManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class StaggeredGrid extends Grid {
     public Object mPendingItem;
@@ -14,7 +13,6 @@ public abstract class StaggeredGrid extends Grid {
     public final CircularArray mLocations = new CircularArray(64);
     public int mFirstIndex = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Location extends Grid.Location {
         public int mOffset;
         public int mSize;
@@ -28,37 +26,37 @@ public abstract class StaggeredGrid extends Grid {
 
     public final boolean appendVisbleItemsWithCache(int i, boolean z) {
         int i2;
-        int i3;
+        int edge;
         CircularArray circularArray = this.mLocations;
         if (circularArray.size() != 0) {
             int count = this.mProvider.getCount();
-            int i4 = this.mLastVisibleIndex;
-            if (i4 >= 0) {
-                i2 = i4 + 1;
-                i3 = this.mProvider.getEdge(i4);
+            int i3 = this.mLastVisibleIndex;
+            if (i3 >= 0) {
+                i2 = i3 + 1;
+                edge = this.mProvider.getEdge(i3);
             } else {
-                int i5 = this.mStartIndex;
-                i2 = i5 != -1 ? i5 : 0;
+                int i4 = this.mStartIndex;
+                i2 = i4 != -1 ? i4 : 0;
                 if (i2 > getLastIndex() + 1 || i2 < this.mFirstIndex) {
                     circularArray.removeFromStart(circularArray.size());
                     return false;
                 }
                 if (i2 <= getLastIndex()) {
-                    i3 = Integer.MAX_VALUE;
+                    edge = Integer.MAX_VALUE;
                 }
             }
             int lastIndex = getLastIndex();
             while (i2 < count && i2 <= lastIndex) {
                 Location location = getLocation(i2);
-                if (i3 != Integer.MAX_VALUE) {
-                    i3 += location.mOffset;
+                if (edge != Integer.MAX_VALUE) {
+                    edge += location.mOffset;
                 }
-                int i6 = location.mRow;
+                int i5 = location.mRow;
                 GridLayoutManager.AnonymousClass2 anonymousClass2 = this.mProvider;
                 Object[] objArr = this.mTmpItem;
-                int createItem = anonymousClass2.createItem(i2, true, objArr, false);
-                if (createItem != location.mSize) {
-                    location.mSize = createItem;
+                int iCreateItem = anonymousClass2.createItem(i2, true, objArr, false);
+                if (iCreateItem != location.mSize) {
+                    location.mSize = iCreateItem;
                     circularArray.removeFromEnd(lastIndex - i2);
                     lastIndex = i2;
                 }
@@ -66,12 +64,12 @@ public abstract class StaggeredGrid extends Grid {
                 if (this.mFirstVisibleIndex < 0) {
                     this.mFirstVisibleIndex = i2;
                 }
-                this.mProvider.addItem(createItem, i6, i3, objArr[0]);
+                this.mProvider.addItem(iCreateItem, i5, edge, objArr[0]);
                 if (z || !checkAppendOverLimit(i)) {
-                    if (i3 == Integer.MAX_VALUE) {
-                        i3 = this.mProvider.getEdge(i2);
+                    if (edge == Integer.MAX_VALUE) {
+                        edge = this.mProvider.getEdge(i2);
                     }
-                    if (i6 != this.mNumRows - 1 || !z) {
+                    if (i5 != this.mNumRows - 1 || !z) {
                         i2++;
                     }
                 }
@@ -167,7 +165,11 @@ public abstract class StaggeredGrid extends Grid {
 
     public abstract boolean appendVisibleItemsWithoutCache(int i, boolean z);
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x004a  */
     @Override // androidx.leanback.widget.Grid
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final CircularIntArray[] getItemPositionsInRows(int i, int i2) {
         for (int i3 = 0; i3 < this.mNumRows; i3++) {
             this.mTmpItemPositionsInRows[i3].tail = 0;
@@ -177,7 +179,10 @@ public abstract class StaggeredGrid extends Grid {
                 CircularIntArray circularIntArray = this.mTmpItemPositionsInRows[getLocation(i).mRow];
                 int i4 = circularIntArray.tail;
                 int i5 = circularIntArray.capacityBitmask;
-                if ((i4 & i5) > 0) {
+                if ((i4 & i5) <= 0) {
+                    circularIntArray.addLast(i);
+                    circularIntArray.addLast(i);
+                } else {
                     if (i4 == 0) {
                         int i6 = CollectionPlatformUtils.$r8$clinit;
                         throw new ArrayIndexOutOfBoundsException();
@@ -190,11 +195,8 @@ public abstract class StaggeredGrid extends Grid {
                         }
                         circularIntArray.tail = i7;
                         circularIntArray.addLast(i);
-                        i++;
                     }
                 }
-                circularIntArray.addLast(i);
-                circularIntArray.addLast(i);
                 i++;
             }
         }
@@ -218,52 +220,52 @@ public abstract class StaggeredGrid extends Grid {
 
     public final boolean prependVisbleItemsWithCache(int i, boolean z) {
         int i2;
+        int edge;
         int i3;
-        int i4;
         CircularArray circularArray = this.mLocations;
         if (circularArray.size() != 0) {
-            int i5 = this.mFirstVisibleIndex;
-            if (i5 < 0) {
-                int i6 = this.mStartIndex;
-                i2 = i6 != -1 ? i6 : 0;
+            int i4 = this.mFirstVisibleIndex;
+            if (i4 < 0) {
+                int i5 = this.mStartIndex;
+                i2 = i5 != -1 ? i5 : 0;
                 if (i2 <= getLastIndex()) {
-                    int i7 = this.mFirstIndex;
-                    if (i2 >= i7 - 1) {
-                        if (i2 >= i7) {
-                            i3 = Integer.MAX_VALUE;
-                            i4 = 0;
+                    int i6 = this.mFirstIndex;
+                    if (i2 >= i6 - 1) {
+                        if (i2 >= i6) {
+                            edge = Integer.MAX_VALUE;
+                            i3 = 0;
                         }
                     }
                 }
                 circularArray.removeFromStart(circularArray.size());
                 return false;
             }
-            i3 = this.mProvider.getEdge(i5);
-            i4 = getLocation(this.mFirstVisibleIndex).mOffset;
+            edge = this.mProvider.getEdge(i4);
+            i3 = getLocation(this.mFirstVisibleIndex).mOffset;
             i2 = this.mFirstVisibleIndex - 1;
-            int max = Math.max(GridLayoutManager.this.mPositionDeltaInPreLayout, this.mFirstIndex);
-            while (i2 >= max) {
+            int iMax = Math.max(GridLayoutManager.this.mPositionDeltaInPreLayout, this.mFirstIndex);
+            while (i2 >= iMax) {
                 Location location = getLocation(i2);
-                int i8 = location.mRow;
+                int i7 = location.mRow;
                 GridLayoutManager.AnonymousClass2 anonymousClass2 = this.mProvider;
                 Object[] objArr = this.mTmpItem;
-                int createItem = anonymousClass2.createItem(i2, false, objArr, false);
-                if (createItem != location.mSize) {
+                int iCreateItem = anonymousClass2.createItem(i2, false, objArr, false);
+                if (iCreateItem != location.mSize) {
                     circularArray.removeFromStart((i2 + 1) - this.mFirstIndex);
                     this.mFirstIndex = this.mFirstVisibleIndex;
                     this.mPendingItem = objArr[0];
-                    this.mPendingItemSize = createItem;
+                    this.mPendingItemSize = iCreateItem;
                     return false;
                 }
                 this.mFirstVisibleIndex = i2;
                 if (this.mLastVisibleIndex < 0) {
                     this.mLastVisibleIndex = i2;
                 }
-                this.mProvider.addItem(createItem, i8, i3 - i4, objArr[0]);
+                this.mProvider.addItem(iCreateItem, i7, edge - i3, objArr[0]);
                 if (z || !checkPrependOverLimit(i)) {
-                    i3 = this.mProvider.getEdge(i2);
-                    i4 = location.mOffset;
-                    if (i8 != 0 || !z) {
+                    edge = this.mProvider.getEdge(i2);
+                    i3 = location.mOffset;
+                    if (i7 != 0 || !z) {
                         i2--;
                     }
                 }

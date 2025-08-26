@@ -13,7 +13,6 @@ import com.android.systemui.media.audiovisseekbar.utils.animator.SingleStateValu
 import com.android.systemui.media.audiovisseekbar.utils.easing.CustomPathInterpolator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MultiWaveAreaTrackRenderer extends BaseRenderer {
     public final int cycleCount;
@@ -29,7 +28,6 @@ public final class MultiWaveAreaTrackRenderer extends BaseRenderer {
     public final int stepX;
     public final SingleStateValueAnimator widthScale;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -65,54 +63,52 @@ public final class MultiWaveAreaTrackRenderer extends BaseRenderer {
     public final void onLayout(RectF rectF) {
         super.onLayout(rectF);
         RendererConfig.INSTANCE.getClass();
-        float dpToPx = DimensionUtilsKt.dpToPx(8.0f) / 2.0f;
-        float centerY = getCenterY() - dpToPx;
-        float centerY2 = getCenterY() + dpToPx;
+        float fDpToPx = DimensionUtilsKt.dpToPx(8.0f) / 2.0f;
+        float centerY = getCenterY() - fDpToPx;
+        float centerY2 = getCenterY() + fDpToPx;
         RectF rectF2 = this.leftCornerBounds;
         float f = rectF.left;
-        rectF2.set(f, centerY, (dpToPx * 2) + f, centerY2);
+        rectF2.set(f, centerY, (fDpToPx * 2) + f, centerY2);
         CustomPathInterpolator customPathInterpolator = this.leftTopCornerPath;
         customPathInterpolator.reset();
         customPathInterpolator.addArc(this.leftCornerBounds, 180.0f, 90.0f);
         customPathInterpolator.updatePath();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0026  */
     @Override // com.android.systemui.media.audiovisseekbar.renderer.BaseRenderer
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onThumbLocationChanged(float f) {
         super.onThumbLocationChanged(f);
-        int width = (int) this.bounds.width();
+        int iWidth = (int) this.bounds.width();
         SingleStateValueAnimator singleStateValueAnimator = this.widthScale;
-        if (width >= 0) {
+        if (iWidth >= 0) {
             RendererConfig.INSTANCE.getClass();
-            if (width < ((int) DimensionUtilsKt.dpToPx(8.0f))) {
+            if (iWidth < ((int) DimensionUtilsKt.dpToPx(8.0f))) {
                 singleStateValueAnimator.animateTo(0.1f);
-                CustomPathInterpolator customPathInterpolator = this.scalePath;
-                customPathInterpolator.reset();
+            } else {
                 RendererConfig.INSTANCE.getClass();
-                customPathInterpolator.moveTo(DimensionUtilsKt.dpToPx(8.0f) / 2.0f, 0.0f);
-                customPathInterpolator.quadTo(DimensionUtilsKt.dpToPx(8.0f) / 2.0f, 1.0f, this.bounds.width() / 2, 1.0f);
-                customPathInterpolator.quadTo(this.bounds.width(), 1.0f, this.bounds.width(), 0.0f);
-                customPathInterpolator.updatePath();
+                int iDpToPx = (int) DimensionUtilsKt.dpToPx(8.0f);
+                int width = this.view.getWidth();
+                int i = this.cycleCount * 2;
+                if (iWidth >= width / i || iDpToPx > iWidth) {
+                    int width2 = this.view.getWidth() / i;
+                    if (iWidth <= this.view.getWidth() && width2 <= iWidth) {
+                        singleStateValueAnimator.animateTo(1.0f);
+                    }
+                } else {
+                    singleStateValueAnimator.animateTo(0.3f);
+                }
             }
         }
+        CustomPathInterpolator customPathInterpolator = this.scalePath;
+        customPathInterpolator.reset();
         RendererConfig.INSTANCE.getClass();
-        int dpToPx = (int) DimensionUtilsKt.dpToPx(8.0f);
-        int width2 = this.view.getWidth();
-        int i = this.cycleCount * 2;
-        if (width >= width2 / i || dpToPx > width) {
-            int width3 = this.view.getWidth() / i;
-            if (width <= this.view.getWidth() && width3 <= width) {
-                singleStateValueAnimator.animateTo(1.0f);
-            }
-        } else {
-            singleStateValueAnimator.animateTo(0.3f);
-        }
-        CustomPathInterpolator customPathInterpolator2 = this.scalePath;
-        customPathInterpolator2.reset();
-        RendererConfig.INSTANCE.getClass();
-        customPathInterpolator2.moveTo(DimensionUtilsKt.dpToPx(8.0f) / 2.0f, 0.0f);
-        customPathInterpolator2.quadTo(DimensionUtilsKt.dpToPx(8.0f) / 2.0f, 1.0f, this.bounds.width() / 2, 1.0f);
-        customPathInterpolator2.quadTo(this.bounds.width(), 1.0f, this.bounds.width(), 0.0f);
-        customPathInterpolator2.updatePath();
+        customPathInterpolator.moveTo(DimensionUtilsKt.dpToPx(8.0f) / 2.0f, 0.0f);
+        customPathInterpolator.quadTo(DimensionUtilsKt.dpToPx(8.0f) / 2.0f, 1.0f, this.bounds.width() / 2, 1.0f);
+        customPathInterpolator.quadTo(this.bounds.width(), 1.0f, this.bounds.width(), 0.0f);
+        customPathInterpolator.updatePath();
     }
 }

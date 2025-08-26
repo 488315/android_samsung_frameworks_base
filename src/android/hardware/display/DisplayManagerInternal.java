@@ -14,9 +14,11 @@ import android.view.DisplayInfo;
 import android.view.SurfaceControl;
 import android.window.DisplayWindowPolicyController;
 import android.window.ScreenCapture;
+import com.android.internal.display.BrightnessSynchronizer;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,12 +28,6 @@ public abstract class DisplayManagerInternal {
     public static final int NONFREEZING = 0;
     public static final int NON_HBM_FREEZE_MODE = 1;
     public static final int REFRESH_RATE_LIMIT_HIGH_BRIGHTNESS_MODE = 1;
-
-    public static class DisplayBrightnessOverrideRequest {
-        public float brightness = Float.NaN;
-        public String screenBrightnessOverridePackage = "";
-        public CharSequence tag;
-    }
 
     public interface DisplayGroupListener {
         void onDisplayGroupAdded(int i);
@@ -90,6 +86,8 @@ public abstract class DisplayManagerInternal {
     }
 
     public abstract void clearOldDisplayDevice();
+
+    public abstract void clearTopologies();
 
     public abstract int createSpegVirtualDisplay(String str, int i, IVirtualDisplayCallback iVirtualDisplayCallback);
 
@@ -151,13 +149,19 @@ public abstract class DisplayManagerInternal {
 
     public abstract void initPowerManagement(DisplayPowerCallbacks displayPowerCallbacks, Handler handler, SensorManager sensorManager);
 
+    public abstract boolean isChangingPreferredMode();
+
     public abstract boolean isDisplayReadyForMirroring(int i);
+
+    public abstract boolean isLoadedUserPreferredResolution();
 
     public abstract boolean isProximitySensorAvailable(int i);
 
     public abstract void onDisplayBelongToTopologyChanged(int i, boolean z);
 
     public abstract void onEarlyInteractivityChange(boolean z);
+
+    public abstract void onExternalDesktopModeChanged(int i);
 
     public abstract void onOverlayChanged();
 
@@ -181,6 +185,8 @@ public abstract class DisplayManagerInternal {
 
     public abstract boolean requestPowerState(int i, DisplayPowerRequest displayPowerRequest, boolean z);
 
+    public abstract void setChangingPreferredMode(boolean z);
+
     public abstract void setDisplayAccessUIDs(SparseArray<IntArray> sparseArray);
 
     public abstract void setDisplayInfoOverrideFromWindowManager(int i, DisplayInfo displayInfo);
@@ -201,6 +207,8 @@ public abstract class DisplayManagerInternal {
 
     public abstract void setScreenBrightnessOverrideFromWindowManager(SparseArray<DisplayBrightnessOverrideRequest> sparseArray);
 
+    public abstract void setUserPreferredDisplayMode(int i, Display.Mode mode);
+
     public abstract void setWindowManagerMirroring(int i, boolean z);
 
     public abstract void stylusGestureStarted(long j);
@@ -216,6 +224,43 @@ public abstract class DisplayManagerInternal {
     public abstract void unregisterDisplayTransactionListener(DisplayTransactionListener displayTransactionListener);
 
     public abstract ScreenCapture.ScreenshotHardwareBuffer userScreenshot(int i);
+
+    public static class DisplayBrightnessOverrideRequest {
+        public float brightness = Float.NaN;
+        public String screenBrightnessOverridePackage = "";
+        public CharSequence tag;
+
+        public void copyFrom(DisplayBrightnessOverrideRequest displayBrightnessOverrideRequest) {
+            this.brightness = displayBrightnessOverrideRequest.brightness;
+            this.tag = displayBrightnessOverrideRequest.tag;
+            this.screenBrightnessOverridePackage = displayBrightnessOverrideRequest.screenBrightnessOverridePackage;
+        }
+
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj instanceof DisplayBrightnessOverrideRequest) {
+                DisplayBrightnessOverrideRequest displayBrightnessOverrideRequest = (DisplayBrightnessOverrideRequest) obj;
+                if (Float.compare(this.brightness, displayBrightnessOverrideRequest.brightness) == 0 && Objects.equals(this.tag, displayBrightnessOverrideRequest.tag) && Objects.equals(this.screenBrightnessOverridePackage, displayBrightnessOverrideRequest.screenBrightnessOverridePackage)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int hashCode() {
+            return Objects.hash(Float.valueOf(this.brightness), this.tag, this.screenBrightnessOverridePackage);
+        }
+
+        public String toString() {
+            return "br:" + brightnessToString(this.brightness) + " tag:" + ((Object) this.tag) + " pkg:" + this.screenBrightnessOverridePackage;
+        }
+
+        private String brightnessToString(float f) {
+            return String.format(Locale.US, "%d(%.2f)", Integer.valueOf(BrightnessSynchronizer.brightnessFloatToInt(f)), Float.valueOf(f));
+        }
+    }
 
     public static class DisplayPowerRequest {
         public static final int POLICY_BRIGHT = 3;

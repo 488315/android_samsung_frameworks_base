@@ -20,7 +20,6 @@ import com.samsung.android.globalactions.util.HandlerUtil;
 import com.samsung.android.globalactions.util.LogWrapper;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MiniSViewCoverViewAnimator implements GlobalActionsAnimator {
     public MiniSViewCoverContentView.AnonymousClass1 mCallback;
@@ -142,9 +141,9 @@ public class MiniSViewCoverViewAnimator implements GlobalActionsAnimator {
         MiniSViewCoverContentItemView miniSViewCoverContentItemView = new MiniSViewCoverContentItemView(miniSViewCoverContentView.mDialog.getContext(), miniSViewCoverContentView.mSelectedViewModel, miniSViewCoverContentView.mConfirmView, miniSViewCoverContentView.mResourceFactory);
         miniSViewCoverContentView.mConfirmView.removeAllViews();
         ViewGroup viewGroup = miniSViewCoverContentView.mConfirmView;
-        View inflateView = miniSViewCoverContentItemView.inflateView();
-        miniSViewCoverContentItemView.setViewAttrs(inflateView);
-        viewGroup.addView(inflateView);
+        View viewInflateView = miniSViewCoverContentItemView.inflateView();
+        miniSViewCoverContentItemView.setViewAttrs(viewInflateView);
+        viewGroup.addView(viewInflateView);
         miniSViewCoverContentView.mConfirmView.setVisibility(0);
         MiniSViewCoverContentView miniSViewCoverContentView2 = MiniSViewCoverContentView.this;
         ViewGroup viewGroup2 = miniSViewCoverContentView2.mConfirmView;
@@ -156,7 +155,7 @@ public class MiniSViewCoverViewAnimator implements GlobalActionsAnimator {
         this.mViewTreeObserverListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.globalactions.presentation.view.MiniSViewCoverViewAnimator$$ExternalSyntheticLambda0
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                MiniSViewCoverViewAnimator miniSViewCoverViewAnimator = MiniSViewCoverViewAnimator.this;
+                MiniSViewCoverViewAnimator miniSViewCoverViewAnimator = this.f$0;
                 miniSViewCoverViewAnimator.mConfirmView.getViewTreeObserver().removeOnGlobalLayoutListener(miniSViewCoverViewAnimator.mViewTreeObserverListener);
                 miniSViewCoverViewAnimator.mOriginalConfirmLocationX = miniSViewCoverViewAnimator.mConfirmIconLabelView.getLeft();
                 miniSViewCoverViewAnimator.mConfirmIconLabelView.setX(((View) miniSViewCoverViewAnimator.mSelectedActionView.getParent()).getLeft() + miniSViewCoverViewAnimator.mSelectedActionView.getLeft());
@@ -178,7 +177,7 @@ public class MiniSViewCoverViewAnimator implements GlobalActionsAnimator {
         this.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.globalactions.presentation.view.MiniSViewCoverViewAnimator$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                MiniSViewCoverViewAnimator.this.mViewStateController.setState(ViewAnimationState.IDLE);
+                this.f$0.mViewStateController.setState(ViewAnimationState.IDLE);
             }
         }, 250L);
     }

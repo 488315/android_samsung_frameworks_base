@@ -17,7 +17,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class WeatherData {
     public static final int $stable = 0;
@@ -39,7 +38,6 @@ public final class WeatherData {
     public static final Companion Companion = new Companion(null);
     private static final WeatherStateIcon WEATHERICON_PLACEHOLDER = WeatherStateIcon.MOSTLY_SUNNY;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -77,13 +75,13 @@ public final class WeatherData {
 
         public final WeatherData fromBundle(Bundle bundle, Function1 function1) {
             String string = bundle.getString("description");
-            WeatherStateIcon fromInt = WeatherStateIcon.Companion.fromInt(bundle.getInt("state", -1));
-            Integer readIntFromBundle = readIntFromBundle(bundle, WeatherData.TEMPERATURE_KEY);
-            if (string == null || fromInt == null || !bundle.containsKey(WeatherData.USE_CELSIUS_KEY) || readIntFromBundle == null) {
+            WeatherStateIcon weatherStateIconFromInt = WeatherStateIcon.Companion.fromInt(bundle.getInt("state", -1));
+            Integer intFromBundle = readIntFromBundle(bundle, WeatherData.TEMPERATURE_KEY);
+            if (string == null || weatherStateIconFromInt == null || !bundle.containsKey(WeatherData.USE_CELSIUS_KEY) || intFromBundle == null) {
                 Log.w(WeatherData.TAG, "Weather data did not parse from " + bundle);
                 return null;
             }
-            WeatherData weatherData = new WeatherData(string, fromInt, bundle.getBoolean(WeatherData.USE_CELSIUS_KEY), readIntFromBundle.intValue(), function1);
+            WeatherData weatherData = new WeatherData(string, weatherStateIconFromInt, bundle.getBoolean(WeatherData.USE_CELSIUS_KEY), intFromBundle.intValue(), function1);
             Log.i(WeatherData.TAG, "Weather data parsed " + weatherData + " from " + bundle);
             return weatherData;
         }
@@ -119,7 +117,6 @@ public final class WeatherData {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WeatherStateIcon {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ WeatherStateIcon[] $VALUES;
@@ -159,7 +156,6 @@ public final class WeatherData {
         public static final WeatherStateIcon WINDY_BREEZY = new WeatherStateIcon("WINDY_BREEZY", 30, 30, "k");
         public static final WeatherStateIcon WINTRY_MIX_RAIN_SNOW = new WeatherStateIcon("WINTRY_MIX_RAIN_SNOW", 31, 31, "h");
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -183,9 +179,9 @@ public final class WeatherData {
         }
 
         static {
-            WeatherStateIcon[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            WeatherStateIcon[] weatherStateIconArr$values = $values();
+            $VALUES = weatherStateIconArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(weatherStateIconArr$values);
             Companion = new Companion(null);
         }
 
@@ -304,9 +300,9 @@ public final class WeatherData {
     }
 
     public int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.temperature, TransitionData$$ExternalSyntheticOutline0.m((this.state.hashCode() + (this.description.hashCode() * 31)) * 31, 31, this.useCelsius), 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.temperature, TransitionData$$ExternalSyntheticOutline0.m((this.state.hashCode() + (this.description.hashCode() * 31)) * 31, 31, this.useCelsius), 31);
         Function1 function1 = this.touchAction;
-        return m + (function1 == null ? 0 : function1.hashCode());
+        return iM + (function1 == null ? 0 : function1.hashCode());
     }
 
     public String toString() {

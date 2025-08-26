@@ -44,9 +44,9 @@ public interface IDeviceVolumeBehaviorDispatcher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDeviceVolumeBehaviorDispatcher.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDeviceVolumeBehaviorDispatcher)) {
-                return (IDeviceVolumeBehaviorDispatcher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDeviceVolumeBehaviorDispatcher.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDeviceVolumeBehaviorDispatcher)) {
+                return (IDeviceVolumeBehaviorDispatcher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IDeviceVolumeBehaviorDispatcher extends IInterface {
             }
             if (i == 1) {
                 AudioDeviceAttributes audioDeviceAttributes = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                dispatchDeviceVolumeBehaviorChanged(audioDeviceAttributes, readInt);
+                dispatchDeviceVolumeBehaviorChanged(audioDeviceAttributes, i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IDeviceVolumeBehaviorDispatcher extends IInterface {
 
             @Override // android.media.IDeviceVolumeBehaviorDispatcher
             public void dispatchDeviceVolumeBehaviorChanged(AudioDeviceAttributes audioDeviceAttributes, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDeviceVolumeBehaviorDispatcher.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDeviceVolumeBehaviorDispatcher.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

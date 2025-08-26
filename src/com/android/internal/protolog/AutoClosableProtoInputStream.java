@@ -4,7 +4,7 @@ import android.util.proto.ProtoInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public final class AutoClosableProtoInputStream implements AutoCloseable {
     private final FileInputStream mFileInputStream;
     private final ProtoInputStream mProtoInputStream;

@@ -66,9 +66,9 @@ public interface IVirtualSensorCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVirtualSensorCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVirtualSensorCallback)) {
-                return (IVirtualSensorCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVirtualSensorCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVirtualSensorCallback)) {
+                return (IVirtualSensorCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,27 +105,27 @@ public interface IVirtualSensorCallback extends IInterface {
             }
             if (i == 1) {
                 VirtualSensor virtualSensor = (VirtualSensor) parcel.readTypedObject(VirtualSensor.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                boolean z = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onConfigurationChanged(virtualSensor, readBoolean, readInt, readInt2);
+                onConfigurationChanged(virtualSensor, z, i3, i4);
             } else if (i == 2) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 SharedMemory sharedMemory = (SharedMemory) parcel.readTypedObject(SharedMemory.CREATOR);
                 parcel.enforceNoDataAvail();
-                onDirectChannelCreated(readInt3, sharedMemory);
+                onDirectChannelCreated(i5, sharedMemory);
             } else if (i == 3) {
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onDirectChannelDestroyed(readInt4);
+                onDirectChannelDestroyed(i6);
             } else if (i == 4) {
-                int readInt5 = parcel.readInt();
+                int i7 = parcel.readInt();
                 VirtualSensor virtualSensor2 = (VirtualSensor) parcel.readTypedObject(VirtualSensor.CREATOR);
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                int i9 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onDirectChannelConfigured(readInt5, virtualSensor2, readInt6, readInt7);
+                onDirectChannelConfigured(i7, virtualSensor2, i8, i9);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -150,56 +150,56 @@ public interface IVirtualSensorCallback extends IInterface {
 
             @Override // android.companion.virtual.sensor.IVirtualSensorCallback
             public void onConfigurationChanged(VirtualSensor virtualSensor, boolean z, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualSensor, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualSensor, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.sensor.IVirtualSensorCallback
             public void onDirectChannelCreated(int i, SharedMemory sharedMemory) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(sharedMemory, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(sharedMemory, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.sensor.IVirtualSensorCallback
             public void onDirectChannelDestroyed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.sensor.IVirtualSensorCallback
             public void onDirectChannelConfigured(int i, VirtualSensor virtualSensor, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(virtualSensor, 0);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(virtualSensor, 0);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

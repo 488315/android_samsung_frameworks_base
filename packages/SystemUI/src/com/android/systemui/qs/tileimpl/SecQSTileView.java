@@ -3,8 +3,10 @@ package com.android.systemui.qs.tileimpl;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +15,13 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.systemui.Dependency;
+import com.android.systemui.FontSizeUtils;
 import com.android.systemui.R;
 import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecQSTileView extends SecQSTileBaseView {
     public final boolean mIsLargeView;
@@ -90,143 +92,86 @@ public class SecQSTileView extends SecQSTileBaseView {
         updateTouchTargetArea();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:42:0x00b4, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:31:0x00b4, code lost:
     
         if (r10.length() <= 0) goto L51;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x00b6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:32:0x00b6, code lost:
     
         r7 = r7 + 1;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x00b8, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:33:0x00b8, code lost:
     
         if (r7 <= 2) goto L52;
      */
     @Override // android.widget.LinearLayout, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void onMeasure(int r17, int r18) {
-        /*
-            r16 = this;
-            r0 = r16
-            android.widget.TextView r1 = r0.mLabel
-            r2 = 0
-            r1.setSingleLine(r2)
-            super.onMeasure(r17, r18)
-            boolean r1 = r0.mCollapsedView
-            if (r1 != 0) goto Ld7
-            android.widget.TextView r1 = r0.mLabel
-            java.lang.CharSequence r1 = r1.getText()
-            java.lang.String r1 = r1.toString()
-            boolean r3 = android.text.TextUtils.isEmpty(r1)
-            if (r3 == 0) goto L21
-            goto Ld7
-        L21:
-            android.widget.TextView r3 = r0.mLabel
-            android.text.TextPaint r3 = r3.getPaint()
-            android.widget.TextView r4 = r0.mLabel
-            float r4 = r4.getTextSize()
-            r3.setTextSize(r4)
-            java.lang.String r4 = "\n"
-            java.lang.String[] r1 = r1.split(r4)
-            android.widget.TextView r4 = r0.mLabel
-            int r4 = r4.getMeasuredWidth()
-            android.widget.TextView r5 = r0.mLabel
-            int r5 = r5.getPaddingLeft()
-            int r4 = r4 - r5
-            android.widget.TextView r5 = r0.mLabel
-            int r5 = r5.getPaddingRight()
-            int r4 = r4 - r5
-            int r5 = r1.length
-            r6 = r2
-            r7 = r6
-        L4d:
-            if (r6 >= r5) goto Lbe
-            r8 = r1[r6]
-            java.lang.String r9 = " "
-            java.lang.String[] r8 = r8.split(r9)
-            java.lang.StringBuilder r10 = new java.lang.StringBuilder
-            r10.<init>()
-            int r11 = r8.length
-            r12 = r2
-        L5e:
-            r13 = 2
-            if (r12 >= r11) goto Lb0
-            r14 = r8[r12]
-            float r15 = r3.measureText(r14)
-            float r2 = (float) r4
-            int r15 = (r15 > r2 ? 1 : (r15 == r2 ? 0 : -1))
-            if (r15 <= 0) goto L71
-            int r1 = r0.mMaxLabelLines
-            int r7 = r1 + 1
-            goto Lbe
-        L71:
-            int r15 = r10.length()
-            if (r15 <= 0) goto L8a
-            java.lang.StringBuilder r15 = new java.lang.StringBuilder
-            r15.<init>()
-            r15.append(r10)
-            r15.append(r9)
-            r15.append(r14)
-            java.lang.String r15 = r15.toString()
-            goto L8b
-        L8a:
-            r15 = r14
-        L8b:
-            float r15 = r3.measureText(r15)
-            int r2 = (r15 > r2 ? 1 : (r15 == r2 ? 0 : -1))
-            if (r2 > 0) goto La1
-            int r2 = r10.length()
-            if (r2 <= 0) goto L9c
-            r10.append(r9)
-        L9c:
-            r10.append(r14)
-            r2 = 0
-            goto Lad
-        La1:
-            int r7 = r7 + 1
-            if (r7 <= r13) goto La6
-            goto Lbe
-        La6:
-            r2 = 0
-            r10.setLength(r2)
-            r10.append(r14)
-        Lad:
-            int r12 = r12 + 1
-            goto L5e
-        Lb0:
-            int r8 = r10.length()
-            if (r8 <= 0) goto Lbb
-            int r7 = r7 + 1
-            if (r7 <= r13) goto Lbb
-            goto Lbe
-        Lbb:
-            int r6 = r6 + 1
-            goto L4d
-        Lbe:
-            int r1 = r0.mMaxLabelLines
-            if (r7 <= r1) goto Lc3
-            goto Ld7
-        Lc3:
-            android.widget.TextView r1 = r0.mSecondLine
-            java.lang.CharSequence r1 = r1.getText()
-            boolean r1 = android.text.TextUtils.isEmpty(r1)
-            if (r1 != 0) goto Ld6
-            int r1 = r0.mMaxLabelLines
-            int r1 = r1 + (-1)
-            if (r7 <= r1) goto Ld6
-            goto Ld7
-        Ld6:
-            return
-        Ld7:
-            android.widget.TextView r1 = r0.mLabel
-            r1.setSingleLine()
-            super.onMeasure(r17, r18)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tileimpl.SecQSTileView.onMeasure(int, int):void");
+    public void onMeasure(int i, int i2) {
+        String str;
+        int i3 = 0;
+        this.mLabel.setSingleLine(false);
+        super.onMeasure(i, i2);
+        if (!this.mCollapsedView) {
+            String string = this.mLabel.getText().toString();
+            if (!TextUtils.isEmpty(string)) {
+                TextPaint paint = this.mLabel.getPaint();
+                paint.setTextSize(this.mLabel.getTextSize());
+                String[] strArrSplit = string.split("\n");
+                int measuredWidth = (this.mLabel.getMeasuredWidth() - this.mLabel.getPaddingLeft()) - this.mLabel.getPaddingRight();
+                int length = strArrSplit.length;
+                int i4 = 0;
+                int i5 = 0;
+                loop0: while (true) {
+                    if (i4 >= length) {
+                        break;
+                    }
+                    String[] strArrSplit2 = strArrSplit[i4].split(" ");
+                    StringBuilder sb = new StringBuilder();
+                    int length2 = strArrSplit2.length;
+                    int i6 = i3;
+                    while (true) {
+                        if (i6 >= length2) {
+                            break;
+                        }
+                        String str2 = strArrSplit2[i6];
+                        float f = measuredWidth;
+                        if (paint.measureText(str2) > f) {
+                            i5 = this.mMaxLabelLines + 1;
+                            break loop0;
+                        }
+                        if (sb.length() > 0) {
+                            str = ((Object) sb) + " " + str2;
+                        } else {
+                            str = str2;
+                        }
+                        if (paint.measureText(str) <= f) {
+                            if (sb.length() > 0) {
+                                sb.append(" ");
+                            }
+                            sb.append(str2);
+                            i3 = 0;
+                        } else {
+                            i5++;
+                            if (i5 > 2) {
+                                break loop0;
+                            }
+                            i3 = 0;
+                            sb.setLength(0);
+                            sb.append(str2);
+                        }
+                        i6++;
+                    }
+                    i4++;
+                }
+                if (i5 <= this.mMaxLabelLines && (TextUtils.isEmpty(this.mSecondLine.getText()) || i5 <= this.mMaxLabelLines - 1)) {
+                    return;
+                }
+            }
+        }
+        this.mLabel.setSingleLine();
+        super.onMeasure(i, i2);
     }
 
     @Override // com.android.systemui.plugins.qs.QSTileView
@@ -234,7 +179,7 @@ public class SecQSTileView extends SecQSTileBaseView {
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.qs.tileimpl.SecQSTileView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SecQSTileView.this.mLabelContainer.setVisibility(z ? 0 : 8);
+                this.f$0.mLabelContainer.setVisibility(z ? 0 : 8);
             }
         });
     }
@@ -290,7 +235,7 @@ public class SecQSTileView extends SecQSTileBaseView {
         this(context, z, z2, z3, z4, null);
     }
 
-    public SecQSTileView(Context context, boolean z, boolean z2, boolean z3, boolean z4, QSIconViewImpl qSIconViewImpl) {
+    public SecQSTileView(Context context, boolean z, boolean z2, boolean z3, boolean z4, QSIconViewImpl qSIconViewImpl) throws Resources.NotFoundException {
         super(context, z, qSIconViewImpl);
         this.mMaxLabelLines = 2;
         ((LinearLayout) this).mContext = context;
@@ -315,6 +260,11 @@ public class SecQSTileView extends SecQSTileBaseView {
         TextView textView2 = (TextView) this.mLabelContainer.findViewById(R.id.app_label);
         this.mSecondLine = textView2;
         textView2.setSelected(true);
+        TextView textView3 = this.mLabel;
+        boolean z5 = this.mIsLargeView;
+        int i = R.dimen.sec_qs_tile_label_text_size;
+        FontSizeUtils.updateFontSize(textView3, z5 ? R.dimen.sec_style_qs_tile_text_size : R.dimen.sec_qs_tile_label_text_size, 1.0f, 1.3f);
+        FontSizeUtils.updateFontSize(this.mSecondLine, this.mIsLargeView ? R.dimen.sec_style_qs_tile_second_text_size : i, 1.0f, 1.3f);
         addView(this.mLabelContainer);
         setOrientation(!z2 ? 1 : 0);
         if (z2) {

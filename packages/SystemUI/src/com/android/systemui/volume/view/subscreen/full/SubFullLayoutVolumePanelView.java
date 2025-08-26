@@ -52,14 +52,12 @@ import java.util.List;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.collections.ReversedListReadOnly;
-import kotlin.collections.ReversedListReadOnly$listIterator$1;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.math.MathKt__MathJVMKt;
 import kotlin.sequences.TransformingSequence;
-import kotlin.sequences.TransformingSequence$iterator$1;
+import kotlin.sequences.TransformingSequence.AnonymousClass1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubFullLayoutVolumePanelView extends FrameLayout implements VolumeObserver<VolumePanelState>, ViewContext {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -103,7 +101,6 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
     public ViewGroup volumePanelView;
     public final Lazy warningDialogController$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -113,7 +110,6 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -170,7 +166,7 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
         this.keyUpRunnable = new Runnable() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelView$keyUpRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                SubFullLayoutVolumePanelView subFullLayoutVolumePanelView = SubFullLayoutVolumePanelView.this;
+                SubFullLayoutVolumePanelView subFullLayoutVolumePanelView = this.this$0;
                 subFullLayoutVolumePanelView.isKeyDownAnimating = false;
                 SubFullLayoutVolumePanelMotion subFullLayoutVolumePanelMotion = subFullLayoutVolumePanelView.volumePanelMotion;
                 SpringAnimation springAnimation = null;
@@ -201,7 +197,7 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i = SubFullLayoutVolumePanelView.$r8$clinit;
-                return new WarningDialogController(SubFullLayoutVolumePanelView.this);
+                return new WarningDialogController(this.f$0);
             }
         });
     }
@@ -224,11 +220,11 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
         Log.d("SubFullLayoutVolumePanelView", "addRows: rows=" + VolumePanelRowExt.listToString(reversedListReadOnly));
         Iterator it = reversedListReadOnly.iterator();
         while (true) {
-            ReversedListReadOnly$listIterator$1 reversedListReadOnly$listIterator$1 = (ReversedListReadOnly$listIterator$1) it;
-            if (!reversedListReadOnly$listIterator$1.delegateIterator.hasPrevious()) {
+            ReversedListReadOnly.AnonymousClass1 anonymousClass1 = (ReversedListReadOnly.AnonymousClass1) it;
+            if (!anonymousClass1.delegateIterator.hasPrevious()) {
                 return;
             }
-            VolumePanelRow volumePanelRow2 = (VolumePanelRow) reversedListReadOnly$listIterator$1.delegateIterator.previous();
+            VolumePanelRow volumePanelRow2 = (VolumePanelRow) anonymousClass1.delegateIterator.previous();
             SubFullLayoutVolumeRowView subFullLayoutVolumeRowView = (SubFullLayoutVolumeRowView) LayoutInflater.from(getContext()).inflate(R.layout.sub_full_volume_row_view, (ViewGroup) null);
             VolumePanelStore volumePanelStore = this.store;
             VolumePanelStore volumePanelStore2 = volumePanelStore != null ? volumePanelStore : null;
@@ -247,86 +243,81 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
             }
             if (!this.isDualViewEnabled) {
                 ViewVisibilityUtil viewVisibilityUtil = ViewVisibilityUtil.INSTANCE;
-                View requireViewById = subFullLayoutVolumeRowView.requireViewById(R.id.volume_seekbar_outline_stroke);
+                View viewRequireViewById = subFullLayoutVolumeRowView.requireViewById(R.id.volume_seekbar_outline_stroke);
                 viewVisibilityUtil.getClass();
-                requireViewById.setVisibility(0);
+                viewRequireViewById.setVisibility(0);
             }
             volumePanelState = volumePanelState2;
         }
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:67:0x0104  */
     @Override // android.view.ViewGroup, android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
         this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_TOUCH_PANEL).isFromOutside(true).build(), false);
         int action = motionEvent.getAction();
-        if (action != 0) {
-            if (action != 1) {
-                if (action == 2) {
-                    float x = motionEvent.getX();
-                    float f = x - this.downX;
-                    VolumePanelState volumePanelState = this.panelState;
-                    if (volumePanelState == null) {
-                        volumePanelState = null;
+        if (action == 0) {
+            VolumePanelState volumePanelState = this.panelState;
+            if (volumePanelState == null) {
+                volumePanelState = null;
+            }
+            if (VolumePanelStateExt.isAODVolumePanel(volumePanelState)) {
+                if (!this.isFirstTouch) {
+                    ViewUtil viewUtil = ViewUtil.INSTANCE;
+                    ViewGroup viewGroup = this.rowContainer;
+                    if (viewGroup == null) {
+                        viewGroup = null;
                     }
-                    if (VolumePanelStateExt.isAODVolumePanel(volumePanelState)) {
-                        float y = this.downY - motionEvent.getY();
-                        if (this.isDragging) {
-                            ViewUtil viewUtil = ViewUtil.INSTANCE;
-                            ViewGroup viewGroup = this.rowContainer;
-                            ViewGroup viewGroup2 = viewGroup != null ? viewGroup : null;
-                            float rawX = motionEvent.getRawX();
-                            float rawY = motionEvent.getRawY();
-                            viewUtil.getClass();
-                            if (!ViewUtil.isTouched(viewGroup2, rawX, rawY)) {
-                                float f2 = ((y / 300.0f) * 1500.0f) + this.currentVolume;
-                                if (f2 < 0.0f) {
-                                    f2 = 0.0f;
-                                }
-                                int roundToInt = MathKt__MathJVMKt.roundToInt(f2 <= 1500.0f ? f2 : 1500.0f);
-                                if (this.isDragging) {
-                                    this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_UPDATE_PROGRESS_BAR).stream(this.activeStream).progress(roundToInt).isFromOutside(true).build(), false);
-                                }
-                            }
-                        }
-                    } else if (this.isTouchDown && Math.abs(f) > this.swipeDistance && !this.startProgress && !this.isLockscreen) {
-                        this.isTouchDown = false;
-                        this.isSwipe = true;
-                        VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder((!BasicRune.VOLUME_LEFT_DISPLAY_VOLUME_DIALOG ? (x > this.downX ? 1 : (x == this.downX ? 0 : -1)) > 0 : (x > this.downX ? 1 : (x == this.downX ? 0 : -1)) < 0) != false ? VolumePanelAction.ActionType.ACTION_SWIPE_COLLAPSED : VolumePanelAction.ActionType.ACTION_SWIPE_PANEL), true, this.storeInteractor, false);
-                    }
-                } else if (action != 3) {
-                    if (action == 4) {
-                        VolumePanelState volumePanelState2 = this.panelState;
-                        if (VolumePanelStateExt.isAODVolumePanel(volumePanelState2 != null ? volumePanelState2 : null)) {
-                            this.isTouchDown = false;
-                            this.isDragging = false;
-                        } else {
-                            VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_TOUCH_OUTSIDE), true, this.storeInteractor, false);
-                            this.touchDownExpandButton = false;
-                        }
+                    float rawX = motionEvent.getRawX();
+                    float rawY = motionEvent.getRawY();
+                    viewUtil.getClass();
+                    if (!ViewUtil.isTouched(viewGroup, rawX, rawY)) {
+                        VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_TOUCH_OUTSIDE), true, this.storeInteractor, false);
+                        this.touchDownExpandButton = false;
                         this.startProgress = false;
                         return true;
                     }
                 }
+                this.isDragging = true;
             }
+            if (!this.isLockscreen) {
+                ViewUtil viewUtil2 = ViewUtil.INSTANCE;
+                ImageView imageView = this.expandButton;
+                ImageView imageView2 = imageView != null ? imageView : null;
+                float rawX2 = motionEvent.getRawX();
+                float rawY2 = motionEvent.getRawY();
+                viewUtil2.getClass();
+                if (ViewUtil.isTouched(imageView2, rawX2, rawY2)) {
+                    this.touchDownExpandButton = true;
+                }
+            }
+            this.downY = motionEvent.getY();
+            this.downX = motionEvent.getX();
+            this.isSwipe = false;
+            this.isTouchDown = true;
+        } else if (action == 1) {
             int i = VolumePanelViewExt.$r8$clinit;
-            TransformingSequence$iterator$1 transformingSequence$iterator$1 = new TransformingSequence$iterator$1(new TransformingSequence(new ViewGroupKt$children$1((ViewGroup) requireViewById(R.id.volume_panel_row_container)), new VolumePanelViewExt$$ExternalSyntheticLambda0(0)));
+            TransformingSequence.AnonymousClass1 anonymousClass1 = new TransformingSequence(new ViewGroupKt$children$1((ViewGroup) requireViewById(R.id.volume_panel_row_container)), new VolumePanelViewExt$$ExternalSyntheticLambda0(0)).new AnonymousClass1();
             while (true) {
-                if (!transformingSequence$iterator$1.iterator.hasNext()) {
+                if (!anonymousClass1.iterator.hasNext()) {
                     boolean z = this.startProgress;
                     if (!z && this.touchDownExpandButton) {
-                        ViewUtil viewUtil2 = ViewUtil.INSTANCE;
-                        ImageView imageView = this.expandButton;
-                        ImageView imageView2 = imageView != null ? imageView : null;
-                        float rawX2 = motionEvent.getRawX();
-                        float rawY2 = motionEvent.getRawY();
-                        viewUtil2.getClass();
-                        if (ViewUtil.isTouched(imageView2, rawX2, rawY2)) {
+                        ViewUtil viewUtil3 = ViewUtil.INSTANCE;
+                        ImageView imageView3 = this.expandButton;
+                        ImageView imageView4 = imageView3 != null ? imageView3 : null;
+                        float rawX3 = motionEvent.getRawX();
+                        float rawY3 = motionEvent.getRawY();
+                        viewUtil3.getClass();
+                        if (ViewUtil.isTouched(imageView4, rawX3, rawY3)) {
                             VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_EXPAND_BUTTON_CLICKED), true, this.storeInteractor, false);
                         }
                     } else if (!this.isSwipe && !this.isSeekBarTouching && !z && !this.isDualViewEnabled) {
-                        VolumePanelState volumePanelState3 = this.panelState;
-                        if (!VolumePanelStateExt.isAODVolumePanel(volumePanelState3 != null ? volumePanelState3 : null)) {
+                        VolumePanelState volumePanelState2 = this.panelState;
+                        if (!VolumePanelStateExt.isAODVolumePanel(volumePanelState2 != null ? volumePanelState2 : null)) {
                             VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_TOUCH_OUTSIDE), true, this.storeInteractor, false);
                             return true;
                         }
@@ -340,49 +331,55 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
                         this.isSwipe = false;
                         return true;
                     }
-                } else if (((SubFullLayoutVolumeRowView) transformingSequence$iterator$1.next()).isIconClicked(motionEvent.getRawX(), motionEvent.getRawY())) {
+                } else if (((SubFullLayoutVolumeRowView) anonymousClass1.next()).isIconClicked(motionEvent.getRawX(), motionEvent.getRawY())) {
                     break;
                 }
             }
-        } else {
-            VolumePanelState volumePanelState4 = this.panelState;
-            if (volumePanelState4 == null) {
-                volumePanelState4 = null;
+        } else if (action == 2) {
+            float x = motionEvent.getX();
+            float f = x - this.downX;
+            VolumePanelState volumePanelState3 = this.panelState;
+            if (volumePanelState3 == null) {
+                volumePanelState3 = null;
             }
-            if (VolumePanelStateExt.isAODVolumePanel(volumePanelState4)) {
-                if (!this.isFirstTouch) {
-                    ViewUtil viewUtil3 = ViewUtil.INSTANCE;
-                    ViewGroup viewGroup3 = this.rowContainer;
-                    if (viewGroup3 == null) {
-                        viewGroup3 = null;
-                    }
-                    float rawX3 = motionEvent.getRawX();
-                    float rawY3 = motionEvent.getRawY();
-                    viewUtil3.getClass();
-                    if (!ViewUtil.isTouched(viewGroup3, rawX3, rawY3)) {
-                        VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_TOUCH_OUTSIDE), true, this.storeInteractor, false);
-                        this.touchDownExpandButton = false;
-                        this.startProgress = false;
-                        return true;
+            if (VolumePanelStateExt.isAODVolumePanel(volumePanelState3)) {
+                float y = this.downY - motionEvent.getY();
+                if (this.isDragging) {
+                    ViewUtil viewUtil4 = ViewUtil.INSTANCE;
+                    ViewGroup viewGroup2 = this.rowContainer;
+                    ViewGroup viewGroup3 = viewGroup2 != null ? viewGroup2 : null;
+                    float rawX4 = motionEvent.getRawX();
+                    float rawY4 = motionEvent.getRawY();
+                    viewUtil4.getClass();
+                    if (!ViewUtil.isTouched(viewGroup3, rawX4, rawY4)) {
+                        float f2 = ((y / 300.0f) * 1500.0f) + this.currentVolume;
+                        if (f2 < 0.0f) {
+                            f2 = 0.0f;
+                        }
+                        int iRoundToInt = MathKt__MathJVMKt.roundToInt(f2 <= 1500.0f ? f2 : 1500.0f);
+                        if (this.isDragging) {
+                            this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_UPDATE_PROGRESS_BAR).stream(this.activeStream).progress(iRoundToInt).isFromOutside(true).build(), false);
+                        }
                     }
                 }
-                this.isDragging = true;
+            } else if (this.isTouchDown && Math.abs(f) > this.swipeDistance && !this.startProgress && !this.isLockscreen) {
+                this.isTouchDown = false;
+                this.isSwipe = true;
+                VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder((!BasicRune.VOLUME_LEFT_DISPLAY_VOLUME_DIALOG ? (x > this.downX ? 1 : (x == this.downX ? 0 : -1)) > 0 : (x > this.downX ? 1 : (x == this.downX ? 0 : -1)) < 0) != false ? VolumePanelAction.ActionType.ACTION_SWIPE_COLLAPSED : VolumePanelAction.ActionType.ACTION_SWIPE_PANEL), true, this.storeInteractor, false);
             }
-            if (!this.isLockscreen) {
-                ViewUtil viewUtil4 = ViewUtil.INSTANCE;
-                ImageView imageView3 = this.expandButton;
-                ImageView imageView4 = imageView3 != null ? imageView3 : null;
-                float rawX4 = motionEvent.getRawX();
-                float rawY4 = motionEvent.getRawY();
-                viewUtil4.getClass();
-                if (ViewUtil.isTouched(imageView4, rawX4, rawY4)) {
-                    this.touchDownExpandButton = true;
+        } else if (action != 3) {
+            if (action == 4) {
+                VolumePanelState volumePanelState4 = this.panelState;
+                if (VolumePanelStateExt.isAODVolumePanel(volumePanelState4 != null ? volumePanelState4 : null)) {
+                    this.isTouchDown = false;
+                    this.isDragging = false;
+                } else {
+                    VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_TOUCH_OUTSIDE), true, this.storeInteractor, false);
+                    this.touchDownExpandButton = false;
                 }
+                this.startProgress = false;
+                return true;
             }
-            this.downY = motionEvent.getY();
-            this.downX = motionEvent.getX();
-            this.isSwipe = false;
-            this.isTouchDown = true;
         }
         return super.dispatchTouchEvent(motionEvent);
     }
@@ -501,12 +498,12 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
 
     @Override // com.samsung.systemui.splugins.volume.VolumeObserver
     public final void onChanged(VolumePanelState volumePanelState) {
-        VolumePanelRow findRow;
+        VolumePanelRow volumePanelRowFindRow;
         VolumePanelState volumePanelState2 = volumePanelState;
         this.panelState = volumePanelState2;
-        r1 = null;
+        springAnimation = null;
         SpringAnimation springAnimation = null;
-        r1 = null;
+        springAnimation = null;
         SpringAnimation springAnimation2 = null;
         switch (WhenMappings.$EnumSwitchMapping$0[volumePanelState2.getStateType().ordinal()]) {
             case 1:
@@ -586,15 +583,15 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
                 ((WarningDialogController) this.warningDialogController$delegate.getValue()).showVolumeCSD100WarningDialog();
                 break;
             case 8:
-                if (VolumePanelStateExt.isAODVolumePanel(volumePanelState2) && (findRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState2, volumePanelState2.getActiveStream())) != null) {
-                    this.currentVolume = findRow.getRealLevel();
+                if (VolumePanelStateExt.isAODVolumePanel(volumePanelState2) && (volumePanelRowFindRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState2, volumePanelState2.getActiveStream())) != null) {
+                    this.currentVolume = volumePanelRowFindRow.getRealLevel();
                     break;
                 }
                 break;
             case 9:
-                VolumePanelRow findRow2 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState2, volumePanelState2.getActiveStream());
-                boolean isSliderEnabled = findRow2 != null ? findRow2.isSliderEnabled() : false;
-                if (!this.isDualViewEnabled && !volumePanelState2.isExpanded() && isSliderEnabled) {
+                VolumePanelRow volumePanelRowFindRow2 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState2, volumePanelState2.getActiveStream());
+                boolean zIsSliderEnabled = volumePanelRowFindRow2 != null ? volumePanelRowFindRow2.isSliderEnabled() : false;
+                if (!this.isDualViewEnabled && !volumePanelState2.isExpanded() && zIsSliderEnabled) {
                     if (!volumePanelState2.isKeyDown()) {
                         if (this.isKeyDownAnimating) {
                             HandlerWrapper handlerWrapper = this.handlerWrapper;
@@ -663,7 +660,7 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
         final Runnable runnable = new Runnable() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelView$startDismissAnimation$dismissRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                SubFullLayoutVolumePanelWindow subFullLayoutVolumePanelWindow = SubFullLayoutVolumePanelView.this.dialog;
+                SubFullLayoutVolumePanelWindow subFullLayoutVolumePanelWindow = this.this$0.dialog;
                 if (subFullLayoutVolumePanelWindow == null) {
                     subFullLayoutVolumePanelWindow = null;
                 }
@@ -688,12 +685,12 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     runnable.run();
-                    SubFullLayoutVolumePanelMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_FINISHED).build(), true);
+                    subFullLayoutVolumePanelMotion.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_FINISHED).build(), true);
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationStart(Animator animator) {
-                    SubFullLayoutVolumePanelMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_START).build(), true);
+                    subFullLayoutVolumePanelMotion.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_START).build(), true);
                 }
             }).start();
             return;
@@ -717,22 +714,22 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
                     springAnimation2.cancel();
                 }
             }
-            ViewPropertyAnimator animate = decorView2.animate();
+            ViewPropertyAnimator viewPropertyAnimatorAnimate = decorView2.animate();
             boolean z = BasicRune.VOLUME_LEFT_DISPLAY_VOLUME_DIALOG;
             int width = decorView2.getWidth();
             if (z) {
                 width = -width;
             }
-            animate.translationX(width).setDuration(350L).setInterpolator(SubFullLayoutVolumePanelMotion.HIDE_INTERPOLATOR).setListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelMotion$startVolumePanelDismissAnimation$2
+            viewPropertyAnimatorAnimate.translationX(width).setDuration(350L).setInterpolator(SubFullLayoutVolumePanelMotion.HIDE_INTERPOLATOR).setListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelMotion$startVolumePanelDismissAnimation$2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     runnable.run();
-                    SubFullLayoutVolumePanelMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_FINISHED).build(), true);
+                    subFullLayoutVolumePanelMotion2.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_FINISHED).build(), true);
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationStart(Animator animator) {
-                    SubFullLayoutVolumePanelMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_START).build(), true);
+                    subFullLayoutVolumePanelMotion2.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_START).build(), true);
                 }
             }).start();
             return;
@@ -753,31 +750,31 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
             animatorSet.cancel();
         }
         subFullLayoutVolumePanelMotion3.dualShowAnimation = null;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(decorView3, "alpha", decorView3.getAlpha(), 0.0f);
-        ofFloat.setDuration(200L);
-        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.67f, 1.0f, ofFloat);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(decorView3, "scaleX", decorView3.getScaleX(), 0.9f);
-        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelMotion$startVolumeDualViewHideAnimation$scaleAnimator$1$1
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(decorView3, "alpha", decorView3.getAlpha(), 0.0f);
+        objectAnimatorOfFloat.setDuration(200L);
+        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.67f, 1.0f, objectAnimatorOfFloat);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(decorView3, "scaleX", decorView3.getScaleX(), 0.9f);
+        objectAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelMotion$startVolumeDualViewHideAnimation$scaleAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 decorView3.setScaleY(((Float) valueAnimator.getAnimatedValue()).floatValue());
             }
         });
-        ofFloat2.setDuration(200L);
-        ofFloat2.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f));
+        objectAnimatorOfFloat2.setDuration(200L);
+        objectAnimatorOfFloat2.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f));
         AnimatorSet animatorSet2 = new AnimatorSet();
-        animatorSet2.playTogether(ofFloat);
-        animatorSet2.playTogether(ofFloat2);
+        animatorSet2.playTogether(objectAnimatorOfFloat);
+        animatorSet2.playTogether(objectAnimatorOfFloat2);
         animatorSet2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumePanelMotion$startVolumeDualViewHideAnimation$1$1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 runnable.run();
-                SubFullLayoutVolumePanelMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_FINISHED).build(), true);
+                subFullLayoutVolumePanelMotion3.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_FINISHED).build(), true);
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator) {
-                SubFullLayoutVolumePanelMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_START).build(), true);
+                subFullLayoutVolumePanelMotion3.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_START).build(), true);
             }
         });
         animatorSet2.start();
@@ -793,10 +790,10 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
                 (textView != null ? textView : null).setText(getContext().getString(R.string.volume_panel_view_title));
                 return;
             }
-            VolumePanelRow findRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, volumePanelState.getStream());
-            if (findRow != null) {
+            VolumePanelRow volumePanelRowFindRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, volumePanelState.getStream());
+            if (volumePanelRowFindRow != null) {
                 TextView textView2 = this.dualViewTitle;
-                (textView2 != null ? textView2 : null).setText(VolumePanelRowExt.getStreamLabel(findRow, getContext()));
+                (textView2 != null ? textView2 : null).setText(VolumePanelRowExt.getStreamLabel(volumePanelRowFindRow, getContext()));
                 return;
             }
             return;
@@ -813,13 +810,13 @@ public final class SubFullLayoutVolumePanelView extends FrameLayout implements V
             (r3 != 0 ? r3 : null).setVisibility(0);
             return;
         }
-        VolumePanelRow findRow2 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, volumePanelState.getStream());
-        if (findRow2 != null) {
+        VolumePanelRow volumePanelRowFindRow2 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, volumePanelState.getStream());
+        if (volumePanelRowFindRow2 != null) {
             TextView textView4 = this.dualViewTitle;
             if (textView4 == null) {
                 textView4 = null;
             }
-            textView4.setText(VolumePanelRowExt.getStreamLabel(findRow2, getContext()));
+            textView4.setText(VolumePanelRowExt.getStreamLabel(volumePanelRowFindRow2, getContext()));
         }
         ViewVisibilityUtil viewVisibilityUtil2 = ViewVisibilityUtil.INSTANCE;
         TextView textView5 = this.dualViewTitle;

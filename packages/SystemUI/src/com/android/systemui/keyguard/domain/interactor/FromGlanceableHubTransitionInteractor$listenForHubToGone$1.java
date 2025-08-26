@@ -21,13 +21,11 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromGlanceableHubTransitionInteractor$listenForHubToGone$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ FromGlanceableHubTransitionInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.domain.interactor.FromGlanceableHubTransitionInteractor$listenForHubToGone$1$4, reason: invalid class name */
     final /* synthetic */ class AnonymousClass4 extends AdaptedFunctionReference implements Function3 {
         public static final AnonymousClass4 INSTANCE = new AnonymousClass4();
@@ -68,17 +66,17 @@ final class FromGlanceableHubTransitionInteractor$listenForHubToGone$1 extends S
             ResultKt.throwOnFailure(obj);
             FromGlanceableHubTransitionInteractor fromGlanceableHubTransitionInteractor = this.this$0;
             BooleanFlowOperators booleanFlowOperators = BooleanFlowOperators.INSTANCE;
-            Flow sample = FlowKt.sample(new TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1(booleanFlowOperators.allOf(fromGlanceableHubTransitionInteractor.keyguardInteractor.isKeyguardGoingAway, booleanFlowOperators.noneOf(fromGlanceableHubTransitionInteractor.communalSceneInteractor.isLaunchingWidget)), fromGlanceableHubTransitionInteractor, new FromAlternateBouncerTransitionInteractor$listenForAlternateBouncerToPrimaryBouncer$1$$ExternalSyntheticLambda0(0)), this.this$0.communalSceneInteractor.editModeState, AnonymousClass4.INSTANCE);
+            Flow flowSample = FlowKt.sample(new TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1(booleanFlowOperators.allOf(fromGlanceableHubTransitionInteractor.keyguardInteractor.isKeyguardGoingAway, booleanFlowOperators.noneOf(fromGlanceableHubTransitionInteractor.communalSceneInteractor.isLaunchingWidget)), fromGlanceableHubTransitionInteractor, new FromAlternateBouncerTransitionInteractor$listenForAlternateBouncerToPrimaryBouncer$1$$ExternalSyntheticLambda0(0)), this.this$0.communalSceneInteractor.editModeState, AnonymousClass4.INSTANCE);
             final FromGlanceableHubTransitionInteractor fromGlanceableHubTransitionInteractor2 = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.FromGlanceableHubTransitionInteractor$listenForHubToGone$1.5
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     EditModeState editModeState = (EditModeState) ((Pair) obj2).component2();
                     if (editModeState == EditModeState.STARTING || editModeState == EditModeState.SHOWING) {
-                        Object startTransitionTo$default = TransitionInteractor.startTransitionTo$default(FromGlanceableHubTransitionInteractor.this, KeyguardState.GONE, null, null, null, continuation, 14);
-                        return startTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default : Unit.INSTANCE;
+                        Object objStartTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromGlanceableHubTransitionInteractor2, KeyguardState.GONE, null, null, null, continuation, 14);
+                        return objStartTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default : Unit.INSTANCE;
                     }
-                    CommunalSceneInteractor communalSceneInteractor = FromGlanceableHubTransitionInteractor.this.communalSceneInteractor;
+                    CommunalSceneInteractor communalSceneInteractor = fromGlanceableHubTransitionInteractor2.communalSceneInteractor;
                     SceneKey sceneKey = CommunalScenes.Blank;
                     CommunalTransitionKeys.INSTANCE.getClass();
                     communalSceneInteractor.changeScene(sceneKey, "hub to gone", CommunalTransitionKeys.SimpleFade, KeyguardState.GONE);
@@ -86,7 +84,7 @@ final class FromGlanceableHubTransitionInteractor$listenForHubToGone$1 extends S
                 }
             };
             this.label = 1;
-            if (sample.collect(flowCollector, this) == coroutineSingletons) {
+            if (flowSample.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

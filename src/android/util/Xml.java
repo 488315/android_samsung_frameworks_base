@@ -57,46 +57,46 @@ public class Xml {
         return SystemProperties.getBoolean("persist.sys.binary_xml", true);
     }
 
-    public static void parse(String str, ContentHandler contentHandler) throws SAXException {
+    public static void parse(String str, ContentHandler contentHandler) throws SAXException, IOException {
         try {
-            XMLReader newXMLReader = newXMLReader();
-            newXMLReader.setContentHandler(contentHandler);
-            newXMLReader.parse(new InputSource(new StringReader(str)));
+            XMLReader xMLReaderNewXMLReader = newXMLReader();
+            xMLReaderNewXMLReader.setContentHandler(contentHandler);
+            xMLReaderNewXMLReader.parse(new InputSource(new StringReader(str)));
         } catch (IOException e) {
             throw new AssertionError(e);
         }
     }
 
-    public static void parse(Reader reader, ContentHandler contentHandler) throws IOException, SAXException {
-        XMLReader newXMLReader = newXMLReader();
-        newXMLReader.setContentHandler(contentHandler);
-        newXMLReader.parse(new InputSource(reader));
+    public static void parse(Reader reader, ContentHandler contentHandler) throws SAXException, IOException {
+        XMLReader xMLReaderNewXMLReader = newXMLReader();
+        xMLReaderNewXMLReader.setContentHandler(contentHandler);
+        xMLReaderNewXMLReader.parse(new InputSource(reader));
     }
 
-    public static void parse(InputStream inputStream, Encoding encoding, ContentHandler contentHandler) throws IOException, SAXException {
-        XMLReader newXMLReader = newXMLReader();
-        newXMLReader.setContentHandler(contentHandler);
+    public static void parse(InputStream inputStream, Encoding encoding, ContentHandler contentHandler) throws SAXException, IOException {
+        XMLReader xMLReaderNewXMLReader = newXMLReader();
+        xMLReaderNewXMLReader.setContentHandler(contentHandler);
         InputSource inputSource = new InputSource(inputStream);
         inputSource.setEncoding(encoding.expatName);
-        newXMLReader.parse(inputSource);
+        xMLReaderNewXMLReader.parse(inputSource);
     }
 
-    public static XmlPullParser newPullParser() {
+    public static XmlPullParser newPullParser() throws XmlPullParserException {
         try {
-            XmlPullParser newXmlPullParser = newXmlPullParser();
-            newXmlPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-docdecl", true);
-            newXmlPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
-            return newXmlPullParser;
+            XmlPullParser xmlPullParserNewXmlPullParser = newXmlPullParser();
+            xmlPullParserNewXmlPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-docdecl", true);
+            xmlPullParserNewXmlPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
+            return xmlPullParserNewXmlPullParser;
         } catch (XmlPullParserException e) {
             throw new AssertionError(e);
         }
     }
 
-    public static XmlPullParser newPullParser$ravenwood() {
+    public static XmlPullParser newPullParser$ravenwood() throws XmlPullParserException {
         try {
-            XmlPullParser newXmlPullParser = newXmlPullParser();
-            newXmlPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
-            return newXmlPullParser;
+            XmlPullParser xmlPullParserNewXmlPullParser = newXmlPullParser();
+            xmlPullParserNewXmlPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
+            return xmlPullParserNewXmlPullParser;
         } catch (XmlPullParserException e) {
             throw new AssertionError(e);
         }
@@ -114,8 +114,8 @@ public class Xml {
         return new BinaryXmlPullParser();
     }
 
-    public static TypedXmlPullParser resolvePullParser(InputStream inputStream) throws IOException {
-        TypedXmlPullParser newFastPullParser;
+    public static TypedXmlPullParser resolvePullParser(InputStream inputStream) throws IOException, ErrnoException {
+        TypedXmlPullParser typedXmlPullParserNewFastPullParser;
         byte[] bArr = new byte[4];
         if (ENABLE_RESOLVE_OPTIMIZATIONS && (inputStream instanceof FileInputStream)) {
             try {
@@ -132,13 +132,13 @@ public class Xml {
             inputStream.reset();
         }
         if (Arrays.equals(bArr, BinaryXmlSerializer.PROTOCOL_MAGIC_VERSION_0)) {
-            newFastPullParser = newBinaryPullParser();
+            typedXmlPullParserNewFastPullParser = newBinaryPullParser();
         } else {
-            newFastPullParser = newFastPullParser();
+            typedXmlPullParserNewFastPullParser = newFastPullParser();
         }
         try {
-            newFastPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
-            return newFastPullParser;
+            typedXmlPullParserNewFastPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
+            return typedXmlPullParserNewFastPullParser;
         } catch (XmlPullParserException e2) {
             throw new IOException(e2);
         }
@@ -161,14 +161,14 @@ public class Xml {
     }
 
     public static TypedXmlSerializer resolveSerializer(OutputStream outputStream) throws IOException {
-        TypedXmlSerializer newFastSerializer;
+        TypedXmlSerializer typedXmlSerializerNewFastSerializer;
         if (ENABLE_BINARY_DEFAULT) {
-            newFastSerializer = newBinarySerializer();
+            typedXmlSerializerNewFastSerializer = newBinarySerializer();
         } else {
-            newFastSerializer = newFastSerializer();
+            typedXmlSerializerNewFastSerializer = newFastSerializer();
         }
-        newFastSerializer.setOutput(outputStream, StandardCharsets.UTF_8.name());
-        return newFastSerializer;
+        typedXmlSerializerNewFastSerializer.setOutput(outputStream, StandardCharsets.UTF_8.name());
+        return typedXmlSerializerNewFastSerializer;
     }
 
     public static TypedXmlSerializer resolveSerializer$ravenwood(OutputStream outputStream) throws IOException {
@@ -177,13 +177,13 @@ public class Xml {
         return binaryXmlSerializer;
     }
 
-    public static void copy(XmlPullParser xmlPullParser, XmlSerializer xmlSerializer) throws XmlPullParserException, IOException {
+    public static void copy(XmlPullParser xmlPullParser, XmlSerializer xmlSerializer) throws XmlPullParserException, IllegalStateException, IOException, IllegalArgumentException {
         if (xmlPullParser.getEventType() == 0) {
             xmlSerializer.startDocument(xmlPullParser.getInputEncoding(), true);
         }
         while (true) {
-            int nextToken = xmlPullParser.nextToken();
-            switch (nextToken) {
+            int iNextToken = xmlPullParser.nextToken();
+            switch (iNextToken) {
                 case 0:
                     xmlSerializer.startDocument(xmlPullParser.getInputEncoding(), true);
                     break;
@@ -221,7 +221,7 @@ public class Xml {
                     xmlSerializer.docdecl(xmlPullParser.getText());
                     break;
                 default:
-                    throw new IllegalStateException("Unknown token " + nextToken);
+                    throw new IllegalStateException("Unknown token " + iNextToken);
             }
         }
     }
@@ -295,9 +295,9 @@ public class Xml {
 
     private static XMLReader newXMLReader$ravenwood() {
         try {
-            SAXParserFactory newInstance = SAXParserFactory.newInstance();
-            newInstance.setNamespaceAware(true);
-            return newInstance.newSAXParser().getXMLReader();
+            SAXParserFactory sAXParserFactoryNewInstance = SAXParserFactory.newInstance();
+            sAXParserFactoryNewInstance.setNamespaceAware(true);
+            return sAXParserFactoryNewInstance.newSAXParser().getXMLReader();
         } catch (Exception e) {
             throw new UnsupportedOperationException(e);
         }

@@ -41,7 +41,6 @@ import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ChargerNowBarView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -345,25 +344,25 @@ public final class ChargerNowBarView extends FrameLayout {
             ((TextView) this.batteryPercent$delegate.getValue()).setText(String.format("%s", Arrays.copyOf(new Object[]{"%"}, 1)));
             ((TextView) this.batteryPercentRtl$delegate.getValue()).setVisibility(8);
         }
-        boolean isTablet = DeviceType.isTablet();
+        boolean zIsTablet = DeviceType.isTablet();
         ChargerAnimationUtils.INSTANCE.getClass();
-        boolean equals = "my-MM".equals(Locale.getDefault().toLanguageTag());
-        if (isTablet) {
-            if (equals) {
+        boolean zEquals = "my-MM".equals(Locale.getDefault().toLanguageTag());
+        if (zIsTablet) {
+            if (zEquals) {
                 ChargerAnimationConstants.INSTANCE.getClass();
                 i = ChargerAnimationConstants.BATTERY_LEVEL_SIZE_TABLET_MYANMAR;
             } else {
                 ChargerAnimationConstants.INSTANCE.getClass();
                 i = ChargerAnimationConstants.BATTERY_LEVEL_SIZE_TABLET;
             }
-        } else if (equals) {
+        } else if (zEquals) {
             ChargerAnimationConstants.INSTANCE.getClass();
             i = ChargerAnimationConstants.BATTERY_LEVEL_SIZE_MYANMAR;
         } else {
             ChargerAnimationConstants.INSTANCE.getClass();
             i = ChargerAnimationConstants.BATTERY_LEVEL_SIZE;
         }
-        if (isTablet) {
+        if (zIsTablet) {
             ChargerAnimationConstants.INSTANCE.getClass();
             i2 = ChargerAnimationConstants.BATTERY_LEVEL_PERCENT_SIZE_TABLET;
         } else {
@@ -371,10 +370,10 @@ public final class ChargerNowBarView extends FrameLayout {
             i2 = ChargerAnimationConstants.BATTERY_LEVEL_PERCENT_SIZE;
         }
         Pair pair = new Pair(Integer.valueOf(i), Integer.valueOf(i2));
-        int intValue = ((Number) pair.component1()).intValue();
-        int intValue2 = ((Number) pair.component2()).intValue();
-        FontSizeUtils.updateFontSize((TextView) this.batteryLevel$delegate.getValue(), intValue);
-        FontSizeUtils.updateFontSize(this.isRTL ? (TextView) this.batteryPercentRtl$delegate.getValue() : (TextView) this.batteryPercent$delegate.getValue(), intValue2);
+        int iIntValue = ((Number) pair.component1()).intValue();
+        int iIntValue2 = ((Number) pair.component2()).intValue();
+        FontSizeUtils.updateFontSize((TextView) this.batteryLevel$delegate.getValue(), iIntValue);
+        FontSizeUtils.updateFontSize(this.isRTL ? (TextView) this.batteryPercentRtl$delegate.getValue() : (TextView) this.batteryPercent$delegate.getValue(), iIntValue2);
         ImageView batteryIcon = getBatteryIcon();
         int i4 = this.chargingType;
         batteryIcon.setImageResource((i4 == 3 || i4 == 4 || i4 == 5) ? R.drawable.nowbar_battery_fast_charging_icon : R.drawable.nowbar_battery_charging_icon);
@@ -395,106 +394,106 @@ public final class ChargerNowBarView extends FrameLayout {
                 return Float.valueOf(16.0f);
             }
         });
-        ((View) getParent()).post(new Runnable() { // from class: com.android.systemui.power.view.ChargerNowBarView$onAttachedToWindow$1
+        ((View) getParent()).post(new Runnable() { // from class: com.android.systemui.power.view.ChargerNowBarView.onAttachedToWindow.1
             @Override // java.lang.Runnable
             public final void run() {
                 final ChargerNowBarView chargerNowBarView = ChargerNowBarView.this;
                 int i5 = ChargerNowBarView.$r8$clinit;
-                ObjectAnimator ofFloat = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryIcon(), "alpha", 0.0f, 1.0f);
-                ofFloat.m894setDuration(600L);
-                ofFloat.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
-                final ValueAnimator ofFloat2 = ValueAnimator.ofFloat(1.05f, 1.0f);
-                ofFloat2.setDuration(1700L);
-                ofFloat2.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
-                ofFloat2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addBatteryIconAnimation$batteryIconScaleAnimator$1$1
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryIcon(), "alpha", 0.0f, 1.0f);
+                objectAnimatorOfFloat.m896setDuration(600L);
+                objectAnimatorOfFloat.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
+                final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.05f, 1.0f);
+                valueAnimatorOfFloat.setDuration(1700L);
+                valueAnimatorOfFloat.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
+                valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addBatteryIconAnimation$batteryIconScaleAnimator$1$1
                     @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                     public final void onAnimationUpdate(Animator animator) {
                         int i6 = ChargerNowBarView.$r8$clinit;
-                        ChargerNowBarView chargerNowBarView2 = ChargerNowBarView.this;
+                        ChargerNowBarView chargerNowBarView2 = chargerNowBarView;
                         ImageView batteryIcon2 = chargerNowBarView2.getBatteryIcon();
-                        ValueAnimator valueAnimator = ofFloat2;
+                        ValueAnimator valueAnimator = valueAnimatorOfFloat;
                         batteryIcon2.setScaleX(((Float) valueAnimator.getAnimatedValue()).floatValue());
                         chargerNowBarView2.getBatteryIcon().setScaleY(((Float) valueAnimator.getAnimatedValue()).floatValue());
                     }
                 });
-                ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryIcon(), "translationY", -12.0f, 0.0f);
-                ofFloat3.m894setDuration(1700L);
-                ofFloat3.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
-                chargerNowBarView.chargerAnimationSet.playTogether(ofFloat, ofFloat2, ofFloat3);
-                final ValueAnimator ofFloat4 = ValueAnimator.ofFloat(1.05f, 1.0f);
-                ofFloat4.setDuration(1700L);
-                ofFloat4.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
-                ofFloat4.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addBatteryIconShadowAnimation$batteryIconShadowScaleAnimator$1$1
+                ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryIcon(), "translationY", -12.0f, 0.0f);
+                objectAnimatorOfFloat2.m896setDuration(1700L);
+                objectAnimatorOfFloat2.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
+                chargerNowBarView.chargerAnimationSet.playTogether(objectAnimatorOfFloat, valueAnimatorOfFloat, objectAnimatorOfFloat2);
+                final ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(1.05f, 1.0f);
+                valueAnimatorOfFloat2.setDuration(1700L);
+                valueAnimatorOfFloat2.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
+                valueAnimatorOfFloat2.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addBatteryIconShadowAnimation$batteryIconShadowScaleAnimator$1$1
                     @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                     public final void onAnimationUpdate(Animator animator) {
                         int i6 = ChargerNowBarView.$r8$clinit;
-                        ChargerNowBarView chargerNowBarView2 = ChargerNowBarView.this;
+                        ChargerNowBarView chargerNowBarView2 = chargerNowBarView;
                         ImageView batteryIconShadow2 = chargerNowBarView2.getBatteryIconShadow();
-                        ValueAnimator valueAnimator = ofFloat4;
+                        ValueAnimator valueAnimator = valueAnimatorOfFloat2;
                         batteryIconShadow2.setScaleX(((Float) valueAnimator.getAnimatedValue()).floatValue());
                         chargerNowBarView2.getBatteryIconShadow().setScaleY(((Float) valueAnimator.getAnimatedValue()).floatValue());
                     }
                 });
-                ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryIconShadow(), "alpha", 0.0f, 1.0f);
-                ofFloat5.m894setDuration(600L);
-                ofFloat5.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
-                ObjectAnimator ofFloat6 = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryIconShadow(), "translationX", 8.0f, 0.0f);
-                ofFloat6.m894setDuration(1700L);
-                ofFloat6.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
-                ObjectAnimator ofFloat7 = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryIconShadow(), "translationY", 8.0f, 0.0f);
-                ofFloat7.m894setDuration(1700L);
-                ofFloat7.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
-                chargerNowBarView.chargerAnimationSet.playTogether(ofFloat4, ofFloat5, ofFloat6, ofFloat7);
-                ObjectAnimator ofFloat8 = ObjectAnimator.ofFloat((ViewGroup) chargerNowBarView.batteryLevelContainer$delegate.getValue(), "alpha", 0.0f, 1.0f);
-                ofFloat8.setStartDelay(200L);
-                ofFloat8.m894setDuration(400L);
-                ofFloat8.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
+                ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryIconShadow(), "alpha", 0.0f, 1.0f);
+                objectAnimatorOfFloat3.m896setDuration(600L);
+                objectAnimatorOfFloat3.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
+                ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryIconShadow(), "translationX", 8.0f, 0.0f);
+                objectAnimatorOfFloat4.m896setDuration(1700L);
+                objectAnimatorOfFloat4.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
+                ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryIconShadow(), "translationY", 8.0f, 0.0f);
+                objectAnimatorOfFloat5.m896setDuration(1700L);
+                objectAnimatorOfFloat5.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
+                chargerNowBarView.chargerAnimationSet.playTogether(valueAnimatorOfFloat2, objectAnimatorOfFloat3, objectAnimatorOfFloat4, objectAnimatorOfFloat5);
+                ObjectAnimator objectAnimatorOfFloat6 = ObjectAnimator.ofFloat((ViewGroup) chargerNowBarView.batteryLevelContainer$delegate.getValue(), "alpha", 0.0f, 1.0f);
+                objectAnimatorOfFloat6.setStartDelay(200L);
+                objectAnimatorOfFloat6.m896setDuration(400L);
+                objectAnimatorOfFloat6.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
                 int i6 = chargerNowBarView.currentBatteryLevel;
                 int i7 = i6 - 12;
                 if (i7 < 0) {
                     i7 = 0;
                 }
-                final ValueAnimator ofInt = ValueAnimator.ofInt(i7, i6);
-                ofInt.setDuration(1000L);
-                ofInt.mInterpolator = new PathInterpolator(0.17f, 0.17f, 0.0f, 1.0f);
-                ofInt.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addBatteryLevelAnimation$batteryLevelSliderAnimator$1$1
+                final ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(i7, i6);
+                valueAnimatorOfInt.setDuration(1000L);
+                valueAnimatorOfInt.mInterpolator = new PathInterpolator(0.17f, 0.17f, 0.0f, 1.0f);
+                valueAnimatorOfInt.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addBatteryLevelAnimation$batteryLevelSliderAnimator$1$1
                     @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                     public final void onAnimationUpdate(Animator animator) {
                         int i8 = ChargerNowBarView.$r8$clinit;
-                        TextView textView2 = (TextView) ChargerNowBarView.this.batteryLevel$delegate.getValue();
+                        TextView textView2 = (TextView) chargerNowBarView.batteryLevel$delegate.getValue();
                         int i9 = StringCompanionObject.$r8$clinit;
-                        textView2.setText(String.format("%d", Arrays.copyOf(new Object[]{ofInt.getAnimatedValue()}, 1)));
+                        textView2.setText(String.format("%d", Arrays.copyOf(new Object[]{valueAnimatorOfInt.getAnimatedValue()}, 1)));
                     }
                 });
-                final ValueAnimator ofFloat9 = ValueAnimator.ofFloat(1.05f, 1.0f);
-                ofFloat9.setDuration(1700L);
-                ofFloat9.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
-                ofFloat9.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addBatteryLevelAnimation$batteryLevelScaleAnimator$1$1
+                final ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(1.05f, 1.0f);
+                valueAnimatorOfFloat3.setDuration(1700L);
+                valueAnimatorOfFloat3.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
+                valueAnimatorOfFloat3.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addBatteryLevelAnimation$batteryLevelScaleAnimator$1$1
                     @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                     public final void onAnimationUpdate(Animator animator) {
                         int i8 = ChargerNowBarView.$r8$clinit;
-                        ChargerNowBarView chargerNowBarView2 = ChargerNowBarView.this;
+                        ChargerNowBarView chargerNowBarView2 = chargerNowBarView;
                         ViewGroup viewGroup = (ViewGroup) chargerNowBarView2.batteryLevelContainer$delegate.getValue();
-                        ValueAnimator valueAnimator = ofFloat9;
+                        ValueAnimator valueAnimator = valueAnimatorOfFloat3;
                         viewGroup.setScaleX(((Float) valueAnimator.getAnimatedValue()).floatValue());
                         ((ViewGroup) chargerNowBarView2.batteryLevelContainer$delegate.getValue()).setScaleY(((Float) valueAnimator.getAnimatedValue()).floatValue());
                     }
                 });
-                ObjectAnimator ofFloat10 = ObjectAnimator.ofFloat((ViewGroup) chargerNowBarView.batteryLevelContainer$delegate.getValue(), "translationY", -12.0f, 0.0f);
-                ofFloat10.m894setDuration(1700L);
-                ofFloat10.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
-                chargerNowBarView.chargerAnimationSet.playTogether(ofFloat8, ofInt, ofFloat9, ofFloat10);
+                ObjectAnimator objectAnimatorOfFloat7 = ObjectAnimator.ofFloat((ViewGroup) chargerNowBarView.batteryLevelContainer$delegate.getValue(), "translationY", -12.0f, 0.0f);
+                objectAnimatorOfFloat7.m896setDuration(1700L);
+                objectAnimatorOfFloat7.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
+                chargerNowBarView.chargerAnimationSet.playTogether(objectAnimatorOfFloat6, valueAnimatorOfInt, valueAnimatorOfFloat3, objectAnimatorOfFloat7);
                 AnimatorSet animatorSet = chargerNowBarView.chargerAnimationSet;
-                final ValueAnimator ofFloat11 = ValueAnimator.ofFloat(1.0f, 0.0f);
-                ofFloat11.setDuration(1700L);
-                ofFloat11.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
-                ofFloat11.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addBatteryLevelShadowAnimation$1$1
+                final ValueAnimator valueAnimatorOfFloat4 = ValueAnimator.ofFloat(1.0f, 0.0f);
+                valueAnimatorOfFloat4.setDuration(1700L);
+                valueAnimatorOfFloat4.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.1f, 1.0f);
+                valueAnimatorOfFloat4.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addBatteryLevelShadowAnimation$1$1
                     @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                     public final void onAnimationUpdate(Animator animator) {
                         ChargerAnimationUtils chargerAnimationUtils = ChargerAnimationUtils.INSTANCE;
-                        float floatValue = ((Float) ValueAnimator.this.getAnimatedValue()).floatValue();
+                        float fFloatValue = ((Float) valueAnimatorOfFloat4.getAnimatedValue()).floatValue();
                         chargerAnimationUtils.getClass();
-                        float f = floatValue * 8.0f;
+                        float f = fFloatValue * 8.0f;
                         float f2 = 8.0f + f;
                         float f3 = f + 0.0f;
                         float[] fArr = {f2, f3, f3};
@@ -508,41 +507,41 @@ public final class ChargerNowBarView extends FrameLayout {
                         }
                     }
                 });
-                animatorSet.play(ofFloat11);
-                Float valueOf = ((View) chargerNowBarView.getParent()) != null ? Float.valueOf(r1.getWidth()) : null;
-                float floatValue = valueOf != null ? valueOf.floatValue() : 0.0f;
+                animatorSet.play(valueAnimatorOfFloat4);
+                Float fValueOf = ((View) chargerNowBarView.getParent()) != null ? Float.valueOf(r1.getWidth()) : null;
+                float fFloatValue = fValueOf != null ? fValueOf.floatValue() : 0.0f;
                 ChargerAnimationUtils chargerAnimationUtils = ChargerAnimationUtils.INSTANCE;
                 int i8 = chargerNowBarView.currentLayoutDirection;
                 chargerAnimationUtils.getClass();
-                float f = i8 == 0 ? -floatValue : floatValue;
-                float progressbarComputeWidth = ChargerAnimationUtils.getProgressbarComputeWidth(floatValue, chargerNowBarView.currentLayoutDirection, chargerNowBarView.currentBatteryLevel) + f;
+                float f = i8 == 0 ? -fFloatValue : fFloatValue;
+                float progressbarComputeWidth = ChargerAnimationUtils.getProgressbarComputeWidth(fFloatValue, chargerNowBarView.currentLayoutDirection, chargerNowBarView.currentBatteryLevel) + f;
                 AnimatorSet animatorSet2 = chargerNowBarView.chargerAnimationSet;
-                ObjectAnimator ofFloat12 = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryProgressbar(), "translationX", f, progressbarComputeWidth);
-                ofFloat12.m894setDuration(1350L);
-                ofFloat12.mInterpolator = new PathInterpolator(0.22f, 0.16f, 0.0f, 1.0f);
-                animatorSet2.play(ofFloat12);
+                ObjectAnimator objectAnimatorOfFloat8 = ObjectAnimator.ofFloat(chargerNowBarView.getBatteryProgressbar(), "translationX", f, progressbarComputeWidth);
+                objectAnimatorOfFloat8.m896setDuration(1350L);
+                objectAnimatorOfFloat8.mInterpolator = new PathInterpolator(0.22f, 0.16f, 0.0f, 1.0f);
+                animatorSet2.play(objectAnimatorOfFloat8);
                 AnimatorSet animatorSet3 = chargerNowBarView.chargerAnimationSet;
-                final ValueAnimator ofFloat13 = ValueAnimator.ofFloat(16.0f, 0.0f);
-                ofFloat13.setDuration(1350L);
-                ofFloat13.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
-                ofFloat13.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addProgressbarWaveBlurAnimation$1$1
+                final ValueAnimator valueAnimatorOfFloat5 = ValueAnimator.ofFloat(16.0f, 0.0f);
+                valueAnimatorOfFloat5.setDuration(1350L);
+                valueAnimatorOfFloat5.mInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
+                valueAnimatorOfFloat5.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.power.view.ChargerNowBarView$addProgressbarWaveBlurAnimation$1$1
                     @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                     public final void onAnimationUpdate(Animator animator) {
                         int i9 = ChargerNowBarView.$r8$clinit;
-                        LottieAnimationView batteryProgressbar2 = ChargerNowBarView.this.getBatteryProgressbar();
+                        LottieAnimationView batteryProgressbar2 = chargerNowBarView.getBatteryProgressbar();
                         ChargerAnimationConstants.INSTANCE.getClass();
                         KeyPath keyPath = ChargerAnimationConstants.WAVE_KEY_PATH;
                         Float f2 = LottieProperty.BLUR_RADIUS;
-                        final ValueAnimator valueAnimator = ofFloat13;
+                        final ValueAnimator valueAnimator = valueAnimatorOfFloat5;
                         batteryProgressbar2.addValueCallback(keyPath, (KeyPath) f2, new SimpleLottieValueCallback() { // from class: com.android.systemui.power.view.ChargerNowBarView$addProgressbarWaveBlurAnimation$1$1.1
                             @Override // com.airbnb.lottie.value.SimpleLottieValueCallback
                             public final Object getValue() {
-                                return (Float) ValueAnimator.this.getAnimatedValue();
+                                return (Float) valueAnimator.getAnimatedValue();
                             }
                         });
                     }
                 });
-                animatorSet3.play(ofFloat13);
+                animatorSet3.play(valueAnimatorOfFloat5);
                 ChargerNowBarView chargerNowBarView2 = ChargerNowBarView.this;
                 chargerNowBarView2.getBatteryProgressbar().playAnimation();
                 chargerNowBarView2.chargerAnimationSet.start();

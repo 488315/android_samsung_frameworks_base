@@ -47,9 +47,9 @@ public interface IBatteryStatsCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBatteryStatsCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBatteryStatsCallback)) {
-                return (IBatteryStatsCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBatteryStatsCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBatteryStatsCallback)) {
+                return (IBatteryStatsCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,9 +76,9 @@ public interface IBatteryStatsCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SemSimpleNetworkStats.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SemSimpleNetworkStats.CREATOR);
                 parcel.enforceNoDataAvail();
-                notifyNetworkStatsUpdated(createTypedArrayList);
+                notifyNetworkStatsUpdated(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,13 +102,13 @@ public interface IBatteryStatsCallback extends IInterface {
 
             @Override // com.android.internal.app.IBatteryStatsCallback
             public void notifyNetworkStatsUpdated(List<SemSimpleNetworkStats> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBatteryStatsCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBatteryStatsCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

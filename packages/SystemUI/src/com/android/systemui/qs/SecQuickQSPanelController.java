@@ -2,6 +2,7 @@ package com.android.systemui.qs;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,6 @@ import java.util.Arrays;
 import java.util.function.IntSupplier;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecQuickQSPanelController extends SecQSPanelControllerBase {
     public View mBrightnessMediaDeviceBar;
@@ -58,7 +58,7 @@ public class SecQuickQSPanelController extends SecQSPanelControllerBase {
         this.mQsPanelHost.mOrientationSupplier = new IntSupplier() { // from class: com.android.systemui.qs.SecQuickQSPanelController$$ExternalSyntheticLambda1
             @Override // java.util.function.IntSupplier
             public final int getAsInt() {
-                SecQuickQSPanelController secQuickQSPanelController = SecQuickQSPanelController.this;
+                SecQuickQSPanelController secQuickQSPanelController = this.f$0;
                 int i = secQuickQSPanelController.mOrientation;
                 return i != 0 ? i : secQuickQSPanelController.getContext().getResources().getConfiguration().orientation;
             }
@@ -76,16 +76,16 @@ public class SecQuickQSPanelController extends SecQSPanelControllerBase {
         super.onConfigurationChanged(configuration);
         int i = getContext().getResources().getConfiguration().orientation;
         ConfigurationState configurationState = this.mLastConfigurationState;
-        boolean needToUpdate = configurationState.needToUpdate(configuration);
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onConfigurationChanged currentOrientation = ", ", newConfig.orientation = ");
-        m.append(configuration.orientation);
-        m.append(", mOrientation = ");
-        m.append(this.mOrientation);
-        m.append(", needToUpdate = ");
-        m.append(needToUpdate);
-        Log.d("SecQuickQSPanelController", m.toString());
+        boolean zNeedToUpdate = configurationState.needToUpdate(configuration);
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onConfigurationChanged currentOrientation = ", ", newConfig.orientation = ");
+        sbM.append(configuration.orientation);
+        sbM.append(", mOrientation = ");
+        sbM.append(this.mOrientation);
+        sbM.append(", needToUpdate = ");
+        sbM.append(zNeedToUpdate);
+        Log.d("SecQuickQSPanelController", sbM.toString());
         Log.d("SecQuickQSPanelController", "onConfigurationChanged diff = " + configurationState.toCompareString(configuration));
-        if (needToUpdate || this.mOrientation != i) {
+        if (zNeedToUpdate || this.mOrientation != i) {
             this.mOrientation = i;
             this.mQsPanelHost.setTiles(Boolean.FALSE);
             configurationState.update(configuration);
@@ -114,7 +114,7 @@ public class SecQuickQSPanelController extends SecQSPanelControllerBase {
     }
 
     @Override // com.android.systemui.qs.SecQSPanelControllerBase
-    public final void setExpanded(boolean z) {
+    public final void setExpanded(boolean z) throws Resources.NotFoundException {
         super.setExpanded(z);
         updateVisibility$6();
     }

@@ -59,9 +59,9 @@ public interface IMmiStatusCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.IMmiStatusCallback");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMmiStatusCallback)) {
-                return (IMmiStatusCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.IMmiStatusCallback");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMmiStatusCallback)) {
+                return (IMmiStatusCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -127,36 +127,36 @@ public interface IMmiStatusCallback extends IInterface {
 
             @Override // android.media.tv.extension.cam.IMmiStatusCallback
             public void onMmiEnq(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.IMmiStatusCallback");
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.IMmiStatusCallback");
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.IMmiStatusCallback
             public void onMmiListMenu(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.IMmiStatusCallback");
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.IMmiStatusCallback");
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.IMmiStatusCallback
             public void onMmiClose() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.IMmiStatusCallback");
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.IMmiStatusCallback");
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

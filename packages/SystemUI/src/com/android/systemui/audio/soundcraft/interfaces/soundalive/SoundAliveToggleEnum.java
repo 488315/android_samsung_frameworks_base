@@ -6,7 +6,6 @@ import kotlin.jvm.internal.Intrinsics;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundAliveToggleEnum {
     public static final /* synthetic */ SoundAliveToggleEnum[] $VALUES;
@@ -16,7 +15,6 @@ public final class SoundAliveToggleEnum {
     private final String routineActionValue;
     private final boolean value;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

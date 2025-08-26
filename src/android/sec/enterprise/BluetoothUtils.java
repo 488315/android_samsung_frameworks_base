@@ -199,47 +199,47 @@ public class BluetoothUtils {
     }
 
     public static void bluetoothLog(String str, int i, BluetoothDevice bluetoothDevice) {
-        String str2;
-        String str3;
-        String str4;
-        String str5;
+        String address;
+        String name;
+        String address2;
+        String name2;
         BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
         if (defaultAdapter == null) {
-            str2 = "";
-            str3 = str2;
+            address = "";
+            name = address;
         } else {
-            str3 = defaultAdapter.getName();
-            str2 = defaultAdapter.getAddress();
+            name = defaultAdapter.getName();
+            address = defaultAdapter.getAddress();
         }
         if (bluetoothDevice == null) {
-            str4 = "";
-            str5 = str4;
+            address2 = "";
+            name2 = address2;
         } else {
-            str5 = bluetoothDevice.getName();
-            str4 = bluetoothDevice.getAddress();
+            name2 = bluetoothDevice.getName();
+            address2 = bluetoothDevice.getAddress();
         }
         StringBuilder sb = new StringBuilder("");
         if (i != -1) {
             sb.append(convertBluetoothProfile(i));
         }
-        if (str4 != null && str4.length() > 0) {
+        if (address2 != null && address2.length() > 0) {
             sb.append("Remote Address: ");
-            sb.append(str4);
+            sb.append(address2);
             sb.append('\n');
         }
-        if (str4 != null && str4.length() > 0) {
+        if (address2 != null && address2.length() > 0) {
             sb.append("Remote Name: ");
-            sb.append(str5);
+            sb.append(name2);
             sb.append('\n');
         }
-        if (str2 != null && str2.length() > 0) {
+        if (address != null && address.length() > 0) {
             sb.append("Local Address: ");
-            sb.append(str2);
+            sb.append(address);
             sb.append('\n');
         }
-        if (str2 != null && str2.length() > 0) {
+        if (address != null && address.length() > 0) {
             sb.append("Local Name: ");
-            sb.append(str3);
+            sb.append(name);
             sb.append('\n');
         }
         bluetoothLog(str, sb.toString());

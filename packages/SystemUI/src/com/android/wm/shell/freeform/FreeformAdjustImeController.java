@@ -1,22 +1,28 @@
 package com.android.wm.shell.freeform;
 
 import android.app.ActivityManager;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.util.Slog;
 import android.view.Choreographer;
+import android.view.InsetsSource;
+import android.view.InsetsState;
 import android.view.SurfaceControl;
+import android.view.WindowInsets;
 import android.window.WindowContainerToken;
 import android.window.WindowContainerTransaction;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable$$ExternalSyntheticOutline0;
 import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
 import com.android.wm.shell.ShellTaskOrganizer;
 import com.android.wm.shell.common.DisplayController;
+import com.android.wm.shell.common.DisplayLayout;
+import com.android.wm.shell.windowdecor.DesktopModeWindowDecorViewModel;
 import com.android.wm.shell.windowdecor.DesktopModeWindowDecoration;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformAdjustImeController {
     public boolean mAnimating;
+    public final DesktopModeWindowDecorViewModel.DecorViewModelState mDecorViewModelState;
     public final DesktopModeWindowDecoration mDecoration;
     public final DisplayController mDisplayController;
     public boolean mIsAdjusted;
@@ -34,29 +40,36 @@ public class FreeformAdjustImeController {
     public int mLastOrientation = 0;
     public int mLastDisplayRotation = -1;
 
-    public FreeformAdjustImeController(DesktopModeWindowDecoration desktopModeWindowDecoration, DisplayController displayController, ShellTaskOrganizer shellTaskOrganizer, SurfaceControl surfaceControl) {
+    public FreeformAdjustImeController(DesktopModeWindowDecoration desktopModeWindowDecoration, DisplayController displayController, ShellTaskOrganizer shellTaskOrganizer, SurfaceControl surfaceControl, DesktopModeWindowDecorViewModel.DecorViewModelState decorViewModelState) {
         this.mDecoration = desktopModeWindowDecoration;
         this.mDisplayController = displayController;
         this.mTaskOrganizer = shellTaskOrganizer;
         this.mTaskSurface = surfaceControl;
+        this.mDecorViewModelState = decorViewModelState;
     }
 
     public final void adjustConfig(WindowContainerToken windowContainerToken) {
-        if (this.mOriginBounds.isEmpty()) {
-            Slog.w("FreeformAdjustImeController", "adjustConfig: failed, empty bounds, " + this.mDecoration);
-            return;
-        }
-        WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-        this.mTmpRect.set(this.mOriginBounds);
-        this.mTmpRect.offset(0, this.mTargetYOffset);
-        windowContainerTransaction.setBounds(windowContainerToken, this.mTmpRect);
-        Rect rect = this.mTargetYOffset != 0 ? this.mTmpRect : null;
-        if (rect == null) {
-            this.mAdjustingBounds.setEmpty();
+        boolean zIsEmpty = this.mOriginBounds.isEmpty();
+        DesktopModeWindowDecoration desktopModeWindowDecoration = this.mDecoration;
+        if (zIsEmpty) {
+            Slog.w("FreeformAdjustImeController", "adjustConfig: failed, empty bounds, " + desktopModeWindowDecoration);
         } else {
-            this.mAdjustingBounds.set(rect);
+            if (desktopModeWindowDecoration.mIsTaskResizing) {
+                Slog.d("FreeformAdjustImeController", "adjustConfig: skip by resizing task");
+                return;
+            }
+            WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+            this.mTmpRect.set(this.mOriginBounds);
+            this.mTmpRect.offset(0, this.mTargetYOffset);
+            windowContainerTransaction.setBounds(windowContainerToken, this.mTmpRect);
+            Rect rect = this.mTargetYOffset != 0 ? this.mTmpRect : null;
+            if (rect == null) {
+                this.mAdjustingBounds.setEmpty();
+            } else {
+                this.mAdjustingBounds.set(rect);
+            }
+            this.mTaskOrganizer.applyTransaction(windowContainerTransaction);
         }
-        this.mTaskOrganizer.applyTransaction(windowContainerTransaction);
     }
 
     public final void imePositionChanged(int i, SurfaceControl.Transaction transaction) {
@@ -65,24 +78,27 @@ public class FreeformAdjustImeController {
         }
         this.mTmpRect.set(this.mOriginBounds);
         this.mTmpRect.offset(0, i);
-        transaction.setFrameTimelineVsync(Choreographer.getInstance().getVsyncId());
-        SurfaceControl surfaceControl = this.mTaskSurface;
-        Rect rect = this.mTmpRect;
-        transaction.setPosition(surfaceControl, rect.left, rect.top);
+        DesktopModeWindowDecorViewModel.DecorViewModelState decorViewModelState = this.mDecorViewModelState;
+        if (decorViewModelState == null || !decorViewModelState.mInTransition) {
+            transaction.setFrameTimelineVsync(Choreographer.getInstance().getVsyncId());
+            SurfaceControl surfaceControl = this.mTaskSurface;
+            Rect rect = this.mTmpRect;
+            transaction.setPosition(surfaceControl, rect.left, rect.top);
+        }
         setAdjusted(i != 0);
     }
 
     public final void onImeEndPositioning(SurfaceControl.Transaction transaction, boolean z) {
         if (!z) {
             float f = this.mLastYOffset;
-            int m$1 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(this.mTargetYOffset, f, 1.0f, f);
+            int iM$1 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(this.mTargetYOffset, f, 1.0f, f);
             this.mAnimating = false;
             this.mDecoration.mTaskPositioner.setImeAnimating(false);
-            if (this.mLastYOffset == this.mTargetYOffset || m$1 == this.mYOffsetForIme) {
+            if (this.mLastYOffset == this.mTargetYOffset || iM$1 == this.mYOffsetForIme) {
                 return;
             }
-            this.mYOffsetForIme = m$1;
-            imePositionChanged(m$1, transaction);
+            this.mYOffsetForIme = iM$1;
+            imePositionChanged(iM$1, transaction);
             return;
         }
         Slog.w("FreeformAdjustImeController", "handleCancel: reset state, " + this.mDecoration);
@@ -99,20 +115,80 @@ public class FreeformAdjustImeController {
         this.mDecoration.mTaskPositioner.setImeAnimating(false);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0074, code lost:
-    
-        if (r5.mLastDisplayRotation == r2.windowConfiguration.getDisplayRotation()) goto L33;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0076  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onImeStartPositioning(boolean r6, android.app.ActivityManager.RunningTaskInfo r7, boolean r8, int r9) {
-        /*
-            Method dump skipped, instructions count: 348
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.freeform.FreeformAdjustImeController.onImeStartPositioning(boolean, android.app.ActivityManager$RunningTaskInfo, boolean, int):void");
+    public final void onImeStartPositioning(boolean z, ActivityManager.RunningTaskInfo runningTaskInfo, boolean z2, int i) {
+        Rect rect = new Rect();
+        int i2 = 0;
+        if (!z && !z2 && !this.mIsAdjusted) {
+            this.mTargetYOffset = 0;
+            this.mLastYOffset = 0;
+            this.mYOffsetForIme = 0;
+        }
+        if (z) {
+            DesktopModeWindowDecoration desktopModeWindowDecoration = this.mDecoration;
+            desktopModeWindowDecoration.mTaskPositioner.getImeStartBounds(rect);
+            if (rect.isEmpty()) {
+                rect.set(desktopModeWindowDecoration.mTaskInfo.getConfiguration().windowConfiguration.getBounds());
+            }
+            if (rect.isEmpty()) {
+                if (this.mOriginBounds.isEmpty()) {
+                    rect.set(runningTaskInfo.getConfiguration().windowConfiguration.getBounds());
+                } else {
+                    rect.set(this.mOriginBounds);
+                }
+            }
+        } else if (!this.mIsAdjusted) {
+            return;
+        }
+        if (rect.isEmpty()) {
+            if (this.mYOffsetForIme != 0) {
+                int i3 = this.mLastOrientation;
+                Configuration configuration = runningTaskInfo.configuration;
+                if (i3 != configuration.orientation || this.mLastDisplayRotation != configuration.windowConfiguration.getDisplayRotation()) {
+                    Configuration configuration2 = runningTaskInfo.configuration;
+                    this.mLastOrientation = configuration2.orientation;
+                    this.mLastDisplayRotation = configuration2.windowConfiguration.getDisplayRotation();
+                    rect.set(runningTaskInfo.getConfiguration().windowConfiguration.getBounds());
+                    this.mStartBounds.set(rect);
+                }
+            }
+        } else if (!this.mIsAdjusted) {
+            this.mStartBounds.set(rect);
+        }
+        this.mLastYOffset = this.mYOffsetForIme;
+        if (z) {
+            int i4 = runningTaskInfo.displayId;
+            DisplayController displayController = this.mDisplayController;
+            InsetsState insetsState = displayController.getInsetsState(i4);
+            DisplayLayout displayLayout = displayController.getDisplayLayout(i4);
+            if (insetsState == null || displayLayout == null) {
+                Slog.e("FreeformAdjustImeController", "getTargetYOffset: insetsState=" + insetsState + " displayLayout=" + displayLayout);
+            } else {
+                int i5 = this.mStartBounds.bottom - i;
+                InsetsSource insetsSourcePeekSource = insetsState.peekSource(InsetsSource.ID_IME);
+                boolean z3 = insetsSourcePeekSource != null && insetsSourcePeekSource.getFrame().height() == 0;
+                if (i5 > 0 && !z3) {
+                    displayLayout.getStableBounds(this.mDisplayFrame, false);
+                    Rect rect2 = this.mDisplayFrame;
+                    rect2.inset(insetsState.calculateInsets(rect2, WindowInsets.Type.systemBars() | WindowInsets.Type.ime() | WindowInsets.Type.displayCutout(), true));
+                    i2 = -Math.min(i5, Math.max(0, this.mStartBounds.top - this.mDisplayFrame.top));
+                }
+            }
+        }
+        this.mTargetYOffset = i2;
+        this.mAnimating = true;
+        this.mDecoration.mTaskPositioner.setImeAnimating(true);
+        if (this.mLastYOffset == this.mTargetYOffset) {
+            return;
+        }
+        if (this.mIsAdjusted ? this.mAdjustingBounds.left != this.mStartBounds.left : !(this.mAdjustingBounds.isEmpty() && this.mTargetYOffset >= 0)) {
+            this.mOriginBounds.set(rect);
+        }
+        adjustConfig(runningTaskInfo.getToken());
+        this.mTaskInfo = runningTaskInfo;
     }
 
     public final void resetState() {
@@ -125,12 +201,19 @@ public class FreeformAdjustImeController {
         this.mTaskInfo = null;
     }
 
+    public final void resetStateIfNeeded(String str) {
+        if (this.mIsAdjusted) {
+            Slog.d("FreeformAdjustImeController", "resetStateIfNeeded, origin=" + this.mOriginBounds + ", reason=" + str);
+            resetState();
+        }
+    }
+
     public final void setAdjusted(boolean z) {
         if (this.mIsAdjusted != z) {
             this.mIsAdjusted = z;
-            StringBuilder m = RowView$$ExternalSyntheticOutline0.m("setAdjusted: ", ", ", z);
-            m.append(this.mDecoration);
-            Slog.d("FreeformAdjustImeController", m.toString());
+            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("setAdjusted: ", ", ", z);
+            sbM.append(this.mDecoration);
+            Slog.d("FreeformAdjustImeController", sbM.toString());
         }
     }
 }

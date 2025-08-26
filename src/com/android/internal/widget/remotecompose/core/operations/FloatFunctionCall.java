@@ -84,17 +84,17 @@ public class FloatFunctionCall extends PaintOperation implements VariableSupport
     }
 
     public String toString() {
-        String str = "callFunction[" + Utils.idString(this.mId) + "] ";
+        String string = "callFunction[" + Utils.idString(this.mId) + "] ";
         int i = 0;
         while (i < this.mArgs.length) {
             StringBuilder sb = new StringBuilder();
-            sb.append(str);
+            sb.append(string);
             sb.append(i == 0 ? "" : " ,");
             sb.append(Utils.floatToString(this.mArgs[i], this.mOutArgs[i]));
-            str = sb.toString();
+            string = sb.toString();
             i++;
         }
-        return str;
+        return string;
     }
 
     public static void apply(WireBuffer wireBuffer, int i, float[] fArr) {
@@ -112,17 +112,17 @@ public class FloatFunctionCall extends PaintOperation implements VariableSupport
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
         float[] fArr;
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        if (readInt2 > 0) {
-            fArr = new float[readInt2];
-            for (int i = 0; i < readInt2; i++) {
-                fArr[i] = wireBuffer.readFloat();
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        if (i2 > 0) {
+            fArr = new float[i2];
+            for (int i3 = 0; i3 < i2; i3++) {
+                fArr[i3] = wireBuffer.readFloat();
             }
         } else {
             fArr = null;
         }
-        list.add(new FloatFunctionCall(readInt, fArr));
+        list.add(new FloatFunctionCall(i, fArr));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

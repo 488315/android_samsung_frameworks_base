@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.phone.HeadsUpAppearanceController$$ExternalSyntheticLambda3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class HeadsUpStatusBarView extends AlphaOptimizedLinearLayout {
     public final Rect mIconDrawingRect;
@@ -106,7 +105,7 @@ public class HeadsUpStatusBarView extends AlphaOptimizedLinearLayout {
         this.mOnSensitivityChangedListener = new NotificationEntry.OnSensitivityChangedListener() { // from class: com.android.systemui.statusbar.HeadsUpStatusBarView$$ExternalSyntheticLambda0
             @Override // com.android.systemui.statusbar.notification.collection.NotificationEntry.OnSensitivityChangedListener
             public final void onSensitivityChanged(NotificationEntry notificationEntry) {
-                HeadsUpStatusBarView headsUpStatusBarView = HeadsUpStatusBarView.this;
+                HeadsUpStatusBarView headsUpStatusBarView = this.f$0;
                 if (notificationEntry == headsUpStatusBarView.mShowingEntry) {
                     headsUpStatusBarView.setEntry(notificationEntry);
                     return;

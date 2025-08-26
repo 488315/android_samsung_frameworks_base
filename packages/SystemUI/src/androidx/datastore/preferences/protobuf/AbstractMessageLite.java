@@ -5,16 +5,14 @@ import androidx.datastore.preferences.protobuf.CodedOutputStream;
 import androidx.datastore.preferences.protobuf.GeneratedMessageLite;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AbstractMessageLite implements MessageLite {
     protected int memoizedHashCode = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Builder implements MessageLiteOrBuilder, Cloneable {
         @Override // 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public abstract GeneratedMessageLite.Builder mo896clone();
+        public abstract GeneratedMessageLite.Builder mo898clone();
     }
 
     public int getMemoizedSerializedSize() {

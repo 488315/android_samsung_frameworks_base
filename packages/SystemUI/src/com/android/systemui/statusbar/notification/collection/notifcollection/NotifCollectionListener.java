@@ -6,7 +6,6 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface NotifCollectionListener {
     default void onEntryUpdated(NotificationEntry notificationEntry) {

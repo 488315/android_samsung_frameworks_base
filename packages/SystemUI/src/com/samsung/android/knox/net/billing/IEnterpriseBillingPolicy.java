@@ -9,7 +9,6 @@ import com.samsung.android.knox.ContextInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IEnterpriseBillingPolicy extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy";
@@ -84,7 +83,6 @@ public interface IEnterpriseBillingPolicy extends IInterface {
 
     boolean updateProfile(ContextInfo contextInfo, EnterpriseBillingProfile enterpriseBillingProfile) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IEnterpriseBillingPolicy {
         public static final int TRANSACTION_activateProfile = 26;
         public static final int TRANSACTION_addProfile = 1;
@@ -122,7 +120,6 @@ public interface IEnterpriseBillingPolicy extends IInterface {
         public static final int TRANSACTION_turnOnProfile = 12;
         public static final int TRANSACTION_updateProfile = 2;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IEnterpriseBillingPolicy {
             public IBinder mRemote;
 
@@ -132,124 +129,124 @@ public interface IEnterpriseBillingPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean activateProfile(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean addProfile(ContextInfo contextInfo, EnterpriseBillingProfile enterpriseBillingProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(enterpriseBillingProfile, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(enterpriseBillingProfile, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean addProfileForCurrentContainer(EnterpriseBillingProfile enterpriseBillingProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(enterpriseBillingProfile, 0);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(enterpriseBillingProfile, 0);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean addVpnToBillingProfile(ContextInfo contextInfo, String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean addVpnToBillingProfileForCurrentContainer(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean allowRoaming(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public void allowWifiFallback(ContextInfo contextInfo, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -260,182 +257,182 @@ public interface IEnterpriseBillingPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean disableProfile(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean disableProfileForApps(ContextInfo contextInfo, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean disableProfileForContainer(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean disableProfileForCurrentContainer() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean enableProfileForApps(ContextInfo contextInfo, String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean enableProfileForContainer(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean enableProfileForCurrentContainer(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public List getApplicationsUsingProfile(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readArrayList(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readArrayList(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public List getAvailableProfiles(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readArrayList(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readArrayList(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public List getAvailableProfilesForCaller() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readArrayList(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readArrayList(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public List getContainersUsingProfile(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readArrayList(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readArrayList(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -445,287 +442,287 @@ public interface IEnterpriseBillingPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public EnterpriseBillingProfile getProfileDetails(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseBillingProfile) obtain2.readTypedObject(EnterpriseBillingProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseBillingProfile) parcelObtain2.readTypedObject(EnterpriseBillingProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public EnterpriseBillingProfile getProfileForApplication(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseBillingProfile) obtain2.readTypedObject(EnterpriseBillingProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseBillingProfile) parcelObtain2.readTypedObject(EnterpriseBillingProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public EnterpriseBillingProfile getProfileForContainer(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (EnterpriseBillingProfile) obtain2.readTypedObject(EnterpriseBillingProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (EnterpriseBillingProfile) parcelObtain2.readTypedObject(EnterpriseBillingProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public List<String> getVpnsBoundToProfile(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean isProfileActive(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean isProfileActiveByCaller(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean isProfileEnabled(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean isProfileTurnedOn(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean isRoamingAllowed(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean isWifiFallbackAllowed(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean removeProfile(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean removeProfileForCurrentContainer(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean removeVpnFromBillingProfile(ContextInfo contextInfo, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean removeVpnFromBillingProfileForCurrentContainer(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean turnOffProfile(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean turnOnProfile(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
             public boolean updateProfile(ContextInfo contextInfo, EnterpriseBillingProfile enterpriseBillingProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(enterpriseBillingProfile, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEnterpriseBillingPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(enterpriseBillingProfile, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -738,8 +735,8 @@ public interface IEnterpriseBillingPolicy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEnterpriseBillingPolicy.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IEnterpriseBillingPolicy)) ? new Proxy(iBinder) : (IEnterpriseBillingPolicy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEnterpriseBillingPolicy.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IEnterpriseBillingPolicy)) ? new Proxy(iBinder) : (IEnterpriseBillingPolicy) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -756,25 +753,25 @@ public interface IEnterpriseBillingPolicy extends IInterface {
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     EnterpriseBillingProfile enterpriseBillingProfile = (EnterpriseBillingProfile) parcel.readTypedObject(EnterpriseBillingProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean addProfile = addProfile(contextInfo, enterpriseBillingProfile);
+                    boolean zAddProfile = addProfile(contextInfo, enterpriseBillingProfile);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addProfile);
+                    parcel2.writeBoolean(zAddProfile);
                     return true;
                 case 2:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     EnterpriseBillingProfile enterpriseBillingProfile2 = (EnterpriseBillingProfile) parcel.readTypedObject(EnterpriseBillingProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean updateProfile = updateProfile(contextInfo2, enterpriseBillingProfile2);
+                    boolean zUpdateProfile = updateProfile(contextInfo2, enterpriseBillingProfile2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(updateProfile);
+                    parcel2.writeBoolean(zUpdateProfile);
                     return true;
                 case 3:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeProfile = removeProfile(contextInfo3, readString);
+                    boolean zRemoveProfile = removeProfile(contextInfo3, string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeProfile);
+                    parcel2.writeBoolean(zRemoveProfile);
                     return true;
                 case 4:
                     ContextInfo contextInfo4 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -785,83 +782,83 @@ public interface IEnterpriseBillingPolicy extends IInterface {
                     return true;
                 case 5:
                     ContextInfo contextInfo5 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseBillingProfile profileDetails = getProfileDetails(contextInfo5, readString2);
+                    EnterpriseBillingProfile profileDetails = getProfileDetails(contextInfo5, string2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(profileDetails, 1);
                     return true;
                 case 6:
                     ContextInfo contextInfo6 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean enableProfileForContainer = enableProfileForContainer(contextInfo6, readString3);
+                    boolean zEnableProfileForContainer = enableProfileForContainer(contextInfo6, string3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableProfileForContainer);
+                    parcel2.writeBoolean(zEnableProfileForContainer);
                     return true;
                 case 7:
                     ContextInfo contextInfo7 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString4 = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                    String string4 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean enableProfileForApps = enableProfileForApps(contextInfo7, readString4, createStringArrayList);
+                    boolean zEnableProfileForApps = enableProfileForApps(contextInfo7, string4, arrayListCreateStringArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableProfileForApps);
+                    parcel2.writeBoolean(zEnableProfileForApps);
                     return true;
                 case 8:
                     ContextInfo contextInfo8 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean disableProfileForContainer = disableProfileForContainer(contextInfo8);
+                    boolean zDisableProfileForContainer = disableProfileForContainer(contextInfo8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disableProfileForContainer);
+                    parcel2.writeBoolean(zDisableProfileForContainer);
                     return true;
                 case 9:
                     ContextInfo contextInfo9 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean disableProfileForApps = disableProfileForApps(contextInfo9, createStringArrayList2);
+                    boolean zDisableProfileForApps = disableProfileForApps(contextInfo9, arrayListCreateStringArrayList2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disableProfileForApps);
+                    parcel2.writeBoolean(zDisableProfileForApps);
                     return true;
                 case 10:
                     ContextInfo contextInfo10 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean disableProfile = disableProfile(contextInfo10, readString5);
+                    boolean zDisableProfile = disableProfile(contextInfo10, string5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disableProfile);
+                    parcel2.writeBoolean(zDisableProfile);
                     return true;
                 case 11:
                     ContextInfo contextInfo11 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isProfileEnabled = isProfileEnabled(contextInfo11, readString6);
+                    boolean zIsProfileEnabled = isProfileEnabled(contextInfo11, string6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isProfileEnabled);
+                    parcel2.writeBoolean(zIsProfileEnabled);
                     return true;
                 case 12:
                     ContextInfo contextInfo12 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean turnOnProfile = turnOnProfile(contextInfo12, readString7);
+                    boolean zTurnOnProfile = turnOnProfile(contextInfo12, string7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(turnOnProfile);
+                    parcel2.writeBoolean(zTurnOnProfile);
                     return true;
                 case 13:
                     ContextInfo contextInfo13 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean turnOffProfile = turnOffProfile(contextInfo13, readString8);
+                    boolean zTurnOffProfile = turnOffProfile(contextInfo13, string8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(turnOffProfile);
+                    parcel2.writeBoolean(zTurnOffProfile);
                     return true;
                 case 14:
                     ContextInfo contextInfo14 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isProfileTurnedOn = isProfileTurnedOn(contextInfo14, readString9);
+                    boolean zIsProfileTurnedOn = isProfileTurnedOn(contextInfo14, string9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isProfileTurnedOn);
+                    parcel2.writeBoolean(zIsProfileTurnedOn);
                     return true;
                 case 15:
                     ContextInfo contextInfo15 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -872,137 +869,137 @@ public interface IEnterpriseBillingPolicy extends IInterface {
                     return true;
                 case 16:
                     ContextInfo contextInfo16 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    EnterpriseBillingProfile profileForApplication = getProfileForApplication(contextInfo16, readString10);
+                    EnterpriseBillingProfile profileForApplication = getProfileForApplication(contextInfo16, string10);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(profileForApplication, 1);
                     return true;
                 case 17:
                     ContextInfo contextInfo17 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List containersUsingProfile = getContainersUsingProfile(contextInfo17, readString11);
+                    List containersUsingProfile = getContainersUsingProfile(contextInfo17, string11);
                     parcel2.writeNoException();
                     parcel2.writeList(containersUsingProfile);
                     return true;
                 case 18:
                     ContextInfo contextInfo18 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString12 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List applicationsUsingProfile = getApplicationsUsingProfile(contextInfo18, readString12);
+                    List applicationsUsingProfile = getApplicationsUsingProfile(contextInfo18, string12);
                     parcel2.writeNoException();
                     parcel2.writeList(applicationsUsingProfile);
                     return true;
                 case 19:
                     ContextInfo contextInfo19 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString13 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string13 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    allowWifiFallback(contextInfo19, readString13, readBoolean);
+                    allowWifiFallback(contextInfo19, string13, z);
                     parcel2.writeNoException();
                     return true;
                 case 20:
                     ContextInfo contextInfo20 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isWifiFallbackAllowed = isWifiFallbackAllowed(contextInfo20, readString14);
+                    boolean zIsWifiFallbackAllowed = isWifiFallbackAllowed(contextInfo20, string14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isWifiFallbackAllowed);
+                    parcel2.writeBoolean(zIsWifiFallbackAllowed);
                     return true;
                 case 21:
                     ContextInfo contextInfo21 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addVpnToBillingProfile = addVpnToBillingProfile(contextInfo21, readString15, readString16, readString17);
+                    boolean zAddVpnToBillingProfile = addVpnToBillingProfile(contextInfo21, string15, string16, string17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addVpnToBillingProfile);
+                    parcel2.writeBoolean(zAddVpnToBillingProfile);
                     return true;
                 case 22:
                     ContextInfo contextInfo22 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString18 = parcel.readString();
-                    String readString19 = parcel.readString();
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeVpnFromBillingProfile = removeVpnFromBillingProfile(contextInfo22, readString18, readString19);
+                    boolean zRemoveVpnFromBillingProfile = removeVpnFromBillingProfile(contextInfo22, string18, string19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeVpnFromBillingProfile);
+                    parcel2.writeBoolean(zRemoveVpnFromBillingProfile);
                     return true;
                 case 23:
                     ContextInfo contextInfo23 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> vpnsBoundToProfile = getVpnsBoundToProfile(contextInfo23, readString20);
+                    List<String> vpnsBoundToProfile = getVpnsBoundToProfile(contextInfo23, string20);
                     parcel2.writeNoException();
                     parcel2.writeStringList(vpnsBoundToProfile);
                     return true;
                 case 24:
                     ContextInfo contextInfo24 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString21 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string21 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowRoaming = allowRoaming(contextInfo24, readString21, readBoolean2);
+                    boolean zAllowRoaming = allowRoaming(contextInfo24, string21, z2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowRoaming);
+                    parcel2.writeBoolean(zAllowRoaming);
                     return true;
                 case 25:
                     ContextInfo contextInfo25 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString22 = parcel.readString();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isRoamingAllowed = isRoamingAllowed(contextInfo25, readString22);
+                    boolean zIsRoamingAllowed = isRoamingAllowed(contextInfo25, string22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRoamingAllowed);
+                    parcel2.writeBoolean(zIsRoamingAllowed);
                     return true;
                 case 26:
                     ContextInfo contextInfo26 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString23 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    String string23 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean activateProfile = activateProfile(contextInfo26, readString23, readBoolean3);
+                    boolean zActivateProfile = activateProfile(contextInfo26, string23, z3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(activateProfile);
+                    parcel2.writeBoolean(zActivateProfile);
                     return true;
                 case 27:
                     ContextInfo contextInfo27 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString24 = parcel.readString();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isProfileActive = isProfileActive(contextInfo27, readString24);
+                    boolean zIsProfileActive = isProfileActive(contextInfo27, string24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isProfileActive);
+                    parcel2.writeBoolean(zIsProfileActive);
                     return true;
                 case 28:
                     EnterpriseBillingProfile enterpriseBillingProfile3 = (EnterpriseBillingProfile) parcel.readTypedObject(EnterpriseBillingProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean addProfileForCurrentContainer = addProfileForCurrentContainer(enterpriseBillingProfile3);
+                    boolean zAddProfileForCurrentContainer = addProfileForCurrentContainer(enterpriseBillingProfile3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addProfileForCurrentContainer);
+                    parcel2.writeBoolean(zAddProfileForCurrentContainer);
                     return true;
                 case 29:
-                    String readString25 = parcel.readString();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeProfileForCurrentContainer = removeProfileForCurrentContainer(readString25);
+                    boolean zRemoveProfileForCurrentContainer = removeProfileForCurrentContainer(string25);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeProfileForCurrentContainer);
+                    parcel2.writeBoolean(zRemoveProfileForCurrentContainer);
                     return true;
                 case 30:
-                    String readString26 = parcel.readString();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean enableProfileForCurrentContainer = enableProfileForCurrentContainer(readString26);
+                    boolean zEnableProfileForCurrentContainer = enableProfileForCurrentContainer(string26);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableProfileForCurrentContainer);
+                    parcel2.writeBoolean(zEnableProfileForCurrentContainer);
                     return true;
                 case 31:
-                    boolean disableProfileForCurrentContainer = disableProfileForCurrentContainer();
+                    boolean zDisableProfileForCurrentContainer = disableProfileForCurrentContainer();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disableProfileForCurrentContainer);
+                    parcel2.writeBoolean(zDisableProfileForCurrentContainer);
                     return true;
                 case 32:
-                    String readString27 = parcel.readString();
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isProfileActiveByCaller = isProfileActiveByCaller(readString27);
+                    boolean zIsProfileActiveByCaller = isProfileActiveByCaller(string27);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isProfileActiveByCaller);
+                    parcel2.writeBoolean(zIsProfileActiveByCaller);
                     return true;
                 case 33:
                     List availableProfilesForCaller = getAvailableProfilesForCaller();
@@ -1010,20 +1007,20 @@ public interface IEnterpriseBillingPolicy extends IInterface {
                     parcel2.writeList(availableProfilesForCaller);
                     return true;
                 case 34:
-                    String readString28 = parcel.readString();
+                    String string28 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean removeVpnFromBillingProfileForCurrentContainer = removeVpnFromBillingProfileForCurrentContainer(readString28);
+                    boolean zRemoveVpnFromBillingProfileForCurrentContainer = removeVpnFromBillingProfileForCurrentContainer(string28);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeVpnFromBillingProfileForCurrentContainer);
+                    parcel2.writeBoolean(zRemoveVpnFromBillingProfileForCurrentContainer);
                     return true;
                 case 35:
-                    String readString29 = parcel.readString();
-                    String readString30 = parcel.readString();
-                    String readString31 = parcel.readString();
+                    String string29 = parcel.readString();
+                    String string30 = parcel.readString();
+                    String string31 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean addVpnToBillingProfileForCurrentContainer = addVpnToBillingProfileForCurrentContainer(readString29, readString30, readString31);
+                    boolean zAddVpnToBillingProfileForCurrentContainer = addVpnToBillingProfileForCurrentContainer(string29, string30, string31);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addVpnToBillingProfileForCurrentContainer);
+                    parcel2.writeBoolean(zAddVpnToBillingProfileForCurrentContainer);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -1036,7 +1033,6 @@ public interface IEnterpriseBillingPolicy extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IEnterpriseBillingPolicy {
         @Override // com.samsung.android.knox.net.billing.IEnterpriseBillingPolicy
         public boolean activateProfile(ContextInfo contextInfo, String str, boolean z) throws RemoteException {

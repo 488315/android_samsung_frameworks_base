@@ -8,7 +8,6 @@ import androidx.lifecycle.viewmodel.internal.ViewModelImpl;
 import androidx.savedstate.SavedStateRegistry;
 import androidx.savedstate.SavedStateRegistryOwner;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AbstractSavedStateViewModelFactory extends ViewModelProvider.OnRequeryFactory implements ViewModelProvider.Factory {
     public final Bundle defaultArgs;
@@ -21,7 +20,7 @@ public abstract class AbstractSavedStateViewModelFactory extends ViewModelProvid
     public abstract ViewModel create(SavedStateHandle savedStateHandle);
 
     @Override // androidx.lifecycle.ViewModelProvider.Factory
-    public final ViewModel create(Class cls, CreationExtras creationExtras) {
+    public final ViewModel create(Class cls, CreationExtras creationExtras) throws Exception {
         String str = (String) creationExtras.get(ViewModelProvider.NewInstanceFactory.VIEW_MODEL_KEY);
         if (str == null) {
             throw new IllegalStateException("VIEW_MODEL_KEY must always be provided by ViewModelProvider");
@@ -35,9 +34,9 @@ public abstract class AbstractSavedStateViewModelFactory extends ViewModelProvid
         lifecycle.getClass();
         Bundle bundle = this.defaultArgs;
         LegacySavedStateHandleController legacySavedStateHandleController = LegacySavedStateHandleController.INSTANCE;
-        Bundle consumeRestoredStateForKey = savedStateRegistry.consumeRestoredStateForKey(str);
+        Bundle bundleConsumeRestoredStateForKey = savedStateRegistry.consumeRestoredStateForKey(str);
         SavedStateHandle.Companion.getClass();
-        SavedStateHandleController savedStateHandleController = new SavedStateHandleController(str, SavedStateHandle.Companion.createHandle(consumeRestoredStateForKey, bundle));
+        SavedStateHandleController savedStateHandleController = new SavedStateHandleController(str, SavedStateHandle.Companion.createHandle(bundleConsumeRestoredStateForKey, bundle));
         if (savedStateHandleController.isAttached) {
             throw new IllegalStateException("Already attached to lifecycleOwner");
         }
@@ -46,16 +45,16 @@ public abstract class AbstractSavedStateViewModelFactory extends ViewModelProvid
         savedStateRegistry.registerSavedStateProvider(savedStateHandleController.key, savedStateHandleController.handle.savedStateProvider);
         LegacySavedStateHandleController.INSTANCE.getClass();
         LegacySavedStateHandleController.tryToAddRecreator(lifecycle, savedStateRegistry);
-        ViewModel create = create(savedStateHandleController.handle);
-        ViewModelImpl viewModelImpl = create.impl;
+        ViewModel viewModelCreate = create(savedStateHandleController.handle);
+        ViewModelImpl viewModelImpl = viewModelCreate.impl;
         if (viewModelImpl != null) {
             viewModelImpl.addCloseable("androidx.lifecycle.savedstate.vm.tag", savedStateHandleController);
         }
-        return create;
+        return viewModelCreate;
     }
 
     @Override // androidx.lifecycle.ViewModelProvider.OnRequeryFactory
-    public final void onRequery(ViewModel viewModel) {
+    public final void onRequery(ViewModel viewModel) throws NoSuchMethodException, SecurityException {
         SavedStateRegistry savedStateRegistry = this.savedStateRegistry;
         if (savedStateRegistry != null) {
             Lifecycle lifecycle = this.lifecycle;
@@ -71,7 +70,7 @@ public abstract class AbstractSavedStateViewModelFactory extends ViewModelProvid
     }
 
     @Override // androidx.lifecycle.ViewModelProvider.Factory
-    public final ViewModel create(Class cls) {
+    public final ViewModel create(Class cls) throws Exception {
         Lifecycle lifecycle = this.lifecycle;
         String canonicalName = cls.getCanonicalName();
         if (canonicalName == null) {
@@ -83,21 +82,21 @@ public abstract class AbstractSavedStateViewModelFactory extends ViewModelProvid
             lifecycle.getClass();
             Bundle bundle = this.defaultArgs;
             LegacySavedStateHandleController legacySavedStateHandleController = LegacySavedStateHandleController.INSTANCE;
-            Bundle consumeRestoredStateForKey = savedStateRegistry.consumeRestoredStateForKey(canonicalName);
+            Bundle bundleConsumeRestoredStateForKey = savedStateRegistry.consumeRestoredStateForKey(canonicalName);
             SavedStateHandle.Companion.getClass();
-            SavedStateHandleController savedStateHandleController = new SavedStateHandleController(canonicalName, SavedStateHandle.Companion.createHandle(consumeRestoredStateForKey, bundle));
+            SavedStateHandleController savedStateHandleController = new SavedStateHandleController(canonicalName, SavedStateHandle.Companion.createHandle(bundleConsumeRestoredStateForKey, bundle));
             if (!savedStateHandleController.isAttached) {
                 savedStateHandleController.isAttached = true;
                 lifecycle.addObserver(savedStateHandleController);
                 savedStateRegistry.registerSavedStateProvider(savedStateHandleController.key, savedStateHandleController.handle.savedStateProvider);
                 LegacySavedStateHandleController.INSTANCE.getClass();
                 LegacySavedStateHandleController.tryToAddRecreator(lifecycle, savedStateRegistry);
-                ViewModel create = create(savedStateHandleController.handle);
-                ViewModelImpl viewModelImpl = create.impl;
+                ViewModel viewModelCreate = create(savedStateHandleController.handle);
+                ViewModelImpl viewModelImpl = viewModelCreate.impl;
                 if (viewModelImpl != null) {
                     viewModelImpl.addCloseable("androidx.lifecycle.savedstate.vm.tag", savedStateHandleController);
                 }
-                return create;
+                return viewModelCreate;
             }
             throw new IllegalStateException("Already attached to lifecycleOwner");
         }

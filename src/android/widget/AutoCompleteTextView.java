@@ -135,8 +135,8 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
     }
 
     public AutoCompleteTextView(Context context, AttributeSet attributeSet, int i, int i2, Resources.Theme theme) {
+        TypedArray typedArrayObtainStyledAttributes;
         super(context, attributeSet, i, i2);
-        TypedArray typedArray;
         this.mDropDownDismissedOnCompletion = true;
         this.mLastKeyCode = 0;
         this.mValidator = null;
@@ -144,15 +144,15 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         this.mBackCallback = new OnBackInvokedCallback() { // from class: android.widget.AutoCompleteTextView$$ExternalSyntheticLambda0
             @Override // android.window.OnBackInvokedCallback
             public final void onBackInvoked() {
-                AutoCompleteTextView.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AutoCompleteTextView, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.AutoCompleteTextView, attributeSet, obtainStyledAttributes, i, i2);
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.AutoCompleteTextView, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.AutoCompleteTextView, attributeSet, typedArrayObtainStyledAttributes2, i, i2);
         if (theme != null) {
             this.mPopupContext = new ContextThemeWrapper(context, theme);
         } else {
-            int resourceId = obtainStyledAttributes.getResourceId(8, 0);
+            int resourceId = typedArrayObtainStyledAttributes2.getResourceId(8, 0);
             if (resourceId != 0) {
                 this.mPopupContext = new ContextThemeWrapper(context, resourceId);
             } else {
@@ -161,25 +161,25 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         }
         Context context2 = this.mPopupContext;
         if (context2 != context) {
-            typedArray = context2.obtainStyledAttributes(attributeSet, R.styleable.AutoCompleteTextView, i, i2);
-            saveAttributeDataForStyleable(context, R.styleable.AutoCompleteTextView, attributeSet, obtainStyledAttributes, i, i2);
+            typedArrayObtainStyledAttributes = context2.obtainStyledAttributes(attributeSet, R.styleable.AutoCompleteTextView, i, i2);
+            saveAttributeDataForStyleable(context, R.styleable.AutoCompleteTextView, attributeSet, typedArrayObtainStyledAttributes2, i, i2);
         } else {
-            typedArray = obtainStyledAttributes;
+            typedArrayObtainStyledAttributes = typedArrayObtainStyledAttributes2;
         }
-        Drawable drawable = typedArray.getDrawable(3);
-        int layoutDimension = typedArray.getLayoutDimension(5, -2);
-        int layoutDimension2 = typedArray.getLayoutDimension(7, -2);
-        int resourceId2 = typedArray.getResourceId(1, R.layout.simple_dropdown_hint);
-        CharSequence text = typedArray.getText(0);
-        if (typedArray != obtainStyledAttributes) {
-            typedArray.recycle();
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(3);
+        int layoutDimension = typedArrayObtainStyledAttributes.getLayoutDimension(5, -2);
+        int layoutDimension2 = typedArrayObtainStyledAttributes.getLayoutDimension(7, -2);
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(1, R.layout.simple_dropdown_hint);
+        CharSequence text = typedArrayObtainStyledAttributes.getText(0);
+        if (typedArrayObtainStyledAttributes != typedArrayObtainStyledAttributes2) {
+            typedArrayObtainStyledAttributes.recycle();
         }
         ListPopupWindow listPopupWindow = new ListPopupWindow(this.mPopupContext, attributeSet, i, i2);
         this.mPopup = listPopupWindow;
         listPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() { // from class: android.widget.AutoCompleteTextView$$ExternalSyntheticLambda1
             @Override // android.widget.PopupWindow.OnDismissListener
             public final void onDismiss() {
-                AutoCompleteTextView.this.lambda$new$1();
+                this.f$0.lambda$new$1();
             }
         });
         listPopupWindow.setSoftInputMode(16);
@@ -190,9 +190,9 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         listPopupWindow.setHeight(layoutDimension2);
         this.mHintResource = resourceId2;
         setCompletionHint(text);
-        this.mDropDownAnchorId = obtainStyledAttributes.getResourceId(6, -1);
-        this.mThreshold = obtainStyledAttributes.getInt(2, 2);
-        obtainStyledAttributes.recycle();
+        this.mDropDownAnchorId = typedArrayObtainStyledAttributes2.getResourceId(6, -1);
+        this.mThreshold = typedArrayObtainStyledAttributes2.getInt(2, 2);
+        typedArrayObtainStyledAttributes2.recycle();
         int inputType = getInputType();
         if ((inputType & 15) == 1) {
             setRawInputType(inputType | 65536);
@@ -440,12 +440,12 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
             return true;
         }
         this.mLastKeyCode = i;
-        boolean onKeyDown = super.onKeyDown(i, keyEvent);
+        boolean zOnKeyDown = super.onKeyDown(i, keyEvent);
         this.mLastKeyCode = 0;
-        if (onKeyDown && isPopupShowing()) {
+        if (zOnKeyDown && isPopupShowing()) {
             clearListSelection();
         }
-        return onKeyDown;
+        return zOnKeyDown;
     }
 
     public boolean enoughToFilter() {
@@ -605,16 +605,16 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         if (getWindowVisibility() == 8) {
             return;
         }
-        boolean isDropDownAlwaysVisible = this.mPopup.isDropDownAlwaysVisible();
-        boolean enoughToFilter = enoughToFilter();
-        if ((i > 0 || isDropDownAlwaysVisible) && enoughToFilter) {
+        boolean zIsDropDownAlwaysVisible = this.mPopup.isDropDownAlwaysVisible();
+        boolean zEnoughToFilter = enoughToFilter();
+        if ((i > 0 || zIsDropDownAlwaysVisible) && zEnoughToFilter) {
             if (hasFocus() && hasWindowFocus() && this.mPopupCanBeUpdated) {
                 showDropDown();
                 return;
             }
             return;
         }
-        if (isDropDownAlwaysVisible || !isPopupShowing()) {
+        if (zIsDropDownAlwaysVisible || !isPopupShowing()) {
             return;
         }
         dismissDropDown();
@@ -738,16 +738,16 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
         if (listAdapter == null || (inputMethodManager = (InputMethodManager) getContext().getSystemService(InputMethodManager.class)) == null) {
             return;
         }
-        int min = Math.min(listAdapter.getCount(), 20);
-        CompletionInfo[] completionInfoArr = new CompletionInfo[min];
+        int iMin = Math.min(listAdapter.getCount(), 20);
+        CompletionInfo[] completionInfoArr = new CompletionInfo[iMin];
         int i = 0;
-        for (int i2 = 0; i2 < min; i2++) {
+        for (int i2 = 0; i2 < iMin; i2++) {
             if (listAdapter.isEnabled(i2)) {
                 completionInfoArr[i] = new CompletionInfo(listAdapter.getItemId(i2), i, convertSelectionToString(listAdapter.getItem(i2)));
                 i++;
             }
         }
-        if (i != min) {
+        if (i != iMin) {
             CompletionInfo[] completionInfoArr2 = new CompletionInfo[i];
             System.arraycopy(completionInfoArr, 0, completionInfoArr2, 0, i);
             completionInfoArr = completionInfoArr2;
@@ -786,22 +786,22 @@ public class AutoCompleteTextView extends EditText implements Filter.FilterListe
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: unregisterOnBackInvokedCallback, reason: merged with bridge method [inline-methods] */
     public void lambda$new$1() {
-        OnBackInvokedDispatcher findOnBackInvokedDispatcher;
-        if (this.mBackCallbackRegistered && (findOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) != null) {
+        OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher;
+        if (this.mBackCallbackRegistered && (onBackInvokedDispatcherFindOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) != null) {
             if (WindowOnBackInvokedDispatcher.isOnBackInvokedCallbackEnabled(this.mPopupContext)) {
-                findOnBackInvokedDispatcher.unregisterOnBackInvokedCallback(this.mBackCallback);
+                onBackInvokedDispatcherFindOnBackInvokedDispatcher.unregisterOnBackInvokedCallback(this.mBackCallback);
             }
             this.mBackCallbackRegistered = false;
         }
     }
 
     private void registerOnBackInvokedCallback() {
-        OnBackInvokedDispatcher findOnBackInvokedDispatcher;
-        if (this.mBackCallbackRegistered || (findOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) == null) {
+        OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher;
+        if (this.mBackCallbackRegistered || (onBackInvokedDispatcherFindOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) == null) {
             return;
         }
         if (WindowOnBackInvokedDispatcher.isOnBackInvokedCallbackEnabled(this.mPopupContext)) {
-            findOnBackInvokedDispatcher.registerOnBackInvokedCallback(1000000, this.mBackCallback);
+            onBackInvokedDispatcherFindOnBackInvokedDispatcher.registerOnBackInvokedCallback(1000000, this.mBackCallback);
         }
         this.mBackCallbackRegistered = true;
     }

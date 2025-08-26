@@ -1,9 +1,10 @@
 package com.android.systemui.media.audiovisseekbar.config;
 
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
+import com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AudioVisSeekBarConfig {
     public int primaryColor;
@@ -32,12 +33,12 @@ public final class AudioVisSeekBarConfig {
     }
 
     public final String toString() {
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(this.primaryColor, this.secondaryColor, "AudioVisSeekBarConfig(primaryColor=", ", secondaryColor=", ", progressColor=");
-        m.append(this.progressColor);
-        m.append(", remainTrackColor=");
-        m.append(this.remainTrackColor);
-        m.append(", remainTrackBorderColor=");
-        return ReorderTile$$ExternalSyntheticOutline0.m(this.remainTrackBorderColor, ")", m);
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(this.primaryColor, this.secondaryColor, "AudioVisSeekBarConfig(primaryColor=", ", secondaryColor=", ", progressColor=");
+        sbM.append(this.progressColor);
+        sbM.append(", remainTrackColor=");
+        sbM.append(this.remainTrackColor);
+        sbM.append(", remainTrackBorderColor=");
+        return ReorderTile$$ExternalSyntheticOutline0.m(this.remainTrackBorderColor, ")", sbM);
     }
 
     public AudioVisSeekBarConfig(int i, int i2, int i3, int i4, int i5) {
@@ -49,52 +50,30 @@ public final class AudioVisSeekBarConfig {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public AudioVisSeekBarConfig(int r1, int r2, int r3, int r4, int r5, int r6, kotlin.jvm.internal.DefaultConstructorMarker r7) {
-        /*
-            r0 = this;
-            r7 = r6 & 1
-            if (r7 == 0) goto Lb
-            com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider r1 = com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider.INSTANCE
-            r1.getClass()
-            int r1 = com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider.uxPrimaryColor
-        Lb:
-            r7 = r6 & 2
-            if (r7 == 0) goto L16
-            com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider r2 = com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider.INSTANCE
-            r2.getClass()
-            int r2 = com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider.uxSecondaryColor
-        L16:
-            r7 = r6 & 4
-            if (r7 == 0) goto L21
-            com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider r3 = com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider.INSTANCE
-            r3.getClass()
-            int r3 = com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider.progressTrackColor
-        L21:
-            r7 = r6 & 8
-            if (r7 == 0) goto L2c
-            com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider r4 = com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider.INSTANCE
-            r4.getClass()
-            int r4 = com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider.remainTrackColor
-        L2c:
-            r6 = r6 & 16
-            if (r6 == 0) goto L37
-            com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider r5 = com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider.INSTANCE
-            r5.getClass()
-            int r5 = com.android.systemui.media.audiovisseekbar.utils.color.ColorPresetProvider.remainTrackBorderColor
-        L37:
-            r6 = r4
-            r7 = r5
-            r4 = r2
-            r5 = r3
-            r2 = r0
-            r3 = r1
-            r2.<init>(r3, r4, r5, r6, r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.audiovisseekbar.config.AudioVisSeekBarConfig.<init>(int, int, int, int, int, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public AudioVisSeekBarConfig(int i, int i2, int i3, int i4, int i5, int i6, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i6 & 1) != 0) {
+            ColorPresetProvider.INSTANCE.getClass();
+            i = ColorPresetProvider.uxPrimaryColor;
+        }
+        if ((i6 & 2) != 0) {
+            ColorPresetProvider.INSTANCE.getClass();
+            i2 = ColorPresetProvider.uxSecondaryColor;
+        }
+        if ((i6 & 4) != 0) {
+            ColorPresetProvider.INSTANCE.getClass();
+            i3 = ColorPresetProvider.progressTrackColor;
+        }
+        if ((i6 & 8) != 0) {
+            ColorPresetProvider.INSTANCE.getClass();
+            i4 = ColorPresetProvider.remainTrackColor;
+        }
+        if ((i6 & 16) != 0) {
+            ColorPresetProvider.INSTANCE.getClass();
+            i5 = ColorPresetProvider.remainTrackBorderColor;
+        }
+        int i7 = i5;
+        int i8 = i3;
+        int i9 = i;
+        this(i9, i2, i8, i4, i7);
     }
 }

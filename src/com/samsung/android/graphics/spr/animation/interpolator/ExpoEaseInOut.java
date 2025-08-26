@@ -18,7 +18,7 @@ public class ExpoEaseInOut implements Interpolator {
     }
 
     private float inout(float f) {
-        double d;
+        double dPow;
         if (f == 0.0f) {
             return 0.0f;
         }
@@ -26,10 +26,10 @@ public class ExpoEaseInOut implements Interpolator {
             return 1.0f;
         }
         if (f * 2.0f < 1.0f) {
-            d = Math.pow(2.0d, (r6 - 1.0f) * 10.0f);
+            dPow = Math.pow(2.0d, (r6 - 1.0f) * 10.0f);
         } else {
-            d = (-Math.pow(2.0d, (r6 - 1.0f) * (-10.0f))) + 2.0d;
+            dPow = (-Math.pow(2.0d, (r6 - 1.0f) * (-10.0f))) + 2.0d;
         }
-        return (float) (d * 0.5d);
+        return (float) (dPow * 0.5d);
     }
 }

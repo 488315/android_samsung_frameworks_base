@@ -7,7 +7,6 @@ import androidx.compose.ui.text.internal.InlineClassHelperKt;
 import kotlin.KotlinNothingValueException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PlaceholderSpan extends ReplacementSpan {
     public Paint.FontMetricsInt fontMetrics;
@@ -21,7 +20,6 @@ public final class PlaceholderSpan extends ReplacementSpan {
     public int widthPx;
     public final int widthUnit;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -54,7 +52,7 @@ public final class PlaceholderSpan extends ReplacementSpan {
     @Override // android.text.style.ReplacementSpan
     public final int getSize(Paint paint, CharSequence charSequence, int i, int i2, Paint.FontMetricsInt fontMetricsInt) {
         float f;
-        double ceil;
+        double dCeil;
         this.isLaidOut = true;
         float textSize = paint.getTextSize();
         Paint.FontMetricsInt fontMetricsInt2 = paint.getFontMetricsInt();
@@ -79,15 +77,15 @@ public final class PlaceholderSpan extends ReplacementSpan {
         this.widthPx = (int) Math.ceil(f);
         int i5 = this.heightUnit;
         if (i5 == 0) {
-            ceil = Math.ceil(this.height * this.pxPerSp);
+            dCeil = Math.ceil(this.height * this.pxPerSp);
         } else {
             if (i5 != 1) {
                 InlineClassHelperKt.throwIllegalArgumentExceptionForNullCheck("Unsupported unit.");
                 throw new KotlinNothingValueException();
             }
-            ceil = Math.ceil(this.height * textSize);
+            dCeil = Math.ceil(this.height * textSize);
         }
-        this.heightPx = (int) ceil;
+        this.heightPx = (int) dCeil;
         if (fontMetricsInt != null) {
             Paint.FontMetricsInt fontMetricsInt3 = this.fontMetrics;
             int i6 = (fontMetricsInt3 != null ? fontMetricsInt3 : null).ascent;

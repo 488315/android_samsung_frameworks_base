@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AudioRepositoryImpl$ringerMode$2 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -42,10 +41,10 @@ final class AudioRepositoryImpl$ringerMode$2 extends SuspendLambda implements Fu
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             int ringerModeInternal = this.this$0.audioManager.getRingerModeInternal();
-            RingerMode.m991constructorimpl(ringerModeInternal);
-            RingerMode m990boximpl = RingerMode.m990boximpl(ringerModeInternal);
+            RingerMode.m993constructorimpl(ringerModeInternal);
+            RingerMode ringerModeM992boximpl = RingerMode.m992boximpl(ringerModeInternal);
             this.label = 1;
-            if (flowCollector.emit(m990boximpl, this) == coroutineSingletons) {
+            if (flowCollector.emit(ringerModeM992boximpl, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

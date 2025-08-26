@@ -5,7 +5,6 @@ import android.view.View;
 import com.android.settingslib.media.MediaDevice;
 import com.android.systemui.media.dialog.MediaOutputAdapterLegacy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class MediaOutputAdapterLegacy$MediaDeviceViewHolderLegacy$$ExternalSyntheticLambda4 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
@@ -35,7 +34,7 @@ public final /* synthetic */ class MediaOutputAdapterLegacy$MediaDeviceViewHolde
                     mediaDeviceViewHolderLegacy.mIconAreaLayout.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.media.dialog.MediaOutputAdapterLegacy$MediaDeviceViewHolderLegacy$$ExternalSyntheticLambda9
                         @Override // android.view.View.OnTouchListener
                         public final boolean onTouch(View view2, MotionEvent motionEvent) {
-                            MediaOutputAdapterLegacy.MediaDeviceViewHolderLegacy.this.mSeekBar.dispatchTouchEvent(motionEvent);
+                            mediaDeviceViewHolderLegacy.mSeekBar.dispatchTouchEvent(motionEvent);
                             return false;
                         }
                     });

@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface ISysuiUnlockAnimationController extends IInterface {
     void onLauncherSmartspaceStateUpdated(SmartspaceState smartspaceState);
@@ -14,7 +13,6 @@ public interface ISysuiUnlockAnimationController extends IInterface {
 
     void unlockAnimationReady();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ISysuiUnlockAnimationController {
         public Stub() {
             attachInterface(this, "com.android.systemui.shared.system.smartspace.ISysuiUnlockAnimationController");
@@ -43,16 +41,16 @@ public interface ISysuiUnlockAnimationController extends IInterface {
                 onLauncherSmartspaceStateUpdated(smartspaceState);
                 return true;
             }
-            String readString = parcel.readString();
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            if (readStrongBinder == null) {
+            String string = parcel.readString();
+            IBinder strongBinder = parcel.readStrongBinder();
+            if (strongBinder == null) {
                 iLauncherUnlockAnimationController$Stub$Proxy = null;
             } else {
-                IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.android.systemui.shared.system.smartspace.ILauncherUnlockAnimationController");
-                iLauncherUnlockAnimationController$Stub$Proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof ILauncherUnlockAnimationController$Stub$Proxy)) ? new ILauncherUnlockAnimationController$Stub$Proxy(readStrongBinder) : (ILauncherUnlockAnimationController$Stub$Proxy) queryLocalInterface;
+                IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.android.systemui.shared.system.smartspace.ILauncherUnlockAnimationController");
+                iLauncherUnlockAnimationController$Stub$Proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ILauncherUnlockAnimationController$Stub$Proxy)) ? new ILauncherUnlockAnimationController$Stub$Proxy(strongBinder) : (ILauncherUnlockAnimationController$Stub$Proxy) iInterfaceQueryLocalInterface;
             }
             parcel.enforceNoDataAvail();
-            setLauncherUnlockController(readString, iLauncherUnlockAnimationController$Stub$Proxy);
+            setLauncherUnlockController(string, iLauncherUnlockAnimationController$Stub$Proxy);
             return true;
         }
 

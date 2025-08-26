@@ -25,6 +25,7 @@ import java.security.PrivateKey;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
+import java.security.spec.InvalidParameterSpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.BadPaddingException;
@@ -98,16 +99,16 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected AlgorithmParameters engineGetParameters() {
+    protected AlgorithmParameters engineGetParameters() throws InvalidParameterSpecException {
         if (this.engineParams == null && this.iv != null) {
             String algorithmName = this.wrapEngine.getAlgorithmName();
             if (algorithmName.indexOf(47) >= 0) {
                 algorithmName = algorithmName.substring(0, algorithmName.indexOf(47));
             }
             try {
-                AlgorithmParameters createParametersInstance = createParametersInstance(algorithmName);
-                this.engineParams = createParametersInstance;
-                createParametersInstance.init(new IvParameterSpec(this.iv));
+                AlgorithmParameters algorithmParametersCreateParametersInstance = createParametersInstance(algorithmName);
+                this.engineParams = algorithmParametersCreateParametersInstance;
+                algorithmParametersCreateParametersInstance.init(new IvParameterSpec(this.iv));
             } catch (Exception e) {
                 throw new RuntimeException(e.toString());
             }
@@ -189,17 +190,17 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
 
     @Override // javax.crypto.CipherSpi
     protected void engineInit(int i, Key key, AlgorithmParameters algorithmParameters, SecureRandom secureRandom) throws InvalidKeyException, InvalidAlgorithmParameterException {
-        AlgorithmParameterSpec algorithmParameterSpec;
+        AlgorithmParameterSpec algorithmParameterSpecExtractSpec;
         if (algorithmParameters != null) {
-            algorithmParameterSpec = SpecUtil.extractSpec(algorithmParameters, this.availableSpecs);
-            if (algorithmParameterSpec == null) {
+            algorithmParameterSpecExtractSpec = SpecUtil.extractSpec(algorithmParameters, this.availableSpecs);
+            if (algorithmParameterSpecExtractSpec == null) {
                 throw new InvalidAlgorithmParameterException("can't handle parameter " + algorithmParameters.toString());
             }
         } else {
-            algorithmParameterSpec = null;
+            algorithmParameterSpecExtractSpec = null;
         }
         this.engineParams = algorithmParameters;
-        engineInit(i, key, algorithmParameterSpec, secureRandom);
+        engineInit(i, key, algorithmParameterSpecExtractSpec, secureRandom);
     }
 
     @Override // javax.crypto.CipherSpi
@@ -232,8 +233,8 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected byte[] engineDoFinal(byte[] bArr, int i, int i2) throws IllegalBlockSizeException, BadPaddingException {
-        byte[] wrap;
+    protected byte[] engineDoFinal(byte[] bArr, int i, int i2) throws BadPaddingException, IllegalBlockSizeException {
+        byte[] bArrWrap;
         ErasableOutputStream erasableOutputStream = this.wrapStream;
         if (erasableOutputStream == null) {
             throw new IllegalStateException("not supported in a wrapping mode");
@@ -244,93 +245,53 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
         try {
             if (this.forWrapping) {
                 try {
-                    wrap = this.wrapEngine.wrap(this.wrapStream.getBuf(), 0, this.wrapStream.size());
-                    return wrap;
+                    bArrWrap = this.wrapEngine.wrap(this.wrapStream.getBuf(), 0, this.wrapStream.size());
                 } catch (Exception e) {
                     throw new IllegalBlockSizeException(e.getMessage());
                 }
+            } else {
+                try {
+                    bArrWrap = this.wrapEngine.unwrap(this.wrapStream.getBuf(), 0, this.wrapStream.size());
+                } catch (InvalidCipherTextException e2) {
+                    throw new BadPaddingException(e2.getMessage());
+                }
             }
-            try {
-                wrap = this.wrapEngine.unwrap(this.wrapStream.getBuf(), 0, this.wrapStream.size());
-                return wrap;
-            } catch (InvalidCipherTextException e2) {
-                throw new BadPaddingException(e2.getMessage());
-            }
+            return bArrWrap;
         } finally {
             this.wrapStream.erase();
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0041 A[Catch: all -> 0x005f, TRY_LEAVE, TryCatch #2 {all -> 0x005f, blocks: (B:5:0x0007, B:9:0x000c, B:10:0x003c, B:12:0x0041, B:16:0x004c, B:17:0x0053, B:23:0x002a, B:20:0x0020, B:21:0x0029, B:26:0x0055, B:27:0x005e), top: B:4:0x0007, inners: #0, #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x004c A[Catch: all -> 0x005f, TRY_ENTER, TryCatch #2 {all -> 0x005f, blocks: (B:5:0x0007, B:9:0x000c, B:10:0x003c, B:12:0x0041, B:16:0x004c, B:17:0x0053, B:23:0x002a, B:20:0x0020, B:21:0x0029, B:26:0x0055, B:27:0x005e), top: B:4:0x0007, inners: #0, #1 }] */
     @Override // javax.crypto.CipherSpi
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    protected int engineDoFinal(byte[] r2, int r3, int r4, byte[] r5, int r6) throws javax.crypto.IllegalBlockSizeException, javax.crypto.BadPaddingException, javax.crypto.ShortBufferException {
-        /*
-            r1 = this;
-            com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher$ErasableOutputStream r0 = r1.wrapStream
-            if (r0 == 0) goto L66
-            r0.write(r2, r3, r4)
-            boolean r2 = r1.forWrapping     // Catch: java.lang.Throwable -> L5f
-            r3 = 0
-            if (r2 == 0) goto L2a
-            com.android.internal.org.bouncycastle.crypto.Wrapper r2 = r1.wrapEngine     // Catch: java.lang.Exception -> L1f java.lang.Throwable -> L5f
-            com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher$ErasableOutputStream r4 = r1.wrapStream     // Catch: java.lang.Exception -> L1f java.lang.Throwable -> L5f
-            byte[] r4 = r4.getBuf()     // Catch: java.lang.Exception -> L1f java.lang.Throwable -> L5f
-            com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher$ErasableOutputStream r0 = r1.wrapStream     // Catch: java.lang.Exception -> L1f java.lang.Throwable -> L5f
-            int r0 = r0.size()     // Catch: java.lang.Exception -> L1f java.lang.Throwable -> L5f
-            byte[] r2 = r2.wrap(r4, r3, r0)     // Catch: java.lang.Exception -> L1f java.lang.Throwable -> L5f
-            goto L3c
-        L1f:
-            r2 = move-exception
-            javax.crypto.IllegalBlockSizeException r3 = new javax.crypto.IllegalBlockSizeException     // Catch: java.lang.Throwable -> L5f
-            java.lang.String r2 = r2.getMessage()     // Catch: java.lang.Throwable -> L5f
-            r3.<init>(r2)     // Catch: java.lang.Throwable -> L5f
-            throw r3     // Catch: java.lang.Throwable -> L5f
-        L2a:
-            com.android.internal.org.bouncycastle.crypto.Wrapper r2 = r1.wrapEngine     // Catch: com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException -> L54 java.lang.Throwable -> L5f
-            com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher$ErasableOutputStream r4 = r1.wrapStream     // Catch: com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException -> L54 java.lang.Throwable -> L5f
-            byte[] r4 = r4.getBuf()     // Catch: com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException -> L54 java.lang.Throwable -> L5f
-            com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher$ErasableOutputStream r0 = r1.wrapStream     // Catch: com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException -> L54 java.lang.Throwable -> L5f
-            int r0 = r0.size()     // Catch: com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException -> L54 java.lang.Throwable -> L5f
-            byte[] r2 = r2.unwrap(r4, r3, r0)     // Catch: com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException -> L54 java.lang.Throwable -> L5f
-        L3c:
-            int r4 = r2.length     // Catch: java.lang.Throwable -> L5f
-            int r4 = r4 + r6
-            int r0 = r5.length     // Catch: java.lang.Throwable -> L5f
-            if (r4 > r0) goto L4c
-            int r4 = r2.length     // Catch: java.lang.Throwable -> L5f
-            java.lang.System.arraycopy(r2, r3, r5, r6, r4)     // Catch: java.lang.Throwable -> L5f
-            int r2 = r2.length     // Catch: java.lang.Throwable -> L5f
-            com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher$ErasableOutputStream r1 = r1.wrapStream
-            r1.erase()
-            return r2
-        L4c:
-            javax.crypto.ShortBufferException r2 = new javax.crypto.ShortBufferException     // Catch: java.lang.Throwable -> L5f
-            java.lang.String r3 = "output buffer too short for input."
-            r2.<init>(r3)     // Catch: java.lang.Throwable -> L5f
-            throw r2     // Catch: java.lang.Throwable -> L5f
-        L54:
-            r2 = move-exception
-            javax.crypto.BadPaddingException r3 = new javax.crypto.BadPaddingException     // Catch: java.lang.Throwable -> L5f
-            java.lang.String r2 = r2.getMessage()     // Catch: java.lang.Throwable -> L5f
-            r3.<init>(r2)     // Catch: java.lang.Throwable -> L5f
-            throw r3     // Catch: java.lang.Throwable -> L5f
-        L5f:
-            r2 = move-exception
-            com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher$ErasableOutputStream r1 = r1.wrapStream
-            r1.erase()
-            throw r2
-        L66:
-            java.lang.IllegalStateException r1 = new java.lang.IllegalStateException
-            java.lang.String r2 = "not supported in a wrapping mode"
-            r1.<init>(r2)
-            throw r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher.engineDoFinal(byte[], int, int, byte[], int):int");
+    protected int engineDoFinal(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws BadPaddingException, IllegalBlockSizeException, ShortBufferException {
+        byte[] bArrUnwrap;
+        ErasableOutputStream erasableOutputStream = this.wrapStream;
+        if (erasableOutputStream == null) {
+            throw new IllegalStateException("not supported in a wrapping mode");
+        }
+        erasableOutputStream.write(bArr, i, i2);
+        try {
+            if (this.forWrapping) {
+                try {
+                    bArrUnwrap = this.wrapEngine.wrap(this.wrapStream.getBuf(), 0, this.wrapStream.size());
+                } catch (Exception e) {
+                    throw new IllegalBlockSizeException(e.getMessage());
+                }
+            } else {
+                try {
+                    bArrUnwrap = this.wrapEngine.unwrap(this.wrapStream.getBuf(), 0, this.wrapStream.size());
+                } catch (InvalidCipherTextException e2) {
+                    throw new BadPaddingException(e2.getMessage());
+                }
+            }
+            if (bArrUnwrap.length + i3 > bArr2.length) {
+                throw new ShortBufferException("output buffer too short for input.");
+            }
+            System.arraycopy(bArrUnwrap, 0, bArr2, i3, bArrUnwrap.length);
+            return bArrUnwrap.length;
+        } finally {
+            this.wrapStream.erase();
+        }
     }
 
     @Override // javax.crypto.CipherSpi
@@ -351,16 +312,16 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected Key engineUnwrap(byte[] bArr, String str, int i) throws InvalidKeyException, NoSuchAlgorithmException {
+    protected Key engineUnwrap(byte[] bArr, String str, int i) throws NoSuchAlgorithmException, InvalidKeyException {
         try {
             Wrapper wrapper = this.wrapEngine;
-            byte[] engineDoFinal = wrapper == null ? engineDoFinal(bArr, 0, bArr.length) : wrapper.unwrap(bArr, 0, bArr.length);
+            byte[] bArrEngineDoFinal = wrapper == null ? engineDoFinal(bArr, 0, bArr.length) : wrapper.unwrap(bArr, 0, bArr.length);
             if (i == 3) {
-                return new SecretKeySpec(engineDoFinal, str);
+                return new SecretKeySpec(bArrEngineDoFinal, str);
             }
             if (str.equals("") && i == 2) {
                 try {
-                    PrivateKeyInfo privateKeyInfo = PrivateKeyInfo.getInstance(engineDoFinal);
+                    PrivateKeyInfo privateKeyInfo = PrivateKeyInfo.getInstance(bArrEngineDoFinal);
                     PrivateKey privateKey = BouncyCastleProvider.getPrivateKey(privateKeyInfo);
                     if (privateKey != null) {
                         return privateKey;
@@ -371,12 +332,12 @@ public abstract class BaseWrapCipher extends CipherSpi implements PBE {
                 }
             }
             try {
-                KeyFactory createKeyFactory = this.helper.createKeyFactory(str);
+                KeyFactory keyFactoryCreateKeyFactory = this.helper.createKeyFactory(str);
                 if (i == 1) {
-                    return createKeyFactory.generatePublic(new X509EncodedKeySpec(engineDoFinal));
+                    return keyFactoryCreateKeyFactory.generatePublic(new X509EncodedKeySpec(bArrEngineDoFinal));
                 }
                 if (i == 2) {
-                    return createKeyFactory.generatePrivate(new PKCS8EncodedKeySpec(engineDoFinal));
+                    return keyFactoryCreateKeyFactory.generatePrivate(new PKCS8EncodedKeySpec(bArrEngineDoFinal));
                 }
                 throw new InvalidKeyException("Unknown key type " + i);
             } catch (NoSuchProviderException e) {

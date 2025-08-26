@@ -1,13 +1,41 @@
 package androidx.compose.runtime;
 
+import java.util.ArrayList;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.CancellableContinuation;
+import kotlinx.coroutines.CancellableContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PausableMonotonicFrameClock implements MonotonicFrameClock {
     public final MonotonicFrameClock frameClock;
     public final Latch latch = new Latch();
+
+    /* renamed from: androidx.compose.runtime.PausableMonotonicFrameClock$withFrameNanos$1, reason: invalid class name */
+    final class AnonymousClass1<R> extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return PausableMonotonicFrameClock.this.withFrameNanos(null, this);
+        }
+    }
 
     public PausableMonotonicFrameClock(MonotonicFrameClock monotonicFrameClock) {
         this.frameClock = monotonicFrameClock;
@@ -33,116 +61,85 @@ public final class PausableMonotonicFrameClock implements MonotonicFrameClock {
         return CoroutineContext.DefaultImpls.plus(this, coroutineContext);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x007d, code lost:
-    
-        if (r8 == r1) goto L35;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x008f A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0090 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // androidx.compose.runtime.MonotonicFrameClock
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object withFrameNanos(kotlin.jvm.functions.Function1 r7, kotlin.coroutines.Continuation r8) {
-        /*
-            r6 = this;
-            boolean r0 = r8 instanceof androidx.compose.runtime.PausableMonotonicFrameClock$withFrameNanos$1
-            if (r0 == 0) goto L13
-            r0 = r8
-            androidx.compose.runtime.PausableMonotonicFrameClock$withFrameNanos$1 r0 = (androidx.compose.runtime.PausableMonotonicFrameClock$withFrameNanos$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.runtime.PausableMonotonicFrameClock$withFrameNanos$1 r0 = new androidx.compose.runtime.PausableMonotonicFrameClock$withFrameNanos$1
-            r0.<init>(r6, r8)
-        L18:
-            java.lang.Object r8 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L3f
-            if (r2 == r4) goto L32
-            if (r2 != r3) goto L2a
-            kotlin.ResultKt.throwOnFailure(r8)
-            return r8
-        L2a:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L32:
-            java.lang.Object r6 = r0.L$1
-            r7 = r6
-            kotlin.jvm.functions.Function1 r7 = (kotlin.jvm.functions.Function1) r7
-            java.lang.Object r6 = r0.L$0
-            androidx.compose.runtime.PausableMonotonicFrameClock r6 = (androidx.compose.runtime.PausableMonotonicFrameClock) r6
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L80
-        L3f:
-            kotlin.ResultKt.throwOnFailure(r8)
-            androidx.compose.runtime.Latch r8 = r6.latch
-            r0.L$0 = r6
-            r0.L$1 = r7
-            r0.label = r4
-            java.lang.Object r2 = r8.lock
-            monitor-enter(r2)
-            boolean r5 = r8._isOpen     // Catch: java.lang.Throwable -> L94
-            monitor-exit(r2)
-            if (r5 == 0) goto L55
-            kotlin.Unit r8 = kotlin.Unit.INSTANCE
-            goto L7d
-        L55:
-            kotlinx.coroutines.CancellableContinuationImpl r2 = new kotlinx.coroutines.CancellableContinuationImpl
-            kotlin.coroutines.Continuation r5 = kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt.intercepted(r0)
-            r2.<init>(r5, r4)
-            r2.initCancellability()
-            java.lang.Object r4 = r8.lock
-            monitor-enter(r4)
-            java.util.List r5 = r8.awaiters     // Catch: java.lang.Throwable -> L91
-            java.util.ArrayList r5 = (java.util.ArrayList) r5     // Catch: java.lang.Throwable -> L91
-            r5.add(r2)     // Catch: java.lang.Throwable -> L91
-            monitor-exit(r4)
-            androidx.compose.runtime.Latch$await$2$2 r4 = new androidx.compose.runtime.Latch$await$2$2
-            r4.<init>()
-            r2.invokeOnCancellation(r4)
-            java.lang.Object r8 = r2.getResult()
-            if (r8 != r1) goto L7b
-            goto L7d
-        L7b:
-            kotlin.Unit r8 = kotlin.Unit.INSTANCE
-        L7d:
-            if (r8 != r1) goto L80
-            goto L8f
-        L80:
-            androidx.compose.runtime.MonotonicFrameClock r6 = r6.frameClock
-            r8 = 0
-            r0.L$0 = r8
-            r0.L$1 = r8
-            r0.label = r3
-            java.lang.Object r6 = r6.withFrameNanos(r7, r0)
-            if (r6 != r1) goto L90
-        L8f:
-            return r1
-        L90:
-            return r6
-        L91:
-            r6 = move-exception
-            monitor-exit(r4)
-            throw r6
-        L94:
-            r6 = move-exception
-            monitor-exit(r2)
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.PausableMonotonicFrameClock.withFrameNanos(kotlin.jvm.functions.Function1, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object withFrameNanos(Function1 function1, Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        boolean z;
+        Object result;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            final Latch latch = this.latch;
+            anonymousClass1.L$0 = this;
+            anonymousClass1.L$1 = function1;
+            anonymousClass1.label = 1;
+            synchronized (latch.lock) {
+                z = latch._isOpen;
+            }
+            if (z) {
+                result = Unit.INSTANCE;
+            } else {
+                final CancellableContinuationImpl cancellableContinuationImpl = new CancellableContinuationImpl(IntrinsicsKt__IntrinsicsJvmKt.intercepted(anonymousClass1), 1);
+                cancellableContinuationImpl.initCancellability();
+                synchronized (latch.lock) {
+                    ((ArrayList) latch.awaiters).add(cancellableContinuationImpl);
+                }
+                cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: androidx.compose.runtime.Latch$await$2$2
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    {
+                        super(1);
+                    }
+
+                    @Override // kotlin.jvm.functions.Function1
+                    /* renamed from: invoke */
+                    public final Object mo781invoke(Object obj2) {
+                        Latch latch2 = latch;
+                        Object obj3 = latch2.lock;
+                        CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
+                        synchronized (obj3) {
+                            latch2.awaiters.remove(cancellableContinuation);
+                        }
+                        return Unit.INSTANCE;
+                    }
+                });
+                result = cancellableContinuationImpl.getResult();
+                if (result != coroutineSingletons) {
+                    result = Unit.INSTANCE;
+                }
+            }
+            if (result != coroutineSingletons) {
+            }
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return obj;
+        }
+        function1 = (Function1) anonymousClass1.L$1;
+        this = (PausableMonotonicFrameClock) anonymousClass1.L$0;
+        ResultKt.throwOnFailure(obj);
+        MonotonicFrameClock monotonicFrameClock = this.frameClock;
+        anonymousClass1.L$0 = null;
+        anonymousClass1.L$1 = null;
+        anonymousClass1.label = 2;
+        Object objWithFrameNanos = monotonicFrameClock.withFrameNanos(function1, anonymousClass1);
+        return objWithFrameNanos == coroutineSingletons ? coroutineSingletons : objWithFrameNanos;
     }
 }

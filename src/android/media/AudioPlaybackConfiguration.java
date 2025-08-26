@@ -377,11 +377,11 @@ public final class AudioPlaybackConfiguration implements Parcelable {
 
     @SystemApi
     public int getChannelMask() {
-        int convertNativeChannelMaskToOutMask;
+        int iConvertNativeChannelMaskToOutMask;
         synchronized (this.mUpdateablePropLock) {
-            convertNativeChannelMaskToOutMask = AudioFormat.convertNativeChannelMaskToOutMask(this.mFormatInfo.mNativeChannelMask);
+            iConvertNativeChannelMaskToOutMask = AudioFormat.convertNativeChannelMaskToOutMask(this.mFormatInfo.mNativeChannelMask);
         }
-        return convertNativeChannelMaskToOutMask;
+        return iConvertNativeChannelMaskToOutMask;
     }
 
     IPlayer getIPlayer() {
@@ -484,11 +484,11 @@ public final class AudioPlaybackConfiguration implements Parcelable {
     }
 
     public int hashCode() {
-        int hash;
+        int iHash;
         synchronized (this.mUpdateablePropLock) {
-            hash = Objects.hash(Integer.valueOf(this.mPlayerIId), Arrays.toString(this.mDeviceIds), Integer.valueOf(this.mMutedState), Integer.valueOf(this.mPlayerType), Integer.valueOf(this.mClientUid), Integer.valueOf(this.mClientPid), Integer.valueOf(this.mSessionId));
+            iHash = Objects.hash(Integer.valueOf(this.mPlayerIId), Arrays.toString(this.mDeviceIds), Integer.valueOf(this.mMutedState), Integer.valueOf(this.mPlayerType), Integer.valueOf(this.mClientUid), Integer.valueOf(this.mClientPid), Integer.valueOf(this.mSessionId));
         }
-        return hash;
+        return iHash;
     }
 
     @Override // android.os.Parcelable
@@ -532,8 +532,8 @@ public final class AudioPlaybackConfiguration implements Parcelable {
         this.mClientPid = parcel.readInt();
         this.mPlayerState = parcel.readInt();
         this.mPlayerAttr = AudioAttributes.CREATOR.createFromParcel(parcel);
-        IPlayer asInterface = IPlayer.Stub.asInterface(parcel.readStrongBinder());
-        this.mIPlayerShell = asInterface != null ? new IPlayerShell(null, asInterface) : null;
+        IPlayer iPlayerAsInterface = IPlayer.Stub.asInterface(parcel.readStrongBinder());
+        this.mIPlayerShell = iPlayerAsInterface != null ? new IPlayerShell(null, iPlayerAsInterface) : null;
         this.mSessionId = parcel.readInt();
         this.mFormatInfo = FormatInfo.CREATOR.createFromParcel(parcel);
     }

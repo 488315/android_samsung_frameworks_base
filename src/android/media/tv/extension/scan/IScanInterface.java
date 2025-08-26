@@ -55,9 +55,9 @@ public interface IScanInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IScanInterface");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IScanInterface)) {
-                return (IScanInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IScanInterface");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IScanInterface)) {
+                return (IScanInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,22 +87,22 @@ public interface IScanInterface extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
-                IScanListener asInterface = IScanListener.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
+                IScanListener iScanListenerAsInterface = IScanListener.Stub.asInterface(parcel.readStrongBinder());
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                IBinder createSession = createSession(readInt, readString, readString2, asInterface, bundle);
+                IBinder iBinderCreateSession = createSession(i3, string, string2, iScanListenerAsInterface, bundle);
                 parcel2.writeNoException();
-                parcel2.writeStrongBinder(createSession);
+                parcel2.writeStrongBinder(iBinderCreateSession);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                String readString3 = parcel.readString();
-                String readString4 = parcel.readString();
+                int i4 = parcel.readInt();
+                String string3 = parcel.readString();
+                String string4 = parcel.readString();
                 Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                Bundle parameters = getParameters(readInt2, readString3, readString4, bundle2);
+                Bundle parameters = getParameters(i4, string3, string4, bundle2);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(parameters, 1);
             } else {
@@ -129,40 +129,40 @@ public interface IScanInterface extends IInterface {
 
             @Override // android.media.tv.extension.scan.IScanInterface
             public IBinder createSession(int i, String str, String str2, IScanListener iScanListener, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IScanInterface");
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iScanListener);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IScanInterface");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iScanListener);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.IScanInterface
             public Bundle getParameters(int i, String str, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IScanInterface");
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IScanInterface");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

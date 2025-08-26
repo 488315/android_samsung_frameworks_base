@@ -16,14 +16,12 @@ import java.util.TreeSet;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ColorUpdateLogger implements Dumpable {
     public static final Companion Companion = new Companion(null);
     public static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.US);
     public final List frames = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,7 +31,6 @@ public final class ColorUpdateLogger implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Frame {
         public final List events;
         public final long startTime;
@@ -92,25 +89,24 @@ public final class ColorUpdateLogger implements Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.println("enabled: false");
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.println("enabled: false");
         ArrayList arrayList = (ArrayList) this.frames;
-        asIndenting.append("frames").append((CharSequence) ": ").println(arrayList.size());
-        asIndenting.increaseIndent();
+        indentingPrintWriterAsIndenting.append("frames").append((CharSequence) ": ").println(arrayList.size());
+        indentingPrintWriterAsIndenting.increaseIndent();
         try {
             int size = arrayList.size();
             int i = 0;
             while (i < size) {
                 Object obj = arrayList.get(i);
                 i++;
-                ((Frame) obj).dump(asIndenting);
+                ((Frame) obj).dump(indentingPrintWriterAsIndenting);
             }
         } finally {
-            asIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.decreaseIndent();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Event {
         public final String extraValue;
         public final String notificationKey;

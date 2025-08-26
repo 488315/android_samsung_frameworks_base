@@ -3,14 +3,12 @@ package com.samsung.android.knox.ex.knoxAI;
 import android.util.Log;
 import com.samsung.android.knox.ex.knoxAI.KnoxAiManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KnoxAiSession {
     public static final String TAG = "KnoxAiSession";
     public final KnoxAiManagerInternal mKnoxAiManagerInternal;
     public final long mSessionID;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum CompUnit {
         CPU,
         GPU,
@@ -22,7 +20,6 @@ public class KnoxAiSession {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum DataFormat {
         NCHW(0),
         NHWC(1);
@@ -38,7 +35,6 @@ public class KnoxAiSession {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum DataType {
         FLOAT32(0),
         FLOAT16(1),
@@ -59,7 +55,6 @@ public class KnoxAiSession {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ExecType {
         FLOAT32,
         FLOAT16,
@@ -72,7 +67,6 @@ public class KnoxAiSession {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Mode {
         DEBUG,
         RELEASE;
@@ -82,7 +76,6 @@ public class KnoxAiSession {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ModelInputType {
         FILEPATH,
         FD,
@@ -93,7 +86,6 @@ public class KnoxAiSession {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ModelType {
         CAFFE,
         SNPE,

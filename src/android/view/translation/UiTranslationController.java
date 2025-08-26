@@ -71,10 +71,10 @@ public class UiTranslationController implements Dumpable {
             Log.i("UiTranslationController", "Cannot update " + stateToString(i) + " for destroyed " + this.mActivity);
             return;
         }
-        boolean isLoggable = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
+        boolean zIsLoggable = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
         StringBuilder sb = new StringBuilder("updateUiTranslationState state: ");
         sb.append(stateToString(i));
-        if (isLoggable) {
+        if (zIsLoggable) {
             str = ", views: " + list + ", spec: " + uiTranslationSpec;
         } else {
             str = "";
@@ -209,11 +209,11 @@ public class UiTranslationController implements Dumpable {
                 printWriter.print("");
                 printWriter.print("#");
                 printWriter.println(i2);
-                AutofillId keyAt = this.mViews.keyAt(i2);
+                AutofillId autofillIdKeyAt = this.mViews.keyAt(i2);
                 View view = this.mViews.valueAt(i2).get();
                 printWriter.print("  ");
                 printWriter.print("autofillId: ");
-                printWriter.println(keyAt);
+                printWriter.println(autofillIdKeyAt);
                 printWriter.print("  ");
                 printWriter.print("view:");
                 printWriter.println(view);
@@ -264,14 +264,14 @@ public class UiTranslationController implements Dumpable {
     }
 
     private void dumpViewInfo(View view, String str, PrintWriter printWriter) {
-        boolean contains;
+        boolean zContains;
         boolean z;
         AutofillId autofillId = view.getAutofillId();
         printWriter.print(str);
         printWriter.print("autofillId: ");
         printWriter.print(autofillId);
         synchronized (this.mLock) {
-            contains = this.mLastRequestAutofillIds.contains(autofillId);
+            zContains = this.mLastRequestAutofillIds.contains(autofillId);
             WeakReference<View> weakReference = this.mViews.get(autofillId);
             z = (weakReference == null || weakReference.get() == null) ? false : true;
         }
@@ -280,20 +280,20 @@ public class UiTranslationController implements Dumpable {
         printWriter.print(z);
         printWriter.print(str);
         printWriter.print("isRequestedView: ");
-        printWriter.println(contains);
+        printWriter.println(zContains);
     }
 
     public void onTranslationCompleted(TranslationResponse translationResponse) {
-        Object valueOf;
+        Object objValueOf;
         LongSparseArray<ViewTranslationResponse> longSparseArray;
         if (translationResponse == null || translationResponse.getTranslationStatus() != 0) {
             StringBuilder sb = new StringBuilder("Fail result from TranslationService, status=");
             if (translationResponse == null) {
-                valueOf = PerfettoProtoLogImpl.NULL_STRING;
+                objValueOf = PerfettoProtoLogImpl.NULL_STRING;
             } else {
-                valueOf = Integer.valueOf(translationResponse.getTranslationStatus());
+                objValueOf = Integer.valueOf(translationResponse.getTranslationStatus());
             }
-            sb.append(valueOf);
+            sb.append(objValueOf);
             Log.w("UiTranslationController", sb.toString());
             return;
         }
@@ -302,13 +302,13 @@ public class UiTranslationController implements Dumpable {
         SparseArray<LongSparseArray<ViewTranslationResponse>> sparseArray2 = new SparseArray<>();
         IntArray intArray = new IntArray(1);
         for (int i = 0; i < viewTranslationResponses.size(); i++) {
-            ViewTranslationResponse valueAt = viewTranslationResponses.valueAt(i);
-            AutofillId autofillId = valueAt.getAutofillId();
+            ViewTranslationResponse viewTranslationResponseValueAt = viewTranslationResponses.valueAt(i);
+            AutofillId autofillId = viewTranslationResponseValueAt.getAutofillId();
             if (intArray.indexOf(autofillId.getViewId()) < 0) {
                 intArray.add(autofillId.getViewId());
             }
             if (autofillId.isNonVirtual()) {
-                sparseArray.put(viewTranslationResponses.keyAt(i), valueAt);
+                sparseArray.put(viewTranslationResponses.keyAt(i), viewTranslationResponseValueAt);
             } else {
                 boolean z = sparseArray2.indexOfKey(autofillId.getViewId()) >= 0;
                 if (z) {
@@ -316,7 +316,7 @@ public class UiTranslationController implements Dumpable {
                 } else {
                     longSparseArray = new LongSparseArray<>();
                 }
-                longSparseArray.put(autofillId.getVirtualChildLongId(), valueAt);
+                longSparseArray.put(autofillId.getVirtualChildLongId(), viewTranslationResponseValueAt);
                 if (!z) {
                     sparseArray2.put(autofillId.getViewId(), longSparseArray);
                 }
@@ -332,7 +332,7 @@ public class UiTranslationController implements Dumpable {
     }
 
     private void onVirtualViewTranslationCompleted(SparseArray<LongSparseArray<ViewTranslationResponse>> sparseArray) {
-        final boolean isLoggable = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
+        final boolean zIsLoggable = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
         if (this.mActivity.isDestroyed()) {
             Log.v("UiTranslationController", "onTranslationCompleted:" + this.mActivity + "is destroyed.");
             return;
@@ -350,18 +350,18 @@ public class UiTranslationController implements Dumpable {
                     if (view == null) {
                         Log.w("UiTranslationController", "onTranslationCompleted: the view for autofill id " + autofillId + " may be gone.");
                     } else {
-                        LongSparseArray<ViewTranslationResponse> valueAt = sparseArray.valueAt(i);
-                        if (isLoggable) {
+                        LongSparseArray<ViewTranslationResponse> longSparseArrayValueAt = sparseArray.valueAt(i);
+                        if (zIsLoggable) {
                             Log.v("UiTranslationController", "onVirtualViewTranslationCompleted: received response for AutofillId " + autofillId);
                         }
-                        view.onVirtualViewTranslationResponses(valueAt);
+                        view.onVirtualViewTranslationResponses(longSparseArrayValueAt);
                         if (this.mCurrentState == 1) {
                             return;
                         } else {
                             this.mActivity.runOnUiThread(new Runnable() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda9
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    UiTranslationController.lambda$onVirtualViewTranslationCompleted$3(View.this, isLoggable);
+                                    UiTranslationController.lambda$onVirtualViewTranslationCompleted$3(view, zIsLoggable);
                                 }
                             });
                         }
@@ -383,13 +383,13 @@ public class UiTranslationController implements Dumpable {
 
     private void onTranslationCompleted(SparseArray<ViewTranslationResponse> sparseArray) {
         final UiTranslationController uiTranslationController;
-        final boolean isLoggable = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
+        final boolean zIsLoggable = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
         if (this.mActivity.isDestroyed()) {
             Log.v("UiTranslationController", "onTranslationCompleted:" + this.mActivity + "is destroyed.");
             return;
         }
         int size = sparseArray.size();
-        if (isLoggable) {
+        if (zIsLoggable) {
             Log.v("UiTranslationController", "onTranslationCompleted: receive " + size + " responses.");
         }
         synchronized (this.mLock) {
@@ -399,11 +399,11 @@ public class UiTranslationController implements Dumpable {
             }
             int i = 0;
             while (i < size) {
-                final ViewTranslationResponse valueAt = sparseArray.valueAt(i);
-                if (isLoggable) {
-                    Log.v("UiTranslationController", "onTranslationCompleted: " + sanitizedViewTranslationResponse(valueAt));
+                final ViewTranslationResponse viewTranslationResponseValueAt = sparseArray.valueAt(i);
+                if (zIsLoggable) {
+                    Log.v("UiTranslationController", "onTranslationCompleted: " + sanitizedViewTranslationResponse(viewTranslationResponseValueAt));
                 }
-                final AutofillId autofillId = valueAt.getAutofillId();
+                final AutofillId autofillId = viewTranslationResponseValueAt.getAutofillId();
                 if (autofillId == null) {
                     Log.w("UiTranslationController", "No AutofillId is set in ViewTranslationResponse");
                 } else {
@@ -418,7 +418,7 @@ public class UiTranslationController implements Dumpable {
                             this.mActivity.runOnUiThread(new Runnable() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda2
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    UiTranslationController.this.lambda$onTranslationCompleted$4(view, valueAt, isLoggable, autofillId, i2);
+                                    this.f$0.lambda$onTranslationCompleted$4(view, viewTranslationResponseValueAt, zIsLoggable, autofillId, i2);
                                 }
                             });
                             i++;
@@ -470,12 +470,12 @@ public class UiTranslationController implements Dumpable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void createTranslatorAndStart(TranslationSpec translationSpec, TranslationSpec translationSpec2, List<AutofillId> list) {
-        Translator createTranslatorIfNeeded = createTranslatorIfNeeded(translationSpec, translationSpec2);
-        if (createTranslatorIfNeeded == null) {
+        Translator translatorCreateTranslatorIfNeeded = createTranslatorIfNeeded(translationSpec, translationSpec2);
+        if (translatorCreateTranslatorIfNeeded == null) {
             Log.w("UiTranslationController", "Can not create Translator for sourceSpec:" + translationSpec + " targetSpec:" + translationSpec2);
             return;
         }
-        onUiTranslationStarted(createTranslatorIfNeeded, list);
+        onUiTranslationStarted(translatorCreateTranslatorIfNeeded, list);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -484,7 +484,7 @@ public class UiTranslationController implements Dumpable {
             Log.w("UiTranslationController", "No ViewTranslationRequest was collected.");
             return;
         }
-        TranslationRequest build = new TranslationRequest.Builder().setViewTranslationRequests(list).build();
+        TranslationRequest translationRequestBuild = new TranslationRequest.Builder().setViewTranslationRequests(list).build();
         if (Log.isLoggable(UiTranslationManager.LOG_TAG, 3)) {
             StringBuilder sb = new StringBuilder("sendTranslationRequest:{requests=[");
             for (ViewTranslationRequest viewTranslationRequest : list) {
@@ -494,7 +494,7 @@ public class UiTranslationController implements Dumpable {
             }
             Log.d("UiTranslationController", "sendTranslationRequest: " + sb.toString());
         }
-        translator.requestUiTranslate(build, new Executor() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda7
+        translator.requestUiTranslate(translationRequestBuild, new Executor() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda7
             @Override // java.util.concurrent.Executor
             public final void execute(Runnable runnable) {
                 runnable.run();
@@ -502,7 +502,7 @@ public class UiTranslationController implements Dumpable {
         }, new Consumer() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda8
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                UiTranslationController.this.onTranslationCompleted((TranslationResponse) obj);
+                this.f$0.onTranslationCompleted((TranslationResponse) obj);
             }
         });
     }
@@ -510,13 +510,13 @@ public class UiTranslationController implements Dumpable {
     /* JADX WARN: Multi-variable type inference failed */
     private void onUiTranslationStarted(final Translator translator, List<AutofillId> list) {
         long[] jArr;
-        int i;
+        int iIntValue;
         synchronized (this.mLock) {
             SparseIntArray requestVirtualViewChildCount = getRequestVirtualViewChildCount(list);
             final ArrayMap arrayMap = new ArrayMap();
             ArrayMap arrayMap2 = null;
-            for (int i2 = 0; i2 < list.size(); i2++) {
-                AutofillId autofillId = list.get(i2);
+            for (int i = 0; i < list.size(); i++) {
+                AutofillId autofillId = list.get(i);
                 if (autofillId.isNonVirtual()) {
                     arrayMap.put(autofillId, null);
                 } else {
@@ -526,14 +526,14 @@ public class UiTranslationController implements Dumpable {
                     AutofillId autofillId2 = new AutofillId(autofillId.getViewId());
                     if (arrayMap.containsKey(autofillId2)) {
                         jArr = (long[]) arrayMap.get(autofillId2);
-                        i = ((Integer) arrayMap2.get(autofillId2)).intValue();
+                        iIntValue = ((Integer) arrayMap2.get(autofillId2)).intValue();
                     } else {
                         jArr = new long[requestVirtualViewChildCount.get(autofillId.getViewId())];
                         arrayMap.put(autofillId2, jArr);
-                        i = 0;
+                        iIntValue = 0;
                     }
-                    arrayMap2.put(autofillId2, Integer.valueOf(i + 1));
-                    jArr[i] = autofillId.getVirtualChildLongId();
+                    arrayMap2.put(autofillId2, Integer.valueOf(iIntValue + 1));
+                    jArr[iIntValue] = autofillId.getVirtualChildLongId();
                 }
             }
             final ArrayList arrayList = new ArrayList();
@@ -543,7 +543,7 @@ public class UiTranslationController implements Dumpable {
             this.mActivity.runOnUiThread(new Runnable() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    UiTranslationController.this.lambda$onUiTranslationStarted$6(rootViews, arrayMap, supportedFormatsLocked, translationCapability, arrayList, translator);
+                    this.f$0.lambda$onUiTranslationStarted$6(rootViews, arrayMap, supportedFormatsLocked, translationCapability, arrayList, translator);
                 }
             });
         }
@@ -623,7 +623,7 @@ public class UiTranslationController implements Dumpable {
 
     private void runForEachView(final BiConsumer<View, ViewTranslationCallback> biConsumer) {
         synchronized (this.mLock) {
-            final boolean isLoggable = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
+            final boolean zIsLoggable = Log.isLoggable(UiTranslationManager.LOG_TAG, 3);
             final ArrayMap arrayMap = new ArrayMap(this.mViews);
             if (arrayMap.size() == 0) {
                 Log.w("UiTranslationController", "No views can be excuted for runForEachView.");
@@ -631,79 +631,32 @@ public class UiTranslationController implements Dumpable {
             this.mActivity.runOnUiThread(new Runnable() { // from class: android.view.translation.UiTranslationController$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    UiTranslationController.lambda$runForEachView$7(ArrayMap.this, isLoggable, biConsumer);
+                    UiTranslationController.lambda$runForEachView$7(arrayMap, zIsLoggable, biConsumer);
                 }
             });
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0048, code lost:
-    
-        android.util.Log.d("UiTranslationController", "View was gone or ViewTranslationCallback for autofillId = " + r6.keyAt(r2));
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    static /* synthetic */ void lambda$runForEachView$7(android.util.ArrayMap r6, boolean r7, java.util.function.BiConsumer r8) {
-        /*
-            java.lang.String r0 = "UiTranslationController"
-            int r1 = r6.size()     // Catch: java.lang.Exception -> L63
-            r2 = 0
-        L7:
-            if (r2 >= r1) goto L76
-            java.lang.Object r3 = r6.valueAt(r2)     // Catch: java.lang.Exception -> L63
-            java.lang.ref.WeakReference r3 = (java.lang.ref.WeakReference) r3     // Catch: java.lang.Exception -> L63
-            java.lang.Object r3 = r3.get()     // Catch: java.lang.Exception -> L63
-            android.view.View r3 = (android.view.View) r3     // Catch: java.lang.Exception -> L63
-            if (r7 == 0) goto L35
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder     // Catch: java.lang.Exception -> L63
-            r4.<init>()     // Catch: java.lang.Exception -> L63
-            java.lang.String r5 = "runForEachView for autofillId = "
-            r4.append(r5)     // Catch: java.lang.Exception -> L63
-            if (r3 == 0) goto L29
-            android.view.autofill.AutofillId r5 = r3.getAutofillId()     // Catch: java.lang.Exception -> L63
-            goto L2b
-        L29:
-            java.lang.String r5 = " null"
-        L2b:
-            r4.append(r5)     // Catch: java.lang.Exception -> L63
-            java.lang.String r4 = r4.toString()     // Catch: java.lang.Exception -> L63
-            android.util.Log.d(r0, r4)     // Catch: java.lang.Exception -> L63
-        L35:
-            if (r3 == 0) goto L46
-            android.view.translation.ViewTranslationCallback r4 = r3.getViewTranslationCallback()     // Catch: java.lang.Exception -> L63
-            if (r4 != 0) goto L3e
-            goto L46
-        L3e:
-            android.view.translation.ViewTranslationCallback r4 = r3.getViewTranslationCallback()     // Catch: java.lang.Exception -> L63
-            r8.accept(r3, r4)     // Catch: java.lang.Exception -> L63
-            goto L60
-        L46:
-            if (r7 == 0) goto L60
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder     // Catch: java.lang.Exception -> L63
-            r3.<init>()     // Catch: java.lang.Exception -> L63
-            java.lang.String r4 = "View was gone or ViewTranslationCallback for autofillId = "
-            r3.append(r4)     // Catch: java.lang.Exception -> L63
-            java.lang.Object r4 = r6.keyAt(r2)     // Catch: java.lang.Exception -> L63
-            r3.append(r4)     // Catch: java.lang.Exception -> L63
-            java.lang.String r3 = r3.toString()     // Catch: java.lang.Exception -> L63
-            android.util.Log.d(r0, r3)     // Catch: java.lang.Exception -> L63
-        L60:
-            int r2 = r2 + 1
-            goto L7
-        L63:
-            r6 = move-exception
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            java.lang.String r8 = "runForEachView: "
-            r7.<init>(r8)
-            r7.append(r6)
-            java.lang.String r6 = r7.toString()
-            android.util.Log.w(r0, r6)
-        L76:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.translation.UiTranslationController.lambda$runForEachView$7(android.util.ArrayMap, boolean, java.util.function.BiConsumer):void");
+    static /* synthetic */ void lambda$runForEachView$7(ArrayMap arrayMap, boolean z, BiConsumer biConsumer) {
+        try {
+            int size = arrayMap.size();
+            for (int i = 0; i < size; i++) {
+                View view = (View) ((WeakReference) arrayMap.valueAt(i)).get();
+                if (z) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("runForEachView for autofillId = ");
+                    sb.append(view != null ? view.getAutofillId() : " null");
+                    Log.d("UiTranslationController", sb.toString());
+                }
+                if (view != null && view.getViewTranslationCallback() != null) {
+                    biConsumer.accept(view, view.getViewTranslationCallback());
+                } else if (z) {
+                    Log.d("UiTranslationController", "View was gone or ViewTranslationCallback for autofillId = " + arrayMap.keyAt(i));
+                }
+            }
+        } catch (Exception e) {
+            Log.w("UiTranslationController", "runForEachView: " + e);
+        }
     }
 
     private Translator createTranslatorIfNeeded(TranslationSpec translationSpec, TranslationSpec translationSpec2) {
@@ -712,11 +665,11 @@ public class UiTranslationController implements Dumpable {
             Log.e("UiTranslationController", "Can not find TranslationManager when trying to create translator.");
             return null;
         }
-        Translator createTranslator = translationManager.createTranslator(new TranslationContext.Builder(translationSpec, translationSpec2).setActivityId(new ActivityId(this.mActivity.getTaskId(), this.mActivity.getShareableActivityToken())).build());
-        if (createTranslator != null) {
-            this.mTranslators.put(new Pair<>(translationSpec, translationSpec2), createTranslator);
+        Translator translatorCreateTranslator = translationManager.createTranslator(new TranslationContext.Builder(translationSpec, translationSpec2).setActivityId(new ActivityId(this.mActivity.getTaskId(), this.mActivity.getShareableActivityToken())).build());
+        if (translatorCreateTranslator != null) {
+            this.mTranslators.put(new Pair<>(translationSpec, translationSpec2), translatorCreateTranslator);
         }
-        return createTranslator;
+        return translatorCreateTranslator;
     }
 
     private void destroyTranslators() {

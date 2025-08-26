@@ -23,7 +23,6 @@ import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.SharedFlowKt;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MultiInstanceInvalidationClient {
     public final Context appContext;
@@ -52,7 +51,7 @@ public final class MultiInstanceInvalidationClient {
         this.observer = new InvalidationTracker.Observer(strArr) { // from class: androidx.room.MultiInstanceInvalidationClient$observer$1
             @Override // androidx.room.InvalidationTracker.Observer
             public final void onInvalidated(Set set) {
-                MultiInstanceInvalidationClient multiInstanceInvalidationClient = MultiInstanceInvalidationClient.this;
+                MultiInstanceInvalidationClient multiInstanceInvalidationClient = this.this$0;
                 if (multiInstanceInvalidationClient.stopped.get()) {
                     return;
                 }
@@ -71,16 +70,16 @@ public final class MultiInstanceInvalidationClient {
             @Override // android.content.ServiceConnection
             public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 IMultiInstanceInvalidationService proxy;
-                MultiInstanceInvalidationClient multiInstanceInvalidationClient = MultiInstanceInvalidationClient.this;
+                MultiInstanceInvalidationClient multiInstanceInvalidationClient = this.this$0;
                 int i = IMultiInstanceInvalidationService.Stub.$r8$clinit;
                 if (iBinder == null) {
                     proxy = null;
                 } else {
-                    IInterface queryLocalInterface = iBinder.queryLocalInterface(IMultiInstanceInvalidationService.DESCRIPTOR);
-                    proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof IMultiInstanceInvalidationService)) ? new IMultiInstanceInvalidationService.Stub.Proxy(iBinder) : (IMultiInstanceInvalidationService) queryLocalInterface;
+                    IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMultiInstanceInvalidationService.DESCRIPTOR);
+                    proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IMultiInstanceInvalidationService)) ? new IMultiInstanceInvalidationService.Stub.Proxy(iBinder) : (IMultiInstanceInvalidationService) iInterfaceQueryLocalInterface;
                 }
                 multiInstanceInvalidationClient.invalidationService = proxy;
-                MultiInstanceInvalidationClient multiInstanceInvalidationClient2 = MultiInstanceInvalidationClient.this;
+                MultiInstanceInvalidationClient multiInstanceInvalidationClient2 = this.this$0;
                 multiInstanceInvalidationClient2.getClass();
                 try {
                     IMultiInstanceInvalidationService iMultiInstanceInvalidationService = multiInstanceInvalidationClient2.invalidationService;
@@ -94,7 +93,7 @@ public final class MultiInstanceInvalidationClient {
 
             @Override // android.content.ServiceConnection
             public final void onServiceDisconnected(ComponentName componentName) {
-                MultiInstanceInvalidationClient.this.invalidationService = null;
+                this.this$0.invalidationService = null;
             }
         };
     }
@@ -107,9 +106,9 @@ public final class MultiInstanceInvalidationClient {
             MultiInstanceInvalidationClient$observer$1 multiInstanceInvalidationClient$observer$1 = this.observer;
             multiInstanceInvalidationClient$observer$1.getClass();
             TriggerBasedInvalidationTracker triggerBasedInvalidationTracker = invalidationTracker.implementation;
-            Pair validateTableNames$room_runtime_release = triggerBasedInvalidationTracker.validateTableNames$room_runtime_release(multiInstanceInvalidationClient$observer$1.tables);
-            String[] strArr = (String[]) validateTableNames$room_runtime_release.component1();
-            int[] iArr = (int[]) validateTableNames$room_runtime_release.component2();
+            Pair pairValidateTableNames$room_runtime_release = triggerBasedInvalidationTracker.validateTableNames$room_runtime_release(multiInstanceInvalidationClient$observer$1.tables);
+            String[] strArr = (String[]) pairValidateTableNames$room_runtime_release.component1();
+            int[] iArr = (int[]) pairValidateTableNames$room_runtime_release.component2();
             ObserverWrapper observerWrapper = new ObserverWrapper(multiInstanceInvalidationClient$observer$1, iArr, strArr);
             ReentrantLock reentrantLock = invalidationTracker.observerMapLock;
             reentrantLock.lock();
@@ -126,7 +125,7 @@ public final class MultiInstanceInvalidationClient {
         }
     }
 
-    public final void stop() {
+    public final void stop() throws Throwable {
         if (this.stopped.compareAndSet(false, true)) {
             MultiInstanceInvalidationClient$observer$1 multiInstanceInvalidationClient$observer$1 = this.observer;
             InvalidationTracker invalidationTracker = this.invalidationTracker;

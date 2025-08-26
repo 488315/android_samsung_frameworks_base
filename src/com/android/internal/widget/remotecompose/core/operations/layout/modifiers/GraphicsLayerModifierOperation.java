@@ -62,7 +62,7 @@ public class GraphicsLayerModifierOperation extends DecoratorModifierOperation {
     public void layout(RemoteContext remoteContext, Component component, float f, float f2) {
     }
 
-    public void fillInAttributes(HashMap<Integer, Object> hashMap) {
+    public void fillInAttributes(HashMap<Integer, Object> map) {
         int i = 0;
         while (true) {
             AttributeValue[] attributeValueArr = this.mValues;
@@ -70,7 +70,7 @@ public class GraphicsLayerModifierOperation extends DecoratorModifierOperation {
                 return;
             }
             if (attributeValueArr[i].needsToWrite()) {
-                hashMap.put(Integer.valueOf(i), this.mValues[i].getObjectValue());
+                map.put(Integer.valueOf(i), this.mValues[i].getObjectValue());
             }
             i++;
         }
@@ -220,11 +220,11 @@ public class GraphicsLayerModifierOperation extends DecoratorModifierOperation {
         return CLASS_NAME;
     }
 
-    public static void apply(WireBuffer wireBuffer, HashMap<Integer, Object> hashMap) {
+    public static void apply(WireBuffer wireBuffer, HashMap<Integer, Object> map) {
         wireBuffer.start(224);
-        wireBuffer.writeInt(hashMap.size());
-        for (Integer num : hashMap.keySet()) {
-            Object obj = hashMap.get(num);
+        wireBuffer.writeInt(map.size());
+        for (Integer num : map.keySet()) {
+            Object obj = map.get(num);
             if (obj instanceof Integer) {
                 writeIntAttribute(wireBuffer, num.intValue(), ((Integer) obj).intValue());
             } else if (obj instanceof Float) {
@@ -244,25 +244,25 @@ public class GraphicsLayerModifierOperation extends DecoratorModifierOperation {
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
+        int i = wireBuffer.readInt();
         GraphicsLayerModifierOperation graphicsLayerModifierOperation = new GraphicsLayerModifierOperation();
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             graphicsLayerModifierOperation.readAttributeValue(wireBuffer);
         }
         list.add(graphicsLayerModifierOperation);
     }
 
     private void readAttributeValue(WireBuffer wireBuffer) {
-        int readInt = wireBuffer.readInt();
-        int i = readInt >> 10;
-        short s = (short) (readInt & 63);
+        int i = wireBuffer.readInt();
+        int i2 = i >> 10;
+        short s = (short) (i & 63);
         if (s == 17 || s == 18) {
             this.mHasBlurEffect = true;
             this.mValues[16].setValue(1);
         }
-        if (i == 1) {
+        if (i2 == 1) {
             this.mValues[s].setValue(wireBuffer.readFloat());
-        } else if (i == 0) {
+        } else if (i2 == 0) {
             this.mValues[s].setValue(wireBuffer.readInt());
         }
     }

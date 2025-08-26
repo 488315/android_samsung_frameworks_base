@@ -7,7 +7,7 @@
     </LinearLayout>
     <FrameLayout android:id="@id/grey_screen" android:background="@drawable/qs_customizer_grey_screen" android:layout_width="fill_parent" android:layout_height="fill_parent" />
     <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <ImageView android:layout_gravity="bottom|center" android:orientation="horizontal" android:id="@id/handler_bar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="7.0dip" android:src="@drawable/sec_scroll_indicator_customizer" />
+        <ImageView android:layout_gravity="center|bottom" android:orientation="horizontal" android:id="@id/handler_bar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="7.0dip" android:src="@drawable/sec_scroll_indicator_customizer" />
     </FrameLayout>
     <FrameLayout android:layout_gravity="center" android:id="@id/tile_edit_button" android:background="@drawable/qs_customizer_layout_edit_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="36.0dip" style="@style/RecoilSmallAnimator">
         <TextView android:text="@string/qs_edit_title" android:textFontWeight="600" style="@style/SecCustomizeButtonTextStyle" />

@@ -95,7 +95,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.IntPredicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AssistManager {
     public static final Map invocationTypeMap = new HashMap<Integer, String>() { // from class: com.android.systemui.assist.AssistManager.2
@@ -141,11 +140,11 @@ public class AssistManager {
     public final List mVisualQueryAttentionListeners = new ArrayList();
     public final AnonymousClass1 mVisualQueryDetectionAttentionListener = new IVisualQueryDetectionAttentionListener.Stub() { // from class: com.android.systemui.assist.AssistManager.1
         public final void onAttentionGained(VisualQueryAttentionResult visualQueryAttentionResult) {
-            AssistManager.m1012$$Nest$mhandleVisualAttentionChanged(AssistManager.this, true);
+            AssistManager.m1014$$Nest$mhandleVisualAttentionChanged(AssistManager.this, true);
         }
 
         public final void onAttentionLost(int i) {
-            AssistManager.m1012$$Nest$mhandleVisualAttentionChanged(AssistManager.this, false);
+            AssistManager.m1014$$Nest$mhandleVisualAttentionChanged(AssistManager.this, false);
         }
     };
     public boolean mIsAssistAppAvailable = true;
@@ -160,7 +159,6 @@ public class AssistManager {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AssistanceAppItemList {
         public final Drawable mAssistanceAppIcon;
         public final String mAssistanceAppName;
@@ -177,7 +175,6 @@ public class AssistManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AssistanceAppItemListAdapter extends ArrayAdapter {
         public final int mResourceId;
         public int mSelectedItem;
@@ -217,7 +214,7 @@ public class AssistManager {
     }
 
     /* renamed from: -$$Nest$mhandleVisualAttentionChanged, reason: not valid java name */
-    public static void m1012$$Nest$mhandleVisualAttentionChanged(AssistManager assistManager, boolean z) {
+    public static void m1014$$Nest$mhandleVisualAttentionChanged(AssistManager assistManager, boolean z) {
         Consumer consumer;
         StatusBarManager statusBarManager = (StatusBarManager) assistManager.mContext.getSystemService(StatusBarManager.class);
         if (statusBarManager != null) {
@@ -334,7 +331,7 @@ public class AssistManager {
                 }
 
                 public final void onStopPerceiving() {
-                    AssistManager.m1012$$Nest$mhandleVisualAttentionChanged(AssistManager.this, false);
+                    AssistManager.m1014$$Nest$mhandleVisualAttentionChanged(AssistManager.this, false);
                     AssistManager.this.mAssistUtils.disableVisualQueryDetection();
                     StatusBarManager statusBarManager = (StatusBarManager) AssistManager.this.mContext.getSystemService(StatusBarManager.class);
                     if (statusBarManager != null) {
@@ -367,7 +364,7 @@ public class AssistManager {
             this.navBarMode = navigationModeController.addListener(new NavigationModeController.ModeChangedListener() { // from class: com.android.systemui.assist.AssistManager$$ExternalSyntheticLambda0
                 @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
                 public final void onNavigationModeChanged(int i) {
-                    AssistManager.this.navBarMode = i;
+                    this.f$0.navBarMode = i;
                 }
             });
             this.mKeyguardManager = keyguardManager;
@@ -380,12 +377,12 @@ public class AssistManager {
     }
 
     public final String getDefaultRecognizer() {
-        ResolveInfo resolveService = this.mContext.getPackageManager().resolveService(new Intent("android.speech.RecognitionService"), 128);
-        if (resolveService == null || resolveService.serviceInfo == null) {
+        ResolveInfo resolveInfoResolveService = this.mContext.getPackageManager().resolveService(new Intent("android.speech.RecognitionService"), 128);
+        if (resolveInfoResolveService == null || resolveInfoResolveService.serviceInfo == null) {
             Log.w("AssistManager", "Unable to resolve default voice recognition service.");
             return "";
         }
-        ServiceInfo serviceInfo = resolveService.serviceInfo;
+        ServiceInfo serviceInfo = resolveInfoResolveService.serviceInfo;
         return new ComponentName(serviceInfo.packageName, serviceInfo.name).flattenToShortString();
     }
 
@@ -426,18 +423,18 @@ public class AssistManager {
         });
     }
 
-    public final void showAssistanceAppSettingAlertDialog() {
-        String str;
+    public final void showAssistanceAppSettingAlertDialog() throws PackageManager.NameNotFoundException {
+        String string;
         ArrayList arrayList;
         PackageInfo packageInfo;
         int i;
         Drawable drawable;
-        String str2;
+        String string2;
         if (this.mAssistanceAppSettingAlertDialog == null) {
-            LayoutInflater from = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.Theme_SystemUI_Dialog));
-            this.mLayoutInflater = from;
-            View inflate = from.inflate(R.layout.assistance_app_setting_alert_dialog_title, (ViewGroup) null);
-            TextView textView = (TextView) inflate.findViewById(R.id.title);
+            LayoutInflater layoutInflaterFrom = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.Theme_SystemUI_Dialog));
+            this.mLayoutInflater = layoutInflaterFrom;
+            View viewInflate = layoutInflaterFrom.inflate(R.layout.assistance_app_setting_alert_dialog_title, (ViewGroup) null);
+            TextView textView = (TextView) viewInflate.findViewById(R.id.title);
             if (!BasicRune.NAVBAR_SUPPORT_SEARCLE) {
                 textView.setText(this.mContext.getResources().getString(R.string.assistance_app_setting_alert_dialog_title_home));
             } else if (BasicRune.SUPPORT_AI_AGENT) {
@@ -451,145 +448,145 @@ public class AssistManager {
             String packageName = assistComponentForUser != null ? this.mAssistUtils.getAssistComponentForUser(ActivityManager.getCurrentUser()).getPackageName() : "";
             PackageManager packageManager = this.mContext.getPackageManager();
             ArrayList arrayList3 = new ArrayList();
-            List<ResolveInfo> queryIntentServices = packageManager.queryIntentServices(new Intent("android.service.voice.VoiceInteractionService"), 128);
-            String str3 = "";
+            List<ResolveInfo> listQueryIntentServices = packageManager.queryIntentServices(new Intent("android.service.voice.VoiceInteractionService"), 128);
+            String str = "";
             int i2 = -1;
-            Drawable drawable2 = null;
+            Drawable drawableSemGetApplicationIconForIconTray = null;
             int i3 = 0;
             while (true) {
-                str = str3;
-                if (i3 >= queryIntentServices.size()) {
+                string = str;
+                if (i3 >= listQueryIntentServices.size()) {
                     break;
                 }
-                ResolveInfo resolveInfo = queryIntentServices.get(i3);
-                List<ResolveInfo> list = queryIntentServices;
+                ResolveInfo resolveInfo = listQueryIntentServices.get(i3);
+                List<ResolveInfo> list = listQueryIntentServices;
                 int i4 = i2;
                 VoiceInteractionServiceInfo voiceInteractionServiceInfo = new VoiceInteractionServiceInfo(packageManager, resolveInfo.serviceInfo);
-                String str4 = resolveInfo.serviceInfo.packageName;
-                if (voiceInteractionServiceInfo.getSupportsAssist() && !arrayList3.contains(str4)) {
-                    arrayList3.add(str4);
-                    int size = packageName.equals(str4) ? arrayList3.size() - 1 : i4;
+                String str2 = resolveInfo.serviceInfo.packageName;
+                if (voiceInteractionServiceInfo.getSupportsAssist() && !arrayList3.contains(str2)) {
+                    arrayList3.add(str2);
+                    int size = packageName.equals(str2) ? arrayList3.size() - 1 : i4;
                     i = i3;
                     try {
-                        PackageInfo packageInfo2 = packageManager.getPackageInfo(str4, 0);
-                        drawable2 = packageManager.semGetApplicationIconForIconTray(str4, 1);
-                        str2 = packageManager.getApplicationLabel(packageInfo2.applicationInfo).toString();
-                        drawable = drawable2;
+                        PackageInfo packageInfo2 = packageManager.getPackageInfo(str2, 0);
+                        drawableSemGetApplicationIconForIconTray = packageManager.semGetApplicationIconForIconTray(str2, 1);
+                        string2 = packageManager.getApplicationLabel(packageInfo2.applicationInfo).toString();
+                        drawable = drawableSemGetApplicationIconForIconTray;
                     } catch (PackageManager.NameNotFoundException e) {
-                        Log.w("AssistManager", "Failed to add assistance app " + str4 + " not found", e);
-                        drawable = drawable2;
-                        str2 = str;
-                        arrayList2.add(new AssistanceAppItemList(new ComponentName(str4, resolveInfo.serviceInfo.name), voiceInteractionServiceInfo, drawable, str2, 1));
-                        drawable2 = drawable;
-                        str3 = str2;
+                        Log.w("AssistManager", "Failed to add assistance app " + str2 + " not found", e);
+                        drawable = drawableSemGetApplicationIconForIconTray;
+                        string2 = string;
+                        arrayList2.add(new AssistanceAppItemList(new ComponentName(str2, resolveInfo.serviceInfo.name), voiceInteractionServiceInfo, drawable, string2, 1));
+                        drawableSemGetApplicationIconForIconTray = drawable;
+                        str = string2;
                         i2 = size;
                         i3 = i + 1;
-                        queryIntentServices = list;
+                        listQueryIntentServices = list;
                     } catch (Resources.NotFoundException e2) {
-                        Log.w("AssistManager", "Failed to add assistance app " + str4, e2);
-                        drawable = drawable2;
-                        str2 = str;
-                        arrayList2.add(new AssistanceAppItemList(new ComponentName(str4, resolveInfo.serviceInfo.name), voiceInteractionServiceInfo, drawable, str2, 1));
-                        drawable2 = drawable;
-                        str3 = str2;
+                        Log.w("AssistManager", "Failed to add assistance app " + str2, e2);
+                        drawable = drawableSemGetApplicationIconForIconTray;
+                        string2 = string;
+                        arrayList2.add(new AssistanceAppItemList(new ComponentName(str2, resolveInfo.serviceInfo.name), voiceInteractionServiceInfo, drawable, string2, 1));
+                        drawableSemGetApplicationIconForIconTray = drawable;
+                        str = string2;
                         i2 = size;
                         i3 = i + 1;
-                        queryIntentServices = list;
+                        listQueryIntentServices = list;
                     } catch (NullPointerException e3) {
-                        Log.w("AssistManager", "Failed to add assistance app " + str4, e3);
-                        drawable = drawable2;
-                        str2 = str;
-                        arrayList2.add(new AssistanceAppItemList(new ComponentName(str4, resolveInfo.serviceInfo.name), voiceInteractionServiceInfo, drawable, str2, 1));
-                        drawable2 = drawable;
-                        str3 = str2;
+                        Log.w("AssistManager", "Failed to add assistance app " + str2, e3);
+                        drawable = drawableSemGetApplicationIconForIconTray;
+                        string2 = string;
+                        arrayList2.add(new AssistanceAppItemList(new ComponentName(str2, resolveInfo.serviceInfo.name), voiceInteractionServiceInfo, drawable, string2, 1));
+                        drawableSemGetApplicationIconForIconTray = drawable;
+                        str = string2;
                         i2 = size;
                         i3 = i + 1;
-                        queryIntentServices = list;
+                        listQueryIntentServices = list;
                     }
-                    arrayList2.add(new AssistanceAppItemList(new ComponentName(str4, resolveInfo.serviceInfo.name), voiceInteractionServiceInfo, drawable, str2, 1));
-                    drawable2 = drawable;
-                    str3 = str2;
+                    arrayList2.add(new AssistanceAppItemList(new ComponentName(str2, resolveInfo.serviceInfo.name), voiceInteractionServiceInfo, drawable, string2, 1));
+                    drawableSemGetApplicationIconForIconTray = drawable;
+                    str = string2;
                     i2 = size;
                 } else {
                     i = i3;
-                    str3 = str;
+                    str = string;
                     i2 = i4;
                 }
                 i3 = i + 1;
-                queryIntentServices = list;
+                listQueryIntentServices = list;
             }
-            List<ResolveInfo> queryIntentActivities = packageManager.queryIntentActivities(new Intent("android.intent.action.ASSIST"), 65536);
-            int i5 = i2;
-            int i6 = 0;
-            while (i6 < queryIntentActivities.size()) {
-                ResolveInfo resolveInfo2 = queryIntentActivities.get(i6);
-                List<ResolveInfo> list2 = queryIntentActivities;
-                String str5 = resolveInfo2.activityInfo.packageName;
-                if (arrayList3.contains(str5)) {
+            List<ResolveInfo> listQueryIntentActivities = packageManager.queryIntentActivities(new Intent("android.intent.action.ASSIST"), 65536);
+            int size2 = i2;
+            int i5 = 0;
+            while (i5 < listQueryIntentActivities.size()) {
+                ResolveInfo resolveInfo2 = listQueryIntentActivities.get(i5);
+                List<ResolveInfo> list2 = listQueryIntentActivities;
+                String str3 = resolveInfo2.activityInfo.packageName;
+                if (arrayList3.contains(str3)) {
                     arrayList = arrayList3;
                 } else {
-                    arrayList3.add(str5);
-                    if (packageName.equals(str5)) {
+                    arrayList3.add(str3);
+                    if (packageName.equals(str3)) {
                         arrayList = arrayList3;
-                        i5 = arrayList3.size() - 1;
+                        size2 = arrayList3.size() - 1;
                     } else {
                         arrayList = arrayList3;
                     }
-                    int i7 = i5;
+                    int i6 = size2;
                     try {
                         try {
-                            packageInfo = packageManager.getPackageInfo(str5, 0);
-                        } catch (PackageManager.NameNotFoundException e4) {
-                            Log.w("AssistManager", "Failed to add assistance app " + str5 + " not found", e4);
-                        } catch (Resources.NotFoundException e5) {
-                            Log.w("AssistManager", "Failed to add assistance app " + str5, e5);
+                            packageInfo = packageManager.getPackageInfo(str3, 0);
+                        } catch (NullPointerException e4) {
+                            e = e4;
                         }
                         try {
-                            drawable2 = packageManager.semGetApplicationIconForIconTray(str5, 1);
-                            str = packageManager.getApplicationLabel(packageInfo.applicationInfo).toString();
-                        } catch (NullPointerException e6) {
-                            e = e6;
-                            Log.w("AssistManager", "Failed to add assistance app " + str5, e);
-                            Drawable drawable3 = drawable2;
-                            String str6 = str;
-                            arrayList2.add(new AssistanceAppItemList(new ComponentName(str5, resolveInfo2.activityInfo.name), null, drawable3, str6, 2));
-                            i5 = i7;
-                            drawable2 = drawable3;
-                            str = str6;
-                            i6++;
-                            queryIntentActivities = list2;
+                            drawableSemGetApplicationIconForIconTray = packageManager.semGetApplicationIconForIconTray(str3, 1);
+                            string = packageManager.getApplicationLabel(packageInfo.applicationInfo).toString();
+                        } catch (NullPointerException e5) {
+                            e = e5;
+                            Log.w("AssistManager", "Failed to add assistance app " + str3, e);
+                            Drawable drawable2 = drawableSemGetApplicationIconForIconTray;
+                            String str4 = string;
+                            arrayList2.add(new AssistanceAppItemList(new ComponentName(str3, resolveInfo2.activityInfo.name), null, drawable2, str4, 2));
+                            size2 = i6;
+                            drawableSemGetApplicationIconForIconTray = drawable2;
+                            string = str4;
+                            i5++;
+                            listQueryIntentActivities = list2;
                             arrayList3 = arrayList;
                         }
-                    } catch (NullPointerException e7) {
-                        e = e7;
+                    } catch (PackageManager.NameNotFoundException e6) {
+                        Log.w("AssistManager", "Failed to add assistance app " + str3 + " not found", e6);
+                    } catch (Resources.NotFoundException e7) {
+                        Log.w("AssistManager", "Failed to add assistance app " + str3, e7);
                     }
-                    Drawable drawable32 = drawable2;
-                    String str62 = str;
-                    arrayList2.add(new AssistanceAppItemList(new ComponentName(str5, resolveInfo2.activityInfo.name), null, drawable32, str62, 2));
-                    i5 = i7;
-                    drawable2 = drawable32;
-                    str = str62;
+                    Drawable drawable22 = drawableSemGetApplicationIconForIconTray;
+                    String str42 = string;
+                    arrayList2.add(new AssistanceAppItemList(new ComponentName(str3, resolveInfo2.activityInfo.name), null, drawable22, str42, 2));
+                    size2 = i6;
+                    drawableSemGetApplicationIconForIconTray = drawable22;
+                    string = str42;
                 }
-                i6++;
-                queryIntentActivities = list2;
+                i5++;
+                listQueryIntentActivities = list2;
                 arrayList3 = arrayList;
             }
-            assistanceAppItemListAdapter.mSelectedItem = i5;
-            Log.d("AssistManager", "Current assistance app - " + assistComponentForUser + " package name - " + packageName + " defaultItem - " + i5);
-            final int i8 = 0;
+            assistanceAppItemListAdapter.mSelectedItem = size2;
+            Log.d("AssistManager", "Current assistance app - " + assistComponentForUser + " package name - " + packageName + " defaultItem - " + size2);
+            final int i7 = 0;
             DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() { // from class: com.android.systemui.assist.AssistManager$$ExternalSyntheticLambda2
                 @Override // android.content.DialogInterface.OnClickListener
-                public final void onClick(DialogInterface dialogInterface, int i9) {
+                public final void onClick(DialogInterface dialogInterface, int i8) {
                     String defaultRecognizer;
-                    final String str7;
-                    String str8;
-                    switch (i8) {
+                    final String packageName2;
+                    String strFlattenToShortString;
+                    switch (i7) {
                         case 0:
                             ArrayList arrayList4 = (ArrayList) arrayList2;
                             AssistManager.AssistanceAppItemListAdapter assistanceAppItemListAdapter2 = assistanceAppItemListAdapter;
                             Map map = AssistManager.invocationTypeMap;
                             synchronized (arrayList4) {
-                                assistanceAppItemListAdapter2.mSelectedItem = i9;
+                                assistanceAppItemListAdapter2.mSelectedItem = i8;
                                 assistanceAppItemListAdapter2.notifyDataSetChanged();
                             }
                             return;
@@ -598,67 +595,67 @@ public class AssistManager {
                             AssistManager.AssistanceAppItemListAdapter assistanceAppItemListAdapter3 = assistanceAppItemListAdapter;
                             assistManager.mAssistPopupPositiveClicked = true;
                             Prefs.putBoolean(assistManager.mContext, "AssistanceAppSettingAlreadySelected", true);
-                            int i10 = assistanceAppItemListAdapter3.mSelectedItem;
-                            AssistManager.AssistanceAppItemList assistanceAppItemList = i10 < 0 ? null : (AssistManager.AssistanceAppItemList) assistanceAppItemListAdapter3.getItem(i10);
+                            int i9 = assistanceAppItemListAdapter3.mSelectedItem;
+                            AssistManager.AssistanceAppItemList assistanceAppItemList = i9 < 0 ? null : (AssistManager.AssistanceAppItemList) assistanceAppItemListAdapter3.getItem(i9);
                             if (assistanceAppItemList == null) {
                                 return;
                             }
-                            int i11 = assistanceAppItemList.mAssistanceAppType;
-                            String str9 = "";
-                            if (i11 == 0) {
+                            int i10 = assistanceAppItemList.mAssistanceAppType;
+                            String strFlattenToShortString2 = "";
+                            if (i10 == 0) {
                                 defaultRecognizer = assistManager.getDefaultRecognizer();
-                                str7 = "None";
-                                str8 = "";
-                            } else if (i11 == 1) {
-                                String packageName2 = assistanceAppItemList.mAssistanceComponent.getPackageName();
-                                str8 = assistanceAppItemList.mAssistanceComponent.flattenToShortString();
-                                defaultRecognizer = new ComponentName(packageName2, assistanceAppItemList.mAssistanceVoiceInteractionService.getRecognitionService()).flattenToShortString();
-                                str7 = packageName2;
-                                str9 = str8;
-                            } else if (i11 != 2) {
+                                packageName2 = "None";
+                                strFlattenToShortString = "";
+                            } else if (i10 == 1) {
+                                String packageName3 = assistanceAppItemList.mAssistanceComponent.getPackageName();
+                                strFlattenToShortString = assistanceAppItemList.mAssistanceComponent.flattenToShortString();
+                                defaultRecognizer = new ComponentName(packageName3, assistanceAppItemList.mAssistanceVoiceInteractionService.getRecognitionService()).flattenToShortString();
+                                packageName2 = packageName3;
+                                strFlattenToShortString2 = strFlattenToShortString;
+                            } else if (i10 != 2) {
                                 defaultRecognizer = "";
-                                str8 = defaultRecognizer;
-                                str7 = str8;
+                                strFlattenToShortString = defaultRecognizer;
+                                packageName2 = strFlattenToShortString;
                             } else {
-                                str7 = assistanceAppItemList.mAssistanceComponent.getPackageName();
-                                str8 = "";
-                                str9 = assistanceAppItemList.mAssistanceComponent.flattenToShortString();
+                                packageName2 = assistanceAppItemList.mAssistanceComponent.getPackageName();
+                                strFlattenToShortString = "";
+                                strFlattenToShortString2 = assistanceAppItemList.mAssistanceComponent.flattenToShortString();
                                 defaultRecognizer = assistManager.getDefaultRecognizer();
                             }
-                            new SemRoleManager(assistManager.mContext).addRoleHolderAsUser("android.app.role.ASSISTANT", str7, 0, Process.myUserHandle(), assistManager.mContext.getMainExecutor(), new Consumer() { // from class: com.android.systemui.assist.AssistManager$$ExternalSyntheticLambda8
+                            new SemRoleManager(assistManager.mContext).addRoleHolderAsUser("android.app.role.ASSISTANT", packageName2, 0, Process.myUserHandle(), assistManager.mContext.getMainExecutor(), new Consumer() { // from class: com.android.systemui.assist.AssistManager$$ExternalSyntheticLambda8
                                 @Override // java.util.function.Consumer
                                 public final void accept(Object obj) {
-                                    String str10 = str7;
+                                    String str5 = packageName2;
                                     Map map2 = AssistManager.invocationTypeMap;
-                                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(((Boolean) obj).booleanValue() ? "role success = " : "role fail = ", str10, "AssistManager");
+                                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(((Boolean) obj).booleanValue() ? "role success = " : "role fail = ", str5, "AssistManager");
                                 }
                             });
-                            ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).setAssistant(str9);
-                            ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).setVoiceInteractionServiceAssistant(str8);
+                            ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).setAssistant(strFlattenToShortString2);
+                            ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).setVoiceInteractionServiceAssistant(strFlattenToShortString);
                             ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).setVoiceRecognitionService(defaultRecognizer);
-                            SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_ASSIST_POPUP_OPENED, SystemUIAnalytics.EID_ASSIST_POPUP_OK, str7);
+                            SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_ASSIST_POPUP_OPENED, SystemUIAnalytics.EID_ASSIST_POPUP_OK, packageName2);
                             return;
                     }
                 }
             };
             AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext);
-            builder.setCustomTitle(inflate);
-            builder.setSingleChoiceItems(assistanceAppItemListAdapter, i5, onClickListener);
+            builder.setCustomTitle(viewInflate);
+            builder.setSingleChoiceItems(assistanceAppItemListAdapter, size2, onClickListener);
             builder.setNegativeButton(android.R.string.cancel, (DialogInterface.OnClickListener) null);
-            final int i9 = 1;
+            final int i8 = 1;
             builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() { // from class: com.android.systemui.assist.AssistManager$$ExternalSyntheticLambda2
                 @Override // android.content.DialogInterface.OnClickListener
-                public final void onClick(DialogInterface dialogInterface, int i92) {
+                public final void onClick(DialogInterface dialogInterface, int i82) {
                     String defaultRecognizer;
-                    final String str7;
-                    String str8;
-                    switch (i9) {
+                    final String packageName2;
+                    String strFlattenToShortString;
+                    switch (i8) {
                         case 0:
                             ArrayList arrayList4 = (ArrayList) this;
                             AssistManager.AssistanceAppItemListAdapter assistanceAppItemListAdapter2 = assistanceAppItemListAdapter;
                             Map map = AssistManager.invocationTypeMap;
                             synchronized (arrayList4) {
-                                assistanceAppItemListAdapter2.mSelectedItem = i92;
+                                assistanceAppItemListAdapter2.mSelectedItem = i82;
                                 assistanceAppItemListAdapter2.notifyDataSetChanged();
                             }
                             return;
@@ -667,45 +664,45 @@ public class AssistManager {
                             AssistManager.AssistanceAppItemListAdapter assistanceAppItemListAdapter3 = assistanceAppItemListAdapter;
                             assistManager.mAssistPopupPositiveClicked = true;
                             Prefs.putBoolean(assistManager.mContext, "AssistanceAppSettingAlreadySelected", true);
-                            int i10 = assistanceAppItemListAdapter3.mSelectedItem;
-                            AssistManager.AssistanceAppItemList assistanceAppItemList = i10 < 0 ? null : (AssistManager.AssistanceAppItemList) assistanceAppItemListAdapter3.getItem(i10);
+                            int i9 = assistanceAppItemListAdapter3.mSelectedItem;
+                            AssistManager.AssistanceAppItemList assistanceAppItemList = i9 < 0 ? null : (AssistManager.AssistanceAppItemList) assistanceAppItemListAdapter3.getItem(i9);
                             if (assistanceAppItemList == null) {
                                 return;
                             }
-                            int i11 = assistanceAppItemList.mAssistanceAppType;
-                            String str9 = "";
-                            if (i11 == 0) {
+                            int i10 = assistanceAppItemList.mAssistanceAppType;
+                            String strFlattenToShortString2 = "";
+                            if (i10 == 0) {
                                 defaultRecognizer = assistManager.getDefaultRecognizer();
-                                str7 = "None";
-                                str8 = "";
-                            } else if (i11 == 1) {
-                                String packageName2 = assistanceAppItemList.mAssistanceComponent.getPackageName();
-                                str8 = assistanceAppItemList.mAssistanceComponent.flattenToShortString();
-                                defaultRecognizer = new ComponentName(packageName2, assistanceAppItemList.mAssistanceVoiceInteractionService.getRecognitionService()).flattenToShortString();
-                                str7 = packageName2;
-                                str9 = str8;
-                            } else if (i11 != 2) {
+                                packageName2 = "None";
+                                strFlattenToShortString = "";
+                            } else if (i10 == 1) {
+                                String packageName3 = assistanceAppItemList.mAssistanceComponent.getPackageName();
+                                strFlattenToShortString = assistanceAppItemList.mAssistanceComponent.flattenToShortString();
+                                defaultRecognizer = new ComponentName(packageName3, assistanceAppItemList.mAssistanceVoiceInteractionService.getRecognitionService()).flattenToShortString();
+                                packageName2 = packageName3;
+                                strFlattenToShortString2 = strFlattenToShortString;
+                            } else if (i10 != 2) {
                                 defaultRecognizer = "";
-                                str8 = defaultRecognizer;
-                                str7 = str8;
+                                strFlattenToShortString = defaultRecognizer;
+                                packageName2 = strFlattenToShortString;
                             } else {
-                                str7 = assistanceAppItemList.mAssistanceComponent.getPackageName();
-                                str8 = "";
-                                str9 = assistanceAppItemList.mAssistanceComponent.flattenToShortString();
+                                packageName2 = assistanceAppItemList.mAssistanceComponent.getPackageName();
+                                strFlattenToShortString = "";
+                                strFlattenToShortString2 = assistanceAppItemList.mAssistanceComponent.flattenToShortString();
                                 defaultRecognizer = assistManager.getDefaultRecognizer();
                             }
-                            new SemRoleManager(assistManager.mContext).addRoleHolderAsUser("android.app.role.ASSISTANT", str7, 0, Process.myUserHandle(), assistManager.mContext.getMainExecutor(), new Consumer() { // from class: com.android.systemui.assist.AssistManager$$ExternalSyntheticLambda8
+                            new SemRoleManager(assistManager.mContext).addRoleHolderAsUser("android.app.role.ASSISTANT", packageName2, 0, Process.myUserHandle(), assistManager.mContext.getMainExecutor(), new Consumer() { // from class: com.android.systemui.assist.AssistManager$$ExternalSyntheticLambda8
                                 @Override // java.util.function.Consumer
                                 public final void accept(Object obj) {
-                                    String str10 = str7;
+                                    String str5 = packageName2;
                                     Map map2 = AssistManager.invocationTypeMap;
-                                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(((Boolean) obj).booleanValue() ? "role success = " : "role fail = ", str10, "AssistManager");
+                                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(((Boolean) obj).booleanValue() ? "role success = " : "role fail = ", str5, "AssistManager");
                                 }
                             });
-                            ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).setAssistant(str9);
-                            ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).setVoiceInteractionServiceAssistant(str8);
+                            ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).setAssistant(strFlattenToShortString2);
+                            ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).setVoiceInteractionServiceAssistant(strFlattenToShortString);
                             ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).setVoiceRecognitionService(defaultRecognizer);
-                            SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_ASSIST_POPUP_OPENED, SystemUIAnalytics.EID_ASSIST_POPUP_OK, str7);
+                            SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_ASSIST_POPUP_OPENED, SystemUIAnalytics.EID_ASSIST_POPUP_OK, packageName2);
                             return;
                     }
                 }
@@ -713,7 +710,7 @@ public class AssistManager {
             builder.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.assist.AssistManager$$ExternalSyntheticLambda4
                 @Override // android.content.DialogInterface.OnDismissListener
                 public final void onDismiss(DialogInterface dialogInterface) {
-                    AssistManager assistManager = AssistManager.this;
+                    AssistManager assistManager = this.f$0;
                     assistManager.mAssistanceAppSettingAlertDialog = null;
                     if (!assistManager.mAssistPopupPositiveClicked) {
                         SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SID_ASSIST_POPUP_OPENED, SystemUIAnalytics.EID_ASSIST_POPUP_CANCEL);
@@ -722,13 +719,13 @@ public class AssistManager {
                 }
             });
             this.mAssistPopupPositiveClicked = false;
-            AlertDialog create = builder.create();
-            this.mAssistanceAppSettingAlertDialog = create;
-            create.getWindow().setType(2009);
+            AlertDialog alertDialogCreate = builder.create();
+            this.mAssistanceAppSettingAlertDialog = alertDialogCreate;
+            alertDialogCreate.getWindow().setType(2009);
             this.mAssistanceAppSettingAlertDialog.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.assist.AssistManager$$ExternalSyntheticLambda5
                 @Override // android.content.DialogInterface.OnShowListener
                 public final void onShow(DialogInterface dialogInterface) {
-                    AssistManager assistManager = AssistManager.this;
+                    AssistManager assistManager = this.f$0;
                     AssistManager.AnonymousClass8 anonymousClass8 = assistManager.mBroadcastReceiver;
                     assistManager.mBroadcastDispatcher.registerReceiver(assistManager.mFilter, anonymousClass8);
                 }
@@ -752,10 +749,10 @@ public class AssistManager {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final void startAssist(Bundle bundle) {
+    public final void startAssist(Bundle bundle) throws PackageManager.NameNotFoundException {
         final Intent assistIntent;
         SubHomeActivity subHomeActivity;
-        String str;
+        String packageName;
         Bundle bundle2 = bundle == null ? new Bundle() : bundle;
         if (this.mActivityManager.getLockTaskModeState() == 1) {
             if (BasicRune.NAVBAR_ADDITIONAL_LOG) {
@@ -789,9 +786,9 @@ public class AssistManager {
         }
         if (bundle2.getBoolean("android.intent.extra.ASSIST_INPUT_HINT_KEYBOARD") && !Prefs.getBoolean(this.mContext, "AssistanceAppSettingAlreadySelected", false) && !Prefs.getBoolean(this.mContext, "AssistanceMetaKeyPressed", false)) {
             String permissionControllerPackageName = this.mContext.getPackageManager().getPermissionControllerPackageName();
-            Intent putExtra = permissionControllerPackageName != null ? new Intent("android.intent.action.MANAGE_DEFAULT_APP").setPackage(permissionControllerPackageName).putExtra("android.intent.extra.ROLE_NAME", "android.app.role.ASSISTANT") : null;
-            if (putExtra != null) {
-                this.mContext.startActivityAsUser(putExtra, UserHandle.CURRENT);
+            Intent intentPutExtra = permissionControllerPackageName != null ? new Intent("android.intent.action.MANAGE_DEFAULT_APP").setPackage(permissionControllerPackageName).putExtra("android.intent.extra.ROLE_NAME", "android.app.role.ASSISTANT") : null;
+            if (intentPutExtra != null) {
+                this.mContext.startActivityAsUser(intentPutExtra, UserHandle.CURRENT);
                 Prefs.putBoolean(this.mContext, "AssistanceMetaKeyPressed", true);
             }
             if (BasicRune.NAVBAR_ADDITIONAL_LOG) {
@@ -811,9 +808,9 @@ public class AssistManager {
         }
         boolean z2 = BasicRune.NAVBAR_ENABLED;
         if (z2) {
-            byte b = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "assist_long_press_home_enabled", this.mContext.getResources().getBoolean(android.R.bool.config_autoPowerModePrefetchLocation) ? 1 : 0, ((UserTrackerImpl) this.mUserTracker).getUserId()) != 0;
+            Object[] objArr = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "assist_long_press_home_enabled", this.mContext.getResources().getBoolean(android.R.bool.config_autoPowerModePrefetchLocation) ? 1 : 0, ((UserTrackerImpl) this.mUserTracker).getUserId()) != 0;
             if (bundle2.getInt("invocation_type", 0) == 5) {
-                if (b != true) {
+                if (objArr != true) {
                     Log.i("AssistManager", "Stop calling assistant by ASSIST_LONG_PRESS_HOME_ENABLED false");
                     return;
                 } else if (BasicRune.SUPPORT_AI_AGENT) {
@@ -832,7 +829,7 @@ public class AssistManager {
             }
             return;
         }
-        boolean equals = assistInfo.equals(this.mAssistUtils.getActiveServiceComponentName());
+        boolean zEquals = assistInfo.equals(this.mAssistUtils.getActiveServiceComponentName());
         int i = bundle2.getInt("invocation_type", 0);
         int phoneState = this.mPhoneStateMonitor.getPhoneState();
         bundle2.putInt("invocation_phone_state", phoneState);
@@ -845,23 +842,23 @@ public class AssistManager {
             this.mIsAssistAppAvailable = true;
         }
         if (z2) {
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             int i2 = bundle2.getInt("invocation_type", 0);
-            HashMap hashMap2 = (HashMap) invocationTypeMap;
-            hashMap.put(SystemUIAnalytics.NAVBAR_KEY_ASSISTANT_INVOCATION_TYPE, hashMap2.containsKey(Integer.valueOf(i2)) ? i2 == 1 ? this.navBarMode == 3 ? "Swipe up handler and pause" : "Diagonal swipe" : (String) hashMap2.get(Integer.valueOf(i2)) : "others");
-            hashMap.put(SystemUIAnalytics.NAVBAR_KEY_DIGITAL_ASSISTANT_APP, this.mAssistUtils.getAssistComponentForUser(ActivityManager.getCurrentUser()) != null ? this.mAssistUtils.getAssistComponentForUser(ActivityManager.getCurrentUser()).getPackageName() : "");
+            HashMap map2 = (HashMap) invocationTypeMap;
+            map.put(SystemUIAnalytics.NAVBAR_KEY_ASSISTANT_INVOCATION_TYPE, map2.containsKey(Integer.valueOf(i2)) ? i2 == 1 ? this.navBarMode == 3 ? "Swipe up handler and pause" : "Diagonal swipe" : (String) map2.get(Integer.valueOf(i2)) : "others");
+            map.put(SystemUIAnalytics.NAVBAR_KEY_DIGITAL_ASSISTANT_APP, this.mAssistUtils.getAssistComponentForUser(ActivityManager.getCurrentUser()) != null ? this.mAssistUtils.getAssistComponentForUser(ActivityManager.getCurrentUser()).getPackageName() : "");
             try {
-                str = ((ActivityManager.RunningTaskInfo) this.mActivityManager.getRunningTasks(1).getFirst()).topActivity.getPackageName();
+                packageName = ((ActivityManager.RunningTaskInfo) this.mActivityManager.getRunningTasks(1).getFirst()).topActivity.getPackageName();
             } catch (Exception e2) {
                 e2.printStackTrace();
-                str = C2paManifestList.UNKNOWN_VALUE;
+                packageName = C2paManifestList.UNKNOWN_VALUE;
             }
-            hashMap.put(SystemUIAnalytics.NAVBAR_KEY_ASSISTANT_FOREGROUND_APP, str);
-            hashMap.put(SystemUIAnalytics.NAVBAR_KEY_ASSISTANT_LOCK_STATE, this.mKeyguardManager.isKeyguardLocked() ? "Locked" : "Unlocked");
+            map.put(SystemUIAnalytics.NAVBAR_KEY_ASSISTANT_FOREGROUND_APP, packageName);
+            map.put(SystemUIAnalytics.NAVBAR_KEY_ASSISTANT_LOCK_STATE, this.mKeyguardManager.isKeyguardLocked() ? "Locked" : "Unlocked");
             if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD || BasicRune.BASIC_FOLDABLE_TYPE_FLIP) {
-                hashMap.put(SystemUIAnalytics.NAVBAR_KEY_ASSISTANT_COVER_STATE, SemWindowManager.getInstance().isFolded() ? "Cover" : "Main");
+                map.put(SystemUIAnalytics.NAVBAR_KEY_ASSISTANT_COVER_STATE, SemWindowManager.getInstance().isFolded() ? "Cover" : "Main");
             }
-            SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_INVOKE_DIGITAL_ASSISTANT, hashMap);
+            SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_INVOKE_DIGITAL_ASSISTANT, map);
         }
         if (BasicRune.NAVBAR_ADDITIONAL_LOG) {
             Log.d("AssistManager", "startAssistInternal");
@@ -877,7 +874,7 @@ public class AssistManager {
                 subScreenManager.mSubScreenPlugin.requestDismissBouncer();
             }
         }
-        if (equals) {
+        if (zEquals) {
             this.mAssistUtils.showSessionForActiveService(bundle2, 4, this.mContext.getAttributionTag(), (IVoiceInteractionSessionShowCallback) null, (IBinder) null);
             return;
         }
@@ -894,12 +891,12 @@ public class AssistManager {
                 showDisclosure();
             }
             try {
-                final ActivityOptions makeCustomAnimation = ActivityOptions.makeCustomAnimation(this.mContext, R.anim.search_launch_enter, R.anim.search_launch_exit);
+                final ActivityOptions activityOptionsMakeCustomAnimation = ActivityOptions.makeCustomAnimation(this.mContext, R.anim.search_launch_enter, R.anim.search_launch_exit);
                 assistIntent.addFlags(268435456);
                 AsyncTask.execute(new Runnable() { // from class: com.android.systemui.assist.AssistManager.5
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AssistManager.this.mContext.startActivityAsUser(assistIntent, makeCustomAnimation.toBundle(), ((UserTrackerImpl) AssistManager.this.mUserTracker).getUserHandle());
+                        AssistManager.this.mContext.startActivityAsUser(assistIntent, activityOptionsMakeCustomAnimation.toBundle(), ((UserTrackerImpl) AssistManager.this.mUserTracker).getUserHandle());
                     }
                 });
             } catch (ActivityNotFoundException unused) {

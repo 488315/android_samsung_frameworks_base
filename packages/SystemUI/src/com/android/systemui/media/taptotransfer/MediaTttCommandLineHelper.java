@@ -22,7 +22,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaTttCommandLineHelper implements CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -30,7 +29,6 @@ public final class MediaTttCommandLineHelper implements CoreStartable {
     public final Context context;
     public final Executor mainExecutor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReceiverCommand implements Command {
         public ReceiverCommand() {
         }
@@ -46,18 +44,17 @@ public final class MediaTttCommandLineHelper implements CoreStartable {
                 ChipStateReceiver.Companion.getClass();
                 int stateInt = ChipStateReceiver.valueOf(str).getStateInt();
                 StatusBarManager statusBarManager = (StatusBarManager) MediaTttCommandLineHelper.this.context.getSystemService("statusbar");
-                MediaRoute2Info.Builder addFeature = new MediaRoute2Info.Builder(list.size() >= 3 ? (String) list.get(2) : "id", "Test Name").addFeature("feature");
+                MediaRoute2Info.Builder builderAddFeature = new MediaRoute2Info.Builder(list.size() >= 3 ? (String) list.get(2) : "id", "Test Name").addFeature("feature");
                 if (list.size() < 2 || !Intrinsics.areEqual(list.get(1), "useAppIcon=false")) {
-                    addFeature.setClientPackageName("com.android.systemui");
+                    builderAddFeature.setClientPackageName("com.android.systemui");
                 }
-                statusBarManager.updateMediaTapToTransferReceiverDisplay(stateInt, addFeature.build(), null, null);
+                statusBarManager.updateMediaTapToTransferReceiverDisplay(stateInt, builderAddFeature.build(), null, null);
             } catch (IllegalArgumentException unused) {
                 ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "Invalid command name ", str);
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SenderCommand implements Command {
         public SenderCommand() {
         }
@@ -90,26 +87,26 @@ public final class MediaTttCommandLineHelper implements CoreStartable {
             try {
                 ChipStateSender.Companion.getClass();
                 int stateInt = ChipStateSender.valueOf(str).getStateInt();
-                final Integer valueOf = Integer.valueOf(stateInt);
+                final Integer numValueOf = Integer.valueOf(stateInt);
                 MediaTttCommandLineHelper mediaTttCommandLineHelper = MediaTttCommandLineHelper.this;
                 StatusBarManager statusBarManager = (StatusBarManager) mediaTttCommandLineHelper.context.getSystemService("statusbar");
-                MediaRoute2Info.Builder addFeature = new MediaRoute2Info.Builder(senderArgs.id, senderArgs.deviceName).addFeature("feature");
+                MediaRoute2Info.Builder builderAddFeature = new MediaRoute2Info.Builder(senderArgs.id, senderArgs.deviceName).addFeature("feature");
                 if (senderArgs.useAppIcon) {
-                    addFeature.setClientPackageName("com.android.systemui");
+                    builderAddFeature.setClientPackageName("com.android.systemui");
                 }
                 if ((stateInt == 4 || stateInt == 5) && senderArgs.showUndo) {
                     executor = mediaTttCommandLineHelper.mainExecutor;
                     runnable = new Runnable() { // from class: com.android.systemui.media.taptotransfer.MediaTttCommandLineHelper$SenderCommand$execute$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            Log.i("MediaTransferCli", "Undo triggered for " + valueOf);
+                            Log.i("MediaTransferCli", "Undo triggered for " + numValueOf);
                         }
                     };
                 } else {
                     executor = null;
                     runnable = null;
                 }
-                statusBarManager.updateMediaTapToTransferSenderDisplay(stateInt, addFeature.build(), executor, runnable);
+                statusBarManager.updateMediaTapToTransferSenderDisplay(stateInt, builderAddFeature.build(), executor, runnable);
             } catch (IllegalArgumentException unused) {
                 ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "Invalid command name ", str);
             }
@@ -170,7 +167,6 @@ public final class MediaTttCommandLineHelper implements CoreStartable {
         });
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SenderArgs {
         public final String commandName;
         public final String deviceName;

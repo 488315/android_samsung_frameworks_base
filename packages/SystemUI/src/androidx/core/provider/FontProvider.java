@@ -21,13 +21,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FontProvider {
     public static final LruCache sProviderCache = new LruCache(2);
     public static final FontProvider$$ExternalSyntheticLambda0 sByteArrayComparator = new FontProvider$$ExternalSyntheticLambda0();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ContentQueryWrapperApi24Impl {
         public final ContentProviderClient mClient;
 
@@ -36,7 +34,6 @@ public class FontProvider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ProviderCacheKey {
         public final String mAuthority;
         public final List mCertificates;
@@ -89,33 +86,33 @@ public class FontProvider {
         FontProvider$$ExternalSyntheticLambda0 fontProvider$$ExternalSyntheticLambda0 = sByteArrayComparator;
         Trace.beginSection("FontProvider.getProvider");
         try {
-            List list = fontRequest.mCertificates;
+            List certs = fontRequest.mCertificates;
             String str = fontRequest.mProviderAuthority;
             String str2 = fontRequest.mProviderPackage;
-            if (list == null) {
-                list = FontResourcesParserCompat.readCerts(resources, fontRequest.mCertificatesArray);
+            if (certs == null) {
+                certs = FontResourcesParserCompat.readCerts(resources, fontRequest.mCertificatesArray);
             }
-            ProviderCacheKey providerCacheKey = new ProviderCacheKey(str, str2, list);
+            ProviderCacheKey providerCacheKey = new ProviderCacheKey(str, str2, certs);
             LruCache lruCache = sProviderCache;
             ProviderInfo providerInfo = (ProviderInfo) lruCache.get(providerCacheKey);
             if (providerInfo != null) {
                 return providerInfo;
             }
-            ProviderInfo resolveContentProvider = packageManager.resolveContentProvider(str, 0);
-            if (resolveContentProvider == null) {
+            ProviderInfo providerInfoResolveContentProvider = packageManager.resolveContentProvider(str, 0);
+            if (providerInfoResolveContentProvider == null) {
                 throw new PackageManager.NameNotFoundException("No package found for authority: ".concat(str));
             }
-            if (!resolveContentProvider.packageName.equals(str2)) {
+            if (!providerInfoResolveContentProvider.packageName.equals(str2)) {
                 throw new PackageManager.NameNotFoundException("Found content provider " + str + ", but package was not " + str2);
             }
-            Signature[] signatureArr = packageManager.getPackageInfo(resolveContentProvider.packageName, 64).signatures;
+            Signature[] signatureArr = packageManager.getPackageInfo(providerInfoResolveContentProvider.packageName, 64).signatures;
             ArrayList arrayList = new ArrayList();
             for (Signature signature : signatureArr) {
                 arrayList.add(signature.toByteArray());
             }
             Collections.sort(arrayList, fontProvider$$ExternalSyntheticLambda0);
-            for (int i = 0; i < list.size(); i++) {
-                ArrayList arrayList2 = new ArrayList((Collection) list.get(i));
+            for (int i = 0; i < certs.size(); i++) {
+                ArrayList arrayList2 = new ArrayList((Collection) certs.get(i));
                 Collections.sort(arrayList2, fontProvider$$ExternalSyntheticLambda0);
                 if (arrayList.size() == arrayList2.size()) {
                     for (int i2 = 0; i2 < arrayList.size(); i2++) {
@@ -123,8 +120,8 @@ public class FontProvider {
                             break;
                         }
                     }
-                    lruCache.put(providerCacheKey, resolveContentProvider);
-                    return resolveContentProvider;
+                    lruCache.put(providerCacheKey, providerInfoResolveContentProvider);
+                    return providerInfoResolveContentProvider;
                 }
             }
             Trace.endSection();
@@ -138,10 +135,10 @@ public class FontProvider {
         Trace.beginSection("FontProvider.query");
         try {
             ArrayList arrayList = new ArrayList();
-            Uri build = new Uri.Builder().scheme("content").authority(str).build();
-            Uri build2 = new Uri.Builder().scheme("content").authority(str).appendPath("file").build();
-            ContentQueryWrapperApi24Impl contentQueryWrapperApi24Impl = new ContentQueryWrapperApi24Impl(context, build);
-            Cursor cursor = null;
+            Uri uriBuild = new Uri.Builder().scheme("content").authority(str).build();
+            Uri uriBuild2 = new Uri.Builder().scheme("content").authority(str).appendPath("file").build();
+            ContentQueryWrapperApi24Impl contentQueryWrapperApi24Impl = new ContentQueryWrapperApi24Impl(context, uriBuild);
+            Cursor cursorQuery = null;
             try {
                 String[] strArr = {"_id", "file_id", "font_ttc_index", "font_variation_settings", "font_weight", "font_italic", "result_code"};
                 Trace.beginSection("ContentQueryWrapper.query");
@@ -150,28 +147,28 @@ public class FontProvider {
                     ContentProviderClient contentProviderClient = contentQueryWrapperApi24Impl.mClient;
                     if (contentProviderClient != null) {
                         try {
-                            cursor = contentProviderClient.query(build, strArr, "query = ?", strArr2, null, null);
+                            cursorQuery = contentProviderClient.query(uriBuild, strArr, "query = ?", strArr2, null, null);
                         } catch (RemoteException e) {
                             Log.w("FontsProvider", "Unable to query the content provider", e);
                         }
                     }
                     Trace.endSection();
-                    if (cursor != null && cursor.getCount() > 0) {
-                        int columnIndex = cursor.getColumnIndex("result_code");
+                    if (cursorQuery != null && cursorQuery.getCount() > 0) {
+                        int columnIndex = cursorQuery.getColumnIndex("result_code");
                         ArrayList arrayList2 = new ArrayList();
-                        int columnIndex2 = cursor.getColumnIndex("_id");
-                        int columnIndex3 = cursor.getColumnIndex("file_id");
-                        int columnIndex4 = cursor.getColumnIndex("font_ttc_index");
-                        int columnIndex5 = cursor.getColumnIndex("font_weight");
-                        int columnIndex6 = cursor.getColumnIndex("font_italic");
-                        while (cursor.moveToNext()) {
-                            int i = columnIndex != -1 ? cursor.getInt(columnIndex) : 0;
-                            arrayList2.add(new FontsContractCompat$FontInfo(columnIndex3 == -1 ? ContentUris.withAppendedId(build, cursor.getLong(columnIndex2)) : ContentUris.withAppendedId(build2, cursor.getLong(columnIndex3)), columnIndex4 != -1 ? cursor.getInt(columnIndex4) : 0, columnIndex5 != -1 ? cursor.getInt(columnIndex5) : 400, columnIndex6 != -1 && cursor.getInt(columnIndex6) == 1, i));
+                        int columnIndex2 = cursorQuery.getColumnIndex("_id");
+                        int columnIndex3 = cursorQuery.getColumnIndex("file_id");
+                        int columnIndex4 = cursorQuery.getColumnIndex("font_ttc_index");
+                        int columnIndex5 = cursorQuery.getColumnIndex("font_weight");
+                        int columnIndex6 = cursorQuery.getColumnIndex("font_italic");
+                        while (cursorQuery.moveToNext()) {
+                            int i = columnIndex != -1 ? cursorQuery.getInt(columnIndex) : 0;
+                            arrayList2.add(new FontsContractCompat$FontInfo(columnIndex3 == -1 ? ContentUris.withAppendedId(uriBuild, cursorQuery.getLong(columnIndex2)) : ContentUris.withAppendedId(uriBuild2, cursorQuery.getLong(columnIndex3)), columnIndex4 != -1 ? cursorQuery.getInt(columnIndex4) : 0, columnIndex5 != -1 ? cursorQuery.getInt(columnIndex5) : 400, columnIndex6 != -1 && cursorQuery.getInt(columnIndex6) == 1, i));
                         }
                         arrayList = arrayList2;
                     }
-                    if (cursor != null) {
-                        cursor.close();
+                    if (cursorQuery != null) {
+                        cursorQuery.close();
                     }
                     ContentProviderClient contentProviderClient2 = contentQueryWrapperApi24Impl.mClient;
                     if (contentProviderClient2 != null) {
@@ -181,8 +178,8 @@ public class FontProvider {
                 } finally {
                 }
             } catch (Throwable th) {
-                if (cursor != null) {
-                    cursor.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
                 ContentProviderClient contentProviderClient3 = contentQueryWrapperApi24Impl.mClient;
                 if (contentProviderClient3 != null) {

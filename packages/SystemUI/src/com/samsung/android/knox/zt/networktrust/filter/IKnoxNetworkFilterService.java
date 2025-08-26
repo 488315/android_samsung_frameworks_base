@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import com.samsung.android.knox.ContextInfo;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IKnoxNetworkFilterService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService";
@@ -64,7 +63,6 @@ public interface IKnoxNetworkFilterService extends IInterface {
 
     int unregisterApplication(ContextInfo contextInfo, String str) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IKnoxNetworkFilterService {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -196,7 +194,6 @@ public interface IKnoxNetworkFilterService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IKnoxNetworkFilterService {
         public static final int TRANSACTION_getAllProfiles = 7;
         public static final int TRANSACTION_getConfig = 6;
@@ -224,7 +221,6 @@ public interface IKnoxNetworkFilterService extends IInterface {
         public static final int TRANSACTION_stop = 11;
         public static final int TRANSACTION_unregisterApplication = 2;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IKnoxNetworkFilterService {
             public IBinder mRemote;
 
@@ -239,63 +235,63 @@ public interface IKnoxNetworkFilterService extends IInterface {
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public List<String> getAllProfiles() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public String getConfig(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public String getConfigByUserId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int getInstanceValidation() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -305,343 +301,343 @@ public interface IKnoxNetworkFilterService extends IInterface {
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int getKnoxNwFilterHttpProxyPort(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public String getPkgNameForTcpV4Port(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public String getPkgNameForTcpV6Port(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public String getProfileForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int getProfileStatus(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public String getRegisteredListeners(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public List<String> getRegisteredPackageList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public String getTcpV4PortInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public String getTcpV6PortInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public String getUdpV6PortInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public boolean isAuthorized() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public boolean isUserLimitReached(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int pause(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int prepareFiltering(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int registerApplication(ContextInfo contextInfo, String str, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int registerListeners(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public void removeConfigByEnduser() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int setConfig(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int start(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int stop(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService
             public int unregisterApplication(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxNetworkFilterService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -654,8 +650,8 @@ public interface IKnoxNetworkFilterService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKnoxNetworkFilterService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IKnoxNetworkFilterService)) ? new Proxy(iBinder) : (IKnoxNetworkFilterService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKnoxNetworkFilterService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IKnoxNetworkFilterService)) ? new Proxy(iBinder) : (IKnoxNetworkFilterService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -670,21 +666,21 @@ public interface IKnoxNetworkFilterService extends IInterface {
             switch (i) {
                 case 1:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int registerApplication = registerApplication(contextInfo, readString, readString2, bundle);
+                    int iRegisterApplication = registerApplication(contextInfo, string, string2, bundle);
                     parcel2.writeNoException();
-                    parcel2.writeInt(registerApplication);
+                    parcel2.writeInt(iRegisterApplication);
                     return true;
                 case 2:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int unregisterApplication = unregisterApplication(contextInfo2, readString3);
+                    int iUnregisterApplication = unregisterApplication(contextInfo2, string3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unregisterApplication);
+                    parcel2.writeInt(iUnregisterApplication);
                     return true;
                 case 3:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -699,17 +695,17 @@ public interface IKnoxNetworkFilterService extends IInterface {
                     parcel2.writeInt(instanceValidation);
                     return true;
                 case 5:
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int config = setConfig(readString4, readString5);
+                    int config = setConfig(string4, string5);
                     parcel2.writeNoException();
                     parcel2.writeInt(config);
                     return true;
                 case 6:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String config2 = getConfig(readString6);
+                    String config2 = getConfig(string6);
                     parcel2.writeNoException();
                     parcel2.writeString(config2);
                     return true;
@@ -719,116 +715,116 @@ public interface IKnoxNetworkFilterService extends IInterface {
                     parcel2.writeStringList(allProfiles);
                     return true;
                 case 8:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int registerListeners = registerListeners(readString7, readString8);
+                    int iRegisterListeners = registerListeners(string7, string8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(registerListeners);
+                    parcel2.writeInt(iRegisterListeners);
                     return true;
                 case 9:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String registeredListeners = getRegisteredListeners(readString9);
+                    String registeredListeners = getRegisteredListeners(string9);
                     parcel2.writeNoException();
                     parcel2.writeString(registeredListeners);
                     return true;
                 case 10:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int start = start(readString10);
+                    int iStart = start(string10);
                     parcel2.writeNoException();
-                    parcel2.writeInt(start);
+                    parcel2.writeInt(iStart);
                     return true;
                 case 11:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int stop = stop(readString11, readString12);
+                    int iStop = stop(string11, string12);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stop);
+                    parcel2.writeInt(iStop);
                     return true;
                 case 12:
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int pause = pause(readString13);
+                    int iPause = pause(string13);
                     parcel2.writeNoException();
-                    parcel2.writeInt(pause);
+                    parcel2.writeInt(iPause);
                     return true;
                 case 13:
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int profileStatus = getProfileStatus(readString14);
+                    int profileStatus = getProfileStatus(string14);
                     parcel2.writeNoException();
                     parcel2.writeInt(profileStatus);
                     return true;
                 case 14:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String tcpV4PortInfo = getTcpV4PortInfo(readInt);
+                    String tcpV4PortInfo = getTcpV4PortInfo(i3);
                     parcel2.writeNoException();
                     parcel2.writeString(tcpV4PortInfo);
                     return true;
                 case 15:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String tcpV6PortInfo = getTcpV6PortInfo(readInt2);
+                    String tcpV6PortInfo = getTcpV6PortInfo(i4);
                     parcel2.writeNoException();
                     parcel2.writeString(tcpV6PortInfo);
                     return true;
                 case 16:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String udpV6PortInfo = getUdpV6PortInfo(readInt3);
+                    String udpV6PortInfo = getUdpV6PortInfo(i5);
                     parcel2.writeNoException();
                     parcel2.writeString(udpV6PortInfo);
                     return true;
                 case 17:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String pkgNameForTcpV4Port = getPkgNameForTcpV4Port(readInt4);
+                    String pkgNameForTcpV4Port = getPkgNameForTcpV4Port(i6);
                     parcel2.writeNoException();
                     parcel2.writeString(pkgNameForTcpV4Port);
                     return true;
                 case 18:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String pkgNameForTcpV6Port = getPkgNameForTcpV6Port(readInt5);
+                    String pkgNameForTcpV6Port = getPkgNameForTcpV6Port(i7);
                     parcel2.writeNoException();
                     parcel2.writeString(pkgNameForTcpV6Port);
                     return true;
                 case 19:
-                    int readInt6 = parcel.readInt();
-                    String readString15 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int knoxNwFilterHttpProxyPort = getKnoxNwFilterHttpProxyPort(readInt6, readString15);
+                    int knoxNwFilterHttpProxyPort = getKnoxNwFilterHttpProxyPort(i8, string15);
                     parcel2.writeNoException();
                     parcel2.writeInt(knoxNwFilterHttpProxyPort);
                     return true;
                 case 20:
-                    boolean isAuthorized = isAuthorized();
+                    boolean zIsAuthorized = isAuthorized();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAuthorized);
+                    parcel2.writeBoolean(zIsAuthorized);
                     return true;
                 case 21:
-                    String readString16 = parcel.readString();
+                    String string16 = parcel.readString();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int prepareFiltering = prepareFiltering(readString16, bundle2);
+                    int iPrepareFiltering = prepareFiltering(string16, bundle2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(prepareFiltering);
+                    parcel2.writeInt(iPrepareFiltering);
                     return true;
                 case 22:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String configByUserId = getConfigByUserId(readInt7);
+                    String configByUserId = getConfigByUserId(i9);
                     parcel2.writeNoException();
                     parcel2.writeString(configByUserId);
                     return true;
                 case 23:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String profileForUser = getProfileForUser(readInt8);
+                    String profileForUser = getProfileForUser(i10);
                     parcel2.writeNoException();
                     parcel2.writeString(profileForUser);
                     return true;
@@ -837,11 +833,11 @@ public interface IKnoxNetworkFilterService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isUserLimitReached = isUserLimitReached(readBoolean);
+                    boolean zIsUserLimitReached = isUserLimitReached(z);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUserLimitReached);
+                    parcel2.writeBoolean(zIsUserLimitReached);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

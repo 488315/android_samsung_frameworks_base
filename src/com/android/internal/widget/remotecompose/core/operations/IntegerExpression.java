@@ -146,17 +146,17 @@ public class IntegerExpression extends Operation implements VariableSupport, Ser
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        int readInt3 = wireBuffer.readInt();
-        if (readInt3 > 320) {
-            throw new RuntimeException("buffer corrupt integer expression " + readInt3);
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        int i3 = wireBuffer.readInt();
+        if (i3 > 320) {
+            throw new RuntimeException("buffer corrupt integer expression " + i3);
         }
-        int[] iArr = new int[readInt3];
-        for (int i = 0; i < readInt3; i++) {
-            iArr[i] = wireBuffer.readInt();
+        int[] iArr = new int[i3];
+        for (int i4 = 0; i4 < i3; i4++) {
+            iArr[i4] = wireBuffer.readInt();
         }
-        list.add(new IntegerExpression(readInt, readInt2, iArr));
+        list.add(new IntegerExpression(i, i2, iArr));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.drawscope.ContentDrawScope;
 import androidx.compose.ui.node.LayoutNodeDrawScope;
 import androidx.compose.ui.unit.Dp;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class RippleAnimationKt {
     public static final float BoundedRippleExtraRadius;
@@ -18,11 +17,11 @@ public abstract class RippleAnimationKt {
     }
 
     /* renamed from: getRippleEndRadius-cSwnlzA, reason: not valid java name */
-    public static final float m243getRippleEndRadiuscSwnlzA(ContentDrawScope contentDrawScope, boolean z, long j) {
-        float m397getDistanceimpl = Offset.m397getDistanceimpl(OffsetKt.Offset(Size.m417getWidthimpl(j), Size.m415getHeightimpl(j))) / 2.0f;
+    public static final float m244getRippleEndRadiuscSwnlzA(ContentDrawScope contentDrawScope, boolean z, long j) {
+        float fM399getDistanceimpl = Offset.m399getDistanceimpl(OffsetKt.Offset(Size.m419getWidthimpl(j), Size.m417getHeightimpl(j))) / 2.0f;
         if (!z) {
-            return m397getDistanceimpl;
+            return fM399getDistanceimpl;
         }
-        return ((LayoutNodeDrawScope) contentDrawScope).mo57toPx0680j_4(BoundedRippleExtraRadius) + m397getDistanceimpl;
+        return ((LayoutNodeDrawScope) contentDrawScope).mo58toPx0680j_4(BoundedRippleExtraRadius) + fM399getDistanceimpl;
     }
 }

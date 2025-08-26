@@ -9,7 +9,6 @@ import androidx.compose.ui.unit.Density;
 import androidx.compose.ui.unit.LayoutDirection;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class GenericShape implements Shape {
     public final Function3 builder;
@@ -20,11 +19,11 @@ public final class GenericShape implements Shape {
 
     @Override // androidx.compose.ui.graphics.Shape
     /* renamed from: createOutline-Pq9zytI */
-    public final Outline mo40createOutlinePq9zytI(long j, LayoutDirection layoutDirection, Density density) {
-        AndroidPath Path = AndroidPath_androidKt.Path();
-        this.builder.invoke(Path, Size.m413boximpl(j), layoutDirection);
-        Path.internalPath.close();
-        return new Outline.Generic(Path);
+    public final Outline mo41createOutlinePq9zytI(long j, LayoutDirection layoutDirection, Density density) {
+        AndroidPath androidPathPath = AndroidPath_androidKt.Path();
+        this.builder.invoke(androidPathPath, Size.m415boximpl(j), layoutDirection);
+        androidPathPath.internalPath.close();
+        return new Outline.Generic(androidPathPath);
     }
 
     public final boolean equals(Object obj) {

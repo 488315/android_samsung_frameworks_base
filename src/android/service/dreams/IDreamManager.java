@@ -215,9 +215,9 @@ public interface IDreamManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDreamManager)) {
-                return (IDreamManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDreamManager)) {
+                return (IDreamManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -312,78 +312,78 @@ public interface IDreamManager extends IInterface {
                     parcel2.writeTypedArray(dreamComponents, 1);
                     return true;
                 case 5:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ComponentName defaultDreamComponentForUser = getDefaultDreamComponentForUser(readInt);
+                    ComponentName defaultDreamComponentForUser = getDefaultDreamComponentForUser(i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(defaultDreamComponentForUser, 1);
                     return true;
                 case 6:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    testDream(readInt2, componentName);
+                    testDream(i4, componentName);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    boolean isDreaming = isDreaming();
+                    boolean zIsDreaming = isDreaming();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDreaming);
+                    parcel2.writeBoolean(zIsDreaming);
                     return true;
                 case 8:
-                    boolean isDreamingOrInPreview = isDreamingOrInPreview();
+                    boolean zIsDreamingOrInPreview = isDreamingOrInPreview();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDreamingOrInPreview);
+                    parcel2.writeBoolean(zIsDreamingOrInPreview);
                     return true;
                 case 9:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean canStartDreaming = canStartDreaming(readBoolean);
+                    boolean zCanStartDreaming = canStartDreaming(z);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canStartDreaming);
+                    parcel2.writeBoolean(zCanStartDreaming);
                     return true;
                 case 10:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    finishSelf(readStrongBinder, readBoolean2);
+                    finishSelf(strongBinder, z2);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    float readFloat = parcel.readFloat();
-                    int readInt5 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    float f = parcel.readFloat();
+                    int i7 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    startDozing(readStrongBinder2, readInt3, readInt4, readFloat, readInt5, readBoolean3);
+                    startDozing(strongBinder2, i5, i6, f, i7, z3);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    stopDozing(readStrongBinder3);
+                    stopDozing(strongBinder3);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    forceAmbientDisplayEnabled(readBoolean4);
+                    forceAmbientDisplayEnabled(z4);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ComponentName[] dreamComponentsForUser = getDreamComponentsForUser(readInt6);
+                    ComponentName[] dreamComponentsForUser = getDreamComponentsForUser(i8);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(dreamComponentsForUser, 1);
                     return true;
                 case 15:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     ComponentName[] componentNameArr2 = (ComponentName[]) parcel.createTypedArray(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setDreamComponentsForUser(readInt7, componentNameArr2);
+                    setDreamComponentsForUser(i9, componentNameArr2);
                     parcel2.writeNoException();
                     return true;
                 case 16:
@@ -405,46 +405,46 @@ public interface IDreamManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDreamIsObscured(readBoolean5);
+                    setDreamIsObscured(z5);
                     return true;
                 case 20:
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDevicePostured(readBoolean6);
+                    setDevicePostured(z6);
                     return true;
                 case 21:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    float readFloat2 = parcel.readFloat();
-                    int readInt10 = parcel.readInt();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    float f2 = parcel.readFloat();
+                    int i12 = parcel.readInt();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    startDozingOneway(readStrongBinder4, readInt8, readInt9, readFloat2, readInt10, readBoolean7);
+                    startDozingOneway(strongBinder4, i10, i11, f2, i12, z7);
                     return true;
                 case 22:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    finishSelfOneway(readStrongBinder5, readBoolean8);
+                    finishSelfOneway(strongBinder5, z8);
                     return true;
                 case 23:
-                    boolean readBoolean9 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setScreensaverEnabled(readBoolean9);
+                    setScreensaverEnabled(z9);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
-                    boolean readBoolean10 = parcel.readBoolean();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    semStartDozing(readStrongBinder6, readInt11, readInt12, readInt13, readInt14, readBoolean10);
+                    semStartDozing(strongBinder6, i13, i14, i15, i16, z10);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -470,369 +470,369 @@ public interface IDreamManager extends IInterface {
 
             @Override // android.service.dreams.IDreamManager
             public void dream() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void awaken() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void setDreamComponents(ComponentName[] componentNameArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(componentNameArr, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(componentNameArr, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public ComponentName[] getDreamComponents() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName[]) obtain2.createTypedArray(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName[]) parcelObtain2.createTypedArray(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public ComponentName getDefaultDreamComponentForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void testDream(int i, ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public boolean isDreaming() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public boolean isDreamingOrInPreview() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public boolean canStartDreaming(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void finishSelf(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void startDozing(IBinder iBinder, int i, int i2, float f, int i3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeFloat(f);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void stopDozing(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void forceAmbientDisplayEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public ComponentName[] getDreamComponentsForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName[]) obtain2.createTypedArray(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName[]) parcelObtain2.createTypedArray(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void setDreamComponentsForUser(int i, ComponentName[] componentNameArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(componentNameArr, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(componentNameArr, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void setSystemDreamComponent(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void registerDreamOverlayService(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void startDreamActivity(Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void setDreamIsObscured(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void setDevicePostured(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void startDozingOneway(IBinder iBinder, int i, int i2, float f, int i3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeFloat(f);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void finishSelfOneway(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void setScreensaverEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.dreams.IDreamManager
             public void semStartDozing(IBinder iBinder, int i, int i2, int i3, int i4, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

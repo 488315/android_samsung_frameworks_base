@@ -15,7 +15,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.customview.view.AbsSavedState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CheckableImageButton extends AppCompatImageButton implements Checkable {
     public static final int[] DRAWABLE_STATE_CHECKED = {R.attr.state_checked};
@@ -23,7 +22,6 @@ public class CheckableImageButton extends AppCompatImageButton implements Checka
     public boolean checked;
     public boolean pressable;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends AbsSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.ClassLoaderCreator() { // from class: com.google.android.material.internal.CheckableImageButton.SavedState.1
             @Override // android.os.Parcelable.ClassLoaderCreator

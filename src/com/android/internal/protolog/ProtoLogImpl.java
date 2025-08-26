@@ -9,7 +9,7 @@ import com.android.internal.protolog.common.LogLevel;
 import java.io.File;
 import java.util.TreeMap;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class ProtoLogImpl {
     private static final String LOG_TAG = "ProtoLogImpl";
     private static ProtoLogCacheUpdater sCacheUpdater;
@@ -52,32 +52,28 @@ public class ProtoLogImpl {
     }
 
     public static synchronized IProtoLog getSingleInstance() {
-        IProtoLog iProtoLog;
-        synchronized (ProtoLogImpl.class) {
-            if (sServiceInstance == null) {
-                Log.i(LOG_TAG, "Setting up ProtoLogImpl with viewerConfigPath = " + sViewerConfigPath);
-                IProtoLogGroup[] iProtoLogGroupArr = (IProtoLogGroup[]) sLogGroups.values().toArray(new IProtoLogGroup[0]);
-                if (Flags.perfettoProtologTracing()) {
-                    if (!new File(sViewerConfigPath).exists()) {
-                        Log.e(LOG_TAG, "Failed to find viewer config file " + sViewerConfigPath + " when setting up ProtoLogImpl. ProtoLog will not work here!");
-                        sServiceInstance = new NoViewerConfigProtoLogImpl();
-                    } else {
-                        try {
-                            ProcessedPerfettoProtoLogImpl processedPerfettoProtoLogImpl = new ProcessedPerfettoProtoLogImpl(ProtoLog.getSharedSingleInstanceDataSource(), sViewerConfigPath, sCacheUpdater, iProtoLogGroupArr);
-                            sServiceInstance = processedPerfettoProtoLogImpl;
-                            processedPerfettoProtoLogImpl.enable();
-                        } catch (ServiceManager.ServiceNotFoundException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
+        if (sServiceInstance == null) {
+            Log.i(LOG_TAG, "Setting up ProtoLogImpl with viewerConfigPath = " + sViewerConfigPath);
+            IProtoLogGroup[] iProtoLogGroupArr = (IProtoLogGroup[]) sLogGroups.values().toArray(new IProtoLogGroup[0]);
+            if (Flags.perfettoProtologTracing()) {
+                if (!new File(sViewerConfigPath).exists()) {
+                    Log.e(LOG_TAG, "Failed to find viewer config file " + sViewerConfigPath + " when setting up ProtoLogImpl. ProtoLog will not work here!");
+                    sServiceInstance = new NoViewerConfigProtoLogImpl();
                 } else {
-                    sServiceInstance = createLegacyProtoLogImpl(iProtoLogGroupArr);
+                    try {
+                        ProcessedPerfettoProtoLogImpl processedPerfettoProtoLogImpl = new ProcessedPerfettoProtoLogImpl(ProtoLog.getSharedSingleInstanceDataSource(), sViewerConfigPath, sCacheUpdater, iProtoLogGroupArr);
+                        sServiceInstance = processedPerfettoProtoLogImpl;
+                        processedPerfettoProtoLogImpl.enable();
+                    } catch (ServiceManager.ServiceNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-                sCacheUpdater.update(sServiceInstance);
+            } else {
+                sServiceInstance = createLegacyProtoLogImpl(iProtoLogGroupArr);
             }
-            iProtoLog = sServiceInstance;
+            sCacheUpdater.update(sServiceInstance);
         }
-        return iProtoLog;
+        return sServiceInstance;
     }
 
     private static LegacyProtoLogImpl createLegacyProtoLogImpl(IProtoLogGroup[] iProtoLogGroupArr) {
@@ -87,8 +83,6 @@ public class ProtoLogImpl {
     }
 
     public static synchronized void setSingleInstance(IProtoLog iProtoLog) {
-        synchronized (ProtoLogImpl.class) {
-            sServiceInstance = iProtoLog;
-        }
+        sServiceInstance = iProtoLog;
     }
 }

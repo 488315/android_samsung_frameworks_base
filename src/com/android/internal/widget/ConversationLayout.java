@@ -10,6 +10,7 @@ import android.app.Person;
 import android.app.RemoteInputHistoryItem;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -37,6 +38,7 @@ import android.widget.TextView;
 import com.android.internal.R;
 import com.android.internal.widget.ConversationAvatarData;
 import com.android.internal.widget.MessagingLinearLayout;
+import com.android.internal.widget.PeopleHelper;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -201,8 +203,8 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         this.mActions = (NotificationActionListLayout) findViewById(R.id.actions);
         this.mImageMessageContainer = (MessagingLinearLayout) findViewById(R.id.conversation_image_message_container);
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int max = Math.max(displayMetrics.widthPixels, displayMetrics.heightPixels);
-        this.mMessagingClipRect = new Rect(0, 0, max, max);
+        int iMax = Math.max(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        this.mMessagingClipRect = new Rect(0, 0, iMax, iMax);
         setMessagingClippingDisabled(false);
         this.mConversationIconView = (CachingIconView) findViewById(R.id.conversation_icon);
         this.mConversationIconContainer = findViewById(R.id.conversation_icon_container);
@@ -215,19 +217,19 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         this.mIcon.setOnVisibilityChangedListener(new Consumer() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ConversationLayout.this.lambda$onFinishInflate$0((Integer) obj);
+                this.f$0.lambda$onFinishInflate$0((Integer) obj);
             }
         });
         this.mIcon.setOnForceHiddenChangedListener(new Consumer() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ConversationLayout.this.lambda$onFinishInflate$1((Boolean) obj);
+                this.f$0.lambda$onFinishInflate$1((Boolean) obj);
             }
         });
         this.mConversationIconView.setOnForceHiddenChangedListener(new Consumer() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ConversationLayout.this.lambda$onFinishInflate$2((Boolean) obj);
+                this.f$0.lambda$onFinishInflate$2((Boolean) obj);
             }
         });
         this.mConversationText = (TextView) findViewById(Flags.notificationsRedesignTemplates() ? 16908310 : R.id.conversation_text);
@@ -266,7 +268,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         this.mAppName.setOnVisibilityChangedListener(new Consumer() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda4
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ConversationLayout.this.lambda$onFinishInflate$3((Integer) obj);
+                this.f$0.lambda$onFinishInflate$3((Integer) obj);
             }
         });
         this.mConversationStartMargin = getResources().getDimensionPixelSize(R.dimen.notification_content_margin_start);
@@ -282,20 +284,20 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
             this.mConversationIconBadgeBg.animate().cancel();
         }
         boolean z2 = this.mImportanceRingView.getVisibility() == 8;
-        int intValue = !this.mImportantConversation ? 8 : num.intValue();
-        Integer valueOf = Integer.valueOf(intValue);
-        valueOf.getClass();
-        if (z2 != (intValue == 8)) {
+        int iIntValue = !this.mImportantConversation ? 8 : num.intValue();
+        Integer numValueOf = Integer.valueOf(iIntValue);
+        numValueOf.getClass();
+        if (z2 != (iIntValue == 8)) {
             this.mImportanceRingView.animate().cancel();
             CachingIconView cachingIconView = this.mImportanceRingView;
-            valueOf.getClass();
-            cachingIconView.setVisibility(intValue);
+            numValueOf.getClass();
+            cachingIconView.setVisibility(iIntValue);
         }
         if ((this.mConversationIconBadge.getVisibility() == 8) != z) {
             this.mConversationIconBadge.animate().cancel();
             View view = this.mConversationIconBadge;
-            valueOf.getClass();
-            view.setVisibility(intValue);
+            numValueOf.getClass();
+            view.setVisibility(iIntValue);
         }
     }
 
@@ -328,11 +330,11 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
     }
 
     @RemotableViewMethod
-    public void setIsImportantConversation(boolean z) {
+    public void setIsImportantConversation(boolean z) throws Resources.NotFoundException {
         setIsImportantConversation(z, false);
     }
 
-    public void setIsImportantConversation(boolean z, boolean z2) {
+    public void setIsImportantConversation(boolean z, boolean z2) throws Resources.NotFoundException {
         this.mImportantConversation = z;
         CachingIconView cachingIconView = this.mImportanceRingView;
         int i = 8;
@@ -353,20 +355,20 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
             ValueAnimator.AnimatorUpdateListener animatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda6
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    ConversationLayout.this.lambda$setIsImportantConversation$4(gradientDrawable, color, dimensionPixelSize3, valueAnimator);
+                    this.f$0.lambda$setIsImportantConversation$4(gradientDrawable, color, dimensionPixelSize3, valueAnimator);
                 }
             };
             float f = dimensionPixelSize2;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, f);
-            ofFloat.setInterpolator(LINEAR_OUT_SLOW_IN);
-            ofFloat.setDuration(250L);
-            ofFloat.addUpdateListener(animatorUpdateListener);
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(f, dimensionPixelSize);
-            ofFloat2.setDuration(200L);
-            ofFloat2.setStartDelay(25L);
-            ofFloat2.setInterpolator(OVERSHOOT);
-            ofFloat2.addUpdateListener(animatorUpdateListener);
-            ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.ConversationLayout.1
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, f);
+            valueAnimatorOfFloat.setInterpolator(LINEAR_OUT_SLOW_IN);
+            valueAnimatorOfFloat.setDuration(250L);
+            valueAnimatorOfFloat.addUpdateListener(animatorUpdateListener);
+            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(f, dimensionPixelSize);
+            valueAnimatorOfFloat2.setDuration(200L);
+            valueAnimatorOfFloat2.setStartDelay(25L);
+            valueAnimatorOfFloat2.setInterpolator(OVERSHOOT);
+            valueAnimatorOfFloat2.addUpdateListener(animatorUpdateListener);
+            valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.ConversationLayout.1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationStart(Animator animator) {
                     GradientDrawable gradientDrawable3 = gradientDrawable2;
@@ -384,16 +386,16 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
                 }
             });
             AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.playSequentially(ofFloat, ofFloat2);
+            animatorSet.playSequentially(valueAnimatorOfFloat, valueAnimatorOfFloat2);
             animatorSet.start();
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setIsImportantConversation$4(GradientDrawable gradientDrawable, int i, int i2, ValueAnimator valueAnimator) {
-        int round = Math.round(((Float) valueAnimator.getAnimatedValue()).floatValue());
-        gradientDrawable.setStroke(round, i);
-        int i3 = i2 + (round * 2);
+        int iRound = Math.round(((Float) valueAnimator.getAnimatedValue()).floatValue());
+        gradientDrawable.setStroke(iRound, i);
+        int i3 = i2 + (iRound * 2);
         gradientDrawable.setSize(i3, i3);
         this.mImportanceRingView.invalidate();
     }
@@ -404,7 +406,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
 
     @RemotableViewMethod(asyncImpl = "setIsCollapsedAsync")
     /* renamed from: setIsCollapsed, reason: merged with bridge method [inline-methods] */
-    public void lambda$setIsCollapsedAsync$5(boolean z) {
+    public void lambda$setIsCollapsedAsync$5(boolean z) throws Resources.NotFoundException {
         this.mIsCollapsed = z;
         this.mMessagingLinearLayout.setMaxDisplayedLines(z ? 2 : Integer.MAX_VALUE);
         updateExpandButton();
@@ -415,21 +417,21 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         this.mIsCollapsed = z;
         return new Runnable() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda12
             @Override // java.lang.Runnable
-            public final void run() {
-                ConversationLayout.this.lambda$setIsCollapsedAsync$5(z);
+            public final void run() throws Resources.NotFoundException {
+                this.f$0.lambda$setIsCollapsedAsync$5(z);
             }
         };
     }
 
     @RemotableViewMethod(asyncImpl = "setDataAsync")
     /* renamed from: setData, reason: merged with bridge method [inline-methods] */
-    public void lambda$setDataAsync$6(Bundle bundle) {
+    public void lambda$setDataAsync$6(Bundle bundle) throws Resources.NotFoundException {
         bind(parseMessagingData(bundle, false, false));
     }
 
     private MessagingData parseMessagingData(Bundle bundle, boolean z, boolean z2) {
-        List<MessagingMessage> createMessages;
-        ConversationHeaderData conversationHeaderData;
+        List<MessagingMessage> listCreateMessages;
+        ConversationHeaderData conversationHeaderDataLoadConversationHeaderData;
         List<Notification.MessagingStyle.Message> messagesFromBundleArray = Notification.MessagingStyle.Message.getMessagesFromBundleArray(bundle.getParcelableArray(Notification.EXTRA_MESSAGES));
         List<Notification.MessagingStyle.Message> messagesFromBundleArray2 = Notification.MessagingStyle.Message.getMessagesFromBundleArray(bundle.getParcelableArray(Notification.EXTRA_HISTORIC_MESSAGES));
         Person person = (Person) bundle.getParcelable(Notification.EXTRA_MESSAGING_PERSON, Person.class);
@@ -439,47 +441,47 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         CharSequence charSequence = bundle.getCharSequence(Notification.EXTRA_SUMMARIZED_CONTENT);
         this.mSummarizedContent = charSequence;
         if (!TextUtils.isEmpty(charSequence) && this.mIsCollapsed) {
-            createMessages = createMessages(List.of(new Notification.MessagingStyle.Message(this.mSummarizedContent, 0L, "")), false, z);
+            listCreateMessages = createMessages(List.of(new Notification.MessagingStyle.Message(this.mSummarizedContent, 0L, "")), false, z);
         } else {
-            createMessages = createMessages(messagesFromBundleArray, false, z);
+            listCreateMessages = createMessages(messagesFromBundleArray, false, z);
         }
-        List<MessagingMessage> list = createMessages;
-        List<MessagingMessage> createMessages2 = createMessages(messagesFromBundleArray2, true, z);
+        List<MessagingMessage> list = listCreateMessages;
+        List<MessagingMessage> listCreateMessages2 = createMessages(messagesFromBundleArray2, true, z);
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
         List<MessagingMessage> list2 = list;
         Person person2 = person;
-        findGroups(createMessages2, list2, person2, arrayList, arrayList2);
+        findGroups(listCreateMessages2, list2, person2, arrayList, arrayList2);
         if (z2 && android.widget.flags.Flags.conversationStyleSetAvatarAsync()) {
-            conversationHeaderData = loadConversationHeaderData(this.mIsOneToOne, this.mConversationTitle, this.mShortcutIcon, this.mLargeIcon, list2, person2, arrayList, this.mLayoutColor);
+            conversationHeaderDataLoadConversationHeaderData = loadConversationHeaderData(this.mIsOneToOne, this.mConversationTitle, this.mShortcutIcon, this.mLargeIcon, list2, person2, arrayList, this.mLayoutColor);
             list2 = list2;
             person2 = person2;
         } else {
-            conversationHeaderData = null;
+            conversationHeaderDataLoadConversationHeaderData = null;
         }
-        return new MessagingData(person2, z3, i, createMessages2, list2, arrayList, arrayList2, conversationHeaderData, this.mSummarizedContent);
+        return new MessagingData(person2, z3, i, listCreateMessages2, list2, arrayList, arrayList2, conversationHeaderDataLoadConversationHeaderData, this.mSummarizedContent);
     }
 
     public Runnable setDataAsync(final Bundle bundle) {
         if (!this.mPrecomputedTextEnabled) {
             return new Runnable() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
-                public final void run() {
-                    ConversationLayout.this.lambda$setDataAsync$6(bundle);
+                public final void run() throws Resources.NotFoundException {
+                    this.f$0.lambda$setDataAsync$6(bundle);
                 }
             };
         }
-        final MessagingData parseMessagingData = parseMessagingData(bundle, true, true);
+        final MessagingData messagingData = parseMessagingData(bundle, true, true);
         return new Runnable() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda11
             @Override // java.lang.Runnable
-            public final void run() {
-                ConversationLayout.this.lambda$setDataAsync$7(parseMessagingData);
+            public final void run() throws Resources.NotFoundException {
+                this.f$0.lambda$setDataAsync$7(messagingData);
             }
         };
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$setDataAsync$7(MessagingData messagingData) {
+    public /* synthetic */ void lambda$setDataAsync$7(MessagingData messagingData) throws Resources.NotFoundException {
         finalizeInflate(messagingData.getHistoricMessagingMessages());
         finalizeInflate(messagingData.getNewMessagingMessages());
         bind(messagingData);
@@ -501,7 +503,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         this.mImageResolver = imageResolver;
     }
 
-    public void setUnreadCount(int i) {
+    public void setUnreadCount(int i) throws Resources.NotFoundException {
         this.mExpandButton.setNumber(i);
         updateConversationUnreadCountText(i);
     }
@@ -532,7 +534,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         }
     }
 
-    private void bind(MessagingData messagingData) {
+    private void bind(MessagingData messagingData) throws Resources.NotFoundException {
         setUser(messagingData.getUser());
         setUnreadCount(messagingData.getUnreadCount());
         ArrayList<MessagingGroup> arrayList = new ArrayList<>(this.mGroups);
@@ -583,7 +585,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
 
     @Deprecated
     private void computeAndSetConversationAvatarAndName() {
-        CharSequence charSequence = this.mConversationTitle;
+        CharSequence senderName = this.mConversationTitle;
         this.mConversationIcon = this.mShortcutIcon;
         if (this.mIsOneToOne) {
             CharSequence key = getKey(this.mUser);
@@ -591,13 +593,13 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
                 MessagingGroup messagingGroup = this.mGroups.get(size);
                 Person sender = messagingGroup.getSender();
                 if ((sender != null && !TextUtils.equals(key, getKey(sender))) || size == 0) {
-                    if (TextUtils.isEmpty(charSequence)) {
-                        charSequence = messagingGroup.getSenderName();
+                    if (TextUtils.isEmpty(senderName)) {
+                        senderName = messagingGroup.getSenderName();
                     }
                     if (this.mConversationIcon == null) {
                         Icon avatarIcon = messagingGroup.getAvatarIcon();
                         if (avatarIcon == null) {
-                            avatarIcon = this.mPeopleHelper.createAvatarSymbol(charSequence, "", this.mLayoutColor);
+                            avatarIcon = this.mPeopleHelper.createAvatarSymbol(senderName, "", this.mLayoutColor);
                         }
                         this.mConversationIcon = avatarIcon;
                     }
@@ -617,11 +619,11 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
             this.mConversationFacePile = findViewById(R.id.conversation_face_pile);
             bindFacePile();
         }
-        if (TextUtils.isEmpty(charSequence)) {
-            charSequence = this.mIsOneToOne ? this.mFallbackChatName : this.mFallbackGroupChatName;
+        if (TextUtils.isEmpty(senderName)) {
+            senderName = this.mIsOneToOne ? this.mFallbackChatName : this.mFallbackGroupChatName;
         }
-        this.mConversationText.lambda$setTextAsync$0(charSequence);
-        this.mPeopleHelper.maybeHideFirstSenderName(this.mGroups, this.mIsOneToOne, charSequence);
+        this.mConversationText.lambda$setTextAsync$0(senderName);
+        this.mPeopleHelper.maybeHideFirstSenderName(this.mGroups, this.mIsOneToOne, senderName);
     }
 
     private void setConversationAvatarAndNameFromData(ConversationHeaderData conversationHeaderData) {
@@ -688,9 +690,9 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         imageView.setImageTintList(ColorStateList.valueOf(0));
         CharSequence key = getKey(this.mUser);
         int size = this.mGroups.size() - 1;
-        Icon icon = null;
-        CharSequence charSequence = null;
-        Icon icon2 = null;
+        Icon iconCreateAvatarSymbol = null;
+        CharSequence key2 = null;
+        Icon iconCreateAvatarSymbol2 = null;
         while (true) {
             if (size < 0) {
                 break;
@@ -698,26 +700,26 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
             MessagingGroup messagingGroup = this.mGroups.get(size);
             Person sender = messagingGroup.getSender();
             boolean z = (sender == null || TextUtils.equals(key, getKey(sender))) ? false : true;
-            boolean z2 = (sender == null || TextUtils.equals(charSequence, getKey(sender))) ? false : true;
-            if ((z && z2) || (size == 0 && charSequence == null)) {
-                if (icon2 == null) {
-                    icon2 = messagingGroup.getAvatarIcon();
-                    charSequence = getKey(sender);
+            boolean z2 = (sender == null || TextUtils.equals(key2, getKey(sender))) ? false : true;
+            if ((z && z2) || (size == 0 && key2 == null)) {
+                if (iconCreateAvatarSymbol2 == null) {
+                    iconCreateAvatarSymbol2 = messagingGroup.getAvatarIcon();
+                    key2 = getKey(sender);
                 } else {
-                    icon = messagingGroup.getAvatarIcon();
+                    iconCreateAvatarSymbol = messagingGroup.getAvatarIcon();
                     break;
                 }
             }
             size--;
         }
-        if (icon2 == null) {
-            icon2 = this.mPeopleHelper.createAvatarSymbol(" ", "", this.mLayoutColor);
+        if (iconCreateAvatarSymbol2 == null) {
+            iconCreateAvatarSymbol2 = this.mPeopleHelper.createAvatarSymbol(" ", "", this.mLayoutColor);
         }
-        imageView2.setImageIcon(icon2);
-        if (icon == null) {
-            icon = this.mPeopleHelper.createAvatarSymbol("", "", this.mLayoutColor);
+        imageView2.setImageIcon(iconCreateAvatarSymbol2);
+        if (iconCreateAvatarSymbol == null) {
+            iconCreateAvatarSymbol = this.mPeopleHelper.createAvatarSymbol("", "", this.mLayoutColor);
         }
-        imageView3.setImageIcon(icon);
+        imageView3.setImageIcon(iconCreateAvatarSymbol);
     }
 
     @Deprecated
@@ -863,7 +865,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
             return new Runnable() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda9
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ConversationLayout.this.lambda$setLargeIconAsync$8(icon);
+                    this.f$0.lambda$setLargeIconAsync$8(icon);
                 }
             };
         }
@@ -883,7 +885,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
             return new Runnable() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ConversationLayout.this.lambda$setShortcutIconAsync$9(icon);
+                    this.f$0.lambda$setShortcutIconAsync$9(icon);
                 }
             };
         }
@@ -903,7 +905,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
             return new Runnable() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda14
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ConversationLayout.this.lambda$setConversationTitleAsync$10(charSequence);
+                    this.f$0.lambda$setConversationTitleAsync$10(charSequence);
                 }
             };
         }
@@ -927,14 +929,14 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
             final MessagingGroup messagingGroup = arrayList.get(i);
             if (!this.mGroups.contains(messagingGroup)) {
                 List<MessagingMessage> messages = messagingGroup.getMessages();
-                boolean isShown = messagingGroup.isShown();
+                boolean zIsShown = messagingGroup.isShown();
                 this.mMessagingLinearLayout.removeView(messagingGroup);
-                if (isShown && !MessagingLinearLayout.isGone(messagingGroup)) {
+                if (zIsShown && !MessagingLinearLayout.isGone(messagingGroup)) {
                     this.mMessagingLinearLayout.addTransientView(messagingGroup, 0);
                     messagingGroup.removeGroupAnimated(new Runnable() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda13
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ConversationLayout.this.lambda$removeGroups$11(messagingGroup);
+                            this.f$0.lambda$removeGroups$11(messagingGroup);
                         }
                     });
                 } else {
@@ -954,13 +956,13 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
 
     private void updateTitleAndNamesDisplay() {
         Icon avatarSymbolIfMatching;
-        Map<CharSequence, String> mapUniqueNamesToPrefix = this.mPeopleHelper.mapUniqueNamesToPrefix(this.mGroups);
+        Map<CharSequence, String> mapMapUniqueNamesToPrefix = this.mPeopleHelper.mapUniqueNamesToPrefix(this.mGroups);
         ArrayMap arrayMap = new ArrayMap();
         for (int i = 0; i < this.mGroups.size(); i++) {
             MessagingGroup messagingGroup = this.mGroups.get(i);
             boolean z = messagingGroup.getSender() == this.mUser;
             CharSequence senderName = messagingGroup.getSenderName();
-            if (messagingGroup.needsGeneratedAvatar() && !TextUtils.isEmpty(senderName) && ((!this.mIsOneToOne || this.mAvatarReplacement == null || z) && (avatarSymbolIfMatching = messagingGroup.getAvatarSymbolIfMatching(senderName, mapUniqueNamesToPrefix.get(senderName), this.mLayoutColor)) != null)) {
+            if (messagingGroup.needsGeneratedAvatar() && !TextUtils.isEmpty(senderName) && ((!this.mIsOneToOne || this.mAvatarReplacement == null || z) && (avatarSymbolIfMatching = messagingGroup.getAvatarSymbolIfMatching(senderName, mapMapUniqueNamesToPrefix.get(senderName), this.mLayoutColor)) != null)) {
                 arrayMap.put(senderName, avatarSymbolIfMatching);
             }
         }
@@ -971,12 +973,12 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
                 if (this.mIsOneToOne && this.mAvatarReplacement != null && messagingGroup2.getSender() != this.mUser) {
                     messagingGroup2.setAvatar(this.mAvatarReplacement);
                 } else {
-                    Icon icon = (Icon) arrayMap.get(senderName2);
-                    if (icon == null) {
-                        icon = this.mPeopleHelper.createAvatarSymbol(senderName2, mapUniqueNamesToPrefix.get(senderName2), this.mLayoutColor);
-                        arrayMap.put(senderName2, icon);
+                    Icon iconCreateAvatarSymbol = (Icon) arrayMap.get(senderName2);
+                    if (iconCreateAvatarSymbol == null) {
+                        iconCreateAvatarSymbol = this.mPeopleHelper.createAvatarSymbol(senderName2, mapMapUniqueNamesToPrefix.get(senderName2), this.mLayoutColor);
+                        arrayMap.put(senderName2, iconCreateAvatarSymbol);
                     }
-                    messagingGroup2.setCreatedAvatar(icon, senderName2, mapUniqueNamesToPrefix.get(senderName2), this.mLayoutColor);
+                    messagingGroup2.setCreatedAvatar(iconCreateAvatarSymbol, senderName2, mapMapUniqueNamesToPrefix.get(senderName2), this.mLayoutColor);
                 }
             }
         }
@@ -988,7 +990,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
             return new Runnable() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ConversationLayout.this.lambda$setLayoutColorAsync$12(i);
+                    this.f$0.lambda$setLayoutColorAsync$12(i);
                 }
             };
         }
@@ -1008,7 +1010,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
             return new Runnable() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ConversationLayout.this.lambda$setIsOneToOneAsync$13(z);
+                    this.f$0.lambda$setIsOneToOneAsync$13(z);
                 }
             };
         }
@@ -1046,64 +1048,62 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
     private void setUser(Person person) {
         this.mUser = person;
         if (person.getIcon() == null) {
-            Icon createWithResource = Icon.createWithResource(getContext(), R.drawable.messaging_user);
-            createWithResource.setTint(this.mLayoutColor);
-            this.mUser = this.mUser.toBuilder().setIcon(createWithResource).build();
+            Icon iconCreateWithResource = Icon.createWithResource(getContext(), R.drawable.messaging_user);
+            iconCreateWithResource.setTint(this.mLayoutColor);
+            this.mUser = this.mUser.toBuilder().setIcon(iconCreateWithResource).build();
         }
     }
 
-    private void createGroupViews(List<List<MessagingMessage>> list, List<Person> list2, boolean z) {
+    private void createGroupViews(List<List<MessagingMessage>> list, List<Person> list2, boolean z) throws Resources.NotFoundException {
         CharSequence charSequence;
         this.mGroups.clear();
         int i = 0;
         while (i < list.size()) {
             List<MessagingMessage> list3 = list.get(i);
             CharSequence charSequence2 = null;
-            MessagingGroup messagingGroup = null;
+            MessagingGroup messagingGroupCreateGroup = null;
             for (int size = list3.size() - 1; size >= 0; size--) {
-                messagingGroup = list3.get(size).getGroup();
-                if (messagingGroup != null) {
+                messagingGroupCreateGroup = list3.get(size).getGroup();
+                if (messagingGroupCreateGroup != null) {
                     break;
                 }
             }
-            if (messagingGroup == null) {
-                messagingGroup = MessagingGroup.createGroup(this.mMessagingLinearLayout);
+            if (messagingGroupCreateGroup == null) {
+                messagingGroupCreateGroup = MessagingGroup.createGroup(this.mMessagingLinearLayout);
                 if (this.mAddedQueue.size() < 10) {
-                    this.mAddedQueue.add(messagingGroup);
+                    this.mAddedQueue.add(messagingGroupCreateGroup);
                 } else {
                     this.mAddedQueue.remove();
-                    this.mAddedQueue.add(messagingGroup);
+                    this.mAddedQueue.add(messagingGroupCreateGroup);
                 }
-            } else if (messagingGroup.getParent() != this.mMessagingLinearLayout) {
-                throw new IllegalStateException("group parent was " + messagingGroup.getParent() + " but expected " + this.mMessagingLinearLayout);
+            } else if (messagingGroupCreateGroup.getParent() != this.mMessagingLinearLayout) {
+                throw new IllegalStateException("group parent was " + messagingGroupCreateGroup.getParent() + " but expected " + this.mMessagingLinearLayout);
             }
-            messagingGroup.setImageDisplayLocation(this.mIsCollapsed ? 2 : 0);
-            messagingGroup.setIsInConversation(true);
-            messagingGroup.setLayoutColor(this.mLayoutColor);
-            messagingGroup.setTextColors(this.mSenderTextColor, this.mMessageTextColor);
+            messagingGroupCreateGroup.setImageDisplayLocation(this.mIsCollapsed ? 2 : 0);
+            messagingGroupCreateGroup.setIsInConversation(true);
+            messagingGroupCreateGroup.setLayoutColor(this.mLayoutColor);
+            messagingGroupCreateGroup.setTextColors(this.mSenderTextColor, this.mMessageTextColor);
             Person person = list2.get(i);
             if (person != this.mUser && (charSequence = this.mNameReplacement) != null) {
                 charSequence2 = charSequence;
             }
-            messagingGroup.setShowingAvatar((this.mIsOneToOne || this.mIsCollapsed) ? false : true);
-            messagingGroup.setSingleLine(false);
-            messagingGroup.setSender(person, charSequence2);
-            messagingGroup.setSending(i == list.size() - 1 && z);
-            this.mGroups.add(messagingGroup);
-            if (this.mMessagingLinearLayout.indexOfChild(messagingGroup) != i) {
-                this.mMessagingLinearLayout.removeView(messagingGroup);
-                this.mMessagingLinearLayout.addView(messagingGroup, i);
+            messagingGroupCreateGroup.setShowingAvatar((this.mIsOneToOne || this.mIsCollapsed) ? false : true);
+            messagingGroupCreateGroup.setSingleLine(false);
+            messagingGroupCreateGroup.setSender(person, charSequence2);
+            messagingGroupCreateGroup.setSending(i == list.size() - 1 && z);
+            this.mGroups.add(messagingGroupCreateGroup);
+            if (this.mMessagingLinearLayout.indexOfChild(messagingGroupCreateGroup) != i) {
+                this.mMessagingLinearLayout.removeView(messagingGroupCreateGroup);
+                this.mMessagingLinearLayout.addView(messagingGroupCreateGroup, i);
             }
-            messagingGroup.setMessages(list3);
+            messagingGroupCreateGroup.setMessages(list3);
             i++;
         }
         if (android.widget.flags.Flags.dropNonExistingMessages()) {
             this.mAddedGroups.removeIf(new Predicate() { // from class: com.android.internal.widget.ConversationLayout$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean lambda$createGroupViews$14;
-                    lambda$createGroupViews$14 = ConversationLayout.this.lambda$createGroupViews$14((MessagingGroup) obj);
-                    return lambda$createGroupViews$14;
+                    return this.f$0.lambda$createGroupViews$14((MessagingGroup) obj);
                 }
             });
         }
@@ -1145,24 +1145,101 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         return person.getKey() == null ? person.getName() : person.getKey();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0068 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0074 A[ADDED_TO_REGION] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private com.android.internal.widget.ConversationHeaderData loadConversationHeaderData(boolean r19, java.lang.CharSequence r20, android.graphics.drawable.Icon r21, android.graphics.drawable.Icon r22, java.util.List<com.android.internal.widget.MessagingMessage> r23, android.app.Person r24, java.util.List<java.util.List<com.android.internal.widget.MessagingMessage>> r25, int r26) {
-        /*
-            Method dump skipped, instructions count: 376
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.ConversationLayout.loadConversationHeaderData(boolean, java.lang.CharSequence, android.graphics.drawable.Icon, android.graphics.drawable.Icon, java.util.List, android.app.Person, java.util.List, int):com.android.internal.widget.ConversationHeaderData");
+    private ConversationHeaderData loadConversationHeaderData(boolean z, CharSequence charSequence, Icon icon, Icon icon2, List<MessagingMessage> list, Person person, List<List<MessagingMessage>> list2, int i) {
+        CharSequence string;
+        Icon icon3;
+        Icon iconCreateAvatarSymbol;
+        CharSequence key = getKey(person);
+        if (z) {
+            for (int size = list.size() - 1; size >= 0; size--) {
+                Person senderPerson = list.get(size).getMessage().getSenderPerson();
+                CharSequence key2 = getKey(senderPerson);
+                if ((senderPerson != null && key2 != key) || size == 0) {
+                    if (charSequence != null && !charSequence.isEmpty()) {
+                        string = charSequence;
+                    } else if (senderPerson == null) {
+                        string = "";
+                    } else {
+                        string = senderPerson.getName();
+                    }
+                    if (icon != null || senderPerson == null) {
+                        icon3 = icon;
+                    } else {
+                        icon3 = senderPerson.getIcon();
+                        if (senderPerson.getIcon() == null) {
+                            icon3 = this.mPeopleHelper.createAvatarSymbol(string, "", i);
+                        }
+                    }
+                }
+            }
+            string = charSequence;
+            icon3 = icon;
+        } else {
+            string = charSequence;
+            icon3 = icon;
+        }
+        if (Flags.cleanUpSpansAndNewLines() && string != null) {
+            string = string.toString();
+        }
+        if (icon3 == null) {
+            icon3 = icon2;
+        }
+        if (z || icon3 != null) {
+            return new ConversationHeaderData(string, new ConversationAvatarData.OneToOneConversationAvatarData(resolveAvatarImageForOneToOne(icon3)));
+        }
+        ArrayList arrayList = new ArrayList();
+        for (int i2 = 0; i2 < list2.size(); i2++) {
+            ArrayList arrayList2 = new ArrayList();
+            for (int i3 = 0; i3 < list2.get(i2).size(); i3++) {
+                arrayList2.add(list2.get(i2).get(i3).getMessage());
+            }
+            arrayList.add(arrayList2);
+        }
+        PeopleHelper.NameToPrefixMap nameToPrefixMapMapUniqueNamesToPrefixWithGroupList = this.mPeopleHelper.mapUniqueNamesToPrefixWithGroupList(arrayList);
+        int size2 = list2.size() - 1;
+        Icon iconCreateAvatarSymbol2 = null;
+        CharSequence charSequence2 = null;
+        Icon iconCreateAvatarSymbol3 = null;
+        while (true) {
+            if (size2 < 0) {
+                break;
+            }
+            Notification.MessagingStyle.Message message = list2.get(size2).get(0).getMessage();
+            Person senderPerson2 = message.getSenderPerson() != null ? message.getSenderPerson() : person;
+            CharSequence key3 = getKey(senderPerson2);
+            boolean z2 = key3 != key;
+            boolean z3 = key3 != charSequence2;
+            if ((z2 && z3) || (size2 == 0 && charSequence2 == null)) {
+                if (iconCreateAvatarSymbol3 == null) {
+                    if (senderPerson2.getIcon() != null) {
+                        iconCreateAvatarSymbol = senderPerson2.getIcon();
+                    } else {
+                        String name = senderPerson2.getName() != null ? senderPerson2.getName() : "";
+                        iconCreateAvatarSymbol = this.mPeopleHelper.createAvatarSymbol(name, nameToPrefixMapMapUniqueNamesToPrefixWithGroupList.getPrefix(name), i);
+                    }
+                    iconCreateAvatarSymbol3 = iconCreateAvatarSymbol;
+                    charSequence2 = key3;
+                } else if (senderPerson2.getIcon() != null) {
+                    iconCreateAvatarSymbol2 = senderPerson2.getIcon();
+                } else {
+                    String name2 = senderPerson2.getName() != null ? senderPerson2.getName() : "";
+                    iconCreateAvatarSymbol2 = this.mPeopleHelper.createAvatarSymbol(name2, nameToPrefixMapMapUniqueNamesToPrefixWithGroupList.getPrefix(name2), i);
+                }
+            }
+            size2--;
+        }
+        if (iconCreateAvatarSymbol3 == null) {
+            iconCreateAvatarSymbol3 = this.mPeopleHelper.createAvatarSymbol("", "", i);
+        }
+        if (iconCreateAvatarSymbol2 == null) {
+            iconCreateAvatarSymbol2 = this.mPeopleHelper.createAvatarSymbol("", "", i);
+        }
+        return new ConversationHeaderData(string, new ConversationAvatarData.GroupConversationAvatarData(resolveAvatarImageForFacePile(iconCreateAvatarSymbol3), resolveAvatarImageForFacePile(iconCreateAvatarSymbol2)));
     }
 
     private Drawable resolveAvatarImageForOneToOne(Icon icon) {
-        Drawable tryLoadingSizeRestrictedIconForOneToOne = tryLoadingSizeRestrictedIconForOneToOne(icon);
-        return tryLoadingSizeRestrictedIconForOneToOne != null ? tryLoadingSizeRestrictedIconForOneToOne : loadDrawableFromIcon(icon);
+        Drawable drawableTryLoadingSizeRestrictedIconForOneToOne = tryLoadingSizeRestrictedIconForOneToOne(icon);
+        return drawableTryLoadingSizeRestrictedIconForOneToOne != null ? drawableTryLoadingSizeRestrictedIconForOneToOne : loadDrawableFromIcon(icon);
     }
 
     private Drawable tryLoadingSizeRestrictedIconForOneToOne(Icon icon) {
@@ -1189,12 +1266,12 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         ArrayList arrayList = new ArrayList();
         for (int i = 0; i < list.size(); i++) {
             Notification.MessagingStyle.Message message = list.get(i);
-            MessagingMessage findAndRemoveMatchingMessage = findAndRemoveMatchingMessage(message);
-            if (findAndRemoveMatchingMessage == null) {
-                findAndRemoveMatchingMessage = MessagingMessage.createMessage(this, message, this.mImageResolver, z2);
+            MessagingMessage messagingMessageFindAndRemoveMatchingMessage = findAndRemoveMatchingMessage(message);
+            if (messagingMessageFindAndRemoveMatchingMessage == null) {
+                messagingMessageFindAndRemoveMatchingMessage = MessagingMessage.createMessage(this, message, this.mImageResolver, z2);
             }
-            findAndRemoveMatchingMessage.setIsHistoric(z);
-            arrayList.add(findAndRemoveMatchingMessage);
+            messagingMessageFindAndRemoveMatchingMessage.setIsHistoric(z);
+            arrayList.add(messagingMessageFindAndRemoveMatchingMessage);
         }
         return arrayList;
     }
@@ -1269,9 +1346,9 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
                     measuredHeight = Math.max(measuredHeight, childAt.getMeasuredHeight() + layoutParams.topMargin + layoutParams.bottomMargin);
                 }
             }
-            int max = Math.max(measuredHeight, getSuggestedMinimumHeight());
-            if (max != getMeasuredHeight()) {
-                setMeasuredDimension(getMeasuredWidth(), max);
+            int iMax = Math.max(measuredHeight, getSuggestedMinimumHeight());
+            if (iMax != getMeasuredHeight()) {
+                setMeasuredDimension(getMeasuredWidth(), iMax);
             }
         }
     }
@@ -1298,13 +1375,13 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         }
         this.mTouchDelegate.clear();
         if (this.mFeedbackIcon.getVisibility() == 0) {
-            float max = Math.max(this.mMinTouchSize, this.mFeedbackIcon.getWidth());
-            float max2 = Math.max(this.mMinTouchSize, this.mFeedbackIcon.getHeight());
+            float fMax = Math.max(this.mMinTouchSize, this.mFeedbackIcon.getWidth());
+            float fMax2 = Math.max(this.mMinTouchSize, this.mFeedbackIcon.getHeight());
             Rect rect = new Rect();
-            rect.left = (int) (((this.mFeedbackIcon.getLeft() + this.mFeedbackIcon.getRight()) / 2.0f) - (max / 2.0f));
-            rect.top = (int) (((this.mFeedbackIcon.getTop() + this.mFeedbackIcon.getBottom()) / 2.0f) - (max2 / 2.0f));
-            rect.bottom = (int) (rect.top + max2);
-            rect.right = (int) (rect.left + max);
+            rect.left = (int) (((this.mFeedbackIcon.getLeft() + this.mFeedbackIcon.getRight()) / 2.0f) - (fMax / 2.0f));
+            rect.top = (int) (((this.mFeedbackIcon.getTop() + this.mFeedbackIcon.getBottom()) / 2.0f) - (fMax2 / 2.0f));
+            rect.bottom = (int) (rect.top + fMax2);
+            rect.right = (int) (rect.left + fMax);
             getRelativeTouchRect(rect, this.mFeedbackIcon);
             this.mTouchDelegate.add(new TouchDelegate(rect, this.mFeedbackIcon));
         }
@@ -1331,7 +1408,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         return this.mGroups;
     }
 
-    private void updateExpandButton() {
+    private void updateExpandButton() throws Resources.NotFoundException {
         NotificationActionListLayout notificationActionListLayout;
         if (Flags.notificationsRedesignTemplates()) {
             return;
@@ -1486,7 +1563,7 @@ public class ConversationLayout extends FrameLayout implements ImageMessageConsu
         }
     }
 
-    private static int getFontScaledMarginHeight(Context context, int i) {
+    private static int getFontScaledMarginHeight(Context context, int i) throws Resources.NotFoundException {
         return (int) (context.getResources().getDimensionPixelSize(i) * ((((context.getResources().getDisplayMetrics().scaledDensity / context.getResources().getDisplayMetrics().density) - 1.0f) / 2.0f) + 1.0f));
     }
 }

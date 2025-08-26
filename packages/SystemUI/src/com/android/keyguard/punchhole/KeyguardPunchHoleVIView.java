@@ -22,7 +22,6 @@ import com.android.systemui.R;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.samsung.systemui.splugins.lockstar.PluginLockStar;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardPunchHoleVIView extends FrameLayout {
     public String TAG;
@@ -300,7 +299,7 @@ public class KeyguardPunchHoleVIView extends FrameLayout {
         this.updateVILocationRunnable = new Runnable() { // from class: com.android.keyguard.punchhole.KeyguardPunchHoleVIView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardPunchHoleVIView.this.updateVILocation();
+                this.f$0.updateVILocation();
             }
         };
         this.mViViewLocation = new Rect();

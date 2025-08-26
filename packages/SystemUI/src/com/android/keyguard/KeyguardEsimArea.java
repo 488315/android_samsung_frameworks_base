@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 class KeyguardEsimArea extends Button implements View.OnClickListener {
     public final EuiccManager mEuiccManager;
@@ -81,9 +80,9 @@ class KeyguardEsimArea extends Button implements View.OnClickListener {
                     return;
                 }
                 Log.e("KeyguardEsimArea", "Error disabling esim, result code = " + resultCode);
-                AlertDialog create = new AlertDialog.Builder(((Button) KeyguardEsimArea.this).mContext).setMessage(com.android.systemui.R.string.error_disable_esim_msg).setTitle(com.android.systemui.R.string.error_disable_esim_title).setCancelable(false).setPositiveButton(com.android.systemui.R.string.ok, (DialogInterface.OnClickListener) null).create();
-                create.getWindow().setType(2009);
-                create.show();
+                AlertDialog alertDialogCreate = new AlertDialog.Builder(((Button) KeyguardEsimArea.this).mContext).setMessage(com.android.systemui.R.string.error_disable_esim_msg).setTitle(com.android.systemui.R.string.error_disable_esim_title).setCancelable(false).setPositiveButton(com.android.systemui.R.string.ok, (DialogInterface.OnClickListener) null).create();
+                alertDialogCreate.getWindow().setType(2009);
+                alertDialogCreate.show();
             }
         };
         this.mEuiccManager = (EuiccManager) context.getSystemService("euicc");

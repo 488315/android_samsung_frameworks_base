@@ -51,9 +51,9 @@ public interface IGetAvailableMemoryInBytesCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGetAvailableMemoryInBytesCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGetAvailableMemoryInBytesCallback)) {
-                return (IGetAvailableMemoryInBytesCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGetAvailableMemoryInBytesCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGetAvailableMemoryInBytesCallback)) {
+                return (IGetAvailableMemoryInBytesCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,13 +83,13 @@ public interface IGetAvailableMemoryInBytesCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                onSuccess(readLong);
+                onSuccess(j);
             } else if (i == 2) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onUnsupportedOperationException(readString);
+                onUnsupportedOperationException(string);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -114,25 +114,25 @@ public interface IGetAvailableMemoryInBytesCallback extends IInterface {
 
             @Override // android.service.euicc.IGetAvailableMemoryInBytesCallback
             public void onSuccess(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetAvailableMemoryInBytesCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetAvailableMemoryInBytesCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IGetAvailableMemoryInBytesCallback
             public void onUnsupportedOperationException(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetAvailableMemoryInBytesCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetAvailableMemoryInBytesCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

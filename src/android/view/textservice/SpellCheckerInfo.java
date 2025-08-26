@@ -48,6 +48,26 @@ public final class SpellCheckerInfo implements Parcelable {
         return 0;
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:24:0x00b6, code lost:
+    
+        if (r3 == null) goto L26;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:25:0x00b8, code lost:
+    
+        r3.close();
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:26:0x00bb, code lost:
+    
+        r19.mLabel = r9;
+        r19.mSettingsActivityName = r10;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:27:0x00bf, code lost:
+    
+        return;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public SpellCheckerInfo(Context context, ResolveInfo resolveInfo) throws XmlPullParserException, IOException {
         int next;
         int i;
@@ -59,47 +79,43 @@ public final class SpellCheckerInfo implements Parcelable {
         XmlResourceParser xmlResourceParser = null;
         try {
             try {
-                XmlResourceParser loadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, SpellCheckerSession.SERVICE_META_DATA);
-                if (loadXmlMetaData == null) {
+                XmlResourceParser xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, SpellCheckerSession.SERVICE_META_DATA);
+                if (xmlResourceParserLoadXmlMetaData == null) {
                     throw new XmlPullParserException("No android.view.textservice.scs meta-data");
                 }
                 Resources resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
-                AttributeSet asAttributeSet = Xml.asAttributeSet(loadXmlMetaData);
+                AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
                 do {
-                    next = loadXmlMetaData.next();
+                    next = xmlResourceParserLoadXmlMetaData.next();
                     i = 1;
                     if (next == 1) {
                         break;
                     }
                 } while (next != 2);
-                if (!"spell-checker".equals(loadXmlMetaData.getName())) {
+                if (!"spell-checker".equals(xmlResourceParserLoadXmlMetaData.getName())) {
                     throw new XmlPullParserException("Meta-data does not start with spell-checker tag");
                 }
-                TypedArray obtainAttributes = resourcesForApplication.obtainAttributes(asAttributeSet, R.styleable.SpellChecker);
-                int resourceId = obtainAttributes.getResourceId(0, 0);
-                String string = obtainAttributes.getString(1);
-                obtainAttributes.recycle();
-                int depth = loadXmlMetaData.getDepth();
+                TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.SpellChecker);
+                int resourceId = typedArrayObtainAttributes.getResourceId(0, 0);
+                String string = typedArrayObtainAttributes.getString(1);
+                typedArrayObtainAttributes.recycle();
+                int depth = xmlResourceParserLoadXmlMetaData.getDepth();
                 while (true) {
-                    int next2 = loadXmlMetaData.next();
-                    if ((next2 != 3 || loadXmlMetaData.getDepth() > depth) && next2 != i) {
-                        if (next2 == 2) {
-                            if (!"subtype".equals(loadXmlMetaData.getName())) {
-                                throw new XmlPullParserException("Meta-data in spell-checker does not start with subtype tag");
-                            }
-                            TypedArray obtainAttributes2 = resourcesForApplication.obtainAttributes(asAttributeSet, R.styleable.SpellChecker_Subtype);
-                            SpellCheckerSubtype spellCheckerSubtype = new SpellCheckerSubtype(obtainAttributes2.getResourceId(0, 0), obtainAttributes2.getString(i), obtainAttributes2.getString(4), obtainAttributes2.getString(2), obtainAttributes2.getInt(3, 0));
-                            obtainAttributes2.recycle();
-                            this.mSubtypes.add(spellCheckerSubtype);
-                            i = 1;
+                    int next2 = xmlResourceParserLoadXmlMetaData.next();
+                    if ((next2 == 3 && xmlResourceParserLoadXmlMetaData.getDepth() <= depth) || next2 == i) {
+                        break;
+                    }
+                    if (next2 == 2) {
+                        if (!"subtype".equals(xmlResourceParserLoadXmlMetaData.getName())) {
+                            throw new XmlPullParserException("Meta-data in spell-checker does not start with subtype tag");
                         }
+                        TypedArray typedArrayObtainAttributes2 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.SpellChecker_Subtype);
+                        SpellCheckerSubtype spellCheckerSubtype = new SpellCheckerSubtype(typedArrayObtainAttributes2.getResourceId(0, 0), typedArrayObtainAttributes2.getString(i), typedArrayObtainAttributes2.getString(4), typedArrayObtainAttributes2.getString(2), typedArrayObtainAttributes2.getInt(3, 0));
+                        typedArrayObtainAttributes2.recycle();
+                        this.mSubtypes.add(spellCheckerSubtype);
+                        i = 1;
                     }
                 }
-                if (loadXmlMetaData != null) {
-                    loadXmlMetaData.close();
-                }
-                this.mLabel = resourceId;
-                this.mSettingsActivityName = string;
             } catch (Exception e) {
                 Slog.e(TAG, "Caught exception: " + e);
                 throw new XmlPullParserException("Unable to create context for: " + serviceInfo.packageName);

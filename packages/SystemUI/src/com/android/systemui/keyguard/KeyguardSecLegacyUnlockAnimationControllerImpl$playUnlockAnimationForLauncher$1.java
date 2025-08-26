@@ -9,7 +9,6 @@ import com.android.systemui.shared.system.smartspace.ILauncherUnlockAnimationCon
 import com.android.systemui.statusbar.phone.CentralSurfaces;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardSecLegacyUnlockAnimationControllerImpl$playUnlockAnimationForLauncher$1 implements Runnable {
     public final /* synthetic */ KeyguardSecLegacyUnlockAnimationControllerImpl this$0;
@@ -48,6 +47,8 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl$playUnlockAnim
         KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl3 = this.this$0;
         keyguardSecLegacyUnlockAnimationControllerImpl3.curTransaction = null;
         keyguardSecLegacyUnlockAnimationControllerImpl3.curLeash = null;
+        keyguardSecLegacyUnlockAnimationControllerImpl3.openingWallpaperLeash = null;
+        keyguardSecLegacyUnlockAnimationControllerImpl3.closingWallpaperLeash = null;
         try {
             IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback = keyguardSecLegacyUnlockAnimationControllerImpl3.surfaceBehindRemoteAnimationFinishedCallback;
             if (iRemoteAnimationFinishedCallback != null) {

@@ -69,7 +69,7 @@ public final class PixelCopy {
             handler.post(new Runnable() { // from class: android.view.PixelCopy$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PixelCopy.OnPixelCopyFinishedListener.this.onPixelCopyFinished(i);
+                    onPixelCopyFinishedListener.onPixelCopyFinished(i);
                 }
             });
         }
@@ -200,6 +200,7 @@ public final class PixelCopy {
                 return new Builder(new Request(surface, rect));
             }
 
+            /* JADX WARN: Multi-variable type inference failed */
             public static Builder ofSurface(Surface surface) {
                 if (surface == null || !surface.isValid()) {
                     throw new IllegalArgumentException("Source must not be null & must be valid");
@@ -285,7 +286,7 @@ public final class PixelCopy {
                 executor.execute(new Runnable() { // from class: android.view.PixelCopy$Request$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PixelCopy.Request.AnonymousClass1.this.lambda$onCopyFinished$0(consumer, i);
+                        this.f$0.lambda$onCopyFinished$0(consumer, i);
                     }
                 });
             }

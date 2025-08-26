@@ -14,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class CredentialViewModel$header$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -30,10 +29,10 @@ final class CredentialViewModel$header$1 extends SuspendLambda implements Functi
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
         CredentialViewModel$header$1 credentialViewModel$header$1 = new CredentialViewModel$header$1(this.this$0, (Continuation) obj3);
         credentialViewModel$header$1.L$0 = (BiometricPromptRequest.Credential) obj;
-        credentialViewModel$header$1.Z$0 = booleanValue;
+        credentialViewModel$header$1.Z$0 = zBooleanValue;
         return credentialViewModel$header$1.invokeSuspend(Unit.INSTANCE);
     }
 

@@ -29,7 +29,6 @@ import com.android.systemui.util.NotificationSAUtil;
 import com.android.systemui.util.SystemUIAnalytics;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationSwipeHelper extends SwipeHelper implements NotificationSwipeActionHelper {
     protected static final long COVER_MENU_DELAY = 4000;
@@ -44,14 +43,13 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
     public boolean mPulsing;
     public View mTranslatingParentView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final DumpManager mDumpManager;
         public final FalsingManager mFalsingManager;
         public final FeatureFlags mFeatureFlags;
         public NotificationCallback mNotificationCallback;
         public final NotificationRoundnessManager mNotificationRoundnessManager;
-        public NotificationStackScrollLayoutController.AnonymousClass10 mOnMenuEventListener;
+        public NotificationStackScrollLayoutController.AnonymousClass11 mOnMenuEventListener;
         public final Resources mResources;
         public final ViewConfiguration mViewConfiguration;
 
@@ -65,7 +63,6 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface NotificationCallback extends SwipeHelper.Callback {
     }
 
@@ -78,7 +75,7 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
         this.mFalsingCheck = new Runnable() { // from class: com.android.systemui.statusbar.notification.stack.NotificationSwipeHelper$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                NotificationSwipeHelper notificationSwipeHelper = NotificationSwipeHelper.this;
+                NotificationSwipeHelper notificationSwipeHelper = this.f$0;
                 SourceType$Companion$from$1 sourceType$Companion$from$1 = NotificationSwipeHelper.SWIPE_DISMISS;
                 notificationSwipeHelper.resetExposedMenuView$1(true, true);
             }
@@ -116,10 +113,10 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
     @Override // com.android.systemui.SwipeHelper
     public final void dismissChild(View view, float f, boolean z) {
         superDismissChild(view, f, z);
-        NotificationStackScrollLayoutController.AnonymousClass11 anonymousClass11 = (NotificationStackScrollLayoutController.AnonymousClass11) this.mCallback;
+        NotificationStackScrollLayoutController.AnonymousClass12 anonymousClass12 = (NotificationStackScrollLayoutController.AnonymousClass12) this.mCallback;
         NotificationStackScrollLayout notificationStackScrollLayout = NotificationStackScrollLayoutController.this.mView;
         if (notificationStackScrollLayout.mIsExpanded && notificationStackScrollLayout.mAmbientState.mDozeAmount == 0.0f) {
-            anonymousClass11.handleChildViewDismissed(view);
+            anonymousClass12.handleChildViewDismissed(view);
         } else {
             Log.d("NotificationSwipeHelper", "dismissChild, but not shouldDismissQuickly");
         }
@@ -187,12 +184,12 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
             }
         }
         if (notificationMenuRowPlugin.isSnappedAndOnSameSide()) {
-            boolean isDismissGesture = isDismissGesture(motionEvent);
-            if (notificationMenuRowPlugin.isWithinSnapMenuThreshold() && !isDismissGesture) {
+            boolean zIsDismissGesture = isDismissGesture(motionEvent);
+            if (notificationMenuRowPlugin.isWithinSnapMenuThreshold() && !zIsDismissGesture) {
                 notificationMenuRowPlugin.onSnapOpen();
                 snapChild(view, notificationMenuRowPlugin.getMenuSnapTarget(), f);
                 return;
-            } else if (!isDismissGesture || notificationMenuRowPlugin.shouldSnapBack()) {
+            } else if (!zIsDismissGesture || notificationMenuRowPlugin.shouldSnapBack()) {
                 snapClosed(view, f);
                 notificationMenuRowPlugin.onSnapClosed();
                 return;
@@ -203,13 +200,13 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
             }
         }
         Log.d("NotificationSwipeHelper", "handleSwipeFromClosedState start");
-        boolean isDismissGesture2 = isDismissGesture(motionEvent);
-        boolean isTowardsMenu = notificationMenuRowPlugin.isTowardsMenu(f);
+        boolean zIsDismissGesture2 = isDismissGesture(motionEvent);
+        boolean zIsTowardsMenu = notificationMenuRowPlugin.isTowardsMenu(f);
         boolean z = false;
         boolean z2 = getEscapeVelocity() <= Math.abs(f);
         boolean z3 = !notificationMenuRowPlugin.canBeDismissed() && ((double) (motionEvent.getEventTime() - motionEvent.getDownTime())) >= 200.0d;
-        boolean z4 = isTowardsMenu && !isDismissGesture2;
-        boolean z5 = (!swipedFarEnough() && notificationMenuRowPlugin.isSwipedEnoughToShowMenu() && (!z2 || z3)) || ((z2 && !isTowardsMenu && !isDismissGesture2) && (notificationMenuRowPlugin.shouldShowGutsOnSnapOpen() || (this.mIsExpanded && !this.mPulsing)));
+        boolean z4 = zIsTowardsMenu && !zIsDismissGesture2;
+        boolean z5 = (!swipedFarEnough() && notificationMenuRowPlugin.isSwipedEnoughToShowMenu() && (!z2 || z3)) || ((z2 && !zIsTowardsMenu && !zIsDismissGesture2) && (notificationMenuRowPlugin.shouldShowGutsOnSnapOpen() || (this.mIsExpanded && !this.mPulsing)));
         int menuSnapTarget = notificationMenuRowPlugin.getMenuSnapTarget();
         if (z5 && !isFalseGesture()) {
             z = true;
@@ -217,7 +214,7 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
         if ((z4 || z) && menuSnapTarget != 0) {
             snapChild(view, menuSnapTarget, f);
             notificationMenuRowPlugin.onSnapOpen();
-        } else if (!isDismissGesture2 || isTowardsMenu) {
+        } else if (!zIsDismissGesture2 || zIsTowardsMenu) {
             snapClosed(view, f);
             notificationMenuRowPlugin.onSnapClosed();
         } else {
@@ -247,11 +244,11 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
     public void initializeRow(SwipeableView swipeableView) {
         ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) swipeableView;
         if (expandableNotificationRow.hasFinishedInitialization()) {
-            NotificationMenuRowPlugin createMenu = expandableNotificationRow.createMenu();
-            setCurrentMenuRow(createMenu);
-            if (createMenu != null) {
-                createMenu.setMenuClickListener(this.mMenuListener);
-                createMenu.onTouchStart();
+            NotificationMenuRowPlugin notificationMenuRowPluginCreateMenu = expandableNotificationRow.createMenu();
+            setCurrentMenuRow(notificationMenuRowPluginCreateMenu);
+            if (notificationMenuRowPluginCreateMenu != null) {
+                notificationMenuRowPluginCreateMenu.setMenuClickListener(this.mMenuListener);
+                notificationMenuRowPluginCreateMenu.onTouchStart();
             }
         }
     }
@@ -291,12 +288,12 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
     @Override // com.android.systemui.SwipeHelper, com.android.systemui.Gefingerpoken
     public final boolean onInterceptTouchEvent(MotionEvent motionEvent) {
         boolean z = this.mIsSwiping;
-        boolean onInterceptTouchEvent = super.onInterceptTouchEvent(motionEvent);
+        boolean zOnInterceptTouchEvent = super.onInterceptTouchEvent(motionEvent);
         ExpandableView expandableView = this.mIsSwiping ? this.mTouchedView : null;
         if (!z && expandableView != null) {
             InteractionJankMonitor.getInstance().begin(expandableView, 4);
         }
-        return onInterceptTouchEvent;
+        return zOnInterceptTouchEvent;
     }
 
     @Override // com.android.systemui.SwipeHelper
@@ -361,17 +358,17 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.systemui.SwipeHelper
     public final void setTranslation(float f, View view) {
-        boolean z;
+        boolean magneticRowTranslation;
         if (view instanceof SwipeableView) {
             SwipeableView swipeableView = (SwipeableView) view;
-            NotificationStackScrollLayoutController.AnonymousClass11 anonymousClass11 = (NotificationStackScrollLayoutController.AnonymousClass11) this.mCallback;
-            anonymousClass11.getClass();
+            NotificationStackScrollLayoutController.AnonymousClass12 anonymousClass12 = (NotificationStackScrollLayoutController.AnonymousClass12) this.mCallback;
+            anonymousClass12.getClass();
             if (swipeableView instanceof ExpandableNotificationRow) {
-                z = NotificationStackScrollLayoutController.this.mMagneticNotificationRowManager.setMagneticRowTranslation((ExpandableNotificationRow) swipeableView, f);
+                magneticRowTranslation = NotificationStackScrollLayoutController.this.mMagneticNotificationRowManager.setMagneticRowTranslation((ExpandableNotificationRow) swipeableView, f);
             } else {
-                z = false;
+                magneticRowTranslation = false;
             }
-            if (z) {
+            if (magneticRowTranslation) {
                 return;
             }
             ((ExpandableNotificationRow) swipeableView).setTranslation(f);
@@ -392,8 +389,8 @@ public class NotificationSwipeHelper extends SwipeHelper implements Notification
             superSnapChild(view, f, f2);
         }
         NotificationCallback notificationCallback = this.mCallback;
-        ((NotificationStackScrollLayoutController.AnonymousClass11) notificationCallback).onMagneticInteractionEnd(f2, view);
-        ((NotificationStackScrollLayoutController.AnonymousClass11) notificationCallback).onDragCancelled(view);
+        ((NotificationStackScrollLayoutController.AnonymousClass12) notificationCallback).onMagneticInteractionEnd(f2, view);
+        ((NotificationStackScrollLayoutController.AnonymousClass12) notificationCallback).onDragCancelled(view);
         if (f == 0.0f) {
             handleMenuCoveredOrDismissed();
         }

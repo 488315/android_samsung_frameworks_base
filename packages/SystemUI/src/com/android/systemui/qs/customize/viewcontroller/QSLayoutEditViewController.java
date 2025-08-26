@@ -2,6 +2,7 @@ package com.android.systemui.qs.customize.viewcontroller;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -22,8 +23,8 @@ import com.android.systemui.Dependency;
 import com.android.systemui.QpRune;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSPanelHost;
-import com.android.systemui.qs.SecQSDetailController$$ExternalSyntheticOutline0;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
+import com.android.systemui.qs.SecTileChunkLayout;
 import com.android.systemui.qs.bar.BarItemImpl;
 import com.android.systemui.qs.bar.BarType;
 import com.android.systemui.qs.bar.ColoredBGHelper;
@@ -43,6 +44,7 @@ import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.ValueAnimatorUtil;
+import com.android.systemui.util.ViewController;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -54,8 +56,8 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
+import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSLayoutEditViewController extends ViewControllerBase {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -66,6 +68,7 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
     public int collapsedBarRow;
     public final QSLayoutEditViewController$collapsedBarRowConsumer$1 collapsedBarRowConsumer;
     public final CustomActionManager customActionManager;
+    public int cutoutBottomMargin;
     public int cutoutTopMargin;
     public final SecQSSettingEditResources editResources;
     public final View.OnClickListener fullTileCustomizerClickListener;
@@ -78,10 +81,10 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
     public final View.OnClickListener settingClickListener;
     public final QSLayoutEditViewController$simpleCallback$1 simpleCallback;
     public final int sumOfItems;
+    public final int tileChunkLayoutBarColumns;
     public final QSLayoutEditViewController$tileEditClickListener$1 tileEditClickListener;
     public FullChunkResizeableFrame tileLayoutContainer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -91,7 +94,6 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InfiniteInflateLayoutManager extends LinearLayoutManager {
         public final int MAX_INT;
 
@@ -110,18 +112,24 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
         new Companion(null);
     }
 
+    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     /* JADX WARN: Type inference failed for: r5v3, types: [com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$collapsedBarRowConsumer$1] */
     /* JADX WARN: Type inference failed for: r5v4, types: [com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$tileEditClickListener$1] */
     /* JADX WARN: Type inference failed for: r6v6, types: [com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$simpleCallback$1] */
-    public QSLayoutEditViewController(final Context context, BarOrderInteractor barOrderInteractor, ColoredBGHelper coloredBGHelper, ArrayList<BarItemImpl> arrayList, SecQSSettingEditResources secQSSettingEditResources, View.OnClickListener onClickListener, View.OnClickListener onClickListener2, int i) {
-        super(LayoutInflater.from(context).inflate(R.layout.qs_customize_layout_edit, (ViewGroup) null, false));
+    public QSLayoutEditViewController(final Context context, BarOrderInteractor barOrderInteractor, ColoredBGHelper coloredBGHelper, ArrayList<BarItemImpl> arrayList, SecQSSettingEditResources secQSSettingEditResources, View.OnClickListener onClickListener, View.OnClickListener onClickListener2, int i, int i2) throws Resources.NotFoundException {
+        SecTileChunkLayout secTileChunkLayout;
+        View viewFindViewById;
+        TextView textView;
         int dimensionPixelSize;
+        super(LayoutInflater.from(context).inflate(R.layout.qs_customize_layout_edit, (ViewGroup) null, false));
+        int i3 = 0;
         this.barOrderInteractor = barOrderInteractor;
         this.barItems = arrayList;
         this.editResources = secQSSettingEditResources;
         this.fullTileCustomizerClickListener = onClickListener;
         this.settingClickListener = onClickListener2;
         this.cutoutTopMargin = i;
+        this.cutoutBottomMargin = i2;
         this.recyclerView = (RecyclerView) this.mView.requireViewById(R.id.bar_list);
         this.simpleCallback = new ItemTouchHelper.SimpleCallback() { // from class: com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$simpleCallback$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -130,13 +138,19 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             }
 
             @Override // androidx.recyclerview.widget.ItemTouchHelper.Callback
-            public final int interpolateOutOfBoundsScroll(RecyclerView recyclerView, int i2, int i3, long j) {
-                return i3 > 0 ? 20 : -20;
+            public final int interpolateOutOfBoundsScroll(RecyclerView recyclerView, int i4, int i5, long j) {
+                return i5 > 0 ? 20 : -20;
             }
 
             @Override // androidx.recyclerview.widget.ItemTouchHelper.Callback
-            public final void onChildDrawOver(Canvas canvas, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float f, float f2, int i2, boolean z) {
-                super.onChildDrawOver(canvas, recyclerView, viewHolder, f, f2, i2, z);
+            public final void onChildDraw(Canvas canvas, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float f, float f2, int i4, boolean z) {
+                float width = recyclerView.getWidth() / 2;
+                super.onChildDraw(canvas, recyclerView, viewHolder, RangesKt___RangesKt.coerceIn(f, -width, width), f2, i4, z);
+            }
+
+            @Override // androidx.recyclerview.widget.ItemTouchHelper.Callback
+            public final void onChildDrawOver(Canvas canvas, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float f, float f2, int i4, boolean z) throws Resources.NotFoundException {
+                super.onChildDrawOver(canvas, recyclerView, viewHolder, f, f2, i4, z);
                 if (f == 0.0f && f2 == 0.0f) {
                     return;
                 }
@@ -153,28 +167,28 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             public final boolean onMove(RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder viewHolder2) {
                 int absoluteAdapterPosition = viewHolder.getAbsoluteAdapterPosition();
                 int absoluteAdapterPosition2 = viewHolder2.getAbsoluteAdapterPosition();
-                QSLayoutEditViewController qSLayoutEditViewController = QSLayoutEditViewController.this;
+                QSLayoutEditViewController qSLayoutEditViewController = this.this$0;
                 if (absoluteAdapterPosition < absoluteAdapterPosition2) {
-                    int i2 = absoluteAdapterPosition;
-                    while (i2 < absoluteAdapterPosition2) {
-                        int i3 = i2 + 1;
-                        Collections.swap(qSLayoutEditViewController.barList, i2, i3);
-                        i2 = i3;
+                    int i4 = absoluteAdapterPosition;
+                    while (i4 < absoluteAdapterPosition2) {
+                        int i5 = i4 + 1;
+                        Collections.swap(qSLayoutEditViewController.barList, i4, i5);
+                        i4 = i5;
                     }
                 } else {
-                    int i4 = absoluteAdapterPosition2 + 1;
-                    if (i4 <= absoluteAdapterPosition) {
-                        int i5 = absoluteAdapterPosition;
+                    int i6 = absoluteAdapterPosition2 + 1;
+                    if (i6 <= absoluteAdapterPosition) {
+                        int i7 = absoluteAdapterPosition;
                         while (true) {
-                            Collections.swap(qSLayoutEditViewController.barList, i5, i5 - 1);
-                            if (i5 == i4) {
+                            Collections.swap(qSLayoutEditViewController.barList, i7, i7 - 1);
+                            if (i7 == i6) {
                                 break;
                             }
-                            i5--;
+                            i7--;
                         }
                     }
                 }
-                int i6 = QSLayoutEditViewController.$r8$clinit;
+                int i8 = QSLayoutEditViewController.$r8$clinit;
                 qSLayoutEditViewController.notifyItemMoved(absoluteAdapterPosition, absoluteAdapterPosition2);
                 Log.d("QSLayoutEditViewController", qSLayoutEditViewController.barList.toString());
                 viewHolder2.itemView.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(41));
@@ -182,12 +196,12 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             }
 
             @Override // androidx.recyclerview.widget.ItemTouchHelper.Callback
-            public final void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int i2) {
+            public final void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int i4) {
                 ValueAnimator valueAnimator;
-                super.onSelectedChanged(viewHolder, i2);
+                super.onSelectedChanged(viewHolder, i4);
                 BarRecyclerAdapter.BorderOutlineViewHolder borderOutlineViewHolder = viewHolder instanceof BarRecyclerAdapter.BorderOutlineViewHolder ? (BarRecyclerAdapter.BorderOutlineViewHolder) viewHolder : null;
                 if (borderOutlineViewHolder != null) {
-                    if ((i2 == 0 || i2 == 2) && (valueAnimator = borderOutlineViewHolder.releaseAnimator) != null) {
+                    if ((i4 == 0 || i4 == 2) && (valueAnimator = borderOutlineViewHolder.releaseAnimator) != null) {
                         ValueAnimatorUtil.INSTANCE.startReleaseScaleAnim(valueAnimator, borderOutlineViewHolder.parentView, 1.0f, borderOutlineViewHolder.downAnimator);
                         Unit unit = Unit.INSTANCE;
                     }
@@ -205,24 +219,24 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
         this.collapsedBarRow = barOrderInteractor.repository.collapsedBarRow;
         this.collapsedBarRowConsumer = new IntConsumer() { // from class: com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$collapsedBarRowConsumer$1
             @Override // java.util.function.IntConsumer
-            public final void accept(int i2) {
-                QSLayoutEditViewController.this.collapsedBarRow = i2;
+            public final void accept(int i4) {
+                this.this$0.collapsedBarRow = i4;
             }
         };
         this.tileEditClickListener = new View.OnClickListener() { // from class: com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$tileEditClickListener$1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSLayoutEditViewController.this.fullTileCustomizerClickListener.onClick(view);
+                this.this$0.fullTileCustomizerClickListener.onClick(view);
                 SystemUIAnalytics.sendRunstoneEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_EDIT_FULL_QUICK_SETTINGS_BUTTONS, SystemUIAnalytics.RUNESTONE_LABEL_QP_BUTTON);
             }
         };
         this.customActionManager = new CustomActionManager();
         int size = arrayList.size();
-        int i2 = 0;
-        int i3 = 0;
-        while (i3 < size) {
-            BarItemImpl barItemImpl = arrayList.get(i3);
-            i3++;
+        int i4 = 0;
+        int i5 = 0;
+        while (i5 < size) {
+            BarItemImpl barItemImpl = arrayList.get(i5);
+            i5++;
             BarItemImpl barItemImpl2 = barItemImpl;
             if (this.barOrderInteractor.repository.nonEditableBars.contains(barItemImpl2.getClass().getSimpleName())) {
                 dimensionPixelSize = 0;
@@ -231,10 +245,10 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             } else {
                 dimensionPixelSize = (barItemImpl2.mBarRootView.getHeight() != 0 ? context.getResources().getDimensionPixelSize(R.dimen.qs_customize_sumOf_margin_and_border_size) : 0) + barItemImpl2.mBarRootView.getHeight();
             }
-            i2 += dimensionPixelSize;
+            i4 += dimensionPixelSize;
         }
-        this.sumOfItems = i2;
-        if (isLargeScreen$7()) {
+        this.sumOfItems = i4;
+        if (isLargeScreen$8()) {
             LinearLayout linearLayout = (LinearLayout) this.mView.findViewById(R.id.layout_edit_view);
             ViewGroup.LayoutParams layoutParams = linearLayout != null ? linearLayout.getLayoutParams() : null;
             if (layoutParams != null) {
@@ -246,17 +260,17 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             @Override // java.lang.Runnable
             public final void run() {
                 QSLayoutEditViewController qSLayoutEditViewController = QSLayoutEditViewController.this;
-                int i4 = QSLayoutEditViewController.$r8$clinit;
-                int i5 = qSLayoutEditViewController.collapsedBarRow;
+                int i6 = QSLayoutEditViewController.$r8$clinit;
+                int i7 = qSLayoutEditViewController.collapsedBarRow;
                 BarOrderInteractor barOrderInteractor2 = qSLayoutEditViewController.barOrderInteractor;
-                barOrderInteractor2.repository.setCollapsedBarRow(i5);
+                barOrderInteractor2.repository.setCollapsedBarRow(i7);
                 barOrderInteractor2.sendCollapsedRowStatusLog();
                 qSLayoutEditViewController.addHiddenBarsToList();
                 ArrayList arrayList2 = qSLayoutEditViewController.barList;
                 barOrderInteractor2.getClass();
-                List distinct = CollectionsKt___CollectionsKt.distinct(arrayList2);
+                List listDistinct = CollectionsKt___CollectionsKt.distinct(arrayList2);
                 BarOrderRepository barOrderRepository = barOrderInteractor2.repository;
-                if (Intrinsics.areEqual(barOrderRepository.barOrder, distinct)) {
+                if (Intrinsics.areEqual(barOrderRepository.barOrder, listDistinct)) {
                     QSPanelHost qSPanelHost = barOrderInteractor2.host;
                     if (qSPanelHost != null) {
                         TileChunkLayoutBar tileChunkLayoutBar = (TileChunkLayoutBar) qSPanelHost.mBarController.getBarInExpanded(BarType.TILE_CHUNK_LAYOUT);
@@ -266,16 +280,16 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
                         ArrayList barItems = qSPanelHost.getBarItems();
                         if (barItems != null) {
                             int size2 = barItems.size();
-                            int i6 = 0;
-                            while (i6 < size2) {
-                                Object obj = barItems.get(i6);
-                                i6++;
+                            int i8 = 0;
+                            while (i8 < size2) {
+                                Object obj = barItems.get(i8);
+                                i8++;
                                 ((BarItemImpl) obj).updateHeightMargins();
                             }
                         }
                     }
                 } else {
-                    barOrderRepository.setBarOrder(distinct);
+                    barOrderRepository.setBarOrder(listDistinct);
                     barOrderInteractor2.sendOrderStatusLog();
                     barOrderInteractor2.applyBarOrder();
                 }
@@ -293,19 +307,18 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             }
         });
         this.mView.requireViewById(R.id.left_button).setOnClickListener(this.settingClickListener);
-        View findViewById = this.mView.findViewById(R.id.left_button);
-        if (findViewById != null) {
-            View findViewById2 = findViewById.findViewById(R.id.button_text);
-            if (findViewById2 != null) {
-                findViewById2.setVisibility(8);
+        View viewFindViewById2 = this.mView.findViewById(R.id.left_button);
+        if (viewFindViewById2 != null) {
+            View viewFindViewById3 = viewFindViewById2.findViewById(R.id.button_text);
+            if (viewFindViewById3 != null) {
+                viewFindViewById3.setVisibility(8);
             }
-            View findViewById3 = findViewById.findViewById(R.id.button_icon_text_container);
-            if (findViewById3 != null) {
-                findViewById3.setVisibility(0);
+            View viewFindViewById4 = viewFindViewById2.findViewById(R.id.button_icon_text_container);
+            if (viewFindViewById4 != null) {
+                viewFindViewById4.setVisibility(0);
             }
         }
-        BarOrderInteractor barOrderInteractor2 = this.barOrderInteractor;
-        setBarList(new ArrayList(barOrderInteractor2.toFilteredNonEditBars(barOrderInteractor2.repository.barOrder)));
+        setBarList(new ArrayList(this.barOrderInteractor.loadBarOrderList()));
         this.customActionManager.setCustomAction(CustomActionId.MOVE_ITEM_UP, new Consumer() { // from class: com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController.4
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
@@ -333,6 +346,41 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             }
         });
         this.resourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
+        if (((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() && (viewFindViewById = this.mView.findViewById(R.id.right_button)) != null && (textView = (TextView) viewFindViewById.findViewById(R.id.button_text)) != null) {
+            textView.post(new Runnable() { // from class: com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController.8
+                @Override // java.lang.Runnable
+                public final void run() throws Resources.NotFoundException {
+                    View viewFindViewById5 = ((ViewController) QSLayoutEditViewController.this).mView.findViewById(R.id.right_button);
+                    int width = viewFindViewById5 != null ? viewFindViewById5.getWidth() : 0;
+                    int dimensionPixelSize2 = QSLayoutEditViewController.this.getResources().getDimensionPixelSize(R.dimen.qs_pop_over_layout_edit_buttons_margin);
+                    int popOverMargin = QSLayoutEditViewController.this.resourcePicker.getPopOverMargin(context) * 2;
+                    TextView leftButtonTextView = QSLayoutEditViewController.this.getLeftButtonTextView();
+                    if (leftButtonTextView != null) {
+                        leftButtonTextView.setMaxWidth(QSLayoutEditViewController.this.resourcePicker.getPanelWidth(context) - ((width + dimensionPixelSize2) + popOverMargin));
+                    }
+                    TextView leftButtonTextView2 = QSLayoutEditViewController.this.getLeftButtonTextView();
+                    if (leftButtonTextView2 != null) {
+                        leftButtonTextView2.requestLayout();
+                    }
+                }
+            });
+        }
+        ArrayList arrayList2 = this.barItems;
+        ArrayList arrayList3 = new ArrayList();
+        int size2 = arrayList2.size();
+        int i6 = 0;
+        while (i6 < size2) {
+            Object obj = arrayList2.get(i6);
+            i6++;
+            if (obj instanceof TileChunkLayoutBar) {
+                arrayList3.add(obj);
+            }
+        }
+        TileChunkLayoutBar tileChunkLayoutBar = (TileChunkLayoutBar) CollectionsKt___CollectionsKt.firstOrNull((List) arrayList3);
+        if (tileChunkLayoutBar != null && (secTileChunkLayout = tileChunkLayoutBar.mTileLayout) != null) {
+            i3 = secTileChunkLayout.columns;
+        }
+        this.tileChunkLayoutBarColumns = i3;
     }
 
     public static final void access$moveItem(QSLayoutEditViewController qSLayoutEditViewController, View view, Function1 function1, Function1 function12) {
@@ -341,17 +389,17 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             return;
         }
         int absoluteAdapterPosition = qSLayoutEditViewController.recyclerView.getChildViewHolder(view).getAbsoluteAdapterPosition();
-        if (((Boolean) function1.mo779invoke(Integer.valueOf(absoluteAdapterPosition))).booleanValue()) {
-            int intValue = ((Number) function12.mo779invoke(Integer.valueOf(absoluteAdapterPosition))).intValue();
-            if (absoluteAdapterPosition < intValue) {
+        if (((Boolean) function1.mo781invoke(Integer.valueOf(absoluteAdapterPosition))).booleanValue()) {
+            int iIntValue = ((Number) function12.mo781invoke(Integer.valueOf(absoluteAdapterPosition))).intValue();
+            if (absoluteAdapterPosition < iIntValue) {
                 int i = absoluteAdapterPosition;
-                while (i < intValue) {
+                while (i < iIntValue) {
                     int i2 = i + 1;
                     Collections.swap(qSLayoutEditViewController.barList, i, i2);
                     i = i2;
                 }
             } else {
-                int i3 = intValue + 1;
+                int i3 = iIntValue + 1;
                 if (i3 <= absoluteAdapterPosition) {
                     int i4 = absoluteAdapterPosition;
                     while (true) {
@@ -364,11 +412,11 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
                     }
                 }
             }
-            qSLayoutEditViewController.notifyItemMoved(absoluteAdapterPosition, intValue);
+            qSLayoutEditViewController.notifyItemMoved(absoluteAdapterPosition, iIntValue);
         }
     }
 
-    public static boolean isLargeScreen$7() {
+    public static boolean isLargeScreen$8() {
         return ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
     }
 
@@ -400,11 +448,10 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
     @Override // com.android.systemui.qs.customize.viewcontroller.ViewControllerBase
     public final void close() {
         super.close();
-        View findViewById = this.mView.findViewById(R.id.left_button);
-        View findViewById2 = findViewById != null ? findViewById.findViewById(R.id.button_text_with_icon) : null;
+        TextView leftButtonTextView = getLeftButtonTextView();
         int i = 0;
-        if (findViewById2 != null) {
-            findViewById2.setSelected(false);
+        if (leftButtonTextView != null) {
+            leftButtonTextView.setSelected(false);
         }
         FullChunkResizeableFrame fullChunkResizeableFrame = this.tileLayoutContainer;
         if (fullChunkResizeableFrame == null) {
@@ -421,6 +468,19 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             i++;
             ((BarItemImpl) obj).removeCloneTileBG();
         }
+    }
+
+    @Override // com.android.systemui.qs.customize.viewcontroller.ViewControllerBase
+    public final void configChanged() throws Resources.NotFoundException {
+        updateRecyclerViewHeight(null);
+    }
+
+    public final TextView getLeftButtonTextView() {
+        View viewFindViewById = this.mView.findViewById(R.id.left_button);
+        if (viewFindViewById != null) {
+            return (TextView) viewFindViewById.findViewById(R.id.button_text_with_icon);
+        }
+        return null;
     }
 
     public final void notifyItemMoved(int i, int i2) {
@@ -441,9 +501,9 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
                 CollectionsKt__CollectionsKt.throwIndexOverflow();
                 throw null;
             }
-            RecyclerView.ViewHolder findViewHolderForAdapterPosition = recyclerView.findViewHolderForAdapterPosition(i3);
-            if (findViewHolderForAdapterPosition != null) {
-                ((BarRecyclerAdapter) recyclerView.mAdapter).addAccessibilityInfo((BarRecyclerAdapter.BorderOutlineViewHolder) findViewHolderForAdapterPosition, i3);
+            RecyclerView.ViewHolder viewHolderFindViewHolderForAdapterPosition = recyclerView.findViewHolderForAdapterPosition(i3);
+            if (viewHolderFindViewHolderForAdapterPosition != null) {
+                ((BarRecyclerAdapter) recyclerView.mAdapter).addAccessibilityInfo((BarRecyclerAdapter.BorderOutlineViewHolder) viewHolderFindViewHolderForAdapterPosition, i3);
             }
             i3 = i5;
         }
@@ -542,9 +602,9 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
     }
 
     public final void setUpView() {
-        boolean isTablet = ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
+        boolean zIsTablet = ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
         SecQSPanelResourcePicker secQSPanelResourcePicker = this.resourcePicker;
-        int popOverMargin = isTablet ? secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getPopOverMargin(getContext()) : secQSPanelResourcePicker.getPanelSidePadding(getContext());
+        int popOverMargin = zIsTablet ? secQSPanelResourcePicker.getPopOverMargin(getContext()) : secQSPanelResourcePicker.getPanelSidePadding(getContext());
         FullChunkResizeableFrame fullChunkResizeableFrame = new FullChunkResizeableFrame(getContext(), this.recyclerView, this.collapsedBarRowConsumer, new QSLayoutEditViewController$createDummyTileLayout$1(this), null, 16, null);
         this.tileLayoutContainer = fullChunkResizeableFrame;
         fullChunkResizeableFrame.requireViewById(R.id.tile_edit_button).setOnClickListener(this.tileEditClickListener);
@@ -563,12 +623,12 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
         RecyclerView recyclerView = this.recyclerView;
         recyclerView.mIsPenSelectionEnabled = false;
         recyclerView.setPadding(popOverMargin, 0, popOverMargin, 0);
-        View findViewById = this.mView.findViewById(R.id.qs_customize_top_summary_buttons);
-        if (findViewById != null) {
-            findViewById.setPadding(popOverMargin, findViewById.getPaddingTop(), popOverMargin, findViewById.getPaddingBottom());
-            int m = isLargeScreen$7() ? SecQSDetailController$$ExternalSyntheticOutline0.m(findViewById, R.dimen.qs_pop_over_layout_edit_buttons_top_margin) : SecQSDetailController$$ExternalSyntheticOutline0.m(findViewById, R.dimen.qs_edit_buttons_top_margin);
-            FrameLayout frameLayout = (FrameLayout) findViewById.findViewById(R.id.qs_customize_top_summary_buttons_button_area);
-            ((LinearLayout.LayoutParams) (frameLayout != null ? frameLayout.getLayoutParams() : null)).topMargin = m;
+        View viewFindViewById = this.mView.findViewById(R.id.qs_customize_top_summary_buttons);
+        if (viewFindViewById != null) {
+            viewFindViewById.setPadding(popOverMargin, viewFindViewById.getPaddingTop(), popOverMargin, viewFindViewById.getPaddingBottom());
+            int iM = isLargeScreen$8() ? QSLayoutEditViewController$$ExternalSyntheticOutline0.m(viewFindViewById, R.dimen.qs_pop_over_layout_edit_buttons_top_margin) : QSLayoutEditViewController$$ExternalSyntheticOutline0.m(viewFindViewById, R.dimen.qs_edit_buttons_top_margin);
+            FrameLayout frameLayout = (FrameLayout) viewFindViewById.findViewById(R.id.qs_customize_top_summary_buttons_button_area);
+            ((LinearLayout.LayoutParams) (frameLayout != null ? frameLayout.getLayoutParams() : null)).topMargin = iM;
         }
         recyclerView.setLayoutManager(new InfiniteInflateLayoutManager(this, recyclerView.getContext()));
         ArrayList arrayList = this.barList;
@@ -589,28 +649,66 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             return;
         }
         setUpView();
-        View findViewById = this.mView.findViewById(R.id.left_button);
-        View findViewById2 = findViewById != null ? findViewById.findViewById(R.id.button_text_with_icon) : null;
-        if (findViewById2 != null) {
-            findViewById2.setSelected(true);
+        TextView leftButtonTextView = getLeftButtonTextView();
+        if (leftButtonTextView != null) {
+            leftButtonTextView.setSelected(true);
         }
         super.show(runnable);
     }
 
-    public final void updateRecyclerViewHeight(Integer num) {
-        if (QpRune.QUICK_POP_OVER_CUSTOMIZER && isLargeScreen$7()) {
+    public final void updateRecyclerViewHeight(Integer num) throws Resources.NotFoundException {
+        boolean z;
+        boolean z2;
+        if (QpRune.QUICK_POP_OVER_CUSTOMIZER && isLargeScreen$8()) {
+            int height = 0;
             if (num != null) {
-                this.lastTileChunkHeight = num.intValue();
+                int iIntValue = num.intValue();
+                z = iIntValue > this.lastTileChunkHeight;
+                this.lastTileChunkHeight = iIntValue;
+            } else {
+                z = false;
             }
-            int displayHeight = DeviceState.getDisplayHeight(getContext()) - ((this.resourcePicker.getNavBarHeight(getContext()) + getContext().getResources().getDimensionPixelSize(R.dimen.qs_pop_over_layout_edit_items_top_margin)) + this.cutoutTopMargin);
+            int displayHeight = DeviceState.getDisplayHeight(getContext()) - ((this.cutoutBottomMargin + getContext().getResources().getDimensionPixelSize(R.dimen.qs_pop_over_layout_edit_items_top_margin)) + this.cutoutTopMargin);
             int i = this.sumOfItems + this.lastTileChunkHeight;
             RecyclerView recyclerView = this.recyclerView;
             ViewGroup.LayoutParams layoutParams = recyclerView.getLayoutParams();
-            if (i <= displayHeight) {
-                displayHeight = i;
+            if (i > displayHeight) {
+                i = displayHeight;
             }
-            layoutParams.height = displayHeight;
+            layoutParams.height = i;
             recyclerView.setLayoutParams(layoutParams);
+            RecyclerView.Adapter adapter = recyclerView.mAdapter;
+            if ((adapter instanceof BarRecyclerAdapter) && z && layoutParams.height == displayHeight && (recyclerView.getLayoutManager() instanceof LinearLayoutManager)) {
+                ArrayList arrayList = this.barList;
+                int size = arrayList.size();
+                int i2 = 0;
+                int i3 = 0;
+                while (true) {
+                    if (i3 >= size) {
+                        i2 = -1;
+                        break;
+                    }
+                    Object obj = arrayList.get(i3);
+                    i3++;
+                    String str = (String) obj;
+                    if (Intrinsics.areEqual(str, "TileChunkLayoutBar") || Intrinsics.areEqual(str, "ExpandableChunkTileLayoutBar")) {
+                        break;
+                    } else {
+                        i2++;
+                    }
+                }
+                int iCoerceIn = RangesKt___RangesKt.coerceIn(i2, 0, ((BarRecyclerAdapter) adapter).barItems.size() - 1);
+                RecyclerView.ViewHolder viewHolderFindViewHolderForPosition = recyclerView.findViewHolderForPosition(iCoerceIn, false);
+                if (viewHolderFindViewHolderForPosition != null) {
+                    z2 = viewHolderFindViewHolderForPosition.itemView.getHeight() + viewHolderFindViewHolderForPosition.itemView.getTop() > displayHeight;
+                    height = displayHeight - viewHolderFindViewHolderForPosition.itemView.getHeight();
+                } else {
+                    z2 = false;
+                }
+                if (z2) {
+                    ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(iCoerceIn, height);
+                }
+            }
         }
     }
 
@@ -620,7 +718,10 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
             return;
         }
         SecQSSettingEditResources secQSSettingEditResources = this.editResources;
-        int panelColumns = secQSSettingEditResources.getPanelColumns();
+        int panelColumns = this.tileChunkLayoutBarColumns;
+        if (panelColumns == 0) {
+            panelColumns = secQSSettingEditResources.getPanelColumns();
+        }
         FullChunkResizeableFrame fullChunkResizeableFrame = this.tileLayoutContainer;
         if (fullChunkResizeableFrame == null) {
             fullChunkResizeableFrame = null;
@@ -726,9 +827,13 @@ public final class QSLayoutEditViewController extends ViewControllerBase {
     }
 
     @Override // com.android.systemui.qs.customize.viewcontroller.ViewControllerBase
-    public final void windowInsetChanged(int i) {
-        if (QpRune.QUICK_POP_OVER_CUSTOMIZER && isLargeScreen$7() && this.cutoutTopMargin != i) {
+    public final void windowInsetChanged(int i, int i2) throws Resources.NotFoundException {
+        if (QpRune.QUICK_POP_OVER_CUSTOMIZER && isLargeScreen$8()) {
+            if (this.cutoutTopMargin == i && this.cutoutBottomMargin == i2) {
+                return;
+            }
             this.cutoutTopMargin = i;
+            this.cutoutBottomMargin = i2;
             updateRecyclerViewHeight(null);
         }
     }

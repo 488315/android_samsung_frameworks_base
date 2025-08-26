@@ -193,7 +193,7 @@ public class MediaSource extends Filter {
     }
 
     @Override // android.filterfw.core.Filter
-    public void process(FilterContext filterContext) {
+    public void process(FilterContext filterContext) throws IllegalStateException, InterruptedException {
         if (this.mLogVerbose) {
             Log.v(TAG, "Processing new frame");
         }
@@ -282,20 +282,20 @@ public class MediaSource extends Filter {
             this.mFrameExtractor.setSourceRegion(fArr2[4], fArr2[5], fArr2[0], fArr2[1], fArr2[12], fArr2[13], fArr2[8], fArr2[9]);
             this.mOrientationUpdated = false;
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
-        this.mFrameExtractor.process(this.mMediaFrame, newFrame);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
+        this.mFrameExtractor.process(this.mMediaFrame, frameNewFrame);
         long timestamp = this.mSurfaceTexture.getTimestamp();
         if (this.mLogVerbose) {
             Log.v(TAG, "Timestamp: " + (timestamp / 1.0E9d) + " s");
         }
-        newFrame.setTimestamp(timestamp);
-        pushOutput("video", newFrame);
-        newFrame.release();
+        frameNewFrame.setTimestamp(timestamp);
+        pushOutput("video", frameNewFrame);
+        frameNewFrame.release();
         this.mPlaying = true;
     }
 
     @Override // android.filterfw.core.Filter
-    public void close(FilterContext filterContext) {
+    public void close(FilterContext filterContext) throws IllegalStateException {
         if (this.mMediaPlayer.isPlaying()) {
             this.mMediaPlayer.stop();
         }

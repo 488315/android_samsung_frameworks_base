@@ -32,20 +32,20 @@ public class FrameNumberTracker {
         while (it.hasNext()) {
             Map.Entry<Long, Integer> next = it.next();
             Long key = next.getKey();
-            long longValue = key.longValue();
-            int intValue = next.getValue().intValue();
+            long jLongValue = key.longValue();
+            int iIntValue = next.getValue().intValue();
             Boolean bool = false;
-            if (longValue == this.mCompletedFrameNumber[intValue] + 1) {
+            if (jLongValue == this.mCompletedFrameNumber[iIntValue] + 1) {
                 bool = true;
             }
-            if (this.mPendingFrameNumbers[intValue].isEmpty()) {
+            if (this.mPendingFrameNumbers[iIntValue].isEmpty()) {
                 int i = 1;
                 while (true) {
                     if (i >= 3) {
                         break;
                     }
-                    int i2 = (intValue + i) % 3;
-                    if (!this.mPendingFrameNumbersWithOtherType[i2].isEmpty() && longValue == this.mPendingFrameNumbersWithOtherType[i2].element().longValue()) {
+                    int i2 = (iIntValue + i) % 3;
+                    if (!this.mPendingFrameNumbersWithOtherType[i2].isEmpty() && jLongValue == this.mPendingFrameNumbersWithOtherType[i2].element().longValue()) {
                         this.mPendingFrameNumbersWithOtherType[i2].remove();
                         bool = true;
                         break;
@@ -53,22 +53,22 @@ public class FrameNumberTracker {
                     i++;
                 }
                 if (!bool.booleanValue()) {
-                    int i3 = (intValue + 1) % 3;
-                    int i4 = (intValue + 2) % 3;
+                    int i3 = (iIntValue + 1) % 3;
+                    int i4 = (iIntValue + 2) % 3;
                     if (this.mPendingFrameNumbersWithOtherType[i3].isEmpty() && this.mPendingFrameNumbersWithOtherType[i4].isEmpty()) {
                         long[] jArr = this.mCompletedFrameNumber;
-                        long max = Math.max(jArr[i3], jArr[i4]) + 1;
-                        if (max > this.mCompletedFrameNumber[intValue] + 1 && max == longValue) {
+                        long jMax = Math.max(jArr[i3], jArr[i4]) + 1;
+                        if (jMax > this.mCompletedFrameNumber[iIntValue] + 1 && jMax == jLongValue) {
                             bool = true;
                         }
                     }
                 }
-            } else if (longValue == this.mPendingFrameNumbers[intValue].element().longValue()) {
-                this.mPendingFrameNumbers[intValue].remove();
+            } else if (jLongValue == this.mPendingFrameNumbers[iIntValue].element().longValue()) {
+                this.mPendingFrameNumbers[iIntValue].remove();
                 bool = true;
             }
             if (bool.booleanValue()) {
-                this.mCompletedFrameNumber[intValue] = longValue;
+                this.mCompletedFrameNumber[iIntValue] = jLongValue;
                 this.mPartialResults.remove(key);
                 it.remove();
             }
@@ -96,12 +96,12 @@ public class FrameNumberTracker {
         if (captureResult == null) {
             return;
         }
-        List<CaptureResult> list = this.mPartialResults.get(Long.valueOf(j));
-        if (list == null) {
-            list = new ArrayList<>();
-            this.mPartialResults.put(Long.valueOf(j), list);
+        List<CaptureResult> arrayList = this.mPartialResults.get(Long.valueOf(j));
+        if (arrayList == null) {
+            arrayList = new ArrayList<>();
+            this.mPartialResults.put(Long.valueOf(j), arrayList);
         }
-        list.add(captureResult);
+        arrayList.add(captureResult);
     }
 
     public List<CaptureResult> popPartialResults(long j) {
@@ -129,22 +129,22 @@ public class FrameNumberTracker {
         }
         int i2 = (i + 1) % 3;
         int i3 = (i + 2) % 3;
-        long max = Math.max(jArr[i2], jArr[i3]);
-        if (j < max) {
+        long jMax = Math.max(jArr[i2], jArr[i3]);
+        if (j < jMax) {
             if (!this.mPendingFrameNumbers[i].isEmpty()) {
-                Long element = this.mPendingFrameNumbers[i].element();
-                if (j != element.longValue()) {
-                    if (j < element.longValue()) {
+                Long lElement = this.mPendingFrameNumbers[i].element();
+                if (j != lElement.longValue()) {
+                    if (j < lElement.longValue()) {
                         throw new IllegalArgumentException("frame number " + j + " is a repeat");
                     }
-                    throw new IllegalArgumentException("frame number " + j + " comes out of order. Expecting " + element);
+                    throw new IllegalArgumentException("frame number " + j + " comes out of order. Expecting " + lElement);
                 }
                 this.mPendingFrameNumbers[i].remove();
             } else {
-                int indexOf = this.mPendingFrameNumbersWithOtherType[i2].indexOf(Long.valueOf(j));
-                int indexOf2 = this.mPendingFrameNumbersWithOtherType[i3].indexOf(Long.valueOf(j));
-                boolean z = indexOf != -1;
-                if (!(z ^ (indexOf2 != -1))) {
+                int iIndexOf = this.mPendingFrameNumbersWithOtherType[i2].indexOf(Long.valueOf(j));
+                int iIndexOf2 = this.mPendingFrameNumbersWithOtherType[i3].indexOf(Long.valueOf(j));
+                boolean z = iIndexOf != -1;
+                if (!(z ^ (iIndexOf2 != -1))) {
                     throw new IllegalArgumentException("frame number " + j + " is a repeat or invalid");
                 }
                 if (z) {
@@ -154,22 +154,22 @@ public class FrameNumberTracker {
                     LinkedList<Long> linkedList3 = this.mPendingFrameNumbersWithOtherType[i3];
                     LinkedList<Long> linkedList4 = this.mPendingFrameNumbers[i2];
                     linkedList = linkedList3;
-                    indexOf = indexOf2;
+                    iIndexOf = iIndexOf2;
                     linkedList2 = linkedList4;
                 }
-                for (int i4 = 0; i4 < indexOf; i4++) {
+                for (int i4 = 0; i4 < iIndexOf; i4++) {
                     linkedList2.add(linkedList.removeFirst());
                 }
                 linkedList.remove();
             }
         } else {
-            long max2 = Math.max(max, this.mCompletedFrameNumber[i]);
+            long jMax2 = Math.max(jMax, this.mCompletedFrameNumber[i]);
             while (true) {
-                max2++;
-                if (max2 >= j) {
+                jMax2++;
+                if (jMax2 >= j) {
                     break;
                 } else {
-                    this.mPendingFrameNumbersWithOtherType[i].add(Long.valueOf(max2));
+                    this.mPendingFrameNumbersWithOtherType[i].add(Long.valueOf(jMax2));
                 }
             }
         }

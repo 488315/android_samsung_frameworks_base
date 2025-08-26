@@ -4,7 +4,6 @@ import gov.nist.javax.sip.header.SIPHeader;
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PMediaAuthorization extends SIPHeader implements PMediaAuthorizationHeader, Header {
     private static final long serialVersionUID = -6463630258703731133L;
@@ -37,7 +36,7 @@ public class PMediaAuthorization extends SIPHeader implements PMediaAuthorizatio
         return false;
     }
 
-    public final void setMediaAuthorizationToken(String str) {
+    public final void setMediaAuthorizationToken(String str) throws InvalidArgumentException {
         if (str == null || str.length() == 0) {
             throw new InvalidArgumentException(" the Media-Authorization-Token parameter is null or empty");
         }

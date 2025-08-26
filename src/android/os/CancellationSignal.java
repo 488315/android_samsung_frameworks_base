@@ -89,7 +89,7 @@ public final class CancellationSignal {
         }
     }
 
-    private void waitForCancelFinishedLocked() {
+    private void waitForCancelFinishedLocked() throws InterruptedException {
         while (this.mCancelInProgress) {
             try {
                 wait();

@@ -8,7 +8,6 @@ import android.view.View;
 import com.android.settingslib.drawable.UserIconDrawable;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UserAvatarView extends View {
     public final UserIconDrawable mDrawable;
@@ -16,47 +15,47 @@ public class UserAvatarView extends View {
     public UserAvatarView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mDrawable = new UserIconDrawable();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.UserAvatarView, i, i2);
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.UserAvatarView, i, i2);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i3 = 0; i3 < indexCount; i3++) {
-            int index = obtainStyledAttributes.getIndex(i3);
+            int index = typedArrayObtainStyledAttributes.getIndex(i3);
             if (index == 1) {
-                float dimension = obtainStyledAttributes.getDimension(index, 0.0f);
+                float dimension = typedArrayObtainStyledAttributes.getDimension(index, 0.0f);
                 UserIconDrawable userIconDrawable = this.mDrawable;
                 userIconDrawable.mPadding = dimension;
                 userIconDrawable.onBoundsChange(userIconDrawable.getBounds());
             } else if (index == 6) {
-                float dimension2 = obtainStyledAttributes.getDimension(index, 0.0f);
+                float dimension2 = typedArrayObtainStyledAttributes.getDimension(index, 0.0f);
                 UserIconDrawable userIconDrawable2 = this.mDrawable;
                 userIconDrawable2.initFramePaint();
                 userIconDrawable2.mFrameWidth = dimension2;
                 userIconDrawable2.mFramePaint.setStrokeWidth(dimension2);
                 userIconDrawable2.onBoundsChange(userIconDrawable2.getBounds());
             } else if (index == 5) {
-                float dimension3 = obtainStyledAttributes.getDimension(index, 0.0f);
+                float dimension3 = typedArrayObtainStyledAttributes.getDimension(index, 0.0f);
                 UserIconDrawable userIconDrawable3 = this.mDrawable;
                 userIconDrawable3.initFramePaint();
                 userIconDrawable3.mFramePadding = dimension3;
                 userIconDrawable3.onBoundsChange(userIconDrawable3.getBounds());
             } else if (index == 4) {
-                ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(index);
+                ColorStateList colorStateList = typedArrayObtainStyledAttributes.getColorStateList(index);
                 UserIconDrawable userIconDrawable4 = this.mDrawable;
                 userIconDrawable4.initFramePaint();
                 userIconDrawable4.mFrameColor = colorStateList;
                 userIconDrawable4.invalidateSelf();
             } else if (index == 2) {
-                float dimension4 = obtainStyledAttributes.getDimension(index, 0.0f);
+                float dimension4 = typedArrayObtainStyledAttributes.getDimension(index, 0.0f);
                 UserIconDrawable userIconDrawable5 = this.mDrawable;
                 userIconDrawable5.mBadgeRadius = dimension4 * 0.5f;
                 userIconDrawable5.onBoundsChange(userIconDrawable5.getBounds());
             } else if (index == 3) {
-                float dimension5 = obtainStyledAttributes.getDimension(index, 0.0f);
+                float dimension5 = typedArrayObtainStyledAttributes.getDimension(index, 0.0f);
                 UserIconDrawable userIconDrawable6 = this.mDrawable;
                 userIconDrawable6.mBadgeMargin = dimension5;
                 userIconDrawable6.onBoundsChange(userIconDrawable6.getBounds());
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         setBackground(this.mDrawable);
     }
 

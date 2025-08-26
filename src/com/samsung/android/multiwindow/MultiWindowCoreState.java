@@ -63,14 +63,14 @@ public class MultiWindowCoreState {
     }
 
     public int updateFrom(Bundle bundle) {
-        int updateFontScaleForExternalDesktop;
+        int iUpdateFontScaleForExternalDesktop;
         if (bundle == null) {
             return 0;
         }
         synchronized (this.mLock) {
-            updateFontScaleForExternalDesktop = updateFontScaleForExternalDesktop(bundle) | updateMultiWindowEnabledState(bundle) | updateCornerGestureState(bundle) | updateCornerGestureCustomValue(bundle) | updateMultiStarSupportCustomDensityState(bundle) | updateSplitImmersiveModeState(bundle) | updateNaviStarSplitImmersiveModeState(bundle) | updateMultiStarSupportStayFocusActivity(bundle) | updateMultiStarSupportStayTopResumedActivity(bundle) | updateMultiStarBlockedMinimizeFreeformState(bundle) | updateMultiStarEnsureLaunchSplitState(bundle);
+            iUpdateFontScaleForExternalDesktop = updateFontScaleForExternalDesktop(bundle) | updateMultiWindowEnabledState(bundle) | updateCornerGestureState(bundle) | updateCornerGestureCustomValue(bundle) | updateMultiStarSupportCustomDensityState(bundle) | updateSplitImmersiveModeState(bundle) | updateNaviStarSplitImmersiveModeState(bundle) | updateMultiStarSupportStayFocusActivity(bundle) | updateMultiStarSupportStayTopResumedActivity(bundle) | updateMultiStarBlockedMinimizeFreeformState(bundle) | updateMultiStarEnsureLaunchSplitState(bundle);
         }
-        return updateFontScaleForExternalDesktop;
+        return iUpdateFontScaleForExternalDesktop;
     }
 
     private int updateCornerGestureCustomValue(Bundle bundle) {
@@ -82,37 +82,18 @@ public class MultiWindowCoreState {
         return MW_FREEFORM_CORNER_GESTURE_CUSTOM_VALUE != i ? 8192 : 0;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x000f, code lost:
-    
-        if (r3.getInt("open_in_pop_up_view", 0) == 1) goto L8;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0012  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int updateCornerGestureState(android.os.Bundle r3) {
-        /*
-            r2 = this;
-            boolean r2 = com.samsung.android.multiwindow.MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_ENABLED
-            boolean r0 = com.samsung.android.multiwindow.MultiWindowCoreState.MW_ENABLED
-            r1 = 0
-            if (r0 == 0) goto L12
-            java.lang.String r0 = "open_in_pop_up_view"
-            int r3 = r3.getInt(r0, r1)
-            r0 = 1
-            if (r3 != r0) goto L12
-            goto L13
-        L12:
-            r0 = r1
-        L13:
-            com.samsung.android.multiwindow.MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_ENABLED = r0
-            if (r0 == r2) goto L1a
-            r2 = 16
-            return r2
-        L1a:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.multiwindow.MultiWindowCoreState.updateCornerGestureState(android.os.Bundle):int");
+    private int updateCornerGestureState(Bundle bundle) {
+        boolean z;
+        boolean z2 = MW_FREEFORM_CORNER_GESTURE_ENABLED;
+        if (MW_ENABLED) {
+            z = bundle.getInt("open_in_pop_up_view", 0) == 1;
+        }
+        MW_FREEFORM_CORNER_GESTURE_ENABLED = z;
+        return z != z2 ? 16 : 0;
     }
 
     private int updateMultiWindowEnabledState(Bundle bundle) {
@@ -162,70 +143,32 @@ public class MultiWindowCoreState {
         return z2 != z ? 1024 : 0;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x000f, code lost:
-    
-        if (r3.getInt(com.samsung.android.multiwindow.MultiWindowCoreState.Key.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED, 0) == 1) goto L8;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0012  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int updateMultiStarSupportStayFocusActivity(android.os.Bundle r3) {
-        /*
-            r2 = this;
-            boolean r2 = com.samsung.android.multiwindow.MultiWindowCoreState.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED
-            boolean r0 = com.samsung.android.multiwindow.MultiWindowCoreState.MW_ENABLED
-            r1 = 0
-            if (r0 == 0) goto L12
-            java.lang.String r0 = "stay_focus_activity"
-            int r3 = r3.getInt(r0, r1)
-            r0 = 1
-            if (r3 != r0) goto L12
-            goto L13
-        L12:
-            r0 = r1
-        L13:
-            com.samsung.android.multiwindow.MultiWindowCoreState.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED = r0
-            if (r0 == r2) goto L1a
-            r2 = 64
-            return r2
-        L1a:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.multiwindow.MultiWindowCoreState.updateMultiStarSupportStayFocusActivity(android.os.Bundle):int");
+    private int updateMultiStarSupportStayFocusActivity(Bundle bundle) {
+        boolean z;
+        boolean z2 = MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED;
+        if (MW_ENABLED) {
+            z = bundle.getInt(Key.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED, 0) == 1;
+        }
+        MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED = z;
+        return z != z2 ? 64 : 0;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x000f, code lost:
-    
-        if (r3.getInt(com.samsung.android.multiwindow.MultiWindowCoreState.Key.MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED, 0) == 1) goto L8;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0012  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int updateMultiStarSupportStayTopResumedActivity(android.os.Bundle r3) {
-        /*
-            r2 = this;
-            boolean r2 = com.samsung.android.multiwindow.MultiWindowCoreState.MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED
-            boolean r0 = com.samsung.android.multiwindow.MultiWindowCoreState.MW_ENABLED
-            r1 = 0
-            if (r0 == 0) goto L12
-            java.lang.String r0 = "stay_top_resumed_activity"
-            int r3 = r3.getInt(r0, r1)
-            r0 = 1
-            if (r3 != r0) goto L12
-            goto L13
-        L12:
-            r0 = r1
-        L13:
-            com.samsung.android.multiwindow.MultiWindowCoreState.MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED = r0
-            if (r0 == r2) goto L1a
-            r2 = 128(0x80, float:1.8E-43)
-            return r2
-        L1a:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.multiwindow.MultiWindowCoreState.updateMultiStarSupportStayTopResumedActivity(android.os.Bundle):int");
+    private int updateMultiStarSupportStayTopResumedActivity(Bundle bundle) {
+        boolean z;
+        boolean z2 = MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED;
+        if (MW_ENABLED) {
+            z = bundle.getInt(Key.MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED, 0) == 1;
+        }
+        MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED = z;
+        return z != z2 ? 128 : 0;
     }
 
     private int updateMultiStarSupportCustomDensityState(Bundle bundle) {

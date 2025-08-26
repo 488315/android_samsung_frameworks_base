@@ -11,7 +11,6 @@ import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.TransactionPool;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SyncTransactionQueue {
     public final ShellExecutor mMainExecutor;
@@ -22,7 +21,7 @@ public final class SyncTransactionQueue {
     public final SyncTransactionQueue$$ExternalSyntheticLambda0 mOnReplyTimeout = new Runnable() { // from class: com.android.wm.shell.common.SyncTransactionQueue$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
         public final void run() {
-            SyncTransactionQueue syncTransactionQueue = SyncTransactionQueue.this;
+            SyncTransactionQueue syncTransactionQueue = this.f$0;
             synchronized (syncTransactionQueue.mQueue) {
                 try {
                     SyncTransactionQueue.SyncCallback syncCallback = syncTransactionQueue.mInFlight;
@@ -38,7 +37,6 @@ public final class SyncTransactionQueue {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SyncCallback extends WindowContainerTransactionCallback {
         public int mId = -1;
         public final WindowContainerTransaction mWCT;
@@ -54,7 +52,7 @@ public final class SyncTransactionQueue {
             SyncTransactionQueue.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.common.SyncTransactionQueue$SyncCallback$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SyncTransactionQueue.SyncCallback syncCallback = SyncTransactionQueue.SyncCallback.this;
+                    SyncTransactionQueue.SyncCallback syncCallback = this.f$0;
                     int i2 = i;
                     SurfaceControl.Transaction transaction2 = transaction;
                     synchronized (SyncTransactionQueue.this.mQueue) {
@@ -109,7 +107,6 @@ public final class SyncTransactionQueue {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TransactionRunnable {
         void runWithTransaction(SurfaceControl.Transaction transaction);
     }
@@ -144,10 +141,10 @@ public final class SyncTransactionQueue {
                     this.mRunnables.add(transactionRunnable);
                     return;
                 }
-                SurfaceControl.Transaction acquire = this.mTransactionPool.acquire();
-                transactionRunnable.runWithTransaction(acquire);
-                acquire.apply();
-                this.mTransactionPool.release(acquire);
+                SurfaceControl.Transaction transactionAcquire = this.mTransactionPool.acquire();
+                transactionRunnable.runWithTransaction(transactionAcquire);
+                transactionAcquire.apply();
+                this.mTransactionPool.release(transactionAcquire);
             } catch (Throwable th) {
                 throw th;
             }

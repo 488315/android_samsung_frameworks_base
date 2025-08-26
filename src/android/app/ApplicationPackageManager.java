@@ -1,6 +1,7 @@
 package android.app;
 
 import android.app.PropertyInvalidatedCache;
+import android.app.SemAppIconSolution;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyResources;
 import android.app.role.RoleManager;
@@ -53,9 +54,11 @@ import android.content.pm.dex.ArtManager;
 import android.content.res.ApkAssets;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -87,17 +90,21 @@ import android.system.OsConstants;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+import android.util.AttributeSet;
 import android.util.LauncherIcons;
 import android.util.Log;
 import android.util.Pair;
 import android.util.Slog;
 import android.util.TypedValue;
+import android.util.Xml;
 import com.android.internal.R;
 import com.android.internal.os.SomeArgs;
 import com.android.internal.pm.RoSystemFeatures;
 import com.android.internal.protolog.PerfettoProtoLogImpl;
+import com.android.internal.util.UserIcons;
 import com.samsung.android.app.SemDualAppManager;
 import com.samsung.android.core.pm.AbiAppHelper;
+import com.samsung.android.core.pm.PmUtils;
 import com.samsung.android.core.pm.containerservice.AsecUtils;
 import com.samsung.android.core.pm.mm.MaintenanceModeUtils;
 import com.samsung.android.knox.SemPersonaManager;
@@ -125,6 +132,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import libcore.util.EmptyArray;
+import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class ApplicationPackageManager extends PackageManager {
@@ -328,23 +336,23 @@ public class ApplicationPackageManager extends PackageManager {
 
     @Override // android.content.pm.PackageManager
     public Intent getLaunchIntentForPackage(String str, boolean z) {
-        PackageManager.ResolveInfoFlags of = PackageManager.ResolveInfoFlags.of(z ? 786432L : 0L);
+        PackageManager.ResolveInfoFlags resolveInfoFlagsOf = PackageManager.ResolveInfoFlags.of(z ? 786432L : 0L);
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_INFO);
         intent.setPackage(str);
-        List<ResolveInfo> queryIntentActivities = queryIntentActivities(intent, of);
-        if (queryIntentActivities == null || queryIntentActivities.size() <= 0) {
+        List<ResolveInfo> listQueryIntentActivities = queryIntentActivities(intent, resolveInfoFlagsOf);
+        if (listQueryIntentActivities == null || listQueryIntentActivities.size() <= 0) {
             intent.removeCategory(Intent.CATEGORY_INFO);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
             intent.setPackage(str);
-            queryIntentActivities = queryIntentActivities(intent, of);
+            listQueryIntentActivities = queryIntentActivities(intent, resolveInfoFlagsOf);
         }
-        if (queryIntentActivities == null || queryIntentActivities.size() <= 0) {
+        if (listQueryIntentActivities == null || listQueryIntentActivities.size() <= 0) {
             return null;
         }
         Intent intent2 = new Intent(intent);
         intent2.setFlags(268435456);
-        intent2.setClassName(queryIntentActivities.get(0).activityInfo.packageName, queryIntentActivities.get(0).activityInfo.name);
+        intent2.setClassName(listQueryIntentActivities.get(0).activityInfo.packageName, listQueryIntentActivities.get(0).activityInfo.name);
         return intent2;
     }
 
@@ -362,13 +370,13 @@ public class ApplicationPackageManager extends PackageManager {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(str2);
         intent.setPackage(str);
-        List<ResolveInfo> queryIntentActivities = queryIntentActivities(intent, 0);
-        if (queryIntentActivities == null || queryIntentActivities.size() <= 0) {
+        List<ResolveInfo> listQueryIntentActivities = queryIntentActivities(intent, 0);
+        if (listQueryIntentActivities == null || listQueryIntentActivities.size() <= 0) {
             return null;
         }
         Intent intent2 = new Intent(intent);
         intent2.setFlags(268435456);
-        intent2.setClassName(queryIntentActivities.get(0).activityInfo.packageName, queryIntentActivities.get(0).activityInfo.name);
+        intent2.setClassName(listQueryIntentActivities.get(0).activityInfo.packageName, listQueryIntentActivities.get(0).activityInfo.name);
         return intent2;
     }
 
@@ -463,9 +471,9 @@ public class ApplicationPackageManager extends PackageManager {
 
     @Override // android.content.pm.PackageManager
     public List<PermissionInfo> queryPermissionsByGroup(String str, int i) throws PackageManager.NameNotFoundException {
-        List<PermissionInfo> queryPermissionsByGroup = getPermissionManager().queryPermissionsByGroup(str, i);
-        if (queryPermissionsByGroup != null) {
-            return queryPermissionsByGroup;
+        List<PermissionInfo> listQueryPermissionsByGroup = getPermissionManager().queryPermissionsByGroup(str, i);
+        if (listQueryPermissionsByGroup != null) {
+            return listQueryPermissionsByGroup;
         }
         throw new PackageManager.NameNotFoundException(str);
     }
@@ -516,13 +524,13 @@ public class ApplicationPackageManager extends PackageManager {
 
     private static ApplicationInfo maybeAdjustApplicationInfo(ApplicationInfo applicationInfo) {
         if (applicationInfo.primaryCpuAbi != null && applicationInfo.secondaryCpuAbi != null) {
-            String vmInstructionSet = VMRuntime.getRuntime().vmInstructionSet();
+            String strVmInstructionSet = VMRuntime.getRuntime().vmInstructionSet();
             String instructionSet = VMRuntime.getInstructionSet(applicationInfo.secondaryCpuAbi);
             String str = SystemProperties.get("ro.dalvik.vm.isa." + instructionSet);
             if (!str.isEmpty()) {
                 instructionSet = str;
             }
-            if (vmInstructionSet.equals(instructionSet)) {
+            if (strVmInstructionSet.equals(instructionSet)) {
                 ApplicationInfo applicationInfo2 = new ApplicationInfo(applicationInfo);
                 applicationInfo2.nativeLibraryDir = applicationInfo.secondaryNativeLibraryDir;
                 return applicationInfo2;
@@ -770,16 +778,16 @@ public class ApplicationPackageManager extends PackageManager {
 
     @Override // android.content.pm.PackageManager
     public boolean hasSystemFeature(String str, int i) {
-        Boolean maybeHasFeature;
+        Boolean boolMaybeHasFeature;
         if (MaintenanceModeUtils.isMaintenanceModeFeature(str)) {
             return MaintenanceModeUtils.hasSystemFeature();
         }
-        Boolean maybeHasFeature2 = RoSystemFeatures.maybeHasFeature(str, i);
-        if (maybeHasFeature2 != null) {
-            return maybeHasFeature2.booleanValue();
+        Boolean boolMaybeHasFeature2 = RoSystemFeatures.maybeHasFeature(str, i);
+        if (boolMaybeHasFeature2 != null) {
+            return boolMaybeHasFeature2.booleanValue();
         }
-        if (this.mUseSystemFeaturesCache && (maybeHasFeature = SystemFeaturesCache.getInstance().maybeHasFeature(str, i)) != null) {
-            return maybeHasFeature.booleanValue();
+        if (this.mUseSystemFeaturesCache && (boolMaybeHasFeature = SystemFeaturesCache.getInstance().maybeHasFeature(str, i)) != null) {
+            return boolMaybeHasFeature.booleanValue();
         }
         return mHasSystemFeatureCache.query(new HasSystemFeatureQuery(str, i)).booleanValue();
     }
@@ -891,18 +899,18 @@ public class ApplicationPackageManager extends PackageManager {
 
     @Override // android.content.pm.PackageManager
     public Intent buildRequestPermissionsIntent(String[] strArr) {
-        Intent buildRequestPermissionsIntent = super.buildRequestPermissionsIntent(strArr);
-        buildRequestPermissionsIntent.putExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_DEVICE_ID, this.mContext.getDeviceId());
-        return buildRequestPermissionsIntent;
+        Intent intentBuildRequestPermissionsIntent = super.buildRequestPermissionsIntent(strArr);
+        intentBuildRequestPermissionsIntent.putExtra(PackageManager.EXTRA_REQUEST_PERMISSIONS_DEVICE_ID, this.mContext.getDeviceId());
+        return intentBuildRequestPermissionsIntent;
     }
 
     @Override // android.content.pm.PackageManager
     public CharSequence getBackgroundPermissionOptionLabel() {
         try {
-            Context createPackageContext = this.mContext.createPackageContext(getPermissionControllerPackageName(), 0);
-            int identifier = createPackageContext.getResources().getIdentifier(APP_PERMISSION_BUTTON_ALLOW_ALWAYS, "string", PERMISSION_CONTROLLER_RESOURCE_PACKAGE);
+            Context contextCreatePackageContext = this.mContext.createPackageContext(getPermissionControllerPackageName(), 0);
+            int identifier = contextCreatePackageContext.getResources().getIdentifier(APP_PERMISSION_BUTTON_ALLOW_ALWAYS, "string", PERMISSION_CONTROLLER_RESOURCE_PACKAGE);
             if (identifier != 0) {
-                return createPackageContext.getText(identifier);
+                return contextCreatePackageContext.getText(identifier);
             }
             return "";
         } catch (PackageManager.NameNotFoundException e) {
@@ -989,7 +997,7 @@ public class ApplicationPackageManager extends PackageManager {
     }
 
     @Override // android.content.pm.PackageManager
-    public void requestChecksums(String str, boolean z, int i, List<Certificate> list, final PackageManager.OnChecksumsReadyListener onChecksumsReadyListener) throws CertificateEncodingException, PackageManager.NameNotFoundException {
+    public void requestChecksums(String str, boolean z, int i, List<Certificate> list, final PackageManager.OnChecksumsReadyListener onChecksumsReadyListener) throws Throwable {
         Objects.requireNonNull(str);
         Objects.requireNonNull(onChecksumsReadyListener);
         Objects.requireNonNull(list);
@@ -1147,15 +1155,15 @@ public class ApplicationPackageManager extends PackageManager {
     }
 
     @Override // android.content.pm.PackageManager
-    public PersistableBundle getAppMetadata(String str) throws PackageManager.NameNotFoundException {
-        PersistableBundle readFromStream;
+    public PersistableBundle getAppMetadata(String str) throws Throwable {
+        PersistableBundle fromStream;
         try {
             ParcelFileDescriptor appMetadataFd = this.mPM.getAppMetadataFd(str, getUserId());
             if (appMetadataFd != null) {
                 try {
                     ParcelFileDescriptor.AutoCloseInputStream autoCloseInputStream = new ParcelFileDescriptor.AutoCloseInputStream(appMetadataFd);
                     try {
-                        readFromStream = PersistableBundle.readFromStream(autoCloseInputStream);
+                        fromStream = PersistableBundle.readFromStream(autoCloseInputStream);
                         autoCloseInputStream.close();
                     } finally {
                     }
@@ -1163,9 +1171,9 @@ public class ApplicationPackageManager extends PackageManager {
                     throw new RuntimeException(e);
                 }
             } else {
-                readFromStream = null;
+                fromStream = null;
             }
-            return readFromStream != null ? readFromStream : new PersistableBundle();
+            return fromStream != null ? fromStream : new PersistableBundle();
         } catch (ParcelableException e2) {
             e2.maybeRethrow(PackageManager.NameNotFoundException.class);
             throw new RuntimeException(e2);
@@ -1175,7 +1183,7 @@ public class ApplicationPackageManager extends PackageManager {
     }
 
     @Override // android.content.pm.PackageManager
-    public int getAppMetadataSource(String str) throws PackageManager.NameNotFoundException {
+    public int getAppMetadataSource(String str) throws Throwable {
         Objects.requireNonNull(str, "packageName cannot be null");
         try {
             return this.mPM.getAppMetadataSource(str, getUserId());
@@ -1362,11 +1370,11 @@ public class ApplicationPackageManager extends PackageManager {
     @Override // android.content.pm.PackageManager
     public List<ResolveInfo> queryIntentActivitiesAsUser(Intent intent, PackageManager.ResolveInfoFlags resolveInfoFlags, int i) {
         try {
-            ParceledListSlice queryIntentActivities = this.mPM.queryIntentActivities(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), i, intent), i);
-            if (queryIntentActivities == null) {
+            ParceledListSlice parceledListSliceQueryIntentActivities = this.mPM.queryIntentActivities(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), i, intent), i);
+            if (parceledListSliceQueryIntentActivities == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryIntentActivities.getList();
+            return parceledListSliceQueryIntentActivities.getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1380,7 +1388,7 @@ public class ApplicationPackageManager extends PackageManager {
     @Override // android.content.pm.PackageManager
     public List<ResolveInfo> queryIntentActivityOptions(ComponentName componentName, List<Intent> list, Intent intent, PackageManager.ResolveInfoFlags resolveInfoFlags) {
         String[] strArr;
-        String resolveTypeIfNeeded;
+        String strResolveTypeIfNeeded;
         int userId = getUserId();
         ContentResolver contentResolver = this.mContext.getContentResolver();
         Intent[] intentArr = null;
@@ -1389,11 +1397,11 @@ public class ApplicationPackageManager extends PackageManager {
             String[] strArr2 = null;
             for (int i = 0; i < size; i++) {
                 Intent intent2 = list.get(i);
-                if (intent2 != null && (resolveTypeIfNeeded = intent2.resolveTypeIfNeeded(contentResolver)) != null) {
+                if (intent2 != null && (strResolveTypeIfNeeded = intent2.resolveTypeIfNeeded(contentResolver)) != null) {
                     if (strArr2 == null) {
                         strArr2 = new String[size];
                     }
-                    strArr2[i] = resolveTypeIfNeeded;
+                    strArr2[i] = strResolveTypeIfNeeded;
                 }
             }
             strArr = strArr2;
@@ -1405,11 +1413,11 @@ public class ApplicationPackageManager extends PackageManager {
             if (list != null) {
                 intentArr = (Intent[]) list.toArray(new Intent[0]);
             }
-            ParceledListSlice queryIntentActivityOptions = iPackageManager.queryIntentActivityOptions(componentName, intentArr, strArr, intent, intent.resolveTypeIfNeeded(contentResolver), updateFlagsForComponent(resolveInfoFlags.getValue(), userId, intent), userId);
-            if (queryIntentActivityOptions == null) {
+            ParceledListSlice parceledListSliceQueryIntentActivityOptions = iPackageManager.queryIntentActivityOptions(componentName, intentArr, strArr, intent, intent.resolveTypeIfNeeded(contentResolver), updateFlagsForComponent(resolveInfoFlags.getValue(), userId, intent), userId);
+            if (parceledListSliceQueryIntentActivityOptions == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryIntentActivityOptions.getList();
+            return parceledListSliceQueryIntentActivityOptions.getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1423,11 +1431,11 @@ public class ApplicationPackageManager extends PackageManager {
     @Override // android.content.pm.PackageManager
     public List<ResolveInfo> queryBroadcastReceiversAsUser(Intent intent, PackageManager.ResolveInfoFlags resolveInfoFlags, int i) {
         try {
-            ParceledListSlice queryIntentReceivers = this.mPM.queryIntentReceivers(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), i, intent), i);
-            if (queryIntentReceivers == null) {
+            ParceledListSlice parceledListSliceQueryIntentReceivers = this.mPM.queryIntentReceivers(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), i, intent), i);
+            if (parceledListSliceQueryIntentReceivers == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryIntentReceivers.getList();
+            return parceledListSliceQueryIntentReceivers.getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1451,8 +1459,8 @@ public class ApplicationPackageManager extends PackageManager {
     @Override // android.content.pm.PackageManager
     public ResolveInfo resolveServiceAsUser(Intent intent, PackageManager.ResolveInfoFlags resolveInfoFlags, int i) {
         try {
-            ResolveInfo resolveService = this.mPM.resolveService(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), i, intent), i);
-            return (resolveService == null && SemDualAppManager.isDualAppId(i)) ? this.mPM.resolveService(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), 0, intent), 0) : resolveService;
+            ResolveInfo resolveInfoResolveService = this.mPM.resolveService(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), i, intent), i);
+            return (resolveInfoResolveService == null && SemDualAppManager.isDualAppId(i)) ? this.mPM.resolveService(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), 0, intent), 0) : resolveInfoResolveService;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1476,11 +1484,11 @@ public class ApplicationPackageManager extends PackageManager {
     @Override // android.content.pm.PackageManager
     public List<ResolveInfo> queryIntentServicesAsUser(Intent intent, PackageManager.ResolveInfoFlags resolveInfoFlags, int i) {
         try {
-            ParceledListSlice queryIntentServices = this.mPM.queryIntentServices(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), i, intent), i);
-            if (queryIntentServices == null) {
+            ParceledListSlice parceledListSliceQueryIntentServices = this.mPM.queryIntentServices(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), i, intent), i);
+            if (parceledListSliceQueryIntentServices == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryIntentServices.getList();
+            return parceledListSliceQueryIntentServices.getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1504,14 +1512,14 @@ public class ApplicationPackageManager extends PackageManager {
     @Override // android.content.pm.PackageManager
     public List<ResolveInfo> queryIntentContentProvidersAsUser(Intent intent, PackageManager.ResolveInfoFlags resolveInfoFlags, int i) {
         try {
-            ParceledListSlice queryIntentContentProviders = this.mPM.queryIntentContentProviders(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), i, intent), i);
-            if (SemDualAppManager.isDualAppId(i) && (queryIntentContentProviders == null || queryIntentContentProviders.getList().size() == 0)) {
-                queryIntentContentProviders = this.mPM.queryIntentContentProviders(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), resolveInfoFlags.getValue(), 0);
+            ParceledListSlice parceledListSliceQueryIntentContentProviders = this.mPM.queryIntentContentProviders(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), updateFlagsForComponent(resolveInfoFlags.getValue(), i, intent), i);
+            if (SemDualAppManager.isDualAppId(i) && (parceledListSliceQueryIntentContentProviders == null || parceledListSliceQueryIntentContentProviders.getList().size() == 0)) {
+                parceledListSliceQueryIntentContentProviders = this.mPM.queryIntentContentProviders(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), resolveInfoFlags.getValue(), 0);
             }
-            if (queryIntentContentProviders == null) {
+            if (parceledListSliceQueryIntentContentProviders == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryIntentContentProviders.getList();
+            return parceledListSliceQueryIntentContentProviders.getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1578,8 +1586,8 @@ public class ApplicationPackageManager extends PackageManager {
     @Override // android.content.pm.PackageManager
     public List<ProviderInfo> queryContentProviders(String str, int i, PackageManager.ComponentInfoFlags componentInfoFlags, String str2) {
         try {
-            ParceledListSlice queryContentProviders = this.mPM.queryContentProviders(str, i, updateFlagsForComponent(componentInfoFlags.getValue(), UserHandle.getUserId(i), null), str2);
-            return queryContentProviders != null ? queryContentProviders.getList() : Collections.EMPTY_LIST;
+            ParceledListSlice parceledListSliceQueryContentProviders = this.mPM.queryContentProviders(str, i, updateFlagsForComponent(componentInfoFlags.getValue(), UserHandle.getUserId(i), null), str2);
+            return parceledListSliceQueryContentProviders != null ? parceledListSliceQueryContentProviders.getList() : Collections.EMPTY_LIST;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1601,11 +1609,11 @@ public class ApplicationPackageManager extends PackageManager {
     @Override // android.content.pm.PackageManager
     public List<InstrumentationInfo> queryInstrumentation(String str, int i) {
         try {
-            ParceledListSlice queryInstrumentationAsUser = this.mPM.queryInstrumentationAsUser(str, i, getUserId());
-            if (queryInstrumentationAsUser == null) {
+            ParceledListSlice parceledListSliceQueryInstrumentationAsUser = this.mPM.queryInstrumentationAsUser(str, i, getUserId());
+            if (parceledListSliceQueryInstrumentationAsUser == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryInstrumentationAsUser.getList();
+            return parceledListSliceQueryInstrumentationAsUser.getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1622,9 +1630,9 @@ public class ApplicationPackageManager extends PackageManager {
                     typedValue.density = this.mContext.getResources().getDisplayMetrics().densityDpi;
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     options.inTargetDensity = this.mContext.getResources().getDisplayMetrics().densityDpi;
-                    Drawable createFromResourceStream = Drawable.createFromResourceStream(this.mContext.getResources(), typedValue, byteArrayInputStream, null, options);
+                    Drawable drawableCreateFromResourceStream = Drawable.createFromResourceStream(this.mContext.getResources(), typedValue, byteArrayInputStream, null, options);
                     Log.i(TAG, "EDM:ApplicationIcon got from EDM database ");
-                    return createFromResourceStream;
+                    return drawableCreateFromResourceStream;
                 }
             } catch (Exception e) {
                 Log.w(TAG, "EDM: Get Icon EX: " + e);
@@ -1674,9 +1682,9 @@ public class ApplicationPackageManager extends PackageManager {
         if (intent.getComponent() != null) {
             return getActivityIcon(intent.getComponent());
         }
-        ResolveInfo resolveActivity = resolveActivity(intent, 65536);
-        if (resolveActivity != null) {
-            return resolveActivity.activityInfo.loadIcon(this);
+        ResolveInfo resolveInfoResolveActivity = resolveActivity(intent, 65536);
+        if (resolveInfoResolveActivity != null) {
+            return resolveInfoResolveActivity.activityInfo.loadIcon(this);
         }
         throw new PackageManager.NameNotFoundException(intent.toUri(0));
     }
@@ -1706,9 +1714,9 @@ public class ApplicationPackageManager extends PackageManager {
         if (intent.getComponent() != null) {
             return getActivityBanner(intent.getComponent());
         }
-        ResolveInfo resolveActivity = resolveActivity(intent, 65536);
-        if (resolveActivity != null) {
-            return resolveActivity.activityInfo.loadBanner(this);
+        ResolveInfo resolveInfoResolveActivity = resolveActivity(intent, 65536);
+        if (resolveInfoResolveActivity != null) {
+            return resolveInfoResolveActivity.activityInfo.loadBanner(this);
         }
         throw new PackageManager.NameNotFoundException(intent.toUri(0));
     }
@@ -1733,9 +1741,9 @@ public class ApplicationPackageManager extends PackageManager {
         if (intent.getComponent() != null) {
             return getActivityLogo(intent.getComponent());
         }
-        ResolveInfo resolveActivity = resolveActivity(intent, 65536);
-        if (resolveActivity != null) {
-            return resolveActivity.activityInfo.loadLogo(this);
+        ResolveInfo resolveInfoResolveActivity = resolveActivity(intent, 65536);
+        if (resolveInfoResolveActivity != null) {
+            return resolveInfoResolveActivity.activityInfo.loadLogo(this);
         }
         throw new PackageManager.NameNotFoundException(intent.toUri(0));
     }
@@ -1762,9 +1770,7 @@ public class ApplicationPackageManager extends PackageManager {
         return getBadgedDrawable(drawable, new LauncherIcons(this.mContext).getBadgeDrawable(getDevicePolicyManager().getResources().getDrawable(getUpdatableUserIconBadgeId(userHandle), DevicePolicyResources.Drawables.Style.SOLID_COLORED, new Supplier() { // from class: android.app.ApplicationPackageManager$$ExternalSyntheticLambda2
             @Override // java.util.function.Supplier
             public final Object get() {
-                Drawable lambda$getUserBadgedIcon$0;
-                lambda$getUserBadgedIcon$0 = ApplicationPackageManager.this.lambda$getUserBadgedIcon$0(userHandle);
-                return lambda$getUserBadgedIcon$0;
+                return this.f$0.lambda$getUserBadgedIcon$0(userHandle);
             }
         }), getUserBadgeColor(userHandle, false)), null, true);
     }
@@ -1812,9 +1818,7 @@ public class ApplicationPackageManager extends PackageManager {
         Drawable drawableForDensity = getDevicePolicyManager().getResources().getDrawableForDensity(getUpdatableUserBadgeId(userHandle), DevicePolicyResources.Drawables.Style.SOLID_COLORED, i, new Supplier() { // from class: android.app.ApplicationPackageManager$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                Drawable lambda$getUserBadgeForDensity$1;
-                lambda$getUserBadgeForDensity$1 = ApplicationPackageManager.this.lambda$getUserBadgeForDensity$1(userHandle, i);
-                return lambda$getUserBadgeForDensity$1;
+                return this.f$0.lambda$getUserBadgeForDensity$1(userHandle, i);
             }
         });
         drawableForDensity.setTint(getUserBadgeColor(userHandle, false));
@@ -1841,16 +1845,14 @@ public class ApplicationPackageManager extends PackageManager {
     }
 
     @Override // android.content.pm.PackageManager
-    public Drawable getUserBadgeForDensityNoBackground(final UserHandle userHandle, final int i) {
+    public Drawable getUserBadgeForDensityNoBackground(final UserHandle userHandle, final int i) throws Resources.NotFoundException {
         if (!hasUserBadge(userHandle.getIdentifier())) {
             return null;
         }
         Drawable drawableForDensity = getDevicePolicyManager().getResources().getDrawableForDensity(getUpdatableUserBadgeId(userHandle), DevicePolicyResources.Drawables.Style.SOLID_NOT_COLORED, i, new Supplier() { // from class: android.app.ApplicationPackageManager$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                Drawable lambda$getUserBadgeForDensityNoBackground$2;
-                lambda$getUserBadgeForDensityNoBackground$2 = ApplicationPackageManager.this.lambda$getUserBadgeForDensityNoBackground$2(userHandle, i);
-                return lambda$getUserBadgeForDensityNoBackground$2;
+                return this.f$0.lambda$getUserBadgeForDensityNoBackground$2(userHandle, i);
             }
         });
         if (drawableForDensity != null) {
@@ -2275,9 +2277,9 @@ public class ApplicationPackageManager extends PackageManager {
 
     private int installExistingPackageAsUser(String str, int i, int i2) throws PackageManager.NameNotFoundException {
         try {
-            int installExistingPackageAsUser = this.mPM.installExistingPackageAsUser(str, i2, 4194304, i, null);
-            if (installExistingPackageAsUser != -3) {
-                return installExistingPackageAsUser;
+            int iInstallExistingPackageAsUser = this.mPM.installExistingPackageAsUser(str, i2, 4194304, i, null);
+            if (iInstallExistingPackageAsUser != -3) {
+                return iInstallExistingPackageAsUser;
             }
             throw new PackageManager.NameNotFoundException("Package " + str + " doesn't exist");
         } catch (RemoteException e) {
@@ -2407,7 +2409,7 @@ public class ApplicationPackageManager extends PackageManager {
     }
 
     @Override // android.content.pm.PackageManager
-    public boolean isAppArchivable(String str) throws PackageManager.NameNotFoundException {
+    public boolean isAppArchivable(String str) throws Throwable {
         try {
             Objects.requireNonNull(str);
             return this.mPM.isAppArchivable(str, new UserHandle(getUserId()));
@@ -2530,14 +2532,14 @@ public class ApplicationPackageManager extends PackageManager {
     }
 
     private boolean isPackageCandidateVolume(ContextImpl contextImpl, ApplicationInfo applicationInfo, VolumeInfo volumeInfo, IPackageManager iPackageManager) {
-        boolean isForceAllowOnExternal = isForceAllowOnExternal(contextImpl);
+        boolean zIsForceAllowOnExternal = isForceAllowOnExternal(contextImpl);
         if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(volumeInfo.getId())) {
             return applicationInfo.isSystemApp() || isAllow3rdPartyOnInternal(contextImpl);
         }
         if (applicationInfo.isSystemApp()) {
             return false;
         }
-        if (!isForceAllowOnExternal && (applicationInfo.installLocation == 1 || applicationInfo.installLocation == -1)) {
+        if (!zIsForceAllowOnExternal && (applicationInfo.installLocation == 1 || applicationInfo.installLocation == -1)) {
             Log.i(TAG, "Apps demanding internal storage can't be moved, " + applicationInfo.packageName);
             return false;
         }
@@ -3112,20 +3114,20 @@ public class ApplicationPackageManager extends PackageManager {
 
     @Override // android.content.pm.PackageManager
     public Drawable loadItemIcon(PackageItemInfo packageItemInfo, ApplicationInfo applicationInfo, boolean z, int i) {
-        Drawable loadUnbadgedItemIcon = loadUnbadgedItemIcon(packageItemInfo, applicationInfo, z, i);
+        Drawable drawableLoadUnbadgedItemIcon = loadUnbadgedItemIcon(packageItemInfo, applicationInfo, z, i);
         if (packageItemInfo.showUserIcon != -10000) {
-            return loadUnbadgedItemIcon;
+            return drawableLoadUnbadgedItemIcon;
         }
         if (applicationInfo != null && SemDualAppManager.isDualAppId(UserHandle.getUserId(applicationInfo.uid))) {
-            return getUserBadgedIcon(loadUnbadgedItemIcon, new UserHandle(UserHandle.getUserId(applicationInfo.uid)));
+            return getUserBadgedIcon(drawableLoadUnbadgedItemIcon, new UserHandle(UserHandle.getUserId(applicationInfo.uid)));
         }
         if (SemDualAppManager.isDualAppId(this.mContext.getUserId())) {
-            return getUserBadgedIcon(loadUnbadgedItemIcon, new UserHandle(0));
+            return getUserBadgedIcon(drawableLoadUnbadgedItemIcon, new UserHandle(0));
         }
         if (PMRune.PM_BADGE_ON_MONETIZED_APP_SUPPORTED && applicationInfo != null && shouldAppSupportBadgeIcon(packageItemInfo.packageName, UserHandle.getUserId(applicationInfo.uid))) {
-            loadUnbadgedItemIcon = getMonetizeBadgedIcon(loadUnbadgedItemIcon);
+            drawableLoadUnbadgedItemIcon = getMonetizeBadgedIcon(drawableLoadUnbadgedItemIcon);
         }
-        return getUserBadgedIcon(loadUnbadgedItemIcon, new UserHandle(getUserId()));
+        return getUserBadgedIcon(drawableLoadUnbadgedItemIcon, new UserHandle(getUserId()));
     }
 
     @Override // android.content.pm.PackageManager
@@ -3133,138 +3135,205 @@ public class ApplicationPackageManager extends PackageManager {
         return loadUnbadgedItemIcon(packageItemInfo, applicationInfo, false, 0);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:53:0x00e3  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00f0  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0186 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0187  */
+    /* JADX WARN: Removed duplicated region for block: B:117:0x0186 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:118:0x0187  */
+    /* JADX WARN: Removed duplicated region for block: B:67:0x00e3  */
+    /* JADX WARN: Removed duplicated region for block: B:69:0x00f0  */
     @Override // android.content.pm.PackageManager
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.graphics.drawable.Drawable loadUnbadgedItemIcon(android.content.pm.PackageItemInfo r19, android.content.pm.ApplicationInfo r20, boolean r21, int r22) {
-        /*
-            Method dump skipped, instructions count: 534
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.ApplicationPackageManager.loadUnbadgedItemIcon(android.content.pm.PackageItemInfo, android.content.pm.ApplicationInfo, boolean, int):android.graphics.drawable.Drawable");
+    public Drawable loadUnbadgedItemIcon(PackageItemInfo packageItemInfo, ApplicationInfo applicationInfo, boolean z, int i) {
+        boolean z2;
+        boolean z3;
+        boolean z4;
+        boolean z5;
+        boolean z6;
+        Drawable drawableLoadDefaultIcon;
+        Drawable drawable;
+        boolean z7;
+        int i2;
+        Drawable colorThemeIcon;
+        int i3;
+        boolean z8;
+        byte[] knoxIcon;
+        PackageItemInfo packageItemInfo2 = packageItemInfo;
+        int i4 = i;
+        if (PMRune.PM_32BIT_APP_RUNNING_IN_ABI64 && !this.mAbiAppHelper.canAccessApkFile(this.mContext, applicationInfo, packageItemInfo2.packageName)) {
+            Log.d(TAG, "The apk size is bigger than 2G, native abort might happen. return default icon");
+            return getDefaultActivityIcon();
+        }
+        int userId = applicationInfo != null ? UserHandle.getUserId(applicationInfo.uid) : 0;
+        if (this.mAppIconSolution == null) {
+            this.mAppIconSolution = SemAppIconSolution.getInstance(this.mContext);
+        }
+        int iCheckAppIconThemePackage = this.mAppIconSolution.checkAppIconThemePackage(this.mContext);
+        if (i4 == 0) {
+            z2 = false;
+            z3 = false;
+        } else if (i4 != 1) {
+            z2 = (i4 & 16) != 0;
+            z3 = (i4 & 32) != 0;
+        } else {
+            z3 = false;
+            z2 = true;
+        }
+        if (!packageItemInfo2.isArchived && SemPersonaManager.isKnoxIcon(packageItemInfo2.packageName, packageItemInfo2.name) && (knoxIcon = SemPersonaManager.getKnoxIcon(packageItemInfo2.packageName, packageItemInfo2.name, userId)) != null) {
+            BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), BitmapFactory.decodeByteArray(knoxIcon, 0, knoxIcon.length));
+            SemAppIconSolution semAppIconSolution = this.mAppIconSolution;
+            return (semAppIconSolution == null || !semAppIconSolution.isAppIconThemePackageSet()) ? bitmapDrawable : this.mAppIconSolution.getThemeIconWithBG(this.mContext, packageItemInfo2, bitmapDrawable, i4);
+        }
+        boolean z9 = iCheckAppIconThemePackage == 0;
+        boolean z10 = iCheckAppIconThemePackage == 3;
+        if (packageItemInfo2.isArchived || !z9) {
+            z4 = false;
+            z5 = false;
+        } else {
+            boolean zReplacedIconFromAppPolicy = replacedIconFromAppPolicy(packageItemInfo2.packageName, userId);
+            if (zReplacedIconFromAppPolicy) {
+                z5 = zReplacedIconFromAppPolicy;
+                z4 = false;
+            } else if (!this.mAppIconSolution.needToGetLiveIcon(this.mContext, packageItemInfo2)) {
+                drawableLoadDefaultIcon = this.mAppIconSolution.getAppIconFromTheme(this.mContext, packageItemInfo2, null, i4);
+                if (drawableLoadDefaultIcon != null) {
+                    return drawableLoadDefaultIcon;
+                }
+                z5 = zReplacedIconFromAppPolicy;
+                z4 = false;
+                z6 = true;
+                if (packageItemInfo2.showUserIcon != -10000) {
+                }
+            } else {
+                z5 = zReplacedIconFromAppPolicy;
+                z4 = true;
+                z6 = true;
+                drawableLoadDefaultIcon = null;
+                if (packageItemInfo2.showUserIcon != -10000) {
+                    return UserIcons.getDefaultUserIcon(this.mContext.getResources(), packageItemInfo2.showUserIcon, false);
+                }
+                if (packageItemInfo2.packageName != null) {
+                    if (packageItemInfo2.isArchived) {
+                        drawableLoadDefaultIcon = getArchivedAppIcon(packageItemInfo2.packageName);
+                        if (drawableLoadDefaultIcon != null) {
+                            return drawableLoadDefaultIcon;
+                        }
+                    } else {
+                        drawableLoadDefaultIcon = getDrawable(packageItemInfo2.packageName, packageItemInfo2.icon, applicationInfo);
+                    }
+                }
+                if (drawableLoadDefaultIcon == null && packageItemInfo2 != applicationInfo && applicationInfo != null) {
+                    return loadUnbadgedItemIcon(applicationInfo, applicationInfo, z, i4);
+                }
+                if (drawableLoadDefaultIcon == null && (drawableLoadDefaultIcon = packageItemInfo2.loadDefaultIcon(this)) != null && (packageItemInfo2 instanceof ComponentInfo)) {
+                    drawable = drawableLoadDefaultIcon;
+                    z7 = z6;
+                } else {
+                    drawable = drawableLoadDefaultIcon;
+                    z7 = false;
+                }
+                int iSemGetAppIconFeatures = (z2 || z3) ? semGetAppIconFeatures(packageItemInfo2.packageName) : 0;
+                Drawable liveIcon = (applicationInfo == null || iCheckAppIconThemePackage == 2 || !PmUtils.supportLiveIcon(packageItemInfo2, applicationInfo, this.mContext)) ? null : getLiveIcon(packageItemInfo2, i4, z4);
+                if (liveIcon != null && !z5) {
+                    if (z3 && z10) {
+                        Drawable colorThemeIcon2 = this.mAppIconSolution.getColorThemeIcon(this.mContext, liveIcon, packageItemInfo2.packageName, iSemGetAppIconFeatures);
+                        if (colorThemeIcon2 != null) {
+                            liveIcon = this.mAppIconSolution.wrapIconShadow(colorThemeIcon2);
+                        }
+                    } else {
+                        SemAppIconSolution semAppIconSolution2 = this.mAppIconSolution;
+                        ContextImpl contextImpl = this.mContext;
+                        if (z && z2) {
+                            i2 = iSemGetAppIconFeatures;
+                            i3 = i4;
+                            z8 = z6;
+                        } else {
+                            i2 = iSemGetAppIconFeatures;
+                            i3 = i4;
+                            z8 = false;
+                        }
+                        liveIcon = semAppIconSolution2.checkAndDrawLiveIconFromTheme(contextImpl, packageItemInfo, liveIcon, z8, z9, i3);
+                        packageItemInfo2 = packageItemInfo;
+                        i4 = i3;
+                        if (liveIcon == null) {
+                            return liveIcon;
+                        }
+                        if (z3 && z10 && drawable != null && (colorThemeIcon = this.mAppIconSolution.getColorThemeIcon(this.mContext, drawable, packageItemInfo2.packageName, i2)) != null) {
+                            return this.mAppIconSolution.wrapIconShadow(colorThemeIcon);
+                        }
+                        if (z && !z9 && drawable != null) {
+                            boolean z11 = ((i2 & 1) == 0 || (i2 & 2) != 0) ? z6 : false;
+                            if ((semCheckComponentMetadataForIconTray(packageItemInfo2.packageName, packageItemInfo2.name) || z11) && z2) {
+                                if (isNonAdaptiveIconPkg(packageItemInfo2.packageName)) {
+                                    return this.mAppIconSolution.wrapIconShadowAndNight(this.mContext, drawable, i4);
+                                }
+                                return this.mAppIconSolution.getThemeIconWithBG(this.mContext, packageItemInfo2, drawable, Boolean.valueOf(z6), i4);
+                            }
+                        }
+                        Drawable drawable2 = drawable;
+                        if (packageItemInfo2.name == null || !packageItemInfo2.name.startsWith("android.permission-group")) {
+                            return (drawable2 == null || !z9 || z7 || (z5 && !"com.samsung.knox.securefolder".equals(packageItemInfo2.packageName))) ? drawable2 : this.mAppIconSolution.getThemeIconWithBG(this.mContext, packageItemInfo2, drawable2, i4);
+                        }
+                        return this.mAppIconSolution.applyPrimaryColorToIcon(this.mContext, drawable2);
+                    }
+                }
+                i2 = iSemGetAppIconFeatures;
+                if (liveIcon == null) {
+                }
+            }
+        }
+        z6 = true;
+        drawableLoadDefaultIcon = null;
+        if (packageItemInfo2.showUserIcon != -10000) {
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00b6  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00d1 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00ab  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0043  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0023  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.graphics.drawable.Drawable getBadgedDrawable(android.graphics.drawable.Drawable r8, android.graphics.drawable.Drawable r9, android.graphics.Rect r10, boolean r11) {
-        /*
-            r7 = this;
-            int r0 = r8.getIntrinsicWidth()
-            int r1 = r8.getIntrinsicHeight()
-            boolean r2 = r8 instanceof android.graphics.drawable.BitmapDrawable
-            r3 = 1
-            r4 = 0
-            if (r2 == 0) goto L23
-            r5 = r8
-            android.graphics.drawable.BitmapDrawable r5 = (android.graphics.drawable.BitmapDrawable) r5
-            android.graphics.Bitmap r5 = r5.getBitmap()
-            int r6 = r5.getWidth()
-            if (r6 != r0) goto L23
-            int r5 = r5.getHeight()
-            if (r5 != r1) goto L23
-            r5 = r3
-            goto L24
-        L23:
-            r5 = r4
-        L24:
-            if (r11 == 0) goto L38
-            if (r2 == 0) goto L38
-            r11 = r8
-            android.graphics.drawable.BitmapDrawable r11 = (android.graphics.drawable.BitmapDrawable) r11
-            android.graphics.Bitmap r11 = r11.getBitmap()
-            boolean r11 = r11.isMutable()
-            if (r11 == 0) goto L38
-            if (r5 == 0) goto L38
-            goto L39
-        L38:
-            r3 = r4
-        L39:
-            if (r3 == 0) goto L43
-            r11 = r8
-            android.graphics.drawable.BitmapDrawable r11 = (android.graphics.drawable.BitmapDrawable) r11
-            android.graphics.Bitmap r11 = r11.getBitmap()
-            goto L49
-        L43:
-            android.graphics.Bitmap$Config r11 = android.graphics.Bitmap.Config.ARGB_8888
-            android.graphics.Bitmap r11 = android.graphics.Bitmap.createBitmap(r0, r1, r11)
-        L49:
-            android.graphics.Canvas r5 = new android.graphics.Canvas
-            r5.<init>(r11)
-            if (r3 != 0) goto L56
-            r8.setBounds(r4, r4, r0, r1)
-            r8.draw(r5)
-        L56:
-            if (r10 == 0) goto Lab
-            int r6 = r10.left
-            if (r6 < 0) goto L8a
-            int r6 = r10.top
-            if (r6 < 0) goto L8a
-            int r6 = r10.width()
-            if (r6 > r0) goto L8a
-            int r6 = r10.height()
-            if (r6 > r1) goto L8a
-            int r0 = r10.width()
-            int r1 = r10.height()
-            r9.setBounds(r4, r4, r0, r1)
-            r5.save()
-            int r0 = r10.left
-            float r0 = (float) r0
-            int r10 = r10.top
-            float r10 = (float) r10
-            r5.translate(r0, r10)
-            r9.draw(r5)
-            r5.restore()
-            goto Lb4
-        L8a:
-            java.lang.IllegalArgumentException r7 = new java.lang.IllegalArgumentException
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder
-            java.lang.String r9 = "Badge location "
-            r8.<init>(r9)
-            r8.append(r10)
-            java.lang.String r9 = " not in badged drawable bounds "
-            r8.append(r9)
-            android.graphics.Rect r9 = new android.graphics.Rect
-            r9.<init>(r4, r4, r0, r1)
-            r8.append(r9)
-            java.lang.String r8 = r8.toString()
-            r7.<init>(r8)
-            throw r7
-        Lab:
-            r9.mutate()
-            r9.setBounds(r4, r4, r0, r1)
-            r9.draw(r5)
-        Lb4:
-            if (r3 != 0) goto Ld1
-            android.graphics.drawable.BitmapDrawable r9 = new android.graphics.drawable.BitmapDrawable
-            android.app.ContextImpl r7 = r7.mContext
-            android.content.res.Resources r7 = r7.getResources()
-            r9.<init>(r7, r11)
-            if (r2 == 0) goto Ld0
-            android.graphics.drawable.BitmapDrawable r8 = (android.graphics.drawable.BitmapDrawable) r8
-            android.graphics.Bitmap r7 = r8.getBitmap()
-            int r7 = r7.getDensity()
-            r9.setTargetDensity(r7)
-        Ld0:
-            return r9
-        Ld1:
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.ApplicationPackageManager.getBadgedDrawable(android.graphics.drawable.Drawable, android.graphics.drawable.Drawable, android.graphics.Rect, boolean):android.graphics.drawable.Drawable");
+    private Drawable getBadgedDrawable(Drawable drawable, Drawable drawable2, Rect rect, boolean z) {
+        boolean z2;
+        Bitmap bitmapCreateBitmap;
+        int intrinsicWidth = drawable.getIntrinsicWidth();
+        int intrinsicHeight = drawable.getIntrinsicHeight();
+        boolean z3 = drawable instanceof BitmapDrawable;
+        if (z3) {
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            z2 = bitmap.getWidth() == intrinsicWidth && bitmap.getHeight() == intrinsicHeight;
+        }
+        boolean z4 = z && z3 && ((BitmapDrawable) drawable).getBitmap().isMutable() && z2;
+        if (z4) {
+            bitmapCreateBitmap = ((BitmapDrawable) drawable).getBitmap();
+        } else {
+            bitmapCreateBitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888);
+        }
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
+        if (!z4) {
+            drawable.setBounds(0, 0, intrinsicWidth, intrinsicHeight);
+            drawable.draw(canvas);
+        }
+        if (rect != null) {
+            if (rect.left < 0 || rect.top < 0 || rect.width() > intrinsicWidth || rect.height() > intrinsicHeight) {
+                throw new IllegalArgumentException("Badge location " + rect + " not in badged drawable bounds " + new Rect(0, 0, intrinsicWidth, intrinsicHeight));
+            }
+            drawable2.setBounds(0, 0, rect.width(), rect.height());
+            canvas.save();
+            canvas.translate(rect.left, rect.top);
+            drawable2.draw(canvas);
+            canvas.restore();
+        } else {
+            drawable2.mutate();
+            drawable2.setBounds(0, 0, intrinsicWidth, intrinsicHeight);
+            drawable2.draw(canvas);
+        }
+        if (z4) {
+            return drawable;
+        }
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), bitmapCreateBitmap);
+        if (z3) {
+            bitmapDrawable.setTargetDensity(((BitmapDrawable) drawable).getBitmap().getDensity());
+        }
+        return bitmapDrawable;
     }
 
     private boolean hasUserBadge(int i) {
@@ -3324,19 +3393,19 @@ public class ApplicationPackageManager extends PackageManager {
 
         @Override // android.content.pm.IPackageMoveObserver
         public void onCreated(int i, Bundle bundle) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.arg2 = bundle;
-            this.mHandler.obtainMessage(1, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.arg2 = bundle;
+            this.mHandler.obtainMessage(1, someArgsObtain).sendToTarget();
         }
 
         @Override // android.content.pm.IPackageMoveObserver
         public void onStatusChanged(int i, int i2, long j) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.argi1 = i;
-            obtain.argi2 = i2;
-            obtain.arg3 = Long.valueOf(j);
-            this.mHandler.obtainMessage(2, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.argi1 = i;
+            someArgsObtain.argi2 = i2;
+            someArgsObtain.arg3 = Long.valueOf(j);
+            this.mHandler.obtainMessage(2, someArgsObtain).sendToTarget();
         }
     }
 
@@ -3618,11 +3687,11 @@ public class ApplicationPackageManager extends PackageManager {
     public List<PackageManager.Property> queryApplicationProperty(String str) {
         Objects.requireNonNull(str);
         try {
-            ParceledListSlice queryProperty = this.mPM.queryProperty(str, 5);
-            if (queryProperty == null) {
+            ParceledListSlice parceledListSliceQueryProperty = this.mPM.queryProperty(str, 5);
+            if (parceledListSliceQueryProperty == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryProperty.getList();
+            return parceledListSliceQueryProperty.getList();
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -3632,11 +3701,11 @@ public class ApplicationPackageManager extends PackageManager {
     public List<PackageManager.Property> queryActivityProperty(String str) {
         Objects.requireNonNull(str);
         try {
-            ParceledListSlice queryProperty = this.mPM.queryProperty(str, 1);
-            if (queryProperty == null) {
+            ParceledListSlice parceledListSliceQueryProperty = this.mPM.queryProperty(str, 1);
+            if (parceledListSliceQueryProperty == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryProperty.getList();
+            return parceledListSliceQueryProperty.getList();
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -3646,11 +3715,11 @@ public class ApplicationPackageManager extends PackageManager {
     public List<PackageManager.Property> queryProviderProperty(String str) {
         Objects.requireNonNull(str);
         try {
-            ParceledListSlice queryProperty = this.mPM.queryProperty(str, 4);
-            if (queryProperty == null) {
+            ParceledListSlice parceledListSliceQueryProperty = this.mPM.queryProperty(str, 4);
+            if (parceledListSliceQueryProperty == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryProperty.getList();
+            return parceledListSliceQueryProperty.getList();
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -3660,11 +3729,11 @@ public class ApplicationPackageManager extends PackageManager {
     public List<PackageManager.Property> queryReceiverProperty(String str) {
         Objects.requireNonNull(str);
         try {
-            ParceledListSlice queryProperty = this.mPM.queryProperty(str, 2);
-            if (queryProperty == null) {
+            ParceledListSlice parceledListSliceQueryProperty = this.mPM.queryProperty(str, 2);
+            if (parceledListSliceQueryProperty == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryProperty.getList();
+            return parceledListSliceQueryProperty.getList();
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -3674,11 +3743,11 @@ public class ApplicationPackageManager extends PackageManager {
     public List<PackageManager.Property> queryServiceProperty(String str) {
         Objects.requireNonNull(str);
         try {
-            ParceledListSlice queryProperty = this.mPM.queryProperty(str, 3);
-            if (queryProperty == null) {
+            ParceledListSlice parceledListSliceQueryProperty = this.mPM.queryProperty(str, 3);
+            if (parceledListSliceQueryProperty == null) {
                 return Collections.EMPTY_LIST;
             }
-            return queryProperty.getList();
+            return parceledListSliceQueryProperty.getList();
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -3715,7 +3784,7 @@ public class ApplicationPackageManager extends PackageManager {
     }
 
     @Override // android.content.pm.PackageManager
-    public boolean[] canPackageQuery(String str, String[] strArr) throws PackageManager.NameNotFoundException {
+    public boolean[] canPackageQuery(String str, String[] strArr) throws Throwable {
         Objects.requireNonNull(str);
         Objects.requireNonNull(strArr);
         try {
@@ -3791,7 +3860,7 @@ public class ApplicationPackageManager extends PackageManager {
     private Drawable getLiveIcon(PackageItemInfo packageItemInfo, int i, boolean z) {
         String str;
         String packagePath;
-        Method findGetLiveIconMethod;
+        Method methodFindGetLiveIconMethod;
         if (!supportLiveIconByPackage(packageItemInfo).booleanValue() || (packagePath = getPackagePath((str = packageItemInfo.packageName))) == null) {
             return null;
         }
@@ -3803,17 +3872,17 @@ public class ApplicationPackageManager extends PackageManager {
                 if (arrayMap.containsKey(str)) {
                     if (packagePath.equals(arrayMap.get(str))) {
                         Log.d(TAG, "we has " + str + " class. reuse it ");
-                        findGetLiveIconMethod = arrayMap2.get(str);
+                        methodFindGetLiveIconMethod = arrayMap2.get(str);
                     } else if (packagePath.equals(arrayMap.get(str))) {
-                        findGetLiveIconMethod = null;
+                        methodFindGetLiveIconMethod = null;
                     } else {
                         Log.d(TAG, "we don't have " + packagePath + " package path. load it");
                         try {
-                            findGetLiveIconMethod = findGetLiveIconMethod(Class.forName(str2, true, new PathClassLoader(packagePath, ClassLoader.getSystemClassLoader())));
+                            methodFindGetLiveIconMethod = findGetLiveIconMethod(Class.forName(str2, true, new PathClassLoader(packagePath, ClassLoader.getSystemClassLoader())));
                             arrayMap.remove(str);
                             arrayMap2.remove(str);
                             arrayMap.put(str, packagePath);
-                            arrayMap2.put(str, findGetLiveIconMethod);
+                            arrayMap2.put(str, methodFindGetLiveIconMethod);
                         } catch (ClassNotFoundException unused) {
                             Log.e(TAG, "!@can't found class" + str2);
                             return null;
@@ -3822,9 +3891,9 @@ public class ApplicationPackageManager extends PackageManager {
                 } else {
                     Log.d(TAG, "we don't have '" + str + "' package name. load it");
                     try {
-                        findGetLiveIconMethod = findGetLiveIconMethod(Class.forName(str2, true, new PathClassLoader(packagePath, ClassLoader.getSystemClassLoader())));
+                        methodFindGetLiveIconMethod = findGetLiveIconMethod(Class.forName(str2, true, new PathClassLoader(packagePath, ClassLoader.getSystemClassLoader())));
                         arrayMap.put(str, packagePath);
-                        arrayMap2.put(str, findGetLiveIconMethod);
+                        arrayMap2.put(str, methodFindGetLiveIconMethod);
                     } catch (ClassNotFoundException unused2) {
                         Log.e(TAG, "!@can't found class" + str2);
                         return null;
@@ -3833,32 +3902,32 @@ public class ApplicationPackageManager extends PackageManager {
             }
         }
         boolean z2 = (i & 256) != 0;
-        if (findGetLiveIconMethod == null) {
+        if (methodFindGetLiveIconMethod == null) {
             return null;
         }
         try {
             LiveIconObject liveIconObject = new LiveIconObject();
             Log.i(TAG, "package : " + str + ", useAppIconResources : " + z);
             Resources appIconPackageResources = z ? this.mAppIconSolution.getAppIconPackageResources(this.mContext) : null;
-            if (findGetLiveIconMethod.getParameterCount() == 1) {
-                liveIconObject.setLiveIcon(findGetLiveIconMethod.invoke(null, this.mContext));
-            } else if (findGetLiveIconMethod.getParameterCount() == 2) {
+            if (methodFindGetLiveIconMethod.getParameterCount() == 1) {
+                liveIconObject.setLiveIcon(methodFindGetLiveIconMethod.invoke(null, this.mContext));
+            } else if (methodFindGetLiveIconMethod.getParameterCount() == 2) {
                 if (z2) {
-                    liveIconObject.setLiveIcon(findGetLiveIconMethod.invoke(null, this.mContext, 1));
+                    liveIconObject.setLiveIcon(methodFindGetLiveIconMethod.invoke(null, this.mContext, 1));
                 } else {
-                    liveIconObject.setLiveIcon(findGetLiveIconMethod.invoke(null, this.mContext, 0));
+                    liveIconObject.setLiveIcon(methodFindGetLiveIconMethod.invoke(null, this.mContext, 0));
                 }
-            } else if (findGetLiveIconMethod.getParameterCount() != 3) {
+            } else if (methodFindGetLiveIconMethod.getParameterCount() != 3) {
                 ComponentName componentName = new ComponentName(str, packageItemInfo.name != null ? packageItemInfo.name : "");
                 if (z2) {
-                    liveIconObject.setLiveIcon(findGetLiveIconMethod.invoke(null, this.mContext, 1, appIconPackageResources, componentName));
+                    liveIconObject.setLiveIcon(methodFindGetLiveIconMethod.invoke(null, this.mContext, 1, appIconPackageResources, componentName));
                 } else {
-                    liveIconObject.setLiveIcon(findGetLiveIconMethod.invoke(null, this.mContext, 0, appIconPackageResources, componentName));
+                    liveIconObject.setLiveIcon(methodFindGetLiveIconMethod.invoke(null, this.mContext, 0, appIconPackageResources, componentName));
                 }
             } else if (z2) {
-                liveIconObject.setLiveIcon(findGetLiveIconMethod.invoke(null, this.mContext, 1, appIconPackageResources));
+                liveIconObject.setLiveIcon(methodFindGetLiveIconMethod.invoke(null, this.mContext, 1, appIconPackageResources));
             } else {
-                liveIconObject.setLiveIcon(findGetLiveIconMethod.invoke(null, this.mContext, 0, appIconPackageResources));
+                liveIconObject.setLiveIcon(methodFindGetLiveIconMethod.invoke(null, this.mContext, 0, appIconPackageResources));
             }
             Object liveIcon = ((LiveIconObject) liveIconObject.clone()).getLiveIcon();
             if (liveIcon instanceof Drawable) {
@@ -3911,18 +3980,18 @@ public class ApplicationPackageManager extends PackageManager {
                 try {
                     try {
                         return cls.getMethod("getLiveIcon", Context.class, Integer.TYPE, Resources.class, ComponentName.class);
-                    } catch (NoSuchMethodException unused) {
-                        return cls.getMethod("getLiveIcon", Context.class);
+                    } catch (NoSuchMethodException e) {
+                        Log.e(TAG, "!@call method fail getLiveIcon", e);
+                        return null;
                     }
-                } catch (NoSuchMethodException unused2) {
-                    return cls.getMethod("getLiveIcon", Context.class, Integer.TYPE);
+                } catch (NoSuchMethodException unused) {
+                    return cls.getMethod("getLiveIcon", Context.class, Integer.TYPE, Resources.class);
                 }
-            } catch (NoSuchMethodException unused3) {
-                return cls.getMethod("getLiveIcon", Context.class, Integer.TYPE, Resources.class);
+            } catch (NoSuchMethodException unused2) {
+                return cls.getMethod("getLiveIcon", Context.class, Integer.TYPE);
             }
-        } catch (NoSuchMethodException e) {
-            Log.e(TAG, "!@call method fail getLiveIcon", e);
-            return null;
+        } catch (NoSuchMethodException unused3) {
+            return cls.getMethod("getLiveIcon", Context.class);
         }
     }
 
@@ -3976,23 +4045,97 @@ public class ApplicationPackageManager extends PackageManager {
         return semGetDrawableForIconTray(drawable, i, null, 0);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0072  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00bb  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00c4  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0100  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0074  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x005f  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0074  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00ad  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00bb  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00c4  */
+    /* JADX WARN: Removed duplicated region for block: B:66:0x0100  */
     @Override // android.content.pm.PackageManager
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.graphics.drawable.Drawable semGetDrawableForIconTray(android.graphics.drawable.Drawable r10, int r11, java.lang.String r12, int r13) {
-        /*
-            Method dump skipped, instructions count: 258
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.ApplicationPackageManager.semGetDrawableForIconTray(android.graphics.drawable.Drawable, int, java.lang.String, int):android.graphics.drawable.Drawable");
+    public Drawable semGetDrawableForIconTray(Drawable drawable, int i, String str, int i2) {
+        boolean z;
+        boolean z2;
+        boolean z3;
+        boolean z4;
+        int iCheckAppIconThemePackage;
+        Drawable colorThemeIcon;
+        boolean z5;
+        Log.i("AppIconSolution", "getThemeIconWithBG called with public API, pkg = " + str + ", mode = " + i);
+        if (drawable instanceof SemAppIconSolution.ShadowDrawable) {
+            Log.i("AppIconSolution", "shadow is already applied, pkg = " + str + ", mode = " + i);
+            return drawable;
+        }
+        if (i != 0) {
+            if (i == 1) {
+                z5 = false;
+            } else {
+                if (i != 2) {
+                    z = (i & 16) != 0;
+                    z4 = (i & 32) != 0;
+                    z3 = false;
+                    if (this.mAppIconSolution == null) {
+                        this.mAppIconSolution = SemAppIconSolution.getInstance(this.mContext);
+                    }
+                    iCheckAppIconThemePackage = this.mAppIconSolution.checkAppIconThemePackage(this.mContext);
+                    boolean z6 = iCheckAppIconThemePackage != 3;
+                    if (iCheckAppIconThemePackage == 0 && (i & 512) != 0) {
+                        Log.i("AppIconSolution", "Just return a stored icon at ArchiveState, pkg = " + str);
+                        return drawable;
+                    }
+                    if (z4 && z6 && drawable != null) {
+                        if (!"com.samsung.knox.securefolder".equals(str) && replacedIconFromAppPolicy(str, this.mContext.getUserId())) {
+                            Log.i("AppIconSolution", "customized secure folder icon is skipped to apply color palette");
+                        } else {
+                            colorThemeIcon = this.mAppIconSolution.getColorThemeIcon(this.mContext, drawable, str, semGetAppIconFeatures(str));
+                            if (colorThemeIcon != null) {
+                                return this.mAppIconSolution.wrapIconShadow(colorThemeIcon);
+                            }
+                        }
+                    }
+                    if (z) {
+                        return drawable;
+                    }
+                    if (isNonAdaptiveIconPkg(str) && (z3 || !this.mAppIconSolution.isAppIconThemePackageSet())) {
+                        return this.mAppIconSolution.wrapIconShadowAndNight(this.mContext, drawable, i);
+                    }
+                    boolean z7 = true;
+                    SemAppIconSolution semAppIconSolution = this.mAppIconSolution;
+                    ContextImpl contextImpl = this.mContext;
+                    if (!z3 && semAppIconSolution.isAppIconThemePackageSet()) {
+                        z7 = false;
+                    }
+                    return semAppIconSolution.getThemeIconWithBG(contextImpl, null, drawable, Boolean.valueOf(z7), false, i2, str, i);
+                }
+                z5 = true;
+            }
+            z2 = z5;
+            z = true;
+        } else {
+            z = false;
+            z2 = false;
+        }
+        z3 = z2;
+        z4 = false;
+        if (this.mAppIconSolution == null) {
+        }
+        iCheckAppIconThemePackage = this.mAppIconSolution.checkAppIconThemePackage(this.mContext);
+        if (iCheckAppIconThemePackage != 3) {
+        }
+        if (iCheckAppIconThemePackage == 0) {
+        }
+        if (z4) {
+            if (!"com.samsung.knox.securefolder".equals(str)) {
+                colorThemeIcon = this.mAppIconSolution.getColorThemeIcon(this.mContext, drawable, str, semGetAppIconFeatures(str));
+                if (colorThemeIcon != null) {
+                }
+            }
+        }
+        if (z) {
+        }
     }
 
     private boolean replacedIconFromAppPolicy(String str, int i) {
@@ -4147,11 +4290,11 @@ public class ApplicationPackageManager extends PackageManager {
         try {
             XmlResourceParser androidManifestParser = getAndroidManifestParser(file);
             try {
-                T apply = function.apply(androidManifestParser);
+                T tApply = function.apply(androidManifestParser);
                 if (androidManifestParser != null) {
                     androidManifestParser.close();
                 }
-                return apply;
+                return tApply;
             } finally {
             }
         } catch (IOException e) {
@@ -4161,21 +4304,21 @@ public class ApplicationPackageManager extends PackageManager {
     }
 
     private static XmlResourceParser getAndroidManifestParser(File file) throws IOException {
-        ApkAssets apkAssets = null;
+        ApkAssets apkAssetsLoadFromPath = null;
         try {
-            apkAssets = ApkAssets.loadFromPath(file.getAbsolutePath());
-            XmlResourceParser openXml = apkAssets.openXml("AndroidManifest.xml");
-            if (apkAssets != null) {
+            apkAssetsLoadFromPath = ApkAssets.loadFromPath(file.getAbsolutePath());
+            XmlResourceParser xmlResourceParserOpenXml = apkAssetsLoadFromPath.openXml("AndroidManifest.xml");
+            if (apkAssetsLoadFromPath != null) {
                 try {
-                    return openXml;
+                    return xmlResourceParserOpenXml;
                 } catch (Throwable th) {
                 }
             }
-            return openXml;
+            return xmlResourceParserOpenXml;
         } finally {
-            if (apkAssets != null) {
+            if (apkAssetsLoadFromPath != null) {
                 try {
-                    apkAssets.close();
+                    apkAssetsLoadFromPath.close();
                 } catch (Throwable th2) {
                     Log.w(TAG, "Failed to close apkAssets", th2);
                 }
@@ -4190,11 +4333,11 @@ public class ApplicationPackageManager extends PackageManager {
         try {
             XmlResourceParser androidManifestParser = getAndroidManifestParser(parcelFileDescriptor);
             try {
-                T apply = function.apply(androidManifestParser);
+                T tApply = function.apply(androidManifestParser);
                 if (androidManifestParser != null) {
                     androidManifestParser.close();
                 }
-                return apply;
+                return tApply;
             } finally {
             }
         } catch (IOException e) {
@@ -4204,21 +4347,21 @@ public class ApplicationPackageManager extends PackageManager {
     }
 
     private static XmlResourceParser getAndroidManifestParser(ParcelFileDescriptor parcelFileDescriptor) throws IOException {
-        ApkAssets apkAssets = null;
+        ApkAssets apkAssetsLoadFromFd = null;
         try {
-            apkAssets = ApkAssets.loadFromFd(parcelFileDescriptor.getFileDescriptor(), parcelFileDescriptor.toString(), 0, null);
-            XmlResourceParser openXml = apkAssets.openXml("AndroidManifest.xml");
-            if (apkAssets != null) {
+            apkAssetsLoadFromFd = ApkAssets.loadFromFd(parcelFileDescriptor.getFileDescriptor(), parcelFileDescriptor.toString(), 0, null);
+            XmlResourceParser xmlResourceParserOpenXml = apkAssetsLoadFromFd.openXml("AndroidManifest.xml");
+            if (apkAssetsLoadFromFd != null) {
                 try {
-                    return openXml;
+                    return xmlResourceParserOpenXml;
                 } catch (Throwable th) {
                 }
             }
-            return openXml;
+            return xmlResourceParserOpenXml;
         } finally {
-            if (apkAssets != null) {
+            if (apkAssetsLoadFromFd != null) {
                 try {
-                    apkAssets.close();
+                    apkAssetsLoadFromFd.close();
                 } catch (Throwable th2) {
                     Log.w(TAG, "Failed to close apkAssets", th2);
                 }
@@ -4226,96 +4369,54 @@ public class ApplicationPackageManager extends PackageManager {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0027, code lost:
-    
-        if (r3 != null) goto L11;
-     */
     @Override // android.content.pm.PackageManager
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public android.content.res.TypedArray extractPackageItemInfoAttributes(android.content.pm.PackageItemInfo r7, java.lang.String r8, java.lang.String r9, int[] r10) {
-        /*
-            r6 = this;
-            java.lang.String r0 = "ApplicationPackageManager"
-            java.lang.String r1 = "No "
-            r2 = 0
-            if (r7 == 0) goto L94
-            android.os.Bundle r3 = r7.metaData
-            if (r3 != 0) goto Ld
-            goto L94
-        Ld:
-            android.content.res.XmlResourceParser r3 = r7.loadXmlMetaData(r6, r8)     // Catch: java.lang.Throwable -> L80
-            if (r3 != 0) goto L2d
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L74
-            r6.<init>(r1)     // Catch: java.lang.Throwable -> L74
-            r6.append(r8)     // Catch: java.lang.Throwable -> L74
-            java.lang.String r8 = " metadata"
-            r6.append(r8)     // Catch: java.lang.Throwable -> L74
-            java.lang.String r6 = r6.toString()     // Catch: java.lang.Throwable -> L74
-            android.util.Log.w(r0, r6)     // Catch: java.lang.Throwable -> L74
-            if (r3 == 0) goto L2c
-        L29:
-            r3.close()     // Catch: java.lang.Throwable -> L80 java.lang.Throwable -> L80 java.lang.Throwable -> L80
-        L2c:
-            return r2
-        L2d:
-            android.util.AttributeSet r1 = android.util.Xml.asAttributeSet(r3)     // Catch: java.lang.Throwable -> L74
-        L31:
-            int r4 = r3.next()     // Catch: java.lang.Throwable -> L74
-            r5 = 1
-            if (r4 == r5) goto L3b
-            r5 = 2
-            if (r4 != r5) goto L31
-        L3b:
-            java.lang.String r4 = r3.getName()     // Catch: java.lang.Throwable -> L74
-            boolean r9 = android.text.TextUtils.equals(r4, r9)     // Catch: java.lang.Throwable -> L74
-            if (r9 != 0) goto L62
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L74
-            r6.<init>()     // Catch: java.lang.Throwable -> L74
-            java.lang.String r9 = "Metadata does not start with "
-            r6.append(r9)     // Catch: java.lang.Throwable -> L74
-            r6.append(r8)     // Catch: java.lang.Throwable -> L74
-            java.lang.String r8 = " tag"
-            r6.append(r8)     // Catch: java.lang.Throwable -> L74
-            java.lang.String r6 = r6.toString()     // Catch: java.lang.Throwable -> L74
-            android.util.Log.w(r0, r6)     // Catch: java.lang.Throwable -> L74
-            if (r3 == 0) goto L61
-            goto L29
-        L61:
-            return r2
-        L62:
-            android.content.pm.ApplicationInfo r8 = r7.getApplicationInfo()     // Catch: java.lang.Throwable -> L74
-            android.content.res.Resources r6 = r6.getResourcesForApplication(r8)     // Catch: java.lang.Throwable -> L74
-            android.content.res.TypedArray r6 = r6.obtainAttributes(r1, r10)     // Catch: java.lang.Throwable -> L74
-            if (r3 == 0) goto L73
-            r3.close()     // Catch: java.lang.Throwable -> L80 java.lang.Throwable -> L80 java.lang.Throwable -> L80
-        L73:
-            return r6
-        L74:
-            r6 = move-exception
-            if (r3 == 0) goto L7f
-            r3.close()     // Catch: java.lang.Throwable -> L7b
-            goto L7f
-        L7b:
-            r8 = move-exception
-            r6.addSuppressed(r8)     // Catch: java.lang.Throwable -> L80 java.lang.Throwable -> L80 java.lang.Throwable -> L80
-        L7f:
-            throw r6     // Catch: java.lang.Throwable -> L80 java.lang.Throwable -> L80 java.lang.Throwable -> L80
-        L80:
-            r6 = move-exception
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder
-            java.lang.String r9 = "Error parsing: "
-            r8.<init>(r9)
-            java.lang.String r7 = r7.packageName
-            r8.append(r7)
-            java.lang.String r7 = r8.toString()
-            android.util.Log.e(r0, r7, r6)
-        L94:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.ApplicationPackageManager.extractPackageItemInfoAttributes(android.content.pm.PackageItemInfo, java.lang.String, java.lang.String, int[]):android.content.res.TypedArray");
+    public TypedArray extractPackageItemInfoAttributes(PackageItemInfo packageItemInfo, String str, String str2, int[] iArr) {
+        int next;
+        if (packageItemInfo != null && packageItemInfo.metaData != null) {
+            try {
+                XmlResourceParser xmlResourceParserLoadXmlMetaData = packageItemInfo.loadXmlMetaData(this, str);
+                try {
+                    if (xmlResourceParserLoadXmlMetaData == null) {
+                        Log.w(TAG, "No " + str + " metadata");
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                        }
+                        return null;
+                    }
+                    AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
+                    do {
+                        next = xmlResourceParserLoadXmlMetaData.next();
+                        if (next == 1) {
+                            break;
+                        }
+                    } while (next != 2);
+                    if (TextUtils.equals(xmlResourceParserLoadXmlMetaData.getName(), str2)) {
+                        TypedArray typedArrayObtainAttributes = getResourcesForApplication(packageItemInfo.getApplicationInfo()).obtainAttributes(attributeSetAsAttributeSet, iArr);
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                            xmlResourceParserLoadXmlMetaData.close();
+                        }
+                        return typedArrayObtainAttributes;
+                    }
+                    Log.w(TAG, "Metadata does not start with " + str + " tag");
+                    if (xmlResourceParserLoadXmlMetaData == null) {
+                        return null;
+                    }
+                    xmlResourceParserLoadXmlMetaData.close();
+                    return null;
+                } catch (Throwable th) {
+                    if (xmlResourceParserLoadXmlMetaData != null) {
+                        try {
+                            xmlResourceParserLoadXmlMetaData.close();
+                        } catch (Throwable th2) {
+                            th.addSuppressed(th2);
+                        }
+                    }
+                    throw th;
+                }
+            } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
+                Log.e(TAG, "Error parsing: " + packageItemInfo.packageName, e);
+            }
+        }
+        return null;
     }
 
     @Override // android.content.pm.PackageManager

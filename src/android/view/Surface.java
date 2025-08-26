@@ -259,21 +259,21 @@ public class Surface implements Parcelable {
     }
 
     public long getNextFrameNumber() {
-        long nativeGetNextFrameNumber;
+        long jNativeGetNextFrameNumber;
         synchronized (this.mLock) {
             checkNotReleasedLocked();
-            nativeGetNextFrameNumber = nativeGetNextFrameNumber(this.mNativeObject);
+            jNativeGetNextFrameNumber = nativeGetNextFrameNumber(this.mNativeObject);
         }
-        return nativeGetNextFrameNumber;
+        return jNativeGetNextFrameNumber;
     }
 
     public boolean isConsumerRunningBehind() {
-        boolean nativeIsConsumerRunningBehind;
+        boolean zNativeIsConsumerRunningBehind;
         synchronized (this.mLock) {
             checkNotReleasedLocked();
-            nativeIsConsumerRunningBehind = nativeIsConsumerRunningBehind(this.mNativeObject);
+            zNativeIsConsumerRunningBehind = nativeIsConsumerRunningBehind(this.mNativeObject);
         }
-        return nativeIsConsumerRunningBehind;
+        return zNativeIsConsumerRunningBehind;
     }
 
     public Point getDefaultSize() {
@@ -330,19 +330,19 @@ public class Surface implements Parcelable {
     }
 
     public Canvas lockHardwareCanvas() {
-        Canvas lockCanvas;
+        Canvas canvasLockCanvas;
         synchronized (this.mLock) {
             checkNotReleasedLocked();
             if (this.mHwuiContext == null) {
                 this.mHwuiContext = new HwuiContext(false);
             }
-            lockCanvas = this.mHwuiContext.lockCanvas(nativeGetWidth(this.mNativeObject), nativeGetHeight(this.mNativeObject));
+            canvasLockCanvas = this.mHwuiContext.lockCanvas(nativeGetWidth(this.mNativeObject), nativeGetHeight(this.mNativeObject));
         }
-        return lockCanvas;
+        return canvasLockCanvas;
     }
 
     public Canvas lockHardwareWideColorGamutCanvas() {
-        Canvas lockCanvas;
+        Canvas canvasLockCanvas;
         synchronized (this.mLock) {
             checkNotReleasedLocked();
             HwuiContext hwuiContext = this.mHwuiContext;
@@ -353,9 +353,9 @@ public class Surface implements Parcelable {
             if (this.mHwuiContext == null) {
                 this.mHwuiContext = new HwuiContext(true);
             }
-            lockCanvas = this.mHwuiContext.lockCanvas(nativeGetWidth(this.mNativeObject), nativeGetHeight(this.mNativeObject));
+            canvasLockCanvas = this.mHwuiContext.lockCanvas(nativeGetWidth(this.mNativeObject), nativeGetHeight(this.mNativeObject));
         }
-        return lockCanvas;
+        return canvasLockCanvas;
     }
 
     @Deprecated
@@ -415,13 +415,13 @@ public class Surface implements Parcelable {
         if (j == 0) {
             throw new NullPointerException("null SurfaceControl native object. Are you using a released SurfaceControl?");
         }
-        long nativeCreateFromSurfaceControl = nativeCreateFromSurfaceControl(j);
+        long jNativeCreateFromSurfaceControl = nativeCreateFromSurfaceControl(j);
         synchronized (this.mLock) {
             long j2 = this.mNativeObject;
             if (j2 != 0) {
                 nativeRelease(j2);
             }
-            setNativeObjectLocked(nativeCreateFromSurfaceControl);
+            setNativeObjectLocked(jNativeCreateFromSurfaceControl);
         }
     }
 
@@ -534,9 +534,9 @@ public class Surface implements Parcelable {
             if (colorSpace == null) {
                 colorSpace = ColorSpace.get(ColorSpace.Named.SRGB);
             }
-            int nativeAttachAndQueueBufferWithColorSpace = nativeAttachAndQueueBufferWithColorSpace(this.mNativeObject, hardwareBuffer, colorSpace.getId());
-            if (nativeAttachAndQueueBufferWithColorSpace != 0) {
-                throw new RuntimeException("Failed to attach and queue buffer to Surface (bad object?), native error: " + nativeAttachAndQueueBufferWithColorSpace);
+            int iNativeAttachAndQueueBufferWithColorSpace = nativeAttachAndQueueBufferWithColorSpace(this.mNativeObject, hardwareBuffer, colorSpace.getId());
+            if (iNativeAttachAndQueueBufferWithColorSpace != 0) {
+                throw new RuntimeException("Failed to attach and queue buffer to Surface (bad object?), native error: " + iNativeAttachAndQueueBufferWithColorSpace);
             }
         }
     }
@@ -644,12 +644,12 @@ public class Surface implements Parcelable {
             } else {
                 fixedSourceRate = frameRateParams.getFixedSourceRate();
             }
-            int nativeSetFrameRate = nativeSetFrameRate(this.mNativeObject, fixedSourceRate, i, frameRateParams.getChangeFrameRateStrategy());
-            if (nativeSetFrameRate == (-OsConstants.EINVAL)) {
+            int iNativeSetFrameRate = nativeSetFrameRate(this.mNativeObject, fixedSourceRate, i, frameRateParams.getChangeFrameRateStrategy());
+            if (iNativeSetFrameRate == (-OsConstants.EINVAL)) {
                 throw new IllegalArgumentException("Invalid argument to Surface.setFrameRate()");
             }
-            if (nativeSetFrameRate != 0) {
-                Log.e(TAG, "Failed to set frame rate on Surface. Native error: " + nativeSetFrameRate);
+            if (iNativeSetFrameRate != 0) {
+                Log.e(TAG, "Failed to set frame rate on Surface. Native error: " + iNativeSetFrameRate);
             }
         }
     }
@@ -657,12 +657,12 @@ public class Surface implements Parcelable {
     public void setFrameRate(float f, int i, int i2) {
         synchronized (this.mLock) {
             checkNotReleasedLocked();
-            int nativeSetFrameRate = nativeSetFrameRate(this.mNativeObject, f, i, i2);
-            if (nativeSetFrameRate == (-OsConstants.EINVAL)) {
+            int iNativeSetFrameRate = nativeSetFrameRate(this.mNativeObject, f, i, i2);
+            if (iNativeSetFrameRate == (-OsConstants.EINVAL)) {
                 throw new IllegalArgumentException("Invalid argument to Surface.setFrameRate()");
             }
-            if (nativeSetFrameRate != 0) {
-                Log.e(TAG, "Failed to set frame rate on Surface. Native error: " + nativeSetFrameRate);
+            if (iNativeSetFrameRate != 0) {
+                Log.e(TAG, "Failed to set frame rate on Surface. Native error: " + iNativeSetFrameRate);
             }
         }
     }
@@ -670,9 +670,9 @@ public class Surface implements Parcelable {
     public void clearFrameRate() {
         synchronized (this.mLock) {
             checkNotReleasedLocked();
-            int nativeSetFrameRate = nativeSetFrameRate(this.mNativeObject, 0.0f, 0, 0);
-            if (nativeSetFrameRate != 0) {
-                throw new RuntimeException("Failed to clear the frame rate on Surface. Native error: " + nativeSetFrameRate);
+            int iNativeSetFrameRate = nativeSetFrameRate(this.mNativeObject, 0.0f, 0, 0);
+            if (iNativeSetFrameRate != 0) {
+                throw new RuntimeException("Failed to clear the frame rate on Surface. Native error: " + iNativeSetFrameRate);
             }
         }
     }
@@ -738,31 +738,41 @@ public class Surface implements Parcelable {
     private final class HwuiContext {
         private RecordingCanvas mCanvas;
         private HardwareRenderer mHardwareRenderer;
+        private int mHeight;
         private final boolean mIsWideColorGamut;
         private final RenderNode mRenderNode;
+        private int mWidth;
 
         HwuiContext(boolean z) {
-            RenderNode create = RenderNode.create("HwuiCanvas", null);
-            this.mRenderNode = create;
-            create.setClipToBounds(false);
-            create.setForceDarkAllowed(false);
+            RenderNode renderNodeCreate = RenderNode.create("HwuiCanvas", null);
+            this.mRenderNode = renderNodeCreate;
+            renderNodeCreate.setClipToBounds(false);
+            renderNodeCreate.setForceDarkAllowed(false);
             this.mIsWideColorGamut = z;
             HardwareRenderer hardwareRenderer = new HardwareRenderer();
             this.mHardwareRenderer = hardwareRenderer;
-            hardwareRenderer.setContentRoot(create);
+            hardwareRenderer.setContentRoot(renderNodeCreate);
             this.mHardwareRenderer.setSurface(Surface.this, true);
             this.mHardwareRenderer.setColorMode(z ? 1 : 0);
             this.mHardwareRenderer.setLightSourceAlpha(0.0f, 0.0f);
             this.mHardwareRenderer.setLightSourceGeometry(0.0f, 0.0f, 0.0f, 0.0f);
+            Point defaultSize = Surface.this.getDefaultSize();
+            this.mWidth = defaultSize.x;
+            this.mHeight = defaultSize.y;
         }
 
         Canvas lockCanvas(int i, int i2) {
             if (this.mCanvas != null) {
                 throw new IllegalStateException("Surface was already locked!");
             }
-            RecordingCanvas beginRecording = this.mRenderNode.beginRecording(i, i2);
-            this.mCanvas = beginRecording;
-            return beginRecording;
+            if (this.mWidth != i || this.mHeight != i2) {
+                this.mWidth = i;
+                this.mHeight = i2;
+                this.mHardwareRenderer.setSurface(Surface.this, true);
+            }
+            RecordingCanvas recordingCanvasBeginRecording = this.mRenderNode.beginRecording(i, i2);
+            this.mCanvas = recordingCanvasBeginRecording;
+            return recordingCanvasBeginRecording;
         }
 
         void unlockAndPost(Canvas canvas) {

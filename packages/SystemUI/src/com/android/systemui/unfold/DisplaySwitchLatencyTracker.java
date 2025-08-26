@@ -3,32 +3,45 @@ package com.android.systemui.unfold;
 import android.content.Context;
 import android.hardware.devicestate.DeviceStateManager;
 import android.os.Trace;
+import com.android.app.tracing.TraceUtils;
 import com.android.internal.util.LatencyTracker;
 import com.android.systemui.CoreStartable;
 import com.android.systemui.display.data.repository.DeviceStateRepository;
 import com.android.systemui.display.data.repository.DeviceStateRepositoryImpl;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
+import com.android.systemui.power.shared.model.ScreenPowerState;
 import com.android.systemui.power.shared.model.WakeSleepReason;
 import com.android.systemui.power.shared.model.WakefulnessModel;
+import com.android.systemui.power.shared.model.WakefulnessState;
+import com.android.systemui.unfold.DisplaySwitchLatencyTracker;
 import com.android.systemui.unfold.data.repository.ScreenTimeoutPolicyRepository;
+import com.android.systemui.unfold.data.repository.UnfoldTransitionRepositoryImpl;
+import com.android.systemui.unfold.data.repository.UnfoldTransitionStatus;
 import com.android.systemui.unfold.domain.interactor.UnfoldTransitionInteractor;
+import com.android.systemui.unfold.domain.interactor.UnfoldTransitionInteractor$waitForTransitionStart$$inlined$filter$1;
 import com.android.systemui.util.Utils;
 import com.android.systemui.util.animation.data.repository.AnimationStatusRepository;
-import com.android.systemui.util.kotlin.FlowKt;
+import com.android.systemui.util.kotlin.WithPrev;
 import com.android.systemui.util.time.SystemClock;
 import com.samsung.android.knox.foresight.KnoxForesight;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.Set;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadLocalRandom;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.EmptySet;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.enums.EnumEntriesKt;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.time.Duration;
@@ -38,12 +51,15 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.ExecutorsKt;
+import kotlinx.coroutines.TimeoutCancellationException;
+import kotlinx.coroutines.TimeoutKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__LimitKt$drop$$inlined$unsafeFlow$1;
+import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DisplaySwitchLatencyTracker implements CoreStartable {
     public static final long COOL_DOWN_DURATION;
@@ -66,7 +82,6 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
     public final SystemClock systemClock;
     public final UnfoldTransitionInteractor unfoldTransitionInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -76,15 +91,14 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
         }
 
         /* renamed from: getCOOL_DOWN_DURATION-UwyO8pc$annotations, reason: not valid java name */
-        public static /* synthetic */ void m3111getCOOL_DOWN_DURATIONUwyO8pc$annotations() {
+        public static /* synthetic */ void m3128getCOOL_DOWN_DURATIONUwyO8pc$annotations() {
         }
 
         /* renamed from: getSCREEN_EVENT_TIMEOUT-UwyO8pc$annotations, reason: not valid java name */
-        public static /* synthetic */ void m3112getSCREEN_EVENT_TIMEOUTUwyO8pc$annotations() {
+        public static /* synthetic */ void m3129getSCREEN_EVENT_TIMEOUTUwyO8pc$annotations() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisplaySwitchLatencyEvent {
         public final int externalDisplayCount;
         public final int fromDensityDpi;
@@ -241,7 +255,6 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TrackingResult {
         public static final /* synthetic */ TrackingResult[] $VALUES;
         public static final TrackingResult CORRUPTED;
@@ -272,7 +285,6 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -313,6 +325,279 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
         }
     }
 
+    /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$start$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        int label;
+
+        /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$start$1$1, reason: invalid class name and collision with other inner class name */
+        final class C06071 extends SuspendLambda implements Function2 {
+            /* synthetic */ Object L$0;
+            Object L$1;
+            int label;
+            final /* synthetic */ DisplaySwitchLatencyTracker this$0;
+
+            /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$start$1$1$2, reason: invalid class name */
+            final class AnonymousClass2 extends SuspendLambda implements Function2 {
+                final /* synthetic */ DisplaySwitchLatencyEvent $event;
+                final /* synthetic */ DeviceStateRepository.DeviceState $newState;
+                final /* synthetic */ DeviceStateRepository.DeviceState $previousState;
+                int I$0;
+                long J$0;
+                long J$1;
+                Object L$0;
+                Object L$1;
+                int label;
+                final /* synthetic */ DisplaySwitchLatencyTracker this$0;
+
+                /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                public AnonymousClass2(DisplaySwitchLatencyTracker displaySwitchLatencyTracker, DeviceStateRepository.DeviceState deviceState, DisplaySwitchLatencyEvent displaySwitchLatencyEvent, DeviceStateRepository.DeviceState deviceState2, Continuation continuation) {
+                    super(2, continuation);
+                    this.this$0 = displaySwitchLatencyTracker;
+                    this.$previousState = deviceState;
+                    this.$event = displaySwitchLatencyEvent;
+                    this.$newState = deviceState2;
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Continuation create(Object obj, Continuation continuation) {
+                    return new AnonymousClass2(this.this$0, this.$previousState, this.$event, this.$newState, continuation);
+                }
+
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                }
+
+                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                public final Object invokeSuspend(Object obj) throws Throwable {
+                    long jCurrentTimeMillis;
+                    Throwable th;
+                    int i;
+                    long j;
+                    String str;
+                    SystemClock systemClock;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = this.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        DisplaySwitchLatencyTracker displaySwitchLatencyTracker = this.this$0;
+                        SystemClock systemClock2 = displaySwitchLatencyTracker.systemClock;
+                        DeviceStateRepository.DeviceState deviceState = this.$newState;
+                        jCurrentTimeMillis = systemClock2.currentTimeMillis();
+                        int i3 = TraceUtils.$r8$clinit;
+                        int iNextInt = ThreadLocalRandom.current().nextInt();
+                        Trace.asyncTraceForTrackBegin(4096L, "DisplaySwitchLatency", "displaySwitch", iNextInt);
+                        try {
+                            int statsInt = DisplaySwitchLatencyTracker.toStatsInt(deviceState);
+                            this.L$0 = systemClock2;
+                            this.L$1 = "DisplaySwitchLatency";
+                            this.J$0 = jCurrentTimeMillis;
+                            this.J$1 = 4096L;
+                            this.I$0 = iNextInt;
+                            this.label = 1;
+                            if (DisplaySwitchLatencyTracker.access$waitForDisplaySwitch(displaySwitchLatencyTracker, statsInt, this) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                            systemClock = systemClock2;
+                            i = iNextInt;
+                            j = 4096;
+                            str = "DisplaySwitchLatency";
+                        } catch (Throwable th2) {
+                            th = th2;
+                            i = iNextInt;
+                            j = 4096;
+                            str = "DisplaySwitchLatency";
+                            Trace.asyncTraceForTrackEnd(j, str, i);
+                            throw th;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        i = this.I$0;
+                        j = this.J$1;
+                        jCurrentTimeMillis = this.J$0;
+                        str = (String) this.L$1;
+                        systemClock = (SystemClock) this.L$0;
+                        try {
+                            ResultKt.throwOnFailure(obj);
+                        } catch (Throwable th3) {
+                            th = th3;
+                            Trace.asyncTraceForTrackEnd(j, str, i);
+                            throw th;
+                        }
+                    }
+                    Unit unit = Unit.INSTANCE;
+                    Trace.asyncTraceForTrackEnd(j, str, i);
+                    long jCurrentTimeMillis2 = systemClock.currentTimeMillis() - jCurrentTimeMillis;
+                    if (this.$previousState == DeviceStateRepository.DeviceState.FOLDED) {
+                        this.this$0.latencyTracker.onActionEnd(13);
+                    }
+                    DisplaySwitchLatencyTracker displaySwitchLatencyTracker2 = this.this$0;
+                    DisplaySwitchLatencyEvent displaySwitchLatencyEvent = this.$event;
+                    DeviceStateRepository.DeviceState deviceState2 = this.$newState;
+                    Companion companion = DisplaySwitchLatencyTracker.Companion;
+                    displaySwitchLatencyTracker2.logDisplaySwitchEvent(displaySwitchLatencyEvent, deviceState2, jCurrentTimeMillis2, TrackingResult.SUCCESS);
+                    return Unit.INSTANCE;
+                }
+            }
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C06071(DisplaySwitchLatencyTracker displaySwitchLatencyTracker, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = displaySwitchLatencyTracker;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                C06071 c06071 = new C06071(this.this$0, continuation);
+                c06071.L$0 = obj;
+                return c06071;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C06071) create((WithPrev) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            /* JADX WARN: Removed duplicated region for block: B:34:0x010a  */
+            /* JADX WARN: Removed duplicated region for block: B:38:0x011f  */
+            /* JADX WARN: Removed duplicated region for block: B:41:0x0136  */
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
+            public final Object invokeSuspend(Object obj) {
+                DisplaySwitchLatencyEvent displaySwitchLatencyEvent;
+                DeviceStateRepository.DeviceState deviceState;
+                DisplaySwitchLatencyTracker displaySwitchLatencyTracker;
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    WithPrev withPrev = (WithPrev) this.L$0;
+                    DeviceStateRepository.DeviceState deviceState2 = (DeviceStateRepository.DeviceState) withPrev.component1();
+                    DeviceStateRepository.DeviceState deviceState3 = (DeviceStateRepository.DeviceState) withPrev.component2();
+                    DisplaySwitchLatencyTracker displaySwitchLatencyTracker2 = this.this$0;
+                    if (displaySwitchLatencyTracker2.isCoolingDown) {
+                        return Unit.INSTANCE;
+                    }
+                    if (deviceState2 == DeviceStateRepository.DeviceState.FOLDED) {
+                        displaySwitchLatencyTracker2.latencyTracker.onActionStart(13);
+                        if (Trace.isEnabled()) {
+                            Trace.instantForTrack(4096L, "DisplaySwitchLatency", "unfold latency tracking started");
+                        }
+                    }
+                    DisplaySwitchLatencyTracker displaySwitchLatencyTracker3 = this.this$0;
+                    DisplaySwitchLatencyEvent displaySwitchLatencyEvent2 = new DisplaySwitchLatencyEvent(0, 0, 0, 0, 0, null, 0, 0, 0, 0, 0, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8388607, null);
+                    this.this$0.getClass();
+                    int statsInt = DisplaySwitchLatencyTracker.toStatsInt(deviceState2);
+                    displaySwitchLatencyTracker3.getClass();
+                    if (Trace.isEnabled()) {
+                        Trace.instantForTrack(4096L, "DisplaySwitchLatency", "fromFoldableDeviceState=" + statsInt);
+                    }
+                    DisplaySwitchLatencyEvent displaySwitchLatencyEventCopy$default = DisplaySwitchLatencyEvent.copy$default(displaySwitchLatencyEvent2, 0, statsInt, 0, 0, 0, ((Boolean) displaySwitchLatencyTracker3.screenTimeoutPolicyRepository.screenTimeoutActive.$$delegate_0.getValue()).booleanValue() ? 1 : 2, 4194301);
+                    try {
+                        DisplaySwitchLatencyTracker.Companion.getClass();
+                        long j = DisplaySwitchLatencyTracker.SCREEN_EVENT_TIMEOUT;
+                        AnonymousClass2 anonymousClass2 = new AnonymousClass2(this.this$0, deviceState2, displaySwitchLatencyEventCopy$default, deviceState3, null);
+                        this.L$0 = deviceState3;
+                        this.L$1 = displaySwitchLatencyEventCopy$default;
+                        this.label = 1;
+                        if (TimeoutKt.m3471withTimeoutKLykuaI(j, anonymousClass2, this) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } catch (TimeoutCancellationException unused) {
+                        displaySwitchLatencyEvent = displaySwitchLatencyEventCopy$default;
+                        deviceState = deviceState3;
+                        if (Trace.isEnabled()) {
+                            Trace.instantForTrack(4096L, "DisplaySwitchLatency", "tracking timed out");
+                        }
+                        this.this$0.latencyTracker.onActionCancel(13);
+                        DisplaySwitchLatencyTracker displaySwitchLatencyTracker4 = this.this$0;
+                        DisplaySwitchLatencyTracker.Companion.getClass();
+                        displaySwitchLatencyTracker4.logDisplaySwitchEvent(displaySwitchLatencyEvent, deviceState, Duration.m3457getInWholeMillisecondsimpl(DisplaySwitchLatencyTracker.SCREEN_EVENT_TIMEOUT), TrackingResult.TIMED_OUT);
+                        return Unit.INSTANCE;
+                    } catch (CancellationException unused2) {
+                        displaySwitchLatencyEvent = displaySwitchLatencyEventCopy$default;
+                        if (Trace.isEnabled()) {
+                            Trace.instantForTrack(4096L, "DisplaySwitchLatency", "new state interrupted, entering cool down");
+                        }
+                        this.this$0.latencyTracker.onActionCancel(13);
+                        displaySwitchLatencyTracker = this.this$0;
+                        if (!displaySwitchLatencyTracker.isCoolingDown) {
+                            displaySwitchLatencyTracker.isCoolingDown = true;
+                            BuildersKt.launch$default(displaySwitchLatencyTracker.applicationScope, displaySwitchLatencyTracker.backgroundDispatcher, null, new DisplaySwitchLatencyTracker$startCoolDown$1(displaySwitchLatencyTracker, displaySwitchLatencyEvent, null), 2);
+                        }
+                        return Unit.INSTANCE;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    displaySwitchLatencyEvent = (DisplaySwitchLatencyEvent) this.L$1;
+                    deviceState = (DeviceStateRepository.DeviceState) this.L$0;
+                    try {
+                        ResultKt.throwOnFailure(obj);
+                    } catch (TimeoutCancellationException unused3) {
+                        if (Trace.isEnabled()) {
+                        }
+                        this.this$0.latencyTracker.onActionCancel(13);
+                        DisplaySwitchLatencyTracker displaySwitchLatencyTracker42 = this.this$0;
+                        DisplaySwitchLatencyTracker.Companion.getClass();
+                        displaySwitchLatencyTracker42.logDisplaySwitchEvent(displaySwitchLatencyEvent, deviceState, Duration.m3457getInWholeMillisecondsimpl(DisplaySwitchLatencyTracker.SCREEN_EVENT_TIMEOUT), TrackingResult.TIMED_OUT);
+                        return Unit.INSTANCE;
+                    } catch (CancellationException unused4) {
+                        if (Trace.isEnabled()) {
+                        }
+                        this.this$0.latencyTracker.onActionCancel(13);
+                        displaySwitchLatencyTracker = this.this$0;
+                        if (!displaySwitchLatencyTracker.isCoolingDown) {
+                        }
+                        return Unit.INSTANCE;
+                    }
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return DisplaySwitchLatencyTracker.this.new AnonymousClass1(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                DisplaySwitchLatencyTracker displaySwitchLatencyTracker = DisplaySwitchLatencyTracker.this;
+                DisplaySwitchLatencyTracker$special$$inlined$filter$1 displaySwitchLatencyTracker$special$$inlined$filter$1 = displaySwitchLatencyTracker.displaySwitchStarted;
+                C06071 c06071 = new C06071(displaySwitchLatencyTracker, null);
+                this.label = 1;
+                if (FlowKt.collectLatest(displaySwitchLatencyTracker$special$$inlined$filter$1, c06071, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     static {
         Duration.Companion companion = Duration.Companion;
         DurationUnit durationUnit = DurationUnit.SECONDS;
@@ -335,10 +620,9 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
         this.deviceStateManager = deviceStateManager;
         this.latencyTracker = latencyTracker;
         this.backgroundDispatcher = ExecutorsKt.from(executor);
-        final Flow pairwise = FlowKt.pairwise(((DeviceStateRepositoryImpl) deviceStateRepository).state);
+        final Flow flowPairwise = com.android.systemui.util.kotlin.FlowKt.pairwise(((DeviceStateRepositoryImpl) deviceStateRepository).state);
         ?? r2 = new Flow() { // from class: com.android.systemui.unfold.DisplaySwitchLatencyTracker$special$$inlined$filter$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$special$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -366,78 +650,56 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                    /*
-                        r5 = this;
-                        boolean r0 = r7 instanceof com.android.systemui.unfold.DisplaySwitchLatencyTracker$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r7
-                        com.android.systemui.unfold.DisplaySwitchLatencyTracker$special$$inlined$filter$1$2$1 r0 = (com.android.systemui.unfold.DisplaySwitchLatencyTracker$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.unfold.DisplaySwitchLatencyTracker$special$$inlined$filter$1$2$1 r0 = new com.android.systemui.unfold.DisplaySwitchLatencyTracker$special$$inlined$filter$1$2$1
-                        r0.<init>(r7)
-                    L18:
-                        java.lang.Object r7 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        goto L4e
-                    L27:
-                        java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                        java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                        r5.<init>(r6)
-                        throw r5
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        r7 = r6
-                        com.android.systemui.util.kotlin.WithPrev r7 = (com.android.systemui.util.kotlin.WithPrev) r7
-                        java.lang.Object r2 = r7.getPreviousValue()
-                        com.android.systemui.display.data.repository.DeviceStateRepository$DeviceState r4 = com.android.systemui.display.data.repository.DeviceStateRepository.DeviceState.FOLDED
-                        if (r2 == r4) goto L43
-                        java.lang.Object r7 = r7.getNewValue()
-                        if (r7 != r4) goto L4e
-                    L43:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                        java.lang.Object r5 = r5.emit(r6, r0)
-                        if (r5 != r1) goto L4e
-                        return r1
-                    L4e:
-                        kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                        return r5
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.unfold.DisplaySwitchLatencyTracker$special$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        WithPrev withPrev = (WithPrev) obj;
+                        Object previousValue = withPrev.getPreviousValue();
+                        DeviceStateRepository.DeviceState deviceState = DeviceStateRepository.DeviceState.FOLDED;
+                        if (previousValue == deviceState || withPrev.getNewValue() == deviceState) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowPairwise.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.displaySwitchStarted = r2;
         final Flow flow = unfoldTransitionInteractor.unfoldTransitionStatus;
         Flow flow2 = new Flow() { // from class: com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -465,73 +727,52 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$1$2$1 r0 = (com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$1$2$1 r0 = new com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L44
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.unfold.data.repository.UnfoldTransitionStatus r6 = (com.android.systemui.unfold.data.repository.UnfoldTransitionStatus) r6
-                        boolean r6 = r6 instanceof com.android.systemui.unfold.data.repository.UnfoldTransitionStatus.TransitionStarted
-                        if (r6 == 0) goto L44
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L44
-                        return r1
-                    L44:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (((UnfoldTransitionStatus) obj) instanceof UnfoldTransitionStatus.TransitionStarted) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
-        final FlowKt__LimitKt$drop$$inlined$unsafeFlow$1 drop = kotlinx.coroutines.flow.FlowKt.drop(powerInteractor.screenPowerState);
+        final FlowKt__LimitKt$drop$$inlined$unsafeFlow$1 flowKt__LimitKt$drop$$inlined$unsafeFlow$1Drop = FlowKt.drop(powerInteractor.screenPowerState);
         Flow flow3 = new Flow() { // from class: com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -559,73 +800,52 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$2$2$1 r0 = (com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$2$2$1 r0 = new com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L44
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.power.shared.model.ScreenPowerState r6 = (com.android.systemui.power.shared.model.ScreenPowerState) r6
-                        com.android.systemui.power.shared.model.ScreenPowerState r2 = com.android.systemui.power.shared.model.ScreenPowerState.SCREEN_ON
-                        if (r6 != r2) goto L44
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L44
-                        return r1
-                    L44:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (((ScreenPowerState) obj) == ScreenPowerState.SCREEN_ON) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__LimitKt$drop$$inlined$unsafeFlow$1Drop.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
-        final FlowKt__LimitKt$drop$$inlined$unsafeFlow$1 drop2 = kotlinx.coroutines.flow.FlowKt.drop(powerInteractor.detailedWakefulness);
-        this.startOrEndEvent = kotlinx.coroutines.flow.FlowKt.merge(r2, kotlinx.coroutines.flow.FlowKt.merge(flow3, new Flow() { // from class: com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$3
+        final FlowKt__LimitKt$drop$$inlined$unsafeFlow$1 flowKt__LimitKt$drop$$inlined$unsafeFlow$1Drop2 = FlowKt.drop(powerInteractor.detailedWakefulness);
+        this.startOrEndEvent = FlowKt.merge(r2, FlowKt.merge(flow3, new Flow() { // from class: com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -655,278 +875,452 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
                     this.this$0 = displaySwitchLatencyTracker;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                    /*
-                        r5 = this;
-                        boolean r0 = r7 instanceof com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r7
-                        com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$3$2$1 r0 = (com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$3$2$1 r0 = new com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$3$2$1
-                        r0.<init>(r7)
-                    L18:
-                        java.lang.Object r7 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        goto L53
-                    L27:
-                        java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                        java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                        r5.<init>(r6)
-                        throw r5
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        r7 = r6
-                        com.android.systemui.power.shared.model.WakefulnessModel r7 = (com.android.systemui.power.shared.model.WakefulnessModel) r7
-                        com.android.systemui.unfold.DisplaySwitchLatencyTracker$Companion r2 = com.android.systemui.unfold.DisplaySwitchLatencyTracker.Companion
-                        com.android.systemui.unfold.DisplaySwitchLatencyTracker r2 = r5.this$0
-                        r2.getClass()
-                        com.android.systemui.power.shared.model.WakefulnessState r7 = r7.internalWakefulnessState
-                        com.android.systemui.power.shared.model.WakefulnessState r4 = com.android.systemui.power.shared.model.WakefulnessState.ASLEEP
-                        if (r7 != r4) goto L53
-                        boolean r7 = r2.isAodEnabled()
-                        if (r7 != 0) goto L53
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                        java.lang.Object r5 = r5.emit(r6, r0)
-                        if (r5 != r1) goto L53
-                        return r1
-                    L53:
-                        kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                        return r5
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.unfold.DisplaySwitchLatencyTracker$anyEndEventFlow$$inlined$filter$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        DisplaySwitchLatencyTracker.Companion companion = DisplaySwitchLatencyTracker.Companion;
+                        DisplaySwitchLatencyTracker displaySwitchLatencyTracker = this.this$0;
+                        displaySwitchLatencyTracker.getClass();
+                        if (((WakefulnessModel) obj).internalWakefulnessState == WakefulnessState.ASLEEP && !displaySwitchLatencyTracker.isAodEnabled()) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__LimitKt$drop$$inlined$unsafeFlow$1Drop2.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, flow2));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x00ef, code lost:
-    
-        if (com.android.systemui.util.kotlin.SuspendKt.race(r6, r0) != r1) goto L53;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x0074, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:25:0x0074, code lost:
     
         if (r8 == r1) goto L52;
      */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0088 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0026  */
+    /* JADX WARN: Code restructure failed: missing block: B:51:0x00ef, code lost:
+    
+        if (com.android.systemui.util.kotlin.SuspendKt.race(r6, r0) != r1) goto L53;
+     */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$waitForDisplaySwitch(com.android.systemui.unfold.DisplaySwitchLatencyTracker r6, int r7, kotlin.coroutines.jvm.internal.ContinuationImpl r8) {
-        /*
-            Method dump skipped, instructions count: 245
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.unfold.DisplaySwitchLatencyTracker.access$waitForDisplaySwitch(com.android.systemui.unfold.DisplaySwitchLatencyTracker, int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$waitForDisplaySwitch(DisplaySwitchLatencyTracker displaySwitchLatencyTracker, int i, ContinuationImpl continuationImpl) throws Throwable {
+        DisplaySwitchLatencyTracker$waitForDisplaySwitch$1 displaySwitchLatencyTracker$waitForDisplaySwitch$1;
+        boolean z;
+        Throwable th;
+        int i2;
+        String str;
+        long j;
+        displaySwitchLatencyTracker.getClass();
+        if (continuationImpl instanceof DisplaySwitchLatencyTracker$waitForDisplaySwitch$1) {
+            displaySwitchLatencyTracker$waitForDisplaySwitch$1 = (DisplaySwitchLatencyTracker$waitForDisplaySwitch$1) continuationImpl;
+            int i3 = displaySwitchLatencyTracker$waitForDisplaySwitch$1.label;
+            if ((i3 & Integer.MIN_VALUE) != 0) {
+                displaySwitchLatencyTracker$waitForDisplaySwitch$1.label = i3 - Integer.MIN_VALUE;
+            } else {
+                displaySwitchLatencyTracker$waitForDisplaySwitch$1 = new DisplaySwitchLatencyTracker$waitForDisplaySwitch$1(displaySwitchLatencyTracker, continuationImpl);
+            }
+        }
+        Object objFirst = displaySwitchLatencyTracker$waitForDisplaySwitch$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i4 = displaySwitchLatencyTracker$waitForDisplaySwitch$1.label;
+        if (i4 == 0) {
+            ResultKt.throwOnFailure(objFirst);
+            if (((UnfoldTransitionRepositoryImpl) displaySwitchLatencyTracker.unfoldTransitionInteractor.repository).unfoldProgressProvider.isPresent()) {
+                Flow flowAreAnimationsEnabled = displaySwitchLatencyTracker.animationStatusRepository.areAnimationsEnabled();
+                displaySwitchLatencyTracker$waitForDisplaySwitch$1.L$0 = displaySwitchLatencyTracker;
+                displaySwitchLatencyTracker$waitForDisplaySwitch$1.I$0 = i;
+                displaySwitchLatencyTracker$waitForDisplaySwitch$1.label = 1;
+                objFirst = FlowKt.first(flowAreAnimationsEnabled, displaySwitchLatencyTracker$waitForDisplaySwitch$1);
+            }
+            displaySwitchLatencyTracker.getClass();
+            if (i == 1 && z) {
+                int i5 = TraceUtils.$r8$clinit;
+                int iNextInt = ThreadLocalRandom.current().nextInt();
+                Trace.asyncTraceForTrackBegin(4096L, "DisplaySwitchLatency", "waitForTransitionStart()", iNextInt);
+                try {
+                    UnfoldTransitionInteractor unfoldTransitionInteractor = displaySwitchLatencyTracker.unfoldTransitionInteractor;
+                    displaySwitchLatencyTracker$waitForDisplaySwitch$1.L$0 = "DisplaySwitchLatency";
+                    displaySwitchLatencyTracker$waitForDisplaySwitch$1.J$0 = 4096L;
+                    displaySwitchLatencyTracker$waitForDisplaySwitch$1.I$0 = iNextInt;
+                    displaySwitchLatencyTracker$waitForDisplaySwitch$1.label = 2;
+                    Object objFirst2 = FlowKt.first(new UnfoldTransitionInteractor$waitForTransitionStart$$inlined$filter$1(((UnfoldTransitionRepositoryImpl) unfoldTransitionInteractor.repository).getTransitionStatus()), displaySwitchLatencyTracker$waitForDisplaySwitch$1);
+                    if (objFirst2 != coroutineSingletons) {
+                        objFirst2 = Unit.INSTANCE;
+                    }
+                    if (objFirst2 != coroutineSingletons) {
+                        i2 = iNextInt;
+                        str = "DisplaySwitchLatency";
+                        j = 4096;
+                        Unit unit = Unit.INSTANCE;
+                        Trace.asyncTraceForTrackEnd(j, str, i2);
+                        return Unit.INSTANCE;
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                    i2 = iNextInt;
+                    str = "DisplaySwitchLatency";
+                    j = 4096;
+                    Trace.asyncTraceForTrackEnd(j, str, i2);
+                    throw th;
+                }
+            } else {
+                Function1[] function1Arr = {new DisplaySwitchLatencyTracker$waitForDisplaySwitch$3(displaySwitchLatencyTracker, null), new DisplaySwitchLatencyTracker$waitForDisplaySwitch$4(displaySwitchLatencyTracker, null)};
+                displaySwitchLatencyTracker$waitForDisplaySwitch$1.L$0 = null;
+                displaySwitchLatencyTracker$waitForDisplaySwitch$1.label = 3;
+            }
+            return coroutineSingletons;
+        }
+        if (i4 != 1) {
+            if (i4 != 2) {
+                if (i4 != 3) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(objFirst);
+                return Unit.INSTANCE;
+            }
+            i2 = displaySwitchLatencyTracker$waitForDisplaySwitch$1.I$0;
+            j = displaySwitchLatencyTracker$waitForDisplaySwitch$1.J$0;
+            str = (String) displaySwitchLatencyTracker$waitForDisplaySwitch$1.L$0;
+            try {
+                ResultKt.throwOnFailure(objFirst);
+                Unit unit2 = Unit.INSTANCE;
+                Trace.asyncTraceForTrackEnd(j, str, i2);
+                return Unit.INSTANCE;
+            } catch (Throwable th3) {
+                th = th3;
+                Trace.asyncTraceForTrackEnd(j, str, i2);
+                throw th;
+            }
+        }
+        i = displaySwitchLatencyTracker$waitForDisplaySwitch$1.I$0;
+        displaySwitchLatencyTracker = (DisplaySwitchLatencyTracker) displaySwitchLatencyTracker$waitForDisplaySwitch$1.L$0;
+        ResultKt.throwOnFailure(objFirst);
+        z = ((Boolean) objFirst).booleanValue();
+        displaySwitchLatencyTracker.getClass();
+        if (i == 1) {
+        }
+        Function1[] function1Arr2 = {new DisplaySwitchLatencyTracker$waitForDisplaySwitch$3(displaySwitchLatencyTracker, null), new DisplaySwitchLatencyTracker$waitForDisplaySwitch$4(displaySwitchLatencyTracker, null)};
+        displaySwitchLatencyTracker$waitForDisplaySwitch$1.L$0 = null;
+        displaySwitchLatencyTracker$waitForDisplaySwitch$1.label = 3;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x003c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$waitForGoToSleepWithScreenOff(final com.android.systemui.unfold.DisplaySwitchLatencyTracker r8, kotlin.coroutines.jvm.internal.ContinuationImpl r9) {
-        /*
-            r8.getClass()
-            boolean r0 = r9 instanceof com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1
-            if (r0 == 0) goto L16
-            r0 = r9
-            com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1 r0 = (com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1 r0 = new com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1
-            r0.<init>(r8, r9)
-        L1b:
-            java.lang.Object r9 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L3c
-            if (r2 != r3) goto L34
-            int r8 = r0.I$0
-            long r1 = r0.J$0
-            java.lang.Object r0 = r0.L$0
-            java.lang.String r0 = (java.lang.String) r0
-            kotlin.ResultKt.throwOnFailure(r9)     // Catch: java.lang.Throwable -> L32
-            goto L70
-        L32:
-            r9 = move-exception
-            goto L7e
-        L34:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-            r8.<init>(r9)
-            throw r8
-        L3c:
-            kotlin.ResultKt.throwOnFailure(r9)
-            int r9 = com.android.app.tracing.TraceUtils.$r8$clinit
-            java.util.concurrent.ThreadLocalRandom r9 = java.util.concurrent.ThreadLocalRandom.current()
-            int r9 = r9.nextInt()
-            r4 = 4096(0x1000, double:2.0237E-320)
-            java.lang.String r2 = "DisplaySwitchLatency"
-            java.lang.String r6 = "waitForGoToSleepWithScreenOff()"
-            android.os.Trace.asyncTraceForTrackBegin(r4, r2, r6, r9)
-            com.android.systemui.power.domain.interactor.PowerInteractor r6 = r8.powerInteractor     // Catch: java.lang.Throwable -> L78
-            kotlinx.coroutines.flow.ReadonlyStateFlow r6 = r6.detailedWakefulness     // Catch: java.lang.Throwable -> L78
-            com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$lambda$8$$inlined$filter$1 r7 = new com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$lambda$8$$inlined$filter$1     // Catch: java.lang.Throwable -> L78
-            r7.<init>()     // Catch: java.lang.Throwable -> L78
-            r0.L$0 = r2     // Catch: java.lang.Throwable -> L78
-            r0.J$0 = r4     // Catch: java.lang.Throwable -> L78
-            r0.I$0 = r9     // Catch: java.lang.Throwable -> L78
-            r0.label = r3     // Catch: java.lang.Throwable -> L78
-            java.lang.Object r8 = kotlinx.coroutines.flow.FlowKt.first(r7, r0)     // Catch: java.lang.Throwable -> L78
-            if (r8 != r1) goto L6b
-            return r1
-        L6b:
-            r0 = r9
-            r9 = r8
-            r8 = r0
-            r0 = r2
-            r1 = r4
-        L70:
-            com.android.systemui.power.shared.model.WakefulnessModel r9 = (com.android.systemui.power.shared.model.WakefulnessModel) r9     // Catch: java.lang.Throwable -> L32
-            android.os.Trace.asyncTraceForTrackEnd(r1, r0, r8)
-            kotlin.Unit r8 = kotlin.Unit.INSTANCE
-            return r8
-        L78:
-            r8 = move-exception
-            r0 = r9
-            r9 = r8
-            r8 = r0
-            r0 = r2
-            r1 = r4
-        L7e:
-            android.os.Trace.asyncTraceForTrackEnd(r1, r0, r8)
-            throw r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.unfold.DisplaySwitchLatencyTracker.access$waitForGoToSleepWithScreenOff(com.android.systemui.unfold.DisplaySwitchLatencyTracker, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$waitForGoToSleepWithScreenOff(final DisplaySwitchLatencyTracker displaySwitchLatencyTracker, ContinuationImpl continuationImpl) throws Throwable {
+        DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1 displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1;
+        Throwable th;
+        int i;
+        String str;
+        long j;
+        displaySwitchLatencyTracker.getClass();
+        if (continuationImpl instanceof DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1) {
+            displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1 = (DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1) continuationImpl;
+            int i2 = displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.label = i2 - Integer.MIN_VALUE;
+            } else {
+                displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1 = new DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1(displaySwitchLatencyTracker, continuationImpl);
+            }
+        }
+        Object obj = displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.label;
+        if (i3 == 0) {
+            ResultKt.throwOnFailure(obj);
+            int i4 = TraceUtils.$r8$clinit;
+            int iNextInt = ThreadLocalRandom.current().nextInt();
+            Trace.asyncTraceForTrackBegin(4096L, "DisplaySwitchLatency", "waitForGoToSleepWithScreenOff()", iNextInt);
+            try {
+                final ReadonlyStateFlow readonlyStateFlow = displaySwitchLatencyTracker.powerInteractor.detailedWakefulness;
+                Flow flow = new Flow() { // from class: com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$lambda$8$$inlined$filter$1
+
+                    /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$lambda$8$$inlined$filter$1$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+                        public final /* synthetic */ DisplaySwitchLatencyTracker this$0;
+
+                        /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$lambda$8$$inlined$filter$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            Object L$1;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector, DisplaySwitchLatencyTracker displaySwitchLatencyTracker) {
+                            this.$this_unsafeFlow = flowCollector;
+                            this.this$0 = displaySwitchLatencyTracker;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                DisplaySwitchLatencyTracker.Companion companion = DisplaySwitchLatencyTracker.Companion;
+                                DisplaySwitchLatencyTracker displaySwitchLatencyTracker = this.this$0;
+                                displaySwitchLatencyTracker.getClass();
+                                if (((WakefulnessModel) obj).internalWakefulnessState == WakefulnessState.ASLEEP && !displaySwitchLatencyTracker.isAodEnabled()) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector, displaySwitchLatencyTracker), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                };
+                displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.L$0 = "DisplaySwitchLatency";
+                displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.J$0 = 4096L;
+                displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.I$0 = iNextInt;
+                displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.label = 1;
+                Object objFirst = FlowKt.first(flow, displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1);
+                if (objFirst == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                obj = objFirst;
+                i = iNextInt;
+                str = "DisplaySwitchLatency";
+                j = 4096;
+            } catch (Throwable th2) {
+                th = th2;
+                i = iNextInt;
+                str = "DisplaySwitchLatency";
+                j = 4096;
+                Trace.asyncTraceForTrackEnd(j, str, i);
+                throw th;
+            }
+        } else {
+            if (i3 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            i = displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.I$0;
+            j = displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.J$0;
+            str = (String) displaySwitchLatencyTracker$waitForGoToSleepWithScreenOff$1.L$0;
+            try {
+                ResultKt.throwOnFailure(obj);
+            } catch (Throwable th3) {
+                th = th3;
+                Trace.asyncTraceForTrackEnd(j, str, i);
+                throw th;
+            }
+        }
+        Trace.asyncTraceForTrackEnd(j, str, i);
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x003c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$waitForScreenTurnedOn(com.android.systemui.unfold.DisplaySwitchLatencyTracker r7, kotlin.coroutines.jvm.internal.ContinuationImpl r8) {
-        /*
-            r7.getClass()
-            boolean r0 = r8 instanceof com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForScreenTurnedOn$1
-            if (r0 == 0) goto L16
-            r0 = r8
-            com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForScreenTurnedOn$1 r0 = (com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForScreenTurnedOn$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L16
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L1b
-        L16:
-            com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForScreenTurnedOn$1 r0 = new com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForScreenTurnedOn$1
-            r0.<init>(r7, r8)
-        L1b:
-            java.lang.Object r8 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L3c
-            if (r2 != r3) goto L34
-            int r7 = r0.I$0
-            long r1 = r0.J$0
-            java.lang.Object r0 = r0.L$0
-            java.lang.String r0 = (java.lang.String) r0
-            kotlin.ResultKt.throwOnFailure(r8)     // Catch: java.lang.Throwable -> L32
-            goto L74
-        L32:
-            r8 = move-exception
-            goto L82
-        L34:
-            java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-            java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-            r7.<init>(r8)
-            throw r7
-        L3c:
-            kotlin.ResultKt.throwOnFailure(r8)
-            int r8 = com.android.app.tracing.TraceUtils.$r8$clinit
-            java.util.concurrent.ThreadLocalRandom r8 = java.util.concurrent.ThreadLocalRandom.current()
-            int r8 = r8.nextInt()
-            r4 = 4096(0x1000, double:2.0237E-320)
-            java.lang.String r2 = "DisplaySwitchLatency"
-            java.lang.String r6 = "waitForScreenTurnedOn()"
-            android.os.Trace.asyncTraceForTrackBegin(r4, r2, r6, r8)
-            com.android.systemui.power.domain.interactor.PowerInteractor r7 = r7.powerInteractor     // Catch: java.lang.Throwable -> L7c
-            kotlinx.coroutines.flow.ReadonlyStateFlow r7 = r7.screenPowerState     // Catch: java.lang.Throwable -> L7c
-            kotlinx.coroutines.flow.FlowKt__LimitKt$drop$$inlined$unsafeFlow$1 r7 = kotlinx.coroutines.flow.FlowKt.drop(r7)     // Catch: java.lang.Throwable -> L7c
-            com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForScreenTurnedOn$lambda$6$$inlined$filter$1 r6 = new com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForScreenTurnedOn$lambda$6$$inlined$filter$1     // Catch: java.lang.Throwable -> L7c
-            r6.<init>()     // Catch: java.lang.Throwable -> L7c
-            r0.L$0 = r2     // Catch: java.lang.Throwable -> L7c
-            r0.J$0 = r4     // Catch: java.lang.Throwable -> L7c
-            r0.I$0 = r8     // Catch: java.lang.Throwable -> L7c
-            r0.label = r3     // Catch: java.lang.Throwable -> L7c
-            java.lang.Object r7 = kotlinx.coroutines.flow.FlowKt.first(r6, r0)     // Catch: java.lang.Throwable -> L7c
-            if (r7 != r1) goto L6f
-            return r1
-        L6f:
-            r0 = r8
-            r8 = r7
-            r7 = r0
-            r0 = r2
-            r1 = r4
-        L74:
-            com.android.systemui.power.shared.model.ScreenPowerState r8 = (com.android.systemui.power.shared.model.ScreenPowerState) r8     // Catch: java.lang.Throwable -> L32
-            android.os.Trace.asyncTraceForTrackEnd(r1, r0, r7)
-            kotlin.Unit r7 = kotlin.Unit.INSTANCE
-            return r7
-        L7c:
-            r7 = move-exception
-            r0 = r8
-            r8 = r7
-            r7 = r0
-            r0 = r2
-            r1 = r4
-        L82:
-            android.os.Trace.asyncTraceForTrackEnd(r1, r0, r7)
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.unfold.DisplaySwitchLatencyTracker.access$waitForScreenTurnedOn(com.android.systemui.unfold.DisplaySwitchLatencyTracker, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object access$waitForScreenTurnedOn(DisplaySwitchLatencyTracker displaySwitchLatencyTracker, ContinuationImpl continuationImpl) throws Throwable {
+        DisplaySwitchLatencyTracker$waitForScreenTurnedOn$1 displaySwitchLatencyTracker$waitForScreenTurnedOn$1;
+        Throwable th;
+        int i;
+        String str;
+        long j;
+        displaySwitchLatencyTracker.getClass();
+        if (continuationImpl instanceof DisplaySwitchLatencyTracker$waitForScreenTurnedOn$1) {
+            displaySwitchLatencyTracker$waitForScreenTurnedOn$1 = (DisplaySwitchLatencyTracker$waitForScreenTurnedOn$1) continuationImpl;
+            int i2 = displaySwitchLatencyTracker$waitForScreenTurnedOn$1.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                displaySwitchLatencyTracker$waitForScreenTurnedOn$1.label = i2 - Integer.MIN_VALUE;
+            } else {
+                displaySwitchLatencyTracker$waitForScreenTurnedOn$1 = new DisplaySwitchLatencyTracker$waitForScreenTurnedOn$1(displaySwitchLatencyTracker, continuationImpl);
+            }
+        }
+        Object obj = displaySwitchLatencyTracker$waitForScreenTurnedOn$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = displaySwitchLatencyTracker$waitForScreenTurnedOn$1.label;
+        if (i3 == 0) {
+            ResultKt.throwOnFailure(obj);
+            int i4 = TraceUtils.$r8$clinit;
+            int iNextInt = ThreadLocalRandom.current().nextInt();
+            Trace.asyncTraceForTrackBegin(4096L, "DisplaySwitchLatency", "waitForScreenTurnedOn()", iNextInt);
+            try {
+                final FlowKt__LimitKt$drop$$inlined$unsafeFlow$1 flowKt__LimitKt$drop$$inlined$unsafeFlow$1Drop = FlowKt.drop(displaySwitchLatencyTracker.powerInteractor.screenPowerState);
+                Flow flow = new Flow() { // from class: com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForScreenTurnedOn$lambda$6$$inlined$filter$1
+
+                    /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForScreenTurnedOn$lambda$6$$inlined$filter$1$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                        /* renamed from: com.android.systemui.unfold.DisplaySwitchLatencyTracker$waitForScreenTurnedOn$lambda$6$$inlined$filter$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            Object L$1;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector) {
+                            this.$this_unsafeFlow = flowCollector;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                if (((ScreenPowerState) obj) == ScreenPowerState.SCREEN_ON) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = flowKt__LimitKt$drop$$inlined$unsafeFlow$1Drop.collect(new AnonymousClass2(flowCollector), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                };
+                displaySwitchLatencyTracker$waitForScreenTurnedOn$1.L$0 = "DisplaySwitchLatency";
+                displaySwitchLatencyTracker$waitForScreenTurnedOn$1.J$0 = 4096L;
+                displaySwitchLatencyTracker$waitForScreenTurnedOn$1.I$0 = iNextInt;
+                displaySwitchLatencyTracker$waitForScreenTurnedOn$1.label = 1;
+                Object objFirst = FlowKt.first(flow, displaySwitchLatencyTracker$waitForScreenTurnedOn$1);
+                if (objFirst == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                obj = objFirst;
+                i = iNextInt;
+                str = "DisplaySwitchLatency";
+                j = 4096;
+            } catch (Throwable th2) {
+                th = th2;
+                i = iNextInt;
+                str = "DisplaySwitchLatency";
+                j = 4096;
+                Trace.asyncTraceForTrackEnd(j, str, i);
+                throw th;
+            }
+        } else {
+            if (i3 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            i = displaySwitchLatencyTracker$waitForScreenTurnedOn$1.I$0;
+            j = displaySwitchLatencyTracker$waitForScreenTurnedOn$1.J$0;
+            str = (String) displaySwitchLatencyTracker$waitForScreenTurnedOn$1.L$0;
+            try {
+                ResultKt.throwOnFailure(obj);
+            } catch (Throwable th3) {
+                th = th3;
+                Trace.asyncTraceForTrackEnd(j, str, i);
+                throw th;
+            }
+        }
+        Trace.asyncTraceForTrackEnd(j, str, i);
+        return Unit.INSTANCE;
     }
 
     public static int toStatsInt(DeviceStateRepository.DeviceState deviceState) {
@@ -982,15 +1376,15 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
                 }
             }
         }
-        DisplaySwitchLatencyEvent copy$default = DisplaySwitchLatencyEvent.copy$default(displaySwitchLatencyEvent, i3, 0, statsInt, i, i2, 0, 6291070);
+        DisplaySwitchLatencyEvent displaySwitchLatencyEventCopy$default = DisplaySwitchLatencyEvent.copy$default(displaySwitchLatencyEvent, i3, 0, statsInt, i, i2, 0, 6291070);
         this.displaySwitchLatencyLogger.getClass();
-        DisplaySwitchLatencyLogger.log(copy$default);
+        DisplaySwitchLatencyLogger.log(displaySwitchLatencyEventCopy$default);
     }
 
     @Override // com.android.systemui.CoreStartable
     public final void start() {
         if (Utils.isDeviceFoldable(this.context.getResources(), this.deviceStateManager)) {
-            BuildersKt.launch$default(this.applicationScope, this.backgroundDispatcher, null, new DisplaySwitchLatencyTracker$start$1(this, null), 2);
+            BuildersKt.launch$default(this.applicationScope, this.backgroundDispatcher, null, new AnonymousClass1(null), 2);
         }
     }
 }

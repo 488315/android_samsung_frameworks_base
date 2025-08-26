@@ -1,6 +1,5 @@
 package com.sec.ims.cmc;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CmcConstants {
     public static final String EXTRA_OEM_EXTRAS = "android.telephony.ims.extra.OEM_EXTRAS";
@@ -8,15 +7,14 @@ public class CmcConstants {
     public static final int SEM_CMC_TYPE_NONE = 0;
     public static final int SEM_CMC_TYPE_PRIMARY_DEVICE = 1;
     public static final int SEM_CMC_TYPE_SECONDARY_DEVICE = 2;
+    public static final String SEM_EXTRA_CMC_DEVICE_ID = "com.samsung.telephony.extra.CMC_DEVICE_ID";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CallDirection {
         public static final int MO = 0;
         public static final int MT = 1;
         public static final int UNKNOWN = -1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CallType {
         public static final int CALL_TYPE_CONFERENCE = 3;
         public static final int CALL_TYPE_EMERGENCY = 4;
@@ -24,7 +22,6 @@ public class CmcConstants {
         public static final int CALL_TYPE_VT = 2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DialogCallState {
         public static final int STATE_CONNECTED = 1;
         public static final int STATE_DIALING = 4;
@@ -33,7 +30,6 @@ public class CmcConstants {
         public static final int STATE_RINGING = 0;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisconnectCause {
         public static final int ALREADY_DIALING = 72;
         public static final int ANSWERED_ELSEWHERE = 52;
@@ -121,7 +117,6 @@ public class CmcConstants {
         public static final int WIFI_LOST = 59;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EndReason {
         public static final int CALL_BUSY = 16;
         public static final int IMS_DEREGISTERED = 14;
@@ -131,14 +126,12 @@ public class CmcConstants {
         public static final int OUT_OF_BATTERY = 10;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HoldDirection {
         public static final int BOTH = 2;
         public static final int LOCAL = 0;
         public static final int REMOTE = 1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Oir {
         public static final int DEFAULT = 0;
         public static final int PRESENTATION_ALLOWED = 1;
@@ -148,7 +141,6 @@ public class CmcConstants {
         public static final int PRESENTATION_UNKNOWN = 3;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RejectReason {
         public static final int E911_NOT_ALLOWED_ON_SD = 15;
         public static final int LOW_BATTERY = 6;
@@ -160,7 +152,6 @@ public class CmcConstants {
         public static final int USER_DECLINE = 3;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TelephonyState {
         public static final int CALL_STATE_IDLE = 0;
         public static final int CALL_STATE_OFFHOOK = 2;

@@ -16,7 +16,6 @@ import com.android.systemui.R;
 import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SppProfile implements LocalBluetoothProfile {
     public final CachedBluetoothDeviceManager mDeviceManager;
@@ -38,15 +37,15 @@ public final class SppProfile implements LocalBluetoothProfile {
                 }
                 for (BluetoothDevice bluetoothDevice : bondedDevices) {
                     if (bluetoothDevice.semIsGearConnected()) {
-                        CachedBluetoothDevice findDevice = sppProfile.mDeviceManager.findDevice(bluetoothDevice);
-                        if (findDevice == null) {
+                        CachedBluetoothDevice cachedBluetoothDeviceFindDevice = sppProfile.mDeviceManager.findDevice(bluetoothDevice);
+                        if (cachedBluetoothDeviceFindDevice == null) {
                             Log.w("SppProfile", "SppProfile found new device: " + bluetoothDevice);
-                            findDevice = sppProfile.mDeviceManager.addDevice(bluetoothDevice);
+                            cachedBluetoothDeviceFindDevice = sppProfile.mDeviceManager.addDevice(bluetoothDevice);
                         }
-                        if (findDevice != null) {
-                            Log.d("SppProfile", "Update cached device : " + findDevice.getNameForLog());
-                            findDevice.onProfileStateChanged(sppProfile, 2);
-                            findDevice.refresh();
+                        if (cachedBluetoothDeviceFindDevice != null) {
+                            Log.d("SppProfile", "Update cached device : " + cachedBluetoothDeviceFindDevice.getNameForLog());
+                            cachedBluetoothDeviceFindDevice.onProfileStateChanged(sppProfile, 2);
+                            cachedBluetoothDeviceFindDevice.refresh();
                         } else {
                             Log.d("SppProfile", "Bluetooth device is null");
                         }

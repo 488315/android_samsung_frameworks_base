@@ -25,7 +25,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MusicControlActionInteractor implements ActionInteractor {
     private static final String KEY_NEW_VALUE = "key_new_value";
@@ -41,7 +40,6 @@ public final class MusicControlActionInteractor implements ActionInteractor {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Action {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ Action[] $VALUES;
@@ -67,9 +65,9 @@ public final class MusicControlActionInteractor implements ActionInteractor {
         }
 
         static {
-            Action[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            Action[] actionArr$values = $values();
+            $VALUES = actionArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(actionArr$values);
         }
 
         private Action(String str, int i) {
@@ -88,7 +86,6 @@ public final class MusicControlActionInteractor implements ActionInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -152,9 +149,9 @@ public final class MusicControlActionInteractor implements ActionInteractor {
 
     @Override // com.android.systemui.bixby2.interactor.ActionInteractor
     public List<String> getSupportingActions() {
-        Action[] values = Action.values();
-        ArrayList arrayList = new ArrayList(values.length);
-        for (Action action : values) {
+        Action[] actionArrValues = Action.values();
+        ArrayList arrayList = new ArrayList(actionArrValues.length);
+        for (Action action : actionArrValues) {
             arrayList.add(action.name());
         }
         return arrayList;
@@ -168,11 +165,11 @@ public final class MusicControlActionInteractor implements ActionInteractor {
         if (StringsKt__StringsKt.contains(str, "volume_control", false)) {
             VolumeType.Companion companion = VolumeType.Companion;
             Context context = this.context;
-            VolumeType create = companion.create(context, getStreamTypeFromString(context, str));
+            VolumeType volumeTypeCreate = companion.create(context, getStreamTypeFromString(context, str));
             Command.StatefulBuilder statefulBuilder = new Command.StatefulBuilder(command.mCommandId);
-            statefulBuilder.mStatus = create.getStatus();
-            statefulBuilder.mStatusCode = create.getStatusCode();
-            statefulBuilder.mTemplate = new SliderTemplate(create.getMinVolume(), create.getMaxVolume(), create.getVolume(), 1.0f, null);
+            statefulBuilder.mStatus = volumeTypeCreate.getStatus();
+            statefulBuilder.mStatusCode = volumeTypeCreate.getStatusCode();
+            statefulBuilder.mTemplate = new SliderTemplate(volumeTypeCreate.getMinVolume(), volumeTypeCreate.getMaxVolume(), volumeTypeCreate.getVolume(), 1.0f, null);
             return statefulBuilder.build();
         }
         if (!StringsKt__StringsKt.contains(str, MUTE_ACTION_PREFIX, false)) {
@@ -186,10 +183,10 @@ public final class MusicControlActionInteractor implements ActionInteractor {
         }
         VolumeType.Companion companion2 = VolumeType.Companion;
         Context context2 = this.context;
-        VolumeType create2 = companion2.create(context2, getStreamTypeFromString(context2, str));
+        VolumeType volumeTypeCreate2 = companion2.create(context2, getStreamTypeFromString(context2, str));
         Command.StatefulBuilder statefulBuilder3 = new Command.StatefulBuilder(command.mCommandId);
         statefulBuilder3.mStatus = 1;
-        statefulBuilder3.mTemplate = new ToggleTemplate(create2.isStreamMute());
+        statefulBuilder3.mTemplate = new ToggleTemplate(volumeTypeCreate2.isStreamMute());
         return statefulBuilder3.build();
     }
 
@@ -226,20 +223,20 @@ public final class MusicControlActionInteractor implements ActionInteractor {
         if (StringsKt__StringsKt.contains(str, "volume_control", false)) {
             VolumeType.Companion companion = VolumeType.Companion;
             Context context = this.context;
-            VolumeType create = companion.create(context, getStreamTypeFromString(context, str));
+            VolumeType volumeTypeCreate = companion.create(context, getStreamTypeFromString(context, str));
             Command.StatefulBuilder statefulBuilder = new Command.StatefulBuilder(command.mCommandId);
-            statefulBuilder.mStatus = create.getStatus();
-            statefulBuilder.mStatusCode = create.getStatusCode();
-            statefulBuilder.mTemplate = new SliderTemplate(create.getMinVolume(), create.getMaxVolume(), create.getVolume(), 1.0f, null);
+            statefulBuilder.mStatus = volumeTypeCreate.getStatus();
+            statefulBuilder.mStatusCode = volumeTypeCreate.getStatusCode();
+            statefulBuilder.mTemplate = new SliderTemplate(volumeTypeCreate.getMinVolume(), volumeTypeCreate.getMaxVolume(), volumeTypeCreate.getVolume(), 1.0f, null);
             return statefulBuilder.build();
         }
         if (StringsKt__StringsKt.contains(str, MUTE_ACTION_PREFIX, false)) {
             VolumeType.Companion companion2 = VolumeType.Companion;
             Context context2 = this.context;
-            VolumeType create2 = companion2.create(context2, getStreamTypeFromString(context2, str));
+            VolumeType volumeTypeCreate2 = companion2.create(context2, getStreamTypeFromString(context2, str));
             Command.StatefulBuilder statefulBuilder2 = new Command.StatefulBuilder(command.mCommandId);
             statefulBuilder2.mStatus = 1;
-            statefulBuilder2.mTemplate = new ToggleTemplate(create2.isStreamMute());
+            statefulBuilder2.mTemplate = new ToggleTemplate(volumeTypeCreate2.isStreamMute());
             return statefulBuilder2.build();
         }
         if (!Intrinsics.areEqual(str, "control_music")) {

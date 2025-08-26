@@ -4,7 +4,6 @@ import java.util.Arrays;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.serialization.descriptors.SerialDescriptor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class InlineClassDescriptor extends PluginGeneratedSerialDescriptor {
     public final boolean isInline;
@@ -16,7 +15,6 @@ public final class InlineClassDescriptor extends PluginGeneratedSerialDescriptor
 
     @Override // kotlinx.serialization.internal.PluginGeneratedSerialDescriptor
     public final boolean equals(Object obj) {
-        int i;
         if (this == obj) {
             return true;
         }
@@ -26,10 +24,11 @@ public final class InlineClassDescriptor extends PluginGeneratedSerialDescriptor
                 InlineClassDescriptor inlineClassDescriptor = (InlineClassDescriptor) obj;
                 if (inlineClassDescriptor.isInline && Arrays.equals((SerialDescriptor[]) this.typeParameterDescriptors$delegate.getValue(), (SerialDescriptor[]) inlineClassDescriptor.typeParameterDescriptors$delegate.getValue())) {
                     int elementsCount = serialDescriptor.getElementsCount();
-                    int i2 = this.elementsCount;
-                    if (i2 == elementsCount) {
-                        for (0; i < i2; i + 1) {
-                            i = (Intrinsics.areEqual(getElementDescriptor(i).getSerialName(), serialDescriptor.getElementDescriptor(i).getSerialName()) && Intrinsics.areEqual(getElementDescriptor(i).getKind(), serialDescriptor.getElementDescriptor(i).getKind())) ? i + 1 : 0;
+                    int i = this.elementsCount;
+                    if (i == elementsCount) {
+                        for (int i2 = 0; i2 < i; i2++) {
+                            if (Intrinsics.areEqual(getElementDescriptor(i2).getSerialName(), serialDescriptor.getElementDescriptor(i2).getSerialName()) && Intrinsics.areEqual(getElementDescriptor(i2).getKind(), serialDescriptor.getElementDescriptor(i2).getKind())) {
+                            }
                         }
                         return true;
                     }

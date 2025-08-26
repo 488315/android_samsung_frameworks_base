@@ -2,7 +2,6 @@ package kotlin.text;
 
 import kotlin.collections.AbstractList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StringsKt__StringsJVMKt extends StringsKt__StringNumberConversionsKt {
     public static String concatToString$default(char[] cArr, int i, int i2, int i3) {
@@ -40,10 +39,10 @@ public class StringsKt__StringsJVMKt extends StringsKt__StringNumberConversionsK
             return "";
         }
         if (length == 1) {
-            char charAt = str.charAt(0);
+            char cCharAt = str.charAt(0);
             char[] cArr = new char[i];
             for (int i3 = 0; i3 < i; i3++) {
-                cArr[i3] = charAt;
+                cArr[i3] = cCharAt;
             }
             return new String(cArr);
         }
@@ -57,14 +56,14 @@ public class StringsKt__StringsJVMKt extends StringsKt__StringNumberConversionsK
                 i2++;
             }
         }
-        String sb2 = sb.toString();
-        sb2.getClass();
-        return sb2;
+        String string = sb.toString();
+        string.getClass();
+        return string;
     }
 
     public static String replace$default(String str, String str2, String str3) {
-        int indexOf = StringsKt__StringsKt.indexOf(str, str2, 0, false);
-        if (indexOf < 0) {
+        int iIndexOf = StringsKt__StringsKt.indexOf(str, str2, 0, false);
+        if (iIndexOf < 0) {
             return str;
         }
         int length = str2.length();
@@ -76,14 +75,14 @@ public class StringsKt__StringsJVMKt extends StringsKt__StringNumberConversionsK
         StringBuilder sb = new StringBuilder(length2);
         int i2 = 0;
         do {
-            sb.append((CharSequence) str, i2, indexOf);
+            sb.append((CharSequence) str, i2, iIndexOf);
             sb.append(str3);
-            i2 = indexOf + length;
-            if (indexOf >= str.length()) {
+            i2 = iIndexOf + length;
+            if (iIndexOf >= str.length()) {
                 break;
             }
-            indexOf = StringsKt__StringsKt.indexOf(str, str2, indexOf + i, false);
-        } while (indexOf > 0);
+            iIndexOf = StringsKt__StringsKt.indexOf(str, str2, iIndexOf + i, false);
+        } while (iIndexOf > 0);
         sb.append((CharSequence) str, i2, str.length());
         return sb.toString();
     }

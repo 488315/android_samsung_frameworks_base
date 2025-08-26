@@ -7,7 +7,6 @@ import androidx.constraintlayout.core.widgets.ConstraintAnchor;
 import androidx.constraintlayout.core.widgets.ConstraintWidget;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Guideline extends ConstraintWidget {
     public boolean mResolved;
@@ -17,7 +16,6 @@ public class Guideline extends ConstraintWidget {
     public ConstraintAnchor mAnchor = this.mTop;
     public int mOrientation = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.constraintlayout.core.widgets.Guideline$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$androidx$constraintlayout$core$widgets$ConstraintAnchor$Type;
@@ -92,49 +90,49 @@ public class Guideline extends ConstraintWidget {
         if (this.mResolved) {
             ConstraintAnchor constraintAnchor = this.mAnchor;
             if (constraintAnchor.mHasFinalValue) {
-                SolverVariable createObjectVariable = linearSystem.createObjectVariable(constraintAnchor);
-                linearSystem.addEquality(createObjectVariable, this.mAnchor.getFinalValue());
+                SolverVariable solverVariableCreateObjectVariable = linearSystem.createObjectVariable(constraintAnchor);
+                linearSystem.addEquality(solverVariableCreateObjectVariable, this.mAnchor.getFinalValue());
                 if (this.mRelativeBegin != -1) {
                     if (z2) {
-                        linearSystem.addGreaterThan(linearSystem.createObjectVariable(anchor2), createObjectVariable, 0, 5);
+                        linearSystem.addGreaterThan(linearSystem.createObjectVariable(anchor2), solverVariableCreateObjectVariable, 0, 5);
                     }
                 } else if (this.mRelativeEnd != -1 && z2) {
-                    SolverVariable createObjectVariable2 = linearSystem.createObjectVariable(anchor2);
-                    linearSystem.addGreaterThan(createObjectVariable, linearSystem.createObjectVariable(anchor), 0, 5);
-                    linearSystem.addGreaterThan(createObjectVariable2, createObjectVariable, 0, 5);
+                    SolverVariable solverVariableCreateObjectVariable2 = linearSystem.createObjectVariable(anchor2);
+                    linearSystem.addGreaterThan(solverVariableCreateObjectVariable, linearSystem.createObjectVariable(anchor), 0, 5);
+                    linearSystem.addGreaterThan(solverVariableCreateObjectVariable2, solverVariableCreateObjectVariable, 0, 5);
                 }
                 this.mResolved = false;
                 return;
             }
         }
         if (this.mRelativeBegin != -1) {
-            SolverVariable createObjectVariable3 = linearSystem.createObjectVariable(this.mAnchor);
-            linearSystem.addEquality(createObjectVariable3, linearSystem.createObjectVariable(anchor), this.mRelativeBegin, 8);
+            SolverVariable solverVariableCreateObjectVariable3 = linearSystem.createObjectVariable(this.mAnchor);
+            linearSystem.addEquality(solverVariableCreateObjectVariable3, linearSystem.createObjectVariable(anchor), this.mRelativeBegin, 8);
             if (z2) {
-                linearSystem.addGreaterThan(linearSystem.createObjectVariable(anchor2), createObjectVariable3, 0, 5);
+                linearSystem.addGreaterThan(linearSystem.createObjectVariable(anchor2), solverVariableCreateObjectVariable3, 0, 5);
                 return;
             }
             return;
         }
         if (this.mRelativeEnd != -1) {
-            SolverVariable createObjectVariable4 = linearSystem.createObjectVariable(this.mAnchor);
-            SolverVariable createObjectVariable5 = linearSystem.createObjectVariable(anchor2);
-            linearSystem.addEquality(createObjectVariable4, createObjectVariable5, -this.mRelativeEnd, 8);
+            SolverVariable solverVariableCreateObjectVariable4 = linearSystem.createObjectVariable(this.mAnchor);
+            SolverVariable solverVariableCreateObjectVariable5 = linearSystem.createObjectVariable(anchor2);
+            linearSystem.addEquality(solverVariableCreateObjectVariable4, solverVariableCreateObjectVariable5, -this.mRelativeEnd, 8);
             if (z2) {
-                linearSystem.addGreaterThan(createObjectVariable4, linearSystem.createObjectVariable(anchor), 0, 5);
-                linearSystem.addGreaterThan(createObjectVariable5, createObjectVariable4, 0, 5);
+                linearSystem.addGreaterThan(solverVariableCreateObjectVariable4, linearSystem.createObjectVariable(anchor), 0, 5);
+                linearSystem.addGreaterThan(solverVariableCreateObjectVariable5, solverVariableCreateObjectVariable4, 0, 5);
                 return;
             }
             return;
         }
         if (this.mRelativePercent != -1.0f) {
-            SolverVariable createObjectVariable6 = linearSystem.createObjectVariable(this.mAnchor);
-            SolverVariable createObjectVariable7 = linearSystem.createObjectVariable(anchor2);
+            SolverVariable solverVariableCreateObjectVariable6 = linearSystem.createObjectVariable(this.mAnchor);
+            SolverVariable solverVariableCreateObjectVariable7 = linearSystem.createObjectVariable(anchor2);
             float f = this.mRelativePercent;
-            ArrayRow createRow = linearSystem.createRow();
-            createRow.variables.put(createObjectVariable6, -1.0f);
-            createRow.variables.put(createObjectVariable7, f);
-            linearSystem.addConstraint(createRow);
+            ArrayRow arrayRowCreateRow = linearSystem.createRow();
+            arrayRowCreateRow.variables.put(solverVariableCreateObjectVariable6, -1.0f);
+            arrayRowCreateRow.variables.put(solverVariableCreateObjectVariable7, f);
+            linearSystem.addConstraint(arrayRowCreateRow);
         }
     }
 
@@ -144,8 +142,8 @@ public class Guideline extends ConstraintWidget {
     }
 
     @Override // androidx.constraintlayout.core.widgets.ConstraintWidget
-    public final void copy(ConstraintWidget constraintWidget, HashMap hashMap) {
-        super.copy(constraintWidget, hashMap);
+    public final void copy(ConstraintWidget constraintWidget, HashMap map) {
+        super.copy(constraintWidget, map);
         Guideline guideline = (Guideline) constraintWidget;
         this.mRelativePercent = guideline.mRelativePercent;
         this.mRelativeBegin = guideline.mRelativeBegin;

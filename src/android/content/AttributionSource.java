@@ -146,20 +146,20 @@ public final class AttributionSource implements Parcelable {
     }
 
     public static AttributionSource myAttributionSource() {
-        AttributionSource currentAttributionSource = ActivityThread.currentAttributionSource();
-        if (currentAttributionSource != null) {
-            if (!Flags.enforceDefaultDeviceIdInMyAttributionSource() || currentAttributionSource.getDeviceId() == 0) {
-                return currentAttributionSource;
+        AttributionSource attributionSourceCurrentAttributionSource = ActivityThread.currentAttributionSource();
+        if (attributionSourceCurrentAttributionSource != null) {
+            if (!Flags.enforceDefaultDeviceIdInMyAttributionSource() || attributionSourceCurrentAttributionSource.getDeviceId() == 0) {
+                return attributionSourceCurrentAttributionSource;
             }
             Log.w(TAG, "Avoid using myAttributionSource() to fetch an attributionSource with a non-default device Id");
-            return currentAttributionSource.withDeviceId(0);
+            return attributionSourceCurrentAttributionSource.withDeviceId(0);
         }
-        int myUid = Process.myUid();
-        if (myUid == 0) {
-            myUid = 1000;
+        int iMyUid = Process.myUid();
+        if (iMyUid == 0) {
+            iMyUid = 1000;
         }
         try {
-            return new Builder(myUid).setPid(Process.myPid()).setDeviceId(0).setPackageName(AppGlobals.getPackageManager().getPackagesForUid(myUid)[0]).build();
+            return new Builder(iMyUid).setPid(Process.myPid()).setDeviceId(0).setPackageName(AppGlobals.getPackageManager().getPackagesForUid(iMyUid)[0]).build();
         } catch (Exception unused) {
             throw new IllegalStateException("Failed to resolve AttributionSource");
         }
@@ -173,10 +173,10 @@ public final class AttributionSource implements Parcelable {
         }
 
         public ScopedParcelState(AttributionSource attributionSource) {
-            Parcel obtain = Parcel.obtain();
-            this.mParcel = obtain;
-            attributionSource.writeToParcel(obtain, 0);
-            obtain.setDataPosition(0);
+            Parcel parcelObtain = Parcel.obtain();
+            this.mParcel = parcelObtain;
+            attributionSource.writeToParcel(parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
         }
 
         @Override // java.lang.AutoCloseable

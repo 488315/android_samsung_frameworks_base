@@ -1,6 +1,5 @@
 package com.google.dexmaker.dx.rop.cst;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CstNat extends Constant {
     public final CstString descriptor;
@@ -24,8 +23,8 @@ public final class CstNat extends Constant {
     @Override // com.google.dexmaker.dx.rop.cst.Constant
     public final int compareTo0(Constant constant) {
         CstNat cstNat = (CstNat) constant;
-        int compareTo = this.name.compareTo((Constant) cstNat.name);
-        return compareTo != 0 ? compareTo : this.descriptor.compareTo((Constant) cstNat.descriptor);
+        int iCompareTo = this.name.compareTo((Constant) cstNat.name);
+        return iCompareTo != 0 ? iCompareTo : this.descriptor.compareTo((Constant) cstNat.descriptor);
     }
 
     public final boolean equals(Object obj) {

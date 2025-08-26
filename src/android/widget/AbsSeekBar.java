@@ -20,6 +20,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.accessibility.AccessibilityNodeInfo;
@@ -199,7 +200,7 @@ public abstract class AbsSeekBar extends ProgressBar {
         this(context, attributeSet, i, 0);
     }
 
-    public AbsSeekBar(Context context, AttributeSet attributeSet, int i, int i2) {
+    public AbsSeekBar(Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(context, attributeSet, i, i2);
         this.mTempRect = new Rect();
         this.mThumbTintList = null;
@@ -225,34 +226,34 @@ public abstract class AbsSeekBar extends ProgressBar {
         this.mLargeFont = false;
         this.mIsTouchDisabled = false;
         this.mSetDualColorMode = false;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.SeekBar, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.SeekBar, attributeSet, obtainStyledAttributes, i, i2);
-        setThumb(obtainStyledAttributes.getDrawable(0));
-        if (obtainStyledAttributes.hasValue(4)) {
-            this.mThumbBlendMode = Drawable.parseBlendMode(obtainStyledAttributes.getInt(4, -1), this.mThumbBlendMode);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.SeekBar, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.SeekBar, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        setThumb(typedArrayObtainStyledAttributes.getDrawable(0));
+        if (typedArrayObtainStyledAttributes.hasValue(4)) {
+            this.mThumbBlendMode = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(4, -1), this.mThumbBlendMode);
             this.mHasThumbBlendMode = true;
         }
-        if (obtainStyledAttributes.hasValue(3)) {
-            this.mThumbTintList = obtainStyledAttributes.getColorStateList(3);
+        if (typedArrayObtainStyledAttributes.hasValue(3)) {
+            this.mThumbTintList = typedArrayObtainStyledAttributes.getColorStateList(3);
             this.mHasThumbTint = true;
         }
-        setTickMark(obtainStyledAttributes.getDrawable(5));
-        if (obtainStyledAttributes.hasValue(7)) {
-            this.mTickMarkBlendMode = Drawable.parseBlendMode(obtainStyledAttributes.getInt(7, -1), this.mTickMarkBlendMode);
+        setTickMark(typedArrayObtainStyledAttributes.getDrawable(5));
+        if (typedArrayObtainStyledAttributes.hasValue(7)) {
+            this.mTickMarkBlendMode = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(7, -1), this.mTickMarkBlendMode);
             this.mHasTickMarkBlendMode = true;
         }
-        if (obtainStyledAttributes.hasValue(6)) {
-            this.mTickMarkTintList = obtainStyledAttributes.getColorStateList(6);
+        if (typedArrayObtainStyledAttributes.hasValue(6)) {
+            this.mTickMarkTintList = typedArrayObtainStyledAttributes.getColorStateList(6);
             this.mHasTickMarkTint = true;
         }
-        this.mSplitTrack = obtainStyledAttributes.getBoolean(2, false);
-        setThumbOffset(obtainStyledAttributes.getDimensionPixelOffset(1, getThumbOffset()));
-        boolean z = obtainStyledAttributes.getBoolean(8, true);
-        obtainStyledAttributes.recycle();
+        this.mSplitTrack = typedArrayObtainStyledAttributes.getBoolean(2, false);
+        setThumbOffset(typedArrayObtainStyledAttributes.getDimensionPixelOffset(1, getThumbOffset()));
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(8, true);
+        typedArrayObtainStyledAttributes.recycle();
         if (z) {
-            TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.Theme, 0, 0);
-            this.mDisabledAlpha = obtainStyledAttributes2.getFloat(3, 0.4f);
-            obtainStyledAttributes2.recycle();
+            TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.Theme, 0, 0);
+            this.mDisabledAlpha = typedArrayObtainStyledAttributes2.getFloat(3, 0.4f);
+            typedArrayObtainStyledAttributes2.recycle();
         } else {
             this.mDisabledAlpha = 1.0f;
         }
@@ -269,24 +270,24 @@ public abstract class AbsSeekBar extends ProgressBar {
         this.mModeExpandThumbRadius = resources.getDimensionPixelSize(R.dimen.sem_seekbar_mode_expand_thumb_radius);
         this.mDefaultNormalProgressColor = colorToColorStateList(resources.getColor(this.mIsDeviceDefaultDark ? R.color.tw_seekbar_color_control_normal_dark : R.color.tw_seekbar_color_control_normal_light, null));
         this.mDefaultSecondaryProgressColor = colorToColorStateList(resources.getColor(R.color.tw_seekbar_color_control_secondary, null));
-        ColorStateList semGetProgressTintList = semGetProgressTintList();
-        this.mDefaultActivatedProgressColor = semGetProgressTintList;
-        if (semGetProgressTintList == null) {
+        ColorStateList colorStateListSemGetProgressTintList = semGetProgressTintList();
+        this.mDefaultActivatedProgressColor = colorStateListSemGetProgressTintList;
+        if (colorStateListSemGetProgressTintList == null) {
             this.mDefaultActivatedProgressColor = colorToColorStateList(resources.getColor(this.mIsDeviceDefaultDark ? R.color.tw_seekbar_color_control_activated_dark : R.color.tw_seekbar_color_control_activated_light, null));
         }
         this.mOverlapNormalProgressColor = colorToColorStateList(resources.getColor(this.mIsDeviceDefaultDark ? R.color.tw_seekbar_color_overlap_normal_dark : R.color.tw_seekbar_color_overlap_normal_light, null));
         boolean z2 = this.mIsDeviceDefaultDark;
         int i3 = R.color.tw_seekbar_color_overlap_activated_dark;
-        this.mOverlapActivatedProgressColor = colorToColorStateList(resources.getColor(z2 ? 17171793 : 17171794, null));
+        this.mOverlapActivatedProgressColor = colorToColorStateList(resources.getColor(z2 ? 17171792 : 17171793, null));
         int[][] iArr = {new int[]{16842910}, new int[]{-16842910}};
-        int color = resources.getColor(this.mIsDeviceDefaultDark ? i3 : 17171794);
+        int color = resources.getColor(this.mIsDeviceDefaultDark ? i3 : 17171793);
         boolean z3 = this.mIsDeviceDefaultDark;
         int i4 = R.color.tw_seekbar_disable_color_activated_dark;
-        this.mOverlapActivatedThumbColor = new ColorStateList(iArr, new int[]{color, resources.getColor(z3 ? 17171797 : 17171798)});
+        this.mOverlapActivatedThumbColor = new ColorStateList(iArr, new int[]{color, resources.getColor(z3 ? 17171796 : 17171797)});
         ColorStateList colorStateList = this.mThumbTintList;
         this.mDefaultActivatedThumbColor = colorStateList;
         if (colorStateList == null) {
-            this.mDefaultActivatedThumbColor = new ColorStateList(iArr, new int[]{resources.getColor(this.mIsDeviceDefaultDark ? R.color.tw_thumb_color_control_activated_dark : R.color.tw_thumb_color_control_activated_light), resources.getColor(this.mIsDeviceDefaultDark ? i4 : 17171798)});
+            this.mDefaultActivatedThumbColor = new ColorStateList(iArr, new int[]{resources.getColor(this.mIsDeviceDefaultDark ? R.color.tw_thumb_color_control_activated_dark : R.color.tw_thumb_color_control_activated_light), resources.getColor(this.mIsDeviceDefaultDark ? i4 : 17171797)});
         }
         boolean z4 = resources.getBoolean(R.bool.tw_seekbar_sliding_animation);
         this.mAllowedSeekBarAnimation = z4;
@@ -371,10 +372,10 @@ public abstract class AbsSeekBar extends ProgressBar {
         Drawable drawable = this.mThumb;
         if (drawable != null) {
             if (this.mHasThumbTint || this.mHasThumbBlendMode) {
-                Drawable mutate = drawable.mutate();
-                this.mThumb = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mThumb = drawableMutate;
                 if (this.mHasThumbTint) {
-                    mutate.setTintList(this.mThumbTintList);
+                    drawableMutate.setTintList(this.mThumbTintList);
                 }
                 if (this.mHasThumbBlendMode) {
                     this.mThumb.setTintBlendMode(this.mThumbBlendMode);
@@ -461,10 +462,10 @@ public abstract class AbsSeekBar extends ProgressBar {
         Drawable drawable = this.mTickMark;
         if (drawable != null) {
             if (this.mHasTickMarkTint || this.mHasTickMarkBlendMode) {
-                Drawable mutate = drawable.mutate();
-                this.mTickMark = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mTickMark = drawableMutate;
                 if (this.mHasTickMarkTint) {
-                    mutate.setTintList(this.mTickMarkTintList);
+                    drawableMutate.setTintList(this.mTickMarkTintList);
                 }
                 if (this.mHasTickMarkBlendMode) {
                     this.mTickMark.setTintBlendMode(this.mTickMarkBlendMode);
@@ -595,19 +596,19 @@ public abstract class AbsSeekBar extends ProgressBar {
         int i5 = (i2 - this.mPaddingTop) - this.mPaddingBottom;
         Drawable currentDrawable = getCurrentDrawable();
         Drawable drawable = this.mThumb;
-        int min = Math.min(this.mMaxHeight, i5);
+        int iMin = Math.min(this.mMaxHeight, i5);
         int intrinsicHeight = drawable == null ? 0 : drawable.getIntrinsicHeight();
-        if (intrinsicHeight > min) {
+        if (intrinsicHeight > iMin) {
             i4 = (i5 - intrinsicHeight) / 2;
-            i3 = ((intrinsicHeight - min) / 2) + i4;
+            i3 = ((intrinsicHeight - iMin) / 2) + i4;
         } else {
-            int i6 = (i5 - min) / 2;
-            int i7 = ((min - intrinsicHeight) / 2) + i6;
+            int i6 = (i5 - iMin) / 2;
+            int i7 = ((iMin - intrinsicHeight) / 2) + i6;
             i3 = i6;
             i4 = i7;
         }
         if (currentDrawable != null) {
-            currentDrawable.setBounds(0, i3, (i - this.mPaddingRight) - this.mPaddingLeft, min + i3);
+            currentDrawable.setBounds(0, i3, (i - this.mPaddingRight) - this.mPaddingLeft, iMin + i3);
         }
         if (drawable != null) {
             setThumbPos(i, drawable, getScale(), i4);
@@ -689,15 +690,15 @@ public abstract class AbsSeekBar extends ProgressBar {
     }
 
     public void growRectTo(Rect rect, int i) {
-        int height = i - rect.height();
-        if (height > 0) {
-            rect.top -= (height + 1) / 2;
-            rect.bottom += height / 2;
+        int iHeight = i - rect.height();
+        if (iHeight > 0) {
+            rect.top -= (iHeight + 1) / 2;
+            rect.bottom += iHeight / 2;
         }
-        int width = i - rect.width();
-        if (width > 0) {
-            rect.left -= (width + 1) / 2;
-            rect.right += width / 2;
+        int iWidth = i - rect.width();
+        if (iWidth > 0) {
+            rect.left -= (iWidth + 1) / 2;
+            rect.right += iWidth / 2;
         }
     }
 
@@ -732,11 +733,11 @@ public abstract class AbsSeekBar extends ProgressBar {
             rect.offset(this.mPaddingLeft - this.mThumbOffset, this.mPaddingTop);
             rect.left += opticalInsets.left;
             rect.right -= opticalInsets.right;
-            int save = canvas.save();
+            int iSave = canvas.save();
             canvas.clipRect(rect, Region.Op.DIFFERENCE);
             super.drawTrack(canvas);
             drawTickMarks(canvas);
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
         } else {
             super.drawTrack(canvas);
             drawTickMarks(canvas);
@@ -754,12 +755,12 @@ public abstract class AbsSeekBar extends ProgressBar {
         Rect bounds = this.mOverlapBackground.getBounds();
         Rect rect2 = this.mTempRect;
         this.mOverlapBackground.copyBounds(rect2);
-        int max = Math.max(getProgress(), this.mOverlapPoint);
-        int max2 = getMax();
+        int iMax = Math.max(getProgress(), this.mOverlapPoint);
+        int max = getMax();
         if (this.mCurrentMode == 3) {
-            rect2.bottom = (int) (bounds.bottom - (bounds.height() * (max / max2)));
+            rect2.bottom = (int) (bounds.bottom - (bounds.height() * (iMax / max)));
         } else {
-            rect2.left = (int) (bounds.left + (bounds.width() * (max / max2)));
+            rect2.left = (int) (bounds.left + (bounds.width() * (iMax / max)));
         }
         canvas.clipRect(rect2);
         if (this.mDefaultNormalProgressColor.getDefaultColor() != this.mOverlapNormalProgressColor.getDefaultColor()) {
@@ -778,52 +779,52 @@ public abstract class AbsSeekBar extends ProgressBar {
                 int i2 = intrinsicHeight >= 0 ? intrinsicHeight / 2 : 1;
                 this.mTickMark.setBounds(-i, -i2, i, i2);
                 float width = ((getWidth() - this.mPaddingLeft) - this.mPaddingRight) / max;
-                int save = canvas.save();
+                int iSave = canvas.save();
                 canvas.translate(this.mPaddingLeft, getHeight() / 2.0f);
                 for (int i3 = 0; i3 <= max; i3++) {
                     this.mTickMark.draw(canvas);
                     canvas.translate(width, 0.0f);
                 }
-                canvas.restoreToCount(save);
+                canvas.restoreToCount(iSave);
             }
         }
     }
 
     void drawThumb(Canvas canvas) {
         if (this.mThumb != null) {
-            int save = canvas.save();
+            int iSave = canvas.save();
             if (this.mCurrentMode == 3) {
                 canvas.translate(this.mPaddingLeft, this.mPaddingTop - this.mThumbOffset);
             } else {
                 canvas.translate(this.mPaddingLeft - this.mThumbOffset, this.mPaddingTop);
             }
             this.mThumb.draw(canvas);
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
         }
     }
 
     @Override // android.widget.ProgressBar, android.view.View
     protected synchronized void onMeasure(int i, int i2) {
-        int i3;
-        int i4;
+        int iMax;
+        int iMax2;
         Drawable currentDrawable = getCurrentDrawable();
         if (currentDrawable == null) {
-            i3 = 0;
-            i4 = 0;
+            iMax = 0;
+            iMax2 = 0;
         } else if (this.mCurrentMode == 3) {
             Drawable drawable = this.mThumb;
             int intrinsicHeight = drawable == null ? 0 : drawable.getIntrinsicHeight();
-            int max = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, currentDrawable.getIntrinsicHeight()));
-            i3 = Math.max(this.mMinHeight, Math.min(this.mMaxHeight, currentDrawable.getIntrinsicWidth()));
-            i4 = Math.max(intrinsicHeight, max);
+            int iMax3 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, currentDrawable.getIntrinsicHeight()));
+            iMax = Math.max(this.mMinHeight, Math.min(this.mMaxHeight, currentDrawable.getIntrinsicWidth()));
+            iMax2 = Math.max(intrinsicHeight, iMax3);
         } else {
             Drawable drawable2 = this.mThumb;
             int intrinsicHeight2 = drawable2 == null ? 0 : drawable2.getIntrinsicHeight();
-            int max2 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, currentDrawable.getIntrinsicWidth()));
-            i3 = Math.max(intrinsicHeight2, Math.max(this.mMinHeight, Math.min(this.mMaxHeight, currentDrawable.getIntrinsicHeight())));
-            i4 = max2;
+            int iMax4 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, currentDrawable.getIntrinsicWidth()));
+            iMax = Math.max(intrinsicHeight2, Math.max(this.mMinHeight, Math.min(this.mMaxHeight, currentDrawable.getIntrinsicHeight())));
+            iMax2 = iMax4;
         }
-        setMeasuredDimension(resolveSizeAndState(i4 + this.mPaddingLeft + this.mPaddingRight, i, 0), resolveSizeAndState(i3 + this.mPaddingTop + this.mPaddingBottom, i2, 0));
+        setMeasuredDimension(resolveSizeAndState(iMax2 + this.mPaddingLeft + this.mPaddingRight, i, 0), resolveSizeAndState(iMax + this.mPaddingTop + this.mPaddingBottom, i2, 0));
     }
 
     @Override // android.view.View
@@ -902,6 +903,11 @@ public abstract class AbsSeekBar extends ProgressBar {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x004e  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0056  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void trackTouchEvent(MotionEvent motionEvent) {
         float f;
         float f2;
@@ -909,32 +915,26 @@ public abstract class AbsSeekBar extends ProgressBar {
             trackTouchEventInVertical(motionEvent);
             return;
         }
-        int round = Math.round(motionEvent.getX());
-        int round2 = Math.round(motionEvent.getY());
+        int iRound = Math.round(motionEvent.getX());
+        int iRound2 = Math.round(motionEvent.getY());
         int width = getWidth();
         int i = (width - this.mPaddingLeft) - this.mPaddingRight;
         if (isLayoutRtl() && this.mMirrorForRtl) {
-            if (round <= width - this.mPaddingRight) {
-                if (round >= this.mPaddingLeft) {
-                    f = (((i - round) + this.mPaddingLeft) / i) + this.mTouchThumbOffset;
+            if (iRound <= width - this.mPaddingRight) {
+                if (iRound >= this.mPaddingLeft) {
+                    f = (((i - iRound) + this.mPaddingLeft) / i) + this.mTouchThumbOffset;
                     f2 = this.mTouchProgressOffset;
                 }
-                f = 1.0f;
-                f2 = 0.0f;
             }
+        } else if (iRound < this.mPaddingLeft) {
             f = 0.0f;
+            f2 = 0.0f;
+        } else if (iRound > width - this.mPaddingRight) {
+            f = 1.0f;
             f2 = 0.0f;
         } else {
-            if (round >= this.mPaddingLeft) {
-                if (round <= width - this.mPaddingRight) {
-                    f = ((round - this.mPaddingLeft) / i) + this.mTouchThumbOffset;
-                    f2 = this.mTouchProgressOffset;
-                }
-                f = 1.0f;
-                f2 = 0.0f;
-            }
-            f = 0.0f;
-            f2 = 0.0f;
+            f = ((iRound - this.mPaddingLeft) / i) + this.mTouchThumbOffset;
+            f2 = this.mTouchProgressOffset;
         }
         float max = getMax() - getMin();
         float f3 = 1.0f / max;
@@ -944,7 +944,7 @@ public abstract class AbsSeekBar extends ProgressBar {
                 f += f3 - f4;
             }
         }
-        setHotspot(round, round2);
+        setHotspot(iRound, iRound2);
         setProgressInternal(Math.round(f2 + (f * max) + getMin()), true, false);
     }
 
@@ -962,82 +962,63 @@ public abstract class AbsSeekBar extends ProgressBar {
         this.mIsDragging = false;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0020, code lost:
-    
-        if (r8 != 81) goto L38;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x0046, code lost:
-    
-        if (r8 != 81) goto L38;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x005c  */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x002a  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0036  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0050  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x005c  */
     @Override // android.view.View, android.view.KeyEvent.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onKeyDown(int r8, android.view.KeyEvent r9) {
-        /*
-            r7 = this;
-            boolean r0 = r7.isEnabled()
-            if (r0 == 0) goto L60
-            int r0 = r7.mKeyProgressIncrement
-            int r1 = r7.mCurrentMode
-            r2 = 3
-            r3 = 81
-            r4 = 70
-            r5 = 69
-            r6 = 1
-            if (r1 != r2) goto L3a
-            r1 = 19
-            if (r8 == r1) goto L24
-            r1 = 20
-            if (r8 == r1) goto L23
-            if (r8 == r5) goto L23
-            if (r8 == r4) goto L24
-            if (r8 == r3) goto L24
-            goto L60
-        L23:
-            int r0 = -r0
-        L24:
-            boolean r1 = r7.isLayoutRtl()
-            if (r1 == 0) goto L2b
-            int r0 = -r0
-        L2b:
-            int r1 = r7.getProgress()
-            int r1 = r1 + r0
-            boolean r0 = r7.setProgressInternal(r1, r6, r6)
-            if (r0 == 0) goto L60
-            r7.onKeyChange()
-            return r6
-        L3a:
-            r1 = 21
-            if (r8 == r1) goto L49
-            r1 = 22
-            if (r8 == r1) goto L4a
-            if (r8 == r5) goto L49
-            if (r8 == r4) goto L4a
-            if (r8 == r3) goto L4a
-            goto L60
-        L49:
-            int r0 = -r0
-        L4a:
-            boolean r1 = r7.isLayoutRtl()
-            if (r1 == 0) goto L51
-            int r0 = -r0
-        L51:
-            int r1 = r7.getProgress()
-            int r1 = r1 + r0
-            boolean r0 = r7.setProgressInternal(r1, r6, r6)
-            if (r0 == 0) goto L60
-            r7.onKeyChange()
-            return r6
-        L60:
-            boolean r7 = super.onKeyDown(r8, r9)
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.AbsSeekBar.onKeyDown(int, android.view.KeyEvent):boolean");
+    public boolean onKeyDown(int i, KeyEvent keyEvent) {
+        if (isEnabled()) {
+            int i2 = this.mKeyProgressIncrement;
+            if (this.mCurrentMode == 3) {
+                if (i == 19) {
+                    if (isLayoutRtl()) {
+                        i2 = -i2;
+                    }
+                    if (setProgressInternal(getProgress() + i2, true, true)) {
+                        onKeyChange();
+                        return true;
+                    }
+                } else {
+                    if (i == 20 || i == 69) {
+                        i2 = -i2;
+                    } else if (i == 70 || i == 81) {
+                    }
+                    if (isLayoutRtl()) {
+                    }
+                    if (setProgressInternal(getProgress() + i2, true, true)) {
+                    }
+                }
+            } else if (i == 21) {
+                i2 = -i2;
+                if (isLayoutRtl()) {
+                    i2 = -i2;
+                }
+                if (setProgressInternal(getProgress() + i2, true, true)) {
+                    onKeyChange();
+                    return true;
+                }
+            } else if (i == 22) {
+                if (isLayoutRtl()) {
+                }
+                if (setProgressInternal(getProgress() + i2, true, true)) {
+                }
+            } else {
+                if (i != 69) {
+                    if (i == 70 || i == 81) {
+                    }
+                }
+                if (isLayoutRtl()) {
+                }
+                if (setProgressInternal(getProgress() + i2, true, true)) {
+                }
+            }
+        }
+        return super.onKeyDown(i, keyEvent);
     }
 
     @Override // android.widget.ProgressBar, android.view.View
@@ -1076,11 +1057,11 @@ public abstract class AbsSeekBar extends ProgressBar {
         if (!canUserSetProgress()) {
             return false;
         }
-        int max = Math.max(1, Math.round((getMax() - getMin()) / 20.0f));
+        int iMax = Math.max(1, Math.round((getMax() - getMin()) / 20.0f));
         if (i == 8192) {
-            max = -max;
+            iMax = -iMax;
         }
-        if (!setProgressInternal(getProgress() + max, true, true)) {
+        if (!setProgressInternal(getProgress() + iMax, true, true)) {
             return false;
         }
         onKeyChange();
@@ -1103,15 +1084,15 @@ public abstract class AbsSeekBar extends ProgressBar {
 
     @Deprecated
     public void semSetThumbTintColor(int i) {
-        ColorStateList colorToColorStateList = colorToColorStateList(i);
-        if (colorToColorStateList.equals(this.mDefaultActivatedThumbColor)) {
+        ColorStateList colorStateListColorToColorStateList = colorToColorStateList(i);
+        if (colorStateListColorToColorStateList.equals(this.mDefaultActivatedThumbColor)) {
             return;
         }
-        this.mDefaultActivatedThumbColor = colorToColorStateList;
+        this.mDefaultActivatedThumbColor = colorStateListColorToColorStateList;
     }
 
     @Override // android.widget.ProgressBar
-    void onProgressRefresh(float f, boolean z, int i) {
+    void onProgressRefresh(float f, boolean z, int i) throws Throwable {
         int i2 = (int) (10000.0f * f);
         if (this.mUseMuteAnimation && !this.mIsFirstSetProgress && !this.mIsDraggingForSliding && this.mCurrentProgressLevel != 0 && i2 == 0) {
             startMuteAnimation();
@@ -1134,14 +1115,14 @@ public abstract class AbsSeekBar extends ProgressBar {
         int i5 = (i - this.mPaddingLeft) - this.mPaddingRight;
         Drawable currentDrawable = getCurrentDrawable();
         Drawable drawable = this.mThumb;
-        int min = Math.min(this.mMaxWidth, i5);
+        int iMin = Math.min(this.mMaxWidth, i5);
         int intrinsicWidth = drawable == null ? 0 : drawable.getIntrinsicWidth();
-        if (intrinsicWidth > min) {
+        if (intrinsicWidth > iMin) {
             i4 = (i5 - intrinsicWidth) / 2;
-            i3 = ((intrinsicWidth - min) / 2) + i4;
+            i3 = ((intrinsicWidth - iMin) / 2) + i4;
         } else {
-            int i6 = (i5 - min) / 2;
-            int i7 = ((min - intrinsicWidth) / 2) + i6;
+            int i6 = (i5 - iMin) / 2;
+            int i7 = ((iMin - intrinsicWidth) / 2) + i6;
             i3 = i6;
             i4 = i7;
         }
@@ -1208,16 +1189,16 @@ public abstract class AbsSeekBar extends ProgressBar {
         float f2;
         int height = getHeight();
         int i = (height - this.mPaddingTop) - this.mPaddingBottom;
-        int round = Math.round(motionEvent.getX());
-        int round2 = height - Math.round(motionEvent.getY());
-        if (round2 < this.mPaddingBottom) {
+        int iRound = Math.round(motionEvent.getX());
+        int iRound2 = height - Math.round(motionEvent.getY());
+        if (iRound2 < this.mPaddingBottom) {
             f = 0.0f;
             f2 = 0.0f;
-        } else if (round2 > height - this.mPaddingTop) {
+        } else if (iRound2 > height - this.mPaddingTop) {
             f = 1.0f;
             f2 = 0.0f;
         } else {
-            f = (round2 - this.mPaddingBottom) / i;
+            f = (iRound2 - this.mPaddingBottom) / i;
             f2 = this.mTouchProgressOffset;
         }
         float max = getMax() - getMin();
@@ -1228,7 +1209,7 @@ public abstract class AbsSeekBar extends ProgressBar {
                 f += f3 - f4;
             }
         }
-        setHotspot(round, round2);
+        setHotspot(iRound, iRound2);
         setProgressInternal(Math.round(f2 + (f * max) + getMin()), true, false);
     }
 
@@ -1269,7 +1250,7 @@ public abstract class AbsSeekBar extends ProgressBar {
     }
 
     @Override // android.view.View
-    public boolean onHoverEvent(MotionEvent motionEvent) {
+    public boolean onHoverEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
         int toolType = motionEvent.getToolType(0);
         if ((toolType == 2 || toolType == 1 || toolType == 3) && isHoveringUIEnabled()) {
             int action = motionEvent.getAction();
@@ -1367,9 +1348,9 @@ public abstract class AbsSeekBar extends ProgressBar {
     }
 
     public void setOverlapBackgroundForDualColor(int i) {
-        ColorStateList colorToColorStateList = colorToColorStateList(i);
-        if (!colorToColorStateList.equals(this.mOverlapNormalProgressColor)) {
-            this.mOverlapNormalProgressColor = colorToColorStateList;
+        ColorStateList colorStateListColorToColorStateList = colorToColorStateList(i);
+        if (!colorStateListColorToColorStateList.equals(this.mOverlapNormalProgressColor)) {
+            this.mOverlapNormalProgressColor = colorStateListColorToColorStateList;
         }
         this.mOverlapActivatedProgressColor = this.mOverlapNormalProgressColor;
         this.mLargeFont = true;
@@ -1422,13 +1403,13 @@ public abstract class AbsSeekBar extends ProgressBar {
     }
 
     public void setDualModeOverlapColor(int i, int i2) {
-        ColorStateList colorToColorStateList = colorToColorStateList(i);
-        ColorStateList colorToColorStateList2 = colorToColorStateList(i2);
-        if (!colorToColorStateList.equals(this.mOverlapNormalProgressColor)) {
-            this.mOverlapNormalProgressColor = colorToColorStateList;
+        ColorStateList colorStateListColorToColorStateList = colorToColorStateList(i);
+        ColorStateList colorStateListColorToColorStateList2 = colorToColorStateList(i2);
+        if (!colorStateListColorToColorStateList.equals(this.mOverlapNormalProgressColor)) {
+            this.mOverlapNormalProgressColor = colorStateListColorToColorStateList;
         }
-        if (!colorToColorStateList2.equals(this.mOverlapActivatedProgressColor)) {
-            this.mOverlapActivatedProgressColor = colorToColorStateList2;
+        if (!colorStateListColorToColorStateList2.equals(this.mOverlapActivatedProgressColor)) {
+            this.mOverlapActivatedProgressColor = colorStateListColorToColorStateList2;
         }
         updateDualColorMode();
         invalidate();
@@ -1473,20 +1454,20 @@ public abstract class AbsSeekBar extends ProgressBar {
     }
 
     private void initMuteAnimation() {
-        ValueAnimator ofInt;
+        ValueAnimator valueAnimatorOfInt;
         this.mMuteAnimationSet = new AnimatorSet();
         ArrayList arrayList = new ArrayList();
         int i = 400;
         for (int i2 = 0; i2 < 8; i2++) {
             boolean z = i2 % 2 == 0;
             if (z) {
-                ofInt = ValueAnimator.ofInt(0, i);
+                valueAnimatorOfInt = ValueAnimator.ofInt(0, i);
             } else {
-                ofInt = ValueAnimator.ofInt(i, 0);
+                valueAnimatorOfInt = ValueAnimator.ofInt(i, 0);
             }
-            ofInt.setDuration(62);
-            ofInt.setInterpolator(new LinearInterpolator());
-            ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.AbsSeekBar.1
+            valueAnimatorOfInt.setDuration(62);
+            valueAnimatorOfInt.setInterpolator(new LinearInterpolator());
+            valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.AbsSeekBar.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     AbsSeekBar.this.mCurrentProgressLevel = ((Integer) valueAnimator.getAnimatedValue()).intValue();
@@ -1494,7 +1475,7 @@ public abstract class AbsSeekBar extends ProgressBar {
                     absSeekBar.onSlidingRefresh(absSeekBar.mCurrentProgressLevel);
                 }
             });
-            arrayList.add(ofInt);
+            arrayList.add(valueAnimatorOfInt);
             if (z) {
                 i = (int) (i * 0.6d);
             }
@@ -1552,9 +1533,9 @@ public abstract class AbsSeekBar extends ProgressBar {
         this.mOverlapNormalProgressColor = colorToColorStateList(resources.getColor(R.color.tw_seekbar_color_overlap_normal_light, null));
         boolean z2 = this.mIsDeviceDefaultDark;
         int i = R.color.tw_seekbar_color_overlap_activated_light;
-        this.mOverlapActivatedProgressColor = colorToColorStateList(resources.getColor(z2 ? 17171794 : 17171793, null));
+        this.mOverlapActivatedProgressColor = colorToColorStateList(resources.getColor(z2 ? 17171793 : 17171792, null));
         if (!this.mIsDeviceDefaultDark) {
-            i = 17171793;
+            i = 17171792;
         }
         this.mOverlapActivatedThumbColor = colorToColorStateList(resources.getColor(i, null));
     }
@@ -1632,9 +1613,9 @@ public abstract class AbsSeekBar extends ProgressBar {
         private void initAnimator() {
             float f = this.mSliderMinWidth;
             float f2 = this.mSliderMaxWidth;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f2);
-            this.mPressedAnimator = ofFloat;
-            ofFloat.setDuration(250L);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f2);
+            this.mPressedAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setDuration(250L);
             this.mPressedAnimator.setInterpolator(this.SINE_IN_OUT_80);
             this.mPressedAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.AbsSeekBar.SliderDrawable.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
@@ -1642,9 +1623,9 @@ public abstract class AbsSeekBar extends ProgressBar {
                     SliderDrawable.this.invalidateTrack(((Float) valueAnimator.getAnimatedValue()).floatValue());
                 }
             });
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(f2, f);
-            this.mReleasedAnimator = ofFloat2;
-            ofFloat2.setDuration(250L);
+            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(f2, f);
+            this.mReleasedAnimator = valueAnimatorOfFloat2;
+            valueAnimatorOfFloat2.setDuration(250L);
             this.mReleasedAnimator.setInterpolator(this.SINE_IN_OUT_80);
             this.mReleasedAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.AbsSeekBar.SliderDrawable.2
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
@@ -1709,7 +1690,7 @@ public abstract class AbsSeekBar extends ProgressBar {
 
         @Override // android.graphics.drawable.Drawable
         protected boolean onStateChange(int[] iArr) {
-            boolean onStateChange = super.onStateChange(iArr);
+            boolean zOnStateChange = super.onStateChange(iArr);
             int colorForState = this.mColorStateList.getColorForState(iArr, this.mColor);
             if (this.mColor != colorForState) {
                 this.mColor = colorForState;
@@ -1730,7 +1711,7 @@ public abstract class AbsSeekBar extends ProgressBar {
                 z = true;
             }
             startSliderAnimation(z);
-            return onStateChange;
+            return zOnStateChange;
         }
 
         @Override // android.graphics.drawable.Drawable
@@ -1854,9 +1835,9 @@ public abstract class AbsSeekBar extends ProgressBar {
         }
 
         void initAnimation() {
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mRadius, 0.0f);
-            this.mThumbPressed = ofFloat;
-            ofFloat.setDuration(100L);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mRadius, 0.0f);
+            this.mThumbPressed = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setDuration(100L);
             this.mThumbPressed.setInterpolator(new LinearInterpolator());
             this.mThumbPressed.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.AbsSeekBar.ThumbDrawable.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
@@ -1865,9 +1846,9 @@ public abstract class AbsSeekBar extends ProgressBar {
                     ThumbDrawable.this.invalidateSelf();
                 }
             });
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, this.mRadius);
-            this.mThumbReleased = ofFloat2;
-            ofFloat2.setDuration(300L);
+            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, this.mRadius);
+            this.mThumbReleased = valueAnimatorOfFloat2;
+            valueAnimatorOfFloat2.setDuration(300L);
             this.mThumbReleased.setInterpolator(this.SINE_IN_OUT_90);
             this.mThumbReleased.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.AbsSeekBar.ThumbDrawable.2
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
@@ -1920,7 +1901,7 @@ public abstract class AbsSeekBar extends ProgressBar {
 
         @Override // android.graphics.drawable.Drawable
         protected boolean onStateChange(int[] iArr) {
-            boolean onStateChange = super.onStateChange(iArr);
+            boolean zOnStateChange = super.onStateChange(iArr);
             int colorForState = this.mColorStateList.getColorForState(iArr, this.mColor);
             if (this.mColor != colorForState) {
                 this.mColor = colorForState;
@@ -1941,7 +1922,7 @@ public abstract class AbsSeekBar extends ProgressBar {
                 z = true;
             }
             startThumbAnimation(z);
-            return onStateChange;
+            return zOnStateChange;
         }
 
         private void startThumbAnimation(boolean z) {

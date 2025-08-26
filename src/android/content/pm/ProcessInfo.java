@@ -89,20 +89,20 @@ public class ProcessInfo implements Parcelable {
 
     protected ProcessInfo(Parcel parcel) {
         boolean z = (parcel.readByte() & 32) != 0;
-        String readString = parcel.readString();
-        ArraySet<String> unparcel = sParcellingForDeniedPermissions.unparcel(parcel);
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        this.name = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.deniedPermissions = unparcel;
-        this.gwpAsanMode = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class, (Annotation) null, readInt);
-        this.memtagMode = readInt2;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.MemtagMode.class, (Annotation) null, readInt2);
-        this.nativeHeapZeroInitialized = readInt3;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class, (Annotation) null, readInt3);
+        String string = parcel.readString();
+        ArraySet<String> arraySetUnparcel = sParcellingForDeniedPermissions.unparcel(parcel);
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        this.name = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.deniedPermissions = arraySetUnparcel;
+        this.gwpAsanMode = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class, (Annotation) null, i);
+        this.memtagMode = i2;
+        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.MemtagMode.class, (Annotation) null, i2);
+        this.nativeHeapZeroInitialized = i3;
+        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class, (Annotation) null, i3);
         this.useEmbeddedDex = z;
     }
 }

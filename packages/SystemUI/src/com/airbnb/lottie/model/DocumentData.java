@@ -3,7 +3,6 @@ package com.airbnb.lottie.model;
 import android.graphics.PointF;
 import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DocumentData {
     public float baselineShift;
@@ -20,7 +19,6 @@ public class DocumentData {
     public String text;
     public int tracking;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Justification {
         LEFT_ALIGN,
         RIGHT_ALIGN,
@@ -44,9 +42,9 @@ public class DocumentData {
     }
 
     public final int hashCode() {
-        int ordinal = ((this.justification.ordinal() + (((int) (PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.text.hashCode() * 31, 31, this.fontName) + this.size)) * 31)) * 31) + this.tracking;
-        long floatToRawIntBits = Float.floatToRawIntBits(this.lineHeight);
-        return (((ordinal * 31) + ((int) (floatToRawIntBits ^ (floatToRawIntBits >>> 32)))) * 31) + this.color;
+        int iOrdinal = ((this.justification.ordinal() + (((int) (PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.text.hashCode() * 31, 31, this.fontName) + this.size)) * 31)) * 31) + this.tracking;
+        long jFloatToRawIntBits = Float.floatToRawIntBits(this.lineHeight);
+        return (((iOrdinal * 31) + ((int) (jFloatToRawIntBits ^ (jFloatToRawIntBits >>> 32)))) * 31) + this.color;
     }
 
     public DocumentData() {

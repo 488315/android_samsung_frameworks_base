@@ -65,7 +65,7 @@ public class DataProfileInfo implements Parcelable {
 
     @Override // android.os.Parcelable
     public final void writeToParcel(Parcel parcel, int i) {
-        int dataPosition = parcel.dataPosition();
+        int iDataPosition = parcel.dataPosition();
         parcel.writeInt(0);
         parcel.writeInt(this.profileId);
         parcel.writeString(this.apn);
@@ -88,133 +88,133 @@ public class DataProfileInfo implements Parcelable {
         parcel.writeBoolean(this.alwaysOn);
         parcel.writeTypedObject(this.trafficDescriptor, i);
         parcel.writeInt(this.infrastructureBitmap);
-        int dataPosition2 = parcel.dataPosition();
-        parcel.setDataPosition(dataPosition);
-        parcel.writeInt(dataPosition2 - dataPosition);
-        parcel.setDataPosition(dataPosition2);
+        int iDataPosition2 = parcel.dataPosition();
+        parcel.setDataPosition(iDataPosition);
+        parcel.writeInt(iDataPosition2 - iDataPosition);
+        parcel.setDataPosition(iDataPosition2);
     }
 
     public final void readFromParcel(Parcel parcel) {
-        int dataPosition = parcel.dataPosition();
-        int readInt = parcel.readInt();
+        int iDataPosition = parcel.dataPosition();
+        int i = parcel.readInt();
         try {
-            if (readInt < 4) {
+            if (i < 4) {
                 throw new BadParcelableException("Parcelable too small");
             }
-            if (parcel.dataPosition() - dataPosition < readInt) {
+            if (parcel.dataPosition() - iDataPosition < i) {
                 this.profileId = parcel.readInt();
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.apn = parcel.readString();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.protocol = parcel.readInt();
-                        if (parcel.dataPosition() - dataPosition < readInt) {
+                        if (parcel.dataPosition() - iDataPosition < i) {
                             this.roamingProtocol = parcel.readInt();
-                            if (parcel.dataPosition() - dataPosition < readInt) {
+                            if (parcel.dataPosition() - iDataPosition < i) {
                                 this.authType = parcel.readInt();
-                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                if (parcel.dataPosition() - iDataPosition < i) {
                                     this.user = parcel.readString();
-                                    if (parcel.dataPosition() - dataPosition < readInt) {
+                                    if (parcel.dataPosition() - iDataPosition < i) {
                                         this.password = parcel.readString();
-                                        if (parcel.dataPosition() - dataPosition < readInt) {
+                                        if (parcel.dataPosition() - iDataPosition < i) {
                                             this.type = parcel.readInt();
-                                            if (parcel.dataPosition() - dataPosition < readInt) {
+                                            if (parcel.dataPosition() - iDataPosition < i) {
                                                 this.maxConnsTime = parcel.readInt();
-                                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                                if (parcel.dataPosition() - iDataPosition < i) {
                                                     this.maxConns = parcel.readInt();
-                                                    if (parcel.dataPosition() - dataPosition < readInt) {
+                                                    if (parcel.dataPosition() - iDataPosition < i) {
                                                         this.waitTime = parcel.readInt();
-                                                        if (parcel.dataPosition() - dataPosition < readInt) {
+                                                        if (parcel.dataPosition() - iDataPosition < i) {
                                                             this.enabled = parcel.readBoolean();
-                                                            if (parcel.dataPosition() - dataPosition < readInt) {
+                                                            if (parcel.dataPosition() - iDataPosition < i) {
                                                                 this.supportedApnTypesBitmap = parcel.readInt();
-                                                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                                                if (parcel.dataPosition() - iDataPosition < i) {
                                                                     this.bearerBitmap = parcel.readInt();
-                                                                    if (parcel.dataPosition() - dataPosition < readInt) {
+                                                                    if (parcel.dataPosition() - iDataPosition < i) {
                                                                         this.mtuV4 = parcel.readInt();
-                                                                        if (parcel.dataPosition() - dataPosition < readInt) {
+                                                                        if (parcel.dataPosition() - iDataPosition < i) {
                                                                             this.mtuV6 = parcel.readInt();
-                                                                            if (parcel.dataPosition() - dataPosition < readInt) {
+                                                                            if (parcel.dataPosition() - iDataPosition < i) {
                                                                                 this.preferred = parcel.readBoolean();
-                                                                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                                                                if (parcel.dataPosition() - iDataPosition < i) {
                                                                                     this.persistent = parcel.readBoolean();
-                                                                                    if (parcel.dataPosition() - dataPosition < readInt) {
+                                                                                    if (parcel.dataPosition() - iDataPosition < i) {
                                                                                         this.alwaysOn = parcel.readBoolean();
-                                                                                        if (parcel.dataPosition() - dataPosition < readInt) {
+                                                                                        if (parcel.dataPosition() - iDataPosition < i) {
                                                                                             this.trafficDescriptor = (TrafficDescriptor) parcel.readTypedObject(TrafficDescriptor.CREATOR);
-                                                                                            if (parcel.dataPosition() - dataPosition < readInt) {
+                                                                                            if (parcel.dataPosition() - iDataPosition < i) {
                                                                                                 this.infrastructureBitmap = parcel.readInt();
-                                                                                                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                                                                if (iDataPosition > Integer.MAX_VALUE - i) {
                                                                                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                                                                                 }
-                                                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                                                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                                                                 throw new BadParcelableException("Overflow in the size of parcelable");
                                                                                             }
-                                                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                                                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                                                             throw new BadParcelableException("Overflow in the size of parcelable");
                                                                                         }
-                                                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                                                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                                                         throw new BadParcelableException("Overflow in the size of parcelable");
                                                                                     }
-                                                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                                                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                                                                 }
-                                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                                                 throw new BadParcelableException("Overflow in the size of parcelable");
                                                                             }
-                                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                                             throw new BadParcelableException("Overflow in the size of parcelable");
                                                                         }
-                                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                                         throw new BadParcelableException("Overflow in the size of parcelable");
                                                                     }
-                                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                                                 }
-                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                                 throw new BadParcelableException("Overflow in the size of parcelable");
                                                             }
-                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                             throw new BadParcelableException("Overflow in the size of parcelable");
                                                         }
-                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                         throw new BadParcelableException("Overflow in the size of parcelable");
                                                     }
-                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                                 }
-                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                                 throw new BadParcelableException("Overflow in the size of parcelable");
                                             }
-                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                             throw new BadParcelableException("Overflow in the size of parcelable");
                                         }
-                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                         throw new BadParcelableException("Overflow in the size of parcelable");
                                     }
-                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                 }
-                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                 throw new BadParcelableException("Overflow in the size of parcelable");
                             }
-                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                 throw new BadParcelableException("Overflow in the size of parcelable");
             }
-            parcel.setDataPosition(dataPosition + readInt);
+            parcel.setDataPosition(iDataPosition + i);
         } catch (Throwable th) {
-            if (dataPosition > Integer.MAX_VALUE - readInt) {
+            if (iDataPosition > Integer.MAX_VALUE - i) {
                 throw new BadParcelableException("Overflow in the size of parcelable");
             }
-            parcel.setDataPosition(dataPosition + readInt);
+            parcel.setDataPosition(iDataPosition + i);
             throw th;
         }
     }

@@ -25,7 +25,7 @@ public class LongitudinalReportingEncoder implements DifferentialPrivacyEncoder 
     }
 
     private LongitudinalReportingEncoder(LongitudinalReportingConfig longitudinalReportingConfig, boolean z, byte[] bArr) {
-        RapporEncoder createInsecureEncoderForTest;
+        RapporEncoder rapporEncoderCreateInsecureEncoderForTest;
         this.mConfig = longitudinalReportingConfig;
         this.mIsSecure = z;
         if (getLongTermRandomizedResult(longitudinalReportingConfig.getProbabilityP(), z, bArr, longitudinalReportingConfig.getEncoderId() + PRR1_ENCODER_ID)) {
@@ -35,11 +35,11 @@ public class LongitudinalReportingEncoder implements DifferentialPrivacyEncoder 
         }
         RapporConfig iRRConfig = longitudinalReportingConfig.getIRRConfig();
         if (z) {
-            createInsecureEncoderForTest = RapporEncoder.createEncoder(iRRConfig, bArr);
+            rapporEncoderCreateInsecureEncoderForTest = RapporEncoder.createEncoder(iRRConfig, bArr);
         } else {
-            createInsecureEncoderForTest = RapporEncoder.createInsecureEncoderForTest(iRRConfig);
+            rapporEncoderCreateInsecureEncoderForTest = RapporEncoder.createInsecureEncoderForTest(iRRConfig);
         }
-        this.mIRREncoder = createInsecureEncoderForTest;
+        this.mIRREncoder = rapporEncoderCreateInsecureEncoderForTest;
     }
 
     @Override // android.privacy.DifferentialPrivacyEncoder
@@ -72,15 +72,15 @@ public class LongitudinalReportingEncoder implements DifferentialPrivacyEncoder 
     }
 
     public static boolean getLongTermRandomizedResult(double d, boolean z, byte[] bArr, String str) {
-        RapporEncoder createInsecureEncoderForTest;
+        RapporEncoder rapporEncoderCreateInsecureEncoderForTest;
         double d2 = d < 0.5d ? d * 2.0d : (1.0d - d) * 2.0d;
         boolean z2 = d >= 0.5d;
         RapporConfig rapporConfig = new RapporConfig(str, 1, d2, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, 1.0d, 1, 1);
         if (z) {
-            createInsecureEncoderForTest = RapporEncoder.createEncoder(rapporConfig, bArr);
+            rapporEncoderCreateInsecureEncoderForTest = RapporEncoder.createEncoder(rapporConfig, bArr);
         } else {
-            createInsecureEncoderForTest = RapporEncoder.createInsecureEncoderForTest(rapporConfig);
+            rapporEncoderCreateInsecureEncoderForTest = RapporEncoder.createInsecureEncoderForTest(rapporConfig);
         }
-        return createInsecureEncoderForTest.encodeBoolean(z2)[0] > 0;
+        return rapporEncoderCreateInsecureEncoderForTest.encodeBoolean(z2)[0] > 0;
     }
 }

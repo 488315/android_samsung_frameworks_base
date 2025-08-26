@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import com.sec.ims.ICentralMsgStoreServiceListener;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ICentralMsgStoreService extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.ICentralMsgStoreService";
@@ -108,7 +107,6 @@ public interface ICentralMsgStoreService extends IInterface {
 
     void wipeOutMessage(String str, String str2) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ICentralMsgStoreService {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -310,7 +308,6 @@ public interface ICentralMsgStoreService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ICentralMsgStoreService {
         static final int TRANSACTION_cancelMessage = 5;
         static final int TRANSACTION_createParticipant = 20;
@@ -361,7 +358,6 @@ public interface ICentralMsgStoreService extends IInterface {
         static final int TRANSACTION_uploadMessage = 7;
         static final int TRANSACTION_wipeOutMessage = 9;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ICentralMsgStoreService {
             private IBinder mRemote;
 
@@ -376,176 +372,176 @@ public interface ICentralMsgStoreService extends IInterface {
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void cancelMessage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void createParticipant(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void createSession(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void deleteMessage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void deleteOldLegacyMessage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void deleteParticipant(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void deleteSession(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void disableAutoSync(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void downloadMessage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void enableAutoSync(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void getAccount(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -555,595 +551,595 @@ public interface ICentralMsgStoreService extends IInterface {
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public int getRestartScreenName(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void getSd(int i, boolean z, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void manageSd(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void manualSync(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void notifyCloudMessageUpdate(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void notifyExtendedFuncUpdated() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void notifyUIScreen(String str, int i, String str2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void onBufferDBReadResult(String str, String str2, String str3, String str4, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void onBufferDBReadResultBatch(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void onDefaultSmsPackageChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void onDeregistered(ImsRegistration imsRegistration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeTypedObject(imsRegistration, 0);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsRegistration, 0);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void onFTUriResponse(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void onRCSDBReady(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void onRegistered(ImsRegistration imsRegistration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeTypedObject(imsRegistration, 0);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsRegistration, 0);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public boolean onUIButtonProceed(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void onUserEnterApp(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void onUserLeaveApp(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void readMessage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void receivedMessage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void registerCallback(String str, ICentralMsgStoreService iCentralMsgStoreService) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iCentralMsgStoreService);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iCentralMsgStoreService);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void registerCmsProvisioningListenerByPhoneId(ICentralMsgStoreServiceListener iCentralMsgStoreServiceListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCentralMsgStoreServiceListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCentralMsgStoreServiceListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void requestMessageProcess(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void requestOperation(int i, int i2, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void restartService(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void resumeSync(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void sendTryDeregisterCms(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void sendTryRegisterCms(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void sentMessage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void startContactSyncActivity(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void startDeltaSync(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void startFullSync(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void stopSync(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void unReadMessage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void unregisterCmsProvisioningListenerByPhoneId(ICentralMsgStoreServiceListener iCentralMsgStoreServiceListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCentralMsgStoreServiceListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCentralMsgStoreServiceListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void updateAccountInfo(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void uploadMessage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ICentralMsgStoreService
             public void wipeOutMessage(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ICentralMsgStoreService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -1156,8 +1152,8 @@ public interface ICentralMsgStoreService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICentralMsgStoreService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ICentralMsgStoreService)) ? new Proxy(iBinder) : (ICentralMsgStoreService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICentralMsgStoreService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ICentralMsgStoreService)) ? new Proxy(iBinder) : (ICentralMsgStoreService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -1171,304 +1167,304 @@ public interface ICentralMsgStoreService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    receivedMessage(readString, readString2);
+                    receivedMessage(string, string2);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sentMessage(readString3, readString4);
+                    sentMessage(string3, string4);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    readMessage(readString5, readString6);
+                    readMessage(string5, string6);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unReadMessage(readString7, readString8);
+                    unReadMessage(string7, string8);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    cancelMessage(readString9, readString10);
+                    cancelMessage(string9, string10);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    deleteMessage(readString11, readString12);
+                    deleteMessage(string11, string12);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    uploadMessage(readString13, readString14);
+                    uploadMessage(string13, string14);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    downloadMessage(readString15, readString16);
+                    downloadMessage(string15, string16);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String readString17 = parcel.readString();
-                    String readString18 = parcel.readString();
+                    String string17 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    wipeOutMessage(readString17, readString18);
+                    wipeOutMessage(string17, string18);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onUserEnterApp(readString19);
+                    onUserEnterApp(string19);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onUserLeaveApp(readString20);
+                    onUserLeaveApp(string20);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    String readString21 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    String readString22 = parcel.readString();
+                    String string21 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean onUIButtonProceed = onUIButtonProceed(readString21, readInt, readString22);
+                    boolean zOnUIButtonProceed = onUIButtonProceed(string21, i3, string22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(onUIButtonProceed);
+                    parcel2.writeBoolean(zOnUIButtonProceed);
                     return true;
                 case 13:
-                    String readString23 = parcel.readString();
-                    String readString24 = parcel.readString();
-                    String readString25 = parcel.readString();
-                    String readString26 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string23 = parcel.readString();
+                    String string24 = parcel.readString();
+                    String string25 = parcel.readString();
+                    String string26 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onBufferDBReadResult(readString23, readString24, readString25, readString26, readInt2, readBoolean);
+                    onBufferDBReadResult(string23, string24, string25, string26, i4, z);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    String readString27 = parcel.readString();
-                    String readString28 = parcel.readString();
+                    String string27 = parcel.readString();
+                    String string28 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onBufferDBReadResultBatch(readString27, readString28);
+                    onBufferDBReadResultBatch(string27, string28);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    String readString29 = parcel.readString();
-                    ICentralMsgStoreService asInterface = asInterface(parcel.readStrongBinder());
+                    String string29 = parcel.readString();
+                    ICentralMsgStoreService iCentralMsgStoreServiceAsInterface = asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerCallback(readString29, asInterface);
+                    registerCallback(string29, iCentralMsgStoreServiceAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    String readString30 = parcel.readString();
-                    String readString31 = parcel.readString();
+                    String string30 = parcel.readString();
+                    String string31 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    stopSync(readString30, readString31);
+                    stopSync(string30, string31);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    String readString32 = parcel.readString();
-                    String readString33 = parcel.readString();
+                    String string32 = parcel.readString();
+                    String string33 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    startFullSync(readString32, readString33);
+                    startFullSync(string32, string33);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    String readString34 = parcel.readString();
-                    String readString35 = parcel.readString();
-                    String readString36 = parcel.readString();
+                    String string34 = parcel.readString();
+                    String string35 = parcel.readString();
+                    String string36 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    notifyCloudMessageUpdate(readString34, readString35, readString36);
+                    notifyCloudMessageUpdate(string34, string35, string36);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    String readString37 = parcel.readString();
-                    String readString38 = parcel.readString();
+                    String string37 = parcel.readString();
+                    String string38 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    createSession(readString37, readString38);
+                    createSession(string37, string38);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    String readString39 = parcel.readString();
-                    String readString40 = parcel.readString();
+                    String string39 = parcel.readString();
+                    String string40 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    createParticipant(readString39, readString40);
+                    createParticipant(string39, string40);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    String readString41 = parcel.readString();
-                    String readString42 = parcel.readString();
+                    String string41 = parcel.readString();
+                    String string42 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    deleteSession(readString41, readString42);
+                    deleteSession(string41, string42);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    String readString43 = parcel.readString();
-                    String readString44 = parcel.readString();
+                    String string43 = parcel.readString();
+                    String string44 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    deleteParticipant(readString43, readString44);
+                    deleteParticipant(string43, string44);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    String readString45 = parcel.readString();
+                    String string45 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onRCSDBReady(readString45);
+                    onRCSDBReady(string45);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    String readString46 = parcel.readString();
-                    String readString47 = parcel.readString();
+                    String string46 = parcel.readString();
+                    String string47 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    deleteOldLegacyMessage(readString46, readString47);
+                    deleteOldLegacyMessage(string46, string47);
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    String readString48 = parcel.readString();
+                    String string48 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    resumeSync(readString48);
+                    resumeSync(string48);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    String readString49 = parcel.readString();
+                    String string49 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    restartService(readString49);
+                    restartService(string49);
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    String readString50 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    String readString51 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string50 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string51 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyUIScreen(readString50, readInt3, readString51, readInt4);
+                    notifyUIScreen(string50, i5, string51, i6);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    String readString52 = parcel.readString();
-                    String readString53 = parcel.readString();
+                    String string52 = parcel.readString();
+                    String string53 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    manualSync(readString52, readString53);
+                    manualSync(string52, string53);
                     parcel2.writeNoException();
                     return true;
                 case 29:
-                    String readString54 = parcel.readString();
-                    String readString55 = parcel.readString();
+                    String string54 = parcel.readString();
+                    String string55 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    enableAutoSync(readString54, readString55);
+                    enableAutoSync(string54, string55);
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    String readString56 = parcel.readString();
-                    String readString57 = parcel.readString();
+                    String string56 = parcel.readString();
+                    String string57 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    disableAutoSync(readString56, readString57);
+                    disableAutoSync(string56, string57);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    String readString58 = parcel.readString();
-                    String readString59 = parcel.readString();
+                    String string58 = parcel.readString();
+                    String string59 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    startDeltaSync(readString58, readString59);
+                    startDeltaSync(string58, string59);
                     parcel2.writeNoException();
                     return true;
                 case 32:
-                    String readString60 = parcel.readString();
-                    String readString61 = parcel.readString();
+                    String string60 = parcel.readString();
+                    String string61 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onFTUriResponse(readString60, readString61);
+                    onFTUriResponse(string60, string61);
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    String readString62 = parcel.readString();
+                    String string62 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int restartScreenName = getRestartScreenName(readString62);
+                    int restartScreenName = getRestartScreenName(string62);
                     parcel2.writeNoException();
                     parcel2.writeInt(restartScreenName);
                     return true;
                 case 34:
-                    int readInt5 = parcel.readInt();
-                    String readString63 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    String string63 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sendTryRegisterCms(readInt5, readString63);
+                    sendTryRegisterCms(i7, string63);
                     parcel2.writeNoException();
                     return true;
                 case 35:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendTryDeregisterCms(readInt6);
+                    sendTryDeregisterCms(i8);
                     parcel2.writeNoException();
                     return true;
                 case 36:
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    String readString64 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    String string64 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    manageSd(readInt7, readInt8, readString64);
+                    manageSd(i9, i10, string64);
                     parcel2.writeNoException();
                     return true;
                 case 37:
-                    int readInt9 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    String readString65 = parcel.readString();
+                    int i11 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    String string65 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    getSd(readInt9, readBoolean2, readString65);
+                    getSd(i11, z2, string65);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getAccount(readInt10);
+                    getAccount(i12);
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    int readInt11 = parcel.readInt();
-                    String readString66 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    String string66 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    updateAccountInfo(readInt11, readString66);
+                    updateAccountInfo(i13, string66);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    String readString67 = parcel.readString();
-                    String readString68 = parcel.readString();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    String string67 = parcel.readString();
+                    String string68 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    requestOperation(readInt12, readInt13, readString67, readString68);
+                    requestOperation(i14, i15, string67, string68);
                     parcel2.writeNoException();
                     return true;
                 case 41:
-                    String readString69 = parcel.readString();
-                    String readString70 = parcel.readString();
-                    int readInt14 = parcel.readInt();
+                    String string69 = parcel.readString();
+                    String string70 = parcel.readString();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestMessageProcess(readString69, readString70, readInt14);
+                    requestMessageProcess(string69, string70, i16);
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    int readInt15 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i17 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    startContactSyncActivity(readInt15, readBoolean3);
+                    startContactSyncActivity(i17, z3);
                     parcel2.writeNoException();
                     return true;
                 case 43:
@@ -1492,17 +1488,17 @@ public interface ICentralMsgStoreService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 47:
-                    ICentralMsgStoreServiceListener asInterface2 = ICentralMsgStoreServiceListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt16 = parcel.readInt();
+                    ICentralMsgStoreServiceListener iCentralMsgStoreServiceListenerAsInterface = ICentralMsgStoreServiceListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerCmsProvisioningListenerByPhoneId(asInterface2, readInt16);
+                    registerCmsProvisioningListenerByPhoneId(iCentralMsgStoreServiceListenerAsInterface, i18);
                     parcel2.writeNoException();
                     return true;
                 case 48:
-                    ICentralMsgStoreServiceListener asInterface3 = ICentralMsgStoreServiceListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt17 = parcel.readInt();
+                    ICentralMsgStoreServiceListener iCentralMsgStoreServiceListenerAsInterface2 = ICentralMsgStoreServiceListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterCmsProvisioningListenerByPhoneId(asInterface3, readInt17);
+                    unregisterCmsProvisioningListenerByPhoneId(iCentralMsgStoreServiceListenerAsInterface2, i19);
                     parcel2.writeNoException();
                     return true;
                 default:

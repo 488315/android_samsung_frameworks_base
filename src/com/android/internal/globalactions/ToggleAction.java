@@ -1,6 +1,7 @@
 package com.android.internal.globalactions;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,29 +56,29 @@ public abstract class ToggleAction implements Action {
     }
 
     @Override // com.android.internal.globalactions.Action
-    public View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater) {
+    public View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater) throws Resources.NotFoundException {
         willCreate();
-        View inflate = layoutInflater.inflate(R.layout.global_actions_item, viewGroup, false);
-        ImageView imageView = (ImageView) inflate.findViewById(16908294);
-        TextView textView = (TextView) inflate.findViewById(16908299);
-        TextView textView2 = (TextView) inflate.findViewById(R.id.status);
-        boolean isEnabled = isEnabled();
+        View viewInflate = layoutInflater.inflate(R.layout.global_actions_item, viewGroup, false);
+        ImageView imageView = (ImageView) viewInflate.findViewById(16908294);
+        TextView textView = (TextView) viewInflate.findViewById(16908299);
+        TextView textView2 = (TextView) viewInflate.findViewById(R.id.status);
+        boolean zIsEnabled = isEnabled();
         if (textView != null) {
             textView.setText(this.mMessageResId);
-            textView.setEnabled(isEnabled);
+            textView.setEnabled(zIsEnabled);
         }
         boolean z = this.mState == State.On || this.mState == State.TurningOn;
         if (imageView != null) {
-            imageView.lambda$setImageURIAsync$0(context.getDrawable(z ? this.mEnabledIconResId : this.mDisabledIconResid));
-            imageView.setEnabled(isEnabled);
+            imageView.lambda$setImageURIAsync$2(context.getDrawable(z ? this.mEnabledIconResId : this.mDisabledIconResid));
+            imageView.setEnabled(zIsEnabled);
         }
         if (textView2 != null) {
             textView2.setText(z ? this.mEnabledStatusMessageResId : this.mDisabledStatusMessageResId);
             textView2.setVisibility(0);
-            textView2.setEnabled(isEnabled);
+            textView2.setEnabled(zIsEnabled);
         }
-        inflate.setEnabled(isEnabled);
-        return inflate;
+        viewInflate.setEnabled(zIsEnabled);
+        return viewInflate;
     }
 
     @Override // com.android.internal.globalactions.Action

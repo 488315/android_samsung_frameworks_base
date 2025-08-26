@@ -9,7 +9,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.io.ByteArrayOutputStream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ShortcutItem implements Parcelable {
     public static final Parcelable.Creator<ShortcutItem> CREATOR = new Parcelable.Creator<ShortcutItem>() { // from class: com.samsung.android.knox.custom.ShortcutItem.1
@@ -306,11 +305,11 @@ public class ShortcutItem implements Parcelable {
         this.mCellY = parcel.readInt();
         this.mColour = parcel.readInt();
         this.mMoreItems = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        if (i > 0) {
+            byte[] bArr = new byte[i];
             parcel.readByteArray(bArr);
-            this.mIcon = new BitmapDrawable(BitmapFactory.decodeByteArray(bArr, 0, readInt));
+            this.mIcon = new BitmapDrawable(BitmapFactory.decodeByteArray(bArr, 0, i));
         }
     }
 }

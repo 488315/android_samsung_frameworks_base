@@ -12,7 +12,6 @@ import com.samsung.android.nexus.base.utils.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LayerContainer extends BaseLayer {
     public final List mEffectLayer = new ArrayList();
@@ -162,11 +161,11 @@ public class LayerContainer extends BaseLayer {
     }
 
     public final void tapCommand(int i, int i2, int i3, long j) {
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "topCommand() : ", " , ", " , ");
-        m.append(i3);
-        m.append(" , ");
-        m.append(j);
-        Log.i("LayerContainer", m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "topCommand() : ", " , ", " , ");
+        sbM.append(i3);
+        sbM.append(" , ");
+        sbM.append(j);
+        Log.i("LayerContainer", sbM.toString());
         if (i == 0) {
             onTouchEvent(i2, i3, j);
         } else if (i == 1) {

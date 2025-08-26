@@ -25,7 +25,7 @@
     <bool name="config_enableDisplayCutoutProtection">false</bool>
     <bool name="config_enableFullscreenUserSwitcher">false</bool>
     <bool name="config_enableLockScreenCustomClocks">true</bool>
-    <item type="bool" name="config_enableLockScreenRotation">@android:bool/config_enableTelephonyTimeZoneDetection</item>
+    <item type="bool" name="config_enableLockScreenRotation">@android:bool/config_enableNightMode</item>
     <bool name="config_enableNonGroupedNotificationExpand">true</bool>
     <bool name="config_enableNotificationShadeDrag">true</bool>
     <bool name="config_enablePrivacyChipAnimation">true</bool>

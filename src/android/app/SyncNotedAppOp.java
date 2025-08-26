@@ -37,7 +37,7 @@ public final class SyncNotedAppOp implements Parcelable {
 
     public SyncNotedAppOp(int i, int i2, String str, String str2) {
         this.mOpCode = i2;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 0L, "to", 162L);
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 0L, "to", 164L);
         this.mAttributionTag = str;
         this.mOpMode = i;
         this.mPackageName = str2;
@@ -112,15 +112,15 @@ public final class SyncNotedAppOp implements Parcelable {
     }
 
     SyncNotedAppOp(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        String readString = (readByte & 4) == 0 ? null : parcel.readString();
-        String readString2 = (readByte & 8) != 0 ? parcel.readString() : null;
-        this.mOpMode = readInt;
-        this.mOpCode = readInt2;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, readInt2, "from", 0L, "to", 162L);
-        this.mAttributionTag = readString;
-        this.mPackageName = readString2;
+        byte b = parcel.readByte();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        String string = (b & 4) == 0 ? null : parcel.readString();
+        String string2 = (b & 8) != 0 ? parcel.readString() : null;
+        this.mOpMode = i;
+        this.mOpCode = i2;
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 0L, "to", 164L);
+        this.mAttributionTag = string;
+        this.mPackageName = string2;
     }
 }

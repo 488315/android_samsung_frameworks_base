@@ -152,7 +152,7 @@ public final class KeyStore2ParameterUtils {
         }
     }
 
-    private static long getRootSid() {
+    private static long getRootSid() throws IllegalStateException {
         long secureUserId = GateKeeper.getSecureUserId();
         if (secureUserId != 0) {
             return secureUserId;

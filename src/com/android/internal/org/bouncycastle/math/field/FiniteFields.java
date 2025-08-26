@@ -21,16 +21,16 @@ public abstract class FiniteFields {
     }
 
     public static FiniteField getPrimeField(BigInteger bigInteger) {
-        int bitLength = bigInteger.bitLength();
-        if (bigInteger.signum() <= 0 || bitLength < 2) {
+        int iBitLength = bigInteger.bitLength();
+        if (bigInteger.signum() <= 0 || iBitLength < 2) {
             throw new IllegalArgumentException("'characteristic' must be >= 2");
         }
-        if (bitLength < 3) {
-            int intValueExact = BigIntegers.intValueExact(bigInteger);
-            if (intValueExact == 2) {
+        if (iBitLength < 3) {
+            int iIntValueExact = BigIntegers.intValueExact(bigInteger);
+            if (iIntValueExact == 2) {
                 return GF_2;
             }
-            if (intValueExact == 3) {
+            if (iIntValueExact == 3) {
                 return GF_3;
             }
         }

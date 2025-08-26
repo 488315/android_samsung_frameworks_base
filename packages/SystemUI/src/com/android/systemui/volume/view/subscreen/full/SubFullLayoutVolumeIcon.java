@@ -2,6 +2,9 @@ package com.android.systemui.volume.view.subscreen.full;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +13,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import com.android.systemui.R;
 import com.android.systemui.volume.store.StoreInteractor;
+import com.android.systemui.volume.util.BluetoothIconUtil;
 import com.android.systemui.volume.util.ColorUtils;
+import com.android.systemui.volume.util.ViewVisibilityUtil;
 import com.android.systemui.volume.view.icon.VolumeIcons;
 import com.samsung.systemui.splugins.extensions.VolumePanelStateExt;
 import com.samsung.systemui.splugins.volume.VolumeObserver;
@@ -22,7 +27,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubFullLayoutVolumeIcon extends FrameLayout implements VolumeObserver<VolumePanelState> {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -37,7 +41,6 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
     public int stream;
     public SubFullLayoutVolumePanelMotion volumePanelMotion;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -47,7 +50,6 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -92,7 +94,7 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i = SubFullLayoutVolumeIcon.$r8$clinit;
-                return new StoreInteractor(SubFullLayoutVolumeIcon.this, null, 2, null);
+                return new StoreInteractor(this.f$0, null, 2, null);
             }
         });
     }
@@ -103,9 +105,9 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
     }
 
     @Override // com.samsung.systemui.splugins.volume.VolumeObserver
-    public final void onChanged(VolumePanelState volumePanelState) {
-        VolumePanelRow findRow;
-        VolumePanelRow findRow2;
+    public final void onChanged(VolumePanelState volumePanelState) throws Resources.NotFoundException {
+        VolumePanelRow volumePanelRowFindRow;
+        VolumePanelRow volumePanelRowFindRow2;
         VolumePanelState volumePanelState2 = volumePanelState;
         int i = WhenMappings.$EnumSwitchMapping$0[volumePanelState2.getStateType().ordinal()];
         if (i == 1) {
@@ -114,18 +116,18 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
         }
         if (i != 2) {
             if (i == 3) {
-                if (this.stream == volumePanelState2.getStream() && (findRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState2, this.stream)) != null && VolumeIcons.isAnimatableIcon(this.stream, findRow.getIconType())) {
-                    updateIconState$1(findRow, false);
+                if (this.stream == volumePanelState2.getStream() && (volumePanelRowFindRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState2, this.stream)) != null && VolumeIcons.isAnimatableIcon(this.stream, volumePanelRowFindRow.getIconType())) {
+                    updateIconState$1(volumePanelRowFindRow, false);
                     return;
                 }
                 return;
             }
             if (i == 4) {
-                if (this.stream != volumePanelState2.getStream() || (findRow2 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState2, this.stream)) == null) {
+                if (this.stream != volumePanelState2.getStream() || (volumePanelRowFindRow2 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState2, this.stream)) == null) {
                     return;
                 }
-                updateIconLayout$1(findRow2, false);
-                updateIconState$1(findRow2, true);
+                updateIconLayout$1(volumePanelRowFindRow2, false);
+                updateIconState$1(volumePanelRowFindRow2, true);
                 return;
             }
             if (i == 5 && this.isAnimatableIcon && this.stream == volumePanelState2.getStream()) {
@@ -139,19 +141,19 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
             }
             return;
         }
-        VolumePanelRow findRow3 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState2, this.stream);
-        if (findRow3 != null) {
-            if (!findRow3.isVisible()) {
-                findRow3 = null;
+        VolumePanelRow volumePanelRowFindRow3 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState2, this.stream);
+        if (volumePanelRowFindRow3 != null) {
+            if (!volumePanelRowFindRow3.isVisible()) {
+                volumePanelRowFindRow3 = null;
             }
-            if (findRow3 != null) {
-                updateIconLayout$1(findRow3, false);
-                int streamType = findRow3.getStreamType();
-                int iconType = findRow3.getIconType();
-                if ((!VolumeIcons.isForMediaIcon(streamType) || !VolumeIcons.isAnimatableMediaIconType(iconType)) && !VolumePanelValues.isRing(streamType) && VolumeIcons.isAnimatableIcon(this.stream, findRow3.getIconType())) {
-                    updateIconState$1(findRow3, false);
+            if (volumePanelRowFindRow3 != null) {
+                updateIconLayout$1(volumePanelRowFindRow3, false);
+                int streamType = volumePanelRowFindRow3.getStreamType();
+                int iconType = volumePanelRowFindRow3.getIconType();
+                if ((!VolumeIcons.isForMediaIcon(streamType) || !VolumeIcons.isAnimatableMediaIconType(iconType)) && !VolumePanelValues.isRing(streamType) && VolumeIcons.isAnimatableIcon(this.stream, volumePanelRowFindRow3.getIconType())) {
+                    updateIconState$1(volumePanelRowFindRow3, false);
                 }
-                int iconType2 = findRow3.getIconType();
+                int iconType2 = volumePanelRowFindRow3.getIconType();
                 View view = this.iconView;
                 if (view != null && this.iconType != iconType2 && VolumePanelValues.isRing(this.stream) && iconType2 != 3) {
                     ImageView imageView = (ImageView) view.requireViewById(R.id.volume_icon_mute_splash);
@@ -170,8 +172,8 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
                     this.currentMediaIconState = 0;
                     this.iconType = iconType2;
                 }
-                updateIconTintColor(volumePanelState2, findRow3);
-                updateEnableState$1(volumePanelState2, findRow3);
+                updateIconTintColor(volumePanelState2, volumePanelRowFindRow3);
+                updateEnableState$1(volumePanelState2, volumePanelRowFindRow3);
             }
         }
     }
@@ -281,65 +283,143 @@ public final class SubFullLayoutVolumeIcon extends FrameLayout implements Volume
     }
 
     public final void updateIconLayout$1(VolumePanelRow volumePanelRow, boolean z) {
-        boolean isAnimatableIcon = VolumeIcons.isAnimatableIcon(volumePanelRow.getStreamType(), volumePanelRow.getIconType());
-        if (z || this.isAnimatableIcon != isAnimatableIcon) {
+        boolean zIsAnimatableIcon = VolumeIcons.isAnimatableIcon(volumePanelRow.getStreamType(), volumePanelRow.getIconType());
+        if (z || this.isAnimatableIcon != zIsAnimatableIcon) {
             if (getChildCount() > 0) {
                 removeAllViews();
             }
-            View view = null;
-            if (!isAnimatableIcon) {
-                view = LayoutInflater.from(getContext()).inflate(R.layout.sub_full_volume_default_icon, (ViewGroup) null);
+            View viewInflate = null;
+            if (!zIsAnimatableIcon) {
+                viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.sub_full_volume_default_icon, (ViewGroup) null);
             } else if (VolumeIcons.isForMediaIcon(this.stream)) {
-                view = LayoutInflater.from(getContext()).inflate(R.layout.sub_full_volume_animated_media_icon, (ViewGroup) null);
+                viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.sub_full_volume_animated_media_icon, (ViewGroup) null);
             } else if (VolumePanelValues.isRing(this.stream)) {
-                view = LayoutInflater.from(getContext()).inflate(R.layout.sub_full_volume_animated_ringtone_icon, (ViewGroup) null);
+                viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.sub_full_volume_animated_ringtone_icon, (ViewGroup) null);
             } else {
-                View inflate = LayoutInflater.from(getContext()).inflate(R.layout.sub_full_volume_animated_icon, (ViewGroup) null);
-                if (inflate instanceof ViewGroup) {
-                    view = (ViewGroup) inflate;
+                View viewInflate2 = LayoutInflater.from(getContext()).inflate(R.layout.sub_full_volume_animated_icon, (ViewGroup) null);
+                if (viewInflate2 instanceof ViewGroup) {
+                    viewInflate = (ViewGroup) viewInflate2;
                 }
             }
-            this.iconView = view;
-            addView(view);
+            this.iconView = viewInflate;
+            addView(viewInflate);
         }
-        this.isAnimatableIcon = isAnimatableIcon;
+        this.isAnimatableIcon = zIsAnimatableIcon;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:63:0x016c  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0186  */
-    /* JADX WARN: Removed duplicated region for block: B:68:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:65:0x0169  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateIconState$1(com.samsung.systemui.splugins.volume.VolumePanelRow r13, boolean r14) {
-        /*
-            Method dump skipped, instructions count: 396
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeIcon.updateIconState$1(com.samsung.systemui.splugins.volume.VolumePanelRow, boolean):void");
+    public final void updateIconState$1(VolumePanelRow volumePanelRow, boolean z) throws Resources.NotFoundException {
+        Drawable drawable;
+        if (!VolumeIcons.isAnimatableIcon(volumePanelRow.getStreamType(), volumePanelRow.getIconType()) || !this.isAnimatableIcon) {
+            if (volumePanelRow.isRoutedToBluetooth()) {
+                String dualBtDeviceAddress = volumePanelRow.getDualBtDeviceAddress();
+                if (TextUtils.isEmpty(dualBtDeviceAddress)) {
+                    drawable = null;
+                } else {
+                    BluetoothIconUtil bluetoothIconUtil = BluetoothIconUtil.INSTANCE;
+                    Context context = getContext();
+                    bluetoothIconUtil.getClass();
+                    drawable = BluetoothIconUtil.getServerIconDrawable(context, dualBtDeviceAddress);
+                }
+            }
+            if (drawable == null) {
+                drawable = getResources().getDrawable(VolumeIcons.getDefaultIconResId(volumePanelRow.getStreamType(), volumePanelRow.getIconType()), null);
+            }
+            View view = this.iconView;
+            if (view instanceof ImageView) {
+                ((ImageView) view).setImageDrawable(drawable);
+                return;
+            }
+            return;
+        }
+        View view2 = this.iconView;
+        if (view2 == null) {
+            return;
+        }
+        if (VolumeIcons.isForMediaIcon(this.stream) || VolumePanelValues.isRing(this.stream)) {
+            int levelMax = volumePanelRow.getLevelMax() * (VolumeIcons.isForMediaIcon(this.stream) ? 100 : 1);
+            int realLevel = volumePanelRow.getRealLevel();
+            double d = realLevel;
+            double d2 = levelMax;
+            int i = d <= 0.5d * d2 ? d > d2 * 0.25d ? 2 : realLevel > 0 ? 1 : 0 : 3;
+            if (VolumePanelValues.isRing(this.stream)) {
+                setSoundIconState$1(i, this.currentMediaIconState, volumePanelRow.getIconType(), z);
+                return;
+            } else {
+                setMediaIconState$1(i, this.currentMediaIconState, z);
+                return;
+            }
+        }
+        ImageView imageView = (ImageView) view2.requireViewById(R.id.volume_normal_icon);
+        ImageView imageView2 = (ImageView) view2.requireViewById(R.id.volume_mute_icon);
+        ImageView imageView3 = (ImageView) view2.requireViewById(R.id.volume_vibrate_icon);
+        ImageView imageView4 = (ImageView) view2.requireViewById(R.id.volume_icon_mute_splash);
+        int streamType = volumePanelRow.getStreamType();
+        if (VolumePanelValues.isNotification(streamType)) {
+            imageView.setImageDrawable(getContext().getDrawable(R.drawable.tw_ic_audio_noti_mtrl));
+            imageView2.setImageDrawable(getContext().getDrawable(R.drawable.tw_ic_audio_noti_mute_mtrl));
+            imageView3.setImageDrawable(getContext().getDrawable(R.drawable.tw_ic_audio_noti_vibrate_mtrl));
+        } else if (VolumePanelValues.isSystem(streamType)) {
+            imageView.setImageDrawable(getContext().getDrawable(R.drawable.tw_ic_audio_system_mtrl));
+            imageView2.setImageDrawable(getContext().getDrawable(R.drawable.tw_ic_audio_system_mute_mtrl));
+        }
+        int iconType = volumePanelRow.getIconType();
+        if (this.iconType != iconType) {
+            this.iconType = iconType;
+            if (iconType == 0) {
+                ViewVisibilityUtil.INSTANCE.getClass();
+                ViewVisibilityUtil.setGone(imageView);
+                ViewVisibilityUtil.setGone(imageView2);
+                ViewVisibilityUtil.setGone(imageView4);
+                imageView3.setVisibility(0);
+                SubFullLayoutVolumePanelMotion subFullLayoutVolumePanelMotion = this.volumePanelMotion;
+                (subFullLayoutVolumePanelMotion != null ? subFullLayoutVolumePanelMotion : null).startVibrationAnimation(imageView3);
+                return;
+            }
+            if (iconType != 1) {
+                if (iconType != 3) {
+                    return;
+                }
+                ViewVisibilityUtil.INSTANCE.getClass();
+                imageView.setVisibility(0);
+                ViewVisibilityUtil.setGone(imageView2);
+                ViewVisibilityUtil.setGone(imageView4);
+                ViewVisibilityUtil.setGone(imageView3);
+                return;
+            }
+            ViewVisibilityUtil.INSTANCE.getClass();
+            ViewVisibilityUtil.setGone(imageView);
+            imageView2.setVisibility(0);
+            imageView4.setVisibility(0);
+            ViewVisibilityUtil.setGone(imageView3);
+            SubFullLayoutVolumePanelMotion subFullLayoutVolumePanelMotion2 = this.volumePanelMotion;
+            (subFullLayoutVolumePanelMotion2 != null ? subFullLayoutVolumePanelMotion2 : null).getClass();
+            SubFullLayoutVolumePanelMotion.startSplashAnimation(imageView4);
+        }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:25:0x004a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateIconTintColor(VolumePanelState volumePanelState, VolumePanelRow volumePanelRow) {
         ColorStateList colorStateList;
         View view = this.iconView;
         if (view == null) {
             return;
         }
-        if (volumePanelRow.getIconType() == 0 || volumePanelRow.getIconType() == 3 || !(volumePanelRow.isMuted() || volumePanelRow.getRealLevel() == 0)) {
-            if (volumePanelState.isSafeMediaDeviceOn() || volumePanelState.isSafeMediaPinDeviceOn()) {
-                int realLevel = volumePanelRow.getRealLevel();
-                if (VolumePanelValues.isAudioSharing(volumePanelRow.getStreamType())) {
-                    realLevel *= 100;
-                }
-                int earProtectLevel = volumePanelRow.getEarProtectLevel();
-                if (1 <= earProtectLevel && earProtectLevel < realLevel) {
-                    colorStateList = this.iconEarShockColor;
-                }
-            }
-            colorStateList = this.iconActiveColor;
-        } else {
+        if (volumePanelRow.getIconType() != 0 && volumePanelRow.getIconType() != 3 && (volumePanelRow.isMuted() || volumePanelRow.getRealLevel() == 0)) {
             colorStateList = this.iconMutedColor;
+        } else if (volumePanelState.isSafeMediaDeviceOn() || volumePanelState.isSafeMediaPinDeviceOn()) {
+            int realLevel = volumePanelRow.getRealLevel();
+            if (VolumePanelValues.isAudioSharing(volumePanelRow.getStreamType())) {
+                realLevel *= 100;
+            }
+            int earProtectLevel = volumePanelRow.getEarProtectLevel();
+            colorStateList = (1 > earProtectLevel || earProtectLevel >= realLevel) ? this.iconActiveColor : this.iconEarShockColor;
         }
         if (!VolumeIcons.isAnimatableIcon(volumePanelRow.getStreamType(), volumePanelRow.getIconType())) {
             ImageView imageView = view instanceof ImageView ? (ImageView) view : null;

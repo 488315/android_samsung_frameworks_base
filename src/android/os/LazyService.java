@@ -28,7 +28,7 @@ public class LazyService extends ILazyService.Stub {
 
     @Override // android.os.ILazyService
     public IBinder getService(String str) {
-        long currentTimeMillis = System.currentTimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         synchronized (this) {
             IServiceCreator iServiceCreator = this.serviceCreators.get(str);
             IBinder iBinder = null;
@@ -37,18 +37,18 @@ public class LazyService extends ILazyService.Stub {
             }
             this.serviceCreators.remove(str);
             Log.d(TAG, str + " getService");
-            long clearCallingIdentity = Binder.clearCallingIdentity();
-            IBinder createService = iServiceCreator.createService(this.mContext);
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
+            IBinder iBinderCreateService = iServiceCreator.createService(this.mContext);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             try {
-                ServiceManager.addService(str, createService);
-                iBinder = createService;
+                ServiceManager.addService(str, iBinderCreateService);
+                iBinder = iBinderCreateService;
             } catch (Throwable th) {
                 Log.e(TAG, "Failure adding " + str + " Service", th);
                 historyServices.add("Failure adding " + str + " Service, Exception : " + th.toString());
             }
-            Log.d(TAG, (System.currentTimeMillis() - currentTimeMillis) + "ms");
-            historyServices.add("GetService " + str + " Service : " + (System.currentTimeMillis() - currentTimeMillis) + "ms");
+            Log.d(TAG, (System.currentTimeMillis() - jCurrentTimeMillis) + "ms");
+            historyServices.add("GetService " + str + " Service : " + (System.currentTimeMillis() - jCurrentTimeMillis) + "ms");
             return iBinder;
         }
     }

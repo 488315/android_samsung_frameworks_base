@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AiAgentEffect$registerListener$2 extends SuspendLambda implements Function2 {
     int label;
@@ -44,10 +43,10 @@ final class AiAgentEffect$registerListener$2 extends SuspendLambda implements Fu
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.aiagent.AiAgentEffect$registerListener$2.1
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    boolean booleanValue = ((Boolean) obj2).booleanValue();
-                    AiAgentEffect aiAgentEffect2 = AiAgentEffect.this;
+                    boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                    AiAgentEffect aiAgentEffect2 = aiAgentEffect;
                     synchronized (aiAgentEffect2.lock) {
-                        aiAgentEffect2.setState(AiAgentEffect.State.copy$default(aiAgentEffect2.state, false, false, false, false, false, false, false, booleanValue, 127));
+                        aiAgentEffect2.setState(AiAgentEffect.State.copy$default(aiAgentEffect2.state, false, false, false, false, false, false, false, zBooleanValue, 127));
                     }
                     return Unit.INSTANCE;
                 }

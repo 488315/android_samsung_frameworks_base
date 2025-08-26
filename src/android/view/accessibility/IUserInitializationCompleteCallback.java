@@ -44,9 +44,9 @@ public interface IUserInitializationCompleteCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUserInitializationCompleteCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUserInitializationCompleteCallback)) {
-                return (IUserInitializationCompleteCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUserInitializationCompleteCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUserInitializationCompleteCallback)) {
+                return (IUserInitializationCompleteCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IUserInitializationCompleteCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onUserInitializationComplete(readInt);
+                onUserInitializationComplete(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface IUserInitializationCompleteCallback extends IInterface {
 
             @Override // android.view.accessibility.IUserInitializationCompleteCallback
             public void onUserInitializationComplete(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUserInitializationCompleteCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUserInitializationCompleteCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

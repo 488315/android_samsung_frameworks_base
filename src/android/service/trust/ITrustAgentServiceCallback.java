@@ -109,9 +109,9 @@ public interface ITrustAgentServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITrustAgentServiceCallback)) {
-                return (ITrustAgentServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITrustAgentServiceCallback)) {
+                return (ITrustAgentServiceCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -160,11 +160,11 @@ public interface ITrustAgentServiceCallback extends IInterface {
             switch (i) {
                 case 1:
                     CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
-                    long readLong = parcel.readLong();
-                    int readInt = parcel.readInt();
+                    long j = parcel.readLong();
+                    int i3 = parcel.readInt();
                     AndroidFuture androidFuture = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    grantTrust(charSequence, readLong, readInt, androidFuture);
+                    grantTrust(charSequence, j, i3, androidFuture);
                     return true;
                 case 2:
                     revokeTrust();
@@ -173,40 +173,40 @@ public interface ITrustAgentServiceCallback extends IInterface {
                     lockUser();
                     return true;
                 case 4:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setManagingTrust(readBoolean);
+                    setManagingTrust(z);
                     return true;
                 case 5:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    boolean z2 = parcel.readBoolean();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    onConfigureCompleted(readBoolean2, readStrongBinder);
+                    onConfigureCompleted(z2, strongBinder);
                     return true;
                 case 6:
-                    byte[] createByteArray = parcel.createByteArray();
-                    int readInt2 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addEscrowToken(createByteArray, readInt2);
+                    addEscrowToken(bArrCreateByteArray, i4);
                     return true;
                 case 7:
-                    long readLong2 = parcel.readLong();
-                    int readInt3 = parcel.readInt();
+                    long j2 = parcel.readLong();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    isEscrowTokenActive(readLong2, readInt3);
+                    isEscrowTokenActive(j2, i5);
                     return true;
                 case 8:
-                    long readLong3 = parcel.readLong();
-                    int readInt4 = parcel.readInt();
+                    long j3 = parcel.readLong();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeEscrowToken(readLong3, readInt4);
+                    removeEscrowToken(j3, i6);
                     return true;
                 case 9:
-                    long readLong4 = parcel.readLong();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    int readInt5 = parcel.readInt();
+                    long j4 = parcel.readLong();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unlockUserWithToken(readLong4, createByteArray2, readInt5);
+                    unlockUserWithToken(j4, bArrCreateByteArray2, i7);
                     return true;
                 case 10:
                     CharSequence charSequence2 = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
@@ -236,138 +236,138 @@ public interface ITrustAgentServiceCallback extends IInterface {
 
             @Override // android.service.trust.ITrustAgentServiceCallback
             public void grantTrust(CharSequence charSequence, long j, int i, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
             public void revokeTrust() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
             public void lockUser() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
             public void setManagingTrust(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
             public void onConfigureCompleted(boolean z, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
             public void addEscrowToken(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
             public void isEscrowTokenActive(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
             public void removeEscrowToken(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
             public void unlockUserWithToken(long j, byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
             public void showKeyguardErrorMessage(CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(10, obtain, null, 1);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

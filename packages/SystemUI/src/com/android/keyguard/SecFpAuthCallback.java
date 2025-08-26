@@ -5,7 +5,6 @@ import java.lang.ref.WeakReference;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SecFpAuthCallback extends FingerprintManager.AuthenticationCallback {
     public final int mCallbackSeq;
@@ -32,7 +31,7 @@ public class SecFpAuthCallback extends FingerprintManager.AuthenticationCallback
         Optional.ofNullable((Consumer) this.mDispatcher.get()).ifPresent(new Consumer() { // from class: com.android.keyguard.SecFpAuthCallback$$ExternalSyntheticLambda5
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((Consumer) obj).accept(SecFpMsg.obtain(3, SecFpAuthCallback.this.mCallbackSeq, -1, null, null));
+                ((Consumer) obj).accept(SecFpMsg.obtain(3, this.f$0.mCallbackSeq, -1, null, null));
             }
         });
     }
@@ -51,7 +50,7 @@ public class SecFpAuthCallback extends FingerprintManager.AuthenticationCallback
         Optional.ofNullable((Consumer) this.mDispatcher.get()).ifPresent(new Consumer() { // from class: com.android.keyguard.SecFpAuthCallback$$ExternalSyntheticLambda4
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                SecFpAuthCallback secFpAuthCallback = SecFpAuthCallback.this;
+                SecFpAuthCallback secFpAuthCallback = this.f$0;
                 ((Consumer) obj).accept(SecFpMsg.obtain(2, secFpAuthCallback.mCallbackSeq, -1, null, authenticationResult));
             }
         });

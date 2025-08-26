@@ -130,24 +130,24 @@ class CustomPKCS1Encoding implements AsymmetricBlockCipher {
 
     private byte[] decodeBlock(byte[] bArr, int i, int i2) throws InvalidCipherTextException {
         int outputBlockSize = this.engine.getOutputBlockSize();
-        byte[] processBlock = this.engine.processBlock(bArr, i, i2);
-        boolean z = this.useStrictLength & (processBlock.length != outputBlockSize);
-        byte[] bArr2 = processBlock.length < outputBlockSize ? this.blockBuffer : processBlock;
-        int checkPkcs1Encoding2 = this.forPrivateKey ? checkPkcs1Encoding2(bArr2) : checkPkcs1Encoding1(bArr2);
-        if (!(z | (checkPkcs1Encoding2 < 0))) {
+        byte[] bArrProcessBlock = this.engine.processBlock(bArr, i, i2);
+        boolean z = this.useStrictLength & (bArrProcessBlock.length != outputBlockSize);
+        byte[] bArr2 = bArrProcessBlock.length < outputBlockSize ? this.blockBuffer : bArrProcessBlock;
+        int iCheckPkcs1Encoding2 = this.forPrivateKey ? checkPkcs1Encoding2(bArr2) : checkPkcs1Encoding1(bArr2);
+        if (!(z | (iCheckPkcs1Encoding2 < 0))) {
             try {
-                byte[] bArr3 = new byte[checkPkcs1Encoding2];
-                System.arraycopy(bArr2, bArr2.length - checkPkcs1Encoding2, bArr3, 0, checkPkcs1Encoding2);
+                byte[] bArr3 = new byte[iCheckPkcs1Encoding2];
+                System.arraycopy(bArr2, bArr2.length - iCheckPkcs1Encoding2, bArr3, 0, iCheckPkcs1Encoding2);
                 return bArr3;
             } finally {
-                Arrays.fill(processBlock, (byte) 0);
+                Arrays.fill(bArrProcessBlock, (byte) 0);
                 byte[] bArr4 = this.blockBuffer;
-                Arrays.fill(bArr4, 0, Math.max(0, bArr4.length - processBlock.length), (byte) 0);
+                Arrays.fill(bArr4, 0, Math.max(0, bArr4.length - bArrProcessBlock.length), (byte) 0);
             }
         }
-        Arrays.fill(processBlock, (byte) 0);
+        Arrays.fill(bArrProcessBlock, (byte) 0);
         byte[] bArr5 = this.blockBuffer;
-        Arrays.fill(bArr5, 0, Math.max(0, bArr5.length - processBlock.length), (byte) 0);
+        Arrays.fill(bArr5, 0, Math.max(0, bArr5.length - bArrProcessBlock.length), (byte) 0);
         return null;
     }
 }

@@ -45,9 +45,9 @@ public interface IAudioSignalInfoListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.IAudioSignalInfoListener");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAudioSignalInfoListener)) {
-                return (IAudioSignalInfoListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.IAudioSignalInfoListener");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAudioSignalInfoListener)) {
+                return (IAudioSignalInfoListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IAudioSignalInfoListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onAudioSignalInfoChanged(readString, bundle);
+                onAudioSignalInfoChanged(string, bundle);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IAudioSignalInfoListener extends IInterface {
 
             @Override // android.media.tv.extension.signal.IAudioSignalInfoListener
             public void onAudioSignalInfoChanged(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfoListener");
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfoListener");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -12,7 +12,6 @@ import java.util.Set;
 import javax.inject.Provider;
 import kotlin.collections.CollectionsKt__IterablesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SystemUIConfigDumpable implements Dumpable {
     public final Context context;
@@ -47,9 +46,9 @@ public final class SystemUIConfigDumpable implements Dumpable {
         printWriter.println("SystemUiServiceComponents configuration:");
         printWriter.print("vendor component: ");
         printWriter.println(this.context.getResources().getString(R.string.config_systemUIVendorServiceComponent));
-        Set keySet = this.startables.keySet();
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(keySet, 10));
-        Iterator it = keySet.iterator();
+        Set setKeySet = this.startables.keySet();
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(setKeySet, 10));
+        Iterator it = setKeySet.iterator();
         while (it.hasNext()) {
             arrayList.add(((Class) it.next()).getSimpleName());
         }

@@ -13,9 +13,9 @@ public class SecretKeyUtil {
     private static Map keySizes;
 
     static {
-        HashMap hashMap = new HashMap();
-        keySizes = hashMap;
-        hashMap.put(PKCSObjectIdentifiers.des_EDE3_CBC.getId(), Integers.valueOf(192));
+        HashMap map = new HashMap();
+        keySizes = map;
+        map.put(PKCSObjectIdentifiers.des_EDE3_CBC.getId(), Integers.valueOf(192));
         keySizes.put(NISTObjectIdentifiers.id_aes128_CBC, Integers.valueOf(128));
         keySizes.put(NISTObjectIdentifiers.id_aes192_CBC, Integers.valueOf(192));
         keySizes.put(NISTObjectIdentifiers.id_aes256_CBC, Integers.valueOf(256));

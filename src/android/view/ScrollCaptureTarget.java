@@ -51,9 +51,9 @@ public final class ScrollCaptureTarget {
     }
 
     public void setScrollBounds(Rect rect) {
-        Rect copyOrNull = Rect.copyOrNull(rect);
-        this.mScrollBounds = copyOrNull;
-        if (copyOrNull == null || copyOrNull.intersect(0, 0, this.mContainingView.getWidth(), this.mContainingView.getHeight())) {
+        Rect rectCopyOrNull = Rect.copyOrNull(rect);
+        this.mScrollBounds = rectCopyOrNull;
+        if (rectCopyOrNull == null || rectCopyOrNull.intersect(0, 0, this.mContainingView.getWidth(), this.mContainingView.getHeight())) {
             return;
         }
         this.mScrollBounds.setEmpty();
@@ -76,7 +76,7 @@ public final class ScrollCaptureTarget {
         printWriter.println("callback: " + this.mCallback);
         StringBuilder sb = new StringBuilder("scrollBounds: ");
         Rect rect = this.mScrollBounds;
-        String str2 = PerfettoProtoLogImpl.NULL_STRING;
+        String shortString = PerfettoProtoLogImpl.NULL_STRING;
         sb.append(rect == null ? PerfettoProtoLogImpl.NULL_STRING : rect.toShortString());
         printWriter.println(sb.toString());
         Point positionInWindow = getPositionInWindow();
@@ -91,9 +91,9 @@ public final class ScrollCaptureTarget {
         Rect localVisibleRect = getLocalVisibleRect();
         StringBuilder sb3 = new StringBuilder("localVisibleRect: ");
         if (localVisibleRect != null) {
-            str2 = localVisibleRect.toShortString();
+            shortString = localVisibleRect.toShortString();
         }
-        sb3.append(str2);
+        sb3.append(shortString);
         printWriter.println(sb3.toString());
     }
 }

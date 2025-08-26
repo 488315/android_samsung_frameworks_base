@@ -85,9 +85,9 @@ public interface IImsServiceController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImsServiceController)) {
-                return (IImsServiceController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImsServiceController)) {
+                return (IImsServiceController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -127,47 +127,47 @@ public interface IImsServiceController extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IImsMMTelFeature createEmergencyMMTelFeature = createEmergencyMMTelFeature(readInt);
+                    IImsMMTelFeature iImsMMTelFeatureCreateEmergencyMMTelFeature = createEmergencyMMTelFeature(i3);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createEmergencyMMTelFeature);
+                    parcel2.writeStrongInterface(iImsMMTelFeatureCreateEmergencyMMTelFeature);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IImsMMTelFeature createMMTelFeature = createMMTelFeature(readInt2);
+                    IImsMMTelFeature iImsMMTelFeatureCreateMMTelFeature = createMMTelFeature(i4);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createMMTelFeature);
+                    parcel2.writeStrongInterface(iImsMMTelFeatureCreateMMTelFeature);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IImsRcsFeature createRcsFeature = createRcsFeature(readInt3);
+                    IImsRcsFeature iImsRcsFeatureCreateRcsFeature = createRcsFeature(i5);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createRcsFeature);
+                    parcel2.writeStrongInterface(iImsRcsFeatureCreateRcsFeature);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeImsFeature(readInt4, readInt5);
+                    removeImsFeature(i6, i7);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    IImsFeatureStatusCallback asInterface = IImsFeatureStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    IImsFeatureStatusCallback iImsFeatureStatusCallbackAsInterface = IImsFeatureStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addFeatureStatusCallback(readInt6, readInt7, asInterface);
+                    addFeatureStatusCallback(i8, i9, iImsFeatureStatusCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    IImsFeatureStatusCallback asInterface2 = IImsFeatureStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    IImsFeatureStatusCallback iImsFeatureStatusCallbackAsInterface2 = IImsFeatureStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeFeatureStatusCallback(readInt8, readInt9, asInterface2);
+                    removeFeatureStatusCallback(i10, i11, iImsFeatureStatusCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -193,99 +193,99 @@ public interface IImsServiceController extends IInterface {
 
             @Override // com.android.ims.internal.IImsServiceController
             public IImsMMTelFeature createEmergencyMMTelFeature(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsMMTelFeature.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsMMTelFeature.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsServiceController
             public IImsMMTelFeature createMMTelFeature(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsMMTelFeature.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsMMTelFeature.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsServiceController
             public IImsRcsFeature createRcsFeature(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsRcsFeature.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsRcsFeature.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsServiceController
             public void removeImsFeature(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsServiceController
             public void addFeatureStatusCallback(int i, int i2, IImsFeatureStatusCallback iImsFeatureStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iImsFeatureStatusCallback);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iImsFeatureStatusCallback);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.IImsServiceController
             public void removeFeatureStatusCallback(int i, int i2, IImsFeatureStatusCallback iImsFeatureStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iImsFeatureStatusCallback);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iImsFeatureStatusCallback);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

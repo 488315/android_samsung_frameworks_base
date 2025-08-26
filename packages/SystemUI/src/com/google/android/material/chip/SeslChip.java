@@ -11,7 +11,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import com.android.systemui.R;
 import com.google.android.material.resources.TextAppearance;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SeslChip extends Chip {
     public SeslChip(Context context) {
@@ -35,27 +34,27 @@ public class SeslChip extends Chip {
         ChipDrawable chipDrawable = this.chipDrawable;
         TextAppearance textAppearance = chipDrawable.textDrawableHelper.textAppearance;
         if (textAppearance != null && (colorStateList = textAppearance.textColor) != null) {
-            ColorStateList withAlpha = colorStateList.withAlpha(i);
+            ColorStateList colorStateListWithAlpha = colorStateList.withAlpha(i);
             TextAppearance textAppearance2 = chipDrawable.textDrawableHelper.textAppearance;
             if (textAppearance2 != null) {
-                textAppearance2.textColor = withAlpha;
+                textAppearance2.textColor = colorStateListWithAlpha;
                 chipDrawable.invalidateSelf();
             }
         }
         ChipDrawable chipDrawable2 = this.chipDrawable;
-        Drawable drawable3 = null;
-        Drawable unwrap = (chipDrawable2 == null || (drawable2 = chipDrawable2.closeIcon) == null) ? null : DrawableCompat.unwrap(drawable2);
-        if (unwrap != null) {
-            unwrap.setAlpha(i);
+        Drawable drawableUnwrap = null;
+        Drawable drawableUnwrap2 = (chipDrawable2 == null || (drawable2 = chipDrawable2.closeIcon) == null) ? null : DrawableCompat.unwrap(drawable2);
+        if (drawableUnwrap2 != null) {
+            drawableUnwrap2.setAlpha(i);
         }
         ChipDrawable chipDrawable3 = this.chipDrawable;
         if (chipDrawable3 != null && (drawable = chipDrawable3.chipIcon) != null) {
-            drawable3 = DrawableCompat.unwrap(drawable);
+            drawableUnwrap = DrawableCompat.unwrap(drawable);
         }
-        if (drawable3 == null) {
+        if (drawableUnwrap == null) {
             return;
         }
-        drawable3.setAlpha(i);
+        drawableUnwrap.setAlpha(i);
     }
 
     @Override // android.widget.TextView, android.view.View

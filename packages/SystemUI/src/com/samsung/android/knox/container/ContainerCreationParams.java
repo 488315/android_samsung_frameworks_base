@@ -6,7 +6,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ContainerCreationParams implements Parcelable {
     public static final Parcelable.Creator<ContainerCreationParams> CREATOR = new Parcelable.Creator<ContainerCreationParams>() { // from class: com.samsung.android.knox.container.ContainerCreationParams.1
@@ -238,8 +237,8 @@ public class ContainerCreationParams implements Parcelable {
         this.mName = str;
     }
 
-    public void setPackagePoliciesMap(HashMap<String, ArrayList<Object>> hashMap) {
-        this.mPackagePoliciesMap = hashMap;
+    public void setPackagePoliciesMap(HashMap<String, ArrayList<Object>> map) {
+        this.mPackagePoliciesMap = map;
     }
 
     public void setPassword(String str) {
@@ -322,7 +321,7 @@ public class ContainerCreationParams implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public ContainerCreationParams m3272clone() {
+    public ContainerCreationParams m3290clone() {
         ContainerCreationParams containerCreationParams = new ContainerCreationParams();
         containerCreationParams.setRequestId(this.mRequestId);
         containerCreationParams.setName(this.mName);
@@ -358,34 +357,34 @@ public class ContainerCreationParams implements Parcelable {
         this.mFeatureType = null;
         this.mConfigurationName = null;
         this.mPackagePoliciesMap = new HashMap<>();
-        String readString = parcel.readString();
-        this.mName = readString;
-        if (readString != null && readString.isEmpty()) {
+        String string = parcel.readString();
+        this.mName = string;
+        if (string != null && string.isEmpty()) {
             this.mName = null;
         }
-        String readString2 = parcel.readString();
-        this.mPassword = readString2;
-        if (readString2 != null && readString2.isEmpty()) {
+        String string2 = parcel.readString();
+        this.mPassword = string2;
+        if (string2 != null && string2.isEmpty()) {
             this.mPassword = null;
         }
-        String readString3 = parcel.readString();
-        this.mBackupPin = readString3;
-        if (readString3 != null && readString3.isEmpty()) {
+        String string3 = parcel.readString();
+        this.mBackupPin = string3;
+        if (string3 != null && string3.isEmpty()) {
             this.mBackupPin = null;
         }
-        String readString4 = parcel.readString();
-        this.mAdminParam = readString4;
-        if (readString4 != null && readString4.isEmpty()) {
+        String string4 = parcel.readString();
+        this.mAdminParam = string4;
+        if (string4 != null && string4.isEmpty()) {
             this.mAdminParam = null;
         }
-        String readString5 = parcel.readString();
-        this.mResetPwdKey = readString5;
-        if (readString5 != null && readString5.isEmpty()) {
+        String string5 = parcel.readString();
+        this.mResetPwdKey = string5;
+        if (string5 != null && string5.isEmpty()) {
             this.mResetPwdKey = null;
         }
-        String readString6 = parcel.readString();
-        this.mConfigurationName = readString6;
-        if (readString6 != null && readString6.isEmpty()) {
+        String string6 = parcel.readString();
+        this.mConfigurationName = string6;
+        if (string6 != null && string6.isEmpty()) {
             this.mConfigurationName = null;
         }
         this.mRequestId = parcel.readInt();
@@ -401,9 +400,9 @@ public class ContainerCreationParams implements Parcelable {
         this.mConfigurationType = (KnoxConfigurationType) parcel.readParcelable(getClass().getClassLoader());
         this.isMigrationFlow = parcel.readInt() == 1;
         this.mAdminRemovable = parcel.readInt() == 1;
-        String readString7 = parcel.readString();
-        this.mFeatureType = readString7;
-        if (readString7 == null || !readString7.isEmpty()) {
+        String string7 = parcel.readString();
+        this.mFeatureType = string7;
+        if (string7 == null || !string7.isEmpty()) {
             return;
         }
         this.mFeatureType = null;

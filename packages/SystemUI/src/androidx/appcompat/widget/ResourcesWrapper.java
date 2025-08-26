@@ -13,9 +13,10 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import androidx.core.content.res.ResourcesCompat;
+import java.io.IOException;
 import java.io.InputStream;
+import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ResourcesWrapper extends Resources {
     public final Resources mResources;
@@ -167,12 +168,12 @@ public class ResourcesWrapper extends Resources {
     }
 
     @Override // android.content.res.Resources
-    public final void getValue(int i, TypedValue typedValue, boolean z) {
+    public final void getValue(int i, TypedValue typedValue, boolean z) throws Resources.NotFoundException {
         this.mResources.getValue(i, typedValue, z);
     }
 
     @Override // android.content.res.Resources
-    public final void getValueForDensity(int i, int i2, TypedValue typedValue, boolean z) {
+    public final void getValueForDensity(int i, int i2, TypedValue typedValue, boolean z) throws Resources.NotFoundException {
         this.mResources.getValueForDensity(i, i2, typedValue, z);
     }
 
@@ -202,12 +203,12 @@ public class ResourcesWrapper extends Resources {
     }
 
     @Override // android.content.res.Resources
-    public final void parseBundleExtra(String str, AttributeSet attributeSet, Bundle bundle) {
+    public final void parseBundleExtra(String str, AttributeSet attributeSet, Bundle bundle) throws XmlPullParserException {
         this.mResources.parseBundleExtra(str, attributeSet, bundle);
     }
 
     @Override // android.content.res.Resources
-    public final void parseBundleExtras(XmlResourceParser xmlResourceParser, Bundle bundle) {
+    public final void parseBundleExtras(XmlResourceParser xmlResourceParser, Bundle bundle) throws XmlPullParserException, IOException {
         this.mResources.parseBundleExtras(xmlResourceParser, bundle);
     }
 
@@ -243,7 +244,7 @@ public class ResourcesWrapper extends Resources {
     }
 
     @Override // android.content.res.Resources
-    public final void getValue(String str, TypedValue typedValue, boolean z) {
+    public final void getValue(String str, TypedValue typedValue, boolean z) throws Resources.NotFoundException {
         this.mResources.getValue(str, typedValue, z);
     }
 

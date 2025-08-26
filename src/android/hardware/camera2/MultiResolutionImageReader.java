@@ -108,11 +108,11 @@ public class MultiResolutionImageReader implements AutoCloseable {
             }
             if (imageReader == null || imageReader != imageReaderArr[i]) {
                 while (true) {
-                    Image acquireNextImageNoThrowISE = this.mReaders[i].acquireNextImageNoThrowISE();
-                    if (acquireNextImageNoThrowISE == null) {
+                    Image imageAcquireNextImageNoThrowISE = this.mReaders[i].acquireNextImageNoThrowISE();
+                    if (imageAcquireNextImageNoThrowISE == null) {
                         break;
                     } else {
-                        acquireNextImageNoThrowISE.close();
+                        imageAcquireNextImageNoThrowISE.close();
                     }
                 }
             }

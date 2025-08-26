@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.UiModeManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -18,31 +20,38 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.text.TextUtils;
 import android.util.AndroidRuntimeException;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ActionMode;
+import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ListAdapter;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.window.OnBackInvokedCallback;
 import android.window.OnBackInvokedDispatcher;
 import androidx.appcompat.R$styleable;
+import androidx.appcompat.app.AppCompatViewInflater;
 import androidx.appcompat.app.ToolbarActionBar;
 import androidx.appcompat.app.TwilightManager;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -52,28 +61,44 @@ import androidx.appcompat.view.StandaloneActionMode;
 import androidx.appcompat.view.SupportActionModeWrapper;
 import androidx.appcompat.view.SupportMenuInflater;
 import androidx.appcompat.view.WindowCallbackWrapper;
+import androidx.appcompat.view.menu.ExpandedMenuView;
 import androidx.appcompat.view.menu.ListMenuPresenter;
+import androidx.appcompat.view.menu.ListMenuPresenter.MenuAdapter;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPresenter;
 import androidx.appcompat.widget.ActionBarContextView;
 import androidx.appcompat.widget.ActionBarOverlayLayout;
 import androidx.appcompat.widget.ActionMenuPresenter;
 import androidx.appcompat.widget.ActionMenuView;
+import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.AppCompatDrawableManager;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView;
+import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.AppCompatToggleButton;
 import androidx.appcompat.widget.ContentFrameLayout;
 import androidx.appcompat.widget.DecorContentParent;
 import androidx.appcompat.widget.TintTypedArray;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.widget.ToolbarWidgetWrapper;
+import androidx.appcompat.widget.VectorEnabledTintResources;
 import androidx.appcompat.widget.ViewStubCompat;
 import androidx.collection.SimpleArrayMap;
 import androidx.core.app.NavUtils;
 import androidx.core.content.PermissionChecker;
+import androidx.core.os.LocaleListCompat;
+import androidx.core.view.KeyEventDispatcher$Component;
 import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewPropertyAnimatorCompat;
 import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import com.sec.ims.presence.ServiceTuple;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
@@ -82,7 +107,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuilder.Callback, LayoutInflater.Factory2 {
     public ActionBar mActionBar;
@@ -141,7 +165,6 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
     public static final int[] sWindowBackgroundStyleable = {R.attr.windowBackground};
     public static final boolean sCanReturnDifferentContext = !"robolectric".equals(Build.FINGERPRINT);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.app.AppCompatDelegateImpl$2, reason: invalid class name */
     public class AnonymousClass2 implements Runnable {
         public AnonymousClass2() {
@@ -163,14 +186,12 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.app.AppCompatDelegateImpl$5, reason: invalid class name */
     public class AnonymousClass5 {
         public AnonymousClass5() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ActionMenuPresenterCallback implements MenuPresenter.Callback {
         public ActionMenuPresenterCallback() {
         }
@@ -191,7 +212,6 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ActionModeCallbackWrapperV9 implements ActionMode.Callback {
         public final ActionMode.Callback mWrapped;
 
@@ -221,10 +241,10 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                 if (viewPropertyAnimatorCompat != null) {
                     viewPropertyAnimatorCompat.cancel();
                 }
-                ViewPropertyAnimatorCompat animate = ViewCompat.animate(appCompatDelegateImpl.mActionModeView);
-                animate.alpha(0.0f);
-                appCompatDelegateImpl.mFadeAnim = animate;
-                animate.setListener(new ViewPropertyAnimatorListenerAdapter() { // from class: androidx.appcompat.app.AppCompatDelegateImpl.ActionModeCallbackWrapperV9.1
+                ViewPropertyAnimatorCompat viewPropertyAnimatorCompatAnimate = ViewCompat.animate(appCompatDelegateImpl.mActionModeView);
+                viewPropertyAnimatorCompatAnimate.alpha(0.0f);
+                appCompatDelegateImpl.mFadeAnim = viewPropertyAnimatorCompatAnimate;
+                viewPropertyAnimatorCompatAnimate.setListener(new ViewPropertyAnimatorListenerAdapter() { // from class: androidx.appcompat.app.AppCompatDelegateImpl.ActionModeCallbackWrapperV9.1
                     @Override // androidx.core.view.ViewPropertyAnimatorListenerAdapter, androidx.core.view.ViewPropertyAnimatorListener
                     public final void onAnimationEnd() {
                         ActionModeCallbackWrapperV9 actionModeCallbackWrapperV9 = ActionModeCallbackWrapperV9.this;
@@ -263,7 +283,6 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AppCompatWindowCallback extends WindowCallbackWrapper {
         public ToolbarActionBar.ToolbarMenuCallback mActionBarCallback;
         public boolean mDispatchKeyEventBypassEnabled;
@@ -301,9 +320,9 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                         if (appCompatDelegateImpl.mPreparedPanel == null) {
                             PanelFeatureState panelState = appCompatDelegateImpl.getPanelState(0);
                             appCompatDelegateImpl.preparePanel(panelState, keyEvent);
-                            boolean performPanelShortcut = appCompatDelegateImpl.performPanelShortcut(panelState, keyEvent.getKeyCode(), keyEvent);
+                            boolean zPerformPanelShortcut = appCompatDelegateImpl.performPanelShortcut(panelState, keyEvent.getKeyCode(), keyEvent);
                             panelState.isPrepared = false;
-                            if (performPanelShortcut) {
+                            if (zPerformPanelShortcut) {
                             }
                         }
                         return false;
@@ -406,11 +425,11 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                     toolbarActionBar.mToolbarMenuPrepared = true;
                 }
             }
-            boolean onPreparePanel = this.mWrapped.onPreparePanel(i, view, menu);
+            boolean zOnPreparePanel = this.mWrapped.onPreparePanel(i, view, menu);
             if (menuBuilder != null) {
                 menuBuilder.mOverrideVisibleItems = false;
             }
-            return onPreparePanel;
+            return zOnPreparePanel;
         }
 
         @Override // androidx.appcompat.view.WindowCallbackWrapper, android.view.Window.Callback
@@ -432,7 +451,7 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         @Override // androidx.appcompat.view.WindowCallbackWrapper, android.view.Window.Callback
         public final android.view.ActionMode onWindowStartingActionMode(ActionMode.Callback callback, int i) {
             ViewGroup viewGroup;
-            Context context;
+            Context contextThemeWrapper;
             AppCompatDelegateImpl appCompatDelegateImpl = AppCompatDelegateImpl.this;
             if (!appCompatDelegateImpl.mHandleNativeActionModes || i != 0) {
                 return this.mWrapped.onWindowStartingActionMode(callback, i);
@@ -467,22 +486,22 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                         Resources.Theme theme = appCompatDelegateImpl2.mContext.getTheme();
                         theme.resolveAttribute(com.android.systemui.R.attr.actionBarTheme, typedValue, true);
                         if (typedValue.resourceId != 0) {
-                            Resources.Theme newTheme = appCompatDelegateImpl2.mContext.getResources().newTheme();
-                            newTheme.setTo(theme);
-                            newTheme.applyStyle(typedValue.resourceId, true);
-                            context = new ContextThemeWrapper(appCompatDelegateImpl2.mContext, 0);
-                            context.getTheme().setTo(newTheme);
+                            Resources.Theme themeNewTheme = appCompatDelegateImpl2.mContext.getResources().newTheme();
+                            themeNewTheme.setTo(theme);
+                            themeNewTheme.applyStyle(typedValue.resourceId, true);
+                            contextThemeWrapper = new ContextThemeWrapper(appCompatDelegateImpl2.mContext, 0);
+                            contextThemeWrapper.getTheme().setTo(themeNewTheme);
                         } else {
-                            context = appCompatDelegateImpl2.mContext;
+                            contextThemeWrapper = appCompatDelegateImpl2.mContext;
                         }
-                        appCompatDelegateImpl2.mActionModeView = new ActionBarContextView(context);
-                        PopupWindow popupWindow = new PopupWindow(context, (AttributeSet) null, com.android.systemui.R.attr.actionModePopupWindowStyle);
+                        appCompatDelegateImpl2.mActionModeView = new ActionBarContextView(contextThemeWrapper);
+                        PopupWindow popupWindow = new PopupWindow(contextThemeWrapper, (AttributeSet) null, com.android.systemui.R.attr.actionModePopupWindowStyle);
                         appCompatDelegateImpl2.mActionModePopup = popupWindow;
                         popupWindow.setWindowLayoutType(2);
                         appCompatDelegateImpl2.mActionModePopup.setContentView(appCompatDelegateImpl2.mActionModeView);
                         appCompatDelegateImpl2.mActionModePopup.setWidth(-1);
-                        context.getTheme().resolveAttribute(com.android.systemui.R.attr.actionBarSize, typedValue, true);
-                        appCompatDelegateImpl2.mActionModeView.mContentHeight = TypedValue.complexToDimensionPixelSize(typedValue.data, context.getResources().getDisplayMetrics());
+                        contextThemeWrapper.getTheme().resolveAttribute(com.android.systemui.R.attr.actionBarSize, typedValue, true);
+                        appCompatDelegateImpl2.mActionModeView.mContentHeight = TypedValue.complexToDimensionPixelSize(typedValue.data, contextThemeWrapper.getResources().getDisplayMetrics());
                         appCompatDelegateImpl2.mActionModePopup.setHeight(-2);
                         appCompatDelegateImpl2.mShowActionModePopup = new Runnable() { // from class: androidx.appcompat.app.AppCompatDelegateImpl.6
                             @Override // java.lang.Runnable
@@ -502,9 +521,9 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                                 }
                                 AppCompatDelegateImpl.this.mActionModeView.setAlpha(0.0f);
                                 AppCompatDelegateImpl appCompatDelegateImpl5 = AppCompatDelegateImpl.this;
-                                ViewPropertyAnimatorCompat animate = ViewCompat.animate(appCompatDelegateImpl5.mActionModeView);
-                                animate.alpha(1.0f);
-                                appCompatDelegateImpl5.mFadeAnim = animate;
+                                ViewPropertyAnimatorCompat viewPropertyAnimatorCompatAnimate = ViewCompat.animate(appCompatDelegateImpl5.mActionModeView);
+                                viewPropertyAnimatorCompatAnimate.alpha(1.0f);
+                                appCompatDelegateImpl5.mFadeAnim = viewPropertyAnimatorCompatAnimate;
                                 AppCompatDelegateImpl.this.mFadeAnim.setListener(new ViewPropertyAnimatorListenerAdapter() { // from class: androidx.appcompat.app.AppCompatDelegateImpl.6.1
                                     @Override // androidx.core.view.ViewPropertyAnimatorListenerAdapter, androidx.core.view.ViewPropertyAnimatorListener
                                     public final void onAnimationEnd() {
@@ -522,12 +541,12 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                             }
                         };
                     } else {
-                        Context context2 = appCompatDelegateImpl2.mSubDecor.getContext();
-                        View findViewById = appCompatDelegateImpl2.mSubDecor.findViewById(context2.getResources().getIdentifier("collapsing_toolbar", "id", context2.getPackageName()));
-                        if (findViewById == null) {
-                            findViewById = appCompatDelegateImpl2.mSubDecor.findViewById(context2.getResources().getIdentifier("sesl_toolbar_container", "id", context2.getPackageName()));
+                        Context context = appCompatDelegateImpl2.mSubDecor.getContext();
+                        View viewFindViewById = appCompatDelegateImpl2.mSubDecor.findViewById(context.getResources().getIdentifier("collapsing_toolbar", "id", context.getPackageName()));
+                        if (viewFindViewById == null) {
+                            viewFindViewById = appCompatDelegateImpl2.mSubDecor.findViewById(context.getResources().getIdentifier("sesl_toolbar_container", "id", context.getPackageName()));
                         }
-                        ViewStubCompat viewStubCompat = findViewById == null ? (ViewStubCompat) appCompatDelegateImpl2.mSubDecor.findViewById(com.android.systemui.R.id.action_mode_bar_stub) : appCompatDelegateImpl2.mOverlayActionMode ? (ViewStubCompat) appCompatDelegateImpl2.mSubDecor.findViewById(com.android.systemui.R.id.action_mode_bar_stub) : (ViewStubCompat) findViewById.findViewById(com.android.systemui.R.id.action_mode_bar_stub);
+                        ViewStubCompat viewStubCompat = (viewFindViewById == null || appCompatDelegateImpl2.mOverlayActionMode) ? (ViewStubCompat) appCompatDelegateImpl2.mSubDecor.findViewById(com.android.systemui.R.id.action_mode_bar_stub) : (ViewStubCompat) viewFindViewById.findViewById(com.android.systemui.R.id.action_mode_bar_stub);
                         if (viewStubCompat != null) {
                             appCompatDelegateImpl2.initWindowDecorActionBar();
                             ActionBar actionBar2 = appCompatDelegateImpl2.mActionBar;
@@ -553,10 +572,10 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                         appCompatDelegateImpl2.mActionMode = standaloneActionMode;
                         if (appCompatDelegateImpl2.mSubDecorInstalled && (viewGroup = appCompatDelegateImpl2.mSubDecor) != null && viewGroup.isLaidOut()) {
                             appCompatDelegateImpl2.mActionModeView.setAlpha(0.0f);
-                            ViewPropertyAnimatorCompat animate = ViewCompat.animate(appCompatDelegateImpl2.mActionModeView);
-                            animate.alpha(1.0f);
-                            appCompatDelegateImpl2.mFadeAnim = animate;
-                            animate.setListener(new ViewPropertyAnimatorListenerAdapter() { // from class: androidx.appcompat.app.AppCompatDelegateImpl.7
+                            ViewPropertyAnimatorCompat viewPropertyAnimatorCompatAnimate = ViewCompat.animate(appCompatDelegateImpl2.mActionModeView);
+                            viewPropertyAnimatorCompatAnimate.alpha(1.0f);
+                            appCompatDelegateImpl2.mFadeAnim = viewPropertyAnimatorCompatAnimate;
+                            viewPropertyAnimatorCompatAnimate.setListener(new ViewPropertyAnimatorListenerAdapter() { // from class: androidx.appcompat.app.AppCompatDelegateImpl.7
                                 @Override // androidx.core.view.ViewPropertyAnimatorListenerAdapter, androidx.core.view.ViewPropertyAnimatorListener
                                 public final void onAnimationEnd() {
                                     AppCompatDelegateImpl appCompatDelegateImpl3 = AppCompatDelegateImpl.this;
@@ -604,7 +623,6 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AutoBatteryNightModeManager extends AutoNightModeManager {
         public final PowerManager mPowerManager;
 
@@ -629,7 +647,6 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class AutoNightModeManager {
         public AnonymousClass1 mReceiver;
 
@@ -656,8 +673,8 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         /* JADX WARN: Type inference failed for: r1v4, types: [androidx.appcompat.app.AppCompatDelegateImpl$AutoNightModeManager$1] */
         public final void setup() {
             cleanup();
-            IntentFilter createIntentFilterForBroadcastReceiver = createIntentFilterForBroadcastReceiver();
-            if (createIntentFilterForBroadcastReceiver.countActions() == 0) {
+            IntentFilter intentFilterCreateIntentFilterForBroadcastReceiver = createIntentFilterForBroadcastReceiver();
+            if (intentFilterCreateIntentFilterForBroadcastReceiver.countActions() == 0) {
                 return;
             }
             if (this.mReceiver == null) {
@@ -668,11 +685,10 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                     }
                 };
             }
-            AppCompatDelegateImpl.this.mContext.registerReceiver(this.mReceiver, createIntentFilterForBroadcastReceiver);
+            AppCompatDelegateImpl.this.mContext.registerReceiver(this.mReceiver, intentFilterCreateIntentFilterForBroadcastReceiver);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AutoTimeNightModeManager extends AutoNightModeManager {
         public final TwilightManager mTwilightManager;
 
@@ -703,24 +719,24 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                     lastKnownLocationForProvider = lastKnownLocationForProvider2;
                 }
                 if (lastKnownLocationForProvider != null) {
-                    long currentTimeMillis = System.currentTimeMillis();
+                    long jCurrentTimeMillis = System.currentTimeMillis();
                     if (TwilightCalculator.sInstance == null) {
                         TwilightCalculator.sInstance = new TwilightCalculator();
                     }
                     TwilightCalculator twilightCalculator = TwilightCalculator.sInstance;
-                    twilightCalculator.calculateTwilight(lastKnownLocationForProvider.getLatitude(), lastKnownLocationForProvider.getLongitude(), currentTimeMillis - 86400000);
-                    twilightCalculator.calculateTwilight(lastKnownLocationForProvider.getLatitude(), lastKnownLocationForProvider.getLongitude(), currentTimeMillis);
+                    twilightCalculator.calculateTwilight(lastKnownLocationForProvider.getLatitude(), lastKnownLocationForProvider.getLongitude(), jCurrentTimeMillis - 86400000);
+                    twilightCalculator.calculateTwilight(lastKnownLocationForProvider.getLatitude(), lastKnownLocationForProvider.getLongitude(), jCurrentTimeMillis);
                     z = twilightCalculator.state == 1;
                     long j2 = twilightCalculator.sunrise;
                     long j3 = twilightCalculator.sunset;
-                    twilightCalculator.calculateTwilight(lastKnownLocationForProvider.getLatitude(), lastKnownLocationForProvider.getLongitude(), currentTimeMillis + 86400000);
+                    twilightCalculator.calculateTwilight(lastKnownLocationForProvider.getLatitude(), lastKnownLocationForProvider.getLongitude(), jCurrentTimeMillis + 86400000);
                     long j4 = twilightCalculator.sunrise;
                     if (j2 == -1 || j3 == -1) {
-                        j = currentTimeMillis + 43200000;
+                        j = jCurrentTimeMillis + 43200000;
                     } else {
-                        if (currentTimeMillis > j3) {
+                        if (jCurrentTimeMillis > j3) {
                             j2 = j4;
-                        } else if (currentTimeMillis > j2) {
+                        } else if (jCurrentTimeMillis > j2) {
                             j2 = j3;
                         }
                         j = j2 + 60000;
@@ -746,7 +762,6 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ListMenuDecorView extends ContentFrameLayout {
         public ListMenuDecorView(Context context) {
             super(context);
@@ -777,7 +792,6 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PanelFeatureState {
         public int background;
         public View createdPanelView;
@@ -801,7 +815,6 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PanelMenuPresenterCallback implements MenuPresenter.Callback {
         public PanelMenuPresenterCallback() {
         }
@@ -879,31 +892,124 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x007f  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00b5  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00c0  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0116 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0185  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0197  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x01ab  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x01be  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x01a1  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x00cd  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x00c2  */
-    /* JADX WARN: Removed duplicated region for block: B:90:0x00b7  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0082  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0096  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean applyApplicationSpecificConfig(boolean r23) {
-        /*
-            Method dump skipped, instructions count: 454
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.app.AppCompatDelegateImpl.applyApplicationSpecificConfig(boolean):boolean");
+    public final boolean applyApplicationSpecificConfig(boolean z) {
+        int i;
+        int i2;
+        DisplayMetrics displayMetrics;
+        boolean z2;
+        boolean z3;
+        if (this.mDestroyed) {
+            return false;
+        }
+        int i3 = this.mLocalNightMode;
+        if (i3 == -100) {
+            i3 = AppCompatDelegate.sDefaultNightMode;
+        }
+        int i4 = i3;
+        Configuration configurationCreateOverrideAppConfiguration = createOverrideAppConfiguration(this.mContext, mapNightMode(i4, this.mContext), null, false);
+        Context context = this.mContext;
+        boolean z4 = true;
+        if (this.mActivityHandlesConfigFlagsChecked || !(this.mHost instanceof Activity)) {
+            this.mActivityHandlesConfigFlagsChecked = true;
+            i = this.mActivityHandlesConfigFlags;
+        } else {
+            PackageManager packageManager = context.getPackageManager();
+            if (packageManager == null) {
+                i = 0;
+            } else {
+                try {
+                    ActivityInfo activityInfo = packageManager.getActivityInfo(new ComponentName(context, this.mHost.getClass()), 269221888);
+                    if (activityInfo != null) {
+                        this.mActivityHandlesConfigFlags = activityInfo.configChanges;
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.d("AppCompatDelegate", "Exception while getting ActivityInfo", e);
+                    this.mActivityHandlesConfigFlags = 0;
+                }
+                this.mActivityHandlesConfigFlagsChecked = true;
+                i = this.mActivityHandlesConfigFlags;
+            }
+        }
+        Configuration configuration = this.mEffectiveConfiguration;
+        if (configuration == null) {
+            configuration = this.mContext.getResources().getConfiguration();
+        }
+        int i5 = configuration.uiMode & 48;
+        int i6 = configurationCreateOverrideAppConfiguration.uiMode & 48;
+        LocaleListCompat localeListCompatForLanguageTags = LocaleListCompat.forLanguageTags(configuration.getLocales().toLanguageTags());
+        int i7 = i5 != i6 ? 512 : 0;
+        if (((~i) & i7) != 0 && z && this.mBaseContextAttached && ((z3 = sCanReturnDifferentContext) || this.mCreated)) {
+            Object obj = this.mHost;
+            if ((obj instanceof Activity) && !((Activity) obj).isChild()) {
+                displayMetrics = null;
+                i2 = i7;
+                Log.d("AppCompatDelegate", String.format("updateAppConfiguration attempting to recreate Activity [currentNightMode:%s, newNightMode:%s, currentLocales:%s, newLocales:%s, activityHandlingNightModeChanges:%s, activityHandlingLocalesChanges:%s, activityHandlingLayoutDirectionChanges:%s, baseContextAttached:%s, created:%s, canReturnDifferentContext:%s, host:%s], application configuration [%s]", Integer.valueOf(i5), Integer.valueOf(i6), localeListCompatForLanguageTags, null, Boolean.valueOf((i & 512) != 0), Boolean.valueOf((i & 4) != 0), Boolean.valueOf((i & 8192) != 0), Boolean.valueOf(this.mBaseContextAttached), Boolean.valueOf(this.mCreated), Boolean.valueOf(z3), this.mHost, this.mContext.getApplicationContext().getResources().getConfiguration()));
+                ((Activity) this.mHost).recreate();
+                z2 = true;
+            }
+        } else {
+            i2 = i7;
+            displayMetrics = null;
+            z2 = false;
+        }
+        if (z2 || i2 == 0) {
+            z4 = z2;
+        } else {
+            boolean z5 = (i & i2) == i2;
+            Resources resources = this.mContext.getResources();
+            Configuration configuration2 = new Configuration(resources.getConfiguration());
+            configuration2.uiMode = i6 | (resources.getConfiguration().uiMode & (-49));
+            resources.updateConfiguration(configuration2, displayMetrics);
+            int i8 = this.mThemeResId;
+            if (i8 != 0) {
+                this.mContext.setTheme(i8);
+                this.mContext.getTheme().applyStyle(this.mThemeResId, true);
+            }
+            if (z5) {
+                Object obj2 = this.mHost;
+                if (obj2 instanceof Activity) {
+                    Activity activity = (Activity) obj2;
+                    if (activity instanceof LifecycleOwner) {
+                        if (((LifecycleOwner) activity).getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.CREATED)) {
+                            activity.onConfigurationChanged(configuration2);
+                        }
+                    } else if (this.mCreated && !this.mDestroyed) {
+                        activity.onConfigurationChanged(configuration2);
+                    }
+                }
+            }
+        }
+        if (z4) {
+            Object obj3 = this.mHost;
+            if ((obj3 instanceof AppCompatActivity) && (i2 & 512) != 0) {
+                ((AppCompatActivity) obj3).getClass();
+            }
+        }
+        if (i4 == 0) {
+            getAutoTimeNightModeManager(this.mContext).setup();
+        } else {
+            AutoTimeNightModeManager autoTimeNightModeManager = this.mAutoTimeNightModeManager;
+            if (autoTimeNightModeManager != null) {
+                autoTimeNightModeManager.cleanup();
+            }
+        }
+        if (i4 == 3) {
+            Context context2 = this.mContext;
+            if (this.mAutoBatteryNightModeManager == null) {
+                this.mAutoBatteryNightModeManager = new AutoBatteryNightModeManager(context2);
+            }
+            this.mAutoBatteryNightModeManager.setup();
+        } else {
+            AutoBatteryNightModeManager autoBatteryNightModeManager = this.mAutoBatteryNightModeManager;
+            if (autoBatteryNightModeManager != null) {
+                autoBatteryNightModeManager.cleanup();
+            }
+        }
+        return z4;
     }
 
     @Override // androidx.appcompat.app.AppCompatDelegate
@@ -923,12 +1029,12 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         AppCompatWindowCallback appCompatWindowCallback = new AppCompatWindowCallback(callback);
         this.mAppCompatWindowCallback = appCompatWindowCallback;
         window.setCallback(appCompatWindowCallback);
-        TintTypedArray obtainStyledAttributes = TintTypedArray.obtainStyledAttributes(this.mContext, (AttributeSet) null, sWindowBackgroundStyleable);
-        Drawable drawableIfKnown = obtainStyledAttributes.getDrawableIfKnown(0);
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(this.mContext, (AttributeSet) null, sWindowBackgroundStyleable);
+        Drawable drawableIfKnown = tintTypedArrayObtainStyledAttributes.getDrawableIfKnown(0);
         if (drawableIfKnown != null) {
             window.setBackgroundDrawable(drawableIfKnown);
         }
-        obtainStyledAttributes.recycle();
+        tintTypedArrayObtainStyledAttributes.recycle();
         this.mWindow = window;
         OnBackInvokedDispatcher onBackInvokedDispatcher = this.mDispatcher;
         if (onBackInvokedDispatcher == null) {
@@ -1027,25 +1133,126 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0031, code lost:
-    
-        if (r4.dispatchKeyEvent(r7) != false) goto L91;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:68:0x00e2, code lost:
-    
-        if (r7.hideOverflowMenu() != false) goto L79;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x010d  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0039  */
+    /* JADX WARN: Removed duplicated region for block: B:66:0x00e5  */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x010d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean dispatchKeyEvent(android.view.KeyEvent r7) {
-        /*
-            Method dump skipped, instructions count: 305
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.app.AppCompatDelegateImpl.dispatchKeyEvent(android.view.KeyEvent):boolean");
+    public final boolean dispatchKeyEvent(KeyEvent keyEvent) {
+        boolean zShowOverflowMenu;
+        boolean zPreparePanel;
+        ActionMenuView actionMenuView;
+        ActionMenuPresenter actionMenuPresenter;
+        Object obj = this.mHost;
+        if (((obj instanceof KeyEventDispatcher$Component) || (obj instanceof AppCompatDialog)) && this.mWindow.getDecorView() != null) {
+            WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
+        }
+        if (keyEvent.getKeyCode() == 82) {
+            AppCompatWindowCallback appCompatWindowCallback = this.mAppCompatWindowCallback;
+            Window.Callback callback = this.mWindow.getCallback();
+            appCompatWindowCallback.getClass();
+            try {
+                appCompatWindowCallback.mDispatchKeyEventBypassEnabled = true;
+                if (!callback.dispatchKeyEvent(keyEvent)) {
+                    int keyCode = keyEvent.getKeyCode();
+                    if (keyEvent.getAction() == 0) {
+                        if (keyCode == 4) {
+                            this.mLongPressBackDown = (keyEvent.getFlags() & 128) != 0;
+                            return false;
+                        }
+                        if (keyCode == 82) {
+                            if (keyEvent.getRepeatCount() == 0) {
+                                PanelFeatureState panelState = getPanelState(0);
+                                if (!panelState.isOpen) {
+                                    preparePanel(panelState, keyEvent);
+                                    return true;
+                                }
+                            }
+                        }
+                        return false;
+                    }
+                    if (keyCode != 4) {
+                        if (keyCode == 82) {
+                            if (this.mActionMode == null) {
+                                PanelFeatureState panelState2 = getPanelState(0);
+                                DecorContentParent decorContentParent = this.mDecorContentParent;
+                                if (decorContentParent != null) {
+                                    ActionBarOverlayLayout actionBarOverlayLayout = (ActionBarOverlayLayout) decorContentParent;
+                                    actionBarOverlayLayout.pullChildren();
+                                    Toolbar toolbar = actionBarOverlayLayout.mDecorToolbar.mToolbar;
+                                    if (toolbar.getVisibility() != 0 || (actionMenuView = toolbar.mMenuView) == null || !actionMenuView.mReserveOverflow || ViewConfiguration.get(this.mContext).hasPermanentMenuKey()) {
+                                        boolean z = panelState2.isOpen;
+                                        if (z || panelState2.isHandled) {
+                                            closePanel(panelState2, true);
+                                            zShowOverflowMenu = z;
+                                            if (zShowOverflowMenu) {
+                                                AudioManager audioManager = (AudioManager) this.mContext.getApplicationContext().getSystemService(ServiceTuple.MEDIA_CAP_AUDIO);
+                                                if (audioManager != null) {
+                                                    audioManager.playSoundEffect(0);
+                                                    return true;
+                                                }
+                                                Log.w("AppCompatDelegate", "Couldn't get audio manager");
+                                                return true;
+                                            }
+                                        } else {
+                                            if (panelState2.isPrepared) {
+                                                if (panelState2.refreshMenuContent) {
+                                                    panelState2.isPrepared = false;
+                                                    zPreparePanel = preparePanel(panelState2, keyEvent);
+                                                } else {
+                                                    zPreparePanel = true;
+                                                }
+                                                if (zPreparePanel) {
+                                                    openPanel(panelState2, keyEvent);
+                                                    zShowOverflowMenu = true;
+                                                    if (zShowOverflowMenu) {
+                                                    }
+                                                }
+                                            }
+                                            zShowOverflowMenu = false;
+                                            if (zShowOverflowMenu) {
+                                            }
+                                        }
+                                    } else {
+                                        ActionBarOverlayLayout actionBarOverlayLayout2 = (ActionBarOverlayLayout) this.mDecorContentParent;
+                                        actionBarOverlayLayout2.pullChildren();
+                                        if (actionBarOverlayLayout2.mDecorToolbar.mToolbar.isOverflowMenuShowing()) {
+                                            ActionBarOverlayLayout actionBarOverlayLayout3 = (ActionBarOverlayLayout) this.mDecorContentParent;
+                                            actionBarOverlayLayout3.pullChildren();
+                                            ActionMenuView actionMenuView2 = actionBarOverlayLayout3.mDecorToolbar.mToolbar.mMenuView;
+                                            if (actionMenuView2 != null && (actionMenuPresenter = actionMenuView2.mPresenter) != null && actionMenuPresenter.hideOverflowMenu()) {
+                                                zShowOverflowMenu = true;
+                                            }
+                                            if (zShowOverflowMenu) {
+                                            }
+                                        } else {
+                                            if (!this.mDestroyed && preparePanel(panelState2, keyEvent)) {
+                                                ActionBarOverlayLayout actionBarOverlayLayout4 = (ActionBarOverlayLayout) this.mDecorContentParent;
+                                                actionBarOverlayLayout4.pullChildren();
+                                                zShowOverflowMenu = actionBarOverlayLayout4.mDecorToolbar.mToolbar.showOverflowMenu();
+                                            }
+                                            if (zShowOverflowMenu) {
+                                            }
+                                        }
+                                        zShowOverflowMenu = false;
+                                        if (zShowOverflowMenu) {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        return false;
+                    }
+                    if (!onBackPressed()) {
+                        return false;
+                    }
+                }
+            } finally {
+                appCompatWindowCallback.mDispatchKeyEventBypassEnabled = false;
+            }
+        }
+        return true;
     }
 
     public final void doInvalidatePanelMenu(int i) {
@@ -1075,35 +1282,35 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
         Context context = this.mContext;
         int[] iArr = R$styleable.AppCompatTheme;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(iArr);
-        if (!obtainStyledAttributes.hasValue(145)) {
-            obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(iArr);
+        if (!typedArrayObtainStyledAttributes.hasValue(145)) {
+            typedArrayObtainStyledAttributes.recycle();
             Log.e("AppCompatDelegate", "createSubDecor: mContext = " + this.mContext);
             throw new IllegalStateException("You need to use a Theme.AppCompat theme (or descendant) with this activity.");
         }
-        if (obtainStyledAttributes.getBoolean(154, false)) {
+        if (typedArrayObtainStyledAttributes.getBoolean(154, false)) {
             requestWindowFeature(1);
-        } else if (obtainStyledAttributes.getBoolean(145, false)) {
+        } else if (typedArrayObtainStyledAttributes.getBoolean(145, false)) {
             requestWindowFeature(108);
         }
-        if (obtainStyledAttributes.getBoolean(146, false)) {
+        if (typedArrayObtainStyledAttributes.getBoolean(146, false)) {
             requestWindowFeature(109);
         }
-        if (obtainStyledAttributes.getBoolean(147, false)) {
+        if (typedArrayObtainStyledAttributes.getBoolean(147, false)) {
             requestWindowFeature(10);
         }
-        this.mIsFloating = obtainStyledAttributes.getBoolean(1, false);
-        if (obtainStyledAttributes.hasValue(86)) {
-            this.mIsIgnoreRemoveSystemTopInset = obtainStyledAttributes.getBoolean(86, false);
+        this.mIsFloating = typedArrayObtainStyledAttributes.getBoolean(1, false);
+        if (typedArrayObtainStyledAttributes.hasValue(86)) {
+            this.mIsIgnoreRemoveSystemTopInset = typedArrayObtainStyledAttributes.getBoolean(86, false);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         ensureWindow();
         this.mWindow.getDecorView();
-        LayoutInflater from = LayoutInflater.from(this.mContext);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this.mContext);
         if (this.mWindowNoTitle) {
-            viewGroup = this.mOverlayActionMode ? (ViewGroup) from.inflate(com.android.systemui.R.layout.sesl_screen_simple_overlay_action_mode, (ViewGroup) null) : (ViewGroup) from.inflate(com.android.systemui.R.layout.sesl_screen_simple, (ViewGroup) null);
+            viewGroup = this.mOverlayActionMode ? (ViewGroup) layoutInflaterFrom.inflate(com.android.systemui.R.layout.sesl_screen_simple_overlay_action_mode, (ViewGroup) null) : (ViewGroup) layoutInflaterFrom.inflate(com.android.systemui.R.layout.sesl_screen_simple, (ViewGroup) null);
         } else if (this.mIsFloating) {
-            viewGroup = (ViewGroup) from.inflate(com.android.systemui.R.layout.sesl_dialog_title, (ViewGroup) null);
+            viewGroup = (ViewGroup) layoutInflaterFrom.inflate(com.android.systemui.R.layout.sesl_dialog_title, (ViewGroup) null);
             this.mOverlayActionBar = false;
             this.mHasActionBar = false;
         } else if (this.mHasActionBar) {
@@ -1207,36 +1414,36 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                             appCompatDelegateImpl.mSubDecor.addView(appCompatDelegateImpl.mStatusGuard, -1, layoutParams);
                         }
                         View view4 = appCompatDelegateImpl.mStatusGuard;
-                        r7 = view4 != null;
-                        if (r7 && view4.getVisibility() != 0) {
+                        z = view4 != null;
+                        if (z && view4.getVisibility() != 0) {
                             View view5 = appCompatDelegateImpl.mStatusGuard;
                             view5.setBackgroundColor((view5.getWindowSystemUiVisibility() & 8192) != 0 ? appCompatDelegateImpl.mContext.getColor(com.android.systemui.R.color.abc_decor_view_status_guard_light) : appCompatDelegateImpl.mContext.getColor(com.android.systemui.R.color.abc_decor_view_status_guard));
                         }
-                        if (!appCompatDelegateImpl.mOverlayActionMode && r7 && !appCompatDelegateImpl.mIsIgnoreRemoveSystemTopInset) {
+                        if (!appCompatDelegateImpl.mOverlayActionMode && z && !appCompatDelegateImpl.mIsIgnoreRemoveSystemTopInset) {
                             systemWindowInsetTop2 = 0;
                         }
-                        View findViewById = appCompatDelegateImpl.findViewById(R.id.content);
-                        if (findViewById instanceof ContentFrameLayout) {
-                            if (findViewById.getPaddingTop() != 0) {
+                        View viewFindViewById = appCompatDelegateImpl.findViewById(R.id.content);
+                        if (viewFindViewById instanceof ContentFrameLayout) {
+                            if (viewFindViewById.getPaddingTop() != 0) {
                                 marginLayoutParams.topMargin = 0;
                             }
-                            if (findViewById.getPaddingRight() != 0) {
+                            if (viewFindViewById.getPaddingRight() != 0) {
                                 marginLayoutParams.rightMargin = 0;
                             }
-                            if (findViewById.getPaddingLeft() != 0) {
+                            if (viewFindViewById.getPaddingLeft() != 0) {
                                 marginLayoutParams.leftMargin = 0;
                             }
                         }
-                        z = r7;
-                        r7 = z2;
+                        z = z;
+                        z = z2;
                     } else if (marginLayoutParams.topMargin != 0) {
                         marginLayoutParams.topMargin = 0;
                         z = false;
                     } else {
                         z = false;
-                        r7 = false;
+                        z = false;
                     }
-                    if (r7) {
+                    if (z) {
                         appCompatDelegateImpl.mActionModeView.setLayoutParams(marginLayoutParams);
                         View view6 = appCompatDelegateImpl.mStatusGuard;
                         if (view6 != null) {
@@ -1257,9 +1464,9 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
                     int systemWindowInsetRight2 = windowInsetsCompat.getSystemWindowInsetRight();
                     int systemWindowInsetBottom = windowInsetsCompat.getSystemWindowInsetBottom();
                     WindowInsetsCompat.Builder builder = new WindowInsetsCompat.Builder(windowInsetsCompat);
-                    androidx.core.graphics.Insets of = androidx.core.graphics.Insets.of(systemWindowInsetLeft2, systemWindowInsetTop2, systemWindowInsetRight2, systemWindowInsetBottom);
+                    androidx.core.graphics.Insets insetsOf = androidx.core.graphics.Insets.of(systemWindowInsetLeft2, systemWindowInsetTop2, systemWindowInsetRight2, systemWindowInsetBottom);
                     WindowInsetsCompat.BuilderImpl30 builderImpl30 = builder.mImpl;
-                    builderImpl30.setSystemWindowInsets(of);
+                    builderImpl30.setSystemWindowInsets(insetsOf);
                     windowInsetsCompat = builderImpl30.build();
                 }
                 return ViewCompat.onApplyWindowInsets(windowInsetsCompat, view);
@@ -1337,40 +1544,40 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         if (contentFrameLayout2.isLaidOut()) {
             contentFrameLayout2.requestLayout();
         }
-        TypedArray obtainStyledAttributes2 = this.mContext.obtainStyledAttributes(iArr);
+        TypedArray typedArrayObtainStyledAttributes2 = this.mContext.obtainStyledAttributes(iArr);
         if (contentFrameLayout2.mMinWidthMajor == null) {
             contentFrameLayout2.mMinWidthMajor = new TypedValue();
         }
-        obtainStyledAttributes2.getValue(152, contentFrameLayout2.mMinWidthMajor);
+        typedArrayObtainStyledAttributes2.getValue(152, contentFrameLayout2.mMinWidthMajor);
         if (contentFrameLayout2.mMinWidthMinor == null) {
             contentFrameLayout2.mMinWidthMinor = new TypedValue();
         }
-        obtainStyledAttributes2.getValue(153, contentFrameLayout2.mMinWidthMinor);
-        if (obtainStyledAttributes2.hasValue(150)) {
+        typedArrayObtainStyledAttributes2.getValue(153, contentFrameLayout2.mMinWidthMinor);
+        if (typedArrayObtainStyledAttributes2.hasValue(150)) {
             if (contentFrameLayout2.mFixedWidthMajor == null) {
                 contentFrameLayout2.mFixedWidthMajor = new TypedValue();
             }
-            obtainStyledAttributes2.getValue(150, contentFrameLayout2.mFixedWidthMajor);
+            typedArrayObtainStyledAttributes2.getValue(150, contentFrameLayout2.mFixedWidthMajor);
         }
-        if (obtainStyledAttributes2.hasValue(151)) {
+        if (typedArrayObtainStyledAttributes2.hasValue(151)) {
             if (contentFrameLayout2.mFixedWidthMinor == null) {
                 contentFrameLayout2.mFixedWidthMinor = new TypedValue();
             }
-            obtainStyledAttributes2.getValue(151, contentFrameLayout2.mFixedWidthMinor);
+            typedArrayObtainStyledAttributes2.getValue(151, contentFrameLayout2.mFixedWidthMinor);
         }
-        if (obtainStyledAttributes2.hasValue(148)) {
+        if (typedArrayObtainStyledAttributes2.hasValue(148)) {
             if (contentFrameLayout2.mFixedHeightMajor == null) {
                 contentFrameLayout2.mFixedHeightMajor = new TypedValue();
             }
-            obtainStyledAttributes2.getValue(148, contentFrameLayout2.mFixedHeightMajor);
+            typedArrayObtainStyledAttributes2.getValue(148, contentFrameLayout2.mFixedHeightMajor);
         }
-        if (obtainStyledAttributes2.hasValue(149)) {
+        if (typedArrayObtainStyledAttributes2.hasValue(149)) {
             if (contentFrameLayout2.mFixedHeightMinor == null) {
                 contentFrameLayout2.mFixedHeightMinor = new TypedValue();
             }
-            obtainStyledAttributes2.getValue(149, contentFrameLayout2.mFixedHeightMinor);
+            typedArrayObtainStyledAttributes2.getValue(149, contentFrameLayout2.mFixedHeightMinor);
         }
-        obtainStyledAttributes2.recycle();
+        typedArrayObtainStyledAttributes2.recycle();
         contentFrameLayout2.requestLayout();
         this.mSubDecorInstalled = true;
         PanelFeatureState panelState = getPanelState(0);
@@ -1451,11 +1658,11 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
 
     @Override // androidx.appcompat.app.AppCompatDelegate
     public final void installViewFactory() {
-        LayoutInflater from = LayoutInflater.from(this.mContext);
-        if (from.getFactory() == null) {
-            from.setFactory2(this);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this.mContext);
+        if (layoutInflaterFrom.getFactory() == null) {
+            layoutInflaterFrom.setFactory2(this);
         } else {
-            if (from.getFactory2() instanceof AppCompatDelegateImpl) {
+            if (layoutInflaterFrom.getFactory2() instanceof AppCompatDelegateImpl) {
                 return;
             }
             Log.i("AppCompatDelegate", "The Activity's LayoutInflater already has a Factory installed so we can not install AppCompat's");
@@ -1531,7 +1738,7 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
 
     @Override // androidx.appcompat.app.AppCompatDelegate
     public final void onCreate() {
-        String str;
+        String parentActivityName;
         this.mBaseContextAttached = true;
         applyApplicationSpecificConfig(false);
         ensureWindow();
@@ -1540,14 +1747,14 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
             try {
                 Activity activity = (Activity) obj;
                 try {
-                    str = NavUtils.getParentActivityName(activity, activity.getComponentName());
+                    parentActivityName = NavUtils.getParentActivityName(activity, activity.getComponentName());
                 } catch (PackageManager.NameNotFoundException e) {
                     throw new IllegalArgumentException(e);
                 }
             } catch (IllegalArgumentException unused) {
-                str = null;
+                parentActivityName = null;
             }
-            if (str != null) {
+            if (parentActivityName != null) {
                 ActionBar actionBar = this.mActionBar;
                 if (actionBar == null) {
                     this.mEnableDefaultActionBarUp = true;
@@ -1565,97 +1772,252 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:88:0x00d7, code lost:
-    
-        if (r11.equals("ImageView") == false) goto L24;
-     */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x009a  */
     @Override // android.view.LayoutInflater.Factory2
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.view.View onCreateView(android.view.View r10, java.lang.String r11, android.content.Context r12, android.util.AttributeSet r13) {
-        /*
-            Method dump skipped, instructions count: 590
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.app.AppCompatDelegateImpl.onCreateView(android.view.View, java.lang.String, android.content.Context, android.util.AttributeSet):android.view.View");
+    public final View onCreateView(View view, String str, Context context, AttributeSet attributeSet) {
+        View appCompatRatingBar;
+        char c = '\b';
+        View view2 = null;
+        if (this.mAppCompatViewInflater == null) {
+            TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(R$styleable.AppCompatTheme);
+            String string = typedArrayObtainStyledAttributes.getString(144);
+            typedArrayObtainStyledAttributes.recycle();
+            if (string == null) {
+                this.mAppCompatViewInflater = new AppCompatViewInflater();
+            } else {
+                try {
+                    Class[] clsArr = new Class[0];
+                    this.mAppCompatViewInflater = (AppCompatViewInflater) this.mContext.getClassLoader().loadClass(string).getDeclaredConstructor(null).newInstance(null);
+                } catch (Throwable th) {
+                    Log.i("AppCompatDelegate", "Failed to instantiate custom view inflater " + string + ". Falling back to default.", th);
+                    this.mAppCompatViewInflater = new AppCompatViewInflater();
+                }
+            }
+        }
+        AppCompatViewInflater appCompatViewInflater = this.mAppCompatViewInflater;
+        int i = VectorEnabledTintResources.$r8$clinit;
+        appCompatViewInflater.getClass();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R$styleable.View, 0, 0);
+        int resourceId = typedArrayObtainStyledAttributes2.getResourceId(8, 0);
+        if (resourceId != 0) {
+            Log.i("AppCompatViewInflater", "app:theme is now deprecated. Please move to using android:theme instead.");
+        }
+        typedArrayObtainStyledAttributes2.recycle();
+        Context contextThemeWrapper = (resourceId == 0 || ((context instanceof ContextThemeWrapper) && ((ContextThemeWrapper) context).mThemeResource == resourceId)) ? context : new ContextThemeWrapper(context, resourceId);
+        str.getClass();
+        switch (str.hashCode()) {
+            case -1946472170:
+                if (!str.equals("RatingBar")) {
+                    c = 65535;
+                    break;
+                } else {
+                    c = 0;
+                    break;
+                }
+            case -1455429095:
+                if (str.equals("CheckedTextView")) {
+                    c = 1;
+                    break;
+                }
+                break;
+            case -1346021293:
+                if (str.equals("MultiAutoCompleteTextView")) {
+                    c = 2;
+                    break;
+                }
+                break;
+            case -938935918:
+                if (str.equals("TextView")) {
+                    c = 3;
+                    break;
+                }
+                break;
+            case -937446323:
+                if (str.equals("ImageButton")) {
+                    c = 4;
+                    break;
+                }
+                break;
+            case -339785223:
+                if (str.equals("Spinner")) {
+                    c = 5;
+                    break;
+                }
+                break;
+            case 776382189:
+                if (str.equals("RadioButton")) {
+                    c = 6;
+                    break;
+                }
+                break;
+            case 799298502:
+                if (str.equals("ToggleButton")) {
+                    c = 7;
+                    break;
+                }
+                break;
+            case 1125864064:
+                if (!str.equals("ImageView")) {
+                }
+                break;
+            case 1413872058:
+                if (str.equals("AutoCompleteTextView")) {
+                    c = '\t';
+                    break;
+                }
+                break;
+            case 1601505219:
+                if (str.equals("CheckBox")) {
+                    c = '\n';
+                    break;
+                }
+                break;
+            case 1666676343:
+                if (str.equals("EditText")) {
+                    c = 11;
+                    break;
+                }
+                break;
+            case 2001146706:
+                if (str.equals("Button")) {
+                    c = '\f';
+                    break;
+                }
+                break;
+        }
+        switch (c) {
+            case 0:
+                appCompatRatingBar = new AppCompatRatingBar(contextThemeWrapper, attributeSet);
+                break;
+            case 1:
+                appCompatRatingBar = new AppCompatCheckedTextView(contextThemeWrapper, attributeSet);
+                break;
+            case 2:
+                appCompatRatingBar = new AppCompatMultiAutoCompleteTextView(contextThemeWrapper, attributeSet);
+                break;
+            case 3:
+                appCompatRatingBar = appCompatViewInflater.createTextView(contextThemeWrapper, attributeSet);
+                break;
+            case 4:
+                appCompatRatingBar = new AppCompatImageButton(contextThemeWrapper, attributeSet);
+                break;
+            case 5:
+                appCompatRatingBar = new AppCompatSpinner(contextThemeWrapper, attributeSet);
+                break;
+            case 6:
+                appCompatRatingBar = appCompatViewInflater.createRadioButton(contextThemeWrapper, attributeSet);
+                break;
+            case 7:
+                appCompatRatingBar = new AppCompatToggleButton(contextThemeWrapper, attributeSet);
+                break;
+            case '\b':
+                appCompatRatingBar = new AppCompatImageView(contextThemeWrapper, attributeSet);
+                break;
+            case '\t':
+                appCompatRatingBar = appCompatViewInflater.createAutoCompleteTextView(contextThemeWrapper, attributeSet);
+                break;
+            case '\n':
+                appCompatRatingBar = appCompatViewInflater.createCheckBox(contextThemeWrapper, attributeSet);
+                break;
+            case 11:
+                appCompatRatingBar = new AppCompatEditText(contextThemeWrapper, attributeSet);
+                break;
+            case '\f':
+                appCompatRatingBar = appCompatViewInflater.createButton(contextThemeWrapper, attributeSet);
+                break;
+            default:
+                appCompatRatingBar = null;
+                break;
+        }
+        if (appCompatRatingBar == null && context != contextThemeWrapper) {
+            Object[] objArr = appCompatViewInflater.mConstructorArgs;
+            if (str.equals("view")) {
+                str = attributeSet.getAttributeValue(null, "class");
+            }
+            try {
+                objArr[0] = contextThemeWrapper;
+                objArr[1] = attributeSet;
+                if (-1 == str.indexOf(46)) {
+                    int i2 = 0;
+                    while (true) {
+                        String[] strArr = AppCompatViewInflater.sClassPrefixList;
+                        if (i2 < 3) {
+                            View viewCreateViewByPrefix = appCompatViewInflater.createViewByPrefix(contextThemeWrapper, str, strArr[i2]);
+                            if (viewCreateViewByPrefix != null) {
+                                objArr[0] = null;
+                                objArr[1] = null;
+                                view2 = viewCreateViewByPrefix;
+                            } else {
+                                i2++;
+                            }
+                        }
+                    }
+                } else {
+                    View viewCreateViewByPrefix2 = appCompatViewInflater.createViewByPrefix(contextThemeWrapper, str, null);
+                    objArr[0] = null;
+                    objArr[1] = null;
+                    view2 = viewCreateViewByPrefix2;
+                }
+            } catch (Exception unused) {
+            } finally {
+                objArr[0] = null;
+                objArr[1] = null;
+            }
+            appCompatRatingBar = view2;
+        }
+        if (appCompatRatingBar != null) {
+            Context context2 = appCompatRatingBar.getContext();
+            if ((context2 instanceof ContextWrapper) && appCompatRatingBar.hasOnClickListeners()) {
+                TypedArray typedArrayObtainStyledAttributes3 = context2.obtainStyledAttributes(attributeSet, AppCompatViewInflater.sOnClickAttrs);
+                String string2 = typedArrayObtainStyledAttributes3.getString(0);
+                if (string2 != null) {
+                    appCompatRatingBar.setOnClickListener(new AppCompatViewInflater.DeclaredOnClickListener(appCompatRatingBar, string2));
+                }
+                typedArrayObtainStyledAttributes3.recycle();
+            }
+        }
+        return appCompatRatingBar;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0067  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:34:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x004d  */
     @Override // androidx.appcompat.app.AppCompatDelegate
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void onDestroy() {
-        /*
-            r3 = this;
-            java.lang.Object r0 = r3.mHost
-            boolean r0 = r0 instanceof android.app.Activity
-            if (r0 == 0) goto L11
-            java.lang.Object r0 = androidx.appcompat.app.AppCompatDelegate.sActivityDelegatesLock
-            monitor-enter(r0)
-            androidx.appcompat.app.AppCompatDelegate.removeDelegateFromActives(r3)     // Catch: java.lang.Throwable -> Le
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> Le
-            goto L11
-        Le:
-            r3 = move-exception
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> Le
-            throw r3
-        L11:
-            boolean r0 = r3.mInvalidatePanelMenuPosted
-            if (r0 == 0) goto L20
-            android.view.Window r0 = r3.mWindow
-            android.view.View r0 = r0.getDecorView()
-            androidx.appcompat.app.AppCompatDelegateImpl$2 r1 = r3.mInvalidatePanelMenuRunnable
-            r0.removeCallbacks(r1)
-        L20:
-            r0 = 1
-            r3.mDestroyed = r0
-            int r0 = r3.mLocalNightMode
-            r1 = -100
-            if (r0 == r1) goto L4d
-            java.lang.Object r0 = r3.mHost
-            boolean r1 = r0 instanceof android.app.Activity
-            if (r1 == 0) goto L4d
-            android.app.Activity r0 = (android.app.Activity) r0
-            boolean r0 = r0.isChangingConfigurations()
-            if (r0 == 0) goto L4d
-            androidx.collection.SimpleArrayMap r0 = androidx.appcompat.app.AppCompatDelegateImpl.sLocalNightModes
-            java.lang.Object r1 = r3.mHost
-            java.lang.Class r1 = r1.getClass()
-            java.lang.String r1 = r1.getName()
-            int r2 = r3.mLocalNightMode
-            java.lang.Integer r2 = java.lang.Integer.valueOf(r2)
-            r0.put(r1, r2)
-            goto L5c
-        L4d:
-            androidx.collection.SimpleArrayMap r0 = androidx.appcompat.app.AppCompatDelegateImpl.sLocalNightModes
-            java.lang.Object r1 = r3.mHost
-            java.lang.Class r1 = r1.getClass()
-            java.lang.String r1 = r1.getName()
-            r0.remove(r1)
-        L5c:
-            androidx.appcompat.app.ActionBar r0 = r3.mActionBar
-            if (r0 == 0) goto L63
-            r0.onDestroy()
-        L63:
-            androidx.appcompat.app.AppCompatDelegateImpl$AutoTimeNightModeManager r0 = r3.mAutoTimeNightModeManager
-            if (r0 == 0) goto L6a
-            r0.cleanup()
-        L6a:
-            androidx.appcompat.app.AppCompatDelegateImpl$AutoBatteryNightModeManager r3 = r3.mAutoBatteryNightModeManager
-            if (r3 == 0) goto L71
-            r3.cleanup()
-        L71:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.app.AppCompatDelegateImpl.onDestroy():void");
+        if (this.mHost instanceof Activity) {
+            synchronized (AppCompatDelegate.sActivityDelegatesLock) {
+                AppCompatDelegate.removeDelegateFromActives(this);
+            }
+        }
+        if (this.mInvalidatePanelMenuPosted) {
+            this.mWindow.getDecorView().removeCallbacks(this.mInvalidatePanelMenuRunnable);
+        }
+        this.mDestroyed = true;
+        if (this.mLocalNightMode != -100) {
+            Object obj = this.mHost;
+            if ((obj instanceof Activity) && ((Activity) obj).isChangingConfigurations()) {
+                sLocalNightModes.put(this.mHost.getClass().getName(), Integer.valueOf(this.mLocalNightMode));
+            } else {
+                sLocalNightModes.remove(this.mHost.getClass().getName());
+            }
+        }
+        ActionBar actionBar = this.mActionBar;
+        if (actionBar != null) {
+            actionBar.onDestroy();
+        }
+        AutoTimeNightModeManager autoTimeNightModeManager = this.mAutoTimeNightModeManager;
+        if (autoTimeNightModeManager != null) {
+            autoTimeNightModeManager.cleanup();
+        }
+        AutoBatteryNightModeManager autoBatteryNightModeManager = this.mAutoBatteryNightModeManager;
+        if (autoBatteryNightModeManager != null) {
+            autoBatteryNightModeManager.cleanup();
+        }
     }
 
     @Override // androidx.appcompat.view.menu.MenuBuilder.Callback
@@ -1686,120 +2048,74 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         return false;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0044, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x0044, code lost:
     
         if (r6.isOverflowMenuShowing() != false) goto L20;
      */
     @Override // androidx.appcompat.view.menu.MenuBuilder.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onMenuModeChange(androidx.appcompat.view.menu.MenuBuilder r6) {
-        /*
-            r5 = this;
-            androidx.appcompat.widget.DecorContentParent r6 = r5.mDecorContentParent
-            r0 = 1
-            r1 = 0
-            if (r6 == 0) goto Lcb
-            androidx.appcompat.widget.ActionBarOverlayLayout r6 = (androidx.appcompat.widget.ActionBarOverlayLayout) r6
-            r6.pullChildren()
-            androidx.appcompat.widget.ToolbarWidgetWrapper r6 = r6.mDecorToolbar
-            androidx.appcompat.widget.Toolbar r6 = r6.mToolbar
-            int r2 = r6.getVisibility()
-            if (r2 != 0) goto Lcb
-            androidx.appcompat.widget.ActionMenuView r6 = r6.mMenuView
-            if (r6 == 0) goto Lcb
-            boolean r6 = r6.mReserveOverflow
-            if (r6 == 0) goto Lcb
-            android.content.Context r6 = r5.mContext
-            android.view.ViewConfiguration r6 = android.view.ViewConfiguration.get(r6)
-            boolean r6 = r6.hasPermanentMenuKey()
-            if (r6 == 0) goto L46
-            androidx.appcompat.widget.DecorContentParent r6 = r5.mDecorContentParent
-            androidx.appcompat.widget.ActionBarOverlayLayout r6 = (androidx.appcompat.widget.ActionBarOverlayLayout) r6
-            r6.pullChildren()
-            androidx.appcompat.widget.ToolbarWidgetWrapper r6 = r6.mDecorToolbar
-            androidx.appcompat.widget.Toolbar r6 = r6.mToolbar
-            androidx.appcompat.widget.ActionMenuView r6 = r6.mMenuView
-            if (r6 == 0) goto Lcb
-            androidx.appcompat.widget.ActionMenuPresenter r6 = r6.mPresenter
-            if (r6 == 0) goto Lcb
-            androidx.appcompat.widget.ActionMenuPresenter$OpenOverflowRunnable r2 = r6.mPostedOpenRunnable
-            if (r2 != 0) goto L46
-            boolean r6 = r6.isOverflowMenuShowing()
-            if (r6 == 0) goto Lcb
-        L46:
-            android.view.Window r6 = r5.mWindow
-            android.view.Window$Callback r6 = r6.getCallback()
-            androidx.appcompat.widget.DecorContentParent r2 = r5.mDecorContentParent
-            androidx.appcompat.widget.ActionBarOverlayLayout r2 = (androidx.appcompat.widget.ActionBarOverlayLayout) r2
-            r2.pullChildren()
-            androidx.appcompat.widget.ToolbarWidgetWrapper r2 = r2.mDecorToolbar
-            androidx.appcompat.widget.Toolbar r2 = r2.mToolbar
-            boolean r2 = r2.isOverflowMenuShowing()
-            r3 = 108(0x6c, float:1.51E-43)
-            if (r2 == 0) goto L84
-            androidx.appcompat.widget.DecorContentParent r0 = r5.mDecorContentParent
-            androidx.appcompat.widget.ActionBarOverlayLayout r0 = (androidx.appcompat.widget.ActionBarOverlayLayout) r0
-            r0.pullChildren()
-            androidx.appcompat.widget.ToolbarWidgetWrapper r0 = r0.mDecorToolbar
-            androidx.appcompat.widget.Toolbar r0 = r0.mToolbar
-            androidx.appcompat.widget.ActionMenuView r0 = r0.mMenuView
-            if (r0 == 0) goto L76
-            androidx.appcompat.widget.ActionMenuPresenter r0 = r0.mPresenter
-            if (r0 == 0) goto L76
-            boolean r0 = r0.hideOverflowMenu()
-        L76:
-            boolean r0 = r5.mDestroyed
-            if (r0 != 0) goto Lca
-            androidx.appcompat.app.AppCompatDelegateImpl$PanelFeatureState r5 = r5.getPanelState(r1)
-            androidx.appcompat.view.menu.MenuBuilder r5 = r5.menu
-            r6.onPanelClosed(r3, r5)
-            return
-        L84:
-            if (r6 == 0) goto Lca
-            boolean r2 = r5.mDestroyed
-            if (r2 != 0) goto Lca
-            boolean r2 = r5.mInvalidatePanelMenuPosted
-            if (r2 == 0) goto La3
-            int r2 = r5.mInvalidatePanelMenuFeatures
-            r0 = r0 & r2
-            if (r0 == 0) goto La3
-            android.view.Window r0 = r5.mWindow
-            android.view.View r0 = r0.getDecorView()
-            androidx.appcompat.app.AppCompatDelegateImpl$2 r2 = r5.mInvalidatePanelMenuRunnable
-            r0.removeCallbacks(r2)
-            androidx.appcompat.app.AppCompatDelegateImpl$2 r0 = r5.mInvalidatePanelMenuRunnable
-            r0.run()
-        La3:
-            androidx.appcompat.app.AppCompatDelegateImpl$PanelFeatureState r0 = r5.getPanelState(r1)
-            androidx.appcompat.view.menu.MenuBuilder r2 = r0.menu
-            if (r2 == 0) goto Lca
-            boolean r4 = r0.refreshMenuContent
-            if (r4 != 0) goto Lca
-            android.view.View r4 = r0.createdPanelView
-            boolean r1 = r6.onPreparePanel(r1, r4, r2)
-            if (r1 == 0) goto Lca
-            androidx.appcompat.view.menu.MenuBuilder r0 = r0.menu
-            r6.onMenuOpened(r3, r0)
-            androidx.appcompat.widget.DecorContentParent r5 = r5.mDecorContentParent
-            androidx.appcompat.widget.ActionBarOverlayLayout r5 = (androidx.appcompat.widget.ActionBarOverlayLayout) r5
-            r5.pullChildren()
-            androidx.appcompat.widget.ToolbarWidgetWrapper r5 = r5.mDecorToolbar
-            androidx.appcompat.widget.Toolbar r5 = r5.mToolbar
-            r5.showOverflowMenu()
-        Lca:
-            return
-        Lcb:
-            androidx.appcompat.app.AppCompatDelegateImpl$PanelFeatureState r6 = r5.getPanelState(r1)
-            r6.refreshDecorView = r0
-            r5.closePanel(r6, r1)
-            r0 = 0
-            r5.openPanel(r6, r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.app.AppCompatDelegateImpl.onMenuModeChange(androidx.appcompat.view.menu.MenuBuilder):void");
+    public final void onMenuModeChange(MenuBuilder menuBuilder) {
+        ActionMenuView actionMenuView;
+        ActionMenuPresenter actionMenuPresenter;
+        DecorContentParent decorContentParent = this.mDecorContentParent;
+        if (decorContentParent != null) {
+            ActionBarOverlayLayout actionBarOverlayLayout = (ActionBarOverlayLayout) decorContentParent;
+            actionBarOverlayLayout.pullChildren();
+            Toolbar toolbar = actionBarOverlayLayout.mDecorToolbar.mToolbar;
+            if (toolbar.getVisibility() == 0 && (actionMenuView = toolbar.mMenuView) != null && actionMenuView.mReserveOverflow) {
+                if (ViewConfiguration.get(this.mContext).hasPermanentMenuKey()) {
+                    ActionBarOverlayLayout actionBarOverlayLayout2 = (ActionBarOverlayLayout) this.mDecorContentParent;
+                    actionBarOverlayLayout2.pullChildren();
+                    ActionMenuView actionMenuView2 = actionBarOverlayLayout2.mDecorToolbar.mToolbar.mMenuView;
+                    if (actionMenuView2 != null) {
+                        ActionMenuPresenter actionMenuPresenter2 = actionMenuView2.mPresenter;
+                        if (actionMenuPresenter2 != null) {
+                            if (actionMenuPresenter2.mPostedOpenRunnable == null) {
+                            }
+                        }
+                    }
+                }
+                Window.Callback callback = this.mWindow.getCallback();
+                ActionBarOverlayLayout actionBarOverlayLayout3 = (ActionBarOverlayLayout) this.mDecorContentParent;
+                actionBarOverlayLayout3.pullChildren();
+                if (actionBarOverlayLayout3.mDecorToolbar.mToolbar.isOverflowMenuShowing()) {
+                    ActionBarOverlayLayout actionBarOverlayLayout4 = (ActionBarOverlayLayout) this.mDecorContentParent;
+                    actionBarOverlayLayout4.pullChildren();
+                    ActionMenuView actionMenuView3 = actionBarOverlayLayout4.mDecorToolbar.mToolbar.mMenuView;
+                    if (actionMenuView3 != null && (actionMenuPresenter = actionMenuView3.mPresenter) != null) {
+                        actionMenuPresenter.hideOverflowMenu();
+                    }
+                    if (this.mDestroyed) {
+                        return;
+                    }
+                    callback.onPanelClosed(108, getPanelState(0).menu);
+                    return;
+                }
+                if (callback == null || this.mDestroyed) {
+                    return;
+                }
+                if (this.mInvalidatePanelMenuPosted && (1 & this.mInvalidatePanelMenuFeatures) != 0) {
+                    this.mWindow.getDecorView().removeCallbacks(this.mInvalidatePanelMenuRunnable);
+                    this.mInvalidatePanelMenuRunnable.run();
+                }
+                PanelFeatureState panelState = getPanelState(0);
+                MenuBuilder menuBuilder2 = panelState.menu;
+                if (menuBuilder2 == null || panelState.refreshMenuContent || !callback.onPreparePanel(0, panelState.createdPanelView, menuBuilder2)) {
+                    return;
+                }
+                callback.onMenuOpened(108, panelState.menu);
+                ActionBarOverlayLayout actionBarOverlayLayout5 = (ActionBarOverlayLayout) this.mDecorContentParent;
+                actionBarOverlayLayout5.pullChildren();
+                actionBarOverlayLayout5.mDecorToolbar.mToolbar.showOverflowMenu();
+                return;
+            }
+        }
+        PanelFeatureState panelState2 = getPanelState(0);
+        panelState2.refreshDecorView = true;
+        closePanel(panelState2, false);
+        openPanel(panelState2, null);
     }
 
     @Override // androidx.appcompat.app.AppCompatDelegate
@@ -1819,26 +2135,154 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:63:0x017f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:91:0x017f, code lost:
     
         if (r15.mAdapter.getCount() > 0) goto L92;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:93:0x015f, code lost:
-    
-        if (r5 != null) goto L81;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x01db  */
-    /* JADX WARN: Removed duplicated region for block: B:36:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:104:0x01db  */
+    /* JADX WARN: Removed duplicated region for block: B:109:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void openPanel(androidx.appcompat.app.AppCompatDelegateImpl.PanelFeatureState r14, android.view.KeyEvent r15) {
-        /*
-            Method dump skipped, instructions count: 482
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.app.AppCompatDelegateImpl.openPanel(androidx.appcompat.app.AppCompatDelegateImpl$PanelFeatureState, android.view.KeyEvent):void");
+    public final void openPanel(PanelFeatureState panelFeatureState, KeyEvent keyEvent) {
+        int i;
+        ViewGroup.LayoutParams layoutParams;
+        if (panelFeatureState.isOpen || this.mDestroyed) {
+            return;
+        }
+        int i2 = panelFeatureState.featureId;
+        if (i2 == 0 && (this.mContext.getResources().getConfiguration().screenLayout & 15) == 4) {
+            return;
+        }
+        Window.Callback callback = this.mWindow.getCallback();
+        if (callback != null && !callback.onMenuOpened(i2, panelFeatureState.menu)) {
+            closePanel(panelFeatureState, true);
+            return;
+        }
+        WindowManager windowManager = (WindowManager) this.mContext.getSystemService("window");
+        if (windowManager == null || !preparePanel(panelFeatureState, keyEvent)) {
+            return;
+        }
+        ListMenuDecorView listMenuDecorView = panelFeatureState.decorView;
+        if (listMenuDecorView != null && !panelFeatureState.refreshDecorView) {
+            View view = panelFeatureState.createdPanelView;
+            if (view != null && (layoutParams = view.getLayoutParams()) != null && layoutParams.width == -1) {
+                i = -1;
+            }
+            panelFeatureState.isHandled = false;
+            WindowManager.LayoutParams layoutParams2 = new WindowManager.LayoutParams(i, -2, 0, 0, 1002, 8519680, -3);
+            layoutParams2.gravity = panelFeatureState.gravity;
+            layoutParams2.windowAnimations = panelFeatureState.windowAnimations;
+            windowManager.addView(panelFeatureState.decorView, layoutParams2);
+            panelFeatureState.isOpen = true;
+            if (i2 != 0) {
+                updateBackInvokedCallbackState();
+                return;
+            }
+            return;
+        }
+        ExpandedMenuView expandedMenuView = null;
+        if (listMenuDecorView == null) {
+            initWindowDecorActionBar();
+            ActionBar actionBar = this.mActionBar;
+            Context themedContext = actionBar != null ? actionBar.getThemedContext() : null;
+            if (themedContext == null) {
+                themedContext = this.mContext;
+            }
+            TypedValue typedValue = new TypedValue();
+            Resources.Theme themeNewTheme = themedContext.getResources().newTheme();
+            themeNewTheme.setTo(themedContext.getTheme());
+            themeNewTheme.resolveAttribute(com.android.systemui.R.attr.actionBarPopupTheme, typedValue, true);
+            int i3 = typedValue.resourceId;
+            if (i3 != 0) {
+                themeNewTheme.applyStyle(i3, true);
+            }
+            themeNewTheme.resolveAttribute(com.android.systemui.R.attr.panelMenuListTheme, typedValue, true);
+            int i4 = typedValue.resourceId;
+            if (i4 != 0) {
+                themeNewTheme.applyStyle(i4, true);
+            } else {
+                themeNewTheme.applyStyle(2132018762, true);
+            }
+            ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(themedContext, 0);
+            contextThemeWrapper.getTheme().setTo(themeNewTheme);
+            panelFeatureState.listPresenterContext = contextThemeWrapper;
+            TypedArray typedArrayObtainStyledAttributes = contextThemeWrapper.obtainStyledAttributes(R$styleable.AppCompatTheme);
+            panelFeatureState.background = typedArrayObtainStyledAttributes.getResourceId(102, 0);
+            panelFeatureState.windowAnimations = typedArrayObtainStyledAttributes.getResourceId(8, 0);
+            typedArrayObtainStyledAttributes.recycle();
+            panelFeatureState.decorView = new ListMenuDecorView(panelFeatureState.listPresenterContext);
+            panelFeatureState.gravity = 81;
+        } else if (panelFeatureState.refreshDecorView && listMenuDecorView.getChildCount() > 0) {
+            panelFeatureState.decorView.removeAllViews();
+        }
+        View view2 = panelFeatureState.createdPanelView;
+        if (view2 == null) {
+            if (panelFeatureState.menu != null) {
+                if (this.mPanelMenuPresenterCallback == null) {
+                    this.mPanelMenuPresenterCallback = new PanelMenuPresenterCallback();
+                }
+                PanelMenuPresenterCallback panelMenuPresenterCallback = this.mPanelMenuPresenterCallback;
+                if (panelFeatureState.menu != null) {
+                    if (panelFeatureState.listMenuPresenter == null) {
+                        ListMenuPresenter listMenuPresenter = new ListMenuPresenter(panelFeatureState.listPresenterContext, com.android.systemui.R.layout.sesl_list_menu_item_layout);
+                        panelFeatureState.listMenuPresenter = listMenuPresenter;
+                        listMenuPresenter.mCallback = panelMenuPresenterCallback;
+                        MenuBuilder menuBuilder = panelFeatureState.menu;
+                        menuBuilder.addMenuPresenter(listMenuPresenter, menuBuilder.mContext);
+                    }
+                    ListMenuPresenter listMenuPresenter2 = panelFeatureState.listMenuPresenter;
+                    ListMenuDecorView listMenuDecorView2 = panelFeatureState.decorView;
+                    if (listMenuPresenter2.mMenuView == null) {
+                        listMenuPresenter2.mMenuView = (ExpandedMenuView) listMenuPresenter2.mInflater.inflate(com.android.systemui.R.layout.abc_expanded_menu_layout, (ViewGroup) listMenuDecorView2, false);
+                        if (listMenuPresenter2.mAdapter == null) {
+                            listMenuPresenter2.mAdapter = listMenuPresenter2.new MenuAdapter();
+                        }
+                        listMenuPresenter2.mMenuView.setAdapter((ListAdapter) listMenuPresenter2.mAdapter);
+                        listMenuPresenter2.mMenuView.setOnItemClickListener(listMenuPresenter2);
+                    }
+                    expandedMenuView = listMenuPresenter2.mMenuView;
+                }
+                panelFeatureState.shownPanelView = expandedMenuView;
+                if (expandedMenuView != null) {
+                }
+            }
+            panelFeatureState.refreshDecorView = true;
+            return;
+        }
+        panelFeatureState.shownPanelView = view2;
+        if (panelFeatureState.shownPanelView != null) {
+            if (panelFeatureState.createdPanelView == null) {
+                ListMenuPresenter listMenuPresenter3 = panelFeatureState.listMenuPresenter;
+                if (listMenuPresenter3.mAdapter == null) {
+                    listMenuPresenter3.mAdapter = listMenuPresenter3.new MenuAdapter();
+                }
+            }
+            ViewGroup.LayoutParams layoutParams3 = panelFeatureState.shownPanelView.getLayoutParams();
+            if (layoutParams3 == null) {
+                layoutParams3 = new ViewGroup.LayoutParams(-2, -2);
+            }
+            panelFeatureState.decorView.setBackgroundResource(panelFeatureState.background);
+            ViewParent parent = panelFeatureState.shownPanelView.getParent();
+            if (parent instanceof ViewGroup) {
+                ((ViewGroup) parent).removeView(panelFeatureState.shownPanelView);
+            }
+            panelFeatureState.decorView.addView(panelFeatureState.shownPanelView, layoutParams3);
+            if (!panelFeatureState.shownPanelView.hasFocus()) {
+                panelFeatureState.shownPanelView.requestFocus();
+            }
+        }
+        panelFeatureState.refreshDecorView = true;
+        return;
+        i = -2;
+        panelFeatureState.isHandled = false;
+        WindowManager.LayoutParams layoutParams22 = new WindowManager.LayoutParams(i, -2, 0, 0, 1002, 8519680, -3);
+        layoutParams22.gravity = panelFeatureState.gravity;
+        layoutParams22.windowAnimations = panelFeatureState.windowAnimations;
+        windowManager.addView(panelFeatureState.decorView, layoutParams22);
+        panelFeatureState.isOpen = true;
+        if (i2 != 0) {
+        }
     }
 
     public final boolean performPanelShortcut(PanelFeatureState panelFeatureState, int i, KeyEvent keyEvent) {
@@ -1852,20 +2296,125 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
         return false;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:62:0x00d3, code lost:
-    
-        if (r13.menu == null) goto L81;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00d6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean preparePanel(androidx.appcompat.app.AppCompatDelegateImpl.PanelFeatureState r13, android.view.KeyEvent r14) {
-        /*
-            Method dump skipped, instructions count: 368
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.app.AppCompatDelegateImpl.preparePanel(androidx.appcompat.app.AppCompatDelegateImpl$PanelFeatureState, android.view.KeyEvent):boolean");
+    public final boolean preparePanel(PanelFeatureState panelFeatureState, KeyEvent keyEvent) {
+        DecorContentParent decorContentParent;
+        Resources.Theme themeNewTheme;
+        DecorContentParent decorContentParent2;
+        DecorContentParent decorContentParent3;
+        if (!this.mDestroyed) {
+            if (panelFeatureState.isPrepared) {
+                return true;
+            }
+            PanelFeatureState panelFeatureState2 = this.mPreparedPanel;
+            if (panelFeatureState2 != null && panelFeatureState2 != panelFeatureState) {
+                closePanel(panelFeatureState2, false);
+            }
+            Window.Callback callback = this.mWindow.getCallback();
+            int i = panelFeatureState.featureId;
+            if (callback != null) {
+                panelFeatureState.createdPanelView = callback.onCreatePanelView(i);
+            }
+            boolean z = i == 0 || i == 108;
+            if (z && (decorContentParent3 = this.mDecorContentParent) != null) {
+                ActionBarOverlayLayout actionBarOverlayLayout = (ActionBarOverlayLayout) decorContentParent3;
+                actionBarOverlayLayout.pullChildren();
+                actionBarOverlayLayout.mDecorToolbar.mMenuPrepared = true;
+            }
+            if (panelFeatureState.createdPanelView == null && (!z || !(this.mActionBar instanceof ToolbarActionBar))) {
+                MenuBuilder menuBuilder = panelFeatureState.menu;
+                if (menuBuilder == null || panelFeatureState.refreshMenuContent) {
+                    if (menuBuilder == null) {
+                        Context context = this.mContext;
+                        if ((i == 0 || i == 108) && this.mDecorContentParent != null) {
+                            TypedValue typedValue = new TypedValue();
+                            Resources.Theme theme = context.getTheme();
+                            theme.resolveAttribute(com.android.systemui.R.attr.actionBarTheme, typedValue, true);
+                            if (typedValue.resourceId != 0) {
+                                themeNewTheme = context.getResources().newTheme();
+                                themeNewTheme.setTo(theme);
+                                themeNewTheme.applyStyle(typedValue.resourceId, true);
+                                themeNewTheme.resolveAttribute(com.android.systemui.R.attr.actionBarWidgetTheme, typedValue, true);
+                            } else {
+                                theme.resolveAttribute(com.android.systemui.R.attr.actionBarWidgetTheme, typedValue, true);
+                                themeNewTheme = null;
+                            }
+                            if (typedValue.resourceId != 0) {
+                                if (themeNewTheme == null) {
+                                    themeNewTheme = context.getResources().newTheme();
+                                    themeNewTheme.setTo(theme);
+                                }
+                                themeNewTheme.applyStyle(typedValue.resourceId, true);
+                            }
+                            if (themeNewTheme != null) {
+                                ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, 0);
+                                contextThemeWrapper.getTheme().setTo(themeNewTheme);
+                                context = contextThemeWrapper;
+                            }
+                        }
+                        MenuBuilder menuBuilder2 = new MenuBuilder(context);
+                        menuBuilder2.mCallback = this;
+                        MenuBuilder menuBuilder3 = panelFeatureState.menu;
+                        if (menuBuilder2 != menuBuilder3) {
+                            if (menuBuilder3 != null) {
+                                menuBuilder3.removeMenuPresenter(panelFeatureState.listMenuPresenter);
+                            }
+                            panelFeatureState.menu = menuBuilder2;
+                            ListMenuPresenter listMenuPresenter = panelFeatureState.listMenuPresenter;
+                            if (listMenuPresenter != null) {
+                                menuBuilder2.addMenuPresenter(listMenuPresenter, menuBuilder2.mContext);
+                            }
+                        }
+                        if (panelFeatureState.menu != null) {
+                            if (z && this.mDecorContentParent != null) {
+                                if (this.mActionMenuPresenterCallback == null) {
+                                    this.mActionMenuPresenterCallback = new ActionMenuPresenterCallback();
+                                }
+                                ((ActionBarOverlayLayout) this.mDecorContentParent).setMenu(panelFeatureState.menu, this.mActionMenuPresenterCallback);
+                            }
+                            panelFeatureState.menu.stopDispatchingItemsChanged();
+                            if (callback.onCreatePanelMenu(i, panelFeatureState.menu)) {
+                                panelFeatureState.refreshMenuContent = false;
+                            } else {
+                                MenuBuilder menuBuilder4 = panelFeatureState.menu;
+                                if (menuBuilder4 != null) {
+                                    if (menuBuilder4 != null) {
+                                        menuBuilder4.removeMenuPresenter(panelFeatureState.listMenuPresenter);
+                                    }
+                                    panelFeatureState.menu = null;
+                                }
+                                if (z && (decorContentParent = this.mDecorContentParent) != null) {
+                                    ((ActionBarOverlayLayout) decorContentParent).setMenu(null, this.mActionMenuPresenterCallback);
+                                }
+                            }
+                        }
+                    }
+                }
+                panelFeatureState.menu.stopDispatchingItemsChanged();
+                Bundle bundle = panelFeatureState.frozenActionViewState;
+                if (bundle != null) {
+                    panelFeatureState.menu.restoreActionViewStates(bundle);
+                    panelFeatureState.frozenActionViewState = null;
+                }
+                if (!callback.onPreparePanel(0, panelFeatureState.createdPanelView, panelFeatureState.menu)) {
+                    if (z && (decorContentParent2 = this.mDecorContentParent) != null) {
+                        ((ActionBarOverlayLayout) decorContentParent2).setMenu(null, this.mActionMenuPresenterCallback);
+                    }
+                    panelFeatureState.menu.startDispatchingItemsChanged();
+                    return false;
+                }
+                panelFeatureState.menu.setQwertyMode(KeyCharacterMap.load(keyEvent != null ? keyEvent.getDeviceId() : -1).getKeyboardType() != 1);
+                panelFeatureState.menu.startDispatchingItemsChanged();
+            }
+            panelFeatureState.isPrepared = true;
+            panelFeatureState.isHandled = false;
+            this.mPreparedPanel = panelFeatureState;
+            return true;
+        }
+        return false;
     }
 
     @Override // androidx.appcompat.app.AppCompatDelegate
@@ -1987,7 +2536,7 @@ public class AppCompatDelegateImpl extends AppCompatDelegate implements MenuBuil
             ?? r1 = new OnBackInvokedCallback() { // from class: androidx.appcompat.app.AppCompatDelegateImpl$Api33Impl$$ExternalSyntheticLambda0
                 @Override // android.window.OnBackInvokedCallback
                 public final void onBackInvoked() {
-                    AppCompatDelegateImpl.this.onBackPressed();
+                    this.f$0.onBackPressed();
                 }
             };
             onBackInvokedDispatcher.registerOnBackInvokedCallback(1000000, r1);

@@ -56,6 +56,7 @@ public final class Flags {
     public static final String FLAG_SINGLE_HOP_SCREENSHOT = "com.android.graphics.surfaceflinger.flags.single_hop_screenshot";
     public static final String FLAG_SKIP_INVISIBLE_WINDOWS_IN_INPUT = "com.android.graphics.surfaceflinger.flags.skip_invisible_windows_in_input";
     public static final String FLAG_STABLE_EDID_IDS = "com.android.graphics.surfaceflinger.flags.stable_edid_ids";
+    public static final String FLAG_STOP_LAYER = "com.android.graphics.surfaceflinger.flags.stop_layer";
     public static final String FLAG_SYNCED_RESOLUTION_SWITCH = "com.android.graphics.surfaceflinger.flags.synced_resolution_switch";
     public static final String FLAG_TRUE_HDR_SCREENSHOTS = "com.android.graphics.surfaceflinger.flags.true_hdr_screenshots";
     public static final String FLAG_USE_KNOWN_REFRESH_RATE_FOR_FPS_CONSISTENCY = "com.android.graphics.surfaceflinger.flags.use_known_refresh_rate_for_fps_consistency";
@@ -277,6 +278,10 @@ public final class Flags {
 
     public static boolean stableEdidIds() {
         return FEATURE_FLAGS.stableEdidIds();
+    }
+
+    public static boolean stopLayer() {
+        return FEATURE_FLAGS.stopLayer();
     }
 
     public static boolean syncedResolutionSwitch() {

@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LeakDetector implements Dumpable {
     public static final boolean ENABLED = Build.IS_DEBUGGABLE;
@@ -44,12 +43,10 @@ public class LeakDetector implements Dumpable {
             this.mTrackedCollections.dump(indentingPrintWriter, new Predicate() { // from class: com.android.systemui.util.leak.LeakDetector$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean lambda$dump$0;
                     Collection collection = (Collection) obj;
                     switch (i) {
                         case 0:
-                            lambda$dump$0 = LeakDetector.lambda$dump$0(collection);
-                            return lambda$dump$0;
+                            return LeakDetector.lambda$dump$0(collection);
                         default:
                             return TrackedObjects.isTrackedObject(collection);
                     }
@@ -63,12 +60,10 @@ public class LeakDetector implements Dumpable {
             this.mTrackedCollections.dump(indentingPrintWriter, new Predicate() { // from class: com.android.systemui.util.leak.LeakDetector$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean lambda$dump$0;
                     Collection collection = (Collection) obj;
                     switch (i2) {
                         case 0:
-                            lambda$dump$0 = LeakDetector.lambda$dump$0(collection);
-                            return lambda$dump$0;
+                            return LeakDetector.lambda$dump$0(collection);
                         default:
                             return TrackedObjects.isTrackedObject(collection);
                     }

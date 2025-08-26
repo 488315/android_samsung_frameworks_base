@@ -2,7 +2,6 @@ package com.android.keyguard;
 
 import android.telecom.TelecomManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class EmergencyButtonController$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -27,7 +26,7 @@ public final /* synthetic */ class EmergencyButtonController$$ExternalSyntheticL
                 emergencyButtonController.mMainExecutor.execute(new Runnable() { // from class: com.android.keyguard.EmergencyButtonController$$ExternalSyntheticLambda9
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EmergencyButtonController.$r8$lambda$e6ceecPxW3wEM4fHjkBzcKaihjE(EmergencyButtonController.this, z);
+                        EmergencyButtonController.$r8$lambda$e6ceecPxW3wEM4fHjkBzcKaihjE(emergencyButtonController, z);
                     }
                 });
                 break;

@@ -9,11 +9,18 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
+import android.icu.util.ULocale;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.util.Printer;
+import android.util.Xml;
+import android.view.inputmethod.InputMethodSubtype;
+import com.android.internal.R;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,17 +81,222 @@ public final class InputMethodInfo implements Parcelable {
         this(context, resolveInfo, null);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:103:0x0288  */
+    /* JADX WARN: Code restructure failed: missing block: B:65:0x01c2, code lost:
+    
+        r17 = r14;
+        r9 = 0;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:66:0x01c5, code lost:
+    
+        if (r18 == null) goto L68;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:67:0x01c7, code lost:
+    
+        r18.close();
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:69:0x01ce, code lost:
+    
+        if (r5.size() != 0) goto L71;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:70:0x01d0, code lost:
+    
+        r1 = false;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:71:0x01d2, code lost:
+    
+        r1 = r23;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:72:0x01d4, code lost:
+    
+        if (r30 == null) goto L80;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:73:0x01d6, code lost:
+    
+        r4 = r30.size();
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:74:0x01da, code lost:
+    
+        if (r9 >= r4) goto L123;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:75:0x01dc, code lost:
+    
+        r8 = r30.get(r9);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:76:0x01e6, code lost:
+    
+        if (r5.contains(r8) != false) goto L78;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:77:0x01e8, code lost:
+    
+        r5.add(r8);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:78:0x01ec, code lost:
+    
+        android.util.Slog.w(android.view.inputmethod.InputMethodInfo.TAG, "Duplicated subtype definition found: " + r8.getLocale() + ", " + r8.getMode());
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:79:0x020f, code lost:
+    
+        r9 = r9 + 1;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:80:0x0212, code lost:
+    
+        r27.mSubtypes = new android.view.inputmethod.InputMethodSubtypeArray(r5);
+        r27.mSettingsActivityName = r12;
+        r27.mLanguageSettingsActivityName = r13;
+        r27.mStylusHandwritingSettingsActivityAttr = r15;
+        r27.mIsDefaultResId = r6;
+        r27.mIsAuxIme = r1;
+        r27.mSupportsSwitchingToNextInputMethod = r11;
+        r27.mInlineSuggestionsEnabled = r7;
+        r27.mSupportsInlineSuggestionsWithTouchExploration = r3;
+        r27.mSuppressesSpellChecker = r17;
+        r27.mShowInInputMethodPicker = r15;
+        r27.mIsVrOnly = r15;
+        r27.mIsVirtualDeviceOnly = r14;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:81:0x0239, code lost:
+    
+        return;
+     */
+    /* JADX WARN: Removed duplicated region for block: B:102:0x0288  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public InputMethodInfo(android.content.Context r28, android.content.pm.ResolveInfo r29, java.util.List<android.view.inputmethod.InputMethodSubtype> r30) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
-        /*
-            Method dump skipped, instructions count: 652
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.inputmethod.InputMethodInfo.<init>(android.content.Context, android.content.pm.ResolveInfo, java.util.List):void");
+    public InputMethodInfo(Context context, ResolveInfo resolveInfo, List<InputMethodSubtype> list) throws Throwable {
+        XmlResourceParser xmlResourceParser;
+        ServiceInfo serviceInfo;
+        XmlResourceParser xmlResourceParser2;
+        int next;
+        String string;
+        this.mService = resolveInfo;
+        ServiceInfo serviceInfo2 = resolveInfo.serviceInfo;
+        this.mId = computeId(resolveInfo);
+        this.mForceDefault = false;
+        PackageManager packageManager = context.getPackageManager();
+        ArrayList arrayList = new ArrayList();
+        try {
+            XmlResourceParser xmlResourceParserLoadXmlMetaData = serviceInfo2.loadXmlMetaData(packageManager, InputMethod.SERVICE_META_DATA);
+            try {
+                try {
+                    if (xmlResourceParserLoadXmlMetaData == null) {
+                        throw new XmlPullParserException("No android.view.im meta-data");
+                    }
+                    try {
+                        try {
+                            Resources resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo2.applicationInfo);
+                            AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
+                            do {
+                                next = xmlResourceParserLoadXmlMetaData.next();
+                                if (next == 1) {
+                                    break;
+                                }
+                            } while (next != 2);
+                            if (!"input-method".equals(xmlResourceParserLoadXmlMetaData.getName())) {
+                                throw new XmlPullParserException("Meta-data does not start with input-method tag");
+                            }
+                            TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.InputMethod);
+                            String string2 = typedArrayObtainAttributes.getString(2);
+                            if (Flags.imeSwitcherRevampApi()) {
+                                try {
+                                    try {
+                                        string = typedArrayObtainAttributes.getString(13);
+                                    } catch (PackageManager.NameNotFoundException | IndexOutOfBoundsException | NumberFormatException unused) {
+                                        serviceInfo = serviceInfo2;
+                                        xmlResourceParser = xmlResourceParserLoadXmlMetaData;
+                                        try {
+                                            throw new XmlPullParserException("Unable to create context for: " + serviceInfo.packageName);
+                                        } catch (Throwable th) {
+                                            th = th;
+                                            if (xmlResourceParser != null) {
+                                                xmlResourceParser.close();
+                                            }
+                                            throw th;
+                                        }
+                                    }
+                                } catch (Throwable th2) {
+                                    th = th2;
+                                    xmlResourceParser = xmlResourceParserLoadXmlMetaData;
+                                    if (xmlResourceParser != null) {
+                                    }
+                                    throw th;
+                                }
+                            } else {
+                                string = null;
+                            }
+                            if ((serviceInfo2.name != null && serviceInfo2.name.length() > 1000) || ((string2 != null && string2.length() > 1000) || (string != null && string.length() > 1000))) {
+                                throw new XmlPullParserException("Activity name exceeds maximum of 1000 characters");
+                            }
+                            boolean z = typedArrayObtainAttributes.getBoolean(4, false);
+                            boolean z2 = typedArrayObtainAttributes.getBoolean(11, false);
+                            int resourceId = typedArrayObtainAttributes.getResourceId(1, 0);
+                            boolean z3 = typedArrayObtainAttributes.getBoolean(3, false);
+                            xmlResourceParser2 = xmlResourceParserLoadXmlMetaData;
+                            try {
+                                boolean z4 = typedArrayObtainAttributes.getBoolean(5, false);
+                                boolean z5 = typedArrayObtainAttributes.getBoolean(9, false);
+                                boolean z6 = typedArrayObtainAttributes.getBoolean(6, false);
+                                boolean z7 = typedArrayObtainAttributes.getBoolean(7, true);
+                                this.mHandledConfigChanges = typedArrayObtainAttributes.getInt(0, 0);
+                                this.mSupportsStylusHandwriting = typedArrayObtainAttributes.getBoolean(8, false);
+                                this.mSupportsConnectionlessStylusHandwriting = typedArrayObtainAttributes.getBoolean(12, false);
+                                String string3 = typedArrayObtainAttributes.getString(10);
+                                typedArrayObtainAttributes.recycle();
+                                int depth = xmlResourceParser2.getDepth();
+                                boolean z8 = true;
+                                while (true) {
+                                    int next2 = xmlResourceParser2.next();
+                                    if ((next2 == 3 && xmlResourceParser2.getDepth() <= depth) || next2 == 1) {
+                                        break;
+                                    }
+                                    if (next2 == 2) {
+                                        if (!"subtype".equals(xmlResourceParser2.getName())) {
+                                            throw new XmlPullParserException("Meta-data in input-method does not start with subtype tag");
+                                        }
+                                        TypedArray typedArrayObtainAttributes2 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.InputMethod_Subtype);
+                                        Resources resources = resourcesForApplication;
+                                        String string4 = typedArrayObtainAttributes2.getString(10);
+                                        String string5 = typedArrayObtainAttributes2.getString(11);
+                                        AttributeSet attributeSet = attributeSetAsAttributeSet;
+                                        int i = depth;
+                                        boolean z9 = z6;
+                                        InputMethodSubtype inputMethodSubtypeBuild = new InputMethodSubtype.InputMethodSubtypeBuilder().setSubtypeNameResId(typedArrayObtainAttributes2.getResourceId(0, 0)).setSubtypeIconResId(typedArrayObtainAttributes2.getResourceId(1, 0)).setPhysicalKeyboardHint(string4 == null ? null : new ULocale(string4), string5 == null ? "" : string5).setLanguageTag(typedArrayObtainAttributes2.getString(9)).setSubtypeLocale(typedArrayObtainAttributes2.getString(2)).setSubtypeMode(typedArrayObtainAttributes2.getString(3)).setSubtypeExtraValue(typedArrayObtainAttributes2.getString(4)).setIsAuxiliary(typedArrayObtainAttributes2.getBoolean(5, false)).setOverridesImplicitlyEnabledSubtype(typedArrayObtainAttributes2.getBoolean(6, false)).setSubtypeId(typedArrayObtainAttributes2.getInt(7, 0)).setIsAsciiCapable(typedArrayObtainAttributes2.getBoolean(8, false)).build();
+                                        typedArrayObtainAttributes2.recycle();
+                                        z8 = inputMethodSubtypeBuild.isAuxiliary() ? z8 : false;
+                                        arrayList.add(inputMethodSubtypeBuild);
+                                        z6 = z9;
+                                        resourcesForApplication = resources;
+                                        attributeSetAsAttributeSet = attributeSet;
+                                        depth = i;
+                                    }
+                                }
+                            } catch (PackageManager.NameNotFoundException | IndexOutOfBoundsException | NumberFormatException unused2) {
+                                serviceInfo = serviceInfo2;
+                                xmlResourceParser = xmlResourceParser2;
+                                throw new XmlPullParserException("Unable to create context for: " + serviceInfo.packageName);
+                            }
+                        } catch (Throwable th3) {
+                            th = th3;
+                            xmlResourceParser = xmlResourceParserLoadXmlMetaData;
+                            if (xmlResourceParser != null) {
+                            }
+                            throw th;
+                        }
+                    } catch (PackageManager.NameNotFoundException | IndexOutOfBoundsException | NumberFormatException unused3) {
+                        serviceInfo = serviceInfo2;
+                        xmlResourceParser2 = xmlResourceParserLoadXmlMetaData;
+                    }
+                } catch (PackageManager.NameNotFoundException | IndexOutOfBoundsException | NumberFormatException unused4) {
+                }
+            } catch (Throwable th4) {
+                th = th4;
+            }
+        } catch (PackageManager.NameNotFoundException | IndexOutOfBoundsException | NumberFormatException unused5) {
+            serviceInfo = serviceInfo2;
+            xmlResourceParser = null;
+        } catch (Throwable th5) {
+            th = th5;
+            xmlResourceParser = null;
+        }
     }
 
     public InputMethodInfo(InputMethodInfo inputMethodInfo) {

@@ -6,7 +6,6 @@ import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyFrameworkInitializer;
-import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.aidl.IFeatureProvisioningCallback;
 import android.telephony.ims.aidl.IImsConfigCallback;
 import android.telephony.ims.aidl.IRcsConfigCallback;
@@ -155,16 +154,16 @@ public class ProvisioningManager {
 
             @Override // android.telephony.ims.aidl.IImsConfigCallback
             public final void onIntConfigChanged(final int i, final int i2) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$Callback$CallbackBinder$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ProvisioningManager.Callback.CallbackBinder.this.lambda$onIntConfigChanged$0(i, i2);
+                            this.f$0.lambda$onIntConfigChanged$0(i, i2);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -175,16 +174,16 @@ public class ProvisioningManager {
 
             @Override // android.telephony.ims.aidl.IImsConfigCallback
             public final void onStringConfigChanged(final int i, final String str) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$Callback$CallbackBinder$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ProvisioningManager.Callback.CallbackBinder.this.lambda$onStringConfigChanged$1(i, str);
+                            this.f$0.lambda$onStringConfigChanged$1(i, str);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -226,16 +225,16 @@ public class ProvisioningManager {
 
             @Override // android.telephony.ims.aidl.IFeatureProvisioningCallback
             public final void onFeatureProvisioningChanged(final int i, final int i2, final boolean z) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$FeatureProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ProvisioningManager.FeatureProvisioningCallback.CallbackBinder.this.lambda$onFeatureProvisioningChanged$0(i, i2, z);
+                            this.f$0.lambda$onFeatureProvisioningChanged$0(i, i2, z);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -246,16 +245,16 @@ public class ProvisioningManager {
 
             @Override // android.telephony.ims.aidl.IFeatureProvisioningCallback
             public final void onRcsFeatureProvisioningChanged(final int i, final int i2, final boolean z) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$FeatureProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ProvisioningManager.FeatureProvisioningCallback.CallbackBinder.this.lambda$onRcsFeatureProvisioningChanged$1(i, i2, z);
+                            this.f$0.lambda$onRcsFeatureProvisioningChanged$1(i, i2, z);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -309,16 +308,16 @@ public class ProvisioningManager {
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
             public void onConfigurationChanged(final byte[] bArr) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this.lambda$onConfigurationChanged$0(bArr);
+                            this.f$0.lambda$onConfigurationChanged$0(bArr);
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -329,16 +328,16 @@ public class ProvisioningManager {
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
             public void onAutoConfigurationErrorReceived(final int i, final String str) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this.lambda$onAutoConfigurationErrorReceived$1(i, str);
+                            this.f$0.lambda$onAutoConfigurationErrorReceived$1(i, str);
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -349,16 +348,16 @@ public class ProvisioningManager {
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
             public void onConfigurationReset() {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this.lambda$onConfigurationReset$2();
+                            this.f$0.lambda$onConfigurationReset$2();
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -369,16 +368,16 @@ public class ProvisioningManager {
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
             public void onRemoved() {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this.lambda$onRemoved$3();
+                            this.f$0.lambda$onRemoved$3();
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -389,16 +388,16 @@ public class ProvisioningManager {
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
             public void onPreProvisioningReceived(final byte[] bArr) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this.lambda$onPreProvisioningReceived$4(bArr);
+                            this.f$0.lambda$onPreProvisioningReceived$4(bArr);
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -643,9 +642,9 @@ public class ProvisioningManager {
     }
 
     private static ITelephony getITelephony() {
-        ITelephony asInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
-        if (asInterface != null) {
-            return asInterface;
+        ITelephony iTelephonyAsInterface = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+        if (iTelephonyAsInterface != null) {
+            return iTelephonyAsInterface;
         }
         throw new RuntimeException("Could not find Telephony Service.");
     }

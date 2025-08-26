@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.phone.fragment;
 
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Debug;
@@ -23,6 +24,7 @@ import androidx.core.animation.AnimatorSet;
 import androidx.core.animation.ValueAnimator;
 import com.android.app.animation.Interpolators;
 import com.android.app.animation.InterpolatorsAndroidX;
+import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.BasicRune;
 import com.android.systemui.Dependency;
@@ -31,6 +33,7 @@ import com.android.systemui.R;
 import com.android.systemui.dagger.DaggerReferenceGlobalRootComponent;
 import com.android.systemui.demomode.DemoMode;
 import com.android.systemui.demomode.DemoModeController;
+import com.android.systemui.display.util.SamsungSecondScreenUtil;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.flags.RefactorFlagUtils;
 import com.android.systemui.keyguard.DisplayLifecycle;
@@ -42,12 +45,14 @@ import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.privacy.logging.PrivacyLogger;
 import com.android.systemui.privacy.logging.PrivacyLogger$$ExternalSyntheticLambda0;
+import com.android.systemui.scene.shared.flag.SceneContainerFlag;
 import com.android.systemui.shade.ShadeExpansionStateManager;
 import com.android.systemui.shade.domain.interactor.PanelExpansionInteractor;
 import com.android.systemui.slimindicator.SlimIndicatorViewMediatorImpl;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.OperatorNameViewController$Factory;
 import com.android.systemui.statusbar.chips.notification.shared.StatusBarNotifChips;
+import com.android.systemui.statusbar.core.StatusBarConnectedDisplays;
 import com.android.systemui.statusbar.core.StatusBarRootModernization;
 import com.android.systemui.statusbar.data.repository.DarkIconDispatcherStore;
 import com.android.systemui.statusbar.data.repository.DarkIconDispatcherStoreImpl;
@@ -58,6 +63,7 @@ import com.android.systemui.statusbar.events.SpringAnimatorSet;
 import com.android.systemui.statusbar.events.SystemStatusAnimationCallback;
 import com.android.systemui.statusbar.events.SystemStatusAnimationScheduler;
 import com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl;
+import com.android.systemui.statusbar.headsup.shared.StatusBarNoHunBehavior;
 import com.android.systemui.statusbar.layout.StatusBarBoundsProvider;
 import com.android.systemui.statusbar.layout.StatusBarBoundsProvider$layoutListener$1;
 import com.android.systemui.statusbar.notification.icon.ui.viewbinder.NotificationIconContainerStatusBarViewBinder;
@@ -75,8 +81,10 @@ import com.android.systemui.statusbar.phone.logo.CarrierLogoView;
 import com.android.systemui.statusbar.phone.ongoingactivity.ChipAnimationController;
 import com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityController;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallBackgroundContainer;
+import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallChronometer;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallController;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallController$$ExternalSyntheticLambda0;
+import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallControllerExt;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallListener;
 import com.android.systemui.statusbar.phone.ongoingcall.StatusBarChipsModernization;
 import com.android.systemui.statusbar.phone.ui.DarkIconManager;
@@ -112,7 +120,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CollapsedStatusBarFragment extends Fragment implements CommandQueue.Callbacks, StatusBarStateController.StateListener, SystemStatusAnimationCallback, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -171,14 +178,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     public final AnonymousClass7 mVolumeSettingObserver;
     public boolean mWaitingForWindowStateChangeAfterCameraLaunch;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment$5, reason: invalid class name */
     public class AnonymousClass5 implements StatusBarVisibilityChangeListener {
         public AnonymousClass5() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment$6, reason: invalid class name */
     public class AnonymousClass6 extends AnimatorListenerAdapter {
         public final /* synthetic */ boolean val$statusBarHidden;
@@ -202,7 +207,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             handler.postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment$6$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CollapsedStatusBarFragment.AnonymousClass6 anonymousClass6 = CollapsedStatusBarFragment.AnonymousClass6.this;
+                    CollapsedStatusBarFragment.AnonymousClass6 anonymousClass6 = this.f$0;
                     boolean z2 = z;
                     CollapsedStatusBarFragment collapsedStatusBarFragment = CollapsedStatusBarFragment.this;
                     if (z2) {
@@ -211,11 +216,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                         LogLevel logLevel = LogLevel.INFO;
                         PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(4);
                         LogBuffer logBuffer = privacyLogger.buffer;
-                        LogMessage obtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
-                        ((LogMessageImpl) obtain).int1 = 1;
-                        logBuffer.commit(obtain);
+                        LogMessage logMessageObtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
+                        ((LogMessageImpl) logMessageObtain).int1 = 1;
+                        logBuffer.commit(logMessageObtain);
                         StatusBarSystemEventDefaultAnimator statusBarSystemEventDefaultAnimator = collapsedStatusBarFragment.mSystemEventAnimator;
-                        statusBarSystemEventDefaultAnimator.onAlphaChanged.mo779invoke(Float.valueOf(1.0f));
+                        statusBarSystemEventDefaultAnimator.onAlphaChanged.mo781invoke(Float.valueOf(1.0f));
                     }
                     collapsedStatusBarFragment.mOngoingCallController.samsungExt.blockClickListener = false;
                     collapsedStatusBarFragment.mOngoingActivityController.blockClickListener = false;
@@ -224,7 +229,6 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OngoingActivityListenerImpl {
         public /* synthetic */ OngoingActivityListenerImpl(CollapsedStatusBarFragment collapsedStatusBarFragment, int i) {
             this();
@@ -293,7 +297,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         this.mStatusBarWindowStateListener = new StatusBarWindowStateListener() { // from class: com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment$$ExternalSyntheticLambda0
             @Override // com.android.systemui.statusbar.window.StatusBarWindowStateListener
             public final void onStatusBarWindowStateChanged(int i) {
-                CollapsedStatusBarFragment collapsedStatusBarFragment = CollapsedStatusBarFragment.this;
+                CollapsedStatusBarFragment collapsedStatusBarFragment = this.f$0;
                 collapsedStatusBarFragment.mWaitingForWindowStateChangeAfterCameraLaunch = false;
                 collapsedStatusBarFragment.updateStatusBarVisibilities(false);
             }
@@ -418,26 +422,73 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x00ce, code lost:
-    
-        if (r1.wereIconsJustHidden == false) goto L40;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final com.android.systemui.statusbar.phone.fragment.StatusBarVisibilityModel calculateInternalModel(com.android.systemui.statusbar.phone.fragment.StatusBarVisibilityModel r12) {
-        /*
-            Method dump skipped, instructions count: 284
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment.calculateInternalModel(com.android.systemui.statusbar.phone.fragment.StatusBarVisibilityModel):com.android.systemui.statusbar.phone.fragment.StatusBarVisibilityModel");
+    public final StatusBarVisibilityModel calculateInternalModel(StatusBarVisibilityModel statusBarVisibilityModel) {
+        int i = StatusBarRootModernization.$r8$clinit;
+        RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+        if (((CollapsedStatusBarFragmentExt) this.mSamsungExtLazy.get()).shouldHideIconsForNextAppWindow) {
+            StatusBarVisibilityModel.Companion.getClass();
+            return new StatusBarVisibilityModel(false, false, false, false, false, false);
+        }
+        boolean zShouldHeadsUpStatusBarBeVisible = this.mHomeStatusBarComponent.getHeadsUpAppearanceController().shouldHeadsUpStatusBarBeVisible();
+        int i2 = StatusBarNoHunBehavior.$r8$clinit;
+        int i3 = SceneContainerFlag.$r8$clinit;
+        KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.mKeyguardStateController;
+        keyguardStateControllerImpl.getClass();
+        if (!keyguardStateControllerImpl.mKeyguardFadingAway) {
+            if (getContext() != null) {
+                getContext().getDisplayId();
+            }
+            int i4 = StatusBarConnectedDisplays.$r8$clinit;
+            if (!this.mShadeExpansionStateManager.isClosed() && this.mPanelExpansionInteractor.shouldHideStatusBarIconsWhenExpanded()) {
+                if (this.mStatusBarStateController.getState() == 1) {
+                }
+                StatusBarVisibilityModel.Companion.getClass();
+                return new StatusBarVisibilityModel(false, false, false, false, false, false);
+            }
+            CollapsedStatusBarFragmentExt collapsedStatusBarFragmentExt = (CollapsedStatusBarFragmentExt) this.mSamsungExtLazy.get();
+            boolean z = this.mWaitingForWindowStateChangeAfterCameraLaunch;
+            boolean zBooleanValue = ((Boolean) this.mHomeStatusBarViewModel.isTransitioningFromLockscreenToOccluded.$$delegate_0.getValue()).booleanValue();
+            if (collapsedStatusBarFragmentExt.shouldHideIconsForNextAppWindow) {
+                collapsedStatusBarFragmentExt.printStatusBarInfoLog("shouldHideStatusBar(NextApp) waitingForWindowStateChangeAfterCameraLaunch:" + z);
+            } else {
+                Lazy lazy = collapsedStatusBarFragmentExt.keyguardStateControllerLazy;
+                boolean z2 = ((KeyguardStateControllerImpl) ((KeyguardStateController) lazy.get())).mOccluded;
+                boolean z3 = ((KeyguardStateControllerImpl) ((KeyguardStateController) lazy.get())).mShowing;
+                if (z2 && zBooleanValue) {
+                    collapsedStatusBarFragmentExt.printStatusBarInfoLog("shouldHideStatusBar(Occluded) isTransitioningFromLockscreenToOccluded:true");
+                } else if (!z3 || z2) {
+                    StatusBarHideIconsForBouncerManager statusBarHideIconsForBouncerManager = collapsedStatusBarFragmentExt.statusBarHideIconsForBouncerManager;
+                    boolean z4 = statusBarHideIconsForBouncerManager.hideIconsForBouncer;
+                    if (z4 || statusBarHideIconsForBouncerManager.wereIconsJustHidden) {
+                        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("hideIconsForBouncer=", " wereIconsJustHidden=", "StatusBarHideIconsForBouncerManager", z4, statusBarHideIconsForBouncerManager.wereIconsJustHidden);
+                    }
+                    if (statusBarHideIconsForBouncerManager.hideIconsForBouncer || statusBarHideIconsForBouncerManager.wereIconsJustHidden) {
+                    }
+                }
+            }
+            if (this.mStatusBarStateController.getState() == 1 || !zShouldHeadsUpStatusBarBeVisible) {
+                StatusBarVisibilityModel.Companion.getClass();
+                return new StatusBarVisibilityModel(false, false, false, false, false, false);
+            }
+        }
+        boolean z5 = statusBarVisibilityModel.showClock && !zShouldHeadsUpStatusBarBeVisible;
+        boolean zShouldVisible = this.mOngoingActivityController.shouldVisible();
+        int i5 = StatusBarNotifChips.$r8$clinit;
+        return new StatusBarVisibilityModel(z5, statusBarVisibilityModel.showNotificationIcons, this.mOngoingCallController.hasOngoingCall() && !zShouldHeadsUpStatusBarBeVisible, zShouldVisible && !zShouldHeadsUpStatusBarBeVisible, false, statusBarVisibilityModel.showSystemInfo);
     }
 
     public final int clockHiddenMode() {
         int i = StatusBarRootModernization.$r8$clinit;
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
-        return (this.mShadeExpansionStateManager.isClosed() || ((KeyguardStateControllerImpl) this.mKeyguardStateController).mShowing || this.mStatusBarStateController.isDozing()) ? 8 : 4;
+        CollapsedStatusBarFragmentExt collapsedStatusBarFragmentExt = (CollapsedStatusBarFragmentExt) this.mSamsungExtLazy.get();
+        boolean zIsClosed = this.mShadeExpansionStateManager.isClosed();
+        boolean zIsDozing = this.mStatusBarStateController.isDozing();
+        boolean z = ((KeyguardStateControllerImpl) ((KeyguardStateController) collapsedStatusBarFragmentExt.keyguardStateControllerLazy.get())).mShowing;
+        boolean z2 = ((SamsungSecondScreenUtil) collapsedStatusBarFragmentExt.secondScreenUtil.get()).isConnectedState;
+        if (zIsClosed || zIsDozing || z) {
+            return (!z2 || !zIsClosed || zIsDozing || z) ? 8 : 4;
+        }
+        return 4;
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
@@ -451,17 +502,17 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragmentLogger$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     LogMessage logMessage = (LogMessage) obj;
-                    return CollapsedStatusBarFragmentLogger.this.disableFlagsLogger.getDisableFlagsString(new DisableFlagsLogger.DisableState(logMessage.getInt1(), logMessage.getInt2()), null);
+                    return collapsedStatusBarFragmentLogger.disableFlagsLogger.getDisableFlagsString(new DisableFlagsLogger.DisableState(logMessage.getInt1(), logMessage.getInt2()), null);
                 }
             };
             LogBuffer logBuffer = collapsedStatusBarFragmentLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("CollapsedSbFragment", logLevel, function1, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("CollapsedSbFragment", logLevel, function1, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.int1 = disableState.disable1;
             logMessageImpl.int2 = disableState.disable2;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             StatusBarVisibilityModel.Companion.getClass();
             this.mLastSystemVisibility = StatusBarVisibilityModel.Companion.createModelFromFlags(i2, i3);
             updateStatusBarVisibilities(z);
@@ -509,11 +560,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     public final void hideCarrierLogo(boolean z, boolean z2) {
         if (this.mCarrierHomeLogoViewController != null) {
-            int clockHiddenMode = clockHiddenMode();
+            int iClockHiddenMode = clockHiddenMode();
             if (z2 || !this.mCarrierHomeLogoViewController.userSetup) {
-                clockHiddenMode = 8;
+                iClockHiddenMode = 8;
             }
-            animateHiddenState(this.mCarrierHomeLogoViewController.logoView, clockHiddenMode, z);
+            animateHiddenState(this.mCarrierHomeLogoViewController.logoView, iClockHiddenMode, z);
         }
     }
 
@@ -522,9 +573,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (this.mCarrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.CARRIER_LOGO_ON_HOME_SCREEN, slotIndex, new Object[0])) {
             ViewStub viewStub = (ViewStub) this.mStatusBar.findViewById(R.id.carrier_logo_container);
             if (viewStub != null) {
-                CarrierHomeLogoViewController create = this.mCarrierLogoViewControllerFactory.create(viewStub.inflate(), slotIndex);
-                this.mCarrierHomeLogoViewController = create;
-                create.init();
+                CarrierHomeLogoViewController carrierHomeLogoViewControllerCreate = this.mCarrierLogoViewControllerFactory.create(viewStub.inflate(), slotIndex);
+                this.mCarrierHomeLogoViewController = carrierHomeLogoViewControllerCreate;
+                carrierHomeLogoViewControllerCreate.init();
             }
             if (((KeyguardStateControllerImpl) this.mKeyguardStateController).mShowing) {
                 hideCarrierLogo(false, false);
@@ -622,25 +673,25 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         LogLevel logLevel = LogLevel.INFO;
         PrivacyLogger$$ExternalSyntheticLambda0 privacyLogger$$ExternalSyntheticLambda0 = new PrivacyLogger$$ExternalSyntheticLambda0(4);
         LogBuffer logBuffer = privacyLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).int1 = 0;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("PrivacyLog", logLevel, privacyLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).int1 = 0;
+        logBuffer.commit(logMessageObtain);
         final StatusBarSystemEventDefaultAnimator statusBarSystemEventDefaultAnimator = this.mSystemEventAnimator;
         statusBarSystemEventDefaultAnimator.getClass();
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 0.0f);
-        ofFloat.setDuration(AnimationUtil.Companion.getFrames(1));
-        ofFloat.setInterpolator(null);
-        ofFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$hideAnimatedViewWithAlpha$1$1
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 0.0f);
+        valueAnimatorOfFloat.setDuration(AnimationUtil.Companion.getFrames(1));
+        valueAnimatorOfFloat.setInterpolator(null);
+        valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.fragment.StatusBarSystemEventDefaultAnimator$hideAnimatedViewWithAlpha$1$1
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
             public final void onAnimationUpdate(Animator animator) {
-                StatusBarSystemEventDefaultAnimator.this.onAlphaChanged.mo779invoke((Float) ofFloat.getAnimatedValue());
+                statusBarSystemEventDefaultAnimator.onAlphaChanged.mo781invoke((Float) valueAnimatorOfFloat.getAnimatedValue());
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
     @Override // android.app.Fragment
-    public final void onResume() {
+    public final void onResume() throws Resources.NotFoundException {
         OngoingCallController.CallNotificationInfo callNotificationInfo;
         super.onResume();
         if (this.mHomeStatusBarComponent == null) {
@@ -658,6 +709,20 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         ongoingCallController.tearDownChipView();
         ongoingCallController.chipView = view;
         OngoingCallBackgroundContainer ongoingCallBackgroundContainer = (OngoingCallBackgroundContainer) view.findViewById(R.id.ongoing_call_chip_background);
+        OngoingCallChronometer ongoingCallChronometer = (OngoingCallChronometer) view.findViewById(R.id.ongoing_call_chip_time);
+        OngoingCallControllerExt ongoingCallControllerExt = ongoingCallController.samsungExt;
+        if (!Intrinsics.areEqual(ongoingCallControllerExt.timeView, ongoingCallChronometer)) {
+            ongoingCallControllerExt.timeView = ongoingCallChronometer;
+            if (ongoingCallChronometer != null) {
+                boolean z = ongoingCallControllerExt.isShowingOAChip;
+                if (ongoingCallChronometer.isShowingOAChip != z) {
+                    ongoingCallChronometer.isShowingOAChip = z;
+                    ongoingCallChronometer.requestLayout();
+                }
+                ongoingCallChronometer.indicatorGardenPresenter = ongoingCallControllerExt.indicatorGardenPresenter;
+                ongoingCallChronometer.slimIndicatorViewMediator = ongoingCallControllerExt.slimIndicatorViewMediator;
+            }
+        }
         if (ongoingCallBackgroundContainer != null) {
             ongoingCallBackgroundContainer.maxHeightFetcher = new OngoingCallController$$ExternalSyntheticLambda0(ongoingCallController, 1);
         }
@@ -695,9 +760,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     @Override // com.android.systemui.statusbar.events.SystemStatusAnimationCallback
     public final SpringAnimatorSet onSystemEventAnimationFinish(boolean z, boolean z2, boolean z3) {
-        SpringAnimatorSet onSystemEventAnimationFinish = this.mSystemEventAnimator.onSystemEventAnimationFinish(z, z2, z3);
-        onSystemEventAnimationFinish.addListener(new AnonymousClass6(z2));
-        return onSystemEventAnimationFinish;
+        SpringAnimatorSet springAnimatorSetOnSystemEventAnimationFinish = this.mSystemEventAnimator.onSystemEventAnimationFinish(z, z2, z3);
+        springAnimatorSetOnSystemEventAnimationFinish.addListener(new AnonymousClass6(z2));
+        return springAnimatorSetOnSystemEventAnimationFinish;
     }
 
     @Override // android.app.Fragment
@@ -722,9 +787,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (statusBarWindowController == null || (darkIconDispatcher = (DarkIconDispatcher) ((DarkIconDispatcherStoreImpl) this.mDarkIconDispatcherStore).forDisplay(displayId)) == null) {
             return;
         }
-        HomeStatusBarComponent create = this.mHomeStatusBarComponentFactory.create((PhoneStatusBarView) getView(), statusBarConfigurationController, statusBarWindowController, darkIconDispatcher);
-        this.mHomeStatusBarComponent = create;
-        ((DaggerReferenceGlobalRootComponent.HomeStatusBarComponentImpl) create).init();
+        HomeStatusBarComponent homeStatusBarComponentCreate = this.mHomeStatusBarComponentFactory.create((PhoneStatusBarView) getView(), statusBarConfigurationController, statusBarWindowController, darkIconDispatcher);
+        this.mHomeStatusBarComponent = homeStatusBarComponentCreate;
+        ((DaggerReferenceGlobalRootComponent.HomeStatusBarComponentImpl) homeStatusBarComponentCreate).init();
         ((ArrayMap) this.mStartableStates).clear();
         for (StatusBarBoundsProvider statusBarBoundsProvider : this.mHomeStatusBarComponent.getStartables()) {
             ((ArrayMap) this.mStartableStates).put(statusBarBoundsProvider, HomeStatusBarComponent$Startable$State.STARTING);
@@ -738,10 +803,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (bundle != null && bundle.containsKey("panel_state")) {
             this.mStatusBar.restoreHierarchyState(bundle.getSparseParcelableArray("panel_state"));
         }
-        DarkIconManager create2 = this.mDarkIconManagerFactory.create((LinearLayout) view.findViewById(R.id.statusIcons), StatusBarLocation.HOME, this.mHomeStatusBarComponent.getDarkIconDispatcher());
-        this.mDarkIconManager = create2;
-        create2.mShouldLog = true;
-        ((StatusBarIconControllerImpl) this.mStatusBarIconController).addIconGroup(create2);
+        DarkIconManager darkIconManagerCreate = this.mDarkIconManagerFactory.create((LinearLayout) view.findViewById(R.id.statusIcons), StatusBarLocation.HOME, this.mHomeStatusBarComponent.getDarkIconDispatcher());
+        this.mDarkIconManager = darkIconManagerCreate;
+        darkIconManagerCreate.mShouldLog = true;
+        ((StatusBarIconControllerImpl) this.mStatusBarIconController).addIconGroup(darkIconManagerCreate);
         this.mEndSideAlphaController = new MultiSourceMinAlphaController((LinearLayout) this.mStatusBar.findViewById(R.id.status_bar_end_side_content));
         this.mClockView = this.mStatusBar.findViewById(R.id.clock);
         this.mOngoingCallChip = this.mStatusBar.findViewById(R.id.ongoing_call_chip);
@@ -770,7 +835,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Float f = (Float) obj;
                 switch (i) {
                     case 0:
@@ -791,7 +856,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Float f = (Float) obj;
                 switch (i2) {
                     case 0:
@@ -806,7 +871,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }, false);
         this.mCarrierConfigTracker.addCallback((CarrierConfigTracker.CarrierConfigChangedListener) this.mCarrierConfigCallback);
         this.mCarrierConfigTracker.addDefaultDataSubscriptionChangedListener(this.mDefaultDataListener);
-        this.mHomeStatusBarViewModel = ((DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass123) this.mHomeStatusBarViewModelFactory).create(displayId);
+        this.mHomeStatusBarViewModel = ((DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass124) this.mHomeStatusBarViewModelFactory).create(displayId);
         ((HomeStatusBarViewBinderImpl) this.mHomeStatusBarViewBinder).bind(view.getContext().getDisplayId(), this.mStatusBar, this.mHomeStatusBarViewModel, null, null, this.mStatusBarVisibilityChangeListener);
         ((CollapsedStatusBarFragmentExt) this.mSamsungExtLazy.get()).updateRunnable = new CollapsedStatusBarFragment$$ExternalSyntheticLambda1(this);
         CollapsedStatusBarFragmentExt collapsedStatusBarFragmentExt = (CollapsedStatusBarFragmentExt) this.mSamsungExtLazy.get();
@@ -815,7 +880,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         this.mChipAnimationController = new ChipAnimationController(this.mStatusBar, this.mNotificationIconAreaController, this.mOngoingActivityController, new Function0() { // from class: com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Boolean.valueOf(((SlimIndicatorViewMediatorImpl) ((CollapsedStatusBarFragmentExt) CollapsedStatusBarFragment.this.mSamsungExtLazy.get()).slimIndicatorViewMediator).isLeftClockPosition());
+                return Boolean.valueOf(((SlimIndicatorViewMediatorImpl) ((CollapsedStatusBarFragmentExt) this.f$0.mSamsungExtLazy.get()).slimIndicatorViewMediator).isLeftClockPosition());
             }
         });
         this.mOngoingActivityController.ongoingActivityListener = new OngoingActivityListenerImpl(this, i);
@@ -898,9 +963,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     public final void updateStatusBarVisibilities(boolean z) {
         CollapsedStatusBarFragmentExt collapsedStatusBarFragmentExt = (CollapsedStatusBarFragmentExt) this.mSamsungExtLazy.get();
-        StatusBarVisibilityModel calculateInternalModel = calculateInternalModel(this.mLastSystemVisibility);
+        StatusBarVisibilityModel statusBarVisibilityModelCalculateInternalModel = calculateInternalModel(this.mLastSystemVisibility);
         collapsedStatusBarFragmentExt.updateStatusBarVisibilitiesCallers = Debug.getCallers(6);
-        if (((KeyguardStateControllerImpl) ((KeyguardStateController) collapsedStatusBarFragmentExt.keyguardStateControllerLazy.get())).mOccluded && (calculateInternalModel.showClock || calculateInternalModel.showNotificationIcons || calculateInternalModel.showOngoingCallChip || calculateInternalModel.showPrimaryOngoingActivityChip || calculateInternalModel.showSecondaryOngoingActivityChip || calculateInternalModel.showSystemInfo)) {
+        if (((KeyguardStateControllerImpl) ((KeyguardStateController) collapsedStatusBarFragmentExt.keyguardStateControllerLazy.get())).mOccluded && (statusBarVisibilityModelCalculateInternalModel.showClock || statusBarVisibilityModelCalculateInternalModel.showNotificationIcons || statusBarVisibilityModelCalculateInternalModel.showOngoingCallChip || statusBarVisibilityModelCalculateInternalModel.showPrimaryOngoingActivityChip || statusBarVisibilityModelCalculateInternalModel.showSecondaryOngoingActivityChip || statusBarVisibilityModelCalculateInternalModel.showSystemInfo)) {
             collapsedStatusBarFragmentExt.postUpdateStatusBarVisibility();
         } else {
             updateStatusBarVisibilitiesInner(z);
@@ -915,26 +980,26 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         int i = StatusBarRootModernization.$r8$clinit;
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
         StatusBarVisibilityModel statusBarVisibilityModel = this.mLastModifiedVisibility;
-        StatusBarVisibilityModel calculateInternalModel = calculateInternalModel(this.mLastSystemVisibility);
+        StatusBarVisibilityModel statusBarVisibilityModelCalculateInternalModel = calculateInternalModel(this.mLastSystemVisibility);
         CollapsedStatusBarFragmentLogger collapsedStatusBarFragmentLogger = this.mCollapsedStatusBarFragmentLogger;
         collapsedStatusBarFragmentLogger.getClass();
         LogLevel logLevel = LogLevel.INFO;
         CollapsedStatusBarFragmentLogger$$ExternalSyntheticLambda1 collapsedStatusBarFragmentLogger$$ExternalSyntheticLambda1 = new CollapsedStatusBarFragmentLogger$$ExternalSyntheticLambda1();
         LogBuffer logBuffer = collapsedStatusBarFragmentLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("CollapsedSbFragment", logLevel, collapsedStatusBarFragmentLogger$$ExternalSyntheticLambda1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-        boolean z2 = calculateInternalModel.showClock;
+        LogMessage logMessageObtain = logBuffer.obtain("CollapsedSbFragment", logLevel, collapsedStatusBarFragmentLogger$$ExternalSyntheticLambda1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+        boolean z2 = statusBarVisibilityModelCalculateInternalModel.showClock;
         logMessageImpl.bool1 = z2;
-        boolean z3 = calculateInternalModel.showNotificationIcons;
+        boolean z3 = statusBarVisibilityModelCalculateInternalModel.showNotificationIcons;
         logMessageImpl.bool2 = z3;
-        boolean z4 = calculateInternalModel.showPrimaryOngoingActivityChip;
+        boolean z4 = statusBarVisibilityModelCalculateInternalModel.showPrimaryOngoingActivityChip;
         logMessageImpl.bool3 = z4;
-        boolean z5 = calculateInternalModel.showSecondaryOngoingActivityChip;
+        boolean z5 = statusBarVisibilityModelCalculateInternalModel.showSecondaryOngoingActivityChip;
         logMessageImpl.int1 = z5 ? 1 : 0;
-        boolean z6 = calculateInternalModel.showSystemInfo;
+        boolean z6 = statusBarVisibilityModelCalculateInternalModel.showSystemInfo;
         logMessageImpl.bool4 = z6;
-        logBuffer.commit(obtain);
-        this.mLastModifiedVisibility = calculateInternalModel;
+        logBuffer.commit(logMessageObtain);
+        this.mLastModifiedVisibility = statusBarVisibilityModelCalculateInternalModel;
         if (z6 != statusBarVisibilityModel.showSystemInfo) {
             if (z6) {
                 showEndSideContent(z);
@@ -949,12 +1014,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                 multiSourceMinAlphaController.updateAlpha(0.0f, 2);
             }
         }
-        byte b = z3 != statusBarVisibilityModel.showNotificationIcons;
+        Object[] objArr = z3 != statusBarVisibilityModel.showNotificationIcons;
         boolean z7 = statusBarVisibilityModel.showOngoingCallChip;
-        boolean z8 = calculateInternalModel.showOngoingCallChip;
-        byte b2 = z8 != z7;
-        byte b3 = (z4 == statusBarVisibilityModel.showPrimaryOngoingActivityChip && z5 == statusBarVisibilityModel.showSecondaryOngoingActivityChip) ? false : true;
-        if (b2 != false && (view2 = this.mOngoingCallChip) != null && ((z8 && view2.getVisibility() != 0) || (!z8 && this.mOngoingCallChip.getVisibility() == 0))) {
+        boolean z8 = statusBarVisibilityModelCalculateInternalModel.showOngoingCallChip;
+        Object[] objArr2 = z8 != z7;
+        Object[] objArr3 = (z4 == statusBarVisibilityModel.showPrimaryOngoingActivityChip && z5 == statusBarVisibilityModel.showSecondaryOngoingActivityChip) ? false : true;
+        if (objArr2 != false && (view2 = this.mOngoingCallChip) != null && ((z8 && view2.getVisibility() != 0) || (!z8 && this.mOngoingCallChip.getVisibility() == 0))) {
             this.mClockView.setAlpha(1.0f);
             CarrierHomeLogoViewController carrierHomeLogoViewController = this.mCarrierHomeLogoViewController;
             if (carrierHomeLogoViewController != null && (carrierLogoView = carrierHomeLogoViewController.logoView) != null) {
@@ -962,7 +1027,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             }
             this.mNotificationIconAreaInner.setAlpha(0.0f);
         }
-        if (b != false || b3 != false || b2 != false) {
+        if (objArr != false || objArr3 != false || objArr2 != false) {
             updateNotificationIconAreaAndOngoingActivityChip(z);
         }
         if (z2 != statusBarVisibilityModel.showClock || ((view = this.mClockView) != null && view.getVisibility() != clockHiddenMode())) {
@@ -984,11 +1049,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }
         CollapsedStatusBarFragmentExt collapsedStatusBarFragmentExt = (CollapsedStatusBarFragmentExt) this.mSamsungExtLazy.get();
         collapsedStatusBarFragmentExt.getClass();
-        if (statusBarVisibilityModel.equals(calculateInternalModel)) {
+        if (statusBarVisibilityModel.equals(statusBarVisibilityModelCalculateInternalModel)) {
             return;
         }
         Log.d("CollapsedStatusBarFragmentExt", "prv:" + statusBarVisibilityModel);
-        Log.d("CollapsedStatusBarFragmentExt", "new:" + calculateInternalModel);
+        Log.d("CollapsedStatusBarFragmentExt", "new:" + statusBarVisibilityModelCalculateInternalModel);
         Log.d("CollapsedStatusBarFragmentExt", collapsedStatusBarFragmentExt.updateStatusBarVisibilitiesCallers);
     }
 }

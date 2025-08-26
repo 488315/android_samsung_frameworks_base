@@ -11,7 +11,7 @@ import com.android.internal.protolog.common.LogLevel;
 import java.util.Arrays;
 import java.util.HashSet;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class ProtoLog {
 
     @Deprecated
@@ -94,16 +94,12 @@ public class ProtoLog {
     }
 
     public static synchronized ProtoLogDataSource getSharedSingleInstanceDataSource() {
-        ProtoLogDataSource protoLogDataSource;
-        synchronized (ProtoLog.class) {
-            if (sDataSource == null) {
-                Producer.init(InitArguments.DEFAULTS);
-                sDataSource = new ProtoLogDataSource();
-                sDataSource.register(new DataSourceParams.Builder().setBufferExhaustedPolicy(0).build());
-            }
-            protoLogDataSource = sDataSource;
+        if (sDataSource == null) {
+            Producer.init(InitArguments.DEFAULTS);
+            sDataSource = new ProtoLogDataSource();
+            sDataSource.register(new DataSourceParams.Builder().setBufferExhaustedPolicy(0).build());
         }
-        return protoLogDataSource;
+        return sDataSource;
     }
 
     private static void logStringMessage(LogLevel logLevel, IProtoLogGroup iProtoLogGroup, String str, Object... objArr) {

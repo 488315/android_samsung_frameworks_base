@@ -1,6 +1,7 @@
 package com.google.android.setupcompat.template;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -14,7 +15,6 @@ import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupcompat.view.StatusBarBackgroundLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StatusBarMixin implements Mixin {
     public final View decorView;
@@ -22,22 +22,22 @@ public class StatusBarMixin implements Mixin {
     public final PartnerCustomizationLayout partnerCustomizationLayout;
     public final StatusBarBackgroundLayout statusBarLayout;
 
-    public StatusBarMixin(PartnerCustomizationLayout partnerCustomizationLayout, Window window, AttributeSet attributeSet, int i) {
+    public StatusBarMixin(PartnerCustomizationLayout partnerCustomizationLayout, Window window, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         this.partnerCustomizationLayout = partnerCustomizationLayout;
-        View findManagedViewById = partnerCustomizationLayout.findManagedViewById(R.id.suc_layout_status);
-        if (findManagedViewById == null) {
+        View viewFindManagedViewById = partnerCustomizationLayout.findManagedViewById(R.id.suc_layout_status);
+        if (viewFindManagedViewById == null) {
             throw new NullPointerException("sucLayoutStatus cannot be null in StatusBarMixin");
         }
-        if (findManagedViewById instanceof StatusBarBackgroundLayout) {
-            this.statusBarLayout = (StatusBarBackgroundLayout) findManagedViewById;
+        if (viewFindManagedViewById instanceof StatusBarBackgroundLayout) {
+            this.statusBarLayout = (StatusBarBackgroundLayout) viewFindManagedViewById;
         } else {
-            this.linearLayout = (LinearLayout) findManagedViewById;
+            this.linearLayout = (LinearLayout) viewFindManagedViewById;
         }
         View decorView = window.getDecorView();
         this.decorView = decorView;
         window.setStatusBarColor(0);
-        TypedArray obtainStyledAttributes = partnerCustomizationLayout.getContext().obtainStyledAttributes(attributeSet, R$styleable.SucStatusBarMixin, i, 0);
-        boolean z = obtainStyledAttributes.getBoolean(0, (decorView.getSystemUiVisibility() & 8192) == 8192);
+        TypedArray typedArrayObtainStyledAttributes = partnerCustomizationLayout.getContext().obtainStyledAttributes(attributeSet, R$styleable.SucStatusBarMixin, i, 0);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(0, (decorView.getSystemUiVisibility() & 8192) == 8192);
         if (partnerCustomizationLayout.shouldApplyPartnerResource()) {
             Context context = partnerCustomizationLayout.getContext();
             z = PartnerConfigHelper.get(context).getBoolean(context, PartnerConfig.CONFIG_LIGHT_STATUS_BAR, false);
@@ -47,8 +47,8 @@ public class StatusBarMixin implements Mixin {
         } else {
             decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() & (-8193));
         }
-        setStatusBarBackground(obtainStyledAttributes.getDrawable(1));
-        obtainStyledAttributes.recycle();
+        setStatusBarBackground(typedArrayObtainStyledAttributes.getDrawable(1));
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public final void setStatusBarBackground(Drawable drawable) {

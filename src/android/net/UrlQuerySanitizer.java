@@ -121,11 +121,11 @@ public class UrlQuerySanitizer {
             }
             StringBuilder sb = new StringBuilder(length);
             for (int i = 0; i < length; i++) {
-                char charAt = str.charAt(i);
-                if (!characterIsLegal(charAt)) {
-                    charAt = (this.mFlags & 1) != 0 ? ' ' : '_';
+                char cCharAt = str.charAt(i);
+                if (!characterIsLegal(cCharAt)) {
+                    cCharAt = (this.mFlags & 1) != 0 ? ' ' : '_';
                 }
-                sb.append(charAt);
+                sb.append(cCharAt);
             }
             return sb.toString();
         }
@@ -234,27 +234,27 @@ public class UrlQuerySanitizer {
     }
 
     public void parseUrl(String str) {
-        String str2;
-        int indexOf = str.indexOf(63);
-        if (indexOf >= 0) {
-            str2 = str.substring(indexOf + 1);
+        String strSubstring;
+        int iIndexOf = str.indexOf(63);
+        if (iIndexOf >= 0) {
+            strSubstring = str.substring(iIndexOf + 1);
         } else {
-            str2 = "";
+            strSubstring = "";
         }
-        parseQuery(str2);
+        parseQuery(strSubstring);
     }
 
     public void parseQuery(String str) {
         clear();
         StringTokenizer stringTokenizer = new StringTokenizer(str, "&");
         while (stringTokenizer.hasMoreElements()) {
-            String nextToken = stringTokenizer.nextToken();
-            if (nextToken.length() > 0) {
-                int indexOf = nextToken.indexOf(61);
-                if (indexOf < 0) {
-                    parseEntry(nextToken, "");
+            String strNextToken = stringTokenizer.nextToken();
+            if (strNextToken.length() > 0) {
+                int iIndexOf = strNextToken.indexOf(61);
+                if (iIndexOf < 0) {
+                    parseEntry(strNextToken, "");
                 } else {
-                    parseEntry(nextToken.substring(0, indexOf), nextToken.substring(indexOf + 1));
+                    parseEntry(strNextToken.substring(0, iIndexOf), strNextToken.substring(iIndexOf + 1));
                 }
             }
         }
@@ -306,12 +306,12 @@ public class UrlQuerySanitizer {
     }
 
     protected void parseEntry(String str, String str2) {
-        String unescape = unescape(str);
-        ValueSanitizer effectiveValueSanitizer = getEffectiveValueSanitizer(unescape);
+        String strUnescape = unescape(str);
+        ValueSanitizer effectiveValueSanitizer = getEffectiveValueSanitizer(strUnescape);
         if (effectiveValueSanitizer == null) {
             return;
         }
-        addSanitizedEntry(unescape, effectiveValueSanitizer.sanitize(unescape(str2)));
+        addSanitizedEntry(strUnescape, effectiveValueSanitizer.sanitize(unescape(str2)));
     }
 
     protected void addSanitizedEntry(String str, String str2) {
@@ -337,24 +337,24 @@ public class UrlQuerySanitizer {
         if (!matcher.find()) {
             return str;
         }
-        int start = matcher.start();
+        int iStart = matcher.start();
         int length = str.length();
         StringBuilder sb = new StringBuilder(length);
-        sb.append(str.substring(0, start));
-        while (start < length) {
-            char charAt = str.charAt(start);
-            if (charAt == '+') {
-                charAt = ' ';
-            } else if (charAt == '%' && (i = start + 2) < length) {
-                char charAt2 = str.charAt(start + 1);
-                char charAt3 = str.charAt(i);
-                if (isHexDigit(charAt2) && isHexDigit(charAt3)) {
-                    charAt = (char) ((decodeHexDigit(charAt2) * 16) + decodeHexDigit(charAt3));
-                    start = i;
+        sb.append(str.substring(0, iStart));
+        while (iStart < length) {
+            char cCharAt = str.charAt(iStart);
+            if (cCharAt == '+') {
+                cCharAt = ' ';
+            } else if (cCharAt == '%' && (i = iStart + 2) < length) {
+                char cCharAt2 = str.charAt(iStart + 1);
+                char cCharAt3 = str.charAt(i);
+                if (isHexDigit(cCharAt2) && isHexDigit(cCharAt3)) {
+                    cCharAt = (char) ((decodeHexDigit(cCharAt2) * 16) + decodeHexDigit(cCharAt3));
+                    iStart = i;
                 }
             }
-            sb.append(charAt);
-            start++;
+            sb.append(cCharAt);
+            iStart++;
         }
         return sb.toString();
     }

@@ -11,14 +11,12 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SecNotificationShadeWindowStateInteractor$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Flow $it;
     int label;
     final /* synthetic */ SecNotificationShadeWindowStateInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.domain.interactor.SecNotificationShadeWindowStateInteractor$2$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int I$0;
@@ -52,23 +50,24 @@ final class SecNotificationShadeWindowStateInteractor$2$1 extends SuspendLambda 
             	at jadx.core.utils.ErrorsCounter.error(ErrorsCounter.java:31)
             	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
             */
-        /* JADX WARN: Removed duplicated region for block: B:12:0x009f  */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x00c6  */
-        /* JADX WARN: Removed duplicated region for block: B:23:0x004c  */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x0055  */
-        /* JADX WARN: Removed duplicated region for block: B:37:0x00ad  */
-        /* JADX WARN: Removed duplicated region for block: B:40:0x0087  */
-        /* JADX WARN: Removed duplicated region for block: B:7:0x007b  */
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:30:0x006b -> B:5:0x006e). Please report as a decompilation issue!!! */
+        /* JADX WARN: Path cross not found for [B:18:0x0059, B:17:0x0057], limit reached: 44 */
+        /* JADX WARN: Removed duplicated region for block: B:11:0x004c  */
+        /* JADX WARN: Removed duplicated region for block: B:14:0x0052  */
+        /* JADX WARN: Removed duplicated region for block: B:16:0x0055  */
+        /* JADX WARN: Removed duplicated region for block: B:25:0x007b  */
+        /* JADX WARN: Removed duplicated region for block: B:30:0x0087  */
+        /* JADX WARN: Removed duplicated region for block: B:33:0x009f  */
+        /* JADX WARN: Removed duplicated region for block: B:40:0x00ad  */
+        /* JADX WARN: Removed duplicated region for block: B:43:0x00c6  */
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:21:0x006b -> B:23:0x006e). Please report as a decompilation issue!!! */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         public final java.lang.Object invokeSuspend(java.lang.Object r11) {
             /*
                 Method dump skipped, instructions count: 331
-                To view this dump change 'Code comments level' option to 'DEBUG'
+                To view this dump add '--comments-level debug' option
             */
             throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.domain.interactor.SecNotificationShadeWindowStateInteractor$2$1.AnonymousClass1.invokeSuspend(java.lang.Object):java.lang.Object");
         }

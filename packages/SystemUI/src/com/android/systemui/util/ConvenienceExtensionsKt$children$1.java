@@ -1,13 +1,15 @@
 package com.android.systemui.util;
 
+import android.view.View;
 import android.view.ViewGroup;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.RestrictedSuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.sequences.SequenceScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ConvenienceExtensionsKt$children$1 extends RestrictedSuspendLambda implements Function2 {
     final /* synthetic */ ViewGroup $this_children;
@@ -29,60 +31,51 @@ final class ConvenienceExtensionsKt$children$1 extends RestrictedSuspendLambda i
         return convenienceExtensionsKt$children$1;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0045  */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x002e  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:8:0x0040 -> B:5:0x0043). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x002e  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0045  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:11:0x0040 -> B:13:0x0043). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r6) {
-        /*
-            r5 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r5.label
-            r2 = 1
-            if (r1 == 0) goto L1d
-            if (r1 != r2) goto L15
-            int r1 = r5.I$1
-            int r3 = r5.I$0
-            java.lang.Object r4 = r5.L$0
-            kotlin.sequences.SequenceScope r4 = (kotlin.sequences.SequenceScope) r4
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L43
-        L15:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L1d:
-            kotlin.ResultKt.throwOnFailure(r6)
-            java.lang.Object r6 = r5.L$0
-            kotlin.sequences.SequenceScope r6 = (kotlin.sequences.SequenceScope) r6
-            android.view.ViewGroup r1 = r5.$this_children
-            int r1 = r1.getChildCount()
-            r3 = 0
-            r4 = r6
-        L2c:
-            if (r3 >= r1) goto L45
-            android.view.ViewGroup r6 = r5.$this_children
-            android.view.View r6 = r6.getChildAt(r3)
-            r5.L$0 = r4
-            r5.I$0 = r3
-            r5.I$1 = r1
-            r5.label = r2
-            kotlin.coroutines.intrinsics.CoroutineSingletons r6 = r4.yield(r6, r5)
-            if (r6 != r0) goto L43
-            return r0
-        L43:
-            int r3 = r3 + r2
-            goto L2c
-        L45:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.util.ConvenienceExtensionsKt$children$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        int childCount;
+        int i;
+        SequenceScope sequenceScope;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = this.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            SequenceScope sequenceScope2 = (SequenceScope) this.L$0;
+            childCount = this.$this_children.getChildCount();
+            i = 0;
+            sequenceScope = sequenceScope2;
+            if (i < childCount) {
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            childCount = this.I$1;
+            i = this.I$0;
+            sequenceScope = (SequenceScope) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            i++;
+            if (i < childCount) {
+                View childAt = this.$this_children.getChildAt(i);
+                this.L$0 = sequenceScope;
+                this.I$0 = i;
+                this.I$1 = childCount;
+                this.label = 1;
+                if (sequenceScope.yield(childAt, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                i++;
+                if (i < childCount) {
+                    return Unit.INSTANCE;
+                }
+            }
+        }
     }
 
     @Override // kotlin.jvm.functions.Function2

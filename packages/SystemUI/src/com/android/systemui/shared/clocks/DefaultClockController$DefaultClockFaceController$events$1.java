@@ -8,7 +8,6 @@ import com.android.systemui.plugins.clocks.ClockFaceEvents;
 import com.android.systemui.plugins.clocks.ThemeConfig;
 import com.android.systemui.shared.clocks.DefaultClockController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DefaultClockController$DefaultClockFaceController$events$1 implements ClockFaceEvents {
     public final /* synthetic */ DefaultClockController.DefaultClockFaceController this$0;

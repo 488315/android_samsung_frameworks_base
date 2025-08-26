@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.phone.ongoingactivity;
 import android.util.Log;
 import com.android.systemui.statusbar.phone.ongoingactivity.OngoingChipAdapter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingChipAdapter$marqueeIfNeeded$1$1 {
     public final /* synthetic */ OngoingChipAdapter.MarqueeTextView $marqueeTextView;
@@ -16,9 +15,9 @@ public final class OngoingChipAdapter$marqueeIfNeeded$1$1 {
 
     public final void onMarqueeEnd() {
         OngoingChipAdapter.MarqueeTextView marqueeTextView = this.$marqueeTextView;
-        boolean isSelected = marqueeTextView.isSelected();
+        boolean zIsSelected = marqueeTextView.isSelected();
         OngoingChipAdapter ongoingChipAdapter = this.this$0;
-        if (isSelected) {
+        if (zIsSelected) {
             Log.i(ongoingChipAdapter.TAG, "onMarqueeEnd");
             marqueeTextView.setSelected(false);
         }

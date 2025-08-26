@@ -1,5 +1,6 @@
 package com.android.internal.widget;
 
+import android.content.res.Resources;
 import android.view.View;
 import com.android.internal.widget.RecyclerView;
 
@@ -55,7 +56,7 @@ public abstract class SimpleItemAnimator extends RecyclerView.ItemAnimator {
     }
 
     @Override // com.android.internal.widget.RecyclerView.ItemAnimator
-    public boolean animateDisappearance(RecyclerView.ViewHolder viewHolder, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo2) {
+    public boolean animateDisappearance(RecyclerView.ViewHolder viewHolder, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo2) throws Resources.NotFoundException {
         int i = itemHolderInfo.left;
         int i2 = itemHolderInfo.top;
         View view = viewHolder.itemView;

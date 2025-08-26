@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BaseGridView extends RecyclerView {
     public final boolean mHasOverlappingRendering;
@@ -19,7 +18,6 @@ public abstract class BaseGridView extends RecyclerView {
     public GridLayoutManager mLayoutManager;
     public int mPrivateFlag;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.leanback.widget.BaseGridView$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {
@@ -57,9 +55,9 @@ public abstract class BaseGridView extends RecyclerView {
     public final View focusSearch(int i) {
         if (isFocused()) {
             GridLayoutManager gridLayoutManager = this.mLayoutManager;
-            View findViewByPosition = gridLayoutManager.findViewByPosition(gridLayoutManager.mFocusPosition);
-            if (findViewByPosition != null) {
-                return focusSearch(findViewByPosition, i);
+            View viewFindViewByPosition = gridLayoutManager.findViewByPosition(gridLayoutManager.mFocusPosition);
+            if (viewFindViewByPosition != null) {
+                return focusSearch(viewFindViewByPosition, i);
             }
         }
         return super.focusSearch(i);
@@ -67,10 +65,10 @@ public abstract class BaseGridView extends RecyclerView {
 
     @Override // androidx.recyclerview.widget.RecyclerView, android.view.ViewGroup
     public final int getChildDrawingOrder(int i, int i2) {
-        int indexOfChild;
+        int iIndexOfChild;
         GridLayoutManager gridLayoutManager = this.mLayoutManager;
-        View findViewByPosition = gridLayoutManager.findViewByPosition(gridLayoutManager.mFocusPosition);
-        return (findViewByPosition != null && i2 >= (indexOfChild = indexOfChild(findViewByPosition))) ? i2 < i + (-1) ? ((indexOfChild + i) - 1) - i2 : indexOfChild : i2;
+        View viewFindViewByPosition = gridLayoutManager.findViewByPosition(gridLayoutManager.mFocusPosition);
+        return (viewFindViewByPosition != null && i2 >= (iIndexOfChild = indexOfChild(viewFindViewByPosition))) ? i2 < i + (-1) ? ((iIndexOfChild + i) - 1) - i2 : iIndexOfChild : i2;
     }
 
     @Override // android.view.View
@@ -79,16 +77,16 @@ public abstract class BaseGridView extends RecyclerView {
     }
 
     public final void initBaseGridViewAttributes(Context context, AttributeSet attributeSet) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.lbBaseGridView);
-        boolean z = obtainStyledAttributes.getBoolean(4, false);
-        boolean z2 = obtainStyledAttributes.getBoolean(3, false);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.lbBaseGridView);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(4, false);
+        boolean z2 = typedArrayObtainStyledAttributes.getBoolean(3, false);
         GridLayoutManager gridLayoutManager = this.mLayoutManager;
         gridLayoutManager.mFlag = (z ? 2048 : 0) | (gridLayoutManager.mFlag & (-6145)) | (z2 ? 4096 : 0);
-        boolean z3 = obtainStyledAttributes.getBoolean(6, true);
-        boolean z4 = obtainStyledAttributes.getBoolean(5, true);
+        boolean z3 = typedArrayObtainStyledAttributes.getBoolean(6, true);
+        boolean z4 = typedArrayObtainStyledAttributes.getBoolean(5, true);
         GridLayoutManager gridLayoutManager2 = this.mLayoutManager;
         gridLayoutManager2.mFlag = (z3 ? 8192 : 0) | (gridLayoutManager2.mFlag & (-24577)) | (z4 ? NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT : 0);
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(2, obtainStyledAttributes.getDimensionPixelSize(8, 0));
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(2, typedArrayObtainStyledAttributes.getDimensionPixelSize(8, 0));
         if (gridLayoutManager2.mOrientation == 1) {
             gridLayoutManager2.mVerticalSpacing = dimensionPixelSize;
             gridLayoutManager2.mSpacingPrimary = dimensionPixelSize;
@@ -97,17 +95,17 @@ public abstract class BaseGridView extends RecyclerView {
             gridLayoutManager2.mSpacingSecondary = dimensionPixelSize;
         }
         GridLayoutManager gridLayoutManager3 = this.mLayoutManager;
-        int dimensionPixelSize2 = obtainStyledAttributes.getDimensionPixelSize(1, obtainStyledAttributes.getDimensionPixelSize(7, 0));
+        int dimensionPixelSize2 = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, typedArrayObtainStyledAttributes.getDimensionPixelSize(7, 0));
         if (gridLayoutManager3.mOrientation == 0) {
             gridLayoutManager3.mSpacingPrimary = dimensionPixelSize2;
         } else {
             gridLayoutManager3.mSpacingSecondary = dimensionPixelSize2;
         }
-        if (obtainStyledAttributes.hasValue(0)) {
-            this.mLayoutManager.mGravity = obtainStyledAttributes.getInt(0, 0);
+        if (typedArrayObtainStyledAttributes.hasValue(0)) {
+            this.mLayoutManager.mGravity = typedArrayObtainStyledAttributes.getInt(0, 0);
             requestLayout();
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.view.View
@@ -120,12 +118,12 @@ public abstract class BaseGridView extends RecyclerView {
         }
         int i2 = gridLayoutManager.mFocusPosition;
         while (true) {
-            View findViewByPosition = gridLayoutManager.findViewByPosition(i2);
-            if (findViewByPosition == null) {
+            View viewFindViewByPosition = gridLayoutManager.findViewByPosition(i2);
+            if (viewFindViewByPosition == null) {
                 return;
             }
-            if (findViewByPosition.getVisibility() == 0 && findViewByPosition.hasFocusable()) {
-                findViewByPosition.requestFocus();
+            if (viewFindViewByPosition.getVisibility() == 0 && viewFindViewByPosition.hasFocusable()) {
+                viewFindViewByPosition.requestFocus();
                 return;
             }
             i2++;
@@ -138,28 +136,26 @@ public abstract class BaseGridView extends RecyclerView {
             return false;
         }
         GridLayoutManager gridLayoutManager = this.mLayoutManager;
-        View findViewByPosition = gridLayoutManager.findViewByPosition(gridLayoutManager.mFocusPosition);
-        if (findViewByPosition != null) {
-            return findViewByPosition.requestFocus(i, rect);
+        View viewFindViewByPosition = gridLayoutManager.findViewByPosition(gridLayoutManager.mFocusPosition);
+        if (viewFindViewByPosition != null) {
+            return viewFindViewByPosition.requestFocus(i, rect);
         }
         return false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:8:0x000f  */
     @Override // android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onRtlPropertiesChanged(int i) {
         int i2;
         GridLayoutManager gridLayoutManager = this.mLayoutManager;
         if (gridLayoutManager != null) {
             if (gridLayoutManager.mOrientation == 0) {
-                if (i == 1) {
-                    i2 = 262144;
-                }
-                i2 = 0;
-            } else {
-                if (i == 1) {
-                    i2 = NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME;
-                }
-                i2 = 0;
+                i2 = i == 1 ? 262144 : 0;
+            } else if (i == 1) {
+                i2 = NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME;
             }
             int i3 = gridLayoutManager.mFlag;
             if ((786432 & i3) == i2) {
@@ -185,13 +181,13 @@ public abstract class BaseGridView extends RecyclerView {
 
     @Override // android.view.ViewGroup
     public final void removeViewAt(int i) {
-        boolean hasFocus = getChildAt(i).hasFocus();
-        if (hasFocus) {
+        boolean zHasFocus = getChildAt(i).hasFocus();
+        if (zHasFocus) {
             this.mPrivateFlag |= 1;
             requestFocus();
         }
         super.removeViewAt(i);
-        if (hasFocus) {
+        if (zHasFocus) {
             this.mPrivateFlag ^= -2;
         }
     }

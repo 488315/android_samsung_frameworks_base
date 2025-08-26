@@ -79,17 +79,17 @@ public abstract class KernelCpuUidBpfMapReader {
     public void removeUidsInRange(int i, int i2) {
         if (this.mErrors <= 5 && i2 >= i && i >= 0) {
             this.mWriteLock.lock();
-            int indexOfKey = this.mData.indexOfKey(i);
-            if (indexOfKey < 0) {
+            int iIndexOfKey = this.mData.indexOfKey(i);
+            if (iIndexOfKey < 0) {
                 this.mData.put(i, null);
-                indexOfKey = this.mData.indexOfKey(i);
+                iIndexOfKey = this.mData.indexOfKey(i);
             }
-            int indexOfKey2 = this.mData.indexOfKey(i2);
-            if (indexOfKey2 < 0) {
+            int iIndexOfKey2 = this.mData.indexOfKey(i2);
+            if (iIndexOfKey2 < 0) {
                 this.mData.put(i2, null);
-                indexOfKey2 = this.mData.indexOfKey(i2);
+                iIndexOfKey2 = this.mData.indexOfKey(i2);
             }
-            this.mData.removeAtRange(indexOfKey, (indexOfKey2 - indexOfKey) + 1);
+            this.mData.removeAtRange(iIndexOfKey, (iIndexOfKey2 - iIndexOfKey) + 1);
             this.mWriteLock.unlock();
         }
     }

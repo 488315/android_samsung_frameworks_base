@@ -53,16 +53,16 @@ public class ColorTemperatureFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
         if (this.mProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
             updateParameters();
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
-        this.mProgram.process(pullInput, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
+        this.mProgram.process(framePullInput, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 
     private void updateParameters() {

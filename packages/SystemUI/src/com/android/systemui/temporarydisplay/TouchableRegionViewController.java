@@ -6,7 +6,6 @@ import android.view.ViewTreeObserver;
 import com.android.systemui.util.ViewController;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TouchableRegionViewController extends ViewController {
     public final TouchableRegionViewController$internalInsetsListener$1 internalInsetsListener;
@@ -18,13 +17,10 @@ public final class TouchableRegionViewController extends ViewController {
         this.tempRect = new Rect();
         this.internalInsetsListener = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.systemui.temporarydisplay.TouchableRegionViewController$internalInsetsListener$1
             public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                View view2;
                 internalInsetsInfo.setTouchableInsets(3);
-                TouchableRegionViewController.this.tempRect.setEmpty();
-                Function2 function22 = function2;
-                view2 = ((ViewController) TouchableRegionViewController.this).mView;
-                function22.invoke(view2, TouchableRegionViewController.this.tempRect);
-                internalInsetsInfo.touchableRegion.set(TouchableRegionViewController.this.tempRect);
+                this.this$0.tempRect.setEmpty();
+                function2.invoke(((ViewController) this.this$0).mView, this.this$0.tempRect);
+                internalInsetsInfo.touchableRegion.set(this.this$0.tempRect);
             }
         };
     }

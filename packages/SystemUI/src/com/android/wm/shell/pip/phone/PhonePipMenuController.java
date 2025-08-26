@@ -2,6 +2,7 @@ package com.android.wm.shell.pip.phone;
 
 import android.app.RemoteAction;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Debug;
 import android.os.Handler;
@@ -17,10 +18,14 @@ import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.systemui.R;
+import com.android.wm.shell.common.DisplayController;
+import com.android.wm.shell.common.DisplayInsetsController;
 import com.android.wm.shell.common.HandlerExecutor;
+import com.android.wm.shell.common.ImeListener;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.common.SystemWindows;
 import com.android.wm.shell.common.pip.PipBoundsState;
+import com.android.wm.shell.common.pip.PipDisplayLayoutState;
 import com.android.wm.shell.common.pip.PipMediaController;
 import com.android.wm.shell.common.pip.PipMenuController;
 import com.android.wm.shell.common.pip.PipUiEventLogger;
@@ -31,12 +36,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PhonePipMenuController implements PipMenuController {
     public List mAppActions;
     public RemoteAction mCloseAction;
     public final Context mContext;
+    public boolean mIsImeVisible;
     public int mLastDensityDpi;
     public Locale mLastLocale;
     public SurfaceControl mLeash;
@@ -54,7 +59,6 @@ public class PhonePipMenuController implements PipMenuController {
     public boolean mIsPipMenuFocused = false;
     public final AnonymousClass1 mMediaActionListener = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.pip.phone.PhonePipMenuController$1, reason: invalid class name */
     public class AnonymousClass1 implements PipMediaController.ActionListener {
         public AnonymousClass1() {
@@ -69,7 +73,7 @@ public class PhonePipMenuController implements PipMenuController {
         }
     }
 
-    public PhonePipMenuController(Context context, PipBoundsState pipBoundsState, PipMediaController pipMediaController, SystemWindows systemWindows, PipUiEventLogger pipUiEventLogger, ShellExecutor shellExecutor, Handler handler, Optional<SplitScreenController> optional) {
+    public PhonePipMenuController(Context context, PipBoundsState pipBoundsState, PipMediaController pipMediaController, SystemWindows systemWindows, DisplayController displayController, DisplayInsetsController displayInsetsController, PipDisplayLayoutState pipDisplayLayoutState, PipUiEventLogger pipUiEventLogger, ShellExecutor shellExecutor, Handler handler, Optional<SplitScreenController> optional) {
         this.mContext = context;
         this.mPipBoundsState = pipBoundsState;
         this.mMediaController = pipMediaController;
@@ -78,6 +82,13 @@ public class PhonePipMenuController implements PipMenuController {
         this.mMainHandler = handler;
         this.mPipUiEventLogger = pipUiEventLogger;
         this.mSplitScreenController = optional;
+        int i = pipDisplayLayoutState.mDisplayId;
+        displayInsetsController.addInsetsChangedListener(i, new ImeListener(displayController, i) { // from class: com.android.wm.shell.pip.phone.PhonePipMenuController.2
+            @Override // com.android.wm.shell.common.ImeListener
+            public final void onImeVisibilityChanged(boolean z, int i2) {
+                PhonePipMenuController.this.mIsImeVisible = z;
+            }
+        });
     }
 
     @Override // com.android.wm.shell.common.pip.PipMenuController
@@ -97,10 +108,10 @@ public class PhonePipMenuController implements PipMenuController {
         this.mLastLocale = Locale.getDefault();
         PipMenuView pipMenuView2 = new PipMenuView(this.mContext, this, this.mMainExecutor, this.mMainHandler, this.mPipUiEventLogger, this.mSplitScreenController);
         this.mPipMenuView = pipMenuView2;
-        pipMenuView2.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.wm.shell.pip.phone.PhonePipMenuController.2
+        pipMenuView2.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.wm.shell.pip.phone.PhonePipMenuController.3
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view) {
-                view.getViewRootImpl().addSurfaceChangedCallback(new ViewRootImpl.SurfaceChangedCallback() { // from class: com.android.wm.shell.pip.phone.PhonePipMenuController.2.1
+                view.getViewRootImpl().addSurfaceChangedCallback(new ViewRootImpl.SurfaceChangedCallback() { // from class: com.android.wm.shell.pip.phone.PhonePipMenuController.3.1
                     public final void surfaceCreated(SurfaceControl.Transaction transaction) {
                         PhonePipMenuController phonePipMenuController = PhonePipMenuController.this;
                         SurfaceControl viewSurface = phonePipMenuController.mSystemWindows.getViewSurface(phonePipMenuController.mPipMenuView);
@@ -172,7 +183,7 @@ public class PhonePipMenuController implements PipMenuController {
         this.mLeash = null;
     }
 
-    public final Size getEstimatedMinMenuSize() {
+    public final Size getEstimatedMinMenuSize() throws Resources.NotFoundException {
         PipMenuView pipMenuView = this.mPipMenuView;
         if (pipMenuView == null) {
             return null;
@@ -200,11 +211,11 @@ public class PhonePipMenuController implements PipMenuController {
     }
 
     public final void pokeMenu() {
-        boolean isMenuVisible = isMenuVisible();
+        boolean zIsMenuVisible = isMenuVisible();
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
-            ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 6426659562702778548L, 12, "PhonePipMenuController", Boolean.valueOf(isMenuVisible));
+            ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, 6426659562702778548L, 12, "PhonePipMenuController", Boolean.valueOf(zIsMenuVisible));
         }
-        if (isMenuVisible) {
+        if (zIsMenuVisible) {
             PipMenuView pipMenuView = this.mPipMenuView;
             ((HandlerExecutor) pipMenuView.mMainExecutor).removeCallbacks(pipMenuView.mHideMenuRunnable);
         }
@@ -256,11 +267,11 @@ public class PhonePipMenuController implements PipMenuController {
 
     public final void showMenuWithPossibleDelay(Rect rect, boolean z, boolean z2) {
         if (z) {
-            boolean isMenuVisible = isMenuVisible();
+            boolean zIsMenuVisible = isMenuVisible();
             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
-                ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, -1487408910745847354L, 12, "PhonePipMenuController", Boolean.valueOf(isMenuVisible));
+                ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, -1487408910745847354L, 12, "PhonePipMenuController", Boolean.valueOf(zIsMenuVisible));
             }
-            if (isMenuVisible) {
+            if (zIsMenuVisible) {
                 PipMenuView pipMenuView = this.mPipMenuView;
                 pipMenuView.mMenuContainer.setAlpha(0.0f);
                 pipMenuView.mSettingsButton.setAlpha(0.0f);
@@ -299,12 +310,12 @@ public class PhonePipMenuController implements PipMenuController {
     }
 
     public final void hideMenu(int i) {
-        boolean isMenuVisible = isMenuVisible();
-        Log.d("PhonePipMenuController", "hideMenu() state=" + this.mMenuState + " isMenuVisible=" + isMenuVisible + " animationType=" + i + " resize=false callers=\n" + Debug.getCallers(5, "    "));
+        boolean zIsMenuVisible = isMenuVisible();
+        Log.d("PhonePipMenuController", "hideMenu() state=" + this.mMenuState + " isMenuVisible=" + zIsMenuVisible + " animationType=" + i + " resize=false callers=\n" + Debug.getCallers(5, "    "));
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_PICTURE_IN_PICTURE_enabled[0]) {
-            ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, -5026655734799582529L, 0, "PhonePipMenuController", String.valueOf(this.mMenuState), String.valueOf(isMenuVisible), String.valueOf(i), String.valueOf(false), String.valueOf(Debug.getCallers(5, "    ")));
+            ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, -5026655734799582529L, 0, "PhonePipMenuController", String.valueOf(this.mMenuState), String.valueOf(zIsMenuVisible), String.valueOf(i), String.valueOf(false), String.valueOf(Debug.getCallers(5, "    ")));
         }
-        if (isMenuVisible) {
+        if (zIsMenuVisible) {
             this.mPipMenuView.hideMenu(null, true, false, i);
         }
     }

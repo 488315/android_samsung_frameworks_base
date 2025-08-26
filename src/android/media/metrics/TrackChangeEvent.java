@@ -200,39 +200,39 @@ public final class TrackChangeEvent extends Event implements Parcelable {
     }
 
     private TrackChangeEvent(Parcel parcel) {
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        String readString = (readInt & 4) == 0 ? null : parcel.readString();
-        String readString2 = (readInt & 8) == 0 ? null : parcel.readString();
-        String readString3 = (readInt & 16) == 0 ? null : parcel.readString();
-        int readInt4 = parcel.readInt();
-        long readLong = parcel.readLong();
-        int readInt5 = parcel.readInt();
-        String readString4 = (readInt & 256) == 0 ? null : parcel.readString();
-        String readString5 = (readInt & 512) != 0 ? parcel.readString() : null;
-        int readInt6 = parcel.readInt();
-        int readInt7 = parcel.readInt();
-        int readInt8 = parcel.readInt();
-        int readInt9 = parcel.readInt();
-        float readFloat = parcel.readFloat();
-        Bundle readBundle = parcel.readBundle();
-        this.mState = readInt2;
-        this.mReason = readInt3;
-        this.mContainerMimeType = readString;
-        this.mSampleMimeType = readString2;
-        this.mCodecName = readString3;
-        this.mBitrate = readInt4;
-        this.mTimeSinceCreatedMillis = readLong;
-        this.mType = readInt5;
-        this.mLanguage = readString4;
-        this.mLanguageRegion = readString5;
-        this.mChannelCount = readInt6;
-        this.mAudioSampleRate = readInt7;
-        this.mWidth = readInt8;
-        this.mHeight = readInt9;
-        this.mVideoFrameRate = readFloat;
-        this.mMetricsBundle = readBundle;
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        String string = (i & 4) == 0 ? null : parcel.readString();
+        String string2 = (i & 8) == 0 ? null : parcel.readString();
+        String string3 = (i & 16) == 0 ? null : parcel.readString();
+        int i4 = parcel.readInt();
+        long j = parcel.readLong();
+        int i5 = parcel.readInt();
+        String string4 = (i & 256) == 0 ? null : parcel.readString();
+        String string5 = (i & 512) != 0 ? parcel.readString() : null;
+        int i6 = parcel.readInt();
+        int i7 = parcel.readInt();
+        int i8 = parcel.readInt();
+        int i9 = parcel.readInt();
+        float f = parcel.readFloat();
+        Bundle bundle = parcel.readBundle();
+        this.mState = i2;
+        this.mReason = i3;
+        this.mContainerMimeType = string;
+        this.mSampleMimeType = string2;
+        this.mCodecName = string3;
+        this.mBitrate = i4;
+        this.mTimeSinceCreatedMillis = j;
+        this.mType = i5;
+        this.mLanguage = string4;
+        this.mLanguageRegion = string5;
+        this.mChannelCount = i6;
+        this.mAudioSampleRate = i7;
+        this.mWidth = i8;
+        this.mHeight = i9;
+        this.mVideoFrameRate = f;
+        this.mMetricsBundle = bundle;
     }
 
     public String toString() {

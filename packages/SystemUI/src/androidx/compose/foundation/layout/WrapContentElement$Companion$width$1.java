@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Lambda;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class WrapContentElement$Companion$width$1 extends Lambda implements Function2 {
     final /* synthetic */ Alignment.Horizontal $align;
@@ -22,6 +21,6 @@ public final class WrapContentElement$Companion$width$1 extends Lambda implement
     @Override // kotlin.jvm.functions.Function2
     public final Object invoke(Object obj, Object obj2) {
         long j = ((IntSize) obj).packedValue;
-        return IntOffset.m847boximpl((this.$align.align(0, (int) (j >> 32), (LayoutDirection) obj2) << 32) | (0 & 4294967295L));
+        return IntOffset.m849boximpl((this.$align.align(0, (int) (j >> 32), (LayoutDirection) obj2) << 32) | (0 & 4294967295L));
     }
 }

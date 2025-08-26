@@ -45,12 +45,12 @@ public class IconDrawableFactory {
         return getBadgedIcon(applicationInfo, applicationInfo, i);
     }
 
-    public Drawable getBadgedIcon(PackageItemInfo packageItemInfo, ApplicationInfo applicationInfo, final int i) {
-        Drawable loadUnbadgedItemIcon = this.mPm.loadUnbadgedItemIcon(packageItemInfo, applicationInfo, true, 1);
+    public Drawable getBadgedIcon(PackageItemInfo packageItemInfo, ApplicationInfo applicationInfo, final int i) throws Resources.NotFoundException {
+        Drawable drawableLoadUnbadgedItemIcon = this.mPm.loadUnbadgedItemIcon(packageItemInfo, applicationInfo, true, 1);
         if (!this.mEmbedShadow && !needsBadging(applicationInfo, i)) {
-            return loadUnbadgedItemIcon;
+            return drawableLoadUnbadgedItemIcon;
         }
-        Drawable shadowedIcon = getShadowedIcon(loadUnbadgedItemIcon);
+        Drawable shadowedIcon = getShadowedIcon(drawableLoadUnbadgedItemIcon);
         if (SemPersonaManager.isKnoxId(i)) {
             return this.mPm.getUserBadgedIcon(shadowedIcon, new UserHandle(i));
         }
@@ -67,9 +67,7 @@ public class IconDrawableFactory {
         return this.mLauncherIcons.getBadgedDrawable(shadowedIcon, this.mDpm.getResources().getDrawable(getUpdatableUserIconBadgeId(i), DevicePolicyResources.Drawables.Style.SOLID_COLORED, new Supplier() { // from class: android.util.IconDrawableFactory$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                Drawable lambda$getBadgedIcon$0;
-                lambda$getBadgedIcon$0 = IconDrawableFactory.this.lambda$getBadgedIcon$0(i);
-                return lambda$getBadgedIcon$0;
+                return this.f$0.lambda$getBadgedIcon$0(i);
             }
         }), this.mUm.getUserBadgeColor(i));
     }

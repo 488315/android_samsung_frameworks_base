@@ -5,7 +5,6 @@ import com.samsung.android.nexus.base.utils.Log;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ReservedAction {
     public final Object[] mArgs;
@@ -17,7 +16,7 @@ public class ReservedAction {
         this(null, str, clsArr, objArr);
     }
 
-    public final void doAction(Object obj) {
+    public final void doAction(Object obj) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         Class<?> cls = obj.getClass();
         String str = this.mMethodName;
         Method method = null;
@@ -25,13 +24,13 @@ public class ReservedAction {
             try {
                 try {
                     method = cls.getMethod(str, this.mParamTypes);
-                } catch (NoSuchMethodException unused) {
-                    Method declaredMethod = cls.getDeclaredMethod(str, this.mParamTypes);
-                    declaredMethod.setAccessible(true);
-                    method = declaredMethod;
+                } catch (NoSuchMethodException e) {
+                    Log.e("ReservedAction", cls.getName() + " - No method. " + e);
                 }
-            } catch (NoSuchMethodException e) {
-                Log.e("ReservedAction", cls.getName() + " - No method. " + e);
+            } catch (NoSuchMethodException unused) {
+                Method declaredMethod = cls.getDeclaredMethod(str, this.mParamTypes);
+                declaredMethod.setAccessible(true);
+                method = declaredMethod;
             }
         }
         try {

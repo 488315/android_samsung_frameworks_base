@@ -2,6 +2,7 @@ package com.android.systemui.qs.tiles.impl.custom.domain.interactor;
 
 import android.app.PendingIntent;
 import android.content.ComponentName;
+import android.os.RemoteException;
 import android.os.UserHandle;
 import android.service.quicksettings.Tile;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
@@ -17,7 +18,11 @@ import com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepos
 import com.android.systemui.user.data.repository.UserRepository;
 import com.android.systemui.user.data.repository.UserRepositoryImpl;
 import dagger.Lazy;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
@@ -26,7 +31,6 @@ import kotlinx.coroutines.flow.SharedFlowKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CustomTileServiceInteractor {
     public final ActivityStarter activityStarter;
@@ -41,7 +45,6 @@ public final class CustomTileServiceInteractor {
     public final TileSpec.CustomTileSpec tileSpec;
     public final Lazy userActionInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReceivingInterface implements CustomTileInterface {
         public final ComponentName component;
         public final StateFlowImpl mutableCallingAppIds = StateFlowKt.MutableStateFlow(-1);
@@ -120,7 +123,7 @@ public final class CustomTileServiceInteractor {
             customTileServiceInteractor.activityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$ReceivingInterface$startUnlockAndRun$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CustomTileServiceInteractor.this.getTileServiceManager().mStateManager.onUnlockComplete();
+                    customTileServiceInteractor.getTileServiceManager().mStateManager.onUnlockComplete();
                 }
             });
         }
@@ -129,6 +132,44 @@ public final class CustomTileServiceInteractor {
         public final void updateTileState(Tile tile, int i) {
             CustomTileServiceInteractor.this.customTileInteractor.tileUpdates.tryEmit(tile);
             this.mutableCallingAppIds.updateState(null, Integer.valueOf(i));
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnClick$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return CustomTileServiceInteractor.this.bindOnClick(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnStart$1, reason: invalid class name and case insensitive filesystem */
+    final class C10171 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public C10171(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return CustomTileServiceInteractor.this.bindOnStart(this);
         }
     }
 
@@ -143,202 +184,149 @@ public final class CustomTileServiceInteractor {
         this.currentUser = ((UserRepositoryImpl) userRepository).getSelectedUserInfo().getUserHandle();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005f A[Catch: RemoteException -> 0x002f, TRY_LEAVE, TryCatch #1 {RemoteException -> 0x002f, blocks: (B:11:0x002b, B:12:0x0057, B:14:0x005f), top: B:10:0x002b }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object bindOnClick(kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnClick$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnClick$1 r0 = (com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnClick$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnClick$1 r0 = new com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnClick$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L39
-            if (r2 != r3) goto L31
-            java.lang.Object r5 = r0.L$1
-            com.android.systemui.qs.external.TileServiceManager r5 = (com.android.systemui.qs.external.TileServiceManager) r5
-            java.lang.Object r0 = r0.L$0
-            com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor r0 = (com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor) r0
-            kotlin.ResultKt.throwOnFailure(r6)     // Catch: android.os.RemoteException -> L2f
-            goto L57
-        L2f:
-            r5 = move-exception
-            goto L71
-        L31:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L39:
-            kotlin.ResultKt.throwOnFailure(r6)
-            com.android.systemui.qs.external.TileServiceManager r6 = r5.getTileServiceManager()     // Catch: android.os.RemoteException -> L6f
-            com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileInteractor r2 = r5.customTileInteractor     // Catch: android.os.RemoteException -> L6f
-            r0.L$0 = r5     // Catch: android.os.RemoteException -> L6f
-            r0.L$1 = r6     // Catch: android.os.RemoteException -> L6f
-            r0.label = r3     // Catch: android.os.RemoteException -> L6f
-            com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepository r2 = r2.customTileRepository     // Catch: android.os.RemoteException -> L6f
-            com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl r2 = (com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl) r2     // Catch: android.os.RemoteException -> L6f
-            java.lang.Object r0 = r2.isTileActive(r0)     // Catch: android.os.RemoteException -> L6f
-            if (r0 != r1) goto L53
-            return r1
-        L53:
-            r4 = r0
-            r0 = r5
-            r5 = r6
-            r6 = r4
-        L57:
-            java.lang.Boolean r6 = (java.lang.Boolean) r6     // Catch: android.os.RemoteException -> L2f
-            boolean r6 = r6.booleanValue()     // Catch: android.os.RemoteException -> L2f
-            if (r6 == 0) goto L7a
-            r5.setBindRequested(r3)     // Catch: android.os.RemoteException -> L2f
-            com.android.systemui.qs.external.TileServiceManager r5 = r0.getTileServiceManager()     // Catch: android.os.RemoteException -> L2f
-            com.android.systemui.qs.external.TileLifecycleManager r5 = r5.mStateManager     // Catch: android.os.RemoteException -> L2f
-            r5.onStartListening()     // Catch: android.os.RemoteException -> L2f
-            goto L7a
-        L6c:
-            r0 = r5
-            r5 = r6
-            goto L71
-        L6f:
-            r6 = move-exception
-            goto L6c
-        L71:
-            com.android.systemui.qs.tiles.base.shared.logging.QSTileLogger r6 = r0.qsTileLogger
-            com.android.systemui.qs.pipeline.shared.TileSpec$CustomTileSpec r0 = r0.tileSpec
-            java.lang.String r1 = "Binding to the service on click failed"
-            r6.logError(r0, r1, r5)
-        L7a:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor.bindOnClick(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object bindOnClick(ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        CustomTileServiceInteractor customTileServiceInteractor;
+        RemoteException e;
+        TileServiceManager tileServiceManager;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            try {
+                TileServiceManager tileServiceManager2 = getTileServiceManager();
+                CustomTileInteractor customTileInteractor = this.customTileInteractor;
+                anonymousClass1.L$0 = this;
+                anonymousClass1.L$1 = tileServiceManager2;
+                anonymousClass1.label = 1;
+                Object objIsTileActive = ((CustomTileRepositoryImpl) customTileInteractor.customTileRepository).isTileActive(anonymousClass1);
+                if (objIsTileActive == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                customTileServiceInteractor = this;
+                tileServiceManager = tileServiceManager2;
+                obj = objIsTileActive;
+            } catch (RemoteException e2) {
+                customTileServiceInteractor = this;
+                e = e2;
+                customTileServiceInteractor.qsTileLogger.logError(customTileServiceInteractor.tileSpec, "Binding to the service on click failed", e);
+                return Unit.INSTANCE;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            tileServiceManager = (TileServiceManager) anonymousClass1.L$1;
+            customTileServiceInteractor = (CustomTileServiceInteractor) anonymousClass1.L$0;
+            try {
+                ResultKt.throwOnFailure(obj);
+            } catch (RemoteException e3) {
+                e = e3;
+                customTileServiceInteractor.qsTileLogger.logError(customTileServiceInteractor.tileSpec, "Binding to the service on click failed", e);
+                return Unit.INSTANCE;
+            }
+        }
+        if (((Boolean) obj).booleanValue()) {
+            tileServiceManager.setBindRequested(true);
+            customTileServiceInteractor.getTileServiceManager().mStateManager.onStartListening();
+        }
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005f A[Catch: RemoteException -> 0x002f, TryCatch #1 {RemoteException -> 0x002f, blocks: (B:11:0x002b, B:12:0x0057, B:14:0x005f, B:18:0x0063), top: B:10:0x002b }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0063 A[Catch: RemoteException -> 0x002f, TRY_LEAVE, TryCatch #1 {RemoteException -> 0x002f, blocks: (B:11:0x002b, B:12:0x0057, B:14:0x005f, B:18:0x0063), top: B:10:0x002b }] */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x005f A[Catch: RemoteException -> 0x002f, TryCatch #1 {RemoteException -> 0x002f, blocks: (B:12:0x002b, B:23:0x0057, B:25:0x005f, B:26:0x0063), top: B:36:0x002b }] */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0063 A[Catch: RemoteException -> 0x002f, TRY_LEAVE, TryCatch #1 {RemoteException -> 0x002f, blocks: (B:12:0x002b, B:23:0x0057, B:25:0x005f, B:26:0x0063), top: B:36:0x002b }] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object bindOnStart(kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnStart$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnStart$1 r0 = (com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnStart$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnStart$1 r0 = new com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$bindOnStart$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L39
-            if (r2 != r3) goto L31
-            java.lang.Object r5 = r0.L$1
-            com.android.systemui.qs.external.TileServiceManager r5 = (com.android.systemui.qs.external.TileServiceManager) r5
-            java.lang.Object r0 = r0.L$0
-            com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor r0 = (com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor) r0
-            kotlin.ResultKt.throwOnFailure(r6)     // Catch: android.os.RemoteException -> L2f
-            goto L57
-        L2f:
-            r5 = move-exception
-            goto L75
-        L31:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L39:
-            kotlin.ResultKt.throwOnFailure(r6)
-            com.android.systemui.qs.external.TileServiceManager r6 = r5.getTileServiceManager()     // Catch: android.os.RemoteException -> L73
-            com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileInteractor r2 = r5.customTileInteractor     // Catch: android.os.RemoteException -> L73
-            r0.L$0 = r5     // Catch: android.os.RemoteException -> L73
-            r0.L$1 = r6     // Catch: android.os.RemoteException -> L73
-            r0.label = r3     // Catch: android.os.RemoteException -> L73
-            com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepository r2 = r2.customTileRepository     // Catch: android.os.RemoteException -> L73
-            com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl r2 = (com.android.systemui.qs.tiles.impl.custom.data.repository.CustomTileRepositoryImpl) r2     // Catch: android.os.RemoteException -> L73
-            java.lang.Object r0 = r2.isTileActive(r0)     // Catch: android.os.RemoteException -> L73
-            if (r0 != r1) goto L53
-            return r1
-        L53:
-            r4 = r0
-            r0 = r5
-            r5 = r6
-            r6 = r4
-        L57:
-            java.lang.Boolean r6 = (java.lang.Boolean) r6     // Catch: android.os.RemoteException -> L2f
-            boolean r6 = r6.booleanValue()     // Catch: android.os.RemoteException -> L2f
-            if (r6 == 0) goto L63
-            r6 = 0
-            r5.mPendingBind = r6     // Catch: android.os.RemoteException -> L2f
-            goto L7e
-        L63:
-            r5.setBindRequested(r3)     // Catch: android.os.RemoteException -> L2f
-            com.android.systemui.qs.external.TileServiceManager r5 = r0.getTileServiceManager()     // Catch: android.os.RemoteException -> L2f
-            com.android.systemui.qs.external.TileLifecycleManager r5 = r5.mStateManager     // Catch: android.os.RemoteException -> L2f
-            r5.onStartListening()     // Catch: android.os.RemoteException -> L2f
-            goto L7e
-        L70:
-            r0 = r5
-            r5 = r6
-            goto L75
-        L73:
-            r6 = move-exception
-            goto L70
-        L75:
-            com.android.systemui.qs.tiles.base.shared.logging.QSTileLogger r6 = r0.qsTileLogger
-            com.android.systemui.qs.pipeline.shared.TileSpec$CustomTileSpec r0 = r0.tileSpec
-            java.lang.String r1 = "Binding to the service failed"
-            r6.logError(r0, r1, r5)
-        L7e:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor.bindOnStart(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object bindOnStart(ContinuationImpl continuationImpl) {
+        C10171 c10171;
+        CustomTileServiceInteractor customTileServiceInteractor;
+        RemoteException e;
+        TileServiceManager tileServiceManager;
+        if (continuationImpl instanceof C10171) {
+            c10171 = (C10171) continuationImpl;
+            int i = c10171.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c10171.label = i - Integer.MIN_VALUE;
+            } else {
+                c10171 = new C10171(continuationImpl);
+            }
+        }
+        Object obj = c10171.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c10171.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            try {
+                TileServiceManager tileServiceManager2 = getTileServiceManager();
+                CustomTileInteractor customTileInteractor = this.customTileInteractor;
+                c10171.L$0 = this;
+                c10171.L$1 = tileServiceManager2;
+                c10171.label = 1;
+                Object objIsTileActive = ((CustomTileRepositoryImpl) customTileInteractor.customTileRepository).isTileActive(c10171);
+                if (objIsTileActive == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                customTileServiceInteractor = this;
+                tileServiceManager = tileServiceManager2;
+                obj = objIsTileActive;
+                if (((Boolean) obj).booleanValue()) {
+                }
+            } catch (RemoteException e2) {
+                customTileServiceInteractor = this;
+                e = e2;
+                customTileServiceInteractor.qsTileLogger.logError(customTileServiceInteractor.tileSpec, "Binding to the service failed", e);
+                return Unit.INSTANCE;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            tileServiceManager = (TileServiceManager) c10171.L$1;
+            customTileServiceInteractor = (CustomTileServiceInteractor) c10171.L$0;
+            try {
+                ResultKt.throwOnFailure(obj);
+                if (((Boolean) obj).booleanValue()) {
+                    tileServiceManager.setBindRequested(true);
+                    customTileServiceInteractor.getTileServiceManager().mStateManager.onStartListening();
+                } else {
+                    tileServiceManager.mPendingBind = false;
+                }
+            } catch (RemoteException e3) {
+                e = e3;
+                customTileServiceInteractor.qsTileLogger.logError(customTileServiceInteractor.tileSpec, "Binding to the service failed", e);
+                return Unit.INSTANCE;
+            }
+        }
+        return Unit.INSTANCE;
     }
 
     public final TileServiceManager getTileServiceManager() {
-        TileServiceManager tileServiceManager;
+        TileServiceManager tileWrapper;
         synchronized (this.tileServices) {
             this.qsTileLogger.logInfo("getTileServiceManager called", this.tileSpec);
-            tileServiceManager = this.tileServiceManager;
-            if (tileServiceManager == null) {
-                tileServiceManager = this.tileServices.getTileWrapper(this.tileReceivingInterface);
+            tileWrapper = this.tileServiceManager;
+            if (tileWrapper == null) {
+                tileWrapper = this.tileServices.getTileWrapper(this.tileReceivingInterface);
                 this.destructionJob = CoroutineTracingKt.launchTraced$default(this.tileScope, null, null, new CustomTileServiceInteractor$createDestructionJob$1(this, null), 7);
-                this.tileServiceManager = tileServiceManager;
+                this.tileServiceManager = tileWrapper;
             }
         }
-        return tileServiceManager;
+        return tileWrapper;
     }
 }

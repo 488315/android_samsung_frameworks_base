@@ -11,7 +11,7 @@ public class SemShapeDrawable extends GradientDrawable {
     static final String TAG = "SemShapeDrawable";
 
     @Override // android.graphics.drawable.GradientDrawable, android.graphics.drawable.Drawable
-    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws IOException, XmlPullParserException {
+    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
         setSmoothCorner(true);
     }

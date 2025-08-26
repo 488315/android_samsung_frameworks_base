@@ -9,7 +9,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.view.SurfaceControl;
 import android.window.ITaskOrganizer;
-import android.window.TaskOrganizer;
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -23,9 +22,6 @@ public class TaskOrganizer extends WindowOrganizer {
     }
 
     public void copySplashScreenView(int i) {
-    }
-
-    public void minimizeAllDesktopTasks(int i) {
     }
 
     public void onAppSplashScreenViewRemoved(int i) {
@@ -107,9 +103,9 @@ public class TaskOrganizer extends WindowOrganizer {
         }
     }
 
-    public void createDeskRootTask(int i, int i2, int i3, IBinder iBinder, boolean z, boolean z2) {
+    public void createDeskRootTask(int i, int i2, int i3, int i4, IBinder iBinder, boolean z, boolean z2) {
         try {
-            this.mTaskOrganizerController.createDeskRootTask(i, i2, i3, iBinder, z, z2);
+            this.mTaskOrganizerController.createDeskRootTask(i, i2, i3, i4, iBinder, z, z2);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -190,7 +186,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$addStartingWindow$0(startingWindowInfo);
+                    this.f$0.lambda$addStartingWindow$0(startingWindowInfo);
                 }
             });
         }
@@ -205,7 +201,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$removeStartingWindow$1(startingWindowRemovalInfo);
+                    this.f$0.lambda$removeStartingWindow$1(startingWindowRemovalInfo);
                 }
             });
         }
@@ -220,7 +216,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$copySplashScreenView$2(i);
+                    this.f$0.lambda$copySplashScreenView$2(i);
                 }
             });
         }
@@ -235,7 +231,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$onAppSplashScreenViewRemoved$3(i);
+                    this.f$0.lambda$onAppSplashScreenViewRemoved$3(i);
                 }
             });
         }
@@ -250,7 +246,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda11
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$onTaskAppeared$4(runningTaskInfo, surfaceControl);
+                    this.f$0.lambda$onTaskAppeared$4(runningTaskInfo, surfaceControl);
                 }
             });
         }
@@ -265,7 +261,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$onTaskVanished$5(runningTaskInfo);
+                    this.f$0.lambda$onTaskVanished$5(runningTaskInfo);
                 }
             });
         }
@@ -280,7 +276,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$onTaskInfoChanged$6(runningTaskInfo);
+                    this.f$0.lambda$onTaskInfoChanged$6(runningTaskInfo);
                 }
             });
         }
@@ -295,7 +291,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$onBackPressedOnTaskRoot$7(runningTaskInfo);
+                    this.f$0.lambda$onBackPressedOnTaskRoot$7(runningTaskInfo);
                 }
             });
         }
@@ -310,7 +306,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda12
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$onImeDrawnOnTask$8(i);
+                    this.f$0.lambda$onImeDrawnOnTask$8(i);
                 }
             });
         }
@@ -320,7 +316,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$onSplitLayoutChangeRequested$9(runningTaskInfo, bundle);
+                    this.f$0.lambda$onSplitLayoutChangeRequested$9(runningTaskInfo, bundle);
                 }
             });
         }
@@ -335,7 +331,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda9
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$resetStashedFreeform$10(i, z);
+                    this.f$0.lambda$resetStashedFreeform$10(i, z);
                 }
             });
         }
@@ -350,7 +346,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$requestAffordanceAnim$11(runningTaskInfo, i);
+                    this.f$0.lambda$requestAffordanceAnim$11(runningTaskInfo, i);
                 }
             });
         }
@@ -365,7 +361,7 @@ public class TaskOrganizer extends WindowOrganizer {
             TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$preloadSplashScreenAppIcon$12(activityInfo, i, configuration);
+                    this.f$0.lambda$preloadSplashScreenAppIcon$12(activityInfo, i, configuration);
                 }
             });
         }
@@ -373,21 +369,6 @@ public class TaskOrganizer extends WindowOrganizer {
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$preloadSplashScreenAppIcon$12(ActivityInfo activityInfo, int i, Configuration configuration) {
             TaskOrganizer.this.preloadSplashScreenAppIcon(activityInfo, i, configuration);
-        }
-
-        @Override // android.window.ITaskOrganizer
-        public void minimizeAllDesktopTasks(final int i) {
-            TaskOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskOrganizer$1$$ExternalSyntheticLambda13
-                @Override // java.lang.Runnable
-                public final void run() {
-                    TaskOrganizer.AnonymousClass1.this.lambda$minimizeAllDesktopTasks$13(i);
-                }
-            });
-        }
-
-        /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$minimizeAllDesktopTasks$13(int i) {
-            TaskOrganizer.this.minimizeAllDesktopTasks(i);
         }
     }
 

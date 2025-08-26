@@ -83,7 +83,7 @@ public class ServiceConnector {
             {
                 this.val$ctx = context;
                 this.val$connector = allShareConnector;
-                this.mListener = IServiceConnectEventListener.this;
+                this.mListener = this.val$l;
                 this.mServiceProvider = new ServiceProviderImpl(context, allShareConnector);
             }
 
@@ -161,7 +161,7 @@ public class ServiceConnector {
                 this.val$ctx = context;
                 this.val$connector = allShareConnector;
                 this.val$serviceType = str;
-                this.mListener = IServiceConnectEventListener.this;
+                this.mListener = this.val$l;
                 this.mServiceProvider = createServiceProvierImpl(context, allShareConnector, str);
             }
 
@@ -632,13 +632,13 @@ public class ServiceConnector {
                 if (cVMessage.getBundle() == null) {
                     cVMessage.setBundle(new Bundle());
                 }
-                long nanoTime = System.nanoTime();
-                cVMessage.setMsgID(nanoTime);
+                long jNanoTime = System.nanoTime();
+                cVMessage.setMsgID(jNanoTime);
                 cVMessage.setMsgType(2);
                 cVMessage.setMessenger(new Messenger(allShareResponseHandler));
                 try {
                     if (this.mISubscriber.requestCVAsync(this.mID, cVMessage)) {
-                        return nanoTime;
+                        return jNanoTime;
                     }
                     DLog.d_api(TAG, this.mSubscriberTag + " requestCVMAsync fail...Maybe Invalid Action Request");
                     return -1L;

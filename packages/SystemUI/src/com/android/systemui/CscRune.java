@@ -1,8 +1,8 @@
 package com.android.systemui;
 
+import android.os.SystemProperties;
 import com.samsung.android.feature.SemCscFeature;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CscRune extends Rune {
     public static String VALUE_CONFIG_CARRIER_TEXT_POLICY = SemCscFeature.getInstance().getString("CscFeature_LockScreen_ConfigCarrierTextPolicy");
@@ -12,6 +12,7 @@ public class CscRune extends Rune {
     public static boolean SECURITY_EMERGENCY_BUTTON_KOR = isDisplayUsimText();
     public static boolean SECURITY_DISABLE_EMERGENCY_CALL_WHEN_OFFLINE = VALUE_CONFIG_CARRIER_EMERGENCY_POLICY.contains("DisableEmergencyCallWhenOffline");
     public static boolean SECURITY_DIRECT_CALL_TO_ECC = VALUE_CONFIG_CARRIER_EMERGENCY_POLICY.contains("DirectCall");
+    public static final boolean SECURITY_SHOW_EMERGENCY_CALL_ONLY_PLMN_ON_SIM_LOCK = "AU".equals(SystemProperties.get("ro.csc.countryiso_code", ""));
     public static boolean SECURITY_KOR_USIM_TEXT = isDisplayUsimText();
     public static boolean SECURITY_SKT_USIM_TEXT = VALUE_CONFIG_CARRIER_TEXT_POLICY.contains("UseSKTSimText");
     public static boolean SECURITY_KTT_USIM_TEXT = VALUE_CONFIG_CARRIER_TEXT_POLICY.contains("UseKTTSimText");

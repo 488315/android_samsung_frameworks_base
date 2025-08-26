@@ -93,13 +93,13 @@ public final class DestinationBuffer implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, (SharedBuffer) parcel.readTypedObject(SharedBuffer.CREATOR));
-        } else if (readInt == 1) {
-            _set(readInt, (NativeHandle) parcel.readTypedObject(NativeHandle.CREATOR));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, (SharedBuffer) parcel.readTypedObject(SharedBuffer.CREATOR));
+        } else if (i == 1) {
+            _set(i, (NativeHandle) parcel.readTypedObject(NativeHandle.CREATOR));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

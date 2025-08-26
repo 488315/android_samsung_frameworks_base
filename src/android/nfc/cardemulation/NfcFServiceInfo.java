@@ -4,15 +4,23 @@ import android.annotation.SystemApi;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Xml;
 import android.util.proto.ProtoOutputStream;
+import com.android.internal.R;
 import com.android.server.SecureKeyConst;
 import java.io.PrintWriter;
+import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -57,17 +65,105 @@ public final class NfcFServiceInfo implements Parcelable {
         this.mT3tPmm = str6;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:86:0x0168  */
+    /* JADX WARN: Removed duplicated region for block: B:76:0x0168  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public NfcFServiceInfo(android.content.pm.PackageManager r17, android.content.pm.ResolveInfo r18) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
-        /*
-            Method dump skipped, instructions count: 364
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.nfc.cardemulation.NfcFServiceInfo.<init>(android.content.pm.PackageManager, android.content.pm.ResolveInfo):void");
+    public NfcFServiceInfo(PackageManager packageManager, ResolveInfo resolveInfo) throws Throwable {
+        XmlResourceParser xmlResourceParser;
+        XmlResourceParser xmlResourceParserLoadXmlMetaData;
+        int i;
+        ServiceInfo serviceInfo = resolveInfo.serviceInfo;
+        try {
+            xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, "android.nfc.cardemulation.host_nfcf_service");
+        } catch (PackageManager.NameNotFoundException unused) {
+            xmlResourceParser = null;
+        } catch (Throwable th) {
+            th = th;
+            xmlResourceParser = null;
+        }
+        try {
+            if (xmlResourceParserLoadXmlMetaData == null) {
+                throw new XmlPullParserException("No android.nfc.cardemulation.host_nfcf_service meta-data");
+            }
+            int eventType = xmlResourceParserLoadXmlMetaData.getEventType();
+            while (true) {
+                i = 1;
+                if (eventType == 2 || eventType == 1) {
+                    break;
+                } else {
+                    eventType = xmlResourceParserLoadXmlMetaData.next();
+                }
+            }
+            if (!"host-nfcf-service".equals(xmlResourceParserLoadXmlMetaData.getName())) {
+                throw new XmlPullParserException("Meta-data does not start with <host-nfcf-service> tag");
+            }
+            Resources resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
+            AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
+            TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.HostNfcFService);
+            this.mService = resolveInfo;
+            this.mDescription = typedArrayObtainAttributes.getString(0);
+            this.mDynamicSystemCode = null;
+            this.mDynamicNfcid2 = null;
+            typedArrayObtainAttributes.recycle();
+            int depth = xmlResourceParserLoadXmlMetaData.getDepth();
+            String upperCase = null;
+            String upperCase2 = null;
+            String upperCase3 = null;
+            while (true) {
+                int next = xmlResourceParserLoadXmlMetaData.next();
+                if ((next == 3 && xmlResourceParserLoadXmlMetaData.getDepth() <= depth) || next == i) {
+                    break;
+                }
+                String name = xmlResourceParserLoadXmlMetaData.getName();
+                if (next == 2 && "system-code-filter".equals(name) && upperCase == null) {
+                    TypedArray typedArrayObtainAttributes2 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.SystemCodeFilter);
+                    upperCase = typedArrayObtainAttributes2.getString(0).toUpperCase();
+                    if (!isValidSystemCode(upperCase) && !upperCase.equalsIgnoreCase("NULL")) {
+                        Log.e(TAG, "Invalid System Code: " + upperCase);
+                        upperCase = null;
+                    }
+                    typedArrayObtainAttributes2.recycle();
+                } else if (next == 2 && "nfcid2-filter".equals(name) && upperCase2 == null) {
+                    TypedArray typedArrayObtainAttributes3 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.Nfcid2Filter);
+                    upperCase2 = typedArrayObtainAttributes3.getString(0).toUpperCase();
+                    if (!upperCase2.equalsIgnoreCase("RANDOM") && !upperCase2.equalsIgnoreCase("NULL") && !isValidNfcid2(upperCase2)) {
+                        Log.e(TAG, "Invalid NFCID2: " + upperCase2);
+                        upperCase2 = null;
+                    }
+                    typedArrayObtainAttributes3.recycle();
+                } else if (next == 2 && name.equals("t3tPmm-filter") && upperCase3 == null) {
+                    TypedArray typedArrayObtainAttributes4 = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.T3tPmmFilter);
+                    upperCase3 = typedArrayObtainAttributes4.getString(0).toUpperCase();
+                    typedArrayObtainAttributes4.recycle();
+                }
+                i = 1;
+            }
+            this.mSystemCode = upperCase == null ? "NULL" : upperCase;
+            this.mNfcid2 = upperCase2 == null ? "NULL" : upperCase2;
+            this.mT3tPmm = upperCase3 == null ? DEFAULT_T3T_PMM : upperCase3;
+            if (xmlResourceParserLoadXmlMetaData != null) {
+                xmlResourceParserLoadXmlMetaData.close();
+            }
+            this.mUid = serviceInfo.applicationInfo.uid;
+        } catch (PackageManager.NameNotFoundException unused2) {
+            xmlResourceParser = xmlResourceParserLoadXmlMetaData;
+            try {
+                throw new XmlPullParserException("Unable to create context for: " + serviceInfo.packageName);
+            } catch (Throwable th2) {
+                th = th2;
+                if (xmlResourceParser != null) {
+                    xmlResourceParser.close();
+                }
+                throw th;
+            }
+        } catch (Throwable th3) {
+            th = th3;
+            xmlResourceParser = xmlResourceParserLoadXmlMetaData;
+            if (xmlResourceParser != null) {
+            }
+            throw th;
+        }
     }
 
     public ComponentName getComponent() {
@@ -183,7 +279,7 @@ public final class NfcFServiceInfo implements Parcelable {
         protoOutputStream.write(1138166333445L, getT3tPmm());
     }
 
-    private static boolean isValidSystemCode(String str) {
+    private static boolean isValidSystemCode(String str) throws NumberFormatException {
         if (str == null) {
             return false;
         }
@@ -204,7 +300,7 @@ public final class NfcFServiceInfo implements Parcelable {
         }
     }
 
-    private static boolean isValidNfcid2(String str) {
+    private static boolean isValidNfcid2(String str) throws NumberFormatException {
         if (str == null) {
             return false;
         }

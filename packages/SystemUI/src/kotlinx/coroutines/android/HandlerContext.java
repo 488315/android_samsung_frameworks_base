@@ -9,7 +9,6 @@ import kotlin.coroutines.CoroutineContext;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
-import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.DisposableHandle;
@@ -20,7 +19,6 @@ import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultIoScheduler;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class HandlerContext extends HandlerDispatcher {
     public final Handler handler;
@@ -73,7 +71,7 @@ public final class HandlerContext extends HandlerDispatcher {
             j = 4611686018427387903L;
         }
         if (this.handler.postDelayed(runnable, j)) {
-            return new DisposableHandle() { // from class: kotlinx.coroutines.android.HandlerContext$invokeOnTimeout$1
+            return new DisposableHandle() { // from class: kotlinx.coroutines.android.HandlerContext.invokeOnTimeout.1
                 @Override // kotlinx.coroutines.DisposableHandle
                 public final void dispose() {
                     HandlerContext.this.handler.removeCallbacks(runnable);
@@ -96,7 +94,7 @@ public final class HandlerContext extends HandlerDispatcher {
         final ?? r0 = new Runnable() { // from class: kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$block$1
             @Override // java.lang.Runnable
             public final void run() {
-                CancellableContinuation.this.resumeUndispatched(this, Unit.INSTANCE);
+                cancellableContinuationImpl.resumeUndispatched(this, Unit.INSTANCE);
             }
         };
         if (j > 4611686018427387903L) {
@@ -106,8 +104,8 @@ public final class HandlerContext extends HandlerDispatcher {
             cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: kotlinx.coroutines.android.HandlerContext$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    HandlerContext.this.handler.removeCallbacks(r0);
+                public final Object mo781invoke(Object obj) {
+                    this.f$0.handler.removeCallbacks(r0);
                     return Unit.INSTANCE;
                 }
             });
@@ -119,29 +117,29 @@ public final class HandlerContext extends HandlerDispatcher {
     @Override // kotlinx.coroutines.MainCoroutineDispatcher, kotlinx.coroutines.CoroutineDispatcher
     public final String toString() {
         HandlerContext handlerContext;
-        String str;
+        String string;
         DefaultScheduler defaultScheduler = Dispatchers.Default;
         HandlerContext handlerContext2 = MainDispatcherLoader.dispatcher;
         if (this == handlerContext2) {
-            str = "Dispatchers.Main";
+            string = "Dispatchers.Main";
         } else {
             try {
                 handlerContext = handlerContext2.immediate;
             } catch (UnsupportedOperationException unused) {
                 handlerContext = null;
             }
-            str = this == handlerContext ? "Dispatchers.Main.immediate" : null;
+            string = this == handlerContext ? "Dispatchers.Main.immediate" : null;
         }
-        if (str == null) {
-            str = this.name;
-            if (str == null) {
-                str = this.handler.toString();
+        if (string == null) {
+            string = this.name;
+            if (string == null) {
+                string = this.handler.toString();
             }
             if (this.invokeImmediately) {
-                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, ".immediate");
+                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, ".immediate");
             }
         }
-        return str;
+        return string;
     }
 
     public /* synthetic */ HandlerContext(Handler handler, String str, int i, DefaultConstructorMarker defaultConstructorMarker) {

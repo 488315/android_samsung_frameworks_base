@@ -278,9 +278,9 @@ public interface ISemInputDeviceManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemInputDeviceManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemInputDeviceManager)) {
-                return (ISemInputDeviceManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemInputDeviceManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemInputDeviceManager)) {
+                return (ISemInputDeviceManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -373,76 +373,76 @@ public interface ISemInputDeviceManager extends IInterface {
                     parcel2.writeString(keyPressStateAll);
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isKeyPressedByKeycode = isKeyPressedByKeycode(readInt);
+                    boolean zIsKeyPressedByKeycode = isKeyPressedByKeycode(i3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isKeyPressedByKeycode);
+                    parcel2.writeBoolean(zIsKeyPressedByKeycode);
                     return true;
                 case 3:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt2 = parcel.readInt();
-                    String readString = parcel.readString();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i4 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean registerListener = registerListener(readStrongBinder, readInt2, readString);
+                    boolean zRegisterListener = registerListener(strongBinder, i4, string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerListener);
+                    parcel2.writeBoolean(zRegisterListener);
                     return true;
                 case 4:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    int readInt3 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    int i5 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean unregisterListener = unregisterListener(readStrongBinder2, readInt3, readString2);
+                    boolean zUnregisterListener = unregisterListener(strongBinder2, i5, string2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterListener);
+                    parcel2.writeBoolean(zUnregisterListener);
                     return true;
                 case 5:
                     SemInputConstants.Device device = (SemInputConstants.Device) parcel.readTypedObject(SemInputConstants.Device.CREATOR);
-                    int[] createIntArray = parcel.createIntArray();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    int sendRawdataTsp = sendRawdataTsp(device, createIntArray);
+                    int iSendRawdataTsp = sendRawdataTsp(device, iArrCreateIntArray);
                     parcel2.writeNoException();
-                    parcel2.writeInt(sendRawdataTsp);
+                    parcel2.writeInt(iSendRawdataTsp);
                     return true;
                 case 6:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isSupportMotion = isSupportMotion(readString3);
+                    boolean zIsSupportMotion = isSupportMotion(string3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSupportMotion);
+                    parcel2.writeBoolean(zIsSupportMotion);
                     return true;
                 case 7:
-                    String readString4 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
-                    String readString5 = parcel.readString();
+                    String string4 = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int enableMotion = enableMotion(readString4, readBoolean, readString5);
+                    int iEnableMotion = enableMotion(string4, z, string5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(enableMotion);
+                    parcel2.writeInt(iEnableMotion);
                     return true;
                 case 8:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int isEnableMotion = isEnableMotion(readString6, readString7);
+                    int iIsEnableMotion = isEnableMotion(string6, string7);
                     parcel2.writeNoException();
-                    parcel2.writeInt(isEnableMotion);
+                    parcel2.writeInt(iIsEnableMotion);
                     return true;
                 case 9:
-                    String readString8 = parcel.readString();
-                    int readInt4 = parcel.readInt();
-                    String readString9 = parcel.readString();
+                    String string8 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int motionControl = setMotionControl(readString8, readInt4, readString9);
+                    int motionControl = setMotionControl(string8, i6, string9);
                     parcel2.writeNoException();
                     parcel2.writeInt(motionControl);
                     return true;
                 case 10:
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int motionControl2 = getMotionControl(readString10, readString11);
+                    int motionControl2 = getMotionControl(string10, string11);
                     parcel2.writeNoException();
                     parcel2.writeInt(motionControl2);
                     return true;
@@ -475,119 +475,119 @@ public interface ISemInputDeviceManager extends IInterface {
                     parcel2.writeString(commandList);
                     return true;
                 case 15:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int tspEnabled = setTspEnabled(readInt5, readInt6, readBoolean2);
+                    int tspEnabled = setTspEnabled(i7, i8, z2);
                     parcel2.writeNoException();
                     parcel2.writeInt(tspEnabled);
                     return true;
                 case 16:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int temperature = setTemperature(readInt7);
+                    int temperature = setTemperature(i9);
                     parcel2.writeNoException();
                     parcel2.writeInt(temperature);
                     return true;
                 case 17:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int aodRect = setAodRect(readInt8, readInt9, readInt10, readInt11);
+                    int aodRect = setAodRect(i10, i11, i12, i13);
                     parcel2.writeNoException();
                     parcel2.writeInt(aodRect);
                     return true;
                 case 18:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int aodEnable = setAodEnable(readInt12);
+                    int aodEnable = setAodEnable(i14);
                     parcel2.writeNoException();
                     parcel2.writeInt(aodEnable);
                     return true;
                 case 19:
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int aotEnable = setAotEnable(readInt13);
+                    int aotEnable = setAotEnable(i15);
                     parcel2.writeNoException();
                     parcel2.writeInt(aotEnable);
                     return true;
                 case 20:
-                    int readInt14 = parcel.readInt();
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int fodEnable = setFodEnable(readInt14, readInt15, readInt16, readInt17);
+                    int fodEnable = setFodEnable(i16, i17, i18, i19);
                     parcel2.writeNoException();
                     parcel2.writeInt(fodEnable);
                     return true;
                 case 21:
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
-                    int readInt20 = parcel.readInt();
-                    int readInt21 = parcel.readInt();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
+                    int i22 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int fodRect = setFodRect(readInt18, readInt19, readInt20, readInt21);
+                    int fodRect = setFodRect(i20, i21, i22, i23);
                     parcel2.writeNoException();
                     parcel2.writeInt(fodRect);
                     return true;
                 case 22:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int fodLpMode = setFodLpMode(readInt22);
+                    int fodLpMode = setFodLpMode(i24);
                     parcel2.writeNoException();
                     parcel2.writeInt(fodLpMode);
                     return true;
                 case 23:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int singletapEnable = setSingletapEnable(readInt23);
+                    int singletapEnable = setSingletapEnable(i25);
                     parcel2.writeNoException();
                     parcel2.writeInt(singletapEnable);
                     return true;
                 case 24:
-                    int readInt24 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int syncChanged = setSyncChanged(readInt24);
+                    int syncChanged = setSyncChanged(i26);
                     parcel2.writeNoException();
                     parcel2.writeInt(syncChanged);
                     return true;
                 case 25:
-                    int readInt25 = parcel.readInt();
-                    int readInt26 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i27 = parcel.readInt();
+                    int i28 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int spenEnabled = setSpenEnabled(readInt25, readInt26, readBoolean3);
+                    int spenEnabled = setSpenEnabled(i27, i28, z3);
                     parcel2.writeNoException();
                     parcel2.writeInt(spenEnabled);
                     return true;
                 case 26:
                     SemInputConstants.Device device6 = (SemInputConstants.Device) parcel.readTypedObject(SemInputConstants.Device.CREATOR);
                     SemInputConstants.DisplayState displayState = (SemInputConstants.DisplayState) parcel.readTypedObject(SemInputConstants.DisplayState.CREATOR);
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int activate = activate(device6, displayState, readBoolean4);
+                    int iActivate = activate(device6, displayState, z4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(activate);
+                    parcel2.writeInt(iActivate);
                     return true;
                 case 27:
                     SemInputConstants.Device device7 = (SemInputConstants.Device) parcel.readTypedObject(SemInputConstants.Device.CREATOR);
                     SemInputConstants.Command command = (SemInputConstants.Command) parcel.readTypedObject(SemInputConstants.Command.CREATOR);
-                    String readString12 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int command2 = setCommand(device7, command, readString12);
+                    int command2 = setCommand(device7, command, string12);
                     parcel2.writeNoException();
                     parcel2.writeInt(command2);
                     return true;
                 case 28:
                     SemInputConstants.Device device8 = (SemInputConstants.Device) parcel.readTypedObject(SemInputConstants.Device.CREATOR);
                     SemInputConstants.Property property = (SemInputConstants.Property) parcel.readTypedObject(SemInputConstants.Property.CREATOR);
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int property2 = setProperty(device8, property, readString13);
+                    int property2 = setProperty(device8, property, string13);
                     parcel2.writeNoException();
                     parcel2.writeInt(property2);
                     return true;
@@ -601,11 +601,11 @@ public interface ISemInputDeviceManager extends IInterface {
                     return true;
                 case 30:
                     SemInputConstants.Device device10 = (SemInputConstants.Device) parcel.readTypedObject(SemInputConstants.Device.CREATOR);
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String runCommand = runCommand(device10, readString14);
+                    String strRunCommand = runCommand(device10, string14);
                     parcel2.writeNoException();
-                    parcel2.writeString(runCommand);
+                    parcel2.writeString(strRunCommand);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -630,512 +630,512 @@ public interface ISemInputDeviceManager extends IInterface {
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public String getKeyPressStateAll() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public boolean isKeyPressedByKeycode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public boolean registerListener(IBinder iBinder, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public boolean unregisterListener(IBinder iBinder, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int sendRawdataTsp(SemInputConstants.Device device, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(device, 0);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(device, 0);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public boolean isSupportMotion(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int enableMotion(String str, boolean z, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int isEnableMotion(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setMotionControl(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int getMotionControl(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int getSupportDevice(SemInputConstants.Device device) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(device, 0);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(device, 0);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int getTspSupportFeature(SemInputConstants.Device device) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(device, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(device, 0);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int getDeviceEnabled(SemInputConstants.Device device) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(device, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(device, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public String getCommandList(SemInputConstants.Device device) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(device, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(device, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setTspEnabled(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setTemperature(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setAodRect(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setAodEnable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setAotEnable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setFodEnable(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setFodRect(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setFodLpMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setSingletapEnable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setSyncChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setSpenEnabled(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int activate(SemInputConstants.Device device, SemInputConstants.DisplayState displayState, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(device, 0);
-                    obtain.writeTypedObject(displayState, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(device, 0);
+                    parcelObtain.writeTypedObject(displayState, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setCommand(SemInputConstants.Device device, SemInputConstants.Command command, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(device, 0);
-                    obtain.writeTypedObject(command, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(device, 0);
+                    parcelObtain.writeTypedObject(command, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public int setProperty(SemInputConstants.Device device, SemInputConstants.Property property, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(device, 0);
-                    obtain.writeTypedObject(property, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(device, 0);
+                    parcelObtain.writeTypedObject(property, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public String getProperty(SemInputConstants.Device device, SemInputConstants.Property property) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(device, 0);
-                    obtain.writeTypedObject(property, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(device, 0);
+                    parcelObtain.writeTypedObject(property, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceManager
             public String runCommand(SemInputConstants.Device device, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(device, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(ISemInputDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(device, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

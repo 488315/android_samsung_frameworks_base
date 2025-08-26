@@ -5,7 +5,6 @@ import java.lang.Enum;
 import kotlin.collections.AbstractList;
 import kotlin.collections.ArraysKt___ArraysKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class EnumEntriesList<T extends Enum<T>> extends AbstractList implements EnumEntries, Serializable {
     private final T[] entries;
@@ -47,9 +46,9 @@ final class EnumEntriesList<T extends Enum<T>> extends AbstractList implements E
             return -1;
         }
         Enum r3 = (Enum) obj;
-        int ordinal = r3.ordinal();
-        if (((Enum) ArraysKt___ArraysKt.getOrNull(ordinal, this.entries)) == r3) {
-            return ordinal;
+        int iOrdinal = r3.ordinal();
+        if (((Enum) ArraysKt___ArraysKt.getOrNull(iOrdinal, this.entries)) == r3) {
+            return iOrdinal;
         }
         return -1;
     }

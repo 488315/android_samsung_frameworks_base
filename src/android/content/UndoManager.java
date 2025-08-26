@@ -101,12 +101,12 @@ public class UndoManager {
         this.mHistorySize = parcel.readInt();
         this.mStateOwners = new UndoOwner[parcel.readInt()];
         while (true) {
-            int readInt = parcel.readInt();
-            if (readInt == 0) {
+            int i = parcel.readInt();
+            if (i == 0) {
                 return;
             }
             UndoState undoState = new UndoState(this, parcel, classLoader);
-            if (readInt == 1) {
+            if (i == 1) {
                 this.mUndos.add(0, undoState);
             } else {
                 this.mRedos.add(0, undoState);
@@ -115,17 +115,17 @@ public class UndoManager {
     }
 
     UndoOwner restoreOwner(Parcel parcel) {
-        int readInt = parcel.readInt();
-        UndoOwner undoOwner = this.mStateOwners[readInt];
+        int i = parcel.readInt();
+        UndoOwner undoOwner = this.mStateOwners[i];
         if (undoOwner != null) {
             return undoOwner;
         }
-        String readString = parcel.readString();
-        int readInt2 = parcel.readInt();
-        UndoOwner undoOwner2 = new UndoOwner(readString, this);
-        undoOwner2.mOpCount = readInt2;
-        this.mStateOwners[readInt] = undoOwner2;
-        this.mOwners.put(readString, undoOwner2);
+        String string = parcel.readString();
+        int i2 = parcel.readInt();
+        UndoOwner undoOwner2 = new UndoOwner(string, this);
+        undoOwner2.mOpCount = i2;
+        this.mStateOwners[i] = undoOwner2;
+        this.mOwners.put(string, undoOwner2);
         return undoOwner2;
     }
 
@@ -150,21 +150,21 @@ public class UndoManager {
         if (topUndo != null) {
             topUndo.makeExecuted();
         }
-        int i2 = -1;
-        int i3 = 0;
+        int iFindPrevState = -1;
+        int i2 = 0;
         while (i > 0) {
-            i2 = findPrevState(this.mUndos, undoOwnerArr, i2);
-            if (i2 < 0) {
+            iFindPrevState = findPrevState(this.mUndos, undoOwnerArr, iFindPrevState);
+            if (iFindPrevState < 0) {
                 break;
             }
-            UndoState remove = this.mUndos.remove(i2);
-            remove.undo();
-            this.mRedos.add(remove);
+            UndoState undoStateRemove = this.mUndos.remove(iFindPrevState);
+            undoStateRemove.undo();
+            this.mRedos.add(undoStateRemove);
             i--;
-            i3++;
+            i2++;
         }
         this.mInUndo = false;
-        return i3;
+        return i2;
     }
 
     public int redo(UndoOwner[] undoOwnerArr, int i) {
@@ -172,21 +172,21 @@ public class UndoManager {
             throw new IllegalStateException("Can't be called during an update");
         }
         this.mInUndo = true;
-        int i2 = -1;
-        int i3 = 0;
+        int iFindPrevState = -1;
+        int i2 = 0;
         while (i > 0) {
-            i2 = findPrevState(this.mRedos, undoOwnerArr, i2);
-            if (i2 < 0) {
+            iFindPrevState = findPrevState(this.mRedos, undoOwnerArr, iFindPrevState);
+            if (iFindPrevState < 0) {
                 break;
             }
-            UndoState remove = this.mRedos.remove(i2);
-            remove.redo();
-            this.mUndos.add(remove);
+            UndoState undoStateRemove = this.mRedos.remove(iFindPrevState);
+            undoStateRemove.redo();
+            this.mUndos.add(undoStateRemove);
             i--;
-            i3++;
+            i2++;
         }
         this.mInUndo = false;
-        return i3;
+        return i2;
     }
 
     public boolean isInUndo() {
@@ -238,12 +238,12 @@ public class UndoManager {
         int i = 0;
         int i2 = 0;
         while (true) {
-            int findNextState = findNextState(this.mUndos, undoOwnerArr, i);
-            if (findNextState < 0) {
+            int iFindNextState = findNextState(this.mUndos, undoOwnerArr, i);
+            if (iFindNextState < 0) {
                 return i2;
             }
             i2++;
-            i = findNextState + 1;
+            i = iFindNextState + 1;
         }
     }
 
@@ -254,12 +254,12 @@ public class UndoManager {
         int i = 0;
         int i2 = 0;
         while (true) {
-            int findNextState = findNextState(this.mRedos, undoOwnerArr, i);
-            if (findNextState < 0) {
+            int iFindNextState = findNextState(this.mRedos, undoOwnerArr, i);
+            if (iFindNextState < 0) {
                 return i2;
             }
             i2++;
-            i = findNextState + 1;
+            i = iFindNextState + 1;
         }
     }
 
@@ -450,17 +450,17 @@ public class UndoManager {
     }
 
     UndoState getTopUndo(UndoOwner[] undoOwnerArr) {
-        int findPrevState;
-        if (this.mUndos.size() > 0 && (findPrevState = findPrevState(this.mUndos, undoOwnerArr, -1)) >= 0) {
-            return this.mUndos.get(findPrevState);
+        int iFindPrevState;
+        if (this.mUndos.size() > 0 && (iFindPrevState = findPrevState(this.mUndos, undoOwnerArr, -1)) >= 0) {
+            return this.mUndos.get(iFindPrevState);
         }
         return null;
     }
 
     UndoState getTopRedo(UndoOwner[] undoOwnerArr) {
-        int findPrevState;
-        if (this.mRedos.size() > 0 && (findPrevState = findPrevState(this.mRedos, undoOwnerArr, -1)) >= 0) {
-            return this.mRedos.get(findPrevState);
+        int iFindPrevState;
+        if (this.mRedos.size() > 0 && (iFindPrevState = findPrevState(this.mRedos, undoOwnerArr, -1)) >= 0) {
+            return this.mRedos.get(iFindPrevState);
         }
         return null;
     }
@@ -541,11 +541,11 @@ public class UndoManager {
             this.mCanMerge = parcel.readInt() != 0;
             this.mExecuted = parcel.readInt() != 0;
             this.mLabel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
-            int readInt = parcel.readInt();
-            for (int i = 0; i < readInt; i++) {
-                UndoOwner restoreOwner = this.mManager.restoreOwner(parcel);
+            int i = parcel.readInt();
+            for (int i2 = 0; i2 < i; i2++) {
+                UndoOwner undoOwnerRestoreOwner = this.mManager.restoreOwner(parcel);
                 UndoOperation<?> undoOperation = (UndoOperation) parcel.readParcelable(classLoader, UndoOperation.class);
-                undoOperation.mOwner = restoreOwner;
+                undoOperation.mOwner = undoOwnerRestoreOwner;
                 this.mOperations.add(undoOperation);
             }
         }

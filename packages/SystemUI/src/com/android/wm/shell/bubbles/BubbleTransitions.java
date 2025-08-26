@@ -38,7 +38,6 @@ import com.android.wm.shell.transition.DefaultSurfaceAnimator;
 import com.android.wm.shell.transition.Transitions;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleTransitions {
     public final BubbleData mBubbleData;
@@ -49,7 +48,6 @@ public class BubbleTransitions {
     public final TaskViewTransitions mTaskViewTransitions;
     public final Transitions mTransitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DragData {
         public final float mCornerRadius;
         public final PointF mDragPosition;
@@ -64,7 +62,6 @@ public class BubbleTransitions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DraggedBubbleIconToFullscreen implements Transitions.TransitionHandler, BubbleTransition {
         public final Bubble mBubble;
         public final Point mDropLocation;
@@ -130,9 +127,9 @@ public class BubbleTransitions {
                 return true;
             }
             TaskViewRepository taskViewRepository = bubbleTransitions.mRepository;
-            int findAndPrune = taskViewRepository.findAndPrune(taskViewTaskController);
-            if (findAndPrune >= 0) {
-                taskViewRepository.mTaskViews.remove(findAndPrune);
+            int iFindAndPrune = taskViewRepository.findAndPrune(taskViewTaskController);
+            if (iFindAndPrune >= 0) {
+                taskViewRepository.mTaskViews.remove(iFindAndPrune);
             }
             final SurfaceControl leash = change.getLeash();
             Point point = this.mDropLocation;
@@ -141,12 +138,12 @@ public class BubbleTransitions {
             transaction.apply();
             ((BubbleTransitions$DraggedBubbleIconToFullscreen$$ExternalSyntheticLambda1) this.mTransactionProvider).getClass();
             final SurfaceControl.Transaction transaction3 = new SurfaceControl.Transaction();
-            final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            ofFloat.setDuration(250L);
-            ofFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.wm.shell.bubbles.BubbleTransitions.DraggedBubbleIconToFullscreen.1
+            final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat.setDuration(250L);
+            valueAnimatorOfFloat.addUpdateListener(new Animator.AnimatorUpdateListener() { // from class: com.android.wm.shell.bubbles.BubbleTransitions.DraggedBubbleIconToFullscreen.1
                 @Override // androidx.core.animation.Animator.AnimatorUpdateListener
                 public final void onAnimationUpdate(Animator animator) {
-                    float f = ofFloat.mCurrentFraction;
+                    float f = valueAnimatorOfFloat.mCurrentFraction;
                     Point point2 = DraggedBubbleIconToFullscreen.this.mDropLocation;
                     float f2 = 1.0f - f;
                     transaction3.setPosition(leash, point2.x * f2, point2.y * f2);
@@ -154,14 +151,14 @@ public class BubbleTransitions {
                     transaction3.apply();
                 }
             });
-            ofFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.wm.shell.bubbles.BubbleTransitions.DraggedBubbleIconToFullscreen.2
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.wm.shell.bubbles.BubbleTransitions.DraggedBubbleIconToFullscreen.2
                 @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     transaction3.close();
                     transitionFinishCallback.onTransitionFinished(null);
                 }
             });
-            ofFloat.start(false);
+            valueAnimatorOfFloat.start(false);
             taskViewTaskController.notifyTaskRemovalStarted(bubble.mBubbleTaskView.taskView.mTaskViewTaskController.mTaskInfo);
             bubbleTransitions.mTaskViewTransitions.onExternalDone(iBinder);
             return true;
@@ -187,7 +184,6 @@ public class BubbleTransitions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TransactionProvider {
     }
 
@@ -201,7 +197,6 @@ public class BubbleTransitions {
         this.mContext = context;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface BubbleTransition {
         default void continueExpand() {
         }
@@ -210,7 +205,6 @@ public class BubbleTransitions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ConvertFromBubble implements Transitions.TransitionHandler, BubbleTransition {
         public final Bubble mBubble;
         public SurfaceControl mRootLeash;
@@ -273,9 +267,9 @@ public class BubbleTransitions {
                 change = (TransitionInfo.Change) transitionInfo.getChanges().get(i);
                 if (change.getTaskInfo() != null && change.getMode() == 6 && this.mTaskInfo.token.equals(change.getTaskInfo().token)) {
                     TaskViewRepository taskViewRepository = bubbleTransitions.mRepository;
-                    int findAndPrune = taskViewRepository.findAndPrune(taskViewTaskController);
-                    if (findAndPrune >= 0) {
-                        taskViewRepository.mTaskViews.remove(findAndPrune);
+                    int iFindAndPrune = taskViewRepository.findAndPrune(taskViewTaskController);
+                    if (iFindAndPrune >= 0) {
+                        taskViewRepository.mTaskViews.remove(iFindAndPrune);
                     }
                     z = true;
                 } else {
@@ -333,7 +327,7 @@ public class BubbleTransitions {
                 transaction3.addTransactionCommittedListener(bubbleTransitions.mMainExecutor, new SurfaceControl.TransactionCommittedListener() { // from class: com.android.wm.shell.bubbles.BubbleTransitions$$ExternalSyntheticLambda0
                     @Override // android.view.SurfaceControl.TransactionCommittedListener
                     public final void onTransactionCommitted() {
-                        BubbleTransitions$ConvertFromBubble$$ExternalSyntheticLambda1.this.run();
+                        bubbleTransitions$ConvertFromBubble$$ExternalSyntheticLambda1.run();
                     }
                 });
                 view2.getViewRootImpl().applyTransactionOnDraw(transaction3);
@@ -345,7 +339,7 @@ public class BubbleTransitions {
                 view3.post(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleTransitions$ConvertFromBubble$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BubbleTransitions.ConvertFromBubble convertFromBubble = BubbleTransitions.ConvertFromBubble.this;
+                        BubbleTransitions.ConvertFromBubble convertFromBubble = this.f$0;
                         BubbleTransitions.this.mTransitions.dispatchTransition(convertFromBubble.mTransition, transitionInfo, transaction, transaction2, transitionFinishCallback, null, null);
                     }
                 });
@@ -364,7 +358,6 @@ public class BubbleTransitions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ConvertToBubble implements Transitions.TransitionHandler, BubbleTransition {
         public final Bubble mBubble;
         public final DragData mDragData;
@@ -380,7 +373,6 @@ public class BubbleTransitions {
         public BubbleViewProvider mPriorBubble = null;
         public final TransitionProgress mTransitionProgress = new TransitionProgress(this, 0);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class TransitionProgress {
             public boolean mReadyToExpand;
             public boolean mSurfaceReady;
@@ -410,7 +402,7 @@ public class BubbleTransitions {
             bubble.inflate(new BubbleViewInfoTask.Callback() { // from class: com.android.wm.shell.bubbles.BubbleTransitions$ConvertToBubble$$ExternalSyntheticLambda1
                 @Override // com.android.wm.shell.bubbles.BubbleViewInfoTask.Callback
                 public final void onBubbleViewsReady(Bubble bubble2) {
-                    BubbleTransitions.ConvertToBubble.this.onInflated(bubble2);
+                    this.f$0.onInflated(bubble2);
                 }
             }, context, bubbleExpandedViewManager, bubbleTaskViewFactory, bubblePositioner, bubbleStackView, bubbleBarLayerView, bubbleIconFactory, new BubbleBadgeIconFactory(BubbleTransitions.this.mContext), false);
         }
@@ -456,8 +448,8 @@ public class BubbleTransitions {
             taskView.setSurfaceLifecycle(2);
             BubbleTransitions bubbleTransitions = BubbleTransitions.this;
             TaskViewRepository taskViewRepository = bubbleTransitions.mRepository;
-            int findAndPrune = taskViewRepository.findAndPrune(taskView.mTaskViewTaskController);
-            TaskViewRepository.TaskViewState taskViewState = findAndPrune >= 0 ? (TaskViewRepository.TaskViewState) taskViewRepository.mTaskViews.get(findAndPrune) : null;
+            int iFindAndPrune = taskViewRepository.findAndPrune(taskView.mTaskViewTaskController);
+            TaskViewRepository.TaskViewState taskViewState = iFindAndPrune >= 0 ? (TaskViewRepository.TaskViewState) taskViewRepository.mTaskViews.get(iFindAndPrune) : null;
             if (taskViewState != null) {
                 taskViewState.mVisible = true;
             }
@@ -524,7 +516,7 @@ public class BubbleTransitions {
             final Consumer consumer = new Consumer() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarAnimationHelper$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    BubbleBarAnimationHelper bubbleBarAnimationHelper2 = BubbleBarAnimationHelper.this;
+                    BubbleBarAnimationHelper bubbleBarAnimationHelper2 = bubbleBarAnimationHelper;
                     BubbleBarExpandedView bubbleBarExpandedView = expandedView;
                     SurfaceControl surfaceControl4 = surfaceControl;
                     BubbleTransitions$ConvertToBubble$$ExternalSyntheticLambda2 bubbleTransitions$ConvertToBubble$$ExternalSyntheticLambda22 = bubbleTransitions$ConvertToBubble$$ExternalSyntheticLambda2;
@@ -539,7 +531,7 @@ public class BubbleTransitions {
             ValueAnimator.AnimatorUpdateListener animatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.animation.SizeChangeAnimation$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(android.animation.ValueAnimator valueAnimator) {
-                    SizeChangeAnimation.this.apply(expandedView, transaction2, surfaceControl3, surfaceControl, Math.clamp(valueAnimator.getAnimatedFraction(), 0.0f, 1.0f));
+                    sizeChangeAnimation.apply(expandedView, transaction2, surfaceControl3, surfaceControl, Math.clamp(valueAnimator.getAnimatedFraction(), 0.0f, 1.0f));
                 }
             };
             android.animation.ValueAnimator valueAnimator = sizeChangeAnimation.mAnimator;
@@ -629,16 +621,16 @@ public class BubbleTransitions {
                     transitionProgress.mTransitionReady = true;
                     transitionProgress.onUpdate();
                     BubbleBarLayerView bubbleBarLayerView = this.mLayerView;
-                    boolean canExpandView = bubbleBarLayerView.canExpandView(bubble);
-                    if (canExpandView) {
-                        BubbleViewProvider prepareExpandedView = bubbleBarLayerView.prepareExpandedView(bubble);
+                    boolean zCanExpandView = bubbleBarLayerView.canExpandView(bubble);
+                    if (zCanExpandView) {
+                        BubbleViewProvider bubbleViewProviderPrepareExpandedView = bubbleBarLayerView.prepareExpandedView(bubble);
                         BubbleBarExpandedView bubbleBarExpandedView = bubbleBarLayerView.mExpandedBubble.getBubbleBarExpandedView();
                         if (bubbleBarExpandedView != null) {
                             BubbleBarExpandedView bubbleBarExpandedView2 = bubbleBarLayerView.mExpandedView;
                             if (bubbleBarExpandedView2 != null && (bubbleViewProvider = bubbleBarLayerView.mExpandedBubble) != null && !bubbleBarExpandedView2.mIsAnimating) {
-                                boolean equals = bubbleViewProvider.getKey().equals("Overflow");
+                                boolean zEquals = bubbleViewProvider.getKey().equals("Overflow");
                                 BubblePositioner bubblePositioner = bubbleBarLayerView.mPositioner;
-                                bubblePositioner.getBubbleBarExpandedViewBounds(bubbleBarLayerView.mTempRect, bubblePositioner.isBubbleBarOnLeft(), equals);
+                                bubblePositioner.getBubbleBarExpandedViewBounds(bubbleBarLayerView.mTempRect, bubblePositioner.isBubbleBarOnLeft(), zEquals);
                                 FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) bubbleBarLayerView.mExpandedView.getLayoutParams();
                                 layoutParams.width = bubbleBarLayerView.mTempRect.width();
                                 layoutParams.height = bubbleBarLayerView.mTempRect.height();
@@ -661,17 +653,17 @@ public class BubbleTransitions {
                             bubbleBarExpandedView.setAlpha(0.0f);
                             bubbleBarExpandedView.setVisibility(0);
                         }
-                        this.mPriorBubble = prepareExpandedView;
+                        this.mPriorBubble = bubbleViewProviderPrepareExpandedView;
                     }
                     BubbleViewProvider bubbleViewProvider2 = this.mPriorBubble;
                     if (bubbleViewProvider2 != null) {
                         bubbleBarLayerView.removeView(bubbleViewProvider2.getBubbleBarExpandedView());
                         this.mPriorBubble = null;
                     }
-                    if (canExpandView && (!transitionProgress.mTransitionReady || !transitionProgress.mSurfaceReady)) {
+                    if (zCanExpandView && (!transitionProgress.mTransitionReady || !transitionProgress.mSurfaceReady)) {
                         return true;
                     }
-                    playAnimation(canExpandView);
+                    playAnimation(zCanExpandView);
                     return true;
                 }
                 i++;

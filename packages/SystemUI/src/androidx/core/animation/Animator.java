@@ -4,14 +4,12 @@ import android.view.Choreographer;
 import androidx.core.animation.AnimationHandler;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Animator implements Cloneable {
     public ArrayList mListeners = null;
     public ArrayList mPauseListeners = null;
     public ArrayList mUpdateListeners = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AnimatorListener {
         void onAnimationCancel(Animator animator);
 
@@ -30,7 +28,6 @@ public abstract class Animator implements Cloneable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AnimatorUpdateListener {
         void onAnimationUpdate(Animator animator);
     }
@@ -132,7 +129,7 @@ public abstract class Animator implements Cloneable {
 
     @Override // 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public Animator mo890clone() {
+    public Animator mo892clone() {
         try {
             Animator animator = (Animator) super.clone();
             if (this.mListeners != null) {

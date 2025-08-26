@@ -54,9 +54,9 @@ public interface IServiceListSetChannelListSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.servicedb.IServiceListSetChannelListSession");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IServiceListSetChannelListSession)) {
-                return (IServiceListSetChannelListSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.servicedb.IServiceListSetChannelListSession");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IServiceListSetChannelListSession)) {
+                return (IServiceListSetChannelListSession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,15 +88,15 @@ public interface IServiceListSetChannelListSession extends IInterface {
             if (i == 1) {
                 Bundle[] bundleArr = (Bundle[]) parcel.createTypedArray(Bundle.CREATOR);
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int channelList = setChannelList(bundleArr, bundle, readInt);
+                int channelList = setChannelList(bundleArr, bundle, i3);
                 parcel2.writeNoException();
                 parcel2.writeInt(channelList);
             } else if (i == 2) {
-                int release = release();
+                int iRelease = release();
                 parcel2.writeNoException();
-                parcel2.writeInt(release);
+                parcel2.writeInt(iRelease);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -121,34 +121,34 @@ public interface IServiceListSetChannelListSession extends IInterface {
 
             @Override // android.media.tv.extension.servicedb.IServiceListSetChannelListSession
             public int setChannelList(Bundle[] bundleArr, Bundle bundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListSetChannelListSession");
-                    obtain.writeTypedArray(bundleArr, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListSetChannelListSession");
+                    parcelObtain.writeTypedArray(bundleArr, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListSetChannelListSession
             public int release() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListSetChannelListSession");
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListSetChannelListSession");
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

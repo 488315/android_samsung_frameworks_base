@@ -46,9 +46,9 @@ public interface IDevicesForAttributesCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDevicesForAttributesCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDevicesForAttributesCallback)) {
-                return (IDevicesForAttributesCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDevicesForAttributesCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDevicesForAttributesCallback)) {
+                return (IDevicesForAttributesCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,10 +76,10 @@ public interface IDevicesForAttributesCallback extends IInterface {
             }
             if (i == 1) {
                 AudioAttributes audioAttributes = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                boolean z = parcel.readBoolean();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                 parcel.enforceNoDataAvail();
-                onDevicesForAttributesChanged(audioAttributes, readBoolean, createTypedArrayList);
+                onDevicesForAttributesChanged(audioAttributes, z, arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,15 +103,15 @@ public interface IDevicesForAttributesCallback extends IInterface {
 
             @Override // android.media.IDevicesForAttributesCallback
             public void onDevicesForAttributesChanged(AudioAttributes audioAttributes, boolean z, List<AudioDeviceAttributes> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDevicesForAttributesCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDevicesForAttributesCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

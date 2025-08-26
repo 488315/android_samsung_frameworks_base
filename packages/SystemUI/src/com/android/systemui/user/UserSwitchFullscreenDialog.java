@@ -12,15 +12,31 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import com.android.systemui.R;
 import com.android.systemui.classifier.FalsingCollector;
+import com.android.systemui.popup.util.PopupUIUtil;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.user.ui.binder.UserSwitcherViewBinder;
 import com.android.systemui.user.ui.viewmodel.UserSwitcherViewModel;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserSwitchFullscreenDialog extends SystemUIDialog {
     public final FalsingCollector falsingCollector;
     public final UserSwitcherViewModel userSwitcherViewModel;
+
+    /* renamed from: com.android.systemui.user.UserSwitchFullscreenDialog$onCreate$2, reason: invalid class name */
+    final /* synthetic */ class AnonymousClass2 extends FunctionReferenceImpl implements Function0 {
+        public AnonymousClass2(Object obj) {
+            super(0, obj, UserSwitchFullscreenDialog.class, PopupUIUtil.EXTRA_SIM_CARD_TRAY_WATER_PROTECTION_POPUP_DISMISS, "dismiss()V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function0
+        public final Object invoke() {
+            ((UserSwitchFullscreenDialog) this.receiver).dismiss();
+            return Unit.INSTANCE;
+        }
+    }
 
     public UserSwitchFullscreenDialog(Context context, FalsingCollector falsingCollector, UserSwitcherViewModel userSwitcherViewModel) {
         super(context, R.style.Theme_UserSwitcherFullscreenDialog);
@@ -62,8 +78,8 @@ public final class UserSwitchFullscreenDialog extends SystemUIDialog {
         UserSwitcherViewModel userSwitcherViewModel = this.userSwitcherViewModel;
         LayoutInflater layoutInflater = getLayoutInflater();
         FalsingCollector falsingCollector = this.falsingCollector;
-        UserSwitchFullscreenDialog$onCreate$2 userSwitchFullscreenDialog$onCreate$2 = new UserSwitchFullscreenDialog$onCreate$2(this);
+        AnonymousClass2 anonymousClass2 = new AnonymousClass2(this);
         userSwitcherViewBinder.getClass();
-        UserSwitcherViewBinder.bind(viewGroup, userSwitcherViewModel, layoutInflater, falsingCollector, userSwitchFullscreenDialog$onCreate$2);
+        UserSwitcherViewBinder.bind(viewGroup, userSwitcherViewModel, layoutInflater, falsingCollector, anonymousClass2);
     }
 }

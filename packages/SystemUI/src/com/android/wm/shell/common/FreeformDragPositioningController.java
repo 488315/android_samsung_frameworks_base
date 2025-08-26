@@ -3,13 +3,11 @@ package com.android.wm.shell.common;
 import android.content.Context;
 import android.graphics.PointF;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformDragPositioningController {
     public static volatile FreeformDragPositioningController sFreeformDragPositioningController;
     public final FreeformDragListener mFreeformDragListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FreeformDragListener {
         public final DismissViewManager mDismissViewManager;
         public final PointF mTmpPoint = new PointF();

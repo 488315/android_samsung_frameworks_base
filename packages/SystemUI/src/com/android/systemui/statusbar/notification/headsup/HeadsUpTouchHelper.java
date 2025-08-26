@@ -1,6 +1,5 @@
 package com.android.systemui.statusbar.notification.headsup;
 
-import android.content.Context;
 import android.os.RemoteException;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
@@ -20,10 +19,9 @@ import com.android.systemui.statusbar.notification.stack.AmbientState;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class HeadsUpTouchHelper implements Gefingerpoken {
-    public final AmbientState mAmbientState;
+    public final AmbientState mAmbientState = (AmbientState) Dependency.sDependency.getDependencyInner(AmbientState.class);
     public final Callback mCallback;
     public boolean mCollapseSnoozes;
     public final HeadsUpManager mHeadsUpManager;
@@ -37,11 +35,9 @@ public class HeadsUpTouchHelper implements Gefingerpoken {
     public boolean mTrackingHeadsUp;
     public int mTrackingPointer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface HeadsUpNotificationViewController {
         void setHeadsUpDraggingStartingHeight(int i);
 
@@ -51,14 +47,11 @@ public class HeadsUpTouchHelper implements Gefingerpoken {
     }
 
     public HeadsUpTouchHelper(HeadsUpManager headsUpManager, IStatusBarService iStatusBarService, Callback callback, HeadsUpNotificationViewController headsUpNotificationViewController) {
-        Context context;
         this.mHeadsUpManager = headsUpManager;
         this.mStatusBarService = iStatusBarService;
         this.mCallback = callback;
         this.mPanel = headsUpNotificationViewController;
-        context = ((ViewGroup) NotificationStackScrollLayout.this).mContext;
-        this.mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-        this.mAmbientState = (AmbientState) Dependency.sDependency.getDependencyInner(AmbientState.class);
+        this.mTouchSlop = ViewConfiguration.get(((ViewGroup) NotificationStackScrollLayout.this).mContext).getScaledTouchSlop();
     }
 
     @Override // com.android.systemui.Gefingerpoken
@@ -67,13 +60,13 @@ public class HeadsUpTouchHelper implements Gefingerpoken {
         HeadsUpManagerImpl.HeadsUpEntry headsUpEntry;
         int pointerId;
         if (this.mTouchingHeadsUpView || motionEvent.getActionMasked() == 0) {
-            int findPointerIndex = motionEvent.findPointerIndex(this.mTrackingPointer);
-            if (findPointerIndex < 0) {
+            int iFindPointerIndex = motionEvent.findPointerIndex(this.mTrackingPointer);
+            if (iFindPointerIndex < 0) {
                 this.mTrackingPointer = motionEvent.getPointerId(0);
-                findPointerIndex = 0;
+                iFindPointerIndex = 0;
             }
-            float x = motionEvent.getX(findPointerIndex);
-            float y = motionEvent.getY(findPointerIndex);
+            float x = motionEvent.getX(iFindPointerIndex);
+            float y = motionEvent.getY(iFindPointerIndex);
             int actionMasked = motionEvent.getActionMasked();
             HeadsUpManager headsUpManager = this.mHeadsUpManager;
             if (actionMasked != 0) {
@@ -155,6 +148,22 @@ public class HeadsUpTouchHelper implements Gefingerpoken {
             }
         }
         return false;
+    }
+
+    public final boolean onTouchEvent(MotionEvent motionEvent) {
+        int i = SceneContainerFlag.$r8$clinit;
+        if (!this.mTrackingHeadsUp) {
+            return false;
+        }
+        int actionMasked = motionEvent.getActionMasked();
+        if (actionMasked != 1 && actionMasked != 3) {
+            return true;
+        }
+        this.mTrackingPointer = -1;
+        this.mPickedChild = null;
+        this.mTouchingHeadsUpView = false;
+        setTrackingHeadsUp$1(false);
+        return true;
     }
 
     public final void setTrackingHeadsUp$1(boolean z) {

@@ -47,9 +47,9 @@ public class CropRectFilter extends Filter {
 
     public void initProgram(FilterContext filterContext, int i) {
         if (i == 3) {
-            ShaderProgram createIdentity = ShaderProgram.createIdentity(filterContext);
-            createIdentity.setMaximumTileSize(this.mTileSize);
-            this.mProgram = createIdentity;
+            ShaderProgram shaderProgramCreateIdentity = ShaderProgram.createIdentity(filterContext);
+            shaderProgramCreateIdentity.setMaximumTileSize(this.mTileSize);
+            this.mProgram = shaderProgramCreateIdentity;
             this.mTarget = i;
             return;
         }
@@ -65,18 +65,18 @@ public class CropRectFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
-        Frame newFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(this.mOutputWidth, this.mOutputHeight, 3, 3));
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(this.mOutputWidth, this.mOutputHeight, 3, 3));
         if (this.mProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
         }
         if (format.getWidth() != this.mWidth || format.getHeight() != this.mHeight) {
             updateSourceRect(format.getWidth(), format.getHeight());
         }
-        this.mProgram.process(pullInput, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        this.mProgram.process(framePullInput, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 
     void updateSourceRect(int i, int i2) {

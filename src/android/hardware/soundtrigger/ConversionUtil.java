@@ -199,12 +199,12 @@ public class ConversionUtil {
             str = "";
         }
         try {
-            SharedMemory create = SharedMemory.create(str, bArr.length);
-            ByteBuffer mapReadWrite = create.mapReadWrite();
-            mapReadWrite.put(bArr);
-            SharedMemory.unmap(mapReadWrite);
-            ParcelFileDescriptor fdDup = create.getFdDup();
-            create.close();
+            SharedMemory sharedMemoryCreate = SharedMemory.create(str, bArr.length);
+            ByteBuffer byteBufferMapReadWrite = sharedMemoryCreate.mapReadWrite();
+            byteBufferMapReadWrite.put(bArr);
+            SharedMemory.unmap(byteBufferMapReadWrite);
+            ParcelFileDescriptor fdDup = sharedMemoryCreate.getFdDup();
+            sharedMemoryCreate.close();
             return fdDup;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -216,17 +216,17 @@ public class ConversionUtil {
             return new byte[0];
         }
         try {
-            SharedMemory fromFileDescriptor = SharedMemory.fromFileDescriptor(parcelFileDescriptor);
+            SharedMemory sharedMemoryFromFileDescriptor = SharedMemory.fromFileDescriptor(parcelFileDescriptor);
             try {
-                ByteBuffer mapReadOnly = fromFileDescriptor.mapReadOnly();
-                if (i > fromFileDescriptor.getSize()) {
-                    i = fromFileDescriptor.getSize();
+                ByteBuffer byteBufferMapReadOnly = sharedMemoryFromFileDescriptor.mapReadOnly();
+                if (i > sharedMemoryFromFileDescriptor.getSize()) {
+                    i = sharedMemoryFromFileDescriptor.getSize();
                 }
                 byte[] bArr = new byte[i];
-                mapReadOnly.get(bArr);
-                SharedMemory.unmap(mapReadOnly);
-                if (fromFileDescriptor != null) {
-                    fromFileDescriptor.close();
+                byteBufferMapReadOnly.get(bArr);
+                SharedMemory.unmap(byteBufferMapReadOnly);
+                if (sharedMemoryFromFileDescriptor != null) {
+                    sharedMemoryFromFileDescriptor.close();
                 }
                 return bArr;
             } finally {

@@ -10,17 +10,14 @@ import io.reactivex.internal.schedulers.TrampolineScheduler;
 import io.reactivex.plugins.RxJavaPlugins;
 import java.util.concurrent.Callable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Schedulers {
     public static final Scheduler COMPUTATION;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ComputationHolder {
         public static final ComputationScheduler DEFAULT = new ComputationScheduler();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ComputationTask implements Callable {
         @Override // java.util.concurrent.Callable
         public final Object call() {
@@ -28,7 +25,6 @@ public final class Schedulers {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IOTask implements Callable {
         @Override // java.util.concurrent.Callable
         public final Object call() {
@@ -36,17 +32,14 @@ public final class Schedulers {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IoHolder {
         public static final IoScheduler DEFAULT = new IoScheduler();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NewThreadHolder {
         public static final NewThreadScheduler DEFAULT = new NewThreadScheduler();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NewThreadTask implements Callable {
         @Override // java.util.concurrent.Callable
         public final Object call() {
@@ -54,12 +47,10 @@ public final class Schedulers {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SingleHolder {
         public static final SingleScheduler DEFAULT = new SingleScheduler();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SingleTask implements Callable {
         @Override // java.util.concurrent.Callable
         public final Object call() {

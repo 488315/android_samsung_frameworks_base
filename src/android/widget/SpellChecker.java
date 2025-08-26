@@ -48,9 +48,9 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
 
     public SpellChecker(TextView textView) {
         this.mTextView = textView;
-        int[] newUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(1);
-        this.mIds = newUnpaddedIntArray;
-        this.mSpellCheckSpans = new SpellCheckSpan[newUnpaddedIntArray.length];
+        int[] iArrNewUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(1);
+        this.mIds = iArrNewUnpaddedIntArray;
+        this.mSpellCheckSpans = new SpellCheckSpan[iArrNewUnpaddedIntArray.length];
         setLocale(textView.getSpellCheckerLocale());
         this.mCookie = hashCode();
     }
@@ -121,14 +121,14 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
 
     /* JADX INFO: Access modifiers changed from: private */
     public void addSpellCheckSpan(Editable editable, int i, int i2) {
-        int nextSpellCheckSpanIndex = nextSpellCheckSpanIndex();
-        SpellCheckSpan spellCheckSpan = this.mSpellCheckSpans[nextSpellCheckSpanIndex];
+        int iNextSpellCheckSpanIndex = nextSpellCheckSpanIndex();
+        SpellCheckSpan spellCheckSpan = this.mSpellCheckSpans[iNextSpellCheckSpanIndex];
         editable.setSpan(spellCheckSpan, i, i2, 33);
         spellCheckSpan.setSpellCheckInProgress(false);
         int[] iArr = this.mIds;
         int i3 = this.mSpanSequenceCounter;
         this.mSpanSequenceCounter = i3 + 1;
-        iArr[nextSpellCheckSpanIndex] = i3;
+        iArr[iNextSpellCheckSpanIndex] = i3;
     }
 
     public void onSpellCheckSpanRemoved(SpellCheckSpan spellCheckSpan) {
@@ -155,18 +155,18 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
     public void spellCheck(int i, int i2, boolean z) {
         Locale locale;
         Locale spellCheckerLocale = this.mTextView.getSpellCheckerLocale();
-        boolean isSessionActive = isSessionActive();
+        boolean zIsSessionActive = isSessionActive();
         if (spellCheckerLocale == null || (locale = this.mCurrentLocale) == null || !locale.equals(spellCheckerLocale)) {
             setLocale(spellCheckerLocale);
             i2 = this.mTextView.getText().length();
             i = 0;
         } else {
             TextServicesManager textServicesManager = this.mTextServicesManager;
-            if (isSessionActive != (textServicesManager != null && textServicesManager.isSpellCheckerEnabled())) {
+            if (zIsSessionActive != (textServicesManager != null && textServicesManager.isSpellCheckerEnabled())) {
                 resetSession();
             }
         }
-        if (isSessionActive) {
+        if (zIsSessionActive) {
             int length = this.mSpellParsers.length;
             for (int i3 = 0; i3 < length; i3++) {
                 SpellParser spellParser = this.mSpellParsers[i3];
@@ -257,10 +257,10 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
                             i4 = spanStart;
                         }
                         if (spanStart >= 0 && spanEnd > spanStart && i5 > i4) {
-                            boolean isVisibleToAccessibility = this.mTextView.isVisibleToAccessibility();
-                            SpannedString spannedString = isVisibleToAccessibility ? new SpannedString(editable) : null;
-                            boolean removeErrorSuggestionSpan = removeErrorSuggestionSpan(editable, i4, i5, RemoveReason.OBSOLETE);
-                            if (isVisibleToAccessibility && removeErrorSuggestionSpan) {
+                            boolean zIsVisibleToAccessibility = this.mTextView.isVisibleToAccessibility();
+                            SpannedString spannedString = zIsVisibleToAccessibility ? new SpannedString(editable) : null;
+                            boolean zRemoveErrorSuggestionSpan = removeErrorSuggestionSpan(editable, i4, i5, RemoveReason.OBSOLETE);
+                            if (zIsVisibleToAccessibility && zRemoveErrorSuggestionSpan) {
                                 this.mTextView.sendAccessibilityEventTypeViewTextChanged(spannedString, i4, i5);
                             }
                         }
@@ -290,9 +290,9 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
     public void onGetSuggestions(SuggestionsInfo[] suggestionsInfoArr) {
         Editable editable = (Editable) this.mTextView.getText();
         for (SuggestionsInfo suggestionsInfo : suggestionsInfoArr) {
-            SpellCheckSpan onGetSuggestionsInternal = onGetSuggestionsInternal(suggestionsInfo, -1, -1);
-            if (onGetSuggestionsInternal != null) {
-                editable.removeSpan(onGetSuggestionsInternal);
+            SpellCheckSpan spellCheckSpanOnGetSuggestionsInternal = onGetSuggestionsInternal(suggestionsInfo, -1, -1);
+            if (spellCheckSpanOnGetSuggestionsInternal != null) {
+                editable.removeSpan(spellCheckSpanOnGetSuggestionsInternal);
             }
         }
         scheduleNewSpellCheck();
@@ -307,9 +307,9 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
                 for (int i = 0; i < sentenceSuggestionsInfo.getSuggestionsCount(); i++) {
                     SuggestionsInfo suggestionsInfoAt = sentenceSuggestionsInfo.getSuggestionsInfoAt(i);
                     if (suggestionsInfoAt != null) {
-                        SpellCheckSpan onGetSuggestionsInternal = onGetSuggestionsInternal(suggestionsInfoAt, sentenceSuggestionsInfo.getOffsetAt(i), sentenceSuggestionsInfo.getLengthAt(i));
-                        if (spellCheckSpan == null && onGetSuggestionsInternal != null) {
-                            spellCheckSpan = onGetSuggestionsInternal;
+                        SpellCheckSpan spellCheckSpanOnGetSuggestionsInternal = onGetSuggestionsInternal(suggestionsInfoAt, sentenceSuggestionsInfo.getOffsetAt(i), sentenceSuggestionsInfo.getLengthAt(i));
+                        if (spellCheckSpan == null && spellCheckSpanOnGetSuggestionsInternal != null) {
+                            spellCheckSpan = spellCheckSpanOnGetSuggestionsInternal;
                         }
                     }
                 }
@@ -392,24 +392,24 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
 
         public void setCharSequence(CharSequence charSequence, int i, int i2) {
             this.mStartOffset = Math.max(0, i);
-            int min = Math.min(i2, charSequence.length());
-            this.mEndOffset = min;
-            this.mSentenceIterator.setText(charSequence.subSequence(this.mStartOffset, min).toString());
+            int iMin = Math.min(i2, charSequence.length());
+            this.mEndOffset = iMin;
+            this.mSentenceIterator.setText(charSequence.subSequence(this.mStartOffset, iMin).toString());
         }
 
         public int preceding(int i) {
-            int preceding;
+            int iPreceding;
             int i2 = this.mStartOffset;
-            if (i >= i2 && (preceding = this.mSentenceIterator.preceding(i - i2)) != -1) {
-                return preceding + this.mStartOffset;
+            if (i >= i2 && (iPreceding = this.mSentenceIterator.preceding(i - i2)) != -1) {
+                return iPreceding + this.mStartOffset;
             }
             return -1;
         }
 
         public int following(int i) {
-            int following;
-            if (i <= this.mEndOffset && (following = this.mSentenceIterator.following(i - this.mStartOffset)) != -1) {
-                return following + this.mStartOffset;
+            int iFollowing;
+            if (i <= this.mEndOffset && (iFollowing = this.mSentenceIterator.following(i - this.mStartOffset)) != -1) {
+                return iFollowing + this.mStartOffset;
             }
             return -1;
         }
@@ -465,45 +465,45 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
             Editable editable = (Editable) SpellChecker.this.mTextView.getText();
             int spanStart = editable.getSpanStart(this.mRange);
             int spanEnd = editable.getSpanEnd(this.mRange);
-            Range detectSentenceBoundary = SpellChecker.this.detectSentenceBoundary(editable, spanStart, spanEnd);
-            int intValue = ((Integer) detectSentenceBoundary.getLower()).intValue();
-            int intValue2 = ((Integer) detectSentenceBoundary.getUpper()).intValue();
-            if (intValue == intValue2) {
+            Range rangeDetectSentenceBoundary = SpellChecker.this.detectSentenceBoundary(editable, spanStart, spanEnd);
+            int iIntValue = ((Integer) rangeDetectSentenceBoundary.getLower()).intValue();
+            int iIntValue2 = ((Integer) rangeDetectSentenceBoundary.getUpper()).intValue();
+            if (iIntValue == iIntValue2) {
                 stop();
                 return;
             }
             boolean z = true;
-            boolean z2 = intValue2 < spanEnd;
-            int i = intValue;
-            int i2 = 0;
+            boolean z2 = iIntValue2 < spanEnd;
+            int iMin = iIntValue;
+            int i = 0;
             while (true) {
-                if (i2 >= SpellChecker.this.mLength) {
+                if (i >= SpellChecker.this.mLength) {
                     break;
                 }
-                SpellCheckSpan spellCheckSpan = SpellChecker.this.mSpellCheckSpans[i2];
-                if (SpellChecker.this.mIds[i2] >= 0 && !spellCheckSpan.isSpellCheckInProgress()) {
+                SpellCheckSpan spellCheckSpan = SpellChecker.this.mSpellCheckSpans[i];
+                if (SpellChecker.this.mIds[i] >= 0 && !spellCheckSpan.isSpellCheckInProgress()) {
                     int spanStart2 = editable.getSpanStart(spellCheckSpan);
                     int spanEnd2 = editable.getSpanEnd(spellCheckSpan);
-                    if (spanEnd2 >= i && intValue2 >= spanStart2) {
-                        if (spanStart2 <= i && intValue2 <= spanEnd2) {
+                    if (spanEnd2 >= iMin && iIntValue2 >= spanStart2) {
+                        if (spanStart2 <= iMin && iIntValue2 <= spanEnd2) {
                             z = false;
                             break;
                         } else {
                             editable.removeSpan(spellCheckSpan);
-                            i = Math.min(spanStart2, i);
-                            intValue2 = Math.max(spanEnd2, intValue2);
+                            iMin = Math.min(spanStart2, iMin);
+                            iIntValue2 = Math.max(spanEnd2, iIntValue2);
                         }
                     }
                 }
-                i2++;
+                i++;
             }
-            if (intValue2 <= i) {
-                Log.w(SpellChecker.TAG, "Trying to spellcheck invalid region, from " + intValue + " to " + intValue2);
+            if (iIntValue2 <= iMin) {
+                Log.w(SpellChecker.TAG, "Trying to spellcheck invalid region, from " + iIntValue + " to " + iIntValue2);
             } else if (z) {
-                SpellChecker.this.addSpellCheckSpan(editable, i, intValue2);
+                SpellChecker.this.addSpellCheckSpan(editable, iMin, iIntValue2);
             }
-            if (z2 && intValue2 != -1 && intValue2 <= spanEnd) {
-                setRangeSpan(editable, intValue2, spanEnd);
+            if (z2 && iIntValue2 != -1 && iIntValue2 <= spanEnd) {
+                setRangeSpan(editable, iIntValue2, spanEnd);
             } else {
                 removeRangeSpan(editable);
             }
@@ -521,37 +521,37 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
 
     /* JADX INFO: Access modifiers changed from: private */
     public Range<Integer> detectSentenceBoundary(CharSequence charSequence, int i, int i2) {
-        int findSeparator = findSeparator(charSequence, Math.max(0, i - 350), Math.max(0, i - 700));
-        int findSeparator2 = findSeparator(charSequence, Math.min(i + 700, i2), Math.min(i + 1050, charSequence.length()));
-        this.mSentenceIterator.setCharSequence(charSequence, findSeparator, findSeparator2);
-        int preceding = this.mSentenceIterator.isBoundary(i) ? i : this.mSentenceIterator.preceding(i);
-        int following = this.mSentenceIterator.following(preceding);
-        if (following != -1) {
-            findSeparator2 = following;
+        int iFindSeparator = findSeparator(charSequence, Math.max(0, i - 350), Math.max(0, i - 700));
+        int iFindSeparator2 = findSeparator(charSequence, Math.min(i + 700, i2), Math.min(i + 1050, charSequence.length()));
+        this.mSentenceIterator.setCharSequence(charSequence, iFindSeparator, iFindSeparator2);
+        int iPreceding = this.mSentenceIterator.isBoundary(i) ? i : this.mSentenceIterator.preceding(i);
+        int iFollowing = this.mSentenceIterator.following(iPreceding);
+        if (iFollowing != -1) {
+            iFindSeparator2 = iFollowing;
         }
-        if (findSeparator2 - preceding <= 350) {
-            while (findSeparator2 < i2) {
-                int following2 = this.mSentenceIterator.following(findSeparator2);
-                if (following2 == -1 || following2 - preceding > 350) {
+        if (iFindSeparator2 - iPreceding <= 350) {
+            while (iFindSeparator2 < i2) {
+                int iFollowing2 = this.mSentenceIterator.following(iFindSeparator2);
+                if (iFollowing2 == -1 || iFollowing2 - iPreceding > 350) {
                     break;
                 }
-                findSeparator2 = following2;
+                iFindSeparator2 = iFollowing2;
             }
-        } else if (findSeparator2 - i > 350) {
-            findSeparator2 = findSeparator(charSequence, i + 350, findSeparator2);
-            preceding = roundUpToWordStart(charSequence, i, preceding);
+        } else if (iFindSeparator2 - i > 350) {
+            iFindSeparator2 = findSeparator(charSequence, i + 350, iFindSeparator2);
+            iPreceding = roundUpToWordStart(charSequence, i, iPreceding);
         } else {
-            preceding = roundUpToWordStart(charSequence, findSeparator2 - 350, preceding);
+            iPreceding = roundUpToWordStart(charSequence, iFindSeparator2 - 350, iPreceding);
         }
-        return new Range<>(Integer.valueOf(preceding), Integer.valueOf(Math.max(preceding, findSeparator2)));
+        return new Range<>(Integer.valueOf(iPreceding), Integer.valueOf(Math.max(iPreceding, iFindSeparator2)));
     }
 
     private int roundUpToWordStart(CharSequence charSequence, int i, int i2) {
         if (isSeparator(charSequence.charAt(i))) {
             return i;
         }
-        int findSeparator = findSeparator(charSequence, i, i2);
-        return findSeparator != i2 ? findSeparator + 1 : i2;
+        int iFindSeparator = findSeparator(charSequence, i, i2);
+        return iFindSeparator != i2 ? iFindSeparator + 1 : i2;
     }
 
     private static int findSeparator(CharSequence charSequence, int i, int i2) {

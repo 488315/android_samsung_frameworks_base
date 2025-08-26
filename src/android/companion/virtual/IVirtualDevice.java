@@ -427,9 +427,9 @@ public interface IVirtualDevice extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVirtualDevice.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVirtualDevice)) {
-                return (IVirtualDevice) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVirtualDevice.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVirtualDevice)) {
+                return (IVirtualDevice) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -573,21 +573,21 @@ public interface IVirtualDevice extends IInterface {
                     parcel2.writeIntArray(displayIds);
                     return true;
                 case 5:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int devicePolicy = getDevicePolicy(readInt);
+                    int devicePolicy = getDevicePolicy(i3);
                     parcel2.writeNoException();
                     parcel2.writeInt(devicePolicy);
                     return true;
                 case 6:
-                    boolean hasCustomAudioInputSupport = hasCustomAudioInputSupport();
+                    boolean zHasCustomAudioInputSupport = hasCustomAudioInputSupport();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasCustomAudioInputSupport);
+                    parcel2.writeBoolean(zHasCustomAudioInputSupport);
                     return true;
                 case 7:
-                    boolean canCreateMirrorDisplays = canCreateMirrorDisplays();
+                    boolean zCanCreateMirrorDisplays = canCreateMirrorDisplays();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canCreateMirrorDisplays);
+                    parcel2.writeBoolean(zCanCreateMirrorDisplays);
                     return true;
                 case 8:
                     goToSleep();
@@ -602,10 +602,10 @@ public interface IVirtualDevice extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setDevicePolicy(readInt2, readInt3);
+                    setDevicePolicy(i4, i5);
                     parcel2.writeNoException();
                     return true;
                 case 12:
@@ -621,19 +621,19 @@ public interface IVirtualDevice extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setDevicePolicyForDisplay(readInt4, readInt5, readInt6);
+                    setDevicePolicyForDisplay(i6, i7, i8);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt7 = parcel.readInt();
-                    IAudioRoutingCallback asInterface = IAudioRoutingCallback.Stub.asInterface(parcel.readStrongBinder());
-                    IAudioConfigChangedCallback asInterface2 = IAudioConfigChangedCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i9 = parcel.readInt();
+                    IAudioRoutingCallback iAudioRoutingCallbackAsInterface = IAudioRoutingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioConfigChangedCallback iAudioConfigChangedCallbackAsInterface = IAudioConfigChangedCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onAudioSessionStarting(readInt7, asInterface, asInterface2);
+                    onAudioSessionStarting(i9, iAudioRoutingCallbackAsInterface, iAudioConfigChangedCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 16:
@@ -642,145 +642,145 @@ public interface IVirtualDevice extends IInterface {
                     return true;
                 case 17:
                     VirtualDisplayConfig virtualDisplayConfig = (VirtualDisplayConfig) parcel.readTypedObject(VirtualDisplayConfig.CREATOR);
-                    IVirtualDisplayCallback asInterface3 = IVirtualDisplayCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IVirtualDisplayCallback iVirtualDisplayCallbackAsInterface = IVirtualDisplayCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int createVirtualDisplay = createVirtualDisplay(virtualDisplayConfig, asInterface3);
+                    int iCreateVirtualDisplay = createVirtualDisplay(virtualDisplayConfig, iVirtualDisplayCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createVirtualDisplay);
+                    parcel2.writeInt(iCreateVirtualDisplay);
                     return true;
                 case 18:
                     VirtualDpadConfig virtualDpadConfig = (VirtualDpadConfig) parcel.readTypedObject(VirtualDpadConfig.CREATOR);
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    createVirtualDpad(virtualDpadConfig, readStrongBinder);
+                    createVirtualDpad(virtualDpadConfig, strongBinder);
                     parcel2.writeNoException();
                     return true;
                 case 19:
                     VirtualKeyboardConfig virtualKeyboardConfig = (VirtualKeyboardConfig) parcel.readTypedObject(VirtualKeyboardConfig.CREATOR);
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    createVirtualKeyboard(virtualKeyboardConfig, readStrongBinder2);
+                    createVirtualKeyboard(virtualKeyboardConfig, strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 20:
                     VirtualMouseConfig virtualMouseConfig = (VirtualMouseConfig) parcel.readTypedObject(VirtualMouseConfig.CREATOR);
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    createVirtualMouse(virtualMouseConfig, readStrongBinder3);
+                    createVirtualMouse(virtualMouseConfig, strongBinder3);
                     parcel2.writeNoException();
                     return true;
                 case 21:
                     VirtualTouchscreenConfig virtualTouchscreenConfig = (VirtualTouchscreenConfig) parcel.readTypedObject(VirtualTouchscreenConfig.CREATOR);
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    createVirtualTouchscreen(virtualTouchscreenConfig, readStrongBinder4);
+                    createVirtualTouchscreen(virtualTouchscreenConfig, strongBinder4);
                     parcel2.writeNoException();
                     return true;
                 case 22:
                     VirtualNavigationTouchpadConfig virtualNavigationTouchpadConfig = (VirtualNavigationTouchpadConfig) parcel.readTypedObject(VirtualNavigationTouchpadConfig.CREATOR);
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    createVirtualNavigationTouchpad(virtualNavigationTouchpadConfig, readStrongBinder5);
+                    createVirtualNavigationTouchpad(virtualNavigationTouchpadConfig, strongBinder5);
                     parcel2.writeNoException();
                     return true;
                 case 23:
                     VirtualStylusConfig virtualStylusConfig = (VirtualStylusConfig) parcel.readTypedObject(VirtualStylusConfig.CREATOR);
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    createVirtualStylus(virtualStylusConfig, readStrongBinder6);
+                    createVirtualStylus(virtualStylusConfig, strongBinder6);
                     parcel2.writeNoException();
                     return true;
                 case 24:
                     VirtualRotaryEncoderConfig virtualRotaryEncoderConfig = (VirtualRotaryEncoderConfig) parcel.readTypedObject(VirtualRotaryEncoderConfig.CREATOR);
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    createVirtualRotaryEncoder(virtualRotaryEncoderConfig, readStrongBinder7);
+                    createVirtualRotaryEncoder(virtualRotaryEncoderConfig, strongBinder7);
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    IBinder readStrongBinder8 = parcel.readStrongBinder();
+                    IBinder strongBinder8 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    unregisterInputDevice(readStrongBinder8);
+                    unregisterInputDevice(strongBinder8);
                     parcel2.writeNoException();
                     return true;
                 case 26:
-                    IBinder readStrongBinder9 = parcel.readStrongBinder();
+                    IBinder strongBinder9 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    int inputDeviceId = getInputDeviceId(readStrongBinder9);
+                    int inputDeviceId = getInputDeviceId(strongBinder9);
                     parcel2.writeNoException();
                     parcel2.writeInt(inputDeviceId);
                     return true;
                 case 27:
-                    IBinder readStrongBinder10 = parcel.readStrongBinder();
+                    IBinder strongBinder10 = parcel.readStrongBinder();
                     VirtualKeyEvent virtualKeyEvent = (VirtualKeyEvent) parcel.readTypedObject(VirtualKeyEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendDpadKeyEvent = sendDpadKeyEvent(readStrongBinder10, virtualKeyEvent);
+                    boolean zSendDpadKeyEvent = sendDpadKeyEvent(strongBinder10, virtualKeyEvent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendDpadKeyEvent);
+                    parcel2.writeBoolean(zSendDpadKeyEvent);
                     return true;
                 case 28:
-                    IBinder readStrongBinder11 = parcel.readStrongBinder();
+                    IBinder strongBinder11 = parcel.readStrongBinder();
                     VirtualKeyEvent virtualKeyEvent2 = (VirtualKeyEvent) parcel.readTypedObject(VirtualKeyEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendKeyEvent = sendKeyEvent(readStrongBinder11, virtualKeyEvent2);
+                    boolean zSendKeyEvent = sendKeyEvent(strongBinder11, virtualKeyEvent2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendKeyEvent);
+                    parcel2.writeBoolean(zSendKeyEvent);
                     return true;
                 case 29:
-                    IBinder readStrongBinder12 = parcel.readStrongBinder();
+                    IBinder strongBinder12 = parcel.readStrongBinder();
                     VirtualMouseButtonEvent virtualMouseButtonEvent = (VirtualMouseButtonEvent) parcel.readTypedObject(VirtualMouseButtonEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendButtonEvent = sendButtonEvent(readStrongBinder12, virtualMouseButtonEvent);
+                    boolean zSendButtonEvent = sendButtonEvent(strongBinder12, virtualMouseButtonEvent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendButtonEvent);
+                    parcel2.writeBoolean(zSendButtonEvent);
                     return true;
                 case 30:
-                    IBinder readStrongBinder13 = parcel.readStrongBinder();
+                    IBinder strongBinder13 = parcel.readStrongBinder();
                     VirtualMouseRelativeEvent virtualMouseRelativeEvent = (VirtualMouseRelativeEvent) parcel.readTypedObject(VirtualMouseRelativeEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendRelativeEvent = sendRelativeEvent(readStrongBinder13, virtualMouseRelativeEvent);
+                    boolean zSendRelativeEvent = sendRelativeEvent(strongBinder13, virtualMouseRelativeEvent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendRelativeEvent);
+                    parcel2.writeBoolean(zSendRelativeEvent);
                     return true;
                 case 31:
-                    IBinder readStrongBinder14 = parcel.readStrongBinder();
+                    IBinder strongBinder14 = parcel.readStrongBinder();
                     VirtualMouseScrollEvent virtualMouseScrollEvent = (VirtualMouseScrollEvent) parcel.readTypedObject(VirtualMouseScrollEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendScrollEvent = sendScrollEvent(readStrongBinder14, virtualMouseScrollEvent);
+                    boolean zSendScrollEvent = sendScrollEvent(strongBinder14, virtualMouseScrollEvent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendScrollEvent);
+                    parcel2.writeBoolean(zSendScrollEvent);
                     return true;
                 case 32:
-                    IBinder readStrongBinder15 = parcel.readStrongBinder();
+                    IBinder strongBinder15 = parcel.readStrongBinder();
                     VirtualTouchEvent virtualTouchEvent = (VirtualTouchEvent) parcel.readTypedObject(VirtualTouchEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendTouchEvent = sendTouchEvent(readStrongBinder15, virtualTouchEvent);
+                    boolean zSendTouchEvent = sendTouchEvent(strongBinder15, virtualTouchEvent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendTouchEvent);
+                    parcel2.writeBoolean(zSendTouchEvent);
                     return true;
                 case 33:
-                    IBinder readStrongBinder16 = parcel.readStrongBinder();
+                    IBinder strongBinder16 = parcel.readStrongBinder();
                     VirtualStylusMotionEvent virtualStylusMotionEvent = (VirtualStylusMotionEvent) parcel.readTypedObject(VirtualStylusMotionEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendStylusMotionEvent = sendStylusMotionEvent(readStrongBinder16, virtualStylusMotionEvent);
+                    boolean zSendStylusMotionEvent = sendStylusMotionEvent(strongBinder16, virtualStylusMotionEvent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendStylusMotionEvent);
+                    parcel2.writeBoolean(zSendStylusMotionEvent);
                     return true;
                 case 34:
-                    IBinder readStrongBinder17 = parcel.readStrongBinder();
+                    IBinder strongBinder17 = parcel.readStrongBinder();
                     VirtualStylusButtonEvent virtualStylusButtonEvent = (VirtualStylusButtonEvent) parcel.readTypedObject(VirtualStylusButtonEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendStylusButtonEvent = sendStylusButtonEvent(readStrongBinder17, virtualStylusButtonEvent);
+                    boolean zSendStylusButtonEvent = sendStylusButtonEvent(strongBinder17, virtualStylusButtonEvent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendStylusButtonEvent);
+                    parcel2.writeBoolean(zSendStylusButtonEvent);
                     return true;
                 case 35:
-                    IBinder readStrongBinder18 = parcel.readStrongBinder();
+                    IBinder strongBinder18 = parcel.readStrongBinder();
                     VirtualRotaryEncoderScrollEvent virtualRotaryEncoderScrollEvent = (VirtualRotaryEncoderScrollEvent) parcel.readTypedObject(VirtualRotaryEncoderScrollEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendRotaryEncoderScrollEvent = sendRotaryEncoderScrollEvent(readStrongBinder18, virtualRotaryEncoderScrollEvent);
+                    boolean zSendRotaryEncoderScrollEvent = sendRotaryEncoderScrollEvent(strongBinder18, virtualRotaryEncoderScrollEvent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendRotaryEncoderScrollEvent);
+                    parcel2.writeBoolean(zSendRotaryEncoderScrollEvent);
                     return true;
                 case 36:
                     List<VirtualSensor> virtualSensorList = getVirtualSensorList();
@@ -788,60 +788,60 @@ public interface IVirtualDevice extends IInterface {
                     parcel2.writeTypedList(virtualSensorList, 1);
                     return true;
                 case 37:
-                    IBinder readStrongBinder19 = parcel.readStrongBinder();
+                    IBinder strongBinder19 = parcel.readStrongBinder();
                     VirtualSensorEvent virtualSensorEvent = (VirtualSensorEvent) parcel.readTypedObject(VirtualSensorEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendSensorEvent = sendSensorEvent(readStrongBinder19, virtualSensorEvent);
+                    boolean zSendSensorEvent = sendSensorEvent(strongBinder19, virtualSensorEvent);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendSensorEvent);
+                    parcel2.writeBoolean(zSendSensorEvent);
                     return true;
                 case 38:
-                    IBinder readStrongBinder20 = parcel.readStrongBinder();
+                    IBinder strongBinder20 = parcel.readStrongBinder();
                     VirtualSensorAdditionalInfo virtualSensorAdditionalInfo = (VirtualSensorAdditionalInfo) parcel.readTypedObject(VirtualSensorAdditionalInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean sendSensorAdditionalInfo = sendSensorAdditionalInfo(readStrongBinder20, virtualSensorAdditionalInfo);
+                    boolean zSendSensorAdditionalInfo = sendSensorAdditionalInfo(strongBinder20, virtualSensorAdditionalInfo);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendSensorAdditionalInfo);
+                    parcel2.writeBoolean(zSendSensorAdditionalInfo);
                     return true;
                 case 39:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
                     ResultReceiver resultReceiver = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                     parcel.enforceNoDataAvail();
-                    launchPendingIntent(readInt8, pendingIntent, resultReceiver);
+                    launchPendingIntent(i10, pendingIntent, resultReceiver);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    IBinder readStrongBinder21 = parcel.readStrongBinder();
+                    IBinder strongBinder21 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    PointF cursorPosition = getCursorPosition(readStrongBinder21);
+                    PointF cursorPosition = getCursorPosition(strongBinder21);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(cursorPosition, 1);
                     return true;
                 case 41:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setShowPointerIcon(readBoolean);
+                    setShowPointerIcon(z);
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setDisplayImePolicy(readInt9, readInt10);
+                    setDisplayImePolicy(i11, i12);
                     parcel2.writeNoException();
                     return true;
                 case 43:
-                    IVirtualDeviceIntentInterceptor asInterface4 = IVirtualDeviceIntentInterceptor.Stub.asInterface(parcel.readStrongBinder());
+                    IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptorAsInterface = IVirtualDeviceIntentInterceptor.Stub.asInterface(parcel.readStrongBinder());
                     IntentFilter intentFilter = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
                     parcel.enforceNoDataAvail();
-                    registerIntentInterceptor(asInterface4, intentFilter);
+                    registerIntentInterceptor(iVirtualDeviceIntentInterceptorAsInterface, intentFilter);
                     parcel2.writeNoException();
                     return true;
                 case 44:
-                    IVirtualDeviceIntentInterceptor asInterface5 = IVirtualDeviceIntentInterceptor.Stub.asInterface(parcel.readStrongBinder());
+                    IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptorAsInterface2 = IVirtualDeviceIntentInterceptor.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterIntentInterceptor(asInterface5);
+                    unregisterIntentInterceptor(iVirtualDeviceIntentInterceptorAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 45:
@@ -864,10 +864,10 @@ public interface IVirtualDevice extends IInterface {
                     parcel2.writeString(virtualCameraId);
                     return true;
                 case 48:
-                    IVirtualDeviceActivityListener asInterface6 = IVirtualDeviceActivityListener.Stub.asInterface(parcel.readStrongBinder());
-                    IVirtualDeviceSoundEffectListener asInterface7 = IVirtualDeviceSoundEffectListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVirtualDeviceActivityListener iVirtualDeviceActivityListenerAsInterface = IVirtualDeviceActivityListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVirtualDeviceSoundEffectListener iVirtualDeviceSoundEffectListenerAsInterface = IVirtualDeviceSoundEffectListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setListeners(asInterface6, asInterface7);
+                    setListeners(iVirtualDeviceActivityListenerAsInterface, iVirtualDeviceSoundEffectListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -893,762 +893,762 @@ public interface IVirtualDevice extends IInterface {
 
             @Override // android.companion.virtual.IVirtualDevice
             public int getAssociationId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public int getDeviceId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public String getPersistentDeviceId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public int[] getDisplayIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public int getDevicePolicy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean hasCustomAudioInputSupport() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean canCreateMirrorDisplays() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void goToSleep() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void wakeUp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void setDevicePolicy(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void addActivityPolicyExemption(ActivityPolicyExemption activityPolicyExemption) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(activityPolicyExemption, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(activityPolicyExemption, 0);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void removeActivityPolicyExemption(ActivityPolicyExemption activityPolicyExemption) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(activityPolicyExemption, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(activityPolicyExemption, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void setDevicePolicyForDisplay(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void onAudioSessionStarting(int i, IAudioRoutingCallback iAudioRoutingCallback, IAudioConfigChangedCallback iAudioConfigChangedCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iAudioRoutingCallback);
-                    obtain.writeStrongInterface(iAudioConfigChangedCallback);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iAudioRoutingCallback);
+                    parcelObtain.writeStrongInterface(iAudioConfigChangedCallback);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void onAudioSessionEnded() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public int createVirtualDisplay(VirtualDisplayConfig virtualDisplayConfig, IVirtualDisplayCallback iVirtualDisplayCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualDisplayConfig, 0);
-                    obtain.writeStrongInterface(iVirtualDisplayCallback);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualDisplayConfig, 0);
+                    parcelObtain.writeStrongInterface(iVirtualDisplayCallback);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void createVirtualDpad(VirtualDpadConfig virtualDpadConfig, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualDpadConfig, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualDpadConfig, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void createVirtualKeyboard(VirtualKeyboardConfig virtualKeyboardConfig, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualKeyboardConfig, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualKeyboardConfig, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void createVirtualMouse(VirtualMouseConfig virtualMouseConfig, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualMouseConfig, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualMouseConfig, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void createVirtualTouchscreen(VirtualTouchscreenConfig virtualTouchscreenConfig, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualTouchscreenConfig, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualTouchscreenConfig, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void createVirtualNavigationTouchpad(VirtualNavigationTouchpadConfig virtualNavigationTouchpadConfig, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualNavigationTouchpadConfig, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualNavigationTouchpadConfig, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void createVirtualStylus(VirtualStylusConfig virtualStylusConfig, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualStylusConfig, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualStylusConfig, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void createVirtualRotaryEncoder(VirtualRotaryEncoderConfig virtualRotaryEncoderConfig, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualRotaryEncoderConfig, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualRotaryEncoderConfig, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void unregisterInputDevice(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public int getInputDeviceId(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendDpadKeyEvent(IBinder iBinder, VirtualKeyEvent virtualKeyEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualKeyEvent, 0);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualKeyEvent, 0);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendKeyEvent(IBinder iBinder, VirtualKeyEvent virtualKeyEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualKeyEvent, 0);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualKeyEvent, 0);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendButtonEvent(IBinder iBinder, VirtualMouseButtonEvent virtualMouseButtonEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualMouseButtonEvent, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualMouseButtonEvent, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendRelativeEvent(IBinder iBinder, VirtualMouseRelativeEvent virtualMouseRelativeEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualMouseRelativeEvent, 0);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualMouseRelativeEvent, 0);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendScrollEvent(IBinder iBinder, VirtualMouseScrollEvent virtualMouseScrollEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualMouseScrollEvent, 0);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualMouseScrollEvent, 0);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendTouchEvent(IBinder iBinder, VirtualTouchEvent virtualTouchEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualTouchEvent, 0);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualTouchEvent, 0);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendStylusMotionEvent(IBinder iBinder, VirtualStylusMotionEvent virtualStylusMotionEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualStylusMotionEvent, 0);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualStylusMotionEvent, 0);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendStylusButtonEvent(IBinder iBinder, VirtualStylusButtonEvent virtualStylusButtonEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualStylusButtonEvent, 0);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualStylusButtonEvent, 0);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendRotaryEncoderScrollEvent(IBinder iBinder, VirtualRotaryEncoderScrollEvent virtualRotaryEncoderScrollEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualRotaryEncoderScrollEvent, 0);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualRotaryEncoderScrollEvent, 0);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public List<VirtualSensor> getVirtualSensorList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(VirtualSensor.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(VirtualSensor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendSensorEvent(IBinder iBinder, VirtualSensorEvent virtualSensorEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualSensorEvent, 0);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualSensorEvent, 0);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public boolean sendSensorAdditionalInfo(IBinder iBinder, VirtualSensorAdditionalInfo virtualSensorAdditionalInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(virtualSensorAdditionalInfo, 0);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(virtualSensorAdditionalInfo, 0);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void launchPendingIntent(int i, PendingIntent pendingIntent, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public PointF getCursorPosition(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PointF) obtain2.readTypedObject(PointF.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PointF) parcelObtain2.readTypedObject(PointF.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void setShowPointerIcon(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void setDisplayImePolicy(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void registerIntentInterceptor(IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptor, IntentFilter intentFilter) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVirtualDeviceIntentInterceptor);
-                    obtain.writeTypedObject(intentFilter, 0);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVirtualDeviceIntentInterceptor);
+                    parcelObtain.writeTypedObject(intentFilter, 0);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void unregisterIntentInterceptor(IVirtualDeviceIntentInterceptor iVirtualDeviceIntentInterceptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVirtualDeviceIntentInterceptor);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVirtualDeviceIntentInterceptor);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void registerVirtualCamera(VirtualCameraConfig virtualCameraConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualCameraConfig, 0);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualCameraConfig, 0);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void unregisterVirtualCamera(VirtualCameraConfig virtualCameraConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualCameraConfig, 0);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualCameraConfig, 0);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public String getVirtualCameraId(VirtualCameraConfig virtualCameraConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeTypedObject(virtualCameraConfig, 0);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(virtualCameraConfig, 0);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDevice
             public void setListeners(IVirtualDeviceActivityListener iVirtualDeviceActivityListener, IVirtualDeviceSoundEffectListener iVirtualDeviceSoundEffectListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVirtualDeviceActivityListener);
-                    obtain.writeStrongInterface(iVirtualDeviceSoundEffectListener);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDevice.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVirtualDeviceActivityListener);
+                    parcelObtain.writeStrongInterface(iVirtualDeviceSoundEffectListener);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

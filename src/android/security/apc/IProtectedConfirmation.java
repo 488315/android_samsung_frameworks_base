@@ -57,9 +57,9 @@ public interface IProtectedConfirmation extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProtectedConfirmation.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProtectedConfirmation)) {
-                return (IProtectedConfirmation) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IProtectedConfirmation.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProtectedConfirmation)) {
+                return (IProtectedConfirmation) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,23 +74,23 @@ public interface IProtectedConfirmation extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IConfirmationCallback asInterface = IConfirmationCallback.Stub.asInterface(parcel.readStrongBinder());
-                String readString = parcel.readString();
-                byte[] createByteArray = parcel.createByteArray();
-                String readString2 = parcel.readString();
-                int readInt = parcel.readInt();
+                IConfirmationCallback iConfirmationCallbackAsInterface = IConfirmationCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
+                String string2 = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                presentPrompt(asInterface, readString, createByteArray, readString2, readInt);
+                presentPrompt(iConfirmationCallbackAsInterface, string, bArrCreateByteArray, string2, i3);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                IConfirmationCallback asInterface2 = IConfirmationCallback.Stub.asInterface(parcel.readStrongBinder());
+                IConfirmationCallback iConfirmationCallbackAsInterface2 = IConfirmationCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                cancelPrompt(asInterface2);
+                cancelPrompt(iConfirmationCallbackAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                boolean isSupported = isSupported();
+                boolean zIsSupported = isSupported();
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isSupported);
+                parcel2.writeBoolean(zIsSupported);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,50 +115,50 @@ public interface IProtectedConfirmation extends IInterface {
 
             @Override // android.security.apc.IProtectedConfirmation
             public void presentPrompt(IConfirmationCallback iConfirmationCallback, String str, byte[] bArr, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProtectedConfirmation.DESCRIPTOR);
-                    obtain.writeStrongInterface(iConfirmationCallback);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IProtectedConfirmation.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iConfirmationCallback);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.apc.IProtectedConfirmation
             public void cancelPrompt(IConfirmationCallback iConfirmationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProtectedConfirmation.DESCRIPTOR);
-                    obtain.writeStrongInterface(iConfirmationCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IProtectedConfirmation.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iConfirmationCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.apc.IProtectedConfirmation
             public boolean isSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProtectedConfirmation.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IProtectedConfirmation.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

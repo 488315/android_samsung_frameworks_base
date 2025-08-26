@@ -10,7 +10,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class GraphPathNode implements Parcelable {
     public static final Parcelable.Creator<GraphPathNode> CREATOR = new Creator();
@@ -23,23 +22,22 @@ public final class GraphPathNode implements Parcelable {
     private final String type;
     private final String typeDescription;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
-            String readString4 = parcel.readString();
-            String readString5 = parcel.readString();
-            Long valueOf = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
-            Long valueOf2 = parcel.readInt() != 0 ? Long.valueOf(parcel.readLong()) : null;
-            int readInt = parcel.readInt();
-            ArrayList arrayList = new ArrayList(readInt);
-            for (int i = 0; i != readInt; i++) {
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
+            String string4 = parcel.readString();
+            String string5 = parcel.readString();
+            Long lValueOf = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
+            Long lValueOf2 = parcel.readInt() != 0 ? Long.valueOf(parcel.readLong()) : null;
+            int i = parcel.readInt();
+            ArrayList arrayList = new ArrayList(i);
+            for (int i2 = 0; i2 != i; i2++) {
                 arrayList.add(GraphPathEdge.CREATOR.createFromParcel(parcel));
             }
-            return new GraphPathNode(readString, readString2, readString3, readString4, readString5, valueOf, valueOf2, arrayList);
+            return new GraphPathNode(string, string2, string3, string4, string5, lValueOf, lValueOf2, arrayList);
         }
 
         @Override // android.os.Parcelable.Creator
@@ -176,19 +174,19 @@ public final class GraphPathNode implements Parcelable {
     }
 
     public int hashCode() {
-        int hashCode = this.iri.hashCode() * 31;
+        int iHashCode = this.iri.hashCode() * 31;
         String str = this.literal;
-        int hashCode2 = (hashCode + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.name;
-        int hashCode3 = (hashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31;
         String str3 = this.type;
-        int hashCode4 = (hashCode3 + (str3 == null ? 0 : str3.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (str3 == null ? 0 : str3.hashCode())) * 31;
         String str4 = this.typeDescription;
-        int hashCode5 = (hashCode4 + (str4 == null ? 0 : str4.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (str4 == null ? 0 : str4.hashCode())) * 31;
         Long l = this.startTimestamp;
-        int hashCode6 = (hashCode5 + (l == null ? 0 : l.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (l == null ? 0 : l.hashCode())) * 31;
         Long l2 = this.endTimestamp;
-        return this.outboundEdges.hashCode() + ((hashCode6 + (l2 != null ? l2.hashCode() : 0)) * 31);
+        return this.outboundEdges.hashCode() + ((iHashCode6 + (l2 != null ? l2.hashCode() : 0)) * 31);
     }
 
     public String toString() {
@@ -214,9 +212,9 @@ public final class GraphPathNode implements Parcelable {
         } else {
             Person$$ExternalSyntheticOutline0.m(parcel, 1, l2);
         }
-        Iterator m = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.outboundEdges);
-        while (m.hasNext()) {
-            ((GraphPathEdge) m.next()).writeToParcel(parcel, i);
+        Iterator itM = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.outboundEdges);
+        while (itM.hasNext()) {
+            ((GraphPathEdge) itM.next()).writeToParcel(parcel, i);
         }
     }
 

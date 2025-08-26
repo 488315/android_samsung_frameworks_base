@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.app.PendingIntent;
 import android.app.compat.CompatChanges;
 import android.app.wearable.IWearableSensingCallback;
-import android.app.wearable.WearableSensingManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -85,15 +84,15 @@ public class WearableSensingManager {
     }
 
     public void provideConnection(final WearableConnection wearableConnection, Executor executor) {
-        RemoteCallback createStatusCallback = createStatusCallback(executor, new Consumer() { // from class: android.app.wearable.WearableSensingManager$$ExternalSyntheticLambda2
+        RemoteCallback remoteCallbackCreateStatusCallback = createStatusCallback(executor, new Consumer() { // from class: android.app.wearable.WearableSensingManager$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                WearableSensingManager.this.lambda$provideConnection$0(wearableConnection, (Integer) obj);
+                this.f$0.lambda$provideConnection$0(wearableConnection, (Integer) obj);
             }
         });
         try {
             this.mWearableConnectionIdMap.put(wearableConnection, -2);
-            this.mWearableConnectionIdMap.put(wearableConnection, Integer.valueOf(this.mService.provideConcurrentConnection(wearableConnection.getConnection(), wearableConnection.getMetadata(), createWearableSensingCallback(executor), createStatusCallback)));
+            this.mWearableConnectionIdMap.put(wearableConnection, Integer.valueOf(this.mService.provideConcurrentConnection(wearableConnection.getConnection(), wearableConnection.getMetadata(), createWearableSensingCallback(executor), remoteCallbackCreateStatusCallback)));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -114,15 +113,15 @@ public class WearableSensingManager {
     }
 
     public void removeConnection(WearableConnection wearableConnection) {
-        Integer remove = this.mWearableConnectionIdMap.remove(wearableConnection);
-        if (remove == null || remove.intValue() == -1) {
+        Integer numRemove = this.mWearableConnectionIdMap.remove(wearableConnection);
+        if (numRemove == null || numRemove.intValue() == -1) {
             throw new NoSuchElementException("The provided connection was never provided or was already removed.");
         }
-        if (remove.intValue() == -2) {
+        if (numRemove.intValue() == -2) {
             throw new IllegalStateException("Attempt to remove connection before provideConnection returns. The connection will not be removed.");
         }
         try {
-            if (this.mService.removeConnection(remove.intValue())) {
+            if (this.mService.removeConnection(numRemove.intValue())) {
             } else {
                 throw new NoSuchElementException("The provided connection was never provided or was already removed.");
             }
@@ -208,7 +207,7 @@ public class WearableSensingManager {
 
     static /* synthetic */ void lambda$createStatusCallback$2(Executor executor, final Consumer consumer, Bundle bundle) {
         final int i = bundle.getInt("android.app.wearable.WearableSensingStatusBundleKey");
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             executor.execute(new Runnable() { // from class: android.app.wearable.WearableSensingManager$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
@@ -217,7 +216,7 @@ public class WearableSensingManager {
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -235,8 +234,8 @@ public class WearableSensingManager {
             final Executor executor = this.val$executor;
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.app.wearable.WearableSensingManager$1$$ExternalSyntheticLambda0
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    WearableSensingManager.AnonymousClass1.this.lambda$openFile$1(executor, str, androidFuture);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$openFile$1(executor, str, androidFuture);
                 }
             });
         }
@@ -246,7 +245,7 @@ public class WearableSensingManager {
             executor.execute(new Runnable() { // from class: android.app.wearable.WearableSensingManager$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WearableSensingManager.AnonymousClass1.this.lambda$openFile$0(str, androidFuture);
+                    this.f$0.lambda$openFile$0(str, androidFuture);
                 }
             });
         }
@@ -256,30 +255,30 @@ public class WearableSensingManager {
         public /* synthetic */ void lambda$openFile$0(String str, AndroidFuture androidFuture) {
             File file = new File(WearableSensingManager.this.mContext.getFilesDir(), str);
             ParcelFileDescriptor parcelFileDescriptor = null;
-            ParcelFileDescriptor parcelFileDescriptor2 = null;
+            ParcelFileDescriptor parcelFileDescriptorOpen = null;
             try {
                 try {
                     try {
-                        parcelFileDescriptor2 = ParcelFileDescriptor.open(file, 268435456);
+                        parcelFileDescriptorOpen = ParcelFileDescriptor.open(file, 268435456);
                         Slog.d(WearableSensingManager.TAG, "Successfully opened a file with ParcelFileDescriptor.");
-                        androidFuture.complete(parcelFileDescriptor2);
-                        parcelFileDescriptor = parcelFileDescriptor2;
-                        if (parcelFileDescriptor2 != null) {
-                            parcelFileDescriptor2.close();
+                        androidFuture.complete(parcelFileDescriptorOpen);
+                        parcelFileDescriptor = parcelFileDescriptorOpen;
+                        if (parcelFileDescriptorOpen != null) {
+                            parcelFileDescriptorOpen.close();
                         }
-                    } catch (FileNotFoundException e) {
-                        Slog.e(WearableSensingManager.TAG, "Cannot open file.", e);
-                        androidFuture.complete(parcelFileDescriptor2);
-                        parcelFileDescriptor = parcelFileDescriptor2;
-                        if (parcelFileDescriptor2 != null) {
-                            parcelFileDescriptor2.close();
-                            parcelFileDescriptor = parcelFileDescriptor2;
-                        }
+                    } catch (IOException e) {
+                        String str2 = WearableSensingManager.TAG;
+                        Slog.e(str2, "Error closing ParcelFileDescriptor.", e);
+                        parcelFileDescriptor = str2;
                     }
-                } catch (IOException e2) {
-                    String str2 = WearableSensingManager.TAG;
-                    Slog.e(str2, "Error closing ParcelFileDescriptor.", e2);
-                    parcelFileDescriptor = str2;
+                } catch (FileNotFoundException e2) {
+                    Slog.e(WearableSensingManager.TAG, "Cannot open file.", e2);
+                    androidFuture.complete(parcelFileDescriptorOpen);
+                    parcelFileDescriptor = parcelFileDescriptorOpen;
+                    if (parcelFileDescriptorOpen != null) {
+                        parcelFileDescriptorOpen.close();
+                        parcelFileDescriptor = parcelFileDescriptorOpen;
+                    }
                 }
             } catch (Throwable th) {
                 androidFuture.complete(parcelFileDescriptor);

@@ -22,6 +22,8 @@ import com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRep
 import com.android.systemui.statusbar.data.repository.StatusBarModePerDisplayRepositoryImpl;
 import com.android.systemui.statusbar.data.repository.StatusBarModeRepositoryStore;
 import com.android.systemui.statusbar.events.shared.model.SystemEventAnimationState;
+import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
+import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.window.StatusBarWindowController;
 import com.android.systemui.statusbar.window.StatusBarWindowControllerImpl;
 import com.android.systemui.statusbar.window.StatusBarWindowControllerStore;
@@ -55,13 +57,14 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimationScheduler, DesktopManager.Callback {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final StateFlowImpl _animationState;
     public final ReadonlyStateFlow animationState;
     public final SystemEventChipAnimationController chipAnimationController;
+    public final ConfigurationController configurationController;
+    public final SystemStatusAnimationSchedulerImpl$configurationControllerListener$1 configurationControllerListener;
     public final SystemEventCoordinator coordinator;
     public final CoroutineScope coroutineScope;
     public StatusEvent currentlyDisplayedEvent;
@@ -79,28 +82,26 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
     public final StatusBarWindowControllerStore statusBarWindowControllerStore;
     public final SystemClock systemClock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$1$1, reason: invalid class name and collision with other inner class name */
-        final class C03091 extends SuspendLambda implements Function3 {
+        final class C04911 extends SuspendLambda implements Function3 {
             /* synthetic */ Object L$0;
             /* synthetic */ Object L$1;
             int label;
 
-            public C03091(Continuation continuation) {
+            public C04911(Continuation continuation) {
                 super(3, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
-                C03091 c03091 = new C03091((Continuation) obj3);
-                c03091.L$0 = (SystemEventAnimationState) obj;
-                c03091.L$1 = (StatusEvent) obj2;
-                return c03091.invokeSuspend(Unit.INSTANCE);
+                C04911 c04911 = new C04911((Continuation) obj3);
+                c04911.L$0 = (SystemEventAnimationState) obj;
+                c04911.L$1 = (StatusEvent) obj2;
+                return c04911.invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -135,7 +136,7 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl = SystemStatusAnimationSchedulerImpl.this;
-                Flow debounce = FlowKt.debounce(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(systemStatusAnimationSchedulerImpl._animationState, systemStatusAnimationSchedulerImpl.scheduledEvent, new C03091(null)), 500L);
+                Flow flowDebounce = FlowKt.debounce(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(systemStatusAnimationSchedulerImpl._animationState, systemStatusAnimationSchedulerImpl.scheduledEvent, new C04911(null)), 500L);
                 final SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl2 = SystemStatusAnimationSchedulerImpl.this;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl.1.2
                     /* JADX WARN: Multi-variable type inference failed */
@@ -146,7 +147,7 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
                         StatusEvent statusEvent = (StatusEvent) pair.component2();
                         if (systemEventAnimationState == SystemEventAnimationState.AnimationQueued && statusEvent != null) {
                             int i2 = SystemStatusAnimationSchedulerImpl.$r8$clinit;
-                            SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl3 = SystemStatusAnimationSchedulerImpl.this;
+                            SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl3 = systemStatusAnimationSchedulerImpl2;
                             systemStatusAnimationSchedulerImpl3.getClass();
                             Assert.isMainThread();
                             systemStatusAnimationSchedulerImpl3.hasPersistentDot = statusEvent.getForceVisible();
@@ -161,7 +162,7 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
                                     value.getClass();
                                     Function1 viewCreator = ((StatusEvent) value).getViewCreator();
                                     HeaderBatteryStatusChipController headerBatteryStatusChipController = systemStatusAnimationSchedulerImpl3.headerBatteryChipController;
-                                    BackgroundAnimatableView backgroundAnimatableView = (BackgroundAnimatableView) viewCreator.mo779invoke(headerBatteryStatusChipController.context);
+                                    BackgroundAnimatableView backgroundAnimatableView = (BackgroundAnimatableView) viewCreator.mo781invoke(headerBatteryStatusChipController.context);
                                     FrameLayout frameLayout = headerBatteryStatusChipController.batteryChipContainer;
                                     backgroundAnimatableView.getClass();
                                     View view = (View) backgroundAnimatableView;
@@ -180,7 +181,7 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
                     }
                 };
                 this.label = 1;
-                if (debounce.collect(flowCollector, this) == coroutineSingletons) {
+                if (flowDebounce.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -193,7 +194,6 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
@@ -224,14 +224,14 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
                         SystemEventAnimationState systemEventAnimationState = (SystemEventAnimationState) obj2;
-                        SystemStatusAnimationSchedulerLogger systemStatusAnimationSchedulerLogger = SystemStatusAnimationSchedulerImpl.this.logger;
+                        SystemStatusAnimationSchedulerLogger systemStatusAnimationSchedulerLogger = systemStatusAnimationSchedulerImpl.logger;
                         if (systemStatusAnimationSchedulerLogger != null) {
                             LogLevel logLevel = LogLevel.DEBUG;
                             SystemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0 systemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0 = new SystemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0(2);
                             LogBuffer logBuffer = systemStatusAnimationSchedulerLogger.logBuffer;
-                            LogMessage obtain = logBuffer.obtain("SystemStatusAnimationSchedulerLog", logLevel, systemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0, null);
-                            ((LogMessageImpl) obtain).str1 = systemEventAnimationState.name();
-                            logBuffer.commit(obtain);
+                            LogMessage logMessageObtain = logBuffer.obtain("SystemStatusAnimationSchedulerLog", logLevel, systemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0, null);
+                            ((LogMessageImpl) logMessageObtain).str1 = systemEventAnimationState.name();
+                            logBuffer.commit(logMessageObtain);
                         }
                         return Unit.INSTANCE;
                     }
@@ -250,7 +250,6 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$3, reason: invalid class name */
     final class AnonymousClass3 extends SuspendLambda implements Function2 {
         int label;
@@ -280,7 +279,7 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl.3.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        SystemStatusAnimationSchedulerImpl.this.statusBarHidden = ((Boolean) obj2).booleanValue();
+                        systemStatusAnimationSchedulerImpl.statusBarHidden = ((Boolean) obj2).booleanValue();
                         return Unit.INSTANCE;
                     }
                 };
@@ -298,7 +297,6 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -312,20 +310,31 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
         new Companion(null);
     }
 
-    public SystemStatusAnimationSchedulerImpl(SystemEventCoordinator systemEventCoordinator, SystemEventChipAnimationController systemEventChipAnimationController, StatusBarWindowControllerStore statusBarWindowControllerStore, DumpManager dumpManager, SystemClock systemClock, CoroutineScope coroutineScope, SystemStatusAnimationSchedulerLogger systemStatusAnimationSchedulerLogger, StatusBarModeRepositoryStore statusBarModeRepositoryStore, DesktopManager desktopManager, HeaderBatteryStatusChipController headerBatteryStatusChipController) {
+    /* JADX WARN: Type inference failed for: r3v6, types: [com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$configurationControllerListener$1] */
+    public SystemStatusAnimationSchedulerImpl(SystemEventCoordinator systemEventCoordinator, SystemEventChipAnimationController systemEventChipAnimationController, StatusBarWindowControllerStore statusBarWindowControllerStore, DumpManager dumpManager, SystemClock systemClock, CoroutineScope coroutineScope, ConfigurationController configurationController, SystemStatusAnimationSchedulerLogger systemStatusAnimationSchedulerLogger, StatusBarModeRepositoryStore statusBarModeRepositoryStore, DesktopManager desktopManager, HeaderBatteryStatusChipController headerBatteryStatusChipController) {
         this.coordinator = systemEventCoordinator;
         this.chipAnimationController = systemEventChipAnimationController;
         this.statusBarWindowControllerStore = statusBarWindowControllerStore;
         this.systemClock = systemClock;
         this.coroutineScope = coroutineScope;
+        this.configurationController = configurationController;
         this.logger = systemStatusAnimationSchedulerLogger;
         this.statusBarModeRepository = statusBarModeRepositoryStore;
         this.desktopManager = desktopManager;
         this.headerBatteryChipController = headerBatteryStatusChipController;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(SystemEventAnimationState.Idle);
-        this._animationState = MutableStateFlow;
-        this.animationState = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(SystemEventAnimationState.Idle);
+        this._animationState = stateFlowImplMutableStateFlow;
+        this.animationState = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
         this.listeners = new LinkedHashSet();
+        this.configurationControllerListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$configurationControllerListener$1
+            @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
+            public final void onDisplayDeviceTypeChanged() {
+                int i = SystemStatusAnimationSchedulerImpl.$r8$clinit;
+                SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl = this.this$0;
+                systemStatusAnimationSchedulerImpl.getClass();
+                systemStatusAnimationSchedulerImpl.eventCancellationJob = CoroutineTracingKt.launchTraced$default(systemStatusAnimationSchedulerImpl.coroutineScope, null, null, new SystemStatusAnimationSchedulerImpl$removeBatteryChip$1(systemStatusAnimationSchedulerImpl, null), 7);
+            }
+        };
         systemEventCoordinator.scheduler = this;
         dumpManager.registerCriticalDumpable("SystemStatusAnimationSchedulerImpl", this);
         desktopManager.registerCallback(this);
@@ -335,24 +344,23 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
     }
 
     public static final void access$runChipDisappearAnimation(final SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl) {
-        SpringAnimatorSet notifyTransitionToPersistentDot;
+        SpringAnimatorSet springAnimatorSetNotifyTransitionToPersistentDot;
         systemStatusAnimationSchedulerImpl.getClass();
         Assert.isMainThread();
         boolean z = systemStatusAnimationSchedulerImpl.statusBarHidden;
         ArrayList arrayList = new ArrayList();
-        boolean z2 = systemStatusAnimationSchedulerImpl.currentlyDisplayedEvent instanceof BatteryEvent;
         Iterator it = systemStatusAnimationSchedulerImpl.listeners.iterator();
         while (it.hasNext()) {
-            SpringAnimatorSet onSystemEventAnimationFinish = ((SystemStatusAnimationCallback) it.next()).onSystemEventAnimationFinish(systemStatusAnimationSchedulerImpl.hasPersistentDot, z, z2);
-            if (onSystemEventAnimationFinish != null) {
-                arrayList.add(onSystemEventAnimationFinish);
+            SpringAnimatorSet springAnimatorSetOnSystemEventAnimationFinish = ((SystemStatusAnimationCallback) it.next()).onSystemEventAnimationFinish(systemStatusAnimationSchedulerImpl.hasPersistentDot, z, systemStatusAnimationSchedulerImpl.currentlyDisplayedEvent instanceof BatteryEvent);
+            if (springAnimatorSetOnSystemEventAnimationFinish != null) {
+                arrayList.add(springAnimatorSetOnSystemEventAnimationFinish);
             }
         }
-        arrayList.add(systemStatusAnimationSchedulerImpl.chipAnimationController.onSystemEventAnimationFinish(systemStatusAnimationSchedulerImpl.hasPersistentDot, z, z2));
-        if (systemStatusAnimationSchedulerImpl.hasPersistentDot && (notifyTransitionToPersistentDot = systemStatusAnimationSchedulerImpl.notifyTransitionToPersistentDot(systemStatusAnimationSchedulerImpl.currentlyDisplayedEvent)) != null) {
-            arrayList.add(notifyTransitionToPersistentDot);
+        arrayList.add(systemStatusAnimationSchedulerImpl.chipAnimationController.onSystemEventAnimationFinish(systemStatusAnimationSchedulerImpl.hasPersistentDot, z, systemStatusAnimationSchedulerImpl.currentlyDisplayedEvent instanceof BatteryEvent));
+        if (systemStatusAnimationSchedulerImpl.hasPersistentDot && (springAnimatorSetNotifyTransitionToPersistentDot = systemStatusAnimationSchedulerImpl.notifyTransitionToPersistentDot(systemStatusAnimationSchedulerImpl.currentlyDisplayedEvent)) != null) {
+            arrayList.add(springAnimatorSetNotifyTransitionToPersistentDot);
         }
-        systemStatusAnimationSchedulerImpl.headerBatteryChipController.onSystemEventAnimationFinish(z, z, z2);
+        systemStatusAnimationSchedulerImpl.headerBatteryChipController.onSystemEventAnimationFinish(z, z, systemStatusAnimationSchedulerImpl.currentlyDisplayedEvent instanceof BatteryEvent);
         SpringAnimatorSet springAnimatorSet = new SpringAnimatorSet();
         springAnimatorSet.playTogether(arrayList);
         systemStatusAnimationSchedulerImpl._animationState.setValue(SystemEventAnimationState.AnimatingOut);
@@ -360,7 +368,7 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
             @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 SystemEventAnimationState systemEventAnimationState;
-                SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl2 = SystemStatusAnimationSchedulerImpl.this;
+                SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl2 = this.this$0;
                 StateFlowImpl stateFlowImpl = systemStatusAnimationSchedulerImpl2._animationState;
                 if (systemStatusAnimationSchedulerImpl2.scheduledEvent.getValue() != null) {
                     if ((systemStatusAnimationSchedulerImpl2.scheduledEvent.getValue() instanceof BatteryEvent) && systemStatusAnimationSchedulerImpl2.hasPersistentDot) {
@@ -382,6 +390,7 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
         });
         springAnimatorSet.start();
         systemStatusAnimationSchedulerImpl.currentlyDisplayedEvent = null;
+        ((ConfigurationControllerImpl) systemStatusAnimationSchedulerImpl.configurationController).removeCallback(systemStatusAnimationSchedulerImpl.configurationControllerListener);
     }
 
     @Override // com.android.systemui.statusbar.policy.CallbackController
@@ -400,9 +409,9 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
         boolean z2 = this.currentlyDisplayedEvent instanceof BatteryEvent;
         Iterator it = this.listeners.iterator();
         while (it.hasNext()) {
-            SpringAnimatorSet onSystemEventAnimationBegin = ((SystemStatusAnimationCallback) it.next()).onSystemEventAnimationBegin(z, z2);
-            if (onSystemEventAnimationBegin != null) {
-                arrayList.add(onSystemEventAnimationBegin);
+            SpringAnimatorSet springAnimatorSetOnSystemEventAnimationBegin = ((SystemStatusAnimationCallback) it.next()).onSystemEventAnimationBegin(z, z2);
+            if (springAnimatorSetOnSystemEventAnimationBegin != null) {
+                arrayList.add(springAnimatorSetOnSystemEventAnimationBegin);
             }
         }
         arrayList.add(this.chipAnimationController.onSystemEventAnimationBegin(z, z2));
@@ -458,15 +467,15 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
         ArrayList arrayList = new ArrayList();
         Iterator it = set.iterator();
         while (true) {
-            String str = null;
+            String contentDescription = null;
             if (!it.hasNext()) {
                 break;
             }
             SystemStatusAnimationCallback systemStatusAnimationCallback = (SystemStatusAnimationCallback) it.next();
             if (statusEvent != null) {
-                str = statusEvent.getContentDescription();
+                contentDescription = statusEvent.getContentDescription();
             }
-            systemStatusAnimationCallback.onSystemStatusAnimationTransitionToPersistentDot(str);
+            systemStatusAnimationCallback.onSystemStatusAnimationTransitionToPersistentDot(contentDescription);
         }
         if (arrayList.isEmpty()) {
             return null;
@@ -486,7 +495,7 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
         int displayType = semDesktopModeState.getDisplayType();
         if (state == 50 && displayType == 101) {
             if (enabled == 4) {
-                new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl$onDesktopModeStateChanged$1
+                new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.statusbar.events.SystemStatusAnimationSchedulerImpl.onDesktopModeStateChanged.1
                     @Override // java.lang.Runnable
                     public final void run() {
                         SystemStatusAnimationSchedulerImpl systemStatusAnimationSchedulerImpl = SystemStatusAnimationSchedulerImpl.this;
@@ -526,13 +535,13 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
                         LogLevel logLevel = LogLevel.DEBUG;
                         SystemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0 systemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0 = new SystemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0(0);
                         LogBuffer logBuffer = systemStatusAnimationSchedulerLogger.logBuffer;
-                        LogMessage obtain = logBuffer.obtain("SystemStatusAnimationSchedulerLog", logLevel, systemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0, null);
-                        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                        LogMessage logMessageObtain = logBuffer.obtain("SystemStatusAnimationSchedulerLog", logLevel, systemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                         logMessageImpl.str1 = statusEvent.getClass().getSimpleName();
                         logMessageImpl.int1 = statusEvent.getPriority();
                         logMessageImpl.bool1 = statusEvent.getForceVisible();
                         logMessageImpl.bool2 = statusEvent.getShowAnimation();
-                        logBuffer.commit(obtain);
+                        logBuffer.commit(logMessageObtain);
                     }
                     if (statusEvent.getShowAnimation() && (readonlyStateFlow.$$delegate_0.getValue() == SystemEventAnimationState.ShowingPersistentDot || this.showingDotWhileChipAnim)) {
                         if (statusEvent instanceof PrivacyEvent) {
@@ -608,13 +617,13 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
                 LogLevel logLevel2 = LogLevel.DEBUG;
                 SystemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0 systemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda02 = new SystemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda0(3);
                 LogBuffer logBuffer2 = systemStatusAnimationSchedulerLogger.logBuffer;
-                LogMessage obtain2 = logBuffer2.obtain("SystemStatusAnimationSchedulerLog", logLevel2, systemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda02, null);
-                LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                LogMessage logMessageObtain2 = logBuffer2.obtain("SystemStatusAnimationSchedulerLog", logLevel2, systemStatusAnimationSchedulerLogger$$ExternalSyntheticLambda02, null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                 logMessageImpl2.str1 = statusEvent.getClass().getSimpleName();
                 logMessageImpl2.int1 = statusEvent.getPriority();
                 logMessageImpl2.bool1 = statusEvent.getForceVisible();
                 logMessageImpl2.bool2 = statusEvent.getShowAnimation();
-                logBuffer2.commit(obtain2);
+                logBuffer2.commit(logMessageObtain2);
             }
         }
     }
@@ -646,9 +655,7 @@ public class SystemStatusAnimationSchedulerImpl implements SystemStatusAnimation
                 } else {
                     stateFlowImpl2.setValue(SystemEventAnimationState.Idle);
                 }
-            } else if (stateFlowImpl2.getValue() == SystemEventAnimationState.AnimatingOut) {
-                notifyHidePersistentDot(z);
-            } else if (this.showingDotWhileChipAnim) {
+            } else if (stateFlowImpl2.getValue() == SystemEventAnimationState.AnimatingOut || this.showingDotWhileChipAnim) {
                 notifyHidePersistentDot(z);
             }
             this.showingDotWhileChipAnim = false;

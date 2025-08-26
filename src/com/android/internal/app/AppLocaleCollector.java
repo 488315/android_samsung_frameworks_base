@@ -55,15 +55,15 @@ public class AppLocaleCollector implements LocaleCollectorBase {
         LocaleManager localeManager = (LocaleManager) this.mContext.getSystemService(LocaleManager.class);
         final HashSet hashSet = new HashSet();
         if (packageManager != null && localeManager != null) {
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             Iterator<ApplicationInfo> it = packageManager.getInstalledApplications(PackageManager.ApplicationInfoFlags.of(0L)).iterator();
             while (it.hasNext()) {
                 LocaleStore.LocaleInfo appActivatedLocaleInfo = LocaleStore.getAppActivatedLocaleInfo(this.mContext, it.next().packageName, false);
                 if (appActivatedLocaleInfo != null && appActivatedLocaleInfo.getLocale().getCountry().length() > 0) {
-                    hashMap.put(appActivatedLocaleInfo.getId(), appActivatedLocaleInfo);
+                    map.put(appActivatedLocaleInfo.getId(), appActivatedLocaleInfo);
                 }
             }
-            hashMap.forEach(new BiConsumer() { // from class: com.android.internal.app.AppLocaleCollector$$ExternalSyntheticLambda2
+            map.forEach(new BiConsumer() { // from class: com.android.internal.app.AppLocaleCollector$$ExternalSyntheticLambda2
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
                     hashSet.add((LocaleStore.LocaleInfo) obj2);
@@ -76,11 +76,11 @@ public class AppLocaleCollector implements LocaleCollectorBase {
     public Set<LocaleStore.LocaleInfo> getActiveImeLocales() {
         InputMethodInfo activeIme;
         InputMethodManager inputMethodManager = (InputMethodManager) this.mContext.getSystemService(InputMethodManager.class);
-        Set<LocaleStore.LocaleInfo> transformImeLanguageTagToLocaleInfo = (inputMethodManager == null || (activeIme = getActiveIme(inputMethodManager)) == null) ? null : LocaleStore.transformImeLanguageTagToLocaleInfo(inputMethodManager.getEnabledInputMethodSubtypeList(activeIme, true));
-        if (transformImeLanguageTagToLocaleInfo == null) {
+        Set<LocaleStore.LocaleInfo> setTransformImeLanguageTagToLocaleInfo = (inputMethodManager == null || (activeIme = getActiveIme(inputMethodManager)) == null) ? null : LocaleStore.transformImeLanguageTagToLocaleInfo(inputMethodManager.getEnabledInputMethodSubtypeList(activeIme, true));
+        if (setTransformImeLanguageTagToLocaleInfo == null) {
             return Collections.EMPTY_SET;
         }
-        return (Set) transformImeLanguageTagToLocaleInfo.stream().filter(new Predicate() { // from class: com.android.internal.app.AppLocaleCollector$$ExternalSyntheticLambda5
+        return (Set) setTransformImeLanguageTagToLocaleInfo.stream().filter(new Predicate() { // from class: com.android.internal.app.AppLocaleCollector$$ExternalSyntheticLambda5
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 return AppLocaleCollector.lambda$getActiveImeLocales$1((LocaleStore.LocaleInfo) obj);
@@ -171,7 +171,7 @@ public class AppLocaleCollector implements LocaleCollectorBase {
         Set<String> ignoredLocaleList = getIgnoredLocaleList(z);
         HashSet hashSet = new HashSet();
         boolean z3 = appSupportedLocales.mLocaleStatus == AppLocaleStore.AppLocaleResult.LocaleStatus.GET_SUPPORTED_LANGUAGE_FROM_LOCAL_CONFIG || appSupportedLocales.mLocaleStatus == AppLocaleStore.AppLocaleResult.LocaleStatus.GET_SUPPORTED_LANGUAGE_FROM_ASSET;
-        Set<LocaleStore.LocaleInfo> set = null;
+        Set<LocaleStore.LocaleInfo> suggestedLocales = null;
         if (z2) {
             systemSupportedLocale = getSystemSupportedLocale(ignoredLocaleList, localeInfo, z);
         } else {
@@ -184,30 +184,30 @@ public class AppLocaleCollector implements LocaleCollectorBase {
         if (!z2) {
             for (LocaleStore.LocaleInfo localeInfo3 : filterSupportedLocales(getSystemCurrentLocales(), appSupportedLocales.mAppSupportedLocales)) {
                 boolean z4 = this.mAppCurrentLocale != null && localeInfo3.getLocale().equals(this.mAppCurrentLocale.getLocale());
-                boolean addSystemSuggestionFlag = addSystemSuggestionFlag(localeInfo3, this.mAllAppActiveLocales);
-                boolean addSystemSuggestionFlag2 = addSystemSuggestionFlag(localeInfo3, this.mImeLocales);
-                if (!z4 && !addSystemSuggestionFlag && !addSystemSuggestionFlag2) {
+                boolean zAddSystemSuggestionFlag = addSystemSuggestionFlag(localeInfo3, this.mAllAppActiveLocales);
+                boolean zAddSystemSuggestionFlag2 = addSystemSuggestionFlag(localeInfo3, this.mImeLocales);
+                if (!z4 && !zAddSystemSuggestionFlag && !zAddSystemSuggestionFlag2) {
                     hashSet.add(localeInfo3);
                 }
             }
         }
         if (z3) {
             hashSet.addAll(filterSupportedLocales(systemSupportedLocale, appSupportedLocales.mAppSupportedLocales));
-            set = getSuggestedLocales(hashSet);
+            suggestedLocales = getSuggestedLocales(hashSet);
         }
         if (!z2 && SystemProperties.getBoolean(PROP_APP_LANGUAGE_SUGGESTION, true)) {
-            Set<LocaleStore.LocaleInfo> filterSupportedLocales = filterSupportedLocales(this.mAllAppActiveLocales, appSupportedLocales.mAppSupportedLocales);
-            if (set != null) {
-                filterSupportedLocales = addImeSuggestionFlag(filterSameLanguageAndCountry(filterSupportedLocales, set));
+            Set<LocaleStore.LocaleInfo> setFilterSupportedLocales = filterSupportedLocales(this.mAllAppActiveLocales, appSupportedLocales.mAppSupportedLocales);
+            if (suggestedLocales != null) {
+                setFilterSupportedLocales = addImeSuggestionFlag(filterSameLanguageAndCountry(setFilterSupportedLocales, suggestedLocales));
             }
-            hashSet.addAll(filterSupportedLocales);
-            set.addAll(filterSupportedLocales);
-            Set<LocaleStore.LocaleInfo> filterSupportedLocales2 = filterSupportedLocales(this.mImeLocales, appSupportedLocales.mAppSupportedLocales);
-            if (set != null) {
-                filterSupportedLocales2 = filterSameLanguageAndCountry(filterSupportedLocales2, set);
+            hashSet.addAll(setFilterSupportedLocales);
+            suggestedLocales.addAll(setFilterSupportedLocales);
+            Set<LocaleStore.LocaleInfo> setFilterSupportedLocales2 = filterSupportedLocales(this.mImeLocales, appSupportedLocales.mAppSupportedLocales);
+            if (suggestedLocales != null) {
+                setFilterSupportedLocales2 = filterSameLanguageAndCountry(setFilterSupportedLocales2, suggestedLocales);
             }
-            hashSet.addAll(filterSupportedLocales2);
-            set.addAll(filterSupportedLocales2);
+            hashSet.addAll(setFilterSupportedLocales2);
+            suggestedLocales.addAll(setFilterSupportedLocales2);
         }
         if (!z2 && z3) {
             hashSet.add(LocaleStore.getSystemDefaultLocaleInfo(this.mAppCurrentLocale == null));
@@ -222,9 +222,7 @@ public class AppLocaleCollector implements LocaleCollectorBase {
         return (Set) set.stream().filter(new Predicate() { // from class: com.android.internal.app.AppLocaleCollector$$ExternalSyntheticLambda4
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean isSuggested;
-                isSuggested = ((LocaleStore.LocaleInfo) obj).isSuggested();
-                return isSuggested;
+                return ((LocaleStore.LocaleInfo) obj).isSuggested();
             }
         }).collect(Collectors.toSet());
     }

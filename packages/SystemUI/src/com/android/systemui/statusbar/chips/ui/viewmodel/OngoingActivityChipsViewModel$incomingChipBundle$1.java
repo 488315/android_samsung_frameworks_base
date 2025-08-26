@@ -17,7 +17,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function6;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class OngoingActivityChipsViewModel$incomingChipBundle$1 extends SuspendLambda implements Function6 {
     /* synthetic */ Object L$0;
@@ -60,15 +59,15 @@ final class OngoingActivityChipsViewModel$incomingChipBundle$1 extends SuspendLa
         LogBuffer logBuffer = this.this$0.logger;
         String str = OngoingActivityChipsViewModel.TAG;
         LogLevel logLevel = LogLevel.INFO;
-        LogMessage obtain = logBuffer.obtain(str, logLevel, new OngoingActivityChipsViewModel$incomingChipBundle$1$$ExternalSyntheticLambda0(0), null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain(str, logLevel, new OngoingActivityChipsViewModel$incomingChipBundle$1$$ExternalSyntheticLambda0(0), null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = ongoingActivityChipModel.getLogName();
         logMessageImpl.str2 = ongoingActivityChipModel2.getLogName();
         logMessageImpl.str3 = ongoingActivityChipModel3.getLogName();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         LogBuffer logBuffer2 = this.this$0.logger;
-        LogMessage obtain2 = logBuffer2.obtain(str, logLevel, new OngoingActivityChipsViewModel$incomingChipBundle$1$$ExternalSyntheticLambda0(1), null);
-        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+        LogMessage logMessageObtain2 = logBuffer2.obtain(str, logLevel, new OngoingActivityChipsViewModel$incomingChipBundle$1$$ExternalSyntheticLambda0(1), null);
+        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
         logMessageImpl2.str1 = ongoingActivityChipModel4.getLogName();
         List list2 = list;
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
@@ -77,7 +76,7 @@ final class OngoingActivityChipsViewModel$incomingChipBundle$1 extends SuspendLa
             arrayList.add(((OngoingActivityChipModel.Active) it.next()).getLogName());
         }
         logMessageImpl2.str2 = arrayList.toString();
-        logBuffer2.commit(obtain2);
+        logBuffer2.commit(logMessageObtain2);
         return new OngoingActivityChipsViewModel.ChipBundle(ongoingActivityChipModel, ongoingActivityChipModel2, ongoingActivityChipModel3, ongoingActivityChipModel4, list);
     }
 }

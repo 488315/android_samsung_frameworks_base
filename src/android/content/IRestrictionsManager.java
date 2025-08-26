@@ -86,9 +86,9 @@ public interface IRestrictionsManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRestrictionsManager)) {
-                return (IRestrictionsManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRestrictionsManager)) {
+                return (IRestrictionsManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -128,45 +128,45 @@ public interface IRestrictionsManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle applicationRestrictions = getApplicationRestrictions(readString);
+                    Bundle applicationRestrictions = getApplicationRestrictions(string);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(applicationRestrictions, 1);
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<Bundle> applicationRestrictionsPerAdminForUser = getApplicationRestrictionsPerAdminForUser(readInt, readString2);
+                    List<Bundle> applicationRestrictionsPerAdminForUser = getApplicationRestrictionsPerAdminForUser(i3, string2);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(applicationRestrictionsPerAdminForUser, 1);
                     return true;
                 case 3:
-                    boolean hasRestrictionsProvider = hasRestrictionsProvider();
+                    boolean zHasRestrictionsProvider = hasRestrictionsProvider();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasRestrictionsProvider);
+                    parcel2.writeBoolean(zHasRestrictionsProvider);
                     return true;
                 case 4:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
                     PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestPermission(readString3, readString4, readString5, persistableBundle);
+                    requestPermission(string3, string4, string5, persistableBundle);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     PersistableBundle persistableBundle2 = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyPermissionResponse(readString6, persistableBundle2);
+                    notifyPermissionResponse(string6, persistableBundle2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    Intent createLocalApprovalIntent = createLocalApprovalIntent();
+                    Intent intentCreateLocalApprovalIntent = createLocalApprovalIntent();
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createLocalApprovalIntent, 1);
+                    parcel2.writeTypedObject(intentCreateLocalApprovalIntent, 1);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -191,98 +191,98 @@ public interface IRestrictionsManager extends IInterface {
 
             @Override // android.content.IRestrictionsManager
             public Bundle getApplicationRestrictions(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRestrictionsManager
             public List<Bundle> getApplicationRestrictionsPerAdminForUser(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRestrictionsManager
             public boolean hasRestrictionsProvider() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRestrictionsManager
             public void requestPermission(String str, String str2, String str3, PersistableBundle persistableBundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRestrictionsManager
             public void notifyPermissionResponse(String str, PersistableBundle persistableBundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IRestrictionsManager
             public Intent createLocalApprovalIntent() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Intent) obtain2.readTypedObject(Intent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Intent) parcelObtain2.readTypedObject(Intent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

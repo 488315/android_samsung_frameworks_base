@@ -13,7 +13,7 @@ public class BlockingBufferChannel implements BufferChannel {
     private BlockingQueue<MediaBuffer> queue = new LinkedBlockingQueue();
 
     @Override // com.samsung.android.sume.core.channel.Channel
-    public void send(MediaBuffer mediaBuffer) {
+    public void send(MediaBuffer mediaBuffer) throws InterruptedException {
         try {
             Log.d(TAG, "send buffer[" + this.queue.size() + "]: " + mediaBuffer);
             this.queue.put(mediaBuffer);

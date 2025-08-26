@@ -147,9 +147,9 @@ public interface IThermalService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IThermalService)) {
-                return (IThermalService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IThermalService)) {
+                return (IThermalService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -205,26 +205,26 @@ public interface IThermalService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IThermalEventListener asInterface = IThermalEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IThermalEventListener iThermalEventListenerAsInterface = IThermalEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerThermalEventListener = registerThermalEventListener(asInterface);
+                    boolean zRegisterThermalEventListener = registerThermalEventListener(iThermalEventListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerThermalEventListener);
+                    parcel2.writeBoolean(zRegisterThermalEventListener);
                     return true;
                 case 2:
-                    IThermalEventListener asInterface2 = IThermalEventListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt = parcel.readInt();
+                    IThermalEventListener iThermalEventListenerAsInterface2 = IThermalEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean registerThermalEventListenerWithType = registerThermalEventListenerWithType(asInterface2, readInt);
+                    boolean zRegisterThermalEventListenerWithType = registerThermalEventListenerWithType(iThermalEventListenerAsInterface2, i3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerThermalEventListenerWithType);
+                    parcel2.writeBoolean(zRegisterThermalEventListenerWithType);
                     return true;
                 case 3:
-                    IThermalEventListener asInterface3 = IThermalEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IThermalEventListener iThermalEventListenerAsInterface3 = IThermalEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterThermalEventListener = unregisterThermalEventListener(asInterface3);
+                    boolean zUnregisterThermalEventListener = unregisterThermalEventListener(iThermalEventListenerAsInterface3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterThermalEventListener);
+                    parcel2.writeBoolean(zUnregisterThermalEventListener);
                     return true;
                 case 4:
                     Temperature[] currentTemperatures = getCurrentTemperatures();
@@ -232,25 +232,25 @@ public interface IThermalService extends IInterface {
                     parcel2.writeTypedArray(currentTemperatures, 1);
                     return true;
                 case 5:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Temperature[] currentTemperaturesWithType = getCurrentTemperaturesWithType(readInt2);
+                    Temperature[] currentTemperaturesWithType = getCurrentTemperaturesWithType(i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(currentTemperaturesWithType, 1);
                     return true;
                 case 6:
-                    IThermalStatusListener asInterface4 = IThermalStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                    IThermalStatusListener iThermalStatusListenerAsInterface = IThermalStatusListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerThermalStatusListener = registerThermalStatusListener(asInterface4);
+                    boolean zRegisterThermalStatusListener = registerThermalStatusListener(iThermalStatusListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerThermalStatusListener);
+                    parcel2.writeBoolean(zRegisterThermalStatusListener);
                     return true;
                 case 7:
-                    IThermalStatusListener asInterface5 = IThermalStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                    IThermalStatusListener iThermalStatusListenerAsInterface2 = IThermalStatusListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterThermalStatusListener = unregisterThermalStatusListener(asInterface5);
+                    boolean zUnregisterThermalStatusListener = unregisterThermalStatusListener(iThermalStatusListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterThermalStatusListener);
+                    parcel2.writeBoolean(zUnregisterThermalStatusListener);
                     return true;
                 case 8:
                     int currentThermalStatus = getCurrentThermalStatus();
@@ -263,16 +263,16 @@ public interface IThermalService extends IInterface {
                     parcel2.writeTypedArray(currentCoolingDevices, 1);
                     return true;
                 case 10:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CoolingDevice[] currentCoolingDevicesWithType = getCurrentCoolingDevicesWithType(readInt3);
+                    CoolingDevice[] currentCoolingDevicesWithType = getCurrentCoolingDevicesWithType(i5);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(currentCoolingDevicesWithType, 1);
                     return true;
                 case 11:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    float thermalHeadroom = getThermalHeadroom(readInt4);
+                    float thermalHeadroom = getThermalHeadroom(i6);
                     parcel2.writeNoException();
                     parcel2.writeFloat(thermalHeadroom);
                     return true;
@@ -282,18 +282,18 @@ public interface IThermalService extends IInterface {
                     parcel2.writeFloatArray(thermalHeadroomThresholds);
                     return true;
                 case 13:
-                    IThermalHeadroomListener asInterface6 = IThermalHeadroomListener.Stub.asInterface(parcel.readStrongBinder());
+                    IThermalHeadroomListener iThermalHeadroomListenerAsInterface = IThermalHeadroomListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerThermalHeadroomListener = registerThermalHeadroomListener(asInterface6);
+                    boolean zRegisterThermalHeadroomListener = registerThermalHeadroomListener(iThermalHeadroomListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerThermalHeadroomListener);
+                    parcel2.writeBoolean(zRegisterThermalHeadroomListener);
                     return true;
                 case 14:
-                    IThermalHeadroomListener asInterface7 = IThermalHeadroomListener.Stub.asInterface(parcel.readStrongBinder());
+                    IThermalHeadroomListener iThermalHeadroomListenerAsInterface2 = IThermalHeadroomListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean unregisterThermalHeadroomListener = unregisterThermalHeadroomListener(asInterface7);
+                    boolean zUnregisterThermalHeadroomListener = unregisterThermalHeadroomListener(iThermalHeadroomListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterThermalHeadroomListener);
+                    parcel2.writeBoolean(zUnregisterThermalHeadroomListener);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -318,222 +318,222 @@ public interface IThermalService extends IInterface {
 
             @Override // android.os.IThermalService
             public boolean registerThermalEventListener(IThermalEventListener iThermalEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalEventListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalEventListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public boolean registerThermalEventListenerWithType(IThermalEventListener iThermalEventListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalEventListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalEventListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public boolean unregisterThermalEventListener(IThermalEventListener iThermalEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalEventListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalEventListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public Temperature[] getCurrentTemperatures() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Temperature[]) obtain2.createTypedArray(Temperature.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Temperature[]) parcelObtain2.createTypedArray(Temperature.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public Temperature[] getCurrentTemperaturesWithType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Temperature[]) obtain2.createTypedArray(Temperature.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Temperature[]) parcelObtain2.createTypedArray(Temperature.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public boolean registerThermalStatusListener(IThermalStatusListener iThermalStatusListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalStatusListener);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalStatusListener);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public boolean unregisterThermalStatusListener(IThermalStatusListener iThermalStatusListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalStatusListener);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalStatusListener);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public int getCurrentThermalStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public CoolingDevice[] getCurrentCoolingDevices() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CoolingDevice[]) obtain2.createTypedArray(CoolingDevice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CoolingDevice[]) parcelObtain2.createTypedArray(CoolingDevice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public CoolingDevice[] getCurrentCoolingDevicesWithType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CoolingDevice[]) obtain2.createTypedArray(CoolingDevice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CoolingDevice[]) parcelObtain2.createTypedArray(CoolingDevice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public float getThermalHeadroom(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public float[] getThermalHeadroomThresholds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createFloatArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createFloatArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public boolean registerThermalHeadroomListener(IThermalHeadroomListener iThermalHeadroomListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalHeadroomListener);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalHeadroomListener);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IThermalService
             public boolean unregisterThermalHeadroomListener(IThermalHeadroomListener iThermalHeadroomListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iThermalHeadroomListener);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iThermalHeadroomListener);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

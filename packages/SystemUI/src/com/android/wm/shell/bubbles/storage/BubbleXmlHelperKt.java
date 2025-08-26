@@ -14,8 +14,8 @@ import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class BubbleXmlHelperKt {
     public static final String getAttributeWithName(XmlPullParser xmlPullParser, String str) {
@@ -28,37 +28,37 @@ public abstract class BubbleXmlHelperKt {
         return null;
     }
 
-    public static final SparseArray readXml(InputStream inputStream) {
+    public static final SparseArray readXml(InputStream inputStream) throws XmlPullParserException, NumberFormatException, IOException {
         SparseArray sparseArray = new SparseArray();
-        XmlPullParser newPullParser = Xml.newPullParser();
-        newPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
-        XmlUtils.beginDocument(newPullParser, "bs");
-        int depth = newPullParser.getDepth();
-        String attributeWithName = getAttributeWithName(newPullParser, "v");
+        XmlPullParser xmlPullParserNewPullParser = Xml.newPullParser();
+        xmlPullParserNewPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
+        XmlUtils.beginDocument(xmlPullParserNewPullParser, "bs");
+        int depth = xmlPullParserNewPullParser.getDepth();
+        String attributeWithName = getAttributeWithName(xmlPullParserNewPullParser, "v");
         if (attributeWithName != null) {
-            int parseInt = Integer.parseInt(attributeWithName);
-            if (parseInt == 1) {
-                int depth2 = newPullParser.getDepth();
+            int i = Integer.parseInt(attributeWithName);
+            if (i == 1) {
+                int depth2 = xmlPullParserNewPullParser.getDepth();
                 ArrayList arrayList = new ArrayList();
-                while (XmlUtils.nextElementWithin(newPullParser, depth2)) {
-                    BubbleEntity readXmlEntry = readXmlEntry(newPullParser);
-                    if (readXmlEntry != null && readXmlEntry.userId == 0) {
-                        arrayList.add(readXmlEntry);
+                while (XmlUtils.nextElementWithin(xmlPullParserNewPullParser, depth2)) {
+                    BubbleEntity xmlEntry = readXmlEntry(xmlPullParserNewPullParser);
+                    if (xmlEntry != null && xmlEntry.userId == 0) {
+                        arrayList.add(xmlEntry);
                     }
                 }
                 if (!arrayList.isEmpty()) {
                     sparseArray.put(0, CollectionsKt___CollectionsKt.toList(arrayList));
                 }
-            } else if (parseInt == 2) {
-                while (XmlUtils.nextElementWithin(newPullParser, depth)) {
-                    String attributeWithName2 = getAttributeWithName(newPullParser, NetworkAnalyticsConstants.DataPoints.UID);
+            } else if (i == 2) {
+                while (XmlUtils.nextElementWithin(xmlPullParserNewPullParser, depth)) {
+                    String attributeWithName2 = getAttributeWithName(xmlPullParserNewPullParser, NetworkAnalyticsConstants.DataPoints.UID);
                     if (attributeWithName2 != null) {
-                        int depth3 = newPullParser.getDepth();
+                        int depth3 = xmlPullParserNewPullParser.getDepth();
                         ArrayList arrayList2 = new ArrayList();
-                        while (XmlUtils.nextElementWithin(newPullParser, depth3)) {
-                            BubbleEntity readXmlEntry2 = readXmlEntry(newPullParser);
-                            if (readXmlEntry2 != null) {
-                                arrayList2.add(readXmlEntry2);
+                        while (XmlUtils.nextElementWithin(xmlPullParserNewPullParser, depth3)) {
+                            BubbleEntity xmlEntry2 = readXmlEntry(xmlPullParserNewPullParser);
+                            if (xmlEntry2 != null) {
+                                arrayList2.add(xmlEntry2);
                             }
                         }
                         if (!arrayList2.isEmpty()) {
@@ -71,7 +71,7 @@ public abstract class BubbleXmlHelperKt {
         return sparseArray;
     }
 
-    public static final BubbleEntity readXmlEntry(XmlPullParser xmlPullParser) {
+    public static final BubbleEntity readXmlEntry(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, NumberFormatException {
         String attributeWithName;
         String attributeWithName2;
         String attributeWithName3;
@@ -82,23 +82,23 @@ public abstract class BubbleXmlHelperKt {
         if (attributeWithName4 == null) {
             return null;
         }
-        int parseInt = Integer.parseInt(attributeWithName4);
+        int i = Integer.parseInt(attributeWithName4);
         String attributeWithName5 = getAttributeWithName(xmlPullParser, "pkg");
         if (attributeWithName5 == null || (attributeWithName = getAttributeWithName(xmlPullParser, "sid")) == null || (attributeWithName2 = getAttributeWithName(xmlPullParser, "key")) == null || (attributeWithName3 = getAttributeWithName(xmlPullParser, "h")) == null) {
             return null;
         }
-        int parseInt2 = Integer.parseInt(attributeWithName3);
+        int i2 = Integer.parseInt(attributeWithName3);
         String attributeWithName6 = getAttributeWithName(xmlPullParser, "hid");
         if (attributeWithName6 == null) {
             return null;
         }
-        int parseInt3 = Integer.parseInt(attributeWithName6);
+        int i3 = Integer.parseInt(attributeWithName6);
         String attributeWithName7 = getAttributeWithName(xmlPullParser, "t");
         String attributeWithName8 = getAttributeWithName(xmlPullParser, "tid");
-        int parseInt4 = attributeWithName8 != null ? Integer.parseInt(attributeWithName8) : -1;
+        int i4 = attributeWithName8 != null ? Integer.parseInt(attributeWithName8) : -1;
         String attributeWithName9 = getAttributeWithName(xmlPullParser, "l");
         String attributeWithName10 = getAttributeWithName(xmlPullParser, "d");
-        return new BubbleEntity(parseInt, attributeWithName5, attributeWithName, attributeWithName2, parseInt2, parseInt3, attributeWithName7, parseInt4, attributeWithName9, attributeWithName10 != null ? Boolean.parseBoolean(attributeWithName10) : false);
+        return new BubbleEntity(i, attributeWithName5, attributeWithName, attributeWithName2, i2, i3, attributeWithName7, i4, attributeWithName9, attributeWithName10 != null ? Boolean.parseBoolean(attributeWithName10) : false);
     }
 
     public static final void writeXml(OutputStream outputStream, SparseArray sparseArray) {
@@ -109,10 +109,10 @@ public abstract class BubbleXmlHelperKt {
         fastXmlSerializer.attribute((String) null, "v", "2");
         int size = sparseArray.size();
         for (int i = 0; i < size; i++) {
-            int keyAt = sparseArray.keyAt(i);
+            int iKeyAt = sparseArray.keyAt(i);
             List<BubbleEntity> list = (List) sparseArray.valueAt(i);
             fastXmlSerializer.startTag((String) null, "bs");
-            fastXmlSerializer.attribute((String) null, NetworkAnalyticsConstants.DataPoints.UID, String.valueOf(keyAt));
+            fastXmlSerializer.attribute((String) null, NetworkAnalyticsConstants.DataPoints.UID, String.valueOf(iKeyAt));
             list.getClass();
             for (BubbleEntity bubbleEntity : list) {
                 try {

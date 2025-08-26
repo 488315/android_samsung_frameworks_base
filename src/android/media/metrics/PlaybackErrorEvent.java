@@ -137,16 +137,16 @@ public final class PlaybackErrorEvent extends Event implements Parcelable {
     }
 
     private PlaybackErrorEvent(Parcel parcel) {
-        String readString = (parcel.readByte() & 1) == 0 ? null : parcel.readString();
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        long readLong = parcel.readLong();
-        Bundle readBundle = parcel.readBundle();
-        this.mExceptionStack = readString;
-        this.mErrorCode = readInt;
-        this.mSubErrorCode = readInt2;
-        this.mTimeSinceCreatedMillis = readLong;
-        this.mMetricsBundle = readBundle;
+        String string = (parcel.readByte() & 1) == 0 ? null : parcel.readString();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        long j = parcel.readLong();
+        Bundle bundle = parcel.readBundle();
+        this.mExceptionStack = string;
+        this.mErrorCode = i;
+        this.mSubErrorCode = i2;
+        this.mTimeSinceCreatedMillis = j;
+        this.mMetricsBundle = bundle;
     }
 
     public static final class Builder {

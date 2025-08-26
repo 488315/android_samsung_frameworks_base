@@ -6,15 +6,34 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import kotlin.collections.AbstractList;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AbstractPersistentList<E> extends AbstractList implements PersistentList<E> {
+
+    /* renamed from: androidx.compose.runtime.external.kotlinx.collections.immutable.implementations.immutableList.AbstractPersistentList$removeAll$1, reason: invalid class name */
+    final class AnonymousClass1 extends Lambda implements Function1 {
+        final /* synthetic */ Collection<Object> $elements;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(Collection<Object> collection) {
+            super(1);
+            this.$elements = collection;
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            return Boolean.valueOf(this.$elements.contains(obj));
+        }
+    }
+
     @Override // java.util.Collection, java.util.List, androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
     public PersistentList addAll(Collection collection) {
-        PersistentVectorBuilder builder = builder();
-        builder.addAll(collection);
-        return builder.build();
+        PersistentVectorBuilder persistentVectorBuilderBuilder = builder();
+        persistentVectorBuilderBuilder.addAll(collection);
+        return persistentVectorBuilderBuilder.build();
     }
 
     @Override // kotlin.collections.AbstractCollection, java.util.Collection, java.util.List
@@ -49,7 +68,7 @@ public abstract class AbstractPersistentList<E> extends AbstractList implements 
 
     @Override // java.util.Collection, java.util.List
     public final PersistentList removeAll(Collection collection) {
-        return removeAll(new AbstractPersistentList$removeAll$1(collection));
+        return removeAll(new AnonymousClass1(collection));
     }
 
     @Override // kotlin.collections.AbstractList, java.util.List

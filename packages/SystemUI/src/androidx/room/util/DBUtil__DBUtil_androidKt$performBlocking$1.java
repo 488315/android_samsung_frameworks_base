@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DBUtil__DBUtil_androidKt$performBlocking$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function1 $block;
@@ -54,7 +53,7 @@ final class DBUtil__DBUtil_androidKt$performBlocking$1 extends SuspendLambda imp
         boolean z = this.$isReadOnly;
         DBUtil__DBUtil_androidKt$performBlocking$1$invokeSuspend$$inlined$internalPerform$1 dBUtil__DBUtil_androidKt$performBlocking$1$invokeSuspend$$inlined$internalPerform$1 = new DBUtil__DBUtil_androidKt$performBlocking$1$invokeSuspend$$inlined$internalPerform$1(this.$inTransaction, z, roomDatabase, null, this.$block);
         this.label = 1;
-        Object useConnection$room_runtime_release = roomDatabase.useConnection$room_runtime_release(z, dBUtil__DBUtil_androidKt$performBlocking$1$invokeSuspend$$inlined$internalPerform$1, this);
-        return useConnection$room_runtime_release == coroutineSingletons ? coroutineSingletons : useConnection$room_runtime_release;
+        Object objUseConnection$room_runtime_release = roomDatabase.useConnection$room_runtime_release(z, dBUtil__DBUtil_androidKt$performBlocking$1$invokeSuspend$$inlined$internalPerform$1, this);
+        return objUseConnection$room_runtime_release == coroutineSingletons ? coroutineSingletons : objUseConnection$room_runtime_release;
     }
 }

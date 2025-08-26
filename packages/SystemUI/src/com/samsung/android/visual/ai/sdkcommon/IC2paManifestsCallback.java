@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IC2paManifestsCallback extends IInterface {
     void onError(String str);
@@ -16,13 +15,11 @@ public interface IC2paManifestsCallback extends IInterface {
 
     void onResult(String str, boolean z, boolean z2);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IC2paManifestsCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onPfdCreation = 3;
         static final int TRANSACTION_onResult = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IC2paManifestsCallback {
             public final IBinder mRemote;
 
@@ -44,8 +41,8 @@ public interface IC2paManifestsCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.visual.ai.sdkcommon.IC2paManifestsCallback");
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IC2paManifestsCallback)) ? new Proxy(iBinder) : (IC2paManifestsCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.visual.ai.sdkcommon.IC2paManifestsCallback");
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IC2paManifestsCallback)) ? new Proxy(iBinder) : (IC2paManifestsCallback) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder

@@ -45,9 +45,9 @@ public final class FlingAnimation extends DynamicAnimation<FlingAnimation> {
 
     @Override // com.android.internal.dynamicanimation.animation.DynamicAnimation
     boolean updateValueAndVelocity(long j) {
-        DynamicAnimation.MassState updateValueAndVelocity = this.mFlingForce.updateValueAndVelocity(this.mValue, this.mVelocity, j);
-        this.mValue = updateValueAndVelocity.mValue;
-        this.mVelocity = updateValueAndVelocity.mVelocity;
+        DynamicAnimation.MassState massStateUpdateValueAndVelocity = this.mFlingForce.updateValueAndVelocity(this.mValue, this.mVelocity, j);
+        this.mValue = massStateUpdateValueAndVelocity.mValue;
+        this.mVelocity = massStateUpdateValueAndVelocity.mVelocity;
         if (this.mValue < this.mMinValue) {
             this.mValue = this.mMinValue;
             return true;

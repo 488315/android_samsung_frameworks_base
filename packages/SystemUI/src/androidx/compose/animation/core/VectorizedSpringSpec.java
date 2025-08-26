@@ -3,7 +3,6 @@ package androidx.compose.animation.core;
 import androidx.compose.animation.core.AnimationVector;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VectorizedSpringSpec<V extends AnimationVector> implements VectorizedFiniteAnimationSpec<V> {
     public final /* synthetic */ VectorizedFloatAnimationSpec $$delegate_0;
@@ -42,26 +41,41 @@ public final class VectorizedSpringSpec<V extends AnimationVector> implements Ve
         this((i & 1) != 0 ? 1.0f : f, (i & 2) != 0 ? 1500.0f : f2, (i & 4) != 0 ? null : animationVector);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public VectorizedSpringSpec(final float r2, final float r3, final V r4) {
-        /*
-            r1 = this;
-            int[] r0 = androidx.compose.animation.core.VectorizedAnimationSpecKt.EmptyIntArray
-            if (r4 == 0) goto La
-            androidx.compose.animation.core.VectorizedAnimationSpecKt$createSpringAnimations$1 r0 = new androidx.compose.animation.core.VectorizedAnimationSpecKt$createSpringAnimations$1
-            r0.<init>(r4, r2, r3)
-            goto Lf
-        La:
-            androidx.compose.animation.core.VectorizedAnimationSpecKt$createSpringAnimations$2 r0 = new androidx.compose.animation.core.VectorizedAnimationSpecKt$createSpringAnimations$2
-            r0.<init>(r2, r3)
-        Lf:
-            r1.<init>(r2, r3, r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.animation.core.VectorizedSpringSpec.<init>(float, float, androidx.compose.animation.core.AnimationVector):void");
+    public VectorizedSpringSpec(final float f, final float f2, final V v) {
+        Animations animations;
+        int[] iArr = VectorizedAnimationSpecKt.EmptyIntArray;
+        if (v != null) {
+            animations = new Animations(v, f, f2) { // from class: androidx.compose.animation.core.VectorizedAnimationSpecKt$createSpringAnimations$1
+                public final FloatSpringSpec[] anims;
+
+                {
+                    int size$animation_core = v.getSize$animation_core();
+                    FloatSpringSpec[] floatSpringSpecArr = new FloatSpringSpec[size$animation_core];
+                    for (int i = 0; i < size$animation_core; i++) {
+                        floatSpringSpecArr[i] = new FloatSpringSpec(f, f2, v.get$animation_core(i));
+                    }
+                    this.anims = floatSpringSpecArr;
+                }
+
+                @Override // androidx.compose.animation.core.Animations
+                public final FloatAnimationSpec get(int i) {
+                    return this.anims[i];
+                }
+            };
+        } else {
+            animations = new Animations(f, f2) { // from class: androidx.compose.animation.core.VectorizedAnimationSpecKt$createSpringAnimations$2
+                public final FloatSpringSpec anim;
+
+                {
+                    this.anim = new FloatSpringSpec(f, f2, 0.0f, 4, null);
+                }
+
+                @Override // androidx.compose.animation.core.Animations
+                public final FloatAnimationSpec get(int i) {
+                    return this.anim;
+                }
+            };
+        }
+        this(f, f2, animations);
     }
 }

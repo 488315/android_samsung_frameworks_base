@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import com.sec.ims.DialogEvent;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IVolteServiceEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.volte2.IVolteServiceEventListener";
@@ -20,14 +19,12 @@ public interface IVolteServiceEventListener extends IInterface {
 
     void onPullingCall(int i) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IVolteServiceEventListener {
         static final int TRANSACTION_onCdpnInfo = 2;
         static final int TRANSACTION_onDialogEvent = 4;
         static final int TRANSACTION_onIncomingCall = 1;
         static final int TRANSACTION_onPullingCall = 3;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IVolteServiceEventListener {
             private IBinder mRemote;
 
@@ -46,62 +43,62 @@ public interface IVolteServiceEventListener extends IInterface {
 
             @Override // com.sec.ims.volte2.IVolteServiceEventListener
             public void onCdpnInfo(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteServiceEventListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteServiceEventListener
             public void onDialogEvent(DialogEvent dialogEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteServiceEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(dialogEvent, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(dialogEvent, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteServiceEventListener
             public void onIncomingCall(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteServiceEventListener
             public void onPullingCall(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteServiceEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteServiceEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -114,8 +111,8 @@ public interface IVolteServiceEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVolteServiceEventListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IVolteServiceEventListener)) ? new Proxy(iBinder) : (IVolteServiceEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVolteServiceEventListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IVolteServiceEventListener)) ? new Proxy(iBinder) : (IVolteServiceEventListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -128,20 +125,20 @@ public interface IVolteServiceEventListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onIncomingCall(readInt);
+                onIncomingCall(i3);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                String readString = parcel.readString();
-                int readInt2 = parcel.readInt();
+                String string = parcel.readString();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCdpnInfo(readString, readInt2);
+                onCdpnInfo(string, i4);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onPullingCall(readInt3);
+                onPullingCall(i5);
                 parcel2.writeNoException();
             } else {
                 if (i != 4) {
@@ -161,7 +158,6 @@ public interface IVolteServiceEventListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IVolteServiceEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

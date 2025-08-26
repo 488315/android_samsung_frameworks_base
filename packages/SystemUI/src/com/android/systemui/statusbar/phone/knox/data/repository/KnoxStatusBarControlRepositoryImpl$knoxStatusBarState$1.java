@@ -18,7 +18,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -56,18 +55,18 @@ final class KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1 extends Susp
             final ?? r1 = new KnoxStateMonitorCallback() { // from class: com.android.systemui.statusbar.phone.knox.data.repository.KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1$callback$1
                 @Override // com.android.systemui.knox.KnoxStateMonitorCallback
                 public final void onUpdateStatusBarHidden() {
-                    KnoxStatusBarControlRepositoryImpl knoxStatusBarControlRepositoryImpl2 = KnoxStatusBarControlRepositoryImpl.this;
+                    KnoxStatusBarControlRepositoryImpl knoxStatusBarControlRepositoryImpl2 = knoxStatusBarControlRepositoryImpl;
                     boolean z = knoxStatusBarControlRepositoryImpl2.enableLog;
                     KnoxStateMonitor knoxStateMonitor = knoxStatusBarControlRepositoryImpl2.knoxStateMonitor;
                     if (z) {
                         KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onUpdateStatusBarHidden()", " >> ", "KnoxStatusBarControlRepository", knoxStatusBarControlRepositoryImpl2.knoxStatusBarControlModel.statusBarHidden, ((KnoxStateMonitorImpl) knoxStateMonitor).isStatusBarHidden());
                     }
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(KnoxStatusBarControlModel.copy$default(knoxStatusBarControlRepositoryImpl2.knoxStatusBarControlModel, ((KnoxStateMonitorImpl) knoxStateMonitor).isStatusBarHidden(), false, null, 0, 0, 0, 62));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(KnoxStatusBarControlModel.copy$default(knoxStatusBarControlRepositoryImpl2.knoxStatusBarControlModel, ((KnoxStateMonitorImpl) knoxStateMonitor).isStatusBarHidden(), false, null, 0, 0, 0, 62));
                 }
 
                 @Override // com.android.systemui.knox.KnoxStateMonitorCallback
                 public final void onUpdateStatusBarIcons() {
-                    KnoxStatusBarControlRepositoryImpl knoxStatusBarControlRepositoryImpl2 = KnoxStatusBarControlRepositoryImpl.this;
+                    KnoxStatusBarControlRepositoryImpl knoxStatusBarControlRepositoryImpl2 = knoxStatusBarControlRepositoryImpl;
                     boolean z = knoxStatusBarControlRepositoryImpl2.enableLog;
                     KnoxStateMonitor knoxStateMonitor = knoxStatusBarControlRepositoryImpl2.knoxStateMonitor;
                     if (z) {
@@ -76,12 +75,12 @@ final class KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1 extends Susp
                         KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onUpdateStatusBarIcons()", " >> ", "KnoxStatusBarControlRepository", z2, customSdkMonitor != null && customSdkMonitor.mStatusBarIconsState);
                     }
                     CustomSdkMonitor customSdkMonitor2 = ((KnoxStateMonitorImpl) knoxStateMonitor).mCustomSdkMonitor;
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(KnoxStatusBarControlModel.copy$default(knoxStatusBarControlRepositoryImpl2.knoxStatusBarControlModel, false, customSdkMonitor2 != null && customSdkMonitor2.mStatusBarIconsState, null, 0, 0, 0, 61));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(KnoxStatusBarControlModel.copy$default(knoxStatusBarControlRepositoryImpl2.knoxStatusBarControlModel, false, customSdkMonitor2 != null && customSdkMonitor2.mStatusBarIconsState, null, 0, 0, 0, 61));
                 }
 
                 @Override // com.android.systemui.knox.KnoxStateMonitorCallback
                 public final void onUpdateStatusBarText() {
-                    KnoxStatusBarControlRepositoryImpl knoxStatusBarControlRepositoryImpl2 = KnoxStatusBarControlRepositoryImpl.this;
+                    KnoxStatusBarControlRepositoryImpl knoxStatusBarControlRepositoryImpl2 = knoxStatusBarControlRepositoryImpl;
                     boolean z = knoxStatusBarControlRepositoryImpl2.enableLog;
                     KnoxStatusBarControlModel knoxStatusBarControlModel = knoxStatusBarControlRepositoryImpl2.knoxStatusBarControlModel;
                     KnoxStateMonitor knoxStateMonitor = knoxStatusBarControlRepositoryImpl2.knoxStateMonitor;
@@ -97,7 +96,7 @@ final class KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1 extends Susp
                     CustomSdkMonitor customSdkMonitor4 = ((KnoxStateMonitorImpl) knoxStateMonitor).mCustomSdkMonitor;
                     int i3 = customSdkMonitor4 == null ? 0 : customSdkMonitor4.mStatusBarTextSize;
                     CustomSdkMonitor customSdkMonitor5 = ((KnoxStateMonitorImpl) knoxStateMonitor).mCustomSdkMonitor;
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(KnoxStatusBarControlModel.copy$default(knoxStatusBarControlRepositoryImpl2.knoxStatusBarControlModel, false, false, str2, i2, i3, customSdkMonitor5 == null ? 0 : customSdkMonitor5.mStatusBarTextWidth, 3));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(KnoxStatusBarControlModel.copy$default(knoxStatusBarControlRepositoryImpl2.knoxStatusBarControlModel, false, false, str2, i2, i3, customSdkMonitor5 == null ? 0 : customSdkMonitor5.mStatusBarTextWidth, 3));
                     CustomSdkMonitor customSdkMonitor6 = ((KnoxStateMonitorImpl) knoxStateMonitor).mCustomSdkMonitor;
                     knoxStatusBarControlModel.knoxStatusBarCustomText = customSdkMonitor6 != null ? customSdkMonitor6.mStatusBarText : null;
                     CustomSdkMonitor customSdkMonitor7 = ((KnoxStateMonitorImpl) knoxStateMonitor).mCustomSdkMonitor;
@@ -111,12 +110,12 @@ final class KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1 extends Susp
             KnoxStatusBarControlModel knoxStatusBarControlModel = knoxStatusBarControlRepositoryImpl2.knoxStatusBarControlModel;
             KnoxStateMonitor knoxStateMonitor = knoxStatusBarControlRepositoryImpl2.knoxStateMonitor;
             CustomSdkMonitor customSdkMonitor = ((KnoxStateMonitorImpl) knoxStateMonitor).mCustomSdkMonitor;
-            ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(KnoxStatusBarControlModel.copy$default(knoxStatusBarControlModel, ((KnoxStateMonitorImpl) knoxStateMonitor).isStatusBarHidden(), customSdkMonitor != null && customSdkMonitor.mStatusBarIconsState, null, 0, 0, 0, 60));
+            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(KnoxStatusBarControlModel.copy$default(knoxStatusBarControlModel, ((KnoxStateMonitorImpl) knoxStateMonitor).isStatusBarHidden(), customSdkMonitor != null && customSdkMonitor.mStatusBarIconsState, null, 0, 0, 0, 60));
             final KnoxStatusBarControlRepositoryImpl knoxStatusBarControlRepositoryImpl3 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.phone.knox.data.repository.KnoxStatusBarControlRepositoryImpl$knoxStatusBarState$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((KnoxStateMonitorImpl) KnoxStatusBarControlRepositoryImpl.this.knoxStateMonitor).removeCallback(r1);
+                    ((KnoxStateMonitorImpl) knoxStatusBarControlRepositoryImpl3.knoxStateMonitor).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

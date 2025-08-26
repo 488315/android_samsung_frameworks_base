@@ -1,5 +1,6 @@
 package com.android.internal.app;
 
+import android.content.res.Resources;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ public class BilingualSuggestedLocaleAdapter extends SuggestedLocaleAdapter {
     }
 
     @Override // com.android.internal.app.SuggestedLocaleAdapter, android.widget.Adapter
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
         if (view == null && this.mInflater == null) {
             this.mInflater = LayoutInflater.from(viewGroup.getContext());
         }

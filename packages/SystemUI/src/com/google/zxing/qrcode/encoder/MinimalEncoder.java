@@ -11,7 +11,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MinimalEncoder {
     public final ErrorCorrectionLevel ecLevel;
@@ -19,7 +18,6 @@ public final class MinimalEncoder {
     public final boolean isGS1;
     public final String stringToEncode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.zxing.qrcode.encoder.MinimalEncoder$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$zxing$qrcode$decoder$Mode;
@@ -50,7 +48,6 @@ public final class MinimalEncoder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Edge {
         public final int cachedTotalSize;
         public final int characterLength;
@@ -72,34 +69,32 @@ public final class MinimalEncoder {
             this.characterLength = i3;
             this.previous = edge;
             boolean z = false;
-            int i5 = edge != null ? edge.cachedTotalSize : 0;
+            int characterCountBits = edge != null ? edge.cachedTotalSize : 0;
             if ((mode == mode2 && edge == null && i4 != 0) || (edge != null && i4 != edge.charsetEncoderIndex)) {
                 z = true;
             }
-            i5 = (edge == null || mode != edge.mode || z) ? i5 + mode.getCharacterCountBits(version) + 4 : i5;
-            int i6 = AnonymousClass1.$SwitchMap$com$google$zxing$qrcode$decoder$Mode[mode.ordinal()];
-            if (i6 == 1) {
-                i5 += 13;
-            } else if (i6 == 2) {
-                i5 += i3 == 1 ? 6 : 11;
-            } else if (i6 == 3) {
-                i5 += i3 != 1 ? i3 == 2 ? 7 : 10 : 4;
-            } else if (i6 == 4) {
-                i5 += minimalEncoder.stringToEncode.substring(i, i3 + i).getBytes(minimalEncoder.encoders.encoders[i2].charset()).length * 8;
+            characterCountBits = (edge == null || mode != edge.mode || z) ? characterCountBits + mode.getCharacterCountBits(version) + 4 : characterCountBits;
+            int i5 = AnonymousClass1.$SwitchMap$com$google$zxing$qrcode$decoder$Mode[mode.ordinal()];
+            if (i5 == 1) {
+                characterCountBits += 13;
+            } else if (i5 == 2) {
+                characterCountBits += i3 == 1 ? 6 : 11;
+            } else if (i5 == 3) {
+                characterCountBits += i3 != 1 ? i3 == 2 ? 7 : 10 : 4;
+            } else if (i5 == 4) {
+                characterCountBits += minimalEncoder.stringToEncode.substring(i, i3 + i).getBytes(minimalEncoder.encoders.encoders[i2].charset()).length * 8;
                 if (z) {
-                    i5 += 12;
+                    characterCountBits += 12;
                 }
             }
-            this.cachedTotalSize = i5;
+            this.cachedTotalSize = characterCountBits;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ResultList {
         public final List list = new ArrayList();
         public final Version version;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ResultNode {
             public final int characterLength;
             public final int charsetEncoderIndex;
@@ -138,13 +133,13 @@ public final class MinimalEncoder {
                 } else {
                     String str = MinimalEncoder.this.stringToEncode;
                     int i = this.fromPosition;
-                    String substring = str.substring(i, this.characterLength + i);
+                    String strSubstring = str.substring(i, this.characterLength + i);
                     StringBuilder sb2 = new StringBuilder();
-                    for (int i2 = 0; i2 < substring.length(); i2++) {
-                        if (substring.charAt(i2) < ' ' || substring.charAt(i2) > '~') {
+                    for (int i2 = 0; i2 < strSubstring.length(); i2++) {
+                        if (strSubstring.charAt(i2) < ' ' || strSubstring.charAt(i2) > '~') {
                             sb2.append('.');
                         } else {
-                            sb2.append(substring.charAt(i2));
+                            sb2.append(strSubstring.charAt(i2));
                         }
                     }
                     sb.append(sb2.toString());
@@ -197,10 +192,10 @@ public final class MinimalEncoder {
             }
             int i9 = version.versionNumber;
             int i10 = 26;
-            int ordinal = (i9 <= 9 ? VersionSize.SMALL : i9 <= 26 ? VersionSize.MEDIUM : VersionSize.LARGE).ordinal();
-            if (ordinal == 0) {
+            int iOrdinal = (i9 <= 9 ? VersionSize.SMALL : i9 <= 26 ? VersionSize.MEDIUM : VersionSize.LARGE).ordinal();
+            if (iOrdinal == 0) {
                 i10 = 9;
-            } else if (ordinal != 1) {
+            } else if (iOrdinal != 1) {
                 i = 27;
                 i10 = 40;
             } else {
@@ -226,23 +221,23 @@ public final class MinimalEncoder {
             for (ResultNode resultNode : this.list) {
                 Mode mode = resultNode.mode;
                 int characterCountBits = mode.getCharacterCountBits(version);
-                int i2 = characterCountBits + 4;
-                int i3 = AnonymousClass1.$SwitchMap$com$google$zxing$qrcode$decoder$Mode[mode.ordinal()];
-                int i4 = resultNode.characterLength;
-                if (i3 == 1) {
-                    i2 += i4 * 13;
-                } else if (i3 == 2) {
-                    i2 = ((i4 / 2) * 11) + i2 + (i4 % 2 == 1 ? 6 : 0);
-                } else if (i3 == 3) {
-                    int i5 = ((i4 / 3) * 10) + i2;
-                    int i6 = i4 % 3;
-                    i2 = i5 + (i6 != 1 ? i6 == 2 ? 7 : 0 : 4);
-                } else if (i3 == 4) {
-                    i2 += resultNode.getCharacterCountIndicator() * 8;
-                } else if (i3 == 5) {
-                    i2 = characterCountBits + 12;
+                int characterCountIndicator = characterCountBits + 4;
+                int i2 = AnonymousClass1.$SwitchMap$com$google$zxing$qrcode$decoder$Mode[mode.ordinal()];
+                int i3 = resultNode.characterLength;
+                if (i2 == 1) {
+                    characterCountIndicator += i3 * 13;
+                } else if (i2 == 2) {
+                    characterCountIndicator = ((i3 / 2) * 11) + characterCountIndicator + (i3 % 2 == 1 ? 6 : 0);
+                } else if (i2 == 3) {
+                    int i4 = ((i3 / 3) * 10) + characterCountIndicator;
+                    int i5 = i3 % 3;
+                    characterCountIndicator = i4 + (i5 != 1 ? i5 == 2 ? 7 : 0 : 4);
+                } else if (i2 == 4) {
+                    characterCountIndicator += resultNode.getCharacterCountIndicator() * 8;
+                } else if (i2 == 5) {
+                    characterCountIndicator = characterCountBits + 12;
                 }
-                i += i2;
+                i += characterCountIndicator;
             }
             return i;
         }
@@ -267,7 +262,6 @@ public final class MinimalEncoder {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum VersionSize {
         SMALL("version 1-9"),
         MEDIUM("version 10-26"),
@@ -307,9 +301,11 @@ public final class MinimalEncoder {
                         if (i2 != 4) {
                             throw new IllegalStateException("Illegal mode " + mode);
                         }
+                        c = c2;
                     }
+                } else {
+                    c = c2;
                 }
-                c = c2;
             }
         }
         Edge edge2 = edgeArr2[c];
@@ -348,8 +344,8 @@ public final class MinimalEncoder {
     }
 
     public static Version getVersion(VersionSize versionSize) {
-        int ordinal = versionSize.ordinal();
-        return ordinal != 0 ? ordinal != 1 ? Version.getVersionForNumber(40) : Version.getVersionForNumber(26) : Version.getVersionForNumber(9);
+        int iOrdinal = versionSize.ordinal();
+        return iOrdinal != 0 ? iOrdinal != 1 ? Version.getVersionForNumber(40) : Version.getVersionForNumber(26) : Version.getVersionForNumber(9);
     }
 
     public final void addEdges(Version version, Edge[][][] edgeArr, int i, Edge edge) {
@@ -396,7 +392,7 @@ public final class MinimalEncoder {
         }
     }
 
-    public final ResultList encodeSpecificVersion(Version version) {
+    public final ResultList encodeSpecificVersion(Version version) throws WriterException {
         int i;
         String str = this.stringToEncode;
         int length = str.length();

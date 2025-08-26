@@ -1,6 +1,7 @@
 package com.android.internal.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
@@ -13,8 +14,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.MathUtils;
 import android.view.AbsSavedState;
+import android.view.FocusFinder;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.SoundEffectConstants;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -187,9 +190,9 @@ public class ViewPager extends ViewGroup {
         public LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
             this.widthFactor = 0.0f;
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, ViewPager.LAYOUT_ATTRS);
-            this.gravity = obtainStyledAttributes.getInteger(0, 48);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, ViewPager.LAYOUT_ATTRS);
+            this.gravity = typedArrayObtainStyledAttributes.getInteger(0, 48);
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -373,31 +376,31 @@ public class ViewPager extends ViewGroup {
             setScrollingCacheEnabled(false);
             return false;
         }
-        int constrain = MathUtils.constrain(i, 0, this.mAdapter.getCount() - 1);
-        if (!z2 && this.mCurItem == constrain && this.mItems.size() != 0) {
+        int iConstrain = MathUtils.constrain(i, 0, this.mAdapter.getCount() - 1);
+        if (!z2 && this.mCurItem == iConstrain && this.mItems.size() != 0) {
             setScrollingCacheEnabled(false);
             return false;
         }
         int i3 = this.mOffscreenPageLimit;
         int i4 = this.mCurItem;
-        if (constrain > i4 + i3 || constrain < i4 - i3) {
+        if (iConstrain > i4 + i3 || iConstrain < i4 - i3) {
             for (int i5 = 0; i5 < this.mItems.size(); i5++) {
                 this.mItems.get(i5).scrolling = true;
             }
         }
-        boolean z3 = this.mCurItem != constrain;
+        boolean z3 = this.mCurItem != iConstrain;
         if (this.mFirstLayout) {
-            this.mCurItem = constrain;
+            this.mCurItem = iConstrain;
             if (z3 && (onPageChangeListener2 = this.mOnPageChangeListener) != null) {
-                onPageChangeListener2.onPageSelected(constrain);
+                onPageChangeListener2.onPageSelected(iConstrain);
             }
             if (z3 && (onPageChangeListener = this.mInternalPageChangeListener) != null) {
-                onPageChangeListener.onPageSelected(constrain);
+                onPageChangeListener.onPageSelected(iConstrain);
             }
             requestLayout();
         } else {
-            populate(constrain);
-            scrollToItem(constrain, z, i2, z3);
+            populate(iConstrain);
+            scrollToItem(iConstrain, z, i2, z3);
         }
         return true;
     }
@@ -431,13 +434,13 @@ public class ViewPager extends ViewGroup {
     }
 
     private int getLeftEdgeForItem(int i) {
-        ItemInfo infoForPosition = infoForPosition(i);
-        if (infoForPosition == null) {
+        ItemInfo itemInfoInfoForPosition = infoForPosition(i);
+        if (itemInfoInfoForPosition == null) {
             return 0;
         }
         float paddedWidth = getPaddedWidth();
-        int constrain = (int) (MathUtils.constrain(infoForPosition.offset, this.mFirstOffset, this.mLastOffset) * paddedWidth);
-        return isLayoutRtl() ? (16777216 - ((int) ((paddedWidth * infoForPosition.widthFactor) + 0.5f))) - constrain : constrain;
+        int iConstrain = (int) (MathUtils.constrain(itemInfoInfoForPosition.offset, this.mFirstOffset, this.mLastOffset) * paddedWidth);
+        return isLayoutRtl() ? (16777216 - ((int) ((paddedWidth * itemInfoInfoForPosition.widthFactor) + 0.5f))) - iConstrain : iConstrain;
     }
 
     public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
@@ -536,7 +539,7 @@ public class ViewPager extends ViewGroup {
     }
 
     void smoothScrollTo(int i, int i2, int i3) {
-        int abs;
+        int iAbs;
         if (getChildCount() == 0) {
             setScrollingCacheEnabled(false);
             return;
@@ -557,14 +560,14 @@ public class ViewPager extends ViewGroup {
         int i6 = paddedWidth / 2;
         float f = paddedWidth;
         float f2 = i6;
-        float distanceInfluenceForSnapDuration = f2 + (distanceInfluenceForSnapDuration(Math.min(1.0f, (Math.abs(i4) * 1.0f) / f)) * f2);
-        int abs2 = Math.abs(i3);
-        if (abs2 > 0) {
-            abs = Math.round(Math.abs(distanceInfluenceForSnapDuration / abs2) * 1000.0f) * 4;
+        float fDistanceInfluenceForSnapDuration = f2 + (distanceInfluenceForSnapDuration(Math.min(1.0f, (Math.abs(i4) * 1.0f) / f)) * f2);
+        int iAbs2 = Math.abs(i3);
+        if (iAbs2 > 0) {
+            iAbs = Math.round(Math.abs(fDistanceInfluenceForSnapDuration / iAbs2) * 1000.0f) * 4;
         } else {
-            abs = (int) (((Math.abs(i4) / ((f * this.mAdapter.getPageWidth(this.mCurItem)) + this.mPageMargin)) + 1.0f) * 100.0f);
+            iAbs = (int) (((Math.abs(i4) / ((f * this.mAdapter.getPageWidth(this.mCurItem)) + this.mPageMargin)) + 1.0f) * 100.0f);
         }
-        this.mScroller.startScroll(scrollX, scrollY, i4, i5, Math.min(abs, 600));
+        this.mScroller.startScroll(scrollX, scrollY, i4, i5, Math.min(iAbs, 600));
         postInvalidateOnAnimation();
     }
 
@@ -585,33 +588,33 @@ public class ViewPager extends ViewGroup {
         int count = this.mAdapter.getCount();
         this.mExpectedAdapterCount = count;
         boolean z = this.mItems.size() < (this.mOffscreenPageLimit * 2) + 1 && this.mItems.size() < count;
-        int i = this.mCurItem;
-        int i2 = 0;
+        int iMax = this.mCurItem;
+        int i = 0;
         boolean z2 = false;
-        while (i2 < this.mItems.size()) {
-            ItemInfo itemInfo = this.mItems.get(i2);
+        while (i < this.mItems.size()) {
+            ItemInfo itemInfo = this.mItems.get(i);
             int itemPosition = this.mAdapter.getItemPosition(itemInfo.object);
             if (itemPosition != -1) {
                 if (itemPosition == -2) {
-                    this.mItems.remove(i2);
-                    i2--;
+                    this.mItems.remove(i);
+                    i--;
                     if (!z2) {
                         this.mAdapter.startUpdate((ViewGroup) this);
                         z2 = true;
                     }
                     this.mAdapter.destroyItem((ViewGroup) this, itemInfo.position, itemInfo.object);
                     if (this.mCurItem == itemInfo.position) {
-                        i = Math.max(0, Math.min(this.mCurItem, count - 1));
+                        iMax = Math.max(0, Math.min(this.mCurItem, count - 1));
                     }
                 } else if (itemInfo.position != itemPosition) {
                     if (itemInfo.position == this.mCurItem) {
-                        i = itemPosition;
+                        iMax = itemPosition;
                     }
                     itemInfo.position = itemPosition;
                 }
                 z = true;
             }
-            i2++;
+            i++;
         }
         if (z2) {
             this.mAdapter.finishUpdate((ViewGroup) this);
@@ -619,13 +622,13 @@ public class ViewPager extends ViewGroup {
         Collections.sort(this.mItems, COMPARATOR);
         if (z) {
             int childCount = getChildCount();
-            for (int i3 = 0; i3 < childCount; i3++) {
-                LayoutParams layoutParams = (LayoutParams) getChildAt(i3).getLayoutParams();
+            for (int i2 = 0; i2 < childCount; i2++) {
+                LayoutParams layoutParams = (LayoutParams) getChildAt(i2).getLayoutParams();
                 if (!layoutParams.isDecor) {
                     layoutParams.widthFactor = 0.0f;
                 }
             }
-            setCurrentItemInternal(i, false, true);
+            setCurrentItemInternal(iMax, false, true);
             requestLayout();
         }
     }
@@ -634,20 +637,188 @@ public class ViewPager extends ViewGroup {
         populate(this.mCurItem);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x006d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:31:0x0073, code lost:
     
-        if (r9.position == r17.mCurItem) goto L32;
+        r9 = null;
      */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x0107 A[PHI: r6 r8 r11
+      0x0107: PHI (r6v43 float) = (r6v41 float), (r6v42 float), (r6v10 float) binds: [B:66:0x00fc, B:63:0x00e6, B:56:0x00ce] A[DONT_GENERATE, DONT_INLINE]
+      0x0107: PHI (r8v6 int) = (r8v5 int), (r8v4 int), (r8v9 int) binds: [B:66:0x00fc, B:63:0x00e6, B:56:0x00ce] A[DONT_GENERATE, DONT_INLINE]
+      0x0107: PHI (r11v7 int) = (r11v1 int), (r11v6 int), (r11v10 int) binds: [B:66:0x00fc, B:63:0x00e6, B:56:0x00ce] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    void populate(int r18) {
-        /*
-            Method dump skipped, instructions count: 654
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.ViewPager.populate(int):void");
+    void populate(int i) {
+        int i2;
+        ItemInfo itemInfoInfoForPosition;
+        String hexString;
+        ItemInfo itemInfoAddNewItem;
+        float f;
+        Rect rect;
+        ItemInfo itemInfoInfoForChild;
+        ItemInfo itemInfo;
+        int i3 = this.mCurItem;
+        if (i3 != i) {
+            i2 = i3 < i ? 66 : 17;
+            itemInfoInfoForPosition = infoForPosition(i3);
+            this.mCurItem = i;
+        } else {
+            i2 = 2;
+            itemInfoInfoForPosition = null;
+        }
+        if (this.mAdapter == null) {
+            sortChildDrawingOrder();
+            return;
+        }
+        if (this.mPopulatePending) {
+            sortChildDrawingOrder();
+            return;
+        }
+        if (getWindowToken() == null) {
+            return;
+        }
+        this.mAdapter.startUpdate((ViewGroup) this);
+        int i4 = this.mOffscreenPageLimit;
+        int iMax = Math.max(0, this.mCurItem - i4);
+        int count = this.mAdapter.getCount();
+        int iMin = Math.min(count - 1, this.mCurItem + i4);
+        if (count != this.mExpectedAdapterCount) {
+            try {
+                hexString = getResources().getResourceName(getId());
+            } catch (Resources.NotFoundException unused) {
+                hexString = Integer.toHexString(getId());
+            }
+            throw new IllegalStateException("The application's PagerAdapter changed the adapter's contents without calling PagerAdapter#notifyDataSetChanged! Expected adapter item count: " + this.mExpectedAdapterCount + ", found: " + count + " Pager id: " + hexString + " Pager class: " + getClass() + " Problematic adapter: " + this.mAdapter.getClass());
+        }
+        int i5 = 0;
+        while (true) {
+            if (i5 >= this.mItems.size()) {
+                break;
+            }
+            itemInfoAddNewItem = this.mItems.get(i5);
+            if (itemInfoAddNewItem.position >= this.mCurItem) {
+                if (itemInfoAddNewItem.position != this.mCurItem) {
+                    break;
+                }
+            } else {
+                i5++;
+            }
+        }
+        if (itemInfoAddNewItem == null && count > 0) {
+            itemInfoAddNewItem = addNewItem(this.mCurItem, i5);
+        }
+        if (itemInfoAddNewItem != null) {
+            int i6 = i5 - 1;
+            ItemInfo itemInfo2 = i6 >= 0 ? this.mItems.get(i6) : null;
+            int paddedWidth = getPaddedWidth();
+            float paddingLeft = paddedWidth <= 0 ? 0.0f : (2.0f - itemInfoAddNewItem.widthFactor) + (getPaddingLeft() / paddedWidth);
+            float f2 = 0.0f;
+            for (int i7 = this.mCurItem - 1; i7 >= 0; i7--) {
+                if (f2 >= paddingLeft && i7 < iMax) {
+                    if (itemInfo2 == null) {
+                        break;
+                    }
+                    if (i7 == itemInfo2.position && !itemInfo2.scrolling) {
+                        this.mItems.remove(i6);
+                        this.mAdapter.destroyItem((ViewGroup) this, i7, itemInfo2.object);
+                        i6--;
+                        i5--;
+                        if (i6 >= 0) {
+                            itemInfo = this.mItems.get(i6);
+                        }
+                        itemInfo2 = itemInfo;
+                    }
+                } else if (itemInfo2 != null && i7 == itemInfo2.position) {
+                    f2 += itemInfo2.widthFactor;
+                    i6--;
+                    if (i6 >= 0) {
+                        itemInfo = this.mItems.get(i6);
+                    }
+                    itemInfo2 = itemInfo;
+                } else {
+                    f2 += addNewItem(i7, i6 + 1).widthFactor;
+                    i5++;
+                    itemInfo = i6 >= 0 ? this.mItems.get(i6) : null;
+                    itemInfo2 = itemInfo;
+                }
+            }
+            f = 0.0f;
+            float f3 = itemInfoAddNewItem.widthFactor;
+            int i8 = i5 + 1;
+            if (f3 < 2.0f) {
+                ItemInfo itemInfo3 = i8 < this.mItems.size() ? this.mItems.get(i8) : null;
+                float paddingRight = paddedWidth <= 0 ? 0.0f : (getPaddingRight() / paddedWidth) + 2.0f;
+                int i9 = this.mCurItem;
+                while (true) {
+                    i9++;
+                    if (i9 >= count) {
+                        break;
+                    }
+                    if (f3 >= paddingRight && i9 > iMin) {
+                        if (itemInfo3 == null) {
+                            break;
+                        }
+                        if (i9 == itemInfo3.position && !itemInfo3.scrolling) {
+                            this.mItems.remove(i8);
+                            this.mAdapter.destroyItem((ViewGroup) this, i9, itemInfo3.object);
+                            if (i8 < this.mItems.size()) {
+                                itemInfo3 = this.mItems.get(i8);
+                            }
+                        }
+                    } else if (itemInfo3 != null && i9 == itemInfo3.position) {
+                        f3 += itemInfo3.widthFactor;
+                        i8++;
+                        if (i8 < this.mItems.size()) {
+                            itemInfo3 = this.mItems.get(i8);
+                        }
+                    } else {
+                        ItemInfo itemInfoAddNewItem2 = addNewItem(i9, i8);
+                        i8++;
+                        f3 += itemInfoAddNewItem2.widthFactor;
+                        itemInfo3 = i8 < this.mItems.size() ? this.mItems.get(i8) : null;
+                    }
+                }
+            }
+            calculatePageOffsets(itemInfoAddNewItem, i5, itemInfoInfoForPosition);
+        } else {
+            f = 0.0f;
+        }
+        this.mAdapter.setPrimaryItem((ViewGroup) this, this.mCurItem, itemInfoAddNewItem != null ? itemInfoAddNewItem.object : null);
+        this.mAdapter.finishUpdate((ViewGroup) this);
+        int childCount = getChildCount();
+        for (int i10 = 0; i10 < childCount; i10++) {
+            View childAt = getChildAt(i10);
+            LayoutParams layoutParams = (LayoutParams) childAt.getLayoutParams();
+            layoutParams.childIndex = i10;
+            if (!layoutParams.isDecor && layoutParams.widthFactor == f && (itemInfoInfoForChild = infoForChild(childAt)) != null) {
+                layoutParams.widthFactor = itemInfoInfoForChild.widthFactor;
+                layoutParams.position = itemInfoInfoForChild.position;
+            }
+        }
+        sortChildDrawingOrder();
+        if (hasFocus()) {
+            View viewFindFocus = findFocus();
+            ItemInfo itemInfoInfoForAnyChild = viewFindFocus != null ? infoForAnyChild(viewFindFocus) : null;
+            if (itemInfoInfoForAnyChild == null || itemInfoInfoForAnyChild.position != this.mCurItem) {
+                for (int i11 = 0; i11 < getChildCount(); i11++) {
+                    View childAt2 = getChildAt(i11);
+                    ItemInfo itemInfoInfoForChild2 = infoForChild(childAt2);
+                    if (itemInfoInfoForChild2 != null && itemInfoInfoForChild2.position == this.mCurItem) {
+                        if (viewFindFocus == null) {
+                            rect = null;
+                        } else {
+                            rect = this.mTempRect;
+                            viewFindFocus.getFocusedRect(rect);
+                            offsetDescendantRectToMyCoords(viewFindFocus, this.mTempRect);
+                            offsetRectIntoDescendantCoords(childAt2, this.mTempRect);
+                        }
+                        if (childAt2.requestFocus(i2, rect)) {
+                            return;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void sortChildDrawingOrder() {
@@ -675,7 +846,7 @@ public class ViewPager extends ViewGroup {
         if (itemInfo2 != null) {
             int i2 = itemInfo2.position;
             if (i2 < itemInfo.position) {
-                float f2 = itemInfo2.offset + itemInfo2.widthFactor + f;
+                float pageWidth = itemInfo2.offset + itemInfo2.widthFactor + f;
                 int i3 = i2 + 1;
                 int i4 = 0;
                 while (i3 <= itemInfo.position && i4 < this.mItems.size()) {
@@ -689,16 +860,16 @@ public class ViewPager extends ViewGroup {
                         itemInfo5 = this.mItems.get(i4);
                     }
                     while (i3 < itemInfo4.position) {
-                        f2 += this.mAdapter.getPageWidth(i3) + f;
+                        pageWidth += this.mAdapter.getPageWidth(i3) + f;
                         i3++;
                     }
-                    itemInfo4.offset = f2;
-                    f2 += itemInfo4.widthFactor + f;
+                    itemInfo4.offset = pageWidth;
+                    pageWidth += itemInfo4.widthFactor + f;
                     i3++;
                 }
             } else if (i2 > itemInfo.position) {
                 int size = this.mItems.size() - 1;
-                float f3 = itemInfo2.offset;
+                float pageWidth2 = itemInfo2.offset;
                 while (true) {
                     i2--;
                     if (i2 < itemInfo.position || size < 0) {
@@ -714,16 +885,16 @@ public class ViewPager extends ViewGroup {
                         itemInfo6 = this.mItems.get(size);
                     }
                     while (i2 > itemInfo3.position) {
-                        f3 -= this.mAdapter.getPageWidth(i2) + f;
+                        pageWidth2 -= this.mAdapter.getPageWidth(i2) + f;
                         i2--;
                     }
-                    f3 -= itemInfo3.widthFactor + f;
-                    itemInfo3.offset = f3;
+                    pageWidth2 -= itemInfo3.widthFactor + f;
+                    itemInfo3.offset = pageWidth2;
                 }
             }
         }
         int size2 = this.mItems.size();
-        float f4 = itemInfo.offset;
+        float pageWidth3 = itemInfo.offset;
         int i5 = itemInfo.position - 1;
         this.mFirstOffset = itemInfo.position == 0 ? itemInfo.offset : -3.4028235E38f;
         int i6 = count - 1;
@@ -732,31 +903,31 @@ public class ViewPager extends ViewGroup {
         while (i7 >= 0) {
             ItemInfo itemInfo7 = this.mItems.get(i7);
             while (i5 > itemInfo7.position) {
-                f4 -= this.mAdapter.getPageWidth(i5) + f;
+                pageWidth3 -= this.mAdapter.getPageWidth(i5) + f;
                 i5--;
             }
-            f4 -= itemInfo7.widthFactor + f;
-            itemInfo7.offset = f4;
+            pageWidth3 -= itemInfo7.widthFactor + f;
+            itemInfo7.offset = pageWidth3;
             if (itemInfo7.position == 0) {
-                this.mFirstOffset = f4;
+                this.mFirstOffset = pageWidth3;
             }
             i7--;
             i5--;
         }
-        float f5 = itemInfo.offset + itemInfo.widthFactor + f;
+        float pageWidth4 = itemInfo.offset + itemInfo.widthFactor + f;
         int i8 = itemInfo.position + 1;
         int i9 = i + 1;
         while (i9 < size2) {
             ItemInfo itemInfo8 = this.mItems.get(i9);
             while (i8 < itemInfo8.position) {
-                f5 += this.mAdapter.getPageWidth(i8) + f;
+                pageWidth4 += this.mAdapter.getPageWidth(i8) + f;
                 i8++;
             }
             if (itemInfo8.position == i6) {
-                this.mLastOffset = (itemInfo8.widthFactor + f5) - 1.0f;
+                this.mLastOffset = (itemInfo8.widthFactor + pageWidth4) - 1.0f;
             }
-            itemInfo8.offset = f5;
-            f5 += itemInfo8.widthFactor + f;
+            itemInfo8.offset = pageWidth4;
+            pageWidth4 += itemInfo8.widthFactor + f;
             i9++;
             i8++;
         }
@@ -857,11 +1028,11 @@ public class ViewPager extends ViewGroup {
     }
 
     public Object getCurrent() {
-        ItemInfo infoForPosition = infoForPosition(getCurrentItem());
-        if (infoForPosition == null) {
+        ItemInfo itemInfoInfoForPosition = infoForPosition(getCurrentItem());
+        if (itemInfoInfoForPosition == null) {
             return null;
         }
-        return infoForPosition.object;
+        return itemInfoInfoForPosition.object;
     }
 
     @Override // android.view.ViewGroup, android.view.ViewManager
@@ -1006,27 +1177,123 @@ public class ViewPager extends ViewGroup {
             this.mScroller.startScroll(scrollX, 0, (int) (infoForPosition(this.mCurItem).offset * i), 0, this.mScroller.getDuration() - this.mScroller.timePassed());
             return;
         }
-        ItemInfo infoForPosition = infoForPosition(this.mCurItem);
-        int min = (int) ((infoForPosition != null ? Math.min(infoForPosition.offset, this.mLastOffset) : 0.0f) * ((i - getPaddingLeft()) - getPaddingRight()));
-        if (min != getScrollX()) {
+        ItemInfo itemInfoInfoForPosition = infoForPosition(this.mCurItem);
+        int iMin = (int) ((itemInfoInfoForPosition != null ? Math.min(itemInfoInfoForPosition.offset, this.mLastOffset) : 0.0f) * ((i - getPaddingLeft()) - getPaddingRight()));
+        if (iMin != getScrollX()) {
             completeScroll(false);
-            scrollTo(min, getScrollY());
+            scrollTo(iMin, getScrollY());
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0073  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0090  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0073  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0090  */
     @Override // android.view.ViewGroup, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onLayout(boolean r19, int r20, int r21, int r22, int r23) {
-        /*
-            Method dump skipped, instructions count: 303
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.ViewPager.onLayout(boolean, int, int, int, int):void");
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
+        boolean z2;
+        ItemInfo itemInfoInfoForChild;
+        int iMax;
+        int measuredWidth;
+        int iMax2;
+        int measuredHeight;
+        int childCount = getChildCount();
+        int i5 = i3 - i;
+        int i6 = i4 - i2;
+        int paddingLeft = getPaddingLeft();
+        int paddingTop = getPaddingTop();
+        int paddingRight = getPaddingRight();
+        int paddingBottom = getPaddingBottom();
+        int scrollX = getScrollX();
+        int i7 = 0;
+        for (int i8 = 0; i8 < childCount; i8++) {
+            View childAt = getChildAt(i8);
+            if (childAt.getVisibility() != 8) {
+                LayoutParams layoutParams = (LayoutParams) childAt.getLayoutParams();
+                if (layoutParams.isDecor) {
+                    int i9 = layoutParams.gravity & 7;
+                    int i10 = layoutParams.gravity & 112;
+                    if (i9 == 1) {
+                        iMax = Math.max((i5 - childAt.getMeasuredWidth()) / 2, paddingLeft);
+                    } else {
+                        if (i9 == 3) {
+                            measuredWidth = childAt.getMeasuredWidth() + paddingLeft;
+                        } else if (i9 != 5) {
+                            measuredWidth = paddingLeft;
+                        } else {
+                            iMax = (i5 - paddingRight) - childAt.getMeasuredWidth();
+                            paddingRight += childAt.getMeasuredWidth();
+                        }
+                        if (i10 != 16) {
+                            iMax2 = Math.max((i6 - childAt.getMeasuredHeight()) / 2, paddingTop);
+                        } else {
+                            if (i10 == 48) {
+                                measuredHeight = childAt.getMeasuredHeight() + paddingTop;
+                            } else if (i10 != 80) {
+                                measuredHeight = paddingTop;
+                            } else {
+                                iMax2 = (i6 - paddingBottom) - childAt.getMeasuredHeight();
+                                paddingBottom += childAt.getMeasuredHeight();
+                            }
+                            int i11 = paddingLeft + scrollX;
+                            childAt.layout(i11, paddingTop, childAt.getMeasuredWidth() + i11, paddingTop + childAt.getMeasuredHeight());
+                            i7++;
+                            paddingTop = measuredHeight;
+                            paddingLeft = measuredWidth;
+                        }
+                        int i12 = iMax2;
+                        measuredHeight = paddingTop;
+                        paddingTop = i12;
+                        int i112 = paddingLeft + scrollX;
+                        childAt.layout(i112, paddingTop, childAt.getMeasuredWidth() + i112, paddingTop + childAt.getMeasuredHeight());
+                        i7++;
+                        paddingTop = measuredHeight;
+                        paddingLeft = measuredWidth;
+                    }
+                    int i13 = iMax;
+                    measuredWidth = paddingLeft;
+                    paddingLeft = i13;
+                    if (i10 != 16) {
+                    }
+                    int i122 = iMax2;
+                    measuredHeight = paddingTop;
+                    paddingTop = i122;
+                    int i1122 = paddingLeft + scrollX;
+                    childAt.layout(i1122, paddingTop, childAt.getMeasuredWidth() + i1122, paddingTop + childAt.getMeasuredHeight());
+                    i7++;
+                    paddingTop = measuredHeight;
+                    paddingLeft = measuredWidth;
+                }
+            }
+        }
+        int i14 = (i5 - paddingLeft) - paddingRight;
+        for (int i15 = 0; i15 < childCount; i15++) {
+            View childAt2 = getChildAt(i15);
+            if (childAt2.getVisibility() != 8) {
+                LayoutParams layoutParams2 = (LayoutParams) childAt2.getLayoutParams();
+                if (!layoutParams2.isDecor && (itemInfoInfoForChild = infoForChild(childAt2)) != null) {
+                    if (layoutParams2.needsMeasure) {
+                        layoutParams2.needsMeasure = false;
+                        childAt2.measure(View.MeasureSpec.makeMeasureSpec((int) (i14 * layoutParams2.widthFactor), 1073741824), View.MeasureSpec.makeMeasureSpec((i6 - paddingTop) - paddingBottom, 1073741824));
+                    }
+                    int measuredWidth2 = childAt2.getMeasuredWidth();
+                    int i16 = (int) (i14 * itemInfoInfoForChild.offset);
+                    int i17 = isLayoutRtl() ? ((16777216 - paddingRight) - i16) - measuredWidth2 : paddingLeft + i16;
+                    childAt2.layout(i17, paddingTop, measuredWidth2 + i17, childAt2.getMeasuredHeight() + paddingTop);
+                }
+            }
+        }
+        this.mTopPageBounds = paddingTop;
+        this.mBottomPageBounds = i6 - paddingBottom;
+        this.mDecorChildCount = i7;
+        if (this.mFirstLayout) {
+            z2 = false;
+            scrollToItem(this.mCurItem, false, 0, false);
+        } else {
+            z2 = false;
+        }
+        this.mFirstLayout = z2;
     }
 
     @Override // android.view.View
@@ -1061,13 +1328,13 @@ public class ViewPager extends ViewGroup {
         if (isLayoutRtl()) {
             i = 16777216 - i;
         }
-        ItemInfo infoForFirstVisiblePage = infoForFirstVisiblePage();
+        ItemInfo itemInfoInfoForFirstVisiblePage = infoForFirstVisiblePage();
         int paddedWidth = getPaddedWidth();
         int i2 = this.mPageMargin;
         int i3 = paddedWidth + i2;
         float f = paddedWidth;
-        int i4 = infoForFirstVisiblePage.position;
-        float f2 = ((i / f) - infoForFirstVisiblePage.offset) / (infoForFirstVisiblePage.widthFactor + (i2 / f));
+        int i4 = itemInfoInfoForFirstVisiblePage.position;
+        float f2 = ((i / f) - itemInfoInfoForFirstVisiblePage.offset) / (itemInfoInfoForFirstVisiblePage.widthFactor + (i2 / f));
         this.mCalledSuper = false;
         onPageScrolled(i4, f2, (int) (i3 * f2));
         if (this.mCalledSuper) {
@@ -1076,111 +1343,71 @@ public class ViewPager extends ViewGroup {
         throw new IllegalStateException("onPageScrolled did not call superclass implementation");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0064  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0064  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onPageScrolled(int r13, float r14, int r15) {
-        /*
-            r12 = this;
-            int r0 = r12.mDecorChildCount
-            r1 = 0
-            r2 = 1
-            if (r0 <= 0) goto L6b
-            int r0 = r12.getScrollX()
-            int r3 = r12.getPaddingLeft()
-            int r4 = r12.getPaddingRight()
-            int r5 = r12.getWidth()
-            int r6 = r12.getChildCount()
-            r7 = r1
-        L1b:
-            if (r7 >= r6) goto L6b
-            android.view.View r8 = r12.getChildAt(r7)
-            android.view.ViewGroup$LayoutParams r9 = r8.getLayoutParams()
-            com.android.internal.widget.ViewPager$LayoutParams r9 = (com.android.internal.widget.ViewPager.LayoutParams) r9
-            boolean r10 = r9.isDecor
-            if (r10 != 0) goto L2c
-            goto L68
-        L2c:
-            int r9 = r9.gravity
-            r9 = r9 & 7
-            if (r9 == r2) goto L4d
-            r10 = 3
-            if (r9 == r10) goto L47
-            r10 = 5
-            if (r9 == r10) goto L3a
-            r9 = r3
-            goto L5c
-        L3a:
-            int r9 = r5 - r4
-            int r10 = r8.getMeasuredWidth()
-            int r9 = r9 - r10
-            int r10 = r8.getMeasuredWidth()
-            int r4 = r4 + r10
-            goto L59
-        L47:
-            int r9 = r8.getWidth()
-            int r9 = r9 + r3
-            goto L5c
-        L4d:
-            int r9 = r8.getMeasuredWidth()
-            int r9 = r5 - r9
-            int r9 = r9 / 2
-            int r9 = java.lang.Math.max(r9, r3)
-        L59:
-            r11 = r9
-            r9 = r3
-            r3 = r11
-        L5c:
-            int r3 = r3 + r0
-            int r10 = r8.getLeft()
-            int r3 = r3 - r10
-            if (r3 == 0) goto L67
-            r8.offsetLeftAndRight(r3)
-        L67:
-            r3 = r9
-        L68:
-            int r7 = r7 + 1
-            goto L1b
-        L6b:
-            com.android.internal.widget.ViewPager$OnPageChangeListener r0 = r12.mOnPageChangeListener
-            if (r0 == 0) goto L72
-            r0.onPageScrolled(r13, r14, r15)
-        L72:
-            com.android.internal.widget.ViewPager$OnPageChangeListener r0 = r12.mInternalPageChangeListener
-            if (r0 == 0) goto L79
-            r0.onPageScrolled(r13, r14, r15)
-        L79:
-            com.android.internal.widget.ViewPager$PageTransformer r13 = r12.mPageTransformer
-            if (r13 == 0) goto Laa
-            int r13 = r12.getScrollX()
-            int r14 = r12.getChildCount()
-        L85:
-            if (r1 >= r14) goto Laa
-            android.view.View r15 = r12.getChildAt(r1)
-            android.view.ViewGroup$LayoutParams r0 = r15.getLayoutParams()
-            com.android.internal.widget.ViewPager$LayoutParams r0 = (com.android.internal.widget.ViewPager.LayoutParams) r0
-            boolean r0 = r0.isDecor
-            if (r0 == 0) goto L96
-            goto La7
-        L96:
-            int r0 = r15.getLeft()
-            int r0 = r0 - r13
-            float r0 = (float) r0
-            int r3 = r12.getPaddedWidth()
-            float r3 = (float) r3
-            float r0 = r0 / r3
-            com.android.internal.widget.ViewPager$PageTransformer r3 = r12.mPageTransformer
-            r3.transformPage(r15, r0)
-        La7:
-            int r1 = r1 + 1
-            goto L85
-        Laa:
-            r12.mCalledSuper = r2
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.ViewPager.onPageScrolled(int, float, int):void");
+    protected void onPageScrolled(int i, float f, int i2) {
+        int iMax;
+        int width;
+        int left;
+        if (this.mDecorChildCount > 0) {
+            int scrollX = getScrollX();
+            int paddingLeft = getPaddingLeft();
+            int paddingRight = getPaddingRight();
+            int width2 = getWidth();
+            int childCount = getChildCount();
+            for (int i3 = 0; i3 < childCount; i3++) {
+                View childAt = getChildAt(i3);
+                LayoutParams layoutParams = (LayoutParams) childAt.getLayoutParams();
+                if (layoutParams.isDecor) {
+                    int i4 = layoutParams.gravity & 7;
+                    if (i4 == 1) {
+                        iMax = Math.max((width2 - childAt.getMeasuredWidth()) / 2, paddingLeft);
+                    } else {
+                        if (i4 == 3) {
+                            width = childAt.getWidth() + paddingLeft;
+                        } else if (i4 != 5) {
+                            width = paddingLeft;
+                        } else {
+                            iMax = (width2 - paddingRight) - childAt.getMeasuredWidth();
+                            paddingRight += childAt.getMeasuredWidth();
+                        }
+                        left = (paddingLeft + scrollX) - childAt.getLeft();
+                        if (left != 0) {
+                            childAt.offsetLeftAndRight(left);
+                        }
+                        paddingLeft = width;
+                    }
+                    int i5 = iMax;
+                    width = paddingLeft;
+                    paddingLeft = i5;
+                    left = (paddingLeft + scrollX) - childAt.getLeft();
+                    if (left != 0) {
+                    }
+                    paddingLeft = width;
+                }
+            }
+        }
+        OnPageChangeListener onPageChangeListener = this.mOnPageChangeListener;
+        if (onPageChangeListener != null) {
+            onPageChangeListener.onPageScrolled(i, f, i2);
+        }
+        OnPageChangeListener onPageChangeListener2 = this.mInternalPageChangeListener;
+        if (onPageChangeListener2 != null) {
+            onPageChangeListener2.onPageScrolled(i, f, i2);
+        }
+        if (this.mPageTransformer != null) {
+            int scrollX2 = getScrollX();
+            int childCount2 = getChildCount();
+            for (int i6 = 0; i6 < childCount2; i6++) {
+                View childAt2 = getChildAt(i6);
+                if (!((LayoutParams) childAt2.getLayoutParams()).isDecor) {
+                    this.mPageTransformer.transformPage(childAt2, (childAt2.getLeft() - scrollX2) / getPaddedWidth());
+                }
+            }
+        }
+        this.mCalledSuper = true;
     }
 
     private void completeScroll(boolean z) {
@@ -1283,12 +1510,12 @@ public class ViewPager extends ViewGroup {
         } else if (action == 2) {
             int i = this.mActivePointerId;
             if (i != -1) {
-                int findPointerIndex = motionEvent.findPointerIndex(i);
-                float x2 = motionEvent.getX(findPointerIndex);
+                int iFindPointerIndex = motionEvent.findPointerIndex(i);
+                float x2 = motionEvent.getX(iFindPointerIndex);
                 float f2 = x2 - this.mLastMotionX;
-                float abs = Math.abs(f2);
-                float y2 = motionEvent.getY(findPointerIndex);
-                float abs2 = Math.abs(y2 - this.mInitialMotionY);
+                float fAbs = Math.abs(f2);
+                float y2 = motionEvent.getY(iFindPointerIndex);
+                float fAbs2 = Math.abs(y2 - this.mInitialMotionY);
                 if (f2 != 0.0f && !isGutterDrag(this.mLastMotionX, f2) && canScroll(this, false, (int) f2, (int) x2, (int) y2)) {
                     this.mLastMotionX = x2;
                     this.mLastMotionY = y2;
@@ -1296,7 +1523,7 @@ public class ViewPager extends ViewGroup {
                     return false;
                 }
                 int i2 = this.mTouchSlop;
-                if (abs > i2 && abs * 0.5f > abs2) {
+                if (fAbs > i2 && fAbs * 0.5f > fAbs2) {
                     this.mIsBeingDragged = true;
                     requestParentDisallowInterceptTouchEvent(true);
                     setScrollState(1);
@@ -1308,7 +1535,7 @@ public class ViewPager extends ViewGroup {
                     this.mLastMotionX = f;
                     this.mLastMotionY = y2;
                     setScrollingCacheEnabled(true);
-                } else if (abs2 > i2) {
+                } else if (fAbs2 > i2) {
                     this.mIsUnableToDrag = true;
                 }
                 if (this.mIsBeingDragged && performDrag(x2, y2)) {
@@ -1329,7 +1556,7 @@ public class ViewPager extends ViewGroup {
     public boolean onTouchEvent(MotionEvent motionEvent) {
         PagerAdapter pagerAdapter;
         float f;
-        boolean z = false;
+        boolean zPerformDrag = false;
         if ((motionEvent.getAction() == 0 && motionEvent.getEdgeFlags() != 0) || (pagerAdapter = this.mAdapter) == null || pagerAdapter.getCount() == 0) {
             return false;
         }
@@ -1352,12 +1579,12 @@ public class ViewPager extends ViewGroup {
         } else if (action != 1) {
             if (action == 2) {
                 if (!this.mIsBeingDragged) {
-                    int findPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
-                    float x2 = motionEvent.getX(findPointerIndex);
-                    float abs = Math.abs(x2 - this.mLastMotionX);
-                    float y2 = motionEvent.getY(findPointerIndex);
-                    float abs2 = Math.abs(y2 - this.mLastMotionY);
-                    if (abs > this.mTouchSlop && abs > abs2) {
+                    int iFindPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
+                    float x2 = motionEvent.getX(iFindPointerIndex);
+                    float fAbs = Math.abs(x2 - this.mLastMotionX);
+                    float y2 = motionEvent.getY(iFindPointerIndex);
+                    float fAbs2 = Math.abs(y2 - this.mLastMotionY);
+                    if (fAbs > this.mTouchSlop && fAbs > fAbs2) {
                         this.mIsBeingDragged = true;
                         requestParentDisallowInterceptTouchEvent(true);
                         float f2 = this.mInitialMotionX;
@@ -1372,8 +1599,8 @@ public class ViewPager extends ViewGroup {
                     }
                 }
                 if (this.mIsBeingDragged) {
-                    int findPointerIndex2 = motionEvent.findPointerIndex(this.mActivePointerId);
-                    z = performDrag(motionEvent.getX(findPointerIndex2), motionEvent.getY(findPointerIndex2));
+                    int iFindPointerIndex2 = motionEvent.findPointerIndex(this.mActivePointerId);
+                    zPerformDrag = performDrag(motionEvent.getX(iFindPointerIndex2), motionEvent.getY(iFindPointerIndex2));
                 }
             } else if (action != 3) {
                 if (action == 5) {
@@ -1390,7 +1617,7 @@ public class ViewPager extends ViewGroup {
                 endDrag();
                 this.mLeftEdge.onRelease();
                 this.mRightEdge.onRelease();
-                z = true;
+                zPerformDrag = true;
             }
         } else if (this.mIsBeingDragged) {
             VelocityTracker velocityTracker = this.mVelocityTracker;
@@ -1398,21 +1625,21 @@ public class ViewPager extends ViewGroup {
             int xVelocity = (int) velocityTracker.getXVelocity(this.mActivePointerId);
             this.mPopulatePending = true;
             float scrollStart = getScrollStart() / getPaddedWidth();
-            ItemInfo infoForFirstVisiblePage = infoForFirstVisiblePage();
-            int i = infoForFirstVisiblePage.position;
+            ItemInfo itemInfoInfoForFirstVisiblePage = infoForFirstVisiblePage();
+            int i = itemInfoInfoForFirstVisiblePage.position;
             if (isLayoutRtl()) {
-                f = (infoForFirstVisiblePage.offset - scrollStart) / infoForFirstVisiblePage.widthFactor;
+                f = (itemInfoInfoForFirstVisiblePage.offset - scrollStart) / itemInfoInfoForFirstVisiblePage.widthFactor;
             } else {
-                f = (scrollStart - infoForFirstVisiblePage.offset) / infoForFirstVisiblePage.widthFactor;
+                f = (scrollStart - itemInfoInfoForFirstVisiblePage.offset) / itemInfoInfoForFirstVisiblePage.widthFactor;
             }
             setCurrentItemInternal(determineTargetPage(i, f, xVelocity, (int) (motionEvent.getX(motionEvent.findPointerIndex(this.mActivePointerId)) - this.mInitialMotionX)), true, true, xVelocity);
             this.mActivePointerId = -1;
             endDrag();
             this.mLeftEdge.onRelease();
             this.mRightEdge.onRelease();
-            z = true;
+            zPerformDrag = true;
         }
-        if (z) {
+        if (zPerformDrag) {
             postInvalidateOnAnimation();
         }
         return true;
@@ -1428,13 +1655,13 @@ public class ViewPager extends ViewGroup {
     private float releaseHorizontalGlow(float f, float f2) {
         float height = f2 / getHeight();
         float width = f / getWidth();
-        float f3 = 0.0f;
+        float fOnPullDistance = 0.0f;
         if (this.mLeftEdge.getDistance() != 0.0f) {
-            f3 = -this.mLeftEdge.onPullDistance(-width, 1.0f - height);
+            fOnPullDistance = -this.mLeftEdge.onPullDistance(-width, 1.0f - height);
         } else if (this.mRightEdge.getDistance() != 0.0f) {
-            f3 = this.mRightEdge.onPullDistance(width, height);
+            fOnPullDistance = this.mRightEdge.onPullDistance(width, height);
         }
-        return f3 * getWidth();
+        return fOnPullDistance * getWidth();
     }
 
     private boolean performDrag(float f, float f2) {
@@ -1447,10 +1674,10 @@ public class ViewPager extends ViewGroup {
         float f7 = this.mLastMotionX - f;
         int paddedWidth = getPaddedWidth();
         this.mLastMotionX = f;
-        float releaseHorizontalGlow = releaseHorizontalGlow(f7, f2);
-        float f8 = f7 - releaseHorizontalGlow;
+        float fReleaseHorizontalGlow = releaseHorizontalGlow(f7, f2);
+        float f8 = f7 - fReleaseHorizontalGlow;
         boolean z = true;
-        boolean z2 = releaseHorizontalGlow != 0.0f;
+        boolean z2 = fReleaseHorizontalGlow != 0.0f;
         if (Math.abs(f8) < 1.0E-4f) {
             return z2;
         }
@@ -1579,33 +1806,33 @@ public class ViewPager extends ViewGroup {
         PagerAdapter pagerAdapter;
         super.draw(canvas);
         int overScrollMode = getOverScrollMode();
-        boolean z = false;
+        boolean zDraw = false;
         if (overScrollMode == 0 || (overScrollMode == 1 && (pagerAdapter = this.mAdapter) != null && pagerAdapter.getCount() > 1)) {
             if (!this.mLeftEdge.isFinished()) {
-                int save = canvas.save();
+                int iSave = canvas.save();
                 int height = (getHeight() - getPaddingTop()) - getPaddingBottom();
                 int width = getWidth();
                 canvas.rotate(270.0f);
                 canvas.translate((-height) + getPaddingTop(), this.mFirstOffset * width);
                 this.mLeftEdge.setSize(height, width);
-                z = this.mLeftEdge.draw(canvas);
-                canvas.restoreToCount(save);
+                zDraw = this.mLeftEdge.draw(canvas);
+                canvas.restoreToCount(iSave);
             }
             if (!this.mRightEdge.isFinished()) {
-                int save2 = canvas.save();
+                int iSave2 = canvas.save();
                 int width2 = getWidth();
                 int height2 = (getHeight() - getPaddingTop()) - getPaddingBottom();
                 canvas.rotate(90.0f);
                 canvas.translate(-getPaddingTop(), (-(this.mLastOffset + 1.0f)) * width2);
                 this.mRightEdge.setSize(height2, width2);
-                z |= this.mRightEdge.draw(canvas);
-                canvas.restoreToCount(save2);
+                zDraw |= this.mRightEdge.draw(canvas);
+                canvas.restoreToCount(iSave2);
             }
         } else {
             this.mLeftEdge.finish();
             this.mRightEdge.finish();
         }
-        if (z) {
+        if (zDraw) {
             postInvalidateOnAnimation();
         }
     }
@@ -1741,120 +1968,58 @@ public class ViewPager extends ViewGroup {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00c9  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x00bc  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean arrowScroll(int r5) {
-        /*
-            r4 = this;
-            android.view.View r0 = r4.findFocus()
-            r1 = 0
-            if (r0 != r4) goto L9
-        L7:
-            r0 = r1
-            goto L60
-        L9:
-            if (r0 == 0) goto L60
-            android.view.ViewParent r2 = r0.getParent()
-        Lf:
-            boolean r3 = r2 instanceof android.view.ViewGroup
-            if (r3 == 0) goto L1b
-            if (r2 != r4) goto L16
-            goto L60
-        L16:
-            android.view.ViewParent r2 = r2.getParent()
-            goto Lf
-        L1b:
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder
-            r2.<init>()
-            java.lang.Class r3 = r0.getClass()
-            java.lang.String r3 = r3.getSimpleName()
-            r2.append(r3)
-            android.view.ViewParent r0 = r0.getParent()
-        L2f:
-            boolean r3 = r0 instanceof android.view.ViewGroup
-            if (r3 == 0) goto L48
-            java.lang.String r3 = " => "
-            r2.append(r3)
-            java.lang.Class r3 = r0.getClass()
-            java.lang.String r3 = r3.getSimpleName()
-            r2.append(r3)
-            android.view.ViewParent r0 = r0.getParent()
-            goto L2f
-        L48:
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r3 = "arrowScroll tried to find focus based on non-child current focused view "
-            r0.<init>(r3)
-            java.lang.String r2 = r2.toString()
-            r0.append(r2)
-            java.lang.String r0 = r0.toString()
-            java.lang.String r2 = "ViewPager"
-            android.util.Log.e(r2, r0)
-            goto L7
-        L60:
-            android.view.FocusFinder r1 = android.view.FocusFinder.getInstance()
-            android.view.View r1 = r1.findNextFocus(r4, r0, r5)
-            r2 = 66
-            r3 = 17
-            if (r1 == 0) goto Lb0
-            if (r1 == r0) goto Lb0
-            if (r5 != r3) goto L90
-            android.graphics.Rect r2 = r4.mTempRect
-            android.graphics.Rect r2 = r4.getChildRectInPagerCoordinates(r2, r1)
-            int r2 = r2.left
-            android.graphics.Rect r3 = r4.mTempRect
-            android.graphics.Rect r3 = r4.getChildRectInPagerCoordinates(r3, r0)
-            int r3 = r3.left
-            if (r0 == 0) goto L8b
-            if (r2 < r3) goto L8b
-            boolean r0 = r4.pageLeft()
-            goto Lc7
-        L8b:
-            boolean r0 = r1.requestFocus()
-            goto Lc7
-        L90:
-            if (r5 != r2) goto Lbc
-            android.graphics.Rect r2 = r4.mTempRect
-            android.graphics.Rect r2 = r4.getChildRectInPagerCoordinates(r2, r1)
-            int r2 = r2.left
-            android.graphics.Rect r3 = r4.mTempRect
-            android.graphics.Rect r3 = r4.getChildRectInPagerCoordinates(r3, r0)
-            int r3 = r3.left
-            if (r0 == 0) goto Lab
-            if (r2 > r3) goto Lab
-            boolean r0 = r4.pageRight()
-            goto Lc7
-        Lab:
-            boolean r0 = r1.requestFocus()
-            goto Lc7
-        Lb0:
-            if (r5 == r3) goto Lc3
-            r0 = 1
-            if (r5 != r0) goto Lb6
-            goto Lc3
-        Lb6:
-            if (r5 == r2) goto Lbe
-            r0 = 2
-            if (r5 != r0) goto Lbc
-            goto Lbe
-        Lbc:
-            r0 = 0
-            goto Lc7
-        Lbe:
-            boolean r0 = r4.pageRight()
-            goto Lc7
-        Lc3:
-            boolean r0 = r4.pageLeft()
-        Lc7:
-            if (r0 == 0) goto Ld0
-            int r5 = android.view.SoundEffectConstants.getContantForFocusDirection(r5)
-            r4.playSoundEffect(r5)
-        Ld0:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.ViewPager.arrowScroll(int):boolean");
+    public boolean arrowScroll(int i) throws Resources.NotFoundException {
+        boolean zPageLeft;
+        View viewFindFocus = findFocus();
+        if (viewFindFocus == this) {
+            viewFindFocus = null;
+        } else if (viewFindFocus != null) {
+            for (ViewParent parent = viewFindFocus.getParent(); parent instanceof ViewGroup; parent = parent.getParent()) {
+                if (parent == this) {
+                    break;
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append(viewFindFocus.getClass().getSimpleName());
+            for (ViewParent parent2 = viewFindFocus.getParent(); parent2 instanceof ViewGroup; parent2 = parent2.getParent()) {
+                sb.append(" => ");
+                sb.append(parent2.getClass().getSimpleName());
+            }
+            Log.e(TAG, "arrowScroll tried to find focus based on non-child current focused view " + sb.toString());
+            viewFindFocus = null;
+        }
+        View viewFindNextFocus = FocusFinder.getInstance().findNextFocus(this, viewFindFocus, i);
+        if (viewFindNextFocus == null || viewFindNextFocus == viewFindFocus) {
+            if (i == 17 || i == 1) {
+                zPageLeft = pageLeft();
+            } else {
+                zPageLeft = (i == 66 || i == 2) ? pageRight() : false;
+            }
+        } else if (i == 17) {
+            int i2 = getChildRectInPagerCoordinates(this.mTempRect, viewFindNextFocus).left;
+            int i3 = getChildRectInPagerCoordinates(this.mTempRect, viewFindFocus).left;
+            if (viewFindFocus != null && i2 >= i3) {
+                zPageLeft = pageLeft();
+            } else {
+                zPageLeft = viewFindNextFocus.requestFocus();
+            }
+        } else if (i == 66) {
+            int i4 = getChildRectInPagerCoordinates(this.mTempRect, viewFindNextFocus).left;
+            int i5 = getChildRectInPagerCoordinates(this.mTempRect, viewFindFocus).left;
+            if (viewFindFocus != null && i4 <= i5) {
+                zPageLeft = pageRight();
+            } else {
+                zPageLeft = viewFindNextFocus.requestFocus();
+            }
+        }
+        if (zPageLeft) {
+            playSoundEffect(SoundEffectConstants.getContantForFocusDirection(i));
+        }
+        return zPageLeft;
     }
 
     private Rect getChildRectInPagerCoordinates(Rect rect, View view) {
@@ -1901,13 +2066,13 @@ public class ViewPager extends ViewGroup {
 
     @Override // android.view.ViewGroup, android.view.View
     public void addFocusables(ArrayList<View> arrayList, int i, int i2) {
-        ItemInfo infoForChild;
+        ItemInfo itemInfoInfoForChild;
         int size = arrayList.size();
         int descendantFocusability = getDescendantFocusability();
         if (descendantFocusability != 393216) {
             for (int i3 = 0; i3 < getChildCount(); i3++) {
                 View childAt = getChildAt(i3);
-                if (childAt.getVisibility() == 0 && (infoForChild = infoForChild(childAt)) != null && infoForChild.position == this.mCurItem) {
+                if (childAt.getVisibility() == 0 && (itemInfoInfoForChild = infoForChild(childAt)) != null && itemInfoInfoForChild.position == this.mCurItem) {
                     childAt.addFocusables(arrayList, i, i2);
                 }
             }
@@ -1922,10 +2087,10 @@ public class ViewPager extends ViewGroup {
 
     @Override // android.view.ViewGroup, android.view.View
     public void addTouchables(ArrayList<View> arrayList) {
-        ItemInfo infoForChild;
+        ItemInfo itemInfoInfoForChild;
         for (int i = 0; i < getChildCount(); i++) {
             View childAt = getChildAt(i);
-            if (childAt.getVisibility() == 0 && (infoForChild = infoForChild(childAt)) != null && infoForChild.position == this.mCurItem) {
+            if (childAt.getVisibility() == 0 && (itemInfoInfoForChild = infoForChild(childAt)) != null && itemInfoInfoForChild.position == this.mCurItem) {
                 childAt.addTouchables(arrayList);
             }
         }
@@ -1936,7 +2101,7 @@ public class ViewPager extends ViewGroup {
         int i2;
         int i3;
         int i4;
-        ItemInfo infoForChild;
+        ItemInfo itemInfoInfoForChild;
         int childCount = getChildCount();
         if ((i & 2) != 0) {
             i3 = childCount;
@@ -1949,7 +2114,7 @@ public class ViewPager extends ViewGroup {
         }
         while (i2 != i3) {
             View childAt = getChildAt(i2);
-            if (childAt.getVisibility() == 0 && (infoForChild = infoForChild(childAt)) != null && infoForChild.position == this.mCurItem && childAt.requestFocus(i, rect)) {
+            if (childAt.getVisibility() == 0 && (itemInfoInfoForChild = infoForChild(childAt)) != null && itemInfoInfoForChild.position == this.mCurItem && childAt.requestFocus(i, rect)) {
                 return true;
             }
             i2 += i4;

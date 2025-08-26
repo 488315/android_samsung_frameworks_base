@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class InputRouteManager {
     static final AudioAttributes INPUT_ATTRIBUTES = new AudioAttributes.Builder().setCapturePreset(1).build();
@@ -29,7 +28,6 @@ public final class InputRouteManager {
     public final Collection mCallbacks = new CopyOnWriteArrayList();
     public final Object mCallbackLock = new Object();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface InputDeviceCallback {
     }
 
@@ -37,7 +35,7 @@ public final class InputRouteManager {
         AudioDeviceCallback audioDeviceCallback = new AudioDeviceCallback() { // from class: com.android.settingslib.media.InputRouteManager.1
             @Override // android.media.AudioDeviceCallback
             public final void onAudioDevicesAdded(AudioDeviceInfo[] audioDeviceInfoArr) {
-                MediaDevice mediaDevice;
+                MediaDevice next;
                 InputRouteManager inputRouteManager = InputRouteManager.this;
                 AudioAttributes audioAttributes = InputRouteManager.INPUT_ATTRIBUTES;
                 inputRouteManager.applyDefaultSelectedTypeToAllPresets();
@@ -48,16 +46,16 @@ public final class InputRouteManager {
                         Iterator<MediaDevice> it = InputRouteManager.this.mInputMediaDevices.iterator();
                         while (true) {
                             if (it.hasNext()) {
-                                mediaDevice = it.next();
-                                if (((InputMediaDevice) mediaDevice).mAudioDeviceInfoType == type) {
+                                next = it.next();
+                                if (((InputMediaDevice) next).mAudioDeviceInfoType == type) {
                                     break;
                                 }
                             } else {
-                                mediaDevice = null;
+                                next = null;
                                 break;
                             }
                         }
-                        if (mediaDevice == null) {
+                        if (next == null) {
                             i = type;
                         }
                     }
@@ -83,7 +81,7 @@ public final class InputRouteManager {
         audioManager.registerAudioDeviceCallback(audioDeviceCallback, handler);
         audioManager.addOnPreferredDevicesForCapturePresetChangedListener(new HandlerExecutor(handler), new AudioManager.OnPreferredDevicesForCapturePresetChangedListener() { // from class: com.android.settingslib.media.InputRouteManager$$ExternalSyntheticLambda0
             public final void onPreferredDevicesForCapturePresetChanged(int i, List list) {
-                InputRouteManager.this.onPreferredDevicesForCapturePresetChangedListener(i, list);
+                this.f$0.onPreferredDevicesForCapturePresetChangedListener(i, list);
             }
         });
         applyDefaultSelectedTypeToAllPresets();
@@ -111,22 +109,22 @@ public final class InputRouteManager {
             this.mInputMediaDevices.clear();
             for (AudioDeviceInfo audioDeviceInfo : devices) {
                 Context context = this.mContext;
-                String valueOf = String.valueOf(audioDeviceInfo.getId());
+                String strValueOf = String.valueOf(audioDeviceInfo.getId());
                 int type = audioDeviceInfo.getType();
                 CharSequence productName = audioDeviceInfo.getProductName();
                 String str = null;
                 if (productName != null) {
-                    String charSequence = productName.toString();
-                    if (!charSequence.isBlank()) {
-                        str = charSequence;
+                    String string = productName.toString();
+                    if (!string.isBlank()) {
+                        str = string;
                     }
                 }
-                InputMediaDevice create = InputMediaDevice.create(context, type, valueOf, str);
-                if (create != null) {
+                InputMediaDevice inputMediaDeviceCreate = InputMediaDevice.create(context, type, strValueOf, str);
+                if (inputMediaDeviceCreate != null) {
                     if (audioDeviceInfo.getType() == this.mSelectedInputDeviceType) {
-                        create.mState = 4;
+                        inputMediaDeviceCreate.mState = 4;
                     }
-                    this.mInputMediaDevices.add(create);
+                    this.mInputMediaDevices.add(inputMediaDeviceCreate);
                 }
             }
             ArrayList arrayList = new ArrayList(this.mInputMediaDevices);

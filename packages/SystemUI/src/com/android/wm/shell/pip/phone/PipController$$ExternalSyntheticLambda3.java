@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.app.ActivityTaskManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.media.session.MediaSessionManager;
 import android.os.Debug;
@@ -50,7 +51,6 @@ import java.util.HashMap;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class PipController$$ExternalSyntheticLambda3 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -62,7 +62,7 @@ public final /* synthetic */ class PipController$$ExternalSyntheticLambda3 imple
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Resources.NotFoundException {
         int i = 2;
         int i2 = 3;
         int i3 = 1;
@@ -74,7 +74,7 @@ public final /* synthetic */ class PipController$$ExternalSyntheticLambda3 imple
                 pipController.mShellCommandHandler.addDumpCallback(new BiConsumer() { // from class: com.android.wm.shell.pip.phone.PipController$$ExternalSyntheticLambda5
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
-                        PipController pipController2 = PipController.this;
+                        PipController pipController2 = pipController;
                         PrintWriter printWriter = (PrintWriter) obj;
                         int i6 = PipController.$r8$clinit;
                         printWriter.println("PipController");
@@ -87,9 +87,9 @@ public final /* synthetic */ class PipController$$ExternalSyntheticLambda3 imple
                         PhonePipMenuController phonePipMenuController = pipController2.mMenuController;
                         phonePipMenuController.getClass();
                         printWriter.println("  PhonePipMenuController");
-                        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mMenuState="), phonePipMenuController.mMenuState, printWriter, "    mPipMenuView=");
-                        m.append(phonePipMenuController.mPipMenuView);
-                        printWriter.println(m.toString());
+                        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("    mMenuState="), phonePipMenuController.mMenuState, printWriter, "    mPipMenuView=");
+                        sbM.append(phonePipMenuController.mPipMenuView);
+                        printWriter.println(sbM.toString());
                         printWriter.println("    mListeners=" + phonePipMenuController.mListeners.size());
                         PipTouchHandler pipTouchHandler = pipController2.mTouchHandler;
                         pipTouchHandler.getClass();
@@ -99,9 +99,9 @@ public final /* synthetic */ class PipController$$ExternalSyntheticLambda3 imple
                         PipTouchState pipTouchState = pipTouchHandler.mTouchState;
                         pipTouchState.getClass();
                         printWriter.println("    PipTouchState");
-                        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("      mAllowTouches="), pipTouchState.mAllowTouches, printWriter, "      mAllowInputEvents="), pipTouchState.mAllowInputEvents, printWriter, "      mActivePointerId="), pipTouchState.mActivePointerId, printWriter, "      mLastTouchDisplayId="), pipTouchState.mLastTouchDisplayId, printWriter, "      mDownTouch=");
-                        m2.append(pipTouchState.mDownTouch);
-                        printWriter.println(m2.toString());
+                        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("      mAllowTouches="), pipTouchState.mAllowTouches, printWriter, "      mAllowInputEvents="), pipTouchState.mAllowInputEvents, printWriter, "      mActivePointerId="), pipTouchState.mActivePointerId, printWriter, "      mLastTouchDisplayId="), pipTouchState.mLastTouchDisplayId, printWriter, "      mDownTouch=");
+                        sbM2.append(pipTouchState.mDownTouch);
+                        printWriter.println(sbM2.toString());
                         printWriter.println("      mDownDelta=" + pipTouchState.mDownDelta);
                         printWriter.println("      mLastTouch=" + pipTouchState.mLastTouch);
                         printWriter.println("      mLastDelta=" + pipTouchState.mLastDelta);
@@ -109,9 +109,9 @@ public final /* synthetic */ class PipController$$ExternalSyntheticLambda3 imple
                         KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("      mIsUserInteracting="), pipTouchState.mIsUserInteracting, printWriter, "      mIsDragging="), pipTouchState.mIsDragging, printWriter, "      mStartedDragging="), pipTouchState.mStartedDragging, printWriter, "      mAllowDraggingOffscreen="), pipTouchState.mAllowDraggingOffscreen, printWriter);
                         PipResizeGestureHandler pipResizeGestureHandler = pipTouchHandler.mPipResizeGestureHandler;
                         if (pipResizeGestureHandler != null) {
-                            StringBuilder m3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "    PipResizeGestureHandler", "      mAllowGesture="), pipResizeGestureHandler.mAllowGesture, printWriter, "      mIsAttached="), pipResizeGestureHandler.mIsAttached, printWriter, "      mIsEnabled="), pipResizeGestureHandler.mIsEnabled, printWriter, "      mEnablePinchResize="), pipResizeGestureHandler.mEnablePinchResize, printWriter, "      mThresholdCrossed="), pipResizeGestureHandler.mThresholdCrossed, printWriter, "      mOhmOffset="), pipResizeGestureHandler.mOhmOffset, printWriter, "      mMinSize=");
-                            m3.append(pipResizeGestureHandler.mMinSize);
-                            printWriter.println(m3.toString());
+                            StringBuilder sbM3 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "    PipResizeGestureHandler", "      mAllowGesture="), pipResizeGestureHandler.mAllowGesture, printWriter, "      mIsAttached="), pipResizeGestureHandler.mIsAttached, printWriter, "      mIsEnabled="), pipResizeGestureHandler.mIsEnabled, printWriter, "      mEnablePinchResize="), pipResizeGestureHandler.mEnablePinchResize, printWriter, "      mThresholdCrossed="), pipResizeGestureHandler.mThresholdCrossed, printWriter, "      mOhmOffset="), pipResizeGestureHandler.mOhmOffset, printWriter, "      mMinSize=");
+                            sbM3.append(pipResizeGestureHandler.mMinSize);
+                            printWriter.println(sbM3.toString());
                             printWriter.println("      mMaxSize=" + pipResizeGestureHandler.mMaxSize);
                             KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("      mCtrlType="), pipResizeGestureHandler.mCtrlType, printWriter, "      mOngoingPinchToResize="), pipResizeGestureHandler.mOngoingPinchToResize, printWriter);
                         }
@@ -136,14 +136,14 @@ public final /* synthetic */ class PipController$$ExternalSyntheticLambda3 imple
                 pipBoundsState.mOnMinimalSizeChangeCallback = pipController$$ExternalSyntheticLambda3;
                 new TriConsumer() { // from class: com.android.wm.shell.pip.phone.PipController$$ExternalSyntheticLambda11
                     public final void accept(Object obj, Object obj2, Object obj3) {
-                        PipController pipController2 = PipController.this;
+                        PipController pipController2 = pipController;
                         int i6 = PipController.$r8$clinit;
                         pipController2.getClass();
-                        boolean booleanValue = ((Boolean) obj).booleanValue();
-                        int intValue = ((Integer) obj2).intValue();
+                        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+                        int iIntValue = ((Integer) obj2).intValue();
                         PipTouchHandler pipTouchHandler = pipController2.mTouchHandler;
-                        pipTouchHandler.mIsShelfShowing = booleanValue;
-                        pipTouchHandler.mShelfHeight = intValue;
+                        pipTouchHandler.mIsShelfShowing = zBooleanValue;
+                        pipTouchHandler.mShelfHeight = iIntValue;
                         if (((Boolean) obj3).booleanValue()) {
                             pipController2.updateMovementBounds(pipController2.mPipBoundsState.getBounds(), false, false, true, null);
                         }
@@ -333,7 +333,7 @@ public final /* synthetic */ class PipController$$ExternalSyntheticLambda3 imple
                 shellController.addExternalInterface("com.android.wm.shell.common.pip.IPip", new Supplier() { // from class: com.android.wm.shell.pip.phone.PipController$$ExternalSyntheticLambda7
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        PipController pipController2 = PipController.this;
+                        PipController pipController2 = pipController;
                         int i6 = PipController.$r8$clinit;
                         pipController2.getClass();
                         return new PipController.IPipImpl(pipController2);

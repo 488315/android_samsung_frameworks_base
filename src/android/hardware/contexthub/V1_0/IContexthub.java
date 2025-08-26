@@ -74,9 +74,9 @@ public interface IContexthub extends IBase {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IContexthub)) {
-            return (IContexthub) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IContexthub)) {
+            return (IContexthub) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -337,13 +337,13 @@ public interface IContexthub extends IBase {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -505,66 +505,66 @@ public interface IContexthub extends IBase {
                     return;
                 case 2:
                     hwParcel.enforceInterface(IContexthub.kInterfaceName);
-                    int registerCallback = registerCallback(hwParcel.readInt32(), IContexthubCallback.asInterface(hwParcel.readStrongBinder()));
+                    int iRegisterCallback = registerCallback(hwParcel.readInt32(), IContexthubCallback.asInterface(hwParcel.readStrongBinder()));
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(registerCallback);
+                    hwParcel2.writeInt32(iRegisterCallback);
                     hwParcel2.send();
                     return;
                 case 3:
                     hwParcel.enforceInterface(IContexthub.kInterfaceName);
-                    int readInt32 = hwParcel.readInt32();
+                    int int32 = hwParcel.readInt32();
                     ContextHubMsg contextHubMsg = new ContextHubMsg();
                     contextHubMsg.readFromParcel(hwParcel);
-                    int sendMessageToHub = sendMessageToHub(readInt32, contextHubMsg);
+                    int iSendMessageToHub = sendMessageToHub(int32, contextHubMsg);
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(sendMessageToHub);
+                    hwParcel2.writeInt32(iSendMessageToHub);
                     hwParcel2.send();
                     return;
                 case 4:
                     hwParcel.enforceInterface(IContexthub.kInterfaceName);
-                    int readInt322 = hwParcel.readInt32();
+                    int int322 = hwParcel.readInt32();
                     NanoAppBinary nanoAppBinary = new NanoAppBinary();
                     nanoAppBinary.readFromParcel(hwParcel);
-                    int loadNanoApp = loadNanoApp(readInt322, nanoAppBinary, hwParcel.readInt32());
+                    int iLoadNanoApp = loadNanoApp(int322, nanoAppBinary, hwParcel.readInt32());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(loadNanoApp);
+                    hwParcel2.writeInt32(iLoadNanoApp);
                     hwParcel2.send();
                     return;
                 case 5:
                     hwParcel.enforceInterface(IContexthub.kInterfaceName);
-                    int unloadNanoApp = unloadNanoApp(hwParcel.readInt32(), hwParcel.readInt64(), hwParcel.readInt32());
+                    int iUnloadNanoApp = unloadNanoApp(hwParcel.readInt32(), hwParcel.readInt64(), hwParcel.readInt32());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(unloadNanoApp);
+                    hwParcel2.writeInt32(iUnloadNanoApp);
                     hwParcel2.send();
                     return;
                 case 6:
                     hwParcel.enforceInterface(IContexthub.kInterfaceName);
-                    int enableNanoApp = enableNanoApp(hwParcel.readInt32(), hwParcel.readInt64(), hwParcel.readInt32());
+                    int iEnableNanoApp = enableNanoApp(hwParcel.readInt32(), hwParcel.readInt64(), hwParcel.readInt32());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(enableNanoApp);
+                    hwParcel2.writeInt32(iEnableNanoApp);
                     hwParcel2.send();
                     return;
                 case 7:
                     hwParcel.enforceInterface(IContexthub.kInterfaceName);
-                    int disableNanoApp = disableNanoApp(hwParcel.readInt32(), hwParcel.readInt64(), hwParcel.readInt32());
+                    int iDisableNanoApp = disableNanoApp(hwParcel.readInt32(), hwParcel.readInt64(), hwParcel.readInt32());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(disableNanoApp);
+                    hwParcel2.writeInt32(iDisableNanoApp);
                     hwParcel2.send();
                     return;
                 case 8:
                     hwParcel.enforceInterface(IContexthub.kInterfaceName);
-                    int queryApps = queryApps(hwParcel.readInt32());
+                    int iQueryApps = queryApps(hwParcel.readInt32());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(queryApps);
+                    hwParcel2.writeInt32(iQueryApps);
                     hwParcel2.send();
                     return;
                 default:
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -575,9 +575,9 @@ public interface IContexthub extends IBase {
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

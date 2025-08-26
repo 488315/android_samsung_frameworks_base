@@ -18,7 +18,6 @@ import com.android.systemui.util.ViewController;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUIWidgetCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardCarrierTextViewController extends ViewController implements SystemUIWidgetCallback, IndicatorGarden {
     public ViewGroup mBouncerStatusBarAreaRootView;
@@ -129,14 +128,14 @@ public class KeyguardCarrierTextViewController extends ViewController implements
         ((CarrierText) ((KeyguardCarrierTextView) this.mView).findViewById(R.id.bouncer_carrier_text)).setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.keyguard.KeyguardCarrierTextViewController$$ExternalSyntheticLambda0
             @Override // android.view.View.OnApplyWindowInsetsListener
             public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                return KeyguardCarrierTextViewController.$r8$lambda$ALKzW_bxVWrgAYAViyzvOhBChas(KeyguardCarrierTextViewController.this, windowInsets);
+                return KeyguardCarrierTextViewController.$r8$lambda$ALKzW_bxVWrgAYAViyzvOhBChas(this.f$0, windowInsets);
             }
         });
         this.mIndicatorGardenPresenter.updateGardenWithNewModel(this);
         ((KeyguardCarrierTextView) this.mView).addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.keyguard.KeyguardCarrierTextViewController$$ExternalSyntheticLambda1
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                KeyguardCarrierTextViewController keyguardCarrierTextViewController = KeyguardCarrierTextViewController.this;
+                KeyguardCarrierTextViewController keyguardCarrierTextViewController = this.f$0;
                 if (keyguardCarrierTextViewController.mKeyguardUpdateMonitor.isBouncerFullyShown()) {
                     IndicatorGardenPresenter indicatorGardenPresenter = keyguardCarrierTextViewController.mIndicatorGardenPresenter;
                     indicatorGardenPresenter.getClass();

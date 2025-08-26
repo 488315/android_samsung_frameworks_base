@@ -239,10 +239,10 @@ public final class CellIdentityLte extends CellIdentity {
 
     @Override // android.telephony.CellIdentity
     public boolean isSameCell(CellIdentity cellIdentity) {
-        boolean isSameCell = super.isSameCell(cellIdentity);
-        if (isSameCell && (cellIdentity instanceof CellIdentityLte) && this.mTac != ((CellIdentityLte) cellIdentity).getTac()) {
+        boolean zIsSameCell = super.isSameCell(cellIdentity);
+        if (zIsSameCell && (cellIdentity instanceof CellIdentityLte) && this.mTac != ((CellIdentityLte) cellIdentity).getTac()) {
             return false;
         }
-        return isSameCell;
+        return zIsSameCell;
     }
 }

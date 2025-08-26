@@ -52,9 +52,9 @@ public interface IOptionsRequestCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOptionsRequestCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOptionsRequestCallback)) {
-                return (IOptionsRequestCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOptionsRequestCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOptionsRequestCallback)) {
+                return (IOptionsRequestCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,14 +85,14 @@ public interface IOptionsRequestCallback extends IInterface {
             }
             if (i == 1) {
                 RcsContactUceCapability rcsContactUceCapability = (RcsContactUceCapability) parcel.readTypedObject(RcsContactUceCapability.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                respondToCapabilityRequest(rcsContactUceCapability, readBoolean);
+                respondToCapabilityRequest(rcsContactUceCapability, z);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                respondToCapabilityRequestWithError(readInt, readString);
+                respondToCapabilityRequestWithError(i3, string);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -117,27 +117,27 @@ public interface IOptionsRequestCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.IOptionsRequestCallback
             public void respondToCapabilityRequest(RcsContactUceCapability rcsContactUceCapability, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOptionsRequestCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(rcsContactUceCapability, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOptionsRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(rcsContactUceCapability, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.IOptionsRequestCallback
             public void respondToCapabilityRequestWithError(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOptionsRequestCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOptionsRequestCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

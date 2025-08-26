@@ -7,9 +7,9 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.EditText;
+import androidx.compose.runtime.OpaqueKey$$ExternalSyntheticOutline0;
 import com.android.systemui.widget.SystemUIEditText;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BaseSecPasswordTextView extends SystemUIEditText {
     public int mMaxLength;
@@ -17,7 +17,6 @@ public abstract class BaseSecPasswordTextView extends SystemUIEditText {
     public String mText;
     public UserActivityListener mUserActivityListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface UserActivityListener {
         void onUserActivity();
     }
@@ -27,6 +26,18 @@ public abstract class BaseSecPasswordTextView extends SystemUIEditText {
         this.mText = "";
         this.mShowPassword = true;
         this.mMaxLength = 256;
+    }
+
+    public final void append(char c) {
+        CharSequence transformedText = getTransformedText();
+        if (this.mText.length() >= this.mMaxLength || getTextCharsSize() >= this.mMaxLength) {
+            return;
+        }
+        String strM = OpaqueKey$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mText, c);
+        this.mText = strM;
+        onAppend(c, strM.length());
+        onUserActivity();
+        sendAccessibilityEventTypeViewTextChanged(transformedText, transformedText.length(), 0, 1);
     }
 
     public final void deleteLastChar() {
@@ -84,17 +95,17 @@ public abstract class BaseSecPasswordTextView extends SystemUIEditText {
 
     public final void sendAccessibilityEventTypeViewTextChanged(CharSequence charSequence, int i, int i2, int i3) {
         if (AccessibilityManager.getInstance(((EditText) this).mContext).isTouchExplorationEnabled() && isShown()) {
-            AccessibilityEvent obtain = AccessibilityEvent.obtain(16);
-            obtain.setFromIndex(i);
-            obtain.setRemovedCount(i2);
-            obtain.setAddedCount(i3);
-            obtain.setBeforeText(charSequence);
+            AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(16);
+            accessibilityEventObtain.setFromIndex(i);
+            accessibilityEventObtain.setRemovedCount(i2);
+            accessibilityEventObtain.setAddedCount(i3);
+            accessibilityEventObtain.setBeforeText(charSequence);
             CharSequence transformedText = getTransformedText();
             if (!TextUtils.isEmpty(transformedText)) {
-                obtain.getText().add(transformedText);
+                accessibilityEventObtain.getText().add(transformedText);
             }
-            obtain.setPassword(true);
-            sendAccessibilityEventUnchecked(obtain);
+            accessibilityEventObtain.setPassword(true);
+            sendAccessibilityEventUnchecked(accessibilityEventObtain);
         }
     }
 
@@ -109,5 +120,8 @@ public abstract class BaseSecPasswordTextView extends SystemUIEditText {
     }
 
     public void onReset(boolean z) {
+    }
+
+    public void onAppend(char c, int i) {
     }
 }

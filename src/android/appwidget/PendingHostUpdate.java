@@ -63,14 +63,14 @@ public class PendingHostUpdate implements Parcelable {
 
     private PendingHostUpdate(Parcel parcel) {
         this.appWidgetId = parcel.readInt();
-        int readInt = parcel.readInt();
-        this.type = readInt;
-        if (readInt == 0) {
+        int i = parcel.readInt();
+        this.type = i;
+        if (i == 0) {
             if (parcel.readInt() != 0) {
                 this.views = new RemoteViews(parcel);
             }
-        } else if (readInt != 1) {
-            if (readInt != 2) {
+        } else if (i != 1) {
+            if (i != 2) {
                 return;
             }
             this.viewId = parcel.readInt();

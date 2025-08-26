@@ -79,13 +79,13 @@ public class Filter extends Element {
         Log.e(this.TAG, "Parse failed");
     }
 
-    private boolean parseJson(String str) {
+    private boolean parseJson(String str) throws JSONException, IOException {
         StringBuilder sb = new StringBuilder();
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(str), StandardCharsets.UTF_8));
             while (true) {
-                String readLine = bufferedReader.readLine();
-                if (readLine == null) {
+                String line = bufferedReader.readLine();
+                if (line == null) {
                     try {
                         break;
                     } catch (JSONException e) {
@@ -93,7 +93,7 @@ public class Filter extends Element {
                         return false;
                     }
                 }
-                sb.append(readLine);
+                sb.append(line);
             }
             JSONObject jSONObject = new JSONObject(sb.toString());
             String string = jSONObject.getString("filter_type");

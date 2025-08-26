@@ -338,11 +338,11 @@ public class SemContextManager {
         if (map == null) {
             return false;
         }
-        boolean containsKey = map.containsKey(Integer.valueOf(i));
+        boolean zContainsKey = map.containsKey(Integer.valueOf(i));
         if (i == 47 && "BCM4773_SLOCATION_CORE".equals(SystemProperties.get("ro.gps.chip.vendor.slocation"))) {
             return false;
         }
-        return containsKey;
+        return zContainsKey;
     }
 
     public int getFeatureLevel(int i) {
@@ -473,23 +473,23 @@ public class SemContextManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     public boolean checkHistoryMode(SemContextEvent semContextEvent) {
-        Boolean bool = false;
+        Boolean boolValueOf = false;
         StringBuilder sb = new StringBuilder();
         int type = semContextEvent.semContext.getType();
         sb.append("onSemContextChanged() : event = " + SemContext.getServiceName(type));
         if (type == 2) {
-            bool = Boolean.valueOf(semContextEvent.getPedometerContext().getMode() == 2);
+            boolValueOf = Boolean.valueOf(semContextEvent.getPedometerContext().getMode() == 2);
         } else if (type == 6) {
             SemContextAutoRotation autoRotationContext = semContextEvent.getAutoRotationContext();
             sb.append(" Angle : ");
             sb.append(autoRotationContext.getAngle());
         } else if (type == 26) {
-            bool = Boolean.valueOf(semContextEvent.getActivityBatchContext().getMode() == 1);
+            boolValueOf = Boolean.valueOf(semContextEvent.getActivityBatchContext().getMode() == 1);
         } else if (type == 33) {
-            bool = Boolean.valueOf(semContextEvent.getStepLevelMonitorContext().getMode() == 1);
+            boolValueOf = Boolean.valueOf(semContextEvent.getStepLevelMonitorContext().getMode() == 1);
         }
         Log.d(TAG, sb.toString());
-        return bool.booleanValue();
+        return boolValueOf.booleanValue();
     }
 
     private class ListenerDelegate extends ISemContextCallback.Stub {
@@ -558,10 +558,10 @@ public class SemContextManager {
 
         @Override // com.samsung.android.hardware.context.ISemContextCallback
         public synchronized void semContextCallback(SemContextEvent semContextEvent) throws RemoteException {
-            Message obtain = Message.obtain();
-            obtain.what = 0;
-            obtain.obj = semContextEvent;
-            this.mHandler.sendMessage(obtain);
+            Message messageObtain = Message.obtain();
+            messageObtain.what = 0;
+            messageObtain.obj = semContextEvent;
+            this.mHandler.sendMessage(messageObtain);
             notifyAll();
         }
 

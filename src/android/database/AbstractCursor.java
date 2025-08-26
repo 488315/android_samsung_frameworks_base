@@ -168,10 +168,10 @@ public abstract class AbstractCursor implements CrossProcessCursor {
     }
 
     public AbstractCursor() {
-        CloseGuard initCloseGuard = initCloseGuard();
-        this.mCloseGuard = initCloseGuard;
-        if (initCloseGuard != null) {
-            initCloseGuard.open("AbstractCursor.close");
+        CloseGuard closeGuardInitCloseGuard = initCloseGuard();
+        this.mCloseGuard = closeGuardInitCloseGuard;
+        if (closeGuardInitCloseGuard != null) {
+            closeGuardInitCloseGuard.open("AbstractCursor.close");
         }
     }
 
@@ -199,13 +199,13 @@ public abstract class AbstractCursor implements CrossProcessCursor {
         if (i == i2) {
             return true;
         }
-        boolean onMove = onMove(i2, i);
-        if (!onMove) {
+        boolean zOnMove = onMove(i2, i);
+        if (!zOnMove) {
             this.mPos = -1;
-            return onMove;
+            return zOnMove;
         }
         this.mPos = i;
-        return onMove;
+        return zOnMove;
     }
 
     @Override // android.database.CrossProcessCursor
@@ -261,10 +261,10 @@ public abstract class AbstractCursor implements CrossProcessCursor {
 
     @Override // android.database.Cursor
     public int getColumnIndex(String str) {
-        int lastIndexOf = str.lastIndexOf(46);
-        if (lastIndexOf != -1) {
+        int iLastIndexOf = str.lastIndexOf(46);
+        if (iLastIndexOf != -1) {
             Log.e(TAG, "requesting column name with table name -- " + str, new Exception());
-            str = str.substring(lastIndexOf + 1);
+            str = str.substring(iLastIndexOf + 1);
         }
         String[] columnNames = getColumnNames();
         int length = columnNames.length;
@@ -278,18 +278,18 @@ public abstract class AbstractCursor implements CrossProcessCursor {
 
     @Override // android.database.Cursor
     public int getColumnIndexOrThrow(String str) {
-        String str2;
+        String string;
         int columnIndex = getColumnIndex(str);
         if (columnIndex >= 0) {
             return columnIndex;
         }
         try {
-            str2 = Arrays.toString(getColumnNames());
+            string = Arrays.toString(getColumnNames());
         } catch (Exception e) {
             Log.d(TAG, "Cannot collect column names for debug purposes", e);
-            str2 = "";
+            string = "";
         }
-        throw new IllegalArgumentException("column '" + str + "' does not exist. Available columns: " + str2);
+        throw new IllegalArgumentException("column '" + str + "' does not exist. Available columns: " + string);
     }
 
     @Override // android.database.Cursor

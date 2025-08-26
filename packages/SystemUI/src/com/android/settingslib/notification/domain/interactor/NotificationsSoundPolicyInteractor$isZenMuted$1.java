@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function6;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class NotificationsSoundPolicyInteractor$isZenMuted$1 extends SuspendLambda implements Function6 {
     final /* synthetic */ int $stream;
@@ -26,17 +25,17 @@ final class NotificationsSoundPolicyInteractor$isZenMuted$1 extends SuspendLambd
 
     @Override // kotlin.jvm.functions.Function6
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-        int intValue = ((Number) obj).intValue();
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
-        boolean booleanValue3 = ((Boolean) obj4).booleanValue();
-        boolean booleanValue4 = ((Boolean) obj5).booleanValue();
+        int iIntValue = ((Number) obj).intValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue3 = ((Boolean) obj4).booleanValue();
+        boolean zBooleanValue4 = ((Boolean) obj5).booleanValue();
         NotificationsSoundPolicyInteractor$isZenMuted$1 notificationsSoundPolicyInteractor$isZenMuted$1 = new NotificationsSoundPolicyInteractor$isZenMuted$1(this.$stream, (Continuation) obj6);
-        notificationsSoundPolicyInteractor$isZenMuted$1.I$0 = intValue;
-        notificationsSoundPolicyInteractor$isZenMuted$1.Z$0 = booleanValue;
-        notificationsSoundPolicyInteractor$isZenMuted$1.Z$1 = booleanValue2;
-        notificationsSoundPolicyInteractor$isZenMuted$1.Z$2 = booleanValue3;
-        notificationsSoundPolicyInteractor$isZenMuted$1.Z$3 = booleanValue4;
+        notificationsSoundPolicyInteractor$isZenMuted$1.I$0 = iIntValue;
+        notificationsSoundPolicyInteractor$isZenMuted$1.Z$0 = zBooleanValue;
+        notificationsSoundPolicyInteractor$isZenMuted$1.Z$1 = zBooleanValue2;
+        notificationsSoundPolicyInteractor$isZenMuted$1.Z$2 = zBooleanValue3;
+        notificationsSoundPolicyInteractor$isZenMuted$1.Z$3 = zBooleanValue4;
         return notificationsSoundPolicyInteractor$isZenMuted$1.invokeSuspend(Unit.INSTANCE);
     }
 

@@ -81,7 +81,7 @@ public abstract class PaintContext {
 
     public abstract void scale(float f, float f2);
 
-    public abstract void setGraphicsLayer(HashMap<Integer, Object> hashMap);
+    public abstract void setGraphicsLayer(HashMap<Integer, Object> map);
 
     public abstract void startGraphicsLayer(int i, int i2);
 

@@ -157,11 +157,11 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
     private void populateFromPrivKeyInfo(PrivateKeyInfo privateKeyInfo) throws IOException {
         X962Parameters x962Parameters = X962Parameters.getInstance(privateKeyInfo.getPrivateKeyAlgorithm().getParameters());
         this.ecSpec = EC5Util.convertToSpec(x962Parameters, EC5Util.getCurve(this.configuration, x962Parameters));
-        ASN1Encodable parsePrivateKey = privateKeyInfo.parsePrivateKey();
-        if (parsePrivateKey instanceof ASN1Integer) {
-            this.d = ASN1Integer.getInstance(parsePrivateKey).getValue();
+        ASN1Encodable privateKey = privateKeyInfo.parsePrivateKey();
+        if (privateKey instanceof ASN1Integer) {
+            this.d = ASN1Integer.getInstance(privateKey).getValue();
         } else {
-            com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey eCPrivateKey = com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey.getInstance(parsePrivateKey);
+            com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey eCPrivateKey = com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey.getInstance(privateKey);
             this.d = eCPrivateKey.getKey();
             this.publicKey = eCPrivateKey.getPublicKey();
         }
@@ -306,7 +306,7 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
         }
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         byte[] bArr = (byte[]) objectInputStream.readObject();
         this.configuration = BouncyCastleProvider.CONFIGURATION;

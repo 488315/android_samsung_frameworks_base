@@ -110,19 +110,19 @@ public final class CountryTimeZones {
     }
 
     public OffsetResult lookupByOffsetWithBias(long j, TimeZone timeZone, int i, boolean z) {
-        CountryTimeZones.OffsetResult lookupByOffsetWithBias = this.mDelegate.lookupByOffsetWithBias(j, timeZone, i, z);
-        if (lookupByOffsetWithBias == null) {
+        CountryTimeZones.OffsetResult offsetResultLookupByOffsetWithBias = this.mDelegate.lookupByOffsetWithBias(j, timeZone, i, z);
+        if (offsetResultLookupByOffsetWithBias == null) {
             return null;
         }
-        return new OffsetResult(lookupByOffsetWithBias.getTimeZone(), lookupByOffsetWithBias.isOnlyMatch());
+        return new OffsetResult(offsetResultLookupByOffsetWithBias.getTimeZone(), offsetResultLookupByOffsetWithBias.isOnlyMatch());
     }
 
     public OffsetResult lookupByOffsetWithBias(long j, TimeZone timeZone, int i) {
-        CountryTimeZones.OffsetResult lookupByOffsetWithBias = this.mDelegate.lookupByOffsetWithBias(j, timeZone, i);
-        if (lookupByOffsetWithBias == null) {
+        CountryTimeZones.OffsetResult offsetResultLookupByOffsetWithBias = this.mDelegate.lookupByOffsetWithBias(j, timeZone, i);
+        if (offsetResultLookupByOffsetWithBias == null) {
             return null;
         }
-        return new OffsetResult(lookupByOffsetWithBias.getTimeZone(), lookupByOffsetWithBias.isOnlyMatch());
+        return new OffsetResult(offsetResultLookupByOffsetWithBias.getTimeZone(), offsetResultLookupByOffsetWithBias.isOnlyMatch());
     }
 
     public List<TimeZoneMapping> getEffectiveTimeZoneMappingsAt(long j) {

@@ -64,16 +64,16 @@ public class SemMdContextManager {
         synchronized (this.mAvailabilityCallbacks) {
             try {
                 try {
-                    MoccaListenerTransport computeIfAbsent = this.mAvailabilityCallbacks.computeIfAbsent(availabilityCallback, new Function() { // from class: com.samsung.android.mocca.SemMdContextManager$$ExternalSyntheticLambda1
+                    MoccaListenerTransport moccaListenerTransportComputeIfAbsent = this.mAvailabilityCallbacks.computeIfAbsent(availabilityCallback, new Function() { // from class: com.samsung.android.mocca.SemMdContextManager$$ExternalSyntheticLambda1
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
                             return SemMdContextManager.lambda$registerAvailabilityCallback$0((SemMdContextManager.AvailabilityCallback) obj);
                         }
                     });
                     if (CONTEXT_TYPE_ALL.equals(str)) {
-                        return this.mService.registerContextAvailabilityListener(computeIfAbsent, null);
+                        return this.mService.registerContextAvailabilityListener(moccaListenerTransportComputeIfAbsent, null);
                     }
-                    return this.mService.registerContextAvailabilityListener(computeIfAbsent, str);
+                    return this.mService.registerContextAvailabilityListener(moccaListenerTransportComputeIfAbsent, str);
                 } catch (RemoteException | ClassCastException | NullPointerException | UnsupportedOperationException e) {
                     Log.e(TAG, "registerAvailabilityCallbackImpl : " + e.getMessage(), e);
                     return false;

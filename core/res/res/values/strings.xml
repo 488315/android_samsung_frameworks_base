@@ -658,6 +658,7 @@ If you choose to install it anyway, carefully review the app's Privacy Notice an
     <string name="callsettings_callwaiting_notsubscribed">Call waiting is not subscribed</string>
     <string name="camera_restrict">Security policy prevents use of camera.</string>
     <string name="can_not_install_app">"Can't install app. App not optimized for use with %s."</string>
+    <string name="can_not_open_searcle_on_the_external_display">"Can't open Circle to Search on a connected display."</string>
     <string name="can_not_open_searcle_on_the_lockscreen">"Can't open Circle to Search on the Lock screen."</string>
     <string name="candidates_style"><u>candidates</u></string>
     <string name="cannot_open_app_concentration_mode">"Can't open app"</string>
@@ -747,6 +748,7 @@ If you choose to install it anyway, carefully review the app's Privacy Notice an
     <string name="common_secure_boot_nwlock_notification_text">This SIM card is not supported.</string>
     <string name="common_secure_boot_nwlock_notification_title">Invalid SIM card</string>
     <string name="compat_restart_education_text">If this app is displayed incorrectly, try closing it and opening it again.</string>
+    <string name="compat_restart_menu_education_text">If this app is displayed incorrectly, restart it from the More menu.</string>
     <string name="concurrent_display_notification_active_content">%1$s is using both displays to show content</string>
     <string name="concurrent_display_notification_active_title">Dual screen is on</string>
     <string name="concurrent_display_notification_name">Dual screen</string>
@@ -2684,6 +2686,7 @@ RETURN TO"</string>
     <string name="permdesc_peripheral_framework">allow the app to connect peripheral automatically and change peripheral settings without your intervention.</string>
     <string name="permdesc_persistentActivity">Allows the app to make parts of itself persistent in memory. This can limit memory available to other apps slowing down the phone.</string>
     <string name="permdesc_postNotification">Allows the app to show notifications</string>
+    <string name="permdesc_postPromotedNotifications">Allows the app to display ongoing, time-sensitive notifications on the status bar and lock screen</string>
     <string name="permdesc_preferredPaymentInfo">Allows the app to get preferred nfc payment service information like registered aids and route destination.</string>
     <string name="permdesc_processOutgoingCalls">Allows the app to see the number being dialed during an outgoing call with the option to redirect the call to a different number or abort the call altogether.</string>
     <string name="permdesc_queryAllPackages">Allows an app to see all installed packages.</string>
@@ -3025,6 +3028,7 @@ for account %s."</string>
     <string name="permlab_peripheral_framework">Connect peripheral automatically and change peripheral settings</string>
     <string name="permlab_persistentActivity">make app always run</string>
     <string name="permlab_postNotification">show notifications</string>
+    <string name="permlab_postPromotedNotifications">Show live updates</string>
     <string name="permlab_preferredPaymentInfo">Preferred NFC Payment Service Information</string>
     <string name="permlab_processOutgoingCalls">reroute outgoing calls</string>
     <string name="permlab_queryAllPackages">query all packages</string>
@@ -3437,7 +3441,7 @@ Listening at high volume for long periods may damage your hearing."</string>
     <string name="satellite_notification_manual_title">Use satellite messaging?</string>
     <string name="satellite_notification_open_message">Open Messages</string>
     <string name="satellite_notification_summary">You can send and receive messages without a mobile or Wi-Fi network</string>
-    <string name="satellite_notification_summary_with_data">You can send and receive messages and use limited data by satellite</string>
+    <string name="satellite_notification_summary_with_data">You can send and receive messages and use select apps over satellite</string>
     <string name="satellite_notification_title">Auto connected to satellite</string>
     <string name="satellite_sos_available_notification_summary">"You can message emergency services if there's no mobile or Wi-Fi network. Google Messages must be your default messaging app."</string>
     <string name="satellite_sos_available_notification_title">Satellite SOS is now available</string>

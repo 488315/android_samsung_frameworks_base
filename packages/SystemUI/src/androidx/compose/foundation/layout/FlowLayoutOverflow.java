@@ -5,7 +5,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class FlowLayoutOverflow {
     public final Function1 collapseGetter;
@@ -16,7 +15,6 @@ public abstract class FlowLayoutOverflow {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OverflowType {
         public static final /* synthetic */ OverflowType[] $VALUES;
         public static final OverflowType Clip;
@@ -50,7 +48,6 @@ public abstract class FlowLayoutOverflow {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

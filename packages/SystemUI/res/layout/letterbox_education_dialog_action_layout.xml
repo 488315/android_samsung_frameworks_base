@@ -3,5 +3,5 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <ImageView android:layout_gravity="center" android:id="@id/letterbox_education_dialog_action_icon" android:layout_width="32.0dip" android:layout_height="32.0dip" android:layout_marginBottom="12.0dip" />
-    <TextView android:textAppearance="@android:style/TextAppearance.Holo.Light.Widget.ActionMode.Title" android:textSize="14.0sp" android:textColor="@android:color/ripple_material_light" android:id="@id/letterbox_education_dialog_action_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:lineSpacingExtra="4.0sp" android:fontFamily="@android:string/csd_momentary_exposure_warning" android:textAlignment="center" />
+    <TextView android:textAppearance="@android:style/TextAppearance.Holo.Light.SearchResult" android:textSize="14.0sp" android:textColor="@android:color/material_grey_50" android:id="@id/letterbox_education_dialog_action_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:lineSpacingExtra="4.0sp" android:fontFamily="@android:string/config_wwan_network_service_package" android:textAlignment="center" />
 </LinearLayout>

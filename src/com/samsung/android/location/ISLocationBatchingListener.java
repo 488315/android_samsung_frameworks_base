@@ -45,9 +45,9 @@ public interface ISLocationBatchingListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISLocationBatchingListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISLocationBatchingListener)) {
-                return (ISLocationBatchingListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISLocationBatchingListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISLocationBatchingListener)) {
+                return (ISLocationBatchingListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface ISLocationBatchingListener extends IInterface {
             }
             if (i == 1) {
                 Location[] locationArr = (Location[]) parcel.createTypedArray(Location.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onLocationAvailable(locationArr, readBoolean);
+                onLocationAvailable(locationArr, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface ISLocationBatchingListener extends IInterface {
 
             @Override // com.samsung.android.location.ISLocationBatchingListener
             public void onLocationAvailable(Location[] locationArr, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISLocationBatchingListener.DESCRIPTOR);
-                    obtain.writeTypedArray(locationArr, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISLocationBatchingListener.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(locationArr, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

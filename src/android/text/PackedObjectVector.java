@@ -68,21 +68,21 @@ class PackedObjectVector<E> {
     }
 
     private void growBuffer() {
-        Object[] newUnpaddedObjectArray = ArrayUtils.newUnpaddedObjectArray(GrowingArrayUtils.growSize(size()) * this.mColumns);
-        int length = newUnpaddedObjectArray.length;
+        Object[] objArrNewUnpaddedObjectArray = ArrayUtils.newUnpaddedObjectArray(GrowingArrayUtils.growSize(size()) * this.mColumns);
+        int length = objArrNewUnpaddedObjectArray.length;
         int i = this.mColumns;
         int i2 = length / i;
         int i3 = this.mRows;
         int i4 = this.mRowGapStart;
         int i5 = i3 - (this.mRowGapLength + i4);
-        System.arraycopy(this.mValues, 0, newUnpaddedObjectArray, 0, i * i4);
+        System.arraycopy(this.mValues, 0, objArrNewUnpaddedObjectArray, 0, i * i4);
         Object[] objArr = this.mValues;
         int i6 = this.mRows - i5;
         int i7 = this.mColumns;
-        System.arraycopy(objArr, i6 * i7, newUnpaddedObjectArray, (i2 - i5) * i7, i5 * i7);
+        System.arraycopy(objArr, i6 * i7, objArrNewUnpaddedObjectArray, (i2 - i5) * i7, i5 * i7);
         this.mRowGapLength += i2 - this.mRows;
         this.mRows = i2;
-        this.mValues = newUnpaddedObjectArray;
+        this.mValues = objArrNewUnpaddedObjectArray;
     }
 
     private void moveRowGapTo(int i) {

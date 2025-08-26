@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AppInitializer {
     public static volatile AppInitializer sInstance;
@@ -38,7 +37,7 @@ public final class AppInitializer {
         return sInstance;
     }
 
-    public final void discoverAndInitialize(Bundle bundle) {
+    public final void discoverAndInitialize(Bundle bundle) throws ClassNotFoundException {
         String string = this.mContext.getString(R.string.androidx_startup);
         if (bundle != null) {
             try {
@@ -62,7 +61,7 @@ public final class AppInitializer {
     }
 
     public final Object doInitialize(Class cls, Set set) {
-        Object obj;
+        Object objCreate;
         if (Trace.isEnabled()) {
             try {
                 android.os.Trace.beginSection(cls.getSimpleName());
@@ -75,27 +74,27 @@ public final class AppInitializer {
             throw new IllegalStateException("Cannot initialize " + cls.getName() + ". Cycle detected.");
         }
         if (((HashMap) this.mInitialized).containsKey(cls)) {
-            obj = ((HashMap) this.mInitialized).get(cls);
+            objCreate = ((HashMap) this.mInitialized).get(cls);
         } else {
             hashSet.add(cls);
             try {
                 Class[] clsArr = new Class[0];
                 Initializer initializer = (Initializer) cls.getDeclaredConstructor(null).newInstance(null);
-                List<Class> dependencies = initializer.dependencies();
-                if (!dependencies.isEmpty()) {
-                    for (Class cls2 : dependencies) {
+                List<Class> listDependencies = initializer.dependencies();
+                if (!listDependencies.isEmpty()) {
+                    for (Class cls2 : listDependencies) {
                         if (!((HashMap) this.mInitialized).containsKey(cls2)) {
                             doInitialize(cls2, set);
                         }
                     }
                 }
-                obj = initializer.create(this.mContext);
+                objCreate = initializer.create(this.mContext);
                 hashSet.remove(cls);
-                ((HashMap) this.mInitialized).put(cls, obj);
+                ((HashMap) this.mInitialized).put(cls, objCreate);
             } catch (Throwable th) {
                 throw new StartupException(th);
             }
         }
-        return obj;
+        return objCreate;
     }
 }

@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PackageChangeInteractor$packageChanged$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ String $packageName$inlined;
@@ -42,10 +41,10 @@ public final class PackageChangeInteractor$packageChanged$$inlined$flatMapLatest
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            int intValue = ((Number) this.L$1).intValue();
+            int iIntValue = ((Number) this.L$1).intValue();
             PackageChangeInteractor packageChangeInteractor = this.this$0;
-            UserHandle of = UserHandle.of(intValue);
-            PackageChangeInteractor$packageChangedInternal$$inlined$filter$1 packageChangeInteractor$packageChangedInternal$$inlined$filter$1 = new PackageChangeInteractor$packageChangedInternal$$inlined$filter$1(((PackageChangeRepositoryImpl) packageChangeInteractor.packageChangeRepository).packageChanged(of), this.$packageName$inlined);
+            UserHandle userHandleOf = UserHandle.of(iIntValue);
+            PackageChangeInteractor$packageChangedInternal$$inlined$filter$1 packageChangeInteractor$packageChangedInternal$$inlined$filter$1 = new PackageChangeInteractor$packageChangedInternal$$inlined$filter$1(((PackageChangeRepositoryImpl) packageChangeInteractor.packageChangeRepository).packageChanged(userHandleOf), this.$packageName$inlined);
             this.label = 1;
             if (FlowKt.emitAll(flowCollector, packageChangeInteractor$packageChangedInternal$$inlined$filter$1, this) == coroutineSingletons) {
                 return coroutineSingletons;

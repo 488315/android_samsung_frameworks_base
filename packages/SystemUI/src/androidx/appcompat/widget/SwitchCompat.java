@@ -4,6 +4,7 @@ import android.R;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
@@ -21,6 +22,7 @@ import android.text.method.TransformationMethod;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.view.ActionMode;
+import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.ViewConfiguration;
 import android.view.accessibility.AccessibilityEvent;
@@ -41,7 +43,6 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SwitchCompat extends CompoundButton {
     public static final int[] CHECKED_STATE_SET;
@@ -92,7 +93,6 @@ public class SwitchCompat extends CompoundButton {
     public final PorterDuff.Mode mTrackTintMode;
     public final VelocityTracker mVelocityTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EmojiCompatInitCallback extends EmojiCompat.InitCallback {
         public final Reference mOuterWeakRef;
 
@@ -121,7 +121,6 @@ public class SwitchCompat extends CompoundButton {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ThumbAnimation extends Animation {
         public final float mDiff;
         public final float mStartPosition;
@@ -160,10 +159,10 @@ public class SwitchCompat extends CompoundButton {
         Drawable drawable = this.mThumbDrawable;
         if (drawable != null) {
             if (this.mHasThumbTint || this.mHasThumbTintMode) {
-                Drawable mutate = drawable.mutate();
-                this.mThumbDrawable = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mThumbDrawable = drawableMutate;
                 if (this.mHasThumbTint) {
-                    mutate.setTintList(this.mThumbTintList);
+                    drawableMutate.setTintList(this.mThumbTintList);
                 }
                 if (this.mHasThumbTintMode) {
                     this.mThumbDrawable.setTintMode(this.mThumbTintMode);
@@ -179,10 +178,10 @@ public class SwitchCompat extends CompoundButton {
         Drawable drawable = this.mTrackDrawable;
         if (drawable != null) {
             if (this.mHasTrackTint || this.mHasTrackTintMode) {
-                Drawable mutate = drawable.mutate();
-                this.mTrackDrawable = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mTrackDrawable = drawableMutate;
                 if (this.mHasTrackTint) {
-                    mutate.setTintList(this.mTrackTintList);
+                    drawableMutate.setTintList(this.mTrackTintList);
                 }
                 if (this.mHasTrackTintMode) {
                     this.mTrackDrawable.setTintMode(this.mTrackTintMode);
@@ -235,8 +234,8 @@ public class SwitchCompat extends CompoundButton {
                 int i17 = rect.bottom;
                 if (i16 > i17) {
                     i2 = i6 - (i16 - i17);
-                    this.mTrackDrawable.setBounds(i9, i, i10, i2);
                 }
+                this.mTrackDrawable.setBounds(i9, i, i10, i2);
             } else {
                 i = i4;
             }
@@ -355,11 +354,11 @@ public class SwitchCompat extends CompoundButton {
 
     @Override // android.widget.CompoundButton, android.widget.TextView, android.view.View
     public int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
         if (isChecked()) {
-            CompoundButton.mergeDrawableStates(onCreateDrawableState, CHECKED_STATE_SET);
+            CompoundButton.mergeDrawableStates(iArrOnCreateDrawableState, CHECKED_STATE_SET);
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     @Override // android.widget.CompoundButton, android.widget.TextView, android.view.View
@@ -403,13 +402,13 @@ public class SwitchCompat extends CompoundButton {
                 drawable2.copyBounds(rect);
                 rect.left += opticalBounds.left;
                 rect.right -= opticalBounds.right;
-                int save = canvas.save();
+                int iSave = canvas.save();
                 canvas.clipRect(rect, Region.Op.DIFFERENCE);
                 drawable.draw(canvas);
-                canvas.restoreToCount(save);
+                canvas.restoreToCount(iSave);
             }
         }
-        int save2 = canvas.save();
+        int iSave2 = canvas.save();
         if (drawable2 != null) {
             drawable2.draw(canvas);
         }
@@ -430,7 +429,7 @@ public class SwitchCompat extends CompoundButton {
             canvas.translate((width / 2) - (layout.getWidth() / 2), ((i3 + i4) / 2) - (layout.getHeight() / 2));
             layout.draw(canvas);
         }
-        canvas.restoreToCount(save2);
+        canvas.restoreToCount(iSave2);
     }
 
     @Override // android.view.View
@@ -447,13 +446,13 @@ public class SwitchCompat extends CompoundButton {
 
     @Override // android.widget.TextView, android.view.View
     public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
-        int i5;
+        int iMax;
         int width;
-        int i6;
-        int i7;
-        int i8;
+        int paddingLeft;
+        int height;
+        int paddingTop;
         super.onLayout(z, i, i2, i3, i4);
-        int i9 = 0;
+        int iMax2 = 0;
         if (this.mThumbDrawable != null) {
             Rect rect = this.mTempRect;
             Drawable drawable = this.mTrackDrawable;
@@ -463,43 +462,43 @@ public class SwitchCompat extends CompoundButton {
                 rect.setEmpty();
             }
             Rect opticalBounds = DrawableUtils.getOpticalBounds(this.mThumbDrawable);
-            i5 = Math.max(0, opticalBounds.left - rect.left);
-            i9 = Math.max(0, opticalBounds.right - rect.right);
+            iMax = Math.max(0, opticalBounds.left - rect.left);
+            iMax2 = Math.max(0, opticalBounds.right - rect.right);
         } else {
-            i5 = 0;
+            iMax = 0;
         }
         if (getLayoutDirection() == 1) {
-            i6 = getPaddingLeft() + i5;
-            width = (((this.mSwitchWidth + i6) + this.mTrackMargin) - i5) - i9;
+            paddingLeft = getPaddingLeft() + iMax;
+            width = (((this.mSwitchWidth + paddingLeft) + this.mTrackMargin) - iMax) - iMax2;
         } else {
-            width = (getWidth() - getPaddingRight()) - i9;
-            i6 = ((width - this.mSwitchWidth) - this.mTrackMargin) + i5 + i9;
+            width = (getWidth() - getPaddingRight()) - iMax2;
+            paddingLeft = ((width - this.mSwitchWidth) - this.mTrackMargin) + iMax + iMax2;
         }
         int gravity = getGravity() & 112;
         if (gravity == 16) {
-            int height = ((getHeight() + getPaddingTop()) - getPaddingBottom()) / 2;
-            int i10 = this.mSwitchHeight;
-            int i11 = height - (i10 / 2);
-            i7 = i10 + i11;
-            i8 = i11;
+            int height2 = ((getHeight() + getPaddingTop()) - getPaddingBottom()) / 2;
+            int i5 = this.mSwitchHeight;
+            int i6 = height2 - (i5 / 2);
+            height = i5 + i6;
+            paddingTop = i6;
         } else if (gravity != 80) {
-            i8 = getPaddingTop();
-            i7 = this.mSwitchHeight + i8;
+            paddingTop = getPaddingTop();
+            height = this.mSwitchHeight + paddingTop;
         } else {
-            i7 = getHeight() - getPaddingBottom();
-            i8 = i7 - this.mSwitchHeight;
+            height = getHeight() - getPaddingBottom();
+            paddingTop = height - this.mSwitchHeight;
         }
-        this.mSwitchLeft = i6;
-        this.mSwitchTop = i8;
-        this.mSwitchBottom = i7;
+        this.mSwitchLeft = paddingLeft;
+        this.mSwitchTop = paddingTop;
+        this.mSwitchBottom = height;
         this.mSwitchRight = width;
     }
 
     @Override // android.widget.TextView, android.view.View
     public final void onMeasure(int i, int i2) {
-        int i3;
-        int i4;
-        int i5;
+        int intrinsicWidth;
+        int intrinsicHeight;
+        int intrinsicHeight2;
         if (this.mShowText) {
             if (this.mOnLayout == null) {
                 CharSequence charSequence = this.mTextOnTransformed;
@@ -514,35 +513,35 @@ public class SwitchCompat extends CompoundButton {
         Drawable drawable = this.mThumbDrawable;
         if (drawable != null) {
             drawable.getPadding(rect);
-            i3 = (this.mThumbDrawable.getIntrinsicWidth() - rect.left) - rect.right;
-            i4 = this.mThumbDrawable.getIntrinsicHeight();
+            intrinsicWidth = (this.mThumbDrawable.getIntrinsicWidth() - rect.left) - rect.right;
+            intrinsicHeight = this.mThumbDrawable.getIntrinsicHeight();
         } else {
-            i3 = 0;
-            i4 = 0;
+            intrinsicWidth = 0;
+            intrinsicHeight = 0;
         }
-        this.mThumbWidth = Math.max(this.mShowText ? (this.mThumbTextPadding * 2) + Math.max(this.mOnLayout.getWidth(), this.mOffLayout.getWidth()) : 0, i3);
+        this.mThumbWidth = Math.max(this.mShowText ? (this.mThumbTextPadding * 2) + Math.max(this.mOnLayout.getWidth(), this.mOffLayout.getWidth()) : 0, intrinsicWidth);
         Drawable drawable2 = this.mTrackDrawable;
         if (drawable2 != null) {
             drawable2.getPadding(rect);
-            i5 = this.mTrackDrawable.getIntrinsicHeight();
+            intrinsicHeight2 = this.mTrackDrawable.getIntrinsicHeight();
         } else {
             rect.setEmpty();
-            i5 = 0;
+            intrinsicHeight2 = 0;
         }
-        int i6 = rect.left;
-        int i7 = rect.right;
+        int i3 = rect.left;
+        int i4 = rect.right;
         Drawable drawable3 = this.mThumbDrawable;
         if (drawable3 != null) {
             Rect opticalBounds = DrawableUtils.getOpticalBounds(drawable3);
-            Math.max(i6, opticalBounds.left);
-            Math.max(i7, opticalBounds.right);
+            Math.max(i3, opticalBounds.left);
+            Math.max(i4, opticalBounds.right);
         }
-        int max = Math.max(i5, i4);
-        this.mSwitchHeight = max;
+        int iMax = Math.max(intrinsicHeight2, intrinsicHeight);
+        this.mSwitchHeight = iMax;
         this.mTrackMargin = this.mThumbWidth / this.mSwitchWidth > 0.5714286f ? (int) Math.ceil(r2 - (r3 * 0.5714286f)) : 0;
         super.onMeasure(i, i2);
-        if (getMeasuredHeight() < max) {
-            setMeasuredDimension(getMeasuredWidthAndState(), max);
+        if (getMeasuredHeight() < iMax) {
+            setMeasuredDimension(getMeasuredWidthAndState(), iMax);
         }
     }
 
@@ -555,29 +554,108 @@ public class SwitchCompat extends CompoundButton {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x00db, code lost:
-    
-        if (r8 > 0.5f) goto L61;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x00dd, code lost:
-    
-        r0 = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:6:0x0017, code lost:
-    
-        if (r0 != 3) goto L95;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0091  */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x00dd  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00df  */
+    /* JADX WARN: Removed duplicated region for block: B:63:0x00e1  */
     @Override // android.widget.TextView, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onTouchEvent(android.view.MotionEvent r11) {
-        /*
-            Method dump skipped, instructions count: 376
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.widget.SwitchCompat.onTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        boolean z;
+        this.mVelocityTracker.addMovement(motionEvent);
+        int actionMasked = motionEvent.getActionMasked();
+        float f = 1.0f;
+        if (actionMasked == 0) {
+            float x = motionEvent.getX();
+            float y = motionEvent.getY();
+            if (isEnabled() && this.mThumbDrawable != null) {
+                int thumbScrollRange = (int) (((getLayoutDirection() == 1 ? 1.0f - this.mThumbPosition : this.mThumbPosition) * getThumbScrollRange()) + 0.5f);
+                this.mThumbDrawable.getPadding(this.mTempRect);
+                int i = this.mSwitchTop;
+                int i2 = this.mTouchSlop;
+                int i3 = i - i2;
+                int i4 = (this.mSwitchLeft + thumbScrollRange) - i2;
+                int i5 = this.mThumbWidth + i4;
+                Rect rect = this.mTempRect;
+                int i6 = i5 + rect.left + rect.right + i2;
+                int i7 = this.mSwitchBottom + i2;
+                if (x > i4 && x < i6 && y > i3 && y < i7) {
+                    this.mTouchMode = 1;
+                    this.mTouchX = x;
+                    this.mTouchY = y;
+                }
+            }
+        } else if (actionMasked == 1) {
+            if (this.mTouchMode == 2) {
+                this.mTouchMode = 0;
+                boolean z2 = motionEvent.getAction() == 1 && isEnabled();
+                boolean zIsChecked = isChecked();
+                if (z2) {
+                    this.mVelocityTracker.computeCurrentVelocity(1000);
+                    float xVelocity = this.mVelocityTracker.getXVelocity();
+                    if (Math.abs(xVelocity) > 2000.0f || Math.abs(xVelocity) > 500.0f) {
+                        z = getLayoutDirection() != 1 ? xVelocity > 0.0f : xVelocity < 0.0f;
+                    } else {
+                        float f2 = this.mThumbPosition;
+                        if (f2 == 0.0f || f2 == 1.0f) {
+                            if (f2 > 0.5f) {
+                            }
+                        }
+                    }
+                } else {
+                    z = zIsChecked;
+                }
+                if (z != zIsChecked) {
+                    playSoundEffect(0);
+                }
+                setChecked(z);
+                MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
+                motionEventObtain.setAction(3);
+                super.onTouchEvent(motionEventObtain);
+                motionEventObtain.recycle();
+                super.onTouchEvent(motionEvent);
+                return true;
+            }
+            this.mTouchMode = 0;
+            this.mVelocityTracker.clear();
+        } else if (actionMasked == 2) {
+            int i8 = this.mTouchMode;
+            if (i8 == 1) {
+                float x2 = motionEvent.getX();
+                float y2 = motionEvent.getY();
+                if (Math.abs(x2 - this.mTouchX) > this.mTouchSlop || Math.abs(y2 - this.mTouchY) > this.mTouchSlop) {
+                    this.mTouchMode = 2;
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                    this.mTouchX = x2;
+                    this.mTouchY = y2;
+                    return true;
+                }
+            } else if (i8 == 2) {
+                float x3 = motionEvent.getX();
+                int thumbScrollRange2 = getThumbScrollRange();
+                float f3 = x3 - this.mTouchX;
+                float f4 = thumbScrollRange2 != 0 ? f3 / thumbScrollRange2 : f3 > 0.0f ? 1.0f : -1.0f;
+                if (getLayoutDirection() == 1) {
+                    f4 = -f4;
+                }
+                float f5 = this.mThumbPosition;
+                float f6 = f4 + f5;
+                if (f6 < 0.0f) {
+                    f = 0.0f;
+                } else if (f6 <= 1.0f) {
+                    f = f6;
+                }
+                if (f != f5) {
+                    this.mTouchX = x3;
+                    setThumbPosition(f);
+                }
+                return true;
+            }
+        } else if (actionMasked == 3) {
+        }
+        return super.onTouchEvent(motionEvent);
     }
 
     @Override // android.widget.TextView
@@ -592,8 +670,8 @@ public class SwitchCompat extends CompoundButton {
             performHapticFeedback(SeslHapticFeedbackConstantsReflector.semGetVibrationIndex(27));
         }
         super.setChecked(z);
-        final boolean isChecked = isChecked();
-        if (isChecked) {
+        final boolean zIsChecked = isChecked();
+        if (zIsChecked) {
             setOnStateDescriptionOnRAndAbove();
         } else {
             setOffStateDescriptionOnRAndAbove();
@@ -603,7 +681,7 @@ public class SwitchCompat extends CompoundButton {
                 clearAnimation();
                 this.mPositionAnimator = null;
             }
-            setThumbPosition(isChecked ? 1.0f : 0.0f);
+            setThumbPosition(zIsChecked ? 1.0f : 0.0f);
             return;
         }
         ThumbAnimation thumbAnimation = this.mPositionAnimator;
@@ -611,7 +689,7 @@ public class SwitchCompat extends CompoundButton {
             clearAnimation();
             this.mPositionAnimator = null;
         }
-        ThumbAnimation thumbAnimation2 = new ThumbAnimation(this.mThumbPosition, isChecked ? 1.0f : 0.0f);
+        ThumbAnimation thumbAnimation2 = new ThumbAnimation(this.mThumbPosition, zIsChecked ? 1.0f : 0.0f);
         this.mPositionAnimator = thumbAnimation2;
         thumbAnimation2.setDuration(150L);
         this.mPositionAnimator.setDuration(300L);
@@ -621,7 +699,7 @@ public class SwitchCompat extends CompoundButton {
             public final void onAnimationEnd(Animation animation) {
                 SwitchCompat switchCompat = SwitchCompat.this;
                 if (switchCompat.mPositionAnimator == animation) {
-                    switchCompat.setThumbPosition(isChecked ? 1.0f : 0.0f);
+                    switchCompat.setThumbPosition(zIsChecked ? 1.0f : 0.0f);
                     SwitchCompat.this.mPositionAnimator = null;
                 }
             }
@@ -637,10 +715,10 @@ public class SwitchCompat extends CompoundButton {
         startAnimation(this.mPositionAnimator);
     }
 
-    public final void setCheckedWithoutAnimation(boolean z) {
+    public final void setCheckedWithoutAnimation(boolean z) throws Resources.NotFoundException {
         super.setChecked(z);
-        boolean isChecked = isChecked();
-        if (isChecked) {
+        boolean zIsChecked = isChecked();
+        if (zIsChecked) {
             setOnStateDescriptionOnRAndAbove();
         } else {
             setOffStateDescriptionOnRAndAbove();
@@ -649,7 +727,7 @@ public class SwitchCompat extends CompoundButton {
             clearAnimation();
             this.mPositionAnimator = null;
         }
-        setThumbPosition(isChecked ? 1.0f : 0.0f);
+        setThumbPosition(zIsChecked ? 1.0f : 0.0f);
     }
 
     @Override // android.widget.TextView
@@ -657,22 +735,22 @@ public class SwitchCompat extends CompoundButton {
         super.setFilters(getEmojiTextViewHelper().getFilters(inputFilterArr));
     }
 
-    public final void setOffStateDescriptionOnRAndAbove() {
-        Object obj = this.mAccessibilityTextOff;
-        if (obj == null) {
-            obj = getResources().getString(com.android.systemui.R.string.abc_capital_off);
+    public final void setOffStateDescriptionOnRAndAbove() throws Resources.NotFoundException {
+        Object string = this.mAccessibilityTextOff;
+        if (string == null) {
+            string = getResources().getString(com.android.systemui.R.string.abc_capital_off);
         }
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        new ViewCompat.AnonymousClass3(com.android.systemui.R.id.tag_state_description, CharSequence.class, 64, 30).set(this, obj);
+        new ViewCompat.AnonymousClass3(com.android.systemui.R.id.tag_state_description, CharSequence.class, 64, 30).set(this, string);
     }
 
-    public final void setOnStateDescriptionOnRAndAbove() {
-        Object obj = this.mAccessibilityTextOn;
-        if (obj == null) {
-            obj = getResources().getString(com.android.systemui.R.string.abc_capital_on);
+    public final void setOnStateDescriptionOnRAndAbove() throws Resources.NotFoundException {
+        Object string = this.mAccessibilityTextOn;
+        if (string == null) {
+            string = getResources().getString(com.android.systemui.R.string.abc_capital_on);
         }
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        new ViewCompat.AnonymousClass3(com.android.systemui.R.id.tag_state_description, CharSequence.class, 64, 30).set(this, obj);
+        new ViewCompat.AnonymousClass3(com.android.systemui.R.id.tag_state_description, CharSequence.class, 64, 30).set(this, string);
     }
 
     public final void setSwitchTypeface(Typeface typeface) {
@@ -687,9 +765,9 @@ public class SwitchCompat extends CompoundButton {
     public final void setTextOffInternal(CharSequence charSequence) {
         this.mTextOff = charSequence;
         AppCompatEmojiTextHelper emojiTextViewHelper = getEmojiTextViewHelper();
-        TransformationMethod wrapTransformationMethod = emojiTextViewHelper.mEmojiTextViewHelper.mHelper.wrapTransformationMethod(this.mSwitchTransformationMethod);
-        if (wrapTransformationMethod != null) {
-            charSequence = wrapTransformationMethod.getTransformation(charSequence, this);
+        TransformationMethod transformationMethodWrapTransformationMethod = emojiTextViewHelper.mEmojiTextViewHelper.mHelper.wrapTransformationMethod(this.mSwitchTransformationMethod);
+        if (transformationMethodWrapTransformationMethod != null) {
+            charSequence = transformationMethodWrapTransformationMethod.getTransformation(charSequence, this);
         }
         this.mTextOffTransformed = charSequence;
         this.mOffLayout = null;
@@ -701,9 +779,9 @@ public class SwitchCompat extends CompoundButton {
     public final void setTextOnInternal(CharSequence charSequence) {
         this.mTextOn = charSequence;
         AppCompatEmojiTextHelper emojiTextViewHelper = getEmojiTextViewHelper();
-        TransformationMethod wrapTransformationMethod = emojiTextViewHelper.mEmojiTextViewHelper.mHelper.wrapTransformationMethod(this.mSwitchTransformationMethod);
-        if (wrapTransformationMethod != null) {
-            charSequence = wrapTransformationMethod.getTransformation(charSequence, this);
+        TransformationMethod transformationMethodWrapTransformationMethod = emojiTextViewHelper.mEmojiTextViewHelper.mHelper.wrapTransformationMethod(this.mSwitchTransformationMethod);
+        if (transformationMethodWrapTransformationMethod != null) {
+            charSequence = transformationMethodWrapTransformationMethod.getTransformation(charSequence, this);
         }
         this.mTextOnTransformed = charSequence;
         this.mOnLayout = null;
@@ -744,9 +822,9 @@ public class SwitchCompat extends CompoundButton {
     }
 
     public SwitchCompat(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
         Typeface typeface;
-        Typeface create;
+        Typeface typefaceCreate;
+        super(context, attributeSet, i);
         this.mThumbTintList = null;
         this.mThumbTintMode = null;
         this.mHasThumbTint = false;
@@ -764,16 +842,16 @@ public class SwitchCompat extends CompoundButton {
         textPaint.density = getResources().getDisplayMetrics().density;
         int i2 = Settings.System.getString(context.getContentResolver(), SettingsHelper.INDEX_CURRENT_SEC_ACTIVE_THEMEPACKAGE) != null ? com.android.systemui.R.attr.themeSwitchStyle : i;
         int[] iArr = R$styleable.SwitchCompat;
-        TintTypedArray obtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context, attributeSet, iArr, i2, 0);
-        TypedArray typedArray = obtainStyledAttributes.mWrapped;
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context, attributeSet, iArr, i2, 0);
+        TypedArray typedArray = tintTypedArrayObtainStyledAttributes.mWrapped;
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         ViewCompat.Api29Impl.saveAttributeDataForStyleable(this, context, iArr, attributeSet, typedArray, i2, 0);
-        Drawable drawable = obtainStyledAttributes.getDrawable(2);
+        Drawable drawable = tintTypedArrayObtainStyledAttributes.getDrawable(2);
         this.mThumbDrawable = drawable;
         if (drawable != null) {
             drawable.setCallback(this);
         }
-        Drawable drawable2 = obtainStyledAttributes.getDrawable(12);
+        Drawable drawable2 = tintTypedArrayObtainStyledAttributes.getDrawable(12);
         this.mTrackDrawable = drawable2;
         if (drawable2 != null) {
             drawable2.setCallback(this);
@@ -789,49 +867,49 @@ public class SwitchCompat extends CompoundButton {
             this.mTrackOnDrawable.setState(new int[]{R.attr.state_enabled, R.attr.state_checked});
             this.mTrackOffDrawable.setState(new int[]{R.attr.state_enabled, -16842912});
         }
-        setTextOnInternal(obtainStyledAttributes.mWrapped.getText(0));
-        setTextOffInternal(obtainStyledAttributes.mWrapped.getText(1));
-        this.mShowText = obtainStyledAttributes.mWrapped.getBoolean(3, true);
-        this.mThumbTextPadding = obtainStyledAttributes.mWrapped.getDimensionPixelSize(9, 0);
-        obtainStyledAttributes.mWrapped.getDimensionPixelSize(5, 0);
-        this.mSwitchPadding = obtainStyledAttributes.mWrapped.getDimensionPixelSize(7, 0);
-        this.mSplitTrack = obtainStyledAttributes.mWrapped.getBoolean(4, false);
-        ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(10);
+        setTextOnInternal(tintTypedArrayObtainStyledAttributes.mWrapped.getText(0));
+        setTextOffInternal(tintTypedArrayObtainStyledAttributes.mWrapped.getText(1));
+        this.mShowText = tintTypedArrayObtainStyledAttributes.mWrapped.getBoolean(3, true);
+        this.mThumbTextPadding = tintTypedArrayObtainStyledAttributes.mWrapped.getDimensionPixelSize(9, 0);
+        tintTypedArrayObtainStyledAttributes.mWrapped.getDimensionPixelSize(5, 0);
+        this.mSwitchPadding = tintTypedArrayObtainStyledAttributes.mWrapped.getDimensionPixelSize(7, 0);
+        this.mSplitTrack = tintTypedArrayObtainStyledAttributes.mWrapped.getBoolean(4, false);
+        ColorStateList colorStateList = tintTypedArrayObtainStyledAttributes.getColorStateList(10);
         if (colorStateList != null) {
             this.mThumbTintList = colorStateList;
             this.mHasThumbTint = true;
         }
-        PorterDuff.Mode parseTintMode = DrawableUtils.parseTintMode(obtainStyledAttributes.mWrapped.getInt(11, -1), null);
-        if (parseTintMode != null) {
-            this.mThumbTintMode = parseTintMode;
+        PorterDuff.Mode tintMode = DrawableUtils.parseTintMode(tintTypedArrayObtainStyledAttributes.mWrapped.getInt(11, -1), null);
+        if (tintMode != null) {
+            this.mThumbTintMode = tintMode;
             this.mHasThumbTintMode = true;
         }
         if (this.mHasThumbTint || this.mHasThumbTintMode) {
             applyThumbTint();
         }
-        ColorStateList colorStateList2 = obtainStyledAttributes.getColorStateList(13);
+        ColorStateList colorStateList2 = tintTypedArrayObtainStyledAttributes.getColorStateList(13);
         if (colorStateList2 != null) {
             this.mTrackTintList = colorStateList2;
             this.mHasTrackTint = true;
         }
-        PorterDuff.Mode parseTintMode2 = DrawableUtils.parseTintMode(obtainStyledAttributes.mWrapped.getInt(14, -1), null);
-        if (parseTintMode2 != null) {
-            this.mTrackTintMode = parseTintMode2;
+        PorterDuff.Mode tintMode2 = DrawableUtils.parseTintMode(tintTypedArrayObtainStyledAttributes.mWrapped.getInt(14, -1), null);
+        if (tintMode2 != null) {
+            this.mTrackTintMode = tintMode2;
             this.mHasTrackTintMode = true;
         }
         if (this.mHasTrackTint || this.mHasTrackTintMode) {
             applyTrackTint();
         }
-        int resourceId = obtainStyledAttributes.mWrapped.getResourceId(8, 0);
+        int resourceId = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(8, 0);
         if (resourceId != 0) {
-            TintTypedArray obtainStyledAttributes2 = TintTypedArray.obtainStyledAttributes(context, resourceId, R$styleable.TextAppearance);
-            ColorStateList colorStateList3 = obtainStyledAttributes2.getColorStateList(3);
+            TintTypedArray tintTypedArrayObtainStyledAttributes2 = TintTypedArray.obtainStyledAttributes(context, resourceId, R$styleable.TextAppearance);
+            ColorStateList colorStateList3 = tintTypedArrayObtainStyledAttributes2.getColorStateList(3);
             if (colorStateList3 != null) {
                 this.mTextColors = colorStateList3;
             } else {
                 this.mTextColors = getTextColors();
             }
-            int dimensionPixelSize = obtainStyledAttributes2.mWrapped.getDimensionPixelSize(0, 0);
+            int dimensionPixelSize = tintTypedArrayObtainStyledAttributes2.mWrapped.getDimensionPixelSize(0, 0);
             if (dimensionPixelSize != 0) {
                 float f = dimensionPixelSize;
                 if (f != textPaint.getTextSize()) {
@@ -839,8 +917,8 @@ public class SwitchCompat extends CompoundButton {
                     requestLayout();
                 }
             }
-            int i3 = obtainStyledAttributes2.mWrapped.getInt(1, -1);
-            int i4 = obtainStyledAttributes2.mWrapped.getInt(2, -1);
+            int i3 = tintTypedArrayObtainStyledAttributes2.mWrapped.getInt(1, -1);
+            int i4 = tintTypedArrayObtainStyledAttributes2.mWrapped.getInt(2, -1);
             if (i3 == 1) {
                 typeface = Typeface.SANS_SERIF;
             } else if (i3 != 2) {
@@ -850,12 +928,12 @@ public class SwitchCompat extends CompoundButton {
             }
             if (i4 > 0) {
                 if (typeface == null) {
-                    create = Typeface.defaultFromStyle(i4);
+                    typefaceCreate = Typeface.defaultFromStyle(i4);
                 } else {
-                    create = Typeface.create(typeface, i4);
+                    typefaceCreate = Typeface.create(typeface, i4);
                 }
-                setSwitchTypeface(create);
-                int i5 = (~(create != null ? create.getStyle() : 0)) & i4;
+                setSwitchTypeface(typefaceCreate);
+                int i5 = (~(typefaceCreate != null ? typefaceCreate.getStyle() : 0)) & i4;
                 textPaint.setFakeBoldText((i5 & 1) != 0);
                 textPaint.setTextSkewX((2 & i5) != 0 ? -0.25f : 0.0f);
             } else {
@@ -863,17 +941,17 @@ public class SwitchCompat extends CompoundButton {
                 textPaint.setTextSkewX(0.0f);
                 setSwitchTypeface(typeface);
             }
-            if (obtainStyledAttributes2.mWrapped.getBoolean(14, false)) {
+            if (tintTypedArrayObtainStyledAttributes2.mWrapped.getBoolean(14, false)) {
                 this.mSwitchTransformationMethod = new AllCapsTransformationMethod(getContext());
             } else {
                 this.mSwitchTransformationMethod = null;
             }
             setTextOnInternal(this.mTextOn);
             setTextOffInternal(this.mTextOff);
-            obtainStyledAttributes2.recycle();
+            tintTypedArrayObtainStyledAttributes2.recycle();
         }
         new AppCompatTextHelper(this).loadFromAttributes(attributeSet, i);
-        obtainStyledAttributes.recycle();
+        tintTypedArrayObtainStyledAttributes.recycle();
         ViewConfiguration viewConfiguration = ViewConfiguration.get(context);
         this.mTouchSlop = viewConfiguration.getScaledTouchSlop();
         viewConfiguration.getScaledMinimumFlingVelocity();

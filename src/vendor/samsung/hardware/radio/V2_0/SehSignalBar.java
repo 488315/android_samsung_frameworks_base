@@ -41,13 +41,13 @@ public final class SehSignalBar {
 
     public static final ArrayList<SehSignalBar> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SehSignalBar> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 28, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 28, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SehSignalBar sehSignalBar = new SehSignalBar();
-            sehSignalBar.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 28);
+            sehSignalBar.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 28);
             arrayList.add(sehSignalBar);
         }
         return arrayList;

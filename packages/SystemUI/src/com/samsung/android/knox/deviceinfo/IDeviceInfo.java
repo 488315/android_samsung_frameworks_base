@@ -9,7 +9,6 @@ import com.samsung.android.knox.ContextInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IDeviceInfo extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.deviceinfo.IDeviceInfo";
@@ -150,7 +149,6 @@ public interface IDeviceInfo extends IInterface {
 
     void storeSMS(String str, String str2, String str3, boolean z) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IDeviceInfo {
         public static final int TRANSACTION_clearCallingLog = 25;
         public static final int TRANSACTION_clearMMSLog = 30;
@@ -221,7 +219,6 @@ public interface IDeviceInfo extends IInterface {
         public static final int TRANSACTION_storeMMS = 31;
         public static final int TRANSACTION_storeSMS = 18;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IDeviceInfo {
             public IBinder mRemote;
 
@@ -236,532 +233,532 @@ public interface IDeviceInfo extends IInterface {
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean clearCallingLog(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean clearMMSLog(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean clearSMSLog(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public void dataUsageTimerActivation(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean enableCallingCapture(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean enableMMSCapture(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean enableSMSCapture(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public long getAvailableCapacityExternal(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public long getAvailableCapacityInternal(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public long getAvailableRamMemory(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public long getBytesReceivedNetwork(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public long getBytesReceivedWiFi(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public long getBytesSentNetwork(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public long getBytesSentWiFi(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getCellTowerCID(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getCellTowerLAC(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getCellTowerPSC(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getCellTowerRSSI(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public List<String> getDataCallLog(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean getDataCallLoggingEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean getDataCallStatisticsEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public int getDataUsageTimer(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getDeviceMaker(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getDeviceName(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getDeviceOS(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getDeviceOSVersion(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getDevicePlatform(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getDeviceProcessorSpeed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getDeviceProcessorType(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public int getDroppedCallsCount(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public List<String> getInboundMMSCaptured(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public List<String> getInboundSMSCaptured(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public List<String> getIncomingCallingCaptured(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -771,574 +768,574 @@ public interface IDeviceInfo extends IInterface {
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getKnoxServiceId(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public List<String> getKnoxServicePackageList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public int getMissedCallsCount(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getModelName(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getModelNumber(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getModemFirmware(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public List<String> getOutboundMMSCaptured(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public List<String> getOutboundSMSCaptured(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public List<String> getOutgoingCallingCaptured(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public int getPlatformSDK(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getPlatformVersion(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getPlatformVersionName(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getSalesCode(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public String getSerialNumber(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public int getSuccessCallsCount(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public long getTotalCapacityExternal(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public long getTotalCapacityInternal(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public long getTotalRamMemory(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean getWifiStatisticEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean isCallingCaptureEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean isDeviceLocked(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean isDeviceSecure(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean isMMSCaptureEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean isSMSCaptureEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean resetCallsCount(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean resetDataCallLogging(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public void resetDataUsage(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean setDataCallLoggingEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean setDataCallStatisticsEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean setDataUsageTimer(ContextInfo contextInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean setKnoxServiceId(ContextInfo contextInfo, List<String> list, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeStringList(list);
-                    obtain.writeString(str);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public boolean setWifiStatisticEnabled(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public void storeCalling(String str, String str2, String str3, String str4, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public void storeMMS(String str, String str2, String str3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.deviceinfo.IDeviceInfo
             public void storeSMS(String str, String str2, String str3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceInfo.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -1351,8 +1348,8 @@ public interface IDeviceInfo extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDeviceInfo.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IDeviceInfo)) ? new Proxy(iBinder) : (IDeviceInfo) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDeviceInfo.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IDeviceInfo)) ? new Proxy(iBinder) : (IDeviceInfo) iInterfaceQueryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -1519,16 +1516,16 @@ public interface IDeviceInfo extends IInterface {
                 case 1:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isDeviceSecure = isDeviceSecure(contextInfo);
+                    boolean zIsDeviceSecure = isDeviceSecure(contextInfo);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeviceSecure);
+                    parcel2.writeBoolean(zIsDeviceSecure);
                     return true;
                 case 2:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isDeviceLocked = isDeviceLocked(contextInfo2);
+                    boolean zIsDeviceLocked = isDeviceLocked(contextInfo2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeviceLocked);
+                    parcel2.writeBoolean(zIsDeviceLocked);
                     return true;
                 case 3:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -1603,24 +1600,24 @@ public interface IDeviceInfo extends IInterface {
                 case 13:
                     ContextInfo contextInfo13 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean resetCallsCount = resetCallsCount(contextInfo13);
+                    boolean zResetCallsCount = resetCallsCount(contextInfo13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(resetCallsCount);
+                    parcel2.writeBoolean(zResetCallsCount);
                     return true;
                 case 14:
                     ContextInfo contextInfo14 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean enableSMSCapture = enableSMSCapture(contextInfo14, readBoolean);
+                    boolean zEnableSMSCapture = enableSMSCapture(contextInfo14, z);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableSMSCapture);
+                    parcel2.writeBoolean(zEnableSMSCapture);
                     return true;
                 case 15:
                     ContextInfo contextInfo15 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isSMSCaptureEnabled = isSMSCaptureEnabled(contextInfo15);
+                    boolean zIsSMSCaptureEnabled = isSMSCaptureEnabled(contextInfo15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSMSCaptureEnabled);
+                    parcel2.writeBoolean(zIsSMSCaptureEnabled);
                     return true;
                 case 16:
                     ContextInfo contextInfo16 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -1637,35 +1634,35 @@ public interface IDeviceInfo extends IInterface {
                     parcel2.writeStringList(inboundSMSCaptured);
                     return true;
                 case 18:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    storeSMS(readString, readString2, readString3, readBoolean2);
+                    storeSMS(string, string2, string3, z2);
                     parcel2.writeNoException();
                     return true;
                 case 19:
                     ContextInfo contextInfo18 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean clearSMSLog = clearSMSLog(contextInfo18);
+                    boolean zClearSMSLog = clearSMSLog(contextInfo18);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearSMSLog);
+                    parcel2.writeBoolean(zClearSMSLog);
                     return true;
                 case 20:
                     ContextInfo contextInfo19 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean enableCallingCapture = enableCallingCapture(contextInfo19, readBoolean3);
+                    boolean zEnableCallingCapture = enableCallingCapture(contextInfo19, z3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableCallingCapture);
+                    parcel2.writeBoolean(zEnableCallingCapture);
                     return true;
                 case 21:
                     ContextInfo contextInfo20 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isCallingCaptureEnabled = isCallingCaptureEnabled(contextInfo20);
+                    boolean zIsCallingCaptureEnabled = isCallingCaptureEnabled(contextInfo20);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCallingCaptureEnabled);
+                    parcel2.writeBoolean(zIsCallingCaptureEnabled);
                     return true;
                 case 22:
                     ContextInfo contextInfo21 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -1682,36 +1679,36 @@ public interface IDeviceInfo extends IInterface {
                     parcel2.writeStringList(incomingCallingCaptured);
                     return true;
                 case 24:
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    storeCalling(readString4, readString5, readString6, readString7, readBoolean4);
+                    storeCalling(string4, string5, string6, string7, z4);
                     parcel2.writeNoException();
                     return true;
                 case 25:
                     ContextInfo contextInfo23 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean clearCallingLog = clearCallingLog(contextInfo23);
+                    boolean zClearCallingLog = clearCallingLog(contextInfo23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearCallingLog);
+                    parcel2.writeBoolean(zClearCallingLog);
                     return true;
                 case 26:
                     ContextInfo contextInfo24 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean enableMMSCapture = enableMMSCapture(contextInfo24, readBoolean5);
+                    boolean zEnableMMSCapture = enableMMSCapture(contextInfo24, z5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableMMSCapture);
+                    parcel2.writeBoolean(zEnableMMSCapture);
                     return true;
                 case 27:
                     ContextInfo contextInfo25 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isMMSCaptureEnabled = isMMSCaptureEnabled(contextInfo25);
+                    boolean zIsMMSCaptureEnabled = isMMSCaptureEnabled(contextInfo25);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMMSCaptureEnabled);
+                    parcel2.writeBoolean(zIsMMSCaptureEnabled);
                     return true;
                 case 28:
                     ContextInfo contextInfo26 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -1730,17 +1727,17 @@ public interface IDeviceInfo extends IInterface {
                 case 30:
                     ContextInfo contextInfo28 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean clearMMSLog = clearMMSLog(contextInfo28);
+                    boolean zClearMMSLog = clearMMSLog(contextInfo28);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearMMSLog);
+                    parcel2.writeBoolean(zClearMMSLog);
                     return true;
                 case 31:
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    storeMMS(readString8, readString9, readString10, readBoolean6);
+                    storeMMS(string8, string9, string10, z6);
                     parcel2.writeNoException();
                     return true;
                 case 32:
@@ -1758,9 +1755,9 @@ public interface IDeviceInfo extends IInterface {
                     return true;
                 case 34:
                     ContextInfo contextInfo31 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean7 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean wifiStatisticEnabled = setWifiStatisticEnabled(contextInfo31, readBoolean7);
+                    boolean wifiStatisticEnabled = setWifiStatisticEnabled(contextInfo31, z7);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(wifiStatisticEnabled);
                     return true;
@@ -1773,9 +1770,9 @@ public interface IDeviceInfo extends IInterface {
                     return true;
                 case 36:
                     ContextInfo contextInfo33 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean dataCallStatisticsEnabled = setDataCallStatisticsEnabled(contextInfo33, readBoolean8);
+                    boolean dataCallStatisticsEnabled = setDataCallStatisticsEnabled(contextInfo33, z8);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dataCallStatisticsEnabled);
                     return true;
@@ -1822,9 +1819,9 @@ public interface IDeviceInfo extends IInterface {
                     return true;
                 case 43:
                     ContextInfo contextInfo40 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean dataUsageTimer = setDataUsageTimer(contextInfo40, readInt);
+                    boolean dataUsageTimer = setDataUsageTimer(contextInfo40, i3);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dataUsageTimer);
                     return true;
@@ -1837,9 +1834,9 @@ public interface IDeviceInfo extends IInterface {
                     return true;
                 case 45:
                     ContextInfo contextInfo42 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean9 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean dataCallLoggingEnabled = setDataCallLoggingEnabled(contextInfo42, readBoolean9);
+                    boolean dataCallLoggingEnabled = setDataCallLoggingEnabled(contextInfo42, z9);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dataCallLoggingEnabled);
                     return true;
@@ -1852,17 +1849,17 @@ public interface IDeviceInfo extends IInterface {
                     return true;
                 case 47:
                     ContextInfo contextInfo44 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean resetDataCallLogging = resetDataCallLogging(contextInfo44, readString11);
+                    boolean zResetDataCallLogging = resetDataCallLogging(contextInfo44, string11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(resetDataCallLogging);
+                    parcel2.writeBoolean(zResetDataCallLogging);
                     return true;
                 case 48:
                     ContextInfo contextInfo45 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString12 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> dataCallLog = getDataCallLog(contextInfo45, readString12);
+                    List<String> dataCallLog = getDataCallLog(contextInfo45, string12);
                     parcel2.writeNoException();
                     parcel2.writeStringList(dataCallLog);
                     return true;
@@ -1987,10 +1984,10 @@ public interface IDeviceInfo extends IInterface {
                     return true;
                 case 66:
                     ContextInfo contextInfo63 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    String readString13 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean knoxServiceId = setKnoxServiceId(contextInfo63, createStringArrayList, readString13);
+                    boolean knoxServiceId = setKnoxServiceId(contextInfo63, arrayListCreateStringArrayList, string13);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(knoxServiceId);
                     return true;
@@ -2019,7 +2016,6 @@ public interface IDeviceInfo extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IDeviceInfo {
         @Override // android.os.IInterface
         public IBinder asBinder() {

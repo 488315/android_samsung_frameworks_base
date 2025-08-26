@@ -10,11 +10,11 @@ public final class ParcelableColorSpace implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ParcelableColorSpace createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == -1) {
+            int i = parcel.readInt();
+            if (i == -1) {
                 return new ParcelableColorSpace(new ColorSpace.Rgb(parcel.readString(), parcel.createFloatArray(), parcel.createFloatArray(), new ColorSpace.Rgb.TransferParameters(parcel.readDouble(), parcel.readDouble(), parcel.readDouble(), parcel.readDouble(), parcel.readDouble(), parcel.readDouble(), parcel.readDouble())));
             }
-            return new ParcelableColorSpace(ColorSpace.get(readInt));
+            return new ParcelableColorSpace(ColorSpace.get(i));
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

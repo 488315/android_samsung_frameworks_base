@@ -21,7 +21,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SpecialEffectsController {
     public static final Companion Companion = new Companion(null);
@@ -32,7 +31,6 @@ public abstract class SpecialEffectsController {
     public final List pendingOperations = new ArrayList();
     public final List runningOperations = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,7 +40,6 @@ public abstract class SpecialEffectsController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FragmentStateManagerOperation extends Operation {
         public final FragmentStateManager fragmentStateManager;
 
@@ -70,40 +67,39 @@ public abstract class SpecialEffectsController {
             if (lifecycleImpact != lifecycleImpact2) {
                 if (lifecycleImpact == Operation.LifecycleImpact.REMOVING) {
                     Fragment fragment = fragmentStateManager.mFragment;
-                    View requireView = fragment.requireView();
+                    View viewRequireView = fragment.requireView();
                     if (FragmentManager.isLoggingEnabled(2)) {
-                        Objects.toString(requireView.findFocus());
-                        requireView.toString();
+                        Objects.toString(viewRequireView.findFocus());
+                        viewRequireView.toString();
                         fragment.toString();
                     }
-                    requireView.clearFocus();
+                    viewRequireView.clearFocus();
                     return;
                 }
                 return;
             }
             Fragment fragment2 = fragmentStateManager.mFragment;
-            View findFocus = fragment2.mView.findFocus();
-            if (findFocus != null) {
-                fragment2.ensureAnimationInfo().mFocusedView = findFocus;
+            View viewFindFocus = fragment2.mView.findFocus();
+            if (viewFindFocus != null) {
+                fragment2.ensureAnimationInfo().mFocusedView = viewFindFocus;
                 if (FragmentManager.isLoggingEnabled(2)) {
-                    findFocus.toString();
+                    viewFindFocus.toString();
                     fragment2.toString();
                 }
             }
-            View requireView2 = this.fragment.requireView();
-            if (requireView2.getParent() == null) {
+            View viewRequireView2 = this.fragment.requireView();
+            if (viewRequireView2.getParent() == null) {
                 fragmentStateManager.addViewToContainer();
-                requireView2.setAlpha(0.0f);
+                viewRequireView2.setAlpha(0.0f);
             }
-            if (requireView2.getAlpha() == 0.0f && requireView2.getVisibility() == 0) {
-                requireView2.setVisibility(4);
+            if (viewRequireView2.getAlpha() == 0.0f && viewRequireView2.getVisibility() == 0) {
+                viewRequireView2.setVisibility(4);
             }
             Fragment.AnimationInfo animationInfo = fragment2.mAnimationInfo;
-            requireView2.setAlpha(animationInfo == null ? 1.0f : animationInfo.mPostOnViewCreatedAlpha);
+            viewRequireView2.setAlpha(animationInfo == null ? 1.0f : animationInfo.mPostOnViewCreatedAlpha);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Operation {
         public final List _effects;
         public final List effects;
@@ -117,14 +113,12 @@ public abstract class SpecialEffectsController {
         public final List completionListeners = new ArrayList();
         public boolean isAwaitingContainerChanges = true;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum LifecycleImpact {
             NONE,
             ADDING,
             REMOVING
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public enum State {
             REMOVED,
             VISIBLE,
@@ -133,7 +127,6 @@ public abstract class SpecialEffectsController {
 
             public static final Companion Companion = new Companion(null);
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class Companion {
                 public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                     this();
@@ -160,7 +153,6 @@ public abstract class SpecialEffectsController {
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -233,7 +225,6 @@ public abstract class SpecialEffectsController {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -349,18 +340,17 @@ public abstract class SpecialEffectsController {
         }
 
         public final String toString() {
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Operation {", Integer.toHexString(System.identityHashCode(this)), "} {finalState = ");
-            m.append(this.finalState);
-            m.append(" lifecycleImpact = ");
-            m.append(this.lifecycleImpact);
-            m.append(" fragment = ");
-            m.append(this.fragment);
-            m.append('}');
-            return m.toString();
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Operation {", Integer.toHexString(System.identityHashCode(this)), "} {finalState = ");
+            sbM.append(this.finalState);
+            sbM.append(" lifecycleImpact = ");
+            sbM.append(this.lifecycleImpact);
+            sbM.append(" fragment = ");
+            sbM.append(this.fragment);
+            sbM.append('}');
+            return sbM.toString();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -467,13 +457,13 @@ public abstract class SpecialEffectsController {
     public final void enqueue(Operation.State state, Operation.LifecycleImpact lifecycleImpact, FragmentStateManager fragmentStateManager) {
         synchronized (this.pendingOperations) {
             try {
-                Operation findPendingOperation = findPendingOperation(fragmentStateManager.mFragment);
-                if (findPendingOperation == null) {
+                Operation operationFindPendingOperation = findPendingOperation(fragmentStateManager.mFragment);
+                if (operationFindPendingOperation == null) {
                     Fragment fragment = fragmentStateManager.mFragment;
-                    findPendingOperation = fragment.mTransitioning ? findRunningOperation(fragment) : null;
+                    operationFindPendingOperation = fragment.mTransitioning ? findRunningOperation(fragment) : null;
                 }
-                if (findPendingOperation != null) {
-                    findPendingOperation.mergeWith(state, lifecycleImpact);
+                if (operationFindPendingOperation != null) {
+                    operationFindPendingOperation.mergeWith(state, lifecycleImpact);
                     return;
                 }
                 final FragmentStateManagerOperation fragmentStateManagerOperation = new FragmentStateManagerOperation(state, lifecycleImpact, fragmentStateManager);
@@ -593,7 +583,7 @@ public abstract class SpecialEffectsController {
                     ((ArrayList) this.pendingOperations).clear();
                     ((ArrayList) this.runningOperations).addAll(arrayList2);
                     collectEffects(arrayList2, this.operationDirectionIsPop);
-                    boolean isOperationSeekable = isOperationSeekable(arrayList2);
+                    boolean zIsOperationSeekable = isOperationSeekable(arrayList2);
                     int size3 = arrayList2.size();
                     boolean z = true;
                     int i3 = 0;
@@ -604,11 +594,11 @@ public abstract class SpecialEffectsController {
                             z = false;
                         }
                     }
-                    this.runningNonSeekableTransition = z && !isOperationSeekable;
+                    this.runningNonSeekableTransition = z && !zIsOperationSeekable;
                     if (!z) {
                         processStart(arrayList2);
                         commitEffects$fragment_release(arrayList2);
-                    } else if (isOperationSeekable) {
+                    } else if (zIsOperationSeekable) {
                         processStart(arrayList2);
                         int size4 = arrayList2.size();
                         for (int i4 = 0; i4 < size4; i4++) {
@@ -665,7 +655,7 @@ public abstract class SpecialEffectsController {
     }
 
     public final void forceCompleteAllOperations() {
-        boolean isAttachedToWindow = this.container.isAttachedToWindow();
+        boolean zIsAttachedToWindow = this.container.isAttachedToWindow();
         synchronized (this.pendingOperations) {
             try {
                 updateFinalState();
@@ -686,7 +676,7 @@ public abstract class SpecialEffectsController {
                     i3++;
                     Operation operation = (Operation) obj2;
                     if (FragmentManager.isLoggingEnabled(2)) {
-                        if (!isAttachedToWindow) {
+                        if (!zIsAttachedToWindow) {
                             StringBuilder sb = new StringBuilder();
                             sb.append("Container ");
                             sb.append(this.container);
@@ -710,7 +700,7 @@ public abstract class SpecialEffectsController {
                     i++;
                     Operation operation2 = (Operation) obj4;
                     if (FragmentManager.isLoggingEnabled(2)) {
-                        if (!isAttachedToWindow) {
+                        if (!zIsAttachedToWindow) {
                             StringBuilder sb2 = new StringBuilder();
                             sb2.append("Container ");
                             sb2.append(this.container);
@@ -758,16 +748,15 @@ public abstract class SpecialEffectsController {
             i++;
             Operation operation = (Operation) obj;
             if (operation.lifecycleImpact == Operation.LifecycleImpact.ADDING) {
-                View requireView = operation.fragment.requireView();
+                View viewRequireView = operation.fragment.requireView();
                 Operation.State.Companion companion = Operation.State.Companion;
-                int visibility = requireView.getVisibility();
+                int visibility = viewRequireView.getVisibility();
                 companion.getClass();
                 operation.mergeWith(Operation.State.Companion.from(visibility), Operation.LifecycleImpact.NONE);
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Effect {
         public boolean isCancelled;
         public boolean isStarted;

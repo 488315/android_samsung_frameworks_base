@@ -44,9 +44,9 @@ public interface IVoidConsumer extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVoidConsumer.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVoidConsumer)) {
-                return (IVoidConsumer) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVoidConsumer.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVoidConsumer)) {
+                return (IVoidConsumer) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,12 +97,12 @@ public interface IVoidConsumer extends IInterface {
 
             @Override // com.android.internal.telephony.IVoidConsumer
             public void accept() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVoidConsumer.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVoidConsumer.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

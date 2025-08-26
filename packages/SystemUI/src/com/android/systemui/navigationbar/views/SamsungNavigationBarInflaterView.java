@@ -20,7 +20,6 @@ import com.android.systemui.navigationbar.views.buttons.ReverseLinearLayout;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SamsungNavigationBarInflaterView extends NavigationBarInflaterView {
     public final int displayId;
@@ -41,7 +40,6 @@ public final class SamsungNavigationBarInflaterView extends NavigationBarInflate
     public static final String taskStack = "task_stack";
     public static final String buttonSpace = "button_space";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -61,69 +59,69 @@ public final class SamsungNavigationBarInflaterView extends NavigationBarInflate
     }
 
     public final void addSidePadding(View view, boolean z) {
-        int intValue = ((Number) ((NavBarStoreImpl) this.navBarStore).handleEvent(this, new EventTypeFactory.EventType.GetNavBarSidePadding(z), this.displayId, 0)).intValue();
-        view.setPadding(intValue, 0, intValue, 0);
+        int iIntValue = ((Number) ((NavBarStoreImpl) this.navBarStore).handleEvent(this, new EventTypeFactory.EventType.GetNavBarSidePadding(z), this.displayId, 0)).intValue();
+        view.setPadding(iIntValue, 0, iIntValue, 0);
     }
 
     @Override // com.android.systemui.navigationbar.views.NavigationBarInflaterView
     public final View createView(String str, ViewGroup viewGroup, LayoutInflater layoutInflater) {
-        View createView;
-        Integer valueOf;
-        String extractButton = NavigationBarInflaterView.extractButton(str);
-        if ((!BasicRune.NAVBAR_MULTI_MODAL_ICON || (!Intrinsics.areEqual(extractButton, leftstr) && !Intrinsics.areEqual(extractButton, rightstr))) && (createView = super.createView(str, viewGroup, layoutInflater)) != null) {
-            return createView;
+        View viewCreateView;
+        Integer numValueOf;
+        String strExtractButton = NavigationBarInflaterView.extractButton(str);
+        if ((!BasicRune.NAVBAR_MULTI_MODAL_ICON || (!Intrinsics.areEqual(strExtractButton, leftstr) && !Intrinsics.areEqual(strExtractButton, rightstr))) && (viewCreateView = super.createView(str, viewGroup, layoutInflater)) != null) {
+            return viewCreateView;
         }
-        boolean canShowKeyboardButtonOnLeft = ((NavBarStateManagerImpl) this.navBarStateManager).canShowKeyboardButtonOnLeft();
-        boolean isGestureMode = ((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode();
-        boolean areEqual = Intrinsics.areEqual(extractButton, leftstr);
+        boolean zCanShowKeyboardButtonOnLeft = ((NavBarStateManagerImpl) this.navBarStateManager).canShowKeyboardButtonOnLeft();
+        boolean zIsGestureMode = ((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode();
+        boolean zAreEqual = Intrinsics.areEqual(strExtractButton, leftstr);
         int i = R.layout.contextual_a11y;
-        if (areEqual) {
-            if (isGestureMode && canShowKeyboardButtonOnLeft) {
+        if (zAreEqual) {
+            if (zIsGestureMode && zCanShowKeyboardButtonOnLeft) {
                 i = R.layout.ime_switcher;
-            } else if (isGestureMode && !canShowKeyboardButtonOnLeft) {
+            } else if (zIsGestureMode && !zCanShowKeyboardButtonOnLeft) {
                 i = R.layout.back;
-            } else if (!isGestureMode && canShowKeyboardButtonOnLeft) {
+            } else if (!zIsGestureMode && zCanShowKeyboardButtonOnLeft) {
                 i = R.layout.contextual_ime;
             }
-            valueOf = Integer.valueOf(i);
-        } else if (Intrinsics.areEqual(extractButton, rightstr)) {
-            if (isGestureMode && canShowKeyboardButtonOnLeft) {
+            numValueOf = Integer.valueOf(i);
+        } else if (Intrinsics.areEqual(strExtractButton, rightstr)) {
+            if (zIsGestureMode && zCanShowKeyboardButtonOnLeft) {
                 i = R.layout.back;
-            } else if (isGestureMode && !canShowKeyboardButtonOnLeft) {
+            } else if (zIsGestureMode && !zCanShowKeyboardButtonOnLeft) {
                 i = R.layout.ime_switcher;
-            } else if (isGestureMode || !canShowKeyboardButtonOnLeft) {
+            } else if (zIsGestureMode || !zCanShowKeyboardButtonOnLeft) {
                 i = R.layout.contextual_ime;
             }
-            valueOf = Integer.valueOf(i);
-        } else if (Intrinsics.areEqual(extractButton, leftGestureHint)) {
-            valueOf = Integer.valueOf(R.layout.hint_left);
-        } else if (Intrinsics.areEqual(extractButton, centerGestureHint)) {
-            valueOf = Integer.valueOf(R.layout.hint_center);
-        } else if (Intrinsics.areEqual(extractButton, rightGestureHint)) {
-            valueOf = Integer.valueOf(R.layout.hint_right);
-        } else if (Intrinsics.areEqual(extractButton, pin)) {
-            valueOf = Integer.valueOf(R.layout.navbar_pin);
-        } else if (Intrinsics.areEqual(extractButton, keymargin)) {
-            valueOf = Integer.valueOf(R.layout.navbar_key_distance);
-        } else if (Intrinsics.areEqual(extractButton, taskStack)) {
-            valueOf = Integer.valueOf(R.layout.navbar_task_stack);
-        } else if (Intrinsics.areEqual(extractButton, buttonSpace)) {
-            valueOf = Integer.valueOf(R.layout.navbar_key_distance);
+            numValueOf = Integer.valueOf(i);
+        } else if (Intrinsics.areEqual(strExtractButton, leftGestureHint)) {
+            numValueOf = Integer.valueOf(R.layout.hint_left);
+        } else if (Intrinsics.areEqual(strExtractButton, centerGestureHint)) {
+            numValueOf = Integer.valueOf(R.layout.hint_center);
+        } else if (Intrinsics.areEqual(strExtractButton, rightGestureHint)) {
+            numValueOf = Integer.valueOf(R.layout.hint_right);
+        } else if (Intrinsics.areEqual(strExtractButton, pin)) {
+            numValueOf = Integer.valueOf(R.layout.navbar_pin);
+        } else if (Intrinsics.areEqual(strExtractButton, keymargin)) {
+            numValueOf = Integer.valueOf(R.layout.navbar_key_distance);
+        } else if (Intrinsics.areEqual(strExtractButton, taskStack)) {
+            numValueOf = Integer.valueOf(R.layout.navbar_task_stack);
+        } else if (Intrinsics.areEqual(strExtractButton, buttonSpace)) {
+            numValueOf = Integer.valueOf(R.layout.navbar_key_distance);
         } else {
-            extractButton.getClass();
-            valueOf = extractButton.startsWith(navkey) ? Integer.valueOf(R.layout.navbar_custom) : null;
+            strExtractButton.getClass();
+            numValueOf = strExtractButton.startsWith(navkey) ? Integer.valueOf(R.layout.navbar_custom) : null;
         }
-        if (valueOf == null) {
+        if (numValueOf == null) {
             return null;
         }
-        View inflate = layoutInflater.inflate(valueOf.intValue(), viewGroup, false);
-        extractButton.getClass();
-        if (extractButton.startsWith(navkey)) {
-            KeyButtonView keyButtonView = (KeyButtonView) inflate;
-            keyButtonView.setId(Integer.parseInt(NavigationBarInflaterView.extractImage(extractButton)));
-            keyButtonView.mCode = NavigationBarInflaterView.extractKeycode(extractButton);
+        View viewInflate = layoutInflater.inflate(numValueOf.intValue(), viewGroup, false);
+        strExtractButton.getClass();
+        if (strExtractButton.startsWith(navkey)) {
+            KeyButtonView keyButtonView = (KeyButtonView) viewInflate;
+            keyButtonView.setId(Integer.parseInt(NavigationBarInflaterView.extractImage(strExtractButton)));
+            keyButtonView.mCode = NavigationBarInflaterView.extractKeycode(strExtractButton);
         }
-        return inflate;
+        return viewInflate;
     }
 
     @Override // com.android.systemui.navigationbar.views.NavigationBarInflaterView
@@ -132,31 +130,31 @@ public final class SamsungNavigationBarInflaterView extends NavigationBarInflate
     }
 
     @Override // com.android.systemui.navigationbar.views.NavigationBarInflaterView
-    public final void inflateButton(String str, ViewGroup viewGroup, boolean z, boolean z2) {
+    public final void inflateButton(String str, ViewGroup viewGroup, boolean z, boolean z2) throws NumberFormatException {
         LayoutInflater layoutInflater = z ? this.mLandscapeInflater : this.mLayoutInflater;
         layoutInflater.getClass();
-        View createView = createView(str, viewGroup, layoutInflater);
-        if (createView == null) {
+        View viewCreateView = createView(str, viewGroup, layoutInflater);
+        if (viewCreateView == null) {
             return;
         }
-        View applySize = applySize(createView, str, z, z2);
-        applySize.getLayoutParams().width = ((Number) ((NavBarStoreImpl) this.navBarStore).handleEvent(this, new EventTypeFactory.EventType.GetInflateButtonWidth(NavigationBarInflaterView.extractButton(str), z), this.displayId, Integer.valueOf(getContext().getResources().getDimensionPixelSize(R.dimen.navigation_key_width)))).intValue();
+        View viewApplySize = applySize(viewCreateView, str, z, z2);
+        viewApplySize.getLayoutParams().width = ((Number) ((NavBarStoreImpl) this.navBarStore).handleEvent(this, new EventTypeFactory.EventType.GetInflateButtonWidth(NavigationBarInflaterView.extractButton(str), z), this.displayId, Integer.valueOf(getContext().getResources().getDimensionPixelSize(R.dimen.navigation_key_width)))).intValue();
         if (viewGroup != null) {
-            viewGroup.addView(applySize);
+            viewGroup.addView(viewApplySize);
         }
-        addToDispatchers(applySize);
+        addToDispatchers(viewApplySize);
         View view = z ? this.mLastLandscape : this.mLastPortrait;
-        if (applySize instanceof ReverseLinearLayout.ReverseRelativeLayout) {
-            applySize = ((ReverseLinearLayout.ReverseRelativeLayout) applySize).getChildAt(0);
+        if (viewApplySize instanceof ReverseLinearLayout.ReverseRelativeLayout) {
+            viewApplySize = ((ReverseLinearLayout.ReverseRelativeLayout) viewApplySize).getChildAt(0);
         }
         if (view != null) {
-            applySize.getClass();
-            applySize.setAccessibilityTraversalAfter(view.getId());
+            viewApplySize.getClass();
+            viewApplySize.setAccessibilityTraversalAfter(view.getId());
         }
         if (z) {
-            this.mLastLandscape = applySize;
+            this.mLastLandscape = viewApplySize;
         } else {
-            this.mLastPortrait = applySize;
+            this.mLastPortrait = viewApplySize;
         }
     }
 
@@ -173,7 +171,7 @@ public final class SamsungNavigationBarInflaterView extends NavigationBarInflate
     }
 
     @Override // com.android.systemui.navigationbar.views.NavigationBarInflaterView
-    public final void inflateLayout(String str) {
+    public final void inflateLayout(String str) throws NumberFormatException {
         super.inflateLayout(str);
         if (BasicRune.NAVBAR_REMOTEVIEW) {
             if (this.mVertical.findViewById(R.id.nav_bar_widget) != null && this.mHorizontal.findViewById(R.id.nav_bar_widget) != null) {
@@ -216,27 +214,27 @@ public final class SamsungNavigationBarInflaterView extends NavigationBarInflate
 
     public final void inflateRemoteViewButtons(String str, ViewGroup viewGroup, boolean z) {
         LayoutInflater layoutInflater = z ? this.mLandscapeInflater : this.mLayoutInflater;
-        View inflate = Intrinsics.areEqual(leftRemoteView, str) ? layoutInflater.inflate(R.layout.navbar_remoteview_left, viewGroup, false) : Intrinsics.areEqual(rightRemoteView, str) ? layoutInflater.inflate(R.layout.navbar_remoteview_right, viewGroup, false) : null;
-        if (inflate != null) {
-            inflate.getLayoutParams().width = ((Number) ((NavBarStoreImpl) this.navBarStore).handleEvent(this, new EventTypeFactory.EventType.GetInflateButtonWidth(str, z), this.displayId, Integer.valueOf(getContext().getResources().getDimensionPixelSize(R.dimen.navigation_key_width)))).intValue();
-            viewGroup.addView(inflate);
+        View viewInflate = Intrinsics.areEqual(leftRemoteView, str) ? layoutInflater.inflate(R.layout.navbar_remoteview_left, viewGroup, false) : Intrinsics.areEqual(rightRemoteView, str) ? layoutInflater.inflate(R.layout.navbar_remoteview_right, viewGroup, false) : null;
+        if (viewInflate != null) {
+            viewInflate.getLayoutParams().width = ((Number) ((NavBarStoreImpl) this.navBarStore).handleEvent(this, new EventTypeFactory.EventType.GetInflateButtonWidth(str, z), this.displayId, Integer.valueOf(getContext().getResources().getDimensionPixelSize(R.dimen.navigation_key_width)))).intValue();
+            viewGroup.addView(viewInflate);
             View view = z ? this.mLastLandscape : this.mLastPortrait;
-            if (inflate instanceof ReverseLinearLayout.ReverseRelativeLayout) {
-                inflate = ((ReverseLinearLayout.ReverseRelativeLayout) inflate).getChildAt(0);
+            if (viewInflate instanceof ReverseLinearLayout.ReverseRelativeLayout) {
+                viewInflate = ((ReverseLinearLayout.ReverseRelativeLayout) viewInflate).getChildAt(0);
             }
             if (view != null) {
-                inflate.setAccessibilityTraversalAfter(view.getId());
+                viewInflate.setAccessibilityTraversalAfter(view.getId());
             }
             if (z) {
-                this.mLastLandscape = inflate;
+                this.mLastLandscape = viewInflate;
             } else {
-                this.mLastPortrait = inflate;
+                this.mLastPortrait = viewInflate;
             }
         }
     }
 
     @Override // com.android.systemui.navigationbar.views.NavigationBarInflaterView
-    public final void updateLayoutProviderView() {
+    public final void updateLayoutProviderView() throws NumberFormatException {
         inflateChildren();
         if (getParent() instanceof NavigationBarView) {
             ((NavigationBarView) getParent()).updateOrientationViews();

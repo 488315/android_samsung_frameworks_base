@@ -98,9 +98,9 @@ public interface IVoiceInteractionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVoiceInteractionService)) {
-                return (IVoiceInteractionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVoiceInteractionService)) {
+                return (IVoiceInteractionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -156,16 +156,16 @@ public interface IVoiceInteractionService extends IInterface {
                     launchVoiceAssistFromKeyguard();
                     return true;
                 case 5:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    IVoiceActionCheckCallback asInterface = IVoiceActionCheckCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    IVoiceActionCheckCallback iVoiceActionCheckCallbackAsInterface = IVoiceActionCheckCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getActiveServiceSupportedActions(createStringArrayList, asInterface);
+                    getActiveServiceSupportedActions(arrayListCreateStringArrayList, iVoiceActionCheckCallbackAsInterface);
                     return true;
                 case 6:
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    prepareToShowSession(bundle, readInt);
+                    prepareToShowSession(bundle, i3);
                     return true;
                 case 7:
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
@@ -173,10 +173,10 @@ public interface IVoiceInteractionService extends IInterface {
                     showSessionFailed(bundle2);
                     return true;
                 case 8:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt2 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    detectorRemoteExceptionOccurred(readStrongBinder, readInt2);
+                    detectorRemoteExceptionOccurred(strongBinder, i4);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -201,96 +201,96 @@ public interface IVoiceInteractionService extends IInterface {
 
             @Override // android.service.voice.IVoiceInteractionService
             public void ready() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IVoiceInteractionService
             public void soundModelsChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IVoiceInteractionService
             public void shutdown() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IVoiceInteractionService
             public void launchVoiceAssistFromKeyguard() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IVoiceInteractionService
             public void getActiveServiceSupportedActions(List<String> list, IVoiceActionCheckCallback iVoiceActionCheckCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iVoiceActionCheckCallback);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iVoiceActionCheckCallback);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IVoiceInteractionService
             public void prepareToShowSession(Bundle bundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IVoiceInteractionService
             public void showSessionFailed(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IVoiceInteractionService
             public void detectorRemoteExceptionOccurred(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

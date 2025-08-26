@@ -23,7 +23,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class SmartMirroringClient$registerClient$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -113,27 +112,27 @@ final class SmartMirroringClient$registerClient$1 extends SuspendLambda implemen
                             break;
                     }
                     Map map = linkedHashMap;
-                    ProducerScope producerScope2 = ProducerScope.this;
+                    ProducerScope producerScope2 = producerScope;
                     BuildersKt.launch$default(producerScope2, null, null, new SmartMirroringClient$registerClient$1$clientMessenger$1$handleMessage$10(producerScope2, map, null), 3);
                 }
             });
-            Message obtain = Message.obtain((Handler) null, 1);
-            obtain.replyTo = messenger;
+            Message messageObtain = Message.obtain((Handler) null, 1);
+            messageObtain.replyTo = messenger;
             Messenger messenger2 = this.this$0.service;
             if (messenger2 != null) {
                 try {
                     int i2 = Result.$r8$clinit;
-                    messenger2.send(obtain);
+                    messenger2.send(messageObtain);
                     failure = Unit.INSTANCE;
                 } catch (Throwable th) {
                     int i3 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-                if (m3422exceptionOrNullimpl != null) {
-                    m3422exceptionOrNullimpl.printStackTrace();
+                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                if (thM3442exceptionOrNullimpl != null) {
+                    thM3442exceptionOrNullimpl.printStackTrace();
                 }
-                Result.m3421boximpl(failure);
+                Result.m3441boximpl(failure);
             }
             final SmartMirroringClient smartMirroringClient = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.SmartMirroringClient$registerClient$1$$ExternalSyntheticLambda0
@@ -142,23 +141,23 @@ final class SmartMirroringClient$registerClient$1 extends SuspendLambda implemen
                     Object failure2;
                     Messenger messenger3 = messenger;
                     Log.d("SmartMirroringClient", "unregister client");
-                    Message obtain2 = Message.obtain((Handler) null, 2);
-                    obtain2.replyTo = messenger3;
+                    Message messageObtain2 = Message.obtain((Handler) null, 2);
+                    messageObtain2.replyTo = messenger3;
                     Messenger messenger4 = smartMirroringClient.service;
                     if (messenger4 != null) {
                         try {
                             int i4 = Result.$r8$clinit;
-                            messenger4.send(obtain2);
+                            messenger4.send(messageObtain2);
                             failure2 = Unit.INSTANCE;
                         } catch (Throwable th2) {
                             int i5 = Result.$r8$clinit;
                             failure2 = new Result.Failure(th2);
                         }
-                        Throwable m3422exceptionOrNullimpl2 = Result.m3422exceptionOrNullimpl(failure2);
-                        if (m3422exceptionOrNullimpl2 != null) {
-                            m3422exceptionOrNullimpl2.printStackTrace();
+                        Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(failure2);
+                        if (thM3442exceptionOrNullimpl2 != null) {
+                            thM3442exceptionOrNullimpl2.printStackTrace();
                         }
-                        Result.m3421boximpl(failure2);
+                        Result.m3441boximpl(failure2);
                     }
                     return Unit.INSTANCE;
                 }

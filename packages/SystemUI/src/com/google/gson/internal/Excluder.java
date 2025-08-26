@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Excluder implements TypeAdapterFactory, Cloneable {
     public static final Excluder DEFAULT = new Excluder();
@@ -83,9 +82,9 @@ public final class Excluder implements TypeAdapterFactory, Cloneable {
     @Override // com.google.gson.TypeAdapterFactory
     public <T> TypeAdapter<T> create(final Gson gson, final TypeToken<T> typeToken) {
         Class<? super T> rawType = typeToken.getRawType();
-        boolean excludeClassChecks = excludeClassChecks(rawType);
-        final boolean z = excludeClassChecks || excludeClassInStrategy(rawType, true);
-        final boolean z2 = excludeClassChecks || excludeClassInStrategy(rawType, false);
+        boolean zExcludeClassChecks = excludeClassChecks(rawType);
+        final boolean z = zExcludeClassChecks || excludeClassInStrategy(rawType, true);
+        final boolean z2 = zExcludeClassChecks || excludeClassInStrategy(rawType, false);
         if (z || z2) {
             return (TypeAdapter<T>) new TypeAdapter<Object>() { // from class: com.google.gson.internal.Excluder.1
                 private TypeAdapter<Object> delegate;
@@ -124,9 +123,9 @@ public final class Excluder implements TypeAdapterFactory, Cloneable {
     }
 
     public Excluder disableInnerClassSerialization() {
-        Excluder m3268clone = m3268clone();
-        m3268clone.serializeInnerClasses = false;
-        return m3268clone;
+        Excluder excluderM3286clone = m3286clone();
+        excluderM3286clone.serializeInnerClasses = false;
+        return excluderM3286clone;
     }
 
     public boolean excludeClass(Class<?> cls, boolean z) {
@@ -162,43 +161,43 @@ public final class Excluder implements TypeAdapterFactory, Cloneable {
     }
 
     public Excluder excludeFieldsWithoutExposeAnnotation() {
-        Excluder m3268clone = m3268clone();
-        m3268clone.requireExpose = true;
-        return m3268clone;
+        Excluder excluderM3286clone = m3286clone();
+        excluderM3286clone.requireExpose = true;
+        return excluderM3286clone;
     }
 
     public Excluder withExclusionStrategy(ExclusionStrategy exclusionStrategy, boolean z, boolean z2) {
-        Excluder m3268clone = m3268clone();
+        Excluder excluderM3286clone = m3286clone();
         if (z) {
             ArrayList arrayList = new ArrayList(this.serializationStrategies);
-            m3268clone.serializationStrategies = arrayList;
+            excluderM3286clone.serializationStrategies = arrayList;
             arrayList.add(exclusionStrategy);
         }
         if (z2) {
             ArrayList arrayList2 = new ArrayList(this.deserializationStrategies);
-            m3268clone.deserializationStrategies = arrayList2;
+            excluderM3286clone.deserializationStrategies = arrayList2;
             arrayList2.add(exclusionStrategy);
         }
-        return m3268clone;
+        return excluderM3286clone;
     }
 
     public Excluder withModifiers(int... iArr) {
-        Excluder m3268clone = m3268clone();
-        m3268clone.modifiers = 0;
+        Excluder excluderM3286clone = m3286clone();
+        excluderM3286clone.modifiers = 0;
         for (int i : iArr) {
-            m3268clone.modifiers = i | m3268clone.modifiers;
+            excluderM3286clone.modifiers = i | excluderM3286clone.modifiers;
         }
-        return m3268clone;
+        return excluderM3286clone;
     }
 
     public Excluder withVersion(double d) {
-        Excluder m3268clone = m3268clone();
-        m3268clone.version = d;
-        return m3268clone;
+        Excluder excluderM3286clone = m3286clone();
+        excluderM3286clone.version = d;
+        return excluderM3286clone;
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public Excluder m3268clone() {
+    public Excluder m3286clone() {
         try {
             return (Excluder) super.clone();
         } catch (CloneNotSupportedException e) {

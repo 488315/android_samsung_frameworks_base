@@ -86,9 +86,9 @@ public interface ICompatChangeableManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICompatChangeableManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICompatChangeableManager)) {
-                return (ICompatChangeableManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICompatChangeableManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICompatChangeableManager)) {
+                return (ICompatChangeableManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -134,35 +134,35 @@ public interface ICompatChangeableManager extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeStringList(compatChangeablePackageNameList);
             } else if (i == 3) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int uid = getUid(readString);
+                int uid = getUid(string);
                 parcel2.writeNoException();
                 parcel2.writeInt(uid);
             } else if (i == 4) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean hasLauncherActivity = hasLauncherActivity(readString2);
+                boolean zHasLauncherActivity = hasLauncherActivity(string2);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(hasLauncherActivity);
+                parcel2.writeBoolean(zHasLauncherActivity);
             } else if (i == 5) {
-                String readString3 = parcel.readString();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean hasGameCategory = hasGameCategory(readString3);
+                boolean zHasGameCategory = hasGameCategory(string3);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(hasGameCategory);
+                parcel2.writeBoolean(zHasGameCategory);
             } else if (i == 101) {
-                String readString4 = parcel.readString();
+                String string4 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean isOrientationOverrideDisallowed = isOrientationOverrideDisallowed(readString4);
+                boolean zIsOrientationOverrideDisallowed = isOrientationOverrideDisallowed(string4);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isOrientationOverrideDisallowed);
+                parcel2.writeBoolean(zIsOrientationOverrideDisallowed);
             } else if (i == 102) {
-                String readString5 = parcel.readString();
+                String string5 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean isMinAspectRatioOverrideDisallowed = isMinAspectRatioOverrideDisallowed(readString5);
+                boolean zIsMinAspectRatioOverrideDisallowed = isMinAspectRatioOverrideDisallowed(string5);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isMinAspectRatioOverrideDisallowed);
+                parcel2.writeBoolean(zIsMinAspectRatioOverrideDisallowed);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -187,96 +187,96 @@ public interface ICompatChangeableManager extends IInterface {
 
             @Override // com.samsung.android.core.ICompatChangeableManager
             public List<String> getCompatChangeablePackageNameList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.ICompatChangeableManager
             public int getUid(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.ICompatChangeableManager
             public boolean hasLauncherActivity(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.ICompatChangeableManager
             public boolean hasGameCategory(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.ICompatChangeableManager
             public boolean isOrientationOverrideDisallowed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(101, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(101, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.ICompatChangeableManager
             public boolean isMinAspectRatioOverrideDisallowed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(102, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ICompatChangeableManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(102, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

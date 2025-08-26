@@ -11,7 +11,9 @@ import android.renderscript.Element;
 import android.renderscript.Type;
 import android.util.Log;
 import android.view.Surface;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
@@ -180,7 +182,7 @@ public class Allocation extends BaseObj {
         this.mBitmap = bitmap;
     }
 
-    Allocation(long j, RenderScript renderScript, Type type, int i) {
+    Allocation(long j, RenderScript renderScript, Type type, int i) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         super(j, renderScript);
         this.mOwningType = false;
         this.mTimeStamp = -1L;
@@ -279,9 +281,9 @@ public class Allocation extends BaseObj {
     @Override // android.renderscript.BaseObj
     void updateFromNative() {
         super.updateFromNative();
-        long nAllocationGetType = this.mRS.nAllocationGetType(getID(this.mRS));
-        if (nAllocationGetType != 0) {
-            Type type = new Type(nAllocationGetType, this.mRS);
+        long jNAllocationGetType = this.mRS.nAllocationGetType(getID(this.mRS));
+        if (jNAllocationGetType != 0) {
+            Type type = new Type(jNAllocationGetType, this.mRS);
             this.mType = type;
             type.updateFromNative();
             updateCacheInfo(this.mType);
@@ -511,9 +513,9 @@ public class Allocation extends BaseObj {
             Trace.traceBegin(32768L, "copyFrom");
             this.mRS.validate();
             if (bitmap.getConfig() == null) {
-                Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                new Canvas(createBitmap).drawBitmap(bitmap, 0.0f, 0.0f, (Paint) null);
-                copyFrom(createBitmap);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+                new Canvas(bitmapCreateBitmap).drawBitmap(bitmap, 0.0f, 0.0f, (Paint) null);
+                copyFrom(bitmapCreateBitmap);
             } else {
                 validateBitmapSize(bitmap);
                 validateBitmapFormat(bitmap);
@@ -754,9 +756,9 @@ public class Allocation extends BaseObj {
             Trace.traceBegin(32768L, "copy2DRangeFrom");
             this.mRS.validate();
             if (bitmap.getConfig() == null) {
-                Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                new Canvas(createBitmap).drawBitmap(bitmap, 0.0f, 0.0f, (Paint) null);
-                copy2DRangeFrom(i, i2, createBitmap);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+                new Canvas(bitmapCreateBitmap).drawBitmap(bitmap, 0.0f, 0.0f, (Paint) null);
+                copy2DRangeFrom(i, i2, bitmapCreateBitmap);
             } else {
                 validateBitmapFormat(bitmap);
                 validate2DRange(i, i2, bitmap.getWidth(), bitmap.getHeight());
@@ -911,9 +913,9 @@ public class Allocation extends BaseObj {
         }
         this.mRS.nAllocationResize1D(getID(this.mRS), i);
         this.mRS.finish();
-        long nAllocationGetType = this.mRS.nAllocationGetType(getID(this.mRS));
+        long jNAllocationGetType = this.mRS.nAllocationGetType(getID(this.mRS));
         this.mType.setID(0L);
-        Type type = new Type(nAllocationGetType, this.mRS);
+        Type type = new Type(jNAllocationGetType, this.mRS);
         this.mType = type;
         type.updateFromNative();
         updateCacheInfo(this.mType);
@@ -1066,11 +1068,11 @@ public class Allocation extends BaseObj {
             if (type.getID(renderScript) == 0) {
                 throw new RSInvalidStateException("Bad Type");
             }
-            long nAllocationCreateTyped = renderScript.nAllocationCreateTyped(type.getID(renderScript), mipmapControl.mID, i, 0L);
-            if (nAllocationCreateTyped == 0) {
+            long jNAllocationCreateTyped = renderScript.nAllocationCreateTyped(type.getID(renderScript), mipmapControl.mID, i, 0L);
+            if (jNAllocationCreateTyped == 0) {
                 throw new RSRuntimeException("Allocation creation failed.");
             }
-            return new Allocation(nAllocationCreateTyped, renderScript, type, false, i, mipmapControl);
+            return new Allocation(jNAllocationCreateTyped, renderScript, type, false, i, mipmapControl);
         } finally {
             Trace.traceEnd(32768L);
         }
@@ -1090,12 +1092,12 @@ public class Allocation extends BaseObj {
             renderScript.validate();
             Type.Builder builder = new Type.Builder(renderScript, element);
             builder.setX(i);
-            Type create = builder.create();
-            long nAllocationCreateTyped = renderScript.nAllocationCreateTyped(create.getID(renderScript), MipmapControl.MIPMAP_NONE.mID, i2, 0L);
-            if (nAllocationCreateTyped == 0) {
+            Type typeCreate = builder.create();
+            long jNAllocationCreateTyped = renderScript.nAllocationCreateTyped(typeCreate.getID(renderScript), MipmapControl.MIPMAP_NONE.mID, i2, 0L);
+            if (jNAllocationCreateTyped == 0) {
                 throw new RSRuntimeException("Allocation creation failed.");
             }
-            return new Allocation(nAllocationCreateTyped, renderScript, create, true, i2, MipmapControl.MIPMAP_NONE);
+            return new Allocation(jNAllocationCreateTyped, renderScript, typeCreate, true, i2, MipmapControl.MIPMAP_NONE);
         } finally {
             Trace.traceEnd(32768L);
         }
@@ -1138,23 +1140,23 @@ public class Allocation extends BaseObj {
                 if ((i & 128) != 0) {
                     throw new RSIllegalArgumentException("USAGE_SHARED cannot be used with a Bitmap that has a null config.");
                 }
-                Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                new Canvas(createBitmap).drawBitmap(bitmap, 0.0f, 0.0f, (Paint) null);
-                return createFromBitmap(renderScript, createBitmap, mipmapControl, i);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+                new Canvas(bitmapCreateBitmap).drawBitmap(bitmap, 0.0f, 0.0f, (Paint) null);
+                return createFromBitmap(renderScript, bitmapCreateBitmap, mipmapControl, i);
             }
-            Type typeFromBitmap = typeFromBitmap(renderScript, bitmap, mipmapControl);
-            if (mipmapControl != MipmapControl.MIPMAP_NONE || !typeFromBitmap.getElement().isCompatible(Element.RGBA_8888(renderScript)) || i != 131) {
-                long nAllocationCreateFromBitmap = renderScript.nAllocationCreateFromBitmap(typeFromBitmap.getID(renderScript), mipmapControl.mID, bitmap, i);
-                if (nAllocationCreateFromBitmap != 0) {
-                    return new Allocation(nAllocationCreateFromBitmap, renderScript, typeFromBitmap, true, i, mipmapControl);
+            Type typeTypeFromBitmap = typeFromBitmap(renderScript, bitmap, mipmapControl);
+            if (mipmapControl != MipmapControl.MIPMAP_NONE || !typeTypeFromBitmap.getElement().isCompatible(Element.RGBA_8888(renderScript)) || i != 131) {
+                long jNAllocationCreateFromBitmap = renderScript.nAllocationCreateFromBitmap(typeTypeFromBitmap.getID(renderScript), mipmapControl.mID, bitmap, i);
+                if (jNAllocationCreateFromBitmap != 0) {
+                    return new Allocation(jNAllocationCreateFromBitmap, renderScript, typeTypeFromBitmap, true, i, mipmapControl);
                 }
                 throw new RSRuntimeException("Load failed.");
             }
-            long nAllocationCreateBitmapBackedAllocation = renderScript.nAllocationCreateBitmapBackedAllocation(typeFromBitmap.getID(renderScript), mipmapControl.mID, bitmap, i);
-            if (nAllocationCreateBitmapBackedAllocation == 0) {
+            long jNAllocationCreateBitmapBackedAllocation = renderScript.nAllocationCreateBitmapBackedAllocation(typeTypeFromBitmap.getID(renderScript), mipmapControl.mID, bitmap, i);
+            if (jNAllocationCreateBitmapBackedAllocation == 0) {
                 throw new RSRuntimeException("Load failed.");
             }
-            Allocation allocation = new Allocation(nAllocationCreateBitmapBackedAllocation, renderScript, typeFromBitmap, true, i, mipmapControl);
+            Allocation allocation = new Allocation(jNAllocationCreateBitmapBackedAllocation, renderScript, typeTypeFromBitmap, true, i, mipmapControl);
             allocation.setBitmap(bitmap);
             return allocation;
         } finally {
@@ -1188,14 +1190,14 @@ public class Allocation extends BaseObj {
                 throw new RSInvalidStateException("Bad Type");
             }
             Allocation[] allocationArr = new Allocation[i2];
-            Allocation createTyped = createTyped(renderScript, type, i);
-            allocationArr[0] = createTyped;
+            Allocation allocationCreateTyped = createTyped(renderScript, type, i);
+            allocationArr[0] = allocationCreateTyped;
             if ((i & 32) != 0) {
                 if (i2 > 16) {
-                    createTyped.destroy();
+                    allocationCreateTyped.destroy();
                     throw new RSIllegalArgumentException("Exceeds the max number of Allocations allowed: 16");
                 }
-                createTyped.setupBufferQueue(i2);
+                allocationCreateTyped.setupBufferQueue(i2);
             }
             for (int i3 = 1; i3 < i2; i3++) {
                 allocationArr[i3] = createFromAllocation(renderScript, allocationArr[0]);
@@ -1216,11 +1218,11 @@ public class Allocation extends BaseObj {
             Type type = allocation.getType();
             int usage = allocation.getUsage();
             MipmapControl mipmap = allocation.getMipmap();
-            long nAllocationCreateTyped = renderScript.nAllocationCreateTyped(type.getID(renderScript), mipmap.mID, usage, 0L);
-            if (nAllocationCreateTyped == 0) {
+            long jNAllocationCreateTyped = renderScript.nAllocationCreateTyped(type.getID(renderScript), mipmap.mID, usage, 0L);
+            if (jNAllocationCreateTyped == 0) {
                 throw new RSRuntimeException("Allocation creation failed.");
             }
-            Allocation allocation2 = new Allocation(nAllocationCreateTyped, renderScript, type, false, usage, mipmap);
+            Allocation allocation2 = new Allocation(jNAllocationCreateTyped, renderScript, type, false, usage, mipmap);
             if ((usage & 32) != 0) {
                 allocation2.shareBufferQueue(allocation);
             }
@@ -1296,18 +1298,18 @@ public class Allocation extends BaseObj {
         if (((height - 1) & height) != 0) {
             throw new RSIllegalArgumentException("Only power of 2 cube faces supported");
         }
-        Element elementFromBitmap = elementFromBitmap(renderScript, bitmap);
-        Type.Builder builder = new Type.Builder(renderScript, elementFromBitmap);
+        Element elementElementFromBitmap = elementFromBitmap(renderScript, bitmap);
+        Type.Builder builder = new Type.Builder(renderScript, elementElementFromBitmap);
         builder.setX(height);
         builder.setY(height);
         builder.setFaces(true);
         builder.setMipmaps(mipmapControl == MipmapControl.MIPMAP_FULL);
-        Type create = builder.create();
-        long nAllocationCubeCreateFromBitmap = renderScript.nAllocationCubeCreateFromBitmap(create.getID(renderScript), mipmapControl.mID, bitmap, i);
-        if (nAllocationCubeCreateFromBitmap == 0) {
-            throw new RSRuntimeException("Load failed for bitmap " + bitmap + " element " + elementFromBitmap);
+        Type typeCreate = builder.create();
+        long jNAllocationCubeCreateFromBitmap = renderScript.nAllocationCubeCreateFromBitmap(typeCreate.getID(renderScript), mipmapControl.mID, bitmap, i);
+        if (jNAllocationCubeCreateFromBitmap == 0) {
+            throw new RSRuntimeException("Load failed for bitmap " + bitmap + " element " + elementElementFromBitmap);
         }
-        return new Allocation(nAllocationCubeCreateFromBitmap, renderScript, create, true, i, mipmapControl);
+        return new Allocation(jNAllocationCubeCreateFromBitmap, renderScript, typeCreate, true, i, mipmapControl);
     }
 
     public static Allocation createCubemapFromBitmap(RenderScript renderScript, Bitmap bitmap) {
@@ -1327,21 +1329,21 @@ public class Allocation extends BaseObj {
         builder.setY(height);
         builder.setFaces(true);
         builder.setMipmaps(mipmapControl == MipmapControl.MIPMAP_FULL);
-        Allocation createTyped = createTyped(renderScript, builder.create(), mipmapControl, i);
-        AllocationAdapter create2D = AllocationAdapter.create2D(renderScript, createTyped);
-        create2D.setFace(Type.CubemapFace.POSITIVE_X);
-        create2D.copyFrom(bitmap);
-        create2D.setFace(Type.CubemapFace.NEGATIVE_X);
-        create2D.copyFrom(bitmap2);
-        create2D.setFace(Type.CubemapFace.POSITIVE_Y);
-        create2D.copyFrom(bitmap3);
-        create2D.setFace(Type.CubemapFace.NEGATIVE_Y);
-        create2D.copyFrom(bitmap4);
-        create2D.setFace(Type.CubemapFace.POSITIVE_Z);
-        create2D.copyFrom(bitmap5);
-        create2D.setFace(Type.CubemapFace.NEGATIVE_Z);
-        create2D.copyFrom(bitmap6);
-        return createTyped;
+        Allocation allocationCreateTyped = createTyped(renderScript, builder.create(), mipmapControl, i);
+        AllocationAdapter allocationAdapterCreate2D = AllocationAdapter.create2D(renderScript, allocationCreateTyped);
+        allocationAdapterCreate2D.setFace(Type.CubemapFace.POSITIVE_X);
+        allocationAdapterCreate2D.copyFrom(bitmap);
+        allocationAdapterCreate2D.setFace(Type.CubemapFace.NEGATIVE_X);
+        allocationAdapterCreate2D.copyFrom(bitmap2);
+        allocationAdapterCreate2D.setFace(Type.CubemapFace.POSITIVE_Y);
+        allocationAdapterCreate2D.copyFrom(bitmap3);
+        allocationAdapterCreate2D.setFace(Type.CubemapFace.NEGATIVE_Y);
+        allocationAdapterCreate2D.copyFrom(bitmap4);
+        allocationAdapterCreate2D.setFace(Type.CubemapFace.POSITIVE_Z);
+        allocationAdapterCreate2D.copyFrom(bitmap5);
+        allocationAdapterCreate2D.setFace(Type.CubemapFace.NEGATIVE_Z);
+        allocationAdapterCreate2D.copyFrom(bitmap6);
+        return allocationCreateTyped;
     }
 
     public static Allocation createCubemapFromCubeFaces(RenderScript renderScript, Bitmap bitmap, Bitmap bitmap2, Bitmap bitmap3, Bitmap bitmap4, Bitmap bitmap5, Bitmap bitmap6) {
@@ -1353,10 +1355,10 @@ public class Allocation extends BaseObj {
         if ((i2 & 224) != 0) {
             throw new RSIllegalArgumentException("Unsupported usage specified.");
         }
-        Bitmap decodeResource = BitmapFactory.decodeResource(resources, i);
-        Allocation createFromBitmap = createFromBitmap(renderScript, decodeResource, mipmapControl, i2);
-        decodeResource.recycle();
-        return createFromBitmap;
+        Bitmap bitmapDecodeResource = BitmapFactory.decodeResource(resources, i);
+        Allocation allocationCreateFromBitmap = createFromBitmap(renderScript, bitmapDecodeResource, mipmapControl, i2);
+        bitmapDecodeResource.recycle();
+        return allocationCreateFromBitmap;
     }
 
     public static Allocation createFromBitmapResource(RenderScript renderScript, Resources resources, int i) {
@@ -1366,13 +1368,13 @@ public class Allocation extends BaseObj {
         return createFromBitmapResource(renderScript, resources, i, MipmapControl.MIPMAP_NONE, 2);
     }
 
-    public static Allocation createFromString(RenderScript renderScript, String str, int i) {
+    public static Allocation createFromString(RenderScript renderScript, String str, int i) throws UnsupportedEncodingException {
         renderScript.validate();
         try {
             byte[] bytes = str.getBytes("UTF-8");
-            Allocation createSized = createSized(renderScript, Element.U8(renderScript), bytes.length, i);
-            createSized.copyFrom(bytes);
-            return createSized;
+            Allocation allocationCreateSized = createSized(renderScript, Element.U8(renderScript), bytes.length, i);
+            allocationCreateSized.copyFrom(bytes);
+            return allocationCreateSized;
         } catch (Exception unused) {
             throw new RSRuntimeException("Could not convert string to utf-8.");
         }

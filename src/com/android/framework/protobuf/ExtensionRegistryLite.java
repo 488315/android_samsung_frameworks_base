@@ -1,6 +1,7 @@
 package com.android.framework.protobuf;
 
 import com.android.framework.protobuf.GeneratedMessageLite;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,23 +46,23 @@ public class ExtensionRegistryLite {
     }
 
     public static ExtensionRegistryLite getEmptyRegistry() {
-        ExtensionRegistryLite extensionRegistryLite;
-        ExtensionRegistryLite extensionRegistryLite2 = emptyRegistry;
-        if (extensionRegistryLite2 != null) {
-            return extensionRegistryLite2;
+        ExtensionRegistryLite extensionRegistryLiteCreateEmpty;
+        ExtensionRegistryLite extensionRegistryLite = emptyRegistry;
+        if (extensionRegistryLite != null) {
+            return extensionRegistryLite;
         }
         synchronized (ExtensionRegistryLite.class) {
-            extensionRegistryLite = emptyRegistry;
-            if (extensionRegistryLite == null) {
+            extensionRegistryLiteCreateEmpty = emptyRegistry;
+            if (extensionRegistryLiteCreateEmpty == null) {
                 if (doFullRuntimeInheritanceCheck) {
-                    extensionRegistryLite = ExtensionRegistryFactory.createEmpty();
+                    extensionRegistryLiteCreateEmpty = ExtensionRegistryFactory.createEmpty();
                 } else {
-                    extensionRegistryLite = EMPTY_REGISTRY_LITE;
+                    extensionRegistryLiteCreateEmpty = EMPTY_REGISTRY_LITE;
                 }
-                emptyRegistry = extensionRegistryLite;
+                emptyRegistry = extensionRegistryLiteCreateEmpty;
             }
         }
-        return extensionRegistryLite;
+        return extensionRegistryLiteCreateEmpty;
     }
 
     public ExtensionRegistryLite getUnmodifiable() {
@@ -76,7 +77,7 @@ public class ExtensionRegistryLite {
         this.extensionsByNumber.put(new ObjectIntPair(generatedExtension.getContainingTypeDefaultInstance(), generatedExtension.getNumber()), generatedExtension);
     }
 
-    public final void add(ExtensionLite<?, ?> extensionLite) {
+    public final void add(ExtensionLite<?, ?> extensionLite) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (GeneratedMessageLite.GeneratedExtension.class.isAssignableFrom(extensionLite.getClass())) {
             add((GeneratedMessageLite.GeneratedExtension<?, ?>) extensionLite);
         }

@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DisplayLifecycle extends SecLifecycle implements Dumpable {
     public final AnonymousClass1 mDisplayListener;
@@ -51,9 +50,13 @@ public class DisplayLifecycle extends SecLifecycle implements Dumpable {
                 displayLifecycle.mHandler.post(new DisplayLifecycle$$ExternalSyntheticLambda4(displayLifecycle, i, 0));
             }
 
+            /* JADX WARN: Removed duplicated region for block: B:7:0x0031  */
             @Override // android.hardware.display.DisplayManager.DisplayListener
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final void onDisplayChanged(int i) {
-                Boolean valueOf;
+                Boolean boolValueOf;
                 DisplayLifecycle displayLifecycle = DisplayLifecycle.this;
                 displayLifecycle.getClass();
                 android.util.Log.d("DisplayLifecycle", "updateDisplay id = " + i);
@@ -61,17 +64,14 @@ public class DisplayLifecycle extends SecLifecycle implements Dumpable {
                     displayLifecycle.addDisplay(i);
                     if (displayLifecycle.getDisplay(i) == null) {
                         android.util.Log.e("DisplayLifecycle", "updateDisplay return - display is null");
-                        valueOf = Boolean.FALSE;
-                        if (!valueOf.booleanValue() || ((DesktopManager) Dependency.sDependency.getDependencyInner(DesktopManager.class)).isDesktopBarConnected()) {
-                            displayLifecycle.mHandler.post(new DisplayLifecycle$$ExternalSyntheticLambda4(displayLifecycle, i, 2));
-                        }
-                        return;
+                        boolValueOf = Boolean.FALSE;
+                    } else {
+                        boolValueOf = Boolean.valueOf(displayLifecycle.updateCacheVariables(i));
                     }
                 }
-                valueOf = Boolean.valueOf(displayLifecycle.updateCacheVariables(i));
-                if (valueOf.booleanValue()) {
+                if (boolValueOf.booleanValue() || ((DesktopManager) Dependency.sDependency.getDependencyInner(DesktopManager.class)).isDesktopBarConnected()) {
+                    displayLifecycle.mHandler.post(new DisplayLifecycle$$ExternalSyntheticLambda4(displayLifecycle, i, 2));
                 }
-                displayLifecycle.mHandler.post(new DisplayLifecycle$$ExternalSyntheticLambda4(displayLifecycle, i, 2));
             }
 
             @Override // android.hardware.display.DisplayManager.DisplayListener
@@ -90,11 +90,11 @@ public class DisplayLifecycle extends SecLifecycle implements Dumpable {
             handler.post(new Runnable() { // from class: com.android.systemui.keyguard.DisplayLifecycle$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final DisplayLifecycle displayLifecycle = DisplayLifecycle.this;
+                    final DisplayLifecycle displayLifecycle = this.f$0;
                     ((KeyguardFoldControllerImpl) ((KeyguardFoldController) lazy.get())).addCallback(new KeyguardFoldController.StateListener() { // from class: com.android.systemui.keyguard.DisplayLifecycle$$ExternalSyntheticLambda3
                         @Override // com.android.systemui.keyguard.KeyguardFoldController.StateListener
                         public final void onFoldStateChanged(final boolean z) {
-                            final DisplayLifecycle displayLifecycle2 = DisplayLifecycle.this;
+                            final DisplayLifecycle displayLifecycle2 = displayLifecycle;
                             if (displayLifecycle2.mIsFolderOpened == z) {
                                 return;
                             }
@@ -104,7 +104,7 @@ public class DisplayLifecycle extends SecLifecycle implements Dumpable {
                             displayLifecycle2.mHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.DisplayLifecycle$$ExternalSyntheticLambda5
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    DisplayLifecycle displayLifecycle3 = DisplayLifecycle.this;
+                                    DisplayLifecycle displayLifecycle3 = displayLifecycle2;
                                     final boolean z2 = z;
                                     displayLifecycle3.dispatch(new Consumer() { // from class: com.android.systemui.keyguard.DisplayLifecycle$$ExternalSyntheticLambda11
                                         @Override // java.util.function.Consumer
@@ -224,7 +224,6 @@ public class DisplayLifecycle extends SecLifecycle implements Dumpable {
         return z2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Observer {
         default void onDisplayAdded(int i) {
         }

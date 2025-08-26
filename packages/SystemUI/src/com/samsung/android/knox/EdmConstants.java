@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EdmConstants {
     public static final String ACTION_CALL_STATE_CHANGED = "com.samsung.android.knox.intent.action.CALL_STATE_CHANGED";
@@ -208,7 +207,6 @@ public class EdmConstants {
         }
     });
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum EnterpriseKnoxSdkVersion {
         KNOX_ENTERPRISE_SDK_VERSION_NONE,
         KNOX_ENTERPRISE_SDK_VERSION_1_0,
@@ -322,7 +320,6 @@ public class EdmConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum EnterpriseSdkVersion {
         ENTERPRISE_SDK_VERSION_2,
         ENTERPRISE_SDK_VERSION_2_1,

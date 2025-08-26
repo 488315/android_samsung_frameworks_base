@@ -112,13 +112,13 @@ public class UsbAccessory implements Parcelable {
     }
 
     public int hashCode() {
-        int hashCode = this.mManufacturer.hashCode() ^ this.mModel.hashCode();
+        int iHashCode = this.mManufacturer.hashCode() ^ this.mModel.hashCode();
         String str = this.mDescription;
-        int hashCode2 = hashCode ^ (str == null ? 0 : str.hashCode());
+        int iHashCode2 = iHashCode ^ (str == null ? 0 : str.hashCode());
         String str2 = this.mVersion;
-        int hashCode3 = hashCode2 ^ (str2 == null ? 0 : str2.hashCode());
+        int iHashCode3 = iHashCode2 ^ (str2 == null ? 0 : str2.hashCode());
         String str3 = this.mUri;
-        return hashCode3 ^ (str3 != null ? str3.hashCode() : 0);
+        return iHashCode3 ^ (str3 != null ? str3.hashCode() : 0);
     }
 
     public String toString() {

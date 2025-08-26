@@ -53,9 +53,9 @@ public interface ICarrierPrivilegesCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICarrierPrivilegesCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICarrierPrivilegesCallback)) {
-                return (ICarrierPrivilegesCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICarrierPrivilegesCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICarrierPrivilegesCallback)) {
+                return (ICarrierPrivilegesCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,15 +85,15 @@ public interface ICarrierPrivilegesCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                int[] createIntArray = parcel.createIntArray();
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                int[] iArrCreateIntArray = parcel.createIntArray();
                 parcel.enforceNoDataAvail();
-                onCarrierPrivilegesChanged(createStringArrayList, createIntArray);
+                onCarrierPrivilegesChanged(arrayListCreateStringArrayList, iArrCreateIntArray);
             } else if (i == 2) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCarrierServiceChanged(readString, readInt);
+                onCarrierServiceChanged(string, i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -118,27 +118,27 @@ public interface ICarrierPrivilegesCallback extends IInterface {
 
             @Override // com.android.internal.telephony.ICarrierPrivilegesCallback
             public void onCarrierPrivilegesChanged(List<String> list, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICarrierPrivilegesCallback.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICarrierPrivilegesCallback.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.ICarrierPrivilegesCallback
             public void onCarrierServiceChanged(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICarrierPrivilegesCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICarrierPrivilegesCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

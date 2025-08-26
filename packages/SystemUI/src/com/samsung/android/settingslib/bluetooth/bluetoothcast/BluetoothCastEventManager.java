@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BluetoothCastEventManager {
     public final String TAG;
@@ -28,7 +27,6 @@ public class BluetoothCastEventManager {
     public final LocalBluetoothCastAdapter mLocalCastAdapter;
     public final ArrayList mReceivers;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AdapterStateChangedHandler implements Handler {
         public /* synthetic */ AdapterStateChangedHandler(BluetoothCastEventManager bluetoothCastEventManager, int i) {
             this();
@@ -51,7 +49,6 @@ public class BluetoothCastEventManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BluetootCastDeviceFoundHandler implements Handler {
         public /* synthetic */ BluetootCastDeviceFoundHandler(BluetoothCastEventManager bluetoothCastEventManager, int i) {
             this();
@@ -63,9 +60,9 @@ public class BluetoothCastEventManager {
                 BluetoothCastEventManager bluetoothCastEventManager = BluetoothCastEventManager.this;
                 Log.d(bluetoothCastEventManager.TAG, semBluetoothCastDevice.getAddressForLog() + " found");
                 CachedBluetoothCastDeviceManager cachedBluetoothCastDeviceManager = bluetoothCastEventManager.mCastDeviceManager;
-                CachedBluetoothCastDevice findCastDevice = cachedBluetoothCastDeviceManager.findCastDevice(semBluetoothCastDevice);
+                CachedBluetoothCastDevice cachedBluetoothCastDeviceFindCastDevice = cachedBluetoothCastDeviceManager.findCastDevice(semBluetoothCastDevice);
                 String str = bluetoothCastEventManager.TAG;
-                if (findCastDevice == null) {
+                if (cachedBluetoothCastDeviceFindCastDevice == null) {
                     Log.d(str, "BluetootCastDeviceFoundHandler :: addCastDevice");
                     if (cachedBluetoothCastDeviceManager.addCastDevice(bluetoothCastEventManager.mBluetoothCastProfileManager, semBluetoothCastDevice) == null) {
                         Log.d(str, "Failed to created new CachedBluetoothDevice");
@@ -74,9 +71,9 @@ public class BluetoothCastEventManager {
                     return;
                 }
                 Log.d(str, "BluetootCastDeviceFoundHandler :: processActionFoundEvent");
-                findCastDevice.mCastDevice = semBluetoothCastDevice;
-                findCastDevice.mName = findCastDevice.mCastDevice.getDeviceName();
-                findCastDevice.dispatchAttributesChanged();
+                cachedBluetoothCastDeviceFindCastDevice.mCastDevice = semBluetoothCastDevice;
+                cachedBluetoothCastDeviceFindCastDevice.mName = cachedBluetoothCastDeviceFindCastDevice.mCastDevice.getDeviceName();
+                cachedBluetoothCastDeviceFindCastDevice.dispatchAttributesChanged();
             }
         }
 
@@ -84,7 +81,6 @@ public class BluetoothCastEventManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BluetootCastDeviceRemovedHandler implements Handler {
         public /* synthetic */ BluetootCastDeviceRemovedHandler(BluetoothCastEventManager bluetoothCastEventManager, int i) {
             this();
@@ -95,16 +91,16 @@ public class BluetoothCastEventManager {
             int i = 0;
             if (intent.getIntExtra("com.samsung.android.bluetooth.cast.device.extra.REMOTEROLE", 0) == 2) {
                 Log.d(BluetoothCastEventManager.this.TAG, semBluetoothCastDevice.getAddressForLog() + " removed");
-                CachedBluetoothCastDevice findCastDevice = BluetoothCastEventManager.this.mCastDeviceManager.findCastDevice(semBluetoothCastDevice);
-                if (findCastDevice == null) {
+                CachedBluetoothCastDevice cachedBluetoothCastDeviceFindCastDevice = BluetoothCastEventManager.this.mCastDeviceManager.findCastDevice(semBluetoothCastDevice);
+                if (cachedBluetoothCastDeviceFindCastDevice == null) {
                     Log.d(BluetoothCastEventManager.this.TAG, "BluetootCastDeviceRemovedHandler :: not found castdevice");
                     return;
                 }
                 Log.d(BluetoothCastEventManager.this.TAG, "BluetootCastDeviceRemovedHandler :: removeCastDevice");
                 CachedBluetoothCastDeviceManager cachedBluetoothCastDeviceManager = BluetoothCastEventManager.this.mCastDeviceManager;
                 synchronized (cachedBluetoothCastDeviceManager) {
-                    Log.d(cachedBluetoothCastDeviceManager.TAG, "removeCastDevice : " + findCastDevice.getName());
-                    ((ArrayList) cachedBluetoothCastDeviceManager.mCachedCastDevices).remove(findCastDevice);
+                    Log.d(cachedBluetoothCastDeviceManager.TAG, "removeCastDevice : " + cachedBluetoothCastDeviceFindCastDevice.getName());
+                    ((ArrayList) cachedBluetoothCastDeviceManager.mCachedCastDevices).remove(cachedBluetoothCastDeviceFindCastDevice);
                     BluetoothCastEventManager bluetoothCastEventManager = cachedBluetoothCastDeviceManager.mBtManager.mCastEventManager;
                     synchronized (bluetoothCastEventManager.mCallbacks) {
                         try {
@@ -127,7 +123,6 @@ public class BluetoothCastEventManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CastDiscoveryStateChangedHandler implements Handler {
         public final boolean mStarted;
 
@@ -154,7 +149,6 @@ public class BluetoothCastEventManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Handler {
         void onReceive(Context context, Intent intent, SemBluetoothCastDevice semBluetoothCastDevice);
     }

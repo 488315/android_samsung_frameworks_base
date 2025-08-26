@@ -38,11 +38,11 @@ public class SprAttributeAnimatorSet extends SprAttributeBase {
         this.startOffset = sprInputStream.readInt();
         this.duration = sprInputStream.readInt();
         this.repeatCount = sprInputStream.readInt();
-        int readInt = sprInputStream.readInt();
-        for (int i = 0; i < readInt; i++) {
-            byte readByte = sprInputStream.readByte();
-            int readInt2 = sprInputStream.readInt();
-            switch (readByte) {
+        int i = sprInputStream.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            byte b = sprInputStream.readByte();
+            int i3 = sprInputStream.readInt();
+            switch (b) {
                 case 1:
                     this.mAnimators.add(new SprAnimatorTranslate(sprInputStream));
                     break;
@@ -62,7 +62,7 @@ public class SprAttributeAnimatorSet extends SprAttributeBase {
                     this.mAnimators.add(new SprAnimatorAlpha(sprInputStream));
                     break;
                 default:
-                    sprInputStream.skip(readInt2);
+                    sprInputStream.skip(i3);
                     break;
             }
         }
@@ -86,11 +86,11 @@ public class SprAttributeAnimatorSet extends SprAttributeBase {
     @Override // com.samsung.android.graphics.spr.document.attribute.SprAttributeBase
     public int getSPRSize() {
         Iterator<Animator> it = this.mAnimators.iterator();
-        int i = 16;
+        int sPRSize = 16;
         while (it.hasNext()) {
-            i += ((SprAnimatorBase) it.next()).getSPRSize() + 5;
+            sPRSize += ((SprAnimatorBase) it.next()).getSPRSize() + 5;
         }
-        return i;
+        return sPRSize;
     }
 
     public ArrayList<Animator> getAnimators() {
@@ -103,8 +103,8 @@ public class SprAttributeAnimatorSet extends SprAttributeBase {
 
     @Override // com.samsung.android.graphics.spr.document.attribute.SprAttributeBase
     /* renamed from: clone */
-    public SprAttributeAnimatorSet mo9221clone() throws CloneNotSupportedException {
-        SprAttributeAnimatorSet sprAttributeAnimatorSet = (SprAttributeAnimatorSet) super.mo9221clone();
+    public SprAttributeAnimatorSet mo9233clone() throws CloneNotSupportedException {
+        SprAttributeAnimatorSet sprAttributeAnimatorSet = (SprAttributeAnimatorSet) super.mo9233clone();
         sprAttributeAnimatorSet.mAnimators = new ArrayList<>();
         Iterator<Animator> it = this.mAnimators.iterator();
         while (it.hasNext()) {

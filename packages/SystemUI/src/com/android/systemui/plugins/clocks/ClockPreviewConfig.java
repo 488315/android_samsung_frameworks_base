@@ -6,7 +6,6 @@ import com.android.internal.policy.SystemBarUtils;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClockPreviewConfig {
     public static final int $stable = 8;
@@ -115,11 +114,11 @@ public final class ClockPreviewConfig {
     }
 
     public int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(this.context.hashCode() * 31, 31, this.isShadeLayoutWide), 31, this.isSceneContainerFlagEnabled);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(this.context.hashCode() * 31, 31, this.isShadeLayoutWide), 31, this.isSceneContainerFlagEnabled);
         Integer num = this.lockId;
-        int hashCode = (m + (num == null ? 0 : num.hashCode())) * 31;
+        int iHashCode = (iM + (num == null ? 0 : num.hashCode())) * 31;
         Float f = this.udfpsTop;
-        return hashCode + (f != null ? f.hashCode() : 0);
+        return iHashCode + (f != null ? f.hashCode() : 0);
     }
 
     public final boolean isSceneContainerFlagEnabled() {

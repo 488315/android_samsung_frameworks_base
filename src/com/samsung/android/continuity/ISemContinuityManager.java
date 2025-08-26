@@ -90,9 +90,9 @@ public interface ISemContinuityManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemContinuityManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemContinuityManager)) {
-                return (ISemContinuityManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemContinuityManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemContinuityManager)) {
+                return (ISemContinuityManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -134,53 +134,53 @@ public interface ISemContinuityManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int nearbyDeviceCount = getNearbyDeviceCount(readInt, readInt2);
+                    int nearbyDeviceCount = getNearbyDeviceCount(i3, i4);
                     parcel2.writeNoException();
                     parcel2.writeInt(nearbyDeviceCount);
                     return true;
                 case 2:
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setLocalClip(bundle, readInt3);
+                    setLocalClip(bundle, i5);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearLocalClip(readInt4);
+                    clearLocalClip(i6);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    ISemContinuitySimpleListener asInterface = ISemContinuitySimpleListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt5 = parcel.readInt();
+                    ISemContinuitySimpleListener iSemContinuitySimpleListenerAsInterface = ISemContinuitySimpleListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerContinuityCopyListener(asInterface, readInt5);
+                    registerContinuityCopyListener(iSemContinuitySimpleListenerAsInterface, i7);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterContinuityCopyListener(readInt6);
+                    unregisterContinuityCopyListener(i8);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    String readString = parcel.readString();
-                    ISemContinuitySimpleListener asInterface2 = ISemContinuitySimpleListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt7 = parcel.readInt();
+                    String string = parcel.readString();
+                    ISemContinuitySimpleListener iSemContinuitySimpleListenerAsInterface2 = ISemContinuitySimpleListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean requestDownload = requestDownload(readString, asInterface2, readInt7);
+                    boolean zRequestDownload = requestDownload(string, iSemContinuitySimpleListenerAsInterface2, i9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(requestDownload);
+                    parcel2.writeBoolean(zRequestDownload);
                     return true;
                 case 7:
-                    String readString2 = parcel.readString();
-                    int readInt8 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    cancelDownload(readString2, readInt8);
+                    cancelDownload(string2, i10);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -206,114 +206,114 @@ public interface ISemContinuityManager extends IInterface {
 
             @Override // com.samsung.android.continuity.ISemContinuityManager
             public int getNearbyDeviceCount(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.continuity.ISemContinuityManager
             public void setLocalClip(Bundle bundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.continuity.ISemContinuityManager
             public void clearLocalClip(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.continuity.ISemContinuityManager
             public void registerContinuityCopyListener(ISemContinuitySimpleListener iSemContinuitySimpleListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSemContinuitySimpleListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSemContinuitySimpleListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.continuity.ISemContinuityManager
             public void unregisterContinuityCopyListener(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.continuity.ISemContinuityManager
             public boolean requestDownload(String str, ISemContinuitySimpleListener iSemContinuitySimpleListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iSemContinuitySimpleListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iSemContinuitySimpleListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.continuity.ISemContinuityManager
             public void cancelDownload(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISemContinuityManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -14,16 +14,18 @@ import android.view.InputEvent;
 import android.view.InputEventReceiver;
 import android.view.MotionEvent;
 import android.view.SurfaceControl;
+import android.view.VelocityTracker;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManagerGlobal;
 import android.window.InputTransferToken;
 import com.android.wm.shell.windowdecor.DragDetector;
 import com.android.wm.shell.windowdecor.FreeformDimInputListener;
+import com.samsung.android.multiwindow.MultiWindowCoreState;
 import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformDimInputListener implements AutoCloseable {
     public final Choreographer mChoreographer;
@@ -42,7 +44,6 @@ public class FreeformDimInputListener implements AutoCloseable {
     public boolean mTouchableState;
     public final IWindowSession mWindowSession;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TaskDimInputEventReceiver extends InputEventReceiver implements DragDetector.MotionEventHandler {
         public final Choreographer mChoreographer;
         public final FreeformDimInputListener$TaskDimInputEventReceiver$$ExternalSyntheticLambda0 mConsumeBatchEventRunnable;
@@ -61,14 +62,110 @@ public class FreeformDimInputListener implements AutoCloseable {
         @Override // com.android.wm.shell.windowdecor.DragDetector.MotionEventHandler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final boolean handleMotionEvent(android.view.View r10, android.view.MotionEvent r11) {
-            /*
-                Method dump skipped, instructions count: 385
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.windowdecor.FreeformDimInputListener.TaskDimInputEventReceiver.handleMotionEvent(android.view.View, android.view.MotionEvent):boolean");
+        public final boolean handleMotionEvent(View view, MotionEvent motionEvent) {
+            boolean z = CoreRune.MW_CAPTION_FREEFORM_MOTION;
+            if (!z || FreeformDimInputListener.this.mTaskPositioner.isAllowTouches()) {
+                int actionMasked = motionEvent.getActionMasked();
+                if (actionMasked == 0) {
+                    this.mTouchBlocked = false;
+                    if (MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_ENABLED && FreeformDimInputListener.this.mTaskPositioner.isStashedAtNavigationBarPosition() && MultiWindowManager.getInstance().isCornerGestureRunning()) {
+                        Log.d("FreeformDimInputListener", "handleMotionEvent: skip, reason=corner_gesture_running");
+                        this.mTouchBlocked = true;
+                        return false;
+                    }
+                    if (z) {
+                        FreeformCaptionTouchState freeformCaptionTouchState = FreeformDimInputListener.this.mFreeformCaptionTouchState;
+                        VelocityTracker velocityTracker = freeformCaptionTouchState.mVelocityTracker;
+                        if (velocityTracker == null) {
+                            freeformCaptionTouchState.mVelocityTracker = VelocityTracker.obtain();
+                        } else {
+                            velocityTracker.clear();
+                        }
+                        FreeformDimInputListener.this.mFreeformCaptionTouchState.addMovementToVelocityTracker(motionEvent);
+                    }
+                    FreeformDimInputListener.this.mDragPointerId = motionEvent.getPointerId(0);
+                    float rawX = motionEvent.getRawX(0);
+                    float rawY = motionEvent.getRawY(0);
+                    FreeformDimInputListener freeformDimInputListener = FreeformDimInputListener.this;
+                    freeformDimInputListener.mTaskPositioner.onDragPositioningStart(0, rawX, rawY, freeformDimInputListener.mDisplayId);
+                    this.mMoved = false;
+                    return true;
+                }
+                if (actionMasked != 1) {
+                    if (actionMasked == 2) {
+                        if (!this.mTouchBlocked) {
+                            int iFindPointerIndex = motionEvent.findPointerIndex(FreeformDimInputListener.this.mDragPointerId);
+                            if (iFindPointerIndex == -1) {
+                                Log.e("FreeformDimInputListener", "Invalid pointerId=" + iFindPointerIndex + " in handleMotionEvent");
+                                return false;
+                            }
+                            if (CoreRune.MW_CAPTION_FREEFORM_STASH) {
+                                int iChangeFreeformScaleIfNeeded = FreeformDimInputListener.this.mTaskPositioner.changeFreeformScaleIfNeeded();
+                                if (iChangeFreeformScaleIfNeeded == 1) {
+                                    FreeformDimInputListener.this.updateBoostIfNeeded(true);
+                                } else if (iChangeFreeformScaleIfNeeded == 0) {
+                                    FreeformDimInputListener.this.updateBoostIfNeeded(false);
+                                }
+                            }
+                            if (z) {
+                                FreeformDimInputListener.this.mFreeformCaptionTouchState.addMovementToVelocityTracker(motionEvent);
+                            }
+                            float rawX2 = motionEvent.getRawX(iFindPointerIndex);
+                            float rawY2 = motionEvent.getRawY(iFindPointerIndex);
+                            FreeformDimInputListener freeformDimInputListener2 = FreeformDimInputListener.this;
+                            freeformDimInputListener2.mTaskPositioner.onDragPositioningMove(rawX2, rawY2, freeformDimInputListener2.mDisplayId);
+                            this.mMoved = true;
+                            return true;
+                        }
+                    }
+                }
+                if (this.mTouchBlocked) {
+                    this.mTouchBlocked = false;
+                    return false;
+                }
+                int iFindPointerIndex2 = motionEvent.findPointerIndex(FreeformDimInputListener.this.mDragPointerId);
+                if (CoreRune.MW_CAPTION_FREEFORM_STASH && !this.mMoved) {
+                    FreeformDimInputListener freeformDimInputListener3 = FreeformDimInputListener.this;
+                    if (freeformDimInputListener3.mDragPointerId != -1) {
+                        freeformDimInputListener3.updateBoostIfNeeded(false);
+                        FreeformDimInputListener.this.mTaskPositioner.resetStashedFreeform(true);
+                    }
+                }
+                if (iFindPointerIndex2 == -1) {
+                    Log.e("FreeformDimInputListener", "Invalid pointerId=" + iFindPointerIndex2 + " in handleMotionEvent");
+                    FreeformDimInputListener freeformDimInputListener4 = FreeformDimInputListener.this;
+                    freeformDimInputListener4.mTaskPositioner.onDragPositioningEnd(-1.0f, -1.0f, freeformDimInputListener4.mDisplayId);
+                } else {
+                    if (z) {
+                        FreeformDimInputListener.this.mFreeformCaptionTouchState.addMovementToVelocityTracker(motionEvent);
+                        FreeformCaptionTouchState freeformCaptionTouchState2 = FreeformDimInputListener.this.mFreeformCaptionTouchState;
+                        VelocityTracker velocityTracker2 = freeformCaptionTouchState2.mVelocityTracker;
+                        if (velocityTracker2 != null) {
+                            velocityTracker2.computeCurrentVelocity(1000, freeformCaptionTouchState2.mMaximumFlingVelocity);
+                            freeformCaptionTouchState2.mVelocity.set(freeformCaptionTouchState2.mVelocityTracker.getXVelocity(), freeformCaptionTouchState2.mVelocityTracker.getYVelocity());
+                        }
+                        FreeformDimInputListener freeformDimInputListener5 = FreeformDimInputListener.this;
+                        freeformDimInputListener5.mTaskPositioner.setFreeformCaptionTouchState(freeformDimInputListener5.mFreeformCaptionTouchState);
+                    }
+                    float rawX3 = motionEvent.getRawX(iFindPointerIndex2);
+                    float rawY3 = motionEvent.getRawY(iFindPointerIndex2);
+                    FreeformDimInputListener freeformDimInputListener6 = FreeformDimInputListener.this;
+                    freeformDimInputListener6.mTaskPositioner.onDragPositioningEnd(rawX3, rawY3, freeformDimInputListener6.mDisplayId);
+                    if (z) {
+                        FreeformCaptionTouchState freeformCaptionTouchState3 = FreeformDimInputListener.this.mFreeformCaptionTouchState;
+                        VelocityTracker velocityTracker3 = freeformCaptionTouchState3.mVelocityTracker;
+                        if (velocityTracker3 != null) {
+                            velocityTracker3.recycle();
+                            freeformCaptionTouchState3.mVelocityTracker = null;
+                        }
+                        FreeformDimInputListener.this.mTaskPositioner.setFreeformCaptionTouchState(null);
+                    }
+                }
+                FreeformDimInputListener.this.mDragPointerId = -1;
+                return false;
+            }
+            return false;
         }
 
         public final void onBatchedInputEventPending(int i) {
@@ -90,7 +187,7 @@ public class FreeformDimInputListener implements AutoCloseable {
             this.mConsumeBatchEventRunnable = new Runnable() { // from class: com.android.wm.shell.windowdecor.FreeformDimInputListener$TaskDimInputEventReceiver$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FreeformDimInputListener.TaskDimInputEventReceiver taskDimInputEventReceiver = FreeformDimInputListener.TaskDimInputEventReceiver.this;
+                    FreeformDimInputListener.TaskDimInputEventReceiver taskDimInputEventReceiver = this.f$0;
                     taskDimInputEventReceiver.mConsumeBatchEventScheduled = false;
                     if (!taskDimInputEventReceiver.consumeBatchedInputEvents(taskDimInputEventReceiver.mChoreographer.getFrameTimeNanos()) || taskDimInputEventReceiver.mConsumeBatchEventScheduled) {
                         return;

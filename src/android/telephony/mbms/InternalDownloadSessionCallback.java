@@ -21,7 +21,7 @@ public class InternalDownloadSessionCallback extends IMbmsDownloadSessionCallbac
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalDownloadSessionCallback.1
                 @Override // java.lang.Runnable
@@ -30,7 +30,7 @@ public class InternalDownloadSessionCallback extends IMbmsDownloadSessionCallbac
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -39,7 +39,7 @@ public class InternalDownloadSessionCallback extends IMbmsDownloadSessionCallbac
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalDownloadSessionCallback.2
                 @Override // java.lang.Runnable
@@ -48,7 +48,7 @@ public class InternalDownloadSessionCallback extends IMbmsDownloadSessionCallbac
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -57,7 +57,7 @@ public class InternalDownloadSessionCallback extends IMbmsDownloadSessionCallbac
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalDownloadSessionCallback.3
                 @Override // java.lang.Runnable
@@ -66,7 +66,7 @@ public class InternalDownloadSessionCallback extends IMbmsDownloadSessionCallbac
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

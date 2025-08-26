@@ -16,7 +16,6 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MonthsPagerAdapter extends RecyclerView.Adapter {
     public final CalendarConstraints calendarConstraints;
@@ -24,7 +23,6 @@ public class MonthsPagerAdapter extends RecyclerView.Adapter {
     public final int itemHeight;
     public final MaterialCalendar.OnDayClickListener onDayClickListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final MaterialCalendarGridView monthGrid;
         public final TextView monthTitle;
@@ -74,24 +72,24 @@ public class MonthsPagerAdapter extends RecyclerView.Adapter {
     public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         ViewHolder viewHolder2 = (ViewHolder) viewHolder;
         CalendarConstraints calendarConstraints = this.calendarConstraints;
-        Month monthsLater = calendarConstraints.start.monthsLater(i);
-        viewHolder2.monthTitle.setText(monthsLater.getLongName());
+        Month monthMonthsLater = calendarConstraints.start.monthsLater(i);
+        viewHolder2.monthTitle.setText(monthMonthsLater.getLongName());
         final MaterialCalendarGridView materialCalendarGridView = (MaterialCalendarGridView) viewHolder2.monthGrid.findViewById(R.id.month_grid);
-        if (materialCalendarGridView.getAdapter() == null || !monthsLater.equals(materialCalendarGridView.getAdapter().month)) {
-            MonthAdapter monthAdapter = new MonthAdapter(monthsLater, null, calendarConstraints, this.dayViewDecorator);
-            materialCalendarGridView.setNumColumns(monthsLater.daysInWeek);
+        if (materialCalendarGridView.getAdapter() == null || !monthMonthsLater.equals(materialCalendarGridView.getAdapter().month)) {
+            MonthAdapter monthAdapter = new MonthAdapter(monthMonthsLater, null, calendarConstraints, this.dayViewDecorator);
+            materialCalendarGridView.setNumColumns(monthMonthsLater.daysInWeek);
             materialCalendarGridView.setAdapter((ListAdapter) monthAdapter);
         } else {
             materialCalendarGridView.invalidate();
             MonthAdapter adapter = materialCalendarGridView.getAdapter();
             Iterator it = adapter.previouslySelectedDates.iterator();
             while (it.hasNext()) {
-                long longValue = ((Long) it.next()).longValue();
-                if (Month.create(longValue).equals(adapter.month)) {
+                long jLongValue = ((Long) it.next()).longValue();
+                if (Month.create(jLongValue).equals(adapter.month)) {
                     Calendar dayCopy = UtcDates.getDayCopy(adapter.month.firstOfMonth);
-                    dayCopy.setTimeInMillis(longValue);
+                    dayCopy.setTimeInMillis(jLongValue);
                     int i2 = dayCopy.get(5);
-                    adapter.updateSelectedState((TextView) materialCalendarGridView.getChildAt((materialCalendarGridView.getAdapter().firstPositionInMonth() + (i2 - 1)) - materialCalendarGridView.getFirstVisiblePosition()), longValue, i2);
+                    adapter.updateSelectedState((TextView) materialCalendarGridView.getChildAt((materialCalendarGridView.getAdapter().firstPositionInMonth() + (i2 - 1)) - materialCalendarGridView.getFirstVisiblePosition()), jLongValue, i2);
                 }
             }
         }

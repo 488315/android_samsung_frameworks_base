@@ -22,7 +22,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.reflect.KFunction;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SensorUseStartedActivity extends Activity implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,7 +37,6 @@ public class SensorUseStartedActivity extends Activity implements DialogInterfac
     public int sensor = -1;
     public final KFunction mBackCallback = new SensorUseStartedActivity$mBackCallback$1(this);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -75,7 +73,11 @@ public class SensorUseStartedActivity extends Activity implements DialogInterfac
         return getPackageManager().hasSystemFeature("android.hardware.type.automotive") ? ((IndividualSensorPrivacyControllerImpl) this.sensorPrivacyController).mSensorPrivacyManager.isCameraPrivacyEnabled(str) : ((IndividualSensorPrivacyControllerImpl) this.sensorPrivacyController).isSensorBlocked(2);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0026  */
     @Override // android.content.DialogInterface.OnClickListener
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onClick(DialogInterface dialogInterface, int i) {
         if (i == -2) {
             this.unsuppressImmediately = false;
@@ -86,31 +88,32 @@ public class SensorUseStartedActivity extends Activity implements DialogInterfac
                 KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.keyguardStateController;
                 if (keyguardStateControllerImpl.mSecure && keyguardStateControllerImpl.mShowing) {
                     this.mShouldRunDisableSensorPrivacy = true;
+                } else {
+                    disableSensorPrivacy();
+                    String str2 = this.sensorUsePackageName;
+                    FrameworkStatsLog.write(VolteConstants.ErrorCode.ALTERNATIVE_SERVICES_EMERGENCY_CSFB, 1, str2 != null ? str2 : null);
                 }
             }
-            disableSensorPrivacy();
-            String str2 = this.sensorUsePackageName;
-            FrameworkStatsLog.write(VolteConstants.ErrorCode.ALTERNATIVE_SERVICES_EMERGENCY_CSFB, 1, str2 != null ? str2 : null);
         }
         finish();
     }
 
     @Override // android.app.Activity
     public final void onCreate(Bundle bundle) {
-        WindowManager.LayoutParams layoutParams;
+        WindowManager.LayoutParams attributes;
         super.onCreate(bundle);
         setShowWhenLocked(true);
         setFinishOnTouchOutside(false);
         setResult(0);
         Window window = getWindow();
-        if (window == null || (layoutParams = window.getAttributes()) == null) {
-            layoutParams = null;
+        if (window == null || (attributes = window.getAttributes()) == null) {
+            attributes = null;
         } else {
-            layoutParams.privateFlags |= 16;
+            attributes.privateFlags |= 16;
         }
         Window window2 = getWindow();
         if (window2 != null) {
-            window2.setAttributes(layoutParams);
+            window2.setAttributes(attributes);
         }
         Window window3 = getWindow();
         if (window3 != null) {
@@ -126,7 +129,7 @@ public class SensorUseStartedActivity extends Activity implements DialogInterfac
             IndividualSensorPrivacyController.Callback callback = new IndividualSensorPrivacyController.Callback() { // from class: com.android.systemui.sensorprivacy.SensorUseStartedActivity$onCreate$callback$1
                 @Override // com.android.systemui.statusbar.policy.IndividualSensorPrivacyController.Callback
                 public final void onSensorBlockedChanged(int i, boolean z) {
-                    SensorUseStartedActivity sensorUseStartedActivity = SensorUseStartedActivity.this;
+                    SensorUseStartedActivity sensorUseStartedActivity = this.this$0;
                     if (((IndividualSensorPrivacyControllerImpl) sensorUseStartedActivity.sensorPrivacyController).isSensorBlocked(1)) {
                         return;
                     }
@@ -159,7 +162,7 @@ public class SensorUseStartedActivity extends Activity implements DialogInterfac
             IndividualSensorPrivacyController.Callback callback2 = new IndividualSensorPrivacyController.Callback() { // from class: com.android.systemui.sensorprivacy.SensorUseStartedActivity$onCreate$callback$2
                 @Override // com.android.systemui.statusbar.policy.IndividualSensorPrivacyController.Callback
                 public final void onSensorBlockedChanged(int i, boolean z) {
-                    SensorUseStartedActivity sensorUseStartedActivity = SensorUseStartedActivity.this;
+                    SensorUseStartedActivity sensorUseStartedActivity = this.this$0;
                     if (i == sensorUseStartedActivity.sensor) {
                         if (i == 2) {
                             String str2 = sensorUseStartedActivity.sensorUsePackageName;
@@ -212,17 +215,17 @@ public class SensorUseStartedActivity extends Activity implements DialogInterfac
         getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(new SensorUseStartedActivity$sam$android_window_OnBackInvokedCallback$0((Function0) this.mBackCallback));
         if (this.mShouldRunDisableSensorPrivacy) {
             this.mShouldRunDisableSensorPrivacy = false;
-            this.bgHandler.postDelayed(new Runnable() { // from class: com.android.systemui.sensorprivacy.SensorUseStartedActivity$onDestroy$2
+            this.bgHandler.postDelayed(new Runnable() { // from class: com.android.systemui.sensorprivacy.SensorUseStartedActivity.onDestroy.2
                 @Override // java.lang.Runnable
                 public final void run() {
                     final SensorUseStartedActivity sensorUseStartedActivity = SensorUseStartedActivity.this;
-                    sensorUseStartedActivity.activityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.sensorprivacy.SensorUseStartedActivity$onDestroy$2.1
+                    sensorUseStartedActivity.activityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.sensorprivacy.SensorUseStartedActivity.onDestroy.2.1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SensorUseStartedActivity sensorUseStartedActivity2 = SensorUseStartedActivity.this;
+                            SensorUseStartedActivity sensorUseStartedActivity2 = sensorUseStartedActivity;
                             int i = SensorUseStartedActivity.$r8$clinit;
                             sensorUseStartedActivity2.disableSensorPrivacy();
-                            String str = SensorUseStartedActivity.this.sensorUsePackageName;
+                            String str = sensorUseStartedActivity.sensorUsePackageName;
                             if (str == null) {
                                 str = null;
                             }
@@ -261,7 +264,7 @@ public class SensorUseStartedActivity extends Activity implements DialogInterfac
         if (this.unsuppressImmediately) {
             setSuppressed(false);
         } else {
-            this.bgHandler.postDelayed(new Runnable() { // from class: com.android.systemui.sensorprivacy.SensorUseStartedActivity$onStop$1
+            this.bgHandler.postDelayed(new Runnable() { // from class: com.android.systemui.sensorprivacy.SensorUseStartedActivity.onStop.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     SensorUseStartedActivity sensorUseStartedActivity = SensorUseStartedActivity.this;

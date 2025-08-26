@@ -78,9 +78,9 @@ public interface IPrintDocumentAdapter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPrintDocumentAdapter)) {
-                return (IPrintDocumentAdapter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPrintDocumentAdapter)) {
+                return (IPrintDocumentAdapter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -119,26 +119,26 @@ public interface IPrintDocumentAdapter extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IPrintDocumentAdapterObserver asInterface = IPrintDocumentAdapterObserver.Stub.asInterface(parcel.readStrongBinder());
+                IPrintDocumentAdapterObserver iPrintDocumentAdapterObserverAsInterface = IPrintDocumentAdapterObserver.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                setObserver(asInterface);
+                setObserver(iPrintDocumentAdapterObserverAsInterface);
             } else if (i == 2) {
                 start();
             } else if (i == 3) {
                 PrintAttributes printAttributes = (PrintAttributes) parcel.readTypedObject(PrintAttributes.CREATOR);
                 PrintAttributes printAttributes2 = (PrintAttributes) parcel.readTypedObject(PrintAttributes.CREATOR);
-                ILayoutResultCallback asInterface2 = ILayoutResultCallback.Stub.asInterface(parcel.readStrongBinder());
+                ILayoutResultCallback iLayoutResultCallbackAsInterface = ILayoutResultCallback.Stub.asInterface(parcel.readStrongBinder());
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                layout(printAttributes, printAttributes2, asInterface2, bundle, readInt);
+                layout(printAttributes, printAttributes2, iLayoutResultCallbackAsInterface, bundle, i3);
             } else if (i == 4) {
                 PageRange[] pageRangeArr = (PageRange[]) parcel.createTypedArray(PageRange.CREATOR);
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                IWriteResultCallback asInterface3 = IWriteResultCallback.Stub.asInterface(parcel.readStrongBinder());
-                int readInt2 = parcel.readInt();
+                IWriteResultCallback iWriteResultCallbackAsInterface = IWriteResultCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                write(pageRangeArr, parcelFileDescriptor, asInterface3, readInt2);
+                write(pageRangeArr, parcelFileDescriptor, iWriteResultCallbackAsInterface, i4);
             } else if (i == 5) {
                 finish();
             } else {
@@ -165,66 +165,66 @@ public interface IPrintDocumentAdapter extends IInterface {
 
             @Override // android.print.IPrintDocumentAdapter
             public void setObserver(IPrintDocumentAdapterObserver iPrintDocumentAdapterObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrintDocumentAdapterObserver);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrintDocumentAdapterObserver);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintDocumentAdapter
             public void start() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintDocumentAdapter
             public void layout(PrintAttributes printAttributes, PrintAttributes printAttributes2, ILayoutResultCallback iLayoutResultCallback, Bundle bundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printAttributes, 0);
-                    obtain.writeTypedObject(printAttributes2, 0);
-                    obtain.writeStrongInterface(iLayoutResultCallback);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printAttributes, 0);
+                    parcelObtain.writeTypedObject(printAttributes2, 0);
+                    parcelObtain.writeStrongInterface(iLayoutResultCallback);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintDocumentAdapter
             public void write(PageRange[] pageRangeArr, ParcelFileDescriptor parcelFileDescriptor, IWriteResultCallback iWriteResultCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(pageRangeArr, 0);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeStrongInterface(iWriteResultCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(pageRangeArr, 0);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeStrongInterface(iWriteResultCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintDocumentAdapter
             public void finish() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

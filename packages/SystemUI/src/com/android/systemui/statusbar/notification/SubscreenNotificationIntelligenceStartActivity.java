@@ -11,7 +11,6 @@ import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.util.SettingsHelper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubscreenNotificationIntelligenceStartActivity extends Activity implements CommandQueue.Callbacks {
     public static final String TAG;
@@ -19,7 +18,6 @@ public final class SubscreenNotificationIntelligenceStartActivity extends Activi
     public boolean needToShowFTU;
     private final SettingsHelper settingsHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -52,9 +50,9 @@ public final class SubscreenNotificationIntelligenceStartActivity extends Activi
     public final void onActivityResult(int i, int i2, Intent intent) {
         SubscreenDeviceModelParent subscreenDeviceModelParent;
         super.onActivityResult(i, i2, intent);
-        String m = ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "onActivityResult() request: ", ", result: ");
+        String strM = ListImplementation$$ExternalSyntheticOutline0.m(i, i2, "onActivityResult() request: ", ", result: ");
         String str = TAG;
-        Log.d(str, m);
+        Log.d(str, strM);
         if (i != 10) {
             if (i == 20 && i2 == -1) {
                 setAiInfoConfirmed();

@@ -62,37 +62,37 @@ public final class WallpaperInfo implements Parcelable {
         ServiceInfo serviceInfo = resolveInfo.serviceInfo;
         PackageManager packageManager = context.getPackageManager();
         try {
-            XmlResourceParser loadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, WallpaperService.SERVICE_META_DATA);
+            XmlResourceParser xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, WallpaperService.SERVICE_META_DATA);
             try {
-                if (loadXmlMetaData == null) {
+                if (xmlResourceParserLoadXmlMetaData == null) {
                     throw new XmlPullParserException("No android.service.wallpaper meta-data");
                 }
                 Resources resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
-                AttributeSet asAttributeSet = Xml.asAttributeSet(loadXmlMetaData);
+                AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
                 do {
-                    next = loadXmlMetaData.next();
+                    next = xmlResourceParserLoadXmlMetaData.next();
                     if (next == 1) {
                         break;
                     }
                 } while (next != 2);
-                if (!"wallpaper".equals(loadXmlMetaData.getName())) {
+                if (!"wallpaper".equals(xmlResourceParserLoadXmlMetaData.getName())) {
                     throw new XmlPullParserException("Meta-data does not start with wallpaper tag");
                 }
-                TypedArray obtainAttributes = resourcesForApplication.obtainAttributes(asAttributeSet, R.styleable.Wallpaper);
-                this.mSettingsActivityName = obtainAttributes.getString(1);
-                this.mThumbnailResource = obtainAttributes.getResourceId(2, -1);
-                this.mAuthorResource = obtainAttributes.getResourceId(3, -1);
-                this.mDescriptionResource = obtainAttributes.getResourceId(0, -1);
-                this.mContextUriResource = obtainAttributes.getResourceId(4, -1);
-                this.mContextDescriptionResource = obtainAttributes.getResourceId(5, -1);
-                this.mShowMetadataInPreview = obtainAttributes.getBoolean(6, false);
-                this.mSupportsAmbientMode = obtainAttributes.getBoolean(7, packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH));
-                this.mShouldUseDefaultUnfoldTransition = obtainAttributes.getBoolean(10, true);
-                this.mSettingsSliceUri = obtainAttributes.getString(8);
-                this.mSupportMultipleDisplays = obtainAttributes.getBoolean(9, false);
-                obtainAttributes.recycle();
-                if (loadXmlMetaData != null) {
-                    loadXmlMetaData.close();
+                TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.Wallpaper);
+                this.mSettingsActivityName = typedArrayObtainAttributes.getString(1);
+                this.mThumbnailResource = typedArrayObtainAttributes.getResourceId(2, -1);
+                this.mAuthorResource = typedArrayObtainAttributes.getResourceId(3, -1);
+                this.mDescriptionResource = typedArrayObtainAttributes.getResourceId(0, -1);
+                this.mContextUriResource = typedArrayObtainAttributes.getResourceId(4, -1);
+                this.mContextDescriptionResource = typedArrayObtainAttributes.getResourceId(5, -1);
+                this.mShowMetadataInPreview = typedArrayObtainAttributes.getBoolean(6, false);
+                this.mSupportsAmbientMode = typedArrayObtainAttributes.getBoolean(7, packageManager.hasSystemFeature(PackageManager.FEATURE_WATCH));
+                this.mShouldUseDefaultUnfoldTransition = typedArrayObtainAttributes.getBoolean(10, true);
+                this.mSettingsSliceUri = typedArrayObtainAttributes.getString(8);
+                this.mSupportMultipleDisplays = typedArrayObtainAttributes.getBoolean(9, false);
+                typedArrayObtainAttributes.recycle();
+                if (xmlResourceParserLoadXmlMetaData != null) {
+                    xmlResourceParserLoadXmlMetaData.close();
                 }
             } finally {
             }

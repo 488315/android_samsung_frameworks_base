@@ -10,26 +10,25 @@ import kotlin.Unit;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface FlowLineMeasurePolicy extends RowColumnMeasurePolicy {
     @Override // androidx.compose.foundation.layout.RowColumnMeasurePolicy
     /* renamed from: createConstraints-xF2OJ5Q */
-    default long mo102createConstraintsxF2OJ5Q(boolean z, int i, int i2, int i3, int i4) {
+    default long mo103createConstraintsxF2OJ5Q(boolean z, int i, int i2, int i3, int i4) {
         if (((FlowMeasurePolicy) this).isHorizontal) {
             RowMeasurePolicy rowMeasurePolicy = RowKt.DefaultRowMeasurePolicy;
             if (!z) {
                 return ConstraintsKt.Constraints(i, i3, i2, i4);
             }
             Constraints.Companion.getClass();
-            return Constraints.Companion.m826fitPrioritizingWidthZbe2FdA(i, i3, i2, i4);
+            return Constraints.Companion.m828fitPrioritizingWidthZbe2FdA(i, i3, i2, i4);
         }
         ColumnMeasurePolicy columnMeasurePolicy = ColumnKt.DefaultColumnMeasurePolicy;
         if (!z) {
             return ConstraintsKt.Constraints(i2, i4, i, i3);
         }
         Constraints.Companion.getClass();
-        return Constraints.Companion.m825fitPrioritizingHeightZbe2FdA(i2, i4, i, i3);
+        return Constraints.Companion.m827fitPrioritizingHeightZbe2FdA(i2, i4, i, i3);
     }
 
     @Override // androidx.compose.foundation.layout.RowColumnMeasurePolicy
@@ -46,7 +45,6 @@ public interface FlowLineMeasurePolicy extends RowColumnMeasurePolicy {
     default MeasureResult placeHelper(final Placeable[] placeableArr, MeasureScope measureScope, final int[] iArr, int i, final int i2, final int[] iArr2, final int i3, final int i4, final int i5) {
         int i6;
         int i7;
-        MeasureResult layout$1;
         boolean z = ((FlowMeasurePolicy) this).isHorizontal;
         if (z) {
             i7 = i;
@@ -57,7 +55,7 @@ public interface FlowLineMeasurePolicy extends RowColumnMeasurePolicy {
         }
         final LayoutDirection layoutDirection = z ? LayoutDirection.Ltr : measureScope.getLayoutDirection();
         final int i8 = 0;
-        layout$1 = measureScope.layout$1(i7, i6, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.layout.FlowLineMeasurePolicy$placeHelper$1$1
+        return measureScope.layout$1(i7, i6, MapsKt__MapsKt.emptyMap(), new Function1() { // from class: androidx.compose.foundation.layout.FlowLineMeasurePolicy$placeHelper$1$1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -65,7 +63,7 @@ public interface FlowLineMeasurePolicy extends RowColumnMeasurePolicy {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 CrossAxisAlignment crossAxisAlignment;
                 Placeable.PlacementScope placementScope = (Placeable.PlacementScope) obj;
                 int[] iArr3 = iArr2;
@@ -82,17 +80,16 @@ public interface FlowLineMeasurePolicy extends RowColumnMeasurePolicy {
                     if (rowColumnParentData == null || (crossAxisAlignment = rowColumnParentData.crossAxisAlignment) == null) {
                         crossAxisAlignment = ((FlowMeasurePolicy) flowLineMeasurePolicy).crossAxisAlignment;
                     }
-                    int align$foundation_layout = crossAxisAlignment.align$foundation_layout(i11 - flowLineMeasurePolicy.crossAxisSize(placeable), layoutDirection2) + i9;
+                    int iAlign$foundation_layout = crossAxisAlignment.align$foundation_layout(i11 - flowLineMeasurePolicy.crossAxisSize(placeable), layoutDirection2) + i9;
                     if (((FlowMeasurePolicy) this).isHorizontal) {
-                        placementScope.place(placeable, iArr[i10 - i4], align$foundation_layout, 0.0f);
+                        placementScope.place(placeable, iArr[i10 - i4], iAlign$foundation_layout, 0.0f);
                     } else {
-                        placementScope.place(placeable, align$foundation_layout, iArr[i10 - i4], 0.0f);
+                        placementScope.place(placeable, iAlign$foundation_layout, iArr[i10 - i4], 0.0f);
                     }
                 }
                 return Unit.INSTANCE;
             }
         });
-        return layout$1;
     }
 
     @Override // androidx.compose.foundation.layout.RowColumnMeasurePolicy

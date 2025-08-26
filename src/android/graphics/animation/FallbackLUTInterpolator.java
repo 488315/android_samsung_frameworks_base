@@ -16,10 +16,10 @@ public class FallbackLUTInterpolator implements NativeInterpolator, TimeInterpol
     }
 
     private static float[] createLUT(TimeInterpolator timeInterpolator, long j) {
-        int min = Math.min(Math.max(2, (int) Math.ceil(j / ((int) (Choreographer.getInstance().getFrameIntervalNanos() / 1000000)))), 300);
-        float[] fArr = new float[min];
-        float f = min - 1;
-        for (int i = 0; i < min; i++) {
+        int iMin = Math.min(Math.max(2, (int) Math.ceil(j / ((int) (Choreographer.getInstance().getFrameIntervalNanos() / 1000000)))), 300);
+        float[] fArr = new float[iMin];
+        float f = iMin - 1;
+        for (int i = 0; i < iMin; i++) {
             fArr[i] = timeInterpolator.getInterpolation(i / f);
         }
         return fArr;

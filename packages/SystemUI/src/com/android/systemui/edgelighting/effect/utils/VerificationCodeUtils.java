@@ -15,7 +15,6 @@ import com.android.systemui.edgelighting.effect.utils.vc.SinVerificationCodePars
 import com.android.systemui.edgelighting.effect.utils.vc.ThlVerificationCodeParser;
 import com.android.systemui.edgelighting.effect.utils.vc.VnVerificationCodeParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class VerificationCodeUtils {
     public static final boolean DEBUG = Debug.semIsProductDev();
@@ -42,9 +41,9 @@ public class VerificationCodeUtils {
         if (verificationCode == null) {
             return false;
         }
-        int indexOf = str.indexOf(verificationCode);
-        code_startIndex = indexOf;
-        code_endIndex = Verify_Code.length() + indexOf;
+        int iIndexOf = str.indexOf(verificationCode);
+        code_startIndex = iIndexOf;
+        code_endIndex = Verify_Code.length() + iIndexOf;
         return true;
     }
 }

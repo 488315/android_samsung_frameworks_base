@@ -23,8 +23,8 @@ public class PackageManagerWrapper {
         ComponentName componentName = new ComponentName("com.sec.android.app.kidshome", "com.sec.android.app.kidshome.apps.ui.AppsActivity");
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
-        ResolveInfo resolveActivity = this.mPackageManager.resolveActivity(intent, 65536);
-        return new ComponentName(resolveActivity.activityInfo.packageName, resolveActivity.activityInfo.name).equals(componentName);
+        ResolveInfo resolveInfoResolveActivity = this.mPackageManager.resolveActivity(intent, 65536);
+        return new ComponentName(resolveInfoResolveActivity.activityInfo.packageName, resolveInfoResolveActivity.activityInfo.name).equals(componentName);
     }
 
     public boolean isATTFOTAPackageAvailable() {

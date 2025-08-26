@@ -2,9 +2,7 @@ package android.os;
 
 import android.app.AppOpsManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.net.wifi.WifiMigration;
 import android.os.Parcelable;
-import android.sec.enterprise.proxy.EnterpriseProxyConstants;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -18,8 +16,10 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
+import com.android.internal.infra.PerUser;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
+import com.samsung.android.sume.core.controller.MediaController;
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
 import java.io.ByteArrayInputStream;
@@ -353,9 +353,9 @@ public final class Parcel {
     }
 
     public static Parcel obtain(IBinder iBinder) {
-        Parcel obtain = obtain();
-        obtain.markForBinder(iBinder);
-        return obtain;
+        Parcel parcelObtain = obtain();
+        parcelObtain.markForBinder(iBinder);
+        return parcelObtain;
     }
 
     public final void recycle() {
@@ -474,21 +474,21 @@ public final class Parcel {
     }
 
     public final void marshall(ByteBuffer byteBuffer) {
-        int nativeMarshallArray;
+        int iNativeMarshallArray;
         byteBuffer.getClass();
         if (byteBuffer.isReadOnly()) {
             throw new ReadOnlyBufferException();
         }
-        int position = byteBuffer.position();
-        int remaining = byteBuffer.remaining();
+        int iPosition = byteBuffer.position();
+        int iRemaining = byteBuffer.remaining();
         if (byteBuffer.isDirect()) {
-            nativeMarshallArray = nativeMarshallBuffer(this.mNativePtr, byteBuffer, position, remaining);
+            iNativeMarshallArray = nativeMarshallBuffer(this.mNativePtr, byteBuffer, iPosition, iRemaining);
         } else if (byteBuffer.hasArray()) {
-            nativeMarshallArray = nativeMarshallArray(this.mNativePtr, byteBuffer.array(), byteBuffer.arrayOffset() + position, remaining);
+            iNativeMarshallArray = nativeMarshallArray(this.mNativePtr, byteBuffer.array(), byteBuffer.arrayOffset() + iPosition, iRemaining);
         } else {
             throw new IllegalArgumentException();
         }
-        byteBuffer.position(position + nativeMarshallArray);
+        byteBuffer.position(iPosition + iNativeMarshallArray);
     }
 
     public final void unmarshall(byte[] bArr, int i, int i2) {
@@ -497,16 +497,16 @@ public final class Parcel {
 
     public final void unmarshall(ByteBuffer byteBuffer) {
         byteBuffer.getClass();
-        int position = byteBuffer.position();
-        int remaining = byteBuffer.remaining();
+        int iPosition = byteBuffer.position();
+        int iRemaining = byteBuffer.remaining();
         if (byteBuffer.isDirect()) {
-            nativeUnmarshallBuffer(this.mNativePtr, byteBuffer, position, remaining);
+            nativeUnmarshallBuffer(this.mNativePtr, byteBuffer, iPosition, iRemaining);
         } else if (byteBuffer.hasArray()) {
-            nativeUnmarshall(this.mNativePtr, byteBuffer.array(), byteBuffer.arrayOffset() + position, remaining);
+            nativeUnmarshall(this.mNativePtr, byteBuffer.array(), byteBuffer.arrayOffset() + iPosition, iRemaining);
         } else {
             throw new IllegalArgumentException();
         }
-        byteBuffer.position(position + remaining);
+        byteBuffer.position(iPosition + iRemaining);
     }
 
     public final void appendFrom(Parcel parcel, int i, int i2) {
@@ -539,9 +539,9 @@ public final class Parcel {
     public void removeClassCookie(Class cls, Object obj) {
         ArrayMap<Class, Object> arrayMap = this.mClassCookies;
         if (arrayMap != null) {
-            Object remove = arrayMap.remove(cls);
-            if (remove != obj) {
-                Log.wtf(TAG, "Expected to remove " + obj + " (with key=" + cls + ") but instead removed " + remove);
+            Object objRemove = arrayMap.remove(cls);
+            if (objRemove != obj) {
+                Log.wtf(TAG, "Expected to remove " + obj + " (with key=" + cls + ") but instead removed " + objRemove);
                 return;
             }
             return;
@@ -657,11 +657,11 @@ public final class Parcel {
     }
 
     public void enforceNoDataAvail() {
-        int dataAvail = dataAvail();
-        if (dataAvail <= 0) {
+        int iDataAvail = dataAvail();
+        if (iDataAvail <= 0) {
             return;
         }
-        throw new BadParcelableException("Parcel data not fully consumed, unread size: " + dataAvail);
+        throw new BadParcelableException("Parcel data not fully consumed, unread size: " + iDataAvail);
     }
 
     public boolean replaceCallingWorkSourceUid(int i) {
@@ -699,30 +699,30 @@ public final class Parcel {
     }
 
     public final void writeInt(int i) {
-        int nativeWriteInt = nativeWriteInt(this.mNativePtr, i);
-        if (nativeWriteInt != 0) {
-            nativeSignalExceptionForError(nativeWriteInt);
+        int iNativeWriteInt = nativeWriteInt(this.mNativePtr, i);
+        if (iNativeWriteInt != 0) {
+            nativeSignalExceptionForError(iNativeWriteInt);
         }
     }
 
     public final void writeLong(long j) {
-        int nativeWriteLong = nativeWriteLong(this.mNativePtr, j);
-        if (nativeWriteLong != 0) {
-            nativeSignalExceptionForError(nativeWriteLong);
+        int iNativeWriteLong = nativeWriteLong(this.mNativePtr, j);
+        if (iNativeWriteLong != 0) {
+            nativeSignalExceptionForError(iNativeWriteLong);
         }
     }
 
     public final void writeFloat(float f) {
-        int nativeWriteFloat = nativeWriteFloat(this.mNativePtr, f);
-        if (nativeWriteFloat != 0) {
-            nativeSignalExceptionForError(nativeWriteFloat);
+        int iNativeWriteFloat = nativeWriteFloat(this.mNativePtr, f);
+        if (iNativeWriteFloat != 0) {
+            nativeSignalExceptionForError(iNativeWriteFloat);
         }
     }
 
     public final void writeDouble(double d) {
-        int nativeWriteDouble = nativeWriteDouble(this.mNativePtr, d);
-        if (nativeWriteDouble != 0) {
-            nativeSignalExceptionForError(nativeWriteDouble);
+        int iNativeWriteDouble = nativeWriteDouble(this.mNativePtr, d);
+        if (iNativeWriteDouble != 0) {
+            nativeSignalExceptionForError(iNativeWriteDouble);
         }
     }
 
@@ -798,10 +798,10 @@ public final class Parcel {
             writeInt(-1);
             return;
         }
-        Set<Map.Entry<String, Object>> entrySet = map.entrySet();
-        int size = entrySet.size();
+        Set<Map.Entry<String, Object>> setEntrySet = map.entrySet();
+        int size = setEntrySet.size();
         writeInt(size);
-        for (Map.Entry<String, Object> entry : entrySet) {
+        for (Map.Entry<String, Object> entry : setEntrySet) {
             writeValue(entry.getKey());
             writeValue(entry.getValue());
             size--;
@@ -811,7 +811,7 @@ public final class Parcel {
         }
     }
 
-    void writeArrayMapInternal(ArrayMap<String, Object> arrayMap) {
+    void writeArrayMapInternal(ArrayMap<String, Object> arrayMap) throws IOException {
         if (arrayMap == null) {
             writeInt(-1);
             return;
@@ -824,7 +824,7 @@ public final class Parcel {
         }
     }
 
-    public void writeArrayMap(ArrayMap<String, Object> arrayMap) {
+    public void writeArrayMap(ArrayMap<String, Object> arrayMap) throws IOException {
         writeArrayMapInternal(arrayMap);
     }
 
@@ -841,7 +841,7 @@ public final class Parcel {
         }
     }
 
-    public void writeArraySet(ArraySet<? extends Object> arraySet) {
+    public void writeArraySet(ArraySet<? extends Object> arraySet) throws IOException {
         int size = arraySet != null ? arraySet.size() : -1;
         writeInt(size);
         for (int i = 0; i < size; i++) {
@@ -972,22 +972,22 @@ public final class Parcel {
     }
 
     private void ensureWithinMemoryLimit(int i, int... iArr) {
-        int i2 = 1;
+        int iMultiplyExact = 1;
         try {
-            for (int i3 : iArr) {
-                i2 = Math.multiplyExact(i2, i3);
+            for (int i2 : iArr) {
+                iMultiplyExact = Math.multiplyExact(iMultiplyExact, i2);
             }
         } catch (ArithmeticException e) {
             Log.e(TAG, "ArithmeticException occurred while multiplying dimensions " + e);
             SneakyThrow.sneakyThrow(new BadParcelableException("Estimated array length is too large. Array Dimensions:" + Arrays.toString(iArr)));
         }
-        ensureWithinMemoryLimit(i, i2);
+        ensureWithinMemoryLimit(i, iMultiplyExact);
     }
 
     private void ensureWithinMemoryLimit(int i, int i2) {
-        int i3;
+        int iMultiplyExact;
         try {
-            i3 = Math.multiplyExact(i, i2);
+            iMultiplyExact = Math.multiplyExact(i, i2);
         } catch (ArithmeticException e) {
             Log.e(TAG, "ArithmeticException occurred while multiplying values " + i + " and " + i2 + " Exception: " + e);
             StringBuilder sb = new StringBuilder("Estimated allocation size is too large. typeSize: ");
@@ -995,39 +995,39 @@ public final class Parcel {
             sb.append(" length: ");
             sb.append(i2);
             SneakyThrow.sneakyThrow(new BadParcelableException(sb.toString()));
-            i3 = 0;
+            iMultiplyExact = 0;
         }
-        boolean isDirectlyHandlingTransaction = Binder.isDirectlyHandlingTransaction();
-        if (!isDirectlyHandlingTransaction || i3 <= 1000000) {
+        boolean zIsDirectlyHandlingTransaction = Binder.isDirectlyHandlingTransaction();
+        if (!zIsDirectlyHandlingTransaction || iMultiplyExact <= 1000000) {
             return;
         }
-        Log.e(TAG, "Trying to Allocate " + i3 + " memory, In Binder Transaction : " + isDirectlyHandlingTransaction);
+        Log.e(TAG, "Trying to Allocate " + iMultiplyExact + " memory, In Binder Transaction : " + zIsDirectlyHandlingTransaction);
         StringBuilder sb2 = new StringBuilder("Allocation of size ");
-        sb2.append(i3);
+        sb2.append(iMultiplyExact);
         sb2.append(" is above allowed limit of 1MB");
         SneakyThrow.sneakyThrow(new BadParcelableException(sb2.toString()));
     }
 
     public final boolean[] createBooleanArray() {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(4, readInt);
-        if (readInt < 0 || readInt > (dataAvail() >> 2)) {
+        int i = readInt();
+        ensureWithinMemoryLimit(4, i);
+        if (i < 0 || i > (dataAvail() >> 2)) {
             return null;
         }
-        boolean[] zArr = new boolean[readInt];
-        for (int i = 0; i < readInt; i++) {
-            zArr[i] = readInt() != 0;
+        boolean[] zArr = new boolean[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            zArr[i2] = readInt() != 0;
         }
         return zArr;
     }
 
     public final void readBooleanArray(boolean[] zArr) {
-        int readInt = readInt();
-        if (readInt != zArr.length) {
+        int i = readInt();
+        if (i != zArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            zArr[i] = readInt() != 0;
+        for (int i2 = 0; i2 < i; i2++) {
+            zArr[i2] = readInt() != 0;
         }
     }
 
@@ -1043,25 +1043,25 @@ public final class Parcel {
     }
 
     public short[] createShortArray() {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(2, readInt);
-        if (readInt < 0 || readInt > (dataAvail() >> 2)) {
+        int i = readInt();
+        ensureWithinMemoryLimit(2, i);
+        if (i < 0 || i > (dataAvail() >> 2)) {
             return null;
         }
-        short[] sArr = new short[readInt];
-        for (int i = 0; i < readInt; i++) {
-            sArr[i] = (short) readInt();
+        short[] sArr = new short[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            sArr[i2] = (short) readInt();
         }
         return sArr;
     }
 
     public void readShortArray(short[] sArr) {
-        int readInt = readInt();
-        if (readInt != sArr.length) {
+        int i = readInt();
+        if (i != sArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            sArr[i] = (short) readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            sArr[i2] = (short) readInt();
         }
     }
 
@@ -1077,25 +1077,25 @@ public final class Parcel {
     }
 
     public final char[] createCharArray() {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(2, readInt);
-        if (readInt < 0 || readInt > (dataAvail() >> 2)) {
+        int i = readInt();
+        ensureWithinMemoryLimit(2, i);
+        if (i < 0 || i > (dataAvail() >> 2)) {
             return null;
         }
-        char[] cArr = new char[readInt];
-        for (int i = 0; i < readInt; i++) {
-            cArr[i] = (char) readInt();
+        char[] cArr = new char[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            cArr[i2] = (char) readInt();
         }
         return cArr;
     }
 
     public final void readCharArray(char[] cArr) {
-        int readInt = readInt();
-        if (readInt != cArr.length) {
+        int i = readInt();
+        if (i != cArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            cArr[i] = (char) readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            cArr[i2] = (char) readInt();
         }
     }
 
@@ -1111,25 +1111,25 @@ public final class Parcel {
     }
 
     public final int[] createIntArray() {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(4, readInt);
-        if (readInt < 0 || readInt > (dataAvail() >> 2)) {
+        int i = readInt();
+        ensureWithinMemoryLimit(4, i);
+        if (i < 0 || i > (dataAvail() >> 2)) {
             return null;
         }
-        int[] iArr = new int[readInt];
-        for (int i = 0; i < readInt; i++) {
-            iArr[i] = readInt();
+        int[] iArr = new int[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            iArr[i2] = readInt();
         }
         return iArr;
     }
 
     public final void readIntArray(int[] iArr) {
-        int readInt = readInt();
-        if (readInt != iArr.length) {
+        int i = readInt();
+        if (i != iArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            iArr[i] = readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            iArr[i2] = readInt();
         }
     }
 
@@ -1145,25 +1145,25 @@ public final class Parcel {
     }
 
     public final long[] createLongArray() {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(8, readInt);
-        if (readInt < 0 || readInt > (dataAvail() >> 3)) {
+        int i = readInt();
+        ensureWithinMemoryLimit(8, i);
+        if (i < 0 || i > (dataAvail() >> 3)) {
             return null;
         }
-        long[] jArr = new long[readInt];
-        for (int i = 0; i < readInt; i++) {
-            jArr[i] = readLong();
+        long[] jArr = new long[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            jArr[i2] = readLong();
         }
         return jArr;
     }
 
     public final void readLongArray(long[] jArr) {
-        int readInt = readInt();
-        if (readInt != jArr.length) {
+        int i = readInt();
+        if (i != jArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            jArr[i] = readLong();
+        for (int i2 = 0; i2 < i; i2++) {
+            jArr[i2] = readLong();
         }
     }
 
@@ -1179,25 +1179,25 @@ public final class Parcel {
     }
 
     public final float[] createFloatArray() {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(4, readInt);
-        if (readInt < 0 || readInt > (dataAvail() >> 2)) {
+        int i = readInt();
+        ensureWithinMemoryLimit(4, i);
+        if (i < 0 || i > (dataAvail() >> 2)) {
             return null;
         }
-        float[] fArr = new float[readInt];
-        for (int i = 0; i < readInt; i++) {
-            fArr[i] = readFloat();
+        float[] fArr = new float[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            fArr[i2] = readFloat();
         }
         return fArr;
     }
 
     public final void readFloatArray(float[] fArr) {
-        int readInt = readInt();
-        if (readInt != fArr.length) {
+        int i = readInt();
+        if (i != fArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            fArr[i] = readFloat();
+        for (int i2 = 0; i2 < i; i2++) {
+            fArr[i2] = readFloat();
         }
     }
 
@@ -1213,25 +1213,25 @@ public final class Parcel {
     }
 
     public final double[] createDoubleArray() {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(8, readInt);
-        if (readInt < 0 || readInt > (dataAvail() >> 3)) {
+        int i = readInt();
+        ensureWithinMemoryLimit(8, i);
+        if (i < 0 || i > (dataAvail() >> 3)) {
             return null;
         }
-        double[] dArr = new double[readInt];
-        for (int i = 0; i < readInt; i++) {
-            dArr[i] = readDouble();
+        double[] dArr = new double[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            dArr[i2] = readDouble();
         }
         return dArr;
     }
 
     public final void readDoubleArray(double[] dArr) {
-        int readInt = readInt();
-        if (readInt != dArr.length) {
+        int i = readInt();
+        if (i != dArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            dArr[i] = readDouble();
+        for (int i2 = 0; i2 < i; i2++) {
+            dArr[i2] = readDouble();
         }
     }
 
@@ -1259,25 +1259,25 @@ public final class Parcel {
     }
 
     public final String[] createString8Array() {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(1, readInt);
-        if (readInt < 0) {
+        int i = readInt();
+        ensureWithinMemoryLimit(1, i);
+        if (i < 0) {
             return null;
         }
-        String[] strArr = new String[readInt];
-        for (int i = 0; i < readInt; i++) {
-            strArr[i] = readString8();
+        String[] strArr = new String[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            strArr[i2] = readString8();
         }
         return strArr;
     }
 
     public final void readString8Array(String[] strArr) {
-        int readInt = readInt();
-        if (readInt != strArr.length) {
+        int i = readInt();
+        if (i != strArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            strArr[i] = readString8();
+        for (int i2 = 0; i2 < i; i2++) {
+            strArr[i2] = readString8();
         }
     }
 
@@ -1293,25 +1293,25 @@ public final class Parcel {
     }
 
     public final String[] createString16Array() {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(1, readInt);
-        if (readInt < 0) {
+        int i = readInt();
+        ensureWithinMemoryLimit(1, i);
+        if (i < 0) {
             return null;
         }
-        String[] strArr = new String[readInt];
-        for (int i = 0; i < readInt; i++) {
-            strArr[i] = readString16();
+        String[] strArr = new String[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            strArr[i2] = readString16();
         }
         return strArr;
     }
 
     public final void readString16Array(String[] strArr) {
-        int readInt = readInt();
-        if (readInt != strArr.length) {
+        int i = readInt();
+        if (i != strArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            strArr[i] = readString16();
+        for (int i2 = 0; i2 < i; i2++) {
+            strArr[i2] = readString16();
         }
     }
 
@@ -1361,48 +1361,48 @@ public final class Parcel {
     }
 
     public final IBinder[] createBinderArray() {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(1, readInt);
-        if (readInt < 0) {
+        int i = readInt();
+        ensureWithinMemoryLimit(1, i);
+        if (i < 0) {
             return null;
         }
-        IBinder[] iBinderArr = new IBinder[readInt];
-        for (int i = 0; i < readInt; i++) {
-            iBinderArr[i] = readStrongBinder();
+        IBinder[] iBinderArr = new IBinder[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            iBinderArr[i2] = readStrongBinder();
         }
         return iBinderArr;
     }
 
     public final void readBinderArray(IBinder[] iBinderArr) {
-        int readInt = readInt();
-        if (readInt != iBinderArr.length) {
+        int i = readInt();
+        if (i != iBinderArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            iBinderArr[i] = readStrongBinder();
+        for (int i2 = 0; i2 < i; i2++) {
+            iBinderArr[i2] = readStrongBinder();
         }
     }
 
     public final <T extends IInterface> T[] createInterfaceArray(IntFunction<T[]> intFunction, Function<IBinder, T> function) {
-        int readInt = readInt();
-        ensureWithinMemoryLimit(1, readInt);
-        if (readInt < 0) {
+        int i = readInt();
+        ensureWithinMemoryLimit(1, i);
+        if (i < 0) {
             return null;
         }
-        T[] apply = intFunction.apply(readInt);
-        for (int i = 0; i < readInt; i++) {
-            apply[i] = function.apply(readStrongBinder());
+        T[] tArrApply = intFunction.apply(i);
+        for (int i2 = 0; i2 < i; i2++) {
+            tArrApply[i2] = function.apply(readStrongBinder());
         }
-        return apply;
+        return tArrApply;
     }
 
     public final <T extends IInterface> void readInterfaceArray(T[] tArr, Function<IBinder, T> function) {
-        int readInt = readInt();
-        if (readInt != tArr.length) {
+        int i = readInt();
+        if (i != tArr.length) {
             throw new BadParcelableException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            tArr[i] = function.apply(readStrongBinder());
+        for (int i2 = 0; i2 < i; i2++) {
+            tArr[i2] = function.apply(readStrongBinder());
         }
     }
 
@@ -1580,7 +1580,7 @@ public final class Parcel {
         throw new BadParcelableException("unknown type for fixed-size array: " + componentType);
     }
 
-    public final void writeValue(Object obj) {
+    public final void writeValue(Object obj) throws IOException {
         if (obj instanceof LazyValue) {
             ((LazyValue) obj).writeToParcel(this);
             return;
@@ -1588,14 +1588,14 @@ public final class Parcel {
         int valueType = getValueType(obj);
         writeInt(valueType);
         if (isLengthPrefixed(valueType)) {
-            int dataPosition = dataPosition();
+            int iDataPosition = dataPosition();
             writeInt(-1);
-            int dataPosition2 = dataPosition();
+            int iDataPosition2 = dataPosition();
             writeValue(valueType, obj);
-            int dataPosition3 = dataPosition();
-            setDataPosition(dataPosition);
-            writeInt(dataPosition3 - dataPosition2);
-            setDataPosition(dataPosition3);
+            int iDataPosition3 = dataPosition();
+            setDataPosition(iDataPosition);
+            writeInt(iDataPosition3 - iDataPosition2);
+            setDataPosition(iDataPosition3);
             return;
         }
         writeValue(valueType, obj);
@@ -1705,7 +1705,7 @@ public final class Parcel {
         throw new IllegalArgumentException("Parcel: unknown type for value " + obj);
     }
 
-    public void writeValue(int i, Object obj) {
+    public void writeValue(int i, Object obj) throws IOException {
         switch (i) {
             case -1:
                 return;
@@ -1878,28 +1878,28 @@ public final class Parcel {
     }
 
     public <T extends Parcelable> T readSquashed(SquashReadHelper<T> squashReadHelper) {
-        int readInt = readInt();
-        int dataPosition = dataPosition();
-        if (readInt == 0) {
-            T readRawParceled = squashReadHelper.readRawParceled(this);
+        int i = readInt();
+        int iDataPosition = dataPosition();
+        if (i == 0) {
+            T rawParceled = squashReadHelper.readRawParceled(this);
             ensureReadSquashableParcelables();
-            this.mReadSquashableParcelables.put(dataPosition, readRawParceled);
-            return readRawParceled;
+            this.mReadSquashableParcelables.put(iDataPosition, rawParceled);
+            return rawParceled;
         }
-        int i = dataPosition - readInt;
-        T t = (T) this.mReadSquashableParcelables.get(i);
+        int i2 = iDataPosition - i;
+        T t = (T) this.mReadSquashableParcelables.get(i2);
         if (t == null) {
             StringBuilder sb = new StringBuilder();
-            for (int i2 = 0; i2 < this.mReadSquashableParcelables.size(); i2++) {
-                sb.append(this.mReadSquashableParcelables.keyAt(i2));
+            for (int i3 = 0; i3 < this.mReadSquashableParcelables.size(); i3++) {
+                sb.append(this.mReadSquashableParcelables.keyAt(i3));
                 sb.append(' ');
             }
-            Slog.wtfStack(TAG, "Map doesn't contain offset " + i + " : contains=" + sb.toString());
+            Slog.wtfStack(TAG, "Map doesn't contain offset " + i2 + " : contains=" + sb.toString());
         }
         return t;
     }
 
-    public final void writeSerializable(Serializable serializable) {
+    public final void writeSerializable(Serializable serializable) throws IOException {
         if (serializable == null) {
             writeString(null);
             return;
@@ -1934,9 +1934,9 @@ public final class Parcel {
             throw new RuntimeException(exc);
         }
         writeString(exc.getMessage());
-        long elapsedRealtime = sParcelExceptionStackTrace ? SystemClock.elapsedRealtime() : 0L;
-        if (sParcelExceptionStackTrace && elapsedRealtime - sLastWriteExceptionStackTrace > 1000) {
-            sLastWriteExceptionStackTrace = elapsedRealtime;
+        long jElapsedRealtime = sParcelExceptionStackTrace ? SystemClock.elapsedRealtime() : 0L;
+        if (sParcelExceptionStackTrace && jElapsedRealtime - sLastWriteExceptionStackTrace > 1000) {
+            sLastWriteExceptionStackTrace = jElapsedRealtime;
             writeStackTrace(exc);
         } else {
             writeInt(0);
@@ -1948,13 +1948,13 @@ public final class Parcel {
             writeInt(((ServiceSpecificException) exc).errorCode);
             return;
         }
-        int dataPosition = dataPosition();
+        int iDataPosition = dataPosition();
         writeInt(0);
         writeParcelable((Parcelable) exc, 1);
-        int dataPosition2 = dataPosition();
-        setDataPosition(dataPosition);
-        writeInt(dataPosition2 - dataPosition);
-        setDataPosition(dataPosition2);
+        int iDataPosition2 = dataPosition();
+        setDataPosition(iDataPosition);
+        writeInt(iDataPosition2 - iDataPosition);
+        setDataPosition(iDataPosition2);
     }
 
     private void writeException$ravenwood(Exception exc) {
@@ -1999,34 +1999,34 @@ public final class Parcel {
     }
 
     public void writeStackTrace(Throwable th) {
-        int dataPosition = dataPosition();
+        int iDataPosition = dataPosition();
         writeInt(0);
         StackTraceElement[] stackTrace = th.getStackTrace();
-        int min = Math.min(stackTrace.length, 5);
+        int iMin = Math.min(stackTrace.length, 5);
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < min; i++) {
+        for (int i = 0; i < iMin; i++) {
             sb.append("\tat ");
             sb.append(stackTrace[i]);
             sb.append('\n');
         }
         writeString(sb.toString());
-        int dataPosition2 = dataPosition();
-        setDataPosition(dataPosition);
-        writeInt(dataPosition2 - dataPosition);
-        setDataPosition(dataPosition2);
+        int iDataPosition2 = dataPosition();
+        setDataPosition(iDataPosition);
+        writeInt(iDataPosition2 - iDataPosition);
+        setDataPosition(iDataPosition2);
     }
 
     public final void writeNoException() {
         AppOpsManager.prefixParcelWithAppOpsIfNeeded(this);
         if (StrictMode.hasGatheredViolations()) {
             writeInt(-128);
-            int dataPosition = dataPosition();
+            int iDataPosition = dataPosition();
             writeInt(0);
             StrictMode.writeGatheredViolationsToParcel(this);
-            int dataPosition2 = dataPosition();
-            setDataPosition(dataPosition);
-            writeInt(dataPosition2 - dataPosition);
-            setDataPosition(dataPosition2);
+            int iDataPosition2 = dataPosition();
+            setDataPosition(iDataPosition);
+            writeInt(iDataPosition2 - iDataPosition);
+            setDataPosition(iDataPosition2);
             return;
         }
         writeInt(0);
@@ -2037,20 +2037,20 @@ public final class Parcel {
     }
 
     public final void readException() {
-        int readExceptionCode = readExceptionCode();
-        if (readExceptionCode != 0) {
-            readException(readExceptionCode, readString());
+        int exceptionCode = readExceptionCode();
+        if (exceptionCode != 0) {
+            readException(exceptionCode, readString());
         }
     }
 
     public final int readExceptionCode() {
-        int readInt = readInt();
-        if (readInt == -127) {
+        int i = readInt();
+        if (i == -127) {
             AppOpsManager.readAndLogNotedAppops(this);
-            readInt = readInt();
+            i = readInt();
         }
-        if (readInt != -128) {
-            return readInt;
+        if (i != -128) {
+            return i;
         }
         if (readInt() == 0) {
             Log.e(TAG, "Unexpected zero-sized Parcel reply header.");
@@ -2061,18 +2061,18 @@ public final class Parcel {
     }
 
     public final void readException(int i, String str) {
-        String readString = readInt() > 0 ? readString() : null;
-        Exception createException = createException(i, str);
-        if (readString != null) {
-            ExceptionUtils.appendCause(createException, new RemoteException("Remote stack trace:\n" + readString, null, false, false));
+        String string = readInt() > 0 ? readString() : null;
+        Exception excCreateException = createException(i, str);
+        if (string != null) {
+            ExceptionUtils.appendCause(excCreateException, new RemoteException("Remote stack trace:\n" + string, null, false, false));
         }
-        SneakyThrow.sneakyThrow(createException);
+        SneakyThrow.sneakyThrow(excCreateException);
     }
 
     private Exception createException(int i, String str) {
-        Exception createExceptionOrNull = createExceptionOrNull(i, str);
-        if (createExceptionOrNull != null) {
-            return createExceptionOrNull;
+        Exception excCreateExceptionOrNull = createExceptionOrNull(i, str);
+        if (excCreateExceptionOrNull != null) {
+            return excCreateExceptionOrNull;
         }
         return new RuntimeException("Unknown exception code: " + i + " msg " + str);
     }
@@ -2154,17 +2154,17 @@ public final class Parcel {
     }
 
     public final IBinder readStrongBinder() {
-        IBinder nativeReadStrongBinder = nativeReadStrongBinder(this.mNativePtr);
-        if (nativeReadStrongBinder != null && hasFlags(3)) {
-            Binder.allowBlocking(nativeReadStrongBinder);
+        IBinder iBinderNativeReadStrongBinder = nativeReadStrongBinder(this.mNativePtr);
+        if (iBinderNativeReadStrongBinder != null && hasFlags(3)) {
+            Binder.allowBlocking(iBinderNativeReadStrongBinder);
         }
-        return nativeReadStrongBinder;
+        return iBinderNativeReadStrongBinder;
     }
 
     public final ParcelFileDescriptor readFileDescriptor() {
-        FileDescriptor nativeReadFileDescriptor = nativeReadFileDescriptor(this.mNativePtr);
-        if (nativeReadFileDescriptor != null) {
-            return new ParcelFileDescriptor(nativeReadFileDescriptor);
+        FileDescriptor fileDescriptorNativeReadFileDescriptor = nativeReadFileDescriptor(this.mNativePtr);
+        if (fileDescriptorNativeReadFileDescriptor != null) {
+            return new ParcelFileDescriptor(fileDescriptorNativeReadFileDescriptor);
         }
         return null;
     }
@@ -2174,25 +2174,25 @@ public final class Parcel {
     }
 
     public final FileDescriptor[] createRawFileDescriptorArray() {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        FileDescriptor[] fileDescriptorArr = new FileDescriptor[readInt];
-        for (int i = 0; i < readInt; i++) {
-            fileDescriptorArr[i] = readRawFileDescriptor();
+        ensureWithinMemoryLimit(1, i);
+        FileDescriptor[] fileDescriptorArr = new FileDescriptor[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            fileDescriptorArr[i2] = readRawFileDescriptor();
         }
         return fileDescriptorArr;
     }
 
     public final void readRawFileDescriptorArray(FileDescriptor[] fileDescriptorArr) {
-        int readInt = readInt();
-        if (readInt != fileDescriptorArr.length) {
+        int i = readInt();
+        if (i != fileDescriptorArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            fileDescriptorArr[i] = readRawFileDescriptor();
+        for (int i2 = 0; i2 < i; i2++) {
+            fileDescriptorArr[i2] = readRawFileDescriptor();
         }
     }
 
@@ -2201,22 +2201,22 @@ public final class Parcel {
     }
 
     @Deprecated
-    public final void readMap(Map map, ClassLoader classLoader) {
+    public final void readMap(Map map, ClassLoader classLoader) throws ClassNotFoundException, IOException {
         readMapInternal(map, classLoader, null, null);
     }
 
-    public <K, V> void readMap(Map<? super K, ? super V> map, ClassLoader classLoader, Class<K> cls, Class<V> cls2) {
+    public <K, V> void readMap(Map<? super K, ? super V> map, ClassLoader classLoader, Class<K> cls, Class<V> cls2) throws ClassNotFoundException, IOException {
         Objects.requireNonNull(cls);
         Objects.requireNonNull(cls2);
         readMapInternal(map, classLoader, cls, cls2);
     }
 
     @Deprecated
-    public final void readList(List list, ClassLoader classLoader) {
+    public final void readList(List list, ClassLoader classLoader) throws ClassNotFoundException, IOException {
         readListInternal(list, readInt(), classLoader, null);
     }
 
-    public <T> void readList(List<? super T> list, ClassLoader classLoader, Class<T> cls) {
+    public <T> void readList(List<? super T> list, ClassLoader classLoader, Class<T> cls) throws ClassNotFoundException, IOException {
         Objects.requireNonNull(cls);
         readListInternal(list, readInt(), classLoader, cls);
     }
@@ -2237,11 +2237,11 @@ public final class Parcel {
     }
 
     public final Bundle readBundle(ClassLoader classLoader) {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        Bundle bundle = new Bundle(this, readInt);
+        Bundle bundle = new Bundle(this, i);
         if (classLoader != null) {
             bundle.setClassLoader(classLoader);
         }
@@ -2253,11 +2253,11 @@ public final class Parcel {
     }
 
     public final PersistableBundle readPersistableBundle(ClassLoader classLoader) {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        PersistableBundle persistableBundle = new PersistableBundle(this, readInt);
+        PersistableBundle persistableBundle = new PersistableBundle(this, i);
         if (classLoader != null) {
             persistableBundle.setClassLoader(classLoader);
         }
@@ -2291,26 +2291,26 @@ public final class Parcel {
     }
 
     public final CharSequence[] readCharSequenceArray() {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        CharSequence[] charSequenceArr = new CharSequence[readInt];
-        for (int i = 0; i < readInt; i++) {
-            charSequenceArr[i] = readCharSequence();
+        ensureWithinMemoryLimit(1, i);
+        CharSequence[] charSequenceArr = new CharSequence[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            charSequenceArr[i2] = readCharSequence();
         }
         return charSequenceArr;
     }
 
     public final ArrayList<CharSequence> readCharSequenceList() {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        ArrayList<CharSequence> arrayList = new ArrayList<>(readInt);
-        for (int i = 0; i < readInt; i++) {
+        ensureWithinMemoryLimit(1, i);
+        ArrayList<CharSequence> arrayList = new ArrayList<>(i);
+        for (int i2 = 0; i2 < i; i2++) {
             arrayList.add(readCharSequence());
         }
         return arrayList;
@@ -2347,184 +2347,184 @@ public final class Parcel {
     }
 
     public final SparseBooleanArray readSparseBooleanArray() {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        SparseBooleanArray sparseBooleanArray = new SparseBooleanArray(readInt);
-        readSparseBooleanArrayInternal(sparseBooleanArray, readInt);
+        ensureWithinMemoryLimit(1, i);
+        SparseBooleanArray sparseBooleanArray = new SparseBooleanArray(i);
+        readSparseBooleanArrayInternal(sparseBooleanArray, i);
         return sparseBooleanArray;
     }
 
     public final SparseIntArray readSparseIntArray() {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        SparseIntArray sparseIntArray = new SparseIntArray(readInt);
-        readSparseIntArrayInternal(sparseIntArray, readInt);
+        ensureWithinMemoryLimit(1, i);
+        SparseIntArray sparseIntArray = new SparseIntArray(i);
+        readSparseIntArrayInternal(sparseIntArray, i);
         return sparseIntArray;
     }
 
     public final <T> ArrayList<T> createTypedArrayList(Parcelable.Creator<T> creator) {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        EnterpriseProxyConstants.AnonymousClass1 anonymousClass1 = (ArrayList<T>) new ArrayList(readInt);
-        while (readInt > 0) {
-            anonymousClass1.add(readTypedObject(creator));
-            readInt--;
+        ensureWithinMemoryLimit(1, i);
+        MediaController.AnonymousClass2 anonymousClass2 = (ArrayList<T>) new ArrayList(i);
+        while (i > 0) {
+            anonymousClass2.add(readTypedObject(creator));
+            i--;
         }
-        return anonymousClass1;
+        return anonymousClass2;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     public final <T> void readTypedList(List<T> list, Parcelable.Creator<T> creator) {
         int size = list.size();
-        int readInt = readInt();
-        ensureWithinMemoryLimit(1, readInt);
-        int i = 0;
-        while (i < size && i < readInt) {
-            list.set(i, readTypedObject(creator));
-            i++;
+        int i = readInt();
+        ensureWithinMemoryLimit(1, i);
+        int i2 = 0;
+        while (i2 < size && i2 < i) {
+            list.set(i2, readTypedObject(creator));
+            i2++;
         }
-        while (i < readInt) {
+        while (i2 < i) {
             list.add(readTypedObject(creator));
-            i++;
+            i2++;
         }
-        while (i < size) {
-            list.remove(readInt);
-            i++;
+        while (i2 < size) {
+            list.remove(i);
+            i2++;
         }
     }
 
     public final <T extends Parcelable> SparseArray<T> createTypedSparseArray(Parcelable.Creator<T> creator) {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        WifiMigration.AnonymousClass1 anonymousClass1 = (SparseArray<T>) new SparseArray(readInt);
-        for (int i = 0; i < readInt; i++) {
-            anonymousClass1.append(readInt(), (Parcelable) readTypedObject(creator));
+        ensureWithinMemoryLimit(1, i);
+        PerUser perUser = (SparseArray<T>) new SparseArray(i);
+        for (int i2 = 0; i2 < i; i2++) {
+            perUser.append(readInt(), (Parcelable) readTypedObject(creator));
         }
-        return anonymousClass1;
+        return perUser;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     public final <T extends Parcelable> ArrayMap<String, T> createTypedArrayMap(Parcelable.Creator<T> creator) {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        ArrayMap<String, T> arrayMap = (ArrayMap<String, T>) new ArrayMap(readInt);
-        for (int i = 0; i < readInt; i++) {
+        ensureWithinMemoryLimit(1, i);
+        ArrayMap<String, T> arrayMap = (ArrayMap<String, T>) new ArrayMap(i);
+        for (int i2 = 0; i2 < i; i2++) {
             arrayMap.append(readString(), (Parcelable) readTypedObject(creator));
         }
         return arrayMap;
     }
 
     public final ArrayList<String> createStringArrayList() {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        ArrayList<String> arrayList = new ArrayList<>(readInt);
-        while (readInt > 0) {
+        ensureWithinMemoryLimit(1, i);
+        ArrayList<String> arrayList = new ArrayList<>(i);
+        while (i > 0) {
             arrayList.add(readString());
-            readInt--;
+            i--;
         }
         return arrayList;
     }
 
     public final ArrayList<IBinder> createBinderArrayList() {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        ArrayList<IBinder> arrayList = new ArrayList<>(readInt);
-        while (readInt > 0) {
+        ensureWithinMemoryLimit(1, i);
+        ArrayList<IBinder> arrayList = new ArrayList<>(i);
+        while (i > 0) {
             arrayList.add(readStrongBinder());
-            readInt--;
+            i--;
         }
         return arrayList;
     }
 
     public final <T extends IInterface> ArrayList<T> createInterfaceArrayList(Function<IBinder, T> function) {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        ArrayList<T> arrayList = new ArrayList<>(readInt);
-        while (readInt > 0) {
+        ensureWithinMemoryLimit(1, i);
+        ArrayList<T> arrayList = new ArrayList<>(i);
+        while (i > 0) {
             arrayList.add(function.apply(readStrongBinder()));
-            readInt--;
+            i--;
         }
         return arrayList;
     }
 
     public final void readStringList(List<String> list) {
         int size = list.size();
-        int readInt = readInt();
-        ensureWithinMemoryLimit(1, readInt);
-        int i = 0;
-        while (i < size && i < readInt) {
-            list.set(i, readString());
-            i++;
+        int i = readInt();
+        ensureWithinMemoryLimit(1, i);
+        int i2 = 0;
+        while (i2 < size && i2 < i) {
+            list.set(i2, readString());
+            i2++;
         }
-        while (i < readInt) {
+        while (i2 < i) {
             list.add(readString());
-            i++;
+            i2++;
         }
-        while (i < size) {
-            list.remove(readInt);
-            i++;
+        while (i2 < size) {
+            list.remove(i);
+            i2++;
         }
     }
 
     public final void readBinderList(List<IBinder> list) {
         int size = list.size();
-        int readInt = readInt();
-        ensureWithinMemoryLimit(1, readInt);
-        int i = 0;
-        while (i < size && i < readInt) {
-            list.set(i, readStrongBinder());
-            i++;
+        int i = readInt();
+        ensureWithinMemoryLimit(1, i);
+        int i2 = 0;
+        while (i2 < size && i2 < i) {
+            list.set(i2, readStrongBinder());
+            i2++;
         }
-        while (i < readInt) {
+        while (i2 < i) {
             list.add(readStrongBinder());
-            i++;
+            i2++;
         }
-        while (i < size) {
-            list.remove(readInt);
-            i++;
+        while (i2 < size) {
+            list.remove(i);
+            i2++;
         }
     }
 
     public final <T extends IInterface> void readInterfaceList(List<T> list, Function<IBinder, T> function) {
         int size = list.size();
-        int readInt = readInt();
-        ensureWithinMemoryLimit(1, readInt);
-        int i = 0;
-        while (i < size && i < readInt) {
-            list.set(i, function.apply(readStrongBinder()));
-            i++;
+        int i = readInt();
+        ensureWithinMemoryLimit(1, i);
+        int i2 = 0;
+        while (i2 < size && i2 < i) {
+            list.set(i2, function.apply(readStrongBinder()));
+            i2++;
         }
-        while (i < readInt) {
+        while (i2 < i) {
             list.add(function.apply(readStrongBinder()));
-            i++;
+            i2++;
         }
-        while (i < size) {
-            list.remove(readInt);
-            i++;
+        while (i2 < size) {
+            list.remove(i);
+            i2++;
         }
     }
 
@@ -2541,50 +2541,50 @@ public final class Parcel {
 
     /* JADX WARN: Multi-variable type inference failed */
     private <T> List<T> readParcelableListInternal(List<T> list, ClassLoader classLoader, Class<? extends T> cls) {
-        int readInt = readInt();
-        if (readInt == -1) {
+        int i = readInt();
+        if (i == -1) {
             list.clear();
             return list;
         }
-        ensureWithinMemoryLimit(1, readInt);
+        ensureWithinMemoryLimit(1, i);
         int size = list.size();
-        int i = 0;
-        while (i < size && i < readInt) {
-            list.set(i, readParcelableInternal(classLoader, cls));
-            i++;
+        int i2 = 0;
+        while (i2 < size && i2 < i) {
+            list.set(i2, readParcelableInternal(classLoader, cls));
+            i2++;
         }
-        while (i < readInt) {
+        while (i2 < i) {
             list.add(readParcelableInternal(classLoader, cls));
-            i++;
+            i2++;
         }
-        while (i < size) {
-            list.remove(readInt);
-            i++;
+        while (i2 < size) {
+            list.remove(i);
+            i2++;
         }
         return list;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     public final <T> T[] createTypedArray(Parcelable.Creator<T> creator) {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        T[] newArray = creator.newArray(readInt);
-        for (int i = 0; i < readInt; i++) {
-            newArray[i] = readTypedObject(creator);
+        ensureWithinMemoryLimit(1, i);
+        T[] tArrNewArray = creator.newArray(i);
+        for (int i2 = 0; i2 < i; i2++) {
+            tArrNewArray[i2] = readTypedObject(creator);
         }
-        return newArray;
+        return tArrNewArray;
     }
 
     public final <T> void readTypedArray(T[] tArr, Parcelable.Creator<T> creator) {
-        int readInt = readInt();
-        if (readInt != tArr.length) {
+        int i = readInt();
+        if (i != tArr.length) {
             throw new RuntimeException("bad array lengths");
         }
-        for (int i = 0; i < readInt; i++) {
-            tArr[i] = readTypedObject(creator);
+        for (int i2 = 0; i2 < i; i2++) {
+            tArr[i2] = readTypedObject(creator);
         }
     }
 
@@ -2636,14 +2636,14 @@ public final class Parcel {
             return;
         }
         if (componentType.isArray()) {
-            int readInt = readInt();
-            if (readInt == Array.getLength(t)) {
-                for (int i = 0; i < readInt; i++) {
-                    readFixedArray(Array.get(t, i));
+            int i = readInt();
+            if (i == Array.getLength(t)) {
+                for (int i2 = 0; i2 < i; i2++) {
+                    readFixedArray(Array.get(t, i2));
                 }
                 return;
             }
-            throw new BadParcelableException("Bad length: expected " + Array.getLength(t) + ", but got " + readInt);
+            throw new BadParcelableException("Bad length: expected " + Array.getLength(t) + ", but got " + i);
         }
         throw new BadParcelableException("Unknown type for fixed-size array: " + componentType);
     }
@@ -2656,14 +2656,14 @@ public final class Parcel {
             return;
         }
         if (componentType.isArray()) {
-            int readInt = readInt();
-            if (readInt == Array.getLength(t)) {
-                for (int i = 0; i < readInt; i++) {
-                    readFixedArray((Parcel) Array.get(t, i), (Function) function);
+            int i = readInt();
+            if (i == Array.getLength(t)) {
+                for (int i2 = 0; i2 < i; i2++) {
+                    readFixedArray((Parcel) Array.get(t, i2), (Function) function);
                 }
                 return;
             }
-            throw new BadParcelableException("Bad length: expected " + Array.getLength(t) + ", but got " + readInt);
+            throw new BadParcelableException("Bad length: expected " + Array.getLength(t) + ", but got " + i);
         }
         throw new BadParcelableException("Unknown type for fixed-size array: " + componentType);
     }
@@ -2676,14 +2676,14 @@ public final class Parcel {
             return;
         }
         if (componentType.isArray()) {
-            int readInt = readInt();
-            if (readInt == Array.getLength(t)) {
-                for (int i = 0; i < readInt; i++) {
-                    readFixedArray((Parcel) Array.get(t, i), (Parcelable.Creator) creator);
+            int i = readInt();
+            if (i == Array.getLength(t)) {
+                for (int i2 = 0; i2 < i; i2++) {
+                    readFixedArray((Parcel) Array.get(t, i2), (Parcelable.Creator) creator);
                 }
                 return;
             }
-            throw new BadParcelableException("Bad length: expected " + Array.getLength(t) + ", but got " + readInt);
+            throw new BadParcelableException("Bad length: expected " + Array.getLength(t) + ", but got " + i);
         }
         throw new BadParcelableException("Unknown type for fixed-size array: " + componentType);
     }
@@ -2726,12 +2726,12 @@ public final class Parcel {
             t = (T) createBinderArray();
         } else {
             if (componentType.isArray()) {
-                int readInt = readInt();
-                if (readInt < 0) {
+                int i = readInt();
+                if (i < 0) {
                     return null;
                 }
-                if (readInt != iArr[0]) {
-                    throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + readInt);
+                if (i != iArr[0]) {
+                    throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + i);
                 }
                 Class<?> componentType2 = componentType.getComponentType();
                 while (componentType2.isArray()) {
@@ -2739,8 +2739,8 @@ public final class Parcel {
                 }
                 ensureWithinMemoryLimit(getItemTypeSize(componentType2), iArr);
                 T t2 = (T) Array.newInstance(componentType2, iArr);
-                for (int i = 0; i < readInt; i++) {
-                    readFixedArray(Array.get(t2, i));
+                for (int i2 = 0; i2 < i; i2++) {
+                    readFixedArray(Array.get(t2, i2));
                 }
                 return t2;
             }
@@ -2769,12 +2769,12 @@ public final class Parcel {
             throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + Array.getLength(t));
         }
         if (componentType.isArray()) {
-            int readInt = readInt();
-            if (readInt < 0) {
+            int i = readInt();
+            if (i < 0) {
                 return null;
             }
-            if (readInt != iArr[0]) {
-                throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + readInt);
+            if (i != iArr[0]) {
+                throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + i);
             }
             Class<?> componentType2 = componentType.getComponentType();
             while (componentType2.isArray()) {
@@ -2782,8 +2782,8 @@ public final class Parcel {
             }
             ensureWithinMemoryLimit(getItemTypeSize(componentType2), iArr);
             T t2 = (T) Array.newInstance(componentType2, iArr);
-            for (int i = 0; i < readInt; i++) {
-                readFixedArray((Parcel) Array.get(t2, i), (Function) function);
+            for (int i2 = 0; i2 < i; i2++) {
+                readFixedArray((Parcel) Array.get(t2, i2), (Function) function);
             }
             return t2;
         }
@@ -2806,12 +2806,12 @@ public final class Parcel {
             throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + Array.getLength(t));
         }
         if (componentType.isArray()) {
-            int readInt = readInt();
-            if (readInt < 0) {
+            int i = readInt();
+            if (i < 0) {
                 return null;
             }
-            if (readInt != iArr[0]) {
-                throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + readInt);
+            if (i != iArr[0]) {
+                throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + i);
             }
             Class<?> componentType2 = componentType.getComponentType();
             while (componentType2.isArray()) {
@@ -2819,8 +2819,8 @@ public final class Parcel {
             }
             ensureWithinMemoryLimit(getItemTypeSize(componentType2), iArr);
             T t2 = (T) Array.newInstance(componentType2, iArr);
-            for (int i = 0; i < readInt; i++) {
-                readFixedArray((Parcel) Array.get(t2, i), (Parcelable.Creator) creator);
+            for (int i2 = 0; i2 < i; i2++) {
+                readFixedArray((Parcel) Array.get(t2, i2), (Parcelable.Creator) creator);
             }
             return t2;
         }
@@ -2838,39 +2838,39 @@ public final class Parcel {
         writeInt(-1);
     }
 
-    public final Object readValue(ClassLoader classLoader) {
+    public final Object readValue(ClassLoader classLoader) throws ClassNotFoundException, IOException {
         return readValue(classLoader, (Class) null, new Class[0]);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public <T> T readValue(ClassLoader classLoader, Class<T> cls, Class<?>... clsArr) {
-        int readInt = readInt();
-        if (isLengthPrefixed(readInt)) {
-            int readInt2 = readInt();
-            int dataPosition = dataPosition();
-            T t = (T) readValue(readInt, classLoader, cls, clsArr);
-            int dataPosition2 = dataPosition() - dataPosition;
-            if (dataPosition2 != readInt2) {
-                Slog.wtfStack(TAG, "Unparcelling of " + t + " of type " + valueTypeToString(readInt) + "  consumed " + dataPosition2 + " bytes, but " + readInt2 + " expected.");
+    public <T> T readValue(ClassLoader classLoader, Class<T> cls, Class<?>... clsArr) throws ClassNotFoundException, IOException {
+        int i = readInt();
+        if (isLengthPrefixed(i)) {
+            int i2 = readInt();
+            int iDataPosition = dataPosition();
+            T t = (T) readValue(i, classLoader, cls, clsArr);
+            int iDataPosition2 = dataPosition() - iDataPosition;
+            if (iDataPosition2 != i2) {
+                Slog.wtfStack(TAG, "Unparcelling of " + t + " of type " + valueTypeToString(i) + "  consumed " + iDataPosition2 + " bytes, but " + i2 + " expected.");
             }
             return t;
         }
-        return (T) readValue(readInt, classLoader, cls, clsArr);
+        return (T) readValue(i, classLoader, cls, clsArr);
     }
 
-    private Object readLazyValue(ClassLoaderProvider classLoaderProvider) {
-        int dataPosition = dataPosition();
-        int readInt = readInt();
-        if (isLengthPrefixed(readInt)) {
-            int readInt2 = readInt();
-            if (readInt2 < 0) {
+    private Object readLazyValue(ClassLoaderProvider classLoaderProvider) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IOException, IllegalArgumentException, NegativeArraySizeException {
+        int iDataPosition = dataPosition();
+        int i = readInt();
+        if (isLengthPrefixed(i)) {
+            int i2 = readInt();
+            if (i2 < 0) {
                 return null;
             }
-            int addOrThrow = MathUtils.addOrThrow(dataPosition(), readInt2);
-            setDataPosition(addOrThrow);
-            return new LazyValue(this, dataPosition, addOrThrow - dataPosition, readInt, classLoaderProvider);
+            int iAddOrThrow = MathUtils.addOrThrow(dataPosition(), i2);
+            setDataPosition(iAddOrThrow);
+            return new LazyValue(this, iDataPosition, iAddOrThrow - iDataPosition, i, classLoaderProvider);
         }
-        return readValue(readInt, getClassLoader(classLoaderProvider), (Class) null);
+        return readValue(i, getClassLoader(classLoaderProvider), (Class) null);
     }
 
     private static ClassLoader getClassLoader(ClassLoaderProvider classLoaderProvider) {
@@ -2902,14 +2902,14 @@ public final class Parcel {
             if (parcel != null) {
                 synchronized (parcel) {
                     if (this.mSource != null) {
-                        int dataPosition = parcel.dataPosition();
+                        int iDataPosition = parcel.dataPosition();
                         try {
                             parcel.setDataPosition(this.mPosition);
                             this.mObject = parcel.readValue(this.mLoaderProvider.getClassLoader(), cls, clsArr);
-                            parcel.setDataPosition(dataPosition);
+                            parcel.setDataPosition(iDataPosition);
                             this.mSource = null;
                         } catch (Throwable th) {
-                            parcel.setDataPosition(dataPosition);
+                            parcel.setDataPosition(iDataPosition);
                             throw th;
                         }
                     }
@@ -2982,11 +2982,11 @@ public final class Parcel {
         }
     }
 
-    private <T> T readValue(int i, ClassLoader classLoader, Class<T> cls) {
+    private <T> T readValue(int i, ClassLoader classLoader, Class<T> cls) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IOException, IllegalArgumentException, NegativeArraySizeException {
         return (T) readValue(i, classLoader, cls, null);
     }
 
-    private <T> T readValue(int i, ClassLoader classLoader, Class<T> cls, Class<?>... clsArr) {
+    private <T> T readValue(int i, ClassLoader classLoader, Class<T> cls, Class<?>... clsArr) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IOException, IllegalArgumentException, NegativeArraySizeException {
         T t;
         switch (i) {
             case -1:
@@ -3137,15 +3137,15 @@ public final class Parcel {
         return (T) readParcelableInternal(classLoader, cls);
     }
 
-    private <T> T readParcelableInternal(ClassLoader classLoader, Class<T> cls) {
-        Parcelable.Creator<T> readParcelableCreatorInternal = readParcelableCreatorInternal(classLoader, cls);
-        if (readParcelableCreatorInternal == null) {
+    private <T> T readParcelableInternal(ClassLoader classLoader, Class<T> cls) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IllegalArgumentException {
+        Parcelable.Creator<T> parcelableCreatorInternal = readParcelableCreatorInternal(classLoader, cls);
+        if (parcelableCreatorInternal == null) {
             return null;
         }
-        if (readParcelableCreatorInternal instanceof Parcelable.ClassLoaderCreator) {
-            return (T) ((Parcelable.ClassLoaderCreator) readParcelableCreatorInternal).createFromParcel(this, classLoader);
+        if (parcelableCreatorInternal instanceof Parcelable.ClassLoaderCreator) {
+            return (T) ((Parcelable.ClassLoaderCreator) parcelableCreatorInternal).createFromParcel(this, classLoader);
         }
-        return readParcelableCreatorInternal.createFromParcel(this);
+        return parcelableCreatorInternal.createFromParcel(this);
     }
 
     public final <T extends Parcelable> T readCreator(Parcelable.Creator<?> creator, ClassLoader classLoader) {
@@ -3165,22 +3165,22 @@ public final class Parcel {
         return readParcelableCreatorInternal(classLoader, cls);
     }
 
-    private <T> Parcelable.Creator<T> readParcelableCreatorInternal(ClassLoader classLoader, Class<T> cls) {
+    private <T> Parcelable.Creator<T> readParcelableCreatorInternal(ClassLoader classLoader, Class<T> cls) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IllegalArgumentException {
         Pair<Parcelable.Creator<?>, Class<?>> pair;
         ClassLoader classLoader2;
-        String readString = readString();
-        if (readString == null) {
+        String string = readString();
+        if (string == null) {
             return null;
         }
-        HashMap<ClassLoader, HashMap<String, Pair<Parcelable.Creator<?>, Class<?>>>> hashMap = sPairedCreators;
-        synchronized (hashMap) {
-            HashMap<String, Pair<Parcelable.Creator<?>, Class<?>>> hashMap2 = hashMap.get(classLoader);
-            if (hashMap2 == null) {
-                hashMap.put(classLoader, new HashMap<>());
+        HashMap<ClassLoader, HashMap<String, Pair<Parcelable.Creator<?>, Class<?>>>> map = sPairedCreators;
+        synchronized (map) {
+            HashMap<String, Pair<Parcelable.Creator<?>, Class<?>>> map2 = map.get(classLoader);
+            if (map2 == null) {
+                map.put(classLoader, new HashMap<>());
                 mCreators.put(classLoader, new HashMap<>());
                 pair = null;
             } else {
-                pair = hashMap2.get(readString);
+                pair = map2.get(string);
             }
         }
         if (pair != null) {
@@ -3189,44 +3189,44 @@ public final class Parcel {
             if (cls == null || cls.isAssignableFrom(cls2)) {
                 return creator;
             }
-            throw new BadTypeParcelableException("Parcelable creator " + readString + " is not a subclass of required class " + cls.getName() + " provided in the parameter");
+            throw new BadTypeParcelableException("Parcelable creator " + string + " is not a subclass of required class " + cls.getName() + " provided in the parameter");
         }
         if (classLoader == null) {
             try {
                 classLoader2 = getClass().getClassLoader();
             } catch (ClassNotFoundException e) {
-                Log.e(TAG, "Class not found when unmarshalling: " + readString, e);
-                throw new BadParcelableException("ClassNotFoundException when unmarshalling: " + readString, e);
+                Log.e(TAG, "Class not found when unmarshalling: " + string, e);
+                throw new BadParcelableException("ClassNotFoundException when unmarshalling: " + string, e);
             } catch (IllegalAccessException e2) {
-                Log.e(TAG, "Illegal access when unmarshalling: " + readString, e2);
-                throw new BadParcelableException("IllegalAccessException when unmarshalling: " + readString, e2);
+                Log.e(TAG, "Illegal access when unmarshalling: " + string, e2);
+                throw new BadParcelableException("IllegalAccessException when unmarshalling: " + string, e2);
             } catch (NoSuchFieldException e3) {
-                throw new BadParcelableException("Parcelable protocol requires a Parcelable.Creator object called CREATOR on class " + readString, e3);
+                throw new BadParcelableException("Parcelable protocol requires a Parcelable.Creator object called CREATOR on class " + string, e3);
             }
         } else {
             classLoader2 = classLoader;
         }
-        Class<?> cls3 = Class.forName(readString, false, classLoader2);
+        Class<?> cls3 = Class.forName(string, false, classLoader2);
         if (!Parcelable.class.isAssignableFrom(cls3)) {
-            throw new BadParcelableException("Parcelable protocol requires subclassing from Parcelable on class " + readString);
+            throw new BadParcelableException("Parcelable protocol requires subclassing from Parcelable on class " + string);
         }
         if (cls != null && !cls.isAssignableFrom(cls3)) {
-            throw new BadTypeParcelableException("Parcelable creator " + readString + " is not a subclass of required class " + cls.getName() + " provided in the parameter");
+            throw new BadTypeParcelableException("Parcelable creator " + string + " is not a subclass of required class " + cls.getName() + " provided in the parameter");
         }
         Field field = cls3.getField("CREATOR");
         if ((field.getModifiers() & 8) == 0) {
-            throw new BadParcelableException("Parcelable protocol requires the CREATOR object to be static on class " + readString);
+            throw new BadParcelableException("Parcelable protocol requires the CREATOR object to be static on class " + string);
         }
         if (!Parcelable.Creator.class.isAssignableFrom(field.getType())) {
-            throw new BadParcelableException("Parcelable protocol requires a Parcelable.Creator object called CREATOR on class " + readString);
+            throw new BadParcelableException("Parcelable protocol requires a Parcelable.Creator object called CREATOR on class " + string);
         }
         Parcelable.Creator<T> creator2 = (Parcelable.Creator) field.get(null);
         if (creator2 == null) {
-            throw new BadParcelableException("Parcelable protocol requires a non-null Parcelable.Creator object called CREATOR on class " + readString);
+            throw new BadParcelableException("Parcelable protocol requires a non-null Parcelable.Creator object called CREATOR on class " + string);
         }
-        synchronized (hashMap) {
-            hashMap.get(classLoader).put(readString, Pair.create(creator2, cls3));
-            mCreators.get(classLoader).put(readString, creator2);
+        synchronized (map) {
+            map.get(classLoader).put(string, Pair.create(creator2, cls3));
+            mCreators.get(classLoader).put(string, creator2);
         }
         return creator2;
     }
@@ -3241,15 +3241,15 @@ public final class Parcel {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private <T> T[] readParcelableArrayInternal(ClassLoader classLoader, Class<T> cls) {
-        int readInt = readInt();
-        if (readInt < 0) {
+    private <T> T[] readParcelableArrayInternal(ClassLoader classLoader, Class<T> cls) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IllegalArgumentException, NegativeArraySizeException {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        T[] tArr = (T[]) ((Object[]) (cls == null ? new Parcelable[readInt] : Array.newInstance((Class<?>) cls, readInt)));
-        for (int i = 0; i < readInt; i++) {
-            tArr[i] = readParcelableInternal(classLoader, cls);
+        ensureWithinMemoryLimit(1, i);
+        T[] tArr = (T[]) ((Object[]) (cls == null ? new Parcelable[i] : Array.newInstance((Class<?>) cls, i)));
+        for (int i2 = 0; i2 < i; i2++) {
+            tArr[i2] = readParcelableInternal(classLoader, cls);
         }
         return tArr;
     }
@@ -3267,21 +3267,21 @@ public final class Parcel {
         return (T) readSerializableInternal(classLoader, cls);
     }
 
-    private <T> T readSerializableInternal(final ClassLoader classLoader, Class<T> cls) {
-        String readString = readString();
-        if (readString == null) {
+    private <T> T readSerializableInternal(final ClassLoader classLoader, Class<T> cls) throws ClassNotFoundException, IOException {
+        String string = readString();
+        if (string == null) {
             return null;
         }
         if (cls != null && classLoader != null) {
             try {
-                Class<?> cls2 = Class.forName(readString, false, classLoader);
+                Class<?> cls2 = Class.forName(string, false, classLoader);
                 if (!cls.isAssignableFrom(cls2)) {
                     throw new BadTypeParcelableException("Serializable object " + cls2.getName() + " is not a subclass of required class " + cls.getName() + " provided in the parameter");
                 }
             } catch (IOException e) {
-                throw new BadParcelableException("Parcelable encountered IOException reading a Serializable object (name = " + readString + NavigationBarInflaterView.KEY_CODE_END, e);
+                throw new BadParcelableException("Parcelable encountered IOException reading a Serializable object (name = " + string + NavigationBarInflaterView.KEY_CODE_END, e);
             } catch (ClassNotFoundException e2) {
-                throw new BadParcelableException("Parcelable encountered ClassNotFoundException reading a Serializable object (name = " + readString + NavigationBarInflaterView.KEY_CODE_END, e2);
+                throw new BadParcelableException("Parcelable encountered ClassNotFoundException reading a Serializable object (name = " + string + NavigationBarInflaterView.KEY_CODE_END, e2);
             }
         }
         T t = (T) new ObjectInputStream(this, new ByteArrayInputStream(createByteArray())) { // from class: android.os.Parcel.2
@@ -3361,26 +3361,26 @@ public final class Parcel {
         destroy();
     }
 
-    void readMapInternal(Map map, int i, ClassLoader classLoader) {
+    void readMapInternal(Map map, int i, ClassLoader classLoader) throws ClassNotFoundException, IOException {
         readMapInternal(map, i, classLoader, null, null);
     }
 
-    private <K, V> HashMap<K, V> readHashMapInternal(ClassLoader classLoader, Class<? extends K> cls, Class<? extends V> cls2) {
-        int readInt = readInt();
-        if (readInt < 0) {
+    private <K, V> HashMap<K, V> readHashMapInternal(ClassLoader classLoader, Class<? extends K> cls, Class<? extends V> cls2) throws ClassNotFoundException, IOException {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        HashMap<K, V> hashMap = new HashMap<>(readInt);
-        readMapInternal(hashMap, readInt, classLoader, cls, cls2);
-        return hashMap;
+        ensureWithinMemoryLimit(1, i);
+        HashMap<K, V> map = new HashMap<>(i);
+        readMapInternal(map, i, classLoader, cls, cls2);
+        return map;
     }
 
-    private <K, V> void readMapInternal(Map<? super K, ? super V> map, ClassLoader classLoader, Class<K> cls, Class<V> cls2) {
+    private <K, V> void readMapInternal(Map<? super K, ? super V> map, ClassLoader classLoader, Class<K> cls, Class<V> cls2) throws ClassNotFoundException, IOException {
         readMapInternal(map, readInt(), classLoader, cls, cls2);
     }
 
-    private <K, V> void readMapInternal(Map<? super K, ? super V> map, int i, ClassLoader classLoader, Class<K> cls, Class<V> cls2) {
+    private <K, V> void readMapInternal(Map<? super K, ? super V> map, int i, ClassLoader classLoader, Class<K> cls, Class<V> cls2) throws ClassNotFoundException, IOException {
         ensureWithinMemoryLimit(1, i);
         while (i > 0) {
             map.put((Object) readValue(classLoader, cls, new Class[0]), (Object) readValue(classLoader, cls2, new Class[0]));
@@ -3388,22 +3388,22 @@ public final class Parcel {
         }
     }
 
-    private void readArrayMapInternal(ArrayMap<? super String, Object> arrayMap, int i, ClassLoaderProvider classLoaderProvider) {
+    private void readArrayMapInternal(ArrayMap<? super String, Object> arrayMap, int i, ClassLoaderProvider classLoaderProvider) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IOException, IllegalArgumentException, NegativeArraySizeException {
         readArrayMap(arrayMap, i, true, false, classLoaderProvider, null);
     }
 
-    void readArrayMap(ArrayMap<? super String, Object> arrayMap, int i, boolean z, boolean z2, ClassLoaderProvider classLoaderProvider, int[] iArr) {
+    void readArrayMap(ArrayMap<? super String, Object> arrayMap, int i, boolean z, boolean z2, ClassLoaderProvider classLoaderProvider, int[] iArr) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IOException, IllegalArgumentException, NegativeArraySizeException {
         ensureWithinMemoryLimit(1, i);
         while (i > 0) {
-            String readString = readString();
-            Object readLazyValue = z2 ? readLazyValue(classLoaderProvider) : readValue(getClassLoader(classLoaderProvider));
-            if (readLazyValue instanceof LazyValue) {
+            String string = readString();
+            Object lazyValue = z2 ? readLazyValue(classLoaderProvider) : readValue(getClassLoader(classLoaderProvider));
+            if (lazyValue instanceof LazyValue) {
                 iArr[0] = iArr[0] + 1;
             }
             if (z) {
-                arrayMap.append(readString, readLazyValue);
+                arrayMap.append(string, lazyValue);
             } else {
-                arrayMap.put(readString, readLazyValue);
+                arrayMap.put(string, lazyValue);
             }
             i--;
         }
@@ -3412,32 +3412,32 @@ public final class Parcel {
         }
     }
 
-    public void readArrayMap(ArrayMap<? super String, Object> arrayMap, ClassLoaderProvider classLoaderProvider) {
-        int readInt = readInt();
-        if (readInt < 0) {
+    public void readArrayMap(ArrayMap<? super String, Object> arrayMap, ClassLoaderProvider classLoaderProvider) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IOException, IllegalArgumentException, NegativeArraySizeException {
+        int i = readInt();
+        if (i < 0) {
             return;
         }
-        readArrayMapInternal(arrayMap, readInt, classLoaderProvider);
+        readArrayMapInternal(arrayMap, i, classLoaderProvider);
     }
 
     public ArraySet<? extends Object> readArraySet(ClassLoader classLoader) {
-        int readInt = readInt();
-        if (readInt < 0) {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        ArraySet<? extends Object> arraySet = new ArraySet<>(readInt);
-        for (int i = 0; i < readInt; i++) {
+        ensureWithinMemoryLimit(1, i);
+        ArraySet<? extends Object> arraySet = new ArraySet<>(i);
+        for (int i2 = 0; i2 < i; i2++) {
             arraySet.append(readValue(classLoader));
         }
         return arraySet;
     }
 
-    private void readListInternal(List list, int i, ClassLoader classLoader) {
+    private void readListInternal(List list, int i, ClassLoader classLoader) throws ClassNotFoundException, IOException {
         readListInternal(list, i, classLoader, null);
     }
 
-    private <T> void readListInternal(List<? super T> list, int i, ClassLoader classLoader, Class<T> cls) {
+    private <T> void readListInternal(List<? super T> list, int i, ClassLoader classLoader, Class<T> cls) throws ClassNotFoundException, IOException {
         ensureWithinMemoryLimit(1, i);
         while (i > 0) {
             list.add((Object) readValue(classLoader, cls, new Class[0]));
@@ -3445,14 +3445,14 @@ public final class Parcel {
         }
     }
 
-    private <T> ArrayList<T> readArrayListInternal(ClassLoader classLoader, Class<? extends T> cls) {
-        int readInt = readInt();
-        if (readInt < 0) {
+    private <T> ArrayList<T> readArrayListInternal(ClassLoader classLoader, Class<? extends T> cls) throws ClassNotFoundException, IOException {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        ArrayList<T> arrayList = new ArrayList<>(readInt);
-        readListInternal(arrayList, readInt, classLoader, cls);
+        ensureWithinMemoryLimit(1, i);
+        ArrayList<T> arrayList = new ArrayList<>(i);
+        readListInternal(arrayList, i, classLoader, cls);
         return arrayList;
     }
 
@@ -3463,14 +3463,14 @@ public final class Parcel {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private <T> T[] readArrayInternal(ClassLoader classLoader, Class<T> cls) {
-        int readInt = readInt();
-        if (readInt < 0) {
+    private <T> T[] readArrayInternal(ClassLoader classLoader, Class<T> cls) throws ClassNotFoundException, IOException, NegativeArraySizeException {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        T[] tArr = (T[]) ((Object[]) (cls == null ? new Object[readInt] : Array.newInstance((Class<?>) cls, readInt)));
-        for (int i = 0; i < readInt; i++) {
-            tArr[i] = readValue(classLoader, cls, new Class[0]);
+        T[] tArr = (T[]) ((Object[]) (cls == null ? new Object[i] : Array.newInstance((Class<?>) cls, i)));
+        for (int i2 = 0; i2 < i; i2++) {
+            tArr[i2] = readValue(classLoader, cls, new Class[0]);
         }
         return tArr;
     }
@@ -3483,28 +3483,28 @@ public final class Parcel {
         }
     }
 
-    private <T> SparseArray<T> readSparseArrayInternal(ClassLoader classLoader, Class<? extends T> cls) {
-        int readInt = readInt();
-        if (readInt < 0) {
+    private <T> SparseArray<T> readSparseArrayInternal(ClassLoader classLoader, Class<? extends T> cls) throws ClassNotFoundException, IOException {
+        int i = readInt();
+        if (i < 0) {
             return null;
         }
-        ensureWithinMemoryLimit(1, readInt);
-        WifiMigration.AnonymousClass1 anonymousClass1 = (SparseArray<T>) new SparseArray(readInt);
-        while (readInt > 0) {
-            anonymousClass1.append(readInt(), readValue(classLoader, cls, new Class[0]));
-            readInt--;
+        ensureWithinMemoryLimit(1, i);
+        PerUser perUser = (SparseArray<T>) new SparseArray(i);
+        while (i > 0) {
+            perUser.append(readInt(), readValue(classLoader, cls, new Class[0]));
+            i--;
         }
-        return anonymousClass1;
+        return perUser;
     }
 
     private void readSparseBooleanArrayInternal(SparseBooleanArray sparseBooleanArray, int i) {
         while (i > 0) {
-            int readInt = readInt();
+            int i2 = readInt();
             boolean z = true;
             if (readByte() != 1) {
                 z = false;
             }
-            sparseBooleanArray.append(readInt, z);
+            sparseBooleanArray.append(i2, z);
             i--;
         }
     }

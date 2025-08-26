@@ -7,7 +7,6 @@ import com.samsung.context.sdk.samsunganalytics.internal.util.Debug;
 import com.samsung.context.sdk.samsunganalytics.internal.util.Preferences;
 import com.sec.android.diagmonagent.common.util.executor.AsyncTaskClient;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SendLogTaskV2 implements AsyncTaskClient {
     public final int Type;
@@ -24,15 +23,15 @@ public class SendLogTaskV2 implements AsyncTaskClient {
     }
 
     @Override // com.sec.android.diagmonagent.common.util.executor.AsyncTaskClient
-    public final int onFinish() {
+    public final int onFinish() throws NumberFormatException {
         try {
             Uri uri = this.returnUri;
             if (uri != null) {
-                int parseInt = Integer.parseInt(uri.getLastPathSegment());
-                Debug.LogD("SendLog Result = " + parseInt);
+                int i = Integer.parseInt(uri.getLastPathSegment());
+                Debug.LogD("SendLog Result = " + i);
                 boolean z = true;
                 if (this.Type == 1) {
-                    if (parseInt != 0) {
+                    if (i != 0) {
                         z = false;
                     }
                     Preferences.getPreferences(this.mContext).edit().putBoolean("sendCommonSuccess", z).apply();

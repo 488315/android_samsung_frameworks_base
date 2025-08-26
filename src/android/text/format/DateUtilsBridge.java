@@ -28,7 +28,7 @@ public final class DateUtilsBridge {
     public static String toSkeleton(Calendar calendar, Calendar calendar2, int i) {
         String str;
         String str2;
-        String str3;
+        String strConcat;
         if ((524288 & i) != 0) {
             i |= 114688;
         }
@@ -46,16 +46,14 @@ public final class DateUtilsBridge {
         }
         int i2 = i & 128;
         if (i2 != 0) {
-            str3 = "H";
+            strConcat = "H";
         } else if ((i & 64) == 0) {
-            str3 = "j";
+            strConcat = "j";
         } else {
-            str3 = "h";
+            strConcat = "h";
         }
-        if ((i & 16384) == 0 || i2 != 0) {
-            str3 = str3.concat("m");
-        } else if (!onTheHour(calendar) || !onTheHour(calendar2)) {
-            str3 = str3.concat("m");
+        if ((i & 16384) == 0 || i2 != 0 || !onTheHour(calendar) || !onTheHour(calendar2)) {
+            strConcat = strConcat.concat("m");
         }
         if (fallOnDifferentDates(calendar, calendar2)) {
             i |= 16;
@@ -83,7 +81,7 @@ public final class DateUtilsBridge {
             sb.append(str2);
         }
         if ((i & 1) != 0) {
-            sb.append(str3);
+            sb.append(strConcat);
         }
         return sb.toString();
     }

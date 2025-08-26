@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import kotlin.Triple;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NeverExactlyLinearLayout extends LinearLayout {
     public static final int $stable = 0;
@@ -28,22 +27,22 @@ public final class NeverExactlyLinearLayout extends LinearLayout {
     @Override // android.widget.LinearLayout, android.view.View
     public void onMeasure(int i, int i2) {
         Triple<Boolean, Integer, Integer> nonExactlyMeasureSpec = getNonExactlyMeasureSpec(i);
-        boolean booleanValue = ((Boolean) nonExactlyMeasureSpec.component1()).booleanValue();
-        int intValue = ((Number) nonExactlyMeasureSpec.component2()).intValue();
-        int intValue2 = ((Number) nonExactlyMeasureSpec.component3()).intValue();
+        boolean zBooleanValue = ((Boolean) nonExactlyMeasureSpec.component1()).booleanValue();
+        int iIntValue = ((Number) nonExactlyMeasureSpec.component2()).intValue();
+        int iIntValue2 = ((Number) nonExactlyMeasureSpec.component3()).intValue();
         Triple<Boolean, Integer, Integer> nonExactlyMeasureSpec2 = getNonExactlyMeasureSpec(i2);
-        boolean booleanValue2 = ((Boolean) nonExactlyMeasureSpec2.component1()).booleanValue();
-        int intValue3 = ((Number) nonExactlyMeasureSpec2.component2()).intValue();
-        int intValue4 = ((Number) nonExactlyMeasureSpec2.component3()).intValue();
-        super.onMeasure(intValue, intValue3);
-        if (booleanValue || booleanValue2) {
-            if (!booleanValue) {
-                intValue2 = getMeasuredWidth();
+        boolean zBooleanValue2 = ((Boolean) nonExactlyMeasureSpec2.component1()).booleanValue();
+        int iIntValue3 = ((Number) nonExactlyMeasureSpec2.component2()).intValue();
+        int iIntValue4 = ((Number) nonExactlyMeasureSpec2.component3()).intValue();
+        super.onMeasure(iIntValue, iIntValue3);
+        if (zBooleanValue || zBooleanValue2) {
+            if (!zBooleanValue) {
+                iIntValue2 = getMeasuredWidth();
             }
-            if (!booleanValue2) {
-                intValue4 = getMeasuredHeight();
+            if (!zBooleanValue2) {
+                iIntValue4 = getMeasuredHeight();
             }
-            setMeasuredDimension(intValue2, intValue4);
+            setMeasuredDimension(iIntValue2, iIntValue4);
         }
     }
 

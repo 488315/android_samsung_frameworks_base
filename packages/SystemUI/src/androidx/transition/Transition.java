@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Transition implements Cloneable {
     public Animator[] mAnimatorCache;
@@ -67,7 +66,6 @@ public abstract class Transition implements Cloneable {
     public static final AnonymousClass1 STRAIGHT_PATH_MOTION = new AnonymousClass1();
     public static final ThreadLocal sRunningAnimators = new ThreadLocal();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.transition.Transition$1, reason: invalid class name */
     public class AnonymousClass1 extends PathMotion {
         public final Path getPath(float f, float f2, float f3, float f4) {
@@ -78,7 +76,6 @@ public abstract class Transition implements Cloneable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationInfo {
         public final Animator mAnimator;
         public final String mName;
@@ -97,11 +94,9 @@ public abstract class Transition implements Cloneable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class EpicenterCallback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl26 {
         private Impl26() {
         }
@@ -115,7 +110,6 @@ public abstract class Transition implements Cloneable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SeekController extends TransitionListenerAdapter implements DynamicAnimation.OnAnimationUpdateListener {
         public boolean mIsCanceled;
         public boolean mIsReady;
@@ -132,13 +126,13 @@ public abstract class Transition implements Cloneable {
             if (this.mSpringAnimation != null) {
                 return;
             }
-            long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+            long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
             float f2 = this.mCurrentPlayTime;
             VelocityTracker1D velocityTracker1D = this.mVelocityTracker;
             char c = 20;
             int i = (velocityTracker1D.mIndex + 1) % 20;
             velocityTracker1D.mIndex = i;
-            velocityTracker1D.mTimeSamples[i] = currentAnimationTimeMillis;
+            velocityTracker1D.mTimeSamples[i] = jCurrentAnimationTimeMillis;
             velocityTracker1D.mDataSamples[i] = f2;
             this.mSpringAnimation = new SpringAnimation(new FloatValueHolder());
             SpringForce springForce = new SpringForce();
@@ -152,96 +146,95 @@ public abstract class Transition implements Cloneable {
             int i2 = velocityTracker1D.mIndex;
             long[] jArr = velocityTracker1D.mTimeSamples;
             long j = Long.MIN_VALUE;
-            float f3 = 0.0f;
+            float fSqrt = 0.0f;
             if (i2 != 0 || jArr[i2] != Long.MIN_VALUE) {
                 long j2 = jArr[i2];
                 int i3 = 0;
                 long j3 = j2;
                 while (true) {
                     long j4 = jArr[i2];
-                    if (j4 != j) {
-                        float f4 = j2 - j4;
-                        float abs = Math.abs(j4 - j3);
-                        if (f4 > 100.0f || abs > 40.0f) {
-                            break;
-                        }
-                        if (i2 == 0) {
-                            i2 = 20;
-                        }
-                        i2--;
-                        i3++;
-                        if (i3 >= 20) {
-                            break;
-                        }
-                        j3 = j4;
-                        j = Long.MIN_VALUE;
-                    } else {
+                    if (j4 == j) {
                         break;
                     }
+                    float f3 = j2 - j4;
+                    float fAbs = Math.abs(j4 - j3);
+                    if (f3 > 100.0f || fAbs > 40.0f) {
+                        break;
+                    }
+                    if (i2 == 0) {
+                        i2 = 20;
+                    }
+                    i2--;
+                    i3++;
+                    if (i3 >= 20) {
+                        break;
+                    }
+                    j3 = j4;
+                    j = Long.MIN_VALUE;
                 }
                 if (i3 >= 2) {
                     float[] fArr = velocityTracker1D.mDataSamples;
-                    float f5 = 1000.0f;
+                    float f4 = 1000.0f;
                     if (i3 == 2) {
                         int i4 = velocityTracker1D.mIndex;
                         int i5 = i4 == 0 ? 19 : i4 - 1;
-                        float f6 = jArr[i4] - jArr[i5];
-                        if (f6 != 0.0f) {
-                            f3 = ((fArr[i4] - fArr[i5]) / f6) * 1000.0f;
+                        float f5 = jArr[i4] - jArr[i5];
+                        if (f5 != 0.0f) {
+                            fSqrt = ((fArr[i4] - fArr[i5]) / f5) * 1000.0f;
                         }
                     } else {
                         int i6 = velocityTracker1D.mIndex;
                         int i7 = ((i6 - i3) + 21) % 20;
                         int i8 = (i6 + 21) % 20;
                         long j5 = jArr[i7];
-                        float f7 = fArr[i7];
+                        float f6 = fArr[i7];
                         int i9 = i7 + 1;
                         int i10 = i9 % 20;
-                        float f8 = 0.0f;
+                        float f7 = 0.0f;
                         while (i10 != i8) {
                             long j6 = jArr[i10];
-                            float f9 = f3;
+                            float f8 = fSqrt;
                             char c2 = c;
-                            float f10 = j6 - j5;
-                            if (f10 == f9) {
-                                f = f5;
+                            float f9 = j6 - j5;
+                            if (f9 == f8) {
+                                f = f4;
                             } else {
-                                float f11 = fArr[i10];
-                                f = f5;
-                                float f12 = (f11 - f7) / f10;
-                                float abs2 = (Math.abs(f12) * (f12 - ((float) (Math.sqrt(2.0f * Math.abs(f8)) * Math.signum(f8))))) + f8;
+                                float f10 = fArr[i10];
+                                f = f4;
+                                float f11 = (f10 - f6) / f9;
+                                float fAbs2 = (Math.abs(f11) * (f11 - ((float) (Math.sqrt(2.0f * Math.abs(f7)) * Math.signum(f7))))) + f7;
                                 if (i10 == i9) {
-                                    abs2 *= 0.5f;
+                                    fAbs2 *= 0.5f;
                                 }
-                                f8 = abs2;
-                                f7 = f11;
+                                f7 = fAbs2;
+                                f6 = f10;
                                 j5 = j6;
                             }
                             i10 = (i10 + 1) % 20;
                             c = c2;
-                            f3 = f9;
-                            f5 = f;
+                            fSqrt = f8;
+                            f4 = f;
                         }
-                        f3 = ((float) (Math.sqrt(Math.abs(f8) * 2.0f) * Math.signum(f8))) * f5;
+                        fSqrt = ((float) (Math.sqrt(Math.abs(f7) * 2.0f) * Math.signum(f7))) * f4;
                     }
                 }
             }
-            springAnimation2.mVelocity = f3;
+            springAnimation2.mVelocity = fSqrt;
             SpringAnimation springAnimation3 = this.mSpringAnimation;
             springAnimation3.mMaxValue = Transition.this.mTotalDuration + 1;
             springAnimation3.mMinValue = -1.0f;
             springAnimation3.setMinimumVisibleChange(4.0f);
             this.mSpringAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: androidx.transition.Transition$SeekController$$ExternalSyntheticLambda0
                 @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
-                public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f13, float f14) {
-                    Transition.SeekController seekController = Transition.SeekController.this;
+                public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f12, float f13) {
+                    Transition.SeekController seekController = this.f$0;
                     if (z) {
                         seekController.getClass();
                         return;
                     }
                     Transition$TransitionNotification$$ExternalSyntheticLambda0 transition$TransitionNotification$$ExternalSyntheticLambda0 = Transition$TransitionNotification$$ExternalSyntheticLambda0.ON_END;
                     Transition transition = Transition.this;
-                    if (f13 >= 1.0f) {
+                    if (f12 >= 1.0f) {
                         transition.notifyFromTransition(transition, transition$TransitionNotification$$ExternalSyntheticLambda0, false);
                         return;
                     }
@@ -267,9 +260,9 @@ public abstract class Transition implements Cloneable {
         @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
         public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
             Transition transition = Transition.this;
-            long max = Math.max(-1L, Math.min(transition.mTotalDuration + 1, Math.round(f)));
-            transition.setCurrentPlayTimeMillis(max, this.mCurrentPlayTime);
-            this.mCurrentPlayTime = max;
+            long jMax = Math.max(-1L, Math.min(transition.mTotalDuration + 1, Math.round(f)));
+            transition.setCurrentPlayTimeMillis(jMax, this.mCurrentPlayTime);
+            this.mCurrentPlayTime = jMax;
         }
 
         @Override // androidx.transition.TransitionListenerAdapter, androidx.transition.Transition.TransitionListener
@@ -278,7 +271,6 @@ public abstract class Transition implements Cloneable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TransitionListener {
         void onTransitionCancel(Transition transition);
 
@@ -430,9 +422,9 @@ public abstract class Transition implements Cloneable {
             return;
         }
         for (int i = 0; i < this.mTargetIds.size(); i++) {
-            View findViewById = viewGroup.findViewById(((Integer) this.mTargetIds.get(i)).intValue());
-            if (findViewById != null) {
-                TransitionValues transitionValues = new TransitionValues(findViewById);
+            View viewFindViewById = viewGroup.findViewById(((Integer) this.mTargetIds.get(i)).intValue());
+            if (viewFindViewById != null) {
+                TransitionValues transitionValues = new TransitionValues(viewFindViewById);
                 if (z) {
                     captureStartValues(transitionValues);
                 } else {
@@ -441,9 +433,9 @@ public abstract class Transition implements Cloneable {
                 transitionValues.mTargetedTransitions.add(this);
                 capturePropagationValues(transitionValues);
                 if (z) {
-                    addViewValues(this.mStartValues, findViewById, transitionValues);
+                    addViewValues(this.mStartValues, viewFindViewById, transitionValues);
                 } else {
-                    addViewValues(this.mEndValues, findViewById, transitionValues);
+                    addViewValues(this.mEndValues, viewFindViewById, transitionValues);
                 }
             }
         }
@@ -501,8 +493,8 @@ public abstract class Transition implements Cloneable {
                 transitionValues3 = null;
             }
             if ((transitionValues2 != null || transitionValues3 != null) && (transitionValues2 == null || transitionValues3 == null || isTransitionRequired(transitionValues2, transitionValues3))) {
-                Animator createAnimator = createAnimator(viewGroup, transitionValues2, transitionValues3);
-                if (createAnimator != null) {
+                Animator animatorCreateAnimator = createAnimator(viewGroup, transitionValues2, transitionValues3);
+                if (animatorCreateAnimator != null) {
                     if (transitionValues3 != null) {
                         View view3 = transitionValues3.view;
                         String[] transitionProperties = getTransitionProperties();
@@ -526,7 +518,7 @@ public abstract class Transition implements Cloneable {
                             while (true) {
                                 if (i4 >= i3) {
                                     view2 = view3;
-                                    animator2 = createAnimator;
+                                    animator2 = animatorCreateAnimator;
                                     break;
                                 }
                                 AnimationInfo animationInfo = (AnimationInfo) runningAnimators.get((Animator) runningAnimators.keyAt(i4));
@@ -544,17 +536,17 @@ public abstract class Transition implements Cloneable {
                             }
                         } else {
                             view2 = view3;
-                            animator2 = createAnimator;
+                            animator2 = animatorCreateAnimator;
                             transitionValues = null;
                         }
-                        createAnimator = animator2;
+                        animatorCreateAnimator = animator2;
                         view = view2;
                     } else {
                         view = transitionValues2.view;
                         transitionValues = null;
                     }
-                    if (createAnimator != null) {
-                        Animator animator3 = createAnimator;
+                    if (animatorCreateAnimator != null) {
+                        Animator animator3 = animatorCreateAnimator;
                         AnimationInfo animationInfo2 = new AnimationInfo(view, this.mName, this, viewGroup.getWindowId(), transitionValues, animator3);
                         if (z) {
                             AnimatorSet animatorSet = new AnimatorSet();
@@ -598,6 +590,33 @@ public abstract class Transition implements Cloneable {
         }
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x002c, code lost:
+    
+        if (r2 < 0) goto L27;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x002e, code lost:
+    
+        if (r6 == false) goto L24;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:23:0x0030, code lost:
+    
+        r4 = r4.mEndValuesList;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:24:0x0033, code lost:
+    
+        r4 = r4.mStartValuesList;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:26:0x003b, code lost:
+    
+        return (androidx.transition.TransitionValues) r4.get(r2);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:27:0x003c, code lost:
+    
+        return null;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final TransitionValues getMatchedTransitionValues(View view, boolean z) {
         TransitionSet transitionSet = this.mParent;
         if (transitionSet != null) {
@@ -623,10 +642,6 @@ public abstract class Transition implements Cloneable {
             }
             i++;
         }
-        if (i >= 0) {
-            return (TransitionValues) (z ? this.mEndValuesList : this.mStartValuesList).get(i);
-        }
-        return null;
     }
 
     public final Transition getRootTransition() {
@@ -917,7 +932,7 @@ public abstract class Transition implements Cloneable {
 
     @Override // 
     /* renamed from: clone */
-    public Transition mo898clone() {
+    public Transition mo900clone() {
         try {
             Transition transition = (Transition) super.clone();
             transition.mAnimators = new ArrayList();
@@ -999,42 +1014,42 @@ public abstract class Transition implements Cloneable {
         this.mListeners = null;
         this.mAnimators = new ArrayList();
         this.mPathMotion = STRAIGHT_PATH_MOTION;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, Styleable.TRANSITION);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, Styleable.TRANSITION);
         XmlResourceParser xmlResourceParser = (XmlResourceParser) attributeSet;
-        long namedInt = TypedArrayUtils.getNamedInt(obtainStyledAttributes, xmlResourceParser, "duration", 1, -1);
+        long namedInt = TypedArrayUtils.getNamedInt(typedArrayObtainStyledAttributes, xmlResourceParser, "duration", 1, -1);
         if (namedInt >= 0) {
             setDuration(namedInt);
         }
-        long j = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "startDelay") != null ? obtainStyledAttributes.getInt(2, -1) : -1;
+        long j = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "startDelay") != null ? typedArrayObtainStyledAttributes.getInt(2, -1) : -1;
         if (j > 0) {
             setStartDelay(j);
         }
-        int resourceId = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "interpolator") != null ? obtainStyledAttributes.getResourceId(0, 0) : 0;
+        int resourceId = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "interpolator") != null ? typedArrayObtainStyledAttributes.getResourceId(0, 0) : 0;
         if (resourceId > 0) {
             setInterpolator(AnimationUtils.loadInterpolator(context, resourceId));
         }
-        String namedString = TypedArrayUtils.getNamedString(obtainStyledAttributes, xmlResourceParser, "matchOrder", 3);
+        String namedString = TypedArrayUtils.getNamedString(typedArrayObtainStyledAttributes, xmlResourceParser, "matchOrder", 3);
         if (namedString != null) {
             StringTokenizer stringTokenizer = new StringTokenizer(namedString, ",");
             int[] iArr2 = new int[stringTokenizer.countTokens()];
             int i = 0;
             while (stringTokenizer.hasMoreTokens()) {
-                String trim = stringTokenizer.nextToken().trim();
-                if ("id".equalsIgnoreCase(trim)) {
+                String strTrim = stringTokenizer.nextToken().trim();
+                if ("id".equalsIgnoreCase(strTrim)) {
                     iArr2[i] = 3;
-                } else if ("instance".equalsIgnoreCase(trim)) {
+                } else if ("instance".equalsIgnoreCase(strTrim)) {
                     iArr2[i] = 1;
-                } else if ("name".equalsIgnoreCase(trim)) {
+                } else if ("name".equalsIgnoreCase(strTrim)) {
                     iArr2[i] = 2;
-                } else if ("itemId".equalsIgnoreCase(trim)) {
+                } else if ("itemId".equalsIgnoreCase(strTrim)) {
                     iArr2[i] = 4;
-                } else if (trim.isEmpty()) {
+                } else if (strTrim.isEmpty()) {
                     int[] iArr3 = new int[iArr2.length - 1];
                     System.arraycopy(iArr2, 0, iArr3, 0, i);
                     i--;
                     iArr2 = iArr3;
                 } else {
-                    throw new InflateException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Unknown match type in matchOrder: '", trim, "'"));
+                    throw new InflateException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Unknown match type in matchOrder: '", strTrim, "'"));
                 }
                 i++;
             }
@@ -1055,7 +1070,7 @@ public abstract class Transition implements Cloneable {
                 this.mMatchOrder = (int[]) iArr2.clone();
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public void setPropagation() {

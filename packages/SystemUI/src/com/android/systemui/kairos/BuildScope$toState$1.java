@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__LimitKt$dropWhile$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class BuildScope$toState$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Object $initial;
@@ -20,7 +19,6 @@ final class BuildScope$toState$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.kairos.BuildScope$toState$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Object $initial;
@@ -86,12 +84,12 @@ final class BuildScope$toState$1 extends SuspendLambda implements Function2 {
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.kairos.BuildScope$toState$1.2
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    Object emit = ((BuildScopeImpl$events$1$1) EventProducerScope.this).$events.emit(obj2, continuation);
+                    Object objEmit = ((BuildScopeImpl$events$1$1) eventProducerScope).$events.emit(obj2, continuation);
                     CoroutineSingletons coroutineSingletons2 = CoroutineSingletons.COROUTINE_SUSPENDED;
-                    if (emit != coroutineSingletons2) {
-                        emit = Unit.INSTANCE;
+                    if (objEmit != coroutineSingletons2) {
+                        objEmit = Unit.INSTANCE;
                     }
-                    return emit == coroutineSingletons2 ? emit : Unit.INSTANCE;
+                    return objEmit == coroutineSingletons2 ? objEmit : Unit.INSTANCE;
                 }
             };
             this.label = 1;

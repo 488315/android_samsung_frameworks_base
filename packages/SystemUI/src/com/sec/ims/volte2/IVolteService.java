@@ -16,7 +16,6 @@ import com.sec.ims.volte2.data.ImsCallInfo;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IVolteService extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.volte2.IVolteService";
@@ -87,7 +86,6 @@ public interface IVolteService extends IInterface {
 
     String updateEccUrn(int i, String str) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IVolteService {
         static final int TRANSACTION_changeAudioPath = 29;
         static final int TRANSACTION_createCallProfile = 5;
@@ -123,7 +121,6 @@ public interface IVolteService extends IInterface {
         static final int TRANSACTION_unregisterRttEventListener = 23;
         static final int TRANSACTION_updateEccUrn = 28;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IVolteService {
             private IBinder mRemote;
 
@@ -138,160 +135,160 @@ public interface IVolteService extends IInterface {
 
             @Override // com.sec.ims.volte2.IVolteService
             public void changeAudioPath(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public CallProfile createCallProfile(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CallProfile) obtain2.readTypedObject(CallProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CallProfile) parcelObtain2.readTypedObject(CallProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public IImsCallSession createSession(CallProfile callProfile) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeTypedObject(callProfile, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsCallSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(callProfile, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsCallSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public IImsCallSession createSessionWithRegId(CallProfile callProfile, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeTypedObject(callProfile, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsCallSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(callProfile, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsCallSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void deRegisterForVolteServiceEvent(int i, IVolteServiceEventListener iVolteServiceEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iVolteServiceEventListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iVolteServiceEventListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void deregisterForCallStateEvent(IImsCallEventListener iImsCallEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallEventListener);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallEventListener);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void deregisterForCallStateEventForSlot(int i, IImsCallEventListener iImsCallEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iImsCallEventListener);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iImsCallEventListener);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void enableCallWaitingRule(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public int[] getCallCount() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public ImsCallInfo[] getImsCallInfos(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ImsCallInfo[]) obtain2.createTypedArray(ImsCallInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ImsCallInfo[]) parcelObtain2.createTypedArray(ImsCallInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -301,370 +298,370 @@ public interface IVolteService extends IInterface {
 
             @Override // com.sec.ims.volte2.IVolteService
             public int getNetworkType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public int getParticipantIdForMerge(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public IImsCallSession getPendingSession(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsCallSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsCallSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public ImsRegistration[] getRegistrationInfoByPhoneId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ImsRegistration[]) obtain2.createTypedArray(ImsRegistration.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ImsRegistration[]) parcelObtain2.createTypedArray(ImsRegistration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public int getRttMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public IImsCallSession getSession(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsCallSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsCallSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public IImsCallSession getSessionByCallId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IImsCallSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IImsCallSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public String getTrn(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void notifyProgressIncomingCall(int i, Map map) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeMap(map);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeMap(map);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void registerForCallStateEvent(IImsCallEventListener iImsCallEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsCallEventListener);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsCallEventListener);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void registerForCallStateEventForSlot(int i, IImsCallEventListener iImsCallEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iImsCallEventListener);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iImsCallEventListener);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void registerForVolteServiceEvent(int i, IVolteServiceEventListener iVolteServiceEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iVolteServiceEventListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iVolteServiceEventListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void registerImsRegistrationListener(IImsRegistrationListener iImsRegistrationListener, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsRegistrationListener);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsRegistrationListener);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void registerRttEventListener(int i, IRttEventListener iRttEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRttEventListener);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRttEventListener);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void sendRttSessionModifyRequest(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void sendRttSessionModifyResponse(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void setAutomaticMode(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void setTtyMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public int startLocalRingBackTone(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public int stopLocalRingBackTone() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void unregisterImsRegistrationListener(IImsRegistrationListener iImsRegistrationListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iImsRegistrationListener);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iImsRegistrationListener);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public void unregisterRttEventListener(int i, IRttEventListener iRttEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRttEventListener);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRttEventListener);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IVolteService
             public String updateEccUrn(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IVolteService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -677,8 +674,8 @@ public interface IVolteService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVolteService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IVolteService)) ? new Proxy(iBinder) : (IVolteService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVolteService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IVolteService)) ? new Proxy(iBinder) : (IVolteService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -692,113 +689,113 @@ public interface IVolteService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    IVolteServiceEventListener asInterface = IVolteServiceEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    IVolteServiceEventListener iVolteServiceEventListenerAsInterface = IVolteServiceEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerForVolteServiceEvent(readInt, asInterface);
+                    registerForVolteServiceEvent(i3, iVolteServiceEventListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    IVolteServiceEventListener asInterface2 = IVolteServiceEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
+                    IVolteServiceEventListener iVolteServiceEventListenerAsInterface2 = IVolteServiceEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    deRegisterForVolteServiceEvent(readInt2, asInterface2);
+                    deRegisterForVolteServiceEvent(i4, iVolteServiceEventListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    IImsRegistrationListener asInterface3 = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt3 = parcel.readInt();
+                    IImsRegistrationListener iImsRegistrationListenerAsInterface = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z = parcel.readBoolean();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerImsRegistrationListener(asInterface3, readBoolean, readInt3);
+                    registerImsRegistrationListener(iImsRegistrationListenerAsInterface, z, i5);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    IImsRegistrationListener asInterface4 = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
+                    IImsRegistrationListener iImsRegistrationListenerAsInterface2 = IImsRegistrationListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterImsRegistrationListener(asInterface4);
+                    unregisterImsRegistrationListener(iImsRegistrationListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CallProfile createCallProfile = createCallProfile(readInt4, readInt5);
+                    CallProfile callProfileCreateCallProfile = createCallProfile(i6, i7);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createCallProfile, 1);
+                    parcel2.writeTypedObject(callProfileCreateCallProfile, 1);
                     return true;
                 case 6:
                     CallProfile callProfile = (CallProfile) parcel.readTypedObject(CallProfile.CREATOR);
                     parcel.enforceNoDataAvail();
-                    IImsCallSession createSession = createSession(callProfile);
+                    IImsCallSession iImsCallSessionCreateSession = createSession(callProfile);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createSession);
+                    parcel2.writeStrongInterface(iImsCallSessionCreateSession);
                     return true;
                 case 7:
                     CallProfile callProfile2 = (CallProfile) parcel.readTypedObject(CallProfile.CREATOR);
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IImsCallSession createSessionWithRegId = createSessionWithRegId(callProfile2, readInt6);
+                    IImsCallSession iImsCallSessionCreateSessionWithRegId = createSessionWithRegId(callProfile2, i8);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createSessionWithRegId);
+                    parcel2.writeStrongInterface(iImsCallSessionCreateSessionWithRegId);
                     return true;
                 case 8:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IImsCallSession pendingSession = getPendingSession(readString);
+                    IImsCallSession pendingSession = getPendingSession(string);
                     parcel2.writeNoException();
                     parcel2.writeStrongInterface(pendingSession);
                     return true;
                 case 9:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IImsCallSession session = getSession(readInt7);
+                    IImsCallSession session = getSession(i9);
                     parcel2.writeNoException();
                     parcel2.writeStrongInterface(session);
                     return true;
                 case 10:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setTtyMode(readInt8);
+                    setTtyMode(i10);
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    IImsCallEventListener asInterface5 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallEventListener iImsCallEventListenerAsInterface = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerForCallStateEvent(asInterface5);
+                    registerForCallStateEvent(iImsCallEventListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    IImsCallEventListener asInterface6 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IImsCallEventListener iImsCallEventListenerAsInterface2 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    deregisterForCallStateEvent(asInterface6);
+                    deregisterForCallStateEvent(iImsCallEventListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    int readInt9 = parcel.readInt();
-                    IImsCallEventListener asInterface7 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i11 = parcel.readInt();
+                    IImsCallEventListener iImsCallEventListenerAsInterface3 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerForCallStateEventForSlot(readInt9, asInterface7);
+                    registerForCallStateEventForSlot(i11, iImsCallEventListenerAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    int readInt10 = parcel.readInt();
-                    IImsCallEventListener asInterface8 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i12 = parcel.readInt();
+                    IImsCallEventListener iImsCallEventListenerAsInterface4 = IImsCallEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    deregisterForCallStateEventForSlot(readInt10, asInterface8);
+                    deregisterForCallStateEventForSlot(i12, iImsCallEventListenerAsInterface4);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    enableCallWaitingRule(readBoolean2);
+                    enableCallWaitingRule(z2);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    int readInt11 = parcel.readInt();
-                    HashMap readHashMap = parcel.readHashMap(getClass().getClassLoader());
+                    int i13 = parcel.readInt();
+                    HashMap hashMap = parcel.readHashMap(getClass().getClassLoader());
                     parcel.enforceNoDataAvail();
-                    notifyProgressIncomingCall(readInt11, readHashMap);
+                    notifyProgressIncomingCall(i13, hashMap);
                     parcel2.writeNoException();
                     return true;
                 case 17:
@@ -812,110 +809,110 @@ public interface IVolteService extends IInterface {
                     parcel2.writeInt(rttMode);
                     return true;
                 case 19:
-                    int readInt12 = parcel.readInt();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    int i14 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAutomaticMode(readInt12, readBoolean3);
+                    setAutomaticMode(i14, z3);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    int readInt13 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i15 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    sendRttSessionModifyResponse(readInt13, readBoolean4);
+                    sendRttSessionModifyResponse(i15, z4);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    int readInt14 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i16 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    sendRttSessionModifyRequest(readInt14, readBoolean5);
+                    sendRttSessionModifyRequest(i16, z5);
                     parcel2.writeNoException();
                     return true;
                 case 22:
-                    int readInt15 = parcel.readInt();
-                    IRttEventListener asInterface9 = IRttEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i17 = parcel.readInt();
+                    IRttEventListener iRttEventListenerAsInterface = IRttEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerRttEventListener(readInt15, asInterface9);
+                    registerRttEventListener(i17, iRttEventListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    int readInt16 = parcel.readInt();
-                    IRttEventListener asInterface10 = IRttEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i18 = parcel.readInt();
+                    IRttEventListener iRttEventListenerAsInterface2 = IRttEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterRttEventListener(readInt16, asInterface10);
+                    unregisterRttEventListener(i18, iRttEventListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int participantIdForMerge = getParticipantIdForMerge(readInt17, readInt18);
+                    int participantIdForMerge = getParticipantIdForMerge(i19, i20);
                     parcel2.writeNoException();
                     parcel2.writeInt(participantIdForMerge);
                     return true;
                 case 25:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IImsCallSession sessionByCallId = getSessionByCallId(readInt19);
+                    IImsCallSession sessionByCallId = getSessionByCallId(i21);
                     parcel2.writeNoException();
                     parcel2.writeStrongInterface(sessionByCallId);
                     return true;
                 case 26:
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ImsRegistration[] registrationInfoByPhoneId = getRegistrationInfoByPhoneId(readInt20);
+                    ImsRegistration[] registrationInfoByPhoneId = getRegistrationInfoByPhoneId(i22);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(registrationInfoByPhoneId, 1);
                     return true;
                 case 27:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int networkType = getNetworkType(readInt21);
+                    int networkType = getNetworkType(i23);
                     parcel2.writeNoException();
                     parcel2.writeInt(networkType);
                     return true;
                 case 28:
-                    int readInt22 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i24 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String updateEccUrn = updateEccUrn(readInt22, readString2);
+                    String strUpdateEccUrn = updateEccUrn(i24, string2);
                     parcel2.writeNoException();
-                    parcel2.writeString(updateEccUrn);
+                    parcel2.writeString(strUpdateEccUrn);
                     return true;
                 case 29:
-                    int readInt23 = parcel.readInt();
-                    int readInt24 = parcel.readInt();
+                    int i25 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    changeAudioPath(readInt23, readInt24);
+                    changeAudioPath(i25, i26);
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    int readInt25 = parcel.readInt();
-                    int readInt26 = parcel.readInt();
-                    int readInt27 = parcel.readInt();
+                    int i27 = parcel.readInt();
+                    int i28 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int startLocalRingBackTone = startLocalRingBackTone(readInt25, readInt26, readInt27);
+                    int iStartLocalRingBackTone = startLocalRingBackTone(i27, i28, i29);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startLocalRingBackTone);
+                    parcel2.writeInt(iStartLocalRingBackTone);
                     return true;
                 case 31:
-                    int stopLocalRingBackTone = stopLocalRingBackTone();
+                    int iStopLocalRingBackTone = stopLocalRingBackTone();
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopLocalRingBackTone);
+                    parcel2.writeInt(iStopLocalRingBackTone);
                     return true;
                 case 32:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String trn = getTrn(readString3, readString4);
+                    String trn = getTrn(string3, string4);
                     parcel2.writeNoException();
                     parcel2.writeString(trn);
                     return true;
                 case 33:
-                    int readInt28 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ImsCallInfo[] imsCallInfos = getImsCallInfos(readInt28);
+                    ImsCallInfo[] imsCallInfos = getImsCallInfos(i30);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(imsCallInfos, 1);
                     return true;
@@ -930,7 +927,6 @@ public interface IVolteService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IVolteService {
         @Override // android.os.IInterface
         public IBinder asBinder() {

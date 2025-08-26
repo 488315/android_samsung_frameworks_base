@@ -29,9 +29,9 @@ public class RSAKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPairGenerator
-    public AsymmetricCipherKeyPair generateKeyPair() {
-        BigInteger chooseRandomPrime;
-        BigInteger multiply;
+    public AsymmetricCipherKeyPair generateKeyPair() throws IllegalArgumentException {
+        BigInteger bigIntegerChooseRandomPrime;
+        BigInteger bigIntegerMultiply;
         RSAKeyPairGenerator rSAKeyPairGenerator = this;
         int strength = rSAKeyPairGenerator.param.getStrength();
         int i = (strength + 1) / 2;
@@ -43,45 +43,45 @@ public class RSAKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
             i4 = i5;
         }
         int i6 = strength >> 2;
-        BigInteger pow = BigInteger.valueOf(2L).pow(i3);
+        BigInteger bigIntegerPow = BigInteger.valueOf(2L).pow(i3);
         BigInteger bigInteger = ONE;
-        BigInteger shiftLeft = bigInteger.shiftLeft(strength - 1);
-        BigInteger shiftLeft2 = bigInteger.shiftLeft(i4);
+        BigInteger bigIntegerShiftLeft = bigInteger.shiftLeft(strength - 1);
+        BigInteger bigIntegerShiftLeft2 = bigInteger.shiftLeft(i4);
         AsymmetricCipherKeyPair asymmetricCipherKeyPair = null;
         boolean z = false;
         while (!z) {
             BigInteger publicExponent = rSAKeyPairGenerator.param.getPublicExponent();
-            BigInteger chooseRandomPrime2 = rSAKeyPairGenerator.chooseRandomPrime(i, publicExponent, shiftLeft);
+            BigInteger bigIntegerChooseRandomPrime2 = rSAKeyPairGenerator.chooseRandomPrime(i, publicExponent, bigIntegerShiftLeft);
             while (true) {
-                chooseRandomPrime = rSAKeyPairGenerator.chooseRandomPrime(i2, publicExponent, shiftLeft);
-                BigInteger abs = chooseRandomPrime.subtract(chooseRandomPrime2).abs();
-                if (abs.bitLength() >= i4 && abs.compareTo(shiftLeft2) > 0) {
-                    multiply = chooseRandomPrime2.multiply(chooseRandomPrime);
-                    if (multiply.bitLength() != strength) {
-                        chooseRandomPrime2 = chooseRandomPrime2.max(chooseRandomPrime);
+                bigIntegerChooseRandomPrime = rSAKeyPairGenerator.chooseRandomPrime(i2, publicExponent, bigIntegerShiftLeft);
+                BigInteger bigIntegerAbs = bigIntegerChooseRandomPrime.subtract(bigIntegerChooseRandomPrime2).abs();
+                if (bigIntegerAbs.bitLength() >= i4 && bigIntegerAbs.compareTo(bigIntegerShiftLeft2) > 0) {
+                    bigIntegerMultiply = bigIntegerChooseRandomPrime2.multiply(bigIntegerChooseRandomPrime);
+                    if (bigIntegerMultiply.bitLength() != strength) {
+                        bigIntegerChooseRandomPrime2 = bigIntegerChooseRandomPrime2.max(bigIntegerChooseRandomPrime);
                     } else {
-                        if (WNafUtil.getNafWeight(multiply) >= i6) {
+                        if (WNafUtil.getNafWeight(bigIntegerMultiply) >= i6) {
                             break;
                         }
-                        chooseRandomPrime2 = rSAKeyPairGenerator.chooseRandomPrime(i, publicExponent, shiftLeft);
+                        bigIntegerChooseRandomPrime2 = rSAKeyPairGenerator.chooseRandomPrime(i, publicExponent, bigIntegerShiftLeft);
                     }
                 } else {
                     rSAKeyPairGenerator = this;
                     strength = strength;
                 }
             }
-            if (chooseRandomPrime2.compareTo(chooseRandomPrime) < 0) {
-                chooseRandomPrime = chooseRandomPrime2;
-                chooseRandomPrime2 = chooseRandomPrime;
+            if (bigIntegerChooseRandomPrime2.compareTo(bigIntegerChooseRandomPrime) < 0) {
+                bigIntegerChooseRandomPrime = bigIntegerChooseRandomPrime2;
+                bigIntegerChooseRandomPrime2 = bigIntegerChooseRandomPrime;
             }
             BigInteger bigInteger2 = ONE;
-            BigInteger subtract = chooseRandomPrime2.subtract(bigInteger2);
-            BigInteger subtract2 = chooseRandomPrime.subtract(bigInteger2);
+            BigInteger bigIntegerSubtract = bigIntegerChooseRandomPrime2.subtract(bigInteger2);
+            BigInteger bigIntegerSubtract2 = bigIntegerChooseRandomPrime.subtract(bigInteger2);
             int i7 = strength;
-            BigInteger modInverse = publicExponent.modInverse(subtract.divide(subtract.gcd(subtract2)).multiply(subtract2));
-            if (modInverse.compareTo(pow) > 0) {
+            BigInteger bigIntegerModInverse = publicExponent.modInverse(bigIntegerSubtract.divide(bigIntegerSubtract.gcd(bigIntegerSubtract2)).multiply(bigIntegerSubtract2));
+            if (bigIntegerModInverse.compareTo(bigIntegerPow) > 0) {
                 z = true;
-                asymmetricCipherKeyPair = new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new RSAKeyParameters(false, multiply, publicExponent, true), (AsymmetricKeyParameter) new RSAPrivateCrtKeyParameters(multiply, publicExponent, modInverse, chooseRandomPrime2, chooseRandomPrime, modInverse.remainder(subtract), modInverse.remainder(subtract2), BigIntegers.modOddInverse(chooseRandomPrime2, chooseRandomPrime), true));
+                asymmetricCipherKeyPair = new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new RSAKeyParameters(false, bigIntegerMultiply, publicExponent, true), (AsymmetricKeyParameter) new RSAPrivateCrtKeyParameters(bigIntegerMultiply, publicExponent, bigIntegerModInverse, bigIntegerChooseRandomPrime2, bigIntegerChooseRandomPrime, bigIntegerModInverse.remainder(bigIntegerSubtract), bigIntegerModInverse.remainder(bigIntegerSubtract2), BigIntegers.modOddInverse(bigIntegerChooseRandomPrime2, bigIntegerChooseRandomPrime), true));
             }
             rSAKeyPairGenerator = this;
             strength = i7;
@@ -89,13 +89,13 @@ public class RSAKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
         return asymmetricCipherKeyPair;
     }
 
-    protected BigInteger chooseRandomPrime(int i, BigInteger bigInteger, BigInteger bigInteger2) {
+    protected BigInteger chooseRandomPrime(int i, BigInteger bigInteger, BigInteger bigInteger2) throws IllegalArgumentException {
         for (int i2 = 0; i2 != i * 5; i2++) {
-            BigInteger createRandomPrime = BigIntegers.createRandomPrime(i, 1, this.param.getRandom());
-            BigInteger mod = createRandomPrime.mod(bigInteger);
+            BigInteger bigIntegerCreateRandomPrime = BigIntegers.createRandomPrime(i, 1, this.param.getRandom());
+            BigInteger bigIntegerMod = bigIntegerCreateRandomPrime.mod(bigInteger);
             BigInteger bigInteger3 = ONE;
-            if (!mod.equals(bigInteger3) && createRandomPrime.multiply(createRandomPrime).compareTo(bigInteger2) >= 0 && isProbablePrime(createRandomPrime) && bigInteger.gcd(createRandomPrime.subtract(bigInteger3)).equals(bigInteger3)) {
-                return createRandomPrime;
+            if (!bigIntegerMod.equals(bigInteger3) && bigIntegerCreateRandomPrime.multiply(bigIntegerCreateRandomPrime).compareTo(bigInteger2) >= 0 && isProbablePrime(bigIntegerCreateRandomPrime) && bigInteger.gcd(bigIntegerCreateRandomPrime.subtract(bigInteger3)).equals(bigInteger3)) {
+                return bigIntegerCreateRandomPrime;
             }
         }
         throw new IllegalStateException("unable to generate prime number for RSA key");

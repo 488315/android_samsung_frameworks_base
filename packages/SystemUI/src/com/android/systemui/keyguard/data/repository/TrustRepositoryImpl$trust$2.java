@@ -16,7 +16,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class TrustRepositoryImpl$trust$2 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -57,11 +56,11 @@ final class TrustRepositoryImpl$trust$2 extends SuspendLambda implements Functio
             LogLevel logLevel = LogLevel.DEBUG;
             TrustRepositoryLogger$$ExternalSyntheticLambda0 trustRepositoryLogger$$ExternalSyntheticLambda0 = new TrustRepositoryLogger$$ExternalSyntheticLambda0(5);
             LogBuffer logBuffer = trustRepositoryLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("TrustRepositoryLog", logLevel, trustRepositoryLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("TrustRepositoryLog", logLevel, trustRepositoryLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.int1 = trustModel.userId;
             logMessageImpl.bool1 = trustModel.isTrusted;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         } else if (obj2 instanceof ActiveUnlockModel) {
             ActiveUnlockModel activeUnlockModel = (ActiveUnlockModel) obj2;
             this.this$0.activeUnlockRunningForUser.put(new Integer(activeUnlockModel.userId), obj2);
@@ -70,11 +69,11 @@ final class TrustRepositoryImpl$trust$2 extends SuspendLambda implements Functio
             LogLevel logLevel2 = LogLevel.DEBUG;
             TrustRepositoryLogger$$ExternalSyntheticLambda0 trustRepositoryLogger$$ExternalSyntheticLambda02 = new TrustRepositoryLogger$$ExternalSyntheticLambda0(2);
             LogBuffer logBuffer2 = trustRepositoryLogger2.logBuffer;
-            LogMessage obtain2 = logBuffer2.obtain("TrustRepositoryLog", logLevel2, trustRepositoryLogger$$ExternalSyntheticLambda02, null);
-            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+            LogMessage logMessageObtain2 = logBuffer2.obtain("TrustRepositoryLog", logLevel2, trustRepositoryLogger$$ExternalSyntheticLambda02, null);
+            LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
             logMessageImpl2.int1 = activeUnlockModel.userId;
             logMessageImpl2.bool1 = activeUnlockModel.isRunning;
-            logBuffer2.commit(obtain2);
+            logBuffer2.commit(logMessageObtain2);
         } else if (obj2 instanceof TrustManagedModel) {
             TrustManagedModel trustManagedModel = (TrustManagedModel) obj2;
             this.this$0.trustManagedForUser.put(new Integer(trustManagedModel.userId), obj2);
@@ -83,11 +82,11 @@ final class TrustRepositoryImpl$trust$2 extends SuspendLambda implements Functio
             LogLevel logLevel3 = LogLevel.DEBUG;
             TrustRepositoryLogger$$ExternalSyntheticLambda0 trustRepositoryLogger$$ExternalSyntheticLambda03 = new TrustRepositoryLogger$$ExternalSyntheticLambda0(0);
             LogBuffer logBuffer3 = trustRepositoryLogger3.logBuffer;
-            LogMessage obtain3 = logBuffer3.obtain("TrustRepositoryLog", logLevel3, trustRepositoryLogger$$ExternalSyntheticLambda03, null);
-            LogMessageImpl logMessageImpl3 = (LogMessageImpl) obtain3;
+            LogMessage logMessageObtain3 = logBuffer3.obtain("TrustRepositoryLog", logLevel3, trustRepositoryLogger$$ExternalSyntheticLambda03, null);
+            LogMessageImpl logMessageImpl3 = (LogMessageImpl) logMessageObtain3;
             logMessageImpl3.bool1 = trustManagedModel.isTrustManaged;
             logMessageImpl3.int1 = trustManagedModel.userId;
-            logBuffer3.commit(obtain3);
+            logBuffer3.commit(logMessageObtain3);
         }
         return Unit.INSTANCE;
     }

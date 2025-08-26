@@ -1,10 +1,13 @@
 package androidx.compose.material3;
 
 import androidx.compose.foundation.text.modifiers.SelectableTextAnnotatedStringElement$$ExternalSyntheticOutline0;
+import androidx.compose.material3.tokens.TypographyTokens;
 import androidx.compose.ui.text.TextStyle;
+import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
+import com.samsung.systemui.splugins.volume.VolumePanelValues;
+import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Typography {
     public final TextStyle bodyLarge;
@@ -95,29 +98,328 @@ public final class Typography {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Typography(androidx.compose.ui.text.TextStyle r32, androidx.compose.ui.text.TextStyle r33, androidx.compose.ui.text.TextStyle r34, androidx.compose.ui.text.TextStyle r35, androidx.compose.ui.text.TextStyle r36, androidx.compose.ui.text.TextStyle r37, androidx.compose.ui.text.TextStyle r38, androidx.compose.ui.text.TextStyle r39, androidx.compose.ui.text.TextStyle r40, androidx.compose.ui.text.TextStyle r41, androidx.compose.ui.text.TextStyle r42, androidx.compose.ui.text.TextStyle r43, androidx.compose.ui.text.TextStyle r44, androidx.compose.ui.text.TextStyle r45, androidx.compose.ui.text.TextStyle r46, androidx.compose.ui.text.TextStyle r47, androidx.compose.ui.text.TextStyle r48, androidx.compose.ui.text.TextStyle r49, androidx.compose.ui.text.TextStyle r50, androidx.compose.ui.text.TextStyle r51, androidx.compose.ui.text.TextStyle r52, androidx.compose.ui.text.TextStyle r53, androidx.compose.ui.text.TextStyle r54, androidx.compose.ui.text.TextStyle r55, androidx.compose.ui.text.TextStyle r56, androidx.compose.ui.text.TextStyle r57, androidx.compose.ui.text.TextStyle r58, androidx.compose.ui.text.TextStyle r59, androidx.compose.ui.text.TextStyle r60, androidx.compose.ui.text.TextStyle r61, int r62, kotlin.jvm.internal.DefaultConstructorMarker r63) {
-        /*
-            Method dump skipped, instructions count: 520
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.material3.Typography.<init>(androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public Typography(TextStyle textStyle, TextStyle textStyle2, TextStyle textStyle3, TextStyle textStyle4, TextStyle textStyle5, TextStyle textStyle6, TextStyle textStyle7, TextStyle textStyle8, TextStyle textStyle9, TextStyle textStyle10, TextStyle textStyle11, TextStyle textStyle12, TextStyle textStyle13, TextStyle textStyle14, TextStyle textStyle15, TextStyle textStyle16, TextStyle textStyle17, TextStyle textStyle18, TextStyle textStyle19, TextStyle textStyle20, TextStyle textStyle21, TextStyle textStyle22, TextStyle textStyle23, TextStyle textStyle24, TextStyle textStyle25, TextStyle textStyle26, TextStyle textStyle27, TextStyle textStyle28, TextStyle textStyle29, TextStyle textStyle30, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        TextStyle textStyle31;
+        TextStyle textStyle32;
+        TextStyle textStyle33;
+        TextStyle textStyle34;
+        TextStyle textStyle35;
+        TextStyle textStyle36;
+        TextStyle textStyle37;
+        TextStyle textStyle38;
+        TextStyle textStyle39;
+        TextStyle textStyle40;
+        TextStyle textStyle41;
+        TextStyle textStyle42;
+        TextStyle textStyle43;
+        TextStyle textStyle44;
+        TextStyle textStyle45;
+        TextStyle textStyle46;
+        TextStyle textStyle47;
+        TextStyle textStyle48;
+        TextStyle textStyle49;
+        TextStyle textStyle50;
+        TextStyle textStyle51;
+        TextStyle textStyle52;
+        TextStyle textStyle53;
+        TextStyle textStyle54;
+        TextStyle textStyle55;
+        TextStyle textStyle56;
+        TextStyle textStyle57;
+        TextStyle textStyle58;
+        TextStyle textStyle59;
+        TextStyle textStyle60;
+        if ((i & 1) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle31 = TypographyTokens.DisplayLarge;
+        } else {
+            textStyle31 = textStyle;
+        }
+        if ((i & 2) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle32 = TypographyTokens.DisplayMedium;
+        } else {
+            textStyle32 = textStyle2;
+        }
+        if ((i & 4) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle33 = TypographyTokens.DisplaySmall;
+        } else {
+            textStyle33 = textStyle3;
+        }
+        if ((i & 8) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle34 = TypographyTokens.HeadlineLarge;
+        } else {
+            textStyle34 = textStyle4;
+        }
+        if ((i & 16) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle35 = TypographyTokens.HeadlineMedium;
+        } else {
+            textStyle35 = textStyle5;
+        }
+        if ((i & 32) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle36 = TypographyTokens.HeadlineSmall;
+        } else {
+            textStyle36 = textStyle6;
+        }
+        if ((i & 64) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle37 = TypographyTokens.TitleLarge;
+        } else {
+            textStyle37 = textStyle7;
+        }
+        if ((i & 128) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle38 = TypographyTokens.TitleMedium;
+        } else {
+            textStyle38 = textStyle8;
+        }
+        if ((i & 256) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle39 = TypographyTokens.TitleSmall;
+        } else {
+            textStyle39 = textStyle9;
+        }
+        if ((i & 512) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle40 = TypographyTokens.BodyLarge;
+        } else {
+            textStyle40 = textStyle10;
+        }
+        if ((i & 1024) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle41 = TypographyTokens.BodyMedium;
+        } else {
+            textStyle41 = textStyle11;
+        }
+        if ((i & 2048) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle42 = TypographyTokens.BodySmall;
+        } else {
+            textStyle42 = textStyle12;
+        }
+        if ((i & 4096) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle43 = TypographyTokens.LabelLarge;
+        } else {
+            textStyle43 = textStyle13;
+        }
+        if ((i & 8192) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle44 = TypographyTokens.LabelMedium;
+        } else {
+            textStyle44 = textStyle14;
+        }
+        if ((i & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle45 = TypographyTokens.LabelSmall;
+        } else {
+            textStyle45 = textStyle15;
+        }
+        if ((i & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle46 = TypographyTokens.DisplayLargeEmphasized;
+        } else {
+            textStyle46 = textStyle16;
+        }
+        if ((i & 65536) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle47 = TypographyTokens.DisplayMediumEmphasized;
+        } else {
+            textStyle47 = textStyle17;
+        }
+        if ((i & 131072) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle48 = TypographyTokens.DisplaySmallEmphasized;
+        } else {
+            textStyle48 = textStyle18;
+        }
+        if ((i & 262144) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle49 = TypographyTokens.HeadlineLargeEmphasized;
+        } else {
+            textStyle49 = textStyle19;
+        }
+        if ((i & NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle50 = TypographyTokens.HeadlineMediumEmphasized;
+        } else {
+            textStyle50 = textStyle20;
+        }
+        if ((i & 1048576) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle51 = TypographyTokens.HeadlineSmallEmphasized;
+        } else {
+            textStyle51 = textStyle21;
+        }
+        if ((i & 2097152) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle52 = TypographyTokens.TitleLargeEmphasized;
+        } else {
+            textStyle52 = textStyle22;
+        }
+        if ((i & 4194304) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle53 = TypographyTokens.TitleMediumEmphasized;
+        } else {
+            textStyle53 = textStyle23;
+        }
+        if ((i & 8388608) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle54 = TypographyTokens.TitleSmallEmphasized;
+        } else {
+            textStyle54 = textStyle24;
+        }
+        if ((i & 16777216) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle55 = TypographyTokens.BodyLargeEmphasized;
+        } else {
+            textStyle55 = textStyle25;
+        }
+        if ((i & 33554432) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle56 = TypographyTokens.BodyMediumEmphasized;
+        } else {
+            textStyle56 = textStyle26;
+        }
+        if ((i & 67108864) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle57 = TypographyTokens.BodySmallEmphasized;
+        } else {
+            textStyle57 = textStyle27;
+        }
+        if ((i & 134217728) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle58 = TypographyTokens.LabelLargeEmphasized;
+        } else {
+            textStyle58 = textStyle28;
+        }
+        if ((i & 268435456) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle59 = TypographyTokens.LabelMediumEmphasized;
+        } else {
+            textStyle59 = textStyle29;
+        }
+        if ((i & VolumePanelValues.FLAG_SHOW_CSD_100_WARNINGS) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle60 = TypographyTokens.LabelSmallEmphasized;
+        } else {
+            textStyle60 = textStyle30;
+        }
+        this(textStyle31, textStyle32, textStyle33, textStyle34, textStyle35, textStyle36, textStyle37, textStyle38, textStyle39, textStyle40, textStyle41, textStyle42, textStyle43, textStyle44, textStyle45, textStyle46, textStyle47, textStyle48, textStyle49, textStyle50, textStyle51, textStyle52, textStyle53, textStyle54, textStyle55, textStyle56, textStyle57, textStyle58, textStyle59, textStyle60);
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public Typography(androidx.compose.ui.text.TextStyle r16, androidx.compose.ui.text.TextStyle r17, androidx.compose.ui.text.TextStyle r18, androidx.compose.ui.text.TextStyle r19, androidx.compose.ui.text.TextStyle r20, androidx.compose.ui.text.TextStyle r21, androidx.compose.ui.text.TextStyle r22, androidx.compose.ui.text.TextStyle r23, androidx.compose.ui.text.TextStyle r24, androidx.compose.ui.text.TextStyle r25, androidx.compose.ui.text.TextStyle r26, androidx.compose.ui.text.TextStyle r27, androidx.compose.ui.text.TextStyle r28, androidx.compose.ui.text.TextStyle r29, androidx.compose.ui.text.TextStyle r30, int r31, kotlin.jvm.internal.DefaultConstructorMarker r32) {
-        /*
-            Method dump skipped, instructions count: 249
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.material3.Typography.<init>(androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, androidx.compose.ui.text.TextStyle, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public Typography(TextStyle textStyle, TextStyle textStyle2, TextStyle textStyle3, TextStyle textStyle4, TextStyle textStyle5, TextStyle textStyle6, TextStyle textStyle7, TextStyle textStyle8, TextStyle textStyle9, TextStyle textStyle10, TextStyle textStyle11, TextStyle textStyle12, TextStyle textStyle13, TextStyle textStyle14, TextStyle textStyle15, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        TextStyle textStyle16;
+        TextStyle textStyle17;
+        TextStyle textStyle18;
+        TextStyle textStyle19;
+        TextStyle textStyle20;
+        TextStyle textStyle21;
+        TextStyle textStyle22;
+        TextStyle textStyle23;
+        TextStyle textStyle24;
+        TextStyle textStyle25;
+        TextStyle textStyle26;
+        TextStyle textStyle27;
+        TextStyle textStyle28;
+        TextStyle textStyle29;
+        TextStyle textStyle30;
+        if ((i & 1) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle16 = TypographyTokens.DisplayLarge;
+        } else {
+            textStyle16 = textStyle;
+        }
+        if ((i & 2) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle17 = TypographyTokens.DisplayMedium;
+        } else {
+            textStyle17 = textStyle2;
+        }
+        if ((i & 4) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle18 = TypographyTokens.DisplaySmall;
+        } else {
+            textStyle18 = textStyle3;
+        }
+        if ((i & 8) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle19 = TypographyTokens.HeadlineLarge;
+        } else {
+            textStyle19 = textStyle4;
+        }
+        if ((i & 16) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle20 = TypographyTokens.HeadlineMedium;
+        } else {
+            textStyle20 = textStyle5;
+        }
+        if ((i & 32) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle21 = TypographyTokens.HeadlineSmall;
+        } else {
+            textStyle21 = textStyle6;
+        }
+        if ((i & 64) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle22 = TypographyTokens.TitleLarge;
+        } else {
+            textStyle22 = textStyle7;
+        }
+        if ((i & 128) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle23 = TypographyTokens.TitleMedium;
+        } else {
+            textStyle23 = textStyle8;
+        }
+        if ((i & 256) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle24 = TypographyTokens.TitleSmall;
+        } else {
+            textStyle24 = textStyle9;
+        }
+        if ((i & 512) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle25 = TypographyTokens.BodyLarge;
+        } else {
+            textStyle25 = textStyle10;
+        }
+        if ((i & 1024) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle26 = TypographyTokens.BodyMedium;
+        } else {
+            textStyle26 = textStyle11;
+        }
+        if ((i & 2048) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle27 = TypographyTokens.BodySmall;
+        } else {
+            textStyle27 = textStyle12;
+        }
+        if ((i & 4096) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle28 = TypographyTokens.LabelLarge;
+        } else {
+            textStyle28 = textStyle13;
+        }
+        if ((i & 8192) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle29 = TypographyTokens.LabelMedium;
+        } else {
+            textStyle29 = textStyle14;
+        }
+        if ((i & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0) {
+            TypographyTokens.INSTANCE.getClass();
+            textStyle30 = TypographyTokens.LabelSmall;
+        } else {
+            textStyle30 = textStyle15;
+        }
+        this(textStyle16, textStyle17, textStyle18, textStyle19, textStyle20, textStyle21, textStyle22, textStyle23, textStyle24, textStyle25, textStyle26, textStyle27, textStyle28, textStyle29, textStyle30);
     }
 
     public Typography(TextStyle textStyle, TextStyle textStyle2, TextStyle textStyle3, TextStyle textStyle4, TextStyle textStyle5, TextStyle textStyle6, TextStyle textStyle7, TextStyle textStyle8, TextStyle textStyle9, TextStyle textStyle10, TextStyle textStyle11, TextStyle textStyle12, TextStyle textStyle13, TextStyle textStyle14, TextStyle textStyle15) {

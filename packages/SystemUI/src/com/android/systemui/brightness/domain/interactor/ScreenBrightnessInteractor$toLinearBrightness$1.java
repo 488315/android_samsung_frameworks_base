@@ -3,7 +3,6 @@ package com.android.systemui.brightness.domain.interactor;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScreenBrightnessInteractor$toLinearBrightness$1 extends ContinuationImpl {
     int I$0;
@@ -23,6 +22,6 @@ final class ScreenBrightnessInteractor$toLinearBrightness$1 extends Continuation
         this.label |= Integer.MIN_VALUE;
         ScreenBrightnessInteractor screenBrightnessInteractor = this.this$0;
         int i = ScreenBrightnessInteractor.$r8$clinit;
-        return screenBrightnessInteractor.m1063toLinearBrightnesskRMD4pI(0, this);
+        return screenBrightnessInteractor.m1065toLinearBrightnesskRMD4pI(0, this);
     }
 }

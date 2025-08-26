@@ -49,15 +49,15 @@ public class RadioGroup extends LinearLayout {
             setImportantForAutofill(1);
         }
         setImportantForAccessibility(1);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RadioGroup, 16842878, 0);
-        saveAttributeDataForStyleable(context, R.styleable.RadioGroup, attributeSet, obtainStyledAttributes, 16842878, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(1, -1);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RadioGroup, 16842878, 0);
+        saveAttributeDataForStyleable(context, R.styleable.RadioGroup, attributeSet, typedArrayObtainStyledAttributes, 16842878, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(1, -1);
         if (resourceId != -1) {
             this.mCheckedId = resourceId;
             this.mInitialCheckedId = resourceId;
         }
-        setOrientation(obtainStyledAttributes.getInt(0, 1));
-        obtainStyledAttributes.recycle();
+        setOrientation(typedArrayObtainStyledAttributes.getInt(0, 1));
+        typedArrayObtainStyledAttributes.recycle();
         init();
     }
 
@@ -132,11 +132,11 @@ public class RadioGroup extends LinearLayout {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void setCheckedStateForView(int i, boolean z) {
-        View findViewById = findViewById(i);
-        if (findViewById == null || !(findViewById instanceof RadioButton)) {
+        View viewFindViewById = findViewById(i);
+        if (viewFindViewById == null || !(viewFindViewById instanceof RadioButton)) {
             return;
         }
-        ((RadioButton) findViewById).setChecked(z);
+        ((RadioButton) viewFindViewById).setChecked(z);
     }
 
     public int getCheckedRadioButtonId() {

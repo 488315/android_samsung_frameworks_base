@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.ViewStub;
@@ -13,7 +14,6 @@ import com.android.systemui.statusbar.policy.QSClockHeaderView;
 import java.util.ArrayList;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubScreenQuickPanelHeader extends LinearLayout {
     public SubScreenQuickPanelHeader(Context context, AttributeSet attributeSet) {
@@ -21,7 +21,7 @@ public final class SubScreenQuickPanelHeader extends LinearLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         BatteryMeterView batteryMeterView = (BatteryMeterView) findViewById(R.id.batteryRemainingIcon);
         QSClockHeaderView qSClockHeaderView = (QSClockHeaderView) findViewById(R.id.header_clock);
@@ -31,10 +31,10 @@ public final class SubScreenQuickPanelHeader extends LinearLayout {
                 viewStub.inflate();
             }
             NetspeedView netspeedView = (NetspeedView) findViewById(R.id.networkSpeed);
-            ArrayList arrayListOf = CollectionsKt__CollectionsKt.arrayListOf(new Rect(0, 0, 0, 0));
+            ArrayList arrayListArrayListOf = CollectionsKt__CollectionsKt.arrayListOf(new Rect(0, 0, 0, 0));
             int color = getContext().getColor(R.color.sub_screen_quick_panel_header_icon_color);
             if (netspeedView != null) {
-                netspeedView.onDarkChanged(arrayListOf, 0.0f, color);
+                netspeedView.onDarkChanged(arrayListArrayListOf, 0.0f, color);
             }
         }
         if (batteryMeterView != null) {
@@ -43,13 +43,13 @@ public final class SubScreenQuickPanelHeader extends LinearLayout {
         if (batteryMeterView != null) {
             batteryMeterView.setTag("SubScreenQuickPanelHeader");
         }
-        ArrayList arrayListOf2 = CollectionsKt__CollectionsKt.arrayListOf(new Rect(0, 0, 0, 0));
+        ArrayList arrayListArrayListOf2 = CollectionsKt__CollectionsKt.arrayListOf(new Rect(0, 0, 0, 0));
         int color2 = getContext().getColor(R.color.sub_screen_quick_panel_header_icon_color);
         if (qSClockHeaderView != null) {
             qSClockHeaderView.setTextColor(color2);
         }
         if (batteryMeterView != null) {
-            batteryMeterView.onDarkChanged(arrayListOf2, 0.0f, color2);
+            batteryMeterView.onDarkChanged(arrayListArrayListOf2, 0.0f, color2);
         }
     }
 }

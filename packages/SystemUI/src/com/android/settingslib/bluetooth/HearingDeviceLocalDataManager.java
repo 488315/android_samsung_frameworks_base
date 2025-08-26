@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HearingDeviceLocalDataManager {
     public static final Object sLock = new Object();
@@ -30,7 +29,6 @@ public class HearingDeviceLocalDataManager {
     public final Map mAddrToDataMap = new HashMap();
     public boolean mIsStarted = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Data extends Record {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final int ambient;
@@ -58,34 +56,34 @@ public class HearingDeviceLocalDataManager {
         }
 
         public final String toSettingsFormat() {
-            String str;
+            String string;
             if (this.ambient != Integer.MIN_VALUE) {
-                str = ",ambient=" + this.ambient;
+                string = ",ambient=" + this.ambient;
             } else {
-                str = "";
+                string = "";
             }
             if (this.groupAmbient != Integer.MIN_VALUE) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ",group_ambient=");
-                m.append(this.groupAmbient);
-                str = m.toString();
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ",group_ambient=");
+                sbM.append(this.groupAmbient);
+                string = sbM.toString();
             }
-            StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ",control_expanded=");
-            m2.append(this.ambientControlExpanded);
-            return m2.toString();
+            StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ",control_expanded=");
+            sbM2.append(this.ambientControlExpanded);
+            return sbM2.toString();
         }
 
         @Override // java.lang.Record
         public final String toString() {
             Object[] objArr = {Integer.valueOf(this.ambient), Integer.valueOf(this.groupAmbient), Boolean.valueOf(this.ambientControlExpanded)};
-            String[] split = "ambient;groupAmbient;ambientControlExpanded".length() == 0 ? new String[0] : "ambient;groupAmbient;ambientControlExpanded".split(";");
+            String[] strArrSplit = "ambient;groupAmbient;ambientControlExpanded".length() == 0 ? new String[0] : "ambient;groupAmbient;ambientControlExpanded".split(";");
             StringBuilder sb = new StringBuilder();
             sb.append(Data.class.getSimpleName());
             sb.append("[");
-            for (int i = 0; i < split.length; i++) {
-                sb.append(split[i]);
+            for (int i = 0; i < strArrSplit.length; i++) {
+                sb.append(strArrSplit[i]);
                 sb.append("=");
                 sb.append(objArr[i]);
-                if (i != split.length - 1) {
+                if (i != strArrSplit.length - 1) {
                     sb.append(", ");
                 }
             }
@@ -103,7 +101,6 @@ public class HearingDeviceLocalDataManager {
             this(Integer.MIN_VALUE, Integer.MIN_VALUE, false);
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Builder {
             public int mAmbient;
             public boolean mAmbientControlExpanded;
@@ -124,7 +121,6 @@ public class HearingDeviceLocalDataManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingsObserver extends ContentObserver {
         public final Uri mAmbientVolumeUri;
 
@@ -171,12 +167,12 @@ public class HearingDeviceLocalDataManager {
 
     public final void getLocalDataFromSettings() {
         synchronized (sLock) {
-            Map parseFromSettings = parseFromSettings();
+            Map fromSettings = parseFromSettings();
             final Map map = this.mAddrToDataMap;
-            ((ArrayMap) parseFromSettings).forEach(new BiConsumer() { // from class: com.android.settingslib.bluetooth.HearingDeviceLocalDataManager$$ExternalSyntheticLambda0
+            ((ArrayMap) fromSettings).forEach(new BiConsumer() { // from class: com.android.settingslib.bluetooth.HearingDeviceLocalDataManager$$ExternalSyntheticLambda0
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
-                    HearingDeviceLocalDataManager hearingDeviceLocalDataManager = HearingDeviceLocalDataManager.this;
+                    HearingDeviceLocalDataManager hearingDeviceLocalDataManager = this.f$0;
                     Map map2 = map;
                     String str = (String) obj;
                     HearingDeviceLocalDataManager.Data data = (HearingDeviceLocalDataManager.Data) obj2;
@@ -188,7 +184,7 @@ public class HearingDeviceLocalDataManager {
                 }
             });
             ((HashMap) this.mAddrToDataMap).clear();
-            ((HashMap) this.mAddrToDataMap).putAll(parseFromSettings);
+            ((HashMap) this.mAddrToDataMap).putAll(fromSettings);
         }
     }
 
@@ -245,7 +241,7 @@ public class HearingDeviceLocalDataManager {
                 ThreadUtils.postOnBackgroundThread(new Runnable() { // from class: com.android.settingslib.bluetooth.HearingDeviceLocalDataManager$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Settings.Global.putStringForUser(HearingDeviceLocalDataManager.this.mContext.getContentResolver(), "hearing_device_local_ambient_volume", sb.toString(), 0);
+                        Settings.Global.putStringForUser(this.f$0.mContext.getContentResolver(), "hearing_device_local_ambient_volume", sb.toString(), 0);
                     }
                 });
             } catch (Throwable th) {

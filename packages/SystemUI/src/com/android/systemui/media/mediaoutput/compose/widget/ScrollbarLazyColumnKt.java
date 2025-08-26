@@ -50,7 +50,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class ScrollbarLazyColumnKt {
     public static final void ScrollbarLazyColumn(final Modifier modifier, LazyListState lazyListState, final PaddingValues paddingValues, Arrangement.Vertical vertical, BiasAlignment.Horizontal horizontal, DefaultFlingBehavior defaultFlingBehavior, boolean z, final Function1 function1, Composer composer, final int i) {
@@ -59,7 +58,7 @@ public abstract class ScrollbarLazyColumnKt {
         final LazyListState lazyListState2;
         Arrangement.Vertical vertical2;
         BiasAlignment.Horizontal horizontal2;
-        DefaultFlingBehavior flingBehavior;
+        DefaultFlingBehavior defaultFlingBehaviorFlingBehavior;
         boolean z2;
         ComposerImpl composerImpl;
         final LazyListState lazyListState3;
@@ -103,17 +102,17 @@ public abstract class ScrollbarLazyColumnKt {
         } else {
             composerImpl2.startDefaults();
             if ((i & 1) == 0 || composerImpl2.getDefaultsInvalid()) {
-                LazyListState rememberLazyListState = LazyListStateKt.rememberLazyListState(composerImpl2);
+                LazyListState lazyListStateRememberLazyListState = LazyListStateKt.rememberLazyListState(composerImpl2);
                 Arrangement.INSTANCE.getClass();
                 Arrangement$Top$1 arrangement$Top$1 = Arrangement.Top;
                 Alignment.Companion.getClass();
                 BiasAlignment.Horizontal horizontal4 = Alignment.Companion.Start;
                 ScrollableDefaults.INSTANCE.getClass();
                 i3 = i6 & (-3727473);
-                lazyListState2 = rememberLazyListState;
+                lazyListState2 = lazyListStateRememberLazyListState;
                 vertical2 = arrangement$Top$1;
                 horizontal2 = horizontal4;
-                flingBehavior = ScrollableDefaults.flingBehavior(composerImpl2);
+                defaultFlingBehaviorFlingBehavior = ScrollableDefaults.flingBehavior(composerImpl2);
                 z2 = true;
             } else {
                 composerImpl2.skipToGroupEnd();
@@ -121,7 +120,7 @@ public abstract class ScrollbarLazyColumnKt {
                 lazyListState2 = lazyListState;
                 vertical2 = vertical;
                 horizontal2 = horizontal;
-                flingBehavior = defaultFlingBehavior;
+                defaultFlingBehaviorFlingBehavior = defaultFlingBehavior;
                 z2 = z;
             }
             composerImpl2.endDefaults();
@@ -129,35 +128,35 @@ public abstract class ScrollbarLazyColumnKt {
                 ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.ScrollbarLazyColumn (ScrollbarLazyColumn.kt:44)");
             }
             composerImpl2.startReplaceGroup(-1600485195);
-            Object rememberedValue = composerImpl2.rememberedValue();
+            Object objRememberedValue = composerImpl2.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
-                rememberedValue = SnapshotStateKt.mutableStateOf$default(Boolean.TRUE);
-                composerImpl2.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == composer$Companion$Empty$1) {
+                objRememberedValue = SnapshotStateKt.mutableStateOf$default(Boolean.TRUE);
+                composerImpl2.updateRememberedValue(objRememberedValue);
             }
-            MutableState mutableState = (MutableState) rememberedValue;
+            MutableState mutableState = (MutableState) objRememberedValue;
             composerImpl2.end(false);
             composerImpl2.startReplaceGroup(-1600482569);
-            boolean changed = composerImpl2.changed(lazyListState2);
-            Object rememberedValue2 = composerImpl2.rememberedValue();
-            if (changed || rememberedValue2 == composer$Companion$Empty$1) {
-                rememberedValue2 = SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ScrollbarLazyColumnKt$$ExternalSyntheticLambda0
+            boolean zChanged = composerImpl2.changed(lazyListState2);
+            Object objRememberedValue2 = composerImpl2.rememberedValue();
+            if (zChanged || objRememberedValue2 == composer$Companion$Empty$1) {
+                objRememberedValue2 = SnapshotStateKt.derivedStateOf(new Function0() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ScrollbarLazyColumnKt$$ExternalSyntheticLambda0
                     /* JADX WARN: Multi-variable type inference failed */
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        LazyListMeasureResult lazyListMeasureResult = (LazyListMeasureResult) LazyListState.this.getLayoutInfo();
+                        LazyListMeasureResult lazyListMeasureResult = (LazyListMeasureResult) lazyListState2.getLayoutInfo();
                         int i7 = lazyListMeasureResult.viewportEndOffset;
                         List list = lazyListMeasureResult.visibleItemsInfo;
                         boolean z4 = false;
-                        List<LazyListItemInfo> filterNotNull = ArraysKt___ArraysKt.filterNotNull(new LazyListItemInfo[]{CollectionsKt___CollectionsKt.firstOrNull(list), CollectionsKt___CollectionsKt.lastOrNull(list)});
-                        if (!filterNotNull.isEmpty()) {
-                            for (LazyListItemInfo lazyListItemInfo : filterNotNull) {
+                        List<LazyListItemInfo> listFilterNotNull = ArraysKt___ArraysKt.filterNotNull(new LazyListItemInfo[]{CollectionsKt___CollectionsKt.firstOrNull(list), CollectionsKt___CollectionsKt.lastOrNull(list)});
+                        if (!listFilterNotNull.isEmpty()) {
+                            for (LazyListItemInfo lazyListItemInfo : listFilterNotNull) {
                                 if (lazyListItemInfo != null) {
                                     if (lazyListItemInfo.getOffset() < 0) {
                                         lazyListItemInfo = null;
                                     }
-                                    if (lazyListItemInfo != null && lazyListItemInfo.getSize() + lazyListItemInfo.getOffset() <= i7) {
+                                    if (lazyListItemInfo == null || lazyListItemInfo.getSize() + lazyListItemInfo.getOffset() > i7) {
                                     }
                                 }
                                 z4 = true;
@@ -166,26 +165,26 @@ public abstract class ScrollbarLazyColumnKt {
                         return Boolean.valueOf(z4);
                     }
                 });
-                composerImpl2.updateRememberedValue(rememberedValue2);
+                composerImpl2.updateRememberedValue(objRememberedValue2);
             }
-            State state = (State) rememberedValue2;
+            State state = (State) objRememberedValue2;
             composerImpl2.end(false);
-            Boolean valueOf = Boolean.valueOf(lazyListState2.scrollableState.isScrollInProgress());
+            Boolean boolValueOf = Boolean.valueOf(lazyListState2.scrollableState.isScrollInProgress());
             composerImpl2.startReplaceGroup(-1600461963);
-            boolean changed2 = composerImpl2.changed(lazyListState2);
-            Object rememberedValue3 = composerImpl2.rememberedValue();
-            if (changed2 || rememberedValue3 == composer$Companion$Empty$1) {
-                rememberedValue3 = new ScrollbarLazyColumnKt$ScrollbarLazyColumn$1$1(lazyListState2, mutableState, null);
-                composerImpl2.updateRememberedValue(rememberedValue3);
+            boolean zChanged2 = composerImpl2.changed(lazyListState2);
+            Object objRememberedValue3 = composerImpl2.rememberedValue();
+            if (zChanged2 || objRememberedValue3 == composer$Companion$Empty$1) {
+                objRememberedValue3 = new ScrollbarLazyColumnKt$ScrollbarLazyColumn$1$1(lazyListState2, mutableState, null);
+                composerImpl2.updateRememberedValue(objRememberedValue3);
             }
             composerImpl2.end(false);
-            EffectsKt.LaunchedEffect(composerImpl2, valueOf, (Function2) rememberedValue3);
+            EffectsKt.LaunchedEffect(composerImpl2, boolValueOf, (Function2) objRememberedValue3);
             Modifier.Companion companion = Modifier.Companion;
             Alignment.Companion.getClass();
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl2);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl2.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl2, companion);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl2.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl2, companion);
             ComposeUiNode.Companion.getClass();
             int i7 = i3;
             Function0 function0 = ComposeUiNode.Companion.Constructor;
@@ -199,15 +198,15 @@ public abstract class ScrollbarLazyColumnKt {
             } else {
                 composerImpl2.useNode();
             }
-            Updater.m336setimpl(composerImpl2, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl2, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl2, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl2, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl2.inserting || !Intrinsics.areEqual(composerImpl2.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl2, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl2, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl2, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
-            LazyDslKt.LazyColumn(modifier, lazyListState2, paddingValues, false, vertical2, horizontal2, flingBehavior, z2, null, function1, composerImpl2, i7 & 2147483646, 0);
+            LazyDslKt.LazyColumn(modifier, lazyListState2, paddingValues, false, vertical2, horizontal2, defaultFlingBehaviorFlingBehavior, z2, null, function1, composerImpl2, i7 & 2147483646, 0);
             AnimatedVisibilityKt.AnimatedVisibility(((Boolean) mutableState.getValue()).booleanValue() && ((Boolean) state.getValue()).booleanValue(), boxScopeInstance.align(companion, Alignment.Companion.CenterEnd), EnterExitTransitionKt.fadeIn$default(null, 3), EnterExitTransitionKt.fadeOut$default(null, 3), null, ComposableLambdaKt.rememberComposableLambda(2025729966, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ScrollbarLazyColumnKt$ScrollbarLazyColumn$2$1
                 @Override // kotlin.jvm.functions.Function3
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
@@ -217,7 +216,7 @@ public abstract class ScrollbarLazyColumnKt {
                         ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.ScrollbarLazyColumn.<anonymous>.<anonymous> (ScrollbarLazyColumn.kt:92)");
                     }
                     Dp.Companion companion2 = Dp.Companion;
-                    ScrollbarKt.SeslScrollbar(LazyListState.this, SizeKt.m143width3ABfNKs(PaddingKt.m128paddingqDBjuR0$default(Modifier.Companion, 0.0f, 0.0f, 0.0f, 20, 7), 8), null, composer2, 48);
+                    ScrollbarKt.SeslScrollbar(lazyListState2, SizeKt.m144width3ABfNKs(PaddingKt.m129paddingqDBjuR0$default(Modifier.Companion, 0.0f, 0.0f, 0.0f, 20, 7), 8), null, composer2, 48);
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }
@@ -232,19 +231,19 @@ public abstract class ScrollbarLazyColumnKt {
             lazyListState3 = lazyListState2;
             vertical3 = vertical2;
             horizontal3 = horizontal2;
-            defaultFlingBehavior2 = flingBehavior;
+            defaultFlingBehavior2 = defaultFlingBehaviorFlingBehavior;
             z3 = z2;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ScrollbarLazyColumnKt$$ExternalSyntheticLambda1
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ScrollbarLazyColumnKt$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                     boolean z4 = z3;
                     Function1 function12 = function1;
-                    ScrollbarLazyColumnKt.ScrollbarLazyColumn(Modifier.this, lazyListState3, paddingValues, vertical3, horizontal3, defaultFlingBehavior2, z4, function12, (Composer) obj, updateChangedFlags);
+                    ScrollbarLazyColumnKt.ScrollbarLazyColumn(modifier, lazyListState3, paddingValues, vertical3, horizontal3, defaultFlingBehavior2, z4, function12, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

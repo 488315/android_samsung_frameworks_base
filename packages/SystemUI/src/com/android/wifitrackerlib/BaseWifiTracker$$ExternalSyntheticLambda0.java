@@ -10,7 +10,6 @@ import com.android.wifitrackerlib.BaseWifiTracker;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BaseWifiTracker$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -55,9 +54,9 @@ public final /* synthetic */ class BaseWifiTracker$$ExternalSyntheticLambda0 imp
                                 ScanResult scanResult = (ScanResult) obj;
                                 Pair pair = new Pair(scanResult.SSID, scanResult.BSSID);
                                 ScanResult scanResult2 = (ScanResult) ((ArrayMap) scanResultUpdater.mScanResultsBySsidAndBssid).get(pair);
-                                if (scanResult2 != null && scanResult2.timestamp >= scanResult.timestamp) {
+                                if (scanResult2 == null || scanResult2.timestamp < scanResult.timestamp) {
+                                    ((ArrayMap) scanResultUpdater.mScanResultsBySsidAndBssid).put(pair, scanResult);
                                 }
-                                ((ArrayMap) scanResultUpdater.mScanResultsBySsidAndBssid).put(pair, scanResult);
                             }
                             ((ArrayMap) scanResultUpdater.mScanResultsBySsidAndBssid).entrySet().removeIf(new ScanResultUpdater$$ExternalSyntheticLambda0(scanResultUpdater, scanResultUpdater.mMaxScanAgeMillis, 1));
                         } catch (Throwable th) {

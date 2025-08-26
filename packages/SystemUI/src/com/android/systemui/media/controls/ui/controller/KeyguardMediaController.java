@@ -21,8 +21,10 @@ import com.android.systemui.statusbar.policy.SplitShadeStateControllerImpl;
 import com.android.systemui.util.DumpUtilsKt;
 import com.android.systemui.util.animation.UniqueObjectHostView;
 import java.io.PrintWriter;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardMediaController implements Dumpable {
     public final KeyguardBypassController bypassController;
@@ -32,6 +34,32 @@ public final class KeyguardMediaController implements Dumpable {
     public ViewGroup splitShadeContainer;
     public final SplitShadeStateController splitShadeStateController;
     public final SysuiStatusBarStateController statusBarStateController;
+
+    /* renamed from: com.android.systemui.media.controls.ui.controller.KeyguardMediaController$attachSinglePaneContainer$1, reason: invalid class name and case insensitive filesystem */
+    final /* synthetic */ class C09281 extends FunctionReferenceImpl implements Function1 {
+        public C09281(Object obj) {
+            super(1, obj, KeyguardMediaController.class, "onMediaHostVisibilityChanged", "onMediaHostVisibilityChanged(Z)V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+            KeyguardMediaController keyguardMediaController = (KeyguardMediaController) this.receiver;
+            if (zBooleanValue) {
+                UniqueObjectHostView uniqueObjectHostView = keyguardMediaController.mediaHost.hostView;
+                if (uniqueObjectHostView == null) {
+                    uniqueObjectHostView = null;
+                }
+                ViewGroup.LayoutParams layoutParams = uniqueObjectHostView.getLayoutParams();
+                layoutParams.height = -2;
+                layoutParams.width = -1;
+            } else {
+                keyguardMediaController.getClass();
+            }
+            return Unit.INSTANCE;
+        }
+    }
 
     public KeyguardMediaController(MediaHost mediaHost, KeyguardBypassController keyguardBypassController, SysuiStatusBarStateController sysuiStatusBarStateController, Context context, ConfigurationController configurationController, SplitShadeStateController splitShadeStateController, KeyguardMediaControllerLogger keyguardMediaControllerLogger, DumpManager dumpManager) {
         this.mediaHost = mediaHost;
@@ -79,7 +107,7 @@ public final class KeyguardMediaController implements Dumpable {
         this.singlePaneContainer = mediaContainerView;
         MediaHost mediaHost = this.mediaHost;
         if (z) {
-            mediaHost.visibleChangedListeners.add(new KeyguardMediaController$attachSinglePaneContainer$1(this));
+            mediaHost.visibleChangedListeners.add(new C09281(this));
         }
         reattachHostView();
         if (mediaHost.state.visible) {
@@ -99,20 +127,20 @@ public final class KeyguardMediaController implements Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.println("KeyguardMediaController");
-        asIndenting.increaseIndent();
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.println("KeyguardMediaController");
+        indentingPrintWriterAsIndenting.increaseIndent();
         try {
-            DumpUtilsKt.println(asIndenting, "Self", this);
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "Self", this);
             Boolean bool = Boolean.FALSE;
-            DumpUtilsKt.println(asIndenting, "visible", bool);
-            DumpUtilsKt.println(asIndenting, "useSplitShade", bool);
-            DumpUtilsKt.println(asIndenting, "bypassController.bypassEnabled", Boolean.valueOf(this.bypassController.getBypassEnabled()));
-            DumpUtilsKt.println(asIndenting, "singlePaneContainer", this.singlePaneContainer);
-            DumpUtilsKt.println(asIndenting, "splitShadeContainer", this.splitShadeContainer);
-            DumpUtilsKt.println(asIndenting, "statusBarStateController.state", StatusBarState.toString(this.statusBarStateController.getState()));
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "visible", bool);
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "useSplitShade", bool);
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "bypassController.bypassEnabled", Boolean.valueOf(this.bypassController.getBypassEnabled()));
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "singlePaneContainer", this.singlePaneContainer);
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "splitShadeContainer", this.splitShadeContainer);
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "statusBarStateController.state", StatusBarState.toString(this.statusBarStateController.getState()));
         } finally {
-            asIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.decreaseIndent();
         }
     }
 

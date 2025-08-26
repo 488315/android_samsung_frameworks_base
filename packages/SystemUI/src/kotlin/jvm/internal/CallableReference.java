@@ -11,7 +11,6 @@ import kotlin.reflect.KDeclarationContainer;
 import kotlin.reflect.KType;
 import kotlin.reflect.KVisibility;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class CallableReference implements KCallable, Serializable {
     public static final Object NO_RECEIVER = NoReceiver.INSTANCE;
@@ -22,7 +21,6 @@ public abstract class CallableReference implements KCallable, Serializable {
     private transient KCallable reflected;
     private final String signature;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class NoReceiver implements Serializable {
         public static final NoReceiver INSTANCE = new NoReceiver();
 
@@ -53,9 +51,9 @@ public abstract class CallableReference implements KCallable, Serializable {
         if (kCallable != null) {
             return kCallable;
         }
-        KCallable computeReflected = computeReflected();
-        this.reflected = computeReflected;
-        return computeReflected;
+        KCallable kCallableComputeReflected = computeReflected();
+        this.reflected = kCallableComputeReflected;
+        return kCallableComputeReflected;
     }
 
     public abstract KCallable computeReflected();
@@ -92,9 +90,9 @@ public abstract class CallableReference implements KCallable, Serializable {
     }
 
     public KCallable getReflected() {
-        KCallable compute = compute();
-        if (compute != this) {
-            return compute;
+        KCallable kCallableCompute = compute();
+        if (kCallableCompute != this) {
+            return kCallableCompute;
         }
         throw new KotlinReflectionNotSupportedError();
     }

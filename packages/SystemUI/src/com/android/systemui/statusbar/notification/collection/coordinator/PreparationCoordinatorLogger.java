@@ -12,7 +12,6 @@ import com.android.systemui.statusbar.notification.NotificationUtilsKt;
 import com.android.systemui.statusbar.notification.collection.GroupEntry;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PreparationCoordinatorLogger {
     public static final int $stable = 8;
@@ -54,46 +53,46 @@ public final class PreparationCoordinatorLogger {
 
     public final void logDelayingGroupRelease(GroupEntry groupEntry, NotificationEntry notificationEntry) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("PreparationCoordinator", LogLevel.DEBUG, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(2), null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(groupEntry);
-        ((LogMessageImpl) obtain).str2 = NotificationUtilsKt.getLogKey(notificationEntry);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("PreparationCoordinator", LogLevel.DEBUG, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(2), null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(groupEntry);
+        ((LogMessageImpl) logMessageObtain).str2 = NotificationUtilsKt.getLogKey(notificationEntry);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logDoneWaitingForGroupInflation(GroupEntry groupEntry) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("PreparationCoordinator", LogLevel.DEBUG, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(3), null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(groupEntry);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("PreparationCoordinator", LogLevel.DEBUG, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(3), null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(groupEntry);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logFreeNotifViews(NotificationEntry notificationEntry, String str) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("PreparationCoordinator", LogLevel.DEBUG, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(4), null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        ((LogMessageImpl) obtain).str2 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("PreparationCoordinator", LogLevel.DEBUG, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(4), null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        ((LogMessageImpl) logMessageObtain).str2 = str;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logGroupInflationTookTooLong(GroupEntry groupEntry) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("PreparationCoordinator", LogLevel.WARNING, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(1), null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(groupEntry);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("PreparationCoordinator", LogLevel.WARNING, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(1), null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(groupEntry);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logInflationAborted(NotificationEntry notificationEntry, String str) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("PreparationCoordinator", LogLevel.DEBUG, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(5), null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        ((LogMessageImpl) obtain).str2 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("PreparationCoordinator", LogLevel.DEBUG, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(5), null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        ((LogMessageImpl) logMessageObtain).str2 = str;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logNotifInflated(NotificationEntry notificationEntry) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("PreparationCoordinator", LogLevel.DEBUG, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(0), null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("PreparationCoordinator", LogLevel.DEBUG, new PreparationCoordinatorLogger$$ExternalSyntheticLambda0(0), null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        logBuffer.commit(logMessageObtain);
     }
 }

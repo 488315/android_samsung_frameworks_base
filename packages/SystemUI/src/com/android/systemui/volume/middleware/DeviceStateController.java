@@ -8,13 +8,11 @@ import com.samsung.systemui.splugins.volume.VolumePanelAction;
 import com.samsung.systemui.splugins.volume.VolumePanelState;
 import com.samsung.systemui.splugins.volume.VolumeState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceStateController implements VolumeMiddleware {
     public final VolumeInfraMediator infraMediator;
     public boolean isCoverClosed;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -115,8 +113,8 @@ public final class DeviceStateController implements VolumeMiddleware {
                 VolumeState volumeState = volumePanelAction.getVolumeState();
                 volumeState.getClass();
                 int zenMode = volumeState.getZenMode();
-                boolean isZenModeEnabled = volumeInfraMediator.isZenModeEnabled(zenMode);
-                return new VolumePanelAction.Builder(volumePanelAction).isZenEnabled(isZenModeEnabled).isZenPriorityOnly(volumeInfraMediator.isZenModePriorityOnly(zenMode)).isZenNone(volumeInfraMediator.isZenModeNone(zenMode)).systemTimeNow(volumeInfraMediator.getSystemTime()).build();
+                boolean zIsZenModeEnabled = volumeInfraMediator.isZenModeEnabled(zenMode);
+                return new VolumePanelAction.Builder(volumePanelAction).isZenEnabled(zIsZenModeEnabled).isZenPriorityOnly(volumeInfraMediator.isZenModePriorityOnly(zenMode)).isZenNone(volumeInfraMediator.isZenModeNone(zenMode)).systemTimeNow(volumeInfraMediator.getSystemTime()).build();
             case 4:
             case 5:
                 return new VolumePanelAction.Builder(volumePanelAction).systemTimeNow(volumeInfraMediator.getSystemTime()).build();

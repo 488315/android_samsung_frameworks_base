@@ -108,13 +108,13 @@ public final class CrossWindowBlurListeners {
         public void onCrossWindowBlurEnabledChanged(boolean z) {
             synchronized (CrossWindowBlurListeners.sLock) {
                 CrossWindowBlurListeners.this.mCrossWindowBlurEnabled = z;
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 for (int i = 0; i < CrossWindowBlurListeners.this.mListeners.size(); i++) {
                     try {
                         CrossWindowBlurListeners crossWindowBlurListeners = CrossWindowBlurListeners.this;
                         crossWindowBlurListeners.notifyListener((Consumer) crossWindowBlurListeners.mListeners.keyAt(i), (Executor) CrossWindowBlurListeners.this.mListeners.valueAt(i), z);
                     } finally {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                     }
                 }
             }

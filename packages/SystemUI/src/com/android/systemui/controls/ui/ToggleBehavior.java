@@ -1,5 +1,6 @@
 package com.android.systemui.controls.ui;
 
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.service.controls.Control;
@@ -12,7 +13,6 @@ import com.android.systemui.R;
 import com.android.systemui.controls.ui.view.ControlsActionButton;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ToggleBehavior implements Behavior, SecBehavior, SecActionButtonBehavior {
     public Control control;
@@ -20,7 +20,7 @@ public final class ToggleBehavior implements Behavior, SecBehavior, SecActionBut
     public ToggleTemplate template;
 
     @Override // com.android.systemui.controls.ui.Behavior
-    public final void bind(ControlWithState controlWithState, int i) {
+    public final void bind(ControlWithState controlWithState, int i) throws Resources.NotFoundException {
         ToggleTemplate toggleTemplate;
         Control control = controlWithState.control;
         control.getClass();
@@ -51,18 +51,18 @@ public final class ToggleBehavior implements Behavior, SecBehavior, SecActionBut
         if (controlViewHolder2 == null) {
             controlViewHolder2 = null;
         }
-        Drawable findDrawableByLayerId = ((RippleDrawable) controlViewHolder2.layout.getBackground()).findDrawableByLayerId(R.id.clip_layer);
-        if (findDrawableByLayerId == null) {
-            findDrawableByLayerId = null;
+        Drawable drawableFindDrawableByLayerId = ((RippleDrawable) controlViewHolder2.layout.getBackground()).findDrawableByLayerId(R.id.clip_layer);
+        if (drawableFindDrawableByLayerId == null) {
+            drawableFindDrawableByLayerId = null;
         }
-        findDrawableByLayerId.setLevel(10000);
+        drawableFindDrawableByLayerId.setLevel(10000);
         ToggleTemplate toggleTemplate2 = this.template;
         if (toggleTemplate2 == null) {
             toggleTemplate2 = null;
         }
-        boolean isChecked = toggleTemplate2.isChecked();
+        boolean zIsChecked = toggleTemplate2.isChecked();
         ControlViewHolder controlViewHolder3 = this.cvh;
-        (controlViewHolder3 != null ? controlViewHolder3 : null).applyRenderInfo$frameworks__base__packages__SystemUI__android_common__SystemUI_core(i, isChecked, true);
+        (controlViewHolder3 != null ? controlViewHolder3 : null).applyRenderInfo$frameworks__base__packages__SystemUI__android_common__SystemUI_core(i, zIsChecked, true);
     }
 
     @Override // com.android.systemui.controls.ui.SecBehavior
@@ -94,12 +94,12 @@ public final class ToggleBehavior implements Behavior, SecBehavior, SecActionBut
     @Override // com.android.systemui.controls.ui.Behavior
     public final void initialize(final ControlViewHolder controlViewHolder) {
         this.cvh = controlViewHolder;
-        controlViewHolder.layout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ToggleBehavior$initialize$1
+        controlViewHolder.layout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ToggleBehavior.initialize.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SecControlActionCoordinator secControlActionCoordinator = ControlViewHolder.this.getSecControlViewHolder().secControlActionCoordinator;
+                SecControlActionCoordinator secControlActionCoordinator = controlViewHolder.getSecControlViewHolder().secControlActionCoordinator;
                 if (secControlActionCoordinator != null) {
-                    ControlViewHolder controlViewHolder2 = ControlViewHolder.this;
+                    ControlViewHolder controlViewHolder2 = controlViewHolder;
                     ToggleTemplate toggleTemplate = this.template;
                     if (toggleTemplate == null) {
                         toggleTemplate = null;
@@ -115,9 +115,9 @@ public final class ToggleBehavior implements Behavior, SecBehavior, SecActionBut
             controlsActionButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ToggleBehavior$initialize$2$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    SecControlActionCoordinator secControlActionCoordinator = ControlViewHolder.this.getSecControlViewHolder().secControlActionCoordinator;
+                    SecControlActionCoordinator secControlActionCoordinator = controlViewHolder.getSecControlViewHolder().secControlActionCoordinator;
                     if (secControlActionCoordinator != null) {
-                        ControlViewHolder controlViewHolder2 = ControlViewHolder.this;
+                        ControlViewHolder controlViewHolder2 = controlViewHolder;
                         ToggleTemplate toggleTemplate = this.template;
                         if (toggleTemplate == null) {
                             toggleTemplate = null;

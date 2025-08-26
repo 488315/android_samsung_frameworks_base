@@ -73,9 +73,9 @@ class WebVttTrack extends SubtitleTrack implements WebVttCueListener {
             }
             textTrackCue.mLines = this.mExtractor.getText();
             if (this.DEBUG) {
-                StringBuilder appendStringsToBuilder = textTrackCue.appendStringsToBuilder(new StringBuilder());
-                appendStringsToBuilder.append(" simplified to: ");
-                Log.v(TAG, textTrackCue.appendLinesToBuilder(appendStringsToBuilder).toString());
+                StringBuilder sbAppendStringsToBuilder = textTrackCue.appendStringsToBuilder(new StringBuilder());
+                sbAppendStringsToBuilder.append(" simplified to: ");
+                Log.v(TAG, textTrackCue.appendLinesToBuilder(sbAppendStringsToBuilder).toString());
             }
             for (TextTrackCueSpan[] textTrackCueSpanArr : textTrackCue.mLines) {
                 for (TextTrackCueSpan textTrackCueSpan : textTrackCueSpanArr) {

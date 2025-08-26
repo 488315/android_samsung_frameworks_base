@@ -59,59 +59,59 @@ public class SecP224K1FieldElement extends ECFieldElement.AbstractFp {
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement add(ECFieldElement eCFieldElement) {
-        int[] create = Nat224.create();
-        SecP224K1Field.add(this.x, ((SecP224K1FieldElement) eCFieldElement).x, create);
-        return new SecP224K1FieldElement(create);
+        int[] iArrCreate = Nat224.create();
+        SecP224K1Field.add(this.x, ((SecP224K1FieldElement) eCFieldElement).x, iArrCreate);
+        return new SecP224K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement addOne() {
-        int[] create = Nat224.create();
-        SecP224K1Field.addOne(this.x, create);
-        return new SecP224K1FieldElement(create);
+        int[] iArrCreate = Nat224.create();
+        SecP224K1Field.addOne(this.x, iArrCreate);
+        return new SecP224K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement subtract(ECFieldElement eCFieldElement) {
-        int[] create = Nat224.create();
-        SecP224K1Field.subtract(this.x, ((SecP224K1FieldElement) eCFieldElement).x, create);
-        return new SecP224K1FieldElement(create);
+        int[] iArrCreate = Nat224.create();
+        SecP224K1Field.subtract(this.x, ((SecP224K1FieldElement) eCFieldElement).x, iArrCreate);
+        return new SecP224K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement multiply(ECFieldElement eCFieldElement) {
-        int[] create = Nat224.create();
-        SecP224K1Field.multiply(this.x, ((SecP224K1FieldElement) eCFieldElement).x, create);
-        return new SecP224K1FieldElement(create);
+        int[] iArrCreate = Nat224.create();
+        SecP224K1Field.multiply(this.x, ((SecP224K1FieldElement) eCFieldElement).x, iArrCreate);
+        return new SecP224K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement divide(ECFieldElement eCFieldElement) {
-        int[] create = Nat224.create();
-        SecP224K1Field.inv(((SecP224K1FieldElement) eCFieldElement).x, create);
-        SecP224K1Field.multiply(create, this.x, create);
-        return new SecP224K1FieldElement(create);
+        int[] iArrCreate = Nat224.create();
+        SecP224K1Field.inv(((SecP224K1FieldElement) eCFieldElement).x, iArrCreate);
+        SecP224K1Field.multiply(iArrCreate, this.x, iArrCreate);
+        return new SecP224K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement negate() {
-        int[] create = Nat224.create();
-        SecP224K1Field.negate(this.x, create);
-        return new SecP224K1FieldElement(create);
+        int[] iArrCreate = Nat224.create();
+        SecP224K1Field.negate(this.x, iArrCreate);
+        return new SecP224K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement square() {
-        int[] create = Nat224.create();
-        SecP224K1Field.square(this.x, create);
-        return new SecP224K1FieldElement(create);
+        int[] iArrCreate = Nat224.create();
+        SecP224K1Field.square(this.x, iArrCreate);
+        return new SecP224K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
     public ECFieldElement invert() {
-        int[] create = Nat224.create();
-        SecP224K1Field.inv(this.x, create);
-        return new SecP224K1FieldElement(create);
+        int[] iArrCreate = Nat224.create();
+        SecP224K1Field.inv(this.x, iArrCreate);
+        return new SecP224K1FieldElement(iArrCreate);
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
@@ -120,50 +120,50 @@ public class SecP224K1FieldElement extends ECFieldElement.AbstractFp {
         if (Nat224.isZero(iArr) || Nat224.isOne(iArr)) {
             return this;
         }
-        int[] create = Nat224.create();
-        SecP224K1Field.square(iArr, create);
-        SecP224K1Field.multiply(create, iArr, create);
-        SecP224K1Field.square(create, create);
-        SecP224K1Field.multiply(create, iArr, create);
-        int[] create2 = Nat224.create();
-        SecP224K1Field.square(create, create2);
-        SecP224K1Field.multiply(create2, iArr, create2);
-        int[] create3 = Nat224.create();
-        SecP224K1Field.squareN(create2, 4, create3);
-        SecP224K1Field.multiply(create3, create2, create3);
-        int[] create4 = Nat224.create();
-        SecP224K1Field.squareN(create3, 3, create4);
-        SecP224K1Field.multiply(create4, create, create4);
-        SecP224K1Field.squareN(create4, 8, create4);
-        SecP224K1Field.multiply(create4, create3, create4);
-        SecP224K1Field.squareN(create4, 4, create3);
-        SecP224K1Field.multiply(create3, create2, create3);
-        SecP224K1Field.squareN(create3, 19, create2);
-        SecP224K1Field.multiply(create2, create4, create2);
-        int[] create5 = Nat224.create();
-        SecP224K1Field.squareN(create2, 42, create5);
-        SecP224K1Field.multiply(create5, create2, create5);
-        SecP224K1Field.squareN(create5, 23, create2);
-        SecP224K1Field.multiply(create2, create3, create2);
-        SecP224K1Field.squareN(create2, 84, create3);
-        SecP224K1Field.multiply(create3, create5, create3);
-        SecP224K1Field.squareN(create3, 20, create3);
-        SecP224K1Field.multiply(create3, create4, create3);
-        SecP224K1Field.squareN(create3, 3, create3);
-        SecP224K1Field.multiply(create3, iArr, create3);
-        SecP224K1Field.squareN(create3, 2, create3);
-        SecP224K1Field.multiply(create3, iArr, create3);
-        SecP224K1Field.squareN(create3, 4, create3);
-        SecP224K1Field.multiply(create3, create, create3);
-        SecP224K1Field.square(create3, create3);
-        SecP224K1Field.square(create3, create5);
-        if (Nat224.eq(iArr, create5)) {
-            return new SecP224K1FieldElement(create3);
+        int[] iArrCreate = Nat224.create();
+        SecP224K1Field.square(iArr, iArrCreate);
+        SecP224K1Field.multiply(iArrCreate, iArr, iArrCreate);
+        SecP224K1Field.square(iArrCreate, iArrCreate);
+        SecP224K1Field.multiply(iArrCreate, iArr, iArrCreate);
+        int[] iArrCreate2 = Nat224.create();
+        SecP224K1Field.square(iArrCreate, iArrCreate2);
+        SecP224K1Field.multiply(iArrCreate2, iArr, iArrCreate2);
+        int[] iArrCreate3 = Nat224.create();
+        SecP224K1Field.squareN(iArrCreate2, 4, iArrCreate3);
+        SecP224K1Field.multiply(iArrCreate3, iArrCreate2, iArrCreate3);
+        int[] iArrCreate4 = Nat224.create();
+        SecP224K1Field.squareN(iArrCreate3, 3, iArrCreate4);
+        SecP224K1Field.multiply(iArrCreate4, iArrCreate, iArrCreate4);
+        SecP224K1Field.squareN(iArrCreate4, 8, iArrCreate4);
+        SecP224K1Field.multiply(iArrCreate4, iArrCreate3, iArrCreate4);
+        SecP224K1Field.squareN(iArrCreate4, 4, iArrCreate3);
+        SecP224K1Field.multiply(iArrCreate3, iArrCreate2, iArrCreate3);
+        SecP224K1Field.squareN(iArrCreate3, 19, iArrCreate2);
+        SecP224K1Field.multiply(iArrCreate2, iArrCreate4, iArrCreate2);
+        int[] iArrCreate5 = Nat224.create();
+        SecP224K1Field.squareN(iArrCreate2, 42, iArrCreate5);
+        SecP224K1Field.multiply(iArrCreate5, iArrCreate2, iArrCreate5);
+        SecP224K1Field.squareN(iArrCreate5, 23, iArrCreate2);
+        SecP224K1Field.multiply(iArrCreate2, iArrCreate3, iArrCreate2);
+        SecP224K1Field.squareN(iArrCreate2, 84, iArrCreate3);
+        SecP224K1Field.multiply(iArrCreate3, iArrCreate5, iArrCreate3);
+        SecP224K1Field.squareN(iArrCreate3, 20, iArrCreate3);
+        SecP224K1Field.multiply(iArrCreate3, iArrCreate4, iArrCreate3);
+        SecP224K1Field.squareN(iArrCreate3, 3, iArrCreate3);
+        SecP224K1Field.multiply(iArrCreate3, iArr, iArrCreate3);
+        SecP224K1Field.squareN(iArrCreate3, 2, iArrCreate3);
+        SecP224K1Field.multiply(iArrCreate3, iArr, iArrCreate3);
+        SecP224K1Field.squareN(iArrCreate3, 4, iArrCreate3);
+        SecP224K1Field.multiply(iArrCreate3, iArrCreate, iArrCreate3);
+        SecP224K1Field.square(iArrCreate3, iArrCreate3);
+        SecP224K1Field.square(iArrCreate3, iArrCreate5);
+        if (Nat224.eq(iArr, iArrCreate5)) {
+            return new SecP224K1FieldElement(iArrCreate3);
         }
-        SecP224K1Field.multiply(create3, PRECOMP_POW2, create3);
-        SecP224K1Field.square(create3, create5);
-        if (Nat224.eq(iArr, create5)) {
-            return new SecP224K1FieldElement(create3);
+        SecP224K1Field.multiply(iArrCreate3, PRECOMP_POW2, iArrCreate3);
+        SecP224K1Field.square(iArrCreate3, iArrCreate5);
+        if (Nat224.eq(iArr, iArrCreate5)) {
+            return new SecP224K1FieldElement(iArrCreate3);
         }
         return null;
     }

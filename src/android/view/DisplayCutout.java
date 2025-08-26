@@ -159,11 +159,11 @@ public final class DisplayCutout {
         }
 
         public int hashCode() {
-            int i = 0;
+            int iHashCode = 0;
             for (Rect rect : this.mRects) {
-                i = (i * 48271) + rect.hashCode();
+                iHashCode = (iHashCode * 48271) + rect.hashCode();
             }
-            return i;
+            return iHashCode;
         }
 
         public boolean equals(Object obj) {
@@ -318,6 +318,20 @@ public final class DisplayCutout {
         this.mBounds = bounds;
         this.mCutoutPathParserInfo = cutoutPathParserInfo == null ? EMPTY_PARSER_INFO : cutoutPathParserInfo;
         this.mSideOverrides = iArr;
+    }
+
+    public boolean isCutoutOnLongEdge(int i, int i2) {
+        boolean z = i < i2;
+        for (Rect rect : getBoundingRects()) {
+            if (z) {
+                if (rect.left == 0 || rect.right == i) {
+                    return true;
+                }
+            } else if (rect.top == 0 || rect.bottom == i2) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -503,7 +517,7 @@ public final class DisplayCutout {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         this.mSafeInsets.dumpDebug(protoOutputStream, 1146756268033L);
         this.mBounds.getRect(0).dumpDebug(protoOutputStream, 1146756268035L);
         this.mBounds.getRect(1).dumpDebug(protoOutputStream, 1146756268036L);
@@ -516,21 +530,21 @@ public final class DisplayCutout {
                 protoOutputStream.write(DisplayCutoutProto.SIDE_OVERRIDES, i);
             }
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public DisplayCutout inset(int i, int i2, int i3, int i4) {
         if ((i != 0 || i2 != 0 || i3 != 0 || i4 != 0) && (!isBoundsEmpty() || !this.mWaterfallInsets.equals(Insets.NONE))) {
-            Rect insetInsets = insetInsets(i, i2, i3, i4, new Rect(this.mSafeInsets));
-            if (i != 0 || i2 != 0 || !this.mSafeInsets.equals(insetInsets)) {
-                Rect insetInsets2 = insetInsets(i, i2, i3, i4, this.mWaterfallInsets.toRect());
+            Rect rectInsetInsets = insetInsets(i, i2, i3, i4, new Rect(this.mSafeInsets));
+            if (i != 0 || i2 != 0 || !this.mSafeInsets.equals(rectInsetInsets)) {
+                Rect rectInsetInsets2 = insetInsets(i, i2, i3, i4, this.mWaterfallInsets.toRect());
                 Rect[] rects = this.mBounds.getRects();
                 for (int i5 = 0; i5 < rects.length; i5++) {
                     if (!rects[i5].equals(ZERO_RECT)) {
                         rects[i5].offset(-i, -i2);
                     }
                 }
-                return new DisplayCutout(insetInsets, Insets.of(insetInsets2), rects, this.mCutoutPathParserInfo, false);
+                return new DisplayCutout(rectInsetInsets, Insets.of(rectInsetInsets2), rects, this.mCutoutPathParserInfo, false);
             }
         }
         return this;
@@ -575,7 +589,7 @@ public final class DisplayCutout {
         return new DisplayCutout(ZERO_RECT, Insets.NONE, rectArr, (CutoutPathParserInfo) null, false);
     }
 
-    private static String getDisplayCutoutPath(Resources resources, String str) {
+    private static String getDisplayCutoutPath(Resources resources, String str) throws Resources.NotFoundException {
         int displayUniqueIdConfigIndex = DisplayUtils.getDisplayUniqueIdConfigIndex(resources, str);
         String[] stringArray = resources.getStringArray(R.array.config_displayCutoutPathArray);
         if (displayUniqueIdConfigIndex >= 0 && displayUniqueIdConfigIndex < stringArray.length) {
@@ -584,7 +598,7 @@ public final class DisplayCutout {
         return resources.getString(R.string.config_mainBuiltInDisplayCutout);
     }
 
-    private static String getDisplayCutoutApproximationRect(Resources resources, String str) {
+    private static String getDisplayCutoutApproximationRect(Resources resources, String str) throws Resources.NotFoundException {
         int displayUniqueIdConfigIndex = DisplayUtils.getDisplayUniqueIdConfigIndex(resources, str);
         String[] stringArray = resources.getStringArray(R.array.config_displayCutoutApproximationRectArray);
         if (displayUniqueIdConfigIndex >= 0 && displayUniqueIdConfigIndex < stringArray.length) {
@@ -593,62 +607,62 @@ public final class DisplayCutout {
         return resources.getString(R.string.config_mainBuiltInDisplayCutoutRectApproximation);
     }
 
-    public static boolean getMaskBuiltInDisplayCutout(Resources resources, String str) {
+    public static boolean getMaskBuiltInDisplayCutout(Resources resources, String str) throws Resources.NotFoundException {
         boolean z;
         int displayUniqueIdConfigIndex = DisplayUtils.getDisplayUniqueIdConfigIndex(resources, str);
-        TypedArray obtainTypedArray = resources.obtainTypedArray(R.array.config_maskBuiltInDisplayCutoutArray);
-        if (displayUniqueIdConfigIndex >= 0 && displayUniqueIdConfigIndex < obtainTypedArray.length()) {
-            z = obtainTypedArray.getBoolean(displayUniqueIdConfigIndex, false);
+        TypedArray typedArrayObtainTypedArray = resources.obtainTypedArray(R.array.config_maskBuiltInDisplayCutoutArray);
+        if (displayUniqueIdConfigIndex >= 0 && displayUniqueIdConfigIndex < typedArrayObtainTypedArray.length()) {
+            z = typedArrayObtainTypedArray.getBoolean(displayUniqueIdConfigIndex, false);
         } else {
             z = resources.getBoolean(R.bool.config_maskMainBuiltInDisplayCutout);
         }
-        obtainTypedArray.recycle();
+        typedArrayObtainTypedArray.recycle();
         return z;
     }
 
-    public static boolean getFillBuiltInDisplayCutout(Resources resources, String str) {
+    public static boolean getFillBuiltInDisplayCutout(Resources resources, String str) throws Resources.NotFoundException {
         boolean z;
         int displayUniqueIdConfigIndex = DisplayUtils.getDisplayUniqueIdConfigIndex(resources, str);
-        TypedArray obtainTypedArray = resources.obtainTypedArray(R.array.config_fillBuiltInDisplayCutoutArray);
-        if (displayUniqueIdConfigIndex >= 0 && displayUniqueIdConfigIndex < obtainTypedArray.length()) {
-            z = obtainTypedArray.getBoolean(displayUniqueIdConfigIndex, false);
+        TypedArray typedArrayObtainTypedArray = resources.obtainTypedArray(R.array.config_fillBuiltInDisplayCutoutArray);
+        if (displayUniqueIdConfigIndex >= 0 && displayUniqueIdConfigIndex < typedArrayObtainTypedArray.length()) {
+            z = typedArrayObtainTypedArray.getBoolean(displayUniqueIdConfigIndex, false);
         } else {
             z = resources.getBoolean(R.bool.config_fillMainBuiltInDisplayCutout);
         }
-        obtainTypedArray.recycle();
+        typedArrayObtainTypedArray.recycle();
         return z;
     }
 
-    private static Insets getWaterfallInsets(Resources resources, String str) {
-        Insets loadWaterfallInset;
+    private static Insets getWaterfallInsets(Resources resources, String str) throws Resources.NotFoundException {
+        Insets insetsLoadWaterfallInset;
         int displayUniqueIdConfigIndex = DisplayUtils.getDisplayUniqueIdConfigIndex(resources, str);
-        TypedArray obtainTypedArray = resources.obtainTypedArray(R.array.config_waterfallCutoutArray);
-        int resourceId = (displayUniqueIdConfigIndex < 0 || displayUniqueIdConfigIndex >= obtainTypedArray.length()) ? 0 : obtainTypedArray.getResourceId(displayUniqueIdConfigIndex, 0);
+        TypedArray typedArrayObtainTypedArray = resources.obtainTypedArray(R.array.config_waterfallCutoutArray);
+        int resourceId = (displayUniqueIdConfigIndex < 0 || displayUniqueIdConfigIndex >= typedArrayObtainTypedArray.length()) ? 0 : typedArrayObtainTypedArray.getResourceId(displayUniqueIdConfigIndex, 0);
         if (resourceId != 0) {
-            TypedArray obtainTypedArray2 = resources.obtainTypedArray(resourceId);
-            loadWaterfallInset = Insets.of(obtainTypedArray2.getDimensionPixelSize(0, 0), obtainTypedArray2.getDimensionPixelSize(1, 0), obtainTypedArray2.getDimensionPixelSize(2, 0), obtainTypedArray2.getDimensionPixelSize(3, 0));
-            obtainTypedArray2.recycle();
+            TypedArray typedArrayObtainTypedArray2 = resources.obtainTypedArray(resourceId);
+            insetsLoadWaterfallInset = Insets.of(typedArrayObtainTypedArray2.getDimensionPixelSize(0, 0), typedArrayObtainTypedArray2.getDimensionPixelSize(1, 0), typedArrayObtainTypedArray2.getDimensionPixelSize(2, 0), typedArrayObtainTypedArray2.getDimensionPixelSize(3, 0));
+            typedArrayObtainTypedArray2.recycle();
         } else {
-            loadWaterfallInset = loadWaterfallInset(resources);
+            insetsLoadWaterfallInset = loadWaterfallInset(resources);
         }
-        obtainTypedArray.recycle();
-        return loadWaterfallInset;
+        typedArrayObtainTypedArray.recycle();
+        return insetsLoadWaterfallInset;
     }
 
-    private static int[] getDisplayCutoutSideOverrides(Resources resources, String str) throws IllegalArgumentException {
+    private static int[] getDisplayCutoutSideOverrides(Resources resources, String str) throws Resources.NotFoundException, IllegalArgumentException {
         int[] intArray;
         if (!Flags.movableCutoutConfiguration()) {
             return null;
         }
         int displayUniqueIdConfigIndex = DisplayUtils.getDisplayUniqueIdConfigIndex(resources, str);
-        TypedArray obtainTypedArray = resources.obtainTypedArray(R.array.config_displayCutoutSideOverrideArray);
-        int resourceId = (displayUniqueIdConfigIndex < 0 || displayUniqueIdConfigIndex >= obtainTypedArray.length()) ? 0 : obtainTypedArray.getResourceId(displayUniqueIdConfigIndex, 0);
+        TypedArray typedArrayObtainTypedArray = resources.obtainTypedArray(R.array.config_displayCutoutSideOverrideArray);
+        int resourceId = (displayUniqueIdConfigIndex < 0 || displayUniqueIdConfigIndex >= typedArrayObtainTypedArray.length()) ? 0 : typedArrayObtainTypedArray.getResourceId(displayUniqueIdConfigIndex, 0);
         if (resourceId != 0) {
-            intArray = obtainTypedArray.getResources().getIntArray(resourceId);
+            intArray = typedArrayObtainTypedArray.getResources().getIntArray(resourceId);
         } else {
             intArray = resources.getIntArray(R.array.config_mainBuiltInDisplayCutoutSideOverride);
         }
-        obtainTypedArray.recycle();
+        typedArrayObtainTypedArray.recycle();
         if (intArray.length == 0) {
             return INVALID_OVERRIDES;
         }
@@ -687,13 +701,13 @@ public final class DisplayCutout {
             if (str3.equals(sCachedSpec) && sCachedDisplayWidth == i3 && sCachedDisplayHeight == i4 && sCachedDensity == f && insets.equals(sCachedWaterfallInsets) && sCachedPhysicalPixelDisplaySizeRatio == physicalPixelDisplaySizeRatio && Arrays.equals(sCachedSideOverrides, iArr)) {
                 return sCachedCutout;
             }
-            String trim = str3.trim();
-            CutoutSpecification parse = new CutoutSpecification.Parser(f, i, i2, physicalPixelDisplaySizeRatio).parse(trim);
-            Rect safeInset = parse.getSafeInset();
-            Rect leftBound = parse.getLeftBound();
-            Rect topBound = parse.getTopBound();
-            Rect rightBound = parse.getRightBound();
-            Rect bottomBound = parse.getBottomBound();
+            String strTrim = str3.trim();
+            CutoutSpecification cutoutSpecification = new CutoutSpecification.Parser(f, i, i2, physicalPixelDisplaySizeRatio).parse(strTrim);
+            Rect safeInset = cutoutSpecification.getSafeInset();
+            Rect leftBound = cutoutSpecification.getLeftBound();
+            Rect topBound = cutoutSpecification.getTopBound();
+            Rect rightBound = cutoutSpecification.getRightBound();
+            Rect bottomBound = cutoutSpecification.getBottomBound();
             if (!insets.equals(Insets.NONE)) {
                 safeInset.set(Math.max(insets.left, safeInset.left), Math.max(insets.top, safeInset.top), Math.max(insets.right, safeInset.right), Math.max(insets.bottom, safeInset.bottom));
             }
@@ -704,9 +718,9 @@ public final class DisplayCutout {
             if (rotationToOverride != 0) {
                 Collections.rotate(Arrays.asList(rects), rotationToOverride);
             }
-            Pair<Path, DisplayCutout> pair = new Pair<>(parse.getPath(), new DisplayCutout(computeSafeInsets(i3, i4, insets, rects), insets, new Bounds(rects[0], rects[1], rects[2], rects[3], false), cutoutPathParserInfo, iArr));
+            Pair<Path, DisplayCutout> pair = new Pair<>(cutoutSpecification.getPath(), new DisplayCutout(computeSafeInsets(i3, i4, insets, rects), insets, new Bounds(rects[0], rects[1], rects[2], rects[3], false), cutoutPathParserInfo, iArr));
             synchronized (obj) {
-                sCachedSpec = trim;
+                sCachedSpec = strTrim;
                 sCachedDisplayWidth = i3;
                 sCachedDisplayHeight = i4;
                 sCachedDensity = f;
@@ -728,31 +742,31 @@ public final class DisplayCutout {
         if (this == displayCutout) {
             return displayCutout;
         }
-        int deltaRotation = RotationUtils.deltaRotation(i3, i4);
-        if (deltaRotation == 0) {
+        int iDeltaRotation = RotationUtils.deltaRotation(i3, i4);
+        if (iDeltaRotation == 0) {
             return this;
         }
-        Insets rotateInsets = RotationUtils.rotateInsets(getWaterfallInsets(), deltaRotation);
+        Insets insetsRotateInsets = RotationUtils.rotateInsets(getWaterfallInsets(), iDeltaRotation);
         Rect[] boundingRectsAll = getBoundingRectsAll();
         int i5 = i;
         Rect rect = new Rect(0, 0, i5, i2);
         for (int i6 = 0; i6 < boundingRectsAll.length; i6++) {
             if (!boundingRectsAll[i6].isEmpty()) {
-                RotationUtils.rotateBounds(boundingRectsAll[i6], rect, deltaRotation);
+                RotationUtils.rotateBounds(boundingRectsAll[i6], rect, iDeltaRotation);
             }
         }
-        Collections.rotate(Arrays.asList(boundingRectsAll), getRotationToOverride(getSideOverride(this.mSideOverrides, i4), boundingRectsAll, -deltaRotation));
+        Collections.rotate(Arrays.asList(boundingRectsAll), getRotationToOverride(getSideOverride(this.mSideOverrides, i4), boundingRectsAll, -iDeltaRotation));
         CutoutPathParserInfo cutoutPathParserInfo = getCutoutPathParserInfo();
         CutoutPathParserInfo cutoutPathParserInfo2 = new CutoutPathParserInfo(cutoutPathParserInfo.getDisplayWidth(), cutoutPathParserInfo.getDisplayHeight(), cutoutPathParserInfo.getPhysicalDisplayWidth(), cutoutPathParserInfo.getPhysicalDisplayHeight(), cutoutPathParserInfo.getDensity(), cutoutPathParserInfo.getCutoutSpec(), i4, cutoutPathParserInfo.getScale(), cutoutPathParserInfo.getPhysicalPixelDisplaySizeRatio());
-        boolean z = deltaRotation % 2 != 0;
+        boolean z = iDeltaRotation % 2 != 0;
         int i7 = z ? i2 : i5;
         if (!z) {
             i5 = i2;
         }
-        DisplayCutout constructDisplayCutout = constructDisplayCutout(boundingRectsAll, rotateInsets, cutoutPathParserInfo2);
-        Rect computeSafeInsets = computeSafeInsets(i7, i5, constructDisplayCutout);
-        constructDisplayCutout.mSideOverrides = this.mSideOverrides;
-        return constructDisplayCutout.replaceSafeInsets(computeSafeInsets);
+        DisplayCutout displayCutoutConstructDisplayCutout = constructDisplayCutout(boundingRectsAll, insetsRotateInsets, cutoutPathParserInfo2);
+        Rect rectComputeSafeInsets = computeSafeInsets(i7, i5, displayCutoutConstructDisplayCutout);
+        displayCutoutConstructDisplayCutout.mSideOverrides = this.mSideOverrides;
+        return displayCutoutConstructDisplayCutout.replaceSafeInsets(rectComputeSafeInsets);
     }
 
     private static int getSideOverride(int[] iArr, int i) {
@@ -875,11 +889,11 @@ public final class DisplayCutout {
         }
 
         public static DisplayCutout readCutoutFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == -1) {
+            int i = parcel.readInt();
+            if (i == -1) {
                 return null;
             }
-            if (readInt == 0) {
+            if (i == 0) {
                 return DisplayCutout.NO_CUTOUT;
             }
             Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);

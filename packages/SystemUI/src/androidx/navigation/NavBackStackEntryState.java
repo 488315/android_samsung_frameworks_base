@@ -5,7 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NavBackStackEntryState implements Parcelable {
     public static final Parcelable.Creator<NavBackStackEntryState> CREATOR;
@@ -14,7 +13,6 @@ public final class NavBackStackEntryState implements Parcelable {
     public final String id;
     public final Bundle savedState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -62,13 +60,13 @@ public final class NavBackStackEntryState implements Parcelable {
     }
 
     public NavBackStackEntryState(Parcel parcel) {
-        String readString = parcel.readString();
-        readString.getClass();
-        this.id = readString;
+        String string = parcel.readString();
+        string.getClass();
+        this.id = string;
         this.destinationId = parcel.readInt();
         this.args = parcel.readBundle(NavBackStackEntryState.class.getClassLoader());
-        Bundle readBundle = parcel.readBundle(NavBackStackEntryState.class.getClassLoader());
-        readBundle.getClass();
-        this.savedState = readBundle;
+        Bundle bundle = parcel.readBundle(NavBackStackEntryState.class.getClassLoader());
+        bundle.getClass();
+        this.savedState = bundle;
     }
 }

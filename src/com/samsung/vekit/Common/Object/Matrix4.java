@@ -80,8 +80,8 @@ public class Matrix4 {
     }
 
     public Vector4<Float> getRow(int i) {
-        Float valueOf = Float.valueOf(0.0f);
-        Vector4<Float> vector4 = new Vector4<>(valueOf, valueOf, valueOf, valueOf);
+        Float fValueOf = Float.valueOf(0.0f);
+        Vector4<Float> vector4 = new Vector4<>(fValueOf, fValueOf, fValueOf, fValueOf);
         vector4.setX(Float.valueOf((float) this.matrix[0][i]));
         vector4.setY(Float.valueOf((float) this.matrix[1][i]));
         vector4.setZ(Float.valueOf((float) this.matrix[2][i]));
@@ -90,8 +90,8 @@ public class Matrix4 {
     }
 
     public Vector4<Float> getColumn(int i) {
-        Float valueOf = Float.valueOf(0.0f);
-        Vector4<Float> vector4 = new Vector4<>(valueOf, valueOf, valueOf, valueOf);
+        Float fValueOf = Float.valueOf(0.0f);
+        Vector4<Float> vector4 = new Vector4<>(fValueOf, fValueOf, fValueOf, fValueOf);
         vector4.setX(Float.valueOf((float) this.matrix[i][0]));
         vector4.setY(Float.valueOf((float) this.matrix[i][1]));
         vector4.setZ(Float.valueOf((float) this.matrix[i][2]));
@@ -295,9 +295,9 @@ public class Matrix4 {
         double d2 = dArr[1][1];
         double d3 = dArr[2][2];
         if (((float) (d + d2 + d3)) > 0.0f) {
-            float sqrt = (float) Math.sqrt(r1 + 1.0f);
-            quaternion.w = sqrt * 0.5f;
-            float f = 0.5f / sqrt;
+            float fSqrt = (float) Math.sqrt(r1 + 1.0f);
+            quaternion.w = fSqrt * 0.5f;
+            float f = 0.5f / fSqrt;
             double[][] dArr2 = this.matrix;
             quaternion.x = ((float) (dArr2[2][1] - dArr2[1][2])) * f;
             double[][] dArr3 = this.matrix;
@@ -307,9 +307,9 @@ public class Matrix4 {
             return quaternion;
         }
         if (d > d2 && d > d3) {
-            float sqrt2 = (float) Math.sqrt(((d + 1.0d) - d2) - d3);
-            quaternion.x = sqrt2 * 0.5f;
-            float f2 = 0.5f / sqrt2;
+            float fSqrt2 = (float) Math.sqrt(((d + 1.0d) - d2) - d3);
+            quaternion.x = fSqrt2 * 0.5f;
+            float f2 = 0.5f / fSqrt2;
             double[][] dArr5 = this.matrix;
             quaternion.y = ((float) (dArr5[0][1] + dArr5[1][0])) * f2;
             double[][] dArr6 = this.matrix;
@@ -319,9 +319,9 @@ public class Matrix4 {
             return quaternion;
         }
         if (d2 > d3) {
-            float sqrt3 = (float) Math.sqrt(((d2 + 1.0d) - d) - d3);
-            quaternion.y = sqrt3 * 0.5f;
-            float f3 = 0.5f / sqrt3;
+            float fSqrt3 = (float) Math.sqrt(((d2 + 1.0d) - d) - d3);
+            quaternion.y = fSqrt3 * 0.5f;
+            float f3 = 0.5f / fSqrt3;
             double[][] dArr8 = this.matrix;
             quaternion.x = ((float) (dArr8[0][1] + dArr8[1][0])) * f3;
             double[][] dArr9 = this.matrix;
@@ -330,9 +330,9 @@ public class Matrix4 {
             quaternion.w = ((float) (dArr10[0][2] - dArr10[2][0])) * f3;
             return quaternion;
         }
-        float sqrt4 = (float) Math.sqrt(((d3 + 1.0d) - d) - d2);
-        quaternion.z = sqrt4 * 0.5f;
-        float f4 = 0.5f / sqrt4;
+        float fSqrt4 = (float) Math.sqrt(((d3 + 1.0d) - d) - d2);
+        quaternion.z = fSqrt4 * 0.5f;
+        float f4 = 0.5f / fSqrt4;
         double[][] dArr11 = this.matrix;
         quaternion.x = ((float) (dArr11[0][2] + dArr11[2][0])) * f4;
         double[][] dArr12 = this.matrix;
@@ -347,19 +347,19 @@ public class Matrix4 {
     }
 
     public Matrix4 getPureRotationMatrix() {
-        double floatValue = getScale().getX().floatValue();
-        double floatValue2 = getScale().getY().floatValue();
-        double floatValue3 = getScale().getZ().floatValue();
+        double dFloatValue = getScale().getX().floatValue();
+        double dFloatValue2 = getScale().getY().floatValue();
+        double dFloatValue3 = getScale().getZ().floatValue();
         Matrix4 matrix4 = new Matrix4();
-        matrix4.set(0, 0, (float) floatValue);
-        matrix4.set(1, 1, (float) floatValue2);
-        matrix4.set(2, 2, (float) floatValue3);
-        Matrix4 inverse = matrix4.inverse();
+        matrix4.set(0, 0, (float) dFloatValue);
+        matrix4.set(1, 1, (float) dFloatValue2);
+        matrix4.set(2, 2, (float) dFloatValue3);
+        Matrix4 matrix4Inverse = matrix4.inverse();
         Matrix4 matrix42 = new Matrix4(this.matrix);
         matrix42.set(3, 0, 0.0f);
         matrix42.set(3, 1, 0.0f);
         matrix42.set(3, 2, 0.0f);
-        return matrix42.multiply(inverse);
+        return matrix42.multiply(matrix4Inverse);
     }
 
     public Vector3<Float> getRotation() {

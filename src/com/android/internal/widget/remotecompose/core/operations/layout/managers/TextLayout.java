@@ -137,23 +137,79 @@ public class TextLayout extends LayoutManager implements VariableSupport, Access
         this(component, i, i2, 0.0f, 0.0f, 0.0f, 0.0f, i3, i4, f, i5, f2, i6, i7, i8, i9);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0093, code lost:
-    
-        if (r4 != 6) goto L20;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c0  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x00f2  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x00a6  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x00c0  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x00f2  */
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.LayoutComponent, com.android.internal.widget.remotecompose.core.operations.layout.Component
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void paintingComponent(com.android.internal.widget.remotecompose.core.PaintContext r14) {
-        /*
-            Method dump skipped, instructions count: 279
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.remotecompose.core.operations.layout.managers.TextLayout.paintingComponent(com.android.internal.widget.remotecompose.core.PaintContext):void");
+    public void paintingComponent(PaintContext paintContext) {
+        PaintContext paintContext2;
+        Component component = paintContext.getContext().mLastComponent;
+        paintContext.getContext().mLastComponent = this;
+        paintContext.save();
+        paintContext.translate(this.mX, this.mY);
+        if (this.mGraphicsLayerModifier != null) {
+            paintContext.startGraphicsLayer((int) getWidth(), (int) getHeight());
+            this.mCachedAttributes.clear();
+            this.mGraphicsLayerModifier.fillInAttributes(this.mCachedAttributes);
+            paintContext.setGraphicsLayer(this.mCachedAttributes);
+        }
+        this.mComponentModifiers.paint(paintContext);
+        float f = this.mPaddingLeft;
+        float f2 = this.mPaddingTop;
+        paintContext.translate(f, f2);
+        paintContext.savePaint();
+        this.mPaint.reset();
+        this.mPaint.setStyle(0);
+        this.mPaint.setColor(this.mColor);
+        this.mPaint.setTextSize(this.mFontSize);
+        this.mPaint.setTextStyle(this.mType, (int) this.mFontWeight, this.mFontStyle == 1);
+        paintContext.replacePaint(this.mPaint);
+        String str = this.mCachedString;
+        if (str == null) {
+            return;
+        }
+        int length = str.length();
+        Platform.ComputedTextLayout computedTextLayout = this.mComputedTextLayout;
+        if (computedTextLayout != null) {
+            paintContext.drawComplexText(computedTextLayout);
+            paintContext2 = paintContext;
+        } else {
+            float f3 = this.mTextX;
+            int i = this.mTextAlign;
+            if (i == 2) {
+                f3 = ((this.mWidth - this.mPaddingLeft) - this.mPaddingRight) - this.mTextW;
+                float f4 = f3;
+                if (this.mTextW <= (this.mWidth - this.mPaddingLeft) - this.mPaddingRight) {
+                    paintContext.save();
+                    paintContext.clipRect(0.0f, 0.0f, (this.mWidth - this.mPaddingLeft) - this.mPaddingRight, (this.mHeight - this.mPaddingTop) - this.mPaddingBottom);
+                    paintContext.translate(getScrollX(), getScrollY());
+                    paintContext2 = paintContext;
+                    paintContext2.drawTextRun(this.mTextId, 0, length, 0, 0, f4, this.mTextY, false);
+                    paintContext2.restore();
+                } else {
+                    paintContext2 = paintContext;
+                    paintContext2.drawTextRun(this.mTextId, 0, length, 0, 0, f4, this.mTextY, false);
+                }
+            } else {
+                if (i == 3) {
+                    f3 = (((this.mWidth - this.mPaddingLeft) - this.mPaddingRight) - this.mTextW) / 2.0f;
+                } else if (i == 6) {
+                }
+                float f42 = f3;
+                if (this.mTextW <= (this.mWidth - this.mPaddingLeft) - this.mPaddingRight) {
+                }
+            }
+        }
+        paintContext2.restorePaint();
+        if (this.mGraphicsLayerModifier != null) {
+            paintContext2.endGraphicsLayer();
+        }
+        paintContext2.translate(-f, -f2);
+        paintContext2.restore();
+        paintContext2.getContext().mLastComponent = component;
     }
 
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.LayoutComponent, com.android.internal.widget.remotecompose.core.operations.layout.Component
@@ -203,27 +259,30 @@ public class TextLayout extends LayoutManager implements VariableSupport, Access
         int i3 = (this.mMaxLines == 1 && ((i2 = this.mOverflow) == 4 || i2 == 5 || i2 == 3)) ? 14 : 6;
         if ((i3 & 8) != 8) {
             for (int i4 = 0; i4 < this.mCachedString.length(); i4++) {
-                char charAt = this.mCachedString.charAt(i4);
-                if (charAt == '\n' || charAt == '\t') {
+                char cCharAt = this.mCachedString.charAt(i4);
+                if (cCharAt == '\n' || cCharAt == '\t') {
                     i = 14;
                     z3 = true;
                     break;
                 }
             }
+            i = i3;
+            z3 = false;
+        } else {
+            i = i3;
+            z3 = false;
         }
-        i = i3;
-        z3 = false;
         if (!z3) {
             paintContext.getTextBounds(this.mTextId, 0, this.mCachedString.length(), i, fArr);
         }
         if (z3 || (fArr[2] - fArr[1] > f && this.mMaxLines > 1 && f > 0.0f)) {
             f3 = f;
-            Platform.ComputedTextLayout layoutComplexText = paintContext.layoutComplexText(this.mTextId, 0, this.mCachedString.length(), this.mTextAlign, this.mOverflow, this.mMaxLines, f3, i);
-            this.mComputedTextLayout = layoutComplexText;
-            if (layoutComplexText != null) {
+            Platform.ComputedTextLayout computedTextLayoutLayoutComplexText = paintContext.layoutComplexText(this.mTextId, 0, this.mCachedString.length(), this.mTextAlign, this.mOverflow, this.mMaxLines, f3, i);
+            this.mComputedTextLayout = computedTextLayoutLayoutComplexText;
+            if (computedTextLayoutLayoutComplexText != null) {
                 fArr[0] = 0.0f;
                 fArr[1] = 0.0f;
-                fArr[2] = layoutComplexText.getWidth();
+                fArr[2] = computedTextLayoutLayoutComplexText.getWidth();
                 fArr[3] = this.mComputedTextLayout.getHeight();
             }
         } else {

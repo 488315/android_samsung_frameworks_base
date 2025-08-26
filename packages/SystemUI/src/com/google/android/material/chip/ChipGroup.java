@@ -21,7 +21,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ChipGroup extends FlowLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -31,14 +30,12 @@ public class ChipGroup extends FlowLayout {
     public final int defaultCheckedId;
     public final PassThroughHierarchyChangeListener passThroughListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.android.material.chip.ChipGroup$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LayoutParams extends ViewGroup.MarginLayoutParams {
         public LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
@@ -57,7 +54,6 @@ public class ChipGroup extends FlowLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PassThroughHierarchyChangeListener implements ViewGroup.OnHierarchyChangeListener {
         public ViewGroup.OnHierarchyChangeListener onHierarchyChangeListener;
 
@@ -148,7 +144,7 @@ public class ChipGroup extends FlowLayout {
     public final void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo accessibilityNodeInfo) {
         int i;
         super.onInitializeAccessibilityNodeInfo(accessibilityNodeInfo);
-        AccessibilityNodeInfoCompat wrap = AccessibilityNodeInfoCompat.wrap(accessibilityNodeInfo);
+        AccessibilityNodeInfoCompat accessibilityNodeInfoCompatWrap = AccessibilityNodeInfoCompat.wrap(accessibilityNodeInfo);
         if (this.singleLine) {
             i = 0;
             for (int i2 = 0; i2 < getChildCount(); i2++) {
@@ -159,7 +155,7 @@ public class ChipGroup extends FlowLayout {
         } else {
             i = -1;
         }
-        wrap.setCollectionInfo(AccessibilityNodeInfoCompat.CollectionInfoCompat.obtain(getRowCount(), i, this.checkableGroup.singleSelection ? 1 : 2));
+        accessibilityNodeInfoCompatWrap.setCollectionInfo(AccessibilityNodeInfoCompat.CollectionInfoCompat.obtain(getRowCount(), i, this.checkableGroup.singleSelection ? 1 : 2));
     }
 
     @Override // android.view.ViewGroup
@@ -181,36 +177,36 @@ public class ChipGroup extends FlowLayout {
         CheckableGroup checkableGroup = new CheckableGroup();
         this.checkableGroup = checkableGroup;
         this.passThroughListener = new PassThroughHierarchyChangeListener(this, null);
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(getContext(), attributeSet, R$styleable.ChipGroup, i, R.style.Widget_MaterialComponents_ChipGroup, new int[0]);
-        int dimensionPixelOffset = obtainStyledAttributes.getDimensionPixelOffset(1, 0);
-        int dimensionPixelOffset2 = obtainStyledAttributes.getDimensionPixelOffset(2, dimensionPixelOffset);
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(getContext(), attributeSet, R$styleable.ChipGroup, i, R.style.Widget_MaterialComponents_ChipGroup, new int[0]);
+        int dimensionPixelOffset = typedArrayObtainStyledAttributes.getDimensionPixelOffset(1, 0);
+        int dimensionPixelOffset2 = typedArrayObtainStyledAttributes.getDimensionPixelOffset(2, dimensionPixelOffset);
         if (this.chipSpacingHorizontal != dimensionPixelOffset2) {
             this.chipSpacingHorizontal = dimensionPixelOffset2;
             this.itemSpacing = dimensionPixelOffset2;
             requestLayout();
         }
-        int dimensionPixelOffset3 = obtainStyledAttributes.getDimensionPixelOffset(3, dimensionPixelOffset);
+        int dimensionPixelOffset3 = typedArrayObtainStyledAttributes.getDimensionPixelOffset(3, dimensionPixelOffset);
         if (this.chipSpacingVertical != dimensionPixelOffset3) {
             this.chipSpacingVertical = dimensionPixelOffset3;
             this.lineSpacing = dimensionPixelOffset3;
             requestLayout();
         }
-        this.singleLine = obtainStyledAttributes.getBoolean(5, false);
-        boolean z = obtainStyledAttributes.getBoolean(6, false);
+        this.singleLine = typedArrayObtainStyledAttributes.getBoolean(5, false);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(6, false);
         if (checkableGroup.singleSelection != z) {
             checkableGroup.singleSelection = z;
-            boolean isEmpty = ((HashSet) checkableGroup.checkedIds).isEmpty();
+            boolean zIsEmpty = ((HashSet) checkableGroup.checkedIds).isEmpty();
             Iterator it = ((HashMap) checkableGroup.checkables).values().iterator();
             while (it.hasNext()) {
                 checkableGroup.uncheckInternal((MaterialCheckable) it.next(), false);
             }
-            if (!isEmpty) {
+            if (!zIsEmpty) {
                 checkableGroup.onCheckedStateChanged();
             }
         }
-        this.checkableGroup.selectionRequired = obtainStyledAttributes.getBoolean(4, false);
-        this.defaultCheckedId = obtainStyledAttributes.getResourceId(0, -1);
-        obtainStyledAttributes.recycle();
+        this.checkableGroup.selectionRequired = typedArrayObtainStyledAttributes.getBoolean(4, false);
+        this.defaultCheckedId = typedArrayObtainStyledAttributes.getResourceId(0, -1);
+        typedArrayObtainStyledAttributes.recycle();
         this.checkableGroup.onCheckedStateChangeListener = new AnonymousClass1();
         super.setOnHierarchyChangeListener(this.passThroughListener);
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;

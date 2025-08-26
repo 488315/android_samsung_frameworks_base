@@ -29,9 +29,9 @@ public class ResolverMultiProfilePagerAdapter extends AbstractMultiProfilePagerA
     }
 
     private ResolverProfileDescriptor createProfileDescriptor(ResolverListAdapter resolverListAdapter) {
-        LayoutInflater from = LayoutInflater.from(getContext());
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(getContext());
         Context context = this.mContext;
-        return new ResolverProfileDescriptor(this, (ViewGroup) from.inflate(((context instanceof ResolverActivity) && ((ResolverActivity) context).mIsAiAssist) ? R.layout.sem_resolver_ai_list : R.layout.sem_resolver_list_per_profile, (ViewGroup) null, false), resolverListAdapter);
+        return new ResolverProfileDescriptor(this, (ViewGroup) layoutInflaterFrom.inflate(((context instanceof ResolverActivity) && ((ResolverActivity) context).mIsAiAssist) ? R.layout.sem_resolver_ai_list : R.layout.sem_resolver_list_per_profile, (ViewGroup) null, false), resolverListAdapter);
     }
 
     AbsListView getListViewForIndex(int i) {

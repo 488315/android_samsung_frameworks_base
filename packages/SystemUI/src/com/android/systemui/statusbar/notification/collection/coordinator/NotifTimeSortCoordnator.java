@@ -16,9 +16,8 @@ import java.util.ArrayList;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.jvm.functions.Function1;
 import kotlin.sequences.TransformingSequence;
-import kotlin.sequences.TransformingSequence$iterator$1;
+import kotlin.sequences.TransformingSequence.AnonymousClass1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotifTimeSortCoordnator implements Coordinator {
     public static final int $stable = 8;
@@ -34,41 +33,16 @@ public final class NotifTimeSortCoordnator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public NotifComparator getComparator() {
-            return NotifTimeSortCoordnator.this.getTimeComparator();
+            return this.this$0.getTimeComparator();
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:4:0x0013, code lost:
-        
-            if (r0 != false) goto L8;
-         */
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public boolean isInSection(com.android.systemui.statusbar.notification.collection.PipelineEntry r3) {
-            /*
-                r2 = this;
-                com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator r0 = com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator.this
-                com.android.systemui.util.SettingsHelper r0 = com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator.access$getSettingsHelper$p(r0)
-                int r0 = r0.getNotificationSortOrderValue()
-                r1 = 1
-                if (r0 != r1) goto L16
-                com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator r0 = com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator.this
-                boolean r0 = com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator.access$isIncludedPriortyList(r0, r3)
-                if (r0 == 0) goto L16
-                goto L17
-            L16:
-                r1 = 0
-            L17:
-                if (r1 == 0) goto L22
-                com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator r0 = com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator.this
-                com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifComparator r2 = r2.getComparator()
-                com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator.access$sortChildren(r0, r3, r2)
-            L22:
-                return r1
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator$sectionerForPriority$1.isInSection(com.android.systemui.statusbar.notification.collection.PipelineEntry):boolean");
+        public boolean isInSection(PipelineEntry pipelineEntry) {
+            boolean z = this.this$0.settingsHelper.getNotificationSortOrderValue() == 1 && this.this$0.isIncludedPriortyList(pipelineEntry);
+            if (z) {
+                this.this$0.sortChildren(pipelineEntry, getComparator());
+            }
+            return z;
         }
     };
     private final NotifSectioner sectioner = new NotifSectioner() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator$sectioner$1
@@ -78,22 +52,18 @@ public final class NotifTimeSortCoordnator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public NotifComparator getComparator() {
-            return NotifTimeSortCoordnator.this.getTimeComparator();
+            return this.this$0.getTimeComparator();
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public boolean isInSection(PipelineEntry pipelineEntry) {
-            HeadsUpManager headsUpManager;
-            SettingsHelper settingsHelper;
             NotificationEntry representativeEntry;
-            headsUpManager = NotifTimeSortCoordnator.this.mHeadsUpManager;
-            if (!((HeadsUpManagerImpl) headsUpManager).isHeadsUpEntry(pipelineEntry.getKey()) && (representativeEntry = pipelineEntry.getRepresentativeEntry()) != null && representativeEntry.isInsignificant()) {
+            if (!((HeadsUpManagerImpl) this.this$0.mHeadsUpManager).isHeadsUpEntry(pipelineEntry.getKey()) && (representativeEntry = pipelineEntry.getRepresentativeEntry()) != null && representativeEntry.isInsignificant()) {
                 return false;
             }
-            settingsHelper = NotifTimeSortCoordnator.this.settingsHelper;
-            boolean z = settingsHelper.getNotificationSortOrderValue() == 1;
+            boolean z = this.this$0.settingsHelper.getNotificationSortOrderValue() == 1;
             if (z) {
-                NotifTimeSortCoordnator.this.sortChildren(pipelineEntry, getComparator());
+                this.this$0.sortChildren(pipelineEntry, getComparator());
             }
             return z;
         }
@@ -105,9 +75,7 @@ public final class NotifTimeSortCoordnator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifComparator, java.util.Comparator
         public int compare(PipelineEntry pipelineEntry, PipelineEntry pipelineEntry2) {
-            int timeCompare;
-            timeCompare = NotifTimeSortCoordnator.this.getTimeCompare(pipelineEntry, pipelineEntry2);
-            return timeCompare;
+            return this.this$0.getTimeCompare(pipelineEntry, pipelineEntry2);
         }
     };
 
@@ -118,27 +86,25 @@ public final class NotifTimeSortCoordnator implements Coordinator {
     }
 
     private final long calculateGroupNotificationTime(GroupEntry groupEntry, long j) {
-        TransformingSequence$iterator$1 transformingSequence$iterator$1 = new TransformingSequence$iterator$1(new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(groupEntry.mUnmodifiableChildren), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator$$ExternalSyntheticLambda0
+        TransformingSequence.AnonymousClass1 anonymousClass1 = new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(groupEntry.mUnmodifiableChildren), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.NotifTimeSortCoordnator$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                long calculateGroupNotificationTime$lambda$1;
-                calculateGroupNotificationTime$lambda$1 = NotifTimeSortCoordnator.calculateGroupNotificationTime$lambda$1(NotifTimeSortCoordnator.this, (NotificationEntry) obj);
-                return Long.valueOf(calculateGroupNotificationTime$lambda$1);
+            public final Object mo781invoke(Object obj) {
+                return Long.valueOf(NotifTimeSortCoordnator.calculateGroupNotificationTime$lambda$1(this.f$0, (NotificationEntry) obj));
             }
-        }));
-        long j2 = Long.MIN_VALUE;
-        long j3 = Long.MAX_VALUE;
-        while (transformingSequence$iterator$1.iterator.hasNext()) {
-            long longValue = ((Number) transformingSequence$iterator$1.next()).longValue();
-            if (j - longValue > 0) {
-                j2 = Math.max(j2, longValue);
+        }).new AnonymousClass1();
+        long jMax = Long.MIN_VALUE;
+        long jMin = Long.MAX_VALUE;
+        while (anonymousClass1.iterator.hasNext()) {
+            long jLongValue = ((Number) anonymousClass1.next()).longValue();
+            if (j - jLongValue > 0) {
+                jMax = Math.max(jMax, jLongValue);
             } else {
-                j3 = Math.min(j3, longValue);
+                jMin = Math.min(jMin, jLongValue);
             }
         }
-        if (j2 != Long.MIN_VALUE || j3 != Long.MAX_VALUE) {
-            return j3 != Long.MAX_VALUE ? j3 : j2;
+        if (jMax != Long.MIN_VALUE || jMin != Long.MAX_VALUE) {
+            return jMin != Long.MAX_VALUE ? jMin : jMax;
         }
         NotificationEntry notificationEntry = groupEntry.mSummary;
         notificationEntry.getClass();
@@ -184,15 +150,15 @@ public final class NotifTimeSortCoordnator implements Coordinator {
         while (i < length) {
             String str = strArr[i];
             int i3 = i2 + 1;
-            String str2 = null;
+            String id = null;
             StatusBarNotification statusBarNotification = representativeEntry != null ? representativeEntry.mSbn : null;
             statusBarNotification.getClass();
             if (str.equals(statusBarNotification.getPackageName())) {
-                String str3 = this.channelArray[i2];
+                String str2 = this.channelArray[i2];
                 if (representativeEntry != null && (channel = representativeEntry.mRanking.getChannel()) != null) {
-                    str2 = channel.getId();
+                    id = channel.getId();
                 }
-                if (str3.equals(str2)) {
+                if (str2.equals(id)) {
                     return true;
                 }
             }

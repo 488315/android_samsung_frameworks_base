@@ -21,7 +21,6 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import java.io.ByteArrayOutputStream;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CoverScreenIconController implements CommandQueue.Callbacks {
     public final DelayableExecutor bgExecutor;
@@ -41,17 +40,17 @@ public final class CoverScreenIconController implements CommandQueue.Callbacks {
         this.bgExecutor = delayableExecutor2;
         this.mobileConnectionsRepository = mobileConnectionsRepository;
         this.delayableExecutor = delayableExecutor3;
-        this.slotMode = context.getResources().getString(17043285);
+        this.slotMode = context.getResources().getString(17043289);
         BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.phone.CoverScreenIconController$broadcastReceiver$1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
-                final CoverScreenIconController coverScreenIconController = CoverScreenIconController.this;
+                final CoverScreenIconController coverScreenIconController = this.this$0;
                 coverScreenIconController.delayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.CoverScreenIconController$broadcastReceiver$1$onReceive$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CoverScreenNetworkSignalModel noServiceInfo = CoverScreenIconController.this.mobileConnectionsRepository.getNoServiceInfo();
+                        CoverScreenNetworkSignalModel noServiceInfo = coverScreenIconController.mobileConnectionsRepository.getNoServiceInfo();
                         Log.d("CoverScreenIconController", "no service state=" + noServiceInfo);
-                        CoverScreenIconController coverScreenIconController2 = CoverScreenIconController.this;
+                        CoverScreenIconController coverScreenIconController2 = coverScreenIconController;
                         coverScreenIconController2.getClass();
                         if (coverScreenIconController2.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.SUB_SCREEN_SIGNAL, 0, new Object[0])) {
                             SubRoomNetworkInfo subRoomNetworkInfo2 = coverScreenIconController2.subRoomNetworkInfo;
@@ -107,20 +106,20 @@ public final class CoverScreenIconController implements CommandQueue.Callbacks {
                         if (identifier == -1) {
                             identifier = 0;
                         }
-                        Drawable loadDrawableAsUser = statusBarIcon.icon.loadDrawableAsUser(this.context, identifier);
-                        Bitmap createBitmap = Bitmap.createBitmap(loadDrawableAsUser.getIntrinsicWidth(), loadDrawableAsUser.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                        Canvas canvas = new Canvas(createBitmap);
-                        loadDrawableAsUser.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-                        loadDrawableAsUser.draw(canvas);
+                        Drawable drawableLoadDrawableAsUser = statusBarIcon.icon.loadDrawableAsUser(this.context, identifier);
+                        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(drawableLoadDrawableAsUser.getIntrinsicWidth(), drawableLoadDrawableAsUser.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(bitmapCreateBitmap);
+                        drawableLoadDrawableAsUser.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                        drawableLoadDrawableAsUser.draw(canvas);
                         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        createBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                        SuggestionsAdapter$$ExternalSyntheticOutline0.m(createBitmap.getWidth(), createBitmap.getHeight(), "Set mode icon ", "x", "CoverScreenIconController");
+                        bitmapCreateBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                        SuggestionsAdapter$$ExternalSyntheticOutline0.m(bitmapCreateBitmap.getWidth(), bitmapCreateBitmap.getHeight(), "Set mode icon ", "x", "CoverScreenIconController");
                         final CoverScreenIconController coverScreenIconController = this;
                         coverScreenIconController.executor.execute(new Runnable() { // from class: com.android.systemui.statusbar.phone.CoverScreenIconController$setModeIcon$1.1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                CoverScreenIconController.this.subRoomNetworkInfo.modeIcon = byteArrayOutputStream.toByteArray();
-                                SubRoomNetworkInfo subRoomNetworkInfo = CoverScreenIconController.this.subRoomNetworkInfo;
+                                coverScreenIconController.subRoomNetworkInfo.modeIcon = byteArrayOutputStream.toByteArray();
+                                SubRoomNetworkInfo subRoomNetworkInfo = coverScreenIconController.subRoomNetworkInfo;
                                 SubRoom.StateChangeListener stateChangeListener = subRoomNetworkInfo.stateChangeListener;
                                 if (stateChangeListener != null) {
                                     Bundle bundle = new Bundle();

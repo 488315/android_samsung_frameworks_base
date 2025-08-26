@@ -21,7 +21,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DefaultDebugIndication$DefaultDebugIndicationInstance$onAttach$1 extends SuspendLambda implements Function2 {
     int label;
@@ -61,13 +60,11 @@ final class DefaultDebugIndication$DefaultDebugIndicationInstance$onAttach$1 ext
                     boolean z = interaction instanceof PressInteraction$Press;
                     Ref$IntRef ref$IntRef4 = ref$IntRef3;
                     Ref$IntRef ref$IntRef5 = ref$IntRef2;
-                    Ref$IntRef ref$IntRef6 = Ref$IntRef.this;
+                    Ref$IntRef ref$IntRef6 = ref$IntRef;
                     boolean z2 = true;
                     if (z) {
                         ref$IntRef6.element++;
-                    } else if (interaction instanceof PressInteraction$Release) {
-                        ref$IntRef6.element--;
-                    } else if (interaction instanceof PressInteraction$Cancel) {
+                    } else if ((interaction instanceof PressInteraction$Release) || (interaction instanceof PressInteraction$Cancel)) {
                         ref$IntRef6.element--;
                     } else if (interaction instanceof HoverInteraction$Enter) {
                         ref$IntRef5.element++;

@@ -87,12 +87,12 @@ public class QwertyKeyListener extends BaseKeyListener {
     }
 
     public static QwertyKeyListener getInstance(boolean z, TextKeyListener.Capitalize capitalize) {
-        int ordinal = (capitalize.ordinal() * 2) + (z ? 1 : 0);
+        int iOrdinal = (capitalize.ordinal() * 2) + (z ? 1 : 0);
         QwertyKeyListener[] qwertyKeyListenerArr = sInstance;
-        if (qwertyKeyListenerArr[ordinal] == null) {
-            qwertyKeyListenerArr[ordinal] = new QwertyKeyListener(capitalize, z);
+        if (qwertyKeyListenerArr[iOrdinal] == null) {
+            qwertyKeyListenerArr[iOrdinal] = new QwertyKeyListener(capitalize, z);
         }
-        return sInstance[ordinal];
+        return sInstance[iOrdinal];
     }
 
     public static QwertyKeyListener getInstanceForFullKeyboard() {
@@ -124,21 +124,17 @@ public class QwertyKeyListener extends BaseKeyListener {
         	at jadx.core.dex.visitors.SimplifyVisitor.simplifyBlock(SimplifyVisitor.java:86)
         	at jadx.core.dex.visitors.SimplifyVisitor.visit(SimplifyVisitor.java:71)
         */
-    /* JADX WARN: Removed duplicated region for block: B:112:0x01c5  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x01df  */
-    /* JADX WARN: Removed duplicated region for block: B:137:0x0221  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x010c  */
-    /* JADX WARN: Removed duplicated region for block: B:84:0x0162  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x017e  */
+    /* JADX WARN: Removed duplicated region for block: B:178:0x02d2  */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x0109  */
+    /* JADX WARN: Removed duplicated region for block: B:70:0x010c  */
     @Override // android.text.method.BaseKeyListener, android.text.method.MetaKeyKeyListener, android.text.method.KeyListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onKeyDown(android.view.View r20, android.text.Editable r21, int r22, android.view.KeyEvent r23) {
+    public boolean onKeyDown(android.view.View r20, android.text.Editable r21, int r22, android.view.KeyEvent r23) throws java.lang.NumberFormatException {
         /*
             Method dump skipped, instructions count: 750
-            To view this dump change 'Code comments level' option to 'DEBUG'
+            To view this dump add '--comments-level debug' option
         */
         throw new UnsupportedOperationException("Method not decompiled: android.text.method.QwertyKeyListener.onKeyDown(android.view.View, android.text.Editable, int, android.view.KeyEvent):boolean");
     }
@@ -147,10 +143,10 @@ public class QwertyKeyListener extends BaseKeyListener {
         boolean z;
         int i3;
         int i4 = i2 - i;
-        String str = AutoText.get(charSequence, i, i2, view);
-        if (str == null) {
-            str = AutoText.get(TextUtils.substring(charSequence, i, i2).toLowerCase(), 0, i4, view);
-            if (str == null) {
+        String titleCase = AutoText.get(charSequence, i, i2, view);
+        if (titleCase == null) {
+            titleCase = AutoText.get(TextUtils.substring(charSequence, i, i2).toLowerCase(), 0, i4, view);
+            if (titleCase == null) {
                 return null;
             }
             z = true;
@@ -168,18 +164,16 @@ public class QwertyKeyListener extends BaseKeyListener {
             i3 = 0;
         }
         if (i3 != 0) {
-            if (i3 == 1) {
-                str = toTitleCase(str);
-            } else if (i3 == i4) {
-                str = str.toUpperCase();
+            if (i3 != 1 && i3 == i4) {
+                titleCase = titleCase.toUpperCase();
             } else {
-                str = toTitleCase(str);
+                titleCase = toTitleCase(titleCase);
             }
         }
-        if (str.length() == i4 && TextUtils.regionMatches(charSequence, i, str, 0, i4)) {
+        if (titleCase.length() == i4 && TextUtils.regionMatches(charSequence, i, titleCase, 0, i4)) {
             return null;
         }
-        return str;
+        return titleCase;
     }
 
     public static void markAsReplaced(Spannable spannable, int i, int i2, String str) {

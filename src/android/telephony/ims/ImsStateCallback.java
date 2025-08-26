@@ -1,7 +1,6 @@
 package android.telephony.ims;
 
 import android.os.Binder;
-import android.telephony.ims.ImsStateCallback;
 import com.android.internal.telephony.IImsStateCallback;
 import com.android.internal.util.FunctionalUtils;
 import java.lang.annotation.Retention;
@@ -59,8 +58,8 @@ public abstract class ImsStateCallback {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda3
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    ImsStateCallback.IImsStateCallbackStub.this.lambda$onAvailable$1(imsStateCallback);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onAvailable$1(imsStateCallback);
                 }
             });
         }
@@ -70,7 +69,7 @@ public abstract class ImsStateCallback {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsStateCallback.this.onAvailable();
+                    imsStateCallback.onAvailable();
                 }
             });
         }
@@ -83,8 +82,8 @@ public abstract class ImsStateCallback {
             }
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda1
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    ImsStateCallback.IImsStateCallbackStub.this.lambda$onUnavailable$3(imsStateCallback, i);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$onUnavailable$3(imsStateCallback, i);
                 }
             });
         }
@@ -94,7 +93,7 @@ public abstract class ImsStateCallback {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsStateCallback.this.onUnavailable(i);
+                    imsStateCallback.onUnavailable(i);
                 }
             });
         }
@@ -106,7 +105,7 @@ public abstract class ImsStateCallback {
             iImsStateCallbackStub.getExecutor().execute(new Runnable() { // from class: android.telephony.ims.ImsStateCallback$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsStateCallback.this.lambda$binderDied$0();
+                    this.f$0.lambda$binderDied$0();
                 }
             });
         }

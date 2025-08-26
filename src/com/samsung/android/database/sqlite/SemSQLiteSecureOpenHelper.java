@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteGlobal;
 import android.os.FileUtils;
+import android.system.ErrnoException;
 import android.util.Log;
 import java.io.File;
 import java.util.Objects;
@@ -191,78 +192,78 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
         if (this.mIsInitializing) {
             throw new IllegalStateException("getDatabase called recursively");
         }
-        SQLiteDatabase sQLiteDatabase2 = this.mDatabase;
+        SQLiteDatabase sQLiteDatabaseOpenSecureDatabase = this.mDatabase;
         try {
             this.mIsInitializing = true;
-            if (sQLiteDatabase2 != null) {
-                if (sQLiteDatabase2.isOpen()) {
-                    sQLiteDatabase2.close();
+            if (sQLiteDatabaseOpenSecureDatabase != null) {
+                if (sQLiteDatabaseOpenSecureDatabase.isOpen()) {
+                    sQLiteDatabaseOpenSecureDatabase.close();
                 }
-                sQLiteDatabase2 = null;
+                sQLiteDatabaseOpenSecureDatabase = null;
             }
             String str = this.mName;
             if (str == null) {
-                sQLiteDatabase2 = SQLiteDatabase.createSecureDatabase(null, bArr);
+                sQLiteDatabaseOpenSecureDatabase = SQLiteDatabase.createSecureDatabase(null, bArr);
             } else {
                 File databasePath = this.mContext.getDatabasePath(str);
                 try {
-                    sQLiteDatabase2 = SQLiteDatabase.openSecureDatabase(databasePath.getPath(), this.mOpenParamsBuilder.build(), bArr, this.mContext);
+                    sQLiteDatabaseOpenSecureDatabase = SQLiteDatabase.openSecureDatabase(databasePath.getPath(), this.mOpenParamsBuilder.build(), bArr, this.mContext);
                     setFilePermissionsForDb(databasePath.getPath());
                 } catch (SQLException e) {
                     throw e;
                 }
             }
-            onConfigure(sQLiteDatabase2);
-            int version = sQLiteDatabase2.getVersion();
+            onConfigure(sQLiteDatabaseOpenSecureDatabase);
+            int version = sQLiteDatabaseOpenSecureDatabase.getVersion();
             if (version != this.mNewVersion) {
-                if (sQLiteDatabase2.isReadOnly()) {
-                    throw new SQLiteException("Can't upgrade read-only database from version " + sQLiteDatabase2.getVersion() + " to " + this.mNewVersion + ": " + this.mName);
+                if (sQLiteDatabaseOpenSecureDatabase.isReadOnly()) {
+                    throw new SQLiteException("Can't upgrade read-only database from version " + sQLiteDatabaseOpenSecureDatabase.getVersion() + " to " + this.mNewVersion + ": " + this.mName);
                 }
                 if (version > 0 && version < this.mMinimumSupportedVersion) {
-                    File file = new File(sQLiteDatabase2.getPath());
-                    onBeforeDelete(sQLiteDatabase2);
-                    sQLiteDatabase2.close();
+                    File file = new File(sQLiteDatabaseOpenSecureDatabase.getPath());
+                    onBeforeDelete(sQLiteDatabaseOpenSecureDatabase);
+                    sQLiteDatabaseOpenSecureDatabase.close();
                     if (SQLiteDatabase.deleteDatabase(file)) {
                         this.mIsInitializing = false;
                         return getDatabaseLocked(z, bArr);
                     }
                     throw new IllegalStateException("Unable to delete obsolete database " + this.mName + " with version " + version);
                 }
-                sQLiteDatabase2.beginTransaction();
+                sQLiteDatabaseOpenSecureDatabase.beginTransaction();
                 try {
                     if (version == 0) {
-                        onCreate(sQLiteDatabase2);
+                        onCreate(sQLiteDatabaseOpenSecureDatabase);
                     } else if (version > this.mNewVersion) {
                         Log.i(TAG, "DB version downgrading from " + version + " to " + this.mNewVersion);
-                        onDowngrade(sQLiteDatabase2, version, this.mNewVersion);
+                        onDowngrade(sQLiteDatabaseOpenSecureDatabase, version, this.mNewVersion);
                     } else {
                         Log.i(TAG, "DB version upgrading from " + version + " to " + this.mNewVersion);
-                        onUpgrade(sQLiteDatabase2, version, this.mNewVersion);
+                        onUpgrade(sQLiteDatabaseOpenSecureDatabase, version, this.mNewVersion);
                     }
-                    sQLiteDatabase2.setVersion(this.mNewVersion);
-                    sQLiteDatabase2.setTransactionSuccessful();
-                    sQLiteDatabase2.endTransaction();
+                    sQLiteDatabaseOpenSecureDatabase.setVersion(this.mNewVersion);
+                    sQLiteDatabaseOpenSecureDatabase.setTransactionSuccessful();
+                    sQLiteDatabaseOpenSecureDatabase.endTransaction();
                 } catch (Throwable th) {
-                    sQLiteDatabase2.endTransaction();
+                    sQLiteDatabaseOpenSecureDatabase.endTransaction();
                     throw th;
                 }
             }
-            onOpen(sQLiteDatabase2);
-            if (sQLiteDatabase2.isReadOnly()) {
+            onOpen(sQLiteDatabaseOpenSecureDatabase);
+            if (sQLiteDatabaseOpenSecureDatabase.isReadOnly()) {
                 Log.w(TAG, "Opened " + this.mName + " in read-only mode");
             }
-            this.mDatabase = sQLiteDatabase2;
+            this.mDatabase = sQLiteDatabaseOpenSecureDatabase;
             this.mIsInitializing = false;
-            return sQLiteDatabase2;
+            return sQLiteDatabaseOpenSecureDatabase;
         } finally {
             this.mIsInitializing = false;
-            if (sQLiteDatabase2 != null && sQLiteDatabase2 != this.mDatabase) {
-                sQLiteDatabase2.close();
+            if (sQLiteDatabaseOpenSecureDatabase != null && sQLiteDatabaseOpenSecureDatabase != this.mDatabase) {
+                sQLiteDatabaseOpenSecureDatabase.close();
             }
         }
     }
 
-    private static void setFilePermissionsForDb(String str) {
+    private static void setFilePermissionsForDb(String str) throws ErrnoException {
         FileUtils.setPermissions(str, 432, -1, -1);
     }
 

@@ -108,11 +108,11 @@ public final class SmsCbMessage implements Parcelable {
         this.mDataCodingScheme = parcel.readInt();
         this.mBody = parcel.readString();
         this.mPriority = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (readInt == 67) {
+        int i = parcel.readInt();
+        if (i == 67) {
             this.mEtwsWarningInfo = null;
             this.mCmasWarningInfo = new SmsCbCmasInfo(parcel);
-        } else if (readInt == 69) {
+        } else if (i == 69) {
             this.mEtwsWarningInfo = new SmsCbEtwsInfo(parcel);
             this.mCmasWarningInfo = null;
         } else {
@@ -120,8 +120,8 @@ public final class SmsCbMessage implements Parcelable {
             this.mCmasWarningInfo = null;
         }
         this.mReceivedTimeMillis = parcel.readLong();
-        String readString = parcel.readString();
-        this.mGeometries = readString != null ? CbGeoUtils.parseGeometriesFromString(readString) : null;
+        String string = parcel.readString();
+        this.mGeometries = string != null ? CbGeoUtils.parseGeometriesFromString(string) : null;
         this.mMaximumWaitTimeSec = parcel.readInt();
         this.mSlotIndex = parcel.readInt();
         this.mSubId = parcel.readInt();

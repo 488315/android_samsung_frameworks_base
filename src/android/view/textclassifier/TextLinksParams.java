@@ -56,12 +56,12 @@ public final class TextLinksParams {
     public int apply(Spannable spannable, TextLinks textLinks) {
         Objects.requireNonNull(spannable);
         Objects.requireNonNull(textLinks);
-        String spannable2 = spannable.toString();
-        if (Linkify.containsUnsupportedCharacters(spannable2)) {
+        String string = spannable.toString();
+        if (Linkify.containsUnsupportedCharacters(string)) {
             EventLog.writeEvent(1397638484, "116321860", -1, "");
             return 4;
         }
-        if (!spannable2.startsWith(textLinks.getText().toString())) {
+        if (!string.startsWith(textLinks.getText().toString())) {
             return 3;
         }
         if (textLinks.getLinks().isEmpty()) {
@@ -69,18 +69,18 @@ public final class TextLinksParams {
         }
         int i = 0;
         for (TextLinks.TextLink textLink : textLinks.getLinks()) {
-            TextLinks.TextLinkSpan apply = this.mSpanFactory.apply(textLink);
-            if (apply != null) {
+            TextLinks.TextLinkSpan textLinkSpanApply = this.mSpanFactory.apply(textLink);
+            if (textLinkSpanApply != null) {
                 ClickableSpan[] clickableSpanArr = (ClickableSpan[]) spannable.getSpans(textLink.getStart(), textLink.getEnd(), ClickableSpan.class);
                 if (clickableSpanArr.length > 0) {
                     if (this.mApplyStrategy == 1) {
                         for (ClickableSpan clickableSpan : clickableSpanArr) {
                             spannable.removeSpan(clickableSpan);
                         }
-                        spannable.setSpan(apply, textLink.getStart(), textLink.getEnd(), 33);
+                        spannable.setSpan(textLinkSpanApply, textLink.getStart(), textLink.getEnd(), 33);
                     }
                 } else {
-                    spannable.setSpan(apply, textLink.getStart(), textLink.getEnd(), 33);
+                    spannable.setSpan(textLinkSpanApply, textLink.getStart(), textLink.getEnd(), 33);
                 }
                 i++;
             }

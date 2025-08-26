@@ -45,9 +45,9 @@ public interface ITranslationCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITranslationCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITranslationCallback)) {
-                return (ITranslationCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITranslationCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITranslationCallback)) {
+                return (ITranslationCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface ITranslationCallback extends IInterface {
 
             @Override // android.service.translation.ITranslationCallback
             public void onTranslationResponse(TranslationResponse translationResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(translationResponse, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(translationResponse, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

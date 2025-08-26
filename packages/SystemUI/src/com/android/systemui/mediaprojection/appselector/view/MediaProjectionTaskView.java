@@ -21,7 +21,6 @@ import com.android.systemui.shared.recents.utilities.Utilities;
 import com.android.systemui.utils.windowmanager.WindowManagerUtils;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaProjectionTaskView extends View {
     public final Paint backgroundPaint;
@@ -42,9 +41,9 @@ public final class MediaProjectionTaskView extends View {
         Integer num;
         this.task = recentTask;
         this.thumbnailData = thumbnailData;
-        int intValue = ((recentTask == null || (num = recentTask.colorBackground) == null) ? -16777216 : num.intValue()) | (-16777216);
-        this.paint.setColor(intValue);
-        this.backgroundPaint.setColor(intValue);
+        int iIntValue = ((recentTask == null || (num = recentTask.colorBackground) == null) ? -16777216 : num.intValue()) | (-16777216);
+        this.paint.setColor(iIntValue);
+        this.backgroundPaint.setColor(iIntValue);
         ThumbnailData thumbnailData2 = this.thumbnailData;
         Bitmap bitmap = thumbnailData2 != null ? thumbnailData2.thumbnail : null;
         if (bitmap != null) {
@@ -87,13 +86,13 @@ public final class MediaProjectionTaskView extends View {
         float f;
         float f2;
         boolean z;
-        float height;
-        float f3;
+        float fHeight;
+        float fHeight2;
         boolean z2;
         boolean z3;
+        float f3;
         float f4;
         float f5;
-        float f6;
         this.previewPositionHelper.getClass();
         BitmapShader bitmapShader = this.bitmapShader;
         if (bitmapShader == null || (thumbnailData = this.thumbnailData) == null || (bitmap = thumbnailData.thumbnail) == null || (display = getContext().getDisplay()) == null) {
@@ -103,7 +102,7 @@ public final class MediaProjectionTaskView extends View {
         this.previewRect.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
         int rotation = display.getRotation();
         boolean z4 = getLayoutDirection() == 1;
-        boolean isLargeScreen = Utilities.isLargeScreen(getContext());
+        boolean zIsLargeScreen = Utilities.isLargeScreen(getContext());
         PreviewPositionHelper previewPositionHelper = this.previewPositionHelper;
         Rect rect = this.previewRect;
         int measuredWidth = getMeasuredWidth();
@@ -114,22 +113,22 @@ public final class MediaProjectionTaskView extends View {
             i += 4;
         }
         RectF rectF = new RectF();
-        boolean z5 = thumbnailData.windowingMode == 1 && !isLargeScreen;
+        boolean z5 = thumbnailData.windowingMode == 1 && !zIsLargeScreen;
         boolean z6 = (i == 1 || i == 3) && z5;
-        float f7 = thumbnailData.scale;
-        if (measuredWidth == 0 || measuredHeight == 0 || f7 == 0.0f) {
+        float f6 = thumbnailData.scale;
+        if (measuredWidth == 0 || measuredHeight == 0 || f6 == 0.0f) {
             f = 0.0f;
             f2 = 0.0f;
             z = false;
         } else {
             boolean z7 = i > 0 && z5;
-            float width = rect.width() / f7;
-            float height2 = rect.height() / f7;
-            float f8 = measuredWidth;
-            float f9 = measuredHeight;
-            float f10 = f8 / f9;
-            float f11 = z7 ? height2 / width : width / height2;
-            boolean z8 = Math.abs(f10 - f11) / Math.abs((f10 + f11) / 2.0f) > 0.1f;
+            float fWidth = rect.width() / f6;
+            float fHeight3 = rect.height() / f6;
+            float f7 = measuredWidth;
+            float f8 = measuredHeight;
+            float f9 = f7 / f8;
+            float f10 = z7 ? fHeight3 / fWidth : fWidth / fHeight3;
+            boolean z8 = Math.abs(f9 - f10) / Math.abs((f9 + f10) / 2.0f) > 0.1f;
             if (z7 && z8) {
                 z7 = false;
                 z2 = false;
@@ -138,93 +137,93 @@ public final class MediaProjectionTaskView extends View {
             }
             if (z8) {
                 Rect rect2 = thumbnailData.letterboxInsets;
-                float f12 = rect2.left;
-                rectF.left = f12;
-                f4 = 0.0f;
-                float f13 = rect2.right;
-                rectF.right = f13;
+                float f11 = rect2.left;
+                rectF.left = f11;
+                f3 = 0.0f;
+                float f12 = rect2.right;
+                rectF.right = f12;
                 z3 = z4;
-                float f14 = rect2.top;
-                rectF.top = f14;
-                float f15 = rect2.bottom;
-                rectF.bottom = f15;
-                f6 = width - (f12 + f13);
-                f5 = height2 - (f14 + f15);
+                float f13 = rect2.top;
+                rectF.top = f13;
+                float f14 = rect2.bottom;
+                rectF.bottom = f14;
+                f5 = fWidth - (f11 + f12);
+                f4 = fHeight3 - (f13 + f14);
             } else {
                 z3 = z4;
-                f4 = 0.0f;
-                f5 = height2;
-                f6 = width;
+                f3 = 0.0f;
+                f4 = fHeight3;
+                f5 = fWidth;
             }
             if (z2) {
-                f9 = f8;
-                f8 = f9;
+                f8 = f7;
+                f7 = f8;
             }
-            float f16 = f8 / f9;
-            float f17 = f6 / f16;
-            if (f17 > f5) {
-                f17 = f5 < f9 ? Math.min(f9, height2) : f5;
-                float f18 = f17 * f16;
-                if (f18 > width) {
-                    f17 = width / f16;
+            float f15 = f7 / f8;
+            float fMin = f5 / f15;
+            if (fMin > f4) {
+                fMin = f4 < f8 ? Math.min(f8, fHeight3) : f4;
+                float f16 = fMin * f15;
+                if (f16 > fWidth) {
+                    fMin = fWidth / f15;
                 } else {
-                    width = f18;
+                    fWidth = f16;
                 }
             } else {
-                width = f6;
+                fWidth = f5;
             }
             if (z3) {
-                float f19 = (f6 - width) + rectF.left;
-                rectF.left = f19;
-                float f20 = rectF.right;
-                if (f20 < f4) {
-                    rectF.left = f19 + f20;
-                    f = f4;
+                float f17 = (f5 - fWidth) + rectF.left;
+                rectF.left = f17;
+                float f18 = rectF.right;
+                if (f18 < f3) {
+                    rectF.left = f17 + f18;
+                    f = f3;
                     rectF.right = f;
                 } else {
-                    f = f4;
+                    f = f3;
                 }
             } else {
-                f = f4;
-                float f21 = (f6 - width) + rectF.right;
-                rectF.right = f21;
-                float f22 = rectF.left;
-                if (f22 < f) {
-                    rectF.right = f21 + f22;
+                f = f3;
+                float f19 = (f5 - fWidth) + rectF.right;
+                rectF.right = f19;
+                float f20 = rectF.left;
+                if (f20 < f) {
+                    rectF.right = f19 + f20;
                     rectF.left = f;
                 }
             }
-            float f23 = (f5 - f17) + rectF.bottom;
-            rectF.bottom = f23;
-            float f24 = rectF.top;
-            if (f24 < f) {
-                rectF.bottom = f23 + f24;
+            float f21 = (f4 - fMin) + rectF.bottom;
+            rectF.bottom = f21;
+            float f22 = rectF.top;
+            if (f22 < f) {
+                rectF.bottom = f21 + f22;
                 rectF.top = f;
-            } else if (f23 < f) {
-                rectF.top = f24 + f23;
+            } else if (f21 < f) {
+                rectF.top = f22 + f21;
                 rectF.bottom = f;
             }
-            f2 = f8 / (width * f7);
+            f2 = f7 / (fWidth * f6);
             z = z7;
         }
         if (z) {
             previewPositionHelper.mMatrix.setRotate(i * 90);
             if (i == 1) {
-                height = rect.height();
-                f3 = f;
+                fHeight = rect.height();
+                fHeight2 = f;
             } else if (i == 2) {
-                height = rect.width();
-                f3 = rect.height();
+                fHeight = rect.width();
+                fHeight2 = rect.height();
             } else if (i != 3) {
-                f3 = f;
-                height = f3;
+                fHeight2 = f;
+                fHeight = fHeight2;
             } else {
-                f3 = rect.width();
-                height = f;
+                fHeight2 = rect.width();
+                fHeight = f;
             }
-            previewPositionHelper.mMatrix.postTranslate(height, f3);
+            previewPositionHelper.mMatrix.postTranslate(fHeight, fHeight2);
         } else {
-            previewPositionHelper.mMatrix.setTranslate((-rectF.left) * f7, (-rectF.top) * f7);
+            previewPositionHelper.mMatrix.setTranslate((-rectF.left) * f6, (-rectF.top) * f6);
         }
         previewPositionHelper.mMatrix.postScale(f2, f2);
         bitmapShader.setLocalMatrix(this.previewPositionHelper.mMatrix);
@@ -241,9 +240,9 @@ public final class MediaProjectionTaskView extends View {
 
     public MediaProjectionTaskView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.colorBackgroundFloating});
-        int color = obtainStyledAttributes.getColor(0, -16777216);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.colorBackgroundFloating});
+        int color = typedArrayObtainStyledAttributes.getColor(0, -16777216);
+        typedArrayObtainStyledAttributes.recycle();
         this.windowManager = WindowManagerUtils.getWindowManager(context);
         this.paint = new Paint(1);
         Paint paint = new Paint(1);

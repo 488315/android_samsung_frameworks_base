@@ -24,7 +24,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BiometricStatusRepositoryImpl$authenticationState$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -59,44 +58,44 @@ final class BiometricStatusRepositoryImpl$authenticationState$1 extends SuspendL
             final Function1 function1 = new Function1() { // from class: com.android.systemui.biometrics.data.repository.BiometricStatusRepositoryImpl$authenticationState$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     AuthenticationState authenticationState = (AuthenticationState) obj2;
                     Log.d("BiometricStatusRepositoryImpl", "authenticationState updated: " + authenticationState);
                     ChannelExt.INSTANCE.getClass();
-                    ChannelExt.trySendWithFailureLogging(ProducerScope.this, authenticationState, "BiometricStatusRepositoryImpl", "Error sending AuthenticationState state");
+                    ChannelExt.trySendWithFailureLogging(producerScope, authenticationState, "BiometricStatusRepositoryImpl", "Error sending AuthenticationState state");
                     return Unit.INSTANCE;
                 }
             };
             final AuthenticationStateListener authenticationStateListener = new AuthenticationStateListener.Stub() { // from class: com.android.systemui.biometrics.data.repository.BiometricStatusRepositoryImpl$authenticationState$1$authenticationStateListener$1
                 public final void onAuthenticationAcquired(AuthenticationAcquiredInfo authenticationAcquiredInfo) {
-                    Function1.this.mo779invoke(new AuthenticationState.Acquired(authenticationAcquiredInfo.getBiometricSourceType(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationAcquiredInfo.getRequestReason()), authenticationAcquiredInfo.getAcquiredInfo()));
+                    function1.mo781invoke(new AuthenticationState.Acquired(authenticationAcquiredInfo.getBiometricSourceType(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationAcquiredInfo.getRequestReason()), authenticationAcquiredInfo.getAcquiredInfo()));
                 }
 
                 public final void onAuthenticationError(AuthenticationErrorInfo authenticationErrorInfo) {
-                    Function1.this.mo779invoke(new AuthenticationState.Error(authenticationErrorInfo.getBiometricSourceType(), authenticationErrorInfo.getErrString(), authenticationErrorInfo.getErrCode(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationErrorInfo.getRequestReason())));
+                    function1.mo781invoke(new AuthenticationState.Error(authenticationErrorInfo.getBiometricSourceType(), authenticationErrorInfo.getErrString(), authenticationErrorInfo.getErrCode(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationErrorInfo.getRequestReason())));
                 }
 
                 public final void onAuthenticationFailed(AuthenticationFailedInfo authenticationFailedInfo) {
-                    Function1.this.mo779invoke(new AuthenticationState.Failed(authenticationFailedInfo.getBiometricSourceType(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationFailedInfo.getRequestReason()), authenticationFailedInfo.getUserId()));
+                    function1.mo781invoke(new AuthenticationState.Failed(authenticationFailedInfo.getBiometricSourceType(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationFailedInfo.getRequestReason()), authenticationFailedInfo.getUserId()));
                 }
 
                 public final void onAuthenticationHelp(AuthenticationHelpInfo authenticationHelpInfo) {
-                    Function1.this.mo779invoke(new AuthenticationState.Help(authenticationHelpInfo.getBiometricSourceType(), authenticationHelpInfo.getHelpString(), authenticationHelpInfo.getHelpCode(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationHelpInfo.getRequestReason())));
+                    function1.mo781invoke(new AuthenticationState.Help(authenticationHelpInfo.getBiometricSourceType(), authenticationHelpInfo.getHelpString(), authenticationHelpInfo.getHelpCode(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationHelpInfo.getRequestReason())));
                 }
 
                 public final void onAuthenticationStarted(AuthenticationStartedInfo authenticationStartedInfo) {
-                    Function1.this.mo779invoke(new AuthenticationState.Started(authenticationStartedInfo.getBiometricSourceType(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationStartedInfo.getRequestReason())));
+                    function1.mo781invoke(new AuthenticationState.Started(authenticationStartedInfo.getBiometricSourceType(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationStartedInfo.getRequestReason())));
                 }
 
                 public final void onAuthenticationStopped(AuthenticationStoppedInfo authenticationStoppedInfo) {
-                    Function1.this.mo779invoke(new AuthenticationState.Stopped(authenticationStoppedInfo.getBiometricSourceType(), AuthenticationReason.NotRunning.INSTANCE));
+                    function1.mo781invoke(new AuthenticationState.Stopped(authenticationStoppedInfo.getBiometricSourceType(), AuthenticationReason.NotRunning.INSTANCE));
                 }
 
                 public final void onAuthenticationSucceeded(AuthenticationSucceededInfo authenticationSucceededInfo) {
-                    Function1.this.mo779invoke(new AuthenticationState.Succeeded(authenticationSucceededInfo.getBiometricSourceType(), authenticationSucceededInfo.isIsStrongBiometric(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationSucceededInfo.getRequestReason()), authenticationSucceededInfo.getUserId()));
+                    function1.mo781invoke(new AuthenticationState.Succeeded(authenticationSucceededInfo.getBiometricSourceType(), authenticationSucceededInfo.isIsStrongBiometric(), BiometricStatusRepositoryKt.access$toAuthenticationReason(authenticationSucceededInfo.getRequestReason()), authenticationSucceededInfo.getUserId()));
                 }
             };
-            function1.mo779invoke(new AuthenticationState.Idle(null, AuthenticationReason.NotRunning.INSTANCE, 1, null));
+            function1.mo781invoke(new AuthenticationState.Idle(null, AuthenticationReason.NotRunning.INSTANCE, 1, null));
             BiometricManager biometricManager = this.this$0.biometricManager;
             if (biometricManager != null) {
                 biometricManager.registerAuthenticationStateListener(authenticationStateListener);
@@ -105,7 +104,7 @@ final class BiometricStatusRepositoryImpl$authenticationState$1 extends SuspendL
             Function0 function0 = new Function0() { // from class: com.android.systemui.biometrics.data.repository.BiometricStatusRepositoryImpl$authenticationState$1$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    BiometricManager biometricManager2 = BiometricStatusRepositoryImpl.this.biometricManager;
+                    BiometricManager biometricManager2 = biometricStatusRepositoryImpl.biometricManager;
                     if (biometricManager2 != null) {
                         biometricManager2.unregisterAuthenticationStateListener(authenticationStateListener);
                     }

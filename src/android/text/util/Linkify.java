@@ -118,7 +118,7 @@ public class Linkify {
         return addLinks(spannable, i, null, function);
     }
 
-    private static boolean addLinks(Spannable spannable, int i, Context context, Function<String, URLSpan> function) {
+    private static boolean addLinks(Spannable spannable, int i, Context context, Function<String, URLSpan> function) throws UnsupportedEncodingException {
         boolean z;
         String str;
         Spannable spannable2;
@@ -157,9 +157,9 @@ public class Linkify {
                     linkSpec.start += lowerCase.indexOf("wap.");
                     linkSpec.url = linkSpec.url.substring(0, linkSpec.url.indexOf("://") + 3) + spannable.toString().substring(linkSpec.start, linkSpec.end);
                 }
-                int lastIndexOf = lowerCase.lastIndexOf(MediaMetrics.SEPARATOR);
-                if (lastIndexOf >= 0 && lastIndexOf < lowerCase.length() - 1 && !lowerCase.startsWith("http://api.map.baidu.com/marker?location=")) {
-                    char[] charArray = lowerCase.substring(lastIndexOf + 1).toCharArray();
+                int iLastIndexOf = lowerCase.lastIndexOf(MediaMetrics.SEPARATOR);
+                if (iLastIndexOf >= 0 && iLastIndexOf < lowerCase.length() - 1 && !lowerCase.startsWith("http://api.map.baidu.com/marker?location=")) {
+                    char[] charArray = lowerCase.substring(iLastIndexOf + 1).toCharArray();
                     int i3 = 0;
                     while (i3 < charArray.length && charArray[i3] < 128) {
                         i3++;
@@ -201,9 +201,9 @@ public class Linkify {
                         linkSpec2.start += lowerCase2.indexOf(str);
                         linkSpec2.url = linkSpec2.url.substring(0, linkSpec2.url.indexOf("://") + 3) + spannable.toString().substring(linkSpec2.start, linkSpec2.end);
                     }
-                    int lastIndexOf2 = lowerCase2.lastIndexOf(MediaMetrics.SEPARATOR);
-                    if (lastIndexOf2 >= 0 && lastIndexOf2 < lowerCase2.length() - 1) {
-                        char[] charArray2 = lowerCase2.substring(lastIndexOf2 + 1).toCharArray();
+                    int iLastIndexOf2 = lowerCase2.lastIndexOf(MediaMetrics.SEPARATOR);
+                    if (iLastIndexOf2 >= 0 && iLastIndexOf2 < lowerCase2.length() - 1) {
+                        char[] charArray2 = lowerCase2.substring(iLastIndexOf2 + 1).toCharArray();
                         int i6 = 0;
                         while (i6 < charArray2.length && charArray2[i6] < 128) {
                             i6++;
@@ -271,12 +271,12 @@ public class Linkify {
             addLinkMovementMethod(textView);
             return true;
         }
-        SpannableString valueOf = SpannableString.valueOf(text);
-        if (!addLinks(valueOf, i, context, null)) {
+        SpannableString spannableStringValueOf = SpannableString.valueOf(text);
+        if (!addLinks(spannableStringValueOf, i, context, null)) {
             return false;
         }
         addLinkMovementMethod(textView);
-        textView.lambda$setTextAsync$0(valueOf);
+        textView.lambda$setTextAsync$0(spannableStringValueOf);
         return true;
     }
 
@@ -296,9 +296,9 @@ public class Linkify {
     }
 
     public static final void addLinks(TextView textView, Pattern pattern, String str, String[] strArr, MatchFilter matchFilter, TransformFilter transformFilter) {
-        SpannableString valueOf = SpannableString.valueOf(textView.getText());
-        if (addLinks(valueOf, pattern, str, strArr, matchFilter, transformFilter)) {
-            textView.lambda$setTextAsync$0(valueOf);
+        SpannableString spannableStringValueOf = SpannableString.valueOf(textView.getText());
+        if (addLinks(spannableStringValueOf, pattern, str, strArr, matchFilter, transformFilter)) {
+            textView.lambda$setTextAsync$0(spannableStringValueOf);
             addLinkMovementMethod(textView);
         }
     }
@@ -343,10 +343,10 @@ public class Linkify {
         Matcher matcher = pattern.matcher(spannable);
         boolean z = false;
         while (matcher.find()) {
-            int start = matcher.start();
-            int end = matcher.end();
-            if (matchFilter != null ? matchFilter.acceptMatch(spannable, start, end) : true) {
-                applyLink(makeUrl(matcher.group(0), strArr2, matcher, transformFilter), start, end, spannable, function);
+            int iStart = matcher.start();
+            int iEnd = matcher.end();
+            if (matchFilter != null ? matchFilter.acceptMatch(spannable, iStart, iEnd) : true) {
+                applyLink(makeUrl(matcher.group(0), strArr2, matcher, transformFilter), iStart, iEnd, spannable, function);
                 z = true;
             }
         }
@@ -392,13 +392,13 @@ public class Linkify {
     private static final void gatherLinks(ArrayList<LinkSpec> arrayList, Spannable spannable, Pattern pattern, String[] strArr, MatchFilter matchFilter, TransformFilter transformFilter) {
         Matcher matcher = pattern.matcher(spannable);
         while (matcher.find()) {
-            int start = matcher.start();
-            int end = matcher.end();
-            if (matchFilter == null || matchFilter.acceptMatch(spannable, start, end)) {
+            int iStart = matcher.start();
+            int iEnd = matcher.end();
+            if (matchFilter == null || matchFilter.acceptMatch(spannable, iStart, iEnd)) {
                 LinkSpec linkSpec = new LinkSpec();
                 linkSpec.url = makeUrl(matcher.group(0), strArr, matcher, transformFilter);
-                linkSpec.start = start;
-                linkSpec.end = end;
+                linkSpec.start = iStart;
+                linkSpec.end = iEnd;
                 arrayList.add(linkSpec);
             }
         }
@@ -422,10 +422,10 @@ public class Linkify {
             linkSpec.url = WebView.SCHEME_TEL + PhoneNumberUtils.normalizeNumber(phoneNumberMatch.rawString());
             linkSpec.start = phoneNumberMatch.start();
             linkSpec.end = phoneNumberMatch.end();
-            String rawString = phoneNumberMatch.rawString();
-            if ((rawString.charAt(0) == '[' && !rawString.contains(NavigationBarInflaterView.SIZE_MOD_END)) || (rawString.charAt(0) == '(' && !rawString.contains(NavigationBarInflaterView.KEY_CODE_END))) {
+            String strRawString = phoneNumberMatch.rawString();
+            if ((strRawString.charAt(0) == '[' && !strRawString.contains(NavigationBarInflaterView.SIZE_MOD_END)) || (strRawString.charAt(0) == '(' && !strRawString.contains(NavigationBarInflaterView.KEY_CODE_END))) {
                 linkSpec.start++;
-            } else if (rawString.charAt(0) == '+' && rawString.charAt(1) == '+') {
+            } else if (strRawString.charAt(0) == '+' && strRawString.charAt(1) == '+') {
                 linkSpec.start++;
             }
             if (!"KR".equals(str) || needToAddLink(spannable.toString(), phoneNumberMatch.rawString(), linkSpec.start, linkSpec.end)) {
@@ -434,22 +434,22 @@ public class Linkify {
         }
     }
 
-    private static final void gatherMapLinks(ArrayList<LinkSpec> arrayList, Spannable spannable) {
-        int indexOf;
-        String spannable2 = spannable.toString();
+    private static final void gatherMapLinks(ArrayList<LinkSpec> arrayList, Spannable spannable) throws UnsupportedEncodingException {
+        int iIndexOf;
+        String string = spannable.toString();
         int i = 0;
         while (true) {
             try {
-                String findAddress = WebView.findAddress(spannable2);
-                if (findAddress != null && (indexOf = spannable2.indexOf(findAddress)) >= 0) {
+                String strFindAddress = WebView.findAddress(string);
+                if (strFindAddress != null && (iIndexOf = string.indexOf(strFindAddress)) >= 0) {
                     LinkSpec linkSpec = new LinkSpec();
-                    int length = findAddress.length() + indexOf;
-                    linkSpec.start = indexOf + i;
+                    int length = strFindAddress.length() + iIndexOf;
+                    linkSpec.start = iIndexOf + i;
                     i += length;
                     linkSpec.end = i;
-                    spannable2 = spannable2.substring(length);
+                    string = string.substring(length);
                     try {
-                        linkSpec.url = WebView.SCHEME_GEO + URLEncoder.encode(findAddress, "UTF-8");
+                        linkSpec.url = WebView.SCHEME_GEO + URLEncoder.encode(strFindAddress, "UTF-8");
                         arrayList.add(linkSpec);
                     } catch (UnsupportedEncodingException unused) {
                     }
@@ -501,23 +501,23 @@ public class Linkify {
     }
 
     private static boolean needToAddLink(String str, String str2, int i, int i2) {
-        char c;
-        char c2;
+        char cCharAt;
+        char cCharAt2;
         if (!str2.contains("/") && !str2.contains("~")) {
             int length = str.length();
             if (i2 < length) {
-                c2 = str.charAt(i2);
+                cCharAt2 = str.charAt(i2);
                 int i3 = i2 + 1;
-                c = i3 < length ? str.charAt(i3) : (char) 0;
+                cCharAt = i3 < length ? str.charAt(i3) : (char) 0;
             } else {
-                c = 0;
-                c2 = 0;
+                cCharAt = 0;
+                cCharAt2 = 0;
             }
-            if (c2 != 50896 && c2 != 8361 && (c2 != ' ' || (c != 50896 && c != 8361))) {
+            if (cCharAt2 != 50896 && cCharAt2 != 8361 && (cCharAt2 != ' ' || (cCharAt != 50896 && cCharAt != 8361))) {
                 if (PhoneNumberUtils.normalizeNumber(str2).length() != 3) {
                     return true;
                 }
-                if ((i >= 1 ? str.charAt(i - 1) : (char) 0) != ',' && c2 != ',' && str2.charAt(0) == '1' && str2.charAt(1) == '1' && (str2.charAt(2) == '2' || str2.charAt(2) == '9')) {
+                if ((i >= 1 ? str.charAt(i - 1) : (char) 0) != ',' && cCharAt2 != ',' && str2.charAt(0) == '1' && str2.charAt(1) == '1' && (str2.charAt(2) == '2' || str2.charAt(2) == '9')) {
                     return true;
                 }
             }
@@ -527,15 +527,15 @@ public class Linkify {
 
     private static void checkBracketsPairs(String str, LinkSpec linkSpec) {
         int i = linkSpec.end - linkSpec.start;
-        String substring = str.substring(linkSpec.start, linkSpec.end);
-        if (substring.charAt(i - 1) != ')') {
+        String strSubstring = str.substring(linkSpec.start, linkSpec.end);
+        if (strSubstring.charAt(i - 1) != ')') {
             return;
         }
         int i2 = 0;
         for (int i3 = 0; i3 < i; i3++) {
-            if (substring.charAt(i3) == ')') {
+            if (strSubstring.charAt(i3) == ')') {
                 i2++;
-            } else if (substring.charAt(i3) == '(') {
+            } else if (strSubstring.charAt(i3) == '(') {
                 i2--;
             }
         }

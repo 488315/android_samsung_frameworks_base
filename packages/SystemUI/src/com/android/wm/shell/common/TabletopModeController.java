@@ -3,6 +3,7 @@ package com.android.wm.shell.common;
 import android.R;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.SystemProperties;
 import android.util.ArraySet;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TabletopModeController implements DevicePostureController.OnDevicePostureChangedListener, DisplayController.OnDisplaysChangedListener {
     public static final boolean PREFER_TOP_HALF_IN_TABLETOP = SystemProperties.getBoolean("persist.wm.debug.prefer_top_half_in_tabletop", true);
@@ -39,7 +39,7 @@ public class TabletopModeController implements DevicePostureController.OnDeviceP
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 int i2 = i;
                 TabletopModeController tabletopModeController = this.f$0;
                 switch (i2) {
@@ -73,7 +73,7 @@ public class TabletopModeController implements DevicePostureController.OnDeviceP
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 int i22 = i2;
                 TabletopModeController tabletopModeController = this.f$0;
                 switch (i22) {
@@ -104,14 +104,14 @@ public class TabletopModeController implements DevicePostureController.OnDeviceP
     }
 
     public final void onDevicePostureOrDisplayRotationChanged(int i, int i2) {
-        boolean isInTabletopMode = isInTabletopMode();
+        boolean zIsInTabletopMode = isInTabletopMode();
         this.mDevicePosture = i;
         this.mDisplayRotation = i2;
-        boolean isInTabletopMode2 = isInTabletopMode();
+        boolean zIsInTabletopMode2 = isInTabletopMode();
         Runnable runnable = this.mOnEnterTabletopModeCallback;
         HandlerExecutor handlerExecutor = (HandlerExecutor) this.mMainExecutor;
         handlerExecutor.removeCallbacks(runnable);
-        if (!isInTabletopMode && isInTabletopMode2) {
+        if (!zIsInTabletopMode && zIsInTabletopMode2) {
             handlerExecutor.executeDelayed(this.mOnEnterTabletopModeCallback, 1000L);
             return;
         }
@@ -131,7 +131,7 @@ public class TabletopModeController implements DevicePostureController.OnDeviceP
         onDevicePostureOrDisplayRotationChanged(this.mDevicePosture, displayRotation);
     }
 
-    public void onInit() {
+    public void onInit() throws Resources.NotFoundException {
         DevicePostureController devicePostureController = this.mDevicePostureController;
         if (!((ArrayList) devicePostureController.mListeners).contains(this)) {
             ((ArrayList) devicePostureController.mListeners).add(this);
@@ -141,7 +141,7 @@ public class TabletopModeController implements DevicePostureController.OnDeviceP
             }
         }
         this.mDisplayController.addDisplayWindowListener(this, -1);
-        int[] intArray = this.mContext.getResources().getIntArray(R.array.config_tvExternalInputLoggingDeviceOnScreenDisplayNames);
+        int[] intArray = this.mContext.getResources().getIntArray(R.array.config_twoDigitNumberPattern);
         if (intArray == null || intArray.length == 0) {
             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_FOLDABLE_enabled[4]) {
                 ProtoLogImpl_1771455215.e(ShellProtoLogGroup.WM_SHELL_FOLDABLE, 1209522085953878031L, 0, null);

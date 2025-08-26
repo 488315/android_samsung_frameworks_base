@@ -39,6 +39,12 @@
     </string-array>
     <array name="config_keySystemUuidMapping" />
     <array name="config_optionalIpSecAlgorithms" />
+    <string-array name="allow_system_modal_policy_transparent_packages">
+        <item>com.google.android.cellbroadcastreceiver</item>
+        <item>com.google.android.packageinstaller</item>
+        <item>com.samsung.android.mtp</item>
+        <item>com.samsung.android.app.dressroom</item>
+    </string-array>
     <string-array name="app_lock_calling_bypass">
         <item>com.tencent.mm.plugin.voip.ui.VideoActivity</item>
         <item>com.tencent.av.ui.AVActivity</item>
@@ -2598,6 +2604,8 @@
         <item>com.sec.android.gallery3d</item>
         <item>com.sec.android.app.fm</item>
         <item>com.samsung.android.dialer</item>
+        <item>com.samsung.android.bixby.agent</item>
+        <item>com.google.android.apps.bard</item>
     </string-array>
     <array name="config_ringtoneEffectUris" />
     <array name="config_roundedCornerBottomRadiusAdjustmentArray">
@@ -2754,7 +2762,6 @@
         <item>71688</item>
         <item>255707</item>
         <item>310830</item>
-        <item>310210</item>
     </string-array>
     <integer-array name="config_screenBrighteningThresholds">
         <item>100</item>

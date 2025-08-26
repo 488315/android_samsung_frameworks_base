@@ -103,9 +103,9 @@ public interface IPredictionManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPredictionManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPredictionManager)) {
-                return (IPredictionManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPredictionManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPredictionManager)) {
+                return (IPredictionManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -153,9 +153,9 @@ public interface IPredictionManager extends IInterface {
                 case 1:
                     AppPredictionContext appPredictionContext = (AppPredictionContext) parcel.readTypedObject(AppPredictionContext.CREATOR);
                     AppPredictionSessionId appPredictionSessionId = (AppPredictionSessionId) parcel.readTypedObject(AppPredictionSessionId.CREATOR);
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    createPredictionSession(appPredictionContext, appPredictionSessionId, readStrongBinder);
+                    createPredictionSession(appPredictionContext, appPredictionSessionId, strongBinder);
                     parcel2.writeNoException();
                     return true;
                 case 2:
@@ -167,32 +167,32 @@ public interface IPredictionManager extends IInterface {
                     return true;
                 case 3:
                     AppPredictionSessionId appPredictionSessionId3 = (AppPredictionSessionId) parcel.readTypedObject(AppPredictionSessionId.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     ParceledListSlice parceledListSlice = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyLaunchLocationShown(appPredictionSessionId3, readString, parceledListSlice);
+                    notifyLaunchLocationShown(appPredictionSessionId3, string, parceledListSlice);
                     parcel2.writeNoException();
                     return true;
                 case 4:
                     AppPredictionSessionId appPredictionSessionId4 = (AppPredictionSessionId) parcel.readTypedObject(AppPredictionSessionId.CREATOR);
                     ParceledListSlice parceledListSlice2 = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
-                    IPredictionCallback asInterface = IPredictionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IPredictionCallback iPredictionCallbackAsInterface = IPredictionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    sortAppTargets(appPredictionSessionId4, parceledListSlice2, asInterface);
+                    sortAppTargets(appPredictionSessionId4, parceledListSlice2, iPredictionCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 5:
                     AppPredictionSessionId appPredictionSessionId5 = (AppPredictionSessionId) parcel.readTypedObject(AppPredictionSessionId.CREATOR);
-                    IPredictionCallback asInterface2 = IPredictionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IPredictionCallback iPredictionCallbackAsInterface2 = IPredictionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerPredictionUpdates(appPredictionSessionId5, asInterface2);
+                    registerPredictionUpdates(appPredictionSessionId5, iPredictionCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
                     AppPredictionSessionId appPredictionSessionId6 = (AppPredictionSessionId) parcel.readTypedObject(AppPredictionSessionId.CREATOR);
-                    IPredictionCallback asInterface3 = IPredictionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IPredictionCallback iPredictionCallbackAsInterface3 = IPredictionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterPredictionUpdates(appPredictionSessionId6, asInterface3);
+                    unregisterPredictionUpdates(appPredictionSessionId6, iPredictionCallbackAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 7:
@@ -209,9 +209,9 @@ public interface IPredictionManager extends IInterface {
                     return true;
                 case 9:
                     AppPredictionSessionId appPredictionSessionId9 = (AppPredictionSessionId) parcel.readTypedObject(AppPredictionSessionId.CREATOR);
-                    IRemoteCallback asInterface4 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteCallback iRemoteCallbackAsInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestServiceFeatures(appPredictionSessionId9, asInterface4);
+                    requestServiceFeatures(appPredictionSessionId9, iRemoteCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -237,146 +237,146 @@ public interface IPredictionManager extends IInterface {
 
             @Override // android.app.prediction.IPredictionManager
             public void createPredictionSession(AppPredictionContext appPredictionContext, AppPredictionSessionId appPredictionSessionId, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(appPredictionContext, 0);
-                    obtain.writeTypedObject(appPredictionSessionId, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appPredictionContext, 0);
+                    parcelObtain.writeTypedObject(appPredictionSessionId, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.prediction.IPredictionManager
             public void notifyAppTargetEvent(AppPredictionSessionId appPredictionSessionId, AppTargetEvent appTargetEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(appPredictionSessionId, 0);
-                    obtain.writeTypedObject(appTargetEvent, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appPredictionSessionId, 0);
+                    parcelObtain.writeTypedObject(appTargetEvent, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.prediction.IPredictionManager
             public void notifyLaunchLocationShown(AppPredictionSessionId appPredictionSessionId, String str, ParceledListSlice parceledListSlice) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(appPredictionSessionId, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appPredictionSessionId, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.prediction.IPredictionManager
             public void sortAppTargets(AppPredictionSessionId appPredictionSessionId, ParceledListSlice parceledListSlice, IPredictionCallback iPredictionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(appPredictionSessionId, 0);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    obtain.writeStrongInterface(iPredictionCallback);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appPredictionSessionId, 0);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    parcelObtain.writeStrongInterface(iPredictionCallback);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.prediction.IPredictionManager
             public void registerPredictionUpdates(AppPredictionSessionId appPredictionSessionId, IPredictionCallback iPredictionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(appPredictionSessionId, 0);
-                    obtain.writeStrongInterface(iPredictionCallback);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appPredictionSessionId, 0);
+                    parcelObtain.writeStrongInterface(iPredictionCallback);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.prediction.IPredictionManager
             public void unregisterPredictionUpdates(AppPredictionSessionId appPredictionSessionId, IPredictionCallback iPredictionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(appPredictionSessionId, 0);
-                    obtain.writeStrongInterface(iPredictionCallback);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appPredictionSessionId, 0);
+                    parcelObtain.writeStrongInterface(iPredictionCallback);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.prediction.IPredictionManager
             public void requestPredictionUpdate(AppPredictionSessionId appPredictionSessionId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(appPredictionSessionId, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appPredictionSessionId, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.prediction.IPredictionManager
             public void onDestroyPredictionSession(AppPredictionSessionId appPredictionSessionId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(appPredictionSessionId, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appPredictionSessionId, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.prediction.IPredictionManager
             public void requestServiceFeatures(AppPredictionSessionId appPredictionSessionId, IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
-                    obtain.writeTypedObject(appPredictionSessionId, 0);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPredictionManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appPredictionSessionId, 0);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

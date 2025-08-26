@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.asn1.nist.NISTObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.ntt.NTTObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
+import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.DerivationFunction;
 import com.android.internal.org.bouncycastle.crypto.params.DESParameters;
 import com.android.internal.org.bouncycastle.crypto.params.KDFParameters;
@@ -46,92 +47,92 @@ public abstract class BaseAgreementSpi extends KeyAgreementSpi {
     protected abstract void doInitFromKey(Key key, AlgorithmParameterSpec algorithmParameterSpec, SecureRandom secureRandom) throws InvalidKeyException, InvalidAlgorithmParameterException;
 
     static {
-        HashMap hashMap = new HashMap();
-        defaultOids = hashMap;
-        HashMap hashMap2 = new HashMap();
-        keySizes = hashMap2;
-        HashMap hashMap3 = new HashMap();
-        nameTable = hashMap3;
+        HashMap map = new HashMap();
+        defaultOids = map;
+        HashMap map2 = new HashMap();
+        keySizes = map2;
+        HashMap map3 = new HashMap();
+        nameTable = map3;
         Hashtable hashtable = new Hashtable();
         oids = hashtable;
         Hashtable hashtable2 = new Hashtable();
         des = hashtable2;
-        Integer valueOf = Integers.valueOf(64);
-        Integer valueOf2 = Integers.valueOf(128);
-        Integer valueOf3 = Integers.valueOf(192);
-        Integer valueOf4 = Integers.valueOf(256);
-        hashMap2.put("DES", valueOf);
-        hashMap2.put("DESEDE", valueOf3);
-        hashMap2.put("BLOWFISH", valueOf2);
-        hashMap2.put("AES", valueOf4);
-        hashMap2.put(NISTObjectIdentifiers.id_aes128_ECB.getId(), valueOf2);
-        hashMap2.put(NISTObjectIdentifiers.id_aes192_ECB.getId(), valueOf3);
-        hashMap2.put(NISTObjectIdentifiers.id_aes256_ECB.getId(), valueOf4);
-        hashMap2.put(NISTObjectIdentifiers.id_aes128_CBC.getId(), valueOf2);
-        hashMap2.put(NISTObjectIdentifiers.id_aes192_CBC.getId(), valueOf3);
-        hashMap2.put(NISTObjectIdentifiers.id_aes256_CBC.getId(), valueOf4);
-        hashMap2.put(NISTObjectIdentifiers.id_aes128_CFB.getId(), valueOf2);
-        hashMap2.put(NISTObjectIdentifiers.id_aes192_CFB.getId(), valueOf3);
-        hashMap2.put(NISTObjectIdentifiers.id_aes256_CFB.getId(), valueOf4);
-        hashMap2.put(NISTObjectIdentifiers.id_aes128_OFB.getId(), valueOf2);
-        hashMap2.put(NISTObjectIdentifiers.id_aes192_OFB.getId(), valueOf3);
-        hashMap2.put(NISTObjectIdentifiers.id_aes256_OFB.getId(), valueOf4);
-        hashMap2.put(NISTObjectIdentifiers.id_aes128_wrap.getId(), valueOf2);
-        hashMap2.put(NISTObjectIdentifiers.id_aes192_wrap.getId(), valueOf3);
-        hashMap2.put(NISTObjectIdentifiers.id_aes256_wrap.getId(), valueOf4);
-        hashMap2.put(NISTObjectIdentifiers.id_aes128_CCM.getId(), valueOf2);
-        hashMap2.put(NISTObjectIdentifiers.id_aes192_CCM.getId(), valueOf3);
-        hashMap2.put(NISTObjectIdentifiers.id_aes256_CCM.getId(), valueOf4);
-        hashMap2.put(NISTObjectIdentifiers.id_aes128_GCM.getId(), valueOf2);
-        hashMap2.put(NISTObjectIdentifiers.id_aes192_GCM.getId(), valueOf3);
-        hashMap2.put(NISTObjectIdentifiers.id_aes256_GCM.getId(), valueOf4);
-        hashMap2.put(NTTObjectIdentifiers.id_camellia128_wrap.getId(), valueOf2);
-        hashMap2.put(NTTObjectIdentifiers.id_camellia192_wrap.getId(), valueOf3);
-        hashMap2.put(NTTObjectIdentifiers.id_camellia256_wrap.getId(), valueOf4);
-        hashMap2.put(KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap.getId(), valueOf2);
-        hashMap2.put(PKCSObjectIdentifiers.id_alg_CMS3DESwrap.getId(), valueOf3);
-        hashMap2.put(PKCSObjectIdentifiers.des_EDE3_CBC.getId(), valueOf3);
-        hashMap2.put(OIWObjectIdentifiers.desCBC.getId(), valueOf);
-        hashMap2.put(PKCSObjectIdentifiers.id_hmacWithSHA1.getId(), Integers.valueOf(160));
-        hashMap2.put(PKCSObjectIdentifiers.id_hmacWithSHA256.getId(), valueOf4);
-        hashMap2.put(PKCSObjectIdentifiers.id_hmacWithSHA384.getId(), Integers.valueOf(384));
-        hashMap2.put(PKCSObjectIdentifiers.id_hmacWithSHA512.getId(), Integers.valueOf(512));
-        hashMap.put("DESEDE", PKCSObjectIdentifiers.des_EDE3_CBC);
-        hashMap.put("AES", NISTObjectIdentifiers.id_aes256_CBC);
-        hashMap.put("CAMELLIA", NTTObjectIdentifiers.id_camellia256_cbc);
-        hashMap.put("SEED", KISAObjectIdentifiers.id_seedCBC);
-        hashMap.put("DES", OIWObjectIdentifiers.desCBC);
-        hashMap3.put(MiscObjectIdentifiers.cast5CBC.getId(), "CAST5");
-        hashMap3.put(MiscObjectIdentifiers.as_sys_sec_alg_ideaCBC.getId(), "IDEA");
-        hashMap3.put(MiscObjectIdentifiers.cryptlib_algorithm_blowfish_ECB.getId(), "Blowfish");
-        hashMap3.put(MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CBC.getId(), "Blowfish");
-        hashMap3.put(MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CFB.getId(), "Blowfish");
-        hashMap3.put(MiscObjectIdentifiers.cryptlib_algorithm_blowfish_OFB.getId(), "Blowfish");
-        hashMap3.put(OIWObjectIdentifiers.desECB.getId(), "DES");
-        hashMap3.put(OIWObjectIdentifiers.desCBC.getId(), "DES");
-        hashMap3.put(OIWObjectIdentifiers.desCFB.getId(), "DES");
-        hashMap3.put(OIWObjectIdentifiers.desOFB.getId(), "DES");
-        hashMap3.put(OIWObjectIdentifiers.desEDE.getId(), KeyProperties.KEY_ALGORITHM_3DES);
-        hashMap3.put(PKCSObjectIdentifiers.des_EDE3_CBC.getId(), KeyProperties.KEY_ALGORITHM_3DES);
-        hashMap3.put(PKCSObjectIdentifiers.id_alg_CMS3DESwrap.getId(), KeyProperties.KEY_ALGORITHM_3DES);
-        hashMap3.put(PKCSObjectIdentifiers.id_alg_CMSRC2wrap.getId(), "RC2");
-        hashMap3.put(PKCSObjectIdentifiers.id_hmacWithSHA1.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA1);
-        hashMap3.put(PKCSObjectIdentifiers.id_hmacWithSHA224.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA224);
-        hashMap3.put(PKCSObjectIdentifiers.id_hmacWithSHA256.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA256);
-        hashMap3.put(PKCSObjectIdentifiers.id_hmacWithSHA384.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA384);
-        hashMap3.put(PKCSObjectIdentifiers.id_hmacWithSHA512.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA512);
-        hashMap3.put(NTTObjectIdentifiers.id_camellia128_cbc.getId(), "Camellia");
-        hashMap3.put(NTTObjectIdentifiers.id_camellia192_cbc.getId(), "Camellia");
-        hashMap3.put(NTTObjectIdentifiers.id_camellia256_cbc.getId(), "Camellia");
-        hashMap3.put(NTTObjectIdentifiers.id_camellia128_wrap.getId(), "Camellia");
-        hashMap3.put(NTTObjectIdentifiers.id_camellia192_wrap.getId(), "Camellia");
-        hashMap3.put(NTTObjectIdentifiers.id_camellia256_wrap.getId(), "Camellia");
-        hashMap3.put(KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap.getId(), "SEED");
-        hashMap3.put(KISAObjectIdentifiers.id_seedCBC.getId(), "SEED");
-        hashMap3.put(KISAObjectIdentifiers.id_seedMAC.getId(), "SEED");
-        hashMap3.put(NISTObjectIdentifiers.id_aes128_wrap.getId(), "AES");
-        hashMap3.put(NISTObjectIdentifiers.id_aes128_CCM.getId(), "AES");
-        hashMap3.put(NISTObjectIdentifiers.id_aes128_CCM.getId(), "AES");
+        Integer numValueOf = Integers.valueOf(64);
+        Integer numValueOf2 = Integers.valueOf(128);
+        Integer numValueOf3 = Integers.valueOf(192);
+        Integer numValueOf4 = Integers.valueOf(256);
+        map2.put("DES", numValueOf);
+        map2.put("DESEDE", numValueOf3);
+        map2.put("BLOWFISH", numValueOf2);
+        map2.put("AES", numValueOf4);
+        map2.put(NISTObjectIdentifiers.id_aes128_ECB.getId(), numValueOf2);
+        map2.put(NISTObjectIdentifiers.id_aes192_ECB.getId(), numValueOf3);
+        map2.put(NISTObjectIdentifiers.id_aes256_ECB.getId(), numValueOf4);
+        map2.put(NISTObjectIdentifiers.id_aes128_CBC.getId(), numValueOf2);
+        map2.put(NISTObjectIdentifiers.id_aes192_CBC.getId(), numValueOf3);
+        map2.put(NISTObjectIdentifiers.id_aes256_CBC.getId(), numValueOf4);
+        map2.put(NISTObjectIdentifiers.id_aes128_CFB.getId(), numValueOf2);
+        map2.put(NISTObjectIdentifiers.id_aes192_CFB.getId(), numValueOf3);
+        map2.put(NISTObjectIdentifiers.id_aes256_CFB.getId(), numValueOf4);
+        map2.put(NISTObjectIdentifiers.id_aes128_OFB.getId(), numValueOf2);
+        map2.put(NISTObjectIdentifiers.id_aes192_OFB.getId(), numValueOf3);
+        map2.put(NISTObjectIdentifiers.id_aes256_OFB.getId(), numValueOf4);
+        map2.put(NISTObjectIdentifiers.id_aes128_wrap.getId(), numValueOf2);
+        map2.put(NISTObjectIdentifiers.id_aes192_wrap.getId(), numValueOf3);
+        map2.put(NISTObjectIdentifiers.id_aes256_wrap.getId(), numValueOf4);
+        map2.put(NISTObjectIdentifiers.id_aes128_CCM.getId(), numValueOf2);
+        map2.put(NISTObjectIdentifiers.id_aes192_CCM.getId(), numValueOf3);
+        map2.put(NISTObjectIdentifiers.id_aes256_CCM.getId(), numValueOf4);
+        map2.put(NISTObjectIdentifiers.id_aes128_GCM.getId(), numValueOf2);
+        map2.put(NISTObjectIdentifiers.id_aes192_GCM.getId(), numValueOf3);
+        map2.put(NISTObjectIdentifiers.id_aes256_GCM.getId(), numValueOf4);
+        map2.put(NTTObjectIdentifiers.id_camellia128_wrap.getId(), numValueOf2);
+        map2.put(NTTObjectIdentifiers.id_camellia192_wrap.getId(), numValueOf3);
+        map2.put(NTTObjectIdentifiers.id_camellia256_wrap.getId(), numValueOf4);
+        map2.put(KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap.getId(), numValueOf2);
+        map2.put(PKCSObjectIdentifiers.id_alg_CMS3DESwrap.getId(), numValueOf3);
+        map2.put(PKCSObjectIdentifiers.des_EDE3_CBC.getId(), numValueOf3);
+        map2.put(OIWObjectIdentifiers.desCBC.getId(), numValueOf);
+        map2.put(PKCSObjectIdentifiers.id_hmacWithSHA1.getId(), Integers.valueOf(160));
+        map2.put(PKCSObjectIdentifiers.id_hmacWithSHA256.getId(), numValueOf4);
+        map2.put(PKCSObjectIdentifiers.id_hmacWithSHA384.getId(), Integers.valueOf(384));
+        map2.put(PKCSObjectIdentifiers.id_hmacWithSHA512.getId(), Integers.valueOf(512));
+        map.put("DESEDE", PKCSObjectIdentifiers.des_EDE3_CBC);
+        map.put("AES", NISTObjectIdentifiers.id_aes256_CBC);
+        map.put("CAMELLIA", NTTObjectIdentifiers.id_camellia256_cbc);
+        map.put("SEED", KISAObjectIdentifiers.id_seedCBC);
+        map.put("DES", OIWObjectIdentifiers.desCBC);
+        map3.put(MiscObjectIdentifiers.cast5CBC.getId(), "CAST5");
+        map3.put(MiscObjectIdentifiers.as_sys_sec_alg_ideaCBC.getId(), "IDEA");
+        map3.put(MiscObjectIdentifiers.cryptlib_algorithm_blowfish_ECB.getId(), "Blowfish");
+        map3.put(MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CBC.getId(), "Blowfish");
+        map3.put(MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CFB.getId(), "Blowfish");
+        map3.put(MiscObjectIdentifiers.cryptlib_algorithm_blowfish_OFB.getId(), "Blowfish");
+        map3.put(OIWObjectIdentifiers.desECB.getId(), "DES");
+        map3.put(OIWObjectIdentifiers.desCBC.getId(), "DES");
+        map3.put(OIWObjectIdentifiers.desCFB.getId(), "DES");
+        map3.put(OIWObjectIdentifiers.desOFB.getId(), "DES");
+        map3.put(OIWObjectIdentifiers.desEDE.getId(), KeyProperties.KEY_ALGORITHM_3DES);
+        map3.put(PKCSObjectIdentifiers.des_EDE3_CBC.getId(), KeyProperties.KEY_ALGORITHM_3DES);
+        map3.put(PKCSObjectIdentifiers.id_alg_CMS3DESwrap.getId(), KeyProperties.KEY_ALGORITHM_3DES);
+        map3.put(PKCSObjectIdentifiers.id_alg_CMSRC2wrap.getId(), "RC2");
+        map3.put(PKCSObjectIdentifiers.id_hmacWithSHA1.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA1);
+        map3.put(PKCSObjectIdentifiers.id_hmacWithSHA224.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA224);
+        map3.put(PKCSObjectIdentifiers.id_hmacWithSHA256.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA256);
+        map3.put(PKCSObjectIdentifiers.id_hmacWithSHA384.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA384);
+        map3.put(PKCSObjectIdentifiers.id_hmacWithSHA512.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA512);
+        map3.put(NTTObjectIdentifiers.id_camellia128_cbc.getId(), "Camellia");
+        map3.put(NTTObjectIdentifiers.id_camellia192_cbc.getId(), "Camellia");
+        map3.put(NTTObjectIdentifiers.id_camellia256_cbc.getId(), "Camellia");
+        map3.put(NTTObjectIdentifiers.id_camellia128_wrap.getId(), "Camellia");
+        map3.put(NTTObjectIdentifiers.id_camellia192_wrap.getId(), "Camellia");
+        map3.put(NTTObjectIdentifiers.id_camellia256_wrap.getId(), "Camellia");
+        map3.put(KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap.getId(), "SEED");
+        map3.put(KISAObjectIdentifiers.id_seedCBC.getId(), "SEED");
+        map3.put(KISAObjectIdentifiers.id_seedMAC.getId(), "SEED");
+        map3.put(NISTObjectIdentifiers.id_aes128_wrap.getId(), "AES");
+        map3.put(NISTObjectIdentifiers.id_aes128_CCM.getId(), "AES");
+        map3.put(NISTObjectIdentifiers.id_aes128_CCM.getId(), "AES");
         hashtable.put("DESEDE", PKCSObjectIdentifiers.des_EDE3_CBC);
         hashtable.put("AES", NISTObjectIdentifiers.id_aes256_CBC);
         hashtable.put("DES", OIWObjectIdentifiers.desCBC);
@@ -208,9 +209,9 @@ public abstract class BaseAgreementSpi extends KeyAgreementSpi {
     @Override // javax.crypto.KeyAgreementSpi
     protected byte[] engineGenerateSecret() throws IllegalStateException {
         if (this.kdf != null) {
-            byte[] calcSecret = calcSecret();
+            byte[] bArrCalcSecret = calcSecret();
             try {
-                return getSharedSecretBytes(calcSecret, null, calcSecret.length * 8);
+                return getSharedSecretBytes(bArrCalcSecret, null, bArrCalcSecret.length * 8);
             } catch (NoSuchAlgorithmException e) {
                 throw new IllegalStateException(e.getMessage());
             }
@@ -220,16 +221,16 @@ public abstract class BaseAgreementSpi extends KeyAgreementSpi {
 
     @Override // javax.crypto.KeyAgreementSpi
     protected int engineGenerateSecret(byte[] bArr, int i) throws IllegalStateException, ShortBufferException {
-        byte[] engineGenerateSecret = engineGenerateSecret();
-        if (bArr.length - i < engineGenerateSecret.length) {
-            throw new ShortBufferException(this.kaAlgorithm + " key agreement: need " + engineGenerateSecret.length + " bytes");
+        byte[] bArrEngineGenerateSecret = engineGenerateSecret();
+        if (bArr.length - i < bArrEngineGenerateSecret.length) {
+            throw new ShortBufferException(this.kaAlgorithm + " key agreement: need " + bArrEngineGenerateSecret.length + " bytes");
         }
-        System.arraycopy(engineGenerateSecret, 0, bArr, i, engineGenerateSecret.length);
-        return engineGenerateSecret.length;
+        System.arraycopy(bArrEngineGenerateSecret, 0, bArr, i, bArrEngineGenerateSecret.length);
+        return bArrEngineGenerateSecret.length;
     }
 
     @Override // javax.crypto.KeyAgreementSpi
-    protected SecretKey engineGenerateSecret(String str) throws NoSuchAlgorithmException {
+    protected SecretKey engineGenerateSecret(String str) throws NoSuchAlgorithmException, DataLengthException, IllegalArgumentException {
         String upperCase = Strings.toUpperCase(str);
         Hashtable hashtable = oids;
         String id = hashtable.containsKey(upperCase) ? ((ASN1ObjectIdentifier) hashtable.get(upperCase)).getId() : str;
@@ -241,7 +242,7 @@ public abstract class BaseAgreementSpi extends KeyAgreementSpi {
         return new SecretKeySpec(sharedSecretBytes, algorithm);
     }
 
-    private byte[] getSharedSecretBytes(byte[] bArr, String str, int i) throws NoSuchAlgorithmException {
+    private byte[] getSharedSecretBytes(byte[] bArr, String str, int i) throws NoSuchAlgorithmException, DataLengthException, IllegalArgumentException {
         if (this.kdf == null) {
             if (i <= 0) {
                 return bArr;
@@ -265,10 +266,10 @@ public abstract class BaseAgreementSpi extends KeyAgreementSpi {
 
     private byte[] calcSecret() {
         if (this.hybridSpec != null) {
-            byte[] doCalcSecret = doCalcSecret();
-            byte[] concatenate = Arrays.concatenate(doCalcSecret, this.hybridSpec.getT());
-            Arrays.clear(doCalcSecret);
-            return concatenate;
+            byte[] bArrDoCalcSecret = doCalcSecret();
+            byte[] bArrConcatenate = Arrays.concatenate(bArrDoCalcSecret, this.hybridSpec.getT());
+            Arrays.clear(bArrDoCalcSecret);
+            return bArrConcatenate;
         }
         return doCalcSecret();
     }

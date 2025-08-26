@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationScrollViewModel$isScrollable$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -44,20 +43,22 @@ final class NotificationScrollViewModel$isScrollable$1 extends SuspendLambda imp
         ResultKt.throwOnFailure(obj);
         SceneKey sceneKey = (SceneKey) this.L$0;
         Set set = (Set) this.L$1;
-        if (!NotificationScrollViewModel.access$showsNotifications(this.this$0, sceneKey)) {
-            Set set2 = set;
-            NotificationScrollViewModel notificationScrollViewModel = this.this$0;
-            if (!(set2 instanceof Collection) || !set2.isEmpty()) {
-                Iterator it = set2.iterator();
-                while (it.hasNext()) {
-                    if (NotificationScrollViewModel.access$showsNotifications(notificationScrollViewModel, (OverlayKey) it.next())) {
-                    }
+        if (NotificationScrollViewModel.access$showsNotifications(this.this$0, sceneKey)) {
+            z = true;
+            break;
+        }
+        Set set2 = set;
+        NotificationScrollViewModel notificationScrollViewModel = this.this$0;
+        if (!(set2 instanceof Collection) || !set2.isEmpty()) {
+            Iterator it = set2.iterator();
+            while (it.hasNext()) {
+                if (NotificationScrollViewModel.access$showsNotifications(notificationScrollViewModel, (OverlayKey) it.next())) {
+                    z = true;
+                    break;
                 }
             }
-            z = false;
-            return Boolean.valueOf(z);
         }
-        z = true;
+        z = false;
         return Boolean.valueOf(z);
     }
 }

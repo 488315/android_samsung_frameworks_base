@@ -81,251 +81,250 @@ public interface IDirEncryptService extends IInterface {
 
             @Override // com.samsung.android.security.IDirEncryptService
             public void registerListener(IDirEncryptServiceListener iDirEncryptServiceListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iDirEncryptServiceListener != null ? iDirEncryptServiceListener.asBinder() : null);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iDirEncryptServiceListener != null ? iDirEncryptServiceListener.asBinder() : null);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public void unregisterListener(IDirEncryptServiceListener iDirEncryptServiceListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iDirEncryptServiceListener != null ? iDirEncryptServiceListener.asBinder() : null);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iDirEncryptServiceListener != null ? iDirEncryptServiceListener.asBinder() : null);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public int setStorageCardEncryptionPolicy(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public int setSdCardEncryptionPolicy(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public int isStorageCardEncryptionPoliciesApplied() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public boolean isSdCardEncryped() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
-            public int setPassword(String str) throws RemoteException {
-                int dataPosition;
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+            public int setPassword(String str) throws Throwable {
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 int i = 0;
                 int length = str == null ? 0 : str.length();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    dataPosition = obtain.dataPosition();
-                } catch (Throwable th) {
-                    th = th;
-                }
-                try {
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    obtain2.recycle();
-                    obtain.setDataPosition(dataPosition);
-                    obtain.writeByteArray(new byte[length]);
-                    obtain.recycle();
-                    return readInt;
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    int iDataPosition = parcelObtain.dataPosition();
+                    try {
+                        parcelObtain.writeString(str);
+                        this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        int i2 = parcelObtain2.readInt();
+                        parcelObtain2.recycle();
+                        parcelObtain.setDataPosition(iDataPosition);
+                        parcelObtain.writeByteArray(new byte[length]);
+                        parcelObtain.recycle();
+                        return i2;
+                    } catch (Throwable th) {
+                        th = th;
+                        i = iDataPosition;
+                        parcelObtain2.recycle();
+                        parcelObtain.setDataPosition(i);
+                        parcelObtain.writeByteArray(new byte[length]);
+                        parcelObtain.recycle();
+                        throw th;
+                    }
                 } catch (Throwable th2) {
                     th = th2;
-                    i = dataPosition;
-                    obtain2.recycle();
-                    obtain.setDataPosition(i);
-                    obtain.writeByteArray(new byte[length]);
-                    obtain.recycle();
-                    throw th;
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public int getCurrentStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public int getLastError() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public int getAdditionalSpaceRequired() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public int encryptStorage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public void unmountSDCardByAdmin() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public void setNeedToCreateKey(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByte(z ? (byte) 1 : (byte) 0);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByte(z ? (byte) 1 : (byte) 0);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public void setMountSDcardToHelper(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByte(z ? (byte) 1 : (byte) 0);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByte(z ? (byte) 1 : (byte) 0);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
             public IVoldTaskListener getListener() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IVoldTaskListener.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IVoldTaskListener.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -334,9 +333,9 @@ public interface IDirEncryptService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDirEncryptService)) {
-                return (IDirEncryptService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDirEncryptService)) {
+                return (IDirEncryptService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -354,20 +353,20 @@ public interface IDirEncryptService extends IInterface {
             switch (i) {
                 case 1:
                     parcel.enforceInterface(DESCRIPTOR);
-                    IDirEncryptServiceListener asInterface = IDirEncryptServiceListener.Stub.asInterface(parcel.readStrongBinder());
-                    if (asInterface == null) {
+                    IDirEncryptServiceListener iDirEncryptServiceListenerAsInterface = IDirEncryptServiceListener.Stub.asInterface(parcel.readStrongBinder());
+                    if (iDirEncryptServiceListenerAsInterface == null) {
                         return false;
                     }
-                    registerListener(asInterface);
+                    registerListener(iDirEncryptServiceListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
                     parcel.enforceInterface(DESCRIPTOR);
-                    IDirEncryptServiceListener asInterface2 = IDirEncryptServiceListener.Stub.asInterface(parcel.readStrongBinder());
-                    if (asInterface2 == null) {
+                    IDirEncryptServiceListener iDirEncryptServiceListenerAsInterface2 = IDirEncryptServiceListener.Stub.asInterface(parcel.readStrongBinder());
+                    if (iDirEncryptServiceListenerAsInterface2 == null) {
                         return false;
                     }
-                    unregisterListener(asInterface2);
+                    unregisterListener(iDirEncryptServiceListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
@@ -378,9 +377,9 @@ public interface IDirEncryptService extends IInterface {
                     return true;
                 case 4:
                     parcel.enforceInterface(DESCRIPTOR);
-                    int isStorageCardEncryptionPoliciesApplied = isStorageCardEncryptionPoliciesApplied();
+                    int iIsStorageCardEncryptionPoliciesApplied = isStorageCardEncryptionPoliciesApplied();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isStorageCardEncryptionPoliciesApplied);
+                    parcel2.writeInt(iIsStorageCardEncryptionPoliciesApplied);
                     return true;
                 case 5:
                     parcel.enforceInterface(DESCRIPTOR);
@@ -408,9 +407,9 @@ public interface IDirEncryptService extends IInterface {
                     return true;
                 case 9:
                     parcel.enforceInterface(DESCRIPTOR);
-                    int encryptStorage = encryptStorage(parcel.readString());
+                    int iEncryptStorage = encryptStorage(parcel.readString());
                     parcel2.writeNoException();
-                    parcel2.writeInt(encryptStorage);
+                    parcel2.writeInt(iEncryptStorage);
                     return true;
                 case 10:
                     parcel.enforceInterface(DESCRIPTOR);
@@ -425,9 +424,9 @@ public interface IDirEncryptService extends IInterface {
                     return true;
                 case 12:
                     parcel.enforceInterface(DESCRIPTOR);
-                    boolean isSdCardEncryped = isSdCardEncryped();
+                    boolean zIsSdCardEncryped = isSdCardEncryped();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isSdCardEncryped ? 1 : 0);
+                    parcel2.writeInt(zIsSdCardEncryped ? 1 : 0);
                     return true;
                 default:
                     switch (i) {

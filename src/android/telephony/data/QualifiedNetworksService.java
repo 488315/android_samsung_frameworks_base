@@ -80,9 +80,7 @@ public abstract class QualifiedNetworksService extends Service {
             QualifiedNetworksService.this.mHandler.obtainMessage(4, this.mSlotIndex, i, list.stream().mapToInt(new ToIntFunction() { // from class: android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider$$ExternalSyntheticLambda0
                 @Override // java.util.function.ToIntFunction
                 public final int applyAsInt(Object obj) {
-                    int intValue;
-                    intValue = ((Integer) obj).intValue();
-                    return intValue;
+                    return ((Integer) obj).intValue();
                 }
             }).toArray()).sendToTarget();
         }
@@ -198,10 +196,10 @@ public abstract class QualifiedNetworksService extends Service {
                         QualifiedNetworksService.this.loge("Network availability provider for slot " + i + " already existed.");
                         break;
                     } else {
-                        NetworkAvailabilityProvider onCreateNetworkAvailabilityProvider = QualifiedNetworksService.this.onCreateNetworkAvailabilityProvider(i);
-                        if (onCreateNetworkAvailabilityProvider != null) {
-                            QualifiedNetworksService.this.mProviders.put(i, onCreateNetworkAvailabilityProvider);
-                            onCreateNetworkAvailabilityProvider.registerForQualifiedNetworkTypesChanged((IQualifiedNetworksServiceCallback) message.obj);
+                        NetworkAvailabilityProvider networkAvailabilityProviderOnCreateNetworkAvailabilityProvider = QualifiedNetworksService.this.onCreateNetworkAvailabilityProvider(i);
+                        if (networkAvailabilityProviderOnCreateNetworkAvailabilityProvider != null) {
+                            QualifiedNetworksService.this.mProviders.put(i, networkAvailabilityProviderOnCreateNetworkAvailabilityProvider);
+                            networkAvailabilityProviderOnCreateNetworkAvailabilityProvider.registerForQualifiedNetworkTypesChanged((IQualifiedNetworksServiceCallback) message.obj);
                             break;
                         } else {
                             QualifiedNetworksService.this.loge("Failed to create network availability provider. slot index = " + i);

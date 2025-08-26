@@ -331,11 +331,11 @@ public final class EncodedBuffer {
                 i9 = 0;
             }
             int i10 = this.mChunkSize;
-            int min = Math.min(i2, Math.min(i10 - this.mWriteIndex, i10 - i9));
-            System.arraycopy(bArr, i9, this.mWriteBuffer, this.mWriteIndex, min);
-            this.mWriteIndex += min;
-            i9 += min;
-            i2 -= min;
+            int iMin = Math.min(i2, Math.min(i10 - this.mWriteIndex, i10 - i9));
+            System.arraycopy(bArr, i9, this.mWriteBuffer, this.mWriteIndex, iMin);
+            this.mWriteIndex += iMin;
+            i9 += iMin;
+            i2 -= iMin;
         }
     }
 
@@ -425,9 +425,9 @@ public final class EncodedBuffer {
 
     public void dumpBuffers(String str) {
         int size = this.mBuffers.size();
-        int i = 0;
-        for (int i2 = 0; i2 < size; i2++) {
-            i += dumpByteString(str, "{" + i2 + "} ", i, this.mBuffers.get(i2));
+        int iDumpByteString = 0;
+        for (int i = 0; i < size; i++) {
+            iDumpByteString += dumpByteString(str, "{" + i + "} ", iDumpByteString, this.mBuffers.get(i));
         }
     }
 

@@ -9,14 +9,12 @@ import com.android.compose.animation.scene.transformation.PropertyTransformation
 import com.android.compose.animation.scene.transformation.Transformation;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Translate implements InterpolatedPropertyTransformation {
     public final PropertyTransformation.Property.Offset property;
     public final float x;
     public final float y;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory implements Transformation.Factory {
         public final float x;
         public final float y;
@@ -50,7 +48,7 @@ public final class Translate implements InterpolatedPropertyTransformation {
         long j = ((Offset) obj).packedValue;
         float density = (propertyTransformationScopeImpl.getDensity() * this.x) + Float.intBitsToFloat((int) (j >> 32));
         float density2 = (propertyTransformationScopeImpl.getDensity() * this.y) + Float.intBitsToFloat((int) (j & 4294967295L));
-        return Offset.m393boximpl((Float.floatToRawIntBits(density2) & 4294967295L) | (Float.floatToRawIntBits(density) << 32));
+        return Offset.m395boximpl((Float.floatToRawIntBits(density2) & 4294967295L) | (Float.floatToRawIntBits(density) << 32));
     }
 
     private Translate(float f, float f2) {

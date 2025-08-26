@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
-/* loaded from: classes.dex */
+/* loaded from: classes3.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
     private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_AUDIO_MIX_OWNERSHIP, Flags.FLAG_AUDIO_MIX_POLICY_ORDERING, Flags.FLAG_AUDIO_MIX_TEST_API, Flags.FLAG_AUDIO_POLICY_UPDATE_MIXING_RULES_API, Flags.FLAG_ENABLE_FADE_MANAGER_CONFIGURATION, Flags.FLAG_MULTI_ZONE_AUDIO, Flags.FLAG_RECORD_AUDIO_DEVICE_AWARE_PERMISSION, ""));

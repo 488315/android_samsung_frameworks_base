@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -32,7 +33,7 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
     private int mUserId;
 
     @Override // android.app.Activity
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(Bundle bundle) throws Resources.NotFoundException {
         AlertDialog.Builder builder;
         super.onCreate(bundle);
         requestWindowFeature(1);
@@ -55,7 +56,7 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
             new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.internal.app.UnlaunchableAppActivity$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    UnlaunchableAppActivity.this.lambda$onCreate$0(userManager);
+                    this.f$0.lambda$onCreate$0(userManager);
                 }
             });
             finish();
@@ -83,15 +84,15 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
         }
         builder.setTitle(dialogTitle).setOnDismissListener(this).setPositiveButton(string, this).setNegativeButton(17039360, (DialogInterface.OnClickListener) null);
         builder.setMessage(dialogMessage);
-        AlertDialog create = builder.create();
-        create.create();
+        AlertDialog alertDialogCreate = builder.create();
+        alertDialogCreate.create();
         if (z) {
-            create.getWindow().findViewById(R.id.parentPanel).setPadding(0, 0, 0, 30);
-            create.getWindow().findViewById(16908315).setOutlineProvider(null);
+            alertDialogCreate.getWindow().findViewById(R.id.parentPanel).setPadding(0, 0, 0, 30);
+            alertDialogCreate.getWindow().findViewById(16908315).setOutlineProvider(null);
         }
         getWindow().setHideOverlayWindows(true);
-        create.getButton(-1).setFilterTouchesWhenObscured(true);
-        create.show();
+        alertDialogCreate.getButton(-1).setFilterTouchesWhenObscured(true);
+        alertDialogCreate.show();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -107,9 +108,7 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
         return ((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.UNLAUNCHABLE_APP_WORK_PAUSED_TITLE, new Supplier() { // from class: com.android.internal.app.UnlaunchableAppActivity$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                String lambda$getDialogTitle$1;
-                lambda$getDialogTitle$1 = UnlaunchableAppActivity.this.lambda$getDialogTitle$1();
-                return lambda$getDialogTitle$1;
+                return this.f$0.lambda$getDialogTitle$1();
             }
         });
     }
@@ -138,7 +137,7 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
             new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.internal.app.UnlaunchableAppActivity$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    UnlaunchableAppActivity.this.lambda$onClick$2(userManager);
+                    this.f$0.lambda$onClick$2(userManager);
                 }
             });
         } else if (i == -3) {
@@ -163,18 +162,18 @@ public class UnlaunchableAppActivity extends Activity implements DialogInterface
     }
 
     public static Intent createInQuietModeDialogIntent(int i) {
-        Intent createBaseIntent = createBaseIntent();
-        createBaseIntent.putExtra(EXTRA_UNLAUNCHABLE_REASON, 1);
-        createBaseIntent.putExtra("android.intent.extra.user_handle", i);
-        return createBaseIntent;
+        Intent intentCreateBaseIntent = createBaseIntent();
+        intentCreateBaseIntent.putExtra(EXTRA_UNLAUNCHABLE_REASON, 1);
+        intentCreateBaseIntent.putExtra("android.intent.extra.user_handle", i);
+        return intentCreateBaseIntent;
     }
 
     public static Intent createInQuietModeDialogIntent(int i, IntentSender intentSender, ResolveInfo resolveInfo) {
-        Intent createInQuietModeDialogIntent = createInQuietModeDialogIntent(i);
-        createInQuietModeDialogIntent.putExtra("android.intent.extra.INTENT", intentSender);
+        Intent intentCreateInQuietModeDialogIntent = createInQuietModeDialogIntent(i);
+        intentCreateInQuietModeDialogIntent.putExtra("android.intent.extra.INTENT", intentSender);
         if (resolveInfo != null) {
-            createInQuietModeDialogIntent.putExtra("android.intent.extra.PACKAGE_NAME", resolveInfo.getComponentInfo().packageName);
+            intentCreateInQuietModeDialogIntent.putExtra("android.intent.extra.PACKAGE_NAME", resolveInfo.getComponentInfo().packageName);
         }
-        return createInQuietModeDialogIntent;
+        return intentCreateInQuietModeDialogIntent;
     }
 }

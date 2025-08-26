@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class IconTilesInteractor$largeTilesSpecs$1 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -51,9 +50,9 @@ final class IconTilesInteractor$largeTilesSpecs$1 extends SuspendLambda implemen
         LogLevel logLevel = LogLevel.DEBUG;
         IconTilesInteractor$$ExternalSyntheticLambda0 iconTilesInteractor$$ExternalSyntheticLambda0 = new IconTilesInteractor$$ExternalSyntheticLambda0();
         LogBuffer logBuffer = iconTilesInteractor.logBuffer;
-        LogMessage obtain = logBuffer.obtain("LargeTilesSpecsChange", logLevel, iconTilesInteractor$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = set.toString();
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("LargeTilesSpecsChange", logLevel, iconTilesInteractor$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = set.toString();
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

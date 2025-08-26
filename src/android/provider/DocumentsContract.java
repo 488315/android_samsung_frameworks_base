@@ -248,9 +248,9 @@ public final class DocumentsContract {
         if (stringArray == null || stringArray.length <= 0) {
             return true;
         }
-        String normalizeMimeType = Intent.normalizeMimeType(str2);
+        String strNormalizeMimeType = Intent.normalizeMimeType(str2);
         for (String str3 : stringArray) {
-            if (MimeTypeFilter.matches(normalizeMimeType, Intent.normalizeMimeType(str3))) {
+            if (MimeTypeFilter.matches(strNormalizeMimeType, Intent.normalizeMimeType(str3))) {
                 return true;
             }
         }
@@ -323,11 +323,11 @@ public final class DocumentsContract {
     }
 
     private static boolean isDocumentsProvider(Context context, String str) {
-        List<ResolveInfo> queryIntentContentProviders = context.getPackageManager().queryIntentContentProviders(new Intent(PROVIDER_INTERFACE), 0);
+        List<ResolveInfo> listQueryIntentContentProviders = context.getPackageManager().queryIntentContentProviders(new Intent(PROVIDER_INTERFACE), 0);
         if (SemDualAppManager.isDualAppId(UserHandle.getCallingUserId())) {
             str = ContentProvider.getAuthorityWithoutUserId(str);
         }
-        Iterator<ResolveInfo> it = queryIntentContentProviders.iterator();
+        Iterator<ResolveInfo> it = listQueryIntentContentProviders.iterator();
         while (it.hasNext()) {
             if (str.equals(it.next().providerInfo.authority)) {
                 return true;
@@ -384,7 +384,7 @@ public final class DocumentsContract {
         return uri.getBooleanQueryParameter(PARAM_MANAGE, false);
     }
 
-    public static Bitmap getDocumentThumbnail(ContentResolver contentResolver, Uri uri, Point point, CancellationSignal cancellationSignal) throws FileNotFoundException {
+    public static Bitmap getDocumentThumbnail(ContentResolver contentResolver, Uri uri, Point point, CancellationSignal cancellationSignal) throws Throwable {
         try {
             return ContentResolver.loadThumbnail(contentResolver, uri, new Size(point.x, point.y), cancellationSignal, 1);
         } catch (Exception e) {
@@ -396,7 +396,7 @@ public final class DocumentsContract {
         }
     }
 
-    public static Uri createDocument(ContentResolver contentResolver, Uri uri, String str, String str2) throws FileNotFoundException {
+    public static Uri createDocument(ContentResolver contentResolver, Uri uri, String str, String str2) throws Throwable {
         try {
             Bundle bundle = new Bundle();
             bundle.putParcelable("uri", uri);
@@ -410,7 +410,7 @@ public final class DocumentsContract {
         }
     }
 
-    public static boolean isChildDocument(ContentResolver contentResolver, Uri uri, Uri uri2) throws FileNotFoundException {
+    public static boolean isChildDocument(ContentResolver contentResolver, Uri uri, Uri uri2) throws Throwable {
         Preconditions.checkNotNull(contentResolver, "content can not be null");
         Preconditions.checkNotNull(uri, "parentDocumentUri can not be null");
         Preconditions.checkNotNull(uri2, "childDocumentUri can not be null");
@@ -418,14 +418,14 @@ public final class DocumentsContract {
             Bundle bundle = new Bundle();
             bundle.putParcelable("uri", uri);
             bundle.putParcelable(EXTRA_TARGET_URI, uri2);
-            Bundle call = contentResolver.call(uri.getAuthority(), METHOD_IS_CHILD_DOCUMENT, (String) null, bundle);
-            if (call == null) {
+            Bundle bundleCall = contentResolver.call(uri.getAuthority(), METHOD_IS_CHILD_DOCUMENT, (String) null, bundle);
+            if (bundleCall == null) {
                 throw new RemoteException("Failed to get a response from isChildDocument query.");
             }
-            if (!call.containsKey("result")) {
+            if (!bundleCall.containsKey("result")) {
                 throw new RemoteException("Response did not include result field..");
             }
-            return call.getBoolean("result");
+            return bundleCall.getBoolean("result");
         } catch (Exception e) {
             Log.w(TAG, "Failed to create document", e);
             rethrowIfNecessary(e);
@@ -433,7 +433,7 @@ public final class DocumentsContract {
         }
     }
 
-    public static Uri renameDocument(ContentResolver contentResolver, Uri uri, String str) throws FileNotFoundException {
+    public static Uri renameDocument(ContentResolver contentResolver, Uri uri, String str) throws Throwable {
         try {
             Bundle bundle = new Bundle();
             bundle.putParcelable("uri", uri);
@@ -447,7 +447,7 @@ public final class DocumentsContract {
         }
     }
 
-    public static boolean deleteDocument(ContentResolver contentResolver, Uri uri) throws FileNotFoundException {
+    public static boolean deleteDocument(ContentResolver contentResolver, Uri uri) throws Throwable {
         try {
             Bundle bundle = new Bundle();
             bundle.putParcelable("uri", uri);
@@ -460,7 +460,7 @@ public final class DocumentsContract {
         }
     }
 
-    public static Uri copyDocument(ContentResolver contentResolver, Uri uri, Uri uri2) throws FileNotFoundException {
+    public static Uri copyDocument(ContentResolver contentResolver, Uri uri, Uri uri2) throws Throwable {
         try {
             Bundle bundle = new Bundle();
             bundle.putParcelable("uri", uri);
@@ -473,7 +473,7 @@ public final class DocumentsContract {
         }
     }
 
-    public static Uri moveDocument(ContentResolver contentResolver, Uri uri, Uri uri2, Uri uri3) throws FileNotFoundException {
+    public static Uri moveDocument(ContentResolver contentResolver, Uri uri, Uri uri2, Uri uri3) throws Throwable {
         try {
             Bundle bundle = new Bundle();
             bundle.putParcelable("uri", uri);
@@ -487,7 +487,7 @@ public final class DocumentsContract {
         }
     }
 
-    public static boolean removeDocument(ContentResolver contentResolver, Uri uri, Uri uri2) throws FileNotFoundException {
+    public static boolean removeDocument(ContentResolver contentResolver, Uri uri, Uri uri2) throws Throwable {
         try {
             Bundle bundle = new Bundle();
             bundle.putParcelable("uri", uri);
@@ -511,7 +511,7 @@ public final class DocumentsContract {
         }
     }
 
-    public static Bundle getDocumentMetadata(ContentResolver contentResolver, Uri uri) throws FileNotFoundException {
+    public static Bundle getDocumentMetadata(ContentResolver contentResolver, Uri uri) throws Throwable {
         Preconditions.checkNotNull(contentResolver, "content can not be null");
         Preconditions.checkNotNull(uri, "documentUri can not be null");
         try {
@@ -525,7 +525,7 @@ public final class DocumentsContract {
         }
     }
 
-    public static Path findDocumentPath(ContentResolver contentResolver, Uri uri) throws FileNotFoundException {
+    public static Path findDocumentPath(ContentResolver contentResolver, Uri uri) throws Throwable {
         try {
             Bundle bundle = new Bundle();
             bundle.putParcelable("uri", uri);
@@ -537,7 +537,7 @@ public final class DocumentsContract {
         }
     }
 
-    public static IntentSender createWebLinkIntent(ContentResolver contentResolver, Uri uri, Bundle bundle) throws FileNotFoundException {
+    public static IntentSender createWebLinkIntent(ContentResolver contentResolver, Uri uri, Bundle bundle) throws Throwable {
         try {
             Bundle bundle2 = new Bundle();
             bundle2.putParcelable("uri", uri);
@@ -554,7 +554,7 @@ public final class DocumentsContract {
 
     public static AssetFileDescriptor openImageThumbnail(File file) throws FileNotFoundException {
         Bundle bundle;
-        ParcelFileDescriptor open = ParcelFileDescriptor.open(file, 268435456);
+        ParcelFileDescriptor parcelFileDescriptorOpen = ParcelFileDescriptor.open(file, 268435456);
         try {
             ExifInterface exifInterface = new ExifInterface(file.getAbsolutePath());
             long[] thumbnailRange = exifInterface.getThumbnailRange();
@@ -572,14 +572,14 @@ public final class DocumentsContract {
                     bundle = new Bundle(1);
                     bundle.putInt(EXTRA_ORIENTATION, 270);
                 }
-                return new AssetFileDescriptor(open, thumbnailRange[0], thumbnailRange[1], bundle);
+                return new AssetFileDescriptor(parcelFileDescriptorOpen, thumbnailRange[0], thumbnailRange[1], bundle);
             }
         } catch (IOException unused) {
         }
-        return new AssetFileDescriptor(open, 0L, -1L, null);
+        return new AssetFileDescriptor(parcelFileDescriptorOpen, 0L, -1L, null);
     }
 
-    private static void rethrowIfNecessary(Exception exc) throws FileNotFoundException {
+    private static void rethrowIfNecessary(Exception exc) throws Throwable {
         if (VMRuntime.getRuntime().getTargetSdkVersion() >= 26) {
             if (exc instanceof ParcelableException) {
                 ((ParcelableException) exc).maybeRethrow(FileNotFoundException.class);

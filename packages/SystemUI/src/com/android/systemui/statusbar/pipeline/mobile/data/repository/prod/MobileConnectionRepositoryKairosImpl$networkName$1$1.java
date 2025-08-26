@@ -18,7 +18,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionRepositoryKairosImpl$networkName$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ NetworkNameModel $defaultNetworkName;
@@ -63,7 +62,7 @@ final class MobileConnectionRepositoryKairosImpl$networkName$1$1 extends Suspend
             BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryKairosImpl$networkName$1$1$receiver$1
                 @Override // android.content.BroadcastReceiver
                 public final void onReceive(Context context, Intent intent) {
-                    if (intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_INDEX", -1) == MobileConnectionRepositoryKairosImpl.this.subId) {
+                    if (intent.getIntExtra("android.telephony.extra.SUBSCRIPTION_INDEX", -1) == mobileConnectionRepositoryKairosImpl.subId) {
                         mobileInputLogger.logServiceProvidersUpdatedBroadcast(intent);
                         CoalescingEventProducerScope coalescingEventProducerScope2 = coalescingEventProducerScope;
                         Object networkNameModel2 = NetworkNameModelKt.toNetworkNameModel(intent, str);

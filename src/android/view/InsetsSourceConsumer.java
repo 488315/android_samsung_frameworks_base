@@ -76,14 +76,14 @@ public class InsetsSourceConsumer {
         }
         if (this.mSourceControl == null) {
             this.mController.notifyControlRevoked(this);
-            InsetsSource peekSource = this.mState.peekSource(this.mId);
-            InsetsSource peekSource2 = this.mController.getLastDispatchedState().peekSource(this.mId);
-            boolean z2 = peekSource != null && peekSource.isVisible();
-            if (peekSource2 != null && peekSource2.isVisible()) {
+            InsetsSource insetsSourcePeekSource = this.mState.peekSource(this.mId);
+            InsetsSource insetsSourcePeekSource2 = this.mController.getLastDispatchedState().peekSource(this.mId);
+            boolean z2 = insetsSourcePeekSource != null && insetsSourcePeekSource.isVisible();
+            if (insetsSourcePeekSource2 != null && insetsSourcePeekSource2.isVisible()) {
                 z = true;
             }
-            if (peekSource != null) {
-                peekSource.setVisible(z);
+            if (insetsSourcePeekSource != null) {
+                insetsSourcePeekSource.setVisible(z);
             }
             if (z2 != z) {
                 this.mController.notifyVisibilityChanged();
@@ -93,14 +93,14 @@ public class InsetsSourceConsumer {
             if (insetsSourceControl3 != null && !Insets.NONE.equals(insetsSourceControl3.getInsetsHint()) && InsetsSource.getInsetSide(insetsSourceControl3.getInsetsHint()) != InsetsSource.getInsetSide(insetsSourceControl.getInsetsHint())) {
                 iArr3[0] = iArr3[0] | this.mType;
             }
-            boolean isRequestedVisibleAwaitingControl = isRequestedVisibleAwaitingControl();
+            boolean zIsRequestedVisibleAwaitingControl = isRequestedVisibleAwaitingControl();
             SurfaceControl leash = insetsSourceControl3 != null ? insetsSourceControl3.getLeash() : null;
             SurfaceControl leash2 = insetsSourceControl.getLeash();
-            if (leash2 != null && ((leash == null || !leash2.isSameSurface(leash)) && isRequestedVisibleAwaitingControl != insetsSourceControl.isInitiallyVisible() && (insetsSourceControl.getType() == WindowInsets.Type.ime() || InsetsSource.getInsetSide(insetsSourceControl.getInsetsHint()) != 0))) {
+            if (leash2 != null && ((leash == null || !leash2.isSameSurface(leash)) && zIsRequestedVisibleAwaitingControl != insetsSourceControl.isInitiallyVisible() && (insetsSourceControl.getType() == WindowInsets.Type.ime() || InsetsSource.getInsetSide(insetsSourceControl.getInsetsHint()) != 0))) {
                 if (InsetsController.DEBUG) {
-                    Log.d(TAG, String.format("Gaining leash in %s, requestedVisible: %b", this.mController.getHost().getRootViewTitle(), Boolean.valueOf(isRequestedVisibleAwaitingControl)));
+                    Log.d(TAG, String.format("Gaining leash in %s, requestedVisible: %b", this.mController.getHost().getRootViewTitle(), Boolean.valueOf(zIsRequestedVisibleAwaitingControl)));
                 }
-                if (isRequestedVisibleAwaitingControl) {
+                if (zIsRequestedVisibleAwaitingControl) {
                     iArr[0] = iArr[0] | this.mType;
                 } else {
                     iArr2[0] = iArr2[0] | this.mType;
@@ -115,7 +115,7 @@ public class InsetsSourceConsumer {
                 if (!this.mController.hasSurfaceAnimation(this.mType)) {
                     applyRequestedVisibilityAndPositionToControl();
                 }
-                if (!isRequestedVisibleAwaitingControl && insetsSourceControl3 == null) {
+                if (!zIsRequestedVisibleAwaitingControl && insetsSourceControl3 == null) {
                     removeSurface();
                 }
             }
@@ -151,41 +151,41 @@ public class InsetsSourceConsumer {
     }
 
     public boolean onAnimationStateChanged(boolean z) {
-        boolean z2;
+        boolean zApplyLocalVisibilityOverride;
         ViewRootImpl viewRoot;
         int i = 1;
         if (z || this.mPendingFrame == null) {
-            z2 = false;
+            zApplyLocalVisibilityOverride = false;
         } else {
-            InsetsSource peekSource = this.mState.peekSource(this.mId);
-            if (peekSource != null) {
-                peekSource.setFrame(this.mPendingFrame);
-                peekSource.setVisibleFrame(this.mPendingVisibleFrame);
-                z2 = true;
+            InsetsSource insetsSourcePeekSource = this.mState.peekSource(this.mId);
+            if (insetsSourcePeekSource != null) {
+                insetsSourcePeekSource.setFrame(this.mPendingFrame);
+                insetsSourcePeekSource.setVisibleFrame(this.mPendingVisibleFrame);
+                zApplyLocalVisibilityOverride = true;
             } else {
-                z2 = false;
+                zApplyLocalVisibilityOverride = false;
             }
             this.mPendingFrame = null;
             this.mPendingVisibleFrame = null;
         }
-        boolean isShowRequested = isShowRequested();
-        boolean z3 = !Flags.refactorInsetsController() ? z || !isShowRequested ? this.mAnimationState != 1 : this.mAnimationState != 2 : (this.mController.getCancelledForNewAnimationTypes() & this.mType) == 0;
+        boolean zIsShowRequested = isShowRequested();
+        boolean z2 = !Flags.refactorInsetsController() ? z || !zIsShowRequested ? this.mAnimationState != 1 : this.mAnimationState != 2 : (this.mController.getCancelledForNewAnimationTypes() & this.mType) == 0;
         if (!z) {
             i = 0;
-        } else if (!isShowRequested) {
+        } else if (!zIsShowRequested) {
             i = 2;
         }
         this.mAnimationState = i;
-        if (!z3) {
-            z2 |= applyLocalVisibilityOverride();
+        if (!z2) {
+            zApplyLocalVisibilityOverride |= applyLocalVisibilityOverride();
         }
         if (Flags.refactorInsetsController()) {
             InsetsController.Host host = this.mController.getHost();
-            if (z2 && this.mType == WindowInsets.Type.ime() && (host instanceof ViewRootInsetsControllerHost) && (viewRoot = ((ViewRootInsetsControllerHost) host).getViewRoot()) != null) {
+            if (zApplyLocalVisibilityOverride && this.mType == WindowInsets.Type.ime() && (host instanceof ViewRootInsetsControllerHost) && (viewRoot = ((ViewRootInsetsControllerHost) host).getViewRoot()) != null) {
                 viewRoot.forceWmRelayout();
             }
         }
-        return z2;
+        return zApplyLocalVisibilityOverride;
     }
 
     protected boolean isShowRequested() {
@@ -209,8 +209,8 @@ public class InsetsSourceConsumer {
         if (Flags.refactorInsetsController() && this.mType == WindowInsets.Type.ime()) {
             ImeTracing.getInstance().triggerClientDump("ImeInsetsSourceConsumer#applyLocalVisibilityOverride", this.mController.getHost().getInputMethodManager(), null);
         }
-        InsetsSource peekSource = this.mState.peekSource(this.mId);
-        if (peekSource == null) {
+        InsetsSource insetsSourcePeekSource = this.mState.peekSource(this.mId);
+        if (insetsSourcePeekSource == null) {
             return false;
         }
         boolean z = (this.mController.getRequestedVisibleTypes() & this.mType) != 0;
@@ -224,17 +224,17 @@ public class InsetsSourceConsumer {
             if (InsetsController.DEBUG) {
                 Log.d(TAG, TextUtils.formatSimple("applyLocalVisibilityOverride: Set the source visibility to false, as there is no leash yet for type %s in %s", WindowInsets.Type.toString(this.mType), this.mController.getHost().getRootViewTitle()));
             }
-            boolean isVisible = peekSource.isVisible();
-            peekSource.setVisible(false);
-            return isVisible;
+            boolean zIsVisible = insetsSourcePeekSource.isVisible();
+            insetsSourcePeekSource.setVisible(false);
+            return zIsVisible;
         }
-        if (peekSource.isVisible() == z) {
+        if (insetsSourcePeekSource.isVisible() == z) {
             return false;
         }
         if (InsetsController.DEBUG) {
             Log.d(TAG, String.format("applyLocalVisibilityOverride: %s requestedVisible: %b", this.mController.getHost().getRootViewTitle(), Boolean.valueOf(z)));
         }
-        peekSource.setVisible(z);
+        insetsSourcePeekSource.setVisible(z);
         return true;
     }
 
@@ -253,8 +253,8 @@ public class InsetsSourceConsumer {
     }
 
     public void updateSource(InsetsSource insetsSource, int i) {
-        InsetsSource peekSource = this.mState.peekSource(this.mId);
-        if (peekSource == null || i == -1 || peekSource.getFrame().equals(insetsSource.getFrame())) {
+        InsetsSource insetsSourcePeekSource = this.mState.peekSource(this.mId);
+        if (insetsSourcePeekSource == null || i == -1 || insetsSourcePeekSource.getFrame().equals(insetsSource.getFrame())) {
             this.mPendingFrame = null;
             this.mPendingVisibleFrame = null;
             this.mState.addSource(insetsSource);
@@ -262,8 +262,8 @@ public class InsetsSourceConsumer {
         }
         this.mPendingFrame = new Rect(insetsSource.getFrame());
         this.mPendingVisibleFrame = insetsSource.getVisibleFrame() != null ? new Rect(insetsSource.getVisibleFrame()) : null;
-        insetsSource.setFrame(peekSource.getFrame());
-        insetsSource.setVisibleFrame(peekSource.getVisibleFrame());
+        insetsSource.setFrame(insetsSourcePeekSource.getFrame());
+        insetsSource.setVisibleFrame(insetsSourcePeekSource.getVisibleFrame());
         this.mState.addSource(insetsSource);
         if (InsetsController.DEBUG) {
             Log.d(TAG, "updateSource: " + insetsSource);
@@ -288,7 +288,7 @@ public class InsetsSourceConsumer {
     }
 
     void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1133871366146L, this.mHasWindowFocus);
         protoOutputStream.write(1133871366147L, isShowRequested());
         InsetsSourceControl insetsSourceControl = this.mSourceControl;
@@ -305,7 +305,7 @@ public class InsetsSourceConsumer {
         }
         protoOutputStream.write(1120986464263L, this.mAnimationState);
         protoOutputStream.write(1120986464264L, this.mType);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     boolean hasPendingFrame() {

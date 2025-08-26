@@ -20,7 +20,6 @@ import com.android.systemui.qp.SubscreenWifiController.TileReceiver;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubroomWifiSettingsView extends LinearLayout implements SubscreenQSControllerContract$View {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -62,7 +61,7 @@ public class SubroomWifiSettingsView extends LinearLayout implements SubscreenQS
         this.mWifiButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qp.SubroomWifiSettingsView$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                SubroomWifiSettingsView subroomWifiSettingsView = SubroomWifiSettingsView.this;
+                SubroomWifiSettingsView subroomWifiSettingsView = this.f$0;
                 int i = SubroomWifiSettingsView.$r8$clinit;
                 if (((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isWifiTileBlocked()) {
                     Log.d("SubroomWifiSettingsView", "Subscreen Wifi tile not available by KnoxStateMonitor.");

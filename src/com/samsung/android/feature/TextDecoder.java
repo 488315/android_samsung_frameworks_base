@@ -26,11 +26,11 @@ public class TextDecoder {
         byte[] bArr = new byte[i];
         int i2 = 0;
         while (i2 < i) {
-            int read = inputStream.read(bArr, i2, i - i2);
-            if (read == -1) {
+            int i3 = inputStream.read(bArr, i2, i - i2);
+            if (i3 == -1) {
                 break;
             }
-            i2 += read;
+            i2 += i3;
         }
         return Arrays.copyOfRange(bArr, 0, i2);
     }
@@ -38,14 +38,14 @@ public class TextDecoder {
     private static boolean isEncodedGzip(File file) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(file);
         try {
-            byte[] readBuffer = fileInputStream.available() > 0 ? readBuffer(fileInputStream, 1024) : null;
+            byte[] buffer = fileInputStream.available() > 0 ? readBuffer(fileInputStream, 1024) : null;
             boolean z = false;
-            if (readBuffer == null || readBuffer.length < 2) {
+            if (buffer == null || buffer.length < 2) {
                 fileInputStream.close();
                 return false;
             }
-            if (readBuffer[0] == 47) {
-                if (readBuffer[1] == 39) {
+            if (buffer[0] == 47) {
+                if (buffer[1] == 39) {
                     z = true;
                 }
             }
@@ -80,8 +80,8 @@ public class TextDecoder {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             while (fileInputStream.available() > 0) {
                 try {
-                    byte[] decodeByte = decodeByte(readBuffer(fileInputStream, 1048576));
-                    byteArrayOutputStream.write(decodeByte, 0, decodeByte.length);
+                    byte[] bArrDecodeByte = decodeByte(readBuffer(fileInputStream, 1048576));
+                    byteArrayOutputStream.write(bArrDecodeByte, 0, bArrDecodeByte.length);
                 } finally {
                 }
             }
@@ -107,8 +107,8 @@ public class TextDecoder {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 while (gZIPInputStream.available() > 0) {
                     try {
-                        byte[] readBuffer = readBuffer(gZIPInputStream, 1048576);
-                        byteArrayOutputStream.write(readBuffer, 0, readBuffer.length);
+                        byte[] buffer = readBuffer(gZIPInputStream, 1048576);
+                        byteArrayOutputStream.write(buffer, 0, buffer.length);
                     } finally {
                     }
                 }
@@ -130,15 +130,15 @@ public class TextDecoder {
     }
 
     static String decode(File file, boolean z) throws IOException {
-        byte[] readAllBytes;
+        byte[] allBytes;
         if (isEncodedGzip(file)) {
-            readAllBytes = readEncodedGzipAllBytes(file);
+            allBytes = readEncodedGzipAllBytes(file);
         } else {
             if (!z) {
                 return null;
             }
-            readAllBytes = Files.readAllBytes(file.toPath());
+            allBytes = Files.readAllBytes(file.toPath());
         }
-        return new String(readAllBytes, StandardCharsets.UTF_8);
+        return new String(allBytes, StandardCharsets.UTF_8);
     }
 }

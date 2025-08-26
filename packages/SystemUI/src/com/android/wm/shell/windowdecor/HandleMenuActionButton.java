@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import com.android.systemui.R;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class HandleMenuActionButton extends LinearLayout {
     public final ImageView iconView;
@@ -35,12 +34,12 @@ public final class HandleMenuActionButton extends LinearLayout {
         this.iconView = imageView;
         MarqueedTextView marqueedTextView = (MarqueedTextView) findViewById(R.id.label);
         this.textView = marqueedTextView;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, com.android.wm.shell.R.styleable.HandleMenuActionButton, 0, 0);
-        setContentDescription(obtainStyledAttributes.getString(2));
-        marqueedTextView.setText(obtainStyledAttributes.getString(2));
-        marqueedTextView.setTextColor(obtainStyledAttributes.getColor(0, 0));
-        imageView.setImageResource(obtainStyledAttributes.getResourceId(1, 0));
-        imageView.setImageTintList(obtainStyledAttributes.getColorStateList(3));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, com.android.wm.shell.R.styleable.HandleMenuActionButton, 0, 0);
+        setContentDescription(typedArrayObtainStyledAttributes.getString(2));
+        marqueedTextView.setText(typedArrayObtainStyledAttributes.getString(2));
+        marqueedTextView.setTextColor(typedArrayObtainStyledAttributes.getColor(0, 0));
+        imageView.setImageResource(typedArrayObtainStyledAttributes.getResourceId(1, 0));
+        imageView.setImageTintList(typedArrayObtainStyledAttributes.getColorStateList(3));
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

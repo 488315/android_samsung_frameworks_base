@@ -38,13 +38,13 @@ public final class CardStatus {
 
     public static final ArrayList<CardStatus> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CardStatus> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 80, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 80, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CardStatus cardStatus = new CardStatus();
-            cardStatus.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 80);
+            cardStatus.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 80);
             arrayList.add(cardStatus);
         }
         return arrayList;

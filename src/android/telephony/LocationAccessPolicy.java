@@ -160,12 +160,12 @@ public final class LocationAccessPolicy {
     private static LocationPermissionResult checkAppLocationPermissionHelper(Context context, LocationPermissionQuery locationPermissionQuery, String str) {
         String str2 = Manifest.permission.ACCESS_FINE_LOCATION.equals(str) ? "fine" : "coarse";
         if (checkManifestPermission(context, locationPermissionQuery.callingPid, locationPermissionQuery.callingUid, str)) {
-            int noteOpNoThrow = ((AppOpsManager) context.getSystemService(AppOpsManager.class)).noteOpNoThrow(getAppOpsString(str), locationPermissionQuery.callingUid, locationPermissionQuery.callingPackage, locationPermissionQuery.callingFeatureId, (String) null);
-            if (noteOpNoThrow == 0) {
+            int iNoteOpNoThrow = ((AppOpsManager) context.getSystemService(AppOpsManager.class)).noteOpNoThrow(getAppOpsString(str), locationPermissionQuery.callingUid, locationPermissionQuery.callingPackage, locationPermissionQuery.callingFeatureId, (String) null);
+            if (iNoteOpNoThrow == 0) {
                 return LocationPermissionResult.ALLOWED;
             }
             Log.i(TAG, locationPermissionQuery.callingPackage + " is aware of " + str2 + " but the app-ops permission is specifically denied.");
-            return appOpsModeToPermissionResult(noteOpNoThrow);
+            return appOpsModeToPermissionResult(iNoteOpNoThrow);
         }
         int i = Manifest.permission.ACCESS_FINE_LOCATION.equals(str) ? locationPermissionQuery.minSdkVersionForFine : locationPermissionQuery.minSdkVersionForCoarse;
         UserHandle userHandleForUid = UserHandle.getUserHandleForUid(locationPermissionQuery.callingUid);
@@ -181,8 +181,8 @@ public final class LocationAccessPolicy {
     }
 
     public static LocationPermissionResult checkLocationPermission(Context context, LocationPermissionQuery locationPermissionQuery) {
-        LocationPermissionResult checkAppLocationPermissionHelper;
-        LocationPermissionResult checkAppLocationPermissionHelper2;
+        LocationPermissionResult locationPermissionResultCheckAppLocationPermissionHelper;
+        LocationPermissionResult locationPermissionResultCheckAppLocationPermissionHelper2;
         if (TelephonyPermissions.isSystemOrPhone(locationPermissionQuery.callingUid) || UserHandle.isSameApp(locationPermissionQuery.callingUid, Process.NETWORK_STACK_UID) || UserHandle.isSameApp(locationPermissionQuery.callingUid, 0)) {
             return LocationPermissionResult.ALLOWED;
         }
@@ -190,17 +190,17 @@ public final class LocationAccessPolicy {
             Log.i(TAG, "checkLocationPermission - callingUid: " + locationPermissionQuery.callingUid + ", callingPid: " + locationPermissionQuery.callingPid + ", result: DENIED_SOFT");
             return LocationPermissionResult.DENIED_SOFT;
         }
-        if (locationPermissionQuery.minSdkVersionForFine < Integer.MAX_VALUE && (checkAppLocationPermissionHelper2 = checkAppLocationPermissionHelper(context, locationPermissionQuery, Manifest.permission.ACCESS_FINE_LOCATION)) != null) {
-            if (checkAppLocationPermissionHelper2 != LocationPermissionResult.ALLOWED) {
-                Log.i(TAG, "checkLocationPermission - callingUid: " + locationPermissionQuery.callingUid + ", callingPid: " + locationPermissionQuery.callingPid + ", resultForFine: " + checkAppLocationPermissionHelper2);
+        if (locationPermissionQuery.minSdkVersionForFine < Integer.MAX_VALUE && (locationPermissionResultCheckAppLocationPermissionHelper2 = checkAppLocationPermissionHelper(context, locationPermissionQuery, Manifest.permission.ACCESS_FINE_LOCATION)) != null) {
+            if (locationPermissionResultCheckAppLocationPermissionHelper2 != LocationPermissionResult.ALLOWED) {
+                Log.i(TAG, "checkLocationPermission - callingUid: " + locationPermissionQuery.callingUid + ", callingPid: " + locationPermissionQuery.callingPid + ", resultForFine: " + locationPermissionResultCheckAppLocationPermissionHelper2);
             }
-            return checkAppLocationPermissionHelper2;
+            return locationPermissionResultCheckAppLocationPermissionHelper2;
         }
-        if (locationPermissionQuery.minSdkVersionForCoarse < Integer.MAX_VALUE && (checkAppLocationPermissionHelper = checkAppLocationPermissionHelper(context, locationPermissionQuery, Manifest.permission.ACCESS_COARSE_LOCATION)) != null) {
-            if (checkAppLocationPermissionHelper != LocationPermissionResult.ALLOWED) {
-                Log.i(TAG, "checkLocationPermission - callingUid: " + locationPermissionQuery.callingUid + ", callingPid: " + locationPermissionQuery.callingPid + ", resultForCoarse: " + checkAppLocationPermissionHelper);
+        if (locationPermissionQuery.minSdkVersionForCoarse < Integer.MAX_VALUE && (locationPermissionResultCheckAppLocationPermissionHelper = checkAppLocationPermissionHelper(context, locationPermissionQuery, Manifest.permission.ACCESS_COARSE_LOCATION)) != null) {
+            if (locationPermissionResultCheckAppLocationPermissionHelper != LocationPermissionResult.ALLOWED) {
+                Log.i(TAG, "checkLocationPermission - callingUid: " + locationPermissionQuery.callingUid + ", callingPid: " + locationPermissionQuery.callingPid + ", resultForCoarse: " + locationPermissionResultCheckAppLocationPermissionHelper);
             }
-            return checkAppLocationPermissionHelper;
+            return locationPermissionResultCheckAppLocationPermissionHelper;
         }
         return LocationPermissionResult.ALLOWED;
     }
@@ -243,20 +243,20 @@ public final class LocationAccessPolicy {
     }
 
     private static boolean isCurrentProfile(Context context, int i) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (UserHandle.getUserHandleForUid(i).getIdentifier() != ActivityManager.getCurrentUser()) {
                 ActivityManager activityManager = (ActivityManager) context.getSystemService(ActivityManager.class);
                 if (activityManager != null) {
                     return activityManager.isProfileForeground(UserHandle.getUserHandleForUid(ActivityManager.getCurrentUser()));
                 }
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 return false;
             }
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             return true;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

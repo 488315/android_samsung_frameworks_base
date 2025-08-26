@@ -16,7 +16,6 @@ import android.os.Looper;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.service.textclassifier.ITextClassifierService;
-import android.service.textclassifier.TextClassifierService;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.view.textclassifier.ConversationActions;
@@ -97,7 +96,7 @@ public abstract class TextClassifierService extends Service {
             TextClassifierService.this.mMainThreadHandler.post(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TextClassifierService.AnonymousClass1.this.lambda$onSuggestSelection$0(textClassificationSessionId, request, iTextClassifierCallback);
+                    this.f$0.lambda$onSuggestSelection$0(textClassificationSessionId, request, iTextClassifierCallback);
                 }
             });
         }
@@ -114,7 +113,7 @@ public abstract class TextClassifierService extends Service {
             TextClassifierService.this.mMainThreadHandler.post(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TextClassifierService.AnonymousClass1.this.lambda$onClassifyText$1(textClassificationSessionId, request, iTextClassifierCallback);
+                    this.f$0.lambda$onClassifyText$1(textClassificationSessionId, request, iTextClassifierCallback);
                 }
             });
         }
@@ -131,7 +130,7 @@ public abstract class TextClassifierService extends Service {
             TextClassifierService.this.mMainThreadHandler.post(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TextClassifierService.AnonymousClass1.this.lambda$onGenerateLinks$2(textClassificationSessionId, request, iTextClassifierCallback);
+                    this.f$0.lambda$onGenerateLinks$2(textClassificationSessionId, request, iTextClassifierCallback);
                 }
             });
         }
@@ -147,7 +146,7 @@ public abstract class TextClassifierService extends Service {
             TextClassifierService.this.mMainThreadHandler.post(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TextClassifierService.AnonymousClass1.this.lambda$onSelectionEvent$3(textClassificationSessionId, selectionEvent);
+                    this.f$0.lambda$onSelectionEvent$3(textClassificationSessionId, selectionEvent);
                 }
             });
         }
@@ -163,7 +162,7 @@ public abstract class TextClassifierService extends Service {
             TextClassifierService.this.mMainThreadHandler.post(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TextClassifierService.AnonymousClass1.this.lambda$onTextClassifierEvent$4(textClassificationSessionId, textClassifierEvent);
+                    this.f$0.lambda$onTextClassifierEvent$4(textClassificationSessionId, textClassifierEvent);
                 }
             });
         }
@@ -180,7 +179,7 @@ public abstract class TextClassifierService extends Service {
             TextClassifierService.this.mMainThreadHandler.post(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TextClassifierService.AnonymousClass1.this.lambda$onDetectLanguage$5(textClassificationSessionId, request, iTextClassifierCallback);
+                    this.f$0.lambda$onDetectLanguage$5(textClassificationSessionId, request, iTextClassifierCallback);
                 }
             });
         }
@@ -197,7 +196,7 @@ public abstract class TextClassifierService extends Service {
             TextClassifierService.this.mMainThreadHandler.post(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TextClassifierService.AnonymousClass1.this.lambda$onSuggestConversationActions$6(textClassificationSessionId, request, iTextClassifierCallback);
+                    this.f$0.lambda$onSuggestConversationActions$6(textClassificationSessionId, request, iTextClassifierCallback);
                 }
             });
         }
@@ -214,7 +213,7 @@ public abstract class TextClassifierService extends Service {
             TextClassifierService.this.mMainThreadHandler.post(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TextClassifierService.AnonymousClass1.this.lambda$onCreateTextClassificationSession$7(textClassificationContext, textClassificationSessionId);
+                    this.f$0.lambda$onCreateTextClassificationSession$7(textClassificationContext, textClassificationSessionId);
                 }
             });
         }
@@ -229,7 +228,7 @@ public abstract class TextClassifierService extends Service {
             TextClassifierService.this.mMainThreadHandler.post(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TextClassifierService.AnonymousClass1.this.lambda$onDestroyTextClassificationSession$8(textClassificationSessionId);
+                    this.f$0.lambda$onDestroyTextClassificationSession$8(textClassificationSessionId);
                 }
             });
         }
@@ -248,7 +247,7 @@ public abstract class TextClassifierService extends Service {
                 runnable = new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda8
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TextClassifierService.this.onConnected();
+                        textClassifierService.onConnected();
                     }
                 };
             } else {
@@ -256,7 +255,7 @@ public abstract class TextClassifierService extends Service {
                 runnable = new Runnable() { // from class: android.service.textclassifier.TextClassifierService$1$$ExternalSyntheticLambda9
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TextClassifierService.this.onDisconnected();
+                        textClassifierService2.onDisconnected();
                     }
                 };
             }
@@ -282,7 +281,7 @@ public abstract class TextClassifierService extends Service {
         this.mSingleThreadExecutor.submit(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                TextClassifierService.this.lambda$onDetectLanguage$0(callback, request);
+                this.f$0.lambda$onDetectLanguage$0(callback, request);
             }
         });
     }
@@ -296,7 +295,7 @@ public abstract class TextClassifierService extends Service {
         this.mSingleThreadExecutor.submit(new Runnable() { // from class: android.service.textclassifier.TextClassifierService$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                TextClassifierService.this.lambda$onSuggestConversationActions$1(callback, request);
+                this.f$0.lambda$onSuggestConversationActions$1(callback, request);
             }
         });
     }
@@ -331,12 +330,12 @@ public abstract class TextClassifierService extends Service {
     }
 
     public static ComponentName getServiceComponentName(Context context, String str, int i) {
-        ResolveInfo resolveService = context.getPackageManager().resolveService(new Intent(SERVICE_INTERFACE).setPackage(str), i);
-        if (resolveService == null || resolveService.serviceInfo == null) {
+        ResolveInfo resolveInfoResolveService = context.getPackageManager().resolveService(new Intent(SERVICE_INTERFACE).setPackage(str), i);
+        if (resolveInfoResolveService == null || resolveInfoResolveService.serviceInfo == null) {
             Slog.w(LOG_TAG, String.format("Package or service not found in package %s for user %d", str, Integer.valueOf(context.getUserId())));
             return null;
         }
-        ServiceInfo serviceInfo = resolveService.serviceInfo;
+        ServiceInfo serviceInfo = resolveInfoResolveService.serviceInfo;
         if (!Manifest.permission.BIND_TEXTCLASSIFIER_SERVICE.equals(serviceInfo.permission)) {
             Slog.w(LOG_TAG, String.format("Service %s should require %s permission. Found %s permission", serviceInfo.getComponentName(), Manifest.permission.BIND_TEXTCLASSIFIER_SERVICE, serviceInfo.permission));
             return null;

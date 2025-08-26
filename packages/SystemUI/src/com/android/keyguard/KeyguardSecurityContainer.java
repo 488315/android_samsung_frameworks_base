@@ -75,7 +75,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecurityContainer extends ConstraintLayout {
     static final float MIN_BACK_SCALE = 0.9f;
@@ -95,7 +94,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
     public ViewMode mViewMode;
     public int mWidth;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum BouncerUiEvent implements UiEventLogger.UiEventEnum {
         UNKNOWN(0),
         BOUNCER_DISMISS_EXTENDED_ACCESS(413),
@@ -117,7 +115,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DefaultViewMode implements ViewMode {
         public KeyguardSecurityContainer mView;
         public KeyguardSecurityViewFlipper mViewFlipper;
@@ -148,7 +145,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DoubleTapListener extends GestureDetector.SimpleOnGestureListener {
         public /* synthetic */ DoubleTapListener(KeyguardSecurityContainer keyguardSecurityContainer, int i) {
             this();
@@ -163,7 +159,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OneHandedViewMode extends SidedSecurityMode {
         public KeyguardSecurityContainer mView;
         public KeyguardSecurityViewFlipper mViewFlipper;
@@ -217,7 +212,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SidedSecurityMode implements ViewMode {
         public int mDefaultSideSetting;
         public GlobalSettings mGlobalSettings;
@@ -225,12 +219,12 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
 
         @Override // com.android.keyguard.KeyguardSecurityContainer.ViewMode
         public final void handleDoubleTap(MotionEvent motionEvent) {
-            boolean isLeftAligned = isLeftAligned();
+            boolean zIsLeftAligned = isLeftAligned();
             float x = motionEvent.getX();
-            if ((isLeftAligned && x > ((float) this.mView.getWidth()) / 2.0f) || (!isLeftAligned && x < ((float) this.mView.getWidth()) / 2.0f)) {
-                boolean z = !isLeftAligned;
-                this.mGlobalSettings.putInt("one_handed_keyguard_side", isLeftAligned ? 1 : 0);
-                SysUiStatsLog.write(63, !isLeftAligned ? 5 : 6);
+            if ((zIsLeftAligned && x > ((float) this.mView.getWidth()) / 2.0f) || (!zIsLeftAligned && x < ((float) this.mView.getWidth()) / 2.0f)) {
+                boolean z = !zIsLeftAligned;
+                this.mGlobalSettings.putInt("one_handed_keyguard_side", zIsLeftAligned ? 1 : 0);
+                SysUiStatsLog.write(63, !zIsLeftAligned ? 5 : 6);
                 updateSecurityViewLocation(z, true);
             }
         }
@@ -242,7 +236,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         public abstract void updateSecurityViewLocation(boolean z, boolean z2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UserSwitcherViewMode extends SidedSecurityMode {
         public final Executor mBgExecutor;
         public FalsingA11yDelegate mFalsingA11yDelegate;
@@ -252,7 +245,7 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         public final KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda2 mUserSwitchCallback = new UserSwitcherController.UserSwitchCallback() { // from class: com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda2
             @Override // com.android.systemui.statusbar.policy.UserSwitcherController.UserSwitchCallback
             public final void onUserSwitched() {
-                KeyguardSecurityContainer.UserSwitcherViewMode.this.setupUserSwitcher();
+                this.f$0.setupUserSwitcher();
             }
         };
         public TextView mUserSwitcher;
@@ -262,7 +255,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         public KeyguardSecurityContainer mView;
         public KeyguardSecurityViewFlipper mViewFlipper;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface UserSwitcherCallback {
         }
 
@@ -279,7 +271,7 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
 
         @Override // com.android.keyguard.KeyguardSecurityContainer.ViewMode
-        public final void init(KeyguardSecurityContainer keyguardSecurityContainer, GlobalSettings globalSettings, KeyguardSecurityViewFlipper keyguardSecurityViewFlipper, FalsingManager falsingManager, UserSwitcherController userSwitcherController, FalsingA11yDelegate falsingA11yDelegate) {
+        public final void init(KeyguardSecurityContainer keyguardSecurityContainer, GlobalSettings globalSettings, KeyguardSecurityViewFlipper keyguardSecurityViewFlipper, FalsingManager falsingManager, UserSwitcherController userSwitcherController, FalsingA11yDelegate falsingA11yDelegate) throws Resources.NotFoundException {
             super.mView = keyguardSecurityContainer;
             this.mGlobalSettings = globalSettings;
             this.mDefaultSideSetting = 1;
@@ -350,18 +342,18 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
             final KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda0 keyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda0 = new KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda0(this);
             this.mBgExecutor.execute(new Runnable() { // from class: com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
-                public final void run() {
+                public final void run() throws Resources.NotFoundException {
                     Object defaultUserIcon;
-                    KeyguardSecurityContainer.UserSwitcherViewMode userSwitcherViewMode = KeyguardSecurityContainer.UserSwitcherViewMode.this;
+                    KeyguardSecurityContainer.UserSwitcherViewMode userSwitcherViewMode = this.f$0;
                     int i2 = i;
                     KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda0 keyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda02 = keyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda0;
                     Bitmap userIcon = UserManager.get(userSwitcherViewMode.mView.getContext()).getUserIcon(i2);
                     if (userIcon != null) {
                         int dimensionPixelSize = userSwitcherViewMode.mResources.getDimensionPixelSize(R.dimen.bouncer_user_switcher_icon_size);
                         Context context = userSwitcherViewMode.mView.getContext();
-                        Bitmap scaleDownIfNecessary = Icon.scaleDownIfNecessary(userIcon, dimensionPixelSize, dimensionPixelSize);
+                        Bitmap bitmapScaleDownIfNecessary = Icon.scaleDownIfNecessary(userIcon, dimensionPixelSize, dimensionPixelSize);
                         int i3 = CircleFramedDrawable.$r8$clinit;
-                        defaultUserIcon = new CircleFramedDrawable(scaleDownIfNecessary, context.getResources().getDimensionPixelSize(R.dimen.update_user_photo_popup_min_width));
+                        defaultUserIcon = new CircleFramedDrawable(bitmapScaleDownIfNecessary, context.getResources().getDimensionPixelSize(R.dimen.update_user_photo_popup_min_width));
                     } else {
                         defaultUserIcon = UserIcons.getDefaultUserIcon(userSwitcherViewMode.mResources, i2, false);
                     }
@@ -373,7 +365,7 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
             keyguardUserSwitcherAnchor.setAccessibilityDelegate(this.mFalsingA11yDelegate);
             final ?? r2 = new BaseUserSwitcherAdapter(this, this.mUserSwitcherController) { // from class: com.android.keyguard.KeyguardSecurityContainer.UserSwitcherViewMode.2
                 @Override // android.widget.Adapter
-                public final View getView(int i2, View view, ViewGroup viewGroup) {
+                public final View getView(int i2, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
                     Drawable layerDrawable;
                     UserRecord userRecord3 = (UserRecord) ((ArrayList) getUsers()).get(i2);
                     FrameLayout frameLayout = (FrameLayout) view;
@@ -414,8 +406,8 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
             };
             keyguardUserSwitcherAnchor.setOnClickListener(new View.OnClickListener() { // from class: com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnClickListener
-                public final void onClick(View view) {
-                    final KeyguardSecurityContainer.UserSwitcherViewMode userSwitcherViewMode = KeyguardSecurityContainer.UserSwitcherViewMode.this;
+                public final void onClick(View view) throws Resources.NotFoundException {
+                    final KeyguardSecurityContainer.UserSwitcherViewMode userSwitcherViewMode = this.f$0;
                     KeyguardUserSwitcherAnchor keyguardUserSwitcherAnchor2 = keyguardUserSwitcherAnchor;
                     final KeyguardSecurityContainer.UserSwitcherViewMode.AnonymousClass2 anonymousClass2 = r2;
                     if (userSwitcherViewMode.mFalsingManager.isFalseTap(1)) {
@@ -428,7 +420,7 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
                     userSwitcherViewMode.mPopup.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda4
                         @Override // android.widget.AdapterView.OnItemClickListener
                         public final void onItemClick(AdapterView adapterView, View view2, int i2, long j) {
-                            KeyguardSecurityContainer.UserSwitcherViewMode userSwitcherViewMode2 = KeyguardSecurityContainer.UserSwitcherViewMode.this;
+                            KeyguardSecurityContainer.UserSwitcherViewMode userSwitcherViewMode2 = userSwitcherViewMode;
                             KeyguardSecurityContainer.UserSwitcherViewMode.AnonymousClass2 anonymousClass22 = anonymousClass2;
                             if (userSwitcherViewMode2.mFalsingManager.isFalseTap(1) || !view2.isEnabled() || userSwitcherViewMode2.mPopup == null) {
                                 return;
@@ -454,17 +446,17 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
 
         @Override // com.android.keyguard.KeyguardSecurityContainer.ViewMode
-        public final void startAppearAnimation(KeyguardSecurityModel.SecurityMode securityMode) {
+        public final void startAppearAnimation(KeyguardSecurityModel.SecurityMode securityMode) throws Resources.NotFoundException {
             ViewGroup viewGroup;
             if (securityMode == KeyguardSecurityModel.SecurityMode.Password || (viewGroup = this.mUserSwitcherViewGroup) == null) {
                 return;
             }
             viewGroup.setAlpha(0.0f);
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
             final int dimensionPixelSize = this.mView.getResources().getDimensionPixelSize(R.dimen.pin_view_trans_y_entry);
-            ofFloat.setInterpolator(Interpolators.STANDARD_DECELERATE);
-            ofFloat.setDuration(650L);
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.keyguard.KeyguardSecurityContainer.UserSwitcherViewMode.1
+            valueAnimatorOfFloat.setInterpolator(Interpolators.STANDARD_DECELERATE);
+            valueAnimatorOfFloat.setDuration(650L);
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.keyguard.KeyguardSecurityContainer.UserSwitcherViewMode.1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     ViewGroup viewGroup2 = UserSwitcherViewMode.this.mUserSwitcherViewGroup;
@@ -474,43 +466,43 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
                     }
                 }
             });
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda6
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$$ExternalSyntheticLambda6
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    KeyguardSecurityContainer.UserSwitcherViewMode userSwitcherViewMode = KeyguardSecurityContainer.UserSwitcherViewMode.this;
+                    KeyguardSecurityContainer.UserSwitcherViewMode userSwitcherViewMode = this.f$0;
                     int i = dimensionPixelSize;
                     if (userSwitcherViewMode.mUserSwitcherViewGroup != null) {
-                        float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                        userSwitcherViewMode.mUserSwitcherViewGroup.setAlpha(floatValue);
+                        float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                        userSwitcherViewMode.mUserSwitcherViewGroup.setAlpha(fFloatValue);
                         float f = i;
-                        userSwitcherViewMode.mUserSwitcherViewGroup.setTranslationY(f - (floatValue * f));
+                        userSwitcherViewMode.mUserSwitcherViewGroup.setTranslationY(f - (fFloatValue * f));
                     }
                 }
             });
-            ofFloat.start();
+            valueAnimatorOfFloat.start();
         }
 
         @Override // com.android.keyguard.KeyguardSecurityContainer.ViewMode
-        public final void startDisappearAnimation(KeyguardSecurityModel.SecurityMode securityMode) {
+        public final void startDisappearAnimation(KeyguardSecurityModel.SecurityMode securityMode) throws Resources.NotFoundException {
             if (securityMode == KeyguardSecurityModel.SecurityMode.Password) {
                 return;
             }
             int dimensionPixelSize = this.mResources.getDimensionPixelSize(R.dimen.disappear_y_translation);
             AnimatorSet animatorSet = new AnimatorSet();
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mViewFlipper, (Property<KeyguardSecurityViewFlipper, Float>) View.TRANSLATION_Y, dimensionPixelSize);
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mUserSwitcherViewGroup, (Property<ViewGroup, Float>) View.ALPHA, 0.0f);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mViewFlipper, (Property<KeyguardSecurityViewFlipper, Float>) View.TRANSLATION_Y, dimensionPixelSize);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mUserSwitcherViewGroup, (Property<ViewGroup, Float>) View.ALPHA, 0.0f);
             animatorSet.setInterpolator(Interpolators.STANDARD_ACCELERATE);
-            animatorSet.playTogether(ofFloat2, ofFloat);
+            animatorSet.playTogether(objectAnimatorOfFloat2, objectAnimatorOfFloat);
             animatorSet.start();
         }
 
         @Override // com.android.keyguard.KeyguardSecurityContainer.ViewMode
-        public final void updateSecurityViewLocation() {
+        public final void updateSecurityViewLocation() throws Resources.NotFoundException {
             updateSecurityViewLocation(isLeftAligned(), false);
         }
 
         @Override // com.android.keyguard.KeyguardSecurityContainer.SidedSecurityMode
-        public final void updateSecurityViewLocation(boolean z, boolean z2) {
+        public final void updateSecurityViewLocation(boolean z, boolean z2) throws Resources.NotFoundException {
             if (z2) {
                 TransitionManager.beginDelayedTransition(this.mView, new KeyguardSecurityViewTransition());
             }
@@ -559,7 +551,7 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
     }
 
     @Override // androidx.constraintlayout.widget.ConstraintLayout, android.view.ViewGroup, android.view.View
-    public final void dispatchDraw(Canvas canvas) {
+    public final void dispatchDraw(Canvas canvas) throws NumberFormatException {
         super.dispatchDraw(canvas);
         ViewMediatorCallback viewMediatorCallback = this.mViewMediatorCallback;
         if (viewMediatorCallback != null) {
@@ -569,10 +561,10 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
 
     @Override // android.view.ViewGroup, android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         TouchLogger.Companion.getClass();
-        TouchLogger.Companion.logDispatchTouch(motionEvent, "KeyguardSecurityView", dispatchTouchEvent);
-        return dispatchTouchEvent;
+        TouchLogger.Companion.logDispatchTouch(motionEvent, "KeyguardSecurityView", zDispatchTouchEvent);
+        return zDispatchTouchEvent;
     }
 
     public boolean handleDoubleTap(MotionEvent motionEvent) {
@@ -619,12 +611,12 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
 
     @Override // android.view.View
     public final WindowInsets onApplyWindowInsets(WindowInsets windowInsets) {
-        int max = Integer.max(windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars()).bottom, windowInsets.getInsets(WindowInsets.Type.ime()).bottom);
-        int max2 = Integer.max(max, getContext().getResources().getDimensionPixelSize(R.dimen.keyguard_security_view_bottom_margin));
+        int iMax = Integer.max(windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars()).bottom, windowInsets.getInsets(WindowInsets.Type.ime()).bottom);
+        int iMax2 = Integer.max(iMax, getContext().getResources().getDimensionPixelSize(R.dimen.keyguard_security_view_bottom_margin));
         if (!this.mDisappearAnimRunning) {
-            setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), max2);
+            setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), iMax2);
         }
-        return windowInsets.inset(0, 0, 0, max);
+        return windowInsets.inset(0, 0, 0, iMax);
     }
 
     @Override // android.view.View
@@ -681,9 +673,7 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         showDialog(i3 != 1 ? i3 != 2 ? i3 != 3 ? null : ((ViewGroup) this).mContext.getString(R.string.kg_failed_attempts_almost_at_erase_user, Integer.valueOf(i), Integer.valueOf(i2)) : ((DevicePolicyManager) ((ViewGroup) this).mContext.getSystemService(DevicePolicyManager.class)).getResources().getString("SystemUi.KEYGUARD_DIALOG_FAILED_ATTEMPTS_ALMOST_ERASING_PROFILE", new Supplier() { // from class: com.android.keyguard.KeyguardSecurityContainer$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                String string;
-                string = ((ViewGroup) KeyguardSecurityContainer.this).mContext.getString(R.string.kg_failed_attempts_almost_at_erase_profile, Integer.valueOf(i), Integer.valueOf(i2));
-                return string;
+                return ((ViewGroup) this.f$0).mContext.getString(R.string.kg_failed_attempts_almost_at_erase_profile, Integer.valueOf(i), Integer.valueOf(i2));
             }
         }, Integer.valueOf(i), Integer.valueOf(i2)) : ((ViewGroup) this).mContext.getString(R.string.kg_failed_attempts_almost_at_wipe, Integer.valueOf(i), Integer.valueOf(i2)));
     }
@@ -693,10 +683,10 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         if (alertDialog != null) {
             alertDialog.dismiss();
         }
-        AlertDialog create = new AlertDialog.Builder(((ViewGroup) this).mContext).setTitle((CharSequence) null).setMessage(str).setCancelable(false).setNeutralButton(R.string.ok, (DialogInterface.OnClickListener) null).create();
-        this.mAlertDialog = create;
+        AlertDialog alertDialogCreate = new AlertDialog.Builder(((ViewGroup) this).mContext).setTitle((CharSequence) null).setMessage(str).setCancelable(false).setNeutralButton(R.string.ok, (DialogInterface.OnClickListener) null).create();
+        this.mAlertDialog = alertDialogCreate;
         if (!(((ViewGroup) this).mContext instanceof Activity)) {
-            create.getWindow().setType(2009);
+            alertDialogCreate.getWindow().setType(2009);
         }
         this.mAlertDialog.show();
     }
@@ -705,9 +695,7 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         showDialog(i2 != 1 ? i2 != 2 ? i2 != 3 ? null : ((ViewGroup) this).mContext.getString(R.string.kg_failed_attempts_now_erasing_user, Integer.valueOf(i)) : ((DevicePolicyManager) ((ViewGroup) this).mContext.getSystemService(DevicePolicyManager.class)).getResources().getString("SystemUi.KEYGUARD_DIALOG_FAILED_ATTEMPTS_ERASING_PROFILE", new Supplier() { // from class: com.android.keyguard.KeyguardSecurityContainer$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                String string;
-                string = ((ViewGroup) KeyguardSecurityContainer.this).mContext.getString(R.string.kg_failed_attempts_now_erasing_profile, Integer.valueOf(i));
-                return string;
+                return ((ViewGroup) this.f$0).mContext.getString(R.string.kg_failed_attempts_now_erasing_profile, Integer.valueOf(i));
             }
         }, Integer.valueOf(i)) : ((ViewGroup) this).mContext.getString(R.string.kg_failed_attempts_now_wiping, Integer.valueOf(i)));
     }
@@ -758,17 +746,17 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
                 float f = z ? -(this.mFinalBounds.bottom - this.mInitialBounds.bottom) : this.mInitialBounds.bottom - this.mFinalBounds.bottom;
                 float f2 = z ? -((this.mFinalBounds.bottom - this.mInitialBounds.bottom) * 0.75f) : 0.0f;
                 Iterator it = list.iterator();
-                int i3 = 0;
-                float f3 = 1.0f;
+                int iLerp = 0;
+                float interpolatedFraction = 1.0f;
                 while (it.hasNext()) {
                     WindowInsetsAnimation windowInsetsAnimation = (WindowInsetsAnimation) it.next();
                     if ((windowInsetsAnimation.getTypeMask() & WindowInsets.Type.ime()) != 0) {
-                        f3 = windowInsetsAnimation.getInterpolatedFraction();
-                        i3 += (int) MathUtils.lerp(f, f2, f3);
+                        interpolatedFraction = windowInsetsAnimation.getInterpolatedFraction();
+                        iLerp += (int) MathUtils.lerp(f, f2, interpolatedFraction);
                     }
                 }
                 KeyguardSecurityContainer keyguardSecurityContainer = KeyguardSecurityContainer.this;
-                KeyguardSecurityContainer.this.updateChildren(keyguardSecurityContainer.mDisappearAnimRunning ? 1.0f - f3 : Math.max(f3, keyguardSecurityContainer.getAlpha()), i3);
+                KeyguardSecurityContainer.this.updateChildren(keyguardSecurityContainer.mDisappearAnimRunning ? 1.0f - interpolatedFraction : Math.max(interpolatedFraction, keyguardSecurityContainer.getAlpha()), iLerp);
                 return windowInsets;
             }
 
@@ -796,7 +784,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         new GestureDetector(context, new DoubleTapListener(this, i2));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecurityContainer$2, reason: invalid class name */
     public class AnonymousClass2 implements OnBackAnimationCallback {
         public AnonymousClass2() {
@@ -823,7 +810,6 @@ public class KeyguardSecurityContainer extends ConstraintLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ViewMode {
         default void onDensityOrFontScaleChanged() {
         }

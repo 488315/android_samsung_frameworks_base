@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TonalPalette {
     public static final List SHADE_KEYS = Arrays.asList(0, 10, 50, 100, 200, 300, 400, 500, Integer.valueOf(VolteConstants.ErrorCode.BUSY_EVERYWHERE), Integer.valueOf(KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED), 800, 900, 1000);
@@ -78,12 +77,12 @@ public class TonalPalette {
     public final int getAtTone(float f) {
         int i = (int) ((1000.0f - f) / 10.0f);
         com.google.ux.material.libmonet.palettes.TonalPalette tonalPalette = this.mMaterialTonalPalette;
-        Integer num = (Integer) ((HashMap) tonalPalette.cache).get(Integer.valueOf(i));
-        if (num == null) {
-            num = Integer.valueOf(Hct.from(tonalPalette.hue, tonalPalette.chroma, i).argb);
-            ((HashMap) tonalPalette.cache).put(Integer.valueOf(i), num);
+        Integer numValueOf = (Integer) ((HashMap) tonalPalette.cache).get(Integer.valueOf(i));
+        if (numValueOf == null) {
+            numValueOf = Integer.valueOf(Hct.from(tonalPalette.hue, tonalPalette.chroma, i).argb);
+            ((HashMap) tonalPalette.cache).put(Integer.valueOf(i), numValueOf);
         }
-        return num.intValue();
+        return numValueOf.intValue();
     }
 
     public final int getS100() {

@@ -37,6 +37,7 @@ import androidx.compose.ui.text.input.OffsetMapping;
 import androidx.compose.ui.text.input.TextFieldValue;
 import androidx.compose.ui.text.input.TextInputSession;
 import androidx.compose.ui.text.input.TransformedText;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import kotlin.Unit;
@@ -48,7 +49,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.reflect.KProperty;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode implements SemanticsModifierNode {
     public boolean enabled;
@@ -77,9 +77,9 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
         textFieldSelectionManager.requestAutofillAction = new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(CoreTextFieldSemanticsModifierNode.this);
-                if (!requireLayoutNode.isCurrentlyCalculatingSemanticsConfiguration) {
-                    LayoutNodeKt.requireOwner(requireLayoutNode);
+                LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(CoreTextFieldSemanticsModifierNode.this);
+                if (!layoutNodeRequireLayoutNode.isCurrentlyCalculatingSemanticsConfiguration) {
+                    LayoutNodeKt.requireOwner(layoutNodeRequireLayoutNode);
                     boolean z4 = ComposeUiFlags.isRectTrackingEnabled;
                 }
                 return Unit.INSTANCE;
@@ -87,7 +87,7 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
         };
     }
 
-    public static final void access$handleTextUpdateFromSemantics(CoreTextFieldSemanticsModifierNode coreTextFieldSemanticsModifierNode, LegacyTextFieldState legacyTextFieldState, String str, boolean z, boolean z2) {
+    public static final void access$handleTextUpdateFromSemantics(CoreTextFieldSemanticsModifierNode coreTextFieldSemanticsModifierNode, LegacyTextFieldState legacyTextFieldState, String str, boolean z, boolean z2) throws IOException {
         coreTextFieldSemanticsModifierNode.getClass();
         if (z || !z2) {
             return;
@@ -97,18 +97,18 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
         Unit unit = null;
         if (textInputSession != null) {
             TextFieldDelegate.Companion companion = TextFieldDelegate.Companion;
-            List asList = Arrays.asList(new DeleteAllCommand(), new CommitTextCommand(str, 1));
+            List listAsList = Arrays.asList(new DeleteAllCommand(), new CommitTextCommand(str, 1));
             companion.getClass();
-            TextFieldValue apply = legacyTextFieldState.processor.apply(asList);
+            TextFieldValue textFieldValueApply = legacyTextFieldState.processor.apply(listAsList);
             if (Intrinsics.areEqual((TextInputSession) textInputSession.textInputService._currentInputSession.get(), textInputSession)) {
-                textInputSession.platformTextInputService.updateState(null, apply);
+                textInputSession.platformTextInputService.updateState(null, textFieldValueApply);
             }
-            function1.mo779invoke(apply);
+            function1.mo781invoke(textFieldValueApply);
             unit = Unit.INSTANCE;
         }
         if (unit == null) {
             int length = str.length();
-            function1.mo779invoke(new TextFieldValue(str, TextRangeKt.TextRange(length, length), (TextRange) null, 4, (DefaultConstructorMarker) null));
+            function1.mo781invoke(new TextFieldValue(str, TextRangeKt.TextRange(length, length), (TextRange) null, 4, (DefaultConstructorMarker) null));
         }
     }
 
@@ -124,20 +124,16 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
         long j = this.value.selection;
         SemanticsPropertyKey semanticsPropertyKey2 = SemanticsProperties.TextSelectionRange;
         KProperty kProperty2 = kPropertyArr2[17];
-        semanticsPropertyKey2.setValue(semanticsPropertyReceiver, TextRange.m745boximpl(j));
+        semanticsPropertyKey2.setValue(semanticsPropertyReceiver, TextRange.m747boximpl(j));
         ContentDataType.Companion.getClass();
         ContentDataType contentDataType = ContentDataType.Companion.Text;
         SemanticsPropertyKey semanticsPropertyKey3 = SemanticsProperties.ContentDataType;
         KProperty kProperty3 = kPropertyArr2[8];
         semanticsPropertyKey3.setValue(semanticsPropertyReceiver, contentDataType);
-        Function1 function1 = new Function1() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$1
-            {
-                super(1);
-            }
-
+        Function1 function1 = new Function1() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) throws IOException {
                 MutableState mutableState = CoreTextFieldSemanticsModifierNode.this.state.justAutofilled$delegate;
                 Boolean bool = Boolean.TRUE;
                 ((SnapshotMutableStateImpl) mutableState).setValue(bool);
@@ -163,14 +159,10 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
         SemanticsPropertyKey semanticsPropertyKey5 = SemanticsProperties.IsEditable;
         KProperty kProperty4 = kPropertyArr2[23];
         semanticsPropertyKey5.setValue(semanticsPropertyReceiver, Boolean.valueOf(z2));
-        SemanticsPropertiesKt.getTextLayoutResult$default(semanticsPropertyReceiver, new Function1() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$2
-            {
-                super(1);
-            }
-
+        SemanticsPropertiesKt.getTextLayoutResult$default(semanticsPropertyReceiver, new Function1() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z3;
                 List list = (List) obj;
                 if (CoreTextFieldSemanticsModifierNode.this.state.getLayoutResult() != null) {
@@ -185,20 +177,16 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
             }
         });
         if (z2) {
-            semanticsConfiguration.set(SemanticsActions.SetText, new AccessibilityAction(null, new Function1() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$3
-                {
-                    super(1);
-                }
-
+            semanticsConfiguration.set(SemanticsActions.SetText, new AccessibilityAction(null, new Function1() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.3
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) throws IOException {
                     CoreTextFieldSemanticsModifierNode coreTextFieldSemanticsModifierNode = CoreTextFieldSemanticsModifierNode.this;
                     CoreTextFieldSemanticsModifierNode.access$handleTextUpdateFromSemantics(coreTextFieldSemanticsModifierNode, coreTextFieldSemanticsModifierNode.state, ((AnnotatedString) obj).text, coreTextFieldSemanticsModifierNode.readOnly, coreTextFieldSemanticsModifierNode.enabled);
                     return Boolean.TRUE;
                 }
             }));
-            semanticsConfiguration.set(SemanticsActions.InsertTextAtCursor, new AccessibilityAction(null, new Function1() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$4
+            semanticsConfiguration.set(SemanticsActions.InsertTextAtCursor, new AccessibilityAction(null, new Function1() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.4
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
@@ -206,7 +194,7 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) throws IOException {
                     AnnotatedString annotatedString2 = (AnnotatedString) obj;
                     CoreTextFieldSemanticsModifierNode coreTextFieldSemanticsModifierNode = CoreTextFieldSemanticsModifierNode.this;
                     if (coreTextFieldSemanticsModifierNode.readOnly || !coreTextFieldSemanticsModifierNode.enabled) {
@@ -216,16 +204,16 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
                     Unit unit = null;
                     if (textInputSession != null) {
                         TextFieldDelegate.Companion companion = TextFieldDelegate.Companion;
-                        List asList = Arrays.asList(new FinishComposingTextCommand(), new CommitTextCommand(annotatedString2, 1));
+                        List listAsList = Arrays.asList(new FinishComposingTextCommand(), new CommitTextCommand(annotatedString2, 1));
                         LegacyTextFieldState legacyTextFieldState = coreTextFieldSemanticsModifierNode.state;
                         EditProcessor editProcessor = legacyTextFieldState.processor;
                         Function1 function12 = legacyTextFieldState.onValueChange;
                         companion.getClass();
-                        TextFieldValue apply = editProcessor.apply(asList);
+                        TextFieldValue textFieldValueApply = editProcessor.apply(listAsList);
                         if (Intrinsics.areEqual((TextInputSession) textInputSession.textInputService._currentInputSession.get(), textInputSession)) {
-                            textInputSession.platformTextInputService.updateState(null, apply);
+                            textInputSession.platformTextInputService.updateState(null, textFieldValueApply);
                         }
-                        function12.mo779invoke(apply);
+                        function12.mo781invoke(textFieldValueApply);
                         unit = Unit.INSTANCE;
                     }
                     if (unit == null) {
@@ -234,49 +222,45 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
                         String str = textFieldValue.annotatedString.text;
                         TextRange.Companion companion2 = TextRange.Companion;
                         long j2 = textFieldValue.selection;
-                        String obj2 = StringsKt__StringsKt.replaceRange(str, (int) (j2 >> 32), (int) (j2 & 4294967295L), annotatedString2).toString();
+                        String string = StringsKt__StringsKt.replaceRange(str, (int) (j2 >> 32), (int) (j2 & 4294967295L), annotatedString2).toString();
                         int length = annotatedString2.text.length() + ((int) (coreTextFieldSemanticsModifierNode2.value.selection >> 32));
-                        coreTextFieldSemanticsModifierNode2.state.onValueChange.mo779invoke(new TextFieldValue(obj2, TextRangeKt.TextRange(length, length), (TextRange) null, 4, (DefaultConstructorMarker) null));
+                        coreTextFieldSemanticsModifierNode2.state.onValueChange.mo781invoke(new TextFieldValue(string, TextRangeKt.TextRange(length, length), (TextRange) null, 4, (DefaultConstructorMarker) null));
                     }
                     return Boolean.TRUE;
                 }
             }));
         }
-        semanticsConfiguration.set(SemanticsActions.SetSelection, new AccessibilityAction(null, new Function3() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$5
-            {
-                super(3);
-            }
-
+        semanticsConfiguration.set(SemanticsActions.SetSelection, new AccessibilityAction(null, new Function3() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.5
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
-                int intValue = ((Number) obj).intValue();
-                int intValue2 = ((Number) obj2).intValue();
-                boolean booleanValue = ((Boolean) obj3).booleanValue();
-                if (!booleanValue) {
-                    intValue = CoreTextFieldSemanticsModifierNode.this.offsetMapping.transformedToOriginal(intValue);
+                int iIntValue = ((Number) obj).intValue();
+                int iIntValue2 = ((Number) obj2).intValue();
+                boolean zBooleanValue = ((Boolean) obj3).booleanValue();
+                if (!zBooleanValue) {
+                    iIntValue = CoreTextFieldSemanticsModifierNode.this.offsetMapping.transformedToOriginal(iIntValue);
                 }
-                if (!booleanValue) {
-                    intValue2 = CoreTextFieldSemanticsModifierNode.this.offsetMapping.transformedToOriginal(intValue2);
+                if (!zBooleanValue) {
+                    iIntValue2 = CoreTextFieldSemanticsModifierNode.this.offsetMapping.transformedToOriginal(iIntValue2);
                 }
                 CoreTextFieldSemanticsModifierNode coreTextFieldSemanticsModifierNode = CoreTextFieldSemanticsModifierNode.this;
                 boolean z3 = false;
                 if (coreTextFieldSemanticsModifierNode.enabled) {
                     long j2 = coreTextFieldSemanticsModifierNode.value.selection;
                     TextRange.Companion companion = TextRange.Companion;
-                    if (intValue != ((int) (j2 >> 32)) || intValue2 != ((int) (j2 & 4294967295L))) {
-                        if (Math.min(intValue, intValue2) < 0 || Math.max(intValue, intValue2) > CoreTextFieldSemanticsModifierNode.this.value.annotatedString.text.length()) {
+                    if (iIntValue != ((int) (j2 >> 32)) || iIntValue2 != ((int) (j2 & 4294967295L))) {
+                        if (Math.min(iIntValue, iIntValue2) < 0 || Math.max(iIntValue, iIntValue2) > CoreTextFieldSemanticsModifierNode.this.value.annotatedString.text.length()) {
                             TextFieldSelectionManager textFieldSelectionManager = CoreTextFieldSemanticsModifierNode.this.manager;
                             textFieldSelectionManager.updateFloatingToolbar(false);
                             textFieldSelectionManager.setHandleState(HandleState.None);
                         } else {
-                            if (booleanValue || intValue == intValue2) {
+                            if (zBooleanValue || iIntValue == iIntValue2) {
                                 TextFieldSelectionManager textFieldSelectionManager2 = CoreTextFieldSemanticsModifierNode.this.manager;
                                 textFieldSelectionManager2.updateFloatingToolbar(false);
                                 textFieldSelectionManager2.setHandleState(HandleState.None);
                             } else {
                                 CoreTextFieldSemanticsModifierNode.this.manager.enterSelectionMode$foundation_release(true);
                             }
-                            CoreTextFieldSemanticsModifierNode.this.state.onValueChange.mo779invoke(new TextFieldValue(CoreTextFieldSemanticsModifierNode.this.value.annotatedString, TextRangeKt.TextRange(intValue, intValue2), (TextRange) null, 4, (DefaultConstructorMarker) null));
+                            CoreTextFieldSemanticsModifierNode.this.state.onValueChange.mo781invoke(new TextFieldValue(CoreTextFieldSemanticsModifierNode.this.value.annotatedString, TextRangeKt.TextRange(iIntValue, iIntValue2), (TextRange) null, 4, (DefaultConstructorMarker) null));
                             z3 = true;
                         }
                     }
@@ -285,25 +269,17 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
             }
         }));
         int i = this.imeOptions.imeAction;
-        Function0 function0 = new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$6
-            {
-                super(0);
-            }
-
+        Function0 function0 = new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.6
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 CoreTextFieldSemanticsModifierNode coreTextFieldSemanticsModifierNode = CoreTextFieldSemanticsModifierNode.this;
-                coreTextFieldSemanticsModifierNode.state.onImeActionPerformed.mo779invoke(ImeAction.m772boximpl(coreTextFieldSemanticsModifierNode.imeOptions.imeAction));
+                coreTextFieldSemanticsModifierNode.state.onImeActionPerformed.mo781invoke(ImeAction.m774boximpl(coreTextFieldSemanticsModifierNode.imeOptions.imeAction));
                 return Boolean.TRUE;
             }
         };
-        semanticsConfiguration.set(SemanticsProperties.ImeAction, ImeAction.m772boximpl(i));
+        semanticsConfiguration.set(SemanticsProperties.ImeAction, ImeAction.m774boximpl(i));
         semanticsConfiguration.set(SemanticsActions.OnImeAction, new AccessibilityAction(null, function0));
-        SemanticsPropertiesKt.onClick(semanticsPropertyReceiver, null, new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$7
-            {
-                super(0);
-            }
-
+        SemanticsPropertiesKt.onClick(semanticsPropertyReceiver, null, new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.7
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 SoftwareKeyboardController softwareKeyboardController;
@@ -312,30 +288,22 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
                 FocusRequester focusRequester = coreTextFieldSemanticsModifierNode.focusRequester;
                 boolean z3 = coreTextFieldSemanticsModifierNode.readOnly;
                 if (!legacyTextFieldState.getHasFocus()) {
-                    FocusRequester.m376requestFocus3ESFkO8$default(focusRequester);
+                    FocusRequester.m378requestFocus3ESFkO8$default(focusRequester);
                 } else if (!z3 && (softwareKeyboardController = legacyTextFieldState.keyboardController) != null) {
                     ((DelegatingSoftwareKeyboardController) softwareKeyboardController).show();
                 }
                 return Boolean.TRUE;
             }
         });
-        SemanticsPropertiesKt.onLongClick(semanticsPropertyReceiver, null, new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$8
-            {
-                super(0);
-            }
-
+        SemanticsPropertiesKt.onLongClick(semanticsPropertyReceiver, null, new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.8
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 CoreTextFieldSemanticsModifierNode.this.manager.enterSelectionMode$foundation_release(true);
                 return Boolean.TRUE;
             }
         });
-        if (!TextRange.m747getCollapsedimpl(this.value.selection) && !z) {
-            semanticsConfiguration.set(SemanticsActions.CopyText, new AccessibilityAction(null, new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$9
-                {
-                    super(0);
-                }
-
+        if (!TextRange.m749getCollapsedimpl(this.value.selection) && !z) {
+            semanticsConfiguration.set(SemanticsActions.CopyText, new AccessibilityAction(null, new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.9
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     CoreTextFieldSemanticsModifierNode.this.manager.copy$foundation_release(true);
@@ -343,11 +311,7 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
                 }
             }));
             if (this.enabled && !this.readOnly) {
-                semanticsConfiguration.set(SemanticsActions.CutText, new AccessibilityAction(null, new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$10
-                    {
-                        super(0);
-                    }
-
+                semanticsConfiguration.set(SemanticsActions.CutText, new AccessibilityAction(null, new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.10
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         CoreTextFieldSemanticsModifierNode.this.manager.cut$foundation_release();
@@ -359,11 +323,7 @@ public final class CoreTextFieldSemanticsModifierNode extends DelegatingNode imp
         if (!this.enabled || this.readOnly) {
             return;
         }
-        semanticsConfiguration.set(SemanticsActions.PasteText, new AccessibilityAction(null, new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode$applySemantics$11
-            {
-                super(0);
-            }
-
+        semanticsConfiguration.set(SemanticsActions.PasteText, new AccessibilityAction(null, new Function0() { // from class: androidx.compose.foundation.text.input.internal.CoreTextFieldSemanticsModifierNode.applySemantics.11
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 CoreTextFieldSemanticsModifierNode.this.manager.paste$foundation_release();

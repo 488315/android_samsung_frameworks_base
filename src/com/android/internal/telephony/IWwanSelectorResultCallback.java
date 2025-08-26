@@ -45,9 +45,9 @@ public interface IWwanSelectorResultCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWwanSelectorResultCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWwanSelectorResultCallback)) {
-                return (IWwanSelectorResultCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWwanSelectorResultCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWwanSelectorResultCallback)) {
+                return (IWwanSelectorResultCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface IWwanSelectorResultCallback extends IInterface {
 
             @Override // com.android.internal.telephony.IWwanSelectorResultCallback
             public void onComplete(EmergencyRegistrationResult emergencyRegistrationResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWwanSelectorResultCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(emergencyRegistrationResult, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWwanSelectorResultCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(emergencyRegistrationResult, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

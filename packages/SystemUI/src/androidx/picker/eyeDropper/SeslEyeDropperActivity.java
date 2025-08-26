@@ -7,18 +7,21 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.KeyguardManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.PathInterpolator;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.picker3.app.SeslColorPickerDialog;
 import androidx.picker3.app.SeslColorPickerDialog$$ExternalSyntheticLambda1;
+import androidx.picker3.widget.SeslColorPicker;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslEyeDropperActivity extends AppCompatActivity {
     public static SeslColorPickerDialog$$ExternalSyntheticLambda1 mOnColorPickListener;
@@ -47,7 +50,7 @@ public class SeslEyeDropperActivity extends AppCompatActivity {
     }
 
     @Override // androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         KeyguardManager keyguardManager = (KeyguardManager) getSystemService("keyguard");
         if (keyguardManager != null && keyguardManager.isKeyguardLocked()) {
@@ -63,44 +66,44 @@ public class SeslEyeDropperActivity extends AppCompatActivity {
         this.mBitmapView.post(new Runnable() { // from class: androidx.picker.eyeDropper.SeslEyeDropperActivity$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                Bitmap bitmap;
-                final SeslEyeDropperActivity seslEyeDropperActivity = SeslEyeDropperActivity.this;
+                Bitmap bitmapCreateScaledBitmap;
+                final SeslEyeDropperActivity seslEyeDropperActivity = this.f$0;
                 WeakReference weakReference = SeslBitmapHolder.sBitmapWeakReference;
                 if (weakReference != null) {
                     SeslColorPickerDialog$$ExternalSyntheticLambda1 seslColorPickerDialog$$ExternalSyntheticLambda1 = SeslEyeDropperActivity.mOnColorPickListener;
-                    bitmap = (Bitmap) weakReference.get();
+                    bitmapCreateScaledBitmap = (Bitmap) weakReference.get();
                 } else {
-                    bitmap = null;
+                    bitmapCreateScaledBitmap = null;
                 }
                 int width = seslEyeDropperActivity.mBitmapView.getWidth();
                 int height = seslEyeDropperActivity.mBitmapView.getHeight();
-                Bitmap createBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(createBitmap);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmapCreateBitmap);
                 canvas.drawColor(-16777216);
-                if (bitmap != null) {
-                    float min = Math.min(width / bitmap.getWidth(), height / bitmap.getHeight());
-                    if (bitmap.getWidth() > width || bitmap.getHeight() > height) {
-                        bitmap = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * min), (int) (bitmap.getHeight() * min), false);
+                if (bitmapCreateScaledBitmap != null) {
+                    float fMin = Math.min(width / bitmapCreateScaledBitmap.getWidth(), height / bitmapCreateScaledBitmap.getHeight());
+                    if (bitmapCreateScaledBitmap.getWidth() > width || bitmapCreateScaledBitmap.getHeight() > height) {
+                        bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmapCreateScaledBitmap, (int) (bitmapCreateScaledBitmap.getWidth() * fMin), (int) (bitmapCreateScaledBitmap.getHeight() * fMin), false);
                     }
-                    canvas.drawBitmap(bitmap, (width - bitmap.getWidth()) / 2, (height - bitmap.getHeight()) / 2, (Paint) null);
+                    canvas.drawBitmap(bitmapCreateScaledBitmap, (width - bitmapCreateScaledBitmap.getWidth()) / 2, (height - bitmapCreateScaledBitmap.getHeight()) / 2, (Paint) null);
                 }
-                seslEyeDropperActivity.mImageBitmap = createBitmap;
-                final int width2 = createBitmap.getWidth() / 2;
+                seslEyeDropperActivity.mImageBitmap = bitmapCreateBitmap;
+                final int width2 = bitmapCreateBitmap.getWidth() / 2;
                 final int height2 = seslEyeDropperActivity.mImageBitmap.getHeight() / 2;
                 seslEyeDropperActivity.mCurrentPixelColor = seslEyeDropperActivity.mImageBitmap.getPixel(width2, height2);
                 seslEyeDropperActivity.mBitmapView.post(new Runnable() { // from class: androidx.picker.eyeDropper.SeslEyeDropperActivity$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SeslEyeDropperActivity seslEyeDropperActivity2 = SeslEyeDropperActivity.this;
+                        SeslEyeDropperActivity seslEyeDropperActivity2 = seslEyeDropperActivity;
                         int i = width2;
                         int i2 = height2;
                         seslEyeDropperActivity2.mBitmapView.setImageBitmap(seslEyeDropperActivity2.mImageBitmap);
                         SeslMagnifyingView seslMagnifyingView = seslEyeDropperActivity2.mMagnifyingView;
-                        Bitmap bitmap2 = seslEyeDropperActivity2.mImageBitmap;
+                        Bitmap bitmap = seslEyeDropperActivity2.mImageBitmap;
                         seslEyeDropperActivity2.mPointerView.getWidth();
                         seslEyeDropperActivity2.mPointerView.getHeight();
                         int i3 = seslEyeDropperActivity2.mCurrentPixelColor;
-                        seslMagnifyingView.mScreenShotBitmap = bitmap2;
+                        seslMagnifyingView.mScreenShotBitmap = bitmap;
                         seslMagnifyingView.mTouchPosX = i;
                         seslMagnifyingView.mTouchPosY = i2;
                         seslMagnifyingView.mColorBorderColor = i3;
@@ -114,18 +117,18 @@ public class SeslEyeDropperActivity extends AppCompatActivity {
         this.mBitmapView.setEnabled(false);
         int dimensionPixelSize = getResources().getDimensionPixelSize(com.android.systemui.R.dimen.sesl_eyedropper_y_animation_offset);
         PathInterpolator pathInterpolator = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mPointerView, "scaleX", 0.0f, 1.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mPointerView, "scaleY", 0.0f, 1.0f);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(this.mMagnifyingView, "scaleX", 0.0f, 1.0f);
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(this.mMagnifyingView, "scaleY", 0.0f, 1.0f);
-        ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(this.mPointerView, "translationY", 0.0f, dimensionPixelSize);
-        ofFloat3.setDuration(400L).setInterpolator(pathInterpolator);
-        ofFloat4.setDuration(400L).setInterpolator(pathInterpolator);
-        ofFloat.setDuration(400L).setInterpolator(pathInterpolator);
-        ofFloat2.setDuration(400L).setInterpolator(pathInterpolator);
-        ofFloat5.setDuration(400L).setInterpolator(pathInterpolator);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mPointerView, "scaleX", 0.0f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mPointerView, "scaleY", 0.0f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(this.mMagnifyingView, "scaleX", 0.0f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(this.mMagnifyingView, "scaleY", 0.0f, 1.0f);
+        ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(this.mPointerView, "translationY", 0.0f, dimensionPixelSize);
+        objectAnimatorOfFloat3.setDuration(400L).setInterpolator(pathInterpolator);
+        objectAnimatorOfFloat4.setDuration(400L).setInterpolator(pathInterpolator);
+        objectAnimatorOfFloat.setDuration(400L).setInterpolator(pathInterpolator);
+        objectAnimatorOfFloat2.setDuration(400L).setInterpolator(pathInterpolator);
+        objectAnimatorOfFloat5.setDuration(400L).setInterpolator(pathInterpolator);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat3, ofFloat4, ofFloat, ofFloat2, ofFloat5);
+        animatorSet.playTogether(objectAnimatorOfFloat3, objectAnimatorOfFloat4, objectAnimatorOfFloat, objectAnimatorOfFloat2, objectAnimatorOfFloat5);
         this.mPointerView.setVisibility(0);
         this.mMagnifyingView.setVisibility(0);
         animatorSet.addListener(new AnimatorListenerAdapter() { // from class: androidx.picker.eyeDropper.SeslEyeDropperActivity.1
@@ -137,83 +140,50 @@ public class SeslEyeDropperActivity extends AppCompatActivity {
         });
         animatorSet.start();
         this.mBitmapView.setOnTouchListener(new View.OnTouchListener() { // from class: androidx.picker.eyeDropper.SeslEyeDropperActivity$$ExternalSyntheticLambda0
-            /* JADX WARN: Code restructure failed: missing block: B:15:0x0050, code lost:
+            /* JADX WARN: Code restructure failed: missing block: B:16:0x0050, code lost:
             
                 if (r8 != 3) goto L24;
              */
+            /* JADX WARN: Removed duplicated region for block: B:23:0x0076  */
             @Override // android.view.View.OnTouchListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final boolean onTouch(android.view.View r7, android.view.MotionEvent r8) {
-                /*
-                    r6 = this;
-                    androidx.picker.eyeDropper.SeslEyeDropperActivity r6 = androidx.picker.eyeDropper.SeslEyeDropperActivity.this
-                    androidx.picker3.app.SeslColorPickerDialog$$ExternalSyntheticLambda1 r7 = androidx.picker.eyeDropper.SeslEyeDropperActivity.mOnColorPickListener
-                    float r7 = r8.getX()
-                    int r7 = (int) r7
-                    float r0 = r8.getY()
-                    int r0 = (int) r0
-                    r1 = 1
-                    if (r7 < 0) goto L7b
-                    android.graphics.Bitmap r2 = r6.mImageBitmap
-                    int r2 = r2.getWidth()
-                    if (r7 >= r2) goto L7b
-                    float r2 = (float) r0
-                    android.view.View r3 = r6.mPointerView
-                    int r3 = r3.getHeight()
-                    float r3 = (float) r3
-                    r4 = 1073741824(0x40000000, float:2.0)
-                    float r3 = r3 / r4
-                    int r3 = (r2 > r3 ? 1 : (r2 == r3 ? 0 : -1))
-                    if (r3 <= 0) goto L7b
-                    android.graphics.Bitmap r3 = r6.mImageBitmap
-                    int r3 = r3.getHeight()
-                    float r3 = (float) r3
-                    android.view.View r5 = r6.mPointerView
-                    int r5 = r5.getHeight()
-                    float r5 = (float) r5
-                    float r5 = r5 / r4
-                    float r3 = r3 - r5
-                    int r2 = (r2 > r3 ? 1 : (r2 == r3 ? 0 : -1))
-                    if (r2 >= 0) goto L7b
-                    android.graphics.Bitmap r2 = r6.mImageBitmap
-                    int r2 = r2.getPixel(r7, r0)
-                    r6.mCurrentPixelColor = r2
-                    int r8 = r8.getActionMasked()
-                    if (r8 == 0) goto L76
-                    if (r8 == r1) goto L53
-                    r2 = 2
-                    if (r8 == r2) goto L76
-                    r7 = 3
-                    if (r8 == r7) goto L53
-                    goto L7b
-                L53:
-                    androidx.picker3.app.SeslColorPickerDialog$$ExternalSyntheticLambda1 r7 = androidx.picker.eyeDropper.SeslEyeDropperActivity.mOnColorPickListener
-                    if (r7 == 0) goto L72
-                    int r8 = r6.mCurrentPixelColor
-                    int r0 = androidx.picker3.app.SeslColorPickerDialog.$r8$clinit
-                    androidx.picker3.app.SeslColorPickerDialog r7 = r7.f$0
-                    r0 = 0
-                    androidx.picker.eyeDropper.SeslBitmapHolder.sBitmapWeakReference = r0
-                    r7.show()
-                    java.lang.Integer r8 = java.lang.Integer.valueOf(r8)
-                    r7.mCurrentColor = r8
-                    androidx.picker3.widget.SeslColorPicker r7 = r7.mColorPicker
-                    androidx.picker3.widget.SeslRecentColorInfo r0 = r7.mRecentColorInfo
-                    r0.mNewColor = r8
-                    r7.updateRecentColorLayout()
-                L72:
-                    r6.finishAfterTransition()
-                    return r1
-                L76:
-                    int r8 = r6.mCurrentPixelColor
-                    r6.positionMagnifierAndPointer(r7, r0, r8)
-                L7b:
-                    return r1
-                */
-                throw new UnsupportedOperationException("Method not decompiled: androidx.picker.eyeDropper.SeslEyeDropperActivity$$ExternalSyntheticLambda0.onTouch(android.view.View, android.view.MotionEvent):boolean");
+            public final boolean onTouch(View view, MotionEvent motionEvent) {
+                SeslEyeDropperActivity seslEyeDropperActivity = this.f$0;
+                SeslColorPickerDialog$$ExternalSyntheticLambda1 seslColorPickerDialog$$ExternalSyntheticLambda1 = SeslEyeDropperActivity.mOnColorPickListener;
+                int x = (int) motionEvent.getX();
+                int y = (int) motionEvent.getY();
+                if (x >= 0 && x < seslEyeDropperActivity.mImageBitmap.getWidth()) {
+                    float f = y;
+                    if (f > seslEyeDropperActivity.mPointerView.getHeight() / 2.0f && f < seslEyeDropperActivity.mImageBitmap.getHeight() - (seslEyeDropperActivity.mPointerView.getHeight() / 2.0f)) {
+                        seslEyeDropperActivity.mCurrentPixelColor = seslEyeDropperActivity.mImageBitmap.getPixel(x, y);
+                        int actionMasked = motionEvent.getActionMasked();
+                        if (actionMasked != 0) {
+                            if (actionMasked != 1) {
+                                if (actionMasked != 2) {
+                                }
+                            }
+                            SeslColorPickerDialog$$ExternalSyntheticLambda1 seslColorPickerDialog$$ExternalSyntheticLambda12 = SeslEyeDropperActivity.mOnColorPickListener;
+                            if (seslColorPickerDialog$$ExternalSyntheticLambda12 != null) {
+                                int i = seslEyeDropperActivity.mCurrentPixelColor;
+                                int i2 = SeslColorPickerDialog.$r8$clinit;
+                                SeslColorPickerDialog seslColorPickerDialog = seslColorPickerDialog$$ExternalSyntheticLambda12.f$0;
+                                SeslBitmapHolder.sBitmapWeakReference = null;
+                                seslColorPickerDialog.show();
+                                Integer numValueOf = Integer.valueOf(i);
+                                seslColorPickerDialog.mCurrentColor = numValueOf;
+                                SeslColorPicker seslColorPicker = seslColorPickerDialog.mColorPicker;
+                                seslColorPicker.mRecentColorInfo.mNewColor = numValueOf;
+                                seslColorPicker.updateRecentColorLayout();
+                            }
+                            seslEyeDropperActivity.finishAfterTransition();
+                            return true;
+                        }
+                        seslEyeDropperActivity.positionMagnifierAndPointer(x, y, seslEyeDropperActivity.mCurrentPixelColor);
+                    }
+                }
+                return true;
             }
         });
     }

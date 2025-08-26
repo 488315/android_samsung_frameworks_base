@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.android.keyguard.KeyguardSimPinView android:layout_gravity="bottom|center" android:orientation="vertical" android:id="@id/keyguard_sim_pin_view" android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_maxWidth="@dimen/keyguard_security_width"
+<com.android.keyguard.KeyguardSimPinView android:layout_gravity="center|bottom" android:orientation="vertical" android:id="@id/keyguard_sim_pin_view" android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_maxWidth="@dimen/keyguard_security_width"
   xmlns:android="http://schemas.android.com/apk/res/android" xmlns:androidprv="http://schemas.android.com/apk/res-auto" xmlns:app="http://schemas.android.com/apk/res-auto">
     <include layout="@layout/keyguard_bouncer_message_area" />
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" android:layoutDirection="ltr">
@@ -22,5 +22,5 @@
         <com.android.keyguard.NumPadKey android:id="@id/key9" android:layout_width="0.0dip" android:layout_height="0.0dip" android:accessibilityTraversalBefore="@id/delete_button" app:digit="9" app:textView="@id/simPinEntry" />
         <com.android.keyguard.NumPadKey android:id="@id/key0" android:layout_width="0.0dip" android:layout_height="0.0dip" android:accessibilityTraversalBefore="@id/key_enter" app:digit="0" app:textView="@id/simPinEntry" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <include android:gravity="center_horizontal" android:layout_gravity="bottom|center" android:orientation="vertical" android:id="@id/keyguard_selector_fade_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/keyguard_eca_top_margin" android:layout_marginBottom="2.0dip" layout="@layout/keyguard_eca" />
+    <include android:gravity="center_horizontal" android:layout_gravity="center|bottom" android:orientation="vertical" android:id="@id/keyguard_selector_fade_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/keyguard_eca_top_margin" android:layout_marginBottom="2.0dip" layout="@layout/keyguard_eca" />
 </com.android.keyguard.KeyguardSimPinView>

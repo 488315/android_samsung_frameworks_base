@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class StatusBarTouchShadeDisplayPolicy$updateExpansionIntent$1 extends SuspendLambda implements Function2 {
     int label;
@@ -40,7 +39,7 @@ final class StatusBarTouchShadeDisplayPolicy$updateExpansionIntent$1 extends Sus
             StatusBarTouchShadeDisplayPolicy.Companion.getClass();
             long j = StatusBarTouchShadeDisplayPolicy.EXPANSION_INTENT_EXPIRY;
             this.label = 1;
-            if (DelayKt.m3449delayVtjQ1oo(j, this) == coroutineSingletons) {
+            if (DelayKt.m3469delayVtjQ1oo(j, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

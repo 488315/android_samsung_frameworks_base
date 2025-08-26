@@ -22,10 +22,10 @@ public class Panel {
     private float width;
 
     public Panel() {
-        Float valueOf = Float.valueOf(0.0f);
+        Float fValueOf = Float.valueOf(0.0f);
         this.width = 0.0f;
         this.height = 0.0f;
-        this.perspective = new Vector2<>(valueOf, valueOf);
+        this.perspective = new Vector2<>(fValueOf, fValueOf);
         this.perspectiveMatrix = new Matrix4();
         this.quaternion = new Quaternion();
         identity();
@@ -46,17 +46,17 @@ public class Panel {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public Panel m9809clone() {
+    public Panel m9822clone() {
         return new Panel(this);
     }
 
     public Panel identity() {
         this.matrix = new Matrix4();
-        Float valueOf = Float.valueOf(0.0f);
-        this.position = new Vector3<>(valueOf, valueOf, valueOf);
-        this.rotation = new Vector3<>(valueOf, valueOf, valueOf);
-        Float valueOf2 = Float.valueOf(1.0f);
-        this.scale = new Vector3<>(valueOf2, valueOf2, valueOf2);
+        Float fValueOf = Float.valueOf(0.0f);
+        this.position = new Vector3<>(fValueOf, fValueOf, fValueOf);
+        this.rotation = new Vector3<>(fValueOf, fValueOf, fValueOf);
+        Float fValueOf2 = Float.valueOf(1.0f);
+        this.scale = new Vector3<>(fValueOf2, fValueOf2, fValueOf2);
         this.quaternion = Quaternion.IDENTITY;
         return this;
     }
@@ -79,21 +79,21 @@ public class Panel {
             return;
         }
         float[] fArr = {0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f};
-        float tan = ((float) Math.tan((this.perspective.getX().floatValue() * 3.141592653589793d) / 180.0d)) * 0.5f * (this.width / this.height);
-        float tan2 = ((float) Math.tan((this.perspective.getY().floatValue() * 3.141592653589793d) / 180.0d)) * 0.5f * (this.height / this.width);
-        if (tan < 0.0f) {
-            f = -tan;
-            tan = 0.0f;
+        float fTan = ((float) Math.tan((this.perspective.getX().floatValue() * 3.141592653589793d) / 180.0d)) * 0.5f * (this.width / this.height);
+        float fTan2 = ((float) Math.tan((this.perspective.getY().floatValue() * 3.141592653589793d) / 180.0d)) * 0.5f * (this.height / this.width);
+        if (fTan < 0.0f) {
+            f = -fTan;
+            fTan = 0.0f;
         } else {
             f = 0.0f;
         }
-        if (tan2 < 0.0f) {
-            f2 = -tan2;
-            tan2 = 0.0f;
+        if (fTan2 < 0.0f) {
+            f2 = -fTan2;
+            fTan2 = 0.0f;
         } else {
             f2 = 0.0f;
         }
-        float[] fArr2 = {0.0f - tan, tan2 + 1.0f, 0.0f - f, 0.0f - tan2, f + 1.0f, 0.0f - f2, tan + 1.0f, f2 + 1.0f};
+        float[] fArr2 = {0.0f - fTan, fTan2 + 1.0f, 0.0f - f, 0.0f - fTan2, f + 1.0f, 0.0f - f2, fTan + 1.0f, f2 + 1.0f};
         Matrix matrix = new Matrix();
         matrix.setPolyToPoly(fArr2, 0, fArr, 0, 4);
         float[] fArr3 = new float[9];
@@ -135,9 +135,9 @@ public class Panel {
         this.position = matrix4.getPosition();
         Quaternion quaternion = matrix4.getPureRotationMatrix().getQuaternion();
         this.quaternion = quaternion;
-        double abs = Math.abs(quaternion.x);
+        double dAbs = Math.abs(quaternion.x);
         double d = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
-        quaternion.x = abs < 9.999999747378752E-6d ? 0.0d : this.quaternion.x;
+        quaternion.x = dAbs < 9.999999747378752E-6d ? 0.0d : this.quaternion.x;
         Quaternion quaternion2 = this.quaternion;
         quaternion2.y = Math.abs(quaternion2.y) < 9.999999747378752E-6d ? 0.0d : this.quaternion.y;
         Quaternion quaternion3 = this.quaternion;

@@ -10,25 +10,25 @@ import kotlinx.coroutines.android.AndroidDispatcherFactory;
 import kotlinx.coroutines.android.HandlerContext;
 import kotlinx.coroutines.android.HandlerDispatcherKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MainDispatcherLoader {
     public static final HandlerContext dispatcher;
 
+    /* JADX WARN: Multi-variable type inference failed */
     static {
-        String str;
+        String property;
         Object next;
         new MainDispatcherLoader();
         int i = SystemPropsKt__SystemPropsKt.AVAILABLE_PROCESSORS;
-        String str2 = null;
-        byte b = 0;
+        String str = null;
+        Object[] objArr = 0;
         try {
-            str = System.getProperty("kotlinx.coroutines.fast.service.loader");
+            property = System.getProperty("kotlinx.coroutines.fast.service.loader");
         } catch (SecurityException unused) {
-            str = null;
+            property = null;
         }
-        if (str != null) {
-            Boolean.parseBoolean(str);
+        if (property != null) {
+            Boolean.parseBoolean(property);
         }
         try {
             Iterator it = SequencesKt___SequencesKt.toList(SequencesKt__SequencesKt.asSequence(Arrays.asList(new AndroidDispatcherFactory()).iterator())).iterator();
@@ -50,7 +50,7 @@ public final class MainDispatcherLoader {
             if (mainLooper == null) {
                 throw new IllegalStateException("The main looper is not available");
             }
-            dispatcher = new HandlerContext(HandlerDispatcherKt.asHandler(mainLooper), str2, 2, b == true ? 1 : 0);
+            dispatcher = new HandlerContext(HandlerDispatcherKt.asHandler(mainLooper), str, 2, objArr == true ? 1 : 0);
         } catch (Throwable th) {
             throw new ServiceConfigurationError(th.getMessage(), th);
         }

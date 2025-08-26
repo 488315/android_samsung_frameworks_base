@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Parcel;
@@ -106,23 +107,23 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         this.mDeferSetDisplayedChild = false;
         this.mDeferSetDisplayedChildIndex = 0;
         this.mAppWidgetGetCurrentDisplayedPosition = "";
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AdapterViewAnimator, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.AdapterViewAnimator, attributeSet, obtainStyledAttributes, i, i2);
-        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AdapterViewAnimator, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.AdapterViewAnimator, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, 0);
         if (resourceId > 0) {
             setInAnimation(context, resourceId);
         } else {
             setInAnimation(getDefaultInAnimation());
         }
-        int resourceId2 = obtainStyledAttributes.getResourceId(1, 0);
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(1, 0);
         if (resourceId2 > 0) {
             setOutAnimation(context, resourceId2);
         } else {
             setOutAnimation(getDefaultOutAnimation());
         }
-        setAnimateFirstView(obtainStyledAttributes.getBoolean(2, true));
-        this.mLoopViews = obtainStyledAttributes.getBoolean(3, false);
-        obtainStyledAttributes.recycle();
+        setAnimateFirstView(typedArrayObtainStyledAttributes.getBoolean(2, true));
+        this.mLoopViews = typedArrayObtainStyledAttributes.getBoolean(3, false);
+        typedArrayObtainStyledAttributes.recycle();
         initViewAnimator();
     }
 
@@ -182,19 +183,19 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     ObjectAnimator getDefaultInAnimation() {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat((Object) null, "alpha", 0.0f, 1.0f);
-        ofFloat.setDuration(200L);
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat((Object) null, "alpha", 0.0f, 1.0f);
+        objectAnimatorOfFloat.setDuration(200L);
+        return objectAnimatorOfFloat;
     }
 
     ObjectAnimator getDefaultOutAnimation() {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat((Object) null, "alpha", 1.0f, 0.0f);
-        ofFloat.setDuration(200L);
-        return ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat((Object) null, "alpha", 1.0f, 0.0f);
+        objectAnimatorOfFloat.setDuration(200L);
+        return objectAnimatorOfFloat;
     }
 
     @RemotableViewMethod
-    public void setDisplayedChild(int i) {
+    public void setDisplayedChild(int i) throws Resources.NotFoundException {
         if (this.mAdapter == null) {
             this.mDeferSetDisplayedChild = true;
             this.mDeferSetDisplayedChildIndex = i;
@@ -203,11 +204,11 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     @RemotableViewMethod
-    public void semSetDisplayedChild(int i) {
+    public void semSetDisplayedChild(int i) throws Resources.NotFoundException {
         setDisplayedChild(i, false);
     }
 
-    private void setDisplayedChild(int i, boolean z) {
+    private void setDisplayedChild(int i, boolean z) throws Resources.NotFoundException {
         if (this.mAdapter != null) {
             this.mWhichChild = i;
             if (i >= getWindowSize()) {
@@ -228,11 +229,11 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         return this.mWhichChild;
     }
 
-    public void showNext() {
+    public void showNext() throws Resources.NotFoundException {
         setDisplayedChild(this.mWhichChild + 1);
     }
 
-    public void showPrevious() {
+    public void showPrevious() throws Resources.NotFoundException {
         setDisplayedChild(this.mWhichChild - 1);
     }
 
@@ -247,9 +248,9 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         if (i < 0 || i > getNumActiveViews() - 1 || this.mAdapter == null) {
             return null;
         }
-        int modulo = modulo(this.mCurrentWindowStartUnbounded + i, getWindowSize());
-        if (this.mViewsMap.get(Integer.valueOf(modulo)) != null) {
-            return this.mViewsMap.get(Integer.valueOf(modulo)).view;
+        int iModulo = modulo(this.mCurrentWindowStartUnbounded + i, getWindowSize());
+        if (this.mViewsMap.get(Integer.valueOf(iModulo)) != null) {
+            return this.mViewsMap.get(Integer.valueOf(iModulo)).view;
         }
         return null;
     }
@@ -286,7 +287,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     void refreshChildren() {
         int count = this.mAdapter == null ? 0 : getCount();
         for (int i = this.mCurrentWindowStart; i <= this.mCurrentWindowEnd; i++) {
-            int modulo = modulo(i, getWindowSize());
+            int iModulo = modulo(i, getWindowSize());
             View view = null;
             if (i < count) {
                 view = this.mAdapter.getView(modulo(i, count), null, this);
@@ -294,8 +295,8 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
                     view.setImportantForAccessibility(1);
                 }
             }
-            if (this.mViewsMap.containsKey(Integer.valueOf(modulo))) {
-                FrameLayout frameLayout = (FrameLayout) this.mViewsMap.get(Integer.valueOf(modulo)).view;
+            if (this.mViewsMap.containsKey(Integer.valueOf(iModulo))) {
+                FrameLayout frameLayout = (FrameLayout) this.mViewsMap.get(Integer.valueOf(iModulo)).view;
                 frameLayout.removeAllViewsInLayout();
                 if (view != null) {
                     frameLayout.addView(view);
@@ -308,7 +309,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         return new FrameLayout(this.mContext);
     }
 
-    void showOnly(int i, boolean z) {
+    void showOnly(int i, boolean z) throws Resources.NotFoundException {
         int count;
         int i2;
         int i3;
@@ -336,20 +337,20 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         this.mPreviousViews.clear();
         int i7 = i - this.mActiveOffset;
         int numActiveViews = (getNumActiveViews() + i7) - 1;
-        int max = Math.max(0, i7);
-        int min = Math.min(count - 1, numActiveViews);
+        int iMax = Math.max(0, i7);
+        int iMin = Math.min(count - 1, numActiveViews);
         if (this.mLoopViews) {
             i4 = numActiveViews;
             i3 = i7;
         } else {
-            i3 = max;
-            i4 = min;
+            i3 = iMax;
+            i4 = iMin;
         }
-        int modulo = modulo(i3, getWindowSize());
-        int modulo2 = modulo(i4, getWindowSize());
-        boolean z2 = modulo > modulo2;
+        int iModulo = modulo(i3, getWindowSize());
+        int iModulo2 = modulo(i4, getWindowSize());
+        boolean z2 = iModulo > iModulo2;
         for (Integer num : this.mViewsMap.keySet()) {
-            if ((!z2 && (num.intValue() < modulo || num.intValue() > modulo2)) || (z2 && num.intValue() > modulo2 && num.intValue() < modulo)) {
+            if ((!z2 && (num.intValue() < iModulo || num.intValue() > iModulo2)) || (z2 && num.intValue() > iModulo2 && num.intValue() < iModulo)) {
                 View view2 = this.mViewsMap.get(num).view;
                 int i8 = this.mViewsMap.get(num).relativeIndex;
                 this.mPreviousViews.add(num);
@@ -359,30 +360,30 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         if (i3 != this.mCurrentWindowStart || i4 != this.mCurrentWindowEnd || i7 != this.mCurrentWindowStartUnbounded) {
             int i9 = i3;
             while (i9 <= i4) {
-                int modulo3 = modulo(i9, getWindowSize());
-                int i10 = this.mViewsMap.containsKey(Integer.valueOf(modulo3)) ? this.mViewsMap.get(Integer.valueOf(modulo3)).relativeIndex : i2;
+                int iModulo3 = modulo(i9, getWindowSize());
+                int i10 = this.mViewsMap.containsKey(Integer.valueOf(iModulo3)) ? this.mViewsMap.get(Integer.valueOf(iModulo3)).relativeIndex : i2;
                 int i11 = i9 - i7;
-                if (this.mViewsMap.containsKey(Integer.valueOf(modulo3)) && !this.mPreviousViews.contains(Integer.valueOf(modulo3))) {
-                    View view3 = this.mViewsMap.get(Integer.valueOf(modulo3)).view;
-                    this.mViewsMap.get(Integer.valueOf(modulo3)).relativeIndex = i11;
+                if (this.mViewsMap.containsKey(Integer.valueOf(iModulo3)) && !this.mPreviousViews.contains(Integer.valueOf(iModulo3))) {
+                    View view3 = this.mViewsMap.get(Integer.valueOf(iModulo3)).view;
+                    this.mViewsMap.get(Integer.valueOf(iModulo3)).relativeIndex = i11;
                     applyTransformForChildAtIndex(view3, i11);
                     transformViewForTransition(i10, i11, view3, z);
                     i5 = i2;
                 } else {
-                    int modulo4 = modulo(i9, count);
-                    View view4 = this.mAdapter.getView(modulo4, null, this);
-                    long itemId = this.mAdapter.getItemId(modulo4);
+                    int iModulo4 = modulo(i9, count);
+                    View view4 = this.mAdapter.getView(iModulo4, null, this);
+                    long itemId = this.mAdapter.getItemId(iModulo4);
                     FrameLayout frameForChild = getFrameForChild();
                     if (view4 != null) {
                         frameForChild.addView(view4);
                     }
-                    this.mViewsMap.put(Integer.valueOf(modulo3), new ViewAndMetaData(this, frameForChild, i11, modulo4, itemId));
+                    this.mViewsMap.put(Integer.valueOf(iModulo3), new ViewAndMetaData(this, frameForChild, i11, iModulo4, itemId));
                     addChild(frameForChild);
                     applyTransformForChildAtIndex(frameForChild, i11);
                     i5 = -1;
                     transformViewForTransition(-1, i11, frameForChild, z);
                 }
-                this.mViewsMap.get(Integer.valueOf(modulo3)).view.bringToFront();
+                this.mViewsMap.get(Integer.valueOf(iModulo3)).view.bringToFront();
                 i9++;
                 i2 = i5;
             }
@@ -400,8 +401,8 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     private void addChild(View view) {
         addViewInLayout(view, -1, createOrReuseLayoutParams(view));
         if (this.mReferenceChildWidth == -1 || this.mReferenceChildHeight == -1) {
-            int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-            view.measure(makeMeasureSpec, makeMeasureSpec);
+            int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+            view.measure(iMakeMeasureSpec, iMakeMeasureSpec);
             this.mReferenceChildWidth = view.getMeasuredWidth();
             this.mReferenceChildHeight = view.getMeasuredHeight();
         }
@@ -435,7 +436,11 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0054  */
     @Override // android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean onTouchEvent(MotionEvent motionEvent) {
         int action = motionEvent.getAction();
         boolean z = true;
@@ -453,7 +458,9 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
                 if (this.mTouchMode == 1) {
                     final View currentView2 = getCurrentView();
                     final ViewAndMetaData metaDataForChild = getMetaDataForChild(currentView2);
-                    if (currentView2 != null && isTransformedTouchPointInView(motionEvent.getX(), motionEvent.getY(), currentView2, null)) {
+                    if (currentView2 == null || !isTransformedTouchPointInView(motionEvent.getX(), motionEvent.getY(), currentView2, null)) {
+                        z = false;
+                    } else {
                         Handler handler = getHandler();
                         if (handler != null) {
                             handler.removeCallbacks(this.mPendingCheckForTap);
@@ -475,11 +482,8 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
                                 });
                             }
                         }, ViewConfiguration.getPressedStateDuration());
-                        this.mTouchMode = 0;
-                        return z;
                     }
                 }
-                z = false;
                 this.mTouchMode = 0;
                 return z;
             }
@@ -521,16 +525,12 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         if (mode == 0) {
             if (z) {
                 i3 = this.mReferenceChildWidth + this.mPaddingLeft + this.mPaddingRight;
-                size = i3;
             } else {
                 size = 0;
             }
         } else if (mode2 == Integer.MIN_VALUE && z) {
             i3 = this.mReferenceChildWidth + this.mPaddingLeft + this.mPaddingRight;
-            if (i3 > size) {
-                size |= 16777216;
-            }
-            size = i3;
+            size = i3 > size ? size | 16777216 : i3;
         }
         setMeasuredDimension(size, size2);
         measureChildren();
@@ -540,7 +540,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         if (this.mDataChanged) {
             post(new Runnable() { // from class: android.widget.AdapterViewAnimator.2
                 @Override // java.lang.Runnable
-                public void run() {
+                public void run() throws Resources.NotFoundException {
                     AdapterViewAnimator.this.handleDataChanged();
                     if (AdapterViewAnimator.this.mWhichChild >= AdapterViewAnimator.this.getWindowSize()) {
                         AdapterViewAnimator.this.mWhichChild = 0;
@@ -559,7 +559,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     @Override // android.widget.AdapterView, android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         checkForAndHandleDataChanged();
         int childCount = getChildCount();
         for (int i5 = 0; i5 < childCount; i5++) {
@@ -607,16 +607,16 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
 
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         RemoteViewsAdapter remoteViewsAdapter = this.mRemoteViewsAdapter;
         if (remoteViewsAdapter != null) {
             remoteViewsAdapter.saveRemoteViewsCache();
         }
-        return new SavedState(onSaveInstanceState, this.mWhichChild);
+        return new SavedState(parcelableOnSaveInstanceState, this.mWhichChild);
     }
 
     @Override // android.view.View
-    public void onRestoreInstanceState(Parcelable parcelable) {
+    public void onRestoreInstanceState(Parcelable parcelable) throws Resources.NotFoundException {
         SavedState savedState = (SavedState) parcelable;
         super.onRestoreInstanceState(savedState.getSuperState());
         int i = savedState.whichChild;
@@ -671,7 +671,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     @Override // android.widget.AdapterView
-    public void setAdapter(Adapter adapter) {
+    public void setAdapter(Adapter adapter) throws Resources.NotFoundException {
         AdapterView<Adapter>.AdapterDataSetObserver adapterDataSetObserver;
         Adapter adapter2 = this.mAdapter;
         if (adapter2 != null && (adapterDataSetObserver = this.mDataSetObserver) != null) {
@@ -719,7 +719,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     @Override // android.widget.AdapterView
-    public void setSelection(int i) {
+    public void setSelection(int i) throws Resources.NotFoundException {
         setDisplayedChild(i);
     }
 
@@ -734,7 +734,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     @Override // android.widget.RemoteViewsAdapter.RemoteAdapterConnectionCallback
-    public boolean onRemoteAdapterConnected() {
+    public boolean onRemoteAdapterConnected() throws Resources.NotFoundException {
         RemoteViewsAdapter remoteViewsAdapter = this.mRemoteViewsAdapter;
         if (remoteViewsAdapter == this.mAdapter) {
             if (remoteViewsAdapter == null) {
@@ -761,7 +761,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     @Override // android.widget.Advanceable
-    public void advance() {
+    public void advance() throws Resources.NotFoundException {
         showNext();
     }
 
@@ -773,14 +773,14 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     private void semSendBroadcastPositionInternal(String str, Intent intent) {
         String str2;
         String str3;
-        String[] split = str.split("/");
-        if (split.length <= 1 || (str2 = split[0]) == null || split[1] == null || str2.isEmpty() || split[1].isEmpty()) {
+        String[] strArrSplit = str.split("/");
+        if (strArrSplit.length <= 1 || (str2 = strArrSplit[0]) == null || strArrSplit[1] == null || str2.isEmpty() || strArrSplit[1].isEmpty()) {
             return;
         }
-        intent.setPackage(split[0]);
-        intent.setComponent(new ComponentName(split[0], split[1]));
-        if (split.length == 3 && (str3 = split[2]) != null && !str3.isEmpty()) {
-            this.mContext.sendBroadcast(intent, split[2]);
+        intent.setPackage(strArrSplit[0]);
+        intent.setComponent(new ComponentName(strArrSplit[0], strArrSplit[1]));
+        if (strArrSplit.length == 3 && (str3 = strArrSplit[2]) != null && !str3.isEmpty()) {
+            this.mContext.sendBroadcast(intent, strArrSplit[2]);
         } else {
             this.mContext.sendBroadcast(intent);
         }

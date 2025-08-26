@@ -9,7 +9,6 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.statusbar.policy.FlashlightControllerImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubroomFlashLightSettingsView extends LinearLayout {
     public LinearLayout mFlashLightBackground;
@@ -23,9 +22,9 @@ public class SubroomFlashLightSettingsView extends LinearLayout {
     public final void onAttachedToWindow() {
         String string;
         super.onAttachedToWindow();
-        boolean isEnabled = ((FlashlightControllerImpl) ((FlashlightController) Dependency.sDependency.getDependencyInner(FlashlightController.class))).isEnabled();
+        boolean zIsEnabled = ((FlashlightControllerImpl) ((FlashlightController) Dependency.sDependency.getDependencyInner(FlashlightController.class))).isEnabled();
         StringBuffer stringBuffer = new StringBuffer();
-        if (isEnabled) {
+        if (zIsEnabled) {
             this.mFlashLightBackground.setBackground(((LinearLayout) this).mContext.getResources().getDrawable(R.drawable.subroom_active_background));
             string = ((LinearLayout) this).mContext.getString(R.string.accessibility_desc_on);
         } else {

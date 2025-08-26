@@ -27,7 +27,6 @@ import androidx.compose.runtime.internal.ComposableLambdaImpl;
 import androidx.compose.runtime.snapshots.Snapshot;
 import androidx.compose.ui.Modifier;
 import androidx.compose.ui.internal.InlineClassHelperKt;
-import androidx.compose.ui.layout.LayoutNodeSubcompositionsState;
 import androidx.compose.ui.layout.SubcomposeLayoutState;
 import androidx.compose.ui.layout.SubcomposeSlotReusePolicy;
 import androidx.compose.ui.node.LayoutNode;
@@ -54,7 +53,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycleCallback {
     public CompositionContext compositionContext;
@@ -74,7 +72,6 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
     public final MutableVector approachComposedSlotIds = new MutableVector(new Object[16], 0);
     public final String NoIntrinsicsMessage = "Asking for intrinsic measurements of SubcomposeLayout layouts is not supported. This includes components that are built on top of SubcomposeLayout, such as lazy lists, BoxWithConstraints, TabRow, etc. To mitigate this:\n- if intrinsic measurements are used to achieve 'match parent' sizing, consider replacing the parent of the component with a custom layout which controls the order in which children are measured, making intrinsic measurement not needed\n- adding a size modifier to the component, in order to fast return the queried intrinsic measurement.";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class ApproachMeasureScopeImpl implements SubcomposeMeasureScope, MeasureScope {
         public final /* synthetic */ Scope $$delegate_0;
 
@@ -114,8 +111,8 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
 
         @Override // androidx.compose.ui.unit.Density
         /* renamed from: roundToPx-0680j_4 */
-        public final int mo51roundToPx0680j_4(float f) {
-            return this.$$delegate_0.mo51roundToPx0680j_4(f);
+        public final int mo52roundToPx0680j_4(float f) {
+            return this.$$delegate_0.mo52roundToPx0680j_4(f);
         }
 
         @Override // androidx.compose.ui.layout.SubcomposeMeasureScope
@@ -169,60 +166,59 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
 
         @Override // androidx.compose.ui.unit.FontScaling
         /* renamed from: toDp-GaN1DYA */
-        public final float mo52toDpGaN1DYA(long j) {
-            return this.$$delegate_0.mo52toDpGaN1DYA(j);
+        public final float mo53toDpGaN1DYA(long j) {
+            return this.$$delegate_0.mo53toDpGaN1DYA(j);
         }
 
         @Override // androidx.compose.ui.unit.Density
         /* renamed from: toDp-u2uoSUM */
-        public final float mo53toDpu2uoSUM(float f) {
-            return this.$$delegate_0.mo53toDpu2uoSUM(f);
+        public final float mo54toDpu2uoSUM(float f) {
+            return this.$$delegate_0.mo54toDpu2uoSUM(f);
         }
 
         @Override // androidx.compose.ui.unit.Density
         /* renamed from: toDpSize-k-rfVVM */
-        public final long mo55toDpSizekrfVVM(long j) {
-            return this.$$delegate_0.mo55toDpSizekrfVVM(j);
+        public final long mo56toDpSizekrfVVM(long j) {
+            return this.$$delegate_0.mo56toDpSizekrfVVM(j);
         }
 
         @Override // androidx.compose.ui.unit.Density
         /* renamed from: toPx--R2X_6o */
-        public final float mo56toPxR2X_6o(long j) {
-            return this.$$delegate_0.mo56toPxR2X_6o(j);
+        public final float mo57toPxR2X_6o(long j) {
+            return this.$$delegate_0.mo57toPxR2X_6o(j);
         }
 
         @Override // androidx.compose.ui.unit.Density
         /* renamed from: toPx-0680j_4 */
-        public final float mo57toPx0680j_4(float f) {
+        public final float mo58toPx0680j_4(float f) {
             return this.$$delegate_0.getDensity() * f;
         }
 
         @Override // androidx.compose.ui.unit.Density
         /* renamed from: toSize-XkaWNTQ */
-        public final long mo58toSizeXkaWNTQ(long j) {
-            return this.$$delegate_0.mo58toSizeXkaWNTQ(j);
+        public final long mo59toSizeXkaWNTQ(long j) {
+            return this.$$delegate_0.mo59toSizeXkaWNTQ(j);
         }
 
         @Override // androidx.compose.ui.unit.FontScaling
         /* renamed from: toSp-0xMU5do */
-        public final long mo59toSp0xMU5do(float f) {
-            return this.$$delegate_0.mo59toSp0xMU5do(f);
+        public final long mo60toSp0xMU5do(float f) {
+            return this.$$delegate_0.mo60toSp0xMU5do(f);
         }
 
         @Override // androidx.compose.ui.unit.Density
         /* renamed from: toSp-kPz2Gy4 */
-        public final long mo60toSpkPz2Gy4(float f) {
-            return this.$$delegate_0.mo60toSpkPz2Gy4(f);
+        public final long mo61toSpkPz2Gy4(float f) {
+            return this.$$delegate_0.mo61toSpkPz2Gy4(f);
         }
 
         @Override // androidx.compose.ui.unit.Density
         /* renamed from: toDp-u2uoSUM */
-        public final float mo54toDpu2uoSUM(int i) {
-            return this.$$delegate_0.mo54toDpu2uoSUM(i);
+        public final float mo55toDpu2uoSUM(int i) {
+            return this.$$delegate_0.mo55toDpu2uoSUM(i);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Scope implements SubcomposeMeasureScope {
         public float density;
         public float fontScale;
@@ -283,13 +279,13 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
                 @Override // androidx.compose.ui.layout.MeasureResult
                 public final void placeChildren() {
                     LookaheadDelegate lookaheadDelegate;
-                    boolean isLookingAhead = this.isLookingAhead();
+                    boolean zIsLookingAhead = this.isLookingAhead();
                     Function1 function13 = function1;
                     LayoutNodeSubcompositionsState layoutNodeSubcompositionsState2 = layoutNodeSubcompositionsState;
-                    if (!isLookingAhead || (lookaheadDelegate = layoutNodeSubcompositionsState2.root.nodes.innerCoordinator.lookaheadDelegate) == null) {
-                        function13.mo779invoke(layoutNodeSubcompositionsState2.root.nodes.innerCoordinator.placementScope);
+                    if (!zIsLookingAhead || (lookaheadDelegate = layoutNodeSubcompositionsState2.root.nodes.innerCoordinator.lookaheadDelegate) == null) {
+                        function13.mo781invoke(layoutNodeSubcompositionsState2.root.nodes.innerCoordinator.placementScope);
                     } else {
-                        function13.mo779invoke(lookaheadDelegate.placementScope);
+                        function13.mo781invoke(lookaheadDelegate.placementScope);
                     }
                 }
             };
@@ -306,37 +302,37 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
                 InlineClassHelperKt.throwIllegalStateException("subcompose can only be used inside the measure or layout blocks");
             }
             MutableScatterMap mutableScatterMap = layoutNodeSubcompositionsState.slotIdToNode;
-            Object obj2 = mutableScatterMap.get(obj);
-            if (obj2 == null) {
-                obj2 = (LayoutNode) layoutNodeSubcompositionsState.precomposeMap.remove(obj);
-                if (obj2 != null) {
+            Object objTakeNodeFromReusables = mutableScatterMap.get(obj);
+            if (objTakeNodeFromReusables == null) {
+                objTakeNodeFromReusables = (LayoutNode) layoutNodeSubcompositionsState.precomposeMap.remove(obj);
+                if (objTakeNodeFromReusables != null) {
                     if (layoutNodeSubcompositionsState.precomposedCount <= 0) {
                         InlineClassHelperKt.throwIllegalStateException("Check failed.");
                     }
                     layoutNodeSubcompositionsState.precomposedCount--;
                 } else {
-                    obj2 = layoutNodeSubcompositionsState.takeNodeFromReusables(obj);
-                    if (obj2 == null) {
+                    objTakeNodeFromReusables = layoutNodeSubcompositionsState.takeNodeFromReusables(obj);
+                    if (objTakeNodeFromReusables == null) {
                         int i = layoutNodeSubcompositionsState.currentIndex;
                         LayoutNode layoutNode2 = new LayoutNode(true, 0, 2, null);
                         layoutNode.ignoreRemeasureRequests = true;
                         layoutNode.insertAt$ui_release(i, layoutNode2);
                         layoutNode.ignoreRemeasureRequests = false;
-                        obj2 = layoutNode2;
+                        objTakeNodeFromReusables = layoutNode2;
                     }
                 }
-                mutableScatterMap.set(obj, obj2);
+                mutableScatterMap.set(obj, objTakeNodeFromReusables);
             }
-            LayoutNode layoutNode3 = (LayoutNode) obj2;
+            LayoutNode layoutNode3 = (LayoutNode) objTakeNodeFromReusables;
             if (CollectionsKt___CollectionsKt.getOrNull(layoutNodeSubcompositionsState.currentIndex, layoutNode.getFoldedChildren$ui_release()) != layoutNode3) {
-                int indexOf = layoutNode.getFoldedChildren$ui_release().indexOf(layoutNode3);
-                if (indexOf < layoutNodeSubcompositionsState.currentIndex) {
+                int iIndexOf = layoutNode.getFoldedChildren$ui_release().indexOf(layoutNode3);
+                if (iIndexOf < layoutNodeSubcompositionsState.currentIndex) {
                     InlineClassHelperKt.throwIllegalArgumentException("Key \"" + obj + "\" was already used. If you are using LazyColumn/Row please make sure you provide a unique key for each item.");
                 }
                 int i2 = layoutNodeSubcompositionsState.currentIndex;
-                if (i2 != indexOf) {
+                if (i2 != iIndexOf) {
                     layoutNode.ignoreRemeasureRequests = true;
-                    layoutNode.move$ui_release(indexOf, i2, 1);
+                    layoutNode.move$ui_release(iIndexOf, i2, 1);
                     layoutNode.ignoreRemeasureRequests = false;
                 }
             }
@@ -402,7 +398,7 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
             Snapshot.Companion.getClass();
             Snapshot currentThreadSnapshot = Snapshot.Companion.getCurrentThreadSnapshot();
             Function1 readObserver = currentThreadSnapshot != null ? currentThreadSnapshot.getReadObserver() : null;
-            Snapshot makeCurrentNonObservable = Snapshot.Companion.makeCurrentNonObservable(currentThreadSnapshot);
+            Snapshot snapshotMakeCurrentNonObservable = Snapshot.Companion.makeCurrentNonObservable(currentThreadSnapshot);
             boolean z2 = false;
             while (size >= i) {
                 try {
@@ -438,12 +434,12 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
                     this.slotIdToNode.remove(obj3);
                     size--;
                 } catch (Throwable th) {
-                    Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, makeCurrentNonObservable, readObserver);
+                    Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, snapshotMakeCurrentNonObservable, readObserver);
                     throw th;
                 }
             }
             Unit unit = Unit.INSTANCE;
-            Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, makeCurrentNonObservable, readObserver);
+            Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, snapshotMakeCurrentNonObservable, readObserver);
             z = z2;
         }
         if (z) {
@@ -460,11 +456,11 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
             InlineClassHelperKt.throwIllegalArgumentException("Inconsistency between the count of nodes tracked by the state (" + mutableScatterMap._size + ") and the children count on the SubcomposeLayout (" + size + "). Are you trying to use the state of the disposed SubcomposeLayout?");
         }
         if (!((size - this.reusableCount) - this.precomposedCount >= 0)) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size, "Incorrect state. Total children ", ". Reusable children ");
-            m.append(this.reusableCount);
-            m.append(". Precomposed children ");
-            m.append(this.precomposedCount);
-            InlineClassHelperKt.throwIllegalArgumentException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size, "Incorrect state. Total children ", ". Reusable children ");
+            sbM.append(this.reusableCount);
+            sbM.append(". Precomposed children ");
+            sbM.append(this.precomposedCount);
+            InlineClassHelperKt.throwIllegalArgumentException(sbM.toString());
         }
         MutableScatterMap mutableScatterMap2 = this.precomposeMap;
         if (mutableScatterMap2._size == this.precomposedCount) {
@@ -483,7 +479,7 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
             Snapshot.Companion.getClass();
             Snapshot currentThreadSnapshot = Snapshot.Companion.getCurrentThreadSnapshot();
             Function1 readObserver = currentThreadSnapshot != null ? currentThreadSnapshot.getReadObserver() : null;
-            Snapshot makeCurrentNonObservable = Snapshot.Companion.makeCurrentNonObservable(currentThreadSnapshot);
+            Snapshot snapshotMakeCurrentNonObservable = Snapshot.Companion.makeCurrentNonObservable(currentThreadSnapshot);
             for (int i = 0; i < size; i++) {
                 try {
                     LayoutNode layoutNode = (LayoutNode) foldedChildren$ui_release.get(i);
@@ -509,12 +505,12 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
                         nodeState.slotId = SubcomposeLayoutKt.ReusedSlotId;
                     }
                 } catch (Throwable th) {
-                    Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, makeCurrentNonObservable, readObserver);
+                    Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, snapshotMakeCurrentNonObservable, readObserver);
                     throw th;
                 }
             }
             Unit unit = Unit.INSTANCE;
-            Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, makeCurrentNonObservable, readObserver);
+            Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, snapshotMakeCurrentNonObservable, readObserver);
             this.slotIdToNode.clear();
         }
         makeSureStateIsConsistent();
@@ -525,7 +521,11 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
         markActiveNodesAsReused(true);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x004f  */
     @Override // androidx.compose.runtime.ComposeNodeLifecycleCallback
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onRelease() {
         ReusableComposition reusableComposition;
         LayoutNode layoutNode = this.root;
@@ -548,12 +548,11 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
                     }
                     if (i2 != 8) {
                         break;
+                    } else if (i == length) {
+                        break;
+                    } else {
+                        i++;
                     }
-                }
-                if (i == length) {
-                    break;
-                } else {
-                    i++;
                 }
             }
         }
@@ -575,7 +574,7 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
     public final SubcomposeLayoutState.PrecomposedSlotHandle precompose(final Object obj, Function2 function2) {
         LayoutNode layoutNode = this.root;
         if (!layoutNode.isAttached()) {
-            return new SubcomposeLayoutState.PrecomposedSlotHandle() { // from class: androidx.compose.ui.layout.LayoutNodeSubcompositionsState$precompose$1
+            return new SubcomposeLayoutState.PrecomposedSlotHandle() { // from class: androidx.compose.ui.layout.LayoutNodeSubcompositionsState.precompose.1
                 @Override // androidx.compose.ui.layout.SubcomposeLayoutState.PrecomposedSlotHandle
                 public final void dispose() {
                 }
@@ -585,14 +584,14 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
         if (!this.slotIdToNode.containsKey(obj)) {
             this.approachPrecomposeSlotHandleMap.remove(obj);
             MutableScatterMap mutableScatterMap = this.precomposeMap;
-            Object obj2 = mutableScatterMap.get(obj);
-            if (obj2 == null) {
-                obj2 = takeNodeFromReusables(obj);
-                if (obj2 != null) {
-                    int indexOf = layoutNode.getFoldedChildren$ui_release().indexOf(obj2);
+            Object objTakeNodeFromReusables = mutableScatterMap.get(obj);
+            if (objTakeNodeFromReusables == null) {
+                objTakeNodeFromReusables = takeNodeFromReusables(obj);
+                if (objTakeNodeFromReusables != null) {
+                    int iIndexOf = layoutNode.getFoldedChildren$ui_release().indexOf(objTakeNodeFromReusables);
                     int size = layoutNode.getFoldedChildren$ui_release().size();
                     layoutNode.ignoreRemeasureRequests = true;
-                    layoutNode.move$ui_release(indexOf, size, 1);
+                    layoutNode.move$ui_release(iIndexOf, size, 1);
                     layoutNode.ignoreRemeasureRequests = false;
                     this.precomposedCount++;
                 } else {
@@ -602,13 +601,13 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
                     layoutNode.insertAt$ui_release(size2, layoutNode2);
                     layoutNode.ignoreRemeasureRequests = false;
                     this.precomposedCount++;
-                    obj2 = layoutNode2;
+                    objTakeNodeFromReusables = layoutNode2;
                 }
-                mutableScatterMap.set(obj, obj2);
+                mutableScatterMap.set(obj, objTakeNodeFromReusables);
             }
-            subcompose((LayoutNode) obj2, obj, function2);
+            subcompose((LayoutNode) objTakeNodeFromReusables, obj, function2);
         }
-        return new SubcomposeLayoutState.PrecomposedSlotHandle() { // from class: androidx.compose.ui.layout.LayoutNodeSubcompositionsState$precompose$2
+        return new SubcomposeLayoutState.PrecomposedSlotHandle() { // from class: androidx.compose.ui.layout.LayoutNodeSubcompositionsState.precompose.2
             public final MutableIntSet hasPremeasured;
 
             {
@@ -626,15 +625,15 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
                         InlineClassHelperKt.throwIllegalStateException("No pre-composed items to dispose");
                     }
                     LayoutNode layoutNode4 = layoutNodeSubcompositionsState.root;
-                    int indexOf2 = layoutNode4.getFoldedChildren$ui_release().indexOf(layoutNode3);
-                    if (indexOf2 < layoutNode4.getFoldedChildren$ui_release().size() - layoutNodeSubcompositionsState.precomposedCount) {
+                    int iIndexOf2 = layoutNode4.getFoldedChildren$ui_release().indexOf(layoutNode3);
+                    if (iIndexOf2 < layoutNode4.getFoldedChildren$ui_release().size() - layoutNodeSubcompositionsState.precomposedCount) {
                         InlineClassHelperKt.throwIllegalStateException("Item is not in pre-composed item range");
                     }
                     layoutNodeSubcompositionsState.reusableCount++;
                     layoutNodeSubcompositionsState.precomposedCount--;
                     int size3 = (layoutNode4.getFoldedChildren$ui_release().size() - layoutNodeSubcompositionsState.precomposedCount) - layoutNodeSubcompositionsState.reusableCount;
                     layoutNode4.ignoreRemeasureRequests = true;
-                    layoutNode4.move$ui_release(indexOf2, size3, 1);
+                    layoutNode4.move$ui_release(iIndexOf2, size3, 1);
                     layoutNode4.ignoreRemeasureRequests = false;
                     layoutNodeSubcompositionsState.disposeOrReuseStartingFromIndex(size3);
                 }
@@ -651,7 +650,7 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
 
             @Override // androidx.compose.ui.layout.SubcomposeLayoutState.PrecomposedSlotHandle
             /* renamed from: getSize-YEO4UFw, reason: not valid java name */
-            public final long mo620getSizeYEO4UFw(int i) {
+            public final long mo622getSizeYEO4UFw(int i) {
                 LayoutNode layoutNode3 = (LayoutNode) LayoutNodeSubcompositionsState.this.precomposeMap.get(obj);
                 if (layoutNode3 != null && layoutNode3.isAttached()) {
                     int size3 = layoutNode3.getChildren$ui_release().size();
@@ -671,7 +670,7 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
 
             @Override // androidx.compose.ui.layout.SubcomposeLayoutState.PrecomposedSlotHandle
             /* renamed from: premeasure-0kLqBqw, reason: not valid java name */
-            public final void mo621premeasure0kLqBqw(int i, long j) {
+            public final void mo623premeasure0kLqBqw(int i, long j) {
                 LayoutNodeSubcompositionsState layoutNodeSubcompositionsState = LayoutNodeSubcompositionsState.this;
                 LayoutNode layoutNode3 = (LayoutNode) layoutNodeSubcompositionsState.precomposeMap.get(obj);
                 if (layoutNode3 == null || !layoutNode3.isAttached()) {
@@ -686,7 +685,7 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
                 }
                 LayoutNode layoutNode4 = layoutNodeSubcompositionsState.root;
                 layoutNode4.ignoreRemeasureRequests = true;
-                ((AndroidComposeView) LayoutNodeKt.requireOwner(layoutNode3)).m694measureAndLayout0kLqBqw((LayoutNode) layoutNode3.getChildren$ui_release().get(i), j);
+                ((AndroidComposeView) LayoutNodeKt.requireOwner(layoutNode3)).m696measureAndLayout0kLqBqw((LayoutNode) layoutNode3.getChildren$ui_release().get(i), j);
                 layoutNode4.ignoreRemeasureRequests = false;
                 this.hasPremeasured.add(i);
             }
@@ -729,7 +728,7 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
             Snapshot.Companion.getClass();
             Snapshot currentThreadSnapshot = Snapshot.Companion.getCurrentThreadSnapshot();
             Function1 readObserver = currentThreadSnapshot != null ? currentThreadSnapshot.getReadObserver() : null;
-            Snapshot makeCurrentNonObservable = Snapshot.Companion.makeCurrentNonObservable(currentThreadSnapshot);
+            Snapshot snapshotMakeCurrentNonObservable = Snapshot.Companion.makeCurrentNonObservable(currentThreadSnapshot);
             try {
                 LayoutNode layoutNode2 = this.root;
                 layoutNode2.ignoreRemeasureRequests = true;
@@ -749,25 +748,25 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj3, Object obj4) {
                         Composer composer = (Composer) obj3;
-                        int intValue = ((Number) obj4).intValue();
+                        int iIntValue = ((Number) obj4).intValue();
                         ComposerImpl composerImpl = (ComposerImpl) composer;
-                        if (composerImpl.shouldExecute(intValue & 1, (intValue & 3) != 2)) {
+                        if (composerImpl.shouldExecute(iIntValue & 1, (iIntValue & 3) != 2)) {
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventStart("androidx.compose.ui.layout.LayoutNodeSubcompositionsState.subcompose.<anonymous>.<anonymous>.<anonymous> (SubcomposeLayout.kt:532)");
                             }
-                            Boolean bool = (Boolean) ((SnapshotMutableStateImpl) LayoutNodeSubcompositionsState.NodeState.this.activeState).getValue();
-                            boolean booleanValue = bool.booleanValue();
+                            Boolean bool = (Boolean) ((SnapshotMutableStateImpl) nodeState2.activeState).getValue();
+                            boolean zBooleanValue = bool.booleanValue();
                             Function2 function23 = function22;
                             composerImpl.startReusableGroup(bool);
-                            boolean changed = composerImpl.changed(booleanValue);
-                            if (booleanValue) {
+                            boolean zChanged = composerImpl.changed(zBooleanValue);
+                            if (zBooleanValue) {
                                 function23.invoke(composerImpl, 0);
                             } else {
                                 if (composerImpl.groupNodeCount != 0) {
                                     ComposerKt.composeImmediateRuntimeError("No nodes can be emitted before calling dactivateToEndGroup");
                                 }
                                 if (!composerImpl.inserting) {
-                                    if (changed) {
+                                    if (zChanged) {
                                         SlotReader slotReader = composerImpl.reader;
                                         int i = slotReader.currentGroup;
                                         int i2 = slotReader.currentEnd;
@@ -801,10 +800,10 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
                 nodeState2.forceReuse = false;
                 layoutNode2.ignoreRemeasureRequests = false;
                 Unit unit = Unit.INSTANCE;
-                Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, makeCurrentNonObservable, readObserver);
+                Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, snapshotMakeCurrentNonObservable, readObserver);
                 nodeState2.forceRecompose = false;
             } catch (Throwable th) {
-                Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, makeCurrentNonObservable, readObserver);
+                Snapshot.Companion.restoreNonObservable(currentThreadSnapshot, snapshotMakeCurrentNonObservable, readObserver);
                 throw th;
             }
         }
@@ -871,7 +870,6 @@ public final class LayoutNodeSubcompositionsState implements ComposeNodeLifecycl
         return layoutNode2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class NodeState {
         public MutableState activeState;
         public ReusableComposition composition;

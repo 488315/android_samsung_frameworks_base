@@ -29,10 +29,10 @@ import com.sec.ims.presence.ServiceTuple;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginWallpaperManagerImpl implements PluginWallpaperManager, KeyguardListener.UserSwitch {
     private static final String FBE_PATH = "/data/user_de/0/com.android.systemui/files/fresh_pack/";
@@ -80,11 +80,11 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
 
     private void fillFbeWallpaperData() {
         PluginHomeWallpaper pluginHomeWallpaper;
-        boolean isFbeWallpaperAvailable = isFbeWallpaperAvailable(1);
+        boolean zIsFbeWallpaperAvailable = isFbeWallpaperAvailable(1);
         int fbeWallpaperType = getFbeWallpaperType(1);
         String fbeWallpaperPath = getFbeWallpaperPath(1);
         this.mUtils.addDump(TAG, BiometricMessageDeferralLogger$$ExternalSyntheticOutline0.m(fbeWallpaperType, "fillFbeWallpaperData, fbeSubType: ", ", fbeSubPath: ", fbeWallpaperPath));
-        if (!isFbeWallpaperAvailable || fbeWallpaperType == -2 || fbeWallpaperPath == null || (pluginHomeWallpaper = this.mMediator.getPluginHomeWallpaper()) == null) {
+        if (!zIsFbeWallpaperAvailable || fbeWallpaperType == -2 || fbeWallpaperPath == null || (pluginHomeWallpaper = this.mMediator.getPluginHomeWallpaper()) == null) {
             return;
         }
         pluginHomeWallpaper.setWallpaper(1, fbeWallpaperType, 0, fbeWallpaperPath);
@@ -96,12 +96,12 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     }
 
     private File getFbeFile(int i, String str) {
-        File[] listFiles;
+        File[] fileArrListFiles;
         File file = new File(i == 0 ? FBE_PATH : FBE_SUB_PATH);
-        if (!file.exists() || (listFiles = file.listFiles()) == null || listFiles.length == 0) {
+        if (!file.exists() || (fileArrListFiles = file.listFiles()) == null || fileArrListFiles.length == 0) {
             return null;
         }
-        for (File file2 : listFiles) {
+        for (File file2 : fileArrListFiles) {
             if (file2 != null && file2.getName().startsWith(str)) {
                 return file2;
             }
@@ -130,7 +130,7 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     }
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
-    public void fillWallpaperData(int i, int i2, int i3, String str) {
+    public void fillWallpaperData(int i, int i2, int i3, String str) throws NumberFormatException {
         if (this.mMediator != null) {
             LogUtil.d(TAG, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "fillWallpaperData screen:"), new Object[0]);
             PluginLockWallpaper pluginLockWallpaper = this.mMediator.getPluginLockWallpaper();
@@ -159,9 +159,9 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     public Bitmap getFbeWallpaper(int i) {
         File fbeWallpaperFile = getFbeWallpaperFile(i);
         if (fbeWallpaperFile != null) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "getFbeWallpaper screen: ", ", path: ");
-            m.append(fbeWallpaperFile.getPath());
-            Log.d(TAG, m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "getFbeWallpaper screen: ", ", path: ");
+            sbM.append(fbeWallpaperFile.getPath());
+            Log.d(TAG, sbM.toString());
             if (fbeWallpaperFile.exists() && fbeWallpaperFile.canRead()) {
                 return getBitmapFromPath(fbeWallpaperFile.getPath());
             }
@@ -171,32 +171,31 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     }
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
-    public String getFbeWallpaperIntelligentCrop(int i) {
-        FileInputStream fileInputStream;
+    public String getFbeWallpaperIntelligentCrop(int i) throws IOException {
         File fbeIcropFile = getFbeIcropFile(i);
-        String str = null;
+        String line = null;
         try {
-            fileInputStream = new FileInputStream(fbeIcropFile);
-        } catch (Exception e) {
-            Log.d(TAG, "getFbeWallpaperIntelligentCrop: " + e.getMessage());
-        }
-        try {
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            FileInputStream fileInputStream = new FileInputStream(fbeIcropFile);
             try {
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
                 try {
-                    str = bufferedReader.readLine();
-                    bufferedReader.close();
-                    inputStreamReader.close();
-                    fileInputStream.close();
-                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("getFbeWallpaperIntelligentCrop: iCrops = ", str, TAG);
-                    return str;
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    try {
+                        line = bufferedReader.readLine();
+                        bufferedReader.close();
+                        inputStreamReader.close();
+                        fileInputStream.close();
+                    } finally {
+                    }
                 } finally {
                 }
             } finally {
             }
-        } finally {
+        } catch (Exception e) {
+            Log.d(TAG, "getFbeWallpaperIntelligentCrop: " + e.getMessage());
         }
+        MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("getFbeWallpaperIntelligentCrop: iCrops = ", line, TAG);
+        return line;
     }
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
@@ -205,7 +204,7 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     }
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
-    public Rect getFbeWallpaperRect() {
+    public Rect getFbeWallpaperRect() throws IOException {
         getFbeWallpaperRect(this.mScreenType);
         return null;
     }
@@ -282,89 +281,42 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0047, code lost:
-    
-        if (r4.equals("image") == false) goto L15;
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public int getSubFbeWallpaperType() {
-        /*
-            r4 = this;
-            r0 = 1
-            com.android.systemui.pluginlock.PluginLockUtils r1 = r4.mUtils
-            boolean r1 = r1.isGoingToRescueParty()
-            r2 = -2
-            if (r1 == 0) goto Lb
-            return r2
-        Lb:
-            java.io.File r4 = r4.getFbeWallpaperFile(r0)
-            if (r4 == 0) goto L61
-            boolean r1 = r4.exists()
-            if (r1 == 0) goto L61
-            boolean r1 = r4.canRead()
-            if (r1 == 0) goto L61
-            java.lang.String r4 = r4.getName()
-            java.lang.String r1 = "_"
-            java.lang.String[] r4 = r4.split(r1)
-            r4 = r4[r0]
-            if (r4 == 0) goto L61
-            r1 = -1
-            int r3 = r4.hashCode()
-            switch(r3) {
-                case 102340: goto L4a;
-                case 100313435: goto L41;
-                case 112202875: goto L35;
-                default: goto L33;
+        File fbeWallpaperFile;
+        String str;
+        char c = 1;
+        if (!this.mUtils.isGoingToRescueParty() && (fbeWallpaperFile = getFbeWallpaperFile(1)) != null && fbeWallpaperFile.exists() && fbeWallpaperFile.canRead() && (str = fbeWallpaperFile.getName().split("_")[1]) != null) {
+            switch (str.hashCode()) {
+                case 102340:
+                    if (!str.equals("gif")) {
+                        c = 65535;
+                        break;
+                    } else {
+                        c = 0;
+                        break;
+                    }
+                case 100313435:
+                    if (!str.equals("image")) {
+                    }
+                    break;
+                case 112202875:
+                    if (str.equals(ServiceTuple.MEDIA_CAP_VIDEO)) {
+                        c = 2;
+                        break;
+                    }
+                    break;
             }
-        L33:
-            r0 = r1
-            goto L54
-        L35:
-            java.lang.String r0 = "video"
-            boolean r4 = r4.equals(r0)
-            if (r4 != 0) goto L3f
-            goto L33
-        L3f:
-            r0 = 2
-            goto L54
-        L41:
-            java.lang.String r3 = "image"
-            boolean r4 = r4.equals(r3)
-            if (r4 != 0) goto L54
-            goto L33
-        L4a:
-            java.lang.String r0 = "gif"
-            boolean r4 = r4.equals(r0)
-            if (r4 != 0) goto L53
-            goto L33
-        L53:
-            r0 = 0
-        L54:
-            switch(r0) {
-                case 0: goto L5e;
-                case 1: goto L5b;
-                case 2: goto L58;
-                default: goto L57;
+            switch (c) {
             }
-        L57:
-            goto L61
-        L58:
-            r4 = 23
-            return r4
-        L5b:
-            r4 = 21
-            return r4
-        L5e:
-            r4 = 22
-            return r4
-        L61:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.PluginWallpaperManagerImpl.getSubFbeWallpaperType():int");
+            return -2;
+        }
+        return -2;
     }
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
@@ -377,41 +329,41 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     }
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
-    public int getWallpaperIndex(int i, Bundle bundle) {
-        String str;
+    public int getWallpaperIndex(int i, Bundle bundle) throws NumberFormatException {
+        String string;
         int i2;
         if (!LsRune.SUBSCREEN_WATCHFACE || i != 1) {
             ListPopupWindow$$ExternalSyntheticOutline0.m(i, "getWallpaperIndex: Not supported yet! screen = ", TAG);
             return -1;
         }
         if (bundle != null) {
-            str = bundle.getString("caller");
+            string = bundle.getString("caller");
             i2 = bundle.getInt("multi_pack_size");
         } else {
-            str = null;
+            string = null;
             i2 = -1;
         }
-        StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(i, "getWallpaperIndex: screen = ", ", source = ", str, ", size = ");
-        m.append(i2);
-        Log.d(TAG, m.toString());
+        StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(i, "getWallpaperIndex: screen = ", ", source = ", string, ", size = ");
+        sbM.append(i2);
+        Log.d(TAG, sbM.toString());
         String homeWallpaperPath = getHomeWallpaperPath(i);
         if (homeWallpaperPath == null) {
             return -1;
         }
         try {
-            String substring = homeWallpaperPath.substring(homeWallpaperPath.lastIndexOf("/") + 1);
-            int indexOf = substring.indexOf(".");
-            if (indexOf > 0) {
-                substring = substring.substring(0, indexOf);
+            String strSubstring = homeWallpaperPath.substring(homeWallpaperPath.lastIndexOf("/") + 1);
+            int iIndexOf = strSubstring.indexOf(".");
+            if (iIndexOf > 0) {
+                strSubstring = strSubstring.substring(0, iIndexOf);
             }
-            String replaceAll = substring.replaceAll("[^0-9]", "");
-            if (isNumeric(replaceAll)) {
-                int parseInt = Integer.parseInt(replaceAll);
-                if ("Cover".equals(str) && parseInt - 1 == -1) {
-                    parseInt = i2 - 1;
+            String strReplaceAll = strSubstring.replaceAll("[^0-9]", "");
+            if (isNumeric(strReplaceAll)) {
+                int i3 = Integer.parseInt(strReplaceAll);
+                if ("Cover".equals(string) && i3 - 1 == -1) {
+                    i3 = i2 - 1;
                 }
-                Log.d(TAG, "getWallpaperIndex: strIndex = " + replaceAll + ", index = " + parseInt);
-                return parseInt;
+                Log.d(TAG, "getWallpaperIndex: strIndex = " + strReplaceAll + ", index = " + i3);
+                return i3;
             }
         } catch (Exception e) {
             EmergencyButton$$ExternalSyntheticOutline0.m("getWallpaperIndex: ", e, TAG);
@@ -588,16 +540,16 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
     public void onWallpaperConsumed(int i, boolean z) {
-        boolean isDynamicLockEnabled = this.mMediator.isDynamicLockEnabled();
-        boolean isCurrentOwner = this.mUtils.isCurrentOwner();
+        boolean zIsDynamicLockEnabled = this.mMediator.isDynamicLockEnabled();
+        boolean zIsCurrentOwner = this.mUtils.isCurrentOwner();
         PluginLockUtils pluginLockUtils = this.mUtils;
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("onWallpaperConsumed, enabled:", ", mIsSwitchingToSub: ", isDynamicLockEnabled);
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, this.mIsSwitchingToSub, ", isOwner: ", isCurrentOwner, ", screen:");
-        m.append(i);
-        m.append(", updateColor:");
-        m.append(z);
-        pluginLockUtils.addDump(TAG, m.toString());
-        if (this.mMediator.getPluginLockWallpaper() == null || !isDynamicLockEnabled || this.mIsSwitchingToSub || !isCurrentOwner || this.mDelegateApp == null) {
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("onWallpaperConsumed, enabled:", ", mIsSwitchingToSub: ", zIsDynamicLockEnabled);
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mIsSwitchingToSub, ", isOwner: ", zIsCurrentOwner, ", screen:");
+        sbM.append(i);
+        sbM.append(", updateColor:");
+        sbM.append(z);
+        pluginLockUtils.addDump(TAG, sbM.toString());
+        if (this.mMediator.getPluginLockWallpaper() == null || !zIsDynamicLockEnabled || this.mIsSwitchingToSub || !zIsCurrentOwner || this.mDelegateApp == null) {
             return;
         }
         try {
@@ -636,35 +588,34 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     }
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
-    public SemWallpaperColors getFbeSemWallpaperColors(int i) {
-        FileInputStream fileInputStream;
+    public SemWallpaperColors getFbeSemWallpaperColors(int i) throws IOException {
         File fbeColorFile = getFbeColorFile(i);
         if (fbeColorFile != null && fbeColorFile.exists() && fbeColorFile.canRead()) {
             StringBuilder sb = new StringBuilder();
             try {
-                fileInputStream = new FileInputStream(fbeColorFile.getPath());
+                FileInputStream fileInputStream = new FileInputStream(fbeColorFile.getPath());
+                try {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream, StandardCharsets.UTF_8));
+                    try {
+                        for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
+                            sb.append(line);
+                        }
+                        bufferedReader.close();
+                        fileInputStream.close();
+                    } finally {
+                    }
+                } finally {
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream, StandardCharsets.UTF_8));
-                try {
-                    for (String readLine = bufferedReader.readLine(); readLine != null; readLine = bufferedReader.readLine()) {
-                        sb.append(readLine);
-                    }
-                    bufferedReader.close();
-                    fileInputStream.close();
-                    try {
-                        String sb2 = sb.toString();
-                        if (!sb2.isEmpty()) {
-                            return SemWallpaperColors.fromXml(sb2);
-                        }
-                    } catch (Exception e2) {
-                        e2.printStackTrace();
-                    }
-                } finally {
+                String string = sb.toString();
+                if (!string.isEmpty()) {
+                    return SemWallpaperColors.fromXml(string);
                 }
-            } finally {
+            } catch (Exception e2) {
+                e2.printStackTrace();
             }
         }
         return SemWallpaperColors.getBlankWallpaperColors();
@@ -677,30 +628,32 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     }
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
-    public Rect getFbeWallpaperRect(int i) {
+    public Rect getFbeWallpaperRect(int i) throws IOException {
         FileInputStream fileInputStream;
+        InputStreamReader inputStreamReader;
+        BufferedReader bufferedReader;
         File fbeRectFile = getFbeRectFile(i);
-        Rect rect = null;
+        Rect rectUnflattenFromString = null;
         try {
             fileInputStream = new FileInputStream(fbeRectFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
             try {
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                inputStreamReader = new InputStreamReader(fileInputStream);
                 try {
-                    rect = Rect.unflattenFromString(bufferedReader.readLine());
-                    bufferedReader.close();
-                    inputStreamReader.close();
-                    fileInputStream.close();
-                    Log.d(TAG, "getFbeWallpaperRect, rect: " + rect);
-                    return rect;
+                    bufferedReader = new BufferedReader(inputStreamReader);
                 } finally {
                 }
             } finally {
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            rectUnflattenFromString = Rect.unflattenFromString(bufferedReader.readLine());
+            bufferedReader.close();
+            inputStreamReader.close();
+            fileInputStream.close();
+            Log.d(TAG, "getFbeWallpaperRect, rect: " + rectUnflattenFromString);
+            return rectUnflattenFromString;
         } finally {
         }
     }
@@ -722,9 +675,9 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     public boolean isFbeWallpaperAvailable(int i) {
         File fbeWallpaperFile = getFbeWallpaperFile(i);
         boolean z = fbeWallpaperFile != null && fbeWallpaperFile.exists() && fbeWallpaperFile.canRead();
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("isFbeWallpaperAvailable: screen = ", i, ", flag = ", z, ", file = ");
-        m.append(fbeWallpaperFile != null ? fbeWallpaperFile.getAbsolutePath() : "null");
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("isFbeWallpaperAvailable: screen = ", i, ", flag = ", z, ", file = ");
+        sbM.append(fbeWallpaperFile != null ? fbeWallpaperFile.getAbsolutePath() : "null");
+        Log.i(TAG, sbM.toString());
         return z && !this.mUtils.isGoingToRescueParty();
     }
 
@@ -827,15 +780,15 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
     public void onLockWallpaperChanged(int i) {
-        boolean isDynamicLockEnabled = this.mMediator.isDynamicLockEnabled();
-        boolean isCurrentOwner = this.mUtils.isCurrentOwner();
+        boolean zIsDynamicLockEnabled = this.mMediator.isDynamicLockEnabled();
+        boolean zIsCurrentOwner = this.mUtils.isCurrentOwner();
         PluginLockUtils pluginLockUtils = this.mUtils;
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("notifyWallpaperChanged, enabled:", ", mIsSwitchingToSub: ", isDynamicLockEnabled);
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, this.mIsSwitchingToSub, ", isOwner: ", isCurrentOwner, ", screen:");
-        m.append(i);
-        pluginLockUtils.addDump(TAG, m.toString());
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("notifyWallpaperChanged, enabled:", ", mIsSwitchingToSub: ", zIsDynamicLockEnabled);
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mIsSwitchingToSub, ", isOwner: ", zIsCurrentOwner, ", screen:");
+        sbM.append(i);
+        pluginLockUtils.addDump(TAG, sbM.toString());
         PluginLockWallpaper pluginLockWallpaper = this.mMediator.getPluginLockWallpaper();
-        if (pluginLockWallpaper == null || !isDynamicLockEnabled || this.mIsSwitchingToSub || !isCurrentOwner) {
+        if (pluginLockWallpaper == null || !zIsDynamicLockEnabled || this.mIsSwitchingToSub || !zIsCurrentOwner) {
             return;
         }
         if (LsRune.LOCKUI_SUB_DISPLAY_LOCK) {
@@ -864,9 +817,9 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     public Bitmap getFbeWallpaper(int i, boolean z) {
         File fbeWallpaperFile = getFbeWallpaperFile(i);
         if (fbeWallpaperFile != null) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "getFbeWallpaper screen: ", ", path: ");
-            m.append(fbeWallpaperFile.getPath());
-            Log.d(TAG, m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "getFbeWallpaper screen: ", ", path: ");
+            sbM.append(fbeWallpaperFile.getPath());
+            Log.d(TAG, sbM.toString());
             if (fbeWallpaperFile.exists() && fbeWallpaperFile.canRead()) {
                 return getBitmapFromPath(fbeWallpaperFile.getPath(), z);
             }
@@ -880,25 +833,25 @@ public class PluginWallpaperManagerImpl implements PluginWallpaperManager, Keygu
     }
 
     @Override // com.android.systemui.pluginlock.PluginWallpaperManager
-    public int getWallpaperIndex() {
+    public int getWallpaperIndex() throws NumberFormatException {
         String wallpaperPath;
         if ((!isCustomPackApplied() && !isMultiPackApplied()) || (wallpaperPath = getWallpaperPath()) == null) {
             return -1;
         }
         try {
-            String substring = wallpaperPath.substring(wallpaperPath.lastIndexOf("/") + 1);
-            int indexOf = substring.indexOf(".");
-            if (indexOf > 0) {
-                substring = substring.substring(0, indexOf);
+            String strSubstring = wallpaperPath.substring(wallpaperPath.lastIndexOf("/") + 1);
+            int iIndexOf = strSubstring.indexOf(".");
+            if (iIndexOf > 0) {
+                strSubstring = strSubstring.substring(0, iIndexOf);
             }
-            String replaceAll = substring.replaceAll("[^0-9]", "");
-            if (isNumeric(replaceAll)) {
-                int parseInt = Integer.parseInt(replaceAll);
+            String strReplaceAll = strSubstring.replaceAll("[^0-9]", "");
+            if (isNumeric(strReplaceAll)) {
+                int i = Integer.parseInt(strReplaceAll);
                 if (isMultiPackApplied()) {
-                    parseInt--;
+                    i--;
                 }
-                Log.d(TAG, "getWallpaperIndex: strIndex = " + replaceAll + ", index = " + parseInt);
-                return parseInt;
+                Log.d(TAG, "getWallpaperIndex: strIndex = " + strReplaceAll + ", index = " + i);
+                return i;
             }
         } catch (Exception e) {
             EmergencyButton$$ExternalSyntheticOutline0.m("getWallpaperIndex, ", e, TAG);

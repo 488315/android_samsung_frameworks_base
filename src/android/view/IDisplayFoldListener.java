@@ -44,9 +44,9 @@ public interface IDisplayFoldListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDisplayFoldListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDisplayFoldListener)) {
-                return (IDisplayFoldListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDisplayFoldListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDisplayFoldListener)) {
+                return (IDisplayFoldListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IDisplayFoldListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onDisplayFoldChanged(readInt, readBoolean);
+                onDisplayFoldChanged(i3, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IDisplayFoldListener extends IInterface {
 
             @Override // android.view.IDisplayFoldListener
             public void onDisplayFoldChanged(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayFoldListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayFoldListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -7,7 +7,6 @@ import androidx.compose.ui.internal.InlineClassHelperKt;
 import androidx.compose.ui.unit.Dp;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DpTouchBoundsExpansion {
     public final float bottom;
@@ -16,7 +15,6 @@ public final class DpTouchBoundsExpansion {
     public final float start;
     public final float top;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,7 +40,7 @@ public final class DpTouchBoundsExpansion {
             return false;
         }
         DpTouchBoundsExpansion dpTouchBoundsExpansion = (DpTouchBoundsExpansion) obj;
-        return Dp.m836equalsimpl0(this.start, dpTouchBoundsExpansion.start) && Dp.m836equalsimpl0(this.top, dpTouchBoundsExpansion.top) && Dp.m836equalsimpl0(this.end, dpTouchBoundsExpansion.end) && Dp.m836equalsimpl0(this.bottom, dpTouchBoundsExpansion.bottom) && this.isLayoutDirectionAware == dpTouchBoundsExpansion.isLayoutDirectionAware;
+        return Dp.m838equalsimpl0(this.start, dpTouchBoundsExpansion.start) && Dp.m838equalsimpl0(this.top, dpTouchBoundsExpansion.top) && Dp.m838equalsimpl0(this.end, dpTouchBoundsExpansion.end) && Dp.m838equalsimpl0(this.bottom, dpTouchBoundsExpansion.bottom) && this.isLayoutDirectionAware == dpTouchBoundsExpansion.isLayoutDirectionAware;
     }
 
     public final int hashCode() {

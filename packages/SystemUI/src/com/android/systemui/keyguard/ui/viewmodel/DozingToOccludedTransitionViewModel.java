@@ -18,7 +18,6 @@ import kotlin.time.DurationKt;
 import kotlin.time.DurationUnit;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DozingToOccludedTransitionViewModel implements DeviceEntryIconTransition {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 deviceEntryParentViewAlpha;
@@ -26,9 +25,9 @@ public final class DozingToOccludedTransitionViewModel implements DeviceEntryIco
 
     public DozingToOccludedTransitionViewModel(KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow) {
         FromAodTransitionInteractor.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m2598setupVtjQ1oo = keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(FromAodTransitionInteractor.TO_OCCLUDED_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.DOZING, KeyguardState.OCCLUDED));
-        this.transitionAnimation = m2598setupVtjQ1oo;
-        this.deviceEntryParentViewAlpha = m2598setupVtjQ1oo.immediatelyTransitionTo(0.0f);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(FromAodTransitionInteractor.TO_OCCLUDED_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.DOZING, KeyguardState.OCCLUDED));
+        this.transitionAnimation = flowBuilderM2615setupVtjQ1oo;
+        this.deviceEntryParentViewAlpha = flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(0.0f);
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition
@@ -42,16 +41,16 @@ public final class DozingToOccludedTransitionViewModel implements DeviceEntryIco
         DurationUnit durationUnit = DurationUnit.MILLISECONDS;
         long duration = DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit);
         long duration2 = DurationKt.toDuration(0, durationUnit);
-        return KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(this.transitionAnimation, duration, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DozingToOccludedTransitionViewModel$$ExternalSyntheticLambda0
+        return KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(this.transitionAnimation, duration, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DozingToOccludedTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return Float.valueOf(MathUtils.lerp(Ref$FloatRef.this.element, 0.0f, ((Float) obj).floatValue()));
+            public final Object mo781invoke(Object obj) {
+                return Float.valueOf(MathUtils.lerp(ref$FloatRef.element, 0.0f, ((Float) obj).floatValue()));
             }
         }, duration2, new Function0(viewStateAccessor) { // from class: com.android.systemui.keyguard.ui.viewmodel.DozingToOccludedTransitionViewModel$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Ref$FloatRef.this.element = 0.0f;
+                this.f$0.element = 0.0f;
                 return Unit.INSTANCE;
             }
         }, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_getFavoriteApp);

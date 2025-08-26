@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallController;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallListener;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IndicatorTouchHandler {
     public int doubleTapCount;
@@ -30,19 +29,19 @@ public final class IndicatorTouchHandler {
             if (i == i5 && i3 == i7) {
                 return;
             }
-            IndicatorTouchHandler.access$updateCallChipRect(IndicatorTouchHandler.this);
+            IndicatorTouchHandler.access$updateCallChipRect(this.this$0);
         }
     };
     public final IndicatorTouchHandler$ongoingCallListener$1 ongoingCallListener = new OngoingCallListener() { // from class: com.android.systemui.statusbar.phone.IndicatorTouchHandler$ongoingCallListener$1
         @Override // com.android.systemui.statusbar.phone.ongoingcall.OngoingCallListener
         public final void onOngoingCallStateChanged() {
-            IndicatorTouchHandler indicatorTouchHandler = IndicatorTouchHandler.this;
+            IndicatorTouchHandler indicatorTouchHandler = this.this$0;
             indicatorTouchHandler.callChipRect.setEmpty();
             indicatorTouchHandler.keyguardCallChipRect.setEmpty();
             OngoingCallController ongoingCallController = indicatorTouchHandler.ongoingCallController;
-            boolean hasOngoingCall = ongoingCallController.hasOngoingCall();
+            boolean zHasOngoingCall = ongoingCallController.hasOngoingCall();
             IndicatorTouchHandler$callChipLayoutChangeListener$1 indicatorTouchHandler$callChipLayoutChangeListener$1 = indicatorTouchHandler.callChipLayoutChangeListener;
-            if (!hasOngoingCall) {
+            if (!zHasOngoingCall) {
                 View view = ongoingCallController.chipView;
                 if (view != null) {
                     view.removeOnLayoutChangeListener(indicatorTouchHandler$callChipLayoutChangeListener$1);
@@ -61,7 +60,7 @@ public final class IndicatorTouchHandler {
     public final IndicatorTouchHandler$doubleTapTimeoutRunnable$1 doubleTapTimeoutRunnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.IndicatorTouchHandler$doubleTapTimeoutRunnable$1
         @Override // java.lang.Runnable
         public final void run() {
-            IndicatorTouchHandler.this.doubleTapCount = 0;
+            this.this$0.doubleTapCount = 0;
         }
     };
 

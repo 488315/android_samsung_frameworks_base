@@ -51,11 +51,11 @@ public abstract class DisplayWindowPolicyController {
     }
 
     public final boolean isWindowingModeSupported(int i) {
-        boolean contains;
+        boolean zContains;
         synchronized (this.mSupportedWindowingModes) {
-            contains = this.mSupportedWindowingModes.contains(Integer.valueOf(i));
+            zContains = this.mSupportedWindowingModes.contains(Integer.valueOf(i));
         }
-        return contains;
+        return zContains;
     }
 
     public final void setSupportedWindowingModes(Set<Integer> set) {

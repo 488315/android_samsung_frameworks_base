@@ -53,7 +53,7 @@ final class DeadZone {
     }
 
     private float getSize(long j) {
-        int lerp;
+        int iLerp;
         int i = this.mSizeMax;
         if (i == 0) {
             return 0.0f;
@@ -62,14 +62,14 @@ final class DeadZone {
         int i2 = this.mHold;
         int i3 = this.mDecay;
         if (j2 > i2 + i3) {
-            lerp = this.mSizeMin;
+            iLerp = this.mSizeMin;
         } else {
             if (j2 < i2) {
                 return i;
             }
-            lerp = (int) lerp(i, this.mSizeMin, (j2 - i2) / i3);
+            iLerp = (int) lerp(i, this.mSizeMin, (j2 - i2) / i3);
         }
-        return lerp;
+        return iLerp;
     }
 
     public void setFlashOnTouchCapture(boolean z) {

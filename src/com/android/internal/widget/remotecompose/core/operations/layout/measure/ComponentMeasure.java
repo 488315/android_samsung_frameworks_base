@@ -97,8 +97,8 @@ public class ComponentMeasure {
     }
 
     public void addVisibilityOverride(int i) {
-        int clearOverride = Component.Visibility.clearOverride(this.mVisibility);
-        this.mVisibility = clearOverride;
-        this.mVisibility = Component.Visibility.add(clearOverride, i);
+        int iClearOverride = Component.Visibility.clearOverride(this.mVisibility);
+        this.mVisibility = iClearOverride;
+        this.mVisibility = Component.Visibility.add(iClearOverride, i);
     }
 }

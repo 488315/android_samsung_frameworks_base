@@ -41,11 +41,11 @@ abstract class AbstractProtobufList<E> extends AbstractList<E> implements Intern
     @Override // java.util.AbstractList, java.util.Collection, java.util.List
     public int hashCode() {
         int size = size();
-        int i = 1;
-        for (int i2 = 0; i2 < size; i2++) {
-            i = (i * 31) + get(i2).hashCode();
+        int iHashCode = 1;
+        for (int i = 0; i < size; i++) {
+            iHashCode = (iHashCode * 31) + get(i).hashCode();
         }
-        return i;
+        return iHashCode;
     }
 
     @Override // java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List
@@ -97,11 +97,11 @@ abstract class AbstractProtobufList<E> extends AbstractList<E> implements Intern
     @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
     public boolean remove(Object obj) {
         ensureIsMutable();
-        int indexOf = indexOf(obj);
-        if (indexOf == -1) {
+        int iIndexOf = indexOf(obj);
+        if (iIndexOf == -1) {
             return false;
         }
-        remove(indexOf);
+        remove(iIndexOf);
         return true;
     }
 

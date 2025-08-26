@@ -13,7 +13,6 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecLifecycle {
     public LooperSlowLogController mLooperSlowLogController;
@@ -24,7 +23,6 @@ public class SecLifecycle {
     public final int QUEUE_MAX = 8;
     public final Queue mMsgForLifecycle = new LinkedList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Msg {
         public final int msg;
         public final int reason;
@@ -56,22 +54,22 @@ public class SecLifecycle {
     }
 
     public final void dispatch(Consumer consumer) {
-        String str;
+        String strM;
         this.mIsDispatching = true;
         int screenState = getScreenState();
         int wakefulness = getWakefulness();
         if (screenState == -1 || this.mLastScreenState == screenState) {
-            str = "";
+            strM = "";
         } else {
-            str = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(screenState, "screenState=");
+            strM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(screenState, "screenState=");
             this.mLastScreenState = screenState;
         }
         if (wakefulness != -1 && this.mLastWakefulness != wakefulness) {
-            str = str + "wakefulness=" + wakefulness;
+            strM = strM + "wakefulness=" + wakefulness;
             this.mLastWakefulness = wakefulness;
         }
-        if (!TextUtils.isEmpty(str)) {
-            Log.d("SecLifecycle", str);
+        if (!TextUtils.isEmpty(strM)) {
+            Log.d("SecLifecycle", strM);
         }
         if (Rune.SYSUI_UI_THREAD_MONITOR) {
             for (int i = 0; i < this.mObservers.size(); i++) {
@@ -79,11 +77,11 @@ public class SecLifecycle {
                     this.mLooperSlowLogController = (LooperSlowLogController) Dependency.sDependency.getDependencyInner(LooperSlowLogController.class);
                 }
                 LooperSlowLogController looperSlowLogController = this.mLooperSlowLogController;
-                int startTime = (looperSlowLogController == null || !((LooperSlowLogControllerImpl) looperSlowLogController).isEnabled()) ? -1 : LogUtil.startTime(-1);
+                int iStartTime = (looperSlowLogController == null || !((LooperSlowLogControllerImpl) looperSlowLogController).isEnabled()) ? -1 : LogUtil.startTime(-1);
                 Object obj = this.mObservers.get(i);
                 consumer.accept(obj);
-                if (startTime >= 0) {
-                    LogUtil.endTime(startTime, 20, "LooperSlow", "dispatch " + obj, new Object[0]);
+                if (iStartTime >= 0) {
+                    LogUtil.endTime(iStartTime, 20, "LooperSlow", "dispatch " + obj, new Object[0]);
                 }
             }
         } else {
@@ -111,7 +109,7 @@ public class SecLifecycle {
     }
 
     public final void setLifecycle(int i, int i2) {
-        Msg createMsg;
+        Msg msgCreateMsg;
         synchronized (this.mMsgForLifecycle) {
             try {
                 if (((LinkedList) this.mMsgForLifecycle).size() >= this.QUEUE_MAX) {
@@ -120,35 +118,35 @@ public class SecLifecycle {
                 }
                 switch (i) {
                     case 0:
-                        createMsg = createMsg(1, i2);
+                        msgCreateMsg = createMsg(1, i2);
                         break;
                     case 1:
-                        createMsg = createMsg(2, i2);
+                        msgCreateMsg = createMsg(2, i2);
                         break;
                     case 2:
-                        createMsg = createMsg(3, i2);
+                        msgCreateMsg = createMsg(3, i2);
                         break;
                     case 3:
-                        createMsg = createMsg(0, i2);
+                        msgCreateMsg = createMsg(0, i2);
                         break;
                     case 4:
-                        createMsg = createMsg(1, i2);
+                        msgCreateMsg = createMsg(1, i2);
                         break;
                     case 5:
-                        createMsg = createMsg(2, i2);
+                        msgCreateMsg = createMsg(2, i2);
                         break;
                     case 6:
-                        createMsg = createMsg(3, i2);
+                        msgCreateMsg = createMsg(3, i2);
                         break;
                     case 7:
-                        createMsg = createMsg(0, i2);
+                        msgCreateMsg = createMsg(0, i2);
                         break;
                     default:
-                        createMsg = null;
+                        msgCreateMsg = null;
                         break;
                 }
-                if (createMsg != null) {
-                    ((LinkedList) this.mMsgForLifecycle).offer(createMsg);
+                if (msgCreateMsg != null) {
+                    ((LinkedList) this.mMsgForLifecycle).offer(msgCreateMsg);
                 }
             } finally {
             }

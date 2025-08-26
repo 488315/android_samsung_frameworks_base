@@ -71,18 +71,22 @@ public class StateLayout extends LayoutManager {
     }
 
     public void collapsePaintedComponents() {
-        int i;
         int size = this.mChildrenComponents.size();
         Iterator<Integer> it = this.statePaintedComponents.keySet().iterator();
         while (it.hasNext()) {
             Component[] componentArr = this.statePaintedComponents.get(it.next());
+            int i = 1;
             if (componentArr.length > 1) {
                 Component component = componentArr[0];
                 if (component != null) {
                     while (true) {
                         if (i < componentArr.length) {
                             Operation operation = componentArr[i];
-                            i = (operation != null && component.suitableForTransition(operation)) ? i + 1 : 1;
+                            if (operation == null || !component.suitableForTransition(operation)) {
+                                break;
+                            } else {
+                                i++;
+                            }
                         } else {
                             for (int i2 = 0; i2 < size; i2++) {
                                 componentArr[i2] = component;
@@ -145,7 +149,11 @@ public class StateLayout extends LayoutManager {
         this.mFirstLayout = false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:45:0x0134  */
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.managers.LayoutManager, com.android.internal.widget.remotecompose.core.operations.layout.Component, com.android.internal.widget.remotecompose.core.operations.layout.measure.Measurable
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void measure(PaintContext paintContext, float f, float f2, float f3, float f4, MeasurePass measurePass) {
         int i;
         Component[] componentArr;
@@ -211,12 +219,11 @@ public class StateLayout extends LayoutManager {
                             componentArr = componentArr3;
                             i = i4;
                             component2.measure(paintContext, componentMeasure2.getW(), componentMeasure2.getW(), componentMeasure2.getH(), componentMeasure2.getH(), measurePass);
-                            i4 = i + 1;
-                            componentArr2 = componentArr;
+                        } else {
+                            i = i4;
+                            componentArr = componentArr3;
                         }
                     }
-                    i = i4;
-                    componentArr = componentArr3;
                     i4 = i + 1;
                     componentArr2 = componentArr;
                 }
@@ -411,11 +418,11 @@ public class StateLayout extends LayoutManager {
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
         wireBuffer.readInt();
         wireBuffer.readInt();
-        list.add(new StateLayout(null, readInt, readInt2, 0.0f, 0.0f, 100.0f, 100.0f, wireBuffer.readInt()));
+        list.add(new StateLayout(null, i, i2, 0.0f, 0.0f, 100.0f, 100.0f, wireBuffer.readInt()));
     }
 
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.LayoutComponent, com.android.internal.widget.remotecompose.core.operations.layout.Component, com.android.internal.widget.remotecompose.core.serialize.Serializable

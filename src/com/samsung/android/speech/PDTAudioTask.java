@@ -165,7 +165,7 @@ class PDTAudioTask extends AudioTask implements Runnable {
     }
 
     @Override // com.samsung.android.speech.AudioTask
-    public void stopBargeInAudioRecord() {
+    public void stopBargeInAudioRecord() throws IllegalStateException, IOException {
         DataOutputStream dataOutputStream;
         Log.i(this.TAG, "stopBargeInAudioRecord start");
         if (this.rec != null) {
@@ -190,7 +190,7 @@ class PDTAudioTask extends AudioTask implements Runnable {
     }
 
     @Override // com.samsung.android.speech.AudioTask, java.lang.Runnable
-    public void run() {
+    public void run() throws IllegalStateException, IOException {
         Handler handler;
         Log.d(this.TAG, "PDTAudioTask run() ");
         if (this.rec != null) {
@@ -214,7 +214,7 @@ class PDTAudioTask extends AudioTask implements Runnable {
     }
 
     @Override // com.samsung.android.speech.AudioTask
-    public void stopPhraseSpotter() {
+    public void stopPhraseSpotter() throws IllegalStateException, IOException {
         stopBargeInAudioRecord();
         if (this.aPDTBargeInEngine != null) {
             Log.i(this.TAG, "PDT phrasespotClose start");
@@ -230,7 +230,7 @@ class PDTAudioTask extends AudioTask implements Runnable {
         Log.d(this.TAG, "m_listener = null");
     }
 
-    int readShortBlock() {
+    int readShortBlock() throws IOException {
         if (this.done) {
             Log.e(this.TAG, "readByteBlock return -1 : Section1 ");
             this.readNshorts = -1;
@@ -304,12 +304,12 @@ class PDTAudioTask extends AudioTask implements Runnable {
 
     private boolean getPDTRecognitionResult(long j, short[] sArr) {
         float[] fArr = new float[3];
-        String phrasespotPipe = this.aPDTBargeInEngine.phrasespotPipe(j, sArr, 320L, 16000L, fArr);
-        if (phrasespotPipe != null) {
-            this.BargeinAct[0] = (short) getPDTBargeInAct(this.mCommandType, phrasespotPipe);
-            this.strResult[0] = phrasespotPipe;
+        String strPhrasespotPipe = this.aPDTBargeInEngine.phrasespotPipe(j, sArr, 320L, 16000L, fArr);
+        if (strPhrasespotPipe != null) {
+            this.BargeinAct[0] = (short) getPDTBargeInAct(this.mCommandType, strPhrasespotPipe);
+            this.strResult[0] = strPhrasespotPipe;
             float f = fArr[0];
-            Log.i(this.TAG, "consoleResult : " + phrasespotPipe);
+            Log.i(this.TAG, "consoleResult : " + strPhrasespotPipe);
             Log.d(this.TAG, "strResult[0] : " + this.strResult[0]);
             Log.d(this.TAG, "BargeinAct[0] : " + ((int) this.BargeinAct[0]));
             Log.i(this.TAG, "CMscore : " + f);
@@ -327,12 +327,12 @@ class PDTAudioTask extends AudioTask implements Runnable {
     }
 
     private void SendHandlerMessage(String[] strArr) {
-        Message obtainMessage = this.handler.obtainMessage();
+        Message messageObtainMessage = this.handler.obtainMessage();
         Bundle bundle = new Bundle();
         bundle.putStringArray("recognition_result", strArr);
-        obtainMessage.setData(bundle);
+        messageObtainMessage.setData(bundle);
         try {
-            this.handler.sendMessage(obtainMessage);
+            this.handler.sendMessage(messageObtainMessage);
         } catch (IllegalStateException e) {
             Log.e(this.TAG, "IllegalStateException " + e.getMessage());
             stop();

@@ -10,7 +10,6 @@ import android.view.MotionEvent;
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.remotecontrol.IRemoteScreenWatcherCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IRemoteInjection extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.remotecontrol.IRemoteInjection";
@@ -31,7 +30,6 @@ public interface IRemoteInjection extends IInterface {
 
     void updateRemoteScreenDimensionsAndCallerUid(int i, int i2, int i3) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IRemoteInjection {
         public static final int TRANSACTION_addRemoteScreenWatcherCallback = 8;
         public static final int TRANSACTION_allowRemoteControl = 4;
@@ -42,7 +40,6 @@ public interface IRemoteInjection extends IInterface {
         public static final int TRANSACTION_isRemoteControlDisabled = 7;
         public static final int TRANSACTION_updateRemoteScreenDimensionsAndCallerUid = 6;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IRemoteInjection {
             public IBinder mRemote;
 
@@ -52,35 +49,35 @@ public interface IRemoteInjection extends IInterface {
 
             @Override // com.samsung.android.knox.remotecontrol.IRemoteInjection
             public boolean addRemoteScreenWatcherCallback(IRemoteScreenWatcherCallback iRemoteScreenWatcherCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteScreenWatcherCallback);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteScreenWatcherCallback);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.remotecontrol.IRemoteInjection
             public boolean allowRemoteControl(ContextInfo contextInfo, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -95,101 +92,101 @@ public interface IRemoteInjection extends IInterface {
 
             @Override // com.samsung.android.knox.remotecontrol.IRemoteInjection
             public boolean injectKeyEvent(KeyEvent keyEvent, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
-                    obtain.writeTypedObject(keyEvent, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyEvent, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.remotecontrol.IRemoteInjection
             public boolean injectPointerEvent(MotionEvent motionEvent, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
-                    obtain.writeTypedObject(motionEvent, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(motionEvent, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.remotecontrol.IRemoteInjection
             public boolean injectTrackballEvent(MotionEvent motionEvent, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
-                    obtain.writeTypedObject(motionEvent, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(motionEvent, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.remotecontrol.IRemoteInjection
             public boolean isRemoteControlAllowed(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.remotecontrol.IRemoteInjection
             public boolean isRemoteControlDisabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.remotecontrol.IRemoteInjection
             public void updateRemoteScreenDimensionsAndCallerUid(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRemoteInjection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -202,8 +199,8 @@ public interface IRemoteInjection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteInjection.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IRemoteInjection)) ? new Proxy(iBinder) : (IRemoteInjection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteInjection.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IRemoteInjection)) ? new Proxy(iBinder) : (IRemoteInjection) iInterfaceQueryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -249,65 +246,65 @@ public interface IRemoteInjection extends IInterface {
             switch (i) {
                 case 1:
                     KeyEvent keyEvent = (KeyEvent) parcel.readTypedObject(KeyEvent.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean injectKeyEvent = injectKeyEvent(keyEvent, readBoolean);
+                    boolean zInjectKeyEvent = injectKeyEvent(keyEvent, z);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(injectKeyEvent);
+                    parcel2.writeBoolean(zInjectKeyEvent);
                     return true;
                 case 2:
                     MotionEvent motionEvent = (MotionEvent) parcel.readTypedObject(MotionEvent.CREATOR);
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean injectPointerEvent = injectPointerEvent(motionEvent, readBoolean2);
+                    boolean zInjectPointerEvent = injectPointerEvent(motionEvent, z2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(injectPointerEvent);
+                    parcel2.writeBoolean(zInjectPointerEvent);
                     return true;
                 case 3:
                     MotionEvent motionEvent2 = (MotionEvent) parcel.readTypedObject(MotionEvent.CREATOR);
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean injectTrackballEvent = injectTrackballEvent(motionEvent2, readBoolean3);
+                    boolean zInjectTrackballEvent = injectTrackballEvent(motionEvent2, z3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(injectTrackballEvent);
+                    parcel2.writeBoolean(zInjectTrackballEvent);
                     return true;
                 case 4:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean4 = parcel.readBoolean();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowRemoteControl = allowRemoteControl(contextInfo, readBoolean4, readBoolean5);
+                    boolean zAllowRemoteControl = allowRemoteControl(contextInfo, z4, z5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowRemoteControl);
+                    parcel2.writeBoolean(zAllowRemoteControl);
                     return true;
                 case 5:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isRemoteControlAllowed = isRemoteControlAllowed(contextInfo2);
+                    boolean zIsRemoteControlAllowed = isRemoteControlAllowed(contextInfo2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRemoteControlAllowed);
+                    parcel2.writeBoolean(zIsRemoteControlAllowed);
                     return true;
                 case 6:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateRemoteScreenDimensionsAndCallerUid(readInt, readInt2, readInt3);
+                    updateRemoteScreenDimensionsAndCallerUid(i3, i4, i5);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isRemoteControlDisabled = isRemoteControlDisabled(readInt4);
+                    boolean zIsRemoteControlDisabled = isRemoteControlDisabled(i6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRemoteControlDisabled);
+                    parcel2.writeBoolean(zIsRemoteControlDisabled);
                     return true;
                 case 8:
-                    IRemoteScreenWatcherCallback asInterface = IRemoteScreenWatcherCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IRemoteScreenWatcherCallback iRemoteScreenWatcherCallbackAsInterface = IRemoteScreenWatcherCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean addRemoteScreenWatcherCallback = addRemoteScreenWatcherCallback(asInterface);
+                    boolean zAddRemoteScreenWatcherCallback = addRemoteScreenWatcherCallback(iRemoteScreenWatcherCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addRemoteScreenWatcherCallback);
+                    parcel2.writeBoolean(zAddRemoteScreenWatcherCallback);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -320,7 +317,6 @@ public interface IRemoteInjection extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IRemoteInjection {
         @Override // com.samsung.android.knox.remotecontrol.IRemoteInjection
         public boolean addRemoteScreenWatcherCallback(IRemoteScreenWatcherCallback iRemoteScreenWatcherCallback) throws RemoteException {

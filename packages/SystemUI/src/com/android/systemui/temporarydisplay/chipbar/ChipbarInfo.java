@@ -13,7 +13,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ChipbarInfo extends TemporaryViewInfo {
     public static final Companion Companion = new Companion(null);
@@ -30,7 +29,6 @@ public final class ChipbarInfo extends TemporaryViewInfo {
     public final String wakeReason;
     public final String windowTitle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -86,13 +84,13 @@ public final class ChipbarInfo extends TemporaryViewInfo {
     }
 
     public final int hashCode() {
-        int hashCode = (this.text.hashCode() + (this.startIcon.hashCode() * 31)) * 31;
+        int iHashCode = (this.text.hashCode() + (this.startIcon.hashCode() * 31)) * 31;
         ChipbarEndItem chipbarEndItem = this.endItem;
-        int hashCode2 = (hashCode + (chipbarEndItem == null ? 0 : chipbarEndItem.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (chipbarEndItem == null ? 0 : chipbarEndItem.hashCode())) * 31;
         VibrationEffect vibrationEffect = this.vibrationEffect;
-        int hashCode3 = (this.priority.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.timeoutMs, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((hashCode2 + (vibrationEffect == null ? 0 : vibrationEffect.hashCode())) * 31, 31, this.allowSwipeToDismiss), 31, this.windowTitle), 31, this.wakeReason), 31), 31, this.id)) * 31;
+        int iHashCode3 = (this.priority.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.timeoutMs, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iHashCode2 + (vibrationEffect == null ? 0 : vibrationEffect.hashCode())) * 31, 31, this.allowSwipeToDismiss), 31, this.windowTitle), 31, this.wakeReason), 31), 31, this.id)) * 31;
         InstanceId instanceId = this.instanceId;
-        return hashCode3 + (instanceId != null ? instanceId.hashCode() : 0);
+        return iHashCode3 + (instanceId != null ? instanceId.hashCode() : 0);
     }
 
     public final String toString() {

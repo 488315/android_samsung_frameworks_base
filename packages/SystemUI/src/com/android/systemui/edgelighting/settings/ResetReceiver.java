@@ -15,7 +15,6 @@ import com.android.systemui.edgelighting.utils.EdgeLightingSettingUtils;
 import com.android.systemui.plugins.subscreen.SubRoom;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ResetReceiver extends BroadcastReceiver {
     public static void reset(Context context) {
@@ -37,23 +36,23 @@ public class ResetReceiver extends BroadcastReceiver {
             Settings.System.putIntForUser(context.getContentResolver(), "edge_lighting_duration", 0, -2);
             EdgeLightingSettingUtils.resetAppCustomColor(context);
             try {
-                INotificationManager asInterface = INotificationManager.Stub.asInterface(ServiceManager.getService(SubRoom.EXTRA_VALUE_NOTIFICATION));
-                if (asInterface != null) {
-                    asInterface.resetDefaultAllowEdgeLighting();
-                    asInterface.resetDefaultEdgeLightingState();
+                INotificationManager iNotificationManagerAsInterface = INotificationManager.Stub.asInterface(ServiceManager.getService(SubRoom.EXTRA_VALUE_NOTIFICATION));
+                if (iNotificationManagerAsInterface != null) {
+                    iNotificationManagerAsInterface.resetDefaultAllowEdgeLighting();
+                    iNotificationManagerAsInterface.resetDefaultEdgeLightingState();
                 }
             } catch (Exception unused) {
                 Slog.d("ResetReceiver", "resetDefaultAllowEdgeLighting is failed");
                 Slog.d("ResetReceiver", "resetDefaultEdgeLightingState is failed");
             }
-            SharedPreferences.Editor edit = context.getSharedPreferences("edge_lighting_settings", 0).edit();
-            edit.remove("version");
-            edit.remove("all_application");
-            edit.remove("enable_list");
-            edit.apply();
-            SharedPreferences.Editor edit2 = context.getSharedPreferences("edge_lighting_custom_text_color", 0).edit();
-            edit2.clear();
-            edit2.apply();
+            SharedPreferences.Editor editorEdit = context.getSharedPreferences("edge_lighting_settings", 0).edit();
+            editorEdit.remove("version");
+            editorEdit.remove("all_application");
+            editorEdit.remove("enable_list");
+            editorEdit.apply();
+            SharedPreferences.Editor editorEdit2 = context.getSharedPreferences("edge_lighting_custom_text_color", 0).edit();
+            editorEdit2.clear();
+            editorEdit2.apply();
         }
     }
 

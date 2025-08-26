@@ -2,6 +2,7 @@ package com.android.wm.shell.common;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.os.RemoteException;
@@ -23,7 +24,6 @@ import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0
 import com.android.systemui.R;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DismissView extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -100,7 +100,7 @@ public class DismissView extends LinearLayout {
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         boolean z = (configuration.uiMode & 32) != 0;
         if (this.mIsNightModeOn != z) {
@@ -118,7 +118,7 @@ public class DismissView extends LinearLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mSineOut60 = AnimationUtils.loadInterpolator(getContext(), R.interpolator.sine_in_out_60);
         this.mTextView = (TextView) findViewById(R.id.dismiss_view_text);
@@ -126,9 +126,9 @@ public class DismissView extends LinearLayout {
         this.mElevation = getResources().getDimension(R.dimen.dismiss_elevation);
         this.mCurrentFontScale = this.mTextView.getResources().getConfiguration().fontScale;
         this.mIsNightModeOn = (getResources().getConfiguration().uiMode & 32) != 0;
-        Animation loadAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.dismiss_view_show);
-        this.mEnterAnimation = loadAnimation;
-        loadAnimation.setAnimationListener(new Animation.AnimationListener() { // from class: com.android.wm.shell.common.DismissView.1
+        Animation animationLoadAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.dismiss_view_show);
+        this.mEnterAnimation = animationLoadAnimation;
+        animationLoadAnimation.setAnimationListener(new Animation.AnimationListener() { // from class: com.android.wm.shell.common.DismissView.1
             @Override // android.view.animation.Animation.AnimationListener
             public final void onAnimationEnd(Animation animation) {
                 int i = DismissView.$r8$clinit;
@@ -167,13 +167,13 @@ public class DismissView extends LinearLayout {
 
     public final void updateMarginBottom() {
         Insets insetsIgnoringVisibility = this.mWindowManager.getCurrentWindowMetrics().getWindowInsets().getInsetsIgnoringVisibility(WindowInsets.Type.systemBars());
-        int i = 0;
+        int iHeight = 0;
         boolean z = Settings.Global.getInt(getContext().getContentResolver(), "taskbar_style_type", 1) == 0;
         if (Settings.Global.getInt(getContext().getContentResolver(), SettingsHelper.INDEX_NAVIGATION_BAR_GESTURE_WHILE_HIDDEN, 0) == 1 && z) {
-            i = this.mHiddenDropTargetArea.height();
+            iHeight = this.mHiddenDropTargetArea.height();
         }
         ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) getLayoutParams();
-        marginLayoutParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen.freeform_dismiss_container_margin_bottom) + insetsIgnoringVisibility.bottom + i;
+        marginLayoutParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen.freeform_dismiss_container_margin_bottom) + insetsIgnoringVisibility.bottom + iHeight;
         setLayoutParams(marginLayoutParams);
     }
 
@@ -212,7 +212,7 @@ public class DismissView extends LinearLayout {
             animate().scaleX(z ? 1.15f : 1.0f).scaleY(z ? 1.15f : 1.0f).alpha(z ? 0.8f : 1.0f).setInterpolator(this.mSineOut60).setDuration(250L).withStartAction(new Runnable() { // from class: com.android.wm.shell.common.DismissView$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DismissView dismissView = DismissView.this;
+                    DismissView dismissView = this.f$0;
                     boolean z3 = z;
                     if (!z3) {
                         int i = DismissView.$r8$clinit;

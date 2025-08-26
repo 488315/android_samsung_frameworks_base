@@ -70,8 +70,8 @@ public final class UnionConstants {
         CharSequence charSequence;
         CharSequence charSequence2;
         String str2;
-        boolean equalsIgnoreCase = "CHINA".equalsIgnoreCase(SystemProperties.get("ro.csc.country_code"));
-        FW_CHINA_MINOR_MODE = equalsIgnoreCase;
+        boolean zEqualsIgnoreCase = "CHINA".equalsIgnoreCase(SystemProperties.get("ro.csc.country_code"));
+        FW_CHINA_MINOR_MODE = zEqualsIgnoreCase;
         ArrayMap<String, String> arrayMap = new ArrayMap<>();
         sClassPathForManager = arrayMap;
         arrayMap.put("semeventdelegator", "com.samsung.android.sepunion.SemEventDelegationManager");
@@ -121,7 +121,7 @@ public final class UnionConstants {
         } else {
             charSequence2 = "SMMTOBSERVER";
         }
-        if (equalsIgnoreCase) {
+        if (zEqualsIgnoreCase) {
             str2 = SERVICE_SMMT_OBSERVER;
             arrayMap2.put(SERVICE_MM_OBSERVER, "com.android.server.sepunion.MinorModeObserverService");
         } else {
@@ -155,7 +155,7 @@ public final class UnionConstants {
         if (SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_VDC").contains(charSequence2)) {
             arrayMap3.put(str2, 0);
         }
-        if (equalsIgnoreCase) {
+        if (zEqualsIgnoreCase) {
             arrayMap3.put(SERVICE_MM_OBSERVER, 0);
         }
         if (SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_VDC").contains("SCOBSERVER")) {

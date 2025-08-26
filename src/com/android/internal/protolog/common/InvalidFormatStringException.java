@@ -1,6 +1,6 @@
 package com.android.internal.protolog.common;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class InvalidFormatStringException extends RuntimeException {
     public InvalidFormatStringException(String str) {
         super(str);

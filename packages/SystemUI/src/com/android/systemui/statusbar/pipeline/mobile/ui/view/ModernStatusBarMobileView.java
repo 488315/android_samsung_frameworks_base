@@ -21,13 +21,11 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ModernStatusBarMobileView extends ModernStatusBarView {
     public static final Companion Companion = new Companion(null);
     public int subId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,22 +47,22 @@ public final class ModernStatusBarMobileView extends ModernStatusBarView {
         modernStatusBarMobileView.initView(str, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.view.ModernStatusBarMobileView$Companion$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return MobileIconBinder.bind$default(ModernStatusBarMobileView.this, locationBasedMobileViewModel, mobileViewLogger, configurationController);
+                return MobileIconBinder.bind$default(this.f$0, locationBasedMobileViewModel, mobileViewLogger, configurationController);
             }
         });
         mobileViewLogger.getClass();
-        String name = locationBasedMobileViewModel.location.name();
+        String strName = locationBasedMobileViewModel.location.name();
         mobileViewLogger.getClass();
         LogLevel logLevel = LogLevel.INFO;
         MobileViewLogger$$ExternalSyntheticLambda1 mobileViewLogger$$ExternalSyntheticLambda1 = new MobileViewLogger$$ExternalSyntheticLambda1(1);
         LogBuffer logBuffer = mobileViewLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileViewLogger", logLevel, mobileViewLogger$$ExternalSyntheticLambda1, null);
+        LogMessage logMessageObtain = logBuffer.obtain("MobileViewLogger", logLevel, mobileViewLogger$$ExternalSyntheticLambda1, null);
         MobileViewLogger.Companion.getClass();
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = MobileViewLogger.Companion.getIdForLogging(modernStatusBarMobileView);
         logMessageImpl.str2 = MobileViewLogger.Companion.getIdForLogging(locationBasedMobileViewModel);
-        logMessageImpl.str3 = name;
-        logBuffer.commit(obtain);
+        logMessageImpl.str3 = strName;
+        logBuffer.commit(logMessageObtain);
         return modernStatusBarMobileView;
     }
 
@@ -74,18 +72,18 @@ public final class ModernStatusBarMobileView extends ModernStatusBarView {
         if (modernStatusBarViewBinding == null) {
             modernStatusBarViewBinding = null;
         }
-        Boolean valueOf = modernStatusBarViewBinding != null ? Boolean.valueOf(modernStatusBarViewBinding.isCollecting()) : null;
+        Boolean boolValueOf = modernStatusBarViewBinding != null ? Boolean.valueOf(modernStatusBarViewBinding.isCollecting()) : null;
         String str = this.slot;
         String str2 = str != null ? str : null;
         int i = this.subId;
         String visibleStateString = StatusBarIconView.getVisibleStateString(this.iconVisibleState);
-        String frameLayout = super.toString();
-        StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i, "ModernStatusBarMobileView(slot='", str2, "', subId=", ", isCollecting=");
-        m888m.append(valueOf);
-        m888m.append(", visibleState=");
-        m888m.append(visibleStateString);
-        m888m.append("); viewString=");
-        m888m.append(frameLayout);
-        return m888m.toString();
+        String string = super.toString();
+        StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i, "ModernStatusBarMobileView(slot='", str2, "', subId=", ", isCollecting=");
+        sbM890m.append(boolValueOf);
+        sbM890m.append(", visibleState=");
+        sbM890m.append(visibleStateString);
+        sbM890m.append("); viewString=");
+        sbM890m.append(string);
+        return sbM890m.toString();
     }
 }

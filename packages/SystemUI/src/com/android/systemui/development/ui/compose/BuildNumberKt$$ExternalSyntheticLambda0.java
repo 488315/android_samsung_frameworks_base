@@ -4,7 +4,6 @@ import com.android.systemui.development.ui.viewmodel.BuildNumberViewModel;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class BuildNumberKt$$ExternalSyntheticLambda0 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -21,7 +20,7 @@ public final /* synthetic */ class BuildNumberKt$$ExternalSyntheticLambda0 imple
             case 0:
                 return ((BuildNumberViewModel.Factory) this.f$0).create();
             default:
-                ((BuildNumberViewModel) this.f$0).copyRequests.mo3456trySendJP2dKIU(Unit.INSTANCE);
+                ((BuildNumberViewModel) this.f$0).copyRequests.mo3476trySendJP2dKIU(Unit.INSTANCE);
                 return Boolean.TRUE;
         }
     }

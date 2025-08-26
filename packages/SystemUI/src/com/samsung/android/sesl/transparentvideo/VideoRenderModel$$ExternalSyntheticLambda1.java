@@ -4,8 +4,8 @@ import android.util.Log;
 import android.view.Surface;
 import com.samsung.android.sesl.transparentvideo.VideoRenderModel;
 import com.samsung.android.sesl.transparentvideo.mediaplayer.BasicMediaPlayer;
+import com.samsung.android.sesl.transparentvideo.mediaplayer.BasicMediaPlayer$$ExternalSyntheticLambda2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class VideoRenderModel$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -43,7 +43,7 @@ public final /* synthetic */ class VideoRenderModel$$ExternalSyntheticLambda1 im
                     videoRenderModel.textureListener.notifyPlaybackStarted();
                     BasicMediaPlayer basicMediaPlayer2 = videoRenderModel.mediaPlayer;
                     if (basicMediaPlayer2 != null) {
-                        basicMediaPlayer2.seekTo();
+                        basicMediaPlayer2.runOnPrepared(new BasicMediaPlayer$$ExternalSyntheticLambda2(basicMediaPlayer2, 5));
                     }
                     Log.i("VideoRenderModel", "Seek requested. positionMs=0");
                 }

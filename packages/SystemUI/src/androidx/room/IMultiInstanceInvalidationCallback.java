@@ -5,17 +5,14 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface IMultiInstanceInvalidationCallback extends IInterface {
     public static final String DESCRIPTOR = "androidx$room$IMultiInstanceInvalidationCallback".replace('$', '.');
 
     void onInvalidation(String[] strArr);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IMultiInstanceInvalidationCallback {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IMultiInstanceInvalidationCallback {
             public final IBinder mRemote;
 
@@ -30,13 +27,13 @@ public interface IMultiInstanceInvalidationCallback extends IInterface {
 
             @Override // androidx.room.IMultiInstanceInvalidationCallback
             public final void onInvalidation(String[] strArr) {
-                Parcel obtain = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMultiInstanceInvalidationCallback.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMultiInstanceInvalidationCallback.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

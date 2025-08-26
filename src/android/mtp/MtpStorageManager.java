@@ -44,8 +44,8 @@ public class MtpStorageManager {
     private volatile boolean mCheckConsistency = false;
     private Thread mConsistencyThread = new Thread(new Runnable() { // from class: android.mtp.MtpStorageManager$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
-        public final void run() {
-            MtpStorageManager.this.lambda$new$0();
+        public final void run() throws InterruptedException {
+            this.f$0.lambda$new$0();
         }
     });
 
@@ -86,120 +86,36 @@ public class MtpStorageManager {
             this.mObject = mtpObject;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:29:0x007d, code lost:
-        
-            r4.this$0.sDebugLog("Object was null in event", r6);
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:31:0x0085, code lost:
-        
-            return;
-         */
         @Override // android.os.FileObserver
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public void onEvent(int r5, java.lang.String r6) {
-            /*
-                r4 = this;
-                java.lang.String r0 = "Got unrecognized event "
-                android.mtp.MtpStorageManager r1 = android.mtp.MtpStorageManager.this
-                monitor-enter(r1)
-                r2 = r5 & 16384(0x4000, float:2.2959E-41)
-                if (r2 == 0) goto L12
-                java.lang.String r2 = android.mtp.MtpStorageManager.m3296$$Nest$sfgetTAG()     // Catch: java.lang.Throwable -> Lab
-                java.lang.String r3 = "Received Inotify overflow event!"
-                android.util.Log.e(r2, r3)     // Catch: java.lang.Throwable -> Lab
-            L12:
-                android.mtp.MtpStorageManager$MtpObject r2 = r4.mObject     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager$MtpObject r2 = android.mtp.MtpStorageManager.MtpObject.m3304$$Nest$mgetChild(r2, r6)     // Catch: java.lang.Throwable -> Lab
-                r3 = r5 & 128(0x80, float:1.8E-43)
-                if (r3 != 0) goto L93
-                r3 = r5 & 256(0x100, float:3.59E-43)
-                if (r3 == 0) goto L22
-                goto L93
-            L22:
-                r3 = r5 & 64
-                if (r3 != 0) goto L7b
-                r3 = r5 & 512(0x200, float:7.17E-43)
-                if (r3 == 0) goto L2b
-                goto L7b
-            L2b:
-                r2 = 32768(0x8000, float:4.5918E-41)
-                r2 = r2 & r5
-                if (r2 == 0) goto L56
-                android.mtp.MtpStorageManager r5 = android.mtp.MtpStorageManager.this     // Catch: java.lang.Throwable -> Lab
-                java.lang.String r6 = "Got inotify deleted"
-                android.mtp.MtpStorageManager$MtpObject r0 = r4.mObject     // Catch: java.lang.Throwable -> Lab
-                java.nio.file.Path r0 = r0.getPath()     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager.m3295$$Nest$msDebugLog(r5, r6, r0)     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager$MtpObject r5 = r4.mObject     // Catch: java.lang.Throwable -> Lab
-                android.os.FileObserver r5 = android.mtp.MtpStorageManager.MtpObject.m3298$$Nest$fgetmObserver(r5)     // Catch: java.lang.Throwable -> Lab
-                if (r5 == 0) goto L4f
-                android.mtp.MtpStorageManager$MtpObject r5 = r4.mObject     // Catch: java.lang.Throwable -> Lab
-                android.os.FileObserver r5 = android.mtp.MtpStorageManager.MtpObject.m3298$$Nest$fgetmObserver(r5)     // Catch: java.lang.Throwable -> Lab
-                r5.stopWatching()     // Catch: java.lang.Throwable -> Lab
-            L4f:
-                android.mtp.MtpStorageManager$MtpObject r4 = r4.mObject     // Catch: java.lang.Throwable -> Lab
-                r5 = 0
-                android.mtp.MtpStorageManager.MtpObject.m3300$$Nest$fputmObserver(r4, r5)     // Catch: java.lang.Throwable -> Lab
-                goto La9
-            L56:
-                r2 = r5 & 8
-                if (r2 == 0) goto L69
-                android.mtp.MtpStorageManager r5 = android.mtp.MtpStorageManager.this     // Catch: java.lang.Throwable -> Lab
-                java.lang.String r0 = "Got inotify CLOSE_WRITE event for"
-                android.mtp.MtpStorageManager.m3294$$Nest$msDebugLog(r5, r0, r6)     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager r5 = android.mtp.MtpStorageManager.this     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager$MtpObject r4 = r4.mObject     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager.m3292$$Nest$mhandleChangedObject(r5, r4, r6)     // Catch: java.lang.Throwable -> Lab
-                goto La9
-            L69:
-                android.mtp.MtpStorageManager r4 = android.mtp.MtpStorageManager.this     // Catch: java.lang.Throwable -> Lab
-                java.lang.StringBuilder r2 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> Lab
-                r2.<init>(r0)     // Catch: java.lang.Throwable -> Lab
-                r2.append(r5)     // Catch: java.lang.Throwable -> Lab
-                java.lang.String r5 = r2.toString()     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager.m3294$$Nest$msDebugLog(r4, r5, r6)     // Catch: java.lang.Throwable -> Lab
-                goto La9
-            L7b:
-                if (r2 != 0) goto L86
-                android.mtp.MtpStorageManager r4 = android.mtp.MtpStorageManager.this     // Catch: java.lang.Throwable -> Lab
-                java.lang.String r5 = "Object was null in event"
-                android.mtp.MtpStorageManager.m3294$$Nest$msDebugLog(r4, r5, r6)     // Catch: java.lang.Throwable -> Lab
-                monitor-exit(r1)     // Catch: java.lang.Throwable -> Lab
-                return
-            L86:
-                android.mtp.MtpStorageManager r5 = android.mtp.MtpStorageManager.this     // Catch: java.lang.Throwable -> Lab
-                java.lang.String r0 = "Got inotify removed event for"
-                android.mtp.MtpStorageManager.m3294$$Nest$msDebugLog(r5, r0, r6)     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager r4 = android.mtp.MtpStorageManager.this     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager.m3293$$Nest$mhandleRemovedObject(r4, r2)     // Catch: java.lang.Throwable -> Lab
-                goto La9
-            L93:
-                android.mtp.MtpStorageManager r0 = android.mtp.MtpStorageManager.this     // Catch: java.lang.Throwable -> Lab
-                java.lang.String r2 = "Got inotify added event for"
-                android.mtp.MtpStorageManager.m3294$$Nest$msDebugLog(r0, r2, r6)     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager r0 = android.mtp.MtpStorageManager.this     // Catch: java.lang.Throwable -> Lab
-                android.mtp.MtpStorageManager$MtpObject r4 = r4.mObject     // Catch: java.lang.Throwable -> Lab
-                r2 = 1073741824(0x40000000, float:2.0)
-                r5 = r5 & r2
-                if (r5 == 0) goto La5
-                r5 = 1
-                goto La6
-            La5:
-                r5 = 0
-            La6:
-                android.mtp.MtpStorageManager.m3291$$Nest$mhandleAddedObject(r0, r4, r6, r5)     // Catch: java.lang.Throwable -> Lab
-            La9:
-                monitor-exit(r1)     // Catch: java.lang.Throwable -> Lab
-                return
-            Lab:
-                r4 = move-exception
-                monitor-exit(r1)     // Catch: java.lang.Throwable -> Lab
-                throw r4
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.mtp.MtpStorageManager.MtpObjectObserver.onEvent(int, java.lang.String):void");
+        public void onEvent(int i, String str) {
+            synchronized (MtpStorageManager.this) {
+                if ((i & 16384) != 0) {
+                    Log.e(MtpStorageManager.TAG, "Received Inotify overflow event!");
+                }
+                MtpObject child = this.mObject.getChild(str);
+                if ((i & 128) != 0 || (i & 256) != 0) {
+                    MtpStorageManager.this.sDebugLog("Got inotify added event for", str);
+                    MtpStorageManager.this.handleAddedObject(this.mObject, str, (i & 1073741824) != 0);
+                } else if ((i & 64) == 0 && (i & 512) == 0) {
+                    if ((32768 & i) != 0) {
+                        MtpStorageManager.this.sDebugLog("Got inotify deleted", this.mObject.getPath());
+                        if (this.mObject.mObserver != null) {
+                            this.mObject.mObserver.stopWatching();
+                        }
+                        this.mObject.mObserver = null;
+                    } else if ((i & 8) != 0) {
+                        MtpStorageManager.this.sDebugLog("Got inotify CLOSE_WRITE event for", str);
+                        MtpStorageManager.this.handleChangedObject(this.mObject, str);
+                    } else {
+                        MtpStorageManager.this.sDebugLog("Got unrecognized event " + i, str);
+                    }
+                } else if (child == null) {
+                    MtpStorageManager.this.sDebugLog("Object was null in event", str);
+                } else {
+                    MtpStorageManager.this.sDebugLog("Got inotify removed event for", str);
+                    MtpStorageManager.this.handleRemovedObject(child);
+                }
+            }
         }
     }
 
@@ -402,9 +318,9 @@ public class MtpStorageManager {
             if (z && this.mIsDir) {
                 Iterator<MtpObject> it = this.mChildren.values().iterator();
                 while (it.hasNext()) {
-                    MtpObject copy = it.next().copy(true);
-                    copy.setParent(mtpObject);
-                    mtpObject.addChild(copy);
+                    MtpObject mtpObjectCopy = it.next().copy(true);
+                    mtpObjectCopy.setParent(mtpObject);
+                    mtpObject.addChild(mtpObjectCopy);
                 }
             }
             return mtpObject;
@@ -420,7 +336,7 @@ public class MtpStorageManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$new$0() {
+    public /* synthetic */ void lambda$new$0() throws InterruptedException {
         while (this.mCheckConsistency) {
             try {
                 Thread.sleep(15000L);
@@ -463,9 +379,9 @@ public class MtpStorageManager {
     }
 
     public synchronized MtpStorage addMtpStorage(StorageVolume storageVolume, Supplier<Boolean> supplier) {
-        int parseInt;
+        int i;
         String id = storageVolume.getId();
-        if (id != null && id.startsWith("emulated;") && (parseInt = Integer.parseInt(id.substring(id.lastIndexOf(NavigationBarInflaterView.GRAVITY_SEPARATOR) + 1))) >= 95 && parseInt < 100) {
+        if (id != null && id.startsWith("emulated;") && (i = Integer.parseInt(id.substring(id.lastIndexOf(NavigationBarInflaterView.GRAVITY_SEPARATOR) + 1))) >= 95 && i < 100) {
             MtpStorage mtpStorage = new MtpStorage(storageVolume, 65538, supplier);
             this.mRoots.put(65538, new MtpObject(mtpStorage.getPath(), 65538, mtpStorage, null, true));
             return mtpStorage;
@@ -474,9 +390,9 @@ public class MtpStorageManager {
         if (storageId != 65537) {
             storageId = ((getNextStorageId() & 65535) << 16) + 1;
         }
-        int i = storageId;
-        MtpStorage mtpStorage2 = new MtpStorage(storageVolume, i, supplier);
-        this.mRoots.put(Integer.valueOf(i), new MtpObject(mtpStorage2.getPath(), i, mtpStorage2, null, true));
+        int i2 = storageId;
+        MtpStorage mtpStorage2 = new MtpStorage(storageVolume, i2, supplier);
+        this.mRoots.put(Integer.valueOf(i2), new MtpObject(mtpStorage2.getPath(), i2, mtpStorage2, null, true));
         return mtpStorage2;
     }
 
@@ -484,35 +400,41 @@ public class MtpStorageManager {
         removeObjectFromCache(getStorageRoot(mtpStorage.getStorageId()), true, true);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x001b  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private synchronized boolean isSpecialSubDir(MtpObject mtpObject) {
         boolean z;
         Set<String> set;
-        if (mtpObject.getParent().isRoot() && (set = this.mSubdirectories) != null) {
-            z = set.contains(mtpObject.getName()) ? false : true;
+        if (!mtpObject.getParent().isRoot() || (set = this.mSubdirectories) == null) {
+            z = false;
+        } else if (!set.contains(mtpObject.getName())) {
+            z = true;
         }
         return z;
     }
 
     public synchronized MtpObject getByPath(String str) {
-        MtpObject mtpObject = null;
-        for (MtpObject mtpObject2 : this.mRoots.values()) {
-            if (str.startsWith(mtpObject2.getName())) {
-                str = str.substring(mtpObject2.getName().length());
-                mtpObject = mtpObject2;
+        MtpObject child = null;
+        for (MtpObject mtpObject : this.mRoots.values()) {
+            if (str.startsWith(mtpObject.getName())) {
+                str = str.substring(mtpObject.getName().length());
+                child = mtpObject;
             }
         }
         for (String str2 : str.split("/")) {
-            if (mtpObject != null && mtpObject.isDir()) {
+            if (child != null && child.isDir()) {
                 if (!"".equals(str2)) {
-                    if (!mtpObject.isVisited()) {
-                        getChildren(mtpObject, true);
+                    if (!child.isVisited()) {
+                        getChildren(child, true);
                     }
-                    mtpObject = mtpObject.getChild(str2);
+                    child = child.getChild(str2);
                 }
             }
             return null;
         }
-        return mtpObject;
+        return child;
     }
 
     public synchronized MtpObject getObject(int i) {
@@ -547,9 +469,9 @@ public class MtpStorageManager {
         return i;
     }
 
-    public synchronized List<MtpObject> getObjects(int i, int i2, int i3, boolean z) {
-        boolean z2 = true;
-        boolean z3 = i == 0;
+    public synchronized List<MtpObject> getObjects(int i, int i2, int i3, boolean z) throws Throwable {
+        boolean objects = true;
+        boolean z2 = i == 0;
         try {
             try {
                 ArrayList arrayList = new ArrayList();
@@ -561,14 +483,14 @@ public class MtpStorageManager {
                     while (it.hasNext()) {
                         MtpStorageManager mtpStorageManager = this;
                         int i4 = i2;
-                        boolean z4 = z;
-                        z2 &= mtpStorageManager.getObjects(arrayList, it.next(), i4, z3, z4);
+                        boolean z3 = z;
+                        objects &= mtpStorageManager.getObjects(arrayList, it.next(), i4, z2, z3);
                         this = mtpStorageManager;
                         i2 = i4;
-                        z = z4;
+                        z = z3;
                     }
                     MtpStorageManager mtpStorageManager2 = this;
-                    if (!z2) {
+                    if (!objects) {
                         arrayList = null;
                     }
                     return arrayList;
@@ -577,24 +499,24 @@ public class MtpStorageManager {
                 if (storageRoot == null) {
                     return null;
                 }
-                if (!getObjects(arrayList, storageRoot, i2, z3, z)) {
+                if (!getObjects(arrayList, storageRoot, i2, z2, z)) {
                     arrayList = null;
                 }
                 return arrayList;
             } catch (Throwable th) {
                 th = th;
-                MtpStorageManager mtpStorageManager3 = this;
                 Throwable th2 = th;
                 throw th2;
             }
         } catch (Throwable th3) {
             th = th3;
+            MtpStorageManager mtpStorageManager3 = this;
             Throwable th22 = th;
             throw th22;
         }
     }
 
-    private synchronized boolean getObjects(List<MtpObject> list, MtpObject mtpObject, int i, boolean z, boolean z2) {
+    private synchronized boolean getObjects(List<MtpObject> list, MtpObject mtpObject, int i, boolean z, boolean z2) throws Throwable {
         MtpStorageManager mtpStorageManager;
         Throwable th;
         MtpStorageManager mtpStorageManager2;
@@ -616,7 +538,7 @@ public class MtpStorageManager {
                             throw th;
                         }
                     }
-                    boolean z4 = true;
+                    boolean objects = true;
                     if (z) {
                         for (MtpObject mtpObject3 : children) {
                             if (mtpObject3.isDir()) {
@@ -624,7 +546,7 @@ public class MtpStorageManager {
                                 list2 = list;
                                 i2 = i;
                                 z3 = z2;
-                                z4 &= mtpStorageManager2.getObjects(list2, mtpObject3, i2, true, z3);
+                                objects &= mtpStorageManager2.getObjects(list2, mtpObject3, i2, true, z3);
                             } else {
                                 mtpStorageManager2 = this;
                                 list2 = list;
@@ -637,16 +559,16 @@ public class MtpStorageManager {
                             z2 = z3;
                         }
                     }
-                    return z4;
+                    return objects;
                 }
             } catch (Throwable th3) {
                 th = th3;
-                mtpStorageManager = this;
                 th = th;
                 throw th;
             }
         } catch (Throwable th4) {
             th = th4;
+            mtpStorageManager = this;
             th = th;
             throw th;
         }
@@ -664,13 +586,13 @@ public class MtpStorageManager {
                     mtpObject.setObserver(new MtpObjectObserver(mtpObject));
                     mtpObject.getObserver().startWatching();
                     try {
-                        DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(path);
+                        DirectoryStream<Path> directoryStreamNewDirectoryStream = Files.newDirectoryStream(path);
                         try {
-                            for (Path path2 : newDirectoryStream) {
+                            for (Path path2 : directoryStreamNewDirectoryStream) {
                                 addObjectToCache(mtpObject, path2.getFileName().toString(), path2.toFile().isDirectory());
                             }
-                            if (newDirectoryStream != null) {
-                                newDirectoryStream.close();
+                            if (directoryStreamNewDirectoryStream != null) {
+                                directoryStreamNewDirectoryStream.close();
                             }
                             mtpObject.setVisited(true);
                             if (mtpObject.isDir() && (mtpObject.isSkipObserving() || mtpObject.getName().startsWith(MediaMetrics.SEPARATOR))) {
@@ -678,9 +600,9 @@ public class MtpStorageManager {
                                 mtpObject.setObserver(null);
                             }
                         } catch (Throwable th) {
-                            if (newDirectoryStream != null) {
+                            if (directoryStreamNewDirectoryStream != null) {
                                 try {
-                                    newDirectoryStream.close();
+                                    directoryStreamNewDirectoryStream.close();
                                 } catch (Throwable th2) {
                                     th.addSuppressed(th2);
                                 }
@@ -720,140 +642,64 @@ public class MtpStorageManager {
         return mtpObject2;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0040, code lost:
-    
-        if (r0 != false) goto L17;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0021 A[Catch: all -> 0x00a6, TryCatch #0 {, blocks: (B:3:0x0001, B:5:0x0009, B:10:0x0021, B:11:0x002a, B:13:0x0030, B:18:0x005d, B:19:0x0066, B:21:0x006c, B:22:0x0077, B:25:0x007f, B:26:0x008c, B:28:0x0092, B:46:0x0048), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0030 A[Catch: all -> 0x00a6, TryCatch #0 {, blocks: (B:3:0x0001, B:5:0x0009, B:10:0x0021, B:11:0x002a, B:13:0x0030, B:18:0x005d, B:19:0x0066, B:21:0x006c, B:22:0x0077, B:25:0x007f, B:26:0x008c, B:28:0x0092, B:46:0x0048), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x005d A[Catch: all -> 0x00a6, TryCatch #0 {, blocks: (B:3:0x0001, B:5:0x0009, B:10:0x0021, B:11:0x002a, B:13:0x0030, B:18:0x005d, B:19:0x0066, B:21:0x006c, B:22:0x0077, B:25:0x007f, B:26:0x008c, B:28:0x0092, B:46:0x0048), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x006c A[Catch: all -> 0x00a6, TryCatch #0 {, blocks: (B:3:0x0001, B:5:0x0009, B:10:0x0021, B:11:0x002a, B:13:0x0030, B:18:0x005d, B:19:0x0066, B:21:0x006c, B:22:0x0077, B:25:0x007f, B:26:0x008c, B:28:0x0092, B:46:0x0048), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0092 A[Catch: all -> 0x00a6, TRY_LEAVE, TryCatch #0 {, blocks: (B:3:0x0001, B:5:0x0009, B:10:0x0021, B:11:0x002a, B:13:0x0030, B:18:0x005d, B:19:0x0066, B:21:0x006c, B:22:0x0077, B:25:0x007f, B:26:0x008c, B:28:0x0092, B:46:0x0048), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0046  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private synchronized boolean removeObjectFromCache(android.mtp.MtpStorageManager.MtpObject r6, boolean r7, boolean r8) {
-        /*
-            r5 = this;
-            monitor-enter(r5)
-            boolean r0 = r6.isRoot()     // Catch: java.lang.Throwable -> La6
-            r1 = 0
-            r2 = 1
-            if (r0 != 0) goto L1e
-            android.mtp.MtpStorageManager$MtpObject r0 = r6.getParent()     // Catch: java.lang.Throwable -> La6
-            java.util.HashMap r0 = android.mtp.MtpStorageManager.MtpObject.m3297$$Nest$fgetmChildren(r0)     // Catch: java.lang.Throwable -> La6
-            java.lang.String r3 = r6.getName()     // Catch: java.lang.Throwable -> La6
-            boolean r0 = r0.remove(r3, r6)     // Catch: java.lang.Throwable -> La6
-            if (r0 == 0) goto L1c
-            goto L1e
-        L1c:
-            r0 = r1
-            goto L1f
-        L1e:
-            r0 = r2
-        L1f:
-            if (r0 != 0) goto L2a
-            java.lang.String r3 = "Failed to remove from parent "
-            java.nio.file.Path r4 = r6.getPath()     // Catch: java.lang.Throwable -> La6
-            r5.sDebugLog(r3, r4)     // Catch: java.lang.Throwable -> La6
-        L2a:
-            boolean r3 = r6.isRoot()     // Catch: java.lang.Throwable -> La6
-            if (r3 == 0) goto L46
-            java.util.HashMap<java.lang.Integer, android.mtp.MtpStorageManager$MtpObject> r3 = r5.mRoots     // Catch: java.lang.Throwable -> La6
-            int r4 = r6.getId()     // Catch: java.lang.Throwable -> La6
-            java.lang.Integer r4 = java.lang.Integer.valueOf(r4)     // Catch: java.lang.Throwable -> La6
-            boolean r3 = r3.remove(r4, r6)     // Catch: java.lang.Throwable -> La6
-            if (r3 == 0) goto L44
-            if (r0 == 0) goto L44
-        L42:
-            r0 = r2
-            goto L5b
-        L44:
-            r0 = r1
-            goto L5b
-        L46:
-            if (r7 == 0) goto L5b
-            java.util.HashMap<java.lang.Integer, android.mtp.MtpStorageManager$MtpObject> r3 = r5.mObjects     // Catch: java.lang.Throwable -> La6
-            int r4 = r6.getId()     // Catch: java.lang.Throwable -> La6
-            java.lang.Integer r4 = java.lang.Integer.valueOf(r4)     // Catch: java.lang.Throwable -> La6
-            boolean r3 = r3.remove(r4, r6)     // Catch: java.lang.Throwable -> La6
-            if (r3 == 0) goto L44
-            if (r0 == 0) goto L44
-            goto L42
-        L5b:
-            if (r0 != 0) goto L66
-            java.lang.String r3 = "Failed to remove from global cache "
-            java.nio.file.Path r4 = r6.getPath()     // Catch: java.lang.Throwable -> La6
-            r5.sDebugLog(r3, r4)     // Catch: java.lang.Throwable -> La6
-        L66:
-            android.os.FileObserver r3 = android.mtp.MtpStorageManager.MtpObject.m3306$$Nest$mgetObserver(r6)     // Catch: java.lang.Throwable -> La6
-            if (r3 == 0) goto L77
-            android.os.FileObserver r3 = android.mtp.MtpStorageManager.MtpObject.m3306$$Nest$mgetObserver(r6)     // Catch: java.lang.Throwable -> La6
-            r3.stopWatching()     // Catch: java.lang.Throwable -> La6
-            r3 = 0
-            android.mtp.MtpStorageManager.MtpObject.m3313$$Nest$msetObserver(r6, r3)     // Catch: java.lang.Throwable -> La6
-        L77:
-            boolean r3 = r6.isDir()     // Catch: java.lang.Throwable -> La6
-            if (r3 == 0) goto La4
-            if (r8 == 0) goto La4
-            java.util.ArrayList r8 = new java.util.ArrayList     // Catch: java.lang.Throwable -> La6
-            java.util.Collection r6 = android.mtp.MtpStorageManager.MtpObject.m3305$$Nest$mgetChildren(r6)     // Catch: java.lang.Throwable -> La6
-            r8.<init>(r6)     // Catch: java.lang.Throwable -> La6
-            java.util.Iterator r6 = r8.iterator()     // Catch: java.lang.Throwable -> La6
-        L8c:
-            boolean r8 = r6.hasNext()     // Catch: java.lang.Throwable -> La6
-            if (r8 == 0) goto La4
-            java.lang.Object r8 = r6.next()     // Catch: java.lang.Throwable -> La6
-            android.mtp.MtpStorageManager$MtpObject r8 = (android.mtp.MtpStorageManager.MtpObject) r8     // Catch: java.lang.Throwable -> La6
-            boolean r8 = r5.removeObjectFromCache(r8, r7, r2)     // Catch: java.lang.Throwable -> La6
-            if (r8 == 0) goto La2
-            if (r0 == 0) goto La2
-            r0 = r2
-            goto L8c
-        La2:
-            r0 = r1
-            goto L8c
-        La4:
-            monitor-exit(r5)
-            return r0
-        La6:
-            r6 = move-exception
-            monitor-exit(r5)     // Catch: java.lang.Throwable -> La6
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.mtp.MtpStorageManager.removeObjectFromCache(android.mtp.MtpStorageManager$MtpObject, boolean, boolean):boolean");
+    private synchronized boolean removeObjectFromCache(MtpObject mtpObject, boolean z, boolean z2) {
+        boolean z3;
+        z3 = mtpObject.isRoot() || mtpObject.getParent().mChildren.remove(mtpObject.getName(), mtpObject);
+        if (!z3) {
+            sDebugLog("Failed to remove from parent ", mtpObject.getPath());
+        }
+        if (mtpObject.isRoot()) {
+            z3 = this.mRoots.remove(Integer.valueOf(mtpObject.getId()), mtpObject) && z3;
+        } else if (z) {
+            if (this.mObjects.remove(Integer.valueOf(mtpObject.getId()), mtpObject) && z3) {
+            }
+        }
+        if (!z3) {
+            sDebugLog("Failed to remove from global cache ", mtpObject.getPath());
+        }
+        if (mtpObject.getObserver() != null) {
+            mtpObject.getObserver().stopWatching();
+            mtpObject.setObserver(null);
+        }
+        if (mtpObject.isDir() && z2) {
+            Iterator it = new ArrayList(mtpObject.getChildren()).iterator();
+            while (it.hasNext()) {
+                z3 = removeObjectFromCache((MtpObject) it.next(), z, true) && z3;
+            }
+        }
+        return z3;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0051 A[Catch: all -> 0x0148, TryCatch #1 {, blocks: (B:4:0x0003, B:6:0x000c, B:8:0x001a, B:10:0x001e, B:11:0x0027, B:20:0x003b, B:23:0x0056, B:31:0x008f, B:35:0x0095, B:37:0x0099, B:41:0x00a1, B:43:0x00a7, B:46:0x00b0, B:48:0x00c3, B:55:0x00fe, B:66:0x0122, B:68:0x0128, B:70:0x0134, B:63:0x010d, B:62:0x010a, B:65:0x010f, B:21:0x004b, B:22:0x0051, B:27:0x007e, B:29:0x0084, B:73:0x0140), top: B:81:0x0003, inners: #3 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public synchronized void handleAddedObject(MtpObject mtpObject, String str, boolean z) {
-        DirectoryStream<Path> newDirectoryStream;
-        MtpOperation mtpOperation = MtpOperation.NONE;
+        MtpOperation operation = MtpOperation.NONE;
         MtpObject child = mtpObject.getChild(str);
         if (child != null) {
             MtpObjectState state = child.getState();
-            mtpOperation = child.getOperation();
+            operation = child.getOperation();
             if (child.isDir() != z && state != MtpObjectState.FROZEN_REMOVED) {
                 sDebugLog("Inconsistent directory info! ", child.getPath());
             }
             child.setDir(z);
-            int ordinal = state.ordinal();
-            if (ordinal != 0) {
-                if (ordinal != 1) {
-                    if (ordinal != 2) {
-                        if (ordinal != 3) {
-                            if (ordinal == 4) {
-                                child.setState(MtpObjectState.NORMAL);
-                            } else {
-                                sDebugLog("Unexpected state in add " + state, str);
-                            }
-                            Log.i(TAG, state + " transitioned to " + child.getState() + " in op " + mtpOperation);
+            int iOrdinal = state.ordinal();
+            if (iOrdinal != 0) {
+                if (iOrdinal == 1) {
+                    child.setState(MtpObjectState.FROZEN_ADDED);
+                    Log.i(TAG, state + " transitioned to " + child.getState() + " in op " + operation);
+                } else if (iOrdinal != 2) {
+                    if (iOrdinal != 3) {
+                        if (iOrdinal == 4) {
+                            child.setState(MtpObjectState.NORMAL);
+                        } else {
+                            sDebugLog("Unexpected state in add " + state, str);
                         }
                     }
+                    Log.i(TAG, state + " transitioned to " + child.getState() + " in op " + operation);
                 }
-                child.setState(MtpObjectState.FROZEN_ADDED);
-                Log.i(TAG, state + " transitioned to " + child.getState() + " in op " + mtpOperation);
             }
             return;
         }
@@ -865,10 +711,10 @@ public class MtpStorageManager {
             return;
         }
         if (z) {
-            if (mtpOperation == MtpOperation.RENAME) {
+            if (operation == MtpOperation.RENAME) {
                 return;
             }
-            if (mtpOperation == MtpOperation.COPY && !child.isVisited()) {
+            if (operation == MtpOperation.COPY && !child.isVisited()) {
                 return;
             }
             if (child.getObserver() != null) {
@@ -879,33 +725,33 @@ public class MtpStorageManager {
             child.getObserver().startWatching();
             child.setVisited(true);
             try {
-                newDirectoryStream = Files.newDirectoryStream(child.getPath());
+                DirectoryStream<Path> directoryStreamNewDirectoryStream = Files.newDirectoryStream(child.getPath());
+                try {
+                    for (Path path : directoryStreamNewDirectoryStream) {
+                        sDebugLog("Manually handling event for ", path.getFileName().toString());
+                        handleAddedObject(child, path.getFileName().toString(), path.toFile().isDirectory());
+                    }
+                    if (directoryStreamNewDirectoryStream != null) {
+                        directoryStreamNewDirectoryStream.close();
+                    }
+                } catch (Throwable th) {
+                    if (directoryStreamNewDirectoryStream != null) {
+                        try {
+                            directoryStreamNewDirectoryStream.close();
+                        } catch (Throwable th2) {
+                            th.addSuppressed(th2);
+                        }
+                    }
+                    throw th;
+                }
             } catch (IOException | DirectoryIteratorException e) {
                 Log.e(TAG, e.toString());
                 child.getObserver().stopWatching();
                 child.setObserver(null);
             }
-            try {
-                for (Path path : newDirectoryStream) {
-                    sDebugLog("Manually handling event for ", path.getFileName().toString());
-                    handleAddedObject(child, path.getFileName().toString(), path.toFile().isDirectory());
-                }
-                if (newDirectoryStream != null) {
-                    newDirectoryStream.close();
-                }
-                if (child.isSkipObserving() || child.getName().startsWith(MediaMetrics.SEPARATOR)) {
-                    child.getObserver().stopWatching();
-                    child.setObserver(null);
-                }
-            } catch (Throwable th) {
-                if (newDirectoryStream != null) {
-                    try {
-                        newDirectoryStream.close();
-                    } catch (Throwable th2) {
-                        th.addSuppressed(th2);
-                    }
-                }
-                throw th;
+            if (child.isSkipObserving() || child.getName().startsWith(MediaMetrics.SEPARATOR)) {
+                child.getObserver().stopWatching();
+                child.setObserver(null);
             }
         }
     }
@@ -914,14 +760,12 @@ public class MtpStorageManager {
     public synchronized void handleRemovedObject(MtpObject mtpObject) {
         MtpObjectState state = mtpObject.getState();
         MtpOperation operation = mtpObject.getOperation();
-        int ordinal = state.ordinal();
+        int iOrdinal = state.ordinal();
         boolean z = true;
-        if (ordinal != 0) {
-            if (ordinal == 1) {
+        if (iOrdinal != 0) {
+            if (iOrdinal == 1 || iOrdinal == 2) {
                 mtpObject.setState(MtpObjectState.FROZEN_REMOVED);
-            } else if (ordinal == 2) {
-                mtpObject.setState(MtpObjectState.FROZEN_REMOVED);
-            } else if (ordinal == 5) {
+            } else if (iOrdinal == 5) {
                 if (operation == MtpOperation.RENAME) {
                     z = false;
                 }
@@ -951,7 +795,7 @@ public class MtpStorageManager {
         }
     }
 
-    public void flushEvents() {
+    public void flushEvents() throws InterruptedException {
         try {
             Thread.sleep(500L);
         } catch (InterruptedException unused) {
@@ -960,11 +804,11 @@ public class MtpStorageManager {
 
     public synchronized void dump() {
         for (Integer num : this.mObjects.keySet()) {
-            int intValue = num.intValue();
+            int iIntValue = num.intValue();
             MtpObject mtpObject = this.mObjects.get(num);
             String str = TAG;
             StringBuilder sb = new StringBuilder();
-            sb.append(intValue);
+            sb.append(iIntValue);
             sb.append(" | ");
             sb.append(mtpObject.getParent() == null ? Integer.valueOf(mtpObject.getParent().getId()) : PerfettoProtoLogImpl.NULL_STRING);
             sb.append(" | ");
@@ -1033,10 +877,10 @@ public class MtpStorageManager {
                     z = false;
                 }
                 try {
-                    DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(mtpObject.getPath());
+                    DirectoryStream<Path> directoryStreamNewDirectoryStream = Files.newDirectoryStream(mtpObject.getPath());
                     try {
                         HashSet hashSet = new HashSet();
-                        for (Path path : newDirectoryStream) {
+                        for (Path path : directoryStreamNewDirectoryStream) {
                             if (mtpObject.isVisited() && mtpObject.getChild(path.getFileName().toString()) == null && (this.mSubdirectories == null || !mtpObject.isRoot() || this.mSubdirectories.contains(path.getFileName().toString()))) {
                                 Log.w(TAG, "File exists in fs but not in children " + path);
                                 z = false;
@@ -1053,13 +897,13 @@ public class MtpStorageManager {
                                 z = false;
                             }
                         }
-                        if (newDirectoryStream != null) {
-                            newDirectoryStream.close();
+                        if (directoryStreamNewDirectoryStream != null) {
+                            directoryStreamNewDirectoryStream.close();
                         }
                     } catch (Throwable th) {
-                        if (newDirectoryStream != null) {
+                        if (directoryStreamNewDirectoryStream != null) {
                             try {
-                                newDirectoryStream.close();
+                                directoryStreamNewDirectoryStream.close();
                             } catch (Throwable th2) {
                                 th.addSuppressed(th2);
                             }
@@ -1089,13 +933,13 @@ public class MtpStorageManager {
         if (i != 12289) {
             z = false;
         }
-        MtpObject addObjectToCache = addObjectToCache(mtpObject, str, z);
-        if (addObjectToCache == null) {
+        MtpObject mtpObjectAddObjectToCache = addObjectToCache(mtpObject, str, z);
+        if (mtpObjectAddObjectToCache == null) {
             return -1;
         }
-        addObjectToCache.setState(MtpObjectState.FROZEN);
-        addObjectToCache.setOperation(MtpOperation.ADD);
-        return addObjectToCache.getId();
+        mtpObjectAddObjectToCache.setState(MtpObjectState.FROZEN);
+        mtpObjectAddObjectToCache.setOperation(MtpOperation.ADD);
+        return mtpObjectAddObjectToCache.getId();
     }
 
     public synchronized boolean endSendObject(MtpObject mtpObject, boolean z) {
@@ -1114,11 +958,11 @@ public class MtpStorageManager {
         if (mtpObject.getParent().getChild(str) != null) {
             return false;
         }
-        MtpObject copy = mtpObject.copy(false);
+        MtpObject mtpObjectCopy = mtpObject.copy(false);
         mtpObject.setName(str);
         mtpObject.getParent().addChild(mtpObject);
-        copy.getParent().addChild(copy);
-        return generalBeginRenameObject(copy, mtpObject);
+        mtpObjectCopy.getParent().addChild(mtpObjectCopy);
+        return generalBeginRenameObject(mtpObjectCopy, mtpObject);
     }
 
     public synchronized boolean endRenameObject(MtpObject mtpObject, String str, boolean z) {
@@ -1141,11 +985,17 @@ public class MtpStorageManager {
         return generalEndRenameObject(mtpObject, child, z);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0020  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public synchronized boolean beginRemoveObject(MtpObject mtpObject) {
         boolean z;
         sDebugLog("beginRemoveObject", mtpObject.getName());
-        if (!mtpObject.isRoot() && !isSpecialSubDir(mtpObject)) {
-            z = generalBeginRemoveObject(mtpObject, MtpOperation.DELETE);
+        if (mtpObject.isRoot() || isSpecialSubDir(mtpObject)) {
+            z = false;
+        } else if (generalBeginRemoveObject(mtpObject, MtpOperation.DELETE)) {
+            z = true;
         }
         return z;
     }
@@ -1191,19 +1041,19 @@ public class MtpStorageManager {
             return false;
         }
         if (mtpObject.getStorageId() != mtpObject2.getStorageId()) {
-            MtpObject copy = mtpObject.copy(true);
-            copy.setParent(mtpObject2);
-            mtpObject2.addChild(copy);
-            if (generalBeginRemoveObject(mtpObject, MtpOperation.RENAME) && generalBeginCopyObject(copy, false)) {
+            MtpObject mtpObjectCopy = mtpObject.copy(true);
+            mtpObjectCopy.setParent(mtpObject2);
+            mtpObject2.addChild(mtpObjectCopy);
+            if (generalBeginRemoveObject(mtpObject, MtpOperation.RENAME) && generalBeginCopyObject(mtpObjectCopy, false)) {
                 z = true;
             }
             return z;
         }
-        MtpObject copy2 = mtpObject.copy(false);
+        MtpObject mtpObjectCopy2 = mtpObject.copy(false);
         mtpObject.setParent(mtpObject2);
-        copy2.getParent().addChild(copy2);
+        mtpObjectCopy2.getParent().addChild(mtpObjectCopy2);
         mtpObject.getParent().addChild(mtpObject);
-        return generalBeginRenameObject(copy2, mtpObject);
+        return generalBeginRenameObject(mtpObjectCopy2, mtpObject);
     }
 
     public synchronized boolean endMoveObject(MtpObject mtpObject, MtpObject mtpObject2, String str, boolean z) {
@@ -1213,8 +1063,8 @@ public class MtpStorageManager {
         boolean z2 = false;
         if (child != null && child2 != null) {
             if (mtpObject.getStorageId() != child2.getStorageId()) {
-                boolean endRemoveObject = endRemoveObject(child, z);
-                if (generalEndCopyObject(child2, z, true) && endRemoveObject) {
+                boolean zEndRemoveObject = endRemoveObject(child, z);
+                if (generalEndCopyObject(child2, z, true) && zEndRemoveObject) {
                     z2 = true;
                 }
                 return z2;
@@ -1249,11 +1099,11 @@ public class MtpStorageManager {
         if (mtpObject2.getChild(name) != null) {
             return -1;
         }
-        MtpObject copy = mtpObject.copy(mtpObject.isDir());
-        mtpObject2.addChild(copy);
-        copy.setParent(mtpObject2);
-        if (generalBeginCopyObject(copy, true)) {
-            return copy.getId();
+        MtpObject mtpObjectCopy = mtpObject.copy(mtpObject.isDir());
+        mtpObject2.addChild(mtpObjectCopy);
+        mtpObjectCopy.setParent(mtpObject2);
+        if (generalBeginCopyObject(mtpObjectCopy, true)) {
+            return mtpObjectCopy.getId();
         }
         return -1;
     }
@@ -1264,9 +1114,9 @@ public class MtpStorageManager {
     }
 
     private synchronized boolean generalEndAddObject(MtpObject mtpObject, boolean z, boolean z2) {
-        int ordinal = mtpObject.getState().ordinal();
-        if (ordinal != 1) {
-            if (ordinal == 2) {
+        int iOrdinal = mtpObject.getState().ordinal();
+        if (iOrdinal != 1) {
+            if (iOrdinal == 2) {
                 mtpObject.setState(MtpObjectState.NORMAL);
                 if (!z) {
                     MtpObject parent = mtpObject.getParent();
@@ -1276,7 +1126,7 @@ public class MtpStorageManager {
                     handleAddedObject(parent, mtpObject.getName(), mtpObject.isDir());
                 }
             } else {
-                if (ordinal != 3) {
+                if (iOrdinal != 3) {
                     return false;
                 }
                 if (!removeObjectFromCache(mtpObject, z2, false)) {
@@ -1295,9 +1145,9 @@ public class MtpStorageManager {
     }
 
     private synchronized boolean generalEndRemoveObject(MtpObject mtpObject, boolean z, boolean z2) {
-        int ordinal = mtpObject.getState().ordinal();
-        if (ordinal != 1) {
-            if (ordinal == 2) {
+        int iOrdinal = mtpObject.getState().ordinal();
+        if (iOrdinal != 1) {
+            if (iOrdinal == 2) {
                 mtpObject.setState(MtpObjectState.NORMAL);
                 if (z) {
                     MtpObject parent = mtpObject.getParent();
@@ -1307,7 +1157,7 @@ public class MtpStorageManager {
                     handleAddedObject(parent, mtpObject.getName(), mtpObject.isDir());
                 }
             } else {
-                if (ordinal != 3) {
+                if (iOrdinal != 3) {
                     return false;
                 }
                 if (!removeObjectFromCache(mtpObject, z2, false)) {
@@ -1367,39 +1217,46 @@ public class MtpStorageManager {
         return true;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0047  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x004f  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x001a A[Catch: all -> 0x005b, TryCatch #0 {, blocks: (B:5:0x0005, B:6:0x0012, B:8:0x001a, B:10:0x0028, B:12:0x002e, B:14:0x003c, B:25:0x0050), top: B:34:0x0005 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private synchronized boolean generalEndCopyObject(MtpObject mtpObject, boolean z, boolean z2) {
         boolean z3;
         boolean z4;
-        boolean z5;
         if (z && z2) {
             this.mObjects.put(Integer.valueOf(mtpObject.getId()), mtpObject);
-        }
-        z3 = false;
-        if (mtpObject.isDir()) {
-            Iterator it = new ArrayList(mtpObject.getChildren()).iterator();
-            loop0: while (true) {
+            z3 = false;
+            if (mtpObject.isDir()) {
+            }
+            if (z) {
+                if (generalEndAddObject(mtpObject, z, (z && z2) ? false : true)) {
+                    z3 = true;
+                }
+            }
+        } else {
+            z3 = false;
+            if (mtpObject.isDir()) {
                 z4 = true;
-                while (it.hasNext()) {
-                    MtpObject mtpObject2 = (MtpObject) it.next();
-                    if (mtpObject2.getOperation() == MtpOperation.COPY) {
-                        if (!generalEndCopyObject(mtpObject2, z, z2) || !z4) {
-                            z4 = false;
+            } else {
+                Iterator it = new ArrayList(mtpObject.getChildren()).iterator();
+                loop0: while (true) {
+                    z4 = true;
+                    while (it.hasNext()) {
+                        MtpObject mtpObject2 = (MtpObject) it.next();
+                        if (mtpObject2.getOperation() == MtpOperation.COPY) {
+                            if (!generalEndCopyObject(mtpObject2, z, z2) || !z4) {
+                                z4 = false;
+                            }
                         }
                     }
                 }
             }
-        } else {
-            z4 = true;
-        }
-        if (!z && z2) {
-            z5 = false;
-            if (generalEndAddObject(mtpObject, z, z5) && z4) {
+            if (generalEndAddObject(mtpObject, z, (z && z2) ? false : true) && z4) {
                 z3 = true;
             }
-        }
-        z5 = true;
-        if (generalEndAddObject(mtpObject, z, z5)) {
-            z3 = true;
         }
         return z3;
     }

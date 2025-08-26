@@ -13,7 +13,6 @@ import kotlin.Unit;
 import kotlin.collections.EmptySet;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FlashlightMapper implements QSTileDataToStateMapper {
     public final Resources resources;
@@ -34,9 +33,9 @@ public final class FlashlightMapper implements QSTileDataToStateMapper {
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.flashlight.ui.mapper.FlashlightMapper$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) throws Resources.NotFoundException {
                 QSTileState.Builder builder = (QSTileState.Builder) obj2;
-                FlashlightTileModel flashlightTileModel2 = FlashlightTileModel.this;
+                FlashlightTileModel flashlightTileModel2 = flashlightTileModel;
                 boolean z = flashlightTileModel2 instanceof FlashlightTileModel.FlashlightAvailable;
                 int i = (z && ((FlashlightTileModel.FlashlightAvailable) flashlightTileModel2).isEnabled) ? R.drawable.qs_flashlight_icon_on : R.drawable.qs_flashlight_icon_off;
                 FlashlightMapper flashlightMapper = this;

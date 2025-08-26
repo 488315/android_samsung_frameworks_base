@@ -1,9 +1,9 @@
 package androidx.datastore.core;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class UncloseableOutputStream extends OutputStream {
     public final FileOutputStream fileOutputStream;
@@ -18,17 +18,17 @@ public final class UncloseableOutputStream extends OutputStream {
     }
 
     @Override // java.io.OutputStream
-    public final void write(int i) {
+    public final void write(int i) throws IOException {
         this.fileOutputStream.write(i);
     }
 
     @Override // java.io.OutputStream
-    public final void write(byte[] bArr) {
+    public final void write(byte[] bArr) throws IOException {
         this.fileOutputStream.write(bArr);
     }
 
     @Override // java.io.OutputStream
-    public final void write(byte[] bArr, int i, int i2) {
+    public final void write(byte[] bArr, int i, int i2) throws IOException {
         this.fileOutputStream.write(bArr, i, i2);
     }
 

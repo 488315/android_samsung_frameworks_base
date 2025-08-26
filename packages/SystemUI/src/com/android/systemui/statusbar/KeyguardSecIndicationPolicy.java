@@ -18,7 +18,6 @@ import java.util.PriorityQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardSecIndicationPolicy implements Dumpable {
     public final SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -31,9 +30,7 @@ public class KeyguardSecIndicationPolicy implements Dumpable {
     public final void addIndicationEvent(IndicationPosition indicationPosition, IndicationEventType indicationEventType, CharSequence charSequence, ColorStateList colorStateList, long j, boolean z) {
         if (indicationEventType != IndicationEventType.EMPTY_LOW && indicationEventType != IndicationEventType.EMPTY_HIGH && TextUtils.isEmpty(charSequence)) {
             addLogs(String.format("%12s pos = %7s, type = %20s", "remove e mpty", indicationPosition, indicationEventType));
-            addLogs(String.format("%12s pos = %7s, type = %20s", "remove Item", indicationPosition, indicationEventType));
-            getIndicationList(indicationPosition).removeIf(new KeyguardSecIndicationPolicy$$ExternalSyntheticLambda0(indicationEventType, 2));
-            updateTopItem(indicationPosition);
+            removeIndicationEvent(indicationPosition, indicationEventType);
             return;
         }
         int i = this.mItemIdSeq;
@@ -104,6 +101,12 @@ public class KeyguardSecIndicationPolicy implements Dumpable {
         }
     }
 
+    public final void removeIndicationEvent(IndicationPosition indicationPosition, IndicationEventType indicationEventType) {
+        addLogs(String.format("%12s pos = %7s, type = %20s", "remove Item", indicationPosition, indicationEventType));
+        getIndicationList(indicationPosition).removeIf(new KeyguardSecIndicationPolicy$$ExternalSyntheticLambda0(indicationEventType, 2));
+        updateTopItem(indicationPosition);
+    }
+
     public final void updateTopItem(final IndicationPosition indicationPosition) {
         PriorityQueue indicationList = getIndicationList(indicationPosition);
         IndicationItem indicationItem = (IndicationItem) this.mTopItemMap.get(indicationPosition);
@@ -123,12 +126,12 @@ public class KeyguardSecIndicationPolicy implements Dumpable {
             Completable.timer(j, AndroidSchedulers.mainThread()).subscribe(new Action() { // from class: com.android.systemui.statusbar.KeyguardSecIndicationPolicy$$ExternalSyntheticLambda5
                 @Override // io.reactivex.functions.Action
                 public final void run() {
-                    KeyguardSecIndicationPolicy keyguardSecIndicationPolicy = KeyguardSecIndicationPolicy.this;
+                    KeyguardSecIndicationPolicy keyguardSecIndicationPolicy = this.f$0;
                     keyguardSecIndicationPolicy.getClass();
                     final int i = indicationItem2.mItemId;
-                    Integer valueOf = Integer.valueOf(i);
+                    Integer numValueOf = Integer.valueOf(i);
                     IndicationPosition indicationPosition2 = indicationPosition;
-                    keyguardSecIndicationPolicy.addLogs(String.format("%12s pos = %7s %28s, id = %5d, ", "remove Item", indicationPosition2, "", valueOf));
+                    keyguardSecIndicationPolicy.addLogs(String.format("%12s pos = %7s %28s, id = %5d, ", "remove Item", indicationPosition2, "", numValueOf));
                     keyguardSecIndicationPolicy.getIndicationList(indicationPosition2).removeIf(new Predicate() { // from class: com.android.systemui.statusbar.KeyguardSecIndicationPolicy$$ExternalSyntheticLambda7
                         @Override // java.util.function.Predicate
                         public final boolean test(Object obj) {

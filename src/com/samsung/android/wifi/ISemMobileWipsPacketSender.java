@@ -103,9 +103,9 @@ public interface ISemMobileWipsPacketSender extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemMobileWipsPacketSender.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemMobileWipsPacketSender)) {
-                return (ISemMobileWipsPacketSender) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemMobileWipsPacketSender.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemMobileWipsPacketSender)) {
+                return (ISemMobileWipsPacketSender) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -149,89 +149,89 @@ public interface ISemMobileWipsPacketSender extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> sendArp = sendArp(readInt, createByteArray, createByteArray2, readString);
+                    List<String> listSendArp = sendArp(i3, bArrCreateByteArray, bArrCreateByteArray2, string);
                     parcel2.writeNoException();
-                    parcel2.writeStringList(sendArp);
+                    parcel2.writeStringList(listSendArp);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    byte[] createByteArray3 = parcel.createByteArray();
-                    byte[] createByteArray4 = parcel.createByteArray();
-                    String readString2 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> sendArpToSniffing = sendArpToSniffing(readInt2, createByteArray3, createByteArray4, readString2);
+                    List<String> listSendArpToSniffing = sendArpToSniffing(i4, bArrCreateByteArray3, bArrCreateByteArray4, string2);
                     parcel2.writeNoException();
-                    parcel2.writeStringList(sendArpToSniffing);
+                    parcel2.writeStringList(listSendArpToSniffing);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    byte[] createByteArray5 = parcel.createByteArray();
-                    byte[] createByteArray6 = parcel.createByteArray();
-                    String readString3 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray6 = parcel.createByteArray();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> sendIcmp = sendIcmp(readInt3, createByteArray5, createByteArray6, readString3);
+                    List<String> listSendIcmp = sendIcmp(i5, bArrCreateByteArray5, bArrCreateByteArray6, string3);
                     parcel2.writeNoException();
-                    parcel2.writeStringList(sendIcmp);
+                    parcel2.writeStringList(listSendIcmp);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    byte[] createByteArray7 = parcel.createByteArray();
-                    int readInt5 = parcel.readInt();
-                    String readString4 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    byte[] bArrCreateByteArray7 = parcel.createByteArray();
+                    int i7 = parcel.readInt();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int sendDhcp = sendDhcp(readInt4, createByteArray7, readInt5, readString4);
+                    int iSendDhcp = sendDhcp(i6, bArrCreateByteArray7, i7, string4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(sendDhcp);
+                    parcel2.writeInt(iSendDhcp);
                     return true;
                 case 5:
-                    long[] createLongArray = parcel.createLongArray();
-                    byte[] createByteArray8 = parcel.createByteArray();
-                    byte[] createByteArray9 = parcel.createByteArray();
-                    byte[] createByteArray10 = parcel.createByteArray();
-                    String readString5 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    long[] jArrCreateLongArray = parcel.createLongArray();
+                    byte[] bArrCreateByteArray8 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray9 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray10 = parcel.createByteArray();
+                    String string5 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    byte[] sendDns = sendDns(createLongArray, createByteArray8, createByteArray9, createByteArray10, readString5, readBoolean);
+                    byte[] bArrSendDns = sendDns(jArrCreateLongArray, bArrCreateByteArray8, bArrCreateByteArray9, bArrCreateByteArray10, string5, z);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(sendDns);
+                    parcel2.writeByteArray(bArrSendDns);
                     return true;
                 case 6:
-                    long[] createLongArray2 = parcel.createLongArray();
-                    byte[] createByteArray11 = parcel.createByteArray();
-                    byte[] createByteArray12 = parcel.createByteArray();
-                    String readString6 = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    int readInt6 = parcel.readInt();
+                    long[] jArrCreateLongArray2 = parcel.createLongArray();
+                    byte[] bArrCreateByteArray11 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray12 = parcel.createByteArray();
+                    String string6 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean sendDnsQueries = sendDnsQueries(createLongArray2, createByteArray11, createByteArray12, readString6, createStringArrayList, readInt6);
+                    boolean zSendDnsQueries = sendDnsQueries(jArrCreateLongArray2, bArrCreateByteArray11, bArrCreateByteArray12, string6, arrayListCreateStringArrayList, i8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendDnsQueries);
+                    parcel2.writeBoolean(zSendDnsQueries);
                     return true;
                 case 7:
-                    int readInt7 = parcel.readInt();
-                    byte[] createByteArray13 = parcel.createByteArray();
-                    byte[] createByteArray14 = parcel.createByteArray();
-                    String readString7 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    byte[] bArrCreateByteArray13 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray14 = parcel.createByteArray();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean sendTcp = sendTcp(readInt7, createByteArray13, createByteArray14, readString7);
+                    boolean zSendTcp = sendTcp(i9, bArrCreateByteArray13, bArrCreateByteArray14, string7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendTcp);
+                    parcel2.writeBoolean(zSendTcp);
                     return true;
                 case 8:
-                    byte[] createByteArray15 = parcel.createByteArray();
-                    byte[] createByteArray16 = parcel.createByteArray();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
+                    byte[] bArrCreateByteArray15 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray16 = parcel.createByteArray();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean pingTcp = pingTcp(createByteArray15, createByteArray16, readInt8, readInt9, readInt10);
+                    boolean zPingTcp = pingTcp(bArrCreateByteArray15, bArrCreateByteArray16, i10, i11, i12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(pingTcp);
+                    parcel2.writeBoolean(zPingTcp);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -256,158 +256,158 @@ public interface ISemMobileWipsPacketSender extends IInterface {
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
             public List<String> sendArp(int i, byte[] bArr, byte[] bArr2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
             public List<String> sendArpToSniffing(int i, byte[] bArr, byte[] bArr2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
             public List<String> sendIcmp(int i, byte[] bArr, byte[] bArr2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
             public int sendDhcp(int i, byte[] bArr, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
             public byte[] sendDns(long[] jArr, byte[] bArr, byte[] bArr2, byte[] bArr3, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
-                    obtain.writeLongArray(jArr);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeByteArray(bArr3);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
+                    parcelObtain.writeLongArray(jArr);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeByteArray(bArr3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
             public boolean sendDnsQueries(long[] jArr, byte[] bArr, byte[] bArr2, String str, List<String> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
-                    obtain.writeLongArray(jArr);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
+                    parcelObtain.writeLongArray(jArr);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
             public boolean sendTcp(int i, byte[] bArr, byte[] bArr2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
             public boolean pingTcp(byte[] bArr, byte[] bArr2, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISemMobileWipsPacketSender.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

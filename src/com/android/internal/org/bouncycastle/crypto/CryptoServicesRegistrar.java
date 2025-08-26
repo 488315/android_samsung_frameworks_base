@@ -124,9 +124,9 @@ public final class CryptoServicesRegistrar {
     }
 
     public static <T> T getProperty(Property property) {
-        Object[] lookupProperty = lookupProperty(property);
-        if (lookupProperty != null) {
-            return (T) lookupProperty[0];
+        Object[] objArrLookupProperty = lookupProperty(property);
+        if (objArrLookupProperty != null) {
+            return (T) objArrLookupProperty[0];
         }
         return null;
     }
@@ -140,32 +140,32 @@ public final class CryptoServicesRegistrar {
     }
 
     public static <T> T[] getSizedProperty(Property property) {
-        Object[] lookupProperty = lookupProperty(property);
-        if (lookupProperty == null) {
+        Object[] objArrLookupProperty = lookupProperty(property);
+        if (objArrLookupProperty == null) {
             return null;
         }
-        return (T[]) ((Object[]) lookupProperty.clone());
+        return (T[]) ((Object[]) objArrLookupProperty.clone());
     }
 
     /* JADX WARN: Type inference failed for: r4v5, types: [T, com.android.internal.org.bouncycastle.crypto.params.DSAParameters] */
     /* JADX WARN: Type inference failed for: r4v8, types: [T, com.android.internal.org.bouncycastle.crypto.params.DHParameters] */
     public static <T> T getSizedProperty(Property property, int i) {
-        Object[] lookupProperty = lookupProperty(property);
-        if (lookupProperty == null) {
+        Object[] objArrLookupProperty = lookupProperty(property);
+        if (objArrLookupProperty == null) {
             return null;
         }
         int i2 = 0;
         if (property.type.isAssignableFrom(DHParameters.class)) {
-            while (i2 != lookupProperty.length) {
-                ?? r4 = (T) ((DHParameters) lookupProperty[i2]);
+            while (i2 != objArrLookupProperty.length) {
+                ?? r4 = (T) ((DHParameters) objArrLookupProperty[i2]);
                 if (r4.getP().bitLength() == i) {
                     return r4;
                 }
                 i2++;
             }
         } else if (property.type.isAssignableFrom(DSAParameters.class)) {
-            while (i2 != lookupProperty.length) {
-                ?? r42 = (T) ((DSAParameters) lookupProperty[i2]);
+            while (i2 != objArrLookupProperty.length) {
+                ?? r42 = (T) ((DSAParameters) objArrLookupProperty[i2]);
                 if (r42.getP().bitLength() == i) {
                     return r42;
                 }

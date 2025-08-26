@@ -5,23 +5,26 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import com.android.keyguard.KeyguardSecSimPinViewController$$ExternalSyntheticOutline0;
 import com.android.keyguard.StrongAuthPopup$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.QpRune;
 import com.android.systemui.R;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.qs.bar.ColoredBGHelper;
+import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import java.util.function.IntConsumer;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FullChunkResizeableFrame extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -63,19 +66,19 @@ public final class FullChunkResizeableFrame extends LinearLayout {
         if (view2 == null) {
             view2 = null;
         }
-        ViewPropertyAnimator animate = view2.animate();
-        if (animate != null) {
-            ViewPropertyAnimator alpha = animate.alpha(z ? 1.0f : 0.0f);
-            if (alpha != null && (duration = alpha.setDuration(this.ANIM_DURATION)) != null) {
+        ViewPropertyAnimator viewPropertyAnimatorAnimate = view2.animate();
+        if (viewPropertyAnimatorAnimate != null) {
+            ViewPropertyAnimator viewPropertyAnimatorAlpha = viewPropertyAnimatorAnimate.alpha(z ? 1.0f : 0.0f);
+            if (viewPropertyAnimatorAlpha != null && (duration = viewPropertyAnimatorAlpha.setDuration(this.ANIM_DURATION)) != null) {
                 duration.start();
             }
         }
         View view3 = this.editButton;
-        ViewPropertyAnimator animate2 = (view3 != null ? view3 : null).animate();
-        if (animate2 != null) {
-            ViewPropertyAnimator alpha2 = animate2.alpha(z ? 1.0f : 0.0f);
-            if (alpha2 != null) {
-                ViewPropertyAnimator duration2 = alpha2.setDuration(z ? 100L : this.ANIM_DURATION);
+        ViewPropertyAnimator viewPropertyAnimatorAnimate2 = (view3 != null ? view3 : null).animate();
+        if (viewPropertyAnimatorAnimate2 != null) {
+            ViewPropertyAnimator viewPropertyAnimatorAlpha2 = viewPropertyAnimatorAnimate2.alpha(z ? 1.0f : 0.0f);
+            if (viewPropertyAnimatorAlpha2 != null) {
+                ViewPropertyAnimator duration2 = viewPropertyAnimatorAlpha2.setDuration(z ? 100L : this.ANIM_DURATION);
                 if (duration2 != null) {
                     duration2.start();
                 }
@@ -92,14 +95,14 @@ public final class FullChunkResizeableFrame extends LinearLayout {
         AnimatableTileGridLayout animatableTileGridLayout2 = this.gridLayout;
         (animatableTileGridLayout2 != null ? animatableTileGridLayout2 : null).requestLayout();
         if (QpRune.QUICK_POP_OVER_CUSTOMIZER) {
-            this.heightChange.mo779invoke(Integer.valueOf(this.heightWithoutTiles + i));
+            this.heightChange.mo781invoke(Integer.valueOf(this.heightWithoutTiles + i));
         }
     }
 
     public FullChunkResizeableFrame(Context context, ViewGroup viewGroup, IntConsumer intConsumer, Function1 function1, AttributeSet attributeSet) {
-        super(context, attributeSet);
         LayerDrawable layerDrawable;
-        Drawable findDrawableByLayerId;
+        Drawable drawableFindDrawableByLayerId;
+        super(context, attributeSet);
         this.recyclerView = viewGroup;
         this.collapsedBarRowConsumer = intConsumer;
         this.heightChange = function1;
@@ -122,99 +125,140 @@ public final class FullChunkResizeableFrame extends LinearLayout {
         LinearLayout linearLayout = this.handleView;
         LayerDrawable layerDrawable2 = null;
         (linearLayout == null ? null : linearLayout).setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.customize.view.FullChunkResizeableFrame$initViews$1
-            /* JADX WARN: Code restructure failed: missing block: B:29:0x0063, code lost:
-            
-                if (r8.getHeight() >= r3) goto L36;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:30:0x0076, code lost:
-            
-                r6.updateLayoutHeight(r5);
-                r8 = r6.step;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:31:0x007b, code lost:
-            
-                if (r8 == r4) goto L54;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:32:0x007d, code lost:
-            
-                if (r8 > r4) goto L47;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:33:0x007f, code lost:
-            
-                r0 = 1.0f;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:35:0x0083, code lost:
-            
-                if (r8 >= r4) goto L79;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:36:0x0085, code lost:
-            
-                r3 = r6.gridLayout;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:37:0x0087, code lost:
-            
-                if (r3 != null) goto L81;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:38:0x0089, code lost:
-            
-                r3 = null;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:40:0x008a, code lost:
-            
-                r3.setPosition(r0, r8);
-                r8 = r8 + 1;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:43:0x008f, code lost:
-            
-                r6.step = r4;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:44:0x0082, code lost:
-            
-                r0 = 0.0f;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:45:0x0091, code lost:
-            
-                r8 = r6.gridLayout;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:46:0x0093, code lost:
-            
-                if (r8 != null) goto L57;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:47:0x0096, code lost:
-            
-                r2 = r8;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:48:0x0097, code lost:
-            
-                r2.setPosition((r1 - (r6.step * r8)) / r6.cellHeight, r4);
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:49:0x00a3, code lost:
-            
-                return true;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:56:0x0074, code lost:
-            
-                if (r8.getHeight() > r3) goto L43;
-             */
+            /* JADX WARN: Removed duplicated region for block: B:49:0x00a0  */
+            /* JADX WARN: Removed duplicated region for block: B:56:0x00b1  */
             @Override // android.view.View.OnTouchListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final boolean onTouch(android.view.View r7, android.view.MotionEvent r8) {
-                /*
-                    Method dump skipped, instructions count: 264
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.customize.view.FullChunkResizeableFrame$initViews$1.onTouch(android.view.View, android.view.MotionEvent):boolean");
+            public final boolean onTouch(View view, MotionEvent motionEvent) {
+                int i;
+                FullChunkResizeableFrame fullChunkResizeableFrame = this.this$0;
+                int i2 = FullChunkResizeableFrame.$r8$clinit;
+                fullChunkResizeableFrame.getClass();
+                int i3 = 0;
+                if (motionEvent == null) {
+                    return false;
+                }
+                int action = motionEvent.getAction();
+                if (action != 0) {
+                    if (action == 1) {
+                        fullChunkResizeableFrame.initTouchY = 0;
+                        fullChunkResizeableFrame.draggingDirection = 0;
+                        fullChunkResizeableFrame.showGreyScreen(true);
+                        fullChunkResizeableFrame.recyclerView.requestDisallowInterceptTouchEvent(false);
+                        View view2 = fullChunkResizeableFrame.parentView;
+                        if (view2 != null) {
+                            view2.setHapticFeedbackEnabled(true);
+                        }
+                        FrameLayout frameLayout = fullChunkResizeableFrame.frame;
+                        int bottom = (frameLayout != null ? frameLayout : null).getBottom() - fullChunkResizeableFrame.verticalCapSize;
+                        int i4 = fullChunkResizeableFrame.cellHeight;
+                        int i5 = bottom < i4 ? 1 : bottom / i4;
+                        fullChunkResizeableFrame.step = i5;
+                        if (fullChunkResizeableFrame.currentRow != 0) {
+                            fullChunkResizeableFrame.updateLayoutHeight(i4 * i5);
+                            int i6 = fullChunkResizeableFrame.step;
+                            fullChunkResizeableFrame.currentRow = i6;
+                            fullChunkResizeableFrame.collapsedBarRowConsumer.accept(i6);
+                            return true;
+                        }
+                    } else if (action == 2) {
+                        fullChunkResizeableFrame.recyclerView.requestDisallowInterceptTouchEvent(true);
+                        View view3 = fullChunkResizeableFrame.parentView;
+                        if (view3 != null) {
+                            view3.setHapticFeedbackEnabled(false);
+                        }
+                        AnimatableTileGridLayout animatableTileGridLayout = fullChunkResizeableFrame.gridLayout;
+                        if (animatableTileGridLayout == null) {
+                            animatableTileGridLayout = null;
+                        }
+                        int height = animatableTileGridLayout.getHeight();
+                        int iRoundToInt = MathKt__MathJVMKt.roundToInt(motionEvent.getRawY(0));
+                        int i7 = iRoundToInt - fullChunkResizeableFrame.initTouchY;
+                        try {
+                            int[] iArr = new int[2];
+                            fullChunkResizeableFrame.recyclerView.getLocationOnScreen(iArr);
+                            if (((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() && i7 == 0) {
+                                if (iArr[1] + fullChunkResizeableFrame.recyclerView.getHeight() < iRoundToInt) {
+                                    i3 = 10;
+                                }
+                            }
+                        } catch (Exception e) {
+                            KeyguardSecSimPinViewController$$ExternalSyntheticOutline0.m("fail to getLocationOnScreen ", e, "FullChunkResizeableFrame");
+                        }
+                        int i8 = height + i7 + i3;
+                        int i9 = fullChunkResizeableFrame.cellHeight;
+                        if (i8 < i9) {
+                            i = i9;
+                        } else {
+                            i = fullChunkResizeableFrame.maximumFrameSize;
+                            if (i8 <= i) {
+                                i = i8;
+                            }
+                        }
+                        int i10 = i / i9;
+                        fullChunkResizeableFrame.initTouchY += i7;
+                        fullChunkResizeableFrame.draggingDirection = i7 > 0 ? fullChunkResizeableFrame.DOWN : fullChunkResizeableFrame.UP;
+                        if (i3 != 0) {
+                            fullChunkResizeableFrame.draggingDirection = fullChunkResizeableFrame.DOWN;
+                        }
+                        if (fullChunkResizeableFrame.draggingDirection == fullChunkResizeableFrame.DOWN) {
+                            AnimatableTileGridLayout animatableTileGridLayout2 = fullChunkResizeableFrame.gridLayout;
+                            if (animatableTileGridLayout2 == null) {
+                                animatableTileGridLayout2 = null;
+                            }
+                            if (animatableTileGridLayout2.getHeight() >= i8) {
+                            }
+                        } else if (fullChunkResizeableFrame.draggingDirection == fullChunkResizeableFrame.UP) {
+                            AnimatableTileGridLayout animatableTileGridLayout3 = fullChunkResizeableFrame.gridLayout;
+                            if (animatableTileGridLayout3 == null) {
+                                animatableTileGridLayout3 = null;
+                            }
+                            if (animatableTileGridLayout3.getHeight() > i8) {
+                                fullChunkResizeableFrame.updateLayoutHeight(i);
+                                int i11 = fullChunkResizeableFrame.step;
+                                if (i11 != i10) {
+                                    float f = i11 <= i10 ? 1.0f : 0.0f;
+                                    while (i11 < i10) {
+                                        AnimatableTileGridLayout animatableTileGridLayout4 = fullChunkResizeableFrame.gridLayout;
+                                        if (animatableTileGridLayout4 == null) {
+                                            animatableTileGridLayout4 = null;
+                                        }
+                                        animatableTileGridLayout4.setPosition(f, i11);
+                                        i11++;
+                                    }
+                                    fullChunkResizeableFrame.step = i10;
+                                }
+                                AnimatableTileGridLayout animatableTileGridLayout5 = fullChunkResizeableFrame.gridLayout;
+                                AnimatableTileGridLayout animatableTileGridLayout6 = animatableTileGridLayout5 != null ? animatableTileGridLayout5 : null;
+                                animatableTileGridLayout6.setPosition((height - (fullChunkResizeableFrame.step * r9)) / fullChunkResizeableFrame.cellHeight, i10);
+                            }
+                        }
+                    }
+                } else {
+                    fullChunkResizeableFrame.draggingDirection = 0;
+                    fullChunkResizeableFrame.initTouchY = MathKt__MathJVMKt.roundToInt(motionEvent.getRawY(0));
+                    fullChunkResizeableFrame.showGreyScreen(false);
+                    fullChunkResizeableFrame.recyclerView.requestDisallowInterceptTouchEvent(true);
+                    ViewGroup viewGroup2 = fullChunkResizeableFrame.recyclerView;
+                    MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
+                    motionEventObtain.setAction(3);
+                    viewGroup2.onTouchEvent(motionEventObtain);
+                    View view4 = fullChunkResizeableFrame.parentView;
+                    if (view4 != null) {
+                        view4.setHapticFeedbackEnabled(false);
+                    }
+                }
+                return true;
             }
         });
         LinearLayout linearLayout2 = this.dummyContainer;
         linearLayout2 = linearLayout2 == null ? null : linearLayout2;
         ColoredBGHelper coloredBGHelper = (ColoredBGHelper) Dependency.sDependency.getDependencyInner(ColoredBGHelper.class);
         Drawable drawable = coloredBGHelper.context.getDrawable(R.drawable.sec_coloring_container_background);
-        if (drawable != null && (findDrawableByLayerId = (layerDrawable = (LayerDrawable) drawable).findDrawableByLayerId(R.id.colored_bg_solid)) != null) {
-            findDrawableByLayerId.setTint(((Number) coloredBGHelper.coloredBackgroundInteractor.backgroundColor.$$delegate_0.getValue()).intValue());
+        if (drawable != null && (drawableFindDrawableByLayerId = (layerDrawable = (LayerDrawable) drawable).findDrawableByLayerId(R.id.colored_bg_solid)) != null) {
+            drawableFindDrawableByLayerId.setTint(((Number) coloredBGHelper.coloredBackgroundInteractor.backgroundColor.$$delegate_0.getValue()).intValue());
             layerDrawable2 = layerDrawable;
         }
         linearLayout2.setBackground(layerDrawable2);

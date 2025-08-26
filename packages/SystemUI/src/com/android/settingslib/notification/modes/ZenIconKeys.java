@@ -4,7 +4,6 @@ import android.R;
 import com.android.settingslib.notification.modes.ZenIcon;
 import com.google.common.collect.ImmutableMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ZenIconKeys {
     public static final ZenIcon.Key MANUAL_DND = ZenIcon.Key.forSystemResource(R.drawable.menu_popup_panel_holo_dark);

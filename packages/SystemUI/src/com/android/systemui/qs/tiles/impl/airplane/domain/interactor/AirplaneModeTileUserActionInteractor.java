@@ -1,16 +1,24 @@
 package com.android.systemui.qs.tiles.impl.airplane.domain.interactor;
 
+import android.content.Intent;
 import com.android.systemui.qs.tiles.base.domain.actions.QSTileIntentUserInputHandler;
 import com.android.systemui.qs.tiles.base.domain.interactor.QSTileUserActionInteractor;
+import com.android.systemui.qs.tiles.base.domain.model.QSTileInput;
+import com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction;
+import com.android.systemui.qs.tiles.impl.airplane.domain.model.AirplaneModeTileModel;
 import com.android.systemui.statusbar.pipeline.airplane.domain.interactor.AirplaneModeInteractor;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AirplaneModeTileUserActionInteractor implements QSTileUserActionInteractor {
     public final AirplaneModeInteractor airplaneModeInteractor;
     public final QSTileIntentUserInputHandler qsTileIntentUserActionHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -28,114 +36,83 @@ public final class AirplaneModeTileUserActionInteractor implements QSTileUserAct
         }
     }
 
+    /* renamed from: com.android.systemui.qs.tiles.impl.airplane.domain.interactor.AirplaneModeTileUserActionInteractor$handleInput$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return AirplaneModeTileUserActionInteractor.this.handleInput(null, this);
+        }
+    }
+
     public AirplaneModeTileUserActionInteractor(AirplaneModeInteractor airplaneModeInteractor, QSTileIntentUserInputHandler qSTileIntentUserInputHandler) {
         this.airplaneModeInteractor = airplaneModeInteractor;
         this.qsTileIntentUserActionHandler = qSTileIntentUserInputHandler;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0063  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.qs.tiles.base.domain.interactor.QSTileUserActionInteractor
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object handleInput(com.android.systemui.qs.tiles.base.domain.model.QSTileInput r5, kotlin.coroutines.Continuation r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof com.android.systemui.qs.tiles.impl.airplane.domain.interactor.AirplaneModeTileUserActionInteractor$handleInput$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.qs.tiles.impl.airplane.domain.interactor.AirplaneModeTileUserActionInteractor$handleInput$1 r0 = (com.android.systemui.qs.tiles.impl.airplane.domain.interactor.AirplaneModeTileUserActionInteractor$handleInput$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.qs.tiles.impl.airplane.domain.interactor.AirplaneModeTileUserActionInteractor$handleInput$1 r0 = new com.android.systemui.qs.tiles.impl.airplane.domain.interactor.AirplaneModeTileUserActionInteractor$handleInput$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L38
-            if (r2 != r3) goto L30
-            java.lang.Object r4 = r0.L$1
-            r5 = r4
-            com.android.systemui.qs.tiles.base.domain.model.QSTileInput r5 = (com.android.systemui.qs.tiles.base.domain.model.QSTileInput) r5
-            java.lang.Object r4 = r0.L$0
-            com.android.systemui.qs.tiles.impl.airplane.domain.interactor.AirplaneModeTileUserActionInteractor r4 = (com.android.systemui.qs.tiles.impl.airplane.domain.interactor.AirplaneModeTileUserActionInteractor) r4
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L57
-        L30:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L38:
-            kotlin.ResultKt.throwOnFailure(r6)
-            com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction r6 = r5.action
-            boolean r2 = r6 instanceof com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction.Click
-            if (r2 == 0) goto L7f
-            java.lang.Object r6 = r5.data
-            com.android.systemui.qs.tiles.impl.airplane.domain.model.AirplaneModeTileModel r6 = (com.android.systemui.qs.tiles.impl.airplane.domain.model.AirplaneModeTileModel) r6
-            boolean r6 = r6.isEnabled
-            r6 = r6 ^ r3
-            r0.L$0 = r4
-            r0.L$1 = r5
-            r0.label = r3
-            com.android.systemui.statusbar.pipeline.airplane.domain.interactor.AirplaneModeInteractor r2 = r4.airplaneModeInteractor
-            java.lang.Object r6 = r2.setIsAirplaneMode(r6, r0)
-            if (r6 != r1) goto L57
-            return r1
-        L57:
-            com.android.systemui.statusbar.pipeline.airplane.domain.interactor.AirplaneModeInteractor$SetResult r6 = (com.android.systemui.statusbar.pipeline.airplane.domain.interactor.AirplaneModeInteractor.SetResult) r6
-            int[] r0 = com.android.systemui.qs.tiles.impl.airplane.domain.interactor.AirplaneModeTileUserActionInteractor.WhenMappings.$EnumSwitchMapping$0
-            int r6 = r6.ordinal()
-            r6 = r0[r6]
-            if (r6 == r3) goto L98
-            r0 = 2
-            if (r6 != r0) goto L79
-            com.android.systemui.qs.tiles.base.domain.actions.QSTileIntentUserInputHandler r4 = r4.qsTileIntentUserActionHandler
-            com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction r5 = r5.action
-            com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction$Click r5 = (com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction.Click) r5
-            com.android.systemui.animation.Expandable r5 = r5.expandable
-            android.content.Intent r6 = new android.content.Intent
-            java.lang.String r0 = "android.telephony.action.SHOW_NOTICE_ECM_BLOCK_OTHERS"
-            r6.<init>(r0)
-            com.android.systemui.qs.tiles.base.domain.actions.QSTileIntentUserInputHandler.handle$default(r4, r5, r6)
-            goto L98
-        L79:
-            kotlin.NoWhenBranchMatchedException r4 = new kotlin.NoWhenBranchMatchedException
-            r4.<init>()
-            throw r4
-        L7f:
-            boolean r5 = r6 instanceof com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction.LongClick
-            if (r5 == 0) goto L94
-            com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction$LongClick r6 = (com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction.LongClick) r6
-            com.android.systemui.animation.Expandable r5 = r6.expandable
-            android.content.Intent r6 = new android.content.Intent
-            java.lang.String r0 = "android.settings.AIRPLANE_MODE_SETTINGS"
-            r6.<init>(r0)
-            com.android.systemui.qs.tiles.base.domain.actions.QSTileIntentUserInputHandler r4 = r4.qsTileIntentUserActionHandler
-            com.android.systemui.qs.tiles.base.domain.actions.QSTileIntentUserInputHandler.handle$default(r4, r5, r6)
-            goto L98
-        L94:
-            boolean r4 = r6 instanceof com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction.ToggleClick
-            if (r4 == 0) goto L9b
-        L98:
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        L9b:
-            kotlin.NoWhenBranchMatchedException r4 = new kotlin.NoWhenBranchMatchedException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.impl.airplane.domain.interactor.AirplaneModeTileUserActionInteractor.handleInput(com.android.systemui.qs.tiles.base.domain.model.QSTileInput, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object isAirplaneMode = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(isAirplaneMode);
+            QSTileUserAction qSTileUserAction = qSTileInput.action;
+            if (!(qSTileUserAction instanceof QSTileUserAction.Click)) {
+                if (qSTileUserAction instanceof QSTileUserAction.LongClick) {
+                    QSTileIntentUserInputHandler.handle$default(this.qsTileIntentUserActionHandler, ((QSTileUserAction.LongClick) qSTileUserAction).expandable, new Intent("android.settings.AIRPLANE_MODE_SETTINGS"));
+                } else if (!(qSTileUserAction instanceof QSTileUserAction.ToggleClick)) {
+                    throw new NoWhenBranchMatchedException();
+                }
+                return Unit.INSTANCE;
+            }
+            boolean z = !((AirplaneModeTileModel) qSTileInput.data).isEnabled;
+            anonymousClass1.L$0 = this;
+            anonymousClass1.L$1 = qSTileInput;
+            anonymousClass1.label = 1;
+            isAirplaneMode = this.airplaneModeInteractor.setIsAirplaneMode(z, anonymousClass1);
+            if (isAirplaneMode == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            qSTileInput = (QSTileInput) anonymousClass1.L$1;
+            this = (AirplaneModeTileUserActionInteractor) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(isAirplaneMode);
+        }
+        int i3 = WhenMappings.$EnumSwitchMapping$0[((AirplaneModeInteractor.SetResult) isAirplaneMode).ordinal()];
+        if (i3 != 1) {
+            if (i3 != 2) {
+                throw new NoWhenBranchMatchedException();
+            }
+            QSTileIntentUserInputHandler.handle$default(this.qsTileIntentUserActionHandler, ((QSTileUserAction.Click) qSTileInput.action).expandable, new Intent("android.telephony.action.SHOW_NOTICE_ECM_BLOCK_OTHERS"));
+        }
+        return Unit.INSTANCE;
     }
 }

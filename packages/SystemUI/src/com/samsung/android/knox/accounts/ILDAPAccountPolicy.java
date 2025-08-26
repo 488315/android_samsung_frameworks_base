@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import com.samsung.android.knox.ContextInfo;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ILDAPAccountPolicy extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.accounts.ILDAPAccountPolicy";
@@ -21,14 +20,12 @@ public interface ILDAPAccountPolicy extends IInterface {
 
     LDAPAccount getLDAPAccount(ContextInfo contextInfo, long j) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements ILDAPAccountPolicy {
         public static final int TRANSACTION_createLDAPAccount = 1;
         public static final int TRANSACTION_deleteLDAPAccount = 2;
         public static final int TRANSACTION_getAllLDAPAccounts = 4;
         public static final int TRANSACTION_getLDAPAccount = 3;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements ILDAPAccountPolicy {
             public IBinder mRemote;
 
@@ -43,50 +40,50 @@ public interface ILDAPAccountPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.accounts.ILDAPAccountPolicy
             public void createLDAPAccount(ContextInfo contextInfo, LDAPAccount lDAPAccount) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILDAPAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(lDAPAccount, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ILDAPAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(lDAPAccount, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.ILDAPAccountPolicy
             public boolean deleteLDAPAccount(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILDAPAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ILDAPAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.ILDAPAccountPolicy
             public List<LDAPAccount> getAllLDAPAccounts(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILDAPAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(LDAPAccount.CREATOR);
+                    parcelObtain.writeInterfaceToken(ILDAPAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(LDAPAccount.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -96,18 +93,18 @@ public interface ILDAPAccountPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.accounts.ILDAPAccountPolicy
             public LDAPAccount getLDAPAccount(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ILDAPAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LDAPAccount) obtain2.readTypedObject(LDAPAccount.CREATOR);
+                    parcelObtain.writeInterfaceToken(ILDAPAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LDAPAccount) parcelObtain2.readTypedObject(LDAPAccount.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -120,8 +117,8 @@ public interface ILDAPAccountPolicy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILDAPAccountPolicy.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof ILDAPAccountPolicy)) ? new Proxy(iBinder) : (ILDAPAccountPolicy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILDAPAccountPolicy.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ILDAPAccountPolicy)) ? new Proxy(iBinder) : (ILDAPAccountPolicy) iInterfaceQueryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -165,16 +162,16 @@ public interface ILDAPAccountPolicy extends IInterface {
                 parcel2.writeNoException();
             } else if (i == 2) {
                 ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                long readLong = parcel.readLong();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                boolean deleteLDAPAccount = deleteLDAPAccount(contextInfo2, readLong);
+                boolean zDeleteLDAPAccount = deleteLDAPAccount(contextInfo2, j);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(deleteLDAPAccount);
+                parcel2.writeBoolean(zDeleteLDAPAccount);
             } else if (i == 3) {
                 ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                long readLong2 = parcel.readLong();
+                long j2 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                LDAPAccount lDAPAccount2 = getLDAPAccount(contextInfo3, readLong2);
+                LDAPAccount lDAPAccount2 = getLDAPAccount(contextInfo3, j2);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(lDAPAccount2, 1);
             } else {
@@ -196,7 +193,6 @@ public interface ILDAPAccountPolicy extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements ILDAPAccountPolicy {
         @Override // android.os.IInterface
         public IBinder asBinder() {

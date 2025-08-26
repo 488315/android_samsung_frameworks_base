@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TransitionValues {
     public final View view;
@@ -31,14 +30,14 @@ public class TransitionValues {
     }
 
     public final String toString() {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("TransitionValues@" + Integer.toHexString(hashCode()) + ":\n", "    view = ");
-        m.append(this.view);
-        m.append("\n");
-        String m2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m.toString(), "    values:");
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("TransitionValues@" + Integer.toHexString(hashCode()) + ":\n", "    view = ");
+        sbM.append(this.view);
+        sbM.append("\n");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM.toString(), "    values:");
         for (String str : ((HashMap) this.values).keySet()) {
-            m2 = m2 + "    " + str + ": " + ((HashMap) this.values).get(str) + "\n";
+            strM = strM + "    " + str + ": " + ((HashMap) this.values).get(str) + "\n";
         }
-        return m2;
+        return strM;
     }
 
     public TransitionValues(View view) {

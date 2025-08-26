@@ -27,13 +27,13 @@ public final class AidGroup implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public AidGroup createFromParcel(Parcel parcel) {
-            String readString8 = parcel.readString8();
-            int readInt = parcel.readInt();
+            String string8 = parcel.readString8();
+            int i = parcel.readInt();
             ArrayList arrayList = new ArrayList();
-            if (readInt > 0) {
+            if (i > 0) {
                 parcel.readStringList(arrayList);
             }
-            return new AidGroup(arrayList, readString8);
+            return new AidGroup(arrayList, string8);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -120,22 +120,22 @@ public final class AidGroup implements Parcelable {
         int eventType = xmlPullParser.getEventType();
         int depth = xmlPullParser.getDepth();
         boolean z = false;
-        String str = null;
+        String attributeValue = null;
         while (eventType != 1 && xmlPullParser.getDepth() >= depth) {
             String name = xmlPullParser.getName();
             if (eventType == 2) {
                 if (name.equals("aid")) {
                     if (z) {
-                        String attributeValue = xmlPullParser.getAttributeValue(null, "value");
-                        if (attributeValue != null) {
-                            arrayList.add(attributeValue.toUpperCase());
+                        String attributeValue2 = xmlPullParser.getAttributeValue(null, "value");
+                        if (attributeValue2 != null) {
+                            arrayList.add(attributeValue2.toUpperCase());
                         }
                     } else {
                         Log.d(TAG, "Ignoring <aid> tag while not in group");
                     }
                 } else if (name.equals("aid-group")) {
-                    str = xmlPullParser.getAttributeValue(null, "category");
-                    if (str == null) {
+                    attributeValue = xmlPullParser.getAttributeValue(null, "category");
+                    if (attributeValue == null) {
                         Log.e(TAG, "<aid-group> tag without valid category");
                         return null;
                     }
@@ -144,14 +144,14 @@ public final class AidGroup implements Parcelable {
                     Log.d(TAG, "Ignoring unexpected tag: " + name);
                 }
             } else if (eventType == 3 && name.equals("aid-group") && z && arrayList.size() > 0) {
-                return new AidGroup(arrayList, str);
+                return new AidGroup(arrayList, attributeValue);
             }
             eventType = xmlPullParser.next();
         }
         return null;
     }
 
-    public void writeAsXml(XmlSerializer xmlSerializer) throws IOException {
+    public void writeAsXml(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         xmlSerializer.startTag(null, "aid-group");
         xmlSerializer.attribute(null, "category", this.mCategory);
         for (String str : this.mAids) {

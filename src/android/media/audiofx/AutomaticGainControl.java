@@ -25,7 +25,7 @@ public class AutomaticGainControl extends AudioEffect {
         }
     }
 
-    private AutomaticGainControl(int i) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    private AutomaticGainControl(int i) throws RuntimeException {
         super(EFFECT_TYPE_AGC, EFFECT_TYPE_NULL, 0, i);
     }
 }

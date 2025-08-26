@@ -10,7 +10,6 @@ import com.sec.ims.IMSParameter;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BatteryStatus {
     public final int chargingStatus;
@@ -31,7 +30,7 @@ public class BatteryStatus {
         this.incompatibleCharger = Optional.empty();
     }
 
-    public final int getChargingSpeed(Context context) {
+    public final int getChargingSpeed(Context context) throws Resources.NotFoundException {
         int integer = context.getResources().getInteger(R.integer.config_chargingSlowlyThreshold);
         Resources resources = context.getResources();
         if (BatteryUtils.sChargingStringV2Enabled == null) {

@@ -86,8 +86,8 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
 
     private Intent getMoreDetailsActivity() {
         Intent intent = new Intent(Intent.ACTION_SHOW_SUSPENDED_APP_DETAILS).setPackage(this.mSuspendingPackage);
-        ResolveInfo resolveActivityAsUser = this.mPm.resolveActivityAsUser(intent, 786432, this.mSuspendingUserId);
-        if (resolveActivityAsUser == null || resolveActivityAsUser.activityInfo == null || !Manifest.permission.SEND_SHOW_SUSPENDED_APP_DETAILS.equals(resolveActivityAsUser.activityInfo.permission)) {
+        ResolveInfo resolveInfoResolveActivityAsUser = this.mPm.resolveActivityAsUser(intent, 786432, this.mSuspendingUserId);
+        if (resolveInfoResolveActivityAsUser == null || resolveInfoResolveActivityAsUser.activityInfo == null || !Manifest.permission.SEND_SHOW_SUSPENDED_APP_DETAILS.equals(resolveInfoResolveActivityAsUser.activityInfo.permission)) {
             return null;
         }
         if (isDigitalWellbingPackage(this.mSuspendingPackage)) {
@@ -267,7 +267,51 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
         RemoteException remoteException;
         if (i == -3) {
             int i2 = this.mNeutralButtonAction;
-            if (i2 == 0) {
+            if (i2 != 0) {
+                if (i2 == 1) {
+                    IPackageManager packageManager = AppGlobals.getPackageManager();
+                    try {
+                        String[] strArr = {this.mSuspendedPackage};
+                        String str = this.mSuspendingPackage;
+                        int i3 = this.mUserId;
+                        if (ArrayUtils.contains(packageManager.setPackagesSuspendedAsUser(strArr, false, null, null, null, 0, str, i3, i3), this.mSuspendedPackage)) {
+                            try {
+                                Slog.e(TAG, "Could not unsuspend " + this.mSuspendedPackage);
+                            } catch (RemoteException e) {
+                                remoteException = e;
+                                suspendedAppActivity = this;
+                                Slog.e(TAG, "Can't talk to system process", remoteException);
+                                suspendedAppActivity.mUsm.reportUserInteraction(suspendedAppActivity.mSuspendingPackage, suspendedAppActivity.mUserId);
+                                suspendedAppActivity.finish();
+                            }
+                        } else {
+                            sendBroadcastAsUser(new Intent().setAction(Intent.ACTION_PACKAGE_UNSUSPENDED_MANUALLY).putExtra("android.intent.extra.PACKAGE_NAME", this.mSuspendedPackage).setPackage(this.mSuspendingPackage).addFlags(16777216), UserHandle.of(this.mSuspendingUserId));
+                            if (this.mOnUnsuspend != null) {
+                                try {
+                                    suspendedAppActivity = this;
+                                } catch (IntentSender.SendIntentException e2) {
+                                    e = e2;
+                                    suspendedAppActivity = this;
+                                }
+                                try {
+                                    this.mOnUnsuspend.sendIntent(suspendedAppActivity, 0, (Intent) null, (String) null, ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1).toBundle(), (Executor) null, (IntentSender.OnFinished) null);
+                                } catch (IntentSender.SendIntentException e3) {
+                                    e = e3;
+                                    Slog.e(TAG, "Error while starting intent " + suspendedAppActivity.mOnUnsuspend, e);
+                                    suspendedAppActivity.mUsm.reportUserInteraction(suspendedAppActivity.mSuspendingPackage, suspendedAppActivity.mUserId);
+                                    suspendedAppActivity.finish();
+                                }
+                            }
+                        }
+                    } catch (RemoteException e4) {
+                        suspendedAppActivity = this;
+                        remoteException = e4;
+                    }
+                } else {
+                    Slog.e(TAG, "Unexpected action on neutral button: " + this.mNeutralButtonAction);
+                }
+                suspendedAppActivity = this;
+            } else {
                 suspendedAppActivity = this;
                 Intent intent = suspendedAppActivity.mMoreDetailsIntent;
                 if (intent != null) {
@@ -275,52 +319,10 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
                 } else {
                     Slog.wtf(TAG, "Neutral button should not have existed!");
                 }
-            } else if (i2 == 1) {
-                IPackageManager packageManager = AppGlobals.getPackageManager();
-                try {
-                    String[] strArr = {this.mSuspendedPackage};
-                    String str = this.mSuspendingPackage;
-                    int i3 = this.mUserId;
-                    if (ArrayUtils.contains(packageManager.setPackagesSuspendedAsUser(strArr, false, null, null, null, 0, str, i3, i3), this.mSuspendedPackage)) {
-                        try {
-                            Slog.e(TAG, "Could not unsuspend " + this.mSuspendedPackage);
-                        } catch (RemoteException e) {
-                            remoteException = e;
-                            suspendedAppActivity = this;
-                            Slog.e(TAG, "Can't talk to system process", remoteException);
-                            suspendedAppActivity.mUsm.reportUserInteraction(suspendedAppActivity.mSuspendingPackage, suspendedAppActivity.mUserId);
-                            suspendedAppActivity.finish();
-                        }
-                    } else {
-                        sendBroadcastAsUser(new Intent().setAction(Intent.ACTION_PACKAGE_UNSUSPENDED_MANUALLY).putExtra("android.intent.extra.PACKAGE_NAME", this.mSuspendedPackage).setPackage(this.mSuspendingPackage).addFlags(16777216), UserHandle.of(this.mSuspendingUserId));
-                        if (this.mOnUnsuspend != null) {
-                            try {
-                                suspendedAppActivity = this;
-                                try {
-                                    this.mOnUnsuspend.sendIntent(suspendedAppActivity, 0, (Intent) null, (String) null, ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1).toBundle(), (Executor) null, (IntentSender.OnFinished) null);
-                                } catch (IntentSender.SendIntentException e2) {
-                                    e = e2;
-                                    Slog.e(TAG, "Error while starting intent " + suspendedAppActivity.mOnUnsuspend, e);
-                                    suspendedAppActivity.mUsm.reportUserInteraction(suspendedAppActivity.mSuspendingPackage, suspendedAppActivity.mUserId);
-                                    suspendedAppActivity.finish();
-                                }
-                            } catch (IntentSender.SendIntentException e3) {
-                                e = e3;
-                                suspendedAppActivity = this;
-                            }
-                        }
-                    }
-                } catch (RemoteException e4) {
-                    suspendedAppActivity = this;
-                    remoteException = e4;
-                }
-            } else {
-                Slog.e(TAG, "Unexpected action on neutral button: " + this.mNeutralButtonAction);
             }
-            suspendedAppActivity.mUsm.reportUserInteraction(suspendedAppActivity.mSuspendingPackage, suspendedAppActivity.mUserId);
-            suspendedAppActivity.finish();
+        } else {
+            suspendedAppActivity = this;
         }
-        suspendedAppActivity = this;
         suspendedAppActivity.mUsm.reportUserInteraction(suspendedAppActivity.mSuspendingPackage, suspendedAppActivity.mUserId);
         suspendedAppActivity.finish();
     }

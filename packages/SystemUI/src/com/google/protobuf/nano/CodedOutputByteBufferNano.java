@@ -10,12 +10,10 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.ReadOnlyBufferException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CodedOutputByteBufferNano {
     public final ByteBuffer buffer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OutOfSpaceException extends IOException {
         private static final long serialVersionUID = -6947486886997889499L;
 
@@ -33,9 +31,9 @@ public final class CodedOutputByteBufferNano {
     }
 
     public static int computeMessageSize(int i, MessageNano messageNano) {
-        int computeTagSize = computeTagSize(i);
+        int iComputeTagSize = computeTagSize(i);
         int serializedSize = messageNano.getSerializedSize();
-        return computeRawVarint32Size(serializedSize) + serializedSize + computeTagSize;
+        return computeRawVarint32Size(serializedSize) + serializedSize + iComputeTagSize;
     }
 
     public static int computeRawVarint32Size(int i) {
@@ -52,9 +50,9 @@ public final class CodedOutputByteBufferNano {
     }
 
     public static int computeStringSize(int i, String str) {
-        int computeTagSize = computeTagSize(i);
-        int encodedLength = encodedLength(str);
-        return computeRawVarint32Size(encodedLength) + encodedLength + computeTagSize;
+        int iComputeTagSize = computeTagSize(i);
+        int iEncodedLength = encodedLength(str);
+        return computeRawVarint32Size(iEncodedLength) + iEncodedLength + iComputeTagSize;
     }
 
     public static int computeTagSize(int i) {
@@ -79,19 +77,19 @@ public final class CodedOutputByteBufferNano {
         int length = str.length();
         int i = 0;
         while (i < length) {
-            char charAt = str.charAt(i);
-            if (charAt < 128) {
-                byteBuffer.put((byte) charAt);
-            } else if (charAt < 2048) {
-                byteBuffer.put((byte) ((charAt >>> 6) | 960));
-                byteBuffer.put((byte) ((charAt & '?') | 128));
+            char cCharAt = str.charAt(i);
+            if (cCharAt < 128) {
+                byteBuffer.put((byte) cCharAt);
+            } else if (cCharAt < 2048) {
+                byteBuffer.put((byte) ((cCharAt >>> 6) | 960));
+                byteBuffer.put((byte) ((cCharAt & '?') | 128));
             } else {
-                if (charAt >= 55296 && 57343 >= charAt) {
+                if (cCharAt >= 55296 && 57343 >= cCharAt) {
                     int i2 = i + 1;
                     if (i2 != str.length()) {
-                        char charAt2 = str.charAt(i2);
-                        if (Character.isSurrogatePair(charAt, charAt2)) {
-                            int codePoint = Character.toCodePoint(charAt, charAt2);
+                        char cCharAt2 = str.charAt(i2);
+                        if (Character.isSurrogatePair(cCharAt, cCharAt2)) {
+                            int codePoint = Character.toCodePoint(cCharAt, cCharAt2);
                             byteBuffer.put((byte) ((codePoint >>> 18) | IKnoxCustomManager.Stub.TRANSACTION_getFavoriteApp));
                             byteBuffer.put((byte) (((codePoint >>> 12) & 63) | 128));
                             byteBuffer.put((byte) (((codePoint >>> 6) & 63) | 128));
@@ -105,9 +103,9 @@ public final class CodedOutputByteBufferNano {
                     sb.append(i - 1);
                     throw new IllegalArgumentException(sb.toString());
                 }
-                byteBuffer.put((byte) ((charAt >>> '\f') | VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE));
-                byteBuffer.put((byte) (((charAt >>> 6) & 63) | 128));
-                byteBuffer.put((byte) ((charAt & '?') | 128));
+                byteBuffer.put((byte) ((cCharAt >>> '\f') | VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE));
+                byteBuffer.put((byte) (((cCharAt >>> 6) & 63) | 128));
+                byteBuffer.put((byte) ((cCharAt & '?') | 128));
             }
             i++;
         }
@@ -125,19 +123,19 @@ public final class CodedOutputByteBufferNano {
             if (i2 >= length) {
                 break;
             }
-            char charAt = charSequence.charAt(i2);
-            if (charAt < 2048) {
-                i3 += (127 - charAt) >>> 31;
+            char cCharAt = charSequence.charAt(i2);
+            if (cCharAt < 2048) {
+                i3 += (127 - cCharAt) >>> 31;
                 i2++;
             } else {
                 int length2 = charSequence.length();
                 while (i2 < length2) {
-                    char charAt2 = charSequence.charAt(i2);
-                    if (charAt2 < 2048) {
-                        i += (127 - charAt2) >>> 31;
+                    char cCharAt2 = charSequence.charAt(i2);
+                    if (cCharAt2 < 2048) {
+                        i += (127 - cCharAt2) >>> 31;
                     } else {
                         i += 2;
-                        if (55296 <= charAt2 && charAt2 <= 57343) {
+                        if (55296 <= cCharAt2 && cCharAt2 <= 57343) {
                             if (Character.codePointAt(charSequence, i2) < 65536) {
                                 throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "Unpaired surrogate at index "));
                             }
@@ -159,7 +157,7 @@ public final class CodedOutputByteBufferNano {
         return new CodedOutputByteBufferNano(bArr, i, i2);
     }
 
-    public final void writeInt32(int i, int i2) {
+    public final void writeInt32(int i, int i2) throws OutOfSpaceException {
         writeTag(i, 0);
         if (i2 >= 0) {
             writeRawVarint32(i2);
@@ -173,13 +171,13 @@ public final class CodedOutputByteBufferNano {
         writeRawByte((int) j);
     }
 
-    public final void writeMessage(int i, MessageNano messageNano) {
+    public final void writeMessage(int i, MessageNano messageNano) throws OutOfSpaceException {
         writeTag(i, 2);
         writeRawVarint32(messageNano.getCachedSize());
         messageNano.writeTo(this);
     }
 
-    public final void writeRawByte(int i) {
+    public final void writeRawByte(int i) throws OutOfSpaceException {
         byte b = (byte) i;
         if (!this.buffer.hasRemaining()) {
             throw new OutOfSpaceException(this.buffer.position(), this.buffer.limit());
@@ -187,7 +185,7 @@ public final class CodedOutputByteBufferNano {
         this.buffer.put(b);
     }
 
-    public final void writeRawVarint32(int i) {
+    public final void writeRawVarint32(int i) throws OutOfSpaceException {
         while ((i & (-128)) != 0) {
             writeRawByte((i & 127) | 128);
             i >>>= 7;
@@ -195,25 +193,25 @@ public final class CodedOutputByteBufferNano {
         writeRawByte(i);
     }
 
-    public final void writeString(int i, String str) {
+    public final void writeString(int i, String str) throws OutOfSpaceException {
         writeTag(i, 2);
         try {
-            int computeRawVarint32Size = computeRawVarint32Size(str.length());
-            if (computeRawVarint32Size != computeRawVarint32Size(str.length() * 3)) {
+            int iComputeRawVarint32Size = computeRawVarint32Size(str.length());
+            if (iComputeRawVarint32Size != computeRawVarint32Size(str.length() * 3)) {
                 writeRawVarint32(encodedLength(str));
                 encode(str, this.buffer);
                 return;
             }
-            int position = this.buffer.position();
-            if (this.buffer.remaining() < computeRawVarint32Size) {
-                throw new OutOfSpaceException(position + computeRawVarint32Size, this.buffer.limit());
+            int iPosition = this.buffer.position();
+            if (this.buffer.remaining() < iComputeRawVarint32Size) {
+                throw new OutOfSpaceException(iPosition + iComputeRawVarint32Size, this.buffer.limit());
             }
-            this.buffer.position(position + computeRawVarint32Size);
+            this.buffer.position(iPosition + iComputeRawVarint32Size);
             encode(str, this.buffer);
-            int position2 = this.buffer.position();
-            this.buffer.position(position);
-            writeRawVarint32((position2 - position) - computeRawVarint32Size);
-            this.buffer.position(position2);
+            int iPosition2 = this.buffer.position();
+            this.buffer.position(iPosition);
+            writeRawVarint32((iPosition2 - iPosition) - iComputeRawVarint32Size);
+            this.buffer.position(iPosition2);
         } catch (BufferOverflowException e) {
             OutOfSpaceException outOfSpaceException = new OutOfSpaceException(this.buffer.position(), this.buffer.limit());
             outOfSpaceException.initCause(e);
@@ -221,7 +219,7 @@ public final class CodedOutputByteBufferNano {
         }
     }
 
-    public final void writeTag(int i, int i2) {
+    public final void writeTag(int i, int i2) throws OutOfSpaceException {
         writeRawVarint32((i << 3) | i2);
     }
 
@@ -230,19 +228,64 @@ public final class CodedOutputByteBufferNano {
         byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x001f, code lost:
-    
-        return r9 + r0;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static int encode(java.lang.CharSequence r7, byte[] r8, int r9, int r10) {
-        /*
-            Method dump skipped, instructions count: 239
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.protobuf.nano.CodedOutputByteBufferNano.encode(java.lang.CharSequence, byte[], int, int):int");
+    public static int encode(CharSequence charSequence, byte[] bArr, int i, int i2) {
+        int i3;
+        char cCharAt;
+        String str = (String) charSequence;
+        int length = str.length();
+        int i4 = i2 + i;
+        int i5 = 0;
+        while (i5 < length && (i3 = i5 + i) < i4 && (cCharAt = str.charAt(i5)) < 128) {
+            bArr[i3] = (byte) cCharAt;
+            i5++;
+        }
+        if (i5 == length) {
+            return i + length;
+        }
+        int i6 = i + i5;
+        while (i5 < length) {
+            char cCharAt2 = str.charAt(i5);
+            if (cCharAt2 < 128 && i6 < i4) {
+                bArr[i6] = (byte) cCharAt2;
+                i6++;
+            } else if (cCharAt2 < 2048 && i6 <= i4 - 2) {
+                int i7 = i6 + 1;
+                bArr[i6] = (byte) ((cCharAt2 >>> 6) | 960);
+                i6 += 2;
+                bArr[i7] = (byte) ((cCharAt2 & '?') | 128);
+            } else {
+                if ((cCharAt2 >= 55296 && 57343 >= cCharAt2) || i6 > i4 - 3) {
+                    if (i6 <= i4 - 4) {
+                        int i8 = i5 + 1;
+                        if (i8 != str.length()) {
+                            char cCharAt3 = str.charAt(i8);
+                            if (Character.isSurrogatePair(cCharAt2, cCharAt3)) {
+                                int codePoint = Character.toCodePoint(cCharAt2, cCharAt3);
+                                bArr[i6] = (byte) ((codePoint >>> 18) | IKnoxCustomManager.Stub.TRANSACTION_getFavoriteApp);
+                                bArr[i6 + 1] = (byte) (((codePoint >>> 12) & 63) | 128);
+                                int i9 = i6 + 3;
+                                bArr[i6 + 2] = (byte) (((codePoint >>> 6) & 63) | 128);
+                                i6 += 4;
+                                bArr[i9] = (byte) ((codePoint & 63) | 128);
+                                i5 = i8;
+                            } else {
+                                i5 = i8;
+                            }
+                        }
+                        StringBuilder sb = new StringBuilder("Unpaired surrogate at index ");
+                        sb.append(i5 - 1);
+                        throw new IllegalArgumentException(sb.toString());
+                    }
+                    throw new ArrayIndexOutOfBoundsException("Failed writing " + cCharAt2 + " at index " + i6);
+                }
+                bArr[i6] = (byte) ((cCharAt2 >>> '\f') | VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
+                int i10 = i6 + 2;
+                bArr[i6 + 1] = (byte) (((cCharAt2 >>> 6) & 63) | 128);
+                i6 += 3;
+                bArr[i10] = (byte) ((cCharAt2 & '?') | 128);
+            }
+            i5++;
+        }
+        return i6;
     }
 }

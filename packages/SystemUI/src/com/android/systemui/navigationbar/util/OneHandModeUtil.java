@@ -5,14 +5,12 @@ import com.android.systemui.navigationbar.store.NavBarStoreAction;
 import com.android.systemui.util.SettingsHelper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class OneHandModeUtil {
     public static final Companion Companion = new Companion(null);
     public static NavBarStoreAction.OneHandModeInfo oneHandModeInfo = new NavBarStoreAction.OneHandModeInfo(0, 0, 1.0f);
     private final SettingsHelper settingsHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

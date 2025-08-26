@@ -12,7 +12,6 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.constraintlayout.widget.R;
 import androidx.constraintlayout.widget.VirtualLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Flow extends VirtualLayout {
     public androidx.constraintlayout.core.widgets.Flow mFlow;
@@ -26,74 +25,74 @@ public class Flow extends VirtualLayout {
         super.init(attributeSet);
         this.mFlow = new androidx.constraintlayout.core.widgets.Flow();
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_Layout);
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_Layout);
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 if (index == R.styleable.ConstraintLayout_Layout_android_orientation) {
-                    this.mFlow.mOrientation = obtainStyledAttributes.getInt(index, 0);
+                    this.mFlow.mOrientation = typedArrayObtainStyledAttributes.getInt(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_android_padding) {
                     androidx.constraintlayout.core.widgets.Flow flow = this.mFlow;
-                    int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     flow.mPaddingTop = dimensionPixelSize;
                     flow.mPaddingBottom = dimensionPixelSize;
                     flow.mPaddingStart = dimensionPixelSize;
                     flow.mPaddingEnd = dimensionPixelSize;
                 } else if (index == R.styleable.ConstraintLayout_Layout_android_paddingStart) {
                     androidx.constraintlayout.core.widgets.Flow flow2 = this.mFlow;
-                    int dimensionPixelSize2 = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    int dimensionPixelSize2 = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                     flow2.mPaddingStart = dimensionPixelSize2;
                     flow2.mResolvedPaddingLeft = dimensionPixelSize2;
                     flow2.mResolvedPaddingRight = dimensionPixelSize2;
                 } else if (index == R.styleable.ConstraintLayout_Layout_android_paddingEnd) {
-                    this.mFlow.mPaddingEnd = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mFlow.mPaddingEnd = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_android_paddingLeft) {
-                    this.mFlow.mResolvedPaddingLeft = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mFlow.mResolvedPaddingLeft = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_android_paddingTop) {
-                    this.mFlow.mPaddingTop = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mFlow.mPaddingTop = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_android_paddingRight) {
-                    this.mFlow.mResolvedPaddingRight = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mFlow.mResolvedPaddingRight = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_android_paddingBottom) {
-                    this.mFlow.mPaddingBottom = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mFlow.mPaddingBottom = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_wrapMode) {
-                    this.mFlow.mWrapMode = obtainStyledAttributes.getInt(index, 0);
+                    this.mFlow.mWrapMode = typedArrayObtainStyledAttributes.getInt(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_horizontalStyle) {
-                    this.mFlow.mHorizontalStyle = obtainStyledAttributes.getInt(index, 0);
+                    this.mFlow.mHorizontalStyle = typedArrayObtainStyledAttributes.getInt(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_verticalStyle) {
-                    this.mFlow.mVerticalStyle = obtainStyledAttributes.getInt(index, 0);
+                    this.mFlow.mVerticalStyle = typedArrayObtainStyledAttributes.getInt(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_firstHorizontalStyle) {
-                    this.mFlow.mFirstHorizontalStyle = obtainStyledAttributes.getInt(index, 0);
+                    this.mFlow.mFirstHorizontalStyle = typedArrayObtainStyledAttributes.getInt(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_lastHorizontalStyle) {
-                    this.mFlow.mLastHorizontalStyle = obtainStyledAttributes.getInt(index, 0);
+                    this.mFlow.mLastHorizontalStyle = typedArrayObtainStyledAttributes.getInt(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_firstVerticalStyle) {
-                    this.mFlow.mFirstVerticalStyle = obtainStyledAttributes.getInt(index, 0);
+                    this.mFlow.mFirstVerticalStyle = typedArrayObtainStyledAttributes.getInt(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_lastVerticalStyle) {
-                    this.mFlow.mLastVerticalStyle = obtainStyledAttributes.getInt(index, 0);
+                    this.mFlow.mLastVerticalStyle = typedArrayObtainStyledAttributes.getInt(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_horizontalBias) {
-                    this.mFlow.mHorizontalBias = obtainStyledAttributes.getFloat(index, 0.5f);
+                    this.mFlow.mHorizontalBias = typedArrayObtainStyledAttributes.getFloat(index, 0.5f);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_firstHorizontalBias) {
-                    this.mFlow.mFirstHorizontalBias = obtainStyledAttributes.getFloat(index, 0.5f);
+                    this.mFlow.mFirstHorizontalBias = typedArrayObtainStyledAttributes.getFloat(index, 0.5f);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_lastHorizontalBias) {
-                    this.mFlow.mLastHorizontalBias = obtainStyledAttributes.getFloat(index, 0.5f);
+                    this.mFlow.mLastHorizontalBias = typedArrayObtainStyledAttributes.getFloat(index, 0.5f);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_firstVerticalBias) {
-                    this.mFlow.mFirstVerticalBias = obtainStyledAttributes.getFloat(index, 0.5f);
+                    this.mFlow.mFirstVerticalBias = typedArrayObtainStyledAttributes.getFloat(index, 0.5f);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_lastVerticalBias) {
-                    this.mFlow.mLastVerticalBias = obtainStyledAttributes.getFloat(index, 0.5f);
+                    this.mFlow.mLastVerticalBias = typedArrayObtainStyledAttributes.getFloat(index, 0.5f);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_verticalBias) {
-                    this.mFlow.mVerticalBias = obtainStyledAttributes.getFloat(index, 0.5f);
+                    this.mFlow.mVerticalBias = typedArrayObtainStyledAttributes.getFloat(index, 0.5f);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_horizontalAlign) {
-                    this.mFlow.mHorizontalAlign = obtainStyledAttributes.getInt(index, 2);
+                    this.mFlow.mHorizontalAlign = typedArrayObtainStyledAttributes.getInt(index, 2);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_verticalAlign) {
-                    this.mFlow.mVerticalAlign = obtainStyledAttributes.getInt(index, 2);
+                    this.mFlow.mVerticalAlign = typedArrayObtainStyledAttributes.getInt(index, 2);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_horizontalGap) {
-                    this.mFlow.mHorizontalGap = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mFlow.mHorizontalGap = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_verticalGap) {
-                    this.mFlow.mVerticalGap = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    this.mFlow.mVerticalGap = typedArrayObtainStyledAttributes.getDimensionPixelSize(index, 0);
                 } else if (index == R.styleable.ConstraintLayout_Layout_flow_maxElementsWrap) {
-                    this.mFlow.mMaxElementsWrap = obtainStyledAttributes.getInt(index, -1);
+                    this.mFlow.mMaxElementsWrap = typedArrayObtainStyledAttributes.getInt(index, -1);
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
         this.mHelperWidget = this.mFlow;
         validateParams();

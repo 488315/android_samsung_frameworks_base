@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.RestrictedContinuationImpl;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class IntrinsicsKt__IntrinsicsJvmKt {
     /* JADX WARN: Multi-variable type inference failed */
@@ -63,9 +62,9 @@ public class IntrinsicsKt__IntrinsicsJvmKt {
     }
 
     public static Continuation intercepted(Continuation continuation) {
-        Continuation intercepted;
+        Continuation continuationIntercepted;
         ContinuationImpl continuationImpl = continuation instanceof ContinuationImpl ? (ContinuationImpl) continuation : null;
-        return (continuationImpl == null || (intercepted = continuationImpl.intercepted()) == null) ? continuation : intercepted;
+        return (continuationImpl == null || (continuationIntercepted = continuationImpl.intercepted()) == null) ? continuation : continuationIntercepted;
     }
 
     public static Object wrapWithContinuationImpl(Function2 function2, Object obj, final Continuation continuation) {

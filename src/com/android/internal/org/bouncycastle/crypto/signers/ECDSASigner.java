@@ -33,24 +33,28 @@ public class ECDSASigner implements ECConstants, DSAExt {
         this.kCalculator = dSAKCalculator;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0036  */
     @Override // com.android.internal.org.bouncycastle.crypto.DSA
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void init(boolean z, CipherParameters cipherParameters) {
-        SecureRandom secureRandom;
+        SecureRandom random;
         if (z) {
             if (cipherParameters instanceof ParametersWithRandom) {
                 ParametersWithRandom parametersWithRandom = (ParametersWithRandom) cipherParameters;
                 this.key = (ECPrivateKeyParameters) parametersWithRandom.getParameters();
-                secureRandom = parametersWithRandom.getRandom();
+                random = parametersWithRandom.getRandom();
                 CryptoServicesRegistrar.checkConstraints(Utils.getDefaultProperties("ECDSA", this.key, z));
-                this.random = initSecureRandom((z || this.kCalculator.isDeterministic()) ? false : true, secureRandom);
+                this.random = initSecureRandom((z || this.kCalculator.isDeterministic()) ? false : true, random);
             }
             this.key = (ECPrivateKeyParameters) cipherParameters;
         } else {
             this.key = (ECPublicKeyParameters) cipherParameters;
         }
-        secureRandom = null;
+        random = null;
         CryptoServicesRegistrar.checkConstraints(Utils.getDefaultProperties("ECDSA", this.key, z));
-        this.random = initSecureRandom((z || this.kCalculator.isDeterministic()) ? false : true, secureRandom);
+        this.random = initSecureRandom((z || this.kCalculator.isDeterministic()) ? false : true, random);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DSAExt
@@ -62,21 +66,21 @@ public class ECDSASigner implements ECConstants, DSAExt {
     public BigInteger[] generateSignature(byte[] bArr) {
         ECDomainParameters parameters = this.key.getParameters();
         BigInteger n = parameters.getN();
-        BigInteger calculateE = calculateE(n, bArr);
+        BigInteger bigIntegerCalculateE = calculateE(n, bArr);
         BigInteger d = ((ECPrivateKeyParameters) this.key).getD();
         if (this.kCalculator.isDeterministic()) {
             this.kCalculator.init(n, d, bArr);
         } else {
             this.kCalculator.init(n, this.random);
         }
-        ECMultiplier createBasePointMultiplier = createBasePointMultiplier();
+        ECMultiplier eCMultiplierCreateBasePointMultiplier = createBasePointMultiplier();
         while (true) {
-            BigInteger nextK = this.kCalculator.nextK();
-            BigInteger mod = createBasePointMultiplier.multiply(parameters.getG(), nextK).normalize().getAffineXCoord().toBigInteger().mod(n);
-            if (!mod.equals(ZERO)) {
-                BigInteger mod2 = BigIntegers.modOddInverse(n, nextK).multiply(calculateE.add(d.multiply(mod))).mod(n);
-                if (!mod2.equals(ZERO)) {
-                    return new BigInteger[]{mod, mod2};
+            BigInteger bigIntegerNextK = this.kCalculator.nextK();
+            BigInteger bigIntegerMod = eCMultiplierCreateBasePointMultiplier.multiply(parameters.getG(), bigIntegerNextK).normalize().getAffineXCoord().toBigInteger().mod(n);
+            if (!bigIntegerMod.equals(ZERO)) {
+                BigInteger bigIntegerMod2 = BigIntegers.modOddInverse(n, bigIntegerNextK).multiply(bigIntegerCalculateE.add(d.multiply(bigIntegerMod))).mod(n);
+                if (!bigIntegerMod2.equals(ZERO)) {
+                    return new BigInteger[]{bigIntegerMod, bigIntegerMod2};
                 }
             }
         }
@@ -88,18 +92,18 @@ public class ECDSASigner implements ECConstants, DSAExt {
         ECFieldElement denominator;
         ECDomainParameters parameters = this.key.getParameters();
         BigInteger n = parameters.getN();
-        BigInteger calculateE = calculateE(n, bArr);
+        BigInteger bigIntegerCalculateE = calculateE(n, bArr);
         if (bigInteger.compareTo(ONE) < 0 || bigInteger.compareTo(n) >= 0 || bigInteger2.compareTo(ONE) < 0 || bigInteger2.compareTo(n) >= 0) {
             return false;
         }
-        BigInteger modOddInverseVar = BigIntegers.modOddInverseVar(n, bigInteger2);
-        ECPoint sumOfTwoMultiplies = ECAlgorithms.sumOfTwoMultiplies(parameters.getG(), calculateE.multiply(modOddInverseVar).mod(n), ((ECPublicKeyParameters) this.key).getQ(), bigInteger.multiply(modOddInverseVar).mod(n));
-        if (sumOfTwoMultiplies.isInfinity()) {
+        BigInteger bigIntegerModOddInverseVar = BigIntegers.modOddInverseVar(n, bigInteger2);
+        ECPoint eCPointSumOfTwoMultiplies = ECAlgorithms.sumOfTwoMultiplies(parameters.getG(), bigIntegerCalculateE.multiply(bigIntegerModOddInverseVar).mod(n), ((ECPublicKeyParameters) this.key).getQ(), bigInteger.multiply(bigIntegerModOddInverseVar).mod(n));
+        if (eCPointSumOfTwoMultiplies.isInfinity()) {
             return false;
         }
-        ECCurve curve = sumOfTwoMultiplies.getCurve();
-        if (curve != null && (cofactor = curve.getCofactor()) != null && cofactor.compareTo(EIGHT) <= 0 && (denominator = getDenominator(curve.getCoordinateSystem(), sumOfTwoMultiplies)) != null && !denominator.isZero()) {
-            ECFieldElement xCoord = sumOfTwoMultiplies.getXCoord();
+        ECCurve curve = eCPointSumOfTwoMultiplies.getCurve();
+        if (curve != null && (cofactor = curve.getCofactor()) != null && cofactor.compareTo(EIGHT) <= 0 && (denominator = getDenominator(curve.getCoordinateSystem(), eCPointSumOfTwoMultiplies)) != null && !denominator.isZero()) {
+            ECFieldElement xCoord = eCPointSumOfTwoMultiplies.getXCoord();
             while (curve.isValidFieldElement(bigInteger)) {
                 if (curve.fromBigInteger(bigInteger).multiply(denominator).equals(xCoord)) {
                     return true;
@@ -108,14 +112,14 @@ public class ECDSASigner implements ECConstants, DSAExt {
             }
             return false;
         }
-        return sumOfTwoMultiplies.normalize().getAffineXCoord().toBigInteger().mod(n).equals(bigInteger);
+        return eCPointSumOfTwoMultiplies.normalize().getAffineXCoord().toBigInteger().mod(n).equals(bigInteger);
     }
 
     protected BigInteger calculateE(BigInteger bigInteger, byte[] bArr) {
-        int bitLength = bigInteger.bitLength();
+        int iBitLength = bigInteger.bitLength();
         int length = bArr.length * 8;
         BigInteger bigInteger2 = new BigInteger(1, bArr);
-        return bitLength < length ? bigInteger2.shiftRight(length - bitLength) : bigInteger2;
+        return iBitLength < length ? bigInteger2.shiftRight(length - iBitLength) : bigInteger2;
     }
 
     protected ECMultiplier createBasePointMultiplier() {

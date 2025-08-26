@@ -53,7 +53,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringNumberConversionsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AuthRippleController extends ViewController implements CoreStartable, KeyguardStateController.Callback, WakefulnessLifecycle.Observer {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -84,7 +83,6 @@ public final class AuthRippleController extends ViewController implements CoreSt
     public float udfpsRadius;
     public final WakefulnessLifecycle wakefulnessLifecycle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AuthRippleCommand implements Command {
         public AuthRippleCommand() {
         }
@@ -104,9 +102,9 @@ public final class AuthRippleController extends ViewController implements CoreSt
                 return;
             }
             String str = (String) list.get(0);
-            int hashCode = str.hashCode();
+            int iHashCode = str.hashCode();
             AuthRippleController authRippleController = AuthRippleController.this;
-            switch (hashCode) {
+            switch (iHashCode) {
                 case -1375934236:
                     if (str.equals("fingerprint")) {
                         printWriter.println("fingerprint ripple sensorLocation=" + authRippleController.fingerprintSensorLocation);
@@ -145,7 +143,6 @@ public final class AuthRippleController extends ViewController implements CoreSt
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -185,28 +182,28 @@ public final class AuthRippleController extends ViewController implements CoreSt
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onBiometricAcquired(BiometricSourceType biometricSourceType, int i) {
                 if (biometricSourceType == BiometricSourceType.FINGERPRINT && BiometricFingerprintConstants.shouldDisableUdfpsDisplayMode(i) && i != 0) {
-                    ((AuthRippleView) ((ViewController) AuthRippleController.this).mView).retractDwellRipple();
+                    ((AuthRippleView) ((ViewController) this.this$0).mView).retractDwellRipple();
                 }
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onBiometricAuthFailed(BiometricSourceType biometricSourceType) {
                 if (biometricSourceType == BiometricSourceType.FINGERPRINT) {
-                    ((AuthRippleView) ((ViewController) AuthRippleController.this).mView).retractDwellRipple();
+                    ((AuthRippleView) ((ViewController) this.this$0).mView).retractDwellRipple();
                 }
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onBiometricAuthenticated(int i, BiometricSourceType biometricSourceType, boolean z) {
                 if (biometricSourceType == BiometricSourceType.FINGERPRINT) {
-                    ((AuthRippleView) ((ViewController) AuthRippleController.this).mView).fadeDwellRipple();
+                    ((AuthRippleView) ((ViewController) this.this$0).mView).fadeDwellRipple();
                 }
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onKeyguardBouncerStateChanged(boolean z) {
                 if (z) {
-                    ((AuthRippleView) ((ViewController) AuthRippleController.this).mView).fadeDwellRipple();
+                    ((AuthRippleView) ((ViewController) this.this$0).mView).fadeDwellRipple();
                 }
             }
         };
@@ -214,19 +211,19 @@ public final class AuthRippleController extends ViewController implements CoreSt
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onThemeChanged() {
                 int i = AuthRippleController.$r8$clinit;
-                AuthRippleController.this.updateRippleColor();
+                this.this$0.updateRippleColor();
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onUiModeChanged() {
                 int i = AuthRippleController.$r8$clinit;
-                AuthRippleController.this.updateRippleColor();
+                this.this$0.updateRippleColor();
             }
         };
         this.udfpsControllerCallback = new UdfpsController.Callback() { // from class: com.android.systemui.biometrics.AuthRippleController$udfpsControllerCallback$1
             @Override // com.android.systemui.biometrics.UdfpsController.Callback
             public final void onFingerDown() {
-                AuthRippleController authRippleController = AuthRippleController.this;
+                AuthRippleController authRippleController = this.this$0;
                 if (authRippleController.keyguardUpdateMonitor.isFingerprintDetectionRunning()) {
                     AuthRippleController.access$showDwellRipple(authRippleController);
                 }
@@ -234,20 +231,20 @@ public final class AuthRippleController extends ViewController implements CoreSt
 
             @Override // com.android.systemui.biometrics.UdfpsController.Callback
             public final void onFingerUp() {
-                ((AuthRippleView) ((ViewController) AuthRippleController.this).mView).retractDwellRipple();
+                ((AuthRippleView) ((ViewController) this.this$0).mView).retractDwellRipple();
             }
         };
         this.authControllerCallback = new AuthController.Callback() { // from class: com.android.systemui.biometrics.AuthRippleController$authControllerCallback$1
             @Override // com.android.systemui.biometrics.AuthController.Callback
             public final void onAllAuthenticatorsRegistered(int i) {
                 int i2 = AuthRippleController.$r8$clinit;
-                AuthRippleController.this.updateUdfpsDependentParams();
+                this.this$0.updateUdfpsDependentParams();
             }
 
             @Override // com.android.systemui.biometrics.AuthController.Callback
             public final void onUdfpsLocationChanged(UdfpsOverlayParams udfpsOverlayParams) {
                 int i = AuthRippleController.$r8$clinit;
-                AuthRippleController.this.updateUdfpsDependentParams();
+                this.this$0.updateUdfpsDependentParams();
             }
         };
     }
@@ -259,64 +256,64 @@ public final class AuthRippleController extends ViewController implements CoreSt
         if (point != null) {
             ((AuthRippleView) authRippleController.mView).setFingerprintSensorLocation(point, authRippleController.udfpsRadius);
             final AuthRippleView authRippleView = (AuthRippleView) authRippleController.mView;
-            boolean isDozing = authRippleController.statusBarStateController.isDozing();
+            boolean zIsDozing = authRippleController.statusBarStateController.isDozing();
             Animator animator = authRippleView.unlockedRippleAnimator;
             if (animator == null || !animator.isRunning()) {
                 Animator animator2 = authRippleView.dwellPulseOutAnimator;
                 if (animator2 == null || !animator2.isRunning()) {
-                    if (isDozing) {
+                    if (zIsDozing) {
                         authRippleView.dwellShader.setColor(-1);
                     } else {
                         authRippleView.dwellShader.setColor(authRippleView.lockScreenColorVal);
                     }
                     DwellRippleShader dwellRippleShader = authRippleView.dwellShader;
                     dwellRippleShader.setColor(ColorUtils.setAlphaComponent(dwellRippleShader.color, 255));
-                    ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 0.8f);
-                    ofFloat.setInterpolator(Interpolators.LINEAR);
-                    ofFloat.setDuration(authRippleView.dwellPulseDuration);
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$startDwellRipple$dwellPulseOutRippleAnimator$1$1
+                    ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 0.8f);
+                    valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+                    valueAnimatorOfFloat.setDuration(authRippleView.dwellPulseDuration);
+                    valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$startDwellRipple$dwellPulseOutRippleAnimator$1$1
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                             long currentPlayTime = valueAnimator.getCurrentPlayTime();
-                            AuthRippleView.this.dwellShader.setProgress(((Float) valueAnimator.getAnimatedValue()).floatValue());
-                            AuthRippleView.this.dwellShader.setTime(currentPlayTime);
-                            AuthRippleView.this.invalidate();
+                            authRippleView.dwellShader.setProgress(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                            authRippleView.dwellShader.setTime(currentPlayTime);
+                            authRippleView.invalidate();
                         }
                     });
-                    ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.8f, 1.0f);
-                    ofFloat2.setInterpolator(Interpolators.LINEAR_OUT_SLOW_IN);
-                    ofFloat2.setDuration(authRippleView.dwellExpandDuration);
-                    ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$startDwellRipple$expandDwellRippleAnimator$1$1
+                    ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.8f, 1.0f);
+                    valueAnimatorOfFloat2.setInterpolator(Interpolators.LINEAR_OUT_SLOW_IN);
+                    valueAnimatorOfFloat2.setDuration(authRippleView.dwellExpandDuration);
+                    valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$startDwellRipple$expandDwellRippleAnimator$1$1
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                             long currentPlayTime = valueAnimator.getCurrentPlayTime();
-                            AuthRippleView.this.dwellShader.setProgress(((Float) valueAnimator.getAnimatedValue()).floatValue());
-                            AuthRippleView.this.dwellShader.setTime(currentPlayTime);
-                            AuthRippleView.this.invalidate();
+                            authRippleView.dwellShader.setProgress(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                            authRippleView.dwellShader.setTime(currentPlayTime);
+                            authRippleView.invalidate();
                         }
                     });
                     AnimatorSet animatorSet = new AnimatorSet();
-                    animatorSet.playSequentially(ofFloat, ofFloat2);
+                    animatorSet.playSequentially(valueAnimatorOfFloat, valueAnimatorOfFloat2);
                     animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.biometrics.AuthRippleView$startDwellRipple$1$1
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationEnd(Animator animator3) {
-                            AuthRippleView authRippleView2 = AuthRippleView.this;
+                            AuthRippleView authRippleView2 = authRippleView;
                             authRippleView2.drawDwell = false;
                             authRippleView2.invalidate();
                         }
 
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationStart(Animator animator3) {
-                            Animator animator4 = AuthRippleView.this.retractDwellAnimator;
+                            Animator animator4 = authRippleView.retractDwellAnimator;
                             if (animator4 != null) {
                                 animator4.cancel();
                             }
-                            Animator animator5 = AuthRippleView.this.fadeDwellAnimator;
+                            Animator animator5 = authRippleView.fadeDwellAnimator;
                             if (animator5 != null) {
                                 animator5.cancel();
                             }
-                            AuthRippleView.this.setVisibility(0);
-                            AuthRippleView.this.drawDwell = true;
+                            authRippleView.setVisibility(0);
+                            authRippleView.drawDwell = true;
                         }
                     });
                     animatorSet.start();
@@ -329,19 +326,19 @@ public final class AuthRippleController extends ViewController implements CoreSt
     public static final void access$showUnlockRippleInternal(AuthRippleController authRippleController, BiometricSourceType biometricSourceType) {
         boolean z = ((KeyguardStateControllerImpl) authRippleController.keyguardStateController).mShowing;
         boolean z2 = !z;
-        boolean isUnlockingWithBiometricAllowed = authRippleController.keyguardUpdateMonitor.isUnlockingWithBiometricAllowed(biometricSourceType);
-        boolean z3 = !isUnlockingWithBiometricAllowed;
+        boolean zIsUnlockingWithBiometricAllowed = authRippleController.keyguardUpdateMonitor.isUnlockingWithBiometricAllowed(biometricSourceType);
+        boolean z3 = !zIsUnlockingWithBiometricAllowed;
         KeyguardLogger keyguardLogger = authRippleController.logger;
-        if (!z || !isUnlockingWithBiometricAllowed) {
+        if (!z || !zIsUnlockingWithBiometricAllowed) {
             keyguardLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             KeyguardLogger$$ExternalSyntheticLambda0 keyguardLogger$$ExternalSyntheticLambda0 = new KeyguardLogger$$ExternalSyntheticLambda0(3);
             LogBuffer logBuffer = keyguardLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("AuthRippleController", logLevel, keyguardLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("AuthRippleController", logLevel, keyguardLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.bool1 = z2;
             logMessageImpl.bool2 = z3;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             return;
         }
         authRippleController.fingerprintSensorLocation = authRippleController.authController.mFingerprintSensorLocation;
@@ -354,9 +351,9 @@ public final class AuthRippleController extends ViewController implements CoreSt
             ((AuthRippleView) authRippleController.mView).setSensorLocation(point);
             int i = point.x;
             int i2 = point.y;
-            int max = Math.max(i, authRippleController.displayMetrics.widthPixels - i);
+            int iMax = Math.max(i, authRippleController.displayMetrics.widthPixels - i);
             int i3 = point.y;
-            authRippleController.circleReveal = new CircleReveal(i, i2, 0, Math.max(max, Math.max(i3, authRippleController.displayMetrics.heightPixels - i3)));
+            authRippleController.circleReveal = new CircleReveal(i, i2, 0, Math.max(iMax, Math.max(i3, authRippleController.displayMetrics.heightPixels - i3)));
             keyguardLogger.showingUnlockRippleAt(point.x, point.y, "Face unlock ripple");
             authRippleController.showUnlockedRipple();
             return;
@@ -366,9 +363,9 @@ public final class AuthRippleController extends ViewController implements CoreSt
             ((AuthRippleView) authRippleController.mView).setFingerprintSensorLocation(point2, authRippleController.udfpsRadius);
             int i4 = point2.x;
             int i5 = point2.y;
-            int max2 = Math.max(i4, authRippleController.displayMetrics.widthPixels - i4);
+            int iMax2 = Math.max(i4, authRippleController.displayMetrics.widthPixels - i4);
             int i6 = point2.y;
-            authRippleController.circleReveal = new CircleReveal(i4, i5, 0, Math.max(max2, Math.max(i6, authRippleController.displayMetrics.heightPixels - i6)));
+            authRippleController.circleReveal = new CircleReveal(i4, i5, 0, Math.max(iMax2, Math.max(i6, authRippleController.displayMetrics.heightPixels - i6)));
             keyguardLogger.showingUnlockRippleAt(point2.x, point2.y, "FP sensor radius: " + authRippleController.udfpsRadius);
             authRippleController.showUnlockedRipple();
         }
@@ -382,33 +379,33 @@ public final class AuthRippleController extends ViewController implements CoreSt
             if (valueAnimator != null) {
                 valueAnimator.cancel();
             }
-            final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.1f, 1.0f);
-            ofFloat.setInterpolator(Interpolators.LINEAR_OUT_SLOW_IN);
-            ofFloat.setDuration(800L);
-            ofFloat.setStartDelay(keyguardStateControllerImpl.mKeyguardFadingAwayDelay);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleController$onKeyguardFadingAwayChanged$1$1
+            final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.1f, 1.0f);
+            valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR_OUT_SLOW_IN);
+            valueAnimatorOfFloat.setDuration(800L);
+            valueAnimatorOfFloat.setStartDelay(keyguardStateControllerImpl.mKeyguardFadingAwayDelay);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleController$onKeyguardFadingAwayChanged$1$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                    AuthRippleController authRippleController = AuthRippleController.this;
+                    AuthRippleController authRippleController = this.this$0;
                     if (Intrinsics.areEqual(authRippleController.lightRevealScrim.revealEffect, authRippleController.circleReveal)) {
-                        AuthRippleController.this.lightRevealScrim.setRevealAmount(((Float) valueAnimator2.getAnimatedValue()).floatValue());
+                        this.this$0.lightRevealScrim.setRevealAmount(((Float) valueAnimator2.getAnimatedValue()).floatValue());
                     } else {
-                        ofFloat.cancel();
+                        valueAnimatorOfFloat.cancel();
                     }
                 }
             });
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.biometrics.AuthRippleController$onKeyguardFadingAwayChanged$1$2
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.biometrics.AuthRippleController$onKeyguardFadingAwayChanged$1$2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    AuthRippleController authRippleController = AuthRippleController.this;
+                    AuthRippleController authRippleController = this.this$0;
                     if (Intrinsics.areEqual(authRippleController.lightRevealScrim.revealEffect, authRippleController.circleReveal)) {
-                        AuthRippleController.this.lightRevealScrim.setRevealEffect(LiftReveal.INSTANCE);
+                        this.this$0.lightRevealScrim.setRevealEffect(LiftReveal.INSTANCE);
                     }
-                    AuthRippleController.this.lightRevealScrimAnimator = null;
+                    this.this$0.lightRevealScrimAnimator = null;
                 }
             });
-            ofFloat.start();
-            this.lightRevealScrimAnimator = ofFloat;
+            valueAnimatorOfFloat.start();
+            this.lightRevealScrimAnimator = valueAnimatorOfFloat;
             this.startLightRevealScrimOnKeyguardFadingAway = false;
         }
     }
@@ -435,7 +432,7 @@ public final class AuthRippleController extends ViewController implements CoreSt
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i = AuthRippleController.$r8$clinit;
-                return AuthRippleController.this.new AuthRippleCommand();
+                return this.f$0.new AuthRippleCommand();
             }
         });
     }
@@ -468,7 +465,7 @@ public final class AuthRippleController extends ViewController implements CoreSt
             this.startLightRevealScrimOnKeyguardFadingAway = true;
         }
         final AuthRippleView authRippleView = (AuthRippleView) this.mView;
-        final Runnable runnable = new Runnable() { // from class: com.android.systemui.biometrics.AuthRippleController$showUnlockedRipple$2
+        final Runnable runnable = new Runnable() { // from class: com.android.systemui.biometrics.AuthRippleController.showUnlockedRipple.2
             @Override // java.lang.Runnable
             public final void run() {
                 AuthRippleController authRippleController = AuthRippleController.this;
@@ -479,39 +476,39 @@ public final class AuthRippleController extends ViewController implements CoreSt
         if (animator != null) {
             animator.cancel();
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(800L);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$startUnlockedRipple$rippleAnimator$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(800L);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthRippleView$startUnlockedRipple$rippleAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 long currentPlayTime = valueAnimator.getCurrentPlayTime();
-                AuthRippleView.this.rippleShader.setRawProgress(((Float) valueAnimator.getAnimatedValue()).floatValue());
-                AuthRippleView.this.rippleShader.setFloatUniform("in_time", currentPlayTime);
-                AuthRippleView.this.invalidate();
+                authRippleView.rippleShader.setRawProgress(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                authRippleView.rippleShader.setFloatUniform("in_time", currentPlayTime);
+                authRippleView.invalidate();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.biometrics.AuthRippleView$startUnlockedRipple$1$1
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.biometrics.AuthRippleView$startUnlockedRipple$1$1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator2) {
                 Runnable runnable2 = runnable;
                 if (runnable2 != null) {
                     runnable2.run();
                 }
-                AuthRippleView authRippleView2 = AuthRippleView.this;
+                AuthRippleView authRippleView2 = authRippleView;
                 authRippleView2.drawRipple = false;
                 authRippleView2.setVisibility(8);
-                AuthRippleView.this.unlockedRippleAnimator = null;
+                authRippleView.unlockedRippleAnimator = null;
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator2) {
-                AuthRippleView authRippleView2 = AuthRippleView.this;
+                AuthRippleView authRippleView2 = authRippleView;
                 authRippleView2.drawRipple = true;
                 authRippleView2.setVisibility(0);
             }
         });
-        authRippleView.unlockedRippleAnimator = ofFloat;
-        ofFloat.start();
+        authRippleView.unlockedRippleAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.start();
     }
 
     public final void updateRippleColor() {

@@ -2,6 +2,7 @@ package com.android.keyguard;
 
 import android.animation.AnimatorSet;
 import android.animation.ValueAnimator;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -31,7 +32,6 @@ import com.android.systemui.vibrate.VibrationUtil;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class KeyguardPinBasedInputViewController extends KeyguardSecAbsKeyInputViewController implements InputManager.InputDeviceListener {
     public final KeyguardPinBasedInputViewController$$ExternalSyntheticLambda1 mActionButtonTouchListener;
@@ -70,7 +70,7 @@ public abstract class KeyguardPinBasedInputViewController extends KeyguardSecAbs
         this.mOnKeyListener = new View.OnKeyListener() { // from class: com.android.keyguard.KeyguardPinBasedInputViewController$$ExternalSyntheticLambda0
             @Override // android.view.View.OnKeyListener
             public final boolean onKey(View view, int i, KeyEvent keyEvent) {
-                return KeyguardPinBasedInputViewController.$r8$lambda$oP84JnP5pIKR9G_QPByy_vW6qno(KeyguardPinBasedInputViewController.this, i, keyEvent);
+                return KeyguardPinBasedInputViewController.$r8$lambda$oP84JnP5pIKR9G_QPByy_vW6qno(this.f$0, i, keyEvent);
             }
         };
         this.mActionButtonTouchListener = new KeyguardPinBasedInputViewController$$ExternalSyntheticLambda1(this, 0);
@@ -114,14 +114,14 @@ public abstract class KeyguardPinBasedInputViewController extends KeyguardSecAbs
         this.mPasswordEntry.mUserActivityListener = new BaseSecPasswordTextView.UserActivityListener() { // from class: com.android.keyguard.KeyguardPinBasedInputViewController$$ExternalSyntheticLambda3
             @Override // com.android.keyguard.BaseSecPasswordTextView.UserActivityListener
             public final void onUserActivity() {
-                KeyguardPinBasedInputViewController.this.onUserInput();
+                this.f$0.onUserInput();
             }
         };
-        View findViewById = ((KeyguardPinBasedInputView) this.mView).findViewById(R.id.delete_button);
+        View viewFindViewById = ((KeyguardPinBasedInputView) this.mView).findViewById(R.id.delete_button);
         bouncerHapticPlayer.getClass();
-        findViewById.setOnTouchListener(this.mActionButtonTouchListener);
+        viewFindViewById.setOnTouchListener(this.mActionButtonTouchListener);
         final int i2 = 0;
-        findViewById.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.keyguard.KeyguardPinBasedInputViewController$$ExternalSyntheticLambda4
+        viewFindViewById.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.keyguard.KeyguardPinBasedInputViewController$$ExternalSyntheticLambda4
             public final /* synthetic */ KeyguardPinBasedInputViewController f$0;
 
             {
@@ -148,18 +148,18 @@ public abstract class KeyguardPinBasedInputViewController extends KeyguardSecAbs
                 }
             }
         });
-        findViewById.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.keyguard.KeyguardPinBasedInputViewController$$ExternalSyntheticLambda5
+        viewFindViewById.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.keyguard.KeyguardPinBasedInputViewController$$ExternalSyntheticLambda5
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
-                KeyguardPinBasedInputViewController.$r8$lambda$_RYmZEuSJUr6f2BKc1DemUlP7dI(KeyguardPinBasedInputViewController.this);
+                KeyguardPinBasedInputViewController.$r8$lambda$_RYmZEuSJUr6f2BKc1DemUlP7dI(this.f$0);
                 return true;
             }
         });
-        View findViewById2 = ((KeyguardPinBasedInputView) this.mView).findViewById(R.id.key_enter);
-        if (findViewById2 != null) {
-            findViewById2.setOnTouchListener(this.mActionButtonTouchListener);
+        View viewFindViewById2 = ((KeyguardPinBasedInputView) this.mView).findViewById(R.id.key_enter);
+        if (viewFindViewById2 != null) {
+            viewFindViewById2.setOnTouchListener(this.mActionButtonTouchListener);
             final int i3 = 1;
-            findViewById2.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.keyguard.KeyguardPinBasedInputViewController$$ExternalSyntheticLambda4
+            viewFindViewById2.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.keyguard.KeyguardPinBasedInputViewController$$ExternalSyntheticLambda4
                 public final /* synthetic */ KeyguardPinBasedInputViewController f$0;
 
                 {
@@ -189,16 +189,16 @@ public abstract class KeyguardPinBasedInputViewController extends KeyguardSecAbs
         }
         JavaAdapterKt.collectFlow(this.mPasswordEntry, this.mKeyguardKeyboardInteractor.isAnyKeyboardConnected, new Consumer() { // from class: com.android.keyguard.KeyguardPinBasedInputViewController$$ExternalSyntheticLambda7
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                KeyguardPinBasedInputViewController keyguardPinBasedInputViewController = KeyguardPinBasedInputViewController.this;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+            public final void accept(Object obj) throws Resources.NotFoundException {
+                KeyguardPinBasedInputViewController keyguardPinBasedInputViewController = this.f$0;
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 Drawable background = keyguardPinBasedInputViewController.mPasswordEntry.getBackground();
                 if (background instanceof StateListDrawable) {
                     Drawable stateDrawable = ((StateListDrawable) background).getStateDrawable(0);
                     if (stateDrawable instanceof GradientDrawable) {
                         GradientDrawable gradientDrawable = (GradientDrawable) stateDrawable;
                         int color = keyguardPinBasedInputViewController.getResources().getColor(R.color.bouncer_password_focus_color);
-                        if (booleanValue) {
+                        if (zBooleanValue) {
                             gradientDrawable.setStroke((int) TypedValue.applyDimension(1, 3.0f, keyguardPinBasedInputViewController.getResources().getDisplayMetrics()), color);
                         } else {
                             gradientDrawable.setStroke(0, color);
@@ -224,6 +224,7 @@ public abstract class KeyguardPinBasedInputViewController extends KeyguardSecAbs
 
     @Override // com.android.keyguard.KeyguardAbsKeyInputViewController
     public void resetState() {
+        this.mMessageAreaController.setMessage(getInitialMessageResId());
         ((KeyguardPinBasedInputView) this.mView).setPasswordEntryEnabled(true);
     }
 
@@ -247,10 +248,10 @@ public abstract class KeyguardPinBasedInputViewController extends KeyguardSecAbs
             final View view = (View) arrayList2.get(i5);
             AnimatorSet animatorSet2 = new AnimatorSet();
             animatorSet2.setStartDelay(i4);
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.8f);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.8f);
             Interpolator interpolator = Interpolators.STANDARD;
-            ofFloat.setInterpolator(interpolator);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardPinBasedInputView$$ExternalSyntheticLambda0
+            valueAnimatorOfFloat.setInterpolator(interpolator);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardPinBasedInputView$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                     int i6 = i;
@@ -269,10 +270,10 @@ public abstract class KeyguardPinBasedInputViewController extends KeyguardSecAbs
                     }
                 }
             });
-            ofFloat.setDuration(50L);
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.8f, 1.0f);
-            ofFloat2.setInterpolator(interpolator);
-            ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardPinBasedInputView$$ExternalSyntheticLambda0
+            valueAnimatorOfFloat.setDuration(50L);
+            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.8f, 1.0f);
+            valueAnimatorOfFloat2.setInterpolator(interpolator);
+            valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.keyguard.KeyguardPinBasedInputView$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                     int i6 = i2;
@@ -291,8 +292,8 @@ public abstract class KeyguardPinBasedInputViewController extends KeyguardSecAbs
                     }
                 }
             });
-            ofFloat2.setDuration(617L);
-            animatorSet2.playSequentially(ofFloat, ofFloat2);
+            valueAnimatorOfFloat2.setDuration(617L);
+            animatorSet2.playSequentially(valueAnimatorOfFloat, valueAnimatorOfFloat2);
             arrayList.add(animatorSet2);
             i4 += 33;
         }

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -76,7 +77,6 @@ import com.samsung.android.sdk.routines.v3.data.ConfigurationResult;
 import com.samsung.android.sdk.routines.v3.data.ParameterValues;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingStyleActivity extends AppCompatActivity implements View.OnClickListener {
     public static boolean sConfigured = false;
@@ -194,16 +194,16 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
                     }
                     edgeLightingStyleActivity2.mAnimatorSet = new AnimatorSet();
                     float f = -edgeLightingStyleActivity2.getResources().getDimensionPixelSize(R.dimen.setting_edge_lighting_style_transition_height);
-                    ObjectAnimator ofFloat = ObjectAnimator.ofFloat(edgeLightingStyleActivity2.mMainRoundedLayout, "translationY", 0.0f, f);
-                    ofFloat.setDuration(300L);
-                    ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(edgeLightingStyleActivity2.mMainRoundedLayout, "alpha", 1.0f, 0.0f);
-                    ofFloat2.setDuration(150L);
-                    ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(edgeLightingStyleActivity2.mActionBar, "translationY", 0.0f, f);
-                    ofFloat3.setDuration(300L);
-                    ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(edgeLightingStyleActivity2.mActionBar, "alpha", 1.0f, 0.0f);
-                    ofFloat4.setDuration(150L);
+                    ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(edgeLightingStyleActivity2.mMainRoundedLayout, "translationY", 0.0f, f);
+                    objectAnimatorOfFloat.setDuration(300L);
+                    ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(edgeLightingStyleActivity2.mMainRoundedLayout, "alpha", 1.0f, 0.0f);
+                    objectAnimatorOfFloat2.setDuration(150L);
+                    ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(edgeLightingStyleActivity2.mActionBar, "translationY", 0.0f, f);
+                    objectAnimatorOfFloat3.setDuration(300L);
+                    ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(edgeLightingStyleActivity2.mActionBar, "alpha", 1.0f, 0.0f);
+                    objectAnimatorOfFloat4.setDuration(150L);
                     edgeLightingStyleActivity2.mAnimatorSet.setInterpolator(new PathInterpolator(0.17f, 0.17f, 0.2f, 1.0f));
-                    edgeLightingStyleActivity2.mAnimatorSet.playTogether(ofFloat3, ofFloat, ofFloat4, ofFloat2);
+                    edgeLightingStyleActivity2.mAnimatorSet.playTogether(objectAnimatorOfFloat3, objectAnimatorOfFloat, objectAnimatorOfFloat4, objectAnimatorOfFloat2);
                     edgeLightingStyleActivity2.mAnimatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity.5
                         @Override // android.animation.Animator.AnimatorListener
                         public final void onAnimationEnd(Animator animator) {
@@ -277,7 +277,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
     public AnimatorSet mAnimatorSet = null;
     public AnonymousClass6 mTabListener = new TabLayout.OnTabSelectedListener() { // from class: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity.6
         @Override // com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-        public final void onTabSelected(TabLayout.Tab tab) {
+        public final void onTabSelected(TabLayout.Tab tab) throws Resources.NotFoundException {
             int i = tab.position;
             EdgeLightingStyleActivity edgeLightingStyleActivity = EdgeLightingStyleActivity.this;
             Slog.d(edgeLightingStyleActivity.TAG, "onTabSelected: position=" + i);
@@ -296,7 +296,6 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity$10, reason: invalid class name */
     public class AnonymousClass10 implements SeslColorPickerDialog.OnColorSetListener {
         public AnonymousClass10() {
@@ -315,22 +314,21 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
             if (string == null || string.isEmpty()) {
                 Settings.Global.putString(applicationContext.getContentResolver(), "edgelighting_recently_used_color", i + ";");
             } else {
-                String[] split = string.split(";");
-                int length = split.length < 6 ? split.length : 6;
-                String str = "";
+                String[] strArrSplit = string.split(";");
+                int length = strArrSplit.length < 6 ? strArrSplit.length : 6;
+                String strM = "";
                 for (int i2 = 0; i2 < length; i2++) {
-                    if (!split[i2].equals(Integer.toString(i))) {
-                        str = TransitionKt$$ExternalSyntheticOutline0.m(PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str), split[i2], ";");
+                    if (!strArrSplit[i2].equals(Integer.toString(i))) {
+                        strM = TransitionKt$$ExternalSyntheticOutline0.m(PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM), strArrSplit[i2], ";");
                     }
                 }
-                Settings.Global.putString(applicationContext.getContentResolver(), "edgelighting_recently_used_color", i + ";" + str);
+                Settings.Global.putString(applicationContext.getContentResolver(), "edgelighting_recently_used_color", i + ";" + strM);
             }
             edgeLightingStyleActivity.mSelectedColorIndex = 99;
             edgeLightingStyleActivity.mColorAdapter.notifyDataSetChanged();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity$13, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass13 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$edgelighting$data$style$EdgeLightingStyleOption;
@@ -353,7 +351,6 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity$9, reason: invalid class name */
     public class AnonymousClass9 {
         public AnonymousClass9() {
@@ -376,31 +373,30 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ColorListAdapter extends BaseAdapter {
         public boolean mAreDisabledAll;
         public final AnonymousClass1 mOnColorClickListener = new View.OnClickListener() { // from class: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity.ColorListAdapter.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 if (view.getTag() != null) {
-                    int intValue = ((Integer) view.getTag()).intValue();
-                    if (intValue == 99) {
+                    int iIntValue = ((Integer) view.getTag()).intValue();
+                    if (iIntValue == 99) {
                         EdgeLightingStyleActivity edgeLightingStyleActivity = EdgeLightingStyleActivity.this;
                         edgeLightingStyleActivity.mSelectedColor = null;
                         edgeLightingStyleActivity.showColorPickerDialog();
                         return;
                     }
                     EdgeLightingStyleActivity edgeLightingStyleActivity2 = EdgeLightingStyleActivity.this;
-                    if (edgeLightingStyleActivity2.mSelectedColorIndex != intValue) {
+                    if (edgeLightingStyleActivity2.mSelectedColorIndex != iIntValue) {
                         view.setContentDescription(edgeLightingStyleActivity2.getString(R.string.edge_lighting_color_selected_tts));
                         ColorListAdapter colorListAdapter = ColorListAdapter.this;
-                        EdgeLightingStyleActivity.this.mSelectedColorIndex = intValue;
+                        EdgeLightingStyleActivity.this.mSelectedColorIndex = iIntValue;
                         colorListAdapter.notifyDataSetChanged();
                         Slog.i(EdgeLightingStyleActivity.this.TAG, " onclick select index : " + EdgeLightingStyleActivity.this.mSelectedColorIndex);
                     }
                     EdgeLightingStyleActivity edgeLightingStyleActivity3 = EdgeLightingStyleActivity.this;
                     if (edgeLightingStyleActivity3.mLightingController != null) {
-                        EdgeLightingStyleActivity.m2562$$Nest$mupdatePreviewEdgeLighting(edgeLightingStyleActivity3);
+                        EdgeLightingStyleActivity.m2579$$Nest$mupdatePreviewEdgeLighting(edgeLightingStyleActivity3);
                     } else {
                         edgeLightingStyleActivity3.showPreviewEdgeLighting(new int[]{edgeLightingStyleActivity3.getEdgeLightingColor()});
                     }
@@ -502,19 +498,17 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         @Override // android.widget.BaseAdapter
         public final void notifyDataSetChanged() {
             EdgeLightingStyleActivity edgeLightingStyleActivity = EdgeLightingStyleActivity.this;
-            EdgeLightingStyleActivity.m2561$$Nest$msetDynamicWidth(edgeLightingStyleActivity, edgeLightingStyleActivity.mColorGridView, 6);
+            EdgeLightingStyleActivity.m2578$$Nest$msetDynamicWidth(edgeLightingStyleActivity, edgeLightingStyleActivity.mColorGridView, 6);
             super.notifyDataSetChanged();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ColorListViewHolder {
         public RelativeLayout container;
         public Button iconView;
         public ImageView selectIV;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EdgeLightingStyleEffectAdapter extends BaseAdapter {
         public final ArrayList mEdgeLightingStyleList = new ArrayList();
         public final AnonymousClass1 mEffectOnClickListener = new View.OnClickListener() { // from class: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity.EdgeLightingStyleEffectAdapter.1
@@ -550,7 +544,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
                 if (edgeLightingStyle.mIsSupport) {
                     if (EdgeLightingStyleActivity.this.mIsStartByRoutine) {
                         String str = edgeLightingStyle.mKey;
-                        if (!"preload/heart".equals(str) && !"preload/fireworks".equals(str) && !"preload/eclipse".equals(str)) {
+                        if ("preload/heart".equals(str) || "preload/fireworks".equals(str) || "preload/eclipse".equals(str)) {
                         }
                     }
                     this.mEdgeLightingStyleList.add(edgeLightingStyle);
@@ -642,12 +636,11 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
             gridView.setNumColumns(edgeLightingStyleActivity.calculateColumnCount(gridView, this.mEdgeLightingStyleList.size()));
             EdgeLightingStyleActivity edgeLightingStyleActivity2 = EdgeLightingStyleActivity.this;
             GridView gridView2 = edgeLightingStyleActivity2.mEffectGridView;
-            EdgeLightingStyleActivity.m2561$$Nest$msetDynamicWidth(edgeLightingStyleActivity2, gridView2, edgeLightingStyleActivity2.calculateColumnCount(gridView2, this.mEdgeLightingStyleList.size()));
+            EdgeLightingStyleActivity.m2578$$Nest$msetDynamicWidth(edgeLightingStyleActivity2, gridView2, edgeLightingStyleActivity2.calculateColumnCount(gridView2, this.mEdgeLightingStyleList.size()));
             super.notifyDataSetChanged();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EffectListViewHolder {
         public ImageView checkIv;
         public ImageView effectIv;
@@ -656,7 +649,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
     }
 
     /* renamed from: -$$Nest$msetDynamicWidth, reason: not valid java name */
-    public static void m2561$$Nest$msetDynamicWidth(EdgeLightingStyleActivity edgeLightingStyleActivity, GridView gridView, int i) {
+    public static void m2578$$Nest$msetDynamicWidth(EdgeLightingStyleActivity edgeLightingStyleActivity, GridView gridView, int i) {
         ListAdapter adapter;
         View view;
         edgeLightingStyleActivity.getClass();
@@ -673,7 +666,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
     }
 
     /* renamed from: -$$Nest$mupdatePreviewEdgeLighting, reason: not valid java name */
-    public static void m2562$$Nest$mupdatePreviewEdgeLighting(EdgeLightingStyleActivity edgeLightingStyleActivity) {
+    public static void m2579$$Nest$mupdatePreviewEdgeLighting(EdgeLightingStyleActivity edgeLightingStyleActivity) {
         if (edgeLightingStyleActivity.mLightingController != null) {
             int[] iArr = {edgeLightingStyleActivity.getEdgeLightingColor()};
             EdgeEffectInfo edgeEffectInfo = edgeLightingStyleActivity.mPreviewEffectInfo;
@@ -691,23 +684,23 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
     }
 
-    public final int calculateColumnCount(GridView gridView, int i) {
+    public final int calculateColumnCount(GridView gridView, int i) throws Resources.NotFoundException {
         if (gridView != null && gridView.getAdapter() != null) {
-            int i2 = getResources().getDisplayMetrics().widthPixels;
+            int dimensionPixelSize = getResources().getDisplayMetrics().widthPixels;
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) this.mMainRoundedLayout.getLayoutParams();
-            if (i2 < getResources().getDimensionPixelOffset(R.dimen.settings_edge_lighting_style_large_screen_point)) {
+            if (dimensionPixelSize < getResources().getDimensionPixelOffset(R.dimen.settings_edge_lighting_style_large_screen_point)) {
                 layoutParams.width = -1;
             } else {
-                i2 = getResources().getDimensionPixelSize(R.dimen.settings_edge_lighting_style_root_view_large_screen_width);
-                layoutParams.width = i2;
+                dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.settings_edge_lighting_style_root_view_large_screen_width);
+                layoutParams.width = dimensionPixelSize;
             }
             View view = gridView.getAdapter().getView(0, null, gridView);
             gridView.measure(0, 0);
             view.measure(0, 0);
-            this.mEdgeLightingEffectColumn = (i2 - getResources().getDimensionPixelSize(R.dimen.settings_edge_lighting_style_color_option_custom_color_margin_start)) / (gridView.getHorizontalSpacing() + view.getMeasuredWidth());
+            this.mEdgeLightingEffectColumn = (dimensionPixelSize - getResources().getDimensionPixelSize(R.dimen.settings_edge_lighting_style_color_option_custom_color_margin_start)) / (gridView.getHorizontalSpacing() + view.getMeasuredWidth());
         }
-        int i3 = this.mEdgeLightingEffectColumn;
-        return i <= i3 ? i : i <= i3 * 2 ? i3 : i % 2 == 0 ? i / 2 : (i / 2) + 1;
+        int i2 = this.mEdgeLightingEffectColumn;
+        return i <= i2 ? i : i <= i2 * 2 ? i2 : i % 2 == 0 ? i / 2 : (i / 2) + 1;
     }
 
     public final int getCustomColor(boolean z) {
@@ -796,7 +789,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
                     if (edgeLightingStyleActivity.mLightingController == null) {
                         edgeLightingStyleActivity.showPreviewEdgeLighting(new int[]{edgeLightingStyleActivity.getEdgeLightingColor()});
                     } else {
-                        EdgeLightingStyleActivity.m2562$$Nest$mupdatePreviewEdgeLighting(edgeLightingStyleActivity);
+                        EdgeLightingStyleActivity.m2579$$Nest$mupdatePreviewEdgeLighting(edgeLightingStyleActivity);
                     }
                 }
             }
@@ -851,14 +844,14 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
             sb2.append(";" + Integer.toString(this.mCurDuration));
             sb2.append(";" + Integer.toString(this.mRoutineEffectColor));
             Slog.d(this.TAG, "sendCurrentSettingToRoutine() data=[" + ((Object) sb) + "]");
-            String[] split = sb2.toString().split(";");
+            String[] strArrSplit = sb2.toString().split(";");
             ParameterValues parameterValues = new ParameterValues();
-            parameterValues.put("effect_key", split[0]);
-            parameterValues.put("color_key", split[1]);
-            parameterValues.put("transparency_key", split[2]);
-            parameterValues.put("thickness_key", split[3]);
-            parameterValues.put("duration_key", split[4]);
-            parameterValues.put("color_value_key", split[5]);
+            parameterValues.put("effect_key", strArrSplit[0]);
+            parameterValues.put("color_key", strArrSplit[1]);
+            parameterValues.put("transparency_key", strArrSplit[2]);
+            parameterValues.put("thickness_key", strArrSplit[3]);
+            parameterValues.put("duration_key", strArrSplit[4]);
+            parameterValues.put("color_value_key", strArrSplit[5]);
             new ConfigurationResult.Builder();
             ConfigurationResult configurationResult = new ConfigurationResult(parameterValues);
             Intent intent = new Intent();
@@ -906,13 +899,13 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         }
         SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences(SystemUIAnalytics.EDGE_LIGHTING_PREF_NAME, 0);
         if (sharedPreferences != null) {
-            SharedPreferences.Editor edit = sharedPreferences.edit();
-            edit.putString(SystemUIAnalytics.EDGE_LIGHTING_STATUS_STYLE_EFFECT, Utils.getEffectEnglishName(this.mCurEdgeStyle.getKey()));
-            edit.putString(SystemUIAnalytics.EDGE_LIGHTING_STATUS_STYLE_COLOR, Utils.getColorName(this.mSelectedColorIndex));
-            edit.putInt(SystemUIAnalytics.EDGE_LIGHTING_STATUS_STYLE_TRANSPARENCY, this.mCurTransparency / 5);
-            edit.putInt(SystemUIAnalytics.EDGE_LIGHTING_STATUS_STYLE_WITDH, this.mCurThickness);
-            edit.putInt(SystemUIAnalytics.EDGE_LIGHTING_STATUS_DURATION, this.mCurDuration);
-            edit.apply();
+            SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+            editorEdit.putString(SystemUIAnalytics.EDGE_LIGHTING_STATUS_STYLE_EFFECT, Utils.getEffectEnglishName(this.mCurEdgeStyle.getKey()));
+            editorEdit.putString(SystemUIAnalytics.EDGE_LIGHTING_STATUS_STYLE_COLOR, Utils.getColorName(this.mSelectedColorIndex));
+            editorEdit.putInt(SystemUIAnalytics.EDGE_LIGHTING_STATUS_STYLE_TRANSPARENCY, this.mCurTransparency / 5);
+            editorEdit.putInt(SystemUIAnalytics.EDGE_LIGHTING_STATUS_STYLE_WITDH, this.mCurThickness);
+            editorEdit.putInt(SystemUIAnalytics.EDGE_LIGHTING_STATUS_DURATION, this.mCurDuration);
+            editorEdit.apply();
         }
         Slog.d(this.TAG, sb3.toString());
         finish();
@@ -942,7 +935,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
     }
 
     @Override // androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException, NumberFormatException {
         super.onCreate(bundle);
         if (!sConfigured) {
             EdgeLightingAnalytics.initEdgeLightingAnalyticsStates(getApplication());
@@ -972,31 +965,31 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
             Intent intent = getIntent();
             String stringExtra = intent != null ? intent.getStringExtra("intent_params") : null;
             if (stringExtra != null) {
-                String[] split = stringExtra.split(";");
-                String str = split[0];
-                int parseInt = Integer.parseInt(split[1]);
-                int parseInt2 = Integer.parseInt(split[2]);
-                int parseInt3 = Integer.parseInt(split[3]);
-                int parseInt4 = Integer.parseInt(split[4]);
-                int parseInt5 = Integer.parseInt(split[5]);
-                EdgeLightingStyle edgeLightingStyle = (EdgeLightingStyle) EdgeLightingStyleManager.getInstance().mStyleHashMap.get(str);
-                this.mCurEdgeStyle = edgeLightingStyle;
-                if (edgeLightingStyle == null) {
-                    edgeLightingStyle = EdgeLightingStyleManager.getInstance().getDefalutStyle();
+                String[] strArrSplit = stringExtra.split(";");
+                String str = strArrSplit[0];
+                int i2 = Integer.parseInt(strArrSplit[1]);
+                int i3 = Integer.parseInt(strArrSplit[2]);
+                int i4 = Integer.parseInt(strArrSplit[3]);
+                int i5 = Integer.parseInt(strArrSplit[4]);
+                int i6 = Integer.parseInt(strArrSplit[5]);
+                EdgeLightingStyle defalutStyle = (EdgeLightingStyle) EdgeLightingStyleManager.getInstance().mStyleHashMap.get(str);
+                this.mCurEdgeStyle = defalutStyle;
+                if (defalutStyle == null) {
+                    defalutStyle = EdgeLightingStyleManager.getInstance().getDefalutStyle();
                 }
-                this.mCurEdgeStyle = edgeLightingStyle;
-                this.mSelectedColorIndex = parseInt;
-                this.mCurThickness = parseInt3;
-                this.mCurTransparency = parseInt2;
-                this.mCurDuration = parseInt4;
-                this.mRoutineEffectColor = parseInt5;
+                this.mCurEdgeStyle = defalutStyle;
+                this.mSelectedColorIndex = i2;
+                this.mCurThickness = i4;
+                this.mCurTransparency = i3;
+                this.mCurDuration = i5;
+                this.mRoutineEffectColor = i6;
                 String str2 = this.TAG;
-                StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(parseInt, "loadRoutineEdgeLightingSetting() : type=", str, ",color=", ",alpha=");
-                ViewPager$$ExternalSyntheticOutline0.m(m888m, parseInt2, ",width=", parseInt3, ",time=");
-                m888m.append(parseInt4);
-                m888m.append(",colorValue=");
-                m888m.append(parseInt5);
-                Slog.d(str2, m888m.toString());
+                StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i2, "loadRoutineEdgeLightingSetting() : type=", str, ",color=", ",alpha=");
+                ViewPager$$ExternalSyntheticOutline0.m(sbM890m, i3, ",width=", i4, ",time=");
+                sbM890m.append(i5);
+                sbM890m.append(",colorValue=");
+                sbM890m.append(i6);
+                Slog.d(str2, sbM890m.toString());
             } else {
                 this.mCurEdgeStyle = EdgeLightingStyleManager.getInstance().getDefalutStyle();
                 this.mSelectedColorIndex = 3;
@@ -1047,8 +1040,8 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         if (tabLayout2.tabTextColors != colorStateList) {
             tabLayout2.tabTextColors = colorStateList;
             int size = tabLayout2.tabs.size();
-            for (int i2 = 0; i2 < size; i2++) {
-                TabLayout.TabView tabView = ((TabLayout.Tab) tabLayout2.tabs.get(i2)).view;
+            for (int i7 = 0; i7 < size; i7++) {
+                TabLayout.TabView tabView = ((TabLayout.Tab) tabLayout2.tabs.get(i7)).view;
                 if (tabView != null) {
                     tabView.update();
                 }
@@ -1128,22 +1121,22 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         getWindow().getDecorView().setSystemUiVisibility(getWindow().getDecorView().getSystemUiVisibility() & (-2051));
         this.mAnimatorSet = new AnimatorSet();
         float dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.setting_edge_lighting_style_transition_height);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mMainRoundedLayout, "translationY", dimensionPixelSize, 0.0f);
-        ofFloat.setDuration(300L);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mMainRoundedLayout, "alpha", 0.0f, 1.0f);
-        ofFloat2.setDuration(150L);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(this.mActionBar, "translationY", dimensionPixelSize, 0.0f);
-        ofFloat3.setDuration(300L);
-        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(this.mActionBar, "alpha", 0.0f, 1.0f);
-        ofFloat4.setDuration(150L);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mMainRoundedLayout, "translationY", dimensionPixelSize, 0.0f);
+        objectAnimatorOfFloat.setDuration(300L);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mMainRoundedLayout, "alpha", 0.0f, 1.0f);
+        objectAnimatorOfFloat2.setDuration(150L);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(this.mActionBar, "translationY", dimensionPixelSize, 0.0f);
+        objectAnimatorOfFloat3.setDuration(300L);
+        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(this.mActionBar, "alpha", 0.0f, 1.0f);
+        objectAnimatorOfFloat4.setDuration(150L);
         this.mAnimatorSet.setStartDelay(i);
         this.mAnimatorSet.setInterpolator(new PathInterpolator(0.17f, 0.17f, 0.2f, 1.0f));
-        this.mAnimatorSet.playTogether(ofFloat3, ofFloat, ofFloat4, ofFloat2);
+        this.mAnimatorSet.playTogether(objectAnimatorOfFloat3, objectAnimatorOfFloat, objectAnimatorOfFloat4, objectAnimatorOfFloat2);
         this.mAnimatorSet.start();
         this.mPreviewMode = false;
     }
 
-    public final void showBottomBarOption(int i) {
+    public final void showBottomBarOption(int i) throws Resources.NotFoundException {
         int size;
         updateTabLayout();
         if (i != 0 || this.mType == 0) {
@@ -1234,12 +1227,12 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
                     }
                 }
                 int i4 = i2 + 1;
-                int calculateColumnCount = calculateColumnCount(this.mEffectGridView, this.mEffectAdapter.mEdgeLightingStyleList.size());
-                int i5 = i4 > calculateColumnCount ? i4 - calculateColumnCount : i4;
+                int iCalculateColumnCount = calculateColumnCount(this.mEffectGridView, this.mEffectAdapter.mEdgeLightingStyleList.size());
+                int i5 = i4 > iCalculateColumnCount ? i4 - iCalculateColumnCount : i4;
                 if (getBaseContext().getResources().getConfiguration().getLayoutDirection() == 1) {
-                    i5 = calculateColumnCount - i2;
-                    if (i4 > calculateColumnCount) {
-                        i5 = calculateColumnCount + i5;
+                    i5 = iCalculateColumnCount - i2;
+                    if (i4 > iCalculateColumnCount) {
+                        i5 = iCalculateColumnCount + i5;
                     }
                 }
                 int i6 = i5 - 1;
@@ -1270,19 +1263,19 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         if (string == null || string.isEmpty()) {
             iArr = null;
         } else {
-            String[] split = string.split(";");
-            iArr = new int[split.length];
-            for (int i = 0; i < split.length; i++) {
-                iArr[i] = Integer.parseInt(split[i]);
+            String[] strArrSplit = string.split(";");
+            iArr = new int[strArrSplit.length];
+            for (int i = 0; i < strArrSplit.length; i++) {
+                iArr[i] = Integer.parseInt(strArrSplit[i]);
             }
         }
         int[] iArr2 = iArr;
         SeslColorPickerDialog seslColorPickerDialog = new SeslColorPickerDialog(this, this.mColorSetListener, customColor, iArr2, false);
         this.mColorPickerDialog = seslColorPickerDialog;
         SeslColorPicker seslColorPicker = seslColorPickerDialog.mColorPicker;
-        View findViewById = seslColorPicker.findViewById(R.id.sesl_last_used_color_slot);
+        View viewFindViewById = seslColorPicker.findViewById(R.id.sesl_last_used_color_slot);
         seslColorPicker.mEyeDropperView.setVisibility(8);
-        findViewById.setVisibility(0);
+        viewFindViewById.setVisibility(0);
         this.mColorPickerDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity.8
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {

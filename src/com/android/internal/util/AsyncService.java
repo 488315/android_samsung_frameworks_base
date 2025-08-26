@@ -32,30 +32,30 @@ public abstract class AsyncService extends Service {
     @Override // android.app.Service
     public void onCreate() {
         super.onCreate();
-        AsyncServiceInfo createHandler = createHandler();
-        this.mAsyncServiceInfo = createHandler;
-        this.mHandler = createHandler.mHandler;
+        AsyncServiceInfo asyncServiceInfoCreateHandler = createHandler();
+        this.mAsyncServiceInfo = asyncServiceInfoCreateHandler;
+        this.mHandler = asyncServiceInfoCreateHandler.mHandler;
         this.mMessenger = new Messenger(this.mHandler);
     }
 
     @Override // android.app.Service
     public int onStartCommand(Intent intent, int i, int i2) {
         Log.d(TAG, "onStartCommand");
-        Message obtainMessage = this.mHandler.obtainMessage();
-        obtainMessage.what = 16777215;
-        obtainMessage.arg1 = i;
-        obtainMessage.arg2 = i2;
-        obtainMessage.obj = intent;
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage();
+        messageObtainMessage.what = 16777215;
+        messageObtainMessage.arg1 = i;
+        messageObtainMessage.arg2 = i2;
+        messageObtainMessage.obj = intent;
+        this.mHandler.sendMessage(messageObtainMessage);
         return this.mAsyncServiceInfo.mRestartFlags;
     }
 
     @Override // android.app.Service
     public void onDestroy() {
         Log.d(TAG, "onDestroy");
-        Message obtainMessage = this.mHandler.obtainMessage();
-        obtainMessage.what = 16777216;
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage();
+        messageObtainMessage.what = 16777216;
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     @Override // android.app.Service

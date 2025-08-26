@@ -26,10 +26,10 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.collections.EmptyList;
-import kotlin.sequences.FlatteningSequence$iterator$1;
+import kotlin.sequences.FlatteningSequence;
+import kotlin.sequences.FlatteningSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class GroupCountCoordinator implements Coordinator {
@@ -42,22 +42,22 @@ public final class GroupCountCoordinator implements Coordinator {
         if (num == null) {
             throw new IllegalStateException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("No untruncated child count for group: ", groupEntry.mKey).toString());
         }
-        int intValue = num.intValue();
+        int iIntValue = num.intValue();
         ExpandableNotificationRow expandableNotificationRow = ((ExpandableNotificationRowController) notifGroupController).mView;
         if (!expandableNotificationRow.mIsSummaryWithChildren) {
-            Log.w("NotifRowController", "Called setUntruncatedChildCount(" + intValue + ") on a leaf row");
+            Log.w("NotifRowController", "Called setUntruncatedChildCount(" + iIntValue + ") on a leaf row");
             return;
         }
         if (expandableNotificationRow.mChildrenContainer == null) {
             expandableNotificationRow.mChildrenContainerStub.inflate();
         }
         final NotificationChildrenContainer notificationChildrenContainer = expandableNotificationRow.mChildrenContainer;
-        notificationChildrenContainer.mUntruncatedChildCount = intValue;
+        notificationChildrenContainer.mUntruncatedChildCount = iIntValue;
         notificationChildrenContainer.updateGroupOverflow();
         notificationChildrenContainer.mChildrenCountViews.stream().filter(new NotificationChildrenContainer$$ExternalSyntheticLambda4()).forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.stack.NotificationChildrenContainer$$ExternalSyntheticLambda5
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                NotificationChildrenContainer notificationChildrenContainer2 = NotificationChildrenContainer.this;
+                NotificationChildrenContainer notificationChildrenContainer2 = notificationChildrenContainer;
                 SourceType$Companion$from$1 sourceType$Companion$from$1 = NotificationChildrenContainer.FROM_PARENT;
                 notificationChildrenContainer2.getClass();
                 ((TextView) obj).setText(String.format(Locale.getDefault(), "%d", Integer.valueOf(notificationChildrenContainer2.mUntruncatedChildCount)));
@@ -72,18 +72,18 @@ public final class GroupCountCoordinator implements Coordinator {
     /* JADX INFO: Access modifiers changed from: private */
     public final void onBeforeFinalizeFilter(List<? extends PipelineEntry> list) {
         this.untruncatedChildCounts.clear();
-        FlatteningSequence$iterator$1 flatteningSequence$iterator$1 = new FlatteningSequence$iterator$1(SequencesKt___SequencesKt.flatMapIterable(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new GroupCountCoordinator$$ExternalSyntheticLambda0()));
-        while (flatteningSequence$iterator$1.hasNext()) {
-            GroupEntry groupEntry = (GroupEntry) flatteningSequence$iterator$1.next();
+        FlatteningSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.flatMapIterable(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new GroupCountCoordinator$$ExternalSyntheticLambda0()).new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            GroupEntry groupEntry = (GroupEntry) anonymousClass1.next();
             this.untruncatedChildCounts.put(groupEntry, Integer.valueOf(groupEntry.mUnmodifiableChildren.size()));
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public static final Iterable onBeforeFinalizeFilter$lambda$0(PipelineEntry pipelineEntry) {
-        Iterable iterable;
+        Iterable iterableSingletonList;
         if (pipelineEntry instanceof GroupEntry) {
-            iterable = Collections.singletonList(pipelineEntry);
+            iterableSingletonList = Collections.singletonList(pipelineEntry);
         } else if (pipelineEntry instanceof BundleEntry) {
             List list = ((BundleEntry) pipelineEntry).children;
             ArrayList arrayList = new ArrayList();
@@ -92,22 +92,22 @@ public final class GroupCountCoordinator implements Coordinator {
                     arrayList.add(obj);
                 }
             }
-            iterable = arrayList;
+            iterableSingletonList = arrayList;
         } else {
-            iterable = EmptyList.INSTANCE;
+            iterableSingletonList = EmptyList.INSTANCE;
         }
-        return iterable;
+        return iterableSingletonList;
     }
 
     @Override // com.android.systemui.statusbar.notification.collection.coordinator.Coordinator
     public void attach(NotifPipeline notifPipeline) {
-        notifPipeline.addOnBeforeFinalizeFilterListener(new OnBeforeFinalizeFilterListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupCountCoordinator$attach$1
+        notifPipeline.addOnBeforeFinalizeFilterListener(new OnBeforeFinalizeFilterListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupCountCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeFinalizeFilterListener
             public final void onBeforeFinalizeFilter(List<? extends PipelineEntry> list) {
                 GroupCountCoordinator.this.onBeforeFinalizeFilter(list);
             }
         });
-        ((ArrayList) notifPipeline.mRenderStageManager.onAfterRenderGroupListeners).add(new OnAfterRenderGroupListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupCountCoordinator$attach$2
+        ((ArrayList) notifPipeline.mRenderStageManager.onAfterRenderGroupListeners).add(new OnAfterRenderGroupListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupCountCoordinator.attach.2
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnAfterRenderGroupListener
             public final void onAfterRenderGroup(GroupEntry groupEntry, NotifGroupController notifGroupController) {
                 GroupCountCoordinator.this.onAfterRenderGroup(groupEntry, notifGroupController);

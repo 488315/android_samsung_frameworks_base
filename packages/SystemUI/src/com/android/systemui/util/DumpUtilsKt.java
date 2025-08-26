@@ -6,12 +6,33 @@ import com.android.systemui.Dumpable;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Iterator;
+import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DumpUtilsKt {
+
+    /* renamed from: com.android.systemui.util.DumpUtilsKt$printCollection$1, reason: invalid class name */
+    public final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function2 {
+        public static final AnonymousClass1 INSTANCE = new AnonymousClass1();
+
+        public AnonymousClass1() {
+            super(2, IndentingPrintWriter.class, "println", "println(Ljava/lang/Object;)V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public /* bridge */ /* synthetic */ Object invoke(Object obj, Object obj2) {
+            invoke((IndentingPrintWriter) obj, obj2);
+            return Unit.INSTANCE;
+        }
+
+        public final void invoke(IndentingPrintWriter indentingPrintWriter, Object obj) {
+            indentingPrintWriter.println(obj);
+        }
+    }
+
     public static final IndentingPrintWriter asIndenting(PrintWriter printWriter) {
         IndentingPrintWriter indentingPrintWriter = printWriter instanceof IndentingPrintWriter ? (IndentingPrintWriter) printWriter : null;
         return indentingPrintWriter == null ? new IndentingPrintWriter(printWriter) : indentingPrintWriter;
@@ -45,7 +66,7 @@ public final class DumpUtilsKt {
 
     public static /* synthetic */ void printCollection$default(IndentingPrintWriter indentingPrintWriter, String str, Collection collection, Function2 function2, int i, Object obj) {
         if ((i & 4) != 0) {
-            function2 = DumpUtilsKt$printCollection$1.INSTANCE;
+            function2 = AnonymousClass1.INSTANCE;
         }
         indentingPrintWriter.append(str).append((CharSequence) ": ").println(collection.size());
         indentingPrintWriter.increaseIndent();

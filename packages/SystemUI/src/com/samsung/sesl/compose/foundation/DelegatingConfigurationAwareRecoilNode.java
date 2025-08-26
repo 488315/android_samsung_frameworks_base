@@ -8,7 +8,6 @@ import androidx.compose.ui.node.ObserverModifierNode;
 import androidx.compose.ui.node.ObserverModifierNodeKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class DelegatingConfigurationAwareRecoilNode extends DelegatingNode implements CompositionLocalConsumerModifierNode, ObserverModifierNode {
     public final ColorProducer color;

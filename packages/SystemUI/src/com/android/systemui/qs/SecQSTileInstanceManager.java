@@ -12,7 +12,6 @@ import com.android.systemui.settings.UserTrackerImpl;
 import dagger.Lazy;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecQSTileInstanceManager {
     public final QSPipelineFlagsRepository mFeatureFlags;
@@ -50,24 +49,24 @@ public class SecQSTileInstanceManager {
     }
 
     public final QSTile requestTileUsing(Object obj, TileSpec tileSpec) {
-        QSTile qSTile = (QSTile) this.mTileInstances.get(tileSpec);
-        Log.d("SecQSTileInstanceManager", "requestTileUsing host:" + obj + " tile: " + qSTile + " " + tileSpec);
-        if (qSTile == null) {
+        QSTile qSTileCreateTile = (QSTile) this.mTileInstances.get(tileSpec);
+        Log.d("SecQSTileInstanceManager", "requestTileUsing host:" + obj + " tile: " + qSTileCreateTile + " " + tileSpec);
+        if (qSTileCreateTile == null) {
             Log.i("SecQSTileInstanceManager", "createTileInstance  " + tileSpec);
             this.mFeatureFlags.getClass();
-            qSTile = this.mQsFactory.createTile(tileSpec.getSpec());
-            if (qSTile != null) {
-                this.mTileInstances.put(tileSpec, qSTile);
-                boolean equals = obj.equals("Bar");
+            qSTileCreateTile = this.mQsFactory.createTile(tileSpec.getSpec());
+            if (qSTileCreateTile != null) {
+                this.mTileInstances.put(tileSpec, qSTileCreateTile);
+                boolean zEquals = obj.equals("Bar");
                 QSPipelineLogger qSPipelineLogger = this.mQSPipelineLogger;
-                if (equals) {
+                if (zEquals) {
                     qSPipelineLogger.logTileCreated(tileSpec, QSPipelineLogger.TileCreatedReason.BAR_TILE_CREATED);
                 } else {
                     qSPipelineLogger.logTileCreated(tileSpec, QSPipelineLogger.TileCreatedReason.TILE_CREATED);
                 }
             }
         }
-        if (qSTile != null) {
+        if (qSTileCreateTile != null) {
             ArraySet arraySet = (ArraySet) this.mTileUsingHosts.get(tileSpec);
             if (arraySet == null) {
                 arraySet = new ArraySet();
@@ -75,6 +74,6 @@ public class SecQSTileInstanceManager {
             arraySet.add(obj);
             this.mTileUsingHosts.put(tileSpec, arraySet);
         }
-        return qSTile;
+        return qSTileCreateTile;
     }
 }

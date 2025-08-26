@@ -2,6 +2,7 @@ package android.media;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.Resources;
 import android.media.AudioAttributes;
 import android.media.VolumeShaper;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.os.Trace;
+import android.system.ErrnoException;
 import android.util.AndroidRuntimeException;
 import android.util.Log;
 import com.samsung.android.audio.AudioManagerHelper;
@@ -98,7 +100,7 @@ public class SoundPool extends PlayerBase {
         DEBUG = Log.isLoggable(TAG, 3);
     }
 
-    public SoundPool(int i, int i2, int i3) {
+    public SoundPool(int i, int i2, int i3) throws IllegalArgumentException {
         this(null, i, new AudioAttributes.Builder().setInternalLegacyStreamType(i2).build(), 0);
         PlayerBase.deprecateStreamTypeForPlayback(i2, TAG, "SoundPool()");
     }
@@ -123,37 +125,37 @@ public class SoundPool extends PlayerBase {
     }
 
     public int load(String str, int i) {
-        String convertStartingPathToSystem = AudioManagerHelper.convertStartingPathToSystem(str);
-        int i2 = 0;
+        String strConvertStartingPathToSystem = AudioManagerHelper.convertStartingPathToSystem(str);
+        int i_load = 0;
         try {
-            File file = new File(convertStartingPathToSystem);
-            ParcelFileDescriptor open = ParcelFileDescriptor.open(file, 268435456);
-            if (open == null) {
+            File file = new File(strConvertStartingPathToSystem);
+            ParcelFileDescriptor parcelFileDescriptorOpen = ParcelFileDescriptor.open(file, 268435456);
+            if (parcelFileDescriptorOpen == null) {
                 return 0;
             }
-            i2 = _load(open.getFileDescriptor(), 0L, file.length(), i);
-            open.close();
-            return i2;
+            i_load = _load(parcelFileDescriptorOpen.getFileDescriptor(), 0L, file.length(), i);
+            parcelFileDescriptorOpen.close();
+            return i_load;
         } catch (IOException unused) {
-            Log.e(TAG, "error loading " + convertStartingPathToSystem);
-            return i2;
+            Log.e(TAG, "error loading " + strConvertStartingPathToSystem);
+            return i_load;
         }
     }
 
-    public int load(Context context, int i, int i2) {
-        AssetFileDescriptor openRawResourceFd = context.getResources().openRawResourceFd(i);
-        if (openRawResourceFd == null) {
+    public int load(Context context, int i, int i2) throws Resources.NotFoundException {
+        AssetFileDescriptor assetFileDescriptorOpenRawResourceFd = context.getResources().openRawResourceFd(i);
+        if (assetFileDescriptorOpenRawResourceFd == null) {
             return 0;
         }
-        int _load = _load(openRawResourceFd.getFileDescriptor(), openRawResourceFd.getStartOffset(), openRawResourceFd.getLength(), i2);
+        int i_load = _load(assetFileDescriptorOpenRawResourceFd.getFileDescriptor(), assetFileDescriptorOpenRawResourceFd.getStartOffset(), assetFileDescriptorOpenRawResourceFd.getLength(), i2);
         try {
-            openRawResourceFd.close();
+            assetFileDescriptorOpenRawResourceFd.close();
         } catch (IOException unused) {
         }
-        return _load;
+        return i_load;
     }
 
-    public int load(AssetFileDescriptor assetFileDescriptor, int i) {
+    public int load(AssetFileDescriptor assetFileDescriptor, int i) throws ErrnoException {
         if (assetFileDescriptor == null) {
             return 0;
         }
@@ -198,9 +200,9 @@ public class SoundPool extends PlayerBase {
             this.mEventHandler.set(null);
             return;
         }
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null) {
-            this.mEventHandler.set(new EventHandler(myLooper, onLoadCompleteListener));
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null) {
+            this.mEventHandler.set(new EventHandler(looperMyLooper, onLoadCompleteListener));
             return;
         }
         Looper mainLooper = Looper.getMainLooper();

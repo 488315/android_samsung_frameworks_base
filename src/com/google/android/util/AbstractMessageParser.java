@@ -139,19 +139,20 @@ public abstract class AbstractMessageParser {
         }
         int i = 0;
         if (this.parseMeText && this.text.startsWith("/me") && this.text.length() > 3 && Character.isWhitespace(this.text.charAt(3))) {
-            String substring = this.text.substring(0, 4);
+            String strSubstring = this.text.substring(0, 4);
             this.text = this.text.substring(4);
-            str = substring;
+            str = strSubstring;
         }
         loop0: while (true) {
             boolean z = false;
             while (this.nextChar < this.text.length()) {
-                if (isWordBreak(this.nextChar) || (z && isSmileyBreak(this.nextChar))) {
-                    if (parseSmiley()) {
-                        z = true;
-                    } else if (!parseAcronym() && !parseURL() && !parseFormatting()) {
-                        parseText();
-                    }
+                if (!isWordBreak(this.nextChar) && (!z || !isSmileyBreak(this.nextChar))) {
+                    break loop0;
+                }
+                if (parseSmiley()) {
+                    z = true;
+                } else if (!parseAcronym() && !parseURL() && !parseFormatting()) {
+                    parseText();
                 }
             }
             for (int i2 = 0; i2 < this.tokens.size(); i2++) {
@@ -185,20 +186,20 @@ public abstract class AbstractMessageParser {
         if (str == null) {
             return null;
         }
-        Video matchURL = Video.matchURL(str, str2);
-        if (matchURL != null) {
-            return matchURL;
+        Video videoMatchURL = Video.matchURL(str, str2);
+        if (videoMatchURL != null) {
+            return videoMatchURL;
         }
-        YouTubeVideo matchURL2 = YouTubeVideo.matchURL(str, str2);
-        if (matchURL2 != null) {
-            return matchURL2;
+        YouTubeVideo youTubeVideoMatchURL = YouTubeVideo.matchURL(str, str2);
+        if (youTubeVideoMatchURL != null) {
+            return youTubeVideoMatchURL;
         }
-        Photo matchURL3 = Photo.matchURL(str, str2);
-        if (matchURL3 != null) {
-            return matchURL3;
+        Photo photoMatchURL = Photo.matchURL(str, str2);
+        if (photoMatchURL != null) {
+            return photoMatchURL;
         }
-        FlickrPhoto matchURL4 = FlickrPhoto.matchURL(str, str2);
-        return matchURL4 != null ? matchURL4 : new Link(str, str2);
+        FlickrPhoto flickrPhotoMatchURL = FlickrPhoto.matchURL(str, str2);
+        return flickrPhotoMatchURL != null ? flickrPhotoMatchURL : new Link(str, str2);
     }
 
     private void buildParts(String str) {
@@ -234,48 +235,48 @@ public abstract class AbstractMessageParser {
             String str = this.text;
             int i2 = this.nextChar;
             this.nextChar = i2 + 1;
-            char charAt = str.charAt(i2);
-            if (charAt == '\n') {
+            char cCharAt = str.charAt(i2);
+            if (cCharAt == '\n') {
                 sb.append("<br>");
-            } else if (charAt == '\"') {
+            } else if (cCharAt == '\"') {
                 sb.append("&quot;");
-            } else if (charAt == '<') {
+            } else if (cCharAt == '<') {
                 sb.append("&lt;");
-            } else if (charAt == '>') {
+            } else if (cCharAt == '>') {
                 sb.append("&gt;");
-            } else if (charAt == '&') {
+            } else if (cCharAt == '&') {
                 sb.append("&amp;");
-            } else if (charAt == '\'') {
+            } else if (cCharAt == '\'') {
                 sb.append("&apos;");
             } else {
-                sb.append(charAt);
+                sb.append(cCharAt);
             }
         } while (!isWordBreak(this.nextChar));
         addToken(new Html(this.text.substring(i, this.nextChar), sb.toString()));
     }
 
     private boolean parseSmiley() {
-        TrieNode longestMatch;
-        if (!this.parseSmilies || (longestMatch = longestMatch(getResources().getSmileys(), this, this.nextChar, true)) == null) {
+        TrieNode trieNodeLongestMatch;
+        if (!this.parseSmilies || (trieNodeLongestMatch = longestMatch(getResources().getSmileys(), this, this.nextChar, true)) == null) {
             return false;
         }
         int charClass = getCharClass(this.nextChar - 1);
-        int charClass2 = getCharClass(this.nextChar + longestMatch.getText().length());
+        int charClass2 = getCharClass(this.nextChar + trieNodeLongestMatch.getText().length());
         if ((charClass == 2 || charClass == 3) && (charClass2 == 2 || charClass2 == 3)) {
             return false;
         }
-        addToken(new Smiley(longestMatch.getText()));
-        this.nextChar += longestMatch.getText().length();
+        addToken(new Smiley(trieNodeLongestMatch.getText()));
+        this.nextChar += trieNodeLongestMatch.getText().length();
         return true;
     }
 
     private boolean parseAcronym() {
-        TrieNode longestMatch;
-        if (!this.parseAcronyms || (longestMatch = longestMatch(getResources().getAcronyms(), this, this.nextChar)) == null) {
+        TrieNode trieNodeLongestMatch;
+        if (!this.parseAcronyms || (trieNodeLongestMatch = longestMatch(getResources().getAcronyms(), this, this.nextChar)) == null) {
             return false;
         }
-        addToken(new Acronym(longestMatch.getText(), longestMatch.getValue()));
-        this.nextChar += longestMatch.getText().length();
+        addToken(new Acronym(trieNodeLongestMatch.getText(), trieNodeLongestMatch.getValue()));
+        this.nextChar += trieNodeLongestMatch.getText().length();
         return true;
     }
 
@@ -287,20 +288,76 @@ public abstract class AbstractMessageParser {
         return matches(getResources().getDomainSuffixes(), reverse(str));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:69:0x00f0, code lost:
-    
-        if (isPunctuation(r3) == false) goto L72;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:49:0x00c9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     private boolean parseURL() {
-        /*
-            Method dump skipped, instructions count: 322
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.util.AbstractMessageParser.parseURL():boolean");
+        String str;
+        char cCharAt;
+        boolean z = false;
+        if (this.parseUrls && isURLBreak(this.nextChar)) {
+            int i = this.nextChar;
+            int i2 = i;
+            while (i2 < this.text.length() && isDomainChar(this.text.charAt(i2))) {
+                i2++;
+            }
+            if (i2 == this.text.length()) {
+                return false;
+            }
+            if (this.text.charAt(i2) == ':') {
+                if (!getResources().getSchemes().contains(this.text.substring(this.nextChar, i2))) {
+                    return false;
+                }
+                str = "";
+            } else if (this.text.charAt(i2) == '.') {
+                while (i2 < this.text.length() && ((cCharAt = this.text.charAt(i2)) == '.' || isDomainChar(cCharAt))) {
+                    i2++;
+                }
+                if (!isValidDomain(this.text.substring(this.nextChar, i2))) {
+                    return false;
+                }
+                int i3 = i2 + 1;
+                if (i3 < this.text.length() && this.text.charAt(i2) == ':' && Character.isDigit(this.text.charAt(i3))) {
+                    while (i3 < this.text.length() && Character.isDigit(this.text.charAt(i3))) {
+                        i3++;
+                    }
+                    i2 = i3;
+                }
+                if (i2 != this.text.length()) {
+                    char cCharAt2 = this.text.charAt(i2);
+                    if (cCharAt2 == '?') {
+                        int i4 = i2 + 1;
+                        if (i4 != this.text.length()) {
+                            char cCharAt3 = this.text.charAt(i4);
+                            if (Character.isWhitespace(cCharAt3) || isPunctuation(cCharAt3)) {
+                            }
+                            str = "http://";
+                        } else {
+                            z = true;
+                            str = "http://";
+                        }
+                    } else {
+                        if (!isPunctuation(cCharAt2) && !Character.isWhitespace(cCharAt2)) {
+                            if (cCharAt2 != '/' && cCharAt2 != '#') {
+                                return false;
+                            }
+                        }
+                        str = "http://";
+                    }
+                }
+            }
+            if (!z) {
+                while (i2 < this.text.length() && !Character.isWhitespace(this.text.charAt(i2))) {
+                    i2++;
+                }
+            }
+            String strSubstring = this.text.substring(i, i2);
+            addURLToken(str + strSubstring, strSubstring);
+            this.nextChar = i2;
+            return true;
+        }
+        return false;
     }
 
     private void addURLToken(String str, String str2) {
@@ -320,21 +377,21 @@ public abstract class AbstractMessageParser {
         }
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         for (int i2 = this.nextChar; i2 < i; i2++) {
-            char charAt = this.text.charAt(i2);
-            Character valueOf = Character.valueOf(charAt);
-            if (linkedHashMap.containsKey(valueOf)) {
-                addToken(new Format(charAt, false));
+            char cCharAt = this.text.charAt(i2);
+            Character chValueOf = Character.valueOf(cCharAt);
+            if (linkedHashMap.containsKey(chValueOf)) {
+                addToken(new Format(cCharAt, false));
             } else {
-                Format format = this.formatStart.get(valueOf);
+                Format format = this.formatStart.get(chValueOf);
                 if (format != null) {
                     format.setMatched(true);
-                    this.formatStart.remove(valueOf);
-                    linkedHashMap.put(valueOf, Boolean.TRUE);
+                    this.formatStart.remove(chValueOf);
+                    linkedHashMap.put(chValueOf, Boolean.TRUE);
                 } else {
-                    Format format2 = new Format(charAt, true);
-                    this.formatStart.put(valueOf, format2);
+                    Format format2 = new Format(cCharAt, true);
+                    this.formatStart.put(chValueOf, format2);
                     addToken(format2);
-                    linkedHashMap.put(valueOf, Boolean.FALSE);
+                    linkedHashMap.put(chValueOf, Boolean.FALSE);
                 }
             }
         }
@@ -366,17 +423,17 @@ public abstract class AbstractMessageParser {
         if (i < 0 || this.text.length() <= i) {
             return 0;
         }
-        char charAt = this.text.charAt(i);
-        if (Character.isWhitespace(charAt)) {
+        char cCharAt = this.text.charAt(i);
+        if (Character.isWhitespace(cCharAt)) {
             return 1;
         }
-        if (Character.isLetter(charAt)) {
+        if (Character.isLetter(cCharAt)) {
             return 2;
         }
-        if (Character.isDigit(charAt)) {
+        if (Character.isDigit(cCharAt)) {
             return 3;
         }
-        if (!isPunctuation(charAt)) {
+        if (!isPunctuation(cCharAt)) {
             return 4;
         }
         int i2 = this.nextClass + 1;
@@ -1006,11 +1063,11 @@ public abstract class AbstractMessageParser {
             Part next = it.next();
             sb.append("<p>");
             Iterator<Token> it2 = next.getTokens().iterator();
-            boolean z = false;
+            boolean caps = false;
             while (it2.hasNext()) {
                 Token next2 = it2.next();
                 if (next2.isHtml()) {
-                    sb.append(next2.toHtml(z));
+                    sb.append(next2.toHtml(caps));
                 } else {
                     switch (next2.getType().ordinal()) {
                         case 2:
@@ -1063,7 +1120,7 @@ public abstract class AbstractMessageParser {
                     }
                 }
                 if (next2.controlCaps()) {
-                    z = next2.setCaps();
+                    caps = next2.setCaps();
                 }
             }
             sb.append("</p>\n");
@@ -1114,13 +1171,13 @@ public abstract class AbstractMessageParser {
         }
 
         public TrieNode getOrCreateChild(char c) {
-            Character valueOf = Character.valueOf(c);
-            TrieNode trieNode = this.children.get(valueOf);
+            Character chValueOf = Character.valueOf(c);
+            TrieNode trieNode = this.children.get(chValueOf);
             if (trieNode != null) {
                 return trieNode;
             }
             TrieNode trieNode2 = new TrieNode(this.text + String.valueOf(c));
-            this.children.put(valueOf, trieNode2);
+            this.children.put(chValueOf, trieNode2);
             return trieNode2;
         }
 

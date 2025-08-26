@@ -3,7 +3,6 @@ package androidx.compose.animation.graphics.vector;
 import androidx.compose.animation.core.Easing;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Keyframe<T> {
     public final float fraction;
@@ -28,9 +27,9 @@ public final class Keyframe<T> {
     }
 
     public final int hashCode() {
-        int hashCode = Float.hashCode(this.fraction) * 31;
+        int iHashCode = Float.hashCode(this.fraction) * 31;
         Object obj = this.value;
-        return this.interpolator.hashCode() + ((hashCode + (obj == null ? 0 : obj.hashCode())) * 31);
+        return this.interpolator.hashCode() + ((iHashCode + (obj == null ? 0 : obj.hashCode())) * 31);
     }
 
     public final String toString() {

@@ -88,15 +88,15 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
             return;
         }
         PhysicalKeyLayout.EnterKey enterKey = this.mKeyLayout.getEnterKey();
-        int width = rect.width();
-        int height = rect.height();
+        int iWidth = rect.width();
+        int iHeight = rect.height();
         int keyboardPadding = this.mResourceProvider.getKeyboardPadding();
         int keyPadding = this.mResourceProvider.getKeyPadding();
         float keyRadius = this.mResourceProvider.getKeyRadius();
-        this.mKeyboardBackground.set(0.0f, 0.0f, width, height);
+        this.mKeyboardBackground.set(0.0f, 0.0f, iWidth, iHeight);
         int i4 = keyboardPadding * 2;
-        int i5 = width - i4;
-        int i6 = height - i4;
+        int i5 = iWidth - i4;
+        int i6 = iHeight - i4;
         if (i5 <= 0 || i6 <= 0) {
             Slog.e(TAG, "Invalid width and height to draw layout preview, width = " + i5 + ", height = " + i6);
             return;
@@ -112,48 +112,48 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
             PhysicalKeyLayout.LayoutKey[] layoutKeyArr2 = keys[i7];
             int length2 = layoutKeyArr2.length;
             PhysicalKeyLayout.LayoutKey[][] layoutKeyArr3 = keys;
-            float f6 = 0.0f;
+            float fKeyWeight = 0.0f;
             for (PhysicalKeyLayout.LayoutKey layoutKey : layoutKeyArr2) {
-                f6 += layoutKey.keyWeight();
+                fKeyWeight += layoutKey.keyWeight();
             }
-            float f7 = (i5 - ((length2 * 2) * keyPadding)) / f6;
-            float f8 = (i7 * f2) + (((i7 * 2) + 1) * keyPadding) + keyboardPadding;
-            float f9 = f3;
-            float f10 = f4;
-            float f11 = f5;
+            float f6 = (i5 - ((length2 * 2) * keyPadding)) / fKeyWeight;
+            float f7 = (i7 * f2) + (((i7 * 2) + 1) * keyPadding) + keyboardPadding;
+            float f8 = f3;
+            float f9 = f4;
+            float f10 = f5;
             int i8 = 0;
-            float f12 = 0.0f;
+            float f11 = 0.0f;
             while (i8 < length2) {
-                float f13 = (((i8 * 2) + 1) * keyPadding) + keyboardPadding + (f12 * f7);
-                float keyWeight = f12 + layoutKeyArr2[i8].keyWeight();
+                float f12 = (((i8 * 2) + 1) * keyPadding) + keyboardPadding + (f11 * f6);
+                float fKeyWeight2 = f11 + layoutKeyArr2[i8].keyWeight();
                 PhysicalKeyLayout.EnterKey enterKey2 = enterKey;
-                RectF rectF = new RectF(f13, f8, (layoutKeyArr2[i8].keyWeight() * f7) + f13, f8 + f2);
+                RectF rectF = new RectF(f12, f7, (layoutKeyArr2[i8].keyWeight() * f6) + f12, f7 + f2);
                 if (enterKey2 != null && layoutKeyArr2[i8].keyCode() == 66) {
                     if (enterKey2.row() == i7 && enterKey2.column() == i8) {
-                        f = f8;
-                        f10 = rectF.left;
+                        f = f7;
+                        f9 = rectF.left;
                         i = i7;
                         i2 = i8;
-                        f11 = rectF.top;
+                        f10 = rectF.top;
                         layoutKeyArr = layoutKeyArr2;
                         i3 = length2;
-                        f9 = f7;
+                        f8 = f6;
                     } else {
-                        f = f8;
+                        f = f7;
                         i = i7;
                         i2 = i8;
                         layoutKeyArr = layoutKeyArr2;
                         i3 = length2;
                     }
                 } else if (PhysicalKeyLayout.isSpecialKey(layoutKeyArr2[i8])) {
-                    f = f8;
+                    f = f7;
                     i = i7;
                     i2 = i8;
                     layoutKeyArr = layoutKeyArr2;
                     i3 = length2;
                     this.mKeyDrawables.add(new TypingKey(null, rectF, keyRadius, this.mResourceProvider.getTextPadding(), this.mResourceProvider.getSpecialKeyPaint(), this.mResourceProvider.getSpecialKeyPaint(), this.mResourceProvider.getSpecialKeyPaint()));
                 } else {
-                    f = f8;
+                    f = f7;
                     i = i7;
                     i2 = i8;
                     layoutKeyArr = layoutKeyArr2;
@@ -166,17 +166,17 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
                 }
                 i8 = i2 + 1;
                 layoutKeyArr2 = layoutKeyArr;
-                f12 = keyWeight;
+                f11 = fKeyWeight2;
                 enterKey = enterKey2;
-                f8 = f;
+                f7 = f;
                 length2 = i3;
                 i7 = i;
             }
             i7++;
             keys = layoutKeyArr3;
-            f3 = f9;
-            f4 = f10;
-            f5 = f11;
+            f3 = f8;
+            f4 = f9;
+            f5 = f10;
         }
         PhysicalKeyLayout.EnterKey enterKey3 = enterKey;
         if (enterKey3 != null) {
@@ -237,28 +237,28 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
         }
 
         private void measureGlyphs() {
-            float width = this.mKeyRect.width();
-            float height = this.mKeyRect.height();
+            float fWidth = this.mKeyRect.width();
+            float fHeight = this.mKeyRect.height();
             for (GlyphDrawable glyphDrawable : this.mGlyphDrawables) {
-                float f = width / 2.0f;
-                float f2 = height / 2.0f;
+                float f = fWidth / 2.0f;
+                float f2 = fHeight / 2.0f;
                 if ((glyphDrawable.gravity & 1) != 0) {
-                    f = (f - (width / 4.0f)) + (this.mTextPadding / 2.0f);
+                    f = (f - (fWidth / 4.0f)) + (this.mTextPadding / 2.0f);
                 }
                 if ((glyphDrawable.gravity & 2) != 0) {
-                    f = (f + (width / 4.0f)) - (this.mTextPadding / 2.0f);
+                    f = (f + (fWidth / 4.0f)) - (this.mTextPadding / 2.0f);
                 }
                 if ((glyphDrawable.gravity & 4) != 0) {
-                    f2 = (f2 - (height / 4.0f)) + (this.mTextPadding / 2.0f);
+                    f2 = (f2 - (fHeight / 4.0f)) + (this.mTextPadding / 2.0f);
                 }
                 if ((glyphDrawable.gravity & 8) != 0) {
-                    f2 = (f2 + (height / 4.0f)) - (this.mTextPadding / 2.0f);
+                    f2 = (f2 + (fHeight / 4.0f)) - (this.mTextPadding / 2.0f);
                 }
                 Rect rect = new Rect();
                 glyphDrawable.paint.getTextBounds(glyphDrawable.text, 0, glyphDrawable.text.length(), rect);
-                float width2 = rect.width() / 2.0f;
-                float height2 = rect.height() / 2.0f;
-                glyphDrawable.rect.set(f - width2, (f2 - height2) - rect.top, f + width2, (f2 + height2) - rect.top);
+                float fWidth2 = rect.width() / 2.0f;
+                float fHeight2 = rect.height() / 2.0f;
+                glyphDrawable.rect.set(f - fWidth2, (f2 - fHeight2) - rect.top, f + fWidth2, (f2 + fHeight2) - rect.top);
             }
         }
 
@@ -268,11 +268,11 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
             float f = this.mKeyRadius;
             canvas.drawRoundRect(rectF, f, f, this.mKeyPaint);
             for (GlyphDrawable glyphDrawable : this.mGlyphDrawables) {
-                float width = glyphDrawable.rect.width();
-                float height = glyphDrawable.rect.height();
-                float width2 = this.mKeyRect.width();
-                float height2 = this.mKeyRect.height();
-                if (width == 0.0f || height == 0.0f || width2 == 0.0f || height2 == 0.0f) {
+                float fWidth = glyphDrawable.rect.width();
+                float fHeight = glyphDrawable.rect.height();
+                float fWidth2 = this.mKeyRect.width();
+                float fHeight2 = this.mKeyRect.height();
+                if (fWidth == 0.0f || fHeight == 0.0f || fWidth2 == 0.0f || fHeight2 == 0.0f) {
                     return;
                 } else {
                     canvas.drawText(glyphDrawable.text, 0, glyphDrawable.text.length(), this.mKeyRect.left + glyphDrawable.rect.left, this.mKeyRect.top + glyphDrawable.rect.top, glyphDrawable.paint);
@@ -450,8 +450,8 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
             this.mKeyboardPadding = (int) TypedValue.applyDimension(1, 10.0f, context.getResources().getDisplayMetrics());
             this.mKeyRadius = (int) TypedValue.applyDimension(1, 5.0f, context.getResources().getDisplayMetrics());
             this.mBackgroundRadius = (int) TypedValue.applyDimension(1, 10.0f, context.getResources().getDisplayMetrics());
-            float applyDimension = TypedValue.applyDimension(2, 1.0f, context.getResources().getDisplayMetrics());
-            this.mSpToPxMultiplier = applyDimension;
+            float fApplyDimension = TypedValue.applyDimension(2, 1.0f, context.getResources().getDisplayMetrics());
+            this.mSpToPxMultiplier = fApplyDimension;
             this.mTextPadding = TypedValue.applyDimension(1, 0.0f, context.getResources().getDisplayMetrics());
             boolean z = (context.getResources().getConfiguration().uiMode & 48) == 32;
             int color = context.getColor(z ? 17170625 : 17170543);
@@ -459,10 +459,10 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
             int color3 = context.getColor(z ? 17170584 : 17170541);
             int color4 = context.getColor(z ? 17170594 : 17170551);
             int color5 = context.getColor(z ? 17170587 : 17170544);
-            Paint createTextPaint = KeyboardLayoutPreviewDrawable.createTextPaint(color3, applyDimension * 10.0f, Typeface.create(Typeface.SANS_SERIF, 1));
-            this.mPrimaryGlyphPaint = createTextPaint;
-            this.mSecondaryGlyphPaint = KeyboardLayoutPreviewDrawable.createTextPaint(color4, applyDimension * 10.0f, Typeface.create(Typeface.SANS_SERIF, 0));
-            this.mFontMetrics = createTextPaint.getFontMetrics();
+            Paint paintCreateTextPaint = KeyboardLayoutPreviewDrawable.createTextPaint(color3, fApplyDimension * 10.0f, Typeface.create(Typeface.SANS_SERIF, 1));
+            this.mPrimaryGlyphPaint = paintCreateTextPaint;
+            this.mSecondaryGlyphPaint = KeyboardLayoutPreviewDrawable.createTextPaint(color4, fApplyDimension * 10.0f, Typeface.create(Typeface.SANS_SERIF, 0));
+            this.mFontMetrics = paintCreateTextPaint.getFontMetrics();
             this.mTypingKeyPaint = KeyboardLayoutPreviewDrawable.createFillPaint(color);
             this.mSpecialKeyPaint = KeyboardLayoutPreviewDrawable.createFillPaint(color2);
             this.mBackgroundPaint = KeyboardLayoutPreviewDrawable.createFillPaint(color5);
@@ -471,10 +471,10 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
         /* JADX INFO: Access modifiers changed from: private */
         public void calculateBestTextSizeForKey(float f) {
             int i = ((int) (this.mSpToPxMultiplier * 10.0f)) + 1;
-            int max = Math.max(1, Math.min(i, ((int) f) / 4));
-            if (i > max) {
-                Slog.d(KeyboardLayoutPreviewDrawable.TAG, "calculateBestTextSizeForKey: adjust initial size " + i + Session.SUBSESSION_SEPARATION_CHAR + max);
-                i = max;
+            int iMax = Math.max(1, Math.min(i, ((int) f) / 4));
+            if (i > iMax) {
+                Slog.d(KeyboardLayoutPreviewDrawable.TAG, "calculateBestTextSizeForKey: adjust initial size " + i + Session.SUBSESSION_SEPARATION_CHAR + iMax);
+                i = iMax;
             }
             while (true) {
                 float f2 = i;

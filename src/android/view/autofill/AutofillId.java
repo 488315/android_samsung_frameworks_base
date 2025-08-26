@@ -21,16 +21,16 @@ public final class AutofillId implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public AutofillId createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = (readInt2 & 4) != 0 ? parcel.readInt() : 0;
-            if ((readInt2 & 1) != 0) {
-                return new AutofillId(readInt2, readInt, parcel.readInt(), readInt3);
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = (i2 & 4) != 0 ? parcel.readInt() : 0;
+            if ((i2 & 1) != 0) {
+                return new AutofillId(i2, i, parcel.readInt(), i3);
             }
-            if ((readInt2 & 2) != 0) {
-                return new AutofillId(readInt2, readInt, parcel.readLong(), readInt3);
+            if ((i2 & 2) != 0) {
+                return new AutofillId(i2, i, parcel.readLong(), i3);
             }
-            return new AutofillId(readInt2, readInt, -1L, readInt3);
+            return new AutofillId(i2, i, -1L, i3);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

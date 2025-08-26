@@ -11,7 +11,6 @@ import com.android.systemui.plugins.PluginManager;
 import com.android.systemui.plugins.ToastPlugin;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ToastFactory implements Dumpable {
     public ToastPlugin mPlugin;
@@ -36,15 +35,15 @@ public class ToastFactory implements Dumpable {
     }
 
     public final SystemUIToast createToast(Context context, Context context2, CharSequence charSequence, String str, int i, int i2) {
-        LayoutInflater from = LayoutInflater.from(context2);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(context2);
         ToastPlugin toastPlugin = this.mPlugin;
-        return toastPlugin != null ? new SystemUIToast(from, context, context2, charSequence, toastPlugin.createToast(charSequence, str, i), str, i, i2) : new SystemUIToast(from, context, context2, charSequence, str, i, i2);
+        return toastPlugin != null ? new SystemUIToast(layoutInflaterFrom, context, context2, charSequence, toastPlugin.createToast(charSequence, str, i), str, i, i2) : new SystemUIToast(layoutInflaterFrom, context, context2, charSequence, str, i, i2);
     }
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "ToastFactory:", "    mAttachedPlugin=");
-        m.append(this.mPlugin);
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "ToastFactory:", "    mAttachedPlugin=");
+        sbM.append(this.mPlugin);
+        printWriter.println(sbM.toString());
     }
 }

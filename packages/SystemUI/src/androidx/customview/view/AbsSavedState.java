@@ -3,7 +3,6 @@ package androidx.customview.view;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AbsSavedState implements Parcelable {
     public final Parcelable mSuperState;
@@ -59,7 +58,7 @@ public abstract class AbsSavedState implements Parcelable {
     }
 
     public AbsSavedState(Parcel parcel, ClassLoader classLoader) {
-        Parcelable readParcelable = parcel.readParcelable(classLoader);
-        this.mSuperState = readParcelable == null ? EMPTY_STATE : readParcelable;
+        Parcelable parcelable = parcel.readParcelable(classLoader);
+        this.mSuperState = parcelable == null ? EMPTY_STATE : parcelable;
     }
 }

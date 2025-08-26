@@ -67,9 +67,9 @@ public interface IRemoteTransition extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteTransition.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteTransition)) {
-                return (IRemoteTransition) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteTransition.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteTransition)) {
+                return (IRemoteTransition) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,33 +105,33 @@ public interface IRemoteTransition extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 TransitionInfo transitionInfo = (TransitionInfo) parcel.readTypedObject(TransitionInfo.CREATOR);
                 SurfaceControl.Transaction transaction = (SurfaceControl.Transaction) parcel.readTypedObject(SurfaceControl.Transaction.CREATOR);
-                IRemoteTransitionFinishedCallback asInterface = IRemoteTransitionFinishedCallback.Stub.asInterface(parcel.readStrongBinder());
+                IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallbackAsInterface = IRemoteTransitionFinishedCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                startAnimation(readStrongBinder, transitionInfo, transaction, asInterface);
+                startAnimation(strongBinder, transitionInfo, transaction, iRemoteTransitionFinishedCallbackAsInterface);
             } else if (i == 2) {
-                IBinder readStrongBinder2 = parcel.readStrongBinder();
+                IBinder strongBinder2 = parcel.readStrongBinder();
                 TransitionInfo transitionInfo2 = (TransitionInfo) parcel.readTypedObject(TransitionInfo.CREATOR);
                 SurfaceControl.Transaction transaction2 = (SurfaceControl.Transaction) parcel.readTypedObject(SurfaceControl.Transaction.CREATOR);
-                IBinder readStrongBinder3 = parcel.readStrongBinder();
-                IRemoteTransitionFinishedCallback asInterface2 = IRemoteTransitionFinishedCallback.Stub.asInterface(parcel.readStrongBinder());
+                IBinder strongBinder3 = parcel.readStrongBinder();
+                IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallbackAsInterface2 = IRemoteTransitionFinishedCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                mergeAnimation(readStrongBinder2, transitionInfo2, transaction2, readStrongBinder3, asInterface2);
+                mergeAnimation(strongBinder2, transitionInfo2, transaction2, strongBinder3, iRemoteTransitionFinishedCallbackAsInterface2);
             } else if (i == 3) {
-                IBinder readStrongBinder4 = parcel.readStrongBinder();
+                IBinder strongBinder4 = parcel.readStrongBinder();
                 TransitionInfo transitionInfo3 = (TransitionInfo) parcel.readTypedObject(TransitionInfo.CREATOR);
                 SurfaceControl.Transaction transaction3 = (SurfaceControl.Transaction) parcel.readTypedObject(SurfaceControl.Transaction.CREATOR);
-                IRemoteTransitionFinishedCallback asInterface3 = IRemoteTransitionFinishedCallback.Stub.asInterface(parcel.readStrongBinder());
+                IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallbackAsInterface3 = IRemoteTransitionFinishedCallback.Stub.asInterface(parcel.readStrongBinder());
                 WindowAnimationState[] windowAnimationStateArr = (WindowAnimationState[]) parcel.createTypedArray(WindowAnimationState.CREATOR);
                 parcel.enforceNoDataAvail();
-                takeOverAnimation(readStrongBinder4, transitionInfo3, transaction3, asInterface3, windowAnimationStateArr);
+                takeOverAnimation(strongBinder4, transitionInfo3, transaction3, iRemoteTransitionFinishedCallbackAsInterface3, windowAnimationStateArr);
             } else if (i == 4) {
-                IBinder readStrongBinder5 = parcel.readStrongBinder();
-                boolean readBoolean = parcel.readBoolean();
+                IBinder strongBinder5 = parcel.readStrongBinder();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onTransitionConsumed(readStrongBinder5, readBoolean);
+                onTransitionConsumed(strongBinder5, z);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -156,61 +156,61 @@ public interface IRemoteTransition extends IInterface {
 
             @Override // android.window.IRemoteTransition
             public void startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(transitionInfo, 0);
-                    obtain.writeTypedObject(transaction, 0);
-                    obtain.writeStrongInterface(iRemoteTransitionFinishedCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(transitionInfo, 0);
+                    parcelObtain.writeTypedObject(transaction, 0);
+                    parcelObtain.writeStrongInterface(iRemoteTransitionFinishedCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IRemoteTransition
             public void mergeAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, IBinder iBinder2, IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(transitionInfo, 0);
-                    obtain.writeTypedObject(transaction, 0);
-                    obtain.writeStrongBinder(iBinder2);
-                    obtain.writeStrongInterface(iRemoteTransitionFinishedCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(transitionInfo, 0);
+                    parcelObtain.writeTypedObject(transaction, 0);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    parcelObtain.writeStrongInterface(iRemoteTransitionFinishedCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IRemoteTransition
             public void takeOverAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback, WindowAnimationState[] windowAnimationStateArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(transitionInfo, 0);
-                    obtain.writeTypedObject(transaction, 0);
-                    obtain.writeStrongInterface(iRemoteTransitionFinishedCallback);
-                    obtain.writeTypedArray(windowAnimationStateArr, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(transitionInfo, 0);
+                    parcelObtain.writeTypedObject(transaction, 0);
+                    parcelObtain.writeStrongInterface(iRemoteTransitionFinishedCallback);
+                    parcelObtain.writeTypedArray(windowAnimationStateArr, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IRemoteTransition
             public void onTransitionConsumed(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteTransition.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

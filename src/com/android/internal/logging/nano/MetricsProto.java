@@ -1670,13 +1670,13 @@ public interface MetricsProto {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public MetricsEvent mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
-            int readTag;
+            int tag;
             do {
-                readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-            } while (WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag));
+            } while (WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag));
             return this;
         }
 

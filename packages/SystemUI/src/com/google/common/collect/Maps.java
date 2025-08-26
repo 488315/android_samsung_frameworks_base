@@ -10,11 +10,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Maps {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class EntrySet extends Sets$ImprovedAbstractSet {
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public final void clear() {
@@ -28,9 +26,9 @@ public final class Maps {
             }
             Map.Entry entry = (Map.Entry) obj;
             Object key = entry.getKey();
-            Object safeGet = Maps.safeGet(key, map());
-            if (Objects.equal(safeGet, entry.getValue())) {
-                return safeGet != null || map().containsKey(key);
+            Object objSafeGet = Maps.safeGet(key, map());
+            if (Objects.equal(objSafeGet, entry.getValue())) {
+                return objSafeGet != null || map().containsKey(key);
             }
             return false;
         }
@@ -57,11 +55,11 @@ public final class Maps {
                 return super.removeAll(collection);
             } catch (UnsupportedOperationException unused) {
                 Iterator it = collection.iterator();
-                boolean z = false;
+                boolean zRemove = false;
                 while (it.hasNext()) {
-                    z |= this.remove(it.next());
+                    zRemove |= this.remove(it.next());
                 }
-                return z;
+                return zRemove;
             }
         }
 
@@ -87,15 +85,14 @@ public final class Maps {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class IteratorBasedAbstractMap extends AbstractMap {
         @Override // java.util.AbstractMap, java.util.Map
         public void clear() {
-            Iterator entryIterator = entryIterator();
-            entryIterator.getClass();
-            while (entryIterator.hasNext()) {
-                entryIterator.next();
-                entryIterator.remove();
+            Iterator itEntryIterator = entryIterator();
+            itEntryIterator.getClass();
+            while (itEntryIterator.hasNext()) {
+                itEntryIterator.next();
+                itEntryIterator.remove();
             }
         }
 
@@ -117,7 +114,6 @@ public final class Maps {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class KeySet extends Sets$ImprovedAbstractSet {
         public final Map map;
 
@@ -166,7 +162,6 @@ public final class Maps {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Values extends AbstractCollection {
         public final Map map;
 
@@ -253,7 +248,6 @@ public final class Maps {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ViewCachingAbstractMap extends AbstractMap {
         public transient Set entrySet;
         public transient KeySet keySet;
@@ -267,9 +261,9 @@ public final class Maps {
             if (set != null) {
                 return set;
             }
-            StandardTable.RowMap.EntrySet createEntrySet = createEntrySet();
-            this.entrySet = createEntrySet;
-            return createEntrySet;
+            StandardTable.RowMap.EntrySet entrySetCreateEntrySet = createEntrySet();
+            this.entrySet = entrySetCreateEntrySet;
+            return entrySetCreateEntrySet;
         }
 
         @Override // java.util.AbstractMap, java.util.Map

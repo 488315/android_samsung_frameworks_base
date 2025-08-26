@@ -21,7 +21,6 @@ import kotlin.Pair;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaAction implements EntityString {
     public static final Companion Companion = new Companion(null);
@@ -38,7 +37,6 @@ public final class MediaAction implements EntityString {
     public final Painter icon;
     public final long id;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -106,7 +104,7 @@ public final class MediaAction implements EntityString {
     }
 
     public final int hashCode() {
-        return Boolean.hashCode(this.enabled) + ControlInfo$$ExternalSyntheticOutline0.m((this.icon.hashCode() + (Long.hashCode(this.id) * 31)) * 31, 31, this.description);
+        return Boolean.hashCode(this.enabled) + ControlInfo$$ExternalSyntheticOutline0.m(AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.icon, Long.hashCode(this.id) * 31, 31), 31, this.description);
     }
 
     public final String toString() {

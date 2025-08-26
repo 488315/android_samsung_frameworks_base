@@ -448,7 +448,7 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
         @Override // android.os.ResultReceiver
         protected void onReceiveResult(int i, final Bundle bundle) {
             super.onReceiveResult(i, bundle);
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 if (i == 0) {
                     Executor executor = this.val$executor;
@@ -456,7 +456,7 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
                     executor.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$1$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            OutcomeReceiver.this.onResult(null);
+                            outcomeReceiver.onResult(null);
                         }
                     });
                 } else {
@@ -465,12 +465,12 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
                     executor2.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$1$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            OutcomeReceiver.this.onError((CallEndpointException) bundle.getParcelable(CallEndpointException.CHANGE_ERROR, CallEndpointException.class));
+                            outcomeReceiver2.onError((CallEndpointException) bundle.getParcelable(CallEndpointException.CHANGE_ERROR, CallEndpointException.class));
                         }
                     });
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -582,27 +582,27 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
                 str3 = str;
                 j2 = j;
                 str4 = str2;
-            } catch (RemoteException e) {
-                e = e;
+                try {
+                    it.next().queryLocation(str3, j2, str4, new AnonymousClass2(this, null, executor, outcomeReceiver), Log.getExternalSession());
+                } catch (RemoteException e) {
+                    e = e;
+                    final RemoteException remoteException = e;
+                    Log.d(this, "queryLocation: Exception e : " + remoteException, new Object[0]);
+                    executor.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            outcomeReceiver.onError(new QueryLocationException(remoteException.getMessage(), 5));
+                        }
+                    });
+                    str = str3;
+                    j = j2;
+                    str2 = str4;
+                }
+            } catch (RemoteException e2) {
+                e = e2;
                 str3 = str;
                 j2 = j;
                 str4 = str2;
-            }
-            try {
-                it.next().queryLocation(str3, j2, str4, new AnonymousClass2(this, null, executor, outcomeReceiver), Log.getExternalSession());
-            } catch (RemoteException e2) {
-                e = e2;
-                final RemoteException remoteException = e;
-                Log.d(this, "queryLocation: Exception e : " + remoteException, new Object[0]);
-                executor.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        OutcomeReceiver.this.onError(new QueryLocationException(remoteException.getMessage(), 5));
-                    }
-                });
-                str = str3;
-                j = j2;
-                str2 = str4;
             }
             str = str3;
             j = j2;
@@ -631,7 +631,7 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
                 executor.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onResult((Location) bundle.getParcelable(Connection.EXTRA_KEY_QUERY_LOCATION, Location.class));
+                        outcomeReceiver.onResult((Location) bundle.getParcelable(Connection.EXTRA_KEY_QUERY_LOCATION, Location.class));
                     }
                 });
             } else {
@@ -640,7 +640,7 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
                 executor2.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$2$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onError((QueryLocationException) bundle.getParcelable(QueryLocationException.QUERY_LOCATION_ERROR, QueryLocationException.class));
+                        outcomeReceiver2.onError((QueryLocationException) bundle.getParcelable(QueryLocationException.QUERY_LOCATION_ERROR, QueryLocationException.class));
                     }
                 });
             }

@@ -16,7 +16,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationInlineImageResolver implements ImageResolver {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,7 +25,6 @@ public class NotificationInlineImageResolver implements ImageResolver {
     protected int mMaxImageWidth;
     public Set mWantedUriSet;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ImageCache {
     }
 
@@ -51,11 +49,11 @@ public class NotificationInlineImageResolver implements ImageResolver {
     }
 
     public int getMaxImageHeight() {
-        return this.mContext.getResources().getDimensionPixelSize(ActivityManager.isLowRamDeviceStatic() ? R.dimen.tooltip_precise_anchor_threshold : R.dimen.tooltip_precise_anchor_extra_offset);
+        return this.mContext.getResources().getDimensionPixelSize(ActivityManager.isLowRamDeviceStatic() ? R.dimen.tooltip_vertical_padding : R.dimen.tooltip_precise_anchor_threshold);
     }
 
     public int getMaxImageWidth() {
-        return this.mContext.getResources().getDimensionPixelSize(ActivityManager.isLowRamDeviceStatic() ? R.dimen.tooltip_y_offset_non_touch : R.dimen.tooltip_vertical_padding);
+        return this.mContext.getResources().getDimensionPixelSize(ActivityManager.isLowRamDeviceStatic() ? R.dimen.tooltip_y_offset_touch : R.dimen.tooltip_y_offset_non_touch);
     }
 
     public final boolean hasCache() {

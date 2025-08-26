@@ -1,7 +1,6 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Person;
 import android.app.admin.DevicePolicyManager;
@@ -609,9 +608,9 @@ public class Notification implements Parcelable {
         private Action(Parcel parcel) {
             this.mAllowGeneratedReplies = true;
             if (parcel.readInt() != 0) {
-                Icon createFromParcel = Icon.CREATOR.createFromParcel(parcel);
-                this.mIcon = createFromParcel;
-                if (createFromParcel.getType() == 2) {
+                Icon iconCreateFromParcel = Icon.CREATOR.createFromParcel(parcel);
+                this.mIcon = iconCreateFromParcel;
+                if (iconCreateFromParcel.getType() == 2) {
                     this.icon = this.mIcon.getResId();
                 }
             }
@@ -814,7 +813,7 @@ public class Notification implements Parcelable {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public Action m425clone() {
+        public Action m429clone() {
             return new Action(getIcon(), this.title, this.actionIntent, this.mExtras == null ? new Bundle() : new Bundle(this.mExtras), getRemoteInputs(), getAllowGeneratedReplies(), getSemanticAction(), isContextual(), isAuthenticationRequired());
         }
 
@@ -896,7 +895,7 @@ public class Notification implements Parcelable {
             }
 
             /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-            public WearableExtender m426clone() {
+            public WearableExtender m430clone() {
                 WearableExtender wearableExtender = new WearableExtender();
                 wearableExtender.mFlags = this.mFlags;
                 wearableExtender.mInProgressLabel = this.mInProgressLabel;
@@ -1046,9 +1045,9 @@ public class Notification implements Parcelable {
 
     private void readFromParcelImpl(Parcel parcel) {
         parcel.readInt();
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        this.mAllowlistToken = readStrongBinder;
-        if (readStrongBinder == null) {
+        IBinder strongBinder = parcel.readStrongBinder();
+        this.mAllowlistToken = strongBinder;
+        if (strongBinder == null) {
             this.mAllowlistToken = processAllowlistToken;
         }
         if (!parcel.hasClassCookie(PendingIntent.class)) {
@@ -1057,9 +1056,9 @@ public class Notification implements Parcelable {
         this.when = parcel.readLong();
         this.creationTime = parcel.readLong();
         if (parcel.readInt() != 0) {
-            Icon createFromParcel = Icon.CREATOR.createFromParcel(parcel);
-            this.mSmallIcon = createFromParcel;
-            if (createFromParcel.getType() == 2) {
+            Icon iconCreateFromParcel = Icon.CREATOR.createFromParcel(parcel);
+            this.mSmallIcon = iconCreateFromParcel;
+            if (iconCreateFromParcel.getType() == 2) {
                 this.icon = this.mSmallIcon.getResId();
             }
         }
@@ -1147,7 +1146,7 @@ public class Notification implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public Notification m421clone() {
+    public Notification m425clone() {
         Notification notification = new Notification();
         cloneInto(notification, true);
         return notification;
@@ -1172,10 +1171,10 @@ public class Notification implements Parcelable {
             notification.tickerText = charSequence.toString();
         }
         if (z && (remoteViews4 = this.tickerView) != null) {
-            notification.tickerView = remoteViews4.mo465clone();
+            notification.tickerView = remoteViews4.mo469clone();
         }
         if (z && (remoteViews3 = this.contentView) != null) {
-            notification.contentView = remoteViews3.mo465clone();
+            notification.contentView = remoteViews3.mo469clone();
         }
         if (z && (icon = this.mLargeIcon) != null) {
             notification.mLargeIcon = icon;
@@ -1226,16 +1225,16 @@ public class Notification implements Parcelable {
                 }
                 Action action = actionArr2[i];
                 if (action != null) {
-                    notification.actions[i] = action.m425clone();
+                    notification.actions[i] = action.m429clone();
                 }
                 i++;
             }
         }
         if (z && (remoteViews2 = this.bigContentView) != null) {
-            notification.bigContentView = remoteViews2.mo465clone();
+            notification.bigContentView = remoteViews2.mo469clone();
         }
         if (z && (remoteViews = this.headsUpContentView) != null) {
-            notification.headsUpContentView = remoteViews.mo465clone();
+            notification.headsUpContentView = remoteViews.mo469clone();
         }
         notification.visibility = this.visibility;
         if (this.publicVersion != null) {
@@ -1262,7 +1261,7 @@ public class Notification implements Parcelable {
         notification.semPriority = this.semPriority;
         ComponentName componentName = this.semBadgeTarget;
         if (componentName != null) {
-            notification.semBadgeTarget = componentName.m926clone();
+            notification.semBadgeTarget = componentName.m930clone();
         }
         notification.parcelDataSize = this.parcelDataSize;
     }
@@ -1378,27 +1377,27 @@ public class Notification implements Parcelable {
     }
 
     public String loadHeaderAppName(Context context) {
-        CharSequence charSequence;
+        CharSequence applicationLabel;
         Trace.beginSection("Notification#loadHeaderAppName");
         try {
             if (this.extras.containsKey(EXTRA_SUBSTITUTE_APP_NAME)) {
-                charSequence = this.extras.getString(EXTRA_SUBSTITUTE_APP_NAME);
-                if (!TextUtils.isEmpty(charSequence)) {
-                    return charSequence.toString();
+                applicationLabel = this.extras.getString(EXTRA_SUBSTITUTE_APP_NAME);
+                if (!TextUtils.isEmpty(applicationLabel)) {
+                    return applicationLabel.toString();
                 }
             } else {
-                charSequence = null;
+                applicationLabel = null;
             }
             if (context == null) {
                 return null;
             }
-            if (TextUtils.isEmpty(charSequence) && getApplicationInfo(context) != null) {
-                charSequence = context.getPackageManager().getApplicationLabel(getApplicationInfo(context));
+            if (TextUtils.isEmpty(applicationLabel) && getApplicationInfo(context) != null) {
+                applicationLabel = context.getPackageManager().getApplicationLabel(getApplicationInfo(context));
             }
-            if (TextUtils.isEmpty(charSequence)) {
+            if (TextUtils.isEmpty(applicationLabel)) {
                 return null;
             }
-            return charSequence.toString();
+            return applicationLabel.toString();
         } finally {
             Trace.endSection();
         }
@@ -1468,9 +1467,9 @@ public class Notification implements Parcelable {
         if (bundle == null || bundle.isEmpty()) {
             return;
         }
-        Set<String> keySet = this.extras.keySet();
-        int size = keySet.size();
-        String[] strArr = (String[]) keySet.toArray(new String[size]);
+        Set<String> setKeySet = this.extras.keySet();
+        int size = setKeySet.size();
+        String[] strArr = (String[]) setKeySet.toArray(new String[size]);
         for (int i = 0; i < size; i++) {
             String str = strArr[i];
             if (!"android.tv.EXTENSIONS".equals(str) && (obj = this.extras.get(str)) != null && ((obj instanceof Parcelable) || (obj instanceof Parcelable[]) || (obj instanceof SparseArray) || (obj instanceof ArrayList))) {
@@ -1508,24 +1507,22 @@ public class Notification implements Parcelable {
     }
 
     private static CharSequence removeTextSizeSpans(CharSequence charSequence) {
-        Object obj;
+        Object textAppearanceSpan;
         if (!(charSequence instanceof Spanned)) {
             return charSequence;
         }
         Spanned spanned = (Spanned) charSequence;
         Object[] spans = spanned.getSpans(0, spanned.length(), Object.class);
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(spanned.toString());
-        for (Object obj2 : spans) {
-            Object underlying = obj2 instanceof CharacterStyle ? ((CharacterStyle) obj2).getUnderlying() : obj2;
+        for (Object obj : spans) {
+            Object underlying = obj instanceof CharacterStyle ? ((CharacterStyle) obj).getUnderlying() : obj;
             if (underlying instanceof TextAppearanceSpan) {
-                TextAppearanceSpan textAppearanceSpan = (TextAppearanceSpan) underlying;
-                obj = new TextAppearanceSpan(textAppearanceSpan.getFamily(), textAppearanceSpan.getTextStyle(), -1, textAppearanceSpan.getTextColor(), textAppearanceSpan.getLinkTextColor());
-            } else {
-                if (!(underlying instanceof RelativeSizeSpan) && !(underlying instanceof AbsoluteSizeSpan)) {
-                    obj = obj2;
-                }
+                TextAppearanceSpan textAppearanceSpan2 = (TextAppearanceSpan) underlying;
+                textAppearanceSpan = new TextAppearanceSpan(textAppearanceSpan2.getFamily(), textAppearanceSpan2.getTextStyle(), -1, textAppearanceSpan2.getTextColor(), textAppearanceSpan2.getLinkTextColor());
+            } else if (!(underlying instanceof RelativeSizeSpan) && !(underlying instanceof AbsoluteSizeSpan)) {
+                textAppearanceSpan = obj;
             }
-            spannableStringBuilder.setSpan(obj, spanned.getSpanStart(obj2), spanned.getSpanEnd(obj2), spanned.getSpanFlags(obj2));
+            spannableStringBuilder.setSpan(textAppearanceSpan, spanned.getSpanStart(obj), spanned.getSpanEnd(obj), spanned.getSpanFlags(obj));
         }
         return spannableStringBuilder;
     }
@@ -1538,7 +1535,7 @@ public class Notification implements Parcelable {
             onMarshaledListener = new PendingIntent.OnMarshaledListener() { // from class: android.app.Notification$$ExternalSyntheticLambda0
                 @Override // android.app.PendingIntent.OnMarshaledListener
                 public final void onMarshaled(PendingIntent pendingIntent, Parcel parcel2, int i2) {
-                    Notification.this.lambda$writeToParcel$0(parcel, pendingIntent, parcel2, i2);
+                    this.f$0.lambda$writeToParcel$0(parcel, pendingIntent, parcel2, i2);
                 }
             };
             PendingIntent.addOnMarshaledListener(onMarshaledListener);
@@ -1835,7 +1832,7 @@ public class Notification implements Parcelable {
     }
 
     @Deprecated
-    public void setLatestEventInfo(Context context, CharSequence charSequence, CharSequence charSequence2, PendingIntent pendingIntent) {
+    public void setLatestEventInfo(Context context, CharSequence charSequence, CharSequence charSequence2, PendingIntent pendingIntent) throws Resources.NotFoundException {
         if (context.getApplicationInfo().targetSdkVersion > 22) {
             Log.e(TAG, "setLatestEventInfo() is deprecated and you should feel deprecated.", new Throwable());
         }
@@ -1874,7 +1871,7 @@ public class Notification implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1138166333441L, getRedatedString(getChannelId()));
         protoOutputStream.write(1133871366146L, this.tickerText != null);
         protoOutputStream.write(1120986464259L, this.flags);
@@ -1894,7 +1891,7 @@ public class Notification implements Parcelable {
         if (notification != null) {
             notification.dumpDebug(protoOutputStream, 1146756268042L);
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     private String getRedatedString(String str) {
@@ -2416,10 +2413,10 @@ public class Notification implements Parcelable {
                 Class[] clsArr = new Class[0];
                 Constructor<? extends Style> declaredConstructor = notificationStyleClass.getDeclaredConstructor(null);
                 declaredConstructor.setAccessible(true);
-                Style newInstance = declaredConstructor.newInstance(null);
-                newInstance.restoreFromExtras(this.mN.extras);
-                if (newInstance != null) {
-                    setStyle(newInstance);
+                Style styleNewInstance = declaredConstructor.newInstance(null);
+                styleNewInstance.restoreFromExtras(this.mN.extras);
+                if (styleNewInstance != null) {
+                    setStyle(styleNewInstance);
                 }
             } catch (Throwable th) {
                 Log.e(Notification.TAG, "Could not create Style", th);
@@ -2565,10 +2562,10 @@ public class Notification implements Parcelable {
                 this.mN.extras.putCharSequenceArray(Notification.EXTRA_REMOTE_INPUT_HISTORY, null);
                 return this;
             }
-            int min = Math.min(5, charSequenceArr.length);
-            CharSequence[] charSequenceArr2 = new CharSequence[min];
-            RemoteInputHistoryItem[] remoteInputHistoryItemArr = new RemoteInputHistoryItem[min];
-            for (int i = 0; i < min; i++) {
+            int iMin = Math.min(5, charSequenceArr.length);
+            CharSequence[] charSequenceArr2 = new CharSequence[iMin];
+            RemoteInputHistoryItem[] remoteInputHistoryItemArr = new RemoteInputHistoryItem[iMin];
+            for (int i = 0; i < iMin; i++) {
                 charSequenceArr2[i] = Notification.safeCharSequence(charSequenceArr[i]);
                 remoteInputHistoryItemArr[i] = new RemoteInputHistoryItem(charSequenceArr[i]);
             }
@@ -2582,9 +2579,9 @@ public class Notification implements Parcelable {
                 this.mN.extras.putParcelableArray(Notification.EXTRA_REMOTE_INPUT_HISTORY_ITEMS, null);
                 return this;
             }
-            int min = Math.min(5, remoteInputHistoryItemArr.length);
-            RemoteInputHistoryItem[] remoteInputHistoryItemArr2 = new RemoteInputHistoryItem[min];
-            for (int i = 0; i < min; i++) {
+            int iMin = Math.min(5, remoteInputHistoryItemArr.length);
+            RemoteInputHistoryItem[] remoteInputHistoryItemArr2 = new RemoteInputHistoryItem[iMin];
+            for (int i = 0; i < iMin; i++) {
                 remoteInputHistoryItemArr2[i] = remoteInputHistoryItemArr[i];
             }
             this.mN.extras.putParcelableArray(Notification.EXTRA_REMOTE_INPUT_HISTORY_ITEMS, remoteInputHistoryItemArr2);
@@ -2689,7 +2686,7 @@ public class Notification implements Parcelable {
         }
 
         @Deprecated
-        public Builder setSound(Uri uri, int i) {
+        public Builder setSound(Uri uri, int i) throws IllegalArgumentException {
             PlayerBase.deprecateStreamTypeForPlayback(i, Notification.TAG, "setSound()");
             this.mN.sound = uri;
             this.mN.audioStreamType = i;
@@ -2910,9 +2907,7 @@ public class Notification implements Parcelable {
             return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getDrawable(getUpdatableProfileBadgeId(), DevicePolicyResources.Drawables.Style.SOLID_COLORED, DevicePolicyResources.Drawables.Source.NOTIFICATION, new Supplier() { // from class: android.app.Notification$Builder$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Drawable defaultProfileBadgeDrawable;
-                    defaultProfileBadgeDrawable = Notification.Builder.this.getDefaultProfileBadgeDrawable();
-                    return defaultProfileBadgeDrawable;
+                    return this.f$0.getDefaultProfileBadgeDrawable();
                 }
             });
         }
@@ -2926,20 +2921,20 @@ public class Notification implements Parcelable {
             return this.mContext.getPackageManager().getUserBadgeForDensityNoBackground(new UserHandle(this.mContext.getUserId()), 0);
         }
 
-        private Bitmap getProfileBadge() {
+        private Bitmap getProfileBadge() throws Resources.NotFoundException {
             Drawable profileBadgeDrawable = getProfileBadgeDrawable();
             if (profileBadgeDrawable == null) {
                 return null;
             }
             int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(Flags.notificationsRedesignTemplates() ? R.dimen.notification_2025_badge_size : R.dimen.notification_badge_size);
-            Bitmap createBitmap = Bitmap.createBitmap(dimensionPixelSize, dimensionPixelSize, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(createBitmap);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(dimensionPixelSize, dimensionPixelSize, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             profileBadgeDrawable.setBounds(0, 0, dimensionPixelSize, dimensionPixelSize);
             profileBadgeDrawable.draw(canvas);
-            return createBitmap;
+            return bitmapCreateBitmap;
         }
 
-        private void bindProfileBadge(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams) {
+        private void bindProfileBadge(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams) throws Resources.NotFoundException {
             Bitmap profileBadge = getProfileBadge();
             if (profileBadge != null) {
                 remoteViews.setImageViewBitmap(R.id.profile_badge, profileBadge);
@@ -2993,7 +2988,7 @@ public class Notification implements Parcelable {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public RemoteViews applyStandardTemplate(int i, StandardTemplateParams standardTemplateParams, TemplateBindResult templateBindResult) {
+        public RemoteViews applyStandardTemplate(int i, StandardTemplateParams standardTemplateParams, TemplateBindResult templateBindResult) throws Resources.NotFoundException {
             standardTemplateParams.headerless(i == getCollapsedBaseLayoutResource() || i == getHeadsUpBaseLayoutResource() || i == getCompactHeadsUpBaseLayoutResource() || i == getMessagingCompactHeadsUpLayoutResource() || i == getCollapsedMessagingLayoutResource() || i == getCollapsedMediaLayoutResource() || i == getCollapsedConversationLayoutResource() || i == 17367295 || i == 17367290 || Flags.notificationsRedesignTemplates() || i == getCollapsedMediaLayoutResource());
             BuilderRemoteViews builderRemoteViews = new BuilderRemoteViews(this.mContext.getApplicationInfo(), i);
             resetStandardTemplate(builderRemoteViews);
@@ -3005,7 +3000,7 @@ public class Notification implements Parcelable {
                 Resources resources = this.mContext.getResources();
                 builderRemoteViews.setViewLayoutMargin(standardTemplateParams.mTextViewId, 5, resources.getDimension(R.dimen.notification_content_margin_end) / resources.getDisplayMetrics().density, 1);
             }
-            boolean handleProgressBar = handleProgressBar(builderRemoteViews, bundle, standardTemplateParams);
+            boolean zHandleProgressBar = handleProgressBar(builderRemoteViews, bundle, standardTemplateParams);
             if (standardTemplateParams.hasTitle()) {
                 builderRemoteViews.setViewVisibility(standardTemplateParams.mTitleViewId, 0);
                 builderRemoteViews.setTextViewText(standardTemplateParams.mTitleViewId, ensureColorSpanContrastOrStripStyling(standardTemplateParams.mTitle, standardTemplateParams));
@@ -3014,21 +3009,21 @@ public class Notification implements Parcelable {
                 builderRemoteViews.setViewVisibility(standardTemplateParams.mTitleViewId, 8);
                 builderRemoteViews.setTextViewText(standardTemplateParams.mTitleViewId, null);
             }
-            if (standardTemplateParams.mText != null && standardTemplateParams.mText.length() != 0 && (!handleProgressBar || standardTemplateParams.mAllowTextWithProgress)) {
+            if (standardTemplateParams.mText != null && standardTemplateParams.mText.length() != 0 && (!zHandleProgressBar || standardTemplateParams.mAllowTextWithProgress)) {
                 builderRemoteViews.setViewVisibility(standardTemplateParams.mTextViewId, 0);
                 builderRemoteViews.setTextViewText(standardTemplateParams.mTextViewId, ensureColorSpanContrastOrStripStyling(standardTemplateParams.mText, standardTemplateParams));
                 setTextViewColorSecondary(builderRemoteViews, standardTemplateParams.mTextViewId, standardTemplateParams);
-                handleProgressBar = true;
-            } else if (standardTemplateParams.mTextViewId != 16909931) {
+                zHandleProgressBar = true;
+            } else if (standardTemplateParams.mTextViewId != 16909932) {
                 builderRemoteViews.setViewVisibility(standardTemplateParams.mTextViewId, 8);
                 builderRemoteViews.setTextViewText(standardTemplateParams.mTextViewId, null);
             }
-            updateExpanderAlignment(builderRemoteViews, standardTemplateParams, handleProgressBar);
-            setHeaderlessVerticalMargins(builderRemoteViews, standardTemplateParams, handleProgressBar);
+            updateExpanderAlignment(builderRemoteViews, standardTemplateParams, zHandleProgressBar);
+            setHeaderlessVerticalMargins(builderRemoteViews, standardTemplateParams, zHandleProgressBar);
             if (Flags.notificationsRedesignTemplates() && !standardTemplateParams.mHeaderless) {
                 builderRemoteViews.setViewLayoutMargin(R.id.notification_main_column, 1, getContentMarginTop(this.mContext, R.dimen.notification_2025_content_margin_top), 0);
             }
-            setHeaderlessVerticalMargins(this.mContext, builderRemoteViews, standardTemplateParams, handleProgressBar);
+            setHeaderlessVerticalMargins(this.mContext, builderRemoteViews, standardTemplateParams, zHandleProgressBar);
             return builderRemoteViews;
         }
 
@@ -3062,11 +3057,11 @@ public class Notification implements Parcelable {
             remoteViews.setViewLayoutMarginDimen(R.id.notification_headerless_view_column, 3, i);
         }
 
-        private static int getFontScaledMarginHeight(Context context, int i) {
+        private static int getFontScaledMarginHeight(Context context, int i) throws Resources.NotFoundException {
             return (int) (context.getResources().getDimensionPixelSize(i) * ((((context.getResources().getDisplayMetrics().scaledDensity / context.getResources().getDisplayMetrics().density) - 1.0f) / 2.0f) + 1.0f));
         }
 
-        private static int getFontScaledHeight(Context context, int i) {
+        private static int getFontScaledHeight(Context context, int i) throws Resources.NotFoundException {
             return (int) (context.getResources().getDimensionPixelSize(i) * (context.getResources().getDisplayMetrics().scaledDensity / context.getResources().getDisplayMetrics().density));
         }
 
@@ -3133,16 +3128,16 @@ public class Notification implements Parcelable {
                 remoteViews.setViewVisibility(16908301, 0);
                 remoteViews.setProgressBar(16908301, i, i2, z);
                 remoteViews.setProgressBackgroundTintList(16908301, this.mContext.getColorStateList(R.color.notification_progress_background_color));
-                ColorStateList valueOf = ColorStateList.valueOf(getPrimaryAccentColor(standardTemplateParams));
-                remoteViews.setProgressTintList(16908301, valueOf);
-                remoteViews.setProgressIndeterminateTintList(16908301, valueOf);
+                ColorStateList colorStateListValueOf = ColorStateList.valueOf(getPrimaryAccentColor(standardTemplateParams));
+                remoteViews.setProgressTintList(16908301, colorStateListValueOf);
+                remoteViews.setProgressIndeterminateTintList(16908301, colorStateListValueOf);
                 return true;
             }
             remoteViews.setViewVisibility(16908301, 8);
             return false;
         }
 
-        private void bindLargeIconAndApplyMargin(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams, TemplateBindResult templateBindResult) {
+        private void bindLargeIconAndApplyMargin(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams, TemplateBindResult templateBindResult) throws Resources.NotFoundException {
             if (templateBindResult == null) {
                 templateBindResult = new TemplateBindResult();
             }
@@ -3156,7 +3151,7 @@ public class Notification implements Parcelable {
             adjustExpandButtonPadding(remoteViews, templateBindResult.mRightIconVisible);
         }
 
-        private void adjustExpandButtonPadding(RemoteViews remoteViews, boolean z) {
+        private void adjustExpandButtonPadding(RemoteViews remoteViews, boolean z) throws Resources.NotFoundException {
             if (Flags.notificationsRedesignTemplates()) {
                 Resources resources = this.mContext.getResources();
                 int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.notification_2025_margin);
@@ -3168,9 +3163,9 @@ public class Notification implements Parcelable {
             }
         }
 
-        private void calculateRightIconDimens(Icon icon, boolean z, TemplateBindResult templateBindResult) {
+        private void calculateRightIconDimens(Icon icon, boolean z, TemplateBindResult templateBindResult) throws Resources.NotFoundException {
             float dimension;
-            Drawable loadDrawable;
+            Drawable drawableLoadDrawable;
             int intrinsicWidth;
             int intrinsicHeight;
             Resources resources = this.mContext.getResources();
@@ -3184,15 +3179,15 @@ public class Notification implements Parcelable {
             }
             float f2 = (dimension / f) - dimension3;
             float dimension4 = resources.getDimension(R.dimen.notification_right_icon_size) / f;
-            float min = (icon == null || (!z && this.mContext.getApplicationInfo().targetSdkVersion < 31) || (loadDrawable = icon.loadDrawable(this.mContext)) == null || (intrinsicWidth = loadDrawable.getIntrinsicWidth()) <= (intrinsicHeight = loadDrawable.getIntrinsicHeight()) || intrinsicHeight <= 0) ? dimension4 : Math.min((intrinsicWidth * dimension4) / intrinsicHeight, 1.7777778f * dimension4);
-            templateBindResult.setRightIconState(icon != null, min, dimension4, min + dimension2, f2);
+            float fMin = (icon == null || (!z && this.mContext.getApplicationInfo().targetSdkVersion < 31) || (drawableLoadDrawable = icon.loadDrawable(this.mContext)) == null || (intrinsicWidth = drawableLoadDrawable.getIntrinsicWidth()) <= (intrinsicHeight = drawableLoadDrawable.getIntrinsicHeight()) || intrinsicHeight <= 0) ? dimension4 : Math.min((intrinsicWidth * dimension4) / intrinsicHeight, 1.7777778f * dimension4);
+            templateBindResult.setRightIconState(icon != null, fMin, dimension4, fMin + dimension2, f2);
         }
 
         /* JADX WARN: Multi-variable type inference failed */
         /* JADX WARN: Type inference failed for: r0v7 */
         /* JADX WARN: Type inference failed for: r0v8, types: [boolean, int] */
         /* JADX WARN: Type inference failed for: r0v9 */
-        private void bindLargeIcon(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams, TemplateBindResult templateBindResult) {
+        private void bindLargeIcon(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams, TemplateBindResult templateBindResult) throws Resources.NotFoundException {
             Icon icon;
             if (this.mN.mLargeIcon == null && this.mN.largeIcon != null) {
                 Notification notification = this.mN;
@@ -3230,17 +3225,17 @@ public class Notification implements Parcelable {
             remoteViews.setIntTag(R.id.right_icon, R.id.tag_keep_when_showing_left_icon, 0);
         }
 
-        private void bindNotificationHeader(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams) {
+        private void bindNotificationHeader(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams) throws Resources.NotFoundException {
             if (standardTemplateParams.mViewType != StandardTemplateParams.VIEW_TYPE_GROUP_HEADER_EXPANDED) {
                 bindSmallIcon(remoteViews, standardTemplateParams);
             }
-            boolean bindHeaderAppName = bindHeaderAppName(remoteViews, standardTemplateParams, false);
-            boolean bindHeaderTextSecondary = bindHeaderAppName | bindHeaderTextSecondary(remoteViews, standardTemplateParams, bindHeaderAppName);
-            boolean bindHeaderText = bindHeaderTextSecondary | bindHeaderText(remoteViews, standardTemplateParams, bindHeaderTextSecondary);
-            if (!bindHeaderText) {
-                bindHeaderText |= bindHeaderAppName(remoteViews, standardTemplateParams, true);
+            boolean zBindHeaderAppName = bindHeaderAppName(remoteViews, standardTemplateParams, false);
+            boolean zBindHeaderTextSecondary = zBindHeaderAppName | bindHeaderTextSecondary(remoteViews, standardTemplateParams, zBindHeaderAppName);
+            boolean zBindHeaderText = zBindHeaderTextSecondary | bindHeaderText(remoteViews, standardTemplateParams, zBindHeaderTextSecondary);
+            if (!zBindHeaderText) {
+                zBindHeaderText |= bindHeaderAppName(remoteViews, standardTemplateParams, true);
             }
-            bindHeaderChronometerAndTime(remoteViews, standardTemplateParams, bindHeaderText);
+            bindHeaderChronometerAndTime(remoteViews, standardTemplateParams, zBindHeaderText);
             bindPhishingAlertIcon(remoteViews, standardTemplateParams);
             bindProfileBadge(remoteViews, standardTemplateParams);
             bindAlertedIcon(remoteViews, standardTemplateParams);
@@ -3259,22 +3254,22 @@ public class Notification implements Parcelable {
 
         private void bindExpandButton(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams) {
             int backgroundColor = getBackgroundColor(standardTemplateParams);
-            int flattenAlpha = Colors.flattenAlpha(getColors(standardTemplateParams).getProtectionColor(), backgroundColor);
-            Colors.flattenAlpha(getPrimaryTextColor(standardTemplateParams), flattenAlpha);
+            int iFlattenAlpha = Colors.flattenAlpha(getColors(standardTemplateParams).getProtectionColor(), backgroundColor);
+            Colors.flattenAlpha(getPrimaryTextColor(standardTemplateParams), iFlattenAlpha);
             remoteViews.setInt(R.id.expand_button, "setDefaultTextColor", isBackgroundColorized(standardTemplateParams) ? getPrimaryTextColor(standardTemplateParams) : getThirdTextColor(standardTemplateParams));
-            remoteViews.setInt(R.id.expand_button, "setDefaultPillColor", flattenAlpha);
+            remoteViews.setInt(R.id.expand_button, "setDefaultPillColor", iFlattenAlpha);
             if (standardTemplateParams.mHighlightExpander) {
-                flattenAlpha = Colors.flattenAlpha(getColors(standardTemplateParams).getTertiaryFixedDimAccentColor(), backgroundColor);
-                Colors.flattenAlpha(getColors(standardTemplateParams).getOnTertiaryFixedAccentTextColor(), flattenAlpha);
+                iFlattenAlpha = Colors.flattenAlpha(getColors(standardTemplateParams).getTertiaryFixedDimAccentColor(), backgroundColor);
+                Colors.flattenAlpha(getColors(standardTemplateParams).getOnTertiaryFixedAccentTextColor(), iFlattenAlpha);
             }
             remoteViews.setInt(R.id.expand_button, "setHighlightTextColor", getSecondaryTextColor(standardTemplateParams));
-            remoteViews.setInt(R.id.expand_button, "setHighlightPillColor", flattenAlpha);
+            remoteViews.setInt(R.id.expand_button, "setHighlightPillColor", iFlattenAlpha);
         }
 
         private void bindCloseButton(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams) {
-            int flattenAlpha = Colors.flattenAlpha(getColors(standardTemplateParams).getProtectionColor(), getBackgroundColor(standardTemplateParams));
-            remoteViews.setInt(R.id.close_button, "setForegroundColor", Colors.flattenAlpha(getPrimaryTextColor(standardTemplateParams), flattenAlpha));
-            remoteViews.setInt(R.id.close_button, "setBackgroundColor", flattenAlpha);
+            int iFlattenAlpha = Colors.flattenAlpha(getColors(standardTemplateParams).getProtectionColor(), getBackgroundColor(standardTemplateParams));
+            remoteViews.setInt(R.id.close_button, "setForegroundColor", Colors.flattenAlpha(getPrimaryTextColor(standardTemplateParams), iFlattenAlpha));
+            remoteViews.setInt(R.id.close_button, "setBackgroundColor", iFlattenAlpha);
         }
 
         private void bindHeaderChronometerAndTime(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams, boolean z) {
@@ -3438,57 +3433,57 @@ public class Notification implements Parcelable {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public RemoteViews applyStandardTemplateWithActions(int i, StandardTemplateParams standardTemplateParams, TemplateBindResult templateBindResult) {
+        public RemoteViews applyStandardTemplateWithActions(int i, StandardTemplateParams standardTemplateParams, TemplateBindResult templateBindResult) throws Resources.NotFoundException {
             StandardTemplateParams standardTemplateParams2;
             RemoteViews remoteViews;
             Builder builder;
-            boolean z;
-            RemoteViews applyStandardTemplate = applyStandardTemplate(i, standardTemplateParams, templateBindResult);
-            resetStandardTemplateWithActions(applyStandardTemplate);
-            bindSnoozeAction(applyStandardTemplate, standardTemplateParams);
-            ColorStateList valueOf = ColorStateList.valueOf(getStandardActionColor(standardTemplateParams));
-            applyStandardTemplate.setColorStateList(R.id.snooze_button, "setImageTintList", valueOf);
-            applyStandardTemplate.setColorStateList(R.id.bubble_button, "setImageTintList", valueOf);
+            boolean zPopulateActionsContainer;
+            RemoteViews remoteViewsApplyStandardTemplate = applyStandardTemplate(i, standardTemplateParams, templateBindResult);
+            resetStandardTemplateWithActions(remoteViewsApplyStandardTemplate);
+            bindSnoozeAction(remoteViewsApplyStandardTemplate, standardTemplateParams);
+            ColorStateList colorStateListValueOf = ColorStateList.valueOf(getStandardActionColor(standardTemplateParams));
+            remoteViewsApplyStandardTemplate.setColorStateList(R.id.snooze_button, "setImageTintList", colorStateListValueOf);
+            remoteViewsApplyStandardTemplate.setColorStateList(R.id.bubble_button, "setImageTintList", colorStateListValueOf);
             List<Action> nonContextualActions = getNonContextualActions();
-            int min = Math.min(nonContextualActions.size(), 3);
-            boolean z2 = standardTemplateParams.mCallStyleActions;
+            int iMin = Math.min(nonContextualActions.size(), 3);
+            boolean z = standardTemplateParams.mCallStyleActions;
             if (standardTemplateParams.mCallStyleActions) {
-                applyStandardTemplate.setViewPadding(R.id.actions, 0, 0, 0, 0);
+                remoteViewsApplyStandardTemplate.setViewPadding(R.id.actions, 0, 0, 0, 0);
                 if (!Flags.notificationsRedesignTemplates()) {
-                    applyStandardTemplate.setInt(R.id.actions, "setCollapsibleIndentDimen", R.dimen.call_notification_collapsible_indent);
+                    remoteViewsApplyStandardTemplate.setInt(R.id.actions, "setCollapsibleIndentDimen", R.dimen.call_notification_collapsible_indent);
                 }
                 if (Flags.evenlyDividedCallStyleActionLayout()) {
                     Log.d(Notification.TAG, "setting evenly divided mode on action list");
-                    applyStandardTemplate.setBoolean(R.id.actions, "setEvenlyDividedMode", true);
+                    remoteViewsApplyStandardTemplate.setBoolean(R.id.actions, "setEvenlyDividedMode", true);
                 }
             }
             if (!Flags.notificationsRedesignTemplates()) {
-                applyStandardTemplate.setBoolean(R.id.actions, "setEmphasizedMode", z2);
+                remoteViewsApplyStandardTemplate.setBoolean(R.id.actions, "setEmphasizedMode", z);
             }
             int i2 = Flags.notificationsRedesignTemplates() ? R.id.actions_container_layout : R.id.actions_container;
-            if (min > 0 && !standardTemplateParams.mHideActions) {
-                applyStandardTemplate.setViewVisibility(i2, 0);
-                applyStandardTemplate.setViewVisibility(R.id.actions, 0);
-                updateMarginsForActions(applyStandardTemplate, z2);
+            if (iMin > 0 && !standardTemplateParams.mHideActions) {
+                remoteViewsApplyStandardTemplate.setViewVisibility(i2, 0);
+                remoteViewsApplyStandardTemplate.setViewVisibility(R.id.actions, 0);
+                updateMarginsForActions(remoteViewsApplyStandardTemplate, z);
                 standardTemplateParams2 = standardTemplateParams;
                 builder = this;
-                z = builder.populateActionsContainer(applyStandardTemplate, standardTemplateParams2, nonContextualActions, min, z2);
-                remoteViews = applyStandardTemplate;
+                zPopulateActionsContainer = builder.populateActionsContainer(remoteViewsApplyStandardTemplate, standardTemplateParams2, nonContextualActions, iMin, z);
+                remoteViews = remoteViewsApplyStandardTemplate;
             } else {
                 standardTemplateParams2 = standardTemplateParams;
-                remoteViews = applyStandardTemplate;
+                remoteViews = remoteViewsApplyStandardTemplate;
                 builder = this;
                 remoteViews.setViewVisibility(i2, 8);
-                z = false;
+                zPopulateActionsContainer = false;
             }
             RemoteInputHistoryItem[] remoteInputHistoryItemArr = (RemoteInputHistoryItem[]) Notification.getParcelableArrayFromBundle(builder.mN.extras, Notification.EXTRA_REMOTE_INPUT_HISTORY_ITEMS, RemoteInputHistoryItem.class);
-            if (z && remoteInputHistoryItemArr != null && remoteInputHistoryItemArr.length > 0 && !TextUtils.isEmpty(remoteInputHistoryItemArr[0].getText()) && standardTemplateParams2.maxRemoteInputHistory > 0) {
-                boolean z3 = builder.mN.extras.getBoolean(Notification.EXTRA_SHOW_REMOTE_INPUT_SPINNER);
+            if (zPopulateActionsContainer && remoteInputHistoryItemArr != null && remoteInputHistoryItemArr.length > 0 && !TextUtils.isEmpty(remoteInputHistoryItemArr[0].getText()) && standardTemplateParams2.maxRemoteInputHistory > 0) {
+                boolean z2 = builder.mN.extras.getBoolean(Notification.EXTRA_SHOW_REMOTE_INPUT_SPINNER);
                 remoteViews.setViewVisibility(R.id.notification_material_reply_container, 0);
                 remoteViews.setViewVisibility(R.id.notification_material_reply_text_1_container, 0);
                 remoteViews.setTextViewText(R.id.notification_material_reply_text_1, builder.ensureColorSpanContrastOrStripStyling(remoteInputHistoryItemArr[0].getText(), standardTemplateParams2));
                 builder.setTextViewColorSecondary(remoteViews, R.id.notification_material_reply_text_1, standardTemplateParams2);
-                remoteViews.setViewVisibility(R.id.notification_material_reply_progress, z3 ? 0 : 8);
+                remoteViews.setViewVisibility(R.id.notification_material_reply_progress, z2 ? 0 : 8);
                 remoteViews.setProgressIndeterminateTintList(R.id.notification_material_reply_progress, ColorStateList.valueOf(builder.getPrimaryAccentColor(standardTemplateParams2)));
                 if (remoteInputHistoryItemArr.length > 1 && !TextUtils.isEmpty(remoteInputHistoryItemArr[1].getText()) && standardTemplateParams2.maxRemoteInputHistory > 1) {
                     remoteViews.setViewVisibility(R.id.notification_material_reply_text_2, 0);
@@ -3516,21 +3511,21 @@ public class Notification implements Parcelable {
             }
         }
 
-        private boolean populateActionsContainer(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams, List<Action> list, int i, boolean z) {
-            boolean z2 = false;
+        private boolean populateActionsContainer(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams, List<Action> list, int i, boolean z) throws Resources.NotFoundException {
+            boolean zHasValidRemoteInput = false;
             for (int i2 = 0; i2 < i; i2++) {
                 Action action = list.get(i2);
-                z2 |= hasValidRemoteInput(action);
-                RemoteViews generateActionButton = generateActionButton(action, z, standardTemplateParams);
+                zHasValidRemoteInput |= hasValidRemoteInput(action);
+                RemoteViews remoteViewsGenerateActionButton = generateActionButton(action, z, standardTemplateParams);
                 if (z && i2 > 0) {
-                    generateActionButton.setViewLayoutMarginDimen(R.id.action0, 4, 0);
+                    remoteViewsGenerateActionButton.setViewLayoutMarginDimen(R.id.action0, 4, 0);
                 }
-                remoteViews.addView(R.id.actions, generateActionButton);
+                remoteViews.addView(R.id.actions, remoteViewsGenerateActionButton);
             }
-            return z2;
+            return zHasValidRemoteInput;
         }
 
-        public static int getContentMarginTop(Context context, int i) {
+        public static int getContentMarginTop(Context context, int i) throws Resources.NotFoundException {
             Resources resources = context.getResources();
             return resources.getDimensionPixelSize(R.dimen.notification_2025_margin) + resources.getDimensionPixelSize(i) + resources.getDimensionPixelSize(R.dimen.notification_subtext_size);
         }
@@ -3555,44 +3550,44 @@ public class Notification implements Parcelable {
 
         @Deprecated
         public RemoteViews createContentView() {
-            RemoteViews makeContentView;
+            RemoteViews remoteViewsMakeContentView;
             if (useExistingRemoteView(this.mN.contentView)) {
                 return fullyCustomViewRequiresDecoration(false) ? minimallyDecoratedContentView(this.mN.contentView) : this.mN.contentView;
             }
             Style style = this.mStyle;
-            if (style == null || (makeContentView = style.makeContentView()) == null) {
+            if (style == null || (remoteViewsMakeContentView = style.makeContentView()) == null) {
                 return applyStandardTemplate(getCollapsedBaseLayoutResource(), this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_NORMAL).fillTextsFrom(this), null);
             }
-            return fullyCustomViewRequiresDecoration(true) ? minimallyDecoratedContentView(makeContentView) : makeContentView;
+            return fullyCustomViewRequiresDecoration(true) ? minimallyDecoratedContentView(remoteViewsMakeContentView) : remoteViewsMakeContentView;
         }
 
         private boolean fullyCustomViewRequiresDecoration(boolean z) {
             return !(z && Notification.isPlatformStyle(this.mStyle)) && this.mContext.getApplicationInfo().targetSdkVersion >= 31;
         }
 
-        private RemoteViews minimallyDecoratedContentView(RemoteViews remoteViews) {
-            StandardTemplateParams fillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_NORMAL).decorationType(1).fillTextsFrom(this);
+        private RemoteViews minimallyDecoratedContentView(RemoteViews remoteViews) throws Resources.NotFoundException {
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_NORMAL).decorationType(1).fillTextsFrom(this);
             TemplateBindResult templateBindResult = new TemplateBindResult();
-            RemoteViews applyStandardTemplate = applyStandardTemplate(getCollapsedBaseLayoutResource(), fillTextsFrom, templateBindResult);
-            Notification.buildCustomContentIntoTemplate(this.mContext, applyStandardTemplate, remoteViews, fillTextsFrom, templateBindResult);
-            return applyStandardTemplate;
+            RemoteViews remoteViewsApplyStandardTemplate = applyStandardTemplate(getCollapsedBaseLayoutResource(), standardTemplateParamsFillTextsFrom, templateBindResult);
+            Notification.buildCustomContentIntoTemplate(this.mContext, remoteViewsApplyStandardTemplate, remoteViews, standardTemplateParamsFillTextsFrom, templateBindResult);
+            return remoteViewsApplyStandardTemplate;
         }
 
-        private RemoteViews minimallyDecoratedExpandedContentView(RemoteViews remoteViews) {
-            StandardTemplateParams fillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).decorationType(1).fillTextsFrom(this);
+        private RemoteViews minimallyDecoratedExpandedContentView(RemoteViews remoteViews) throws Resources.NotFoundException {
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).decorationType(1).fillTextsFrom(this);
             TemplateBindResult templateBindResult = new TemplateBindResult();
-            RemoteViews applyStandardTemplateWithActions = applyStandardTemplateWithActions(getExpandedBaseLayoutResource(), fillTextsFrom, templateBindResult);
-            Notification.buildCustomContentIntoTemplate(this.mContext, applyStandardTemplateWithActions, remoteViews, fillTextsFrom, templateBindResult);
-            makeHeaderExpanded(applyStandardTemplateWithActions);
-            return applyStandardTemplateWithActions;
+            RemoteViews remoteViewsApplyStandardTemplateWithActions = applyStandardTemplateWithActions(getExpandedBaseLayoutResource(), standardTemplateParamsFillTextsFrom, templateBindResult);
+            Notification.buildCustomContentIntoTemplate(this.mContext, remoteViewsApplyStandardTemplateWithActions, remoteViews, standardTemplateParamsFillTextsFrom, templateBindResult);
+            makeHeaderExpanded(remoteViewsApplyStandardTemplateWithActions);
+            return remoteViewsApplyStandardTemplateWithActions;
         }
 
-        private RemoteViews minimallyDecoratedHeadsUpContentView(RemoteViews remoteViews) {
-            StandardTemplateParams fillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_HEADS_UP).decorationType(1).fillTextsFrom(this);
+        private RemoteViews minimallyDecoratedHeadsUpContentView(RemoteViews remoteViews) throws Resources.NotFoundException {
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_HEADS_UP).decorationType(1).fillTextsFrom(this);
             TemplateBindResult templateBindResult = new TemplateBindResult();
-            RemoteViews applyStandardTemplateWithActions = applyStandardTemplateWithActions(getHeadsUpBaseLayoutResource(), fillTextsFrom, templateBindResult);
-            Notification.buildCustomContentIntoTemplate(this.mContext, applyStandardTemplateWithActions, remoteViews, fillTextsFrom, templateBindResult);
-            return applyStandardTemplateWithActions;
+            RemoteViews remoteViewsApplyStandardTemplateWithActions = applyStandardTemplateWithActions(getHeadsUpBaseLayoutResource(), standardTemplateParamsFillTextsFrom, templateBindResult);
+            Notification.buildCustomContentIntoTemplate(this.mContext, remoteViewsApplyStandardTemplateWithActions, remoteViews, standardTemplateParamsFillTextsFrom, templateBindResult);
+            return remoteViewsApplyStandardTemplateWithActions;
         }
 
         private boolean useExistingRemoteView(RemoteViews remoteViews) {
@@ -3611,8 +3606,8 @@ public class Notification implements Parcelable {
             return createExpandedContentView();
         }
 
-        private RemoteViews createExpandedContentView() {
-            RemoteViews remoteViews;
+        private RemoteViews createExpandedContentView() throws Resources.NotFoundException {
+            RemoteViews remoteViewsApplyStandardTemplateWithActions;
             if (useExistingRemoteView(this.mN.bigContentView)) {
                 if (fullyCustomViewRequiresDecoration(false)) {
                     return minimallyDecoratedExpandedContentView(this.mN.bigContentView);
@@ -3621,18 +3616,18 @@ public class Notification implements Parcelable {
             }
             Style style = this.mStyle;
             if (style != null) {
-                remoteViews = style.makeExpandedContentView();
+                remoteViewsApplyStandardTemplateWithActions = style.makeExpandedContentView();
                 if (fullyCustomViewRequiresDecoration(true)) {
-                    remoteViews = minimallyDecoratedExpandedContentView(remoteViews);
+                    remoteViewsApplyStandardTemplateWithActions = minimallyDecoratedExpandedContentView(remoteViewsApplyStandardTemplateWithActions);
                 }
             } else {
-                remoteViews = null;
+                remoteViewsApplyStandardTemplateWithActions = null;
             }
-            if (remoteViews == null && expandedContentViewRequired()) {
-                remoteViews = applyStandardTemplateWithActions(getExpandedBaseLayoutResource(), this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).allowTextWithProgress(true).fillTextsFrom(this), null);
+            if (remoteViewsApplyStandardTemplateWithActions == null && expandedContentViewRequired()) {
+                remoteViewsApplyStandardTemplateWithActions = applyStandardTemplateWithActions(getExpandedBaseLayoutResource(), this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).allowTextWithProgress(true).fillTextsFrom(this), null);
             }
-            makeHeaderExpanded(remoteViews);
-            return remoteViews;
+            makeHeaderExpanded(remoteViewsApplyStandardTemplateWithActions);
+            return remoteViewsApplyStandardTemplateWithActions;
         }
 
         private boolean expandedContentViewRequired() {
@@ -3660,7 +3655,7 @@ public class Notification implements Parcelable {
             return makeNotificationHeader(this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_GROUP_HEADER_EXPANDED).fillTextsFrom(this));
         }
 
-        private RemoteViews makeNotificationHeader(StandardTemplateParams standardTemplateParams) {
+        private RemoteViews makeNotificationHeader(StandardTemplateParams standardTemplateParams) throws Resources.NotFoundException {
             BuilderRemoteViews builderRemoteViews;
             if (standardTemplateParams.mViewType == StandardTemplateParams.VIEW_TYPE_GROUP_HEADER) {
                 builderRemoteViews = new BuilderRemoteViews(this.mContext.getApplicationInfo(), R.layout.notification_template_group_header);
@@ -3689,17 +3684,17 @@ public class Notification implements Parcelable {
         }
 
         public RemoteViews createCompactHeadsUpContentView() {
-            RemoteViews makeCompactHeadsUpContentView;
+            RemoteViews remoteViewsMakeCompactHeadsUpContentView;
             if (this.mN.fullScreenIntent != null) {
                 return createHeadsUpContentView();
             }
             Style style = this.mStyle;
-            if (style != null && (makeCompactHeadsUpContentView = style.makeCompactHeadsUpContentView()) != null) {
-                return makeCompactHeadsUpContentView;
+            if (style != null && (remoteViewsMakeCompactHeadsUpContentView = style.makeCompactHeadsUpContentView()) != null) {
+                return remoteViewsMakeCompactHeadsUpContentView;
             }
-            StandardTemplateParams fillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_HEADS_UP).fillTextsFrom(this);
-            fillTextsFrom.headerTextSecondary(fillTextsFrom.mText).text(null).hideTime(true).summaryText("");
-            return applyStandardTemplate(getCompactHeadsUpBaseLayoutResource(), fillTextsFrom, null);
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_HEADS_UP).fillTextsFrom(this);
+            standardTemplateParamsFillTextsFrom.headerTextSecondary(standardTemplateParamsFillTextsFrom.mText).text(null).hideTime(true).summaryText("");
+            return applyStandardTemplate(getCompactHeadsUpBaseLayoutResource(), standardTemplateParamsFillTextsFrom, null);
         }
 
         @Deprecated
@@ -3712,9 +3707,9 @@ public class Notification implements Parcelable {
             }
             Style style = this.mStyle;
             if (style != null) {
-                RemoteViews makeHeadsUpContentView = style.makeHeadsUpContentView();
-                if (makeHeadsUpContentView != null) {
-                    return fullyCustomViewRequiresDecoration(true) ? minimallyDecoratedHeadsUpContentView(makeHeadsUpContentView) : makeHeadsUpContentView;
+                RemoteViews remoteViewsMakeHeadsUpContentView = style.makeHeadsUpContentView();
+                if (remoteViewsMakeHeadsUpContentView != null) {
+                    return fullyCustomViewRequiresDecoration(true) ? minimallyDecoratedHeadsUpContentView(remoteViewsMakeHeadsUpContentView) : remoteViewsMakeHeadsUpContentView;
                 }
             } else if (this.mActions.size() == 0) {
                 return null;
@@ -3726,18 +3721,18 @@ public class Notification implements Parcelable {
             return makePublicContentView(z, false);
         }
 
-        public RemoteViews makePublicContentView(boolean z, boolean z2) {
+        public RemoteViews makePublicContentView(boolean z, boolean z2) throws Resources.NotFoundException {
             if (this.mN.publicVersion != null && !z2) {
-                Builder recoverBuilder = recoverBuilder(this.mContext, this.mN.publicVersion);
+                Builder builderRecoverBuilder = recoverBuilder(this.mContext, this.mN.publicVersion);
                 Style style = this.mStyle;
                 if (style instanceof MessagingStyle) {
                     MessagingStyle messagingStyle = (MessagingStyle) style;
-                    Style style2 = recoverBuilder.mStyle;
+                    Style style2 = builderRecoverBuilder.mStyle;
                     if (style2 instanceof MessagingStyle) {
                         ((MessagingStyle) style2).mConversationType = messagingStyle.mConversationType;
                     }
                 }
-                return recoverBuilder.createContentView();
+                return builderRecoverBuilder.createContentView();
             }
             Bundle bundle = this.mN.extras;
             Style style3 = this.mStyle;
@@ -3760,47 +3755,47 @@ public class Notification implements Parcelable {
                 bundle2.putString(Notification.EXTRA_SUBSTITUTE_APP_NAME, string);
             }
             this.mN.extras = bundle2;
-            StandardTemplateParams fillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_PUBLIC).fillTextsFrom(this);
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_PUBLIC).fillTextsFrom(this);
             if (z) {
-                fillTextsFrom.highlightExpander(false);
+                standardTemplateParamsFillTextsFrom.highlightExpander(false);
             }
             if (!this.mN.isPromotedOngoing()) {
-                fillTextsFrom.disallowColorization();
+                standardTemplateParamsFillTextsFrom.disallowColorization();
             }
-            RemoteViews makeNotificationHeader = makeNotificationHeader(fillTextsFrom);
-            makeNotificationHeader.setBoolean(R.id.notification_header, "setExpandOnlyOnButton", true);
-            makeNotificationHeader.setBoolean(R.id.notification_header, "styleTextAsTitle", true);
+            RemoteViews remoteViewsMakeNotificationHeader = makeNotificationHeader(standardTemplateParamsFillTextsFrom);
+            remoteViewsMakeNotificationHeader.setBoolean(R.id.notification_header, "setExpandOnlyOnButton", true);
+            remoteViewsMakeNotificationHeader.setBoolean(R.id.notification_header, "styleTextAsTitle", true);
             this.mN.extras = bundle;
             this.mN.mLargeIcon = icon;
             this.mN.largeIcon = bitmap;
             this.mActions = arrayList;
             this.mStyle = style3;
-            return makeNotificationHeader;
+            return remoteViewsMakeNotificationHeader;
         }
 
-        public RemoteViews makeLowPriorityContentView(boolean z) {
-            StandardTemplateParams fillTextsFrom = this.mParams.reset().disallowColorization().viewType(StandardTemplateParams.VIEW_TYPE_MINIMIZED).highlightExpander(false).fillTextsFrom(this);
-            if (!z || TextUtils.isEmpty(fillTextsFrom.mSubText)) {
-                fillTextsFrom.summaryText(createSummaryText());
+        public RemoteViews makeLowPriorityContentView(boolean z) throws Resources.NotFoundException {
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mParams.reset().disallowColorization().viewType(StandardTemplateParams.VIEW_TYPE_MINIMIZED).highlightExpander(false).fillTextsFrom(this);
+            if (!z || TextUtils.isEmpty(standardTemplateParamsFillTextsFrom.mSubText)) {
+                standardTemplateParamsFillTextsFrom.summaryText(createSummaryText());
             }
-            RemoteViews makeNotificationHeader = makeNotificationHeader(fillTextsFrom);
-            makeNotificationHeader.setBoolean(R.id.notification_header, "setAcceptAllTouches", true);
-            makeNotificationHeader.setBoolean(R.id.notification_header, "styleTextAsTitle", true);
-            return makeNotificationHeader;
+            RemoteViews remoteViewsMakeNotificationHeader = makeNotificationHeader(standardTemplateParamsFillTextsFrom);
+            remoteViewsMakeNotificationHeader.setBoolean(R.id.notification_header, "setAcceptAllTouches", true);
+            remoteViewsMakeNotificationHeader.setBoolean(R.id.notification_header, "styleTextAsTitle", true);
+            return remoteViewsMakeNotificationHeader;
         }
 
-        public RemoteViews makeInsignificantView(boolean z) {
-            StandardTemplateParams fillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_INSIGNIFICANT).highlightExpander(false).fillTextsFrom(this);
-            if (!z || TextUtils.isEmpty(fillTextsFrom.mSubText)) {
-                fillTextsFrom.summaryText(createSummaryText());
+        public RemoteViews makeInsignificantView(boolean z) throws Resources.NotFoundException {
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_INSIGNIFICANT).highlightExpander(false).fillTextsFrom(this);
+            if (!z || TextUtils.isEmpty(standardTemplateParamsFillTextsFrom.mSubText)) {
+                standardTemplateParamsFillTextsFrom.summaryText(createSummaryText());
             }
-            RemoteViews makeNotificationHeader = makeNotificationHeader(fillTextsFrom);
-            makeNotificationHeader.setBoolean(R.id.notification_header, "setAcceptAllTouches", true);
-            makeNotificationHeader.setBoolean(R.id.notification_header, "styleTextAsTitle", true);
-            makeNotificationHeader.setTextViewText(fillTextsFrom.mTextViewId, ensureColorSpanContrastOrStripStyling(fillTextsFrom.mText, fillTextsFrom));
-            setTextViewColorSecondary(makeNotificationHeader, fillTextsFrom.mTextViewId, fillTextsFrom);
-            makeNotificationHeader.setViewVisibility(R.id.text, 0);
-            return makeNotificationHeader;
+            RemoteViews remoteViewsMakeNotificationHeader = makeNotificationHeader(standardTemplateParamsFillTextsFrom);
+            remoteViewsMakeNotificationHeader.setBoolean(R.id.notification_header, "setAcceptAllTouches", true);
+            remoteViewsMakeNotificationHeader.setBoolean(R.id.notification_header, "styleTextAsTitle", true);
+            remoteViewsMakeNotificationHeader.setTextViewText(standardTemplateParamsFillTextsFrom.mTextViewId, ensureColorSpanContrastOrStripStyling(standardTemplateParamsFillTextsFrom.mText, standardTemplateParamsFillTextsFrom));
+            setTextViewColorSecondary(remoteViewsMakeNotificationHeader, standardTemplateParamsFillTextsFrom.mTextViewId, standardTemplateParamsFillTextsFrom);
+            remoteViewsMakeNotificationHeader.setViewVisibility(R.id.text, 0);
+            return remoteViewsMakeNotificationHeader;
         }
 
         private CharSequence createSummaryText() {
@@ -3827,7 +3822,7 @@ public class Notification implements Parcelable {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public RemoteViews generateActionButton(Action action, boolean z, StandardTemplateParams standardTemplateParams) {
+        public RemoteViews generateActionButton(Action action, boolean z, StandardTemplateParams standardTemplateParams) throws Resources.NotFoundException {
             Integer fullLengthSpanColor;
             boolean z2 = action.actionIntent == null;
             BuilderRemoteViews builderRemoteViews = new BuilderRemoteViews(this.mContext.getApplicationInfo(), getActionButtonLayoutResource(z, z2));
@@ -3839,39 +3834,39 @@ public class Notification implements Parcelable {
                 builderRemoteViews.setRemoteInputs(R.id.action0, action.mRemoteInputs);
             }
             if (z) {
-                CharSequence charSequence = action.title;
+                CharSequence charSequenceEnsureColorSpanContrast = action.title;
                 int secondaryAccentColor = getColors(standardTemplateParams).getSecondaryAccentColor();
                 if (z2) {
                     Context context = this.mContext;
                     secondaryAccentColor = setAlphaComponentByFloatDimen(context, ContrastColorUtil.resolveSecondaryColor(context, getColors(standardTemplateParams).getBackgroundColor(), this.mInNightMode), R.dimen.notification_action_disabled_container_alpha);
                 }
                 if (Flags.cleanUpSpansAndNewLines()) {
-                    if (!isLegacy() && (fullLengthSpanColor = getFullLengthSpanColor(charSequence)) != null) {
+                    if (!isLegacy() && (fullLengthSpanColor = getFullLengthSpanColor(charSequenceEnsureColorSpanContrast)) != null) {
                         secondaryAccentColor = ensureButtonFillContrast(fullLengthSpanColor.intValue(), getColors(standardTemplateParams).getBackgroundColor());
                     }
                 } else if (isLegacy()) {
-                    charSequence = ContrastColorUtil.clearColorSpans(charSequence);
+                    charSequenceEnsureColorSpanContrast = ContrastColorUtil.clearColorSpans(charSequenceEnsureColorSpanContrast);
                 } else {
-                    Integer fullLengthSpanColor2 = getFullLengthSpanColor(charSequence);
+                    Integer fullLengthSpanColor2 = getFullLengthSpanColor(charSequenceEnsureColorSpanContrast);
                     if (fullLengthSpanColor2 != null) {
                         secondaryAccentColor = ensureButtonFillContrast(fullLengthSpanColor2.intValue(), getColors(standardTemplateParams).getBackgroundColor());
                     }
-                    charSequence = ContrastColorUtil.ensureColorSpanContrast(charSequence, secondaryAccentColor);
+                    charSequenceEnsureColorSpanContrast = ContrastColorUtil.ensureColorSpanContrast(charSequenceEnsureColorSpanContrast, secondaryAccentColor);
                 }
-                CharSequence ensureColorSpanContrastOrStripStyling = ensureColorSpanContrastOrStripStyling(charSequence, standardTemplateParams);
+                CharSequence charSequenceEnsureColorSpanContrastOrStripStyling = ensureColorSpanContrastOrStripStyling(charSequenceEnsureColorSpanContrast, standardTemplateParams);
                 if (standardTemplateParams.mCallStyleActions && Flags.evenlyDividedCallStyleActionLayout()) {
                     Log.d(Notification.TAG, "new action layout enabled, gluing instead of setting text");
-                    builderRemoteViews.setCharSequence(R.id.action0, "glueLabel", ensureColorSpanContrastOrStripStyling);
+                    builderRemoteViews.setCharSequence(R.id.action0, "glueLabel", charSequenceEnsureColorSpanContrastOrStripStyling);
                 } else {
-                    builderRemoteViews.setTextViewText(R.id.action0, ensureColorSpanContrastOrStripStyling);
+                    builderRemoteViews.setTextViewText(R.id.action0, charSequenceEnsureColorSpanContrastOrStripStyling);
                 }
-                int resolvePrimaryColor = ContrastColorUtil.resolvePrimaryColor(this.mContext, secondaryAccentColor, this.mInNightMode);
+                int iResolvePrimaryColor = ContrastColorUtil.resolvePrimaryColor(this.mContext, secondaryAccentColor, this.mInNightMode);
                 if (z2) {
                     Context context2 = this.mContext;
-                    resolvePrimaryColor = setAlphaComponentByFloatDimen(context2, ContrastColorUtil.resolveSecondaryColor(context2, getColors(standardTemplateParams).getBackgroundColor(), this.mInNightMode), R.dimen.notification_action_disabled_content_alpha);
+                    iResolvePrimaryColor = setAlphaComponentByFloatDimen(context2, ContrastColorUtil.resolveSecondaryColor(context2, getColors(standardTemplateParams).getBackgroundColor(), this.mInNightMode), R.dimen.notification_action_disabled_content_alpha);
                 }
-                builderRemoteViews.setTextColor(R.id.action0, resolvePrimaryColor);
-                builderRemoteViews.setColorStateList(R.id.action0, "setRippleColor", ColorStateList.valueOf((resolvePrimaryColor & 16777215) | Enums.AUDIO_FORMAT_DTS_UHD_P2));
+                builderRemoteViews.setTextColor(R.id.action0, iResolvePrimaryColor);
+                builderRemoteViews.setColorStateList(R.id.action0, "setRippleColor", ColorStateList.valueOf((iResolvePrimaryColor & 16777215) | Enums.AUDIO_FORMAT_DTS_UHD_P2));
                 builderRemoteViews.setColorStateList(R.id.action0, "setButtonBackground", ColorStateList.valueOf(secondaryAccentColor));
                 if (standardTemplateParams.mCallStyleActions) {
                     boolean z3 = action.getExtras().getBoolean("key_action_priority");
@@ -3882,9 +3877,9 @@ public class Notification implements Parcelable {
                 builderRemoteViews.setTextViewText(R.id.action0, ensureColorSpanContrastOrStripStyling(action.title, standardTemplateParams));
                 builderRemoteViews.setTextColor(R.id.action0, getStandardActionColor(standardTemplateParams));
             }
-            int indexOf = this.mActions.indexOf(action);
-            if (indexOf != -1) {
-                builderRemoteViews.setIntTag(R.id.action0, R.id.notification_action_index_tag, indexOf);
+            int iIndexOf = this.mActions.indexOf(action);
+            if (iIndexOf != -1) {
+                builderRemoteViews.setIntTag(R.id.action0, R.id.notification_action_index_tag, iIndexOf);
             }
             return builderRemoteViews;
         }
@@ -3902,14 +3897,14 @@ public class Notification implements Parcelable {
             return getActionLayoutResource();
         }
 
-        private static int setAlphaComponentByFloatDimen(Context context, int i, int i2) {
+        private static int setAlphaComponentByFloatDimen(Context context, int i, int i2) throws Resources.NotFoundException {
             TypedValue typedValue = new TypedValue();
             context.getResources().getValue(i2, typedValue, true);
             return ColorUtils.setAlphaComponent(i, Math.round(typedValue.getFloat() * 255.0f));
         }
 
         public static Integer getFullLengthSpanColor(CharSequence charSequence) {
-            Integer num = null;
+            Integer numValueOf = null;
             if (charSequence instanceof Spanned) {
                 Spanned spanned = (Spanned) charSequence;
                 for (Object obj : spanned.getSpans(0, spanned.length(), Object.class)) {
@@ -3917,15 +3912,15 @@ public class Notification implements Parcelable {
                         if (obj instanceof TextAppearanceSpan) {
                             ColorStateList textColor = ((TextAppearanceSpan) obj).getTextColor();
                             if (textColor != null) {
-                                num = Integer.valueOf(textColor.getDefaultColor());
+                                numValueOf = Integer.valueOf(textColor.getDefaultColor());
                             }
                         } else if (obj instanceof ForegroundColorSpan) {
-                            num = Integer.valueOf(((ForegroundColorSpan) obj).getForegroundColor());
+                            numValueOf = Integer.valueOf(((ForegroundColorSpan) obj).getForegroundColor());
                         }
                     }
                 }
             }
-            return num;
+            return numValueOf;
         }
 
         public CharSequence ensureColorSpanContrastOrStripStyling(CharSequence charSequence, StandardTemplateParams standardTemplateParams) {
@@ -3973,12 +3968,12 @@ public class Notification implements Parcelable {
         }
 
         private void processSmallIconColor(Icon icon, RemoteViews remoteViews, StandardTemplateParams standardTemplateParams) {
-            boolean isGrayscaleIcon = getColorUtil().isGrayscaleIcon(this.mContext, icon);
+            boolean zIsGrayscaleIcon = getColorUtil().isGrayscaleIcon(this.mContext, icon);
             int smallIconColor = getSmallIconColor(standardTemplateParams);
             if (standardTemplateParams.mViewType != StandardTemplateParams.VIEW_TYPE_INSIGNIFICANT) {
                 remoteViews.setInt(16908294, "setBackgroundColor", getBackgroundColor(standardTemplateParams));
             }
-            if (!isGrayscaleIcon) {
+            if (!zIsGrayscaleIcon) {
                 smallIconColor = 1;
             }
             remoteViews.setInt(16908294, "setOriginalIconColor", smallIconColor);
@@ -4061,7 +4056,7 @@ public class Notification implements Parcelable {
             return build();
         }
 
-        public Notification build() {
+        public Notification build() throws Resources.NotFoundException {
             if (this.mN.mShortcutId != null && this.mN.mBubbleMetadata != null && this.mN.mBubbleMetadata.getShortcutId() != null && !this.mN.mShortcutId.equals(this.mN.mBubbleMetadata.getShortcutId())) {
                 throw new IllegalArgumentException("Notification and BubbleMetadata shortcut id's don't match, notification: " + this.mN.mShortcutId + " vs bubble: " + this.mN.mBubbleMetadata.getShortcutId());
             }
@@ -4083,22 +4078,22 @@ public class Notification implements Parcelable {
             }
             this.mN.reduceImageSizes(this.mContext);
             if (this.mContext.getApplicationInfo().targetSdkVersion < 24 && !styleDisplaysCustomViewInline()) {
-                RemoteViews remoteViews = this.mN.contentView;
-                RemoteViews remoteViews2 = this.mN.bigContentView;
-                RemoteViews remoteViews3 = this.mN.headsUpContentView;
-                if (remoteViews == null) {
-                    remoteViews = createContentView();
-                    this.mN.extras.putInt(EXTRA_REBUILD_CONTENT_VIEW_ACTION_COUNT, remoteViews.getSequenceNumber());
+                RemoteViews remoteViewsCreateContentView = this.mN.contentView;
+                RemoteViews remoteViewsCreateBigContentView = this.mN.bigContentView;
+                RemoteViews remoteViewsCreateHeadsUpContentView = this.mN.headsUpContentView;
+                if (remoteViewsCreateContentView == null) {
+                    remoteViewsCreateContentView = createContentView();
+                    this.mN.extras.putInt(EXTRA_REBUILD_CONTENT_VIEW_ACTION_COUNT, remoteViewsCreateContentView.getSequenceNumber());
                 }
-                if (remoteViews2 == null && (remoteViews2 = createBigContentView()) != null) {
-                    this.mN.extras.putInt(EXTRA_REBUILD_BIG_CONTENT_VIEW_ACTION_COUNT, remoteViews2.getSequenceNumber());
+                if (remoteViewsCreateBigContentView == null && (remoteViewsCreateBigContentView = createBigContentView()) != null) {
+                    this.mN.extras.putInt(EXTRA_REBUILD_BIG_CONTENT_VIEW_ACTION_COUNT, remoteViewsCreateBigContentView.getSequenceNumber());
                 }
-                if (remoteViews3 == null && (remoteViews3 = createHeadsUpContentView()) != null) {
-                    this.mN.extras.putInt(EXTRA_REBUILD_HEADS_UP_CONTENT_VIEW_ACTION_COUNT, remoteViews3.getSequenceNumber());
+                if (remoteViewsCreateHeadsUpContentView == null && (remoteViewsCreateHeadsUpContentView = createHeadsUpContentView()) != null) {
+                    this.mN.extras.putInt(EXTRA_REBUILD_HEADS_UP_CONTENT_VIEW_ACTION_COUNT, remoteViewsCreateHeadsUpContentView.getSequenceNumber());
                 }
-                this.mN.contentView = remoteViews;
-                this.mN.bigContentView = remoteViews2;
-                this.mN.headsUpContentView = remoteViews3;
+                this.mN.contentView = remoteViewsCreateContentView;
+                this.mN.bigContentView = remoteViewsCreateBigContentView;
+                this.mN.headsUpContentView = remoteViewsCreateHeadsUpContentView;
             }
             if ((this.mN.defaults & 4) != 0) {
                 this.mN.flags |= 1;
@@ -4124,20 +4119,20 @@ public class Notification implements Parcelable {
                 boolean z2 = (notification.bigContentView instanceof BuilderRemoteViews) && notification.extras.getInt(EXTRA_REBUILD_BIG_CONTENT_VIEW_ACTION_COUNT, -1) == notification.bigContentView.getSequenceNumber();
                 boolean z3 = (notification.headsUpContentView instanceof BuilderRemoteViews) && notification.extras.getInt(EXTRA_REBUILD_HEADS_UP_CONTENT_VIEW_ACTION_COUNT, -1) == notification.headsUpContentView.getSequenceNumber();
                 if (z || z2 || z3) {
-                    Notification m421clone = notification.m421clone();
+                    Notification notificationM425clone = notification.m425clone();
                     if (z) {
-                        m421clone.contentView = null;
-                        m421clone.extras.remove(EXTRA_REBUILD_CONTENT_VIEW_ACTION_COUNT);
+                        notificationM425clone.contentView = null;
+                        notificationM425clone.extras.remove(EXTRA_REBUILD_CONTENT_VIEW_ACTION_COUNT);
                     }
                     if (z2) {
-                        m421clone.bigContentView = null;
-                        m421clone.extras.remove(EXTRA_REBUILD_BIG_CONTENT_VIEW_ACTION_COUNT);
+                        notificationM425clone.bigContentView = null;
+                        notificationM425clone.extras.remove(EXTRA_REBUILD_BIG_CONTENT_VIEW_ACTION_COUNT);
                     }
                     if (z3) {
-                        m421clone.headsUpContentView = null;
-                        m421clone.extras.remove(EXTRA_REBUILD_HEADS_UP_CONTENT_VIEW_ACTION_COUNT);
+                        notificationM425clone.headsUpContentView = null;
+                        notificationM425clone.extras.remove(EXTRA_REBUILD_HEADS_UP_CONTENT_VIEW_ACTION_COUNT);
                     }
-                    return m421clone;
+                    return notificationM425clone;
                 }
             }
             return notification;
@@ -4248,18 +4243,18 @@ public class Notification implements Parcelable {
         }
     }
 
-    void reduceImageSizes(Context context) {
+    void reduceImageSizes(Context context) throws Resources.NotFoundException {
         if (this.extras.getBoolean(EXTRA_REDUCED_IMAGES)) {
             return;
         }
-        boolean isLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
+        boolean zIsLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
         Icon icon = this.mSmallIcon;
         if (icon != null && (icon.getType() == 1 || this.mSmallIcon.getType() == 5)) {
-            int dimensionPixelSize = context.getResources().getDimensionPixelSize(isLowRamDeviceStatic ? R.dimen.notification_small_icon_size_low_ram : R.dimen.notification_small_icon_size);
+            int dimensionPixelSize = context.getResources().getDimensionPixelSize(zIsLowRamDeviceStatic ? R.dimen.notification_small_icon_size_low_ram : R.dimen.notification_small_icon_size);
             this.mSmallIcon.scaleDownIfNecessary(dimensionPixelSize, dimensionPixelSize);
         }
         if (this.mLargeIcon != null || this.largeIcon != null) {
-            int dimensionPixelSize2 = context.getResources().getDimensionPixelSize(isLowRamDeviceStatic ? R.dimen.notification_right_icon_size_low_ram : R.dimen.notification_right_icon_size);
+            int dimensionPixelSize2 = context.getResources().getDimensionPixelSize(zIsLowRamDeviceStatic ? R.dimen.notification_right_icon_size_low_ram : R.dimen.notification_right_icon_size);
             Icon icon2 = this.mLargeIcon;
             if (icon2 != null) {
                 icon2.scaleDownIfNecessary(dimensionPixelSize2, dimensionPixelSize2);
@@ -4269,9 +4264,9 @@ public class Notification implements Parcelable {
                 this.largeIcon = Icon.scaleDownIfNecessary(bitmap, dimensionPixelSize2, dimensionPixelSize2);
             }
         }
-        reduceImageSizesForRemoteView(this.contentView, context, isLowRamDeviceStatic);
-        reduceImageSizesForRemoteView(this.headsUpContentView, context, isLowRamDeviceStatic);
-        reduceImageSizesForRemoteView(this.bigContentView, context, isLowRamDeviceStatic);
+        reduceImageSizesForRemoteView(this.contentView, context, zIsLowRamDeviceStatic);
+        reduceImageSizesForRemoteView(this.headsUpContentView, context, zIsLowRamDeviceStatic);
+        reduceImageSizesForRemoteView(this.bigContentView, context, zIsLowRamDeviceStatic);
         this.extras.putBoolean(EXTRA_REDUCED_IMAGES, true);
     }
 
@@ -4420,7 +4415,7 @@ public class Notification implements Parcelable {
     public static void buildCustomContentIntoTemplate(Context context, RemoteViews remoteViews, RemoteViews remoteViews2, StandardTemplateParams standardTemplateParams, TemplateBindResult templateBindResult) {
         int i;
         if (remoteViews2 != null) {
-            RemoteViews mo465clone = remoteViews2.mo465clone();
+            RemoteViews remoteViewsMo469clone = remoteViews2.mo469clone();
             if (standardTemplateParams.mHeaderless) {
                 remoteViews.removeFromParent(R.id.notification_top_line);
                 Builder.setHeaderlessVerticalMargins(context, remoteViews, standardTemplateParams, true);
@@ -4430,7 +4425,7 @@ public class Notification implements Parcelable {
             }
             remoteViews.removeAllViewsExceptId(R.id.notification_main_column, 16908301);
             i = 0;
-            remoteViews.addView(R.id.notification_main_column, mo465clone, 0);
+            remoteViews.addView(R.id.notification_main_column, remoteViewsMo469clone, 0);
             remoteViews.addFlags(1);
         } else {
             i = -1;
@@ -4640,19 +4635,19 @@ public class Notification implements Parcelable {
         }
 
         @Override // android.app.Notification.Style
-        public void reduceImageSizes(Context context) {
+        public void reduceImageSizes(Context context) throws Resources.NotFoundException {
             super.reduceImageSizes(context);
             Resources resources = context.getResources();
-            boolean isLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
+            boolean zIsLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
             if (this.mPictureIcon != null) {
-                int dimensionPixelSize = resources.getDimensionPixelSize(isLowRamDeviceStatic ? R.dimen.notification_big_picture_max_height_low_ram : R.dimen.notification_big_picture_max_height);
-                int dimensionPixelSize2 = resources.getDimensionPixelSize(isLowRamDeviceStatic ? R.dimen.notification_big_picture_max_width_low_ram : R.dimen.notification_big_picture_max_width);
+                int dimensionPixelSize = resources.getDimensionPixelSize(zIsLowRamDeviceStatic ? R.dimen.notification_big_picture_max_height_low_ram : R.dimen.notification_big_picture_max_height);
+                int dimensionPixelSize2 = resources.getDimensionPixelSize(zIsLowRamDeviceStatic ? R.dimen.notification_big_picture_max_width_low_ram : R.dimen.notification_big_picture_max_width);
                 if (this.mPictureIcon.getType() == 1 || this.mPictureIcon.getType() == 5) {
                     this.mPictureIcon = Icon.createWithBitmap(Notification.scaleDownIfNecessaryForBigPicture(this.mPictureIcon.getBitmap(), dimensionPixelSize2, dimensionPixelSize));
                 }
             }
             if (this.mBigLargeIcon != null) {
-                int dimensionPixelSize3 = resources.getDimensionPixelSize(isLowRamDeviceStatic ? R.dimen.notification_right_icon_size_low_ram : R.dimen.notification_right_icon_size);
+                int dimensionPixelSize3 = resources.getDimensionPixelSize(zIsLowRamDeviceStatic ? R.dimen.notification_right_icon_size_low_ram : R.dimen.notification_right_icon_size);
                 this.mBigLargeIcon.scaleDownIfNecessary(dimensionPixelSize3, dimensionPixelSize3);
             }
         }
@@ -4686,11 +4681,11 @@ public class Notification implements Parcelable {
                 icon = null;
                 bitmap = null;
             }
-            StandardTemplateParams fillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).fillTextsFrom(this.mBuilder);
-            RemoteViews standardView = getStandardView(this.mBuilder.getBigPictureLayoutResource(), fillTextsFrom, null);
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).fillTextsFrom(this.mBuilder);
+            RemoteViews standardView = getStandardView(this.mBuilder.getBigPictureLayoutResource(), standardTemplateParamsFillTextsFrom, null);
             if (this.mSummaryTextSet) {
-                standardView.setTextViewText(R.id.text, this.mBuilder.ensureColorSpanContrastOrStripStyling(this.mBuilder.processLegacyText(this.mSummaryText), fillTextsFrom));
-                this.mBuilder.setTextViewColorSecondary(standardView, R.id.text, fillTextsFrom);
+                standardView.setTextViewText(R.id.text, this.mBuilder.ensureColorSpanContrastOrStripStyling(this.mBuilder.processLegacyText(this.mSummaryText), standardTemplateParamsFillTextsFrom));
+                this.mBuilder.setTextViewColorSecondary(standardView, R.id.text, standardTemplateParamsFillTextsFrom);
                 standardView.setViewVisibility(R.id.text, 0);
             }
             if (this.mBigLargeIconSet) {
@@ -4807,15 +4802,15 @@ public class Notification implements Parcelable {
 
         @Override // android.app.Notification.Style
         public RemoteViews makeExpandedContentView() {
-            StandardTemplateParams fillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).allowTextWithProgress(true).textViewId(R.id.big_text).fillTextsFrom(this.mBuilder);
-            CharSequence processLegacyText = this.mBuilder.processLegacyText(this.mBigText);
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).allowTextWithProgress(true).textViewId(R.id.big_text).fillTextsFrom(this.mBuilder);
+            CharSequence charSequenceProcessLegacyText = this.mBuilder.processLegacyText(this.mBigText);
             if (!this.mBuilder.mN.isPromotedOngoing() && Flags.cleanUpSpansAndNewLines()) {
-                processLegacyText = Notification.normalizeBigText(Notification.stripStyling(processLegacyText));
+                charSequenceProcessLegacyText = Notification.normalizeBigText(Notification.stripStyling(charSequenceProcessLegacyText));
             }
-            if (!TextUtils.isEmpty(processLegacyText)) {
-                fillTextsFrom.text(processLegacyText);
+            if (!TextUtils.isEmpty(charSequenceProcessLegacyText)) {
+                standardTemplateParamsFillTextsFrom.text(charSequenceProcessLegacyText);
             }
-            return getStandardView(this.mBuilder.getBigTextLayoutResource(), fillTextsFrom, null);
+            return getStandardView(this.mBuilder.getBigTextLayoutResource(), standardTemplateParamsFillTextsFrom, null);
         }
 
         @Override // android.app.Notification.Style
@@ -5020,56 +5015,56 @@ public class Notification implements Parcelable {
         }
 
         private void fixTitleAndTextExtras(Bundle bundle) {
-            Message findLatestIncomingMessage = findLatestIncomingMessage();
-            CharSequence charSequence = null;
-            CharSequence charSequence2 = findLatestIncomingMessage == null ? null : findLatestIncomingMessage.mText;
-            if (findLatestIncomingMessage != null) {
-                charSequence = ((findLatestIncomingMessage.mSender == null || TextUtils.isEmpty(findLatestIncomingMessage.mSender.getName())) ? this.mUser : findLatestIncomingMessage.mSender).getName();
+            Message messageFindLatestIncomingMessage = findLatestIncomingMessage();
+            CharSequence charSequenceStripStyling = null;
+            CharSequence charSequence = messageFindLatestIncomingMessage == null ? null : messageFindLatestIncomingMessage.mText;
+            if (messageFindLatestIncomingMessage != null) {
+                charSequenceStripStyling = ((messageFindLatestIncomingMessage.mSender == null || TextUtils.isEmpty(messageFindLatestIncomingMessage.mSender.getName())) ? this.mUser : messageFindLatestIncomingMessage.mSender).getName();
             }
             if (!TextUtils.isEmpty(this.mConversationTitle)) {
-                if (!TextUtils.isEmpty(charSequence) && !this.mConversationTitle.equals(charSequence)) {
+                if (!TextUtils.isEmpty(charSequenceStripStyling) && !this.mConversationTitle.equals(charSequenceStripStyling)) {
                     BidiFormatter bidiFormatter = BidiFormatter.getInstance();
-                    charSequence = this.mBuilder.mContext.getString(R.string.notification_messaging_title_template, bidiFormatter.unicodeWrap(this.mConversationTitle), bidiFormatter.unicodeWrap(charSequence));
+                    charSequenceStripStyling = this.mBuilder.mContext.getString(R.string.notification_messaging_title_template, bidiFormatter.unicodeWrap(this.mConversationTitle), bidiFormatter.unicodeWrap(charSequenceStripStyling));
                 } else {
-                    charSequence = this.mConversationTitle;
+                    charSequenceStripStyling = this.mConversationTitle;
                 }
             }
             if (Flags.cleanUpSpansAndNewLines()) {
-                charSequence = Notification.stripStyling(charSequence);
+                charSequenceStripStyling = Notification.stripStyling(charSequenceStripStyling);
+            }
+            if (charSequenceStripStyling != null) {
+                bundle.putCharSequence(Notification.EXTRA_TITLE, charSequenceStripStyling);
             }
             if (charSequence != null) {
-                bundle.putCharSequence(Notification.EXTRA_TITLE, charSequence);
-            }
-            if (charSequence2 != null) {
-                bundle.putCharSequence(Notification.EXTRA_TEXT, charSequence2);
+                bundle.putCharSequence(Notification.EXTRA_TEXT, charSequence);
             }
         }
 
         private void fixTitleAndTextForCompactMessaging(StandardTemplateParams standardTemplateParams) {
             CharSequence name;
-            Message findLatestIncomingMessage = findLatestIncomingMessage();
-            CharSequence charSequence = findLatestIncomingMessage == null ? null : findLatestIncomingMessage.mText;
-            if (findLatestIncomingMessage == null) {
+            Message messageFindLatestIncomingMessage = findLatestIncomingMessage();
+            CharSequence charSequence = messageFindLatestIncomingMessage == null ? null : messageFindLatestIncomingMessage.mText;
+            if (messageFindLatestIncomingMessage == null) {
                 name = null;
             } else {
-                name = ((findLatestIncomingMessage.mSender == null || TextUtils.isEmpty(findLatestIncomingMessage.mSender.getName())) ? this.mUser : findLatestIncomingMessage.mSender).getName();
+                name = ((messageFindLatestIncomingMessage.mSender == null || TextUtils.isEmpty(messageFindLatestIncomingMessage.mSender.getName())) ? this.mUser : messageFindLatestIncomingMessage.mSender).getName();
             }
-            CharSequence charSequence2 = this.mIsGroupConversation ? this.mConversationTitle : null;
+            CharSequence string = this.mIsGroupConversation ? this.mConversationTitle : null;
             BidiFormatter bidiFormatter = BidiFormatter.getInstance();
             if (name != null) {
                 name = this.mBuilder.mContext.getString(R.string.notification_messaging_title_template, bidiFormatter.unicodeWrap(name), "");
-            } else if (charSequence2 != null) {
-                charSequence2 = this.mBuilder.mContext.getString(R.string.notification_messaging_title_template, bidiFormatter.unicodeWrap(charSequence2), "");
+            } else if (string != null) {
+                string = this.mBuilder.mContext.getString(R.string.notification_messaging_title_template, bidiFormatter.unicodeWrap(string), "");
             }
             if (Flags.cleanUpSpansAndNewLines()) {
-                charSequence2 = Notification.stripStyling(charSequence2);
+                string = Notification.stripStyling(string);
                 name = Notification.stripStyling(name);
             }
-            boolean z = showConversationTitle() && charSequence2 != null;
+            boolean z = showConversationTitle() && string != null;
             if (!z) {
-                charSequence2 = name;
+                string = name;
             }
-            standardTemplateParams.title(charSequence2);
+            standardTemplateParams.title(string);
             if (z) {
                 standardTemplateParams.headerTextSecondary(name);
                 standardTemplateParams.summaryText(charSequence);
@@ -5138,13 +5133,13 @@ public class Notification implements Parcelable {
                 } else {
                     name = message.getSenderPerson().getName();
                 }
-                String valueOf = String.valueOf(name);
+                String strValueOf = String.valueOf(name);
                 if (message2.getSenderPerson() == null) {
                     name2 = message2.getSender();
                 } else {
                     name2 = message2.getSenderPerson().getName();
                 }
-                if (!Objects.equals(valueOf, String.valueOf(name2))) {
+                if (!Objects.equals(strValueOf, String.valueOf(name2))) {
                     return true;
                 }
                 if (!Objects.equals(message.getSenderPerson() == null ? null : message.getSenderPerson().getKey(), message2.getSenderPerson() != null ? message2.getSenderPerson().getKey() : null)) {
@@ -5177,23 +5172,121 @@ public class Notification implements Parcelable {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:43:0x00c5  */
-        /* JADX WARN: Removed duplicated region for block: B:54:0x0192  */
-        /* JADX WARN: Removed duplicated region for block: B:65:0x00e9  */
+        /* JADX WARN: Removed duplicated region for block: B:53:0x00aa  */
+        /* JADX WARN: Removed duplicated region for block: B:59:0x00ba  */
+        /* JADX WARN: Removed duplicated region for block: B:62:0x00c5  */
+        /* JADX WARN: Removed duplicated region for block: B:66:0x00e9  */
+        /* JADX WARN: Removed duplicated region for block: B:81:0x0192  */
+        /* JADX WARN: Removed duplicated region for block: B:88:0x01c6  */
         /* JADX WARN: Type inference failed for: r13v1, types: [android.app.Notification-IA] */
         /* JADX WARN: Type inference failed for: r13v2, types: [java.lang.CharSequence] */
         /* JADX WARN: Type inference failed for: r13v3 */
         /* JADX WARN: Type inference failed for: r3v11, types: [android.app.Notification$StandardTemplateParams] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private android.widget.RemoteViews makeMessagingView(int r17) {
-            /*
-                Method dump skipped, instructions count: 485
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.Notification.MessagingStyle.makeMessagingView(int):android.widget.RemoteViews");
+        private RemoteViews makeMessagingView(int i) throws Resources.NotFoundException {
+            CharSequence otherPersonName;
+            boolean zIsEmpty;
+            boolean z;
+            CharSequence charSequence;
+            StandardTemplateParams standardTemplateParamsHideRightIcon;
+            RemoteViews remoteViewsApplyStandardTemplateWithActions;
+            boolean z2 = i != StandardTemplateParams.VIEW_TYPE_EXPANDED;
+            boolean z3 = i != StandardTemplateParams.VIEW_TYPE_NORMAL;
+            int i2 = this.mConversationType;
+            boolean z4 = i2 != 0;
+            boolean z5 = i2 == 2;
+            boolean z6 = !z4 && z2;
+            boolean z7 = (z4 || z2) ? false : true;
+            if (!TextUtils.isEmpty(((Style) this).mBigContentTitle)) {
+                otherPersonName = ((Style) this).mBigContentTitle;
+            } else {
+                otherPersonName = this.mConversationTitle;
+            }
+            if (!(this.mBuilder.mContext.getApplicationInfo().targetSdkVersion >= 28)) {
+                zIsEmpty = TextUtils.isEmpty(otherPersonName);
+                if (hasOnlyWhiteSpaceSenders()) {
+                    z = true;
+                    charSequence = otherPersonName;
+                    otherPersonName = null;
+                }
+                if ((!z6 || Flags.notificationsRedesignTemplates()) && z && TextUtils.isEmpty(otherPersonName)) {
+                }
+                Icon icon = this.mBuilder.mN.mLargeIcon;
+                TemplateBindResult templateBindResult = new TemplateBindResult();
+                standardTemplateParamsHideRightIcon = this.mBuilder.mParams.reset().viewType(i).highlightExpander(z4).hideProgress(true).hideAppName((z6 && z7) ? false : true).hideLeftIcon(z).hideRightIcon(!z3 || z);
+                if (!Flags.notificationsRedesignTemplates()) {
+                    standardTemplateParamsHideRightIcon.title(otherPersonName).text(this.mMessages.isEmpty() ? null : ((Message) this.mMessages.getLast()).mText.toString()).hideAppName(z2);
+                } else {
+                    standardTemplateParamsHideRightIcon.title(z6 ? otherPersonName : null).text(null).headerTextSecondary(z6 ? 0 : otherPersonName);
+                }
+                remoteViewsApplyStandardTemplateWithActions = this.mBuilder.applyStandardTemplateWithActions(getMessagingLayoutResource(z4, z2), standardTemplateParamsHideRightIcon, templateBindResult);
+                if (z4 && !Flags.notificationsRedesignTemplates()) {
+                    this.mBuilder.setTextViewColorPrimary(remoteViewsApplyStandardTemplateWithActions, R.id.conversation_text, standardTemplateParamsHideRightIcon);
+                    remoteViewsApplyStandardTemplateWithActions.setViewVisibility(R.id.app_name_divider, 8);
+                    this.mBuilder.setTextViewColorSecondary(remoteViewsApplyStandardTemplateWithActions, R.id.app_name_divider, standardTemplateParamsHideRightIcon);
+                }
+                addExtras(this.mBuilder.mN.extras, true, this.mBuilder.getBackgroundColor(standardTemplateParamsHideRightIcon));
+                remoteViewsApplyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setLayoutColor", this.mBuilder.getSmallIconColor(standardTemplateParamsHideRightIcon));
+                remoteViewsApplyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setSenderTextColor", this.mBuilder.getPrimaryTextColor(standardTemplateParamsHideRightIcon));
+                remoteViewsApplyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setMessageTextColor", this.mBuilder.getSecondaryTextColor(standardTemplateParamsHideRightIcon));
+                remoteViewsApplyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setNotificationBackgroundColor", this.mBuilder.getBackgroundColor(standardTemplateParamsHideRightIcon));
+                remoteViewsApplyStandardTemplateWithActions.setBoolean(R.id.status_bar_latest_event_content, "setIsCollapsed", z2);
+                remoteViewsApplyStandardTemplateWithActions.setIcon(R.id.status_bar_latest_event_content, "setAvatarReplacement", this.mBuilder.mN.mLargeIcon);
+                remoteViewsApplyStandardTemplateWithActions.setCharSequence(R.id.status_bar_latest_event_content, "setNameReplacement", charSequence);
+                remoteViewsApplyStandardTemplateWithActions.setBoolean(R.id.status_bar_latest_event_content, "setIsOneToOne", z);
+                remoteViewsApplyStandardTemplateWithActions.setCharSequence(R.id.status_bar_latest_event_content, "setConversationTitle", otherPersonName);
+                if (z4) {
+                    remoteViewsApplyStandardTemplateWithActions.setIcon(R.id.status_bar_latest_event_content, "setShortcutIcon", this.mShortcutIcon);
+                    remoteViewsApplyStandardTemplateWithActions.setBoolean(R.id.status_bar_latest_event_content, "setIsImportantConversation", z5);
+                }
+                if (Flags.notificationsRedesignTemplates() && !z2) {
+                    remoteViewsApplyStandardTemplateWithActions.setViewLayoutMargin(16908310, 4, this.mBuilder.mContext.getResources().getDimensionPixelSize(R.dimen.notification_2025_content_margin_start), 0);
+                }
+                if (!z6 || z2) {
+                    remoteViewsApplyStandardTemplateWithActions.setInt(R.id.notification_messaging, "setMaxDisplayedLines", 2);
+                }
+                remoteViewsApplyStandardTemplateWithActions.setIcon(R.id.status_bar_latest_event_content, "setLargeIcon", icon);
+                remoteViewsApplyStandardTemplateWithActions.setBundle(R.id.status_bar_latest_event_content, "setData", this.mBuilder.mN.extras);
+                return remoteViewsApplyStandardTemplateWithActions;
+            }
+            zIsEmpty = !isGroupConversation();
+            z = zIsEmpty;
+            charSequence = null;
+            otherPersonName = !z6 ? getOtherPersonName() : getOtherPersonName();
+            Icon icon2 = this.mBuilder.mN.mLargeIcon;
+            TemplateBindResult templateBindResult2 = new TemplateBindResult();
+            standardTemplateParamsHideRightIcon = this.mBuilder.mParams.reset().viewType(i).highlightExpander(z4).hideProgress(true).hideAppName((z6 && z7) ? false : true).hideLeftIcon(z).hideRightIcon(!z3 || z);
+            if (!Flags.notificationsRedesignTemplates()) {
+            }
+            remoteViewsApplyStandardTemplateWithActions = this.mBuilder.applyStandardTemplateWithActions(getMessagingLayoutResource(z4, z2), standardTemplateParamsHideRightIcon, templateBindResult2);
+            if (z4) {
+                this.mBuilder.setTextViewColorPrimary(remoteViewsApplyStandardTemplateWithActions, R.id.conversation_text, standardTemplateParamsHideRightIcon);
+                remoteViewsApplyStandardTemplateWithActions.setViewVisibility(R.id.app_name_divider, 8);
+                this.mBuilder.setTextViewColorSecondary(remoteViewsApplyStandardTemplateWithActions, R.id.app_name_divider, standardTemplateParamsHideRightIcon);
+            }
+            addExtras(this.mBuilder.mN.extras, true, this.mBuilder.getBackgroundColor(standardTemplateParamsHideRightIcon));
+            remoteViewsApplyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setLayoutColor", this.mBuilder.getSmallIconColor(standardTemplateParamsHideRightIcon));
+            remoteViewsApplyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setSenderTextColor", this.mBuilder.getPrimaryTextColor(standardTemplateParamsHideRightIcon));
+            remoteViewsApplyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setMessageTextColor", this.mBuilder.getSecondaryTextColor(standardTemplateParamsHideRightIcon));
+            remoteViewsApplyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setNotificationBackgroundColor", this.mBuilder.getBackgroundColor(standardTemplateParamsHideRightIcon));
+            remoteViewsApplyStandardTemplateWithActions.setBoolean(R.id.status_bar_latest_event_content, "setIsCollapsed", z2);
+            remoteViewsApplyStandardTemplateWithActions.setIcon(R.id.status_bar_latest_event_content, "setAvatarReplacement", this.mBuilder.mN.mLargeIcon);
+            remoteViewsApplyStandardTemplateWithActions.setCharSequence(R.id.status_bar_latest_event_content, "setNameReplacement", charSequence);
+            remoteViewsApplyStandardTemplateWithActions.setBoolean(R.id.status_bar_latest_event_content, "setIsOneToOne", z);
+            remoteViewsApplyStandardTemplateWithActions.setCharSequence(R.id.status_bar_latest_event_content, "setConversationTitle", otherPersonName);
+            if (z4) {
+            }
+            if (Flags.notificationsRedesignTemplates()) {
+                remoteViewsApplyStandardTemplateWithActions.setViewLayoutMargin(16908310, 4, this.mBuilder.mContext.getResources().getDimensionPixelSize(R.dimen.notification_2025_content_margin_start), 0);
+            }
+            if (!z6) {
+                remoteViewsApplyStandardTemplateWithActions.setInt(R.id.notification_messaging, "setMaxDisplayedLines", 2);
+            }
+            remoteViewsApplyStandardTemplateWithActions.setIcon(R.id.status_bar_latest_event_content, "setLargeIcon", icon2);
+            remoteViewsApplyStandardTemplateWithActions.setBundle(R.id.status_bar_latest_event_content, "setData", this.mBuilder.mN.extras);
+            return remoteViewsApplyStandardTemplateWithActions;
         }
 
         private int getMessagingLayoutResource(boolean z, boolean z2) {
@@ -5262,22 +5355,22 @@ public class Notification implements Parcelable {
         }
 
         @Override // android.app.Notification.Style
-        public RemoteViews makeHeadsUpContentView() {
-            RemoteViews makeMessagingView = makeMessagingView(StandardTemplateParams.VIEW_TYPE_HEADS_UP);
-            makeMessagingView.setInt(R.id.notification_messaging, "setMaxDisplayedLines", 2);
-            return makeMessagingView;
+        public RemoteViews makeHeadsUpContentView() throws Resources.NotFoundException {
+            RemoteViews remoteViewsMakeMessagingView = makeMessagingView(StandardTemplateParams.VIEW_TYPE_HEADS_UP);
+            remoteViewsMakeMessagingView.setInt(R.id.notification_messaging, "setMaxDisplayedLines", 2);
+            return remoteViewsMakeMessagingView;
         }
 
         @Override // android.app.Notification.Style
-        public RemoteViews makeCompactHeadsUpContentView() {
+        public RemoteViews makeCompactHeadsUpContentView() throws Resources.NotFoundException {
             Icon icon;
             Action action;
-            Message findLatestIncomingMessage;
+            Message messageFindLatestIncomingMessage;
             Person person;
             boolean z = this.mConversationType != 0;
             if (z) {
                 icon = this.mShortcutIcon;
-                if (icon == null && !this.mIsGroupConversation && (findLatestIncomingMessage = findLatestIncomingMessage()) != null && (person = findLatestIncomingMessage.mSender) != null) {
+                if (icon == null && !this.mIsGroupConversation && (messageFindLatestIncomingMessage = findLatestIncomingMessage()) != null && (person = messageFindLatestIncomingMessage.mSender) != null) {
                     icon = person.getIcon();
                 }
                 if (Flags.compactHeadsUpNotificationReply()) {
@@ -5288,51 +5381,53 @@ public class Notification implements Parcelable {
                             break;
                         }
                     }
+                    action = null;
+                } else {
+                    action = null;
                 }
-                action = null;
             } else {
                 icon = null;
                 action = null;
             }
-            StandardTemplateParams hideTime = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_HEADS_UP).highlightExpander(z).fillTextsFrom(this.mBuilder).hideTime(true);
-            fixTitleAndTextForCompactMessaging(hideTime);
-            RemoteViews applyStandardTemplate = this.mBuilder.applyStandardTemplate(this.mBuilder.getMessagingCompactHeadsUpLayoutResource(), hideTime, new TemplateBindResult());
-            applyStandardTemplate.setViewVisibility(R.id.header_text_secondary_divider, 8);
-            applyStandardTemplate.setViewVisibility(R.id.header_text_divider, 8);
+            StandardTemplateParams standardTemplateParamsHideTime = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_HEADS_UP).highlightExpander(z).fillTextsFrom(this.mBuilder).hideTime(true);
+            fixTitleAndTextForCompactMessaging(standardTemplateParamsHideTime);
+            RemoteViews remoteViewsApplyStandardTemplate = this.mBuilder.applyStandardTemplate(this.mBuilder.getMessagingCompactHeadsUpLayoutResource(), standardTemplateParamsHideTime, new TemplateBindResult());
+            remoteViewsApplyStandardTemplate.setViewVisibility(R.id.header_text_secondary_divider, 8);
+            remoteViewsApplyStandardTemplate.setViewVisibility(R.id.header_text_divider, 8);
             if (icon != null) {
-                applyStandardTemplate.setViewVisibility(16908294, 8);
-                applyStandardTemplate.setViewVisibility(R.id.conversation_face_pile, 8);
-                applyStandardTemplate.setViewVisibility(R.id.conversation_icon, 0);
-                applyStandardTemplate.setImageViewIcon(R.id.conversation_icon, icon);
+                remoteViewsApplyStandardTemplate.setViewVisibility(16908294, 8);
+                remoteViewsApplyStandardTemplate.setViewVisibility(R.id.conversation_face_pile, 8);
+                remoteViewsApplyStandardTemplate.setViewVisibility(R.id.conversation_icon, 0);
+                remoteViewsApplyStandardTemplate.setImageViewIcon(R.id.conversation_icon, icon);
             } else if (this.mIsGroupConversation) {
-                applyStandardTemplate.setViewVisibility(16908294, 8);
-                applyStandardTemplate.setViewVisibility(R.id.conversation_icon, 8);
-                applyStandardTemplate.setInt(R.id.status_bar_latest_event_content, "setNotificationBackgroundColor", this.mBuilder.getBackgroundColor(hideTime));
-                applyStandardTemplate.setInt(R.id.status_bar_latest_event_content, "setLayoutColor", this.mBuilder.getSmallIconColor(hideTime));
-                applyStandardTemplate.setBundle(R.id.status_bar_latest_event_content, "setGroupFacePile", this.mBuilder.mN.extras);
+                remoteViewsApplyStandardTemplate.setViewVisibility(16908294, 8);
+                remoteViewsApplyStandardTemplate.setViewVisibility(R.id.conversation_icon, 8);
+                remoteViewsApplyStandardTemplate.setInt(R.id.status_bar_latest_event_content, "setNotificationBackgroundColor", this.mBuilder.getBackgroundColor(standardTemplateParamsHideTime));
+                remoteViewsApplyStandardTemplate.setInt(R.id.status_bar_latest_event_content, "setLayoutColor", this.mBuilder.getSmallIconColor(standardTemplateParamsHideTime));
+                remoteViewsApplyStandardTemplate.setBundle(R.id.status_bar_latest_event_content, "setGroupFacePile", this.mBuilder.mN.extras);
             }
             if (action != null) {
-                applyStandardTemplate.setViewVisibility(R.id.reply_action_container, 0);
-                RemoteViews generateActionButton = this.mBuilder.generateActionButton(action, false, hideTime);
-                generateActionButton.setInt(R.id.action0, "setBackgroundResource", 0);
-                generateActionButton.setTextViewText(R.id.action0, this.mBuilder.mContext.getString(R.string.notification_compact_heads_up_reply));
-                applyStandardTemplate.addView(R.id.reply_action_container, generateActionButton);
-                return applyStandardTemplate;
+                remoteViewsApplyStandardTemplate.setViewVisibility(R.id.reply_action_container, 0);
+                RemoteViews remoteViewsGenerateActionButton = this.mBuilder.generateActionButton(action, false, standardTemplateParamsHideTime);
+                remoteViewsGenerateActionButton.setInt(R.id.action0, "setBackgroundResource", 0);
+                remoteViewsGenerateActionButton.setTextViewText(R.id.action0, this.mBuilder.mContext.getString(R.string.notification_compact_heads_up_reply));
+                remoteViewsApplyStandardTemplate.addView(R.id.reply_action_container, remoteViewsGenerateActionButton);
+                return remoteViewsApplyStandardTemplate;
             }
-            applyStandardTemplate.setViewVisibility(R.id.reply_action_container, 8);
-            return applyStandardTemplate;
+            remoteViewsApplyStandardTemplate.setViewVisibility(R.id.reply_action_container, 8);
+            return remoteViewsApplyStandardTemplate;
         }
 
         @Override // android.app.Notification.Style
-        public void reduceImageSizes(Context context) {
+        public void reduceImageSizes(Context context) throws Resources.NotFoundException {
             super.reduceImageSizes(context);
             Resources resources = context.getResources();
-            boolean isLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
+            boolean zIsLowRamDeviceStatic = ActivityManager.isLowRamDeviceStatic();
             if (this.mShortcutIcon != null) {
-                int dimensionPixelSize = resources.getDimensionPixelSize(isLowRamDeviceStatic ? R.dimen.notification_small_icon_size_low_ram : R.dimen.notification_small_icon_size);
+                int dimensionPixelSize = resources.getDimensionPixelSize(zIsLowRamDeviceStatic ? R.dimen.notification_small_icon_size_low_ram : R.dimen.notification_small_icon_size);
                 this.mShortcutIcon.scaleDownIfNecessary(dimensionPixelSize, dimensionPixelSize);
             }
-            int dimensionPixelSize2 = resources.getDimensionPixelSize(isLowRamDeviceStatic ? R.dimen.notification_person_icon_max_size_low_ram : R.dimen.notification_person_icon_max_size);
+            int dimensionPixelSize2 = resources.getDimensionPixelSize(zIsLowRamDeviceStatic ? R.dimen.notification_person_icon_max_size_low_ram : R.dimen.notification_person_icon_max_size);
             Person person = this.mUser;
             if (person != null && person.getIcon() != null) {
                 this.mUser.getIcon().scaleDownIfNecessary(dimensionPixelSize2, dimensionPixelSize2);
@@ -5403,20 +5498,20 @@ public class Notification implements Parcelable {
             }
 
             private CharSequence stripNonStyleSpans(CharSequence charSequence) {
-                Object obj;
+                Object textAppearanceSpan;
                 if (!(charSequence instanceof Spanned)) {
                     return charSequence;
                 }
                 Spanned spanned = (Spanned) charSequence;
                 Object[] spans = spanned.getSpans(0, spanned.length(), Object.class);
                 SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(spanned.toString());
-                for (Object obj2 : spans) {
-                    if ((obj2 instanceof StyleSpan) || (obj2 instanceof StrikethroughSpan) || (obj2 instanceof UnderlineSpan)) {
-                        obj = obj2;
-                    } else if (obj2 instanceof TextAppearanceSpan) {
-                        obj = new TextAppearanceSpan(null, ((TextAppearanceSpan) obj2).getTextStyle(), -1, null, null);
+                for (Object obj : spans) {
+                    if ((obj instanceof StyleSpan) || (obj instanceof StrikethroughSpan) || (obj instanceof UnderlineSpan)) {
+                        textAppearanceSpan = obj;
+                    } else if (obj instanceof TextAppearanceSpan) {
+                        textAppearanceSpan = new TextAppearanceSpan(null, ((TextAppearanceSpan) obj).getTextStyle(), -1, null, null);
                     }
-                    spannableStringBuilder.setSpan(obj, spanned.getSpanStart(obj2), spanned.getSpanEnd(obj2), spanned.getSpanFlags(obj2));
+                    spannableStringBuilder.setSpan(textAppearanceSpan, spanned.getSpanStart(obj), spanned.getSpanEnd(obj), spanned.getSpanFlags(obj));
                 }
                 return spannableStringBuilder;
             }
@@ -5518,11 +5613,11 @@ public class Notification implements Parcelable {
                 CharSequence charSequence;
                 try {
                     if (bundle.containsKey("text") && bundle.containsKey("time")) {
-                        Person person = (Person) bundle.getParcelable(KEY_SENDER_PERSON, Person.class);
-                        if (person == null && (charSequence = bundle.getCharSequence("sender")) != null) {
-                            person = new Person.Builder().setName(charSequence).build();
+                        Person personBuild = (Person) bundle.getParcelable(KEY_SENDER_PERSON, Person.class);
+                        if (personBuild == null && (charSequence = bundle.getCharSequence("sender")) != null) {
+                            personBuild = new Person.Builder().setName(charSequence).build();
                         }
-                        Message message = new Message(bundle.getCharSequence("text"), bundle.getLong("time"), person, bundle.getBoolean(KEY_REMOTE_INPUT_HISTORY, false));
+                        Message message = new Message(bundle.getCharSequence("text"), bundle.getLong("time"), personBuild, bundle.getBoolean(KEY_REMOTE_INPUT_HISTORY, false));
                         if (bundle.containsKey("type") && bundle.containsKey("uri")) {
                             message.setData(bundle.getString("type"), (Uri) bundle.getParcelable("uri", Uri.class));
                         }
@@ -5588,20 +5683,61 @@ public class Notification implements Parcelable {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:24:0x00ac  */
-        /* JADX WARN: Removed duplicated region for block: B:31:0x00d8 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x00dd  */
+        /* JADX WARN: Removed duplicated region for block: B:18:0x0091 A[PHI: r1
+          0x0091: PHI (r1v7 int) = (r1v6 int), (r1v6 int), (r1v6 int), (r1v9 int) binds: [B:9:0x006d, B:11:0x0070, B:13:0x0080, B:16:0x008b] A[DONT_GENERATE, DONT_INLINE]] */
         @Override // android.app.Notification.Style
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public android.widget.RemoteViews makeExpandedContentView() {
-            /*
-                Method dump skipped, instructions count: 264
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.Notification.InboxStyle.makeExpandedContentView():android.widget.RemoteViews");
+        public RemoteViews makeExpandedContentView() throws Resources.NotFoundException {
+            boolean z;
+            int i;
+            int i2;
+            StandardTemplateParams standardTemplateParamsText = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).fillTextsFrom(this.mBuilder).text(null);
+            RemoteViews standardView = getStandardView(this.mBuilder.getInboxLayoutResource(), standardTemplateParamsText, new TemplateBindResult());
+            int[] iArr = {R.id.inbox_text0, R.id.inbox_text1, R.id.inbox_text2, R.id.inbox_text3, R.id.inbox_text4, R.id.inbox_text5, R.id.inbox_text6};
+            for (int i3 = 0; i3 < 7; i3++) {
+                standardView.setViewVisibility(iArr[i3], 8);
+            }
+            int dimensionPixelSize = this.mBuilder.mContext.getResources().getDimensionPixelSize(R.dimen.notification_inbox_item_top_padding);
+            int i4 = this.mBuilder.mActions.size() > 0 ? 6 : 7;
+            RemoteInputHistoryItem[] remoteInputHistoryItemArr = (RemoteInputHistoryItem[]) Notification.getParcelableArrayFromBundle(this.mBuilder.mN.extras, Notification.EXTRA_REMOTE_INPUT_HISTORY_ITEMS, RemoteInputHistoryItem.class);
+            if (remoteInputHistoryItemArr == null || remoteInputHistoryItemArr.length <= 1) {
+                z = true;
+                i = 0;
+                i2 = 0;
+            } else {
+                int size = (this.mTexts.size() + Math.min(remoteInputHistoryItemArr.length, 3)) - 1;
+                if (size > i4) {
+                    int i5 = size - i4;
+                    if (this.mTexts.size() > i4) {
+                        i4 -= i5;
+                        z = true;
+                        i = 0;
+                        i2 = 0;
+                    } else {
+                        z = true;
+                        i2 = i5;
+                        i = 0;
+                    }
+                }
+            }
+            while (i2 < this.mTexts.size() && i2 < i4) {
+                CharSequence charSequence = this.mTexts.get(i2);
+                if (!TextUtils.isEmpty(charSequence)) {
+                    standardView.setViewVisibility(iArr[i2], 0);
+                    standardView.setTextViewText(iArr[i2], this.mBuilder.ensureColorSpanContrastOrStripStyling(this.mBuilder.processLegacyText(charSequence), standardTemplateParamsText));
+                    this.mBuilder.setTextViewColorSecondary(standardView, iArr[i2], standardTemplateParamsText);
+                    standardView.setViewPadding(iArr[i2], 0, dimensionPixelSize, 0, 0);
+                    i = z ? iArr[i2] : 0;
+                    z = false;
+                }
+                i2++;
+            }
+            if (i != 0) {
+                standardView.setViewPadding(i, 0, this.mBuilder.mContext.getResources().getDimensionPixelSize(R.dimen.notification_text_margin_top), 0, 0);
+            }
+            return standardView;
         }
 
         @Override // android.app.Notification.Style
@@ -5746,42 +5882,42 @@ public class Notification implements Parcelable {
             remoteViews.setContentDescription(i, action.title);
         }
 
-        protected RemoteViews makeMediaContentView(RemoteViews remoteViews) {
+        protected RemoteViews makeMediaContentView(RemoteViews remoteViews) throws Resources.NotFoundException {
             int size = this.mBuilder.mActions.size();
             int[] iArr = this.mActionsToShowInCompact;
-            int min = Math.min(iArr == null ? 0 : iArr.length, 3);
-            if (min > size) {
+            int iMin = Math.min(iArr == null ? 0 : iArr.length, 3);
+            if (iMin > size) {
                 throw new IllegalArgumentException(String.format("setShowActionsInCompactView: action %d out of bounds (max %d)", Integer.valueOf(size), Integer.valueOf(size - 1)));
             }
-            StandardTemplateParams fillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_NORMAL).hideTime(min > 1).hideSubText(min > 1).hideLeftIcon(false).hideRightIcon(min > 0).hideProgress(true).fillTextsFrom(this.mBuilder);
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_NORMAL).hideTime(iMin > 1).hideSubText(iMin > 1).hideLeftIcon(false).hideRightIcon(iMin > 0).hideProgress(true).fillTextsFrom(this.mBuilder);
             TemplateBindResult templateBindResult = new TemplateBindResult();
-            RemoteViews applyStandardTemplate = this.mBuilder.applyStandardTemplate(this.mBuilder.getCollapsedMediaLayoutResource(), fillTextsFrom, null);
+            RemoteViews remoteViewsApplyStandardTemplate = this.mBuilder.applyStandardTemplate(this.mBuilder.getCollapsedMediaLayoutResource(), standardTemplateParamsFillTextsFrom, null);
             for (int i = 0; i < 3; i++) {
-                if (i < min) {
-                    bindMediaActionButton(applyStandardTemplate, MEDIA_BUTTON_IDS[i], (Action) this.mBuilder.mActions.get(this.mActionsToShowInCompact[i]), fillTextsFrom);
+                if (i < iMin) {
+                    bindMediaActionButton(remoteViewsApplyStandardTemplate, MEDIA_BUTTON_IDS[i], (Action) this.mBuilder.mActions.get(this.mActionsToShowInCompact[i]), standardTemplateParamsFillTextsFrom);
                 } else {
-                    applyStandardTemplate.setViewVisibility(MEDIA_BUTTON_IDS[i], 8);
+                    remoteViewsApplyStandardTemplate.setViewVisibility(MEDIA_BUTTON_IDS[i], 8);
                 }
             }
-            applyStandardTemplate.setViewVisibility(R.id.media_actions, min != 0 ? 0 : 8);
-            Notification.buildCustomContentIntoTemplate(this.mBuilder.mContext, applyStandardTemplate, remoteViews, fillTextsFrom, templateBindResult);
-            return applyStandardTemplate;
+            remoteViewsApplyStandardTemplate.setViewVisibility(R.id.media_actions, iMin != 0 ? 0 : 8);
+            Notification.buildCustomContentIntoTemplate(this.mBuilder.mContext, remoteViewsApplyStandardTemplate, remoteViews, standardTemplateParamsFillTextsFrom, templateBindResult);
+            return remoteViewsApplyStandardTemplate;
         }
 
-        protected RemoteViews makeMediaExpandedContentView(RemoteViews remoteViews) {
-            int min = Math.min(this.mBuilder.mActions.size(), 5);
-            StandardTemplateParams fillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).hideProgress(true).fillTextsFrom(this.mBuilder);
+        protected RemoteViews makeMediaExpandedContentView(RemoteViews remoteViews) throws Resources.NotFoundException {
+            int iMin = Math.min(this.mBuilder.mActions.size(), 5);
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).hideProgress(true).fillTextsFrom(this.mBuilder);
             TemplateBindResult templateBindResult = new TemplateBindResult();
-            RemoteViews applyStandardTemplate = this.mBuilder.applyStandardTemplate(this.mBuilder.getExpandedMediaLayoutResource(), fillTextsFrom, templateBindResult);
+            RemoteViews remoteViewsApplyStandardTemplate = this.mBuilder.applyStandardTemplate(this.mBuilder.getExpandedMediaLayoutResource(), standardTemplateParamsFillTextsFrom, templateBindResult);
             for (int i = 0; i < 5; i++) {
-                if (i < min) {
-                    bindMediaActionButton(applyStandardTemplate, MEDIA_BUTTON_IDS[i], (Action) this.mBuilder.mActions.get(i), fillTextsFrom);
+                if (i < iMin) {
+                    bindMediaActionButton(remoteViewsApplyStandardTemplate, MEDIA_BUTTON_IDS[i], (Action) this.mBuilder.mActions.get(i), standardTemplateParamsFillTextsFrom);
                 } else {
-                    applyStandardTemplate.setViewVisibility(MEDIA_BUTTON_IDS[i], 8);
+                    remoteViewsApplyStandardTemplate.setViewVisibility(MEDIA_BUTTON_IDS[i], 8);
                 }
             }
-            Notification.buildCustomContentIntoTemplate(this.mBuilder.mContext, applyStandardTemplate, remoteViews, fillTextsFrom, templateBindResult);
-            return applyStandardTemplate;
+            Notification.buildCustomContentIntoTemplate(this.mBuilder.mContext, remoteViewsApplyStandardTemplate, remoteViews, standardTemplateParamsFillTextsFrom, templateBindResult);
+            return remoteViewsApplyStandardTemplate;
         }
     }
 
@@ -5870,11 +6006,11 @@ public class Notification implements Parcelable {
 
         @Override // android.app.Notification.Style
         public Notification buildStyled(Notification notification) {
-            Notification buildStyled = super.buildStyled(notification);
+            Notification notificationBuildStyled = super.buildStyled(notification);
             this.mBuilder.mActions = getActionsListWithSystemActions();
-            buildStyled.actions = new Action[this.mBuilder.mActions.size()];
-            this.mBuilder.mActions.toArray(buildStyled.actions);
-            return buildStyled;
+            notificationBuildStyled.actions = new Action[this.mBuilder.mActions.size()];
+            this.mBuilder.mActions.toArray(notificationBuildStyled.actions);
+            return notificationBuildStyled;
         }
 
         @Override // android.app.Notification.Style
@@ -5887,7 +6023,7 @@ public class Notification implements Parcelable {
         }
 
         @Override // android.app.Notification.Style
-        public void reduceImageSizes(Context context) {
+        public void reduceImageSizes(Context context) throws Resources.NotFoundException {
             super.reduceImageSizes(context);
             if (this.mVerificationIcon != null) {
                 int dimensionPixelSize = context.getResources().getDimensionPixelSize(ActivityManager.isLowRamDeviceStatic() ? R.dimen.notification_right_icon_size_low_ram : R.dimen.notification_right_icon_size);
@@ -5936,9 +6072,9 @@ public class Notification implements Parcelable {
             if (num == null || !this.mBuilder.isCallActionColorCustomizable()) {
                 num = Integer.valueOf(this.mBuilder.mContext.getColor(i3));
             }
-            Action build = new Action.Builder(Icon.createWithResource("", i), new SpannableStringBuilder().append(this.mBuilder.mContext.getString(i2), new ForegroundColorSpan(num.intValue()), 18), pendingIntent).build();
-            build.getExtras().putBoolean(KEY_ACTION_PRIORITY, true);
-            return build;
+            Action actionBuild = new Action.Builder(Icon.createWithResource("", i), new SpannableStringBuilder().append(this.mBuilder.mContext.getString(i2), new ForegroundColorSpan(num.intValue()), 18), pendingIntent).build();
+            actionBuild.getExtras().putBoolean(KEY_ACTION_PRIORITY, true);
+            return actionBuild;
         }
 
         private boolean isActionAddedByCallStyle(Action action) {
@@ -5946,10 +6082,10 @@ public class Notification implements Parcelable {
         }
 
         public ArrayList<Action> getActionsListWithSystemActions() {
-            Action makeNegativeAction = makeNegativeAction();
-            Action makeAnswerAction = makeAnswerAction();
+            Action actionMakeNegativeAction = makeNegativeAction();
+            Action actionMakeAnswerAction = makeAnswerAction();
             ArrayList<Action> arrayList = new ArrayList<>(3);
-            arrayList.add(makeNegativeAction);
+            arrayList.add(actionMakeNegativeAction);
             int i = 2;
             if (this.mBuilder.mActions != null) {
                 Iterator it = this.mBuilder.mActions.iterator();
@@ -5961,69 +6097,69 @@ public class Notification implements Parcelable {
                         arrayList.add(action);
                         i--;
                     }
-                    if (makeAnswerAction != null && i == 1) {
-                        arrayList.add(makeAnswerAction);
+                    if (actionMakeAnswerAction != null && i == 1) {
+                        arrayList.add(actionMakeAnswerAction);
                         i--;
                     }
                 }
             }
-            if (makeAnswerAction != null && i >= 1) {
-                arrayList.add(makeAnswerAction);
+            if (actionMakeAnswerAction != null && i >= 1) {
+                arrayList.add(actionMakeAnswerAction);
             }
             return arrayList;
         }
 
-        private RemoteViews makeCallLayout(int i) {
-            RemoteViews applyStandardTemplateWithActions;
+        private RemoteViews makeCallLayout(int i) throws Resources.NotFoundException {
+            RemoteViews remoteViewsApplyStandardTemplateWithActions;
             boolean z = i == StandardTemplateParams.VIEW_TYPE_NORMAL;
             boolean z2 = i == StandardTemplateParams.VIEW_TYPE_HEADS_UP;
             Bundle bundle = this.mBuilder.mN.extras;
             Person person = this.mPerson;
             CharSequence name = person != null ? person.getName() : null;
-            CharSequence processLegacyText = this.mBuilder.processLegacyText(bundle.getCharSequence(Notification.EXTRA_TEXT));
-            if (processLegacyText == null) {
-                processLegacyText = getDefaultText();
+            CharSequence charSequenceProcessLegacyText = this.mBuilder.processLegacyText(bundle.getCharSequence(Notification.EXTRA_TEXT));
+            if (charSequenceProcessLegacyText == null) {
+                charSequenceProcessLegacyText = getDefaultText();
             }
-            StandardTemplateParams text = this.mBuilder.mParams.reset().viewType(i).callStyleActions(true).allowTextWithProgress(true).hideLeftIcon(true).hideRightIcon(true).hideAppName(z).title(name).text(processLegacyText);
+            StandardTemplateParams standardTemplateParamsText = this.mBuilder.mParams.reset().viewType(i).callStyleActions(true).allowTextWithProgress(true).hideLeftIcon(true).hideRightIcon(true).hideAppName(z).title(name).text(charSequenceProcessLegacyText);
             if (!Flags.notificationsRedesignTemplates()) {
-                text.titleViewId(R.id.conversation_text).summaryText(this.mBuilder.processLegacyText(this.mVerificationText));
+                standardTemplateParamsText.titleViewId(R.id.conversation_text).summaryText(this.mBuilder.processLegacyText(this.mVerificationText));
             }
             this.mBuilder.mActions = getActionsListWithSystemActions();
             if (z) {
-                applyStandardTemplateWithActions = this.mBuilder.applyStandardTemplate(this.mBuilder.getCollapsedCallLayoutResource(), text, null);
+                remoteViewsApplyStandardTemplateWithActions = this.mBuilder.applyStandardTemplate(this.mBuilder.getCollapsedCallLayoutResource(), standardTemplateParamsText, null);
             } else if (Flags.notificationsRedesignTemplates() && z2) {
-                applyStandardTemplateWithActions = this.mBuilder.applyStandardTemplateWithActions(this.mBuilder.getCollapsedCallLayoutResource(), text, null);
+                remoteViewsApplyStandardTemplateWithActions = this.mBuilder.applyStandardTemplateWithActions(this.mBuilder.getCollapsedCallLayoutResource(), standardTemplateParamsText, null);
             } else {
-                applyStandardTemplateWithActions = this.mBuilder.applyStandardTemplateWithActions(this.mBuilder.getExpandedCallLayoutResource(), text, null);
+                remoteViewsApplyStandardTemplateWithActions = this.mBuilder.applyStandardTemplateWithActions(this.mBuilder.getExpandedCallLayoutResource(), standardTemplateParamsText, null);
             }
-            if (!Flags.notificationsRedesignTemplates() && !text.mHideAppName) {
-                this.mBuilder.setTextViewColorSecondary(applyStandardTemplateWithActions, R.id.app_name_divider, text);
-                applyStandardTemplateWithActions.setViewVisibility(R.id.app_name_divider, 8);
+            if (!Flags.notificationsRedesignTemplates() && !standardTemplateParamsText.mHideAppName) {
+                this.mBuilder.setTextViewColorSecondary(remoteViewsApplyStandardTemplateWithActions, R.id.app_name_divider, standardTemplateParamsText);
+                remoteViewsApplyStandardTemplateWithActions.setViewVisibility(R.id.app_name_divider, 8);
             }
-            bindCallerVerification(applyStandardTemplateWithActions, text);
-            applyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setLayoutColor", this.mBuilder.getSmallIconColor(text));
-            applyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setNotificationBackgroundColor", this.mBuilder.getBackgroundColor(text));
-            applyStandardTemplateWithActions.setIcon(R.id.status_bar_latest_event_content, "setLargeIcon", this.mBuilder.mN.mLargeIcon);
-            applyStandardTemplateWithActions.setBundle(R.id.status_bar_latest_event_content, "setData", this.mBuilder.mN.extras);
-            return applyStandardTemplateWithActions;
+            bindCallerVerification(remoteViewsApplyStandardTemplateWithActions, standardTemplateParamsText);
+            remoteViewsApplyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setLayoutColor", this.mBuilder.getSmallIconColor(standardTemplateParamsText));
+            remoteViewsApplyStandardTemplateWithActions.setInt(R.id.status_bar_latest_event_content, "setNotificationBackgroundColor", this.mBuilder.getBackgroundColor(standardTemplateParamsText));
+            remoteViewsApplyStandardTemplateWithActions.setIcon(R.id.status_bar_latest_event_content, "setLargeIcon", this.mBuilder.mN.mLargeIcon);
+            remoteViewsApplyStandardTemplateWithActions.setBundle(R.id.status_bar_latest_event_content, "setData", this.mBuilder.mN.extras);
+            return remoteViewsApplyStandardTemplateWithActions;
         }
 
         private void bindCallerVerification(RemoteViews remoteViews, StandardTemplateParams standardTemplateParams) {
             boolean z;
-            String str;
+            String string;
             Icon icon = this.mVerificationIcon;
             boolean z2 = false;
-            String str2 = null;
+            String str = null;
             if (icon != null) {
                 remoteViews.setImageViewIcon(R.id.verification_icon, icon);
                 remoteViews.setDrawableTint(R.id.verification_icon, false, this.mBuilder.getSecondaryTextColor(standardTemplateParams), PorterDuff.Mode.SRC_ATOP);
                 remoteViews.setViewVisibility(R.id.verification_icon, 0);
-                str = this.mBuilder.mContext.getString(R.string.notification_verified_content_description);
+                string = this.mBuilder.mContext.getString(R.string.notification_verified_content_description);
                 z = false;
             } else {
                 remoteViews.setViewVisibility(R.id.verification_icon, 8);
                 z = true;
-                str = null;
+                string = null;
             }
             if (!TextUtils.isEmpty(this.mVerificationText)) {
                 remoteViews.setTextViewText(R.id.verification_text, this.mVerificationText);
@@ -6032,9 +6168,9 @@ public class Notification implements Parcelable {
                 z2 = z;
             } else {
                 remoteViews.setViewVisibility(R.id.verification_text, 8);
-                str2 = str;
+                str = string;
             }
-            remoteViews.setContentDescription(R.id.verification_icon, str2);
+            remoteViews.setContentDescription(R.id.verification_icon, str);
             if (z2) {
                 remoteViews.setViewVisibility(R.id.verification_divider, 8);
                 this.mBuilder.setTextViewColorSecondary(remoteViews, R.id.verification_divider, standardTemplateParams);
@@ -6243,12 +6379,12 @@ public class Notification implements Parcelable {
                 return 100;
             }
             int i = 0;
-            int i2 = 0;
-            for (int i3 = 0; i3 < list.size(); i3++) {
-                int length = list.get(i3).getLength();
+            int iAddExact = 0;
+            for (int i2 = 0; i2 < list.size(); i2++) {
+                int length = list.get(i2).getLength();
                 if (length > 0) {
                     try {
-                        i2 = Math.addExact(i2, length);
+                        iAddExact = Math.addExact(iAddExact, length);
                         i++;
                     } catch (ArithmeticException e) {
                         Log.e(Notification.TAG, "Notification.ProgressStyle segment total overflowed.", e);
@@ -6259,7 +6395,7 @@ public class Notification implements Parcelable {
             if (i == 0) {
                 return 100;
             }
-            return i2;
+            return iAddExact;
         }
 
         public boolean isProgressIndeterminate() {
@@ -6325,7 +6461,7 @@ public class Notification implements Parcelable {
         }
 
         @Override // android.app.Notification.Style
-        public void reduceImageSizes(Context context) {
+        public void reduceImageSizes(Context context) throws Resources.NotFoundException {
             super.reduceImageSizes(context);
             Resources resources = context.getResources();
             int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.notification_progress_icon_size);
@@ -6396,8 +6532,8 @@ public class Notification implements Parcelable {
 
         @Override // android.app.Notification.Style
         public RemoteViews makeExpandedContentView() {
-            StandardTemplateParams fillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).allowTextWithProgress(true).hideProgress(true).fillTextsFrom(this.mBuilder);
-            RemoteViews standardView = getStandardView(this.mBuilder.getProgressLayoutResource(), fillTextsFrom, null);
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).allowTextWithProgress(true).hideProgress(true).fillTextsFrom(this.mBuilder);
+            RemoteViews standardView = getStandardView(this.mBuilder.getProgressLayoutResource(), standardTemplateParamsFillTextsFrom, null);
             if (this.mStartIcon != null) {
                 standardView.setViewVisibility(R.id.notification_progress_start_icon, 0);
                 standardView.setImageViewIcon(R.id.notification_progress_start_icon, this.mStartIcon);
@@ -6411,7 +6547,7 @@ public class Notification implements Parcelable {
                 standardView.setViewVisibility(R.id.notification_progress_end_icon, 8);
             }
             standardView.setViewVisibility(16908301, 0);
-            standardView.setBundle(16908301, "setProgressModel", createProgressModel(this.mBuilder.getPrimaryAccentColor(fillTextsFrom), this.mBuilder.getColors(fillTextsFrom).getBackgroundColor()).toBundle());
+            standardView.setBundle(16908301, "setProgressModel", createProgressModel(this.mBuilder.getPrimaryAccentColor(standardTemplateParamsFillTextsFrom), this.mBuilder.getColors(standardTemplateParamsFillTextsFrom).getBackgroundColor()).toBundle());
             standardView.setIcon(16908301, "setProgressTrackerIcon", this.mTrackerIcon);
             return standardView;
         }
@@ -6481,15 +6617,15 @@ public class Notification implements Parcelable {
         public NotificationProgressModel createProgressModel(int i, int i2) {
             int i3;
             boolean z;
+            int iSanitizeProgressColor;
             int i4;
             int i5;
-            int i6;
             if (this.mIndeterminate) {
                 return new NotificationProgressModel(sanitizeProgressColor(!this.mProgressSegments.isEmpty() ? this.mProgressSegments.get(0).mColor : i, i2, i));
             }
             ArrayList arrayList = new ArrayList();
             Iterator<Segment> it = this.mProgressSegments.iterator();
-            int i7 = 0;
+            int iAddExact = 0;
             while (true) {
                 i3 = 100;
                 if (!it.hasNext()) {
@@ -6499,33 +6635,33 @@ public class Notification implements Parcelable {
                 int length = next.getLength();
                 if (length > 0) {
                     try {
-                        i7 = Math.addExact(i7, length);
+                        iAddExact = Math.addExact(iAddExact, length);
                         arrayList.add(sanitizeSegment(next, i2, i));
                     } catch (ArithmeticException unused) {
                         arrayList.clear();
-                        i7 = 100;
+                        iAddExact = 100;
                     }
                 }
             }
-            int i8 = 1;
+            int i6 = 1;
             if (arrayList.isEmpty()) {
                 arrayList.add(sanitizeSegment(new Segment(100), i2, i));
             } else {
                 if (arrayList.size() > 10) {
                     int color = ((Segment) arrayList.getFirst()).getColor();
-                    int i9 = 1;
+                    int i7 = 1;
                     while (true) {
-                        if (i9 >= arrayList.size()) {
+                        if (i7 >= arrayList.size()) {
                             z = true;
                             break;
                         }
-                        if (((Segment) arrayList.get(i9)).getColor() != color) {
+                        if (((Segment) arrayList.get(i7)).getColor() != color) {
                             z = false;
                             break;
                         }
-                        i9++;
+                        i7++;
                     }
-                    Segment segment = new Segment(i7);
+                    Segment segment = new Segment(iAddExact);
                     if (!z) {
                         color = 0;
                     }
@@ -6533,7 +6669,7 @@ public class Notification implements Parcelable {
                     arrayList.clear();
                     arrayList.add(sanitizeSegment(segment, i2, i));
                 }
-                i3 = i7;
+                i3 = iAddExact;
             }
             ArrayList arrayList2 = new ArrayList();
             for (Point point : this.mProgressPoints) {
@@ -6546,25 +6682,25 @@ public class Notification implements Parcelable {
                 }
             }
             if (arrayList.size() <= 1) {
-                i6 = 0;
                 i5 = 0;
+                i4 = 0;
             } else {
                 int color2 = ((Segment) arrayList.getFirst()).getColor();
                 while (true) {
-                    if (i8 >= arrayList.size()) {
-                        i4 = 0;
+                    if (i6 >= arrayList.size()) {
+                        iSanitizeProgressColor = 0;
                         break;
                     }
-                    if (((Segment) arrayList.get(i8)).getColor() != color2) {
-                        i4 = sanitizeProgressColor(0, i2, i);
+                    if (((Segment) arrayList.get(i6)).getColor() != color2) {
+                        iSanitizeProgressColor = sanitizeProgressColor(0, i2, i);
                         break;
                     }
-                    i8++;
+                    i6++;
                 }
-                i5 = i4;
-                i6 = 0;
+                i4 = iSanitizeProgressColor;
+                i5 = 0;
             }
-            return new NotificationProgressModel(arrayList, arrayList2, Math.clamp(this.mProgress, i6, i3), this.mIsStyledByProgress, i5);
+            return new NotificationProgressModel(arrayList, arrayList2, Math.clamp(this.mProgress, i5, i3), this.mIsStyledByProgress, i4);
         }
 
         private Segment sanitizeSegment(Segment segment, int i, int i2) {
@@ -6702,7 +6838,7 @@ public class Notification implements Parcelable {
             return makeDecoratedHeadsUpContentView();
         }
 
-        private RemoteViews makeDecoratedHeadsUpContentView() {
+        private RemoteViews makeDecoratedHeadsUpContentView() throws Resources.NotFoundException {
             RemoteViews remoteViews;
             if (this.mBuilder.mN.headsUpContentView == null) {
                 remoteViews = this.mBuilder.mN.contentView;
@@ -6716,24 +6852,24 @@ public class Notification implements Parcelable {
                 return makeStandardTemplateWithCustomContent(remoteViews);
             }
             TemplateBindResult templateBindResult = new TemplateBindResult();
-            StandardTemplateParams fillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_HEADS_UP).decorationType(2).fillTextsFrom(this.mBuilder);
-            RemoteViews applyStandardTemplateWithActions = this.mBuilder.applyStandardTemplateWithActions(this.mBuilder.getHeadsUpBaseLayoutResource(), fillTextsFrom, templateBindResult);
-            Notification.buildCustomContentIntoTemplate(this.mBuilder.mContext, applyStandardTemplateWithActions, remoteViews, fillTextsFrom, templateBindResult);
-            return applyStandardTemplateWithActions;
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_HEADS_UP).decorationType(2).fillTextsFrom(this.mBuilder);
+            RemoteViews remoteViewsApplyStandardTemplateWithActions = this.mBuilder.applyStandardTemplateWithActions(this.mBuilder.getHeadsUpBaseLayoutResource(), standardTemplateParamsFillTextsFrom, templateBindResult);
+            Notification.buildCustomContentIntoTemplate(this.mBuilder.mContext, remoteViewsApplyStandardTemplateWithActions, remoteViews, standardTemplateParamsFillTextsFrom, templateBindResult);
+            return remoteViewsApplyStandardTemplateWithActions;
         }
 
-        private RemoteViews makeStandardTemplateWithCustomContent(RemoteViews remoteViews) {
+        private RemoteViews makeStandardTemplateWithCustomContent(RemoteViews remoteViews) throws Resources.NotFoundException {
             if (remoteViews == null) {
                 return null;
             }
             TemplateBindResult templateBindResult = new TemplateBindResult();
-            StandardTemplateParams fillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_NORMAL).decorationType(2).fillTextsFrom(this.mBuilder);
-            RemoteViews applyStandardTemplate = this.mBuilder.applyStandardTemplate(this.mBuilder.getCollapsedBaseLayoutResource(), fillTextsFrom, templateBindResult);
-            Notification.buildCustomContentIntoTemplate(this.mBuilder.mContext, applyStandardTemplate, remoteViews, fillTextsFrom, templateBindResult);
-            return applyStandardTemplate;
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_NORMAL).decorationType(2).fillTextsFrom(this.mBuilder);
+            RemoteViews remoteViewsApplyStandardTemplate = this.mBuilder.applyStandardTemplate(this.mBuilder.getCollapsedBaseLayoutResource(), standardTemplateParamsFillTextsFrom, templateBindResult);
+            Notification.buildCustomContentIntoTemplate(this.mBuilder.mContext, remoteViewsApplyStandardTemplate, remoteViews, standardTemplateParamsFillTextsFrom, templateBindResult);
+            return remoteViewsApplyStandardTemplate;
         }
 
-        private RemoteViews makeDecoratedExpandedContentView() {
+        private RemoteViews makeDecoratedExpandedContentView() throws Resources.NotFoundException {
             RemoteViews remoteViews;
             if (this.mBuilder.mN.bigContentView == null) {
                 remoteViews = this.mBuilder.mN.contentView;
@@ -6744,10 +6880,10 @@ public class Notification implements Parcelable {
                 return null;
             }
             TemplateBindResult templateBindResult = new TemplateBindResult();
-            StandardTemplateParams fillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).decorationType(2).fillTextsFrom(this.mBuilder);
-            RemoteViews applyStandardTemplateWithActions = this.mBuilder.applyStandardTemplateWithActions(this.mBuilder.getExpandedBaseLayoutResource(), fillTextsFrom, templateBindResult);
-            Notification.buildCustomContentIntoTemplate(this.mBuilder.mContext, applyStandardTemplateWithActions, remoteViews, fillTextsFrom, templateBindResult);
-            return applyStandardTemplateWithActions;
+            StandardTemplateParams standardTemplateParamsFillTextsFrom = this.mBuilder.mParams.reset().viewType(StandardTemplateParams.VIEW_TYPE_EXPANDED).decorationType(2).fillTextsFrom(this.mBuilder);
+            RemoteViews remoteViewsApplyStandardTemplateWithActions = this.mBuilder.applyStandardTemplateWithActions(this.mBuilder.getExpandedBaseLayoutResource(), standardTemplateParamsFillTextsFrom, templateBindResult);
+            Notification.buildCustomContentIntoTemplate(this.mBuilder.mContext, remoteViewsApplyStandardTemplateWithActions, remoteViews, standardTemplateParamsFillTextsFrom, templateBindResult);
+            return remoteViewsApplyStandardTemplateWithActions;
         }
 
         @Override // android.app.Notification.Style
@@ -6941,27 +7077,27 @@ public class Notification implements Parcelable {
         }
 
         private void printLog(String str) {
-            String str2;
-            String str3 = TAG;
+            String string;
+            String str2 = TAG;
             if ((str + ": Icon = " + this.mChipIcon + ", mExpandedChipView = " + this.mExpandedChipView + ", mExpandedChipText = " + ((Object) this.mExpandedChipText) + ", mChipBackground = " + this.mChipBackground + ", mActions = " + this.mActions) != null) {
-                str2 = Integer.toString(this.mActions.size());
+                string = Integer.toString(this.mActions.size());
             } else {
                 if (("null, mActionBgColor = " + this.mActionBgColors) != null) {
-                    str2 = Integer.toString(this.mActionBgColors.size());
+                    string = Integer.toString(this.mActionBgColors.size());
                 } else {
-                    str2 = "null, mPrimaryActionNum = " + this.mPrimaryActionNum + ", mCardIcon = " + this.mCardIcon + ", mBadge = " + this.mBadge + ", mPrimaryInfo = " + ((Object) this.mPrimaryInfo) + ", mSecondaryInfo = " + ((Object) this.mSecondaryInfo) + ", mMoreInfo = " + ((Object) this.mMoreInfo) + ", mCustomCardViewCenterUI = " + this.mCustomCardViewCenterUI + ", mCustomExpandedCardView = " + this.mCustomExpandedCardView + ", mCardBackground = " + this.mCardBackground + ", mExpandedNowBarView = " + this.mExpandedNowBarView + ", mNowBarExpandableType = " + this.mNowBarExpandableType + ", mChronometerBase = " + this.mChronometerBase + ", mChronometerFormat = " + this.mChronometerFormat + ", mChronometerCountDown = " + this.mChronometerCountDown + ", mChronometerStart = " + this.mChronometerStart + ", mChronometerSpeed = " + this.mChronometerSpeed;
+                    string = "null, mPrimaryActionNum = " + this.mPrimaryActionNum + ", mCardIcon = " + this.mCardIcon + ", mBadge = " + this.mBadge + ", mPrimaryInfo = " + ((Object) this.mPrimaryInfo) + ", mSecondaryInfo = " + ((Object) this.mSecondaryInfo) + ", mMoreInfo = " + ((Object) this.mMoreInfo) + ", mCustomCardViewCenterUI = " + this.mCustomCardViewCenterUI + ", mCustomExpandedCardView = " + this.mCustomExpandedCardView + ", mCardBackground = " + this.mCardBackground + ", mExpandedNowBarView = " + this.mExpandedNowBarView + ", mNowBarExpandableType = " + this.mNowBarExpandableType + ", mChronometerBase = " + this.mChronometerBase + ", mChronometerFormat = " + this.mChronometerFormat + ", mChronometerCountDown = " + this.mChronometerCountDown + ", mChronometerStart = " + this.mChronometerStart + ", mChronometerSpeed = " + this.mChronometerSpeed;
                 }
             }
-            Log.i(str3, str2);
+            Log.i(str2, string);
         }
 
         @Override // android.app.Notification.Style
         public Notification buildStyled(Notification notification) {
-            Notification buildStyled = super.buildStyled(notification);
+            Notification notificationBuildStyled = super.buildStyled(notification);
             this.mBuilder.mActions = this.mActions;
-            buildStyled.actions = new Action[this.mBuilder.mActions.size()];
-            this.mBuilder.mActions.toArray(buildStyled.actions);
-            return buildStyled;
+            notificationBuildStyled.actions = new Action[this.mBuilder.mActions.size()];
+            this.mBuilder.mActions.toArray(notificationBuildStyled.actions);
+            return notificationBuildStyled;
         }
 
         @Override // android.app.Notification.Style
@@ -7499,7 +7635,7 @@ public class Notification implements Parcelable {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public WearableExtender m472clone() {
+        public WearableExtender m476clone() {
             WearableExtender wearableExtender = new WearableExtender();
             wearableExtender.mActions = new ArrayList<>(this.mActions);
             wearableExtender.mFlags = this.mFlags;
@@ -8129,12 +8265,12 @@ public class Notification implements Parcelable {
 
         @Override // android.widget.RemoteViews
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public BuilderRemoteViews mo465clone() {
-            Parcel obtain = Parcel.obtain();
-            writeToParcel(obtain, 0);
-            obtain.setDataPosition(0);
-            BuilderRemoteViews builderRemoteViews = new BuilderRemoteViews(obtain);
-            obtain.recycle();
+        public BuilderRemoteViews mo469clone() {
+            Parcel parcelObtain = Parcel.obtain();
+            writeToParcel(parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
+            BuilderRemoteViews builderRemoteViews = new BuilderRemoteViews(parcelObtain);
+            parcelObtain.recycle();
             return builderRemoteViews;
         }
     }
@@ -8183,7 +8319,7 @@ public class Notification implements Parcelable {
                 float dpValue = getDpValue() + f;
                 if (i == 16909441) {
                     remoteViews.setFloat(R.id.notification_header, "setTopLineExtraMarginEndDp", dpValue);
-                } else if (i != 16909931 && i != 16908880) {
+                } else if (i != 16909932 && i != 16908880) {
                     remoteViews.setViewLayoutMargin(i, 5, dpValue, 1);
                 } else {
                     if (this.mValueIfGone != 0.0f) {
@@ -8457,10 +8593,10 @@ public class Notification implements Parcelable {
                     this.mBackgroundColor = i;
                 }
                 if (Flags.uiRichOngoing()) {
-                    boolean isColorDark = Builder.isColorDark(this.mBackgroundColor);
-                    int i2 = isColorDark ? -1 : -16777216;
-                    this.mPrimaryTextColor = ContrastColorUtil.ensureContrast(ColorUtils.blendARGB(this.mBackgroundColor, i2, 0.9f), this.mBackgroundColor, isColorDark, 4.5d);
-                    this.mSecondaryTextColor = ContrastColorUtil.ensureContrast(ColorUtils.blendARGB(this.mBackgroundColor, i2, 0.8f), this.mBackgroundColor, isColorDark, 4.5d);
+                    boolean zIsColorDark = Builder.isColorDark(this.mBackgroundColor);
+                    int i2 = zIsColorDark ? -1 : -16777216;
+                    this.mPrimaryTextColor = ContrastColorUtil.ensureContrast(ColorUtils.blendARGB(this.mBackgroundColor, i2, 0.9f), this.mBackgroundColor, zIsColorDark, 4.5d);
+                    this.mSecondaryTextColor = ContrastColorUtil.ensureContrast(ColorUtils.blendARGB(this.mBackgroundColor, i2, 0.8f), this.mBackgroundColor, zIsColorDark, 4.5d);
                 } else {
                     this.mPrimaryTextColor = ContrastColorUtil.findAlphaToMeetContrast(ContrastColorUtil.resolvePrimaryColor(context, this.mBackgroundColor, z2), this.mBackgroundColor, 4.5d);
                     this.mSecondaryTextColor = ContrastColorUtil.findAlphaToMeetContrast(ContrastColorUtil.resolveSecondaryColor(context, this.mBackgroundColor, z2), this.mBackgroundColor, 4.5d);
@@ -8469,11 +8605,11 @@ public class Notification implements Parcelable {
                 this.mContrastColor = i3;
                 this.mPrimaryAccentColor = i3;
                 this.mSecondaryAccentColor = this.mSecondaryTextColor;
-                int flattenAlpha = flattenAlpha(i3, this.mBackgroundColor);
-                this.mTertiaryAccentColor = flattenAlpha;
+                int iFlattenAlpha = flattenAlpha(i3, this.mBackgroundColor);
+                this.mTertiaryAccentColor = iFlattenAlpha;
                 int i4 = this.mBackgroundColor;
                 this.mOnTertiaryAccentTextColor = i4;
-                this.mTertiaryFixedDimAccentColor = flattenAlpha;
+                this.mTertiaryFixedDimAccentColor = iFlattenAlpha;
                 this.mOnTertiaryFixedAccentTextColor = i4;
                 this.mErrorColor = this.mPrimaryTextColor;
                 this.mRippleAlpha = 51;
@@ -8487,20 +8623,20 @@ public class Notification implements Parcelable {
                 this.mOnTertiaryAccentTextColor = context.getColor(R.color.materialColorOnTertiary);
                 this.mTertiaryFixedDimAccentColor = context.getColor(R.color.materialColorTertiaryFixedDim);
                 this.mOnTertiaryFixedAccentTextColor = context.getColor(R.color.materialColorOnTertiaryFixed);
-                TypedArray obtainDayNightAttributes = obtainDayNightAttributes(context, new int[]{16844099, 16843820});
+                TypedArray typedArrayObtainDayNightAttributes = obtainDayNightAttributes(context, new int[]{16844099, 16843820});
                 try {
-                    this.mErrorColor = getColor(obtainDayNightAttributes, 0, 1);
-                    this.mRippleAlpha = Color.alpha(getColor(obtainDayNightAttributes, 1, 872415231));
-                    if (obtainDayNightAttributes != null) {
-                        obtainDayNightAttributes.close();
+                    this.mErrorColor = getColor(typedArrayObtainDayNightAttributes, 0, 1);
+                    this.mRippleAlpha = Color.alpha(getColor(typedArrayObtainDayNightAttributes, 1, 872415231));
+                    if (typedArrayObtainDayNightAttributes != null) {
+                        typedArrayObtainDayNightAttributes.close();
                     }
                     this.mContrastColor = calculateContrastColor(context, i, this.mPrimaryAccentColor, this.mBackgroundColor, z2);
-                    int resolvePrimaryColor = ContrastColorUtil.resolvePrimaryColor(context, 0, z2);
-                    this.mPrimaryTextColor = resolvePrimaryColor;
-                    this.mPrimaryAccentColor = resolvePrimaryColor;
-                    int resolveSecondaryColor = ContrastColorUtil.resolveSecondaryColor(context, 0, z2);
-                    this.mSecondaryTextColor = resolveSecondaryColor;
-                    this.mSecondaryAccentColor = resolveSecondaryColor;
+                    int iResolvePrimaryColor = ContrastColorUtil.resolvePrimaryColor(context, 0, z2);
+                    this.mPrimaryTextColor = iResolvePrimaryColor;
+                    this.mPrimaryAccentColor = iResolvePrimaryColor;
+                    int iResolveSecondaryColor = ContrastColorUtil.resolveSecondaryColor(context, 0, z2);
+                    this.mSecondaryTextColor = iResolveSecondaryColor;
+                    this.mSecondaryAccentColor = iResolveSecondaryColor;
                     this.mThirdTextColor = ContrastColorUtil.resolveThirdColor(context, 0, z2);
                     if (this.mTertiaryAccentColor == 1) {
                         this.mTertiaryAccentColor = this.mContrastColor;
@@ -8518,9 +8654,9 @@ public class Notification implements Parcelable {
                         this.mErrorColor = this.mPrimaryTextColor;
                     }
                 } catch (Throwable th) {
-                    if (obtainDayNightAttributes != null) {
+                    if (typedArrayObtainDayNightAttributes != null) {
                         try {
-                            obtainDayNightAttributes.close();
+                            typedArrayObtainDayNightAttributes.close();
                         } catch (Throwable th2) {
                             th.addSuppressed(th2);
                         }
@@ -8623,8 +8759,8 @@ public class Notification implements Parcelable {
             f2 = width;
         }
         float f3 = f / f2;
-        Bitmap createScaledBitmap = Bitmap.createScaledBitmap(bitmap, Math.max(1, (int) (width * f3)), Math.max(1, (int) (f3 * height)), true);
-        Log.d(TAG, "bigpicture scaling before[" + width + " : " + height + "]  after[" + createScaledBitmap.getWidth() + " : " + createScaledBitmap.getHeight() + NavigationBarInflaterView.SIZE_MOD_END);
-        return createScaledBitmap;
+        Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmap, Math.max(1, (int) (width * f3)), Math.max(1, (int) (f3 * height)), true);
+        Log.d(TAG, "bigpicture scaling before[" + width + " : " + height + "]  after[" + bitmapCreateScaledBitmap.getWidth() + " : " + bitmapCreateScaledBitmap.getHeight() + NavigationBarInflaterView.SIZE_MOD_END);
+        return bitmapCreateScaledBitmap;
     }
 }

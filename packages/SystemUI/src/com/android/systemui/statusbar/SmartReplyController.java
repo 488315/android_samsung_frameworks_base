@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SmartReplyController implements Dumpable {
     public final IStatusBarService mBarService;
@@ -25,7 +24,6 @@ public class SmartReplyController implements Dumpable {
     public final Set mSendingKeys = new ArraySet();
     public final NotificationVisibilityProvider mVisibilityProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onSmartReplySent(NotificationEntry notificationEntry, CharSequence charSequence);
     }
@@ -47,11 +45,11 @@ public class SmartReplyController implements Dumpable {
     }
 
     public final void smartActionClicked(NotificationEntry notificationEntry, int i, Notification.Action action, boolean z) {
-        NotificationVisibility obtain = ((NotificationVisibilityProviderImpl) this.mVisibilityProvider).obtain(notificationEntry);
+        NotificationVisibility notificationVisibilityObtain = ((NotificationVisibilityProviderImpl) this.mVisibilityProvider).obtain(notificationEntry);
         NotificationClickNotifier notificationClickNotifier = this.mClickNotifier;
         Executor executor = notificationClickNotifier.backgroundExecutor;
         String str = notificationEntry.mKey;
-        executor.execute(new NotificationClickNotifier$onNotificationActionClick$1(notificationClickNotifier, str, i, action, obtain, z));
+        executor.execute(new NotificationClickNotifier$onNotificationActionClick$1(notificationClickNotifier, str, i, action, notificationVisibilityObtain, z));
         notificationClickNotifier.mainExecutor.execute(new NotificationClickNotifier$onNotificationActionClick$2(notificationClickNotifier, str));
         SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_OPENED, SystemUIAnalytics.EID_QPNE_QUICK_REPLY_BUTTON_AND_ACTIONS, "type", SystemUIAnalytics.QPNE_VID_ACTIONS, SystemUIAnalytics.QPNE_KEY_APP, notificationEntry.mSbn.getPackageName());
     }

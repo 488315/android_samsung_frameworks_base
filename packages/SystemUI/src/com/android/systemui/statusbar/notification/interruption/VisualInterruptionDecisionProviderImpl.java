@@ -28,7 +28,6 @@ import com.android.systemui.util.time.SystemClock;
 import com.android.wm.shell.bubbles.Bubbles;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VisualInterruptionDecisionProviderImpl implements VisualInterruptionDecisionProvider {
     public final EventLog eventLog;
@@ -40,7 +39,6 @@ public final class VisualInterruptionDecisionProviderImpl implements VisualInter
     public final SystemClock systemClock;
     public final SystemSettings systemSettings;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DecisionImpl implements VisualInterruptionDecisionProvider.Decision {
         public final String logReason;
         public final boolean shouldInterrupt;
@@ -84,14 +82,14 @@ public final class VisualInterruptionDecisionProviderImpl implements VisualInter
 
     @Override // com.android.systemui.statusbar.notification.interruption.VisualInterruptionDecisionProvider
     public final void logFullScreenIntentDecision(NotificationInterruptStateProviderWrapper.FullScreenIntentDecisionImpl fullScreenIntentDecisionImpl) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("VisualInterruptionDecisionProviderImpl#logFullScreenIntentDecision");
         }
         try {
             throw new IllegalStateException("Check failed.");
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -100,14 +98,14 @@ public final class VisualInterruptionDecisionProviderImpl implements VisualInter
 
     @Override // com.android.systemui.statusbar.notification.interruption.VisualInterruptionDecisionProvider
     public final VisualInterruptionDecisionProvider.Decision makeAndLogBubbleDecision(NotificationEntry notificationEntry) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("VisualInterruptionDecisionProviderImpl#makeAndLogBubbleDecision");
         }
         try {
             throw new IllegalStateException("Check failed.");
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -116,14 +114,14 @@ public final class VisualInterruptionDecisionProviderImpl implements VisualInter
 
     @Override // com.android.systemui.statusbar.notification.interruption.VisualInterruptionDecisionProvider
     public final VisualInterruptionDecisionProvider.Decision makeAndLogHeadsUpDecision(NotificationEntry notificationEntry) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("VisualInterruptionDecisionProviderImpl#makeAndLogHeadsUpDecision");
         }
         try {
             throw new IllegalStateException("Check failed.");
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -132,14 +130,14 @@ public final class VisualInterruptionDecisionProviderImpl implements VisualInter
 
     @Override // com.android.systemui.statusbar.notification.interruption.VisualInterruptionDecisionProvider
     public final NotificationInterruptStateProviderWrapper.FullScreenIntentDecisionImpl makeUnloggedFullScreenIntentDecision(NotificationEntry notificationEntry) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("VisualInterruptionDecisionProviderImpl#makeUnloggedFullScreenIntentDecision");
         }
         try {
             throw new IllegalStateException("Check failed.");
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -148,14 +146,14 @@ public final class VisualInterruptionDecisionProviderImpl implements VisualInter
 
     @Override // com.android.systemui.statusbar.notification.interruption.VisualInterruptionDecisionProvider
     public final VisualInterruptionDecisionProvider.Decision makeUnloggedHeadsUpDecision(NotificationEntry notificationEntry) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("VisualInterruptionDecisionProviderImpl#makeUnloggedHeadsUpDecision");
         }
         try {
             throw new IllegalStateException("Check failed.");
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;

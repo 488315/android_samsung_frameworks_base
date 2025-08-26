@@ -94,26 +94,26 @@ public class BitmapData extends Operation implements SerializableToString, Seria
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
         int i;
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        int readInt3 = wireBuffer.readInt();
-        int i2 = 0;
-        if (readInt2 > 65535) {
-            i = readInt2 >> 16;
-            readInt2 &= 65535;
+        int i2 = wireBuffer.readInt();
+        int i3 = wireBuffer.readInt();
+        int i4 = wireBuffer.readInt();
+        int i5 = 0;
+        if (i3 > 65535) {
+            i = i3 >> 16;
+            i3 &= 65535;
         } else {
             i = 0;
         }
-        if (readInt3 > 65535) {
-            i2 = readInt3 >> 16;
-            readInt3 &= 65535;
+        if (i4 > 65535) {
+            i5 = i4 >> 16;
+            i4 &= 65535;
         }
-        if (readInt2 < 1 || readInt3 < 1 || readInt3 > 8000 || readInt2 > 8000) {
-            throw new RuntimeException("Dimension of image is invalid " + readInt2 + "x" + readInt3);
+        if (i3 < 1 || i4 < 1 || i4 > 8000 || i3 > 8000) {
+            throw new RuntimeException("Dimension of image is invalid " + i3 + "x" + i4);
         }
-        BitmapData bitmapData = new BitmapData(readInt, readInt2, readInt3, wireBuffer.readBuffer());
+        BitmapData bitmapData = new BitmapData(i2, i3, i4, wireBuffer.readBuffer());
         bitmapData.mType = (short) i;
-        bitmapData.mEncoding = (short) i2;
+        bitmapData.mEncoding = (short) i5;
         list.add(bitmapData);
     }
 

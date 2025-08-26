@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.UserHandle;
 import android.util.Log;
+import android.view.DisplayCutout;
 import android.view.WindowManager;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.systemui.R;
@@ -20,7 +21,6 @@ import com.android.wm.shell.shared.bubbles.BubbleDropTargetBoundsProvider;
 import com.android.wm.shell.shared.bubbles.DeviceConfig;
 import com.samsung.android.knox.EnterpriseContainerCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubblePositioner implements BubbleDropTargetBoundsProvider {
     public int mBarExpViewDropTargetPaddingBottom;
@@ -63,14 +63,13 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
     public int mSpacingBetweenBubbles;
     public int mStackOffset;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum StackPinnedEdge {
         LEFT,
         RIGHT
     }
 
     public BubblePositioner(Context context, WindowManager windowManager) {
-        this(context, DeviceConfig.create(context, windowManager));
+        this(context, DeviceConfig.create(context, windowManager, null));
     }
 
     public final RectF getAllowableStackPositionRegion(int i) {
@@ -111,11 +110,11 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
             Insets insets = this.mInsets;
             return ((((i2 - Math.max(insets.bottom, insets.top)) - this.mManageButtonHeight) - this.mPointerWidth) - (expandedViewHeightForLargeScreen / 2.0f)) - (f / 2.0f);
         }
-        float centerY = showBubblesVertically() ? this.mPositionRect.centerY() : this.mPositionRect.centerX();
+        float fCenterY = showBubblesVertically() ? this.mPositionRect.centerY() : this.mPositionRect.centerX();
         if (showBubblesVertically() && this.mImeVisible) {
-            centerY = this.mPositionRect.centerY() - this.mPositionRect.bottom;
+            fCenterY = this.mPositionRect.centerY() - this.mPositionRect.bottom;
         }
-        return centerY - (f / 2.0f);
+        return fCenterY - (f / 2.0f);
     }
 
     public final PointF getDefaultStartPosition(boolean z) {
@@ -125,30 +124,30 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
     public final PointF getExpandedBubbleXY(int i, BubbleStackView.StackViewState stackViewState) {
         float f;
         float f2;
-        int i2;
-        int i3;
-        boolean showBubblesVertically = showBubblesVertically();
-        if (!showBubblesVertically && this.mDeviceConfig.isRtl) {
+        int tabletSidePadding;
+        int tabletSidePadding2;
+        boolean zShowBubblesVertically = showBubblesVertically();
+        if (!zShowBubblesVertically && this.mDeviceConfig.isRtl) {
             i = (stackViewState.numberOfBubbles - 1) - i;
         }
         float f3 = (this.mBubbleSize + this.mSpacingBetweenBubbles) * i;
         float bubbleRowStart = getBubbleRowStart(stackViewState);
-        if (showBubblesVertically) {
-            int i4 = this.mExpandedViewLargeScreenInsetClosestEdge;
+        if (zShowBubblesVertically) {
+            int i2 = this.mExpandedViewLargeScreenInsetClosestEdge;
             f2 = stackViewState.numberOfBubbles == 2 ? bubbleRowStart + f3 + (this.mSpacingBetweenBubbles * 2) : (bubbleRowStart + f3) - (this.mBubbleSize / 4);
             boolean z = this.mDeviceConfig.isLargeScreen;
-            int i5 = z ? (i4 - this.mExpandedViewPadding) - this.mBubbleSize : this.mPositionRect.left;
-            int i6 = z ? (this.mPositionRect.right - i4) + this.mExpandedViewPadding : this.mPositionRect.right - this.mBubbleSize;
+            int i3 = z ? (i2 - this.mExpandedViewPadding) - this.mBubbleSize : this.mPositionRect.left;
+            int i4 = z ? (this.mPositionRect.right - i2) + this.mExpandedViewPadding : this.mPositionRect.right - this.mBubbleSize;
             if (QpShellRune.NOTI_BUBBLE_STYLE_TABLET) {
-                i2 = ((getTabletSidePadding() + this.mPositionRect.left) - this.mBubbleSize) - this.mBubblePaddingTop;
-                i3 = ((getTabletSidePadding() + this.mPositionRect.right) - this.mBubbleSize) - this.mBubblePaddingTop;
+                tabletSidePadding = ((getTabletSidePadding() + this.mPositionRect.left) - this.mBubbleSize) - this.mBubblePaddingTop;
+                tabletSidePadding2 = ((this.mBubbleSize / 2) + (this.mPositionRect.right - getTabletSidePadding())) - this.mBubblePaddingTop;
             } else {
-                int i7 = -(this.mBubbleOffscreenAmount / 2);
-                int i8 = i6 + i7;
-                i2 = i5 - i7;
-                i3 = i8;
+                int i5 = -(this.mBubbleOffscreenAmount / 2);
+                int i6 = i4 + i5;
+                tabletSidePadding = i3 - i5;
+                tabletSidePadding2 = i6;
             }
-            f = stackViewState.onLeft ? i2 : i3;
+            f = stackViewState.onLeft ? tabletSidePadding : tabletSidePadding2;
         } else {
             float f4 = this.mPositionRect.top + this.mBubblePaddingTop;
             if (stackViewState.numberOfBubbles == 2) {
@@ -158,70 +157,76 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
             f = f3 + bubbleRowStart;
             f2 = f4;
         }
-        if (!showBubblesVertically || !this.mImeVisible) {
+        if (!zShowBubblesVertically || !this.mImeVisible) {
             return new PointF(f, f2);
         }
         float f5 = this.mPositionRect.top + this.mExpandedViewPadding;
         if (showBubblesVertically()) {
-            int i9 = (this.mImeVisible ? this.mImeHeight : 0) + this.mInsets.bottom;
-            int i10 = this.mSpacingBetweenBubbles;
-            float f6 = this.mScreenRect.bottom - ((i10 * 2) + i9);
-            int i11 = stackViewState.numberOfBubbles;
-            float f7 = ((i11 - 1) * i10) + (this.mBubbleSize * i11);
+            int i7 = (this.mImeVisible ? this.mImeHeight : 0) + this.mInsets.bottom;
+            int i8 = this.mSpacingBetweenBubbles;
+            float f6 = this.mScreenRect.bottom - ((i8 * 2) + i7);
+            int i9 = stackViewState.numberOfBubbles;
+            float f7 = ((i9 - 1) * i8) + (this.mBubbleSize * i9);
             float bubbleRowStart2 = getBubbleRowStart(stackViewState);
             float f8 = f7 + bubbleRowStart2;
             if (f8 > f6) {
                 float f9 = bubbleRowStart2 - (f8 - f6);
-                float max = Math.max(f9, f5);
+                float fMax = Math.max(f9, f5);
                 if (f9 < f5) {
-                    int i12 = stackViewState.numberOfBubbles;
-                    float f10 = ((i12 - 2) * this.mSpacingBetweenBubbles) + ((i12 - 1) * this.mBubbleSize);
-                    float centerY = showBubblesVertically() ? this.mPositionRect.centerY() : this.mPositionRect.centerX();
+                    int i10 = stackViewState.numberOfBubbles;
+                    float f10 = ((i10 - 2) * this.mSpacingBetweenBubbles) + ((i10 - 1) * this.mBubbleSize);
+                    float fCenterY = showBubblesVertically() ? this.mPositionRect.centerY() : this.mPositionRect.centerX();
                     float f11 = f10 / 2.0f;
-                    bubbleRowStart2 = (centerY - f11) - ((centerY + f11) - f6);
+                    bubbleRowStart2 = (fCenterY - f11) - ((fCenterY + f11) - f6);
                 } else {
-                    bubbleRowStart2 = max;
+                    bubbleRowStart2 = fMax;
                 }
             }
-            int i13 = stackViewState.selectedIndex;
-            int i14 = this.mBubbleSize + this.mSpacingBetweenBubbles;
-            if ((i13 * i14) + bubbleRowStart2 >= f5) {
+            int i11 = stackViewState.selectedIndex;
+            int i12 = this.mBubbleSize + this.mSpacingBetweenBubbles;
+            if ((i11 * i12) + bubbleRowStart2 >= f5) {
                 f5 = bubbleRowStart2;
             }
-            f5 += i14 * i;
+            f5 += i12 * i;
         }
         return new PointF(f, f5);
     }
 
     public final int[] getExpandedViewContainerPadding(boolean z, boolean z2) {
+        DisplayCutout displayCutout;
         int i = this.mPointerHeight - this.mPointerOverlap;
-        int width = (z2 && this.mDeviceConfig.isLargeScreen) ? (this.mScreenRect.width() - this.mExpandedViewLargeScreenInsetClosestEdge) - this.mOverflowWidth : this.mExpandedViewLargeScreenInsetFurthestEdge;
+        int iWidth = (z2 && this.mDeviceConfig.isLargeScreen) ? (this.mScreenRect.width() - this.mExpandedViewLargeScreenInsetClosestEdge) - this.mOverflowWidth : this.mExpandedViewLargeScreenInsetFurthestEdge;
         int[] iArr = new int[4];
-        if (this.mDeviceConfig.isLargeScreen) {
-            iArr[0] = z ? this.mExpandedViewLargeScreenInsetClosestEdge - i : width;
+        DeviceConfig deviceConfig = this.mDeviceConfig;
+        if (deviceConfig.isLargeScreen) {
+            iArr[0] = z ? this.mExpandedViewLargeScreenInsetClosestEdge - i : iWidth;
             iArr[1] = 0;
             if (!z) {
-                width = this.mExpandedViewLargeScreenInsetClosestEdge - i;
+                iWidth = this.mExpandedViewLargeScreenInsetClosestEdge - i;
             }
-            iArr[2] = width;
+            iArr[2] = iWidth;
             iArr[3] = z2 ? this.mExpandedViewPadding : 0;
             return iArr;
         }
         Insets insets = this.mInsets;
         int i2 = insets.left;
         int i3 = this.mExpandedViewPadding;
-        int i4 = i2 + i3;
-        int i5 = insets.right + i3;
+        int safeInsetLeft = i2 + i3;
+        int safeInsetRight = insets.right + i3;
+        if (QpShellRune.NOTI_BUBBLE_FOLDABLE_TYPE_FOLD_HID_BUT_UDC_CUTOUT && (displayCutout = deviceConfig.displayCutout) != null) {
+            safeInsetLeft = (safeInsetLeft - i2) + displayCutout.getSafeInsetLeft();
+            safeInsetRight = (safeInsetRight - this.mInsets.right) + displayCutout.getSafeInsetRight();
+        }
         if (showBubblesVertically()) {
             if (z) {
-                i4 += this.mBubbleSize - i;
+                safeInsetLeft += this.mBubbleSize - i;
             } else {
-                i5 += this.mBubbleSize - i;
+                safeInsetRight += this.mBubbleSize - i;
             }
         }
-        iArr[0] = i4;
+        iArr[0] = safeInsetLeft;
         iArr[1] = showBubblesVertically() ? 0 : this.mPointerMargin;
-        iArr[2] = i5;
+        iArr[2] = safeInsetRight;
         iArr[3] = 0;
         if (QpShellRune.NOTI_BUBBLE_STYLE_TABLET) {
             iArr[0] = getTabletSidePadding();
@@ -232,9 +237,9 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
         return iArr;
     }
 
-    public final float getExpandedViewHeight(BubbleViewProvider bubbleViewProvider) {
+    public final float getExpandedViewHeight(BubbleViewProvider bubbleViewProvider) throws Resources.NotFoundException {
         float f;
-        int i = 0;
+        int dimensionPixelSize = 0;
         boolean z = bubbleViewProvider == null || "Overflow".equals(bubbleViewProvider.getKey());
         if (z && showBubblesVertically() && !this.mDeviceConfig.isLargeScreen && !QpShellRune.NOTI_BUBBLE_STYLE_TABLET) {
             return this.mBubbleOverflowLandscapeHeight;
@@ -244,8 +249,8 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
         } else {
             Bubble bubble = (Bubble) bubbleViewProvider;
             Context context = this.mContext;
-            int i2 = bubble.mDesiredHeightResId;
-            if (i2 != 0) {
+            int i = bubble.mDesiredHeightResId;
+            if (i != 0) {
                 String str = bubble.mPackageName;
                 int identifier = bubble.mUser.getIdentifier();
                 if (str != null) {
@@ -253,22 +258,22 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
                         identifier = 0;
                     }
                     try {
-                        i = context.createContextAsUser(UserHandle.of(identifier), 0).getPackageManager().getResourcesForApplication(str).getDimensionPixelSize(i2);
+                        dimensionPixelSize = context.createContextAsUser(UserHandle.of(identifier), 0).getPackageManager().getResourcesForApplication(str).getDimensionPixelSize(i);
                     } catch (PackageManager.NameNotFoundException unused) {
                     } catch (Resources.NotFoundException e) {
                         Log.e("Bubble", "Couldn't find desired height res id", e);
                     }
                 }
-                f = i;
+                f = dimensionPixelSize;
             } else {
                 f = bubble.mDesiredHeight * context.getResources().getDisplayMetrics().density;
             }
         }
-        float max = Math.max(f, this.mExpandedViewMinHeight);
-        if (max > getMaxExpandedViewHeight(z)) {
+        float fMax = Math.max(f, this.mExpandedViewMinHeight);
+        if (fMax > getMaxExpandedViewHeight(z)) {
             return -1.0f;
         }
-        return max;
+        return fMax;
     }
 
     public final int getExpandedViewHeightForBubbleBar(boolean z) {
@@ -283,7 +288,7 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
         return (((Math.min(this.mScreenRect.height(), this.mScreenRect.width()) - (Math.max(insets.top, insets.bottom) * 2)) - this.mManageButtonHeight) - this.mPointerWidth) - (this.mExpandedViewPadding * 2);
     }
 
-    public final float getExpandedViewY(BubbleViewProvider bubbleViewProvider, float f) {
+    public final float getExpandedViewY(BubbleViewProvider bubbleViewProvider, float f) throws Resources.NotFoundException {
         boolean z = bubbleViewProvider == null || "Overflow".equals(bubbleViewProvider.getKey());
         float expandedViewHeight = getExpandedViewHeight(bubbleViewProvider);
         int expandedViewYTopAligned = getExpandedViewYTopAligned();
@@ -319,10 +324,6 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
     }
 
     public final int getMaxExpandedViewHeight(boolean z) {
-        DeviceConfig deviceConfig = this.mDeviceConfig;
-        if (deviceConfig.isLargeScreen && !deviceConfig.isSmallTablet && !z) {
-            return getExpandedViewHeightForLargeScreen();
-        }
         int expandedViewYTopAligned = getExpandedViewYTopAligned() - this.mInsets.top;
         int i = showBubblesVertically() ? 0 : this.mPointerHeight;
         return (((this.mPositionRect.height() - expandedViewYTopAligned) - i) - (showBubblesVertically() ? this.mPointerWidth : this.mPointerHeight + this.mPointerMargin)) - (z ? this.mExpandedViewPadding : this.mManageButtonHeightIncludingMargins);
@@ -379,7 +380,7 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
         return deviceConfig.isLandscape || deviceConfig.isLargeScreen;
     }
 
-    public final void update(DeviceConfig deviceConfig) {
+    public final void update(DeviceConfig deviceConfig) throws Resources.NotFoundException {
         this.mDeviceConfig = deviceConfig;
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
             ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, -5246433577405958017L, EnterpriseContainerCallback.CONTAINER_PACKAGE_UNINSTALL_FAILURE, Long.valueOf(this.mRotation), String.valueOf(deviceConfig.insets), Boolean.valueOf(deviceConfig.isLargeScreen), Boolean.valueOf(deviceConfig.isSmallTablet), Boolean.FALSE, String.valueOf(deviceConfig.windowBounds));
@@ -387,7 +388,8 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
         updateInternal(this.mRotation, deviceConfig.insets, deviceConfig.windowBounds);
     }
 
-    public void updateInternal(int i, Insets insets, Rect rect) {
+    public void updateInternal(int i, Insets insets, Rect rect) throws Resources.NotFoundException {
+        DisplayCutout displayCutout;
         Rect rect2;
         BubbleStackView.RelativeStackPosition relativeStackPosition = (this.mRestingStackPosition == null || (rect2 = this.mScreenRect) == null || rect2.equals(rect)) ? null : new BubbleStackView.RelativeStackPosition(getRestingPosition(), getAllowableStackPositionRegion(1));
         this.mRotation = i;
@@ -397,10 +399,17 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
         this.mPositionRect = rect3;
         int i2 = rect3.left;
         Insets insets2 = this.mInsets;
-        rect3.left = i2 + insets2.left;
+        int i3 = insets2.left;
+        int i4 = i2 + i3;
+        rect3.left = i4;
         rect3.top += insets2.top;
         rect3.right -= insets2.right;
         rect3.bottom -= insets2.bottom;
+        if (QpShellRune.NOTI_BUBBLE_FOLDABLE_TYPE_FOLD_HID_BUT_UDC_CUTOUT && (displayCutout = this.mDeviceConfig.displayCutout) != null) {
+            rect3.left = displayCutout.getSafeInsetLeft() + (i4 - i3);
+            Rect rect4 = this.mPositionRect;
+            rect4.right = (rect4.right + this.mInsets.right) - displayCutout.getSafeInsetRight();
+        }
         Resources resources = this.mContext.getResources();
         this.mBubbleSize = resources.getDimensionPixelSize(R.dimen.bubble_size);
         this.mSpacingBetweenBubbles = resources.getDimensionPixelSize(R.dimen.bubble_spacing);
@@ -423,13 +432,13 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
         }
         DeviceConfig deviceConfig = this.mDeviceConfig;
         if (!deviceConfig.isLargeScreen) {
-            int i3 = this.mExpandedViewPadding;
-            this.mExpandedViewLargeScreenInsetClosestEdge = i3;
-            this.mExpandedViewLargeScreenInsetFurthestEdge = i3;
+            int i5 = this.mExpandedViewPadding;
+            this.mExpandedViewLargeScreenInsetClosestEdge = i5;
+            this.mExpandedViewLargeScreenInsetFurthestEdge = i5;
         } else if (deviceConfig.isSmallTablet) {
-            int width = (rect.width() - this.mExpandedViewLargeScreenWidth) / 2;
-            this.mExpandedViewLargeScreenInsetClosestEdge = width;
-            this.mExpandedViewLargeScreenInsetFurthestEdge = width;
+            int iWidth = (rect.width() - this.mExpandedViewLargeScreenWidth) / 2;
+            this.mExpandedViewLargeScreenInsetClosestEdge = iWidth;
+            this.mExpandedViewLargeScreenInsetFurthestEdge = iWidth;
         } else {
             this.mExpandedViewLargeScreenInsetClosestEdge = resources.getDimensionPixelSize(R.dimen.bubble_expanded_view_largescreen_landscape_padding);
             this.mExpandedViewLargeScreenInsetFurthestEdge = (rect.width() - this.mExpandedViewLargeScreenInsetClosestEdge) - this.mExpandedViewLargeScreenWidth;
@@ -453,7 +462,7 @@ public class BubblePositioner implements BubbleDropTargetBoundsProvider {
         }
     }
 
-    public BubblePositioner(Context context, DeviceConfig deviceConfig) {
+    public BubblePositioner(Context context, DeviceConfig deviceConfig) throws Resources.NotFoundException {
         this.mRotation = 0;
         this.mBubbleBarLocation = BubbleBarLocation.DEFAULT;
         this.mContext = context;

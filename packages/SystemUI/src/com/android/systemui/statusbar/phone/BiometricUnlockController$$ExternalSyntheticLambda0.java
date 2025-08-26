@@ -5,7 +5,6 @@ import com.android.systemui.keyguard.shared.model.TransitionStep;
 import com.android.systemui.statusbar.phone.BiometricUnlockController;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BiometricUnlockController$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -28,9 +27,9 @@ public final /* synthetic */ class BiometricUnlockController$$ExternalSyntheticL
                 BiometricUnlockController.UI_EVENT_LOGGER.log((BiometricUnlockController.BiometricUiEvent) obj, biometricUnlockController.mSessionTracker.getSessionId(1));
                 break;
             case 2:
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 SecLockIconViewController secLockIconViewController = (SecLockIconViewController) biometricUnlockController.mSecLockIconViewControllerLazy.get();
-                secLockIconViewController.mIsBiometricToastViewAnimating = booleanValue;
+                secLockIconViewController.mIsBiometricToastViewAnimating = zBooleanValue;
                 secLockIconViewController.updateVisibility$4();
                 break;
             case 3:

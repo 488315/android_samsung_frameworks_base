@@ -21,7 +21,6 @@ import com.android.systemui.statusbar.notification.row.NotificationBackgroundVie
 import com.android.systemui.statusbar.notification.shared.NotificationHeadsUpCycling;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StackScrollAlgorithm {
     public boolean mClipNotificationScrollToTop;
@@ -47,16 +46,14 @@ public class StackScrollAlgorithm {
     public boolean mFavoriteGap = false;
     public float mOverExpansionAmount = 0.0f;
     public boolean mOngoingGap = false;
+    public float mPaddingTopWhenEmptyShade = 0.0f;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface BypassController {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SectionProvider {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StackScrollAlgorithmState {
         public ExpandableView firstViewInShelf;
         public float mCurrentExpandedYPosition;
@@ -68,13 +65,14 @@ public class StackScrollAlgorithm {
         SourceType.from("StackScrollAlgorithm");
     }
 
-    public StackScrollAlgorithm(Context context, ViewGroup viewGroup, HeadsUpAnimator headsUpAnimator) {
+    public StackScrollAlgorithm(Context context, ViewGroup viewGroup, HeadsUpAnimator headsUpAnimator) throws Resources.NotFoundException {
         this.mHostView = viewGroup;
         this.mContext = context;
         initView(context);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:232:0x04ca  */
     /* JADX WARN: Type inference failed for: r11v5, types: [java.util.ArrayList] */
     /* JADX WARN: Type inference failed for: r17v0 */
     /* JADX WARN: Type inference failed for: r17v1, types: [int] */
@@ -100,47 +98,50 @@ public class StackScrollAlgorithm {
     /* JADX WARN: Type inference failed for: r7v4, types: [int] */
     /* JADX WARN: Type inference failed for: r7v5, types: [int] */
     /* JADX WARN: Type inference failed for: r7v6 */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static void getNotificationChildrenStates(StackScrollAlgorithmState stackScrollAlgorithmState) {
         int i;
         boolean z;
         int i2;
-        int i3;
+        int maxAllowedVisibleChildren;
+        float groupExpandFraction;
         float f;
-        float f2;
+        int i3;
         int i4;
         int i5;
         int i6;
-        int i7;
         boolean z2;
         char c;
-        int i8;
+        int iInterpolate;
         StackScrollAlgorithmState stackScrollAlgorithmState2 = stackScrollAlgorithmState;
         int size = stackScrollAlgorithmState2.visibleChildren.size();
         boolean z3 = false;
-        int i9 = 0;
-        while (i9 < size) {
-            ExpandableView expandableView = (ExpandableView) stackScrollAlgorithmState2.visibleChildren.get(i9);
+        int i7 = 0;
+        while (i7 < size) {
+            ExpandableView expandableView = (ExpandableView) stackScrollAlgorithmState2.visibleChildren.get(i7);
             if (expandableView instanceof ExpandableNotificationRow) {
                 ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) expandableView;
                 if (expandableNotificationRow.mIsSummaryWithChildren) {
                     ExpandableViewState expandableViewState = expandableNotificationRow.mViewState;
                     NotificationChildrenContainer notificationChildrenContainer = expandableNotificationRow.mChildrenContainer;
                     int size2 = ((ArrayList) notificationChildrenContainer.mAttachedChildren).size();
-                    ?? r7 = notificationChildrenContainer.mContainingNotification.isGroupExpanded$1() ? notificationChildrenContainer.mHeaderExpandedHeight : z3;
-                    int maxAllowedVisibleChildren = notificationChildrenContainer.getMaxAllowedVisibleChildren();
-                    int i10 = maxAllowedVisibleChildren - 1;
+                    ?? Interpolate = notificationChildrenContainer.mContainingNotification.isGroupExpanded$1() ? notificationChildrenContainer.mHeaderExpandedHeight : z3;
+                    int maxAllowedVisibleChildren2 = notificationChildrenContainer.getMaxAllowedVisibleChildren();
+                    int i8 = maxAllowedVisibleChildren2 - 1;
                     boolean z4 = notificationChildrenContainer.mUserLocked;
                     if (z4) {
-                        f = notificationChildrenContainer.getGroupExpandFraction();
-                        i3 = notificationChildrenContainer.getMaxAllowedVisibleChildren(z3);
+                        groupExpandFraction = notificationChildrenContainer.getGroupExpandFraction();
+                        maxAllowedVisibleChildren = notificationChildrenContainer.getMaxAllowedVisibleChildren(z3);
                     } else {
-                        i3 = maxAllowedVisibleChildren;
-                        f = 0.0f;
+                        maxAllowedVisibleChildren = maxAllowedVisibleChildren2;
+                        groupExpandFraction = 0.0f;
                     }
                     char c2 = 1;
                     boolean z5 = (!notificationChildrenContainer.mChildrenExpanded || notificationChildrenContainer.mContainingNotification.isGroupExpansionChanging()) ? z3 : true;
                     ?? r17 = z3;
-                    int i11 = r17;
+                    int i9 = r17;
                     boolean z6 = true;
                     for (?? r2 = z3; r2 < size2; r2++) {
                         ExpandableNotificationRow expandableNotificationRow2 = (ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(r2);
@@ -148,67 +149,67 @@ public class StackScrollAlgorithm {
                             boolean z7 = notificationChildrenContainer.mUntruncatedChildCount > 1 && !notificationChildrenContainer.showingLowPriorityGroupHeader();
                             if (z4) {
                                 boolean z8 = z7;
-                                int interpolate = (int) (NotificationUtils.interpolate(0.0f, notificationChildrenContainer.mAdditionalExpandedHeaderMargin + notificationChildrenContainer.mHeaderExpandedHeight, f) + ((float) r7));
+                                int iInterpolate2 = (int) (NotificationUtils.interpolate(0.0f, notificationChildrenContainer.mAdditionalExpandedHeaderMargin + notificationChildrenContainer.mHeaderExpandedHeight, groupExpandFraction) + ((float) Interpolate));
                                 if (z8) {
                                     ArrayList arrayList = notificationChildrenContainer.mExpanderViewStates;
                                     int size3 = arrayList.size();
-                                    i6 = interpolate;
-                                    int i12 = 0;
-                                    while (i12 < size3) {
-                                        Object obj = arrayList.get(i12);
-                                        int i13 = i12 + 1;
+                                    i5 = iInterpolate2;
+                                    int i10 = 0;
+                                    while (i10 < size3) {
+                                        Object obj = arrayList.get(i10);
+                                        int i11 = i10 + 1;
                                         ViewState viewState = (ViewState) obj;
                                         viewState.hidden = false;
-                                        viewState.setAlpha(NotificationUtils.interpolate(0.0f, 1.0f, f));
+                                        viewState.setAlpha(NotificationUtils.interpolate(0.0f, 1.0f, groupExpandFraction));
                                         arrayList = arrayList;
-                                        i12 = i13;
+                                        i10 = i11;
                                         size = size;
-                                        i9 = i9;
+                                        i7 = i7;
                                     }
-                                    i4 = size;
-                                    i5 = i9;
-                                    float f3 = 0.0f;
-                                    float f4 = 1.0f;
+                                    i3 = size;
+                                    i4 = i7;
+                                    float f2 = 0.0f;
+                                    float f3 = 1.0f;
                                     ArrayList arrayList2 = notificationChildrenContainer.mChildrenCountViewStates;
                                     int size4 = arrayList2.size();
-                                    int i14 = 0;
-                                    while (i14 < size4) {
-                                        Object obj2 = arrayList2.get(i14);
-                                        i14++;
-                                        ((ViewState) obj2).setAlpha(NotificationUtils.interpolate(f4, f3, f));
+                                    int i12 = 0;
+                                    while (i12 < size4) {
+                                        Object obj2 = arrayList2.get(i12);
+                                        i12++;
+                                        ((ViewState) obj2).setAlpha(NotificationUtils.interpolate(f3, f2, groupExpandFraction));
                                         size4 = size4;
                                         arrayList2 = arrayList2;
-                                        f3 = 0.0f;
-                                        f4 = 1.0f;
+                                        f2 = 0.0f;
+                                        f3 = 1.0f;
                                     }
                                 } else {
-                                    i6 = interpolate;
-                                    i4 = size;
-                                    i5 = i9;
+                                    i5 = iInterpolate2;
+                                    i3 = size;
+                                    i4 = i7;
                                     ArrayList arrayList3 = notificationChildrenContainer.mExpanderViewStates;
                                     int size5 = arrayList3.size();
-                                    int i15 = 0;
-                                    while (i15 < size5) {
-                                        Object obj3 = arrayList3.get(i15);
-                                        i15++;
+                                    int i13 = 0;
+                                    while (i13 < size5) {
+                                        Object obj3 = arrayList3.get(i13);
+                                        i13++;
                                         ViewState viewState2 = (ViewState) obj3;
                                         viewState2.hidden = false;
                                         viewState2.setAlpha(1.0f);
                                     }
                                 }
-                                r7 = i6;
+                                Interpolate = i5;
                             } else {
                                 boolean z9 = z7;
-                                i4 = size;
-                                i5 = i9;
-                                r7 += notificationChildrenContainer.mChildrenExpanded ? notificationChildrenContainer.mAdditionalExpandedHeaderMargin : 0;
+                                i3 = size;
+                                i4 = i7;
+                                Interpolate += notificationChildrenContainer.mChildrenExpanded ? notificationChildrenContainer.mAdditionalExpandedHeaderMargin : 0;
                                 if (z9) {
                                     ArrayList arrayList4 = notificationChildrenContainer.mExpanderViewStates;
                                     int size6 = arrayList4.size();
-                                    int i16 = 0;
-                                    while (i16 < size6) {
-                                        Object obj4 = arrayList4.get(i16);
-                                        i16++;
+                                    int i14 = 0;
+                                    while (i14 < size6) {
+                                        Object obj4 = arrayList4.get(i14);
+                                        i14++;
                                         ViewState viewState3 = (ViewState) obj4;
                                         ArrayList arrayList5 = arrayList4;
                                         viewState3.hidden = false;
@@ -217,10 +218,10 @@ public class StackScrollAlgorithm {
                                     }
                                     ArrayList arrayList6 = notificationChildrenContainer.mChildrenCountViewStates;
                                     int size7 = arrayList6.size();
-                                    int i17 = 0;
-                                    while (i17 < size7) {
-                                        Object obj5 = arrayList6.get(i17);
-                                        i17++;
+                                    int i15 = 0;
+                                    while (i15 < size7) {
+                                        Object obj5 = arrayList6.get(i15);
+                                        i15++;
                                         ArrayList arrayList7 = arrayList6;
                                         ((ViewState) obj5).setAlpha(notificationChildrenContainer.mChildrenExpanded ? 0.0f : 1.0f);
                                         arrayList6 = arrayList7;
@@ -228,10 +229,10 @@ public class StackScrollAlgorithm {
                                 } else {
                                     ArrayList arrayList8 = notificationChildrenContainer.mExpanderViewStates;
                                     int size8 = arrayList8.size();
-                                    int i18 = 0;
-                                    while (i18 < size8) {
-                                        Object obj6 = arrayList8.get(i18);
-                                        i18++;
+                                    int i16 = 0;
+                                    while (i16 < size8) {
+                                        Object obj6 = arrayList8.get(i16);
+                                        i16++;
                                         ViewState viewState4 = (ViewState) obj6;
                                         viewState4.hidden = false;
                                         viewState4.setAlpha(1.0f);
@@ -239,10 +240,10 @@ public class StackScrollAlgorithm {
                                     }
                                     ArrayList arrayList9 = notificationChildrenContainer.mChildrenCountViewStates;
                                     int size9 = arrayList9.size();
-                                    int i19 = 0;
-                                    while (i19 < size9) {
-                                        Object obj7 = arrayList9.get(i19);
-                                        i19++;
+                                    int i17 = 0;
+                                    while (i17 < size9) {
+                                        Object obj7 = arrayList9.get(i17);
+                                        i17++;
                                         ((ViewState) obj7).setAlpha(0.0f);
                                         arrayList9 = arrayList9;
                                     }
@@ -251,12 +252,12 @@ public class StackScrollAlgorithm {
                             z6 = false;
                         } else {
                             if (r2 > c2 || notificationChildrenContainer.mChildrenExpanded) {
-                                r7 = z4 ? (int) (NotificationUtils.interpolate(notificationChildrenContainer.mChildPadding, notificationChildrenContainer.mDividerHeight, f) + ((float) r7)) : r7 + (notificationChildrenContainer.mChildrenExpanded ? notificationChildrenContainer.mDividerHeight : notificationChildrenContainer.mChildPadding);
+                                Interpolate = z4 ? (int) (NotificationUtils.interpolate(notificationChildrenContainer.mChildPadding, notificationChildrenContainer.mDividerHeight, groupExpandFraction) + ((float) Interpolate)) : Interpolate + (notificationChildrenContainer.mChildrenExpanded ? notificationChildrenContainer.mDividerHeight : notificationChildrenContainer.mChildPadding);
                             } else if (z4) {
-                                r7 = (int) (NotificationUtils.interpolate(0.0f, notificationChildrenContainer.mDividerHeight, f) + ((float) r7));
+                                Interpolate = (int) (NotificationUtils.interpolate(0.0f, notificationChildrenContainer.mDividerHeight, groupExpandFraction) + ((float) Interpolate));
                             }
-                            i4 = size;
-                            i5 = i9;
+                            i3 = size;
+                            i4 = i7;
                         }
                         ExpandableViewState expandableViewState2 = expandableNotificationRow2.mViewState;
                         expandableViewState2.dimmed = expandableViewState.dimmed;
@@ -275,11 +276,11 @@ public class StackScrollAlgorithm {
                                 notificationBackgroundView2.invalidate();
                             }
                             r17 = intrinsicHeight;
-                        } else if (i11 != 0) {
-                            r7 += r17 - intrinsicHeight;
+                        } else if (i9 != 0) {
+                            Interpolate += r17 - intrinsicHeight;
                         }
-                        float f5 = (float) r7;
-                        expandableViewState2.setYTranslation(f5);
+                        float f4 = (float) Interpolate;
+                        expandableViewState2.setYTranslation(f4);
                         expandableViewState2.hidden = false;
                         if (expandableNotificationRow2.mExpandAnimationRunning || notificationChildrenContainer.mContainingNotification.mChildIsExpanding) {
                             expandableViewState2.setZTranslation(expandableNotificationRow2.getTranslationZ());
@@ -289,16 +290,16 @@ public class StackScrollAlgorithm {
                             expandableViewState2.setZTranslation(10.0f - ((float) r2));
                         }
                         expandableViewState2.hideSensitive = expandableViewState.hideSensitive;
-                        if (i11 == 0) {
-                            i7 = intrinsicHeight;
+                        if (i9 == 0) {
+                            i6 = intrinsicHeight;
                             expandableViewState2.clipTopAmount = 0;
                             expandableNotificationRow2.setContentClipTopAmount(0);
-                        } else if (!z4 || f <= 0.0f) {
-                            i7 = intrinsicHeight;
-                            expandableViewState2.clipTopAmount = i7 - notificationChildrenContainer.mOverLappedSize;
+                        } else if (!z4 || groupExpandFraction <= 0.0f) {
+                            i6 = intrinsicHeight;
+                            expandableViewState2.clipTopAmount = i6 - notificationChildrenContainer.mOverLappedSize;
                         } else {
                             expandableViewState2.clipTopAmount = 0;
-                            i7 = intrinsicHeight;
+                            i6 = intrinsicHeight;
                             expandableNotificationRow2.setContentClipTopAmount((int) ((((ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(r2 - 1)).getTranslationY() + r1.getIntrinsicHeight()) - expandableNotificationRow2.getTranslationY()));
                         }
                         if (notificationChildrenContainer.showingLowPriorityGroupHeader() && !notificationChildrenContainer.mChildrenExpanded && !z4 && !notificationChildrenContainer.mContainingNotification.isGroupExpansionChanging()) {
@@ -312,19 +313,19 @@ public class StackScrollAlgorithm {
                             z2 = true;
                         }
                         expandableViewState2.setAlpha(0.0f);
-                        if (r2 < i3) {
+                        if (r2 < maxAllowedVisibleChildren) {
                             if (!z4 || r2 <= 0) {
                                 expandableViewState2.setAlpha(1.0f);
                                 expandableViewState2.setScaleX(1.0f);
                             } else {
-                                expandableViewState2.setAlpha(r2 == z2 ? Math.max(notificationChildrenContainer.mReduceTransparencyAndBlurOn ? 0.4f : 0.5f, f) : f);
-                                expandableViewState2.setScaleX(NotificationUtils.interpolate(0.92f, 1.0f, f));
+                                expandableViewState2.setAlpha(r2 == z2 ? Math.max(notificationChildrenContainer.mReduceTransparencyAndBlurOn ? 0.4f : 0.5f, groupExpandFraction) : groupExpandFraction);
+                                expandableViewState2.setScaleX(NotificationUtils.interpolate(0.92f, 1.0f, groupExpandFraction));
                             }
-                        } else if (f == 1.0f && r2 <= i10) {
+                        } else if (groupExpandFraction == 1.0f && r2 <= i8) {
                             expandableViewState2.setAlpha((notificationChildrenContainer.mActualHeight - expandableViewState2.mYTranslation) / expandableViewState2.height);
                             expandableViewState2.setAlpha(Math.max(0.0f, Math.min(1.0f, expandableViewState2.mAlpha)));
                             expandableViewState2.setScaleX(1.0f);
-                        } else if (maxAllowedVisibleChildren == 1 && r2 > 0) {
+                        } else if (maxAllowedVisibleChildren2 == 1 && r2 > 0) {
                             expandableViewState2.setAlpha(notificationChildrenContainer.mReduceTransparencyAndBlurOn ? 0.4f : 0.5f);
                             expandableViewState2.setScaleX(0.92f);
                         }
@@ -332,7 +333,7 @@ public class StackScrollAlgorithm {
                         expandableViewState2.inShelf = expandableViewState.inShelf;
                         expandableNotificationRow2.setContentAlphaLocked(false);
                         if (r2 == 0 && notificationChildrenContainer.showingLowPriorityGroupHeader()) {
-                            expandableNotificationRow2.setContentAlpha(NotificationUtils.interpolate(0.0f, 1.0f, notificationChildrenContainer.mUserLocked ? f : notificationChildrenContainer.mContainingNotification.isGroupExpanded$1() ? 1.0f : 0.0f));
+                            expandableNotificationRow2.setContentAlpha(NotificationUtils.interpolate(0.0f, 1.0f, notificationChildrenContainer.mUserLocked ? groupExpandFraction : notificationChildrenContainer.mContainingNotification.isGroupExpanded$1() ? 1.0f : 0.0f));
                             c = 1;
                             if (!z4) {
                                 expandableNotificationRow2.setContentAlphaLocked(true);
@@ -346,26 +347,26 @@ public class StackScrollAlgorithm {
                             expandableNotificationRow2.setContentAlphaLocked(true);
                         }
                         if (r2 >= c || notificationChildrenContainer.mChildrenExpanded) {
-                            r7 += i7;
-                            i11 = 0;
+                            Interpolate += i6;
+                            i9 = 0;
                         } else {
                             if (z4) {
-                                i8 = (int) (NotificationUtils.interpolate(notificationChildrenContainer.mOverLappedSize, i7 - (i7 - (r2 + 1 < size2 ? ((ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(r0)).getIntrinsicHeight() : 0)), f) + f5);
+                                iInterpolate = (int) (NotificationUtils.interpolate(notificationChildrenContainer.mOverLappedSize, i6 - (i6 - (r2 + 1 < size2 ? ((ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(r0)).getIntrinsicHeight() : 0)), groupExpandFraction) + f4);
                             } else {
-                                i8 = notificationChildrenContainer.mOverLappedSize + r7;
+                                iInterpolate = notificationChildrenContainer.mOverLappedSize + Interpolate;
                             }
-                            r7 = i8;
-                            i11 = 1;
+                            Interpolate = iInterpolate;
+                            i9 = 1;
                         }
                         if (notificationChildrenContainer.mContainingNotification.isInsignificantSummary()) {
-                            expandableNotificationRow2.updateInsignificantAlpha(notificationChildrenContainer.mUserLocked ? f : notificationChildrenContainer.mContainingNotification.isGroupExpanded$1() ? 1.0f : 0.0f);
+                            expandableNotificationRow2.updateInsignificantAlpha(notificationChildrenContainer.mUserLocked ? groupExpandFraction : notificationChildrenContainer.mContainingNotification.isGroupExpanded$1() ? 1.0f : 0.0f);
                         }
-                        size = i4;
-                        i9 = i5;
+                        size = i3;
+                        i7 = i4;
                         c2 = 1;
                     }
                     i = size;
-                    i2 = i9;
+                    i2 = i7;
                     if (notificationChildrenContainer.mOverflowNumber != null) {
                         notificationChildrenContainer.mGroupOverFlowState.copyFrom(((ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(Math.min(notificationChildrenContainer.getMaxAllowedVisibleChildren(true), size2) - 1)).mViewState);
                         ViewState viewState5 = notificationChildrenContainer.mGroupOverFlowState;
@@ -388,38 +389,35 @@ public class StackScrollAlgorithm {
                         }
                         z = false;
                         notificationChildrenContainer.mHeaderViewState.setYTranslation(0);
-                        View findViewById = notificationChildrenContainer.mCurrentHeader.findViewById(R.id.resolver_list);
-                        View findViewById2 = notificationChildrenContainer.mCurrentHeader.findViewById(R.id.flagRetrieveInteractiveWindows);
-                        if (findViewById != null) {
-                            findViewById.setAlpha(notificationChildrenContainer.mHeaderVisibleAmount);
+                        View viewFindViewById = notificationChildrenContainer.mCurrentHeader.findViewById(R.id.resolver_list);
+                        View viewFindViewById2 = notificationChildrenContainer.mCurrentHeader.findViewById(R.id.flagRetrieveInteractiveWindows);
+                        if (viewFindViewById != null) {
+                            viewFindViewById.setAlpha(notificationChildrenContainer.mHeaderVisibleAmount);
                         }
-                        if (findViewById2 != null) {
-                            findViewById2.setAlpha(notificationChildrenContainer.mHeaderVisibleAmount);
+                        if (viewFindViewById2 != null) {
+                            viewFindViewById2.setAlpha(notificationChildrenContainer.mHeaderVisibleAmount);
                         }
-                        View findViewById3 = notificationChildrenContainer.mCurrentHeader.findViewById(R.id.icon);
-                        View findViewById4 = notificationChildrenContainer.mCurrentHeader.findViewById(R.id.input_separator);
-                        if (findViewById3 != null) {
-                            f2 = 1.0f;
-                            findViewById3.setTranslationY((1.0f - notificationChildrenContainer.mHeaderVisibleAmount) * notificationChildrenContainer.mTranslationYFactor);
+                        View viewFindViewById3 = notificationChildrenContainer.mCurrentHeader.findViewById(R.id.icon);
+                        View viewFindViewById4 = notificationChildrenContainer.mCurrentHeader.findViewById(R.id.input_separator);
+                        if (viewFindViewById3 != null) {
+                            f = 1.0f;
+                            viewFindViewById3.setTranslationY((1.0f - notificationChildrenContainer.mHeaderVisibleAmount) * notificationChildrenContainer.mTranslationYFactor);
                         } else {
-                            f2 = 1.0f;
+                            f = 1.0f;
                         }
-                        if (findViewById4 != null) {
-                            findViewById4.setTranslationY((f2 - notificationChildrenContainer.mHeaderVisibleAmount) * notificationChildrenContainer.mTranslationYFactor);
+                        if (viewFindViewById4 != null) {
+                            viewFindViewById4.setTranslationY((f - notificationChildrenContainer.mHeaderVisibleAmount) * notificationChildrenContainer.mTranslationYFactor);
                         }
                     } else {
                         z = false;
                     }
-                    i9 = i2 + 1;
-                    stackScrollAlgorithmState2 = stackScrollAlgorithmState;
-                    z3 = z;
-                    size = i;
+                } else {
+                    i = size;
+                    z = z3;
+                    i2 = i7;
                 }
             }
-            i = size;
-            z = z3;
-            i2 = i9;
-            i9 = i2 + 1;
+            i7 = i2 + 1;
             stackScrollAlgorithmState2 = stackScrollAlgorithmState;
             z3 = z;
             size = i;
@@ -466,9 +464,9 @@ public class StackScrollAlgorithm {
     }
 
     public void clampHunToTop(float f, float f2, ExpandableViewState expandableViewState) {
-        float max = Math.max(f, expandableViewState.mYTranslation);
-        float f3 = expandableViewState.height - (max - expandableViewState.mYTranslation);
-        expandableViewState.setYTranslation(max);
+        float fMax = Math.max(f, expandableViewState.mYTranslation);
+        float f3 = expandableViewState.height - (fMax - expandableViewState.mYTranslation);
+        expandableViewState.setYTranslation(fMax);
         expandableViewState.height = (int) Math.max(f3, f2);
     }
 
@@ -494,7 +492,7 @@ public class StackScrollAlgorithm {
         return this.mFavoriteGapHeight;
     }
 
-    public final void initView(Context context) {
+    public final void initView(Context context) throws Resources.NotFoundException {
         Resources resources = context.getResources();
         this.mPaddingBetweenElements = resources.getDimensionPixelSize(com.android.systemui.R.dimen.notification_divider_height);
         this.mCollapsedSize = resources.getDimensionPixelSize(com.android.systemui.R.dimen.notification_min_height);
@@ -515,6 +513,7 @@ public class StackScrollAlgorithm {
         this.mMaxGroupExpandedBottomGap = resources.getDimension(com.android.systemui.R.dimen.notification_group_expanded_max_bottom_gap);
         this.mOngoingGapHeight = resources.getDimensionPixelSize(com.android.systemui.R.dimen.notification_section_ongoing_gap_height);
         this.mFavoriteGapHeight = resources.getDimensionPixelSize(com.android.systemui.R.dimen.notification_section_favorite_gap_height);
+        this.mPaddingTopWhenEmptyShade = resources.getDimensionPixelSize(com.android.systemui.R.dimen.sec_notification_stack_top_padding_when_empty_shade_tablet);
     }
 
     public void maybeUpdateHeadsUpIsVisible(ExpandableViewState expandableViewState, boolean z, boolean z2, boolean z3, float f, float f2) {
@@ -550,7 +549,7 @@ public class StackScrollAlgorithm {
     }
 
     public void updateViewWithShelf(ExpandableView expandableView, ExpandableViewState expandableViewState, float f, float f2) {
-        expandableViewState.setYTranslation(Math.min(expandableViewState.mYTranslation, f));
+        expandableViewState.setYTranslation(Math.min(expandableViewState.mYTranslation, (!expandableView.isPinned() ? f2 + this.mPaddingBetweenElements : 0.0f) + f));
         if (expandableViewState.mYTranslation >= f) {
             expandableViewState.hidden = (expandableView.isExpandAnimationRunning() || expandableView.hasExpandingChild()) ? false : true;
             expandableViewState.inShelf = true;

@@ -33,7 +33,7 @@ public class SmartClipUtils {
 
     public static String getChromeViewClassNameFromManifest(Context context, String str) {
         ApplicationInfo applicationInfo;
-        String str2 = null;
+        String string = null;
         try {
             applicationInfo = context.getPackageManager().getApplicationInfo(str, 128);
         } catch (PackageManager.NameNotFoundException unused) {
@@ -43,10 +43,10 @@ public class SmartClipUtils {
             return null;
         }
         Bundle bundle = applicationInfo.metaData;
-        if (bundle != null && (str2 = bundle.getString("org.chromium.content.browser.SMART_CLIP_PROVIDER")) != null) {
-            Log.d(TAG, "Target chrome view = " + str2);
+        if (bundle != null && (string = bundle.getString("org.chromium.content.browser.SMART_CLIP_PROVIDER")) != null) {
+            Log.d(TAG, "Target chrome view = " + string);
         }
-        return str2;
+        return string;
     }
 
     public static Rect getViewBoundsOnScreen(View view) {

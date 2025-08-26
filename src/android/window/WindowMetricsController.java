@@ -38,23 +38,21 @@ public final class WindowMetricsController {
     private WindowMetrics getWindowMetricsInternal(boolean z) {
         final Rect maxBounds;
         float f;
-        final boolean isScreenRound;
+        final boolean zIsScreenRound;
         final int activityType;
         synchronized (ResourcesManager.getInstance()) {
             Configuration configuration = this.mContext.getResources().getConfiguration();
             WindowConfiguration windowConfiguration = configuration.windowConfiguration;
             maxBounds = z ? windowConfiguration.getMaxBounds() : windowConfiguration.getBounds();
             f = configuration.densityDpi * 0.00625f;
-            isScreenRound = configuration.isScreenRound();
+            zIsScreenRound = configuration.isScreenRound();
             activityType = windowConfiguration.getActivityType();
         }
         final IBinder token = Context.getToken(this.mContext);
         return new WindowMetrics(new Rect(maxBounds), (Supplier<WindowInsets>) new Supplier() { // from class: android.window.WindowMetricsController$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                WindowInsets lambda$getWindowMetricsInternal$0;
-                lambda$getWindowMetricsInternal$0 = WindowMetricsController.this.lambda$getWindowMetricsInternal$0(token, maxBounds, isScreenRound, activityType);
-                return lambda$getWindowMetricsInternal$0;
+                return this.f$0.lambda$getWindowMetricsInternal$0(token, maxBounds, zIsScreenRound, activityType);
             }
         }, f);
     }
@@ -86,11 +84,11 @@ public final class WindowMetricsController {
                 DisplayInfo displayInfo = possibleDisplayInfo.get(i2);
                 Rect rect = new Rect(0, 0, displayInfo.getNaturalWidth(), displayInfo.getNaturalHeight());
                 WindowInsets windowInsetsFromServerForDisplay = getWindowInsetsFromServerForDisplay(displayInfo.displayId, null, new Rect(0, 0, displayInfo.getNaturalWidth(), displayInfo.getNaturalHeight()), (displayInfo.flags & 16) != 0, 0);
-                DisplayCutout displayCutout = displayInfo.displayCutout;
-                if (displayCutout != null && displayInfo.rotation != 0) {
-                    displayCutout = displayCutout.getRotated(displayInfo.logicalWidth, displayInfo.logicalHeight, displayInfo.rotation, 0);
+                DisplayCutout rotated = displayInfo.displayCutout;
+                if (rotated != null && displayInfo.rotation != 0) {
+                    rotated = rotated.getRotated(displayInfo.logicalWidth, displayInfo.logicalHeight, displayInfo.rotation, 0);
                 }
-                hashSet.add(new WindowMetrics(rect, new WindowInsets.Builder(windowInsetsFromServerForDisplay).setRoundedCorners(displayInfo.roundedCorners).setDisplayCutout(displayCutout).build(), displayInfo.logicalDensityDpi * 0.00625f));
+                hashSet.add(new WindowMetrics(rect, new WindowInsets.Builder(windowInsetsFromServerForDisplay).setRoundedCorners(displayInfo.roundedCorners).setDisplayCutout(rotated).build(), displayInfo.logicalDensityDpi * 0.00625f));
             }
             return hashSet;
         } catch (RemoteException e) {

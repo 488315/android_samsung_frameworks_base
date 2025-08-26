@@ -10,7 +10,6 @@ import com.google.android.material.progressindicator.BaseProgressIndicator;
 import com.google.android.material.progressindicator.DrawingDelegate;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CircularIndeterminateAnimatorDelegate extends IndeterminateAnimatorDelegate {
     public static final AnonymousClass3 ANIMATION_FRACTION;
@@ -135,10 +134,10 @@ public final class CircularIndeterminateAnimatorDelegate extends IndeterminateAn
                 float interpolation = fastOutSlowInInterpolator.getInterpolation(fractionInRange);
                 DrawingDelegate.ActiveIndicator activeIndicator2 = (DrawingDelegate.ActiveIndicator) ((ArrayList) this.activeIndicators).get(0);
                 ArgbEvaluatorCompat argbEvaluatorCompat = ArgbEvaluatorCompat.instance;
-                Integer valueOf = Integer.valueOf(i5);
-                Integer valueOf2 = Integer.valueOf(i6);
+                Integer numValueOf = Integer.valueOf(i5);
+                Integer numValueOf2 = Integer.valueOf(i6);
                 argbEvaluatorCompat.getClass();
-                activeIndicator2.color = ArgbEvaluatorCompat.evaluate(interpolation, valueOf, valueOf2).intValue();
+                activeIndicator2.color = ArgbEvaluatorCompat.evaluate(interpolation, numValueOf, numValueOf2).intValue();
                 break;
             }
             i3++;
@@ -149,9 +148,9 @@ public final class CircularIndeterminateAnimatorDelegate extends IndeterminateAn
     @Override // com.google.android.material.progressindicator.IndeterminateAnimatorDelegate
     public final void startAnimator() {
         if (this.animator == null) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, ANIMATION_FRACTION, 0.0f, 1.0f);
-            this.animator = ofFloat;
-            ofFloat.setDuration(5400L);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, ANIMATION_FRACTION, 0.0f, 1.0f);
+            this.animator = objectAnimatorOfFloat;
+            objectAnimatorOfFloat.setDuration(5400L);
             this.animator.setInterpolator(null);
             this.animator.setRepeatCount(-1);
             this.animator.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.progressindicator.CircularIndeterminateAnimatorDelegate.1
@@ -164,9 +163,9 @@ public final class CircularIndeterminateAnimatorDelegate extends IndeterminateAn
             });
         }
         if (this.completeEndAnimator == null) {
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, COMPLETE_END_FRACTION, 0.0f, 1.0f);
-            this.completeEndAnimator = ofFloat2;
-            ofFloat2.setDuration(333L);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, COMPLETE_END_FRACTION, 0.0f, 1.0f);
+            this.completeEndAnimator = objectAnimatorOfFloat2;
+            objectAnimatorOfFloat2.setDuration(333L);
             this.completeEndAnimator.setInterpolator(this.interpolator);
             this.completeEndAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.progressindicator.CircularIndeterminateAnimatorDelegate.2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener

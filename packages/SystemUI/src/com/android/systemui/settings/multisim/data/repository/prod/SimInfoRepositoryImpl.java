@@ -13,13 +13,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
+import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.motion.widget.MotionLayout$$ExternalSyntheticOutline0;
 import androidx.core.app.NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0;
 import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
@@ -27,6 +30,7 @@ import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0
 import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor$$ExternalSyntheticOutline0;
 import com.android.settingslib.net.DataUsageController;
+import com.android.systemui.Operator;
 import com.android.systemui.R;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.settings.multisim.data.repository.SimInfoRepository;
@@ -39,24 +43,37 @@ import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
 import com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider;
+import com.samsung.android.feature.SemCarrierFeature;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.telephonyui.multisimicons.MultiSimIcons;
 import com.sec.ims.settings.ImsProfile;
 import com.sec.ims.volte2.data.VolteConstants;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.AbstractCollection;
+import kotlin.collections.AbstractList;
+import kotlin.collections.AbstractList.IteratorImpl;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
+import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.ExecutorsKt;
+import kotlinx.coroutines.channels.ChannelCoroutine;
+import kotlinx.coroutines.channels.ProduceKt;
+import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
@@ -67,7 +84,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SimInfoRepositoryImpl implements SimInfoRepository {
     public static final Uri INTERNAL_URI;
@@ -132,12 +148,11 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
     public final ReadonlyStateFlow sim2IconIndex;
     public final ReadonlyStateFlow sim2Name;
     public final ReadonlyStateFlow sim2PhoneNumber;
-    public SimInfoRepositoryImpl$registerSimCardManagerCallback$1 simCardCallback;
-    public SimCardManagerServiceProvider simCardManagerService;
+    public final SimInfoRepositoryImpl$simCardCallback$1 simCardCallback;
+    public volatile SimCardManagerServiceProvider simCardManagerService;
     public final SubscriptionManager subscriptionManager;
     public final SimInfoRepositoryImpl$updateDataHandler$1 updateDataHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -149,7 +164,6 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KoreanSimCarrier {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ KoreanSimCarrier[] $VALUES;
@@ -180,7 +194,6 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PhoneNumberSource {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ PhoneNumberSource[] $VALUES;
@@ -209,7 +222,6 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -231,6 +243,145 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
         }
     }
 
+    /* renamed from: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ String $this_toStateFlow;
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(String str, Continuation continuation) {
+            super(2, continuation);
+            this.$this_toStateFlow = str;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass1 anonymousClass1 = SimInfoRepositoryImpl.this.new AnonymousClass1(this.$this_toStateFlow, continuation);
+            anonymousClass1.L$0 = obj;
+            return anonymousClass1;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Multi-variable type inference failed */
+        /* JADX WARN: Type inference failed for: r3v0, types: [android.database.ContentObserver, com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$1$observer$1] */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final ProducerScope producerScope = (ProducerScope) this.L$0;
+                final Handler handler = SimInfoRepositoryImpl.this.bgHandler;
+                final ?? r3 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$1$observer$1
+                    @Override // android.database.ContentObserver
+                    public final void onChange(boolean z) {
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    }
+                };
+                SimInfoRepositoryImpl.this.mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor(this.$this_toStateFlow), false, r3);
+                final SimInfoRepositoryImpl simInfoRepositoryImpl = SimInfoRepositoryImpl.this;
+                Function0 function0 = new Function0() { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$1$$ExternalSyntheticLambda0
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        simInfoRepositoryImpl.mContext.getContentResolver().unregisterContentObserver(r3);
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (ProduceKt.awaitClose(producerScope, function0, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ String $this_toStateFlow;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(String str, Continuation continuation) {
+            super(2, continuation);
+            this.$this_toStateFlow = str;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return new AnonymousClass2(this.$this_toStateFlow, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((Unit) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            Log.d("MULTISIM-PROD-REPO", this.$this_toStateFlow + " changed");
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$3, reason: invalid class name */
+    final class AnonymousClass3 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        public AnonymousClass3(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass3 anonymousClass3 = new AnonymousClass3(continuation);
+            anonymousClass3.L$0 = obj;
+            return anonymousClass3;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass3) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                FlowCollector flowCollector = (FlowCollector) this.L$0;
+                Unit unit = Unit.INSTANCE;
+                this.label = 1;
+                if (flowCollector.emit(unit, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     static {
         new Companion(null);
         RINGING = 1;
@@ -239,12 +390,16 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x0153  */
     /* JADX WARN: Type inference failed for: r10v4, types: [android.database.ContentObserver, com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mMobileDataObserver$1] */
-    /* JADX WARN: Type inference failed for: r11v5, types: [com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$updateDataHandler$1] */
+    /* JADX WARN: Type inference failed for: r11v6, types: [com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$updateDataHandler$1] */
     /* JADX WARN: Type inference failed for: r12v0, types: [android.content.BroadcastReceiver, com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mIntentReceiver$1] */
     /* JADX WARN: Type inference failed for: r5v10, types: [android.telephony.SubscriptionManager$OnSubscriptionsChangedListener, com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mOnSubscriptionsChangeListener$1] */
     /* JADX WARN: Type inference failed for: r8v43, types: [android.database.ContentObserver, com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mChangeNetModeObserver$1] */
     /* JADX WARN: Type inference failed for: r9v5, types: [android.database.ContentObserver, com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mPreferredVoiceObserver$1] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public SimInfoRepositoryImpl(Context context, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, final Handler handler, SubscriptionManager subscriptionManager, BroadcastDispatcher broadcastDispatcher, NetworkController networkController) {
         boolean z;
         int i;
@@ -255,9 +410,9 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
         this.subscriptionManager = subscriptionManager;
         this.dataController = ((NetworkControllerImpl) networkController).mDataUsageController;
         Boolean bool = Boolean.FALSE;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(bool);
-        this._isMultiSIMReady = MutableStateFlow;
-        this.isMultiSIMReady = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(bool);
+        this._isMultiSIMReady = stateFlowImplMutableStateFlow;
+        this.isMultiSIMReady = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
         this.mNeedCheckOpportunisticESim = true;
         this._networkNameDefault = "";
         this._unknownPhoneNumber = context.getString(R.string.qs_multisim_unknown_number);
@@ -273,10 +428,10 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                r0 = 0;
+                i = 0;
                 int i3 = 0;
-                r0 = false;
-                r0 = false;
+                z = false;
+                z = false;
                 boolean z2 = false;
                 int i4 = 1;
                 SimInfoRepositoryImpl simInfoRepositoryImpl = this.f$0;
@@ -641,39 +796,39 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
                 }
             }
         });
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(this._networkNameDefault);
-        this._sim1CarrierName = MutableStateFlow2;
-        this.sim1CarrierName = FlowKt.asStateFlow(MutableStateFlow2);
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(this._networkNameDefault);
-        this._sim2CarrierName = MutableStateFlow3;
-        this.sim2CarrierName = FlowKt.asStateFlow(MutableStateFlow3);
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(this._unknownPhoneNumber);
-        this._sim1PhoneNumber = MutableStateFlow4;
-        this.sim1PhoneNumber = FlowKt.asStateFlow(MutableStateFlow4);
-        StateFlowImpl MutableStateFlow5 = StateFlowKt.MutableStateFlow(this._unknownPhoneNumber);
-        this._sim2PhoneNumber = MutableStateFlow5;
-        this.sim2PhoneNumber = FlowKt.asStateFlow(MutableStateFlow5);
-        StateFlowImpl MutableStateFlow6 = StateFlowKt.MutableStateFlow(bool);
-        this._isESim1 = MutableStateFlow6;
-        this.isESim1 = FlowKt.asStateFlow(MutableStateFlow6);
-        StateFlowImpl MutableStateFlow7 = StateFlowKt.MutableStateFlow(bool);
-        this._isESim2 = MutableStateFlow7;
-        this.isESim2 = FlowKt.asStateFlow(MutableStateFlow7);
-        StateFlowImpl MutableStateFlow8 = StateFlowKt.MutableStateFlow(0);
-        this._defaultVoiceSimId = MutableStateFlow8;
-        this.defaultVoiceSimId = FlowKt.asStateFlow(MutableStateFlow8);
-        StateFlowImpl MutableStateFlow9 = StateFlowKt.MutableStateFlow(0);
-        this._defaultSmsSimId = MutableStateFlow9;
-        this.defaultSmsSimId = FlowKt.asStateFlow(MutableStateFlow9);
-        StateFlowImpl MutableStateFlow10 = StateFlowKt.MutableStateFlow(0);
-        this._defaultDataSimId = MutableStateFlow10;
-        this.defaultDataSimId = FlowKt.asStateFlow(MutableStateFlow10);
-        StateFlowImpl MutableStateFlow11 = StateFlowKt.MutableStateFlow(bool);
-        this._isSRoaming = MutableStateFlow11;
-        this.isSRoaming = FlowKt.asStateFlow(MutableStateFlow11);
-        StateFlowImpl MutableStateFlow12 = StateFlowKt.MutableStateFlow(Boolean.valueOf(checkDataOn()));
-        this._isDataEnabled = MutableStateFlow12;
-        this.isDataEnabled = FlowKt.asStateFlow(MutableStateFlow12);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(this._networkNameDefault);
+        this._sim1CarrierName = stateFlowImplMutableStateFlow2;
+        this.sim1CarrierName = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(this._networkNameDefault);
+        this._sim2CarrierName = stateFlowImplMutableStateFlow3;
+        this.sim2CarrierName = FlowKt.asStateFlow(stateFlowImplMutableStateFlow3);
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(this._unknownPhoneNumber);
+        this._sim1PhoneNumber = stateFlowImplMutableStateFlow4;
+        this.sim1PhoneNumber = FlowKt.asStateFlow(stateFlowImplMutableStateFlow4);
+        StateFlowImpl stateFlowImplMutableStateFlow5 = StateFlowKt.MutableStateFlow(this._unknownPhoneNumber);
+        this._sim2PhoneNumber = stateFlowImplMutableStateFlow5;
+        this.sim2PhoneNumber = FlowKt.asStateFlow(stateFlowImplMutableStateFlow5);
+        StateFlowImpl stateFlowImplMutableStateFlow6 = StateFlowKt.MutableStateFlow(bool);
+        this._isESim1 = stateFlowImplMutableStateFlow6;
+        this.isESim1 = FlowKt.asStateFlow(stateFlowImplMutableStateFlow6);
+        StateFlowImpl stateFlowImplMutableStateFlow7 = StateFlowKt.MutableStateFlow(bool);
+        this._isESim2 = stateFlowImplMutableStateFlow7;
+        this.isESim2 = FlowKt.asStateFlow(stateFlowImplMutableStateFlow7);
+        StateFlowImpl stateFlowImplMutableStateFlow8 = StateFlowKt.MutableStateFlow(0);
+        this._defaultVoiceSimId = stateFlowImplMutableStateFlow8;
+        this.defaultVoiceSimId = FlowKt.asStateFlow(stateFlowImplMutableStateFlow8);
+        StateFlowImpl stateFlowImplMutableStateFlow9 = StateFlowKt.MutableStateFlow(0);
+        this._defaultSmsSimId = stateFlowImplMutableStateFlow9;
+        this.defaultSmsSimId = FlowKt.asStateFlow(stateFlowImplMutableStateFlow9);
+        StateFlowImpl stateFlowImplMutableStateFlow10 = StateFlowKt.MutableStateFlow(0);
+        this._defaultDataSimId = stateFlowImplMutableStateFlow10;
+        this.defaultDataSimId = FlowKt.asStateFlow(stateFlowImplMutableStateFlow10);
+        StateFlowImpl stateFlowImplMutableStateFlow11 = StateFlowKt.MutableStateFlow(bool);
+        this._isSRoaming = stateFlowImplMutableStateFlow11;
+        this.isSRoaming = FlowKt.asStateFlow(stateFlowImplMutableStateFlow11);
+        StateFlowImpl stateFlowImplMutableStateFlow12 = StateFlowKt.MutableStateFlow(Boolean.valueOf(checkDataOn()));
+        this._isDataEnabled = stateFlowImplMutableStateFlow12;
+        this.isDataEnabled = FlowKt.asStateFlow(stateFlowImplMutableStateFlow12);
         if (DeviceState.isVoiceCapable(context)) {
             int callState = TelephonyManager.from(ActivityThread.currentApplication().getApplicationContext()).getCallState(getSubId(0));
             int callState2 = TelephonyManager.from(ActivityThread.currentApplication().getApplicationContext()).getCallState(getSubId(1));
@@ -681,355 +836,62 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
             int i9 = RINGING;
             if (callState == i9 || callState == (i = OFFHOOK) || callState2 == i9 || callState2 == i) {
                 z = true;
-                StateFlowImpl MutableStateFlow13 = StateFlowKt.MutableStateFlow(Boolean.valueOf(z));
-                this._isCalling = MutableStateFlow13;
-                this.isCalling = FlowKt.asStateFlow(MutableStateFlow13);
-                StateFlowImpl MutableStateFlow14 = StateFlowKt.MutableStateFlow(bool);
-                this._isNetModeChanging = MutableStateFlow14;
-                this.isNetModeChanging = FlowKt.asStateFlow(MutableStateFlow14);
-                StateFlowImpl MutableStateFlow15 = StateFlowKt.MutableStateFlow(bool);
-                this._isDataSimSwitching = MutableStateFlow15;
-                this.isDataSimSwitching = FlowKt.asStateFlow(MutableStateFlow15);
-                StateFlowImpl MutableStateFlow16 = StateFlowKt.MutableStateFlow(Boolean.valueOf(DeviceState.isSubInfoReversed(context)));
-                this._isSlotReversed = MutableStateFlow16;
-                this.isSlotReversed = FlowKt.asStateFlow(MutableStateFlow16);
-                ?? r5 = new SubscriptionManager.OnSubscriptionsChangedListener() { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mOnSubscriptionsChangeListener$1
-                    @Override // android.telephony.SubscriptionManager.OnSubscriptionsChangedListener
-                    public final void onSubscriptionsChanged() {
-                        Log.d("MULTISIM-PROD-REPO", "onSubscriptionsChanged: ");
-                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, VolteConstants.ErrorCode.CALL_FORBIDDEN);
-                    }
-                };
-                this.mOnSubscriptionsChangeListener = r5;
-                ?? r8 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mChangeNetModeObserver$1
-                    @Override // android.database.ContentObserver
-                    public final void onChange(boolean z2, Uri uri) {
-                        onChange(z2);
-                        if (uri != null && uri.equals(Settings.Global.getUriFor("set_network_mode_by_quick_panel"))) {
-                            boolean z3 = Settings.Global.getInt(SimInfoRepositoryImpl.this.mContext.getContentResolver(), "set_network_mode_by_quick_panel", 0) != 0;
-                            EmergencyButtonController$$ExternalSyntheticOutline0.m("ChangeNetModeObserver onChange() ", "MULTISIM-PROD-REPO", z3);
-                            if (z3) {
-                                SimInfoRepositoryImpl.this._isNetModeChanging.updateState(null, Boolean.TRUE);
-                                SimInfoRepositoryImpl$updateDataHandler$1 simInfoRepositoryImpl$updateDataHandler$1 = SimInfoRepositoryImpl.this.updateDataHandler;
-                                simInfoRepositoryImpl$updateDataHandler$1.removeMessages(1001);
-                                simInfoRepositoryImpl$updateDataHandler$1.sendMessageDelayed(simInfoRepositoryImpl$updateDataHandler$1.obtainMessage(1001), 1000L);
-                            }
-                        }
-                    }
-                };
-                this.mChangeNetModeObserver = r8;
-                ?? r9 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mPreferredVoiceObserver$1
-                    @Override // android.database.ContentObserver
-                    public final void onChange(boolean z2) {
-                        Log.d("MULTISIM-PROD-REPO", "PreferredVoiceObserver onChange()");
-                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2010);
-                    }
-                };
-                this.mPreferredVoiceObserver = r9;
-                ?? r10 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mMobileDataObserver$1
-                    @Override // android.database.ContentObserver
-                    public final void onChange(boolean z2) {
-                        Log.d("MULTISIM-PROD-REPO", "MobileDataObserver onChange()");
-                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2006);
-                    }
-                };
-                this.mMobileDataObserver = r10;
-                ?? r12 = new BroadcastReceiver() { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mIntentReceiver$1
-                    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-                    @Override // android.content.BroadcastReceiver
-                    public final void onReceive(Context context2, Intent intent) {
-                        String action = intent.getAction();
-                        MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("onReceive() - action = ", action, "MULTISIM-PROD-REPO");
-                        if (action != null) {
-                            switch (action.hashCode()) {
-                                case -2125003962:
-                                    if (action.equals("com.samsung.android.softsim.ServiceStatus")) {
-                                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2007);
-                                        return;
-                                    }
-                                    break;
-                                case -2104353374:
-                                    if (action.equals("android.intent.action.SERVICE_STATE")) {
-                                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2000);
-                                        return;
-                                    }
-                                    break;
-                                case -1909638742:
-                                    if (action.equals("com.samsung.settings.SIMCARD_MGT_ACTIVATED")) {
-                                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2008);
-                                        return;
-                                    }
-                                    break;
-                                case -1465084191:
-                                    if (action.equals("android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED")) {
-                                        ListPopupWindow$$ExternalSyntheticOutline0.m(intent.getIntExtra("subscription", 0), "onReceive() - subId = ", "MULTISIM-PROD-REPO");
-                                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2010);
-                                        return;
-                                    }
-                                    break;
-                                case -1326089125:
-                                    if (action.equals("android.intent.action.PHONE_STATE")) {
-                                        String stringExtra = intent.getStringExtra("state");
-                                        if (stringExtra == null || stringExtra.length() == 0) {
-                                            return;
-                                        }
-                                        SimInfoRepositoryImpl.this._isCalling.updateState(null, Boolean.valueOf(Intrinsics.areEqual(TelephonyManager.EXTRA_STATE_RINGING, stringExtra) || Intrinsics.areEqual(TelephonyManager.EXTRA_STATE_OFFHOOK, stringExtra)));
-                                        return;
-                                    }
-                                    break;
-                                case -874111300:
-                                    if (action.equals("com.samsung.telecom.action.DEFAULT_OUTGOING_PHONE_ACCOUNT_CHANGED")) {
-                                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2010);
-                                        return;
-                                    }
-                                    break;
-                                case -602747103:
-                                    if (action.equals("com.samsung.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGE_SUCCESS")) {
-                                        ListPopupWindow$$ExternalSyntheticOutline0.m(intent.getIntExtra("subscription", 0), "onReceive() - subId = ", "MULTISIM-PROD-REPO");
-                                        if (((Boolean) SimInfoRepositoryImpl.this._isDataSimSwitching.getValue()).booleanValue()) {
-                                            SimInfoRepositoryImpl$updateDataHandler$1 simInfoRepositoryImpl$updateDataHandler$1 = SimInfoRepositoryImpl.this.updateDataHandler;
-                                            simInfoRepositoryImpl$updateDataHandler$1.removeMessages(1000);
-                                            simInfoRepositoryImpl$updateDataHandler$1.sendMessageDelayed(simInfoRepositoryImpl$updateDataHandler$1.obtainMessage(1000), 60000L);
-                                            return;
-                                        }
-                                        return;
-                                    }
-                                    break;
-                                case -271221703:
-                                    if (action.equals("android.telephony.action.DEFAULT_SMS_SUBSCRIPTION_CHANGED")) {
-                                        ListPopupWindow$$ExternalSyntheticOutline0.m(intent.getIntExtra("subscription", 0), "onReceive() - subId = ", "MULTISIM-PROD-REPO");
-                                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2011);
-                                        return;
-                                    }
-                                    break;
-                                case -229777127:
-                                    if (action.equals("android.intent.action.SIM_STATE_CHANGED")) {
-                                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2008);
-                                        String stringExtra2 = intent.getStringExtra(ImsProfile.SERVICE_SS);
-                                        if ("READY".equals(stringExtra2)) {
-                                            SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, VolteConstants.ErrorCode.MAKECALL_REG_FAILURE_REG_403);
-                                            return;
-                                        } else {
-                                            if ("LOADED".equals(stringExtra2)) {
-                                                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, VolteConstants.ErrorCode.MAKECALL_REG_FAILURE_REG_423);
-                                                return;
-                                            }
-                                            return;
-                                        }
-                                    }
-                                    break;
-                                case -25388475:
-                                    if (action.equals("android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED")) {
-                                        ListPopupWindow$$ExternalSyntheticOutline0.m(intent.getIntExtra("subscription", 0), "onReceive() - subId = ", "MULTISIM-PROD-REPO");
-                                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2012);
-                                        return;
-                                    }
-                                    break;
-                                case -19011148:
-                                    if (action.equals("android.intent.action.LOCALE_CHANGED")) {
-                                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2009);
-                                        return;
-                                    }
-                                    break;
-                                case 551474169:
-                                    if (action.equals("android.samsung.action.ACTION_NETWORK_SLOT_CHANGING_FINISH")) {
-                                        if (((Boolean) SimInfoRepositoryImpl.this._isDataSimSwitching.getValue()).booleanValue()) {
-                                            SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 1000);
-                                            return;
-                                        }
-                                        return;
-                                    }
-                                    break;
-                            }
-                        }
-                        MotionLayout$$ExternalSyntheticOutline0.m("Unsupport - ", action, "MULTISIM-PROD-REPO");
-                    }
-                };
-                this.mIntentReceiver = r12;
-                this.mDefaultIdUpdateList = new ArrayList();
-                final Looper looper = handler.getLooper();
-                this.updateDataHandler = new Handler(looper) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$updateDataHandler$1
-                    @Override // android.os.Handler
-                    public final void handleMessage(Message message) {
-                        NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(message.what, "HANDLE_MSG(", ")", "MULTISIM-PROD-REPO");
-                        int i10 = message.what;
-                        SimInfoRepositoryImpl simInfoRepositoryImpl = SimInfoRepositoryImpl.this;
-                        if (i10 == 1000) {
-                            simInfoRepositoryImpl._isDataSimSwitching.updateState(null, Boolean.FALSE);
-                            return;
-                        }
-                        if (i10 == 1001) {
-                            simInfoRepositoryImpl._isNetModeChanging.updateState(null, Boolean.FALSE);
-                            return;
-                        }
-                        switch (i10) {
-                            case 2000:
-                                simInfoRepositoryImpl._isDataEnabled.updateState(null, Boolean.valueOf(simInfoRepositoryImpl.checkDataOn()));
-                                simInfoRepositoryImpl.updateCarrierNameAndPhoneNumber(false);
-                                break;
-                            case VolteConstants.ErrorCode.CALL_FORBIDDEN /* 2001 */:
-                                simInfoRepositoryImpl.mNeedCheckOpportunisticESim = true;
-                                simInfoRepositoryImpl.updateMultiSimReadyState(false);
-                                simInfoRepositoryImpl._isSlotReversed.updateState(null, Boolean.valueOf(DeviceState.isSubInfoReversed(simInfoRepositoryImpl.mContext)));
-                                Log.d("MULTISIM-PROD-REPO", "sub reversed " + simInfoRepositoryImpl.isSlotReversed.$$delegate_0.getValue());
-                                simInfoRepositoryImpl._isDataEnabled.updateState(null, Boolean.valueOf(simInfoRepositoryImpl.checkDataOn()));
-                                simInfoRepositoryImpl.updateCarrierNameAndPhoneNumber(false);
-                                break;
-                            case VolteConstants.ErrorCode.MAKECALL_REG_FAILURE_TIMER_F /* 2002 */:
-                                int i11 = SimInfoRepositoryImpl.RINGING;
-                                simInfoRepositoryImpl.updateCarrierNameAndPhoneNumber(false);
-                                break;
-                            case VolteConstants.ErrorCode.MAKECALL_REG_FAILURE_REG_403 /* 2003 */:
-                                simInfoRepositoryImpl._isDataEnabled.updateState(null, Boolean.valueOf(simInfoRepositoryImpl.checkDataOn()));
-                                simInfoRepositoryImpl.updateSimSlotType();
-                                break;
-                            case VolteConstants.ErrorCode.MAKECALL_REG_FAILURE_REG_423 /* 2004 */:
-                                simInfoRepositoryImpl._isDataEnabled.updateState(null, Boolean.valueOf(simInfoRepositoryImpl.checkDataOn()));
-                                simInfoRepositoryImpl.updateSimSlotType();
-                                simInfoRepositoryImpl.updateCurrentDefaultSlot(ButtonType.VOICE);
-                                simInfoRepositoryImpl.updateCurrentDefaultSlot(ButtonType.SMS);
-                                simInfoRepositoryImpl.updateCurrentDefaultSlot(ButtonType.DATA);
-                                break;
-                            default:
-                                switch (i10) {
-                                    case 2006:
-                                        simInfoRepositoryImpl._isDataEnabled.updateState(null, Boolean.valueOf(simInfoRepositoryImpl.checkDataOn()));
-                                        break;
-                                    case 2007:
-                                        StateFlowImpl stateFlowImpl = simInfoRepositoryImpl._isSRoaming;
-                                        Context context2 = simInfoRepositoryImpl.mContext;
-                                        int i12 = 9;
-                                        if (context2 == null) {
-                                            Log.d("MULTISIM-PROD-REPO", "context is null : com.samsung.android.globalroaming");
-                                        } else {
-                                            try {
-                                                context2.getPackageManager().getApplicationInfo("com.samsung.android.globalroaming", 128).getClass();
-                                                Log.i("MULTISIM-PROD-REPO", "has sroaming package");
-                                                String mSimSystemProperty = DeviceState.getMSimSystemProperty("persist.sys.softsim.status", 0, "default");
-                                                String mSimSystemProperty2 = DeviceState.getMSimSystemProperty("persist.sys.softsim.status", 1, "default");
-                                                mSimSystemProperty.getClass();
-                                                int sRoamingStatus = SimInfoRepositoryImpl.getSRoamingStatus(mSimSystemProperty);
-                                                mSimSystemProperty2.getClass();
-                                                int sRoamingStatus2 = SimInfoRepositoryImpl.getSRoamingStatus(mSimSystemProperty2);
-                                                if (sRoamingStatus == 1 || sRoamingStatus2 == 1) {
-                                                    i12 = 1;
-                                                } else if (sRoamingStatus == 0 && sRoamingStatus2 == 0) {
-                                                    i12 = 0;
-                                                }
-                                                ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i12, "sroaming status : ", "MULTISIM-PROD-REPO");
-                                            } catch (PackageManager.NameNotFoundException unused) {
-                                                Log.e("MULTISIM-PROD-REPO", "Package not found : com.samsung.android.globalroaming");
-                                            }
-                                        }
-                                        stateFlowImpl.updateState(null, Boolean.valueOf(i12 == 1));
-                                        break;
-                                    case 2008:
-                                        int i13 = SimInfoRepositoryImpl.RINGING;
-                                        simInfoRepositoryImpl.updateMultiSimReadyState(true);
-                                        break;
-                                    case 2009:
-                                        int i14 = SimInfoRepositoryImpl.RINGING;
-                                        simInfoRepositoryImpl.updateCarrierNameAndPhoneNumber(true);
-                                        break;
-                                    case 2010:
-                                        ButtonType buttonType = ButtonType.VOICE;
-                                        int i15 = SimInfoRepositoryImpl.RINGING;
-                                        simInfoRepositoryImpl.updateCurrentDefaultSlot(buttonType);
-                                        break;
-                                    case 2011:
-                                        ButtonType buttonType2 = ButtonType.SMS;
-                                        int i16 = SimInfoRepositoryImpl.RINGING;
-                                        simInfoRepositoryImpl.updateCurrentDefaultSlot(buttonType2);
-                                        break;
-                                    case 2012:
-                                        ButtonType buttonType3 = ButtonType.DATA;
-                                        int i17 = SimInfoRepositoryImpl.RINGING;
-                                        simInfoRepositoryImpl.updateCurrentDefaultSlot(buttonType3);
-                                        break;
-                                    default:
-                                        Log.w("MULTISIM-PROD-REPO", "MSG Unknown");
-                                        break;
-                                }
-                        }
-                    }
-                };
-                IntentFilter intentFilter = new IntentFilter();
-                intentFilter.addAction("android.intent.action.LOCALE_CHANGED");
-                intentFilter.addAction("com.samsung.settings.SIMCARD_MGT_ACTIVATED");
-                intentFilter.addAction("com.samsung.telecom.action.DEFAULT_OUTGOING_PHONE_ACCOUNT_CHANGED");
-                intentFilter.addAction("android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED");
-                intentFilter.addAction("android.telephony.action.DEFAULT_SMS_SUBSCRIPTION_CHANGED");
-                KeyguardUpdateMonitor$$ExternalSyntheticOutline0.m(intentFilter, "android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED", "android.intent.action.SIM_STATE_CHANGED", "com.samsung.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGE_SUCCESS", "android.samsung.action.ACTION_NETWORK_SLOT_CHANGING_FINISH");
-                KeyguardUpdateMonitor$$ExternalSyntheticOutline0.m(intentFilter, "android.intent.action.PHONE_STATE", "android.intent.action.SERVICE_STATE", "com.samsung.android.softsim.ServiceStatus", EnterpriseDeviceManager.ACTION_KNOX_RESTRICTIONS_CHANGED);
-                BroadcastDispatcher.registerReceiver$default(broadcastDispatcher, r12, intentFilter, null, null, 0, null, 60);
-                context.getContentResolver().registerContentObserver(Settings.System.getUriFor("prefered_voice_call"), false, r9);
-                context.getContentResolver().registerContentObserver(Settings.Global.getUriFor(SettingsHelper.INDEX_MOBILE_DATA), false, r10);
-                context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("device_provisioned"), false, r10);
-                context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("set_network_mode_by_quick_panel"), false, r8);
-                subscriptionManager.addOnSubscriptionsChangedListener(ExecutorsKt.asExecutor(coroutineDispatcher), r5);
-                updateCurrentDefaultSlot(ButtonType.VOICE);
-                updateCurrentDefaultSlot(ButtonType.SMS);
-                updateCurrentDefaultSlot(ButtonType.DATA);
-                updateMultiSimReadyState(true);
-                updateSimSlotType();
-                updateCarrierNameAndPhoneNumber(true);
             }
+        } else {
+            z = false;
         }
-        z = false;
-        StateFlowImpl MutableStateFlow132 = StateFlowKt.MutableStateFlow(Boolean.valueOf(z));
-        this._isCalling = MutableStateFlow132;
-        this.isCalling = FlowKt.asStateFlow(MutableStateFlow132);
-        StateFlowImpl MutableStateFlow142 = StateFlowKt.MutableStateFlow(bool);
-        this._isNetModeChanging = MutableStateFlow142;
-        this.isNetModeChanging = FlowKt.asStateFlow(MutableStateFlow142);
-        StateFlowImpl MutableStateFlow152 = StateFlowKt.MutableStateFlow(bool);
-        this._isDataSimSwitching = MutableStateFlow152;
-        this.isDataSimSwitching = FlowKt.asStateFlow(MutableStateFlow152);
-        StateFlowImpl MutableStateFlow162 = StateFlowKt.MutableStateFlow(Boolean.valueOf(DeviceState.isSubInfoReversed(context)));
-        this._isSlotReversed = MutableStateFlow162;
-        this.isSlotReversed = FlowKt.asStateFlow(MutableStateFlow162);
-        ?? r52 = new SubscriptionManager.OnSubscriptionsChangedListener() { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mOnSubscriptionsChangeListener$1
+        StateFlowImpl stateFlowImplMutableStateFlow13 = StateFlowKt.MutableStateFlow(Boolean.valueOf(z));
+        this._isCalling = stateFlowImplMutableStateFlow13;
+        this.isCalling = FlowKt.asStateFlow(stateFlowImplMutableStateFlow13);
+        StateFlowImpl stateFlowImplMutableStateFlow14 = StateFlowKt.MutableStateFlow(bool);
+        this._isNetModeChanging = stateFlowImplMutableStateFlow14;
+        this.isNetModeChanging = FlowKt.asStateFlow(stateFlowImplMutableStateFlow14);
+        StateFlowImpl stateFlowImplMutableStateFlow15 = StateFlowKt.MutableStateFlow(bool);
+        this._isDataSimSwitching = stateFlowImplMutableStateFlow15;
+        this.isDataSimSwitching = FlowKt.asStateFlow(stateFlowImplMutableStateFlow15);
+        StateFlowImpl stateFlowImplMutableStateFlow16 = StateFlowKt.MutableStateFlow(Boolean.valueOf(DeviceState.isSubInfoReversed(context)));
+        this._isSlotReversed = stateFlowImplMutableStateFlow16;
+        this.isSlotReversed = FlowKt.asStateFlow(stateFlowImplMutableStateFlow16);
+        ?? r5 = new SubscriptionManager.OnSubscriptionsChangedListener() { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mOnSubscriptionsChangeListener$1
             @Override // android.telephony.SubscriptionManager.OnSubscriptionsChangedListener
             public final void onSubscriptionsChanged() {
                 Log.d("MULTISIM-PROD-REPO", "onSubscriptionsChanged: ");
-                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, VolteConstants.ErrorCode.CALL_FORBIDDEN);
+                this.this$0.sendToUpdateDataHandler(VolteConstants.ErrorCode.CALL_FORBIDDEN, 0L);
             }
         };
-        this.mOnSubscriptionsChangeListener = r52;
-        ?? r82 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mChangeNetModeObserver$1
+        this.mOnSubscriptionsChangeListener = r5;
+        ?? r8 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mChangeNetModeObserver$1
             @Override // android.database.ContentObserver
             public final void onChange(boolean z2, Uri uri) {
                 onChange(z2);
                 if (uri != null && uri.equals(Settings.Global.getUriFor("set_network_mode_by_quick_panel"))) {
-                    boolean z3 = Settings.Global.getInt(SimInfoRepositoryImpl.this.mContext.getContentResolver(), "set_network_mode_by_quick_panel", 0) != 0;
+                    boolean z3 = Settings.Global.getInt(this.this$0.mContext.getContentResolver(), "set_network_mode_by_quick_panel", 0) != 0;
                     EmergencyButtonController$$ExternalSyntheticOutline0.m("ChangeNetModeObserver onChange() ", "MULTISIM-PROD-REPO", z3);
                     if (z3) {
-                        SimInfoRepositoryImpl.this._isNetModeChanging.updateState(null, Boolean.TRUE);
-                        SimInfoRepositoryImpl$updateDataHandler$1 simInfoRepositoryImpl$updateDataHandler$1 = SimInfoRepositoryImpl.this.updateDataHandler;
-                        simInfoRepositoryImpl$updateDataHandler$1.removeMessages(1001);
-                        simInfoRepositoryImpl$updateDataHandler$1.sendMessageDelayed(simInfoRepositoryImpl$updateDataHandler$1.obtainMessage(1001), 1000L);
+                        this.this$0._isNetModeChanging.updateState(null, Boolean.TRUE);
+                        this.this$0.sendToUpdateDataHandler(1001, 1000L);
                     }
                 }
             }
         };
-        this.mChangeNetModeObserver = r82;
-        ?? r92 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mPreferredVoiceObserver$1
+        this.mChangeNetModeObserver = r8;
+        ?? r9 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mPreferredVoiceObserver$1
             @Override // android.database.ContentObserver
             public final void onChange(boolean z2) {
                 Log.d("MULTISIM-PROD-REPO", "PreferredVoiceObserver onChange()");
-                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2010);
+                this.this$0.sendToUpdateDataHandler(2010, 0L);
             }
         };
-        this.mPreferredVoiceObserver = r92;
-        ?? r102 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mMobileDataObserver$1
+        this.mPreferredVoiceObserver = r9;
+        ?? r10 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mMobileDataObserver$1
             @Override // android.database.ContentObserver
             public final void onChange(boolean z2) {
                 Log.d("MULTISIM-PROD-REPO", "MobileDataObserver onChange()");
-                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2006);
+                this.this$0.sendToUpdateDataHandler(2006, 0L);
             }
         };
-        this.mMobileDataObserver = r102;
-        ?? r122 = new BroadcastReceiver() { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mIntentReceiver$1
+        this.mMobileDataObserver = r10;
+        ?? r12 = new BroadcastReceiver() { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$mIntentReceiver$1
             /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
@@ -1039,26 +901,26 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
                     switch (action.hashCode()) {
                         case -2125003962:
                             if (action.equals("com.samsung.android.softsim.ServiceStatus")) {
-                                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2007);
+                                this.this$0.sendToUpdateDataHandler(2007, 0L);
                                 return;
                             }
                             break;
                         case -2104353374:
                             if (action.equals("android.intent.action.SERVICE_STATE")) {
-                                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2000);
+                                this.this$0.sendToUpdateDataHandler(2000, 0L);
                                 return;
                             }
                             break;
                         case -1909638742:
                             if (action.equals("com.samsung.settings.SIMCARD_MGT_ACTIVATED")) {
-                                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2008);
+                                this.this$0.sendToUpdateDataHandler(2008, 0L);
                                 return;
                             }
                             break;
                         case -1465084191:
                             if (action.equals("android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED")) {
                                 ListPopupWindow$$ExternalSyntheticOutline0.m(intent.getIntExtra("subscription", 0), "onReceive() - subId = ", "MULTISIM-PROD-REPO");
-                                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2010);
+                                this.this$0.sendToUpdateDataHandler(2010, 0L);
                                 return;
                             }
                             break;
@@ -1068,23 +930,21 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
                                 if (stringExtra == null || stringExtra.length() == 0) {
                                     return;
                                 }
-                                SimInfoRepositoryImpl.this._isCalling.updateState(null, Boolean.valueOf(Intrinsics.areEqual(TelephonyManager.EXTRA_STATE_RINGING, stringExtra) || Intrinsics.areEqual(TelephonyManager.EXTRA_STATE_OFFHOOK, stringExtra)));
+                                this.this$0._isCalling.updateState(null, Boolean.valueOf(Intrinsics.areEqual(TelephonyManager.EXTRA_STATE_RINGING, stringExtra) || Intrinsics.areEqual(TelephonyManager.EXTRA_STATE_OFFHOOK, stringExtra)));
                                 return;
                             }
                             break;
                         case -874111300:
                             if (action.equals("com.samsung.telecom.action.DEFAULT_OUTGOING_PHONE_ACCOUNT_CHANGED")) {
-                                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2010);
+                                this.this$0.sendToUpdateDataHandler(2010, 0L);
                                 return;
                             }
                             break;
                         case -602747103:
                             if (action.equals("com.samsung.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGE_SUCCESS")) {
                                 ListPopupWindow$$ExternalSyntheticOutline0.m(intent.getIntExtra("subscription", 0), "onReceive() - subId = ", "MULTISIM-PROD-REPO");
-                                if (((Boolean) SimInfoRepositoryImpl.this._isDataSimSwitching.getValue()).booleanValue()) {
-                                    SimInfoRepositoryImpl$updateDataHandler$1 simInfoRepositoryImpl$updateDataHandler$1 = SimInfoRepositoryImpl.this.updateDataHandler;
-                                    simInfoRepositoryImpl$updateDataHandler$1.removeMessages(1000);
-                                    simInfoRepositoryImpl$updateDataHandler$1.sendMessageDelayed(simInfoRepositoryImpl$updateDataHandler$1.obtainMessage(1000), 60000L);
+                                if (((Boolean) this.this$0._isDataSimSwitching.getValue()).booleanValue()) {
+                                    this.this$0.sendToUpdateDataHandler(1000, 60000L);
                                     return;
                                 }
                                 return;
@@ -1093,20 +953,20 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
                         case -271221703:
                             if (action.equals("android.telephony.action.DEFAULT_SMS_SUBSCRIPTION_CHANGED")) {
                                 ListPopupWindow$$ExternalSyntheticOutline0.m(intent.getIntExtra("subscription", 0), "onReceive() - subId = ", "MULTISIM-PROD-REPO");
-                                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2011);
+                                this.this$0.sendToUpdateDataHandler(2011, 0L);
                                 return;
                             }
                             break;
                         case -229777127:
                             if (action.equals("android.intent.action.SIM_STATE_CHANGED")) {
-                                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2008);
+                                this.this$0.sendToUpdateDataHandler(2008, 0L);
                                 String stringExtra2 = intent.getStringExtra(ImsProfile.SERVICE_SS);
                                 if ("READY".equals(stringExtra2)) {
-                                    SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, VolteConstants.ErrorCode.MAKECALL_REG_FAILURE_REG_403);
+                                    this.this$0.sendToUpdateDataHandler(VolteConstants.ErrorCode.MAKECALL_REG_FAILURE_REG_403, 0L);
                                     return;
                                 } else {
                                     if ("LOADED".equals(stringExtra2)) {
-                                        SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, VolteConstants.ErrorCode.MAKECALL_REG_FAILURE_REG_423);
+                                        this.this$0.sendToUpdateDataHandler(VolteConstants.ErrorCode.MAKECALL_REG_FAILURE_REG_423, 0L);
                                         return;
                                     }
                                     return;
@@ -1116,20 +976,22 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
                         case -25388475:
                             if (action.equals("android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED")) {
                                 ListPopupWindow$$ExternalSyntheticOutline0.m(intent.getIntExtra("subscription", 0), "onReceive() - subId = ", "MULTISIM-PROD-REPO");
-                                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2012);
+                                this.this$0.sendToUpdateDataHandler(2012, 0L);
                                 return;
                             }
                             break;
                         case -19011148:
                             if (action.equals("android.intent.action.LOCALE_CHANGED")) {
-                                SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 2009);
+                                SimInfoRepositoryImpl simInfoRepositoryImpl = this.this$0;
+                                int i10 = SimInfoRepositoryImpl.RINGING;
+                                simInfoRepositoryImpl.sendToUpdateDataHandler(2009, 500L);
                                 return;
                             }
                             break;
                         case 551474169:
                             if (action.equals("android.samsung.action.ACTION_NETWORK_SLOT_CHANGING_FINISH")) {
-                                if (((Boolean) SimInfoRepositoryImpl.this._isDataSimSwitching.getValue()).booleanValue()) {
-                                    SimInfoRepositoryImpl.sendToUpdateDataHandler$default(SimInfoRepositoryImpl.this, 1000);
+                                if (((Boolean) this.this$0._isDataSimSwitching.getValue()).booleanValue()) {
+                                    this.this$0.sendToUpdateDataHandler(1000, 0L);
                                     return;
                                 }
                                 return;
@@ -1140,15 +1002,16 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
                 MotionLayout$$ExternalSyntheticOutline0.m("Unsupport - ", action, "MULTISIM-PROD-REPO");
             }
         };
-        this.mIntentReceiver = r122;
+        this.mIntentReceiver = r12;
         this.mDefaultIdUpdateList = new ArrayList();
-        final Looper looper2 = handler.getLooper();
-        this.updateDataHandler = new Handler(looper2) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$updateDataHandler$1
+        this.simCardCallback = new SimInfoRepositoryImpl$simCardCallback$1(this);
+        final Looper looper = handler.getLooper();
+        this.updateDataHandler = new Handler(looper) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$updateDataHandler$1
             @Override // android.os.Handler
             public final void handleMessage(Message message) {
                 NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(message.what, "HANDLE_MSG(", ")", "MULTISIM-PROD-REPO");
                 int i10 = message.what;
-                SimInfoRepositoryImpl simInfoRepositoryImpl = SimInfoRepositoryImpl.this;
+                SimInfoRepositoryImpl simInfoRepositoryImpl = this.this$0;
                 if (i10 == 1000) {
                     simInfoRepositoryImpl._isDataSimSwitching.updateState(null, Boolean.FALSE);
                     return;
@@ -1248,20 +1111,20 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
                 }
             }
         };
-        IntentFilter intentFilter2 = new IntentFilter();
-        intentFilter2.addAction("android.intent.action.LOCALE_CHANGED");
-        intentFilter2.addAction("com.samsung.settings.SIMCARD_MGT_ACTIVATED");
-        intentFilter2.addAction("com.samsung.telecom.action.DEFAULT_OUTGOING_PHONE_ACCOUNT_CHANGED");
-        intentFilter2.addAction("android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED");
-        intentFilter2.addAction("android.telephony.action.DEFAULT_SMS_SUBSCRIPTION_CHANGED");
-        KeyguardUpdateMonitor$$ExternalSyntheticOutline0.m(intentFilter2, "android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED", "android.intent.action.SIM_STATE_CHANGED", "com.samsung.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGE_SUCCESS", "android.samsung.action.ACTION_NETWORK_SLOT_CHANGING_FINISH");
-        KeyguardUpdateMonitor$$ExternalSyntheticOutline0.m(intentFilter2, "android.intent.action.PHONE_STATE", "android.intent.action.SERVICE_STATE", "com.samsung.android.softsim.ServiceStatus", EnterpriseDeviceManager.ACTION_KNOX_RESTRICTIONS_CHANGED);
-        BroadcastDispatcher.registerReceiver$default(broadcastDispatcher, r122, intentFilter2, null, null, 0, null, 60);
-        context.getContentResolver().registerContentObserver(Settings.System.getUriFor("prefered_voice_call"), false, r92);
-        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor(SettingsHelper.INDEX_MOBILE_DATA), false, r102);
-        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("device_provisioned"), false, r102);
-        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("set_network_mode_by_quick_panel"), false, r82);
-        subscriptionManager.addOnSubscriptionsChangedListener(ExecutorsKt.asExecutor(coroutineDispatcher), r52);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("android.intent.action.LOCALE_CHANGED");
+        intentFilter.addAction("com.samsung.settings.SIMCARD_MGT_ACTIVATED");
+        intentFilter.addAction("com.samsung.telecom.action.DEFAULT_OUTGOING_PHONE_ACCOUNT_CHANGED");
+        intentFilter.addAction("android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED");
+        intentFilter.addAction("android.telephony.action.DEFAULT_SMS_SUBSCRIPTION_CHANGED");
+        KeyguardUpdateMonitor$$ExternalSyntheticOutline0.m(intentFilter, "android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED", "android.intent.action.SIM_STATE_CHANGED", "com.samsung.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGE_SUCCESS", "android.samsung.action.ACTION_NETWORK_SLOT_CHANGING_FINISH");
+        KeyguardUpdateMonitor$$ExternalSyntheticOutline0.m(intentFilter, "android.intent.action.PHONE_STATE", "android.intent.action.SERVICE_STATE", "com.samsung.android.softsim.ServiceStatus", EnterpriseDeviceManager.ACTION_KNOX_RESTRICTIONS_CHANGED);
+        BroadcastDispatcher.registerReceiver$default(broadcastDispatcher, r12, intentFilter, null, null, 0, null, 60);
+        context.getContentResolver().registerContentObserver(Settings.System.getUriFor("prefered_voice_call"), false, r9);
+        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor(SettingsHelper.INDEX_MOBILE_DATA), false, r10);
+        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("device_provisioned"), false, r10);
+        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("set_network_mode_by_quick_panel"), false, r8);
+        subscriptionManager.addOnSubscriptionsChangedListener(ExecutorsKt.asExecutor(coroutineDispatcher), r5);
         updateCurrentDefaultSlot(ButtonType.VOICE);
         updateCurrentDefaultSlot(ButtonType.SMS);
         updateCurrentDefaultSlot(ButtonType.DATA);
@@ -1294,12 +1157,6 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
         return -1;
     }
 
-    public static void sendToUpdateDataHandler$default(SimInfoRepositoryImpl simInfoRepositoryImpl, int i) {
-        SimInfoRepositoryImpl$updateDataHandler$1 simInfoRepositoryImpl$updateDataHandler$1 = simInfoRepositoryImpl.updateDataHandler;
-        simInfoRepositoryImpl$updateDataHandler$1.removeMessages(i);
-        simInfoRepositoryImpl$updateDataHandler$1.sendMessageDelayed(simInfoRepositoryImpl$updateDataHandler$1.obtainMessage(i), 0L);
-    }
-
     public final boolean checkDataOn() {
         DataUsageController dataUsageController = this.dataController;
         return dataUsageController != null && dataUsageController.isMobileDataSupported() && dataUsageController.isMobileDataEnabled();
@@ -1307,13 +1164,13 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
 
     public final int getCurrentVoiceSlotByMethodCall() {
         try {
-            Bundle call = this.mContext.getContentResolver().call(INTERNAL_URI, "getCurrentVoiceCall", (String) null, new Bundle());
-            if (call == null) {
+            Bundle bundleCall = this.mContext.getContentResolver().call(INTERNAL_URI, "getCurrentVoiceCall", (String) null, new Bundle());
+            if (bundleCall == null) {
                 Log.d("MULTISIM-PROD-REPO", "bundle is null : getCurrentVoiceCall");
                 return 0;
             }
-            boolean z = call.getBoolean("success");
-            int i = call.getInt("result");
+            boolean z = bundleCall.getBoolean("success");
+            int i = bundleCall.getInt("result");
             Log.d("MULTISIM-PROD-REPO", "getCurrentVoiceCall, " + z + ", " + i);
             return i;
         } catch (Throwable th) {
@@ -1322,19 +1179,86 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0077  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x007e A[EDGE_INSN: B:14:0x007e->B:15:0x007e BREAK  A[LOOP:0: B:2:0x002c->B:55:0x002c], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x002c A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0077  */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x007e A[EDGE_INSN: B:59:0x007e->B:22:0x007e BREAK  A[LOOP:0: B:3:0x002c->B:60:0x002c], SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x002c A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String getPhoneNumber(int r11) {
-        /*
-            Method dump skipped, instructions count: 268
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl.getPhoneNumber(int):java.lang.String");
+    public final String getPhoneNumber(int i) {
+        String simOperatorNumericForPhone = TelephonyManager.from(ActivityThread.currentApplication().getApplicationContext()).getSimOperatorNumericForPhone(i);
+        boolean z = Operator.QUICK_IS_VZW_BRANDING;
+        String string = SemCarrierFeature.getInstance().getString(i, "CarrierFeature_RIL_DisablePhoneNumberSource", "", false);
+        AbstractList abstractList = (AbstractList) PhoneNumberSource.$ENTRIES;
+        abstractList.getClass();
+        AbstractList.IteratorImpl iteratorImpl = abstractList.new IteratorImpl();
+        String phoneNumber = "";
+        while (iteratorImpl.hasNext()) {
+            PhoneNumberSource phoneNumberSource = (PhoneNumberSource) iteratorImpl.next();
+            string.getClass();
+            if (!StringsKt__StringsKt.contains(string, phoneNumberSource.name(), false)) {
+                int subId = getSubId(i);
+                int value = phoneNumberSource.getValue();
+                SubscriptionManager subscriptionManager = this.subscriptionManager;
+                if (subscriptionManager != null) {
+                    try {
+                        phoneNumber = subscriptionManager.getPhoneNumber(subId, value);
+                    } catch (IllegalArgumentException e) {
+                        Log.e("MULTISIM-PROD-REPO", "failed to get SubscriptionManager.getPhoneNumber: " + e.getMessage());
+                    } catch (IllegalStateException e2) {
+                        Log.e("MULTISIM-PROD-REPO", "failed to get SubscriptionManager.getPhoneNumber: " + e2.getMessage());
+                    } catch (SecurityException e3) {
+                        Log.e("MULTISIM-PROD-REPO", "failed to get SubscriptionManager.getPhoneNumber: " + e3.getMessage());
+                    }
+                    if (phoneNumber == null) {
+                        phoneNumber = "";
+                    }
+                    if (TextUtils.isEmpty(phoneNumber)) {
+                        break;
+                    }
+                }
+                phoneNumber = null;
+                if (phoneNumber == null) {
+                }
+                if (TextUtils.isEmpty(phoneNumber)) {
+                }
+            }
+        }
+        if (TextUtils.isEmpty(phoneNumber)) {
+            if ("AIS".equals(SystemProperties.get("ro.csc.sales_code", "unknown"))) {
+                String mSimSystemProperty = DeviceState.getMSimSystemProperty("gsm.sim.state", 0, "NOT_READY");
+                String mSimSystemProperty2 = DeviceState.getMSimSystemProperty("gsm.sim.state", 0, "NOT_READY");
+                if (i != 0) {
+                    if (i == 1 && Intrinsics.areEqual(mSimSystemProperty2, "NETWORK_LOCKED")) {
+                        Log.d("MULTISIM-PROD-REPO", "sim2 Network Lock!!");
+                        phoneNumber = this._invalidSimInfo;
+                    }
+                    phoneNumber = this._unknownPhoneNumber;
+                } else {
+                    if (Intrinsics.areEqual(mSimSystemProperty, "NETWORK_LOCKED")) {
+                        Log.d("MULTISIM-PROD-REPO", "sim1 Network Lock!!");
+                        phoneNumber = this._invalidSimInfo;
+                    }
+                    phoneNumber = this._unknownPhoneNumber;
+                }
+            } else {
+                phoneNumber = this._unknownPhoneNumber;
+            }
+        }
+        if (TextUtils.isEmpty(phoneNumber)) {
+            return phoneNumber;
+        }
+        Collection collection = KoreanSimCarrier.$ENTRIES;
+        if (collection != null && ((AbstractCollection) collection).isEmpty()) {
+            return phoneNumber;
+        }
+        Iterator it = ((AbstractList) collection).iterator();
+        while (it.hasNext()) {
+            if (Intrinsics.areEqual(((KoreanSimCarrier) it.next()).getNumeric(), simOperatorNumericForPhone)) {
+                return phoneNumber.startsWith("+82") ? AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("0", phoneNumber.substring(3)) : phoneNumber;
+            }
+        }
+        return phoneNumber;
     }
 
     public final int getSimIcon(int i, boolean z) {
@@ -1367,12 +1291,12 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
         try {
             Bundle bundle = new Bundle();
             bundle.putInt("selectItem", i);
-            Bundle call = this.mContext.getContentResolver().call(INTERNAL_URI, "isDefaultDataSlotAllowed", (String) null, bundle);
-            if (call == null) {
+            Bundle bundleCall = this.mContext.getContentResolver().call(INTERNAL_URI, "isDefaultDataSlotAllowed", (String) null, bundle);
+            if (bundleCall == null) {
                 Log.d("MULTISIM-PROD-REPO", "bundle is null : isDefaultDataSlotAllowed");
             } else {
-                boolean z2 = call.getBoolean("success");
-                boolean z3 = call.getBoolean("result");
+                boolean z2 = bundleCall.getBoolean("success");
+                boolean z3 = bundleCall.getBoolean("result");
                 Log.d("MULTISIM-PROD-REPO", "isDefaultDataSlotAllowed, " + z2 + ", " + z3);
                 z = z3;
             }
@@ -1384,11 +1308,16 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
         return z4;
     }
 
+    public final void sendToUpdateDataHandler(int i, long j) {
+        SimInfoRepositoryImpl$updateDataHandler$1 simInfoRepositoryImpl$updateDataHandler$1 = this.updateDataHandler;
+        simInfoRepositoryImpl$updateDataHandler$1.removeMessages(i);
+        simInfoRepositoryImpl$updateDataHandler$1.sendMessageDelayed(simInfoRepositoryImpl$updateDataHandler$1.obtainMessage(i), j);
+    }
+
     public final ReadonlyStateFlow toStateFlow(String str, final Function0 function0) {
-        final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new SimInfoRepositoryImpl$toStateFlow$3(null), new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowConflatedKt.conflatedCallbackFlow(new SimInfoRepositoryImpl$toStateFlow$1(this, str, null)), new SimInfoRepositoryImpl$toStateFlow$2(str, null)));
+        final FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new AnonymousClass3(null), new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowConflatedKt.conflatedCallbackFlow(new AnonymousClass1(str, null)), new AnonymousClass2(str, null)));
         return FlowKt.stateIn(FlowKt.flowOn(new Flow() { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ Function0 $getVal$inlined;
@@ -1417,66 +1346,46 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
                     this.$getVal$inlined = function0;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$$inlined$map$1$2$1 r0 = (com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$$inlined$map$1$2$1 r0 = new com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Unit r5 = (kotlin.Unit) r5
-                        kotlin.jvm.functions.Function0 r5 = r4.$getVal$inlined
-                        java.lang.Object r5 = r5.invoke()
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Object objInvoke = this.$getVal$inlined.invoke();
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(objInvoke, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, function0), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, function0), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, this.bgDispatcher), this.applicationScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), function0.invoke());
     }
@@ -1485,22 +1394,22 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
         CharSequence carrierName;
         CharSequence carrierName2;
         if (z) {
-            this._networkNameDefault = this.mContext.getString(android.R.string.permlab_accessHiddenProfile);
+            this._networkNameDefault = this.mContext.getString(android.R.string.permlab_accessLastKnownCellId);
             this._unknownPhoneNumber = this.mContext.getString(R.string.qs_multisim_unknown_number);
             this._invalidSimInfo = this.mContext.getString(R.string.qs_multisim_invalid_sim_info);
         }
-        String str = this._networkNameDefault;
+        String string = this._networkNameDefault;
         SubscriptionInfo activeSubscriptionInfoForSimSlotIndex = this.subscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(0);
         if (activeSubscriptionInfoForSimSlotIndex != null && (carrierName2 = activeSubscriptionInfoForSimSlotIndex.getCarrierName()) != null && carrierName2.length() != 0) {
-            str = activeSubscriptionInfoForSimSlotIndex.getCarrierName().toString();
+            string = activeSubscriptionInfoForSimSlotIndex.getCarrierName().toString();
         }
-        this._sim1CarrierName.setValue(str);
-        String str2 = this._networkNameDefault;
+        this._sim1CarrierName.setValue(string);
+        String string2 = this._networkNameDefault;
         SubscriptionInfo activeSubscriptionInfoForSimSlotIndex2 = this.subscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(1);
         if (activeSubscriptionInfoForSimSlotIndex2 != null && (carrierName = activeSubscriptionInfoForSimSlotIndex2.getCarrierName()) != null && carrierName.length() != 0) {
-            str2 = activeSubscriptionInfoForSimSlotIndex2.getCarrierName().toString();
+            string2 = activeSubscriptionInfoForSimSlotIndex2.getCarrierName().toString();
         }
-        this._sim2CarrierName.setValue(str2);
+        this._sim2CarrierName.setValue(string2);
         updatePhoneNumberWhenNeeded();
     }
 
@@ -1518,17 +1427,18 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
         if (i != 1) {
             if (i == 2) {
                 int phoneId = SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultSmsSubscriptionId());
-                Log.d("MULTISIM-PROD-REPO", "updateCurrentDefaultSlot : sms = " + phoneId);
+                ListPopupWindow$$ExternalSyntheticOutline0.m(phoneId, "updateCurrentDefaultSlot : sms = ", "MULTISIM-PROD-REPO");
                 this._defaultSmsSimId.updateState(null, Integer.valueOf(phoneId));
                 return;
-            }
-            if (i != 3) {
+            } else {
+                if (i != 3) {
+                    return;
+                }
+                int phoneId2 = SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId());
+                ListPopupWindow$$ExternalSyntheticOutline0.m(phoneId2, "updateCurrentDefaultSlot : data = ", "MULTISIM-PROD-REPO");
+                this._defaultDataSimId.updateState(null, Integer.valueOf(phoneId2));
                 return;
             }
-            int phoneId2 = SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId());
-            Log.d("MULTISIM-PROD-REPO", "updateCurrentDefaultSlot : data = " + phoneId2);
-            this._defaultDataSimId.updateState(null, Integer.valueOf(phoneId2));
-            return;
         }
         try {
             if (this.simCardManagerService == null || !SimCardManagerServiceProvider.isServiceRunningCheck(this.mContext)) {
@@ -1579,10 +1489,10 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
     }
 
     public final void updateSimSlotType() {
-        boolean isESIM = DeviceState.isESIM(this.mContext, 0);
-        boolean isESIM2 = DeviceState.isESIM(this.mContext, 1);
-        this._isESim1.updateState(null, Boolean.valueOf(isESIM));
-        this._isESim2.updateState(null, Boolean.valueOf(isESIM2));
-        Log.d("MULTISIM-PROD-REPO", "updateSimSlotType() - " + isESIM + " " + isESIM2);
+        boolean zIsESIM = DeviceState.isESIM(this.mContext, 0);
+        boolean zIsESIM2 = DeviceState.isESIM(this.mContext, 1);
+        this._isESim1.updateState(null, Boolean.valueOf(zIsESIM));
+        this._isESim2.updateState(null, Boolean.valueOf(zIsESIM2));
+        Log.d("MULTISIM-PROD-REPO", "updateSimSlotType() - " + zIsESIM + " " + zIsESIM2);
     }
 }

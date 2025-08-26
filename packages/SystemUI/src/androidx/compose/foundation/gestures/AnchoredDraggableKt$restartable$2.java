@@ -9,13 +9,14 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Ref$ObjectRef;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
+import kotlinx.coroutines.CoroutineStart;
 import kotlinx.coroutines.Job;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AnchoredDraggableKt$restartable$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function2 $block;
@@ -23,14 +24,12 @@ final class AnchoredDraggableKt$restartable$2 extends SuspendLambda implements F
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2$1, reason: invalid class name */
     final class AnonymousClass1<T> implements FlowCollector {
         public final /* synthetic */ CoroutineScope $$this$coroutineScope;
         public final /* synthetic */ Function2 $block;
         public final /* synthetic */ Ref$ObjectRef $previousDrag;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ CoroutineScope $$this$coroutineScope;
@@ -85,79 +84,52 @@ final class AnchoredDraggableKt$restartable$2 extends SuspendLambda implements F
             this.$block = function2;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x0039  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
         @Override // kotlinx.coroutines.flow.FlowCollector
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-            /*
-                r5 = this;
-                boolean r0 = r7 instanceof androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2$1$emit$1
-                if (r0 == 0) goto L13
-                r0 = r7
-                androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2$1$emit$1 r0 = (androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2$1$emit$1) r0
-                int r1 = r0.label
-                r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                r3 = r1 & r2
-                if (r3 == 0) goto L13
-                int r1 = r1 - r2
-                r0.label = r1
-                goto L18
-            L13:
-                androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2$1$emit$1 r0 = new androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2$1$emit$1
-                r0.<init>(r5, r7)
-            L18:
-                java.lang.Object r7 = r0.result
-                kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                int r2 = r0.label
-                r3 = 1
-                if (r2 == 0) goto L39
-                if (r2 != r3) goto L31
-                java.lang.Object r5 = r0.L$2
-                kotlinx.coroutines.Job r5 = (kotlinx.coroutines.Job) r5
-                java.lang.Object r6 = r0.L$1
-                java.lang.Object r5 = r0.L$0
-                androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2$1 r5 = (androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2.AnonymousClass1) r5
-                kotlin.ResultKt.throwOnFailure(r7)
-                goto L5b
-            L31:
-                java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                r5.<init>(r6)
-                throw r5
-            L39:
-                kotlin.ResultKt.throwOnFailure(r7)
-                kotlin.jvm.internal.Ref$ObjectRef r7 = r5.$previousDrag
-                T r7 = r7.element
-                kotlinx.coroutines.Job r7 = (kotlinx.coroutines.Job) r7
-                if (r7 == 0) goto L5b
-                androidx.compose.foundation.gestures.AnchoredDragFinishedSignal r2 = new androidx.compose.foundation.gestures.AnchoredDragFinishedSignal
-                r2.<init>()
-                r7.cancel(r2)
-                r0.L$0 = r5
-                r0.L$1 = r6
-                r0.L$2 = r7
-                r0.label = r3
-                java.lang.Object r7 = r7.join(r0)
-                if (r7 != r1) goto L5b
-                return r1
-            L5b:
-                kotlin.jvm.internal.Ref$ObjectRef r7 = r5.$previousDrag
-                kotlinx.coroutines.CoroutineStart r0 = kotlinx.coroutines.CoroutineStart.UNDISPATCHED
-                androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2$1$2 r1 = new androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2$1$2
-                kotlin.jvm.functions.Function2 r2 = r5.$block
-                kotlinx.coroutines.CoroutineScope r5 = r5.$$this$coroutineScope
-                r4 = 0
-                r1.<init>(r2, r6, r5, r4)
-                kotlinx.coroutines.StandaloneCoroutine r5 = kotlinx.coroutines.BuildersKt.launch$default(r5, r4, r0, r1, r3)
-                r7.element = r5
-                kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                return r5
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.AnchoredDraggableKt$restartable$2.AnonymousClass1.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+        public final Object emit(Object obj, Continuation continuation) {
+            AnchoredDraggableKt$restartable$2$1$emit$1 anchoredDraggableKt$restartable$2$1$emit$1;
+            if (continuation instanceof AnchoredDraggableKt$restartable$2$1$emit$1) {
+                anchoredDraggableKt$restartable$2$1$emit$1 = (AnchoredDraggableKt$restartable$2$1$emit$1) continuation;
+                int i = anchoredDraggableKt$restartable$2$1$emit$1.label;
+                if ((i & Integer.MIN_VALUE) != 0) {
+                    anchoredDraggableKt$restartable$2$1$emit$1.label = i - Integer.MIN_VALUE;
+                } else {
+                    anchoredDraggableKt$restartable$2$1$emit$1 = new AnchoredDraggableKt$restartable$2$1$emit$1(this, continuation);
+                }
+            }
+            Object obj2 = anchoredDraggableKt$restartable$2$1$emit$1.result;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i2 = anchoredDraggableKt$restartable$2$1$emit$1.label;
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj2);
+                Job job = (Job) this.$previousDrag.element;
+                if (job != null) {
+                    job.cancel(new AnchoredDragFinishedSignal());
+                    anchoredDraggableKt$restartable$2$1$emit$1.L$0 = this;
+                    anchoredDraggableKt$restartable$2$1$emit$1.L$1 = obj;
+                    anchoredDraggableKt$restartable$2$1$emit$1.L$2 = job;
+                    anchoredDraggableKt$restartable$2$1$emit$1.label = 1;
+                    if (job.join(anchoredDraggableKt$restartable$2$1$emit$1) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                obj = anchoredDraggableKt$restartable$2$1$emit$1.L$1;
+                this = (AnonymousClass1) anchoredDraggableKt$restartable$2$1$emit$1.L$0;
+                ResultKt.throwOnFailure(obj2);
+            }
+            Ref$ObjectRef ref$ObjectRef = this.$previousDrag;
+            CoroutineStart coroutineStart = CoroutineStart.UNDISPATCHED;
+            Function2 function2 = this.$block;
+            CoroutineScope coroutineScope = this.$$this$coroutineScope;
+            ref$ObjectRef.element = (T) BuildersKt.launch$default(coroutineScope, null, coroutineStart, new AnonymousClass2(function2, obj, coroutineScope, null), 1);
+            return Unit.INSTANCE;
         }
     }
 
@@ -188,10 +160,10 @@ final class AnchoredDraggableKt$restartable$2 extends SuspendLambda implements F
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
             Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
-            SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(this.$inputs);
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(this.$inputs);
             AnonymousClass1 anonymousClass1 = new AnonymousClass1(ref$ObjectRef, coroutineScope, this.$block);
             this.label = 1;
-            if (snapshotFlow.collect(anonymousClass1, this) == coroutineSingletons) {
+            if (safeFlowSnapshotFlow.collect(anonymousClass1, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

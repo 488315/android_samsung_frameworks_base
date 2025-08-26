@@ -3,7 +3,6 @@ package androidx.compose.foundation.layout;
 import com.android.systemui.util.SystemUIAnalytics;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class WindowInsetsSides {
     public static final int Horizontal;
@@ -20,7 +19,6 @@ public final class WindowInsetsSides {
     public static final int Top = 16;
     public static final int Bottom = 32;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,7 +37,7 @@ public final class WindowInsetsSides {
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m149toStringimpl(int i) {
+    public static String m150toStringimpl(int i) {
         StringBuilder sb = new StringBuilder("WindowInsetsSides(");
         StringBuilder sb2 = new StringBuilder();
         int i2 = Start;
@@ -90,6 +88,6 @@ public final class WindowInsetsSides {
     }
 
     public final String toString() {
-        return m149toStringimpl(this.value);
+        return m150toStringimpl(this.value);
     }
 }

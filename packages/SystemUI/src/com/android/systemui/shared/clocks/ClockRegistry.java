@@ -31,7 +31,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$BooleanRef;
@@ -41,7 +46,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ClockRegistry {
     public final String TAG;
@@ -71,12 +75,10 @@ public class ClockRegistry {
     public ClockSettings settings;
     public final ClockRegistry$userSwitchObserver$1 userSwitchObserver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ClockChangeListener {
         void onCurrentClockChanged();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ClockInfo {
         public final PluginLifecycleManager manager;
         public final ClockMetadata metadata;
@@ -100,15 +102,156 @@ public class ClockRegistry {
         }
 
         public final int hashCode() {
-            int hashCode = this.metadata.hashCode() * 31;
+            int iHashCode = this.metadata.hashCode() * 31;
             ClockProvider clockProvider = this.provider;
-            int hashCode2 = (hashCode + (clockProvider == null ? 0 : clockProvider.hashCode())) * 31;
+            int iHashCode2 = (iHashCode + (clockProvider == null ? 0 : clockProvider.hashCode())) * 31;
             PluginLifecycleManager pluginLifecycleManager = this.manager;
-            return hashCode2 + (pluginLifecycleManager != null ? pluginLifecycleManager.hashCode() : 0);
+            return iHashCode2 + (pluginLifecycleManager != null ? pluginLifecycleManager.hashCode() : 0);
         }
 
         public final String toString() {
             return "ClockInfo(metadata=" + this.metadata + ", provider=" + this.provider + ", manager=" + this.manager + ")";
+        }
+    }
+
+    /* renamed from: com.android.systemui.shared.clocks.ClockRegistry$registerListeners$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ClockRegistry.this.new AnonymousClass1(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            ClockRegistry.this.querySettings();
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.shared.clocks.ClockRegistry$triggerOnCurrentClockChanged$1, reason: invalid class name and case insensitive filesystem */
+    final class C10431 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C10431(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ClockRegistry.this.new C10431(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C10431) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            ClockRegistry.this.f104assert.isMainThread();
+            int i = 0;
+            ClockRegistry.this.isClockChanged.set(false);
+            ArrayList arrayList = (ArrayList) ClockRegistry.this.clockChangeListeners;
+            int size = arrayList.size();
+            while (i < size) {
+                Object obj2 = arrayList.get(i);
+                i++;
+                ((ClockChangeListener) obj2).onCurrentClockChanged();
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.shared.clocks.ClockRegistry$verifyLoadedProviders$1, reason: invalid class name and case insensitive filesystem */
+    final class C10441 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C10441(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ClockRegistry.this.new C10441(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C10441) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            ClockRegistry clockRegistry = ClockRegistry.this;
+            synchronized (clockRegistry.availableClocks) {
+                try {
+                    clockRegistry.isQueued.set(false);
+                    if (clockRegistry.keepAllLoaded) {
+                        Logger.i$default(clockRegistry.logger, "verifyLoadedProviders: keepAllLoaded=true", null, 2, null);
+                        Iterator it = clockRegistry.availableClocks.entrySet().iterator();
+                        while (it.hasNext()) {
+                            PluginLifecycleManager pluginLifecycleManager = ((ClockInfo) ((Map.Entry) it.next()).getValue()).manager;
+                            if (pluginLifecycleManager != null) {
+                                pluginLifecycleManager.loadPlugin();
+                            }
+                        }
+                        return Unit.INSTANCE;
+                    }
+                    ClockInfo clockInfo = (ClockInfo) clockRegistry.availableClocks.get(clockRegistry.getCurrentClockId());
+                    if (clockInfo == null) {
+                        Logger.i$default(clockRegistry.logger, "verifyLoadedProviders: currentClock=null", null, 2, null);
+                        Iterator it2 = clockRegistry.availableClocks.entrySet().iterator();
+                        while (it2.hasNext()) {
+                            PluginLifecycleManager pluginLifecycleManager2 = ((ClockInfo) ((Map.Entry) it2.next()).getValue()).manager;
+                            if (pluginLifecycleManager2 != null) {
+                                pluginLifecycleManager2.unloadPlugin();
+                            }
+                        }
+                        return Unit.INSTANCE;
+                    }
+                    Logger.i$default(clockRegistry.logger, "verifyLoadedProviders: load currentClock", null, 2, null);
+                    PluginLifecycleManager pluginLifecycleManager3 = clockInfo.manager;
+                    if (pluginLifecycleManager3 != null) {
+                        pluginLifecycleManager3.loadPlugin();
+                    }
+                    Iterator it3 = clockRegistry.availableClocks.entrySet().iterator();
+                    while (it3.hasNext()) {
+                        PluginLifecycleManager pluginLifecycleManager4 = ((ClockInfo) ((Map.Entry) it3.next()).getValue()).manager;
+                        if (pluginLifecycleManager4 != null && !Intrinsics.areEqual(pluginLifecycleManager3, pluginLifecycleManager4)) {
+                            pluginLifecycleManager4.unloadPlugin();
+                        }
+                    }
+                    return Unit.INSTANCE;
+                } catch (Throwable th) {
+                    throw th;
+                }
+            }
         }
     }
 
@@ -140,7 +283,7 @@ public class ClockRegistry {
             }
 
             public final void onChange(boolean z4, Collection collection, int i, int i2) {
-                ClockRegistry clockRegistry = ClockRegistry.this;
+                ClockRegistry clockRegistry = this.this$0;
                 BuildersKt.launch$default(clockRegistry.scope, clockRegistry.bgDispatcher, null, new ClockRegistry$settingObserver$1$onChange$1(clockRegistry, null), 2);
             }
         };
@@ -148,14 +291,14 @@ public class ClockRegistry {
             /* JADX WARN: Multi-variable type inference failed */
             @Override // com.android.systemui.plugins.PluginListener
             public final boolean onPluginAttached(PluginLifecycleManager pluginLifecycleManager) {
-                String obj;
-                final ClockRegistry clockRegistry = ClockRegistry.this;
+                String string;
+                final ClockRegistry clockRegistry = this.this$0;
                 pluginLifecycleManager.setLogFunc(new BiConsumer() { // from class: com.android.systemui.shared.clocks.ClockRegistry$pluginListener$1$onPluginAttached$1
                     @Override // java.util.function.BiConsumer
-                    public final void accept(Object obj2, Object obj3) {
-                        String str4 = (String) obj2;
-                        String str5 = (String) obj3;
-                        ClockMessageBuffers clockMessageBuffers2 = ClockRegistry.this.clockBuffers;
+                    public final void accept(Object obj, Object obj2) {
+                        String str4 = (String) obj;
+                        String str5 = (String) obj2;
+                        ClockMessageBuffers clockMessageBuffers2 = clockRegistry.clockBuffers;
                         LogBuffer logBuffer = (LogBuffer) (clockMessageBuffers2 != null ? clockMessageBuffers2.getInfraMessageBuffer() : null);
                         if (logBuffer != null) {
                             str4.getClass();
@@ -171,28 +314,28 @@ public class ClockRegistry {
                 List<ClockMetadata> list = (List) ClockRegistryKt.KNOWN_PLUGINS.get(pluginLifecycleManager.getPackage());
                 Logger logger = clockRegistry.logger;
                 if (list == null) {
-                    LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, new ClockRegistry$$ExternalSyntheticLambda0(8), null);
-                    obtain.setStr1(pluginLifecycleManager.getPackage());
-                    logger.getBuffer().commit(obtain);
+                    LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, new ClockRegistry$$ExternalSyntheticLambda0(8), null);
+                    logMessageObtain.setStr1(pluginLifecycleManager.getPackage());
+                    logger.getBuffer().commit(logMessageObtain);
                     return true;
                 }
-                LogMessage obtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new ClockRegistry$$ExternalSyntheticLambda0(9), null);
-                obtain2.setStr1(pluginLifecycleManager.getPackage());
-                logger.getBuffer().commit(obtain2);
+                LogMessage logMessageObtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new ClockRegistry$$ExternalSyntheticLambda0(9), null);
+                logMessageObtain2.setStr1(pluginLifecycleManager.getPackage());
+                logger.getBuffer().commit(logMessageObtain2);
                 Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                 boolean z4 = false;
                 for (ClockMetadata clockMetadata : list) {
                     String clockId = clockMetadata.getClockId();
                     ConcurrentHashMap concurrentHashMap = clockRegistry.availableClocks;
                     ClockRegistry.ClockInfo clockInfo = new ClockRegistry.ClockInfo(clockMetadata, null, pluginLifecycleManager);
-                    Object putIfAbsent = concurrentHashMap.putIfAbsent(clockId, clockInfo);
-                    if (putIfAbsent == 0) {
+                    Object objPutIfAbsent = concurrentHashMap.putIfAbsent(clockId, clockInfo);
+                    if (objPutIfAbsent == 0) {
                         ref$BooleanRef.element = true;
                         ClockRegistry.access$onConnected(clockRegistry, clockInfo);
                         Unit unit = Unit.INSTANCE;
                     }
-                    if (putIfAbsent != 0) {
-                        clockInfo = putIfAbsent;
+                    if (objPutIfAbsent != 0) {
+                        clockInfo = objPutIfAbsent;
                     }
                     ClockRegistry.ClockInfo clockInfo2 = clockInfo;
                     PluginLifecycleManager pluginLifecycleManager2 = clockInfo2.manager;
@@ -200,15 +343,15 @@ public class ClockRegistry {
                         z4 = z4 || Intrinsics.areEqual(clockRegistry.getCurrentClockId(), clockMetadata.getClockId());
                         clockInfo2.provider = null;
                     } else {
-                        LogMessage obtain3 = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, new ClockRegistry$$ExternalSyntheticLambda0(10), null);
-                        obtain3.setStr1(clockId);
-                        if (pluginLifecycleManager2 == null || (obj = pluginLifecycleManager2.toString()) == null) {
+                        LogMessage logMessageObtain3 = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, new ClockRegistry$$ExternalSyntheticLambda0(10), null);
+                        logMessageObtain3.setStr1(clockId);
+                        if (pluginLifecycleManager2 == null || (string = pluginLifecycleManager2.toString()) == null) {
                             ClockProvider clockProvider2 = clockInfo2.provider;
-                            obj = clockProvider2 != null ? clockProvider2.toString() : null;
+                            string = clockProvider2 != null ? clockProvider2.toString() : null;
                         }
-                        obtain3.setStr2(obj);
-                        obtain3.setStr3(pluginLifecycleManager.toString());
-                        logger.getBuffer().commit(obtain3);
+                        logMessageObtain3.setStr2(string);
+                        logMessageObtain3.setStr3(pluginLifecycleManager.toString());
+                        logger.getBuffer().commit(logMessageObtain3);
                     }
                 }
                 if (ref$BooleanRef.element) {
@@ -222,7 +365,7 @@ public class ClockRegistry {
             public final void onPluginDetached(PluginLifecycleManager pluginLifecycleManager) {
                 int i;
                 ArrayList arrayList = new ArrayList();
-                ClockRegistry clockRegistry = ClockRegistry.this;
+                ClockRegistry clockRegistry = this.this$0;
                 Iterator it = clockRegistry.availableClocks.entrySet().iterator();
                 while (true) {
                     i = 0;
@@ -243,13 +386,13 @@ public class ClockRegistry {
                     Object obj = arrayList.get(i);
                     i++;
                     ClockRegistry.ClockInfo clockInfo = (ClockRegistry.ClockInfo) obj;
-                    boolean areEqual = Intrinsics.areEqual(clockRegistry.getCurrentClockId(), clockInfo.metadata.getClockId());
+                    boolean zAreEqual = Intrinsics.areEqual(clockRegistry.getCurrentClockId(), clockInfo.metadata.getClockId());
                     Logger logger = clockRegistry.logger;
-                    LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), areEqual ? LogLevel.INFO : LogLevel.DEBUG, new ClockRegistry$$ExternalSyntheticLambda0(3), null);
-                    obtain.setStr1(clockInfo.metadata.getClockId());
-                    obtain.setStr2(String.valueOf(clockInfo.manager));
-                    obtain.setBool1(areEqual);
-                    logger.getBuffer().commit(obtain);
+                    LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), zAreEqual ? LogLevel.INFO : LogLevel.DEBUG, new ClockRegistry$$ExternalSyntheticLambda0(3), null);
+                    logMessageObtain.setStr1(clockInfo.metadata.getClockId());
+                    logMessageObtain.setStr2(String.valueOf(clockInfo.manager));
+                    logMessageObtain.setBool1(zAreEqual);
+                    logger.getBuffer().commit(logMessageObtain);
                 }
                 if (arrayList.size() > 0) {
                     ClockRegistry.access$triggerOnAvailableClocksChanged(clockRegistry);
@@ -259,30 +402,30 @@ public class ClockRegistry {
             /* JADX WARN: Multi-variable type inference failed */
             @Override // com.android.systemui.plugins.PluginListener
             public final void onPluginLoaded(Plugin plugin, Context context2, PluginLifecycleManager pluginLifecycleManager) {
-                String obj;
+                String string;
                 ClockProviderPlugin clockProviderPlugin = (ClockProviderPlugin) plugin;
-                ClockRegistry clockRegistry = ClockRegistry.this;
+                ClockRegistry clockRegistry = this.this$0;
                 clockProviderPlugin.initialize(clockRegistry.clockBuffers);
                 Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                 for (ClockMetadata clockMetadata : clockProviderPlugin.getClocks()) {
                     String clockId = clockMetadata.getClockId();
                     ConcurrentHashMap concurrentHashMap = clockRegistry.availableClocks;
                     ClockRegistry.ClockInfo clockInfo = new ClockRegistry.ClockInfo(clockMetadata, clockProviderPlugin, pluginLifecycleManager);
-                    Object putIfAbsent = concurrentHashMap.putIfAbsent(clockId, clockInfo);
-                    if (putIfAbsent == 0) {
+                    Object objPutIfAbsent = concurrentHashMap.putIfAbsent(clockId, clockInfo);
+                    if (objPutIfAbsent == 0) {
                         ref$BooleanRef.element = true;
                         ClockRegistry.access$onConnected(clockRegistry, clockInfo);
                         Unit unit = Unit.INSTANCE;
                     }
-                    if (putIfAbsent != 0) {
-                        clockInfo = putIfAbsent;
+                    if (objPutIfAbsent != 0) {
+                        clockInfo = objPutIfAbsent;
                     }
                     ClockRegistry.ClockInfo clockInfo2 = clockInfo;
                     PluginLifecycleManager pluginLifecycleManager2 = clockInfo2.manager;
-                    boolean areEqual = Intrinsics.areEqual(pluginLifecycleManager, pluginLifecycleManager2);
+                    boolean zAreEqual = Intrinsics.areEqual(pluginLifecycleManager, pluginLifecycleManager2);
                     Logger logger = clockRegistry.logger;
-                    String str4 = null;
-                    if (areEqual) {
+                    String string2 = null;
+                    if (zAreEqual) {
                         String replacementTarget = clockMetadata.getReplacementTarget();
                         if (replacementTarget != null) {
                             clockRegistry.replacementMap.put(clockId, replacementTarget);
@@ -290,29 +433,29 @@ public class ClockRegistry {
                         clockInfo2.provider = clockProviderPlugin;
                         String currentClockId = clockRegistry.getCurrentClockId();
                         ClockMetadata clockMetadata2 = clockInfo2.metadata;
-                        boolean areEqual2 = Intrinsics.areEqual(currentClockId, clockMetadata2.getClockId());
-                        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), areEqual2 ? LogLevel.INFO : LogLevel.DEBUG, new ClockRegistry$$ExternalSyntheticLambda0(6), null);
-                        obtain.setStr1(clockMetadata2.getClockId());
-                        obtain.setStr2(String.valueOf(pluginLifecycleManager2));
-                        obtain.setBool1(areEqual2);
-                        logger.getBuffer().commit(obtain);
-                        if (areEqual2) {
+                        boolean zAreEqual2 = Intrinsics.areEqual(currentClockId, clockMetadata2.getClockId());
+                        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), zAreEqual2 ? LogLevel.INFO : LogLevel.DEBUG, new ClockRegistry$$ExternalSyntheticLambda0(6), null);
+                        logMessageObtain.setStr1(clockMetadata2.getClockId());
+                        logMessageObtain.setStr2(String.valueOf(pluginLifecycleManager2));
+                        logMessageObtain.setBool1(zAreEqual2);
+                        logger.getBuffer().commit(logMessageObtain);
+                        if (zAreEqual2) {
                             clockRegistry.triggerOnCurrentClockChanged();
                         }
                     } else {
-                        LogMessage obtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, new ClockRegistry$$ExternalSyntheticLambda0(7), null);
-                        obtain2.setStr1(clockId);
-                        if (pluginLifecycleManager2 == null || (obj = pluginLifecycleManager2.toString()) == null) {
+                        LogMessage logMessageObtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, new ClockRegistry$$ExternalSyntheticLambda0(7), null);
+                        logMessageObtain2.setStr1(clockId);
+                        if (pluginLifecycleManager2 == null || (string = pluginLifecycleManager2.toString()) == null) {
                             ClockProvider clockProvider2 = clockInfo2.provider;
                             if (clockProvider2 != null) {
-                                str4 = clockProvider2.toString();
+                                string2 = clockProvider2.toString();
                             }
                         } else {
-                            str4 = obj;
+                            string2 = string;
                         }
-                        obtain2.setStr2(str4);
-                        obtain2.setStr3(pluginLifecycleManager.toString());
-                        logger.getBuffer().commit(obtain2);
+                        logMessageObtain2.setStr2(string2);
+                        logMessageObtain2.setStr3(pluginLifecycleManager.toString());
+                        logger.getBuffer().commit(logMessageObtain2);
                         pluginLifecycleManager.unloadPlugin();
                     }
                 }
@@ -326,51 +469,51 @@ public class ClockRegistry {
             public final void onPluginUnloaded(Plugin plugin, PluginLifecycleManager pluginLifecycleManager) {
                 ClockProvider clockProvider2;
                 PluginLifecycleManager pluginLifecycleManager2;
-                String obj;
+                String string;
                 Iterator<ClockMetadata> it = ((ClockProviderPlugin) plugin).getClocks().iterator();
                 while (true) {
-                    boolean hasNext = it.hasNext();
-                    ClockRegistry clockRegistry = ClockRegistry.this;
-                    if (!hasNext) {
+                    boolean zHasNext = it.hasNext();
+                    ClockRegistry clockRegistry = this.this$0;
+                    if (!zHasNext) {
                         clockRegistry.verifyLoadedProviders();
                         return;
                     }
                     String clockId = it.next().getClockId();
                     ClockRegistry.ClockInfo clockInfo = (ClockRegistry.ClockInfo) clockRegistry.availableClocks.get(clockId);
-                    String str4 = null;
-                    boolean areEqual = Intrinsics.areEqual(clockInfo != null ? clockInfo.manager : null, pluginLifecycleManager);
+                    String string2 = null;
+                    boolean zAreEqual = Intrinsics.areEqual(clockInfo != null ? clockInfo.manager : null, pluginLifecycleManager);
                     Logger logger = clockRegistry.logger;
-                    if (areEqual) {
+                    if (zAreEqual) {
                         clockInfo.provider = null;
                         String currentClockId = clockRegistry.getCurrentClockId();
                         ClockMetadata clockMetadata = clockInfo.metadata;
-                        boolean areEqual2 = Intrinsics.areEqual(currentClockId, clockMetadata.getClockId());
-                        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), areEqual2 ? LogLevel.WARNING : LogLevel.DEBUG, new ClockRegistry$$ExternalSyntheticLambda0(4), null);
-                        obtain.setStr1(clockMetadata.getClockId());
-                        obtain.setStr2(String.valueOf(clockInfo.manager));
-                        obtain.setBool1(areEqual2);
-                        logger.getBuffer().commit(obtain);
-                        if (areEqual2) {
+                        boolean zAreEqual2 = Intrinsics.areEqual(currentClockId, clockMetadata.getClockId());
+                        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), zAreEqual2 ? LogLevel.WARNING : LogLevel.DEBUG, new ClockRegistry$$ExternalSyntheticLambda0(4), null);
+                        logMessageObtain.setStr1(clockMetadata.getClockId());
+                        logMessageObtain.setStr2(String.valueOf(clockInfo.manager));
+                        logMessageObtain.setBool1(zAreEqual2);
+                        logger.getBuffer().commit(logMessageObtain);
+                        if (zAreEqual2) {
                             clockRegistry.triggerOnCurrentClockChanged();
                         }
                     } else {
-                        LogMessage obtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, new ClockRegistry$$ExternalSyntheticLambda0(11), null);
-                        obtain2.setStr1(clockId);
-                        if (clockInfo != null && (pluginLifecycleManager2 = clockInfo.manager) != null && (obj = pluginLifecycleManager2.toString()) != null) {
-                            str4 = obj;
+                        LogMessage logMessageObtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, new ClockRegistry$$ExternalSyntheticLambda0(11), null);
+                        logMessageObtain2.setStr1(clockId);
+                        if (clockInfo != null && (pluginLifecycleManager2 = clockInfo.manager) != null && (string = pluginLifecycleManager2.toString()) != null) {
+                            string2 = string;
                         } else if (clockInfo != null && (clockProvider2 = clockInfo.provider) != null) {
-                            str4 = clockProvider2.toString();
+                            string2 = clockProvider2.toString();
                         }
-                        obtain2.setStr2(str4);
-                        obtain2.setStr3(pluginLifecycleManager.toString());
-                        logger.getBuffer().commit(obtain2);
+                        logMessageObtain2.setStr2(string2);
+                        logMessageObtain2.setStr3(pluginLifecycleManager.toString());
+                        logger.getBuffer().commit(logMessageObtain2);
                     }
                 }
             }
         };
         this.userSwitchObserver = new UserSwitchObserver() { // from class: com.android.systemui.shared.clocks.ClockRegistry$userSwitchObserver$1
             public final void onUserSwitchComplete(int i) {
-                ClockRegistry clockRegistry = ClockRegistry.this;
+                ClockRegistry clockRegistry = this.this$0;
                 BuildersKt.launch$default(clockRegistry.scope, clockRegistry.bgDispatcher, null, new ClockRegistry$userSwitchObserver$1$onUserSwitchComplete$1(clockRegistry, null), 2);
             }
         };
@@ -392,13 +535,13 @@ public class ClockRegistry {
     }
 
     public static final void access$onConnected(ClockRegistry clockRegistry, ClockInfo clockInfo) {
-        boolean areEqual = Intrinsics.areEqual(clockRegistry.getCurrentClockId(), clockInfo.metadata.getClockId());
+        boolean zAreEqual = Intrinsics.areEqual(clockRegistry.getCurrentClockId(), clockInfo.metadata.getClockId());
         Logger logger = clockRegistry.logger;
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), areEqual ? LogLevel.INFO : LogLevel.DEBUG, new ClockRegistry$$ExternalSyntheticLambda0(5), null);
-        obtain.setStr1(clockInfo.metadata.getClockId());
-        obtain.setStr2(String.valueOf(clockInfo.manager));
-        obtain.setBool1(areEqual);
-        logger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), zAreEqual ? LogLevel.INFO : LogLevel.DEBUG, new ClockRegistry$$ExternalSyntheticLambda0(5), null);
+        logMessageObtain.setStr1(clockInfo.metadata.getClockId());
+        logMessageObtain.setStr2(String.valueOf(clockInfo.manager));
+        logMessageObtain.setBool1(zAreEqual);
+        logger.getBuffer().commit(logMessageObtain);
     }
 
     public static final void access$triggerOnAvailableClocksChanged(ClockRegistry clockRegistry) {
@@ -428,31 +571,31 @@ public class ClockRegistry {
     public final ClockController createCurrentClock() {
         String currentClockId = getCurrentClockId();
         if (this.isEnabled && currentClockId.length() > 0) {
-            ClockController createClock = createClock(currentClockId);
+            ClockController clockControllerCreateClock = createClock(currentClockId);
             Logger logger = this.logger;
-            if (createClock != null) {
+            if (clockControllerCreateClock != null) {
                 ClockRegistry$$ExternalSyntheticLambda0 clockRegistry$$ExternalSyntheticLambda0 = new ClockRegistry$$ExternalSyntheticLambda0(0);
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, clockRegistry$$ExternalSyntheticLambda0, null);
-                obtain.setStr1(currentClockId);
-                logger.getBuffer().commit(obtain);
-                return createClock;
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, clockRegistry$$ExternalSyntheticLambda0, null);
+                logMessageObtain.setStr1(currentClockId);
+                logger.getBuffer().commit(logMessageObtain);
+                return clockControllerCreateClock;
             }
             if (this.availableClocks.containsKey(currentClockId)) {
                 ClockRegistry$$ExternalSyntheticLambda0 clockRegistry$$ExternalSyntheticLambda02 = new ClockRegistry$$ExternalSyntheticLambda0(1);
-                LogMessage obtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, clockRegistry$$ExternalSyntheticLambda02, null);
-                obtain2.setStr1(currentClockId);
-                logger.getBuffer().commit(obtain2);
+                LogMessage logMessageObtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, clockRegistry$$ExternalSyntheticLambda02, null);
+                logMessageObtain2.setStr1(currentClockId);
+                logger.getBuffer().commit(logMessageObtain2);
                 verifyLoadedProviders();
             } else {
                 ClockRegistry$$ExternalSyntheticLambda0 clockRegistry$$ExternalSyntheticLambda03 = new ClockRegistry$$ExternalSyntheticLambda0(2);
-                LogMessage obtain3 = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, clockRegistry$$ExternalSyntheticLambda03, null);
-                obtain3.setStr1(currentClockId);
-                logger.getBuffer().commit(obtain3);
+                LogMessage logMessageObtain3 = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, clockRegistry$$ExternalSyntheticLambda03, null);
+                logMessageObtain3.setStr1(currentClockId);
+                logger.getBuffer().commit(logMessageObtain3);
             }
         }
-        ClockController createClock2 = createClock("DEFAULT");
-        createClock2.getClass();
-        return createClock2;
+        ClockController clockControllerCreateClock2 = createClock("DEFAULT");
+        clockControllerCreateClock2.getClass();
+        return clockControllerCreateClock2;
     }
 
     public final String getCurrentClockId() {
@@ -463,19 +606,19 @@ public class ClockRegistry {
 
     public final void querySettings() {
         this.f104assert.isNotMainThread();
-        ClockSettings clockSettings = null;
+        ClockSettings clockSettingsFromJson = null;
         try {
             String stringForUser = this.handleAllUsers ? Settings.Secure.getStringForUser(this.context.getContentResolver(), "lock_screen_custom_clock_face", ActivityManager.getCurrentUser()) : Settings.Secure.getString(this.context.getContentResolver(), "lock_screen_custom_clock_face");
             if (stringForUser != null) {
-                clockSettings = ClockSettings.Companion.fromJson(new JSONObject(stringForUser));
+                clockSettingsFromJson = ClockSettings.Companion.fromJson(new JSONObject(stringForUser));
             }
         } catch (Exception e) {
             this.logger.e("Failed to parse clock settings", e);
         }
-        if (Intrinsics.areEqual(this.settings, clockSettings)) {
+        if (Intrinsics.areEqual(this.settings, clockSettingsFromJson)) {
             return;
         }
-        this.settings = clockSettings;
+        this.settings = clockSettingsFromJson;
         verifyLoadedProviders();
         triggerOnCurrentClockChanged();
     }
@@ -486,7 +629,7 @@ public class ClockRegistry {
         }
         this.isRegistered = true;
         this.pluginManager.addPluginListener((PluginListener) this.pluginListener, ClockProviderPlugin.class, true);
-        BuildersKt.launch$default(this.scope, this.bgDispatcher, null, new ClockRegistry$registerListeners$1(this, null), 2);
+        BuildersKt.launch$default(this.scope, this.bgDispatcher, null, new AnonymousClass1(null), 2);
         boolean z = this.handleAllUsers;
         ClockRegistry$settingObserver$1 clockRegistry$settingObserver$1 = this.settingObserver;
         if (!z) {
@@ -499,7 +642,7 @@ public class ClockRegistry {
 
     public final void triggerOnCurrentClockChanged() {
         if (this.isClockChanged.compareAndSet(false, true)) {
-            BuildersKt.launch$default(this.scope, this.mainDispatcher, null, new ClockRegistry$triggerOnCurrentClockChanged$1(this, null), 2);
+            BuildersKt.launch$default(this.scope, this.mainDispatcher, null, new C10431(null), 2);
         }
     }
 
@@ -507,7 +650,7 @@ public class ClockRegistry {
         if (!this.isQueued.compareAndSet(false, true)) {
             Logger.v$default(this.logger, "verifyLoadedProviders: shouldSchedule=false", null, 2, null);
         } else {
-            BuildersKt.launch$default(this.scope, this.bgDispatcher, null, new ClockRegistry$verifyLoadedProviders$1(this, null), 2);
+            BuildersKt.launch$default(this.scope, this.bgDispatcher, null, new C10441(null), 2);
         }
     }
 

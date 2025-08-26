@@ -74,7 +74,7 @@ public class ThemeUtil {
             Slog.i(str, str2);
         }
 
-        public static StringBuilder getLogText() {
+        public static StringBuilder getLogText() throws IOException {
             File[] fileArr = {new File("/data/log/color_palette_log1.txt"), new File("/data/log/color_palette_log0.txt")};
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 2; i++) {
@@ -84,11 +84,11 @@ public class ThemeUtil {
                         BufferedReader bufferedReader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
                         while (true) {
                             try {
-                                String readLine = bufferedReader.readLine();
-                                if (readLine == null) {
+                                String line = bufferedReader.readLine();
+                                if (line == null) {
                                     break;
                                 }
-                                sb.append(readLine);
+                                sb.append(line);
                                 sb.append('\n');
                             } finally {
                             }

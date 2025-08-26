@@ -125,13 +125,13 @@ public final class QosFilter {
 
         public static final ArrayList<TypeOfService> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<TypeOfService> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 2, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 2, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 TypeOfService typeOfService = new TypeOfService();
-                typeOfService.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 2);
+                typeOfService.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 2);
                 arrayList.add(typeOfService);
             }
             return arrayList;
@@ -288,13 +288,13 @@ public final class QosFilter {
 
         public static final ArrayList<Ipv6FlowLabel> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<Ipv6FlowLabel> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 Ipv6FlowLabel ipv6FlowLabel = new Ipv6FlowLabel();
-                ipv6FlowLabel.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 8);
+                ipv6FlowLabel.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 8);
                 arrayList.add(ipv6FlowLabel);
             }
             return arrayList;
@@ -451,13 +451,13 @@ public final class QosFilter {
 
         public static final ArrayList<IpsecSpi> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<IpsecSpi> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 8, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 IpsecSpi ipsecSpi = new IpsecSpi();
-                ipsecSpi.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 8);
+                ipsecSpi.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 8);
                 arrayList.add(ipsecSpi);
             }
             return arrayList;
@@ -537,13 +537,13 @@ public final class QosFilter {
 
     public static final ArrayList<QosFilter> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<QosFilter> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             QosFilter qosFilter = new QosFilter();
-            qosFilter.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 88);
+            qosFilter.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 88);
             arrayList.add(qosFilter);
         }
         return arrayList;
@@ -551,23 +551,23 @@ public final class QosFilter {
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         int int32 = hwBlob.getInt32(j + 8);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j, true);
         this.localAddresses.clear();
         for (int i = 0; i < int32; i++) {
             new String();
             int i2 = i * 16;
-            String string = readEmbeddedBuffer.getString(i2);
-            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, readEmbeddedBuffer.handle(), i2, false);
+            String string = embeddedBuffer.getString(i2);
+            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, embeddedBuffer.handle(), i2, false);
             this.localAddresses.add(string);
         }
         int int322 = hwBlob.getInt32(j + 24);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 16, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 16, true);
         this.remoteAddresses.clear();
         for (int i3 = 0; i3 < int322; i3++) {
             new String();
             int i4 = i3 * 16;
-            String string2 = readEmbeddedBuffer2.getString(i4);
-            hwParcel.readEmbeddedBuffer(string2.getBytes().length + 1, readEmbeddedBuffer2.handle(), i4, false);
+            String string2 = embeddedBuffer2.getString(i4);
+            hwParcel.readEmbeddedBuffer(string2.getBytes().length + 1, embeddedBuffer2.handle(), i4, false);
             this.remoteAddresses.add(string2);
         }
         this.localPort.readEmbeddedFromParcel(hwParcel, hwBlob, j + 32);

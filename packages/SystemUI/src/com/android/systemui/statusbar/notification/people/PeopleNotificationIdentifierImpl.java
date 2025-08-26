@@ -11,9 +11,8 @@ import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.jvm.functions.Function1;
 import kotlin.sequences.TransformingSequence;
-import kotlin.sequences.TransformingSequence$iterator$1;
+import kotlin.sequences.TransformingSequence.AnonymousClass1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PeopleNotificationIdentifierImpl implements PeopleNotificationIdentifier {
     public final GroupMembershipManager groupManager;
@@ -32,7 +31,7 @@ public final class PeopleNotificationIdentifierImpl implements PeopleNotificatio
         int i;
         List children;
         NotificationListenerService.Ranking ranking = notificationEntry.mRanking;
-        int i2 = 0;
+        int iMax = 0;
         if (ranking.isConversation()) {
             i = 1;
             if (ranking.getConversationShortcutInfo() != null) {
@@ -45,21 +44,21 @@ public final class PeopleNotificationIdentifierImpl implements PeopleNotificatio
         if (i != 3) {
             StatusBarNotification statusBarNotification = notificationEntry.mSbn;
             NotificationPersonExtractorPlugin notificationPersonExtractorPlugin = ((NotificationPersonExtractorPluginBoundary) this.personExtractor).plugin;
-            int max = Math.max(i, (int) (notificationPersonExtractorPlugin != null ? notificationPersonExtractorPlugin.isPersonNotification(statusBarNotification) : 0));
-            if (max != 3) {
+            int iMax2 = Math.max(i, (int) (notificationPersonExtractorPlugin != null ? notificationPersonExtractorPlugin.isPersonNotification(statusBarNotification) : 0));
+            if (iMax2 != 3) {
                 GroupMembershipManagerImpl groupMembershipManagerImpl = (GroupMembershipManagerImpl) this.groupManager;
                 if (groupMembershipManagerImpl.isGroupSummary(notificationEntry) && (children = groupMembershipManagerImpl.getChildren(notificationEntry)) != null) {
-                    TransformingSequence$iterator$1 transformingSequence$iterator$1 = new TransformingSequence$iterator$1(new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(children), new Function1() { // from class: com.android.systemui.statusbar.notification.people.PeopleNotificationIdentifierImpl$$ExternalSyntheticLambda0
+                    TransformingSequence.AnonymousClass1 anonymousClass1 = new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(children), new Function1() { // from class: com.android.systemui.statusbar.notification.people.PeopleNotificationIdentifierImpl$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
-                            return Integer.valueOf(PeopleNotificationIdentifierImpl.this.getPeopleNotificationType((NotificationEntry) obj));
+                        public final Object mo781invoke(Object obj) {
+                            return Integer.valueOf(this.f$0.getPeopleNotificationType((NotificationEntry) obj));
                         }
-                    }));
-                    while (transformingSequence$iterator$1.iterator.hasNext() && (i2 = Math.max(i2, ((Number) transformingSequence$iterator$1.next()).intValue())) != 3) {
+                    }).new AnonymousClass1();
+                    while (anonymousClass1.iterator.hasNext() && (iMax = Math.max(iMax, ((Number) anonymousClass1.next()).intValue())) != 3) {
                     }
                 }
-                return Math.max(max, i2);
+                return Math.max(iMax2, iMax);
             }
         }
         return 3;

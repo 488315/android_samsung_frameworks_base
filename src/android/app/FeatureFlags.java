@@ -6,6 +6,8 @@ public interface FeatureFlags {
 
     boolean apiRichOngoing();
 
+    boolean apiRichOngoingPermission();
+
     boolean apiTvextender();
 
     boolean appRestrictionsApi();

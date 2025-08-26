@@ -12,7 +12,6 @@ import com.android.keyguard.logging.KeyguardUpdateMonitorLogger$$ExternalSynthet
 import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class DozeLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -23,7 +22,7 @@ public final /* synthetic */ class DozeLogger$$ExternalSyntheticLambda0 implemen
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -79,12 +78,12 @@ public final /* synthetic */ class DozeLogger$$ExternalSyntheticLambda0 implemen
             case 25:
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Skipping sensor registration because its already registered. sensor=", logMessage.getStr1());
             case 26:
-                String reasonToString = DozeLog.reasonToString(logMessage.getInt1());
+                String strReasonToString = DozeLog.reasonToString(logMessage.getInt1());
                 boolean bool1 = logMessage.getBool1();
                 long long1 = logMessage.getLong1();
-                StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("Proximity result reason=", reasonToString, " near=", " millis=", bool1);
-                m.append(long1);
-                return m.toString();
+                StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("Proximity result reason=", strReasonToString, " near=", " millis=", bool1);
+                sbM.append(long1);
+                return sbM.toString();
             case 27:
                 return "Power save active=" + logMessage.getBool1() + " nextState=" + logMessage.getStr1();
             case 28:

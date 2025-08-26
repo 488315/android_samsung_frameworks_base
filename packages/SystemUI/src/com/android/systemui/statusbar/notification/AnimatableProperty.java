@@ -7,13 +7,11 @@ import com.android.systemui.R;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class AnimatableProperty {
     public static final AnonymousClass7 ALPHA;
     public static final AnonymousClass7 Y;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.AnimatableProperty$5, reason: invalid class name */
     public class AnonymousClass5 extends FloatProperty {
         public final /* synthetic */ Function val$getter;
@@ -37,7 +35,6 @@ public abstract class AnimatableProperty {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.AnimatableProperty$6, reason: invalid class name */
     public class AnonymousClass6 extends AnimatableProperty {
         public final /* synthetic */ int val$animatorTag;
@@ -73,7 +70,6 @@ public abstract class AnimatableProperty {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.AnimatableProperty$7, reason: invalid class name */
     public class AnonymousClass7 extends AnimatableProperty {
         public final /* synthetic */ int val$animatorTag;

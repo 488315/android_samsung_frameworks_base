@@ -6,14 +6,13 @@ import kotlin.jvm.functions.Function1;
 import kotlin.sequences.SequencesKt__SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ViewTreeViewModelStoreOwner {
     public static final ViewModelStoreOwner get(View view) {
         return (ViewModelStoreOwner) SequencesKt___SequencesKt.firstOrNull(SequencesKt___SequencesKt.mapNotNull(SequencesKt__SequencesKt.generateSequence(view, new Function1() { // from class: androidx.lifecycle.ViewTreeViewModelStoreOwner$findViewTreeViewModelStoreOwner$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Object parent = ((View) obj).getParent();
                 if (parent instanceof View) {
                     return (View) parent;
@@ -23,7 +22,7 @@ public abstract class ViewTreeViewModelStoreOwner {
         }), new Function1() { // from class: androidx.lifecycle.ViewTreeViewModelStoreOwner$findViewTreeViewModelStoreOwner$2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Object tag = ((View) obj).getTag(R.id.view_tree_view_model_store_owner);
                 if (tag instanceof ViewModelStoreOwner) {
                     return (ViewModelStoreOwner) tag;

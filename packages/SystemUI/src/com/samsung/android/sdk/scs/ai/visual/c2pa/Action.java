@@ -8,7 +8,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Action {
     private final String action;
@@ -27,7 +26,6 @@ public final class Action {
     private final String softwareAgent;
     private String title;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         private String action;
         private String digitalSourceType;
@@ -264,25 +262,25 @@ public final class Action {
 
     public int hashCode() {
         String str = this.action;
-        int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+        int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
         String str2 = this.digitalSourceType;
-        int hashCode2 = (hashCode + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str2 == null ? 0 : str2.hashCode())) * 31;
         String str3 = this.softwareAgent;
-        int hashCode3 = (hashCode2 + (str3 == null ? 0 : str3.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (str3 == null ? 0 : str3.hashCode())) * 31;
         Parameters parameters = this.parameters;
-        int hashCode4 = (hashCode3 + (parameters == null ? 0 : parameters.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (parameters == null ? 0 : parameters.hashCode())) * 31;
         String str4 = this.actionTime;
-        int hashCode5 = (hashCode4 + (str4 == null ? 0 : str4.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (str4 == null ? 0 : str4.hashCode())) * 31;
         String str5 = this.issuer;
-        int hashCode6 = (hashCode5 + (str5 == null ? 0 : str5.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (str5 == null ? 0 : str5.hashCode())) * 31;
         String str6 = this.claimGenerator;
-        int hashCode7 = (hashCode6 + (str6 == null ? 0 : str6.hashCode())) * 31;
+        int iHashCode7 = (iHashCode6 + (str6 == null ? 0 : str6.hashCode())) * 31;
         Boolean bool = this.isInvalid;
-        int hashCode8 = (hashCode7 + (bool == null ? 0 : bool.hashCode())) * 31;
+        int iHashCode8 = (iHashCode7 + (bool == null ? 0 : bool.hashCode())) * 31;
         String str7 = this.title;
-        int hashCode9 = (hashCode8 + (str7 == null ? 0 : str7.hashCode())) * 31;
+        int iHashCode9 = (iHashCode8 + (str7 == null ? 0 : str7.hashCode())) * 31;
         String str8 = this.activeManifest;
-        return this.ingredientsFile.hashCode() + ((hashCode9 + (str8 != null ? str8.hashCode() : 0)) * 31);
+        return this.ingredientsFile.hashCode() + ((iHashCode9 + (str8 != null ? str8.hashCode() : 0)) * 31);
     }
 
     public final boolean isAiGenerated() {

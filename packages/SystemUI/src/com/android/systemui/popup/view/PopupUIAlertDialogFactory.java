@@ -1,5 +1,6 @@
 package com.android.systemui.popup.view;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import com.android.systemui.BasicRune;
 import com.android.systemui.Dependency;
@@ -10,7 +11,6 @@ import com.android.systemui.popup.util.KeyguardUpdateMonitorWrapper;
 import com.android.systemui.popup.util.PopupUIUtil;
 import com.android.systemui.qp.SubscreenQsPanelController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PopupUIAlertDialogFactory {
     private static final String TAG = "PopupUIAlertDialogFactory";
@@ -60,57 +60,21 @@ public class PopupUIAlertDialogFactory {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0012, code lost:
-    
-        if (r9 != 4) goto L17;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public com.android.systemui.popup.view.PopupUIAlertDialog getDataConnectionDialog(int r9, boolean r10, android.app.PendingIntent r11) {
-        /*
-            r8 = this;
-            r8.initializeDialog()
-            r0 = -1
-            if (r9 == r0) goto L34
-            if (r9 == 0) goto L21
-            r0 = 1
-            if (r9 == r0) goto L21
-            r0 = 2
-            if (r9 == r0) goto L21
-            r0 = 3
-            if (r9 == r0) goto L15
-            r0 = 4
-            if (r9 == r0) goto L21
-            goto L37
-        L15:
-            com.android.systemui.popup.view.DataConnectionDataLimitDialog r9 = new com.android.systemui.popup.view.DataConnectionDataLimitDialog
-            android.content.Context r10 = r8.mContext
-            com.android.systemui.basic.util.LogWrapper r11 = r8.mLogWrapper
-            r9.<init>(r10, r11)
-            r8.mPopupUIAlertDialog = r9
-            goto L37
-        L21:
-            com.android.systemui.popup.view.DataConnectionErrorDialog r0 = new com.android.systemui.popup.view.DataConnectionErrorDialog
-            android.content.Context r1 = r8.mContext
-            com.android.systemui.basic.util.LogWrapper r2 = r8.mLogWrapper
-            java.lang.Runnable r3 = r8.mShowingDialog
-            java.lang.Runnable r4 = r8.mDismissDialog
-            r5 = r9
-            r6 = r10
-            r7 = r11
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7)
-            r8.mPopupUIAlertDialog = r0
-            goto L37
-        L34:
-            r9 = 0
-            r8.mPopupUIAlertDialog = r9
-        L37:
-            com.android.systemui.popup.view.PopupUIAlertDialog r8 = r8.mPopupUIAlertDialog
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.popup.view.PopupUIAlertDialogFactory.getDataConnectionDialog(int, boolean, android.app.PendingIntent):com.android.systemui.popup.view.PopupUIAlertDialog");
+    public PopupUIAlertDialog getDataConnectionDialog(int i, boolean z, PendingIntent pendingIntent) {
+        initializeDialog();
+        if (i == -1) {
+            this.mPopupUIAlertDialog = null;
+        } else if (i == 0 || i == 1 || i == 2) {
+            this.mPopupUIAlertDialog = new DataConnectionErrorDialog(this.mContext, this.mLogWrapper, this.mShowingDialog, this.mDismissDialog, i, z, pendingIntent);
+        } else if (i == 3) {
+            this.mPopupUIAlertDialog = new DataConnectionDataLimitDialog(this.mContext, this.mLogWrapper);
+        } else if (i == 4) {
+        }
+        return this.mPopupUIAlertDialog;
     }
 
     public PopupUIAlertDialog getOverheatWarningDialog(String str, boolean z, boolean z2) {

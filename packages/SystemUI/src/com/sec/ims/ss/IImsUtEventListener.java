@@ -7,7 +7,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IImsUtEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.ss.IImsUtEventListener";
@@ -26,7 +25,6 @@ public interface IImsUtEventListener extends IInterface {
 
     void onUtConfigurationUpdated(int i) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IImsUtEventListener {
         static final int TRANSACTION_onUtConfigurationCallBarringQueried = 7;
         static final int TRANSACTION_onUtConfigurationCallForwardQueried = 6;
@@ -36,7 +34,6 @@ public interface IImsUtEventListener extends IInterface {
         static final int TRANSACTION_onUtConfigurationUpdateFailed = 1;
         static final int TRANSACTION_onUtConfigurationUpdated = 4;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IImsUtEventListener {
             private IBinder mRemote;
 
@@ -55,112 +52,112 @@ public interface IImsUtEventListener extends IInterface {
 
             @Override // com.sec.ims.ss.IImsUtEventListener
             public void onUtConfigurationCallBarringQueried(int i, Bundle[] bundleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(bundleArr, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(bundleArr, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ss.IImsUtEventListener
             public void onUtConfigurationCallForwardQueried(int i, Bundle[] bundleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(bundleArr, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(bundleArr, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ss.IImsUtEventListener
             public void onUtConfigurationCallWaitingQueried(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ss.IImsUtEventListener
             public void onUtConfigurationQueried(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ss.IImsUtEventListener
             public void onUtConfigurationQueryFailed(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ss.IImsUtEventListener
             public void onUtConfigurationUpdateFailed(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.ss.IImsUtEventListener
             public void onUtConfigurationUpdated(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsUtEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -173,8 +170,8 @@ public interface IImsUtEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsUtEventListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IImsUtEventListener)) ? new Proxy(iBinder) : (IImsUtEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsUtEventListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IImsUtEventListener)) ? new Proxy(iBinder) : (IImsUtEventListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -188,51 +185,51 @@ public interface IImsUtEventListener extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onUtConfigurationUpdateFailed(readInt, bundle);
+                    onUtConfigurationUpdateFailed(i3, bundle);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onUtConfigurationQueryFailed(readInt2, bundle2);
+                    onUtConfigurationQueryFailed(i4, bundle2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onUtConfigurationQueried(readInt3, bundle3);
+                    onUtConfigurationQueried(i5, bundle3);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onUtConfigurationUpdated(readInt4);
+                    onUtConfigurationUpdated(i6);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i7 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onUtConfigurationCallWaitingQueried(readInt5, readBoolean);
+                    onUtConfigurationCallWaitingQueried(i7, z);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     Bundle[] bundleArr = (Bundle[]) parcel.createTypedArray(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onUtConfigurationCallForwardQueried(readInt6, bundleArr);
+                    onUtConfigurationCallForwardQueried(i8, bundleArr);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     Bundle[] bundleArr2 = (Bundle[]) parcel.createTypedArray(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onUtConfigurationCallBarringQueried(readInt7, bundleArr2);
+                    onUtConfigurationCallBarringQueried(i9, bundleArr2);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -246,7 +243,6 @@ public interface IImsUtEventListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IImsUtEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

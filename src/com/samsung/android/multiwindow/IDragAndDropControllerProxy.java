@@ -45,9 +45,9 @@ public interface IDragAndDropControllerProxy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDragAndDropControllerProxy.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDragAndDropControllerProxy)) {
-                return (IDragAndDropControllerProxy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDragAndDropControllerProxy.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDragAndDropControllerProxy)) {
+                return (IDragAndDropControllerProxy) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IDragAndDropControllerProxy extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                show(readInt);
+                show(i3);
                 parcel2.writeNoException();
                 return true;
             }
@@ -101,16 +101,16 @@ public interface IDragAndDropControllerProxy extends IInterface {
 
             @Override // com.samsung.android.multiwindow.IDragAndDropControllerProxy
             public void show(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDragAndDropControllerProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDragAndDropControllerProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -3,7 +3,6 @@ package androidx.core.animation;
 import android.view.Choreographer;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AnimationHandler {
     public static final ThreadLocal sAnimationHandler = new ThreadLocal();
@@ -11,16 +10,13 @@ public class AnimationHandler {
     public boolean mListDirty = false;
     public final AnimationFrameCallbackProvider mProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AnimationFrameCallback {
         boolean doAnimationFrame(long j);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AnimationFrameCallbackProvider {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FrameCallbackProvider16 implements AnimationFrameCallbackProvider, Choreographer.FrameCallback {
         public FrameCallbackProvider16() {
         }

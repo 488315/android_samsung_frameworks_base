@@ -52,9 +52,9 @@ public interface ISnapshotRuntimeProfileCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISnapshotRuntimeProfileCallback)) {
-                return (ISnapshotRuntimeProfileCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISnapshotRuntimeProfileCallback)) {
+                return (ISnapshotRuntimeProfileCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,9 +88,9 @@ public interface ISnapshotRuntimeProfileCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onSuccess(parcelFileDescriptor);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onError(readInt);
+                onError(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,25 +115,25 @@ public interface ISnapshotRuntimeProfileCallback extends IInterface {
 
             @Override // android.content.pm.dex.ISnapshotRuntimeProfileCallback
             public void onSuccess(ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.dex.ISnapshotRuntimeProfileCallback
             public void onError(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

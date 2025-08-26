@@ -41,14 +41,14 @@ public class MediaRouteChooserDialog extends AlertDialog implements MediaRouteCh
 
     @Override // android.app.AlertDialog, android.app.Dialog
     protected void onCreate(Bundle bundle) {
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.media_route_chooser_dialog, (ViewGroup) null);
-        setView(inflate);
+        View viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.media_route_chooser_dialog, (ViewGroup) null);
+        setView(viewInflate);
         setTitle(this.mContentManager.getRouteTypes() == 4 ? R.string.media_route_chooser_title_for_remote_display : R.string.media_route_chooser_title);
         setIcon(isLightTheme(getContext()) ? R.drawable.ic_media_route_off_holo_light : R.drawable.ic_media_route_off_holo_dark);
         super.onCreate(bundle);
         this.mExtendedSettingsButton = (Button) findViewById(R.id.media_route_extended_settings_button);
         updateExtendedSettingsButton();
-        this.mContentManager.bindViews(inflate);
+        this.mContentManager.bindViews(viewInflate);
     }
 
     private void updateExtendedSettingsButton() {

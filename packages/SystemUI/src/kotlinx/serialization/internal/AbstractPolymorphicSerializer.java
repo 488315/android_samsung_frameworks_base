@@ -16,7 +16,6 @@ import kotlinx.serialization.SerializationException;
 import kotlinx.serialization.encoding.AbstractEncoder;
 import kotlinx.serialization.modules.SerialModuleImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractPolymorphicSerializer implements KSerializer {
     public abstract KClass getBaseClass();
@@ -40,7 +39,7 @@ public abstract class AbstractPolymorphicSerializer implements KSerializer {
                 Object obj2 = serializersModule.polyBase2DefaultSerializerProvider.get(classReference);
                 Function1 function1 = TypeIntrinsics.isFunctionOfArity(1, obj2) ? (Function1) obj2 : null;
                 if (function1 != null) {
-                    kSerializer = (KSerializer) function1.mo779invoke(obj);
+                    kSerializer = (KSerializer) function1.mo781invoke(obj);
                 }
             }
         }
@@ -61,10 +60,10 @@ public abstract class AbstractPolymorphicSerializer implements KSerializer {
             simpleName = String.valueOf(orCreateKotlinClass);
         }
         ClassReference classReference2 = (ClassReference) baseClass2;
-        String m = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("in the polymorphic scope of '", classReference2.getSimpleName(), "'");
+        String strM = ContentInViewNode$Request$$ExternalSyntheticOutline0.m("in the polymorphic scope of '", classReference2.getSimpleName(), "'");
         String simpleName2 = classReference2.getSimpleName();
-        StringBuilder m2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Serializer for subclass '", simpleName, "' is not found ", m, ".\nCheck if class with serial name '");
-        MoveResult$$ExternalSyntheticOutline0.m(m2, simpleName, "' exists and serializer is registered in a corresponding SerializersModule.\nTo be registered automatically, class '", simpleName, "' has to be '@Serializable', and the base class '");
-        throw new SerializationException(TransitionKt$$ExternalSyntheticOutline0.m(m2, simpleName2, "' has to be sealed and '@Serializable'."));
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Serializer for subclass '", simpleName, "' is not found ", strM, ".\nCheck if class with serial name '");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, simpleName, "' exists and serializer is registered in a corresponding SerializersModule.\nTo be registered automatically, class '", simpleName, "' has to be '@Serializable', and the base class '");
+        throw new SerializationException(TransitionKt$$ExternalSyntheticOutline0.m(sbM, simpleName2, "' has to be sealed and '@Serializable'."));
     }
 }

@@ -64,14 +64,14 @@ public class SemWallpaperProperties {
     public void refresh() {
         this.mDlsStateShot = new DlsStateShot(this.mContext, this.mUserId);
         this.mTargetWhich = getPairingConsideredTargetWhich(this.mOriginalWhich);
-        boolean isDlsEnabled = isDlsEnabled();
-        if (!isDlsEnabled) {
+        boolean zIsDlsEnabled = isDlsEnabled();
+        if (!zIsDlsEnabled) {
             this.mExtras = this.mWallpaperManager.getWallpaperExtras(this.mTargetWhich, this.mUserId);
         }
         if (this.mExtras == null) {
             this.mExtras = new Bundle();
         }
-        Log.d(TAG, "refresh: which=" + this.mOriginalWhich + ", targetWhich=" + this.mTargetWhich + ", dlsEnabled=" + isDlsEnabled + ", dlsState=" + this.mDlsStateShot.getStateCode() + ", userId=" + this.mUserId);
+        Log.d(TAG, "refresh: which=" + this.mOriginalWhich + ", targetWhich=" + this.mTargetWhich + ", dlsEnabled=" + zIsDlsEnabled + ", dlsState=" + this.mDlsStateShot.getStateCode() + ", userId=" + this.mUserId);
     }
 
     public boolean isSupportFullAod() {
@@ -189,11 +189,11 @@ public class SemWallpaperProperties {
         if (!WhichChecker.isSystem(this.mOriginalWhich)) {
             throw new IllegalArgumentException("Only supports FLAG_SYSTEM. which=" + this.mOriginalWhich);
         }
-        int semGetWallpaperType = this.mWallpaperManager.semGetWallpaperType(this.mTargetWhich);
-        if (semGetWallpaperType == 0) {
+        int iSemGetWallpaperType = this.mWallpaperManager.semGetWallpaperType(this.mTargetWhich);
+        if (iSemGetWallpaperType == 0) {
             return true;
         }
-        if (semGetWallpaperType != 7) {
+        if (iSemGetWallpaperType != 7) {
             return false;
         }
         return VALUE_CONTENT_TYPE_LAYERED.equals(getContentType());
@@ -212,11 +212,11 @@ public class SemWallpaperProperties {
             Log.e(TAG, "isDefaultLiveWallpaper : factory default component is null");
             return false;
         }
-        ComponentName semGetWallpaperComponent = this.mWallpaperManager.semGetWallpaperComponent(this.mTargetWhich, this.mUserId);
-        if (semGetWallpaperComponent == null) {
+        ComponentName componentNameSemGetWallpaperComponent = this.mWallpaperManager.semGetWallpaperComponent(this.mTargetWhich, this.mUserId);
+        if (componentNameSemGetWallpaperComponent == null) {
             return false;
         }
-        return defaultLiveWallpaperComponentName.equals(semGetWallpaperComponent);
+        return defaultLiveWallpaperComponentName.equals(componentNameSemGetWallpaperComponent);
     }
 
     private boolean hasCroppedObject() {

@@ -52,7 +52,7 @@ public final class SharedFilter implements AutoCloseable {
                 executor.execute(new Runnable() { // from class: android.media.tv.tuner.filter.SharedFilter$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SharedFilter.this.lambda$onFilterStatus$0(i);
+                        this.f$0.lambda$onFilterStatus$0(i);
                     }
                 });
             }
@@ -82,7 +82,7 @@ public final class SharedFilter implements AutoCloseable {
                 executor.execute(new Runnable() { // from class: android.media.tv.tuner.filter.SharedFilter$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SharedFilter.this.lambda$onFilterEvent$1(filterEventArr);
+                        this.f$0.lambda$onFilterEvent$1(filterEventArr);
                     }
                 });
             }
@@ -121,43 +121,43 @@ public final class SharedFilter implements AutoCloseable {
     }
 
     public int start() {
-        int nativeStartSharedFilter;
+        int iNativeStartSharedFilter;
         synchronized (this.mLock) {
             TunerUtils.checkResourceAccessible(TAG, this.mIsAccessible);
             TunerUtils.checkResourceState(TAG, this.mIsClosed);
-            nativeStartSharedFilter = nativeStartSharedFilter();
+            iNativeStartSharedFilter = nativeStartSharedFilter();
         }
-        return nativeStartSharedFilter;
+        return iNativeStartSharedFilter;
     }
 
     public int stop() {
-        int nativeStopSharedFilter;
+        int iNativeStopSharedFilter;
         synchronized (this.mLock) {
             TunerUtils.checkResourceAccessible(TAG, this.mIsAccessible);
             TunerUtils.checkResourceState(TAG, this.mIsClosed);
-            nativeStopSharedFilter = nativeStopSharedFilter();
+            iNativeStopSharedFilter = nativeStopSharedFilter();
         }
-        return nativeStopSharedFilter;
+        return iNativeStopSharedFilter;
     }
 
     public int flush() {
-        int nativeFlushSharedFilter;
+        int iNativeFlushSharedFilter;
         synchronized (this.mLock) {
             TunerUtils.checkResourceAccessible(TAG, this.mIsAccessible);
             TunerUtils.checkResourceState(TAG, this.mIsClosed);
-            nativeFlushSharedFilter = nativeFlushSharedFilter();
+            iNativeFlushSharedFilter = nativeFlushSharedFilter();
         }
-        return nativeFlushSharedFilter;
+        return iNativeFlushSharedFilter;
     }
 
     public int read(byte[] bArr, long j, long j2) {
-        int nativeSharedRead;
+        int iNativeSharedRead;
         synchronized (this.mLock) {
             TunerUtils.checkResourceAccessible(TAG, this.mIsAccessible);
             TunerUtils.checkResourceState(TAG, this.mIsClosed);
-            nativeSharedRead = nativeSharedRead(bArr, j, Math.min(j2, bArr.length - j));
+            iNativeSharedRead = nativeSharedRead(bArr, j, Math.min(j2, bArr.length - j));
         }
-        return nativeSharedRead;
+        return iNativeSharedRead;
     }
 
     @Override // java.lang.AutoCloseable

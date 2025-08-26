@@ -16,9 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import androidx.collection.ArrayMap;
+import androidx.collection.IndexBasedArrayIterator;
 import com.android.internal.policy.SystemBarUtils;
 import com.android.internal.statusbar.StatusBarIcon;
 import com.android.internal.util.ContrastColorUtil;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.settingslib.Utils;
@@ -39,18 +42,22 @@ import com.android.systemui.statusbar.StatusBarIconView;
 import com.android.systemui.statusbar.headsup.shared.StatusBarNoHunBehavior;
 import com.android.systemui.statusbar.notification.NotificationUtils;
 import com.android.systemui.statusbar.notification.NotificationWakeUpCoordinator;
+import com.android.systemui.statusbar.notification.collection.NotificationEntry;
+import com.android.systemui.statusbar.notification.collection.PipelineEntry;
 import com.android.systemui.statusbar.notification.collection.provider.SectionStyleProvider;
 import com.android.systemui.statusbar.notification.shared.NotificationIconContainerRefactor;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallController;
 import com.android.systemui.util.SettingsHelper;
+import com.android.wm.shell.bubbles.BubbleController;
 import com.android.wm.shell.bubbles.Bubbles;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LegacyNotificationIconAreaControllerImpl implements NotificationIconAreaController, DarkIconDispatcher.DarkReceiver, StatusBarStateController.StateListener, NotificationWakeUpCoordinator.WakeUpListener, DemoMode {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -83,14 +90,12 @@ public class LegacyNotificationIconAreaControllerImpl implements NotificationIco
     public final ArrayList mTintAreas = new ArrayList();
     public boolean mShowLowPriority = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.LegacyNotificationIconAreaControllerImpl$1, reason: invalid class name */
     public class AnonymousClass1 implements NotificationListener.NotificationSettingsListener {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.LegacyNotificationIconAreaControllerImpl$3, reason: invalid class name */
     class AnonymousClass3 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass3() {
@@ -102,15 +107,15 @@ public class LegacyNotificationIconAreaControllerImpl implements NotificationIco
         }
     }
 
-    public LegacyNotificationIconAreaControllerImpl(SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper, Context context, StatusBarStateController statusBarStateController, NotificationWakeUpCoordinator notificationWakeUpCoordinator, KeyguardBypassController keyguardBypassController, NotificationMediaManager notificationMediaManager, NotificationListener notificationListener, DozeParameters dozeParameters, SectionStyleProvider sectionStyleProvider, Optional<Bubbles> optional, DemoModeController demoModeController, DarkIconDispatcher darkIconDispatcher, FeatureFlags featureFlags, ScreenOffAnimationController screenOffAnimationController, IndicatorScaleGardener indicatorScaleGardener, OngoingCallController ongoingCallController) {
+    public LegacyNotificationIconAreaControllerImpl(SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper, Context context, StatusBarStateController statusBarStateController, NotificationWakeUpCoordinator notificationWakeUpCoordinator, KeyguardBypassController keyguardBypassController, NotificationMediaManager notificationMediaManager, NotificationListener notificationListener, DozeParameters dozeParameters, SectionStyleProvider sectionStyleProvider, Optional<Bubbles> optional, DemoModeController demoModeController, DarkIconDispatcher darkIconDispatcher, FeatureFlags featureFlags, ScreenOffAnimationController screenOffAnimationController, IndicatorScaleGardener indicatorScaleGardener, OngoingCallController ongoingCallController) throws Resources.NotFoundException {
         AnonymousClass1 anonymousClass1 = new AnonymousClass1();
         this.mSettingsListener = anonymousClass1;
         this.mSettingsCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.phone.LegacyNotificationIconAreaControllerImpl.2
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
-            public final void onChanged(Uri uri) {
-                boolean equals = uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_STATUSBAR_NOTIFICATION_STYLE));
+            public final void onChanged(Uri uri) throws Resources.NotFoundException {
+                boolean zEquals = uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_STATUSBAR_NOTIFICATION_STYLE));
                 LegacyNotificationIconAreaControllerImpl legacyNotificationIconAreaControllerImpl = LegacyNotificationIconAreaControllerImpl.this;
-                if (!equals) {
+                if (!zEquals) {
                     if (uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_LOCKSCREEN_MINIMIZING_NOTIFICATION))) {
                         legacyNotificationIconAreaControllerImpl.mIsNotificationDotOnlyOn = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isNotificationAsDot();
                         return;
@@ -151,9 +156,9 @@ public class LegacyNotificationIconAreaControllerImpl implements NotificationIco
         RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
         notificationListener.mSettingsListeners.add(anonymousClass1);
         reloadDimens(context);
-        View inflate = LayoutInflater.from(context).inflate(R.layout.notification_icon_area, (ViewGroup) null);
-        this.mNotificationIconArea = inflate;
-        this.mNotificationIcons = (NotificationIconContainer) inflate.findViewById(R.id.notificationIcons);
+        View viewInflate = LayoutInflater.from(context).inflate(R.layout.notification_icon_area, (ViewGroup) null);
+        this.mNotificationIconArea = viewInflate;
+        this.mNotificationIcons = (NotificationIconContainer) viewInflate.findViewById(R.id.notificationIcons);
         Utils.getColorAttrDefaultColor(context, R.attr.wallpaperTextColor, -1);
         darkIconDispatcher.addDarkReceiver(this);
         ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).registerCallback(this.mSettingsCallback, Settings.System.getUriFor(SettingsHelper.INDEX_STATUSBAR_NOTIFICATION_STYLE));
@@ -213,52 +218,178 @@ public class LegacyNotificationIconAreaControllerImpl implements NotificationIco
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:20:0x013c  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x026b  */
     @Override // com.android.systemui.statusbar.phone.NotificationIconAreaController
-    public final void dump(PrintWriter printWriter) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void dump(PrintWriter printWriter) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         String str;
+        String str2;
+        String str3;
+        String str4;
+        String str5;
+        String str6;
+        String str7;
+        String str8;
+        int i;
+        String resourceName;
+        LegacyNotificationIconAreaControllerImpl legacyNotificationIconAreaControllerImpl;
+        String resourceName2;
+        LegacyNotificationIconAreaControllerImpl legacyNotificationIconAreaControllerImpl2 = this;
+        String str9 = "  ";
+        printWriter.println("  ");
         printWriter.println("NotificationIconAreaController state:");
-        int childCount = this.mNotificationIcons.getChildCount();
-        printWriter.println("  noti icons: " + childCount + String.format("  tintColor=0x%08x", Integer.valueOf(this.mIconTint)));
-        if (this.mStatusBarNotificationStyle != 0) {
-            MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder(" statusbar notification style : "), this.mStatusBarNotificationStyle, printWriter);
-        }
-        for (int i = 0; i < childCount; i++) {
-            StatusBarIconView statusBarIconView = (StatusBarIconView) this.mNotificationIcons.getChildAt(i);
-            boolean isGrayscale = NotificationUtils.isGrayscale(statusBarIconView, this.mContrastColorUtil);
-            boolean isInAreas = DarkIconDispatcher.isInAreas(this.mTintAreas, statusBarIconView);
-            printWriter.println("    [" + i + "] icon=" + statusBarIconView + " / getVisibleState " + statusBarIconView.mVisibleState + "/ getIconAppearAmount " + statusBarIconView.mIconAppearAmount + " / getDotAppearAmount " + statusBarIconView.mDotAppearAmount + " / getAlpha " + statusBarIconView.getAlpha() + " / getVisibility " + statusBarIconView.getVisibility() + " / getTranslationX " + statusBarIconView.getTranslationX());
-            StringBuilder sb = new StringBuilder(" colorize=");
-            sb.append(isGrayscale);
-            sb.append(" isInAreas=");
-            sb.append(isInAreas);
-            sb.append(String.format("  color=0x%08x", Integer.valueOf(statusBarIconView.mDrawableColor)));
-            printWriter.println(sb.toString());
+        int childCount = legacyNotificationIconAreaControllerImpl2.mNotificationIcons.getChildCount();
+        StringBuilder sb = new StringBuilder("  statusbar noti icons: ");
+        sb.append(childCount);
+        String str10 = "  tintColor=0x%08x";
+        sb.append(String.format("  tintColor=0x%08x", Integer.valueOf(legacyNotificationIconAreaControllerImpl2.mIconTint)));
+        printWriter.println(sb.toString());
+        MagnificationImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  statusbar notification style : "), legacyNotificationIconAreaControllerImpl2.mStatusBarNotificationStyle, printWriter);
+        int i2 = 0;
+        while (true) {
+            str = " / getAlpha ";
+            str2 = str10;
+            str3 = str9;
+            str4 = "] icon=";
+            str5 = " iconStr=";
+            if (i2 >= childCount) {
+                break;
+            }
+            int i3 = childCount;
+            StatusBarIconView statusBarIconView = (StatusBarIconView) legacyNotificationIconAreaControllerImpl2.mNotificationIcons.getChildAt(i2);
+            boolean zIsGrayscale = NotificationUtils.isGrayscale(statusBarIconView, legacyNotificationIconAreaControllerImpl2.mContrastColorUtil);
+            boolean zIsInAreas = DarkIconDispatcher.isInAreas(legacyNotificationIconAreaControllerImpl2.mTintAreas, statusBarIconView);
+            printWriter.println("    [" + i2 + "] icon=" + statusBarIconView + " / getVisibleState " + statusBarIconView.mVisibleState + "/ getIconAppearAmount " + statusBarIconView.mIconAppearAmount + " / getDotAppearAmount " + statusBarIconView.mDotAppearAmount + " / getAlpha " + statusBarIconView.getAlpha() + " / getVisibility " + statusBarIconView.getVisibility() + " / getTranslationX " + statusBarIconView.getTranslationX());
+            StringBuilder sb2 = new StringBuilder(" colorize=");
+            sb2.append(zIsGrayscale);
+            sb2.append(" isInAreas=");
+            sb2.append(zIsInAreas);
+            sb2.append(String.format("  color=0x%08x", Integer.valueOf(statusBarIconView.mDrawableColor)));
+            printWriter.println(sb2.toString());
             StatusBarIcon statusBarIcon = statusBarIconView.mIcon;
             if (statusBarIcon != null) {
                 Icon icon = statusBarIcon.icon;
-                String valueOf = String.valueOf(icon);
-                if (icon != null && icon.getType() == 2) {
-                    StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(valueOf, " / ");
-                    Context context = this.mContext;
+                String strValueOf = String.valueOf(icon);
+                if (icon == null || icon.getType() != 2) {
+                    legacyNotificationIconAreaControllerImpl = this;
+                } else {
+                    StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strValueOf, " / ");
+                    legacyNotificationIconAreaControllerImpl = this;
+                    Context contextCreatePackageContext = legacyNotificationIconAreaControllerImpl.mContext;
                     String resPackage = icon.getResPackage();
                     int resId = icon.getResId();
                     if (resPackage != null) {
                         try {
-                            context = context.createPackageContext(resPackage, 0);
+                            contextCreatePackageContext = contextCreatePackageContext.createPackageContext(resPackage, 0);
                         } catch (PackageManager.NameNotFoundException unused) {
                         }
                     }
                     try {
-                        str = context.getResources().getResourceName(resId);
+                        resourceName2 = contextCreatePackageContext.getResources().getResourceName(resId);
                     } catch (Resources.NotFoundException unused2) {
-                        str = "<name unknown>";
+                        resourceName2 = "<name unknown>";
                     }
-                    m.append(str);
-                    ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, " iconStr=", m.toString());
+                    sbM.append(resourceName2);
+                    ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, str5, sbM.toString());
                 }
             }
+            i2++;
+            legacyNotificationIconAreaControllerImpl2 = legacyNotificationIconAreaControllerImpl;
+            str10 = str2;
+            str9 = str3;
+            childCount = i3;
         }
-        printWriter.println("  ");
+        LegacyNotificationIconAreaControllerImpl legacyNotificationIconAreaControllerImpl3 = legacyNotificationIconAreaControllerImpl2;
+        printWriter.println(str3);
+        int childCount2 = legacyNotificationIconAreaControllerImpl3.mKeyguardStatusBarIcons.getChildCount();
+        String str11 = " / ";
+        StringBuilder sb3 = new StringBuilder("  keyguard noti icons: ");
+        sb3.append(childCount2);
+        String str12 = "  color=0x%08x";
+        sb3.append(String.format(str2, Integer.valueOf(legacyNotificationIconAreaControllerImpl3.mIconTint)));
+        printWriter.println(sb3.toString());
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  keyguard notification style is Dot: "), legacyNotificationIconAreaControllerImpl3.mIsNotificationDotOnlyOn, printWriter);
+        int i4 = 0;
+        while (i4 < childCount2) {
+            StatusBarIconView statusBarIconView2 = (StatusBarIconView) legacyNotificationIconAreaControllerImpl3.mKeyguardStatusBarIcons.getChildAt(i4);
+            boolean zIsGrayscale2 = NotificationUtils.isGrayscale(statusBarIconView2, legacyNotificationIconAreaControllerImpl3.mContrastColorUtil);
+            int i5 = childCount2;
+            boolean zIsInAreas2 = DarkIconDispatcher.isInAreas(legacyNotificationIconAreaControllerImpl3.mTintAreas, statusBarIconView2);
+            StringBuilder sb4 = new StringBuilder("    [");
+            sb4.append(i4);
+            sb4.append(str4);
+            sb4.append(statusBarIconView2);
+            sb4.append(" / getVisibleState ");
+            String str13 = str4;
+            sb4.append(statusBarIconView2.mVisibleState);
+            sb4.append("/ getIconAppearAmount ");
+            sb4.append(statusBarIconView2.mIconAppearAmount);
+            sb4.append(" / getDotAppearAmount ");
+            sb4.append(statusBarIconView2.mDotAppearAmount);
+            sb4.append(str);
+            sb4.append(statusBarIconView2.getAlpha());
+            sb4.append(" / getVisibility ");
+            sb4.append(statusBarIconView2.getVisibility());
+            sb4.append(" / getTranslationX ");
+            sb4.append(statusBarIconView2.getTranslationX());
+            printWriter.println(sb4.toString());
+            StringBuilder sb5 = new StringBuilder(" colorize=");
+            sb5.append(zIsGrayscale2);
+            sb5.append(" isInAreas=");
+            sb5.append(zIsInAreas2);
+            String str14 = str12;
+            sb5.append(String.format(str14, Integer.valueOf(statusBarIconView2.mDrawableColor)));
+            printWriter.println(sb5.toString());
+            StatusBarIcon statusBarIcon2 = statusBarIconView2.mIcon;
+            if (statusBarIcon2 != null) {
+                Icon icon2 = statusBarIcon2.icon;
+                String strValueOf2 = String.valueOf(icon2);
+                if (icon2 == null || icon2.getType() != 2) {
+                    legacyNotificationIconAreaControllerImpl3 = this;
+                    str6 = str;
+                    str7 = str5;
+                    str8 = str11;
+                    i = i4;
+                } else {
+                    String str15 = str11;
+                    StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strValueOf2, str15);
+                    legacyNotificationIconAreaControllerImpl3 = this;
+                    Context contextCreatePackageContext2 = legacyNotificationIconAreaControllerImpl3.mContext;
+                    i = i4;
+                    String resPackage2 = icon2.getResPackage();
+                    str6 = str;
+                    int resId2 = icon2.getResId();
+                    if (resPackage2 != null) {
+                        str8 = str15;
+                        try {
+                            contextCreatePackageContext2 = contextCreatePackageContext2.createPackageContext(resPackage2, 0);
+                        } catch (PackageManager.NameNotFoundException unused3) {
+                        }
+                    } else {
+                        str8 = str15;
+                    }
+                    try {
+                        resourceName = contextCreatePackageContext2.getResources().getResourceName(resId2);
+                    } catch (Resources.NotFoundException unused4) {
+                        resourceName = "<name unknown>";
+                    }
+                    sbM2.append(resourceName);
+                    String string = sbM2.toString();
+                    str7 = str5;
+                    ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, str7, string);
+                }
+            }
+            i4 = i + 1;
+            str5 = str7;
+            childCount2 = i5;
+            str4 = str13;
+            str11 = str8;
+            str = str6;
+            str12 = str14;
+        }
     }
 
     @Override // com.android.systemui.statusbar.phone.NotificationIconAreaController
@@ -290,7 +421,7 @@ public class LegacyNotificationIconAreaControllerImpl implements NotificationIco
     }
 
     @Override // com.android.systemui.statusbar.phone.NotificationIconAreaController
-    public final void onDensityOrFontScaleChanged(Context context) {
+    public final void onDensityOrFontScaleChanged(Context context) throws Resources.NotFoundException {
         reloadDimens(context);
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams((this.mIconHPadding * 2) + this.mIconSize, SystemBarUtils.getStatusBarHeight(this.mContext));
         for (int i = 0; i < this.mNotificationIcons.getChildCount(); i++) {
@@ -319,7 +450,7 @@ public class LegacyNotificationIconAreaControllerImpl implements NotificationIco
         Utils.getColorAttrDefaultColor(this.mContext, R.attr.wallpaperTextColor, -1);
     }
 
-    public final void reloadDimens(Context context) {
+    public final void reloadDimens(Context context) throws Resources.NotFoundException {
         Resources resources = context.getResources();
         this.mIconSize = resources.getDimensionPixelSize(R.dimen.notification_icon_view_width);
         this.mIconSize = (int) (this.mIconSize * this.mIndicatorScaleGardener.getLatestScaleModel(this.mContext).ratio);
@@ -334,7 +465,7 @@ public class LegacyNotificationIconAreaControllerImpl implements NotificationIco
     }
 
     @Override // com.android.systemui.statusbar.phone.NotificationIconAreaController
-    public final void setIsolatedIconLocation(Rect rect, boolean z) {
+    public final void setIsolatedIconLocation(Rect rect, boolean z) throws Resources.NotFoundException {
         NotificationIconContainer notificationIconContainer = this.mNotificationIcons;
         notificationIconContainer.getClass();
         int i = StatusBarNoHunBehavior.$r8$clinit;
@@ -368,7 +499,7 @@ public class LegacyNotificationIconAreaControllerImpl implements NotificationIco
     }
 
     @Override // com.android.systemui.statusbar.phone.NotificationIconAreaController
-    public final void showIconIsolated(StatusBarIconView statusBarIconView, boolean z) {
+    public final void showIconIsolated(StatusBarIconView statusBarIconView, boolean z) throws Resources.NotFoundException {
         NotificationIconContainer notificationIconContainer = this.mNotificationIcons;
         notificationIconContainer.getClass();
         int i = NotificationIconContainerRefactor.$r8$clinit;
@@ -392,24 +523,119 @@ public class LegacyNotificationIconAreaControllerImpl implements NotificationIco
         notificationIconContainer.setAnimationsEnabled(z);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x0054, code lost:
-    
-        if (r10 != false) goto L61;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x005a, code lost:
-    
-        if (r6.mIsReaded != false) goto L61;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x005e  */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x00d6  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateIconsForLayout(java.util.function.Function r17, com.android.systemui.statusbar.phone.NotificationIconContainer r18, boolean r19, boolean r20, boolean r21, boolean r22) {
-        /*
-            Method dump skipped, instructions count: 520
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.LegacyNotificationIconAreaControllerImpl.updateIconsForLayout(java.util.function.Function, com.android.systemui.statusbar.phone.NotificationIconContainer, boolean, boolean, boolean, boolean):void");
+    public final void updateIconsForLayout(Function function, NotificationIconContainer notificationIconContainer, boolean z, boolean z2, boolean z3, boolean z4) {
+        int i;
+        ArrayList arrayList = new ArrayList(this.mNotificationEntries.size());
+        for (int i2 = 0; i2 < this.mNotificationEntries.size(); i2++) {
+            NotificationEntry representativeEntry = ((PipelineEntry) this.mNotificationEntries.get(i2)).getRepresentativeEntry();
+            if (representativeEntry != null && representativeEntry.row != null) {
+                if (z4) {
+                    if (representativeEntry.getAttachedNotifChildren() != null) {
+                        ArrayList arrayList2 = (ArrayList) representativeEntry.getAttachedNotifChildren();
+                        int size = arrayList2.size();
+                        boolean z5 = true;
+                        int i3 = 0;
+                        while (i3 < size) {
+                            Object obj = arrayList2.get(i3);
+                            i3++;
+                            z5 = z5 && ((NotificationEntry) obj).mIsReaded;
+                        }
+                        if (z5) {
+                        }
+                    } else if (representativeEntry.mIsReaded) {
+                    }
+                } else if ((!representativeEntry.mRanking.isAmbient() || z) && ((z2 || representativeEntry.mRanking.getImportance() >= 3) && ((!representativeEntry.isRowDismissed() || !z3) && ((z || !representativeEntry.shouldSuppressVisualEffect(32)) && ((!this.mBubblesOptional.isPresent() || !((BubbleController.BubblesImpl) ((Bubbles) this.mBubblesOptional.get())).isBubbleExpanded(representativeEntry.mKey)) && ((!this.mOngoingCallController.hasOngoingCall() || ((i = representativeEntry.mSbn.getNotification().extras.getInt("android.callType", -1)) != 2 && i != 1 && i != 3)) && ((!representativeEntry.isOngoingActivity() || !representativeEntry.isPromotedState()) && !representativeEntry.isInsignificant()))))))) {
+                    StatusBarIconView statusBarIconView = (StatusBarIconView) function.apply(representativeEntry);
+                    if (statusBarIconView != null) {
+                        arrayList.add(statusBarIconView);
+                    }
+                }
+            }
+        }
+        ArrayMap arrayMap = new ArrayMap();
+        ArrayList arrayList3 = new ArrayList();
+        for (int i4 = 0; i4 < notificationIconContainer.getChildCount(); i4++) {
+            View childAt = notificationIconContainer.getChildAt(i4);
+            if ((childAt instanceof StatusBarIconView) && !arrayList.contains(childAt)) {
+                StatusBarIconView statusBarIconView2 = (StatusBarIconView) childAt;
+                String groupKey = statusBarIconView2.mNotification.getGroupKey();
+                int i5 = 0;
+                boolean z6 = false;
+                while (true) {
+                    if (i5 >= arrayList.size()) {
+                        break;
+                    }
+                    StatusBarIconView statusBarIconView3 = (StatusBarIconView) arrayList.get(i5);
+                    if (statusBarIconView3.mIcon.icon.sameAs(statusBarIconView2.mIcon.icon) && statusBarIconView3.mNotification.getGroupKey().equals(groupKey)) {
+                        if (z6) {
+                            z6 = false;
+                            break;
+                        }
+                        z6 = true;
+                    }
+                    i5++;
+                }
+                if (z6) {
+                    ArrayList arrayList4 = (ArrayList) arrayMap.get(groupKey);
+                    if (arrayList4 == null) {
+                        arrayList4 = new ArrayList();
+                        arrayMap.put(groupKey, arrayList4);
+                    }
+                    arrayList4.add(statusBarIconView2.mIcon);
+                }
+                arrayList3.add(statusBarIconView2);
+            }
+        }
+        ArrayList arrayList5 = new ArrayList();
+        Iterator it = ((ArrayMap.KeySet) arrayMap.keySet()).iterator();
+        while (true) {
+            IndexBasedArrayIterator indexBasedArrayIterator = (IndexBasedArrayIterator) it;
+            if (!indexBasedArrayIterator.hasNext()) {
+                break;
+            }
+            String str = (String) indexBasedArrayIterator.next();
+            if (((ArrayList) arrayMap.get(str)).size() != 1) {
+                arrayList5.add(str);
+            }
+        }
+        arrayMap.removeAll(arrayList5);
+        int i6 = NotificationIconContainerRefactor.$r8$clinit;
+        RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+        notificationIconContainer.mReplacingIconsLegacy = arrayMap;
+        int size2 = arrayList3.size();
+        for (int i7 = 0; i7 < size2; i7++) {
+            notificationIconContainer.removeView((View) arrayList3.get(i7));
+        }
+        ViewGroup.LayoutParams layoutParams = new FrameLayout.LayoutParams((this.mIconHPadding * 2) + this.mIconSize, SystemBarUtils.getStatusBarHeight(this.mContext));
+        for (int i8 = 0; i8 < arrayList.size(); i8++) {
+            StatusBarIconView statusBarIconView4 = (StatusBarIconView) arrayList.get(i8);
+            notificationIconContainer.removeTransientView(statusBarIconView4);
+            if (statusBarIconView4.getParent() == null) {
+                if (z3) {
+                    statusBarIconView4.mOnDismissListener = this.mUpdateStatusBarIcons;
+                }
+                notificationIconContainer.addView(statusBarIconView4, i8, layoutParams);
+            }
+        }
+        notificationIconContainer.mChangingViewPositions = true;
+        int iMin = Math.min(notificationIconContainer.getChildCount(), arrayList.size());
+        for (int i9 = 0; i9 < iMin; i9++) {
+            View childAt2 = notificationIconContainer.getChildAt(i9);
+            View view = (StatusBarIconView) arrayList.get(i9);
+            if (childAt2 != view) {
+                notificationIconContainer.removeView(view);
+                notificationIconContainer.addView(view, i9);
+            }
+        }
+        notificationIconContainer.mChangingViewPositions = false;
+        int i10 = NotificationIconContainerRefactor.$r8$clinit;
+        RefactorFlagUtils refactorFlagUtils2 = RefactorFlagUtils.INSTANCE;
+        notificationIconContainer.mReplacingIconsLegacy = null;
     }
 
     @Override // com.android.systemui.statusbar.phone.NotificationIconAreaController

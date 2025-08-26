@@ -40,10 +40,10 @@ public class FMRadioServiceFeature {
         BLEND_RMSSI_HI = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_QUALCOMM_BLEND_RMSSI_HI");
         FEATURE_CONFIG_SOFTMUTE = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_COMMON_SOFTMUTE_TH");
         FEATURE_SUPPORT_SOFTMUTE = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FMRADIO_SUPPORT_SOFTMUTE");
-        int parseInt = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_CHIP_VENDOR"));
-        CHIP_VENDOR = parseInt;
+        int i = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_CHIP_VENDOR"));
+        CHIP_VENDOR = i;
         boolean z = true;
-        if (parseInt != 1 && parseInt != 5 && parseInt != 10 && parseInt != 7) {
+        if (i != 1 && i != 5 && i != 10 && i != 7) {
             z = false;
         }
         FEATURE_USE_CHIPSET_VOLUME = z;

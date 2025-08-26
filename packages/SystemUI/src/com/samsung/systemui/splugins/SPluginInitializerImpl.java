@@ -6,7 +6,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.plugins.ActivityStarter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SPluginInitializerImpl implements SPluginInitializer {
     private static final boolean WTFS_SHOULD_CRASH = false;

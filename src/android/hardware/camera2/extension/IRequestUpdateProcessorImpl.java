@@ -68,9 +68,9 @@ public interface IRequestUpdateProcessorImpl extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRequestUpdateProcessorImpl.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRequestUpdateProcessorImpl)) {
-                return (IRequestUpdateProcessorImpl) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRequestUpdateProcessorImpl.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRequestUpdateProcessorImpl)) {
+                return (IRequestUpdateProcessorImpl) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -107,9 +107,9 @@ public interface IRequestUpdateProcessorImpl extends IInterface {
             }
             if (i == 1) {
                 Surface surface = (Surface) parcel.readTypedObject(Surface.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onOutputSurface(surface, readInt);
+                onOutputSurface(surface, i3);
                 parcel2.writeNoException();
             } else if (i == 2) {
                 Size size = (Size) parcel.readTypedObject(Size.CREATOR);
@@ -117,17 +117,17 @@ public interface IRequestUpdateProcessorImpl extends IInterface {
                 onResolutionUpdate(size);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onImageFormatUpdate(readInt2);
+                onImageFormatUpdate(i4);
                 parcel2.writeNoException();
             } else if (i == 4) {
                 CameraMetadataNative cameraMetadataNative = (CameraMetadataNative) parcel.readTypedObject(CameraMetadataNative.CREATOR);
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                CaptureStageImpl process = process(cameraMetadataNative, readInt3);
+                CaptureStageImpl captureStageImplProcess = process(cameraMetadataNative, i5);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(process, 1);
+                parcel2.writeTypedObject(captureStageImplProcess, 1);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -152,64 +152,64 @@ public interface IRequestUpdateProcessorImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.IRequestUpdateProcessorImpl
             public void onOutputSurface(Surface surface, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRequestUpdateProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(surface, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRequestUpdateProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(surface, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IRequestUpdateProcessorImpl
             public void onResolutionUpdate(Size size) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRequestUpdateProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(size, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRequestUpdateProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(size, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IRequestUpdateProcessorImpl
             public void onImageFormatUpdate(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRequestUpdateProcessorImpl.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRequestUpdateProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IRequestUpdateProcessorImpl
             public CaptureStageImpl process(CameraMetadataNative cameraMetadataNative, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRequestUpdateProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(cameraMetadataNative, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CaptureStageImpl) obtain2.readTypedObject(CaptureStageImpl.CREATOR);
+                    parcelObtain.writeInterfaceToken(IRequestUpdateProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cameraMetadataNative, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CaptureStageImpl) parcelObtain2.readTypedObject(CaptureStageImpl.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

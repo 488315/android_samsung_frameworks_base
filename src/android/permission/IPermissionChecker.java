@@ -59,9 +59,9 @@ public interface IPermissionChecker extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPermissionChecker.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPermissionChecker)) {
-                return (IPermissionChecker) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPermissionChecker.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPermissionChecker)) {
+                return (IPermissionChecker) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,34 +76,34 @@ public interface IPermissionChecker extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 AttributionSourceState attributionSourceState = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                String readString2 = parcel.readString();
-                boolean readBoolean = parcel.readBoolean();
-                boolean readBoolean2 = parcel.readBoolean();
-                boolean readBoolean3 = parcel.readBoolean();
-                int readInt = parcel.readInt();
+                String string2 = parcel.readString();
+                boolean z = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
+                boolean z3 = parcel.readBoolean();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int checkPermission = checkPermission(readString, attributionSourceState, readString2, readBoolean, readBoolean2, readBoolean3, readInt);
+                int iCheckPermission = checkPermission(string, attributionSourceState, string2, z, z2, z3, i3);
                 parcel2.writeNoException();
-                parcel2.writeInt(checkPermission);
+                parcel2.writeInt(iCheckPermission);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 AttributionSourceState attributionSourceState2 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                boolean readBoolean4 = parcel.readBoolean();
+                boolean z4 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                finishDataDelivery(readInt2, attributionSourceState2, readBoolean4);
+                finishDataDelivery(i4, attributionSourceState2, z4);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 AttributionSourceState attributionSourceState3 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                String readString3 = parcel.readString();
-                boolean readBoolean5 = parcel.readBoolean();
-                boolean readBoolean6 = parcel.readBoolean();
+                String string3 = parcel.readString();
+                boolean z5 = parcel.readBoolean();
+                boolean z6 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                int checkOp = checkOp(readInt3, attributionSourceState3, readString3, readBoolean5, readBoolean6);
+                int iCheckOp = checkOp(i5, attributionSourceState3, string3, z5, z6);
                 parcel2.writeNoException();
-                parcel2.writeInt(checkOp);
+                parcel2.writeInt(iCheckOp);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -128,60 +128,60 @@ public interface IPermissionChecker extends IInterface {
 
             @Override // android.permission.IPermissionChecker
             public int checkPermission(String str, AttributionSourceState attributionSourceState, String str2, boolean z, boolean z2, boolean z3, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionChecker.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPermissionChecker.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionChecker
             public void finishDataDelivery(int i, AttributionSourceState attributionSourceState, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionChecker.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPermissionChecker.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionChecker
             public int checkOp(int i, AttributionSourceState attributionSourceState, String str, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPermissionChecker.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPermissionChecker.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

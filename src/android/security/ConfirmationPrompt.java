@@ -122,7 +122,7 @@ public class ConfirmationPrompt {
         }
     }
 
-    public void presentPrompt(Executor executor, ConfirmationCallback confirmationCallback) throws ConfirmationAlreadyPresentingException, ConfirmationNotAvailableException {
+    public void presentPrompt(Executor executor, ConfirmationCallback confirmationCallback) throws ConfirmationNotAvailableException, ConfirmationAlreadyPresentingException {
         if (this.mCallback != null) {
             throw new ConfirmationAlreadyPresentingException();
         }
@@ -131,28 +131,28 @@ public class ConfirmationPrompt {
         }
         this.mCallback = confirmationCallback;
         this.mExecutor = executor;
-        int presentConfirmationPrompt = getService().presentConfirmationPrompt(this.mConfirmationCallback, this.mPromptText.toString(), this.mExtraData, Locale.getDefault().toLanguageTag(), getUiOptionsAsFlags());
-        if (presentConfirmationPrompt != 0) {
-            if (presentConfirmationPrompt == 3) {
+        int iPresentConfirmationPrompt = getService().presentConfirmationPrompt(this.mConfirmationCallback, this.mPromptText.toString(), this.mExtraData, Locale.getDefault().toLanguageTag(), getUiOptionsAsFlags());
+        if (iPresentConfirmationPrompt != 0) {
+            if (iPresentConfirmationPrompt == 3) {
                 throw new ConfirmationAlreadyPresentingException();
             }
-            if (presentConfirmationPrompt == 6) {
+            if (iPresentConfirmationPrompt == 6) {
                 throw new ConfirmationNotAvailableException();
             }
-            Log.w(TAG, "Unexpected responseCode=" + presentConfirmationPrompt + " from presentConfirmationPrompt() call.");
+            Log.w(TAG, "Unexpected responseCode=" + iPresentConfirmationPrompt + " from presentConfirmationPrompt() call.");
             throw new IllegalArgumentException();
         }
     }
 
     public void cancelPrompt() {
-        int cancelConfirmationPrompt = getService().cancelConfirmationPrompt(this.mConfirmationCallback);
-        if (cancelConfirmationPrompt == 0) {
+        int iCancelConfirmationPrompt = getService().cancelConfirmationPrompt(this.mConfirmationCallback);
+        if (iCancelConfirmationPrompt == 0) {
             return;
         }
-        if (cancelConfirmationPrompt == 3) {
+        if (iCancelConfirmationPrompt == 3) {
             throw new IllegalStateException();
         }
-        Log.w(TAG, "Unexpected responseCode=" + cancelConfirmationPrompt + " from cancelConfirmationPrompt() call.");
+        Log.w(TAG, "Unexpected responseCode=" + iCancelConfirmationPrompt + " from cancelConfirmationPrompt() call.");
         throw new IllegalStateException();
     }
 

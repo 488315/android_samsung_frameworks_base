@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.StartedWhileSubscribed;
 import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileIconViewModel implements MobileIconViewModelCommon {
     public final ChannelFlowTransformLatest activityContainerVisible;
@@ -51,7 +50,7 @@ public final class MobileIconViewModel implements MobileIconViewModelCommon {
         Lazy lazy = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                MobileIconViewModel mobileIconViewModel = MobileIconViewModel.this;
+                MobileIconViewModel mobileIconViewModel = this.f$0;
                 return new CellularIconViewModel(mobileIconViewModel.subscriptionId, mobileIconViewModel.iconInteractor, airplaneModeInteractor, connectivityConstants, coroutineScope, mobileIconViewModel.taskbarIndicatorController, str);
             }
         });
@@ -59,40 +58,40 @@ public final class MobileIconViewModel implements MobileIconViewModelCommon {
         Lazy lazy2 = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModel$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                MobileIconViewModel mobileIconViewModel = MobileIconViewModel.this;
+                MobileIconViewModel mobileIconViewModel = this.f$0;
                 return new CarrierBasedSatelliteViewModelImpl(mobileIconViewModel.subscriptionId, airplaneModeInteractor, mobileIconViewModel.iconInteractor, coroutineScope);
             }
         });
         this.satelliteProvider$delegate = lazy2;
-        ChannelFlowTransformLatest mapLatest = FlowKt.mapLatest(mobileIconInteractor.isNonTerrestrial(), new MobileIconViewModel$vmProvider$1(this, null));
+        ChannelFlowTransformLatest channelFlowTransformLatestMapLatest = FlowKt.mapLatest(mobileIconInteractor.isNonTerrestrial(), new MobileIconViewModel$vmProvider$1(this, null));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(mapLatest, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), (CellularIconViewModel) lazy.getValue());
-        this.vmProvider = stateIn;
-        Flow isNonTerrestrial = mobileIconInteractor.isNonTerrestrial();
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(channelFlowTransformLatestMapLatest, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), (CellularIconViewModel) lazy.getValue());
+        this.vmProvider = readonlyStateFlowStateIn;
+        Flow flowIsNonTerrestrial = mobileIconInteractor.isNonTerrestrial();
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         Boolean bool = Boolean.FALSE;
-        ReadonlyStateFlow stateIn2 = FlowKt.stateIn(isNonTerrestrial, coroutineScope, WhileSubscribed$default, bool);
-        this.isNtn = stateIn2;
-        if (((Boolean) stateIn2.$$delegate_0.getValue()).booleanValue()) {
+        ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(flowIsNonTerrestrial, coroutineScope, startedWhileSubscribedWhileSubscribed$default, bool);
+        this.isNtn = readonlyStateFlowStateIn2;
+        if (((Boolean) readonlyStateFlowStateIn2.$$delegate_0.getValue()).booleanValue()) {
             int i2 = ((CarrierBasedSatelliteViewModelImpl) lazy2.getValue()).slotId;
         } else {
             int i3 = ((CellularIconViewModel) lazy.getValue()).slotId;
         }
-        this.isVisible = FlowKt.stateIn(FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        this.icon = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$2(null));
-        this.contentDescription = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$3(null));
-        this.roaming = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$4(null));
-        this.networkTypeIcon = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$5(null));
-        this.networkTypeBackground = FlowKt.stateIn(FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$6(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
-        this.activityInVisible = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$7(null));
-        this.activityOutVisible = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$8(null));
-        this.activityContainerVisible = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$9(null));
-        this.activityIcon = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$10(null));
-        this.roamingIcon = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$11(null));
-        this.anyChanges = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$12(null));
-        this.dexStatusBarIcon = FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$13(null));
-        this.updateDeXStatusBarIconModel = FlowKt.stateIn(FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$14(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
-        this.voiceNoServiceIcon = FlowKt.stateIn(FlowKt.transformLatest(stateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$15(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
+        this.isVisible = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
+        this.icon = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$2(null));
+        this.contentDescription = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$3(null));
+        this.roaming = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$4(null));
+        this.networkTypeIcon = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$5(null));
+        this.networkTypeBackground = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$6(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
+        this.activityInVisible = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$7(null));
+        this.activityOutVisible = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$8(null));
+        this.activityContainerVisible = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$9(null));
+        this.activityIcon = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$10(null));
+        this.roamingIcon = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$11(null));
+        this.anyChanges = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$12(null));
+        this.dexStatusBarIcon = FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$13(null));
+        this.updateDeXStatusBarIconModel = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$14(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), null);
+        this.voiceNoServiceIcon = FlowKt.stateIn(FlowKt.transformLatest(readonlyStateFlowStateIn, new MobileIconViewModel$special$$inlined$flatMapLatest$15(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
     }
 
     @Override // com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconViewModelCommon

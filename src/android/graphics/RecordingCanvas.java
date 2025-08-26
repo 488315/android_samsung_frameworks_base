@@ -72,20 +72,20 @@ public final class RecordingCanvas extends BaseRecordingCanvas {
         if (renderNode == null) {
             throw new IllegalArgumentException("node cannot be null");
         }
-        RecordingCanvas acquire = sPool.acquire();
-        if (acquire == null) {
-            acquire = new RecordingCanvas(renderNode, i, i2);
+        RecordingCanvas recordingCanvasAcquire = sPool.acquire();
+        if (recordingCanvasAcquire == null) {
+            recordingCanvasAcquire = new RecordingCanvas(renderNode, i, i2);
             i3 = i;
             i4 = i2;
         } else {
             i3 = i;
             i4 = i2;
-            nResetDisplayListCanvas(acquire.mNativeCanvasWrapper, renderNode.mNativeRenderNode, i3, i4);
+            nResetDisplayListCanvas(recordingCanvasAcquire.mNativeCanvasWrapper, renderNode.mNativeRenderNode, i3, i4);
         }
-        acquire.mNode = renderNode;
-        acquire.mWidth = i3;
-        acquire.mHeight = i4;
-        return acquire;
+        recordingCanvasAcquire.mNode = renderNode;
+        recordingCanvasAcquire.mWidth = i3;
+        recordingCanvasAcquire.mHeight = i4;
+        return recordingCanvasAcquire;
     }
 
     void recycle() {

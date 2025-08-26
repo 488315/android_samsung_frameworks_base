@@ -7,6 +7,6 @@
             <com.android.systemui.widget.SystemUITextView android:gravity="center" android:id="@id/keyguard_admin_lock_help_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/kg_phone_locked" sysui:originColor="origin_keyguard_message_area_text_color" sysui:whitebgColor="whitebg_keyguard_text_color" style="@style/keyguard_message_area_style" />
             <com.android.systemui.widget.SystemUITextView android:gravity="center" android:id="@id/keyguard_admin_lock_sub_help_text" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/kg_contact_your_it_admin" sysui:originColor="origin_keyguard_sub_message_area_text_color" sysui:whitebgColor="whitebg_keyguard_sub_message_area_text_color" style="@style/keyguard_sub_help_text_style" />
         </LinearLayout>
-        <include android:gravity="center" android:layout_gravity="bottom|center" android:id="@id/keyguard_selector_fade_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/kg_pin_eca_margin_bottom" layout="@layout/keyguard_emergency_button" />
+        <include android:gravity="center" android:layout_gravity="center|bottom" android:id="@id/keyguard_selector_fade_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/kg_pin_eca_margin_bottom" layout="@layout/keyguard_emergency_button" />
     </FrameLayout>
 </com.android.keyguard.KeyguardAdminView>

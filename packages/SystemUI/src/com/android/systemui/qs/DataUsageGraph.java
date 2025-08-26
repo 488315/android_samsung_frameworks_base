@@ -10,7 +10,6 @@ import android.view.View;
 import com.android.settingslib.Utils;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DataUsageGraph extends View {
     public final int mMarkerWidth;
@@ -49,8 +48,8 @@ public class DataUsageGraph extends View {
         rectF.set(0.0f, 0.0f, f3, f4);
         paint.setColor(this.mUsageColor);
         canvas.drawRect(rectF, paint);
-        float min = Math.min(Math.max(f3 - (this.mMarkerWidth / 2), 0.0f), width - this.mMarkerWidth);
-        rectF.set(min, 0.0f, this.mMarkerWidth + min, f4);
+        float fMin = Math.min(Math.max(f3 - (this.mMarkerWidth / 2), 0.0f), width - this.mMarkerWidth);
+        rectF.set(fMin, 0.0f, this.mMarkerWidth + fMin, f4);
         paint.setColor(this.mWarningColor);
         canvas.drawRect(rectF, paint);
     }

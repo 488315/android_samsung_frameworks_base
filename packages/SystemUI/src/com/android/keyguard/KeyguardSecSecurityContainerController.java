@@ -8,6 +8,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.UserInfo;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -17,17 +18,22 @@ import android.os.Debug;
 import android.os.Parcelable;
 import android.os.SystemClock;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Slog;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
+import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.compose.runtime.collection.MutableVectorKt$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -38,6 +44,7 @@ import com.android.internal.widget.LockscreenCredential;
 import com.android.keyguard.AdminSecondaryLockScreenController;
 import com.android.keyguard.DualDarInnerLockScreenController;
 import com.android.keyguard.KeyguardArrowViewController;
+import com.android.keyguard.KeyguardInputViewController;
 import com.android.keyguard.KeyguardPluginControllerImpl;
 import com.android.keyguard.KeyguardSecurityContainer;
 import com.android.keyguard.KeyguardSecurityModel;
@@ -55,6 +62,7 @@ import com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor;
 import com.android.systemui.classifier.FalsingA11yDelegate;
 import com.android.systemui.classifier.FalsingCollector;
 import com.android.systemui.deviceentry.domain.interactor.DeviceEntryFaceAuthInteractor;
+import com.android.systemui.deviceentry.shared.FaceAuthUiEvent;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.keyguard.KeyguardUnlockAnimationController;
@@ -74,6 +82,7 @@ import com.android.systemui.shared.system.SysUiStatsLog;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
+import com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
@@ -86,14 +95,17 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.util.settings.GlobalSettings;
 import com.samsung.android.knox.accounts.HostAuth;
+import com.samsung.android.knox.dar.VirtualLockUtils;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
+import com.samsung.android.knox.zt.config.securelog.SignalSeverity;
+import com.samsung.android.security.mdf.MdfUtils;
 import dagger.Lazy;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.Executor;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecSecurityContainerController extends KeyguardSecurityContainerController {
     public final AlarmManager mAlarmManager;
@@ -129,14 +141,12 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
     public final SelectedUserInteractor mSelectedUserInteractor;
     private SettingsHelper mSettingsHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecSecurityContainerController$3, reason: invalid class name */
     public class AnonymousClass3 implements KeyguardArrowViewCallback {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecSecurityContainerController$5, reason: invalid class name */
     public class AnonymousClass5 implements KeyguardSecurityCallback {
         public AnonymousClass5() {
@@ -149,21 +159,21 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
 
         @Override // com.android.keyguard.KeyguardSecurityCallback
         public final void finish(int i) {
-            boolean z;
-            Integer valueOf = Integer.valueOf(i);
+            boolean zOnDismiss;
+            Integer numValueOf = Integer.valueOf(i);
             KeyguardSecSecurityContainerController keyguardSecSecurityContainerController = KeyguardSecSecurityContainerController.this;
-            Log.d("KeyguardUnlockInfo", "finish userId=%d, hasDismissAction=%d", valueOf, Integer.valueOf(LogUtil.getInt(keyguardSecSecurityContainerController.mDismissAction)));
+            Log.d("KeyguardUnlockInfo", "finish userId=%d, hasDismissAction=%d", numValueOf, Integer.valueOf(LogUtil.getInt(keyguardSecSecurityContainerController.mDismissAction)));
             ActivityStarter.OnDismissAction onDismissAction = keyguardSecSecurityContainerController.mDismissAction;
             if (onDismissAction != null) {
-                z = onDismissAction.onDismiss();
+                zOnDismiss = onDismissAction.onDismiss();
                 keyguardSecSecurityContainerController.mDismissAction = null;
                 keyguardSecSecurityContainerController.mCancelAction = null;
             } else {
-                z = false;
+                zOnDismiss = false;
             }
             ViewMediatorCallback viewMediatorCallback = keyguardSecSecurityContainerController.mViewMediatorCallback;
             if (viewMediatorCallback != null) {
-                if (z) {
+                if (zOnDismiss) {
                     viewMediatorCallback.keyguardDonePending(i);
                 } else {
                     viewMediatorCallback.keyguardDone(i);
@@ -198,10 +208,10 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
                 int i3 = AnonymousClass6.$SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode[keyguardSecSecurityContainerController.mSecurityModel.getSecurityMode(i).ordinal()];
                 String str = i3 != 1 ? i3 != 2 ? i3 != 3 ? null : "2" : "3" : "1";
                 if (str != null) {
-                    HashMap hashMap = new HashMap();
-                    hashMap.put("det", "1");
-                    hashMap.put(str, String.valueOf(failedUnlockAttempts + 1));
-                    SystemUIAnalytics.sendEventCDLog("102", SystemUIAnalytics.EID_UNLOCK_BOUNCER, hashMap);
+                    HashMap map = new HashMap();
+                    map.put("det", "1");
+                    map.put(str, String.valueOf(failedUnlockAttempts + 1));
+                    SystemUIAnalytics.sendEventCDLog("102", SystemUIAnalytics.EID_UNLOCK_BOUNCER, map);
                 }
                 KeyguardUpdateMonitor keyguardUpdateMonitor = keyguardSecSecurityContainerController.mUpdateMonitor;
                 keyguardUpdateMonitor.clearFailedUnlockAttempts(true);
@@ -214,10 +224,14 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
                 }
                 if (((KnoxStateMonitorImpl) keyguardSecSecurityContainerController.mKnoxStateMonitor).mEdmMonitor.mPwdChangeRequest > 0) {
                     Intent intent = new Intent();
+                    boolean z2 = Settings.Secure.getIntForUser(keyguardSecSecurityContainerController.getContext().getContentResolver(), "ucm_keyguard_enforce_case", 0, i) == 1;
                     intent.setClassName(KnoxVpnPolicyConstants.ANDROID_SETTINGS_PKG, "com.android.settings.password.ChooseLockGeneric$InternalActivity");
                     intent.addFlags(268435456);
                     intent.addFlags(4194304);
                     intent.addFlags(8388608);
+                    if (z2) {
+                        intent.addFlags(603979776);
+                    }
                     keyguardSecSecurityContainerController.getContext().startActivityAsUser(intent, UserHandle.CURRENT);
                 }
                 if (keyguardUpdateMonitor.isForgotPasswordView()) {
@@ -296,11 +310,11 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
             if (!z && KeyguardUnlockInfo.unlockTrigger == KeyguardUnlockInfo.UnlockTrigger.TRIGGER_UNKNOWN && DeviceType.getDebugLevel() != DeviceType.DEBUG_LEVEL_LOW) {
                 android.util.Log.d("KeyguardUnlockInfo", "unknown trigger caller\n" + Debug.getCallers(15, "  "));
             }
-            boolean showNextSecurityScreenOrFinish = keyguardSecSecurityContainerController.showNextSecurityScreenOrFinish(z, i, z2, securityMode);
-            if (showNextSecurityScreenOrFinish && z) {
+            boolean zShowNextSecurityScreenOrFinish = keyguardSecSecurityContainerController.showNextSecurityScreenOrFinish(z, i, z2, securityMode);
+            if (zShowNextSecurityScreenOrFinish && z) {
                 keyguardUpdateMonitor.setUnlockingKeyguard(true);
             }
-            return showNextSecurityScreenOrFinish;
+            return zShowNextSecurityScreenOrFinish;
         }
 
         @Override // com.android.keyguard.KeyguardSecurityCallback
@@ -308,7 +322,6 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecSecurityContainerController$6, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass6 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;
@@ -375,7 +388,6 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OnApplyWindowInsetsListener implements View.OnApplyWindowInsetsListener {
         public /* synthetic */ OnApplyWindowInsetsListener(KeyguardSecSecurityContainerController keyguardSecSecurityContainerController, int i) {
             this();
@@ -383,51 +395,51 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
 
         @Override // android.view.View.OnApplyWindowInsetsListener
         public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-            int i;
+            int iMax;
             KeyguardSecSecurityContainerController keyguardSecSecurityContainerController = KeyguardSecSecurityContainerController.this;
-            r0 = 1;
-            byte b = 1;
+            c = 1;
+            char c = 1;
             if (keyguardSecSecurityContainerController.isPassword(keyguardSecSecurityContainerController.mCurrentSecurityMode)) {
-                int i2 = LsRune.SECURITY_NAVBAR_ENABLED ? 0 : windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars()).bottom;
-                int i3 = windowInsets.getInsets(WindowInsets.Type.ime()).bottom;
+                int i = LsRune.SECURITY_NAVBAR_ENABLED ? 0 : windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars()).bottom;
+                int i2 = windowInsets.getInsets(WindowInsets.Type.ime()).bottom;
                 KeyguardSecSecurityContainerController keyguardSecSecurityContainerController2 = KeyguardSecSecurityContainerController.this;
-                if (keyguardSecSecurityContainerController2.mImeBottom != i3) {
-                    keyguardSecSecurityContainerController2.mImeBottom = i3;
-                    keyguardSecSecurityContainerController2.mIsImeShown = i3 != 0;
+                if (keyguardSecSecurityContainerController2.mImeBottom != i2) {
+                    keyguardSecSecurityContainerController2.mImeBottom = i2;
+                    keyguardSecSecurityContainerController2.mIsImeShown = i2 != 0;
                     keyguardSecSecurityContainerController2.updateLayoutMargins();
                     Context context = KeyguardSecSecurityContainerController.this.getContext();
-                    int i4 = KeyguardSecSecurityContainerController.this.mImeBottom;
-                    int i5 = SecurityUtils.sPINContainerBottomMargin;
+                    int i3 = KeyguardSecSecurityContainerController.this.mImeBottom;
+                    int i4 = SecurityUtils.sPINContainerBottomMargin;
                     int rotation = DeviceState.getRotation(context.getResources().getConfiguration().windowConfiguration.getRotation());
                     if (rotation != 1 && rotation != 3) {
-                        b = 0;
+                        c = 0;
                     }
                     int[] iArr = SecurityUtils.sImeHeight;
-                    int i6 = iArr[b];
-                    if (i6 == 0 || i6 != i4) {
-                        iArr[b] = i4;
+                    int i5 = iArr[c];
+                    if (i5 == 0 || i5 != i3) {
+                        iArr[c] = i3;
                     }
                     if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY) {
                         KeyguardSecSecurityContainerController keyguardSecSecurityContainerController3 = KeyguardSecSecurityContainerController.this;
                         keyguardSecSecurityContainerController3.mUpdateMonitor.updateSIPShownState(keyguardSecSecurityContainerController3.mIsImeShown);
                     }
                 }
-                i = Integer.max(i2, i3);
+                iMax = Integer.max(i, i2);
             } else {
                 if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY) {
-                    int i7 = windowInsets.getInsets(WindowInsets.Type.ime()).bottom;
+                    int i6 = windowInsets.getInsets(WindowInsets.Type.ime()).bottom;
                     KeyguardSecSecurityContainerController keyguardSecSecurityContainerController4 = KeyguardSecSecurityContainerController.this;
-                    if (keyguardSecSecurityContainerController4.mImeBottom != i7) {
-                        keyguardSecSecurityContainerController4.mImeBottom = i7;
-                        boolean z = i7 != 0;
+                    if (keyguardSecSecurityContainerController4.mImeBottom != i6) {
+                        keyguardSecSecurityContainerController4.mImeBottom = i6;
+                        boolean z = i6 != 0;
                         keyguardSecSecurityContainerController4.mIsImeShown = z;
                         keyguardSecSecurityContainerController4.mUpdateMonitor.updateSIPShownState(z);
                     }
                 }
-                i = 0;
+                iMax = 0;
             }
-            ((KeyguardSecSecurityContainer) ((ViewController) KeyguardSecSecurityContainerController.this).mView).setPadding(((KeyguardSecSecurityContainer) ((ViewController) KeyguardSecSecurityContainerController.this).mView).getPaddingLeft(), ((KeyguardSecSecurityContainer) ((ViewController) KeyguardSecSecurityContainerController.this).mView).getPaddingTop(), ((KeyguardSecSecurityContainer) ((ViewController) KeyguardSecSecurityContainerController.this).mView).getPaddingRight(), i);
-            return windowInsets.inset(0, 0, 0, i);
+            ((KeyguardSecSecurityContainer) ((ViewController) KeyguardSecSecurityContainerController.this).mView).setPadding(((KeyguardSecSecurityContainer) ((ViewController) KeyguardSecSecurityContainerController.this).mView).getPaddingLeft(), ((KeyguardSecSecurityContainer) ((ViewController) KeyguardSecSecurityContainerController.this).mView).getPaddingTop(), ((KeyguardSecSecurityContainer) ((ViewController) KeyguardSecSecurityContainerController.this).mView).getPaddingRight(), iMax);
+            return windowInsets.inset(0, 0, 0, iMax);
         }
 
         private OnApplyWindowInsetsListener() {
@@ -435,7 +447,7 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
     }
 
     /* renamed from: $r8$lambda$5mPUvyQ1u7jyxIoop9We5V-6bYo, reason: not valid java name */
-    public static void m957$r8$lambda$5mPUvyQ1u7jyxIoop9We5V6bYo(KeyguardSecSecurityContainerController keyguardSecSecurityContainerController) {
+    public static void m959$r8$lambda$5mPUvyQ1u7jyxIoop9We5V6bYo(KeyguardSecSecurityContainerController keyguardSecSecurityContainerController) {
         ActionBarContextView$$ExternalSyntheticOutline0.m(new StringBuilder("OnChangedCallback() "), keyguardSecSecurityContainerController.mIsResetCredentialShowing, "KeyguardSecSecurityContainer");
         SettingsHelper settingsHelper = keyguardSecSecurityContainerController.mSettingsHelper;
         if (settingsHelper != null && settingsHelper.isResetCredential() && keyguardSecSecurityContainerController.mIsResetCredentialShowing) {
@@ -465,7 +477,7 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
         this.mOnChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.keyguard.KeyguardSecSecurityContainerController$$ExternalSyntheticLambda1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                KeyguardSecSecurityContainerController.m957$r8$lambda$5mPUvyQ1u7jyxIoop9We5V6bYo(KeyguardSecSecurityContainerController.this);
+                KeyguardSecSecurityContainerController.m959$r8$lambda$5mPUvyQ1u7jyxIoop9We5V6bYo(this.f$0);
             }
         };
         this.mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.KeyguardSecSecurityContainerController.1
@@ -581,10 +593,10 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
             int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
             KeyguardUpdateMonitor keyguardUpdateMonitor = this.mUpdateMonitor;
             int failedUnlockAttempts = keyguardUpdateMonitor.getFailedUnlockAttempts(selectedUserId);
-            boolean isAutoWipe = keyguardUpdateMonitor.isAutoWipe();
+            boolean zIsAutoWipe = keyguardUpdateMonitor.isAutoWipe();
             int maximumFailedPasswordsForWipe = this.mDpm.getMaximumFailedPasswordsForWipe(null, selectedUserId);
             if (maximumFailedPasswordsForWipe <= 0) {
-                maximumFailedPasswordsForWipe = isAutoWipe ? 20 : 0;
+                maximumFailedPasswordsForWipe = zIsAutoWipe ? 20 : 0;
             }
             android.util.Log.d("KeyguardSecSecurityContainer", MutableVectorKt$$ExternalSyntheticOutline0.m(maximumFailedPasswordsForWipe, failedUnlockAttempts, "doWipeOutIfMaxFailedAttemptsSinceBoot( failedAttemptsBeforeWipe = ", " , failedAttempts = ", " )"));
             if (maximumFailedPasswordsForWipe <= 0 || failedUnlockAttempts < maximumFailedPasswordsForWipe) {
@@ -672,19 +684,134 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00c7  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00dc  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00c2  */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x00c7  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00dc  */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x010a  */
     @Override // com.android.keyguard.KeyguardSecurityContainerController
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void reportFailedUnlockAttempt(int r17, int r18) {
-        /*
-            Method dump skipped, instructions count: 498
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardSecSecurityContainerController.reportFailedUnlockAttempt(int, int):void");
+    public final void reportFailedUnlockAttempt(int i, int i2) {
+        int i3;
+        String string;
+        int i4;
+        int i5;
+        KeyguardUpdateMonitor keyguardUpdateMonitor = this.mUpdateMonitor;
+        int failedUnlockAttempts = keyguardUpdateMonitor.getFailedUnlockAttempts(i) + 1;
+        boolean zIsAutoWipe = keyguardUpdateMonitor.isAutoWipe();
+        KeyguardSecurityModel keyguardSecurityModel = this.mSecurityModel;
+        int i6 = AnonymousClass6.$SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode[keyguardSecurityModel.getSecurityMode(i).ordinal()];
+        String str = i6 != 1 ? i6 != 2 ? i6 != 3 ? null : "2" : "3" : "1";
+        if (str != null) {
+            SystemUIAnalytics.sendEventCDLog("102", SystemUIAnalytics.EID_FAIL_ATTEMPT_FOR_THROTTLE_TIME, str, String.valueOf(failedUnlockAttempts));
+        }
+        int maximumFailedPasswordsForWipe = this.mDpm.getMaximumFailedPasswordsForWipe(null, i);
+        if (maximumFailedPasswordsForWipe <= 0) {
+            maximumFailedPasswordsForWipe = zIsAutoWipe ? 20 : 0;
+        }
+        this.mRemainingBeforeWipe = maximumFailedPasswordsForWipe > 0 ? maximumFailedPasswordsForWipe - failedUnlockAttempts : Integer.MAX_VALUE;
+        boolean zIsFingerprintOptionEnabled = keyguardUpdateMonitor.isFingerprintOptionEnabled();
+        boolean zIsFaceOptionEnabled = keyguardUpdateMonitor.isFaceOptionEnabled();
+        if ((zIsFingerprintOptionEnabled || zIsFaceOptionEnabled) && maximumFailedPasswordsForWipe > 0) {
+            if (maximumFailedPasswordsForWipe >= 10) {
+                if (this.mRemainingBeforeWipe <= 5) {
+                    this.mLockPatternUtils.requireStrongAuth(2, i);
+                    if (zIsFaceOptionEnabled) {
+                        keyguardUpdateMonitor.stopListeningForFace(FaceAuthUiEvent.FACE_AUTH_STOPPED_USER_INPUT_ON_BOUNCER);
+                    }
+                }
+            } else if (this.mRemainingBeforeWipe <= 2) {
+                this.mLockPatternUtils.requireStrongAuth(2, i);
+                if (zIsFaceOptionEnabled) {
+                    keyguardUpdateMonitor.stopListeningForFace(FaceAuthUiEvent.FACE_AUTH_STOPPED_USER_INPUT_ON_BOUNCER);
+                }
+            }
+        }
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(maximumFailedPasswordsForWipe, "reportFailedUnlockAttempt   \n failedAttemptsBeforeWipe: ", "\n mRemainingBeforeWipe  ");
+        sbM.append(this.mRemainingBeforeWipe);
+        sbM.append("\n failedAttempts: ");
+        sbM.append(failedUnlockAttempts);
+        android.util.Log.w("KeyguardSecSecurityContainer", sbM.toString());
+        if (this.mRemainingBeforeWipe < 5) {
+            int profileWithMinimumFailedPasswordsForWipe = this.mDpm.getProfileWithMinimumFailedPasswordsForWipe(i);
+            if (profileWithMinimumFailedPasswordsForWipe == i) {
+                i4 = profileWithMinimumFailedPasswordsForWipe != 0 ? 3 : 1;
+                if (this.mRemainingBeforeWipe > 0) {
+                    Slog.i("KeyguardSecSecurityContainer", "Too many unlock attempts; user " + profileWithMinimumFailedPasswordsForWipe + " will be wiped!");
+                    if (zIsAutoWipe) {
+                        ResetDeviceUtils resetDeviceUtils = this.mResetDeviceUtils;
+                        int profileWithMinimumFailedPasswordsForWipe2 = resetDeviceUtils.mLockPatternUtils.getDevicePolicyManager().getProfileWithMinimumFailedPasswordsForWipe(i4);
+                        if (profileWithMinimumFailedPasswordsForWipe2 == i4) {
+                            i5 = profileWithMinimumFailedPasswordsForWipe2 != 0 ? 3 : 1;
+                            resetDeviceUtils.wipeOut(failedUnlockAttempts, i4, i5);
+                        } else {
+                            if (profileWithMinimumFailedPasswordsForWipe2 != -10000) {
+                                i5 = 2;
+                            }
+                            resetDeviceUtils.wipeOut(failedUnlockAttempts, i4, i5);
+                        }
+                    } else {
+                        ((KeyguardSecSecurityContainer) this.mView).showWipeDialog(failedUnlockAttempts, i4);
+                    }
+                } else if (!zIsAutoWipe && !CscRune.SECURITY_WARNING_WIPE_OUT_MESSAGE) {
+                    this.mImm.semForceHideSoftInput();
+                    ((KeyguardSecSecurityContainer) this.mView).showAlmostAtWipeDialog(failedUnlockAttempts, this.mRemainingBeforeWipe, i4);
+                }
+            } else {
+                if (profileWithMinimumFailedPasswordsForWipe != -10000) {
+                    i4 = 2;
+                }
+                if (this.mRemainingBeforeWipe > 0) {
+                }
+            }
+        }
+        this.mLockPatternUtils.reportFailedPasswordAttempt(i);
+        KnoxStateMonitorImpl knoxStateMonitorImpl = (KnoxStateMonitorImpl) this.mKnoxStateMonitor;
+        EdmMonitor edmMonitor = knoxStateMonitorImpl.mEdmMonitor;
+        if (edmMonitor != null) {
+            edmMonitor.updateFailedUnlockAttemptForDeviceDisabled();
+        }
+        EdmMonitor edmMonitor2 = knoxStateMonitorImpl.mEdmMonitor;
+        if (edmMonitor2 != null) {
+            edmMonitor2.updateFailedUnlockAttemptForProfileDisabled();
+        }
+        boolean z = CscRune.SECURITY_WARNING_WIPE_OUT_MESSAGE;
+        KeyguardPluginControllerImpl keyguardPluginControllerImpl = this.mKeyguardPluginController;
+        if (z && ((i3 = this.mRemainingBeforeWipe) == 1 || i3 == 5)) {
+            UserInfo userInfo = UserManager.get(getContext()).getUserInfo(i);
+            if (userInfo != null && userInfo.isPrimary()) {
+                this.mImm.semForceHideSoftInput();
+                int i7 = this.mRemainingBeforeWipe;
+                KeyguardTextBuilder keyguardTextBuilder = KeyguardTextBuilder.getInstance(getContext());
+                KeyguardSecurityModel.SecurityMode securityMode = keyguardSecurityModel.getSecurityMode(i);
+                keyguardTextBuilder.getClass();
+                String str2 = i7 != 1 ? SignalSeverity.NONE : "1";
+                keyguardTextBuilder.updateSecurityMode(securityMode);
+                int identifier = keyguardTextBuilder.mContext.getResources().getIdentifier(String.format(keyguardTextBuilder.mContext.getResources().getString(R.string.kg_device_security_remaining_frp), keyguardTextBuilder.mDeviceType, keyguardTextBuilder.mSecurityType, str2), "string", keyguardTextBuilder.mContext.getPackageName());
+                if (identifier != 0) {
+                    string = keyguardTextBuilder.mContext.getString(identifier, Integer.valueOf(i7));
+                } else {
+                    ListPopupWindow$$ExternalSyntheticOutline0.m(identifier, "Can't find warning frp string id=", "KeyguardTextBuilder");
+                    string = "";
+                }
+                ((KeyguardSecSecurityContainer) this.mView).showDialog(string);
+                keyguardPluginControllerImpl.showWipeWarningDialog(string);
+            }
+        } else if (zIsAutoWipe && this.mRemainingBeforeWipe == 1) {
+            this.mImm.semForceHideSoftInput();
+            String warningAutoWipeMessage = KeyguardTextBuilder.getInstance(getContext()).getWarningAutoWipeMessage(failedUnlockAttempts, this.mRemainingBeforeWipe);
+            if (warningAutoWipeMessage != null) {
+                ((KeyguardSecSecurityContainer) this.mView).showDialog(warningAutoWipeMessage);
+                keyguardPluginControllerImpl.showWipeWarningDialog(warningAutoWipeMessage);
+            }
+        }
+        if (i2 > 0) {
+            this.mLockPatternUtils.reportPasswordLockout(i2, i);
+        }
+        if (failedUnlockAttempts >= keyguardUpdateMonitor.getMaxFailedUnlockAttempts()) {
+            keyguardUpdateMonitor.updatePermanentLock(i);
+        }
     }
 
     public final void setOnDismissAction(ActivityStarter.OnDismissAction onDismissAction, Runnable runnable) {
@@ -718,20 +845,241 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
         ((KeyguardSecSecurityContainer) this.mView).announceForAccessibility(charSequence);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:19:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x01be  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x00a4 A[FALL_THROUGH] */
     @Override // com.android.keyguard.KeyguardSecurityContainerController
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean showNextSecurityScreenOrFinish(boolean r17, int r18, boolean r19, com.android.keyguard.KeyguardSecurityModel.SecurityMode r20) {
-        /*
-            Method dump skipped, instructions count: 490
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardSecSecurityContainerController.showNextSecurityScreenOrFinish(boolean, int, boolean, com.android.keyguard.KeyguardSecurityModel$SecurityMode):boolean");
+    public final boolean showNextSecurityScreenOrFinish(boolean z, int i, boolean z2, KeyguardSecurityModel.SecurityMode securityMode) {
+        boolean z3;
+        boolean z4;
+        boolean z5;
+        int mainUserId = i;
+        android.util.Log.d("KeyguardSecSecurityContainer", "showNextSecurityScreenOrFinish(" + z + ")");
+        if (securityMode != KeyguardSecurityModel.SecurityMode.Invalid && securityMode != this.mCurrentSecurityMode) {
+            android.util.Log.w("KeyguardSecSecurityContainer", "Attempted to invoke showNextSecurityScreenOrFinish with securityMode " + securityMode + ", but current mode is " + this.mCurrentSecurityMode);
+            return false;
+        }
+        KeyguardUpdateMonitor keyguardUpdateMonitor = this.mUpdateMonitor;
+        boolean zIsDualDarInnerAuthRequired = keyguardUpdateMonitor.isDualDarInnerAuthRequired(mainUserId);
+        KnoxStateMonitor knoxStateMonitor = this.mKnoxStateMonitor;
+        boolean z6 = true;
+        if (!zIsDualDarInnerAuthRequired || z2) {
+            z3 = true;
+        } else {
+            KnoxStateMonitorImpl knoxStateMonitorImpl = (KnoxStateMonitorImpl) knoxStateMonitor;
+            if (knoxStateMonitorImpl.mDualDarMonitor != null) {
+                boolean zIsVirtualUserId = VirtualLockUtils.isVirtualUserId(mainUserId);
+                KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("isVirtualUserId - userId : ", mainUserId, ", ret : ", zIsVirtualUserId, "DualDarMonitor");
+                if (zIsVirtualUserId) {
+                    StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(mainUserId, "Switch targetUserId ", " to ");
+                    sbM.append(knoxStateMonitorImpl.getMainUserId(mainUserId));
+                    android.util.Log.d("KeyguardSecSecurityContainer", sbM.toString());
+                    mainUserId = knoxStateMonitorImpl.getMainUserId(mainUserId);
+                    z3 = true;
+                }
+            }
+            z3 = false;
+        }
+        if (MdfUtils.isMdfDisabled()) {
+            Toast.makeText(getContext(), "User authentication is blocked by CC mode since it detects the device has been tampered", 1).show();
+            return false;
+        }
+        boolean z7 = LsRune.SECURITY_SWIPE_BOUNCER;
+        if (!z7 || KeyguardSecurityModel.SecurityMode.Swipe != this.mCurrentSecurityMode) {
+            if (!keyguardUpdateMonitor.getUserCanSkipBouncer(mainUserId)) {
+                KeyguardSecurityModel.SecurityMode securityMode2 = KeyguardSecurityModel.SecurityMode.None;
+                KeyguardSecurityModel.SecurityMode securityMode3 = this.mCurrentSecurityMode;
+                KeyguardSecurityModel keyguardSecurityModel = this.mSecurityModel;
+                if (securityMode2 == securityMode3) {
+                    KeyguardSecurityModel.SecurityMode securityMode4 = keyguardSecurityModel.getSecurityMode(mainUserId);
+                    if (z7 && securityMode2 == securityMode4 && this.mIsSwipeBouncer) {
+                        showSecurityScreen(KeyguardSecurityModel.SecurityMode.Swipe);
+                    } else if (securityMode2 == securityMode4) {
+                        SystemUIAnalytics.sendEventLog("101", SystemUIAnalytics.EID_GO_TO_SECOND_SCREEN, "2");
+                        z4 = true;
+                        z6 = z4;
+                        z5 = true;
+                    } else {
+                        showSecurityScreen(securityMode4);
+                    }
+                    z4 = false;
+                    z6 = z4;
+                    z5 = true;
+                } else {
+                    if (z) {
+                        switch (AnonymousClass6.$SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode[securityMode3.ordinal()]) {
+                            case 6:
+                            case 7:
+                            case 8:
+                            case 9:
+                            case 10:
+                            case 11:
+                            case 12:
+                            case 13:
+                            case 14:
+                                KeyguardSecurityModel.SecurityMode securityMode5 = keyguardSecurityModel.getSecurityMode(mainUserId);
+                                boolean z8 = this.mLockPatternUtils.isLockScreenDisabled(this.mSelectedUserInteractor.getSelectedUserId()) || !((DeviceProvisionedControllerImpl) this.mDeviceProvisionedController).isUserSetup(mainUserId);
+                                KnoxStateMonitorImpl knoxStateMonitorImpl2 = (KnoxStateMonitorImpl) knoxStateMonitor;
+                                knoxStateMonitorImpl2.getClass();
+                                if (((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isForcedLock() || (knoxStateMonitorImpl2.mCustomSdkMonitor.mKnoxCustomLockScreenOverrideMode & 2) == 0) {
+                                    android.util.Log.d("KeyguardSecSecurityContainer", "showNextSecurityScreenOrFinish mCurrentSecurityMode : " + this.mCurrentSecurityMode + " -> securityMode : " + securityMode5);
+                                    if (securityMode5 == securityMode2) {
+                                        if ((keyguardUpdateMonitor.isSimPinSecure() && z8) || (keyguardUpdateMonitor.isRemoteLockEnabled() && z8)) {
+                                            showSecurityScreen(securityMode5);
+                                            break;
+                                        }
+                                    } else {
+                                        showSecurityScreen(securityMode5);
+                                        break;
+                                    }
+                                }
+                                break;
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                                z5 = true;
+                                break;
+                            default:
+                                Objects.toString(this.mCurrentSecurityMode);
+                                if (!keyguardUpdateMonitor.isForgotPasswordView()) {
+                                    showPrimarySecurityScreen();
+                                    break;
+                                }
+                                break;
+                        }
+                    }
+                    z5 = true;
+                    z6 = false;
+                }
+            } else if (z7 && this.mIsSwipeBouncer) {
+                showSecurityScreen(KeyguardSecurityModel.SecurityMode.Swipe);
+                z5 = true;
+                z6 = false;
+            } else {
+                boolean zIsBiometricsAuthenticatedOnLock = keyguardUpdateMonitor.isBiometricsAuthenticatedOnLock();
+                if (zIsBiometricsAuthenticatedOnLock || !keyguardUpdateMonitor.getUserHasTrust(mainUserId)) {
+                    if (zIsBiometricsAuthenticatedOnLock) {
+                        KeyguardUnlockInfo.setAuthDetailSkipBouncer(KeyguardUnlockInfo.SkipBouncerReason.BIOMETRICS_UNLOCK_LOCK_STAY);
+                        SystemUIAnalytics.sendEventLog("101", SystemUIAnalytics.EID_GO_TO_SECOND_SCREEN, "4");
+                    }
+                    z5 = true;
+                } else {
+                    KeyguardUnlockInfo.setAuthDetailSkipBouncer(KeyguardUnlockInfo.SkipBouncerReason.EXTEND_LOCK);
+                    SystemUIAnalytics.sendEventLog("101", SystemUIAnalytics.EID_GO_TO_SECOND_SCREEN, "3");
+                }
+                z5 = false;
+            }
+        }
+        if (z6 && !z3 && keyguardUpdateMonitor.isDualDarInnerAuthRequired(mainUserId)) {
+            startDisappearAnimation(new Runnable() { // from class: com.android.keyguard.KeyguardSecSecurityContainerController$$ExternalSyntheticLambda3
+                @Override // java.lang.Runnable
+                public final void run() {
+                    final DualDarInnerLockScreenController dualDarInnerLockScreenController = this.f$0.mDualDarInnerLockScreenController;
+                    dualDarInnerLockScreenController.getClass();
+                    int innerAuthUserId = ((KnoxStateMonitorImpl) dualDarInnerLockScreenController.mKnoxStateMonitor).getInnerAuthUserId(UserHandle.getCallingUserId());
+                    int credentialTypeForUser = dualDarInnerLockScreenController.mLockPatternUtils.getCredentialTypeForUser(innerAuthUserId);
+                    DualDarInnerLockScreenController.AnonymousClass4 anonymousClass4 = dualDarInnerLockScreenController.mCallback;
+                    KeyguardSecurityContainer keyguardSecurityContainer = dualDarInnerLockScreenController.mParent;
+                    DualDarKeyguardSecurityCallback dualDarKeyguardSecurityCallback = dualDarInnerLockScreenController.mDualDarKeyguardSecurityCallback;
+                    KeyguardInputViewController.Factory factory = dualDarInnerLockScreenController.mKeyguardSecurityViewControllerFactory;
+                    if (credentialTypeForUser == 3) {
+                        KeyguardInputView keyguardInputView = DeviceType.isTablet() ? (KeyguardInputView) dualDarInnerLockScreenController.mLayoutInflater.inflate(R.layout.keyguard_knox_dual_dar_inner_pin_view_tablet, (ViewGroup) keyguardSecurityContainer, false) : (KeyguardInputView) dualDarInnerLockScreenController.mLayoutInflater.inflate(R.layout.keyguard_knox_dual_dar_inner_pin_view, (ViewGroup) keyguardSecurityContainer, false);
+                        dualDarInnerLockScreenController.mBaseView = keyguardInputView;
+                        keyguardInputView.setId(View.generateViewId());
+                        dualDarInnerLockScreenController.mBaseViewController = factory.create(dualDarInnerLockScreenController.mBaseView, KeyguardSecurityModel.SecurityMode.PIN, anonymousClass4);
+                        ((KeyguardSecSecurityContainerController$$ExternalSyntheticLambda2) dualDarKeyguardSecurityCallback).onSecurityModeChanged(false);
+                        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) dualDarInnerLockScreenController.mBaseView.getLayoutParams();
+                        layoutParams.bottomToBottom = 0;
+                        dualDarInnerLockScreenController.mBaseView.setLayoutParams(layoutParams);
+                    } else if (credentialTypeForUser != 4) {
+                        android.util.Log.d("DualDarInnerLockScreenController", "Something went wrong");
+                    } else {
+                        KeyguardInputView keyguardInputView2 = DeviceType.isTablet() ? (KeyguardInputView) dualDarInnerLockScreenController.mLayoutInflater.inflate(R.layout.keyguard_knox_dual_dar_inner_password_view_tablet, (ViewGroup) keyguardSecurityContainer, false) : (KeyguardInputView) dualDarInnerLockScreenController.mLayoutInflater.inflate(R.layout.keyguard_knox_dual_dar_inner_password_view, (ViewGroup) keyguardSecurityContainer, false);
+                        dualDarInnerLockScreenController.mBaseView = keyguardInputView2;
+                        keyguardInputView2.setId(View.generateViewId());
+                        dualDarInnerLockScreenController.mBaseViewController = factory.create(dualDarInnerLockScreenController.mBaseView, KeyguardSecurityModel.SecurityMode.Password, anonymousClass4);
+                        ((KeyguardSecSecurityContainerController$$ExternalSyntheticLambda2) dualDarKeyguardSecurityCallback).onSecurityModeChanged(true);
+                        ConstraintLayout.LayoutParams layoutParams2 = (ConstraintLayout.LayoutParams) dualDarInnerLockScreenController.mBaseView.getLayoutParams();
+                        layoutParams2.bottomToBottom = 0;
+                        layoutParams2.startToStart = 0;
+                        layoutParams2.endToEnd = 0;
+                        dualDarInnerLockScreenController.mBaseView.setLayoutParams(layoutParams2);
+                    }
+                    KeyguardInputView keyguardInputView3 = dualDarInnerLockScreenController.mBaseView;
+                    if (keyguardInputView3 != null) {
+                        keyguardInputView3.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: com.android.keyguard.DualDarInnerLockScreenController.2
+                            @Override // android.view.View.OnAttachStateChangeListener
+                            public final void onViewAttachedToWindow(View view) {
+                                DualDarInnerLockScreenController dualDarInnerLockScreenController2 = DualDarInnerLockScreenController.this;
+                                dualDarInnerLockScreenController2.mUpdateMonitor.registerCallback(dualDarInnerLockScreenController2.mUpdateCallback);
+                            }
+
+                            @Override // android.view.View.OnAttachStateChangeListener
+                            public final void onViewDetachedFromWindow(View view) {
+                                DualDarInnerLockScreenController dualDarInnerLockScreenController2 = DualDarInnerLockScreenController.this;
+                                dualDarInnerLockScreenController2.mUpdateMonitor.removeCallback(dualDarInnerLockScreenController2.mUpdateCallback);
+                            }
+                        });
+                        dualDarInnerLockScreenController.mBaseView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.keyguard.DualDarInnerLockScreenController$$ExternalSyntheticLambda0
+                            @Override // android.view.View.OnApplyWindowInsetsListener
+                            public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
+                                int iMax;
+                                DualDarInnerLockScreenController dualDarInnerLockScreenController2 = dualDarInnerLockScreenController;
+                                dualDarInnerLockScreenController2.getClass();
+                                if (dualDarInnerLockScreenController2.mLockPatternUtils.getCredentialTypeForUser(((KnoxStateMonitorImpl) dualDarInnerLockScreenController2.mKnoxStateMonitor).getInnerAuthUserId(UserHandle.getCallingUserId())) == 4) {
+                                    int i2 = LsRune.SECURITY_NAVBAR_ENABLED ? 0 : windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars()).bottom;
+                                    int i3 = windowInsets.getInsets(WindowInsets.Type.ime()).bottom;
+                                    boolean zIsVisible = windowInsets.isVisible(WindowInsets.Type.ime());
+                                    if (dualDarInnerLockScreenController2.mIsImeShown != zIsVisible) {
+                                        dualDarInnerLockScreenController2.mIsImeShown = zIsVisible;
+                                        dualDarInnerLockScreenController2.updateLayoutMargins(dualDarInnerLockScreenController2.mParent, dualDarInnerLockScreenController2.mBaseView);
+                                    }
+                                    iMax = Integer.max(i2, i3);
+                                } else {
+                                    iMax = 0;
+                                }
+                                view.setPadding(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), iMax);
+                                return windowInsets.inset(0, 0, 0, iMax);
+                            }
+                        });
+                    }
+                    KeyguardInputView keyguardInputView4 = dualDarInnerLockScreenController.mBaseView;
+                    if (keyguardInputView4 == null || keyguardInputView4.isAttachedToWindow()) {
+                        return;
+                    }
+                    keyguardSecurityContainer.addView(dualDarInnerLockScreenController.mBaseView);
+                    ConstraintSet constraintSet = new ConstraintSet();
+                    constraintSet.clone(keyguardSecurityContainer);
+                    constraintSet.connect(dualDarInnerLockScreenController.mBaseView.getId(), 3, 0, 3);
+                    constraintSet.connect(dualDarInnerLockScreenController.mBaseView.getId(), 6, 0, 6);
+                    constraintSet.connect(dualDarInnerLockScreenController.mBaseView.getId(), 7, 0, 7);
+                    constraintSet.connect(dualDarInnerLockScreenController.mBaseView.getId(), 4, 0, 4);
+                    constraintSet.constrainHeight(dualDarInnerLockScreenController.mBaseView.getId(), 0);
+                    constraintSet.constrainWidth(dualDarInnerLockScreenController.mBaseView.getId(), 0);
+                    constraintSet.applyTo(keyguardSecurityContainer);
+                    dualDarInnerLockScreenController.mBaseViewController.init();
+                    dualDarInnerLockScreenController.mBaseViewController.reset$1();
+                    dualDarInnerLockScreenController.mBaseViewController.onResume(2);
+                    dualDarInnerLockScreenController.mBaseViewController.startAppearAnimation();
+                    dualDarInnerLockScreenController.updateLayoutMargins(keyguardSecurityContainer, dualDarInnerLockScreenController.mBaseView);
+                    dualDarInnerLockScreenController.mBaseView.setFocusable(true);
+                    dualDarInnerLockScreenController.mBaseView.setFocusableInTouchMode(true);
+                    dualDarInnerLockScreenController.mBaseView.requestFocus();
+                    dualDarInnerLockScreenController.mUpdateMonitor.dispatchDualDarInnerLockScreenState(innerAuthUserId, true);
+                }
+            });
+            return false;
+        }
+        if (z6 && !z2) {
+            if (z5) {
+                KeyguardUnlockInfo.setAuthDetail(this.mCurrentSecurityMode);
+            }
+            this.mKeyguardSecurityCallback.finish(mainUserId);
+        }
+        return z6;
     }
 
     @Override // com.android.keyguard.KeyguardSecurityContainerController
@@ -748,20 +1096,22 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
             if (edmMonitor != null && edmMonitor.mLockedIccIdList != null && SubscriptionManager.isValidSubscriptionId(nextSubIdForState)) {
                 SubscriptionInfo activeSubscriptionInfo = ((SubscriptionManager) edmMonitor.knoxStateMonitor.mContext.getSystemService("telephony_subscription_service")).getActiveSubscriptionInfo(nextSubIdForState);
                 String iccId = activeSubscriptionInfo != null ? activeSubscriptionInfo.getIccId() : null;
-                Integer valueOf = Integer.valueOf(nextSubIdForState);
+                Integer numValueOf = Integer.valueOf(nextSubIdForState);
                 Object obj = activeSubscriptionInfo;
                 if (activeSubscriptionInfo == null) {
                     obj = "";
                 }
-                android.util.Log.d("EdmMonitor", String.format("isSubIdLockedByAdmin subId=%d, subInfo=%s, iccId=%s", valueOf, obj, iccId != null ? iccId : ""));
-                if (iccId != null) {
-                    for (String str : edmMonitor.mLockedIccIdList) {
-                        if (!str.equals(iccId)) {
-                        }
+                android.util.Log.d("EdmMonitor", String.format("isSubIdLockedByAdmin subId=%d, subInfo=%s, iccId=%s", numValueOf, obj, iccId != null ? iccId : ""));
+                if (iccId == null) {
+                    z = true;
+                    break;
+                }
+                for (String str : edmMonitor.mLockedIccIdList) {
+                    if (str.equals(iccId)) {
+                        z = true;
+                        break;
                     }
                 }
-                z = true;
-                break;
             }
             Log.d("KeyguardSecSecurityContainer", "reportSecurityMode SimPin -> None simPinSubId = %d, isLockedByMDM=%b", Integer.valueOf(nextSubIdForState), Boolean.valueOf(z));
         }
@@ -783,9 +1133,9 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
             if (keyguardArrowViewController.isInvalidArrowView()) {
                 return;
             }
-            SharedPreferences.Editor edit = keyguardArrowViewController.getContext().getSharedPreferences(SystemUIAnalytics.LOCK_PREF_NAME, 0).edit();
+            SharedPreferences.Editor editorEdit = keyguardArrowViewController.getContext().getSharedPreferences(SystemUIAnalytics.LOCK_PREF_NAME, 0).edit();
             int bouncerOneHandPosition = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).getBouncerOneHandPosition();
-            edit.putString(SystemUIAnalytics.STID_LOCK_BOUNCER_POSITION, bouncerOneHandPosition != 0 ? bouncerOneHandPosition != 2 ? SystemUIAnalytics.DT_BOUNCER_POSITION_CENTER : SystemUIAnalytics.DT_BOUNCER_POSITION_RIGHT : SystemUIAnalytics.DT_BOUNCER_POSITION_LEFT).apply();
+            editorEdit.putString(SystemUIAnalytics.STID_LOCK_BOUNCER_POSITION, bouncerOneHandPosition != 0 ? bouncerOneHandPosition != 2 ? SystemUIAnalytics.DT_BOUNCER_POSITION_CENTER : SystemUIAnalytics.DT_BOUNCER_POSITION_RIGHT : SystemUIAnalytics.DT_BOUNCER_POSITION_LEFT).apply();
         }
     }
 
@@ -837,6 +1187,10 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:68:0x00cb  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateLayoutMargins(int i) {
         int inDisplayFingerprintHeight;
         int i2;
@@ -849,7 +1203,7 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
         KeyguardSecurityModel.SecurityMode securityMode = this.mCurrentSecurityMode;
         this.mIsPassword = isPassword(securityMode);
         int i5 = 0;
-        this.mNavigationBarHeight = LsRune.SECURITY_NAVBAR_ENABLED ? resources.getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_left_edge_size) : 0;
+        this.mNavigationBarHeight = LsRune.SECURITY_NAVBAR_ENABLED ? resources.getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_right_edge_size) : 0;
         boolean z = LsRune.SECURITY_SUB_DISPLAY_LOCK;
         KeyguardUpdateMonitor keyguardUpdateMonitor = this.mUpdateMonitor;
         if (z && !DeviceState.isSmartViewFitToActiveDisplay()) {
@@ -888,19 +1242,10 @@ public class KeyguardSecSecurityContainerController extends KeyguardSecurityCont
                     if (!z3) {
                         dimensionPixelSize = this.mNavigationBarHeight;
                     }
-                    updateLayoutParams(0, 0, dimensionPixelSize);
-                    return;
                 }
-                dimensionPixelSize = 0;
-                updateLayoutParams(0, 0, dimensionPixelSize);
-                return;
+            } else {
+                dimensionPixelSize = (this.mIsPassword && this.mIsImeShown) ? 0 : this.mNavigationBarHeight;
             }
-            if (!this.mIsPassword || !this.mIsImeShown) {
-                dimensionPixelSize = this.mNavigationBarHeight;
-                updateLayoutParams(0, 0, dimensionPixelSize);
-                return;
-            }
-            dimensionPixelSize = 0;
             updateLayoutParams(0, 0, dimensionPixelSize);
             return;
         }

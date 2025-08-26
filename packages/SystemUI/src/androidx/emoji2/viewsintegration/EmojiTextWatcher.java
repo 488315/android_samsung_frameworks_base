@@ -9,7 +9,6 @@ import androidx.emoji2.text.EmojiCompat;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EmojiTextWatcher implements TextWatcher {
     public final EditText mEditText;
@@ -17,7 +16,6 @@ public final class EmojiTextWatcher implements TextWatcher {
     public final boolean mExpectInitializedEmojiCompat;
     public InitCallbackImpl mInitCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InitCallbackImpl extends EmojiCompat.InitCallback {
         public final Reference mViewRef;
 

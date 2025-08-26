@@ -7,6 +7,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -37,7 +38,6 @@ import kotlin.sequences.SequencesKt__SequencesKt$$ExternalSyntheticLambda2;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt$sortedWith$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ChannelEditorDialogController {
     public Drawable appIcon;
@@ -69,10 +69,10 @@ public final class ChannelEditorDialogController {
     public final void apply() {
         for (Map.Entry entry : ((LinkedHashMap) this.edits).entrySet()) {
             NotificationChannel notificationChannel = (NotificationChannel) entry.getKey();
-            int intValue = ((Number) entry.getValue()).intValue();
-            if (notificationChannel.getImportance() != intValue) {
+            int iIntValue = ((Number) entry.getValue()).intValue();
+            if (notificationChannel.getImportance() != iIntValue) {
                 try {
-                    notificationChannel.setImportance(intValue);
+                    notificationChannel.setImportance(iIntValue);
                     INotificationManager iNotificationManager = this.noMan;
                     String str = this.packageName;
                     str.getClass();
@@ -123,8 +123,8 @@ public final class ChannelEditorDialogController {
         }
     }
 
-    public final void prepareDialogForApp(String str, String str2, int i, NotificationChannel notificationChannel, Drawable drawable, NotificationGutsManager$$ExternalSyntheticLambda1 notificationGutsManager$$ExternalSyntheticLambda1) {
-        boolean z;
+    public final void prepareDialogForApp(String str, String str2, int i, NotificationChannel notificationChannel, Drawable drawable, NotificationGutsManager$$ExternalSyntheticLambda1 notificationGutsManager$$ExternalSyntheticLambda1) throws Resources.NotFoundException {
+        boolean zAreNotificationsEnabledForPackage;
         List list;
         this.appName = str;
         this.packageName = str2;
@@ -136,15 +136,15 @@ public final class ChannelEditorDialogController {
             str3.getClass();
             Integer num = this.appUid;
             num.getClass();
-            z = iNotificationManager.areNotificationsEnabledForPackage(str3, num.intValue());
+            zAreNotificationsEnabledForPackage = iNotificationManager.areNotificationsEnabledForPackage(str3, num.intValue());
         } catch (Exception e) {
             Log.e("ChannelDialogController", "Error calling NoMan", e);
-            z = false;
+            zAreNotificationsEnabledForPackage = false;
         }
-        this.appNotificationsEnabled = z;
+        this.appNotificationsEnabled = zAreNotificationsEnabledForPackage;
         this.onSettingsClickListener = notificationGutsManager$$ExternalSyntheticLambda1;
         this.channel = notificationChannel;
-        this.appNotificationsCurrentlyEnabled = Boolean.valueOf(z);
+        this.appNotificationsCurrentlyEnabled = Boolean.valueOf(zAreNotificationsEnabledForPackage);
         ((ArrayList) this.channelGroupList).clear();
         List list2 = this.channelGroupList;
         try {
@@ -204,9 +204,9 @@ public final class ChannelEditorDialogController {
             }), new Function1() { // from class: com.android.systemui.statusbar.notification.row.ChannelEditorDialogController$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     String id = ((NotificationChannel) obj2).getId();
-                    NotificationChannel notificationChannel4 = ChannelEditorDialogController.this.channel;
+                    NotificationChannel notificationChannel4 = this.f$0.channel;
                     notificationChannel4.getClass();
                     return Boolean.valueOf(Intrinsics.areEqual(id, notificationChannel4.getId()));
                 }
@@ -237,7 +237,7 @@ public final class ChannelEditorDialogController {
         channelEditorDialog4.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.statusbar.notification.row.ChannelEditorDialogController$initDialog$1$1
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                OnChannelEditorDialogFinishedListener onChannelEditorDialogFinishedListener = ChannelEditorDialogController.this.onFinishListener;
+                OnChannelEditorDialogFinishedListener onChannelEditorDialogFinishedListener = this.this$0.onFinishListener;
                 if (onChannelEditorDialogFinishedListener != null) {
                     onChannelEditorDialogFinishedListener.onChannelEditorDialogFinished();
                 }
@@ -254,7 +254,7 @@ public final class ChannelEditorDialogController {
         channelEditorDialog4.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.statusbar.notification.row.ChannelEditorDialogController$initDialog$1$3
             @Override // android.content.DialogInterface.OnShowListener
             public final void onShow(DialogInterface dialogInterface) {
-                ChannelEditorListView channelEditorListView2 = ChannelEditorListView.this;
+                ChannelEditorListView channelEditorListView2 = channelEditorListView;
                 if (channelEditorListView2 != null) {
                     NotificationChannel notificationChannel4 = this.channel;
                     notificationChannel4.getClass();
@@ -267,17 +267,17 @@ public final class ChannelEditorDialogController {
                         i3++;
                         final ChannelRow channelRow = (ChannelRow) obj2;
                         if (Intrinsics.areEqual(channelRow.channel, notificationChannel4)) {
-                            ValueAnimator ofObject = ValueAnimator.ofObject(new ArgbEvaluator(), 0, Integer.valueOf(channelRow.highlightColor));
-                            ofObject.setDuration(200L);
-                            ofObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.ChannelRow$playHighlight$1
+                            ValueAnimator valueAnimatorOfObject = ValueAnimator.ofObject(new ArgbEvaluator(), 0, Integer.valueOf(channelRow.highlightColor));
+                            valueAnimatorOfObject.setDuration(200L);
+                            valueAnimatorOfObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.ChannelRow$playHighlight$1
                                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                    ChannelRow.this.setBackgroundColor(((Integer) valueAnimator.getAnimatedValue()).intValue());
+                                    channelRow.setBackgroundColor(((Integer) valueAnimator.getAnimatedValue()).intValue());
                                 }
                             });
-                            ofObject.setRepeatMode(2);
-                            ofObject.setRepeatCount(5);
-                            ofObject.start();
+                            valueAnimatorOfObject.setRepeatMode(2);
+                            valueAnimatorOfObject.setRepeatCount(5);
+                            valueAnimatorOfObject.start();
                         }
                     }
                 }
@@ -288,8 +288,8 @@ public final class ChannelEditorDialogController {
             textView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.ChannelEditorDialogController$initDialog$1$4
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    ChannelEditorDialogController.this.apply();
-                    ChannelEditorDialogController.this.done();
+                    this.this$0.apply();
+                    this.this$0.done();
                 }
             });
         }
@@ -298,10 +298,10 @@ public final class ChannelEditorDialogController {
             textView2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.ChannelEditorDialogController$initDialog$1$5
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    ChannelEditorDialogController channelEditorDialogController = ChannelEditorDialogController.this;
+                    ChannelEditorDialogController channelEditorDialogController = this.this$0;
                     view.getClass();
                     channelEditorDialogController.launchSettings(view);
-                    ChannelEditorDialogController.this.done();
+                    this.this$0.done();
                 }
             });
         }

@@ -3,13 +3,12 @@ package com.android.wm.shell.freeform;
 import android.animation.Animator;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class FreeformTaskTransitionHandler$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ ArrayList f$0;
 
-    public /* synthetic */ FreeformTaskTransitionHandler$$ExternalSyntheticLambda0(ArrayList arrayList, int i) {
+    public /* synthetic */ FreeformTaskTransitionHandler$$ExternalSyntheticLambda0(int i, ArrayList arrayList) {
         this.$r8$classId = i;
         this.f$0 = arrayList;
     }

@@ -1,11 +1,12 @@
 package com.android.systemui.shade.data.repository;
 
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SecPanelExpansionStateRepository$panelState$1 extends SuspendLambda implements Function5 {
     /* synthetic */ float F$0;
@@ -20,98 +21,48 @@ final class SecPanelExpansionStateRepository$panelState$1 extends SuspendLambda 
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        float floatValue = ((Number) obj).floatValue();
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
-        float floatValue2 = ((Number) obj3).floatValue();
-        int intValue = ((Number) obj4).intValue();
+        float fFloatValue = ((Number) obj).floatValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+        float fFloatValue2 = ((Number) obj3).floatValue();
+        int iIntValue = ((Number) obj4).intValue();
         SecPanelExpansionStateRepository$panelState$1 secPanelExpansionStateRepository$panelState$1 = new SecPanelExpansionStateRepository$panelState$1((Continuation) obj5);
-        secPanelExpansionStateRepository$panelState$1.F$0 = floatValue;
-        secPanelExpansionStateRepository$panelState$1.Z$0 = booleanValue;
-        secPanelExpansionStateRepository$panelState$1.F$1 = floatValue2;
-        secPanelExpansionStateRepository$panelState$1.I$0 = intValue;
+        secPanelExpansionStateRepository$panelState$1.F$0 = fFloatValue;
+        secPanelExpansionStateRepository$panelState$1.Z$0 = zBooleanValue;
+        secPanelExpansionStateRepository$panelState$1.F$1 = fFloatValue2;
+        secPanelExpansionStateRepository$panelState$1.I$0 = iIntValue;
         return secPanelExpansionStateRepository$panelState$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0025, code lost:
-    
-        if (r1 == 1.0f) goto L15;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0027, code lost:
-    
-        r2 = 2;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0029, code lost:
-    
-        r2 = 1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x002d, code lost:
-    
-        if (r1 < 1.0f) goto L16;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0037, code lost:
-    
-        if (r7 == 1.0f) goto L15;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0027  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0029  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r7) {
-        /*
-            r6 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r0 = r6.label
-            if (r0 != 0) goto L40
-            kotlin.ResultKt.throwOnFailure(r7)
-            float r7 = r6.F$0
-            boolean r0 = r6.Z$0
-            float r1 = r6.F$1
-            int r6 = r6.I$0
-            r2 = 0
-            if (r0 == 0) goto L15
-            goto L3a
-        L15:
-            r0 = 0
-            r3 = 1065353216(0x3f800000, float:1.0)
-            r4 = 2
-            r5 = 1
-            if (r6 == r5) goto L30
-            if (r6 == r4) goto L2b
-            int r6 = (r1 > r0 ? 1 : (r1 == r0 ? 0 : -1))
-            if (r6 != 0) goto L23
-            goto L3a
-        L23:
-            int r6 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            if (r6 != 0) goto L29
-        L27:
-            r2 = r4
-            goto L3a
-        L29:
-            r2 = r5
-            goto L3a
-        L2b:
-            int r6 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            if (r6 >= 0) goto L27
-            goto L29
-        L30:
-            int r6 = (r7 > r0 ? 1 : (r7 == r0 ? 0 : -1))
-            if (r6 != 0) goto L35
-            goto L3a
-        L35:
-            int r6 = (r7 > r3 ? 1 : (r7 == r3 ? 0 : -1))
-            if (r6 != 0) goto L29
-            goto L27
-        L3a:
-            java.lang.Integer r6 = new java.lang.Integer
-            r6.<init>(r2)
-            return r6
-        L40:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.data.repository.SecPanelExpansionStateRepository$panelState$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        if (this.label != 0) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        ResultKt.throwOnFailure(obj);
+        float f = this.F$0;
+        boolean z = this.Z$0;
+        float f2 = this.F$1;
+        int i = this.I$0;
+        int i2 = 0;
+        if (!z) {
+            if (i != 1) {
+                if (i != 2) {
+                    if (f2 != 0.0f) {
+                        i2 = f2 == 1.0f ? 2 : 1;
+                    }
+                } else if (f2 < 1.0f) {
+                }
+            } else if (f != 0.0f) {
+                if (f == 1.0f) {
+                }
+            }
+        }
+        return new Integer(i2);
     }
 }

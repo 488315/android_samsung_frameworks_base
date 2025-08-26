@@ -5,11 +5,13 @@ import gov.nist.core.GenericObject;
 import gov.nist.core.HostPort;
 import gov.nist.core.NameValue;
 import gov.nist.core.NameValueList;
+import gov.nist.javax.sip.header.HeaderFactoryImpl;
 import java.text.ParseException;
 import java.util.Iterator;
+import javax.sip.PeerUnavailableException;
+import javax.sip.SipFactory;
 import javax.sip.address.SipURI;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SipUri extends GenericURI implements SipURI {
     private static final long serialVersionUID = 7749781076218987044L;
@@ -55,23 +57,128 @@ public class SipUri extends GenericURI implements SipURI {
         return stringBuffer.toString();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:203:0x00f4  */
-    /* JADX WARN: Removed duplicated region for block: B:206:0x00d5  */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00d3  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00f2  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x00fc  */
+    /* JADX WARN: Removed duplicated region for block: B:70:0x00d3  */
+    /* JADX WARN: Removed duplicated region for block: B:71:0x00d5  */
+    /* JADX WARN: Removed duplicated region for block: B:74:0x00dd  */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x00f2  */
+    /* JADX WARN: Removed duplicated region for block: B:84:0x00f4  */
+    /* JADX WARN: Removed duplicated region for block: B:87:0x00fc  */
     @Override // gov.nist.javax.sip.address.GenericURI, gov.nist.javax.sip.address.NetObject, gov.nist.core.GenericObject
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean equals(java.lang.Object r8) {
-        /*
-            Method dump skipped, instructions count: 696
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: gov.nist.javax.sip.address.SipUri.equals(java.lang.Object):boolean");
+    public final boolean equals(Object obj) throws PeerUnavailableException {
+        HostPort hostPort;
+        int port;
+        Authority authority;
+        HostPort hostPort2;
+        if (obj != this) {
+            if (obj instanceof SipURI) {
+                SipUri sipUri = (SipUri) ((SipURI) obj);
+                if (!(this.scheme.equalsIgnoreCase("sips") ^ sipUri.scheme.equalsIgnoreCase("sips"))) {
+                    if (!((getUser() == null) ^ (sipUri.getUser() == null))) {
+                        if (!((getUserPassword() == null) ^ (sipUri.getUserPassword() == null)) && ((getUser() == null || RFC2396UrlDecoder.decode(getUser()).equals(RFC2396UrlDecoder.decode(sipUri.getUser()))) && (getUserPassword() == null || RFC2396UrlDecoder.decode(getUserPassword()).equals(RFC2396UrlDecoder.decode(sipUri.getUserPassword()))))) {
+                            if (!((getHost() == null) ^ (sipUri.getHost() == null)) && (getHost() == null || getHost().equalsIgnoreCase(sipUri.getHost()))) {
+                                Authority authority2 = this.authority;
+                                if (authority2 != null) {
+                                    HostPort hostPort3 = authority2.hostPort;
+                                    if ((hostPort3 == null ? null : hostPort3.getHost()) != null) {
+                                        hostPort = this.authority.hostPort;
+                                    }
+                                    port = hostPort != null ? -1 : hostPort.getPort();
+                                    authority = sipUri.authority;
+                                    if (authority != null) {
+                                        HostPort hostPort4 = authority.hostPort;
+                                        if ((hostPort4 == null ? null : hostPort4.getHost()) != null) {
+                                            hostPort2 = sipUri.authority.hostPort;
+                                        }
+                                        if (port == (hostPort2 == null ? -1 : hostPort2.getPort())) {
+                                            Iterator names = this.uriParms.getNames();
+                                            while (true) {
+                                                if (names.hasNext()) {
+                                                    String str = (String) names.next();
+                                                    String parameter = getParameter(str);
+                                                    String parameter2 = sipUri.getParameter(str);
+                                                    if (parameter != null && parameter2 != null && !RFC2396UrlDecoder.decode(parameter).equalsIgnoreCase(RFC2396UrlDecoder.decode(parameter2))) {
+                                                        break;
+                                                    }
+                                                } else {
+                                                    NameValueList nameValueList = this.uriParms;
+                                                    boolean z = (nameValueList != null ? (String) nameValueList.getValue("transport") : null) == null;
+                                                    NameValueList nameValueList2 = sipUri.uriParms;
+                                                    if (!(z ^ ((nameValueList2 != null ? (String) nameValueList2.getValue("transport") : null) == null))) {
+                                                        if (!((sipUri.getParameter("user") == null) ^ (getParameter("user") == null))) {
+                                                            Integer num = (Integer) this.uriParms.getValue("ttl");
+                                                            boolean z2 = (num != null ? num.intValue() : -1) == -1;
+                                                            Integer num2 = (Integer) sipUri.uriParms.getValue("ttl");
+                                                            if (!(z2 ^ ((num2 != null ? num2.intValue() : -1) == -1))) {
+                                                                if (!((sipUri.getParameter("method") == null) ^ (getParameter("method") == null))) {
+                                                                    NameValue nameValue = this.uriParms.getNameValue("maddr");
+                                                                    boolean z3 = (nameValue == null ? null : (String) nameValue.getValueAsObject()) == null;
+                                                                    NameValue nameValue2 = sipUri.uriParms.getNameValue("maddr");
+                                                                    if (!(z3 ^ ((nameValue2 == null ? null : (String) nameValue2.getValueAsObject()) == null)) && ((!this.qheaders.getNames().hasNext() || sipUri.qheaders.getNames().hasNext()) && (this.qheaders.getNames().hasNext() || !sipUri.qheaders.getNames().hasNext()))) {
+                                                                        if (this.qheaders.getNames().hasNext() && sipUri.qheaders.getNames().hasNext()) {
+                                                                            try {
+                                                                                SipFactory.getInstance().getClass();
+                                                                                try {
+                                                                                    new HeaderFactoryImpl();
+                                                                                    Iterator names2 = this.qheaders.getNames();
+                                                                                    while (names2.hasNext()) {
+                                                                                        String str2 = (String) names2.next();
+                                                                                        String string = this.qheaders.getValue(str2) != null ? this.qheaders.getValue(str2).toString() : null;
+                                                                                        String string2 = sipUri.qheaders.getValue(str2) != null ? sipUri.qheaders.getValue(str2).toString() : null;
+                                                                                        if ((string != null || string2 == null) && (string2 != null || string == null)) {
+                                                                                            if (string != null || string2 != null) {
+                                                                                                try {
+                                                                                                    if (!HeaderFactoryImpl.createHeader(str2, RFC2396UrlDecoder.decode(string)).equals(HeaderFactoryImpl.createHeader(str2, RFC2396UrlDecoder.decode(string2)))) {
+                                                                                                    }
+                                                                                                } catch (ParseException unused) {
+                                                                                                    encode();
+                                                                                                    sipUri.toString();
+                                                                                                    return false;
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                } catch (Exception e) {
+                                                                                    if (e instanceof PeerUnavailableException) {
+                                                                                        throw ((PeerUnavailableException) e);
+                                                                                    }
+                                                                                    throw new PeerUnavailableException("Failed to create HeaderFactory", e);
+                                                                                }
+                                                                            } catch (PeerUnavailableException unused2) {
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    hostPort2 = null;
+                                    if (port == (hostPort2 == null ? -1 : hostPort2.getPort())) {
+                                    }
+                                }
+                                hostPort = null;
+                                if (hostPort != null) {
+                                }
+                                authority = sipUri.authority;
+                                if (authority != null) {
+                                }
+                                hostPort2 = null;
+                                if (port == (hostPort2 == null ? -1 : hostPort2.getPort())) {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        return true;
     }
 
     public final String getHost() {

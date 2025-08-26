@@ -48,15 +48,15 @@ final class UserRestrictionsDetector extends BroadcastReceiver {
     @Override // android.content.BroadcastReceiver
     public void onReceive(Context context, Intent intent) {
         if (UserManager.ACTION_USER_RESTRICTIONS_CHANGED.equals(intent.getAction())) {
-            boolean isUnmuteMicrophoneDisallowed = isUnmuteMicrophoneDisallowed();
+            boolean zIsUnmuteMicrophoneDisallowed = isUnmuteMicrophoneDisallowed();
             synchronized (this.mLock) {
-                if (isUnmuteMicrophoneDisallowed == this.mIsUnmuteMicDisallowed) {
+                if (zIsUnmuteMicrophoneDisallowed == this.mIsUnmuteMicDisallowed) {
                     return;
                 }
-                this.mIsUnmuteMicDisallowed = isUnmuteMicrophoneDisallowed;
+                this.mIsUnmuteMicDisallowed = zIsUnmuteMicrophoneDisallowed;
                 UserRestrictionsCallback userRestrictionsCallback = this.mUserRestrictionsCallback;
                 if (userRestrictionsCallback != null) {
-                    userRestrictionsCallback.onMicrophoneRestrictionChanged(isUnmuteMicrophoneDisallowed);
+                    userRestrictionsCallback.onMicrophoneRestrictionChanged(zIsUnmuteMicrophoneDisallowed);
                 }
             }
         }

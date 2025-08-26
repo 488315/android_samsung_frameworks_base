@@ -4,8 +4,8 @@ import kotlin.Lazy;
 import kotlin.Pair;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class StateDerived extends StateStore {
     public volatile Object cache;
@@ -13,7 +13,6 @@ public abstract class StateDerived extends StateStore {
     public final TransactionCache transactionCache;
     public volatile long validatedEpoch;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EmptyCache {
         public static final EmptyCache INSTANCE = new EmptyCache();
 
@@ -39,59 +38,42 @@ public abstract class StateDerived extends StateStore {
 
     @Override // com.android.systemui.kairos.internal.StateStore
     public final Pair getCurrentWithEpoch(final EvalScope evalScope) {
-        Object obj;
+        Object objDeferAsync;
         TransactionCache transactionCache = this.transactionCache;
         if (transactionCache.epoch < evalScope.getEpoch()) {
             transactionCache.epoch = evalScope.getEpoch();
-            obj = evalScope.deferAsync(new Function0() { // from class: com.android.systemui.kairos.internal.StateDerived$$ExternalSyntheticLambda0
-                /* JADX WARN: Code restructure failed: missing block: B:8:0x002c, code lost:
-                
-                    if (r1 == null) goto L10;
-                 */
+            objDeferAsync = evalScope.deferAsync(new Function0() { // from class: com.android.systemui.kairos.internal.StateDerived$$ExternalSyntheticLambda0
+                /* JADX WARN: Removed duplicated region for block: B:10:0x002e  */
                 @Override // kotlin.jvm.functions.Function0
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object invoke() {
-                    /*
-                        r6 = this;
-                        com.android.systemui.kairos.internal.StateDerived r0 = com.android.systemui.kairos.internal.StateDerived.this
-                        com.android.systemui.kairos.internal.EvalScope r6 = r2
-                        kotlin.Pair r6 = r0.recalc(r6)
-                        if (r6 == 0) goto L2e
-                        java.lang.Object r1 = r6.component1()
-                        java.lang.Object r6 = r6.component2()
-                        java.lang.Number r6 = (java.lang.Number) r6
-                        long r2 = r6.longValue()
-                        long r4 = r0.validatedEpoch
-                        int r6 = (r2 > r4 ? 1 : (r2 == r4 ? 0 : -1))
-                        if (r6 <= 0) goto L2c
-                        r0.validatedEpoch = r2
-                        java.lang.Object r6 = r0.cache
-                        boolean r6 = kotlin.jvm.internal.Intrinsics.areEqual(r6, r1)
-                        if (r6 != 0) goto L2c
-                        r0.cache = r1
-                        r0.invalidatedEpoch = r2
-                    L2c:
-                        if (r1 != 0) goto L30
-                    L2e:
-                        java.lang.Object r1 = r0.cache
-                    L30:
-                        long r2 = r0.invalidatedEpoch
-                        java.lang.Long r6 = java.lang.Long.valueOf(r2)
-                        kotlin.Pair r0 = new kotlin.Pair
-                        r0.<init>(r1, r6)
-                        return r0
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.kairos.internal.StateDerived$$ExternalSyntheticLambda0.invoke():java.lang.Object");
+                public final Object invoke() {
+                    Object objComponent1;
+                    StateDerived stateDerived = this.f$0;
+                    Pair pairRecalc = stateDerived.recalc(evalScope);
+                    if (pairRecalc != null) {
+                        objComponent1 = pairRecalc.component1();
+                        long jLongValue = ((Number) pairRecalc.component2()).longValue();
+                        if (jLongValue > stateDerived.validatedEpoch) {
+                            stateDerived.validatedEpoch = jLongValue;
+                            if (!Intrinsics.areEqual(stateDerived.cache, objComponent1)) {
+                                stateDerived.cache = objComponent1;
+                                stateDerived.invalidatedEpoch = jLongValue;
+                            }
+                        }
+                        if (objComponent1 == null) {
+                            objComponent1 = stateDerived.cache;
+                        }
+                    }
+                    return new Pair(objComponent1, Long.valueOf(stateDerived.invalidatedEpoch));
                 }
             });
-            evalScope.getTransactionStore().set(transactionCache.key, obj);
+            evalScope.getTransactionStore().set(transactionCache.key, objDeferAsync);
         } else {
-            obj = evalScope.getTransactionStore().get(transactionCache.key);
+            objDeferAsync = evalScope.getTransactionStore().get(transactionCache.key);
         }
-        return (Pair) ((Lazy) obj).getValue();
+        return (Pair) ((Lazy) objDeferAsync).getValue();
     }
 
     public abstract Pair recalc(EvalScope evalScope);

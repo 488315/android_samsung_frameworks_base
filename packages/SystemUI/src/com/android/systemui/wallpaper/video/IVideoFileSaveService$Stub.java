@@ -14,7 +14,6 @@ import com.android.systemui.LsRune;
 import com.android.systemui.wallpaper.video.VideoFileSaveService;
 import java.io.File;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class IVideoFileSaveService$Stub extends Binder implements IInterface {
     public IVideoFileSaveService$Stub() {
@@ -32,41 +31,41 @@ public abstract class IVideoFileSaveService$Stub extends Binder implements IInte
         }
         switch (i) {
             case 1:
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
                 VideoFileSaveService videoFileSaveService = VideoFileSaveService.this;
-                videoFileSaveService.mVideoFileExt = readString;
-                videoFileSaveService.mUserId = readInt;
-                videoFileSaveService.mCurentWhich = readInt2;
+                videoFileSaveService.mVideoFileExt = string;
+                videoFileSaveService.mUserId = i3;
+                videoFileSaveService.mCurentWhich = i4;
                 parcel2.writeNoException();
                 return true;
             case 2:
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                ParcelFileDescriptor videoFileDescriptorAsUserWithFilename = ((VideoFileSaveService.AnonymousClass2) this).getVideoFileDescriptorAsUserWithFilename(null, readBoolean);
+                ParcelFileDescriptor videoFileDescriptorAsUserWithFilename = ((VideoFileSaveService.AnonymousClass2) this).getVideoFileDescriptorAsUserWithFilename(null, z);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(videoFileDescriptorAsUserWithFilename, 1);
                 return true;
             case 3:
-                boolean readBoolean2 = parcel.readBoolean();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                boolean isVideoFileExistsWithFilename = ((VideoFileSaveService.AnonymousClass2) this).isVideoFileExistsWithFilename(null, readBoolean2);
+                boolean zIsVideoFileExistsWithFilename = ((VideoFileSaveService.AnonymousClass2) this).isVideoFileExistsWithFilename(null, z2);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isVideoFileExistsWithFilename);
+                parcel2.writeBoolean(zIsVideoFileExistsWithFilename);
                 return true;
             case 4:
-                boolean readBoolean3 = parcel.readBoolean();
+                boolean z3 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                boolean deleteVideoFileWithFilename = ((VideoFileSaveService.AnonymousClass2) this).deleteVideoFileWithFilename(null, readBoolean3);
+                boolean zDeleteVideoFileWithFilename = ((VideoFileSaveService.AnonymousClass2) this).deleteVideoFileWithFilename(null, z3);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(deleteVideoFileWithFilename);
+                parcel2.writeBoolean(zDeleteVideoFileWithFilename);
                 return true;
             case 5:
-                boolean renameVideoFileWithFilename = ((VideoFileSaveService.AnonymousClass2) this).renameVideoFileWithFilename(null);
+                boolean zRenameVideoFileWithFilename = ((VideoFileSaveService.AnonymousClass2) this).renameVideoFileWithFilename(null);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(renameVideoFileWithFilename);
+                parcel2.writeBoolean(zRenameVideoFileWithFilename);
                 return true;
             case 6:
                 ((VideoFileSaveService.AnonymousClass2) this).setVideoLockscreenWallpaperAsOwnerWithFilename(null);
@@ -79,44 +78,44 @@ public abstract class IVideoFileSaveService$Stub extends Binder implements IInte
                 parcel2.writeNoException();
                 return true;
             case 8:
-                String readString2 = parcel.readString();
-                boolean readBoolean4 = parcel.readBoolean();
+                String string2 = parcel.readString();
+                boolean z4 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                ParcelFileDescriptor videoFileDescriptorAsUserWithFilename2 = ((VideoFileSaveService.AnonymousClass2) this).getVideoFileDescriptorAsUserWithFilename(readString2, readBoolean4);
+                ParcelFileDescriptor videoFileDescriptorAsUserWithFilename2 = ((VideoFileSaveService.AnonymousClass2) this).getVideoFileDescriptorAsUserWithFilename(string2, z4);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(videoFileDescriptorAsUserWithFilename2, 1);
                 return true;
             case 9:
-                String readString3 = parcel.readString();
-                boolean readBoolean5 = parcel.readBoolean();
+                String string3 = parcel.readString();
+                boolean z5 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                boolean isVideoFileExistsWithFilename2 = ((VideoFileSaveService.AnonymousClass2) this).isVideoFileExistsWithFilename(readString3, readBoolean5);
+                boolean zIsVideoFileExistsWithFilename2 = ((VideoFileSaveService.AnonymousClass2) this).isVideoFileExistsWithFilename(string3, z5);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isVideoFileExistsWithFilename2);
+                parcel2.writeBoolean(zIsVideoFileExistsWithFilename2);
                 return true;
             case 10:
-                String readString4 = parcel.readString();
-                boolean readBoolean6 = parcel.readBoolean();
+                String string4 = parcel.readString();
+                boolean z6 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                boolean deleteVideoFileWithFilename2 = ((VideoFileSaveService.AnonymousClass2) this).deleteVideoFileWithFilename(readString4, readBoolean6);
+                boolean zDeleteVideoFileWithFilename2 = ((VideoFileSaveService.AnonymousClass2) this).deleteVideoFileWithFilename(string4, z6);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(deleteVideoFileWithFilename2);
+                parcel2.writeBoolean(zDeleteVideoFileWithFilename2);
                 return true;
             case 11:
-                String readString5 = parcel.readString();
+                String string5 = parcel.readString();
                 parcel.enforceNoDataAvail();
                 VideoFileSaveService.AnonymousClass2 anonymousClass2 = (VideoFileSaveService.AnonymousClass2) this;
                 if (UserHandle.semGetMyUserId() != 0) {
                     throw new IllegalStateException("This service must be run from the owner(" + UserHandle.semGetMyUserId() + ")");
                 }
-                boolean z = LsRune.WALLPAPER_SUB_DISPLAY_MODE && !LsRune.WALLPAPER_SUB_WATCHFACE;
+                boolean z7 = LsRune.WALLPAPER_SUB_DISPLAY_MODE && !LsRune.WALLPAPER_SUB_WATCHFACE;
                 WallpaperManager wallpaperManager = WallpaperManager.getInstance(VideoFileSaveService.this.getApplicationContext());
                 String videoFilePath = wallpaperManager.getVideoFilePath(2);
                 String videoFilePath2 = wallpaperManager.getVideoFilePath(18);
                 for (File file : new File("/data/user_de/0/com.android.systemui/files").listFiles(VideoFileSaveService.this.mVideoWallpaperFileFilter)) {
                     String name = file.getName();
-                    if ((TextUtils.isEmpty(videoFilePath) || !videoFilePath.contains(readString5)) && (!z || TextUtils.isEmpty(videoFilePath2) || !videoFilePath2.contains(readString5))) {
-                        if (name.contains(readString5) && file.delete()) {
+                    if ((TextUtils.isEmpty(videoFilePath) || !videoFilePath.contains(string5)) && (!z7 || TextUtils.isEmpty(videoFilePath2) || !videoFilePath2.contains(string5))) {
+                        if (name.contains(string5) && file.delete()) {
                             Log.i("VideoFileCopyService", "deleteVideoFiles: ".concat(name));
                         } else {
                             Log.w("VideoFileCopyService", "deleteVideoFiles, fail: ".concat(name));
@@ -126,23 +125,23 @@ public abstract class IVideoFileSaveService$Stub extends Binder implements IInte
                 parcel2.writeNoException();
                 return true;
             case 12:
-                String readString6 = parcel.readString();
+                String string6 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean renameVideoFileWithFilename2 = ((VideoFileSaveService.AnonymousClass2) this).renameVideoFileWithFilename(readString6);
+                boolean zRenameVideoFileWithFilename2 = ((VideoFileSaveService.AnonymousClass2) this).renameVideoFileWithFilename(string6);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(renameVideoFileWithFilename2);
+                parcel2.writeBoolean(zRenameVideoFileWithFilename2);
                 return true;
             case 13:
-                String readString7 = parcel.readString();
+                String string7 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                ((VideoFileSaveService.AnonymousClass2) this).setVideoLockscreenWallpaperAsOwnerWithFilename(readString7);
+                ((VideoFileSaveService.AnonymousClass2) this).setVideoLockscreenWallpaperAsOwnerWithFilename(string7);
                 parcel2.writeNoException();
                 return true;
             case 14:
-                String readString8 = parcel.readString();
+                String string8 = parcel.readString();
                 Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                ((VideoFileSaveService.AnonymousClass2) this).setVideoWallpaperAsOwnerWithFilename(bundle2, readString8);
+                ((VideoFileSaveService.AnonymousClass2) this).setVideoWallpaperAsOwnerWithFilename(bundle2, string8);
                 parcel2.writeNoException();
                 return true;
             default:

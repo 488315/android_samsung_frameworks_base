@@ -22,17 +22,16 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class MergeKt {
     public static final EventsInit merge(Events... eventsArr) {
-        final Iterable asIterable = ArraysKt___ArraysKt.asIterable(eventsArr);
-        final MuxLifecycle switchDeferredImpl = MuxDeferredKt.switchDeferredImpl(new Function1() { // from class: com.android.systemui.kairos.MergeKt$merge$$inlined$mergeNodes$1
+        final Iterable iterableAsIterable = ArraysKt___ArraysKt.asIterable(eventsArr);
+        final MuxLifecycle muxLifecycleSwitchDeferredImpl = MuxDeferredKt.switchDeferredImpl(new Function1() { // from class: com.android.systemui.kairos.MergeKt$merge$$inlined$mergeNodes$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 EvalScope evalScope = (EvalScope) obj;
-                Iterable iterable = asIterable;
+                Iterable iterable = iterableAsIterable;
                 ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable, 10));
                 Iterator it = iterable.iterator();
                 while (it.hasNext()) {
@@ -43,7 +42,7 @@ public abstract class MergeKt {
         }, new Function1() { // from class: com.android.systemui.kairos.internal.MuxDeferredKt$mergeNodes$switchNode$4
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return PullNodesKt.neverImpl;
             }
         }, new MutableArrayMapK.Factory());
@@ -64,24 +63,24 @@ public abstract class MergeKt {
         return new EventsInit(new Init(null, new InitKt$constInit$1(PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.MuxDeferredKt$mergeNodes$$inlined$mapImpl$3
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                ActivationResult activate = switchDeferredImpl.activate(evalScope, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = muxLifecycleSwitchDeferredImpl.activate(evalScope, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, muxDeferredKt$mergeNodes$merged$6), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         }))));
     }
 
     public static final EventsInit mergeLeft(Events... eventsArr) {
-        final Iterable asIterable = ArraysKt___ArraysKt.asIterable(eventsArr);
-        final MuxLifecycle switchDeferredImpl = MuxDeferredKt.switchDeferredImpl(new Function1() { // from class: com.android.systemui.kairos.MergeKt$mergeLeft$$inlined$mergeNodesLeft$1
+        final Iterable iterableAsIterable = ArraysKt___ArraysKt.asIterable(eventsArr);
+        final MuxLifecycle muxLifecycleSwitchDeferredImpl = MuxDeferredKt.switchDeferredImpl(new Function1() { // from class: com.android.systemui.kairos.MergeKt$mergeLeft$$inlined$mergeNodesLeft$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 EvalScope evalScope = (EvalScope) obj;
-                Iterable iterable = asIterable;
+                Iterable iterable = iterableAsIterable;
                 ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable, 10));
                 Iterator it = iterable.iterator();
                 while (it.hasNext()) {
@@ -92,7 +91,7 @@ public abstract class MergeKt {
         }, new Function1() { // from class: com.android.systemui.kairos.internal.MuxDeferredKt$mergeNodesLeft$switchNode$2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return PullNodesKt.neverImpl;
             }
         }, new MutableArrayMapK.Factory());
@@ -106,12 +105,12 @@ public abstract class MergeKt {
         return new EventsInit(new Init(null, new InitKt$constInit$1(PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.MuxDeferredKt$mergeNodesLeft$$inlined$mapImpl$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                ActivationResult activate = switchDeferredImpl.activate(evalScope, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = muxLifecycleSwitchDeferredImpl.activate(evalScope, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, muxDeferredKt$mergeNodesLeft$merged$2), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         }))));
     }

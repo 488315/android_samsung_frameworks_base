@@ -3,7 +3,6 @@ package com.android.wm.shell.freeform;
 import android.animation.ValueAnimator;
 import android.widget.ImageView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class FreeformContainerView$$ExternalSyntheticLambda4 implements ValueAnimator.AnimatorUpdateListener {
     public final /* synthetic */ int $r8$classId;
@@ -31,9 +30,9 @@ public final /* synthetic */ class FreeformContainerView$$ExternalSyntheticLambd
                 FreeformContainerView freeformContainerView2 = this.f$0;
                 ImageView imageView2 = (ImageView) this.f$1;
                 if (!freeformContainerView2.mIsAppIconMoving) {
-                    float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                    imageView2.setScaleX(floatValue);
-                    imageView2.setScaleY(floatValue);
+                    float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                    imageView2.setScaleX(fFloatValue);
+                    imageView2.setScaleY(fFloatValue);
                     break;
                 }
                 break;

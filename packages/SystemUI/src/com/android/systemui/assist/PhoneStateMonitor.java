@@ -23,7 +23,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PhoneStateMonitor {
     public static final String[] DEFAULT_HOME_CHANGE_ACTIONS = {"android.intent.action.ACTION_PREFERRED_ACTIVITY_CHANGED", "android.intent.action.PACKAGE_ADDED", "android.intent.action.PACKAGE_CHANGED", "android.intent.action.PACKAGE_REMOVED"};
@@ -34,7 +33,6 @@ public final class PhoneStateMonitor {
     public boolean mLauncherShowing;
     public final StatusBarStateController mStatusBarStateController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.assist.PhoneStateMonitor$1, reason: invalid class name */
     public class AnonymousClass1 extends BroadcastReceiver {
         public AnonymousClass1() {
@@ -63,16 +61,16 @@ public final class PhoneStateMonitor {
         }
         IntentFilter intentFilter = new IntentFilter();
         String[] strArr = DEFAULT_HOME_CHANGE_ACTIONS;
-        boolean z = false;
+        boolean zEquals = false;
         for (int i = 0; i < 4; i++) {
             intentFilter.addAction(strArr[i]);
         }
         broadcastDispatcher.registerReceiver(intentFilter, new AnonymousClass1());
         ActivityManager.RunningTaskInfo runningTask = ActivityManagerWrapper.sInstance.getRunningTask();
         if (runningTask != null && (componentName = runningTask.topActivity) != null) {
-            z = componentName.equals(this.mDefaultHome);
+            zEquals = componentName.equals(this.mDefaultHome);
         }
-        this.mLauncherShowing = z;
+        this.mLauncherShowing = zEquals;
         TaskStackChangeListeners.INSTANCE.registerTaskStackListener(new TaskStackChangeListener() { // from class: com.android.systemui.assist.PhoneStateMonitor.2
             @Override // com.android.systemui.shared.system.TaskStackChangeListener
             public final void onTaskMovedToFront(ActivityManager.RunningTaskInfo runningTaskInfo) {
@@ -85,36 +83,36 @@ public final class PhoneStateMonitor {
     }
 
     public static ComponentName getCurrentDefaultHome() {
-        ComponentName componentName;
+        ComponentName homeActivities;
         ArrayList arrayList = new ArrayList();
         PackageManagerWrapper.sInstance.getClass();
         try {
-            componentName = PackageManagerWrapper.mIPackageManager.getHomeActivities(arrayList);
+            homeActivities = PackageManagerWrapper.mIPackageManager.getHomeActivities(arrayList);
         } catch (RemoteException e) {
             e.printStackTrace();
-            componentName = null;
+            homeActivities = null;
         }
-        if (componentName != null) {
-            return componentName;
+        if (homeActivities != null) {
+            return homeActivities;
         }
         int size = arrayList.size();
         int i = Integer.MIN_VALUE;
         int i2 = 0;
         while (true) {
-            ComponentName componentName2 = null;
+            ComponentName componentName = null;
             while (i2 < size) {
                 Object obj = arrayList.get(i2);
                 i2++;
                 ResolveInfo resolveInfo = (ResolveInfo) obj;
                 int i3 = resolveInfo.priority;
                 if (i3 > i) {
-                    componentName2 = resolveInfo.activityInfo.getComponentName();
+                    componentName = resolveInfo.activityInfo.getComponentName();
                     i = resolveInfo.priority;
                 } else if (i3 == i) {
                     break;
                 }
             }
-            return componentName2;
+            return componentName;
         }
     }
 

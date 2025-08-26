@@ -14,13 +14,13 @@ public final class QuantizerMap implements Quantizer {
 
     @Override // com.android.internal.graphics.palette.Quantizer
     public void quantize(int[] iArr, int i) {
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
         for (int i2 : iArr) {
-            hashMap.merge(Integer.valueOf(i2), 1, new AppOpsManager$$ExternalSyntheticLambda4());
+            map.merge(Integer.valueOf(i2), 1, new AppOpsManager$$ExternalSyntheticLambda4());
         }
-        this.mColorToCount = hashMap;
+        this.mColorToCount = map;
         ArrayList arrayList = new ArrayList();
-        for (Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             arrayList.add(new Palette.Swatch(entry.getKey().intValue(), entry.getValue().intValue()));
         }
         this.mPalette = Palette.from(arrayList);

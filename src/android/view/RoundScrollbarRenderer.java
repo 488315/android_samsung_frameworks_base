@@ -38,7 +38,7 @@ public class RoundScrollbarRenderer {
     private final Paint mTrackPaint;
     private final boolean mUseRefactoredRoundScrollbar;
 
-    public RoundScrollbarRenderer(View view) {
+    public RoundScrollbarRenderer(View view) throws Resources.NotFoundException {
         Paint paint = new Paint();
         this.mThumbPaint = paint;
         Paint paint2 = new Paint();
@@ -100,22 +100,22 @@ public class RoundScrollbarRenderer {
         if (f == 0.0f) {
             return;
         }
-        float computeVerticalScrollRange = this.mParent.computeVerticalScrollRange();
-        float computeVerticalScrollExtent = this.mParent.computeVerticalScrollExtent();
-        float computeVerticalScrollOffset = this.mParent.computeVerticalScrollOffset();
-        float computeScrollExtent = computeScrollExtent(computeVerticalScrollExtent, computeVerticalScrollRange);
-        if (computeScrollExtent < 0.0f) {
+        float fComputeVerticalScrollRange = this.mParent.computeVerticalScrollRange();
+        float fComputeVerticalScrollExtent = this.mParent.computeVerticalScrollExtent();
+        float fComputeVerticalScrollOffset = this.mParent.computeVerticalScrollOffset();
+        float fComputeScrollExtent = computeScrollExtent(fComputeVerticalScrollExtent, fComputeVerticalScrollRange);
+        if (fComputeScrollExtent < 0.0f) {
             return;
         }
-        resizeGradually(computeVerticalScrollRange, computeVerticalScrollOffset);
-        float f2 = computeVerticalScrollRange - this.mMaxScrollDiff;
-        float f3 = computeVerticalScrollOffset - this.mCurrentScrollDiff;
+        resizeGradually(fComputeVerticalScrollRange, fComputeVerticalScrollOffset);
+        float f2 = fComputeVerticalScrollRange - this.mMaxScrollDiff;
+        float f3 = fComputeVerticalScrollOffset - this.mCurrentScrollDiff;
         applyThumbColor(f);
-        float computeSweepAngle = computeSweepAngle(computeScrollExtent, f2);
-        float computeStartAngle = computeStartAngle(Math.max(0.0f, f3), computeSweepAngle, f2, computeScrollExtent);
+        float fComputeSweepAngle = computeSweepAngle(fComputeScrollExtent, f2);
+        float fComputeStartAngle = computeStartAngle(Math.max(0.0f, f3), fComputeSweepAngle, f2, fComputeScrollExtent);
         updateBounds(rect);
         this.mDrawToLeft = z;
-        drawRoundScrollbars(canvas, computeStartAngle, computeSweepAngle, f);
+        drawRoundScrollbars(canvas, fComputeStartAngle, fComputeSweepAngle, f);
     }
 
     private void drawRoundScrollbars(Canvas canvas, float f, float f2, float f3) {
@@ -143,10 +143,10 @@ public class RoundScrollbarRenderer {
     }
 
     void getRoundVerticalScrollBarBounds(Rect rect) {
-        float dpToPx = dpToPx(2.0f);
+        float fDpToPx = dpToPx(2.0f);
         int i = this.mParent.mRight - this.mParent.mLeft;
         int i2 = this.mParent.mBottom - this.mParent.mTop;
-        int i3 = (int) dpToPx;
+        int i3 = (int) fDpToPx;
         rect.left = this.mParent.mScrollX + i3;
         rect.top = this.mParent.mScrollY + i3;
         rect.right = (this.mParent.mScrollX + i) - i3;
@@ -162,16 +162,16 @@ public class RoundScrollbarRenderer {
     }
 
     private void applyThumbColor(float f) {
-        int applyAlpha = applyAlpha(DEFAULT_THUMB_COLOR, f);
-        if (this.mThumbPaint.getColor() != applyAlpha) {
-            this.mThumbPaint.setColor(applyAlpha);
+        int iApplyAlpha = applyAlpha(DEFAULT_THUMB_COLOR, f);
+        if (this.mThumbPaint.getColor() != iApplyAlpha) {
+            this.mThumbPaint.setColor(iApplyAlpha);
         }
     }
 
     private void applyTrackColor(float f) {
-        int applyAlpha = applyAlpha(DEFAULT_TRACK_COLOR, f);
-        if (this.mTrackPaint.getColor() != applyAlpha) {
-            this.mTrackPaint.setColor(applyAlpha);
+        int iApplyAlpha = applyAlpha(DEFAULT_TRACK_COLOR, f);
+        if (this.mTrackPaint.getColor() != iApplyAlpha) {
+            this.mTrackPaint.setColor(iApplyAlpha);
         }
     }
 

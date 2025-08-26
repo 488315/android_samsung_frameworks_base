@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PrivacyItemController$MyExecutor$updateListeningState$1 implements Runnable {
     public final /* synthetic */ PrivacyItemController this$0;
@@ -16,13 +15,13 @@ public final class PrivacyItemController$MyExecutor$updateListeningState$1 imple
     @Override // java.lang.Runnable
     public final void run() {
         PrivacyItemController privacyItemController = this.this$0;
-        boolean isEmpty = ((ArrayList) privacyItemController.callbacks).isEmpty();
-        boolean z = !isEmpty;
+        boolean zIsEmpty = ((ArrayList) privacyItemController.callbacks).isEmpty();
+        boolean z = !zIsEmpty;
         if (privacyItemController.listening == z) {
             return;
         }
         privacyItemController.listening = z;
-        if (isEmpty) {
+        if (zIsEmpty) {
             Iterator it = privacyItemController.privacyItemMonitors.iterator();
             while (it.hasNext()) {
                 AppOpsPrivacyItemMonitor appOpsPrivacyItemMonitor = (AppOpsPrivacyItemMonitor) ((PrivacyItemMonitor) it.next());
@@ -32,7 +31,7 @@ public final class PrivacyItemController$MyExecutor$updateListeningState$1 imple
                     Unit unit = Unit.INSTANCE;
                 }
             }
-            privacyItemController.update$4$1();
+            privacyItemController.update$5$1();
             return;
         }
         for (PrivacyItemMonitor privacyItemMonitor : privacyItemController.privacyItemMonitors) {
@@ -44,6 +43,6 @@ public final class PrivacyItemController$MyExecutor$updateListeningState$1 imple
                 Unit unit2 = Unit.INSTANCE;
             }
         }
-        privacyItemController.update$4$1();
+        privacyItemController.update$5$1();
     }
 }

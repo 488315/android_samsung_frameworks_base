@@ -15,7 +15,6 @@ import com.android.app.animation.Interpolators;
 import com.android.systemui.R;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsAnimations$observerForAnimations$1 implements LifecycleObserver {
     public final /* synthetic */ ViewGroup $view;
@@ -65,7 +64,7 @@ public final class ControlsAnimations$observerForAnimations$1 implements Lifecyc
         WindowTransition windowTransition = new WindowTransition(new Function1() { // from class: com.android.systemui.controls.management.ControlsAnimations$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 View view = (View) obj;
                 switch (i) {
                     case 0:
@@ -74,16 +73,16 @@ public final class ControlsAnimations$observerForAnimations$1 implements Lifecyc
                     default:
                         ControlsAnimations controlsAnimations2 = ControlsAnimations.INSTANCE;
                         Log.d("ControlsUiController", "Exit animation for " + view);
-                        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "transitionAlpha", 0.0f);
+                        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "transitionAlpha", 0.0f);
                         Interpolator interpolator = Interpolators.ACCELERATE;
-                        ofFloat.setInterpolator(interpolator);
-                        ofFloat.setDuration(183L);
+                        objectAnimatorOfFloat.setInterpolator(interpolator);
+                        objectAnimatorOfFloat.setDuration(183L);
                         view.setTranslationY(0.0f);
-                        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, "translationY", -ControlsAnimations.translationY);
-                        ofFloat2.setInterpolator(interpolator);
-                        ofFloat2.setDuration(183L);
+                        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, "translationY", -ControlsAnimations.translationY);
+                        objectAnimatorOfFloat2.setInterpolator(interpolator);
+                        objectAnimatorOfFloat2.setDuration(183L);
                         AnimatorSet animatorSet = new AnimatorSet();
-                        animatorSet.playTogether(ofFloat, ofFloat2);
+                        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
                         return animatorSet;
                 }
             }
@@ -95,7 +94,7 @@ public final class ControlsAnimations$observerForAnimations$1 implements Lifecyc
         WindowTransition windowTransition2 = new WindowTransition(new Function1() { // from class: com.android.systemui.controls.management.ControlsAnimations$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 View view = (View) obj;
                 switch (i2) {
                     case 0:
@@ -104,16 +103,16 @@ public final class ControlsAnimations$observerForAnimations$1 implements Lifecyc
                     default:
                         ControlsAnimations controlsAnimations2 = ControlsAnimations.INSTANCE;
                         Log.d("ControlsUiController", "Exit animation for " + view);
-                        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "transitionAlpha", 0.0f);
+                        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "transitionAlpha", 0.0f);
                         Interpolator interpolator = Interpolators.ACCELERATE;
-                        ofFloat.setInterpolator(interpolator);
-                        ofFloat.setDuration(183L);
+                        objectAnimatorOfFloat.setInterpolator(interpolator);
+                        objectAnimatorOfFloat.setDuration(183L);
                         view.setTranslationY(0.0f);
-                        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, "translationY", -ControlsAnimations.translationY);
-                        ofFloat2.setInterpolator(interpolator);
-                        ofFloat2.setDuration(183L);
+                        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, "translationY", -ControlsAnimations.translationY);
+                        objectAnimatorOfFloat2.setInterpolator(interpolator);
+                        objectAnimatorOfFloat2.setDuration(183L);
                         AnimatorSet animatorSet = new AnimatorSet();
-                        animatorSet.playTogether(ofFloat, ofFloat2);
+                        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
                         return animatorSet;
                 }
             }
@@ -125,7 +124,7 @@ public final class ControlsAnimations$observerForAnimations$1 implements Lifecyc
         WindowTransition windowTransition3 = new WindowTransition(new Function1() { // from class: com.android.systemui.controls.management.ControlsAnimations$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 View view = (View) obj;
                 switch (i3) {
                     case 0:
@@ -134,16 +133,16 @@ public final class ControlsAnimations$observerForAnimations$1 implements Lifecyc
                     default:
                         ControlsAnimations controlsAnimations2 = ControlsAnimations.INSTANCE;
                         Log.d("ControlsUiController", "Exit animation for " + view);
-                        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "transitionAlpha", 0.0f);
+                        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "transitionAlpha", 0.0f);
                         Interpolator interpolator = Interpolators.ACCELERATE;
-                        ofFloat.setInterpolator(interpolator);
-                        ofFloat.setDuration(183L);
+                        objectAnimatorOfFloat.setInterpolator(interpolator);
+                        objectAnimatorOfFloat.setDuration(183L);
                         view.setTranslationY(0.0f);
-                        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, "translationY", -ControlsAnimations.translationY);
-                        ofFloat2.setInterpolator(interpolator);
-                        ofFloat2.setDuration(183L);
+                        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, "translationY", -ControlsAnimations.translationY);
+                        objectAnimatorOfFloat2.setInterpolator(interpolator);
+                        objectAnimatorOfFloat2.setDuration(183L);
                         AnimatorSet animatorSet = new AnimatorSet();
-                        animatorSet.playTogether(ofFloat, ofFloat2);
+                        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
                         return animatorSet;
                 }
             }
@@ -155,7 +154,7 @@ public final class ControlsAnimations$observerForAnimations$1 implements Lifecyc
         WindowTransition windowTransition4 = new WindowTransition(new Function1() { // from class: com.android.systemui.controls.management.ControlsAnimations$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 View view = (View) obj;
                 switch (i4) {
                     case 0:
@@ -164,16 +163,16 @@ public final class ControlsAnimations$observerForAnimations$1 implements Lifecyc
                     default:
                         ControlsAnimations controlsAnimations2 = ControlsAnimations.INSTANCE;
                         Log.d("ControlsUiController", "Exit animation for " + view);
-                        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "transitionAlpha", 0.0f);
+                        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "transitionAlpha", 0.0f);
                         Interpolator interpolator = Interpolators.ACCELERATE;
-                        ofFloat.setInterpolator(interpolator);
-                        ofFloat.setDuration(183L);
+                        objectAnimatorOfFloat.setInterpolator(interpolator);
+                        objectAnimatorOfFloat.setDuration(183L);
                         view.setTranslationY(0.0f);
-                        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, "translationY", -ControlsAnimations.translationY);
-                        ofFloat2.setInterpolator(interpolator);
-                        ofFloat2.setDuration(183L);
+                        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, "translationY", -ControlsAnimations.translationY);
+                        objectAnimatorOfFloat2.setInterpolator(interpolator);
+                        objectAnimatorOfFloat2.setDuration(183L);
                         AnimatorSet animatorSet = new AnimatorSet();
-                        animatorSet.playTogether(ofFloat, ofFloat2);
+                        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
                         return animatorSet;
                 }
             }

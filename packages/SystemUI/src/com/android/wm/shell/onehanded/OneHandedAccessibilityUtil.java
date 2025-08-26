@@ -6,7 +6,6 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.systemui.R;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OneHandedAccessibilityUtil {
     public final AccessibilityManager mAccessibilityManager;
@@ -25,11 +24,11 @@ public final class OneHandedAccessibilityUtil {
     public final void announcementForScreenReader(String str) {
         if (this.mAccessibilityManager.isTouchExplorationEnabled()) {
             this.mDescription = str;
-            AccessibilityEvent obtain = AccessibilityEvent.obtain();
-            obtain.setPackageName(this.mPackageName);
-            obtain.setEventType(NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT);
-            obtain.getText().add(this.mDescription);
-            this.mAccessibilityManager.sendAccessibilityEvent(obtain);
+            AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain();
+            accessibilityEventObtain.setPackageName(this.mPackageName);
+            accessibilityEventObtain.setEventType(NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT);
+            accessibilityEventObtain.getText().add(this.mDescription);
+            this.mAccessibilityManager.sendAccessibilityEvent(accessibilityEventObtain);
         }
     }
 }

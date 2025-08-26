@@ -274,9 +274,9 @@ public interface IShortcutService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IShortcutService)) {
-                return (IShortcutService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IShortcutService)) {
+                return (IShortcutService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -364,122 +364,122 @@ public interface IShortcutService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     ParceledListSlice parceledListSlice = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean dynamicShortcuts = setDynamicShortcuts(readString, parceledListSlice, readInt);
+                    boolean dynamicShortcuts = setDynamicShortcuts(string, parceledListSlice, i3);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dynamicShortcuts);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     ParceledListSlice parceledListSlice2 = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean addDynamicShortcuts = addDynamicShortcuts(readString2, parceledListSlice2, readInt2);
+                    boolean zAddDynamicShortcuts = addDynamicShortcuts(string2, parceledListSlice2, i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addDynamicShortcuts);
+                    parcel2.writeBoolean(zAddDynamicShortcuts);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    int readInt3 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeDynamicShortcuts(readString3, createStringArrayList, readInt3);
+                    removeDynamicShortcuts(string3, arrayListCreateStringArrayList, i5);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String readString4 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeAllDynamicShortcuts(readString4, readInt4);
+                    removeAllDynamicShortcuts(string4, i6);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     ParceledListSlice parceledListSlice3 = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean updateShortcuts = updateShortcuts(readString5, parceledListSlice3, readInt5);
+                    boolean zUpdateShortcuts = updateShortcuts(string5, parceledListSlice3, i7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(updateShortcuts);
+                    parcel2.writeBoolean(zUpdateShortcuts);
                     return true;
                 case 6:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     ShortcutInfo shortcutInfo = (ShortcutInfo) parcel.readTypedObject(ShortcutInfo.CREATOR);
                     IntentSender intentSender = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean requestPinShortcut = requestPinShortcut(readString6, shortcutInfo, intentSender, readInt6);
+                    boolean zRequestPinShortcut = requestPinShortcut(string6, shortcutInfo, intentSender, i8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(requestPinShortcut);
+                    parcel2.writeBoolean(zRequestPinShortcut);
                     return true;
                 case 7:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     ShortcutInfo shortcutInfo2 = (ShortcutInfo) parcel.readTypedObject(ShortcutInfo.CREATOR);
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Intent createShortcutResultIntent = createShortcutResultIntent(readString7, shortcutInfo2, readInt7);
+                    Intent intentCreateShortcutResultIntent = createShortcutResultIntent(string7, shortcutInfo2, i9);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createShortcutResultIntent, 1);
+                    parcel2.writeTypedObject(intentCreateShortcutResultIntent, 1);
                     return true;
                 case 8:
-                    String readString8 = parcel.readString();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+                    String string8 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
                     CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disableShortcuts(readString8, createStringArrayList2, charSequence, readInt8, readInt9);
+                    disableShortcuts(string8, arrayListCreateStringArrayList2, charSequence, i10, i11);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String readString9 = parcel.readString();
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
-                    int readInt10 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    enableShortcuts(readString9, createStringArrayList3, readInt10);
+                    enableShortcuts(string9, arrayListCreateStringArrayList3, i12);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    String readString10 = parcel.readString();
-                    int readInt11 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int maxShortcutCountPerActivity = getMaxShortcutCountPerActivity(readString10, readInt11);
+                    int maxShortcutCountPerActivity = getMaxShortcutCountPerActivity(string10, i13);
                     parcel2.writeNoException();
                     parcel2.writeInt(maxShortcutCountPerActivity);
                     return true;
                 case 11:
-                    String readString11 = parcel.readString();
-                    int readInt12 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int remainingCallCount = getRemainingCallCount(readString11, readInt12);
+                    int remainingCallCount = getRemainingCallCount(string11, i14);
                     parcel2.writeNoException();
                     parcel2.writeInt(remainingCallCount);
                     return true;
                 case 12:
-                    String readString12 = parcel.readString();
-                    int readInt13 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long rateLimitResetTime = getRateLimitResetTime(readString12, readInt13);
+                    long rateLimitResetTime = getRateLimitResetTime(string12, i15);
                     parcel2.writeNoException();
                     parcel2.writeLong(rateLimitResetTime);
                     return true;
                 case 13:
-                    String readString13 = parcel.readString();
-                    int readInt14 = parcel.readInt();
+                    String string13 = parcel.readString();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int iconMaxDimensions = getIconMaxDimensions(readString13, readInt14);
+                    int iconMaxDimensions = getIconMaxDimensions(string13, i16);
                     parcel2.writeNoException();
                     parcel2.writeInt(iconMaxDimensions);
                     return true;
                 case 14:
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
-                    int readInt15 = parcel.readInt();
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportShortcutUsed(readString14, readString15, readInt15);
+                    reportShortcutUsed(string14, string15, i17);
                     parcel2.writeNoException();
                     return true;
                 case 15:
@@ -487,83 +487,83 @@ public interface IShortcutService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    String readString16 = parcel.readString();
-                    int readInt16 = parcel.readInt();
+                    String string16 = parcel.readString();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onApplicationActive(readString16, readInt16);
+                    onApplicationActive(string16, i18);
                     return true;
                 case 17:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    byte[] backupPayload = getBackupPayload(readInt17);
+                    byte[] backupPayload = getBackupPayload(i19);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(backupPayload);
                     return true;
                 case 18:
-                    byte[] createByteArray = parcel.createByteArray();
-                    int readInt18 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    applyRestore(createByteArray, readInt18);
+                    applyRestore(bArrCreateByteArray, i20);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    int readInt19 = parcel.readInt();
-                    int readInt20 = parcel.readInt();
+                    int i21 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isRequestPinItemSupported = isRequestPinItemSupported(readInt19, readInt20);
+                    boolean zIsRequestPinItemSupported = isRequestPinItemSupported(i21, i22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRequestPinItemSupported);
+                    parcel2.writeBoolean(zIsRequestPinItemSupported);
                     return true;
                 case 20:
-                    String readString17 = parcel.readString();
+                    String string17 = parcel.readString();
                     IntentFilter intentFilter = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice shareTargets = getShareTargets(readString17, intentFilter, readInt21);
+                    ParceledListSlice shareTargets = getShareTargets(string17, intentFilter, i23);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(shareTargets, 1);
                     return true;
                 case 21:
-                    String readString18 = parcel.readString();
-                    String readString19 = parcel.readString();
-                    int readInt22 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasShareTargets = hasShareTargets(readString18, readString19, readInt22);
+                    boolean zHasShareTargets = hasShareTargets(string18, string19, i24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasShareTargets);
+                    parcel2.writeBoolean(zHasShareTargets);
                     return true;
                 case 22:
-                    String readString20 = parcel.readString();
-                    ArrayList<String> createStringArrayList4 = parcel.createStringArrayList();
-                    int readInt23 = parcel.readInt();
+                    String string20 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList4 = parcel.createStringArrayList();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeLongLivedShortcuts(readString20, createStringArrayList4, readInt23);
+                    removeLongLivedShortcuts(string20, arrayListCreateStringArrayList4, i25);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    String readString21 = parcel.readString();
-                    int readInt24 = parcel.readInt();
-                    int readInt25 = parcel.readInt();
+                    String string21 = parcel.readString();
+                    int i26 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice shortcuts = getShortcuts(readString21, readInt24, readInt25);
+                    ParceledListSlice shortcuts = getShortcuts(string21, i26, i27);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(shortcuts, 1);
                     return true;
                 case 24:
-                    String readString22 = parcel.readString();
+                    String string22 = parcel.readString();
                     ShortcutInfo shortcutInfo3 = (ShortcutInfo) parcel.readTypedObject(ShortcutInfo.CREATOR);
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    pushDynamicShortcut(readString22, shortcutInfo3, readInt26);
+                    pushDynamicShortcut(string22, shortcutInfo3, i28);
                     parcel2.writeNoException();
                     return true;
                 case 25:
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    int readInt27 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int applyRestoreSmartSwitch = applyRestoreSmartSwitch(parcelFileDescriptor, readInt27);
+                    int iApplyRestoreSmartSwitch = applyRestoreSmartSwitch(parcelFileDescriptor, i29);
                     parcel2.writeNoException();
-                    parcel2.writeInt(applyRestoreSmartSwitch);
+                    parcel2.writeInt(iApplyRestoreSmartSwitch);
                     return true;
                 case 26:
                     IParcelFileDescriptorFactory shortcutBitmapsFileDescriptor = getShortcutBitmapsFileDescriptor();
@@ -572,36 +572,36 @@ public interface IShortcutService extends IInterface {
                     return true;
                 case 27:
                     ParcelFileDescriptor parcelFileDescriptor2 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    String readString23 = parcel.readString();
-                    String readString24 = parcel.readString();
+                    String string23 = parcel.readString();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    restoreBitmapsFromBackupService(parcelFileDescriptor2, readString23, readString24);
+                    restoreBitmapsFromBackupService(parcelFileDescriptor2, string23, string24);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    int readInt28 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String[] bitmapPathList = getBitmapPathList(readInt28);
+                    String[] bitmapPathList = getBitmapPathList(i30);
                     parcel2.writeNoException();
                     parcel2.writeStringArray(bitmapPathList);
                     return true;
                 case 29:
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ParcelFileDescriptor backupShortcut = getBackupShortcut(readInt29);
+                    ParcelFileDescriptor backupShortcut = getBackupShortcut(i31);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(backupShortcut, 1);
                     return true;
                 case 30:
-                    String readString25 = parcel.readString();
+                    String string25 = parcel.readString();
                     ShortcutInfo shortcutInfo4 = (ShortcutInfo) parcel.readTypedObject(ShortcutInfo.CREATOR);
                     IntentSender intentSender2 = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
-                    int readInt30 = parcel.readInt();
-                    int readInt31 = parcel.readInt();
+                    int i32 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean requestPinShortcutAsDisplay = requestPinShortcutAsDisplay(readString25, shortcutInfo4, intentSender2, readInt30, readInt31);
+                    boolean zRequestPinShortcutAsDisplay = requestPinShortcutAsDisplay(string25, shortcutInfo4, intentSender2, i32, i33);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(requestPinShortcutAsDisplay);
+                    parcel2.writeBoolean(zRequestPinShortcutAsDisplay);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -626,516 +626,516 @@ public interface IShortcutService extends IInterface {
 
             @Override // android.content.pm.IShortcutService
             public boolean setDynamicShortcuts(String str, ParceledListSlice parceledListSlice, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public boolean addDynamicShortcuts(String str, ParceledListSlice parceledListSlice, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void removeDynamicShortcuts(String str, List<String> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void removeAllDynamicShortcuts(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public boolean updateShortcuts(String str, ParceledListSlice parceledListSlice, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public boolean requestPinShortcut(String str, ShortcutInfo shortcutInfo, IntentSender intentSender, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(shortcutInfo, 0);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(shortcutInfo, 0);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public Intent createShortcutResultIntent(String str, ShortcutInfo shortcutInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(shortcutInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Intent) obtain2.readTypedObject(Intent.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(shortcutInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Intent) parcelObtain2.readTypedObject(Intent.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void disableShortcuts(String str, List<String> list, CharSequence charSequence, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void enableShortcuts(String str, List<String> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public int getMaxShortcutCountPerActivity(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public int getRemainingCallCount(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public long getRateLimitResetTime(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public int getIconMaxDimensions(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void reportShortcutUsed(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void resetThrottling() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void onApplicationActive(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public byte[] getBackupPayload(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void applyRestore(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public boolean isRequestPinItemSupported(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public ParceledListSlice getShareTargets(String str, IntentFilter intentFilter, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(intentFilter, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(intentFilter, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public boolean hasShareTargets(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void removeLongLivedShortcuts(String str, List<String> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public ParceledListSlice getShortcuts(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void pushDynamicShortcut(String str, ShortcutInfo shortcutInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(shortcutInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(shortcutInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public int applyRestoreSmartSwitch(ParcelFileDescriptor parcelFileDescriptor, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public IParcelFileDescriptorFactory getShortcutBitmapsFileDescriptor() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IParcelFileDescriptorFactory.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IParcelFileDescriptorFactory.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public void restoreBitmapsFromBackupService(ParcelFileDescriptor parcelFileDescriptor, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public String[] getBitmapPathList(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public ParcelFileDescriptor getBackupShortcut(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IShortcutService
             public boolean requestPinShortcutAsDisplay(String str, ShortcutInfo shortcutInfo, IntentSender intentSender, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(shortcutInfo, 0);
-                    obtain.writeTypedObject(intentSender, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(shortcutInfo, 0);
+                    parcelObtain.writeTypedObject(intentSender, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

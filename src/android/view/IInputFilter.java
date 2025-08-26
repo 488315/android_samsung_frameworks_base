@@ -59,9 +59,9 @@ public interface IInputFilter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInputFilter)) {
-                return (IInputFilter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInputFilter)) {
+                return (IInputFilter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,16 +94,16 @@ public interface IInputFilter extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IInputFilterHost asInterface = IInputFilterHost.Stub.asInterface(parcel.readStrongBinder());
+                IInputFilterHost iInputFilterHostAsInterface = IInputFilterHost.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                install(asInterface);
+                install(iInputFilterHostAsInterface);
             } else if (i == 2) {
                 uninstall();
             } else if (i == 3) {
                 InputEvent inputEvent = (InputEvent) parcel.readTypedObject(InputEvent.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                filterInputEvent(inputEvent, readInt);
+                filterInputEvent(inputEvent, i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -128,37 +128,37 @@ public interface IInputFilter extends IInterface {
 
             @Override // android.view.IInputFilter
             public void install(IInputFilterHost iInputFilterHost) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputFilterHost);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputFilterHost);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IInputFilter
             public void uninstall() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IInputFilter
             public void filterInputEvent(InputEvent inputEvent, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(inputEvent, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputEvent, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

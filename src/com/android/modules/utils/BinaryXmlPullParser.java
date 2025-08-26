@@ -54,7 +54,7 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
     }
 
     @Override // org.xmlpull.v1.XmlPullParser
-    public void setInput(InputStream inputStream, String str) throws XmlPullParserException {
+    public void setInput(InputStream inputStream, String str) throws XmlPullParserException, IOException {
         if (str != null && !StandardCharsets.UTF_8.name().equalsIgnoreCase(str)) {
             throw new UnsupportedOperationException();
         }
@@ -102,14 +102,21 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
         throw new UnsupportedOperationException();
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:17:0x0020, code lost:
+    
+        return r0;
+     */
     @Override // org.xmlpull.v1.XmlPullParser
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public int next() throws XmlPullParserException, IOException {
         while (true) {
-            int nextToken = nextToken();
-            if (nextToken == 1 || nextToken == 2 || nextToken == 3) {
+            int iNextToken = nextToken();
+            if (iNextToken == 1 || iNextToken == 2 || iNextToken == 3) {
                 break;
             }
-            if (nextToken == 4) {
+            if (iNextToken == 4) {
                 consumeAdditionalText();
                 String str = this.mCurrentText;
                 if (str != null && str.length() != 0) {
@@ -121,29 +128,29 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
 
     @Override // org.xmlpull.v1.XmlPullParser
     public int nextToken() throws XmlPullParserException, IOException {
-        int i;
+        int iPeekNextExternalToken;
         if (this.mCurrentToken == 3) {
             this.mCurrentDepth--;
         }
         try {
-            i = peekNextExternalToken();
+            iPeekNextExternalToken = peekNextExternalToken();
             consumeToken();
         } catch (EOFException unused) {
-            i = 1;
+            iPeekNextExternalToken = 1;
         }
-        if (i == 2) {
+        if (iPeekNextExternalToken == 2) {
             peekNextExternalToken();
             this.mCurrentDepth++;
         }
-        this.mCurrentToken = i;
-        return i;
+        this.mCurrentToken = iPeekNextExternalToken;
+        return iPeekNextExternalToken;
     }
 
-    private int peekNextExternalToken() throws IOException, XmlPullParserException {
+    private int peekNextExternalToken() throws XmlPullParserException, IOException {
         while (true) {
-            int peekNextToken = peekNextToken();
-            if (peekNextToken != 15) {
-                return peekNextToken;
+            int iPeekNextToken = peekNextToken();
+            if (iPeekNextToken != 15) {
+                return iPeekNextToken;
             }
             consumeToken();
         }
@@ -153,44 +160,44 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
         return this.mIn.peekByte() & 15;
     }
 
-    private void consumeToken() throws IOException, XmlPullParserException {
-        byte readByte = this.mIn.readByte();
-        int i = readByte & 15;
-        int i2 = readByte & 240;
+    private void consumeToken() throws XmlPullParserException, IOException {
+        byte b = this.mIn.readByte();
+        int i = b & 15;
+        int i2 = b & 240;
         if (i == 15) {
-            Attribute obtainAttribute = obtainAttribute();
-            obtainAttribute.name = this.mIn.readInternedUTF();
-            obtainAttribute.type = i2;
+            Attribute attributeObtainAttribute = obtainAttribute();
+            attributeObtainAttribute.name = this.mIn.readInternedUTF();
+            attributeObtainAttribute.type = i2;
             switch (i2) {
                 case 16:
                 case 192:
                 case 208:
                     return;
                 case 32:
-                    obtainAttribute.valueString = this.mIn.readUTF();
+                    attributeObtainAttribute.valueString = this.mIn.readUTF();
                     return;
                 case 48:
-                    obtainAttribute.valueString = this.mIn.readInternedUTF();
+                    attributeObtainAttribute.valueString = this.mIn.readInternedUTF();
                     return;
                 case 64:
                 case 80:
                     byte[] bArr = new byte[this.mIn.readUnsignedShort()];
                     this.mIn.readFully(bArr);
-                    obtainAttribute.valueBytes = bArr;
+                    attributeObtainAttribute.valueBytes = bArr;
                     return;
                 case 96:
                 case 112:
-                    obtainAttribute.valueInt = this.mIn.readInt();
+                    attributeObtainAttribute.valueInt = this.mIn.readInt();
                     return;
                 case 128:
                 case 144:
-                    obtainAttribute.valueLong = this.mIn.readLong();
+                    attributeObtainAttribute.valueLong = this.mIn.readLong();
                     return;
                 case 160:
-                    obtainAttribute.valueFloat = this.mIn.readFloat();
+                    attributeObtainAttribute.valueFloat = this.mIn.readFloat();
                     return;
                 case 176:
-                    obtainAttribute.valueDouble = this.mIn.readDouble();
+                    attributeObtainAttribute.valueDouble = this.mIn.readDouble();
                     return;
                 default:
                     throw new IOException("Unexpected data type " + i2);
@@ -243,9 +250,9 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                 }
                 return;
             case 6:
-                String readUTF = this.mIn.readUTF();
-                this.mCurrentName = readUTF;
-                this.mCurrentText = resolveEntity(readUTF);
+                String utf = this.mIn.readUTF();
+                this.mCurrentName = utf;
+                this.mCurrentText = resolveEntity(utf);
                 if (this.mAttributeCount > 0) {
                     resetAttributes();
                     return;
@@ -256,14 +263,14 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
         }
     }
 
-    private void consumeAdditionalText() throws IOException, XmlPullParserException {
+    private void consumeAdditionalText() throws XmlPullParserException, IOException {
         String str = this.mCurrentText;
         while (true) {
-            int peekNextExternalToken = peekNextExternalToken();
-            if (peekNextExternalToken == 4 || peekNextExternalToken == 5 || peekNextExternalToken == 6) {
+            int iPeekNextExternalToken = peekNextExternalToken();
+            if (iPeekNextExternalToken == 4 || iPeekNextExternalToken == 5 || iPeekNextExternalToken == 6) {
                 consumeToken();
                 str = str + this.mCurrentText;
-            } else if (peekNextExternalToken == 8 || peekNextExternalToken == 9) {
+            } else if (iPeekNextExternalToken == 8 || iPeekNextExternalToken == 9) {
                 consumeToken();
             } else {
                 this.mCurrentToken = 4;

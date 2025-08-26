@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArraySet;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -140,7 +141,7 @@ public final class KnownNetwork implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.mNetworkSource);
         parcel.writeString(this.mSsid);
         parcel.writeArraySet(this.mSecurityTypes);
@@ -154,13 +155,13 @@ public final class KnownNetwork implements Parcelable {
     }
 
     public static KnownNetwork readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        String readString = parcel.readString();
-        ArraySet<? extends Object> readArraySet = parcel.readArraySet(null);
+        int i = parcel.readInt();
+        String string = parcel.readString();
+        ArraySet<? extends Object> arraySet = parcel.readArraySet(null);
         if (parcel.readBoolean()) {
-            return new KnownNetwork(readInt, readString, readArraySet, NetworkProviderInfo.readFromParcel(parcel), parcel.readBundle());
+            return new KnownNetwork(i, string, arraySet, NetworkProviderInfo.readFromParcel(parcel), parcel.readBundle());
         }
-        return new KnownNetwork(readInt, readString, readArraySet, null, parcel.readBundle());
+        return new KnownNetwork(i, string, arraySet, null, parcel.readBundle());
     }
 
     public String toString() {

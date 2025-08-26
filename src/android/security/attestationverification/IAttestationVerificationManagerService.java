@@ -54,9 +54,9 @@ public interface IAttestationVerificationManagerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAttestationVerificationManagerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAttestationVerificationManagerService)) {
-                return (IAttestationVerificationManagerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAttestationVerificationManagerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAttestationVerificationManagerService)) {
+                return (IAttestationVerificationManagerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,12 +87,12 @@ public interface IAttestationVerificationManagerService extends IInterface {
             }
             if (i == 1) {
                 AttestationProfile attestationProfile = (AttestationProfile) parcel.readTypedObject(AttestationProfile.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 AndroidFuture androidFuture = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                 parcel.enforceNoDataAvail();
-                verifyAttestation(attestationProfile, readInt, bundle, createByteArray, androidFuture);
+                verifyAttestation(attestationProfile, i3, bundle, bArrCreateByteArray, androidFuture);
             } else if (i == 2) {
                 VerificationToken verificationToken = (VerificationToken) parcel.readTypedObject(VerificationToken.CREATOR);
                 ParcelDuration parcelDuration = (ParcelDuration) parcel.readTypedObject(ParcelDuration.CREATOR);
@@ -123,31 +123,31 @@ public interface IAttestationVerificationManagerService extends IInterface {
 
             @Override // android.security.attestationverification.IAttestationVerificationManagerService
             public void verifyAttestation(AttestationProfile attestationProfile, int i, Bundle bundle, byte[] bArr, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAttestationVerificationManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(attestationProfile, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAttestationVerificationManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(attestationProfile, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.attestationverification.IAttestationVerificationManagerService
             public void verifyToken(VerificationToken verificationToken, ParcelDuration parcelDuration, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAttestationVerificationManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(verificationToken, 0);
-                    obtain.writeTypedObject(parcelDuration, 0);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAttestationVerificationManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(verificationToken, 0);
+                    parcelObtain.writeTypedObject(parcelDuration, 0);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

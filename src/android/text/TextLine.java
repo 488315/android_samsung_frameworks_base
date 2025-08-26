@@ -12,6 +12,7 @@ import android.text.TextShaper;
 import android.text.style.CharacterStyle;
 import android.text.style.MetricAffectingSpan;
 import android.text.style.ReplacementSpan;
+import com.android.internal.util.ArrayUtils;
 import java.util.ArrayList;
 
 /* loaded from: classes4.dex */
@@ -169,126 +170,70 @@ public class TextLine {
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x009e  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00a6  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00a0  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x002e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void set(android.text.TextPaint r2, java.lang.CharSequence r3, int r4, int r5, int r6, android.text.Layout.Directions r7, boolean r8, android.text.Layout.TabStops r9, int r10, int r11, boolean r12) {
-        /*
-            r1 = this;
-            r1.mPaint = r2
-            r1.mText = r3
-            r1.mStart = r4
-            int r0 = r5 - r4
-            r1.mLen = r0
-            r1.mDir = r6
-            r1.mDirections = r7
-            r1.mUseFallbackExtent = r12
-            if (r7 == 0) goto Laa
-            r1.mHasTabs = r8
-            r6 = 0
-            r1.mSpanned = r6
-            boolean r7 = r3 instanceof android.text.Spanned
-            r8 = 0
-            if (r7 == 0) goto L2e
-            r7 = r3
-            android.text.Spanned r7 = (android.text.Spanned) r7
-            r1.mSpanned = r7
-            android.text.SpanSet<android.text.style.ReplacementSpan> r12 = r1.mReplacementSpanSpanSet
-            r12.init(r7, r4, r5)
-            android.text.SpanSet<android.text.style.ReplacementSpan> r7 = r1.mReplacementSpanSpanSet
-            int r7 = r7.numberOfSpans
-            if (r7 <= 0) goto L2e
-            r7 = 1
-            goto L2f
-        L2e:
-            r7 = r8
-        L2f:
-            r1.mComputed = r6
-            boolean r12 = r3 instanceof android.text.PrecomputedText
-            if (r12 == 0) goto L4a
-            r12 = r3
-            android.text.PrecomputedText r12 = (android.text.PrecomputedText) r12
-            r1.mComputed = r12
-            android.text.PrecomputedText$Params r12 = r12.getParams()
-            android.text.TextPaint r12 = r12.getTextPaint()
-            boolean r2 = r12.equalsForTextMeasurement(r2)
-            if (r2 != 0) goto L4a
-            r1.mComputed = r6
-        L4a:
-            r1.mCharsValid = r7
-            if (r7 == 0) goto L95
-            char[] r2 = r1.mChars
-            if (r2 == 0) goto L57
-            int r2 = r2.length
-            int r6 = r1.mLen
-            if (r2 >= r6) goto L5f
-        L57:
-            int r2 = r1.mLen
-            char[] r2 = com.android.internal.util.ArrayUtils.newUnpaddedCharArray(r2)
-            r1.mChars = r2
-        L5f:
-            char[] r2 = r1.mChars
-            android.text.TextUtils.getChars(r3, r4, r5, r2, r8)
-            if (r7 == 0) goto L95
-            char[] r2 = r1.mChars
-            r3 = r4
-        L69:
-            if (r3 >= r5) goto L95
-            android.text.SpanSet<android.text.style.ReplacementSpan> r6 = r1.mReplacementSpanSpanSet
-            int r6 = r6.getNextTransition(r3, r5)
-            android.text.SpanSet<android.text.style.ReplacementSpan> r7 = r1.mReplacementSpanSpanSet
-            boolean r7 = r7.hasSpansIntersecting(r3, r6)
-            if (r7 == 0) goto L93
-            int r3 = r3 - r4
-            if (r3 >= r11) goto L80
-            int r7 = r6 - r4
-            if (r7 > r10) goto L93
-        L80:
-            r7 = 65532(0xfffc, float:9.183E-41)
-            r2[r3] = r7
-            int r3 = r3 + 1
-            int r7 = r6 - r4
-        L89:
-            if (r3 >= r7) goto L93
-            r12 = 65279(0xfeff, float:9.1475E-41)
-            r2[r3] = r12
-            int r3 = r3 + 1
-            goto L89
-        L93:
-            r3 = r6
-            goto L69
-        L95:
-            r1.mTabs = r9
-            r2 = 0
-            r1.mAddedWordSpacingInPx = r2
-            r1.mIsJustifying = r8
-            if (r10 == r11) goto La0
-            r2 = r10
-            goto La1
-        La0:
-            r2 = r8
-        La1:
-            r1.mEllipsisStart = r2
-            if (r10 == r11) goto La6
-            goto La7
-        La6:
-            r11 = r8
-        La7:
-            r1.mEllipsisEnd = r11
-            return
-        Laa:
-            java.lang.IllegalArgumentException r1 = new java.lang.IllegalArgumentException
-            java.lang.String r2 = "Directions cannot be null"
-            r1.<init>(r2)
-            throw r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.TextLine.set(android.text.TextPaint, java.lang.CharSequence, int, int, int, android.text.Layout$Directions, boolean, android.text.Layout$TabStops, int, int, boolean):void");
+    public void set(TextPaint textPaint, CharSequence charSequence, int i, int i2, int i3, Layout.Directions directions, boolean z, Layout.TabStops tabStops, int i4, int i5, boolean z2) {
+        boolean z3;
+        int i6;
+        this.mPaint = textPaint;
+        this.mText = charSequence;
+        this.mStart = i;
+        this.mLen = i2 - i;
+        this.mDir = i3;
+        this.mDirections = directions;
+        this.mUseFallbackExtent = z2;
+        if (directions == null) {
+            throw new IllegalArgumentException("Directions cannot be null");
+        }
+        this.mHasTabs = z;
+        this.mSpanned = null;
+        if (charSequence instanceof Spanned) {
+            Spanned spanned = (Spanned) charSequence;
+            this.mSpanned = spanned;
+            this.mReplacementSpanSpanSet.init(spanned, i, i2);
+            z3 = this.mReplacementSpanSpanSet.numberOfSpans > 0;
+        }
+        this.mComputed = null;
+        if (charSequence instanceof PrecomputedText) {
+            PrecomputedText precomputedText = (PrecomputedText) charSequence;
+            this.mComputed = precomputedText;
+            if (!precomputedText.getParams().getTextPaint().equalsForTextMeasurement(textPaint)) {
+                this.mComputed = null;
+            }
+        }
+        this.mCharsValid = z3;
+        if (z3) {
+            char[] cArr = this.mChars;
+            if (cArr == null || cArr.length < this.mLen) {
+                this.mChars = ArrayUtils.newUnpaddedCharArray(this.mLen);
+            }
+            TextUtils.getChars(charSequence, i, i2, this.mChars, 0);
+            if (z3) {
+                char[] cArr2 = this.mChars;
+                int i7 = i;
+                while (i7 < i2) {
+                    int nextTransition = this.mReplacementSpanSpanSet.getNextTransition(i7, i2);
+                    if (this.mReplacementSpanSpanSet.hasSpansIntersecting(i7, nextTransition) && ((i6 = i7 - i) >= i5 || nextTransition - i <= i4)) {
+                        cArr2[i6] = 65532;
+                        int i8 = nextTransition - i;
+                        for (int i9 = i6 + 1; i9 < i8; i9++) {
+                            cArr2[i9] = 65279;
+                        }
+                    }
+                    i7 = nextTransition;
+                }
+            }
+        }
+        this.mTabs = tabStops;
+        this.mAddedWordSpacingInPx = 0.0f;
+        this.mIsJustifying = false;
+        this.mEllipsisStart = i4 != i5 ? i4 : 0;
+        if (i4 == i5) {
+            i5 = 0;
+        }
+        this.mEllipsisEnd = i5;
     }
 
     private char charAt(int i) {
@@ -303,21 +248,21 @@ public class TextLine {
         }
         if (i == 1) {
             textLine = this;
-            float abs = Math.abs(textLine.measure(i2, false, null, null, null));
-            int countStretchableSpaces = textLine.countStretchableSpaces(0, i2);
-            if (countStretchableSpaces == 0) {
+            float fAbs = Math.abs(textLine.measure(i2, false, null, null, null));
+            int iCountStretchableSpaces = textLine.countStretchableSpaces(0, i2);
+            if (iCountStretchableSpaces == 0) {
                 return;
             }
-            textLine.mAddedWordSpacingInPx = (f - abs) / countStretchableSpaces;
+            textLine.mAddedWordSpacingInPx = (f - fAbs) / iCountStretchableSpaces;
             textLine.mAddedLetterSpacingInPx = 0.0f;
         } else {
             textLine = this;
             LineInfo lineInfo = new LineInfo();
-            float abs2 = Math.abs(textLine.measure(i2, false, null, null, lineInfo));
+            float fAbs2 = Math.abs(textLine.measure(i2, false, null, null, lineInfo));
             if (lineInfo.getClusterCount() < 2) {
                 return;
             }
-            float f2 = (f - abs2) / (r9 - 1);
+            float f2 = (f - fAbs2) / (r9 - 1);
             textLine.mAddedLetterSpacingInPx = f2;
             if (f2 > 0.03d) {
                 String fontFeatureSettings = textLine.mPaint.getFontFeatureSettings();
@@ -344,13 +289,13 @@ public class TextLine {
             if (runStart > this.mLen) {
                 return;
             }
-            int min = Math.min(this.mDirections.getRunLength(i7) + runStart, this.mLen);
-            boolean isRunRtl = this.mDirections.isRunRtl(i7);
-            int calculateRunFlag = calculateRunFlag(i7, runCount, this.mDir);
-            float f3 = f2;
-            for (int i8 = this.mHasTabs ? runStart : min; i8 <= min; i8++) {
-                if (i8 == min || charAt(i8) == '\t') {
-                    float f4 = f + f3;
+            int iMin = Math.min(this.mDirections.getRunLength(i7) + runStart, this.mLen);
+            boolean zIsRunRtl = this.mDirections.isRunRtl(i7);
+            int iCalculateRunFlag = calculateRunFlag(i7, runCount, this.mDir);
+            float fDrawRun = f2;
+            for (int i8 = this.mHasTabs ? runStart : iMin; i8 <= iMin; i8++) {
+                if (i8 == iMin || charAt(i8) == '\t') {
+                    float f3 = f + fDrawRun;
                     if (i7 == runCount - 1 && i8 == this.mLen) {
                         z = false;
                         canvas2 = canvas;
@@ -364,21 +309,21 @@ public class TextLine {
                         i6 = i3;
                         canvas2 = canvas;
                     }
-                    f3 += drawRun(canvas2, runStart, i8, isRunRtl, f4, i4, i5, i6, z, calculateRunFlag);
-                    if (i8 != min) {
+                    fDrawRun += drawRun(canvas2, runStart, i8, zIsRunRtl, f3, i4, i5, i6, z, iCalculateRunFlag);
+                    if (i8 != iMin) {
                         int i9 = this.mDir;
-                        f3 = i9 * nextTab(f3 * i9);
+                        fDrawRun = i9 * nextTab(fDrawRun * i9);
                     }
                     runStart = i8 + 1;
                 }
             }
             i7++;
-            f2 = f3;
+            f2 = fDrawRun;
         }
     }
 
     public float metrics(Paint.FontMetricsInt fontMetricsInt, RectF rectF, boolean z, LineInfo lineInfo) {
-        float max;
+        float fMax;
         if (z) {
             if (rectF == null) {
                 if (this.mTmpRectForMeasure == null) {
@@ -388,13 +333,13 @@ public class TextLine {
             }
             RectF rectF2 = rectF;
             rectF2.setEmpty();
-            float measure = measure(this.mLen, false, fontMetricsInt, rectF2, lineInfo);
-            if (measure >= 0.0f) {
-                max = Math.max(rectF2.right, measure) - Math.min(0.0f, rectF2.left);
+            float fMeasure = measure(this.mLen, false, fontMetricsInt, rectF2, lineInfo);
+            if (fMeasure >= 0.0f) {
+                fMax = Math.max(rectF2.right, fMeasure) - Math.min(0.0f, rectF2.left);
             } else {
-                max = Math.max(rectF2.right, 0.0f) - Math.min(measure, rectF2.left);
+                fMax = Math.max(rectF2.right, 0.0f) - Math.min(fMeasure, rectF2.left);
             }
-            return Math.abs(measure) > max ? measure : Math.signum(measure) * max;
+            return Math.abs(fMeasure) > fMax ? fMeasure : Math.signum(fMeasure) * fMax;
         }
         return measure(this.mLen, false, fontMetricsInt, rectF, lineInfo);
     }
@@ -408,31 +353,31 @@ public class TextLine {
             if (runStart > this.mLen) {
                 return;
             }
-            int min = Math.min(this.mDirections.getRunLength(i) + runStart, this.mLen);
-            boolean isRunRtl = this.mDirections.isRunRtl(i);
-            int calculateRunFlag = calculateRunFlag(i, runCount, this.mDir);
-            int i2 = this.mHasTabs ? runStart : min;
-            float f2 = f;
-            while (i2 <= min) {
-                if (i2 == min || charAt(i2) == '\t') {
-                    f2 += shapeRun(glyphsConsumer, runStart, i2, isRunRtl, 0.0f + f2, (i == runCount + (-1) && i2 == this.mLen) ? false : true, calculateRunFlag);
-                    if (i2 != min) {
+            int iMin = Math.min(this.mDirections.getRunLength(i) + runStart, this.mLen);
+            boolean zIsRunRtl = this.mDirections.isRunRtl(i);
+            int iCalculateRunFlag = calculateRunFlag(i, runCount, this.mDir);
+            int i2 = this.mHasTabs ? runStart : iMin;
+            float fShapeRun = f;
+            while (i2 <= iMin) {
+                if (i2 == iMin || charAt(i2) == '\t') {
+                    fShapeRun += shapeRun(glyphsConsumer, runStart, i2, zIsRunRtl, 0.0f + fShapeRun, (i == runCount + (-1) && i2 == this.mLen) ? false : true, iCalculateRunFlag);
+                    if (i2 != iMin) {
                         int i3 = this.mDir;
-                        f2 = i3 * nextTab(f2 * i3);
+                        fShapeRun = i3 * nextTab(fShapeRun * i3);
                     }
                     runStart = i2 + 1;
                 }
                 i2++;
             }
             i++;
-            f = f2;
+            f = fShapeRun;
         }
     }
 
     public float measure(int i, boolean z, Paint.FontMetricsInt fontMetricsInt, RectF rectF, LineInfo lineInfo) {
         boolean z2;
         int i2;
-        float measureRun;
+        float fMeasureRun;
         TextLine textLine = this;
         int i3 = i;
         LineInfo lineInfo2 = lineInfo;
@@ -455,60 +400,60 @@ public class TextLine {
             if (runStart > textLine.mLen) {
                 break;
             }
-            int min = Math.min(textLine.mDirections.getRunLength(i5) + runStart, textLine.mLen);
-            boolean isRunRtl = textLine.mDirections.isRunRtl(i5);
-            int calculateRunFlag = calculateRunFlag(i5, runCount, textLine.mDir);
-            float f2 = f;
+            int iMin = Math.min(textLine.mDirections.getRunLength(i5) + runStart, textLine.mLen);
+            boolean zIsRunRtl = textLine.mDirections.isRunRtl(i5);
+            int iCalculateRunFlag = calculateRunFlag(i5, runCount, textLine.mDir);
+            float fNextTab = f;
             int i6 = runStart;
-            int i7 = textLine.mHasTabs ? runStart : min;
-            while (i7 <= min) {
-                if (i7 == min || textLine.charAt(i7) == '\t') {
+            int i7 = textLine.mHasTabs ? runStart : iMin;
+            while (i7 <= iMin) {
+                if (i7 == iMin || textLine.charAt(i7) == '\t') {
                     boolean z4 = (i4 < i6 || i4 >= i7) ? z3 : true;
-                    boolean z5 = (textLine.mDir == -1 ? true : z3) == isRunRtl ? true : z3;
+                    boolean z5 = (textLine.mDir == -1 ? true : z3) == zIsRunRtl ? true : z3;
                     if (z4 && z5) {
-                        measureRun = textLine.measureRun(i6, i3, i7, isRunRtl, fontMetricsInt, rectF, null, 0, f2, lineInfo2, calculateRunFlag);
+                        fMeasureRun = textLine.measureRun(i6, i3, i7, zIsRunRtl, fontMetricsInt, rectF, null, 0, fNextTab, lineInfo2, iCalculateRunFlag);
                     } else {
-                        int i8 = min;
-                        z2 = isRunRtl;
+                        int i8 = iMin;
+                        z2 = zIsRunRtl;
                         int i9 = i7;
                         i2 = i8;
-                        float measureRun2 = measureRun(i6, i9, i7, z2, fontMetricsInt, rectF, null, 0, f2, lineInfo, calculateRunFlag);
+                        float fMeasureRun2 = measureRun(i6, i9, i7, z2, fontMetricsInt, rectF, null, 0, fNextTab, lineInfo, iCalculateRunFlag);
                         if (!z5) {
-                            measureRun2 = -measureRun2;
+                            fMeasureRun2 = -fMeasureRun2;
                         }
-                        f2 += measureRun2;
+                        fNextTab += fMeasureRun2;
                         if (z4) {
-                            measureRun = measureRun(i6, i, i9, z2, null, null, null, 0, f2, lineInfo, calculateRunFlag);
+                            fMeasureRun = measureRun(i6, i, i9, z2, null, null, null, 0, fNextTab, lineInfo, iCalculateRunFlag);
                         } else {
                             textLine = this;
                             i7 = i9;
                             i3 = i;
                             if (i7 != i2) {
                                 if (i3 == i7) {
-                                    return f2;
+                                    return fNextTab;
                                 }
                                 int i10 = textLine.mDir;
-                                f2 = i10 * textLine.nextTab(f2 * i10);
+                                fNextTab = i10 * textLine.nextTab(fNextTab * i10);
                                 if (i4 == i7) {
-                                    return f2;
+                                    return fNextTab;
                                 }
                             }
                             i6 = i7 + 1;
                         }
                     }
-                    return f2 + measureRun;
+                    return fNextTab + fMeasureRun;
                 }
-                i2 = min;
-                z2 = isRunRtl;
+                i2 = iMin;
+                z2 = zIsRunRtl;
                 i7++;
                 lineInfo2 = lineInfo;
-                isRunRtl = z2;
-                min = i2;
+                zIsRunRtl = z2;
+                iMin = i2;
                 z3 = false;
             }
             i5++;
             lineInfo2 = lineInfo;
-            f = f2;
+            f = fNextTab;
             z3 = false;
         }
         return f;
@@ -516,8 +461,8 @@ public class TextLine {
 
     public void measureAllBounds(float[] fArr, float[] fArr2) {
         int i;
-        float nextTab;
-        float f;
+        float fNextTab;
+        float fNextTab2;
         if (fArr == null) {
             throw new IllegalArgumentException("bounds can't be null");
         }
@@ -531,73 +476,73 @@ public class TextLine {
             throw new IndexOutOfBoundsException("advance doesn't have enough space to receive the result, needed: " + this.mLen + " had: " + fArr3.length);
         }
         int runCount = this.mDirections.getRunCount();
-        float f2 = 0.0f;
+        float f = 0.0f;
         int i3 = 0;
         while (i3 < runCount) {
             int runStart = this.mDirections.getRunStart(i3);
             if (runStart > this.mLen) {
                 return;
             }
-            int min = Math.min(this.mDirections.getRunLength(i3) + runStart, this.mLen);
-            boolean isRunRtl = this.mDirections.isRunRtl(i3);
-            int calculateRunFlag = calculateRunFlag(i3, runCount, this.mDir);
-            float f3 = f2;
+            int iMin = Math.min(this.mDirections.getRunLength(i3) + runStart, this.mLen);
+            boolean zIsRunRtl = this.mDirections.isRunRtl(i3);
+            int iCalculateRunFlag = calculateRunFlag(i3, runCount, this.mDir);
+            float f2 = f;
             int i4 = runStart;
-            int i5 = this.mHasTabs ? runStart : min;
-            while (i5 <= min) {
-                if (i5 == min || charAt(i5) == '\t') {
-                    boolean z = (this.mDir == -1) == isRunRtl;
-                    i = min;
-                    float measureRun = measureRun(i4, i5, i5, isRunRtl, null, null, fArr3, i4, 0.0f, null, calculateRunFlag);
+            int i5 = this.mHasTabs ? runStart : iMin;
+            while (i5 <= iMin) {
+                if (i5 == iMin || charAt(i5) == '\t') {
+                    boolean z = (this.mDir == -1) == zIsRunRtl;
+                    i = iMin;
+                    float fMeasureRun = measureRun(i4, i5, i5, zIsRunRtl, null, null, fArr3, i4, 0.0f, null, iCalculateRunFlag);
                     if (!z) {
-                        measureRun = -measureRun;
+                        fMeasureRun = -fMeasureRun;
                     }
-                    float f4 = f3 + measureRun;
+                    float f3 = f2 + fMeasureRun;
                     if (!z) {
-                        f3 = f4;
+                        f2 = f3;
                     }
                     while (i4 < i5 && i4 < this.mLen) {
-                        if (isRunRtl) {
+                        if (zIsRunRtl) {
                             int i6 = i4 * 2;
-                            fArr[i6 + 1] = f3;
-                            f3 -= fArr3[i4];
-                            fArr[i6] = f3;
+                            fArr[i6 + 1] = f2;
+                            f2 -= fArr3[i4];
+                            fArr[i6] = f2;
                         } else {
                             int i7 = i4 * 2;
-                            fArr[i7] = f3;
-                            f3 += fArr3[i4];
-                            fArr[i7 + 1] = f3;
+                            fArr[i7] = f2;
+                            f2 += fArr3[i4];
+                            fArr[i7 + 1] = f2;
                         }
                         i4++;
                     }
                     if (i5 != i) {
-                        if (isRunRtl) {
+                        if (zIsRunRtl) {
                             int i8 = this.mDir;
-                            f = i8 * nextTab(i8 * f4);
-                            nextTab = f4;
-                            f4 = f;
+                            fNextTab2 = i8 * nextTab(i8 * f3);
+                            fNextTab = f3;
+                            f3 = fNextTab2;
                         } else {
                             int i9 = this.mDir;
-                            nextTab = i9 * nextTab(i9 * f4);
-                            f = nextTab;
+                            fNextTab = i9 * nextTab(i9 * f3);
+                            fNextTab2 = fNextTab;
                         }
                         int i10 = i5 * 2;
-                        fArr[i10] = f4;
-                        fArr[i10 + 1] = nextTab;
-                        fArr3[i5] = nextTab - f4;
-                        f3 = f;
+                        fArr[i10] = f3;
+                        fArr[i10 + 1] = fNextTab;
+                        fArr3[i5] = fNextTab - f3;
+                        f2 = fNextTab2;
                     } else {
-                        f3 = f4;
+                        f2 = f3;
                     }
                     i4 = i5 + 1;
                 } else {
-                    i = min;
+                    i = iMin;
                 }
                 i5++;
-                min = i;
+                iMin = i;
             }
             i3++;
-            f2 = f3;
+            f = f2;
         }
     }
 
@@ -619,63 +564,63 @@ public class TextLine {
             if (runStart > this.mLen) {
                 break;
             }
-            int min = Math.min(this.mDirections.getRunLength(i3) + runStart, this.mLen);
-            boolean isRunRtl = this.mDirections.isRunRtl(i3);
-            int calculateRunFlag = calculateRunFlag(i3, runCount, this.mDir);
+            int iMin = Math.min(this.mDirections.getRunLength(i3) + runStart, this.mLen);
+            boolean zIsRunRtl = this.mDirections.isRunRtl(i3);
+            int iCalculateRunFlag = calculateRunFlag(i3, runCount, this.mDir);
             float f3 = f2;
-            int i4 = this.mHasTabs ? runStart : min;
-            while (i4 <= min) {
-                if (i4 == min || charAt(i4) == '\t') {
-                    boolean z3 = (this.mDir == -1 ? z2 : false) == isRunRtl ? z2 : false;
+            int i4 = this.mHasTabs ? runStart : iMin;
+            while (i4 <= iMin) {
+                if (i4 == iMin || charAt(i4) == '\t') {
+                    boolean z3 = (this.mDir == -1 ? z2 : false) == zIsRunRtl ? z2 : false;
                     float f4 = fArr[runStart];
                     int i5 = i3;
                     int i6 = runStart;
                     i = i5;
-                    i2 = min;
-                    z = isRunRtl;
-                    float measureRun = measureRun(i6, i4, i4, z, fontMetricsInt, null, fArr, i6, 0.0f, null, calculateRunFlag);
+                    i2 = iMin;
+                    z = zIsRunRtl;
+                    float fMeasureRun = measureRun(i6, i4, i4, z, fontMetricsInt, null, fArr, i6, 0.0f, null, iCalculateRunFlag);
                     if (!z3) {
-                        measureRun = -measureRun;
+                        fMeasureRun = -fMeasureRun;
                     }
-                    float f5 = f3 + measureRun;
+                    float fNextTab = f3 + fMeasureRun;
                     if (!z3) {
-                        f3 = f5;
+                        f3 = fNextTab;
                     }
-                    int min2 = Math.min(i4, this.mLen);
-                    for (int i7 = i6; i7 <= min2; i7++) {
-                        if (i7 < min2) {
+                    int iMin2 = Math.min(i4, this.mLen);
+                    for (int i7 = i6; i7 <= iMin2; i7++) {
+                        if (i7 < iMin2) {
                             f = z ? -fArr[i7] : fArr[i7];
                         } else {
                             f = 0.0f;
                         }
                         if (i7 == i6 && zArr[i7]) {
                             fArr[i7] = f4;
-                        } else if (i7 != min2 || zArr[i7]) {
+                        } else if (i7 != iMin2 || zArr[i7]) {
                             fArr[i7] = f3;
                         }
                         f3 += f;
                     }
                     if (i4 != i2) {
                         if (!zArr[i4]) {
-                            fArr[i4] = f5;
+                            fArr[i4] = fNextTab;
                         }
                         int i8 = this.mDir;
-                        f5 = i8 * nextTab(f5 * i8);
+                        fNextTab = i8 * nextTab(fNextTab * i8);
                         int i9 = i4 + 1;
                         if (zArr[i9]) {
-                            fArr[i9] = f5;
+                            fArr[i9] = fNextTab;
                         }
                     }
-                    f3 = f5;
+                    f3 = fNextTab;
                     runStart = i4 + 1;
                 } else {
                     i = i3;
-                    i2 = min;
-                    z = isRunRtl;
+                    i2 = iMin;
+                    z = zIsRunRtl;
                 }
                 i4++;
-                isRunRtl = z;
-                min = i2;
+                zIsRunRtl = z;
+                iMin = i2;
                 i3 = i;
                 z2 = true;
             }
@@ -717,45 +662,49 @@ public class TextLine {
         return handleRun(i, i2, i2, z, null, glyphsConsumer, f, 0, 0, 0, null, null, z2, null, 0, null, i3);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x0119, code lost:
-    
-        if (r4 != (-1)) goto L104;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:48:0x011b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:100:0x011b, code lost:
     
         if (r0 == false) goto L103;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:50:0x0121, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:102:0x0121, code lost:
     
         return r20.mLen + 1;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x0122, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:103:0x0122, code lost:
     
         return -1;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x0123, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:104:0x0123, code lost:
     
         if (r4 > r8) goto L108;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:53:0x0125, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:105:0x0125, code lost:
     
         if (r0 == false) goto L107;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x0127, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:106:0x0127, code lost:
     
         return r8;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:55:0x0128, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:107:0x0128, code lost:
     
         return r17;
      */
+    /* JADX WARN: Code restructure failed: missing block: B:108:0x0129, code lost:
+    
+        return r4;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:99:0x0119, code lost:
+    
+        if (r4 != (-1)) goto L104;
+     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x00ca  */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x00d1  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00d7  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0117 A[ADDED_TO_REGION, EDGE_INSN: B:56:0x0117->B:46:0x0117 BREAK  A[LOOP:0: B:9:0x00c8->B:32:0x010e], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x00d3  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00cd  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0070  */
+    /* JADX WARN: Removed duplicated region for block: B:63:0x00c7  */
+    /* JADX WARN: Removed duplicated region for block: B:65:0x00ca  */
+    /* JADX WARN: Removed duplicated region for block: B:66:0x00cd  */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x00d1  */
+    /* JADX WARN: Removed duplicated region for block: B:69:0x00d3  */
     /* JADX WARN: Type inference failed for: r17v0 */
     /* JADX WARN: Type inference failed for: r17v1 */
     /* JADX WARN: Type inference failed for: r17v3 */
@@ -764,16 +713,170 @@ public class TextLine {
     /* JADX WARN: Type inference failed for: r17v6 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    int getOffsetToLeftRightOf(int r21, boolean r22) {
-        /*
-            Method dump skipped, instructions count: 298
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.TextLine.getOffsetToLeftRightOf(int, boolean):int");
+    int getOffsetToLeftRightOf(int i, boolean z) {
+        int length;
+        int i2;
+        boolean z2;
+        ?? r17;
+        boolean z3;
+        int i3;
+        int offsetBeforeAfter;
+        int i4;
+        int i5;
+        int i6 = this.mLen;
+        boolean z4 = this.mDir == -1;
+        int[] iArr = this.mDirections.mDirections;
+        int i7 = 67108863;
+        if (i == 0) {
+            offsetBeforeAfter = -1;
+            i2 = 67108863;
+            length = -2;
+        } else if (i == i6) {
+            length = iArr.length;
+            offsetBeforeAfter = -1;
+            i2 = 67108863;
+        } else {
+            int i8 = i6;
+            length = 0;
+            int i9 = 0;
+            while (true) {
+                if (length >= iArr.length) {
+                    i2 = i7;
+                    z2 = true;
+                    r17 = 0;
+                    z3 = false;
+                    i3 = 0;
+                    break;
+                }
+                i9 = iArr[length];
+                if (i >= i9) {
+                    int i10 = iArr[length + 1];
+                    int i11 = (i10 & i7) + i9;
+                    if (i11 > i6) {
+                        i11 = i6;
+                    }
+                    if (i < i11) {
+                        int i12 = (i10 >>> 26) & 63;
+                        if (i == i9) {
+                            int i13 = i - 1;
+                            int i14 = 0;
+                            z2 = true;
+                            r17 = 0;
+                            while (true) {
+                                if (i14 >= iArr.length) {
+                                    i2 = i7;
+                                    i4 = i11;
+                                    z3 = false;
+                                    break;
+                                }
+                                int i15 = iArr[i14];
+                                if (i13 >= i15) {
+                                    int i16 = iArr[i14 + 1];
+                                    i4 = i15 + (i16 & i7);
+                                    if (i4 > i6) {
+                                        i4 = i6;
+                                    }
+                                    if (i13 < i4) {
+                                        i2 = i7;
+                                        int i17 = (i16 >>> 26) & 63;
+                                        if (i17 < i12) {
+                                            length = i14;
+                                            i9 = i15;
+                                            i12 = i17;
+                                            z3 = true;
+                                            break;
+                                        }
+                                    } else {
+                                        i2 = i7;
+                                    }
+                                }
+                                i14 += 2;
+                                i7 = i2;
+                            }
+                            i3 = i12;
+                            i8 = i4;
+                        } else {
+                            i2 = i7;
+                            z2 = true;
+                            r17 = 0;
+                            i3 = i12;
+                            i8 = i11;
+                            z3 = false;
+                        }
+                    } else {
+                        i8 = i11;
+                    }
+                }
+                length += 2;
+                i7 = i7;
+            }
+            if (length == iArr.length) {
+                offsetBeforeAfter = -1;
+            } else {
+                boolean z5 = (i3 & 1) != 0 ? z2 : r17 == true ? 1 : 0;
+                boolean z6 = z5;
+                boolean z7 = z == z5 ? z2 : r17 == true ? 1 : 0;
+                if (i != (z7 ? i8 : i9) || z7 != z3) {
+                    offsetBeforeAfter = getOffsetBeforeAfter(length, i9, i8, z6, i, z7);
+                    if (z7) {
+                        i9 = i8;
+                    }
+                    if (offsetBeforeAfter != i9) {
+                        return offsetBeforeAfter;
+                    }
+                }
+            }
+            while (true) {
+                boolean z8 = z != z4 ? z2 : r17;
+                length += !z8 ? 2 : -2;
+                if (length < 0 || length >= iArr.length) {
+                    break;
+                }
+                int i18 = iArr[length];
+                int i19 = iArr[length + 1];
+                int i20 = (i19 & i2) + i18;
+                if (i20 > i6) {
+                    i20 = i6;
+                }
+                int i21 = i19 >>> 26;
+                i5 = i21 & 63;
+                boolean z9 = (i21 & 1) != 0 ? z2 : r17;
+                boolean z10 = z == z9 ? z2 : r17;
+                if (offsetBeforeAfter == -1) {
+                    offsetBeforeAfter = getOffsetBeforeAfter(length, i18, i20, z9, z10 ? i18 : i20, z10);
+                    if (z10) {
+                        i18 = i20;
+                    }
+                    if (offsetBeforeAfter != i18) {
+                        return offsetBeforeAfter;
+                    }
+                    i3 = i5;
+                } else if (i5 < i3) {
+                    return z10 ? i18 : i20;
+                }
+            }
+        }
+        i3 = 0;
+        z2 = true;
+        r17 = 0;
+        while (true) {
+            if (z != z4) {
+            }
+            length += !z8 ? 2 : -2;
+            if (length < 0) {
+                break;
+            }
+            break;
+            break;
+            i3 = i5;
+        }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:48:0x00a5  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private int getOffsetBeforeAfter(int i, int i2, int i3, boolean z, int i4, boolean z2) {
         int offsetBefore;
         int i5;
@@ -790,9 +893,9 @@ public class TextLine {
                     int i7 = z2 ? i4 + 1 : i4;
                     int i8 = this.mStart + i3;
                     while (true) {
-                        int nextSpanTransition = this.mSpanned.nextSpanTransition(this.mStart + i2, i8, MetricAffectingSpan.class);
+                        int iNextSpanTransition = this.mSpanned.nextSpanTransition(this.mStart + i2, i8, MetricAffectingSpan.class);
                         i6 = this.mStart;
-                        i3 = nextSpanTransition - i6;
+                        i3 = iNextSpanTransition - i6;
                         if (i3 >= i7) {
                             break;
                         }
@@ -822,15 +925,13 @@ public class TextLine {
                 int i11 = this.mStart;
                 offsetBefore = textPaint.getTextRunCursor(charSequence, i9 + i11, i11 + i3, z, i4 + i11, i10);
                 i5 = this.mStart;
-                return offsetBefore - i5;
+            } else if (z2) {
+                offsetBefore = TextUtils.getOffsetAfter(this.mText, i4 + this.mStart);
+                i5 = this.mStart;
+            } else {
+                offsetBefore = TextUtils.getOffsetBefore(this.mText, i4 + this.mStart);
+                i5 = this.mStart;
             }
-        }
-        if (z2) {
-            offsetBefore = TextUtils.getOffsetAfter(this.mText, i4 + this.mStart);
-            i5 = this.mStart;
-        } else {
-            offsetBefore = TextUtils.getOffsetBefore(this.mText, i4 + this.mStart);
-            i5 = this.mStart;
         }
         return offsetBefore - i5;
     }
@@ -884,14 +985,14 @@ public class TextLine {
         float f6 = f5 + textPaint.baselineShift + f;
         int color = textPaint.getColor();
         Paint.Style style = textPaint.getStyle();
-        boolean isAntiAlias = textPaint.isAntiAlias();
+        boolean zIsAntiAlias = textPaint.isAntiAlias();
         textPaint.setStyle(Paint.Style.FILL);
         textPaint.setAntiAlias(true);
         textPaint.setColor(i);
         canvas.drawRect(f3, f6, f4, f2 + f6, textPaint);
         textPaint.setStyle(style);
         textPaint.setColor(color);
-        textPaint.setAntiAlias(isAntiAlias);
+        textPaint.setAntiAlias(zIsAntiAlias);
     }
 
     private float getRunAdvance(TextPaint textPaint, int i, int i2, int i3, int i4, boolean z, int i5, float[] fArr, int i6, RectF rectF, LineInfo lineInfo) {
@@ -945,7 +1046,7 @@ public class TextLine {
         if (fontMetricsInt3 != null) {
             expandMetricsFromPaint(fontMetricsInt3, textPaint);
         }
-        float f6 = 0.0f;
+        float fMeasureText = 0.0f;
         if (i2 == i) {
             return 0.0f;
         }
@@ -975,21 +1076,21 @@ public class TextLine {
                 }
                 rectF.union(this.mTmpRectForPaintAPI);
             }
-            f6 = runAdvance;
+            fMeasureText = runAdvance;
         } else {
             i11 = size;
             fontMetricsInt2 = fontMetricsInt3;
         }
         int i13 = (this.mStart + i2) - 1;
         if (i13 >= 0 && TextUtils.semNeedMoreWidth(this.mText.charAt(i13))) {
-            f6 += textPaint.measureText(" ");
+            fMeasureText += textPaint.measureText(" ");
         }
-        float f7 = f6;
+        float f6 = fMeasureText;
         if (z) {
-            f2 = f5 - f7;
+            f2 = f5 - f6;
         } else {
             f2 = f5;
-            f5 += f7;
+            f5 += f6;
         }
         if (glyphsConsumer != null) {
             shapeTextRun(glyphsConsumer, textPaint, i, i2, i3, i4, z, f2);
@@ -1014,45 +1115,45 @@ public class TextLine {
             }
             drawTextRun(canvas, textPaint2, i, i2, i3, i4, z, f2, i6 + textPaint2.baselineShift);
             int i14 = i;
-            float f8 = f2;
+            float f7 = f2;
             if (i11 != 0) {
                 int i15 = 0;
                 while (i15 < i11) {
                     DecorationInfo decorationInfo = arrayList.get(i15);
-                    int max = Math.max(decorationInfo.start, i14);
-                    int min = Math.min(decorationInfo.end, i8);
+                    int iMax = Math.max(decorationInfo.start, i14);
+                    int iMin = Math.min(decorationInfo.end, i8);
                     int i16 = i15;
-                    float f9 = f5;
-                    float runAdvance2 = getRunAdvance(textPaint, i14, i2, i3, i4, z, max, null, 0, null, null);
-                    float runAdvance3 = getRunAdvance(textPaint, i, i2, i3, i4, z, min, null, 0, null, null);
+                    float f8 = f5;
+                    float runAdvance2 = getRunAdvance(textPaint, i14, i2, i3, i4, z, iMax, null, 0, null, null);
+                    float runAdvance3 = getRunAdvance(textPaint, i, i2, i3, i4, z, iMin, null, 0, null, null);
                     if (z) {
-                        f3 = f9 - runAdvance3;
-                        f4 = f9 - runAdvance2;
+                        f3 = f8 - runAdvance3;
+                        f4 = f8 - runAdvance2;
                     } else {
-                        f3 = f8 + runAdvance2;
-                        f4 = f8 + runAdvance3;
+                        f3 = f7 + runAdvance2;
+                        f4 = f7 + runAdvance3;
                     }
-                    float f10 = f3;
-                    float f11 = f4;
+                    float f9 = f3;
+                    float f10 = f4;
                     if (decorationInfo.underlineColor != 0) {
                         i12 = i6;
-                        drawStroke(textPaint, canvas, decorationInfo.underlineColor, textPaint.getUnderlinePosition(), decorationInfo.underlineThickness, f10, f11, i12);
+                        drawStroke(textPaint, canvas, decorationInfo.underlineColor, textPaint.getUnderlinePosition(), decorationInfo.underlineThickness, f9, f10, i12);
                     } else {
                         i12 = i6;
                     }
                     if (decorationInfo.isUnderlineText) {
-                        drawStroke(textPaint, canvas, textPaint.getColor(), textPaint.getUnderlinePosition(), Math.max(textPaint.getUnderlineThickness(), 1.0f), f10, f11, i12);
+                        drawStroke(textPaint, canvas, textPaint.getColor(), textPaint.getUnderlinePosition(), Math.max(textPaint.getUnderlineThickness(), 1.0f), f9, f10, i12);
                     }
                     if (decorationInfo.isStrikeThruText) {
-                        drawStroke(textPaint, canvas, textPaint.getColor(), textPaint.getStrikeThruPosition(), Math.max(textPaint.getStrikeThruThickness(), 1.0f), f10, f11, i12);
+                        drawStroke(textPaint, canvas, textPaint.getColor(), textPaint.getStrikeThruPosition(), Math.max(textPaint.getStrikeThruThickness(), 1.0f), f9, f10, i12);
                     }
                     i15 = i16 + 1;
                     i14 = i;
-                    f5 = f9;
+                    f5 = f8;
                 }
             }
         }
-        return z ? -f7 : f7;
+        return z ? -f6 : f6;
     }
 
     private float handleReplacement(ReplacementSpan replacementSpan, TextPaint textPaint, int i, int i2, boolean z, Canvas canvas, float f, int i3, int i4, int i5, Paint.FontMetricsInt fontMetricsInt, boolean z2) {
@@ -1150,18 +1251,240 @@ public class TextLine {
         textPaint.setUnderlineText(0, 0.0f);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:91:0x027a  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x028c  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x027a  */
+    /* JADX WARN: Removed duplicated region for block: B:97:0x028c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private float handleRun(int r31, int r32, int r33, boolean r34, android.graphics.Canvas r35, android.text.TextShaper.GlyphsConsumer r36, float r37, int r38, int r39, int r40, android.graphics.Paint.FontMetricsInt r41, android.graphics.RectF r42, boolean r43, float[] r44, int r45, android.text.TextLine.LineInfo r46, int r47) {
-        /*
-            Method dump skipped, instructions count: 830
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.TextLine.handleRun(int, int, int, boolean, android.graphics.Canvas, android.text.TextShaper$GlyphsConsumer, float, int, int, int, android.graphics.Paint$FontMetricsInt, android.graphics.RectF, boolean, float[], int, android.text.TextLine$LineInfo, int):float");
+    private float handleRun(int i, int i2, int i3, boolean z, Canvas canvas, TextShaper.GlyphsConsumer glyphsConsumer, float f, int i4, int i5, int i6, Paint.FontMetricsInt fontMetricsInt, RectF rectF, boolean z2, float[] fArr, int i7, LineInfo lineInfo, int i8) {
+        float f2;
+        int i9;
+        int i10;
+        TextPaint textPaint;
+        float f3;
+        boolean z3;
+        float f4;
+        int i11;
+        TextPaint textPaint2;
+        DecorationInfo decorationInfo;
+        int i12;
+        int i13;
+        int i14;
+        TextPaint textPaint3;
+        int i15;
+        TextLine textLine = this;
+        Paint.FontMetricsInt fontMetricsInt2 = fontMetricsInt;
+        if (i2 < i || i2 > i3) {
+            throw new IndexOutOfBoundsException("measureLimit (" + i2 + ") is out of start (" + i + ") and limit (" + i3 + ") bounds");
+        }
+        if (fArr != null && fArr.length - i7 < i2 - i) {
+            throw new IndexOutOfBoundsException("advances doesn't have enough space to receive the result");
+        }
+        float f5 = 0.0f;
+        if (i == i2) {
+            TextPaint textPaint4 = textLine.mWorkPaint;
+            textPaint4.set(textLine.mPaint);
+            if (fontMetricsInt2 != null) {
+                expandMetricsFromPaint(fontMetricsInt2, textPaint4);
+            }
+            if (rectF != null) {
+                if (fontMetricsInt2 == null) {
+                    Paint.FontMetricsInt fontMetricsInt3 = new Paint.FontMetricsInt();
+                    expandMetricsFromPaint(fontMetricsInt3, textPaint4);
+                    fontMetricsInt2 = fontMetricsInt3;
+                }
+                rectF.union(0.0f, fontMetricsInt2.top, 0.0f, fontMetricsInt2.bottom);
+            }
+            return 0.0f;
+        }
+        Spanned spanned = textLine.mSpanned;
+        if (spanned != null) {
+            SpanSet<MetricAffectingSpan> spanSet = textLine.mMetricAffectingSpanSpanSet;
+            int i16 = textLine.mStart;
+            spanSet.init(spanned, i16 + i, i16 + i3);
+            SpanSet<CharacterStyle> spanSet2 = textLine.mCharacterStyleSpanSet;
+            Spanned spanned2 = textLine.mSpanned;
+            int i17 = textLine.mStart;
+            spanSet2.init(spanned2, i17 + i, i17 + i3);
+            if (textLine.mMetricAffectingSpanSpanSet.numberOfSpans != 0 || textLine.mCharacterStyleSpanSet.numberOfSpans != 0) {
+                int i18 = i2;
+                int i19 = i;
+                float fHandleText = f;
+                while (i19 < i18) {
+                    TextPaint textPaint5 = textLine.mWorkPaint;
+                    textPaint5.set(textLine.mPaint);
+                    SpanSet<MetricAffectingSpan> spanSet3 = textLine.mMetricAffectingSpanSpanSet;
+                    int i20 = textLine.mStart;
+                    int nextTransition = spanSet3.getNextTransition(i20 + i19, i20 + i3) - textLine.mStart;
+                    int iMin = Math.min(nextTransition, i18);
+                    ReplacementSpan replacementSpan = null;
+                    int i21 = 0;
+                    while (true) {
+                        if (i21 >= textLine.mMetricAffectingSpanSpanSet.numberOfSpans) {
+                            break;
+                        }
+                        if (textLine.mMetricAffectingSpanSpanSet.spanStarts[i21] < textLine.mStart + iMin) {
+                            int i22 = textLine.mMetricAffectingSpanSpanSet.spanEnds[i21];
+                            int i23 = textLine.mStart;
+                            if (i22 > i23 + i19) {
+                                boolean z4 = i23 + textLine.mEllipsisStart <= textLine.mMetricAffectingSpanSpanSet.spanStarts[i21] && textLine.mMetricAffectingSpanSpanSet.spanEnds[i21] <= textLine.mStart + textLine.mEllipsisEnd;
+                                MetricAffectingSpan metricAffectingSpan = textLine.mMetricAffectingSpanSpanSet.spans[i21];
+                                if (metricAffectingSpan instanceof ReplacementSpan) {
+                                    replacementSpan = !z4 ? (ReplacementSpan) metricAffectingSpan : null;
+                                } else {
+                                    metricAffectingSpan.updateDrawState(textPaint5);
+                                }
+                            }
+                        }
+                        i21++;
+                    }
+                    if (replacementSpan != null) {
+                        int i24 = i19;
+                        float fHandleReplacement = textLine.handleReplacement(replacementSpan, textPaint5, i24, iMin, z, canvas, fHandleText, i4, i5, i6, fontMetricsInt, z2 || iMin < i18);
+                        float f6 = fHandleText + fHandleReplacement;
+                        if (fArr != null) {
+                            int i25 = (i7 + i24) - i;
+                            if (z) {
+                                fHandleReplacement = -fHandleReplacement;
+                            }
+                            fArr[i25] = fHandleReplacement;
+                            for (int i26 = i24 + 1; i26 < iMin; i26++) {
+                                fArr[(i7 + i26) - i] = f5;
+                            }
+                        }
+                        fHandleText = f6;
+                        f2 = f5;
+                        i10 = i18;
+                        i9 = nextTransition;
+                    } else {
+                        TextLine textLine2 = textLine;
+                        TextPaint textPaint6 = textPaint5;
+                        int i27 = iMin;
+                        float f7 = fHandleText;
+                        int i28 = i19;
+                        TextPaint textPaint7 = textLine2.mActivePaint;
+                        textPaint7.set(textLine2.mPaint);
+                        DecorationInfo decorationInfo2 = textLine2.mDecorationInfo;
+                        textLine2.mDecorations.clear();
+                        float f8 = f7;
+                        int i29 = i28;
+                        int i30 = i29;
+                        while (i30 < i27) {
+                            SpanSet<CharacterStyle> spanSet4 = textLine2.mCharacterStyleSpanSet;
+                            int i31 = textLine2.mStart;
+                            int nextTransition2 = spanSet4.getNextTransition(i31 + i30, i31 + nextTransition) - textLine2.mStart;
+                            int iMin2 = Math.min(nextTransition2, i27);
+                            textPaint6.set(textLine2.mPaint);
+                            for (int i32 = 0; i32 < textLine2.mCharacterStyleSpanSet.numberOfSpans; i32++) {
+                                if (textLine2.mCharacterStyleSpanSet.spanStarts[i32] < textLine2.mStart + iMin2 && textLine2.mCharacterStyleSpanSet.spanEnds[i32] > textLine2.mStart + i30) {
+                                    textLine2.mCharacterStyleSpanSet.spans[i32].updateDrawState(textPaint6);
+                                }
+                            }
+                            textLine2.extractDecorationInfo(textPaint6, decorationInfo2);
+                            if (i30 == i28) {
+                                textPaint7.set(textPaint6);
+                            } else {
+                                if (!equalAttributes(textPaint6, textPaint7)) {
+                                    int i33 = iMin;
+                                    int i34 = i29;
+                                    int i35 = i18;
+                                    int iResolveRunFlagForSubSequence = resolveRunFlagForSubSequence(i8, z, i, i35, i34, i33);
+                                    textPaint7.setStartHyphenEdit(textLine2.adjustStartHyphenEdit(i34, textLine2.mPaint.getStartHyphenEdit()));
+                                    textPaint7.setEndHyphenEdit(textLine2.adjustEndHyphenEdit(i33, textLine2.mPaint.getEndHyphenEdit()));
+                                    if (z2 || i33 < i35) {
+                                        textPaint = textPaint7;
+                                        f3 = f8;
+                                        z3 = true;
+                                    } else {
+                                        textPaint = textPaint7;
+                                        f3 = f8;
+                                        z3 = false;
+                                    }
+                                    f4 = 0.0f;
+                                    i11 = i27;
+                                    int i36 = i28;
+                                    TextLine textLine3 = textLine2;
+                                    textPaint2 = textPaint6;
+                                    decorationInfo = decorationInfo2;
+                                    i12 = i30;
+                                    i13 = nextTransition2;
+                                    i14 = nextTransition;
+                                    float fHandleText2 = textLine3.handleText(textPaint, i34, i33, i36, i14, z, canvas, glyphsConsumer, f3, i4, i5, i6, fontMetricsInt, rectF, z3, Math.min(i33, i27), textLine2.mDecorations, fArr, (i7 + i34) - i, lineInfo, iResolveRunFlagForSubSequence);
+                                    textLine2 = textLine3;
+                                    textPaint3 = textPaint;
+                                    i28 = i36;
+                                    f8 = f3 + fHandleText2;
+                                    textPaint3.set(textPaint2);
+                                    textLine2.mDecorations.clear();
+                                    i29 = i12;
+                                }
+                                if (decorationInfo.hasDecoration()) {
+                                    i15 = i13;
+                                } else {
+                                    DecorationInfo decorationInfoCopyInfo = decorationInfo.copyInfo();
+                                    decorationInfoCopyInfo.start = i12;
+                                    i15 = i13;
+                                    decorationInfoCopyInfo.end = i15;
+                                    textLine2.mDecorations.add(decorationInfoCopyInfo);
+                                }
+                                i18 = i2;
+                                nextTransition = i14;
+                                textPaint7 = textPaint3;
+                                iMin = i15;
+                                i30 = iMin;
+                                i27 = i11;
+                                decorationInfo2 = decorationInfo;
+                                f5 = f4;
+                                textPaint6 = textPaint2;
+                            }
+                            i13 = nextTransition2;
+                            i11 = i27;
+                            textPaint2 = textPaint6;
+                            textPaint3 = textPaint7;
+                            decorationInfo = decorationInfo2;
+                            i12 = i30;
+                            i14 = nextTransition;
+                            f4 = 0.0f;
+                            f8 = f8;
+                            if (decorationInfo.hasDecoration()) {
+                            }
+                            i18 = i2;
+                            nextTransition = i14;
+                            textPaint7 = textPaint3;
+                            iMin = i15;
+                            i30 = iMin;
+                            i27 = i11;
+                            decorationInfo2 = decorationInfo;
+                            f5 = f4;
+                            textPaint6 = textPaint2;
+                        }
+                        int i37 = iMin;
+                        int i38 = i27;
+                        TextPaint textPaint8 = textPaint7;
+                        f2 = f5;
+                        i9 = nextTransition;
+                        float f9 = f8;
+                        int i39 = i29;
+                        int i40 = i18;
+                        int iResolveRunFlagForSubSequence2 = resolveRunFlagForSubSequence(i8, z, i, i40, i39, i37);
+                        i10 = i40;
+                        textPaint8.setStartHyphenEdit(textLine2.adjustStartHyphenEdit(i39, textLine2.mPaint.getStartHyphenEdit()));
+                        textPaint8.setEndHyphenEdit(textLine2.adjustEndHyphenEdit(i37, textLine2.mPaint.getEndHyphenEdit()));
+                        fHandleText = f9 + textLine2.handleText(textPaint8, i39, i37, i28, i9, z, canvas, glyphsConsumer, f9, i4, i5, i6, fontMetricsInt, rectF, z2 || i37 < i10, Math.min(i37, i38), textLine2.mDecorations, fArr, (i7 + i39) - i, lineInfo, iResolveRunFlagForSubSequence2);
+                    }
+                    textLine = this;
+                    i18 = i10;
+                    i19 = i9;
+                    f5 = f2;
+                }
+                return fHandleText - f;
+            }
+        }
+        TextPaint textPaint9 = textLine.mWorkPaint;
+        textPaint9.set(textLine.mPaint);
+        textPaint9.setStartHyphenEdit(textLine.adjustStartHyphenEdit(i, textPaint9.getStartHyphenEdit()));
+        textPaint9.setEndHyphenEdit(textLine.adjustEndHyphenEdit(i3, textPaint9.getEndHyphenEdit()));
+        return textLine.handleText(textPaint9, i, i3, i, i3, z, canvas, glyphsConsumer, f, i4, i5, i6, fontMetricsInt2, rectF, z2, i2, null, fArr, i7, lineInfo, i8);
     }
 
     private void drawTextRun(Canvas canvas, TextPaint textPaint, int i, int i2, int i3, int i4, boolean z, float f, int i5) {
@@ -1174,17 +1497,17 @@ public class TextLine {
     }
 
     private void shapeTextRun(TextShaper.GlyphsConsumer glyphsConsumer, TextPaint textPaint, int i, int i2, int i3, int i4, boolean z, float f) {
-        PositionedGlyphs shapeTextRun;
+        PositionedGlyphs positionedGlyphsShapeTextRun;
         int i5 = i2 - i;
         int i6 = i4 - i3;
         if (this.mCharsValid) {
-            shapeTextRun = TextRunShaper.shapeTextRun(this.mChars, i, i5, i3, i6, f, 0.0f, z, textPaint);
+            positionedGlyphsShapeTextRun = TextRunShaper.shapeTextRun(this.mChars, i, i5, i3, i6, f, 0.0f, z, textPaint);
         } else {
             CharSequence charSequence = this.mText;
             int i7 = this.mStart;
-            shapeTextRun = TextRunShaper.shapeTextRun(charSequence, i7 + i, i5, i7 + i3, i6, f, 0.0f, z, textPaint);
+            positionedGlyphsShapeTextRun = TextRunShaper.shapeTextRun(charSequence, i7 + i, i5, i7 + i3, i6, f, 0.0f, z, textPaint);
         }
-        glyphsConsumer.accept(i, i5, shapeTextRun, textPaint);
+        glyphsConsumer.accept(i, i5, positionedGlyphsShapeTextRun, textPaint);
     }
 
     float nextTab(float f) {

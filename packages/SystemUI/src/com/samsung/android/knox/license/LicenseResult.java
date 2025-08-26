@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LicenseResult implements Parcelable {
     public static final Parcelable.Creator<LicenseResult> CREATOR = new Parcelable.Creator<LicenseResult>() { // from class: com.samsung.android.knox.license.LicenseResult.1
@@ -29,7 +28,6 @@ public class LicenseResult implements Parcelable {
     private long timeRemainingUntilNextLicenseRequest;
     private Type type;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Status {
         SUCCESS("success"),
         FAILURE(null);
@@ -46,7 +44,6 @@ public class LicenseResult implements Parcelable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Type {
         ELM_ACTIVATION(800),
         ELM_VALIDATION(801),

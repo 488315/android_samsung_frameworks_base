@@ -2,13 +2,11 @@ package androidx.compose.animation;
 
 import androidx.compose.ui.unit.Density;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FlingCalculator {
     public final float friction;
     public final float magicPhysicalCoefficient;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FlingInfo {
         public final float distance;
         public final long duration;

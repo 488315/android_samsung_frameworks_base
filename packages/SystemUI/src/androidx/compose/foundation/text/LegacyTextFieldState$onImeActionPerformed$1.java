@@ -10,7 +10,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LegacyTextFieldState$onImeActionPerformed$1 extends Lambda implements Function1 {
     final /* synthetic */ LegacyTextFieldState this$0;
@@ -23,7 +22,7 @@ final class LegacyTextFieldState$onImeActionPerformed$1 extends Lambda implement
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         Function1 function1;
         Unit unit;
         FocusManager focusManager;
@@ -75,7 +74,7 @@ final class LegacyTextFieldState$onImeActionPerformed$1 extends Lambda implement
             function1 = null;
         }
         if (function1 != null) {
-            function1.mo779invoke(keyboardActionRunner);
+            function1.mo781invoke(keyboardActionRunner);
             unit = Unit.INSTANCE;
         } else {
             unit = null;
@@ -85,12 +84,12 @@ final class LegacyTextFieldState$onImeActionPerformed$1 extends Lambda implement
                 FocusManager focusManager2 = keyboardActionRunner.focusManager;
                 focusManager = focusManager2 != null ? focusManager2 : null;
                 FocusDirection.Companion.getClass();
-                ((FocusOwnerImpl) focusManager).m373moveFocus3ESFkO8(FocusDirection.Next);
+                ((FocusOwnerImpl) focusManager).m375moveFocus3ESFkO8(FocusDirection.Next);
             } else if (i == ImeAction.Previous) {
                 FocusManager focusManager3 = keyboardActionRunner.focusManager;
                 focusManager = focusManager3 != null ? focusManager3 : null;
                 FocusDirection.Companion.getClass();
-                ((FocusOwnerImpl) focusManager).m373moveFocus3ESFkO8(FocusDirection.Previous);
+                ((FocusOwnerImpl) focusManager).m375moveFocus3ESFkO8(FocusDirection.Previous);
             } else if (i == i2) {
                 SoftwareKeyboardController softwareKeyboardController = keyboardActionRunner.keyboardController;
                 if (softwareKeyboardController != null) {

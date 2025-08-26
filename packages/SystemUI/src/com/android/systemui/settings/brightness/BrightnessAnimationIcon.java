@@ -15,7 +15,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BrightnessAnimationIcon {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -23,7 +22,6 @@ public final class BrightnessAnimationIcon {
     public float iconAnimationValue;
     public final Lazy settingsHelper$delegate = LazyKt__LazyJVMKt.lazy(new BrightnessAnimationIcon$$ExternalSyntheticLambda0());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -58,14 +56,14 @@ public final class BrightnessAnimationIcon {
         if (lottieAnimationView == null) {
             return;
         }
-        Float valueOf = Float.valueOf(i / i2);
-        if (Math.abs(this.iconAnimationValue - valueOf.floatValue()) <= 1.0E-6d) {
-            valueOf = null;
+        Float fValueOf = Float.valueOf(i / i2);
+        if (Math.abs(this.iconAnimationValue - fValueOf.floatValue()) <= 1.0E-6d) {
+            fValueOf = null;
         }
-        if (valueOf != null) {
-            float floatValue = valueOf.floatValue();
-            this.iconAnimationValue = floatValue;
-            lottieAnimationView.setProgress(floatValue);
+        if (fValueOf != null) {
+            float fFloatValue = fValueOf.floatValue();
+            this.iconAnimationValue = fFloatValue;
+            lottieAnimationView.setProgress(fFloatValue);
         }
     }
 }

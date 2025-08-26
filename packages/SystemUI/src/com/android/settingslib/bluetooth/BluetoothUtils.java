@@ -1,13 +1,18 @@
 package com.android.settingslib.bluetooth;
 
 import android.R;
+import android.app.ActivityManager;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManufacturerData;
 import android.bluetooth.SemBluetoothUuid;
 import android.content.ComponentName;
+import android.content.ContentProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -25,21 +30,26 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.text.TextUtils;
+import android.util.AndroidRuntimeException;
 import android.util.Log;
 import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.widget.Toast;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
+import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0;
 import com.google.common.collect.ImmutableSet;
 import com.samsung.android.bluetooth.SemBluetoothCastAdapter;
 import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.restriction.PhoneRestrictionPolicy;
 import com.samsung.android.knox.zt.devicetrust.cert.CertProvisionProfile;
+import com.samsung.android.settingslib.bluetooth.BluetoothRestoredDevice;
 import com.samsung.android.settingslib.bluetooth.ManufacturerData;
 import com.samsung.android.settingslib.bluetooth.bluetoothcast.AudioCastProfile;
 import com.sec.ims.configuration.DATA;
 import com.sec.ims.im.ImIntent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -48,7 +58,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BluetoothUtils {
     public static final String[] BD_ROTATE_LEFT;
@@ -93,11 +102,11 @@ public class BluetoothUtils {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
         }
-        Bitmap createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static boolean getBooleanMetaData(BluetoothDevice bluetoothDevice) {
@@ -162,24 +171,24 @@ public class BluetoothUtils {
         Resources resources = context.getResources();
         if (isAdvancedDetailsHeader(bluetoothDevice)) {
             String str = (bluetoothDevice == null || (metadata = bluetoothDevice.getMetadata(5)) == null) ? null : new String(metadata);
-            Uri parse = str != null ? Uri.parse(str) : null;
-            if (parse != null) {
+            Uri uri = str != null ? Uri.parse(str) : null;
+            if (uri != null) {
                 try {
-                    context.getContentResolver().takePersistableUriPermission(parse, 1);
+                    context.getContentResolver().takePersistableUriPermission(uri, 1);
                 } catch (SecurityException e) {
-                    Log.e("BluetoothUtils", "Failed to take persistable permission for: " + parse, e);
+                    Log.e("BluetoothUtils", "Failed to take persistable permission for: " + uri, e);
                 }
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), parse);
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
                     if (bitmap != null) {
-                        Bitmap createScaledBitmap = Bitmap.createScaledBitmap(bitmap, dimensionPixelSize, dimensionPixelSize, false);
+                        Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmap, dimensionPixelSize, dimensionPixelSize, false);
                         bitmap.recycle();
-                        return new Pair(new BitmapDrawable(resources, createScaledBitmap), (String) btClassDrawableWithDescription.second);
+                        return new Pair(new BitmapDrawable(resources, bitmapCreateScaledBitmap), (String) btClassDrawableWithDescription.second);
                     }
                 } catch (IOException e2) {
-                    Log.e("BluetoothUtils", "Failed to get drawable for: " + parse, e2);
+                    Log.e("BluetoothUtils", "Failed to get drawable for: " + uri, e2);
                 } catch (SecurityException e3) {
-                    Log.e("BluetoothUtils", "Failed to get permission for: " + parse, e3);
+                    Log.e("BluetoothUtils", "Failed to get permission for: " + uri, e3);
                 }
             }
         }
@@ -202,59 +211,32 @@ public class BluetoothUtils {
         return com.android.systemui.R.string.bluetooth_disconnecting;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0032, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:24:0x0032, code lost:
     
         r8 = r3;
      */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0037 A[EDGE_INSN: B:22:0x0037->B:23:0x0037 BREAK  A[LOOP:0: B:6:0x000c->B:25:0x000c], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x000c A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0037 A[EDGE_INSN: B:30:0x0037->B:27:0x0037 BREAK  A[LOOP:0: B:6:0x000c->B:31:0x000c], SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x000c A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.settingslib.bluetooth.CachedBluetoothDevice getDeviceForGroupConnectionState(com.android.settingslib.bluetooth.CachedBluetoothDevice r8) {
-        /*
-            int r0 = r8.mCachedMaxConnectionState
-            r1 = 2
-            if (r0 != r1) goto L6
-            return r8
-        L6:
-            java.util.Set r2 = r8.mMemberDevices
-            java.util.Iterator r2 = r2.iterator()
-        Lc:
-            boolean r3 = r2.hasNext()
-            if (r3 == 0) goto L37
-            java.lang.Object r3 = r2.next()
-            com.android.settingslib.bluetooth.CachedBluetoothDevice r3 = (com.android.settingslib.bluetooth.CachedBluetoothDevice) r3
-            int r4 = r3.mCachedMaxConnectionState
-            if (r0 != r4) goto L1d
-            goto Lc
-        L1d:
-            int r5 = r8.mCachedMaxConnectionState
-            if (r5 == 0) goto L30
-            r6 = 1
-            if (r5 == r6) goto L2d
-            r7 = 3
-            if (r5 == r7) goto L28
-            goto L33
-        L28:
-            if (r4 == r6) goto L32
-            if (r4 != r1) goto L33
-            goto L32
-        L2d:
-            if (r4 != r1) goto L33
-            goto L32
-        L30:
-            if (r4 == 0) goto L33
-        L32:
-            r8 = r3
-        L33:
-            int r3 = r8.mCachedMaxConnectionState
-            if (r3 != r1) goto Lc
-        L37:
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.BluetoothUtils.getDeviceForGroupConnectionState(com.android.settingslib.bluetooth.CachedBluetoothDevice):com.android.settingslib.bluetooth.CachedBluetoothDevice");
+    public static CachedBluetoothDevice getDeviceForGroupConnectionState(CachedBluetoothDevice cachedBluetoothDevice) {
+        int i = cachedBluetoothDevice.mCachedMaxConnectionState;
+        if (i == 2) {
+            return cachedBluetoothDevice;
+        }
+        for (CachedBluetoothDevice cachedBluetoothDevice2 : cachedBluetoothDevice.mMemberDevices) {
+            int i2 = cachedBluetoothDevice2.mCachedMaxConnectionState;
+            if (i != i2) {
+                if ((r5 = cachedBluetoothDevice.mCachedMaxConnectionState) != 0) {
+                    if (cachedBluetoothDevice.mCachedMaxConnectionState != 2) {
+                        break;
+                    }
+                } else if (cachedBluetoothDevice.mCachedMaxConnectionState != 2) {
+                }
+            }
+        }
+        return cachedBluetoothDevice;
     }
 
     public static String getFastPairCustomizedField(BluetoothDevice bluetoothDevice, String str) {
@@ -286,41 +268,182 @@ public class BluetoothUtils {
         }
     }
 
-    public static Drawable getOverlayIconTintableDrawable(Drawable drawable, Context context, int i, int i2) {
+    public static Drawable getOverlayIconTintableDrawable(Drawable drawable, Context context, int i, int i2) throws Resources.NotFoundException {
         int color = "com.android.systemui".equals(context.getPackageName().toLowerCase()) ? context.getResources().getColor(com.android.systemui.R.color.qs_detail_item_device_bt_icon_tint_color) : context.getResources().getColor(com.android.systemui.R.color.bt_device_icon_tint_color);
         drawable.setTint(color);
-        Bitmap drawableToBitmap = drawableToBitmap(drawable);
-        Bitmap drawableToBitmap2 = drawableToBitmap(context.getResources().getDrawable(i));
+        Bitmap bitmapDrawableToBitmap = drawableToBitmap(drawable);
+        Bitmap bitmapDrawableToBitmap2 = drawableToBitmap(context.getResources().getDrawable(i));
         Drawable drawable2 = context.getResources().getDrawable(i2);
         drawable2.setTint(color);
-        Bitmap drawableToBitmap3 = drawableToBitmap(drawable2);
-        Bitmap createBitmap = Bitmap.createBitmap(drawableToBitmap.getWidth(), drawableToBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
-        canvas.drawBitmap(drawableToBitmap, 0.0f, 0.0f, (Paint) null);
+        Bitmap bitmapDrawableToBitmap3 = drawableToBitmap(drawable2);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmapDrawableToBitmap.getWidth(), bitmapDrawableToBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
+        canvas.drawBitmap(bitmapDrawableToBitmap, 0.0f, 0.0f, (Paint) null);
         Paint paint = new Paint();
         paint.setFilterBitmap(false);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
-        canvas.drawBitmap(drawableToBitmap2, 0.0f, 0.0f, paint);
+        canvas.drawBitmap(bitmapDrawableToBitmap2, 0.0f, 0.0f, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
-        canvas.drawBitmap(drawableToBitmap3, 0.0f, 0.0f, paint);
+        canvas.drawBitmap(bitmapDrawableToBitmap3, 0.0f, 0.0f, paint);
         paint.setXfermode(null);
-        return new BitmapDrawable(context.getResources(), createBitmap);
+        return new BitmapDrawable(context.getResources(), bitmapCreateBitmap);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0163  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x016d  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0175  */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x0163  */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x016d  */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x0175  */
     /* JADX WARN: Unreachable blocks removed: 2, instructions: 3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.util.List getRestoredDevices(android.content.Context r26, com.android.settingslib.bluetooth.LocalBluetoothProfileManager r27, boolean r28) {
-        /*
-            Method dump skipped, instructions count: 390
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.BluetoothUtils.getRestoredDevices(android.content.Context, com.android.settingslib.bluetooth.LocalBluetoothProfileManager, boolean):java.util.List");
+    public static List getRestoredDevices(Context context, LocalBluetoothProfileManager localBluetoothProfileManager, boolean z) throws Throwable {
+        ArrayList arrayList;
+        ArrayList arrayList2;
+        ArrayList arrayList3;
+        ArrayList arrayList4;
+        Cursor cursorQuery;
+        ArrayList arrayList5 = new ArrayList();
+        ArrayList arrayList6 = new ArrayList();
+        Cursor cursor = null;
+        try {
+            try {
+                arrayList3 = arrayList6;
+                arrayList4 = arrayList5;
+                try {
+                    cursorQuery = context.getContentResolver().query(ContentProvider.maybeAddUserId(Uri.parse("content://com.samsung.bt.btservice.btsettingsprovider/bonddevice"), ActivityManager.getCurrentUser()), null, "bond_state == 1 OR bond_state == 4", null, "timestamp DESC");
+                    try {
+                    } catch (Throwable th) {
+                        th = th;
+                        cursor = cursorQuery;
+                        if (cursor != null) {
+                            Log.e("BluetoothUtils", "getRestoredDevices :: will be cursor close");
+                            cursor.close();
+                        }
+                        throw th;
+                    }
+                } catch (IllegalStateException e) {
+                    e = e;
+                }
+            } catch (IllegalStateException e2) {
+                e = e2;
+                arrayList = arrayList5;
+                arrayList2 = arrayList6;
+            }
+            if (cursorQuery != null) {
+                try {
+                    Log.e("BluetoothUtils", "getRestoredDevices() :: cursor count: " + cursorQuery.getCount() + ", Columns : " + cursorQuery.getColumnCount());
+                    cursorQuery.moveToFirst();
+                    int columnIndex = cursorQuery.getColumnIndex("address");
+                    int columnIndex2 = cursorQuery.getColumnIndex("name");
+                    int columnIndex3 = cursorQuery.getColumnIndex("cod");
+                    int columnIndex4 = cursorQuery.getColumnIndex("bond_state");
+                    int columnIndex5 = cursorQuery.getColumnIndex("appearance");
+                    int columnIndex6 = cursorQuery.getColumnIndex("manufacturerdata");
+                    int columnIndex7 = cursorQuery.getColumnIndex(PhoneRestrictionPolicy.TIMESTAMP);
+                    int columnIndex8 = cursorQuery.getColumnIndex("linktype");
+                    int columnIndex9 = cursorQuery.getColumnIndex("uuids");
+                    while (!cursorQuery.isAfterLast()) {
+                        BluetoothRestoredDevice bluetoothRestoredDevice = new BluetoothRestoredDevice(context, cursorQuery.getString(columnIndex));
+                        bluetoothRestoredDevice.mName = cursorQuery.getString(columnIndex2);
+                        bluetoothRestoredDevice.mCod = cursorQuery.getInt(columnIndex3);
+                        bluetoothRestoredDevice.mBondState = cursorQuery.getInt(columnIndex4);
+                        bluetoothRestoredDevice.mAppearance = cursorQuery.getInt(columnIndex5);
+                        byte[] bArrStringToByte = stringToByte(cursorQuery.getString(columnIndex6));
+                        bluetoothRestoredDevice.mManufacturerData = bArrStringToByte;
+                        int i = columnIndex2;
+                        int i2 = columnIndex3;
+                        bluetoothRestoredDevice.mTimeStamp = cursorQuery.getLong(columnIndex7);
+                        bluetoothRestoredDevice.mLinkType = cursorQuery.getInt(columnIndex8);
+                        String string = cursorQuery.getString(columnIndex9);
+                        boolean zIsSyncDevice = isSyncDevice(string, bArrStringToByte);
+                        bluetoothRestoredDevice.setUuids(string);
+                        CachedBluetoothDevice cachedBluetoothDevice = new CachedBluetoothDevice(context, localBluetoothProfileManager, bluetoothRestoredDevice, zIsSyncDevice);
+                        if (z && zIsSyncDevice) {
+                            arrayList2 = arrayList3;
+                            try {
+                                arrayList2.add(cachedBluetoothDevice);
+                                arrayList = arrayList4;
+                            } catch (IllegalStateException e3) {
+                                e = e3;
+                                cursor = cursorQuery;
+                                arrayList = arrayList4;
+                                Log.e("BluetoothUtils", "getRestoredDevices :: Occurs IllegalStateException");
+                                e.printStackTrace();
+                                if (cursor != null) {
+                                    Log.e("BluetoothUtils", "getRestoredDevices :: will be cursor close");
+                                    cursor.close();
+                                }
+                                boolean z2 = DEBUG;
+                                if (z) {
+                                }
+                            }
+                        } else {
+                            arrayList2 = arrayList3;
+                            arrayList = arrayList4;
+                            try {
+                                arrayList.add(cachedBluetoothDevice);
+                            } catch (IllegalStateException e4) {
+                                e = e4;
+                                cursor = cursorQuery;
+                                Log.e("BluetoothUtils", "getRestoredDevices :: Occurs IllegalStateException");
+                                e.printStackTrace();
+                                if (cursor != null) {
+                                }
+                                boolean z22 = DEBUG;
+                                if (z) {
+                                }
+                            }
+                        }
+                        cursorQuery.moveToNext();
+                        arrayList3 = arrayList2;
+                        arrayList4 = arrayList;
+                        columnIndex2 = i;
+                        columnIndex3 = i2;
+                    }
+                    arrayList = arrayList4;
+                    arrayList2 = arrayList3;
+                    Log.e("BluetoothUtils", "getRestoredDevices :: will be cursor close");
+                    cursorQuery.close();
+                } catch (IllegalStateException e5) {
+                    e = e5;
+                    arrayList = arrayList4;
+                    arrayList2 = arrayList3;
+                }
+                boolean z222 = DEBUG;
+                if (z) {
+                    if (z222) {
+                        Log.d("BluetoothUtils", "getRestoredDevices :: restoredDevices");
+                    }
+                    return arrayList;
+                }
+                if (z222) {
+                    Log.d("BluetoothUtils", "getRestoredDevices :: syncedDevices");
+                }
+                return arrayList2;
+            }
+            try {
+                Log.e("BluetoothUtils", "getRestoredDevices() :: query return null");
+                if (cursorQuery != null) {
+                    Log.e("BluetoothUtils", "getRestoredDevices :: will be cursor close");
+                    cursorQuery.close();
+                }
+                return null;
+            } catch (IllegalStateException e6) {
+                e = e6;
+                cursor = cursorQuery;
+                arrayList = arrayList4;
+                arrayList2 = arrayList3;
+                Log.e("BluetoothUtils", "getRestoredDevices :: Occurs IllegalStateException");
+                e.printStackTrace();
+                if (cursor != null) {
+                }
+                boolean z2222 = DEBUG;
+                if (z) {
+                }
+            }
+        } catch (Throwable th2) {
+            th = th2;
+        }
     }
 
     public static String[] getStringToken(String str) {
@@ -337,37 +460,25 @@ public class BluetoothUtils {
         return strArr;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0011, code lost:
-    
-        if (r3[r1 + 1] == 1) goto L11;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0014  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean hasGearManufacturerData(byte[] r3) {
-        /*
-            if (r3 == 0) goto L14
-            int r0 = r3.length
-            int r1 = android.bluetooth.BluetoothManufacturerData.OFFSET_OLD_DEVICE_ID
-            int r2 = r1 + 2
-            if (r0 < r2) goto L14
-            r0 = r3[r1]
-            if (r0 != 0) goto L14
-            r0 = 1
-            int r1 = r1 + r0
-            r3 = r3[r1]
-            if (r3 != r0) goto L14
-            goto L15
-        L14:
-            r0 = 0
-        L15:
-            java.lang.String r3 = "hasGearManufacturerData : "
-            java.lang.String r1 = "BluetoothUtils"
-            com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0.m(r3, r1, r0)
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.bluetooth.BluetoothUtils.hasGearManufacturerData(byte[]):boolean");
+    public static boolean hasGearManufacturerData(byte[] bArr) {
+        boolean z;
+        if (bArr != null) {
+            int length = bArr.length;
+            int i = BluetoothManufacturerData.OFFSET_OLD_DEVICE_ID;
+            if (length < i + 2 || bArr[i] != 0) {
+                z = false;
+            } else {
+                z = true;
+                if (bArr[i + 1] != 1) {
+                }
+            }
+        }
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("hasGearManufacturerData : ", "BluetoothUtils", z);
+        return z;
     }
 
     public static boolean isActiveMediaDevice(CachedBluetoothDevice cachedBluetoothDevice) {
@@ -461,9 +572,9 @@ public class BluetoothUtils {
         if (str == null) {
             return false;
         }
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(str);
-        if (unflattenFromString != null) {
-            str = unflattenFromString.getPackageName();
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(str);
+        if (componentNameUnflattenFromString != null) {
+            str = componentNameUnflattenFromString.getPackageName();
         }
         try {
             z = context.getPackageManager().getApplicationInfo(str, 0).enabled;
@@ -494,6 +605,10 @@ public class BluetoothUtils {
         return (context.getResources().getConfiguration().screenLayout & 192) == 128;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0034  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static boolean isSyncDevice(String str, byte[] bArr) {
         String[] stringToken;
         boolean z = DEBUG;
@@ -501,28 +616,49 @@ public class BluetoothUtils {
             byte[] bArr2 = new ManufacturerData(bArr).mData.mDeviceId;
             int i = bArr2[1] & 255;
             byte b = bArr2[0];
-            if (((b == 1 || b == 2 || b == 3) && i >= 1 && i <= 255) || (b == 65 && i >= 1 && i <= 255)) {
-                if (z) {
-                    Log.d("BluetoothUtils", "isSyncDevice :: DeviceId");
-                    return true;
+            if (((b != 1 && b != 2 && b != 3) || i < 1 || i > 255) && (b != 65 || i < 1 || i > 255)) {
+                if (str != null && str.length() > 0 && (stringToken = getStringToken(str)) != null) {
+                    for (String str2 : stringToken) {
+                        if ("e7ab2241-ca64-4a69-ac02-05f5c6fe2d62".equals(str2)) {
+                            if (z) {
+                                Log.d("BluetoothUtils", "isSyncDevice :: UUID");
+                            }
+                        }
+                    }
                 }
+                if (z) {
+                    Log.d("BluetoothUtils", "isSyncDevice :: It is not synced device");
+                }
+                return false;
+            }
+            if (z) {
+                Log.d("BluetoothUtils", "isSyncDevice :: DeviceId");
                 return true;
             }
         }
-        if (str != null && str.length() > 0 && (stringToken = getStringToken(str)) != null) {
-            for (String str2 : stringToken) {
-                if ("e7ab2241-ca64-4a69-ac02-05f5c6fe2d62".equals(str2)) {
-                    if (z) {
-                        Log.d("BluetoothUtils", "isSyncDevice :: UUID");
-                    }
-                    return true;
-                }
+        return true;
+    }
+
+    public static void onStartBudsUniteManager(Context context, CachedBluetoothDevice cachedBluetoothDevice) {
+        Intent intent = new Intent();
+        try {
+            intent.setComponent(new ComponentName("com.samsung.accessory.budsunitemgr", "com.samsung.accessory.hearablemgr.WelcomeActivity"));
+            if (intent.resolveActivity(context.getPackageManager()) == null) {
+                throw new RuntimeException("resolveActivity is null");
+            }
+            intent.putExtra("DEVICE_ADDRESS", cachedBluetoothDevice.mDevice.getAddress());
+            intent.putExtra("MODEL_NAME", cachedBluetoothDevice.getName());
+            intent.putExtra("request_app_package_name", context.getPackageName());
+            intent.putExtra("DATA", cachedBluetoothDevice.getManufacturerRawData());
+            intent.putExtra("FROM", "BLUETOOTH_PAIRING");
+            intent.setFlags(67108864);
+            context.startActivity(intent);
+        } catch (AndroidRuntimeException e) {
+            if (e.getMessage().contains("Calling startActivity() from outside of an Activity")) {
+                intent.setFlags(335544320);
+                context.startActivity(intent);
             }
         }
-        if (z) {
-            Log.d("BluetoothUtils", "isSyncDevice :: It is not synced device");
-        }
-        return false;
     }
 
     public static void setQuickPannelOn(boolean z) {

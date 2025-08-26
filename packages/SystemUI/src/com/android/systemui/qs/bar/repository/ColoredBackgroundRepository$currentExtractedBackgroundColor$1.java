@@ -1,5 +1,6 @@
 package com.android.systemui.qs.bar.repository;
 
+import android.content.res.Resources;
 import android.util.Log;
 import com.android.systemui.R;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
@@ -11,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function6;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ColoredBackgroundRepository$currentExtractedBackgroundColor$1 extends SuspendLambda implements Function6 {
     final /* synthetic */ ColoredBackgroundWallpaperInteractor $coloredBackgroundWallpaperInteractor;
@@ -30,18 +30,18 @@ final class ColoredBackgroundRepository$currentExtractedBackgroundColor$1 extend
 
     @Override // kotlin.jvm.functions.Function6
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
-        int intValue = ((Number) obj3).intValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+        int iIntValue = ((Number) obj3).intValue();
         ColoredBackgroundRepository$currentExtractedBackgroundColor$1 coloredBackgroundRepository$currentExtractedBackgroundColor$1 = new ColoredBackgroundRepository$currentExtractedBackgroundColor$1(this.$coloredBackgroundWallpaperInteractor, this.this$0, (Continuation) obj6);
-        coloredBackgroundRepository$currentExtractedBackgroundColor$1.Z$0 = booleanValue;
-        coloredBackgroundRepository$currentExtractedBackgroundColor$1.Z$1 = booleanValue2;
-        coloredBackgroundRepository$currentExtractedBackgroundColor$1.I$0 = intValue;
+        coloredBackgroundRepository$currentExtractedBackgroundColor$1.Z$0 = zBooleanValue;
+        coloredBackgroundRepository$currentExtractedBackgroundColor$1.Z$1 = zBooleanValue2;
+        coloredBackgroundRepository$currentExtractedBackgroundColor$1.I$0 = iIntValue;
         return coloredBackgroundRepository$currentExtractedBackgroundColor$1.invokeSuspend(Unit.INSTANCE);
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Resources.NotFoundException {
         int color;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {

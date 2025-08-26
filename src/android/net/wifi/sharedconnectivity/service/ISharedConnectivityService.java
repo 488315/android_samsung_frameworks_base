@@ -126,9 +126,9 @@ public interface ISharedConnectivityService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISharedConnectivityService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISharedConnectivityService)) {
-                return (ISharedConnectivityService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISharedConnectivityService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISharedConnectivityService)) {
+                return (ISharedConnectivityService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -178,15 +178,15 @@ public interface ISharedConnectivityService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ISharedConnectivityCallback asInterface = ISharedConnectivityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISharedConnectivityCallback iSharedConnectivityCallbackAsInterface = ISharedConnectivityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerCallback(asInterface);
+                    registerCallback(iSharedConnectivityCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    ISharedConnectivityCallback asInterface2 = ISharedConnectivityCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISharedConnectivityCallback iSharedConnectivityCallbackAsInterface2 = ISharedConnectivityCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterCallback(asInterface2);
+                    unregisterCallback(iSharedConnectivityCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
@@ -261,166 +261,166 @@ public interface ISharedConnectivityService extends IInterface {
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public void registerCallback(ISharedConnectivityCallback iSharedConnectivityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSharedConnectivityCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSharedConnectivityCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public void unregisterCallback(ISharedConnectivityCallback iSharedConnectivityCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSharedConnectivityCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSharedConnectivityCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public void connectHotspotNetwork(HotspotNetwork hotspotNetwork) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    obtain.writeTypedObject(hotspotNetwork, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hotspotNetwork, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public void disconnectHotspotNetwork(HotspotNetwork hotspotNetwork) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    obtain.writeTypedObject(hotspotNetwork, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hotspotNetwork, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public void connectKnownNetwork(KnownNetwork knownNetwork) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    obtain.writeTypedObject(knownNetwork, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knownNetwork, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public void forgetKnownNetwork(KnownNetwork knownNetwork) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    obtain.writeTypedObject(knownNetwork, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(knownNetwork, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public List<HotspotNetwork> getHotspotNetworks() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(HotspotNetwork.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(HotspotNetwork.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public List<KnownNetwork> getKnownNetworks() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(KnownNetwork.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(KnownNetwork.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public SharedConnectivitySettingsState getSettingsState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SharedConnectivitySettingsState) obtain2.readTypedObject(SharedConnectivitySettingsState.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SharedConnectivitySettingsState) parcelObtain2.readTypedObject(SharedConnectivitySettingsState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public HotspotNetworkConnectionStatus getHotspotNetworkConnectionStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (HotspotNetworkConnectionStatus) obtain2.readTypedObject(HotspotNetworkConnectionStatus.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (HotspotNetworkConnectionStatus) parcelObtain2.readTypedObject(HotspotNetworkConnectionStatus.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
             public KnownNetworkConnectionStatus getKnownNetworkConnectionStatus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (KnownNetworkConnectionStatus) obtain2.readTypedObject(KnownNetworkConnectionStatus.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (KnownNetworkConnectionStatus) parcelObtain2.readTypedObject(KnownNetworkConnectionStatus.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

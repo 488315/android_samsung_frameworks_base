@@ -68,24 +68,28 @@ public class HostNamedActionOperation extends Operation implements ActionOperati
         return sb.toString();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x003e  */
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.ActionOperation
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void runAction(RemoteContext remoteContext, CoreDocument coreDocument, Component component, float f, float f2) {
-        Object obj;
-        if (this.mValueId != -1) {
+        Object floats;
+        if (this.mValueId == -1) {
+            floats = null;
+        } else {
             int i = this.mType;
             if (i == 1) {
-                obj = Integer.valueOf(remoteContext.mRemoteComposeState.getInteger(this.mValueId));
+                floats = Integer.valueOf(remoteContext.mRemoteComposeState.getInteger(this.mValueId));
             } else if (i == 2) {
-                obj = remoteContext.mRemoteComposeState.getFromId(this.mValueId);
+                floats = remoteContext.mRemoteComposeState.getFromId(this.mValueId);
             } else if (i == 0) {
-                obj = Float.valueOf(remoteContext.mRemoteComposeState.getFloat(this.mValueId));
+                floats = Float.valueOf(remoteContext.mRemoteComposeState.getFloat(this.mValueId));
             } else if (i == 3) {
-                obj = remoteContext.mRemoteComposeState.getFloats(this.mValueId);
+                floats = remoteContext.mRemoteComposeState.getFloats(this.mValueId);
             }
-            remoteContext.runNamedAction(this.mTextId, obj);
         }
-        obj = null;
-        remoteContext.runNamedAction(this.mTextId, obj);
+        remoteContext.runNamedAction(this.mTextId, floats);
     }
 
     public static void apply(WireBuffer wireBuffer, int i, int i2, int i3) {

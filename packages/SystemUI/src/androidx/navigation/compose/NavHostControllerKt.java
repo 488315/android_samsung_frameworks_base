@@ -1,10 +1,34 @@
 package androidx.navigation.compose;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
+import androidx.compose.runtime.Composer;
+import androidx.compose.runtime.ComposerImpl;
+import androidx.compose.runtime.ComposerKt;
+import androidx.compose.runtime.saveable.RememberSaveableKt;
+import androidx.compose.runtime.saveable.SaverKt;
+import androidx.compose.runtime.saveable.SaverKt$Saver$1;
+import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt;
+import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
+import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.NavBackStackEntryState;
 import androidx.navigation.NavHostController;
+import androidx.navigation.Navigator;
 import androidx.navigation.NavigatorProvider;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import kotlin.collections.ArrayDeque;
+import kotlin.collections.CollectionsKt__CollectionsKt;
+import kotlin.collections.MapsKt__MapsKt;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.ArrayIterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class NavHostControllerKt {
     public static final NavHostController access$createNavController(Context context) {
@@ -16,99 +40,182 @@ public abstract class NavHostControllerKt {
         return navHostController;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0038, code lost:
-    
-        if (r4 == androidx.compose.runtime.Composer.Companion.Empty) goto L9;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x003a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final androidx.navigation.NavHostController rememberNavController(androidx.navigation.Navigator[] r9, androidx.compose.runtime.ComposerImpl r10) {
-        /*
-            boolean r0 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r0 == 0) goto Lb
-            java.lang.String r0 = "androidx.navigation.compose.rememberNavController (NavHostController.kt:57)"
-            androidx.compose.runtime.ComposerKt.traceEventStart(r0)
-        Lb:
-            androidx.compose.runtime.StaticProvidableCompositionLocal r0 = androidx.compose.ui.platform.AndroidCompositionLocals_androidKt.LocalContext
-            java.lang.Object r0 = r10.consume(r0)
-            android.content.Context r0 = (android.content.Context) r0
-            int r1 = r9.length
-            java.lang.Object[] r2 = java.util.Arrays.copyOf(r9, r1)
-            androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1 r1 = new kotlin.jvm.functions.Function2() { // from class: androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1
-                static {
-                    /*
-                        androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1 r0 = new androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1
-                        r0.<init>()
-                        
-                        // error: 0x0005: SPUT (r0 I:androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1) androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1.INSTANCE androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1
-                        return
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1.<clinit>():void");
+    public static final NavHostController rememberNavController(Navigator[] navigatorArr, ComposerImpl composerImpl) {
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventStart("androidx.navigation.compose.rememberNavController (NavHostController.kt:57)");
+        }
+        final Context context = (Context) composerImpl.consume(AndroidCompositionLocals_androidKt.LocalContext);
+        Object[] objArrCopyOf = Arrays.copyOf(navigatorArr, navigatorArr.length);
+        NavHostControllerKt$NavControllerSaver$1 navHostControllerKt$NavControllerSaver$1 = new Function2() { // from class: androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                Bundle bundle;
+                NavHostController navHostController = (NavHostController) obj2;
+                navHostController.getClass();
+                ArrayList<String> arrayList = new ArrayList<>();
+                Bundle bundle2 = new Bundle();
+                for (Map.Entry entry : MapsKt__MapsKt.toMap(navHostController._navigatorProvider._navigators).entrySet()) {
+                    ((Navigator) entry.getValue()).getClass();
                 }
-
-                {
-                    /*
-                        r1 = this;
-                        r0 = 2
-                        r1.<init>(r0)
-                        return
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1.<init>():void");
+                if (arrayList.isEmpty()) {
+                    bundle = null;
+                } else {
+                    bundle = new Bundle();
+                    bundle2.putStringArrayList("android-support-nav:controller:navigatorState:names", arrayList);
+                    bundle.putBundle("android-support-nav:controller:navigatorState", bundle2);
                 }
-
-                @Override // kotlin.jvm.functions.Function2
-                public final java.lang.Object invoke(java.lang.Object r10, java.lang.Object r11) {
-                    /*
-                        Method dump skipped, instructions count: 356
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$1.invoke(java.lang.Object, java.lang.Object):java.lang.Object");
+                ArrayDeque arrayDeque = navHostController.backQueue;
+                if (!arrayDeque.isEmpty()) {
+                    if (bundle == null) {
+                        bundle = new Bundle();
+                    }
+                    Parcelable[] parcelableArr = new Parcelable[arrayDeque.getSize()];
+                    Iterator it = arrayDeque.iterator();
+                    int i = 0;
+                    while (it.hasNext()) {
+                        parcelableArr[i] = new NavBackStackEntryState((NavBackStackEntry) it.next());
+                        i++;
+                    }
+                    bundle.putParcelableArray("android-support-nav:controller:backStack", parcelableArr);
                 }
+                if (!navHostController.backStackMap.isEmpty()) {
+                    if (bundle == null) {
+                        bundle = new Bundle();
+                    }
+                    int[] iArr = new int[navHostController.backStackMap.size()];
+                    ArrayList<String> arrayList2 = new ArrayList<>();
+                    int i2 = 0;
+                    for (Map.Entry entry2 : ((LinkedHashMap) navHostController.backStackMap).entrySet()) {
+                        int iIntValue = ((Number) entry2.getKey()).intValue();
+                        String str = (String) entry2.getValue();
+                        iArr[i2] = iIntValue;
+                        arrayList2.add(str);
+                        i2++;
+                    }
+                    bundle.putIntArray("android-support-nav:controller:backStackDestIds", iArr);
+                    bundle.putStringArrayList("android-support-nav:controller:backStackIds", arrayList2);
+                }
+                if (!navHostController.backStackStates.isEmpty()) {
+                    if (bundle == null) {
+                        bundle = new Bundle();
+                    }
+                    ArrayList<String> arrayList3 = new ArrayList<>();
+                    for (Map.Entry entry3 : ((LinkedHashMap) navHostController.backStackStates).entrySet()) {
+                        String str2 = (String) entry3.getKey();
+                        ArrayDeque arrayDeque2 = (ArrayDeque) entry3.getValue();
+                        arrayList3.add(str2);
+                        Parcelable[] parcelableArr2 = new Parcelable[arrayDeque2.getSize()];
+                        Iterator it2 = arrayDeque2.iterator();
+                        int i3 = 0;
+                        while (it2.hasNext()) {
+                            Object next = it2.next();
+                            int i4 = i3 + 1;
+                            if (i3 < 0) {
+                                CollectionsKt__CollectionsKt.throwIndexOverflow();
+                                throw null;
+                            }
+                            parcelableArr2[i3] = (NavBackStackEntryState) next;
+                            i3 = i4;
+                        }
+                        bundle.putParcelableArray(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("android-support-nav:controller:backStackStates:", str2), parcelableArr2);
+                    }
+                    bundle.putStringArrayList("android-support-nav:controller:backStackStates", arrayList3);
+                }
+                if (navHostController.deepLinkHandled) {
+                    if (bundle == null) {
+                        bundle = new Bundle();
+                    }
+                    bundle.putBoolean("android-support-nav:controller:deepLinkHandled", navHostController.deepLinkHandled);
+                }
+                return bundle;
             }
-            androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$2 r3 = new androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$2
-            r3.<init>()
-            androidx.compose.runtime.saveable.SaverKt$Saver$1 r4 = androidx.compose.runtime.saveable.SaverKt.AutoSaver
-            r4 = r3
-            androidx.compose.runtime.saveable.SaverKt$Saver$1 r3 = new androidx.compose.runtime.saveable.SaverKt$Saver$1
-            r3.<init>(r1, r4)
-            boolean r1 = r10.changedInstance(r0)
-            java.lang.Object r4 = r10.rememberedValue()
-            if (r1 != 0) goto L3a
-            androidx.compose.runtime.Composer$Companion r1 = androidx.compose.runtime.Composer.Companion
-            r1.getClass()
-            androidx.compose.runtime.Composer$Companion$Empty$1 r1 = androidx.compose.runtime.Composer.Companion.Empty
-            if (r4 != r1) goto L42
-        L3a:
-            androidx.navigation.compose.NavHostControllerKt$rememberNavController$1$1 r4 = new androidx.navigation.compose.NavHostControllerKt$rememberNavController$1$1
-            r4.<init>()
-            r10.updateRememberedValue(r4)
-        L42:
-            r5 = r4
-            kotlin.jvm.functions.Function0 r5 = (kotlin.jvm.functions.Function0) r5
-            r8 = 4
-            r4 = 0
-            r7 = 0
-            r6 = r10
-            java.lang.Object r10 = androidx.compose.runtime.saveable.RememberSaveableKt.rememberSaveable(r2, r3, r4, r5, r6, r7, r8)
-            androidx.navigation.NavHostController r10 = (androidx.navigation.NavHostController) r10
-            int r0 = r9.length
-            r1 = 0
-        L51:
-            if (r1 >= r0) goto L5d
-            r2 = r9[r1]
-            androidx.navigation.NavigatorProvider r3 = r10._navigatorProvider
-            r3.addNavigator(r2)
-            int r1 = r1 + 1
-            goto L51
-        L5d:
-            boolean r9 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r9 == 0) goto L66
-            androidx.compose.runtime.ComposerKt.traceEventEnd()
-        L66:
-            return r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.navigation.compose.NavHostControllerKt.rememberNavController(androidx.navigation.Navigator[], androidx.compose.runtime.ComposerImpl):androidx.navigation.NavHostController");
+        };
+        Function1 function1 = new Function1() { // from class: androidx.navigation.compose.NavHostControllerKt$NavControllerSaver$2
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            {
+                super(1);
+            }
+
+            @Override // kotlin.jvm.functions.Function1
+            /* renamed from: invoke */
+            public final Object mo781invoke(Object obj) {
+                Bundle bundle = (Bundle) obj;
+                NavHostController navHostControllerAccess$createNavController = NavHostControllerKt.access$createNavController(context);
+                if (bundle == null) {
+                    return navHostControllerAccess$createNavController;
+                }
+                bundle.setClassLoader(navHostControllerAccess$createNavController.context.getClassLoader());
+                navHostControllerAccess$createNavController.navigatorStateToRestore = bundle.getBundle("android-support-nav:controller:navigatorState");
+                navHostControllerAccess$createNavController.backStackToRestore = bundle.getParcelableArray("android-support-nav:controller:backStack");
+                ((LinkedHashMap) navHostControllerAccess$createNavController.backStackStates).clear();
+                int[] intArray = bundle.getIntArray("android-support-nav:controller:backStackDestIds");
+                ArrayList<String> stringArrayList = bundle.getStringArrayList("android-support-nav:controller:backStackIds");
+                int i = 0;
+                if (intArray != null && stringArrayList != null) {
+                    int length = intArray.length;
+                    int i2 = 0;
+                    int i3 = 0;
+                    while (i2 < length) {
+                        navHostControllerAccess$createNavController.backStackMap.put(Integer.valueOf(intArray[i2]), stringArrayList.get(i3));
+                        i2++;
+                        i3++;
+                    }
+                }
+                ArrayList<String> stringArrayList2 = bundle.getStringArrayList("android-support-nav:controller:backStackStates");
+                if (stringArrayList2 != null) {
+                    int size = stringArrayList2.size();
+                    while (i < size) {
+                        String str = stringArrayList2.get(i);
+                        i++;
+                        String str2 = str;
+                        Parcelable[] parcelableArray = bundle.getParcelableArray("android-support-nav:controller:backStackStates:" + str2);
+                        if (parcelableArray != null) {
+                            Map map = navHostControllerAccess$createNavController.backStackStates;
+                            ArrayDeque arrayDeque = new ArrayDeque(parcelableArray.length);
+                            ArrayIterator arrayIterator = new ArrayIterator(parcelableArray);
+                            while (arrayIterator.hasNext()) {
+                                arrayDeque.addLast((NavBackStackEntryState) ((Parcelable) arrayIterator.next()));
+                            }
+                            map.put(str2, arrayDeque);
+                        }
+                    }
+                }
+                navHostControllerAccess$createNavController.deepLinkHandled = bundle.getBoolean("android-support-nav:controller:deepLinkHandled");
+                return navHostControllerAccess$createNavController;
+            }
+        };
+        SaverKt$Saver$1 saverKt$Saver$1 = SaverKt.AutoSaver;
+        SaverKt$Saver$1 saverKt$Saver$12 = new SaverKt$Saver$1(navHostControllerKt$NavControllerSaver$1, function1);
+        boolean zChangedInstance = composerImpl.changedInstance(context);
+        Object objRememberedValue = composerImpl.rememberedValue();
+        if (!zChangedInstance) {
+            Composer.Companion.getClass();
+            if (objRememberedValue == Composer.Companion.Empty) {
+                objRememberedValue = new Function0() { // from class: androidx.navigation.compose.NavHostControllerKt$rememberNavController$1$1
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    {
+                        super(0);
+                    }
+
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        return NavHostControllerKt.access$createNavController(context);
+                    }
+                };
+                composerImpl.updateRememberedValue(objRememberedValue);
+            }
+        }
+        NavHostController navHostController = (NavHostController) RememberSaveableKt.rememberSaveable(objArrCopyOf, saverKt$Saver$12, null, (Function0) objRememberedValue, composerImpl, 0, 4);
+        for (Navigator navigator : navigatorArr) {
+            navHostController._navigatorProvider.addNavigator(navigator);
+        }
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventEnd();
+        }
+        return navHostController;
     }
 }

@@ -17,12 +17,12 @@ public class CellBroadcastUtils {
 
     public static String getDefaultCellBroadcastReceiverPackageName(Context context) {
         PackageManager packageManager = context.getPackageManager();
-        ResolveInfo resolveActivity = packageManager.resolveActivity(new Intent(Telephony.Sms.Intents.SMS_CB_RECEIVED_ACTION), 1048576);
-        if (resolveActivity == null) {
+        ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(new Intent(Telephony.Sms.Intents.SMS_CB_RECEIVED_ACTION), 1048576);
+        if (resolveInfoResolveActivity == null) {
             Log.e(TAG, "getDefaultCellBroadcastReceiverPackageName: no package found");
             return null;
         }
-        String str = resolveActivity.activityInfo.applicationInfo.packageName;
+        String str = resolveInfoResolveActivity.activityInfo.applicationInfo.packageName;
         if (!TextUtils.isEmpty(str) && packageManager.checkPermission(Manifest.permission.READ_CELL_BROADCASTS, str) != -1) {
             return str;
         }

@@ -9,7 +9,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AndroidAutofill_androidKt {
     public static final void populateViewStructure(AndroidAutofill androidAutofill, ViewStructure viewStructure) {
@@ -20,16 +19,16 @@ public abstract class AndroidAutofill_androidKt {
         AutofillTree autofillTree = androidAutofill.autofillTree;
         int size = autofillTree.children.size();
         autofillApi26Helper.getClass();
-        int addChildCount = viewStructure.addChildCount(size);
+        int iAddChildCount = viewStructure.addChildCount(size);
         for (Map.Entry entry : ((LinkedHashMap) autofillTree.children).entrySet()) {
-            int intValue = ((Number) entry.getKey()).intValue();
+            int iIntValue = ((Number) entry.getKey()).intValue();
             AutofillNode autofillNode = (AutofillNode) entry.getValue();
             AutofillApi26Helper.INSTANCE.getClass();
-            ViewStructure newChild = viewStructure.newChild(addChildCount);
-            newChild.setAutofillId(androidAutofill.rootAutofillId, intValue);
-            newChild.setId(intValue, androidAutofill.view.getContext().getPackageName(), null, null);
+            ViewStructure viewStructureNewChild = viewStructure.newChild(iAddChildCount);
+            viewStructureNewChild.setAutofillId(androidAutofill.rootAutofillId, iIntValue);
+            viewStructureNewChild.setId(iIntValue, androidAutofill.view.getContext().getPackageName(), null, null);
             ContentDataType.Companion.getClass();
-            newChild.setAutofillType(((AndroidContentDataType) ContentDataType.Companion.Text).androidAutofillType);
+            viewStructureNewChild.setAutofillType(((AndroidContentDataType) ContentDataType.Companion.Text).androidAutofillType);
             List list = autofillNode.autofillTypes;
             ArrayList arrayList = new ArrayList(list.size());
             int size2 = list.size();
@@ -40,19 +39,19 @@ public abstract class AndroidAutofill_androidKt {
                 }
                 arrayList.add(str);
             }
-            newChild.setAutofillHints((String[]) arrayList.toArray(new String[0]));
+            viewStructureNewChild.setAutofillHints((String[]) arrayList.toArray(new String[0]));
             Rect rect = autofillNode.boundingBox;
             if (rect == null) {
                 Log.w("Autofill Warning", "Bounding box not set.\n                        Did you call perform autofillTree before the component was positioned? ");
             } else {
-                int round = Math.round(rect.left);
-                int round2 = Math.round(rect.top);
-                int round3 = Math.round(rect.right);
-                int round4 = Math.round(rect.bottom) - round2;
+                int iRound = Math.round(rect.left);
+                int iRound2 = Math.round(rect.top);
+                int iRound3 = Math.round(rect.right);
+                int iRound4 = Math.round(rect.bottom) - iRound2;
                 AutofillApi26Helper.INSTANCE.getClass();
-                newChild.setDimens(round, round2, 0, 0, round3 - round, round4);
+                viewStructureNewChild.setDimens(iRound, iRound2, 0, 0, iRound3 - iRound, iRound4);
             }
-            addChildCount++;
+            iAddChildCount++;
         }
     }
 }

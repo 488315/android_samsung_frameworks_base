@@ -31,13 +31,13 @@ public final class OsAppId {
 
     public static final ArrayList<OsAppId> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<OsAppId> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             OsAppId osAppId = new OsAppId();
-            osAppId.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 16);
+            osAppId.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 16);
             arrayList.add(osAppId);
         }
         return arrayList;
@@ -45,10 +45,10 @@ public final class OsAppId {
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         int int32 = hwBlob.getInt32(8 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j, true);
         this.osAppId.clear();
         for (int i = 0; i < int32; i++) {
-            this.osAppId.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i)));
+            this.osAppId.add(Byte.valueOf(embeddedBuffer.getInt8(i)));
         }
     }
 

@@ -132,11 +132,11 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
 
     @Override // android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimationDrawable);
-        super.inflateWithAttributes(resources, xmlPullParser, obtainAttributes, 0);
-        updateStateFromTypedArray(obtainAttributes);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimationDrawable);
+        super.inflateWithAttributes(resources, xmlPullParser, typedArrayObtainAttributes, 0);
+        updateStateFromTypedArray(typedArrayObtainAttributes);
         updateDensity(resources);
-        obtainAttributes.recycle();
+        typedArrayObtainAttributes.recycle();
         inflateChildElements(resources, xmlPullParser, attributeSet, theme);
         setFrame(0, true, false);
     }
@@ -154,13 +154,13 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
                 return;
             }
             if (next2 == 2 && depth2 <= depth && xmlPullParser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
-                TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimationDrawableItem);
-                int i = obtainAttributes.getInt(0, -1);
+                TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimationDrawableItem);
+                int i = typedArrayObtainAttributes.getInt(0, -1);
                 if (i < 0) {
                     throw new XmlPullParserException(xmlPullParser.getPositionDescription() + ": <item> tag requires a 'duration' attribute");
                 }
-                Drawable drawable = obtainAttributes.getDrawable(1);
-                obtainAttributes.recycle();
+                Drawable drawable = typedArrayObtainAttributes.getDrawable(1);
+                typedArrayObtainAttributes.recycle();
                 if (drawable == null) {
                     do {
                         next = xmlPullParser.next();
@@ -227,6 +227,7 @@ public class AnimationDrawable extends DrawableContainer implements Runnable, An
             this.mDurations = (int[]) this.mDurations.clone();
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new AnimationDrawable(this, null);

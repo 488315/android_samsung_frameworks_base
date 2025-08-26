@@ -68,13 +68,13 @@ public class SignerInfo extends ASN1Object {
         this.version = (ASN1Integer) objects.nextElement();
         this.sid = SignerIdentifier.getInstance(objects.nextElement());
         this.digAlgorithm = AlgorithmIdentifier.getInstance(objects.nextElement());
-        Object nextElement = objects.nextElement();
-        if (nextElement instanceof ASN1TaggedObject) {
-            this.authenticatedAttributes = ASN1Set.getInstance((ASN1TaggedObject) nextElement, false);
+        Object objNextElement = objects.nextElement();
+        if (objNextElement instanceof ASN1TaggedObject) {
+            this.authenticatedAttributes = ASN1Set.getInstance((ASN1TaggedObject) objNextElement, false);
             this.digEncryptionAlgorithm = AlgorithmIdentifier.getInstance(objects.nextElement());
         } else {
             this.authenticatedAttributes = null;
-            this.digEncryptionAlgorithm = AlgorithmIdentifier.getInstance(nextElement);
+            this.digEncryptionAlgorithm = AlgorithmIdentifier.getInstance(objNextElement);
         }
         this.encryptedDigest = DEROctetString.getInstance(objects.nextElement());
         if (objects.hasMoreElements()) {

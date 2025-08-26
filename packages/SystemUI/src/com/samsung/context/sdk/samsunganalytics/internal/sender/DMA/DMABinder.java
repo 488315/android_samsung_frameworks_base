@@ -10,7 +10,6 @@ import com.samsung.context.sdk.samsunganalytics.internal.Callback;
 import com.samsung.context.sdk.samsunganalytics.internal.util.Debug;
 import com.sec.android.diagmonagent.sa.IDMAInterface;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DMABinder {
     public final Context context;
@@ -32,18 +31,18 @@ public class DMABinder {
                     if (iBinder == null) {
                         proxy = null;
                     } else {
-                        IInterface queryLocalInterface = iBinder.queryLocalInterface("com.sec.android.diagmonagent.sa.IDMAInterface");
-                        proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof IDMAInterface)) ? new IDMAInterface.Stub.Proxy(iBinder) : (IDMAInterface) queryLocalInterface;
+                        IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.sec.android.diagmonagent.sa.IDMAInterface");
+                        proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IDMAInterface)) ? new IDMAInterface.Stub.Proxy(iBinder) : (IDMAInterface) iInterfaceQueryLocalInterface;
                     }
                     dMABinder.dmaInterface = proxy;
-                    String checkToken = ((IDMAInterface.Stub.Proxy) DMABinder.this.dmaInterface).checkToken();
-                    if (checkToken == null) {
+                    String strCheckToken = ((IDMAInterface.Stub.Proxy) DMABinder.this.dmaInterface).checkToken();
+                    if (strCheckToken == null) {
                         DMABinder.this.unBind();
                         DMABinder.this.isTokenFail = true;
                         Debug.LogD("DMABinder", "Token failed");
                     } else {
                         DMABinder.this.isTokenFail = false;
-                        callback.onResult(checkToken);
+                        callback.onResult(strCheckToken);
                         Debug.LogD("DMABinder", "DMA connected");
                     }
                 } catch (Exception e) {

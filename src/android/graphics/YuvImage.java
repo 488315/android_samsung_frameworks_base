@@ -204,18 +204,18 @@ public class YuvImage {
     }
 
     private void adjustRectangle(Rect rect) {
-        int width = rect.width();
-        int height = rect.height();
+        int iWidth = rect.width();
+        int iHeight = rect.height();
         if (this.mFormat == 17) {
-            width &= -2;
+            iWidth &= -2;
             rect.left &= -2;
             rect.top &= -2;
-            rect.right = rect.left + width;
-            rect.bottom = rect.top + (height & (-2));
+            rect.right = rect.left + iWidth;
+            rect.bottom = rect.top + (iHeight & (-2));
         }
         if (this.mFormat == 20) {
             rect.left &= -2;
-            rect.right = rect.left + (width & (-2));
+            rect.right = rect.left + (iWidth & (-2));
         }
     }
 }

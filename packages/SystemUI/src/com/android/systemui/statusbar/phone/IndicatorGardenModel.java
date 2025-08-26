@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.phone;
 import androidx.viewpager.widget.ViewPager$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IndicatorGardenModel {
     public int cameraBottomMargin;
@@ -32,16 +31,16 @@ public final class IndicatorGardenModel {
         int i6 = this.maxWidthLeftContainer;
         int i7 = this.maxWidthCenterContainer;
         int i8 = this.maxWidthRightContainer;
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("totalHeight=", i, "  hasCameraTopMargin=", z, "  cameraTopMargin=");
-        m.append(i2);
-        m.append("  hasCameraBottomMargin=");
-        m.append(z2);
-        m.append("  cameraBottomMargin=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i3, "  paddingLeft=", i4, "  paddingRight=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i5, "  maxWidthLeftContainer=", i6, "  maxWidthCenterContainer=");
-        m.append(i7);
-        m.append("  maxWidthRightContainer=");
-        m.append(i8);
-        return m.toString();
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("totalHeight=", i, "  hasCameraTopMargin=", z, "  cameraTopMargin=");
+        sbM.append(i2);
+        sbM.append("  hasCameraBottomMargin=");
+        sbM.append(z2);
+        sbM.append("  cameraBottomMargin=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i3, "  paddingLeft=", i4, "  paddingRight=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i5, "  maxWidthLeftContainer=", i6, "  maxWidthCenterContainer=");
+        sbM.append(i7);
+        sbM.append("  maxWidthRightContainer=");
+        sbM.append(i8);
+        return sbM.toString();
     }
 }

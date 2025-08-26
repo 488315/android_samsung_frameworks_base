@@ -171,7 +171,7 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
     }
 
     private AudioRecord(AudioAttributes audioAttributes, AudioFormat audioFormat, int i, int i2, Context context, int i3, int i4) throws IllegalArgumentException {
-        AudioAttributes audioAttributes2 = audioAttributes;
+        AudioAttributes audioAttributesBuild = audioAttributes;
         this.mState = 0;
         this.mRecordingState = 1;
         this.mRecordingStateLock = new Object();
@@ -190,21 +190,21 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
         this.mRecordingInfoImpl = new AudioRecordingMonitorImpl(this);
         this.mRecordingState = 1;
         this.mHalInputFlags = i4;
-        if (audioAttributes2 == null) {
+        if (audioAttributesBuild == null) {
             throw new IllegalArgumentException("Illegal null AudioAttributes");
         }
         if (audioFormat == null) {
             throw new IllegalArgumentException("Illegal null AudioFormat");
         }
-        Looper myLooper = Looper.myLooper();
-        this.mInitializationLooper = myLooper;
-        if (myLooper == null) {
+        Looper looperMyLooper = Looper.myLooper();
+        this.mInitializationLooper = looperMyLooper;
+        if (looperMyLooper == null) {
             this.mInitializationLooper = Looper.getMainLooper();
         }
-        if (audioAttributes2.getCapturePreset() == 8) {
-            AudioAttributes.Builder builder = new AudioAttributes.Builder(audioAttributes2);
+        if (audioAttributesBuild.getCapturePreset() == 8) {
+            AudioAttributes.Builder builder = new AudioAttributes.Builder(audioAttributesBuild);
             HashSet<String> hashSet = new HashSet<>();
-            for (String str : audioAttributes2.getTags()) {
+            for (String str : audioAttributesBuild.getTags()) {
                 if (str.equalsIgnoreCase(SUBMIX_FIXED_VOLUME)) {
                     this.mIsSubmixFullVolume = true;
                     Log.v(TAG, "Will record from REMOTE_SUBMIX at full fixed volume");
@@ -213,9 +213,9 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
                 }
             }
             builder.replaceTags(hashSet);
-            audioAttributes2 = builder.build();
+            audioAttributesBuild = builder.build();
         }
-        this.mAudioAttributes = audioAttributes2;
+        this.mAudioAttributes = audioAttributesBuild;
         int sampleRate = audioFormat.getSampleRate();
         audioParamCheck(this.mAudioAttributes.getCapturePreset(), sampleRate == 0 ? 0 : sampleRate, (audioFormat.getPropertySetMask() & 1) != 0 ? audioFormat.getEncoding() : 1);
         if ((audioFormat.getPropertySetMask() & 8) != 0) {
@@ -235,19 +235,19 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
         attributionSource = attributionSource.getPackageName() == null ? attributionSource.withPackageName("uid:" + Binder.getCallingUid()) : attributionSource;
         int[] iArr = {this.mSampleRate};
         int[] iArr2 = {resolveSessionId(context, i2)};
-        AttributionSource.ScopedParcelState asScopedParcelState = attributionSource.asScopedParcelState();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = attributionSource.asScopedParcelState();
         try {
-            int native_setup = native_setup(new WeakReference(this), this.mAudioAttributes, iArr, this.mChannelMask, this.mChannelIndexMask, this.mAudioFormat, this.mNativeBufferSizeInBytes, iArr2, asScopedParcelState.getParcel(), 0L, i3, this.mHalInputFlags);
-            if (native_setup != 0) {
-                loge("Error code " + native_setup + " when initializing native AudioRecord object.");
-                if (asScopedParcelState != null) {
-                    asScopedParcelState.close();
+            int iNative_setup = native_setup(new WeakReference(this), this.mAudioAttributes, iArr, this.mChannelMask, this.mChannelIndexMask, this.mAudioFormat, this.mNativeBufferSizeInBytes, iArr2, scopedParcelStateAsScopedParcelState.getParcel(), 0L, i3, this.mHalInputFlags);
+            if (iNative_setup != 0) {
+                loge("Error code " + iNative_setup + " when initializing native AudioRecord object.");
+                if (scopedParcelStateAsScopedParcelState != null) {
+                    scopedParcelStateAsScopedParcelState.close();
                     return;
                 }
                 return;
             }
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
             this.mSampleRate = iArr[0];
             this.mSessionId = iArr2[0];
@@ -293,14 +293,14 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
         }
         int[] iArr = {0};
         int[] iArr2 = {0};
-        AttributionSource.ScopedParcelState asScopedParcelState = AttributionSource.myAttributionSource().asScopedParcelState();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = AttributionSource.myAttributionSource().asScopedParcelState();
         try {
-            int native_setup = native_setup(new WeakReference(this), null, iArr2, 0, 0, 0, 0, iArr, asScopedParcelState.getParcel(), j, 0, 0);
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            int iNative_setup = native_setup(new WeakReference(this), null, iArr2, 0, 0, 0, 0, iArr, scopedParcelStateAsScopedParcelState.getParcel(), j, 0, 0);
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
-            if (native_setup != 0) {
-                loge("Error code " + native_setup + " when initializing native AudioRecord object.");
+            if (iNative_setup != 0) {
+                loge("Error code " + iNative_setup + " when initializing native AudioRecord object.");
                 return;
             }
             this.mSessionId = iArr[0];
@@ -397,18 +397,18 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
             return this;
         }
 
-        private AudioRecord buildAudioPlaybackCaptureRecord() {
-            android.media.audiopolicy.AudioMix createAudioMix = this.mAudioPlaybackCaptureConfiguration.createAudioMix(this.mFormat);
-            AudioPolicy build = new AudioPolicy.Builder(this.mContext).setMediaProjection(this.mAudioPlaybackCaptureConfiguration.getMediaProjection()).addMix(createAudioMix).build();
-            if (AudioManager.registerAudioPolicyStatic(build) != 0) {
+        private AudioRecord buildAudioPlaybackCaptureRecord() throws IllegalArgumentException {
+            android.media.audiopolicy.AudioMix audioMixCreateAudioMix = this.mAudioPlaybackCaptureConfiguration.createAudioMix(this.mFormat);
+            AudioPolicy audioPolicyBuild = new AudioPolicy.Builder(this.mContext).setMediaProjection(this.mAudioPlaybackCaptureConfiguration.getMediaProjection()).addMix(audioMixCreateAudioMix).build();
+            if (AudioManager.registerAudioPolicyStatic(audioPolicyBuild) != 0) {
                 throw new UnsupportedOperationException("Error: could not register audio policy");
             }
-            AudioRecord createAudioRecordSink = build.createAudioRecordSink(createAudioMix);
-            if (createAudioRecordSink == null) {
+            AudioRecord audioRecordCreateAudioRecordSink = audioPolicyBuild.createAudioRecordSink(audioMixCreateAudioMix);
+            if (audioRecordCreateAudioRecordSink == null) {
                 throw new UnsupportedOperationException("Cannot create AudioRecord");
             }
-            createAudioRecordSink.unregisterAudioPolicyOnRelease(build);
-            return createAudioRecordSink;
+            audioRecordCreateAudioRecordSink.unregisterAudioPolicyOnRelease(audioPolicyBuild);
+            return audioRecordCreateAudioRecordSink;
         }
 
         public Builder setCallRedirectionMode(int i) {
@@ -419,18 +419,18 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
             throw new IllegalArgumentException("Invalid call redirection mode " + i);
         }
 
-        private AudioRecord buildCallExtractionRecord() {
-            android.media.audiopolicy.AudioMix build = new AudioMix.Builder(new AudioMixingRule.Builder().addMixRule(1, new AudioAttributes.Builder().setUsage(2).setForCallRedirection().build()).addMixRule(1, new AudioAttributes.Builder().setUsage(3).setForCallRedirection().build()).setTargetMixRole(0).build()).setFormat(this.mFormat).setRouteFlags(2).build();
-            AudioPolicy build2 = new AudioPolicy.Builder(this.mContext).addMix(build).build();
-            if (AudioManager.registerAudioPolicyStatic(build2) != 0) {
+        private AudioRecord buildCallExtractionRecord() throws IllegalArgumentException {
+            android.media.audiopolicy.AudioMix audioMixBuild = new AudioMix.Builder(new AudioMixingRule.Builder().addMixRule(1, new AudioAttributes.Builder().setUsage(2).setForCallRedirection().build()).addMixRule(1, new AudioAttributes.Builder().setUsage(3).setForCallRedirection().build()).setTargetMixRole(0).build()).setFormat(this.mFormat).setRouteFlags(2).build();
+            AudioPolicy audioPolicyBuild = new AudioPolicy.Builder(this.mContext).addMix(audioMixBuild).build();
+            if (AudioManager.registerAudioPolicyStatic(audioPolicyBuild) != 0) {
                 throw new UnsupportedOperationException("Error: could not register audio policy");
             }
-            AudioRecord createAudioRecordSink = build2.createAudioRecordSink(build);
-            if (createAudioRecordSink == null) {
+            AudioRecord audioRecordCreateAudioRecordSink = audioPolicyBuild.createAudioRecordSink(audioMixBuild);
+            if (audioRecordCreateAudioRecordSink == null) {
                 throw new UnsupportedOperationException("Cannot create extraction AudioRecord");
             }
-            createAudioRecordSink.unregisterAudioPolicyOnRelease(build2);
-            return createAudioRecordSink;
+            audioRecordCreateAudioRecordSink.unregisterAudioPolicyOnRelease(audioPolicyBuild);
+            return audioRecordCreateAudioRecordSink;
         }
 
         @SystemApi
@@ -467,22 +467,92 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
             return this;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:14:0x002d  */
-        /* JADX WARN: Removed duplicated region for block: B:17:0x007d  */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x00ac  */
-        /* JADX WARN: Removed duplicated region for block: B:43:0x00f9  */
-        /* JADX WARN: Removed duplicated region for block: B:45:0x00fe  */
-        /* JADX WARN: Removed duplicated region for block: B:61:0x0041  */
+        /* JADX WARN: Removed duplicated region for block: B:20:0x002d  */
+        /* JADX WARN: Removed duplicated region for block: B:21:0x0041  */
+        /* JADX WARN: Removed duplicated region for block: B:31:0x007d  */
+        /* JADX WARN: Removed duplicated region for block: B:36:0x0094  */
+        /* JADX WARN: Removed duplicated region for block: B:39:0x00ac  */
+        /* JADX WARN: Removed duplicated region for block: B:58:0x00f9  */
+        /* JADX WARN: Removed duplicated region for block: B:60:0x00fe  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public android.media.AudioRecord build() throws java.lang.UnsupportedOperationException {
-            /*
-                Method dump skipped, instructions count: 341
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.media.AudioRecord.Builder.build():android.media.AudioRecord");
+        public AudioRecord build() throws UnsupportedOperationException {
+            int i;
+            int i2;
+            AudioFormat audioFormat;
+            int i3;
+            if (this.mAudioPlaybackCaptureConfiguration != null) {
+                return buildAudioPlaybackCaptureRecord();
+            }
+            if (this.mIsHotwordStream) {
+                if (this.mIsHotwordLookback) {
+                    throw new UnsupportedOperationException("setRequestHotwordLookbackStream and setRequestHotwordStream used concurrently");
+                }
+                i2 = 512;
+            } else {
+                if (!this.mIsHotwordLookback) {
+                    i = 0;
+                    audioFormat = this.mFormat;
+                    if (audioFormat != null) {
+                        this.mFormat = new AudioFormat.Builder().setEncoding(2).setChannelMask(16).build();
+                    } else {
+                        if (audioFormat.getEncoding() == 0) {
+                            this.mFormat = new AudioFormat.Builder(this.mFormat).setEncoding(2).build();
+                        }
+                        if (this.mFormat.getChannelMask() == 0 && this.mFormat.getChannelIndexMask() == 0) {
+                            this.mFormat = new AudioFormat.Builder(this.mFormat).setChannelMask(16).build();
+                        }
+                    }
+                    if (this.mAttributes == null) {
+                        this.mAttributes = new AudioAttributes.Builder().setInternalCapturePreset(0).build();
+                    }
+                    if (!this.mIsHotwordStream || this.mIsHotwordLookback) {
+                        this.mAttributes = new AudioAttributes.Builder(this.mAttributes).setInternalCapturePreset(6).build();
+                    }
+                    if (this.mPrivacySensitive != -1) {
+                        int capturePreset = this.mAttributes.getCapturePreset();
+                        if (capturePreset == 8 || capturePreset == 1998 || capturePreset == 3 || capturePreset == 2 || capturePreset == 4 || capturePreset == 1997) {
+                            throw new UnsupportedOperationException("Cannot request private capture with source: " + capturePreset);
+                        }
+                        this.mAttributes = new AudioAttributes.Builder(this.mAttributes).setInternalCapturePreset(capturePreset).setPrivacySensitive(this.mPrivacySensitive == 1).build();
+                    }
+                    i3 = this.mCallRedirectionMode;
+                    if (i3 != 2) {
+                        return buildCallExtractionRecord();
+                    }
+                    if (i3 == 1) {
+                        this.mAttributes = new AudioAttributes.Builder(this.mAttributes).setForCallRedirection().build();
+                    }
+                    try {
+                        if (this.mBufferSizeInBytes == 0) {
+                            this.mBufferSizeInBytes = this.mFormat.getChannelCount() * AudioFormat.getBytesPerSample(this.mFormat.getEncoding());
+                        }
+                        AudioRecord audioRecord = new AudioRecord(this.mAttributes, this.mFormat, this.mBufferSizeInBytes, this.mSessionId, this.mContext, this.mMaxSharedAudioHistoryMs, i);
+                        if (audioRecord.getState() != 0) {
+                            return audioRecord;
+                        }
+                        throw new UnsupportedOperationException("Cannot create AudioRecord");
+                    } catch (IllegalArgumentException e) {
+                        throw new UnsupportedOperationException(e.getMessage());
+                    }
+                }
+                i2 = 1536;
+            }
+            i = i2;
+            audioFormat = this.mFormat;
+            if (audioFormat != null) {
+            }
+            if (this.mAttributes == null) {
+            }
+            if (!this.mIsHotwordStream) {
+                this.mAttributes = new AudioAttributes.Builder(this.mAttributes).setInternalCapturePreset(6).build();
+            }
+            if (this.mPrivacySensitive != -1) {
+            }
+            i3 = this.mCallRedirectionMode;
+            if (i3 != 2) {
+            }
         }
 
         public Builder semSetConcurrentCapture(boolean z) {
@@ -608,7 +678,7 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
         return this.mChannelMask;
     }
 
-    public AudioFormat getFormat() {
+    public AudioFormat getFormat() throws IllegalArgumentException {
         AudioFormat.Builder encoding = new AudioFormat.Builder().setSampleRate(this.mSampleRate).setEncoding(this.mAudioFormat);
         int i = this.mChannelMask;
         if (i != 0) {
@@ -659,24 +729,24 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
     public static int getMinBufferSize(int i, int i2, int i3) {
         int i4 = 1;
         if (i2 != 1 && i2 != 2) {
-            if (i2 != 3 && i2 != 12) {
-                if (i2 != 16) {
-                    if (i2 != 48) {
-                        loge("getMinBufferSize(): Invalid channel configuration.");
-                        return -2;
-                    }
+            if (i2 == 3 || i2 == 12) {
+                i4 = 2;
+            } else if (i2 != 16) {
+                if (i2 != 48) {
+                    loge("getMinBufferSize(): Invalid channel configuration.");
+                    return -2;
                 }
+                i4 = 2;
             }
-            i4 = 2;
         }
-        int native_get_min_buff_size = native_get_min_buff_size(i, i4, i3);
-        if (native_get_min_buff_size == 0) {
+        int iNative_get_min_buff_size = native_get_min_buff_size(i, i4, i3);
+        if (iNative_get_min_buff_size == 0) {
             return -2;
         }
-        if (native_get_min_buff_size == -1) {
+        if (iNative_get_min_buff_size == -1) {
             return -1;
         }
-        return native_get_min_buff_size;
+        return iNative_get_min_buff_size;
     }
 
     public int getAudioSessionId() {
@@ -850,9 +920,9 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
 
     private List<AudioDeviceInfo> getRoutedDevicesInternal() {
         ArrayList arrayList = new ArrayList();
-        int[] native_getRoutedDeviceIds = native_getRoutedDeviceIds();
-        if (native_getRoutedDeviceIds != null && native_getRoutedDeviceIds.length != 0) {
-            for (int i : native_getRoutedDeviceIds) {
+        int[] iArrNative_getRoutedDeviceIds = native_getRoutedDeviceIds();
+        if (iArrNative_getRoutedDeviceIds != null && iArrNative_getRoutedDeviceIds.length != 0) {
+            for (int i : iArrNative_getRoutedDeviceIds) {
                 AudioDeviceInfo deviceForPortId = AudioManager.getDeviceForPortId(i, 1);
                 if (deviceForPortId != null) {
                     arrayList.add(deviceForPortId);
@@ -877,21 +947,21 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
     }
 
     @SystemApi
-    public MediaSyncEvent shareAudioHistory(String str, long j) {
+    public MediaSyncEvent shareAudioHistory(String str, long j) throws IllegalArgumentException {
         Objects.requireNonNull(str);
         if (j < 0) {
             throw new IllegalArgumentException("Illegal negative sharedAudioHistoryMs argument");
         }
-        int native_shareAudioHistory = native_shareAudioHistory(str, j);
-        if (native_shareAudioHistory == -2) {
+        int iNative_shareAudioHistory = native_shareAudioHistory(str, j);
+        if (iNative_shareAudioHistory == -2) {
             throw new IllegalArgumentException("Illegal sharedAudioHistoryMs argument");
         }
-        if (native_shareAudioHistory == -4) {
+        if (iNative_shareAudioHistory == -4) {
             throw new SecurityException("permission CAPTURE_AUDIO_HOTWORD required");
         }
-        MediaSyncEvent createEvent = MediaSyncEvent.createEvent(100);
-        createEvent.setAudioSessionId(this.mSessionId);
-        return createEvent;
+        MediaSyncEvent mediaSyncEventCreateEvent = MediaSyncEvent.createEvent(100);
+        mediaSyncEventCreateEvent.setAudioSessionId(this.mSessionId);
+        return mediaSyncEventCreateEvent;
     }
 
     private void testEnableNativeRoutingCallbacksLocked() {
@@ -976,14 +1046,14 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
         if (audioDeviceInfo != null && !audioDeviceInfo.isSource()) {
             return false;
         }
-        boolean native_setInputDevice = native_setInputDevice(audioDeviceInfo != null ? audioDeviceInfo.getId() : 0);
-        if (!native_setInputDevice) {
-            return native_setInputDevice;
+        boolean zNative_setInputDevice = native_setInputDevice(audioDeviceInfo != null ? audioDeviceInfo.getId() : 0);
+        if (!zNative_setInputDevice) {
+            return zNative_setInputDevice;
         }
         synchronized (this) {
             this.mPreferredDevice = audioDeviceInfo;
         }
-        return native_setInputDevice;
+        return zNative_setInputDevice;
     }
 
     @Override // android.media.AudioRouting
@@ -998,22 +1068,22 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
     public List<MicrophoneInfo> getActiveMicrophones() throws IOException {
         AudioDeviceInfo routedDevice;
         ArrayList<MicrophoneInfo> arrayList = new ArrayList<>();
-        int native_get_active_microphones = native_get_active_microphones(arrayList);
-        if (native_get_active_microphones != 0) {
-            if (native_get_active_microphones != -3) {
-                Log.e(TAG, "getActiveMicrophones failed:" + native_get_active_microphones);
+        int iNative_get_active_microphones = native_get_active_microphones(arrayList);
+        if (iNative_get_active_microphones != 0) {
+            if (iNative_get_active_microphones != -3) {
+                Log.e(TAG, "getActiveMicrophones failed:" + iNative_get_active_microphones);
             }
             Log.i(TAG, "getActiveMicrophones failed, fallback on routed device info");
         }
         AudioManager.setPortIdForMicrophones(arrayList);
         if (arrayList.size() == 0 && (routedDevice = getRoutedDevice()) != null) {
-            MicrophoneInfo microphoneInfoFromAudioDeviceInfo = AudioManager.microphoneInfoFromAudioDeviceInfo(routedDevice);
+            MicrophoneInfo microphoneInfoMicrophoneInfoFromAudioDeviceInfo = AudioManager.microphoneInfoFromAudioDeviceInfo(routedDevice);
             ArrayList arrayList2 = new ArrayList();
             for (int i = 0; i < this.mChannelCount; i++) {
                 arrayList2.add(new Pair(Integer.valueOf(i), 1));
             }
-            microphoneInfoFromAudioDeviceInfo.setChannelMapping(arrayList2);
-            arrayList.add(microphoneInfoFromAudioDeviceInfo);
+            microphoneInfoMicrophoneInfoFromAudioDeviceInfo.setChannelMapping(arrayList2);
+            arrayList.add(microphoneInfoMicrophoneInfoFromAudioDeviceInfo);
         }
         return arrayList;
     }
@@ -1113,19 +1183,19 @@ public class AudioRecord implements AudioRouting, MicrophoneDirection, AudioReco
 
     @Deprecated
     private int native_setup(Object obj, Object obj2, int[] iArr, int i, int i2, int i3, int i4, int[] iArr2, String str, long j, int i5) {
-        AttributionSource.ScopedParcelState asScopedParcelState = AttributionSource.myAttributionSource().withPackageName(str).asScopedParcelState();
+        AttributionSource.ScopedParcelState scopedParcelStateAsScopedParcelState = AttributionSource.myAttributionSource().withPackageName(str).asScopedParcelState();
         try {
-            int native_setup = native_setup(obj, obj2, iArr, i, i2, i3, i4, iArr2, asScopedParcelState.getParcel(), j, 0, i5);
-            if (asScopedParcelState != null) {
-                asScopedParcelState.close();
+            int iNative_setup = native_setup(obj, obj2, iArr, i, i2, i3, i4, iArr2, scopedParcelStateAsScopedParcelState.getParcel(), j, 0, i5);
+            if (scopedParcelStateAsScopedParcelState != null) {
+                scopedParcelStateAsScopedParcelState.close();
             }
-            return native_setup;
+            return iNative_setup;
         } catch (Throwable th) {
-            if (asScopedParcelState == null) {
+            if (scopedParcelStateAsScopedParcelState == null) {
                 throw th;
             }
             try {
-                asScopedParcelState.close();
+                scopedParcelStateAsScopedParcelState.close();
                 throw th;
             } catch (Throwable th2) {
                 th.addSuppressed(th2);

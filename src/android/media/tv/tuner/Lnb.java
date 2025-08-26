@@ -119,7 +119,7 @@ public class Lnb implements AutoCloseable {
                     executor.execute(new Runnable() { // from class: android.media.tv.tuner.Lnb$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            Lnb.this.lambda$onEvent$0(lnbCallback, i);
+                            this.f$0.lambda$onEvent$0(lnbCallback, i);
                         }
                     });
                 }
@@ -144,7 +144,7 @@ public class Lnb implements AutoCloseable {
                     executor.execute(new Runnable() { // from class: android.media.tv.tuner.Lnb$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            Lnb.this.lambda$onDiseqcMessage$1(lnbCallback, bArr);
+                            this.f$0.lambda$onDiseqcMessage$1(lnbCallback, bArr);
                         }
                     });
                 }
@@ -162,11 +162,11 @@ public class Lnb implements AutoCloseable {
     }
 
     boolean isClosed() {
-        boolean booleanValue;
+        boolean zBooleanValue;
         synchronized (this.mLock) {
-            booleanValue = this.mIsClosed.booleanValue();
+            zBooleanValue = this.mIsClosed.booleanValue();
         }
-        return booleanValue;
+        return zBooleanValue;
     }
 
     void closeInternal() {
@@ -174,9 +174,9 @@ public class Lnb implements AutoCloseable {
             if (this.mIsClosed.booleanValue()) {
                 return;
             }
-            int nativeClose = nativeClose();
-            if (nativeClose != 0) {
-                TunerUtils.throwExceptionForResult(nativeClose, "Failed to close LNB");
+            int iNativeClose = nativeClose();
+            if (iNativeClose != 0) {
+                TunerUtils.throwExceptionForResult(iNativeClose, "Failed to close LNB");
             } else {
                 this.mIsClosed = true;
                 Tuner tuner = this.mOwner;
@@ -190,39 +190,39 @@ public class Lnb implements AutoCloseable {
     }
 
     public int setVoltage(int i) {
-        int nativeSetVoltage;
+        int iNativeSetVoltage;
         synchronized (this.mLock) {
             TunerUtils.checkResourceState(TAG, this.mIsClosed.booleanValue());
-            nativeSetVoltage = nativeSetVoltage(i);
+            iNativeSetVoltage = nativeSetVoltage(i);
         }
-        return nativeSetVoltage;
+        return iNativeSetVoltage;
     }
 
     public int setTone(int i) {
-        int nativeSetTone;
+        int iNativeSetTone;
         synchronized (this.mLock) {
             TunerUtils.checkResourceState(TAG, this.mIsClosed.booleanValue());
-            nativeSetTone = nativeSetTone(i);
+            iNativeSetTone = nativeSetTone(i);
         }
-        return nativeSetTone;
+        return iNativeSetTone;
     }
 
     public int setSatellitePosition(int i) {
-        int nativeSetSatellitePosition;
+        int iNativeSetSatellitePosition;
         synchronized (this.mLock) {
             TunerUtils.checkResourceState(TAG, this.mIsClosed.booleanValue());
-            nativeSetSatellitePosition = nativeSetSatellitePosition(i);
+            iNativeSetSatellitePosition = nativeSetSatellitePosition(i);
         }
-        return nativeSetSatellitePosition;
+        return iNativeSetSatellitePosition;
     }
 
     public int sendDiseqcMessage(byte[] bArr) {
-        int nativeSendDiseqcMessage;
+        int iNativeSendDiseqcMessage;
         synchronized (this.mLock) {
             TunerUtils.checkResourceState(TAG, this.mIsClosed.booleanValue());
-            nativeSendDiseqcMessage = nativeSendDiseqcMessage(bArr);
+            iNativeSendDiseqcMessage = nativeSendDiseqcMessage(bArr);
         }
-        return nativeSendDiseqcMessage;
+        return iNativeSendDiseqcMessage;
     }
 
     @Override // java.lang.AutoCloseable

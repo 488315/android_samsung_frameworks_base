@@ -17,9 +17,9 @@ public class EC {
     }
 
     static {
-        HashMap hashMap = new HashMap();
-        generalEcAttributes = hashMap;
-        hashMap.put("SupportedKeyClasses", "java.security.interfaces.ECPublicKey|java.security.interfaces.ECPrivateKey");
-        hashMap.put("SupportedKeyFormats", "PKCS#8|X.509");
+        HashMap map = new HashMap();
+        generalEcAttributes = map;
+        map.put("SupportedKeyClasses", "java.security.interfaces.ECPublicKey|java.security.interfaces.ECPrivateKey");
+        map.put("SupportedKeyFormats", "PKCS#8|X.509");
     }
 }

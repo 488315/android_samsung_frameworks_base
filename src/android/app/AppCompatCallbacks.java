@@ -16,12 +16,12 @@ public final class AppCompatCallbacks implements Compatibility.BehaviorChangeDel
     }
 
     private AppCompatCallbacks(long[] jArr, long[] jArr2) {
-        long[] copyOf = Arrays.copyOf(jArr, jArr.length);
-        this.mDisabledChanges = copyOf;
-        long[] copyOf2 = Arrays.copyOf(jArr2, jArr2.length);
-        this.mLoggableChanges = copyOf2;
-        Arrays.sort(copyOf);
-        Arrays.sort(copyOf2);
+        long[] jArrCopyOf = Arrays.copyOf(jArr, jArr.length);
+        this.mDisabledChanges = jArrCopyOf;
+        long[] jArrCopyOf2 = Arrays.copyOf(jArr2, jArr2.length);
+        this.mLoggableChanges = jArrCopyOf2;
+        Arrays.sort(jArrCopyOf);
+        Arrays.sort(jArrCopyOf2);
         this.mChangeReporter = new ChangeReporter(1);
     }
 
@@ -34,13 +34,13 @@ public final class AppCompatCallbacks implements Compatibility.BehaviorChangeDel
     }
 
     public boolean isChangeEnabled(long j) {
-        boolean changeIdInChangeList = changeIdInChangeList(this.mDisabledChanges, j);
-        boolean changeIdInChangeList2 = changeIdInChangeList(this.mLoggableChanges, j);
-        if (!changeIdInChangeList) {
-            reportChange(j, 1, changeIdInChangeList2);
+        boolean zChangeIdInChangeList = changeIdInChangeList(this.mDisabledChanges, j);
+        boolean zChangeIdInChangeList2 = changeIdInChangeList(this.mLoggableChanges, j);
+        if (!zChangeIdInChangeList) {
+            reportChange(j, 1, zChangeIdInChangeList2);
             return true;
         }
-        reportChange(j, 2, changeIdInChangeList2);
+        reportChange(j, 2, zChangeIdInChangeList2);
         return false;
     }
 

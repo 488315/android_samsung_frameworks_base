@@ -115,12 +115,12 @@ public class CipherSpi extends BaseCipherSpi {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseCipherSpi, javax.crypto.CipherSpi
-    protected AlgorithmParameters engineGetParameters() {
+    protected AlgorithmParameters engineGetParameters() throws InvalidParameterSpecException {
         if (this.engineParams == null && this.paramSpec != null) {
             try {
-                AlgorithmParameters createAlgorithmParameters = this.helper.createAlgorithmParameters("OAEP");
-                this.engineParams = createAlgorithmParameters;
-                createAlgorithmParameters.init(this.paramSpec);
+                AlgorithmParameters algorithmParametersCreateAlgorithmParameters = this.helper.createAlgorithmParameters("OAEP");
+                this.engineParams = algorithmParametersCreateAlgorithmParameters;
+                algorithmParametersCreateAlgorithmParameters.init(this.paramSpec);
             } catch (Exception e) {
                 throw new RuntimeException(e.toString());
             }
@@ -189,19 +189,19 @@ public class CipherSpi extends BaseCipherSpi {
 
     @Override // javax.crypto.CipherSpi
     protected void engineInit(int i, Key key, AlgorithmParameterSpec algorithmParameterSpec, SecureRandom secureRandom) throws InvalidKeyException, InvalidAlgorithmParameterException {
-        CipherParameters generatePrivateKeyParameter;
+        CipherParameters cipherParametersGeneratePrivateKeyParameter;
         CipherParameters parametersWithRandom;
         if (algorithmParameterSpec == null || (algorithmParameterSpec instanceof OAEPParameterSpec)) {
             if (key instanceof RSAPublicKey) {
                 if (this.privateKeyOnly && i == 1) {
                     throw new InvalidKeyException("mode 1 requires RSAPrivateKey");
                 }
-                generatePrivateKeyParameter = RSAUtil.generatePublicKeyParameter((RSAPublicKey) key);
+                cipherParametersGeneratePrivateKeyParameter = RSAUtil.generatePublicKeyParameter((RSAPublicKey) key);
             } else if (key instanceof RSAPrivateKey) {
                 if (this.publicKeyOnly && i == 1) {
                     throw new InvalidKeyException("mode 2 requires RSAPublicKey");
                 }
-                generatePrivateKeyParameter = RSAUtil.generatePrivateKeyParameter((RSAPrivateKey) key);
+                cipherParametersGeneratePrivateKeyParameter = RSAUtil.generatePrivateKeyParameter((RSAPrivateKey) key);
             } else {
                 throw new InvalidKeyException("unknown key type passed to RSA");
             }
@@ -227,11 +227,11 @@ public class CipherSpi extends BaseCipherSpi {
             }
             if (!(this.cipher instanceof RSABlindedEngine)) {
                 if (secureRandom != null) {
-                    parametersWithRandom = new ParametersWithRandom(generatePrivateKeyParameter, secureRandom);
+                    parametersWithRandom = new ParametersWithRandom(cipherParametersGeneratePrivateKeyParameter, secureRandom);
                 } else {
-                    parametersWithRandom = new ParametersWithRandom(generatePrivateKeyParameter, CryptoServicesRegistrar.getSecureRandom());
+                    parametersWithRandom = new ParametersWithRandom(cipherParametersGeneratePrivateKeyParameter, CryptoServicesRegistrar.getSecureRandom());
                 }
-                generatePrivateKeyParameter = parametersWithRandom;
+                cipherParametersGeneratePrivateKeyParameter = parametersWithRandom;
             }
             this.bOut.reset();
             if (i != 1) {
@@ -242,17 +242,17 @@ public class CipherSpi extends BaseCipherSpi {
                         }
                     }
                 }
-                this.cipher.init(false, generatePrivateKeyParameter);
+                this.cipher.init(false, cipherParametersGeneratePrivateKeyParameter);
                 return;
             }
-            this.cipher.init(true, generatePrivateKeyParameter);
+            this.cipher.init(true, cipherParametersGeneratePrivateKeyParameter);
             return;
         }
         throw new InvalidAlgorithmParameterException("unknown parameter type: " + algorithmParameterSpec.getClass().getName());
     }
 
     @Override // javax.crypto.CipherSpi
-    protected void engineInit(int i, Key key, AlgorithmParameters algorithmParameters, SecureRandom secureRandom) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected void engineInit(int i, Key key, AlgorithmParameters algorithmParameters, SecureRandom secureRandom) throws InvalidParameterSpecException, InvalidKeyException, InvalidAlgorithmParameterException {
         AlgorithmParameterSpec parameterSpec;
         if (algorithmParameters != null) {
             try {
@@ -307,7 +307,7 @@ public class CipherSpi extends BaseCipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected byte[] engineDoFinal(byte[] bArr, int i, int i2) throws IllegalBlockSizeException, BadPaddingException {
+    protected byte[] engineDoFinal(byte[] bArr, int i, int i2) throws BadPaddingException, IllegalBlockSizeException {
         if (bArr != null) {
             this.bOut.write(bArr, i, i2);
         }
@@ -322,7 +322,7 @@ public class CipherSpi extends BaseCipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected int engineDoFinal(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws IllegalBlockSizeException, BadPaddingException, ShortBufferException {
+    protected int engineDoFinal(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws BadPaddingException, IllegalBlockSizeException, ShortBufferException {
         if (engineGetOutputSize(i2) + i3 > bArr2.length) {
             throw new ShortBufferException("output buffer too short for input.");
         }
@@ -347,16 +347,16 @@ public class CipherSpi extends BaseCipherSpi {
         try {
             try {
                 try {
-                    byte[] processBlock = this.cipher.processBlock(this.bOut.getBuf(), 0, this.bOut.size());
-                    if (processBlock == null) {
+                    byte[] bArrProcessBlock = this.cipher.processBlock(this.bOut.getBuf(), 0, this.bOut.size());
+                    if (bArrProcessBlock == null) {
                         throw new BadBlockException("unable to decrypt block", null);
                     }
                     this.bOut.erase();
-                    return processBlock;
-                } catch (InvalidCipherTextException e) {
+                    return bArrProcessBlock;
+                } catch (ArrayIndexOutOfBoundsException e) {
                     throw new BadBlockException("unable to decrypt block", e);
                 }
-            } catch (ArrayIndexOutOfBoundsException e2) {
+            } catch (InvalidCipherTextException e2) {
                 throw new BadBlockException("unable to decrypt block", e2);
             }
         } catch (Throwable th) {

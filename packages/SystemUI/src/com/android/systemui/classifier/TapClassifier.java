@@ -5,7 +5,6 @@ import com.android.systemui.classifier.FalsingClassifier;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class TapClassifier extends FalsingClassifier {
     public final float mTouchSlop;
@@ -29,9 +28,9 @@ public abstract class TapClassifier extends FalsingClassifier {
         Iterator it = list.iterator();
         while (it.hasNext()) {
             MotionEvent motionEvent = (MotionEvent) it.next();
-            float abs = Math.abs(motionEvent.getX() - x);
+            float fAbs = Math.abs(motionEvent.getX() - x);
             float f = this.mTouchSlop;
-            if (abs >= f) {
+            if (fAbs >= f) {
                 return falsed(d, "dX too big for a tap: " + Math.abs(motionEvent.getX() - x) + "vs " + f);
             }
             if (Math.abs(motionEvent.getY() - y) >= f) {

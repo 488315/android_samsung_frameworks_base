@@ -25,10 +25,10 @@ public class COMPOSITE {
     private static final Map<String, String> compositeAttributes;
 
     static {
-        HashMap hashMap = new HashMap();
-        compositeAttributes = hashMap;
-        hashMap.put("SupportedKeyClasses", "com.android.internal.org.bouncycastle.jcajce.CompositePublicKey|com.android.internal.org.bouncycastle.jcajce.CompositePrivateKey");
-        hashMap.put("SupportedKeyFormats", "PKCS#8|X.509");
+        HashMap map = new HashMap();
+        compositeAttributes = map;
+        map.put("SupportedKeyClasses", "com.android.internal.org.bouncycastle.jcajce.CompositePublicKey|com.android.internal.org.bouncycastle.jcajce.CompositePrivateKey");
+        map.put("SupportedKeyFormats", "PKCS#8|X.509");
     }
 
     public static class KeyFactory extends BaseKeyFactorySpi {

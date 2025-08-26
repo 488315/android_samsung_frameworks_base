@@ -26,15 +26,15 @@ public class InetAddressUtils {
     }
 
     public static InetAddress unparcelInetAddress(Parcel parcel) {
-        byte[] createByteArray = parcel.createByteArray();
-        if (createByteArray == null) {
+        byte[] bArrCreateByteArray = parcel.createByteArray();
+        if (bArrCreateByteArray == null) {
             return null;
         }
         try {
-            if (createByteArray.length == 16) {
-                return Inet6Address.getByAddress((String) null, createByteArray, parcel.readBoolean() ? parcel.readInt() : 0);
+            if (bArrCreateByteArray.length == 16) {
+                return Inet6Address.getByAddress((String) null, bArrCreateByteArray, parcel.readBoolean() ? parcel.readInt() : 0);
             }
-            return InetAddress.getByAddress(createByteArray);
+            return InetAddress.getByAddress(bArrCreateByteArray);
         } catch (UnknownHostException unused) {
             return null;
         }

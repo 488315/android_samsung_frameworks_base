@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.Dp;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class NoPlayKt$$ExternalSyntheticLambda0 implements Function0 {
     @Override // kotlin.jvm.functions.Function0
@@ -30,7 +29,7 @@ public final /* synthetic */ class NoPlayKt$$ExternalSyntheticLambda0 implements
         pathBuilder.curveTo(1.115f, -0.383f, 0.0f, 0.356f, 0.0f, 1.537f);
         pathBuilder.lineTo(0.0f, 12.42f);
         pathBuilder.curveTo(0.0f, 13.602f, 1.115f, 14.341f, 2.006f, 13.75f);
-        builder.m565addPathoIyEayM("", pathBuilder._nodes, 0, solidColor, 1.0f, null, 1.0f, 0.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        builder.m567addPathoIyEayM("", pathBuilder._nodes, 0, solidColor, 1.0f, null, 1.0f, 0.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
         return builder.build();
     }
 }

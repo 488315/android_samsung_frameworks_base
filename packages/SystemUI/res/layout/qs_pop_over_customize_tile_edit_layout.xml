@@ -19,7 +19,7 @@
             <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@id/qs_available_page_parent" android:layout_width="fill_parent" android:layout_height="wrap_content">
                 <com.android.systemui.qs.customize.CustomizerTileViewPager android:id="@id/qs_customizer_available_pager" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="0.0dip" android:minHeight="50.0dip" />
             </LinearLayout>
-            <LinearLayout android:gravity="bottom|center" android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/qs_available_paged_indicator_container" android:layout_width="fill_parent" android:layout_height="@dimen/qs_edit_available_area_indicator_bottom">
+            <LinearLayout android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/qs_available_paged_indicator_container" android:layout_width="fill_parent" android:layout_height="@dimen/qs_pop_over_edit_available_area_indicator_bottom">
                 <com.android.systemui.qs.SecPageIndicator android:gravity="center" android:layout_gravity="center" android:id="@id/qs_available_paged_indicator" android:layout_width="fill_parent" android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>

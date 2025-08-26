@@ -16,15 +16,20 @@ import android.text.method.TransformationMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.SurfaceView;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.internal.protolog.PerfettoProtoLogImpl;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -148,11 +153,11 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
 
     public boolean setPendingExtractionResult(SemSmartClipDataElement semSmartClipDataElement) {
         SmartClipDataElementImpl smartClipDataElementImpl = (SmartClipDataElementImpl) semSmartClipDataElement;
-        int findElementIndexFromPendingList = findElementIndexFromPendingList(smartClipDataElementImpl);
-        if (findElementIndexFromPendingList < 0) {
+        int iFindElementIndexFromPendingList = findElementIndexFromPendingList(smartClipDataElementImpl);
+        if (iFindElementIndexFromPendingList < 0) {
             return false;
         }
-        this.mPendingElements.remove(findElementIndexFromPendingList);
+        this.mPendingElements.remove(iFindElementIndexFromPendingList);
         if (!smartClipDataElementImpl.isEmptyTag(false)) {
             if (DEBUG) {
                 Log.d(TAG, "setPendingExtractionResult : Contains meta data : " + smartClipDataElementImpl.getDumpString(false, true));
@@ -175,19 +180,19 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
     /* JADX WARN: Type inference failed for: r2v6 */
     /* JADX WARN: Type inference failed for: r2v7 */
     protected ArrayList<View> getParentList(View view) {
-        View view2;
+        View parent;
         ArrayList<View> arrayList = new ArrayList<>();
         if (view instanceof ViewGroup) {
-            view2 = (ViewParent) view;
+            parent = (ViewParent) view;
         } else {
             arrayList.add(view);
-            view2 = view.getParent();
+            parent = view.getParent();
         }
-        while (view2 != 0) {
-            if (view2 instanceof ViewGroup) {
-                arrayList.add(view2);
+        while (parent != 0) {
+            if (parent instanceof ViewGroup) {
+                arrayList.add(parent);
             }
-            view2 = view2.getParent();
+            parent = parent.getParent();
         }
         return arrayList;
     }
@@ -264,14 +269,14 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
     }
 
     private Point getViewLocationOnScreen(View view) {
-        Point point = this.mUseViewPositionCache ? this.mViewPositionCache.get(view) : null;
-        if (point == null) {
-            point = SmartClipUtils.getViewLocationOnScreen(view);
+        Point viewLocationOnScreen = this.mUseViewPositionCache ? this.mViewPositionCache.get(view) : null;
+        if (viewLocationOnScreen == null) {
+            viewLocationOnScreen = SmartClipUtils.getViewLocationOnScreen(view);
             if (this.mUseViewPositionCache) {
-                this.mViewPositionCache.put(view, point);
+                this.mViewPositionCache.put(view, viewLocationOnScreen);
             }
         }
-        return point;
+        return viewLocationOnScreen;
     }
 
     public int extractDefaultSmartClipData(View view, SemSmartClipCroppedArea semSmartClipCroppedArea, SmartClipDataElementImpl smartClipDataElementImpl) {
@@ -332,9 +337,9 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
             if (textView.hasSelection()) {
                 int selectionStart = textView.getSelectionStart();
                 int selectionEnd = textView.getSelectionEnd();
-                CharSequence subSequence = charSequence.subSequence(Math.max(0, Math.min(selectionStart, selectionEnd)), Math.max(0, Math.max(selectionStart, selectionEnd)));
-                if (subSequence != null) {
-                    smartClipDataElementImpl.addTag(new SemSmartClipMetaTag(SemSmartClipMetaTagType.TEXT_SELECTION, subSequence.toString()));
+                CharSequence charSequenceSubSequence = charSequence.subSequence(Math.max(0, Math.min(selectionStart, selectionEnd)), Math.max(0, Math.max(selectionStart, selectionEnd)));
+                if (charSequenceSubSequence != null) {
+                    smartClipDataElementImpl.addTag(new SemSmartClipMetaTag(SemSmartClipMetaTagType.TEXT_SELECTION, charSequenceSubSequence.toString()));
                 }
             }
             text = charSequence;
@@ -363,7 +368,7 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
         return 1;
     }
 
-    private int extractDefaultSmartClipData_GoogleChromeView(View view, SemSmartClipCroppedArea semSmartClipCroppedArea, SmartClipDataElementImpl smartClipDataElementImpl) {
+    private int extractDefaultSmartClipData_GoogleChromeView(View view, SemSmartClipCroppedArea semSmartClipCroppedArea, SmartClipDataElementImpl smartClipDataElementImpl) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         try {
             if (this.mExtractionRequest.mExtractionMode == 4) {
                 extractSmartClipImageData(view, semSmartClipCroppedArea, smartClipDataElementImpl);
@@ -386,7 +391,7 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
                     }
 
                     @Override // android.os.Handler
-                    public void handleMessage(Message message) {
+                    public void handleMessage(Message message) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
                         Log.d(SmartClipDataCropperImpl.TAG, "Meta data arrived from chrome");
                         Bundle data = message.getData();
                         if (data == null) {
@@ -463,7 +468,7 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
         return 1;
     }
 
-    private void extractSmartClipImageData(View view, SemSmartClipCroppedArea semSmartClipCroppedArea, SmartClipDataElementImpl smartClipDataElementImpl) {
+    private void extractSmartClipImageData(View view, SemSmartClipCroppedArea semSmartClipCroppedArea, SmartClipDataElementImpl smartClipDataElementImpl) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         try {
             Method method = view.getClass().getMethod("getSmartClipImageData", Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE, Integer.TYPE);
             Method method2 = view.getClass().getMethod("setSmartClipImageResultHandler", Handler.class);
@@ -485,25 +490,25 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
                 }
 
                 @Override // android.os.Handler
-                public void handleMessage(Message message) {
+                public void handleMessage(Message message) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
                     Log.d(SmartClipDataCropperImpl.TAG, "Original image data arrived from sbrowser");
                     Bundle data = message.getData();
                     if (data != null) {
                         String string = data.getString("image_uri");
-                        String valueOf = String.valueOf(data.getInt("width"));
-                        String valueOf2 = String.valueOf(data.getInt("height"));
-                        String valueOf3 = String.valueOf(data.getInt("error_code"));
+                        String strValueOf = String.valueOf(data.getInt("width"));
+                        String strValueOf2 = String.valueOf(data.getInt("height"));
+                        String strValueOf3 = String.valueOf(data.getInt("error_code"));
                         if (!TextUtils.isEmpty(string)) {
                             this.val$resultElement.setTag(new SemSmartClipMetaTag("image_uri", string));
                         }
-                        if (!TextUtils.isEmpty(valueOf)) {
-                            this.val$resultElement.setTag(new SemSmartClipMetaTag("width", valueOf));
+                        if (!TextUtils.isEmpty(strValueOf)) {
+                            this.val$resultElement.setTag(new SemSmartClipMetaTag("width", strValueOf));
                         }
-                        if (!TextUtils.isEmpty(valueOf2)) {
-                            this.val$resultElement.setTag(new SemSmartClipMetaTag("height", valueOf2));
+                        if (!TextUtils.isEmpty(strValueOf2)) {
+                            this.val$resultElement.setTag(new SemSmartClipMetaTag("height", strValueOf2));
                         }
-                        if (!TextUtils.isEmpty(valueOf3)) {
-                            this.val$resultElement.setTag(new SemSmartClipMetaTag("error_code", valueOf3));
+                        if (!TextUtils.isEmpty(strValueOf3)) {
+                            this.val$resultElement.setTag(new SemSmartClipMetaTag("error_code", strValueOf3));
                         }
                         try {
                             this.val$setSmartClipImageResultHandlerMethod.invoke(this.val$view, null);
@@ -526,21 +531,21 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
         }
     }
 
-    private int extractDefaultSmartClipData_ThirdPartyInterface(View view, SemSmartClipCroppedArea semSmartClipCroppedArea, SmartClipDataElementImpl smartClipDataElementImpl) {
-        Object obj;
+    private int extractDefaultSmartClipData_ThirdPartyInterface(View view, SemSmartClipCroppedArea semSmartClipCroppedArea, SmartClipDataElementImpl smartClipDataElementImpl) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        Object tag;
         try {
             Method thirPartyExtractionInterfaceMethod = getThirPartyExtractionInterfaceMethod(view);
             if (thirPartyExtractionInterfaceMethod == null) {
-                obj = view.getTag();
-                if (obj != null) {
-                    thirPartyExtractionInterfaceMethod = getThirPartyExtractionInterfaceMethod(obj);
+                tag = view.getTag();
+                if (tag != null) {
+                    thirPartyExtractionInterfaceMethod = getThirPartyExtractionInterfaceMethod(tag);
                 }
             } else {
-                obj = view;
+                tag = view;
             }
-            if (obj != null && thirPartyExtractionInterfaceMethod != null) {
+            if (tag != null && thirPartyExtractionInterfaceMethod != null) {
                 Log.d(TAG, "Extracting meta data using third party interface...");
-                Object invoke = thirPartyExtractionInterfaceMethod.invoke(obj, semSmartClipCroppedArea.getRect(), new Handler(smartClipDataElementImpl, view) { // from class: com.samsung.android.content.smartclip.SmartClipDataCropperImpl.3
+                Object objInvoke = thirPartyExtractionInterfaceMethod.invoke(tag, semSmartClipCroppedArea.getRect(), new Handler(smartClipDataElementImpl, view) { // from class: com.samsung.android.content.smartclip.SmartClipDataCropperImpl.3
                     public SemSmartClipDataElement mResult;
                     final /* synthetic */ SmartClipDataElementImpl val$resultElement;
                     final /* synthetic */ View val$view;
@@ -564,12 +569,12 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
                         }
                     }
                 });
-                if (invoke == null || !(invoke instanceof Bundle)) {
+                if (objInvoke == null || !(objInvoke instanceof Bundle)) {
                     Log.d(TAG, "Null returned immediately from third party. waiting pending meta data..");
                     return 2;
                 }
                 Log.d(TAG, "Bundle data returned immediately from third party");
-                updateDataElementWithBundle(view, (Bundle) invoke, smartClipDataElementImpl);
+                updateDataElementWithBundle(view, (Bundle) objInvoke, smartClipDataElementImpl);
                 return 1;
             }
         } catch (Exception e) {
@@ -590,9 +595,9 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
             Log.e(TAG, "adjustMetaAreaRect : rect is null");
             return null;
         }
-        for (View view2 = view.getParent(); view2 != 0; view2 = view2.getParent()) {
-            if (view2 instanceof ViewGroup) {
-                Rect viewBoundsOnScreen2 = getViewBoundsOnScreen(view2);
+        for (View parent = view.getParent(); parent != 0; parent = parent.getParent()) {
+            if (parent instanceof ViewGroup) {
+                Rect viewBoundsOnScreen2 = getViewBoundsOnScreen(parent);
                 Rect rect3 = new Rect();
                 if (rect3.setIntersect(viewBoundsOnScreen, viewBoundsOnScreen2)) {
                     viewBoundsOnScreen = rect3;
@@ -609,19 +614,19 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
     private Rect getOpaqueBackgroundRect(SmartClipDataElementImpl smartClipDataElementImpl) {
         Drawable background;
         Rect metaAreaRect;
-        Rect adjustMetaAreaRect;
+        Rect rectAdjustMetaAreaRect;
         Rect rect = null;
-        SmartClipDataElementImpl smartClipDataElementImpl2 = smartClipDataElementImpl;
-        while (smartClipDataElementImpl2 != null) {
-            View view = smartClipDataElementImpl2.getView();
-            if (view != null && (background = view.getBackground()) != null && background.isVisible() && background.getOpacity() != -2 && (metaAreaRect = smartClipDataElementImpl2.getMetaAreaRect()) != null && (adjustMetaAreaRect = adjustMetaAreaRect(view, metaAreaRect)) != null) {
+        SmartClipDataElementImpl smartClipDataElementImplTraverseNextElement = smartClipDataElementImpl;
+        while (smartClipDataElementImplTraverseNextElement != null) {
+            View view = smartClipDataElementImplTraverseNextElement.getView();
+            if (view != null && (background = view.getBackground()) != null && background.isVisible() && background.getOpacity() != -2 && (metaAreaRect = smartClipDataElementImplTraverseNextElement.getMetaAreaRect()) != null && (rectAdjustMetaAreaRect = adjustMetaAreaRect(view, metaAreaRect)) != null) {
                 if (rect == null) {
-                    rect = new Rect(adjustMetaAreaRect);
+                    rect = new Rect(rectAdjustMetaAreaRect);
                 } else {
-                    rect.union(adjustMetaAreaRect);
+                    rect.union(rectAdjustMetaAreaRect);
                 }
             }
-            smartClipDataElementImpl2 = smartClipDataElementImpl2.traverseNextElement(smartClipDataElementImpl);
+            smartClipDataElementImplTraverseNextElement = smartClipDataElementImplTraverseNextElement.traverseNextElement(smartClipDataElementImpl);
         }
         Log.d(TAG, "getOpaqueBackgroundRect : opaqueRect=" + rect + "  element=" + smartClipDataElementImpl);
         return rect;
@@ -654,11 +659,11 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
             Log.e(TAG, "filterMetaTagForBrowserViews : element is null!");
             return;
         }
-        SmartClipDataElementImpl smartClipDataElementImpl2 = smartClipDataElementImpl;
-        while (smartClipDataElementImpl2 != null) {
-            SemSmartClipMetaTagArray tagTable = smartClipDataElementImpl2.getTagTable();
+        SmartClipDataElementImpl smartClipDataElementImplTraverseNextElement = smartClipDataElementImpl;
+        while (smartClipDataElementImplTraverseNextElement != null) {
+            SemSmartClipMetaTagArray tagTable = smartClipDataElementImplTraverseNextElement.getTagTable();
             if (tagTable != null) {
-                View view = smartClipDataElementImpl2.getView();
+                View view = smartClipDataElementImplTraverseNextElement.getView();
                 String simpleName = view != null ? view.getClass().getSimpleName() : PerfettoProtoLogImpl.NULL_STRING;
                 int size = tagTable.getMetaTags(SemSmartClipMetaTagType.HTML).size();
                 int size2 = tagTable.getMetaTags(SemSmartClipMetaTagType.PLAIN_TEXT).size();
@@ -684,117 +689,99 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
                         String value = next2.getValue();
                         if (value.length() > MAX_META_VALUE_SIZE) {
                             Log.e(TAG, "filterMetaTagForBrowserViews : Have large HTML data(" + value.length() + " bytes). Converting tag..");
-                            String allocateMetaTagFilePath = allocateMetaTagFilePath();
-                            if (!writeStringToFile(allocateMetaTagFilePath, value)) {
-                                Log.e(TAG, "filterMetaTagForBrowserViews : Failed to save meta tag! - " + allocateMetaTagFilePath);
+                            String strAllocateMetaTagFilePath = allocateMetaTagFilePath();
+                            if (!writeStringToFile(strAllocateMetaTagFilePath, value)) {
+                                Log.e(TAG, "filterMetaTagForBrowserViews : Failed to save meta tag! - " + strAllocateMetaTagFilePath);
                             } else {
-                                Log.d(TAG, "filterMetaTagForBrowserViews : Saved the meta tag to " + allocateMetaTagFilePath);
+                                Log.d(TAG, "filterMetaTagForBrowserViews : Saved the meta tag to " + strAllocateMetaTagFilePath);
                             }
                             next2.setType(SemSmartClipMetaTagType.FILE_PATH_HTML);
-                            next2.setValue(allocateMetaTagFilePath);
+                            next2.setValue(strAllocateMetaTagFilePath);
                         }
                     }
                 }
             }
-            smartClipDataElementImpl2 = smartClipDataElementImpl2.traverseNextElement(smartClipDataElementImpl);
+            smartClipDataElementImplTraverseNextElement = smartClipDataElementImplTraverseNextElement.traverseNextElement(smartClipDataElementImpl);
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0075  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0075  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean writeStringToFile(java.lang.String r8, java.lang.String r9) {
-        /*
-            r7 = this;
-            java.lang.String r7 = "writeStringToFile : File close failed! "
-            java.lang.String r0 = "writeStringToFile : File write failed! "
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            java.lang.String r2 = "writeStringToFile : "
-            r1.<init>(r2)
-            r1.append(r8)
-            java.lang.String r1 = r1.toString()
-            java.lang.String r2 = "SmartClipDataCropperImpl"
-            android.util.Log.d(r2, r1)
-            java.io.File r1 = new java.io.File
-            r1.<init>(r8)
-            r3 = 0
-            r4 = 1
-            r5 = 0
-            java.io.FileOutputStream r6 = new java.io.FileOutputStream     // Catch: java.lang.Throwable -> L4d java.lang.Exception -> L4f
-            r6.<init>(r1)     // Catch: java.lang.Throwable -> L4d java.lang.Exception -> L4f
-            java.lang.String r5 = "UTF-8"
-            byte[] r9 = r9.getBytes(r5)     // Catch: java.lang.Throwable -> L47 java.lang.Exception -> L4a
-            r6.write(r9)     // Catch: java.lang.Throwable -> L47 java.lang.Exception -> L4a
-            r6.close()     // Catch: java.lang.Exception -> L35
-            r7 = r4
-            goto L6c
-        L35:
-            r9 = move-exception
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>(r7)
-        L3b:
-            r0.append(r9)
-            java.lang.String r7 = r0.toString()
-            android.util.Log.e(r2, r7)
-        L45:
-            r7 = r3
-            goto L6c
-        L47:
-            r8 = move-exception
-            r5 = r6
-            goto L87
-        L4a:
-            r9 = move-exception
-            r5 = r6
-            goto L50
-        L4d:
-            r8 = move-exception
-            goto L87
-        L4f:
-            r9 = move-exception
-        L50:
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L4d
-            r6.<init>(r0)     // Catch: java.lang.Throwable -> L4d
-            r6.append(r9)     // Catch: java.lang.Throwable -> L4d
-            java.lang.String r9 = r6.toString()     // Catch: java.lang.Throwable -> L4d
-            android.util.Log.e(r2, r9)     // Catch: java.lang.Throwable -> L4d
-            if (r5 == 0) goto L45
-            r5.close()     // Catch: java.lang.Exception -> L65
-            goto L45
-        L65:
-            r9 = move-exception
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>(r7)
-            goto L3b
-        L6c:
-            r1.setReadable(r4, r3)
-            boolean r9 = r1.setWritable(r4, r3)
-            if (r9 != 0) goto L86
-            java.lang.StringBuilder r9 = new java.lang.StringBuilder
-            java.lang.String r0 = "Failed to set writable permission for file: "
-            r9.<init>(r0)
-            r9.append(r8)
-            java.lang.String r8 = r9.toString()
-            android.util.Log.e(r2, r8)
-        L86:
-            return r7
-        L87:
-            if (r5 == 0) goto L9d
-            r5.close()     // Catch: java.lang.Exception -> L8d
-            goto L9d
-        L8d:
-            r9 = move-exception
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>(r7)
-            r0.append(r9)
-            java.lang.String r7 = r0.toString()
-            android.util.Log.e(r2, r7)
-        L9d:
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.content.smartclip.SmartClipDataCropperImpl.writeStringToFile(java.lang.String, java.lang.String):boolean");
+    private boolean writeStringToFile(String str, String str2) throws Throwable {
+        StringBuilder sb;
+        boolean z;
+        FileOutputStream fileOutputStream;
+        Log.d(TAG, "writeStringToFile : " + str);
+        File file = new File(str);
+        FileOutputStream fileOutputStream2 = null;
+        try {
+            try {
+                fileOutputStream = new FileOutputStream(file);
+            } catch (Exception e) {
+                e = e;
+            }
+        } catch (Throwable th) {
+            th = th;
+        }
+        try {
+            fileOutputStream.write(str2.getBytes("UTF-8"));
+            try {
+                fileOutputStream.close();
+                z = true;
+            } catch (Exception e2) {
+                e = e2;
+                sb = new StringBuilder("writeStringToFile : File close failed! ");
+                sb.append(e);
+                Log.e(TAG, sb.toString());
+                z = false;
+                file.setReadable(true, false);
+                if (!file.setWritable(true, false)) {
+                }
+                return z;
+            }
+        } catch (Exception e3) {
+            e = e3;
+            fileOutputStream2 = fileOutputStream;
+            Log.e(TAG, "writeStringToFile : File write failed! " + e);
+            if (fileOutputStream2 != null) {
+                try {
+                    fileOutputStream2.close();
+                } catch (Exception e4) {
+                    e = e4;
+                    sb = new StringBuilder("writeStringToFile : File close failed! ");
+                    sb.append(e);
+                    Log.e(TAG, sb.toString());
+                    z = false;
+                    file.setReadable(true, false);
+                    if (!file.setWritable(true, false)) {
+                    }
+                    return z;
+                }
+            }
+            z = false;
+            file.setReadable(true, false);
+            if (!file.setWritable(true, false)) {
+            }
+            return z;
+        } catch (Throwable th2) {
+            th = th2;
+            fileOutputStream2 = fileOutputStream;
+            if (fileOutputStream2 != null) {
+                try {
+                    fileOutputStream2.close();
+                } catch (Exception e5) {
+                    Log.e(TAG, "writeStringToFile : File close failed! " + e5);
+                }
+            }
+            throw th;
+        }
+        file.setReadable(true, false);
+        if (!file.setWritable(true, false)) {
+            Log.e(TAG, "Failed to set writable permission for file: " + str);
+        }
+        return z;
     }
 
     private String allocateMetaTagFilePath() {
@@ -911,130 +898,191 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:32:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00c8  */
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00cf  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00ff  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x009d  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x009b  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x009d  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x00b2  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00c8  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x00cf  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x00ff  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean traverseView(android.view.View r10, com.samsung.android.content.smartclip.SemSmartClipCroppedArea r11, com.samsung.android.content.smartclip.SemSmartClipDataRepository r12, com.samsung.android.content.smartclip.SmartClipDataElementImpl r13) {
-        /*
-            Method dump skipped, instructions count: 304
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.content.smartclip.SmartClipDataCropperImpl.traverseView(android.view.View, com.samsung.android.content.smartclip.SemSmartClipCroppedArea, com.samsung.android.content.smartclip.SemSmartClipDataRepository, com.samsung.android.content.smartclip.SmartClipDataElementImpl):boolean");
+    private boolean traverseView(View view, SemSmartClipCroppedArea semSmartClipCroppedArea, SemSmartClipDataRepository semSmartClipDataRepository, SmartClipDataElementImpl smartClipDataElementImpl) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        int iSemExtractSmartClipData;
+        boolean z;
+        Rect opaqueBackgroundRect;
+        int size;
+        int i;
+        if (view != null && view.getVisibility() == 0 && view.getWidth() > 0 && view.getHeight() > 0) {
+            Rect viewBoundsOnScreen = getViewBoundsOnScreen(view);
+            if (Rect.intersects(semSmartClipCroppedArea.getRect(), viewBoundsOnScreen)) {
+                SmartClipDataElementImpl smartClipDataElementImpl2 = new SmartClipDataElementImpl(semSmartClipDataRepository, view, viewBoundsOnScreen);
+                SmartClipMetaTagArrayImpl smartClipMetaTagArrayImpl = (SmartClipMetaTagArrayImpl) view.semGetSmartClipTags();
+                if (smartClipMetaTagArrayImpl != null) {
+                    smartClipDataElementImpl2.setTagTable(smartClipMetaTagArrayImpl.getCopy());
+                }
+                SemSmartClipDataExtractionListener semSmartClipDataExtractionListenerSemGetSmartClipDataExtractionListener = view.semGetSmartClipDataExtractionListener();
+                if (this.mSupportThirdPartyExtractionInterface && isSupportThirdPartyExtractionInterface(view)) {
+                    iSemExtractSmartClipData = extractDefaultSmartClipData_ThirdPartyInterface(view, semSmartClipCroppedArea, smartClipDataElementImpl2);
+                } else if (semSmartClipDataExtractionListenerSemGetSmartClipDataExtractionListener != null) {
+                    iSemExtractSmartClipData = semSmartClipDataExtractionListenerSemGetSmartClipDataExtractionListener.onExtractSmartClipData(view, semSmartClipCroppedArea, smartClipDataElementImpl2);
+                } else {
+                    iSemExtractSmartClipData = view.semExtractSmartClipData(semSmartClipCroppedArea, smartClipDataElementImpl2);
+                }
+                for (SmartClipDataElementImpl smartClipDataElementImplTraverseNextElement = smartClipDataElementImpl2; smartClipDataElementImplTraverseNextElement != null; smartClipDataElementImplTraverseNextElement = smartClipDataElementImplTraverseNextElement.traverseNextElement(smartClipDataElementImpl2)) {
+                }
+                int mainResultFromExtractionResult = getMainResultFromExtractionResult(iSemExtractSmartClipData);
+                if (mainResultFromExtractionResult == 0) {
+                    smartClipDataElementImpl2.clearMetaData();
+                } else {
+                    if (mainResultFromExtractionResult != 1) {
+                        if (mainResultFromExtractionResult != 2) {
+                            Log.e(TAG, "Unknown main extraction result value : " + mainResultFromExtractionResult + " / View = " + view.toString());
+                            smartClipDataElementImpl2.clearMetaData();
+                        } else {
+                            this.mPendingElements.add(smartClipDataElementImpl2);
+                            z = true;
+                        }
+                    }
+                    boolean z2 = (iSemExtractSmartClipData & 256) == 0;
+                    if ((view instanceof ViewGroup) && !z2) {
+                        ArrayList<View> childViewsByZOrder = getChildViewsByZOrder((ViewGroup) view);
+                        size = childViewsByZOrder.size();
+                        for (i = 0; i < size; i++) {
+                            if (traverseView(childViewsByZOrder.get(i), semSmartClipCroppedArea, semSmartClipDataRepository, smartClipDataElementImpl2)) {
+                                z = true;
+                            }
+                        }
+                    }
+                    if (!smartClipDataElementImpl2.isEmptyTag(true)) {
+                        z = true;
+                    }
+                    if (!smartClipDataElementImpl2.isEmptyTag(false)) {
+                        if (DEBUG) {
+                            Log.d(TAG, "traverseView : Contains meta data : " + smartClipDataElementImpl2.getDumpString(false, true));
+                        } else {
+                            Log.d(TAG, "traverseView : Contains meta data : " + smartClipDataElementImpl2.getDumpString(false, false));
+                        }
+                    }
+                    if (z) {
+                        if ((view instanceof FrameLayout) || (view instanceof RelativeLayout)) {
+                            SmartClipDataElementImpl lastChild = smartClipDataElementImpl2.getLastChild();
+                            Rect rect = null;
+                            while (lastChild != null) {
+                                SmartClipDataElementImpl prevSibling = lastChild.getPrevSibling();
+                                if (!(rect != null ? removeSmartClipDataElementByRect(lastChild, rect) : false) && (opaqueBackgroundRect = getOpaqueBackgroundRect(lastChild)) != null) {
+                                    if (rect == null) {
+                                        rect = opaqueBackgroundRect;
+                                    } else {
+                                        rect.union(opaqueBackgroundRect);
+                                    }
+                                }
+                                lastChild = prevSibling;
+                            }
+                        }
+                        smartClipDataElementImpl.addChild(smartClipDataElementImpl2);
+                    }
+                    return z;
+                }
+                z = false;
+                if ((iSemExtractSmartClipData & 256) == 0) {
+                }
+                if (view instanceof ViewGroup) {
+                    ArrayList<View> childViewsByZOrder2 = getChildViewsByZOrder((ViewGroup) view);
+                    size = childViewsByZOrder2.size();
+                    while (i < size) {
+                    }
+                }
+                if (!smartClipDataElementImpl2.isEmptyTag(true)) {
+                }
+                if (!smartClipDataElementImpl2.isEmptyTag(false)) {
+                }
+                if (z) {
+                }
+                return z;
+            }
+        }
+        return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0095  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00a6 A[EDGE_INSN: B:40:0x00a6->B:41:0x00a6 BREAK  A[LOOP:1: B:34:0x0093->B:37:0x00a3], SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00b0  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0081  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x0095  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00ad  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00b0  */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x00a6 A[EDGE_INSN: B:51:0x00a6->B:42:0x00a6 BREAK  A[LOOP:1: B:37:0x0093->B:41:0x00a3], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean traverseViewForDragAndDrop(android.view.View r9, com.samsung.android.content.smartclip.SemSmartClipCroppedArea r10, com.samsung.android.content.smartclip.SemSmartClipDataRepository r11, com.samsung.android.content.smartclip.SmartClipDataElementImpl r12) {
-        /*
-            r8 = this;
-            r0 = 0
-            if (r9 == 0) goto Lb4
-            int r1 = r9.getVisibility()
-            if (r1 != 0) goto Lb4
-            int r1 = r9.getWidth()
-            if (r1 <= 0) goto Lb4
-            int r1 = r9.getHeight()
-            if (r1 <= 0) goto Lb4
-            android.graphics.Rect r1 = r8.getViewBoundsOnScreen(r9)
-            android.graphics.Rect r2 = r10.getRect()
-            boolean r2 = android.graphics.Rect.intersects(r2, r1)
-            if (r2 == 0) goto Lb4
-            com.samsung.android.content.smartclip.SmartClipDataElementImpl r2 = new com.samsung.android.content.smartclip.SmartClipDataElementImpl
-            r2.<init>(r11, r9, r1)
-            com.samsung.android.content.smartclip.SemSmartClipDataExtractionListener r1 = r9.semGetSmartClipDataExtractionListener()
-            if (r1 == 0) goto L37
-            boolean r3 = r9 instanceof android.view.SurfaceView
-            if (r3 == 0) goto L37
-            int r1 = r1.onExtractSmartClipData(r9, r10, r2)
-            goto L3b
-        L37:
-            int r1 = r9.semExtractSmartClipData(r10, r2)
-        L3b:
-            r3 = r2
-        L3c:
-            if (r3 == 0) goto L43
-            com.samsung.android.content.smartclip.SmartClipDataElementImpl r3 = r3.traverseNextElement(r2)
-            goto L3c
-        L43:
-            int r3 = r8.getMainResultFromExtractionResult(r1)
-            r4 = 1
-            if (r3 == 0) goto L79
-            if (r3 == r4) goto L7c
-            r5 = 2
-            if (r3 == r5) goto L72
-            java.lang.String r5 = r9.toString()
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            java.lang.String r7 = "Unknown main extraction result value : "
-            r6.<init>(r7)
-            r6.append(r3)
-            java.lang.String r3 = " / View = "
-            r6.append(r3)
-            r6.append(r5)
-            java.lang.String r3 = r6.toString()
-            java.lang.String r5 = "SmartClipDataCropperImpl"
-            android.util.Log.e(r5, r3)
-            r2.clearMetaData()
-            goto L7c
-        L72:
-            java.util.ArrayList<com.samsung.android.content.smartclip.SmartClipDataElementImpl> r3 = r8.mPendingElements
-            r3.add(r2)
-            r3 = r4
-            goto L7d
-        L79:
-            r2.clearMetaData()
-        L7c:
-            r3 = r0
-        L7d:
-            r1 = r1 & 256(0x100, float:3.59E-43)
-            if (r1 == 0) goto L82
-            r0 = r4
-        L82:
-            boolean r1 = r9 instanceof android.view.ViewGroup
-            if (r1 == 0) goto La6
-            if (r0 != 0) goto La6
-            android.view.ViewGroup r9 = (android.view.ViewGroup) r9
-            java.util.ArrayList r9 = r8.getChildViewsByZOrder(r9)
-            int r0 = r9.size()
-            int r0 = r0 - r4
-        L93:
-            if (r0 < 0) goto La6
-            java.lang.Object r1 = r9.get(r0)
-            android.view.View r1 = (android.view.View) r1
-            boolean r1 = r8.traverseViewForDragAndDrop(r1, r10, r11, r2)
-            if (r1 == 0) goto La3
-            r3 = r4
-            goto La6
-        La3:
-            int r0 = r0 + (-1)
-            goto L93
-        La6:
-            boolean r8 = r2.isEmptyTag(r4)
-            if (r8 != 0) goto Lad
-            goto Lae
-        Lad:
-            r4 = r3
-        Lae:
-            if (r4 == 0) goto Lb3
-            r12.addChild(r2)
-        Lb3:
-            return r4
-        Lb4:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.content.smartclip.SmartClipDataCropperImpl.traverseViewForDragAndDrop(android.view.View, com.samsung.android.content.smartclip.SemSmartClipCroppedArea, com.samsung.android.content.smartclip.SemSmartClipDataRepository, com.samsung.android.content.smartclip.SmartClipDataElementImpl):boolean");
+    private boolean traverseViewForDragAndDrop(View view, SemSmartClipCroppedArea semSmartClipCroppedArea, SemSmartClipDataRepository semSmartClipDataRepository, SmartClipDataElementImpl smartClipDataElementImpl) {
+        int iSemExtractSmartClipData;
+        boolean z;
+        boolean z2;
+        int size;
+        if (view != null && view.getVisibility() == 0 && view.getWidth() > 0 && view.getHeight() > 0) {
+            Rect viewBoundsOnScreen = getViewBoundsOnScreen(view);
+            if (Rect.intersects(semSmartClipCroppedArea.getRect(), viewBoundsOnScreen)) {
+                SmartClipDataElementImpl smartClipDataElementImpl2 = new SmartClipDataElementImpl(semSmartClipDataRepository, view, viewBoundsOnScreen);
+                SemSmartClipDataExtractionListener semSmartClipDataExtractionListenerSemGetSmartClipDataExtractionListener = view.semGetSmartClipDataExtractionListener();
+                if (semSmartClipDataExtractionListenerSemGetSmartClipDataExtractionListener != null && (view instanceof SurfaceView)) {
+                    iSemExtractSmartClipData = semSmartClipDataExtractionListenerSemGetSmartClipDataExtractionListener.onExtractSmartClipData(view, semSmartClipCroppedArea, smartClipDataElementImpl2);
+                } else {
+                    iSemExtractSmartClipData = view.semExtractSmartClipData(semSmartClipCroppedArea, smartClipDataElementImpl2);
+                }
+                for (SmartClipDataElementImpl smartClipDataElementImplTraverseNextElement = smartClipDataElementImpl2; smartClipDataElementImplTraverseNextElement != null; smartClipDataElementImplTraverseNextElement = smartClipDataElementImplTraverseNextElement.traverseNextElement(smartClipDataElementImpl2)) {
+                }
+                int mainResultFromExtractionResult = getMainResultFromExtractionResult(iSemExtractSmartClipData);
+                if (mainResultFromExtractionResult == 0) {
+                    smartClipDataElementImpl2.clearMetaData();
+                } else {
+                    if (mainResultFromExtractionResult != 1) {
+                        if (mainResultFromExtractionResult == 2) {
+                            this.mPendingElements.add(smartClipDataElementImpl2);
+                            z = true;
+                        } else {
+                            Log.e(TAG, "Unknown main extraction result value : " + mainResultFromExtractionResult + " / View = " + view.toString());
+                            smartClipDataElementImpl2.clearMetaData();
+                        }
+                    }
+                    boolean z3 = (iSemExtractSmartClipData & 256) != 0;
+                    if ((view instanceof ViewGroup) && !z3) {
+                        ArrayList<View> childViewsByZOrder = getChildViewsByZOrder((ViewGroup) view);
+                        size = childViewsByZOrder.size() - 1;
+                        while (true) {
+                            if (size < 0) {
+                                break;
+                            }
+                            if (traverseViewForDragAndDrop(childViewsByZOrder.get(size), semSmartClipCroppedArea, semSmartClipDataRepository, smartClipDataElementImpl2)) {
+                                z = true;
+                                break;
+                            }
+                            size--;
+                        }
+                    }
+                    z2 = smartClipDataElementImpl2.isEmptyTag(true) ? z : true;
+                    if (z2) {
+                        smartClipDataElementImpl.addChild(smartClipDataElementImpl2);
+                    }
+                    return z2;
+                }
+                z = false;
+                if ((iSemExtractSmartClipData & 256) != 0) {
+                }
+                if (view instanceof ViewGroup) {
+                    ArrayList<View> childViewsByZOrder2 = getChildViewsByZOrder((ViewGroup) view);
+                    size = childViewsByZOrder2.size() - 1;
+                    while (true) {
+                        if (size < 0) {
+                        }
+                        size--;
+                    }
+                }
+                if (smartClipDataElementImpl2.isEmptyTag(true)) {
+                }
+                if (z2) {
+                }
+                return z2;
+            }
+        }
+        return false;
     }
 }

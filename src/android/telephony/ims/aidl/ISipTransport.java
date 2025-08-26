@@ -55,9 +55,9 @@ public interface ISipTransport extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISipTransport.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISipTransport)) {
-                return (ISipTransport) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISipTransport.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISipTransport)) {
+                return (ISipTransport) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,17 +87,17 @@ public interface ISipTransport extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 DelegateRequest delegateRequest = (DelegateRequest) parcel.readTypedObject(DelegateRequest.CREATOR);
-                ISipDelegateStateCallback asInterface = ISipDelegateStateCallback.Stub.asInterface(parcel.readStrongBinder());
-                ISipDelegateMessageCallback asInterface2 = ISipDelegateMessageCallback.Stub.asInterface(parcel.readStrongBinder());
+                ISipDelegateStateCallback iSipDelegateStateCallbackAsInterface = ISipDelegateStateCallback.Stub.asInterface(parcel.readStrongBinder());
+                ISipDelegateMessageCallback iSipDelegateMessageCallbackAsInterface = ISipDelegateMessageCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                createSipDelegate(readInt, delegateRequest, asInterface, asInterface2);
+                createSipDelegate(i3, delegateRequest, iSipDelegateStateCallbackAsInterface, iSipDelegateMessageCallbackAsInterface);
             } else if (i == 2) {
-                ISipDelegate asInterface3 = ISipDelegate.Stub.asInterface(parcel.readStrongBinder());
-                int readInt2 = parcel.readInt();
+                ISipDelegate iSipDelegateAsInterface = ISipDelegate.Stub.asInterface(parcel.readStrongBinder());
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                destroySipDelegate(asInterface3, readInt2);
+                destroySipDelegate(iSipDelegateAsInterface, i4);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -122,29 +122,29 @@ public interface ISipTransport extends IInterface {
 
             @Override // android.telephony.ims.aidl.ISipTransport
             public void createSipDelegate(int i, DelegateRequest delegateRequest, ISipDelegateStateCallback iSipDelegateStateCallback, ISipDelegateMessageCallback iSipDelegateMessageCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipTransport.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(delegateRequest, 0);
-                    obtain.writeStrongInterface(iSipDelegateStateCallback);
-                    obtain.writeStrongInterface(iSipDelegateMessageCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipTransport.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(delegateRequest, 0);
+                    parcelObtain.writeStrongInterface(iSipDelegateStateCallback);
+                    parcelObtain.writeStrongInterface(iSipDelegateMessageCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISipTransport
             public void destroySipDelegate(ISipDelegate iSipDelegate, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipTransport.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSipDelegate);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipTransport.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSipDelegate);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

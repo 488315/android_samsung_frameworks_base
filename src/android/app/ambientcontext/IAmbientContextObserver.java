@@ -53,9 +53,9 @@ public interface IAmbientContextObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAmbientContextObserver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAmbientContextObserver)) {
-                return (IAmbientContextObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAmbientContextObserver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAmbientContextObserver)) {
+                return (IAmbientContextObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,13 +85,13 @@ public interface IAmbientContextObserver extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(AmbientContextEvent.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AmbientContextEvent.CREATOR);
                 parcel.enforceNoDataAvail();
-                onEvents(createTypedArrayList);
+                onEvents(arrayListCreateTypedArrayList);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onRegistrationComplete(readInt);
+                onRegistrationComplete(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -116,25 +116,25 @@ public interface IAmbientContextObserver extends IInterface {
 
             @Override // android.app.ambientcontext.IAmbientContextObserver
             public void onEvents(List<AmbientContextEvent> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAmbientContextObserver.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAmbientContextObserver.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ambientcontext.IAmbientContextObserver
             public void onRegistrationComplete(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAmbientContextObserver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAmbientContextObserver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

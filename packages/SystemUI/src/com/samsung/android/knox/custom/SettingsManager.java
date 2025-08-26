@@ -12,7 +12,6 @@ import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SettingsManager {
     public static final String TAG = "SettingsManager";
@@ -24,21 +23,17 @@ public class SettingsManager {
     }
 
     public static synchronized SettingsManager getInstance() {
-        SettingsManager settingsManager;
-        synchronized (SettingsManager.class) {
-            try {
-                if (sSettingsManager == null) {
-                    sSettingsManager = new SettingsManager();
-                }
-                if (sContextInfo == null) {
-                    sContextInfo = new ContextInfo();
-                }
-                settingsManager = sSettingsManager;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sSettingsManager == null) {
+                sSettingsManager = new SettingsManager();
             }
+            if (sContextInfo == null) {
+                sContextInfo = new ContextInfo();
+            }
+        } catch (Throwable th) {
+            throw th;
         }
-        return settingsManager;
+        return sSettingsManager;
     }
 
     public boolean addRoleHolder(String str, String str2) {
@@ -743,19 +738,15 @@ public class SettingsManager {
     }
 
     public static synchronized SettingsManager getInstance(int i) {
-        SettingsManager settingsManager;
-        synchronized (SettingsManager.class) {
-            try {
-                if (sSettingsManager == null) {
-                    sSettingsManager = new SettingsManager();
-                }
-                sContextInfo = new ContextInfo(Process.myUid(), false, i);
-                settingsManager = sSettingsManager;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sSettingsManager == null) {
+                sSettingsManager = new SettingsManager();
             }
+            sContextInfo = new ContextInfo(Process.myUid(), false, i);
+        } catch (Throwable th) {
+            throw th;
         }
-        return settingsManager;
+        return sSettingsManager;
     }
 
     public int setWifiState(boolean z, String str, String str2, String str3) {

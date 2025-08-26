@@ -1,6 +1,8 @@
 package android.content;
 
+import android.net.Uri;
 import java.util.ArrayList;
+import java.util.List;
 
 /* loaded from: classes.dex */
 public class UriMatcher {
@@ -28,7 +30,7 @@ public class UriMatcher {
     }
 
     public void addURI(String str, String str2, int i) {
-        String[] strArr;
+        String[] strArrSplit;
         if (i < 0) {
             throw new IllegalArgumentException("code " + i + " is invalid: it must be positive");
         }
@@ -36,14 +38,14 @@ public class UriMatcher {
             if (str2.length() > 1 && str2.charAt(0) == '/') {
                 str2 = str2.substring(1);
             }
-            strArr = str2.split("/");
+            strArrSplit = str2.split("/");
         } else {
-            strArr = null;
+            strArrSplit = null;
         }
-        int length = strArr != null ? strArr.length : 0;
+        int length = strArrSplit != null ? strArrSplit.length : 0;
         int i2 = -1;
         while (i2 < length) {
-            String str3 = i2 < 0 ? str : strArr[i2];
+            String str3 = i2 < 0 ? str : strArrSplit[i2];
             ArrayList<UriMatcher> arrayList = this.mChildren;
             int size = arrayList.size();
             int i3 = 0;
@@ -59,9 +61,9 @@ public class UriMatcher {
                 i3++;
             }
             if (i3 == size) {
-                UriMatcher createChild = createChild(str3);
-                this.mChildren.add(createChild);
-                this = createChild;
+                UriMatcher uriMatcherCreateChild = createChild(str3);
+                this.mChildren.add(uriMatcherCreateChild);
+                this = uriMatcherCreateChild;
             }
             i2++;
         }
@@ -79,96 +81,61 @@ public class UriMatcher {
         return new UriMatcher(0, str);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0040, code lost:
-    
-        if (r10 != 2) goto L36;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:42:0x0060, code lost:
-    
-        if (r9.mText.equals(r4) != false) goto L35;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0062  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x0066 A[LOOP:1: B:17:0x0030->B:38:0x0066, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x0069 A[EDGE_INSN: B:48:0x0069->B:39:0x0069 BREAK  A[LOOP:1: B:17:0x0030->B:38:0x0066], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int match(android.net.Uri r15) {
-        /*
-            r14 = this;
-            java.util.List r0 = r15.getPathSegments()
-            int r1 = r0.size()
-            if (r1 != 0) goto L13
-            java.lang.String r2 = r15.getAuthority()
-            if (r2 != 0) goto L13
-            int r14 = r14.mCode
-            return r14
-        L13:
-            r2 = -1
-            r3 = r2
-        L15:
-            if (r3 >= r1) goto L70
-            if (r3 >= 0) goto L1e
-            java.lang.String r4 = r15.getAuthority()
-            goto L24
-        L1e:
-            java.lang.Object r4 = r0.get(r3)
-            java.lang.String r4 = (java.lang.String) r4
-        L24:
-            java.util.ArrayList<android.content.UriMatcher> r5 = r14.mChildren
-            if (r5 != 0) goto L29
-            goto L70
-        L29:
-            int r14 = r5.size()
-            r6 = 0
-            r7 = 0
-            r8 = r6
-        L30:
-            if (r8 >= r14) goto L69
-            java.lang.Object r9 = r5.get(r8)
-            android.content.UriMatcher r9 = (android.content.UriMatcher) r9
-            int r10 = r9.mWhich
-            if (r10 == 0) goto L5a
-            r11 = 1
-            if (r10 == r11) goto L43
-            r11 = 2
-            if (r10 == r11) goto L62
-            goto L63
-        L43:
-            int r10 = r4.length()
-            r11 = r6
-        L48:
-            if (r11 >= r10) goto L62
-            char r12 = r4.charAt(r11)
-            r13 = 48
-            if (r12 < r13) goto L63
-            r13 = 57
-            if (r12 <= r13) goto L57
-            goto L63
-        L57:
-            int r11 = r11 + 1
-            goto L48
-        L5a:
-            java.lang.String r10 = r9.mText
-            boolean r10 = r10.equals(r4)
-            if (r10 == 0) goto L63
-        L62:
-            r7 = r9
-        L63:
-            if (r7 == 0) goto L66
-            goto L69
-        L66:
-            int r8 = r8 + 1
-            goto L30
-        L69:
-            r14 = r7
-            if (r14 != 0) goto L6d
-            return r2
-        L6d:
-            int r3 = r3 + 1
-            goto L15
-        L70:
-            int r14 = r14.mCode
-            return r14
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.UriMatcher.match(android.net.Uri):int");
+    public int match(Uri uri) {
+        List<String> pathSegments = uri.getPathSegments();
+        int size = pathSegments.size();
+        if (size == 0 && uri.getAuthority() == null) {
+            return this.mCode;
+        }
+        int i = -1;
+        while (i < size) {
+            String authority = i < 0 ? uri.getAuthority() : pathSegments.get(i);
+            ArrayList<UriMatcher> arrayList = this.mChildren;
+            if (arrayList == null) {
+                break;
+            }
+            int size2 = arrayList.size();
+            UriMatcher uriMatcher = null;
+            for (int i2 = 0; i2 < size2; i2++) {
+                UriMatcher uriMatcher2 = arrayList.get(i2);
+                int i3 = uriMatcher2.mWhich;
+                if (i3 == 0) {
+                    if (uriMatcher2.mText.equals(authority)) {
+                    }
+                    if (uriMatcher != null) {
+                    }
+                } else if (i3 != 1) {
+                    if (i3 == 2) {
+                        uriMatcher = uriMatcher2;
+                    }
+                    if (uriMatcher != null) {
+                        break;
+                    }
+                } else {
+                    int length = authority.length();
+                    for (int i4 = 0; i4 < length; i4++) {
+                        char cCharAt = authority.charAt(i4);
+                        if (cCharAt < '0' || cCharAt > '9') {
+                            break;
+                        }
+                    }
+                    uriMatcher = uriMatcher2;
+                    if (uriMatcher != null) {
+                    }
+                }
+            }
+            this = uriMatcher;
+            if (this == null) {
+                return -1;
+            }
+            i++;
+        }
+        return this.mCode;
     }
 }

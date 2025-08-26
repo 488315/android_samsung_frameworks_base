@@ -42,9 +42,9 @@ public class DSASigner extends SignatureSpi implements PKCSObjectIdentifiers, X5
 
     @Override // java.security.SignatureSpi
     protected void engineInitVerify(PublicKey publicKey) throws InvalidKeyException {
-        AsymmetricKeyParameter generatePublicKeyParameter = DSAUtil.generatePublicKeyParameter(publicKey);
+        AsymmetricKeyParameter asymmetricKeyParameterGeneratePublicKeyParameter = DSAUtil.generatePublicKeyParameter(publicKey);
         this.digest.reset();
-        this.signer.init(false, generatePublicKeyParameter);
+        this.signer.init(false, asymmetricKeyParameterGeneratePublicKeyParameter);
     }
 
     @Override // java.security.SignatureSpi
@@ -55,13 +55,13 @@ public class DSASigner extends SignatureSpi implements PKCSObjectIdentifiers, X5
 
     @Override // java.security.SignatureSpi
     protected void engineInitSign(PrivateKey privateKey) throws InvalidKeyException {
-        CipherParameters generatePrivateKeyParameter = DSAUtil.generatePrivateKeyParameter(privateKey);
-        checkKey(((DSAKeyParameters) generatePrivateKeyParameter).getParameters());
+        CipherParameters cipherParametersGeneratePrivateKeyParameter = DSAUtil.generatePrivateKeyParameter(privateKey);
+        checkKey(((DSAKeyParameters) cipherParametersGeneratePrivateKeyParameter).getParameters());
         if (this.random != null) {
-            generatePrivateKeyParameter = new ParametersWithRandom(generatePrivateKeyParameter, this.random);
+            cipherParametersGeneratePrivateKeyParameter = new ParametersWithRandom(cipherParametersGeneratePrivateKeyParameter, this.random);
         }
         this.digest.reset();
-        this.signer.init(true, generatePrivateKeyParameter);
+        this.signer.init(true, cipherParametersGeneratePrivateKeyParameter);
     }
 
     @Override // java.security.SignatureSpi
@@ -79,8 +79,8 @@ public class DSASigner extends SignatureSpi implements PKCSObjectIdentifiers, X5
         byte[] bArr = new byte[this.digest.getDigestSize()];
         this.digest.doFinal(bArr, 0);
         try {
-            BigInteger[] generateSignature = this.signer.generateSignature(bArr);
-            return this.encoding.encode(this.signer.getOrder(), generateSignature[0], generateSignature[1]);
+            BigInteger[] bigIntegerArrGenerateSignature = this.signer.generateSignature(bArr);
+            return this.encoding.encode(this.signer.getOrder(), bigIntegerArrGenerateSignature[0], bigIntegerArrGenerateSignature[1]);
         } catch (Exception e) {
             throw new SignatureException(e.toString());
         }
@@ -91,8 +91,8 @@ public class DSASigner extends SignatureSpi implements PKCSObjectIdentifiers, X5
         byte[] bArr2 = new byte[this.digest.getDigestSize()];
         this.digest.doFinal(bArr2, 0);
         try {
-            BigInteger[] decode = this.encoding.decode(this.signer.getOrder(), bArr);
-            return this.signer.verifySignature(bArr2, decode[0], decode[1]);
+            BigInteger[] bigIntegerArrDecode = this.encoding.decode(this.signer.getOrder(), bArr);
+            return this.signer.verifySignature(bArr2, bigIntegerArrDecode[0], bigIntegerArrDecode[1]);
         } catch (Exception unused) {
             throw new SignatureException("error decoding signature bytes.");
         }
@@ -104,22 +104,22 @@ public class DSASigner extends SignatureSpi implements PKCSObjectIdentifiers, X5
     }
 
     protected void checkKey(DSAParameters dSAParameters) throws InvalidKeyException {
-        int bitLength = dSAParameters.getP().bitLength();
-        int bitLength2 = dSAParameters.getQ().bitLength();
+        int iBitLength = dSAParameters.getP().bitLength();
+        int iBitLength2 = dSAParameters.getQ().bitLength();
         int digestSize = this.digest.getDigestSize();
-        if (bitLength < 1024 || bitLength > 3072 || bitLength % 1024 != 0) {
+        if (iBitLength < 1024 || iBitLength > 3072 || iBitLength % 1024 != 0) {
             throw new InvalidKeyException("valueL values must be between 1024 and 3072 and a multiple of 1024");
         }
-        if (bitLength == 1024 && bitLength2 != 160) {
+        if (iBitLength == 1024 && iBitLength2 != 160) {
             throw new InvalidKeyException("valueN must be 160 for valueL = 1024");
         }
-        if (bitLength == 2048 && bitLength2 != 224 && bitLength2 != 256) {
+        if (iBitLength == 2048 && iBitLength2 != 224 && iBitLength2 != 256) {
             throw new InvalidKeyException("valueN must be 224 or 256 for valueL = 2048");
         }
-        if (bitLength == 3072 && bitLength2 != 256) {
+        if (iBitLength == 3072 && iBitLength2 != 256) {
             throw new InvalidKeyException("valueN must be 256 for valueL = 3072");
         }
-        if (!(this.digest instanceof NullDigest) && bitLength2 > digestSize * 8) {
+        if (!(this.digest instanceof NullDigest) && iBitLength2 > digestSize * 8) {
             throw new InvalidKeyException("Key is too strong for this signature algorithm");
         }
     }

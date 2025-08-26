@@ -12,7 +12,6 @@ import com.samsung.android.visual.ai.sdkcommon.IDpsC2pa;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class C2paServiceExecutor extends ServiceExecutor {
     private static final String TAG = "ScsApi@C2PAServiceExecutor";
@@ -42,15 +41,15 @@ public class C2paServiceExecutor extends ServiceExecutor {
     }
 
     @Override // com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener
-    public void onConnected(ComponentName componentName, IBinder iBinder) {
+    public void onConnected(ComponentName componentName, IBinder iBinder) throws RemoteException {
         IDpsC2pa proxy;
         Log.d(TAG, "onServiceConnected");
         int i = IDpsC2pa.Stub.$r8$clinit;
         if (iBinder == null) {
             proxy = null;
         } else {
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-            proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof IDpsC2pa)) ? new IDpsC2pa.Stub.Proxy(iBinder) : (IDpsC2pa) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
+            proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IDpsC2pa)) ? new IDpsC2pa.Stub.Proxy(iBinder) : (IDpsC2pa) iInterfaceQueryLocalInterface;
         }
         this.mC2PAService = proxy;
         try {

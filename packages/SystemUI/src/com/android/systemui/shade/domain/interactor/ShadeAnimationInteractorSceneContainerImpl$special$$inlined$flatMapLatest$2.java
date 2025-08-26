@@ -1,12 +1,23 @@
 package com.android.systemui.shade.domain.interactor;
 
+import com.android.compose.animation.scene.ContentKey;
+import com.android.compose.animation.scene.ObservableTransitionState;
+import com.android.compose.animation.scene.SceneKey;
+import com.android.systemui.scene.shared.model.Scenes;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
+import kotlin.jvm.internal.Intrinsics;
+import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeAnimationInteractorSceneContainerImpl$special$$inlined$flatMapLatest$2 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -25,84 +36,119 @@ public final class ShadeAnimationInteractorSceneContainerImpl$special$$inlined$f
         return shadeAnimationInteractorSceneContainerImpl$special$$inlined$flatMapLatest$2.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x0058, code lost:
-    
-        if (kotlin.jvm.internal.Intrinsics.areEqual(r1.toContent, r4) == false) goto L24;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0062  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r6) {
-        /*
-            r5 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r5.label
-            r2 = 1
-            if (r1 == 0) goto L15
-            if (r1 != r2) goto Ld
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L72
-        Ld:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L15:
-            kotlin.ResultKt.throwOnFailure(r6)
-            java.lang.Object r6 = r5.L$0
-            kotlinx.coroutines.flow.FlowCollector r6 = (kotlinx.coroutines.flow.FlowCollector) r6
-            java.lang.Object r1 = r5.L$1
-            com.android.compose.animation.scene.ObservableTransitionState r1 = (com.android.compose.animation.scene.ObservableTransitionState) r1
-            boolean r3 = r1 instanceof com.android.compose.animation.scene.ObservableTransitionState.Idle
-            if (r3 == 0) goto L2c
-            java.lang.Boolean r1 = java.lang.Boolean.FALSE
-            kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 r3 = new kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2
-            r3.<init>(r1)
-            goto L69
-        L2c:
-            boolean r3 = r1 instanceof com.android.compose.animation.scene.ObservableTransitionState.Transition
-            if (r3 == 0) goto L75
-            com.android.compose.animation.scene.ObservableTransitionState$Transition r1 = (com.android.compose.animation.scene.ObservableTransitionState.Transition) r1
-            boolean r3 = r1.isInitiatedByUserInput
-            if (r3 == 0) goto L62
-            com.android.compose.animation.scene.ContentKey r3 = r1.fromContent
-            com.android.compose.animation.scene.SceneKey r4 = com.android.systemui.scene.shared.model.Scenes.Shade
-            boolean r3 = kotlin.jvm.internal.Intrinsics.areEqual(r3, r4)
-            if (r3 != 0) goto L5a
-            com.android.compose.animation.scene.ContentKey r3 = r1.toContent
-            boolean r3 = kotlin.jvm.internal.Intrinsics.areEqual(r3, r4)
-            if (r3 != 0) goto L5a
-            com.android.compose.animation.scene.ContentKey r3 = r1.fromContent
-            com.android.compose.animation.scene.SceneKey r4 = com.android.systemui.scene.shared.model.Scenes.QuickSettings
-            boolean r3 = kotlin.jvm.internal.Intrinsics.areEqual(r3, r4)
-            if (r3 != 0) goto L5a
-            com.android.compose.animation.scene.ContentKey r3 = r1.toContent
-            boolean r3 = kotlin.jvm.internal.Intrinsics.areEqual(r3, r4)
-            if (r3 == 0) goto L62
-        L5a:
-            kotlinx.coroutines.flow.Flow r1 = r1.isUserInputOngoing
-            com.android.systemui.shade.domain.interactor.ShadeAnimationInteractorSceneContainerImpl$isAnyFlingAnimationRunning$lambda$3$$inlined$map$1 r3 = new com.android.systemui.shade.domain.interactor.ShadeAnimationInteractorSceneContainerImpl$isAnyFlingAnimationRunning$lambda$3$$inlined$map$1
-            r3.<init>()
-            goto L69
-        L62:
-            java.lang.Boolean r1 = java.lang.Boolean.FALSE
-            kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 r3 = new kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2
-            r3.<init>(r1)
-        L69:
-            r5.label = r2
-            java.lang.Object r5 = kotlinx.coroutines.flow.FlowKt.emitAll(r6, r3, r5)
-            if (r5 != r0) goto L72
-            return r0
-        L72:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        L75:
-            kotlin.NoWhenBranchMatchedException r5 = new kotlin.NoWhenBranchMatchedException
-            r5.<init>()
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.domain.interactor.ShadeAnimationInteractorSceneContainerImpl$special$$inlined$flatMapLatest$2.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            FlowCollector flowCollector = (FlowCollector) this.L$0;
+            ObservableTransitionState observableTransitionState = (ObservableTransitionState) this.L$1;
+            if (observableTransitionState instanceof ObservableTransitionState.Idle) {
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
+            } else {
+                if (!(observableTransitionState instanceof ObservableTransitionState.Transition)) {
+                    throw new NoWhenBranchMatchedException();
+                }
+                ObservableTransitionState.Transition transition = (ObservableTransitionState.Transition) observableTransitionState;
+                if (transition.isInitiatedByUserInput) {
+                    ContentKey contentKey = transition.fromContent;
+                    SceneKey sceneKey = Scenes.Shade;
+                    if (!Intrinsics.areEqual(contentKey, sceneKey) && !Intrinsics.areEqual(transition.toContent, sceneKey)) {
+                        ContentKey contentKey2 = transition.fromContent;
+                        SceneKey sceneKey2 = Scenes.QuickSettings;
+                        if (!Intrinsics.areEqual(contentKey2, sceneKey2) && !Intrinsics.areEqual(transition.toContent, sceneKey2)) {
+                            flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
+                        }
+                    }
+                    final Flow flow = transition.isUserInputOngoing;
+                    flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new Flow() { // from class: com.android.systemui.shade.domain.interactor.ShadeAnimationInteractorSceneContainerImpl$isAnyFlingAnimationRunning$lambda$3$$inlined$map$1
+
+                        /* renamed from: com.android.systemui.shade.domain.interactor.ShadeAnimationInteractorSceneContainerImpl$isAnyFlingAnimationRunning$lambda$3$$inlined$map$1$2, reason: invalid class name */
+                        public final class AnonymousClass2 implements FlowCollector {
+                            public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                            /* renamed from: com.android.systemui.shade.domain.interactor.ShadeAnimationInteractorSceneContainerImpl$isAnyFlingAnimationRunning$lambda$3$$inlined$map$1$2$1, reason: invalid class name */
+                            public final class AnonymousClass1 extends ContinuationImpl {
+                                Object L$0;
+                                int label;
+                                /* synthetic */ Object result;
+
+                                public AnonymousClass1(Continuation continuation) {
+                                    super(continuation);
+                                }
+
+                                @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                                public final Object invokeSuspend(Object obj) {
+                                    this.result = obj;
+                                    this.label |= Integer.MIN_VALUE;
+                                    return AnonymousClass2.this.emit(null, this);
+                                }
+                            }
+
+                            public AnonymousClass2(FlowCollector flowCollector) {
+                                this.$this_unsafeFlow = flowCollector;
+                            }
+
+                            /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                            @Override // kotlinx.coroutines.flow.FlowCollector
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                            */
+                            public final Object emit(Object obj, Continuation continuation) {
+                                AnonymousClass1 anonymousClass1;
+                                if (continuation instanceof AnonymousClass1) {
+                                    anonymousClass1 = (AnonymousClass1) continuation;
+                                    int i = anonymousClass1.label;
+                                    if ((i & Integer.MIN_VALUE) != 0) {
+                                        anonymousClass1.label = i - Integer.MIN_VALUE;
+                                    } else {
+                                        anonymousClass1 = new AnonymousClass1(continuation);
+                                    }
+                                }
+                                Object obj2 = anonymousClass1.result;
+                                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                                int i2 = anonymousClass1.label;
+                                if (i2 == 0) {
+                                    ResultKt.throwOnFailure(obj2);
+                                    Boolean boolValueOf = Boolean.valueOf(!((Boolean) obj).booleanValue());
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                } else {
+                                    if (i2 != 1) {
+                                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                    }
+                                    ResultKt.throwOnFailure(obj2);
+                                }
+                                return Unit.INSTANCE;
+                            }
+                        }
+
+                        @Override // kotlinx.coroutines.flow.Flow
+                        public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
+                            Object objCollect = flow.collect(new AnonymousClass2(flowCollector2), continuation);
+                            return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                        }
+                    };
+                }
+            }
+            this.label = 1;
+            if (FlowKt.emitAll(flowCollector, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, this) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        return Unit.INSTANCE;
     }
 }

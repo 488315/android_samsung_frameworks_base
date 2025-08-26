@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AutofillNode {
     public static final Companion Companion;
@@ -17,7 +16,6 @@ public final class AutofillNode {
     public final Rect boundingBox;
     public final Function1 onFill;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,11 +47,11 @@ public final class AutofillNode {
     }
 
     public final int hashCode() {
-        int hashCode = this.autofillTypes.hashCode() * 31;
+        int iHashCode = this.autofillTypes.hashCode() * 31;
         Rect rect = this.boundingBox;
-        int hashCode2 = (hashCode + (rect != null ? rect.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (rect != null ? rect.hashCode() : 0)) * 31;
         Function1 function1 = this.onFill;
-        return hashCode2 + (function1 != null ? function1.hashCode() : 0);
+        return iHashCode2 + (function1 != null ? function1.hashCode() : 0);
     }
 
     public AutofillNode(List<? extends AutofillType> list, Rect rect, Function1 function1) {

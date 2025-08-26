@@ -39,7 +39,7 @@ public class RecoverySession implements AutoCloseable {
         return HexEncoding.encodeToString(bArr, false);
     }
 
-    public byte[] start(String str, CertPath certPath, byte[] bArr, byte[] bArr2, List<KeyChainProtectionParams> list) throws CertificateException, InternalRecoveryServiceException {
+    public byte[] start(String str, CertPath certPath, byte[] bArr, byte[] bArr2, List<KeyChainProtectionParams> list) throws InternalRecoveryServiceException, CertificateException {
         try {
             return this.mRecoveryController.getBinder().startRecoverySessionWithCertPath(this.mSessionId, str, RecoveryCertPath.createRecoveryCertPath(certPath), bArr, bArr2, list);
         } catch (RemoteException e) {
@@ -52,7 +52,7 @@ public class RecoverySession implements AutoCloseable {
         }
     }
 
-    public Map<String, Key> recoverKeyChainSnapshot(byte[] bArr, List<WrappedApplicationKey> list) throws SessionExpiredException, DecryptionFailedException, InternalRecoveryServiceException {
+    public Map<String, Key> recoverKeyChainSnapshot(byte[] bArr, List<WrappedApplicationKey> list) throws SessionExpiredException, InternalRecoveryServiceException, DecryptionFailedException {
         try {
             return getKeysFromGrants(this.mRecoveryController.getBinder().recoverKeyChainSnapshot(this.mSessionId, bArr, list));
         } catch (RemoteException e) {

@@ -23,7 +23,6 @@ import com.android.systemui.qs.QSPanelControllerBase$TileRecord;
 import com.android.systemui.qs.SecPageIndicator;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTileLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -41,7 +40,6 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
     public final ArrayList mPages;
     public final ArrayList mTiles;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qp.SubscreenPagedTileLayout$4, reason: invalid class name */
     public class AnonymousClass4 extends PagerAdapter {
         public AnonymousClass4() {
@@ -172,18 +170,18 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
     @Override // androidx.viewpager.widget.ViewPager, android.view.View
     public final void onMeasure(int i, int i2) {
         this.mTiles.size();
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mPageHeight, 1073741824);
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(makeMeasureSpec, "onMeasure, heightMeasureSpec: ", " mDistributeTiles: ");
-        m.append(this.mDistributeTiles);
-        m.append(" mLastMaxHeight: ");
-        m.append(this.mLastMaxHeight);
-        m.append(" mPageHeight: ");
-        m.append(this.mPageHeight);
-        m.append(" mLastMaxWidth: ");
-        m.append(this.mLastMaxWidth);
-        m.append(" MeasureSpec.getSize: ");
-        m.append(View.MeasureSpec.getSize(i));
-        Log.d("SubscreenPagedTileLayout", m.toString());
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mPageHeight, 1073741824);
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iMakeMeasureSpec, "onMeasure, heightMeasureSpec: ", " mDistributeTiles: ");
+        sbM.append(this.mDistributeTiles);
+        sbM.append(" mLastMaxHeight: ");
+        sbM.append(this.mLastMaxHeight);
+        sbM.append(" mPageHeight: ");
+        sbM.append(this.mPageHeight);
+        sbM.append(" mLastMaxWidth: ");
+        sbM.append(this.mLastMaxWidth);
+        sbM.append(" MeasureSpec.getSize: ");
+        sbM.append(View.MeasureSpec.getSize(i));
+        Log.d("SubscreenPagedTileLayout", sbM.toString());
         if (this.mDistributeTiles || this.mLastMaxHeight != this.mPageHeight || this.mLastMaxWidth != View.MeasureSpec.getSize(i)) {
             SubscreenTileLayout subscreenTileLayout = (SubscreenTileLayout) this.mPages.get(0);
             int i3 = this.mPageHeight;
@@ -195,12 +193,12 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
             int size = View.MeasureSpec.getSize(i);
             int i4 = subscreenTileLayout2.mColumns;
             subscreenTileLayout2.mColumns = 4;
-            StringBuilder m2 = MutableObjectList$$ExternalSyntheticOutline0.m(size, size, "updateMaxRowsAndColumns width: ", " availableWidth: ", " mColumns: ");
-            m2.append(subscreenTileLayout2.mColumns);
-            m2.append(" heightMeasureSpec: ");
-            m2.append(View.MeasureSpec.getSize(makeMeasureSpec));
-            Log.d("SubscreenTileLayout", m2.toString());
-            int size2 = View.MeasureSpec.getSize(makeMeasureSpec);
+            StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(size, size, "updateMaxRowsAndColumns width: ", " availableWidth: ", " mColumns: ");
+            sbM2.append(subscreenTileLayout2.mColumns);
+            sbM2.append(" heightMeasureSpec: ");
+            sbM2.append(View.MeasureSpec.getSize(iMakeMeasureSpec));
+            Log.d("SubscreenTileLayout", sbM2.toString());
+            int size2 = View.MeasureSpec.getSize(iMakeMeasureSpec);
             int i5 = subscreenTileLayout2.mRows;
             subscreenTileLayout2.mRows = size2 / subscreenTileLayout2.mMaxCellHeight;
             RecyclerView$$ExternalSyntheticOutline0.m(subscreenTileLayout2.mRows, "SubscreenTileLayout", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size2, "updateMaxRows before availableHeight: ", " mRows: "));
@@ -210,17 +208,17 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
                 this.mDistributeTiles = false;
                 int size3 = this.mTiles.size();
                 SubscreenTileLayout subscreenTileLayout3 = (SubscreenTileLayout) this.mPages.get(0);
-                int max = Math.max(size3 / Math.max(subscreenTileLayout3.mColumns * subscreenTileLayout3.mRows, 1), 1);
+                int iMax = Math.max(size3 / Math.max(subscreenTileLayout3.mColumns * subscreenTileLayout3.mRows, 1), 1);
                 SubscreenTileLayout subscreenTileLayout4 = (SubscreenTileLayout) this.mPages.get(0);
-                if (size3 > Math.max(subscreenTileLayout4.mColumns * subscreenTileLayout4.mRows, 1) * max) {
-                    max++;
+                if (size3 > Math.max(subscreenTileLayout4.mColumns * subscreenTileLayout4.mRows, 1) * iMax) {
+                    iMax++;
                 }
                 int size4 = this.mPages.size();
                 for (int i6 = 0; i6 < size4; i6++) {
                     ((SubscreenTileLayout) this.mPages.get(i6)).removeAllViews();
                 }
-                if (size4 != max) {
-                    while (this.mPages.size() < max) {
+                if (size4 != iMax) {
+                    while (this.mPages.size() < iMax) {
                         Log.d("SubscreenPagedTileLayout", "Adding page");
                         ArrayList arrayList = this.mPages;
                         SubscreenTileLayout subscreenTileLayout5 = (SubscreenTileLayout) LayoutInflater.from(getContext()).inflate(R.layout.qs_subscreen_paged_page, (ViewGroup) this, false);
@@ -228,7 +226,7 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
                         subscreenTileLayout5.mColumns = 4;
                         arrayList.add(subscreenTileLayout5);
                     }
-                    while (this.mPages.size() > max) {
+                    while (this.mPages.size() > iMax) {
                         Log.d("SubscreenPagedTileLayout", "Removing page");
                         ArrayList arrayList2 = this.mPages;
                         arrayList2.remove(arrayList2.size() - 1);
@@ -247,19 +245,19 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
                         setCurrentItem(i7, false);
                         this.mPageToRestore = -1;
                     }
-                    StringBuilder m3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size4, "pages count is changed (", " -> ");
-                    m3.append(this.mPages.size());
-                    m3.append(" ), pageRestore=");
-                    RecyclerView$$ExternalSyntheticOutline0.m(this.mPageToRestore, "SubscreenPagedTileLayout", m3);
+                    StringBuilder sbM3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(size4, "pages count is changed (", " -> ");
+                    sbM3.append(this.mPages.size());
+                    sbM3.append(" ), pageRestore=");
+                    RecyclerView$$ExternalSyntheticOutline0.m(this.mPageToRestore, "SubscreenPagedTileLayout", sbM3);
                 }
                 SubscreenTileLayout subscreenTileLayout6 = (SubscreenTileLayout) this.mPages.get(0);
-                int max2 = Math.max(subscreenTileLayout6.mColumns * subscreenTileLayout6.mRows, 1);
+                int iMax2 = Math.max(subscreenTileLayout6.mColumns * subscreenTileLayout6.mRows, 1);
                 Log.d("SubscreenPagedTileLayout", "Distributing tiles");
                 int size5 = this.mTiles.size();
                 int i8 = 0;
                 for (int i9 = 0; i9 < size5; i9++) {
                     QSPanelControllerBase$TileRecord qSPanelControllerBase$TileRecord = (QSPanelControllerBase$TileRecord) this.mTiles.get(i9);
-                    if (((SubscreenTileLayout) this.mPages.get(i8)).mRecords.size() == max2) {
+                    if (((SubscreenTileLayout) this.mPages.get(i8)).mRecords.size() == iMax2) {
                         i8++;
                     }
                     Log.d("SubscreenPagedTileLayout", "Adding " + qSPanelControllerBase$TileRecord.tile.getClass().getSimpleName() + " to " + i8);
@@ -282,7 +280,7 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
             int i10 = ((SubscreenTileLayout) this.mPages.get(0)).mRows;
             int i11 = ((SubscreenTileLayout) this.mPages.get(0)).mColumns;
             SubscreenTileLayout subscreenTileLayout8 = (SubscreenTileLayout) this.mPages.get(0);
-            int size6 = View.MeasureSpec.getSize(makeMeasureSpec);
+            int size6 = View.MeasureSpec.getSize(iMakeMeasureSpec);
             subscreenTileLayout8.mTileLayoutHeight = size6;
             for (int i12 = 0; i12 < this.mPages.size(); i12++) {
                 SubscreenTileLayout subscreenTileLayout9 = (SubscreenTileLayout) this.mPages.get(i12);
@@ -291,7 +289,7 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
                 subscreenTileLayout9.mTileLayoutHeight = size6;
             }
         }
-        super.onMeasure(i, makeMeasureSpec);
+        super.onMeasure(i, iMakeMeasureSpec);
     }
 
     @Override // android.view.View
@@ -320,7 +318,7 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
         updateListening$1();
     }
 
-    public final void setPageIndicator(SecPageIndicator secPageIndicator) {
+    public final void setPageIndicator(SecPageIndicator secPageIndicator) throws Resources.NotFoundException {
         ArrayList arrayList;
         this.mPageIndicator = secPageIndicator;
         if (secPageIndicator == null || (arrayList = this.mPages) == null || arrayList.size() <= 1) {
@@ -361,15 +359,15 @@ public class SubscreenPagedTileLayout extends ViewPager implements QSPanel.QSTil
     }
 
     public final boolean updateResources() {
-        boolean z = false;
+        boolean zUpdateResources = false;
         for (int i = 0; i < this.mPages.size(); i++) {
-            z |= ((SubscreenTileLayout) this.mPages.get(i)).updateResources();
+            zUpdateResources |= ((SubscreenTileLayout) this.mPages.get(i)).updateResources();
         }
-        boolean z2 = (this.mLastMaxHeight != this.mPageHeight) | z;
-        if (z2) {
+        boolean z = (this.mLastMaxHeight != this.mPageHeight) | zUpdateResources;
+        if (z) {
             this.mDistributeTiles = true;
             requestLayout();
         }
-        return z2;
+        return z;
     }
 }

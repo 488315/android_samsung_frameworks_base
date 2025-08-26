@@ -40,9 +40,9 @@ public interface ISocialComposerObserverService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISocialComposerObserverService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISocialComposerObserverService)) {
-                return (ISocialComposerObserverService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISocialComposerObserverService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISocialComposerObserverService)) {
+                return (ISocialComposerObserverService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

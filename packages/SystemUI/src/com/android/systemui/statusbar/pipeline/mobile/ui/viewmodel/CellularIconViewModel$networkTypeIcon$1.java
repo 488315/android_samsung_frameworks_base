@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class CellularIconViewModel$networkTypeIcon$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -26,10 +25,10 @@ final class CellularIconViewModel$networkTypeIcon$1 extends SuspendLambda implem
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
         CellularIconViewModel$networkTypeIcon$1 cellularIconViewModel$networkTypeIcon$1 = new CellularIconViewModel$networkTypeIcon$1((Continuation) obj4);
         cellularIconViewModel$networkTypeIcon$1.L$0 = (NetworkTypeIconModel) obj;
-        cellularIconViewModel$networkTypeIcon$1.Z$0 = booleanValue;
+        cellularIconViewModel$networkTypeIcon$1.Z$0 = zBooleanValue;
         cellularIconViewModel$networkTypeIcon$1.L$1 = (DisabledDataIconModel) obj3;
         return cellularIconViewModel$networkTypeIcon$1.invokeSuspend(Unit.INSTANCE);
     }
@@ -45,9 +44,9 @@ final class CellularIconViewModel$networkTypeIcon$1 extends SuspendLambda implem
         boolean z = this.Z$0;
         DisabledDataIconModel disabledDataIconModel = (DisabledDataIconModel) this.L$1;
         Icon.Resource resource = networkTypeIconModel.getIconId() != 0 ? new Icon.Resource(networkTypeIconModel.getIconId(), networkTypeIconModel.getContentDescription() != 0 ? new ContentDescription.Resource(networkTypeIconModel.getContentDescription()) : null) : null;
-        boolean equals = disabledDataIconModel.iconLocation.equals(IconLocation.DATA_ICON);
+        boolean zEquals = disabledDataIconModel.iconLocation.equals(IconLocation.DATA_ICON);
         int i = disabledDataIconModel.iconId;
-        boolean z2 = equals && i != 0;
+        boolean z2 = zEquals && i != 0;
         Icon.Resource resource2 = new Icon.Resource(i, null);
         if (z) {
             return resource;

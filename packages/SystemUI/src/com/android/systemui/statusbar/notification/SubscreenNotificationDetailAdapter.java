@@ -1,5 +1,6 @@
 package com.android.systemui.statusbar.notification;
 
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,7 +19,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
     public static SubscreenNotificationDetailAdapter sInstance;
@@ -49,7 +49,6 @@ public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ItemViewHolder extends SubscreenParentDetailItemViewHolder {
         public String mBodyLayoutString;
         public String mPrevSender;
@@ -68,16 +67,16 @@ public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
             SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter = SubscreenNotificationDetailAdapter.this;
             int size = subscreenNotificationDetailAdapter.mNotificationInfoManager.mReplyWordList.size();
             for (int i = 0; i < size; i++) {
-                View inflate = LayoutInflater.from(subscreenNotificationDetailAdapter.mContext).inflate(subscreenNotificationDetailAdapter.mDeviceModel.getDetailAdapterReplyWordResource(), (ViewGroup) this.mContentLayout, false);
-                ImageView imageView = (ImageView) inflate.findViewById(R.id.subscreen_detail_word_line_top);
-                final TextView textView = (TextView) inflate.findViewById(R.id.subscreen_detail_word);
+                View viewInflate = LayoutInflater.from(subscreenNotificationDetailAdapter.mContext).inflate(subscreenNotificationDetailAdapter.mDeviceModel.getDetailAdapterReplyWordResource(), (ViewGroup) this.mContentLayout, false);
+                ImageView imageView = (ImageView) viewInflate.findViewById(R.id.subscreen_detail_word_line_top);
+                final TextView textView = (TextView) viewInflate.findViewById(R.id.subscreen_detail_word);
                 String str = (String) subscreenNotificationDetailAdapter.mNotificationInfoManager.mReplyWordList.get(i);
                 if (i == 0) {
                     imageView.setVisibility(0);
                 }
                 textView.setText(str);
-                SubscreenNotificationDetailAdapter.this.setReplyWordTextStyle(inflate, SubscreenNotificationDetailAdapter.REGULAR, false, 0.2f, 1.0f);
-                inflate.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationDetailAdapter.ItemViewHolder.1
+                SubscreenNotificationDetailAdapter.this.setReplyWordTextStyle(viewInflate, SubscreenNotificationDetailAdapter.REGULAR, false, 0.2f, 1.0f);
+                viewInflate.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationDetailAdapter.ItemViewHolder.1
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view) {
                         SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter2 = SubscreenNotificationDetailAdapter.this;
@@ -87,8 +86,8 @@ public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
                         }
                         subscreenNotificationDetailAdapter2.mDeviceModel.getClass();
                         int dispalyHeight = SubscreenNotificationDetailAdapter.this.mDeviceModel.getDispalyHeight() - SubscreenNotificationDetailAdapter.this.mDeviceModel.getMainHeaderViewHeight();
-                        int computeVerticalScrollOffset = SubscreenNotificationDetailAdapter.this.mSubRoomNotification.mNotificationRecyclerView.computeVerticalScrollOffset();
-                        SubscreenNotificationDetailAdapter.this.mSubRoomNotification.mNotificationRecyclerView.smoothScrollBy(0, (int) ((view.getY() + (ItemViewHolder.this.mReplylayout.getY() + ItemViewHolder.this.mReplyContainer.getY())) - (((dispalyHeight / 2) + computeVerticalScrollOffset) - (view.getHeight() / 2))), false);
+                        int iComputeVerticalScrollOffset = SubscreenNotificationDetailAdapter.this.mSubRoomNotification.mNotificationRecyclerView.computeVerticalScrollOffset();
+                        SubscreenNotificationDetailAdapter.this.mSubRoomNotification.mNotificationRecyclerView.smoothScrollBy(0, (int) ((view.getY() + (ItemViewHolder.this.mReplylayout.getY() + ItemViewHolder.this.mReplyContainer.getY())) - (((dispalyHeight / 2) + iComputeVerticalScrollOffset) - (view.getHeight() / 2))), false);
                         for (int i2 = 0; i2 < ItemViewHolder.this.mReplylayout.getChildCount(); i2++) {
                             View childAt = ItemViewHolder.this.mReplylayout.getChildAt(i2);
                             if (childAt.equals(view)) {
@@ -111,12 +110,11 @@ public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
                         SystemUIAnalytics.sendEventLog(SystemUIAnalytics.EID_QPNE_COVER_SCREEN_ID_DETAIL, SystemUIAnalytics.EID_QPNE_COVER_REPLY_WITH_PRESET);
                     }
                 });
-                this.mReplylayout.addView(inflate);
+                this.mReplylayout.addView(viewInflate);
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ScrollInfo {
         public int mCompleteItemUpdateReason = 0;
         public boolean mIsSendedQuickReply = false;
@@ -130,7 +128,6 @@ public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TextViewHolder extends SubscreenParentDetailItemViewHolder {
         public TextViewHolder(View view) {
             super(view);
@@ -214,14 +211,14 @@ public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) throws Resources.NotFoundException {
         if (!(viewHolder instanceof ItemViewHolder)) {
             if (viewHolder instanceof TextViewHolder) {
                 TextViewHolder textViewHolder = (TextViewHolder) viewHolder;
                 SubscreenNotificationInfo subscreenNotificationInfo = this.mSelectNotificationInfo;
-                boolean needsRedaction = subscreenNotificationInfo.mRow.needsRedaction();
+                boolean zNeedsRedaction = subscreenNotificationInfo.mRow.needsRedaction();
                 SubscreenNotificationDetailAdapter subscreenNotificationDetailAdapter = SubscreenNotificationDetailAdapter.this;
-                String contentHiddenText = (needsRedaction && subscreenNotificationDetailAdapter.mDeviceModel.isNotShwonNotificationState(subscreenNotificationInfo.mRow.mEntry)) ? subscreenNotificationInfo.getContentHiddenText() : subscreenNotificationInfo.mContext.getResources().getString(R.string.subscreen_detail_adapter_custom_view);
+                String contentHiddenText = (zNeedsRedaction && subscreenNotificationDetailAdapter.mDeviceModel.isNotShwonNotificationState(subscreenNotificationInfo.mRow.mEntry)) ? subscreenNotificationInfo.getContentHiddenText() : subscreenNotificationInfo.mContext.getResources().getString(R.string.subscreen_detail_adapter_custom_view);
                 textViewHolder.mInfo = subscreenNotificationInfo;
                 textViewHolder.mAppName.setText(subscreenNotificationInfo.mAppName);
                 textViewHolder.mTitle.setText(contentHiddenText);
@@ -248,10 +245,10 @@ public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
             return;
         }
         String title = subscreenNotificationInfo2.getTitle();
-        int indexOf = title != null ? title.indexOf(":") : -1;
-        if (subscreenNotificationInfo2.mIsGroupConversation && indexOf > -1) {
+        int iIndexOf = title != null ? title.indexOf(":") : -1;
+        if (subscreenNotificationInfo2.mIsGroupConversation && iIndexOf > -1) {
             try {
-                title = title.substring(0, indexOf);
+                title = title.substring(0, iIndexOf);
             } catch (StringIndexOutOfBoundsException e) {
                 Log.w("SubscreenNotificationDetailAdapter", "StringIndexOutOfBoundsException: " + e + "title : " + title);
             }
@@ -327,9 +324,9 @@ public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
         if (replyButtonView == null) {
             return;
         }
-        PopupWindow showReplyButtonViewPopupWindow = this.mDeviceModel.showReplyButtonViewPopupWindow(replyButtonView, view);
-        this.mPopupWindow = showReplyButtonViewPopupWindow;
-        showReplyButtonViewPopupWindow.setFocusable(true);
+        PopupWindow popupWindowShowReplyButtonViewPopupWindow = this.mDeviceModel.showReplyButtonViewPopupWindow(replyButtonView, view);
+        this.mPopupWindow = popupWindowShowReplyButtonViewPopupWindow;
+        popupWindowShowReplyButtonViewPopupWindow.setFocusable(true);
         this.mPopupWindow.update();
         this.mReplyButtonView.requestFocus();
         this.mReplyButtonView.addOnUnhandledKeyEventListener(this.mPopupWindowKeyEventListener);
@@ -357,14 +354,14 @@ public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
         });
         this.mNotificationAnimatorManager.replyButtonAnimated(this.mReplyButtonView, null, 0.8f, 1.0f, 0.0f, 1.0f);
         TextView textView = (TextView) this.mReplyButtonView.findViewById(R.id.cancel);
-        View findViewById = this.mReplyButtonView.findViewById(R.id.send);
+        View viewFindViewById = this.mReplyButtonView.findViewById(R.id.send);
         textView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationDetailAdapter.3
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
                 SubscreenNotificationDetailAdapter.this.dismissReplyButtons(false);
             }
         });
-        findViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationDetailAdapter.4
+        viewFindViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationDetailAdapter.4
             public boolean isSent = false;
 
             @Override // android.view.View.OnClickListener
@@ -374,13 +371,13 @@ public class SubscreenNotificationDetailAdapter extends SubscreenParentAdapter {
                     return;
                 }
                 final SubscreenNotificationController subscreenNotificationController = (SubscreenNotificationController) Dependency.sDependency.getDependencyInner(SubscreenNotificationController.class);
-                boolean useHistory = subscreenNotificationController.useHistory(itemViewHolder.mInfo.mRow.mEntry);
+                boolean zUseHistory = subscreenNotificationController.useHistory(itemViewHolder.mInfo.mRow.mEntry);
                 SubscreenNotificationDetailAdapter.this.mDeviceModel.setSmartReplyResultValue(-1, null, null);
                 subscreenNotificationController.replyNotification(itemViewHolder.mInfo.mKey, str);
                 SubscreenNotificationDetailAdapter.this.mReplySendAlphaAnimation = new AlphaAnimation(0.8f, 0.2f);
                 SubscreenNotificationDetailAdapter.this.mReplySendAlphaAnimation.setDuration(1000L);
-                SubscreenNotificationDetailAdapter.this.mReplySendAlphaAnimation.setRepeatCount(useHistory ? -1 : 0);
-                if (!useHistory) {
+                SubscreenNotificationDetailAdapter.this.mReplySendAlphaAnimation.setRepeatCount(zUseHistory ? -1 : 0);
+                if (!zUseHistory) {
                     SubscreenNotificationDetailAdapter.this.mReplySendAlphaAnimation.setAnimationListener(new Animation.AnimationListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationDetailAdapter.4.1
                         @Override // android.view.animation.Animation.AnimationListener
                         public final void onAnimationEnd(Animation animation) {

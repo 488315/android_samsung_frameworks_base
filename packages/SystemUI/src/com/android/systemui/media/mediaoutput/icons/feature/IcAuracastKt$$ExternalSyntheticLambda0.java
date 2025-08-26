@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.Dp;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class IcAuracastKt$$ExternalSyntheticLambda0 implements Function0 {
     @Override // kotlin.jvm.functions.Function0
@@ -105,7 +104,7 @@ public final /* synthetic */ class IcAuracastKt$$ExternalSyntheticLambda0 implem
         pathBuilder.curveTo(7.3913f, 20.2344f, 7.3494f, 22.1579f, 8.2534f, 23.7884f);
         pathBuilder.curveTo(9.1574f, 25.419f, 10.8033f, 26.393f, 12.656f, 26.393f);
         ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0.m(pathBuilder, 22.6354f, 26.393f, 22.6381f, 26.3944f);
-        builder.m565addPathoIyEayM("", pathBuilder._nodes, 0, solidColor, 1.0f, solidColor2, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        builder.m567addPathoIyEayM("", pathBuilder._nodes, 0, solidColor, 1.0f, solidColor2, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
         return builder.build();
     }
 }

@@ -87,7 +87,7 @@ public class TextInputTimePickerView extends RelativeLayout {
             }
 
             @Override // android.text.TextWatcher
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged(Editable editable) throws NumberFormatException {
                 TextInputTimePickerView.this.parseAndSetMinuteInternal(editable.toString());
             }
         });
@@ -127,19 +127,19 @@ public class TextInputTimePickerView extends RelativeLayout {
     }
 
     boolean validateInput() {
-        String editable;
-        String editable2;
+        String string;
+        String string2;
         if (TextUtils.isEmpty(this.mHourEditText.getText())) {
-            editable = this.mHourEditText.getHint().toString();
+            string = this.mHourEditText.getHint().toString();
         } else {
-            editable = this.mHourEditText.getText().toString();
+            string = this.mHourEditText.getText().toString();
         }
         if (TextUtils.isEmpty(this.mMinuteEditText.getText())) {
-            editable2 = this.mMinuteEditText.getHint().toString();
+            string2 = this.mMinuteEditText.getHint().toString();
         } else {
-            editable2 = this.mMinuteEditText.getText().toString();
+            string2 = this.mMinuteEditText.getText().toString();
         }
-        boolean z = parseAndSetHourInternal(editable) && parseAndSetMinuteInternal(editable2);
+        boolean z = parseAndSetHourInternal(string) && parseAndSetMinuteInternal(string2);
         setError(!z);
         return z;
     }
@@ -185,15 +185,15 @@ public class TextInputTimePickerView extends RelativeLayout {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public boolean parseAndSetHourInternal(String str) {
+    public boolean parseAndSetHourInternal(String str) throws NumberFormatException {
         try {
-            int parseInt = Integer.parseInt(str);
-            if (!isValidLocalizedHour(parseInt)) {
-                int i = !this.mHourFormatStartsAtZero ? 1 : 0;
-                this.mListener.onValueChanged(0, getHourOfDayFromLocalizedHour(MathUtils.constrain(parseInt, i, this.mIs24Hour ? 23 : i + 11)));
+            int i = Integer.parseInt(str);
+            if (!isValidLocalizedHour(i)) {
+                int i2 = !this.mHourFormatStartsAtZero ? 1 : 0;
+                this.mListener.onValueChanged(0, getHourOfDayFromLocalizedHour(MathUtils.constrain(i, i2, this.mIs24Hour ? 23 : i2 + 11)));
                 return false;
             }
-            this.mListener.onValueChanged(0, getHourOfDayFromLocalizedHour(parseInt));
+            this.mListener.onValueChanged(0, getHourOfDayFromLocalizedHour(i));
             setTimeSet(true);
             return true;
         } catch (NumberFormatException unused) {
@@ -202,15 +202,15 @@ public class TextInputTimePickerView extends RelativeLayout {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public boolean parseAndSetMinuteInternal(String str) {
+    public boolean parseAndSetMinuteInternal(String str) throws NumberFormatException {
         try {
-            int parseInt = Integer.parseInt(str);
-            if (parseInt >= 0 && parseInt <= 59) {
-                this.mListener.onValueChanged(1, parseInt);
+            int i = Integer.parseInt(str);
+            if (i >= 0 && i <= 59) {
+                this.mListener.onValueChanged(1, i);
                 setTimeSet(true);
                 return true;
             }
-            this.mListener.onValueChanged(1, MathUtils.constrain(parseInt, 0, 59));
+            this.mListener.onValueChanged(1, MathUtils.constrain(i, 0, 59));
         } catch (NumberFormatException unused) {
         }
         return false;

@@ -5,6 +5,7 @@ public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
     public static final String FLAG_ACCURATE_WALLPAPER_DOWNSAMPLING = "android.app.accurate_wallpaper_downsampling";
     public static final String FLAG_API_RICH_ONGOING = "android.app.api_rich_ongoing";
+    public static final String FLAG_API_RICH_ONGOING_PERMISSION = "android.app.api_rich_ongoing_permission";
     public static final String FLAG_API_TVEXTENDER = "android.app.api_tvextender";
     public static final String FLAG_APP_RESTRICTIONS_API = "android.app.app_restrictions_api";
     public static final String FLAG_APP_START_INFO = "android.app.app_start_info";
@@ -103,6 +104,10 @@ public final class Flags {
 
     public static boolean apiRichOngoing() {
         return FEATURE_FLAGS.apiRichOngoing();
+    }
+
+    public static boolean apiRichOngoingPermission() {
+        return FEATURE_FLAGS.apiRichOngoingPermission();
     }
 
     public static boolean apiTvextender() {

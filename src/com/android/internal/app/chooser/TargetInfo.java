@@ -46,9 +46,9 @@ public interface TargetInfo {
     boolean startAsUser(Activity activity, Bundle bundle, UserHandle userHandle);
 
     static void prepareIntentForCrossProfileLaunch(Intent intent, int i) {
-        int myUserId = UserHandle.myUserId();
-        if (i != myUserId) {
-            intent.fixUris(myUserId);
+        int iMyUserId = UserHandle.myUserId();
+        if (i != iMyUserId) {
+            intent.fixUris(iMyUserId);
         }
     }
 

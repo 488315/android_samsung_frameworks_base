@@ -15,11 +15,9 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface NavBarStoreAction {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Action {
         public final boolean a11yClickable;
         public final boolean a11yLongClickable;
@@ -61,11 +59,11 @@ public interface NavBarStoreAction {
         }
 
         public final int hashCode() {
-            int hashCode = (this.navBarLayoutInfo.hashCode() + (this.oneHandModeInfo.hashCode() * 31)) * 31;
+            int iHashCode = (this.navBarLayoutInfo.hashCode() + (this.oneHandModeInfo.hashCode() * 31)) * 31;
             LinearLayout linearLayout = this.leftRemoteViewContainer;
-            int hashCode2 = (hashCode + (linearLayout == null ? 0 : linearLayout.hashCode())) * 31;
+            int iHashCode2 = (iHashCode + (linearLayout == null ? 0 : linearLayout.hashCode())) * 31;
             LinearLayout linearLayout2 = this.rightRemoteViewContainer;
-            return Integer.hashCode(this.rotation) + ReorderTile$$ExternalSyntheticOutline0.m(this.displayId, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.dampingRatio, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.stiffness, (this.taskbarNavBarEvents.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.sysUiFlagInfoList, (this.gestureHintVIInfo.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.edgeBackGestureDisablePolicy, ReorderTile$$ExternalSyntheticOutline0.m(this.navBarVisibility, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.navBarIconHints, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.darkIntensity, TransitionData$$ExternalSyntheticOutline0.m((this.remoteViewShortcut.hashCode() + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.remoteViewDarkIntensity, TransitionData$$ExternalSyntheticOutline0.m((hashCode2 + (linearLayout2 != null ? linearLayout2.hashCode() : 0)) * 31, 31, this.contextualButtonVisible), 31)) * 31, 31, this.disableSUWBack), 31), 31), 31, this.a11yClickable), 31, this.a11yLongClickable), 31), 31)) * 31, 31), 31, this.folded), 31, this.taskbarEnabled)) * 31, 31), 31), 31);
+            return Integer.hashCode(this.rotation) + ReorderTile$$ExternalSyntheticOutline0.m(this.displayId, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.dampingRatio, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.stiffness, (this.taskbarNavBarEvents.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.sysUiFlagInfoList, (this.gestureHintVIInfo.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.edgeBackGestureDisablePolicy, ReorderTile$$ExternalSyntheticOutline0.m(this.navBarVisibility, TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.navBarIconHints, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.darkIntensity, TransitionData$$ExternalSyntheticOutline0.m((this.remoteViewShortcut.hashCode() + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.remoteViewDarkIntensity, TransitionData$$ExternalSyntheticOutline0.m((iHashCode2 + (linearLayout2 != null ? linearLayout2.hashCode() : 0)) * 31, 31, this.contextualButtonVisible), 31)) * 31, 31, this.disableSUWBack), 31), 31), 31, this.a11yClickable), 31, this.a11yLongClickable), 31), 31)) * 31, 31), 31, this.folded), 31, this.taskbarEnabled)) * 31, 31), 31), 31);
         }
 
         public final String toString() {
@@ -151,10 +149,10 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ForceHideGestureHint implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public ForceHideGestureHint() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -178,58 +176,17 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ ForceHideGestureHint(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.ForceHideGestureHint.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ ForceHideGestureHint(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class GestureHintVIInfo {
         public final int distanceX;
         public final int distanceY;
@@ -278,10 +235,10 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InvalidateRemoteView implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public InvalidateRemoteView() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -305,61 +262,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ InvalidateRemoteView(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.InvalidateRemoteView.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ InvalidateRemoteView(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MoveHintVI implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public MoveHintVI() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -383,61 +300,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ MoveHintVI(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.MoveHintVI.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ MoveHintVI(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NavBarIconMarquee implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public NavBarIconMarquee() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -461,58 +338,17 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ NavBarIconMarquee(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.NavBarIconMarquee.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ NavBarIconMarquee(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NavBarLayoutInfo {
         public final int gravity;
         public final int height;
@@ -565,7 +401,6 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OneHandModeInfo {
         public final int offsetX;
         public final int offsetY;
@@ -610,10 +445,10 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RecalculateGestureInsetScale implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public RecalculateGestureInsetScale() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -637,61 +472,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ RecalculateGestureInsetScale(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.RecalculateGestureInsetScale.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ RecalculateGestureInsetScale(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReevaluateNavBar implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public ReevaluateNavBar() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -715,61 +510,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ ReevaluateNavBar(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.ReevaluateNavBar.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ ReevaluateNavBar(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReinflateNavBar implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public ReinflateNavBar() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -793,58 +548,17 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ ReinflateNavBar(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.ReinflateNavBar.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ ReinflateNavBar(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RemoteViewShortcut {
         public final int position;
         public final int priority;
@@ -868,9 +582,9 @@ public interface NavBarStoreAction {
 
         public final int hashCode() {
             String str = this.requestClass;
-            int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+            int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
             RemoteViews remoteViews = this.remoteViews;
-            return Integer.hashCode(this.priority) + ReorderTile$$ExternalSyntheticOutline0.m(this.position, (hashCode + (remoteViews != null ? remoteViews.hashCode() : 0)) * 31, 31);
+            return Integer.hashCode(this.priority) + ReorderTile$$ExternalSyntheticOutline0.m(this.position, (iHashCode + (remoteViews != null ? remoteViews.hashCode() : 0)) * 31, 31);
         }
 
         public final String toString() {
@@ -897,10 +611,10 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ResetHintVI implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public ResetHintVI() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -924,61 +638,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ ResetHintVI(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.ResetHintVI.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ ResetHintVI(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SetGestureHintViewGroup implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public SetGestureHintViewGroup() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1002,61 +676,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ SetGestureHintViewGroup(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.SetGestureHintViewGroup.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ SetGestureHintViewGroup(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SetNavBarVisibility implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public SetNavBarVisibility() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1080,61 +714,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ SetNavBarVisibility(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.SetNavBarVisibility.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ SetNavBarVisibility(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowA11ySwipeUpTipPopup implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public ShowA11ySwipeUpTipPopup() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1158,61 +752,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ ShowA11ySwipeUpTipPopup(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.ShowA11ySwipeUpTipPopup.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ ShowA11ySwipeUpTipPopup(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StartHintVI implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public StartHintVI() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1236,58 +790,17 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ StartHintVI(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.StartHintVI.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ StartHintVI(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SysUiFlagInfo {
         public final long flag;
         public final boolean value;
@@ -1325,10 +838,10 @@ public interface NavBarStoreAction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateA11YStatus implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateA11YStatus() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1352,61 +865,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateA11YStatus(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateA11YStatus.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateA11YStatus(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateDefaultNavigationBarStatus implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateDefaultNavigationBarStatus() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1430,61 +903,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateDefaultNavigationBarStatus(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateDefaultNavigationBarStatus.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateDefaultNavigationBarStatus(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateEdgeBackGestureDisabledPolicy implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateEdgeBackGestureDisabledPolicy() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1508,61 +941,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateEdgeBackGestureDisabledPolicy(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateEdgeBackGestureDisabledPolicy.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateEdgeBackGestureDisabledPolicy(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateGestureHintVisibility implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateGestureHintVisibility() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1586,61 +979,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateGestureHintVisibility(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateGestureHintVisibility.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateGestureHintVisibility(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateIndicatorSpringParams implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateIndicatorSpringParams() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1664,61 +1017,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateIndicatorSpringParams(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateIndicatorSpringParams.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateIndicatorSpringParams(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateNavBarGoneStateFlag implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateNavBarGoneStateFlag() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1742,61 +1055,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateNavBarGoneStateFlag(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateNavBarGoneStateFlag.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateNavBarGoneStateFlag(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateNavBarIconAndHints implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateNavBarIconAndHints() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1820,61 +1093,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateNavBarIconAndHints(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateNavBarIconAndHints.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateNavBarIconAndHints(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateNavBarLayoutParams implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateNavBarLayoutParams() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1898,61 +1131,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateNavBarLayoutParams(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateNavBarLayoutParams.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateNavBarLayoutParams(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateNavBarNormalStyle implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateNavBarNormalStyle() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -1976,61 +1169,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateNavBarNormalStyle(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateNavBarNormalStyle.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateNavBarNormalStyle(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateNavBarOpaqueColor implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateNavBarOpaqueColor() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2054,61 +1207,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateNavBarOpaqueColor(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateNavBarOpaqueColor.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateNavBarOpaqueColor(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateNavBarSUWStyle implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateNavBarSUWStyle() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2132,61 +1245,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateNavBarSUWStyle(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateNavBarSUWStyle.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateNavBarSUWStyle(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateNavigationIcon implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateNavigationIcon() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2210,61 +1283,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateNavigationIcon(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateNavigationIcon.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateNavigationIcon(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateOneHandModeInfo implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateOneHandModeInfo() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2288,61 +1321,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateOneHandModeInfo(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateOneHandModeInfo.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateOneHandModeInfo(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateRegionSamplingRect implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateRegionSamplingRect() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2366,61 +1359,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateRegionSamplingRect(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateRegionSamplingRect.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateRegionSamplingRect(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateRemoteViewContainer implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateRemoteViewContainer() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2444,61 +1397,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateRemoteViewContainer(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateRemoteViewContainer.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateRemoteViewContainer(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateRemoteViewDarkIntensity implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateRemoteViewDarkIntensity() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2522,61 +1435,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateRemoteViewDarkIntensity(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateRemoteViewDarkIntensity.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateRemoteViewDarkIntensity(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateRemoteViewShortcut implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateRemoteViewShortcut() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2600,61 +1473,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateRemoteViewShortcut(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateRemoteViewShortcut.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateRemoteViewShortcut(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateSUWA11yIcon implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateSUWA11yIcon() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2678,61 +1511,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateSUWA11yIcon(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateSUWA11yIcon.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateSUWA11yIcon(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateSUWDarkIntensity implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateSUWDarkIntensity() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2756,61 +1549,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateSUWDarkIntensity(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateSUWDarkIntensity.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateSUWDarkIntensity(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateSUWDisabled implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateSUWDisabled() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2834,61 +1587,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateSUWDisabled(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateSUWDisabled.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateSUWDisabled(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateSUWIconHints implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateSUWIconHints() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2912,61 +1625,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateSUWIconHints(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateSUWIconHints.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateSUWIconHints(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateSysUiFlags implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateSysUiFlags() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -2990,61 +1663,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateSysUiFlags(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateSysUiFlags.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateSysUiFlags(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateTaskBarIconsAndHints implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateTaskBarIconsAndHints() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -3068,61 +1701,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateTaskBarIconsAndHints(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateTaskBarIconsAndHints.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateTaskBarIconsAndHints(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateTaskBarNavBarEvents implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateTaskBarNavBarEvents() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -3146,61 +1739,21 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateTaskBarNavBarEvents(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateTaskBarNavBarEvents.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateTaskBarNavBarEvents(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UpdateTaskbarStatus implements NavBarStoreAction {
         public final Action action;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public UpdateTaskbarStatus() {
             this(null, 1, 0 == true ? 1 : 0);
         }
@@ -3224,54 +1777,14 @@ public interface NavBarStoreAction {
             this.action = action;
         }
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public /* synthetic */ UpdateTaskbarStatus(com.android.systemui.navigationbar.store.NavBarStoreAction.Action r28, int r29, kotlin.jvm.internal.DefaultConstructorMarker r30) {
-            /*
-                r27 = this;
-                r0 = r29 & 1
-                if (r0 == 0) goto L31
-                com.android.systemui.navigationbar.store.NavBarStoreAction$Action r1 = new com.android.systemui.navigationbar.store.NavBarStoreAction$Action
-                r25 = 8388607(0x7fffff, float:1.1754942E-38)
-                r26 = 0
-                r2 = 0
-                r3 = 0
-                r4 = 0
-                r5 = 0
-                r6 = 0
-                r7 = 0
-                r8 = 0
-                r9 = 0
-                r10 = 0
-                r11 = 0
-                r12 = 0
-                r13 = 0
-                r14 = 0
-                r15 = 0
-                r16 = 0
-                r17 = 0
-                r18 = 0
-                r19 = 0
-                r20 = 0
-                r21 = 0
-                r22 = 0
-                r23 = 0
-                r24 = 0
-                r1.<init>(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25, r26)
-            L2e:
-                r0 = r27
-                goto L34
-            L31:
-                r1 = r28
-                goto L2e
-            L34:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.store.NavBarStoreAction.UpdateTaskbarStatus.<init>(com.android.systemui.navigationbar.store.NavBarStoreAction$Action, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public /* synthetic */ UpdateTaskbarStatus(Action action, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            Action action2;
+            if ((i & 1) != 0) {
+                action2 = new Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
+            } else {
+                action2 = action;
+            }
+            this(action2);
         }
     }
 }

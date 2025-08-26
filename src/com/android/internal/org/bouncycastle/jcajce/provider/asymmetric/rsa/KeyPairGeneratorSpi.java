@@ -67,9 +67,9 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
     }
 
     @Override // java.security.KeyPairGenerator, java.security.KeyPairGeneratorSpi
-    public KeyPair generateKeyPair() {
-        AsymmetricCipherKeyPair generateKeyPair = this.engine.generateKeyPair();
-        return new KeyPair(new BCRSAPublicKey(this.algId, (RSAKeyParameters) generateKeyPair.getPublic()), new BCRSAPrivateCrtKey(this.algId, (RSAPrivateCrtKeyParameters) generateKeyPair.getPrivate()));
+    public KeyPair generateKeyPair() throws IllegalArgumentException {
+        AsymmetricCipherKeyPair asymmetricCipherKeyPairGenerateKeyPair = this.engine.generateKeyPair();
+        return new KeyPair(new BCRSAPublicKey(this.algId, (RSAKeyParameters) asymmetricCipherKeyPairGenerateKeyPair.getPublic()), new BCRSAPrivateCrtKey(this.algId, (RSAPrivateCrtKeyParameters) asymmetricCipherKeyPairGenerateKeyPair.getPrivate()));
     }
 
     public static class PSS extends KeyPairGeneratorSpi {

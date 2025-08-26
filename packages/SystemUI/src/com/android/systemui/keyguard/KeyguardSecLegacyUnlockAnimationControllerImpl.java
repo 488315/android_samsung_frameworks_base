@@ -24,6 +24,7 @@ import android.view.WindowManager;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import com.android.internal.jank.InteractionJankMonitor;
+import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardViewController;
 import com.android.systemui.LsRune;
 import com.android.systemui.aod.AODAmbientWallpaperHelper;
@@ -48,15 +49,16 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.samsung.android.os.SemPerfManager;
 import dagger.Lazy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.Executor;
 import kotlin.Unit;
+import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends KeyguardUnlockAnimationController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -121,9 +123,9 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
         this.aodAmbientWallpaperHelper = aODAmbientWallpaperHelper;
         this.keyguardFastBioUnlockControllerLazy = lazy6;
         this.dozeParameters = dozeParameters;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 0.120000005f);
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.alphaAnimator = ofFloat2;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 0.120000005f);
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.alphaAnimator = valueAnimatorOfFloat2;
         this.surfaceBehindMatrix = new Matrix();
         this.tmpFloat9 = new float[9];
         this.reqKeyguardAlpha = -1.0f;
@@ -132,47 +134,47 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
         this.reqLeashScale = -1.0f;
         this.curLeashAlpha = -1.0f;
         this.curLeashScale = -1.0f;
-        ofFloat.setInterpolator(KeyguardSecLegacyUnlockAnimationControllerImplKt.SCALE_INTERPOLATOR);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$1$1
+        valueAnimatorOfFloat.setInterpolator(KeyguardSecLegacyUnlockAnimationControllerImplKt.SCALE_INTERPOLATOR);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = KeyguardSecLegacyUnlockAnimationControllerImpl.this;
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = this.this$0;
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 SurfaceControl surfaceControl = keyguardSecLegacyUnlockAnimationControllerImpl.curLeash;
                 if (surfaceControl == null || keyguardSecLegacyUnlockAnimationControllerImpl.curTransaction == null) {
                     Log.w("KeyguardUnlock", "updateLeashScale " + surfaceControl + " " + keyguardSecLegacyUnlockAnimationControllerImpl.curTransaction);
                 } else if (surfaceControl.isValid()) {
-                    keyguardSecLegacyUnlockAnimationControllerImpl.reqLeashScale = (keyguardSecLegacyUnlockAnimationControllerImpl.isLauncherActivity ? 0.88f : 0.95f) + floatValue;
+                    keyguardSecLegacyUnlockAnimationControllerImpl.reqLeashScale = (keyguardSecLegacyUnlockAnimationControllerImpl.isLauncherActivity ? 0.88f : 0.95f) + fFloatValue;
                 } else {
                     Log.w("KeyguardUnlock", "invalid leash");
                 }
-                KeyguardSecLegacyUnlockAnimationControllerImpl.this.applyTransaction();
+                this.this$0.applyTransaction();
             }
         });
-        ofFloat2.setInterpolator(KeyguardSecLegacyUnlockAnimationControllerImplKt.ALPHA_INTERPOLATOR);
-        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$2$1
+        valueAnimatorOfFloat2.setInterpolator(KeyguardSecLegacyUnlockAnimationControllerImplKt.ALPHA_INTERPOLATOR);
+        valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$2$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = KeyguardSecLegacyUnlockAnimationControllerImpl.this;
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = this.this$0;
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 int i = KeyguardSecLegacyUnlockAnimationControllerImpl.$r8$clinit;
-                keyguardSecLegacyUnlockAnimationControllerImpl.updateLeashAlpha(floatValue);
-                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl2 = KeyguardSecLegacyUnlockAnimationControllerImpl.this;
-                float floatValue2 = 1 - ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                keyguardSecLegacyUnlockAnimationControllerImpl.updateLeashAlpha(fFloatValue);
+                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl2 = this.this$0;
+                float fFloatValue2 = 1 - ((Float) valueAnimator.getAnimatedValue()).floatValue();
                 SurfaceControl surfaceControl = keyguardSecLegacyUnlockAnimationControllerImpl2.keyguardViewController.getViewRootImpl().getSurfaceControl();
                 keyguardSecLegacyUnlockAnimationControllerImpl2.keyguardSurface = surfaceControl;
                 if (surfaceControl == null || keyguardSecLegacyUnlockAnimationControllerImpl2.curTransaction == null) {
                     Log.w("KeyguardUnlock", "updateKeyguardAlpha " + surfaceControl + " " + keyguardSecLegacyUnlockAnimationControllerImpl2.curTransaction);
                 } else if (surfaceControl.isValid()) {
-                    Log.d("KeyguardUnlock", "updateKeyguardAlpha: updateKeyguardAlpha=" + floatValue2);
-                    keyguardSecLegacyUnlockAnimationControllerImpl2.reqKeyguardAlpha = floatValue2;
+                    Log.d("KeyguardUnlock", "updateKeyguardAlpha: updateKeyguardAlpha=" + fFloatValue2);
+                    keyguardSecLegacyUnlockAnimationControllerImpl2.reqKeyguardAlpha = fFloatValue2;
                 } else {
                     Log.w("KeyguardUnlock", "updateKeyguardAlpha invalid leash");
                 }
-                KeyguardSecLegacyUnlockAnimationControllerImpl.this.applyTransaction();
+                this.this$0.applyTransaction();
             }
         });
-        ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$2$2
+        valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$2$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator) {
                 Log.d("KeyguardUnlock", "onAnimationCancel");
@@ -180,14 +182,14 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = KeyguardSecLegacyUnlockAnimationControllerImpl.this;
+                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = this.this$0;
                 int i = keyguardSecLegacyUnlockAnimationControllerImpl.frameUpdatedCount;
                 int i2 = keyguardSecLegacyUnlockAnimationControllerImpl.skipFrameCount;
                 boolean z = keyguardSecLegacyUnlockAnimationControllerImpl.forceEnded;
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "onAnimationEnd frameUpdatedCount=", " skip=", " forceEnded=");
-                m.append(z);
-                Log.d("KeyguardUnlock", m.toString());
-                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl2 = KeyguardSecLegacyUnlockAnimationControllerImpl.this;
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "onAnimationEnd frameUpdatedCount=", " skip=", " forceEnded=");
+                sbM.append(z);
+                Log.d("KeyguardUnlock", sbM.toString());
+                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl2 = this.this$0;
                 keyguardSecLegacyUnlockAnimationControllerImpl2.getClass();
                 Choreographer.getInstance().postCallback(1, new KeyguardSecLegacyUnlockAnimationControllerImpl$onFinished$1(keyguardSecLegacyUnlockAnimationControllerImpl2), null);
             }
@@ -196,18 +198,18 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
             public final void onAnimationStart(Animator animator, boolean z) {
                 ArrayList<Animator> childAnimations;
                 ArrayList<Animator> childAnimations2;
-                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = KeyguardSecLegacyUnlockAnimationControllerImpl.this;
+                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = this.this$0;
                 int i = KeyguardSecLegacyUnlockAnimationControllerImpl.$r8$clinit;
                 AnimatorSet animatorSet = keyguardSecLegacyUnlockAnimationControllerImpl.cannedAnimatorSet;
-                Integer num = null;
+                Integer numValueOf = null;
                 Log.d("KeyguardUnlock", "onAnimationStart " + ((animatorSet == null || (childAnimations2 = animatorSet.getChildAnimations()) == null) ? null : Integer.valueOf(childAnimations2.size())));
-                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl2 = KeyguardSecLegacyUnlockAnimationControllerImpl.this;
+                KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl2 = this.this$0;
                 if (keyguardSecLegacyUnlockAnimationControllerImpl2.isPrimaryBouncerShowing) {
                     AnimatorSet animatorSet2 = keyguardSecLegacyUnlockAnimationControllerImpl2.cannedAnimatorSet;
                     if (animatorSet2 != null && (childAnimations = animatorSet2.getChildAnimations()) != null) {
-                        num = Integer.valueOf(childAnimations.size());
+                        numValueOf = Integer.valueOf(childAnimations.size());
                     }
-                    if (num != null && num.intValue() == 1) {
+                    if (numValueOf != null && numValueOf.intValue() == 1) {
                         keyguardSecLegacyUnlockAnimationControllerImpl2.updateLeashAlpha(1.0f);
                         keyguardSecLegacyUnlockAnimationControllerImpl2.applyTransaction();
                     }
@@ -217,140 +219,124 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
         });
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(13:3|4|5|(8:36|37|9|10|(2:28|29)|13|(1:17)|(2:23|24)(2:20|21))|8|9|10|(1:12)(3:25|28|29)|13|(2:15|17)|(0)|23|24) */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x0079, code lost:
-    
-        r3 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:32:0x007a, code lost:
-    
-        r3.printStackTrace();
-        com.android.systemui.keyguard.Log.d("KeyguardUnlock", "applyTransaction catch the exception");
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public final void applyTransaction() {
-        /*
-            r11 = this;
-            java.lang.String r0 = "applyTransaction catch the exception"
-            java.lang.String r1 = "KeyguardUnlock"
-            java.lang.String r2 = "%.2f"
-            java.lang.String r3 = "setAlpha "
-            android.view.SurfaceControl$Transaction r4 = r11.curTransaction
-            if (r4 == 0) goto Ld7
-            r5 = 0
-            r6 = -1082130432(0xffffffffbf800000, float:-1.0)
-            r7 = 1
-            float r8 = r11.reqLeashAlpha     // Catch: java.lang.Exception -> L41
-            int r9 = (r8 > r6 ? 1 : (r8 == r6 ? 0 : -1))
-            if (r9 != 0) goto L18
-            goto L48
-        L18:
-            float r9 = r11.curLeashAlpha     // Catch: java.lang.Exception -> L41
-            int r9 = (r8 > r9 ? 1 : (r8 == r9 ? 0 : -1))
-            if (r9 != 0) goto L1f
-            goto L48
-        L1f:
-            java.lang.Float r8 = java.lang.Float.valueOf(r8)     // Catch: java.lang.Exception -> L41
-            java.lang.Object[] r8 = new java.lang.Object[]{r8}     // Catch: java.lang.Exception -> L41
-            java.lang.Object[] r8 = java.util.Arrays.copyOf(r8, r7)     // Catch: java.lang.Exception -> L41
-            java.lang.String r8 = java.lang.String.format(r2, r8)     // Catch: java.lang.Exception -> L41
-            java.lang.String r8 = r3.concat(r8)     // Catch: java.lang.Exception -> L41
-            com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$1 r9 = new com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$1     // Catch: java.lang.Exception -> L41
-            r9.<init>()     // Catch: java.lang.Exception -> L41
-            r11.trace(r9, r8)     // Catch: java.lang.Exception -> L41
-            float r8 = r11.reqLeashAlpha     // Catch: java.lang.Exception -> L41
-            r11.curLeashAlpha = r8     // Catch: java.lang.Exception -> L41
-            r8 = r7
-            goto L49
-        L41:
-            r8 = move-exception
-            r8.printStackTrace()
-            com.android.systemui.keyguard.Log.d(r1, r0)
-        L48:
-            r8 = r5
-        L49:
-            float r9 = r11.reqKeyguardAlpha     // Catch: java.lang.Exception -> L79
-            int r10 = (r9 > r6 ? 1 : (r9 == r6 ? 0 : -1))
-            if (r10 != 0) goto L50
-            goto L80
-        L50:
-            float r10 = r11.curKeyguardAlpha     // Catch: java.lang.Exception -> L79
-            int r10 = (r9 > r10 ? 1 : (r9 == r10 ? 0 : -1))
-            if (r10 != 0) goto L57
-            goto L80
-        L57:
-            java.lang.Float r9 = java.lang.Float.valueOf(r9)     // Catch: java.lang.Exception -> L79
-            java.lang.Object[] r9 = new java.lang.Object[]{r9}     // Catch: java.lang.Exception -> L79
-            java.lang.Object[] r9 = java.util.Arrays.copyOf(r9, r7)     // Catch: java.lang.Exception -> L79
-            java.lang.String r9 = java.lang.String.format(r2, r9)     // Catch: java.lang.Exception -> L79
-            java.lang.String r3 = r3.concat(r9)     // Catch: java.lang.Exception -> L79
-            com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$2 r9 = new com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$2     // Catch: java.lang.Exception -> L79
-            r9.<init>()     // Catch: java.lang.Exception -> L79
-            r11.trace(r9, r3)     // Catch: java.lang.Exception -> L79
-            float r3 = r11.reqKeyguardAlpha     // Catch: java.lang.Exception -> L79
-            r11.curKeyguardAlpha = r3     // Catch: java.lang.Exception -> L79
-            r8 = r7
-            goto L80
-        L79:
-            r3 = move-exception
-            r3.printStackTrace()
-            com.android.systemui.keyguard.Log.d(r1, r0)
-        L80:
-            float r0 = r11.reqLeashScale
-            int r1 = (r0 > r6 ? 1 : (r0 == r6 ? 0 : -1))
-            if (r1 != 0) goto L87
-            goto Lbd
-        L87:
-            float r1 = r11.curLeashScale
-            int r1 = (r0 > r1 ? 1 : (r0 == r1 ? 0 : -1))
-            if (r1 != 0) goto L8e
-            goto Lbd
-        L8e:
-            android.graphics.Matrix r1 = r11.surfaceBehindMatrix
-            float r3 = r11.curLeashWidth
-            float r5 = r11.curLeashHeight
-            r1.setScale(r0, r0, r3, r5)
-            float r0 = r11.reqLeashScale
-            java.lang.Float r0 = java.lang.Float.valueOf(r0)
-            java.lang.Object[] r0 = new java.lang.Object[]{r0}
-            java.lang.Object[] r0 = java.util.Arrays.copyOf(r0, r7)
-            java.lang.String r0 = java.lang.String.format(r2, r0)
-            java.lang.String r1 = "setMatrix "
-            java.lang.String r0 = r1.concat(r0)
-            com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$3 r1 = new com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$3
-            r1.<init>()
-            r11.trace(r1, r0)
-            float r0 = r11.reqLeashScale
-            r11.curLeashScale = r0
-            r5 = r7
-        Lbd:
-            if (r8 != 0) goto Lc8
-            if (r5 == 0) goto Lc2
-            goto Lc8
-        Lc2:
-            int r0 = r11.skipFrameCount
-            int r0 = r0 + r7
-            r11.skipFrameCount = r0
-            goto Ld7
-        Lc8:
-            com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$4 r0 = new com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$4
-            r0.<init>()
-            java.lang.String r1 = "apply"
-            r11.trace(r0, r1)
-            int r0 = r11.frameUpdatedCount
-            int r0 = r0 + r7
-            r11.frameUpdatedCount = r0
-        Ld7:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl.applyTransaction():void");
+        boolean z;
+        float f;
+        float f2;
+        float f3;
+        final SurfaceControl.Transaction transaction = this.curTransaction;
+        if (transaction != null) {
+            boolean z2 = false;
+            try {
+                f3 = this.reqLeashAlpha;
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d("KeyguardUnlock", "applyTransaction catch the exception");
+            }
+            if (f3 == -1.0f || f3 == this.curLeashAlpha) {
+                z = false;
+                f2 = this.reqKeyguardAlpha;
+                if (f2 != -1.0f) {
+                    trace(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SurfaceControl.Transaction transaction2 = transaction;
+                            SurfaceControl surfaceControl = this.keyguardSurface;
+                            surfaceControl.getClass();
+                            transaction2.setAlpha(surfaceControl, this.reqKeyguardAlpha);
+                        }
+                    }, "setAlpha ".concat(String.format("%.2f", Arrays.copyOf(new Object[]{Float.valueOf(f2)}, 1))));
+                    this.curKeyguardAlpha = this.reqKeyguardAlpha;
+                    z = true;
+                }
+                f = this.reqLeashScale;
+                if (f != -1.0f) {
+                    this.surfaceBehindMatrix.setScale(f, f, this.curLeashWidth, this.curLeashHeight);
+                    trace(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SurfaceControl.Transaction transaction2 = transaction;
+                            SurfaceControl surfaceControl = this.curLeash;
+                            surfaceControl.getClass();
+                            KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = this;
+                            transaction2.setMatrix(surfaceControl, keyguardSecLegacyUnlockAnimationControllerImpl.surfaceBehindMatrix, keyguardSecLegacyUnlockAnimationControllerImpl.tmpFloat9);
+                        }
+                    }, "setMatrix ".concat(String.format("%.2f", Arrays.copyOf(new Object[]{Float.valueOf(this.reqLeashScale)}, 1))));
+                    this.curLeashScale = this.reqLeashScale;
+                    z2 = true;
+                }
+                if (z) {
+                }
+                trace(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$4
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        transaction.apply();
+                    }
+                }, "apply");
+                this.frameUpdatedCount++;
+            }
+            trace(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    SurfaceControl.Transaction transaction2 = transaction;
+                    SurfaceControl surfaceControl = this.curLeash;
+                    surfaceControl.getClass();
+                    transaction2.setAlpha(surfaceControl, this.reqLeashAlpha);
+                }
+            }, "setAlpha ".concat(String.format("%.2f", Arrays.copyOf(new Object[]{Float.valueOf(f3)}, 1))));
+            this.curLeashAlpha = this.reqLeashAlpha;
+            z = true;
+            try {
+                f2 = this.reqKeyguardAlpha;
+                if (f2 != -1.0f && f2 != this.curKeyguardAlpha) {
+                    trace(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SurfaceControl.Transaction transaction2 = transaction;
+                            SurfaceControl surfaceControl = this.keyguardSurface;
+                            surfaceControl.getClass();
+                            transaction2.setAlpha(surfaceControl, this.reqKeyguardAlpha);
+                        }
+                    }, "setAlpha ".concat(String.format("%.2f", Arrays.copyOf(new Object[]{Float.valueOf(f2)}, 1))));
+                    this.curKeyguardAlpha = this.reqKeyguardAlpha;
+                    z = true;
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+                Log.d("KeyguardUnlock", "applyTransaction catch the exception");
+            }
+            f = this.reqLeashScale;
+            if (f != -1.0f && f != this.curLeashScale) {
+                this.surfaceBehindMatrix.setScale(f, f, this.curLeashWidth, this.curLeashHeight);
+                trace(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$3
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SurfaceControl.Transaction transaction2 = transaction;
+                        SurfaceControl surfaceControl = this.curLeash;
+                        surfaceControl.getClass();
+                        KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = this;
+                        transaction2.setMatrix(surfaceControl, keyguardSecLegacyUnlockAnimationControllerImpl.surfaceBehindMatrix, keyguardSecLegacyUnlockAnimationControllerImpl.tmpFloat9);
+                    }
+                }, "setMatrix ".concat(String.format("%.2f", Arrays.copyOf(new Object[]{Float.valueOf(this.reqLeashScale)}, 1))));
+                this.curLeashScale = this.reqLeashScale;
+                z2 = true;
+            }
+            if (z && !z2) {
+                this.skipFrameCount++;
+            } else {
+                trace(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$applyTransaction$1$4
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        transaction.apply();
+                    }
+                }, "apply");
+                this.frameUpdatedCount++;
+            }
+        }
     }
 
     @Override // com.android.systemui.keyguard.KeyguardSecUnlockAnimationController
-    public final long getUnlockAnimationDuration() {
+    public final long getUnlockAnimationDuration() throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         float f;
         float transitionAnimationScale;
         if (this.isLauncherActivity) {
@@ -381,6 +367,8 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
     @Override // com.android.systemui.keyguard.KeyguardUnlockAnimationController
     public final void notifyStartSurfaceBehindRemoteAnimation(RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, long j, boolean z) {
         this.surfaceBehindRemoteAnimationTargets = remoteAnimationTargetArr;
+        this.openingWallpaperTargets = remoteAnimationTargetArr2;
+        this.closingWallpaperTargets = remoteAnimationTargetArr3;
         this.surfaceBehindRemoteAnimationStartTime = j;
         Log.i("KeyguardUnlock", "notifyStartSurfaceBehindRemoteAnimation::target = " + remoteAnimationTargetArr);
         playCannedUnlockAnimation();
@@ -449,15 +437,21 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
         }
         RemoteAnimationTarget[] remoteAnimationTargetArr2 = this.surfaceBehindRemoteAnimationTargets;
         final RemoteAnimationTarget remoteAnimationTarget3 = remoteAnimationTargetArr2 != null ? remoteAnimationTargetArr2[0] : null;
-        boolean areEqual = Intrinsics.areEqual((remoteAnimationTarget3 == null || (runningTaskInfo = remoteAnimationTarget3.taskInfo) == null || (componentName = runningTaskInfo.topActivity) == null) ? null : componentName.getClassName(), "com.sec.android.app.launcher.Launcher");
-        this.isLauncherActivity = areEqual;
-        boolean z2 = ((KeyguardStateControllerImpl) this.keyguardStateController).mPrimaryBouncerShowing;
-        this.isPrimaryBouncerShowing = z2;
-        Log.d("KeyguardUnlock", "playCannedUnlockAnimation: isLauncherActivity=" + areEqual + ", isPrimaryBouncerShowing=" + z2);
+        this.isLauncherActivity = Intrinsics.areEqual((remoteAnimationTarget3 == null || (runningTaskInfo = remoteAnimationTarget3.taskInfo) == null || (componentName = runningTaskInfo.topActivity) == null) ? null : componentName.getClassName(), "com.sec.android.app.launcher.Launcher");
+        this.isPrimaryBouncerShowing = ((KeyguardStateControllerImpl) this.keyguardStateController).mPrimaryBouncerShowing;
         RemoteAnimationTarget[] remoteAnimationTargetArr3 = this.openingWallpaperTargets;
-        this.openingWallpaperLeash = (remoteAnimationTargetArr3 == null || (remoteAnimationTarget2 = remoteAnimationTargetArr3[0]) == null) ? null : remoteAnimationTarget2.leash;
+        this.openingWallpaperLeash = (remoteAnimationTargetArr3 == null || (remoteAnimationTarget2 = (RemoteAnimationTarget) ArraysKt___ArraysKt.getOrNull(0, remoteAnimationTargetArr3)) == null) ? null : remoteAnimationTarget2.leash;
         RemoteAnimationTarget[] remoteAnimationTargetArr4 = this.closingWallpaperTargets;
-        this.closingWallpaperLeash = (remoteAnimationTargetArr4 == null || (remoteAnimationTarget = remoteAnimationTargetArr4[0]) == null) ? null : remoteAnimationTarget.leash;
+        SurfaceControl surfaceControl = (remoteAnimationTargetArr4 == null || (remoteAnimationTarget = (RemoteAnimationTarget) ArraysKt___ArraysKt.getOrNull(0, remoteAnimationTargetArr4)) == null) ? null : remoteAnimationTarget.leash;
+        this.closingWallpaperLeash = surfaceControl;
+        boolean z2 = this.isLauncherActivity;
+        boolean z3 = this.isPrimaryBouncerShowing;
+        SurfaceControl surfaceControl2 = this.openingWallpaperLeash;
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("playCannedUnlockAnimation: isLauncherActivity=", ", isPrimaryBouncerShowing=", ", openingWallpaperLeash=", z2, z3);
+        sbM.append(surfaceControl2);
+        sbM.append(", closingWallpaperLeash=");
+        sbM.append(surfaceControl);
+        Log.d("KeyguardUnlock", sbM.toString());
         KeyguardViewMediatorHelperImpl$setupLocked$5 keyguardViewMediatorHelperImpl$setupLocked$52 = this.callback;
         if (keyguardViewMediatorHelperImpl$setupLocked$52 != null) {
             KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = keyguardViewMediatorHelperImpl$setupLocked$52.this$0;
@@ -482,19 +476,19 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
             } else if (((Boolean) ((ShadeInteractorImpl) ((ShadeInteractor) this.shadeInteractorLazy.get())).isUserInteracting.$$delegate_0.getValue()).booleanValue()) {
                 Log.e("KeyguardUnlock", "isUserInteracting already true, skipping enable");
             } else {
-                StandaloneCoroutine launch$default = BuildersKt.launch$default(this.scope, null, null, new KeyguardSecLegacyUnlockAnimationControllerImpl$enablePanelDetector$1(this, null), 3);
-                this.shadeExpansionCollectorJob = launch$default;
-                launch$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$$ExternalSyntheticLambda0
+                StandaloneCoroutine standaloneCoroutineLaunch$default = BuildersKt.launch$default(this.scope, null, null, new KeyguardSecLegacyUnlockAnimationControllerImpl$enablePanelDetector$1(this, null), 3);
+                this.shadeExpansionCollectorJob = standaloneCoroutineLaunch$default;
+                standaloneCoroutineLaunch$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
-                        KeyguardSecLegacyUnlockAnimationControllerImpl.this.shadeExpansionCollectorJob = null;
+                    public final Object mo781invoke(Object obj) {
+                        this.f$0.shadeExpansionCollectorJob = null;
                         return Unit.INSTANCE;
                     }
                 });
             }
         }
-        this.unlockAnimationExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$playCannedUnlockAnimation$5
+        this.unlockAnimationExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl.playCannedUnlockAnimation.5
             @Override // java.lang.Runnable
             public final void run() {
                 StandaloneCoroutine standaloneCoroutine;
@@ -502,9 +496,9 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
                 RemoteAnimationTarget remoteAnimationTarget4 = remoteAnimationTarget3;
                 if (remoteAnimationTarget4 != null) {
                     KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = this;
-                    SurfaceControl surfaceControl = remoteAnimationTarget4.leash;
-                    keyguardSecLegacyUnlockAnimationControllerImpl.curLeash = surfaceControl;
-                    keyguardSecLegacyUnlockAnimationControllerImpl.traceTag = surfaceControl.toString();
+                    SurfaceControl surfaceControl3 = remoteAnimationTarget4.leash;
+                    keyguardSecLegacyUnlockAnimationControllerImpl.curLeash = surfaceControl3;
+                    keyguardSecLegacyUnlockAnimationControllerImpl.traceTag = surfaceControl3.toString();
                     Rect rect = remoteAnimationTarget4.screenSpaceBounds;
                     keyguardSecLegacyUnlockAnimationControllerImpl.curLeashWidth = rect.width() / 2.0f;
                     keyguardSecLegacyUnlockAnimationControllerImpl.curLeashHeight = rect.height() / 2.0f;
@@ -541,11 +535,11 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
                     animatorSet2.setStartDelay(keyguardSecLegacyUnlockAnimationControllerImpl2.animStartDelay);
                     animatorSet2.play(keyguardSecLegacyUnlockAnimationControllerImpl2.alphaAnimator);
                     keyguardSecLegacyUnlockAnimationControllerImpl2.cannedAnimatorSet = animatorSet2;
-                    SurfaceControl surfaceControl2 = keyguardSecLegacyUnlockAnimationControllerImpl2.openingWallpaperLeash;
-                    if (surfaceControl2 != null) {
+                    SurfaceControl surfaceControl4 = keyguardSecLegacyUnlockAnimationControllerImpl2.openingWallpaperLeash;
+                    if (surfaceControl4 != null) {
                         SurfaceControl.Transaction transaction = keyguardSecLegacyUnlockAnimationControllerImpl2.curTransaction;
                         transaction.getClass();
-                        transaction.setAlpha(surfaceControl2, 1.0f);
+                        transaction.setAlpha(surfaceControl4, 1.0f);
                     }
                     keyguardSecLegacyUnlockAnimationControllerImpl2.skipFrameCount = 0;
                     keyguardSecLegacyUnlockAnimationControllerImpl2.frameUpdatedCount = 0;
@@ -562,7 +556,7 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
                 keyguardSecLegacyUnlockAnimationControllerImpl2.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$playUnlockAnimation$4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ((KeyguardViewMediator) KeyguardSecLegacyUnlockAnimationControllerImpl.this.keyguardViewMediatorLazy.get()).exitKeyguardAndFinishSurfaceBehindRemoteAnimation();
+                        ((KeyguardViewMediator) keyguardSecLegacyUnlockAnimationControllerImpl2.keyguardViewMediatorLazy.get()).exitKeyguardAndFinishSurfaceBehindRemoteAnimation();
                     }
                 });
             }
@@ -575,11 +569,11 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
     }
 
     public final void trace(Runnable runnable, String str) {
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.traceTag, "#", str);
-        if (m.length() > 127) {
-            m = m.substring(0, 126);
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(this.traceTag, "#", str);
+        if (strM.length() > 127) {
+            strM = strM.substring(0, 126);
         }
-        Trace.beginSection(m);
+        Trace.beginSection(strM);
         runnable.run();
         Trace.endSection();
     }
@@ -625,7 +619,7 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
                         this.delayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl$updateKeyguardSurface$1$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                ((KeyguardSurfaceControllerImpl) KeyguardSecLegacyUnlockAnimationControllerImpl.this.keyguardSurfaceControllerLazy.get()).restoreKeyguardSurfaceByTransaction();
+                                ((KeyguardSurfaceControllerImpl) this.this$0.keyguardSurfaceControllerLazy.get()).restoreKeyguardSurfaceByTransaction();
                             }
                         }, this.animStartDelay);
                     }

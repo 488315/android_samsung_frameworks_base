@@ -24,10 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.jvm.functions.Function1;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class GroupWhenCoordinator implements Coordinator {
@@ -41,9 +41,7 @@ public final class GroupWhenCoordinator implements Coordinator {
     private final Runnable invalidateListRunnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupWhenCoordinator$invalidateListRunnable$1
         @Override // java.lang.Runnable
         public final void run() {
-            GroupWhenCoordinator$invalidator$1 groupWhenCoordinator$invalidator$1;
-            groupWhenCoordinator$invalidator$1 = GroupWhenCoordinator.this.invalidator;
-            groupWhenCoordinator$invalidator$1.invalidateList("future notification invalidation");
+            invalidateList("future notification invalidation");
         }
     };
 
@@ -54,19 +52,19 @@ public final class GroupWhenCoordinator implements Coordinator {
     }
 
     private final long calculateGroupNotificationTime(GroupEntry groupEntry, long j) {
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(groupEntry.mUnmodifiableChildren), new GroupWhenCoordinator$$ExternalSyntheticLambda0()));
-        long j2 = Long.MIN_VALUE;
-        long j3 = Long.MAX_VALUE;
-        while (filteringSequence$iterator$1.hasNext()) {
-            long longValue = ((Number) filteringSequence$iterator$1.next()).longValue();
-            if (j - longValue > 0) {
-                j2 = Math.max(j2, longValue);
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.mapNotNull(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(groupEntry.mUnmodifiableChildren), new GroupWhenCoordinator$$ExternalSyntheticLambda0()).new AnonymousClass1();
+        long jMax = Long.MIN_VALUE;
+        long jMin = Long.MAX_VALUE;
+        while (anonymousClass1.hasNext()) {
+            long jLongValue = ((Number) anonymousClass1.next()).longValue();
+            if (j - jLongValue > 0) {
+                jMax = Math.max(jMax, jLongValue);
             } else {
-                j3 = Math.min(j3, longValue);
+                jMin = Math.min(jMin, jLongValue);
             }
         }
-        if (j2 != Long.MIN_VALUE || j3 != Long.MAX_VALUE) {
-            return j3 != Long.MAX_VALUE ? j3 : j2;
+        if (jMax != Long.MIN_VALUE || jMin != Long.MAX_VALUE) {
+            return jMin != Long.MAX_VALUE ? jMin : jMax;
         }
         NotificationEntry notificationEntry = groupEntry.mSummary;
         if (notificationEntry != null) {
@@ -77,9 +75,9 @@ public final class GroupWhenCoordinator implements Coordinator {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static final Long calculateGroupNotificationTime$lambda$2(NotificationEntry notificationEntry) {
-        Long valueOf = Long.valueOf(notificationEntry.mSbn.getNotification().getWhen());
-        if (valueOf.longValue() > 0) {
-            return valueOf;
+        Long lValueOf = Long.valueOf(notificationEntry.mSbn.getNotification().getWhen());
+        if (lValueOf.longValue() > 0) {
+            return lValueOf;
         }
         return null;
     }
@@ -97,35 +95,35 @@ public final class GroupWhenCoordinator implements Coordinator {
         NotificationViewWrapper notificationViewWrapper;
         Long l = this.notificationGroupTimes.get(groupEntry);
         if (l != null) {
-            long longValue = l.longValue();
+            long jLongValue = l.longValue();
             ExpandableNotificationRow expandableNotificationRow = ((ExpandableNotificationRowController) notifGroupController).mView;
             boolean z = expandableNotificationRow.mIsSummaryWithChildren;
             if (!z) {
-                Log.w("NotifRowController", "Called setNotificationTime(" + longValue + ") on a leaf row");
+                Log.w("NotifRowController", "Called setNotificationTime(" + jLongValue + ") on a leaf row");
                 return;
             }
             if (!z) {
-                Log.w("ExpandableNotifRow", "setNotificationGroupWhen( whenMillis: " + longValue + ") mIsSummaryWithChildren: false mChildrenContainer has not been inflated yet.");
+                Log.w("ExpandableNotifRow", "setNotificationGroupWhen( whenMillis: " + jLongValue + ") mIsSummaryWithChildren: false mChildrenContainer has not been inflated yet.");
                 return;
             }
             NotificationChildrenContainer notificationChildrenContainer = expandableNotificationRow.mChildrenContainer;
             NotificationHeaderViewWrapper notificationHeaderViewWrapper = notificationChildrenContainer.mGroupHeaderWrapper;
             if (notificationHeaderViewWrapper != null) {
-                notificationHeaderViewWrapper.setNotificationWhen(longValue);
+                notificationHeaderViewWrapper.setNotificationWhen(jLongValue);
             }
             NotificationHeaderViewWrapper notificationHeaderViewWrapper2 = notificationChildrenContainer.mMinimizedGroupHeaderWrapper;
             if (notificationHeaderViewWrapper2 != null) {
-                notificationHeaderViewWrapper2.setNotificationWhen(longValue);
+                notificationHeaderViewWrapper2.setNotificationWhen(jLongValue);
             }
             if (NotiRune.NOTI_SUBSCREEN_NOTIFICATION_COMMON) {
-                notificationChildrenContainer.mWhenMillis = longValue;
+                notificationChildrenContainer.mWhenMillis = jLongValue;
             }
             NotificationContentView notificationContentView = expandableNotificationRow.mPublicLayout;
             if ((notificationContentView.mContractedChild == null || (notificationViewWrapper = notificationContentView.mContractedWrapper) == null) && ((notificationContentView.mExpandedChild == null || (notificationViewWrapper = notificationContentView.mExpandedWrapper) == null) && (notificationContentView.mHeadsUpChild == null || (notificationViewWrapper = notificationContentView.mHeadsUpWrapper) == null))) {
                 notificationViewWrapper = null;
             }
             if (notificationViewWrapper instanceof NotificationHeaderViewWrapper) {
-                ((NotificationHeaderViewWrapper) notificationViewWrapper).setNotificationWhen(longValue);
+                ((NotificationHeaderViewWrapper) notificationViewWrapper).setNotificationWhen(jLongValue);
             }
         }
     }
@@ -134,37 +132,37 @@ public final class GroupWhenCoordinator implements Coordinator {
     public final void onBeforeFinalizeFilterListener(List<? extends PipelineEntry> list) {
         cancelListInvalidation();
         this.notificationGroupTimes.clear();
-        long currentTimeMillis = this.systemClock.currentTimeMillis();
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupWhenCoordinator$onBeforeFinalizeFilterListener$$inlined$filterIsInstance$1
+        long jCurrentTimeMillis = this.systemClock.currentTimeMillis();
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupWhenCoordinator$onBeforeFinalizeFilterListener$$inlined$filterIsInstance$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Boolean mo779invoke(Object obj) {
+            public final Boolean mo781invoke(Object obj) {
                 return Boolean.valueOf(obj instanceof GroupEntry);
             }
-        }));
-        long j = Long.MAX_VALUE;
-        while (filteringSequence$iterator$1.hasNext()) {
-            GroupEntry groupEntry = (GroupEntry) filteringSequence$iterator$1.next();
-            long calculateGroupNotificationTime = calculateGroupNotificationTime(groupEntry, currentTimeMillis);
-            this.notificationGroupTimes.put(groupEntry, Long.valueOf(calculateGroupNotificationTime));
-            if (calculateGroupNotificationTime > currentTimeMillis) {
-                j = Math.min(j, calculateGroupNotificationTime);
+        }).new AnonymousClass1();
+        long jMin = Long.MAX_VALUE;
+        while (anonymousClass1.hasNext()) {
+            GroupEntry groupEntry = (GroupEntry) anonymousClass1.next();
+            long jCalculateGroupNotificationTime = calculateGroupNotificationTime(groupEntry, jCurrentTimeMillis);
+            this.notificationGroupTimes.put(groupEntry, Long.valueOf(jCalculateGroupNotificationTime));
+            if (jCalculateGroupNotificationTime > jCurrentTimeMillis) {
+                jMin = Math.min(jMin, jCalculateGroupNotificationTime);
             }
         }
-        if (j != Long.MAX_VALUE) {
-            this.cancelInvalidateListRunnable = this.delayableExecutor.executeDelayed(this.invalidateListRunnable, j - currentTimeMillis);
+        if (jMin != Long.MAX_VALUE) {
+            this.cancelInvalidateListRunnable = this.delayableExecutor.executeDelayed(this.invalidateListRunnable, jMin - jCurrentTimeMillis);
         }
     }
 
     @Override // com.android.systemui.statusbar.notification.collection.coordinator.Coordinator
     public void attach(NotifPipeline notifPipeline) {
-        notifPipeline.addOnBeforeFinalizeFilterListener(new OnBeforeFinalizeFilterListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupWhenCoordinator$attach$1
+        notifPipeline.addOnBeforeFinalizeFilterListener(new OnBeforeFinalizeFilterListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupWhenCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeFinalizeFilterListener
             public final void onBeforeFinalizeFilter(List<? extends PipelineEntry> list) {
                 GroupWhenCoordinator.this.onBeforeFinalizeFilterListener(list);
             }
         });
-        ((ArrayList) notifPipeline.mRenderStageManager.onAfterRenderGroupListeners).add(new OnAfterRenderGroupListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupWhenCoordinator$attach$2
+        ((ArrayList) notifPipeline.mRenderStageManager.onAfterRenderGroupListeners).add(new OnAfterRenderGroupListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GroupWhenCoordinator.attach.2
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnAfterRenderGroupListener
             public final void onAfterRenderGroup(GroupEntry groupEntry, NotifGroupController notifGroupController) {
                 GroupWhenCoordinator.this.onAfterRenderGroupListener(groupEntry, notifGroupController);

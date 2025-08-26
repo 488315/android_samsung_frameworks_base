@@ -1,7 +1,6 @@
 package android.app.prediction;
 
 import android.annotation.SystemApi;
-import android.app.prediction.AppPredictor;
 import android.app.prediction.IPredictionCallback;
 import android.app.prediction.IPredictionManager;
 import android.content.Context;
@@ -37,12 +36,12 @@ public final class AppPredictor {
     }
 
     AppPredictor(Context context, AppPredictionContext appPredictionContext) {
-        IPredictionManager asInterface = IPredictionManager.Stub.asInterface(ServiceManager.getService(Context.APP_PREDICTION_SERVICE));
-        this.mPredictionManager = asInterface;
+        IPredictionManager iPredictionManagerAsInterface = IPredictionManager.Stub.asInterface(ServiceManager.getService(Context.APP_PREDICTION_SERVICE));
+        this.mPredictionManager = iPredictionManagerAsInterface;
         AppPredictionSessionId appPredictionSessionId = new AppPredictionSessionId(context.getPackageName() + ":" + UUID.randomUUID(), context.getUserId());
         this.mSessionId = appPredictionSessionId;
         try {
-            asInterface.createPredictionSession(appPredictionContext, appPredictionSessionId, getToken());
+            iPredictionManagerAsInterface.createPredictionSession(appPredictionContext, appPredictionSessionId, getToken());
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to create predictor", e);
             e.rethrowAsRuntimeException();
@@ -92,7 +91,7 @@ public final class AppPredictor {
             CallbackWrapper callbackWrapper = new CallbackWrapper(executor, new Consumer() { // from class: android.app.prediction.AppPredictor$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    AppPredictor.Callback.this.onTargetsAvailable((List) obj);
+                    callback.onTargetsAvailable((List) obj);
                 }
             });
             this.mPredictionManager.registerPredictionUpdates(this.mSessionId, callbackWrapper);
@@ -209,16 +208,16 @@ public final class AppPredictor {
 
         @Override // android.app.prediction.IPredictionCallback
         public void onResult(final ParceledListSlice parceledListSlice) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.app.prediction.AppPredictor$CallbackWrapper$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AppPredictor.CallbackWrapper.this.lambda$onResult$0(parceledListSlice);
+                        this.f$0.lambda$onResult$0(parceledListSlice);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -239,16 +238,16 @@ public final class AppPredictor {
 
         @Override // android.os.IRemoteCallback
         public void sendResult(final Bundle bundle) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mExecutor.execute(new Runnable() { // from class: android.app.prediction.AppPredictor$RemoteCallbackWrapper$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AppPredictor.RemoteCallbackWrapper.this.lambda$sendResult$0(bundle);
+                        this.f$0.lambda$sendResult$0(bundle);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

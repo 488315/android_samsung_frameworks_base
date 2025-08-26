@@ -1,6 +1,5 @@
 package com.google.protobuf;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class UnknownFieldSetLiteSchema extends UnknownFieldSchema {
     @Override // com.google.protobuf.UnknownFieldSchema
@@ -35,9 +34,9 @@ public class UnknownFieldSetLiteSchema extends UnknownFieldSchema {
         if (unknownFieldSetLite != UnknownFieldSetLite.DEFAULT_INSTANCE) {
             return unknownFieldSetLite;
         }
-        UnknownFieldSetLite newInstance = UnknownFieldSetLite.newInstance();
-        generatedMessageLite.unknownFields = newInstance;
-        return newInstance;
+        UnknownFieldSetLite unknownFieldSetLiteNewInstance = UnknownFieldSetLite.newInstance();
+        generatedMessageLite.unknownFields = unknownFieldSetLiteNewInstance;
+        return unknownFieldSetLiteNewInstance;
     }
 
     @Override // com.google.protobuf.UnknownFieldSchema
@@ -57,13 +56,13 @@ public class UnknownFieldSetLiteSchema extends UnknownFieldSchema {
         if (i != -1) {
             return i;
         }
-        int i2 = 0;
-        for (int i3 = 0; i3 < unknownFieldSetLite.count; i3++) {
-            int i4 = unknownFieldSetLite.tags[i3] >>> 3;
-            i2 += CodedOutputStream.computeBytesSize(3, (ByteString) unknownFieldSetLite.objects[i3]) + CodedOutputStream.computeUInt32Size(2, i4) + (CodedOutputStream.computeTagSize(1) * 2);
+        int iComputeBytesSize = 0;
+        for (int i2 = 0; i2 < unknownFieldSetLite.count; i2++) {
+            int i3 = unknownFieldSetLite.tags[i2] >>> 3;
+            iComputeBytesSize += CodedOutputStream.computeBytesSize(3, (ByteString) unknownFieldSetLite.objects[i2]) + CodedOutputStream.computeUInt32Size(2, i3) + (CodedOutputStream.computeTagSize(1) * 2);
         }
-        unknownFieldSetLite.memoizedSerializedSize = i2;
-        return i2;
+        unknownFieldSetLite.memoizedSerializedSize = iComputeBytesSize;
+        return iComputeBytesSize;
     }
 
     @Override // com.google.protobuf.UnknownFieldSchema

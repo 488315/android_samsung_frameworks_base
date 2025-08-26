@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class FacePropertyRepositoryImpl$sensorLocation$1$1 extends SuspendLambda implements Function5 {
     /* synthetic */ float F$0;
@@ -30,12 +29,12 @@ final class FacePropertyRepositoryImpl$sensorLocation$1$1 extends SuspendLambda 
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        float floatValue = ((Number) obj4).floatValue();
+        float fFloatValue = ((Number) obj4).floatValue();
         FacePropertyRepositoryImpl$sensorLocation$1$1 facePropertyRepositoryImpl$sensorLocation$1$1 = new FacePropertyRepositoryImpl$sensorLocation$1$1(this.this$0, (Continuation) obj5);
         facePropertyRepositoryImpl$sensorLocation$1$1.L$0 = (Point) obj;
         facePropertyRepositoryImpl$sensorLocation$1$1.L$1 = (DisplayRotation) obj2;
         facePropertyRepositoryImpl$sensorLocation$1$1.L$2 = (Size) obj3;
-        facePropertyRepositoryImpl$sensorLocation$1$1.F$0 = floatValue;
+        facePropertyRepositoryImpl$sensorLocation$1$1.F$0 = fFloatValue;
         return facePropertyRepositoryImpl$sensorLocation$1$1.invokeSuspend(Unit.INSTANCE);
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -42,8 +43,8 @@ public final class ContextParam implements Parcelable {
     }
 
     protected ContextParam(Parcel parcel) {
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             this.mParams.put(parcel.readString(), parcel.readValue(null));
         }
     }
@@ -53,13 +54,13 @@ public final class ContextParam implements Parcelable {
         parcel.writeInt(this.mParams.size());
         this.mParams.forEach(new BiConsumer() { // from class: com.samsung.android.mocca.ContextParam$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                ContextParam.lambda$writeToParcel$0(Parcel.this, (String) obj, obj2);
+            public final void accept(Object obj, Object obj2) throws IOException {
+                ContextParam.lambda$writeToParcel$0(parcel, (String) obj, obj2);
             }
         });
     }
 
-    static /* synthetic */ void lambda$writeToParcel$0(Parcel parcel, String str, Object obj) {
+    static /* synthetic */ void lambda$writeToParcel$0(Parcel parcel, String str, Object obj) throws IOException {
         parcel.writeString(str);
         parcel.writeValue(obj);
     }

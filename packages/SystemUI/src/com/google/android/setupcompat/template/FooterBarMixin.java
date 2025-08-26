@@ -1,20 +1,32 @@
 package com.google.android.setupcompat.template;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.InsetDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.PersistableBundle;
 import android.util.AttributeSet;
+import android.util.StateSet;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import com.android.systemui.R;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonHelper;
 import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.R$styleable;
 import com.google.android.setupcompat.internal.FooterButtonPartnerConfig;
@@ -30,7 +42,6 @@ import com.google.android.setupcompat.view.ButtonBarLayout;
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FooterBarMixin implements Mixin {
     public static final Logger LOG = new Logger("FooterBarMixin");
@@ -61,7 +72,6 @@ public class FooterBarMixin implements Mixin {
     public FooterButtonPartnerConfig tertiaryButtonPartnerConfigForTesting;
     final boolean useFullDynamicColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.android.setupcompat.template.FooterBarMixin$1, reason: invalid class name */
     public class AnonymousClass1 {
         public final /* synthetic */ int val$id;
@@ -71,7 +81,7 @@ public class FooterBarMixin implements Mixin {
         }
     }
 
-    public FooterBarMixin(TemplateLayout templateLayout, AttributeSet attributeSet, int i) {
+    public FooterBarMixin(TemplateLayout templateLayout, AttributeSet attributeSet, int i) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         XmlResourceParser xml;
         PartnerConfig partnerConfig;
         FooterBarMixinMetrics footerBarMixinMetrics = new FooterBarMixinMetrics();
@@ -84,41 +94,41 @@ public class FooterBarMixin implements Mixin {
         this.applyPartnerResources = z && ((PartnerCustomizationLayout) templateLayout).shouldApplyPartnerResource();
         this.applyDynamicColor = z && ((PartnerCustomizationLayout) templateLayout).shouldApplyDynamicColor();
         this.useFullDynamicColor = z && ((PartnerCustomizationLayout) templateLayout).useFullDynamicColor();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SucFooterBarMixin, i, 0);
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(17, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SucFooterBarMixin, i, 0);
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(17, 0);
         this.defaultPadding = dimensionPixelSize;
-        this.footerBarPaddingTop = obtainStyledAttributes.getDimensionPixelSize(16, dimensionPixelSize);
-        this.footerBarPaddingBottom = obtainStyledAttributes.getDimensionPixelSize(13, this.defaultPadding);
-        this.footerBarPaddingStart = obtainStyledAttributes.getDimensionPixelSize(15, 0);
-        this.footerBarPaddingEnd = obtainStyledAttributes.getDimensionPixelSize(14, 0);
-        this.footerBarPrimaryBackgroundColor = obtainStyledAttributes.getColor(18, 0);
-        int color = obtainStyledAttributes.getColor(22, 0);
-        this.footerButtonAlignEnd = obtainStyledAttributes.getBoolean(0, false);
-        this.footerBarPrimaryButtonEnabledTextColor = obtainStyledAttributes.getColor(21, 0);
-        int color2 = obtainStyledAttributes.getColor(25, 0);
-        this.footerBarPrimaryButtonDisabledTextColor = obtainStyledAttributes.getColor(20, 0);
-        int color3 = obtainStyledAttributes.getColor(24, 0);
-        this.footerBarButtonMiddleSpacing = obtainStyledAttributes.getDimensionPixelSize(8, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(19, 0);
-        int resourceId2 = obtainStyledAttributes.getResourceId(23, 0);
-        obtainStyledAttributes.recycle();
+        this.footerBarPaddingTop = typedArrayObtainStyledAttributes.getDimensionPixelSize(16, dimensionPixelSize);
+        this.footerBarPaddingBottom = typedArrayObtainStyledAttributes.getDimensionPixelSize(13, this.defaultPadding);
+        this.footerBarPaddingStart = typedArrayObtainStyledAttributes.getDimensionPixelSize(15, 0);
+        this.footerBarPaddingEnd = typedArrayObtainStyledAttributes.getDimensionPixelSize(14, 0);
+        this.footerBarPrimaryBackgroundColor = typedArrayObtainStyledAttributes.getColor(18, 0);
+        int color = typedArrayObtainStyledAttributes.getColor(22, 0);
+        this.footerButtonAlignEnd = typedArrayObtainStyledAttributes.getBoolean(0, false);
+        this.footerBarPrimaryButtonEnabledTextColor = typedArrayObtainStyledAttributes.getColor(21, 0);
+        int color2 = typedArrayObtainStyledAttributes.getColor(25, 0);
+        this.footerBarPrimaryButtonDisabledTextColor = typedArrayObtainStyledAttributes.getColor(20, 0);
+        int color3 = typedArrayObtainStyledAttributes.getColor(24, 0);
+        this.footerBarButtonMiddleSpacing = typedArrayObtainStyledAttributes.getDimensionPixelSize(8, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(19, 0);
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(23, 0);
+        typedArrayObtainStyledAttributes.recycle();
         FooterButtonInflater footerButtonInflater = new FooterButtonInflater(context);
         if (resourceId2 != 0) {
             xml = footerButtonInflater.context.getResources().getXml(resourceId2);
             try {
-                FooterButton inflate = footerButtonInflater.inflate(xml);
+                FooterButton footerButtonInflate = footerButtonInflater.inflate(xml);
                 xml.close();
                 Preconditions.ensureOnMainThread("setSecondaryButton");
                 ensureFooterInflated();
                 int i2 = PartnerConfigHelper.isGlifExpressiveEnabled(context) ? R.style.SucGlifMaterialButton_Secondary : R.style.SucPartnerCustomizationButton_Secondary;
-                FooterButtonPartnerConfig.Builder builder = new FooterButtonPartnerConfig.Builder(inflate);
+                FooterButtonPartnerConfig.Builder builder = new FooterButtonPartnerConfig.Builder(footerButtonInflate);
                 PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_FOOTER_SECONDARY_BUTTON_BG_COLOR;
-                builder.partnerTheme = getPartnerTheme(inflate, i2, partnerConfig2);
+                builder.partnerTheme = getPartnerTheme(footerButtonInflate, i2, partnerConfig2);
                 builder.buttonBackgroundConfig = partnerConfig2;
                 builder.buttonDisableAlphaConfig = PartnerConfig.CONFIG_FOOTER_BUTTON_DISABLED_ALPHA;
                 builder.buttonDisableBackgroundConfig = PartnerConfig.CONFIG_FOOTER_BUTTON_DISABLED_BG_COLOR;
                 builder.buttonDisableTextColorConfig = PartnerConfig.CONFIG_FOOTER_SECONDARY_BUTTON_DISABLED_TEXT_COLOR;
-                switch (inflate.buttonType) {
+                switch (footerButtonInflate.buttonType) {
                     case 1:
                         partnerConfig = PartnerConfig.CONFIG_FOOTER_BUTTON_ICON_ADD_ANOTHER;
                         break;
@@ -157,21 +167,21 @@ public class FooterBarMixin implements Mixin {
                 builder.buttonTextTypeFaceConfig = PartnerConfig.CONFIG_FOOTER_BUTTON_FONT_FAMILY;
                 builder.buttonTextWeightConfig = PartnerConfig.CONFIG_FOOTER_BUTTON_FONT_WEIGHT;
                 builder.buttonTextStyleConfig = PartnerConfig.CONFIG_FOOTER_BUTTON_TEXT_STYLE;
-                FooterButtonPartnerConfig build = builder.build();
-                Object inflateButton = inflateButton(inflate, build);
-                Button button = (Button) inflateButton;
+                FooterButtonPartnerConfig footerButtonPartnerConfigBuild = builder.build();
+                Object objInflateButton = inflateButton(footerButtonInflate, footerButtonPartnerConfigBuild);
+                Button button = (Button) objInflateButton;
                 this.secondaryButtonId = button.getId();
-                if (inflateButton instanceof MaterialFooterActionButton) {
-                    ((MaterialFooterActionButton) inflateButton).getClass();
+                if (objInflateButton instanceof MaterialFooterActionButton) {
+                    ((MaterialFooterActionButton) objInflateButton).getClass();
                 } else if (button instanceof FooterActionButton) {
-                    ((FooterActionButton) inflateButton).isPrimaryButtonStyle = false;
+                    ((FooterActionButton) objInflateButton).isPrimaryButtonStyle = false;
                 } else {
                     LOG.e("Set the primary button style error when setting secondary button.");
                 }
-                this.secondaryButton = inflate;
-                this.secondaryButtonPartnerConfigForTesting = build;
+                this.secondaryButton = footerButtonInflate;
+                this.secondaryButtonPartnerConfigForTesting = footerButtonPartnerConfigBuild;
                 onFooterButtonInflated(button, color);
-                onFooterButtonApplyPartnerResource(button, build);
+                onFooterButtonApplyPartnerResource(button, footerButtonPartnerConfigBuild);
                 if (PartnerConfigHelper.isGlifExpressiveEnabled(context)) {
                     boolean z2 = this.secondaryButton.enabled;
                     color2 = z2 ? color2 : color3;
@@ -193,9 +203,9 @@ public class FooterBarMixin implements Mixin {
         if (resourceId != 0) {
             xml = footerButtonInflater.context.getResources().getXml(resourceId);
             try {
-                FooterButton inflate2 = footerButtonInflater.inflate(xml);
+                FooterButton footerButtonInflate2 = footerButtonInflater.inflate(xml);
                 xml.close();
-                setPrimaryButton(inflate2);
+                setPrimaryButton(footerButtonInflate2);
                 footerBarMixinMetrics.secondaryButtonVisibility = footerBarMixinMetrics.secondaryButtonVisibility.equals(C2paManifestList.UNKNOWN_VALUE) ? "VisibleUsingXml" : footerBarMixinMetrics.secondaryButtonVisibility;
             } finally {
             }
@@ -335,96 +345,37 @@ public class FooterBarMixin implements Mixin {
         return this.buttonContainer.getVisibility();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0084  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final com.google.android.setupcompat.template.IFooterActionButton inflateButton(com.google.android.setupcompat.template.FooterButton r8, com.google.android.setupcompat.internal.FooterButtonPartnerConfig r9) {
-        /*
-            r7 = this;
-            android.content.Context r0 = r7.context
-            boolean r1 = com.google.android.setupcompat.partnerconfig.PartnerConfigHelper.isGlifExpressiveEnabled(r0)
-            int r9 = r9.partnerTheme
-            com.google.android.setupcompat.util.Logger r2 = com.google.android.setupcompat.template.FooterBarMixin.LOG
-            r3 = 0
-            if (r1 == 0) goto L4a
-            r1 = 2132018158(0x7f1403ee, float:1.9674615E38)
-            if (r9 != r1) goto L22
-            com.google.android.setupcompat.template.MaterialFooterActionButton r4 = new com.google.android.setupcompat.template.MaterialFooterActionButton     // Catch: java.lang.IllegalArgumentException -> L20
-            android.view.ContextThemeWrapper r5 = new android.view.ContextThemeWrapper     // Catch: java.lang.IllegalArgumentException -> L20
-            r5.<init>(r0, r9)     // Catch: java.lang.IllegalArgumentException -> L20
-            r6 = 2130970286(0x7f0406ae, float:1.7549278E38)
-            r4.<init>(r5, r3, r6)     // Catch: java.lang.IllegalArgumentException -> L20
-            goto L5e
-        L20:
-            r4 = move-exception
-            goto L30
-        L22:
-            com.google.android.setupcompat.template.MaterialFooterActionButton r4 = new com.google.android.setupcompat.template.MaterialFooterActionButton     // Catch: java.lang.IllegalArgumentException -> L20
-            android.view.ContextThemeWrapper r5 = new android.view.ContextThemeWrapper     // Catch: java.lang.IllegalArgumentException -> L20
-            r5.<init>(r0, r9)     // Catch: java.lang.IllegalArgumentException -> L20
-            r6 = 2130970287(0x7f0406af, float:1.754928E38)
-            r4.<init>(r5, r3, r6)     // Catch: java.lang.IllegalArgumentException -> L20
-            goto L5e
-        L30:
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            java.lang.String r6 = "Applyed invalid material theme: "
-            r5.<init>(r6)
-            r5.append(r4)
-            java.lang.String r4 = r5.toString()
-            r2.e(r4)
-            if (r9 != r1) goto L47
-            r9 = 2132018161(0x7f1403f1, float:1.967462E38)
-            goto L4a
-        L47:
-            r9 = 2132018162(0x7f1403f2, float:1.9674623E38)
-        L4a:
-            android.view.ContextThemeWrapper r1 = new android.view.ContextThemeWrapper
-            r1.<init>(r0, r9)
-            android.view.LayoutInflater r9 = android.view.LayoutInflater.from(r1)
-            r0 = 2131559725(0x7f0d052d, float:1.8744802E38)
-            r1 = 0
-            android.view.View r9 = r9.inflate(r0, r3, r1)
-            r4 = r9
-            com.google.android.setupcompat.template.IFooterActionButton r4 = (com.google.android.setupcompat.template.IFooterActionButton) r4
-        L5e:
-            r9 = r4
-            android.widget.Button r9 = (android.widget.Button) r9
-            int r0 = android.view.View.generateViewId()
-            r9.setId(r0)
-            java.lang.CharSequence r0 = r8.text
-            r9.setText(r0)
-            r9.setOnClickListener(r8)
-            int r0 = r8.visibility
-            r9.setVisibility(r0)
-            boolean r0 = r8.enabled
-            r9.setEnabled(r0)
-            boolean r0 = r4 instanceof com.google.android.setupcompat.template.MaterialFooterActionButton
-            if (r0 == 0) goto L84
-            r0 = r4
-            com.google.android.setupcompat.template.MaterialFooterActionButton r0 = (com.google.android.setupcompat.template.MaterialFooterActionButton) r0
-            r0.footerButton = r8
-            goto L93
-        L84:
-            boolean r0 = r9 instanceof com.google.android.setupcompat.template.FooterActionButton
-            if (r0 == 0) goto L8e
-            r0 = r4
-            com.google.android.setupcompat.template.FooterActionButton r0 = (com.google.android.setupcompat.template.FooterActionButton) r0
-            r0.footerButton = r8
-            goto L93
-        L8e:
-            java.lang.String r0 = "Set the footer button error!"
-            r2.e(r0)
-        L93:
-            int r9 = r9.getId()
-            com.google.android.setupcompat.template.FooterBarMixin$1 r0 = new com.google.android.setupcompat.template.FooterBarMixin$1
-            r0.<init>(r9)
-            r8.buttonListener = r0
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.setupcompat.template.FooterBarMixin.inflateButton(com.google.android.setupcompat.template.FooterButton, com.google.android.setupcompat.internal.FooterButtonPartnerConfig):com.google.android.setupcompat.template.IFooterActionButton");
+    public final IFooterActionButton inflateButton(FooterButton footerButton, FooterButtonPartnerConfig footerButtonPartnerConfig) {
+        IFooterActionButton materialFooterActionButton;
+        Context context = this.context;
+        boolean zIsGlifExpressiveEnabled = PartnerConfigHelper.isGlifExpressiveEnabled(context);
+        int i = footerButtonPartnerConfig.partnerTheme;
+        Logger logger = LOG;
+        if (zIsGlifExpressiveEnabled) {
+            try {
+                materialFooterActionButton = i == 2132018158 ? new MaterialFooterActionButton(new ContextThemeWrapper(context, i), null, R.attr.sucMaterialButtonStyle) : new MaterialFooterActionButton(new ContextThemeWrapper(context, i), null, R.attr.sucMaterialOutlinedButtonStyle);
+            } catch (IllegalArgumentException e) {
+                logger.e("Applyed invalid material theme: " + e);
+                i = i == 2132018158 ? R.style.SucPartnerCustomizationButton_Primary : R.style.SucPartnerCustomizationButton_Secondary;
+            }
+        } else {
+            materialFooterActionButton = (IFooterActionButton) LayoutInflater.from(new ContextThemeWrapper(context, i)).inflate(R.layout.suc_button, (ViewGroup) null, false);
+        }
+        Button button = (Button) materialFooterActionButton;
+        button.setId(View.generateViewId());
+        button.setText(footerButton.text);
+        button.setOnClickListener(footerButton);
+        button.setVisibility(footerButton.visibility);
+        button.setEnabled(footerButton.enabled);
+        if (materialFooterActionButton instanceof MaterialFooterActionButton) {
+            ((MaterialFooterActionButton) materialFooterActionButton).footerButton = footerButton;
+        } else if (button instanceof FooterActionButton) {
+            ((FooterActionButton) materialFooterActionButton).footerButton = footerButton;
+        } else {
+            logger.e("Set the footer button error!");
+        }
+        footerButton.buttonListener = new AnonymousClass1(button.getId());
+        return materialFooterActionButton;
     }
 
     public final boolean isFooterButtonAlignedEnd() {
@@ -441,30 +392,158 @@ public class FooterBarMixin implements Mixin {
         return getSecondaryButtonView() != null && getSecondaryButtonView().getVisibility() == 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:61:0x020b  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x0254  */
-    /* JADX WARN: Removed duplicated region for block: B:77:0x0260  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x026d  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0278  */
-    /* JADX WARN: Removed duplicated region for block: B:92:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0270  */
-    /* JADX WARN: Removed duplicated region for block: B:94:0x025d  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x024d  */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x0205  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onFooterButtonApplyPartnerResource(android.widget.Button r19, com.google.android.setupcompat.internal.FooterButtonPartnerConfig r20) {
-        /*
-            Method dump skipped, instructions count: 664
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.setupcompat.template.FooterBarMixin.onFooterButtonApplyPartnerResource(android.widget.Button, com.google.android.setupcompat.internal.FooterButtonPartnerConfig):void");
+    public final void onFooterButtonApplyPartnerResource(Button button, FooterButtonPartnerConfig footerButtonPartnerConfig) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
+        float f;
+        Typeface typefaceCreate;
+        Drawable drawable;
+        if (this.applyPartnerResources) {
+            Context context = this.context;
+            boolean z = this.applyDynamicColor;
+            boolean z2 = button.getId() == this.primaryButtonId;
+            FooterButtonStyleUtils.defaultTextColor.put(Integer.valueOf(button.getId()), button.getTextColors());
+            PartnerConfig partnerConfig = footerButtonPartnerConfig.buttonDisableTextColorConfig;
+            PartnerConfig partnerConfig2 = footerButtonPartnerConfig.buttonTextColorConfig;
+            if (z) {
+                f = 255.0f;
+            } else {
+                if (button.isEnabled()) {
+                    int color = PartnerConfigHelper.get(context).getColor(context, partnerConfig2);
+                    if (color != 0) {
+                        button.setTextColor(ColorStateList.valueOf(color));
+                    }
+                } else {
+                    FooterButtonStyleUtils.updateButtonTextDisabledColorWithPartnerConfig(context, button, partnerConfig);
+                }
+                int color2 = PartnerConfigHelper.get(context).getColor(context, footerButtonPartnerConfig.buttonBackgroundConfig);
+                float fraction = PartnerConfigHelper.get(context).getFraction(context, footerButtonPartnerConfig.buttonDisableAlphaConfig);
+                int color3 = PartnerConfigHelper.get(context).getColor(context, footerButtonPartnerConfig.buttonDisableBackgroundConfig);
+                int[] iArr = {-16842910};
+                f = 255.0f;
+                int[] iArr2 = new int[0];
+                if (color2 != 0) {
+                    if (fraction <= 0.0f) {
+                        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{android.R.attr.disabledAlpha});
+                        float f2 = typedArrayObtainStyledAttributes.getFloat(0, 0.26f);
+                        typedArrayObtainStyledAttributes.recycle();
+                        fraction = f2;
+                    }
+                    if (color3 == 0) {
+                        color3 = color2;
+                    }
+                    ColorStateList colorStateList = new ColorStateList(new int[][]{iArr, iArr2}, new int[]{Color.argb((int) (fraction * 255.0f), Color.red(color3), Color.green(color3), Color.blue(color3)), color2});
+                    button.getBackground().mutate().setState(new int[0]);
+                    button.refreshDrawableState();
+                    button.setBackgroundTintList(colorStateList);
+                }
+            }
+            int defaultColor = z ? button.getTextColors().getDefaultColor() : PartnerConfigHelper.get(context).getColor(context, partnerConfig2);
+            float fraction2 = PartnerConfigHelper.get(context).getFraction(context, footerButtonPartnerConfig.buttonRippleColorAlphaConfig);
+            Drawable background = button.getBackground();
+            RippleDrawable rippleDrawable = background instanceof InsetDrawable ? (RippleDrawable) ((InsetDrawable) background).getDrawable() : background instanceof RippleDrawable ? (RippleDrawable) background : null;
+            if (rippleDrawable != null) {
+                int[] iArr3 = {android.R.attr.state_pressed};
+                int[] iArr4 = {android.R.attr.state_focused};
+                int iArgb = Color.argb((int) (fraction2 * f), Color.red(defaultColor), Color.green(defaultColor), Color.blue(defaultColor));
+                ColorStateList colorStateList2 = new ColorStateList(new int[][]{iArr3, iArr4, StateSet.NOTHING}, new int[]{iArgb, iArgb, 0});
+                if (PartnerConfigHelper.isGlifExpressiveEnabled(context) && (button instanceof MaterialFooterActionButton)) {
+                    MaterialFooterActionButton materialFooterActionButton = (MaterialFooterActionButton) button;
+                    if (materialFooterActionButton.isUsingOriginalBackground()) {
+                        MaterialButtonHelper materialButtonHelper = materialFooterActionButton.materialButtonHelper;
+                        if (materialButtonHelper.rippleColor != colorStateList2) {
+                            materialButtonHelper.rippleColor = colorStateList2;
+                            MaterialButton materialButton = materialButtonHelper.materialButton;
+                            if (materialButton.getBackground() instanceof RippleDrawable) {
+                                ((RippleDrawable) materialButton.getBackground()).setColor(colorStateList2);
+                            }
+                        }
+                    }
+                } else {
+                    rippleDrawable.setColor(colorStateList2);
+                }
+            }
+            ViewGroup.LayoutParams layoutParams = button.getLayoutParams();
+            PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context);
+            PartnerConfig partnerConfig3 = footerButtonPartnerConfig.buttonMarginStartConfig;
+            if (partnerConfigHelper.isPartnerConfigAvailable(partnerConfig3) && (layoutParams instanceof ViewGroup.MarginLayoutParams)) {
+                ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams;
+                marginLayoutParams.setMargins((int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig3, 0.0f), marginLayoutParams.topMargin, marginLayoutParams.rightMargin, marginLayoutParams.bottomMargin);
+            }
+            float dimension = PartnerConfigHelper.get(context).getDimension(context, footerButtonPartnerConfig.buttonTextSizeConfig, 0.0f);
+            if (dimension > 0.0f) {
+                button.setTextSize(0, dimension);
+            }
+            PartnerConfigHelper partnerConfigHelper2 = PartnerConfigHelper.get(context);
+            PartnerConfig partnerConfig4 = footerButtonPartnerConfig.buttonMinHeightConfig;
+            if (partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig4)) {
+                float dimension2 = PartnerConfigHelper.get(context).getDimension(context, partnerConfig4, 0.0f);
+                if (dimension2 > 0.0f) {
+                    button.setMinHeight((int) dimension2);
+                }
+            }
+            String string = PartnerConfigHelper.get(context).getString(context, footerButtonPartnerConfig.buttonTextTypeFaceConfig);
+            PartnerConfigHelper partnerConfigHelper3 = PartnerConfigHelper.get(context);
+            PartnerConfig partnerConfig5 = footerButtonPartnerConfig.buttonTextStyleConfig;
+            int integer = partnerConfigHelper3.isPartnerConfigAvailable(partnerConfig5) ? PartnerConfigHelper.get(context).getInteger(context, partnerConfig5, 0) : 0;
+            if (PartnerConfigHelper.isFontWeightEnabled(context)) {
+                PartnerConfigHelper partnerConfigHelper4 = PartnerConfigHelper.get(context);
+                PartnerConfig partnerConfig6 = footerButtonPartnerConfig.buttonTextWeightConfig;
+                typefaceCreate = partnerConfigHelper4.isPartnerConfigAvailable(partnerConfig6) ? Typeface.create(Typeface.create(string, integer), PartnerConfigHelper.get(context).getInteger(context, partnerConfig6, 400), false) : Typeface.create(string, integer);
+            }
+            if (typefaceCreate != null) {
+                button.setTypeface(typefaceCreate);
+            }
+            float dimension3 = PartnerConfigHelper.get(context).getDimension(context, footerButtonPartnerConfig.buttonRadiusConfig, 0.0f);
+            if (PartnerConfigHelper.isGlifExpressiveEnabled(context) && (button instanceof MaterialFooterActionButton)) {
+                MaterialFooterActionButton materialFooterActionButton2 = (MaterialFooterActionButton) button;
+                int i = (int) dimension3;
+                if (materialFooterActionButton2.isUsingOriginalBackground()) {
+                    MaterialButtonHelper materialButtonHelper2 = materialFooterActionButton2.materialButtonHelper;
+                    if (!materialButtonHelper2.cornerRadiusSet || materialButtonHelper2.cornerRadius != i) {
+                        materialButtonHelper2.cornerRadius = i;
+                        materialButtonHelper2.cornerRadiusSet = true;
+                        materialButtonHelper2.setShapeAppearanceModel(materialButtonHelper2.shapeAppearanceModel.withCornerSize(i));
+                    }
+                }
+            } else {
+                GradientDrawable gradientDrawable = FooterButtonStyleUtils.getGradientDrawable(button);
+                if (gradientDrawable != null) {
+                    gradientDrawable.setCornerRadius(dimension3);
+                }
+            }
+            PartnerConfig partnerConfig7 = footerButtonPartnerConfig.buttonIconConfig;
+            Drawable drawable2 = partnerConfig7 != null ? PartnerConfigHelper.get(context).getDrawable(context, partnerConfig7) : null;
+            if (drawable2 != null) {
+                drawable2.setBounds(0, 0, drawable2.getIntrinsicWidth(), drawable2.getIntrinsicHeight());
+            }
+            if (z2) {
+                drawable = drawable2;
+                drawable2 = null;
+            } else {
+                drawable = null;
+            }
+            button.setCompoundDrawablesRelative(drawable2, null, drawable, null);
+            if (this.applyDynamicColor) {
+                return;
+            }
+            if (!button.isEnabled()) {
+                FooterButtonStyleUtils.updateButtonTextDisabledColorWithPartnerConfig(this.context, button, partnerConfig);
+                return;
+            }
+            Context context2 = this.context;
+            int color4 = PartnerConfigHelper.get(context2).getColor(context2, partnerConfig2);
+            if (color4 != 0) {
+                button.setTextColor(ColorStateList.valueOf(color4));
+            }
+        }
     }
 
     public final void onFooterButtonInflated(Button button, int i) {
         if (!this.applyDynamicColor && i != 0) {
-            HashMap hashMap = FooterButtonStyleUtils.defaultTextColor;
+            HashMap map = FooterButtonStyleUtils.defaultTextColor;
             button.getBackground().mutate().setColorFilter(i, PorterDuff.Mode.SRC_ATOP);
         }
         this.buttonContainer.addView(button);
@@ -474,13 +553,13 @@ public class FooterBarMixin implements Mixin {
     public final void repopulateButtons() {
         LinearLayout.LayoutParams layoutParams;
         LinearLayout.LayoutParams layoutParams2;
-        LinearLayout ensureFooterInflated = ensureFooterInflated();
+        LinearLayout linearLayoutEnsureFooterInflated = ensureFooterInflated();
         Button primaryButtonView = getPrimaryButtonView();
         Button secondaryButtonView = getSecondaryButtonView();
-        boolean isGlifExpressiveEnabled = PartnerConfigHelper.isGlifExpressiveEnabled(this.context);
+        boolean zIsGlifExpressiveEnabled = PartnerConfigHelper.isGlifExpressiveEnabled(this.context);
         Logger logger = LOG;
         View view = null;
-        if (isGlifExpressiveEnabled) {
+        if (zIsGlifExpressiveEnabled) {
             LinearLayout linearLayout = this.buttonContainer;
             if (linearLayout != null) {
                 view = (Button) linearLayout.findViewById(0);
@@ -488,27 +567,27 @@ public class FooterBarMixin implements Mixin {
         } else {
             logger.atDebug("Cannot get tertiary button when glif expressive is not enabled.");
         }
-        ensureFooterInflated.removeAllViews();
+        linearLayoutEnsureFooterInflated.removeAllViews();
         int i = this.context.getResources().getConfiguration().orientation;
         if (secondaryButtonView != null) {
-            ensureFooterInflated.addView(secondaryButtonView);
+            linearLayoutEnsureFooterInflated.addView(secondaryButtonView);
         }
         if (!isFooterButtonAlignedEnd() && !PartnerConfigHelper.isGlifExpressiveEnabled(this.context)) {
-            LinearLayout ensureFooterInflated2 = ensureFooterInflated();
+            LinearLayout linearLayoutEnsureFooterInflated2 = ensureFooterInflated();
             View view2 = new View(this.context);
             view2.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 1.0f));
             view2.setVisibility(4);
-            ensureFooterInflated2.addView(view2);
+            linearLayoutEnsureFooterInflated2.addView(view2);
         }
         if (PartnerConfigHelper.isGlifExpressiveEnabled(this.context) && view != null) {
             if (isBothButtons(primaryButtonView, secondaryButtonView)) {
-                ensureFooterInflated.addView(view);
+                linearLayoutEnsureFooterInflated.addView(view);
             } else {
                 logger.atDebug("Cannot add tertiary button when primary or secondary button is null.");
             }
         }
         if (primaryButtonView != null) {
-            ensureFooterInflated.addView(primaryButtonView);
+            linearLayoutEnsureFooterInflated.addView(primaryButtonView);
         }
         if (primaryButtonView != null && (layoutParams2 = (LinearLayout.LayoutParams) primaryButtonView.getLayoutParams()) != null) {
             layoutParams2.width = -2;
@@ -525,7 +604,7 @@ public class FooterBarMixin implements Mixin {
         }
     }
 
-    public final void setPrimaryButton(FooterButton footerButton) {
+    public final void setPrimaryButton(FooterButton footerButton) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         PartnerConfig partnerConfig;
         Preconditions.ensureOnMainThread("setPrimaryButton");
         ensureFooterInflated();
@@ -576,31 +655,31 @@ public class FooterBarMixin implements Mixin {
         builder.buttonTextTypeFaceConfig = PartnerConfig.CONFIG_FOOTER_BUTTON_FONT_FAMILY;
         builder.buttonTextWeightConfig = PartnerConfig.CONFIG_FOOTER_BUTTON_FONT_WEIGHT;
         builder.buttonTextStyleConfig = PartnerConfig.CONFIG_FOOTER_BUTTON_TEXT_STYLE;
-        FooterButtonPartnerConfig build = builder.build();
-        Object inflateButton = inflateButton(footerButton, build);
-        Button button = (Button) inflateButton;
+        FooterButtonPartnerConfig footerButtonPartnerConfigBuild = builder.build();
+        Object objInflateButton = inflateButton(footerButton, footerButtonPartnerConfigBuild);
+        Button button = (Button) objInflateButton;
         this.primaryButtonId = button.getId();
-        if (inflateButton instanceof MaterialFooterActionButton) {
-            ((MaterialFooterActionButton) inflateButton).getClass();
+        if (objInflateButton instanceof MaterialFooterActionButton) {
+            ((MaterialFooterActionButton) objInflateButton).getClass();
         } else if (button instanceof FooterActionButton) {
-            ((FooterActionButton) inflateButton).isPrimaryButtonStyle = true;
+            ((FooterActionButton) objInflateButton).isPrimaryButtonStyle = true;
         } else {
             LOG.e("Set the primary button style error when setting primary button.");
         }
         this.primaryButton = footerButton;
-        this.primaryButtonPartnerConfigForTesting = build;
+        this.primaryButtonPartnerConfigForTesting = footerButtonPartnerConfigBuild;
         onFooterButtonInflated(button, this.footerBarPrimaryBackgroundColor);
-        onFooterButtonApplyPartnerResource(button, build);
+        onFooterButtonApplyPartnerResource(button, footerButtonPartnerConfigBuild);
         if (PartnerConfigHelper.isGlifExpressiveEnabled(this.context)) {
             boolean z = this.primaryButton.enabled;
             int i2 = z ? this.footerBarPrimaryButtonEnabledTextColor : this.footerBarPrimaryButtonDisabledTextColor;
             if (z) {
-                HashMap hashMap = FooterButtonStyleUtils.defaultTextColor;
+                HashMap map = FooterButtonStyleUtils.defaultTextColor;
                 if (i2 != 0) {
                     button.setTextColor(ColorStateList.valueOf(i2));
                 }
             } else {
-                HashMap hashMap2 = FooterButtonStyleUtils.defaultTextColor;
+                HashMap map2 = FooterButtonStyleUtils.defaultTextColor;
                 if (i2 != 0) {
                     button.setTextColor(ColorStateList.valueOf(i2));
                 }
@@ -614,21 +693,21 @@ public class FooterBarMixin implements Mixin {
     public boolean stackButtonIfTextOverFlow(Button button, Button button2, float f, int i) {
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) button.getLayoutParams();
         LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) button2.getLayoutParams();
-        String charSequence = button.getText().toString();
+        String string = button.getText().toString();
         Paint paint = new Paint();
         paint.setTypeface(button.getTypeface());
         paint.setTextSize(button.getTextSize());
-        float measureText = paint.measureText(charSequence) + button.getPaddingLeft() + button.getPaddingRight() + button.getPaddingStart() + button.getPaddingEnd();
-        boolean z = measureText > f;
+        float fMeasureText = paint.measureText(string) + button.getPaddingLeft() + button.getPaddingRight() + button.getPaddingStart() + button.getPaddingEnd();
+        boolean z = fMeasureText > f;
         Logger logger = LOG;
-        logger.atDebug("isPrimaryButtonTextOverFlowing= " + z + ", primaryButtonWidth= " + measureText + ", maxButtonWidth= " + f);
-        String charSequence2 = button2.getText().toString();
+        logger.atDebug("isPrimaryButtonTextOverFlowing= " + z + ", primaryButtonWidth= " + fMeasureText + ", maxButtonWidth= " + f);
+        String string2 = button2.getText().toString();
         Paint paint2 = new Paint();
         paint2.setTypeface(button2.getTypeface());
         paint2.setTextSize(button2.getTextSize());
-        float measureText2 = paint2.measureText(charSequence2) + button2.getPaddingLeft() + button2.getPaddingRight() + button2.getPaddingStart() + button2.getPaddingEnd();
-        boolean z2 = measureText2 > f;
-        logger.atDebug("isSecondaryButtonTextOverFlowing= " + z2 + ", secondaryButtonWidth= " + measureText2 + ", maxButtonWidth= " + f);
+        float fMeasureText2 = paint2.measureText(string2) + button2.getPaddingLeft() + button2.getPaddingRight() + button2.getPaddingStart() + button2.getPaddingEnd();
+        boolean z2 = fMeasureText2 > f;
+        logger.atDebug("isSecondaryButtonTextOverFlowing= " + z2 + ", secondaryButtonWidth= " + fMeasureText2 + ", maxButtonWidth= " + f);
         if (z || z2) {
             LinearLayout linearLayout = this.buttonContainer;
             if (linearLayout instanceof ButtonBarLayout) {

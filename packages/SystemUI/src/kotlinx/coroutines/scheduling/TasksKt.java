@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 import kotlinx.coroutines.internal.SystemPropsKt;
 import kotlinx.coroutines.internal.SystemPropsKt__SystemPropsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class TasksKt {
     public static final int CORE_POOL_SIZE;
@@ -15,17 +14,17 @@ public abstract class TasksKt {
     public static final NanoTimeSource schedulerTimeSource;
 
     static {
-        String str;
+        String property;
         int i = SystemPropsKt__SystemPropsKt.AVAILABLE_PROCESSORS;
         try {
-            str = System.getProperty("kotlinx.coroutines.scheduler.default.name");
+            property = System.getProperty("kotlinx.coroutines.scheduler.default.name");
         } catch (SecurityException unused) {
-            str = null;
+            property = null;
         }
-        if (str == null) {
-            str = "DefaultDispatcher";
+        if (property == null) {
+            property = "DefaultDispatcher";
         }
-        DEFAULT_SCHEDULER_NAME = str;
+        DEFAULT_SCHEDULER_NAME = property;
         WORK_STEALING_TIME_RESOLUTION_NS = SystemPropsKt.systemProp("kotlinx.coroutines.scheduler.resolution.ns", 100000L, 1L, Long.MAX_VALUE);
         int i2 = SystemPropsKt__SystemPropsKt.AVAILABLE_PROCESSORS;
         if (i2 < 2) {

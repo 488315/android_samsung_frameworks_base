@@ -14,13 +14,11 @@ import com.android.systemui.statusbar.pipeline.wifi.ui.WifiUiAdapter;
 import dagger.Lazy;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TintedIconManager extends IconManager {
     public int mColor;
     public int mForegroundColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final CoroutineScope mAppScope;
         public final BTTetherUiAdapter mBTTetherUiAdapter;
@@ -51,12 +49,12 @@ public class TintedIconManager extends IconManager {
 
     @Override // com.android.systemui.statusbar.phone.ui.IconManager
     public void onIconAdded(int i, String str, boolean z, StatusBarIconHolder statusBarIconHolder) {
-        StatusIconDisplayable addHolder = addHolder(i, str, z, statusBarIconHolder);
-        addHolder.setStaticDrawableColor(this.mColor, this.mForegroundColor);
-        addHolder.setDecorColor(this.mColor);
+        StatusIconDisplayable statusIconDisplayableAddHolder = addHolder(i, str, z, statusBarIconHolder);
+        statusIconDisplayableAddHolder.setStaticDrawableColor(this.mColor, this.mForegroundColor);
+        statusIconDisplayableAddHolder.setDecorColor(this.mColor);
     }
 
-    public final void setTint(int i, int i2) {
+    public void setTint(int i, int i2) {
         this.mColor = i;
         this.mForegroundColor = i2;
         for (int i3 = 0; i3 < this.mGroup.getChildCount(); i3++) {

@@ -13,7 +13,6 @@ import com.android.systemui.util.QsResetSettingsManager;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.ViewController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenQsPanelController implements QsResetSettingsManager.ResetSettingsApplier, QsResetSettingsManager.DemoResetSettingsApplier {
     public ViewController mBaseViewController;
@@ -24,7 +23,6 @@ public class SubscreenQsPanelController implements QsResetSettingsManager.ResetS
     public final InjectionInflationController mInjectionInflater;
     public SubscreenSubRoomQuickSettings mSubRoomQuickSettings;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SubroomQuickSettingsBaseViewFactory {
         public SubroomQuickSettingsBaseViewFactory() {
         }
@@ -47,9 +45,9 @@ public class SubscreenQsPanelController implements QsResetSettingsManager.ResetS
     @Override // com.android.systemui.util.QsResetSettingsManager.DemoResetSettingsApplier
     public final void applyDemoResetSetting() {
         Log.d("SubscreenQsPanelController", "applyDemoResetSetting");
-        SharedPreferences.Editor edit = this.mContext.getSharedPreferences("ShowDifferentHelpViewText", 0).edit();
-        edit.putInt("helpViewTextCount", 0);
-        edit.commit();
+        SharedPreferences.Editor editorEdit = this.mContext.getSharedPreferences("ShowDifferentHelpViewText", 0).edit();
+        editorEdit.putInt("helpViewTextCount", 0);
+        editorEdit.commit();
     }
 
     @Override // com.android.systemui.util.QsResetSettingsManager.ResetSettingsApplier

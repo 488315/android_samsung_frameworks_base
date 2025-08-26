@@ -435,37 +435,37 @@ public final class ShortcutInfo implements Parcelable {
     }
 
     public static String getResourcePackageName(String str) {
-        int indexOf = str.indexOf(58);
-        if (indexOf < 0) {
+        int iIndexOf = str.indexOf(58);
+        if (iIndexOf < 0) {
             return null;
         }
-        return str.substring(0, indexOf);
+        return str.substring(0, iIndexOf);
     }
 
     public static String getResourceTypeName(String str) {
         int i;
-        int indexOf;
-        int indexOf2 = str.indexOf(58);
-        if (indexOf2 >= 0 && (indexOf = str.indexOf(47, (i = indexOf2 + 1))) >= 0) {
-            return str.substring(i, indexOf);
+        int iIndexOf;
+        int iIndexOf2 = str.indexOf(58);
+        if (iIndexOf2 >= 0 && (iIndexOf = str.indexOf(47, (i = iIndexOf2 + 1))) >= 0) {
+            return str.substring(i, iIndexOf);
         }
         return null;
     }
 
     public static String getResourceTypeAndEntryName(String str) {
-        int indexOf = str.indexOf(58);
-        if (indexOf < 0) {
+        int iIndexOf = str.indexOf(58);
+        if (iIndexOf < 0) {
             return null;
         }
-        return str.substring(indexOf + 1);
+        return str.substring(iIndexOf + 1);
     }
 
     public static String getResourceEntryName(String str) {
-        int indexOf = str.indexOf(47);
-        if (indexOf < 0) {
+        int iIndexOf = str.indexOf(47);
+        if (iIndexOf < 0) {
             return null;
         }
-        return str.substring(indexOf + 1);
+        return str.substring(iIndexOf + 1);
     }
 
     public static int lookUpResourceId(Resources resources, String str, String str2, String str3) {
@@ -1312,9 +1312,9 @@ public final class ShortcutInfo implements Parcelable {
         for (String str : map2.keySet()) {
             List<String> list = map2.get(str);
             String str2 = list.get(0);
-            List<String> subList = list.size() == 1 ? Collections.EMPTY_LIST : list.subList(1, list.size());
+            List<String> listSubList = list.size() == 1 ? Collections.EMPTY_LIST : list.subList(1, list.size());
             CapabilityParams.Builder builder = new CapabilityParams.Builder(str, str2);
-            Iterator<String> it = subList.iterator();
+            Iterator<String> it = listSubList.iterator();
             while (it.hasNext()) {
                 builder = builder.addAlias(it.next());
             }
@@ -1352,12 +1352,12 @@ public final class ShortcutInfo implements Parcelable {
         this.mTitleResName = parcel.readString8();
         this.mTextResName = parcel.readString8();
         this.mDisabledMessageResName = parcel.readString8();
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
+        int i = parcel.readInt();
+        if (i == 0) {
             this.mCategories = null;
         } else {
-            this.mCategories = new ArraySet<>(readInt);
-            for (int i = 0; i < readInt; i++) {
+            this.mCategories = new ArraySet<>(i);
+            for (int i2 = 0; i2 < i; i2++) {
                 this.mCategories.add(parcel.readString8().intern());
             }
         }
@@ -1366,12 +1366,12 @@ public final class ShortcutInfo implements Parcelable {
         this.mIconUri = parcel.readString8();
         this.mStartingThemeResName = parcel.readString8();
         this.mExcludedSurfaces = parcel.readInt();
-        HashMap readHashMap = parcel.readHashMap(null, String.class, HashMap.class);
-        if (readHashMap == null || readHashMap.isEmpty()) {
+        HashMap hashMap = parcel.readHashMap(null, String.class, HashMap.class);
+        if (hashMap == null || hashMap.isEmpty()) {
             return;
         }
-        final ArrayMap arrayMap = new ArrayMap(readHashMap.size());
-        readHashMap.forEach(new BiConsumer() { // from class: android.content.pm.ShortcutInfo$$ExternalSyntheticLambda1
+        final ArrayMap arrayMap = new ArrayMap(hashMap.size());
+        hashMap.forEach(new BiConsumer() { // from class: android.content.pm.ShortcutInfo$$ExternalSyntheticLambda1
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
                 arrayMap.put((String) obj, (Map) obj2);

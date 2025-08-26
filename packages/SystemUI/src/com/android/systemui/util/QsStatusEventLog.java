@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class QsStatusEventLog {
     private static final String BIG_DATA_WEEKLY_TIME_STORED_IN_MILLI_SECONDS = "big_data_weekly_time_stored_in_milliseconds";
@@ -37,13 +36,13 @@ public class QsStatusEventLog {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void checkWeeklyStatus() {
-        long currentTimeMillis = System.currentTimeMillis();
-        long j = currentTimeMillis - this.mContext.getSharedPreferences(PREFS, 0).getLong(BIG_DATA_WEEKLY_TIME_STORED_IN_MILLI_SECONDS, currentTimeMillis);
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        long j = jCurrentTimeMillis - this.mContext.getSharedPreferences(PREFS, 0).getLong(BIG_DATA_WEEKLY_TIME_STORED_IN_MILLI_SECONDS, jCurrentTimeMillis);
         if (j <= 0) {
-            updateTime(currentTimeMillis);
+            updateTime(jCurrentTimeMillis);
         } else if (j > SA_SEVEN_DAYS_IN_MILLISECONDS.longValue()) {
             Log.d(TAG, " time difference greater than seven days. Send Weekly status logs.");
-            updateTime(currentTimeMillis);
+            updateTime(jCurrentTimeMillis);
             sendStatusEventLog();
         }
     }

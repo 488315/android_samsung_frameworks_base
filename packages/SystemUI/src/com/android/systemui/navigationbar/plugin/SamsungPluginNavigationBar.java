@@ -30,7 +30,6 @@ import com.samsung.systemui.splugins.navigationbar.LayoutProviderContainer;
 import com.samsung.systemui.splugins.navigationbar.NavBarStoreAdapter;
 import com.samsung.systemui.splugins.navigationbar.TaskStackAdapterBase;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SamsungPluginNavigationBar implements ExtendableBar {
     public final ButtonDispatcherProxy buttonDispatcher;
@@ -46,7 +45,7 @@ public final class SamsungPluginNavigationBar implements ExtendableBar {
     public final SamsungPluginNavigationBar$keyguardCallback$1 keyguardCallback = new KeyguardStateController.Callback() { // from class: com.android.systemui.navigationbar.plugin.SamsungPluginNavigationBar$keyguardCallback$1
         @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
         public final void onKeyguardShowingChanged() {
-            SamsungPluginNavigationBar samsungPluginNavigationBar = SamsungPluginNavigationBar.this;
+            SamsungPluginNavigationBar samsungPluginNavigationBar = this.this$0;
             KeyguardStateController keyguardStateController = samsungPluginNavigationBar.keyguardStateController;
             samsungPluginNavigationBar.keyguardShowing = keyguardStateController != null ? ((KeyguardStateControllerImpl) keyguardStateController).mShowing : false;
         }

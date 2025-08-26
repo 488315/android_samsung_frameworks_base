@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.widget.SeekBar;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaOutputSeekbar extends SeekBar {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -18,7 +17,7 @@ public class MediaOutputSeekbar extends SeekBar {
         setMin(0);
         super.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() { // from class: com.android.systemui.media.dialog.MediaOutputSeekbar.1
             @Override // android.widget.SeekBar.OnSeekBarChangeListener
-            public final void onProgressChanged(SeekBar seekBar, int i, boolean z) {
+            public final void onProgressChanged(SeekBar seekBar, int i, boolean z) throws Resources.NotFoundException {
                 Resources resources = context.getResources();
                 MediaOutputSeekbar mediaOutputSeekbar = MediaOutputSeekbar.this;
                 MediaOutputSeekbar.this.setStateDescription(resources.getString(R.string.media_output_dialog_volume_percentage, Integer.valueOf((int) ((((mediaOutputSeekbar.getProgress() / 1000) * 1000) * 100.0d) / mediaOutputSeekbar.getMax()))));

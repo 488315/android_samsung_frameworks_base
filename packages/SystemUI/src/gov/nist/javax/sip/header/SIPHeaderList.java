@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.ListIterator;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SIPHeaderList<HDR extends SIPHeader> extends SIPHeader implements List<HDR>, Header {
     protected List<HDR> hlist;
@@ -243,7 +242,7 @@ public abstract class SIPHeaderList<HDR extends SIPHeader> extends SIPHeader imp
 
     @Override // 
     /* renamed from: getFirst, reason: merged with bridge method [inline-methods] */
-    public SIPHeader mo3419getFirst() {
+    public SIPHeader mo3439getFirst() {
         List<HDR> list = this.hlist;
         if (list == null || list.isEmpty()) {
             return null;
@@ -253,7 +252,7 @@ public abstract class SIPHeaderList<HDR extends SIPHeader> extends SIPHeader imp
 
     @Override // 
     /* renamed from: getLast, reason: merged with bridge method [inline-methods] */
-    public SIPHeader mo3420getLast() {
+    public SIPHeader mo3440getLast() {
         List<HDR> list = this.hlist;
         if (list == null || list.isEmpty()) {
             return null;

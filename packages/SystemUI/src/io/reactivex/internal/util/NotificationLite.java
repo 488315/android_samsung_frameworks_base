@@ -4,12 +4,10 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.functions.ObjectHelper;
 import java.io.Serializable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public enum NotificationLite {
     COMPLETE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class DisposableNotification implements Serializable {
         private static final long serialVersionUID = -7482590109178395495L;
         final Disposable upstream;
@@ -23,7 +21,6 @@ public enum NotificationLite {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class ErrorNotification implements Serializable {
         private static final long serialVersionUID = -8759979445933046293L;
         final Throwable e;

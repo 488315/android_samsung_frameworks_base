@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryIconViewModel$burnInOffsets$1$4 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -18,7 +17,6 @@ final class DeviceEntryIconViewModel$burnInOffsets$1$4 extends SuspendLambda imp
     /* synthetic */ Object L$2;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -60,13 +58,13 @@ final class DeviceEntryIconViewModel$burnInOffsets$1$4 extends SuspendLambda imp
         BurnInOffsets burnInOffsets = (BurnInOffsets) this.L$1;
         BurnInOffsets burnInOffsets2 = (BurnInOffsets) this.L$2;
         TransitionStep transitionStep = (TransitionStep) pair.component1();
-        boolean booleanValue = ((Boolean) pair.component2()).booleanValue();
+        boolean zBooleanValue = ((Boolean) pair.component2()).booleanValue();
         KeyguardState keyguardState = transitionStep.to;
         KeyguardState keyguardState2 = KeyguardState.AOD;
         KeyguardState keyguardState3 = transitionStep.from;
         if (keyguardState == keyguardState2) {
             int i = WhenMappings.$EnumSwitchMapping$0[keyguardState3.ordinal()];
-            if (i != 1 && (i != 2 || booleanValue)) {
+            if (i != 1 && (i != 2 || zBooleanValue)) {
                 return burnInOffsets2;
             }
         } else {

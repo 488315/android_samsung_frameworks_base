@@ -132,12 +132,12 @@ public final class PlaybackStateEvent extends Event implements Parcelable {
     }
 
     private PlaybackStateEvent(Parcel parcel) {
-        int readInt = parcel.readInt();
-        long readLong = parcel.readLong();
-        Bundle readBundle = parcel.readBundle();
-        this.mState = readInt;
-        this.mTimeSinceCreatedMillis = readLong;
-        this.mMetricsBundle = readBundle;
+        int i = parcel.readInt();
+        long j = parcel.readLong();
+        Bundle bundle = parcel.readBundle();
+        this.mState = i;
+        this.mTimeSinceCreatedMillis = j;
+        this.mMetricsBundle = bundle;
     }
 
     public static final class Builder {

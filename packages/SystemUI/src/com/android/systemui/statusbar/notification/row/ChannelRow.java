@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.android.settingslib.Utils;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ChannelRow extends LinearLayout {
     public NotificationChannel channel;
@@ -38,10 +37,10 @@ public final class ChannelRow extends LinearLayout {
         if (materialSwitch == null) {
             materialSwitch = null;
         }
-        materialSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.android.systemui.statusbar.notification.row.ChannelRow$onFinishInflate$1
+        materialSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.android.systemui.statusbar.notification.row.ChannelRow.onFinishInflate.1
             @Override // android.widget.CompoundButton.OnCheckedChangeListener
             public final void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                int i;
+                int originalImportance;
                 ChannelRow channelRow = ChannelRow.this;
                 NotificationChannel notificationChannel = channelRow.channel;
                 if (notificationChannel != null) {
@@ -50,18 +49,18 @@ public final class ChannelRow extends LinearLayout {
                         channelEditorDialogController = null;
                     }
                     if (z) {
-                        i = notificationChannel.getOriginalImportance();
-                        if (i < 2) {
-                            i = 2;
+                        originalImportance = notificationChannel.getOriginalImportance();
+                        if (originalImportance < 2) {
+                            originalImportance = 2;
                         }
                     } else {
-                        i = 0;
+                        originalImportance = 0;
                     }
                     channelEditorDialogController.getClass();
-                    if (notificationChannel.getImportance() == i) {
+                    if (notificationChannel.getImportance() == originalImportance) {
                         channelEditorDialogController.edits.remove(notificationChannel);
                     } else {
-                        channelEditorDialogController.edits.put(notificationChannel, Integer.valueOf(i));
+                        channelEditorDialogController.edits.put(notificationChannel, Integer.valueOf(originalImportance));
                     }
                     ChannelEditorDialog channelEditorDialog = channelEditorDialogController.dialog;
                     ChannelEditorDialog channelEditorDialog2 = channelEditorDialog != null ? channelEditorDialog : null;
@@ -73,7 +72,7 @@ public final class ChannelRow extends LinearLayout {
                 }
             }
         });
-        setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.ChannelRow$onFinishInflate$2
+        setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.ChannelRow.onFinishInflate.2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 MaterialSwitch materialSwitch2 = ChannelRow.this.f106switch;

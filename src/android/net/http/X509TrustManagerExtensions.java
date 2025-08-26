@@ -19,7 +19,7 @@ public class X509TrustManagerExtensions {
     private final Method mIsSameTrustConfiguration;
     private final X509TrustManager mTrustManager;
 
-    public X509TrustManagerExtensions(X509TrustManager x509TrustManager) throws IllegalArgumentException {
+    public X509TrustManagerExtensions(X509TrustManager x509TrustManager) throws NoSuchMethodException, SecurityException, IllegalArgumentException {
         Method method;
         Method method2 = null;
         if (x509TrustManager instanceof TrustManagerImpl) {
@@ -73,8 +73,8 @@ public class X509TrustManagerExtensions {
     public List<X509Certificate> checkServerTrusted(X509Certificate[] x509CertificateArr, byte[] bArr, byte[] bArr2, String str, String str2) throws CertificateException {
         if (this.mDelegate != null) {
             if (Flags.certificateTransparencyCheckservertrustedApi()) {
-                List<X509Certificate> checkServerTrusted = this.mDelegate.checkServerTrusted(x509CertificateArr, bArr, bArr2, str, str2);
-                return checkServerTrusted == null ? Collections.EMPTY_LIST : checkServerTrusted;
+                List<X509Certificate> listCheckServerTrusted = this.mDelegate.checkServerTrusted(x509CertificateArr, bArr, bArr2, str, str2);
+                return listCheckServerTrusted == null ? Collections.EMPTY_LIST : listCheckServerTrusted;
             }
             throw new IllegalArgumentException("Required method checkServerTrusted(X509Certificate[], byte[], byte[], String, String) not available in TrustManagerImpl");
         }

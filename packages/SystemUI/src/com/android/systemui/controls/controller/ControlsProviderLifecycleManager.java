@@ -25,7 +25,6 @@ import java.util.Set;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsProviderLifecycleManager {
     public static final int BIND_FLAGS;
@@ -47,7 +46,6 @@ public final class ControlsProviderLifecycleManager {
     public final UserHandle user;
     public ServiceWrapper wrapper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Action extends ServiceMethod {
         public final ControlAction action;
         public final String id;
@@ -84,7 +82,6 @@ public final class ControlsProviderLifecycleManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -94,7 +91,6 @@ public final class ControlsProviderLifecycleManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Load extends ServiceMethod {
         public final IControlsProviderInfoSubscriber providerInfoSubscriber;
         public final IControlsSubscriber.Stub subscriber;
@@ -137,7 +133,6 @@ public final class ControlsProviderLifecycleManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LoadProviderInfo extends ServiceMethod {
         public final IControlsProviderInfoSubscriber providerInfoSubscriber;
 
@@ -163,7 +158,6 @@ public final class ControlsProviderLifecycleManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ServiceMethod {
         public ServiceMethod() {
         }
@@ -182,7 +176,7 @@ public final class ControlsProviderLifecycleManager {
             controlsProviderLifecycleManager.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsProviderLifecycleManager$ServiceMethod$run$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ControlsProviderLifecycleManager controlsProviderLifecycleManager2 = ControlsProviderLifecycleManager.this;
+                    ControlsProviderLifecycleManager controlsProviderLifecycleManager2 = controlsProviderLifecycleManager;
                     int i = ControlsProviderLifecycleManager.BIND_FLAGS;
                     controlsProviderLifecycleManager2.unbindAndCleanup("couldn't call through binder");
                 }
@@ -190,7 +184,6 @@ public final class ControlsProviderLifecycleManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Subscribe extends ServiceMethod {
         public final List list;
         public final IControlsSubscriber subscriber;
@@ -219,7 +212,6 @@ public final class ControlsProviderLifecycleManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Suggest extends ServiceMethod {
         public final IControlsSubscriber.Stub subscriber;
 
@@ -274,15 +266,15 @@ public final class ControlsProviderLifecycleManager {
         this.packageUpdateMonitor = factory.create(userHandle, componentName.getPackageName(), new Runnable() { // from class: com.android.systemui.controls.controller.ControlsProviderLifecycleManager$packageUpdateMonitor$1
             @Override // java.lang.Runnable
             public final void run() {
-                final ControlsProviderLifecycleManager controlsProviderLifecycleManager = ControlsProviderLifecycleManager.this;
+                final ControlsProviderLifecycleManager controlsProviderLifecycleManager = this.this$0;
                 if (controlsProviderLifecycleManager.requiresBound) {
                     controlsProviderLifecycleManager.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsProviderLifecycleManager$packageUpdateMonitor$1.1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ControlsProviderLifecycleManager controlsProviderLifecycleManager2 = ControlsProviderLifecycleManager.this;
+                            ControlsProviderLifecycleManager controlsProviderLifecycleManager2 = controlsProviderLifecycleManager;
                             int i = ControlsProviderLifecycleManager.BIND_FLAGS;
                             controlsProviderLifecycleManager2.unbindAndCleanup("package updated");
-                            ControlsProviderLifecycleManager controlsProviderLifecycleManager3 = ControlsProviderLifecycleManager.this;
+                            ControlsProviderLifecycleManager controlsProviderLifecycleManager3 = controlsProviderLifecycleManager;
                             controlsProviderLifecycleManager3.executor.execute(new ControlsProviderLifecycleManager$bindService$1(controlsProviderLifecycleManager3, true, controlsProviderLifecycleManager3.lastForPanel));
                         }
                     });
@@ -335,9 +327,9 @@ public final class ControlsProviderLifecycleManager {
     }
 
     public final void unbindAndCleanup(String str) {
-        String m = KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("unbindAndCleanup requiresBound = ", this.requiresBound);
+        String strM = KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("unbindAndCleanup requiresBound = ", this.requiresBound);
         String str2 = this.TAG;
-        Log.d(str2, m);
+        Log.d(str2, strM);
         Log.d(str2, "Unbinding service " + this.intent + ". Reason: " + str);
         this.wrapper = null;
         try {

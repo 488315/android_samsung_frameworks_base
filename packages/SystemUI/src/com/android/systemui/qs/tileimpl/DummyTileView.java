@@ -14,14 +14,12 @@ import com.android.systemui.plugins.qs.QSTileView;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DummyTileView extends QSTileView {
     public final SecQSCommonTileView commonTileView;
     public final FrameLayout iconFrame;
     public final QSIconViewImpl iconView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,8 +42,8 @@ public final class DummyTileView extends QSTileView {
         FrameLayout frameLayout = secQSCommonTileView.iconFrame;
         addView(frameLayout);
         this.iconFrame = frameLayout;
-        LinearLayout createLabel = secQSCommonTileView.createLabel(R.layout.sec_qs_tile_label, this);
-        addView(createLabel);
+        LinearLayout linearLayoutCreateLabel = secQSCommonTileView.createLabel(R.layout.sec_qs_tile_label, this);
+        addView(linearLayoutCreateLabel);
         setClipChildren(false);
         setClipToPadding(false);
         setClickable(true);
@@ -58,12 +56,12 @@ public final class DummyTileView extends QSTileView {
             layoutParams2.width = -1;
             frameLayout.setLayoutParams(layoutParams2);
         }
-        if (createLabel != null) {
-            ViewGroup.LayoutParams layoutParams3 = createLabel.getLayoutParams();
+        if (linearLayoutCreateLabel != null) {
+            ViewGroup.LayoutParams layoutParams3 = linearLayoutCreateLabel.getLayoutParams();
             LinearLayout.LayoutParams layoutParams4 = layoutParams3 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams3 : null;
             if (layoutParams4 != null) {
-                layoutParams4.height = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getLabelHeight(createLabel.getContext());
-                createLabel.setLayoutParams(layoutParams4);
+                layoutParams4.height = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getLabelHeight(linearLayoutCreateLabel.getContext());
+                linearLayoutCreateLabel.setLayoutParams(layoutParams4);
             }
         }
         setLayoutParams(new LinearLayout.LayoutParams(-1, -1));

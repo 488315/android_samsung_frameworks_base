@@ -86,9 +86,9 @@ public interface IRequestProcessorImpl extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRequestProcessorImpl.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRequestProcessorImpl)) {
-                return (IRequestProcessorImpl) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRequestProcessorImpl.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRequestProcessorImpl)) {
+                return (IRequestProcessorImpl) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -129,32 +129,32 @@ public interface IRequestProcessorImpl extends IInterface {
             switch (i) {
                 case 1:
                     OutputConfigId outputConfigId = (OutputConfigId) parcel.readTypedObject(OutputConfigId.CREATOR);
-                    IImageProcessorImpl asInterface = IImageProcessorImpl.Stub.asInterface(parcel.readStrongBinder());
+                    IImageProcessorImpl iImageProcessorImplAsInterface = IImageProcessorImpl.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setImageProcessor(outputConfigId, asInterface);
+                    setImageProcessor(outputConfigId, iImageProcessorImplAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
                     Request request = (Request) parcel.readTypedObject(Request.CREATOR);
-                    IRequestCallback asInterface2 = IRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IRequestCallback iRequestCallbackAsInterface = IRequestCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int submit = submit(request, asInterface2);
+                    int iSubmit = submit(request, iRequestCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(submit);
+                    parcel2.writeInt(iSubmit);
                     return true;
                 case 3:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(Request.CREATOR);
-                    IRequestCallback asInterface3 = IRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(Request.CREATOR);
+                    IRequestCallback iRequestCallbackAsInterface2 = IRequestCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int submitBurst = submitBurst(createTypedArrayList, asInterface3);
+                    int iSubmitBurst = submitBurst(arrayListCreateTypedArrayList, iRequestCallbackAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(submitBurst);
+                    parcel2.writeInt(iSubmitBurst);
                     return true;
                 case 4:
                     Request request2 = (Request) parcel.readTypedObject(Request.CREATOR);
-                    IRequestCallback asInterface4 = IRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IRequestCallback iRequestCallbackAsInterface3 = IRequestCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int repeating = setRepeating(request2, asInterface4);
+                    int repeating = setRepeating(request2, iRequestCallbackAsInterface3);
                     parcel2.writeNoException();
                     parcel2.writeInt(repeating);
                     return true;
@@ -189,96 +189,96 @@ public interface IRequestProcessorImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.IRequestProcessorImpl
             public void setImageProcessor(OutputConfigId outputConfigId, IImageProcessorImpl iImageProcessorImpl) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(outputConfigId, 0);
-                    obtain.writeStrongInterface(iImageProcessorImpl);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(outputConfigId, 0);
+                    parcelObtain.writeStrongInterface(iImageProcessorImpl);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IRequestProcessorImpl
             public int submit(Request request, IRequestCallback iRequestCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(request, 0);
-                    obtain.writeStrongInterface(iRequestCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(request, 0);
+                    parcelObtain.writeStrongInterface(iRequestCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IRequestProcessorImpl
             public int submitBurst(List<Request> list, IRequestCallback iRequestCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeStrongInterface(iRequestCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeStrongInterface(iRequestCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IRequestProcessorImpl
             public int setRepeating(Request request, IRequestCallback iRequestCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(request, 0);
-                    obtain.writeStrongInterface(iRequestCallback);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(request, 0);
+                    parcelObtain.writeStrongInterface(iRequestCallback);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IRequestProcessorImpl
             public void abortCaptures() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.IRequestProcessorImpl
             public void stopRepeating() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IRequestProcessorImpl.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

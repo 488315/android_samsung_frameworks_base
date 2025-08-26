@@ -17,7 +17,6 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TreeTypeAdapter<T> extends TypeAdapter<T> {
     private final GsonContextImpl context = new GsonContextImpl();
@@ -28,7 +27,6 @@ public final class TreeTypeAdapter<T> extends TypeAdapter<T> {
     private final TypeAdapterFactory skipPast;
     private final TypeToken<T> typeToken;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class GsonContextImpl implements JsonSerializationContext, JsonDeserializationContext {
         private GsonContextImpl() {
         }
@@ -49,7 +47,6 @@ public final class TreeTypeAdapter<T> extends TypeAdapter<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SingleTypeFactory implements TypeAdapterFactory {
         private final JsonDeserializer<?> deserializer;
         private final TypeToken<?> exactType;
@@ -110,15 +107,15 @@ public final class TreeTypeAdapter<T> extends TypeAdapter<T> {
 
     @Override // com.google.gson.TypeAdapter
     /* renamed from: read */
-    public T read2(JsonReader jsonReader) throws IOException {
+    public T read2(JsonReader jsonReader) throws JsonParseException, IOException {
         if (this.deserializer == null) {
             return delegate().read2(jsonReader);
         }
-        JsonElement parse = Streams.parse(jsonReader);
-        if (parse.isJsonNull()) {
+        JsonElement jsonElement = Streams.parse(jsonReader);
+        if (jsonElement.isJsonNull()) {
             return null;
         }
-        return this.deserializer.deserialize(parse, this.typeToken.getType(), this.context);
+        return this.deserializer.deserialize(jsonElement, this.typeToken.getType(), this.context);
     }
 
     @Override // com.google.gson.TypeAdapter

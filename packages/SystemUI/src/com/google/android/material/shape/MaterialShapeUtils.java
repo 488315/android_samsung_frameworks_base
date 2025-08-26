@@ -8,7 +8,6 @@ import com.google.android.material.elevation.ElevationOverlayProvider;
 import com.google.android.material.shape.MaterialShapeDrawable;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialShapeUtils {
     private MaterialShapeUtils() {
@@ -30,14 +29,14 @@ public class MaterialShapeUtils {
         if (elevationOverlayProvider == null || !elevationOverlayProvider.elevationOverlayEnabled) {
             return;
         }
-        float f = 0.0f;
+        float elevation = 0.0f;
         for (ViewParent parent = view.getParent(); parent instanceof View; parent = parent.getParent()) {
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-            f += ViewCompat.Api21Impl.getElevation((View) parent);
+            elevation += ViewCompat.Api21Impl.getElevation((View) parent);
         }
         MaterialShapeDrawable.MaterialShapeDrawableState materialShapeDrawableState = materialShapeDrawable.drawableState;
-        if (materialShapeDrawableState.parentAbsoluteElevation != f) {
-            materialShapeDrawableState.parentAbsoluteElevation = f;
+        if (materialShapeDrawableState.parentAbsoluteElevation != elevation) {
+            materialShapeDrawableState.parentAbsoluteElevation = elevation;
             materialShapeDrawable.updateZ();
         }
     }

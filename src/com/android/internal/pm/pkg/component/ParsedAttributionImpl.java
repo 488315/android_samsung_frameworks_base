@@ -91,14 +91,14 @@ public class ParsedAttributionImpl implements ParsedAttribution, Parcelable {
     }
 
     protected ParsedAttributionImpl(Parcel parcel) {
-        String readString = parcel.readString();
-        int readInt = parcel.readInt();
+        String string = parcel.readString();
+        int i = parcel.readInt();
         ArrayList arrayList = new ArrayList();
         parcel.readStringList(arrayList);
-        this.tag = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.label = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) StringRes.class, (Annotation) null, readInt);
+        this.tag = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.label = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) StringRes.class, (Annotation) null, i);
         this.inheritFrom = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
     }

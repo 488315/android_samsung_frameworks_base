@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardTransitionAuditLogger$start$4 extends SuspendLambda implements Function2 {
     int label;
@@ -42,17 +41,17 @@ final class KeyguardTransitionAuditLogger$start$4 extends SuspendLambda implemen
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            Flow debounce = FlowKt.debounce((StateFlow) this.this$0.sharedNotificationContainerViewModel.bounds$delegate.getValue(), 20L);
+            Flow flowDebounce = FlowKt.debounce((StateFlow) this.this$0.sharedNotificationContainerViewModel.bounds$delegate.getValue(), 20L);
             final KeyguardTransitionAuditLogger keyguardTransitionAuditLogger = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.KeyguardTransitionAuditLogger$start$4.1
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    KeyguardTransitionAuditLogger.this.logger.log(KeyguardTransitionAuditLoggerKt.TAG, LogLevel.VERBOSE, "Notif: bounds (debounced)", (NotificationContainerBounds) obj2);
+                    keyguardTransitionAuditLogger.logger.log(KeyguardTransitionAuditLoggerKt.TAG, LogLevel.VERBOSE, "Notif: bounds (debounced)", (NotificationContainerBounds) obj2);
                     return Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (debounce.collect(flowCollector, this) == coroutineSingletons) {
+            if (flowDebounce.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

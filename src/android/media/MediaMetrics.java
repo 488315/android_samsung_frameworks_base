@@ -197,9 +197,9 @@ public class MediaMetrics {
             this.mPropertyCountOffset = i4;
             this.mPropertyStartOffset = length + 33;
             this.mKey = str;
-            ByteBuffer allocateDirect = ByteBuffer.allocateDirect(Math.max(i3, length + 33));
-            this.mBuffer = allocateDirect;
-            allocateDirect.order(ByteOrder.nativeOrder()).putInt(0).putInt(i4).putChar((char) 0).putChar((char) (length + 1)).put(bytes).put((byte) 0).putInt(i).putInt(i2).putLong(j);
+            ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(Math.max(i3, length + 33));
+            this.mBuffer = byteBufferAllocateDirect;
+            byteBufferAllocateDirect.order(ByteOrder.nativeOrder()).putInt(0).putInt(i4).putChar((char) 0).putChar((char) (length + 1)).put(bytes).put((byte) 0).putInt(i).putInt(i2).putLong(j);
             if (i4 != this.mBuffer.position()) {
                 throw new IllegalStateException("Mismatched sizing");
             }
@@ -228,51 +228,51 @@ public class MediaMetrics {
 
         public Item putInt(String str, int i) {
             byte[] bytes = str.getBytes(MediaMetrics.MEDIAMETRICS_CHARSET);
-            char reserveProperty = (char) reserveProperty(bytes, 4);
-            int position = this.mBuffer.position() + reserveProperty;
-            this.mBuffer.putChar(reserveProperty).put((byte) 1).put(bytes).put((byte) 0).putInt(i);
+            char cReserveProperty = (char) reserveProperty(bytes, 4);
+            int iPosition = this.mBuffer.position() + cReserveProperty;
+            this.mBuffer.putChar(cReserveProperty).put((byte) 1).put(bytes).put((byte) 0).putInt(i);
             this.mPropertyCount++;
-            if (this.mBuffer.position() == position) {
+            if (this.mBuffer.position() == iPosition) {
                 return this;
             }
-            throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + position);
+            throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + iPosition);
         }
 
         public Item putLong(String str, long j) {
             byte[] bytes = str.getBytes(MediaMetrics.MEDIAMETRICS_CHARSET);
-            char reserveProperty = (char) reserveProperty(bytes, 8);
-            int position = this.mBuffer.position() + reserveProperty;
-            this.mBuffer.putChar(reserveProperty).put((byte) 2).put(bytes).put((byte) 0).putLong(j);
+            char cReserveProperty = (char) reserveProperty(bytes, 8);
+            int iPosition = this.mBuffer.position() + cReserveProperty;
+            this.mBuffer.putChar(cReserveProperty).put((byte) 2).put(bytes).put((byte) 0).putLong(j);
             this.mPropertyCount++;
-            if (this.mBuffer.position() == position) {
+            if (this.mBuffer.position() == iPosition) {
                 return this;
             }
-            throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + position);
+            throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + iPosition);
         }
 
         public Item putDouble(String str, double d) {
             byte[] bytes = str.getBytes(MediaMetrics.MEDIAMETRICS_CHARSET);
-            char reserveProperty = (char) reserveProperty(bytes, 8);
-            int position = this.mBuffer.position() + reserveProperty;
-            this.mBuffer.putChar(reserveProperty).put((byte) 3).put(bytes).put((byte) 0).putDouble(d);
+            char cReserveProperty = (char) reserveProperty(bytes, 8);
+            int iPosition = this.mBuffer.position() + cReserveProperty;
+            this.mBuffer.putChar(cReserveProperty).put((byte) 3).put(bytes).put((byte) 0).putDouble(d);
             this.mPropertyCount++;
-            if (this.mBuffer.position() == position) {
+            if (this.mBuffer.position() == iPosition) {
                 return this;
             }
-            throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + position);
+            throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + iPosition);
         }
 
         public Item putString(String str, String str2) {
             byte[] bytes = str.getBytes(MediaMetrics.MEDIAMETRICS_CHARSET);
             byte[] bytes2 = str2.getBytes(MediaMetrics.MEDIAMETRICS_CHARSET);
-            char reserveProperty = (char) reserveProperty(bytes, bytes2.length + 1);
-            int position = this.mBuffer.position() + reserveProperty;
-            this.mBuffer.putChar(reserveProperty).put((byte) 4).put(bytes).put((byte) 0).put(bytes2).put((byte) 0);
+            char cReserveProperty = (char) reserveProperty(bytes, bytes2.length + 1);
+            int iPosition = this.mBuffer.position() + cReserveProperty;
+            this.mBuffer.putChar(cReserveProperty).put((byte) 4).put(bytes).put((byte) 0).put(bytes2).put((byte) 0);
             this.mPropertyCount++;
-            if (this.mBuffer.position() == position) {
+            if (this.mBuffer.position() == iPosition) {
                 return this;
             }
-            throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + position);
+            throw new IllegalStateException("Final position " + this.mBuffer.position() + " != estimatedFinalPosition " + iPosition);
         }
 
         public Item setPid(int i) {
@@ -307,9 +307,9 @@ public class MediaMetrics {
 
         public Bundle toBundle() {
             updateHeader();
-            ByteBuffer duplicate = this.mBuffer.duplicate();
-            duplicate.order(ByteOrder.nativeOrder()).flip();
-            return toBundle(duplicate);
+            ByteBuffer byteBufferDuplicate = this.mBuffer.duplicate();
+            byteBufferDuplicate.order(ByteOrder.nativeOrder()).flip();
+            return toBundle(byteBufferDuplicate);
         }
 
         public static Bundle toBundle(ByteBuffer byteBuffer) {
@@ -326,16 +326,16 @@ public class MediaMetrics {
                 int i3 = byteBuffer.getInt();
                 int i4 = byteBuffer.getInt();
                 long j = byteBuffer.getLong();
-                int position = byteBuffer.position();
+                int iPosition = byteBuffer.position();
                 if (c != 0) {
-                    if (position > i2) {
-                        throw new IllegalArgumentException("Item key:" + stringFromBuffer + " headerRead:" + position + " > headerSize:" + i2);
+                    if (iPosition > i2) {
+                        throw new IllegalArgumentException("Item key:" + stringFromBuffer + " headerRead:" + iPosition + " > headerSize:" + i2);
                     }
-                    if (position < i2) {
+                    if (iPosition < i2) {
                         byteBuffer.position(i2);
                     }
-                } else if (position != i2) {
-                    throw new IllegalArgumentException("Item key:" + stringFromBuffer + " headerRead:" + position + " != headerSize:" + i2);
+                } else if (iPosition != i2) {
+                    throw new IllegalArgumentException("Item key:" + stringFromBuffer + " headerRead:" + iPosition + " != headerSize:" + i2);
                 }
                 int i5 = byteBuffer.getInt();
                 if (i5 < 0) {
@@ -351,7 +351,7 @@ public class MediaMetrics {
                 bundle.putLong(BUNDLE_TIMESTAMP, j);
                 bundle.putInt(BUNDLE_PROPERTY_COUNT, i5);
                 for (int i6 = 0; i6 < i5; i6++) {
-                    int position2 = byteBuffer.position();
+                    int iPosition2 = byteBuffer.position();
                     char c3 = byteBuffer.getChar();
                     byte b = byteBuffer.get();
                     String stringFromBuffer2 = getStringFromBuffer(byteBuffer);
@@ -371,19 +371,19 @@ public class MediaMetrics {
                             if (c == 0) {
                                 throw new IllegalArgumentException("Property " + stringFromBuffer2 + " has unsupported type " + ((int) b));
                             }
-                            byteBuffer.position(position2 + c3);
+                            byteBuffer.position(iPosition2 + c3);
                         }
                     }
-                    int position3 = byteBuffer.position() - position2;
-                    if (position3 != c3) {
-                        throw new IllegalArgumentException("propSize:" + c3 + " != deltaPosition:" + position3);
+                    int iPosition3 = byteBuffer.position() - iPosition2;
+                    if (iPosition3 != c3) {
+                        throw new IllegalArgumentException("propSize:" + c3 + " != deltaPosition:" + iPosition3);
                     }
                 }
-                int position4 = byteBuffer.position();
-                if (position4 == i) {
+                int iPosition4 = byteBuffer.position();
+                if (iPosition4 == i) {
                     return bundle;
                 }
-                throw new IllegalArgumentException("totalSize:" + i + " != finalPosition:" + position4);
+                throw new IllegalArgumentException("totalSize:" + i + " != finalPosition:" + iPosition4);
             }
             throw new IllegalArgumentException("Illegal null key");
         }
@@ -403,15 +403,15 @@ public class MediaMetrics {
             if (this.mBuffer.remaining() >= i2) {
                 return i2;
             }
-            int position = this.mBuffer.position() + i2;
-            if (position > 1073741823) {
-                throw new IllegalStateException("Item memory requirements too large: " + position);
+            int iPosition = this.mBuffer.position() + i2;
+            if (iPosition > 1073741823) {
+                throw new IllegalStateException("Item memory requirements too large: " + iPosition);
             }
-            ByteBuffer allocateDirect = ByteBuffer.allocateDirect(position << 1);
-            allocateDirect.order(ByteOrder.nativeOrder());
+            ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(iPosition << 1);
+            byteBufferAllocateDirect.order(ByteOrder.nativeOrder());
             this.mBuffer.flip();
-            allocateDirect.put(this.mBuffer);
-            this.mBuffer = allocateDirect;
+            byteBufferAllocateDirect.put(this.mBuffer);
+            this.mBuffer = byteBufferAllocateDirect;
             return i2;
         }
 
@@ -421,31 +421,31 @@ public class MediaMetrics {
 
         private static String getStringFromBuffer(ByteBuffer byteBuffer, int i) {
             int i2;
-            int position = byteBuffer.position();
-            int limit = byteBuffer.limit();
-            if (i < Integer.MAX_VALUE - position && (i2 = position + i) < limit) {
-                limit = i2;
+            int iPosition = byteBuffer.position();
+            int iLimit = byteBuffer.limit();
+            if (i < Integer.MAX_VALUE - iPosition && (i2 = iPosition + i) < iLimit) {
+                iLimit = i2;
             }
-            while (position < limit) {
-                if (byteBuffer.get(position) == 0) {
-                    int i3 = position + 1;
+            while (iPosition < iLimit) {
+                if (byteBuffer.get(iPosition) == 0) {
+                    int i3 = iPosition + 1;
                     if (i != Integer.MAX_VALUE && i3 - byteBuffer.position() != i) {
-                        throw new IllegalArgumentException("chars consumed at " + position + ": " + (i3 - byteBuffer.position()) + " != size: " + i);
+                        throw new IllegalArgumentException("chars consumed at " + iPosition + ": " + (i3 - byteBuffer.position()) + " != size: " + i);
                     }
                     if (byteBuffer.hasArray()) {
-                        String str = new String(byteBuffer.array(), byteBuffer.position() + byteBuffer.arrayOffset(), position - byteBuffer.position(), MediaMetrics.MEDIAMETRICS_CHARSET);
+                        String str = new String(byteBuffer.array(), byteBuffer.position() + byteBuffer.arrayOffset(), iPosition - byteBuffer.position(), MediaMetrics.MEDIAMETRICS_CHARSET);
                         byteBuffer.position(i3);
                         return str;
                     }
-                    byte[] bArr = new byte[position - byteBuffer.position()];
+                    byte[] bArr = new byte[iPosition - byteBuffer.position()];
                     byteBuffer.get(bArr);
                     String str2 = new String(bArr, MediaMetrics.MEDIAMETRICS_CHARSET);
                     byteBuffer.get();
                     return str2;
                 }
-                position++;
+                iPosition++;
             }
-            throw new IllegalArgumentException("No zero termination found in string position: " + byteBuffer.position() + " end: " + position);
+            throw new IllegalArgumentException("No zero termination found in string position: " + byteBuffer.position() + " end: " + iPosition);
         }
 
         private void updateHeader() {

@@ -7,14 +7,15 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.View;
+import android.view.ViewGroup;
 import androidx.constraintlayout.widget.ConstraintAttribute;
 import androidx.constraintlayout.widget.R;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyTrigger extends Key {
     public float mFireLastPos;
@@ -38,7 +39,6 @@ public class KeyTrigger extends Key {
     public float mFireThreshold = Float.NaN;
     public boolean mPostLayout = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Loader {
         public static final SparseIntArray sAttrMap;
 
@@ -78,23 +78,142 @@ public class KeyTrigger extends Key {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:68:0x008b  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x00cd  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x009f  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x008b  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x009f  */
+    /* JADX WARN: Removed duplicated region for block: B:49:0x00b4  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00cd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void conditionallyFire(float r11, android.view.View r12) {
-        /*
-            Method dump skipped, instructions count: 345
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.constraintlayout.motion.widget.KeyTrigger.conditionallyFire(float, android.view.View):void");
+    public final void conditionallyFire(float f, View view) {
+        boolean z;
+        boolean z2;
+        boolean z3;
+        boolean z4;
+        boolean z5;
+        boolean z6;
+        if (this.mTriggerCollisionId != -1) {
+            if (this.mTriggerCollisionView == null) {
+                this.mTriggerCollisionView = ((ViewGroup) view.getParent()).findViewById(this.mTriggerCollisionId);
+            }
+            setUpRect(this.mCollisionRect, this.mTriggerCollisionView, this.mPostLayout);
+            setUpRect(this.mTargetRect, view, this.mPostLayout);
+            if (this.mCollisionRect.intersect(this.mTargetRect)) {
+                if (this.mFireCrossReset) {
+                    this.mFireCrossReset = false;
+                    z = true;
+                } else {
+                    z = false;
+                }
+                if (this.mFirePositiveReset) {
+                    this.mFirePositiveReset = false;
+                    z6 = true;
+                } else {
+                    z6 = false;
+                }
+                this.mFireNegativeReset = true;
+                z5 = z6;
+                z3 = false;
+            } else {
+                if (this.mFireCrossReset) {
+                    z = false;
+                } else {
+                    this.mFireCrossReset = true;
+                    z = true;
+                }
+                if (this.mFireNegativeReset) {
+                    this.mFireNegativeReset = false;
+                    z3 = true;
+                } else {
+                    z3 = false;
+                }
+                this.mFirePositiveReset = true;
+                z5 = false;
+            }
+        } else {
+            if (this.mFireCrossReset) {
+                float f2 = this.mFireThreshold;
+                if ((this.mFireLastPos - f2) * (f - f2) < 0.0f) {
+                    this.mFireCrossReset = false;
+                    z = true;
+                }
+                if (!this.mFireNegativeReset) {
+                    float f3 = this.mFireThreshold;
+                    float f4 = f - f3;
+                    if ((this.mFireLastPos - f3) * f4 < 0.0f && f4 < 0.0f) {
+                        this.mFireNegativeReset = false;
+                        z2 = true;
+                    }
+                    if (this.mFirePositiveReset) {
+                        float f5 = this.mFireThreshold;
+                        float f6 = f - f5;
+                        if ((this.mFireLastPos - f5) * f6 >= 0.0f || f6 <= 0.0f) {
+                            z4 = false;
+                        } else {
+                            this.mFirePositiveReset = false;
+                            z4 = true;
+                        }
+                        boolean z7 = z2;
+                        z5 = z4;
+                        z3 = z7;
+                    } else {
+                        if (Math.abs(f - this.mFireThreshold) > this.mTriggerSlack) {
+                            this.mFirePositiveReset = true;
+                        }
+                        z3 = z2;
+                        z5 = false;
+                    }
+                } else if (Math.abs(f - this.mFireThreshold) > this.mTriggerSlack) {
+                    this.mFireNegativeReset = true;
+                }
+                z2 = false;
+                if (this.mFirePositiveReset) {
+                }
+            } else if (Math.abs(f - this.mFireThreshold) > this.mTriggerSlack) {
+                this.mFireCrossReset = true;
+            }
+            z = false;
+            if (!this.mFireNegativeReset) {
+            }
+            z2 = false;
+            if (this.mFirePositiveReset) {
+            }
+        }
+        this.mFireLastPos = f;
+        if (z3 || z || z5) {
+            ((MotionLayout) view.getParent()).fireTrigger(this.mTriggerID, z5, f);
+        }
+        View viewFindViewById = this.mTriggerReceiver == -1 ? view : ((MotionLayout) view.getParent()).findViewById(this.mTriggerReceiver);
+        if (z3) {
+            String str = this.mNegativeCross;
+            if (str != null) {
+                fire(viewFindViewById, str);
+            }
+            if (this.mViewTransitionOnNegativeCross != -1) {
+                ((MotionLayout) view.getParent()).viewTransition(this.mViewTransitionOnNegativeCross, viewFindViewById);
+            }
+        }
+        if (z5) {
+            String str2 = this.mPositiveCross;
+            if (str2 != null) {
+                fire(viewFindViewById, str2);
+            }
+            if (this.mViewTransitionOnPositiveCross != -1) {
+                ((MotionLayout) view.getParent()).viewTransition(this.mViewTransitionOnPositiveCross, viewFindViewById);
+            }
+        }
+        if (z) {
+            String str3 = this.mCross;
+            if (str3 != null) {
+                fire(viewFindViewById, str3);
+            }
+            if (this.mViewTransitionOnCross != -1) {
+                ((MotionLayout) view.getParent()).viewTransition(this.mViewTransitionOnCross, viewFindViewById);
+            }
+        }
     }
 
-    public final void fire(View view, String str) {
+    public final void fire(View view, String str) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         Method method;
         if (str == null) {
             return;
@@ -143,71 +262,71 @@ public class KeyTrigger extends Key {
 
     @Override // androidx.constraintlayout.motion.widget.Key
     public final void load(Context context, AttributeSet attributeSet) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.KeyTrigger);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.KeyTrigger);
         SparseIntArray sparseIntArray = Loader.sAttrMap;
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
-            int index = obtainStyledAttributes.getIndex(i);
+            int index = typedArrayObtainStyledAttributes.getIndex(i);
             SparseIntArray sparseIntArray2 = Loader.sAttrMap;
             switch (sparseIntArray2.get(index)) {
                 case 1:
-                    this.mNegativeCross = obtainStyledAttributes.getString(index);
+                    this.mNegativeCross = typedArrayObtainStyledAttributes.getString(index);
                     break;
                 case 2:
-                    this.mPositiveCross = obtainStyledAttributes.getString(index);
+                    this.mPositiveCross = typedArrayObtainStyledAttributes.getString(index);
                     break;
                 case 3:
                 default:
                     Log.e("KeyTrigger", "unused attribute 0x" + Integer.toHexString(index) + "   " + sparseIntArray2.get(index));
                     break;
                 case 4:
-                    this.mCross = obtainStyledAttributes.getString(index);
+                    this.mCross = typedArrayObtainStyledAttributes.getString(index);
                     break;
                 case 5:
-                    this.mTriggerSlack = obtainStyledAttributes.getFloat(index, this.mTriggerSlack);
+                    this.mTriggerSlack = typedArrayObtainStyledAttributes.getFloat(index, this.mTriggerSlack);
                     break;
                 case 6:
-                    this.mTriggerID = obtainStyledAttributes.getResourceId(index, this.mTriggerID);
+                    this.mTriggerID = typedArrayObtainStyledAttributes.getResourceId(index, this.mTriggerID);
                     break;
                 case 7:
                     if (MotionLayout.IS_IN_EDIT_MODE) {
-                        int resourceId = obtainStyledAttributes.getResourceId(index, this.mTargetId);
+                        int resourceId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTargetId);
                         this.mTargetId = resourceId;
                         if (resourceId == -1) {
-                            this.mTargetString = obtainStyledAttributes.getString(index);
+                            this.mTargetString = typedArrayObtainStyledAttributes.getString(index);
                             break;
                         } else {
                             break;
                         }
-                    } else if (obtainStyledAttributes.peekValue(index).type == 3) {
-                        this.mTargetString = obtainStyledAttributes.getString(index);
+                    } else if (typedArrayObtainStyledAttributes.peekValue(index).type == 3) {
+                        this.mTargetString = typedArrayObtainStyledAttributes.getString(index);
                         break;
                     } else {
-                        this.mTargetId = obtainStyledAttributes.getResourceId(index, this.mTargetId);
+                        this.mTargetId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTargetId);
                         break;
                     }
                 case 8:
-                    int integer = obtainStyledAttributes.getInteger(index, this.mFramePosition);
+                    int integer = typedArrayObtainStyledAttributes.getInteger(index, this.mFramePosition);
                     this.mFramePosition = integer;
                     this.mFireThreshold = (integer + 0.5f) / 100.0f;
                     break;
                 case 9:
-                    this.mTriggerCollisionId = obtainStyledAttributes.getResourceId(index, this.mTriggerCollisionId);
+                    this.mTriggerCollisionId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTriggerCollisionId);
                     break;
                 case 10:
-                    this.mPostLayout = obtainStyledAttributes.getBoolean(index, this.mPostLayout);
+                    this.mPostLayout = typedArrayObtainStyledAttributes.getBoolean(index, this.mPostLayout);
                     break;
                 case 11:
-                    this.mTriggerReceiver = obtainStyledAttributes.getResourceId(index, this.mTriggerReceiver);
+                    this.mTriggerReceiver = typedArrayObtainStyledAttributes.getResourceId(index, this.mTriggerReceiver);
                     break;
                 case 12:
-                    this.mViewTransitionOnCross = obtainStyledAttributes.getResourceId(index, this.mViewTransitionOnCross);
+                    this.mViewTransitionOnCross = typedArrayObtainStyledAttributes.getResourceId(index, this.mViewTransitionOnCross);
                     break;
                 case 13:
-                    this.mViewTransitionOnNegativeCross = obtainStyledAttributes.getResourceId(index, this.mViewTransitionOnNegativeCross);
+                    this.mViewTransitionOnNegativeCross = typedArrayObtainStyledAttributes.getResourceId(index, this.mViewTransitionOnNegativeCross);
                     break;
                 case 14:
-                    this.mViewTransitionOnPositiveCross = obtainStyledAttributes.getResourceId(index, this.mViewTransitionOnPositiveCross);
+                    this.mViewTransitionOnPositiveCross = typedArrayObtainStyledAttributes.getResourceId(index, this.mViewTransitionOnPositiveCross);
                     break;
             }
         }
@@ -215,7 +334,7 @@ public class KeyTrigger extends Key {
 
     @Override // androidx.constraintlayout.motion.widget.Key
     /* renamed from: clone */
-    public final Key mo886clone() {
+    public final Key mo888clone() {
         KeyTrigger keyTrigger = new KeyTrigger();
         super.copy(this);
         keyTrigger.mCross = this.mCross;

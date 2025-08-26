@@ -27,9 +27,9 @@ public class InputSurface {
     }
 
     private void eglSetup() {
-        EGLDisplay eglGetDisplay = EGL14.eglGetDisplay(0);
-        this.mEGLDisplay = eglGetDisplay;
-        if (eglGetDisplay == EGL14.EGL_NO_DISPLAY) {
+        EGLDisplay eGLDisplayEglGetDisplay = EGL14.eglGetDisplay(0);
+        this.mEGLDisplay = eGLDisplayEglGetDisplay;
+        if (eGLDisplayEglGetDisplay == EGL14.EGL_NO_DISPLAY) {
             throw new RuntimeException("unable to get EGL14 display");
         }
         int[] iArr = new int[2];
@@ -86,18 +86,18 @@ public class InputSurface {
     }
 
     private void checkEglError(String str) {
-        int eglGetError;
+        int iEglGetError;
         boolean z = false;
         while (true) {
-            eglGetError = EGL14.eglGetError();
-            if (eglGetError == 12288) {
+            iEglGetError = EGL14.eglGetError();
+            if (iEglGetError == 12288) {
                 break;
             } else {
                 z = true;
             }
         }
         if (z) {
-            LogS.e("TranscodeLib", str + ": EGL error: " + eglGetError);
+            LogS.e("TranscodeLib", str + ": EGL error: " + iEglGetError);
             throw new RuntimeException("EGL error encountered (see log)");
         }
     }

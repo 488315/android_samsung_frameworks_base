@@ -201,9 +201,9 @@ public interface IWindow extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWindow)) {
-                return (IWindow) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWindow)) {
+                return (IWindow) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -275,25 +275,25 @@ public interface IWindow extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     parcel.enforceNoDataAvail();
-                    executeCommand(readString, readString2, parcelFileDescriptor);
+                    executeCommand(string, string2, parcelFileDescriptor);
                     return true;
                 case 2:
                     ClientWindowFrames clientWindowFrames = (ClientWindowFrames) parcel.readTypedObject(ClientWindowFrames.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     MergedConfiguration mergedConfiguration = (MergedConfiguration) parcel.readTypedObject(MergedConfiguration.CREATOR);
                     InsetsState insetsState = (InsetsState) parcel.readTypedObject(InsetsState.CREATOR);
-                    boolean readBoolean2 = parcel.readBoolean();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     ActivityWindowInfo activityWindowInfo = (ActivityWindowInfo) parcel.readTypedObject(ActivityWindowInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    resized(clientWindowFrames, readBoolean, mergedConfiguration, insetsState, readBoolean2, readBoolean3, readInt, readInt2, readBoolean4, activityWindowInfo);
+                    resized(clientWindowFrames, z, mergedConfiguration, insetsState, z2, z3, i3, i4, z4, activityWindowInfo);
                     return true;
                 case 3:
                     InsetsState insetsState2 = (InsetsState) parcel.readTypedObject(InsetsState.CREATOR);
@@ -302,57 +302,57 @@ public interface IWindow extends IInterface {
                     insetsControlChanged(insetsState2, array);
                     return true;
                 case 4:
-                    int readInt3 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    int i5 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
                     ImeTracker.Token token = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
                     parcel.enforceNoDataAvail();
-                    showInsets(readInt3, readBoolean5, token);
+                    showInsets(i5, z5, token);
                     return true;
                 case 5:
-                    int readInt4 = parcel.readInt();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    int i6 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
                     ImeTracker.Token token2 = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
                     parcel.enforceNoDataAvail();
-                    hideInsets(readInt4, readBoolean6, token2);
+                    hideInsets(i6, z6, token2);
                     return true;
                 case 6:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    moved(readInt5, readInt6);
+                    moved(i7, i8);
                     return true;
                 case 7:
-                    boolean readBoolean7 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    dispatchAppVisibility(readBoolean7);
+                    dispatchAppVisibility(z7);
                     return true;
                 case 8:
                     dispatchGetNewSurface();
                     return true;
                 case 9:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    closeSystemDialogs(readString3);
+                    closeSystemDialogs(string3);
                     return true;
                 case 10:
-                    float readFloat = parcel.readFloat();
-                    float readFloat2 = parcel.readFloat();
-                    float readFloat3 = parcel.readFloat();
-                    float readFloat4 = parcel.readFloat();
-                    float readFloat5 = parcel.readFloat();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    float f = parcel.readFloat();
+                    float f2 = parcel.readFloat();
+                    float f3 = parcel.readFloat();
+                    float f4 = parcel.readFloat();
+                    float f5 = parcel.readFloat();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    dispatchWallpaperOffsets(readFloat, readFloat2, readFloat3, readFloat4, readFloat5, readBoolean8);
+                    dispatchWallpaperOffsets(f, f2, f3, f4, f5, z8);
                     return true;
                 case 11:
-                    String readString4 = parcel.readString();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    boolean readBoolean9 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    dispatchWallpaperCommand(readString4, readInt7, readInt8, readInt9, bundle, readBoolean9);
+                    dispatchWallpaperCommand(string4, i9, i10, i11, bundle, z9);
                     return true;
                 case 12:
                     DragEvent dragEvent = (DragEvent) parcel.readTypedObject(DragEvent.CREATOR);
@@ -363,15 +363,15 @@ public interface IWindow extends IInterface {
                     dispatchWindowShown();
                     return true;
                 case 14:
-                    IResultReceiver asInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt10 = parcel.readInt();
+                    IResultReceiver iResultReceiverAsInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestAppKeyboardShortcuts(asInterface, readInt10);
+                    requestAppKeyboardShortcuts(iResultReceiverAsInterface, i12);
                     return true;
                 case 15:
-                    IScrollCaptureResponseListener asInterface2 = IScrollCaptureResponseListener.Stub.asInterface(parcel.readStrongBinder());
+                    IScrollCaptureResponseListener iScrollCaptureResponseListenerAsInterface = IScrollCaptureResponseListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestScrollCapture(asInterface2);
+                    requestScrollCapture(iScrollCaptureResponseListenerAsInterface);
                     return true;
                 case 16:
                     ParcelFileDescriptor parcelFileDescriptor2 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
@@ -384,9 +384,9 @@ public interface IWindow extends IInterface {
                     dispatchSmartClipRemoteRequest(smartClipRemoteRequestInfo);
                     return true;
                 case 18:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    dispatchLetterboxDirectionChanged(readInt11);
+                    dispatchLetterboxDirectionChanged(i13);
                     return true;
                 case 19:
                     InputEvent[] inputEventArr = (InputEvent[]) parcel.createTypedArray(InputEvent.CREATOR);
@@ -399,14 +399,14 @@ public interface IWindow extends IInterface {
                     dispatchDragEventUpdated(dragEvent2);
                     return true;
                 case 21:
-                    boolean readBoolean10 = parcel.readBoolean();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    invalidateForScreenShot(readBoolean10);
+                    invalidateForScreenShot(z10);
                     return true;
                 case 22:
-                    boolean readBoolean11 = parcel.readBoolean();
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    windowFocusInTaskChanged(readBoolean11);
+                    windowFocusInTaskChanged(z11);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -431,291 +431,291 @@ public interface IWindow extends IInterface {
 
             @Override // android.view.IWindow
             public void executeCommand(String str, String str2, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void resized(ClientWindowFrames clientWindowFrames, boolean z, MergedConfiguration mergedConfiguration, InsetsState insetsState, boolean z2, boolean z3, int i, int i2, boolean z4, ActivityWindowInfo activityWindowInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(clientWindowFrames, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(mergedConfiguration, 0);
-                    obtain.writeTypedObject(insetsState, 0);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z4);
-                    obtain.writeTypedObject(activityWindowInfo, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientWindowFrames, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(mergedConfiguration, 0);
+                    parcelObtain.writeTypedObject(insetsState, 0);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z4);
+                    parcelObtain.writeTypedObject(activityWindowInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void insetsControlChanged(InsetsState insetsState, InsetsSourceControl.Array array) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(insetsState, 0);
-                    obtain.writeTypedObject(array, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(insetsState, 0);
+                    parcelObtain.writeTypedObject(array, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void showInsets(int i, boolean z, ImeTracker.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void hideInsets(int i, boolean z, ImeTracker.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void moved(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dispatchAppVisibility(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dispatchGetNewSurface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void closeSystemDialogs(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dispatchWallpaperOffsets(float f, float f2, float f3, float f4, float f5, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    obtain.writeFloat(f2);
-                    obtain.writeFloat(f3);
-                    obtain.writeFloat(f4);
-                    obtain.writeFloat(f5);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeFloat(f2);
+                    parcelObtain.writeFloat(f3);
+                    parcelObtain.writeFloat(f4);
+                    parcelObtain.writeFloat(f5);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dispatchWallpaperCommand(String str, int i, int i2, int i3, Bundle bundle, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dispatchDragEvent(DragEvent dragEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(dragEvent, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(dragEvent, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dispatchWindowShown() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void requestAppKeyboardShortcuts(IResultReceiver iResultReceiver, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void requestScrollCapture(IScrollCaptureResponseListener iScrollCaptureResponseListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iScrollCaptureResponseListener);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iScrollCaptureResponseListener);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dumpWindow(ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dispatchSmartClipRemoteRequest(SmartClipRemoteRequestInfo smartClipRemoteRequestInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(smartClipRemoteRequestInfo, 0);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(smartClipRemoteRequestInfo, 0);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dispatchLetterboxDirectionChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dispatchSPenGestureEvent(InputEvent[] inputEventArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(inputEventArr, 0);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(inputEventArr, 0);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void dispatchDragEventUpdated(DragEvent dragEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(dragEvent, 0);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(dragEvent, 0);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void invalidateForScreenShot(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IWindow
             public void windowFocusInTaskChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

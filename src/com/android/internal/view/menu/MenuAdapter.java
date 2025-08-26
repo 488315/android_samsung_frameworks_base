@@ -1,5 +1,6 @@
 package com.android.internal.view.menu;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,7 @@ public class MenuAdapter extends BaseAdapter {
     }
 
     @Override // android.widget.Adapter
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
         if (view == null) {
             view = this.mInflater.inflate(this.mItemLayoutRes, viewGroup, false);
         }

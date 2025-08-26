@@ -1,6 +1,5 @@
 package com.google.protobuf.nano;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CodedInputByteBufferNano {
     public final byte[] buffer;
@@ -23,16 +22,16 @@ public final class CodedInputByteBufferNano {
         return new CodedInputByteBufferNano(bArr, i, i2);
     }
 
-    public final void readMessage(MessageNano messageNano) {
-        int readRawVarint32 = readRawVarint32();
+    public final void readMessage(MessageNano messageNano) throws InvalidProtocolBufferNanoException {
+        int rawVarint32 = readRawVarint32();
         int i = this.recursionDepth;
         if (i >= 64) {
             throw new InvalidProtocolBufferNanoException("Protocol message had too many levels of nesting.  May be malicious.  Use CodedInputStream.setRecursionLimit() to increase the depth limit.");
         }
-        if (readRawVarint32 < 0) {
+        if (rawVarint32 < 0) {
             throw new InvalidProtocolBufferNanoException("CodedInputStream encountered an embedded string or message which claimed to have negative size.");
         }
-        int i2 = readRawVarint32 + this.bufferPos;
+        int i2 = rawVarint32 + this.bufferPos;
         int i3 = this.currentLimit;
         if (i2 > i3) {
             throw InvalidProtocolBufferNanoException.truncatedMessage();
@@ -65,7 +64,7 @@ public final class CodedInputByteBufferNano {
         this.bufferSize = i6 - i7;
     }
 
-    public final byte readRawByte() {
+    public final byte readRawByte() throws InvalidProtocolBufferNanoException {
         int i = this.bufferPos;
         if (i == this.bufferSize) {
             throw InvalidProtocolBufferNanoException.truncatedMessage();
@@ -74,29 +73,29 @@ public final class CodedInputByteBufferNano {
         return this.buffer[i];
     }
 
-    public final int readRawVarint32() {
+    public final int readRawVarint32() throws InvalidProtocolBufferNanoException {
         int i;
-        byte readRawByte = readRawByte();
-        if (readRawByte >= 0) {
-            return readRawByte;
+        byte rawByte = readRawByte();
+        if (rawByte >= 0) {
+            return rawByte;
         }
-        int i2 = readRawByte & Byte.MAX_VALUE;
-        byte readRawByte2 = readRawByte();
-        if (readRawByte2 >= 0) {
-            i = readRawByte2 << 7;
+        int i2 = rawByte & Byte.MAX_VALUE;
+        byte rawByte2 = readRawByte();
+        if (rawByte2 >= 0) {
+            i = rawByte2 << 7;
         } else {
-            i2 |= (readRawByte2 & Byte.MAX_VALUE) << 7;
-            byte readRawByte3 = readRawByte();
-            if (readRawByte3 >= 0) {
-                i = readRawByte3 << 14;
+            i2 |= (rawByte2 & Byte.MAX_VALUE) << 7;
+            byte rawByte3 = readRawByte();
+            if (rawByte3 >= 0) {
+                i = rawByte3 << 14;
             } else {
-                i2 |= (readRawByte3 & Byte.MAX_VALUE) << 14;
-                byte readRawByte4 = readRawByte();
-                if (readRawByte4 < 0) {
-                    int i3 = i2 | ((readRawByte4 & Byte.MAX_VALUE) << 21);
-                    byte readRawByte5 = readRawByte();
-                    int i4 = i3 | (readRawByte5 << 28);
-                    if (readRawByte5 < 0) {
+                i2 |= (rawByte3 & Byte.MAX_VALUE) << 14;
+                byte rawByte4 = readRawByte();
+                if (rawByte4 < 0) {
+                    int i3 = i2 | ((rawByte4 & Byte.MAX_VALUE) << 21);
+                    byte rawByte5 = readRawByte();
+                    int i4 = i3 | (rawByte5 << 28);
+                    if (rawByte5 < 0) {
                         for (int i5 = 0; i5 < 5; i5++) {
                             if (readRawByte() < 0) {
                             }
@@ -105,56 +104,56 @@ public final class CodedInputByteBufferNano {
                     }
                     return i4;
                 }
-                i = readRawByte4 << 21;
+                i = rawByte4 << 21;
             }
         }
         return i | i2;
     }
 
-    public final String readString() {
-        int readRawVarint32 = readRawVarint32();
+    public final String readString() throws InvalidProtocolBufferNanoException {
+        int rawVarint32 = readRawVarint32();
         int i = this.bufferSize;
         int i2 = this.bufferPos;
         int i3 = i - i2;
         byte[] bArr = this.buffer;
-        if (readRawVarint32 <= i3 && readRawVarint32 > 0) {
-            String str = new String(bArr, i2, readRawVarint32, InternalNano.UTF_8);
-            this.bufferPos += readRawVarint32;
+        if (rawVarint32 <= i3 && rawVarint32 > 0) {
+            String str = new String(bArr, i2, rawVarint32, InternalNano.UTF_8);
+            this.bufferPos += rawVarint32;
             return str;
         }
-        if (readRawVarint32 < 0) {
+        if (rawVarint32 < 0) {
             throw new InvalidProtocolBufferNanoException("CodedInputStream encountered an embedded string or message which claimed to have negative size.");
         }
-        int i4 = i2 + readRawVarint32;
+        int i4 = i2 + rawVarint32;
         int i5 = this.currentLimit;
         if (i4 > i5) {
             skipRawBytes(i5 - i2);
             throw InvalidProtocolBufferNanoException.truncatedMessage();
         }
-        if (readRawVarint32 > i3) {
+        if (rawVarint32 > i3) {
             throw InvalidProtocolBufferNanoException.truncatedMessage();
         }
-        byte[] bArr2 = new byte[readRawVarint32];
-        System.arraycopy(bArr, i2, bArr2, 0, readRawVarint32);
-        this.bufferPos += readRawVarint32;
+        byte[] bArr2 = new byte[rawVarint32];
+        System.arraycopy(bArr, i2, bArr2, 0, rawVarint32);
+        this.bufferPos += rawVarint32;
         return new String(bArr2, InternalNano.UTF_8);
     }
 
-    public final int readTag() {
+    public final int readTag() throws InvalidProtocolBufferNanoException {
         if (this.bufferPos == this.bufferSize) {
             this.lastTag = 0;
             return 0;
         }
-        int readRawVarint32 = readRawVarint32();
-        this.lastTag = readRawVarint32;
-        if (readRawVarint32 != 0) {
-            return readRawVarint32;
+        int rawVarint32 = readRawVarint32();
+        this.lastTag = rawVarint32;
+        if (rawVarint32 != 0) {
+            return rawVarint32;
         }
         throw new InvalidProtocolBufferNanoException("Protocol message contained an invalid tag (zero).");
     }
 
-    public final boolean skipField(int i) {
-        int readTag;
+    public final boolean skipField(int i) throws InvalidProtocolBufferNanoException {
+        int tag;
         int i2 = i & 7;
         if (i2 == 0) {
             readRawVarint32();
@@ -177,11 +176,11 @@ public final class CodedInputByteBufferNano {
         }
         if (i2 == 3) {
             do {
-                readTag = readTag();
-                if (readTag == 0) {
+                tag = readTag();
+                if (tag == 0) {
                     break;
                 }
-            } while (skipField(readTag));
+            } while (skipField(tag));
             if (this.lastTag == (((i >>> 3) << 3) | 4)) {
                 return true;
             }
@@ -200,7 +199,7 @@ public final class CodedInputByteBufferNano {
         return true;
     }
 
-    public final void skipRawBytes(int i) {
+    public final void skipRawBytes(int i) throws InvalidProtocolBufferNanoException {
         if (i < 0) {
             throw new InvalidProtocolBufferNanoException("CodedInputStream encountered an embedded string or message which claimed to have negative size.");
         }

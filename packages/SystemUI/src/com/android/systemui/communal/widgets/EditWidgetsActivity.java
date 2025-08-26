@@ -13,18 +13,34 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import androidx.activity.ComponentActivity;
 import androidx.activity.compose.ComponentActivityKt;
+import androidx.compose.animation.AnimatedContentKt$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.BackgroundKt;
+import androidx.compose.foundation.layout.BoxKt;
+import androidx.compose.foundation.layout.BoxScopeInstance;
+import androidx.compose.foundation.layout.SizeKt;
 import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
+import androidx.compose.material3.MaterialTheme;
+import androidx.compose.runtime.ComposablesKt;
 import androidx.compose.runtime.Composer;
 import androidx.compose.runtime.ComposerImpl;
 import androidx.compose.runtime.ComposerKt;
+import androidx.compose.runtime.PersistentCompositionLocalMap;
+import androidx.compose.runtime.Updater;
 import androidx.compose.runtime.internal.ComposableLambdaImpl;
 import androidx.compose.runtime.internal.ComposableLambdaKt;
+import androidx.compose.ui.Alignment;
+import androidx.compose.ui.ComposedModifierKt;
+import androidx.compose.ui.Modifier;
+import androidx.compose.ui.graphics.RectangleShapeKt;
+import androidx.compose.ui.layout.MeasurePolicy;
+import androidx.compose.ui.node.ComposeUiNode;
 import androidx.lifecycle.LifecycleKt;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.compose.theme.PlatformThemeKt;
 import com.android.internal.logging.UiEventLogger;
 import com.android.systemui.communal.domain.interactor.CommunalInteractor;
 import com.android.systemui.communal.shared.log.CommunalUiEvent;
+import com.android.systemui.communal.ui.compose.CommunalHubKt;
 import com.android.systemui.communal.ui.view.layout.sections.CommunalAppWidgetSection;
 import com.android.systemui.communal.ui.viewmodel.BaseCommunalViewModel;
 import com.android.systemui.communal.ui.viewmodel.CommunalEditModeViewModel;
@@ -34,14 +50,16 @@ import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.core.Logger;
 import com.android.systemui.settings.UserTracker;
+import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+import kotlin.reflect.KFunction;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class EditWidgetsActivity extends ComponentActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -57,12 +75,10 @@ public final class EditWidgetsActivity extends ComponentActivity {
     public final CommunalAppWidgetSection widgetSection;
     public final IWindowManager windowManagerService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ActivityControllerImpl {
         public boolean activityFullyVisible;
         public boolean waitingForResult;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -116,7 +132,6 @@ public final class EditWidgetsActivity extends ComponentActivity {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -181,45 +196,111 @@ public final class EditWidgetsActivity extends ComponentActivity {
         }
         getWindow().setDecorFitsSystemWindows(false);
         this.shouldOpenWidgetPickerOnStart = getIntent().getBooleanExtra("open_widget_picker_on_start", false);
-        ComponentActivityKt.setContent$default(this, new ComposableLambdaImpl(-664677188, true, new Function2() { // from class: com.android.systemui.communal.widgets.EditWidgetsActivity$onCreate$1
+        ComponentActivityKt.setContent$default(this, new ComposableLambdaImpl(-664677188, true, new Function2() { // from class: com.android.systemui.communal.widgets.EditWidgetsActivity.onCreate.1
+            /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
             @Override // kotlin.jvm.functions.Function2
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final Object invoke(Object obj, Object obj2) {
                 Composer composer = (Composer) obj;
                 if ((((Number) obj2).intValue() & 3) == 2) {
                     ComposerImpl composerImpl = (ComposerImpl) composer;
                     if (composerImpl.getSkipping()) {
                         composerImpl.skipToGroupEnd();
-                        return Unit.INSTANCE;
+                    } else {
+                        if (ComposerKt.isTraceInProgress()) {
+                            ComposerKt.traceEventStart("com.android.systemui.communal.widgets.EditWidgetsActivity.onCreate.<anonymous> (EditWidgetsActivity.kt:194)");
+                        }
+                        final EditWidgetsActivity editWidgetsActivity = EditWidgetsActivity.this;
+                        PlatformThemeKt.PlatformTheme(false, ComposableLambdaKt.rememberComposableLambda(-700058190, new Function2() { // from class: com.android.systemui.communal.widgets.EditWidgetsActivity.onCreate.1.1
+                            /* JADX WARN: Removed duplicated region for block: B:26:0x00ba  */
+                            /* JADX WARN: Removed duplicated region for block: B:31:0x00e7  */
+                            /* JADX WARN: Removed duplicated region for block: B:8:0x001d  */
+                            @Override // kotlin.jvm.functions.Function2
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                            */
+                            public final Object invoke(Object obj3, Object obj4) {
+                                Composer composer2 = (Composer) obj3;
+                                if ((((Number) obj4).intValue() & 3) == 2) {
+                                    ComposerImpl composerImpl2 = (ComposerImpl) composer2;
+                                    if (composerImpl2.getSkipping()) {
+                                        composerImpl2.skipToGroupEnd();
+                                    } else {
+                                        if (ComposerKt.isTraceInProgress()) {
+                                            ComposerKt.traceEventStart("com.android.systemui.communal.widgets.EditWidgetsActivity.onCreate.<anonymous>.<anonymous> (EditWidgetsActivity.kt:195)");
+                                        }
+                                        Modifier modifierFillMaxSize = SizeKt.fillMaxSize(Modifier.Companion, 1.0f);
+                                        MaterialTheme.INSTANCE.getClass();
+                                        Modifier modifierM26backgroundbw27NRU = BackgroundKt.m26backgroundbw27NRU(modifierFillMaxSize, MaterialTheme.getColorScheme(composer2).surfaceDim, RectangleShapeKt.RectangleShape);
+                                        Alignment.Companion.getClass();
+                                        MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
+                                        int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composer2);
+                                        ComposerImpl composerImpl3 = (ComposerImpl) composer2;
+                                        PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl3.currentCompositionLocalScope();
+                                        Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composer2, modifierM26backgroundbw27NRU);
+                                        ComposeUiNode.Companion.getClass();
+                                        Function0 function0 = ComposeUiNode.Companion.Constructor;
+                                        if (composerImpl3.applier == null) {
+                                            ComposablesKt.invalidApplier();
+                                            throw null;
+                                        }
+                                        composerImpl3.startReusableNode();
+                                        if (composerImpl3.inserting) {
+                                            composerImpl3.createNode(function0);
+                                        } else {
+                                            composerImpl3.useNode();
+                                        }
+                                        Updater.m337setimpl(composer2, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+                                        Updater.m337setimpl(composer2, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+                                        Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
+                                        if (composerImpl3.inserting || !Intrinsics.areEqual(composerImpl3.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
+                                            AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl3, currentCompositeKeyHash, function2);
+                                        }
+                                        Updater.m337setimpl(composer2, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
+                                        BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
+                                        EditWidgetsActivity editWidgetsActivity2 = editWidgetsActivity;
+                                        CommunalEditModeViewModel communalEditModeViewModel = editWidgetsActivity2.communalViewModel;
+                                        composerImpl3.startReplaceGroup(49112580);
+                                        boolean zChangedInstance = composerImpl3.changedInstance(editWidgetsActivity2);
+                                        Object objRememberedValue = composerImpl3.rememberedValue();
+                                        Composer.Companion companion = Composer.Companion;
+                                        if (!zChangedInstance) {
+                                            companion.getClass();
+                                            if (objRememberedValue == Composer.Companion.Empty) {
+                                                objRememberedValue = new EditWidgetsActivity$onCreate$1$1$1$1$1(editWidgetsActivity2);
+                                                composerImpl3.updateRememberedValue(objRememberedValue);
+                                            }
+                                            KFunction kFunction = (KFunction) objRememberedValue;
+                                            composerImpl3.end(false);
+                                            WidgetConfigurationController widgetConfigurationController = (WidgetConfigurationController) editWidgetsActivity2.widgetConfigurator$delegate.getValue();
+                                            composerImpl3.startReplaceGroup(49116540);
+                                            boolean zChangedInstance2 = composerImpl3.changedInstance(editWidgetsActivity2);
+                                            Object objRememberedValue2 = composerImpl3.rememberedValue();
+                                            if (!zChangedInstance2) {
+                                                companion.getClass();
+                                                if (objRememberedValue2 == Composer.Companion.Empty) {
+                                                    objRememberedValue2 = new EditWidgetsActivity$onCreate$1$1$1$2$1(editWidgetsActivity2);
+                                                    composerImpl3.updateRememberedValue(objRememberedValue2);
+                                                }
+                                                composerImpl3.end(false);
+                                                CommunalHubKt.CommunalHub(null, communalEditModeViewModel, editWidgetsActivity2.widgetSection, null, null, widgetConfigurationController, (Function0) kFunction, (Function0) ((KFunction) objRememberedValue2), null, composer2, 0, IKnoxCustomManager.Stub.TRANSACTION_setBootingAnimationSub);
+                                                composerImpl3.end(true);
+                                                if (ComposerKt.isTraceInProgress()) {
+                                                    ComposerKt.traceEventEnd();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                return Unit.INSTANCE;
+                            }
+                        }, composer), composer, 48, 1);
+                        if (ComposerKt.isTraceInProgress()) {
+                            ComposerKt.traceEventEnd();
+                        }
                     }
-                }
-                if (ComposerKt.isTraceInProgress()) {
-                    ComposerKt.traceEventStart("com.android.systemui.communal.widgets.EditWidgetsActivity.onCreate.<anonymous> (EditWidgetsActivity.kt:194)");
-                }
-                final EditWidgetsActivity editWidgetsActivity = EditWidgetsActivity.this;
-                PlatformThemeKt.PlatformTheme(false, ComposableLambdaKt.rememberComposableLambda(-700058190, new Function2() { // from class: com.android.systemui.communal.widgets.EditWidgetsActivity$onCreate$1.1
-                    /* JADX WARN: Code restructure failed: missing block: B:24:0x00b8, code lost:
-                    
-                        if (r15 == androidx.compose.runtime.Composer.Companion.Empty) goto L26;
-                     */
-                    /* JADX WARN: Code restructure failed: missing block: B:28:0x00e5, code lost:
-                    
-                        if (r3 == androidx.compose.runtime.Composer.Companion.Empty) goto L31;
-                     */
-                    @Override // kotlin.jvm.functions.Function2
-                    /*
-                        Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
-                    */
-                    public final java.lang.Object invoke(java.lang.Object r14, java.lang.Object r15) {
-                        /*
-                            Method dump skipped, instructions count: 283
-                            To view this dump change 'Code comments level' option to 'DEBUG'
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.communal.widgets.EditWidgetsActivity$onCreate$1.AnonymousClass1.invoke(java.lang.Object, java.lang.Object):java.lang.Object");
-                    }
-                }, composer), composer, 48, 1);
-                if (ComposerKt.isTraceInProgress()) {
-                    ComposerKt.traceEventEnd();
                 }
                 return Unit.INSTANCE;
             }
@@ -262,7 +343,7 @@ public final class EditWidgetsActivity extends ComponentActivity {
     }
 
     @Override // android.app.Activity
-    public final void startIntentSenderForResult(IntentSender intentSender, int i, Intent intent, int i2, int i3, int i4, Bundle bundle) {
+    public final void startIntentSenderForResult(IntentSender intentSender, int i, Intent intent, int i2, int i3, int i4, Bundle bundle) throws IntentSender.SendIntentException {
         this.activityController.waitingForResult = true;
         super.startIntentSenderForResult(intentSender, i, intent, i2, i3, i4, bundle);
     }
@@ -279,7 +360,7 @@ public final class EditWidgetsActivity extends ComponentActivity {
         this.widgetConfigurator$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.communal.widgets.EditWidgetsActivity$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                EditWidgetsActivity editWidgetsActivity = EditWidgetsActivity.this;
+                EditWidgetsActivity editWidgetsActivity = this.f$0;
                 return editWidgetsActivity.widgetConfiguratorFactory.create(editWidgetsActivity);
             }
         });

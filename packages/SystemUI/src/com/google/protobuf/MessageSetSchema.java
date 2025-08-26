@@ -1,11 +1,11 @@
 package com.google.protobuf;
 
+import com.google.protobuf.ArrayDecoders;
 import com.google.protobuf.GeneratedMessageLite;
 import com.google.protobuf.LazyField;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MessageSetSchema implements Schema {
     public final MessageLite defaultInstance;
@@ -47,29 +47,29 @@ public final class MessageSetSchema implements Schema {
         }
         FieldSet extensions = this.extensionSchema.getExtensions(abstractMessageLite);
         int i = 0;
-        int i2 = 0;
+        int messageSetSerializedSize = 0;
         while (true) {
             smallSortedMap = extensions.fields;
             if (i >= smallSortedMap.entryList.size()) {
                 break;
             }
-            i2 += FieldSet.getMessageSetSerializedSize(smallSortedMap.getArrayEntryAt(i));
+            messageSetSerializedSize += FieldSet.getMessageSetSerializedSize(smallSortedMap.getArrayEntryAt(i));
             i++;
         }
         Iterator it = smallSortedMap.getOverflowEntries().iterator();
         while (it.hasNext()) {
-            i2 += FieldSet.getMessageSetSerializedSize((Map.Entry) it.next());
+            messageSetSerializedSize += FieldSet.getMessageSetSerializedSize((Map.Entry) it.next());
         }
-        return serializedSizeAsMessageSet + i2;
+        return serializedSizeAsMessageSet + messageSetSerializedSize;
     }
 
     @Override // com.google.protobuf.Schema
     public final int hashCode(GeneratedMessageLite generatedMessageLite) {
-        int hashCode = this.unknownFieldSchema.getFromMessage(generatedMessageLite).hashCode();
+        int iHashCode = this.unknownFieldSchema.getFromMessage(generatedMessageLite).hashCode();
         if (!this.hasExtensions) {
-            return hashCode;
+            return iHashCode;
         }
-        return this.extensionSchema.getExtensions(generatedMessageLite).fields.hashCode() + (hashCode * 53);
+        return this.extensionSchema.getExtensions(generatedMessageLite).fields.hashCode() + (iHashCode * 53);
     }
 
     @Override // com.google.protobuf.Schema
@@ -104,34 +104,34 @@ public final class MessageSetSchema implements Schema {
         return ((GeneratedMessageLite.Builder) generatedMessageLite.dynamicMethod(GeneratedMessageLite.MethodToInvoke.NEW_BUILDER)).buildPartial();
     }
 
-    public final boolean parseMessageSetItemOrUnknownField(CodedInputStreamReader codedInputStreamReader, ExtensionRegistryLite extensionRegistryLite, ExtensionSchema extensionSchema, FieldSet fieldSet, UnknownFieldSchema unknownFieldSchema, Object obj) {
+    public final boolean parseMessageSetItemOrUnknownField(CodedInputStreamReader codedInputStreamReader, ExtensionRegistryLite extensionRegistryLite, ExtensionSchema extensionSchema, FieldSet fieldSet, UnknownFieldSchema unknownFieldSchema, Object obj) throws InvalidProtocolBufferException {
         int i = codedInputStreamReader.tag;
         MessageLite messageLite = this.defaultInstance;
         if (i != 11) {
             if ((i & 7) != 2) {
                 return codedInputStreamReader.skipField();
             }
-            GeneratedMessageLite.GeneratedExtension findExtensionByNumber = extensionSchema.findExtensionByNumber(extensionRegistryLite, messageLite, i >>> 3);
-            if (findExtensionByNumber == null) {
+            GeneratedMessageLite.GeneratedExtension generatedExtensionFindExtensionByNumber = extensionSchema.findExtensionByNumber(extensionRegistryLite, messageLite, i >>> 3);
+            if (generatedExtensionFindExtensionByNumber == null) {
                 return unknownFieldSchema.mergeOneFieldFrom(obj, codedInputStreamReader);
             }
-            extensionSchema.parseLengthPrefixedMessageSetItem(codedInputStreamReader, findExtensionByNumber, extensionRegistryLite, fieldSet);
+            extensionSchema.parseLengthPrefixedMessageSetItem(codedInputStreamReader, generatedExtensionFindExtensionByNumber, extensionRegistryLite, fieldSet);
             return true;
         }
-        GeneratedMessageLite.GeneratedExtension generatedExtension = null;
-        int i2 = 0;
-        ByteString byteString = null;
+        GeneratedMessageLite.GeneratedExtension generatedExtensionFindExtensionByNumber2 = null;
+        int uInt32 = 0;
+        ByteString bytes = null;
         while (codedInputStreamReader.getFieldNumber() != Integer.MAX_VALUE) {
-            int i3 = codedInputStreamReader.tag;
-            if (i3 == 16) {
+            int i2 = codedInputStreamReader.tag;
+            if (i2 == 16) {
                 codedInputStreamReader.requireWireType(0);
-                i2 = codedInputStreamReader.input.readUInt32();
-                generatedExtension = extensionSchema.findExtensionByNumber(extensionRegistryLite, messageLite, i2);
-            } else if (i3 == 26) {
-                if (generatedExtension != null) {
-                    extensionSchema.parseLengthPrefixedMessageSetItem(codedInputStreamReader, generatedExtension, extensionRegistryLite, fieldSet);
+                uInt32 = codedInputStreamReader.input.readUInt32();
+                generatedExtensionFindExtensionByNumber2 = extensionSchema.findExtensionByNumber(extensionRegistryLite, messageLite, uInt32);
+            } else if (i2 == 26) {
+                if (generatedExtensionFindExtensionByNumber2 != null) {
+                    extensionSchema.parseLengthPrefixedMessageSetItem(codedInputStreamReader, generatedExtensionFindExtensionByNumber2, extensionRegistryLite, fieldSet);
                 } else {
-                    byteString = codedInputStreamReader.readBytes();
+                    bytes = codedInputStreamReader.readBytes();
                 }
             } else if (!codedInputStreamReader.skipField()) {
                 break;
@@ -140,12 +140,12 @@ public final class MessageSetSchema implements Schema {
         if (codedInputStreamReader.tag != 12) {
             throw new InvalidProtocolBufferException("Protocol message end-group tag did not match expected tag.");
         }
-        if (byteString != null) {
-            if (generatedExtension != null) {
-                extensionSchema.parseMessageSetItem(byteString, generatedExtension, extensionRegistryLite, fieldSet);
+        if (bytes != null) {
+            if (generatedExtensionFindExtensionByNumber2 != null) {
+                extensionSchema.parseMessageSetItem(bytes, generatedExtensionFindExtensionByNumber2, extensionRegistryLite, fieldSet);
                 return true;
             }
-            unknownFieldSchema.addLengthDelimited(obj, i2, byteString);
+            unknownFieldSchema.addLengthDelimited(obj, uInt32, bytes);
         }
         return true;
     }
@@ -169,19 +169,87 @@ public final class MessageSetSchema implements Schema {
         unknownFieldSchema.writeAsMessageSetTo(unknownFieldSchema.getFromMessage(obj), codedOutputStreamWriter);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00c1  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00c6 A[EDGE_INSN: B:40:0x00c6->B:41:0x00c6 BREAK  A[LOOP:1: B:23:0x0073->B:31:0x009e], SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x00bc  */
     @Override // com.google.protobuf.Schema
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void mergeFrom(java.lang.Object r17, byte[] r18, int r19, int r20, com.google.protobuf.ArrayDecoders.Registers r21) {
-        /*
-            Method dump skipped, instructions count: 219
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.protobuf.MessageSetSchema.mergeFrom(java.lang.Object, byte[], int, int, com.google.protobuf.ArrayDecoders$Registers):void");
+    public final void mergeFrom(Object obj, byte[] bArr, int i, int i2, ArrayDecoders.Registers registers) throws InvalidProtocolBufferException {
+        MessageSetSchema messageSetSchema = this;
+        GeneratedMessageLite generatedMessageLite = (GeneratedMessageLite) obj;
+        UnknownFieldSetLite unknownFieldSetLiteNewInstance = generatedMessageLite.unknownFields;
+        if (unknownFieldSetLiteNewInstance == UnknownFieldSetLite.DEFAULT_INSTANCE) {
+            unknownFieldSetLiteNewInstance = UnknownFieldSetLite.newInstance();
+            generatedMessageLite.unknownFields = unknownFieldSetLiteNewInstance;
+        }
+        UnknownFieldSetLite unknownFieldSetLite = unknownFieldSetLiteNewInstance;
+        GeneratedMessageLite.ExtendableMessage extendableMessage = (GeneratedMessageLite.ExtendableMessage) obj;
+        FieldSet fieldSet = extendableMessage.extensions;
+        if (fieldSet.isImmutable) {
+            extendableMessage.extensions = fieldSet.m3288clone();
+        }
+        FieldSet fieldSet2 = extendableMessage.extensions;
+        int iSkipField = i;
+        GeneratedMessageLite.GeneratedExtension generatedExtension = null;
+        while (iSkipField < i2) {
+            GeneratedMessageLite.GeneratedExtension generatedExtensionFindExtensionByNumber = generatedExtension;
+            int iDecodeVarint32 = ArrayDecoders.decodeVarint32(bArr, iSkipField, registers);
+            int i3 = registers.int1;
+            MessageLite messageLite = messageSetSchema.defaultInstance;
+            ExtensionSchema extensionSchema = messageSetSchema.extensionSchema;
+            int i4 = 2;
+            ExtensionRegistryLite extensionRegistryLite = registers.extensionRegistry;
+            if (i3 == 11) {
+                int i5 = 0;
+                ByteString byteString = null;
+                while (iDecodeVarint32 < i2) {
+                    iDecodeVarint32 = ArrayDecoders.decodeVarint32(bArr, iDecodeVarint32, registers);
+                    int i6 = registers.int1;
+                    int i7 = i6 >>> 3;
+                    int i8 = i6 & 7;
+                    if (i7 == i4) {
+                        if (i8 == 0) {
+                            iDecodeVarint32 = ArrayDecoders.decodeVarint32(bArr, iDecodeVarint32, registers);
+                            i5 = registers.int1;
+                            generatedExtensionFindExtensionByNumber = extensionSchema.findExtensionByNumber(extensionRegistryLite, messageLite, i5);
+                        }
+                        i4 = 2;
+                    } else if (i7 == 3) {
+                        if (generatedExtensionFindExtensionByNumber != null) {
+                            iDecodeVarint32 = ArrayDecoders.decodeMessageField(Protobuf.INSTANCE.schemaFor((Class) generatedExtensionFindExtensionByNumber.messageDefaultInstance.getClass()), bArr, iDecodeVarint32, i2, registers);
+                            fieldSet2.setField(generatedExtensionFindExtensionByNumber.descriptor, registers.object1);
+                        } else if (i8 == 2) {
+                            iDecodeVarint32 = ArrayDecoders.decodeBytes(bArr, iDecodeVarint32, registers);
+                            byteString = (ByteString) registers.object1;
+                        } else if (i6 == 12) {
+                            break;
+                        } else {
+                            iDecodeVarint32 = ArrayDecoders.skipField(i6, bArr, iDecodeVarint32, i2, registers);
+                        }
+                        i4 = 2;
+                    }
+                }
+                if (byteString != null) {
+                    unknownFieldSetLite.storeField((i5 << 3) | 2, byteString);
+                }
+                messageSetSchema = this;
+                iSkipField = iDecodeVarint32;
+            } else if ((i3 & 7) == 2) {
+                generatedExtensionFindExtensionByNumber = extensionSchema.findExtensionByNumber(extensionRegistryLite, messageLite, i3 >>> 3);
+                if (generatedExtensionFindExtensionByNumber != null) {
+                    iSkipField = ArrayDecoders.decodeMessageField(Protobuf.INSTANCE.schemaFor((Class) generatedExtensionFindExtensionByNumber.messageDefaultInstance.getClass()), bArr, iDecodeVarint32, i2, registers);
+                    fieldSet2.setField(generatedExtensionFindExtensionByNumber.descriptor, registers.object1);
+                } else {
+                    iSkipField = ArrayDecoders.decodeUnknownField(i3, bArr, iDecodeVarint32, i2, unknownFieldSetLite, registers);
+                }
+            } else {
+                iSkipField = ArrayDecoders.skipField(i3, bArr, iDecodeVarint32, i2, registers);
+            }
+            generatedExtension = generatedExtensionFindExtensionByNumber;
+        }
+        if (iSkipField != i2) {
+            throw InvalidProtocolBufferException.parseFailure();
+        }
     }
 
     @Override // com.google.protobuf.Schema

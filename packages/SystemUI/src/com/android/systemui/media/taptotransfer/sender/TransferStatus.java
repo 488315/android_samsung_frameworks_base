@@ -6,7 +6,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TransferStatus {
     public static final /* synthetic */ TransferStatus[] $VALUES;
@@ -17,6 +16,7 @@ public final class TransferStatus {
     public static final TransferStatus TOO_FAR;
     private final VibrationEffect vibrationEffect;
 
+    /* JADX WARN: Multi-variable type inference failed */
     static {
         TransferStatus transferStatus = new TransferStatus("NOT_STARTED", 0, VibrationEffect.startComposition().addPrimitive(1, 1.0f, 0).compose());
         NOT_STARTED = transferStatus;

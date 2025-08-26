@@ -52,9 +52,9 @@ public final class PrintDocumentInfo implements Parcelable {
 
     private PrintDocumentInfo(Parcel parcel) {
         this.mName = (String) Preconditions.checkStringNotEmpty(parcel.readString());
-        int readInt = parcel.readInt();
-        this.mPageCount = readInt;
-        Preconditions.checkArgument(readInt == -1 || readInt > 0);
+        int i = parcel.readInt();
+        this.mPageCount = i;
+        Preconditions.checkArgument(i == -1 || i > 0);
         this.mContentType = parcel.readInt();
         this.mDataSize = Preconditions.checkArgumentNonnegative(parcel.readLong());
     }
@@ -89,9 +89,9 @@ public final class PrintDocumentInfo implements Parcelable {
 
     public int hashCode() {
         String str = this.mName;
-        int hashCode = ((((((str != null ? str.hashCode() : 0) + 31) * 31) + this.mContentType) * 31) + this.mPageCount) * 31;
+        int iHashCode = ((((((str != null ? str.hashCode() : 0) + 31) * 31) + this.mContentType) * 31) + this.mPageCount) * 31;
         long j = this.mDataSize;
-        return ((hashCode + ((int) j)) * 31) + ((int) (j >> 32));
+        return ((iHashCode + ((int) j)) * 31) + ((int) (j >> 32));
     }
 
     public boolean equals(Object obj) {

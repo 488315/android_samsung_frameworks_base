@@ -7,7 +7,6 @@ import android.os.Binder;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.telephony.TelephonyFrameworkInitializer;
-import android.telephony.ims.RcsUceAdapter;
 import android.telephony.ims.aidl.IImsRcsController;
 import android.telephony.ims.aidl.IRcsUceControllerCallback;
 import android.telephony.ims.aidl.IRcsUcePublishStateCallback;
@@ -177,16 +176,16 @@ public class RcsUceAdapter {
                 if (this.mPublishStateChangeListener == null) {
                     return;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.RcsUceAdapter$PublishStateCallbackAdapter$PublishStateBinder$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RcsUceAdapter.PublishStateCallbackAdapter.PublishStateBinder.this.lambda$onPublishUpdated$0(publishAttributes);
+                            this.f$0.lambda$onPublishUpdated$0(publishAttributes);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -267,52 +266,52 @@ public class RcsUceAdapter {
 
         @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
         public void onCapabilitiesReceived(final List<RcsContactUceCapability> list) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CapabilitiesCallback capabilitiesCallback = this.val$c;
                 executor.execute(new Runnable() { // from class: android.telephony.ims.RcsUceAdapter$1$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RcsUceAdapter.CapabilitiesCallback.this.onCapabilitiesReceived(list);
+                        capabilitiesCallback.onCapabilitiesReceived(list);
                     }
                 });
             } finally {
-                restoreCallingIdentity(clearCallingIdentity);
+                restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
         public void onComplete(final SipDetails sipDetails) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CapabilitiesCallback capabilitiesCallback = this.val$c;
                 executor.execute(new Runnable() { // from class: android.telephony.ims.RcsUceAdapter$1$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RcsUceAdapter.CapabilitiesCallback.this.onComplete(sipDetails);
+                        capabilitiesCallback.onComplete(sipDetails);
                     }
                 });
             } finally {
-                restoreCallingIdentity(clearCallingIdentity);
+                restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
         public void onError(final int i, final long j, final SipDetails sipDetails) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CapabilitiesCallback capabilitiesCallback = this.val$c;
                 executor.execute(new Runnable() { // from class: android.telephony.ims.RcsUceAdapter$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RcsUceAdapter.CapabilitiesCallback.this.onError(i, j, sipDetails);
+                        capabilitiesCallback.onError(i, j, sipDetails);
                     }
                 });
             } finally {
-                restoreCallingIdentity(clearCallingIdentity);
+                restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -355,52 +354,52 @@ public class RcsUceAdapter {
 
         @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
         public void onCapabilitiesReceived(final List<RcsContactUceCapability> list) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CapabilitiesCallback capabilitiesCallback = this.val$c;
                 executor.execute(new Runnable() { // from class: android.telephony.ims.RcsUceAdapter$2$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RcsUceAdapter.CapabilitiesCallback.this.onCapabilitiesReceived(list);
+                        capabilitiesCallback.onCapabilitiesReceived(list);
                     }
                 });
             } finally {
-                restoreCallingIdentity(clearCallingIdentity);
+                restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
         public void onComplete(final SipDetails sipDetails) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CapabilitiesCallback capabilitiesCallback = this.val$c;
                 executor.execute(new Runnable() { // from class: android.telephony.ims.RcsUceAdapter$2$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RcsUceAdapter.CapabilitiesCallback.this.onComplete(sipDetails);
+                        capabilitiesCallback.onComplete(sipDetails);
                     }
                 });
             } finally {
-                restoreCallingIdentity(clearCallingIdentity);
+                restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.telephony.ims.aidl.IRcsUceControllerCallback
         public void onError(final int i, final long j, final SipDetails sipDetails) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final CapabilitiesCallback capabilitiesCallback = this.val$c;
                 executor.execute(new Runnable() { // from class: android.telephony.ims.RcsUceAdapter$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        RcsUceAdapter.CapabilitiesCallback.this.onError(i, j, sipDetails);
+                        capabilitiesCallback.onError(i, j, sipDetails);
                     }
                 });
             } finally {
-                restoreCallingIdentity(clearCallingIdentity);
+                restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -455,12 +454,12 @@ public class RcsUceAdapter {
             Log.e(TAG, "removeOnPublishStateChangedListener: IImsRcsController is null");
             throw new ImsException("Cannot find remote IMS service", 1);
         }
-        PublishStateCallbackAdapter removePublishStateCallback = removePublishStateCallback(onPublishStateChangedListener);
-        if (removePublishStateCallback == null) {
+        PublishStateCallbackAdapter publishStateCallbackAdapterRemovePublishStateCallback = removePublishStateCallback(onPublishStateChangedListener);
+        if (publishStateCallbackAdapterRemovePublishStateCallback == null) {
             return;
         }
         try {
-            iImsRcsController.unregisterUcePublishStateCallback(this.mSubId, removePublishStateCallback.getBinder());
+            iImsRcsController.unregisterUcePublishStateCallback(this.mSubId, publishStateCallbackAdapterRemovePublishStateCallback.getBinder());
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling IImsRcsController#unregisterUcePublishStateCallback", e);
             throw new ImsException("Remote IMS Service is not available", 1);
@@ -507,11 +506,11 @@ public class RcsUceAdapter {
     }
 
     private PublishStateCallbackAdapter removePublishStateCallback(OnPublishStateChangedListener onPublishStateChangedListener) {
-        PublishStateCallbackAdapter remove;
+        PublishStateCallbackAdapter publishStateCallbackAdapterRemove;
         synchronized (this.mPublishStateCallbacks) {
-            remove = this.mPublishStateCallbacks.remove(onPublishStateChangedListener);
+            publishStateCallbackAdapterRemove = this.mPublishStateCallbacks.remove(onPublishStateChangedListener);
         }
-        return remove;
+        return publishStateCallbackAdapterRemove;
     }
 
     private IImsRcsController getIImsRcsController() {

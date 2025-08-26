@@ -12,15 +12,14 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StateHandler {
     public static StateHandler mInstance;
     public Callback mCallback = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Callback {
         public List<String> getUsedPermissionsWhenAppStateRequested() {
             return null;
@@ -36,7 +35,7 @@ public class StateHandler {
     private StateHandler() {
     }
 
-    public static void adjustConceptsDueToPermissions(List list, JSONObject jSONObject) {
+    public static void adjustConceptsDueToPermissions(List list, JSONObject jSONObject) throws JSONException {
         try {
             if (((ArrayList) list).isEmpty() || !jSONObject.has("concepts")) {
                 return;
@@ -97,17 +96,13 @@ public class StateHandler {
     }
 
     public static synchronized StateHandler getInstance() {
-        StateHandler stateHandler;
-        synchronized (StateHandler.class) {
-            try {
-                if (mInstance == null) {
-                    mInstance = new StateHandler();
-                }
-                stateHandler = mInstance;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (mInstance == null) {
+                mInstance = new StateHandler();
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return stateHandler;
+        return mInstance;
     }
 }

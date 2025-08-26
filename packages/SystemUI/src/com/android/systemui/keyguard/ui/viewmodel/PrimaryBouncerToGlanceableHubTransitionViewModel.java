@@ -11,7 +11,6 @@ import com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition;
 import com.android.systemui.keyguard.ui.transitions.PrimaryBouncerTransition;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PrimaryBouncerToGlanceableHubTransitionViewModel implements DeviceEntryIconTransition, PrimaryBouncerTransition {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 deviceEntryParentViewAlpha;
@@ -23,11 +22,11 @@ public final class PrimaryBouncerToGlanceableHubTransitionViewModel implements D
         FromPrimaryBouncerTransitionInteractor.Companion.getClass();
         long j = FromPrimaryBouncerTransitionInteractor.TO_GLANCEABLE_HUB_DURATION;
         Edge.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.PRIMARY_BOUNCER, KeyguardState.GLANCEABLE_HUB, keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(j, Edge.INVALID));
-        this.transitionAnimation = m;
-        this.deviceEntryParentViewAlpha = m.immediatelyTransitionTo(1.0f);
-        this.windowBlurRadius = m.immediatelyTransitionTo(blurConfig.minBlurRadiusPx);
-        this.notificationBlurRadius = m.immediatelyTransitionTo(0.0f);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.PRIMARY_BOUNCER, KeyguardState.GLANCEABLE_HUB, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, Edge.INVALID));
+        this.transitionAnimation = flowBuilderM;
+        this.deviceEntryParentViewAlpha = flowBuilderM.immediatelyTransitionTo(1.0f);
+        this.windowBlurRadius = flowBuilderM.immediatelyTransitionTo(blurConfig.minBlurRadiusPx);
+        this.notificationBlurRadius = flowBuilderM.immediatelyTransitionTo(0.0f);
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition

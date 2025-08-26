@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RowContent extends SliceContent {
     public final ArrayList mEndItems;
@@ -30,8 +29,8 @@ public class RowContent extends SliceContent {
     public final ArrayList mToggleItems;
 
     public RowContent(SliceItem sliceItem, int i) {
-        super(sliceItem, i);
         boolean z;
+        super(sliceItem, i);
         this.mEndItems = new ArrayList();
         this.mToggleItems = new ArrayList();
         this.mLineCount = 0;
@@ -61,10 +60,10 @@ public class RowContent extends SliceContent {
         } else if (arrayList2.size() > 0) {
             this.mPrimaryAction = (SliceItem) arrayList2.get(0);
         }
-        ArrayList filterInvalidItems = filterInvalidItems(sliceItem);
-        if (filterInvalidItems.size() == 1 && (("action".equals(((SliceItem) filterInvalidItems.get(0)).mFormat) || "slice".equals(((SliceItem) filterInvalidItems.get(0)).mFormat)) && !((SliceItem) filterInvalidItems.get(0)).hasAnyHints("shortcut", UniversalCredentialUtil.AGENT_TITLE) && isValidRow((SliceItem) filterInvalidItems.get(0)))) {
-            sliceItem = (SliceItem) filterInvalidItems.get(0);
-            filterInvalidItems = filterInvalidItems(sliceItem);
+        ArrayList arrayListFilterInvalidItems = filterInvalidItems(sliceItem);
+        if (arrayListFilterInvalidItems.size() == 1 && (("action".equals(((SliceItem) arrayListFilterInvalidItems.get(0)).mFormat) || "slice".equals(((SliceItem) arrayListFilterInvalidItems.get(0)).mFormat)) && !((SliceItem) arrayListFilterInvalidItems.get(0)).hasAnyHints("shortcut", UniversalCredentialUtil.AGENT_TITLE) && isValidRow((SliceItem) arrayListFilterInvalidItems.get(0)))) {
+            sliceItem = (SliceItem) arrayListFilterInvalidItems.get(0);
+            arrayListFilterInvalidItems = filterInvalidItems(sliceItem);
             z = true;
         } else {
             z = false;
@@ -73,37 +72,37 @@ public class RowContent extends SliceContent {
             if (SliceQuery.findSubtype(sliceItem, "action", "range") == null || z) {
                 this.mRange = sliceItem;
             } else {
-                filterInvalidItems.remove(this.mStartItem);
-                if (filterInvalidItems.size() != 1) {
-                    SliceItem findSubtype = SliceQuery.findSubtype(sliceItem, "action", "range");
-                    this.mRange = findSubtype;
-                    ArrayList filterInvalidItems2 = filterInvalidItems(findSubtype);
-                    filterInvalidItems2.remove(getInputRangeThumb());
-                    filterInvalidItems.remove(this.mRange);
-                    filterInvalidItems.addAll(filterInvalidItems2);
-                } else if (isValidRow((SliceItem) filterInvalidItems.get(0))) {
-                    sliceItem = (SliceItem) filterInvalidItems.get(0);
-                    filterInvalidItems = filterInvalidItems(sliceItem);
+                arrayListFilterInvalidItems.remove(this.mStartItem);
+                if (arrayListFilterInvalidItems.size() != 1) {
+                    SliceItem sliceItemFindSubtype = SliceQuery.findSubtype(sliceItem, "action", "range");
+                    this.mRange = sliceItemFindSubtype;
+                    ArrayList arrayListFilterInvalidItems2 = filterInvalidItems(sliceItemFindSubtype);
+                    arrayListFilterInvalidItems2.remove(getInputRangeThumb());
+                    arrayListFilterInvalidItems.remove(this.mRange);
+                    arrayListFilterInvalidItems.addAll(arrayListFilterInvalidItems2);
+                } else if (isValidRow((SliceItem) arrayListFilterInvalidItems.get(0))) {
+                    sliceItem = (SliceItem) arrayListFilterInvalidItems.get(0);
+                    arrayListFilterInvalidItems = filterInvalidItems(sliceItem);
                     this.mRange = sliceItem;
-                    filterInvalidItems.remove(getInputRangeThumb());
+                    arrayListFilterInvalidItems.remove(getInputRangeThumb());
                 }
             }
         }
         if ("selection".equals(sliceItem.mSubType)) {
             this.mSelection = sliceItem;
         }
-        if (filterInvalidItems.size() > 0) {
+        if (arrayListFilterInvalidItems.size() > 0) {
             SliceItem sliceItem2 = this.mStartItem;
             if (sliceItem2 != null) {
-                filterInvalidItems.remove(sliceItem2);
+                arrayListFilterInvalidItems.remove(sliceItem2);
             }
             SliceItem sliceItem3 = this.mPrimaryAction;
             if (sliceItem3 != null) {
-                filterInvalidItems.remove(sliceItem3);
+                arrayListFilterInvalidItems.remove(sliceItem3);
             }
             ArrayList arrayList3 = new ArrayList();
-            for (int i2 = 0; i2 < filterInvalidItems.size(); i2++) {
-                SliceItem sliceItem4 = (SliceItem) filterInvalidItems.get(i2);
+            for (int i2 = 0; i2 < arrayListFilterInvalidItems.size(); i2++) {
+                SliceItem sliceItem4 = (SliceItem) arrayListFilterInvalidItems.get(i2);
                 if ("text".equals(sliceItem4.mFormat)) {
                     SliceItem sliceItem5 = this.mTitleItem;
                     if ((sliceItem5 == null || !ArrayUtils.contains(sliceItem5.mHints, UniversalCredentialUtil.AGENT_TITLE)) && ArrayUtils.contains(sliceItem4.mHints, UniversalCredentialUtil.AGENT_TITLE) && !ArrayUtils.contains(sliceItem4.mHints, UniversalCredentialUtil.AGENT_SUMMARY)) {
@@ -162,12 +161,12 @@ public class RowContent extends SliceContent {
             return false;
         }
         if ("slice".equals(sliceItem.mFormat) || "action".equals(sliceItem.mFormat)) {
-            List asList = Arrays.asList(sliceItem.getSlice().mItems);
-            if (ArrayUtils.contains(sliceItem.mHints, "see_more") && asList.isEmpty()) {
+            List listAsList = Arrays.asList(sliceItem.getSlice().mItems);
+            if (ArrayUtils.contains(sliceItem.mHints, "see_more") && listAsList.isEmpty()) {
                 return true;
             }
-            for (int i = 0; i < asList.size(); i++) {
-                if (isValidRowContent(sliceItem, (SliceItem) asList.get(i))) {
+            for (int i = 0; i < listAsList.size(); i++) {
+                if (isValidRowContent(sliceItem, (SliceItem) listAsList.get(i))) {
                     return true;
                 }
             }
@@ -217,10 +216,10 @@ public class RowContent extends SliceContent {
         if (sliceItem == null) {
             return null;
         }
-        List asList = Arrays.asList(sliceItem.getSlice().mItems);
-        for (int i = 0; i < asList.size(); i++) {
-            if ("image".equals(((SliceItem) asList.get(i)).mFormat)) {
-                return (SliceItem) asList.get(i);
+        List listAsList = Arrays.asList(sliceItem.getSlice().mItems);
+        for (int i = 0; i < listAsList.size(); i++) {
+            if ("image".equals(((SliceItem) listAsList.get(i)).mFormat)) {
+                return (SliceItem) listAsList.get(i);
             }
         }
         return null;

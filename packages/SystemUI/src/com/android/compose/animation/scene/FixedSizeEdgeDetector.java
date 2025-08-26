@@ -7,12 +7,10 @@ import com.android.compose.animation.scene.Edge;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FixedSizeEdgeDetector implements SwipeSourceDetector {
     public final float size;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -40,7 +38,7 @@ public final class FixedSizeEdgeDetector implements SwipeSourceDetector {
 
     @Override // com.android.compose.animation.scene.SwipeSourceDetector
     /* renamed from: source-NDhlJko, reason: not valid java name */
-    public final Edge.Resolved mo924sourceNDhlJko(long j, long j2, Density density, Orientation orientation) {
+    public final Edge.Resolved mo926sourceNDhlJko(long j, long j2, Density density, Orientation orientation) {
         int i;
         int i2;
         Edge.Resolved resolved;
@@ -62,12 +60,12 @@ public final class FixedSizeEdgeDetector implements SwipeSourceDetector {
             resolved = Edge.Resolved.Top;
             resolved2 = Edge.Resolved.Bottom;
         }
-        float mo57toPx0680j_4 = density.mo57toPx0680j_4(this.size);
+        float fMo58toPx0680j_4 = density.mo58toPx0680j_4(this.size);
         float f = i2;
-        if (f <= mo57toPx0680j_4) {
+        if (f <= fMo58toPx0680j_4) {
             return resolved;
         }
-        if (f >= i - mo57toPx0680j_4) {
+        if (f >= i - fMo58toPx0680j_4) {
             return resolved2;
         }
         return null;

@@ -4,7 +4,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CompletedContinuation {
     public final Throwable cancelCause;
@@ -49,15 +48,15 @@ public final class CompletedContinuation {
 
     public final int hashCode() {
         Object obj = this.result;
-        int hashCode = (obj == null ? 0 : obj.hashCode()) * 31;
+        int iHashCode = (obj == null ? 0 : obj.hashCode()) * 31;
         CancelHandler cancelHandler = this.cancelHandler;
-        int hashCode2 = (hashCode + (cancelHandler == null ? 0 : cancelHandler.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (cancelHandler == null ? 0 : cancelHandler.hashCode())) * 31;
         Function3 function3 = this.onCancellation;
-        int hashCode3 = (hashCode2 + (function3 == null ? 0 : function3.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (function3 == null ? 0 : function3.hashCode())) * 31;
         Object obj2 = this.idempotentResume;
-        int hashCode4 = (hashCode3 + (obj2 == null ? 0 : obj2.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (obj2 == null ? 0 : obj2.hashCode())) * 31;
         Throwable th = this.cancelCause;
-        return hashCode4 + (th != null ? th.hashCode() : 0);
+        return iHashCode4 + (th != null ? th.hashCode() : 0);
     }
 
     public final String toString() {

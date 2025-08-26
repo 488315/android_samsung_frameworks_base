@@ -117,12 +117,12 @@ public abstract class AtomicFormula extends IntegrityFormula {
         public boolean matches(AppInstallMetadata appInstallMetadata) {
             if (this.mValue != null && this.mOperator != null) {
                 long longMetadataValue = getLongMetadataValue(appInstallMetadata, getKey());
-                int intValue = this.mOperator.intValue();
-                if (intValue != 0) {
-                    if (intValue == 1) {
+                int iIntValue = this.mOperator.intValue();
+                if (iIntValue != 0) {
+                    if (iIntValue == 1) {
                         return longMetadataValue > this.mValue.longValue();
                     }
-                    if (intValue == 2) {
+                    if (iIntValue == 2) {
                         return longMetadataValue >= this.mValue.longValue();
                     }
                     throw new IllegalArgumentException(String.format("Unexpected operator %d", this.mOperator));
@@ -236,9 +236,9 @@ public abstract class AtomicFormula extends IntegrityFormula {
         public StringAtomicFormula(int i, String str) {
             super(i);
             Preconditions.checkArgument(i == 0 || i == 1 || i == 3 || i == 2 || i == 7 || i == 8, "Key %s cannot be used with StringAtomicFormula", keyToString(i));
-            String hashValue = hashValue(i, str);
-            this.mValue = hashValue;
-            this.mIsHashedValue = Boolean.valueOf(i == 1 || i == 3 || i == 7 || i == 8 || !hashValue.equals(str));
+            String strHashValue = hashValue(i, str);
+            this.mValue = strHashValue;
+            this.mIsHashedValue = Boolean.valueOf(i == 1 || i == 3 || i == 7 || i == 8 || !strHashValue.equals(str));
         }
 
         StringAtomicFormula(Parcel parcel) {

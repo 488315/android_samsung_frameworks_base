@@ -2,6 +2,7 @@ package com.android.wm.shell.compatui;
 
 import android.app.AppCompatTaskInfo;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.os.Handler;
@@ -22,7 +23,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MultiTaskingAppCompatUILayout extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -42,7 +42,7 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
     public MultiTaskingAppCompatUIWindowManager mWindowManager;
 
     /* renamed from: $r8$lambda$mCU4zJ-Ek2I7AokD1FchTrCG1cc, reason: not valid java name */
-    public static void m3223$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout) {
+    public static void m3240$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout) {
         multiTaskingAppCompatUILayout.configureTouchableRegion(multiTaskingAppCompatUILayout.mTouchableRegionCalculator);
         multiTaskingAppCompatUILayout.getRootView().getViewTreeObserver().removeOnGlobalLayoutListener(multiTaskingAppCompatUILayout.mLayoutListener);
     }
@@ -66,7 +66,7 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
         this.mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                MultiTaskingAppCompatUILayout.m3223$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(MultiTaskingAppCompatUILayout.this);
+                MultiTaskingAppCompatUILayout.m3240$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(this.f$0);
             }
         };
         this.mFrameCommitCallback = new Runnable() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout.1
@@ -114,16 +114,16 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
         Rect taskBounds = multiTaskingAppCompatUIWindowManager.getTaskBounds();
         MultiTaskingAppCompatUIController multiTaskingAppCompatUIController = this.mController;
         multiTaskingAppCompatUIController.getClass();
-        int height = ((taskBounds.height() - new Rect(multiTaskingAppCompatUIController.mTaskInfo.appCompatTaskInfo.topActivityBounds).height()) / 2) - this.mWindowManager.mDisplayLayout.mNavBarFrameHeight;
+        int iHeight = ((taskBounds.height() - new Rect(multiTaskingAppCompatUIController.mTaskInfo.appCompatTaskInfo.topActivityBounds).height()) / 2) - this.mWindowManager.mDisplayLayout.mNavBarFrameHeight;
         int i = this.mNaviButtonSize;
-        if (height >= i) {
-            height = 0;
+        if (iHeight >= i) {
+            iHeight = 0;
         }
-        float min = height > 0 ? Math.min(0.8f, height / i) : 1.0f;
+        float fMin = iHeight > 0 ? Math.min(0.8f, iHeight / i) : 1.0f;
         View view3 = (View) this.mButtons.get(Integer.valueOf(R.id.mt_app_compat_align_top_button));
         if (view3 != null) {
             FrameLayout.LayoutParams layoutParams3 = (FrameLayout.LayoutParams) view3.getLayoutParams();
-            int i2 = (int) (this.mNaviButtonSize * min);
+            int i2 = (int) (this.mNaviButtonSize * fMin);
             layoutParams3.width = i2;
             layoutParams3.height = i2;
             layoutParams3.topMargin = displayLayout.mNavBarFrameHeight + this.mVerticalMarginFromActivityBounds;
@@ -132,7 +132,7 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
         View view4 = (View) this.mButtons.get(Integer.valueOf(R.id.mt_app_compat_align_bottom_button));
         if (view4 != null) {
             FrameLayout.LayoutParams layoutParams4 = (FrameLayout.LayoutParams) view4.getLayoutParams();
-            int i3 = (int) (this.mNaviButtonSize * min);
+            int i3 = (int) (this.mNaviButtonSize * fMin);
             layoutParams4.width = i3;
             layoutParams4.height = i3;
             layoutParams4.bottomMargin = displayLayout.mNavBarFrameHeight + this.mVerticalMarginFromActivityBounds;
@@ -215,7 +215,7 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
             this.mHandler.postDelayed(new Runnable() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = MultiTaskingAppCompatUILayout.this;
+                    MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = this.f$0;
                     Iterator it = multiTaskingAppCompatUILayout.mButtons.entrySet().iterator();
                     while (it.hasNext()) {
                         ImageButton imageButton = (ImageButton) ((Map.Entry) it.next()).getValue();
@@ -233,14 +233,14 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
             handler.postDelayed(new Runnable() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUIController$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MultiTaskingAppCompatUIController multiTaskingAppCompatUIController2 = MultiTaskingAppCompatUIController.this;
+                    MultiTaskingAppCompatUIController multiTaskingAppCompatUIController2 = multiTaskingAppCompatUIController;
                     multiTaskingAppCompatUIController2.mController.removeLayouts(multiTaskingAppCompatUIController2.mTaskInfo.taskId);
                 }
             }, multiTaskingAppCompatUIController, 5000L);
         }
     }
 
-    public final void setButtonVisibility(int i, int i2, boolean z) {
+    public final void setButtonVisibility(int i, int i2, boolean z) throws Resources.NotFoundException {
         View view = (View) this.mButtons.get(Integer.valueOf(i));
         AnimationListenerWrapper animationListenerWrapper = (AnimationListenerWrapper) this.mAnimationListenerWrappers.remove(Integer.valueOf(i));
         if (animationListenerWrapper != null) {
@@ -254,9 +254,9 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
             view.setVisibility(i2);
             return;
         }
-        Animation loadAnimation = AnimationUtils.loadAnimation(((FrameLayout) this).mContext, i2 == 0 ? R.anim.mt_app_compat_ui_btn_release_n_appear : R.anim.mt_app_compat_ui_btn_release_n_disappear);
-        this.mAnimationListenerWrappers.put(Integer.valueOf(i), new AnimationListenerWrapper(loadAnimation, view, i2));
-        view.startAnimation(loadAnimation);
+        Animation animationLoadAnimation = AnimationUtils.loadAnimation(((FrameLayout) this).mContext, i2 == 0 ? R.anim.mt_app_compat_ui_btn_release_n_appear : R.anim.mt_app_compat_ui_btn_release_n_disappear);
+        this.mAnimationListenerWrappers.put(Integer.valueOf(i), new AnimationListenerWrapper(animationLoadAnimation, view, i2));
+        view.startAnimation(animationLoadAnimation);
     }
 
     @Override // android.view.View
@@ -290,7 +290,7 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
         this.mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                MultiTaskingAppCompatUILayout.m3223$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(MultiTaskingAppCompatUILayout.this);
+                MultiTaskingAppCompatUILayout.m3240$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(this.f$0);
             }
         };
         this.mFrameCommitCallback = new Runnable() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout.1
@@ -303,7 +303,6 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
         this.mHandler = new Handler(Looper.myLooper());
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationListenerWrapper implements Animation.AnimationListener {
         public final Animation mAnimation;
         public boolean mCancel;
@@ -354,7 +353,7 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
         this.mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                MultiTaskingAppCompatUILayout.m3223$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(MultiTaskingAppCompatUILayout.this);
+                MultiTaskingAppCompatUILayout.m3240$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(this.f$0);
             }
         };
         this.mFrameCommitCallback = new Runnable() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout.1

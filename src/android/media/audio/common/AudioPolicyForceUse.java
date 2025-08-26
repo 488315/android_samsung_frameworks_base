@@ -235,34 +235,34 @@ public final class AudioPolicyForceUse implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        switch (readInt) {
+        int i = parcel.readInt();
+        switch (i) {
             case 0:
-                _set(readInt, java.lang.Byte.valueOf(parcel.readByte()));
+                _set(i, java.lang.Byte.valueOf(parcel.readByte()));
                 return;
             case 1:
-                _set(readInt, java.lang.Byte.valueOf(parcel.readByte()));
+                _set(i, java.lang.Byte.valueOf(parcel.readByte()));
                 return;
             case 2:
-                _set(readInt, java.lang.Byte.valueOf(parcel.readByte()));
+                _set(i, java.lang.Byte.valueOf(parcel.readByte()));
                 return;
             case 3:
-                _set(readInt, java.lang.Byte.valueOf(parcel.readByte()));
+                _set(i, java.lang.Byte.valueOf(parcel.readByte()));
                 return;
             case 4:
-                _set(readInt, java.lang.Byte.valueOf(parcel.readByte()));
+                _set(i, java.lang.Byte.valueOf(parcel.readByte()));
                 return;
             case 5:
-                _set(readInt, java.lang.Boolean.valueOf(parcel.readBoolean()));
+                _set(i, java.lang.Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 6:
-                _set(readInt, java.lang.Boolean.valueOf(parcel.readBoolean()));
+                _set(i, java.lang.Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 7:
-                _set(readInt, java.lang.Byte.valueOf(parcel.readByte()));
+                _set(i, java.lang.Byte.valueOf(parcel.readByte()));
                 return;
             default:
-                throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

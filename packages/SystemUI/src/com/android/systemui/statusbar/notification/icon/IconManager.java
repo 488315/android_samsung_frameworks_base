@@ -33,7 +33,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IconManager implements ConversationIconManager {
     public final CoroutineScope applicationCoroutineScope;
@@ -48,23 +47,23 @@ public final class IconManager implements ConversationIconManager {
     public final IconManager$entryListener$1 entryListener = new NotifCollectionListener() { // from class: com.android.systemui.statusbar.notification.icon.IconManager$entryListener$1
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         public final void onEntryCleanUp(NotificationEntry notificationEntry) {
-            notificationEntry.mOnSensitivityChangedListeners.remove(IconManager.this.sensitivityListener);
+            notificationEntry.mOnSensitivityChangedListeners.remove(this.this$0.sensitivityListener);
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         public final void onEntryInit(NotificationEntry notificationEntry) {
-            notificationEntry.mOnSensitivityChangedListeners.addIfAbsent(IconManager.this.sensitivityListener);
+            notificationEntry.mOnSensitivityChangedListeners.addIfAbsent(this.this$0.sensitivityListener);
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         public final void onRankingApplied() {
-            IconManager.this.recalculateForImportantConversationChange();
+            this.this$0.recalculateForImportantConversationChange();
         }
     };
     public final IconManager$sensitivityListener$1 sensitivityListener = new NotificationEntry.OnSensitivityChangedListener() { // from class: com.android.systemui.statusbar.notification.icon.IconManager$sensitivityListener$1
         @Override // com.android.systemui.statusbar.notification.collection.NotificationEntry.OnSensitivityChangedListener
         public final void onSensitivityChanged(NotificationEntry notificationEntry) {
-            IconManager iconManager = IconManager.this;
+            IconManager iconManager = this.this$0;
             iconManager.getClass();
             try {
                 iconManager.updateIcons(notificationEntry, false);
@@ -87,49 +86,50 @@ public final class IconManager implements ConversationIconManager {
 
     public final void createIcons(NotificationEntry notificationEntry) {
         IconBuilder iconBuilder = this.iconBuilder;
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("IconManager.createIcons");
         }
         try {
-            StatusBarIconView createIconView$default = IconBuilder.createIconView$default(iconBuilder, notificationEntry);
+            StatusBarIconView statusBarIconViewCreateIconView$default = IconBuilder.createIconView$default(iconBuilder, notificationEntry);
             ImageView.ScaleType scaleType = ImageView.ScaleType.CENTER_INSIDE;
-            createIconView$default.setScaleType(scaleType);
-            StatusBarIconView createIconView$default2 = IconBuilder.createIconView$default(iconBuilder, notificationEntry);
-            createIconView$default2.setScaleType(scaleType);
-            StatusBarIconView createIconView$default3 = IconBuilder.createIconView$default(iconBuilder, notificationEntry);
-            createIconView$default3.setScaleType(scaleType);
-            createIconView$default3.setVisibility(4);
-            StatusBarIconView createIconView$default4 = IconBuilder.createIconView$default(iconBuilder, notificationEntry);
-            createIconView$default4.setScaleType(scaleType);
-            Pair iconDescriptors = getIconDescriptors(notificationEntry);
-            StatusBarIcon statusBarIcon = (StatusBarIcon) iconDescriptors.component1();
-            StatusBarIcon statusBarIcon2 = (StatusBarIcon) iconDescriptors.component2();
+            statusBarIconViewCreateIconView$default.setScaleType(scaleType);
+            StatusBarIconView statusBarIconViewCreateIconView$default2 = IconBuilder.createIconView$default(iconBuilder, notificationEntry);
+            statusBarIconViewCreateIconView$default2.setScaleType(scaleType);
+            StatusBarIconView statusBarIconViewCreateIconView$default3 = IconBuilder.createIconView$default(iconBuilder, notificationEntry);
+            statusBarIconViewCreateIconView$default3.setScaleType(scaleType);
+            statusBarIconViewCreateIconView$default3.setVisibility(4);
+            StatusBarIconView statusBarIconViewCreateIconView$default4 = IconBuilder.createIconView$default(iconBuilder, notificationEntry);
+            statusBarIconViewCreateIconView$default4.setScaleType(scaleType);
+            StatusBarIcon iconDescriptor = getIconDescriptor(notificationEntry, false);
+            Pair pair = new Pair(iconDescriptor, ((Boolean) notificationEntry.mSensitive.getValue()).booleanValue() ? getIconDescriptor(notificationEntry, true) : iconDescriptor);
+            StatusBarIcon statusBarIcon = (StatusBarIcon) pair.component1();
+            StatusBarIcon statusBarIcon2 = (StatusBarIcon) pair.component2();
             try {
-                setIcon(notificationEntry, statusBarIcon, createIconView$default);
-                setIcon(notificationEntry, statusBarIcon, createIconView$default2);
-                setIcon(notificationEntry, statusBarIcon2, createIconView$default3);
-                setIcon(notificationEntry, statusBarIcon, createIconView$default4);
-                notificationEntry.mIcons = IconPack.buildPack(createIconView$default, createIconView$default2, createIconView$default3, createIconView$default4, notificationEntry.mIcons);
+                setIcon(notificationEntry, statusBarIcon, statusBarIconViewCreateIconView$default);
+                setIcon(notificationEntry, statusBarIcon, statusBarIconViewCreateIconView$default2);
+                setIcon(notificationEntry, statusBarIcon2, statusBarIconViewCreateIconView$default3);
+                setIcon(notificationEntry, statusBarIcon, statusBarIconViewCreateIconView$default4);
+                notificationEntry.mIcons = IconPack.buildPack(statusBarIconViewCreateIconView$default, statusBarIconViewCreateIconView$default2, statusBarIconViewCreateIconView$default3, statusBarIconViewCreateIconView$default4, notificationEntry.mIcons);
                 Unit unit = Unit.INSTANCE;
             } catch (InflationException e) {
                 notificationEntry.mIcons = IconPack.buildEmptyPack(notificationEntry.mIcons);
                 throw e;
             }
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
     }
 
-    public final StatusBarIcon getIconDescriptor(final NotificationEntry notificationEntry, boolean z) {
+    public final StatusBarIcon getIconDescriptor(final NotificationEntry notificationEntry, boolean z) throws InflationException {
         Pair pair;
         boolean z2 = !z && isImportantConversation(notificationEntry);
         IconPack iconPack = notificationEntry.mIcons;
         StatusBarIcon statusBarIcon = iconPack.mPeopleAvatarDescriptor;
         StatusBarIcon statusBarIcon2 = iconPack.mSmallIconDescriptor;
-        Icon icon = null;
+        Icon smallIcon = null;
         if (!z2 || statusBarIcon == null) {
             statusBarIcon = statusBarIcon2 == null ? null : statusBarIcon2;
         }
@@ -145,16 +145,16 @@ public final class IconManager implements ConversationIconManager {
                 job.cancel(null);
             }
             ConcurrentHashMap concurrentHashMap2 = this.launcherPeopleAvatarIconJobs;
-            StandaloneCoroutine launchTraced$default = CoroutineTracingKt.launchTraced$default(this.applicationCoroutineScope, null, null, new IconManager$createPeopleAvatar$1(this, notificationEntry, null), 7);
-            launchTraced$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.statusbar.notification.icon.IconManager$$ExternalSyntheticLambda0
+            StandaloneCoroutine standaloneCoroutineLaunchTraced$default = CoroutineTracingKt.launchTraced$default(this.applicationCoroutineScope, null, null, new IconManager$createPeopleAvatar$1(this, notificationEntry, null), 7);
+            standaloneCoroutineLaunchTraced$default.invokeOnCompletion(new Function1() { // from class: com.android.systemui.statusbar.notification.icon.IconManager$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    IconManager.this.launcherPeopleAvatarIconJobs.remove(notificationEntry.mKey);
+                public final Object mo781invoke(Object obj) {
+                    this.f$0.launcherPeopleAvatarIconJobs.remove(notificationEntry.mKey);
                     return Unit.INSTANCE;
                 }
             });
-            concurrentHashMap2.put(str, launchTraced$default);
+            concurrentHashMap2.put(str, standaloneCoroutineLaunchTraced$default);
             Bundle bundle = notificationEntry.mSbn.getNotification().extras;
             List<Notification.MessagingStyle.Message> messagesFromBundleArray = Notification.MessagingStyle.Message.getMessagesFromBundleArray(bundle.getParcelableArray("android.messages"));
             Person person = (Person) bundle.getParcelable("android.messagingUser");
@@ -167,7 +167,7 @@ public final class IconManager implements ConversationIconManager {
                     if (senderPerson != null && senderPerson != person) {
                         Person senderPerson2 = message.getSenderPerson();
                         senderPerson2.getClass();
-                        icon = senderPerson2.getIcon();
+                        smallIcon = senderPerson2.getIcon();
                         break;
                     }
                     if (i < 0) {
@@ -176,25 +176,25 @@ public final class IconManager implements ConversationIconManager {
                     size = i;
                 }
             }
-            if (icon == null) {
-                icon = notificationEntry.mSbn.getNotification().getLargeIcon();
+            if (smallIcon == null) {
+                smallIcon = notificationEntry.mSbn.getNotification().getLargeIcon();
             }
-            if (icon == null) {
-                icon = notificationEntry.mSbn.getNotification().getSmallIcon();
+            if (smallIcon == null) {
+                smallIcon = notificationEntry.mSbn.getNotification().getSmallIcon();
             }
-            if (icon == null) {
+            if (smallIcon == null) {
                 throw new InflationException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("No icon in notification from ", notificationEntry.mSbn.getPackageName()));
             }
-            pair = new Pair(icon, StatusBarIcon.Type.PeopleAvatar);
+            pair = new Pair(smallIcon, StatusBarIcon.Type.PeopleAvatar);
         } else {
             pair = new Pair(notification2.getSmallIcon(), StatusBarIcon.Type.NotifSmallIcon);
         }
-        Icon icon2 = (Icon) pair.component1();
+        Icon icon = (Icon) pair.component1();
         StatusBarIcon.Type type = (StatusBarIcon.Type) pair.component2();
-        if (icon2 == null) {
+        if (icon == null) {
             throw new InflationException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("No icon in notification from ", notificationEntry.mSbn.getPackageName()));
         }
-        StatusBarIcon statusBarIcon3 = toStatusBarIcon(icon2, notificationEntry, type);
+        StatusBarIcon statusBarIcon3 = toStatusBarIcon(icon, notificationEntry, type);
         if (isImportantConversation(notificationEntry)) {
             if (statusBarIcon3.type == StatusBarIcon.Type.PeopleAvatar) {
                 notificationEntry.mIcons.mPeopleAvatarDescriptor = statusBarIcon3;
@@ -205,11 +205,6 @@ public final class IconManager implements ConversationIconManager {
         return statusBarIcon3;
     }
 
-    public final Pair getIconDescriptors(NotificationEntry notificationEntry) {
-        StatusBarIcon iconDescriptor = getIconDescriptor(notificationEntry, false);
-        return new Pair(iconDescriptor, ((Boolean) notificationEntry.mSensitive.getValue()).booleanValue() ? getIconDescriptor(notificationEntry, true) : iconDescriptor);
-    }
-
     public final boolean isImportantConversation(NotificationEntry notificationEntry) {
         return notificationEntry.mRanking.getChannel() != null && notificationEntry.mRanking.getChannel().isImportantConversation() && notificationEntry.mSbn.getNotification().isStyle(Notification.MessagingStyle.class) && !this.unimportantConversationKeys.contains(notificationEntry.mKey);
     }
@@ -217,20 +212,20 @@ public final class IconManager implements ConversationIconManager {
     public final void recalculateForImportantConversationChange() {
         for (NotificationEntry notificationEntry : ((NotifPipeline) this.notifCollection).getAllNotifs()) {
             notificationEntry.getClass();
-            boolean isImportantConversation = isImportantConversation(notificationEntry);
+            boolean zIsImportantConversation = isImportantConversation(notificationEntry);
             IconPack iconPack = notificationEntry.mIcons;
-            if (iconPack.mAreIconsAvailable && isImportantConversation != iconPack.mIsImportantConversation) {
+            if (iconPack.mAreIconsAvailable && zIsImportantConversation != iconPack.mIsImportantConversation) {
                 try {
                     updateIcons(notificationEntry, false);
                 } catch (InflationException e) {
                     Log.e("IconManager", "Unable to update icon", e);
                 }
             }
-            notificationEntry.mIcons.mIsImportantConversation = isImportantConversation;
+            notificationEntry.mIcons.mIsImportantConversation = zIsImportantConversation;
         }
     }
 
-    public final void setIcon(NotificationEntry notificationEntry, StatusBarIcon statusBarIcon, StatusBarIconView statusBarIconView) {
+    public final void setIcon(NotificationEntry notificationEntry, StatusBarIcon statusBarIcon, StatusBarIconView statusBarIconView) throws InflationException {
         IconPack iconPack = notificationEntry.mIcons;
         boolean z = (!isImportantConversation(notificationEntry) || statusBarIcon.icon.equals(notificationEntry.mSbn.getNotification().getSmallIcon()) || ((statusBarIconView == iconPack.mShelfIcon || statusBarIconView == iconPack.mAodIcon) && ((Boolean) notificationEntry.mSensitive.getValue()).booleanValue())) ? false : true;
         if (statusBarIconView.mShowsConversation != z) {
@@ -250,8 +245,8 @@ public final class IconManager implements ConversationIconManager {
     }
 
     public final Unit updateIcons(NotificationEntry notificationEntry, boolean z) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("IconManager.updateIcons");
         }
         try {
@@ -261,39 +256,40 @@ public final class IconManager implements ConversationIconManager {
                     iconPack.mSmallIconDescriptor = null;
                     iconPack.mPeopleAvatarDescriptor = null;
                 }
-                Pair iconDescriptors = getIconDescriptors(notificationEntry);
-                StatusBarIcon statusBarIcon = (StatusBarIcon) iconDescriptors.component1();
-                StatusBarIcon statusBarIcon2 = (StatusBarIcon) iconDescriptors.component2();
+                StatusBarIcon iconDescriptor = getIconDescriptor(notificationEntry, false);
+                Pair pair = new Pair(iconDescriptor, ((Boolean) notificationEntry.mSensitive.getValue()).booleanValue() ? getIconDescriptor(notificationEntry, true) : iconDescriptor);
+                StatusBarIcon statusBarIcon = (StatusBarIcon) pair.component1();
+                StatusBarIcon statusBarIcon2 = (StatusBarIcon) pair.component2();
                 Notification notification2 = notificationEntry.mSbn.getNotification();
-                CharSequence contentDescForNotification = notification2 != null ? NotificationContentDescription.contentDescForNotification(this.iconBuilder.context, notification2) : null;
+                CharSequence charSequenceContentDescForNotification = notification2 != null ? NotificationContentDescription.contentDescForNotification(this.iconBuilder.context, notification2) : null;
                 StatusBarIconView statusBarIconView = notificationEntry.mIcons.mStatusBarIcon;
                 if (statusBarIconView != null) {
-                    statusBarIconView.setNotification(notificationEntry.mSbn, contentDescForNotification);
+                    statusBarIconView.setNotification(notificationEntry.mSbn, charSequenceContentDescForNotification);
                     setIcon(notificationEntry, statusBarIcon, statusBarIconView);
                 }
                 StatusBarIconView statusBarIconView2 = notificationEntry.mIcons.mStatusBarChipIcon;
                 if (statusBarIconView2 != null) {
-                    statusBarIconView2.setNotification(notificationEntry.mSbn, contentDescForNotification);
+                    statusBarIconView2.setNotification(notificationEntry.mSbn, charSequenceContentDescForNotification);
                     setIcon(notificationEntry, statusBarIcon, statusBarIconView2);
                 }
                 StatusBarIconView statusBarIconView3 = notificationEntry.mIcons.mShelfIcon;
                 if (statusBarIconView3 != null) {
-                    statusBarIconView3.setNotification(notificationEntry.mSbn, contentDescForNotification);
+                    statusBarIconView3.setNotification(notificationEntry.mSbn, charSequenceContentDescForNotification);
                     setIcon(notificationEntry, statusBarIcon2, statusBarIconView3);
                 }
                 StatusBarIconView statusBarIconView4 = notificationEntry.mIcons.mAodIcon;
                 if (statusBarIconView4 != null) {
-                    statusBarIconView4.setNotification(notificationEntry.mSbn, contentDescForNotification);
+                    statusBarIconView4.setNotification(notificationEntry.mSbn, charSequenceContentDescForNotification);
                     setIcon(notificationEntry, statusBarIcon2, statusBarIconView4);
                 }
             }
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             return unit;
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;

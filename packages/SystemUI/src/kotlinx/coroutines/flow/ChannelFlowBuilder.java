@@ -1,5 +1,6 @@
 package kotlinx.coroutines.flow;
 
+import java.io.IOException;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
@@ -11,7 +12,6 @@ import kotlinx.coroutines.channels.BufferOverflow;
 import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.flow.internal.ChannelFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ChannelFlowBuilder extends ChannelFlow {
     public final Function2 block;
@@ -22,8 +22,8 @@ public class ChannelFlowBuilder extends ChannelFlow {
 
     @Override // kotlinx.coroutines.flow.internal.ChannelFlow
     public Object collectTo(ProducerScope producerScope, Continuation continuation) {
-        Object invoke = this.block.invoke(producerScope, continuation);
-        return invoke == CoroutineSingletons.COROUTINE_SUSPENDED ? invoke : Unit.INSTANCE;
+        Object objInvoke = this.block.invoke(producerScope, continuation);
+        return objInvoke == CoroutineSingletons.COROUTINE_SUSPENDED ? objInvoke : Unit.INSTANCE;
     }
 
     @Override // kotlinx.coroutines.flow.internal.ChannelFlow
@@ -32,7 +32,7 @@ public class ChannelFlowBuilder extends ChannelFlow {
     }
 
     @Override // kotlinx.coroutines.flow.internal.ChannelFlow
-    public final String toString() {
+    public final String toString() throws IOException {
         return "block[" + this.block + "] -> " + super.toString();
     }
 

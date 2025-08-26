@@ -1,13 +1,13 @@
 package gov.nist.core;
 
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
+import com.samsung.android.knox.custom.CustomDeviceManager;
 import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import gov.nist.javax.sip.Utils;
 import java.text.ParseException;
 import java.util.Hashtable;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LexerCore extends StringTokenizer {
     public static final Hashtable globalSymbolTable = new Hashtable();
@@ -25,13 +25,13 @@ public class LexerCore extends StringTokenizer {
 
     public final void SPorHT() {
         try {
-            char lookAhead = lookAhead(0);
+            char cLookAhead = lookAhead(0);
             while (true) {
-                if (lookAhead != ' ' && lookAhead != '\t') {
+                if (cLookAhead != ' ' && cLookAhead != '\t') {
                     return;
                 }
                 consume(1);
-                lookAhead = lookAhead(0);
+                cLookAhead = lookAhead(0);
             }
         } catch (ParseException unused) {
         }
@@ -40,25 +40,25 @@ public class LexerCore extends StringTokenizer {
     public final void addKeyword(int i, String str) {
         char[] cArr = Utils.toHex;
         String upperCase = str.toUpperCase(Locale.ENGLISH);
-        Integer valueOf = Integer.valueOf(i);
-        this.currentLexer.put(upperCase, valueOf);
+        Integer numValueOf = Integer.valueOf(i);
+        this.currentLexer.put(upperCase, numValueOf);
         Hashtable hashtable = globalSymbolTable;
-        if (hashtable.containsKey(valueOf)) {
+        if (hashtable.containsKey(numValueOf)) {
             return;
         }
-        hashtable.put(valueOf, upperCase);
+        hashtable.put(numValueOf, upperCase);
     }
 
     public final String byteStringNoSemicolon() {
         StringBuffer stringBuffer = new StringBuffer();
         while (true) {
             try {
-                char lookAhead = lookAhead(0);
-                if (lookAhead == 0 || lookAhead == '\n' || lookAhead == ';' || lookAhead == ',') {
+                char cLookAhead = lookAhead(0);
+                if (cLookAhead == 0 || cLookAhead == '\n' || cLookAhead == ';' || cLookAhead == ',') {
                     break;
                 }
                 consume(1);
-                stringBuffer.append(lookAhead);
+                stringBuffer.append(cLookAhead);
             } catch (ParseException unused) {
                 return stringBuffer.toString();
             }
@@ -70,12 +70,12 @@ public class LexerCore extends StringTokenizer {
         StringBuffer stringBuffer = new StringBuffer();
         while (true) {
             try {
-                char lookAhead = lookAhead(0);
-                if (lookAhead == 0 || lookAhead == '\n' || lookAhead == '/') {
+                char cLookAhead = lookAhead(0);
+                if (cLookAhead == 0 || cLookAhead == '\n' || cLookAhead == '/') {
                     break;
                 }
                 consume(1);
-                stringBuffer.append(lookAhead);
+                stringBuffer.append(cLookAhead);
             } catch (ParseException unused) {
                 return stringBuffer.toString();
             }
@@ -83,7 +83,7 @@ public class LexerCore extends StringTokenizer {
         return stringBuffer.toString();
     }
 
-    public final String comment() {
+    public final String comment() throws ParseException {
         StringBuffer stringBuffer = new StringBuffer();
         if (lookAhead(0) != '(') {
             return null;
@@ -111,62 +111,50 @@ public class LexerCore extends StringTokenizer {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0032 A[Catch: ParseException -> 0x0036, LOOP:0: B:2:0x0001->B:17:0x0032, LOOP_END, TRY_LEAVE, TryCatch #0 {ParseException -> 0x0036, blocks: (B:3:0x0001, B:5:0x0007, B:8:0x0011, B:9:0x0013, B:13:0x002d, B:22:0x001c, B:23:0x0021, B:24:0x0026, B:17:0x0032), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0036 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0032 A[Catch: ParseException -> 0x0036, LOOP:0: B:24:0x0001->B:20:0x0032, LOOP_END, TRY_LEAVE, TryCatch #0 {ParseException -> 0x0036, blocks: (B:3:0x0001, B:5:0x0007, B:8:0x0011, B:9:0x0013, B:18:0x002d, B:13:0x001c, B:14:0x0021, B:15:0x0026, B:20:0x0032), top: B:24:0x0001 }] */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0036 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void consumeValidChars(char[] r7) {
-        /*
-            r6 = this;
-            int r0 = r7.length
-        L1:
-            boolean r1 = r6.hasMoreChars()     // Catch: java.text.ParseException -> L36
-            if (r1 == 0) goto L36
-            r1 = 0
-            char r2 = r6.lookAhead(r1)     // Catch: java.text.ParseException -> L36
-            r3 = r1
-            r4 = r3
-        Le:
-            r5 = 1
-            if (r3 >= r0) goto L30
-            char r4 = r7[r3]     // Catch: java.text.ParseException -> L36
-            switch(r4) {
-                case 65533: goto L26;
-                case 65534: goto L21;
-                case 65535: goto L1c;
-                default: goto L16;
-            }     // Catch: java.text.ParseException -> L36
-        L16:
-            if (r2 != r4) goto L1a
-            r4 = r5
-            goto L2a
-        L1a:
-            r4 = r1
-            goto L2a
-        L1c:
-            boolean r4 = gov.nist.core.StringTokenizer.isAlpha(r2)     // Catch: java.text.ParseException -> L36
-            goto L2a
-        L21:
-            boolean r4 = gov.nist.core.StringTokenizer.isDigit(r2)     // Catch: java.text.ParseException -> L36
-            goto L2a
-        L26:
-            boolean r4 = gov.nist.core.StringTokenizer.isAlphaDigit(r2)     // Catch: java.text.ParseException -> L36
-        L2a:
-            if (r4 == 0) goto L2d
-            goto L30
-        L2d:
-            int r3 = r3 + 1
-            goto Le
-        L30:
-            if (r4 == 0) goto L36
-            r6.consume(r5)     // Catch: java.text.ParseException -> L36
-            goto L1
-        L36:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: gov.nist.core.LexerCore.consumeValidChars(char[]):void");
+    public final void consumeValidChars(char[] cArr) {
+        while (hasMoreChars()) {
+            try {
+                char cLookAhead = lookAhead(0);
+                boolean zIsAlphaDigit = false;
+                for (char c : cArr) {
+                    switch (c) {
+                        case 65533:
+                            zIsAlphaDigit = StringTokenizer.isAlphaDigit(cLookAhead);
+                            break;
+                        case 65534:
+                            zIsAlphaDigit = StringTokenizer.isDigit(cLookAhead);
+                            break;
+                        case CustomDeviceManager.QUICK_PANEL_ALL /* 65535 */:
+                            zIsAlphaDigit = StringTokenizer.isAlpha(cLookAhead);
+                            break;
+                        default:
+                            if (cLookAhead == c) {
+                                zIsAlphaDigit = true;
+                                break;
+                            } else {
+                                zIsAlphaDigit = false;
+                                break;
+                            }
+                    }
+                    if (zIsAlphaDigit) {
+                        if (zIsAlphaDigit) {
+                            return;
+                        } else {
+                            consume(1);
+                        }
+                    }
+                }
+                if (zIsAlphaDigit) {
+                }
+            } catch (ParseException unused) {
+                return;
+            }
+        }
     }
 
     public final String getRest() {
@@ -178,47 +166,151 @@ public class LexerCore extends StringTokenizer {
         return str.substring(this.ptr);
     }
 
-    public final String getString() {
+    public final String getString() throws ParseException {
         StringBuffer stringBuffer = new StringBuffer();
         while (true) {
-            char lookAhead = lookAhead(0);
+            char cLookAhead = lookAhead(0);
             String str = this.buffer;
-            if (lookAhead == 0) {
+            if (cLookAhead == 0) {
                 throw new ParseException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "unexpected EOL"), this.ptr);
             }
-            if (lookAhead == '/') {
+            if (cLookAhead == '/') {
                 consume(1);
                 return stringBuffer.toString();
             }
-            if (lookAhead == '\\') {
+            if (cLookAhead == '\\') {
                 consume(1);
-                char lookAhead2 = lookAhead(0);
-                if (lookAhead2 == 0) {
+                char cLookAhead2 = lookAhead(0);
+                if (cLookAhead2 == 0) {
                     throw new ParseException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "unexpected EOL"), this.ptr);
                 }
                 consume(1);
-                stringBuffer.append(lookAhead2);
+                stringBuffer.append(cLookAhead2);
             } else {
                 consume(1);
-                stringBuffer.append(lookAhead);
+                stringBuffer.append(cLookAhead);
             }
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:45:0x0078 A[FALL_THROUGH] */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0078 A[FALL_THROUGH] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final gov.nist.core.Token match(int r5) {
-        /*
-            Method dump skipped, instructions count: 404
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: gov.nist.core.LexerCore.match(int):gov.nist.core.Token");
+    public final Token match(int i) throws ParseException {
+        char cLookAhead;
+        String str = this.buffer;
+        boolean zIsTokenChar = false;
+        if (i <= 2048 || i >= 4096) {
+            if (i > 4096) {
+                char cLookAhead2 = lookAhead(0);
+                if (i == 4098) {
+                    if (!StringTokenizer.isDigit(cLookAhead2)) {
+                        throw new ParseException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "\nExpecting DIGIT"), this.ptr);
+                    }
+                    Token token = new Token();
+                    this.currentMatch = token;
+                    token.tokenValue = String.valueOf(cLookAhead2);
+                    this.currentMatch.tokenType = i;
+                    consume(1);
+                } else if (i == 4099) {
+                    if (!StringTokenizer.isAlpha(cLookAhead2)) {
+                        throw new ParseException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "\nExpecting ALPHA"), this.ptr);
+                    }
+                    Token token2 = new Token();
+                    this.currentMatch = token2;
+                    token2.tokenValue = String.valueOf(cLookAhead2);
+                    this.currentMatch.tokenType = i;
+                    consume(1);
+                }
+            } else {
+                char c = (char) i;
+                char cLookAhead3 = lookAhead(0);
+                if (cLookAhead3 != c) {
+                    throw new ParseException(str + "\nExpecting  >>>" + c + "<<< got >>>" + cLookAhead3 + "<<<", this.ptr);
+                }
+                consume(1);
+            }
+        } else if (i == 4095) {
+            try {
+                zIsTokenChar = isTokenChar(lookAhead(0));
+            } catch (ParseException unused) {
+            }
+            if (!zIsTokenChar) {
+                throw new ParseException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "\nID expected"), this.ptr);
+            }
+            String strTtoken = ttoken();
+            Token token3 = new Token();
+            this.currentMatch = token3;
+            token3.tokenValue = strTtoken;
+            token3.tokenType = 4095;
+        } else if (i == 4094) {
+            try {
+                cLookAhead = lookAhead(0);
+            } catch (ParseException unused2) {
+            }
+            if (!StringTokenizer.isAlphaDigit(cLookAhead) && cLookAhead != '\'' && cLookAhead != '=' && cLookAhead != '[' && cLookAhead != '*' && cLookAhead != '+' && cLookAhead != ':' && cLookAhead != ';' && cLookAhead != '?' && cLookAhead != '@') {
+                switch (cLookAhead) {
+                    default:
+                        switch (cLookAhead) {
+                            default:
+                                switch (cLookAhead) {
+                                    default:
+                                        switch (cLookAhead) {
+                                            case '{':
+                                            case '|':
+                                            case '}':
+                                            case '~':
+                                                break;
+                                            default:
+                                                throw new ParseException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "\nID expected"), this.ptr);
+                                        }
+                                    case ']':
+                                    case '^':
+                                    case '_':
+                                    case '`':
+                                        String strTtokenSafe = ttokenSafe();
+                                        Token token4 = new Token();
+                                        this.currentMatch = token4;
+                                        token4.tokenValue = strTtokenSafe;
+                                        token4.tokenType = 4094;
+                                        break;
+                                }
+                            case '-':
+                            case '.':
+                            case '/':
+                                break;
+                        }
+                    case '!':
+                    case '\"':
+                    case '#':
+                    case '$':
+                    case '%':
+                        break;
+                }
+            }
+            String strTtokenSafe2 = ttokenSafe();
+            Token token42 = new Token();
+            this.currentMatch = token42;
+            token42.tokenValue = strTtokenSafe2;
+            token42.tokenType = 4094;
+        } else {
+            String strTtoken2 = ttoken();
+            Hashtable hashtable = this.currentLexer;
+            char[] cArr = Utils.toHex;
+            Integer num = (Integer) hashtable.get(strTtoken2.toUpperCase(Locale.ENGLISH));
+            if (num == null || num.intValue() != i) {
+                throw new ParseException(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "\nUnexpected Token : ", strTtoken2), this.ptr);
+            }
+            Token token5 = new Token();
+            this.currentMatch = token5;
+            token5.tokenValue = strTtoken2;
+            token5.tokenType = i;
+        }
+        return this.currentMatch;
     }
 
-    public final String number() {
+    public final String number() throws ParseException {
         String str = this.buffer;
         int i = this.ptr;
         try {
@@ -235,22 +327,22 @@ public class LexerCore extends StringTokenizer {
         }
     }
 
-    public final Token[] peekNextToken(int i) {
-        boolean z;
+    public final Token[] peekNextToken(int i) throws ParseException {
+        boolean zIsTokenChar;
         int i2 = this.ptr;
         Token[] tokenArr = new Token[i];
         for (int i3 = 0; i3 < i; i3++) {
             Token token = new Token();
             try {
-                z = isTokenChar(lookAhead(0));
+                zIsTokenChar = isTokenChar(lookAhead(0));
             } catch (ParseException unused) {
-                z = false;
+                zIsTokenChar = false;
             }
-            if (z) {
-                String ttoken = ttoken();
-                token.tokenValue = ttoken;
+            if (zIsTokenChar) {
+                String strTtoken = ttoken();
+                token.tokenValue = strTtoken;
                 char[] cArr = Utils.toHex;
-                String upperCase = ttoken.toUpperCase(Locale.ENGLISH);
+                String upperCase = strTtoken.toUpperCase(Locale.ENGLISH);
                 if (this.currentLexer.containsKey(upperCase)) {
                     token.tokenType = ((Integer) this.currentLexer.get(upperCase)).intValue();
                 } else {
@@ -274,7 +366,7 @@ public class LexerCore extends StringTokenizer {
         return tokenArr;
     }
 
-    public final String quotedString() {
+    public final String quotedString() throws ParseException {
         int i = this.ptr + 1;
         if (lookAhead(0) != '\"') {
             return null;
@@ -307,88 +399,61 @@ public class LexerCore extends StringTokenizer {
         return this.buffer.substring(i, this.ptr);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0045 A[Catch: ParseException -> 0x0052, FALL_THROUGH, TryCatch #0 {ParseException -> 0x0052, blocks: (B:3:0x0002, B:5:0x0008, B:38:0x0014, B:24:0x0038, B:25:0x003b, B:26:0x003e, B:27:0x0041, B:34:0x0045, B:30:0x0049), top: B:2:0x0002 }] */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0045 A[Catch: ParseException -> 0x0052, FALL_THROUGH, TryCatch #0 {ParseException -> 0x0052, blocks: (B:3:0x0002, B:5:0x0008, B:7:0x0014, B:24:0x0038, B:25:0x003b, B:26:0x003e, B:27:0x0041, B:29:0x0045, B:30:0x0049), top: B:34:0x0002 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String ttokenSafe() {
-        /*
-            r4 = this;
-            int r0 = r4.ptr
-        L2:
-            boolean r1 = r4.hasMoreChars()     // Catch: java.text.ParseException -> L52
-            if (r1 == 0) goto L49
-            r1 = 0
-            char r1 = r4.lookAhead(r1)     // Catch: java.text.ParseException -> L52
-            boolean r2 = gov.nist.core.StringTokenizer.isAlphaDigit(r1)     // Catch: java.text.ParseException -> L52
-            r3 = 1
-            if (r2 == 0) goto L18
-            r4.consume(r3)     // Catch: java.text.ParseException -> L52
-            goto L2
-        L18:
-            r2 = 39
-            if (r1 == r2) goto L45
-            r2 = 91
-            if (r1 == r2) goto L45
-            r2 = 42
-            if (r1 == r2) goto L45
-            r2 = 43
-            if (r1 == r2) goto L45
-            r2 = 58
-            if (r1 == r2) goto L45
-            r2 = 59
-            if (r1 == r2) goto L45
-            r2 = 63
-            if (r1 == r2) goto L45
-            r2 = 64
-            if (r1 == r2) goto L45
-            switch(r1) {
-                case 33: goto L45;
-                case 34: goto L45;
-                case 35: goto L45;
-                case 36: goto L45;
-                case 37: goto L45;
-                default: goto L3b;
-            }     // Catch: java.text.ParseException -> L52
-        L3b:
-            switch(r1) {
-                case 45: goto L45;
-                case 46: goto L45;
-                case 47: goto L45;
-                default: goto L3e;
-            }     // Catch: java.text.ParseException -> L52
-        L3e:
-            switch(r1) {
-                case 93: goto L45;
-                case 94: goto L45;
-                case 95: goto L45;
-                case 96: goto L45;
-                default: goto L41;
-            }     // Catch: java.text.ParseException -> L52
-        L41:
-            switch(r1) {
-                case 123: goto L45;
-                case 124: goto L45;
-                case 125: goto L45;
-                case 126: goto L45;
-                default: goto L44;
-            }     // Catch: java.text.ParseException -> L52
-        L44:
-            goto L49
-        L45:
-            r4.consume(r3)     // Catch: java.text.ParseException -> L52
-            goto L2
-        L49:
-            java.lang.String r1 = r4.buffer     // Catch: java.text.ParseException -> L52
-            int r4 = r4.ptr     // Catch: java.text.ParseException -> L52
-            java.lang.String r4 = r1.substring(r0, r4)     // Catch: java.text.ParseException -> L52
-            return r4
-        L52:
-            r4 = 0
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: gov.nist.core.LexerCore.ttokenSafe():java.lang.String");
+    public final String ttokenSafe() {
+        int i = this.ptr;
+        while (hasMoreChars()) {
+            try {
+                char cLookAhead = lookAhead(0);
+                if (StringTokenizer.isAlphaDigit(cLookAhead)) {
+                    consume(1);
+                } else {
+                    if (cLookAhead != '\'' && cLookAhead != '[' && cLookAhead != '*' && cLookAhead != '+' && cLookAhead != ':' && cLookAhead != ';' && cLookAhead != '?' && cLookAhead != '@') {
+                        switch (cLookAhead) {
+                            default:
+                                switch (cLookAhead) {
+                                    default:
+                                        switch (cLookAhead) {
+                                            default:
+                                                switch (cLookAhead) {
+                                                    case '{':
+                                                    case '|':
+                                                    case '}':
+                                                    case '~':
+                                                        break;
+                                                    default:
+                                                        return this.buffer.substring(i, this.ptr);
+                                                }
+                                            case ']':
+                                            case '^':
+                                            case '_':
+                                            case '`':
+                                                consume(1);
+                                                break;
+                                        }
+                                    case '-':
+                                    case '.':
+                                    case '/':
+                                        break;
+                                }
+                            case '!':
+                            case '\"':
+                            case '#':
+                            case '$':
+                            case '%':
+                                break;
+                        }
+                    }
+                    consume(1);
+                }
+            } catch (ParseException unused) {
+                return null;
+            }
+        }
+        return this.buffer.substring(i, this.ptr);
     }
 
     public LexerCore(String str, String str2) {

@@ -8,11 +8,9 @@ import com.android.systemui.log.table.TableLogBuffer;
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface ResolvedNetworkType extends Diffable {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CarrierMergedNetworkType implements ResolvedNetworkType {
         public static final CarrierMergedNetworkType INSTANCE = new CarrierMergedNetworkType();
         public static final String lookupKey = "cwf";
@@ -31,7 +29,6 @@ public interface ResolvedNetworkType extends Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -43,7 +40,6 @@ public interface ResolvedNetworkType extends Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DefaultNetworkType implements ResolvedNetworkType {
         public final String lookupKey;
 
@@ -72,7 +68,6 @@ public interface ResolvedNetworkType extends Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OverrideNetworkType implements ResolvedNetworkType {
         public final String lookupKey;
 
@@ -101,7 +96,6 @@ public interface ResolvedNetworkType extends Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UnknownNetworkType implements ResolvedNetworkType {
         public static final UnknownNetworkType INSTANCE = new UnknownNetworkType();
         public static final String lookupKey = Integer.toString(0);

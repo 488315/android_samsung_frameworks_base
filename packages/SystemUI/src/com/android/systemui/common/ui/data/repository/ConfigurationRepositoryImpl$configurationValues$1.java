@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ConfigurationRepositoryImpl$configurationValues$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -49,10 +48,10 @@ final class ConfigurationRepositoryImpl$configurationValues$1 extends SuspendLam
             ConfigurationController.ConfigurationListener configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.common.ui.data.repository.ConfigurationRepositoryImpl$configurationValues$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
                 public final void onConfigChanged(Configuration configuration) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(configuration);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(configuration);
                 }
             };
-            ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(this.this$0.context.getResources().getConfiguration());
+            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(this.this$0.context.getResources().getConfiguration());
             ((ConfigurationControllerImpl) this.this$0.configurationController).addCallback(configurationListener);
             ConfigurationRepositoryImpl$onMovedToDisplay$1$$ExternalSyntheticLambda0 configurationRepositoryImpl$onMovedToDisplay$1$$ExternalSyntheticLambda0 = new ConfigurationRepositoryImpl$onMovedToDisplay$1$$ExternalSyntheticLambda0(this.this$0, configurationListener, 1);
             this.label = 1;

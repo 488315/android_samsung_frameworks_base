@@ -72,13 +72,13 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static TelephonyTimeZoneSuggestion createFromParcel(Parcel parcel) {
-        TelephonyTimeZoneSuggestion build = new Builder(parcel.readInt()).setZoneId(parcel.readString()).setMatchType(parcel.readInt()).setQuality(parcel.readInt()).build();
-        ArrayList readArrayList = parcel.readArrayList(TelephonyTimeZoneSuggestion.class.getClassLoader(), String.class);
-        if (readArrayList != null) {
-            build.addDebugInfo(readArrayList);
+        TelephonyTimeZoneSuggestion telephonyTimeZoneSuggestionBuild = new Builder(parcel.readInt()).setZoneId(parcel.readString()).setMatchType(parcel.readInt()).setQuality(parcel.readInt()).build();
+        ArrayList arrayList = parcel.readArrayList(TelephonyTimeZoneSuggestion.class.getClassLoader(), String.class);
+        if (arrayList != null) {
+            telephonyTimeZoneSuggestionBuild.addDebugInfo(arrayList);
         }
-        build.mCountryIso = parcel.readString();
-        return build;
+        telephonyTimeZoneSuggestionBuild.mCountryIso = parcel.readString();
+        return telephonyTimeZoneSuggestionBuild;
     }
 
     @Override // android.os.Parcelable
@@ -205,25 +205,25 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
     }
 
     public static TelephonyTimeZoneSuggestion parseCommandLineArg(ShellCommand shellCommand) throws IllegalArgumentException {
-        Integer num = null;
-        String str = null;
-        Integer num2 = null;
-        Integer num3 = null;
+        Integer numValueOf = null;
+        String nextArgRequired = null;
+        Integer numValueOf2 = null;
+        Integer numValueOf3 = null;
         while (true) {
             String nextArg = shellCommand.getNextArg();
             if (nextArg == null) {
-                if (num == null) {
+                if (numValueOf == null) {
                     throw new IllegalArgumentException("No slotIndex specified.");
                 }
-                Builder builder = new Builder(num.intValue());
-                if (!TextUtils.isEmpty(str) && !Session.SESSION_SEPARATION_CHAR_CHILD.equals(str)) {
-                    builder.setZoneId(str);
+                Builder builder = new Builder(numValueOf.intValue());
+                if (!TextUtils.isEmpty(nextArgRequired) && !Session.SESSION_SEPARATION_CHAR_CHILD.equals(nextArgRequired)) {
+                    builder.setZoneId(nextArgRequired);
                 }
-                if (num2 != null) {
-                    builder.setQuality(num2.intValue());
+                if (numValueOf2 != null) {
+                    builder.setQuality(numValueOf2.intValue());
                 }
-                if (num3 != null) {
-                    builder.setMatchType(num3.intValue());
+                if (numValueOf3 != null) {
+                    builder.setMatchType(numValueOf3.intValue());
                 }
                 builder.addDebugInfo("Command line injection");
                 return builder.build();
@@ -231,16 +231,16 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
             nextArg.hashCode();
             switch (nextArg) {
                 case "--match_type":
-                    num3 = Integer.valueOf(parseMatchTypeCommandLineArg(shellCommand.getNextArgRequired()));
+                    numValueOf3 = Integer.valueOf(parseMatchTypeCommandLineArg(shellCommand.getNextArgRequired()));
                     break;
                 case "--zone_id":
-                    str = shellCommand.getNextArgRequired();
+                    nextArgRequired = shellCommand.getNextArgRequired();
                     break;
                 case "--quality":
-                    num2 = Integer.valueOf(parseQualityCommandLineArg(shellCommand.getNextArgRequired()));
+                    numValueOf2 = Integer.valueOf(parseQualityCommandLineArg(shellCommand.getNextArgRequired()));
                     break;
                 case "--slot_index":
-                    num = Integer.valueOf(Integer.parseInt(shellCommand.getNextArgRequired()));
+                    numValueOf = Integer.valueOf(Integer.parseInt(shellCommand.getNextArgRequired()));
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown option: " + nextArg);

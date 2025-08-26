@@ -1,6 +1,7 @@
 package com.android.keyguard;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -8,7 +9,6 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class KeyguardPinBasedInputView extends KeyguardSecAbsKeyInputView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,7 +35,7 @@ public abstract class KeyguardPinBasedInputView extends KeyguardSecAbsKeyInputVi
     }
 
     @Override // com.android.keyguard.KeyguardAbsKeyInputView, com.android.keyguard.KeyguardInputView, android.view.View
-    public void onFinishInflate() {
+    public void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         PasswordTextView passwordTextView = (PasswordTextView) findViewById(getPasswordTextViewId());
         this.mPasswordEntry = passwordTextView;

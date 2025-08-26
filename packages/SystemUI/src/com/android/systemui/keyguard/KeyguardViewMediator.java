@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.graphics.Matrix;
 import android.hardware.biometrics.BiometricSourceType;
 import android.media.AudioAttributes;
@@ -32,6 +33,7 @@ import android.os.IRemoteCallback;
 import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.Trace;
@@ -122,6 +124,7 @@ import com.android.systemui.keyguard.ui.viewmodel.LockscreenToDreamingTransition
 import com.android.systemui.knox.EdmMonitor;
 import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.log.SessionTracker;
+import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.navigationbar.NavigationModeController;
 import com.android.systemui.pluginlock.PluginLockInstancePolicy;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
@@ -133,6 +136,8 @@ import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.settings.UserTrackerImpl$handleBeforeUserSwitching$$inlined$notifySubscribers$1;
 import com.android.systemui.shade.NotificationShadeWindowControllerImpl;
+import com.android.systemui.shade.SecNotificationShadeWindowControllerHelper;
+import com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl;
 import com.android.systemui.shade.ShadeController;
 import com.android.systemui.shade.ShadeExpansionStateManager;
 import com.android.systemui.shade.domain.interactor.ShadeLockscreenInteractor;
@@ -169,7 +174,11 @@ import com.android.systemui.wallpaper.BackupRestoreReceiver;
 import com.android.systemui.wallpapers.data.repository.WallpaperRepository;
 import com.android.systemui.wallpapers.data.repository.WallpaperRepositoryImpl;
 import com.android.wm.shell.keyguard.KeyguardTransitions;
+import com.samsung.android.cover.CoverState;
+import com.samsung.android.knox.EnterpriseDeviceManager;
+import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.custom.CustomDeviceManager;
+import com.samsung.android.knox.sdp.internal.SdpAuthenticator;
 import com.samsung.android.knox.zt.config.securelog.SignalSeverity;
 import com.samsung.android.os.SemDvfsManager;
 import com.sec.ims.volte2.data.VolteConstants;
@@ -180,6 +189,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
+import java.util.function.BiConsumer;
+import java.util.function.BooleanSupplier;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import kotlin.Unit;
@@ -188,12 +199,12 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.ArrayIterator;
 import kotlin.jvm.internal.Ref$BooleanRef;
+import kotlin.text.CharsKt__CharJVMKt;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyguardViewMediator implements CoreStartable, StatusBarStateController.StateListener {
     public static final Intent USER_PRESENT_INTENT = new Intent("android.intent.action.USER_PRESENT").addFlags(606076928);
@@ -320,7 +331,6 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     public boolean mHideAnimationRunning = false;
     public boolean mIsKeyguardExitAnimationCanceled = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.KeyguardViewMediator$10, reason: invalid class name */
     public class AnonymousClass10 extends IRemoteAnimationRunner.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -355,7 +365,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
             KeyguardViewMediator.this.mContext.getMainExecutor().execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$10$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final KeyguardViewMediator.AnonymousClass10 anonymousClass10 = KeyguardViewMediator.AnonymousClass10.this;
+                    final KeyguardViewMediator.AnonymousClass10 anonymousClass10 = this.f$0;
                     boolean z2 = z;
                     RemoteAnimationTarget[] remoteAnimationTargetArr4 = remoteAnimationTargetArr2;
                     final IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback2 = iRemoteAnimationFinishedCallback;
@@ -365,9 +375,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         valueAnimator.cancel();
                     }
                     if (!z2 && !KeyguardViewMediator.this.mShowCommunalWhenUnoccluding) {
-                        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-                        anonymousClass10.mUnoccludeAnimator = ofFloat;
-                        ofFloat.setDuration(250L);
+                        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+                        anonymousClass10.mUnoccludeAnimator = valueAnimatorOfFloat;
+                        valueAnimatorOfFloat.setDuration(250L);
                         anonymousClass10.mUnoccludeAnimator.setInterpolator(Interpolators.TOUCH_RESPONSE);
                         anonymousClass10.mUnoccludeAnimator.addUpdateListener(new KeyguardViewMediator$$ExternalSyntheticLambda84(anonymousClass10, syncRtSurfaceTransactionApplier2, 2));
                         anonymousClass10.mUnoccludeAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardViewMediator.10.1
@@ -400,7 +410,6 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.KeyguardViewMediator$14, reason: invalid class name */
     public class AnonymousClass14 extends Handler {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -411,11 +420,15 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Multi-variable type inference failed */
+        /* JADX WARN: Removed duplicated region for block: B:92:0x0293  */
         @Override // android.os.Handler
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final void handleMessage(Message message) {
             String str;
             String str2;
-            byte b;
+            Object[] objArr;
             KeyguardViewMediator keyguardViewMediator;
             int i = 0;
             int i2 = 0;
@@ -454,7 +467,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     return;
                 case 3:
                     str2 = "RESET";
-                    KeyguardViewMediator.m2589$$Nest$mhandleReset(KeyguardViewMediator.this, message.arg1 != 0);
+                    KeyguardViewMediator.m2606$$Nest$mhandleReset(KeyguardViewMediator.this, message.arg1 != 0);
                     str = str2;
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
                     KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl222 = KeyguardViewMediator.this.mHelper;
@@ -477,7 +490,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     return;
                 case 5:
                     str = "NOTIFY_FINISHED_GOING_TO_SLEEP";
-                    KeyguardViewMediator.m2587$$Nest$mhandleNotifyFinishedGoingToSleep(KeyguardViewMediator.this);
+                    KeyguardViewMediator.m2604$$Nest$mhandleNotifyFinishedGoingToSleep(KeyguardViewMediator.this);
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
                     KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl22222 = KeyguardViewMediator.this.mHelper;
                     Objects.requireNonNull(keyguardViewMediatorHelperImpl22222);
@@ -496,7 +509,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                 case 8:
                     str = "KEYGUARD_DONE_DRAWING";
                     Trace.beginSection("KeyguardViewMediator#handleMessage KEYGUARD_DONE_DRAWING");
-                    KeyguardViewMediator.m2586$$Nest$mhandleKeyguardDoneDrawing(KeyguardViewMediator.this);
+                    KeyguardViewMediator.m2603$$Nest$mhandleKeyguardDoneDrawing(KeyguardViewMediator.this);
                     Trace.endSection();
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
                     KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222 = KeyguardViewMediator.this.mHelper;
@@ -510,7 +523,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     boolean z2 = message.arg1 != 0;
                     boolean z3 = message.arg2 != 0;
                     Object obj = message.obj;
-                    KeyguardViewMediator.m2590$$Nest$mhandleSetOccluded(keyguardViewMediator3, z2, z3, obj != null ? ((Integer) obj).intValue() : -1);
+                    KeyguardViewMediator.m2607$$Nest$mhandleSetOccluded(keyguardViewMediator3, z2, z3, obj != null ? ((Integer) obj).intValue() : -1);
                     Trace.endSection();
                     str = str2;
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
@@ -540,7 +553,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         KeyguardUpdateMonitor keyguardUpdateMonitor = keyguardViewMediatorHelperImpl4.updateMonitor;
                         if (z4 && keyguardUpdateMonitor.isIccBlockedPermanently()) {
                             Log.d("KeyguardViewMediator", "dismiss failed. Permanent state.");
-                            b = iKeyguardDismissCallback != null ? (byte) 1 : (byte) 0;
+                            objArr = iKeyguardDismissCallback != null ? 1 : null;
                             i2 = 1;
                         } else {
                             boolean z5 = LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY;
@@ -552,49 +565,45 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                                     }
                                     i3 = 3;
                                 } else {
-                                    b = false;
+                                    objArr = false;
                                 }
                             } else if (iKeyguardDismissCallback != null) {
                                 dismissCallbackRegistry.addCallback(iKeyguardDismissCallback);
                                 keyguardViewMediatorHelperImpl4.subScreenManager.requestCoverBouncer();
                             }
                             int i5 = i3;
-                            b = false;
+                            objArr = false;
                             i2 = i5;
                         }
-                        if (b != false) {
+                        if (objArr != false) {
                             new DismissCallbackWrapper(iKeyguardDismissCallback).notifyDismissError();
                         }
                         if (i2 != 0) {
                             KeyguardViewMediatorHelperImpl.logD$1("handleDismiss reason=" + i2);
-                            str = str3;
-                            android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222222 = KeyguardViewMediator.this.mHelper;
-                            Objects.requireNonNull(keyguardViewMediatorHelperImpl2222222222);
-                            keyguardViewMediatorHelperImpl2222222222.postHandleMsg(message);
-                            return;
                         }
-                    }
-                    if (keyguardViewMediator4.mShowing) {
-                        KeyguardWmStateRefactor keyguardWmStateRefactor = KeyguardWmStateRefactor.INSTANCE;
-                        if (iKeyguardDismissCallback != null) {
-                            keyguardViewMediator4.mDismissCallbackRegistry.addCallback(iKeyguardDismissCallback);
-                        }
-                        keyguardViewMediator4.mCustomMessage = charSequence;
-                        if (!keyguardViewMediator4.mHiding) {
-                            ((KeyguardViewController) keyguardViewMediator4.mKeyguardViewControllerLazy.get()).dismissAndCollapse();
-                        }
+                        str = str3;
                     } else {
-                        android.util.Log.w("KeyguardViewMediator", "Ignoring request to DISMISS because mShowing=false");
-                        if (iKeyguardDismissCallback != null) {
-                            new DismissCallbackWrapper(iKeyguardDismissCallback).notifyDismissError();
+                        if (keyguardViewMediator4.mShowing) {
+                            KeyguardWmStateRefactor keyguardWmStateRefactor = KeyguardWmStateRefactor.INSTANCE;
+                            if (iKeyguardDismissCallback != null) {
+                                keyguardViewMediator4.mDismissCallbackRegistry.addCallback(iKeyguardDismissCallback);
+                            }
+                            keyguardViewMediator4.mCustomMessage = charSequence;
+                            if (!keyguardViewMediator4.mHiding) {
+                                ((KeyguardViewController) keyguardViewMediator4.mKeyguardViewControllerLazy.get()).dismissAndCollapse();
+                            }
+                        } else {
+                            android.util.Log.w("KeyguardViewMediator", "Ignoring request to DISMISS because mShowing=false");
+                            if (iKeyguardDismissCallback != null) {
+                                new DismissCallbackWrapper(iKeyguardDismissCallback).notifyDismissError();
+                            }
                         }
+                        str = str3;
                     }
-                    str = str3;
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl22222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl22222222222);
-                    keyguardViewMediatorHelperImpl22222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl2222222222);
+                    keyguardViewMediatorHelperImpl2222222222.postHandleMsg(message);
                     return;
                 case 12:
                     str = "START_KEYGUARD_EXIT_ANIM";
@@ -607,7 +616,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     ((NotificationShadeWindowControllerImpl) ((NotificationShadeWindowController) keyguardViewMediator.mNotificationShadeWindowControllerLazy.get())).batchApplyWindowLayoutParams(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$14$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            KeyguardViewMediator.AnonymousClass14 anonymousClass14 = KeyguardViewMediator.AnonymousClass14.this;
+                            KeyguardViewMediator.AnonymousClass14 anonymousClass14 = this.f$0;
                             KeyguardViewMediator.StartKeyguardExitAnimParams startKeyguardExitAnimParams2 = startKeyguardExitAnimParams;
                             int i6 = KeyguardViewMediator.AnonymousClass14.$r8$clinit;
                             long j = startKeyguardExitAnimParams2.startTime;
@@ -632,9 +641,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     });
                     Trace.endSection();
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl222222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl222222222222);
-                    keyguardViewMediatorHelperImpl222222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl22222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl22222222222);
+                    keyguardViewMediatorHelperImpl22222222222.postHandleMsg(message);
                     return;
                 case 13:
                     str = "KEYGUARD_DONE_PENDING_TIMEOUT";
@@ -642,19 +651,19 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     android.util.Log.w("KeyguardViewMediator", "Timeout while waiting for activity drawn!");
                     Trace.endSection();
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl2222222222222);
-                    keyguardViewMediatorHelperImpl2222222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl222222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl222222222222);
+                    keyguardViewMediatorHelperImpl222222222222.postHandleMsg(message);
                     return;
                 case 14:
                     str = "NOTIFY_STARTED_WAKING_UP";
                     Trace.beginSection("KeyguardViewMediator#handleMessage NOTIFY_STARTED_WAKING_UP");
-                    KeyguardViewMediator.m2588$$Nest$mhandleNotifyStartedWakingUp(KeyguardViewMediator.this);
+                    KeyguardViewMediator.m2605$$Nest$mhandleNotifyStartedWakingUp(KeyguardViewMediator.this);
                     Trace.endSection();
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl22222222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl22222222222222);
-                    keyguardViewMediatorHelperImpl22222222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl2222222222222);
+                    keyguardViewMediatorHelperImpl2222222222222.postHandleMsg(message);
                     return;
                 case 17:
                     str = "NOTIFY_STARTED_GOING_TO_SLEEP";
@@ -664,9 +673,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         ((KeyguardViewController) keyguardViewMediator5.mKeyguardViewControllerLazy.get()).onStartedGoingToSleep();
                     }
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl222222222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl222222222222222);
-                    keyguardViewMediatorHelperImpl222222222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl22222222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl22222222222222);
+                    keyguardViewMediatorHelperImpl22222222222222.postHandleMsg(message);
                     return;
                 case 18:
                     str2 = "SYSTEM_READY";
@@ -684,7 +693,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                             CommunalTransitionViewModel communalTransitionViewModel = (CommunalTransitionViewModel) keyguardViewMediator6.mCommunalTransitionViewModel.get();
                             keyguardViewMediator6.mJavaAdapter.alwaysCollectFlow(dreamViewModel.dreamAlpha, new KeyguardViewMediator$$ExternalSyntheticLambda69(keyguardViewMediator6, 4));
                             keyguardViewMediator6.mJavaAdapter.alwaysCollectFlow(dreamViewModel.transitionEnded, new KeyguardViewMediator$$ExternalSyntheticLambda69(keyguardViewMediator6, i4));
-                            keyguardViewMediator6.mJavaAdapter.alwaysCollectFlow(communalTransitionViewModel.showCommunalFromOccluded, new KeyguardViewMediator$$ExternalSyntheticLambda69(keyguardViewMediator6, r0 ? 1 : 0));
+                            keyguardViewMediator6.mJavaAdapter.alwaysCollectFlow(communalTransitionViewModel.showCommunalFromOccluded, new KeyguardViewMediator$$ExternalSyntheticLambda69(keyguardViewMediator6, z ? 1 : 0));
                             keyguardViewMediator6.mJavaAdapter.alwaysCollectFlow(communalTransitionViewModel.transitionFromOccludedEnded, new KeyguardViewMediator$$ExternalSyntheticLambda69(keyguardViewMediator6, i4));
                             UserTracker userTracker = keyguardViewMediator6.mUserTracker;
                             if (((UserTrackerImpl) userTracker).isUserSwitching) {
@@ -696,9 +705,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     keyguardViewMediator6.maybeSendUserPresentBroadcast$1();
                     str = str2;
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl2222222222222222);
-                    keyguardViewMediatorHelperImpl2222222222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl222222222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl222222222222222);
+                    keyguardViewMediatorHelperImpl222222222222222.postHandleMsg(message);
                     return;
                 case 19:
                     str3 = "CANCEL_KEYGUARD_EXIT_ANIM";
@@ -739,9 +748,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     Trace.endSection();
                     str = str3;
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl22222222222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl22222222222222222);
-                    keyguardViewMediatorHelperImpl22222222222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl2222222222222222);
+                    keyguardViewMediatorHelperImpl2222222222222222.postHandleMsg(message);
                     return;
                 case 20:
                     str3 = "BOOT_INTERACTOR";
@@ -751,154 +760,84 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     keyguardViewMediatorHelperImpl32.handleSecMessage(message);
                     str = str3;
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl222222222222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl222222222222222222);
-                    keyguardViewMediatorHelperImpl222222222222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl22222222222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl22222222222222222);
+                    keyguardViewMediatorHelperImpl22222222222222222.postHandleMsg(message);
                     return;
                 case 21:
                     str = "BEFORE_USER_SWITCHING";
                     KeyguardViewMediator.this.handleBeforeUserSwitching(message.arg1, (Runnable) message.obj);
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222222222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl2222222222222222222);
-                    keyguardViewMediatorHelperImpl2222222222222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl222222222222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl222222222222222222);
+                    keyguardViewMediatorHelperImpl222222222222222222.postHandleMsg(message);
                     return;
                 case 22:
                     str = "USER_SWITCHING";
                     KeyguardViewMediator.this.handleUserSwitching(message.arg1, (Runnable) message.obj);
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl22222222222222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl22222222222222222222);
-                    keyguardViewMediatorHelperImpl22222222222222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222222222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl2222222222222222222);
+                    keyguardViewMediatorHelperImpl2222222222222222222.postHandleMsg(message);
                     return;
                 case 23:
                     str = "USER_SWITCH_COMPLETE";
                     KeyguardViewMediator.this.handleUserSwitchComplete(message.arg1);
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
-                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl222222222222222222222 = KeyguardViewMediator.this.mHelper;
-                    Objects.requireNonNull(keyguardViewMediatorHelperImpl222222222222222222222);
-                    keyguardViewMediatorHelperImpl222222222222222222222.postHandleMsg(message);
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl22222222222222222222 = KeyguardViewMediator.this.mHelper;
+                    Objects.requireNonNull(keyguardViewMediatorHelperImpl22222222222222222222);
+                    keyguardViewMediatorHelperImpl22222222222222222222.postHandleMsg(message);
                     return;
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.KeyguardViewMediator$15, reason: invalid class name */
     public class AnonymousClass15 implements Runnable {
         public AnonymousClass15() {
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:13:0x004f, code lost:
-        
-            if (r2.mWallpaperSupportsAmbientMode != false) goto L16;
-         */
-        /* JADX WARN: Removed duplicated region for block: B:10:0x0047  */
-        /* JADX WARN: Removed duplicated region for block: B:16:0x0062  */
-        /* JADX WARN: Removed duplicated region for block: B:19:0x0077  */
+        /* JADX WARN: Removed duplicated region for block: B:16:0x0051  */
+        /* JADX WARN: Removed duplicated region for block: B:9:0x0036  */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         public final void run() {
-            /*
-                r5 = this;
-                r0 = 1
-                java.lang.String r1 = "KeyguardViewMediator.mKeyGuardGoingAwayRunnable"
-                android.os.Trace.beginSection(r1)
-                com.android.systemui.keyguard.KeyguardViewMediator r1 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                dagger.Lazy r1 = r1.mKeyguardViewControllerLazy
-                java.lang.Object r1 = r1.get()
-                com.android.keyguard.KeyguardViewController r1 = (com.android.keyguard.KeyguardViewController) r1
-                r1.keyguardGoingAway()
-                com.android.systemui.keyguard.KeyguardViewMediator r1 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                dagger.Lazy r1 = r1.mKeyguardViewControllerLazy
-                java.lang.Object r1 = r1.get()
-                com.android.keyguard.KeyguardViewController r1 = (com.android.keyguard.KeyguardViewController) r1
-                r1.getClass()
-                com.android.systemui.keyguard.KeyguardViewMediator r1 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl r1 = r1.mHelper
-                boolean r1 = r1.isEnabledBiometricUnlockVI()
-                if (r1 != 0) goto L36
-                com.android.systemui.keyguard.KeyguardViewMediator r1 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                boolean r2 = r1.mWakeAndUnlocking
-                if (r2 == 0) goto L36
-                boolean r1 = r1.mWallpaperSupportsAmbientMode
-                if (r1 != 0) goto L36
-                r1 = 2
-                goto L37
-            L36:
-                r1 = 0
-            L37:
-                com.android.systemui.keyguard.KeyguardViewMediator r2 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                dagger.Lazy r2 = r2.mKeyguardViewControllerLazy
-                java.lang.Object r2 = r2.get()
-                com.android.keyguard.KeyguardViewController r2 = (com.android.keyguard.KeyguardViewController) r2
-                boolean r2 = r2.isGoingToNotificationShade()
-                if (r2 != 0) goto L51
-                com.android.systemui.keyguard.KeyguardViewMediator r2 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                boolean r3 = r2.mWakeAndUnlocking
-                if (r3 == 0) goto L52
-                boolean r2 = r2.mWallpaperSupportsAmbientMode
-                if (r2 == 0) goto L52
-            L51:
-                r1 = r1 | r0
-            L52:
-                com.android.systemui.keyguard.KeyguardViewMediator r2 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                dagger.Lazy r2 = r2.mKeyguardViewControllerLazy
-                java.lang.Object r2 = r2.get()
-                com.android.keyguard.KeyguardViewController r2 = (com.android.keyguard.KeyguardViewController) r2
-                boolean r2 = r2.isUnlockWithWallpaper()
-                if (r2 == 0) goto L64
-                r1 = r1 | 4
-            L64:
-                com.android.systemui.keyguard.KeyguardViewMediator r2 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                dagger.Lazy r2 = r2.mKeyguardViewControllerLazy
-                java.lang.Object r2 = r2.get()
-                com.android.keyguard.KeyguardViewController r2 = (com.android.keyguard.KeyguardViewController) r2
-                r2.shouldSubtleWindowAnimationsForUnlock()
-                com.android.systemui.keyguard.KeyguardViewMediator r2 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                boolean r3 = r2.mWakeAndUnlocking
-                if (r3 == 0) goto L82
-                dagger.Lazy r2 = r2.mKeyguardUnlockAnimationControllerLazy
-                java.lang.Object r2 = r2.get()
-                com.android.systemui.keyguard.KeyguardUnlockAnimationController r2 = (com.android.systemui.keyguard.KeyguardUnlockAnimationController) r2
-                r2.getClass()
-            L82:
-                com.android.systemui.keyguard.KeyguardViewMediator r2 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                com.android.keyguard.KeyguardUpdateMonitor r2 = r2.mUpdateMonitor
-                r2.setKeyguardGoingAway(r0)
-                com.android.systemui.keyguard.KeyguardViewMediator r2 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                dagger.Lazy r2 = r2.mKeyguardViewControllerLazy
-                java.lang.Object r2 = r2.get()
-                com.android.keyguard.KeyguardViewController r2 = (com.android.keyguard.KeyguardViewController) r2
-                r2.setKeyguardGoingAwayState(r0)
-                com.android.systemui.keyguard.KeyguardWmStateRefactor r2 = com.android.systemui.keyguard.KeyguardWmStateRefactor.INSTANCE
-                com.android.systemui.keyguard.KeyguardViewMediator r2 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                com.android.systemui.user.domain.interactor.SelectedUserInteractor r3 = r2.mSelectedUserInteractor
-                int r3 = r3.getSelectedUserId()
-                r2.mGoingAwayRequestedForUserId = r3
-                java.lang.StringBuilder r2 = new java.lang.StringBuilder
-                java.lang.String r3 = "keyguardGoingAway requested for userId: "
-                r2.<init>(r3)
-                com.android.systemui.keyguard.KeyguardViewMediator r3 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                int r3 = r3.mGoingAwayRequestedForUserId
-                java.lang.String r4 = "KeyguardViewMediator"
-                androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0.m(r3, r4, r2)
-                com.android.systemui.keyguard.KeyguardViewMediator r2 = com.android.systemui.keyguard.KeyguardViewMediator.this
-                java.util.concurrent.Executor r2 = r2.mUiBgExecutor
-                com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda65 r3 = new com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda65
-                r3.<init>(r5, r1, r0)
-                r2.execute(r3)
-                android.os.Trace.endSection()
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediator.AnonymousClass15.run():void");
+            int i;
+            int i2 = 1;
+            Trace.beginSection("KeyguardViewMediator.mKeyGuardGoingAwayRunnable");
+            ((KeyguardViewController) KeyguardViewMediator.this.mKeyguardViewControllerLazy.get()).keyguardGoingAway();
+            ((KeyguardViewController) KeyguardViewMediator.this.mKeyguardViewControllerLazy.get()).getClass();
+            if (!KeyguardViewMediator.this.mHelper.isEnabledBiometricUnlockVI()) {
+                KeyguardViewMediator keyguardViewMediator = KeyguardViewMediator.this;
+                i = (!keyguardViewMediator.mWakeAndUnlocking || keyguardViewMediator.mWallpaperSupportsAmbientMode) ? 0 : 2;
+            }
+            if (!((KeyguardViewController) KeyguardViewMediator.this.mKeyguardViewControllerLazy.get()).isGoingToNotificationShade()) {
+                KeyguardViewMediator keyguardViewMediator2 = KeyguardViewMediator.this;
+                if (keyguardViewMediator2.mWakeAndUnlocking && keyguardViewMediator2.mWallpaperSupportsAmbientMode) {
+                    i |= 1;
+                }
+            }
+            if (((KeyguardViewController) KeyguardViewMediator.this.mKeyguardViewControllerLazy.get()).isUnlockWithWallpaper()) {
+                i |= 4;
+            }
+            ((KeyguardViewController) KeyguardViewMediator.this.mKeyguardViewControllerLazy.get()).shouldSubtleWindowAnimationsForUnlock();
+            KeyguardViewMediator keyguardViewMediator3 = KeyguardViewMediator.this;
+            if (keyguardViewMediator3.mWakeAndUnlocking) {
+                ((KeyguardUnlockAnimationController) keyguardViewMediator3.mKeyguardUnlockAnimationControllerLazy.get()).getClass();
+            }
+            KeyguardViewMediator.this.mUpdateMonitor.setKeyguardGoingAway(true);
+            ((KeyguardViewController) KeyguardViewMediator.this.mKeyguardViewControllerLazy.get()).setKeyguardGoingAwayState(true);
+            KeyguardWmStateRefactor keyguardWmStateRefactor = KeyguardWmStateRefactor.INSTANCE;
+            KeyguardViewMediator keyguardViewMediator4 = KeyguardViewMediator.this;
+            keyguardViewMediator4.mGoingAwayRequestedForUserId = keyguardViewMediator4.mSelectedUserInteractor.getSelectedUserId();
+            RecyclerView$$ExternalSyntheticOutline0.m(KeyguardViewMediator.this.mGoingAwayRequestedForUserId, "KeyguardViewMediator", new StringBuilder("keyguardGoingAway requested for userId: "));
+            KeyguardViewMediator.this.mUiBgExecutor.execute(new KeyguardViewMediator$$ExternalSyntheticLambda65(this, i, i2));
+            Trace.endSection();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.KeyguardViewMediator$18, reason: invalid class name */
     public class AnonymousClass18 extends IRemoteAnimationRunner.Stub {
         public final /* synthetic */ IRemoteAnimationRunner val$wrapped;
@@ -923,7 +862,6 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.KeyguardViewMediator$5, reason: invalid class name */
     public class AnonymousClass5 implements ViewMediatorCallback {
         public AnonymousClass5() {
@@ -949,7 +887,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                 boolean z2 = z || (keyguardUpdateMonitor.isUnlockWithFacePossible(selectedUserId) || keyguardUpdateMonitor.isUnlockWithFingerprintPossible(selectedUserId));
                 KeyguardUpdateMonitor.StrongAuthTracker strongAuthTracker = keyguardUpdateMonitor.mStrongAuthTracker;
                 int strongAuthForUser = strongAuthTracker.getStrongAuthForUser(selectedUserId);
-                boolean isNonStrongBiometricAllowedAfterIdleTimeout = strongAuthTracker.isNonStrongBiometricAllowedAfterIdleTimeout(selectedUserId);
+                boolean zIsNonStrongBiometricAllowedAfterIdleTimeout = strongAuthTracker.isNonStrongBiometricAllowedAfterIdleTimeout(selectedUserId);
                 if (z2 && !strongAuthTracker.hasUserAuthenticatedSinceBoot()) {
                     keyguardViewMediator.mSystemPropertiesHelper.getClass();
                     return Objects.equals(SystemProperties.get("sys.boot.reason.last"), "reboot,mainline_update") ? 16 : 1;
@@ -981,7 +919,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                 if (z2 && (strongAuthForUser & 128) != 0) {
                     return 7;
                 }
-                if (z2 && !isNonStrongBiometricAllowedAfterIdleTimeout) {
+                if (z2 && !zIsNonStrongBiometricAllowedAfterIdleTimeout) {
                     return 17;
                 }
             }
@@ -1111,7 +1049,6 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.KeyguardViewMediator$9, reason: invalid class name */
     public class AnonymousClass9 extends IRemoteAnimationRunner.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -1137,7 +1074,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     KeyguardViewMediator.this.mContext.getMainExecutor().execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$9$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            final KeyguardViewMediator.AnonymousClass9 anonymousClass9 = KeyguardViewMediator.AnonymousClass9.this;
+                            final KeyguardViewMediator.AnonymousClass9 anonymousClass9 = this.f$0;
                             RemoteAnimationTarget remoteAnimationTarget2 = remoteAnimationTarget;
                             SyncRtSurfaceTransactionApplier syncRtSurfaceTransactionApplier2 = syncRtSurfaceTransactionApplier;
                             final IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback2 = iRemoteAnimationFinishedCallback;
@@ -1145,9 +1082,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                             if (valueAnimator != null) {
                                 valueAnimator.cancel();
                             }
-                            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                            anonymousClass9.mOccludeByDreamAnimator = ofFloat;
-                            ofFloat.setDuration(KeyguardViewMediator.this.mDreamOpenAnimationDuration);
+                            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                            anonymousClass9.mOccludeByDreamAnimator = valueAnimatorOfFloat;
+                            valueAnimatorOfFloat.setDuration(KeyguardViewMediator.this.mDreamOpenAnimationDuration);
                             anonymousClass9.mOccludeByDreamAnimator.addUpdateListener(new KeyguardViewMediator$$ExternalSyntheticLambda84(remoteAnimationTarget2, syncRtSurfaceTransactionApplier2, 1));
                             anonymousClass9.mOccludeByDreamAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardViewMediator.9.1
                                 public boolean mIsCancelled = false;
@@ -1161,7 +1098,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                                 public final void onAnimationEnd(Animator animator) {
                                     try {
                                         if (!this.mIsCancelled) {
-                                            KeyguardViewMediator.m2590$$Nest$mhandleSetOccluded(KeyguardViewMediator.this, true, false, -1);
+                                            KeyguardViewMediator.m2607$$Nest$mhandleSetOccluded(KeyguardViewMediator.this, true, false, -1);
                                         }
                                         iRemoteAnimationFinishedCallback2.onAnimationFinished();
                                         AnonymousClass9.this.mOccludeByDreamAnimator = null;
@@ -1182,7 +1119,6 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ActivityLaunchRemoteAnimationRunner extends IRemoteAnimationRunner.Stub {
         public final ActivityTransitionAnimator.Controller mActivityLaunchController;
         public ActivityTransitionAnimator.Runner mRunner;
@@ -1199,13 +1135,12 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
 
         public void onAnimationStart(int i, RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
-            ActivityTransitionAnimator.Runner createEphemeralRunner = ((ActivityTransitionAnimator) KeyguardViewMediator.this.mActivityTransitionAnimator.get()).createEphemeralRunner(this.mActivityLaunchController);
-            this.mRunner = createEphemeralRunner;
-            createEphemeralRunner.onAnimationStart(i, remoteAnimationTargetArr, remoteAnimationTargetArr2, remoteAnimationTargetArr3, iRemoteAnimationFinishedCallback);
+            ActivityTransitionAnimator.Runner runnerCreateEphemeralRunner = ((ActivityTransitionAnimator) KeyguardViewMediator.this.mActivityTransitionAnimator.get()).createEphemeralRunner(this.mActivityLaunchController);
+            this.mRunner = runnerCreateEphemeralRunner;
+            runnerCreateEphemeralRunner.onAnimationStart(i, remoteAnimationTargetArr, remoteAnimationTargetArr2, remoteAnimationTargetArr3, iRemoteAnimationFinishedCallback);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DismissMessage {
         public final IKeyguardDismissCallback mCallback;
         public final CharSequence mMessage;
@@ -1216,7 +1151,6 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LockNowCallback {
         public final IRemoteCallback mRemoteCallback;
         public final int mUserId;
@@ -1227,7 +1161,6 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OccludeActivityLaunchRemoteAnimationRunner extends ActivityLaunchRemoteAnimationRunner {
         public OccludeActivityLaunchRemoteAnimationRunner(ActivityTransitionAnimator.Controller controller) {
             super(controller);
@@ -1253,7 +1186,6 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StartKeyguardExitAnimParams {
         public final long fadeoutDuration;
         public RemoteAnimationTarget[] mApps;
@@ -1277,7 +1209,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     }
 
     /* renamed from: -$$Nest$mhandleKeyguardDoneDrawing, reason: not valid java name */
-    public static void m2586$$Nest$mhandleKeyguardDoneDrawing(KeyguardViewMediator keyguardViewMediator) {
+    public static void m2603$$Nest$mhandleKeyguardDoneDrawing(KeyguardViewMediator keyguardViewMediator) {
         keyguardViewMediator.getClass();
         Trace.beginSection("KeyguardViewMediator#handleKeyguardDoneDrawing");
         synchronized (keyguardViewMediator) {
@@ -1297,7 +1229,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     }
 
     /* renamed from: -$$Nest$mhandleNotifyFinishedGoingToSleep, reason: not valid java name */
-    public static void m2587$$Nest$mhandleNotifyFinishedGoingToSleep(KeyguardViewMediator keyguardViewMediator) {
+    public static void m2604$$Nest$mhandleNotifyFinishedGoingToSleep(KeyguardViewMediator keyguardViewMediator) {
         synchronized (keyguardViewMediator) {
             android.util.Log.d("KeyguardViewMediator", "handleNotifyFinishedGoingToSleep");
             ((KeyguardViewController) keyguardViewMediator.mKeyguardViewControllerLazy.get()).onFinishedGoingToSleep();
@@ -1305,7 +1237,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     }
 
     /* renamed from: -$$Nest$mhandleNotifyStartedWakingUp, reason: not valid java name */
-    public static void m2588$$Nest$mhandleNotifyStartedWakingUp(KeyguardViewMediator keyguardViewMediator) {
+    public static void m2605$$Nest$mhandleNotifyStartedWakingUp(KeyguardViewMediator keyguardViewMediator) {
         keyguardViewMediator.getClass();
         Trace.beginSection("KeyguardViewMediator#handleMotifyStartedWakingUp");
         synchronized (keyguardViewMediator) {
@@ -1316,7 +1248,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     }
 
     /* renamed from: -$$Nest$mhandleReset, reason: not valid java name */
-    public static void m2589$$Nest$mhandleReset(KeyguardViewMediator keyguardViewMediator, boolean z) {
+    public static void m2606$$Nest$mhandleReset(KeyguardViewMediator keyguardViewMediator, boolean z) {
         synchronized (keyguardViewMediator) {
             try {
                 if (keyguardViewMediator.mHideAnimationRun) {
@@ -1333,92 +1265,74 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         keyguardViewMediator.scheduleNonStrongBiometricIdleTimeout$1();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:8:0x004c A[Catch: all -> 0x0043, TryCatch #0 {all -> 0x0043, blocks: (B:26:0x003b, B:6:0x0046, B:8:0x004c, B:10:0x005a, B:13:0x0060, B:15:0x007f, B:16:0x009a), top: B:25:0x003b }] */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0045  */
     /* renamed from: -$$Nest$mhandleSetOccluded, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m2590$$Nest$mhandleSetOccluded(com.android.systemui.keyguard.KeyguardViewMediator r4, boolean r5, boolean r6, int r7) {
-        /*
-            r4.getClass()
-            java.lang.String r0 = "isOccluded="
-            java.lang.String r1 = "KeyguardViewMediator#handleSetOccluded"
-            android.os.Trace.beginSection(r1)
-            java.lang.String r1 = "KeyguardViewMediator"
-            java.lang.String r2 = "handleSetOccluded(%b) seq=%d"
-            java.lang.Boolean r3 = java.lang.Boolean.valueOf(r5)
-            java.lang.Integer r7 = java.lang.Integer.valueOf(r7)
-            java.lang.Object[] r7 = new java.lang.Object[]{r3, r7}
-            com.android.systemui.keyguard.Log.d(r1, r2, r7)
-            java.lang.Integer r7 = java.lang.Integer.valueOf(r5)
-            java.lang.Integer r1 = java.lang.Integer.valueOf(r6)
-            java.lang.Object[] r7 = new java.lang.Object[]{r7, r1}
-            r1 = 36080(0x8cf0, float:5.0559E-41)
-            android.util.EventLog.writeEvent(r1, r7)
-            com.android.internal.jank.InteractionJankMonitor r7 = r4.mInteractionJankMonitor
-            r1 = 23
-            r7.cancel(r1)
-            monitor-enter(r4)
-            r7 = 1
-            r1 = 0
-            if (r5 == 0) goto L45
-            com.android.keyguard.KeyguardUpdateMonitor r2 = r4.mUpdateMonitor     // Catch: java.lang.Throwable -> L43
-            boolean r2 = r2.mSecureCameraLaunched     // Catch: java.lang.Throwable -> L43
-            if (r2 == 0) goto L45
-            r2 = r7
-            goto L46
-        L43:
-            r5 = move-exception
-            goto L9f
-        L45:
-            r2 = r1
-        L46:
-            r4.mPowerGestureIntercepted = r2     // Catch: java.lang.Throwable -> L43
-            boolean r2 = r4.mOccluded     // Catch: java.lang.Throwable -> L43
-            if (r2 == r5) goto L7f
-            r4.mOccluded = r5     // Catch: java.lang.Throwable -> L43
-            com.android.systemui.keyguard.KeyguardWmStateRefactor r2 = com.android.systemui.keyguard.KeyguardWmStateRefactor.INSTANCE     // Catch: java.lang.Throwable -> L43
-            dagger.Lazy r2 = r4.mKeyguardViewControllerLazy     // Catch: java.lang.Throwable -> L43
-            java.lang.Object r2 = r2.get()     // Catch: java.lang.Throwable -> L43
-            com.android.keyguard.KeyguardViewController r2 = (com.android.keyguard.KeyguardViewController) r2     // Catch: java.lang.Throwable -> L43
-            if (r6 == 0) goto L5f
-            boolean r6 = r4.mDeviceInteractive     // Catch: java.lang.Throwable -> L43
-            if (r6 == 0) goto L5f
-            goto L60
-        L5f:
-            r7 = r1
-        L60:
-            r2.setOccluded(r5, r7)     // Catch: java.lang.Throwable -> L43
-            r4.adjustStatusBarLocked$1(r1, r1)     // Catch: java.lang.Throwable -> L43
-            com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl r6 = r4.mHelper     // Catch: java.lang.Throwable -> L43
-            java.util.Objects.requireNonNull(r6)     // Catch: java.lang.Throwable -> L43
-            com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda68 r7 = new com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda68     // Catch: java.lang.Throwable -> L43
-            r7.<init>()     // Catch: java.lang.Throwable -> L43
-            boolean r6 = r4.mShowing     // Catch: java.lang.Throwable -> L43
-            boolean r1 = com.android.systemui.Rune.SYSUI_MULTI_SIM     // Catch: java.lang.Throwable -> L43
-            java.lang.Boolean r1 = java.lang.Boolean.valueOf(r5)     // Catch: java.lang.Throwable -> L43
-            java.lang.Boolean r6 = java.lang.Boolean.valueOf(r6)     // Catch: java.lang.Throwable -> L43
-            r7.accept(r1, r6)     // Catch: java.lang.Throwable -> L43
-        L7f:
-            java.lang.String r6 = "KeyguardViewMediator"
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L43
-            r7.<init>(r0)     // Catch: java.lang.Throwable -> L43
-            r7.append(r5)     // Catch: java.lang.Throwable -> L43
-            java.lang.String r5 = ",mPowerGestureIntercepted="
-            r7.append(r5)     // Catch: java.lang.Throwable -> L43
-            boolean r5 = r4.mPowerGestureIntercepted     // Catch: java.lang.Throwable -> L43
-            r7.append(r5)     // Catch: java.lang.Throwable -> L43
-            java.lang.String r5 = r7.toString()     // Catch: java.lang.Throwable -> L43
-            android.util.Log.d(r6, r5)     // Catch: java.lang.Throwable -> L43
-            monitor-exit(r4)     // Catch: java.lang.Throwable -> L43
-            android.os.Trace.endSection()
-            return
-        L9f:
-            monitor-exit(r4)     // Catch: java.lang.Throwable -> L43
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediator.m2590$$Nest$mhandleSetOccluded(com.android.systemui.keyguard.KeyguardViewMediator, boolean, boolean, int):void");
+    public static void m2607$$Nest$mhandleSetOccluded(KeyguardViewMediator keyguardViewMediator, boolean z, boolean z2, int i) {
+        boolean z3;
+        keyguardViewMediator.getClass();
+        Trace.beginSection("KeyguardViewMediator#handleSetOccluded");
+        Log.d("KeyguardViewMediator", "handleSetOccluded(%b) seq=%d", Boolean.valueOf(z), Integer.valueOf(i));
+        EventLog.writeEvent(36080, Integer.valueOf(z ? 1 : 0), Integer.valueOf(z2 ? 1 : 0));
+        keyguardViewMediator.mInteractionJankMonitor.cancel(23);
+        synchronized (keyguardViewMediator) {
+            boolean z4 = true;
+            if (z) {
+                try {
+                    z3 = keyguardViewMediator.mUpdateMonitor.mSecureCameraLaunched;
+                } catch (Throwable th) {
+                    throw th;
+                }
+            }
+            keyguardViewMediator.mPowerGestureIntercepted = z3;
+            if (keyguardViewMediator.mOccluded != z) {
+                keyguardViewMediator.mOccluded = z;
+                KeyguardWmStateRefactor keyguardWmStateRefactor = KeyguardWmStateRefactor.INSTANCE;
+                KeyguardViewController keyguardViewController = (KeyguardViewController) keyguardViewMediator.mKeyguardViewControllerLazy.get();
+                if (!z2 || !keyguardViewMediator.mDeviceInteractive) {
+                    z4 = false;
+                }
+                keyguardViewController.setOccluded(z, z4);
+                keyguardViewMediator.adjustStatusBarLocked$1(false, false);
+                final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = keyguardViewMediator.mHelper;
+                Objects.requireNonNull(keyguardViewMediatorHelperImpl);
+                BiConsumer biConsumer = new BiConsumer() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda68
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = keyguardViewMediatorHelperImpl;
+                        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+                        keyguardViewMediatorHelperImpl2.getClass();
+                        if (!zBooleanValue && zBooleanValue2) {
+                            KeyguardUnlockInfo.reset();
+                        }
+                        KeyguardDumpLog.state$default(KeyguardDumpLog.INSTANCE, 4, zBooleanValue, false, false, 0, 0, 60);
+                        ((KeyguardViewMediator) keyguardViewMediatorHelperImpl2.viewMediatorLazy.get()).userActivity();
+                        if (zBooleanValue2) {
+                            boolean z5 = LsRune.KEYGUARD_SUB_DISPLAY_COVER;
+                            KeyguardDisplayManager keyguardDisplayManager = keyguardViewMediatorHelperImpl2.keyguardDisplayManager;
+                            if ((z5 && !keyguardViewMediatorHelperImpl2.foldControllerImpl.isFoldOpened()) || keyguardDisplayManager.isDesktopMode() || !zBooleanValue) {
+                                keyguardDisplayManager.show();
+                                return;
+                            }
+                            KeyguardVisibilityMonitor keyguardVisibilityMonitor = keyguardDisplayManager.mKeyguardVisibilityMonitor;
+                            if (keyguardVisibilityMonitor.isVisible()) {
+                                keyguardVisibilityMonitor.addVisibilityChangedListener(keyguardDisplayManager.mVisibilityListener);
+                            } else {
+                                keyguardDisplayManager.hide();
+                            }
+                        }
+                    }
+                };
+                boolean z5 = keyguardViewMediator.mShowing;
+                boolean z6 = Rune.SYSUI_MULTI_SIM;
+                biConsumer.accept(Boolean.valueOf(z), Boolean.valueOf(z5));
+            }
+            android.util.Log.d("KeyguardViewMediator", "isOccluded=" + z + ",mPowerGestureIntercepted=" + keyguardViewMediator.mPowerGestureIntercepted);
+        }
+        Trace.endSection();
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -1508,7 +1422,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                                     @Override // java.lang.Runnable
                                     public final void run() {
                                         Log.d("KeyguardViewMediator", "PendingPinLock : doKeyguardLockedAfterUnlockAnimation");
-                                        KeyguardViewMediatorHelperImpl.this.doKeyguardLocked$2(null);
+                                        keyguardViewMediatorHelperImpl2.doKeyguardLocked$2(null);
                                     }
                                 }, ((KeyguardUnlockAnimationController) keyguardViewMediatorHelperImpl2.unlockAnimationControllerLazy.get()).getUnlockAnimationDuration());
                             }
@@ -1522,15 +1436,15 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onSimStateChanged(int i, int i2, int i3) {
                 boolean z;
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "onSimStateChanged(subId=", ", slotId=", ",state=");
-                m.append(TelephonyManager.simStateToString(i3));
-                m.append(")");
-                android.util.Log.d("KeyguardViewMediator", m.toString());
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "onSimStateChanged(subId=", ", slotId=", ",state=");
+                sbM.append(TelephonyManager.simStateToString(i3));
+                sbM.append(")");
+                android.util.Log.d("KeyguardViewMediator", sbM.toString());
                 int size = KeyguardViewMediator.this.mKeyguardStateCallbacks.size();
-                boolean isSimPinSecure = KeyguardViewMediator.this.mUpdateMonitor.isSimPinSecure();
+                boolean zIsSimPinSecure = KeyguardViewMediator.this.mUpdateMonitor.isSimPinSecure();
                 for (int i4 = size - 1; i4 >= 0; i4--) {
                     try {
-                        ((IKeyguardStateCallback) KeyguardViewMediator.this.mKeyguardStateCallbacks.get(i4)).onSimSecureStateChanged(isSimPinSecure);
+                        ((IKeyguardStateCallback) KeyguardViewMediator.this.mKeyguardStateCallbacks.get(i4)).onSimSecureStateChanged(zIsSimPinSecure);
                     } catch (RemoteException e) {
                         Slog.w("KeyguardViewMediator", "Failed to call onSimSecureStateChanged", e);
                         if (e instanceof DeadObjectException) {
@@ -1544,11 +1458,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     synchronized (KeyguardViewMediator.this) {
                         try {
                             int i5 = KeyguardViewMediator.this.mLastSimStates.get(i2);
-                            if (i5 != 2 && i5 != 3 && (!LsRune.SECURITY_SIM_PERSO_LOCK || i5 != 12)) {
-                                z = false;
-                                KeyguardViewMediator.this.mLastSimStates.append(i2, i3);
-                            }
-                            z = true;
+                            z = i5 == 2 || i5 == 3 || (LsRune.SECURITY_SIM_PERSO_LOCK && i5 == 12);
                             KeyguardViewMediator.this.mLastSimStates.append(i2, i3);
                         } finally {
                         }
@@ -1636,7 +1546,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         return;
                     }
                 }
-                if (!isSimPinSecure) {
+                if (!zIsSimPinSecure) {
                     android.util.Log.i("KeyguardViewMediator", "PendingPinlock : set false");
                     KeyguardViewMediator.this.mPendingPinLock = false;
                 }
@@ -5306,7 +5216,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
                 Intent intent = KeyguardViewMediator.USER_PRESENT_INTENT;
-                KeyguardViewMediator keyguardViewMediator = KeyguardViewMediator.this;
+                KeyguardViewMediator keyguardViewMediator = this.f$0;
                 Intent intent2 = KeyguardViewMediator.USER_PRESENT_INTENT;
                 keyguardViewMediator.setShowingLocked((String) obj3, ((Boolean) obj).booleanValue(), ((Boolean) obj2).booleanValue());
                 return Unit.INSTANCE;
@@ -5322,7 +5232,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 KeyguardViewMediator keyguardViewMediator = this.f$0;
                 switch (i40) {
                     case 0:
@@ -5333,9 +5243,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     case 1:
                         Intent intent3 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         Intent intent4 = KeyguardViewMediator.USER_PRESENT_INTENT;
-                        int intValue = ((Integer) obj).intValue();
-                        if (intValue != 0) {
-                            keyguardViewMediator.mHelper.playSound$2(intValue);
+                        int iIntValue = ((Integer) obj).intValue();
+                        if (iIntValue != 0) {
+                            keyguardViewMediator.mHelper.playSound$2(iIntValue);
                         }
                         break;
                     case 2:
@@ -5344,7 +5254,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         keyguardViewMediator.mHiding = ((Boolean) obj).booleanValue();
                         break;
                     case 3:
-                        int intValue2 = ((Integer) obj).intValue();
+                        int iIntValue2 = ((Integer) obj).intValue();
                         Intent intent6 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         break;
                     case 4:
@@ -5382,7 +5292,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 KeyguardViewMediator keyguardViewMediator = this.f$0;
                 switch (i41) {
                     case 0:
@@ -5393,9 +5303,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     case 1:
                         Intent intent3 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         Intent intent4 = KeyguardViewMediator.USER_PRESENT_INTENT;
-                        int intValue = ((Integer) obj).intValue();
-                        if (intValue != 0) {
-                            keyguardViewMediator.mHelper.playSound$2(intValue);
+                        int iIntValue = ((Integer) obj).intValue();
+                        if (iIntValue != 0) {
+                            keyguardViewMediator.mHelper.playSound$2(iIntValue);
                         }
                         break;
                     case 2:
@@ -5404,7 +5314,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         keyguardViewMediator.mHiding = ((Boolean) obj).booleanValue();
                         break;
                     case 3:
-                        int intValue2 = ((Integer) obj).intValue();
+                        int iIntValue2 = ((Integer) obj).intValue();
                         Intent intent6 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         break;
                     case 4:
@@ -5664,7 +5574,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 KeyguardViewMediator keyguardViewMediator = this.f$0;
                 switch (i44) {
                     case 0:
@@ -5675,9 +5585,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     case 1:
                         Intent intent3 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         Intent intent4 = KeyguardViewMediator.USER_PRESENT_INTENT;
-                        int intValue = ((Integer) obj).intValue();
-                        if (intValue != 0) {
-                            keyguardViewMediator.mHelper.playSound$2(intValue);
+                        int iIntValue = ((Integer) obj).intValue();
+                        if (iIntValue != 0) {
+                            keyguardViewMediator.mHelper.playSound$2(iIntValue);
                         }
                         break;
                     case 2:
@@ -5686,7 +5596,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         keyguardViewMediator.mHiding = ((Boolean) obj).booleanValue();
                         break;
                     case 3:
-                        int intValue2 = ((Integer) obj).intValue();
+                        int iIntValue2 = ((Integer) obj).intValue();
                         Intent intent6 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         break;
                     case 4:
@@ -5950,7 +5860,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 KeyguardViewMediator keyguardViewMediator = this.f$0;
                 switch (i47) {
                     case 0:
@@ -5961,9 +5871,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     case 1:
                         Intent intent3 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         Intent intent4 = KeyguardViewMediator.USER_PRESENT_INTENT;
-                        int intValue = ((Integer) obj).intValue();
-                        if (intValue != 0) {
-                            keyguardViewMediator.mHelper.playSound$2(intValue);
+                        int iIntValue = ((Integer) obj).intValue();
+                        if (iIntValue != 0) {
+                            keyguardViewMediator.mHelper.playSound$2(iIntValue);
                         }
                         break;
                     case 2:
@@ -5972,7 +5882,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         keyguardViewMediator.mHiding = ((Boolean) obj).booleanValue();
                         break;
                     case 3:
-                        int intValue2 = ((Integer) obj).intValue();
+                        int iIntValue2 = ((Integer) obj).intValue();
                         Intent intent6 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         break;
                     case 4:
@@ -6008,7 +5918,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 KeyguardViewMediator keyguardViewMediator = this.f$0;
                 switch (i48) {
                     case 0:
@@ -6019,9 +5929,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     case 1:
                         Intent intent3 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         Intent intent4 = KeyguardViewMediator.USER_PRESENT_INTENT;
-                        int intValue = ((Integer) obj).intValue();
-                        if (intValue != 0) {
-                            keyguardViewMediator.mHelper.playSound$2(intValue);
+                        int iIntValue = ((Integer) obj).intValue();
+                        if (iIntValue != 0) {
+                            keyguardViewMediator.mHelper.playSound$2(iIntValue);
                         }
                         break;
                     case 2:
@@ -6030,7 +5940,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         keyguardViewMediator.mHiding = ((Boolean) obj).booleanValue();
                         break;
                     case 3:
-                        int intValue2 = ((Integer) obj).intValue();
+                        int iIntValue2 = ((Integer) obj).intValue();
                         Intent intent6 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         break;
                     case 4:
@@ -6066,7 +5976,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 KeyguardViewMediator keyguardViewMediator = this.f$0;
                 switch (i49) {
                     case 0:
@@ -6077,9 +5987,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     case 1:
                         Intent intent3 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         Intent intent4 = KeyguardViewMediator.USER_PRESENT_INTENT;
-                        int intValue = ((Integer) obj).intValue();
-                        if (intValue != 0) {
-                            keyguardViewMediator.mHelper.playSound$2(intValue);
+                        int iIntValue = ((Integer) obj).intValue();
+                        if (iIntValue != 0) {
+                            keyguardViewMediator.mHelper.playSound$2(iIntValue);
                         }
                         break;
                     case 2:
@@ -6088,7 +5998,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         keyguardViewMediator.mHiding = ((Boolean) obj).booleanValue();
                         break;
                     case 3:
-                        int intValue2 = ((Integer) obj).intValue();
+                        int iIntValue2 = ((Integer) obj).intValue();
                         Intent intent6 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         break;
                     case 4:
@@ -6124,7 +6034,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 KeyguardViewMediator keyguardViewMediator = this.f$0;
                 switch (i50) {
                     case 0:
@@ -6135,9 +6045,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     case 1:
                         Intent intent3 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         Intent intent4 = KeyguardViewMediator.USER_PRESENT_INTENT;
-                        int intValue = ((Integer) obj).intValue();
-                        if (intValue != 0) {
-                            keyguardViewMediator.mHelper.playSound$2(intValue);
+                        int iIntValue = ((Integer) obj).intValue();
+                        if (iIntValue != 0) {
+                            keyguardViewMediator.mHelper.playSound$2(iIntValue);
                         }
                         break;
                     case 2:
@@ -6146,7 +6056,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         keyguardViewMediator.mHiding = ((Boolean) obj).booleanValue();
                         break;
                     case 3:
-                        int intValue2 = ((Integer) obj).intValue();
+                        int iIntValue2 = ((Integer) obj).intValue();
                         Intent intent6 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         break;
                     case 4:
@@ -6182,7 +6092,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 KeyguardViewMediator keyguardViewMediator = this.f$0;
                 switch (i51) {
                     case 0:
@@ -6193,9 +6103,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     case 1:
                         Intent intent3 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         Intent intent4 = KeyguardViewMediator.USER_PRESENT_INTENT;
-                        int intValue = ((Integer) obj).intValue();
-                        if (intValue != 0) {
-                            keyguardViewMediator.mHelper.playSound$2(intValue);
+                        int iIntValue = ((Integer) obj).intValue();
+                        if (iIntValue != 0) {
+                            keyguardViewMediator.mHelper.playSound$2(iIntValue);
                         }
                         break;
                     case 2:
@@ -6204,7 +6114,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         keyguardViewMediator.mHiding = ((Boolean) obj).booleanValue();
                         break;
                     case 3:
-                        int intValue2 = ((Integer) obj).intValue();
+                        int iIntValue2 = ((Integer) obj).intValue();
                         Intent intent6 = KeyguardViewMediator.USER_PRESENT_INTENT;
                         break;
                     case 4:
@@ -6261,14 +6171,14 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         deviceConfigProxy.addOnPropertiesChangedListener("systemui", new Executor() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda3
             @Override // java.util.concurrent.Executor
             public final void execute(Runnable runnable) {
-                KeyguardViewMediator.AnonymousClass14.this.post(runnable);
+                anonymousClass14.post(runnable);
             }
         }, r9);
         this.mInGestureNavigationMode = QuickStepContract.isGesturalMode(navigationModeController.addListener(new NavigationModeController.ModeChangedListener() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda4
             @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
             public final void onNavigationModeChanged(int i52) {
                 Intent intent = KeyguardViewMediator.USER_PRESENT_INTENT;
-                KeyguardViewMediator keyguardViewMediator = KeyguardViewMediator.this;
+                KeyguardViewMediator keyguardViewMediator = this.f$0;
                 keyguardViewMediator.getClass();
                 keyguardViewMediator.mInGestureNavigationMode = QuickStepContract.isGesturalMode(i52);
             }
@@ -6297,9 +6207,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         this.mDreamViewModel = lazy8;
         this.mCommunalTransitionViewModel = lazy9;
         this.mOrderUnlockAndWake = context.getResources().getBoolean(android.R.bool.config_showBuiltinWirelessChargingAnim);
-        PowerManager.WakeLock newWakeLock = powerManager.newWakeLock(1, "show keyguard");
-        this.mShowKeyguardWakeLock = newWakeLock;
-        newWakeLock.setReferenceCounted(false);
+        PowerManager.WakeLock wakeLockNewWakeLock = powerManager.newWakeLock(1, "show keyguard");
+        this.mShowKeyguardWakeLock = wakeLockNewWakeLock;
+        wakeLockNewWakeLock.setReferenceCounted(false);
     }
 
     public static void initAlphaForAnimationTargets(RemoteAnimationTarget[] remoteAnimationTargetArr) {
@@ -6336,19 +6246,96 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00b9  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x015b A[Catch: RemoteException -> 0x017c, TryCatch #0 {RemoteException -> 0x017c, blocks: (B:63:0x0155, B:65:0x015b, B:68:0x0174, B:70:0x017e), top: B:62:0x0155 }] */
-    /* JADX WARN: Removed duplicated region for block: B:72:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00a5  */
+    /* JADX WARN: Removed duplicated region for block: B:75:0x0043 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void adjustStatusBarLocked$1(boolean r13, boolean r14) {
-        /*
-            Method dump skipped, instructions count: 405
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediator.adjustStatusBarLocked$1(boolean, boolean):void");
+    public final void adjustStatusBarLocked$1(boolean z, boolean z2) {
+        int i;
+        KeyguardEditModeController keyguardEditModeController;
+        if (this.mStatusBarManager == null) {
+            this.mStatusBarManager = (StatusBarManager) this.mContext.getSystemService("statusbar");
+        }
+        if (this.mStatusBarManager == null) {
+            android.util.Log.w("KeyguardViewMediator", "Could not get status bar manager");
+            return;
+        }
+        if (z2) {
+            if (UserManager.isVisibleBackgroundUsersEnabled()) {
+                ProcessWrapper processWrapper = this.mProcessWrapper;
+                processWrapper.getClass();
+                if (ProcessWrapper.isSystemUser() || processWrapper.mActivityManager.isProfileForeground(Process.myUserHandle())) {
+                    try {
+                        this.mStatusBarService.disableForUser(0, this.mStatusBarDisableToken, this.mContext.getPackageName(), this.mSelectedUserInteractor.getSelectedUserId());
+                    } catch (RemoteException e) {
+                        android.util.Log.d("KeyguardViewMediator", "Failed to force clear flags 0", e);
+                    }
+                } else {
+                    android.util.Log.d("KeyguardViewMediator", "Status bar manager is disabled for visible background users");
+                }
+            }
+        }
+        boolean z3 = this.mOccluded;
+        boolean z4 = this.mShowHomeOverLockscreen;
+        boolean z5 = this.mInGestureNavigationMode;
+        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.mHelper;
+        boolean zIsShowing$1 = keyguardViewMediatorHelperImpl.isShowing$1();
+        boolean z6 = ((KeyguardStateControllerImpl) keyguardViewMediatorHelperImpl.stateController).mKeyguardGoingAway;
+        if (!z6) {
+            i = 18874368;
+            if (!z && !((KeyguardViewMediator) keyguardViewMediatorHelperImpl.viewMediatorLazy.get()).isShowingAndNotOccluded()) {
+                if (!zIsShowing$1) {
+                    i = 0;
+                } else if (z3 && (((keyguardEditModeController = keyguardViewMediatorHelperImpl.editModeController) == null || !((KeyguardEditModeControllerImpl) keyguardEditModeController).isEditMode) && (!LsRune.SUBSCREEN_WATCHFACE || keyguardViewMediatorHelperImpl.foldControllerImpl.isFoldOpened()))) {
+                    i = 16777216;
+                }
+            }
+        }
+        if (zIsShowing$1 && keyguardViewMediatorHelperImpl.updateMonitor.isRemoteLockMode()) {
+            i |= EnterpriseDeviceManager.PASSWORD_QUALITY_ALPHANUMERIC;
+        }
+        if (keyguardViewMediatorHelperImpl.disableFlags == i) {
+            int[] iArr = {2097152, 16777216, 262144, 65536};
+            int i2 = keyguardViewMediatorHelperImpl.disabled1;
+            for (int i3 = 0; i3 < 4; i3++) {
+                int i4 = iArr[i3];
+                if ((i4 & i) == i4 && (i4 & i2) != i4) {
+                    CharsKt__CharJVMKt.checkRadix(16);
+                    String string = Integer.toString(i, 16);
+                    CharsKt__CharJVMKt.checkRadix(16);
+                    KeyguardViewMediatorHelperImpl.logD$1("isValidDisableFlags 0x" + string + " 0x" + Integer.toString(i2, 16));
+                }
+            }
+            CharsKt__CharJVMKt.checkRadix(16);
+            KeyguardViewMediatorHelperImpl.logD$1("adjustStatusBarLocked: no need to update flags=0x" + Integer.toString(i, 16) + " / showHomeOverLock=" + z4);
+            return;
+        }
+        keyguardViewMediatorHelperImpl.disableFlags = i;
+        boolean zIsSecure$2 = keyguardViewMediatorHelperImpl.isSecure$2();
+        CharsKt__CharJVMKt.checkRadix(16);
+        String string2 = Integer.toString(i, 16);
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("adjustStatusBarLocked: goingAway=", " showing=", " occluded=", z6, zIsShowing$1);
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z3, " isSecure=", zIsSecure$2, " force=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z, " showHomeOverLock=", z4, " gestureNaviMode=");
+        sbM.append(z5);
+        sbM.append(" --> flags=0x");
+        sbM.append(string2);
+        KeyguardViewMediatorHelperImpl.logD$1(sbM.toString());
+        try {
+            IStatusBarService barService = keyguardViewMediatorHelperImpl.getBarService();
+            if (barService != null) {
+                keyguardViewMediatorHelperImpl.getHandler$1().removeMessages(VolteConstants.ErrorCode.PPP_STATUS_CLOSE_EVENT);
+                if (((KeyguardViewController) keyguardViewMediatorHelperImpl.viewControllerLazy.get()).isLaunchEditMode() && z6) {
+                    keyguardViewMediatorHelperImpl.getHandler$1().sendEmptyMessage(VolteConstants.ErrorCode.PPP_STATUS_CLOSE_EVENT);
+                } else {
+                    barService.disable(i, keyguardViewMediatorHelperImpl.token, keyguardViewMediatorHelperImpl.context.getPackageName());
+                }
+            }
+        } catch (RemoteException e2) {
+            Slog.w("KeyguardViewMediator", "adjustStatusBarLocked - disable failed", e2);
+            KeyguardDumpLog.log("KeyguardViewMediator", LogLevel.WARNING, "adjustStatusBarLocked - disable failed", e2);
+        }
     }
 
     public void cancelKeyguardExitAnimation() {
@@ -6360,8 +6347,8 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
     public final InteractionJankMonitor.Configuration.Builder createInteractionJankMonitorConf$1(int i, String str) {
         Log.d("KeyguardViewMediator", str != null ? str : "null");
-        InteractionJankMonitor.Configuration.Builder withView = InteractionJankMonitor.Configuration.Builder.withView(i, ((KeyguardViewController) this.mKeyguardViewControllerLazy.get()).getViewRootImpl().getView());
-        return str != null ? withView.setTag(str) : withView;
+        InteractionJankMonitor.Configuration.Builder builderWithView = InteractionJankMonitor.Configuration.Builder.withView(i, ((KeyguardViewController) this.mKeyguardViewControllerLazy.get()).getViewRootImpl().getView());
+        return str != null ? builderWithView.setTag(str) : builderWithView;
     }
 
     public void dismiss(IKeyguardDismissCallback iKeyguardDismissCallback, CharSequence charSequence) {
@@ -6378,156 +6365,72 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x0075, code lost:
-    
-        if (r3 <= 0) goto L36;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00dd A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x00a4 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void doKeyguardLaterForChildProfilesLocked$1() {
-        /*
-            r15 = this;
-            com.android.systemui.settings.UserTracker r0 = r15.mUserTracker
-            com.android.systemui.settings.UserTrackerImpl r0 = (com.android.systemui.settings.UserTrackerImpl) r0
-            java.util.List r0 = r0.getUserProfiles()
-            java.util.Iterator r0 = r0.iterator()
-        Lc:
-            boolean r1 = r0.hasNext()
-            if (r1 == 0) goto Lea
-            java.lang.Object r1 = r0.next()
-            android.content.pm.UserInfo r1 = (android.content.pm.UserInfo) r1
-            boolean r2 = r1.isEnabled()
-            if (r2 != 0) goto L1f
-            goto Lc
-        L1f:
-            int r1 = r1.id
-            com.android.internal.widget.LockPatternUtils r2 = r15.mLockPatternUtils
-            boolean r2 = r2.isSeparateProfileChallengeEnabled(r1)
-            if (r2 == 0) goto Lc
-            com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl r2 = r15.mHelper
-            r2.getClass()
-            boolean r3 = com.samsung.android.knox.SemPersonaManager.isSecureFolderId(r1)
-            r4 = -1
-            java.lang.String r5 = "knox_screen_off_timeout"
-            if (r3 == 0) goto L42
-            android.content.Context r3 = r2.context
-            android.content.ContentResolver r3 = r3.getContentResolver()
-            int r3 = android.provider.Settings.System.getIntForUser(r3, r5, r4, r1)
-            goto L4c
-        L42:
-            android.content.Context r3 = r2.context
-            android.content.ContentResolver r3 = r3.getContentResolver()
-            int r3 = android.provider.Settings.Secure.getIntForUser(r3, r5, r4, r1)
-        L4c:
-            long r3 = (long) r3
-            com.android.internal.widget.LockPatternUtils r5 = r2.lockPatternUtils
-            android.app.admin.DevicePolicyManager r5 = r5.getDevicePolicyManager()
-            r6 = 0
-            long r5 = r5.getMaximumTimeToLock(r6, r1)
-            r7 = 0
-            int r9 = (r5 > r7 ? 1 : (r5 == r7 ? 0 : -1))
-            r10 = 1
-            if (r9 <= 0) goto L61
-            r9 = r10
-            goto L62
-        L61:
-            r9 = 0
-        L62:
-            r11 = -2
-            if (r9 == 0) goto L6f
-            int r13 = (r3 > r7 ? 1 : (r3 == r7 ? 0 : -1))
-            if (r13 <= 0) goto L6f
-            long r3 = java.lang.Math.min(r5, r3)
-            goto L78
-        L6f:
-            if (r9 == 0) goto L73
-            r3 = r5
-            goto L78
-        L73:
-            int r5 = (r3 > r7 ? 1 : (r3 == r7 ? 0 : -1))
-            if (r5 > 0) goto L78
-            goto La0
-        L78:
-            int r5 = (r3 > r7 ? 1 : (r3 == r7 ? 0 : -1))
-            if (r5 == 0) goto L8c
-            r5 = -1
-            int r5 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
-            if (r5 == 0) goto L8c
-            int r5 = (r3 > r11 ? 1 : (r3 == r11 ? 0 : -1))
-            if (r5 == 0) goto L8c
-            r5 = 5000(0x1388, double:2.4703E-320)
-            long r3 = java.lang.Math.max(r3, r5)
-        L8c:
-            long r5 = android.os.SystemClock.uptimeMillis()
-            android.os.PowerManager r2 = r2.pm
-            long r13 = r2.getLastUserActivityTime(r1)
-            long r5 = r5 - r13
-            long r5 = java.lang.Math.max(r5, r7)
-            long r3 = r3 - r5
-            long r3 = java.lang.Math.max(r3, r7)
-        La0:
-            int r2 = (r3 > r7 ? 1 : (r3 == r7 ? 0 : -1))
-            if (r2 <= 0) goto Ldd
-            com.android.systemui.util.time.SystemClock r2 = r15.mSystemClock
-            long r5 = r2.elapsedRealtime()
-            long r5 = r5 + r3
-            android.content.Intent r2 = new android.content.Intent
-            java.lang.String r3 = "com.android.internal.policy.impl.PhoneWindowManager.DELAYED_LOCK"
-            r2.<init>(r3)
-            android.content.Context r3 = r15.mContext
-            java.lang.String r3 = r3.getPackageName()
-            r2.setPackage(r3)
-            java.lang.String r3 = "seq"
-            int r4 = r15.mDelayedProfileShowingSequence
-            r2.putExtra(r3, r4)
-            java.lang.String r3 = "android.intent.extra.USER_ID"
-            r2.putExtra(r3, r1)
-            r3 = 268435456(0x10000000, float:2.524355E-29)
-            r2.addFlags(r3)
-            android.content.Context r3 = r15.mContext
-            r4 = 335544320(0x14000000, float:6.4623485E-27)
-            android.app.PendingIntent r1 = android.app.PendingIntent.getBroadcast(r3, r1, r2, r4)
-            android.app.AlarmManager r2 = r15.mAlarmManager
-            r3 = 2
-            r2.setExactAndAllowWhileIdle(r3, r5, r1)
-            goto Lc
-        Ldd:
-            if (r2 == 0) goto Le3
-            int r2 = (r3 > r11 ? 1 : (r3 == r11 ? 0 : -1))
-            if (r2 != 0) goto Lc
-        Le3:
-            android.app.trust.TrustManager r2 = r15.mTrustManager
-            r2.setDeviceLockedForUser(r1, r10)
-            goto Lc
-        Lea:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediator.doKeyguardLaterForChildProfilesLocked$1():void");
+        for (UserInfo userInfo : ((UserTrackerImpl) this.mUserTracker).getUserProfiles()) {
+            if (userInfo.isEnabled()) {
+                int i = userInfo.id;
+                if (this.mLockPatternUtils.isSeparateProfileChallengeEnabled(i)) {
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.mHelper;
+                    keyguardViewMediatorHelperImpl.getClass();
+                    long intForUser = SemPersonaManager.isSecureFolderId(i) ? Settings.System.getIntForUser(keyguardViewMediatorHelperImpl.context.getContentResolver(), "knox_screen_off_timeout", -1, i) : Settings.Secure.getIntForUser(keyguardViewMediatorHelperImpl.context.getContentResolver(), "knox_screen_off_timeout", -1, i);
+                    long maximumTimeToLock = keyguardViewMediatorHelperImpl.lockPatternUtils.getDevicePolicyManager().getMaximumTimeToLock(null, i);
+                    boolean z = maximumTimeToLock > 0;
+                    if (z && intForUser > 0) {
+                        intForUser = Math.min(maximumTimeToLock, intForUser);
+                    } else if (z) {
+                        intForUser = maximumTimeToLock;
+                    } else {
+                        if (intForUser > 0) {
+                        }
+                        if (intForUser <= 0) {
+                            long jElapsedRealtime = this.mSystemClock.elapsedRealtime() + intForUser;
+                            Intent intent = new Intent("com.android.internal.policy.impl.PhoneWindowManager.DELAYED_LOCK");
+                            intent.setPackage(this.mContext.getPackageName());
+                            intent.putExtra("seq", this.mDelayedProfileShowingSequence);
+                            intent.putExtra("android.intent.extra.USER_ID", i);
+                            intent.addFlags(268435456);
+                            this.mAlarmManager.setExactAndAllowWhileIdle(2, jElapsedRealtime, PendingIntent.getBroadcast(this.mContext, i, intent, 335544320));
+                        } else if (intForUser == 0 || intForUser == -2) {
+                            this.mTrustManager.setDeviceLockedForUser(i, true);
+                        }
+                    }
+                    if (intForUser != 0 && intForUser != -1 && intForUser != -2) {
+                        intForUser = Math.max(intForUser, 5000L);
+                    }
+                    intForUser = Math.max(intForUser - Math.max(android.os.SystemClock.uptimeMillis() - keyguardViewMediatorHelperImpl.pm.getLastUserActivityTime(i), 0L), 0L);
+                    if (intForUser <= 0) {
+                    }
+                }
+            }
+        }
     }
 
     public final void doKeyguardLaterLocked$1(long j) {
-        boolean isLockscreenDisabled;
+        boolean zIsLockscreenDisabled;
         KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.mHelper;
         keyguardViewMediatorHelperImpl.getClass();
         boolean z = LsRune.COVER_SUPPORTED;
         if (!z || keyguardViewMediatorHelperImpl.doKeyguardPendingIntent == null) {
-            isLockscreenDisabled = keyguardViewMediatorHelperImpl.updateMonitor.isLockscreenDisabled();
+            zIsLockscreenDisabled = keyguardViewMediatorHelperImpl.updateMonitor.isLockscreenDisabled();
         } else {
             Log.d("KeyguardViewMediator", "doKeyguardLaterLocked is already in process");
-            isLockscreenDisabled = true;
+            zIsLockscreenDisabled = true;
         }
-        if (isLockscreenDisabled) {
+        if (zIsLockscreenDisabled) {
             return;
         }
-        long elapsedRealtime = this.mSystemClock.elapsedRealtime() + j;
+        long jElapsedRealtime = this.mSystemClock.elapsedRealtime() + j;
         Intent intent = new Intent("com.android.internal.policy.impl.PhoneWindowManager.DELAYED_KEYGUARD");
         intent.setPackage(this.mContext.getPackageName());
         intent.putExtra("seq", this.mDelayedShowingSequence);
         intent.addFlags(268435456);
         PendingIntent broadcast = PendingIntent.getBroadcast(this.mContext, 0, intent, 335544320);
-        this.mAlarmManager.setExactAndAllowWhileIdle(2, elapsedRealtime, broadcast);
+        this.mAlarmManager.setExactAndAllowWhileIdle(2, jElapsedRealtime, broadcast);
         Log.d("KeyguardViewMediator", "setting alarm to turn off keyguard, seq = %s, timeout = %d", Integer.valueOf(this.mDelayedShowingSequence), Long.valueOf(j));
         doKeyguardLaterForChildProfilesLocked$1();
         Objects.requireNonNull(keyguardViewMediatorHelperImpl);
@@ -6788,18 +6691,90 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0099 A[Catch: all -> 0x0054, TryCatch #0 {all -> 0x0054, blocks: (B:12:0x002f, B:14:0x0049, B:15:0x0052, B:18:0x0057, B:20:0x005c, B:22:0x0064, B:25:0x006f, B:27:0x0072, B:29:0x0076, B:31:0x007a, B:33:0x0085, B:38:0x0095, B:40:0x0099, B:41:0x00a0, B:42:0x00cd, B:44:0x00d1, B:46:0x00e8, B:49:0x00d7, B:51:0x00db, B:52:0x0091, B:54:0x00a8), top: B:11:0x002f }] */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00d1 A[Catch: all -> 0x0054, TryCatch #0 {all -> 0x0054, blocks: (B:12:0x002f, B:14:0x0049, B:15:0x0052, B:18:0x0057, B:20:0x005c, B:22:0x0064, B:25:0x006f, B:27:0x0072, B:29:0x0076, B:31:0x007a, B:33:0x0085, B:38:0x0095, B:40:0x0099, B:41:0x00a0, B:42:0x00cd, B:44:0x00d1, B:46:0x00e8, B:49:0x00d7, B:51:0x00db, B:52:0x0091, B:54:0x00a8), top: B:11:0x002f }] */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0091 A[Catch: all -> 0x0054, TryCatch #0 {all -> 0x0054, blocks: (B:13:0x002f, B:15:0x0049, B:16:0x0052, B:20:0x0057, B:22:0x005c, B:24:0x0064, B:28:0x006f, B:29:0x0072, B:31:0x0076, B:33:0x007a, B:35:0x0085, B:42:0x0095, B:44:0x0099, B:45:0x00a0, B:47:0x00cd, B:49:0x00d1, B:54:0x00e8, B:51:0x00d7, B:53:0x00db, B:40:0x0091, B:46:0x00a8), top: B:59:0x002f }] */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x0099 A[Catch: all -> 0x0054, TryCatch #0 {all -> 0x0054, blocks: (B:13:0x002f, B:15:0x0049, B:16:0x0052, B:20:0x0057, B:22:0x005c, B:24:0x0064, B:28:0x006f, B:29:0x0072, B:31:0x0076, B:33:0x007a, B:35:0x0085, B:42:0x0095, B:44:0x0099, B:45:0x00a0, B:47:0x00cd, B:49:0x00d1, B:54:0x00e8, B:51:0x00d7, B:53:0x00db, B:40:0x0091, B:46:0x00a8), top: B:59:0x002f }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void handleHide$1() {
-        /*
-            Method dump skipped, instructions count: 239
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediator.handleHide$1():void");
+        Trace.beginSection("KeyguardViewMediator#handleHide");
+        if (this.mAodShowing) {
+            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.mHelper;
+            if (!keyguardViewMediatorHelperImpl.fastUnlockController.isFastWakeAndUnlockMode() && (!LsRune.KEYGUARD_SUB_DISPLAY_LOCK || !keyguardViewMediatorHelperImpl.foldControllerImpl.isUnlockOnFoldOpened())) {
+                this.mPM.wakeUp(this.mSystemClock.uptimeMillis(), 4, "com.android.systemui:BOUNCER_DOZING");
+            }
+        }
+        synchronized (this) {
+            try {
+                android.util.Log.d("KeyguardViewMediator", "handleHide");
+                final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = this.mHelper;
+                Objects.requireNonNull(keyguardViewMediatorHelperImpl2);
+                BooleanSupplier booleanSupplier = new BooleanSupplier() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda72
+                    @Override // java.util.function.BooleanSupplier
+                    public final boolean getAsBoolean() {
+                        KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = keyguardViewMediatorHelperImpl2;
+                        boolean zIsKeyguardHiding = keyguardViewMediatorHelperImpl3.isKeyguardHiding();
+                        boolean zIsUnlockStartedOrFinished = keyguardViewMediatorHelperImpl3.isUnlockStartedOrFinished();
+                        boolean z = false;
+                        boolean z2 = !keyguardViewMediatorHelperImpl3.isShowing$1() && ((SecNotificationShadeWindowControllerHelperImpl) ((SecNotificationShadeWindowControllerHelper) keyguardViewMediatorHelperImpl3.shadeWindowControllerHelper$delegate.getValue())).getCurrentState().keyguardShowing;
+                        boolean z3 = !keyguardViewMediatorHelperImpl3.isShowing$1() && ((KeyguardViewMediator) keyguardViewMediatorHelperImpl3.viewMediatorLazy.get()).isInputRestricted();
+                        if (zIsKeyguardHiding || (zIsUnlockStartedOrFinished && !z2 && !z3)) {
+                            z = true;
+                        }
+                        if (z) {
+                            StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("cancel handleHide ", " ", " ", zIsKeyguardHiding, zIsUnlockStartedOrFinished);
+                            sbM.append(z2);
+                            sbM.append(" ");
+                            sbM.append(z3);
+                            KeyguardViewMediatorHelperImpl.logD$1(sbM.toString());
+                        }
+                        if (z) {
+                            Lazy lazy = keyguardViewMediatorHelperImpl3.biometricUnlockControllerLazy;
+                            if (((BiometricUnlockController) lazy.get()).isWakeAndUnlock()) {
+                                ((BiometricUnlockController) lazy.get()).finishKeyguardFadingAway();
+                            }
+                        }
+                        return z;
+                    }
+                };
+                boolean z = Rune.SYSUI_MULTI_SIM;
+                if (booleanSupplier.getAsBoolean()) {
+                    android.util.Log.d("KeyguardViewMediator", "handleHide: mWakeAndUnlocking set false");
+                    this.mWakeAndUnlocking = false;
+                    return;
+                }
+                if (!this.mWakeAndUnlocking) {
+                    setUnlockAndWakeFromDream$1(0, this.mStatusBarStateController.isDreaming() && this.mPM.isInteractive());
+                }
+                if (this.mBootCompleted && this.mShowing) {
+                    KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = this.mHelper;
+                    boolean z2 = this.mOccluded;
+                    keyguardViewMediatorHelperImpl3.getClass();
+                    if ((!LsRune.KEYGUARD_SUB_DISPLAY_COVER || keyguardViewMediatorHelperImpl3.foldControllerImpl.isFoldOpened()) && !z2) {
+                    }
+                    if (this.mUnlockingAndWakingFromDream) {
+                    }
+                    this.mHiding = true;
+                    this.mKeyguardGoingAwayRunnable.run();
+                } else if (this.mUnlockingAndWakingFromDream) {
+                    if (this.mUnlockingAndWakingFromDream) {
+                        android.util.Log.d("KeyguardViewMediator", "hiding keyguard before waking from dream");
+                    }
+                    this.mHiding = true;
+                    this.mKeyguardGoingAwayRunnable.run();
+                } else {
+                    KeyguardWmStateRefactor keyguardWmStateRefactor = KeyguardWmStateRefactor.INSTANCE;
+                    ((KeyguardViewController) this.mKeyguardViewControllerLazy.get()).hide(this.mSystemClock.uptimeMillis() + this.mHideAnimation.getStartOffset(), this.mHideAnimation.getDuration());
+                    onKeyguardExitFinished("Hiding keyguard while occluded. Just hide the keyguard view and exit.");
+                }
+                if ((this.mDreamOverlayShowing || this.mUpdateMonitor.mIsDreaming) && !this.mOrderUnlockAndWake) {
+                    this.mPM.wakeUp(this.mSystemClock.uptimeMillis(), 4, "com.android.systemui:UNLOCK_DREAMING");
+                }
+                Trace.endSection();
+            } catch (Throwable th) {
+                throw th;
+            }
+        }
     }
 
     public final void handleKeyguardDone$1() {
@@ -6830,29 +6805,92 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         keyguardViewMediatorHelperImpl.onAbortKeyguardDone();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0099 A[Catch: all -> 0x0042, TryCatch #0 {all -> 0x0042, blocks: (B:11:0x0032, B:13:0x0036, B:14:0x0040, B:17:0x0045, B:19:0x0057, B:21:0x006b, B:23:0x008b, B:28:0x0099, B:29:0x00bf, B:31:0x00df, B:33:0x00e7, B:35:0x00eb, B:37:0x00f8, B:39:0x0122, B:41:0x0134, B:43:0x0139, B:46:0x0142, B:47:0x0146, B:48:0x0157, B:49:0x015f, B:57:0x00f1, B:58:0x00f5, B:60:0x005b, B:62:0x0065), top: B:10:0x0032, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00df A[Catch: all -> 0x0042, TryCatch #0 {all -> 0x0042, blocks: (B:11:0x0032, B:13:0x0036, B:14:0x0040, B:17:0x0045, B:19:0x0057, B:21:0x006b, B:23:0x008b, B:28:0x0099, B:29:0x00bf, B:31:0x00df, B:33:0x00e7, B:35:0x00eb, B:37:0x00f8, B:39:0x0122, B:41:0x0134, B:43:0x0139, B:46:0x0142, B:47:0x0146, B:48:0x0157, B:49:0x015f, B:57:0x00f1, B:58:0x00f5, B:60:0x005b, B:62:0x0065), top: B:10:0x0032, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0122 A[Catch: all -> 0x0042, TryCatch #0 {all -> 0x0042, blocks: (B:11:0x0032, B:13:0x0036, B:14:0x0040, B:17:0x0045, B:19:0x0057, B:21:0x006b, B:23:0x008b, B:28:0x0099, B:29:0x00bf, B:31:0x00df, B:33:0x00e7, B:35:0x00eb, B:37:0x00f8, B:39:0x0122, B:41:0x0134, B:43:0x0139, B:46:0x0142, B:47:0x0146, B:48:0x0157, B:49:0x015f, B:57:0x00f1, B:58:0x00f5, B:60:0x005b, B:62:0x0065), top: B:10:0x0032, inners: #1 }] */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00f5 A[Catch: all -> 0x0042, TryCatch #0 {all -> 0x0042, blocks: (B:11:0x0032, B:13:0x0036, B:14:0x0040, B:17:0x0045, B:19:0x0057, B:21:0x006b, B:23:0x008b, B:28:0x0099, B:29:0x00bf, B:31:0x00df, B:33:0x00e7, B:35:0x00eb, B:37:0x00f8, B:39:0x0122, B:41:0x0134, B:43:0x0139, B:46:0x0142, B:47:0x0146, B:48:0x0157, B:49:0x015f, B:57:0x00f1, B:58:0x00f5, B:60:0x005b, B:62:0x0065), top: B:10:0x0032, inners: #1 }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void handleShowInner(android.os.Bundle r10) {
-        /*
-            Method dump skipped, instructions count: 375
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.KeyguardViewMediator.handleShowInner(android.os.Bundle):void");
+    public final void handleShowInner(Bundle bundle) {
+        CoverState coverState;
+        boolean z = bundle != null && bundle.getBoolean("show_dismissible", false);
+        int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
+        if (z) {
+            this.mUpdateMonitor.setForceIsDismissibleKeyguard(true);
+        } else if (this.mLockPatternUtils.isSecure(selectedUserId)) {
+            this.mLockPatternUtils.getDevicePolicyManager().reportKeyguardSecured(selectedUserId);
+        }
+        synchronized (this) {
+            try {
+                if (!this.mSystemReady) {
+                    android.util.Log.d("KeyguardViewMediator", "ignoring handleShow because system is not ready.");
+                    notifyLockNowCallback();
+                    return;
+                }
+                android.util.Log.d("KeyguardViewMediator", "handleShow");
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.mHelper;
+                Objects.requireNonNull(keyguardViewMediatorHelperImpl);
+                boolean z2 = Rune.SYSUI_MULTI_SIM;
+                if (LsRune.KEYGUARD_SUB_DISPLAY_LOCK || LsRune.KEYGUARD_SUB_DISPLAY_COVER) {
+                    KeyguardFoldControllerImpl keyguardFoldControllerImpl = keyguardViewMediatorHelperImpl.foldControllerImpl;
+                    if (keyguardFoldControllerImpl.initShowTime == 0) {
+                        keyguardFoldControllerImpl.initShowTime = System.currentTimeMillis();
+                    }
+                }
+                keyguardViewMediatorHelperImpl.fastUnlockController.reset();
+                keyguardViewMediatorHelperImpl.updateMonitor.setUnlockingKeyguard(false);
+                keyguardViewMediatorHelperImpl.hidingByDisabled = false;
+                this.mKeyguardExitAnimationRunner = null;
+                this.mWakeAndUnlocking = false;
+                setUnlockAndWakeFromDream$1(1, false);
+                setPendingLock(false);
+                this.mHelper.setShowingOptions(bundle);
+                boolean z3 = this.mHiding || ((KeyguardStateControllerImpl) this.mKeyguardStateController).mKeyguardGoingAway;
+                if (z3) {
+                    android.util.Log.d("KeyguardViewMediator", "Forcing setShowingLocked because one of these is true:mHiding=" + this.mHiding + ", keyguardGoingAway=" + ((KeyguardStateControllerImpl) this.mKeyguardStateController).mKeyguardGoingAway + ", which means we're showing in the middle of hiding.");
+                }
+                setShowingLocked("handleShowInner", true, z3);
+                this.mHiding = false;
+                KeyguardWmStateRefactor keyguardWmStateRefactor = KeyguardWmStateRefactor.INSTANCE;
+                ((KeyguardViewController) this.mKeyguardViewControllerLazy.get()).show(bundle);
+                resetKeyguardDonePendingLocked$1();
+                this.mHideAnimationRun = false;
+                adjustStatusBarLocked$1(false, false);
+                if (!LsRune.COVER_SUPPORTED || (coverState = this.mUpdateMonitor.getCoverState()) == null || !coverState.attached || coverState.getSwitchState()) {
+                    userActivity();
+                }
+                this.mUpdateMonitor.setKeyguardGoingAway(false);
+                ((KeyguardViewController) this.mKeyguardViewControllerLazy.get()).setKeyguardGoingAwayState(false);
+                this.mShowKeyguardWakeLock.release();
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = this.mHelper;
+                Objects.requireNonNull(keyguardViewMediatorHelperImpl2);
+                if (!keyguardViewMediatorHelperImpl2.updateMonitor.getUserHasTrust(((UserTrackerImpl) keyguardViewMediatorHelperImpl2.userTracker).getUserId())) {
+                    int selectedUserId2 = ((KnoxStateMonitorImpl) keyguardViewMediatorHelperImpl2.knoxStateMonitor).mSelectedUserInteractor.getSelectedUserId();
+                    if (SemPersonaManager.isDoEnabled(selectedUserId2)) {
+                        android.util.Log.d("KnoxStateMonitorImpl", "lockSdp :: Device Owner has been locked");
+                        try {
+                            SdpAuthenticator.getInstance().onDeviceOwnerLocked(selectedUserId2);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        android.util.Log.d("KnoxStateMonitorImpl", "lockSdp :: Maybe keyguard shown as user " + selectedUserId2);
+                    }
+                }
+                KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl3 = this.mHelper;
+                Objects.requireNonNull(keyguardViewMediatorHelperImpl3);
+                keyguardViewMediatorHelperImpl3.onSecurityPropertyUpdated();
+                if (!this.mOccluded || this.mKeyguardDisplayManager.isDesktopMode()) {
+                    this.mKeyguardDisplayManager.show();
+                }
+                scheduleNonStrongBiometricIdleTimeout$1();
+            } catch (Throwable th) {
+                throw th;
+            }
+        }
     }
 
     public final void handleStartKeyguardExitAnimationInner(long j, long j2, final RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, final IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
         final int i = 2;
         final int i2 = 0;
         final int i3 = 1;
-        StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("handleStartKeyguardExitAnimation startTime=", j, " fadeoutDuration=");
-        m.append(j2);
-        android.util.Log.d("KeyguardViewMediator", m.toString());
+        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("handleStartKeyguardExitAnimation startTime=", j, " fadeoutDuration=");
+        sbM.append(j2);
+        android.util.Log.d("KeyguardViewMediator", sbM.toString());
         int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
         KeyguardWmStateRefactor keyguardWmStateRefactor = KeyguardWmStateRefactor.INSTANCE;
         if (this.mGoingAwayRequestedForUserId != selectedUserId) {
@@ -6927,7 +6965,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                 this.mContext.getMainExecutor().execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda82
                     @Override // java.lang.Runnable
                     public final void run() {
-                        final KeyguardViewMediator keyguardViewMediator = KeyguardViewMediator.this;
+                        final KeyguardViewMediator keyguardViewMediator = this.f$0;
                         final IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback3 = iRemoteAnimationFinishedCallback;
                         RemoteAnimationTarget[] remoteAnimationTargetArr4 = remoteAnimationTargetArr;
                         if (iRemoteAnimationFinishedCallback3 == null) {
@@ -6951,11 +6989,11 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         }
                         SyncRtSurfaceTransactionApplier syncRtSurfaceTransactionApplier = new SyncRtSurfaceTransactionApplier(((KeyguardViewController) keyguardViewMediator.mKeyguardViewControllerLazy.get()).getViewRootImpl().getView());
                         RemoteAnimationTarget remoteAnimationTarget = remoteAnimationTargetArr4[0];
-                        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                        ofFloat.setDuration(400L);
-                        ofFloat.setInterpolator(Interpolators.LINEAR);
-                        ofFloat.addUpdateListener(new KeyguardViewMediator$$ExternalSyntheticLambda84(remoteAnimationTarget, syncRtSurfaceTransactionApplier, 0));
-                        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardViewMediator.17
+                        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                        valueAnimatorOfFloat.setDuration(400L);
+                        valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+                        valueAnimatorOfFloat.addUpdateListener(new KeyguardViewMediator$$ExternalSyntheticLambda84(remoteAnimationTarget, syncRtSurfaceTransactionApplier, 0));
+                        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.KeyguardViewMediator.17
                             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                             public final void onAnimationCancel(Animator animator) {
                                 try {
@@ -6980,7 +7018,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                                 }
                             }
                         });
-                        ofFloat.start();
+                        valueAnimatorOfFloat.start();
                     }
                 });
                 onKeyguardExitFinished("remote animation disabled");
@@ -7361,9 +7399,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     public final void onKeyguardExitFinished(String str) {
         int i;
         android.util.Log.d("KeyguardViewMediator", "onKeyguardExitFinished()");
-        boolean equals = TelephonyManager.EXTRA_STATE_IDLE.equals(this.mPhoneState);
+        boolean zEquals = TelephonyManager.EXTRA_STATE_IDLE.equals(this.mPhoneState);
         KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.mHelper;
-        if (equals && (i = this.mUnlockSoundId) != 0) {
+        if (zEquals && (i = this.mUnlockSoundId) != 0) {
             keyguardViewMediatorHelperImpl.playSound$2(i);
         }
         setShowingLocked("onKeyguardExitFinished: ".concat(str), false, false);
@@ -7396,31 +7434,30 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r10v0, types: [com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda9] */
     public void onStartedGoingToSleep(int i) {
-        boolean z;
         int i2;
         int i3;
         synchronized (this) {
             try {
                 final KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.mHelper;
                 Objects.requireNonNull(keyguardViewMediatorHelperImpl);
-                boolean z2 = Rune.SYSUI_MULTI_SIM;
+                boolean z = Rune.SYSUI_MULTI_SIM;
                 keyguardViewMediatorHelperImpl.enableLooperLogController(5, 3000L);
                 keyguardViewMediatorHelperImpl.lastSleepReason = i;
                 if (LsRune.AOD_FULLSCREEN && keyguardViewMediatorHelperImpl.aodAmbientWallpaperHelper.isAODFullScreenMode()) {
                     keyguardViewMediatorHelperImpl.getHandler$1().post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$onStartedGoingToSleep$1
+                        /* JADX WARN: Removed duplicated region for block: B:9:0x0025  */
                         @Override // java.lang.Runnable
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
                         public final void run() {
-                            boolean z3;
-                            SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper = KeyguardViewMediatorHelperImpl.this.unlockedScreenOffAnimationHelper;
+                            boolean z2;
+                            SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper = keyguardViewMediatorHelperImpl.unlockedScreenOffAnimationHelper;
                             if (secUnlockedScreenOffAnimationHelper.statusBarStateControllerImpl.mState == 0) {
                                 Lazy lazy = secUnlockedScreenOffAnimationHelper.keyguardVisibilityMonitorLazy;
-                                if (((KeyguardVisibilityMonitor) lazy.get()).isVisible() && ((KeyguardVisibilityMonitor) lazy.get()).panelState == 2) {
-                                    z3 = true;
-                                    secUnlockedScreenOffAnimationHelper.isPanelOpenedOnGoingToSleep = z3;
-                                }
+                                z2 = ((KeyguardVisibilityMonitor) lazy.get()).isVisible() && ((KeyguardVisibilityMonitor) lazy.get()).panelState == 2;
                             }
-                            z3 = false;
-                            secUnlockedScreenOffAnimationHelper.isPanelOpenedOnGoingToSleep = z3;
+                            secUnlockedScreenOffAnimationHelper.isPanelOpenedOnGoingToSleep = z2;
                         }
                     });
                 }
@@ -7431,47 +7468,26 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                 this.mPowerGestureIntercepted = false;
                 this.mGoingToSleep = true;
                 int selectedUserId = this.mSelectedUserInteractor.getSelectedUserId();
-                if (!this.mLockPatternUtils.getPowerButtonInstantlyLocks(selectedUserId) && this.mLockPatternUtils.isSecure(selectedUserId)) {
-                    z = false;
-                    final long lockTimeout$1 = getLockTimeout$1(this.mSelectedUserInteractor.getSelectedUserId());
-                    this.mLockLater = false;
-                    if (this.mShowing || ((KeyguardStateControllerImpl) this.mKeyguardStateController).mKeyguardGoingAway) {
-                        i2 = i;
-                        this.mHelper.updatePendingLock(i2, lockTimeout$1, z, selectedUserId, new KeyguardViewMediator$$ExternalSyntheticLambda0(this, 4), new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda9
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                KeyguardViewMediator keyguardViewMediator = KeyguardViewMediator.this;
-                                long j = lockTimeout$1;
-                                Intent intent = KeyguardViewMediator.USER_PRESENT_INTENT;
-                                keyguardViewMediator.doKeyguardLaterLocked$1(j);
-                                keyguardViewMediator.mLockLater = true;
-                            }
-                        });
-                    } else {
-                        this.mPendingReset = true;
-                        i2 = i;
-                    }
-                    if (this.mPendingLock && (i3 = this.mLockSoundId) != 0) {
-                        this.mHelper.playSound$2(i3);
-                    }
-                }
-                z = true;
-                final long lockTimeout$12 = getLockTimeout$1(this.mSelectedUserInteractor.getSelectedUserId());
+                boolean z2 = this.mLockPatternUtils.getPowerButtonInstantlyLocks(selectedUserId) || !this.mLockPatternUtils.isSecure(selectedUserId);
+                final long lockTimeout$1 = getLockTimeout$1(this.mSelectedUserInteractor.getSelectedUserId());
                 this.mLockLater = false;
-                if (this.mShowing) {
+                if (!this.mShowing || ((KeyguardStateControllerImpl) this.mKeyguardStateController).mKeyguardGoingAway) {
+                    i2 = i;
+                    this.mHelper.updatePendingLock(i2, lockTimeout$1, z2, selectedUserId, new KeyguardViewMediator$$ExternalSyntheticLambda0(this, 4), new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda9
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            KeyguardViewMediator keyguardViewMediator = this.f$0;
+                            long j = lockTimeout$1;
+                            Intent intent = KeyguardViewMediator.USER_PRESENT_INTENT;
+                            keyguardViewMediator.doKeyguardLaterLocked$1(j);
+                            keyguardViewMediator.mLockLater = true;
+                        }
+                    });
+                } else {
+                    this.mPendingReset = true;
+                    i2 = i;
                 }
-                i2 = i;
-                this.mHelper.updatePendingLock(i2, lockTimeout$12, z, selectedUserId, new KeyguardViewMediator$$ExternalSyntheticLambda0(this, 4), new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda9
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        KeyguardViewMediator keyguardViewMediator = KeyguardViewMediator.this;
-                        long j = lockTimeout$12;
-                        Intent intent = KeyguardViewMediator.USER_PRESENT_INTENT;
-                        keyguardViewMediator.doKeyguardLaterLocked$1(j);
-                        keyguardViewMediator.mLockLater = true;
-                    }
-                });
-                if (this.mPendingLock) {
+                if (this.mPendingLock && (i3 = this.mLockSoundId) != 0) {
                     this.mHelper.playSound$2(i3);
                 }
             } catch (Throwable th) {
@@ -7614,7 +7630,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         @Override // java.lang.Runnable
                         public final void run() {
                             int i = 1;
-                            KeyguardViewMediator keyguardViewMediator = KeyguardViewMediator.this;
+                            KeyguardViewMediator keyguardViewMediator = this.f$0;
                             UserManager userManager2 = userManager;
                             UserHandle userHandle2 = userHandle;
                             int i2 = selectedUserId;
@@ -7734,7 +7750,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
             this.mUiBgExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediator$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KeyguardViewMediator keyguardViewMediator = KeyguardViewMediator.this;
+                    KeyguardViewMediator keyguardViewMediator = this.f$0;
                     boolean z8 = z;
                     boolean z9 = z3;
                     String str2 = str;
@@ -7759,10 +7775,10 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     }
                     KeyguardEditModeController keyguardEditModeController = keyguardViewMediatorHelperImpl.editModeController;
                     long j = (keyguardEditModeController == null || !((KeyguardEditModeControllerImpl) keyguardEditModeController).isEditMode || keyguardViewMediatorHelperImpl.curIsOccluded) ? 300L : 1000L;
-                    StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("updateActivityLockScreenState ", " ", " after ", z8, z9);
-                    m.append(j);
-                    m.append("ms");
-                    Log.i("KeyguardViewMediator", m.toString());
+                    StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("updateActivityLockScreenState ", " ", " after ", z8, z9);
+                    sbM.append(j);
+                    sbM.append("ms");
+                    Log.i("KeyguardViewMediator", sbM.toString());
                     KeyguardViewMediatorHelperImplKt.isLockShownDelay = false;
                     keyguardViewMediatorHelperImpl.lockShownJob = BuildersKt.launch$default(keyguardViewMediatorHelperImpl.scope, Dispatchers.Default, null, new KeyguardViewMediatorHelperImpl$updateActivityLockScreenState$1$2(j, keyguardViewMediatorHelperImpl$setLockScreenShownRunnable$1, null), 2);
                 }
@@ -7780,10 +7796,10 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                 executor.execute(new KeyguardViewMediator$$ExternalSyntheticLambda6(trustManager, 0));
             }
         }
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("setShowingLocked: notifyDefaultDisplayCallbacks=", " showing=", z5);
-        m.append(this.mShowing);
-        m.append(" aodShowing=");
-        ActionBarContextView$$ExternalSyntheticOutline0.m(m, this.mAodShowing, "KeyguardViewMediator");
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("setShowingLocked: notifyDefaultDisplayCallbacks=", " showing=", z5);
+        sbM.append(this.mShowing);
+        sbM.append(" aodShowing=");
+        ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, this.mAodShowing, "KeyguardViewMediator");
         this.mHelper.setShowingOptions(null);
     }
 
@@ -7821,7 +7837,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
     public final void setupLocked$1() {
         boolean z;
-        boolean z2;
+        boolean zIsEnabled;
         this.mBroadcastDispatcher.registerReceiver(AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0.m("android.intent.action.ACTION_SHUTDOWN"), this.mBroadcastReceiver);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.android.internal.policy.impl.PhoneWindowManager.DELAYED_KEYGUARD");
@@ -7831,11 +7847,11 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         this.mAlarmManager = (AlarmManager) this.mContext.getSystemService("alarm");
         KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.mHelper;
         keyguardViewMediatorHelperImpl.getClass();
-        boolean z3 = LsRune.KEYGUARD_SUB_DISPLAY_LOCK;
-        if (z3 || LsRune.KEYGUARD_SUB_DISPLAY_COVER) {
+        boolean z2 = LsRune.KEYGUARD_SUB_DISPLAY_LOCK;
+        if (z2 || LsRune.KEYGUARD_SUB_DISPLAY_COVER) {
             keyguardViewMediatorHelperImpl.foldControllerImpl.handler = keyguardViewMediatorHelperImpl.getHandler$1();
         }
-        if (z3) {
+        if (z2) {
             KeyguardVisibilityMonitor keyguardVisibilityMonitor = keyguardViewMediatorHelperImpl.keyguardVisibilityMonitor;
             KeyguardViewMediatorHelperImpl$setupLocked$1 keyguardViewMediatorHelperImpl$setupLocked$1 = new KeyguardViewMediatorHelperImpl$setupLocked$1(keyguardViewMediatorHelperImpl);
             ArrayList arrayList = (ArrayList) keyguardVisibilityMonitor.panelStateChangedListeners;
@@ -7848,9 +7864,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         }
         BroadcastDispatcher broadcastDispatcher = keyguardViewMediatorHelperImpl.broadcastDispatcher;
         KeyguardViewMediatorHelperImpl$broadcastReceiver$1 keyguardViewMediatorHelperImpl$broadcastReceiver$1 = keyguardViewMediatorHelperImpl.broadcastReceiver;
-        IntentFilter m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("com.samsung.internal.policy.impl.Keyguard.PCW_LOCKED", "com.samsung.internal.policy.impl.Keyguard.PCW_UNLOCKED");
+        IntentFilter intentFilterM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("com.samsung.internal.policy.impl.Keyguard.PCW_LOCKED", "com.samsung.internal.policy.impl.Keyguard.PCW_UNLOCKED");
         Unit unit = Unit.INSTANCE;
-        BroadcastDispatcher.registerReceiver$default(broadcastDispatcher, keyguardViewMediatorHelperImpl$broadcastReceiver$1, m, null, null, 0, "com.samsung.android.permission.LOCK_SECURITY_MONITOR", 28);
+        BroadcastDispatcher.registerReceiver$default(broadcastDispatcher, keyguardViewMediatorHelperImpl$broadcastReceiver$1, intentFilterM, null, null, 0, "com.samsung.android.permission.LOCK_SECURITY_MONITOR", 28);
         BroadcastDispatcher.registerReceiver$default(keyguardViewMediatorHelperImpl.broadcastDispatcher, keyguardViewMediatorHelperImpl.broadcastReceiver, KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("com.sec.android.FindingLostPhonePlus.CANCEL", "com.sec.android.FindingLostPhonePlus.SUBSCRIBE"), null, null, 0, null, 60);
         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(keyguardViewMediatorHelperImpl.context);
         KeyguardViewMediatorHelperImpl$localReceiver$1 keyguardViewMediatorHelperImpl$localReceiver$1 = keyguardViewMediatorHelperImpl.localReceiver;
@@ -7879,10 +7895,10 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
             }
         }
         keyguardViewMediatorHelperImpl.updateMonitor.setupLocked$2();
-        SemDvfsManager createInstance = SemDvfsManager.createInstance(keyguardViewMediatorHelperImpl.context, "KEYGUARD_UNLOCK");
-        if (createInstance != null && createInstance.checkHintSupported(3100)) {
-            createInstance.setHint(3100);
-            keyguardViewMediatorHelperImpl.dvfsManager = createInstance;
+        SemDvfsManager semDvfsManagerCreateInstance = SemDvfsManager.createInstance(keyguardViewMediatorHelperImpl.context, "KEYGUARD_UNLOCK");
+        if (semDvfsManagerCreateInstance != null && semDvfsManagerCreateInstance.checkHintSupported(3100)) {
+            semDvfsManagerCreateInstance.setHint(3100);
+            keyguardViewMediatorHelperImpl.dvfsManager = semDvfsManagerCreateInstance;
         }
         final KeyguardFastBioUnlockController keyguardFastBioUnlockController = keyguardViewMediatorHelperImpl.fastUnlockController;
         keyguardFastBioUnlockController.getClass();
@@ -7891,7 +7907,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                 @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
                 public final void onPostFinishedWakingUp() {
                     KeyguardFastBioUnlockController.Companion companion = KeyguardFastBioUnlockController.Companion;
-                    final KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = KeyguardFastBioUnlockController.this;
+                    final KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = keyguardFastBioUnlockController;
                     if (keyguardFastBioUnlockController2.isBrightnessChangedCallbackRegistered) {
                         KeyguardFastBioUnlockController.logD("unregisterBrightnessListener");
                         ((DisplayTrackerImpl) keyguardFastBioUnlockController2.displayTracker).removeCallback(keyguardFastBioUnlockController2.brightnessChangedCallback);
@@ -7901,11 +7917,11 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         keyguardFastBioUnlockController2.mainHandler.postDelayed(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$init$1$onPostFinishedWakingUp$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                KeyguardFastBioUnlockController keyguardFastBioUnlockController3 = KeyguardFastBioUnlockController.this;
+                                KeyguardFastBioUnlockController keyguardFastBioUnlockController3 = keyguardFastBioUnlockController2;
                                 KeyguardFastBioUnlockController.Companion companion2 = KeyguardFastBioUnlockController.Companion;
                                 keyguardFastBioUnlockController3.getClass();
                                 KeyguardFastBioUnlockController.logD("cancel blank scrim");
-                                ((ScrimController) KeyguardFastBioUnlockController.this.scrimControllerLazy.get()).onScreenTurnedOn();
+                                ((ScrimController) keyguardFastBioUnlockController2.scrimControllerLazy.get()).onScreenTurnedOn();
                             }
                         }, 64L);
                     }
@@ -7913,7 +7929,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
 
                 @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
                 public final void onStartedGoingToSleep() {
-                    KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = KeyguardFastBioUnlockController.this;
+                    KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = keyguardFastBioUnlockController;
                     if (((KeyguardUpdateMonitor) keyguardFastBioUnlockController2.updateMonitorLazy.get()).isFingerprintOptionEnabled() && ((KeyguardUpdateMonitor) keyguardFastBioUnlockController2.updateMonitorLazy.get()).isEnabledWof() && !keyguardFastBioUnlockController2.isBrightnessChangedCallbackRegistered) {
                         KeyguardFastBioUnlockController.logD("registerBrightnessListener");
                         DisplayTrackerImpl displayTrackerImpl = (DisplayTrackerImpl) keyguardFastBioUnlockController2.displayTracker;
@@ -7939,11 +7955,11 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         ((KeyguardUnlockAnimationController) keyguardViewMediatorHelperImpl.unlockAnimationControllerLazy.get()).setCallback(new KeyguardViewMediatorHelperImpl$setupLocked$5(keyguardViewMediatorHelperImpl));
         BroadcastDispatcher.registerReceiver$default(keyguardViewMediatorHelperImpl.broadcastDispatcher, keyguardViewMediatorHelperImpl.broadcastReceiver, new IntentFilter("com.samsung.intent.action.OMC_CHANGED"), null, null, 0, null, 60);
         try {
-            z2 = this.mContext.getPackageManager().getServiceInfo(new ComponentName(this.mContext, (Class<?>) KeyguardService.class), 0).isEnabled();
+            zIsEnabled = this.mContext.getPackageManager().getServiceInfo(new ComponentName(this.mContext, (Class<?>) KeyguardService.class), 0).isEnabled();
         } catch (PackageManager.NameNotFoundException unused) {
-            z2 = true;
+            zIsEnabled = true;
         }
-        if (z2) {
+        if (zIsEnabled) {
             if (!shouldWaitForProvisioning$1() && !this.mHelper.isKeyguardDisabled(true) && !this.mLockPatternUtils.isLockScreenDisabled(this.mSelectedUserInteractor.getSelectedUserId())) {
                 z = true;
             }
@@ -7985,9 +8001,9 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         int i5 = this.mTrustedSoundId;
         KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2 = this.mHelper;
         keyguardViewMediatorHelperImpl2.getClass();
-        int load = soundPool.load("/system/media/audio/ui/Unlock_VA_Mode.ogg", 1);
-        keyguardViewMediatorHelperImpl2.lockStaySoundId = load;
-        if (load == 0) {
+        int iLoad = soundPool.load("/system/media/audio/ui/Unlock_VA_Mode.ogg", 1);
+        keyguardViewMediatorHelperImpl2.lockStaySoundId = iLoad;
+        if (iLoad == 0) {
             Log.w("KeyguardViewMediator", "failed to load lock stay sound from /system/media/audio/ui/Unlock_VA_Mode.ogg");
         }
         if (LsRune.KEYGUARD_LOCK_SITUATION_VOLUME) {
@@ -8066,12 +8082,12 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     public final void startKeyguardExitAnimation$1(int i, long j, long j2, RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
         int i2;
         char c;
-        String str;
+        String strM;
         Trace.beginSection("KeyguardViewMediator#startKeyguardExitAnimation");
-        Message obtainMessage = this.mHandler.obtainMessage(VolteConstants.ErrorCode.CLIENT_ERROR_NOT_ALLOWED_URI, new StartKeyguardExitAnimParams(i, j, j2, remoteAnimationTargetArr, remoteAnimationTargetArr2, remoteAnimationTargetArr3, iRemoteAnimationFinishedCallback, 0));
+        Message messageObtainMessage = this.mHandler.obtainMessage(VolteConstants.ErrorCode.CLIENT_ERROR_NOT_ALLOWED_URI, new StartKeyguardExitAnimParams(i, j, j2, remoteAnimationTargetArr, remoteAnimationTargetArr2, remoteAnimationTargetArr3, iRemoteAnimationFinishedCallback, 0));
         KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.mHelper;
         keyguardViewMediatorHelperImpl.getHandler$1().post(new KeyguardViewMediatorHelperImpl$cancelAODJankMonitor$1(keyguardViewMediatorHelperImpl));
-        StartKeyguardExitAnimParams startKeyguardExitAnimParams = (StartKeyguardExitAnimParams) obtainMessage.obj;
+        StartKeyguardExitAnimParams startKeyguardExitAnimParams = (StartKeyguardExitAnimParams) messageObtainMessage.obj;
         int i3 = 1;
         char c2 = 2;
         if (Debug.semIsProductDev() || LogUtil.isDebugLevelMid() || LogUtil.isDebugLevelHigh()) {
@@ -8089,21 +8105,21 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                         if (remoteAnimationTarget != null) {
                             ActivityManager.RunningTaskInfo runningTaskInfo = remoteAnimationTarget.taskInfo;
                             ComponentName componentName = runningTaskInfo != null ? runningTaskInfo.topActivity : null;
-                            String str2 = strArr[i4];
+                            String str = strArr[i4];
                             if (componentName != null) {
                                 i2 = i3;
-                                str = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(componentName.getPackageName(), "/", componentName.getClassName());
+                                strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(componentName.getPackageName(), "/", componentName.getClassName());
                             } else {
                                 i2 = i3;
-                                str = SignalSeverity.NONE;
+                                strM = SignalSeverity.NONE;
                             }
                             boolean z = remoteAnimationTarget.leash != null ? i2 : 0;
                             c = c2;
-                            StringBuilder m888m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m888m(i5, "exitAnimParam ", str2, "[", "]=");
-                            m888m.append(str);
-                            m888m.append(", hasLeash=");
-                            m888m.append(z);
-                            KeyguardViewMediatorHelperImpl.logD$1(m888m.toString());
+                            StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(i5, "exitAnimParam ", str, "[", "]=");
+                            sbM890m.append(strM);
+                            sbM890m.append(", hasLeash=");
+                            sbM890m.append(z);
+                            KeyguardViewMediatorHelperImpl.logD$1(sbM890m.toString());
                         } else {
                             i2 = i3;
                             c = c2;
@@ -8164,23 +8180,23 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
         KeyguardFastBioUnlockController keyguardFastBioUnlockController = keyguardViewMediatorHelperImpl.fastUnlockController;
         if (keyguardFastBioUnlockController.isFastUnlockMode()) {
             keyguardFastBioUnlockController.startKeyguardExitAnimationTime = System.nanoTime();
-            handler$1.sendMessageAtFrontOfQueue(obtainMessage);
+            handler$1.sendMessageAtFrontOfQueue(messageObtainMessage);
         } else if (keyguardFastBioUnlockController.isFastWakeAndUnlockMode()) {
             keyguardFastBioUnlockController.startKeyguardExitAnimationTime = System.nanoTime();
-            handler$1.sendMessage(obtainMessage);
+            handler$1.sendMessage(messageObtainMessage);
         } else if (LsRune.KEYGUARD_SUB_DISPLAY_LOCK && keyguardViewMediatorHelperImpl.foldControllerImpl.isUnlockOnFoldOpened()) {
-            handler$1.sendMessageAtFrontOfQueue(obtainMessage);
+            handler$1.sendMessageAtFrontOfQueue(messageObtainMessage);
         } else {
-            handler$1.sendMessage(obtainMessage);
+            handler$1.sendMessage(messageObtainMessage);
         }
         Trace.endSection();
     }
 
     public final void tryKeyguardDone$1() {
         SemDvfsManager semDvfsManager;
-        int i;
+        int iOrdinal;
         KeyguardUnlockInfo.UnlockTrigger unlockTrigger;
-        int ordinal;
+        int iOrdinal2;
         KeyguardUnlockInfo.SkipBouncerReason skipBouncerReason;
         StringBuilder sb = new StringBuilder("tryKeyguardDone: pending - ");
         sb.append(this.mKeyguardDonePending);
@@ -8220,50 +8236,50 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
             semDvfsManager.acquire(1000);
         }
         if (KeyguardUnlockInfo.authType != KeyguardUnlockInfo.AuthType.AUTH_UNKNOWN) {
-            i = (KeyguardUnlockInfo.authType.ordinal() * 10000) + 300000;
-            int i2 = KeyguardUnlockInfo.WhenMappings.$EnumSwitchMapping$0[KeyguardUnlockInfo.authType.ordinal()];
-            if (i2 == 1) {
+            iOrdinal = (KeyguardUnlockInfo.authType.ordinal() * 10000) + 300000;
+            int i = KeyguardUnlockInfo.WhenMappings.$EnumSwitchMapping$0[KeyguardUnlockInfo.authType.ordinal()];
+            if (i == 1) {
                 KeyguardSecurityModel.SecurityMode securityMode = KeyguardUnlockInfo.securityMode;
                 if (securityMode != null) {
-                    ordinal = securityMode.ordinal();
-                    i += ordinal * 100;
+                    iOrdinal2 = securityMode.ordinal();
+                    iOrdinal += iOrdinal2 * 100;
                 }
-            } else if (i2 == 2) {
+            } else if (i == 2) {
                 BiometricSourceType biometricSourceType = KeyguardUnlockInfo.biometricSourceType;
                 if (biometricSourceType != null) {
-                    ordinal = biometricSourceType.ordinal();
-                    i += ordinal * 100;
+                    iOrdinal2 = biometricSourceType.ordinal();
+                    iOrdinal += iOrdinal2 * 100;
                 }
-            } else if (i2 == 3 && (skipBouncerReason = KeyguardUnlockInfo.skipBouncerReason) != null) {
-                ordinal = skipBouncerReason.ordinal();
-                i += ordinal * 100;
+            } else if (i == 3 && (skipBouncerReason = KeyguardUnlockInfo.skipBouncerReason) != null) {
+                iOrdinal2 = skipBouncerReason.ordinal();
+                iOrdinal += iOrdinal2 * 100;
             }
         } else {
-            i = 3;
+            iOrdinal = 3;
         }
-        if (i > 3 && (unlockTrigger = KeyguardUnlockInfo.unlockTrigger) != null) {
-            i += unlockTrigger.ordinal();
+        if (iOrdinal > 3 && (unlockTrigger = KeyguardUnlockInfo.unlockTrigger) != null) {
+            iOrdinal += unlockTrigger.ordinal();
         }
-        int i3 = i;
+        int i2 = iOrdinal;
         KeyguardUnlockInfo.INSTANCE.getClass();
-        int i4 = KeyguardUnlockInfo.WhenMappings.$EnumSwitchMapping$0[KeyguardUnlockInfo.authType.ordinal()];
-        String str = i4 != 1 ? i4 != 2 ? i4 != 3 ? KeyguardUnlockInfo.authType.toString() : String.valueOf(KeyguardUnlockInfo.skipBouncerReason) : String.valueOf(KeyguardUnlockInfo.biometricSourceType) : String.valueOf(KeyguardUnlockInfo.securityMode);
-        KeyguardUnlockInfo.leaveHistory(i3 + ": " + str + " " + KeyguardUnlockInfo.unlockTrigger, true);
+        int i3 = KeyguardUnlockInfo.WhenMappings.$EnumSwitchMapping$0[KeyguardUnlockInfo.authType.ordinal()];
+        String string = i3 != 1 ? i3 != 2 ? i3 != 3 ? KeyguardUnlockInfo.authType.toString() : String.valueOf(KeyguardUnlockInfo.skipBouncerReason) : String.valueOf(KeyguardUnlockInfo.biometricSourceType) : String.valueOf(KeyguardUnlockInfo.securityMode);
+        KeyguardUnlockInfo.leaveHistory(i2 + ": " + string + " " + KeyguardUnlockInfo.unlockTrigger, true);
         KeyguardUnlockInfo.reset();
-        EventLog.writeEvent(70000, i3);
-        KeyguardDumpLog.state$default(KeyguardDumpLog.INSTANCE, 3, false, false, false, i3, 0, 46);
+        EventLog.writeEvent(70000, i2);
+        KeyguardDumpLog.state$default(KeyguardDumpLog.INSTANCE, 3, false, false, false, i2, 0, 46);
         handleKeyguardDone$1();
     }
 
     public final void updateInputRestrictedLocked$1() {
         KeyguardWmStateRefactor keyguardWmStateRefactor = KeyguardWmStateRefactor.INSTANCE;
-        boolean isInputRestricted = isInputRestricted();
-        if (this.mInputRestricted != isInputRestricted) {
-            this.mInputRestricted = isInputRestricted;
+        boolean zIsInputRestricted = isInputRestricted();
+        if (this.mInputRestricted != zIsInputRestricted) {
+            this.mInputRestricted = zIsInputRestricted;
             for (int size = this.mKeyguardStateCallbacks.size() - 1; size >= 0; size--) {
                 IKeyguardStateCallback iKeyguardStateCallback = (IKeyguardStateCallback) this.mKeyguardStateCallbacks.get(size);
                 try {
-                    iKeyguardStateCallback.onInputRestrictedStateChanged(isInputRestricted);
+                    iKeyguardStateCallback.onInputRestrictedStateChanged(zIsInputRestricted);
                 } catch (RemoteException e) {
                     Slog.w("KeyguardViewMediator", "Failed to call onDeviceProvisioned", e);
                     if (e instanceof DeadObjectException) {

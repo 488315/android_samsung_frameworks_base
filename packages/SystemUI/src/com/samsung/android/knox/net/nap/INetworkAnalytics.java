@@ -9,12 +9,10 @@ import android.os.RemoteException;
 import com.samsung.android.knox.ContextInfo;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface INetworkAnalytics extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.net.nap.INetworkAnalytics";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements INetworkAnalytics {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -71,7 +69,6 @@ public interface INetworkAnalytics extends IInterface {
 
     int unregisterNetworkMonitorProfile(ContextInfo contextInfo, String str) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements INetworkAnalytics {
         public static final int TRANSACTION_getNPAVersion = 7;
         public static final int TRANSACTION_getNetworkMonitorProfiles = 4;
@@ -81,7 +78,6 @@ public interface INetworkAnalytics extends IInterface {
         public static final int TRANSACTION_registerNetworkMonitorProfile = 1;
         public static final int TRANSACTION_unregisterNetworkMonitorProfile = 5;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements INetworkAnalytics {
             public IBinder mRemote;
 
@@ -100,117 +96,117 @@ public interface INetworkAnalytics extends IInterface {
 
             @Override // com.samsung.android.knox.net.nap.INetworkAnalytics
             public String getNPAVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.nap.INetworkAnalytics
             public List<String> getNetworkMonitorProfiles(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.nap.INetworkAnalytics
             public List<Profile> getProfiles(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(Profile.CREATOR);
+                    parcelObtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(Profile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.nap.INetworkAnalytics
             public int handleNAPClientCall(String str, Bundle bundle, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.nap.INetworkAnalytics
             public int isProfileActivatedForUser(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.nap.INetworkAnalytics
             public int registerNetworkMonitorProfile(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.net.nap.INetworkAnalytics
             public int unregisterNetworkMonitorProfile(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(INetworkAnalytics.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -223,8 +219,8 @@ public interface INetworkAnalytics extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(INetworkAnalytics.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof INetworkAnalytics)) ? new Proxy(iBinder) : (INetworkAnalytics) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(INetworkAnalytics.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof INetworkAnalytics)) ? new Proxy(iBinder) : (INetworkAnalytics) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -239,20 +235,20 @@ public interface INetworkAnalytics extends IInterface {
             switch (i) {
                 case 1:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int registerNetworkMonitorProfile = registerNetworkMonitorProfile(contextInfo, readString);
+                    int iRegisterNetworkMonitorProfile = registerNetworkMonitorProfile(contextInfo, string);
                     parcel2.writeNoException();
-                    parcel2.writeInt(registerNetworkMonitorProfile);
+                    parcel2.writeInt(iRegisterNetworkMonitorProfile);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int handleNAPClientCall = handleNAPClientCall(readString2, bundle, readBoolean);
+                    int iHandleNAPClientCall = handleNAPClientCall(string2, bundle, z);
                     parcel2.writeNoException();
-                    parcel2.writeInt(handleNAPClientCall);
+                    parcel2.writeInt(iHandleNAPClientCall);
                     return true;
                 case 3:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -270,19 +266,19 @@ public interface INetworkAnalytics extends IInterface {
                     return true;
                 case 5:
                     ContextInfo contextInfo4 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int unregisterNetworkMonitorProfile = unregisterNetworkMonitorProfile(contextInfo4, readString3);
+                    int iUnregisterNetworkMonitorProfile = unregisterNetworkMonitorProfile(contextInfo4, string3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unregisterNetworkMonitorProfile);
+                    parcel2.writeInt(iUnregisterNetworkMonitorProfile);
                     return true;
                 case 6:
                     ContextInfo contextInfo5 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int isProfileActivatedForUser = isProfileActivatedForUser(contextInfo5, readString4);
+                    int iIsProfileActivatedForUser = isProfileActivatedForUser(contextInfo5, string4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(isProfileActivatedForUser);
+                    parcel2.writeInt(iIsProfileActivatedForUser);
                     return true;
                 case 7:
                     String nPAVersion = getNPAVersion();

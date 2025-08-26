@@ -235,9 +235,9 @@ public class DeviceAdminReceiver extends BroadcastReceiver {
             return;
         }
         if (ACTION_DEVICE_ADMIN_DISABLE_REQUESTED.equals(action)) {
-            CharSequence onDisableRequested = onDisableRequested(context, intent);
-            if (onDisableRequested != null) {
-                getResultExtras(true).putCharSequence(EXTRA_DISABLE_WARNING, onDisableRequested);
+            CharSequence charSequenceOnDisableRequested = onDisableRequested(context, intent);
+            if (charSequenceOnDisableRequested != null) {
+                getResultExtras(true).putCharSequence(EXTRA_DISABLE_WARNING, charSequenceOnDisableRequested);
                 return;
             }
             return;

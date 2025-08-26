@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ActivatedKairosSpecKt {
     public static final <T> void ActivatedKairosSpec(Function1 function1, KairosNetwork kairosNetwork, final Function3 function3, Composer composer, final int i) {
@@ -46,27 +45,27 @@ public final class ActivatedKairosSpecKt {
             }
             Object obj = new Object();
             composerImpl.startReplaceGroup(315701921);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
-                rememberedValue = SnapshotStateKt.mutableStateOf$default(obj);
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == composer$Companion$Empty$1) {
+                objRememberedValue = SnapshotStateKt.mutableStateOf$default(obj);
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            MutableState mutableState = (MutableState) rememberedValue;
+            MutableState mutableState = (MutableState) objRememberedValue;
             composerImpl.end(false);
             Unit unit = Unit.INSTANCE;
             composerImpl.startReplaceGroup(315704457);
-            boolean changedInstance = ((i2 & 14) == 4) | composerImpl.changedInstance(kairosNetwork) | composerImpl.changedInstance(obj);
-            Object rememberedValue2 = composerImpl.rememberedValue();
-            if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
+            boolean zChangedInstance = ((i2 & 14) == 4) | composerImpl.changedInstance(kairosNetwork) | composerImpl.changedInstance(obj);
+            Object objRememberedValue2 = composerImpl.rememberedValue();
+            if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
                 function12 = function1;
                 kairosNetwork2 = kairosNetwork;
                 activatedKairosSpecKt$ActivatedKairosSpec$1$1 = new ActivatedKairosSpecKt$ActivatedKairosSpec$1$1(kairosNetwork2, function12, mutableState, obj, null);
                 composerImpl.updateRememberedValue(activatedKairosSpecKt$ActivatedKairosSpec$1$1);
             } else {
                 function12 = function1;
-                activatedKairosSpecKt$ActivatedKairosSpec$1$1 = rememberedValue2;
+                activatedKairosSpecKt$ActivatedKairosSpec$1$1 = objRememberedValue2;
                 kairosNetwork2 = kairosNetwork;
             }
             composerImpl.end(false);
@@ -81,17 +80,15 @@ public final class ActivatedKairosSpecKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.util.composable.kairos.ActivatedKairosSpecKt$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.util.composable.kairos.ActivatedKairosSpecKt$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj2, Object obj3) {
-                    Unit ActivatedKairosSpec$lambda$5;
-                    int intValue = ((Integer) obj3).intValue();
+                    int iIntValue = ((Integer) obj3).intValue();
                     Function3 function32 = function3;
                     int i3 = i;
-                    ActivatedKairosSpec$lambda$5 = ActivatedKairosSpecKt.ActivatedKairosSpec$lambda$5(Function1.this, kairosNetwork2, function32, i3, (Composer) obj2, intValue);
-                    return ActivatedKairosSpec$lambda$5;
+                    return ActivatedKairosSpecKt.ActivatedKairosSpec$lambda$5(function12, kairosNetwork2, function32, i3, (Composer) obj2, iIntValue);
                 }
             };
         }

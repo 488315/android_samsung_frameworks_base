@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDialogSliderViewModel$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -61,9 +60,9 @@ public final class VolumeDialogSliderViewModel$special$$inlined$flatMapLatest$1 
                 volumeDialogSliderIconProvider.getClass();
                 AudioStream.Companion.getClass();
                 if (AudioStream.supportedStreamTypes.contains(Integer.valueOf(i2))) {
-                    AudioStream.m989constructorimpl(i2);
+                    AudioStream.m991constructorimpl(i2);
                     ZenModeInteractor zenModeInteractor = volumeDialogSliderIconProvider.zenModeInteractor;
-                    flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = zenModeInteractor.zenModeByStreamPredicates.containsKey(Integer.valueOf(i2)) ? zenModeInteractor.m3091activeModesBlockingStreamtLTdkI8(i2) : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
+                    flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = zenModeInteractor.zenModeByStreamPredicates.containsKey(Integer.valueOf(i2)) ? zenModeInteractor.m3108activeModesBlockingStreamtLTdkI8(i2) : new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
                 } else {
                     flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null);
                 }

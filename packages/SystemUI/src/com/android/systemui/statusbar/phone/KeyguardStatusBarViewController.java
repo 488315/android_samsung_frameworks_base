@@ -114,7 +114,6 @@ import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardStatusBarViewController extends ViewController implements IndicatorGarden, Dumpable {
     public static final AnimationProperties KEYGUARD_HUN_PROPERTIES;
@@ -206,7 +205,6 @@ public class KeyguardStatusBarViewController extends ViewController implements I
     public final UserManager mUserManager;
     public final AnonymousClass11 mVolumeSettingObserver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$1, reason: invalid class name */
     public class AnonymousClass1 implements ConfigurationController.ConfigurationListener {
         public AnonymousClass1() {
@@ -223,7 +221,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         }
 
         @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-        public final void onDensityOrFontScaleChanged() {
+        public final void onDensityOrFontScaleChanged() throws Resources.NotFoundException {
             KeyguardStatusBarViewController keyguardStatusBarViewController = KeyguardStatusBarViewController.this;
             ((KeyguardStatusBarView) ((ViewController) keyguardStatusBarViewController).mView).loadDimens();
             keyguardStatusBarViewController.mSystemEventAnimator = new StatusBarSystemEventDefaultAnimator(keyguardStatusBarViewController.getResources(), new KeyguardStatusBarViewController$$ExternalSyntheticLambda12(keyguardStatusBarViewController, 1), new KeyguardStatusBarViewController$$ExternalSyntheticLambda12(keyguardStatusBarViewController, 2), keyguardStatusBarViewController.mSystemEventAnimator.isAnimationRunning);
@@ -249,7 +247,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         }
 
         @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-        public final void onDisplayDeviceTypeChanged() {
+        public final void onDisplayDeviceTypeChanged() throws Resources.NotFoundException {
             if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD) {
                 onDensityOrFontScaleChanged();
             }
@@ -265,26 +263,21 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         }
 
         @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-        public final void onThemeChanged() {
+        public final void onThemeChanged() throws Resources.NotFoundException {
             KeyguardStatusBarViewController keyguardStatusBarViewController = KeyguardStatusBarViewController.this;
-            ((KeyguardStatusBarView) ((ViewController) keyguardStatusBarViewController).mView).onOverlayChanged();
+            ((KeyguardStatusBarView) ((ViewController) keyguardStatusBarViewController).mView).onOverlayChanged(keyguardStatusBarViewController.mIndicatorScaleGardener.getLatestScaleModel(keyguardStatusBarViewController.getContext()).ratio);
             keyguardStatusBarViewController.onThemeChanged();
         }
     }
 
-    public static void $r8$lambda$EYGtYh_In_SILyRDC0euEuXDK9E(KeyguardStatusBarViewController keyguardStatusBarViewController) {
-        keyguardStatusBarViewController.mMainExecutor.execute(new KeyguardStatusBarViewController$$ExternalSyntheticLambda15(keyguardStatusBarViewController, 1));
-        keyguardStatusBarViewController.mNotificationIconAreaController.setKeyguardNotifIconTint(((KeyguardStatusBarView) keyguardStatusBarViewController.mView).mNotifIconColor);
-    }
-
-    public static void $r8$lambda$LWsNDpOIXrKQmKLzeTePDCTTMzI(KeyguardStatusBarViewController keyguardStatusBarViewController) {
+    public static void $r8$lambda$LWsNDpOIXrKQmKLzeTePDCTTMzI(KeyguardStatusBarViewController keyguardStatusBarViewController) throws Resources.NotFoundException {
         KeyguardStatusBarView keyguardStatusBarView = (KeyguardStatusBarView) keyguardStatusBarViewController.mView;
         keyguardStatusBarView.isMultiUserAvatarHidden = ((SlimIndicatorViewMediatorImpl) keyguardStatusBarViewController.mSlimIndicatorViewMediator).isHiddenLockScreenMum();
         keyguardStatusBarView.updateVisibilities();
     }
 
     /* renamed from: $r8$lambda$SDjYX36TdSthdVP17CFw-x9k5IE, reason: not valid java name */
-    public static void m3074$r8$lambda$SDjYX36TdSthdVP17CFwx9k5IE(KeyguardStatusBarViewController keyguardStatusBarViewController, String str, Drawable drawable) {
+    public static void m3091$r8$lambda$SDjYX36TdSthdVP17CFwx9k5IE(KeyguardStatusBarViewController keyguardStatusBarViewController, String str, Drawable drawable) {
         KeyguardStatusBarView keyguardStatusBarView = (KeyguardStatusBarView) keyguardStatusBarViewController.mView;
         keyguardStatusBarView.mMultiUserAvatar.setImageDrawable(drawable);
         if (BasicRune.STATUS_LAYOUT_MUM_ICON) {
@@ -326,9 +319,9 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         BatteryMeterView batteryMeterView = (BatteryMeterView) ((KeyguardStatusBarView) keyguardStatusBarViewController.mView).findViewById(R.id.battery);
         int paddingEnd = ((KeyguardStatusBarView) keyguardStatusBarViewController.mView).findViewById(R.id.statusIcons).getPaddingEnd();
         int paddingRight = keyguardStatusBarViewController.getSidePaddingContainer().getPaddingRight();
-        int width = keyguardStatusBarViewController.getResources().getConfiguration().windowConfiguration.getBounds().width();
+        int iWidth = keyguardStatusBarViewController.getResources().getConfiguration().windowConfiguration.getBounds().width();
         TwoPhoneModeIconController twoPhoneModeIconController = keyguardStatusBarViewController.mTwoPhoneModeController;
-        return (width - (((batteryMeterView.getMeasuredWidth() + paddingRight) + paddingEnd) + ((!twoPhoneModeIconController.featureEnabled() || twoPhoneModeIconController.getViewWidth() <= 0) ? 0 : twoPhoneModeIconController.getViewWidth()))) - (keyguardStatusBarViewController.getResources().getDimensionPixelSize(R.dimen.indicator_marquee_max_shift) + rect.right);
+        return (iWidth - (((batteryMeterView.getMeasuredWidth() + paddingRight) + paddingEnd) + ((!twoPhoneModeIconController.featureEnabled() || twoPhoneModeIconController.getViewWidth() <= 0) ? 0 : twoPhoneModeIconController.getViewWidth()))) - (keyguardStatusBarViewController.getResources().getDimensionPixelSize(R.dimen.indicator_marquee_max_shift) + rect.right);
     }
 
     static {
@@ -349,7 +342,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
     /* JADX WARN: Type inference failed for: r7v6, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda8] */
     /* JADX WARN: Type inference failed for: r7v8, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$5] */
     /* JADX WARN: Type inference failed for: r7v9, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda9] */
-    public KeyguardStatusBarViewController(CoroutineDispatcher coroutineDispatcher, Context context, KeyguardStatusBarView keyguardStatusBarView, CarrierTextController carrierTextController, ConfigurationController configurationController, SystemStatusAnimationScheduler systemStatusAnimationScheduler, BatteryController batteryController, UserInfoController userInfoController, StatusBarIconController statusBarIconController, TintedIconManager.Factory factory, BatteryMeterViewController batteryMeterViewController, BatteryViewModel.Factory factory2, ShadeViewStateProvider shadeViewStateProvider, KeyguardStateController keyguardStateController, KeyguardBypassController keyguardBypassController, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStatusBarViewModel keyguardStatusBarViewModel, BiometricUnlockController biometricUnlockController, SysuiStatusBarStateController sysuiStatusBarStateController, StatusBarContentInsetsProviderStore statusBarContentInsetsProviderStore, UserManager userManager, StatusBarUserChipViewModel statusBarUserChipViewModel, SecureSettings secureSettings, CommandQueue commandQueue, Executor executor, Executor executor2, KeyguardLogger keyguardLogger, StatusOverlayHoverListenerFactory statusOverlayHoverListenerFactory, CommunalSceneInteractor communalSceneInteractor, GlanceableHubToLockscreenTransitionViewModel glanceableHubToLockscreenTransitionViewModel, LockscreenToGlanceableHubTransitionViewModel lockscreenToGlanceableHubTransitionViewModel, IndicatorGardenPresenter indicatorGardenPresenter, KeyguardStatusBarNioLayoutRepository keyguardStatusBarNioLayoutRepository, IndicatorScaleGardener indicatorScaleGardener, StatusIconContainerController statusIconContainerController, OngoingCallController ongoingCallController, KeyguardStatusBarWallpaperHelper keyguardStatusBarWallpaperHelper, DumpManager dumpManager, IndicatorCutoutUtil indicatorCutoutUtil, TwoPhoneModeIconController twoPhoneModeIconController, KnoxStatusBarControlViewModel knoxStatusBarControlViewModel, NetspeedViewController netspeedViewController, SlimIndicatorKeyguardCarrierTextHelper slimIndicatorKeyguardCarrierTextHelper, NotificationIconAreaController notificationIconAreaController, PluginLockMediator pluginLockMediator, SlimIndicatorViewMediator slimIndicatorViewMediator, PluginLockStarManager pluginLockStarManager, PrivacyDotViewController privacyDotViewController) {
+    public KeyguardStatusBarViewController(CoroutineDispatcher coroutineDispatcher, Context context, KeyguardStatusBarView keyguardStatusBarView, CarrierTextController carrierTextController, ConfigurationController configurationController, SystemStatusAnimationScheduler systemStatusAnimationScheduler, BatteryController batteryController, UserInfoController userInfoController, StatusBarIconController statusBarIconController, TintedIconManager.Factory factory, BatteryMeterViewController batteryMeterViewController, BatteryViewModel.Factory factory2, ShadeViewStateProvider shadeViewStateProvider, KeyguardStateController keyguardStateController, KeyguardBypassController keyguardBypassController, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStatusBarViewModel keyguardStatusBarViewModel, BiometricUnlockController biometricUnlockController, SysuiStatusBarStateController sysuiStatusBarStateController, StatusBarContentInsetsProviderStore statusBarContentInsetsProviderStore, UserManager userManager, StatusBarUserChipViewModel statusBarUserChipViewModel, SecureSettings secureSettings, CommandQueue commandQueue, Executor executor, Executor executor2, KeyguardLogger keyguardLogger, StatusOverlayHoverListenerFactory statusOverlayHoverListenerFactory, CommunalSceneInteractor communalSceneInteractor, GlanceableHubToLockscreenTransitionViewModel glanceableHubToLockscreenTransitionViewModel, LockscreenToGlanceableHubTransitionViewModel lockscreenToGlanceableHubTransitionViewModel, IndicatorGardenPresenter indicatorGardenPresenter, KeyguardStatusBarNioLayoutRepository keyguardStatusBarNioLayoutRepository, IndicatorScaleGardener indicatorScaleGardener, StatusIconContainerController statusIconContainerController, OngoingCallController ongoingCallController, KeyguardStatusBarWallpaperHelper keyguardStatusBarWallpaperHelper, DumpManager dumpManager, IndicatorCutoutUtil indicatorCutoutUtil, TwoPhoneModeIconController twoPhoneModeIconController, KnoxStatusBarControlViewModel knoxStatusBarControlViewModel, NetspeedViewController netspeedViewController, SlimIndicatorKeyguardCarrierTextHelper slimIndicatorKeyguardCarrierTextHelper, NotificationIconAreaController notificationIconAreaController, PluginLockMediator pluginLockMediator, SlimIndicatorViewMediator slimIndicatorViewMediator, PluginLockStarManager pluginLockStarManager, PrivacyDotViewController privacyDotViewController) throws Resources.NotFoundException {
         super(keyguardStatusBarView);
         final int i = 2;
         final int i2 = 1;
@@ -357,8 +350,8 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         this.mKeyguardHeadsUpShowingAmount = 0.0f;
         BiConsumer biConsumer = new BiConsumer() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda5
             @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                KeyguardStatusBarViewController keyguardStatusBarViewController = KeyguardStatusBarViewController.this;
+            public final void accept(Object obj, Object obj2) throws Resources.NotFoundException {
+                KeyguardStatusBarViewController keyguardStatusBarViewController = this.f$0;
                 AnimationProperties animationProperties = KeyguardStatusBarViewController.KEYGUARD_HUN_PROPERTIES;
                 keyguardStatusBarViewController.getClass();
                 keyguardStatusBarViewController.mKeyguardHeadsUpShowingAmount = ((Float) obj2).floatValue();
@@ -368,7 +361,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         Function function = new Function() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda6
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return Float.valueOf(KeyguardStatusBarViewController.this.mKeyguardHeadsUpShowingAmount);
+                return Float.valueOf(this.f$0.mKeyguardHeadsUpShowingAmount);
             }
         };
         AnimatableProperty.AnonymousClass7 anonymousClass7 = AnimatableProperty.Y;
@@ -389,7 +382,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         };
         this.mBatteryStateChangeCallback = new BatteryController.BatteryStateChangeCallback() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController.3
             @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
-            public final void onBatteryLevelChanged(int i4, boolean z, boolean z2) {
+            public final void onBatteryLevelChanged(int i4, boolean z, boolean z2) throws Resources.NotFoundException {
                 KeyguardStatusBarView keyguardStatusBarView2 = (KeyguardStatusBarView) ((ViewController) KeyguardStatusBarViewController.this).mView;
                 if (keyguardStatusBarView2.mBatteryCharging != z2) {
                     keyguardStatusBarView2.mBatteryCharging = z2;
@@ -400,14 +393,14 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         this.mOnUserInfoChangedListener = new UserInfoController.OnUserInfoChangedListener() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda7
             @Override // com.android.systemui.statusbar.policy.UserInfoController.OnUserInfoChangedListener
             public final void onUserInfoChanged(String str, Drawable drawable, String str2) {
-                KeyguardStatusBarViewController.m3074$r8$lambda$SDjYX36TdSthdVP17CFwx9k5IE(KeyguardStatusBarViewController.this, str, drawable);
+                KeyguardStatusBarViewController.m3091$r8$lambda$SDjYX36TdSthdVP17CFwx9k5IE(this.f$0, str, drawable);
             }
         };
         this.mAnimatorUpdateListener = new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda8
             @Override // androidx.core.animation.Animator.AnimatorUpdateListener
-            public final void onAnimationUpdate(Animator animator) {
+            public final void onAnimationUpdate(Animator animator) throws Resources.NotFoundException {
                 AnimationProperties animationProperties = KeyguardStatusBarViewController.KEYGUARD_HUN_PROPERTIES;
-                KeyguardStatusBarViewController keyguardStatusBarViewController = KeyguardStatusBarViewController.this;
+                KeyguardStatusBarViewController keyguardStatusBarViewController = this.f$0;
                 keyguardStatusBarViewController.mKeyguardStatusBarAnimateAlpha = ((Float) ((ValueAnimator) animator).getAnimatedValue()).floatValue();
                 keyguardStatusBarViewController.updateViewState();
             }
@@ -422,7 +415,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onBiometricRunningStateChanged(boolean z, BiometricSourceType biometricSourceType) {
+            public final void onBiometricRunningStateChanged(boolean z, BiometricSourceType biometricSourceType) throws Resources.NotFoundException {
                 KeyguardStatusBarViewController keyguardStatusBarViewController = KeyguardStatusBarViewController.this;
                 int i4 = keyguardStatusBarViewController.mStatusBarState;
                 boolean z2 = true;
@@ -466,7 +459,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
             }
 
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+            public final void accept(Object obj) throws Resources.NotFoundException {
                 int i4 = i3;
                 KeyguardStatusBarViewController keyguardStatusBarViewController = this.f$0;
                 switch (i4) {
@@ -499,7 +492,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
             }
 
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+            public final void accept(Object obj) throws Resources.NotFoundException {
                 int i4 = i2;
                 KeyguardStatusBarViewController keyguardStatusBarViewController = this.f$0;
                 switch (i4) {
@@ -529,7 +522,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
             }
 
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+            public final void accept(Object obj) throws Resources.NotFoundException {
                 int i4 = i;
                 KeyguardStatusBarViewController keyguardStatusBarViewController = this.f$0;
                 switch (i4) {
@@ -579,13 +572,13 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         };
         this.mPluginLockStarCallback = new PluginLockStarManager.LockStarCallback() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController.7
             @Override // com.android.systemui.lockstar.PluginLockStarManager.LockStarCallback
-            public final void onChangedLockStarData(boolean z) {
+            public final void onChangedLockStarData(boolean z) throws Resources.NotFoundException {
                 EmergencyButtonController$$ExternalSyntheticOutline0.m("LockStarCallback: onChangedLockStarEnabled: ", "KeyguardStatusBarViewController", z);
                 KeyguardStatusBarViewController.this.updateViewState();
             }
 
             @Override // com.android.systemui.lockstar.PluginLockStarManager.LockStarCallback
-            public final Bundle request(Bundle bundle) {
+            public final Bundle request(Bundle bundle) throws Resources.NotFoundException {
                 Log.d("KeyguardStatusBarViewController", "LockStarCallback: request: " + bundle);
                 if (!TextUtils.equals(bundle.getString("type", ""), PluginLockStar.STATUS_BAR_TYPE)) {
                     return null;
@@ -599,11 +592,11 @@ public class KeyguardStatusBarViewController extends ViewController implements I
             @Override // com.android.systemui.statusbar.phone.ongoingcall.OngoingCallListener
             public final void onOngoingCallStateChanged() {
                 KeyguardStatusBarViewController keyguardStatusBarViewController = KeyguardStatusBarViewController.this;
-                View findViewById = ((KeyguardStatusBarView) ((ViewController) keyguardStatusBarViewController).mView).findViewById(R.id.keyguard_ongoing_call_chip);
-                View findViewById2 = findViewById.findViewById(R.id.ongoing_call_chip);
+                View viewFindViewById = ((KeyguardStatusBarView) ((ViewController) keyguardStatusBarViewController).mView).findViewById(R.id.keyguard_ongoing_call_chip);
+                View viewFindViewById2 = viewFindViewById.findViewById(R.id.ongoing_call_chip);
                 OngoingCallController ongoingCallController2 = keyguardStatusBarViewController.mOngoingCallController;
-                findViewById2.setVisibility(ongoingCallController2.hasOngoingCall() ? 0 : 8);
-                findViewById.setVisibility(ongoingCallController2.hasOngoingCall() ? 0 : 8);
+                viewFindViewById2.setVisibility(ongoingCallController2.hasOngoingCall() ? 0 : 8);
+                viewFindViewById.setVisibility(ongoingCallController2.hasOngoingCall() ? 0 : 8);
             }
         };
         this.mRecentAlpha = -2.0f;
@@ -611,7 +604,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         this.mCallerExplicitAlpha = "-";
         this.mVolumeSettingObserver = new ContentObserver(null) { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController.11
             @Override // android.database.ContentObserver
-            public final void onChange(boolean z) {
+            public final void onChange(boolean z) throws Resources.NotFoundException {
                 KeyguardStatusBarViewController.this.updateBlockedIcons();
             }
         };
@@ -695,24 +688,24 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         this.mPrivacyDotViewController = privacyDotViewController;
     }
 
-    public final void animateKeyguardStatusBarIn() {
+    public final void animateKeyguardStatusBarIn() throws Resources.NotFoundException {
         int i = SceneContainerFlag.$r8$clinit;
         LogLevel logLevel = LogLevel.DEBUG;
         LogBuffer$$ExternalSyntheticLambda0 logBuffer$$ExternalSyntheticLambda0 = new LogBuffer$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = this.mLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardStatusBarViewController", logLevel, logBuffer$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = "animating status bar in";
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardStatusBarViewController", logLevel, logBuffer$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = "animating status bar in";
+        logBuffer.commit(logMessageObtain);
         if (this.mDisableStateTracker.isDisabled) {
             return;
         }
         ((KeyguardStatusBarView) this.mView).setVisibility(0);
         ((KeyguardStatusBarView) this.mView).setAlpha(0.0f);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.addUpdateListener(this.mAnimatorUpdateListener);
-        ofFloat.setDuration(360L);
-        ofFloat.setInterpolator(InterpolatorsAndroidX.LINEAR_OUT_SLOW_IN);
-        ofFloat.start(false);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.addUpdateListener(this.mAnimatorUpdateListener);
+        valueAnimatorOfFloat.setDuration(360L);
+        valueAnimatorOfFloat.setInterpolator(InterpolatorsAndroidX.LINEAR_OUT_SLOW_IN);
+        valueAnimatorOfFloat.start(false);
     }
 
     public final void animateKeyguardStatusBarOut(long j, long j2) {
@@ -720,31 +713,31 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         LogLevel logLevel = LogLevel.DEBUG;
         LogBuffer$$ExternalSyntheticLambda0 logBuffer$$ExternalSyntheticLambda0 = new LogBuffer$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = this.mLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardStatusBarViewController", logLevel, logBuffer$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = "animating status bar out";
-        logBuffer.commit(obtain);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(((KeyguardStatusBarView) this.mView).getAlpha(), 0.0f);
-        ofFloat.addUpdateListener(this.mAnimatorUpdateListener);
-        ofFloat.setStartDelay(j);
-        ofFloat.setDuration(j2);
-        ofFloat.setInterpolator(InterpolatorsAndroidX.LINEAR_OUT_SLOW_IN);
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController.10
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardStatusBarViewController", logLevel, logBuffer$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = "animating status bar out";
+        logBuffer.commit(logMessageObtain);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(((KeyguardStatusBarView) this.mView).getAlpha(), 0.0f);
+        valueAnimatorOfFloat.addUpdateListener(this.mAnimatorUpdateListener);
+        valueAnimatorOfFloat.setStartDelay(j);
+        valueAnimatorOfFloat.setDuration(j2);
+        valueAnimatorOfFloat.setInterpolator(InterpolatorsAndroidX.LINEAR_OUT_SLOW_IN);
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController.10
             @Override // androidx.core.animation.AnimatorListenerAdapter, androidx.core.animation.Animator.AnimatorListener
-            public final void onAnimationEnd(Animator animator) {
+            public final void onAnimationEnd(Animator animator) throws Resources.NotFoundException {
                 KeyguardStatusBarViewController keyguardStatusBarViewController = KeyguardStatusBarViewController.this;
                 ((KeyguardStatusBarView) ((ViewController) keyguardStatusBarViewController).mView).setVisibility(4);
                 ((KeyguardStatusBarView) ((ViewController) keyguardStatusBarViewController).mView).setAlpha(1.0f);
                 keyguardStatusBarViewController.mKeyguardStatusBarAnimateAlpha = 1.0f;
             }
         });
-        ofFloat.start(false);
+        valueAnimatorOfFloat.start(false);
     }
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "KeyguardStatusBarView:", "  mBatteryListening: "), this.mBatteryListening, printWriter, "  mExplicitAlpha: "), this.mExplicitAlpha, printWriter, "  mCallerExplicitAlpha: ");
-        m.append(this.mCallerExplicitAlpha);
-        printWriter.println(m.toString());
+        StringBuilder sbM = MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "KeyguardStatusBarView:", "  mBatteryListening: "), this.mBatteryListening, printWriter, "  mExplicitAlpha: "), this.mExplicitAlpha, printWriter, "  mCallerExplicitAlpha: ");
+        sbM.append(this.mCallerExplicitAlpha);
+        printWriter.println(sbM.toString());
         printWriter.println("  alpha: " + ((KeyguardStatusBarView) this.mView).getAlpha());
         printWriter.println("  visibility: " + ((KeyguardStatusBarView) this.mView).getVisibility());
         KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  mHiddenByKnox: "), this.mHiddenByKnox, printWriter);
@@ -794,15 +787,15 @@ public class KeyguardStatusBarViewController extends ViewController implements I
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGarden
     public final int getEssentialRightWidth() {
-        View findViewById;
+        View viewFindViewById;
         BatteryMeterView batteryMeterView = (BatteryMeterView) ((KeyguardStatusBarView) this.mView).findViewById(R.id.battery);
-        int i = 0;
-        int measuredWidth = (BasicRune.STATUS_REAL_TIME_NETWORK_SPEED && (findViewById = ((KeyguardStatusBarView) this.mView).findViewById(R.id.networkSpeed)) != null && findViewById.getVisibility() == 0) ? findViewById.getMeasuredWidth() : 0;
+        int viewWidth = 0;
+        int measuredWidth = (BasicRune.STATUS_REAL_TIME_NETWORK_SPEED && (viewFindViewById = ((KeyguardStatusBarView) this.mView).findViewById(R.id.networkSpeed)) != null && viewFindViewById.getVisibility() == 0) ? viewFindViewById.getMeasuredWidth() : 0;
         TwoPhoneModeIconController twoPhoneModeIconController = this.mTwoPhoneModeController;
         if (twoPhoneModeIconController.featureEnabled() && twoPhoneModeIconController.getViewWidth() > 0) {
-            i = twoPhoneModeIconController.getViewWidth();
+            viewWidth = twoPhoneModeIconController.getViewWidth();
         }
-        return batteryMeterView.getMeasuredWidth() + measuredWidth + i;
+        return batteryMeterView.getMeasuredWidth() + measuredWidth + viewWidth;
     }
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGarden
@@ -902,16 +895,16 @@ public class KeyguardStatusBarViewController extends ViewController implements I
 
     /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.statusbar.phone.KeyguardStatusBarView$$ExternalSyntheticLambda0] */
     @Override // com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         final int i = 0;
         final KeyguardStatusBarView keyguardStatusBarView = (KeyguardStatusBarView) this.mView;
         StatusBarUserChipViewBinder.bind(keyguardStatusBarView.mUserSwitcherContainer, this.mStatusBarUserChipViewModel, new Function1() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                int intValue = ((Integer) obj).intValue();
-                KeyguardStatusBarView keyguardStatusBarView2 = KeyguardStatusBarView.this;
-                keyguardStatusBarView2.mUserCount = intValue;
+            public final Object mo781invoke(Object obj) throws Resources.NotFoundException {
+                int iIntValue = ((Integer) obj).intValue();
+                KeyguardStatusBarView keyguardStatusBarView2 = keyguardStatusBarView;
+                keyguardStatusBarView2.mUserCount = iIntValue;
                 keyguardStatusBarView2.updateVisibilities();
                 return Unit.INSTANCE;
             }
@@ -925,14 +918,14 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         sysuiStatusBarStateController.addCallback(anonymousClass5);
         this.mStatusBarState = sysuiStatusBarStateController.getState();
         this.mKeyguardUpdateMonitor.registerCallback(this.mKeyguardUpdateMonitorCallback);
-        Integer valueOf = Integer.valueOf(((KeyguardStatusBarView) this.mView).getDisplay().getDisplayId());
+        Integer numValueOf = Integer.valueOf(((KeyguardStatusBarView) this.mView).getDisplay().getDisplayId());
         DisableStateTracker disableStateTracker = this.mDisableStateTracker;
-        disableStateTracker.displayId = valueOf;
+        disableStateTracker.displayId = numValueOf;
         this.mCommandQueue.addCallback((CommandQueue.Callbacks) disableStateTracker);
         if (this.mTintedIconManager == null) {
-            TintedIconManager create = this.mTintedIconManagerFactory.create((ViewGroup) ((KeyguardStatusBarView) this.mView).findViewById(R.id.statusIcons), StatusBarLocation.KEYGUARD);
-            this.mTintedIconManager = create;
-            ((StatusBarIconControllerImpl) this.mStatusBarIconController).addIconGroup(create);
+            TintedIconManager tintedIconManagerCreate = this.mTintedIconManagerFactory.create((ViewGroup) ((KeyguardStatusBarView) this.mView).findViewById(R.id.statusIcons), StatusBarLocation.KEYGUARD);
+            this.mTintedIconManager = tintedIconManagerCreate;
+            ((StatusBarIconControllerImpl) this.mStatusBarIconController).addIconGroup(tintedIconManagerCreate);
         } else {
             int i2 = SceneContainerFlag.$r8$clinit;
         }
@@ -940,7 +933,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         ((KeyguardStatusBarView) this.mView).setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda0
             @Override // android.view.View.OnApplyWindowInsetsListener
             public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                return KeyguardStatusBarViewController.$r8$lambda$uRu3BdOjY_vdtOtpXqUuJMlQ2MU(KeyguardStatusBarViewController.this, windowInsets);
+                return KeyguardStatusBarViewController.$r8$lambda$uRu3BdOjY_vdtOtpXqUuJMlQ2MU(this.f$0, windowInsets);
             }
         });
         this.mIndicatorGardenPresenter.updateGardenWithNewModel(this);
@@ -970,13 +963,13 @@ public class KeyguardStatusBarViewController extends ViewController implements I
                 }
             }
         });
-        View findViewById = ((KeyguardStatusBarView) this.mView).findViewById(R.id.keyguard_carrier_text_nio_container);
+        View viewFindViewById = ((KeyguardStatusBarView) this.mView).findViewById(R.id.keyguard_carrier_text_nio_container);
         KeyguardStatusBarNioLayoutRepository keyguardStatusBarNioLayoutRepository = this.mKeyguardStatusBarNioLayoutRepository;
         keyguardStatusBarNioLayoutRepository.getClass();
-        keyguardStatusBarNioLayoutRepository.printLog("injectNioContainer(" + findViewById + ")");
-        keyguardStatusBarNioLayoutRepository.nioContainerView = findViewById;
-        if (findViewById != null) {
-            findViewById.addOnLayoutChangeListener(keyguardStatusBarNioLayoutRepository);
+        keyguardStatusBarNioLayoutRepository.printLog("injectNioContainer(" + viewFindViewById + ")");
+        keyguardStatusBarNioLayoutRepository.nioContainerView = viewFindViewById;
+        if (viewFindViewById != null) {
+            viewFindViewById.addOnLayoutChangeListener(keyguardStatusBarNioLayoutRepository);
             keyguardStatusBarNioLayoutRepository.updateNioLayoutMargin();
         }
         this.mSecureSettings.registerContentObserverForUserSync("status_bar_show_vibrate_icon", false, (ContentObserver) this.mVolumeSettingObserver, -1);
@@ -1045,8 +1038,8 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         }
         ((SlimIndicatorViewMediatorImpl) this.mSlimIndicatorViewMediator).registerSubscriber("KeyguardStatusBarViewController", new SlimIndicatorViewSubscriber() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda4
             @Override // com.android.systemui.slimindicator.SlimIndicatorViewSubscriber
-            public final void updateQuickStarStyle() {
-                KeyguardStatusBarViewController.$r8$lambda$LWsNDpOIXrKQmKLzeTePDCTTMzI(KeyguardStatusBarViewController.this);
+            public final void updateQuickStarStyle() throws Resources.NotFoundException {
+                KeyguardStatusBarViewController.$r8$lambda$LWsNDpOIXrKQmKLzeTePDCTTMzI(this.f$0);
             }
         });
         this.mPluginLockStarManager.registerCallback(PluginLockStar.STATUS_BAR_TYPE, this.mPluginLockStarCallback);
@@ -1083,10 +1076,10 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         slimIndicatorKeyguardCarrierTextHelper.mCarrierTextView = null;
         ((SlimIndicatorViewMediatorImpl) slimIndicatorKeyguardCarrierTextHelper.mSlimIndicatorViewMediator).unregisterSubscriber("KeyguardStatusBarCarrierText");
         ((SlimIndicatorViewMediatorImpl) this.mSlimIndicatorViewMediator).unregisterSubscriber("KeyguardStatusBarViewController");
-        View findViewById = ((KeyguardStatusBarView) this.mView).findViewById(R.id.keyguard_carrier_text_nio_container);
+        View viewFindViewById = ((KeyguardStatusBarView) this.mView).findViewById(R.id.keyguard_carrier_text_nio_container);
         KeyguardStatusBarNioLayoutRepository keyguardStatusBarNioLayoutRepository = this.mKeyguardStatusBarNioLayoutRepository;
         keyguardStatusBarNioLayoutRepository.getClass();
-        keyguardStatusBarNioLayoutRepository.printLog("removeNioContainer(" + findViewById + ")");
+        keyguardStatusBarNioLayoutRepository.printLog("removeNioContainer(" + viewFindViewById + ")");
         View view = keyguardStatusBarNioLayoutRepository.nioContainerView;
         if (view != null) {
             view.removeOnLayoutChangeListener(keyguardStatusBarNioLayoutRepository);
@@ -1094,7 +1087,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         keyguardStatusBarNioLayoutRepository.nioContainerView = null;
     }
 
-    public final void setAlpha(float f) {
+    public final void setAlpha(float f) throws Resources.NotFoundException {
         int i = SceneContainerFlag.$r8$clinit;
         if (Float.compare(this.mExplicitAlpha, f) != 0 && Float.compare(this.mExplicitAlpha, -1.0f) == 0 && Float.compare(f, -0.01f) > 0) {
             this.mCallerExplicitAlpha = Debug.getCallers(0, 3);
@@ -1109,11 +1102,11 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         updateViewState();
     }
 
-    public void updateBlockedIcons() {
+    public void updateBlockedIcons() throws Resources.NotFoundException {
         Resources resources = getResources();
         SecureSettings secureSettings = this.mSecureSettings;
         ArraysKt___ArraysKt.toList(resources.getStringArray(R.array.config_collapsed_statusbar_icon_blocklist));
-        resources.getString(17043303);
+        resources.getString(17043307);
         secureSettings.getIntForUser("status_bar_show_vibrate_icon", 0, -2);
         ArrayList arrayList = new ArrayList();
         synchronized (this.mLock) {
@@ -1123,14 +1116,14 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         this.mMainExecutor.execute(new KeyguardStatusBarViewController$$ExternalSyntheticLambda15(this, 0));
     }
 
-    public void updateCommunalAlphaTransition(float f) {
+    public void updateCommunalAlphaTransition(float f) throws Resources.NotFoundException {
         if (!this.mCommunalShowing || f == 0.0f) {
             f = -1.0f;
         }
         setAlpha(f);
     }
 
-    public void updateCommunalShowing(boolean z) {
+    public void updateCommunalShowing(boolean z) throws Resources.NotFoundException {
         this.mCommunalShowing = z;
         if (!z) {
             setAlpha(-1.0f);
@@ -1169,12 +1162,12 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         }
     }
 
-    public final void updateViewState() {
+    public final void updateViewState() throws Resources.NotFoundException {
         boolean z = true;
         if (this.mStatusBarState == 1) {
             int i = SceneContainerFlag.$r8$clinit;
             ShadeViewStateProvider shadeViewStateProvider = this.mShadeViewStateProvider;
-            float min = 1.0f - Math.min(1.0f, shadeViewStateProvider.getLockscreenShadeDragProgress() * 2.0f);
+            float fMin = 1.0f - Math.min(1.0f, shadeViewStateProvider.getLockscreenShadeDragProgress() * 2.0f);
             if (shadeViewStateProvider.getKeyguardTouchAnimator().isViRunning()) {
                 if (this.mView != 0) {
                     Log.d("KeyguardStatusBarViewController", "updateViewState() KeyguardTouchAnimator isViRunning is true, so return.. v:" + ((KeyguardStatusBarView) this.mView).getVisibility() + ", a:" + ((KeyguardStatusBarView) this.mView).getAlpha());
@@ -1182,12 +1175,12 @@ public class KeyguardStatusBarViewController extends ViewController implements I
                 }
                 return;
             }
-            float f = this.mExplicitAlpha;
-            if (f == -1.0f) {
-                f = Math.min(getKeyguardContentsAlpha(), min) * this.mKeyguardStatusBarAnimateAlpha * (1.0f - this.mKeyguardHeadsUpShowingAmount);
+            float fMin2 = this.mExplicitAlpha;
+            if (fMin2 == -1.0f) {
+                fMin2 = Math.min(getKeyguardContentsAlpha(), fMin) * this.mKeyguardStatusBarAnimateAlpha * (1.0f - this.mKeyguardHeadsUpShowingAmount);
             }
             if (this.mSystemEventAnimator.isAnimationRunning) {
-                f = Math.min(f, this.mSystemEventAnimatorAlpha);
+                fMin2 = Math.min(fMin2, this.mSystemEventAnimatorAlpha);
             } else {
                 ((KeyguardStatusBarView) this.mView).setTranslationX(0.0f);
             }
@@ -1197,15 +1190,15 @@ public class KeyguardStatusBarViewController extends ViewController implements I
                 z = false;
             }
             DisableStateTracker disableStateTracker = this.mDisableStateTracker;
-            int i2 = (f == 0.0f || this.mDozing || z || disableStateTracker.isDisabled || (this.mCommunalShowing && this.mExplicitAlpha == -1.0f) || this.mHiddenByKnox || !isLockStarStatusBarEnabled()) ? 4 : 0;
-            if (this.mRecentAlpha != f && (f == 0.0f || f == 1.0f)) {
-                this.mRecentAlpha = f;
+            int i2 = (fMin2 == 0.0f || this.mDozing || z || disableStateTracker.isDisabled || (this.mCommunalShowing && this.mExplicitAlpha == -1.0f) || this.mHiddenByKnox || !isLockStarStatusBarEnabled()) ? 4 : 0;
+            if (this.mRecentAlpha != fMin2 && (fMin2 == 0.0f || fMin2 == 1.0f)) {
+                this.mRecentAlpha = fMin2;
                 StringBuilder sb = new StringBuilder("Alpha changed! - mExplicitAlpha=");
                 sb.append(this.mExplicitAlpha);
                 sb.append(", getKeyguardContentsAlpha()=");
                 sb.append(getKeyguardContentsAlpha());
                 sb.append(", alphaQsExpansion=");
-                sb.append(min);
+                sb.append(fMin);
                 sb.append(", mKeyguardStatusBarAnimateAlpha=");
                 sb.append(this.mKeyguardStatusBarAnimateAlpha);
                 sb.append(", mKeyguardHeadsUpShowingAmount=");
@@ -1215,11 +1208,11 @@ public class KeyguardStatusBarViewController extends ViewController implements I
                 this.mRecentVisibility = i2;
                 Log.d("KeyguardStatusBarViewController", "Visibility changed! - mDozing=" + this.mDozing + ", mFirstBypassAttempt=" + this.mFirstBypassAttempt + ", mKeyguardUpdateMonitor.shouldListenForFace()=" + keyguardUpdateMonitor.shouldListenForFace() + ", mDelayShowingKeyguardStatusBar=" + this.mDelayShowingKeyguardStatusBar + ", mDisableStateTracker.isDisabled()=" + disableStateTracker.isDisabled + ", Flags.glanceableHubV2()=false, mCommunalShowing=" + this.mCommunalShowing + ", mExplicitAlpha=" + this.mExplicitAlpha + ", mHiddenByKnox=" + this.mHiddenByKnox + ", isLockStarStatusBarEnabled()=" + isLockStarStatusBarEnabled());
             }
-            updateViewState(f, i2);
+            updateViewState(fMin2, i2);
         }
     }
 
-    public final void updateViewState(float f, int i) {
+    public final void updateViewState(float f, int i) throws Resources.NotFoundException {
         int i2 = SceneContainerFlag.$r8$clinit;
         if (this.mDisableStateTracker.isDisabled) {
             i = 4;

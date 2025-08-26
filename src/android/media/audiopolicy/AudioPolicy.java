@@ -38,7 +38,7 @@ import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
 @SystemApi
-/* loaded from: classes.dex */
+/* loaded from: classes3.dex */
 public class AudioPolicy {
     private static final boolean DEBUG = false;
     public static final int FOCUS_POLICY_DUCKING_DEFAULT = 0;
@@ -281,7 +281,7 @@ public class AudioPolicy {
     }
 
     public int attachMixes(List<AudioMix> list) {
-        int addMixForPolicy;
+        int iAddMixForPolicy;
         if (list == null) {
             throw new IllegalArgumentException("Illegal null list of AudioMix");
         }
@@ -301,8 +301,8 @@ public class AudioPolicy {
             }
             AudioPolicyConfig audioPolicyConfig = new AudioPolicyConfig(arrayList);
             try {
-                addMixForPolicy = getService().addMixForPolicy(audioPolicyConfig, cb());
-                if (addMixForPolicy == 0) {
+                iAddMixForPolicy = getService().addMixForPolicy(audioPolicyConfig, cb());
+                if (iAddMixForPolicy == 0) {
                     this.mConfig.add(arrayList);
                 }
             } catch (RemoteException e) {
@@ -310,11 +310,11 @@ public class AudioPolicy {
                 return -1;
             }
         }
-        return addMixForPolicy;
+        return iAddMixForPolicy;
     }
 
     public int detachMixes(List<AudioMix> list) {
-        int removeMixForPolicy;
+        int iRemoveMixForPolicy;
         if (list == null) {
             throw new IllegalArgumentException("Illegal null list of AudioMix");
         }
@@ -334,8 +334,8 @@ public class AudioPolicy {
             }
             AudioPolicyConfig audioPolicyConfig = new AudioPolicyConfig(arrayList);
             try {
-                removeMixForPolicy = getService().removeMixForPolicy(audioPolicyConfig, cb());
-                if (removeMixForPolicy == 0) {
+                iRemoveMixForPolicy = getService().removeMixForPolicy(audioPolicyConfig, cb());
+                if (iRemoveMixForPolicy == 0) {
                     this.mConfig.remove(arrayList);
                 }
             } catch (RemoteException e) {
@@ -343,16 +343,16 @@ public class AudioPolicy {
                 return -1;
             }
         }
-        return removeMixForPolicy;
+        return iRemoveMixForPolicy;
     }
 
     public int updateMixingRules(List<Pair<AudioMix, AudioMixingRule>> list) {
-        int updateMixingRulesForPolicy;
+        int iUpdateMixingRulesForPolicy;
         Objects.requireNonNull(list);
         IAudioService service = getService();
         try {
             synchronized (this.mLock) {
-                updateMixingRulesForPolicy = service.updateMixingRulesForPolicy((AudioMix[]) list.stream().map(new Function() { // from class: android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda1
+                iUpdateMixingRulesForPolicy = service.updateMixingRulesForPolicy((AudioMix[]) list.stream().map(new Function() { // from class: android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda1
                     @Override // java.util.function.Function
                     public final Object apply(Object obj) {
                         return AudioPolicy.lambda$updateMixingRules$0((Pair) obj);
@@ -373,11 +373,11 @@ public class AudioPolicy {
                         return AudioPolicy.lambda$updateMixingRules$3(i);
                     }
                 }), cb());
-                if (updateMixingRulesForPolicy == 0) {
+                if (iUpdateMixingRulesForPolicy == 0) {
                     this.mConfig.updateMixingRules(list);
                 }
             }
-            return updateMixingRulesForPolicy;
+            return iUpdateMixingRulesForPolicy;
         } catch (RemoteException e) {
             Log.e(TAG, "Received remote exeception in updateMixingRules call: ", e);
             return -1;
@@ -501,14 +501,14 @@ public class AudioPolicy {
     }
 
     public List<AudioMix> getMixes() {
-        List<AudioMix> copyOf;
+        List<AudioMix> listCopyOf;
         if (!Flags.audioMixTestApi()) {
             return Collections.EMPTY_LIST;
         }
         synchronized (this.mLock) {
-            copyOf = List.copyOf(this.mConfig.getMixes());
+            listCopyOf = List.copyOf(this.mConfig.getMixes());
         }
-        return copyOf;
+        return listCopyOf;
     }
 
     public void setRegistration(String str) {
@@ -551,18 +551,18 @@ public class AudioPolicy {
 
     @SystemApi
     public int clearFadeManagerConfigurationForFocusLoss() {
-        int clearFadeManagerConfigurationForFocusLoss;
+        int iClearFadeManagerConfigurationForFocusLoss;
         IAudioService service = getService();
         synchronized (this.mLock) {
             Preconditions.checkState(isAudioPolicyRegisteredLocked(), "Cannot clear FadeManagerConfiguration from unregistered AudioPolicy");
             try {
-                clearFadeManagerConfigurationForFocusLoss = service.clearFadeManagerConfigurationForFocusLoss();
+                iClearFadeManagerConfigurationForFocusLoss = service.clearFadeManagerConfigurationForFocusLoss();
             } catch (RemoteException e) {
                 Log.e(TAG, "Received remote exception for clearFadeManagerConfigurationForFocusLoss:", e);
                 throw e.rethrowFromSystemServer();
             }
         }
-        return clearFadeManagerConfigurationForFocusLoss;
+        return iClearFadeManagerConfigurationForFocusLoss;
     }
 
     @SystemApi
@@ -585,6 +585,10 @@ public class AudioPolicy {
         return this.mStatus == 2;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0047  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private boolean policyReadyToUse() {
         boolean z;
         synchronized (this.mLock) {
@@ -601,17 +605,10 @@ public class AudioPolicy {
             try {
                 MediaProjection mediaProjection = this.mProjection;
                 if (mediaProjection != null) {
-                    if (mediaProjection.getProjection().canProjectAudio()) {
-                        z = true;
-                        if ((!isLoopbackRenderPolicy() && z) || ((isCallRedirectionPolicy() && z3) || z2)) {
-                            return true;
-                        }
-                        Slog.w(TAG, "Cannot use AudioPolicy for pid " + Binder.getCallingPid() + " / uid " + Binder.getCallingUid() + ", needs MODIFY_AUDIO_ROUTING or MediaProjection that can project audio.");
-                        return false;
-                    }
+                    z = mediaProjection.getProjection().canProjectAudio();
                 }
-                z = false;
-                if (!isLoopbackRenderPolicy()) {
+                if ((isLoopbackRenderPolicy() && z) || ((isCallRedirectionPolicy() && z3) || z2)) {
+                    return true;
                 }
                 Slog.w(TAG, "Cannot use AudioPolicy for pid " + Binder.getCallingPid() + " / uid " + Binder.getCallingUid() + ", needs MODIFY_AUDIO_ROUTING or MediaProjection that can project audio.");
                 return false;
@@ -623,16 +620,16 @@ public class AudioPolicy {
     }
 
     private boolean isLoopbackRenderPolicy() {
-        boolean allMatch;
+        boolean zAllMatch;
         synchronized (this.mLock) {
-            allMatch = this.mConfig.mMixes.stream().allMatch(new Predicate() { // from class: android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda0
+            zAllMatch = this.mConfig.mMixes.stream().allMatch(new Predicate() { // from class: android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
                     return AudioPolicy.lambda$isLoopbackRenderPolicy$4((AudioMix) obj);
                 }
             });
         }
-        return allMatch;
+        return zAllMatch;
     }
 
     static /* synthetic */ boolean lambda$isLoopbackRenderPolicy$4(AudioMix audioMix) {
@@ -692,7 +689,7 @@ public class AudioPolicy {
         return this.mConfig.mDuckingPolicy;
     }
 
-    public int setFocusDuckingBehavior(int i) throws IllegalArgumentException, IllegalStateException {
+    public int setFocusDuckingBehavior(int i) throws IllegalStateException, IllegalArgumentException {
         int focusPropertiesForPolicy;
         if (i != 0 && i != 1) {
             throw new IllegalArgumentException("Invalid ducking behavior " + i);
@@ -748,12 +745,12 @@ public class AudioPolicy {
             return null;
         }
         checkMixReadyToUse(audioMix, false);
-        AudioFormat build = new AudioFormat.Builder(audioMix.getFormat()).setChannelMask(AudioFormat.inChannelMaskFromOutChannelMask(audioMix.getFormat().getChannelMask())).build();
-        AudioAttributes.Builder addTag = new AudioAttributes.Builder().setInternalCapturePreset(8).addTag(addressForTag(audioMix)).addTag(AudioRecord.SUBMIX_FIXED_VOLUME);
+        AudioFormat audioFormatBuild = new AudioFormat.Builder(audioMix.getFormat()).setChannelMask(AudioFormat.inChannelMaskFromOutChannelMask(audioMix.getFormat().getChannelMask())).build();
+        AudioAttributes.Builder builderAddTag = new AudioAttributes.Builder().setInternalCapturePreset(8).addTag(addressForTag(audioMix)).addTag(AudioRecord.SUBMIX_FIXED_VOLUME);
         if (audioMix.isForCallRedirection()) {
-            addTag.setForCallRedirection();
+            builderAddTag.setForCallRedirection();
         }
-        AudioRecord audioRecord = new AudioRecord(addTag.build(), build, AudioRecord.getMinBufferSize(audioMix.getFormat().getSampleRate(), 12, audioMix.getFormat().getEncoding()), 0);
+        AudioRecord audioRecord = new AudioRecord(builderAddTag.build(), audioFormatBuild, AudioRecord.getMinBufferSize(audioMix.getFormat().getSampleRate(), 12, audioMix.getFormat().getEncoding()), 0);
         synchronized (this.mLock) {
             if (this.mCaptors == null) {
                 this.mCaptors = new ArrayList<>(1);
@@ -769,11 +766,11 @@ public class AudioPolicy {
             return null;
         }
         checkMixReadyToUse(audioMix, true);
-        AudioAttributes.Builder addTag = new AudioAttributes.Builder().setUsage(15).addTag(addressForTag(audioMix));
+        AudioAttributes.Builder builderAddTag = new AudioAttributes.Builder().setUsage(15).addTag(addressForTag(audioMix));
         if (audioMix.isForCallRedirection()) {
-            addTag.setForCallRedirection();
+            builderAddTag.setForCallRedirection();
         }
-        AudioTrack audioTrack = new AudioTrack(addTag.build(), audioMix.getFormat(), AudioTrack.getMinBufferSize(audioMix.getFormat().getSampleRate(), audioMix.getFormat().getChannelMask(), audioMix.getFormat().getEncoding()), 1, 0);
+        AudioTrack audioTrack = new AudioTrack(builderAddTag.build(), audioMix.getFormat(), AudioTrack.getMinBufferSize(audioMix.getFormat().getSampleRate(), audioMix.getFormat().getChannelMask(), audioMix.getFormat().getEncoding()), 1, 0);
         synchronized (this.mLock) {
             if (this.mInjectors == null) {
                 this.mInjectors = new ArrayList<>(1);
@@ -919,9 +916,9 @@ public class AudioPolicy {
         if (iAudioService != null) {
             return iAudioService;
         }
-        IAudioService asInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
-        sService = asInterface;
-        return asInterface;
+        IAudioService iAudioServiceAsInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
+        sService = iAudioServiceAsInterface;
+        return iAudioServiceAsInterface;
     }
 
     public String toLogFriendlyString() {

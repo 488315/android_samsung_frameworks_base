@@ -7,7 +7,6 @@ import gov.nist.javax.sip.parser.Lexer;
 import gov.nist.javax.sip.parser.ParametersParser;
 import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PVisitedNetworkIDParser extends ParametersParser {
     public PVisitedNetworkIDParser(String str) {
@@ -15,7 +14,7 @@ public class PVisitedNetworkIDParser extends ParametersParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws ParseException {
         PVisitedNetworkIDList pVisitedNetworkIDList = new PVisitedNetworkIDList();
         this.lexer.match(2123);
         this.lexer.SPorHT();
@@ -53,12 +52,12 @@ public class PVisitedNetworkIDParser extends ParametersParser {
             }
             pVisitedNetworkIDList.add((SIPHeader) pVisitedNetworkID);
             this.lexer.SPorHT();
-            char lookAhead = this.lexer.lookAhead(0);
-            if (lookAhead != ',') {
-                if (lookAhead == '\n') {
+            char cLookAhead = this.lexer.lookAhead(0);
+            if (cLookAhead != ',') {
+                if (cLookAhead == '\n') {
                     return pVisitedNetworkIDList;
                 }
-                throw createParseException("unexpected char = " + lookAhead);
+                throw createParseException("unexpected char = " + cLookAhead);
             }
             this.lexer.match(44);
             this.lexer.SPorHT();

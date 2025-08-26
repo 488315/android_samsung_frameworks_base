@@ -54,8 +54,8 @@ public class RSAKeyParameters extends AsymmetricKeyParameter {
         if (!bigInteger.gcd(SMALL_PRIMES_PRODUCT).equals(ONE)) {
             throw new IllegalArgumentException("RSA modulus has a small prime factor");
         }
-        int asInteger = Properties.asInteger("com.android.internal.org.bouncycastle.rsa.max_mr_tests", getMRIterations(bigInteger.bitLength() / 2));
-        if (asInteger > 0 && !Primes.enhancedMRProbablePrimeTest(bigInteger, CryptoServicesRegistrar.getSecureRandom(), asInteger).isProvablyComposite()) {
+        int iAsInteger = Properties.asInteger("com.android.internal.org.bouncycastle.rsa.max_mr_tests", getMRIterations(bigInteger.bitLength() / 2));
+        if (iAsInteger > 0 && !Primes.enhancedMRProbablePrimeTest(bigInteger, CryptoServicesRegistrar.getSecureRandom(), iAsInteger).isProvablyComposite()) {
             throw new IllegalArgumentException("RSA modulus is not composite");
         }
         validated.add(bigInteger);

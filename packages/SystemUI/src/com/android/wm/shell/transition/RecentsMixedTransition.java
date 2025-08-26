@@ -31,7 +31,6 @@ import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RecentsMixedTransition extends DefaultMixedHandler.MixedTransition {
     public final DesktopTasksController mDesktopTasksController;
@@ -84,11 +83,11 @@ public class RecentsMixedTransition extends DefaultMixedHandler.MixedTransition 
                 }
             }
             recentsMixedTransition = this;
-            boolean animateKeyguard = MixedTransitionHelper.animateKeyguard(recentsMixedTransition, transitionInfo, transaction3, transaction4, this.mFinishCB, this.mKeyguardHandler, this.mPipHandler);
+            boolean zAnimateKeyguard = MixedTransitionHelper.animateKeyguard(recentsMixedTransition, transitionInfo, transaction3, transaction4, this.mFinishCB, this.mKeyguardHandler, this.mPipHandler);
             transitionInfo2 = transitionInfo;
             transaction3 = transaction3;
             transaction4 = transaction4;
-            if (animateKeyguard) {
+            if (zAnimateKeyguard) {
                 transitionFinishCallback.onTransitionFinished(null);
             }
         } else {
@@ -148,7 +147,7 @@ public class RecentsMixedTransition extends DefaultMixedHandler.MixedTransition 
                 Transitions.TransitionFinishCallback transitionFinishCallback3 = new Transitions.TransitionFinishCallback() { // from class: com.android.wm.shell.transition.RecentsMixedTransition$$ExternalSyntheticLambda0
                     @Override // com.android.wm.shell.transition.Transitions.TransitionFinishCallback
                     public final void onTransitionFinished(WindowContainerTransaction windowContainerTransaction) {
-                        RecentsMixedTransition recentsMixedTransition = RecentsMixedTransition.this;
+                        RecentsMixedTransition recentsMixedTransition = this.f$0;
                         int i4 = recentsMixedTransition.mInFlightSubAnimations - 1;
                         recentsMixedTransition.mInFlightSubAnimations = i4;
                         if (i4 == 0) {
@@ -189,19 +188,22 @@ public class RecentsMixedTransition extends DefaultMixedHandler.MixedTransition 
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
             ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -7057538322415863605L, 1, Long.valueOf(transitionInfo.getDebugId()));
         }
-        int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
+        int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
         while (true) {
             StageCoordinator stageCoordinator = this.mSplitHandler;
-            if (m < 0) {
+            if (iM < 0) {
                 final DefaultMixedHandler$$ExternalSyntheticLambda4 defaultMixedHandler$$ExternalSyntheticLambda42 = (DefaultMixedHandler$$ExternalSyntheticLambda4) transitionFinishCallback;
                 Transitions.TransitionFinishCallback transitionFinishCallback4 = new Transitions.TransitionFinishCallback() { // from class: com.android.wm.shell.transition.RecentsMixedTransition$$ExternalSyntheticLambda1
+                    /* JADX WARN: Removed duplicated region for block: B:20:0x005f  */
                     @Override // com.android.wm.shell.transition.Transitions.TransitionFinishCallback
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
                     public final void onTransitionFinished(WindowContainerTransaction windowContainerTransaction) {
                         ActivityManager.RunningTaskInfo runningTaskInfo;
-                        boolean z;
                         SurfaceControl.Transaction transaction4 = transaction2;
-                        RecentsMixedTransition recentsMixedTransition = RecentsMixedTransition.this;
-                        boolean z2 = false;
+                        RecentsMixedTransition recentsMixedTransition = this.f$0;
+                        boolean z = false;
                         recentsMixedTransition.mInFlightSubAnimations = 0;
                         if (windowContainerTransaction == null) {
                             windowContainerTransaction = new WindowContainerTransaction();
@@ -215,16 +217,16 @@ public class RecentsMixedTransition extends DefaultMixedHandler.MixedTransition 
                             }
                             for (int size2 = stageCoordinator2.mPausingTasks.size() - 1; size2 >= 0; size2--) {
                                 Integer num = (Integer) stageCoordinator2.mPausingTasks.get(size2);
-                                int intValue = num.intValue();
+                                int iIntValue = num.intValue();
                                 StageTaskListener stageTaskListener = stageCoordinator2.mMainStage;
                                 if (stageTaskListener.mChildrenTaskInfo.mTaskIds.contains(num)) {
-                                    ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) stageTaskListener.mChildrenTaskInfo.get(intValue);
+                                    ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) stageTaskListener.mChildrenTaskInfo.get(iIntValue);
                                     if (runningTaskInfo2 != null) {
                                         StageTaskListener.evictChild(windowContainerTransaction, runningTaskInfo2, "recentsPairToPair");
                                     }
                                 } else {
                                     StageTaskListener stageTaskListener2 = stageCoordinator2.mSideStage;
-                                    if (stageTaskListener2.mChildrenTaskInfo.mTaskIds.contains(num) && (runningTaskInfo = (ActivityManager.RunningTaskInfo) stageTaskListener2.mChildrenTaskInfo.get(intValue)) != null) {
+                                    if (stageTaskListener2.mChildrenTaskInfo.mTaskIds.contains(num) && (runningTaskInfo = (ActivityManager.RunningTaskInfo) stageTaskListener2.mChildrenTaskInfo.get(iIntValue)) != null) {
                                         StageTaskListener.evictChild(windowContainerTransaction, runningTaskInfo, "recentsPairToPair");
                                     }
                                 }
@@ -248,21 +250,15 @@ public class RecentsMixedTransition extends DefaultMixedHandler.MixedTransition 
                                 if (!stageTaskListener3.contains(new StageTaskListener$$ExternalSyntheticLambda0(container, 1))) {
                                     StageTaskListener stageTaskListener4 = stageCoordinator2.mSideStage;
                                     stageTaskListener4.getClass();
-                                    if (!stageTaskListener4.contains(new StageTaskListener$$ExternalSyntheticLambda0(container, 1))) {
-                                        z = false;
-                                        if (hierarchyOp.getType() != 1 && hierarchyOp.getToTop() && z) {
-                                            z2 = true;
-                                            break;
-                                        }
-                                        i5++;
+                                    boolean z2 = stageTaskListener4.contains(new StageTaskListener$$ExternalSyntheticLambda0(container, 1));
+                                    if (hierarchyOp.getType() == 1 && hierarchyOp.getToTop() && z2) {
+                                        z = true;
+                                        break;
                                     }
+                                    i5++;
                                 }
-                                z = true;
-                                if (hierarchyOp.getType() != 1) {
-                                }
-                                i5++;
                             }
-                            stageCoordinator2.onRecentsInSplitAnimationFinishing(z2, windowContainerTransaction, transaction4);
+                            stageCoordinator2.onRecentsInSplitAnimationFinishing(z, windowContainerTransaction, transaction4);
                         }
                         stageCoordinator2.onTransitionAnimationComplete();
                         defaultMixedHandler$$ExternalSyntheticLambda42.onTransitionFinished(windowContainerTransaction);
@@ -273,10 +269,10 @@ public class RecentsMixedTransition extends DefaultMixedHandler.MixedTransition 
                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_SPLIT_SCREEN_enabled[0]) {
                     ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_SPLIT_SCREEN, -5213330322118069807L, 1, Long.valueOf(transitionInfo.getDebugId()));
                 }
-                boolean isSplitScreenVisible = stageCoordinator.isSplitScreenVisible();
+                boolean zIsSplitScreenVisible = stageCoordinator.isSplitScreenVisible();
                 StageTaskListener stageTaskListener = stageCoordinator.mSideStage;
                 StageTaskListener stageTaskListener2 = stageCoordinator.mMainStage;
-                if (isSplitScreenVisible) {
+                if (zIsSplitScreenVisible) {
                     for (int i4 = 0; i4 < transitionInfo.getChanges().size(); i4++) {
                         TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(i4);
                         if (TransitionUtil.isClosingType(change.getMode()) && change.getTaskInfo() != null && (stageTaskListener2.getTopVisibleChildTaskId() == (i = change.getTaskInfo().taskId) || stageTaskListener.getTopVisibleChildTaskId() == i || (CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER && stageCoordinator.isMultiSplitScreenVisible() && stageCoordinator.mCellStage.getTopVisibleChildTaskId() == i))) {
@@ -305,11 +301,11 @@ public class RecentsMixedTransition extends DefaultMixedHandler.MixedTransition 
                 }
                 if (splitState.isSplitStashed()) {
                     TransactionPool transactionPool = stageCoordinator.mTransactionPool;
-                    SurfaceControl.Transaction acquire = transactionPool.acquire();
-                    acquire.setAlpha(stageTaskListener2.mDimLayer, 0.0f).hide(stageTaskListener2.mDimLayer);
-                    acquire.setAlpha(stageTaskListener.mDimLayer, 0.0f).hide(stageTaskListener.mDimLayer);
-                    acquire.apply();
-                    transactionPool.release(acquire);
+                    SurfaceControl.Transaction transactionAcquire = transactionPool.acquire();
+                    transactionAcquire.setAlpha(stageTaskListener2.mDimLayer, 0.0f).hide(stageTaskListener2.mDimLayer);
+                    transactionAcquire.setAlpha(stageTaskListener.mDimLayer, 0.0f).hide(stageTaskListener.mDimLayer);
+                    transactionAcquire.apply();
+                    transactionPool.release(transactionAcquire);
                     splitState.mState = 10;
                 }
                 if (CoreRune.MW_MULTI_SPLIT_CELL_DIVIDER && stageCoordinator.isMultiSplitScreenVisible()) {
@@ -321,17 +317,17 @@ public class RecentsMixedTransition extends DefaultMixedHandler.MixedTransition 
                 if (z2) {
                     stageCoordinator.mIsRecentsInSplitAnimating = true;
                 }
-                boolean startAnimation = this.mLeftoversHandler.startAnimation(this.mTransition, transitionInfo, transaction, transaction2, transitionFinishCallback4);
-                if (!startAnimation) {
+                boolean zStartAnimation = this.mLeftoversHandler.startAnimation(this.mTransition, transitionInfo, transaction, transaction2, transitionFinishCallback4);
+                if (!zStartAnimation) {
                     stageCoordinator.onRecentsInSplitAnimationCanceled();
                 }
-                return startAnimation;
+                return zStartAnimation;
             }
-            TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+            TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
             if (this.mPipHandler.isEnteringPip$1(change2, transitionInfo.getType()) && stageCoordinator.getSplitItemPosition(change2.getLastParent()) != -1) {
                 return MixedTransitionHelper.animateEnterPipFromSplit(this, transitionInfo, transaction3, transaction2, transitionFinishCallback2, this.mPlayer, this.mMixedHandler, this.mPipHandler, this.mSplitHandler, false);
             }
-            m--;
+            iM--;
             transaction3 = transaction;
             transitionFinishCallback2 = transitionFinishCallback;
         }

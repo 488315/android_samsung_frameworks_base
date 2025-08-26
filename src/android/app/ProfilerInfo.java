@@ -127,7 +127,7 @@ public class ProfilerInfo implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1138166333441L, this.profileFile);
         ParcelFileDescriptor parcelFileDescriptor = this.profileFd;
         if (parcelFileDescriptor != null) {
@@ -139,7 +139,7 @@ public class ProfilerInfo implements Parcelable {
         protoOutputStream.write(1138166333446L, this.agent);
         protoOutputStream.write(1120986464263L, this.clockType);
         protoOutputStream.write(1120986464264L, this.profilerOutputVersion);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     private ProfilerInfo(Parcel parcel) {

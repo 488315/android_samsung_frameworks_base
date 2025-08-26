@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyframeSet implements Keyframes {
     public TypeEvaluator mEvaluator;
@@ -60,24 +59,24 @@ public class KeyframeSet implements Keyframes {
     }
 
     public final String toString() {
-        String str = " ";
+        String string = " ";
         for (int i = 0; i < this.mNumKeyframes; i++) {
-            StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
-            m.append(((Keyframe) this.mKeyframes.get(i)).getValue());
-            m.append("  ");
-            str = m.toString();
+            StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(string);
+            sbM.append(((Keyframe) this.mKeyframes.get(i)).getValue());
+            sbM.append("  ");
+            string = sbM.toString();
         }
-        return str;
+        return string;
     }
 
     @Override // 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public KeyframeSet mo892clone() {
+    public KeyframeSet mo894clone() {
         List list = this.mKeyframes;
         int size = list.size();
         ArrayList arrayList = new ArrayList(size);
         for (int i = 0; i < size; i++) {
-            arrayList.add(((Keyframe) list.get(i)).mo893clone());
+            arrayList.add(((Keyframe) list.get(i)).mo895clone());
         }
         return new KeyframeSet(arrayList);
     }

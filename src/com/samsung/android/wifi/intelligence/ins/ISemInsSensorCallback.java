@@ -44,9 +44,9 @@ public interface ISemInsSensorCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemInsSensorCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemInsSensorCallback)) {
-                return (ISemInsSensorCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemInsSensorCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemInsSensorCallback)) {
+                return (ISemInsSensorCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,11 +73,11 @@ public interface ISemInsSensorCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
-                int readInt = parcel.readInt();
-                float[] createFloatArray = parcel.createFloatArray();
+                long j = parcel.readLong();
+                int i3 = parcel.readInt();
+                float[] fArrCreateFloatArray = parcel.createFloatArray();
                 parcel.enforceNoDataAvail();
-                onSensorChanged(readLong, readInt, createFloatArray);
+                onSensorChanged(j, i3, fArrCreateFloatArray);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,15 +101,15 @@ public interface ISemInsSensorCallback extends IInterface {
 
             @Override // com.samsung.android.wifi.intelligence.ins.ISemInsSensorCallback
             public void onSensorChanged(long j, int i, float[] fArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsSensorCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeFloatArray(fArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsSensorCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloatArray(fArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

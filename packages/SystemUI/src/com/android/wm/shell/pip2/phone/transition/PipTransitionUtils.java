@@ -8,7 +8,6 @@ import com.android.internal.util.Preconditions;
 import com.android.systemui.animation.RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0;
 import com.android.wm.shell.common.pip.PipDisplayLayoutState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipTransitionUtils {
     public static TransitionInfo.Change getChangeByToken(TransitionInfo transitionInfo, WindowContainerToken windowContainerToken) {
@@ -26,8 +25,8 @@ public class PipTransitionUtils {
             return null;
         }
         TransitionInfo.Change change = changeByToken;
-        for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-            TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+        for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+            TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
             if (change2 != changeByToken && change2.getParent() != null && change2.getParent().equals(change.getContainer())) {
                 if (change2.getTaskInfo() == null && change2.hasFlags(4194304)) {
                     return change2;
@@ -40,17 +39,17 @@ public class PipTransitionUtils {
 
     public static int getFixedRotationDelta(TransitionInfo transitionInfo, TransitionInfo.Change change, PipDisplayLayoutState pipDisplayLayoutState) {
         TransitionInfo.Change change2;
-        int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
+        int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
         while (true) {
-            if (m < 0) {
+            if (iM < 0) {
                 change2 = null;
                 break;
             }
-            change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+            change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
             if (change2.getEndFixedRotation() != -1) {
                 break;
             }
-            m--;
+            iM--;
         }
         int startRotation = change.getStartRotation();
         if (change.getEndRotation() != -1 && startRotation != change.getEndRotation()) {

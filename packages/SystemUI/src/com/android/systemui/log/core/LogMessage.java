@@ -1,26 +1,22 @@
 package com.android.systemui.log.core;
 
-import android.icu.text.SimpleDateFormat;
 import java.io.PrintWriter;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface LogMessage {
     default void dump(PrintWriter printWriter) {
-        SimpleDateFormat simpleDateFormat;
         PrintWriter printWriter2;
-        simpleDateFormat = LogMessageKt.DATE_FORMAT;
-        String format = simpleDateFormat.format(Long.valueOf(getTimestamp()));
+        String str = LogMessageKt.DATE_FORMAT.format(Long.valueOf(getTimestamp()));
         String shortString = getLevel().getShortString();
-        String str = (String) getMessagePrinter().mo779invoke(this);
+        String str2 = (String) getMessagePrinter().mo781invoke(this);
         if (getThreadId() > 0 || getTagSeparator() != null) {
-            format.getClass();
+            str.getClass();
             printWriter2 = printWriter;
-            LogMessageKt.printLikeLogcat(printWriter2, format, shortString, getTag(), str, getThreadId(), getTagSeparator());
+            LogMessageKt.printLikeLogcat(printWriter2, str, shortString, getTag(), str2, getThreadId(), getTagSeparator());
         } else {
-            format.getClass();
-            LogMessageKt.printLikeLogcat(printWriter, format, shortString, getTag(), str);
+            str.getClass();
+            LogMessageKt.printLikeLogcat(printWriter, str, shortString, getTag(), str2);
             printWriter2 = printWriter;
         }
         Throwable exception = getException();

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PreferenceGroup extends Preference {
     public boolean mAttachedToHierarchy;
@@ -48,20 +47,20 @@ public abstract class PreferenceGroup extends Preference {
             }
         };
         this.mPreferences = new ArrayList();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.PreferenceGroup, i, i2);
-        this.mOrderingAsAdded = obtainStyledAttributes.getBoolean(2, obtainStyledAttributes.getBoolean(2, true));
-        if (obtainStyledAttributes.hasValue(1)) {
-            int i3 = obtainStyledAttributes.getInt(1, obtainStyledAttributes.getInt(1, Integer.MAX_VALUE));
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.PreferenceGroup, i, i2);
+        this.mOrderingAsAdded = typedArrayObtainStyledAttributes.getBoolean(2, typedArrayObtainStyledAttributes.getBoolean(2, true));
+        if (typedArrayObtainStyledAttributes.hasValue(1)) {
+            int i3 = typedArrayObtainStyledAttributes.getInt(1, typedArrayObtainStyledAttributes.getInt(1, Integer.MAX_VALUE));
             if (i3 != Integer.MAX_VALUE && TextUtils.isEmpty(this.mKey)) {
                 Log.e("PreferenceGroup", getClass().getSimpleName().concat(" should have a key defined if it contains an expandable preference"));
             }
             this.mInitialExpandedChildrenCount = i3;
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public boolean addPreference(Preference preference) {
-        long j;
+        long jLongValue;
         if (!((ArrayList) this.mPreferences).contains(preference)) {
             if (preference.mKey != null) {
                 PreferenceGroup preferenceGroup = this;
@@ -87,26 +86,26 @@ public abstract class PreferenceGroup extends Preference {
                     ((PreferenceGroup) preference).mOrderingAsAdded = this.mOrderingAsAdded;
                 }
             }
-            int binarySearch = Collections.binarySearch(this.mPreferences, preference);
-            if (binarySearch < 0) {
-                binarySearch = (binarySearch * (-1)) - 1;
+            int iBinarySearch = Collections.binarySearch(this.mPreferences, preference);
+            if (iBinarySearch < 0) {
+                iBinarySearch = (iBinarySearch * (-1)) - 1;
             }
             onPrepareAddPreference(preference);
             synchronized (this) {
-                ((ArrayList) this.mPreferences).add(binarySearch, preference);
+                ((ArrayList) this.mPreferences).add(iBinarySearch, preference);
             }
             PreferenceManager preferenceManager = this.mPreferenceManager;
             String str2 = preference.mKey;
             if (str2 == null || !this.mIdRecycleCache.containsKey(str2)) {
                 synchronized (preferenceManager) {
-                    j = preferenceManager.mNextId;
-                    preferenceManager.mNextId = 1 + j;
+                    jLongValue = preferenceManager.mNextId;
+                    preferenceManager.mNextId = 1 + jLongValue;
                 }
             } else {
-                j = ((Long) this.mIdRecycleCache.get(str2)).longValue();
+                jLongValue = ((Long) this.mIdRecycleCache.get(str2)).longValue();
                 this.mIdRecycleCache.remove(str2);
             }
-            preference.mId = j;
+            preference.mId = jLongValue;
             preference.mHasId = true;
             try {
                 preference.onAttachedToHierarchy(preferenceManager);
@@ -152,7 +151,7 @@ public abstract class PreferenceGroup extends Preference {
     }
 
     public final Preference findPreference(CharSequence charSequence) {
-        Preference findPreference;
+        Preference preferenceFindPreference;
         if (charSequence == null) {
             throw new IllegalArgumentException("Key cannot be null");
         }
@@ -165,8 +164,8 @@ public abstract class PreferenceGroup extends Preference {
             if (TextUtils.equals(preference.mKey, charSequence)) {
                 return preference;
             }
-            if ((preference instanceof PreferenceGroup) && (findPreference = ((PreferenceGroup) preference).findPreference(charSequence)) != null) {
-                return findPreference;
+            if ((preference instanceof PreferenceGroup) && (preferenceFindPreference = ((PreferenceGroup) preference).findPreference(charSequence)) != null) {
+                return preferenceFindPreference;
             }
         }
         return null;
@@ -215,9 +214,9 @@ public abstract class PreferenceGroup extends Preference {
     }
 
     public void onPrepareAddPreference(Preference preference) {
-        boolean shouldDisableDependents = shouldDisableDependents();
-        if (preference.mParentDependencyMet == shouldDisableDependents) {
-            preference.mParentDependencyMet = !shouldDisableDependents;
+        boolean zShouldDisableDependents = shouldDisableDependents();
+        if (preference.mParentDependencyMet == zShouldDisableDependents) {
+            preference.mParentDependencyMet = !zShouldDisableDependents;
             preference.notifyDependencyChange(preference.shouldDisableDependents());
             preference.notifyChanged();
         }
@@ -271,7 +270,6 @@ public abstract class PreferenceGroup extends Preference {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends Preference.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: androidx.preference.PreferenceGroup.SavedState.1
             @Override // android.os.Parcelable.Creator

@@ -23,23 +23,23 @@ public class AccessibilityServiceWarning {
         if (!accessibilityServiceInfo.getResolveInfo().serviceInfo.applicationInfo.isSystemApp()) {
             cancelable.setNeutralButton(R.string.accessibility_dialog_button_uninstall_samsung, (DialogInterface.OnClickListener) null);
         }
-        AlertDialog create = cancelable.create();
-        create.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.internal.accessibility.dialog.AccessibilityServiceWarning.1
+        AlertDialog alertDialogCreate = cancelable.create();
+        alertDialogCreate.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.internal.accessibility.dialog.AccessibilityServiceWarning.1
             @Override // android.content.DialogInterface.OnShowListener
             public void onShow(DialogInterface dialogInterface) {
                 AlertDialog alertDialog = (AlertDialog) dialogInterface;
                 Button button = alertDialog.getButton(-1);
-                button.setOnClickListener(View.OnClickListener.this);
+                button.setOnClickListener(onClickListener);
                 button.setOnTouchListener(AccessibilityServiceWarning.getTouchConsumingListener());
                 alertDialog.getButton(-2).setOnClickListener(onClickListener2);
                 alertDialog.getButton(-3).setOnClickListener(onClickListener3);
             }
         });
-        Window window = create.getWindow();
+        Window window = alertDialogCreate.getWindow();
         WindowManager.LayoutParams attributes = window.getAttributes();
         attributes.privateFlags |= 524288;
         window.setAttributes(attributes);
-        return create;
+        return alertDialogCreate;
     }
 
     public static View createAccessibilityServiceWarningDialogContentView(Context context, AccessibilityServiceInfo accessibilityServiceInfo, View.OnClickListener onClickListener, View.OnClickListener onClickListener2, View.OnClickListener onClickListener3) {

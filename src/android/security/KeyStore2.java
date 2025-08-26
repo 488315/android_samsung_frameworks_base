@@ -30,7 +30,7 @@ public class KeyStore2 {
         R execute(IKeystoreService iKeystoreService) throws RemoteException;
     }
 
-    <R> R handleRemoteExceptionWithRetry(CheckedRemoteRequest<R> checkedRemoteRequest) throws KeyStoreException {
+    <R> R handleRemoteExceptionWithRetry(CheckedRemoteRequest<R> checkedRemoteRequest) throws InterruptedException, KeyStoreException {
         IKeystoreService service = getService(false);
         boolean z = true;
         while (true) {
@@ -72,12 +72,12 @@ public class KeyStore2 {
         return this.mBinder;
     }
 
-    void delete(final KeyDescriptor keyDescriptor) throws KeyStoreException {
+    void delete(final KeyDescriptor keyDescriptor) throws InterruptedException, KeyStoreException {
         StrictMode.noteDiskWrite();
         handleRemoteExceptionWithRetry(new CheckedRemoteRequest() { // from class: android.security.KeyStore2$$ExternalSyntheticLambda6
             @Override // android.security.KeyStore2.CheckedRemoteRequest
             public final Object execute(IKeystoreService iKeystoreService) {
-                return KeyStore2.lambda$delete$0(KeyDescriptor.this, iKeystoreService);
+                return KeyStore2.lambda$delete$0(keyDescriptor, iKeystoreService);
             }
         });
     }
@@ -92,9 +92,7 @@ public class KeyStore2 {
         return (KeyDescriptor[]) handleRemoteExceptionWithRetry(new CheckedRemoteRequest() { // from class: android.security.KeyStore2$$ExternalSyntheticLambda3
             @Override // android.security.KeyStore2.CheckedRemoteRequest
             public final Object execute(IKeystoreService iKeystoreService) {
-                KeyDescriptor[] listEntries;
-                listEntries = iKeystoreService.listEntries(i, j);
-                return listEntries;
+                return iKeystoreService.listEntries(i, j);
             }
         });
     }
@@ -104,9 +102,7 @@ public class KeyStore2 {
         return (KeyDescriptor[]) handleRemoteExceptionWithRetry(new CheckedRemoteRequest() { // from class: android.security.KeyStore2$$ExternalSyntheticLambda5
             @Override // android.security.KeyStore2.CheckedRemoteRequest
             public final Object execute(IKeystoreService iKeystoreService) {
-                KeyDescriptor[] listEntriesBatched;
-                listEntriesBatched = iKeystoreService.listEntriesBatched(i, j, str);
-                return listEntriesBatched;
+                return iKeystoreService.listEntriesBatched(i, j, str);
             }
         });
     }
@@ -129,19 +125,17 @@ public class KeyStore2 {
         return (KeyDescriptor) handleRemoteExceptionWithRetry(new CheckedRemoteRequest() { // from class: android.security.KeyStore2$$ExternalSyntheticLambda9
             @Override // android.security.KeyStore2.CheckedRemoteRequest
             public final Object execute(IKeystoreService iKeystoreService) {
-                KeyDescriptor grant;
-                grant = iKeystoreService.grant(KeyDescriptor.this, i, i2);
-                return grant;
+                return iKeystoreService.grant(keyDescriptor, i, i2);
             }
         });
     }
 
-    public void ungrant(final KeyDescriptor keyDescriptor, final int i) throws KeyStoreException {
+    public void ungrant(final KeyDescriptor keyDescriptor, final int i) throws InterruptedException, KeyStoreException {
         StrictMode.noteDiskWrite();
         handleRemoteExceptionWithRetry(new CheckedRemoteRequest() { // from class: android.security.KeyStore2$$ExternalSyntheticLambda2
             @Override // android.security.KeyStore2.CheckedRemoteRequest
             public final Object execute(IKeystoreService iKeystoreService) {
-                return KeyStore2.lambda$ungrant$4(KeyDescriptor.this, i, iKeystoreService);
+                return KeyStore2.lambda$ungrant$4(keyDescriptor, i, iKeystoreService);
             }
         });
     }
@@ -156,9 +150,7 @@ public class KeyStore2 {
         return (KeyEntryResponse) handleRemoteExceptionWithRetry(new CheckedRemoteRequest() { // from class: android.security.KeyStore2$$ExternalSyntheticLambda8
             @Override // android.security.KeyStore2.CheckedRemoteRequest
             public final Object execute(IKeystoreService iKeystoreService) {
-                KeyEntryResponse keyEntry;
-                keyEntry = iKeystoreService.getKeyEntry(KeyDescriptor.this);
-                return keyEntry;
+                return iKeystoreService.getKeyEntry(keyDescriptor);
             }
         });
     }
@@ -176,12 +168,12 @@ public class KeyStore2 {
         return new KeyStoreSecurityLevel(iKeystoreService.getSecurityLevel(i));
     }
 
-    public void updateSubcomponents(final KeyDescriptor keyDescriptor, final byte[] bArr, final byte[] bArr2) throws KeyStoreException {
+    public void updateSubcomponents(final KeyDescriptor keyDescriptor, final byte[] bArr, final byte[] bArr2) throws InterruptedException, KeyStoreException {
         KnoxKeyStoreHelper.checkCertificateTrustful(bArr, bArr2);
         handleRemoteExceptionWithRetry(new CheckedRemoteRequest() { // from class: android.security.KeyStore2$$ExternalSyntheticLambda7
             @Override // android.security.KeyStore2.CheckedRemoteRequest
             public final Object execute(IKeystoreService iKeystoreService) {
-                return KeyStore2.lambda$updateSubcomponents$7(KeyDescriptor.this, bArr, bArr2, iKeystoreService);
+                return KeyStore2.lambda$updateSubcomponents$7(keyDescriptor, bArr, bArr2, iKeystoreService);
             }
         });
     }
@@ -196,12 +188,12 @@ public class KeyStore2 {
         return 0;
     }
 
-    public void deleteKey(final KeyDescriptor keyDescriptor) throws KeyStoreException {
+    public void deleteKey(final KeyDescriptor keyDescriptor) throws InterruptedException, KeyStoreException {
         List<X509Certificate> certificates = getCertificates(keyDescriptor);
         handleRemoteExceptionWithRetry(new CheckedRemoteRequest() { // from class: android.security.KeyStore2$$ExternalSyntheticLambda4
             @Override // android.security.KeyStore2.CheckedRemoteRequest
             public final Object execute(IKeystoreService iKeystoreService) {
-                return KeyStore2.lambda$deleteKey$9(KeyDescriptor.this, iKeystoreService);
+                return KeyStore2.lambda$deleteKey$9(keyDescriptor, iKeystoreService);
             }
         });
         KnoxKeyStoreHelper.notifyCertificateRemovedAsUser(certificates);
@@ -222,14 +214,12 @@ public class KeyStore2 {
         return ((Integer) handleRemoteExceptionWithRetry(new CheckedRemoteRequest() { // from class: android.security.KeyStore2$$ExternalSyntheticLambda0
             @Override // android.security.KeyStore2.CheckedRemoteRequest
             public final Object execute(IKeystoreService iKeystoreService) {
-                Integer valueOf;
-                valueOf = Integer.valueOf(iKeystoreService.getNumberOfEntries(i, j));
-                return valueOf;
+                return Integer.valueOf(iKeystoreService.getNumberOfEntries(i, j));
             }
         })).intValue();
     }
 
-    protected static void interruptedPreservingSleep(long j) {
+    protected static void interruptedPreservingSleep(long j) throws InterruptedException {
         Calendar calendar = Calendar.getInstance();
         long timeInMillis = calendar.getTimeInMillis() + j;
         boolean z = false;

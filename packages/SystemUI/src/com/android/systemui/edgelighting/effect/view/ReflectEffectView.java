@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import com.android.keyguard.KeyguardSecPatternViewController$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ReflectEffectView extends DrawEdgeLayout {
     public AnimatorSet mAnimationSet;
@@ -33,10 +32,10 @@ public class ReflectEffectView extends DrawEdgeLayout {
         WindowManager windowManager = (WindowManager) getContext().getSystemService("window");
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getRealMetrics(displayMetrics);
-        int round = (int) Math.round(Math.sqrt(Math.pow(displayMetrics.heightPixels, 2.0d) + Math.pow(displayMetrics.widthPixels, 2.0d)));
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(round, round);
-        layoutParams.setMarginStart((displayMetrics.widthPixels - round) / 2);
-        layoutParams.topMargin = (displayMetrics.heightPixels - round) / 2;
+        int iRound = (int) Math.round(Math.sqrt(Math.pow(displayMetrics.heightPixels, 2.0d) + Math.pow(displayMetrics.widthPixels, 2.0d)));
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(iRound, iRound);
+        layoutParams.setMarginStart((displayMetrics.widthPixels - iRound) / 2);
+        layoutParams.topMargin = (displayMetrics.heightPixels - iRound) / 2;
         this.mImageFrame.setLayoutParams(layoutParams);
         addView(this.mImageFrame);
         setBackgroundColor(0);
@@ -49,25 +48,25 @@ public class ReflectEffectView extends DrawEdgeLayout {
             this.mAnimationSet = null;
         }
         this.mImageFrame.setRotation(0.0f);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mImageFrame, "rotation", 0.0f, 360.0f);
-        ofFloat.setDuration(6000L);
-        ofFloat.setRepeatCount(-1);
-        ofFloat.setRepeatMode(1);
-        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.0f, 0.0f, 1.0f, 1.0f, ofFloat);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mImageFrame, "rotation", 0.0f, 360.0f);
+        objectAnimatorOfFloat.setDuration(6000L);
+        objectAnimatorOfFloat.setRepeatCount(-1);
+        objectAnimatorOfFloat.setRepeatMode(1);
+        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.0f, 0.0f, 1.0f, 1.0f, objectAnimatorOfFloat);
         this.mImageFrame.setAlpha(0.0f);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mImageFrame, "alpha", this.mLightingAlpha);
-        ofFloat2.setDuration(350L);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mImageFrame, "alpha", this.mLightingAlpha);
+        objectAnimatorOfFloat2.setDuration(350L);
         AnimatorSet animatorSet2 = new AnimatorSet();
         this.mAnimationSet = animatorSet2;
-        animatorSet2.playTogether(ofFloat, ofFloat2);
+        animatorSet2.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
         this.mAnimationSet.start();
     }
 
     public final void stopAnimation() {
         this.mImageFrame.setAlpha(this.mLightingAlpha);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mImageFrame, "alpha", 0.0f);
-        ofFloat.setDuration(500L);
-        ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.edgelighting.effect.view.ReflectEffectView.1
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mImageFrame, "alpha", 0.0f);
+        objectAnimatorOfFloat.setDuration(500L);
+        objectAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.edgelighting.effect.view.ReflectEffectView.1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 AnimatorSet animatorSet = ReflectEffectView.this.mAnimationSet;
@@ -92,7 +91,7 @@ public class ReflectEffectView extends DrawEdgeLayout {
             public final void onAnimationStart(Animator animator) {
             }
         });
-        ofFloat.start();
+        objectAnimatorOfFloat.start();
     }
 
     public ReflectEffectView(Context context, AttributeSet attributeSet) {

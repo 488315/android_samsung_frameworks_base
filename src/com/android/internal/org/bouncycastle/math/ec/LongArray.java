@@ -123,28 +123,28 @@ class LongArray implements Cloneable {
 
     public int getUsedLengthFrom(int i) {
         long[] jArr = this.m_ints;
-        int min = Math.min(i, jArr.length);
-        if (min < 1) {
+        int iMin = Math.min(i, jArr.length);
+        if (iMin < 1) {
             return 0;
         }
         if (jArr[0] != 0) {
             while (true) {
-                int i2 = min - 1;
+                int i2 = iMin - 1;
                 if (jArr[i2] != 0) {
-                    return min;
+                    return iMin;
                 }
-                min = i2;
+                iMin = i2;
             }
         } else {
             while (true) {
-                int i3 = min - 1;
+                int i3 = iMin - 1;
                 if (jArr[i3] != 0) {
-                    return min;
+                    return iMin;
                 }
                 if (i3 <= 0) {
                     return 0;
                 }
-                min = i3;
+                iMin = i3;
             }
         }
     }
@@ -260,9 +260,9 @@ class LongArray implements Cloneable {
         if (this.m_ints.length == 0) {
             return new LongArray(new long[]{1});
         }
-        long[] resizedInts = resizedInts(Math.max(1, getUsedLength()));
-        resizedInts[0] = resizedInts[0] ^ 1;
-        return new LongArray(resizedInts);
+        long[] jArrResizedInts = resizedInts(Math.max(1, getUsedLength()));
+        jArrResizedInts[0] = jArrResizedInts[0] ^ 1;
+        return new LongArray(jArrResizedInts);
     }
 
     private void addShiftedByBitsSafe(LongArray longArray, int i, int i2) {
@@ -273,11 +273,11 @@ class LongArray implements Cloneable {
             add(this.m_ints, i4, longArray.m_ints, 0, i3);
             return;
         }
-        long addShiftedUp = addShiftedUp(this.m_ints, i4, longArray.m_ints, 0, i3, i5);
-        if (addShiftedUp != 0) {
+        long jAddShiftedUp = addShiftedUp(this.m_ints, i4, longArray.m_ints, 0, i3, i5);
+        if (jAddShiftedUp != 0) {
             long[] jArr = this.m_ints;
             int i6 = i3 + i4;
-            jArr[i6] = addShiftedUp ^ jArr[i6];
+            jArr[i6] = jAddShiftedUp ^ jArr[i6];
         }
     }
 
@@ -398,10 +398,10 @@ class LongArray implements Cloneable {
                 return;
             }
             if ((j2 & 1) != 0) {
-                long addShiftedUp = addShiftedUp(jArr3, i4, jArr, 0, i3, i5);
-                if (addShiftedUp != 0) {
+                long jAddShiftedUp = addShiftedUp(jArr3, i4, jArr, 0, i3, i5);
+                if (jAddShiftedUp != 0) {
                     int i6 = i2 + i;
-                    jArr2[i6] = jArr2[i6] ^ addShiftedUp;
+                    jArr2[i6] = jArr2[i6] ^ jAddShiftedUp;
                 }
             }
             i5++;
@@ -417,22 +417,22 @@ class LongArray implements Cloneable {
         LongArray longArray2;
         LongArray longArray3;
         long[] jArr;
-        int degree = degree();
-        if (degree == 0) {
+        int iDegree = degree();
+        if (iDegree == 0) {
             return this;
         }
-        int degree2 = longArray.degree();
-        if (degree2 == 0) {
+        int iDegree2 = longArray.degree();
+        if (iDegree2 == 0) {
             return longArray;
         }
-        if (degree > degree2) {
-            i3 = degree;
-            i2 = degree2;
+        if (iDegree > iDegree2) {
+            i3 = iDegree;
+            i2 = iDegree2;
             longArray3 = this;
             longArray2 = longArray;
         } else {
-            i2 = degree;
-            i3 = degree2;
+            i2 = iDegree;
+            i3 = iDegree2;
             longArray2 = this;
             longArray3 = longArray;
         }
@@ -523,22 +523,22 @@ class LongArray implements Cloneable {
         LongArray longArray3;
         long[] jArr;
         long[] jArr2;
-        int degree = degree();
-        if (degree == 0) {
+        int iDegree = degree();
+        if (iDegree == 0) {
             return this;
         }
-        int degree2 = longArray.degree();
-        if (degree2 == 0) {
+        int iDegree2 = longArray.degree();
+        if (iDegree2 == 0) {
             return longArray;
         }
-        if (degree > degree2) {
-            i3 = degree;
-            i2 = degree2;
+        if (iDegree > iDegree2) {
+            i3 = iDegree;
+            i2 = iDegree2;
             longArray3 = this;
             longArray2 = longArray;
         } else {
-            i2 = degree;
-            i3 = degree2;
+            i2 = iDegree;
+            i3 = iDegree2;
             longArray2 = this;
             longArray3 = longArray;
         }
@@ -630,22 +630,22 @@ class LongArray implements Cloneable {
         int i7;
         int i8;
         long[] jArr2;
-        int degree = degree();
-        if (degree == 0) {
+        int iDegree = degree();
+        if (iDegree == 0) {
             return this;
         }
-        int degree2 = longArray.degree();
-        if (degree2 == 0) {
+        int iDegree2 = longArray.degree();
+        if (iDegree2 == 0) {
             return longArray;
         }
-        if (degree > degree2) {
-            i3 = degree;
-            i2 = degree2;
+        if (iDegree > iDegree2) {
+            i3 = iDegree;
+            i2 = iDegree2;
             longArray3 = this;
             longArray2 = longArray;
         } else {
-            i2 = degree;
-            i3 = degree2;
+            i2 = iDegree;
+            i3 = iDegree2;
             longArray2 = this;
             longArray3 = longArray;
         }
@@ -774,8 +774,8 @@ class LongArray implements Cloneable {
     }
 
     public LongArray modReduce(int i, int[] iArr) {
-        long[] clone = Arrays.clone(this.m_ints);
-        return new LongArray(clone, 0, reduceInPlace(clone, 0, clone.length, i, iArr));
+        long[] jArrClone = Arrays.clone(this.m_ints);
+        return new LongArray(jArrClone, 0, reduceInPlace(jArrClone, 0, jArrClone.length, i, iArr));
     }
 
     public LongArray multiply(LongArray longArray, int i, int[] iArr) {
@@ -785,22 +785,22 @@ class LongArray implements Cloneable {
         LongArray longArray3;
         int i4;
         int i5;
-        int degree = degree();
-        if (degree == 0) {
+        int iDegree = degree();
+        if (iDegree == 0) {
             return this;
         }
-        int degree2 = longArray.degree();
-        if (degree2 == 0) {
+        int iDegree2 = longArray.degree();
+        if (iDegree2 == 0) {
             return longArray;
         }
-        if (degree > degree2) {
-            i3 = degree;
-            i2 = degree2;
+        if (iDegree > iDegree2) {
+            i3 = iDegree;
+            i2 = iDegree2;
             longArray3 = this;
             longArray2 = longArray;
         } else {
-            i2 = degree;
-            i3 = degree2;
+            i2 = iDegree;
+            i3 = iDegree2;
             longArray2 = this;
             longArray3 = longArray;
         }
@@ -882,11 +882,11 @@ class LongArray implements Cloneable {
 
     public void reduce(int i, int[] iArr) {
         long[] jArr = this.m_ints;
-        int reduceInPlace = reduceInPlace(jArr, 0, jArr.length, i, iArr);
-        if (reduceInPlace < jArr.length) {
-            long[] jArr2 = new long[reduceInPlace];
+        int iReduceInPlace = reduceInPlace(jArr, 0, jArr.length, i, iArr);
+        if (iReduceInPlace < jArr.length) {
+            long[] jArr2 = new long[iReduceInPlace];
             this.m_ints = jArr2;
-            System.arraycopy(jArr, 0, jArr2, 0, reduceInPlace);
+            System.arraycopy(jArr, 0, jArr2, 0, iReduceInPlace);
         }
     }
 
@@ -900,8 +900,8 @@ class LongArray implements Cloneable {
             return i2;
         }
         int i5 = i2 << 6;
-        int min = Math.min(i5, (i3 << 1) - 1);
-        int i6 = i5 - min;
+        int iMin = Math.min(i5, (i3 << 1) - 1);
+        int i6 = i5 - iMin;
         int i7 = i2;
         while (i6 >= 64) {
             i7--;
@@ -910,10 +910,10 @@ class LongArray implements Cloneable {
         int length = iArr.length;
         int i8 = iArr[length - 1];
         int i9 = length > 1 ? iArr[length - 2] : 0;
-        int max = Math.max(i3, i8 + 64);
-        int min2 = (i6 + Math.min(min - max, i3 - i9)) >> 6;
-        if (min2 > 1) {
-            int i10 = i7 - min2;
+        int iMax = Math.max(i3, i8 + 64);
+        int iMin2 = (i6 + Math.min(iMin - iMax, i3 - i9)) >> 6;
+        if (iMin2 > 1) {
+            int i10 = i7 - iMin2;
             int i11 = i7;
             reduceVectorWise(jArr, i, i11, i10, i3, iArr);
             i7 = i11;
@@ -921,17 +921,17 @@ class LongArray implements Cloneable {
                 i7--;
                 jArr[i + i7] = 0;
             }
-            min = i10 << 6;
+            iMin = i10 << 6;
         }
-        int i12 = min;
+        int i12 = iMin;
         int i13 = i7;
-        if (i12 > max) {
-            reduceWordWise(jArr, i, i13, max, i3, iArr);
+        if (i12 > iMax) {
+            reduceWordWise(jArr, i, i13, iMax, i3, iArr);
         } else {
-            max = i12;
+            iMax = i12;
         }
-        if (max > i3) {
-            reduceBitWise(jArr, i, max, i3, iArr);
+        if (iMax > i3) {
+            reduceBitWise(jArr, i, iMax, i3, iArr);
         }
         return i4;
     }
@@ -1175,59 +1175,59 @@ class LongArray implements Cloneable {
     }
 
     public LongArray modInverse(int i, int[] iArr) {
-        int degree = degree();
-        if (degree == 0) {
+        int iDegree = degree();
+        if (iDegree == 0) {
             throw new IllegalStateException();
         }
         int i2 = 1;
-        if (degree == 1) {
+        if (iDegree == 1) {
             return this;
         }
         LongArray longArray = (LongArray) clone();
         int i3 = (i + 63) >>> 6;
         LongArray longArray2 = new LongArray(i3);
-        int i4 = 0;
+        int iDegreeFrom = 0;
         reduceBit(longArray2.m_ints, 0, i, i, iArr);
         LongArray longArray3 = new LongArray(i3);
         longArray3.m_ints[0] = 1;
         LongArray longArray4 = new LongArray(i3);
         int[] iArr2 = new int[2];
-        iArr2[0] = degree;
+        iArr2[0] = iDegree;
         iArr2[1] = i + 1;
         LongArray[] longArrayArr = {longArray, longArray2};
         int[] iArr3 = new int[2];
         iArr3[0] = 1;
         iArr3[1] = 0;
         LongArray[] longArrayArr2 = {longArray3, longArray4};
-        int i5 = iArr2[1];
-        int i6 = i5 - iArr2[0];
+        int i4 = iArr2[1];
+        int i5 = i4 - iArr2[0];
         while (true) {
-            if (i6 < 0) {
-                i6 = -i6;
-                iArr2[i2] = i5;
-                iArr3[i2] = i4;
-                int i7 = 1 - i2;
-                int i8 = iArr2[i7];
-                i4 = iArr3[i7];
-                i2 = i7;
-                i5 = i8;
+            if (i5 < 0) {
+                i5 = -i5;
+                iArr2[i2] = i4;
+                iArr3[i2] = iDegreeFrom;
+                int i6 = 1 - i2;
+                int i7 = iArr2[i6];
+                iDegreeFrom = iArr3[i6];
+                i2 = i6;
+                i4 = i7;
             }
-            int i9 = 1 - i2;
-            longArrayArr[i2].addShiftedByBitsSafe(longArrayArr[i9], iArr2[i9], i6);
-            int degreeFrom = longArrayArr[i2].degreeFrom(i5);
-            if (degreeFrom == 0) {
-                return longArrayArr2[i9];
+            int i8 = 1 - i2;
+            longArrayArr[i2].addShiftedByBitsSafe(longArrayArr[i8], iArr2[i8], i5);
+            int iDegreeFrom2 = longArrayArr[i2].degreeFrom(i4);
+            if (iDegreeFrom2 == 0) {
+                return longArrayArr2[i8];
             }
-            int i10 = iArr3[i9];
-            longArrayArr2[i2].addShiftedByBitsSafe(longArrayArr2[i9], i10, i6);
-            int i11 = i10 + i6;
-            if (i11 > i4) {
-                i4 = i11;
-            } else if (i11 == i4) {
-                i4 = longArrayArr2[i2].degreeFrom(i4);
+            int i9 = iArr3[i8];
+            longArrayArr2[i2].addShiftedByBitsSafe(longArrayArr2[i8], i9, i5);
+            int i10 = i9 + i5;
+            if (i10 > iDegreeFrom) {
+                iDegreeFrom = i10;
+            } else if (i10 == iDegreeFrom) {
+                iDegreeFrom = longArrayArr2[i2].degreeFrom(iDegreeFrom);
             }
-            i6 += degreeFrom - i5;
-            i5 = degreeFrom;
+            i5 += iDegreeFrom2 - i4;
+            i4 = iDegreeFrom2;
         }
     }
 

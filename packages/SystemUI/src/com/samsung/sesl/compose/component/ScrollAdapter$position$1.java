@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class ScrollAdapter$position$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ float $value;
@@ -47,10 +46,10 @@ final class ScrollAdapter$position$1 extends SuspendLambda implements Function2 
             if (handleSizeFraction < i2) {
                 handleSizeFraction = i2;
             }
-            float coerceIn = RangesKt___RangesKt.coerceIn(f / (r3 - handleSizeFraction), 0.0f, 1.0f);
+            float fCoerceIn = RangesKt___RangesKt.coerceIn(f / (r3 - handleSizeFraction), 0.0f, 1.0f);
             SeslScrollableState seslScrollableState = this.this$0.scrollableState;
             this.label = 1;
-            if (seslScrollableState.scrollTo(coerceIn, this) == coroutineSingletons) {
+            if (seslScrollableState.scrollTo(fCoerceIn, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

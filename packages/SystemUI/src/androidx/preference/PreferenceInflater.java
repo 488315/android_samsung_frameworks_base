@@ -13,7 +13,6 @@ import java.util.HashMap;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PreferenceInflater {
     public final Context mContext;
@@ -28,14 +27,16 @@ public class PreferenceInflater {
         this.mPreferenceManager = preferenceManager;
     }
 
-    public final Preference createItem(String str, String[] strArr, AttributeSet attributeSet) {
+    public final Preference createItem(String str, String[] strArr, AttributeSet attributeSet) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         Class<?> cls;
         Constructor<?> constructor = (Constructor) CONSTRUCTOR_MAP.get(str);
         if (constructor == null) {
             try {
                 try {
                     ClassLoader classLoader = this.mContext.getClassLoader();
-                    if (strArr != null && strArr.length != 0) {
+                    if (strArr == null || strArr.length == 0) {
+                        cls = Class.forName(str, false, classLoader);
+                    } else {
                         cls = null;
                         ClassNotFoundException e = null;
                         for (String str2 : strArr) {
@@ -52,21 +53,17 @@ public class PreferenceInflater {
                             }
                             throw new InflateException(attributeSet.getPositionDescription() + ": Error inflating class " + str);
                         }
-                        constructor = cls.getConstructor(CONSTRUCTOR_SIGNATURE);
-                        constructor.setAccessible(true);
-                        CONSTRUCTOR_MAP.put(str, constructor);
                     }
-                    cls = Class.forName(str, false, classLoader);
                     constructor = cls.getConstructor(CONSTRUCTOR_SIGNATURE);
                     constructor.setAccessible(true);
                     CONSTRUCTOR_MAP.put(str, constructor);
-                } catch (Exception e3) {
-                    InflateException inflateException = new InflateException(attributeSet.getPositionDescription() + ": Error inflating class " + str);
-                    inflateException.initCause(e3);
-                    throw inflateException;
+                } catch (ClassNotFoundException e3) {
+                    throw e3;
                 }
-            } catch (ClassNotFoundException e4) {
-                throw e4;
+            } catch (Exception e4) {
+                InflateException inflateException = new InflateException(attributeSet.getPositionDescription() + ": Error inflating class " + str);
+                inflateException.initCause(e4);
+                throw inflateException;
             }
         }
         Object[] objArr = this.mConstructorArgs;
@@ -95,7 +92,7 @@ public class PreferenceInflater {
     public final PreferenceGroup inflate(XmlPullParser xmlPullParser, PreferenceScreen preferenceScreen) {
         int next;
         synchronized (this.mConstructorArgs) {
-            AttributeSet asAttributeSet = Xml.asAttributeSet(xmlPullParser);
+            AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlPullParser);
             this.mConstructorArgs[0] = this.mContext;
             do {
                 try {
@@ -105,16 +102,16 @@ public class PreferenceInflater {
                             if (next == 2) {
                                 break;
                             }
-                        } catch (XmlPullParserException e) {
-                            InflateException inflateException = new InflateException(e.getMessage());
+                        } catch (IOException e) {
+                            InflateException inflateException = new InflateException(xmlPullParser.getPositionDescription() + ": " + e.getMessage());
                             inflateException.initCause(e);
                             throw inflateException;
                         }
                     } catch (InflateException e2) {
                         throw e2;
                     }
-                } catch (IOException e3) {
-                    InflateException inflateException2 = new InflateException(xmlPullParser.getPositionDescription() + ": " + e3.getMessage());
+                } catch (XmlPullParserException e3) {
+                    InflateException inflateException2 = new InflateException(e3.getMessage());
                     inflateException2.initCause(e3);
                     throw inflateException2;
                 }
@@ -122,17 +119,17 @@ public class PreferenceInflater {
             if (next != 2) {
                 throw new InflateException(xmlPullParser.getPositionDescription() + ": No start tag found!");
             }
-            ?? r2 = (PreferenceGroup) createItemFromTag(xmlPullParser.getName(), asAttributeSet);
+            ?? r2 = (PreferenceGroup) createItemFromTag(xmlPullParser.getName(), attributeSetAsAttributeSet);
             if (preferenceScreen == null) {
                 r2.onAttachedToHierarchy(this.mPreferenceManager);
                 preferenceScreen = r2;
             }
-            rInflate(xmlPullParser, preferenceScreen, asAttributeSet);
+            rInflate(xmlPullParser, preferenceScreen, attributeSetAsAttributeSet);
         }
         return preferenceScreen;
     }
 
-    public final void rInflate(XmlPullParser xmlPullParser, Preference preference, AttributeSet attributeSet) {
+    public final void rInflate(XmlPullParser xmlPullParser, Preference preference, AttributeSet attributeSet) throws XmlPullParserException, IOException {
         int depth = xmlPullParser.getDepth();
         while (true) {
             int next = xmlPullParser.next();
@@ -159,7 +156,8 @@ public class PreferenceInflater {
                         int depth2 = xmlPullParser.getDepth();
                         while (true) {
                             int next2 = xmlPullParser.next();
-                            if (next2 != 1 && (next2 != 3 || xmlPullParser.getDepth() > depth2)) {
+                            if (next2 == 1 || (next2 == 3 && xmlPullParser.getDepth() <= depth2)) {
+                                break;
                             }
                         }
                     } catch (IOException e2) {
@@ -168,9 +166,9 @@ public class PreferenceInflater {
                         throw xmlPullParserException2;
                     }
                 } else {
-                    Preference createItemFromTag = createItemFromTag(name, attributeSet);
-                    ((PreferenceGroup) preference).addPreference(createItemFromTag);
-                    rInflate(xmlPullParser, createItemFromTag, attributeSet);
+                    Preference preferenceCreateItemFromTag = createItemFromTag(name, attributeSet);
+                    ((PreferenceGroup) preference).addPreference(preferenceCreateItemFromTag);
+                    rInflate(xmlPullParser, preferenceCreateItemFromTag, attributeSet);
                 }
             }
         }

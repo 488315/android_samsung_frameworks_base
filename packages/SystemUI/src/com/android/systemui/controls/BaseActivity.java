@@ -31,7 +31,6 @@ import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class BaseActivity extends AppCompatActivity {
     public final BroadcastDispatcher broadcastDispatcher;
@@ -51,7 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             if (intent != null) {
-                BaseActivity baseActivity = BaseActivity.this;
+                BaseActivity baseActivity = this.this$0;
                 String action = intent.getAction();
                 Log.d(baseActivity.getTag(), "onReceive " + action);
                 if (!PopupUIUtil.ACTION_CLOSE_SYSTEM_DIALOGS.equals(action)) {
@@ -79,23 +78,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         @Override // androidx.activity.OnBackPressedCallback
         public final void handleOnBackPressed() {
             Log.d("BaseActivity", "handleOnBackPressed called");
-            BaseActivity.this.onBackKeyPressed();
+            this.this$0.onBackKeyPressed();
         }
     };
     public final BaseActivity$userTrackerCallback$1 userTrackerCallback = new UserTracker.Callback() { // from class: com.android.systemui.controls.BaseActivity$userTrackerCallback$1
         public final int startingUser;
 
         {
-            this.startingUser = BaseActivity.this.controller.getCurrentUserId();
+            this.startingUser = this.this$0.controller.getCurrentUserId();
         }
 
         @Override // com.android.systemui.settings.UserTracker.Callback
         public final void onUserChanged(int i, Context context) {
-            BaseActivity baseActivity = BaseActivity.this;
+            BaseActivity baseActivity = this.this$0;
             String tag = baseActivity.getTag();
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onUserChanged newUser = ", ", startingUser = ");
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onUserChanged newUser = ", ", startingUser = ");
             int i2 = this.startingUser;
-            RecyclerView$$ExternalSyntheticOutline0.m(i2, tag, m);
+            RecyclerView$$ExternalSyntheticOutline0.m(i2, tag, sbM);
             if (i != i2) {
                 ((UserTrackerImpl) baseActivity.userTracker).removeCallback(this);
                 baseActivity.finish();
@@ -109,14 +108,13 @@ public abstract class BaseActivity extends AppCompatActivity {
                 return;
             }
             if (uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_ULTRA_POWERSAVING_MODE)) || uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_MINIMAL_BATTERY_USE))) {
-                BaseActivity baseActivity = BaseActivity.this;
+                BaseActivity baseActivity = this.this$0;
                 Log.d(baseActivity.getTag(), "isUltraPowerSavingMode changed = " + baseActivity.getSettingsHelper().isUltraPowerSavingMode());
                 baseActivity.finish();
             }
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -191,7 +189,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     @Override // android.view.View.OnApplyWindowInsetsListener
                     public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
                         Insets insets = windowInsets.getInsets(WindowInsets.Type.systemBars() | WindowInsets.Type.navigationBars() | WindowInsets.Type.displayCutout());
-                        BaseActivity baseActivity = BaseActivity.this;
+                        BaseActivity baseActivity = this.this$0;
                         Configuration configuration2 = view.getContext().getResources().getConfiguration();
                         BaseActivity.Companion companion = BaseActivity.Companion;
                         baseActivity.getClass();

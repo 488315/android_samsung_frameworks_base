@@ -83,9 +83,9 @@ public interface ISmartspaceService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISmartspaceService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISmartspaceService)) {
-                return (ISmartspaceService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISmartspaceService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISmartspaceService)) {
+                return (ISmartspaceService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -143,15 +143,15 @@ public interface ISmartspaceService extends IInterface {
                     return true;
                 case 4:
                     SmartspaceSessionId smartspaceSessionId4 = (SmartspaceSessionId) parcel.readTypedObject(SmartspaceSessionId.CREATOR);
-                    ISmartspaceCallback asInterface = ISmartspaceCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISmartspaceCallback iSmartspaceCallbackAsInterface = ISmartspaceCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerSmartspaceUpdates(smartspaceSessionId4, asInterface);
+                    registerSmartspaceUpdates(smartspaceSessionId4, iSmartspaceCallbackAsInterface);
                     return true;
                 case 5:
                     SmartspaceSessionId smartspaceSessionId5 = (SmartspaceSessionId) parcel.readTypedObject(SmartspaceSessionId.CREATOR);
-                    ISmartspaceCallback asInterface2 = ISmartspaceCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISmartspaceCallback iSmartspaceCallbackAsInterface2 = ISmartspaceCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterSmartspaceUpdates(smartspaceSessionId5, asInterface2);
+                    unregisterSmartspaceUpdates(smartspaceSessionId5, iSmartspaceCallbackAsInterface2);
                     return true;
                 case 6:
                     SmartspaceSessionId smartspaceSessionId6 = (SmartspaceSessionId) parcel.readTypedObject(SmartspaceSessionId.CREATOR);
@@ -181,77 +181,77 @@ public interface ISmartspaceService extends IInterface {
 
             @Override // android.service.smartspace.ISmartspaceService
             public void onCreateSmartspaceSession(SmartspaceConfig smartspaceConfig, SmartspaceSessionId smartspaceSessionId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
-                    obtain.writeTypedObject(smartspaceConfig, 0);
-                    obtain.writeTypedObject(smartspaceSessionId, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(smartspaceConfig, 0);
+                    parcelObtain.writeTypedObject(smartspaceSessionId, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.smartspace.ISmartspaceService
             public void notifySmartspaceEvent(SmartspaceSessionId smartspaceSessionId, SmartspaceTargetEvent smartspaceTargetEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
-                    obtain.writeTypedObject(smartspaceSessionId, 0);
-                    obtain.writeTypedObject(smartspaceTargetEvent, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(smartspaceSessionId, 0);
+                    parcelObtain.writeTypedObject(smartspaceTargetEvent, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.smartspace.ISmartspaceService
             public void requestSmartspaceUpdate(SmartspaceSessionId smartspaceSessionId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
-                    obtain.writeTypedObject(smartspaceSessionId, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(smartspaceSessionId, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.smartspace.ISmartspaceService
             public void registerSmartspaceUpdates(SmartspaceSessionId smartspaceSessionId, ISmartspaceCallback iSmartspaceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
-                    obtain.writeTypedObject(smartspaceSessionId, 0);
-                    obtain.writeStrongInterface(iSmartspaceCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(smartspaceSessionId, 0);
+                    parcelObtain.writeStrongInterface(iSmartspaceCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.smartspace.ISmartspaceService
             public void unregisterSmartspaceUpdates(SmartspaceSessionId smartspaceSessionId, ISmartspaceCallback iSmartspaceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
-                    obtain.writeTypedObject(smartspaceSessionId, 0);
-                    obtain.writeStrongInterface(iSmartspaceCallback);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(smartspaceSessionId, 0);
+                    parcelObtain.writeStrongInterface(iSmartspaceCallback);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.smartspace.ISmartspaceService
             public void onDestroySmartspaceSession(SmartspaceSessionId smartspaceSessionId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
-                    obtain.writeTypedObject(smartspaceSessionId, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISmartspaceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(smartspaceSessionId, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

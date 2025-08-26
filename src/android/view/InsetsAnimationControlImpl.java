@@ -86,9 +86,9 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
             SparseIntArray sparseIntArray = new SparseIntArray();
             this.mCurrentInsets = getInsetsFromState(insetsState2, rect, null);
             this.mHiddenInsets = calculateInsets(insetsState2, rect, sparseArray, false, null);
-            Insets calculateInsets = calculateInsets(insetsState2, rect, sparseArray, true, sparseIntArray);
-            this.mShownInsets = calculateInsets;
-            boolean z = calculateInsets.bottom == 0 && controlsType(WindowInsets.Type.ime());
+            Insets insetsCalculateInsets = calculateInsets(insetsState2, rect, sparseArray, true, sparseIntArray);
+            this.mShownInsets = insetsCalculateInsets;
+            boolean z = insetsCalculateInsets.bottom == 0 && controlsType(WindowInsets.Type.ime());
             this.mHasZeroInsetsIme = z;
             if (z) {
                 sparseIntArray.put(InsetsSource.ID_IME, 4);
@@ -97,9 +97,9 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
         } else {
             this.mCurrentInsets = calculateInsets(insetsState2, sparseArray, true);
             this.mHiddenInsets = calculateInsets(null, sparseArray, false);
-            Insets calculateInsets2 = calculateInsets(null, sparseArray, true);
-            this.mShownInsets = calculateInsets2;
-            this.mHasZeroInsetsIme = calculateInsets2.bottom == 0 && controlsType(WindowInsets.Type.ime());
+            Insets insetsCalculateInsets2 = calculateInsets(null, sparseArray, true);
+            this.mShownInsets = insetsCalculateInsets2;
+            this.mHasZeroInsetsIme = insetsCalculateInsets2.bottom == 0 && controlsType(WindowInsets.Type.ime());
             buildSideControlsMap(sparseSetArray, sparseArray);
         }
         this.mPendingInsets = this.mCurrentInsets;
@@ -183,10 +183,10 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
     @Override // android.view.InsetsAnimationControlRunner
     public void updateSurfacePosition(SparseArray<InsetsSourceControl> sparseArray) {
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
-            InsetsSourceControl valueAt = sparseArray.valueAt(size);
-            InsetsSourceControl insetsSourceControl = this.mControls.get(valueAt.getId());
+            InsetsSourceControl insetsSourceControlValueAt = sparseArray.valueAt(size);
+            InsetsSourceControl insetsSourceControl = this.mControls.get(insetsSourceControlValueAt.getId());
             if (insetsSourceControl != null) {
-                Point surfacePosition = valueAt.getSurfacePosition();
+                Point surfacePosition = insetsSourceControlValueAt.getSurfacePosition();
                 insetsSourceControl.setSurfacePosition(surfacePosition.x, surfacePosition.y);
             }
         }
@@ -228,11 +228,11 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
         this.mPendingInsets = sanitize(insets);
         this.mPendingAlpha = sanitize(f);
         this.mController.scheduleApplyChangeInsets(this);
-        boolean calculatePerceptible = calculatePerceptible(this.mPendingInsets, this.mPendingAlpha);
+        boolean zCalculatePerceptible = calculatePerceptible(this.mPendingInsets, this.mPendingAlpha);
         Boolean bool = this.mPerceptible;
-        if (bool == null || calculatePerceptible != bool.booleanValue()) {
-            this.mController.reportPerceptible(this.mTypes, calculatePerceptible);
-            this.mPerceptible = Boolean.valueOf(calculatePerceptible);
+        if (bool == null || zCalculatePerceptible != bool.booleanValue()) {
+            this.mController.reportPerceptible(this.mTypes, zCalculatePerceptible);
+            this.mPerceptible = Boolean.valueOf(zCalculatePerceptible);
         }
     }
 
@@ -245,12 +245,12 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
             Log.d(TAG, "applyChangeInsets canceled");
             return false;
         }
-        Insets subtract = Insets.subtract(this.mShownInsets, this.mPendingInsets);
+        Insets insetsSubtract = Insets.subtract(this.mShownInsets, this.mPendingInsets);
         ArrayList<SyncRtSurfaceTransactionApplier.SurfaceParams> arrayList = new ArrayList<>();
-        updateLeashesForSide(1, subtract.left, arrayList, insetsState, this.mPendingAlpha);
-        updateLeashesForSide(2, subtract.top, arrayList, insetsState, this.mPendingAlpha);
-        updateLeashesForSide(3, subtract.right, arrayList, insetsState, this.mPendingAlpha);
-        updateLeashesForSide(4, subtract.bottom, arrayList, insetsState, this.mPendingAlpha);
+        updateLeashesForSide(1, insetsSubtract.left, arrayList, insetsState, this.mPendingAlpha);
+        updateLeashesForSide(2, insetsSubtract.top, arrayList, insetsState, this.mPendingAlpha);
+        updateLeashesForSide(3, insetsSubtract.right, arrayList, insetsState, this.mPendingAlpha);
+        updateLeashesForSide(4, insetsSubtract.bottom, arrayList, insetsState, this.mPendingAlpha);
         this.mSurfaceParamsApplier.applySurfaceParams((SyncRtSurfaceTransactionApplier.SurfaceParams[]) arrayList.toArray(new SyncRtSurfaceTransactionApplier.SurfaceParams[arrayList.size()]));
         this.mCurrentInsets = this.mPendingInsets;
         this.mAnimation.setFraction(this.mPendingFraction);
@@ -272,14 +272,14 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
 
     private void releaseLeashes() {
         for (int size = this.mControls.size() - 1; size >= 0; size--) {
-            InsetsSourceControl valueAt = this.mControls.valueAt(size);
-            if (valueAt != null) {
+            InsetsSourceControl insetsSourceControlValueAt = this.mControls.valueAt(size);
+            if (insetsSourceControlValueAt != null) {
                 final InsetsAnimationControlCallbacks insetsAnimationControlCallbacks = this.mController;
                 Objects.requireNonNull(insetsAnimationControlCallbacks);
-                valueAt.release(new Consumer() { // from class: android.view.InsetsAnimationControlImpl$$ExternalSyntheticLambda0
+                insetsSourceControlValueAt.release(new Consumer() { // from class: android.view.InsetsAnimationControlImpl$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        InsetsAnimationControlCallbacks.this.releaseSurfaceControlFromRt((SurfaceControl) obj);
+                        insetsAnimationControlCallbacks.releaseSurfaceControlFromRt((SurfaceControl) obj);
                     }
                 });
             }
@@ -358,7 +358,7 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
 
     @Override // android.view.InsetsAnimationControlRunner
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1133871366145L, this.mCancelled);
         protoOutputStream.write(1133871366146L, this.mFinished);
         protoOutputStream.write(1138166333443L, Objects.toString(this.mTmpMatrix));
@@ -367,7 +367,7 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
         protoOutputStream.write(1133871366150L, this.mShownOnFinish);
         protoOutputStream.write(1108101562375L, this.mCurrentAlpha);
         protoOutputStream.write(1108101562376L, this.mPendingAlpha);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     SparseArray<InsetsSourceControl> getControls() {
@@ -380,26 +380,26 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
 
     private Insets calculateInsets(InsetsState insetsState, Rect rect, SparseArray<InsetsSourceControl> sparseArray, boolean z, SparseIntArray sparseIntArray) {
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
-            InsetsSourceControl valueAt = sparseArray.valueAt(size);
-            if (valueAt != null) {
-                insetsState.setSourceVisible(valueAt.getId(), z);
+            InsetsSourceControl insetsSourceControlValueAt = sparseArray.valueAt(size);
+            if (insetsSourceControlValueAt != null) {
+                insetsState.setSourceVisible(insetsSourceControlValueAt.getId(), z);
             }
         }
         return getInsetsFromState(insetsState, rect, sparseIntArray);
     }
 
     private Insets calculateInsets(InsetsState insetsState, SparseArray<InsetsSourceControl> sparseArray, boolean z) {
-        Insets insets = Insets.NONE;
+        Insets insetsMax = Insets.NONE;
         if (!z) {
-            return insets;
+            return insetsMax;
         }
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
-            InsetsSourceControl valueAt = sparseArray.valueAt(size);
-            if (valueAt != null && (insetsState == null || insetsState.isSourceOrDefaultVisible(valueAt.getId(), valueAt.getType()))) {
-                insets = Insets.max(insets, valueAt.getInsetsHint());
+            InsetsSourceControl insetsSourceControlValueAt = sparseArray.valueAt(size);
+            if (insetsSourceControlValueAt != null && (insetsState == null || insetsState.isSourceOrDefaultVisible(insetsSourceControlValueAt.getId(), insetsSourceControlValueAt.getType()))) {
+                insetsMax = Insets.max(insetsMax, insetsSourceControlValueAt.getInsetsHint());
             }
         }
-        return insets;
+        return insetsMax;
     }
 
     private Insets sanitize(Insets insets) {
@@ -421,20 +421,20 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
             z = !this.mCancelling ? this.mAnimationType == 0 && this.mPendingFraction == 0.0f : this.mLayoutInsetsDuringAnimation != 0;
         }
         for (int size = arraySet.size() - 1; size >= 0; size--) {
-            InsetsSourceControl valueAt = arraySet.valueAt(size);
-            InsetsSource peekSource = this.mInitialInsetsState.peekSource(valueAt.getId());
-            SurfaceControl leash = valueAt.getLeash();
-            if (CoreRune.FW_MINIMIZED_IME_INSET_ANIM && peekSource != null && valueAt.getType() == WindowInsets.Type.ime()) {
-                this.mTmpMatrix.setTranslate(valueAt.getSurfacePosition().x, valueAt.getSurfacePosition().y + peekSource.getMinimizedInsetHint().top);
+            InsetsSourceControl insetsSourceControlValueAt = arraySet.valueAt(size);
+            InsetsSource insetsSourcePeekSource = this.mInitialInsetsState.peekSource(insetsSourceControlValueAt.getId());
+            SurfaceControl leash = insetsSourceControlValueAt.getLeash();
+            if (CoreRune.FW_MINIMIZED_IME_INSET_ANIM && insetsSourcePeekSource != null && insetsSourceControlValueAt.getType() == WindowInsets.Type.ime()) {
+                this.mTmpMatrix.setTranslate(insetsSourceControlValueAt.getSurfacePosition().x, insetsSourceControlValueAt.getSurfacePosition().y + insetsSourcePeekSource.getMinimizedInsetHint().top);
             } else {
-                this.mTmpMatrix.setTranslate(valueAt.getSurfacePosition().x, valueAt.getSurfacePosition().y);
+                this.mTmpMatrix.setTranslate(insetsSourceControlValueAt.getSurfacePosition().x, insetsSourceControlValueAt.getSurfacePosition().y);
             }
-            if (peekSource != null) {
-                this.mTmpFrame.set(peekSource.getFrame());
+            if (insetsSourcePeekSource != null) {
+                this.mTmpFrame.set(insetsSourcePeekSource.getFrame());
             }
             addTranslationToMatrix(i, i2, this.mTmpMatrix, this.mTmpFrame);
-            if (insetsState != null && peekSource != null) {
-                insetsState.addSource(new InsetsSource(peekSource).setVisible(z).setFrame(this.mTmpFrame));
+            if (insetsState != null && insetsSourcePeekSource != null) {
+                insetsState.addSource(new InsetsSource(insetsSourcePeekSource).setVisible(z).setFrame(this.mTmpFrame));
             }
             if (leash != null) {
                 arrayList.add(new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(leash).withAlpha(f).withMatrix(this.mTmpMatrix).withVisibility(z).build());
@@ -444,47 +444,47 @@ public class InsetsAnimationControlImpl implements InternalInsetsAnimationContro
 
     private void addTranslationToMatrix(int i, int i2, Matrix matrix, Rect rect) {
         CompatibilityInfo.Translator translator = this.mTranslator;
-        float translateLengthInAppWindowToScreen = translator != null ? translator.translateLengthInAppWindowToScreen(i2) : i2;
+        float fTranslateLengthInAppWindowToScreen = translator != null ? translator.translateLengthInAppWindowToScreen(i2) : i2;
         if (i == 1) {
-            matrix.postTranslate(-translateLengthInAppWindowToScreen, 0.0f);
+            matrix.postTranslate(-fTranslateLengthInAppWindowToScreen, 0.0f);
             rect.offset(-i2, 0);
             return;
         }
         if (i == 2) {
-            matrix.postTranslate(0.0f, -translateLengthInAppWindowToScreen);
+            matrix.postTranslate(0.0f, -fTranslateLengthInAppWindowToScreen);
             rect.offset(0, -i2);
         } else if (i == 3) {
-            matrix.postTranslate(translateLengthInAppWindowToScreen, 0.0f);
+            matrix.postTranslate(fTranslateLengthInAppWindowToScreen, 0.0f);
             rect.offset(i2, 0);
         } else {
             if (i != 4) {
                 return;
             }
-            matrix.postTranslate(0.0f, translateLengthInAppWindowToScreen);
+            matrix.postTranslate(0.0f, fTranslateLengthInAppWindowToScreen);
             rect.offset(0, i2);
         }
     }
 
     private static void buildSideControlsMap(SparseIntArray sparseIntArray, SparseSetArray<InsetsSourceControl> sparseSetArray, SparseArray<InsetsSourceControl> sparseArray) {
         for (int size = sparseIntArray.size() - 1; size >= 0; size--) {
-            int keyAt = sparseIntArray.keyAt(size);
-            int valueAt = sparseIntArray.valueAt(size);
-            InsetsSourceControl insetsSourceControl = sparseArray.get(keyAt);
+            int iKeyAt = sparseIntArray.keyAt(size);
+            int iValueAt = sparseIntArray.valueAt(size);
+            InsetsSourceControl insetsSourceControl = sparseArray.get(iKeyAt);
             if (insetsSourceControl != null) {
-                sparseSetArray.add(valueAt, insetsSourceControl);
+                sparseSetArray.add(iValueAt, insetsSourceControl);
             }
         }
     }
 
     private static void buildSideControlsMap(SparseSetArray<InsetsSourceControl> sparseSetArray, SparseArray<InsetsSourceControl> sparseArray) {
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
-            InsetsSourceControl valueAt = sparseArray.valueAt(size);
-            if (valueAt != null) {
-                int insetSide = InsetsSource.getInsetSide(valueAt.getInsetsHint());
-                if (insetSide == 0 && valueAt.getType() == WindowInsets.Type.ime()) {
+            InsetsSourceControl insetsSourceControlValueAt = sparseArray.valueAt(size);
+            if (insetsSourceControlValueAt != null) {
+                int insetSide = InsetsSource.getInsetSide(insetsSourceControlValueAt.getInsetsHint());
+                if (insetSide == 0 && insetsSourceControlValueAt.getType() == WindowInsets.Type.ime()) {
                     insetSide = 4;
                 }
-                sparseSetArray.add(insetSide, valueAt);
+                sparseSetArray.add(insetSide, insetsSourceControlValueAt);
             }
         }
     }

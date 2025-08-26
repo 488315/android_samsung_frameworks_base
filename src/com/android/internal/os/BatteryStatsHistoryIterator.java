@@ -75,30 +75,30 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
             this.mParcelContainers = this.mBatteryStatsHistory.getParcelContainers(this.mStartTimeMs, this.mEndTimeMs);
         }
         while (true) {
-            BatteryStatsHistory.BatteryHistoryParcelContainer peek = this.mParcelContainers.peek();
-            if (peek == null) {
+            BatteryStatsHistory.BatteryHistoryParcelContainer batteryHistoryParcelContainerPeek = this.mParcelContainers.peek();
+            if (batteryHistoryParcelContainerPeek == null) {
                 return false;
             }
-            Parcel parcel = peek.getParcel();
+            Parcel parcel = batteryHistoryParcelContainerPeek.getParcel();
             if (parcel == null || parcel.dataPosition() >= parcel.dataSize()) {
-                peek.close();
+                batteryHistoryParcelContainerPeek.close();
                 this.mParcelContainers.remove();
                 this.mParcelDataPosition = 0;
             } else {
                 if (!this.mTimeInitialized) {
-                    long monotonicStartTime = peek.getMonotonicStartTime();
+                    long monotonicStartTime = batteryHistoryParcelContainerPeek.getMonotonicStartTime();
                     this.mBaseMonotonicTime = monotonicStartTime;
                     this.mHistoryItem.time = monotonicStartTime;
                     this.mTimeInitialized = true;
                 }
                 try {
                     readHistoryDelta(parcel, this.mHistoryItem);
-                    int dataPosition = parcel.dataPosition();
-                    if (dataPosition <= this.mParcelDataPosition) {
-                        Slog.wtf(TAG, "Corrupted battery history, parcel is not progressing: " + dataPosition + " of " + parcel.dataSize());
+                    int iDataPosition = parcel.dataPosition();
+                    if (iDataPosition <= this.mParcelDataPosition) {
+                        Slog.wtf(TAG, "Corrupted battery history, parcel is not progressing: " + iDataPosition + " of " + parcel.dataSize());
                         return false;
                     }
-                    this.mParcelDataPosition = dataPosition;
+                    this.mParcelDataPosition = iDataPosition;
                     if (this.mHistoryItem.cmd == 5 || this.mHistoryItem.cmd == 7) {
                         this.mBaseTimeUtc = this.mHistoryItem.currentTime - (this.mHistoryItem.time - this.mBaseMonotonicTime);
                     }
@@ -127,25 +127,25 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
 
     private void readHistoryDelta(Parcel parcel, BatteryStats.HistoryItem historyItem) {
         int i;
-        PowerStats.Descriptor readSummaryFromParcel;
+        PowerStats.Descriptor summaryFromParcel;
         int i2;
-        int readInt = parcel.readInt();
-        int i3 = 131071 & readInt;
+        int i3 = parcel.readInt();
+        int i4 = 131071 & i3;
         historyItem.cmd = (byte) 0;
         historyItem.numReadInts = 1;
-        if (i3 < 131069) {
-            historyItem.time += i3;
-        } else if (i3 == 131069) {
+        if (i4 < 131069) {
+            historyItem.time += i4;
+        } else if (i4 == 131069) {
             historyItem.readFromParcel(parcel);
             return;
-        } else if (i3 == 131070) {
+        } else if (i4 == 131070) {
             historyItem.time += parcel.readInt();
             historyItem.numReadInts++;
         } else {
             historyItem.time += parcel.readLong();
             historyItem.numReadInts += 2;
         }
-        if ((524288 & readInt) != 0) {
+        if ((524288 & i3) != 0) {
             i = parcel.readInt();
             historyItem.numReadInts++;
             if ((i & 2) != 0) {
@@ -158,13 +158,13 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
         } else {
             i = 0;
         }
-        if ((262144 & readInt) != 0) {
+        if ((262144 & i3) != 0) {
             readCurrentNTemperatureInt(parcel.readInt(), historyItem);
             historyItem.numReadInts++;
             readTemperature2Int(parcel.readInt(), historyItem);
             historyItem.numReadInts++;
         }
-        if ((readInt & 131072) != 0) {
+        if ((i3 & 131072) != 0) {
             historyItem.batterySecCurrentEvent = parcel.readInt();
             historyItem.numReadInts++;
             readSecBatteryInfoInt(parcel.readInt(), historyItem);
@@ -174,12 +174,12 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
             historyItem.protectBatteryMode = parcel.readInt();
             historyItem.numReadInts++;
         }
-        if ((1048576 & readInt) != 0) {
-            int readInt2 = parcel.readInt();
-            historyItem.states = (16777215 & readInt2) | ((-33554432) & readInt);
-            historyItem.batteryStatus = (byte) ((readInt2 >> 29) & 7);
-            historyItem.batteryHealth = (byte) (((readInt2 >> 26) & 7) | ((readInt2 >> 14) & 8));
-            historyItem.batteryPlugType = (byte) ((readInt2 >> 24) & 3);
+        if ((1048576 & i3) != 0) {
+            int i5 = parcel.readInt();
+            historyItem.states = (16777215 & i5) | ((-33554432) & i3);
+            historyItem.batteryStatus = (byte) ((i5 >> 29) & 7);
+            historyItem.batteryHealth = (byte) (((i5 >> 26) & 7) | ((i5 >> 14) & 8));
+            historyItem.batteryPlugType = (byte) ((i5 >> 24) & 3);
             byte b = historyItem.batteryPlugType;
             if (b == 1) {
                 historyItem.batteryPlugType = (byte) 1;
@@ -190,21 +190,21 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
             }
             historyItem.numReadInts++;
         } else {
-            historyItem.states = (readInt & (-33554432)) | (historyItem.states & 16777215);
+            historyItem.states = (i3 & (-33554432)) | (historyItem.states & 16777215);
         }
-        if ((2097152 & readInt) != 0) {
+        if ((2097152 & i3) != 0) {
             historyItem.states2 = parcel.readInt();
         }
-        if ((4194304 & readInt) != 0) {
-            int readInt3 = parcel.readInt();
-            int i4 = readInt3 & 65535;
-            int i5 = (readInt3 >> 16) & 65535;
-            if (readHistoryTag(parcel, i4, historyItem.localWakelockTag)) {
+        if ((4194304 & i3) != 0) {
+            int i6 = parcel.readInt();
+            int i7 = i6 & 65535;
+            int i8 = (i6 >> 16) & 65535;
+            if (readHistoryTag(parcel, i7, historyItem.localWakelockTag)) {
                 historyItem.wakelockTag = historyItem.localWakelockTag;
             } else {
                 historyItem.wakelockTag = null;
             }
-            if (readHistoryTag(parcel, i5, historyItem.localWakeReasonTag)) {
+            if (readHistoryTag(parcel, i8, historyItem.localWakeReasonTag)) {
                 historyItem.wakeReasonTag = historyItem.localWakeReasonTag;
             } else {
                 historyItem.wakeReasonTag = null;
@@ -214,11 +214,11 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
             historyItem.wakelockTag = null;
             historyItem.wakeReasonTag = null;
         }
-        if ((8388608 & readInt) != 0) {
+        if ((8388608 & i3) != 0) {
             historyItem.eventTag = historyItem.localEventTag;
-            int readInt4 = parcel.readInt();
-            historyItem.eventCode = readInt4 & 65535;
-            if (readHistoryTag(parcel, (readInt4 >> 16) & 65535, historyItem.localEventTag)) {
+            int i9 = parcel.readInt();
+            historyItem.eventCode = i9 & 65535;
+            if (readHistoryTag(parcel, (i9 >> 16) & 65535, historyItem.localEventTag)) {
                 historyItem.eventTag = historyItem.localEventTag;
             } else {
                 historyItem.eventTag = null;
@@ -233,22 +233,22 @@ public class BatteryStatsHistoryIterator implements Iterator<BatteryStats.Histor
         } else {
             historyItem.stepDetails = null;
         }
-        if ((readInt & 16777216) != 0) {
+        if ((i3 & 16777216) != 0) {
             historyItem.batteryChargeUah = parcel.readInt();
         }
         historyItem.modemRailChargeMah = parcel.readDouble();
         historyItem.wifiRailChargeMah = parcel.readDouble();
         if ((historyItem.states2 & 131072) != 0) {
-            int readInt5 = parcel.readInt();
-            if ((readInt5 & 1) != 0 && (readSummaryFromParcel = PowerStats.Descriptor.readSummaryFromParcel(parcel)) != null) {
-                this.mDescriptorRegistry.register(readSummaryFromParcel);
+            int i10 = parcel.readInt();
+            if ((i10 & 1) != 0 && (summaryFromParcel = PowerStats.Descriptor.readSummaryFromParcel(parcel)) != null) {
+                this.mDescriptorRegistry.register(summaryFromParcel);
             }
-            if ((readInt5 & 2) != 0) {
+            if ((i10 & 2) != 0) {
                 historyItem.powerStats = PowerStats.readFromParcel(parcel, this.mDescriptorRegistry);
             } else {
                 historyItem.powerStats = null;
             }
-            if ((readInt5 & 4) != 0) {
+            if ((i10 & 4) != 0) {
                 historyItem.processStateChange = historyItem.localProcessStateChange;
                 historyItem.processStateChange.readFromParcel(parcel);
                 return;

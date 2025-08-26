@@ -6,12 +6,10 @@ import kotlin.collections.AbstractList.IteratorImpl;
 import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface CommunalContentSize {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -19,21 +17,21 @@ public interface CommunalContentSize {
         }
 
         public static FixedSize toSize(int i) {
-            Object obj;
+            Object next;
             AbstractList abstractList = (AbstractList) FixedSize.$ENTRIES;
             abstractList.getClass();
             AbstractList.IteratorImpl iteratorImpl = abstractList.new IteratorImpl();
             while (true) {
                 if (!iteratorImpl.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 }
-                obj = iteratorImpl.next();
-                if (((FixedSize) obj).getSpan() == i) {
+                next = iteratorImpl.next();
+                if (((FixedSize) next).getSpan() == i) {
                     break;
                 }
             }
-            FixedSize fixedSize = (FixedSize) obj;
+            FixedSize fixedSize = (FixedSize) next;
             if (fixedSize != null) {
                 return fixedSize;
             }
@@ -43,7 +41,6 @@ public interface CommunalContentSize {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FixedSize implements CommunalContentSize {
         public static final /* synthetic */ EnumEntries $ENTRIES;
         public static final /* synthetic */ FixedSize[] $VALUES;
@@ -82,7 +79,6 @@ public interface CommunalContentSize {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Responsive implements CommunalContentSize {
         public final int span;
 
@@ -91,7 +87,7 @@ public interface CommunalContentSize {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ Responsive m1074boximpl(int i) {
+        public static final /* synthetic */ Responsive m1076boximpl(int i) {
             return new Responsive(i);
         }
 

@@ -4,7 +4,6 @@ import androidx.compose.animation.FlingCalculator;
 import androidx.compose.animation.core.FloatDecayAnimationSpec;
 import androidx.compose.ui.unit.Density;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SplineBasedFloatDecayAnimationSpec implements FloatDecayAnimationSpec {
     public final FlingCalculator flingCalculator;
@@ -36,9 +35,9 @@ public final class SplineBasedFloatDecayAnimationSpec implements FloatDecayAnima
         FlingCalculator.FlingInfo flingInfo = this.flingCalculator.flingInfo(f2);
         long j3 = flingInfo.duration;
         float f3 = j3 > 0 ? j2 / j3 : 1.0f;
-        float signum = Math.signum(flingInfo.initialVelocity) * flingInfo.distance;
+        float fSignum = Math.signum(flingInfo.initialVelocity) * flingInfo.distance;
         AndroidFlingSpline.INSTANCE.getClass();
-        return (signum * AndroidFlingSpline.flingPosition(f3).distanceCoefficient) + f;
+        return (fSignum * AndroidFlingSpline.flingPosition(f3).distanceCoefficient) + f;
     }
 
     @Override // androidx.compose.animation.core.FloatDecayAnimationSpec

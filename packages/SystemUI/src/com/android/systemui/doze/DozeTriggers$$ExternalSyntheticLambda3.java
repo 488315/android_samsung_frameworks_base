@@ -9,7 +9,6 @@ import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.statusbar.phone.DozeServiceHost;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class DozeTriggers$$ExternalSyntheticLambda3 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -26,11 +25,11 @@ public final /* synthetic */ class DozeTriggers$$ExternalSyntheticLambda3 implem
         DozeTriggers dozeTriggers = this.f$0;
         switch (i) {
             case 0:
-                boolean booleanValue = ((Boolean) obj).booleanValue();
-                boolean isExecutingTransition = dozeTriggers.mMachine.isExecutingTransition();
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
+                boolean zIsExecutingTransition = dozeTriggers.mMachine.isExecutingTransition();
                 DozeLog dozeLog = dozeTriggers.mDozeLog;
-                if (!isExecutingTransition) {
-                    boolean z = !booleanValue;
+                if (!zIsExecutingTransition) {
+                    boolean z = !zBooleanValue;
                     DozeMachine.State state = dozeTriggers.mMachine.getState();
                     boolean z2 = state == DozeMachine.State.DOZE_AOD_PAUSED;
                     DozeMachine.State state2 = DozeMachine.State.DOZE_AOD_PAUSING;
@@ -43,26 +42,26 @@ public final /* synthetic */ class DozeTriggers$$ExternalSyntheticLambda3 implem
                         LogLevel logLevel = LogLevel.DEBUG;
                         DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(16);
                         LogBuffer logBuffer = dozeLogger.buffer;
-                        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-                        ((LogMessageImpl) obtain).bool1 = z;
-                        logBuffer.commit(obtain);
+                        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+                        ((LogMessageImpl) logMessageObtain).bool1 = z;
+                        logBuffer.commit(logMessageObtain);
                         DozeServiceHost dozeServiceHost = (DozeServiceHost) dozeTriggers.mDozeHost;
                         if (z != dozeServiceHost.mIgnoreTouchWhilePulsing) {
                             DozeLogger dozeLogger2 = dozeServiceHost.mDozeLog.mLogger;
                             dozeLogger2.getClass();
                             DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda02 = new DozeLogger$$ExternalSyntheticLambda0(18);
                             LogBuffer logBuffer2 = dozeLogger2.buffer;
-                            LogMessage obtain2 = logBuffer2.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda02, null);
-                            ((LogMessageImpl) obtain2).bool1 = z;
-                            logBuffer2.commit(obtain2);
+                            LogMessage logMessageObtain2 = logBuffer2.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda02, null);
+                            ((LogMessageImpl) logMessageObtain2).bool1 = z;
+                            logBuffer2.commit(logMessageObtain2);
                         }
                         dozeServiceHost.mIgnoreTouchWhilePulsing = z;
-                        if (dozeServiceHost.mStatusBarStateController.isDozing() && !booleanValue) {
+                        if (dozeServiceHost.mStatusBarStateController.isDozing() && !zBooleanValue) {
                             dozeServiceHost.mNotificationShadeWindowViewController.cancelCurrentTouch();
                         }
                     }
-                    if (!booleanValue || (!z2 && !z3)) {
-                        if (!booleanValue && z4) {
+                    if (!zBooleanValue || (!z2 && !z3)) {
+                        if (!zBooleanValue && z4) {
                             DozeLogger dozeLogger3 = dozeLog.mLogger;
                             dozeLogger3.getClass();
                             LogBuffer.log$default(dozeLogger3.buffer, "DozeLog", LogLevel.DEBUG, "Prox NEAR, starting pausing AOD countdown");

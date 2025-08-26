@@ -62,9 +62,9 @@ public interface ISyncAdapter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISyncAdapter)) {
-                return (ISyncAdapter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISyncAdapter)) {
+                return (ISyncAdapter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,20 +97,20 @@ public interface ISyncAdapter extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ISyncAdapterUnsyncableAccountCallback asInterface = ISyncAdapterUnsyncableAccountCallback.Stub.asInterface(parcel.readStrongBinder());
+                ISyncAdapterUnsyncableAccountCallback iSyncAdapterUnsyncableAccountCallbackAsInterface = ISyncAdapterUnsyncableAccountCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onUnsyncableAccount(asInterface);
+                onUnsyncableAccount(iSyncAdapterUnsyncableAccountCallbackAsInterface);
             } else if (i == 2) {
-                ISyncContext asInterface2 = ISyncContext.Stub.asInterface(parcel.readStrongBinder());
-                String readString = parcel.readString();
+                ISyncContext iSyncContextAsInterface = ISyncContext.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
                 Account account = (Account) parcel.readTypedObject(Account.CREATOR);
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                startSync(asInterface2, readString, account, bundle);
+                startSync(iSyncContextAsInterface, string, account, bundle);
             } else if (i == 3) {
-                ISyncContext asInterface3 = ISyncContext.Stub.asInterface(parcel.readStrongBinder());
+                ISyncContext iSyncContextAsInterface2 = ISyncContext.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                cancelSync(asInterface3);
+                cancelSync(iSyncContextAsInterface2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -135,40 +135,40 @@ public interface ISyncAdapter extends IInterface {
 
             @Override // android.content.ISyncAdapter
             public void onUnsyncableAccount(ISyncAdapterUnsyncableAccountCallback iSyncAdapterUnsyncableAccountCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSyncAdapterUnsyncableAccountCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSyncAdapterUnsyncableAccountCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.ISyncAdapter
             public void startSync(ISyncContext iSyncContext, String str, Account account, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSyncContext);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(account, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSyncContext);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(account, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.ISyncAdapter
             public void cancelSync(ISyncContext iSyncContext) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSyncContext);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSyncContext);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

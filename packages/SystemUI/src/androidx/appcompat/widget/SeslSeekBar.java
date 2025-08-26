@@ -6,12 +6,10 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.SeekBar;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslSeekBar extends SeslAbsSeekBar {
     public OnSeekBarChangeListener mOnSeekBarChangeListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnSeekBarChangeListener {
         void onProgressChanged(SeslSeekBar seslSeekBar, int i, boolean z);
 

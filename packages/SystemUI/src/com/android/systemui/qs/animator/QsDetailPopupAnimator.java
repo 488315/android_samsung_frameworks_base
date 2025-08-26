@@ -29,6 +29,7 @@ import com.android.systemui.qs.animator.QsTransitionAnimator;
 import com.android.systemui.qs.animator.SecQSImplAnimatorManager;
 import com.android.systemui.qs.bar.ColoredBGHelper;
 import com.android.systemui.qs.tileimpl.LargeTileView;
+import com.android.systemui.shade.ShadeExpansionChangeEvent;
 import com.android.systemui.shade.ShadeHeaderController;
 import com.android.systemui.util.ConfigurationState;
 import com.android.systemui.util.DeviceState;
@@ -40,7 +41,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -93,7 +93,7 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
     public final QsDetailPopupAnimator$anchorLayoutChangedListener$1 anchorLayoutChangedListener = new View.OnLayoutChangeListener() { // from class: com.android.systemui.qs.animator.QsDetailPopupAnimator$anchorLayoutChangedListener$1
         @Override // android.view.View.OnLayoutChangeListener
         public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-            QsDetailPopupAnimator qsDetailPopupAnimator = QsDetailPopupAnimator.this;
+            QsDetailPopupAnimator qsDetailPopupAnimator = this.this$0;
             Rect rect = qsDetailPopupAnimator.anchorRegion;
             if (rect == null || !QsAnimatorState.isDetailShowing) {
                 return;
@@ -111,10 +111,10 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
         @Override // android.view.View.OnLayoutChangeListener
         public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
             if (!(i == i5 && i3 == i7 && i2 == i6 && i4 == i8) && QsAnimatorState.isDetailShowing) {
-                QsDetailPopupAnimator qsDetailPopupAnimator = QsDetailPopupAnimator.this;
+                QsDetailPopupAnimator qsDetailPopupAnimator = this.this$0;
                 int i9 = QsDetailPopupAnimator.$r8$clinit;
                 qsDetailPopupAnimator.aimingTarget();
-                QsDetailPopupAnimator.this.updateAnimators();
+                this.this$0.updateAnimators();
             }
         }
     };
@@ -124,12 +124,12 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
             if (i == i5 && i3 == i7 && i2 == i6 && i4 == i8) {
                 return;
             }
-            QsDetailPopupAnimator qsDetailPopupAnimator = QsDetailPopupAnimator.this;
+            QsDetailPopupAnimator qsDetailPopupAnimator = this.this$0;
             if (qsDetailPopupAnimator.isAnimating) {
                 qsDetailPopupAnimator.cancelAnimators();
                 boolean z = QsAnimatorState.isDetailPopupShowing;
                 if (z) {
-                    QsDetailPopupAnimator qsDetailPopupAnimator2 = QsDetailPopupAnimator.this;
+                    QsDetailPopupAnimator qsDetailPopupAnimator2 = this.this$0;
                     qsDetailPopupAnimator2.transitionDetail(qsDetailPopupAnimator2.anchorView, z);
                 }
             }
@@ -137,38 +137,38 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
     };
     public final QsDetailPopupAnimator$showAnimEndListener$1 showAnimEndListener = new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.qs.animator.QsDetailPopupAnimator$showAnimEndListener$1
         public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f, float f2) {
-            QsTransitionAnimator.DetailCallback detailCallback = QsDetailPopupAnimator.this.detailCallback;
+            QsTransitionAnimator.DetailCallback detailCallback = this.this$0.detailCallback;
             if (detailCallback != null) {
                 detailCallback.showDetailAnimEnd();
             }
-            if (QsDetailPopupAnimator.this.animStateCallback != null) {
+            if (this.this$0.animStateCallback != null) {
                 SecQSImplAnimatorManager.AnonymousClass2.setDetailOpening(false);
             }
-            if (!z && QsDetailPopupAnimator.this.animStateCallback != null) {
+            if (!z && this.this$0.animStateCallback != null) {
                 QsAnimatorState.setDetailShowing(true);
             }
-            QsDetailPopupAnimator qsDetailPopupAnimator = QsDetailPopupAnimator.this;
+            QsDetailPopupAnimator qsDetailPopupAnimator = this.this$0;
             qsDetailPopupAnimator.isAnimating = false;
             SpringAnimation springAnimation = qsDetailPopupAnimator.showDetailSpringAnimator;
             if (springAnimation != null) {
                 springAnimation.removeUpdateListener(qsDetailPopupAnimator.showAnimUpdateListener);
             }
-            QsDetailPopupAnimator qsDetailPopupAnimator2 = QsDetailPopupAnimator.this;
+            QsDetailPopupAnimator qsDetailPopupAnimator2 = this.this$0;
             qsDetailPopupAnimator2.showAnimUpdateListener = null;
             qsDetailPopupAnimator2.showDetailSpringAnimator = null;
         }
     };
     public final QsDetailPopupAnimator$hideAnimEndListener$1 hideAnimEndListener = new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.qs.animator.QsDetailPopupAnimator$hideAnimEndListener$1
         public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f, float f2) {
-            QsDetailPopupAnimator.this.clearAnimationState();
-            QsTransitionAnimator.DetailCallback detailCallback = QsDetailPopupAnimator.this.detailCallback;
+            this.this$0.clearAnimationState();
+            QsTransitionAnimator.DetailCallback detailCallback = this.this$0.detailCallback;
             if (detailCallback != null) {
                 detailCallback.hideDetailAnimEnd();
             }
-            if (QsDetailPopupAnimator.this.animStateCallback != null) {
+            if (this.this$0.animStateCallback != null) {
                 SecQSImplAnimatorManager.AnonymousClass2.setDetailClosing(false);
             }
-            QsDetailPopupAnimator qsDetailPopupAnimator = QsDetailPopupAnimator.this;
+            QsDetailPopupAnimator qsDetailPopupAnimator = this.this$0;
             if (qsDetailPopupAnimator.animStateCallback != null) {
                 QsAnimatorState.isDetailPopupShowing = false;
             }
@@ -176,29 +176,28 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
             if (qSAnimView != null) {
                 qSAnimView.setVisibility(4);
             }
-            QsDetailPopupAnimator qsDetailPopupAnimator2 = QsDetailPopupAnimator.this;
+            QsDetailPopupAnimator qsDetailPopupAnimator2 = this.this$0;
             qsDetailPopupAnimator2.isAnimating = false;
             QSAnimView qSAnimView2 = qsDetailPopupAnimator2.buttonContainer;
             if (qSAnimView2 != null) {
                 QsDetailPopupAnimator.setFocusability(qSAnimView2, 131072);
             }
-            QSAnimView qSAnimView3 = QsDetailPopupAnimator.this.qsPanel;
+            QSAnimView qSAnimView3 = this.this$0.qsPanel;
             if (qSAnimView3 != null) {
                 QsDetailPopupAnimator.setFocusability(qSAnimView3, 131072);
             }
-            QsDetailPopupAnimator qsDetailPopupAnimator3 = QsDetailPopupAnimator.this;
+            QsDetailPopupAnimator qsDetailPopupAnimator3 = this.this$0;
             SpringAnimation springAnimation = qsDetailPopupAnimator3.hideDetailSpringAnimator;
             if (springAnimation != null) {
                 springAnimation.removeUpdateListener(qsDetailPopupAnimator3.hideAnimUpdateListener);
             }
-            QsDetailPopupAnimator qsDetailPopupAnimator4 = QsDetailPopupAnimator.this;
+            QsDetailPopupAnimator qsDetailPopupAnimator4 = this.this$0;
             qsDetailPopupAnimator4.hideAnimUpdateListener = null;
             qsDetailPopupAnimator4.hideDetailSpringAnimator = null;
             QsAnimatorState.isDetailPopupClosing = false;
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -242,10 +241,10 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
     public final void aimingTarget() {
         int displayWidth;
         int displayHeight;
-        int[] iArr = new int[2];
+        int[] centerPositionOnScreen = new int[2];
         View view = this.anchorView;
         if (view != null) {
-            iArr = getCenterPositionOnScreen(view);
+            centerPositionOnScreen = getCenterPositionOnScreen(view);
             KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0.m(CubicBezierEasing$$ExternalSyntheticOutline0.m("aimingTarget anchor = ", view.getScaleX(), ", ", view.getScaleY(), ", w,h = "), view.getWidth(), ",", view.getHeight(), "QsDetailPopupAnimator");
         }
         View view2 = this.anchorView;
@@ -260,11 +259,11 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
         int right = view6 != null ? view6.getRight() : 0;
         View view7 = this.anchorView;
         Rect rect = new Rect(left, top, right, view7 != null ? view7.getBottom() : 0);
-        int[] iArr2 = new int[2];
+        int[] centerPositionOnScreen2 = new int[2];
         if (this.anchorView instanceof LargeTileView) {
             View view8 = this.targetView;
             if (view8 != null) {
-                iArr2 = getCenterPositionOnScreen(view8);
+                centerPositionOnScreen2 = getCenterPositionOnScreen(view8);
             }
             View view9 = this.targetView;
             displayWidth = view9 != null ? view9.getWidth() : 0;
@@ -273,22 +272,22 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
         } else {
             displayWidth = (int) (DeviceState.getDisplayWidth(this.context) * 0.917f);
             displayHeight = (int) (DeviceState.getDisplayHeight(this.context) * 0.65f);
-            iArr2[0] = (displayWidth / 2) + ((int) (DeviceState.getDisplayWidth(this.context) * 0.0415f));
-            iArr2[1] = (displayHeight / 2) + ((int) (DeviceState.getDisplayHeight(this.context) * 0.175f));
+            centerPositionOnScreen2[0] = (displayWidth / 2) + ((int) (DeviceState.getDisplayWidth(this.context) * 0.0415f));
+            centerPositionOnScreen2[1] = (displayHeight / 2) + ((int) (DeviceState.getDisplayHeight(this.context) * 0.175f));
         }
         int i = displayWidth - width;
         int i2 = displayHeight - height;
         if (i != 0 && i2 != 0) {
-            int[] iArr3 = new int[2];
+            int[] iArr = new int[2];
             View view11 = this.detailContainer;
             if (view11 != null) {
-                view11.getLocationOnScreen(iArr3);
+                view11.getLocationOnScreen(iArr);
             }
-            float measuredHeight = (this.shadeHeaderController.header.getMeasuredHeight() - iArr3[1]) / 2.0f;
-            float f = iArr2[0] - iArr[0];
+            float measuredHeight = (this.shadeHeaderController.header.getMeasuredHeight() - iArr[1]) / 2.0f;
+            float f = centerPositionOnScreen2[0] - centerPositionOnScreen[0];
             this.xDiff = f;
-            float f2 = iArr2[1] + measuredHeight;
-            float f3 = iArr[1];
+            float f2 = centerPositionOnScreen2[1] + measuredHeight;
+            float f3 = centerPositionOnScreen[1];
             this.yDiff = f2 - f3;
             this.textXDiff = f;
             this.textYDiff = (f2 - (displayHeight / 2.0f)) - f3;
@@ -302,16 +301,16 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
             this.fromScaleY = scaleY;
             this.scaleXDiff = 1.0f - this.fromScaleX;
             this.scaleYDiff = 1.0f - scaleY;
-            int i3 = iArr2[0];
-            int i4 = iArr2[1];
-            int i5 = iArr[0];
-            int i6 = iArr[1];
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i4, "aimingTarget targetPt = ", ", ", ", targetOffsetY = ");
-            m.append(measuredHeight);
-            m.append(", anchorPt = ");
-            m.append(i5);
-            m.append(",");
-            RecyclerView$$ExternalSyntheticOutline0.m(i6, "QsDetailPopupAnimator", m);
+            int i3 = centerPositionOnScreen2[0];
+            int i4 = centerPositionOnScreen2[1];
+            int i5 = centerPositionOnScreen[0];
+            int i6 = centerPositionOnScreen[1];
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i4, "aimingTarget targetPt = ", ", ", ", targetOffsetY = ");
+            sbM.append(measuredHeight);
+            sbM.append(", anchorPt = ");
+            sbM.append(i5);
+            sbM.append(",");
+            RecyclerView$$ExternalSyntheticOutline0.m(i6, "QsDetailPopupAnimator", sbM);
         }
         KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0.m(CubicBezierEasing$$ExternalSyntheticOutline0.m("aimingTarget x,y diff = ", this.xDiff, ", ", this.yDiff, ", w,h diff = "), i, ", ", i2, "QsDetailPopupAnimator");
     }
@@ -435,7 +434,6 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
         this.anchorRegion = null;
         resetSpringAnimator();
         this.panelClosingAnchorHidingAnimator = null;
-        this.panelClosingIndicatorHidingAnimator = null;
         this.panelClosingDetailHidingAnimator = null;
         QsAnimatorState.isDetailPopupShowing = false;
         this.isQuicklyDetailPopupClosing = false;
@@ -478,12 +476,12 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
     @Override // com.android.systemui.qs.animator.SecQSImplAnimatorBase
     public final void onConfigurationChanged(Configuration configuration) {
         ConfigurationState configurationState = this.lastConfigurationState;
-        boolean needToUpdate = configurationState.needToUpdate(configuration);
-        ActionBarContextView$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("onConfigurationChanged needToUpdate = ", ", isDetailPopupShowing = ", ", isDetailPopupClosing = ", needToUpdate, QsAnimatorState.isDetailPopupShowing), QsAnimatorState.isDetailPopupClosing, "QsDetailPopupAnimator");
-        if (QpRune.QUICK_PANEL_BLUR_MASSIVE && needToUpdate) {
+        boolean zNeedToUpdate = configurationState.needToUpdate(configuration);
+        ActionBarContextView$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("onConfigurationChanged needToUpdate = ", ", isDetailPopupShowing = ", ", isDetailPopupClosing = ", zNeedToUpdate, QsAnimatorState.isDetailPopupShowing), QsAnimatorState.isDetailPopupClosing, "QsDetailPopupAnimator");
+        if (QpRune.QUICK_PANEL_BLUR_MASSIVE && zNeedToUpdate) {
             clearAnimationState();
         }
-        if (QsAnimatorState.isDetailPopupShowing && needToUpdate && !QsAnimatorState.isDetailPopupClosing) {
+        if (QsAnimatorState.isDetailPopupShowing && zNeedToUpdate && !QsAnimatorState.isDetailPopupClosing) {
             QsAnimatorState.isDetailPopupShowing = false;
             View view = this.detailContent;
             ColoredBGHelper coloredBGHelper = this.coloredBGHelper;
@@ -535,79 +533,48 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0038, code lost:
-    
-        if (r3.isRunning() == false) goto L26;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x003b  */
     @Override // com.android.systemui.qs.animator.SecQSImplAnimatorBase, com.android.systemui.shade.ShadeExpansionListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onPanelExpansionChanged(com.android.systemui.shade.ShadeExpansionChangeEvent r3) {
-        /*
-            r2 = this;
-            float r0 = r2.expandedFraction
-            float r3 = r3.fraction
-            int r0 = (r0 > r3 ? 1 : (r0 == r3 ? 0 : -1))
-            if (r0 != 0) goto L9
-            goto L65
-        L9:
-            r2.expandedFraction = r3
-            boolean r0 = com.android.systemui.qs.animator.QsAnimatorState.isDetailShowing
-            boolean r1 = com.android.systemui.qs.animator.QsAnimatorState.isDetailPopupShowing
-            r0 = r0 | r1
-            if (r0 != 0) goto L13
-            goto L65
-        L13:
-            boolean r0 = r2.isQuicklyDetailPopupClosing
-            if (r0 != 0) goto L3e
-            r0 = 1065353216(0x3f800000, float:1.0)
-            int r3 = (r3 > r0 ? 1 : (r3 == r0 ? 0 : -1))
-            if (r3 >= 0) goto L3b
-            boolean r3 = com.android.systemui.qs.animator.QsAnimatorState.isDetailShowing
-            if (r3 != 0) goto L3b
-            boolean r3 = com.android.systemui.qs.animator.QsAnimatorState.isDetailPopupShowing
-            if (r3 == 0) goto L3b
-            com.android.internal.dynamicanimation.animation.SpringAnimation r3 = r2.showDetailSpringAnimator
-            if (r3 == 0) goto L3b
-            boolean r3 = r3.isRunning()
-            r0 = 1
-            if (r3 != r0) goto L3b
-            com.android.internal.dynamicanimation.animation.SpringAnimation r3 = r2.hideDetailSpringAnimator
-            if (r3 == 0) goto L3b
-            boolean r3 = r3.isRunning()
-            if (r3 != 0) goto L3b
-            goto L3c
-        L3b:
-            r0 = 0
-        L3c:
-            r2.isQuicklyDetailPopupClosing = r0
-        L3e:
-            boolean r3 = com.android.systemui.qs.animator.QsAnimatorState.isDetailShowing
-            if (r3 == 0) goto L4b
-            com.android.systemui.qs.TouchAnimator r3 = r2.panelClosingIndicatorHidingAnimator
-            if (r3 == 0) goto L4b
-            float r0 = r2.expandedFraction
-            r3.setPosition(r0)
-        L4b:
-            boolean r3 = com.android.systemui.qs.animator.QsAnimatorState.isDetailPopupShowing
-            if (r3 == 0) goto L58
-            com.android.systemui.qs.TouchAnimator r3 = r2.panelClosingAnchorHidingAnimator
-            if (r3 == 0) goto L58
-            float r0 = r2.expandedFraction
-            r3.setPosition(r0)
-        L58:
-            boolean r3 = r2.isQuicklyDetailPopupClosing
-            if (r3 == 0) goto L65
-            com.android.systemui.qs.TouchAnimator r3 = r2.panelClosingDetailHidingAnimator
-            if (r3 == 0) goto L65
-            float r2 = r2.expandedFraction
-            r3.setPosition(r2)
-        L65:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.animator.QsDetailPopupAnimator.onPanelExpansionChanged(com.android.systemui.shade.ShadeExpansionChangeEvent):void");
+    public final void onPanelExpansionChanged(ShadeExpansionChangeEvent shadeExpansionChangeEvent) {
+        TouchAnimator touchAnimator;
+        TouchAnimator touchAnimator2;
+        TouchAnimator touchAnimator3;
+        boolean z;
+        SpringAnimation springAnimation;
+        SpringAnimation springAnimation2;
+        float f = this.expandedFraction;
+        float f2 = shadeExpansionChangeEvent.fraction;
+        if (f == f2) {
+            return;
+        }
+        this.expandedFraction = f2;
+        if (!QsAnimatorState.isDetailShowing && !QsAnimatorState.isDetailPopupShowing) {
+            return;
+        }
+        if (!this.isQuicklyDetailPopupClosing) {
+            if (f2 >= 1.0f || QsAnimatorState.isDetailShowing || !QsAnimatorState.isDetailPopupShowing || (springAnimation = this.showDetailSpringAnimator) == null) {
+                z = false;
+                this.isQuicklyDetailPopupClosing = z;
+            } else {
+                z = true;
+                if (!springAnimation.isRunning() || (springAnimation2 = this.hideDetailSpringAnimator) == null || springAnimation2.isRunning()) {
+                }
+                this.isQuicklyDetailPopupClosing = z;
+            }
+        }
+        if (QsAnimatorState.isDetailShowing && (touchAnimator3 = this.panelClosingIndicatorHidingAnimator) != null) {
+            touchAnimator3.setPosition(this.expandedFraction);
+        }
+        if (QsAnimatorState.isDetailPopupShowing && (touchAnimator2 = this.panelClosingAnchorHidingAnimator) != null) {
+            touchAnimator2.setPosition(this.expandedFraction);
+        }
+        if (!this.isQuicklyDetailPopupClosing || (touchAnimator = this.panelClosingDetailHidingAnimator) == null) {
+            return;
+        }
+        touchAnimator.setPosition(this.expandedFraction);
     }
 
     public final void resetSpringAnimator() {
@@ -677,11 +644,11 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
         boolean z2 = QsAnimatorState.isDetailShowing;
         boolean z3 = QsAnimatorState.isDetailPopupClosing;
         String callers = Debug.getCallers(3, " ");
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("transitionDetail showDetail = ", ", isDetailShowing = ", ", isDetailPopupClosing = ", z, z2);
-        m.append(z3);
-        m.append("\n");
-        m.append(callers);
-        Log.d("QsDetailPopupAnimator", m.toString());
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("transitionDetail showDetail = ", ", isDetailShowing = ", ", isDetailPopupClosing = ", z, z2);
+        sbM.append(z3);
+        sbM.append("\n");
+        sbM.append(callers);
+        Log.d("QsDetailPopupAnimator", sbM.toString());
         if (z && !QsAnimatorState.isDetailPopupClosing && !Intrinsics.areEqual(view, this.anchorView)) {
             clearAnimationState();
             View view3 = this.detailContent;
@@ -787,10 +754,10 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
                 view11.removeOnLayoutChangeListener(qsDetailPopupAnimator$targetLayoutChangedListener$1);
             }
             QSAnimView qSAnimView5 = this.detail;
-            View findViewWithTag = (qSAnimView5 == null || (view2 = qSAnimView5.getView()) == null) ? null : view2.findViewWithTag("target");
-            this.targetView = findViewWithTag;
-            if (findViewWithTag != null) {
-                findViewWithTag.addOnLayoutChangeListener(qsDetailPopupAnimator$targetLayoutChangedListener$1);
+            View viewFindViewWithTag = (qSAnimView5 == null || (view2 = qSAnimView5.getView()) == null) ? null : view2.findViewWithTag("target");
+            this.targetView = viewFindViewWithTag;
+            if (viewFindViewWithTag != null) {
+                viewFindViewWithTag.addOnLayoutChangeListener(qsDetailPopupAnimator$targetLayoutChangedListener$1);
             }
             this.targetChildren.clear();
             View view12 = this.targetView;
@@ -816,9 +783,9 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
             return;
         }
         SpringAnimation springAnimation3 = this.showDetailSpringAnimator;
-        Boolean valueOf = springAnimation3 != null ? Boolean.valueOf(springAnimation3.isRunning()) : null;
+        Boolean boolValueOf = springAnimation3 != null ? Boolean.valueOf(springAnimation3.isRunning()) : null;
         SpringAnimation springAnimation4 = this.hideDetailSpringAnimator;
-        Log.d("QsDetailPopupAnimator", "updateAnimators SpringAnimator is Running (" + valueOf + ", " + (springAnimation4 != null ? Boolean.valueOf(springAnimation4.isRunning()) : null) + ") > skip updateAnimator");
+        Log.d("QsDetailPopupAnimator", "updateAnimators SpringAnimator is Running (" + boolValueOf + ", " + (springAnimation4 != null ? Boolean.valueOf(springAnimation4.isRunning()) : null) + ") > skip updateAnimator");
     }
 
     public final void updateViews$5() {
@@ -851,19 +818,15 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
             qSAnimView3 = qSAnimView4;
         }
         this.buttonContainer = qSAnimView3;
-        QSAnimView qSAnimView5 = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER_NETWORK_SPEED);
+        this.systemIconContainer = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER_SYSTEM_ICONS);
+        this.privacyContainer = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER_PRIVACY_CONTAINER);
+        QSAnimView qSAnimView5 = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER_PLMN);
         if (qSAnimView5 != null) {
             this.panelAnimViewList.add(qSAnimView5);
         }
-        this.systemIconContainer = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER_SYSTEM_ICONS);
-        this.privacyContainer = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER_PRIVACY_CONTAINER);
-        QSAnimView qSAnimView6 = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.SHADE_HEADER_PLMN);
-        if (qSAnimView6 != null) {
-            this.panelAnimViewList.add(qSAnimView6);
-        }
-        QSAnimView qSAnimView7 = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.DETAIL);
-        this.detail = qSAnimView7;
-        if (qSAnimView7 == null || (view = qSAnimView7.getView()) == null) {
+        QSAnimView qSAnimView6 = qSAnimViewProvider.get(QSAnimViewProvider.ViewType.DETAIL);
+        this.detail = qSAnimView6;
+        if (qSAnimView6 == null || (view = qSAnimView6.getView()) == null) {
             return;
         }
         this.detailContainer = view.findViewById(R.id.panel_adjusted_detail);
@@ -884,14 +847,14 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
         }
         this.springAnimList.clear();
         final boolean z2 = this.anchorView instanceof LargeTileView;
-        final float hypot = (float) Math.hypot(this.xDiff, this.yDiff);
+        final float fHypot = (float) Math.hypot(this.xDiff, this.yDiff);
         SpringAnimation springAnimation = new SpringAnimation(new FloatValueHolder(0.0f));
-        springAnimation.setSpring(new SpringForce().setStiffness(300.0f).setDampingRatio(0.80829036f).setFinalPosition(hypot));
+        springAnimation.setSpring(new SpringForce().setStiffness(300.0f).setDampingRatio(0.80829036f).setFinalPosition(fHypot));
         ?? r3 = new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.qs.animator.QsDetailPopupAnimator$updateAnimators$1$1
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
                 float f3;
                 float f4;
-                float f5 = f / hypot;
+                float f5 = f / fHypot;
                 if (Float.isNaN(f5)) {
                     Log.e("QsDetailPopupAnimator", "animatedValue for showDetailSpringAnimator is NaN, so sets as 0f");
                     f5 = 0.0f;
@@ -927,7 +890,7 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
                 }
                 float f9 = 1.0f - (0.1f * f5);
                 View view2 = this.anchorView;
-                int hashCode = view2 != null ? view2.hashCode() : 0;
+                int iHashCode = view2 != null ? view2.hashCode() : 0;
                 ArrayList arrayList = this.panelViewList;
                 int size = arrayList.size();
                 int i = 0;
@@ -935,7 +898,7 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
                     Object obj = arrayList.get(i);
                     i++;
                     View view3 = (View) obj;
-                    if (hashCode != view3.hashCode()) {
+                    if (iHashCode != view3.hashCode()) {
                         view3.setAlpha(f7);
                         view3.setScaleX(f9);
                         view3.setScaleY(f9);
@@ -949,7 +912,7 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
                     i2++;
                     QSAnimView qSAnimView = (QSAnimView) obj2;
                     View view4 = qSAnimView.getView();
-                    if (hashCode != (view4 != null ? view4.hashCode() : 0)) {
+                    if (iHashCode != (view4 != null ? view4.hashCode() : 0)) {
                         qSAnimView.setAlpha(f7);
                         qSAnimView.setScaleX(f9);
                         qSAnimView.setScaleY(f9);
@@ -1008,11 +971,11 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
         springAnimation.addEndListener(this.showAnimEndListener);
         this.springAnimList.add(springAnimation);
         this.showDetailSpringAnimator = springAnimation;
-        SpringAnimation springAnimation2 = new SpringAnimation(new FloatValueHolder(hypot));
+        SpringAnimation springAnimation2 = new SpringAnimation(new FloatValueHolder(fHypot));
         springAnimation2.setSpring(new SpringForce().setStiffness(400.0f).setDampingRatio(0.9f).setFinalPosition(0.0f));
         ?? r32 = new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.qs.animator.QsDetailPopupAnimator$updateAnimators$3$1
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f, float f2) {
-                float f3 = f / hypot;
+                float f3 = f / fHypot;
                 if (Float.isNaN(f3)) {
                     Log.e("QsDetailPopupAnimator", "animatedValue for hideDetailSpringAnimator is NaN, so sets as 1f");
                     f3 = 1.0f;
@@ -1047,7 +1010,7 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
                 }
                 float f8 = 1.0f - (0.1f * f3);
                 View view2 = this.anchorView;
-                int hashCode = view2 != null ? view2.hashCode() : 0;
+                int iHashCode = view2 != null ? view2.hashCode() : 0;
                 ArrayList arrayList = this.panelViewList;
                 int size = arrayList.size();
                 int i = 0;
@@ -1055,7 +1018,7 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
                     Object obj = arrayList.get(i);
                     i++;
                     View view3 = (View) obj;
-                    if (hashCode != view3.hashCode()) {
+                    if (iHashCode != view3.hashCode()) {
                         view3.setAlpha(f5);
                         view3.setScaleX(f8);
                         view3.setScaleY(f8);
@@ -1069,7 +1032,7 @@ public final class QsDetailPopupAnimator extends SecQSImplAnimatorBase {
                     i2++;
                     QSAnimView qSAnimView = (QSAnimView) obj2;
                     View view4 = qSAnimView.getView();
-                    if (hashCode != (view4 != null ? view4.hashCode() : 0)) {
+                    if (iHashCode != (view4 != null ? view4.hashCode() : 0)) {
                         qSAnimView.setAlpha(f5);
                         qSAnimView.setScaleX(f8);
                         qSAnimView.setScaleY(f8);

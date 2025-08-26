@@ -19,40 +19,40 @@ public final class SQLiteQuery extends SQLiteProgram {
         try {
             try {
                 cursorWindow.acquireReference();
+            } catch (Throwable th) {
+                th = th;
+            }
+            try {
                 try {
-                } catch (SQLiteDatabaseCorruptException e) {
-                    e = e;
-                } catch (SQLiteException e2) {
-                    e = e2;
-                } catch (Throwable th) {
-                    th = th;
-                    Throwable th2 = th;
-                    cursorWindow.releaseReference();
-                    throw th2;
-                }
-                try {
-                    int executeForCursorWindow = getSession().executeForCursorWindow(getSql(), getBindArgs(), cursorWindow, i, i2, z, getConnectionFlags(), this.mCancellationSignal);
+                    int iExecuteForCursorWindow = getSession().executeForCursorWindow(getSql(), getBindArgs(), cursorWindow, i, i2, z, getConnectionFlags(), this.mCancellationSignal);
                     if (cursorWindow.getFilledRows() + i == cursorWindow.getTotalRows()) {
                         getDatabase().tryWalBackgroundCheckpoint();
                     }
                     cursorWindow.releaseReference();
-                    return executeForCursorWindow;
-                } catch (SQLiteDatabaseCorruptException e3) {
-                    e = e3;
+                    return iExecuteForCursorWindow;
+                } catch (SQLiteDatabaseCorruptException e) {
+                    e = e;
                     SQLiteDatabaseCorruptException sQLiteDatabaseCorruptException = e;
                     onCorruption(sQLiteDatabaseCorruptException.getCorruptCode());
                     throw sQLiteDatabaseCorruptException;
-                } catch (SQLiteException e4) {
-                    e = e4;
+                } catch (SQLiteException e2) {
+                    e = e2;
                     SQLiteException sQLiteException = e;
                     Log.e(TAG, "exception: " + sQLiteException.getMessage() + "; query: " + getSql());
                     throw sQLiteException;
                 }
-            } finally {
-                releaseReference();
+            } catch (SQLiteDatabaseCorruptException e3) {
+                e = e3;
+            } catch (SQLiteException e4) {
+                e = e4;
+            } catch (Throwable th2) {
+                th = th2;
+                Throwable th3 = th;
+                cursorWindow.releaseReference();
+                throw th3;
             }
-        } catch (Throwable th3) {
-            th = th3;
+        } finally {
+            releaseReference();
         }
     }
 

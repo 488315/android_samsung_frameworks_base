@@ -7,7 +7,6 @@ import androidx.compose.ui.ComposeUiFlags;
 import androidx.compose.ui.autofill.AndroidAutofill$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FocusTransactionManager {
     public int generation;
@@ -27,6 +26,10 @@ public final class FocusTransactionManager {
         mutableVector.clear();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:22:0x006a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final void access$commitTransaction(FocusTransactionManager focusTransactionManager) {
         MutableScatterMap mutableScatterMap = focusTransactionManager.states;
         Object[] objArr = mutableScatterMap.keys;
@@ -42,12 +45,12 @@ public final class FocusTransactionManager {
                         if ((255 & j) < 128) {
                             FocusTargetNode focusTargetNode = (FocusTargetNode) objArr[(i << 3) + i3];
                             focusTargetNode.getClass();
-                            FocusTransactionManager requireTransactionManager = FocusTargetNodeKt.requireTransactionManager(focusTargetNode);
-                            requireTransactionManager.getClass();
+                            FocusTransactionManager focusTransactionManagerRequireTransactionManager = FocusTargetNodeKt.requireTransactionManager(focusTargetNode);
+                            focusTransactionManagerRequireTransactionManager.getClass();
                             if (ComposeUiFlags.isTrackFocusEnabled) {
                                 throw new IllegalStateException("uncommittedFocusState must not be accessed when isTrackFocusEnabled is on");
                             }
-                            FocusStateImpl focusStateImpl = (FocusStateImpl) requireTransactionManager.states.get(focusTargetNode);
+                            FocusStateImpl focusStateImpl = (FocusStateImpl) focusTransactionManagerRequireTransactionManager.states.get(focusTargetNode);
                             if (focusStateImpl == null) {
                                 throw AndroidAutofill$$ExternalSyntheticOutline0.m("committing a node that was not updated in the current transaction");
                             }
@@ -57,12 +60,11 @@ public final class FocusTransactionManager {
                     }
                     if (i2 != 8) {
                         break;
+                    } else if (i == length) {
+                        break;
+                    } else {
+                        i++;
                     }
-                }
-                if (i == length) {
-                    break;
-                } else {
-                    i++;
                 }
             }
         }

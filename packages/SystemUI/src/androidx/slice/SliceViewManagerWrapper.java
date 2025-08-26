@@ -11,7 +11,6 @@ import androidx.collection.ArraySet;
 import androidx.collection.ArraySet.ElementIterator;
 import androidx.slice.widget.SliceLiveData;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceViewManagerWrapper extends SliceViewManagerBase {
     public final ArrayMap mCachedAuthorities;
@@ -35,11 +34,11 @@ public class SliceViewManagerWrapper extends SliceViewManagerBase {
         ArrayMap arrayMap = this.mCachedAuthorities;
         String str2 = (String) arrayMap.get(str);
         if (str2 == null) {
-            ProviderInfo resolveContentProvider = this.mContext.getPackageManager().resolveContentProvider(str, 0);
-            if (resolveContentProvider == null) {
+            ProviderInfo providerInfoResolveContentProvider = this.mContext.getPackageManager().resolveContentProvider(str, 0);
+            if (providerInfoResolveContentProvider == null) {
                 return false;
             }
-            str2 = resolveContentProvider.packageName;
+            str2 = providerInfoResolveContentProvider.packageName;
             arrayMap.put(str, str2);
         }
         return isPackageSuspended(str2);
@@ -50,9 +49,9 @@ public class SliceViewManagerWrapper extends SliceViewManagerBase {
         Boolean bool = (Boolean) arrayMap.get(str);
         if (bool == null) {
             try {
-                Boolean valueOf = Boolean.valueOf((this.mContext.getPackageManager().getApplicationInfo(str, 0).flags & 1073741824) != 0);
-                arrayMap.put(str, valueOf);
-                bool = valueOf;
+                Boolean boolValueOf = Boolean.valueOf((this.mContext.getPackageManager().getApplicationInfo(str, 0).flags & 1073741824) != 0);
+                arrayMap.put(str, boolValueOf);
+                bool = boolValueOf;
             } catch (PackageManager.NameNotFoundException unused) {
                 return false;
             }
@@ -65,9 +64,9 @@ public class SliceViewManagerWrapper extends SliceViewManagerBase {
         try {
             this.mManager.pinSlice(uri, this.mSpecs);
         } catch (RuntimeException e) {
-            ContentProviderClient acquireContentProviderClient = this.mContext.getContentResolver().acquireContentProviderClient(uri);
-            if (acquireContentProviderClient != null) {
-                acquireContentProviderClient.release();
+            ContentProviderClient contentProviderClientAcquireContentProviderClient = this.mContext.getContentResolver().acquireContentProviderClient(uri);
+            if (contentProviderClientAcquireContentProviderClient != null) {
+                contentProviderClientAcquireContentProviderClient.release();
                 throw e;
             }
             throw new IllegalArgumentException("No provider found for " + uri);
@@ -100,15 +99,15 @@ public class SliceViewManagerWrapper extends SliceViewManagerBase {
     }
 
     public final Slice bindSlice(Intent intent) {
-        boolean isAuthoritySuspended;
+        boolean zIsAuthoritySuspended;
         if (intent.getComponent() != null) {
-            isAuthoritySuspended = isPackageSuspended(intent.getComponent().getPackageName());
+            zIsAuthoritySuspended = isPackageSuspended(intent.getComponent().getPackageName());
         } else if (intent.getPackage() != null) {
-            isAuthoritySuspended = isPackageSuspended(intent.getPackage());
+            zIsAuthoritySuspended = isPackageSuspended(intent.getPackage());
         } else {
-            isAuthoritySuspended = intent.getData() != null ? isAuthoritySuspended(intent.getData().getAuthority()) : false;
+            zIsAuthoritySuspended = intent.getData() != null ? isAuthoritySuspended(intent.getData().getAuthority()) : false;
         }
-        if (isAuthoritySuspended) {
+        if (zIsAuthoritySuspended) {
             return null;
         }
         return SliceConvert.wrap(this.mManager.bindSlice(intent, this.mSpecs), this.mContext);

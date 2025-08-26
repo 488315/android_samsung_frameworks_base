@@ -2,6 +2,7 @@ package android.preference;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -20,9 +21,9 @@ public class SemSwitchPreferenceScreen extends SwitchPreference {
     @Deprecated
     public SemSwitchPreferenceScreen(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Preference, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Preference, i, i2);
         Configuration configuration = context.getResources().getConfiguration();
-        if ("".equals(obtainStyledAttributes.getString(13))) {
+        if ("".equals(typedArrayObtainStyledAttributes.getString(13))) {
             Log.w("SemSwitchPreferenceScreen", "SwitchPreferenceScreen should get fragment property. Fragment property does not exist in SwitchPreferenceScreen");
         }
         if ((configuration.screenWidthDp <= 320 && configuration.fontScale >= 1.1f) || (configuration.screenWidthDp < 411 && configuration.fontScale >= 1.3f)) {
@@ -36,7 +37,7 @@ public class SemSwitchPreferenceScreen extends SwitchPreference {
             setWidgetLayoutResource(R.layout.tw_switch_preference_screen_widget_divider);
         }
         setRecycleEnabled(true);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Deprecated
@@ -62,18 +63,18 @@ public class SemSwitchPreferenceScreen extends SwitchPreference {
     public boolean onKey(View view, int i, KeyEvent keyEvent) {
         int action = keyEvent.getAction();
         int keyCode = keyEvent.getKeyCode();
-        boolean isChecked = isChecked();
+        boolean zIsChecked = isChecked();
         boolean z = isRTL() && hasRTL();
         if (action == 0 && isEnabled()) {
             if (keyCode != 21) {
                 if (keyCode == 22) {
-                    if (z && isChecked) {
+                    if (z && zIsChecked) {
                         if (callChangeListener(false)) {
                             setChecked(false);
                         }
                         return true;
                     }
-                    if (!z && !isChecked) {
+                    if (!z && !zIsChecked) {
                         if (callChangeListener(true)) {
                             setChecked(true);
                         }
@@ -81,13 +82,13 @@ public class SemSwitchPreferenceScreen extends SwitchPreference {
                     }
                 }
             } else {
-                if (z && !isChecked) {
+                if (z && !zIsChecked) {
                     if (callChangeListener(true)) {
                         setChecked(true);
                     }
                     return true;
                 }
-                if (!z && isChecked) {
+                if (!z && zIsChecked) {
                     if (callChangeListener(false)) {
                         setChecked(false);
                     }
@@ -99,14 +100,14 @@ public class SemSwitchPreferenceScreen extends SwitchPreference {
     }
 
     @Override // android.preference.SwitchPreference, android.preference.Preference
-    protected void onBindView(View view) {
+    protected void onBindView(View view) throws Resources.NotFoundException {
         super.onBindView(view);
         TextView textView = (TextView) view.findViewById(16908310);
-        View findViewById = view.findViewById(16908352);
-        if (textView == null || findViewById == null) {
+        View viewFindViewById = view.findViewById(16908352);
+        if (textView == null || viewFindViewById == null) {
             return;
         }
-        findViewById.semSetHoverPopupType(0);
-        findViewById.setContentDescription(textView.getText().toString());
+        viewFindViewById.semSetHoverPopupType(0);
+        viewFindViewById.setContentDescription(textView.getText().toString());
     }
 }

@@ -4,12 +4,12 @@ import java.time.Instant;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class EduDeviceConnectionTime {
     public final Instant keyboardFirstConnectionTime;
     public final Instant touchpadFirstConnectionTime;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public EduDeviceConnectionTime() {
         this(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
     }
@@ -27,9 +27,9 @@ public final class EduDeviceConnectionTime {
 
     public final int hashCode() {
         Instant instant = this.keyboardFirstConnectionTime;
-        int hashCode = (instant == null ? 0 : instant.hashCode()) * 31;
+        int iHashCode = (instant == null ? 0 : instant.hashCode()) * 31;
         Instant instant2 = this.touchpadFirstConnectionTime;
-        return hashCode + (instant2 != null ? instant2.hashCode() : 0);
+        return iHashCode + (instant2 != null ? instant2.hashCode() : 0);
     }
 
     public final String toString() {

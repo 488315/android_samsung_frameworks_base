@@ -61,18 +61,18 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
         this.mPrimaryProviderReportedStatus = timeZoneProviderStatus;
         this.mSecondaryProviderStatus = requireValidProviderStatus(i3);
         this.mSecondaryProviderReportedStatus = timeZoneProviderStatus2;
-        boolean hasProviderReported = hasProviderReported(i2);
+        boolean zHasProviderReported = hasProviderReported(i2);
         boolean z = timeZoneProviderStatus != null;
-        if (!hasProviderReported && z) {
+        if (!zHasProviderReported && z) {
             throw new IllegalArgumentException("primaryProviderReportedStatus=" + timeZoneProviderStatus + ", primaryProviderStatus=" + providerStatusToString(i2));
         }
-        boolean hasProviderReported2 = hasProviderReported(i3);
+        boolean zHasProviderReported2 = hasProviderReported(i3);
         boolean z2 = timeZoneProviderStatus2 != null;
-        if (!hasProviderReported2 && z2) {
+        if (!zHasProviderReported2 && z2) {
             throw new IllegalArgumentException("secondaryProviderReportedStatus=" + timeZoneProviderStatus2 + ", secondaryProviderStatus=" + providerStatusToString(i3));
         }
         if (i != 3) {
-            if (hasProviderReported || hasProviderReported2) {
+            if (zHasProviderReported || zHasProviderReported2) {
                 throw new IllegalArgumentException("algorithmStatus=" + DetectorStatusTypes.detectionAlgorithmStatusToString(i) + ", primaryProviderReportedStatus=" + timeZoneProviderStatus + ", secondaryProviderReportedStatus=" + timeZoneProviderStatus2);
             }
         }
@@ -144,25 +144,25 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
     }
 
     public boolean couldEnableTelephonyFallback() {
-        boolean couldEnableTelephonyFallback;
+        boolean zCouldEnableTelephonyFallback;
         TimeZoneProviderStatus timeZoneProviderStatus;
-        boolean couldEnableTelephonyFallback2;
+        boolean zCouldEnableTelephonyFallback2;
         TimeZoneProviderStatus timeZoneProviderStatus2;
         int i = this.mStatus;
         if (i != 0 && i != 2 && i != 1) {
             int i2 = this.mPrimaryProviderStatus;
             if (i2 == 1) {
-                couldEnableTelephonyFallback = true;
+                zCouldEnableTelephonyFallback = true;
             } else {
-                couldEnableTelephonyFallback = (i2 != 4 || (timeZoneProviderStatus = this.mPrimaryProviderReportedStatus) == null) ? false : timeZoneProviderStatus.couldEnableTelephonyFallback();
+                zCouldEnableTelephonyFallback = (i2 != 4 || (timeZoneProviderStatus = this.mPrimaryProviderReportedStatus) == null) ? false : timeZoneProviderStatus.couldEnableTelephonyFallback();
             }
             int i3 = this.mSecondaryProviderStatus;
             if (i3 == 1) {
-                couldEnableTelephonyFallback2 = true;
+                zCouldEnableTelephonyFallback2 = true;
             } else {
-                couldEnableTelephonyFallback2 = (i3 != 4 || (timeZoneProviderStatus2 = this.mSecondaryProviderReportedStatus) == null) ? false : timeZoneProviderStatus2.couldEnableTelephonyFallback();
+                zCouldEnableTelephonyFallback2 = (i3 != 4 || (timeZoneProviderStatus2 = this.mSecondaryProviderReportedStatus) == null) ? false : timeZoneProviderStatus2.couldEnableTelephonyFallback();
             }
-            if (couldEnableTelephonyFallback && couldEnableTelephonyFallback2) {
+            if (zCouldEnableTelephonyFallback && zCouldEnableTelephonyFallback2) {
                 return true;
             }
         }

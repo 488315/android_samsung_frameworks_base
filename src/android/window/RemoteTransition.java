@@ -143,14 +143,14 @@ public final class RemoteTransition implements Parcelable {
     }
 
     protected RemoteTransition(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        IRemoteTransition asInterface = IRemoteTransition.Stub.asInterface(parcel.readStrongBinder());
-        IApplicationThread asInterface2 = (readByte & 2) == 0 ? null : IApplicationThread.Stub.asInterface(parcel.readStrongBinder());
-        String readString = (readByte & 4) == 0 ? null : parcel.readString();
-        this.mRemoteTransition = asInterface;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) asInterface);
-        this.mAppThread = asInterface2;
-        this.mDebugName = readString;
+        byte b = parcel.readByte();
+        IRemoteTransition iRemoteTransitionAsInterface = IRemoteTransition.Stub.asInterface(parcel.readStrongBinder());
+        IApplicationThread iApplicationThreadAsInterface = (b & 2) == 0 ? null : IApplicationThread.Stub.asInterface(parcel.readStrongBinder());
+        String string = (b & 4) == 0 ? null : parcel.readString();
+        this.mRemoteTransition = iRemoteTransitionAsInterface;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) iRemoteTransitionAsInterface);
+        this.mAppThread = iApplicationThreadAsInterface;
+        this.mDebugName = string;
         if (CoreRune.FW_SHELL_TRANSITION_MERGE) {
             this.mFlags = parcel.readInt();
         }

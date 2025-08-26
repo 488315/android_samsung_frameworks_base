@@ -13,7 +13,6 @@ import androidx.slice.widget.ActionRow$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.google.android.material.button.MaterialButton;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ButtonPreference extends Preference {
     public Button mButton;
@@ -21,7 +20,6 @@ public class ButtonPreference extends Preference {
     public Drawable mIcon;
     public CharSequence mTitle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum ButtonStyle {
         /* JADX INFO: Fake field, exist only in values array */
         FILLED_NORMAL(0, 0, R.layout.settingslib_expressive_button_filled),
@@ -64,18 +62,18 @@ public class ButtonPreference extends Preference {
 
     public ButtonPreference(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
-        int i2 = R.layout.settingslib_button_layout;
+        int layoutId = R.layout.settingslib_button_layout;
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.Preference, i, 0);
-            this.mTitle = obtainStyledAttributes.getText(4);
-            this.mIcon = obtainStyledAttributes.getDrawable(0);
-            obtainStyledAttributes.recycle();
-            TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, com.android.settingslib.widget.preference.button.R$styleable.ButtonPreference, i, 0);
-            this.mGravity = obtainStyledAttributes2.getInt(0, 8388611);
-            i2 = SettingsThemeHelper.isExpressiveTheme(context) ? ButtonStyle.getLayoutId(obtainStyledAttributes2.getInt(2, 0), obtainStyledAttributes2.getInt(1, 0)) : i2;
-            obtainStyledAttributes2.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.Preference, i, 0);
+            this.mTitle = typedArrayObtainStyledAttributes.getText(4);
+            this.mIcon = typedArrayObtainStyledAttributes.getDrawable(0);
+            typedArrayObtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, com.android.settingslib.widget.preference.button.R$styleable.ButtonPreference, i, 0);
+            this.mGravity = typedArrayObtainStyledAttributes2.getInt(0, 8388611);
+            layoutId = SettingsThemeHelper.isExpressiveTheme(context) ? ButtonStyle.getLayoutId(typedArrayObtainStyledAttributes2.getInt(2, 0), typedArrayObtainStyledAttributes2.getInt(1, 0)) : layoutId;
+            typedArrayObtainStyledAttributes2.recycle();
         }
-        this.mLayoutResId = i2;
+        this.mLayoutResId = layoutId;
     }
 
     @Override // androidx.preference.Preference
@@ -135,8 +133,8 @@ public class ButtonPreference extends Preference {
             ((MaterialButton) button).setIcon(drawable);
             return;
         }
-        int m = (int) ActionRow$$ExternalSyntheticOutline0.m(this.mContext, 1, 24.0f);
-        drawable.setBounds(0, 0, m, m);
+        int iM = (int) ActionRow$$ExternalSyntheticOutline0.m(this.mContext, 1, 24.0f);
+        drawable.setBounds(0, 0, iM, iM);
         this.mButton.setCompoundDrawablesRelativeWithIntrinsicBounds(drawable, (Drawable) null, (Drawable) null, (Drawable) null);
     }
 

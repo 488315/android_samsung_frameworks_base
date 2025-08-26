@@ -149,12 +149,12 @@ public final class SignalStrengthUpdateRequest implements Parcelable {
         if (collection == null || (collection.isEmpty() && !z)) {
             throw new IllegalArgumentException("SignalThresholdInfo collection is null or empty");
         }
-        HashMap hashMap = new HashMap(collection.size());
+        HashMap map = new HashMap(collection.size());
         for (SignalThresholdInfo signalThresholdInfo : collection) {
             int radioAccessNetworkType = signalThresholdInfo.getRadioAccessNetworkType();
             int signalMeasurementType = signalThresholdInfo.getSignalMeasurementType();
-            hashMap.putIfAbsent(Integer.valueOf(radioAccessNetworkType), new HashSet());
-            if (!((Set) hashMap.get(Integer.valueOf(radioAccessNetworkType))).add(Integer.valueOf(signalMeasurementType))) {
+            map.putIfAbsent(Integer.valueOf(radioAccessNetworkType), new HashSet());
+            if (!((Set) map.get(Integer.valueOf(radioAccessNetworkType))).add(Integer.valueOf(signalMeasurementType))) {
                 throw new IllegalArgumentException("SignalMeasurementType " + signalMeasurementType + " for RAN " + radioAccessNetworkType + " is not unique");
             }
         }

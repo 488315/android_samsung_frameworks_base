@@ -120,9 +120,9 @@ public class SimpleFrame extends Frame {
     }
 
     private void setFormatObjectClass(Class cls) {
-        MutableFrameFormat mutableCopy = getFormat().mutableCopy();
-        mutableCopy.setObjectClass(cls);
-        setFormat(mutableCopy);
+        MutableFrameFormat mutableFrameFormatMutableCopy = getFormat().mutableCopy();
+        mutableFrameFormatMutableCopy.setObjectClass(cls);
+        setFormat(mutableFrameFormatMutableCopy);
     }
 
     @Override // android.filterfw.core.Frame

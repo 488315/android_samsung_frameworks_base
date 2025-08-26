@@ -16,7 +16,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda0 implements ScreenDecorCommand.Callback {
     public final /* synthetic */ ScreenDecorations f$0;
@@ -26,7 +25,7 @@ public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda0 i
     }
 
     public final void onExecute(final ScreenDecorCommand screenDecorCommand) {
-        DebugRoundedCornerModel debugRoundedCornerModel;
+        DebugRoundedCornerModel roundedCornerDebugModel;
         char c;
         final int i = 1;
         final int i2 = 0;
@@ -55,10 +54,10 @@ public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda0 i
                             ScreenDecorCommand screenDecorCommand2 = screenDecorCommand;
                             ScreenDecorHwcLayer screenDecorHwcLayer = screenDecorations2.mScreenDecorHwcLayer;
                             if (screenDecorHwcLayer != null) {
-                                int intValue = screenDecorCommand2.getColor().intValue();
-                                if (screenDecorHwcLayer.debug && screenDecorHwcLayer.color != intValue) {
-                                    screenDecorHwcLayer.color = intValue;
-                                    screenDecorHwcLayer.paint.setColor(intValue);
+                                int iIntValue = screenDecorCommand2.getColor().intValue();
+                                if (screenDecorHwcLayer.debug && screenDecorHwcLayer.color != iIntValue) {
+                                    screenDecorHwcLayer.color = iIntValue;
+                                    screenDecorHwcLayer.paint.setColor(iIntValue);
                                     screenDecorHwcLayer.updateColors();
                                     screenDecorHwcLayer.invalidate();
                                 }
@@ -82,13 +81,13 @@ public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda0 i
                             ScreenDecorCommand screenDecorCommand4 = screenDecorCommand;
                             boolean z2 = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;
                             screenDecorCommand4.getClass();
-                            int intValue2 = ((Integer) screenDecorCommand4.faceAuthScreen$delegate.getValue(screenDecorCommand4, ScreenDecorCommand.$$delegatedProperties[5])).intValue();
+                            int iIntValue2 = ((Integer) screenDecorCommand4.faceAuthScreen$delegate.getValue(screenDecorCommand4, ScreenDecorCommand.$$delegatedProperties[5])).intValue();
                             ScreenDecorations.DisplayCutoutView displayCutoutView = (ScreenDecorations.DisplayCutoutView) screenDecorations4.getOverlayView(screenDecorations4.mFaceScanningViewId);
                             if (displayCutoutView != null) {
                                 displayCutoutView.mDebug = true;
                                 CameraAvailabilityListener cameraAvailabilityListener = screenDecorations4.mCameraListener;
                                 List list = cameraAvailabilityListener.cameraProtectionInfoList;
-                                CameraProtectionInfo cameraProtectionInfo = list != null ? (CameraProtectionInfo) CollectionsKt___CollectionsKt.getOrNull(intValue2, list) : null;
+                                CameraProtectionInfo cameraProtectionInfo = list != null ? (CameraProtectionInfo) CollectionsKt___CollectionsKt.getOrNull(iIntValue2, list) : null;
                                 if (cameraProtectionInfo != null) {
                                     cameraAvailabilityListener.notifyCameraActive(cameraProtectionInfo);
                                     break;
@@ -109,10 +108,10 @@ public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda0 i
                             ScreenDecorCommand screenDecorCommand2 = screenDecorCommand;
                             ScreenDecorHwcLayer screenDecorHwcLayer = screenDecorations2.mScreenDecorHwcLayer;
                             if (screenDecorHwcLayer != null) {
-                                int intValue = screenDecorCommand2.getColor().intValue();
-                                if (screenDecorHwcLayer.debug && screenDecorHwcLayer.color != intValue) {
-                                    screenDecorHwcLayer.color = intValue;
-                                    screenDecorHwcLayer.paint.setColor(intValue);
+                                int iIntValue = screenDecorCommand2.getColor().intValue();
+                                if (screenDecorHwcLayer.debug && screenDecorHwcLayer.color != iIntValue) {
+                                    screenDecorHwcLayer.color = iIntValue;
+                                    screenDecorHwcLayer.paint.setColor(iIntValue);
                                     screenDecorHwcLayer.updateColors();
                                     screenDecorHwcLayer.invalidate();
                                 }
@@ -136,13 +135,13 @@ public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda0 i
                             ScreenDecorCommand screenDecorCommand4 = screenDecorCommand;
                             boolean z2 = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;
                             screenDecorCommand4.getClass();
-                            int intValue2 = ((Integer) screenDecorCommand4.faceAuthScreen$delegate.getValue(screenDecorCommand4, ScreenDecorCommand.$$delegatedProperties[5])).intValue();
+                            int iIntValue2 = ((Integer) screenDecorCommand4.faceAuthScreen$delegate.getValue(screenDecorCommand4, ScreenDecorCommand.$$delegatedProperties[5])).intValue();
                             ScreenDecorations.DisplayCutoutView displayCutoutView = (ScreenDecorations.DisplayCutoutView) screenDecorations4.getOverlayView(screenDecorations4.mFaceScanningViewId);
                             if (displayCutoutView != null) {
                                 displayCutoutView.mDebug = true;
                                 CameraAvailabilityListener cameraAvailabilityListener = screenDecorations4.mCameraListener;
                                 List list = cameraAvailabilityListener.cameraProtectionInfoList;
-                                CameraProtectionInfo cameraProtectionInfo = list != null ? (CameraProtectionInfo) CollectionsKt___CollectionsKt.getOrNull(intValue2, list) : null;
+                                CameraProtectionInfo cameraProtectionInfo = list != null ? (CameraProtectionInfo) CollectionsKt___CollectionsKt.getOrNull(iIntValue2, list) : null;
                                 if (cameraProtectionInfo != null) {
                                     cameraAvailabilityListener.notifyCameraActive(cameraProtectionInfo);
                                     break;
@@ -155,33 +154,33 @@ public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda0 i
         }
         KProperty kProperty2 = kPropertyArr[3];
         OptionalSubCommand optionalSubCommand = screenDecorCommand.roundedTop$delegate;
-        DebugRoundedCornerModel debugRoundedCornerModel2 = null;
+        DebugRoundedCornerModel roundedCornerDebugModel2 = null;
         if (((RoundedCornerSubCommand) optionalSubCommand.getValue()) != null) {
             KProperty kProperty3 = kPropertyArr[3];
-            debugRoundedCornerModel = ((RoundedCornerSubCommand) optionalSubCommand.getValue()).toRoundedCornerDebugModel();
+            roundedCornerDebugModel = ((RoundedCornerSubCommand) optionalSubCommand.getValue()).toRoundedCornerDebugModel();
         } else {
-            debugRoundedCornerModel = null;
+            roundedCornerDebugModel = null;
         }
         KProperty kProperty4 = kPropertyArr[4];
         OptionalSubCommand optionalSubCommand2 = screenDecorCommand.roundedBottom$delegate;
         if (((RoundedCornerSubCommand) optionalSubCommand2.getValue()) != null) {
             KProperty kProperty5 = kPropertyArr[4];
-            debugRoundedCornerModel2 = ((RoundedCornerSubCommand) optionalSubCommand2.getValue()).toRoundedCornerDebugModel();
+            roundedCornerDebugModel2 = ((RoundedCornerSubCommand) optionalSubCommand2.getValue()).toRoundedCornerDebugModel();
         }
-        if (debugRoundedCornerModel == null && debugRoundedCornerModel2 == null) {
+        if (roundedCornerDebugModel == null && roundedCornerDebugModel2 == null) {
             c = 1;
         } else {
             DebugRoundedCornerDelegate debugRoundedCornerDelegate = screenDecorations.mDebugRoundedCornerDelegate;
-            if (debugRoundedCornerModel != null) {
+            if (roundedCornerDebugModel != null) {
                 debugRoundedCornerDelegate.hasTop = true;
-                debugRoundedCornerDelegate.topRoundedDrawable = new PathDrawable(debugRoundedCornerModel.path, debugRoundedCornerModel.width, debugRoundedCornerModel.height, debugRoundedCornerModel.scaleX, debugRoundedCornerModel.scaleY, debugRoundedCornerDelegate.paint);
-                debugRoundedCornerDelegate.topRoundedSize = new Size(debugRoundedCornerModel.width, debugRoundedCornerModel.height);
+                debugRoundedCornerDelegate.topRoundedDrawable = new PathDrawable(roundedCornerDebugModel.path, roundedCornerDebugModel.width, roundedCornerDebugModel.height, roundedCornerDebugModel.scaleX, roundedCornerDebugModel.scaleY, debugRoundedCornerDelegate.paint);
+                debugRoundedCornerDelegate.topRoundedSize = new Size(roundedCornerDebugModel.width, roundedCornerDebugModel.height);
             }
-            if (debugRoundedCornerModel2 != null) {
+            if (roundedCornerDebugModel2 != null) {
                 debugRoundedCornerDelegate.hasBottom = true;
                 c = 1;
-                debugRoundedCornerDelegate.bottomRoundedDrawable = new PathDrawable(debugRoundedCornerModel2.path, debugRoundedCornerModel2.width, debugRoundedCornerModel2.height, debugRoundedCornerModel2.scaleX, debugRoundedCornerModel2.scaleY, debugRoundedCornerDelegate.paint);
-                debugRoundedCornerDelegate.bottomRoundedSize = new Size(debugRoundedCornerModel2.width, debugRoundedCornerModel2.height);
+                debugRoundedCornerDelegate.bottomRoundedDrawable = new PathDrawable(roundedCornerDebugModel2.path, roundedCornerDebugModel2.width, roundedCornerDebugModel2.height, roundedCornerDebugModel2.scaleX, roundedCornerDebugModel2.scaleY, debugRoundedCornerDelegate.paint);
+                debugRoundedCornerDelegate.bottomRoundedSize = new Size(roundedCornerDebugModel2.width, roundedCornerDebugModel2.height);
             } else {
                 c = 1;
                 debugRoundedCornerDelegate.getClass();
@@ -198,10 +197,10 @@ public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda0 i
                             ScreenDecorCommand screenDecorCommand2 = screenDecorCommand;
                             ScreenDecorHwcLayer screenDecorHwcLayer = screenDecorations2.mScreenDecorHwcLayer;
                             if (screenDecorHwcLayer != null) {
-                                int intValue = screenDecorCommand2.getColor().intValue();
-                                if (screenDecorHwcLayer.debug && screenDecorHwcLayer.color != intValue) {
-                                    screenDecorHwcLayer.color = intValue;
-                                    screenDecorHwcLayer.paint.setColor(intValue);
+                                int iIntValue = screenDecorCommand2.getColor().intValue();
+                                if (screenDecorHwcLayer.debug && screenDecorHwcLayer.color != iIntValue) {
+                                    screenDecorHwcLayer.color = iIntValue;
+                                    screenDecorHwcLayer.paint.setColor(iIntValue);
                                     screenDecorHwcLayer.updateColors();
                                     screenDecorHwcLayer.invalidate();
                                 }
@@ -225,13 +224,13 @@ public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda0 i
                             ScreenDecorCommand screenDecorCommand4 = screenDecorCommand;
                             boolean z2 = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;
                             screenDecorCommand4.getClass();
-                            int intValue2 = ((Integer) screenDecorCommand4.faceAuthScreen$delegate.getValue(screenDecorCommand4, ScreenDecorCommand.$$delegatedProperties[5])).intValue();
+                            int iIntValue2 = ((Integer) screenDecorCommand4.faceAuthScreen$delegate.getValue(screenDecorCommand4, ScreenDecorCommand.$$delegatedProperties[5])).intValue();
                             ScreenDecorations.DisplayCutoutView displayCutoutView = (ScreenDecorations.DisplayCutoutView) screenDecorations4.getOverlayView(screenDecorations4.mFaceScanningViewId);
                             if (displayCutoutView != null) {
                                 displayCutoutView.mDebug = true;
                                 CameraAvailabilityListener cameraAvailabilityListener = screenDecorations4.mCameraListener;
                                 List list = cameraAvailabilityListener.cameraProtectionInfoList;
-                                CameraProtectionInfo cameraProtectionInfo = list != null ? (CameraProtectionInfo) CollectionsKt___CollectionsKt.getOrNull(intValue2, list) : null;
+                                CameraProtectionInfo cameraProtectionInfo = list != null ? (CameraProtectionInfo) CollectionsKt___CollectionsKt.getOrNull(iIntValue2, list) : null;
                                 if (cameraProtectionInfo != null) {
                                     cameraAvailabilityListener.notifyCameraActive(cameraProtectionInfo);
                                     break;

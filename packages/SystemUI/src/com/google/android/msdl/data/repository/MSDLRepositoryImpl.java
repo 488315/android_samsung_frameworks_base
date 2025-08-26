@@ -13,14 +13,12 @@ import kotlin.collections.ArraysKt___ArraysJvmKt;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MSDLRepositoryImpl implements MSDLRepository {
     public static final Map HAPTIC_DATA;
     public static final int[] SPIN_WAVEFORM_AMPLITUDES;
     public static final long[] SPIN_WAVEFORM_TIMINGS;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -34,27 +32,27 @@ public final class MSDLRepositoryImpl implements MSDLRepository {
         new Companion(null);
         long[] jArr = {20, 20, 3, 43, 20, 20, 3};
         int[] iArr = {40, 80, 40, 0, 40, 80, 40};
-        long[] copyOf = Arrays.copyOf(jArr, 8);
-        copyOf[7] = 56;
-        int length = copyOf.length;
-        long[] copyOf2 = Arrays.copyOf(copyOf, length + 7);
-        System.arraycopy(jArr, 0, copyOf2, length, 7);
-        copyOf2.getClass();
-        int length2 = copyOf2.length;
-        long[] copyOf3 = Arrays.copyOf(copyOf2, length2 + 1);
-        copyOf3[length2] = 56;
-        int length3 = copyOf3.length;
-        long[] copyOf4 = Arrays.copyOf(copyOf3, length3 + 7);
-        System.arraycopy(jArr, 0, copyOf4, length3, 7);
-        copyOf4.getClass();
-        SPIN_WAVEFORM_TIMINGS = copyOf4;
-        int[] copyOf5 = Arrays.copyOf(iArr, 8);
-        copyOf5[7] = 10;
-        int[] plus = ArraysKt___ArraysJvmKt.plus(copyOf5, iArr);
-        int length4 = plus.length;
-        int[] copyOf6 = Arrays.copyOf(plus, length4 + 1);
-        copyOf6[length4] = 10;
-        SPIN_WAVEFORM_AMPLITUDES = ArraysKt___ArraysJvmKt.plus(copyOf6, iArr);
+        long[] jArrCopyOf = Arrays.copyOf(jArr, 8);
+        jArrCopyOf[7] = 56;
+        int length = jArrCopyOf.length;
+        long[] jArrCopyOf2 = Arrays.copyOf(jArrCopyOf, length + 7);
+        System.arraycopy(jArr, 0, jArrCopyOf2, length, 7);
+        jArrCopyOf2.getClass();
+        int length2 = jArrCopyOf2.length;
+        long[] jArrCopyOf3 = Arrays.copyOf(jArrCopyOf2, length2 + 1);
+        jArrCopyOf3[length2] = 56;
+        int length3 = jArrCopyOf3.length;
+        long[] jArrCopyOf4 = Arrays.copyOf(jArrCopyOf3, length3 + 7);
+        System.arraycopy(jArr, 0, jArrCopyOf4, length3, 7);
+        jArrCopyOf4.getClass();
+        SPIN_WAVEFORM_TIMINGS = jArrCopyOf4;
+        int[] iArrCopyOf = Arrays.copyOf(iArr, 8);
+        iArrCopyOf[7] = 10;
+        int[] iArrPlus = ArraysKt___ArraysJvmKt.plus(iArrCopyOf, iArr);
+        int length4 = iArrPlus.length;
+        int[] iArrCopyOf2 = Arrays.copyOf(iArrPlus, length4 + 1);
+        iArrCopyOf2[length4] = 10;
+        SPIN_WAVEFORM_AMPLITUDES = ArraysKt___ArraysJvmKt.plus(iArrCopyOf2, iArr);
         HAPTIC_DATA = MapsKt__MapsKt.mapOf(new Pair(HapticToken.NEGATIVE_CONFIRMATION_HIGH_EMPHASIS, new MSDLHapticData() { // from class: com.google.android.msdl.data.repository.MSDLRepositoryImpl$Companion$HAPTIC_DATA$1
             @Override // com.google.android.msdl.data.repository.MSDLHapticData
             public final HapticComposition get() {

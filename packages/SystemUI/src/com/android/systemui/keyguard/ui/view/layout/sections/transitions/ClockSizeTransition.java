@@ -34,17 +34,14 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClockSizeTransition extends TransitionSet {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ClockFaceInTransition extends ClockFaceTransition {
         public static final Interpolator CLOCK_IN_INTERPOLATOR;
         public final boolean isLargeClock;
         public final float smallClockMoveScale;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -80,13 +77,11 @@ public final class ClockSizeTransition extends TransitionSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ClockFaceOutTransition extends ClockFaceTransition {
         public static final Interpolator CLOCK_OUT_INTERPOLATOR;
         public final boolean isLargeClock;
         public final float smallClockMoveScale;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -121,7 +116,6 @@ public final class ClockSizeTransition extends TransitionSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ClockFaceTransition extends VisibilityBoundsTransition {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final KeyguardClockViewModel viewModel;
@@ -150,9 +144,9 @@ public final class ClockSizeTransition extends TransitionSet {
             }
             Logger logger = this.logger;
             ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0 clockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0 = new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(0);
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, clockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0, null);
-            obtain.setStr1(String.valueOf(clockController.getLargeClock().getLayout().getViews()));
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, clockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0, null);
+            logMessageObtain.setStr1(String.valueOf(clockController.getLargeClock().getLayout().getViews()));
+            logger.getBuffer().commit(logMessageObtain);
             Iterator<T> it = clockController.getLargeClock().getLayout().getViews().iterator();
             while (it.hasNext()) {
                 addTarget((View) it.next());
@@ -183,22 +177,20 @@ public final class ClockSizeTransition extends TransitionSet {
             }
             int i = rect2.top;
             rect.getClass();
-            int abs = (int) Math.abs(getSmallClockMoveScale() * (i - rect.top));
+            int iAbs = (int) Math.abs(getSmallClockMoveScale() * (i - rect.top));
             Rect rect3 = target.bounds;
             Rect rect4 = target2.bounds;
-            rect3.top = rect4.top - abs;
-            rect3.bottom = rect4.bottom - abs;
+            rect3.top = rect4.top - iAbs;
+            rect3.bottom = rect4.bottom - iAbs;
         }
 
         public abstract boolean isLargeClock();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SmartspaceMoveTransition extends VisibilityBoundsTransition {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final KeyguardClockViewModel viewModel;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -238,9 +230,9 @@ public final class ClockSizeTransition extends TransitionSet {
             }
             Logger logger = this.logger;
             ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0 clockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0 = new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(1);
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, clockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0, null);
-            obtain.setInt1(target2.view.getId());
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, clockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0, null);
+            logMessageObtain.setInt1(target2.view.getId());
+            logger.getBuffer().commit(logMessageObtain);
             if (target.isVisible) {
                 target2.bounds.set(target.bounds);
             } else {
@@ -251,10 +243,10 @@ public final class ClockSizeTransition extends TransitionSet {
         @Override // com.android.systemui.keyguard.ui.view.layout.sections.transitions.ClockSizeTransition.VisibilityBoundsTransition
         public final void mutateTargets(VisibilityBoundsTransition.Target target) {
             if (target.view.getId() == R.id.date_smartspace_view) {
-                boolean booleanValue = ((Boolean) this.viewModel.hasCustomWeatherDataDisplay.$$delegate_0.getValue()).booleanValue();
-                target.isVisible = !booleanValue;
-                target.visibility = !booleanValue ? 0 : 8;
-                target.alpha = !booleanValue ? 1.0f : 0.0f;
+                boolean zBooleanValue = ((Boolean) this.viewModel.hasCustomWeatherDataDisplay.$$delegate_0.getValue()).booleanValue();
+                target.isVisible = !zBooleanValue;
+                target.visibility = !zBooleanValue ? 0 : 8;
+                target.alpha = !zBooleanValue ? 1.0f : 0.0f;
             }
         }
     }
@@ -268,12 +260,10 @@ public final class ClockSizeTransition extends TransitionSet {
         addTransition(new SmartspaceMoveTransition(config, keyguardClockViewModel, logBuffer));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class VisibilityBoundsTransition extends Transition {
         public static final String[] TRANSITION_PROPERTIES;
         public final Logger logger;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -283,7 +273,6 @@ public final class ClockSizeTransition extends TransitionSet {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Target {
             public static final Companion Companion = new Companion(null);
             public float alpha;
@@ -293,7 +282,6 @@ public final class ClockSizeTransition extends TransitionSet {
             public final View view;
             public int visibility;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             public final class Companion {
                 public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                     this();
@@ -324,9 +312,9 @@ public final class ClockSizeTransition extends TransitionSet {
             }
 
             public final int hashCode() {
-                int hashCode = (this.bounds.hashCode() + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.alpha, TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.visibility, this.view.hashCode() * 31, 31), 31, this.isVisible), 31)) * 31;
+                int iHashCode = (this.bounds.hashCode() + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.alpha, TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.visibility, this.view.hashCode() * 31, 31), 31, this.isVisible), 31)) * 31;
                 Rect rect = this.ssBounds;
-                return hashCode + (rect == null ? 0 : rect.hashCode());
+                return iHashCode + (rect == null ? 0 : rect.hashCode());
             }
 
             public final String toString() {
@@ -348,20 +336,20 @@ public final class ClockSizeTransition extends TransitionSet {
         public static final void createAnimator$assignAnimValues(VisibilityBoundsTransition visibilityBoundsTransition, Target target, Target target2, String str, float f, Integer num, boolean z) {
             visibilityBoundsTransition.mutateTargets(target2);
             Rect rect = new Rect((int) MathUtils.lerp(target.bounds.left, target2.bounds.left, f), (int) MathUtils.lerp(target.bounds.top, target2.bounds.top, f), (int) MathUtils.lerp(target.bounds.right, target2.bounds.right, f), (int) MathUtils.lerp(target.bounds.bottom, target2.bounds.bottom, f));
-            float lerp = MathUtils.lerp(target.alpha, target2.alpha, f);
+            float fLerp = MathUtils.lerp(target.alpha, target2.alpha, f);
             if (z) {
                 Logger logger = visibilityBoundsTransition.logger;
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(6), null);
-                obtain.setStr1(str);
-                obtain.setStr2(String.valueOf(target2.view));
-                obtain.setInt1((int) (f * 100));
-                obtain.setDouble1(lerp);
-                obtain.setInt2(num != null ? num.intValue() : 0);
-                obtain.setStr3(String.valueOf(rect));
-                logger.getBuffer().commit(obtain);
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.INFO, new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(6), null);
+                logMessageObtain.setStr1(str);
+                logMessageObtain.setStr2(String.valueOf(target2.view));
+                logMessageObtain.setInt1((int) (f * 100));
+                logMessageObtain.setDouble1(fLerp);
+                logMessageObtain.setInt2(num != null ? num.intValue() : 0);
+                logMessageObtain.setStr3(String.valueOf(rect));
+                logger.getBuffer().commit(logMessageObtain);
             }
             target2.view.setVisibility(num != null ? num.intValue() : 0);
-            target2.view.setAlpha(lerp);
+            target2.view.setAlpha(fLerp);
             target2.view.setLeftTopRightBottom(rect.left, rect.top, rect.right, rect.bottom);
         }
 
@@ -382,19 +370,19 @@ public final class ClockSizeTransition extends TransitionSet {
             transitionValues.values.put("ClockSizeTransition:Bounds", new Rect(view.getLeft(), view.getTop(), view.getRight(), view.getBottom()));
             if (getCaptureSmartspace()) {
                 View view2 = (View) view.getParent();
-                View findViewById = view2.findViewById(R.id.bc_smartspace_view);
-                if (findViewById == null) {
-                    findViewById = view2.findViewById(R.id.keyguard_slice_view);
+                View viewFindViewById = view2.findViewById(R.id.bc_smartspace_view);
+                if (viewFindViewById == null) {
+                    viewFindViewById = view2.findViewById(R.id.keyguard_slice_view);
                 }
-                if (findViewById != null) {
-                    transitionValues.values.put("ClockSizeTransition:SSBounds", new Rect(findViewById.getLeft(), findViewById.getTop(), findViewById.getRight(), findViewById.getBottom()));
+                if (viewFindViewById != null) {
+                    transitionValues.values.put("ClockSizeTransition:SSBounds", new Rect(viewFindViewById.getLeft(), viewFindViewById.getTop(), viewFindViewById.getRight(), viewFindViewById.getBottom()));
                     return;
                 }
                 Logger logger = this.logger;
                 ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0 clockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0 = new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(2);
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, clockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0, null);
-                obtain.setStr1(String.valueOf(view2));
-                logger.getBuffer().commit(obtain);
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, clockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0, null);
+                logMessageObtain.setStr1(String.valueOf(view2));
+                logger.getBuffer().commit(logMessageObtain);
             }
         }
 
@@ -406,80 +394,80 @@ public final class ClockSizeTransition extends TransitionSet {
             int i2 = 4;
             if (transitionValues == null || transitionValues2 == null) {
                 Logger logger = this.logger;
-                LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(3), null);
-                obtain.setStr1(String.valueOf(transitionValues));
-                obtain.setStr2(String.valueOf(transitionValues2));
-                logger.getBuffer().commit(obtain);
+                LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(3), null);
+                logMessageObtain.setStr1(String.valueOf(transitionValues));
+                logMessageObtain.setStr2(String.valueOf(transitionValues2));
+                logger.getBuffer().commit(logMessageObtain);
                 return null;
             }
             Target.Companion.getClass();
-            int intValue = ((Integer) transitionValues.values.get("ClockSizeTransition:Visibility")).intValue();
-            boolean z2 = intValue == 0;
-            float floatValue = ((Float) transitionValues.values.get("ClockSizeTransition:Alpha")).floatValue();
+            int iIntValue = ((Integer) transitionValues.values.get("ClockSizeTransition:Visibility")).intValue();
+            boolean z2 = iIntValue == 0;
+            float fFloatValue = ((Float) transitionValues.values.get("ClockSizeTransition:Alpha")).floatValue();
             if (z2) {
-                if (floatValue <= 0.0f) {
+                if (fFloatValue <= 0.0f) {
                     i = 4;
                     z = false;
                 } else {
-                    i = intValue;
+                    i = iIntValue;
                     z = z2;
                 }
-                f = floatValue;
+                f = fFloatValue;
             } else {
-                i = intValue;
+                i = iIntValue;
                 z = z2;
                 f = 0.0f;
             }
             final Target target = new Target(transitionValues.view, i, z, f, (Rect) transitionValues.values.get("ClockSizeTransition:Bounds"), (Rect) transitionValues.values.get("ClockSizeTransition:SSBounds"));
-            int intValue2 = ((Integer) transitionValues2.values.get("ClockSizeTransition:Visibility")).intValue();
-            boolean z3 = intValue2 == 0;
-            final Target target2 = new Target(transitionValues2.view, intValue2, z3, z3 ? 1.0f : 0.0f, (Rect) transitionValues2.values.get("ClockSizeTransition:Bounds"), (Rect) transitionValues2.values.get("ClockSizeTransition:SSBounds"));
+            int iIntValue2 = ((Integer) transitionValues2.values.get("ClockSizeTransition:Visibility")).intValue();
+            boolean z3 = iIntValue2 == 0;
+            final Target target2 = new Target(transitionValues2.view, iIntValue2, z3, z3 ? 1.0f : 0.0f, (Rect) transitionValues2.values.get("ClockSizeTransition:Bounds"), (Rect) transitionValues2.values.get("ClockSizeTransition:SSBounds"));
             initTargets(target, target2);
             mutateTargets(target2);
             if (target.isVisible == target2.isVisible && target.bounds.equals(target2.bounds)) {
                 Logger logger2 = this.logger;
-                LogMessage obtain2 = logger2.getBuffer().obtain(logger2.getTag(), LogLevel.WARNING, new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(i2), null);
-                obtain2.setStr1(String.valueOf(target2.view));
-                obtain2.setInt1(target.visibility);
-                obtain2.setInt2(target2.visibility);
-                obtain2.setStr2(target.alpha + " -> " + target2.alpha);
-                obtain2.setStr3(target.bounds + " -> " + target2.bounds);
-                logger2.getBuffer().commit(obtain2);
+                LogMessage logMessageObtain2 = logger2.getBuffer().obtain(logger2.getTag(), LogLevel.WARNING, new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(i2), null);
+                logMessageObtain2.setStr1(String.valueOf(target2.view));
+                logMessageObtain2.setInt1(target.visibility);
+                logMessageObtain2.setInt2(target2.visibility);
+                logMessageObtain2.setStr2(target.alpha + " -> " + target2.alpha);
+                logMessageObtain2.setStr3(target.bounds + " -> " + target2.bounds);
+                logger2.getBuffer().commit(logMessageObtain2);
                 return null;
             }
             final boolean z4 = target.isVisible && !target2.isVisible;
             Logger logger3 = this.logger;
-            LogMessage obtain3 = logger3.getBuffer().obtain(logger3.getTag(), LogLevel.INFO, new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(5), null);
-            obtain3.setStr1(String.valueOf(target2.view));
-            obtain3.setInt1(target.visibility);
-            obtain3.setInt2(target2.visibility);
-            obtain3.setStr2(target.alpha + " -> " + target2.alpha);
-            obtain3.setStr3(target.bounds + " -> " + target2.bounds);
-            logger3.getBuffer().commit(obtain3);
-            final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            LogMessage logMessageObtain3 = logger3.getBuffer().obtain(logger3.getTag(), LogLevel.INFO, new ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0(5), null);
+            logMessageObtain3.setStr1(String.valueOf(target2.view));
+            logMessageObtain3.setInt1(target.visibility);
+            logMessageObtain3.setInt2(target2.visibility);
+            logMessageObtain3.setStr2(target.alpha + " -> " + target2.alpha);
+            logMessageObtain3.setStr3(target.bounds + " -> " + target2.bounds);
+            logger3.getBuffer().commit(logMessageObtain3);
+            final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
             final ViewTreeObserver.OnPreDrawListener onPreDrawListener = new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.transitions.ClockSizeTransition$VisibilityBoundsTransition$createAnimator$7$predrawCallback$1
                 @Override // android.view.ViewTreeObserver.OnPreDrawListener
                 public final boolean onPreDraw() {
-                    ClockSizeTransition.VisibilityBoundsTransition.createAnimator$assignAnimValues(this, target, target2, "predraw", ofFloat.getAnimatedFraction(), null, false);
+                    ClockSizeTransition.VisibilityBoundsTransition.createAnimator$assignAnimValues(this, target, target2, "predraw", valueAnimatorOfFloat.getAnimatedFraction(), null, false);
                     return true;
                 }
             };
             addListener(new TransitionListenerAdapter() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.transitions.ClockSizeTransition$VisibilityBoundsTransition$createAnimator$7$1
                 @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
                 public final void onTransitionEnd(Transition transition) {
-                    ClockSizeTransition.VisibilityBoundsTransition.Target.this.view.getViewTreeObserver().removeOnPreDrawListener(onPreDrawListener);
+                    target2.view.getViewTreeObserver().removeOnPreDrawListener(onPreDrawListener);
                 }
 
                 @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
                 public final void onTransitionStart(Transition transition) {
-                    ClockSizeTransition.VisibilityBoundsTransition.Target.this.view.getViewTreeObserver().addOnPreDrawListener(onPreDrawListener);
+                    target2.view.getViewTreeObserver().addOnPreDrawListener(onPreDrawListener);
                 }
             });
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.transitions.ClockSizeTransition$VisibilityBoundsTransition$createAnimator$7$listener$1
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.keyguard.ui.view.layout.sections.transitions.ClockSizeTransition$VisibilityBoundsTransition$createAnimator$7$listener$1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     ClockSizeTransition.VisibilityBoundsTransition visibilityBoundsTransition = this;
-                    ClockSizeTransition.VisibilityBoundsTransition.Target target3 = ClockSizeTransition.VisibilityBoundsTransition.Target.this;
+                    ClockSizeTransition.VisibilityBoundsTransition.Target target3 = target;
                     ClockSizeTransition.VisibilityBoundsTransition.Target target4 = target2;
                     ClockSizeTransition.VisibilityBoundsTransition.createAnimator$assignAnimValues(visibilityBoundsTransition, target3, target4, NetworkAnalyticsConstants.DataPoints.CLOSE_TIME, 1.0f, Integer.valueOf(target4.visibility), true);
                     if (z4) {
@@ -490,12 +478,12 @@ public final class ClockSizeTransition extends TransitionSet {
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationStart(Animator animator) {
                     ClockSizeTransition.VisibilityBoundsTransition visibilityBoundsTransition = this;
-                    ClockSizeTransition.VisibilityBoundsTransition.Target target3 = ClockSizeTransition.VisibilityBoundsTransition.Target.this;
+                    ClockSizeTransition.VisibilityBoundsTransition.Target target3 = target;
                     ClockSizeTransition.VisibilityBoundsTransition.createAnimator$assignAnimValues(visibilityBoundsTransition, target3, target2, NetworkAnalyticsConstants.DataPoints.OPEN_TIME, 0.0f, Integer.valueOf(target3.visibility), true);
                 }
             });
             createAnimator$assignAnimValues(this, target, target2, "init", 0.0f, Integer.valueOf(target.visibility), true);
-            return ofFloat;
+            return valueAnimatorOfFloat;
         }
 
         public abstract boolean getCaptureSmartspace();

@@ -59,9 +59,9 @@ public interface IAccessibilityEmbeddedConnection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAccessibilityEmbeddedConnection.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAccessibilityEmbeddedConnection)) {
-                return (IAccessibilityEmbeddedConnection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAccessibilityEmbeddedConnection.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAccessibilityEmbeddedConnection)) {
+                return (IAccessibilityEmbeddedConnection) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,19 +94,19 @@ public interface IAccessibilityEmbeddedConnection extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                int readInt = parcel.readInt();
+                IBinder strongBinder = parcel.readStrongBinder();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                IBinder associateEmbeddedHierarchy = associateEmbeddedHierarchy(readStrongBinder, readInt);
+                IBinder iBinderAssociateEmbeddedHierarchy = associateEmbeddedHierarchy(strongBinder, i3);
                 parcel2.writeNoException();
-                parcel2.writeStrongBinder(associateEmbeddedHierarchy);
+                parcel2.writeStrongBinder(iBinderAssociateEmbeddedHierarchy);
             } else if (i == 2) {
                 disassociateEmbeddedHierarchy();
                 parcel2.writeNoException();
             } else if (i == 3) {
-                float[] createFloatArray = parcel.createFloatArray();
+                float[] fArrCreateFloatArray = parcel.createFloatArray();
                 parcel.enforceNoDataAvail();
-                setWindowMatrix(createFloatArray);
+                setWindowMatrix(fArrCreateFloatArray);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -131,44 +131,44 @@ public interface IAccessibilityEmbeddedConnection extends IInterface {
 
             @Override // android.view.accessibility.IAccessibilityEmbeddedConnection
             public IBinder associateEmbeddedHierarchy(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAccessibilityEmbeddedConnection.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(IAccessibilityEmbeddedConnection.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IAccessibilityEmbeddedConnection
             public void disassociateEmbeddedHierarchy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IAccessibilityEmbeddedConnection.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IAccessibilityEmbeddedConnection.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IAccessibilityEmbeddedConnection
             public void setWindowMatrix(float[] fArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAccessibilityEmbeddedConnection.DESCRIPTOR);
-                    obtain.writeFloatArray(fArr);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAccessibilityEmbeddedConnection.DESCRIPTOR);
+                    parcelObtain.writeFloatArray(fArr);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

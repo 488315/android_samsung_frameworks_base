@@ -81,7 +81,7 @@ final class SerializedWaveformEnvelopeEffect implements SerializedComposedEffect
         Parser() {
         }
 
-        static SerializedWaveformEnvelopeEffect parseNext(TypedXmlPullParser typedXmlPullParser, int i) throws XmlParserException, IOException {
+        static SerializedWaveformEnvelopeEffect parseNext(TypedXmlPullParser typedXmlPullParser, int i) throws IOException, XmlParserException {
             XmlValidator.checkStartTag(typedXmlPullParser, XmlConstants.TAG_WAVEFORM_ENVELOPE_EFFECT);
             XmlValidator.checkTagHasNoUnexpectedAttributes(typedXmlPullParser, XmlConstants.ATTRIBUTE_INITIAL_FREQUENCY_HZ);
             Builder builder = new Builder();

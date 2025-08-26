@@ -28,8 +28,8 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
     private InputConnectionInfo mInputConnectionInfo;
 
     @Override // android.view.OnReceiveContentListener
-    public ContentInfo onReceiveContent(View view, ContentInfo contentInfo) {
-        CharSequence coerceToStyledText;
+    public ContentInfo onReceiveContent(View view, ContentInfo contentInfo) throws Throwable {
+        CharSequence charSequenceCoerceToStyledText;
         if (Log.isLoggable(LOG_TAG, 3)) {
             Log.d(LOG_TAG, "onReceive: " + contentInfo);
         }
@@ -48,20 +48,20 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
         boolean z = false;
         for (int i = 0; i < clip.getItemCount(); i++) {
             if ((flags & 1) != 0) {
-                coerceToStyledText = clip.getItemAt(i).coerceToText(context);
-                if (coerceToStyledText instanceof Spanned) {
-                    coerceToStyledText = coerceToStyledText.toString();
+                charSequenceCoerceToStyledText = clip.getItemAt(i).coerceToText(context);
+                if (charSequenceCoerceToStyledText instanceof Spanned) {
+                    charSequenceCoerceToStyledText = charSequenceCoerceToStyledText.toString();
                 }
             } else {
-                coerceToStyledText = clip.getItemAt(i).coerceToStyledText(context);
+                charSequenceCoerceToStyledText = clip.getItemAt(i).coerceToStyledText(context);
             }
-            if (coerceToStyledText != null) {
+            if (charSequenceCoerceToStyledText != null) {
                 if (!z) {
-                    replaceSelection(editable, coerceToStyledText);
+                    replaceSelection(editable, charSequenceCoerceToStyledText);
                     z = true;
                 } else {
                     editable.insert(Selection.getSelectionEnd(editable), ShaderAssembler.NEWLINE);
-                    editable.insert(Selection.getSelectionEnd(editable), coerceToStyledText);
+                    editable.insert(Selection.getSelectionEnd(editable), charSequenceCoerceToStyledText);
                 }
             }
         }
@@ -71,10 +71,10 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
     private static void replaceSelection(Editable editable, CharSequence charSequence) {
         int selectionStart = Selection.getSelectionStart(editable);
         int selectionEnd = Selection.getSelectionEnd(editable);
-        int max = Math.max(0, Math.min(selectionStart, selectionEnd));
-        int max2 = Math.max(0, Math.max(selectionStart, selectionEnd));
-        Selection.setSelection(editable, max2);
-        editable.replace(max, max2, charSequence);
+        int iMax = Math.max(0, Math.min(selectionStart, selectionEnd));
+        int iMax2 = Math.max(0, Math.max(selectionStart, selectionEnd));
+        Selection.setSelection(editable, iMax2);
+        editable.replace(iMax, iMax2, charSequence);
     }
 
     private void onReceiveForAutofill(TextView textView, ContentInfo contentInfo) {
@@ -90,20 +90,20 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
         }
     }
 
-    private static CharSequence coerceToText(ClipData clipData, Context context, int i) {
-        CharSequence coerceToStyledText;
+    private static CharSequence coerceToText(ClipData clipData, Context context, int i) throws Throwable {
+        CharSequence charSequenceCoerceToStyledText;
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
         for (int i2 = 0; i2 < clipData.getItemCount(); i2++) {
             if ((i & 1) != 0) {
-                coerceToStyledText = clipData.getItemAt(i2).coerceToText(context);
-                if (coerceToStyledText instanceof Spanned) {
-                    coerceToStyledText = coerceToStyledText.toString();
+                charSequenceCoerceToStyledText = clipData.getItemAt(i2).coerceToText(context);
+                if (charSequenceCoerceToStyledText instanceof Spanned) {
+                    charSequenceCoerceToStyledText = charSequenceCoerceToStyledText.toString();
                 }
             } else {
-                coerceToStyledText = clipData.getItemAt(i2).coerceToStyledText(context);
+                charSequenceCoerceToStyledText = clipData.getItemAt(i2).coerceToStyledText(context);
             }
-            if (coerceToStyledText != null) {
-                spannableStringBuilder.append(coerceToStyledText);
+            if (charSequenceCoerceToStyledText != null) {
+                spannableStringBuilder.append(charSequenceCoerceToStyledText);
             }
         }
         return spannableStringBuilder;

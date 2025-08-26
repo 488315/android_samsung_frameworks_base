@@ -10,7 +10,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SchedulerPoolFactory {
     public static final boolean PURGE_ENABLED;
@@ -18,13 +17,11 @@ public final class SchedulerPoolFactory {
     public static final AtomicReference PURGE_THREAD = new AtomicReference();
     public static final Map POOLS = new ConcurrentHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PurgeProperties {
         public boolean purgeEnable;
         public int purgePeriod;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScheduledTask implements Runnable {
         @Override // java.lang.Runnable
         public final void run() {
@@ -73,14 +70,14 @@ public final class SchedulerPoolFactory {
             if (scheduledExecutorService != null) {
                 return;
             }
-            ScheduledExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(1, new RxThreadFactory("RxSchedulerPurge"));
-            if (atomicReference.compareAndSet(scheduledExecutorService, newScheduledThreadPool)) {
+            ScheduledExecutorService scheduledExecutorServiceNewScheduledThreadPool = Executors.newScheduledThreadPool(1, new RxThreadFactory("RxSchedulerPurge"));
+            if (atomicReference.compareAndSet(scheduledExecutorService, scheduledExecutorServiceNewScheduledThreadPool)) {
                 ScheduledTask scheduledTask = new ScheduledTask();
                 long j = PURGE_PERIOD_SECONDS;
-                newScheduledThreadPool.scheduleAtFixedRate(scheduledTask, j, j, TimeUnit.SECONDS);
+                scheduledExecutorServiceNewScheduledThreadPool.scheduleAtFixedRate(scheduledTask, j, j, TimeUnit.SECONDS);
                 return;
             }
-            newScheduledThreadPool.shutdownNow();
+            scheduledExecutorServiceNewScheduledThreadPool.shutdownNow();
         }
     }
 

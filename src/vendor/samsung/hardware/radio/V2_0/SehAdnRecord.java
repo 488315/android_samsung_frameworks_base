@@ -47,13 +47,13 @@ public final class SehAdnRecord {
 
     public static final ArrayList<SehAdnRecord> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SehAdnRecord> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 152, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 152, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SehAdnRecord sehAdnRecord = new SehAdnRecord();
-            sehAdnRecord.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 152);
+            sehAdnRecord.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 152);
             arrayList.add(sehAdnRecord);
         }
         return arrayList;
@@ -61,10 +61,10 @@ public final class SehAdnRecord {
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         int int32 = hwBlob.getInt32(8 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j, true);
         this.name.clear();
         for (int i = 0; i < int32; i++) {
-            this.name.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i)));
+            this.name.add(Byte.valueOf(embeddedBuffer.getInt8(i)));
         }
         this.nameDcs = hwBlob.getInt32(16 + j);
         this.nameLength = hwBlob.getInt32(20 + j);
@@ -72,10 +72,10 @@ public final class SehAdnRecord {
         this.number = hwBlob.getString(j2);
         hwParcel.readEmbeddedBuffer(r11.getBytes().length + 1, hwBlob.handle(), j2, false);
         int int322 = hwBlob.getInt32(48 + j);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322, hwBlob.handle(), j + 40, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322, hwBlob.handle(), j + 40, true);
         this.gsm8bitEmail.clear();
         for (int i2 = 0; i2 < int322; i2++) {
-            this.gsm8bitEmail.add(Byte.valueOf(readEmbeddedBuffer2.getInt8(i2)));
+            this.gsm8bitEmail.add(Byte.valueOf(embeddedBuffer2.getInt8(i2)));
         }
         this.gsm8bitEmailLength = hwBlob.getInt32(56 + j);
         long j3 = j + 64;
@@ -91,10 +91,10 @@ public final class SehAdnRecord {
         this.anrC = hwBlob.getString(j6);
         hwParcel.readEmbeddedBuffer(r11.getBytes().length + 1, hwBlob.handle(), j6, false);
         int int323 = hwBlob.getInt32(136 + j);
-        HwBlob readEmbeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323, hwBlob.handle(), j + 128, true);
+        HwBlob embeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323, hwBlob.handle(), j + 128, true);
         this.sne.clear();
         for (int i3 = 0; i3 < int323; i3++) {
-            this.sne.add(Byte.valueOf(readEmbeddedBuffer3.getInt8(i3)));
+            this.sne.add(Byte.valueOf(embeddedBuffer3.getInt8(i3)));
         }
         this.sneLength = hwBlob.getInt32(144 + j);
         this.sneDcs = hwBlob.getInt32(j + 148);

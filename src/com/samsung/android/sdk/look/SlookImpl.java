@@ -103,12 +103,12 @@ public class SlookImpl {
         if (sHasMetaEdgeSingle == -1) {
             sHasMetaEdgeSingle = 0;
             IPackageManager packageManager = ActivityThread.getPackageManager();
-            String currentOpPackageName = ActivityThread.currentOpPackageName();
-            if (packageManager == null || currentOpPackageName == null) {
+            String strCurrentOpPackageName = ActivityThread.currentOpPackageName();
+            if (packageManager == null || strCurrentOpPackageName == null) {
                 return;
             }
             try {
-                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(currentOpPackageName, 128L, UserHandle.myUserId());
+                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(strCurrentOpPackageName, 128L, UserHandle.myUserId());
                 if (applicationInfo != null) {
                     Bundle bundle2 = applicationInfo.metaData;
                     if (bundle2 != null && (string2 = bundle2.getString("com.samsung.android.cocktail.mode", "")) != null && string2.equals("edge_single")) {
@@ -116,13 +116,13 @@ public class SlookImpl {
                     }
                     if (sHasMetaEdgeSingle == 0) {
                         Intent intent = new Intent(CocktailBarManager.ACTION_COCKTAIL_UPDATE);
-                        intent.setPackage(currentOpPackageName);
+                        intent.setPackage(strCurrentOpPackageName);
                         intent.resolveTypeIfNeeded(ActivityThread.currentApplication().getContentResolver());
                         List list = packageManager.queryIntentReceivers(intent, intent.resolveTypeIfNeeded(ActivityThread.currentApplication().getContentResolver()), 128L, UserHandle.myUserId()).getList();
                         int size = list == null ? 0 : list.size();
                         for (int i = 0; i < size; i++) {
                             ActivityInfo activityInfo = ((ResolveInfo) list.get(i)).activityInfo;
-                            if ((activityInfo.applicationInfo.flags & 262144) == 0 && currentOpPackageName.equals(activityInfo.packageName) && (bundle = activityInfo.metaData) != null && (string = bundle.getString("com.samsung.android.cocktail.mode", "")) != null && string.equals("edge_single")) {
+                            if ((activityInfo.applicationInfo.flags & 262144) == 0 && strCurrentOpPackageName.equals(activityInfo.packageName) && (bundle = activityInfo.metaData) != null && (string = bundle.getString("com.samsung.android.cocktail.mode", "")) != null && string.equals("edge_single")) {
                                 sHasMetaEdgeSingle = 1;
                                 return;
                             }

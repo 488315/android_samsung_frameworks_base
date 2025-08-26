@@ -14,7 +14,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DelegatingThemeAwareRippleNode$updateConfiguration$1 extends Lambda implements Function0 {
     final /* synthetic */ DelegatingThemeAwareRippleNode this$0;
@@ -40,11 +39,11 @@ final class DelegatingThemeAwareRippleNode$updateConfiguration$1 extends Lambda 
                 ColorProducer colorProducer = new ColorProducer() { // from class: androidx.compose.material3.DelegatingThemeAwareRippleNode$attachNewRipple$calculateColor$1
                     @Override // androidx.compose.ui.graphics.ColorProducer
                     /* renamed from: invoke-0d7_KjU, reason: not valid java name */
-                    public final long mo261invoke0d7_KjU() {
-                        DelegatingThemeAwareRippleNode delegatingThemeAwareRippleNode3 = DelegatingThemeAwareRippleNode.this;
-                        long mo261invoke0d7_KjU = delegatingThemeAwareRippleNode3.color.mo261invoke0d7_KjU();
-                        if (mo261invoke0d7_KjU != 16) {
-                            return mo261invoke0d7_KjU;
+                    public final long mo262invoke0d7_KjU() {
+                        DelegatingThemeAwareRippleNode delegatingThemeAwareRippleNode3 = delegatingThemeAwareRippleNode2;
+                        long jMo262invoke0d7_KjU = delegatingThemeAwareRippleNode3.color.mo262invoke0d7_KjU();
+                        if (jMo262invoke0d7_KjU != 16) {
+                            return jMo262invoke0d7_KjU;
                         }
                         RippleConfiguration rippleConfiguration = (RippleConfiguration) CompositionLocalConsumerModifierNodeKt.currentValueOf(delegatingThemeAwareRippleNode3, RippleKt.LocalRippleConfiguration);
                         if (rippleConfiguration != null) {
@@ -64,7 +63,7 @@ final class DelegatingThemeAwareRippleNode$updateConfiguration$1 extends Lambda 
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         RippleAlpha rippleAlpha;
-                        RippleConfiguration rippleConfiguration = (RippleConfiguration) CompositionLocalConsumerModifierNodeKt.currentValueOf(DelegatingThemeAwareRippleNode.this, RippleKt.LocalRippleConfiguration);
+                        RippleConfiguration rippleConfiguration = (RippleConfiguration) CompositionLocalConsumerModifierNodeKt.currentValueOf(delegatingThemeAwareRippleNode2, RippleKt.LocalRippleConfiguration);
                         if (rippleConfiguration != null && (rippleAlpha = rippleConfiguration.rippleAlpha) != null) {
                             return rippleAlpha;
                         }

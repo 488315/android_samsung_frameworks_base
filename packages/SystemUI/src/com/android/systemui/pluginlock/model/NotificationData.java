@@ -2,7 +2,6 @@ package com.android.systemui.pluginlock.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NotificationData {
 
@@ -21,7 +20,6 @@ public class NotificationData {
     @SerializedName("visibility")
     private Integer mVisibility = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NotificationCardData {
 
         @SerializedName("top_y")
@@ -100,12 +98,11 @@ public class NotificationData {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public NotificationCardData m2662clone() throws CloneNotSupportedException {
+        public NotificationCardData m2680clone() throws CloneNotSupportedException {
             return (NotificationCardData) super.clone();
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NotificationIconOnlyData {
 
         @SerializedName("gravity")
@@ -205,7 +202,7 @@ public class NotificationData {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public NotificationIconOnlyData m2663clone() throws CloneNotSupportedException {
+        public NotificationIconOnlyData m2681clone() throws CloneNotSupportedException {
             return (NotificationIconOnlyData) super.clone();
         }
     }
@@ -258,7 +255,7 @@ public class NotificationData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public NotificationData m2661clone() throws CloneNotSupportedException {
+    public NotificationData m2679clone() throws CloneNotSupportedException {
         return (NotificationData) super.clone();
     }
 }

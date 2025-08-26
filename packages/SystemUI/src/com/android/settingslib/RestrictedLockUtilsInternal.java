@@ -15,13 +15,11 @@ import com.samsung.android.knox.restriction.RestrictionPolicy;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RestrictedLockUtilsInternal extends RestrictedLockUtils {
     public static final boolean DEBUG = Log.isLoggable("RestrictedLockUtils", 3);
     static Proxy sProxy = new Proxy();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class Proxy {
     }
 
@@ -33,21 +31,21 @@ public class RestrictedLockUtilsInternal extends RestrictedLockUtils {
         RestrictedLockUtils.EnforcedAdmin enforcedAdmin = null;
         if (devicePolicyManager2 != null) {
             UserManager userManager = UserManager.get(context);
-            UserHandle of = UserHandle.of(i);
-            List userRestrictionSources = userManager.getUserRestrictionSources(str, of);
+            UserHandle userHandleOf = UserHandle.of(i);
+            List userRestrictionSources = userManager.getUserRestrictionSources(str, userHandleOf);
             if (!userRestrictionSources.isEmpty()) {
                 int size = userRestrictionSources.size();
                 if (size > 1) {
                     RestrictedLockUtils.EnforcedAdmin enforcedAdmin2 = new RestrictedLockUtils.EnforcedAdmin();
                     enforcedAdmin2.enforcedRestriction = str;
-                    enforcedAdmin2.user = of;
+                    enforcedAdmin2.user = userHandleOf;
                     if (DEBUG) {
-                        StringBuilder m = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(size, "Multiple (", ") enforcing users for restriction '", str, "' on user ");
-                        m.append(of);
-                        m.append("; returning default admin (");
-                        m.append(enforcedAdmin2);
-                        m.append(")");
-                        Log.d("RestrictedLockUtils", m.toString());
+                        StringBuilder sbM = KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(size, "Multiple (", ") enforcing users for restriction '", str, "' on user ");
+                        sbM.append(userHandleOf);
+                        sbM.append("; returning default admin (");
+                        sbM.append(enforcedAdmin2);
+                        sbM.append(")");
+                        Log.d("RestrictedLockUtils", sbM.toString());
                     }
                     return enforcedAdmin2;
                 }

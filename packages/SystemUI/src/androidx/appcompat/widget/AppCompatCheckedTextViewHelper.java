@@ -3,7 +3,6 @@ package androidx.appcompat.widget;
 import android.graphics.drawable.Drawable;
 import android.widget.CheckedTextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatCheckedTextViewHelper {
     public final boolean mHasCheckMarkTint = false;
@@ -19,17 +18,17 @@ public class AppCompatCheckedTextViewHelper {
         Drawable checkMarkDrawable = this.mView.getCheckMarkDrawable();
         if (checkMarkDrawable != null) {
             if (this.mHasCheckMarkTint || this.mHasCheckMarkTintMode) {
-                Drawable mutate = checkMarkDrawable.mutate();
+                Drawable drawableMutate = checkMarkDrawable.mutate();
                 if (this.mHasCheckMarkTint) {
-                    mutate.setTintList(null);
+                    drawableMutate.setTintList(null);
                 }
                 if (this.mHasCheckMarkTintMode) {
-                    mutate.setTintMode(null);
+                    drawableMutate.setTintMode(null);
                 }
-                if (mutate.isStateful()) {
-                    mutate.setState(this.mView.getDrawableState());
+                if (drawableMutate.isStateful()) {
+                    drawableMutate.setState(this.mView.getDrawableState());
                 }
-                this.mView.setCheckMarkDrawable(mutate);
+                this.mView.setCheckMarkDrawable(drawableMutate);
             }
         }
     }

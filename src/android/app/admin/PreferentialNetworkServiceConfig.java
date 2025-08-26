@@ -252,9 +252,7 @@ public final class PreferentialNetworkServiceConfig implements Parcelable {
         return arrayList.stream().map(new Function() { // from class: android.app.admin.PreferentialNetworkServiceConfig$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer valueOf;
-                valueOf = Integer.valueOf(Integer.parseInt((String) obj));
-                return valueOf;
+                return Integer.valueOf(Integer.parseInt((String) obj));
             }
         }).mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray();
     }

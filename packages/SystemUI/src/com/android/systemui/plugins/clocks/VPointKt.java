@@ -2,7 +2,6 @@ package com.android.systemui.plugins.clocks;
 
 import kotlin.ULong;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class VPointKt {
     private static final long X_MASK = -4294967296L;
@@ -17,7 +16,7 @@ public final class VPointKt {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: unpackX-VKZWuLQ, reason: not valid java name */
-    public static final int m2782unpackXVKZWuLQ(long j) {
+    public static final int m2800unpackXVKZWuLQ(long j) {
         long j2 = j & X_MASK;
         int i = ULong.$r8$clinit;
         return (int) (j2 >>> 32);
@@ -25,7 +24,7 @@ public final class VPointKt {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: unpackY-VKZWuLQ, reason: not valid java name */
-    public static final int m2783unpackYVKZWuLQ(long j) {
+    public static final int m2801unpackYVKZWuLQ(long j) {
         long j2 = j & Y_MASK;
         int i = ULong.$r8$clinit;
         return (int) j2;

@@ -37,13 +37,13 @@ public final class EvdoSignalStrength {
 
     public static final ArrayList<EvdoSignalStrength> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<EvdoSignalStrength> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 12, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 12, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             EvdoSignalStrength evdoSignalStrength = new EvdoSignalStrength();
-            evdoSignalStrength.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 12);
+            evdoSignalStrength.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 12);
             arrayList.add(evdoSignalStrength);
         }
         return arrayList;

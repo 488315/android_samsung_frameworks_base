@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.ComposeView;
 import com.android.systemui.animation.TransitionAnimator;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DrawExpandableInOverlayNode extends Modifier.Node implements DrawModifierNode {
     public int[] composeViewLocationOnScreen;
@@ -51,23 +50,23 @@ public final class DrawExpandableInOverlayNode extends Modifier.Node implements 
                 BorderStroke borderStroke = this.controller.borderStroke;
                 float width = state.getWidth();
                 float height = state.getHeight();
-                long floatToRawIntBits = (Float.floatToRawIntBits(height) & 4294967295L) | (Float.floatToRawIntBits(width) << 32);
+                long jFloatToRawIntBits = (Float.floatToRawIntBits(height) & 4294967295L) | (Float.floatToRawIntBits(width) << 32);
                 Size.Companion companion = Size.Companion;
-                ExpandableKt.m912drawBackgroundHilfTbk(layoutNodeDrawScope, state, j, borderStroke, floatToRawIntBits);
-                long m408getSizeNHjbRc = ((Rect) ((SnapshotMutableStateImpl) this.controller.boundsInComposeViewRoot$delegate).getValue()).m408getSizeNHjbRc();
-                float intBitsToFloat = Float.intBitsToFloat((int) (m408getSizeNHjbRc >> 32));
-                float intBitsToFloat2 = Float.intBitsToFloat((int) (m408getSizeNHjbRc & 4294967295L));
-                float min = Math.min(state.getWidth() / intBitsToFloat, state.getHeight() / intBitsToFloat2);
+                ExpandableKt.m914drawBackgroundHilfTbk(layoutNodeDrawScope, state, j, borderStroke, jFloatToRawIntBits);
+                long jM410getSizeNHjbRc = ((Rect) ((SnapshotMutableStateImpl) this.controller.boundsInComposeViewRoot$delegate).getValue()).m410getSizeNHjbRc();
+                float fIntBitsToFloat = Float.intBitsToFloat((int) (jM410getSizeNHjbRc >> 32));
+                float fIntBitsToFloat2 = Float.intBitsToFloat((int) (jM410getSizeNHjbRc & 4294967295L));
+                float fMin = Math.min(state.getWidth() / fIntBitsToFloat, state.getHeight() / fIntBitsToFloat2);
                 float height2 = state.getHeight() / 2.0f;
-                long floatToRawIntBits2 = (Float.floatToRawIntBits(height2) & 4294967295L) | (Float.floatToRawIntBits(state.getWidth() / 2.0f) << 32);
+                long jFloatToRawIntBits2 = (Float.floatToRawIntBits(height2) & 4294967295L) | (Float.floatToRawIntBits(state.getWidth() / 2.0f) << 32);
                 Offset.Companion companion2 = Offset.Companion;
                 CanvasDrawScope$drawContext$1 canvasDrawScope$drawContext$1 = canvasDrawScope.drawContext;
-                long m526getSizeNHjbRc = canvasDrawScope$drawContext$1.m526getSizeNHjbRc();
+                long jM528getSizeNHjbRc = canvasDrawScope$drawContext$1.m528getSizeNHjbRc();
                 canvasDrawScope$drawContext$1.getCanvas().save();
                 try {
-                    canvasDrawScope$drawContext$1.transform.m530scale0AR0LA0(min, min, floatToRawIntBits2);
-                    float width2 = (state.getWidth() - intBitsToFloat) / 2.0f;
-                    float height3 = (state.getHeight() - intBitsToFloat2) / 2.0f;
+                    canvasDrawScope$drawContext$1.transform.m532scale0AR0LA0(fMin, fMin, jFloatToRawIntBits2);
+                    float width2 = (state.getWidth() - fIntBitsToFloat) / 2.0f;
+                    float height3 = (state.getHeight() - fIntBitsToFloat2) / 2.0f;
                     canvasDrawScope.drawContext.transform.translate(width2, height3);
                     try {
                         GraphicsLayerKt.drawLayer(layoutNodeDrawScope, this.contentGraphicsLayer);
@@ -76,7 +75,7 @@ public final class DrawExpandableInOverlayNode extends Modifier.Node implements 
                     }
                 } finally {
                     canvasDrawScope$drawContext$1.getCanvas().restore();
-                    canvasDrawScope$drawContext$1.m527setSizeuvyYCjk(m526getSizeNHjbRc);
+                    canvasDrawScope$drawContext$1.m529setSizeuvyYCjk(jM528getSizeNHjbRc);
                 }
             } finally {
                 canvasDrawScope.drawContext.transform.translate(-f3, -f2);

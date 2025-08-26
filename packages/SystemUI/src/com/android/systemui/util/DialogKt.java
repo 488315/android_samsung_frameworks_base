@@ -25,7 +25,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DialogKt {
     public static final Pair<LaunchableFrameLayout, View.OnLayoutChangeListener> maybeForceFullscreen(final Dialog dialog) {
@@ -41,7 +40,7 @@ public final class DialogKt {
         final LaunchableFrameLayout launchableFrameLayout = new LaunchableFrameLayout(dialog.getContext());
         launchableFrameLayout.setBackground(viewGroup.getBackground());
         window.setBackgroundDrawableResource(R.color.transparent);
-        frameLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.util.DialogKt$maybeForceFullscreen$1
+        frameLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.util.DialogKt.maybeForceFullscreen.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 dialog.dismiss();
@@ -96,7 +95,6 @@ public final class DialogKt {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static final Unit registerAnimationOnBackInvoked$lambda$1(View view, BackTransformation backTransformation) {
-        int width;
         float height;
         float f = backTransformation.translateX;
         if (!Float.isInfinite(f) && !Float.isNaN(f)) {
@@ -110,14 +108,10 @@ public final class DialogKt {
         if (scalePivotPosition != null) {
             int[] iArr = ScalePivotPosition.WhenMappings.$EnumSwitchMapping$0;
             int i = iArr[scalePivotPosition.ordinal()];
-            if (i == 1) {
-                width = view.getWidth();
-            } else {
-                if (i != 2) {
-                    throw new NoWhenBranchMatchedException();
-                }
-                width = view.getWidth();
+            if (i != 1 && i != 2) {
+                throw new NoWhenBranchMatchedException();
             }
+            int width = view.getWidth();
             float f3 = width / 2.0f;
             int i2 = iArr[scalePivotPosition.ordinal()];
             if (i2 == 1) {
@@ -151,10 +145,8 @@ public final class DialogKt {
         final Function1 function1 = new Function1() { // from class: com.android.systemui.util.DialogKt$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Unit registerAnimationOnBackInvoked$lambda$1;
-                registerAnimationOnBackInvoked$lambda$1 = DialogKt.registerAnimationOnBackInvoked$lambda$1(view, (BackTransformation) obj);
-                return registerAnimationOnBackInvoked$lambda$1;
+            public final Object mo781invoke(Object obj) {
+                return DialogKt.registerAnimationOnBackInvoked$lambda$1(view, (BackTransformation) obj);
             }
         };
         final DialogKt$$ExternalSyntheticLambda1 dialogKt$$ExternalSyntheticLambda1 = new DialogKt$$ExternalSyntheticLambda1(dialog);
@@ -190,13 +182,13 @@ public final class DialogKt {
             @Override // com.android.systemui.animation.back.FlingOnBackAnimationCallback
             public final void onBackProgressedCompat(BackEvent backEvent) {
                 this.$backAnimationSpec.getBackTransformation(backEvent, (backEvent.getTouchY() - this.initialY) / this.$displayMetrics.heightPixels, this.lastTransformation);
-                this.$onBackProgressed.mo779invoke(this.lastTransformation);
+                this.$onBackProgressed.mo781invoke(this.lastTransformation);
             }
 
             @Override // com.android.systemui.animation.back.FlingOnBackAnimationCallback
             public final void onBackStartedCompat(BackEvent backEvent) {
                 this.initialY = backEvent.getTouchY();
-                Function1.this.mo779invoke(backEvent);
+                this.$onBackStarted.mo781invoke(backEvent);
             }
         };
         final int i = 0;

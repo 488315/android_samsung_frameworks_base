@@ -3,7 +3,6 @@ package androidx.compose.runtime;
 import java.util.ArrayList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class GroupSourceInformation {
     public ArrayList groups;
@@ -44,8 +43,10 @@ public final class GroupSourceInformation {
                     break;
                 }
             }
+            obj = null;
+        } else {
+            obj = null;
         }
-        obj = null;
         GroupSourceInformation groupSourceInformation = obj instanceof GroupSourceInformation ? (GroupSourceInformation) obj : null;
         return groupSourceInformation != null ? groupSourceInformation.openInformation() : this;
     }

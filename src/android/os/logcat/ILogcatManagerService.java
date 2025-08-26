@@ -58,9 +58,9 @@ public interface ILogcatManagerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ILogcatManagerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILogcatManagerService)) {
-                return (ILogcatManagerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ILogcatManagerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILogcatManagerService)) {
+                return (ILogcatManagerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -93,19 +93,19 @@ public interface ILogcatManagerService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                startThread(readInt, readInt2, readInt3, readInt4);
+                startThread(i3, i4, i5, i6);
             } else if (i == 2) {
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
-                int readInt8 = parcel.readInt();
+                int i7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                int i9 = parcel.readInt();
+                int i10 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                finishThread(readInt5, readInt6, readInt7, readInt8);
+                finishThread(i7, i8, i9, i10);
             } else if (i == 3) {
                 SecurityLogEvent securityLogEvent = (SecurityLogEvent) parcel.readTypedObject(SecurityLogEvent.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -134,43 +134,43 @@ public interface ILogcatManagerService extends IInterface {
 
             @Override // android.os.logcat.ILogcatManagerService
             public void startThread(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ILogcatManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ILogcatManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.logcat.ILogcatManagerService
             public void finishThread(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ILogcatManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ILogcatManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.logcat.ILogcatManagerService
             public void onKnoxSecurityLogEvent(SecurityLogEvent securityLogEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ILogcatManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(securityLogEvent, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ILogcatManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(securityLogEvent, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

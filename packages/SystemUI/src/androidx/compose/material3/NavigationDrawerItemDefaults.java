@@ -6,21 +6,20 @@ import androidx.compose.runtime.Composer;
 import androidx.compose.runtime.ComposerKt;
 import androidx.compose.ui.unit.Dp;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NavigationDrawerItemDefaults {
     public static final NavigationDrawerItemDefaults INSTANCE = new NavigationDrawerItemDefaults();
 
     static {
         Dp.Companion companion = Dp.Companion;
-        PaddingKt.m121PaddingValuesYgX7TsA$default(12, 2);
+        PaddingKt.m122PaddingValuesYgX7TsA$default(12, 2);
     }
 
     private NavigationDrawerItemDefaults() {
     }
 
     /* renamed from: colors-oq7We08, reason: not valid java name */
-    public static NavigationDrawerItemColors m274colorsoq7We08(long j, Composer composer) {
+    public static NavigationDrawerItemColors m275colorsoq7We08(long j, Composer composer) {
         NavigationDrawerTokens navigationDrawerTokens = NavigationDrawerTokens.INSTANCE;
         navigationDrawerTokens.getClass();
         long value = ColorSchemeKt.getValue(NavigationDrawerTokens.ActiveIndicatorColor, composer);

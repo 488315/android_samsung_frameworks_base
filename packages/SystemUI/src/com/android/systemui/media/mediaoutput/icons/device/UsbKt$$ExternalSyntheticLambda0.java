@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.Dp;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class UsbKt$$ExternalSyntheticLambda0 implements Function0 {
     @Override // kotlin.jvm.functions.Function0
@@ -27,35 +26,35 @@ public final /* synthetic */ class UsbKt$$ExternalSyntheticLambda0 implements Fu
         StrokeJoin.Companion.getClass();
         PathFillType.Companion.getClass();
         int i = PathFillType.EvenOdd;
-        PathBuilder m = ExpandMoreKt$$ExternalSyntheticOutline0.m(13.1622f, 27.5132f, 22.8377f, 27.5132f);
-        m.lineTo(22.8377f, 14.067f);
-        ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0.m(m, 13.1622f, 14.067f, 13.1622f, 27.5132f);
-        m.moveTo(23.1247f, 29.0132f);
-        m.lineTo(12.8752f, 29.0132f);
-        m.curveTo(12.2065f, 29.0132f, 11.6622f, 28.469f, 11.6622f, 27.8003f);
-        m.lineTo(11.6622f, 13.78f);
-        m.curveTo(11.6622f, 13.1112f, 12.2065f, 12.567f, 12.8752f, 12.567f);
-        m.lineTo(23.1247f, 12.567f);
-        m.curveTo(23.7935f, 12.567f, 24.3377f, 13.1112f, 24.3377f, 13.78f);
-        m.lineTo(24.3377f, 27.8003f);
-        m.curveTo(24.3377f, 28.469f, 23.7935f, 29.0132f, 23.1247f, 29.0132f);
-        m.lineTo(23.1247f, 29.0132f);
-        m.close();
-        builder.m565addPathoIyEayM("", m._nodes, i, solidColor, 1.0f, solidColor2, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        PathBuilder pathBuilderM = ExpandMoreKt$$ExternalSyntheticOutline0.m(13.1622f, 27.5132f, 22.8377f, 27.5132f);
+        pathBuilderM.lineTo(22.8377f, 14.067f);
+        ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0.m(pathBuilderM, 13.1622f, 14.067f, 13.1622f, 27.5132f);
+        pathBuilderM.moveTo(23.1247f, 29.0132f);
+        pathBuilderM.lineTo(12.8752f, 29.0132f);
+        pathBuilderM.curveTo(12.2065f, 29.0132f, 11.6622f, 28.469f, 11.6622f, 27.8003f);
+        pathBuilderM.lineTo(11.6622f, 13.78f);
+        pathBuilderM.curveTo(11.6622f, 13.1112f, 12.2065f, 12.567f, 12.8752f, 12.567f);
+        pathBuilderM.lineTo(23.1247f, 12.567f);
+        pathBuilderM.curveTo(23.7935f, 12.567f, 24.3377f, 13.1112f, 24.3377f, 13.78f);
+        pathBuilderM.lineTo(24.3377f, 27.8003f);
+        pathBuilderM.curveTo(24.3377f, 28.469f, 23.7935f, 29.0132f, 23.1247f, 29.0132f);
+        pathBuilderM.lineTo(23.1247f, 29.0132f);
+        pathBuilderM.close();
+        builder.m567addPathoIyEayM("", pathBuilderM._nodes, i, solidColor, 1.0f, solidColor2, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
         SolidColor solidColor3 = new SolidColor(ColorKt.Color(4278190080L), null);
         SolidColor solidColor4 = new SolidColor(ColorKt.Color(0), null);
-        PathBuilder m2 = ExpandMoreKt$$ExternalSyntheticOutline0.m(22.4936f, 14.0608f, 20.9936f, 14.0608f);
-        m2.lineTo(20.9936f, 8.4868f);
-        m2.lineTo(15.0063f, 8.4868f);
-        m2.lineTo(15.0063f, 14.0608f);
-        m2.lineTo(13.5063f, 14.0608f);
-        m2.lineTo(13.5063f, 7.9601f);
-        m2.curveTo(13.5063f, 7.4233f, 13.9429f, 6.9868f, 14.4793f, 6.9868f);
-        m2.lineTo(21.5206f, 6.9868f);
-        m2.curveTo(22.0571f, 6.9868f, 22.4936f, 7.4233f, 22.4936f, 7.9601f);
-        m2.lineTo(22.4936f, 14.0608f);
-        m2.close();
-        builder.m565addPathoIyEayM("", m2._nodes, i, solidColor3, 1.0f, solidColor4, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        PathBuilder pathBuilderM2 = ExpandMoreKt$$ExternalSyntheticOutline0.m(22.4936f, 14.0608f, 20.9936f, 14.0608f);
+        pathBuilderM2.lineTo(20.9936f, 8.4868f);
+        pathBuilderM2.lineTo(15.0063f, 8.4868f);
+        pathBuilderM2.lineTo(15.0063f, 14.0608f);
+        pathBuilderM2.lineTo(13.5063f, 14.0608f);
+        pathBuilderM2.lineTo(13.5063f, 7.9601f);
+        pathBuilderM2.curveTo(13.5063f, 7.4233f, 13.9429f, 6.9868f, 14.4793f, 6.9868f);
+        pathBuilderM2.lineTo(21.5206f, 6.9868f);
+        pathBuilderM2.curveTo(22.0571f, 6.9868f, 22.4936f, 7.4233f, 22.4936f, 7.9601f);
+        pathBuilderM2.lineTo(22.4936f, 14.0608f);
+        pathBuilderM2.close();
+        builder.m567addPathoIyEayM("", pathBuilderM2._nodes, i, solidColor3, 1.0f, solidColor4, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
         SolidColor solidColor5 = new SolidColor(ColorKt.Color(4278190080L), null);
         SolidColor solidColor6 = new SolidColor(ColorKt.Color(0), null);
         PathBuilder pathBuilder = new PathBuilder();
@@ -64,7 +63,7 @@ public final /* synthetic */ class UsbKt$$ExternalSyntheticLambda0 implements Fu
         pathBuilder.lineToRelative(0.0f, -2.324f);
         pathBuilder.lineToRelative(-1.0f, 0.0f);
         pathBuilder.close();
-        builder.m565addPathoIyEayM("", pathBuilder._nodes, i, solidColor5, 1.0f, solidColor6, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        builder.m567addPathoIyEayM("", pathBuilder._nodes, i, solidColor5, 1.0f, solidColor6, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
         SolidColor solidColor7 = new SolidColor(ColorKt.Color(4278190080L), null);
         SolidColor solidColor8 = new SolidColor(ColorKt.Color(0), null);
         PathBuilder pathBuilder2 = new PathBuilder();
@@ -73,7 +72,7 @@ public final /* synthetic */ class UsbKt$$ExternalSyntheticLambda0 implements Fu
         pathBuilder2.lineToRelative(0.0f, -2.324f);
         pathBuilder2.lineToRelative(-1.0f, 0.0f);
         pathBuilder2.close();
-        builder.m565addPathoIyEayM("", pathBuilder2._nodes, i, solidColor7, 1.0f, solidColor8, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        builder.m567addPathoIyEayM("", pathBuilder2._nodes, i, solidColor7, 1.0f, solidColor8, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
         return builder.build();
     }
 }

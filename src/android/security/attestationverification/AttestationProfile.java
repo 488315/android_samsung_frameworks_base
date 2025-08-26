@@ -122,13 +122,13 @@ public final class AttestationProfile implements Parcelable {
     }
 
     AttestationProfile(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        int readInt = parcel.readInt();
-        String readString = (readByte & 2) == 0 ? null : parcel.readString();
-        String readString2 = (readByte & 4) == 0 ? null : parcel.readString();
-        this.mAttestationProfileId = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) AttestationVerificationManager.AttestationProfileId.class, (Annotation) null, readInt);
-        this.mPackageName = readString;
-        this.mProfileName = readString2;
+        byte b = parcel.readByte();
+        int i = parcel.readInt();
+        String string = (b & 2) == 0 ? null : parcel.readString();
+        String string2 = (b & 4) == 0 ? null : parcel.readString();
+        this.mAttestationProfileId = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) AttestationVerificationManager.AttestationProfileId.class, (Annotation) null, i);
+        this.mPackageName = string;
+        this.mProfileName = string2;
     }
 }

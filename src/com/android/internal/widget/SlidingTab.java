@@ -1,6 +1,7 @@
 package com.android.internal.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -77,7 +78,7 @@ public class SlidingTab extends ViewGroup {
         private int currentState = 0;
         private int alignment = 4;
 
-        Slider(ViewGroup viewGroup, int i, int i2, int i3) {
+        Slider(ViewGroup viewGroup, int i, int i2, int i3) throws Resources.NotFoundException {
             ImageView imageView = new ImageView(viewGroup.getContext());
             this.tab = imageView;
             imageView.setBackgroundResource(i);
@@ -155,32 +156,32 @@ public class SlidingTab extends ViewGroup {
         }
 
         void show(boolean z) {
-            int i;
-            int i2 = 0;
+            int width;
+            int height = 0;
             this.text.setVisibility(0);
             this.tab.setVisibility(0);
             if (z) {
-                int i3 = this.alignment;
+                int i = this.alignment;
                 boolean z2 = true;
-                if (i3 != 0 && i3 != 1) {
+                if (i != 0 && i != 1) {
                     z2 = false;
                 }
                 if (z2) {
-                    i = i3 == 0 ? this.tab.getWidth() : -this.tab.getWidth();
+                    width = i == 0 ? this.tab.getWidth() : -this.tab.getWidth();
                 } else {
-                    i = 0;
+                    width = 0;
                 }
                 if (!z2) {
-                    i2 = this.alignment == 2 ? this.tab.getHeight() : -this.tab.getHeight();
+                    height = this.alignment == 2 ? this.tab.getHeight() : -this.tab.getHeight();
                 }
-                TranslateAnimation translateAnimation = new TranslateAnimation(-i, 0.0f, -i2, 0.0f);
+                TranslateAnimation translateAnimation = new TranslateAnimation(-width, 0.0f, -height, 0.0f);
                 translateAnimation.setDuration(250L);
                 this.tab.startAnimation(translateAnimation);
                 this.text.startAnimation(translateAnimation);
             }
         }
 
-        void setState(int i) {
+        void setState(int i) throws Resources.NotFoundException {
             this.text.setPressed(i == 1);
             this.tab.setPressed(i == 1);
             if (i == 2) {
@@ -207,7 +208,7 @@ public class SlidingTab extends ViewGroup {
             this.target.setVisibility(0);
         }
 
-        void reset(boolean z) {
+        void reset(boolean z) throws Resources.NotFoundException {
             int i;
             int i2;
             int bottom;
@@ -329,7 +330,7 @@ public class SlidingTab extends ViewGroup {
             this.alignment_value = i4;
         }
 
-        public void updateDrawableStates() {
+        public void updateDrawableStates() throws Resources.NotFoundException {
             setState(this.currentState);
         }
 
@@ -379,14 +380,14 @@ public class SlidingTab extends ViewGroup {
             }
 
             @Override // android.view.animation.Animation.AnimationListener
-            public void onAnimationEnd(Animation animation) {
+            public void onAnimationEnd(Animation animation) throws Resources.NotFoundException {
                 SlidingTab.this.onAnimationDone();
             }
         };
         this.mTmpRect = new Rect();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.SlidingTab);
-        this.mOrientation = obtainStyledAttributes.getInt(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.SlidingTab);
+        this.mOrientation = typedArrayObtainStyledAttributes.getInt(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
         this.mDensity = getResources().getDisplayMetrics().density;
         this.mLeftSlider = new Slider(this, R.drawable.jog_tab_left_generic, R.drawable.jog_tab_bar_left_generic, R.drawable.jog_tab_target_gray);
         this.mRightSlider = new Slider(this, R.drawable.jog_tab_right_generic, R.drawable.jog_tab_bar_right_generic, R.drawable.jog_tab_target_gray);
@@ -394,8 +395,8 @@ public class SlidingTab extends ViewGroup {
 
     @Override // android.view.View
     protected void onMeasure(int i, int i2) {
-        int max;
-        int max2;
+        int iMax;
+        int iMax2;
         View.MeasureSpec.getMode(i);
         int size = View.MeasureSpec.getSize(i);
         View.MeasureSpec.getMode(i2);
@@ -407,17 +408,17 @@ public class SlidingTab extends ViewGroup {
         int tabHeight = this.mLeftSlider.getTabHeight();
         int tabHeight2 = this.mRightSlider.getTabHeight();
         if (isHorizontal()) {
-            max = Math.max(size, tabWidth + tabWidth2);
-            max2 = Math.max(tabHeight, tabHeight2);
+            iMax = Math.max(size, tabWidth + tabWidth2);
+            iMax2 = Math.max(tabHeight, tabHeight2);
         } else {
-            max = Math.max(tabWidth, tabHeight2);
-            max2 = Math.max(size2, tabHeight + tabHeight2);
+            iMax = Math.max(tabWidth, tabHeight2);
+            iMax2 = Math.max(size2, tabHeight + tabHeight2);
         }
-        setMeasuredDimension(max, max2);
+        setMeasuredDimension(iMax, iMax2);
     }
 
     @Override // android.view.ViewGroup
-    public boolean onInterceptTouchEvent(MotionEvent motionEvent) {
+    public boolean onInterceptTouchEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
         int action = motionEvent.getAction();
         float x = motionEvent.getX();
         float y = motionEvent.getY();
@@ -427,17 +428,17 @@ public class SlidingTab extends ViewGroup {
         this.mLeftSlider.tab.getHitRect(this.mTmpRect);
         int i = (int) x;
         int i2 = (int) y;
-        boolean contains = this.mTmpRect.contains(i, i2);
+        boolean zContains = this.mTmpRect.contains(i, i2);
         this.mRightSlider.tab.getHitRect(this.mTmpRect);
-        boolean contains2 = this.mTmpRect.contains(i, i2);
-        if (!this.mTracking && !contains && !contains2) {
+        boolean zContains2 = this.mTmpRect.contains(i, i2);
+        if (!this.mTracking && !zContains && !zContains2) {
             return false;
         }
         if (action == 0) {
             this.mTracking = true;
             this.mTriggered = false;
             vibrate(VIBRATE_SHORT);
-            if (contains) {
+            if (zContains) {
                 this.mCurrentSlider = this.mLeftSlider;
                 this.mOtherSlider = this.mRightSlider;
                 this.mThreshold = isHorizontal() ? 0.6666667f : 0.3333333f;
@@ -455,7 +456,7 @@ public class SlidingTab extends ViewGroup {
         return true;
     }
 
-    public void reset(boolean z) {
+    public void reset(boolean z) throws Resources.NotFoundException {
         this.mLeftSlider.reset(z);
         this.mRightSlider.reset(z);
         if (z) {
@@ -465,132 +466,51 @@ public class SlidingTab extends ViewGroup {
     }
 
     @Override // android.view.View
-    public void setVisibility(int i) {
+    public void setVisibility(int i) throws Resources.NotFoundException {
         if (i != getVisibility() && i == 4) {
             reset(false);
         }
         super.setVisibility(i);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x0018, code lost:
-    
-        if (r0 != 3) goto L55;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x0095  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onTouchEvent(android.view.MotionEvent r8) {
-        /*
-            r7 = this;
-            boolean r0 = r7.mTracking
-            r1 = 0
-            r2 = 1
-            if (r0 == 0) goto L98
-            int r0 = r8.getAction()
-            float r3 = r8.getX()
-            float r4 = r8.getY()
-            if (r0 == r2) goto L95
-            r5 = 2
-            if (r0 == r5) goto L1c
-            r3 = 3
-            if (r0 == r3) goto L95
-            goto L98
-        L1c:
-            boolean r0 = r7.withinView(r3, r4, r7)
-            if (r0 == 0) goto L95
-            r7.moveHandle(r3, r4)
-            boolean r0 = r7.isHorizontal()
-            if (r0 == 0) goto L2c
-            goto L2d
-        L2c:
-            r3 = r4
-        L2d:
-            float r0 = r7.mThreshold
-            boolean r4 = r7.isHorizontal()
-            if (r4 == 0) goto L3a
-            int r4 = r7.getWidth()
-            goto L3e
-        L3a:
-            int r4 = r7.getHeight()
-        L3e:
-            float r4 = (float) r4
-            float r0 = r0 * r4
-            boolean r4 = r7.isHorizontal()
-            if (r4 == 0) goto L59
-            com.android.internal.widget.SlidingTab$Slider r4 = r7.mCurrentSlider
-            com.android.internal.widget.SlidingTab$Slider r6 = r7.mLeftSlider
-            if (r4 != r6) goto L51
-            int r0 = (r3 > r0 ? 1 : (r3 == r0 ? 0 : -1))
-            if (r0 <= 0) goto L57
-            goto L55
-        L51:
-            int r0 = (r3 > r0 ? 1 : (r3 == r0 ? 0 : -1))
-            if (r0 >= 0) goto L57
-        L55:
-            r0 = r2
-            goto L69
-        L57:
-            r0 = r1
-            goto L69
-        L59:
-            com.android.internal.widget.SlidingTab$Slider r4 = r7.mCurrentSlider
-            com.android.internal.widget.SlidingTab$Slider r6 = r7.mLeftSlider
-            if (r4 != r6) goto L64
-            int r0 = (r3 > r0 ? 1 : (r3 == r0 ? 0 : -1))
-            if (r0 >= 0) goto L57
-            goto L55
-        L64:
-            int r0 = (r3 > r0 ? 1 : (r3 == r0 ? 0 : -1))
-            if (r0 <= 0) goto L57
-            goto L55
-        L69:
-            boolean r3 = r7.mTriggered
-            if (r3 != 0) goto L98
-            if (r0 == 0) goto L98
-            r7.mTriggered = r2
-            r7.mTracking = r1
-            com.android.internal.widget.SlidingTab$Slider r0 = r7.mCurrentSlider
-            r0.setState(r5)
-            com.android.internal.widget.SlidingTab$Slider r0 = r7.mCurrentSlider
-            com.android.internal.widget.SlidingTab$Slider r3 = r7.mLeftSlider
-            if (r0 != r3) goto L80
-            r0 = r2
-            goto L81
-        L80:
-            r0 = r1
-        L81:
-            if (r0 == 0) goto L84
-            r5 = r2
-        L84:
-            r7.dispatchTriggerEvent(r5)
-            if (r0 == 0) goto L8c
-            boolean r0 = r7.mHoldLeftOnTransition
-            goto L8e
-        L8c:
-            boolean r0 = r7.mHoldRightOnTransition
-        L8e:
-            r7.startAnimating(r0)
-            r7.setGrabbedState(r1)
-            goto L98
-        L95:
-            r7.cancelGrab()
-        L98:
-            boolean r0 = r7.mTracking
-            if (r0 != 0) goto La4
-            boolean r7 = super.onTouchEvent(r8)
-            if (r7 == 0) goto La3
-            goto La4
-        La3:
-            return r1
-        La4:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.SlidingTab.onTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onTouchEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
+        if (this.mTracking) {
+            int action = motionEvent.getAction();
+            float x = motionEvent.getX();
+            float y = motionEvent.getY();
+            if (action != 1) {
+                if (action != 2) {
+                    if (action == 3) {
+                        cancelGrab();
+                    }
+                } else if (withinView(x, y, this)) {
+                    moveHandle(x, y);
+                    if (!isHorizontal()) {
+                        x = y;
+                    }
+                    float width = this.mThreshold * (isHorizontal() ? getWidth() : getHeight());
+                    boolean z = !isHorizontal() ? this.mCurrentSlider != this.mLeftSlider ? x <= width : x >= width : this.mCurrentSlider != this.mLeftSlider ? x >= width : x <= width;
+                    if (!this.mTriggered && z) {
+                        this.mTriggered = true;
+                        this.mTracking = false;
+                        this.mCurrentSlider.setState(2);
+                        boolean z2 = this.mCurrentSlider == this.mLeftSlider;
+                        dispatchTriggerEvent(z2 ? 1 : 2);
+                        startAnimating(z2 ? this.mHoldLeftOnTransition : this.mHoldRightOnTransition);
+                        setGrabbedState(0);
+                    }
+                }
+            }
+        }
+        return this.mTracking || super.onTouchEvent(motionEvent);
     }
 
-    private void cancelGrab() {
+    private void cancelGrab() throws Resources.NotFoundException {
         this.mTracking = false;
         this.mTriggered = false;
         this.mOtherSlider.show(true);
@@ -646,7 +566,7 @@ public class SlidingTab extends ViewGroup {
             }
 
             @Override // android.view.animation.Animation.AnimationListener
-            public void onAnimationEnd(Animation animation) {
+            public void onAnimationEnd(Animation animation) throws Resources.NotFoundException {
                 Animation alphaAnimation;
                 if (z) {
                     int i3 = i2;
@@ -669,7 +589,7 @@ public class SlidingTab extends ViewGroup {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void onAnimationDone() {
+    public void onAnimationDone() throws Resources.NotFoundException {
         resetView();
         this.mAnimating = false;
     }
@@ -686,7 +606,7 @@ public class SlidingTab extends ViewGroup {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void resetView() {
+    public void resetView() throws Resources.NotFoundException {
         this.mLeftSlider.reset(false);
         this.mRightSlider.reset(false);
     }
@@ -714,7 +634,7 @@ public class SlidingTab extends ViewGroup {
         invalidate();
     }
 
-    public void setLeftTabResources(int i, int i2, int i3, int i4) {
+    public void setLeftTabResources(int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         this.mLeftSlider.setIcon(i);
         this.mLeftSlider.setTarget(i2);
         this.mLeftSlider.setBarBackgroundResource(i3);
@@ -728,7 +648,7 @@ public class SlidingTab extends ViewGroup {
         }
     }
 
-    public void setRightTabResources(int i, int i2, int i3, int i4) {
+    public void setRightTabResources(int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         this.mRightSlider.setIcon(i);
         this.mRightSlider.setTarget(i2);
         this.mRightSlider.setBarBackgroundResource(i3);
@@ -767,7 +687,7 @@ public class SlidingTab extends ViewGroup {
     }
 
     @Override // android.view.View
-    protected void onVisibilityChanged(View view, int i) {
+    protected void onVisibilityChanged(View view, int i) throws Resources.NotFoundException {
         super.onVisibilityChanged(view, i);
         if (view != this || i == 0 || this.mGrabbedState == 0) {
             return;

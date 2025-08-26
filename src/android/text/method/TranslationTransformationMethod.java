@@ -41,7 +41,7 @@ public class TranslationTransformationMethod implements TransformationMethod2 {
 
     @Override // android.text.method.TransformationMethod
     public CharSequence getTransformation(CharSequence charSequence, View view) {
-        CharSequence charSequence2;
+        CharSequence text;
         if (!this.mAllowLengthChanges) {
             Log.w(TAG, "Caller did not enable length changes; not transforming to translated text");
             return charSequence;
@@ -49,21 +49,21 @@ public class TranslationTransformationMethod implements TransformationMethod2 {
         TranslationResponseValue value = this.mTranslationResponse.getValue(ViewTranslationRequest.ID_TEXT);
         boolean z = value.getExtras().getBoolean("show_origin_message");
         if (value.getStatusCode() == 0) {
-            charSequence2 = value.getText();
+            text = value.getText();
             if (this.SEP_VERSION.floatValue() >= 15.1d && (view instanceof TextView) && z) {
                 try {
                     int[] colors = ((TextView) view).getTextColors().withAlpha(179).getColors();
-                    SpannableString spannableString = new SpannableString(charSequence2);
+                    SpannableString spannableString = new SpannableString(text);
                     spannableString.setSpan(new ForegroundColorSpan(colors[0]), 0, spannableString.length(), 33);
-                    charSequence2 = spannableString;
+                    text = spannableString;
                 } catch (Exception e) {
                     Log.e(TAG, "trans color change exception " + e);
                 }
             }
         } else {
-            charSequence2 = "";
+            text = "";
         }
-        return (TextUtils.isEmpty(charSequence2) || isWhitespace(charSequence2.toString())) ? charSequence : (((double) this.SEP_VERSION.floatValue()) >= 15.1d && (view instanceof TextView) && z) ? TextUtils.concat(charSequence, ShaderAssembler.NEWLINE, charSequence2) : charSequence2;
+        return (TextUtils.isEmpty(text) || isWhitespace(text.toString())) ? charSequence : (((double) this.SEP_VERSION.floatValue()) >= 15.1d && (view instanceof TextView) && z) ? TextUtils.concat(charSequence, ShaderAssembler.NEWLINE, text) : text;
     }
 
     @Override // android.text.method.TransformationMethod2

@@ -13,7 +13,6 @@ import com.android.wm.shell.controlpanel.activity.FlexPanelActivity;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CheckControlWindowState {
     public static final SparseArray mActionViewIdMap;
@@ -48,17 +47,17 @@ public class CheckControlWindowState {
     }
 
     public static boolean isMediaPanelRequestedState(Context context, MediaController mediaController) {
-        boolean contains;
+        boolean zContains;
         String packageNameForMediaPanel = ControlPanelUtils.getPackageNameForMediaPanel(context, true);
         Log.d("CheckControlWindowState", "isMediaPanelRequestedState() start : " + packageNameForMediaPanel);
         String[] stringArray = context.getResources().getStringArray(R.array.config_MediaPanel_Exclude);
         if (stringArray == null) {
             Log.d("CheckControlWindowState", "excludeMediaApp packageList is null");
-            contains = false;
+            zContains = false;
         } else {
-            contains = Arrays.asList(stringArray).contains(packageNameForMediaPanel);
+            zContains = Arrays.asList(stringArray).contains(packageNameForMediaPanel);
         }
-        if (contains) {
+        if (zContains) {
             MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("media app category 0 is in foreground : ", packageNameForMediaPanel, "CheckControlWindowState");
             return false;
         }

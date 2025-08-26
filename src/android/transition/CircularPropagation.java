@@ -18,8 +18,8 @@ public class CircularPropagation extends VisibilityPropagation {
     @Override // android.transition.TransitionPropagation
     public long getStartDelay(ViewGroup viewGroup, Transition transition, TransitionValues transitionValues, TransitionValues transitionValues2) {
         int i;
-        int round;
-        int i2;
+        int iRound;
+        int iCenterX;
         if (transitionValues == null && transitionValues2 == null) {
             return 0L;
         }
@@ -33,20 +33,20 @@ public class CircularPropagation extends VisibilityPropagation {
         int viewY = getViewY(transitionValues);
         Rect epicenter = transition.getEpicenter();
         if (epicenter != null) {
-            i2 = epicenter.centerX();
-            round = epicenter.centerY();
+            iCenterX = epicenter.centerX();
+            iRound = epicenter.centerY();
         } else {
             viewGroup.getLocationOnScreen(new int[2]);
-            int round2 = Math.round(r5[0] + (viewGroup.getWidth() / 2) + viewGroup.getTranslationX());
-            round = Math.round(r5[1] + (viewGroup.getHeight() / 2) + viewGroup.getTranslationY());
-            i2 = round2;
+            int iRound2 = Math.round(r5[0] + (viewGroup.getWidth() / 2) + viewGroup.getTranslationX());
+            iRound = Math.round(r5[1] + (viewGroup.getHeight() / 2) + viewGroup.getTranslationY());
+            iCenterX = iRound2;
         }
-        double distance = distance(viewX, viewY, i2, round) / distance(0.0f, 0.0f, viewGroup.getWidth(), viewGroup.getHeight());
+        double dDistance = distance(viewX, viewY, iCenterX, iRound) / distance(0.0f, 0.0f, viewGroup.getWidth(), viewGroup.getHeight());
         long duration = transition.getDuration();
         if (duration < 0) {
             duration = 300;
         }
-        return Math.round(((duration * i) / this.mPropagationSpeed) * distance);
+        return Math.round(((duration * i) / this.mPropagationSpeed) * dDistance);
     }
 
     private static double distance(float f, float f2, float f3, float f4) {

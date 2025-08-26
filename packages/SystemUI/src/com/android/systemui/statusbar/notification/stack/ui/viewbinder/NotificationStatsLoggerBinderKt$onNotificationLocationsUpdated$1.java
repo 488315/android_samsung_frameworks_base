@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ NotificationStackScrollLayout $this_onNotificationLocationsUpdated;
@@ -55,7 +54,7 @@ final class NotificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1 ext
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    NotificationStackScrollLayout notificationStackScrollLayout3 = NotificationStackScrollLayout.this;
+                    NotificationStackScrollLayout notificationStackScrollLayout3 = notificationStackScrollLayout2;
                     notificationStackScrollLayout3.getClass();
                     int i3 = NotificationsLiveDataStoreRefactor.$r8$clinit;
                     RefactorFlagUtils refactorFlagUtils2 = RefactorFlagUtils.INSTANCE;

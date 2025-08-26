@@ -4,7 +4,6 @@ import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOu
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SliderHapticFeedbackConfig {
     public final float additionalVelocityMaxBump;
@@ -75,7 +74,7 @@ public final class SliderHapticFeedbackConfig {
     public /* synthetic */ SliderHapticFeedbackConfig(float r17, float r18, float r19, float r20, float r21, float r22, float r23, int r24, float r25, int r26, float r27, float r28, float r29, float r30, com.android.systemui.haptics.slider.SliderHapticFeedbackFilter r31, int r32, kotlin.jvm.internal.DefaultConstructorMarker r33) {
         /*
             Method dump skipped, instructions count: 211
-            To view this dump change 'Code comments level' option to 'DEBUG'
+            To view this dump add '--comments-level debug' option
         */
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.haptics.slider.SliderHapticFeedbackConfig.<init>(float, float, float, float, float, float, float, int, float, int, float, float, float, float, com.android.systemui.haptics.slider.SliderHapticFeedbackFilter, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
     }

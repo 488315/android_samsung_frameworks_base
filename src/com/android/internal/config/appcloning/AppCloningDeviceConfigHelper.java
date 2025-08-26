@@ -36,7 +36,7 @@ public class AppCloningDeviceConfigHelper {
     private void initializeDeviceConfigChangeListener() {
         this.mDeviceConfigChangeListener = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.internal.config.appcloning.AppCloningDeviceConfigHelper$$ExternalSyntheticLambda0
             public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                AppCloningDeviceConfigHelper.this.lambda$initializeDeviceConfigChangeListener$0(properties);
+                this.f$0.lambda$initializeDeviceConfigChangeListener$0(properties);
             }
         };
     }

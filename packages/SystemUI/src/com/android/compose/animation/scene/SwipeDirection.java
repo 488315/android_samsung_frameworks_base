@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function1;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SwipeDirection {
     public static final /* synthetic */ SwipeDirection[] $VALUES;
@@ -23,7 +22,6 @@ public final class SwipeDirection {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Resolved {
         public static final /* synthetic */ Resolved[] $VALUES;
         public static final Resolved Down;
@@ -70,7 +68,7 @@ public final class SwipeDirection {
         SwipeDirection swipeDirection = new SwipeDirection("Up", 0, new Function1() { // from class: com.android.compose.animation.scene.SwipeDirection$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i) {
                     case 0:
@@ -99,7 +97,7 @@ public final class SwipeDirection {
         SwipeDirection swipeDirection2 = new SwipeDirection("Down", 1, new Function1() { // from class: com.android.compose.animation.scene.SwipeDirection$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i2) {
                     case 0:
@@ -128,7 +126,7 @@ public final class SwipeDirection {
         SwipeDirection swipeDirection3 = new SwipeDirection(SystemUIAnalytics.DT_BOUNCER_POSITION_LEFT, 2, new Function1() { // from class: com.android.compose.animation.scene.SwipeDirection$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i3) {
                     case 0:
@@ -157,7 +155,7 @@ public final class SwipeDirection {
         SwipeDirection swipeDirection4 = new SwipeDirection(SystemUIAnalytics.DT_BOUNCER_POSITION_RIGHT, 3, new Function1() { // from class: com.android.compose.animation.scene.SwipeDirection$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i4) {
                     case 0:
@@ -186,7 +184,7 @@ public final class SwipeDirection {
         SwipeDirection swipeDirection5 = new SwipeDirection("Start", 4, new Function1() { // from class: com.android.compose.animation.scene.SwipeDirection$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i5) {
                     case 0:
@@ -215,7 +213,7 @@ public final class SwipeDirection {
         SwipeDirection swipeDirection6 = new SwipeDirection("End", 5, new Function1() { // from class: com.android.compose.animation.scene.SwipeDirection$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i6) {
                     case 0:

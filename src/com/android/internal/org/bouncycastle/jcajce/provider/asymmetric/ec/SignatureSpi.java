@@ -28,19 +28,19 @@ public class SignatureSpi extends DSABase {
 
     @Override // java.security.SignatureSpi
     protected void engineInitVerify(PublicKey publicKey) throws InvalidKeyException {
-        AsymmetricKeyParameter generatePublicKeyParameter = ECUtils.generatePublicKeyParameter(publicKey);
+        AsymmetricKeyParameter asymmetricKeyParameterGeneratePublicKeyParameter = ECUtils.generatePublicKeyParameter(publicKey);
         this.digest.reset();
-        this.signer.init(false, generatePublicKeyParameter);
+        this.signer.init(false, asymmetricKeyParameterGeneratePublicKeyParameter);
     }
 
     @Override // java.security.SignatureSpi
     protected void engineInitSign(PrivateKey privateKey) throws InvalidKeyException {
-        AsymmetricKeyParameter generatePrivateKeyParameter = ECUtils.generatePrivateKeyParameter(privateKey);
+        AsymmetricKeyParameter asymmetricKeyParameterGeneratePrivateKeyParameter = ECUtils.generatePrivateKeyParameter(privateKey);
         this.digest.reset();
         if (this.appRandom != null) {
-            this.signer.init(true, new ParametersWithRandom(generatePrivateKeyParameter, this.appRandom));
+            this.signer.init(true, new ParametersWithRandom(asymmetricKeyParameterGeneratePrivateKeyParameter, this.appRandom));
         } else {
-            this.signer.init(true, generatePrivateKeyParameter);
+            this.signer.init(true, asymmetricKeyParameterGeneratePrivateKeyParameter);
         }
     }
 

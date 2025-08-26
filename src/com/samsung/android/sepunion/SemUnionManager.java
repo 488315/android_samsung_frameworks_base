@@ -65,23 +65,23 @@ public class SemUnionManager {
     }
 
     private IUnionManager getService() {
-        IUnionManager asInterface = IUnionManager.Stub.asInterface(ServiceManager.getService(Context.SEP_UNION_SERVICE));
-        if (asInterface == null) {
+        IUnionManager iUnionManagerAsInterface = IUnionManager.Stub.asInterface(ServiceManager.getService(Context.SEP_UNION_SERVICE));
+        if (iUnionManagerAsInterface == null) {
             Log.i(TAG, "IUnionManager is NULL");
         }
-        return asInterface;
+        return iUnionManagerAsInterface;
     }
 
     public static boolean isUnionService(String str) {
-        boolean containsKey;
+        boolean zContainsKey;
         synchronized (mLock) {
-            containsKey = sManagerMap.containsKey(str);
+            zContainsKey = sManagerMap.containsKey(str);
         }
-        return containsKey;
+        return zContainsKey;
     }
 
     public Object getUnionService(String str) {
-        Object obj;
+        Object objNewInstance;
         Log.i(TAG, "getUnionService(" + str + NavigationBarInflaterView.KEY_CODE_END);
         synchronized (mLock) {
             if (sNeedInitialize) {
@@ -89,23 +89,23 @@ public class SemUnionManager {
             }
             try {
                 try {
-                    obj = sConstructorMap.get(str).newInstance(this.mContext);
-                } catch (InstantiationException e) {
+                    objNewInstance = sConstructorMap.get(str).newInstance(this.mContext);
+                } catch (IllegalAccessException e) {
                     e.printStackTrace();
-                    obj = null;
-                    return obj;
-                } catch (InvocationTargetException e2) {
-                    e2.printStackTrace();
-                    obj = null;
-                    return obj;
+                    objNewInstance = null;
+                    return objNewInstance;
                 }
-            } catch (IllegalAccessException e3) {
+            } catch (InstantiationException e2) {
+                e2.printStackTrace();
+                objNewInstance = null;
+                return objNewInstance;
+            } catch (InvocationTargetException e3) {
                 e3.printStackTrace();
-                obj = null;
-                return obj;
+                objNewInstance = null;
+                return objNewInstance;
             }
         }
-        return obj;
+        return objNewInstance;
     }
 
     private Constructor getConstructor(String str) {

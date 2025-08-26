@@ -51,9 +51,9 @@ public interface IHdmiVendorCommandListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IHdmiVendorCommandListener)) {
-                return (IHdmiVendorCommandListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IHdmiVendorCommandListener)) {
+                return (IHdmiVendorCommandListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,17 +83,17 @@ public interface IHdmiVendorCommandListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                byte[] createByteArray = parcel.createByteArray();
-                boolean readBoolean = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onReceived(readInt, readInt2, createByteArray, readBoolean);
+                onReceived(i3, i4, bArrCreateByteArray, z);
             } else if (i == 2) {
-                boolean readBoolean2 = parcel.readBoolean();
-                int readInt3 = parcel.readInt();
+                boolean z2 = parcel.readBoolean();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onControlStateChanged(readBoolean2, readInt3);
+                onControlStateChanged(z2, i5);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -118,29 +118,29 @@ public interface IHdmiVendorCommandListener extends IInterface {
 
             @Override // android.hardware.hdmi.IHdmiVendorCommandListener
             public void onReceived(int i, int i2, byte[] bArr, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.hdmi.IHdmiVendorCommandListener
             public void onControlStateChanged(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

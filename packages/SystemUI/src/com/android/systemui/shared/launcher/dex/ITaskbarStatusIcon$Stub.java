@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import com.android.systemui.TaskbarIndicatorController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ITaskbarStatusIcon$Stub extends Binder implements IInterface {
     public ITaskbarStatusIcon$Stub() {
@@ -24,10 +23,10 @@ public abstract class ITaskbarStatusIcon$Stub extends Binder implements IInterfa
         }
         ITaskbarStatusIconListener$Stub$Proxy iTaskbarStatusIconListener$Stub$Proxy = null;
         if (i == 1) {
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            if (readStrongBinder != null) {
-                IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener");
-                iTaskbarStatusIconListener$Stub$Proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof ITaskbarStatusIconListener$Stub$Proxy)) ? new ITaskbarStatusIconListener$Stub$Proxy(readStrongBinder) : (ITaskbarStatusIconListener$Stub$Proxy) queryLocalInterface;
+            IBinder strongBinder = parcel.readStrongBinder();
+            if (strongBinder != null) {
+                IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener");
+                iTaskbarStatusIconListener$Stub$Proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ITaskbarStatusIconListener$Stub$Proxy)) ? new ITaskbarStatusIconListener$Stub$Proxy(strongBinder) : (ITaskbarStatusIconListener$Stub$Proxy) iInterfaceQueryLocalInterface;
             }
             parcel.enforceNoDataAvail();
             ((TaskbarIndicatorController) this).taskbarStatusIconListener = iTaskbarStatusIconListener$Stub$Proxy;
@@ -40,11 +39,11 @@ public abstract class ITaskbarStatusIcon$Stub extends Binder implements IInterfa
             ((TaskbarIndicatorController) this).requestStatusIcons();
             return true;
         }
-        IBinder readStrongBinder2 = parcel.readStrongBinder();
-        if (readStrongBinder2 != null) {
-            IInterface queryLocalInterface2 = readStrongBinder2.queryLocalInterface("com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener");
-            if (queryLocalInterface2 == null || !(queryLocalInterface2 instanceof ITaskbarStatusIconListener$Stub$Proxy)) {
-                new ITaskbarStatusIconListener$Stub$Proxy(readStrongBinder2);
+        IBinder strongBinder2 = parcel.readStrongBinder();
+        if (strongBinder2 != null) {
+            IInterface iInterfaceQueryLocalInterface2 = strongBinder2.queryLocalInterface("com.android.systemui.shared.launcher.dex.ITaskbarStatusIconListener");
+            if (iInterfaceQueryLocalInterface2 == null || !(iInterfaceQueryLocalInterface2 instanceof ITaskbarStatusIconListener$Stub$Proxy)) {
+                new ITaskbarStatusIconListener$Stub$Proxy(strongBinder2);
             }
         }
         parcel.enforceNoDataAvail();

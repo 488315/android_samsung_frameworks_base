@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class PlaceQueryOption implements Parcelable {
     public static final Parcelable.Creator<PlaceQueryOption> CREATOR = new Creator();
@@ -13,7 +12,6 @@ public final class PlaceQueryOption implements Parcelable {
     private final int offset;
     private final PlaceQueryType queryType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -66,7 +64,6 @@ public final class PlaceQueryOption implements Parcelable {
         this.queryType = placeQueryType;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WrapBuilder {
         public final String engramId;
         public final int limit;

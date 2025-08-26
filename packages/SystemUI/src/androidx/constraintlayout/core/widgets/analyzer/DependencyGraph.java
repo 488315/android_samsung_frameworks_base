@@ -10,7 +10,6 @@ import androidx.constraintlayout.core.widgets.analyzer.BasicMeasure;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DependencyGraph {
     public final ConstraintWidgetContainer mContainer;
@@ -406,37 +405,37 @@ public class DependencyGraph {
 
     public final int computeWrap(ConstraintWidgetContainer constraintWidgetContainer, int i) {
         int i2;
-        long max;
+        long jMax;
         float f;
         DependencyGraph dependencyGraph = this;
         ConstraintWidgetContainer constraintWidgetContainer2 = constraintWidgetContainer;
         int size = dependencyGraph.mGroups.size();
         long j = 0;
         int i3 = 0;
-        long j2 = 0;
+        long jMax2 = 0;
         while (i3 < size) {
             WidgetRun widgetRun = ((RunGroup) dependencyGraph.mGroups.get(i3)).mFirstRun;
             if (!(widgetRun instanceof ChainRun) ? !(i != 0 ? (widgetRun instanceof VerticalWidgetRun) : (widgetRun instanceof HorizontalWidgetRun)) : ((ChainRun) widgetRun).orientation != i) {
                 DependencyNode dependencyNode = (i == 0 ? constraintWidgetContainer2.mHorizontalRun : constraintWidgetContainer2.mVerticalRun).start;
                 DependencyNode dependencyNode2 = (i == 0 ? constraintWidgetContainer2.mHorizontalRun : constraintWidgetContainer2.mVerticalRun).end;
-                boolean contains = ((ArrayList) widgetRun.start.mTargets).contains(dependencyNode);
+                boolean zContains = ((ArrayList) widgetRun.start.mTargets).contains(dependencyNode);
                 DependencyNode dependencyNode3 = widgetRun.end;
-                boolean contains2 = ((ArrayList) dependencyNode3.mTargets).contains(dependencyNode2);
+                boolean zContains2 = ((ArrayList) dependencyNode3.mTargets).contains(dependencyNode2);
                 long wrapDimension = widgetRun.getWrapDimension();
                 DependencyNode dependencyNode4 = widgetRun.start;
-                if (contains && contains2) {
-                    long traverseStart = RunGroup.traverseStart(dependencyNode4, j);
-                    long traverseEnd = RunGroup.traverseEnd(dependencyNode3, j);
-                    long j3 = traverseStart - wrapDimension;
+                if (zContains && zContains2) {
+                    long jTraverseStart = RunGroup.traverseStart(dependencyNode4, j);
+                    long jTraverseEnd = RunGroup.traverseEnd(dependencyNode3, j);
+                    long j2 = jTraverseStart - wrapDimension;
                     int i4 = dependencyNode3.mMargin;
                     i2 = i3;
-                    if (j3 >= (-i4)) {
-                        j3 += i4;
+                    if (j2 >= (-i4)) {
+                        j2 += i4;
                     }
-                    long j4 = dependencyNode4.mMargin;
-                    long j5 = ((-traverseEnd) - wrapDimension) - j4;
-                    if (j5 >= j4) {
-                        j5 -= j4;
+                    long j3 = dependencyNode4.mMargin;
+                    long j4 = ((-jTraverseEnd) - wrapDimension) - j3;
+                    if (j4 >= j3) {
+                        j4 -= j3;
                     }
                     ConstraintWidget constraintWidget = widgetRun.mWidget;
                     if (i == 0) {
@@ -447,23 +446,23 @@ public class DependencyGraph {
                         constraintWidget.getClass();
                         f = -1.0f;
                     }
-                    float f2 = f > 0.0f ? (long) ((j3 / (1.0f - f)) + (j5 / f)) : 0L;
-                    max = (dependencyNode4.mMargin + ((((long) ((f2 * f) + 0.5f)) + wrapDimension) + ((long) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f, f2, 0.5f)))) - dependencyNode3.mMargin;
+                    float f2 = f > 0.0f ? (long) ((j2 / (1.0f - f)) + (j4 / f)) : 0L;
+                    jMax = (dependencyNode4.mMargin + ((((long) ((f2 * f) + 0.5f)) + wrapDimension) + ((long) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f, f2, 0.5f)))) - dependencyNode3.mMargin;
                 } else {
                     i2 = i3;
-                    max = contains ? Math.max(RunGroup.traverseStart(dependencyNode4, dependencyNode4.mMargin), dependencyNode4.mMargin + wrapDimension) : contains2 ? Math.max(-RunGroup.traverseEnd(dependencyNode3, dependencyNode3.mMargin), (-dependencyNode3.mMargin) + wrapDimension) : (widgetRun.getWrapDimension() + dependencyNode4.mMargin) - dependencyNode3.mMargin;
+                    jMax = zContains ? Math.max(RunGroup.traverseStart(dependencyNode4, dependencyNode4.mMargin), dependencyNode4.mMargin + wrapDimension) : zContains2 ? Math.max(-RunGroup.traverseEnd(dependencyNode3, dependencyNode3.mMargin), (-dependencyNode3.mMargin) + wrapDimension) : (widgetRun.getWrapDimension() + dependencyNode4.mMargin) - dependencyNode3.mMargin;
                 }
             } else {
-                max = j;
+                jMax = j;
                 i2 = i3;
             }
-            j2 = Math.max(j2, max);
+            jMax2 = Math.max(jMax2, jMax);
             i3 = i2 + 1;
             dependencyGraph = this;
             constraintWidgetContainer2 = constraintWidgetContainer;
             j = 0;
         }
-        return (int) j2;
+        return (int) jMax2;
     }
 
     public final void findGroup(WidgetRun widgetRun, int i, ArrayList arrayList) {

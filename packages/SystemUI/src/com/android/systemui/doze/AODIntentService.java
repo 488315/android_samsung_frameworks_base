@@ -7,7 +7,6 @@ import com.android.systemui.SystemUIAppComponentFactoryBase;
 import com.android.systemui.plugins.aod.PluginAOD;
 import dagger.Lazy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AODIntentService extends IntentService {
     public Handler mHandler;
@@ -22,13 +21,13 @@ public class AODIntentService extends IntentService {
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.doze.AODIntentService$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                AODIntentService aODIntentService = AODIntentService.this;
+                AODIntentService aODIntentService = this.f$0;
                 final Intent intent2 = intent;
                 final PluginAODManager pluginAODManager = (PluginAODManager) aODIntentService.mPluginAODManagerLazy.get();
                 pluginAODManager.mHandler.post(new Runnable() { // from class: com.android.systemui.doze.PluginAODManager$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PluginAODManager pluginAODManager2 = PluginAODManager.this;
+                        PluginAODManager pluginAODManager2 = pluginAODManager;
                         Intent intent3 = intent2;
                         PluginAOD pluginAOD = pluginAODManager2.mAODPlugin;
                         if (pluginAOD != null) {

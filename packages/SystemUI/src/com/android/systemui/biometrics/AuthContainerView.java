@@ -64,7 +64,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AuthContainerView extends LinearLayout implements WakefulnessLifecycle.Observer, CredentialView.Host {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -93,7 +92,6 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
     public final WindowManager mWindowManager;
     public final IBinder mWindowToken;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class BiometricCallback implements Spaghetti.Callback {
         public BiometricCallback() {
         }
@@ -181,7 +179,6 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Config {
         public AuthController mCallback;
         public Context mContext;
@@ -204,7 +201,7 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
         this.mBackCallback = new OnBackInvokedCallback() { // from class: com.android.systemui.biometrics.AuthContainerView$$ExternalSyntheticLambda3
             @Override // android.window.OnBackInvokedCallback
             public final void onBackInvoked() {
-                AuthContainerView.this.onBackInvoked();
+                this.f$0.onBackInvoked();
             }
         };
         this.mConfig = config;
@@ -221,21 +218,21 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
         boolean z = ((LinearLayout) this).mContext.getResources().getConfiguration().orientation == 2;
         this.mPromptSelectorInteractorProvider = provider;
         ((PromptSelectorInteractorImpl) ((PromptSelectorInteractor) provider.get())).setPrompt(config.mPromptInfo, config.mUserId, config.mRequestId, biometricModalities, config.mOperationId, config.mOpPackageName, false, z);
-        LayoutInflater from = LayoutInflater.from(((LinearLayout) this).mContext);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(((LinearLayout) this).mContext);
         PromptKind promptKind = (PromptKind) promptViewModel.promptKind.$$delegate_0.getValue();
         if (!promptKind.isBiometric()) {
-            this.mLayout = (FrameLayout) from.inflate(R.layout.auth_container_view, (ViewGroup) this, false);
+            this.mLayout = (FrameLayout) layoutInflaterFrom.inflate(R.layout.auth_container_view, (ViewGroup) this, false);
         } else if (promptKind.isTwoPaneLandscapeBiometric()) {
-            this.mLayout = (ConstraintLayout) from.inflate(R.layout.biometric_prompt_two_pane_layout, (ViewGroup) this, false);
+            this.mLayout = (ConstraintLayout) layoutInflaterFrom.inflate(R.layout.biometric_prompt_two_pane_layout, (ViewGroup) this, false);
         } else {
-            this.mLayout = (ConstraintLayout) from.inflate(R.layout.biometric_prompt_one_pane_layout, (ViewGroup) this, false);
+            this.mLayout = (ConstraintLayout) layoutInflaterFrom.inflate(R.layout.biometric_prompt_one_pane_layout, (ViewGroup) this, false);
         }
         addView(this.mLayout);
         ImageView imageView = (ImageView) this.mLayout.findViewById(R.id.background);
         this.mBackgroundView = imageView;
-        View findViewById = this.mLayout.findViewById(R.id.panel);
-        this.mPanelView = findViewById;
-        this.mPanelController = new AuthPanelController(((LinearLayout) this).mContext, findViewById);
+        View viewFindViewById = this.mLayout.findViewById(R.id.panel);
+        this.mPanelView = viewFindViewById;
+        this.mPanelController = new AuthPanelController(((LinearLayout) this).mContext, viewFindViewById);
         this.mInteractionJankMonitor = interactionJankMonitor;
         this.mCredentialViewModelProvider = provider2;
         ReadonlyStateFlow readonlyStateFlow = promptViewModel.promptKind;
@@ -250,7 +247,7 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
         setOnKeyListener(new View.OnKeyListener() { // from class: com.android.systemui.biometrics.AuthContainerView$$ExternalSyntheticLambda4
             @Override // android.view.View.OnKeyListener
             public final boolean onKey(View view, int i, KeyEvent keyEvent) {
-                AuthContainerView authContainerView = AuthContainerView.this;
+                AuthContainerView authContainerView = this.f$0;
                 int i2 = AuthContainerView.$r8$clinit;
                 authContainerView.getClass();
                 if (i != 4) {
@@ -267,7 +264,7 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
     }
 
     public static WindowManager.LayoutParams getLayoutParams(IBinder iBinder, CharSequence charSequence, boolean z) {
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, -1, 2038, 17309698, -3);
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, -1, 2009, 17309698, -3);
         layoutParams.privateFlags |= 16;
         layoutParams.setFitInsetsTypes(layoutParams.getFitInsetsTypes() & (~WindowInsets.Type.ime()) & (~WindowInsets.Type.systemBars()));
         layoutParams.layoutInDisplayCutoutMode = 3;
@@ -283,7 +280,7 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
 
     public final void addCredentialView(boolean z, boolean z2) {
         int i;
-        LayoutInflater from = LayoutInflater.from(((LinearLayout) this).mContext);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(((LinearLayout) this).mContext);
         PromptKind credentialType = Utils.getCredentialType(this.mLockPatternUtils, this.mEffectiveUserId);
         if (credentialType instanceof PromptKind.Pattern) {
             i = R.layout.auth_credential_pattern_view;
@@ -295,7 +292,7 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
             }
             i = R.layout.auth_credential_password_view;
         }
-        this.mCredentialView = from.inflate(i, this.mLayout, false);
+        this.mCredentialView = layoutInflaterFrom.inflate(i, this.mLayout, false);
         this.mBackgroundView.setOnClickListener(null);
         this.mBackgroundView.setImportantForAccessibility(2);
         CredentialViewModel credentialViewModel = (CredentialViewModel) this.mCredentialViewModelProvider.get();
@@ -329,13 +326,13 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
         postOnAnimation(new Runnable() { // from class: com.android.systemui.biometrics.AuthContainerView$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                final AuthContainerView authContainerView = AuthContainerView.this;
+                final AuthContainerView authContainerView = this.f$0;
                 AuthContainerView$$ExternalSyntheticLambda0 authContainerView$$ExternalSyntheticLambda02 = authContainerView$$ExternalSyntheticLambda0;
                 int i3 = AuthContainerView.$r8$clinit;
                 authContainerView.animate().alpha(0.0f).translationY(authContainerView.mTranslationY).setDuration(350L).setInterpolator(authContainerView.mLinearOutSlowIn).setListener(authContainerView.new AnonymousClass1(authContainerView, PopupUIUtil.EXTRA_SIM_CARD_TRAY_WATER_PROTECTION_POPUP_DISMISS, 350L)).setUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.biometrics.AuthContainerView$$ExternalSyntheticLambda6
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        AuthContainerView authContainerView2 = AuthContainerView.this;
+                        AuthContainerView authContainerView2 = authContainerView;
                         if (authContainerView2.mWindowManager == null || authContainerView2.getViewRootImpl() == null) {
                             Log.w("AuthContainerView", "skip updateViewLayout() for dim animation.");
                             return;
@@ -356,9 +353,9 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
                 this.mCredentialView.animate().cancel();
             }
             this.mPanelView.animate().cancel();
-            ViewPropertyAnimator animate = this.mBiometricView.view.animate();
-            if (animate != null) {
-                animate.cancel();
+            ViewPropertyAnimator viewPropertyAnimatorAnimate = this.mBiometricView.view.animate();
+            if (viewPropertyAnimatorAnimate != null) {
+                viewPropertyAnimatorAnimate.cancel();
             }
             animate().cancel();
             onDialogAnimatedIn();
@@ -382,9 +379,9 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
             this.mConfig.getClass();
             postOnAnimation(new AuthContainerView$$ExternalSyntheticLambda0(this, 1));
         }
-        OnBackInvokedDispatcher findOnBackInvokedDispatcher = findOnBackInvokedDispatcher();
-        if (findOnBackInvokedDispatcher != null) {
-            findOnBackInvokedDispatcher.registerOnBackInvokedCallback(0, this.mBackCallback);
+        OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher = findOnBackInvokedDispatcher();
+        if (onBackInvokedDispatcherFindOnBackInvokedDispatcher != null) {
+            onBackInvokedDispatcherFindOnBackInvokedDispatcher.registerOnBackInvokedCallback(0, this.mBackCallback);
         }
     }
 
@@ -395,20 +392,20 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
 
     public final void onCredentialAttemptsRemaining(int i, String str) {
         if (i == 1) {
-            AlertDialog create = new AlertDialog.Builder(((LinearLayout) this).mContext).setTitle(R.string.biometric_dialog_last_attempt_before_wipe_dialog_title).setMessage(str).setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) null).create();
-            create.getWindow().setType(2009);
-            create.show();
+            AlertDialog alertDialogCreate = new AlertDialog.Builder(((LinearLayout) this).mContext).setTitle(R.string.biometric_dialog_last_attempt_before_wipe_dialog_title).setMessage(str).setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) null).create();
+            alertDialogCreate.getWindow().setType(2009);
+            alertDialogCreate.show();
         } else if (i <= 0) {
-            AlertDialog create2 = new AlertDialog.Builder(((LinearLayout) this).mContext).setMessage(str).setPositiveButton(R.string.failed_attempts_now_wiping_dialog_dismiss, (DialogInterface.OnClickListener) null).setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.biometrics.AuthContainerView$$ExternalSyntheticLambda7
+            AlertDialog alertDialogCreate2 = new AlertDialog.Builder(((LinearLayout) this).mContext).setMessage(str).setPositiveButton(R.string.failed_attempts_now_wiping_dialog_dismiss, (DialogInterface.OnClickListener) null).setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.biometrics.AuthContainerView$$ExternalSyntheticLambda7
                 @Override // android.content.DialogInterface.OnDismissListener
                 public final void onDismiss(DialogInterface dialogInterface) {
-                    AuthContainerView authContainerView = AuthContainerView.this;
+                    AuthContainerView authContainerView = this.f$0;
                     int i2 = AuthContainerView.$r8$clinit;
                     authContainerView.animateAway(5, true);
                 }
             }).create();
-            create2.getWindow().setType(2009);
-            create2.show();
+            alertDialogCreate2.getWindow().setType(2009);
+            alertDialogCreate2.show();
         }
     }
 
@@ -484,7 +481,7 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
         Integer num = this.mPendingCallbackReason;
         if (num != null) {
             AuthController authController = this.mConfig.mCallback;
-            int intValue = num.intValue();
+            int iIntValue = num.intValue();
             byte[] bArr = this.mCredentialAttestation;
             long j = this.mConfig.mRequestId;
             AuthContainerView authContainerView = authController.mCurrentDialog;
@@ -494,11 +491,11 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
                     Log.e("AuthController", "sendResultAndCleanUp: Receiver is null");
                 } else {
                     try {
-                        iBiometricSysuiReceiver.onDialogDismissed(intValue, bArr);
+                        iBiometricSysuiReceiver.onDialogDismissed(iIntValue, bArr);
                     } catch (RemoteException e) {
                         Log.w("AuthController", "Remote exception", e);
                     }
-                    ListPopupWindow$$ExternalSyntheticOutline0.m(intValue, "onDialogDismissed: ", "AuthController");
+                    ListPopupWindow$$ExternalSyntheticOutline0.m(iIntValue, "onDialogDismissed: ", "AuthController");
                     if (authController.mCurrentDialog == null) {
                         Log.w("AuthController", "Dialog already dismissed");
                     }
@@ -537,7 +534,6 @@ public class AuthContainerView extends LinearLayout implements WakefulnessLifecy
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.AuthContainerView$1, reason: invalid class name */
     public class AnonymousClass1 implements Animator.AnimatorListener {
         public final /* synthetic */ long val$timeout;

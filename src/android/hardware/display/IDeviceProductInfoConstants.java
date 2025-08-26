@@ -44,9 +44,9 @@ public interface IDeviceProductInfoConstants extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDeviceProductInfoConstants.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDeviceProductInfoConstants)) {
-                return (IDeviceProductInfoConstants) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDeviceProductInfoConstants.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDeviceProductInfoConstants)) {
+                return (IDeviceProductInfoConstants) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

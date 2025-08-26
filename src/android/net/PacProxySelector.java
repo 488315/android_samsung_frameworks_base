@@ -31,9 +31,9 @@ public class PacProxySelector extends ProxySelector {
     }
 
     public PacProxySelector() {
-        IProxyService asInterface = IProxyService.Stub.asInterface(ServiceManager.getService("com.android.net.IProxyService"));
-        this.mProxyService = asInterface;
-        if (asInterface == null) {
+        IProxyService iProxyServiceAsInterface = IProxyService.Stub.asInterface(ServiceManager.getService("com.android.net.IProxyService"));
+        this.mProxyService = iProxyServiceAsInterface;
+        if (iProxyServiceAsInterface == null) {
             Log.e(TAG, "PacProxyService: no proxy service");
         }
         this.mDefaultList = Lists.newArrayList(java.net.Proxy.NO_PROXY);
@@ -42,7 +42,7 @@ public class PacProxySelector extends ProxySelector {
     @Override // java.net.ProxySelector
     public List<java.net.Proxy> select(URI uri) {
         String host;
-        String str;
+        String strResolvePacFile;
         if (this.mProxyService == null) {
             this.mProxyService = IProxyService.Stub.asInterface(ServiceManager.getService("com.android.net.IProxyService"));
         }
@@ -61,44 +61,44 @@ public class PacProxySelector extends ProxySelector {
             host = uri.getHost();
         }
         try {
-            str = this.mProxyService.resolvePacFile(uri.getHost(), host);
+            strResolvePacFile = this.mProxyService.resolvePacFile(uri.getHost(), host);
         } catch (Exception e) {
             Log.e(TAG, "Error resolving PAC File", e);
-            str = null;
+            strResolvePacFile = null;
         }
-        if (str == null) {
+        if (strResolvePacFile == null) {
             return this.mDefaultList;
         }
-        return parseResponse(str);
+        return parseResponse(strResolvePacFile);
     }
 
     private static List<java.net.Proxy> parseResponse(String str) {
-        java.net.Proxy proxyFromHostPort;
-        String[] split = str.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
-        ArrayList newArrayList = Lists.newArrayList();
-        for (String str2 : split) {
-            String trim = str2.trim();
-            if (trim.equals("DIRECT")) {
-                newArrayList.add(java.net.Proxy.NO_PROXY);
-            } else if (trim.startsWith(PROXY)) {
-                java.net.Proxy proxyFromHostPort2 = proxyFromHostPort(Proxy.Type.HTTP, trim.substring(6));
-                if (proxyFromHostPort2 != null) {
-                    newArrayList.add(proxyFromHostPort2);
+        java.net.Proxy proxyProxyFromHostPort;
+        String[] strArrSplit = str.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
+        ArrayList arrayListNewArrayList = Lists.newArrayList();
+        for (String str2 : strArrSplit) {
+            String strTrim = str2.trim();
+            if (strTrim.equals("DIRECT")) {
+                arrayListNewArrayList.add(java.net.Proxy.NO_PROXY);
+            } else if (strTrim.startsWith(PROXY)) {
+                java.net.Proxy proxyProxyFromHostPort2 = proxyFromHostPort(Proxy.Type.HTTP, strTrim.substring(6));
+                if (proxyProxyFromHostPort2 != null) {
+                    arrayListNewArrayList.add(proxyProxyFromHostPort2);
                 }
-            } else if (trim.startsWith(SOCKS) && (proxyFromHostPort = proxyFromHostPort(Proxy.Type.SOCKS, trim.substring(6))) != null) {
-                newArrayList.add(proxyFromHostPort);
+            } else if (strTrim.startsWith(SOCKS) && (proxyProxyFromHostPort = proxyFromHostPort(Proxy.Type.SOCKS, strTrim.substring(6))) != null) {
+                arrayListNewArrayList.add(proxyProxyFromHostPort);
             }
         }
-        if (newArrayList.size() == 0) {
-            newArrayList.add(java.net.Proxy.NO_PROXY);
+        if (arrayListNewArrayList.size() == 0) {
+            arrayListNewArrayList.add(java.net.Proxy.NO_PROXY);
         }
-        return newArrayList;
+        return arrayListNewArrayList;
     }
 
     private static java.net.Proxy proxyFromHostPort(Proxy.Type type, String str) {
         try {
-            String[] split = str.split(":");
-            return new java.net.Proxy(type, InetSocketAddress.createUnresolved(split[0], Integer.parseInt(split[1])));
+            String[] strArrSplit = str.split(":");
+            return new java.net.Proxy(type, InetSocketAddress.createUnresolved(strArrSplit[0], Integer.parseInt(strArrSplit[1])));
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             Log.d(TAG, "Unable to parse proxy " + str + " " + e);
             return null;

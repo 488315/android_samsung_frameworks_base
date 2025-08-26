@@ -5,12 +5,10 @@ import com.sec.ims.settings.RcsConfigurationReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DATA {
     public static List<DM_FIELD_INFO> DM_FIELD_LIST;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DM_FIELD_INDEX {
         public static final String AMR_AUDIO_BITRATE = "6";
         public static final String AMR_AUDIO_BITRATE_WB = "7";
@@ -221,7 +219,6 @@ public class DATA {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DM_FIELD_INFO {
         private final int mIndex;
         private String mName;
@@ -254,7 +251,6 @@ public class DATA {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DM_NODE {
         public static final String AMR_AUDIO_BITRATE = "AMR_AUDIO_BITRATE";
         public static final String AMR_AUDIO_BITRATE_WB = "AMR_AUDIO_BITRATE_WB";
@@ -414,7 +410,6 @@ public class DATA {
         public static final String VZW_TIMS_TIMER = "VZW_TIMS_TIMER";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class STORAGE_TYPE {
         public static final int AUTOCONFIG_DB = 5;
         public static final int CONFIG_DM = 0;
@@ -424,7 +419,6 @@ public class DATA {
         public static final int UNKNOWN = -1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class URI {
         public static final String CONFIG_PROVIDER = "content://com.samsung.rcs.autoconfigurationprovider/";
         public static final String DMCONFIG_PROVIDER = "content://com.samsung.rcs.dmconfigurationprovider/";

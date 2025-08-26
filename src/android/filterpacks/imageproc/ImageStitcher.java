@@ -48,7 +48,7 @@ public class ImageStitcher extends Filter {
     }
 
     private FrameFormat calcOutputFormatForInput(FrameFormat frameFormat) {
-        MutableFrameFormat mutableCopy = frameFormat.mutableCopy();
+        MutableFrameFormat mutableFrameFormatMutableCopy = frameFormat.mutableCopy();
         this.mInputWidth = frameFormat.getWidth();
         int height = frameFormat.getHeight();
         this.mInputHeight = height;
@@ -62,14 +62,14 @@ public class ImageStitcher extends Filter {
         this.mImageWidth = i5;
         int i6 = i4 * this.mYSlices;
         this.mImageHeight = i6;
-        mutableCopy.setDimensions(i5, i6);
-        return mutableCopy;
+        mutableFrameFormatMutableCopy.setDimensions(i5, i6);
+        return mutableFrameFormatMutableCopy;
     }
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
         if (this.mSliceIndex == 0) {
             this.mOutputFrame = filterContext.getFrameManager().newFrame(calcOutputFormatForInput(format));
         } else if (format.getWidth() != this.mInputWidth || format.getHeight() != this.mInputHeight) {
@@ -84,15 +84,15 @@ public class ImageStitcher extends Filter {
         int i4 = this.mSliceWidth;
         int i5 = (i2 % i3) * i4;
         int i6 = (i2 / i3) * this.mSliceHeight;
-        float min = Math.min(i4, this.mImageWidth - i5);
-        float min2 = Math.min(this.mSliceHeight, this.mImageHeight - i6);
-        ((ShaderProgram) this.mProgram).setSourceRect(i / this.mInputWidth, i / this.mInputHeight, min / this.mInputWidth, min2 / this.mInputHeight);
+        float fMin = Math.min(i4, this.mImageWidth - i5);
+        float fMin2 = Math.min(this.mSliceHeight, this.mImageHeight - i6);
+        ((ShaderProgram) this.mProgram).setSourceRect(i / this.mInputWidth, i / this.mInputHeight, fMin / this.mInputWidth, fMin2 / this.mInputHeight);
         ShaderProgram shaderProgram = (ShaderProgram) this.mProgram;
         float f = i5;
         int i7 = this.mImageWidth;
         int i8 = this.mImageHeight;
-        shaderProgram.setTargetRect(f / i7, i6 / i8, min / i7, min2 / i8);
-        this.mProgram.process(pullInput, this.mOutputFrame);
+        shaderProgram.setTargetRect(f / i7, i6 / i8, fMin / i7, fMin2 / i8);
+        this.mProgram.process(framePullInput, this.mOutputFrame);
         int i9 = this.mSliceIndex + 1;
         this.mSliceIndex = i9;
         if (i9 == this.mXSlices * this.mYSlices) {

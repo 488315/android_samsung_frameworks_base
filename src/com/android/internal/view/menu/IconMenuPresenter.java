@@ -89,9 +89,9 @@ public class IconMenuPresenter extends BaseMenuPresenter {
         super.updateMenuView(z);
         if (z2 && ((iconMenuItemView2 = this.mMoreView) == null || iconMenuItemView2.getParent() != iconMenuView)) {
             if (this.mMoreView == null) {
-                IconMenuItemView createMoreItemView = iconMenuView.createMoreItemView();
-                this.mMoreView = createMoreItemView;
-                createMoreItemView.setBackgroundDrawable(iconMenuView.getItemBackgroundDrawable());
+                IconMenuItemView iconMenuItemViewCreateMoreItemView = iconMenuView.createMoreItemView();
+                this.mMoreView = iconMenuItemViewCreateMoreItemView;
+                iconMenuItemViewCreateMoreItemView.setBackgroundDrawable(iconMenuView.getItemBackgroundDrawable());
             }
             iconMenuView.addView(this.mMoreView);
         } else if (!z2 && (iconMenuItemView = this.mMoreView) != null) {
@@ -121,16 +121,16 @@ public class IconMenuPresenter extends BaseMenuPresenter {
     }
 
     public void restoreHierarchyState(Bundle bundle) {
-        MenuItem findItem;
+        MenuItem menuItemFindItem;
         SparseArray<Parcelable> sparseParcelableArray = bundle.getSparseParcelableArray(VIEWS_TAG);
         if (sparseParcelableArray != null) {
             ((View) this.mMenuView).restoreHierarchyState(sparseParcelableArray);
         }
         int i = bundle.getInt(OPEN_SUBMENU_KEY, 0);
-        if (i <= 0 || this.mMenu == null || (findItem = this.mMenu.findItem(i)) == null) {
+        if (i <= 0 || this.mMenu == null || (menuItemFindItem = this.mMenu.findItem(i)) == null) {
             return;
         }
-        onSubMenuSelected((SubMenuBuilder) findItem.getSubMenu());
+        onSubMenuSelected((SubMenuBuilder) menuItemFindItem.getSubMenu());
     }
 
     @Override // com.android.internal.view.menu.MenuPresenter

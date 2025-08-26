@@ -6,11 +6,9 @@ import android.util.Property;
 import com.google.android.material.circularreveal.CircularRevealHelper;
 import com.google.android.material.math.MathUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface CircularRevealWidget extends CircularRevealHelper.Delegate {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CircularRevealEvaluator implements TypeEvaluator {
         public static final CircularRevealEvaluator CIRCULAR_REVEAL = new CircularRevealEvaluator();
         public final RevealInfo revealInfo = new RevealInfo();
@@ -20,17 +18,16 @@ public interface CircularRevealWidget extends CircularRevealHelper.Delegate {
             RevealInfo revealInfo = (RevealInfo) obj;
             RevealInfo revealInfo2 = (RevealInfo) obj2;
             RevealInfo revealInfo3 = this.revealInfo;
-            float lerp = MathUtils.lerp(revealInfo.centerX, revealInfo2.centerX, f);
-            float lerp2 = MathUtils.lerp(revealInfo.centerY, revealInfo2.centerY, f);
-            float lerp3 = MathUtils.lerp(revealInfo.radius, revealInfo2.radius, f);
-            revealInfo3.centerX = lerp;
-            revealInfo3.centerY = lerp2;
-            revealInfo3.radius = lerp3;
+            float fLerp = MathUtils.lerp(revealInfo.centerX, revealInfo2.centerX, f);
+            float fLerp2 = MathUtils.lerp(revealInfo.centerY, revealInfo2.centerY, f);
+            float fLerp3 = MathUtils.lerp(revealInfo.radius, revealInfo2.radius, f);
+            revealInfo3.centerX = fLerp;
+            revealInfo3.centerY = fLerp2;
+            revealInfo3.radius = fLerp3;
             return this.revealInfo;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CircularRevealProperty extends Property {
         public static final CircularRevealProperty CIRCULAR_REVEAL = new CircularRevealProperty("circularReveal");
 
@@ -49,7 +46,6 @@ public interface CircularRevealWidget extends CircularRevealHelper.Delegate {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CircularRevealScrimColorProperty extends Property {
         public static final CircularRevealScrimColorProperty CIRCULAR_REVEAL_SCRIM_COLOR = new CircularRevealScrimColorProperty("circularRevealScrimColor");
 
@@ -68,7 +64,6 @@ public interface CircularRevealWidget extends CircularRevealHelper.Delegate {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RevealInfo {
         public float centerX;
         public float centerY;

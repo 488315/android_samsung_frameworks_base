@@ -14,7 +14,6 @@ import com.android.internal.os.SomeArgs;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TaskStackListenerImpl extends TaskStackListener implements Handler.Callback {
     public final IActivityTaskManager mActivityTaskManager;
@@ -30,12 +29,12 @@ public class TaskStackListenerImpl extends TaskStackListener implements Handler.
     }
 
     public final void addListener(TaskStackListenerCallback taskStackListenerCallback) {
-        boolean isEmpty;
+        boolean zIsEmpty;
         synchronized (this.mTaskStackListeners) {
-            isEmpty = ((ArrayList) this.mTaskStackListeners).isEmpty();
+            zIsEmpty = ((ArrayList) this.mTaskStackListeners).isEmpty();
             ((ArrayList) this.mTaskStackListeners).add(taskStackListenerCallback);
         }
-        if (isEmpty) {
+        if (zIsEmpty) {
             try {
                 this.mActivityTaskManager.registerTaskStackListener(this);
             } catch (Exception e) {
@@ -49,141 +48,149 @@ public class TaskStackListenerImpl extends TaskStackListener implements Handler.
         synchronized (this.mTaskStackListeners) {
             try {
                 int i = message.what;
-                if (i == 100) {
-                    for (int size = ((ArrayList) this.mTaskStackListeners).size() - 1; size >= 0; size--) {
-                        ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size)).onActivityDismissingSplitTask((String) message.obj);
-                    }
-                } else if (i != 101) {
-                    switch (i) {
-                        case 1:
-                            Trace.beginSection("onTaskStackChanged");
-                            for (int size2 = ((ArrayList) this.mTaskStackListeners).size() - 1; size2 >= 0; size2--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size2)).onTaskStackChanged();
-                            }
-                            Trace.endSection();
-                            break;
-                        case 2:
-                            Trace.beginSection("onTaskSnapshotChanged");
-                            TaskSnapshot taskSnapshot = (TaskSnapshot) message.obj;
-                            for (int size3 = ((ArrayList) this.mTaskStackListeners).size() - 1; size3 >= 0; size3--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size3)).getClass();
-                            }
-                            if (taskSnapshot.getHardwareBuffer() != null) {
-                                taskSnapshot.getHardwareBuffer().close();
-                            }
-                            Trace.endSection();
-                            break;
-                        case 3:
-                            SomeArgs someArgs = (SomeArgs) message.obj;
-                            for (int size4 = ((ArrayList) this.mTaskStackListeners).size() - 1; size4 >= 0; size4--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size4)).onActivityPinned(someArgs.argi1, (String) someArgs.arg1);
-                            }
-                            break;
-                        case 4:
-                            SomeArgs someArgs2 = (SomeArgs) message.obj;
-                            ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) someArgs2.arg1;
-                            boolean z = someArgs2.argi2 != 0;
-                            boolean z2 = someArgs2.argi3 != 0;
-                            for (int size5 = ((ArrayList) this.mTaskStackListeners).size() - 1; size5 >= 0; size5--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size5)).onActivityRestartAttempt(runningTaskInfo, z, z2);
-                            }
-                            break;
-                        case 5:
-                            for (int size6 = ((ArrayList) this.mTaskStackListeners).size() - 1; size6 >= 0; size6--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size6)).onActivityForcedResizable((String) message.obj, message.arg1, message.arg2);
-                            }
-                            break;
-                        case 6:
-                            for (int size7 = ((ArrayList) this.mTaskStackListeners).size() - 1; size7 >= 0; size7--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size7)).getClass();
-                            }
-                            break;
-                        case 7:
-                            for (int size8 = ((ArrayList) this.mTaskStackListeners).size() - 1; size8 >= 0; size8--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size8)).getClass();
-                            }
-                            break;
-                        case 8:
-                            for (int size9 = ((ArrayList) this.mTaskStackListeners).size() - 1; size9 >= 0; size9--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size9)).onActivityUnpinned();
-                            }
-                            break;
-                        case 9:
-                            for (int size10 = ((ArrayList) this.mTaskStackListeners).size() - 1; size10 >= 0; size10--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size10)).getClass();
-                            }
-                            break;
-                        case 10:
-                            for (int size11 = ((ArrayList) this.mTaskStackListeners).size() - 1; size11 >= 0; size11--) {
-                                TaskStackListenerCallback taskStackListenerCallback = (TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size11);
-                                taskStackListenerCallback.onTaskCreated();
-                            }
-                            break;
-                        case 11:
-                            for (int size12 = ((ArrayList) this.mTaskStackListeners).size() - 1; size12 >= 0; size12--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size12)).getClass();
-                            }
-                            break;
-                        case 12:
-                            ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) message.obj;
-                            for (int size13 = ((ArrayList) this.mTaskStackListeners).size() - 1; size13 >= 0; size13--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size13)).onTaskMovedToFront(runningTaskInfo2);
-                            }
-                            break;
-                        case 13:
-                            for (int size14 = ((ArrayList) this.mTaskStackListeners).size() - 1; size14 >= 0; size14--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size14)).onActivityRequestedOrientationChanged(message.arg1, message.arg2);
-                            }
-                            break;
-                        case 14:
-                            for (int size15 = ((ArrayList) this.mTaskStackListeners).size() - 1; size15 >= 0; size15--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size15)).getClass();
-                            }
-                            break;
-                        case 15:
-                            for (int size16 = ((ArrayList) this.mTaskStackListeners).size() - 1; size16 >= 0; size16--) {
-                                TaskStackListenerCallback taskStackListenerCallback2 = (TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size16);
-                                taskStackListenerCallback2.getClass();
-                            }
-                            break;
-                        case 16:
-                            for (int size17 = ((ArrayList) this.mTaskStackListeners).size() - 1; size17 >= 0; size17--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size17)).getClass();
-                            }
-                            break;
-                        case 17:
-                            for (int size18 = ((ArrayList) this.mTaskStackListeners).size() - 1; size18 >= 0; size18--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size18)).onRecentTaskListUpdated();
-                            }
-                            break;
-                        case 18:
-                            for (int size19 = ((ArrayList) this.mTaskStackListeners).size() - 1; size19 >= 0; size19--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size19)).getClass();
-                            }
-                            break;
-                        case 19:
-                            for (int size20 = ((ArrayList) this.mTaskStackListeners).size() - 1; size20 >= 0; size20--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size20)).getClass();
-                            }
-                            break;
-                        case 20:
-                            for (int size21 = ((ArrayList) this.mTaskStackListeners).size() - 1; size21 >= 0; size21--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size21)).getClass();
-                            }
-                            break;
-                        case 21:
-                            int intValue = ((Integer) message.obj).intValue();
-                            for (int size22 = ((ArrayList) this.mTaskStackListeners).size() - 1; size22 >= 0; size22--) {
-                                ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size22)).onRecentTaskRemovedForAddTask(intValue);
-                            }
-                            break;
-                    }
-                } else {
-                    for (int size23 = ((ArrayList) this.mTaskStackListeners).size() - 1; size23 >= 0; size23--) {
-                        TaskStackListenerCallback taskStackListenerCallback3 = (TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size23);
-                        ((Integer) message.obj).getClass();
-                        taskStackListenerCallback3.onLockTaskModeChanged();
-                    }
+                switch (i) {
+                    case 1:
+                        Trace.beginSection("onTaskStackChanged");
+                        for (int size = ((ArrayList) this.mTaskStackListeners).size() - 1; size >= 0; size--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size)).onTaskStackChanged();
+                        }
+                        Trace.endSection();
+                        break;
+                    case 2:
+                        Trace.beginSection("onTaskSnapshotChanged");
+                        TaskSnapshot taskSnapshot = (TaskSnapshot) message.obj;
+                        for (int size2 = ((ArrayList) this.mTaskStackListeners).size() - 1; size2 >= 0; size2--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size2)).getClass();
+                        }
+                        if (taskSnapshot.getHardwareBuffer() != null) {
+                            taskSnapshot.getHardwareBuffer().close();
+                        }
+                        Trace.endSection();
+                        break;
+                    case 3:
+                        SomeArgs someArgs = (SomeArgs) message.obj;
+                        for (int size3 = ((ArrayList) this.mTaskStackListeners).size() - 1; size3 >= 0; size3--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size3)).onActivityPinned(someArgs.argi1, (String) someArgs.arg1);
+                        }
+                        break;
+                    case 4:
+                        SomeArgs someArgs2 = (SomeArgs) message.obj;
+                        ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) someArgs2.arg1;
+                        boolean z = someArgs2.argi2 != 0;
+                        boolean z2 = someArgs2.argi3 != 0;
+                        for (int size4 = ((ArrayList) this.mTaskStackListeners).size() - 1; size4 >= 0; size4--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size4)).onActivityRestartAttempt(runningTaskInfo, z, z2);
+                        }
+                        break;
+                    case 5:
+                        for (int size5 = ((ArrayList) this.mTaskStackListeners).size() - 1; size5 >= 0; size5--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size5)).onActivityForcedResizable((String) message.obj, message.arg1, message.arg2);
+                        }
+                        break;
+                    case 6:
+                        for (int size6 = ((ArrayList) this.mTaskStackListeners).size() - 1; size6 >= 0; size6--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size6)).getClass();
+                        }
+                        break;
+                    case 7:
+                        for (int size7 = ((ArrayList) this.mTaskStackListeners).size() - 1; size7 >= 0; size7--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size7)).getClass();
+                        }
+                        break;
+                    case 8:
+                        for (int size8 = ((ArrayList) this.mTaskStackListeners).size() - 1; size8 >= 0; size8--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size8)).onActivityUnpinned();
+                        }
+                        break;
+                    case 9:
+                        for (int size9 = ((ArrayList) this.mTaskStackListeners).size() - 1; size9 >= 0; size9--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size9)).getClass();
+                        }
+                        break;
+                    case 10:
+                        for (int size10 = ((ArrayList) this.mTaskStackListeners).size() - 1; size10 >= 0; size10--) {
+                            TaskStackListenerCallback taskStackListenerCallback = (TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size10);
+                            taskStackListenerCallback.onTaskCreated();
+                        }
+                        break;
+                    case 11:
+                        for (int size11 = ((ArrayList) this.mTaskStackListeners).size() - 1; size11 >= 0; size11--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size11)).getClass();
+                        }
+                        break;
+                    case 12:
+                        ActivityManager.RunningTaskInfo runningTaskInfo2 = (ActivityManager.RunningTaskInfo) message.obj;
+                        for (int size12 = ((ArrayList) this.mTaskStackListeners).size() - 1; size12 >= 0; size12--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size12)).onTaskMovedToFront(runningTaskInfo2);
+                        }
+                        break;
+                    case 13:
+                        for (int size13 = ((ArrayList) this.mTaskStackListeners).size() - 1; size13 >= 0; size13--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size13)).onActivityRequestedOrientationChanged(message.arg1, message.arg2);
+                        }
+                        break;
+                    case 14:
+                        for (int size14 = ((ArrayList) this.mTaskStackListeners).size() - 1; size14 >= 0; size14--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size14)).getClass();
+                        }
+                        break;
+                    case 15:
+                        for (int size15 = ((ArrayList) this.mTaskStackListeners).size() - 1; size15 >= 0; size15--) {
+                            TaskStackListenerCallback taskStackListenerCallback2 = (TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size15);
+                            taskStackListenerCallback2.getClass();
+                        }
+                        break;
+                    case 16:
+                        for (int size16 = ((ArrayList) this.mTaskStackListeners).size() - 1; size16 >= 0; size16--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size16)).getClass();
+                        }
+                        break;
+                    case 17:
+                        for (int size17 = ((ArrayList) this.mTaskStackListeners).size() - 1; size17 >= 0; size17--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size17)).onRecentTaskListUpdated();
+                        }
+                        break;
+                    case 18:
+                        for (int size18 = ((ArrayList) this.mTaskStackListeners).size() - 1; size18 >= 0; size18--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size18)).getClass();
+                        }
+                        break;
+                    case 19:
+                        for (int size19 = ((ArrayList) this.mTaskStackListeners).size() - 1; size19 >= 0; size19--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size19)).getClass();
+                        }
+                        break;
+                    case 20:
+                        for (int size20 = ((ArrayList) this.mTaskStackListeners).size() - 1; size20 >= 0; size20--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size20)).getClass();
+                        }
+                        break;
+                    case 21:
+                        int iIntValue = ((Integer) message.obj).intValue();
+                        for (int size21 = ((ArrayList) this.mTaskStackListeners).size() - 1; size21 >= 0; size21--) {
+                            ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size21)).onRecentTaskRemovedForAddTask(iIntValue);
+                        }
+                        break;
+                    default:
+                        switch (i) {
+                            case 100:
+                                for (int size22 = ((ArrayList) this.mTaskStackListeners).size() - 1; size22 >= 0; size22--) {
+                                    ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size22)).onActivityDismissingSplitTask((String) message.obj);
+                                }
+                                break;
+                            case 101:
+                                for (int size23 = ((ArrayList) this.mTaskStackListeners).size() - 1; size23 >= 0; size23--) {
+                                    TaskStackListenerCallback taskStackListenerCallback3 = (TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size23);
+                                    ((Integer) message.obj).getClass();
+                                    taskStackListenerCallback3.onLockTaskModeChanged();
+                                }
+                                break;
+                            case 102:
+                                for (int size24 = ((ArrayList) this.mTaskStackListeners).size() - 1; size24 >= 0; size24--) {
+                                    ((TaskStackListenerCallback) ((ArrayList) this.mTaskStackListeners).get(size24)).onRecentTaskRemoved(((Integer) message.obj).intValue());
+                                }
+                                break;
+                        }
                 }
             } catch (Throwable th) {
                 throw th;
@@ -217,13 +224,13 @@ public class TaskStackListenerImpl extends TaskStackListener implements Handler.
     }
 
     public final void onActivityPinned(String str, int i, int i2, int i3) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = str;
-        obtain.argi1 = i;
-        obtain.argi2 = i2;
-        obtain.argi3 = i3;
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = str;
+        someArgsObtain.argi1 = i;
+        someArgsObtain.argi2 = i2;
+        someArgsObtain.argi3 = i3;
         this.mMainHandler.removeMessages(3);
-        this.mMainHandler.obtainMessage(3, obtain).sendToTarget();
+        this.mMainHandler.obtainMessage(3, someArgsObtain).sendToTarget();
     }
 
     public final void onActivityRequestedOrientationChanged(int i, int i2) {
@@ -231,12 +238,12 @@ public class TaskStackListenerImpl extends TaskStackListener implements Handler.
     }
 
     public final void onActivityRestartAttempt(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, boolean z2, boolean z3) {
-        SomeArgs obtain = SomeArgs.obtain();
-        obtain.arg1 = runningTaskInfo;
-        obtain.argi1 = z ? 1 : 0;
-        obtain.argi2 = z2 ? 1 : 0;
-        obtain.argi3 = z3 ? 1 : 0;
-        this.mMainHandler.obtainMessage(4, obtain).sendToTarget();
+        SomeArgs someArgsObtain = SomeArgs.obtain();
+        someArgsObtain.arg1 = runningTaskInfo;
+        someArgsObtain.argi1 = z ? 1 : 0;
+        someArgsObtain.argi2 = z2 ? 1 : 0;
+        someArgsObtain.argi3 = z3 ? 1 : 0;
+        this.mMainHandler.obtainMessage(4, someArgsObtain).sendToTarget();
     }
 
     public final void onActivityRotation(int i) {
@@ -262,6 +269,10 @@ public class TaskStackListenerImpl extends TaskStackListener implements Handler.
 
     public final void onRecentTaskListUpdated() {
         this.mMainHandler.obtainMessage(17).sendToTarget();
+    }
+
+    public final void onRecentTaskRemoved(int i) {
+        this.mMainHandler.obtainMessage(102, Integer.valueOf(i)).sendToTarget();
     }
 
     public final void onRecentTaskRemovedForAddTask(int i) {

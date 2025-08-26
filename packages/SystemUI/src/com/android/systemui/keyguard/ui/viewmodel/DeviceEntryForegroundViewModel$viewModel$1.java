@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryForegroundViewModel$viewModel$1 extends SuspendLambda implements Function5 {
     /* synthetic */ int I$0;
@@ -24,14 +23,14 @@ final class DeviceEntryForegroundViewModel$viewModel$1 extends SuspendLambda imp
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
-        int intValue = ((Number) obj3).intValue();
-        int intValue2 = ((Number) obj4).intValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+        int iIntValue = ((Number) obj3).intValue();
+        int iIntValue2 = ((Number) obj4).intValue();
         DeviceEntryForegroundViewModel$viewModel$1 deviceEntryForegroundViewModel$viewModel$1 = new DeviceEntryForegroundViewModel$viewModel$1((Continuation) obj5);
         deviceEntryForegroundViewModel$viewModel$1.L$0 = (DeviceEntryIconView.IconType) obj;
-        deviceEntryForegroundViewModel$viewModel$1.Z$0 = booleanValue;
-        deviceEntryForegroundViewModel$viewModel$1.I$0 = intValue;
-        deviceEntryForegroundViewModel$viewModel$1.I$1 = intValue2;
+        deviceEntryForegroundViewModel$viewModel$1.Z$0 = zBooleanValue;
+        deviceEntryForegroundViewModel$viewModel$1.I$0 = iIntValue;
+        deviceEntryForegroundViewModel$viewModel$1.I$1 = iIntValue2;
         return deviceEntryForegroundViewModel$viewModel$1.invokeSuspend(Unit.INSTANCE);
     }
 

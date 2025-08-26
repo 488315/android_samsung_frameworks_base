@@ -5,7 +5,6 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import com.android.wm.shell.desktopmode.DesktopModeUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FixedAspectRatioTaskPositionerDecorator extends AbstractTaskPositionerDecorator {
     public int edgeResizeCtrlType;
@@ -86,7 +85,6 @@ public final class FixedAspectRatioTaskPositionerDecorator extends AbstractTaskP
                 } else {
                     break;
                 }
-                break;
         }
         return super.onDragPositioningEnd(f, f2, i);
     }
@@ -132,11 +130,11 @@ public final class FixedAspectRatioTaskPositionerDecorator extends AbstractTaskP
 
     @Override // com.android.wm.shell.windowdecor.AbstractTaskPositionerDecorator, com.android.wm.shell.windowdecor.DragPositioningCallback
     public final Rect onDragPositioningStart(int i, float f, float f2, int i2) {
-        Rect onDragPositioningStart;
+        Rect rectOnDragPositioningStart;
         this.originalCtrlType = i;
-        boolean requiresFixedAspectRatio = requiresFixedAspectRatio();
+        boolean zRequiresFixedAspectRatio = requiresFixedAspectRatio();
         TaskPositioner taskPositioner = this.taskPositioner;
-        if (!requiresFixedAspectRatio) {
+        if (!zRequiresFixedAspectRatio) {
             return taskPositioner.onDragPositioningStart(this.originalCtrlType, f, f2, i2);
         }
         Rect rect = this.lastRepositionedBounds;
@@ -144,25 +142,25 @@ public final class FixedAspectRatioTaskPositionerDecorator extends AbstractTaskP
         rect.set(getBounds(desktopModeWindowDecoration.mTaskInfo));
         this.startingPoint.set(f, f2);
         this.lastValidPoint.set(f, f2);
-        int width = this.lastRepositionedBounds.width();
-        int height = this.lastRepositionedBounds.height();
+        int iWidth = this.lastRepositionedBounds.width();
+        int iHeight = this.lastRepositionedBounds.height();
         this.startingAspectRatio = DesktopModeUtils.calculateAspectRatio(desktopModeWindowDecoration.mTaskInfo);
-        this.isTaskPortrait = width <= height;
+        this.isTaskPortrait = iWidth <= iHeight;
         Rect rect2 = this.lastRepositionedBounds;
         int i3 = this.originalCtrlType;
         if (i3 == 1 || i3 == 2) {
-            int i4 = i3 + (f2 < ((float) ((height / 2) + rect2.top)) ? 4 : 8);
+            int i4 = i3 + (f2 < ((float) ((iHeight / 2) + rect2.top)) ? 4 : 8);
             this.edgeResizeCtrlType = i4;
-            onDragPositioningStart = taskPositioner.onDragPositioningStart(i4, f, f2, i2);
+            rectOnDragPositioningStart = taskPositioner.onDragPositioningStart(i4, f, f2, i2);
         } else if (i3 == 4 || i3 == 8) {
-            int i5 = i3 + (f >= ((float) ((width / 2) + rect2.left)) ? 2 : 1);
+            int i5 = i3 + (f >= ((float) ((iWidth / 2) + rect2.left)) ? 2 : 1);
             this.edgeResizeCtrlType = i5;
-            onDragPositioningStart = taskPositioner.onDragPositioningStart(i5, f, f2, i2);
+            rectOnDragPositioningStart = taskPositioner.onDragPositioningStart(i5, f, f2, i2);
         } else {
             this.edgeResizeCtrlType = 0;
-            onDragPositioningStart = taskPositioner.onDragPositioningStart(i3, f, f2, i2);
+            rectOnDragPositioningStart = taskPositioner.onDragPositioningStart(i3, f, f2, i2);
         }
-        rect2.set(onDragPositioningStart);
+        rect2.set(rectOnDragPositioningStart);
         return this.lastRepositionedBounds;
     }
 

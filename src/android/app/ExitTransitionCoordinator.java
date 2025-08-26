@@ -184,17 +184,17 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
                 }
             }
         });
-        final ArrayList<View> createSnapshots = createSnapshots(this.mExitSharedElementBundle, this.mSharedElementNames);
+        final ArrayList<View> arrayListCreateSnapshots = createSnapshots(this.mExitSharedElementBundle, this.mSharedElementNames);
         OneShotPreDrawListener.add(viewGroup, new Runnable() { // from class: android.app.ExitTransitionCoordinator$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ExitTransitionCoordinator.this.lambda$startSharedElementExit$0(createSnapshots);
+                this.f$0.lambda$startSharedElementExit$0(arrayListCreateSnapshots);
             }
         });
         lambda$scheduleGhostVisibilityChange$1(4);
         scheduleGhostVisibilityChange(4);
         if (this.mListener != null) {
-            this.mListener.onSharedElementEnd(this.mSharedElementNames, this.mSharedElements, createSnapshots);
+            this.mListener.onSharedElementEnd(this.mSharedElementNames, this.mSharedElements, arrayListCreateSnapshots);
         }
         TransitionManager.beginDelayedTransition(viewGroup, sharedElementExitTransition);
         scheduleGhostVisibilityChange(0);
@@ -235,7 +235,7 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         startTransition(new Runnable() { // from class: android.app.ExitTransitionCoordinator$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                ExitTransitionCoordinator.this.beginTransitions();
+                this.f$0.beginTransitions();
             }
         });
     }
@@ -282,7 +282,7 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         startTransition(new Runnable() { // from class: android.app.ExitTransitionCoordinator$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                ExitTransitionCoordinator.this.startExitTransition();
+                this.f$0.startExitTransition();
             }
         });
     }
@@ -315,11 +315,11 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
         if (this.mBackgroundAnimator == null) {
             ViewGroup decor = getDecor();
             if (decor != null && (background = decor.getBackground()) != null) {
-                Drawable mutate = background.mutate();
-                getWindow().setBackgroundDrawable(mutate);
-                ObjectAnimator ofInt = ObjectAnimator.ofInt(mutate, "alpha", 0);
-                this.mBackgroundAnimator = ofInt;
-                ofInt.addListener(new AnimatorListenerAdapter() { // from class: android.app.ExitTransitionCoordinator.5
+                Drawable drawableMutate = background.mutate();
+                getWindow().setBackgroundDrawable(drawableMutate);
+                ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(drawableMutate, "alpha", 0);
+                this.mBackgroundAnimator = objectAnimatorOfInt;
+                objectAnimatorOfInt.addListener(new AnimatorListenerAdapter() { // from class: android.app.ExitTransitionCoordinator.5
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public void onAnimationEnd(Animator animator) {
                         ExitTransitionCoordinator.this.mBackgroundAnimator = null;
@@ -342,10 +342,10 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
     private Transition getExitTransition() {
         Transition transition = null;
         if (this.mTransitioningViews != null && !this.mTransitioningViews.isEmpty()) {
-            Transition configureTransition = configureTransition(getViewsTransition(), true);
-            removeExcludedViews(configureTransition, this.mTransitioningViews);
+            Transition transitionConfigureTransition = configureTransition(getViewsTransition(), true);
+            removeExcludedViews(transitionConfigureTransition, this.mTransitioningViews);
             if (!this.mTransitioningViews.isEmpty()) {
-                transition = configureTransition;
+                transition = transitionConfigureTransition;
             }
         }
         if (transition == null) {
@@ -377,12 +377,12 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
     }
 
     private Transition getSharedElementExitTransition() {
-        Transition configureTransition = !this.mSharedElements.isEmpty() ? configureTransition(getSharedElementTransition(), false) : null;
-        if (configureTransition == null) {
+        Transition transitionConfigureTransition = !this.mSharedElements.isEmpty() ? configureTransition(getSharedElementTransition(), false) : null;
+        if (transitionConfigureTransition == null) {
             sharedElementTransitionComplete();
-            return configureTransition;
+            return transitionConfigureTransition;
         }
-        configureTransition.addListener(new ActivityTransitionCoordinator.ContinueTransitionListener() { // from class: android.app.ExitTransitionCoordinator.7
+        transitionConfigureTransition.addListener(new ActivityTransitionCoordinator.ContinueTransitionListener() { // from class: android.app.ExitTransitionCoordinator.7
             @Override // android.app.ActivityTransitionCoordinator.ContinueTransitionListener, android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
             public void onTransitionEnd(Transition transition) {
                 ExitTransitionCoordinator.this.sharedElementTransitionComplete();
@@ -394,22 +394,22 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
             }
         });
         this.mSharedElements.get(0).invalidate();
-        return configureTransition;
+        return transitionConfigureTransition;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void beginTransitions() {
         Transition sharedElementExitTransition = getSharedElementExitTransition();
         Transition exitTransition = getExitTransition();
-        Transition mergeTransitions = mergeTransitions(sharedElementExitTransition, exitTransition);
+        Transition transitionMergeTransitions = mergeTransitions(sharedElementExitTransition, exitTransition);
         ViewGroup decor = getDecor();
-        if (mergeTransitions != null && decor != null) {
+        if (transitionMergeTransitions != null && decor != null) {
             lambda$scheduleGhostVisibilityChange$1(4);
             scheduleGhostVisibilityChange(4);
             if (exitTransition != null) {
                 setTransitioningViewsVisiblity(0, false);
             }
-            TransitionManager.beginDelayedTransition(decor, mergeTransitions);
+            TransitionManager.beginDelayedTransition(decor, transitionMergeTransitions);
             scheduleGhostVisibilityChange(0);
             lambda$scheduleGhostVisibilityChange$1(0);
             if (exitTransition != null) {

@@ -5,5 +5,5 @@
         <androidx.recyclerview.widget.RecyclerView android:id="@id/media_projection_recent_tasks_recycler" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
         <ProgressBar android:layout_gravity="center" android:id="@id/media_projection_recent_tasks_loader" android:layout_width="@dimen/media_projection_app_selector_loader_size" android:layout_height="@dimen/media_projection_app_selector_loader_size" android:indeterminate="true" android:indeterminateOnly="true" />
     </FrameLayout>
-    <ImageView android:layout_width="72.0dip" android:layout_height="2.0dip" android:layout_marginTop="24.0dip" android:layout_marginBottom="8.0dip" android:src="@android:drawable/ic_lockscreen_unlock_activated" android:tint="@android:color/secondary_text_inverse_when_activated_material" android:importantForAccessibility="no" />
+    <ImageView android:layout_width="72.0dip" android:layout_height="2.0dip" android:layout_marginTop="24.0dip" android:layout_marginBottom="8.0dip" android:src="@android:drawable/ic_jog_dial_answer_and_end" android:tint="@android:color/notification_default_color_light" android:importantForAccessibility="no" />
 </LinearLayout>

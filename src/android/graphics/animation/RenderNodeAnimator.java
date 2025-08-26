@@ -141,17 +141,17 @@ public class RenderNodeAnimator extends Animator {
     }
 
     private void applyInterpolator() {
-        long createNativeInterpolator;
+        long jCreateNativeInterpolator;
         TimeInterpolator timeInterpolator = this.mInterpolator;
         if (timeInterpolator == null || this.mNativePtr == null) {
             return;
         }
         if (isNativeInterpolator(timeInterpolator)) {
-            createNativeInterpolator = ((NativeInterpolator) this.mInterpolator).createNativeInterpolator();
+            jCreateNativeInterpolator = ((NativeInterpolator) this.mInterpolator).createNativeInterpolator();
         } else {
-            createNativeInterpolator = FallbackLUTInterpolator.createNativeInterpolator(this.mInterpolator, nGetDuration(this.mNativePtr.get()));
+            jCreateNativeInterpolator = FallbackLUTInterpolator.createNativeInterpolator(this.mInterpolator, nGetDuration(this.mNativePtr.get()));
         }
-        nSetInterpolator(this.mNativePtr.get(), createNativeInterpolator);
+        nSetInterpolator(this.mNativePtr.get(), jCreateNativeInterpolator);
     }
 
     @Override // android.animation.Animator
@@ -200,10 +200,10 @@ public class RenderNodeAnimator extends Animator {
     }
 
     private void notifyStartListeners() {
-        ArrayList<Animator.AnimatorListener> cloneListeners = cloneListeners();
-        int size = cloneListeners == null ? 0 : cloneListeners.size();
+        ArrayList<Animator.AnimatorListener> arrayListCloneListeners = cloneListeners();
+        int size = arrayListCloneListeners == null ? 0 : arrayListCloneListeners.size();
         for (int i = 0; i < size; i++) {
-            cloneListeners.get(i).onAnimationStart(this);
+            arrayListCloneListeners.get(i).onAnimationStart(this);
         }
     }
 
@@ -217,10 +217,10 @@ public class RenderNodeAnimator extends Animator {
             getHelper().removeDelayedAnimation(this);
             moveToRunningState();
         }
-        ArrayList<Animator.AnimatorListener> cloneListeners = cloneListeners();
-        int size = cloneListeners == null ? 0 : cloneListeners.size();
+        ArrayList<Animator.AnimatorListener> arrayListCloneListeners = cloneListeners();
+        int size = arrayListCloneListeners == null ? 0 : arrayListCloneListeners.size();
         for (int i2 = 0; i2 < size; i2++) {
-            cloneListeners.get(i2).onAnimationCancel(this);
+            arrayListCloneListeners.get(i2).onAnimationCancel(this);
         }
         end();
     }
@@ -349,10 +349,10 @@ public class RenderNodeAnimator extends Animator {
             notifyStartListeners();
         }
         this.mState = 3;
-        ArrayList<Animator.AnimatorListener> cloneListeners = cloneListeners();
-        int size = cloneListeners == null ? 0 : cloneListeners.size();
+        ArrayList<Animator.AnimatorListener> arrayListCloneListeners = cloneListeners();
+        int size = arrayListCloneListeners == null ? 0 : arrayListCloneListeners.size();
         for (int i2 = 0; i2 < size; i2++) {
-            cloneListeners.get(i2).onAnimationEnd(this);
+            arrayListCloneListeners.get(i2).onAnimationEnd(this);
         }
         releaseNativePtr();
     }
@@ -453,7 +453,7 @@ public class RenderNodeAnimator extends Animator {
             handler.post(new Runnable() { // from class: android.graphics.animation.RenderNodeAnimator$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RenderNodeAnimator.this.onFinished();
+                    this.f$0.onFinished();
                 }
             });
         } else {
@@ -462,7 +462,7 @@ public class RenderNodeAnimator extends Animator {
             handler2.post(new Runnable() { // from class: android.graphics.animation.RenderNodeAnimator$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    RenderNodeAnimator.this.onFinished();
+                    this.f$0.onFinished();
                 }
             });
         }

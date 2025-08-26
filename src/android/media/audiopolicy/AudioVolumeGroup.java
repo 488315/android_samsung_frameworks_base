@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @SystemApi
-/* loaded from: classes.dex */
+/* loaded from: classes3.dex */
 public final class AudioVolumeGroup implements Parcelable {
     public static final int DEFAULT_VOLUME_GROUP = -1;
     private static final String TAG = "AudioVolumeGroup";
@@ -27,19 +27,19 @@ public final class AudioVolumeGroup implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public AudioVolumeGroup createFromParcel(Parcel parcel) {
             Preconditions.checkNotNull(parcel, "in Parcel must not be null");
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            AudioAttributes[] audioAttributesArr = new AudioAttributes[readInt2];
-            for (int i = 0; i < readInt2; i++) {
-                audioAttributesArr[i] = AudioAttributes.CREATOR.createFromParcel(parcel);
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            AudioAttributes[] audioAttributesArr = new AudioAttributes[i2];
+            for (int i3 = 0; i3 < i2; i3++) {
+                audioAttributesArr[i3] = AudioAttributes.CREATOR.createFromParcel(parcel);
             }
-            int readInt3 = parcel.readInt();
-            int[] iArr = new int[readInt3];
-            for (int i2 = 0; i2 < readInt3; i2++) {
-                iArr[i2] = parcel.readInt();
+            int i4 = parcel.readInt();
+            int[] iArr = new int[i4];
+            for (int i5 = 0; i5 < i4; i5++) {
+                iArr[i5] = parcel.readInt();
             }
-            return new AudioVolumeGroup(readString, readInt, audioAttributesArr, iArr);
+            return new AudioVolumeGroup(string, i, audioAttributesArr, iArr);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

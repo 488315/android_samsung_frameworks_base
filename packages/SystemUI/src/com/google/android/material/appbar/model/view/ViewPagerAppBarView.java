@@ -21,13 +21,13 @@ import com.google.android.material.appbar.model.view.ViewPagerAppBarView$inflate
 import java.util.ArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ViewPagerAppBarView extends AppBarView {
     private ViewGroup bottomLayout;
     private SeslIndicator indicator;
     private ViewPager2 viewpager;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public ViewPagerAppBarView(Context context) {
         this(context, null, 2, 0 == true ? 1 : 0);
     }
@@ -65,18 +65,19 @@ public class ViewPagerAppBarView extends AppBarView {
         return this.viewpager;
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public void inflate() {
         int i = 2;
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.sesl_app_bar_viewpager, (ViewGroup) this, false);
-        byte b = 0;
-        byte b2 = 0;
-        ViewGroup viewGroup = inflate instanceof ViewGroup ? (ViewGroup) inflate : null;
+        View viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.sesl_app_bar_viewpager, (ViewGroup) this, false);
+        Object[] objArr = 0;
+        Object[] objArr2 = 0;
+        ViewGroup viewGroup = viewInflate instanceof ViewGroup ? (ViewGroup) viewInflate : null;
         if (viewGroup == null) {
             return;
         }
         this.viewpager = (ViewPager2) viewGroup.findViewById(R.id.app_bar_viewpager);
         this.bottomLayout = (ViewGroup) viewGroup.findViewById(R.id.bottom_layout);
-        final SeslIndicator seslIndicator = new SeslIndicator(getContext(), b2 == true ? 1 : 0, i, b == true ? 1 : 0);
+        final SeslIndicator seslIndicator = new SeslIndicator(getContext(), objArr2 == true ? 1 : 0, i, objArr == true ? 1 : 0);
         final ViewPagerAppBarView$inflate$1$1 viewPagerAppBarView$inflate$1$1 = new ViewPagerAppBarView$inflate$1$1(this);
         seslIndicator.itemClickListener = viewPagerAppBarView$inflate$1$1;
         ArrayList arrayList = (ArrayList) seslIndicator.indicator;
@@ -88,12 +89,12 @@ public class ViewPagerAppBarView extends AppBarView {
             ((SeslIndicator.PageIndicatorMarker) obj).setOnClickListener(new View.OnClickListener() { // from class: androidx.appcompat.widget.SeslIndicator$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    ViewPagerAppBarView$inflate$1$1 viewPagerAppBarView$inflate$1$12 = ViewPagerAppBarView$inflate$1$1.this;
-                    int indexOf = ((ArrayList) seslIndicator.indicator).indexOf(view);
+                    ViewPagerAppBarView$inflate$1$1 viewPagerAppBarView$inflate$1$12 = viewPagerAppBarView$inflate$1$1;
+                    int iIndexOf = ((ArrayList) seslIndicator.indicator).indexOf(view);
                     ViewPager2 viewpager = viewPagerAppBarView$inflate$1$12.this$0.getViewpager();
                     if (viewpager != null) {
                         viewpager.mFakeDragger.mScrollEventAdapter.getClass();
-                        viewpager.setCurrentItemInternal(indexOf);
+                        viewpager.setCurrentItemInternal(iIndexOf);
                     }
                 }
             });
@@ -163,8 +164,8 @@ public class ViewPagerAppBarView extends AppBarView {
 
     @Override // com.google.android.material.appbar.model.view.AppBarView
     public void updateResource(Context context) {
-        Drawable drawable;
-        Drawable mutate;
+        Drawable drawableMutate;
+        Drawable drawableMutate2;
         ViewPager2 viewPager2 = this.viewpager;
         if (viewPager2 != null) {
             viewPager2.setBackgroundTintList(getViewPagerBackgroundColorStateList(context));
@@ -175,20 +176,20 @@ public class ViewPagerAppBarView extends AppBarView {
         }
         SeslIndicator seslIndicator = this.indicator;
         if (seslIndicator != null) {
-            Drawable drawable2 = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
-            Drawable drawable3 = null;
-            if (drawable2 == null || (drawable = drawable2.mutate()) == null) {
-                drawable = null;
+            Drawable drawable = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
+            Drawable drawable2 = null;
+            if (drawable == null || (drawableMutate = drawable.mutate()) == null) {
+                drawableMutate = null;
             } else {
-                drawable.setTint(getViewPagerIndicatorOffColor(context));
+                drawableMutate.setTint(getViewPagerIndicatorOffColor(context));
             }
-            seslIndicator.setDefaultCircle(drawable);
-            Drawable drawable4 = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
-            if (drawable4 != null && (mutate = drawable4.mutate()) != null) {
-                mutate.setTint(getViewPagerIndicatorOnColor(context));
-                drawable3 = mutate;
+            seslIndicator.setDefaultCircle(drawableMutate);
+            Drawable drawable3 = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
+            if (drawable3 != null && (drawableMutate2 = drawable3.mutate()) != null) {
+                drawableMutate2.setTint(getViewPagerIndicatorOnColor(context));
+                drawable2 = drawableMutate2;
             }
-            seslIndicator.setSelectCircle(drawable3);
+            seslIndicator.setSelectCircle(drawable2);
         }
     }
 

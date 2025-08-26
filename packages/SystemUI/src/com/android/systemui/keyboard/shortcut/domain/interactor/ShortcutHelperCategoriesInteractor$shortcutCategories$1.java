@@ -28,7 +28,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ShortcutHelperCategoriesInteractor$shortcutCategories$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -60,10 +59,10 @@ final class ShortcutHelperCategoriesInteractor$shortcutCategories$1 extends Susp
         List list = (List) this.L$0;
         List list2 = (List) this.L$1;
         ShortcutHelperCategoriesInteractor shortcutHelperCategoriesInteractor = this.this$0;
-        List plus = CollectionsKt___CollectionsKt.plus((Iterable) list2, (Collection) list);
+        List listPlus = CollectionsKt___CollectionsKt.plus((Iterable) list2, (Collection) list);
         shortcutHelperCategoriesInteractor.getClass();
         LinkedHashMap linkedHashMap = new LinkedHashMap();
-        ArrayList arrayList = (ArrayList) plus;
+        ArrayList arrayList = (ArrayList) listPlus;
         int size = arrayList.size();
         int i = 0;
         int i2 = 0;
@@ -71,88 +70,88 @@ final class ShortcutHelperCategoriesInteractor$shortcutCategories$1 extends Susp
             Object obj2 = arrayList.get(i2);
             i2++;
             ShortcutCategoryType shortcutCategoryType = ((ShortcutCategory) obj2).type;
-            Object obj3 = linkedHashMap.get(shortcutCategoryType);
-            if (obj3 == null) {
-                obj3 = new ArrayList();
-                linkedHashMap.put(shortcutCategoryType, obj3);
+            Object arrayList2 = linkedHashMap.get(shortcutCategoryType);
+            if (arrayList2 == null) {
+                arrayList2 = new ArrayList();
+                linkedHashMap.put(shortcutCategoryType, arrayList2);
             }
-            ((List) obj3).add(obj2);
+            ((List) arrayList2).add(obj2);
         }
-        Set entrySet = linkedHashMap.entrySet();
+        Set setEntrySet = linkedHashMap.entrySet();
         int i3 = 10;
-        ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(entrySet, 10));
-        Iterator it = entrySet.iterator();
+        ArrayList arrayList3 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(setEntrySet, 10));
+        Iterator it = setEntrySet.iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
             ShortcutCategoryType shortcutCategoryType2 = (ShortcutCategoryType) entry.getKey();
             List list3 = (List) entry.getValue();
-            ArrayList arrayList3 = new ArrayList();
+            ArrayList arrayList4 = new ArrayList();
             Iterator it2 = list3.iterator();
             while (it2.hasNext()) {
-                CollectionsKt__MutableCollectionsKt.addAll(((ShortcutCategory) it2.next()).subCategories, arrayList3);
+                CollectionsKt__MutableCollectionsKt.addAll(((ShortcutCategory) it2.next()).subCategories, arrayList4);
             }
             LinkedHashMap linkedHashMap2 = new LinkedHashMap();
-            int size2 = arrayList3.size();
+            int size2 = arrayList4.size();
             int i4 = i;
             while (i4 < size2) {
-                Object obj4 = arrayList3.get(i4);
+                Object obj3 = arrayList4.get(i4);
                 i4++;
-                String str = ((ShortcutSubCategory) obj4).label;
-                Object obj5 = linkedHashMap2.get(str);
-                if (obj5 == null) {
-                    obj5 = new ArrayList();
-                    linkedHashMap2.put(str, obj5);
+                String str = ((ShortcutSubCategory) obj3).label;
+                Object arrayList5 = linkedHashMap2.get(str);
+                if (arrayList5 == null) {
+                    arrayList5 = new ArrayList();
+                    linkedHashMap2.put(str, arrayList5);
                 }
-                ((List) obj5).add(obj4);
+                ((List) arrayList5).add(obj3);
             }
-            Set entrySet2 = linkedHashMap2.entrySet();
-            ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(entrySet2, i3));
-            Iterator it3 = entrySet2.iterator();
+            Set setEntrySet2 = linkedHashMap2.entrySet();
+            ArrayList arrayList6 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(setEntrySet2, i3));
+            Iterator it3 = setEntrySet2.iterator();
             while (it3.hasNext()) {
                 Map.Entry entry2 = (Map.Entry) it3.next();
                 String str2 = (String) entry2.getKey();
                 List list4 = (List) entry2.getValue();
-                ArrayList arrayList5 = new ArrayList();
+                ArrayList arrayList7 = new ArrayList();
                 Iterator it4 = list4.iterator();
                 while (it4.hasNext()) {
-                    CollectionsKt__MutableCollectionsKt.addAll(((ShortcutSubCategory) it4.next()).shortcuts, arrayList5);
+                    CollectionsKt__MutableCollectionsKt.addAll(((ShortcutSubCategory) it4.next()).shortcuts, arrayList7);
                 }
                 LinkedHashMap linkedHashMap3 = new LinkedHashMap();
-                int size3 = arrayList5.size();
+                int size3 = arrayList7.size();
                 int i5 = i;
                 while (i5 < size3) {
-                    Object obj6 = arrayList5.get(i5);
+                    Object obj4 = arrayList7.get(i5);
                     i5++;
-                    String str3 = ((Shortcut) obj6).label;
-                    Object obj7 = linkedHashMap3.get(str3);
-                    if (obj7 == null) {
-                        obj7 = new ArrayList();
-                        linkedHashMap3.put(str3, obj7);
+                    String str3 = ((Shortcut) obj4).label;
+                    Object arrayList8 = linkedHashMap3.get(str3);
+                    if (arrayList8 == null) {
+                        arrayList8 = new ArrayList();
+                        linkedHashMap3.put(str3, arrayList8);
                     }
-                    ((List) obj7).add(obj6);
+                    ((List) arrayList8).add(obj4);
                 }
-                Set<Map.Entry> entrySet3 = linkedHashMap3.entrySet();
-                ArrayList arrayList6 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(entrySet3, i3));
-                for (Map.Entry entry3 : entrySet3) {
+                Set<Map.Entry> setEntrySet3 = linkedHashMap3.entrySet();
+                ArrayList arrayList9 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(setEntrySet3, i3));
+                for (Map.Entry entry3 : setEntrySet3) {
                     String str4 = (String) entry3.getKey();
                     List list5 = (List) entry3.getValue();
                     Shortcut shortcut = (Shortcut) list5.get(i);
                     List list6 = list5;
-                    ArrayList arrayList7 = new ArrayList();
+                    ArrayList arrayList10 = new ArrayList();
                     Iterator it5 = list6.iterator();
                     while (it5.hasNext()) {
-                        CollectionsKt__MutableCollectionsKt.addAll(((Shortcut) it5.next()).commands, arrayList7);
+                        CollectionsKt__MutableCollectionsKt.addAll(((Shortcut) it5.next()).commands, arrayList10);
                     }
-                    List sortedWith = CollectionsKt___CollectionsKt.sortedWith(arrayList7, new Comparator() { // from class: com.android.systemui.keyboard.shortcut.domain.interactor.ShortcutHelperCategoriesInteractor$groupShortcutsInSubcategory$lambda$10$$inlined$sortedBy$1
+                    List listSortedWith = CollectionsKt___CollectionsKt.sortedWith(arrayList10, new Comparator() { // from class: com.android.systemui.keyboard.shortcut.domain.interactor.ShortcutHelperCategoriesInteractor$groupShortcutsInSubcategory$lambda$10$$inlined$sortedBy$1
                         @Override // java.util.Comparator
-                        public final int compare(Object obj8, Object obj9) {
-                            return ComparisonsKt__ComparisonsKt.compareValues(Integer.valueOf(((ShortcutCommand) obj8).keys.size()), Integer.valueOf(((ShortcutCommand) obj9).keys.size()));
+                        public final int compare(Object obj5, Object obj6) {
+                            return ComparisonsKt__ComparisonsKt.compareValues(Integer.valueOf(((ShortcutCommand) obj5).keys.size()), Integer.valueOf(((ShortcutCommand) obj6).keys.size()));
                         }
                     });
-                    ArrayList arrayList8 = new ArrayList();
+                    ArrayList arrayList11 = new ArrayList();
                     Iterator it6 = list6.iterator();
                     while (it6.hasNext()) {
-                        CollectionsKt__MutableCollectionsKt.addAll(((Shortcut) it6.next()).commands, arrayList8);
+                        CollectionsKt__MutableCollectionsKt.addAll(((Shortcut) it6.next()).commands, arrayList11);
                     }
                     String string = shortcutHelperCategoriesInteractor.context.getString(R.string.shortcut_helper_add_shortcut_dialog_placeholder);
                     String string2 = shortcutHelperCategoriesInteractor.context.getString(R.string.shortcut_helper_key_combinations_and_conjunction);
@@ -160,12 +159,12 @@ final class ShortcutHelperCategoriesInteractor$shortcutCategories$1 extends Susp
                     StringBuilder sb = new StringBuilder();
                     Iterator it7 = it;
                     sb.append(str4 + ", " + string);
-                    int size4 = arrayList8.size();
+                    int size4 = arrayList11.size();
                     Iterator it8 = it3;
                     int i6 = 0;
                     int i7 = 0;
                     while (i6 < size4) {
-                        Object obj8 = arrayList8.get(i6);
+                        Object obj5 = arrayList11.get(i6);
                         i6++;
                         int i8 = i7 + 1;
                         if (i7 < 0) {
@@ -173,7 +172,7 @@ final class ShortcutHelperCategoriesInteractor$shortcutCategories$1 extends Susp
                             throw null;
                         }
                         int i9 = size4;
-                        ShortcutCommand shortcutCommand = (ShortcutCommand) obj8;
+                        ShortcutCommand shortcutCommand = (ShortcutCommand) obj5;
                         if (i7 > 0) {
                             sb.append(", " + string3);
                         }
@@ -188,7 +187,7 @@ final class ShortcutHelperCategoriesInteractor$shortcutCategories$1 extends Susp
                             }
                             Iterator it10 = it9;
                             ShortcutKey shortcutKey = (ShortcutKey) next;
-                            ArrayList arrayList9 = arrayList8;
+                            ArrayList arrayList12 = arrayList11;
                             if (i10 > 0) {
                                 sb.append(" " + string2);
                             }
@@ -196,28 +195,28 @@ final class ShortcutHelperCategoriesInteractor$shortcutCategories$1 extends Susp
                             if (contentDescription != null) {
                                 sb.append(" ".concat(contentDescription));
                             }
-                            arrayList8 = arrayList9;
+                            arrayList11 = arrayList12;
                             i10 = i11;
                             it9 = it10;
                         }
                         i7 = i8;
                         size4 = i9;
                     }
-                    arrayList6.add(new Shortcut(shortcut.label, sortedWith, shortcut.icon, sb.toString(), shortcut.isCustomizable));
+                    arrayList9.add(new Shortcut(shortcut.label, listSortedWith, shortcut.icon, sb.toString(), shortcut.isCustomizable));
                     it = it7;
                     it3 = it8;
                     i = 0;
                 }
-                arrayList4.add(new ShortcutSubCategory(str2, arrayList6));
+                arrayList6.add(new ShortcutSubCategory(str2, arrayList9));
                 it = it;
                 i3 = 10;
                 i = 0;
             }
-            arrayList2.add(new ShortcutCategory(shortcutCategoryType2, arrayList4));
+            arrayList3.add(new ShortcutCategory(shortcutCategoryType2, arrayList6));
             it = it;
             i3 = 10;
             i = 0;
         }
-        return arrayList2;
+        return arrayList3;
     }
 }

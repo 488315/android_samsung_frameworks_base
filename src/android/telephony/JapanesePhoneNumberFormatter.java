@@ -23,7 +23,7 @@ class JapanesePhoneNumberFormatter {
         } else {
             i = 3;
         }
-        CharSequence subSequence = editable.subSequence(0, length);
+        CharSequence charSequenceSubSequence = editable.subSequence(0, length);
         int i2 = 0;
         while (i2 < editable.length()) {
             if (editable.charAt(i2) == '-') {
@@ -39,26 +39,26 @@ class JapanesePhoneNumberFormatter {
             if (i3 >= length2) {
                 break;
             }
-            char charAt = editable.charAt(i3);
-            if (!Character.isDigit(charAt)) {
-                editable.replace(0, length2, subSequence);
+            char cCharAt = editable.charAt(i3);
+            if (!Character.isDigit(cCharAt)) {
+                editable.replace(0, length2, charSequenceSubSequence);
                 return;
             }
-            s = FORMAT_MAP[(s + charAt) - 48];
+            s = FORMAT_MAP[(s + cCharAt) - 48];
             if (s >= 0) {
                 i3++;
             } else {
                 if (s <= -100) {
-                    editable.replace(0, length2, subSequence);
+                    editable.replace(0, length2, charSequenceSubSequence);
                     return;
                 }
-                int abs = (Math.abs((int) s) % 10) + i;
-                if (length2 > abs) {
-                    editable.insert(abs, NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+                int iAbs = (Math.abs((int) s) % 10) + i;
+                if (length2 > iAbs) {
+                    editable.insert(iAbs, NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
                 }
-                int abs2 = (Math.abs((int) s) / 10) + i;
-                if (length2 > abs2) {
-                    editable.insert(abs2, NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+                int iAbs2 = (Math.abs((int) s) / 10) + i;
+                if (length2 > iAbs2) {
+                    editable.insert(iAbs2, NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
                 }
             }
         }

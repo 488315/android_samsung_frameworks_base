@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver$2 extends SuspendLambda implements Function3 {
     final /* synthetic */ Object $defaultValue$inlined;
@@ -39,7 +38,7 @@ public final class DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow flow;
+        Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -47,12 +46,11 @@ public final class DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             List list = (List) this.L$1;
             if (list.isEmpty()) {
-                flow = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(this.$defaultValue$inlined);
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(this.$defaultValue$inlined);
             } else {
                 final Flow[] flowArr = (Flow[]) CollectionsKt___CollectionsKt.toList(list).toArray(new Flow[0]);
-                flow = new Flow() { // from class: com.android.systemui.statusbar.pipeline.satellite.domain.interactor.DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver$2.1
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new Flow() { // from class: com.android.systemui.statusbar.pipeline.satellite.domain.interactor.DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver$2.1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.statusbar.pipeline.satellite.domain.interactor.DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver$2$1$3, reason: invalid class name */
                     public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                         private /* synthetic */ Object L$0;
@@ -92,9 +90,9 @@ public final class DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver
                                     }
                                     i2++;
                                 }
-                                Boolean valueOf = Boolean.valueOf(z);
+                                Boolean boolValueOf = Boolean.valueOf(z);
                                 this.label = 1;
-                                if (flowCollector.emit(valueOf, this) == coroutineSingletons) {
+                                if (flowCollector.emit(boolValueOf, this) == coroutineSingletons) {
                                     return coroutineSingletons;
                                 }
                             } else {
@@ -110,18 +108,18 @@ public final class DeviceBasedSatelliteInteractor$special$$inlined$aggregateOver
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
                         final Flow[] flowArr2 = flowArr;
-                        Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.pipeline.satellite.domain.interactor.DeviceBasedSatelliteInteractor$special$.inlined.aggregateOver.2.1.2
+                        Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.pipeline.satellite.domain.interactor.DeviceBasedSatelliteInteractor$special$.inlined.aggregateOver.2.1.2
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 return new Boolean[flowArr2.length];
                             }
                         }, new AnonymousClass3(null), flowCollector2, continuation);
-                        return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                        return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
                     }
                 };
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, flow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

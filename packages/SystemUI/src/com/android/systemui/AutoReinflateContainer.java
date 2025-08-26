@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AutoReinflateContainer extends FrameLayout {
     public static final Set SUPPORTED_CHANGES = Set.of(4, 512, Integer.MIN_VALUE, 4096, 1073741824);
@@ -24,12 +23,12 @@ public class AutoReinflateContainer extends FrameLayout {
         super(context, attributeSet);
         this.mInflateListeners = new ArrayList();
         this.mLastConfig = new Configuration();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.AutoReinflateContainer);
-        if (!obtainStyledAttributes.hasValue(0)) {
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.AutoReinflateContainer);
+        if (!typedArrayObtainStyledAttributes.hasValue(0)) {
             throw new IllegalArgumentException("AutoReinflateContainer must contain a layout");
         }
-        this.mLayout = obtainStyledAttributes.getResourceId(0, 0);
-        obtainStyledAttributes.recycle();
+        this.mLayout = typedArrayObtainStyledAttributes.getResourceId(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
         inflateLayout();
     }
 
@@ -48,10 +47,10 @@ public class AutoReinflateContainer extends FrameLayout {
 
     @Override // android.view.View
     public final void onConfigurationChanged(Configuration configuration) {
-        int updateFrom = this.mLastConfig.updateFrom(configuration);
+        int iUpdateFrom = this.mLastConfig.updateFrom(configuration);
         Iterator it = SUPPORTED_CHANGES.iterator();
         while (it.hasNext()) {
-            if ((((Integer) it.next()).intValue() & updateFrom) != 0) {
+            if ((((Integer) it.next()).intValue() & iUpdateFrom) != 0) {
                 inflateLayout();
                 return;
             }

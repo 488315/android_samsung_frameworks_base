@@ -397,24 +397,24 @@ public class SystemConditionChecker implements ConditionChecker {
     @Override // com.samsung.android.globalactions.util.ConditionChecker
     public boolean isEnabled(Object obj) {
         try {
-            long currentTimeMillis = System.currentTimeMillis();
-            Long valueOf = Long.valueOf(currentTimeMillis);
-            SystemConditions valueOf2 = SystemConditions.valueOf(obj.toString());
-            boolean isEnabled = isEnabled(valueOf2);
-            long currentTimeMillis2 = System.currentTimeMillis();
-            Long valueOf3 = Long.valueOf(currentTimeMillis2);
+            long jCurrentTimeMillis = System.currentTimeMillis();
+            Long lValueOf = Long.valueOf(jCurrentTimeMillis);
+            SystemConditions systemConditionsValueOf = SystemConditions.valueOf(obj.toString());
+            boolean zIsEnabled = isEnabled(systemConditionsValueOf);
+            long jCurrentTimeMillis2 = System.currentTimeMillis();
+            Long lValueOf2 = Long.valueOf(jCurrentTimeMillis2);
             LogWrapper logWrapper = this.mLogWrapper;
             StringBuilder sb = new StringBuilder(NavigationBarInflaterView.SIZE_MOD_START);
-            sb.append(valueOf2.name().toLowerCase());
+            sb.append(systemConditionsValueOf.name().toLowerCase());
             sb.append("] ");
-            sb.append(isEnabled);
+            sb.append(zIsEnabled);
             sb.append(" (");
-            valueOf3.getClass();
-            valueOf.getClass();
-            sb.append(currentTimeMillis2 - currentTimeMillis);
+            lValueOf2.getClass();
+            lValueOf.getClass();
+            sb.append(jCurrentTimeMillis2 - jCurrentTimeMillis);
             sb.append(NavigationBarInflaterView.KEY_CODE_END);
             logWrapper.i(TAG, sb.toString());
-            return isEnabled;
+            return zIsEnabled;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

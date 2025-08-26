@@ -17,9 +17,9 @@ public class SemCustomDumpManager {
 
     private IUnionManager getService() {
         if (this.mService == null) {
-            IUnionManager asInterface = IUnionManager.Stub.asInterface(ServiceManager.getService(Context.SEP_UNION_SERVICE));
-            this.mService = asInterface;
-            if (asInterface == null) {
+            IUnionManager iUnionManagerAsInterface = IUnionManager.Stub.asInterface(ServiceManager.getService(Context.SEP_UNION_SERVICE));
+            this.mService = iUnionManagerAsInterface;
+            if (iUnionManagerAsInterface == null) {
                 Log.i(TAG, "IUnionManager is NULL");
             }
         }

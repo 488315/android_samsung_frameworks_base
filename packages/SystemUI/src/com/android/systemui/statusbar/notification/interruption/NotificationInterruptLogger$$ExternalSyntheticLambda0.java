@@ -10,14 +10,13 @@ import com.android.keyguard.logging.KeyguardUpdateMonitorLogger$$ExternalSynthet
 import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotificationInterruptLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -29,11 +28,11 @@ public final /* synthetic */ class NotificationInterruptLogger$$ExternalSyntheti
                 long long2 = logMessage.getLong2();
                 String str2 = logMessage.getStr2();
                 String str1 = logMessage.getStr1();
-                StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("Maybe heads up: old when ", long1, " (age=");
-                m.append(long2);
-                m.append(" ms) but ");
-                m.append(str2);
-                return TransitionKt$$ExternalSyntheticOutline0.m(m, ": ", str1);
+                StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("Maybe heads up: old when ", long1, " (age=");
+                sbM.append(long2);
+                sbM.append(" ms) but ");
+                sbM.append(str2);
+                return TransitionKt$$ExternalSyntheticOutline0.m(sbM, ": ", str1);
             case 3:
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("No heads up: unimportant notification: ", logMessage.getStr1());
             case 4:
@@ -66,11 +65,11 @@ public final /* synthetic */ class NotificationInterruptLogger$$ExternalSyntheti
                 long long12 = logMessage.getLong1();
                 long long22 = logMessage.getLong2();
                 String str12 = logMessage.getStr1();
-                StringBuilder m2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("No heads up: old when ", long12, " (age=");
-                m2.append(long22);
-                m2.append(" ms): ");
-                m2.append(str12);
-                return m2.toString();
+                StringBuilder sbM2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("No heads up: old when ", long12, " (age=");
+                sbM2.append(long22);
+                sbM2.append(" ms): ");
+                sbM2.append(str12);
+                return sbM2.toString();
             case 18:
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Heads up: ", logMessage.getStr1());
             case 19:
@@ -81,9 +80,9 @@ public final /* synthetic */ class NotificationInterruptLogger$$ExternalSyntheti
                 String str22 = logMessage.getStr2();
                 boolean bool1 = logMessage.getBool1();
                 String str13 = logMessage.getStr1();
-                StringBuilder m3 = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("No alerting: aborted by suppressor: ", str22, " awake=", " sbnKey=", bool1);
-                m3.append(str13);
-                return m3.toString();
+                StringBuilder sbM3 = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("No alerting: aborted by suppressor: ", str22, " awake=", " sbnKey=", bool1);
+                sbM3.append(str13);
+                return sbM3.toString();
             case 22:
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("No alerting: app is suspended: ", logMessage.getStr1());
             default:

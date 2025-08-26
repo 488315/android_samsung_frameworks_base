@@ -72,9 +72,9 @@ public interface IMediaContainerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaContainerService)) {
-                return (IMediaContainerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMediaContainerService)) {
+                return (IMediaContainerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -110,33 +110,33 @@ public interface IMediaContainerService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                IParcelFileDescriptorFactory asInterface = IParcelFileDescriptorFactory.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                IParcelFileDescriptorFactory iParcelFileDescriptorFactoryAsInterface = IParcelFileDescriptorFactory.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int copyPackage = copyPackage(readString, asInterface);
+                int iCopyPackage = copyPackage(string, iParcelFileDescriptorFactoryAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeInt(copyPackage);
+                parcel2.writeInt(iCopyPackage);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                int readInt = parcel.readInt();
-                String readString3 = parcel.readString();
+                String string2 = parcel.readString();
+                int i3 = parcel.readInt();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                PackageInfoLite minimalPackageInfo = getMinimalPackageInfo(readString2, readInt, readString3);
+                PackageInfoLite minimalPackageInfo = getMinimalPackageInfo(string2, i3, string3);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(minimalPackageInfo, 1);
             } else if (i == 3) {
-                String readString4 = parcel.readString();
+                String string4 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                ObbInfo obbInfo = getObbInfo(readString4);
+                ObbInfo obbInfo = getObbInfo(string4);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(obbInfo, 1);
             } else if (i == 4) {
-                String readString5 = parcel.readString();
-                String readString6 = parcel.readString();
+                String string5 = parcel.readString();
+                String string6 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                long calculateInstalledSize = calculateInstalledSize(readString5, readString6);
+                long jCalculateInstalledSize = calculateInstalledSize(string5, string6);
                 parcel2.writeNoException();
-                parcel2.writeLong(calculateInstalledSize);
+                parcel2.writeLong(jCalculateInstalledSize);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -161,69 +161,69 @@ public interface IMediaContainerService extends IInterface {
 
             @Override // com.android.internal.app.IMediaContainerService
             public int copyPackage(String str, IParcelFileDescriptorFactory iParcelFileDescriptorFactory) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iParcelFileDescriptorFactory);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iParcelFileDescriptorFactory);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IMediaContainerService
             public PackageInfoLite getMinimalPackageInfo(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PackageInfoLite) obtain2.readTypedObject(PackageInfoLite.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PackageInfoLite) parcelObtain2.readTypedObject(PackageInfoLite.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IMediaContainerService
             public ObbInfo getObbInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ObbInfo) obtain2.readTypedObject(ObbInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ObbInfo) parcelObtain2.readTypedObject(ObbInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IMediaContainerService
             public long calculateInstalledSize(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

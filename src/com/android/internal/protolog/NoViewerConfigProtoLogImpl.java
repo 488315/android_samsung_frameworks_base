@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Deprecated
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class NoViewerConfigProtoLogImpl implements IProtoLog {
     private static final String LOG_TAG = "ProtoLog";
 

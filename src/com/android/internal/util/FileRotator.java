@@ -177,9 +177,7 @@ public class FileRotator {
         TreeSet treeSet = new TreeSet(Comparator.comparingLong(new ToLongFunction() { // from class: com.android.internal.util.FileRotator$$ExternalSyntheticLambda0
             @Override // java.util.function.ToLongFunction
             public final long applyAsLong(Object obj) {
-                long longValue;
-                longValue = ((Long) ((Pair) obj).first).longValue();
-                return longValue;
+                return ((Long) ((Pair) obj).first).longValue();
             }
         }));
         for (String str : this.mBasePath.list()) {
@@ -276,17 +274,17 @@ public class FileRotator {
         public boolean parse(String str) {
             this.endMillis = -1L;
             this.startMillis = -1L;
-            int lastIndexOf = str.lastIndexOf(46);
-            int lastIndexOf2 = str.lastIndexOf(45);
-            if (lastIndexOf == -1 || lastIndexOf2 == -1 || !this.prefix.equals(str.substring(0, lastIndexOf))) {
+            int iLastIndexOf = str.lastIndexOf(46);
+            int iLastIndexOf2 = str.lastIndexOf(45);
+            if (iLastIndexOf == -1 || iLastIndexOf2 == -1 || !this.prefix.equals(str.substring(0, iLastIndexOf))) {
                 return false;
             }
             try {
-                this.startMillis = Long.parseLong(str.substring(lastIndexOf + 1, lastIndexOf2));
-                if (str.length() - lastIndexOf2 == 1) {
+                this.startMillis = Long.parseLong(str.substring(iLastIndexOf + 1, iLastIndexOf2));
+                if (str.length() - iLastIndexOf2 == 1) {
                     this.endMillis = Long.MAX_VALUE;
                 } else {
-                    this.endMillis = Long.parseLong(str.substring(lastIndexOf2 + 1));
+                    this.endMillis = Long.parseLong(str.substring(iLastIndexOf2 + 1));
                 }
                 return true;
             } catch (NumberFormatException unused) {

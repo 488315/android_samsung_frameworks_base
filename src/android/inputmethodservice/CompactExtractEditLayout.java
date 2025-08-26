@@ -34,9 +34,9 @@ public class CompactExtractEditLayout extends LinearLayout {
         super.onFinishInflate();
         this.mInputExtractEditText = findViewById(16908325);
         this.mInputExtractAccessories = findViewById(16908378);
-        View findViewById = findViewById(16908377);
-        this.mInputExtractAction = findViewById;
-        if (this.mInputExtractEditText == null || this.mInputExtractAccessories == null || findViewById == null) {
+        View viewFindViewById = findViewById(16908377);
+        this.mInputExtractAction = viewFindViewById;
+        if (this.mInputExtractEditText == null || this.mInputExtractAccessories == null || viewFindViewById == null) {
             return;
         }
         this.mPerformLayoutChanges = true;

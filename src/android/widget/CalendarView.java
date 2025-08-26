@@ -167,10 +167,10 @@ public class CalendarView extends FrameLayout {
 
     public CalendarView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CalendarView, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.CalendarView, attributeSet, obtainStyledAttributes, i, i2);
-        int i3 = obtainStyledAttributes.getInt(13, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CalendarView, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.CalendarView, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        int i3 = typedArrayObtainStyledAttributes.getInt(13, 0);
+        typedArrayObtainStyledAttributes.recycle();
         if (i3 == 0) {
             this.mDelegate = new CalendarViewLegacyDelegate(this, context, attributeSet, i, i2);
         } else {

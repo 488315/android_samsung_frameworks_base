@@ -40,7 +40,7 @@ class X509CertificateObject extends X509CertificateImpl implements PKCS12BagAttr
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.x509.X509CertificateImpl, java.security.cert.X509Certificate
-    public void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity(Date date) throws CertificateNotYetValidException, CertificateExpiredException {
         long time = date.getTime();
         long[] validityValues = getValidityValues();
         if (time > validityValues[1]) {
@@ -200,7 +200,7 @@ class X509CertificateObject extends X509CertificateImpl implements PKCS12BagAttr
     }
 
     private X509CertificateInternal getInternalCertificate() {
-        byte[] bArr;
+        byte[] encoded;
         X509CertificateEncodingException x509CertificateEncodingException;
         X509CertificateInternal x509CertificateInternal;
         synchronized (this.cacheLock) {
@@ -209,13 +209,13 @@ class X509CertificateObject extends X509CertificateImpl implements PKCS12BagAttr
                 return x509CertificateInternal2;
             }
             try {
-                bArr = this.c.getEncoded(ASN1Encoding.DER);
+                encoded = this.c.getEncoded(ASN1Encoding.DER);
                 x509CertificateEncodingException = null;
             } catch (IOException e) {
-                bArr = null;
+                encoded = null;
                 x509CertificateEncodingException = new X509CertificateEncodingException(e);
             }
-            X509CertificateInternal x509CertificateInternal3 = new X509CertificateInternal(this.bcHelper, this.c, this.basicConstraints, this.keyUsage, this.sigAlgName, this.sigAlgParams, bArr, x509CertificateEncodingException);
+            X509CertificateInternal x509CertificateInternal3 = new X509CertificateInternal(this.bcHelper, this.c, this.basicConstraints, this.keyUsage, this.sigAlgName, this.sigAlgParams, encoded, x509CertificateEncodingException);
             synchronized (this.cacheLock) {
                 if (this.internalCertificateValue == null) {
                     this.internalCertificateValue = x509CertificateInternal3;

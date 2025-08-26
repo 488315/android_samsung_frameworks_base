@@ -1256,6 +1256,7 @@ Nếu tiếp tục, bạn có thể bị tính phí sử dụng dữ liệu."</s
     <string name="delete_blob_text">Xóa dữ liệu được chia sẻ</string>
     <string name="demo_mode">Chế độ thử nghiệm giao diện người dùng hệ thống</string>
     <string name="demote_explain_text">%1$s sẽ không còn hiển thị Thông tin cập nhật trực tiếp. Bạn có thể thay đổi lựa chọn này bất cứ lúc nào trong phần Cài đặt.</string>
+    <string name="desktop_label">Máy tính để bàn %d</string>
     <string name="desktop_mode_a11y_action_maximize_restore">Phóng to hoặc khôi phục kích thước cửa sổ</string>
     <string name="desktop_mode_a11y_action_snap_left">Đổi kích thước và chuyển cửa sổ ứng dụng sang trái</string>
     <string name="desktop_mode_a11y_action_snap_right">Đổi kích thước và chuyển cửa sổ ứng dụng sang phải</string>
@@ -1310,6 +1311,17 @@ Nếu tiếp tục, bạn có thể bị tính phí sử dụng dữ liệu."</s
     <string name="dex_touchpad_dialog_how_to_start_touchpad_tablet">Cách mở bảng cảm ứng trên máy tính bảng</string>
     <string name="dex_touchpad_dialog_pinch">Chụm 2 ngón tay</string>
     <string name="dex_touchpad_dialog_pinch_desc">Phóng to hoặc thu nhỏ.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content">Sử dụng S Pen để viết hoặc vẽ trong ứng dụng yêu thích của bạn. Khi bạn đặt S Pen lên trên màn hình điện thoại, con trỏ sẽ nhảy ngay đến điểm đó trên màn hình.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content_tablet">Sử dụng S Pen để viết hoặc vẽ trong ứng dụng yêu thích của bạn. Khi bạn đặt S Pen lên trên màn hình máy tính bảng, con trỏ sẽ nhảy ngay đến điểm đó trên màn hình.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_content">Chọn đối tượng, mở ứng dụng, kích hoạt phím và nhiều hơn nữa (bấm chuột trái).</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_content">Cuộn theo bất kỳ hướng nào.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_title">Chạm và kéo</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_title">Chạm</string>
+    <string name="dex_touchpad_dialog_spen_gesture_title">Con trỏ S Pen</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_and_hold_title">Chạm và giữ</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_content">Chọn đối tượng trên màn hình.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_content">Di chuyển đối tượng quanh màn hình hoặc chọn văn bản.</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_title">Chạm và giữ, sau đó kéo</string>
     <string name="dex_touchpad_dialog_swipe">Vuốt bằng 2 ngón tay</string>
     <string name="dex_touchpad_dialog_swipe_desc">Cuộn theo bất kỳ hướng nào.</string>
     <string name="dex_touchpad_dialog_swipe_left_right">Vuốt sang trái hoặc phải bằng 3 ngón tay</string>
@@ -1351,6 +1363,7 @@ Nếu tiếp tục, bạn có thể bị tính phí sử dụng dữ liệu."</s
     <string name="disconnect_smart_view">Ngắt kết nối Smart View?</string>
     <string name="dismiss_dialog">Đóng</string>
     <string name="dismissible_keyguard_swipe">Vuốt lên để tiếp tục</string>
+    <string name="display_disconnected_to_change_user">Đã ngắt kết nối màn hình để thay đổi người dùng.</string>
     <string name="divider_panel_app_pair_to_edge">Thêm cặp ứng dụng vào Bảng ở cạnh</string>
     <string name="divider_panel_change_layout">Thay đổi bố cục</string>
     <string name="divider_panel_rotate_clockwise">Xoay theo chiều kim đồng hồ</string>
@@ -1408,6 +1421,7 @@ Nếu tiếp tục, bạn có thể bị tính phí sử dụng dữ liệu."</s
     <string name="drop_now_to_open_in_fullscreen_view">Thả ngay để mở dưới dạng xem toàn màn hình</string>
     <string name="dropdown_menu">Trình đơn thả xuống</string>
     <string name="durationMinutes">%d phút</string>
+    <string name="dw_desktop_disabled_while_smart_view_is_in_use">Không gian làm việc trên màn hình bị ẩn khi sử dụng Smart View.</string>
     <string name="edge_feeds_preview_not_selected_tts">%s không được chọn.</string>
     <string name="edge_feeds_preview_selected_tts">%s đã được chọn.</string>
     <string name="edge_lighting_action_description">Hiệu ứng B.sáng MH cạnh một lần</string>
@@ -2623,6 +2637,7 @@ Hãy thử lại sau %2$d giây."</string>
     <string name="ksh_group_system_notifications">Thông báo</string>
     <string name="ksh_group_system_popup_view">Dạng xem pop-up</string>
     <string name="ksh_group_system_recents">Gần đây</string>
+    <string name="ksh_group_system_running_apps">Ứng dụng đang chạy</string>
     <string name="ksh_group_system_screen_off">Màn hình tắt</string>
     <string name="ksh_group_system_show_emojis">Hiển thị emoji</string>
     <string name="ksh_group_system_show_hanja_input">Hiển thị bàn phím Hán tự</string>
@@ -3174,9 +3189,13 @@ Nếu bạn có thắc mắc, hãy liên hệ với %2$s."</string>
     <string name="music_share_description_second_line">Nếu bạn và một người bạn đều có Galaxy Buds, cả hai người có thể nghe nhạc cùng nhau.</string>
     <string name="mw_caption_button_text_open_in_browser">Mở trong trình duyệt</string>
     <string name="mw_caption_button_text_remove_from_workspace">Xóa khỏi không gian làm việc</string>
+    <string name="mw_caption_button_text_restart_app">Khởi động lại ứng dụng để tối ưu bố cục</string>
     <string name="mw_caption_button_text_send_to_other_display">Gửi đến màn hình khác</string>
     <string name="mw_caption_button_text_snap_to_left">Kéo sang trái</string>
     <string name="mw_caption_button_text_snap_to_right">Kéo sang phải</string>
+    <string name="mw_desktop_drag_handle_blocked_overheat">Không gian làm việc trên màn hình bị ẩn vì điện thoại của bạn quá nóng. Không gian làm việc sẽ hoạt động trở lại khi điện thoại hạ nhiệt.</string>
+    <string name="mw_desktop_drag_handle_blocked_sw_600">Không thể chuyển ứng dụng này sang không gian làm việc trên màn hình nền vì màn hình của bạn được phóng to quá mức. Thay đổi cài đặt Thu/phóng màn hình và thử lại.</string>
+    <string name="mw_desktop_drag_handle_blocked_using_smart_view">Không thể thay đổi ứng dụng thành dạng xem trên máy tính khi đang sử dụng Smart View.</string>
     <string name="nav_bar">Thanh điều hướng</string>
     <string name="nav_bar_layout">Bố cục</string>
     <string name="navigation_menu">Trình đơn điều hướng</string>
@@ -3523,6 +3542,7 @@ Bây giờ, điện thoại sẽ tắt nguồn để hạ nhiệt."</string>
     <string name="qs_custom_action_move_to_bottom">Chuyển xuống cuối</string>
     <string name="qs_custom_action_move_to_top">Chuyển lên đầu</string>
     <string name="qs_custom_action_move_up">Di chuyển lên</string>
+    <string name="qs_custom_action_radio_button">Hộp chọn</string>
     <string name="qs_custom_action_removed_done">Đã xóa phím %s</string>
     <string name="qs_customizer_settings">Cài đặt bảng điều khiển</string>
     <string name="qs_detail_flashlight_title">Đèn pin</string>
@@ -3617,6 +3637,7 @@ Hãy thử lại sau."</string>
     <string name="qs_record_issue_label">Ghi sự cố</string>
     <string name="qs_record_issue_start">Bắt đầu</string>
     <string name="qs_record_issue_stop">Dừng</string>
+    <string name="qs_reset_complete">Đặt lại hoàn tất.</string>
     <string name="qs_sensor_privacy_dialog_cancel">Thoát</string>
     <string name="qs_sensor_privacy_dialog_turn_on">Bật</string>
     <string name="qs_sensor_privacy_dialog_unblock">Bỏ chặn</string>
@@ -3897,7 +3918,6 @@ Tắt Hồ sơ công việc để sử dụng máy tính bảng mà không bị 
     <string name="retail_demo_reset_title">Yêu cầu mật khẩu</string>
     <string name="retry_face">Thử xác thực lại khuôn mặt</string>
     <string name="reverse_folding_alert_view_warning_text">Mở điện thoại và gập từ bên trái.</string>
-    <string name="reverse_folding_order_guide_text">Gập phía bên trái trước.</string>
     <string name="right_icon">Biểu tượng bên phải</string>
     <string name="right_keycode">Mã phím bên phải</string>
     <string name="right_nav_bar_button_type">Loại nút bổ sung bên phải</string>
@@ -4117,6 +4137,7 @@ Tắt Hồ sơ công việc để sử dụng máy tính bảng mà không bị 
     <string name="sec_decor_button_text_caption_pin">Ghim menu tùy chọn lên đầu</string>
     <string name="sec_decor_button_text_caption_unpin">Bỏ ghim menu tùy chọn</string>
     <string name="sec_decor_button_text_close">Đóng</string>
+    <string name="sec_decor_button_text_enter_full_screen">Toàn màn hình</string>
     <string name="sec_decor_button_text_exit_full_screen">Thoát chế độ toàn màn hình</string>
     <string name="sec_decor_button_text_freeform">Mở ở dạng xem pop-up</string>
     <string name="sec_decor_button_text_maximize">Phóng to</string>
@@ -4132,6 +4153,7 @@ Tắt Hồ sơ công việc để sử dụng máy tính bảng mà không bị 
     <string name="sec_decor_button_text_window_pin">Ghim cửa sổ lên đầu</string>
     <string name="sec_decor_button_text_window_unpin">Bỏ ghim cửa sổ</string>
     <string name="sec_decor_handle_text">Tùy chọn nhanh</string>
+    <string name="sec_decor_window_handle">Nút cửa sổ</string>
     <string name="sec_default_app">Đặt làm mặc định</string>
     <string name="sec_devices_and_media_control">Phím Điều khiển thiết bị và Đầu ra media</string>
     <string name="sec_dlg_turn_on">Bật</string>

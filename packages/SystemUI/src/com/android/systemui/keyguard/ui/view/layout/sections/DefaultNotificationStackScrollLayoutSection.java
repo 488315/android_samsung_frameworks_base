@@ -1,6 +1,7 @@
 package com.android.systemui.keyguard.ui.view.layout.sections;
 
 import android.content.Context;
+import android.content.res.Resources;
 import androidx.constraintlayout.widget.ConstraintSet;
 import com.android.systemui.R;
 import com.android.systemui.shade.LargeScreenHeaderHelper;
@@ -10,7 +11,6 @@ import com.android.systemui.statusbar.notification.stack.ui.viewbinder.SharedNot
 import com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel;
 import dagger.Lazy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DefaultNotificationStackScrollLayoutSection extends NotificationStackScrollLayoutSection {
     public final Lazy largeScreenHeaderHelperLazy;
@@ -21,7 +21,7 @@ public final class DefaultNotificationStackScrollLayoutSection extends Notificat
     }
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
-    public final void applyConstraints(ConstraintSet constraintSet) {
+    public final void applyConstraints(ConstraintSet constraintSet) throws Resources.NotFoundException {
         int dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R.dimen.keyguard_status_view_bottom_margin);
         boolean z = this.context.getResources().getBoolean(R.bool.config_use_large_screen_shade_header);
         int largeScreenHeaderHeight = ((LargeScreenHeaderHelper) this.largeScreenHeaderHelperLazy.get()).getLargeScreenHeaderHeight();

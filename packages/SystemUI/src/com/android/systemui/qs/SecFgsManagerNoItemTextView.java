@@ -9,14 +9,12 @@ import com.android.systemui.res.R$styleable;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecFgsManagerNoItemTextView extends TextView {
     public float currentFontScale;
     public float maxFontScale;
     public float originalTextSize;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -39,11 +37,11 @@ public class SecFgsManagerNoItemTextView extends TextView {
 
     public final void init(Context context, AttributeSet attributeSet) {
         this.originalTextSize = getTextSize();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.QSTextView);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.QSTextView);
         try {
-            this.maxFontScale = obtainStyledAttributes.getFloat(0, 1.3f);
+            this.maxFontScale = typedArrayObtainStyledAttributes.getFloat(0, 1.3f);
             Unit unit = Unit.INSTANCE;
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             float f = context.getResources().getConfiguration().fontScale;
             float f2 = this.maxFontScale;
             if (f > f2) {
@@ -55,7 +53,7 @@ public class SecFgsManagerNoItemTextView extends TextView {
             this.currentFontScale = f;
             setTextSize(0, this.originalTextSize * f);
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

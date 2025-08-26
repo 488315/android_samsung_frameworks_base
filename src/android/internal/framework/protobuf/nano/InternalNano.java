@@ -170,26 +170,26 @@ public final class InternalNano {
 
     public static int hashCode(byte[][] bArr) {
         int length = bArr == null ? 0 : bArr.length;
-        int i = 0;
-        for (int i2 = 0; i2 < length; i2++) {
-            byte[] bArr2 = bArr[i2];
+        int iHashCode = 0;
+        for (int i = 0; i < length; i++) {
+            byte[] bArr2 = bArr[i];
             if (bArr2 != null) {
-                i = (i * 31) + Arrays.hashCode(bArr2);
+                iHashCode = (iHashCode * 31) + Arrays.hashCode(bArr2);
             }
         }
-        return i;
+        return iHashCode;
     }
 
     public static int hashCode(Object[] objArr) {
         int length = objArr == null ? 0 : objArr.length;
-        int i = 0;
-        for (int i2 = 0; i2 < length; i2++) {
-            Object obj = objArr[i2];
+        int iHashCode = 0;
+        for (int i = 0; i < length; i++) {
+            Object obj = objArr[i];
             if (obj != null) {
-                i = (i * 31) + obj.hashCode();
+                iHashCode = (iHashCode * 31) + obj.hashCode();
             }
         }
-        return i;
+        return iHashCode;
     }
 
     private static Object primitiveDefaultValue(int i) {
@@ -226,36 +226,36 @@ public final class InternalNano {
 
     /* JADX WARN: Multi-variable type inference failed */
     public static final <K, V> Map<K, V> mergeMapEntry(CodedInputByteBufferNano codedInputByteBufferNano, Map<K, V> map, MapFactories.MapFactory mapFactory, int i, int i2, V v, int i3, int i4) throws IOException {
-        Map<K, V> forMap = mapFactory.forMap(map);
-        int pushLimit = codedInputByteBufferNano.pushLimit(codedInputByteBufferNano.readRawVarint32());
-        Object obj = null;
+        Map<K, V> mapForMap = mapFactory.forMap(map);
+        int iPushLimit = codedInputByteBufferNano.pushLimit(codedInputByteBufferNano.readRawVarint32());
+        Object objPrimitiveDefaultValue = null;
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == i3) {
-                obj = codedInputByteBufferNano.readPrimitiveField(i);
-            } else if (readTag == i4) {
+            if (tag == i3) {
+                objPrimitiveDefaultValue = codedInputByteBufferNano.readPrimitiveField(i);
+            } else if (tag == i4) {
                 if (i2 == 11) {
                     codedInputByteBufferNano.readMessage(v);
                 } else {
                     v = (V) codedInputByteBufferNano.readPrimitiveField(i2);
                 }
-            } else if (!codedInputByteBufferNano.skipField(readTag)) {
+            } else if (!codedInputByteBufferNano.skipField(tag)) {
                 break;
             }
         }
         codedInputByteBufferNano.checkLastTagWas(0);
-        codedInputByteBufferNano.popLimit(pushLimit);
-        if (obj == null) {
-            obj = primitiveDefaultValue(i);
+        codedInputByteBufferNano.popLimit(iPushLimit);
+        if (objPrimitiveDefaultValue == null) {
+            objPrimitiveDefaultValue = primitiveDefaultValue(i);
         }
         if (v == 0) {
             v = primitiveDefaultValue(i2);
         }
-        forMap.put(obj, v);
-        return forMap;
+        mapForMap.put(objPrimitiveDefaultValue, v);
+        return mapForMap;
     }
 
     public static <K, V> void serializeMapField(CodedOutputByteBufferNano codedOutputByteBufferNano, Map<K, V> map, int i, int i2, int i3) throws IOException {
@@ -265,27 +265,27 @@ public final class InternalNano {
             if (key == null || value == null) {
                 throw new IllegalStateException("keys and values in maps cannot be null");
             }
-            int computeFieldSize = CodedOutputByteBufferNano.computeFieldSize(1, i2, key) + CodedOutputByteBufferNano.computeFieldSize(2, i3, value);
+            int iComputeFieldSize = CodedOutputByteBufferNano.computeFieldSize(1, i2, key) + CodedOutputByteBufferNano.computeFieldSize(2, i3, value);
             codedOutputByteBufferNano.writeTag(i, 2);
-            codedOutputByteBufferNano.writeRawVarint32(computeFieldSize);
+            codedOutputByteBufferNano.writeRawVarint32(iComputeFieldSize);
             codedOutputByteBufferNano.writeField(1, i2, key);
             codedOutputByteBufferNano.writeField(2, i3, value);
         }
     }
 
     public static <K, V> int computeMapFieldSize(Map<K, V> map, int i, int i2, int i3) {
-        int computeTagSize = CodedOutputByteBufferNano.computeTagSize(i);
-        int i4 = 0;
+        int iComputeTagSize = CodedOutputByteBufferNano.computeTagSize(i);
+        int iComputeRawVarint32Size = 0;
         for (Map.Entry<K, V> entry : map.entrySet()) {
             K key = entry.getKey();
             V value = entry.getValue();
             if (key == null || value == null) {
                 throw new IllegalStateException("keys and values in maps cannot be null");
             }
-            int computeFieldSize = CodedOutputByteBufferNano.computeFieldSize(1, i2, key) + CodedOutputByteBufferNano.computeFieldSize(2, i3, value);
-            i4 += computeTagSize + computeFieldSize + CodedOutputByteBufferNano.computeRawVarint32Size(computeFieldSize);
+            int iComputeFieldSize = CodedOutputByteBufferNano.computeFieldSize(1, i2, key) + CodedOutputByteBufferNano.computeFieldSize(2, i3, value);
+            iComputeRawVarint32Size += iComputeTagSize + iComputeFieldSize + CodedOutputByteBufferNano.computeRawVarint32Size(iComputeFieldSize);
         }
-        return i4;
+        return iComputeRawVarint32Size;
     }
 
     public static <K, V> boolean equals(Map<K, V> map, Map<K, V> map2) {
@@ -320,14 +320,14 @@ public final class InternalNano {
     }
 
     public static <K, V> int hashCode(Map<K, V> map) {
-        int i = 0;
+        int iHashCodeForMap = 0;
         if (map == null) {
             return 0;
         }
         for (Map.Entry<K, V> entry : map.entrySet()) {
-            i += hashCodeForMap(entry.getValue()) ^ hashCodeForMap(entry.getKey());
+            iHashCodeForMap += hashCodeForMap(entry.getValue()) ^ hashCodeForMap(entry.getKey());
         }
-        return i;
+        return iHashCodeForMap;
     }
 
     private static int hashCodeForMap(Object obj) {
@@ -339,7 +339,7 @@ public final class InternalNano {
 
     public static void cloneUnknownFieldData(ExtendableMessageNano extendableMessageNano, ExtendableMessageNano extendableMessageNano2) {
         if (extendableMessageNano.unknownFieldData != null) {
-            extendableMessageNano2.unknownFieldData = extendableMessageNano.unknownFieldData.m2268clone();
+            extendableMessageNano2.unknownFieldData = extendableMessageNano.unknownFieldData.m2274clone();
         }
     }
 }

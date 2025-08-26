@@ -6,11 +6,9 @@ import com.android.systemui.haptics.slider.compose.ui.SliderHapticsViewModel;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface Haptics {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Disabled implements Haptics {
         public static final Disabled INSTANCE = new Disabled();
 
@@ -30,7 +28,6 @@ public interface Haptics {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Enabled implements Haptics {
         public final SliderHapticFeedbackFilter hapticFilter;
         public final SliderHapticsViewModel.Factory hapticsViewModelFactory;

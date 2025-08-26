@@ -69,9 +69,9 @@ public interface IDisplayHashingService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDisplayHashingService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDisplayHashingService)) {
-                return (IDisplayHashingService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDisplayHashingService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDisplayHashingService)) {
+                return (IDisplayHashingService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -107,19 +107,19 @@ public interface IDisplayHashingService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 HardwareBuffer hardwareBuffer = (HardwareBuffer) parcel.readTypedObject(HardwareBuffer.CREATOR);
                 Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                generateDisplayHash(createByteArray, hardwareBuffer, rect, readString, remoteCallback);
+                generateDisplayHash(bArrCreateByteArray, hardwareBuffer, rect, string, remoteCallback);
             } else if (i == 2) {
-                byte[] createByteArray2 = parcel.createByteArray();
+                byte[] bArrCreateByteArray2 = parcel.createByteArray();
                 DisplayHash displayHash = (DisplayHash) parcel.readTypedObject(DisplayHash.CREATOR);
                 RemoteCallback remoteCallback2 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                verifyDisplayHash(createByteArray2, displayHash, remoteCallback2);
+                verifyDisplayHash(bArrCreateByteArray2, displayHash, remoteCallback2);
             } else if (i == 3) {
                 RemoteCallback remoteCallback3 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -152,55 +152,55 @@ public interface IDisplayHashingService extends IInterface {
 
             @Override // android.service.displayhash.IDisplayHashingService
             public void generateDisplayHash(byte[] bArr, HardwareBuffer hardwareBuffer, Rect rect, String str, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedObject(hardwareBuffer, 0);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedObject(hardwareBuffer, 0);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.displayhash.IDisplayHashingService
             public void verifyDisplayHash(byte[] bArr, DisplayHash displayHash, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedObject(displayHash, 0);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedObject(displayHash, 0);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.displayhash.IDisplayHashingService
             public void getDisplayHashAlgorithms(RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.displayhash.IDisplayHashingService
             public void getIntervalBetweenRequestsMillis(RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.android.systemui.statusbar.phone;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -22,6 +23,8 @@ import com.android.systemui.deviceentry.shared.FaceAuthUiEvent;
 import com.android.systemui.doze.AODOverlayContainer;
 import com.android.systemui.doze.DozeHost;
 import com.android.systemui.doze.DozeLog;
+import com.android.systemui.doze.DozeLogger;
+import com.android.systemui.doze.DozeLogger$$ExternalSyntheticLambda3;
 import com.android.systemui.doze.DozeUi;
 import com.android.systemui.doze.PluginAODManager;
 import com.android.systemui.keyguard.KeyguardFastBioUnlockController;
@@ -60,7 +63,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.function.LongConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DozeServiceHost implements DozeHost {
     public AODOverlayContainer mAODOverlayContainer;
@@ -102,7 +104,6 @@ public final class DozeServiceHost implements DozeHost {
     boolean mWakeLockScreenPerformsAuth;
     public final WakefulnessLifecycle mWakefulnessLifecycle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.DozeServiceHost$1, reason: invalid class name */
     public class AnonymousClass1 implements DozeHost.PulseCallback {
         public final /* synthetic */ DozeHost.PulseCallback val$callback;
@@ -159,9 +160,9 @@ public final class DozeServiceHost implements DozeHost {
                 LogLevel logLevel = LogLevel.DEBUG;
                 KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3 = new KeyguardUpdateMonitorLogger$$ExternalSyntheticLambda3(23);
                 LogBuffer logBuffer = keyguardUpdateMonitorLogger.logBuffer;
-                LogMessage obtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
-                ((LogMessageImpl) obtain).bool1 = z;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("KeyguardUpdateMonitorLog", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda3, null);
+                ((LogMessageImpl) logMessageObtain).bool1 = z;
+                logBuffer.commit(logMessageObtain);
                 if (keyguardUpdateMonitor.mAuthInterruptActive != z) {
                     keyguardUpdateMonitor.mAuthInterruptActive = z;
                     keyguardUpdateMonitor.updateFaceListeningState(2, FaceAuthUiEvent.FACE_AUTH_TRIGGERED_ON_REACH_GESTURE_ON_AOD);
@@ -179,7 +180,6 @@ public final class DozeServiceHost implements DozeHost {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface HasPendingScreenOffCallbackChangeListener {
         void onHasPendingScreenOffCallbackChanged(boolean z);
     }
@@ -195,9 +195,9 @@ public final class DozeServiceHost implements DozeHost {
             @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
             public final void onHeadsUpStateChanged(NotificationEntry notificationEntry, boolean z) {
                 DozeServiceHost dozeServiceHost = DozeServiceHost.this;
-                boolean isDozing = dozeServiceHost.mStatusBarStateController.isDozing();
+                boolean zIsDozing = dozeServiceHost.mStatusBarStateController.isDozing();
                 DozeScrimController dozeScrimController2 = dozeServiceHost.mDozeScrimController;
-                if (isDozing && z) {
+                if (zIsDozing && z) {
                     notificationEntry.getClass();
                     DozeServiceHost$$ExternalSyntheticLambda3 dozeServiceHost$$ExternalSyntheticLambda3 = new DozeServiceHost$$ExternalSyntheticLambda3(dozeServiceHost, notificationEntry);
                     Assert.isMainThread();
@@ -273,7 +273,7 @@ public final class DozeServiceHost implements DozeHost {
         return null;
     }
 
-    public final void pulseWhileDozing(DozeUi.AnonymousClass2 anonymousClass2, int i) {
+    public final void pulseWhileDozing(DozeUi.AnonymousClass2 anonymousClass2, int i) throws PackageManager.NameNotFoundException {
         if (i == 5) {
             this.mPowerManager.wakeUp(SystemClock.uptimeMillis(), 4, "com.android.systemui:LONG_PRESS");
             ((AssistManager) this.mAssistManagerLazy.get()).startAssist(new Bundle());
@@ -303,77 +303,38 @@ public final class DozeServiceHost implements DozeHost {
         this.mCentralSurfaces.updateScrimController();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0069, code lost:
-    
-        if (r7.mState == com.android.systemui.statusbar.phone.ScrimState.PULSING) goto L15;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void setAodDimmingScrim(float r8) {
-        /*
-            r7 = this;
-            long r0 = (long) r8
-            com.android.systemui.doze.DozeLog r2 = r7.mDozeLog
-            com.android.systemui.doze.DozeLogger r2 = r2.mLogger
-            r2.getClass()
-            com.android.systemui.log.core.LogLevel r3 = com.android.systemui.log.core.LogLevel.INFO
-            com.android.systemui.doze.DozeLogger$$ExternalSyntheticLambda3 r4 = new com.android.systemui.doze.DozeLogger$$ExternalSyntheticLambda3
-            r5 = 0
-            r4.<init>(r5)
-            java.lang.String r5 = "DozeLog"
-            com.android.systemui.log.LogBuffer r2 = r2.buffer
-            r6 = 0
-            com.android.systemui.log.core.LogMessage r3 = r2.obtain(r5, r3, r4, r6)
-            r4 = r3
-            com.android.systemui.log.LogMessageImpl r4 = (com.android.systemui.log.LogMessageImpl) r4
-            r4.long1 = r0
-            r2.commit(r3)
-            com.android.systemui.statusbar.phone.ScrimController r7 = r7.mScrimController
-            com.android.systemui.statusbar.phone.SecLsScrimControlHelper r0 = r7.mSecLsScrimControlHelper
-            r0.getClass()
-            int r1 = com.android.systemui.keyguard.KeyguardFastBioUnlockController.MODE_FLAG_ENABLED
-            com.android.systemui.keyguard.KeyguardFastBioUnlockController r0 = r0.mKeyguardFastBioUnlockController
-            boolean r0 = r0.isMode(r1)
-            if (r0 == 0) goto L4c
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            java.lang.String r0 = "setAodFrontScrimAlpha: alpha="
-            r7.<init>(r0)
-            r7.append(r8)
-            java.lang.String r8 = " skip setAodFrontScrimAlpha"
-            r7.append(r8)
-            java.lang.String r7 = r7.toString()
-            java.lang.String r8 = "ScrimController"
-            android.util.Log.d(r8, r7)
-            return
-        L4c:
-            float r0 = r7.mInFrontAlpha
-            int r0 = (r0 > r8 ? 1 : (r0 == r8 ? 0 : -1))
-            if (r0 == 0) goto L70
-            com.android.systemui.statusbar.phone.ScrimState r0 = r7.mState
-            com.android.systemui.statusbar.phone.ScrimState r1 = com.android.systemui.statusbar.phone.ScrimState.AOD
-            if (r0 != r1) goto L65
-            com.android.systemui.statusbar.phone.DozeParameters r0 = r7.mDozeParameters
-            boolean r0 = r0.getAlwaysOn()
-            if (r0 != 0) goto L6b
-            com.android.systemui.dock.DockManager r0 = r7.mDockManager
-            r0.getClass()
-        L65:
-            com.android.systemui.statusbar.phone.ScrimState r0 = r7.mState
-            com.android.systemui.statusbar.phone.ScrimState r1 = com.android.systemui.statusbar.phone.ScrimState.PULSING
-            if (r0 != r1) goto L70
-        L6b:
-            r7.mInFrontAlpha = r8
-            r7.updateScrims()
-        L70:
-            com.android.systemui.statusbar.phone.ScrimState r7 = com.android.systemui.statusbar.phone.ScrimState.AOD
-            r7.mAodFrontScrimAlpha = r8
-            com.android.systemui.statusbar.phone.ScrimState r7 = com.android.systemui.statusbar.phone.ScrimState.PULSING
-            r7.mAodFrontScrimAlpha = r8
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.DozeServiceHost.setAodDimmingScrim(float):void");
+    public final void setAodDimmingScrim(float f) {
+        DozeLogger dozeLogger = this.mDozeLog.mLogger;
+        dozeLogger.getClass();
+        LogLevel logLevel = LogLevel.INFO;
+        DozeLogger$$ExternalSyntheticLambda3 dozeLogger$$ExternalSyntheticLambda3 = new DozeLogger$$ExternalSyntheticLambda3(0);
+        LogBuffer logBuffer = dozeLogger.buffer;
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
+        ((LogMessageImpl) logMessageObtain).long1 = (long) f;
+        logBuffer.commit(logMessageObtain);
+        ScrimController scrimController = this.mScrimController;
+        SecLsScrimControlHelper secLsScrimControlHelper = scrimController.mSecLsScrimControlHelper;
+        secLsScrimControlHelper.getClass();
+        if (secLsScrimControlHelper.mKeyguardFastBioUnlockController.isMode(KeyguardFastBioUnlockController.MODE_FLAG_ENABLED)) {
+            Log.d("ScrimController", "setAodFrontScrimAlpha: alpha=" + f + " skip setAodFrontScrimAlpha");
+            return;
+        }
+        if (scrimController.mInFrontAlpha != f) {
+            if (scrimController.mState == ScrimState.AOD) {
+                if (!scrimController.mDozeParameters.getAlwaysOn()) {
+                    scrimController.mDockManager.getClass();
+                    if (scrimController.mState == ScrimState.PULSING) {
+                    }
+                }
+                scrimController.mInFrontAlpha = f;
+                scrimController.updateScrims();
+            } else if (scrimController.mState == ScrimState.PULSING) {
+                scrimController.mInFrontAlpha = f;
+                scrimController.updateScrims();
+            }
+        }
+        ScrimState.AOD.mAodFrontScrimAlpha = f;
+        ScrimState.PULSING.mAodFrontScrimAlpha = f;
     }
 
     public final void stopDozing() {
@@ -392,11 +353,11 @@ public final class DozeServiceHost implements DozeHost {
     public final void updateDozing() {
         Assert.isMainThread();
         boolean z = Rune.SYSUI_UI_THREAD_MONITOR;
-        int i = -1;
+        int iStartTime = -1;
         if (z && ((LooperSlowLogControllerImpl) this.mLooperSlowLogController).isEnabled()) {
-            i = LogUtil.startTime(-1);
+            iStartTime = LogUtil.startTime(-1);
         }
-        int i2 = SceneContainerFlag.$r8$clinit;
+        int i = SceneContainerFlag.$r8$clinit;
         final boolean z2 = this.mDozingRequested && this.mStatusBarStateController.getState() == 1;
         if (((BiometricUnlockController) this.mBiometricUnlockControllerLazy.get()).mMode == 1 || ((KeyguardFastBioUnlockController) Dependency.sDependency.getDependencyInner(KeyguardFastBioUnlockController.class)).isFastWakeAndUnlockMode()) {
             z2 = false;
@@ -405,15 +366,15 @@ public final class DozeServiceHost implements DozeHost {
             Log.d("DozeServiceHost", "updateDozing set dozing false (dozing true, setDozing to false)");
             z2 = false;
         }
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("updateDozing dozing = ", " / dozingRequested = ", z2);
-        m.append(this.mDozingRequested);
-        m.append(" / state = ");
-        m.append(StatusBarState.toString(this.mStatusBarStateController.getState()));
-        m.append(" mode = ");
-        RecyclerView$$ExternalSyntheticOutline0.m(((BiometricUnlockController) this.mBiometricUnlockControllerLazy.get()).mMode, "DozeServiceHost", m);
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("updateDozing dozing = ", " / dozingRequested = ", z2);
+        sbM.append(this.mDozingRequested);
+        sbM.append(" / state = ");
+        sbM.append(StatusBarState.toString(this.mStatusBarStateController.getState()));
+        sbM.append(" mode = ");
+        RecyclerView$$ExternalSyntheticOutline0.m(((BiometricUnlockController) this.mBiometricUnlockControllerLazy.get()).mMode, "DozeServiceHost", sbM);
         ((PluginAODManager) this.mPluginAODManagerLazy.get()).setIsDozing(z2, ((BiometricUnlockController) this.mBiometricUnlockControllerLazy.get()).mMode == 1);
-        if (z && i >= 0) {
-            LogUtil.lapTime(i, new LongConsumer() { // from class: com.android.systemui.statusbar.phone.DozeServiceHost$$ExternalSyntheticLambda1
+        if (z && iStartTime >= 0) {
+            LogUtil.lapTime(iStartTime, new LongConsumer() { // from class: com.android.systemui.statusbar.phone.DozeServiceHost$$ExternalSyntheticLambda1
                 @Override // java.util.function.LongConsumer
                 public final void accept(long j) {
                     boolean z3 = z2;
@@ -436,15 +397,15 @@ public final class DozeServiceHost implements DozeHost {
                     try {
                         ArrayList arrayList = new ArrayList(statusBarStateControllerImpl.mListeners);
                         int size = arrayList.size();
-                        int i3 = 0;
-                        while (i3 < size) {
-                            Object obj = arrayList.get(i3);
-                            i3++;
+                        int i2 = 0;
+                        while (i2 < size) {
+                            Object obj = arrayList.get(i2);
+                            i2++;
                             final SysuiStatusBarStateController.RankedListener rankedListener = (SysuiStatusBarStateController.RankedListener) obj;
                             LogUtil.execTime(new Runnable() { // from class: com.android.systemui.statusbar.StatusBarStateControllerImpl$$ExternalSyntheticLambda2
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    SysuiStatusBarStateController.RankedListener rankedListener2 = SysuiStatusBarStateController.RankedListener.this;
+                                    SysuiStatusBarStateController.RankedListener rankedListener2 = rankedListener;
                                     boolean z3 = z2;
                                     Comparator comparator = StatusBarStateControllerImpl.sComparator;
                                     rankedListener2.mListener.onDozingChanged(z3);
@@ -457,25 +418,25 @@ public final class DozeServiceHost implements DozeHost {
             } else {
                 synchronized (statusBarStateControllerImpl.mListeners) {
                     try {
-                        String concat = statusBarStateControllerImpl.getClass().getSimpleName().concat("#setIsDozing");
-                        DejankUtils.startDetectingBlockingIpcs(concat);
+                        String strConcat = statusBarStateControllerImpl.getClass().getSimpleName().concat("#setIsDozing");
+                        DejankUtils.startDetectingBlockingIpcs(strConcat);
                         ArrayList arrayList2 = new ArrayList(statusBarStateControllerImpl.mListeners);
                         int size2 = arrayList2.size();
-                        int i4 = 0;
-                        while (i4 < size2) {
-                            Object obj2 = arrayList2.get(i4);
-                            i4++;
+                        int i3 = 0;
+                        while (i3 < size2) {
+                            Object obj2 = arrayList2.get(i3);
+                            i3++;
                             ((SysuiStatusBarStateController.RankedListener) obj2).mListener.onDozingChanged(z2);
                         }
-                        DejankUtils.stopDetectingBlockingIpcs(concat);
+                        DejankUtils.stopDetectingBlockingIpcs(strConcat);
                     } finally {
                     }
                 }
             }
         }
-        if (!Rune.SYSUI_UI_THREAD_MONITOR || i < 0) {
+        if (!Rune.SYSUI_UI_THREAD_MONITOR || iStartTime < 0) {
             return;
         }
-        LogUtil.endTime(i, 10, "LooperSlow", "updateDozing end", new Object[0]);
+        LogUtil.endTime(iStartTime, 10, "LooperSlow", "updateDozing end", new Object[0]);
     }
 }

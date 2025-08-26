@@ -2044,7 +2044,7 @@ Escuchar sonidos fuertes durante mucho tiempo puede dañar los oídos."</string>
     <string name="satellite_notification_manual_title">¿Usar mensajes por satélite?</string>
     <string name="satellite_notification_open_message">Abre Mensajes</string>
     <string name="satellite_notification_summary">Puedes enviar y recibir mensajes sin una red móvil o Wi-Fi</string>
-    <string name="satellite_notification_summary_with_data">Puedes enviar y recibir mensajes y usar datos limitados por satélite</string>
+    <string name="satellite_notification_summary_with_data">Puedes enviar y recibir mensajes y usar algunas aplicaciones por satélite</string>
     <string name="satellite_notification_title">Conectado automáticamente al satélite</string>
     <string name="satellite_sos_available_notification_summary">Puedes enviar mensajes a los servicios de emergencias si no hay una red móvil o Wi-Fi disponible. Mensajes de Google debe ser tu aplicación de mensajería predeterminada.</string>
     <string name="satellite_sos_available_notification_title">SOS por satélite ya está disponible</string>

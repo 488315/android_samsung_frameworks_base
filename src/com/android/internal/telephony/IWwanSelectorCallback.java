@@ -59,9 +59,9 @@ public interface IWwanSelectorCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWwanSelectorCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWwanSelectorCallback)) {
-                return (IWwanSelectorCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWwanSelectorCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWwanSelectorCallback)) {
+                return (IWwanSelectorCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,17 +94,17 @@ public interface IWwanSelectorCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int[] createIntArray = parcel.createIntArray();
-                int readInt = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
-                IWwanSelectorResultCallback asInterface = IWwanSelectorResultCallback.Stub.asInterface(parcel.readStrongBinder());
+                int[] iArrCreateIntArray = parcel.createIntArray();
+                int i3 = parcel.readInt();
+                boolean z = parcel.readBoolean();
+                IWwanSelectorResultCallback iWwanSelectorResultCallbackAsInterface = IWwanSelectorResultCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onRequestEmergencyNetworkScan(createIntArray, readInt, readBoolean, asInterface);
+                onRequestEmergencyNetworkScan(iArrCreateIntArray, i3, z, iWwanSelectorResultCallbackAsInterface);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                boolean readBoolean2 = parcel.readBoolean();
+                int i4 = parcel.readInt();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onDomainSelected(readInt2, readBoolean2);
+                onDomainSelected(i4, z2);
             } else if (i == 3) {
                 onCancel();
             } else {
@@ -131,40 +131,40 @@ public interface IWwanSelectorCallback extends IInterface {
 
             @Override // com.android.internal.telephony.IWwanSelectorCallback
             public void onRequestEmergencyNetworkScan(int[] iArr, int i, boolean z, IWwanSelectorResultCallback iWwanSelectorResultCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWwanSelectorCallback.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iWwanSelectorResultCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWwanSelectorCallback.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iWwanSelectorResultCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IWwanSelectorCallback
             public void onDomainSelected(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWwanSelectorCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWwanSelectorCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telephony.IWwanSelectorCallback
             public void onCancel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWwanSelectorCallback.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWwanSelectorCallback.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

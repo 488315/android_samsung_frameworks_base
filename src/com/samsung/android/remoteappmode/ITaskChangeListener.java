@@ -72,9 +72,9 @@ public interface ITaskChangeListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITaskChangeListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITaskChangeListener)) {
-                return (ITaskChangeListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITaskChangeListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITaskChangeListener)) {
+                return (ITaskChangeListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -113,24 +113,24 @@ public interface ITaskChangeListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onTaskRemoved(readInt);
+                onTaskRemoved(i3);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onTaskPlayed(readInt2, readInt3);
+                onTaskPlayed(i4, i5);
             } else if (i == 3) {
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onTaskTriedToGoToBackground(readInt4, readInt5);
+                onTaskTriedToGoToBackground(i6, i7);
             } else if (i == 4) {
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                int i9 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onTaskDisplayChanged(readInt6, readInt7);
+                onTaskDisplayChanged(i8, i9);
             } else if (i == 5) {
                 onRecentTaskListUpdated();
             } else {
@@ -157,63 +157,63 @@ public interface ITaskChangeListener extends IInterface {
 
             @Override // com.samsung.android.remoteappmode.ITaskChangeListener
             public void onTaskRemoved(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.ITaskChangeListener
             public void onTaskPlayed(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.ITaskChangeListener
             public void onTaskTriedToGoToBackground(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.ITaskChangeListener
             public void onTaskDisplayChanged(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.remoteappmode.ITaskChangeListener
             public void onRecentTaskListUpdated() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

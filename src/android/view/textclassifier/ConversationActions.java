@@ -213,12 +213,12 @@ public final class ConversationActions implements Parcelable {
             ArrayList arrayList = new ArrayList();
             parcel.readParcelableList(arrayList, null, Message.class);
             TextClassifier.EntityConfig entityConfig = (TextClassifier.EntityConfig) parcel.readParcelable(null, TextClassifier.EntityConfig.class);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             ArrayList arrayList2 = new ArrayList();
             parcel.readStringList(arrayList2);
-            Bundle readBundle = parcel.readBundle();
+            Bundle bundle = parcel.readBundle();
             SystemTextClassifierMetadata systemTextClassifierMetadata = (SystemTextClassifierMetadata) parcel.readParcelable(null, SystemTextClassifierMetadata.class);
-            Request request = new Request(arrayList, entityConfig, readInt, arrayList2, readBundle);
+            Request request = new Request(arrayList, entityConfig, i, arrayList2, bundle);
             request.setSystemTextClassifierMetadata(systemTextClassifierMetadata);
             return request;
         }
@@ -304,24 +304,24 @@ public final class ConversationActions implements Parcelable {
             }
 
             public Request build() {
-                List unmodifiableList;
-                List unmodifiableList2 = Collections.unmodifiableList(this.mConversation);
-                TextClassifier.EntityConfig entityConfig = this.mTypeConfig;
-                if (entityConfig == null) {
-                    entityConfig = new TextClassifier.EntityConfig.Builder().build();
+                List listUnmodifiableList;
+                List listUnmodifiableList2 = Collections.unmodifiableList(this.mConversation);
+                TextClassifier.EntityConfig entityConfigBuild = this.mTypeConfig;
+                if (entityConfigBuild == null) {
+                    entityConfigBuild = new TextClassifier.EntityConfig.Builder().build();
                 }
                 int i = this.mMaxSuggestions;
                 List<String> list = this.mHints;
                 if (list == null) {
-                    unmodifiableList = Collections.EMPTY_LIST;
+                    listUnmodifiableList = Collections.EMPTY_LIST;
                 } else {
-                    unmodifiableList = Collections.unmodifiableList(list);
+                    listUnmodifiableList = Collections.unmodifiableList(list);
                 }
                 Bundle bundle = this.mExtras;
                 if (bundle == null) {
                     bundle = Bundle.EMPTY;
                 }
-                return new Request(unmodifiableList2, entityConfig, i, unmodifiableList, bundle);
+                return new Request(listUnmodifiableList2, entityConfigBuild, i, listUnmodifiableList, bundle);
             }
         }
     }

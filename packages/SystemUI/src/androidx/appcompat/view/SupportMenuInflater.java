@@ -29,11 +29,11 @@ import androidx.core.view.ActionProvider;
 import com.samsung.android.knox.custom.CustomDeviceManager;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SupportMenuInflater extends MenuInflater {
     public static final Class[] ACTION_PROVIDER_CONSTRUCTOR_SIGNATURE;
@@ -43,7 +43,6 @@ public class SupportMenuInflater extends MenuInflater {
     public final Context mContext;
     public Object mRealOwner;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InflatedOnMenuItemClickListener implements MenuItem.OnMenuItemClickListener {
         public static final Class[] PARAM_TYPES = {MenuItem.class};
         public final Method mMethod;
@@ -55,16 +54,16 @@ public class SupportMenuInflater extends MenuInflater {
             try {
                 this.mMethod = cls.getMethod(str, PARAM_TYPES);
             } catch (Exception e) {
-                StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Couldn't resolve menu item onClick handler ", str, " in class ");
-                m.append(cls.getName());
-                InflateException inflateException = new InflateException(m.toString());
+                StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Couldn't resolve menu item onClick handler ", str, " in class ");
+                sbM.append(cls.getName());
+                InflateException inflateException = new InflateException(sbM.toString());
                 inflateException.initCause(e);
                 throw inflateException;
             }
         }
 
         @Override // android.view.MenuItem.OnMenuItemClickListener
-        public final boolean onMenuItemClick(MenuItem menuItem) {
+        public final boolean onMenuItemClick(MenuItem menuItem) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             try {
                 if (this.mMethod.getReturnType() == Boolean.TYPE) {
                     return ((Boolean) this.mMethod.invoke(this.mRealOwner, menuItem)).booleanValue();
@@ -77,7 +76,6 @@ public class SupportMenuInflater extends MenuInflater {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MenuState {
         public ActionProvider itemActionProvider;
         public String itemActionViewClassName;
@@ -114,7 +112,7 @@ public class SupportMenuInflater extends MenuInflater {
             this.menu = menu;
         }
 
-        public final Object newInstance(String str, Class[] clsArr, Object[] objArr) {
+        public final Object newInstance(String str, Class[] clsArr, Object[] objArr) throws NoSuchMethodException, SecurityException {
             try {
                 Constructor<?> constructor = Class.forName(str, false, SupportMenuInflater.this.mContext.getClassLoader()).getConstructor(clsArr);
                 constructor.setAccessible(true);
@@ -125,7 +123,7 @@ public class SupportMenuInflater extends MenuInflater {
             }
         }
 
-        public final void setItem(MenuItem menuItem) {
+        public final void setItem(MenuItem menuItem) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             boolean z = false;
             menuItem.setChecked(this.itemChecked).setVisible(this.itemVisible).setEnabled(this.itemEnabled).setCheckable(this.itemCheckable >= 1).setTitleCondensed(this.itemTitleCondensed).setIcon(this.itemIconResId);
             int i = this.itemShowAsAction;
@@ -244,7 +242,7 @@ public class SupportMenuInflater extends MenuInflater {
     }
 
     public static Object findRealOwner(Object obj) {
-        return obj instanceof Activity ? obj : obj instanceof ContextWrapper ? findRealOwner(((ContextWrapper) obj).getBaseContext()) : obj;
+        return (!(obj instanceof Activity) && (obj instanceof ContextWrapper)) ? findRealOwner(((ContextWrapper) obj).getBaseContext()) : obj;
     }
 
     @Override // android.view.MenuInflater
@@ -253,12 +251,12 @@ public class SupportMenuInflater extends MenuInflater {
             super.inflate(i, menu);
             return;
         }
-        XmlResourceParser xmlResourceParser = null;
+        XmlResourceParser layout = null;
         boolean z = false;
         try {
             try {
-                xmlResourceParser = this.mContext.getResources().getLayout(i);
-                AttributeSet asAttributeSet = Xml.asAttributeSet(xmlResourceParser);
+                layout = this.mContext.getResources().getLayout(i);
+                AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(layout);
                 if (menu instanceof MenuBuilder) {
                     MenuBuilder menuBuilder = (MenuBuilder) menu;
                     if (!menuBuilder.mPreventDispatchingItemsChanged) {
@@ -266,11 +264,11 @@ public class SupportMenuInflater extends MenuInflater {
                         z = true;
                     }
                 }
-                parseMenu(xmlResourceParser, asAttributeSet, menu);
+                parseMenu(layout, attributeSetAsAttributeSet, menu);
                 if (z) {
                     ((MenuBuilder) menu).startDispatchingItemsChanged();
                 }
-                xmlResourceParser.close();
+                layout.close();
             } catch (IOException e) {
                 throw new InflateException("Error inflating menu XML", e);
             } catch (XmlPullParserException e2) {
@@ -280,8 +278,8 @@ public class SupportMenuInflater extends MenuInflater {
             if (z) {
                 ((MenuBuilder) menu).startDispatchingItemsChanged();
             }
-            if (xmlResourceParser != null) {
-                xmlResourceParser.close();
+            if (layout != null) {
+                layout.close();
             }
             throw th;
         }
@@ -291,7 +289,7 @@ public class SupportMenuInflater extends MenuInflater {
     /* JADX WARN: Type inference failed for: r4v0 */
     /* JADX WARN: Type inference failed for: r4v1, types: [boolean, int] */
     /* JADX WARN: Type inference failed for: r4v64 */
-    public final void parseMenu(XmlPullParser xmlPullParser, AttributeSet attributeSet, Menu menu) {
+    public final void parseMenu(XmlPullParser xmlPullParser, AttributeSet attributeSet, Menu menu) throws XmlPullParserException, IllegalAccessException, IOException, IllegalArgumentException, InvocationTargetException {
         ?? r4;
         int i;
         XmlPullParser xmlPullParser2;
@@ -323,84 +321,89 @@ public class SupportMenuInflater extends MenuInflater {
                 throw new RuntimeException("Unexpected end of document");
             }
             if (eventType != i) {
-                if (eventType == 3) {
+                if (eventType != 3) {
+                    xmlPullParser2 = xmlPullParser;
+                    z = r4;
+                } else {
                     String name2 = xmlPullParser.getName();
                     if (z3 && name2.equals(str)) {
                         xmlPullParser2 = xmlPullParser;
                         z = r4;
                         z3 = false;
                         str = null;
-                        eventType = xmlPullParser2.next();
-                        r4 = z;
-                        i = 2;
-                        z3 = z3;
-                    } else if (name2.equals("group")) {
-                        menuState.groupId = 0;
-                        menuState.groupCategory = 0;
-                        menuState.groupOrder = 0;
-                        menuState.groupCheckable = 0;
-                        menuState.groupVisible = r4;
-                        menuState.groupEnabled = r4;
-                    } else if (name2.equals("item")) {
-                        if (!menuState.itemAdded) {
-                            ActionProvider actionProvider = menuState.itemActionProvider;
-                            if (actionProvider == null || !actionProvider.hasSubMenu()) {
-                                menuState.itemAdded = r4;
-                                menuState.setItem(menuState.menu.add(menuState.groupId, menuState.itemId, menuState.itemCategoryOrder, menuState.itemTitle));
-                            } else {
-                                menuState.itemAdded = r4;
-                                menuState.setItem(menuState.menu.addSubMenu(menuState.groupId, menuState.itemId, menuState.itemCategoryOrder, menuState.itemTitle).getItem());
+                    } else {
+                        if (name2.equals("group")) {
+                            menuState.groupId = 0;
+                            menuState.groupCategory = 0;
+                            menuState.groupOrder = 0;
+                            menuState.groupCheckable = 0;
+                            menuState.groupVisible = r4;
+                            menuState.groupEnabled = r4;
+                        } else if (name2.equals("item")) {
+                            if (!menuState.itemAdded) {
+                                ActionProvider actionProvider = menuState.itemActionProvider;
+                                if (actionProvider == null || !actionProvider.hasSubMenu()) {
+                                    menuState.itemAdded = r4;
+                                    menuState.setItem(menuState.menu.add(menuState.groupId, menuState.itemId, menuState.itemCategoryOrder, menuState.itemTitle));
+                                } else {
+                                    menuState.itemAdded = r4;
+                                    menuState.setItem(menuState.menu.addSubMenu(menuState.groupId, menuState.itemId, menuState.itemCategoryOrder, menuState.itemTitle).getItem());
+                                }
                             }
+                        } else if (name2.equals("menu")) {
+                            xmlPullParser2 = xmlPullParser;
+                            z2 = r4;
+                            z = z2;
                         }
-                    } else if (name2.equals("menu")) {
                         xmlPullParser2 = xmlPullParser;
-                        z2 = r4;
-                        z = z2;
+                        z = r4;
                     }
                 }
-                xmlPullParser2 = xmlPullParser;
-                z = r4;
+                eventType = xmlPullParser2.next();
+                r4 = z;
+                i = 2;
+                z3 = z3;
             } else {
                 if (!z3) {
                     String name3 = xmlPullParser.getName();
-                    boolean equals = name3.equals("group");
+                    boolean zEquals = name3.equals("group");
                     SupportMenuInflater supportMenuInflater = SupportMenuInflater.this;
-                    if (equals) {
-                        TypedArray obtainStyledAttributes = supportMenuInflater.mContext.obtainStyledAttributes(attributeSet, R$styleable.MenuGroup);
-                        menuState.groupId = obtainStyledAttributes.getResourceId(r4, 0);
-                        menuState.groupCategory = obtainStyledAttributes.getInt(3, 0);
-                        menuState.groupOrder = obtainStyledAttributes.getInt(4, 0);
-                        menuState.groupCheckable = obtainStyledAttributes.getInt(5, 0);
-                        menuState.groupVisible = obtainStyledAttributes.getBoolean(2, r4);
-                        menuState.groupEnabled = obtainStyledAttributes.getBoolean(0, r4);
-                        obtainStyledAttributes.recycle();
+                    if (zEquals) {
+                        TypedArray typedArrayObtainStyledAttributes = supportMenuInflater.mContext.obtainStyledAttributes(attributeSet, R$styleable.MenuGroup);
+                        menuState.groupId = typedArrayObtainStyledAttributes.getResourceId(r4, 0);
+                        menuState.groupCategory = typedArrayObtainStyledAttributes.getInt(3, 0);
+                        menuState.groupOrder = typedArrayObtainStyledAttributes.getInt(4, 0);
+                        menuState.groupCheckable = typedArrayObtainStyledAttributes.getInt(5, 0);
+                        menuState.groupVisible = typedArrayObtainStyledAttributes.getBoolean(2, r4);
+                        menuState.groupEnabled = typedArrayObtainStyledAttributes.getBoolean(0, r4);
+                        typedArrayObtainStyledAttributes.recycle();
                     } else {
                         if (name3.equals("item")) {
-                            TintTypedArray obtainStyledAttributes2 = TintTypedArray.obtainStyledAttributes(supportMenuInflater.mContext, attributeSet, R$styleable.MenuItem);
-                            menuState.itemId = obtainStyledAttributes2.mWrapped.getResourceId(2, 0);
-                            menuState.itemCategoryOrder = (obtainStyledAttributes2.mWrapped.getInt(6, menuState.groupOrder) & CustomDeviceManager.QUICK_PANEL_ALL) | (obtainStyledAttributes2.mWrapped.getInt(5, menuState.groupCategory) & (-65536));
-                            menuState.itemTitle = obtainStyledAttributes2.mWrapped.getText(7);
-                            menuState.itemTitleCondensed = obtainStyledAttributes2.mWrapped.getText(8);
-                            menuState.itemIconResId = obtainStyledAttributes2.mWrapped.getResourceId(0, 0);
-                            String string = obtainStyledAttributes2.mWrapped.getString(9);
+                            TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(supportMenuInflater.mContext, attributeSet, R$styleable.MenuItem);
+                            menuState.itemId = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(2, 0);
+                            menuState.itemCategoryOrder = (tintTypedArrayObtainStyledAttributes.mWrapped.getInt(6, menuState.groupOrder) & CustomDeviceManager.QUICK_PANEL_ALL) | (tintTypedArrayObtainStyledAttributes.mWrapped.getInt(5, menuState.groupCategory) & (-65536));
+                            menuState.itemTitle = tintTypedArrayObtainStyledAttributes.mWrapped.getText(7);
+                            menuState.itemTitleCondensed = tintTypedArrayObtainStyledAttributes.mWrapped.getText(8);
+                            menuState.itemIconResId = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(0, 0);
+                            String string = tintTypedArrayObtainStyledAttributes.mWrapped.getString(9);
                             menuState.itemAlphabeticShortcut = string == null ? (char) 0 : string.charAt(0);
-                            menuState.itemAlphabeticModifiers = obtainStyledAttributes2.mWrapped.getInt(16, 4096);
-                            String string2 = obtainStyledAttributes2.mWrapped.getString(10);
+                            menuState.itemAlphabeticModifiers = tintTypedArrayObtainStyledAttributes.mWrapped.getInt(16, 4096);
+                            String string2 = tintTypedArrayObtainStyledAttributes.mWrapped.getString(10);
                             menuState.itemNumericShortcut = string2 == null ? (char) 0 : string2.charAt(0);
-                            menuState.itemNumericModifiers = obtainStyledAttributes2.mWrapped.getInt(20, 4096);
-                            if (obtainStyledAttributes2.mWrapped.hasValue(11)) {
-                                menuState.itemCheckable = obtainStyledAttributes2.mWrapped.getBoolean(11, false) ? 1 : 0;
+                            menuState.itemNumericModifiers = tintTypedArrayObtainStyledAttributes.mWrapped.getInt(20, 4096);
+                            if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(11)) {
+                                menuState.itemCheckable = tintTypedArrayObtainStyledAttributes.mWrapped.getBoolean(11, false) ? 1 : 0;
                             } else {
                                 menuState.itemCheckable = menuState.groupCheckable;
                             }
-                            menuState.itemChecked = obtainStyledAttributes2.mWrapped.getBoolean(3, false);
-                            menuState.itemVisible = obtainStyledAttributes2.mWrapped.getBoolean(4, menuState.groupVisible);
-                            menuState.itemEnabled = obtainStyledAttributes2.mWrapped.getBoolean(1, menuState.groupEnabled);
-                            menuState.itemShowAsAction = obtainStyledAttributes2.mWrapped.getInt(22, -1);
-                            menuState.itemListenerMethodName = obtainStyledAttributes2.mWrapped.getString(12);
-                            menuState.itemActionViewLayout = obtainStyledAttributes2.mWrapped.getResourceId(13, 0);
-                            menuState.itemActionViewClassName = obtainStyledAttributes2.mWrapped.getString(15);
-                            String string3 = obtainStyledAttributes2.mWrapped.getString(14);
+                            menuState.itemChecked = tintTypedArrayObtainStyledAttributes.mWrapped.getBoolean(3, false);
+                            menuState.itemVisible = tintTypedArrayObtainStyledAttributes.mWrapped.getBoolean(4, menuState.groupVisible);
+                            menuState.itemEnabled = tintTypedArrayObtainStyledAttributes.mWrapped.getBoolean(1, menuState.groupEnabled);
+                            menuState.itemShowAsAction = tintTypedArrayObtainStyledAttributes.mWrapped.getInt(22, -1);
+                            menuState.itemListenerMethodName = tintTypedArrayObtainStyledAttributes.mWrapped.getString(12);
+                            menuState.itemActionViewLayout = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(13, 0);
+                            menuState.itemActionViewClassName = tintTypedArrayObtainStyledAttributes.mWrapped.getString(15);
+                            String string3 = tintTypedArrayObtainStyledAttributes.mWrapped.getString(14);
                             boolean z4 = string3 != null;
                             if (z4 && menuState.itemActionViewLayout == 0 && menuState.itemActionViewClassName == null) {
                                 menuState.itemActionProvider = (ActionProvider) menuState.newInstance(string3, ACTION_PROVIDER_CONSTRUCTOR_SIGNATURE, supportMenuInflater.mActionProviderConstructorArguments);
@@ -410,32 +413,32 @@ public class SupportMenuInflater extends MenuInflater {
                                 }
                                 menuState.itemActionProvider = null;
                             }
-                            menuState.itemContentDescription = obtainStyledAttributes2.mWrapped.getText(17);
-                            menuState.itemTooltipText = obtainStyledAttributes2.mWrapped.getText(23);
-                            if (obtainStyledAttributes2.mWrapped.hasValue(19)) {
-                                menuState.itemIconTintMode = DrawableUtils.parseTintMode(obtainStyledAttributes2.mWrapped.getInt(19, -1), menuState.itemIconTintMode);
+                            menuState.itemContentDescription = tintTypedArrayObtainStyledAttributes.mWrapped.getText(17);
+                            menuState.itemTooltipText = tintTypedArrayObtainStyledAttributes.mWrapped.getText(23);
+                            if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(19)) {
+                                menuState.itemIconTintMode = DrawableUtils.parseTintMode(tintTypedArrayObtainStyledAttributes.mWrapped.getInt(19, -1), menuState.itemIconTintMode);
                                 colorStateList = null;
                             } else {
                                 colorStateList = null;
                                 menuState.itemIconTintMode = null;
                             }
-                            if (obtainStyledAttributes2.mWrapped.hasValue(18)) {
-                                menuState.itemIconTintList = obtainStyledAttributes2.getColorStateList(18);
+                            if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(18)) {
+                                menuState.itemIconTintList = tintTypedArrayObtainStyledAttributes.getColorStateList(18);
                             } else {
                                 menuState.itemIconTintList = colorStateList;
                             }
-                            obtainStyledAttributes2.mWrapped.getInt(21, 0);
-                            obtainStyledAttributes2.recycle();
+                            tintTypedArrayObtainStyledAttributes.mWrapped.getInt(21, 0);
+                            tintTypedArrayObtainStyledAttributes.recycle();
                             menuState.itemAdded = false;
                             xmlPullParser2 = xmlPullParser;
                             z = true;
                         } else if (name3.equals("menu")) {
                             z = true;
                             menuState.itemAdded = true;
-                            SubMenu addSubMenu = menuState.menu.addSubMenu(menuState.groupId, menuState.itemId, menuState.itemCategoryOrder, menuState.itemTitle);
-                            menuState.setItem(addSubMenu.getItem());
+                            SubMenu subMenuAddSubMenu = menuState.menu.addSubMenu(menuState.groupId, menuState.itemId, menuState.itemCategoryOrder, menuState.itemTitle);
+                            menuState.setItem(subMenuAddSubMenu.getItem());
                             xmlPullParser2 = xmlPullParser;
-                            parseMenu(xmlPullParser2, attributeSet, addSubMenu);
+                            parseMenu(xmlPullParser2, attributeSet, subMenuAddSubMenu);
                         } else {
                             xmlPullParser2 = xmlPullParser;
                             z = true;

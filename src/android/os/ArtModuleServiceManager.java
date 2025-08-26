@@ -15,7 +15,7 @@ public class ArtModuleServiceManager {
             this.mRetry = z;
         }
 
-        public IBinder waitForService() {
+        public IBinder waitForService() throws InterruptedException {
             if (this.mRetry) {
                 return ServiceManager.waitForService(this.mServiceName);
             }

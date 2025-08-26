@@ -45,9 +45,9 @@ public interface IAlarmListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAlarmListener)) {
-                return (IAlarmListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAlarmListener)) {
+                return (IAlarmListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IAlarmListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IAlarmCompleteListener asInterface = IAlarmCompleteListener.Stub.asInterface(parcel.readStrongBinder());
+                IAlarmCompleteListener iAlarmCompleteListenerAsInterface = IAlarmCompleteListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                doAlarm(asInterface);
+                doAlarm(iAlarmCompleteListenerAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,13 +100,13 @@ public interface IAlarmListener extends IInterface {
 
             @Override // android.app.IAlarmListener
             public void doAlarm(IAlarmCompleteListener iAlarmCompleteListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAlarmCompleteListener);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAlarmCompleteListener);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -53,9 +53,9 @@ public interface ISatelliteProvisionStateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISatelliteProvisionStateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISatelliteProvisionStateCallback)) {
-                return (ISatelliteProvisionStateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISatelliteProvisionStateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISatelliteProvisionStateCallback)) {
+                return (ISatelliteProvisionStateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,13 +85,13 @@ public interface ISatelliteProvisionStateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onSatelliteProvisionStateChanged(readBoolean);
+                onSatelliteProvisionStateChanged(z);
             } else if (i == 2) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SatelliteSubscriberProvisionStatus.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SatelliteSubscriberProvisionStatus.CREATOR);
                 parcel.enforceNoDataAvail();
-                onSatelliteSubscriptionProvisionStateChanged(createTypedArrayList);
+                onSatelliteSubscriptionProvisionStateChanged(arrayListCreateTypedArrayList);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -116,25 +116,25 @@ public interface ISatelliteProvisionStateCallback extends IInterface {
 
             @Override // android.telephony.satellite.ISatelliteProvisionStateCallback
             public void onSatelliteProvisionStateChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteProvisionStateCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteProvisionStateCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.ISatelliteProvisionStateCallback
             public void onSatelliteSubscriptionProvisionStateChanged(List<SatelliteSubscriberProvisionStatus> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteProvisionStateCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteProvisionStateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -15,7 +15,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LocalMediaRepositoryImpl$mediaDevicesUpdates$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -52,7 +51,7 @@ final class LocalMediaRepositoryImpl$mediaDevicesUpdates$1 extends SuspendLambda
             final ?? r1 = new LocalMediaManager.DeviceCallback() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$mediaDevicesUpdates$1$callback$1
                 @Override // com.android.settingslib.media.LocalMediaManager.DeviceCallback
                 public final void onDeviceAttributesChanged() {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new Object() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$DeviceAttributesChanged
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new Object() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$DeviceAttributesChanged
                         public final boolean equals(Object obj2) {
                             return this == obj2 || (obj2 instanceof LocalMediaRepositoryImpl$DevicesUpdate$DeviceAttributesChanged);
                         }
@@ -69,7 +68,7 @@ final class LocalMediaRepositoryImpl$mediaDevicesUpdates$1 extends SuspendLambda
 
                 @Override // com.android.settingslib.media.LocalMediaManager.DeviceCallback
                 public final void onDeviceListUpdate(List list) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new Object(list) { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$DeviceListUpdate
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new Object(list) { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$DeviceListUpdate
                         public final List newDevices;
 
                         {
@@ -99,7 +98,7 @@ final class LocalMediaRepositoryImpl$mediaDevicesUpdates$1 extends SuspendLambda
 
                 @Override // com.android.settingslib.media.LocalMediaManager.DeviceCallback
                 public final void onSelectedDeviceStateChanged(MediaDevice mediaDevice) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new Object() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$SelectedDeviceStateChanged
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new Object() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$SelectedDeviceStateChanged
                         public final boolean equals(Object obj2) {
                             return this == obj2 || (obj2 instanceof LocalMediaRepositoryImpl$DevicesUpdate$SelectedDeviceStateChanged);
                         }
@@ -119,7 +118,7 @@ final class LocalMediaRepositoryImpl$mediaDevicesUpdates$1 extends SuspendLambda
             Function0 function0 = new Function0() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$mediaDevicesUpdates$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    LocalMediaRepositoryImpl.this.localMediaManager.unregisterCallback(r1);
+                    localMediaRepositoryImpl.localMediaManager.unregisterCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

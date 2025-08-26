@@ -11,7 +11,6 @@ import androidx.appcompat.R$styleable;
 import androidx.core.view.ViewCompat;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatBackgroundHelper {
     public TintInfo mBackgroundTint;
@@ -84,15 +83,15 @@ public class AppCompatBackgroundHelper {
     public final void loadFromAttributes(AttributeSet attributeSet, int i) {
         Context context = this.mView.getContext();
         int[] iArr = R$styleable.ViewBackgroundHelper;
-        TintTypedArray obtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context, attributeSet, iArr, i, 0);
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context, attributeSet, iArr, i, 0);
         View view = this.mView;
         Context context2 = view.getContext();
-        TypedArray typedArray = obtainStyledAttributes.mWrapped;
+        TypedArray typedArray = tintTypedArrayObtainStyledAttributes.mWrapped;
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         ViewCompat.Api29Impl.saveAttributeDataForStyleable(view, context2, iArr, attributeSet, typedArray, i, 0);
         try {
-            if (obtainStyledAttributes.mWrapped.hasValue(0)) {
-                obtainStyledAttributes.mWrapped.getResourceId(0, -1);
+            if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(0)) {
+                tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(0, -1);
                 AppCompatDrawableManager appCompatDrawableManager = this.mDrawableManager;
                 this.mView.getContext();
                 synchronized (appCompatDrawableManager) {
@@ -100,15 +99,15 @@ public class AppCompatBackgroundHelper {
                     }
                 }
             }
-            if (obtainStyledAttributes.mWrapped.hasValue(1)) {
-                ViewCompat.Api21Impl.setBackgroundTintList(this.mView, obtainStyledAttributes.getColorStateList(1));
+            if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(1)) {
+                ViewCompat.Api21Impl.setBackgroundTintList(this.mView, tintTypedArrayObtainStyledAttributes.getColorStateList(1));
             }
-            if (obtainStyledAttributes.mWrapped.hasValue(2)) {
-                ViewCompat.Api21Impl.setBackgroundTintMode(this.mView, DrawableUtils.parseTintMode(obtainStyledAttributes.mWrapped.getInt(2, -1), null));
+            if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(2)) {
+                ViewCompat.Api21Impl.setBackgroundTintMode(this.mView, DrawableUtils.parseTintMode(tintTypedArrayObtainStyledAttributes.mWrapped.getInt(2, -1), null));
             }
-            obtainStyledAttributes.recycle();
+            tintTypedArrayObtainStyledAttributes.recycle();
         } catch (Throwable th) {
-            obtainStyledAttributes.recycle();
+            tintTypedArrayObtainStyledAttributes.recycle();
             throw th;
         }
     }

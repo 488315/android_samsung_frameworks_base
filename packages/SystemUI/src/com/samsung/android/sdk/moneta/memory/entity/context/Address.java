@@ -6,7 +6,6 @@ import androidx.compose.runtime.OpaqueKey$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Address implements Parcelable {
     public static final Parcelable.Creator<Address> CREATOR = new Creator();
@@ -18,7 +17,6 @@ public final class Address implements Parcelable {
     private final String subAdminArea;
     private final String subLocality;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -147,19 +145,19 @@ public final class Address implements Parcelable {
     }
 
     public int hashCode() {
-        int hashCode = this.fullAddress.hashCode() * 31;
+        int iHashCode = this.fullAddress.hashCode() * 31;
         String str = this.countryName;
-        int hashCode2 = (hashCode + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.adminArea;
-        int hashCode3 = (hashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31;
         String str3 = this.subAdminArea;
-        int hashCode4 = (hashCode3 + (str3 == null ? 0 : str3.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (str3 == null ? 0 : str3.hashCode())) * 31;
         String str4 = this.locality;
-        int hashCode5 = (hashCode4 + (str4 == null ? 0 : str4.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (str4 == null ? 0 : str4.hashCode())) * 31;
         String str5 = this.subLocality;
-        int hashCode6 = (hashCode5 + (str5 == null ? 0 : str5.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (str5 == null ? 0 : str5.hashCode())) * 31;
         String str6 = this.streetName;
-        return hashCode6 + (str6 != null ? str6.hashCode() : 0);
+        return iHashCode6 + (str6 != null ? str6.hashCode() : 0);
     }
 
     public String toString() {

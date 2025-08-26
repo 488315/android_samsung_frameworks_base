@@ -14,14 +14,54 @@ import com.android.systemui.volume.dialog.domain.interactor.VolumeDialogVisibili
 import com.android.systemui.volume.dialog.shared.model.VolumeDialogVisibilityModel;
 import com.android.systemui.volume.dialog.utils.VolumeTracerImpl;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.EmptyCoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function3;
+import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDialog extends ComponentDialog {
     public final VolumeDialogComponentFactory componentFactory;
     public final VolumeDialogVisibilityInteractor visibilityInteractor;
+
+    /* renamed from: com.android.systemui.volume.dialog.VolumeDialog$onCreate$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function3 {
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(3, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            return VolumeDialog.this.new AnonymousClass1((Continuation) obj3).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                VolumeDialog$onCreate$1$invokeSuspend$$inlined$coroutineScopeTraced$1 volumeDialog$onCreate$1$invokeSuspend$$inlined$coroutineScopeTraced$1 = new VolumeDialog$onCreate$1$invokeSuspend$$inlined$coroutineScopeTraced$1(null, "[Volume]dialog", VolumeDialog.this);
+                this.label = 1;
+                if (CoroutineScopeKt.coroutineScope(volumeDialog$onCreate$1$invokeSuspend$$inlined$coroutineScopeTraced$1, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
 
     public VolumeDialog(Context context, VolumeDialogComponentFactory volumeDialogComponentFactory, VolumeDialogVisibilityInteractor volumeDialogVisibilityInteractor) {
         super(context, R.style.Theme_SystemUI_Dialog_Volume);
@@ -46,7 +86,7 @@ public final class VolumeDialog extends ComponentDialog {
     public final void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.volume_dialog);
-        RepeatWhenAttachedKt.repeatWhenAttached(requireViewById(R.id.volume_dialog), EmptyCoroutineContext.INSTANCE, new VolumeDialog$onCreate$1(this, null));
+        RepeatWhenAttachedKt.repeatWhenAttached(requireViewById(R.id.volume_dialog), EmptyCoroutineContext.INSTANCE, new AnonymousClass1(null));
     }
 
     @Override // android.app.Dialog

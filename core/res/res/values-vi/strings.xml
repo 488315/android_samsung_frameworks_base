@@ -592,6 +592,7 @@ Nếu bạn vẫn chọn cài đặt ứng dụng này, hãy xem xét cẩn th�
     <string name="call_notification_screening_text">Đang sàng lọc cuộc gọi đến</string>
     <string name="camera_restrict">Chính sách bảo mật không cho dùng máy ảnh.</string>
     <string name="can_not_install_app">Không thể cài đặt ứng dụng. Ứng dụng không được tối ưu để sử dụng với %s.</string>
+    <string name="can_not_open_searcle_on_the_external_display">Không thể mở Khoanh tròn để tìm kiếm trên màn hình đã kết nối.</string>
     <string name="can_not_open_searcle_on_the_lockscreen">Không thể mở Khoanh tròn để tìm kiếm trên Màn hình khóa.</string>
     <string name="cannot_open_app_concentration_mode">Không thể mở ứng dụng</string>
     <string name="capability_desc_canCaptureFingerprintGestures">Có thể ghi lại các cử chỉ được thực hiện trên cảm biến vân tay của thiết bị.</string>
@@ -673,6 +674,7 @@ Nếu bạn vẫn chọn cài đặt ứng dụng này, hãy xem xét cẩn th�
     <string name="common_secure_boot_nwlock_notification_text">Thẻ SIM này không được hỗ trợ.</string>
     <string name="common_secure_boot_nwlock_notification_title">Đã gắn thẻ SIM không hợp lệ</string>
     <string name="compat_restart_education_text">Nếu ứng dụng này hiển thị không đúng, hãy thử đóng ứng dụng và mở lại.</string>
+    <string name="compat_restart_menu_education_text">Nếu ứng dụng này hiển thị không đúng, hãy khởi động lại ứng dụng từ menu Khác.</string>
     <string name="concurrent_display_notification_active_content">%1$s đang dùng cả hai màn hình để thể hiện nội dung</string>
     <string name="concurrent_display_notification_active_title">Chế độ Dual screen bật</string>
     <string name="concurrent_display_notification_name">Dual screen</string>
@@ -2920,7 +2922,7 @@ Việc nghe ở mức âm lượng cao trong thời gian dài có thể gây t�
     <string name="satellite_notification_manual_title">Sử dụng tính năng nhắn tin qua vệ tinh?</string>
     <string name="satellite_notification_open_message">Mở ứng dụng Tin nhắn</string>
     <string name="satellite_notification_summary">Bạn có thể gửi và nhận tin nhắn mà không cần có mạng di động hoặc mạng Wi-Fi</string>
-    <string name="satellite_notification_summary_with_data">Bạn có thể gửi và nhận tin nhắn cũng như sử dụng dữ liệu hạn chế qua vệ tinh</string>
+    <string name="satellite_notification_summary_with_data">Bạn có thể gửi và nhận tin nhắn cũng như dùng một số ứng dụng qua vệ tinh</string>
     <string name="satellite_notification_title">Đã tự động kết nối với vệ tinh</string>
     <string name="satellite_sos_available_notification_summary">Bạn có thể nhắn tin cho dịch vụ khẩn cấp khi không có mạng di động hay mạng Wi-Fi. Google Tin nhắn phải là ứng dụng nhắn tin mặc định của bạn.</string>
     <string name="satellite_sos_available_notification_title">Tính năng Liên lạc khẩn cấp qua vệ tinh đang hoạt động</string>

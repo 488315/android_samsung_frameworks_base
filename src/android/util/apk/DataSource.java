@@ -7,7 +7,7 @@ import java.security.DigestException;
 
 /* loaded from: classes4.dex */
 interface DataSource {
-    void feedIntoDataDigester(DataDigester dataDigester, long j, int i) throws IOException, DigestException;
+    void feedIntoDataDigester(DataDigester dataDigester, long j, int i) throws DigestException, IOException;
 
     long size();
 

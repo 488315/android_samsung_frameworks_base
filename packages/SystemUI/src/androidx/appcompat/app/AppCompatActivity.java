@@ -1,6 +1,7 @@
 package androidx.appcompat.app;
 
 import android.app.Activity;
+import android.app.LocaleManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,8 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.LocaleList;
+import android.util.Log;
+import android.util.Xml;
 import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.MenuInflater;
@@ -23,16 +26,25 @@ import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.appcompat.widget.ResourceManagerInternal;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.widget.VectorEnabledTintResources;
+import androidx.collection.ArraySet;
+import androidx.collection.ArraySet.ElementIterator;
 import androidx.collection.LongSparseArray;
+import androidx.core.app.AppLocalesStorageHelper;
 import androidx.core.app.NavUtils;
 import androidx.core.app.TaskStackBuilder;
+import androidx.core.os.LocaleListCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewTreeLifecycleOwner;
 import androidx.lifecycle.ViewTreeViewModelStoreOwner;
 import androidx.savedstate.SavedStateRegistry;
 import androidx.savedstate.ViewTreeSavedStateRegistryOwner;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatActivity extends FragmentActivity implements AppCompatCallback {
     public AppCompatDelegateImpl mDelegate;
@@ -72,183 +84,108 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
         if (i == -100) {
             i = AppCompatDelegate.sDefaultNightMode;
         }
-        int mapNightMode = appCompatDelegateImpl.mapNightMode(i, context);
+        int iMapNightMode = appCompatDelegateImpl.mapNightMode(i, context);
         if (AppCompatDelegate.isAutoStorageOptedIn(context) && AppCompatDelegate.isAutoStorageOptedIn(context) && !AppCompatDelegate.sIsFrameworkSyncChecked) {
             AppCompatDelegate.sSerialExecutorForLocalesStorage.execute(new Runnable() { // from class: androidx.appcompat.app.AppCompatDelegate$$ExternalSyntheticLambda0
-                /* JADX WARN: Code restructure failed: missing block: B:32:0x009c, code lost:
-                
-                    if (r6 != null) goto L73;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:42:0x009e, code lost:
-                
-                    r6.close();
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:48:0x0087, code lost:
-                
-                    if (r9 != 4) goto L84;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:51:0x0094, code lost:
-                
-                    if (r7.getName().equals("locales") == false) goto L89;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:53:0x0096, code lost:
+                /* JADX WARN: Code restructure failed: missing block: B:38:0x0096, code lost:
                 
                     r3 = r7.getAttributeValue(null, "application_locales");
                  */
-                /* JADX WARN: Code restructure failed: missing block: B:72:0x00ab, code lost:
-                
-                    if (r6 == null) goto L47;
-                 */
-                /* JADX WARN: Removed duplicated region for block: B:39:0x00c9  */
                 @Override // java.lang.Runnable
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
                 public final void run() {
-                    /*
-                        r12 = this;
-                        android.content.Context r12 = r1
-                        androidx.appcompat.app.AppCompatDelegate$SerialExecutor r0 = androidx.appcompat.app.AppCompatDelegate.sSerialExecutorForLocalesStorage
-                        android.content.ComponentName r0 = new android.content.ComponentName
-                        java.lang.String r1 = "androidx.appcompat.app.AppLocalesMetadataHolderService"
-                        r0.<init>(r12, r1)
-                        android.content.pm.PackageManager r1 = r12.getPackageManager()
-                        int r1 = r1.getComponentEnabledSetting(r0)
-                        r2 = 1
-                        if (r1 == r2) goto Ldc
-                        androidx.collection.ArraySet r1 = androidx.appcompat.app.AppCompatDelegate.sActivityDelegates
-                        r1.getClass()
-                        androidx.collection.ArraySet$ElementIterator r3 = new androidx.collection.ArraySet$ElementIterator
-                        r3.<init>()
-                    L20:
-                        boolean r1 = r3.hasNext()
-                        java.lang.String r4 = "locale"
-                        r5 = 0
-                        if (r1 == 0) goto L42
-                        java.lang.Object r1 = r3.next()
-                        java.lang.ref.WeakReference r1 = (java.lang.ref.WeakReference) r1
-                        java.lang.Object r1 = r1.get()
-                        androidx.appcompat.app.AppCompatDelegate r1 = (androidx.appcompat.app.AppCompatDelegate) r1
-                        if (r1 == 0) goto L20
-                        android.content.Context r1 = r1.getContextForDelegate()
-                        if (r1 == 0) goto L20
-                        java.lang.Object r1 = r1.getSystemService(r4)
-                        goto L43
-                    L42:
-                        r1 = r5
-                    L43:
-                        if (r1 == 0) goto L50
-                        android.app.LocaleManager r1 = (android.app.LocaleManager) r1
-                        android.os.LocaleList r1 = r1.getApplicationLocales()
-                        androidx.core.os.LocaleListCompat r1 = androidx.core.os.LocaleListCompat.wrap(r1)
-                        goto L52
-                    L50:
-                        androidx.core.os.LocaleListCompat r1 = androidx.core.os.LocaleListCompat.sEmptyLocaleList
-                    L52:
-                        androidx.core.os.LocaleListInterface r1 = r1.mImpl
-                        boolean r1 = r1.isEmpty()
-                        if (r1 == 0) goto Ld5
-                        java.lang.Object r1 = androidx.core.app.AppLocalesStorageHelper.sAppLocaleStorageSync
-                        monitor-enter(r1)
-                        java.lang.String r3 = ""
-                        java.lang.String r6 = "androidx.appcompat.app.AppCompatDelegate.application_locales_record_file"
-                        java.io.FileInputStream r6 = r12.openFileInput(r6)     // Catch: java.lang.Throwable -> La2 java.io.FileNotFoundException -> Lc2
-                        org.xmlpull.v1.XmlPullParser r7 = android.util.Xml.newPullParser()     // Catch: java.lang.Throwable -> L82 java.lang.Throwable -> La4
-                        java.lang.String r8 = "UTF-8"
-                        r7.setInput(r6, r8)     // Catch: java.lang.Throwable -> L82 java.lang.Throwable -> La4
-                        int r8 = r7.getDepth()     // Catch: java.lang.Throwable -> L82 java.lang.Throwable -> La4
-                    L72:
-                        int r9 = r7.next()     // Catch: java.lang.Throwable -> L82 java.lang.Throwable -> La4
-                        if (r9 == r2) goto L9c
-                        r10 = 3
-                        if (r9 != r10) goto L84
-                        int r11 = r7.getDepth()     // Catch: java.lang.Throwable -> L82 java.lang.Throwable -> La4
-                        if (r11 <= r8) goto L9c
-                        goto L84
-                    L82:
-                        r12 = move-exception
-                        goto Lbc
-                    L84:
-                        if (r9 == r10) goto L72
-                        r10 = 4
-                        if (r9 != r10) goto L8a
-                        goto L72
-                    L8a:
-                        java.lang.String r9 = r7.getName()     // Catch: java.lang.Throwable -> L82 java.lang.Throwable -> La4
-                        java.lang.String r10 = "locales"
-                        boolean r9 = r9.equals(r10)     // Catch: java.lang.Throwable -> L82 java.lang.Throwable -> La4
-                        if (r9 == 0) goto L72
-                        java.lang.String r8 = "application_locales"
-                        java.lang.String r3 = r7.getAttributeValue(r5, r8)     // Catch: java.lang.Throwable -> L82 java.lang.Throwable -> La4
-                    L9c:
-                        if (r6 == 0) goto Lae
-                    L9e:
-                        r6.close()     // Catch: java.lang.Throwable -> La2 java.io.IOException -> Lae
-                        goto Lae
-                    La2:
-                        r12 = move-exception
-                        goto Ld3
-                    La4:
-                        java.lang.String r5 = "AppLocalesStorageHelper"
-                        java.lang.String r7 = "Reading app Locales : Unable to parse through file :androidx.appcompat.app.AppCompatDelegate.application_locales_record_file"
-                        android.util.Log.w(r5, r7)     // Catch: java.lang.Throwable -> L82
-                        if (r6 == 0) goto Lae
-                        goto L9e
-                    Lae:
-                        boolean r5 = r3.isEmpty()     // Catch: java.lang.Throwable -> La2
-                        if (r5 != 0) goto Lb5
-                        goto Lba
-                    Lb5:
-                        java.lang.String r5 = "androidx.appcompat.app.AppCompatDelegate.application_locales_record_file"
-                        r12.deleteFile(r5)     // Catch: java.lang.Throwable -> La2
-                    Lba:
-                        monitor-exit(r1)     // Catch: java.lang.Throwable -> La2
-                        goto Lc3
-                    Lbc:
-                        if (r6 == 0) goto Lc1
-                        r6.close()     // Catch: java.lang.Throwable -> La2 java.io.IOException -> Lc1
-                    Lc1:
-                        throw r12     // Catch: java.lang.Throwable -> La2
-                    Lc2:
-                        monitor-exit(r1)     // Catch: java.lang.Throwable -> La2
-                    Lc3:
-                        java.lang.Object r1 = r12.getSystemService(r4)
-                        if (r1 == 0) goto Ld5
-                        android.os.LocaleList r3 = android.os.LocaleList.forLanguageTags(r3)
-                        android.app.LocaleManager r1 = (android.app.LocaleManager) r1
-                        r1.setApplicationLocales(r3)
-                        goto Ld5
-                    Ld3:
-                        monitor-exit(r1)     // Catch: java.lang.Throwable -> La2
-                        throw r12
-                    Ld5:
-                        android.content.pm.PackageManager r12 = r12.getPackageManager()
-                        r12.setComponentEnabledSetting(r0, r2, r2)
-                    Ldc:
-                        androidx.appcompat.app.AppCompatDelegate.sIsFrameworkSyncChecked = r2
-                        return
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.app.AppCompatDelegate$$ExternalSyntheticLambda0.run():void");
+                    Object systemService;
+                    String attributeValue;
+                    Context contextForDelegate;
+                    Context context2 = context;
+                    AppCompatDelegate.SerialExecutor serialExecutor = AppCompatDelegate.sSerialExecutorForLocalesStorage;
+                    ComponentName componentName = new ComponentName(context2, "androidx.appcompat.app.AppLocalesMetadataHolderService");
+                    if (context2.getPackageManager().getComponentEnabledSetting(componentName) != 1) {
+                        ArraySet arraySet = AppCompatDelegate.sActivityDelegates;
+                        arraySet.getClass();
+                        ArraySet.ElementIterator elementIterator = arraySet.new ElementIterator();
+                        while (true) {
+                            if (!elementIterator.hasNext()) {
+                                systemService = null;
+                                break;
+                            }
+                            AppCompatDelegate appCompatDelegate = (AppCompatDelegate) ((WeakReference) elementIterator.next()).get();
+                            if (appCompatDelegate != null && (contextForDelegate = appCompatDelegate.getContextForDelegate()) != null) {
+                                systemService = contextForDelegate.getSystemService("locale");
+                                break;
+                            }
+                        }
+                        if ((systemService != null ? LocaleListCompat.wrap(((LocaleManager) systemService).getApplicationLocales()) : LocaleListCompat.sEmptyLocaleList).mImpl.isEmpty()) {
+                            synchronized (AppLocalesStorageHelper.sAppLocaleStorageSync) {
+                                attributeValue = "";
+                                try {
+                                    FileInputStream fileInputStreamOpenFileInput = context2.openFileInput("androidx.appcompat.app.AppCompatDelegate.application_locales_record_file");
+                                    try {
+                                        try {
+                                            XmlPullParser xmlPullParserNewPullParser = Xml.newPullParser();
+                                            xmlPullParserNewPullParser.setInput(fileInputStreamOpenFileInput, "UTF-8");
+                                            int depth = xmlPullParserNewPullParser.getDepth();
+                                            while (true) {
+                                                int next = xmlPullParserNewPullParser.next();
+                                                if (next != 1 && (next != 3 || xmlPullParserNewPullParser.getDepth() > depth)) {
+                                                    if (next != 3 && next != 4 && xmlPullParserNewPullParser.getName().equals("locales")) {
+                                                        break;
+                                                    }
+                                                } else {
+                                                    break;
+                                                }
+                                            }
+                                        } catch (IOException | XmlPullParserException unused) {
+                                            Log.w("AppLocalesStorageHelper", "Reading app Locales : Unable to parse through file :androidx.appcompat.app.AppCompatDelegate.application_locales_record_file");
+                                            if (fileInputStreamOpenFileInput != null) {
+                                            }
+                                        }
+                                        if (fileInputStreamOpenFileInput != null) {
+                                            try {
+                                                fileInputStreamOpenFileInput.close();
+                                            } catch (IOException unused2) {
+                                            }
+                                        }
+                                        if (attributeValue.isEmpty()) {
+                                            context2.deleteFile("androidx.appcompat.app.AppCompatDelegate.application_locales_record_file");
+                                        }
+                                    } catch (Throwable th) {
+                                        if (fileInputStreamOpenFileInput != null) {
+                                            try {
+                                                fileInputStreamOpenFileInput.close();
+                                            } catch (IOException unused3) {
+                                            }
+                                        }
+                                        throw th;
+                                    }
+                                } catch (FileNotFoundException unused4) {
+                                }
+                            }
+                            Object systemService2 = context2.getSystemService("locale");
+                            if (systemService2 != null) {
+                                ((LocaleManager) systemService2).setApplicationLocales(LocaleList.forLanguageTags(attributeValue));
+                            }
+                        }
+                        context2.getPackageManager().setComponentEnabledSetting(componentName, 1, 1);
+                    }
+                    AppCompatDelegate.sIsFrameworkSyncChecked = true;
                 }
             });
         }
         Configuration configuration = null;
         if (context instanceof ContextThemeWrapper) {
             try {
-                ((ContextThemeWrapper) context).applyOverrideConfiguration(AppCompatDelegateImpl.createOverrideAppConfiguration(context, mapNightMode, null, false));
+                ((ContextThemeWrapper) context).applyOverrideConfiguration(AppCompatDelegateImpl.createOverrideAppConfiguration(context, iMapNightMode, null, false));
             } catch (IllegalStateException unused) {
             }
-            super.attachBaseContext(context);
-        }
-        if (context instanceof androidx.appcompat.view.ContextThemeWrapper) {
+        } else if (context instanceof androidx.appcompat.view.ContextThemeWrapper) {
             try {
-                ((androidx.appcompat.view.ContextThemeWrapper) context).applyOverrideConfiguration(AppCompatDelegateImpl.createOverrideAppConfiguration(context, mapNightMode, null, false));
+                ((androidx.appcompat.view.ContextThemeWrapper) context).applyOverrideConfiguration(AppCompatDelegateImpl.createOverrideAppConfiguration(context, iMapNightMode, null, false));
             } catch (IllegalStateException unused2) {
             }
-            super.attachBaseContext(context);
-        }
-        if (AppCompatDelegateImpl.sCanReturnDifferentContext) {
+        } else if (AppCompatDelegateImpl.sCanReturnDifferentContext) {
             Configuration configuration2 = new Configuration();
             configuration2.uiMode = -1;
             configuration2.fontScale = 0.0f;
@@ -372,9 +309,9 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
                     }
                 }
             }
-            Configuration createOverrideAppConfiguration = AppCompatDelegateImpl.createOverrideAppConfiguration(context, mapNightMode, configuration, true);
+            Configuration configurationCreateOverrideAppConfiguration = AppCompatDelegateImpl.createOverrideAppConfiguration(context, iMapNightMode, configuration, true);
             androidx.appcompat.view.ContextThemeWrapper contextThemeWrapper = new androidx.appcompat.view.ContextThemeWrapper(context, 2132018774);
-            contextThemeWrapper.applyOverrideConfiguration(createOverrideAppConfiguration);
+            contextThemeWrapper.applyOverrideConfiguration(configurationCreateOverrideAppConfiguration);
             try {
                 if (context.getTheme() != null) {
                     contextThemeWrapper.getTheme().rebase();
@@ -498,7 +435,7 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
                 navigateUpTo(parentActivityIntent);
                 return true;
             }
-            TaskStackBuilder create = TaskStackBuilder.create(this);
+            TaskStackBuilder taskStackBuilderCreate = TaskStackBuilder.create(this);
             Intent parentActivityIntent2 = NavUtils.getParentActivityIntent(this);
             if (parentActivityIntent2 == null) {
                 parentActivityIntent2 = NavUtils.getParentActivityIntent(this);
@@ -506,12 +443,12 @@ public class AppCompatActivity extends FragmentActivity implements AppCompatCall
             if (parentActivityIntent2 != null) {
                 ComponentName component = parentActivityIntent2.getComponent();
                 if (component == null) {
-                    component = parentActivityIntent2.resolveActivity(create.mSourceContext.getPackageManager());
+                    component = parentActivityIntent2.resolveActivity(taskStackBuilderCreate.mSourceContext.getPackageManager());
                 }
-                create.addParentStack(component);
-                create.mIntents.add(parentActivityIntent2);
+                taskStackBuilderCreate.addParentStack(component);
+                taskStackBuilderCreate.mIntents.add(parentActivityIntent2);
             }
-            create.startActivities();
+            taskStackBuilderCreate.startActivities();
             try {
                 finishAffinity();
             } catch (IllegalStateException unused) {

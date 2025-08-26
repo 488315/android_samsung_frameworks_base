@@ -7,11 +7,9 @@ import android.provider.Settings;
 import android.util.KeyValueListParser;
 import android.util.Slog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BatterySaverUtils {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Parameters {
         public final int endNth;
         public final int startNth;

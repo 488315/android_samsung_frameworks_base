@@ -7,13 +7,11 @@ import androidx.constraintlayout.core.widgets.analyzer.DependencyNode;
 import androidx.constraintlayout.core.widgets.analyzer.WidgetRun;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class VerticalWidgetRun extends WidgetRun {
     public final DependencyNode baseline;
     public BaselineDimensionDependency mBaselineDimension;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.constraintlayout.core.widgets.analyzer.VerticalWidgetRun$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$androidx$constraintlayout$core$widgets$analyzer$WidgetRun$RunType;

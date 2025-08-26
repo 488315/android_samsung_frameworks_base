@@ -23,10 +23,10 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
     private synchronized ISehAuthenticationFramework getService() {
         if (this.mService == null) {
             try {
-                ISehAuthenticationFramework asInterface = ISehAuthenticationFramework.Stub.asInterface(ServiceManager.waitForDeclaredService(ISehAuthenticationFramework.DESCRIPTOR + "/default"));
-                this.mService = asInterface;
-                if (asInterface != null) {
-                    asInterface.asBinder().linkToDeath(this, 0);
+                ISehAuthenticationFramework iSehAuthenticationFrameworkAsInterface = ISehAuthenticationFramework.Stub.asInterface(ServiceManager.waitForDeclaredService(ISehAuthenticationFramework.DESCRIPTOR + "/default"));
+                this.mService = iSehAuthenticationFrameworkAsInterface;
+                if (iSehAuthenticationFrameworkAsInterface != null) {
+                    iSehAuthenticationFrameworkAsInterface.asBinder().linkToDeath(this, 0);
                 }
             } catch (RemoteException unused) {
                 return null;
@@ -52,7 +52,7 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
         return load(translateTaType(trustedAppAssetType), parcelFileDescriptor, j, j2);
     }
 
-    private boolean load(int i, ParcelFileDescriptor parcelFileDescriptor, long j, long j2) {
+    private boolean load(int i, ParcelFileDescriptor parcelFileDescriptor, long j, long j2) throws IOException {
         if (i == 0) {
             AuthenticatorLog.e(TAG, "type can not be 0");
             return false;
@@ -70,11 +70,11 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
                             AuthenticatorLog.e(TAG, "Skipped fewer bytes than requested.");
                         }
                         while (true) {
-                            int read = autoCloseInputStream.read(bArr2);
-                            if (read == -1) {
+                            int i2 = autoCloseInputStream.read(bArr2);
+                            if (i2 == -1) {
                                 break;
                             }
-                            byteArrayOutputStream.write(bArr2, 0, read);
+                            byteArrayOutputStream.write(bArr2, 0, i2);
                         }
                         byte[] byteArray = byteArrayOutputStream.toByteArray();
                         byteArrayOutputStream.close();
@@ -90,11 +90,11 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
             }
         }
         try {
-            boolean load = iSehAuthenticationFramework.load(i, bArr);
-            if (load) {
+            boolean zLoad = iSehAuthenticationFramework.load(i, bArr);
+            if (zLoad) {
                 return true;
             }
-            AuthenticatorLog.e(TAG, "load fail. " + load);
+            AuthenticatorLog.e(TAG, "load fail. " + zLoad);
             return false;
         } catch (RemoteException e2) {
             AuthenticatorLog.e(TAG, "initialize failed : " + e2.getMessage());
@@ -119,11 +119,11 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
             return false;
         }
         try {
-            boolean terminate = ((ISehAuthenticationFramework) checkNotNullState(getService())).terminate(i);
-            if (terminate) {
+            boolean zTerminate = ((ISehAuthenticationFramework) checkNotNullState(getService())).terminate(i);
+            if (zTerminate) {
                 return true;
             }
-            AuthenticatorLog.e(TAG, "unload fail. " + terminate);
+            AuthenticatorLog.e(TAG, "unload fail. " + zTerminate);
             return false;
         } catch (RemoteException e) {
             AuthenticatorLog.e(TAG, "terminate failed : " + e.getMessage());
@@ -149,17 +149,17 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
             return null;
         }
         try {
-            SehResult execute = ((ISehAuthenticationFramework) checkNotNullState(getService())).execute(i, bArr);
+            SehResult sehResultExecute = ((ISehAuthenticationFramework) checkNotNullState(getService())).execute(i, bArr);
             StringBuilder sb = new StringBuilder("ret: ");
-            sb.append(execute.status);
+            sb.append(sehResultExecute.status);
             sb.append(", ");
-            sb.append(execute.data == null ? -1 : execute.data.length);
+            sb.append(sehResultExecute.data == null ? -1 : sehResultExecute.data.length);
             AuthenticatorLog.i(TAG, sb.toString());
-            if (execute.data == null || execute.data.length <= 0) {
+            if (sehResultExecute.data == null || sehResultExecute.data.length <= 0) {
                 return null;
             }
-            bArr2 = new byte[execute.data.length];
-            System.arraycopy(execute.data, 0, bArr2, 0, execute.data.length);
+            bArr2 = new byte[sehResultExecute.data.length];
+            System.arraycopy(sehResultExecute.data, 0, bArr2, 0, sehResultExecute.data.length);
             return bArr2;
         } catch (RemoteException e) {
             AuthenticatorLog.e(TAG, "process failed : " + e.getMessage());

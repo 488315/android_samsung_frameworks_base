@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.sec.clipboard.util.Log;
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 /* loaded from: classes6.dex */
@@ -82,14 +83,14 @@ public class SemIntentClipData extends SemClipData {
     }
 
     private void setClipData() {
-        Intent intent;
+        Intent uri;
         try {
-            intent = Intent.parseUri(this.mValue, 1);
+            uri = Intent.parseUri(this.mValue, 1);
         } catch (URISyntaxException e) {
             e.printStackTrace();
-            intent = null;
+            uri = null;
         }
-        setClipData(new String[]{ClipDescription.MIMETYPE_TEXT_INTENT}, new ClipData.Item(intent));
+        setClipData(new String[]{ClipDescription.MIMETYPE_TEXT_INTENT}, new ClipData.Item(uri));
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
@@ -124,7 +125,7 @@ public class SemIntentClipData extends SemClipData {
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData, android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         Log.secI(TAG, "Intent write to parcel");
         parcel.writeInt(8);
         super.writeToParcel(parcel, i);
@@ -135,11 +136,11 @@ public class SemIntentClipData extends SemClipData {
         StringBuilder sb = new StringBuilder("SemIntentClipData class. Value is ");
         int length = this.mValue.length();
         String str = this.mValue;
-        CharSequence charSequence = str;
+        CharSequence charSequenceSubSequence = str;
         if (length > 20) {
-            charSequence = str.subSequence(0, 20);
+            charSequenceSubSequence = str.subSequence(0, 20);
         }
-        sb.append((Object) charSequence);
+        sb.append((Object) charSequenceSubSequence);
         return sb.toString();
     }
 }

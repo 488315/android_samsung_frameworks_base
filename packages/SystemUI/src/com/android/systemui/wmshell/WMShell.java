@@ -74,7 +74,6 @@ import java.util.function.Consumer;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -124,6 +123,11 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
     };
     public final UserTracker.Callback mUserChangedCallback = new UserTracker.Callback() { // from class: com.android.systemui.wmshell.WMShell.4
         @Override // com.android.systemui.settings.UserTracker.Callback
+        public final void onBeforeUserSwitching(int i) {
+            WMShell.this.mShell.onBeforeUserSwitching(i);
+        }
+
+        @Override // com.android.systemui.settings.UserTracker.Callback
         public final void onProfilesChanged(List list) {
             WMShell.this.mShell.onUserProfilesChanged(list);
         }
@@ -147,14 +151,12 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wmshell.WMShell$10, reason: invalid class name */
     public class AnonymousClass10 {
         public AnonymousClass10() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wmshell.WMShell$12, reason: invalid class name */
     public class AnonymousClass12 implements OneHandedTransitionCallback {
         public AnonymousClass12() {
@@ -176,7 +178,6 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wmshell.WMShell$13, reason: invalid class name */
     public class AnonymousClass13 {
         public AnonymousClass13() {
@@ -351,9 +352,9 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
                 switch (i2) {
                     case 0:
                         CommandQueue commandQueue2 = (CommandQueue) obj2;
-                        boolean booleanValue = ((Boolean) obj).booleanValue();
+                        boolean zBooleanValue = ((Boolean) obj).booleanValue();
                         synchronized (commandQueue2.mLock) {
-                            commandQueue2.mHandler.obtainMessage(3080192, booleanValue ? 1 : 0, 0).sendToTarget();
+                            commandQueue2.mHandler.obtainMessage(3080192, zBooleanValue ? 1 : 0, 0).sendToTarget();
                         }
                         return;
                     default:
@@ -367,7 +368,7 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
         RecentTasksController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.recents.RecentTasksController$RecentTasksImpl$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                RecentTasksController.RecentTasksImpl recentTasksImpl2 = RecentTasksController.RecentTasksImpl.this;
+                RecentTasksController.RecentTasksImpl recentTasksImpl2 = recentTasksImpl;
                 Executor executor2 = executor;
                 WMShell$$ExternalSyntheticLambda2 wMShell$$ExternalSyntheticLambda2 = r2;
                 RecentsTransitionHandler recentsTransitionHandler = RecentTasksController.this.mTransitionHandler;
@@ -406,9 +407,9 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
                 switch (i22) {
                     case 0:
                         CommandQueue commandQueue2 = (CommandQueue) obj2;
-                        boolean booleanValue = ((Boolean) obj).booleanValue();
+                        boolean zBooleanValue = ((Boolean) obj).booleanValue();
                         synchronized (commandQueue2.mLock) {
-                            commandQueue2.mHandler.obtainMessage(3080192, booleanValue ? 1 : 0, 0).sendToTarget();
+                            commandQueue2.mHandler.obtainMessage(3080192, zBooleanValue ? 1 : 0, 0).sendToTarget();
                         }
                         return;
                     default:
@@ -502,7 +503,7 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
         this.mCommandRegistry.registerCommand("wmshell-passthrough", new Function0() { // from class: com.android.systemui.wmshell.WMShell$$ExternalSyntheticLambda5
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return WMShell.this.mShellCommand;
+                return this.f$0.mShellCommand;
             }
         });
         this.mPipOptional.ifPresent(new WMShell$$ExternalSyntheticLambda0(this, 3));
@@ -517,9 +518,9 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks {
         Reflection.getOrCreateKotlinClass(NoteTaskInitializer.class).getSimpleName();
         if (noteTaskInitializer.isEnabled && !noteTaskInitializer.optionalBubbles.isEmpty()) {
             InputManager inputManager = noteTaskInitializer.inputManager;
-            List singletonList = Collections.singletonList(33);
+            List listSingletonList = Collections.singletonList(33);
             NoteTaskInitializer$callbacks$1 noteTaskInitializer$callbacks$1 = noteTaskInitializer.callbacks;
-            inputManager.registerKeyGestureEventHandler(singletonList, noteTaskInitializer$callbacks$1);
+            inputManager.registerKeyGestureEventHandler(listSingletonList, noteTaskInitializer$callbacks$1);
             noteTaskInitializer.roleManager.addOnRoleHoldersChangedListenerAsUser(noteTaskInitializer.backgroundExecutor, noteTaskInitializer$callbacks$1, UserHandle.ALL);
             UserTrackerImpl userTrackerImpl = (UserTrackerImpl) noteTaskInitializer.userTracker;
             int userId = userTrackerImpl.getUserId();

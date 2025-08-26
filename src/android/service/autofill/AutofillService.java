@@ -48,9 +48,9 @@ public abstract class AutofillService extends Service {
 
         @Override // android.service.autofill.IAutoFillService
         public void onFillRequest(FillRequest fillRequest, IFillCallback iFillCallback) {
-            ICancellationSignal createTransport = CancellationSignal.createTransport();
+            ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
             try {
-                iFillCallback.onCancellable(createTransport);
+                iFillCallback.onCancellable(iCancellationSignalCreateTransport);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
@@ -59,7 +59,7 @@ public abstract class AutofillService extends Service {
                 public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
                     ((AutofillService) obj).onFillRequest((FillRequest) obj2, (CancellationSignal) obj3, (FillCallback) obj4);
                 }
-            }, AutofillService.this, fillRequest, CancellationSignal.fromTransport(createTransport), new FillCallback(iFillCallback, fillRequest.getId())));
+            }, AutofillService.this, fillRequest, CancellationSignal.fromTransport(iCancellationSignalCreateTransport), new FillCallback(iFillCallback, fillRequest.getId())));
         }
 
         @Override // android.service.autofill.IAutoFillService
@@ -74,9 +74,9 @@ public abstract class AutofillService extends Service {
 
         @Override // android.service.autofill.IAutoFillService
         public void onFillCredentialRequest(FillRequest fillRequest, IFillCallback iFillCallback, IBinder iBinder) {
-            ICancellationSignal createTransport = CancellationSignal.createTransport();
+            ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
             try {
-                iFillCallback.onCancellable(createTransport);
+                iFillCallback.onCancellable(iCancellationSignalCreateTransport);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
@@ -85,7 +85,7 @@ public abstract class AutofillService extends Service {
                 public final void accept(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
                     ((AutofillService) obj).onFillCredentialRequest((FillRequest) obj2, (CancellationSignal) obj3, (FillCallback) obj4, (IBinder) obj5);
                 }
-            }, AutofillService.this, fillRequest, CancellationSignal.fromTransport(createTransport), new FillCallback(iFillCallback, fillRequest.getId()), iBinder));
+            }, AutofillService.this, fillRequest, CancellationSignal.fromTransport(iCancellationSignalCreateTransport), new FillCallback(iFillCallback, fillRequest.getId()), iBinder));
         }
 
         @Override // android.service.autofill.IAutoFillService

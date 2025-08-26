@@ -9,6 +9,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.autofill.AutofillManager;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
@@ -21,10 +22,10 @@ public final class AutofillOptions implements Parcelable {
             autofillOptions.augmentedAutofillEnabled = parcel.readBoolean();
             autofillOptions.whitelistedActivitiesForAugmentedAutofill = parcel.readArraySet(null);
             autofillOptions.appDisabledExpiration = parcel.readLong();
-            int readInt = parcel.readInt();
-            if (readInt > 0) {
+            int i = parcel.readInt();
+            if (i > 0) {
                 autofillOptions.disabledActivities = new ArrayMap<>();
-                for (int i = 0; i < readInt; i++) {
+                for (int i2 = 0; i2 < i; i2++) {
                     autofillOptions.disabledActivities.put(parcel.readString(), Long.valueOf(parcel.readLong()));
                 }
             }
@@ -60,35 +61,35 @@ public final class AutofillOptions implements Parcelable {
         if (!this.augmentedAutofillEnabled || (autofillClient = context.getAutofillClient()) == null) {
             return false;
         }
-        ComponentName autofillClientGetComponentName = autofillClient.autofillClientGetComponentName();
+        ComponentName componentNameAutofillClientGetComponentName = autofillClient.autofillClientGetComponentName();
         ArraySet<ComponentName> arraySet = this.whitelistedActivitiesForAugmentedAutofill;
-        return arraySet == null || arraySet.contains(autofillClientGetComponentName);
+        return arraySet == null || arraySet.contains(componentNameAutofillClientGetComponentName);
     }
 
     public boolean isAutofillDisabledLocked(ComponentName componentName) {
         Long l;
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        String flattenToString = componentName.flattenToString();
-        if (this.appDisabledExpiration >= elapsedRealtime) {
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        String strFlattenToString = componentName.flattenToString();
+        if (this.appDisabledExpiration >= jElapsedRealtime) {
             return true;
         }
         ArrayMap<String, Long> arrayMap = this.disabledActivities;
-        if (arrayMap != null && (l = arrayMap.get(flattenToString)) != null) {
-            if (l.longValue() >= elapsedRealtime) {
+        if (arrayMap != null && (l = arrayMap.get(strFlattenToString)) != null) {
+            if (l.longValue() >= jElapsedRealtime) {
                 return true;
             }
-            this.disabledActivities.remove(flattenToString);
+            this.disabledActivities.remove(strFlattenToString);
         }
         this.appDisabledExpiration = 0L;
         return false;
     }
 
     public static AutofillOptions forWhitelistingItself() {
-        ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-        if (currentActivityThread == null) {
+        ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+        if (activityThreadCurrentActivityThread == null) {
             throw new IllegalStateException("No ActivityThread");
         }
-        String packageName = currentActivityThread.getApplication().getPackageName();
+        String packageName = activityThreadCurrentActivityThread.getApplication().getPackageName();
         if (!"android.autofillservice.cts".equals(packageName)) {
             Log.e(TAG, "forWhitelistingItself(): called by " + packageName);
             throw new SecurityException("Thou shall not pass!");
@@ -123,7 +124,7 @@ public final class AutofillOptions implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.loggingLevel);
         parcel.writeBoolean(this.compatModeEnabled);
         parcel.writeBoolean(this.augmentedAutofillEnabled);
@@ -134,9 +135,9 @@ public final class AutofillOptions implements Parcelable {
         parcel.writeInt(size);
         if (size > 0) {
             for (int i2 = 0; i2 < size; i2++) {
-                String keyAt = this.disabledActivities.keyAt(i2);
-                parcel.writeString(keyAt);
-                parcel.writeLong(this.disabledActivities.get(keyAt).longValue());
+                String strKeyAt = this.disabledActivities.keyAt(i2);
+                parcel.writeString(strKeyAt);
+                parcel.writeLong(this.disabledActivities.get(strKeyAt).longValue());
             }
         }
     }

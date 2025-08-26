@@ -4,13 +4,11 @@ import com.android.systemui.blur.data.repository.SecBouncerColorCurveRepository;
 import com.android.systemui.blur.data.repository.SecQsColorCurveRepository;
 import com.android.systemui.blur.di.SecPanelBlurBinding;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CapturedBlurBlurInfoProvider {
     public final SecBouncerColorCurveRepository secBouncerColorCurveRepository;
     public final SecQsColorCurveRepository secQsColorCurveRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

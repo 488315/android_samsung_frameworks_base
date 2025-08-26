@@ -17,7 +17,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(action = PluginKeyguardStatusView.ACTION, version = 0)
 @SupportVersionChecker
 /* loaded from: classes2.dex */
@@ -27,7 +26,6 @@ public interface PluginKeyguardStatusView extends Plugin {
     public static final int MINOR_VERSION = 6;
     public static final int VERSION = 4006;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @SupportVersionChecker
     public interface Callback {
         @VersionCheck(version = 1028)

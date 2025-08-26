@@ -19,7 +19,7 @@ public class AttachedDevices {
         return this.item;
     }
 
-    static AttachedDevices read(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static AttachedDevices read(XmlPullParser xmlPullParser) throws XmlPullParserException, DatatypeConfigurationException, IOException {
         int next;
         AttachedDevices attachedDevices = new AttachedDevices();
         xmlPullParser.getDepth();

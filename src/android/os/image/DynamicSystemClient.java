@@ -96,9 +96,9 @@ public class DynamicSystemClient {
             Slog.v(DynamicSystemClient.TAG, "onServiceConnected: " + componentName);
             DynamicSystemClient.this.mService = new Messenger(iBinder);
             try {
-                Message obtain = Message.obtain((Handler) null, 1);
-                obtain.replyTo = DynamicSystemClient.this.mMessenger;
-                DynamicSystemClient.this.mService.send(obtain);
+                Message messageObtain = Message.obtain((Handler) null, 1);
+                messageObtain.replyTo = DynamicSystemClient.this.mMessenger;
+                DynamicSystemClient.this.mService.send(messageObtain);
             } catch (RemoteException e) {
                 Slog.e(DynamicSystemClient.TAG, "Unable to get status from installation service");
                 DynamicSystemClient.this.notifyOnStatusChangedListener(0, 5, 0L, e);
@@ -136,7 +136,7 @@ public class DynamicSystemClient {
                 executor.execute(new Runnable() { // from class: android.os.image.DynamicSystemClient$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DynamicSystemClient.this.lambda$notifyOnStatusChangedListener$0(i, i2, j, th);
+                        this.f$0.lambda$notifyOnStatusChangedListener$0(i, i2, j, th);
                     }
                 });
             } else {
@@ -163,9 +163,9 @@ public class DynamicSystemClient {
         if (this.mBound) {
             if (this.mService != null) {
                 try {
-                    Message obtain = Message.obtain((Handler) null, 2);
-                    obtain.replyTo = this.mMessenger;
-                    this.mService.send(obtain);
+                    Message messageObtain = Message.obtain((Handler) null, 2);
+                    messageObtain.replyTo = this.mMessenger;
+                    this.mService.send(messageObtain);
                 } catch (RemoteException unused) {
                     Slog.e(TAG, "Unable to unregister from installation service");
                 }

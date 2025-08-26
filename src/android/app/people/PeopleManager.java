@@ -3,7 +3,6 @@ package android.app.people;
 import android.annotation.SystemApi;
 import android.app.people.IConversationListener;
 import android.app.people.IPeopleManager;
-import android.app.people.PeopleManager;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.os.RemoteException;
@@ -141,7 +140,7 @@ public final class PeopleManager {
                 executor.execute(new Runnable() { // from class: android.app.people.PeopleManager$ConversationListenerProxy$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PeopleManager.ConversationListenerProxy.this.lambda$onConversationUpdate$0(conversationChannel);
+                        this.f$0.lambda$onConversationUpdate$0(conversationChannel);
                     }
                 });
             }

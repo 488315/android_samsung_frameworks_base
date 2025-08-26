@@ -46,9 +46,9 @@ public interface ICapturePresetDevicesRoleDispatcher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICapturePresetDevicesRoleDispatcher.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICapturePresetDevicesRoleDispatcher)) {
-                return (ICapturePresetDevicesRoleDispatcher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICapturePresetDevicesRoleDispatcher.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICapturePresetDevicesRoleDispatcher)) {
+                return (ICapturePresetDevicesRoleDispatcher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,11 +75,11 @@ public interface ICapturePresetDevicesRoleDispatcher extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                 parcel.enforceNoDataAvail();
-                dispatchDevicesRoleChanged(readInt, readInt2, createTypedArrayList);
+                dispatchDevicesRoleChanged(i3, i4, arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,15 +103,15 @@ public interface ICapturePresetDevicesRoleDispatcher extends IInterface {
 
             @Override // android.media.ICapturePresetDevicesRoleDispatcher
             public void dispatchDevicesRoleChanged(int i, int i2, List<AudioDeviceAttributes> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICapturePresetDevicesRoleDispatcher.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICapturePresetDevicesRoleDispatcher.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

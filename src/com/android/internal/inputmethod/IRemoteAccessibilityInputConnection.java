@@ -104,9 +104,9 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteAccessibilityInputConnection.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteAccessibilityInputConnection)) {
-                return (IRemoteAccessibilityInputConnection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteAccessibilityInputConnection)) {
+                return (IRemoteAccessibilityInputConnection) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -154,33 +154,33 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
                 case 1:
                     InputConnectionCommandHeader inputConnectionCommandHeader = (InputConnectionCommandHeader) parcel.readTypedObject(InputConnectionCommandHeader.CREATOR);
                     CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     TextAttribute textAttribute = (TextAttribute) parcel.readTypedObject(TextAttribute.CREATOR);
                     parcel.enforceNoDataAvail();
-                    commitText(inputConnectionCommandHeader, charSequence, readInt, textAttribute);
+                    commitText(inputConnectionCommandHeader, charSequence, i3, textAttribute);
                     return true;
                 case 2:
                     InputConnectionCommandHeader inputConnectionCommandHeader2 = (InputConnectionCommandHeader) parcel.readTypedObject(InputConnectionCommandHeader.CREATOR);
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setSelection(inputConnectionCommandHeader2, readInt2, readInt3);
+                    setSelection(inputConnectionCommandHeader2, i4, i5);
                     return true;
                 case 3:
                     InputConnectionCommandHeader inputConnectionCommandHeader3 = (InputConnectionCommandHeader) parcel.readTypedObject(InputConnectionCommandHeader.CREATOR);
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     AndroidFuture androidFuture = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getSurroundingText(inputConnectionCommandHeader3, readInt4, readInt5, readInt6, androidFuture);
+                    getSurroundingText(inputConnectionCommandHeader3, i6, i7, i8, androidFuture);
                     return true;
                 case 4:
                     InputConnectionCommandHeader inputConnectionCommandHeader4 = (InputConnectionCommandHeader) parcel.readTypedObject(InputConnectionCommandHeader.CREATOR);
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    deleteSurroundingText(inputConnectionCommandHeader4, readInt7, readInt8);
+                    deleteSurroundingText(inputConnectionCommandHeader4, i9, i10);
                     return true;
                 case 5:
                     InputConnectionCommandHeader inputConnectionCommandHeader5 = (InputConnectionCommandHeader) parcel.readTypedObject(InputConnectionCommandHeader.CREATOR);
@@ -190,28 +190,28 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
                     return true;
                 case 6:
                     InputConnectionCommandHeader inputConnectionCommandHeader6 = (InputConnectionCommandHeader) parcel.readTypedObject(InputConnectionCommandHeader.CREATOR);
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    performEditorAction(inputConnectionCommandHeader6, readInt9);
+                    performEditorAction(inputConnectionCommandHeader6, i11);
                     return true;
                 case 7:
                     InputConnectionCommandHeader inputConnectionCommandHeader7 = (InputConnectionCommandHeader) parcel.readTypedObject(InputConnectionCommandHeader.CREATOR);
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    performContextMenuAction(inputConnectionCommandHeader7, readInt10);
+                    performContextMenuAction(inputConnectionCommandHeader7, i12);
                     return true;
                 case 8:
                     InputConnectionCommandHeader inputConnectionCommandHeader8 = (InputConnectionCommandHeader) parcel.readTypedObject(InputConnectionCommandHeader.CREATOR);
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     AndroidFuture androidFuture2 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getCursorCapsMode(inputConnectionCommandHeader8, readInt11, androidFuture2);
+                    getCursorCapsMode(inputConnectionCommandHeader8, i13, androidFuture2);
                     return true;
                 case 9:
                     InputConnectionCommandHeader inputConnectionCommandHeader9 = (InputConnectionCommandHeader) parcel.readTypedObject(InputConnectionCommandHeader.CREATOR);
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearMetaKeyStates(inputConnectionCommandHeader9, readInt12);
+                    clearMetaKeyStates(inputConnectionCommandHeader9, i14);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -236,131 +236,131 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
             public void commitText(InputConnectionCommandHeader inputConnectionCommandHeader, CharSequence charSequence, int i, TextAttribute textAttribute) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(inputConnectionCommandHeader, 0);
+                    parcelObtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputConnectionCommandHeader, 0);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(textAttribute, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(textAttribute, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
             public void setSelection(InputConnectionCommandHeader inputConnectionCommandHeader, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(inputConnectionCommandHeader, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputConnectionCommandHeader, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
             public void getSurroundingText(InputConnectionCommandHeader inputConnectionCommandHeader, int i, int i2, int i3, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(inputConnectionCommandHeader, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputConnectionCommandHeader, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
             public void deleteSurroundingText(InputConnectionCommandHeader inputConnectionCommandHeader, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(inputConnectionCommandHeader, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputConnectionCommandHeader, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
             public void sendKeyEvent(InputConnectionCommandHeader inputConnectionCommandHeader, KeyEvent keyEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(inputConnectionCommandHeader, 0);
-                    obtain.writeTypedObject(keyEvent, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputConnectionCommandHeader, 0);
+                    parcelObtain.writeTypedObject(keyEvent, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
             public void performEditorAction(InputConnectionCommandHeader inputConnectionCommandHeader, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(inputConnectionCommandHeader, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputConnectionCommandHeader, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
             public void performContextMenuAction(InputConnectionCommandHeader inputConnectionCommandHeader, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(inputConnectionCommandHeader, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputConnectionCommandHeader, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
             public void getCursorCapsMode(InputConnectionCommandHeader inputConnectionCommandHeader, int i, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(inputConnectionCommandHeader, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputConnectionCommandHeader, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
             public void clearMetaKeyStates(InputConnectionCommandHeader inputConnectionCommandHeader, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(inputConnectionCommandHeader, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputConnectionCommandHeader, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

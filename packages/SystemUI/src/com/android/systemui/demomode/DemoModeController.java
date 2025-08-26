@@ -15,23 +15,33 @@ import com.android.systemui.statusbar.policy.CallbackController;
 import com.android.systemui.util.Assert;
 import com.android.systemui.util.settings.GlobalSettings;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
+import kotlinx.coroutines.channels.ChannelCoroutine;
+import kotlinx.coroutines.channels.ProduceKt;
+import kotlinx.coroutines.channels.ProducerScope;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DemoModeController implements CallbackController, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -45,13 +55,80 @@ public final class DemoModeController implements CallbackController, Dumpable {
     public final List receivers = new ArrayList();
     public final DemoModeController$tracker$1 tracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.demomode.DemoModeController$demoFlowForCommand$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ String $command;
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(String str, Continuation continuation) {
+            super(2, continuation);
+            this.$command = str;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass1 anonymousClass1 = DemoModeController.this.new AnonymousClass1(this.$command, continuation);
+            anonymousClass1.L$0 = obj;
+            return anonymousClass1;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Multi-variable type inference failed */
+        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.demomode.DemoMode, com.android.systemui.demomode.DemoModeController$demoFlowForCommand$1$callback$1] */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final ProducerScope producerScope = (ProducerScope) this.L$0;
+                final String str = this.$command;
+                final ?? r1 = new DemoMode() { // from class: com.android.systemui.demomode.DemoModeController$demoFlowForCommand$1$callback$1
+                    @Override // com.android.systemui.demomode.DemoMode
+                    public final List demoCommands() {
+                        return Collections.singletonList(str);
+                    }
+
+                    @Override // com.android.systemui.demomode.DemoModeCommandReceiver
+                    public final void dispatchDemoCommand(Bundle bundle, String str2) {
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(bundle);
+                    }
+                };
+                DemoModeController.this.addCallback((DemoMode) r1);
+                final DemoModeController demoModeController = DemoModeController.this;
+                Function0 function0 = new Function0() { // from class: com.android.systemui.demomode.DemoModeController$demoFlowForCommand$1$$ExternalSyntheticLambda0
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        demoModeController.removeCallback((DemoMode) r1);
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (ProduceKt.awaitClose(producerScope, function0, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -81,12 +158,12 @@ public final class DemoModeController implements CallbackController, Dumpable {
             @Override // com.android.systemui.demomode.DemoModeAvailabilityTracker
             public final void onDemoModeAvailabilityChanged() {
                 int i = DemoModeController.$r8$clinit;
-                DemoModeController.this.getClass();
+                this.this$0.getClass();
             }
 
             @Override // com.android.systemui.demomode.DemoModeAvailabilityTracker
             public final void onDemoModeFinished() {
-                DemoModeController demoModeController = DemoModeController.this;
+                DemoModeController demoModeController = this.this$0;
                 demoModeController.getClass();
                 if (this.isInDemoMode) {
                     demoModeController.exitDemoMode$1();
@@ -95,7 +172,7 @@ public final class DemoModeController implements CallbackController, Dumpable {
 
             @Override // com.android.systemui.demomode.DemoModeAvailabilityTracker
             public final void onDemoModeStarted() {
-                DemoModeController.this.getClass();
+                this.this$0.getClass();
             }
         };
         this.broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.demomode.DemoModeController$broadcastReceiver$1
@@ -108,7 +185,7 @@ public final class DemoModeController implements CallbackController, Dumpable {
                         return;
                     }
                     try {
-                        DemoModeController.this.dispatchDemoCommand(extras, lowerCase);
+                        this.this$0.dispatchDemoCommand(extras, lowerCase);
                     } catch (Throwable th) {
                         Log.w("DemoModeController", "Error running demo command, intent=" + intent + " " + th);
                     }
@@ -118,7 +195,7 @@ public final class DemoModeController implements CallbackController, Dumpable {
     }
 
     public final Flow demoFlowForCommand() {
-        return FlowConflatedKt.conflatedCallbackFlow(new DemoModeController$demoFlowForCommand$1(this, "network", null));
+        return FlowConflatedKt.conflatedCallbackFlow(new AnonymousClass1("network", null));
     }
 
     public final void dispatchDemoCommand(Bundle bundle, String str) {
@@ -137,7 +214,7 @@ public final class DemoModeController implements CallbackController, Dumpable {
     }
 
     @Override // com.android.systemui.Dumpable
-    public final void dump(PrintWriter printWriter, String[] strArr) {
+    public final void dump(PrintWriter printWriter, String[] strArr) throws IOException {
         List list;
         printWriter.println("DemoModeController state -");
         printWriter.println("  isInDemoMode=false");
@@ -151,7 +228,7 @@ public final class DemoModeController implements CallbackController, Dumpable {
         printWriter.println("  receivers=[" + CollectionsKt___CollectionsKt.joinToString$default(list2, ", ", null, null, new Function1() { // from class: com.android.systemui.demomode.DemoModeController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 DemoMode demoMode = (DemoMode) obj;
                 switch (i) {
                     case 0:
@@ -180,7 +257,7 @@ public final class DemoModeController implements CallbackController, Dumpable {
             printWriter.println(MotionLayout$$ExternalSyntheticOutline0.m("    ", str, " : [", CollectionsKt___CollectionsKt.joinToString$default(list3, ", ", null, null, new Function1() { // from class: com.android.systemui.demomode.DemoModeController$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     DemoMode demoMode = (DemoMode) obj;
                     switch (i2) {
                         case 0:
@@ -220,9 +297,9 @@ public final class DemoModeController implements CallbackController, Dumpable {
 
     @Override // com.android.systemui.statusbar.policy.CallbackController
     public final void addCallback(DemoMode demoMode) {
-        List<String> demoCommands = demoMode.demoCommands();
-        demoCommands.getClass();
-        for (String str : demoCommands) {
+        List<String> listDemoCommands = demoMode.demoCommands();
+        listDemoCommands.getClass();
+        for (String str : listDemoCommands) {
             if (!this.receiverMap.containsKey(str)) {
                 throw new IllegalStateException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Command (", str, ") not recognized. See DemoMode.java for valid commands"));
             }

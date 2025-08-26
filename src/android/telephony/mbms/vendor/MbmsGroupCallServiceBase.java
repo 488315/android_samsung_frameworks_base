@@ -23,7 +23,7 @@ public class MbmsGroupCallServiceBase extends Service {
                 throw new NullPointerException("Callback must not be null");
             }
             final int callingUid = Binder.getCallingUid();
-            int initialize = MbmsGroupCallServiceBase.this.initialize(new MbmsGroupCallSessionCallback() { // from class: android.telephony.mbms.vendor.MbmsGroupCallServiceBase.1.1
+            int iInitialize = MbmsGroupCallServiceBase.this.initialize(new MbmsGroupCallSessionCallback() { // from class: android.telephony.mbms.vendor.MbmsGroupCallServiceBase.1.1
                 @Override // android.telephony.mbms.MbmsGroupCallSessionCallback
                 public void onError(int i2, String str) {
                     try {
@@ -63,7 +63,7 @@ public class MbmsGroupCallServiceBase extends Service {
                     }
                 }
             }, i);
-            if (initialize == 0) {
+            if (iInitialize == 0) {
                 iMbmsGroupCallSessionCallback.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.telephony.mbms.vendor.MbmsGroupCallServiceBase.1.2
                     @Override // android.os.IBinder.DeathRecipient
                     public void binderDied() {
@@ -71,7 +71,7 @@ public class MbmsGroupCallServiceBase extends Service {
                     }
                 }, 0);
             }
-            return initialize;
+            return iInitialize;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
@@ -90,7 +90,7 @@ public class MbmsGroupCallServiceBase extends Service {
                 throw new NullPointerException("Callback must not be null");
             }
             final int callingUid = Binder.getCallingUid();
-            int startGroupCall = MbmsGroupCallServiceBase.this.startGroupCall(i, j, list, list2, new GroupCallCallback() { // from class: android.telephony.mbms.vendor.MbmsGroupCallServiceBase.1.3
+            int iStartGroupCall = MbmsGroupCallServiceBase.this.startGroupCall(i, j, list, list2, new GroupCallCallback() { // from class: android.telephony.mbms.vendor.MbmsGroupCallServiceBase.1.3
                 @Override // android.telephony.mbms.GroupCallCallback
                 public void onError(int i2, String str) {
                     try {
@@ -121,7 +121,7 @@ public class MbmsGroupCallServiceBase extends Service {
                     }
                 }
             });
-            if (startGroupCall == 0) {
+            if (iStartGroupCall == 0) {
                 iGroupCallCallback.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.telephony.mbms.vendor.MbmsGroupCallServiceBase.1.4
                     @Override // android.os.IBinder.DeathRecipient
                     public void binderDied() {
@@ -129,7 +129,7 @@ public class MbmsGroupCallServiceBase extends Service {
                     }
                 }, 0);
             }
-            return startGroupCall;
+            return iStartGroupCall;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsGroupCallService

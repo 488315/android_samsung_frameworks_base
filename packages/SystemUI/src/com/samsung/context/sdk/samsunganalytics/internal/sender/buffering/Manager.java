@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Manager {
     public static Manager instance;
@@ -36,9 +35,7 @@ public class Manager {
             synchronized (Manager.class) {
                 try {
                     if (instance == null) {
-                        if (PolicyUtils.senderType != 0) {
-                            instance = new Manager(context, false);
-                        } else if (Preferences.getPreferences(context).getString("lgt", "").equals("rtb")) {
+                        if (PolicyUtils.senderType == 0 && Preferences.getPreferences(context).getString("lgt", "").equals("rtb")) {
                             configuration.getClass();
                             instance = new Manager(context, true);
                         } else {
@@ -53,31 +50,31 @@ public class Manager {
     }
 
     public final Queue get(int i) {
-        Queue queue;
+        Queue queueSelect;
         boolean z = this.useDatabase;
         if (z) {
             if (z) {
                 this.dbManager.dbOpenHelper.getWritableDatabase().delete("logs_v2", ValueAnimator$$ExternalSyntheticOutline0.m("timestamp <= ", System.currentTimeMillis() - (5 * 86400000)), null);
             }
             if (i <= 0) {
-                queue = this.dbManager.select("select * from logs_v2");
+                queueSelect = this.dbManager.select("select * from logs_v2");
             } else {
                 DbManager dbManager = this.dbManager;
                 dbManager.getClass();
-                queue = dbManager.select("select * from logs_v2 LIMIT " + i);
+                queueSelect = dbManager.select("select * from logs_v2 LIMIT " + i);
             }
         } else {
-            queue = this.queueManager.logQueue;
+            queueSelect = this.queueManager.logQueue;
         }
-        if (!queue.isEmpty()) {
+        if (!queueSelect.isEmpty()) {
             StringBuilder sb = new StringBuilder("get log from ");
             sb.append(this.useDatabase ? "Database " : "Queue ");
             sb.append("(");
-            sb.append(queue.size());
+            sb.append(queueSelect.size());
             sb.append(")");
             Debug.LogENG(sb.toString());
         }
-        return queue;
+        return queueSelect;
     }
 
     public final void insert(SimpleLog simpleLog) {
@@ -109,8 +106,8 @@ public class Manager {
                             i2 = size;
                         }
                         int i3 = i + i2;
-                        List subList = arrayList.subList(i, i3);
-                        writableDatabase.delete("logs_v2", ("_id IN(" + new String(new char[subList.size() - 1]).replaceAll("\u0000", "?,")) + "?)", (String[]) subList.toArray(new String[0]));
+                        List listSubList = arrayList.subList(i, i3);
+                        writableDatabase.delete("logs_v2", ("_id IN(" + new String(new char[listSubList.size() - 1]).replaceAll("\u0000", "?,")) + "?)", (String[]) listSubList.toArray(new String[0]));
                         size -= i2;
                         i = i3;
                     }

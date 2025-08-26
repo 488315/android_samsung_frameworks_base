@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class SuspendAnimatorsKt {
     public static final void access$resumeIfCan(CancellableContinuation cancellableContinuation, Unit unit) {
@@ -35,13 +34,13 @@ public abstract class SuspendAnimatorsKt {
         final DynamicAnimation.OnAnimationUpdateListener onAnimationUpdateListener = new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.volume.dialog.ui.utils.SuspendAnimatorsKt$suspendAnimate$7$updateListener$1
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationUpdateListener
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f2, float f3) {
-                Function1.this.mo779invoke(Float.valueOf(f2));
+                function1.mo781invoke(Float.valueOf(f2));
             }
         };
         final DynamicAnimation.OnAnimationEndListener onAnimationEndListener = new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.volume.dialog.ui.utils.SuspendAnimatorsKt$suspendAnimate$7$endListener$1
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f2, float f3) {
-                SuspendAnimatorsKt.access$resumeIfCan(CancellableContinuation.this, Unit.INSTANCE);
+                SuspendAnimatorsKt.access$resumeIfCan(cancellableContinuationImpl, Unit.INSTANCE);
             }
         };
         springAnimation.addUpdateListener(onAnimationUpdateListener);
@@ -50,12 +49,12 @@ public abstract class SuspendAnimatorsKt {
         cancellableContinuationImpl.invokeOnCancellation(new Function1() { // from class: com.android.systemui.volume.dialog.ui.utils.SuspendAnimatorsKt$suspendAnimate$7$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                SpringAnimation springAnimation2 = SpringAnimation.this;
+            public final Object mo781invoke(Object obj) {
+                SpringAnimation springAnimation2 = springAnimation;
                 ArrayList arrayList = springAnimation2.mUpdateListeners;
-                int indexOf = arrayList.indexOf(onAnimationUpdateListener);
-                if (indexOf >= 0) {
-                    arrayList.set(indexOf, null);
+                int iIndexOf = arrayList.indexOf(onAnimationUpdateListener);
+                if (iIndexOf >= 0) {
+                    arrayList.set(iIndexOf, null);
                 }
                 springAnimation2.removeEndListener(onAnimationEndListener);
                 springAnimation2.cancel();

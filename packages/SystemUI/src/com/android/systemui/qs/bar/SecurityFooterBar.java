@@ -2,13 +2,13 @@ package com.android.systemui.qs.bar;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSSecurityFooter;
 import com.android.systemui.statusbar.policy.SecurityControllerImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecurityFooterBar extends BarItemImpl {
     public final QSSecurityFooter mSecurityFooter;
@@ -64,7 +64,7 @@ public class SecurityFooterBar extends BarItemImpl {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void updateHeightMargins() {
+    public final void updateHeightMargins() throws Resources.NotFoundException {
         int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.bar_bottom_margin_security_footer);
         LinearLayout linearLayout = (LinearLayout) this.mSecurityFooter.getView();
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();

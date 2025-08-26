@@ -16,7 +16,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidUiFrameClock implements MonotonicFrameClock {
     public final Choreographer choreographer;
@@ -66,11 +65,11 @@ public final class AndroidUiFrameClock implements MonotonicFrameClock {
             @Override // android.view.Choreographer.FrameCallback
             public final void doFrame(long j) {
                 Object failure;
-                CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                CancellableContinuation cancellableContinuation = this.$co;
                 Function1 function12 = this.$onFrame;
                 try {
                     int i = Result.$r8$clinit;
-                    failure = function12.mo779invoke(Long.valueOf(j));
+                    failure = function12.mo781invoke(Long.valueOf(j));
                 } catch (Throwable th) {
                     int i2 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
@@ -88,8 +87,8 @@ public final class AndroidUiFrameClock implements MonotonicFrameClock {
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    AndroidUiFrameClock.this.choreographer.removeFrameCallback(frameCallback);
+                public final Object mo781invoke(Object obj) {
+                    this.this$0.choreographer.removeFrameCallback(frameCallback);
                     return Unit.INSTANCE;
                 }
             });
@@ -114,8 +113,8 @@ public final class AndroidUiFrameClock implements MonotonicFrameClock {
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    AndroidUiDispatcher androidUiDispatcher2 = AndroidUiDispatcher.this;
+                public final Object mo781invoke(Object obj) {
+                    AndroidUiDispatcher androidUiDispatcher2 = androidUiDispatcher;
                     Choreographer.FrameCallback frameCallback2 = frameCallback;
                     synchronized (androidUiDispatcher2.lock) {
                         androidUiDispatcher2.toRunOnFrame.remove(frameCallback2);

@@ -8,7 +8,6 @@ import io.reactivex.plugins.RxJavaPlugins;
 import java.util.Comparator;
 import java.util.concurrent.Callable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Functions {
     public static final EmptyAction EMPTY_ACTION;
@@ -16,11 +15,9 @@ public final class Functions {
     public static final EmptyRunnable EMPTY_RUNNABLE;
     public static final OnErrorMissingConsumer ON_ERROR_MISSING;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EmptyLongConsumer {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ErrorConsumer implements Consumer {
         @Override // io.reactivex.functions.Consumer
         public final void accept(Object obj) {
@@ -28,18 +25,15 @@ public final class Functions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FalsePredicate {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Identity {
         public final String toString() {
             return "IdentityFunction";
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MaxRequestSubscription implements Consumer {
         @Override // io.reactivex.functions.Consumer
         public final void accept(Object obj) {
@@ -47,7 +41,6 @@ public final class Functions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NaturalObjectComparator implements Comparator {
         @Override // java.util.Comparator
         public final int compare(Object obj, Object obj2) {
@@ -55,7 +48,6 @@ public final class Functions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NullCallable implements Callable {
         @Override // java.util.concurrent.Callable
         public final Object call() {
@@ -63,7 +55,6 @@ public final class Functions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnErrorMissingConsumer implements Consumer {
         @Override // io.reactivex.functions.Consumer
         public final void accept(Object obj) {
@@ -71,7 +62,6 @@ public final class Functions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TruePredicate {
     }
 
@@ -94,7 +84,6 @@ public final class Functions {
         throw new IllegalStateException("No instances!");
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EmptyAction implements Action {
         public final String toString() {
             return "EmptyAction";
@@ -105,7 +94,6 @@ public final class Functions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EmptyRunnable implements Runnable {
         public final String toString() {
             return "EmptyRunnable";
@@ -116,7 +104,6 @@ public final class Functions {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EmptyConsumer implements Consumer {
         public final String toString() {
             return "EmptyConsumer";

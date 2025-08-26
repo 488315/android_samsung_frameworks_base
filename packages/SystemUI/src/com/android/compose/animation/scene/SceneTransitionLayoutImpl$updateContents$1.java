@@ -25,7 +25,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlin.jvm.internal.Ref$IntRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SceneTransitionLayoutImpl$updateContents$1 {
     public final /* synthetic */ OverscrollFactory $defaultEffectFactory;
@@ -49,7 +48,7 @@ public final class SceneTransitionLayoutImpl$updateContents$1 {
     }
 
     public static void scene$default(SceneTransitionLayoutImpl$updateContents$1 sceneTransitionLayoutImpl$updateContents$1, SceneKey sceneKey, Map map, OffsetOverscrollEffectFactory offsetOverscrollEffectFactory, ComposableLambdaImpl composableLambdaImpl, int i) {
-        Map emptyMap = (i & 2) != 0 ? MapsKt__MapsKt.emptyMap() : map;
+        Map mapEmptyMap = (i & 2) != 0 ? MapsKt__MapsKt.emptyMap() : map;
         OverscrollFactory overscrollFactory = (i & 4) != 0 ? null : offsetOverscrollEffectFactory;
         if (sceneTransitionLayoutImpl$updateContents$1.$overlaysDefined.element) {
             throw new IllegalArgumentException("all scenes must be defined before overlays");
@@ -58,8 +57,8 @@ public final class SceneTransitionLayoutImpl$updateContents$1 {
         LayoutDirection layoutDirection = sceneTransitionLayoutImpl$updateContents$1.$layoutDirection;
         SceneTransitionLayoutImpl sceneTransitionLayoutImpl = sceneTransitionLayoutImpl$updateContents$1.this$0;
         sceneTransitionLayoutImpl.getClass();
-        LinkedHashMap linkedHashMap = new LinkedHashMap(MapsKt__MapsJVMKt.mapCapacity(emptyMap.size()));
-        for (Map.Entry entry : emptyMap.entrySet()) {
+        LinkedHashMap linkedHashMap = new LinkedHashMap(MapsKt__MapsJVMKt.mapCapacity(mapEmptyMap.size()));
+        for (Map.Entry entry : mapEmptyMap.entrySet()) {
             linkedHashMap.put(((UserAction) entry.getKey()).resolve$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(layoutDirection), entry.getValue());
         }
         for (Map.Entry entry2 : linkedHashMap.entrySet()) {
@@ -93,13 +92,13 @@ public final class SceneTransitionLayoutImpl$updateContents$1 {
         if (1 > i2 || i2 >= 1000) {
             throw new IllegalArgumentException("A scene can have at most 999 contents.");
         }
-        long pow = (((long) Math.pow(10.0d, (5 - size) * 3)) * i2) + j;
+        long jPow = (((long) Math.pow(10.0d, (5 - size) * 3)) * i2) + j;
         if (overscrollFactory == null) {
             overscrollFactory = sceneTransitionLayoutImpl$updateContents$1.$defaultEffectFactory;
         }
         OverscrollFactory overscrollFactory2 = overscrollFactory;
         if (scene == null) {
-            snapshotStateMap.put(sceneKey, new Scene(sceneKey, sceneTransitionLayoutImpl$updateContents$1.this$0, composableLambdaImpl, linkedHashMap, ref$IntRef.element, pow, overscrollFactory2, false));
+            snapshotStateMap.put(sceneKey, new Scene(sceneKey, sceneTransitionLayoutImpl$updateContents$1.this$0, composableLambdaImpl, linkedHashMap, ref$IntRef.element, jPow, overscrollFactory2, false));
             return;
         }
         if (scene.alwaysCompose) {
@@ -108,7 +107,7 @@ public final class SceneTransitionLayoutImpl$updateContents$1 {
         ((SnapshotMutableStateImpl) scene.content$delegate).setValue(composableLambdaImpl);
         ((SnapshotMutableStateImpl) scene.userActions$delegate).setValue(linkedHashMap);
         ((SnapshotMutableFloatStateImpl) scene.zIndex$delegate).setFloatValue(ref$IntRef.element);
-        ((SnapshotMutableLongStateImpl) scene.globalZIndex$delegate).setLongValue(pow);
+        ((SnapshotMutableLongStateImpl) scene.globalZIndex$delegate).setLongValue(jPow);
         MutableState mutableState = scene.lastFactory$delegate;
         if (Intrinsics.areEqual(overscrollFactory2, (OverscrollFactory) ((SnapshotMutableStateImpl) mutableState).getValue())) {
             return;

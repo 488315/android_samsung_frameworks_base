@@ -25,19 +25,19 @@ public class SprInputStream {
     }
 
     public int read() throws IOException {
-        int read = this.in.read();
-        if (read >= 0) {
+        int i = this.in.read();
+        if (i >= 0) {
             this.mPosition++;
         }
-        return read;
+        return i;
     }
 
     public int read(byte[] bArr, int i, int i2) throws IOException {
-        int read = this.in.read(bArr, i, i2);
-        if (read > 0) {
-            this.mPosition += read;
+        int i3 = this.in.read(bArr, i, i2);
+        if (i3 > 0) {
+            this.mPosition += i3;
         }
-        return read;
+        return i3;
     }
 
     public synchronized void reset() throws IOException {
@@ -49,11 +49,11 @@ public class SprInputStream {
     }
 
     public long skip(long j) throws IOException {
-        long skip = this.in.skip(j);
-        if (skip > 0) {
-            this.mPosition += skip;
+        long jSkip = this.in.skip(j);
+        if (jSkip > 0) {
+            this.mPosition += jSkip;
         }
-        return skip;
+        return jSkip;
     }
 
     public long getPosition() {
@@ -61,26 +61,26 @@ public class SprInputStream {
     }
 
     public int readInt() throws IOException {
-        int readInt = this.in.readInt();
+        int i = this.in.readInt();
         this.mPosition += 4;
-        return readInt;
+        return i;
     }
 
     public short readShort() throws IOException {
-        short readShort = this.in.readShort();
+        short s = this.in.readShort();
         this.mPosition += 2;
-        return readShort;
+        return s;
     }
 
     public float readFloat() throws IOException {
-        float readFloat = this.in.readFloat();
+        float f = this.in.readFloat();
         this.mPosition += 4;
-        return readFloat;
+        return f;
     }
 
     public byte readByte() throws IOException {
-        byte readByte = this.in.readByte();
+        byte b = this.in.readByte();
         this.mPosition++;
-        return readByte;
+        return b;
     }
 }

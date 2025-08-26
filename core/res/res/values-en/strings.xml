@@ -187,6 +187,7 @@ If you choose to install it anyway, carefully review the app's Privacy Notice an
     <string name="callControlSSModification">Send modified SS by SIM.</string>
     <string name="camera_restrict">Security policy prevents use of camera.</string>
     <string name="can_not_install_app">"Can't install app. App not optimised for use with %s."</string>
+    <string name="can_not_open_searcle_on_the_external_display">"Can't open Circle to Search on a connected display."</string>
     <string name="can_not_open_searcle_on_the_lockscreen">"Can't open Circle to Search on the Lock screen."</string>
     <string name="cannot_open_app_concentration_mode">"Can't open app"</string>
     <string name="cert_fail_reason_alg_non_fips_approved">Certificate algorithm not FIPS approved.</string>
@@ -229,6 +230,7 @@ If you choose to install it anyway, carefully review the app's Privacy Notice an
     <string name="common_secure_boot_nwlock_notification_text">This SIM card is not supported.</string>
     <string name="common_secure_boot_nwlock_notification_title">Invalid SIM card inserted</string>
     <string name="compat_restart_education_text">If this app is displayed incorrectly, try closing it and opening it again.</string>
+    <string name="compat_restart_menu_education_text">If this app is displayed incorrectly, restart it from the More menu.</string>
     <string name="constrained_status_bar_device_locked">Device locked</string>
     <string name="cooldown_mode_toast_v2_phone">"Can't open %s. Phone overheating."</string>
     <string name="cooldown_mode_toast_v2_tablet">"Can't open %s. Tablet overheating."</string>

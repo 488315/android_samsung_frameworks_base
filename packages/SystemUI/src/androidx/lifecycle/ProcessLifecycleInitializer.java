@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ProcessLifecycleInitializer implements Initializer {
     @Override // androidx.startup.Initializer
@@ -33,7 +32,7 @@ public final class ProcessLifecycleInitializer implements Initializer {
         ((Application) context.getApplicationContext()).registerActivityLifecycleCallbacks(new EmptyActivityLifecycleCallbacks() { // from class: androidx.lifecycle.ProcessLifecycleOwner$attach$1
             @Override // androidx.lifecycle.EmptyActivityLifecycleCallbacks, android.app.Application.ActivityLifecycleCallbacks
             public void onActivityPaused(Activity activity) {
-                ProcessLifecycleOwner processLifecycleOwner2 = ProcessLifecycleOwner.this;
+                ProcessLifecycleOwner processLifecycleOwner2 = processLifecycleOwner;
                 int i = processLifecycleOwner2.resumedCounter - 1;
                 processLifecycleOwner2.resumedCounter = i;
                 if (i == 0) {
@@ -45,11 +44,11 @@ public final class ProcessLifecycleInitializer implements Initializer {
 
             @Override // android.app.Application.ActivityLifecycleCallbacks
             public void onActivityPreCreated(Activity activity, Bundle bundle) {
-                final ProcessLifecycleOwner processLifecycleOwner2 = ProcessLifecycleOwner.this;
+                final ProcessLifecycleOwner processLifecycleOwner2 = processLifecycleOwner;
                 ProcessLifecycleOwner.Api29Impl.registerActivityLifecycleCallbacks(activity, new EmptyActivityLifecycleCallbacks() { // from class: androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1
                     @Override // android.app.Application.ActivityLifecycleCallbacks
                     public void onActivityPostResumed(Activity activity2) {
-                        ProcessLifecycleOwner processLifecycleOwner3 = ProcessLifecycleOwner.this;
+                        ProcessLifecycleOwner processLifecycleOwner3 = processLifecycleOwner2;
                         int i = processLifecycleOwner3.resumedCounter + 1;
                         processLifecycleOwner3.resumedCounter = i;
                         if (i == 1) {
@@ -66,7 +65,7 @@ public final class ProcessLifecycleInitializer implements Initializer {
 
                     @Override // android.app.Application.ActivityLifecycleCallbacks
                     public void onActivityPostStarted(Activity activity2) {
-                        ProcessLifecycleOwner processLifecycleOwner3 = ProcessLifecycleOwner.this;
+                        ProcessLifecycleOwner processLifecycleOwner3 = processLifecycleOwner2;
                         int i = processLifecycleOwner3.startedCounter + 1;
                         processLifecycleOwner3.startedCounter = i;
                         if (i == 1 && processLifecycleOwner3.stopSent) {
@@ -79,7 +78,7 @@ public final class ProcessLifecycleInitializer implements Initializer {
 
             @Override // androidx.lifecycle.EmptyActivityLifecycleCallbacks, android.app.Application.ActivityLifecycleCallbacks
             public void onActivityStopped(Activity activity) {
-                ProcessLifecycleOwner processLifecycleOwner2 = ProcessLifecycleOwner.this;
+                ProcessLifecycleOwner processLifecycleOwner2 = processLifecycleOwner;
                 int i = processLifecycleOwner2.startedCounter - 1;
                 processLifecycleOwner2.startedCounter = i;
                 if (i == 0 && processLifecycleOwner2.pauseSent) {

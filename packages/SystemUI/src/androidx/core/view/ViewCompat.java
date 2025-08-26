@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ViewCompat {
     public static final ViewCompat$$ExternalSyntheticLambda0 NO_OP_ON_RECEIVE_CONTENT_VIEW_BEHAVIOR = null;
@@ -32,7 +31,6 @@ public class ViewCompat {
     public static final int[] ACCESSIBILITY_ACTIONS_RESOURCE_IDS = {R.id.accessibility_custom_action_0, R.id.accessibility_custom_action_1, R.id.accessibility_custom_action_2, R.id.accessibility_custom_action_3, R.id.accessibility_custom_action_4, R.id.accessibility_custom_action_5, R.id.accessibility_custom_action_6, R.id.accessibility_custom_action_7, R.id.accessibility_custom_action_8, R.id.accessibility_custom_action_9, R.id.accessibility_custom_action_10, R.id.accessibility_custom_action_11, R.id.accessibility_custom_action_12, R.id.accessibility_custom_action_13, R.id.accessibility_custom_action_14, R.id.accessibility_custom_action_15, R.id.accessibility_custom_action_16, R.id.accessibility_custom_action_17, R.id.accessibility_custom_action_18, R.id.accessibility_custom_action_19, R.id.accessibility_custom_action_20, R.id.accessibility_custom_action_21, R.id.accessibility_custom_action_22, R.id.accessibility_custom_action_23, R.id.accessibility_custom_action_24, R.id.accessibility_custom_action_25, R.id.accessibility_custom_action_26, R.id.accessibility_custom_action_27, R.id.accessibility_custom_action_28, R.id.accessibility_custom_action_29, R.id.accessibility_custom_action_30, R.id.accessibility_custom_action_31};
     public static final AccessibilityPaneVisibilityManager sAccessibilityPaneVisibilityManager = new AccessibilityPaneVisibilityManager();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.core.view.ViewCompat$2, reason: invalid class name */
     public class AnonymousClass2 extends AccessibilityViewProperty {
         public AnonymousClass2(int i, Class cls, int i2, int i3) {
@@ -55,7 +53,6 @@ public class ViewCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.core.view.ViewCompat$3, reason: invalid class name */
     public class AnonymousClass3 extends AccessibilityViewProperty {
         public AnonymousClass3(int i, Class cls, int i2, int i3) {
@@ -78,7 +75,6 @@ public class ViewCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.core.view.ViewCompat$4, reason: invalid class name */
     public class AnonymousClass4 extends AccessibilityViewProperty {
         public AnonymousClass4(int i, Class cls, int i2) {
@@ -103,7 +99,6 @@ public class ViewCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class AccessibilityViewProperty {
         public final int mContentChangeType;
         public final int mFrameworkMinimumSdk;
@@ -159,7 +154,6 @@ public class ViewCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api20Impl {
         private Api20Impl() {
         }
@@ -177,7 +171,6 @@ public class ViewCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api21Impl {
         private Api21Impl() {
         }
@@ -261,7 +254,6 @@ public class ViewCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api23Impl {
         private Api23Impl() {
         }
@@ -283,7 +275,6 @@ public class ViewCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api26Impl {
         private Api26Impl() {
         }
@@ -297,7 +288,6 @@ public class ViewCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api28Impl {
         private Api28Impl() {
         }
@@ -327,7 +317,6 @@ public class ViewCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api29Impl {
         private Api29Impl() {
         }
@@ -341,7 +330,6 @@ public class ViewCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api30Impl {
         private Api30Impl() {
         }
@@ -377,8 +365,8 @@ public class ViewCompat {
         if (windowInsets == null) {
             return windowInsetsCompat;
         }
-        WindowInsets dispatchApplyWindowInsets = Api20Impl.dispatchApplyWindowInsets(view, windowInsets);
-        return !dispatchApplyWindowInsets.equals(windowInsets) ? WindowInsetsCompat.toWindowInsetsCompat(view, dispatchApplyWindowInsets) : windowInsetsCompat;
+        WindowInsets windowInsetsDispatchApplyWindowInsets = Api20Impl.dispatchApplyWindowInsets(view, windowInsets);
+        return !windowInsetsDispatchApplyWindowInsets.equals(windowInsets) ? WindowInsetsCompat.toWindowInsetsCompat(view, windowInsetsDispatchApplyWindowInsets) : windowInsetsCompat;
     }
 
     public static CharSequence getAccessibilityPaneTitle(View view) {
@@ -400,16 +388,16 @@ public class ViewCompat {
         if (accessibilityManager.isEnabled()) {
             boolean z = getAccessibilityPaneTitle(view) != null && view.isShown() && view.getWindowVisibility() == 0;
             if (view.getAccessibilityLiveRegion() != 0 || z) {
-                AccessibilityEvent obtain = AccessibilityEvent.obtain();
-                obtain.setEventType(z ? 32 : 2048);
-                obtain.setContentChangeTypes(i);
+                AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain();
+                accessibilityEventObtain.setEventType(z ? 32 : 2048);
+                accessibilityEventObtain.setContentChangeTypes(i);
                 if (z) {
-                    obtain.getText().add(getAccessibilityPaneTitle(view));
+                    accessibilityEventObtain.getText().add(getAccessibilityPaneTitle(view));
                     if (view.getImportantForAccessibility() == 0) {
                         view.setImportantForAccessibility(1);
                     }
                 }
-                view.sendAccessibilityEventUnchecked(obtain);
+                view.sendAccessibilityEventUnchecked(accessibilityEventObtain);
                 return;
             }
             if (i != 32) {
@@ -424,14 +412,14 @@ public class ViewCompat {
                 }
                 return;
             }
-            AccessibilityEvent obtain2 = AccessibilityEvent.obtain();
-            view.onInitializeAccessibilityEvent(obtain2);
-            obtain2.setEventType(32);
-            obtain2.setContentChangeTypes(i);
-            obtain2.setSource(view);
-            view.onPopulateAccessibilityEvent(obtain2);
-            obtain2.getText().add(getAccessibilityPaneTitle(view));
-            accessibilityManager.sendAccessibilityEvent(obtain2);
+            AccessibilityEvent accessibilityEventObtain2 = AccessibilityEvent.obtain();
+            view.onInitializeAccessibilityEvent(accessibilityEventObtain2);
+            accessibilityEventObtain2.setEventType(32);
+            accessibilityEventObtain2.setContentChangeTypes(i);
+            accessibilityEventObtain2.setSource(view);
+            view.onPopulateAccessibilityEvent(accessibilityEventObtain2);
+            accessibilityEventObtain2.getText().add(getAccessibilityPaneTitle(view));
+            accessibilityManager.sendAccessibilityEvent(accessibilityEventObtain2);
         }
     }
 
@@ -440,8 +428,8 @@ public class ViewCompat {
         if (windowInsets == null) {
             return windowInsetsCompat;
         }
-        WindowInsets onApplyWindowInsets = Api20Impl.onApplyWindowInsets(view, windowInsets);
-        return !onApplyWindowInsets.equals(windowInsets) ? WindowInsetsCompat.toWindowInsetsCompat(view, onApplyWindowInsets) : windowInsetsCompat;
+        WindowInsets windowInsetsOnApplyWindowInsets = Api20Impl.onApplyWindowInsets(view, windowInsets);
+        return !windowInsetsOnApplyWindowInsets.equals(windowInsets) ? WindowInsetsCompat.toWindowInsetsCompat(view, windowInsetsOnApplyWindowInsets) : windowInsetsCompat;
     }
 
     public static void removeActionWithId(View view, int i) {
@@ -502,7 +490,6 @@ public class ViewCompat {
         view.setWindowInsetsAnimationCallback(callback != null ? new WindowInsetsAnimationCompat.Impl30.ProxyCallback(callback) : null);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AccessibilityPaneVisibilityManager implements ViewTreeObserver.OnGlobalLayoutListener, View.OnAttachStateChangeListener {
         public final WeakHashMap mPanesToVisible = new WeakHashMap();
 

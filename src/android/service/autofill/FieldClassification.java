@@ -45,19 +45,19 @@ public final class FieldClassification {
     }
 
     private static FieldClassification readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         ArrayList arrayList = new ArrayList();
-        for (int i = 0; i < readInt; i++) {
-            arrayList.add(i, Match.readFromParcel(parcel));
+        for (int i2 = 0; i2 < i; i2++) {
+            arrayList.add(i2, Match.readFromParcel(parcel));
         }
         return new FieldClassification(arrayList);
     }
 
     static FieldClassification[] readArrayFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        FieldClassification[] fieldClassificationArr = new FieldClassification[readInt];
-        for (int i = 0; i < readInt; i++) {
-            fieldClassificationArr[i] = readFromParcel(parcel);
+        int i = parcel.readInt();
+        FieldClassification[] fieldClassificationArr = new FieldClassification[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            fieldClassificationArr[i2] = readFromParcel(parcel);
         }
         return fieldClassificationArr;
     }

@@ -1,7 +1,9 @@
 package com.android.systemui.qs;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
@@ -30,15 +32,21 @@ import com.android.systemui.pluginlock.component.PluginLockShortcutTask;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.qs.DetailAdapter;
 import com.android.systemui.plugins.qs.QSTile;
+import com.android.systemui.plugins.qs.QSTileView;
+import com.android.systemui.plugins.qs.SQSTile;
 import com.android.systemui.qs.SecQSPanelControllerBase;
 import com.android.systemui.qs.animator.QsAnimatorState;
 import com.android.systemui.qs.animator.QsDetailPopupAnimator;
 import com.android.systemui.qs.animator.QsTransitionAnimator;
 import com.android.systemui.qs.animator.SecQSImplAnimatorManager;
+import com.android.systemui.qs.bar.BarType;
 import com.android.systemui.qs.bar.ColoredBGHelper;
+import com.android.systemui.qs.buttons.QSTooltipWindow;
+import com.android.systemui.qs.panelresource.SecQSPanelResourceCommon;
 import com.android.systemui.qs.panelresource.SecQSPanelResourcePickHelper;
 import com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractor;
 import com.android.systemui.qs.tiles.detail.DndDetailAdapter;
+import com.android.systemui.qs.tiles.detail.MediaOutputDetailAdapter;
 import com.android.systemui.samsung.quicksetting.SecQSPanelComposeAdapter;
 import com.android.systemui.shade.ShadeHeaderController;
 import com.android.systemui.shade.domain.interactor.SecPanelExpansionStateChangeEvent;
@@ -48,6 +56,7 @@ import com.android.systemui.shade.domain.interactor.ShadeInteractor;
 import com.android.systemui.shade.domain.interactor.ShadeInteractorImpl;
 import com.android.systemui.statusbar.StatusBarStateControllerImpl;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
+import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.ViewController;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -56,10 +65,13 @@ import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecQSDetailController extends ViewController {
     public static final /* synthetic */ int $r8$clinit = 0;
+    public final float CONTENT_AREA_RATIO;
+    public final float DETAIL_TITLE_SUMMARY_RATIO;
+    public final float DND_DETAIL_TITLE_SUMMARY_RATIO;
+    public final float DND_SUMMARY_CONTENT_RATIO;
     public final ActivityStarter activityStarter;
     public boolean closeDetailOnRelease;
     public final ColoredBGHelper coloredBGHelper;
@@ -74,8 +86,8 @@ public final class SecQSDetailController extends ViewController {
     public SecQSDetailContentView detailContentParent;
     public Button detailDoneButton;
     public LinearLayout detailExtendedContainer;
-    public ViewGroup detailExtendedSummarContainer;
     public TextView detailExtendedSummary;
+    public ViewGroup detailExtendedSummaryContainer;
     public TextView detailExtendedText;
     public QsDetailPopupAnimator detailPopupAnimator;
     public Button detailSettingsButton;
@@ -90,6 +102,7 @@ public final class SecQSDetailController extends ViewController {
     public SecQSPanelController panelController;
     public final SecPanelExpansionStateInteractor panelExpansionStateInteractor;
     public final SecQSDetailController$panelExpansionStateListener$1 panelExpansionStateListener;
+    public int popUpHeight;
     public SecQSImplAnimatorManager qsAnimatorManager;
     public LinearLayout qsDetailExtendedContainer;
     public View qsDetailHeader;
@@ -110,7 +123,6 @@ public final class SecQSDetailController extends ViewController {
     public QsTransitionAnimator transitionAnimator;
     public final SecQSDetail view;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -148,13 +160,13 @@ public final class SecQSDetailController extends ViewController {
         this.shadeHeaderLayoutChangeListener = new View.OnLayoutChangeListener() { // from class: com.android.systemui.qs.SecQSDetailController$shadeHeaderLayoutChangeListener$1
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i6, i8, "shadeHeaderLayoutChangeListener ", ",", " > ");
-                m.append(i2);
-                m.append(",");
-                m.append(i4);
-                Log.d("SecQSDetailController", m.toString());
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i6, i8, "shadeHeaderLayoutChangeListener ", ",", " > ");
+                sbM.append(i2);
+                sbM.append(",");
+                sbM.append(i4);
+                Log.d("SecQSDetailController", sbM.toString());
                 if (i8 - i6 != i4 - i2) {
-                    SecQSDetailController secQSDetailController = SecQSDetailController.this;
+                    SecQSDetailController secQSDetailController = this.this$0;
                     int i9 = SecQSDetailController.$r8$clinit;
                     secQSDetailController.updateMarginAndPadding();
                 }
@@ -164,14 +176,14 @@ public final class SecQSDetailController extends ViewController {
             @Override // com.android.systemui.shade.domain.interactor.SecPanelExpansionStateListener
             public final void onPanelExpansionStateChanged(SecPanelExpansionStateChangeEvent secPanelExpansionStateChangeEvent) {
                 boolean z = secPanelExpansionStateChangeEvent.panelExpansionState == 1;
-                SecQSDetailController.this.isPanelExpanding = z;
+                this.this$0.isPanelExpanding = z;
                 EmergencyButtonController$$ExternalSyntheticOutline0.m("onPanelExpansionStateChanged isPanelExpanding = ", "SecQSDetailController", z);
             }
         };
         this.detailCallback = new QsTransitionAnimator.DetailCallback() { // from class: com.android.systemui.qs.SecQSDetailController$detailCallback$1
             @Override // com.android.systemui.qs.animator.QsTransitionAnimator.DetailCallback
-            public final void hideDetailAnimEnd() {
-                SecQSDetailController secQSDetailController = SecQSDetailController.this;
+            public final void hideDetailAnimEnd() throws Resources.NotFoundException {
+                SecQSDetailController secQSDetailController = this.this$0;
                 SecQSDetailController$handleShowingDetail$6$1 secQSDetailController$handleShowingDetail$6$1 = secQSDetailController.detailAdapterDismissRunnable;
                 if (secQSDetailController$handleShowingDetail$6$1 != null) {
                     secQSDetailController$handleShowingDetail$6$1.run();
@@ -186,8 +198,8 @@ public final class SecQSDetailController extends ViewController {
             }
 
             @Override // com.android.systemui.qs.animator.QsTransitionAnimator.DetailCallback
-            public final void showDetailAnimEnd() {
-                SecQSDetailController secQSDetailController = SecQSDetailController.this;
+            public final void showDetailAnimEnd() throws Resources.NotFoundException {
+                SecQSDetailController secQSDetailController = this.this$0;
                 SecQSPanelController secQSPanelController = secQSDetailController.panelController;
                 if (secQSPanelController != null) {
                     if (secQSDetailController.detailAdapter == null) {
@@ -208,8 +220,8 @@ public final class SecQSDetailController extends ViewController {
         };
         this.detailCallbackForPopup = new QsTransitionAnimator.DetailCallback() { // from class: com.android.systemui.qs.SecQSDetailController$detailCallbackForPopup$1
             @Override // com.android.systemui.qs.animator.QsTransitionAnimator.DetailCallback
-            public final void hideDetailAnimEnd() {
-                SecQSDetailController secQSDetailController = SecQSDetailController.this;
+            public final void hideDetailAnimEnd() throws Resources.NotFoundException {
+                SecQSDetailController secQSDetailController = this.this$0;
                 SecQSDetailController$handleShowingDetail$6$1 secQSDetailController$handleShowingDetail$6$1 = secQSDetailController.detailAdapterDismissRunnable;
                 if (secQSDetailController$handleShowingDetail$6$1 != null) {
                     secQSDetailController$handleShowingDetail$6$1.run();
@@ -224,8 +236,8 @@ public final class SecQSDetailController extends ViewController {
             }
 
             @Override // com.android.systemui.qs.animator.QsTransitionAnimator.DetailCallback
-            public final void showDetailAnimEnd() {
-                SecQSDetailController secQSDetailController = SecQSDetailController.this;
+            public final void showDetailAnimEnd() throws Resources.NotFoundException {
+                SecQSDetailController secQSDetailController = this.this$0;
                 boolean z = secQSDetailController.switchState;
                 DetailAdapter detailAdapter = secQSDetailController.detailAdapter;
                 boolean z2 = false;
@@ -235,10 +247,14 @@ public final class SecQSDetailController extends ViewController {
                 SecQSDetailController.access$handleToggleStateChanged(secQSDetailController, z, z2);
             }
         };
+        this.CONTENT_AREA_RATIO = 0.64f;
+        this.DND_SUMMARY_CONTENT_RATIO = 0.13f;
+        this.DETAIL_TITLE_SUMMARY_RATIO = 0.33f;
+        this.DND_DETAIL_TITLE_SUMMARY_RATIO = 0.2f;
         init();
     }
 
-    public static final void access$handleToggleStateChanged(SecQSDetailController secQSDetailController, boolean z, boolean z2) {
+    public static final void access$handleToggleStateChanged(SecQSDetailController secQSDetailController, boolean z, boolean z2) throws Resources.NotFoundException {
         CharSequence title;
         secQSDetailController.switchState = z;
         View view = secQSDetailController.qsDetailHeader;
@@ -267,21 +283,21 @@ public final class SecQSDetailController extends ViewController {
         secQSDetailController.getClass();
         if (detailAdapter != null) {
             int metricsCategory = detailAdapter.getMetricsCategory();
-            View createDetailView = detailAdapter.createDetailView(secQSDetailController.getContext(), (View) secQSDetailController.detailViews.get(metricsCategory), secQSDetailController.detailContent);
-            if (createDetailView != null) {
+            View viewCreateDetailView = detailAdapter.createDetailView(secQSDetailController.getContext(), (View) secQSDetailController.detailViews.get(metricsCategory), secQSDetailController.detailContent);
+            if (viewCreateDetailView != null) {
                 if (detailAdapter.shouldUseFullScreen()) {
                     ViewGroup viewGroup = secQSDetailController.toViewGroup(R.id.qs_detail_full_screen_container);
                     if (viewGroup != null) {
-                        viewGroup.addView(createDetailView);
+                        viewGroup.addView(viewCreateDetailView);
                     }
                 } else {
                     ViewGroup viewGroup2 = secQSDetailController.detailContent;
                     if (viewGroup2 != null) {
                         viewGroup2.removeAllViews();
-                        viewGroup2.addView(createDetailView);
+                        viewGroup2.addView(viewCreateDetailView);
                     }
                 }
-                secQSDetailController.detailViews.put(metricsCategory, createDetailView);
+                secQSDetailController.detailViews.put(metricsCategory, viewCreateDetailView);
                 int i = detailAdapter.getSettingsIntent() == null ? 8 : 0;
                 Button button = secQSDetailController.detailSettingsButton;
                 if (button != null) {
@@ -295,21 +311,23 @@ public final class SecQSDetailController extends ViewController {
         }
     }
 
-    public static boolean isLargeScreen$5() {
+    public static boolean isLargeScreen$6() {
         return ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
     }
 
-    public static final void updateDetailButtonText$update(TextView textView, int i) {
-        FontSizeUtils.updateFontSize(textView, R.dimen.sec_qs_detail_button_text_size, 0.8f, 1.6f);
+    public static final void updateDetailButtonText$update(TextView textView, int i) throws Resources.NotFoundException {
+        FontSizeUtils.updateFontSize(textView, R.dimen.sec_qs_detail_button_text_size, 0.8f, 1.7f);
         if (textView != null) {
             textView.setText(i);
             textView.getTypeface().isLikeDefault = true;
             textView.setBackground(textView.getContext().getDrawable(R.drawable.sec_qs_btn_borderless_rect));
             textView.semSetButtonShapeEnabled(true);
+            textView.setEllipsize(TextUtils.TruncateAt.END);
+            textView.setMaxLines(1);
         }
     }
 
-    public final void closeDetail() {
+    public final void closeDetail() throws Resources.NotFoundException {
         this.closeDetailOnRelease = false;
         SecQSPanelControllerBase.Record record = this.currentRecord;
         if (record != null) {
@@ -317,7 +335,7 @@ public final class SecQSDetailController extends ViewController {
         }
     }
 
-    public final void closeTargetDetail(DetailAdapter detailAdapter) {
+    public final void closeTargetDetail(DetailAdapter detailAdapter) throws Resources.NotFoundException {
         SecQSPanelControllerBase.Record record = this.currentRecord;
         if (record != null) {
             if (!Intrinsics.areEqual(record.mDetailAdapter, detailAdapter)) {
@@ -340,23 +358,119 @@ public final class SecQSDetailController extends ViewController {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:102:0x0111  */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x0042  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x004b  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x015b  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x01ae  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0021  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleShowingDetail(com.android.systemui.plugins.qs.DetailAdapter r11) {
-        /*
-            Method dump skipped, instructions count: 443
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.SecQSDetailController.handleShowingDetail(com.android.systemui.plugins.qs.DetailAdapter):void");
+    public final void handleShowingDetail(DetailAdapter detailAdapter) throws Resources.NotFoundException {
+        Object[] objArr;
+        SecQSPanelController secQSPanelController;
+        boolean z = detailAdapter != null;
+        SecQSDetail secQSDetail = this.view;
+        secQSDetail.setClickable(z);
+        boolean z2 = this.detailAdapter != null;
+        if (z) {
+            if (detailAdapter != null ? detailAdapter.shouldUseFullScreen() : false) {
+                objArr = true;
+            }
+        } else {
+            objArr = false;
+        }
+        if (z && !QsAnimatorState.panelExpanded) {
+            closeDetail();
+            return;
+        }
+        updateVisibility(detailAdapter);
+        if (z && objArr == false) {
+            setDetailExtendedContainerHeight();
+            if (detailAdapter != null) {
+                setupDetailHeader(detailAdapter);
+            }
+            updateHeaderProgress(false);
+        }
+        if ((z2 != z) == true || z2) {
+            View viewFindViewWithTag = null;
+            viewFindViewWithTag = null;
+            viewFindViewWithTag = null;
+            if (z) {
+                secQSDetail.setTranslationX(isLargeScreen$6() ? this.resourcePicker.getQsFrameX() : 0.0f);
+                Integer numValueOf = detailAdapter != null ? Integer.valueOf(detailAdapter.getMetricsCategory()) : null;
+                if (detailAdapter != null) {
+                    View viewCreateDetailView = detailAdapter.createDetailView(getContext(), (View) this.detailViews.get(numValueOf != null ? numValueOf.intValue() : 0), this.detailContent);
+                    if (viewCreateDetailView != null) {
+                        ViewGroup viewGroup = objArr != false ? toViewGroup(R.id.qs_detail_full_screen_container) : this.detailContent;
+                        if (viewGroup != null) {
+                            viewGroup.removeAllViews();
+                            viewGroup.addView(viewCreateDetailView);
+                        }
+                        this.detailViews.put(numValueOf != null ? numValueOf.intValue() : 0, viewCreateDetailView);
+                        setupDetailFooter(detailAdapter);
+                        this.metricsLogger.visible(detailAdapter.getMetricsCategory());
+                        secQSDetail.announceForAccessibility(getContext().getString(R.string.accessibility_quick_settings_detail) + ", " + ((Object) detailAdapter.getTitle()));
+                        this.detailAdapter = detailAdapter;
+                        this.detailAdapterDismissRunnable = null;
+                        updateMarginAndPadding();
+                        secQSDetail.setVisibility(0);
+                        if (objArr == false) {
+                            updateDetailButtonText();
+                            if (isDNDTile()) {
+                                updateDndDetail();
+                            }
+                        }
+                    }
+                }
+                Log.e("SecQSDetailController", "Tile = " + ((Object) (detailAdapter != null ? detailAdapter.getTitle() : null)) + " detailView is null");
+                return;
+            }
+            DetailAdapter detailAdapter2 = this.detailAdapter;
+            if (detailAdapter2 != null) {
+                if (!z2) {
+                    detailAdapter2 = null;
+                }
+                if (detailAdapter2 != null) {
+                    this.detailAdapterDismissRunnable = new SecQSDetailController$handleShowingDetail$6$1(this, detailAdapter2);
+                }
+            }
+            if (((this.statusBarStateController.mState == 1) == false || getQsExpanded()) && (secQSPanelController = this.panelController) != null) {
+                secQSPanelController.setGridContentVisibility(getQsExpanded());
+            }
+            if (this.scanState) {
+                this.scanState = false;
+                updateHeaderProgress(false);
+            }
+            secQSDetail.sendAccessibilityEvent(32);
+            if (!((isLargeScreen$6() || QpRune.QUICK_PANEL_BLUR_MASSIVE) ? false : true)) {
+                QsTransitionAnimator qsTransitionAnimator = this.transitionAnimator;
+                if (qsTransitionAnimator != null) {
+                    qsTransitionAnimator.transitionDetail(z);
+                }
+            } else if (!(z && ((isBluetoothOrWifiTile() || (detailAdapter instanceof MediaOutputDetailAdapter)) && getQsExpanded())) && (z || !QsAnimatorState.isDetailPopupShowing)) {
+                QsTransitionAnimator qsTransitionAnimator2 = this.transitionAnimator;
+                if (qsTransitionAnimator2 != null) {
+                    qsTransitionAnimator2.transitionDetail(z);
+                }
+            } else {
+                if (isBluetoothOrWifiTile()) {
+                    SecQSPanelController secQSPanelController2 = this.panelController;
+                    if (secQSPanelController2 != null) {
+                        QSTileView tileView = secQSPanelController2.mQsPanelHost.getTileView(this.detailTileSpec);
+                        if (tileView != null) {
+                            viewFindViewWithTag = tileView.findViewWithTag("anchor");
+                        }
+                    }
+                } else {
+                    SecQSPanelController secQSPanelController3 = this.panelController;
+                    if (secQSPanelController3 != null) {
+                        viewFindViewWithTag = secQSPanelController3.mQsPanelHost.mBarController.getBarInExpanded(BarType.QS_MEDIA_PLAYER).mBarRootView;
+                    }
+                }
+                QsDetailPopupAnimator qsDetailPopupAnimator = this.detailPopupAnimator;
+                if (qsDetailPopupAnimator != null) {
+                    qsDetailPopupAnimator.transitionDetail(viewFindViewWithTag, z);
+                }
+            }
+            SystemUIAnalytics.sendScreenViewLog(SystemUIAnalytics.SID_QUICKPANEL_EXPANDED);
+        }
     }
 
     public final boolean isBluetoothOrWifiTile() {
@@ -372,7 +486,7 @@ public final class SecQSDetailController extends ViewController {
     }
 
     public final boolean isPortrait$1() {
-        return getResources().getConfiguration().orientation == 1 || (QpRune.QUICK_PANEL_CODE_FOR_POP_OVER && isLargeScreen$5());
+        return getResources().getConfiguration().orientation == 1 || (QpRune.QUICK_PANEL_CODE_FOR_POP_OVER && isLargeScreen$6());
     }
 
     @Override // com.android.systemui.util.ViewController
@@ -383,13 +497,13 @@ public final class SecQSDetailController extends ViewController {
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         SecQSDetail secQSDetail = this.view;
         ((ArrayList) secQSDetail.mOnConfigurationChangedListeners).add(this.onConfigurationChangedListener);
         secQSDetail.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.SecQSDetailController$onViewAttached$1$1
             @Override // android.view.View.OnTouchListener
-            public final boolean onTouch(View view, MotionEvent motionEvent) {
-                SecQSDetailController secQSDetailController = SecQSDetailController.this;
+            public final boolean onTouch(View view, MotionEvent motionEvent) throws Resources.NotFoundException {
+                SecQSDetailController secQSDetailController = this.this$0;
                 motionEvent.getClass();
                 int i = SecQSDetailController.$r8$clinit;
                 secQSDetailController.getClass();
@@ -397,13 +511,13 @@ public final class SecQSDetailController extends ViewController {
                     float x = motionEvent.getX();
                     float y = motionEvent.getY();
                     Rect rect = new Rect();
-                    View findViewById = secQSDetailController.view.findViewById(R.id.qs_detail_extended_container);
-                    if (findViewById != null) {
-                        findViewById.getGlobalVisibleRect(rect);
+                    View viewFindViewById = secQSDetailController.view.findViewById(R.id.qs_detail_extended_container);
+                    if (viewFindViewById != null) {
+                        viewFindViewById.getGlobalVisibleRect(rect);
                     }
                     secQSDetailController.closeDetailOnRelease = !rect.contains((int) x, (int) y);
                 } else if (motionEvent.getAction() == 1 && secQSDetailController.closeDetailOnRelease) {
-                    SecQSDetailController.this.closeDetail();
+                    this.this$0.closeDetail();
                 }
                 return true;
             }
@@ -418,106 +532,124 @@ public final class SecQSDetailController extends ViewController {
         ((ArrayList) this.view.mOnConfigurationChangedListeners).remove(this.onConfigurationChangedListener);
     }
 
-    public final void setDetailExtendedContainerHeight() {
-        int measuredHeight;
+    public final void setDetailExtendedContainerHeight() throws Resources.NotFoundException {
+        float f;
         boolean z = QpRune.QUICK_TABLET;
         SecQSPanelResourcePicker secQSPanelResourcePicker = this.resourcePicker;
         if (z) {
+            int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.qs_pop_over_blur_detail_height);
+            int availableDisplayHeight = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).resourcePickHelper.getTargetPicker().getAvailableDisplayHeight(getContext());
+            if (dimensionPixelSize > availableDisplayHeight) {
+                dimensionPixelSize = availableDisplayHeight;
+            }
+            this.popUpHeight = dimensionPixelSize;
+            if (isDNDTile()) {
+                ViewGroup viewGroup = this.detailExtendedSummaryContainer;
+                if (viewGroup != null) {
+                    ViewGroup.LayoutParams layoutParams = viewGroup.getLayoutParams();
+                    LinearLayout.LayoutParams layoutParams2 = layoutParams instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams : null;
+                    if (layoutParams2 != null) {
+                        layoutParams2.height = (int) (this.DND_SUMMARY_CONTENT_RATIO * this.popUpHeight);
+                    }
+                }
+                f = this.DND_DETAIL_TITLE_SUMMARY_RATIO;
+            } else {
+                f = this.DETAIL_TITLE_SUMMARY_RATIO;
+            }
             LinearLayout linearLayout = this.detailExtendedContainer;
             if (linearLayout != null) {
-                ViewGroup.LayoutParams layoutParams = linearLayout.getLayoutParams();
-                LinearLayout.LayoutParams layoutParams2 = layoutParams instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams : null;
-                if (layoutParams2 != null) {
-                    layoutParams2.bottomMargin = toDp(R.dimen.sec_qs_detail_header_bottom_margin_tablet);
-                }
-            }
-            boolean isBluetoothOrWifiTile = isBluetoothOrWifiTile();
-            int detailContentViewMaxHeight = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailContentViewMaxHeight(getContext());
-            Context context = getContext();
-            SecQSPanelResourcePickHelper secQSPanelResourcePickHelper = secQSPanelResourcePicker.resourcePickHelper;
-            int detailContentViewMinHeight = secQSPanelResourcePickHelper.getTargetPicker().getDetailContentViewMinHeight(context);
-            SecQSDetailContentView secQSDetailContentView = this.detailContentParent;
-            if (secQSDetailContentView != null) {
-                ViewGroup.LayoutParams layoutParams3 = secQSDetailContentView.getLayoutParams();
+                ViewGroup.LayoutParams layoutParams3 = linearLayout.getLayoutParams();
                 LinearLayout.LayoutParams layoutParams4 = layoutParams3 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams3 : null;
                 if (layoutParams4 != null) {
-                    secQSDetailContentView.setMinimumHeight(detailContentViewMinHeight);
-                    layoutParams4.height = isBluetoothOrWifiTile ? detailContentViewMaxHeight : -2;
+                    layoutParams4.height = (int) (this.popUpHeight * f);
+                }
+            }
+            SecQSDetailContentView secQSDetailContentView = this.detailContentParent;
+            if (secQSDetailContentView != null) {
+                ViewGroup.LayoutParams layoutParams5 = secQSDetailContentView.getLayoutParams();
+                LinearLayout.LayoutParams layoutParams6 = layoutParams5 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams5 : null;
+                if (layoutParams6 != null) {
+                    secQSDetailContentView.setMinimumHeight(secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailContentViewMinHeight(secQSDetailContentView.getContext()));
+                    layoutParams6.height = (int) (this.popUpHeight * this.CONTENT_AREA_RATIO);
                 }
             }
             LinearLayout linearLayout2 = this.qsDetailExtendedContainer;
             if (linearLayout2 != null) {
                 linearLayout2.measure(0, 0);
-                ViewGroup.LayoutParams layoutParams5 = linearLayout2.getLayoutParams();
-                r4 = layoutParams5 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams5 : null;
-                if (r4 != null) {
-                    r4.gravity = 49;
-                    if (isLargeScreen$5()) {
-                        measuredHeight = secQSPanelResourcePickHelper.getTargetPicker().getDetailExtendedContainerTopMargin(linearLayout2.getContext());
-                    } else {
-                        measuredHeight = (int) ((((linearLayout2.getResources().getDisplayMetrics().heightPixels - linearLayout2.getMeasuredHeight()) - this.shadeHeaderController.header.getMeasuredHeight()) - ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getNavBarHeight(this.view.getContext())) * (isPortrait$1() ? 0.19455254f : 0.5f));
-                    }
-                    r4.topMargin = measuredHeight;
-                    return;
+                ViewGroup.LayoutParams layoutParams7 = linearLayout2.getLayoutParams();
+                LinearLayout.LayoutParams layoutParams8 = layoutParams7 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams7 : null;
+                if (layoutParams8 != null) {
+                    layoutParams8.gravity = 49;
                 }
+            }
+            TextView textView = this.detailExtendedSummary;
+            if (textView != null) {
+                ViewGroup.LayoutParams layoutParams9 = textView.getLayoutParams();
+                layoutParams = layoutParams9 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams9 : null;
+                if (layoutParams != null) {
+                    layoutParams.gravity = 17;
+                    textView.setLayoutParams(layoutParams);
+                }
+                FontSizeUtils.updateFontSize(textView, R.dimen.sec_qs_detail_extended_container_text_size, 0.8f, 1.0f);
                 return;
             }
             return;
         }
         LinearLayout linearLayout3 = this.detailExtendedContainer;
+        int height = -2;
         if (linearLayout3 != null) {
-            ViewGroup.LayoutParams layoutParams6 = linearLayout3.getLayoutParams();
-            LinearLayout.LayoutParams layoutParams7 = layoutParams6 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams6 : null;
-            if (layoutParams7 != null) {
-                layoutParams7.height = isPortrait$1() ? -2 : 0;
-            } else {
-                layoutParams7 = null;
-            }
-            linearLayout3.setLayoutParams(layoutParams7);
-        }
-        boolean isBluetoothOrWifiTile2 = isBluetoothOrWifiTile();
-        int detailContentViewMaxHeight2 = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailContentViewMaxHeight(getContext());
-        SecQSDetailContentView secQSDetailContentView2 = this.detailContentParent;
-        if (secQSDetailContentView2 != null) {
-            ViewGroup.LayoutParams layoutParams8 = secQSDetailContentView2.getLayoutParams();
-            LinearLayout.LayoutParams layoutParams9 = layoutParams8 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams8 : null;
-            if (layoutParams9 != null) {
-                layoutParams9.bottomMargin = isPortrait$1() ? 0 : toDp(R.dimen.sec_qs_detail_bottom_margin);
-                layoutParams9.topMargin = isPortrait$1() ? toDp(R.dimen.qs_detail_margin_top) : 0;
-                if (isBluetoothOrWifiTile2) {
-                    if (isPortrait$1()) {
-                        r1 = detailContentViewMaxHeight2;
-                    } else {
-                        View view = this.scrollView;
-                        r1 = (view != null ? view.getHeight() : 0) - layoutParams9.bottomMargin;
-                    }
-                }
-                layoutParams9.height = r1;
-            } else {
-                layoutParams9 = null;
-            }
-            secQSDetailContentView2.setLayoutParams(layoutParams9);
-        }
-        ViewGroup viewGroup = this.detailExtendedSummarContainer;
-        if (viewGroup != null) {
-            ViewGroup.LayoutParams layoutParams10 = viewGroup.getLayoutParams();
+            ViewGroup.LayoutParams layoutParams10 = linearLayout3.getLayoutParams();
             LinearLayout.LayoutParams layoutParams11 = layoutParams10 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams10 : null;
             if (layoutParams11 != null) {
-                layoutParams11.bottomMargin = isPortrait$1() ? 0 : toDp(R.dimen.sec_qs_detail_bottom_extended_margin);
+                layoutParams11.height = isPortrait$1() ? -2 : 0;
             } else {
                 layoutParams11 = null;
             }
-            viewGroup.setLayoutParams(layoutParams11);
+            linearLayout3.setLayoutParams(layoutParams11);
         }
-        TextView textView = this.detailExtendedSummary;
-        if (textView != null) {
-            ViewGroup.LayoutParams layoutParams12 = textView.getLayoutParams();
+        boolean zIsBluetoothOrWifiTile = isBluetoothOrWifiTile();
+        int detailContentViewMaxHeight = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailContentViewMaxHeight(getContext());
+        SecQSDetailContentView secQSDetailContentView2 = this.detailContentParent;
+        if (secQSDetailContentView2 != null) {
+            ViewGroup.LayoutParams layoutParams12 = secQSDetailContentView2.getLayoutParams();
             LinearLayout.LayoutParams layoutParams13 = layoutParams12 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams12 : null;
             if (layoutParams13 != null) {
-                layoutParams13.gravity = isPortrait$1() ? 17 : 8388611;
-                r4 = layoutParams13;
+                layoutParams13.bottomMargin = isPortrait$1() ? 0 : getResources().getDimensionPixelSize(R.dimen.sec_qs_detail_bottom_margin);
+                layoutParams13.topMargin = isPortrait$1() ? getResources().getDimensionPixelSize(R.dimen.qs_detail_margin_top) : 0;
+                if (zIsBluetoothOrWifiTile) {
+                    if (isPortrait$1()) {
+                        height = detailContentViewMaxHeight;
+                    } else {
+                        View view = this.scrollView;
+                        height = (view != null ? view.getHeight() : 0) - layoutParams13.bottomMargin;
+                    }
+                }
+                layoutParams13.height = height;
+            } else {
+                layoutParams13 = null;
             }
-            textView.setLayoutParams(r4);
+            secQSDetailContentView2.setLayoutParams(layoutParams13);
+        }
+        ViewGroup viewGroup2 = this.detailExtendedSummaryContainer;
+        if (viewGroup2 != null) {
+            ViewGroup.LayoutParams layoutParams14 = viewGroup2.getLayoutParams();
+            LinearLayout.LayoutParams layoutParams15 = layoutParams14 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams14 : null;
+            if (layoutParams15 != null) {
+                layoutParams15.bottomMargin = isPortrait$1() ? 0 : getResources().getDimensionPixelSize(R.dimen.sec_qs_detail_bottom_extended_margin);
+            } else {
+                layoutParams15 = null;
+            }
+            viewGroup2.setLayoutParams(layoutParams15);
+        }
+        TextView textView2 = this.detailExtendedSummary;
+        if (textView2 != null) {
+            ViewGroup.LayoutParams layoutParams16 = textView2.getLayoutParams();
+            LinearLayout.LayoutParams layoutParams17 = layoutParams16 instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams16 : null;
+            if (layoutParams17 != null) {
+                layoutParams17.gravity = isPortrait$1() ? 17 : 8388611;
+                layoutParams = layoutParams17;
+            }
+            textView2.setLayoutParams(layoutParams);
         }
     }
 
@@ -548,94 +680,49 @@ public final class SecQSDetailController extends ViewController {
             button.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.SecQSDetailController$setupDetailFooter$1$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view2) {
-                    SecQSDetailController.this.activityStarter.postStartActivityDismissingKeyguard(detailAdapter.getSettingsIntent(), 0);
+                    this.this$0.activityStarter.postStartActivityDismissingKeyguard(detailAdapter.getSettingsIntent(), 0);
                 }
             });
         }
         Button button2 = this.detailDoneButton;
         if (button2 != null) {
-            button2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.SecQSDetailController$setupDetailFooter$2
-                /* JADX WARN: Removed duplicated region for block: B:10:0x0043  */
+            button2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.SecQSDetailController.setupDetailFooter.2
+                /* JADX WARN: Removed duplicated region for block: B:10:0x003e  */
                 @Override // android.view.View.OnClickListener
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final void onClick(android.view.View r5) {
-                    /*
-                        r4 = this;
-                        com.android.systemui.qs.SecQSDetailController r5 = com.android.systemui.qs.SecQSDetailController.this
-                        com.android.systemui.plugins.qs.DetailAdapter r0 = r5.detailAdapter
-                        r1 = 0
-                        if (r0 == 0) goto L5a
-                        com.android.systemui.qs.SecQSPanelController r5 = r5.panelController
-                        if (r5 == 0) goto L3e
-                        com.android.systemui.qs.QSPanelHost r2 = r5.mQsPanelHost
-                        r2.getClass()
-                        com.android.systemui.qs.SecQSDetailController r5 = r5.mDetailController
-                        com.android.systemui.qs.SecQSPanelControllerBase$Record r5 = r5.currentRecord
-                        boolean r5 = r5 instanceof com.android.systemui.qs.SecQSPanelControllerBase.TileRecord
-                        if (r5 != 0) goto L19
-                        goto L3e
-                    L19:
-                        java.util.ArrayList r5 = r2.mRecords
-                        java.util.stream.Stream r5 = r5.stream()
-                        com.android.systemui.qs.QSPanelHost$$ExternalSyntheticLambda6 r2 = new com.android.systemui.qs.QSPanelHost$$ExternalSyntheticLambda6
-                        r3 = 2
-                        r2.<init>(r3)
-                        java.util.stream.Stream r5 = r5.map(r2)
-                        com.android.systemui.qs.QSPanelHost$$ExternalSyntheticLambda25 r2 = new com.android.systemui.qs.QSPanelHost$$ExternalSyntheticLambda25
-                        r3 = 0
-                        r2.<init>(r0, r3)
-                        java.util.stream.Stream r5 = r5.filter(r2)
-                        java.util.Optional r5 = r5.findFirst()
-                        java.lang.Object r5 = r5.orElse(r1)
-                        com.android.systemui.plugins.qs.QSTile r5 = (com.android.systemui.plugins.qs.QSTile) r5
-                        goto L3f
-                    L3e:
-                        r5 = r1
-                    L3f:
-                        boolean r2 = r5 instanceof com.android.systemui.plugins.qs.SQSTile
-                        if (r2 == 0) goto L46
-                        r1 = r5
-                        com.android.systemui.plugins.qs.SQSTile r1 = (com.android.systemui.plugins.qs.SQSTile) r1
-                    L46:
-                        if (r1 == 0) goto L51
-                        java.lang.String r5 = r1.getTileMapKey()
-                        if (r5 != 0) goto L4f
-                        goto L51
-                    L4f:
-                        r1 = r5
-                        goto L5a
-                    L51:
-                        int r5 = r0.getMetricsCategory()
-                        java.lang.String r5 = java.lang.String.valueOf(r5)
-                        goto L4f
-                    L5a:
-                        java.lang.String r5 = com.android.systemui.util.SystemUIAnalytics.getCurrentScreenID()
-                        java.lang.String r0 = "QPDE1007"
-                        com.android.systemui.util.SystemUIAnalytics.sendEventLog(r5, r0, r1)
-                        com.android.systemui.qs.SecQSDetailController r5 = com.android.systemui.qs.SecQSDetailController.this
-                        com.android.systemui.qs.SecQSDetail r0 = r5.view
-                        android.content.Context r5 = r5.getContext()
-                        r1 = 2131951762(0x7f130092, float:1.9539948E38)
-                        java.lang.String r5 = r5.getString(r1)
-                        r0.announceForAccessibility(r5)
-                        com.android.systemui.plugins.qs.DetailAdapter r5 = r2
-                        boolean r5 = r5.onDoneButtonClicked()
-                        if (r5 != 0) goto L82
-                        com.android.systemui.qs.SecQSDetailController r4 = com.android.systemui.qs.SecQSDetailController.this
-                        r4.closeDetail()
-                    L82:
-                        return
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.SecQSDetailController$setupDetailFooter$2.onClick(android.view.View):void");
+                public final void onClick(View view2) throws Resources.NotFoundException {
+                    String strValueOf;
+                    SecQSDetailController secQSDetailController = SecQSDetailController.this;
+                    DetailAdapter detailAdapter2 = secQSDetailController.detailAdapter;
+                    String str = null;
+                    if (detailAdapter2 != null) {
+                        SecQSPanelController secQSPanelController = secQSDetailController.panelController;
+                        if (secQSPanelController != null) {
+                            QSPanelHost qSPanelHost = secQSPanelController.mQsPanelHost;
+                            qSPanelHost.getClass();
+                            QSTile qSTile = !(secQSPanelController.mDetailController.currentRecord instanceof SecQSPanelControllerBase.TileRecord) ? null : (QSTile) qSPanelHost.mRecords.stream().map(new QSPanelHost$$ExternalSyntheticLambda6(2)).filter(new QSPanelHost$$ExternalSyntheticLambda25(detailAdapter2, 0)).findFirst().orElse(null);
+                            SQSTile sQSTile = qSTile instanceof SQSTile ? (SQSTile) qSTile : null;
+                            if (sQSTile == null || (strValueOf = sQSTile.getTileMapKey()) == null) {
+                                strValueOf = String.valueOf(detailAdapter2.getMetricsCategory());
+                            }
+                            str = strValueOf;
+                        }
+                    }
+                    SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_DETAIL_DETAILS, str);
+                    SecQSDetailController secQSDetailController2 = SecQSDetailController.this;
+                    secQSDetailController2.view.announceForAccessibility(secQSDetailController2.getContext().getString(R.string.accessibility_desc_quick_settings));
+                    if (detailAdapter.onDoneButtonClicked()) {
+                        return;
+                    }
+                    SecQSDetailController.this.closeDetail();
                 }
             });
         }
     }
 
-    public final void setupDetailHeader(final DetailAdapter detailAdapter) {
+    public final void setupDetailHeader(final DetailAdapter detailAdapter) throws Resources.NotFoundException {
         TextView textView = this.qsDetailHeaderTitle;
         if (textView != null) {
             textView.setText(detailAdapter.getTitle());
@@ -657,16 +744,16 @@ public final class SecQSDetailController extends ViewController {
                     viewStub = null;
                 }
                 if (viewStub != null) {
-                    View inflate = viewStub.inflate();
-                    this.qsDetailHeaderSwitch = inflate instanceof SecQSSwitch ? (SecQSSwitch) inflate : null;
+                    View viewInflate = viewStub.inflate();
+                    this.qsDetailHeaderSwitch = viewInflate instanceof SecQSSwitch ? (SecQSSwitch) viewInflate : null;
                 }
             }
             this.switchAdapter = detailAdapter;
             this.switchState = toggleState.booleanValue();
-            boolean booleanValue = toggleState.booleanValue();
+            boolean zBooleanValue = toggleState.booleanValue();
             SecQSSwitch secQSSwitch2 = this.qsDetailHeaderSwitch;
             if (secQSSwitch2 != null) {
-                secQSSwitch2.setChecked(booleanValue);
+                secQSSwitch2.setChecked(zBooleanValue);
                 secQSSwitch2.setEnabled(detailAdapter.getToggleEnabled());
                 secQSSwitch2.setClickable(true);
                 secQSSwitch2.jumpDrawablesToCurrentState();
@@ -678,7 +765,7 @@ public final class SecQSDetailController extends ViewController {
                 view2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.SecQSDetailController$setupDetailHeader$3$1
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view3) {
-                        SecQSSwitch secQSSwitch3 = SecQSDetailController.this.qsDetailHeaderSwitch;
+                        SecQSSwitch secQSSwitch3 = this.this$0.qsDetailHeaderSwitch;
                         if (secQSSwitch3 != null) {
                             DetailAdapter detailAdapter2 = detailAdapter;
                             boolean z = !secQSSwitch3.isChecked();
@@ -693,55 +780,29 @@ public final class SecQSDetailController extends ViewController {
                 secQSSwitch3.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.SecQSDetailController$setupHeaderSwitchListener$1$1
                     @Override // android.view.View.OnClickListener
                     public final void onClick(View view3) {
-                        DetailAdapter.this.setToggleState(secQSSwitch3.isChecked());
+                        detailAdapter.setToggleState(secQSSwitch3.isChecked());
                     }
                 });
                 secQSSwitch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.android.systemui.qs.SecQSDetailController$setupHeaderSwitchListener$1$2
-                    /* JADX WARN: Removed duplicated region for block: B:10:0x0021  */
-                    /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
-                    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
+                    /* JADX WARN: Removed duplicated region for block: B:6:0x000e  */
                     @Override // android.widget.CompoundButton.OnCheckedChangeListener
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
                     */
-                    public final void onCheckedChanged(android.widget.CompoundButton r2, boolean r3) {
-                        /*
-                            r1 = this;
-                            if (r3 == 0) goto Le
-                            com.android.systemui.qs.SecQSDetailController r2 = com.android.systemui.qs.SecQSDetailController.this
-                            int r0 = com.android.systemui.qs.SecQSDetailController.$r8$clinit
-                            boolean r2 = r2.isBluetoothOrWifiTile()
-                            if (r2 == 0) goto Le
-                            r2 = 0
-                            goto L10
-                        Le:
-                            r2 = 8
-                        L10:
-                            com.android.systemui.qs.SecQSDetailController r0 = com.android.systemui.qs.SecQSDetailController.this
-                            android.widget.ProgressBar r0 = r0.qsDetailHeaderProgress
-                            if (r0 == 0) goto L19
-                            r0.setVisibility(r2)
-                        L19:
-                            com.android.systemui.qs.SecQSDetailController r2 = com.android.systemui.qs.SecQSDetailController.this
-                            boolean r2 = r2.isPortrait$1()
-                            if (r2 == 0) goto L3b
-                            if (r3 == 0) goto L27
-                            r2 = 2131957033(0x7f131529, float:1.9550639E38)
-                            goto L2a
-                        L27:
-                            r2 = 2131957032(0x7f131528, float:1.9550636E38)
-                        L2a:
-                            com.android.systemui.qs.SecQSDetailController r3 = com.android.systemui.qs.SecQSDetailController.this
-                            com.android.systemui.qs.SecQSSwitch r1 = r2
-                            com.android.systemui.qs.SecQSDetail r3 = r3.view
-                            android.content.Context r1 = r1.getContext()
-                            java.lang.String r1 = r1.getString(r2)
-                            r3.announceForAccessibility(r1)
-                        L3b:
-                            return
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.SecQSDetailController$setupHeaderSwitchListener$1$2.onCheckedChanged(android.widget.CompoundButton, boolean):void");
+                    public final void onCheckedChanged(CompoundButton compoundButton, boolean z) {
+                        int i;
+                        if (z) {
+                            SecQSDetailController secQSDetailController = this.this$0;
+                            int i2 = SecQSDetailController.$r8$clinit;
+                            i = secQSDetailController.isBluetoothOrWifiTile() ? 0 : 8;
+                        }
+                        ProgressBar progressBar = this.this$0.qsDetailHeaderProgress;
+                        if (progressBar != null) {
+                            progressBar.setVisibility(i);
+                        }
+                        if (this.this$0.isPortrait$1()) {
+                            this.this$0.view.announceForAccessibility(secQSSwitch3.getContext().getString(z ? R.string.switch_bar_on : R.string.switch_bar_off));
+                        }
                     }
                 });
             }
@@ -749,8 +810,12 @@ public final class SecQSDetailController extends ViewController {
         updateDetailTitle(toggleState, detailAdapter.getTitle());
     }
 
-    public final void showDetail(boolean z, SecQSPanelControllerBase.Record record) {
+    public final void showDetail(boolean z, SecQSPanelControllerBase.Record record) throws Resources.NotFoundException {
         Pair pair;
+        QSTooltipWindow qSTooltipWindow;
+        if (z && (qSTooltipWindow = QSTooltipWindow.getInstance(getContext())) != null) {
+            qSTooltipWindow.hideToolTip();
+        }
         if (z && (QsAnimatorState.isCustomizerShowing || QsAnimatorState.isSliding || QsAnimatorState.isDetailPopupShowing || QsAnimatorState.isDetailShowing || QsAnimatorState.isDetailOpening || this.isPanelExpanding)) {
             String str = QsAnimatorState.isCustomizerShowing ? "customizer is showing," : "";
             String str2 = QsAnimatorState.isSliding ? "isSliding," : "";
@@ -758,11 +823,11 @@ public final class SecQSDetailController extends ViewController {
             String str4 = QsAnimatorState.isDetailShowing ? "detail is showing," : "";
             String str5 = QsAnimatorState.isDetailOpening ? "detail is opening," : "";
             String str6 = this.isPanelExpanding ? "panel is opening," : "";
-            StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("showDetail ", str, str2, str3, str4);
-            m.append(str5);
-            m.append(str6);
-            m.append(" ignore detail show request");
-            Log.d("SecQSDetailController", m.toString());
+            StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("showDetail ", str, str2, str3, str4);
+            sbM.append(str5);
+            sbM.append(str6);
+            sbM.append(" ignore detail show request");
+            Log.d("SecQSDetailController", sbM.toString());
             return;
         }
         SecQSPanelControllerBase.TileRecord tileRecord = record instanceof SecQSPanelControllerBase.TileRecord ? (SecQSPanelControllerBase.TileRecord) record : null;
@@ -780,7 +845,7 @@ public final class SecQSDetailController extends ViewController {
                 }
             }
             this.detailTileSpec = z ? qSTile.getTileSpec() : "";
-            if (!isLargeScreen$5() && !QpRune.QUICK_PANEL_BLUR_MASSIVE) {
+            if (!isLargeScreen$6() && !QpRune.QUICK_PANEL_BLUR_MASSIVE) {
                 if (isBluetoothOrWifiTile() && getQsExpanded()) {
                     SecQSDetailContentView secQSDetailContentView = this.detailContentParent;
                     if (secQSDetailContentView != null) {
@@ -818,28 +883,24 @@ public final class SecQSDetailController extends ViewController {
         }
     }
 
-    public final void showTargetDetail(DetailAdapter detailAdapter) {
+    public final void showTargetDetail(DetailAdapter detailAdapter) throws Resources.NotFoundException {
         SecQSPanelControllerBase.Record record = new SecQSPanelControllerBase.Record();
         record.mDetailAdapter = detailAdapter;
         Unit unit = Unit.INSTANCE;
         showDetail(true, record);
     }
 
-    public final int toDp(int i) {
-        return getResources().getDimensionPixelSize(i);
-    }
-
     public final ViewGroup toViewGroup(int i) {
-        View findViewById = this.view.findViewById(i);
-        if (findViewById instanceof ViewGroup) {
-            return (ViewGroup) findViewById;
+        View viewFindViewById = this.view.findViewById(i);
+        if (viewFindViewById instanceof ViewGroup) {
+            return (ViewGroup) viewFindViewById;
         }
         return null;
     }
 
-    public final void updateDetailButtonText() {
+    public final void updateDetailButtonText() throws Resources.NotFoundException {
         if (isDNDTile()) {
-            ViewGroup viewGroup = this.detailExtendedSummarContainer;
+            ViewGroup viewGroup = this.detailExtendedSummaryContainer;
             if (viewGroup != null) {
                 viewGroup.setVisibility(0);
             }
@@ -848,7 +909,7 @@ public final class SecQSDetailController extends ViewController {
                 textView.setVisibility(0);
             }
         } else {
-            ViewGroup viewGroup2 = this.detailExtendedSummarContainer;
+            ViewGroup viewGroup2 = this.detailExtendedSummaryContainer;
             if (viewGroup2 != null) {
                 viewGroup2.setVisibility(8);
             }
@@ -871,13 +932,15 @@ public final class SecQSDetailController extends ViewController {
             }
             ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
             LinearLayout.LayoutParams layoutParams2 = layoutParams instanceof LinearLayout.LayoutParams ? (LinearLayout.LayoutParams) layoutParams : null;
-            if (isPortrait$1()) {
+            boolean zIsLargeScreen$6 = isLargeScreen$6();
+            SecQSPanelResourcePicker secQSPanelResourcePicker = this.resourcePicker;
+            if (zIsLargeScreen$6 || isPortrait$1()) {
                 ViewGroup viewGroup2 = toViewGroup(R.id.qs_detail_parent);
                 if (viewGroup2 != null) {
                     viewGroup2.addView(view, 0);
                 }
                 if (layoutParams2 != null) {
-                    layoutParams2.height = toDp(R.dimen.sec_qs_detail_header_height);
+                    layoutParams2.height = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailHeaderHeight(view.getContext());
                     layoutParams2.bottomMargin = 0;
                     return;
                 }
@@ -888,23 +951,23 @@ public final class SecQSDetailController extends ViewController {
                 viewGroup3.addView(view, 0);
             }
             if (layoutParams2 != null) {
-                layoutParams2.height = toDp(R.dimen.sec_qs_detail_header_height);
-                layoutParams2.topMargin = toDp(R.dimen.sec_qs_detail_header_marginVertical);
-                layoutParams2.bottomMargin = toDp(R.dimen.sec_qs_detail_header_marginVertical);
+                layoutParams2.height = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailHeaderHeight(view.getContext());
+                layoutParams2.topMargin = getResources().getDimensionPixelSize(R.dimen.sec_qs_detail_header_marginVertical);
+                layoutParams2.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sec_qs_detail_header_marginVertical);
             }
         }
     }
 
-    public final void updateDetailTitle(Boolean bool, CharSequence charSequence) {
+    public final void updateDetailTitle(Boolean bool, CharSequence charSequence) throws Resources.NotFoundException {
         if (charSequence == null || charSequence.toString().length() == 0) {
             return;
         }
-        String obj = charSequence.toString();
-        int length = obj.length() - 1;
+        String string = charSequence.toString();
+        int length = string.length() - 1;
         int i = 0;
         boolean z = false;
         while (i <= length) {
-            boolean z2 = Intrinsics.compare(obj.charAt(!z ? i : length), 32) <= 0;
+            boolean z2 = Intrinsics.compare(string.charAt(!z ? i : length), 32) <= 0;
             if (z) {
                 if (!z2) {
                     break;
@@ -917,17 +980,17 @@ public final class SecQSDetailController extends ViewController {
                 z = true;
             }
         }
-        String obj2 = obj.subSequence(i, length + 1).toString();
+        String string2 = string.subSequence(i, length + 1).toString();
         TextView textView = this.detailExtendedText;
         if (textView != null) {
-            textView.setText(obj2);
+            textView.setText(string2);
         }
-        Log.d("SecQSDetailController", "updateDetailTitle" + obj2);
-        boolean isPortrait$1 = isPortrait$1();
+        Log.d("SecQSDetailController", "updateDetailTitle" + string2);
+        boolean zIsPortrait$1 = isPortrait$1();
         if (bool != null) {
             View view = this.qsDetailHeader;
             if (view != null) {
-                if (isPortrait$1) {
+                if (zIsPortrait$1) {
                     view.setClickable(true);
                 } else {
                     view.setClickable(false);
@@ -936,19 +999,19 @@ public final class SecQSDetailController extends ViewController {
             }
             TextView textView2 = this.qsDetailHeaderTitle;
             if (textView2 != null) {
-                Pair pair = isPortrait$1 ? bool.booleanValue() ? new Pair(textView2.getContext().getString(R.string.sec_switch_bar_on), Integer.valueOf(R.color.sec_qs_detail_header_on_text_color)) : new Pair(textView2.getContext().getString(R.string.sec_switch_bar_off), Integer.valueOf(R.color.sec_qs_detail_header_off_text_color)) : new Pair(obj2, Integer.valueOf(R.color.sec_qs_detail_header_text_color));
+                Pair pair = (isLargeScreen$6() || zIsPortrait$1) ? bool.booleanValue() ? new Pair(textView2.getContext().getString(R.string.sec_switch_bar_on), Integer.valueOf(R.color.sec_qs_detail_header_on_text_color)) : new Pair(textView2.getContext().getString(R.string.sec_switch_bar_off), Integer.valueOf(R.color.sec_qs_detail_header_off_text_color)) : new Pair(string2, Integer.valueOf(R.color.sec_qs_detail_header_text_color));
                 textView2.setText((CharSequence) pair.getFirst());
                 textView2.setTextColor(textView2.getContext().getColor(((Number) pair.getSecond()).intValue()));
-                FontSizeUtils.updateFontSize(textView2, R.dimen.sec_qs_detail_header_text_size, 0.8f, 1.6f);
+                FontSizeUtils.updateFontSize(textView2, R.dimen.sec_qs_detail_header_text_size, 0.8f, 1.3f);
             }
             SecQSSwitch secQSSwitch = this.qsDetailHeaderSwitch;
             if (secQSSwitch != null) {
-                secQSSwitch.setImportantForAccessibility(isPortrait$1 ? 2 : 1);
+                secQSSwitch.setImportantForAccessibility(zIsPortrait$1 ? 2 : 1);
             }
         } else {
             View view2 = this.qsDetailHeader;
             if (view2 != null) {
-                if (isPortrait$1) {
+                if (isLargeScreen$6() || zIsPortrait$1) {
                     view2.setVisibility(8);
                 } else {
                     view2.setVisibility(0);
@@ -958,27 +1021,28 @@ public final class SecQSDetailController extends ViewController {
             }
             TextView textView3 = this.qsDetailHeaderTitle;
             if (textView3 != null) {
-                TextView textView4 = isPortrait$1 ? null : textView3;
+                TextView textView4 = zIsPortrait$1 ? null : textView3;
                 if (textView4 != null) {
-                    textView4.setText(obj2);
+                    textView4.setText(string2);
                     textView4.setTextColor(textView4.getContext().getColor(R.color.sec_qs_detail_header_text_color));
+                    FontSizeUtils.updateFontSize(textView4, R.dimen.sec_qs_detail_header_text_size, 0.8f, 1.3f);
                 }
             }
         }
         TextView textView5 = this.qsDetailHeaderTitle;
         if (textView5 != null) {
-            textView5.setImportantForAccessibility(isPortrait$1 ? 2 : 1);
+            textView5.setImportantForAccessibility(zIsPortrait$1 ? 2 : 1);
         }
         View view3 = this.toggleDivider;
         if (view3 != null) {
-            view3.setVisibility((!isPortrait$1 || bool == null) ? 8 : 0);
+            view3.setVisibility((!zIsPortrait$1 || bool == null) ? 8 : 0);
         }
     }
 
     public final void updateDndDetail() {
         View view;
         if (!isDNDTile()) {
-            ViewGroup viewGroup = this.detailExtendedSummarContainer;
+            ViewGroup viewGroup = this.detailExtendedSummaryContainer;
             if (viewGroup != null) {
                 viewGroup.setVisibility(8);
                 return;
@@ -988,7 +1052,7 @@ public final class SecQSDetailController extends ViewController {
         if ((isPortrait$1() || QpRune.QUICK_TABLET) && (view = this.qsDetailHeader) != null) {
             view.setVisibility(8);
         }
-        ViewGroup viewGroup2 = this.detailExtendedSummarContainer;
+        ViewGroup viewGroup2 = this.detailExtendedSummaryContainer;
         if (viewGroup2 != null) {
             viewGroup2.setVisibility(0);
         }
@@ -1010,32 +1074,53 @@ public final class SecQSDetailController extends ViewController {
     }
 
     public final void updateMarginAndPadding() {
-        boolean isLargeScreen$5 = isLargeScreen$5();
+        boolean zIsLargeScreen$6 = isLargeScreen$6();
         ShadeHeaderController shadeHeaderController = this.shadeHeaderController;
         SecQSPanelResourcePicker secQSPanelResourcePicker = this.resourcePicker;
         SecQSDetail secQSDetail = this.view;
-        if (!isLargeScreen$5) {
-            View findViewById = ((SecQSDetail) this.mView).findViewById(R.id.panel_adjusted_detail);
-            if (findViewById != null) {
-                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) findViewById.getLayoutParams();
-                layoutParams.topMargin = shadeHeaderController.header.getMeasuredHeight();
-                layoutParams.bottomMargin = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getNavBarHeight(secQSDetail.getContext());
-                layoutParams.width = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelWidth(secQSDetail.getContext());
-                findViewById.setPadding(secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailSidePadding(((SecQSDetail) this.mView).getContext()), ((SecQSDetail) this.mView).getPaddingTop(), secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailSidePadding(((SecQSDetail) this.mView).getContext()), ((SecQSDetail) this.mView).getPaddingBottom());
+        if (!zIsLargeScreen$6) {
+            ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) ((SecQSDetail) this.mView).getLayoutParams();
+            ((ViewGroup.MarginLayoutParams) layoutParams).topMargin = 0;
+            ((ViewGroup.MarginLayoutParams) layoutParams).bottomMargin = 0;
+            ((ViewGroup.MarginLayoutParams) layoutParams).width = -1;
+            View viewFindViewById = ((SecQSDetail) this.mView).findViewById(R.id.qs_detail_container);
+            if (viewFindViewById != null) {
+                viewFindViewById.getLayoutParams().height = -1;
+                viewFindViewById.setPadding(0, 0, 0, 0);
+            }
+            View viewFindViewById2 = ((SecQSDetail) this.mView).findViewById(R.id.panel_adjusted_detail);
+            if (viewFindViewById2 != null) {
+                FrameLayout.LayoutParams layoutParams2 = (FrameLayout.LayoutParams) viewFindViewById2.getLayoutParams();
+                layoutParams2.topMargin = shadeHeaderController.header.getMeasuredHeight();
+                layoutParams2.bottomMargin = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getNavBarHeight(secQSDetail.getContext());
+                layoutParams2.width = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelWidth(secQSDetail.getContext());
+                viewFindViewById2.setPadding(secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailSidePadding(((SecQSDetail) this.mView).getContext()), ((SecQSDetail) this.mView).getPaddingTop(), secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailSidePadding(((SecQSDetail) this.mView).getContext()), ((SecQSDetail) this.mView).getPaddingBottom());
                 return;
             }
             return;
         }
-        SecQSDetail secQSDetail2 = (SecQSDetail) this.mView;
-        ConstraintLayout.LayoutParams layoutParams2 = (ConstraintLayout.LayoutParams) secQSDetail2.getLayoutParams();
-        ((ViewGroup.MarginLayoutParams) layoutParams2).topMargin = shadeHeaderController.header.getMeasuredHeight();
-        ((ViewGroup.MarginLayoutParams) layoutParams2).bottomMargin = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getNavBarHeight(secQSDetail.getContext());
-        ((ViewGroup.MarginLayoutParams) layoutParams2).width = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelWidth(secQSDetail.getContext());
-        secQSDetail2.setPadding(secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailSidePadding(((SecQSDetail) this.mView).getContext()), ((SecQSDetail) this.mView).getPaddingTop(), secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailSidePadding(((SecQSDetail) this.mView).getContext()), ((SecQSDetail) this.mView).getPaddingBottom());
-        View findViewById2 = ((SecQSDetail) this.mView).findViewById(R.id.qs_detail_container);
-        if (findViewById2 != null) {
-            findViewById2.getLayoutParams().height = SecQSDetailController$$ExternalSyntheticOutline0.m(findViewById2, R.dimen.qs_pop_over_blur_detail_height);
-            findViewById2.setPadding(findViewById2.getPaddingLeft(), findViewById2.getPaddingTop(), findViewById2.getPaddingRight(), findViewById2.getContext().getResources().getDimensionPixelSize(R.dimen.qs_affordance_arrow_translation_y_tablet));
+        ConstraintLayout.LayoutParams layoutParams3 = (ConstraintLayout.LayoutParams) ((SecQSDetail) this.mView).getLayoutParams();
+        ((ViewGroup.MarginLayoutParams) layoutParams3).topMargin = shadeHeaderController.header.getMeasuredHeight();
+        ((ViewGroup.MarginLayoutParams) layoutParams3).bottomMargin = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getNavBarHeight(secQSDetail.getContext());
+        ((ViewGroup.MarginLayoutParams) layoutParams3).width = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getPanelWidth(secQSDetail.getContext());
+        SecQSPanelResourceCommon.Companion companion = SecQSPanelResourceCommon.Companion;
+        Context context = getContext();
+        companion.getClass();
+        int iDp = SecQSPanelResourceCommon.Companion.dp(R.dimen.qs_pop_over_blur_detail_height, context);
+        this.popUpHeight = iDp;
+        int availableDisplayHeight = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getAvailableDisplayHeight(secQSDetail.getContext());
+        SecQSPanelResourcePickHelper secQSPanelResourcePickHelper = secQSPanelResourcePicker.resourcePickHelper;
+        if (iDp > availableDisplayHeight) {
+            this.popUpHeight = secQSPanelResourcePickHelper.getTargetPicker().getAvailableDisplayHeight(secQSDetail.getContext());
+        }
+        View viewFindViewById3 = ((SecQSDetail) this.mView).findViewById(R.id.qs_detail_container);
+        if (viewFindViewById3 != null) {
+            viewFindViewById3.getLayoutParams().height = this.popUpHeight;
+            viewFindViewById3.setPadding(viewFindViewById3.getPaddingLeft(), viewFindViewById3.getPaddingTop(), viewFindViewById3.getPaddingRight(), viewFindViewById3.getContext().getResources().getDimensionPixelSize(R.dimen.qs_affordance_arrow_translation_y_tablet));
+        }
+        View viewFindViewById4 = ((SecQSDetail) this.mView).findViewById(R.id.panel_adjusted_detail);
+        if (viewFindViewById4 != null) {
+            viewFindViewById4.setPadding(secQSPanelResourcePickHelper.getTargetPicker().getDetailSidePadding(((SecQSDetail) this.mView).getContext()), viewFindViewById4.getPaddingTop(), secQSPanelResourcePickHelper.getTargetPicker().getDetailSidePadding(((SecQSDetail) this.mView).getContext()), viewFindViewById4.getPaddingBottom());
         }
     }
 
@@ -1048,17 +1133,17 @@ public final class SecQSDetailController extends ViewController {
         this.detailExtendedText = (TextView) secQSDetail.findViewById(R.id.qs_detail_extended_text);
         this.detailContentParent = (SecQSDetailContentView) secQSDetail.findViewById(R.id.qs_detail_parent);
         this.toggleDivider = secQSDetail.findViewById(R.id.qs_toggle_divider);
-        View findViewById = secQSDetail.findViewById(R.id.qs_detail_header);
-        if (findViewById != null) {
-            this.qsDetailHeaderTitle = (TextView) findViewById.findViewById(R.id.title);
-            this.qsDetailHeaderSwitchStub = (ViewStub) findViewById.findViewById(R.id.toggle_stub);
+        View viewFindViewById = secQSDetail.findViewById(R.id.qs_detail_header);
+        if (viewFindViewById != null) {
+            this.qsDetailHeaderTitle = (TextView) viewFindViewById.findViewById(R.id.title);
+            this.qsDetailHeaderSwitchStub = (ViewStub) viewFindViewById.findViewById(R.id.toggle_stub);
             this.qsDetailHeaderSwitch = null;
         } else {
-            findViewById = null;
+            viewFindViewById = null;
         }
-        this.qsDetailHeader = findViewById;
+        this.qsDetailHeader = viewFindViewById;
         this.qsDetailHeaderProgress = (ProgressBar) secQSDetail.findViewById(R.id.qs_detail_header_progress);
-        this.detailExtendedSummarContainer = (ViewGroup) secQSDetail.findViewById(R.id.qs_detail_extended_summary_container);
+        this.detailExtendedSummaryContainer = (ViewGroup) secQSDetail.findViewById(R.id.qs_detail_extended_summary_container);
         this.detailExtendedSummary = (TextView) secQSDetail.findViewById(R.id.qs_detail_extended_summary);
         this.qsDetailExtendedContainer = (LinearLayout) secQSDetail.findViewById(R.id.qs_detail_extended_container);
         if (isDNDTile()) {
@@ -1066,62 +1151,41 @@ public final class SecQSDetailController extends ViewController {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0011, code lost:
-    
-        if ((r5 != null ? r5.shouldUseFullScreen() : false) != false) goto L13;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0014  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateVisibility(com.android.systemui.plugins.qs.DetailAdapter r5) {
-        /*
-            r4 = this;
-            r0 = 1
-            r1 = 0
-            if (r5 == 0) goto L6
-            r2 = r0
-            goto L7
-        L6:
-            r2 = r1
-        L7:
-            if (r2 == 0) goto L14
-            if (r5 == 0) goto L10
-            boolean r5 = r5.shouldUseFullScreen()
-            goto L11
-        L10:
-            r5 = r1
-        L11:
-            if (r5 == 0) goto L14
-            goto L15
-        L14:
-            r0 = r1
-        L15:
-            if (r2 == 0) goto L48
-            r5 = 2131364348(0x7f0a09fc, float:1.834853E38)
-            r2 = 8
-            r3 = 2131364343(0x7f0a09f7, float:1.834852E38)
-            com.android.systemui.qs.SecQSDetail r4 = r4.view
-            if (r0 == 0) goto L36
-            android.view.View r0 = r4.findViewById(r3)
-            if (r0 == 0) goto L2c
-            r0.setVisibility(r2)
-        L2c:
-            android.view.View r4 = r4.findViewById(r5)
-            if (r4 == 0) goto L48
-            r4.setVisibility(r1)
-            return
-        L36:
-            android.view.View r0 = r4.findViewById(r3)
-            if (r0 == 0) goto L3f
-            r0.setVisibility(r1)
-        L3f:
-            android.view.View r4 = r4.findViewById(r5)
-            if (r4 == 0) goto L48
-            r4.setVisibility(r2)
-        L48:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.SecQSDetailController.updateVisibility(com.android.systemui.plugins.qs.DetailAdapter):void");
+    public final void updateVisibility(DetailAdapter detailAdapter) {
+        boolean z = true;
+        boolean z2 = detailAdapter != null;
+        if (z2) {
+            if (!(detailAdapter != null ? detailAdapter.shouldUseFullScreen() : false)) {
+            }
+        } else {
+            z = false;
+        }
+        if (z2) {
+            SecQSDetail secQSDetail = this.view;
+            if (z) {
+                View viewFindViewById = secQSDetail.findViewById(R.id.qs_detail_extended_container);
+                if (viewFindViewById != null) {
+                    viewFindViewById.setVisibility(8);
+                }
+                View viewFindViewById2 = secQSDetail.findViewById(R.id.qs_detail_full_screen_container);
+                if (viewFindViewById2 != null) {
+                    viewFindViewById2.setVisibility(0);
+                    return;
+                }
+                return;
+            }
+            View viewFindViewById3 = secQSDetail.findViewById(R.id.qs_detail_extended_container);
+            if (viewFindViewById3 != null) {
+                viewFindViewById3.setVisibility(0);
+            }
+            View viewFindViewById4 = secQSDetail.findViewById(R.id.qs_detail_full_screen_container);
+            if (viewFindViewById4 != null) {
+                viewFindViewById4.setVisibility(8);
+            }
+        }
     }
 }

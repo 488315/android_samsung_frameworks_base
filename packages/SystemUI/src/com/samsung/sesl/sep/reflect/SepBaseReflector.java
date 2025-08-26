@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SepBaseReflector {
     public static final SepBaseReflector INSTANCE = new SepBaseReflector();
@@ -13,7 +12,7 @@ public final class SepBaseReflector {
     private SepBaseReflector() {
     }
 
-    public static Method getDeclaredMethod(Class cls, String str, Class... clsArr) {
+    public static Method getDeclaredMethod(Class cls, String str, Class... clsArr) throws NoSuchMethodException, SecurityException {
         try {
             Method declaredMethod = cls.getDeclaredMethod(str, (Class[]) Arrays.copyOf(clsArr, clsArr.length));
             declaredMethod.setAccessible(true);

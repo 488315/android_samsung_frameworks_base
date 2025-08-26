@@ -85,137 +85,75 @@ public class DialerFilter extends RelativeLayout {
         return this.mIsQwerty;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x001b, code lost:
-    
-        if (r0 != 5) goto L46;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0027  */
     @Override // android.view.View, android.view.KeyEvent.Callback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onKeyDown(int r8, android.view.KeyEvent r9) {
-        /*
-            r7 = this;
-            r0 = 66
-            r1 = 1
-            r2 = 0
-            if (r8 == r0) goto Ld5
-            r0 = 67
-            r3 = 5
-            r4 = 4
-            r5 = 3
-            r6 = 2
-            if (r8 == r0) goto L68
-            switch(r8) {
-                case 19: goto Ld5;
-                case 20: goto Ld5;
-                case 21: goto Ld5;
-                case 22: goto Ld5;
-                case 23: goto Ld5;
-                default: goto L11;
+    public boolean onKeyDown(int i, KeyEvent keyEvent) {
+        boolean zOnKeyDown = false;
+        if (i != 66) {
+            if (i == 67) {
+                int i2 = this.mMode;
+                if (i2 == 1) {
+                    zOnKeyDown = this.mLetters.onKeyDown(i, keyEvent) & this.mDigits.onKeyDown(i, keyEvent);
+                } else if (i2 == 2) {
+                    zOnKeyDown = this.mLetters.onKeyDown(i, keyEvent);
+                    if (this.mLetters.getText().length() == this.mDigits.getText().length()) {
+                        setMode(1);
+                    }
+                } else if (i2 == 3) {
+                    if (this.mDigits.getText().length() == this.mLetters.getText().length()) {
+                        this.mLetters.onKeyDown(i, keyEvent);
+                        setMode(1);
+                    }
+                    zOnKeyDown = this.mDigits.onKeyDown(i, keyEvent);
+                } else if (i2 == 4) {
+                    zOnKeyDown = this.mDigits.onKeyDown(i, keyEvent);
+                } else if (i2 == 5) {
+                    zOnKeyDown = this.mLetters.onKeyDown(i, keyEvent);
+                }
+            } else {
+                switch (i) {
+                    case 19:
+                    case 20:
+                    case 21:
+                    case 22:
+                    case 23:
+                        break;
+                    default:
+                        int i3 = this.mMode;
+                        if (i3 == 1) {
+                            zOnKeyDown = this.mLetters.onKeyDown(i, keyEvent);
+                            if (KeyEvent.isModifierKey(i)) {
+                                this.mDigits.onKeyDown(i, keyEvent);
+                                zOnKeyDown = true;
+                                break;
+                            } else if (keyEvent.isPrintingKey() || i == 62 || i == 61) {
+                                if (keyEvent.getMatch(DialerKeyListener.CHARACTERS) != 0) {
+                                    zOnKeyDown = this.mDigits.onKeyDown(i, keyEvent) & zOnKeyDown;
+                                    break;
+                                } else {
+                                    setMode(2);
+                                    break;
+                                }
+                            }
+                        } else if (i3 == 2) {
+                            zOnKeyDown = this.mLetters.onKeyDown(i, keyEvent);
+                            break;
+                        } else if (i3 == 3 || i3 == 4) {
+                            zOnKeyDown = this.mDigits.onKeyDown(i, keyEvent);
+                            break;
+                        } else if (i3 == 5) {
+                        }
+                        break;
+                }
             }
-        L11:
-            int r0 = r7.mMode
-            if (r0 == r1) goto L2f
-            if (r0 == r6) goto L27
-            if (r0 == r5) goto L1f
-            if (r0 == r4) goto L1f
-            if (r0 == r3) goto L27
-            goto Ld5
-        L1f:
-            android.widget.EditText r0 = r7.mDigits
-            boolean r2 = r0.onKeyDown(r8, r9)
-            goto Ld5
-        L27:
-            android.widget.EditText r0 = r7.mLetters
-            boolean r2 = r0.onKeyDown(r8, r9)
-            goto Ld5
-        L2f:
-            android.widget.EditText r0 = r7.mLetters
-            boolean r2 = r0.onKeyDown(r8, r9)
-            boolean r0 = android.view.KeyEvent.isModifierKey(r8)
-            if (r0 == 0) goto L43
-            android.widget.EditText r0 = r7.mDigits
-            r0.onKeyDown(r8, r9)
-            r2 = r1
-            goto Ld5
-        L43:
-            boolean r0 = r9.isPrintingKey()
-            if (r0 != 0) goto L51
-            r0 = 62
-            if (r8 == r0) goto L51
-            r0 = 61
-            if (r8 != r0) goto Ld5
-        L51:
-            char[] r0 = android.text.method.DialerKeyListener.CHARACTERS
-            char r0 = r9.getMatch(r0)
-            if (r0 == 0) goto L63
-            android.widget.EditText r0 = r7.mDigits
-            boolean r0 = r0.onKeyDown(r8, r9)
-            r0 = r0 & r2
-            r2 = r0
-            goto Ld5
-        L63:
-            r7.setMode(r6)
-            goto Ld5
-        L68:
-            int r0 = r7.mMode
-            if (r0 == r1) goto Lc8
-            if (r0 == r6) goto La8
-            if (r0 == r5) goto L83
-            if (r0 == r4) goto L7c
-            if (r0 == r3) goto L75
-            goto Ld5
-        L75:
-            android.widget.EditText r0 = r7.mLetters
-            boolean r2 = r0.onKeyDown(r8, r9)
-            goto Ld5
-        L7c:
-            android.widget.EditText r0 = r7.mDigits
-            boolean r2 = r0.onKeyDown(r8, r9)
-            goto Ld5
-        L83:
-            android.widget.EditText r0 = r7.mDigits
-            android.text.Editable r0 = r0.getText()
-            int r0 = r0.length()
-            android.widget.EditText r2 = r7.mLetters
-            android.text.Editable r2 = r2.getText()
-            int r2 = r2.length()
-            if (r0 != r2) goto La1
-            android.widget.EditText r0 = r7.mLetters
-            r0.onKeyDown(r8, r9)
-            r7.setMode(r1)
-        La1:
-            android.widget.EditText r0 = r7.mDigits
-            boolean r2 = r0.onKeyDown(r8, r9)
-            goto Ld5
-        La8:
-            android.widget.EditText r0 = r7.mLetters
-            boolean r2 = r0.onKeyDown(r8, r9)
-            android.widget.EditText r0 = r7.mLetters
-            android.text.Editable r0 = r0.getText()
-            int r0 = r0.length()
-            android.widget.EditText r3 = r7.mDigits
-            android.text.Editable r3 = r3.getText()
-            int r3 = r3.length()
-            if (r0 != r3) goto Ld5
-            r7.setMode(r1)
-            goto Ld5
-        Lc8:
-            android.widget.EditText r0 = r7.mDigits
-            boolean r0 = r0.onKeyDown(r8, r9)
-            android.widget.EditText r2 = r7.mLetters
-            boolean r2 = r2.onKeyDown(r8, r9)
-            r2 = r2 & r0
-        Ld5:
-            if (r2 != 0) goto Ldc
-            boolean r7 = super.onKeyDown(r8, r9)
-            return r7
-        Ldc:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.DialerFilter.onKeyDown(int, android.view.KeyEvent):boolean");
+        }
+        if (zOnKeyDown) {
+            return true;
+        }
+        return super.onKeyDown(i, keyEvent);
     }
 
     @Override // android.view.View, android.view.KeyEvent.Callback

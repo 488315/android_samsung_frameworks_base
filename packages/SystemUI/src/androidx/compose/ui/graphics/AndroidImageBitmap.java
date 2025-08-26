@@ -2,7 +2,6 @@ package androidx.compose.ui.graphics;
 
 import android.graphics.Bitmap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidImageBitmap implements ImageBitmap {
     public final Bitmap bitmap;
@@ -12,7 +11,7 @@ public final class AndroidImageBitmap implements ImageBitmap {
     }
 
     /* renamed from: getConfig-_sVssgQ, reason: not valid java name */
-    public final int m430getConfig_sVssgQ() {
+    public final int m432getConfig_sVssgQ() {
         Bitmap.Config config = this.bitmap.getConfig();
         config.getClass();
         if (config == Bitmap.Config.ALPHA_8) {

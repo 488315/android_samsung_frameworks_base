@@ -15,9 +15,9 @@ public class WTauNafMultiplier extends AbstractECMultiplier {
         }
         ECPoint.AbstractF2m abstractF2m = (ECPoint.AbstractF2m) eCPoint;
         ECCurve.AbstractF2m abstractF2m2 = (ECCurve.AbstractF2m) abstractF2m.getCurve();
-        byte byteValue = abstractF2m2.getA().toBigInteger().byteValue();
-        byte mu = Tnaf.getMu(byteValue);
-        return multiplyWTnaf(abstractF2m, Tnaf.partModReduction(abstractF2m2, bigInteger, byteValue, mu, (byte) 10), byteValue, mu);
+        byte bByteValue = abstractF2m2.getA().toBigInteger().byteValue();
+        byte mu = Tnaf.getMu(bByteValue);
+        return multiplyWTnaf(abstractF2m, Tnaf.partModReduction(abstractF2m2, bigInteger, bByteValue, mu, (byte) 10), bByteValue, mu);
     }
 
     private ECPoint.AbstractF2m multiplyWTnaf(ECPoint.AbstractF2m abstractF2m, ZTauElement zTauElement, byte b, byte b2) {
@@ -26,7 +26,7 @@ public class WTauNafMultiplier extends AbstractECMultiplier {
 
     private static ECPoint.AbstractF2m multiplyFromWTnaf(final ECPoint.AbstractF2m abstractF2m, byte[] bArr) {
         ECCurve.AbstractF2m abstractF2m2 = (ECCurve.AbstractF2m) abstractF2m.getCurve();
-        final byte byteValue = abstractF2m2.getA().toBigInteger().byteValue();
+        final byte bByteValue = abstractF2m2.getA().toBigInteger().byteValue();
         ECPoint.AbstractF2m[] preComp = ((WTauNafPreCompInfo) abstractF2m2.precompute(abstractF2m, PRECOMP_NAME, new PreCompCallback() { // from class: com.android.internal.org.bouncycastle.math.ec.WTauNafMultiplier.1
             @Override // com.android.internal.org.bouncycastle.math.ec.PreCompCallback
             public PreCompInfo precompute(PreCompInfo preCompInfo) {
@@ -34,7 +34,7 @@ public class WTauNafMultiplier extends AbstractECMultiplier {
                     return preCompInfo;
                 }
                 WTauNafPreCompInfo wTauNafPreCompInfo = new WTauNafPreCompInfo();
-                wTauNafPreCompInfo.setPreComp(Tnaf.getPreComp(ECPoint.AbstractF2m.this, byteValue));
+                wTauNafPreCompInfo.setPreComp(Tnaf.getPreComp(abstractF2m, bByteValue));
                 return wTauNafPreCompInfo;
             }
         })).getPreComp();

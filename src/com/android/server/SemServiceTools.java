@@ -92,8 +92,8 @@ public class SemServiceTools {
         }
     }
 
-    public static boolean ccmVerify(byte[] bArr, byte[] bArr2) {
-        boolean z = false;
+    public static boolean ccmVerify(byte[] bArr, byte[] bArr2) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, InvalidAlgorithmParameterException {
+        boolean zVerify = false;
         try {
             Log.i(TAG, "verify start");
         } catch (NoClassDefFoundError e) {
@@ -113,14 +113,14 @@ public class SemServiceTools {
             if (bArr2 != null && bArr2.length == 64) {
                 KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_EC);
                 keyPairGenerator.initialize(new ECGenParameterSpec("secp256r1"));
-                ECPublicKey decodeECPublicKey = decodeECPublicKey(((ECPublicKey) keyPairGenerator.generateKeyPair().getPublic()).getParams(), x_cord, y_cord);
+                ECPublicKey eCPublicKeyDecodeECPublicKey = decodeECPublicKey(((ECPublicKey) keyPairGenerator.generateKeyPair().getPublic()).getParams(), x_cord, y_cord);
                 Signature signature = Signature.getInstance("SHA256withECDSA");
                 byte[] asnSignature = getAsnSignature(bArr2);
-                signature.initVerify(decodeECPublicKey);
+                signature.initVerify(eCPublicKeyDecodeECPublicKey);
                 signature.update(bArr);
-                z = signature.verify(asnSignature);
-                Log.i(TAG, "verify end : " + z);
-                return z;
+                zVerify = signature.verify(asnSignature);
+                Log.i(TAG, "verify end : " + zVerify);
+                return zVerify;
             }
             Log.e(TAG, "signature is invalid");
             return false;
@@ -129,7 +129,7 @@ public class SemServiceTools {
         return false;
     }
 
-    private static ECPublicKey decodeECPublicKey(ECParameterSpec eCParameterSpec, byte[] bArr, byte[] bArr2) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private static ECPublicKey decodeECPublicKey(ECParameterSpec eCParameterSpec, byte[] bArr, byte[] bArr2) throws InvalidKeySpecException, NoSuchAlgorithmException {
         return (ECPublicKey) KeyFactory.getInstance(KeyProperties.KEY_ALGORITHM_EC).generatePublic(new ECPublicKeySpec(new ECPoint(new BigInteger(1, bArr), new BigInteger(1, bArr2)), eCParameterSpec));
     }
 
@@ -144,26 +144,26 @@ public class SemServiceTools {
                 i++;
             }
             int i2 = 32 - i;
-            byte[] bArr4 = new byte[i2];
-            System.arraycopy(bArr2, i, bArr4, 0, i2);
+            byte[] bArrConcatenate = new byte[i2];
+            System.arraycopy(bArr2, i, bArrConcatenate, 0, i2);
             int i3 = 0;
             while (bArr3[i3] == 0) {
                 i3++;
             }
             int i4 = 32 - i3;
-            byte[] bArr5 = new byte[i4];
-            System.arraycopy(bArr3, i3, bArr5, 0, i4);
-            if ((bArr4[0] & 255) > 127) {
-                bArr4 = concatenate((byte) 0, bArr4);
+            byte[] bArrConcatenate2 = new byte[i4];
+            System.arraycopy(bArr3, i3, bArrConcatenate2, 0, i4);
+            if ((bArrConcatenate[0] & 255) > 127) {
+                bArrConcatenate = concatenate((byte) 0, bArrConcatenate);
             }
-            if ((bArr5[0] & 255) > 127) {
-                bArr5 = concatenate((byte) 0, bArr5);
+            if ((bArrConcatenate2[0] & 255) > 127) {
+                bArrConcatenate2 = concatenate((byte) 0, bArrConcatenate2);
             }
-            byte[] concatenate = concatenate(concatenate(concatenate(concatenate(concatenate((byte) 2, (byte) bArr4.length), bArr4), (byte) 2), (byte) bArr5.length), bArr5);
-            byte[] concatenate2 = concatenate(SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, concatenate((byte) concatenate.length, concatenate));
+            byte[] bArrConcatenate3 = concatenate(concatenate(concatenate(concatenate(concatenate((byte) 2, (byte) bArrConcatenate.length), bArrConcatenate), (byte) 2), (byte) bArrConcatenate2.length), bArrConcatenate2);
+            byte[] bArrConcatenate4 = concatenate(SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, concatenate((byte) bArrConcatenate3.length, bArrConcatenate3));
             Log.d(TAG, "raw: " + bytesToHex(bArr));
-            Log.d(TAG, "encoded: " + bytesToHex(concatenate2));
-            return concatenate2;
+            Log.d(TAG, "encoded: " + bytesToHex(bArrConcatenate4));
+            return bArrConcatenate4;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
             return null;

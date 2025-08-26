@@ -19,7 +19,6 @@ import com.sec.ims.settings.ImsProfile;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingSettingUtils {
     public static final int[] mSimilarColorIndex = {3, 3, 3, 3, 3, 12, 13, 10, 5, 6, 7, 8, 12, 13};
@@ -103,17 +102,17 @@ public class EdgeLightingSettingUtils {
     public static int[] getLightingColor(Context context, String[] strArr, String str, int[] iArr) {
         String str2;
         if (strArr != null && !strArr[0].isEmpty()) {
-            String str3 = strArr[0];
+            String strReplace = strArr[0];
             if ("com.samsung.android.messaging".equals(str) && (str2 = strArr[0].split(" \\(")[0]) != null) {
-                str3 = str2;
+                strReplace = str2;
             }
-            if (str3 != null) {
-                str3 = str3.replace("\u2068", "").replace("\u2069", "").replace("\u200f", "");
+            if (strReplace != null) {
+                strReplace = strReplace.replace("\u2068", "").replace("\u2069", "").replace("\u200f", "");
             }
-            HashMap loadCustomTextList = loadCustomTextList(context);
-            int intValue = (loadCustomTextList == null || !loadCustomTextList.containsKey(str3)) ? -1 : ((Integer) loadCustomTextList.get(str3)).intValue();
-            if (intValue != -1) {
-                return new int[]{intValue, 0};
+            HashMap mapLoadCustomTextList = loadCustomTextList(context);
+            int iIntValue = (mapLoadCustomTextList == null || !mapLoadCustomTextList.containsKey(strReplace)) ? -1 : ((Integer) mapLoadCustomTextList.get(strReplace)).intValue();
+            if (iIntValue != -1) {
+                return new int[]{iIntValue, 0};
             }
         }
         return iArr;
@@ -163,9 +162,9 @@ public class EdgeLightingSettingUtils {
         SharedPreferences sharedPreferences = context.getSharedPreferences("edge_lighting_app_color", 0);
         if (sharedPreferences.contains(str)) {
             int i = sharedPreferences.getInt(str, 0);
-            StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" loadAppCustomColor : ", str, " color : ");
-            m.append(Integer.toHexString(i));
-            Slog.i("EdgeLightingSettingUtils", m.toString());
+            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m(" loadAppCustomColor : ", str, " color : ");
+            sbM.append(Integer.toHexString(i));
+            Slog.i("EdgeLightingSettingUtils", sbM.toString());
             return i;
         }
         Slog.i("EdgeLightingSettingUtils", " loadAppCustomColor : " + str + " don't set custom app color");
@@ -173,22 +172,22 @@ public class EdgeLightingSettingUtils {
     }
 
     public static HashMap loadCustomTextList(Context context) {
-        String[] split;
-        HashMap hashMap = new HashMap();
+        String[] strArrSplit;
+        HashMap map = new HashMap();
         String stringForUser = Settings.System.getStringForUser(context.getContentResolver(), "edge_lighting_custom_text_color", -2);
-        if (stringForUser == null || (split = stringForUser.split(";")) == null || split.length % 2 != 0) {
+        if (stringForUser == null || (strArrSplit = stringForUser.split(";")) == null || strArrSplit.length % 2 != 0) {
             return null;
         }
-        for (int i = 0; i < split.length; i++) {
+        for (int i = 0; i < strArrSplit.length; i++) {
             try {
                 if (i % 2 == 0) {
-                    hashMap.put(split[i], Integer.valueOf(Integer.parseInt(split[i + 1])));
+                    map.put(strArrSplit[i], Integer.valueOf(Integer.parseInt(strArrSplit[i + 1])));
                 }
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
-        return hashMap;
+        return map;
     }
 
     public static int loadEdgeLightingDurationOptionType(Context context) {
@@ -196,9 +195,9 @@ public class EdgeLightingSettingUtils {
     }
 
     public static void rematchingSimilarColorChip(ContentResolver contentResolver, int i) {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, " re-matching similar color index  : ", " backup version : ");
-        m.append(Settings.Global.getInt(contentResolver, "lighting_color_backup_version", 0));
-        Slog.i("EdgeLightingSettingUtils", m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, " re-matching similar color index  : ", " backup version : ");
+        sbM.append(Settings.Global.getInt(contentResolver, "lighting_color_backup_version", 0));
+        Slog.i("EdgeLightingSettingUtils", sbM.toString());
         if (Settings.Global.getInt(contentResolver, "lighting_color_backup_version", 0) == 3) {
             Slog.i("EdgeLightingSettingUtils", " don't need rematching.");
             setEdgeLightingBasicColorIndex(contentResolver, i);
@@ -217,19 +216,19 @@ public class EdgeLightingSettingUtils {
     }
 
     public static void resetAppCustomColor(Context context) {
-        SharedPreferences.Editor edit = context.getSharedPreferences("edge_lighting_app_color", 0).edit();
-        edit.clear();
-        edit.putBoolean("app_color_changed", false);
-        edit.apply();
+        SharedPreferences.Editor editorEdit = context.getSharedPreferences("edge_lighting_app_color", 0).edit();
+        editorEdit.clear();
+        editorEdit.putBoolean("app_color_changed", false);
+        editorEdit.apply();
     }
 
     public static void saveAppCustomColor(Context context, String str, int i) {
-        SharedPreferences.Editor edit = context.getSharedPreferences("edge_lighting_app_color", 0).edit();
-        edit.putInt(str, i);
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("saveAppCustomColor pkgName : ", str, " Color : ");
-        m.append(Integer.toHexString(i));
-        Slog.i("EdgeLightingSettingUtils", m.toString());
-        edit.apply();
+        SharedPreferences.Editor editorEdit = context.getSharedPreferences("edge_lighting_app_color", 0).edit();
+        editorEdit.putInt(str, i);
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("saveAppCustomColor pkgName : ", str, " Color : ");
+        sbM.append(Integer.toHexString(i));
+        Slog.i("EdgeLightingSettingUtils", sbM.toString());
+        editorEdit.apply();
     }
 
     public static void setEdgeLightingBasicColorIndex(ContentResolver contentResolver, int i) {

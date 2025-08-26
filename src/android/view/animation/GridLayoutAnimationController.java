@@ -34,12 +34,12 @@ public class GridLayoutAnimationController extends LayoutAnimationController {
 
     public GridLayoutAnimationController(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.GridLayoutAnimation);
-        this.mColumnDelay = Animation.Description.parseValue(obtainStyledAttributes.peekValue(0), context).value;
-        this.mRowDelay = Animation.Description.parseValue(obtainStyledAttributes.peekValue(1), context).value;
-        this.mDirection = obtainStyledAttributes.getInt(2, 0);
-        this.mDirectionPriority = obtainStyledAttributes.getInt(3, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.GridLayoutAnimation);
+        this.mColumnDelay = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(0), context).value;
+        this.mRowDelay = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(1), context).value;
+        this.mDirection = typedArrayObtainStyledAttributes.getInt(2, 0);
+        this.mDirectionPriority = typedArrayObtainStyledAttributes.getInt(3, 0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public GridLayoutAnimationController(Animation animation) {
@@ -129,34 +129,34 @@ public class GridLayoutAnimationController extends LayoutAnimationController {
     }
 
     private int getTransformedColumnIndex(AnimationParameters animationParameters) {
-        int i;
+        int iNextFloat;
         int order = getOrder();
         if (order == 1) {
-            i = (animationParameters.columnsCount - 1) - animationParameters.column;
+            iNextFloat = (animationParameters.columnsCount - 1) - animationParameters.column;
         } else if (order == 2) {
             if (this.mRandomizer == null) {
                 this.mRandomizer = new Random();
             }
-            i = (int) (animationParameters.columnsCount * this.mRandomizer.nextFloat());
+            iNextFloat = (int) (animationParameters.columnsCount * this.mRandomizer.nextFloat());
         } else {
-            i = animationParameters.column;
+            iNextFloat = animationParameters.column;
         }
-        return (this.mDirection & 1) == 1 ? (animationParameters.columnsCount - 1) - i : i;
+        return (this.mDirection & 1) == 1 ? (animationParameters.columnsCount - 1) - iNextFloat : iNextFloat;
     }
 
     private int getTransformedRowIndex(AnimationParameters animationParameters) {
-        int i;
+        int iNextFloat;
         int order = getOrder();
         if (order == 1) {
-            i = (animationParameters.rowsCount - 1) - animationParameters.row;
+            iNextFloat = (animationParameters.rowsCount - 1) - animationParameters.row;
         } else if (order == 2) {
             if (this.mRandomizer == null) {
                 this.mRandomizer = new Random();
             }
-            i = (int) (animationParameters.rowsCount * this.mRandomizer.nextFloat());
+            iNextFloat = (int) (animationParameters.rowsCount * this.mRandomizer.nextFloat());
         } else {
-            i = animationParameters.row;
+            iNextFloat = animationParameters.row;
         }
-        return (this.mDirection & 2) == 2 ? (animationParameters.rowsCount - 1) - i : i;
+        return (this.mDirection & 2) == 2 ? (animationParameters.rowsCount - 1) - iNextFloat : iNextFloat;
     }
 }

@@ -10,12 +10,14 @@ import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.util.ArraySet;
+import android.util.Log;
 import android.util.Pair;
 import android.util.SparseArray;
 import android.view.Display;
 import android.view.InsetsSourceControl;
 import android.view.InsetsState;
 import android.view.accessibility.AccessibilityManager;
+import android.window.DesktopModeFlags;
 import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
 import com.android.systemui.util.DelayableMarqueeTextView;
 import com.android.wm.shell.ShellTaskOrganizer;
@@ -52,7 +54,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CompatUIController implements DisplayController.OnDisplaysChangedListener, DisplayImeController.ImePositionProcessor, KeyguardChangeListener, CompatUIHandler {
     public LetterboxEduWindowManager mActiveLetterboxEduLayout;
@@ -93,13 +94,11 @@ public class CompatUIController implements DisplayController.OnDisplaysChangedLi
     public boolean mHasShownUserAspectRatioSettingsButton = false;
     public final CompatUIHintsState mCompatUIHintsState = new CompatUIHintsState();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CompatUIHintsState {
         public boolean mHasShownSizeCompatHint;
         public boolean mHasShownUserAspectRatioSettingsButtonHint;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PerDisplayOnInsetsChangedListener implements DisplayInsetsController.OnInsetsChangedListener {
         public final int mDisplayId;
         public final InsetsState mInsetsState = new InsetsState();
@@ -262,13 +261,13 @@ public class CompatUIController implements DisplayController.OnDisplaysChangedLi
         if (this.mIsInDesktopMode || (orCreateDisplayContext = getOrCreateDisplayContext(taskInfo.displayId)) == null) {
             return;
         }
-        ReachabilityEduWindowManager createReachabilityEduWindowManager = createReachabilityEduWindowManager(orCreateDisplayContext, taskInfo, taskListener);
-        if (createReachabilityEduWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
+        ReachabilityEduWindowManager reachabilityEduWindowManagerCreateReachabilityEduWindowManager = createReachabilityEduWindowManager(orCreateDisplayContext, taskInfo, taskListener);
+        if (reachabilityEduWindowManagerCreateReachabilityEduWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
             ReachabilityEduWindowManager reachabilityEduWindowManager3 = this.mActiveReachabilityEduLayout;
             if (reachabilityEduWindowManager3 != null) {
                 reachabilityEduWindowManager3.release();
             }
-            this.mActiveReachabilityEduLayout = createReachabilityEduWindowManager;
+            this.mActiveReachabilityEduLayout = reachabilityEduWindowManagerCreateReachabilityEduWindowManager;
         }
     }
 
@@ -292,9 +291,9 @@ public class CompatUIController implements DisplayController.OnDisplaysChangedLi
         if (this.mIsInDesktopMode || (orCreateDisplayContext = getOrCreateDisplayContext(taskInfo.displayId)) == null) {
             return;
         }
-        UserAspectRatioSettingsWindowManager createUserAspectRatioSettingsWindowManager = createUserAspectRatioSettingsWindowManager(orCreateDisplayContext, taskInfo, taskListener);
-        if (createUserAspectRatioSettingsWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
-            this.mUserAspectRatioSettingsLayout = createUserAspectRatioSettingsWindowManager;
+        UserAspectRatioSettingsWindowManager userAspectRatioSettingsWindowManagerCreateUserAspectRatioSettingsWindowManager = createUserAspectRatioSettingsWindowManager(orCreateDisplayContext, taskInfo, taskListener);
+        if (userAspectRatioSettingsWindowManagerCreateUserAspectRatioSettingsWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
+            this.mUserAspectRatioSettingsLayout = userAspectRatioSettingsWindowManagerCreateUserAspectRatioSettingsWindowManager;
         }
     }
 
@@ -315,7 +314,7 @@ public class CompatUIController implements DisplayController.OnDisplaysChangedLi
         Supplier supplier = new Supplier() { // from class: com.android.wm.shell.compatui.CompatUIController$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                return Boolean.valueOf(CompatUIController.this.mHasShownUserAspectRatioSettingsButton);
+                return Boolean.valueOf(this.f$0.mHasShownUserAspectRatioSettingsButton);
             }
         };
         CompatUIController$$ExternalSyntheticLambda2 compatUIController$$ExternalSyntheticLambda2 = new CompatUIController$$ExternalSyntheticLambda2(this, i);
@@ -365,33 +364,216 @@ public class CompatUIController implements DisplayController.OnDisplaysChangedLi
         if (context == null) {
             Display display = ((DisplayManager) this.mContext.getSystemService(DisplayManager.class)).getDisplay(i);
             if (display != null) {
-                Context createDisplayContext = this.mContext.createDisplayContext(display);
-                this.mDisplayContextCache.put(i, new WeakReference(createDisplayContext));
-                return createDisplayContext;
+                Context contextCreateDisplayContext = this.mContext.createDisplayContext(display);
+                this.mDisplayContextCache.put(i, new WeakReference(contextCreateDisplayContext));
+                return contextCreateDisplayContext;
             }
             ClockEventController$$ExternalSyntheticOutline0.m(i, "Cannot get context for display ", "CompatUIController");
         }
         return context;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x01ce  */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x0249  */
-    /* JADX WARN: Removed duplicated region for block: B:127:0x02c1  */
-    /* JADX WARN: Removed duplicated region for block: B:142:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:149:0x02ac  */
-    /* JADX WARN: Removed duplicated region for block: B:93:0x0194  */
-    /* JADX WARN: Removed duplicated region for block: B:97:0x01b1 A[ADDED_TO_REGION] */
+    public final boolean isInDesktopMode(TaskInfo taskInfo) {
+        if (!this.mDesktopUserRepositories.isEmpty() && taskInfo != null) {
+            boolean zIsAnyDeskActive = ((DesktopUserRepositories) this.mDesktopUserRepositories.get()).getCurrent().isAnyDeskActive(taskInfo.displayId);
+            if (DesktopModeFlags.ENABLE_DESKTOP_SKIP_COMPAT_UI_EDUCATION_IN_DESKTOP_MODE_BUGFIX.isTrue() && zIsAnyDeskActive) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:120:0x0204  */
+    /* JADX WARN: Removed duplicated region for block: B:143:0x0289  */
+    /* JADX WARN: Removed duplicated region for block: B:78:0x0139  */
+    /* JADX WARN: Removed duplicated region for block: B:89:0x016e  */
+    /* JADX WARN: Removed duplicated region for block: B:94:0x018b  */
     @Override // com.android.wm.shell.compatui.api.CompatUIHandler
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onCompatInfoChanged(com.android.wm.shell.compatui.api.CompatUIInfo r11) {
-        /*
-            Method dump skipped, instructions count: 750
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.compatui.CompatUIController.onCompatInfoChanged(com.android.wm.shell.compatui.api.CompatUIInfo):void");
+    public final void onCompatInfoChanged(CompatUIInfo compatUIInfo) {
+        Context orCreateDisplayContext;
+        CompatUIWindowManager compatUIWindowManagerCreateCompatUiWindowManager;
+        Context orCreateDisplayContext2;
+        RestartDialogWindowManager restartDialogWindowManagerCreateRestartDialogWindowManager;
+        Context orCreateDisplayContext3;
+        LetterboxEduWindowManager letterboxEduWindowManagerCreateLetterboxEduWindowManager;
+        Context orCreateDisplayContext4;
+        TaskInfo taskInfo = compatUIInfo.taskInfo;
+        ShellTaskOrganizer.TaskListener taskListener = compatUIInfo.listener;
+        if (taskListener == null) {
+            this.mTaskIdToCompatUIInfoMap.delete(taskInfo.taskId);
+        } else {
+            this.mTaskIdToCompatUIInfoMap.put(taskInfo.taskId, compatUIInfo);
+        }
+        boolean zIsRestartMenuEnabledForDisplayMove = taskInfo.appCompatTaskInfo.isRestartMenuEnabledForDisplayMove();
+        if (!taskInfo.appCompatTaskInfo.isTopActivityInSizeCompat() && !zIsRestartMenuEnabledForDisplayMove) {
+            ((HashSet) this.mSetOfTaskIdsShowingRestartDialog).remove(Integer.valueOf(taskInfo.taskId));
+        }
+        boolean zIsInDesktopMode = isInDesktopMode(taskInfo);
+        this.mIsInDesktopMode = zIsInDesktopMode;
+        if (taskInfo.configuration == null || taskListener == null || (zIsInDesktopMode && !zIsRestartMenuEnabledForDisplayMove)) {
+            removeLayouts(taskInfo.taskId);
+            return;
+        }
+        int i = this.mTopActivityTaskId;
+        int i2 = taskInfo.taskId;
+        if (i != i2 && !taskInfo.isTopActivityTransparent && taskInfo.isVisible && taskInfo.isFocused) {
+            this.mTopActivityTaskId = i2;
+            this.mHasShownUserAspectRatioSettingsButton = false;
+        }
+        boolean z = CoreRune.FW_FLIP_FULL_COVER_SCREEN_APP_COMPAT_UI;
+        if (taskInfo.appCompatTaskInfo.hasMultiTaskingCompatUi()) {
+            if (taskInfo.appCompatTaskInfo.topActivityBounds == null) {
+                Log.e("CompatUIController", "no activity bounds");
+                removeLayouts(taskInfo.taskId);
+                return;
+            }
+            MultiTaskingAppCompatUIWindowManager multiTaskingAppCompatUIWindowManager = (MultiTaskingAppCompatUIWindowManager) this.mActiveMultiTaskingAppCompatLayouts.get(taskInfo.taskId);
+            if (multiTaskingAppCompatUIWindowManager != null) {
+                if (multiTaskingAppCompatUIWindowManager.updateCompatInfo(taskInfo, taskListener, showOnDisplay(multiTaskingAppCompatUIWindowManager.mDisplayId))) {
+                    return;
+                }
+                this.mActiveMultiTaskingAppCompatLayouts.remove(taskInfo.taskId);
+                return;
+            } else {
+                if (this.mIsInDesktopMode || (orCreateDisplayContext4 = getOrCreateDisplayContext(taskInfo.displayId)) == null) {
+                    return;
+                }
+                MultiTaskingAppCompatUIWindowManager multiTaskingAppCompatUIWindowManagerCreateMultiTaskingAppCompatUiWindowManager = createMultiTaskingAppCompatUiWindowManager(orCreateDisplayContext4, taskInfo, taskListener);
+                if (multiTaskingAppCompatUIWindowManagerCreateMultiTaskingAppCompatUiWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
+                    this.mActiveMultiTaskingAppCompatLayouts.put(taskInfo.taskId, multiTaskingAppCompatUIWindowManagerCreateMultiTaskingAppCompatUiWindowManager);
+                    return;
+                }
+                return;
+            }
+        }
+        if (this.mIsFirstReachabilityEducationRunning) {
+            if (!taskInfo.appCompatTaskInfo.isFromLetterboxDoubleTap() && !taskInfo.appCompatTaskInfo.isTopActivityInSizeCompat()) {
+                return;
+            } else {
+                this.mIsFirstReachabilityEducationRunning = false;
+            }
+        }
+        boolean zIsTopActivityLetterboxed = taskInfo.appCompatTaskInfo.isTopActivityLetterboxed();
+        CompatUIConfiguration compatUIConfiguration = this.mCompatUIConfiguration;
+        if (zIsTopActivityLetterboxed) {
+            if (taskInfo.appCompatTaskInfo.isLetterboxEducationEnabled()) {
+                LetterboxEduWindowManager letterboxEduWindowManager = this.mActiveLetterboxEduLayout;
+                if (letterboxEduWindowManager == null) {
+                    if (!this.mIsInDesktopMode && (orCreateDisplayContext3 = getOrCreateDisplayContext(taskInfo.displayId)) != null) {
+                        letterboxEduWindowManagerCreateLetterboxEduWindowManager = createLetterboxEduWindowManager(orCreateDisplayContext3, taskInfo, taskListener);
+                        if (letterboxEduWindowManagerCreateLetterboxEduWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
+                            LetterboxEduWindowManager letterboxEduWindowManager2 = this.mActiveLetterboxEduLayout;
+                            if (letterboxEduWindowManager2 != null) {
+                                letterboxEduWindowManager2.release();
+                            }
+                            this.mActiveLetterboxEduLayout = letterboxEduWindowManagerCreateLetterboxEduWindowManager;
+                        }
+                    }
+                } else if (letterboxEduWindowManager.needsToBeRecreated(taskInfo, taskListener) || this.mIsInDesktopMode) {
+                    this.mActiveLetterboxEduLayout.release();
+                    this.mActiveLetterboxEduLayout = null;
+                    if (!this.mIsInDesktopMode) {
+                        letterboxEduWindowManagerCreateLetterboxEduWindowManager = createLetterboxEduWindowManager(orCreateDisplayContext3, taskInfo, taskListener);
+                        if (letterboxEduWindowManagerCreateLetterboxEduWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
+                        }
+                    }
+                } else {
+                    LetterboxEduWindowManager letterboxEduWindowManager3 = this.mActiveLetterboxEduLayout;
+                    if (!letterboxEduWindowManager3.updateCompatInfo(taskInfo, taskListener, showOnDisplay(letterboxEduWindowManager3.mDisplayId))) {
+                        this.mActiveLetterboxEduLayout.release();
+                        this.mActiveLetterboxEduLayout = null;
+                    }
+                }
+            } else if (!taskInfo.appCompatTaskInfo.isFromLetterboxDoubleTap()) {
+                boolean zIsTopActivityPillarboxShaped = taskInfo.appCompatTaskInfo.isTopActivityPillarboxShaped();
+                if (zIsTopActivityPillarboxShaped) {
+                    SharedPreferences sharedPreferences = compatUIConfiguration.mCompatUISharedPreferences;
+                    int i3 = taskInfo.userId;
+                    StringBuilder sb = new StringBuilder("has_seen_horizontal_reachability_education@");
+                    sb.append(i3);
+                    boolean z2 = !sharedPreferences.getBoolean(sb.toString(), false);
+                    if (!zIsTopActivityPillarboxShaped) {
+                        SharedPreferences sharedPreferences2 = compatUIConfiguration.mCompatUISharedPreferences;
+                        int i4 = taskInfo.userId;
+                        StringBuilder sb2 = new StringBuilder("has_seen_vertical_reachability_education@");
+                        sb2.append(i4);
+                        boolean z3 = !sharedPreferences2.getBoolean(sb2.toString(), false);
+                        if (z2 || z3) {
+                            compatUIConfiguration.mLetterboxEduSharedPreferences.edit().putBoolean(String.valueOf(taskInfo.userId), true).apply();
+                            if (taskInfo.appCompatTaskInfo.isLetterboxDoubleTapEnabled()) {
+                                this.mIsFirstReachabilityEducationRunning = true;
+                                createOrUpdateReachabilityEduLayout(taskInfo, taskListener);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        CompatUIWindowManager compatUIWindowManager = (CompatUIWindowManager) this.mActiveCompatLayouts.get(taskInfo.taskId);
+        if (compatUIWindowManager == null) {
+            if (!this.mIsInDesktopMode && (orCreateDisplayContext = getOrCreateDisplayContext(taskInfo.displayId)) != null) {
+                compatUIWindowManagerCreateCompatUiWindowManager = createCompatUiWindowManager(orCreateDisplayContext, taskInfo, taskListener);
+                if (compatUIWindowManagerCreateCompatUiWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
+                    this.mActiveCompatLayouts.put(taskInfo.taskId, compatUIWindowManagerCreateCompatUiWindowManager);
+                }
+            }
+        } else if (compatUIWindowManager.needsToBeRecreated(taskInfo, taskListener) || this.mIsInDesktopMode) {
+            this.mActiveCompatLayouts.remove(taskInfo.taskId);
+            compatUIWindowManager.release();
+            if (!this.mIsInDesktopMode) {
+                compatUIWindowManagerCreateCompatUiWindowManager = createCompatUiWindowManager(orCreateDisplayContext, taskInfo, taskListener);
+                if (compatUIWindowManagerCreateCompatUiWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
+                }
+            }
+        } else if (!compatUIWindowManager.updateCompatInfo(taskInfo, taskListener, showOnDisplay(compatUIWindowManager.mDisplayId))) {
+            this.mActiveCompatLayouts.remove(taskInfo.taskId);
+        }
+        RestartDialogWindowManager restartDialogWindowManager = (RestartDialogWindowManager) this.mTaskIdToRestartDialogWindowManagerMap.get(taskInfo.taskId);
+        boolean z4 = this.mIsInDesktopMode && !taskInfo.appCompatTaskInfo.isRestartMenuEnabledForDisplayMove();
+        if (restartDialogWindowManager == null) {
+            if (!z4 && (orCreateDisplayContext2 = getOrCreateDisplayContext(taskInfo.displayId)) != null) {
+                restartDialogWindowManagerCreateRestartDialogWindowManager = createRestartDialogWindowManager(orCreateDisplayContext2, taskInfo, taskListener);
+                restartDialogWindowManagerCreateRestartDialogWindowManager.mRequestRestartDialog = ((HashSet) this.mSetOfTaskIdsShowingRestartDialog).contains(Integer.valueOf(taskInfo.taskId));
+                if (restartDialogWindowManagerCreateRestartDialogWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
+                    this.mTaskIdToRestartDialogWindowManagerMap.put(taskInfo.taskId, restartDialogWindowManagerCreateRestartDialogWindowManager);
+                }
+            }
+        } else if (restartDialogWindowManager.needsToBeRecreated(taskInfo, taskListener) || z4) {
+            this.mTaskIdToRestartDialogWindowManagerMap.remove(taskInfo.taskId);
+            restartDialogWindowManager.release();
+            if (!z4) {
+                restartDialogWindowManagerCreateRestartDialogWindowManager = createRestartDialogWindowManager(orCreateDisplayContext2, taskInfo, taskListener);
+                restartDialogWindowManagerCreateRestartDialogWindowManager.mRequestRestartDialog = ((HashSet) this.mSetOfTaskIdsShowingRestartDialog).contains(Integer.valueOf(taskInfo.taskId));
+                if (restartDialogWindowManagerCreateRestartDialogWindowManager.createLayout(showOnDisplay(taskInfo.displayId))) {
+                }
+            }
+        } else {
+            restartDialogWindowManager.mRequestRestartDialog = ((HashSet) this.mSetOfTaskIdsShowingRestartDialog).contains(Integer.valueOf(taskInfo.taskId));
+            if (!restartDialogWindowManager.updateCompatInfo(taskInfo, taskListener, showOnDisplay(restartDialogWindowManager.mDisplayId))) {
+                this.mTaskIdToRestartDialogWindowManagerMap.remove(taskInfo.taskId);
+            }
+        }
+        if (compatUIConfiguration.mLetterboxEduSharedPreferences.getBoolean(String.valueOf(taskInfo.userId), false)) {
+            if (taskInfo.appCompatTaskInfo.isLetterboxDoubleTapEnabled()) {
+                createOrUpdateReachabilityEduLayout(taskInfo, taskListener);
+            }
+            if (taskInfo.getWindowingMode() == 1) {
+                if (taskInfo.appCompatTaskInfo.isFromLetterboxDoubleTap()) {
+                    return;
+                }
+                createOrUpdateUserAspectRatioSettingsLayout(taskInfo, taskListener);
+            } else {
+                UserAspectRatioSettingsWindowManager userAspectRatioSettingsWindowManager = this.mUserAspectRatioSettingsLayout;
+                if (userAspectRatioSettingsWindowManager != null) {
+                    userAspectRatioSettingsWindowManager.release();
+                    this.mUserAspectRatioSettingsLayout = null;
+                }
+            }
+        }
     }
 
     @Override // com.android.wm.shell.common.DisplayController.OnDisplaysChangedListener
@@ -450,7 +632,7 @@ public class CompatUIController implements DisplayController.OnDisplaysChangedLi
         forAllLayouts(new CompatUIController$$ExternalSyntheticLambda18(i), new Consumer() { // from class: com.android.wm.shell.compatui.CompatUIController$$ExternalSyntheticLambda17
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((CompatUIWindowManagerAbstract) obj).updateVisibility(CompatUIController.this.showOnDisplay(i));
+                ((CompatUIWindowManagerAbstract) obj).updateVisibility(this.f$0.showOnDisplay(i));
             }
         });
     }
@@ -466,19 +648,26 @@ public class CompatUIController implements DisplayController.OnDisplaysChangedLi
         }
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:14:0x004c, code lost:
+    
+        if (r0.getBoolean(r1.topActivity.getPackageName() + "@" + r2, false) == false) goto L18;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onRestartButtonClicked(Pair pair) {
         CompatUIConfiguration compatUIConfiguration = this.mCompatUIConfiguration;
-        if (compatUIConfiguration.mIsRestartDialogOverrideEnabled || (compatUIConfiguration.mIsRestartDialogEnabled && compatUIConfiguration.mIsLetterboxRestartDialogAllowed)) {
-            TaskInfo taskInfo = (TaskInfo) pair.first;
-            SharedPreferences sharedPreferences = compatUIConfiguration.mCompatUISharedPreferences;
-            int i = taskInfo.userId;
-            if (!sharedPreferences.getBoolean(taskInfo.topActivity.getPackageName() + "@" + i, false)) {
-                ((HashSet) this.mSetOfTaskIdsShowingRestartDialog).add(Integer.valueOf(((TaskInfo) pair.first).taskId));
-                onCompatInfoChanged(new CompatUIInfo((TaskInfo) pair.first, (ShellTaskOrganizer.TaskListener) pair.second));
-                return;
+        if (!compatUIConfiguration.mIsRestartDialogOverrideEnabled && (!compatUIConfiguration.mIsRestartDialogEnabled || !compatUIConfiguration.mIsLetterboxRestartDialogAllowed)) {
+            if (((TaskInfo) pair.first).appCompatTaskInfo.isRestartMenuEnabledForDisplayMove() && isInDesktopMode((TaskInfo) pair.first)) {
+                TaskInfo taskInfo = (TaskInfo) pair.first;
+                SharedPreferences sharedPreferences = compatUIConfiguration.mCompatUISharedPreferences;
+                int i = taskInfo.userId;
             }
+            this.mCallback.accept(new CompatUIEvents.SizeCompatRestartButtonClicked(((TaskInfo) pair.first).taskId));
+            return;
         }
-        this.mCallback.accept(new CompatUIEvents.SizeCompatRestartButtonClicked(((TaskInfo) pair.first).taskId));
+        ((HashSet) this.mSetOfTaskIdsShowingRestartDialog).add(Integer.valueOf(((TaskInfo) pair.first).taskId));
+        onCompatInfoChanged(new CompatUIInfo((TaskInfo) pair.first, (ShellTaskOrganizer.TaskListener) pair.second));
     }
 
     public void removeLayouts(int i) {
@@ -522,11 +711,21 @@ public class CompatUIController implements DisplayController.OnDisplaysChangedLi
     }
 
     @Override // com.android.wm.shell.compatui.api.CompatUIHandler
-    public final void sendCompatUIRequest(CompatUIRequests.DisplayCompatShowRestartDialog displayCompatShowRestartDialog) {
+    public final void sendCompatUIRequest(CompatUIRequests compatUIRequests) {
         CompatUIInfo compatUIInfo;
-        if (displayCompatShowRestartDialog.requestId == 0 && (compatUIInfo = (CompatUIInfo) this.mTaskIdToCompatUIInfoMap.get(displayCompatShowRestartDialog.taskId)) != null) {
-            onRestartButtonClicked(new Pair(compatUIInfo.taskInfo, compatUIInfo.listener));
+        int i = compatUIRequests.requestId;
+        if (i != 0) {
+            if (i == 1 && (compatUIInfo = (CompatUIInfo) this.mTaskIdToCompatUIInfoMap.get(((CompatUIRequests.DisplayCompatRestartTask) compatUIRequests).taskId)) != null) {
+                this.mCallback.accept(new CompatUIEvents.SizeCompatRestartButtonClicked(compatUIInfo.taskInfo.taskId));
+                return;
+            }
+            return;
         }
+        CompatUIInfo compatUIInfo2 = (CompatUIInfo) this.mTaskIdToCompatUIInfoMap.get(((CompatUIRequests.DisplayCompatShowRestartDialog) compatUIRequests).taskId);
+        if (compatUIInfo2 == null) {
+            return;
+        }
+        onRestartButtonClicked(new Pair(compatUIInfo2.taskInfo, compatUIInfo2.listener));
     }
 
     @Override // com.android.wm.shell.compatui.api.CompatUIHandler

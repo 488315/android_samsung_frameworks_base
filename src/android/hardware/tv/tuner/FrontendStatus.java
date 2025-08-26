@@ -920,154 +920,154 @@ public final class FrontendStatus implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        switch (readInt) {
+        int i = parcel.readInt();
+        switch (i) {
             case 0:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 1:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 2:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 3:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 4:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 5:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 6:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 7:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 8:
-                _set(readInt, Long.valueOf(parcel.readLong()));
+                _set(i, Long.valueOf(parcel.readLong()));
                 return;
             case 9:
-                _set(readInt, (FrontendModulationStatus) parcel.readTypedObject(FrontendModulationStatus.CREATOR));
+                _set(i, (FrontendModulationStatus) parcel.readTypedObject(FrontendModulationStatus.CREATOR));
                 return;
             case 10:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 11:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 12:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 13:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 14:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 15:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 16:
-                _set(readInt, parcel.createBooleanArray());
+                _set(i, parcel.createBooleanArray());
                 return;
             case 17:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 18:
-                _set(readInt, Long.valueOf(parcel.readLong()));
+                _set(i, Long.valueOf(parcel.readLong()));
                 return;
             case 19:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 20:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 21:
-                _set(readInt, (FrontendStatusAtsc3PlpInfo[]) parcel.createTypedArray(FrontendStatusAtsc3PlpInfo.CREATOR));
+                _set(i, (FrontendStatusAtsc3PlpInfo[]) parcel.createTypedArray(FrontendStatusAtsc3PlpInfo.CREATOR));
                 return;
             case 22:
-                _set(readInt, (FrontendModulation[]) parcel.createTypedArray(FrontendModulation.CREATOR));
+                _set(i, (FrontendModulation[]) parcel.createTypedArray(FrontendModulation.CREATOR));
                 return;
             case 23:
-                _set(readInt, parcel.createIntArray());
+                _set(i, parcel.createIntArray());
                 return;
             case 24:
-                _set(readInt, parcel.createLongArray());
+                _set(i, parcel.createLongArray());
                 return;
             case 25:
-                _set(readInt, (FrontendBandwidth) parcel.readTypedObject(FrontendBandwidth.CREATOR));
+                _set(i, (FrontendBandwidth) parcel.readTypedObject(FrontendBandwidth.CREATOR));
                 return;
             case 26:
-                _set(readInt, (FrontendGuardInterval) parcel.readTypedObject(FrontendGuardInterval.CREATOR));
+                _set(i, (FrontendGuardInterval) parcel.readTypedObject(FrontendGuardInterval.CREATOR));
                 return;
             case 27:
-                _set(readInt, (FrontendTransmissionMode) parcel.readTypedObject(FrontendTransmissionMode.CREATOR));
+                _set(i, (FrontendTransmissionMode) parcel.readTypedObject(FrontendTransmissionMode.CREATOR));
                 return;
             case 28:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 29:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 30:
-                _set(readInt, (FrontendInterleaveMode[]) parcel.createTypedArray(FrontendInterleaveMode.CREATOR));
+                _set(i, (FrontendInterleaveMode[]) parcel.createTypedArray(FrontendInterleaveMode.CREATOR));
                 return;
             case 31:
-                _set(readInt, parcel.createIntArray());
+                _set(i, parcel.createIntArray());
                 return;
             case 32:
-                _set(readInt, parcel.createIntArray());
+                _set(i, parcel.createIntArray());
                 return;
             case 33:
-                _set(readInt, (FrontendRollOff) parcel.readTypedObject(FrontendRollOff.CREATOR));
+                _set(i, (FrontendRollOff) parcel.readTypedObject(FrontendRollOff.CREATOR));
                 return;
             case 34:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 35:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 36:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 37:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 38:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 39:
-                _set(readInt, parcel.createIntArray());
+                _set(i, parcel.createIntArray());
                 return;
             case 40:
-                _set(readInt, parcel.createIntArray());
+                _set(i, parcel.createIntArray());
                 return;
             case 41:
-                _set(readInt, (FrontendScanAtsc3PlpInfo[]) parcel.createTypedArray(FrontendScanAtsc3PlpInfo.CREATOR));
+                _set(i, (FrontendScanAtsc3PlpInfo[]) parcel.createTypedArray(FrontendScanAtsc3PlpInfo.CREATOR));
                 return;
             case 42:
-                _set(readInt, parcel.readString());
+                _set(i, parcel.readString());
                 return;
             case 43:
-                _set(readInt, Long.valueOf(parcel.readLong()));
+                _set(i, Long.valueOf(parcel.readLong()));
                 return;
             case 44:
-                _set(readInt, Long.valueOf(parcel.readLong()));
+                _set(i, Long.valueOf(parcel.readLong()));
                 return;
             case 45:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 46:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 47:
-                _set(readInt, (FrontendStandardExt) parcel.readTypedObject(FrontendStandardExt.CREATOR));
+                _set(i, (FrontendStandardExt) parcel.readTypedObject(FrontendStandardExt.CREATOR));
                 return;
             default:
-                throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 
@@ -1112,11 +1112,11 @@ public final class FrontendStatus implements Parcelable {
             return 0;
         }
         if (obj instanceof Object[]) {
-            int i = 0;
+            int iDescribeContents = 0;
             for (Object obj2 : (Object[]) obj) {
-                i |= describeContents(obj2);
+                iDescribeContents |= describeContents(obj2);
             }
-            return i;
+            return iDescribeContents;
         }
         if (obj instanceof Parcelable) {
             return ((Parcelable) obj).describeContents();

@@ -102,14 +102,14 @@ public abstract class AbstractInputMethodService extends WindowProviderService i
         @Override // android.view.inputmethod.InputMethodSession
         public void dispatchKeyEvent(int i, KeyEvent keyEvent, InputMethodSession.EventCallback eventCallback) {
             AbstractInputMethodService abstractInputMethodService = AbstractInputMethodService.this;
-            boolean dispatch = keyEvent.dispatch(abstractInputMethodService, abstractInputMethodService.mDispatcherState, this);
+            boolean zDispatch = keyEvent.dispatch(abstractInputMethodService, abstractInputMethodService.mDispatcherState, this);
             if (keyEvent.getKeyCode() == 1006 && keyEvent.getAction() == 0) {
                 AbstractInputMethodService.this.mIsPressBtnSIPOnOff = true;
             }
             if (eventCallback != null) {
-                eventCallback.finishedEvent(i, dispatch);
+                eventCallback.finishedEvent(i, zDispatch);
             }
-            if (!Flags.imeSwitcherRevamp() || dispatch || keyEvent.getAction() != 0 || keyEvent.getUnicodeChar() <= 0 || AbstractInputMethodService.this.mInputMethodServiceInternal == null) {
+            if (!Flags.imeSwitcherRevamp() || zDispatch || keyEvent.getAction() != 0 || keyEvent.getUnicodeChar() <= 0 || AbstractInputMethodService.this.mInputMethodServiceInternal == null) {
                 return;
             }
             AbstractInputMethodService.this.mInputMethodServiceInternal.notifyUserActionIfNecessary();
@@ -122,17 +122,17 @@ public abstract class AbstractInputMethodService extends WindowProviderService i
 
         @Override // android.view.inputmethod.InputMethodSession
         public void dispatchTrackballEvent(int i, MotionEvent motionEvent, InputMethodSession.EventCallback eventCallback) {
-            boolean onTrackballEvent = AbstractInputMethodService.this.onTrackballEvent(motionEvent);
+            boolean zOnTrackballEvent = AbstractInputMethodService.this.onTrackballEvent(motionEvent);
             if (eventCallback != null) {
-                eventCallback.finishedEvent(i, onTrackballEvent);
+                eventCallback.finishedEvent(i, zOnTrackballEvent);
             }
         }
 
         @Override // android.view.inputmethod.InputMethodSession
         public void dispatchGenericMotionEvent(int i, MotionEvent motionEvent, InputMethodSession.EventCallback eventCallback) {
-            boolean onGenericMotionEvent = AbstractInputMethodService.this.onGenericMotionEvent(motionEvent);
+            boolean zOnGenericMotionEvent = AbstractInputMethodService.this.onGenericMotionEvent(motionEvent);
             if (eventCallback != null) {
-                eventCallback.finishedEvent(i, onGenericMotionEvent);
+                eventCallback.finishedEvent(i, zOnGenericMotionEvent);
             }
         }
     }

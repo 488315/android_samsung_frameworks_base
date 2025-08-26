@@ -5,7 +5,6 @@ import androidx.compose.ui.platform.InspectableValueKt;
 import com.android.systemui.volume.panel.component.volume.ui.composable.ColumnVolumeSlidersKt$ColumnVolumeSliders$1$1$1$1;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PaddingKt {
     public static final PaddingKt$$ExternalSyntheticLambda0 PaddingUnspecified = new PaddingKt$$ExternalSyntheticLambda0();

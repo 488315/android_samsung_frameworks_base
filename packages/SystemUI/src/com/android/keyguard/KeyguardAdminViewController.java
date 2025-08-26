@@ -13,7 +13,6 @@ import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.widget.SystemUITextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardAdminViewController extends KeyguardInputViewController {
     public KeyguardAdminViewController(KeyguardAdminView keyguardAdminView, KeyguardSecurityModel.SecurityMode securityMode, KeyguardSecurityCallback keyguardSecurityCallback, EmergencyButtonController emergencyButtonController, KeyguardMessageAreaController.Factory factory, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, BouncerHapticPlayer bouncerHapticPlayer) {

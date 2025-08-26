@@ -5,11 +5,9 @@ import android.view.SurfaceControl;
 import android.window.ScreenCapture;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ScreenshotUtils {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BufferConsumer implements Consumer {
         public final int mLayer;
         public final SurfaceControl mParentSurfaceControl;
@@ -28,9 +26,9 @@ public class ScreenshotUtils {
             if (screenshotHardwareBuffer == null || screenshotHardwareBuffer.getHardwareBuffer() == null) {
                 return;
             }
-            SurfaceControl build = new SurfaceControl.Builder().setName("ScreenshotUtils screenshot").setFormat(-3).setSecure(screenshotHardwareBuffer.containsSecureLayers()).setCallsite("ScreenshotUtils.takeScreenshot").setBLASTLayer().build();
-            this.mScreenshot = build;
-            this.mTransaction.setBuffer(build, screenshotHardwareBuffer.getHardwareBuffer());
+            SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setName("ScreenshotUtils screenshot").setFormat(-3).setSecure(screenshotHardwareBuffer.containsSecureLayers()).setCallsite("ScreenshotUtils.takeScreenshot").setBLASTLayer().build();
+            this.mScreenshot = surfaceControlBuild;
+            this.mTransaction.setBuffer(surfaceControlBuild, screenshotHardwareBuffer.getHardwareBuffer());
             this.mTransaction.setColorSpace(this.mScreenshot, screenshotHardwareBuffer.getColorSpace());
             this.mTransaction.reparent(this.mScreenshot, this.mParentSurfaceControl);
             this.mTransaction.setLayer(this.mScreenshot, this.mLayer);

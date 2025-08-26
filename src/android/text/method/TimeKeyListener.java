@@ -57,11 +57,11 @@ public class TimeKeyListener extends NumberKeyListener {
     public static TimeKeyListener getInstance(Locale locale) {
         TimeKeyListener timeKeyListener;
         synchronized (sLock) {
-            HashMap<Locale, TimeKeyListener> hashMap = sInstanceCache;
-            timeKeyListener = hashMap.get(locale);
+            HashMap<Locale, TimeKeyListener> map = sInstanceCache;
+            timeKeyListener = map.get(locale);
             if (timeKeyListener == null) {
                 timeKeyListener = new TimeKeyListener(locale);
-                hashMap.put(locale, timeKeyListener);
+                map.put(locale, timeKeyListener);
             }
         }
         return timeKeyListener;

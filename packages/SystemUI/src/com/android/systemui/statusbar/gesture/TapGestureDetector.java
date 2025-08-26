@@ -4,8 +4,9 @@ import android.content.Context;
 import android.view.GestureDetector;
 import android.view.InputEvent;
 import android.view.MotionEvent;
+import com.android.systemui.settings.DisplayTracker;
+import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TapGestureDetector extends GenericGestureDetector {
     public final Context context;
@@ -14,27 +15,19 @@ public final class TapGestureDetector extends GenericGestureDetector {
 
     /* JADX WARN: Illegal instructions before constructor call */
     /* JADX WARN: Type inference failed for: r2v1, types: [com.android.systemui.statusbar.gesture.TapGestureDetector$gestureListener$1] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public TapGestureDetector(android.content.Context r2, com.android.systemui.settings.DisplayTracker r3) {
-        /*
-            r1 = this;
-            java.lang.Class<com.android.systemui.statusbar.gesture.TapGestureDetector> r0 = com.android.systemui.statusbar.gesture.TapGestureDetector.class
-            kotlin.jvm.internal.ClassReference r0 = kotlin.jvm.internal.Reflection.getOrCreateKotlinClass(r0)
-            java.lang.String r0 = r0.getSimpleName()
-            r0.getClass()
-            r3.getClass()
-            r3 = 0
-            r1.<init>(r0, r3)
-            r1.context = r2
-            com.android.systemui.statusbar.gesture.TapGestureDetector$gestureListener$1 r2 = new com.android.systemui.statusbar.gesture.TapGestureDetector$gestureListener$1
-            r2.<init>()
-            r1.gestureListener = r2
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.gesture.TapGestureDetector.<init>(android.content.Context, com.android.systemui.settings.DisplayTracker):void");
+    public TapGestureDetector(Context context, DisplayTracker displayTracker) {
+        String simpleName = Reflection.getOrCreateKotlinClass(TapGestureDetector.class).getSimpleName();
+        simpleName.getClass();
+        displayTracker.getClass();
+        super(simpleName, 0);
+        this.context = context;
+        this.gestureListener = new GestureDetector.SimpleOnGestureListener() { // from class: com.android.systemui.statusbar.gesture.TapGestureDetector$gestureListener$1
+            @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
+            public final boolean onSingleTapUp(MotionEvent motionEvent) {
+                this.this$0.onGestureDetected$frameworks__base__packages__SystemUI__android_common__SystemUI_core(motionEvent);
+                return true;
+            }
+        };
     }
 
     @Override // com.android.systemui.statusbar.gesture.GenericGestureDetector

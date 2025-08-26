@@ -12,19 +12,16 @@ import kotlin.collections.CollectionsKt__MutableCollectionsKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FontVariation {
     public static final FontVariation INSTANCE = new FontVariation();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Setting {
         String getAxisName();
 
         float toVariationValue();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SettingFloat implements Setting {
         public final String axisName;
         public final float value;
@@ -67,7 +64,6 @@ public final class FontVariation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SettingInt implements Setting {
         public final String axisName;
         public final int value;
@@ -110,7 +106,6 @@ public final class FontVariation {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Settings {
         public final List settings;
 
@@ -118,27 +113,27 @@ public final class FontVariation {
             LinkedHashMap linkedHashMap = new LinkedHashMap();
             for (Setting setting : settingArr) {
                 String axisName = setting.getAxisName();
-                Object obj = linkedHashMap.get(axisName);
-                if (obj == null) {
-                    obj = new ArrayList();
-                    linkedHashMap.put(axisName, obj);
+                Object arrayList = linkedHashMap.get(axisName);
+                if (arrayList == null) {
+                    arrayList = new ArrayList();
+                    linkedHashMap.put(axisName, arrayList);
                 }
-                ((List) obj).add(setting);
+                ((List) arrayList).add(setting);
             }
-            ArrayList arrayList = new ArrayList();
+            ArrayList arrayList2 = new ArrayList();
             for (Map.Entry entry : linkedHashMap.entrySet()) {
                 String str = (String) entry.getKey();
                 List list = (List) entry.getValue();
                 if (list.size() != 1) {
                     throw new IllegalArgumentException(OpaqueKey$$ExternalSyntheticOutline0.m(ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("'", str, "' must be unique. Actual [ ["), CollectionsKt___CollectionsKt.joinToString$default(list, null, null, null, null, 63), ']').toString());
                 }
-                CollectionsKt__MutableCollectionsKt.addAll(list, arrayList);
+                CollectionsKt__MutableCollectionsKt.addAll(list, arrayList2);
             }
-            ArrayList arrayList2 = new ArrayList(arrayList);
-            this.settings = arrayList2;
-            int size = arrayList2.size();
+            ArrayList arrayList3 = new ArrayList(arrayList2);
+            this.settings = arrayList3;
+            int size = arrayList3.size();
             for (int i = 0; i < size; i++) {
-                ((Setting) arrayList2.get(i)).getClass();
+                ((Setting) arrayList3.get(i)).getClass();
             }
         }
 

@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CapabilityManager {
     private static final String LOG_TAG_BASE = "CapabilityManager";
@@ -30,7 +29,6 @@ public class CapabilityManager {
     private int mPhoneId;
     private Set<CapabilityListener> mQueuedCapabilityListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ConnectionListener {
         void onConnected();
 
@@ -207,9 +205,9 @@ public class CapabilityManager {
             Log.e(this.LOG_TAG, "registerListener: not connected.");
             this.mQueuedCapabilityListener.add(capabilityListener);
         } else {
-            String registerListener = iCapabilityService.registerListener(capabilityListener.callback, this.mPhoneId);
-            if (registerListener != null) {
-                capabilityListener.mToken = registerListener;
+            String strRegisterListener = iCapabilityService.registerListener(capabilityListener.callback, this.mPhoneId);
+            if (strRegisterListener != null) {
+                capabilityListener.mToken = strRegisterListener;
             }
         }
     }

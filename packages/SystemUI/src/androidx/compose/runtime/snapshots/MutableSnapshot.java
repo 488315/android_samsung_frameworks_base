@@ -3,6 +3,7 @@ package androidx.compose.runtime.snapshots;
 import androidx.collection.MutableScatterSet;
 import androidx.collection.ScatterSetKt;
 import androidx.compose.runtime.PreconditionsKt;
+import androidx.compose.runtime.collection.ScatterSetWrapper;
 import androidx.compose.runtime.snapshots.SnapshotApplyResult;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,10 +12,12 @@ import java.util.Map;
 import kotlin.Pair;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MutableSnapshot extends Snapshot {
     public static final int[] EmptyIntArray;
@@ -28,7 +31,6 @@ public class MutableSnapshot extends Snapshot {
     public int writeCount;
     public final Function1 writeObserver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -69,21 +71,156 @@ public class MutableSnapshot extends Snapshot {
         setInvalid$runtime_release(SnapshotKt.addRange(getInvalid$runtime_release(), snapshotId + 1, getSnapshotId()));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00b4 A[LOOP:1: B:32:0x00b2->B:33:0x00b4, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00c2 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x011b A[Catch: all -> 0x0108, TryCatch #1 {all -> 0x0108, blocks: (B:38:0x00c2, B:40:0x00d1, B:43:0x00df, B:45:0x00ec, B:47:0x00f6, B:49:0x00fc, B:51:0x010a, B:57:0x011b, B:60:0x0125, B:62:0x0130, B:64:0x013a, B:66:0x0140, B:68:0x014a, B:74:0x0151, B:76:0x0153, B:78:0x0157, B:80:0x015e, B:82:0x0169, B:88:0x0111), top: B:37:0x00c2 }] */
-    /* JADX WARN: Removed duplicated region for block: B:78:0x0157 A[Catch: all -> 0x0108, TryCatch #1 {all -> 0x0108, blocks: (B:38:0x00c2, B:40:0x00d1, B:43:0x00df, B:45:0x00ec, B:47:0x00f6, B:49:0x00fc, B:51:0x010a, B:57:0x011b, B:60:0x0125, B:62:0x0130, B:64:0x013a, B:66:0x0140, B:68:0x014a, B:74:0x0151, B:76:0x0153, B:78:0x0157, B:80:0x015e, B:82:0x0169, B:88:0x0111), top: B:37:0x00c2 }] */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x010f  */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x0113  */
+    /* JADX WARN: Removed duplicated region for block: B:75:0x014f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public androidx.compose.runtime.snapshots.SnapshotApplyResult apply() {
-        /*
-            Method dump skipped, instructions count: 373
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.snapshots.MutableSnapshot.apply():androidx.compose.runtime.snapshots.SnapshotApplyResult");
+    public SnapshotApplyResult apply() {
+        Map mapAccess$optimisticMerges;
+        List list;
+        MutableScatterSet mutableScatterSet;
+        char c;
+        long j;
+        long j2;
+        MutableScatterSet modified$runtime_release = getModified$runtime_release();
+        if (modified$runtime_release != null) {
+            long j3 = SnapshotKt.globalSnapshot.snapshotId;
+            mapAccess$optimisticMerges = SnapshotKt.access$optimisticMerges(j3, this, SnapshotKt.openSnapshots.clear(j3));
+        } else {
+            mapAccess$optimisticMerges = null;
+        }
+        EmptyList emptyList = EmptyList.INSTANCE;
+        synchronized (SnapshotKt.lock) {
+            try {
+                SnapshotKt.access$validateOpen(this);
+                if (modified$runtime_release == null || modified$runtime_release._size == 0) {
+                    closeLocked$runtime_release();
+                    GlobalSnapshot globalSnapshot = SnapshotKt.globalSnapshot;
+                    MutableScatterSet mutableScatterSet2 = globalSnapshot.modified;
+                    SnapshotKt.resetGlobalSnapshotLocked(globalSnapshot, SnapshotKt.emptyLambda);
+                    if (mutableScatterSet2 == null || !mutableScatterSet2.isNotEmpty()) {
+                        list = emptyList;
+                        mutableScatterSet = null;
+                    } else {
+                        list = SnapshotKt.applyObservers;
+                        mutableScatterSet = mutableScatterSet2;
+                    }
+                } else {
+                    GlobalSnapshot globalSnapshot2 = SnapshotKt.globalSnapshot;
+                    SnapshotApplyResult snapshotApplyResultInnerApplyLocked$runtime_release = innerApplyLocked$runtime_release(SnapshotKt.nextSnapshotId, modified$runtime_release, mapAccess$optimisticMerges, SnapshotKt.openSnapshots.clear(globalSnapshot2.snapshotId));
+                    if (!Intrinsics.areEqual(snapshotApplyResultInnerApplyLocked$runtime_release, SnapshotApplyResult.Success.INSTANCE)) {
+                        return snapshotApplyResultInnerApplyLocked$runtime_release;
+                    }
+                    closeLocked$runtime_release();
+                    mutableScatterSet = globalSnapshot2.modified;
+                    SnapshotKt.resetGlobalSnapshotLocked(globalSnapshot2, SnapshotKt.emptyLambda);
+                    setModified(null);
+                    globalSnapshot2.modified = null;
+                    list = SnapshotKt.applyObservers;
+                }
+                Unit unit = Unit.INSTANCE;
+                this.applied = true;
+                if (mutableScatterSet != null) {
+                    ScatterSetWrapper scatterSetWrapper = new ScatterSetWrapper(mutableScatterSet);
+                    if (!scatterSetWrapper.set.isEmpty()) {
+                        int size = list.size();
+                        for (int i = 0; i < size; i++) {
+                            ((Function2) list.get(i)).invoke(scatterSetWrapper, this);
+                        }
+                    }
+                }
+                if (modified$runtime_release != null && modified$runtime_release.isNotEmpty()) {
+                    ScatterSetWrapper scatterSetWrapper2 = new ScatterSetWrapper(modified$runtime_release);
+                    int size2 = list.size();
+                    for (int i2 = 0; i2 < size2; i2++) {
+                        ((Function2) list.get(i2)).invoke(scatterSetWrapper2, this);
+                    }
+                }
+                synchronized (SnapshotKt.lock) {
+                    try {
+                        releasePinnedSnapshotsForCloseLocked$runtime_release();
+                        SnapshotKt.checkAndOverwriteUnusedRecordsLocked();
+                        if (mutableScatterSet != null) {
+                            Object[] objArr = mutableScatterSet.elements;
+                            long[] jArr = mutableScatterSet.metadata;
+                            int length = jArr.length - 2;
+                            if (length >= 0) {
+                                int i3 = 0;
+                                c = 7;
+                                j = 128;
+                                while (true) {
+                                    long j4 = jArr[i3];
+                                    j2 = 255;
+                                    if ((((~j4) << 7) & j4 & (-9187201950435737472L)) != -9187201950435737472L) {
+                                        int i4 = 8 - ((~(i3 - length)) >>> 31);
+                                        for (int i5 = 0; i5 < i4; i5++) {
+                                            if ((j4 & 255) < 128) {
+                                                SnapshotKt.processForUnusedRecordsLocked((StateObject) objArr[(i3 << 3) + i5]);
+                                            }
+                                            j4 >>= 8;
+                                        }
+                                        if (i4 != 8) {
+                                            break;
+                                        }
+                                        if (i3 == length) {
+                                            break;
+                                        }
+                                        i3++;
+                                    }
+                                }
+                            } else {
+                                c = 7;
+                                j = 128;
+                                j2 = 255;
+                            }
+                        }
+                        if (modified$runtime_release != null) {
+                            Object[] objArr2 = modified$runtime_release.elements;
+                            long[] jArr2 = modified$runtime_release.metadata;
+                            int length2 = jArr2.length - 2;
+                            if (length2 >= 0) {
+                                int i6 = 0;
+                                while (true) {
+                                    long j5 = jArr2[i6];
+                                    if ((((~j5) << c) & j5 & (-9187201950435737472L)) != -9187201950435737472L) {
+                                        int i7 = 8 - ((~(i6 - length2)) >>> 31);
+                                        for (int i8 = 0; i8 < i7; i8++) {
+                                            if ((j5 & j2) < j) {
+                                                SnapshotKt.processForUnusedRecordsLocked((StateObject) objArr2[(i6 << 3) + i8]);
+                                            }
+                                            j5 >>= 8;
+                                        }
+                                        if (i7 != 8) {
+                                            break;
+                                        }
+                                        if (i6 == length2) {
+                                            break;
+                                        }
+                                        i6++;
+                                    }
+                                }
+                            }
+                        }
+                        List list2 = this.merged;
+                        if (list2 != null) {
+                            int size3 = list2.size();
+                            for (int i9 = 0; i9 < size3; i9++) {
+                                SnapshotKt.processForUnusedRecordsLocked((StateObject) list2.get(i9));
+                            }
+                        }
+                        this.merged = null;
+                        Unit unit2 = Unit.INSTANCE;
+                    } catch (Throwable th) {
+                        throw th;
+                    }
+                }
+                return SnapshotApplyResult.Success.INSTANCE;
+            } catch (Throwable th2) {
+                throw th2;
+            }
+        }
     }
 
     @Override // androidx.compose.runtime.snapshots.Snapshot
@@ -125,9 +262,29 @@ public class MutableSnapshot extends Snapshot {
         return this.writeObserver;
     }
 
-    public final SnapshotApplyResult innerApplyLocked$runtime_release(long j, MutableScatterSet mutableScatterSet, Map map, SnapshotIdSet snapshotIdSet) {
+    /* JADX WARN: Removed duplicated region for block: B:51:0x011e A[PHI: r11 r17 r24 r25
+      0x011e: PHI (r11v8 java.util.ArrayList) = 
+      (r11v5 java.util.ArrayList)
+      (r11v5 java.util.ArrayList)
+      (r11v5 java.util.ArrayList)
+      (r11v6 java.util.ArrayList)
+      (r11v9 java.util.ArrayList)
+     binds: [B:19:0x0098, B:22:0x00a0, B:33:0x00ca, B:50:0x011b, B:14:0x0077] A[DONT_GENERATE, DONT_INLINE]
+      0x011e: PHI (r17v6 int) = (r17v5 int), (r17v5 int), (r17v5 int), (r17v5 int), (r17v7 int) binds: [B:19:0x0098, B:22:0x00a0, B:33:0x00ca, B:50:0x011b, B:14:0x0077] A[DONT_GENERATE, DONT_INLINE]
+      0x011e: PHI (r24v3 java.util.List) = (r24v2 java.util.List), (r24v2 java.util.List), (r24v2 java.util.List), (r24v2 java.util.List), (r24v4 java.util.List) binds: [B:19:0x0098, B:22:0x00a0, B:33:0x00ca, B:50:0x011b, B:14:0x0077] A[DONT_GENERATE, DONT_INLINE]
+      0x011e: PHI (r25v7 androidx.compose.runtime.snapshots.SnapshotIdSet) = 
+      (r25v5 androidx.compose.runtime.snapshots.SnapshotIdSet)
+      (r25v5 androidx.compose.runtime.snapshots.SnapshotIdSet)
+      (r25v5 androidx.compose.runtime.snapshots.SnapshotIdSet)
+      (r25v5 androidx.compose.runtime.snapshots.SnapshotIdSet)
+      (r25v8 androidx.compose.runtime.snapshots.SnapshotIdSet)
+     binds: [B:19:0x0098, B:22:0x00a0, B:33:0x00ca, B:50:0x011b, B:14:0x0077] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final SnapshotApplyResult innerApplyLocked$runtime_release(long j, MutableScatterSet mutableScatterSet, Map map, SnapshotIdSet snapshotIdSet) throws Throwable {
         ArrayList arrayList;
-        List list;
+        List listPlus;
         ArrayList arrayList2;
         Object[] objArr;
         long[] jArr;
@@ -140,20 +297,20 @@ public class MutableSnapshot extends Snapshot {
         SnapshotIdSet snapshotIdSet3;
         int i2;
         ArrayList arrayList3;
-        List list2;
-        StateRecord mergeRecords;
-        SnapshotIdSet or = getInvalid$runtime_release().set(getSnapshotId()).or(this.previousIds);
+        List list;
+        StateRecord stateRecordMergeRecords;
+        SnapshotIdSet snapshotIdSetOr = getInvalid$runtime_release().set(getSnapshotId()).or(this.previousIds);
         Object[] objArr3 = mutableScatterSet.elements;
         long[] jArr3 = mutableScatterSet.metadata;
         int length = jArr3.length - 2;
         if (length >= 0) {
             int i3 = 0;
             arrayList2 = null;
-            list = null;
+            listPlus = null;
             Throwable th2 = null;
             while (true) {
                 long j3 = jArr3[i3];
-                SnapshotIdSet snapshotIdSet4 = or;
+                SnapshotIdSet snapshotIdSet4 = snapshotIdSetOr;
                 if ((((~j3) << 7) & j3 & (-9187201950435737472L)) != -9187201950435737472L) {
                     int i4 = 8;
                     int i5 = 8 - ((~(i3 - length)) >>> 31);
@@ -167,54 +324,55 @@ public class MutableSnapshot extends Snapshot {
                             StateRecord firstStateRecord = stateObject.getFirstStateRecord();
                             jArr2 = jArr3;
                             j2 = j3;
-                            StateRecord readable = SnapshotKt.readable(firstStateRecord, j, snapshotIdSet);
-                            if (readable == null) {
+                            StateRecord stateRecord = SnapshotKt.readable(firstStateRecord, j, snapshotIdSet);
+                            if (stateRecord == null) {
                                 arrayList3 = arrayList2;
-                                list2 = list;
+                                list = listPlus;
                                 snapshotIdSet3 = snapshotIdSet4;
                             } else {
                                 arrayList3 = arrayList2;
-                                list2 = list;
+                                list = listPlus;
                                 SnapshotIdSet snapshotIdSet5 = snapshotIdSet4;
-                                StateRecord readable2 = SnapshotKt.readable(firstStateRecord, getSnapshotId(), snapshotIdSet5);
-                                if (readable2 == null) {
+                                StateRecord stateRecord2 = SnapshotKt.readable(firstStateRecord, getSnapshotId(), snapshotIdSet5);
+                                if (stateRecord2 == null) {
                                     snapshotIdSet3 = snapshotIdSet5;
                                 } else {
                                     i2 = i6;
                                     snapshotIdSet3 = snapshotIdSet5;
-                                    if (readable2.snapshotId != 1 && !readable.equals(readable2)) {
-                                        StateRecord readable3 = SnapshotKt.readable(firstStateRecord, getSnapshotId(), getInvalid$runtime_release());
-                                        if (readable3 == null) {
+                                    if (stateRecord2.snapshotId != 1 && !stateRecord.equals(stateRecord2)) {
+                                        StateRecord stateRecord3 = SnapshotKt.readable(firstStateRecord, getSnapshotId(), getInvalid$runtime_release());
+                                        if (stateRecord3 == null) {
                                             SnapshotKt.readError();
                                             throw th;
                                         }
-                                        if (map == null || (mergeRecords = (StateRecord) map.get(readable)) == null) {
-                                            mergeRecords = stateObject.mergeRecords(readable2, readable, readable3);
+                                        if (map == null || (stateRecordMergeRecords = (StateRecord) map.get(stateRecord)) == null) {
+                                            stateRecordMergeRecords = stateObject.mergeRecords(stateRecord2, stateRecord, stateRecord3);
                                         }
-                                        if (mergeRecords == null) {
+                                        if (stateRecordMergeRecords == null) {
                                             return new SnapshotApplyResult.Failure(this);
                                         }
-                                        if (!mergeRecords.equals(readable3)) {
-                                            if (mergeRecords.equals(readable)) {
-                                                arrayList2 = arrayList3 == null ? new ArrayList() : arrayList3;
-                                                arrayList2.add(new Pair(stateObject, readable.create(getSnapshotId())));
-                                                list = list2 == null ? new ArrayList() : list2;
-                                                list.add(stateObject);
-                                            } else {
-                                                if (arrayList3 == null) {
-                                                    arrayList3 = new ArrayList();
-                                                }
-                                                arrayList3.add(!mergeRecords.equals(readable2) ? new Pair(stateObject, mergeRecords) : new Pair(stateObject, readable2.create(getSnapshotId())));
+                                        if (stateRecordMergeRecords.equals(stateRecord3)) {
+                                            arrayList2 = arrayList3;
+                                            listPlus = list;
+                                        } else if (stateRecordMergeRecords.equals(stateRecord)) {
+                                            arrayList2 = arrayList3 == null ? new ArrayList() : arrayList3;
+                                            arrayList2.add(new Pair(stateObject, stateRecord.create(getSnapshotId())));
+                                            listPlus = list == null ? new ArrayList() : list;
+                                            listPlus.add(stateObject);
+                                        } else {
+                                            if (arrayList3 == null) {
+                                                arrayList3 = new ArrayList();
                                             }
+                                            arrayList3.add(!stateRecordMergeRecords.equals(stateRecord2) ? new Pair(stateObject, stateRecordMergeRecords) : new Pair(stateObject, stateRecord2.create(getSnapshotId())));
+                                            arrayList2 = arrayList3;
+                                            listPlus = list;
                                         }
                                     }
-                                    arrayList2 = arrayList3;
-                                    list = list2;
                                 }
                             }
                             i2 = i6;
                             arrayList2 = arrayList3;
-                            list = list2;
+                            listPlus = list;
                         } else {
                             i = i4;
                             objArr2 = objArr3;
@@ -250,11 +408,11 @@ public class MutableSnapshot extends Snapshot {
                 th2 = th;
                 objArr3 = objArr;
                 jArr3 = jArr;
-                or = snapshotIdSet2;
+                snapshotIdSetOr = snapshotIdSet2;
             }
         } else {
             arrayList = null;
-            list = null;
+            listPlus = null;
         }
         arrayList2 = arrayList;
         if (arrayList2 != null) {
@@ -263,25 +421,25 @@ public class MutableSnapshot extends Snapshot {
             for (int i7 = 0; i7 < size; i7++) {
                 Pair pair = (Pair) arrayList2.get(i7);
                 StateObject stateObject2 = (StateObject) pair.component1();
-                StateRecord stateRecord = (StateRecord) pair.component2();
-                stateRecord.snapshotId = j;
+                StateRecord stateRecord4 = (StateRecord) pair.component2();
+                stateRecord4.snapshotId = j;
                 synchronized (SnapshotKt.lock) {
-                    stateRecord.next = stateObject2.getFirstStateRecord();
-                    stateObject2.prependStateRecord(stateRecord);
+                    stateRecord4.next = stateObject2.getFirstStateRecord();
+                    stateObject2.prependStateRecord(stateRecord4);
                     Unit unit = Unit.INSTANCE;
                 }
             }
         }
-        if (list != null) {
-            int size2 = list.size();
+        if (listPlus != null) {
+            int size2 = listPlus.size();
             for (int i8 = 0; i8 < size2; i8++) {
-                mutableScatterSet.remove((StateObject) list.get(i8));
+                mutableScatterSet.remove((StateObject) listPlus.get(i8));
             }
-            List list3 = this.merged;
-            if (list3 != null) {
-                list = CollectionsKt___CollectionsKt.plus((Iterable) list, (Collection) list3);
+            List list2 = this.merged;
+            if (list2 != null) {
+                listPlus = CollectionsKt___CollectionsKt.plus((Iterable) listPlus, (Collection) list2);
             }
-            this.merged = list;
+            this.merged = listPlus;
         }
         return SnapshotApplyResult.Success.INSTANCE;
     }
@@ -291,7 +449,11 @@ public class MutableSnapshot extends Snapshot {
         this.snapshots++;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:34:0x008c  */
     @Override // androidx.compose.runtime.snapshots.Snapshot
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void nestedDeactivated$runtime_release() {
         if (this.snapshots <= 0) {
             PreconditionsKt.throwIllegalArgumentException("no pending nested snapshots");
@@ -331,12 +493,11 @@ public class MutableSnapshot extends Snapshot {
                         }
                         if (i3 != 8) {
                             break;
+                        } else if (i2 == length) {
+                            break;
+                        } else {
+                            i2++;
                         }
-                    }
-                    if (i2 == length) {
-                        break;
-                    } else {
-                        i2++;
                     }
                 }
             }

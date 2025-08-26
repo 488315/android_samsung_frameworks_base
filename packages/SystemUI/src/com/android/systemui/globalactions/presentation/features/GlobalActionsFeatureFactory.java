@@ -50,7 +50,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class GlobalActionsFeatureFactory implements FeatureFactory {
     public final ConditionChecker mConditionChecker;
@@ -301,14 +300,14 @@ public class GlobalActionsFeatureFactory implements FeatureFactory {
 
     public final void loggingStrategy(String str, List list) {
         Iterator it = ((ArrayList) list).iterator();
-        String str2 = "";
+        String string = "";
         while (it.hasNext()) {
             Object next = it.next();
-            StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str2);
-            m.append(next.getClass().getSimpleName());
-            m.append(" ");
-            str2 = m.toString();
+            StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(string);
+            sbM.append(next.getClass().getSimpleName());
+            sbM.append(" ");
+            string = sbM.toString();
         }
-        this.mLogWrapper.i("GlobalActionsFeatureFactory", MotionLayout$$ExternalSyntheticOutline0.m("check ", str, " [ ", str2, "]"));
+        this.mLogWrapper.i("GlobalActionsFeatureFactory", MotionLayout$$ExternalSyntheticOutline0.m("check ", str, " [ ", string, "]"));
     }
 }

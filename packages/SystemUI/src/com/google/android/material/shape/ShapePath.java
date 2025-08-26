@@ -13,7 +13,6 @@ import com.google.android.material.shadow.ShadowRenderer;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ShapePath {
     public float currentShadowAngle;
@@ -25,7 +24,6 @@ public class ShapePath {
     public float startX;
     public float startY;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ArcShadowOperation extends ShadowCompatOperation {
         public final PathArcOperation operation;
 
@@ -60,15 +58,15 @@ public class ShapePath {
                 iArr[2] = shadowRenderer.shadowMiddleColor;
                 iArr[3] = shadowRenderer.shadowEndColor;
             }
-            float width = rectF.width() / 2.0f;
-            if (width <= 0.0f) {
+            float fWidth = rectF.width() / 2.0f;
+            if (fWidth <= 0.0f) {
                 return;
             }
-            float f4 = 1.0f - (i / width);
+            float f4 = 1.0f - (i / fWidth);
             float[] fArr = ShadowRenderer.cornerPositions;
             fArr[1] = f4;
             fArr[2] = ((1.0f - f4) / 2.0f) + f4;
-            shadowRenderer.cornerShadowPaint.setShader(new RadialGradient(rectF.centerX(), rectF.centerY(), width, iArr, fArr, Shader.TileMode.CLAMP));
+            shadowRenderer.cornerShadowPaint.setShader(new RadialGradient(rectF.centerX(), rectF.centerY(), fWidth, iArr, fArr, Shader.TileMode.CLAMP));
             canvas.save();
             canvas.concat(matrix);
             canvas.scale(1.0f, rectF.height() / rectF.width());
@@ -81,7 +79,6 @@ public class ShapePath {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LineShadowOperation extends ShadowCompatOperation {
         public final PathLineOperation operation;
         public final float startX;
@@ -127,7 +124,6 @@ public class ShapePath {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PathArcOperation extends PathOperation {
         public static final RectF rectF = new RectF();
         public final float bottom;
@@ -156,7 +152,6 @@ public class ShapePath {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PathLineOperation extends PathOperation {
         public float x;
         public float y;
@@ -171,14 +166,12 @@ public class ShapePath {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class PathOperation {
         public final Matrix matrix = new Matrix();
 
         public abstract void applyToPath(Matrix matrix, Path path);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ShadowCompatOperation {
         public static final Matrix IDENTITY_MATRIX = new Matrix();
         public final Matrix renderMatrix = new Matrix();

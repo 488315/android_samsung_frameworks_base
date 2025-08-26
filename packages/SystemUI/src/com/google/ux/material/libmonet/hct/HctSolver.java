@@ -2,7 +2,6 @@ package com.google.ux.material.libmonet.hct;
 
 import com.google.ux.material.libmonet.utils.MathUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class HctSolver {
     public static final double[][] SCALED_DISCOUNT_FROM_LINRGB = {new double[]{0.001200833568784504d, 0.002389694492170889d, 2.795742885861124E-4d}, new double[]{5.891086651375999E-4d, 0.0029785502573438758d, 3.270666104008398E-4d}, new double[]{1.0146692491640572E-4d, 5.364214359186694E-4d, 0.0032979401770712076d}};
@@ -18,21 +17,21 @@ public class HctSolver {
     }
 
     public static double chromaticAdaptation(double d) {
-        double pow = Math.pow(Math.abs(d), 0.42d);
-        return (((d < 0.0d ? -1 : d == 0.0d ? 0 : 1) * 400.0d) * pow) / (pow + 27.13d);
+        double dPow = Math.pow(Math.abs(d), 0.42d);
+        return (((d < 0.0d ? -1 : d == 0.0d ? 0 : 1) * 400.0d) * dPow) / (dPow + 27.13d);
     }
 
     public static double hueOf(double[] dArr) {
-        double[] matrixMultiply = MathUtils.matrixMultiply(dArr, SCALED_DISCOUNT_FROM_LINRGB);
-        double chromaticAdaptation = chromaticAdaptation(matrixMultiply[0]);
-        double chromaticAdaptation2 = chromaticAdaptation(matrixMultiply[1]);
-        double chromaticAdaptation3 = chromaticAdaptation(matrixMultiply[2]);
-        return Math.atan2(((chromaticAdaptation + chromaticAdaptation2) - (chromaticAdaptation3 * 2.0d)) / 9.0d, ((((-12.0d) * chromaticAdaptation2) + (chromaticAdaptation * 11.0d)) + chromaticAdaptation3) / 11.0d);
+        double[] dArrMatrixMultiply = MathUtils.matrixMultiply(dArr, SCALED_DISCOUNT_FROM_LINRGB);
+        double dChromaticAdaptation = chromaticAdaptation(dArrMatrixMultiply[0]);
+        double dChromaticAdaptation2 = chromaticAdaptation(dArrMatrixMultiply[1]);
+        double dChromaticAdaptation3 = chromaticAdaptation(dArrMatrixMultiply[2]);
+        return Math.atan2(((dChromaticAdaptation + dChromaticAdaptation2) - (dChromaticAdaptation3 * 2.0d)) / 9.0d, ((((-12.0d) * dChromaticAdaptation2) + (dChromaticAdaptation * 11.0d)) + dChromaticAdaptation3) / 11.0d);
     }
 
     public static double inverseChromaticAdaptation(double d) {
-        double abs = Math.abs(d);
-        return Math.pow(Math.max(0.0d, (27.13d * abs) / (400.0d - abs)), 2.380952380952381d) * (d < 0.0d ? -1 : d == 0.0d ? 0 : 1);
+        double dAbs = Math.abs(d);
+        return Math.pow(Math.max(0.0d, (27.13d * dAbs) / (400.0d - dAbs)), 2.380952380952381d) * (d < 0.0d ? -1 : d == 0.0d ? 0 : 1);
     }
 
     public static boolean isBounded(double d) {

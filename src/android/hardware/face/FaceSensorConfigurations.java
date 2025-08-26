@@ -122,12 +122,12 @@ public class FaceSensorConfigurations implements Parcelable {
 
     public static IFace getIFace(String str) {
         if (str.contains(AudioDeviceDescription.CONNECTION_VIRTUAL)) {
-            String remapFqName = remapFqName(str);
-            Slog.i(TAG, "getIFace fqName is mapped: " + str + Session.SUBSESSION_SEPARATION_CHAR + remapFqName);
+            String strRemapFqName = remapFqName(str);
+            Slog.i(TAG, "getIFace fqName is mapped: " + str + Session.SUBSESSION_SEPARATION_CHAR + strRemapFqName);
             try {
-                return IVirtualHal.Stub.asInterface(Binder.allowBlocking(ServiceManager.waitForService(remapFqName))).getFaceHal();
+                return IVirtualHal.Stub.asInterface(Binder.allowBlocking(ServiceManager.waitForService(strRemapFqName))).getFaceHal();
             } catch (RemoteException unused) {
-                Slog.e(TAG, "Remote exception in vhal.getFaceHal() call" + remapFqName);
+                Slog.e(TAG, "Remote exception in vhal.getFaceHal() call" + strRemapFqName);
             }
         }
         return IFace.Stub.asInterface(Binder.allowBlocking(ServiceManager.waitForDeclaredService(str)));

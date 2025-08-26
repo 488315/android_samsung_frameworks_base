@@ -13,7 +13,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AlarmTileUserActionInteractor implements QSTileUserActionInteractor {
     public final QSTileIntentUserInputHandler inputHandler;
@@ -22,7 +21,11 @@ public final class AlarmTileUserActionInteractor implements QSTileUserActionInte
         this.inputHandler = qSTileIntentUserInputHandler;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x002c  */
     @Override // com.android.systemui.qs.tiles.base.domain.interactor.QSTileUserActionInteractor
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) {
         QSTileUserAction qSTileUserAction = qSTileInput.action;
         if (qSTileUserAction instanceof QSTileUserAction.Click) {
@@ -36,9 +39,10 @@ public final class AlarmTileUserActionInteractor implements QSTileUserActionInte
                     Expandable expandable = ((QSTileUserAction.Click) qSTileUserAction).expandable;
                     showIntent.getClass();
                     ((QSTileIntentUserInputHandlerImpl) qSTileIntentUserInputHandler).handle(expandable, showIntent, true);
+                } else {
+                    QSTileIntentUserInputHandler.handle$default(qSTileIntentUserInputHandler, ((QSTileUserAction.Click) qSTileUserAction).expandable, new Intent("android.intent.action.SHOW_ALARMS"));
                 }
             }
-            QSTileIntentUserInputHandler.handle$default(qSTileIntentUserInputHandler, ((QSTileUserAction.Click) qSTileUserAction).expandable, new Intent("android.intent.action.SHOW_ALARMS"));
         } else if (!(qSTileUserAction instanceof QSTileUserAction.LongClick) && !(qSTileUserAction instanceof QSTileUserAction.ToggleClick)) {
             throw new NoWhenBranchMatchedException();
         }

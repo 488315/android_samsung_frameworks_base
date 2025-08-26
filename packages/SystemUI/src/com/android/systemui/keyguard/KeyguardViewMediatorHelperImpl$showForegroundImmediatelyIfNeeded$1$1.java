@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.view.IRemoteAnimationFinishedCallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardViewMediatorHelperImpl$showForegroundImmediatelyIfNeeded$1$1 implements Runnable {
     public final /* synthetic */ IRemoteAnimationFinishedCallback $finishedCallback;
@@ -27,7 +26,7 @@ public final class KeyguardViewMediatorHelperImpl$showForegroundImmediatelyIfNee
         handler$1.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$showForegroundImmediatelyIfNeeded$1$1.1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardViewMediatorHelperImpl.this.fixedRotationMonitor.cancel();
+                keyguardViewMediatorHelperImpl.fixedRotationMonitor.cancel();
             }
         });
     }

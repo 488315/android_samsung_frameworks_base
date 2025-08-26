@@ -30,7 +30,6 @@ import com.android.systemui.statusbar.notification.headsup.HeadsUpManager;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl;
 import com.android.systemui.statusbar.notification.stack.AmbientState;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
-import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import com.android.systemui.util.SettingsHelper;
 import java.util.ArrayList;
@@ -47,7 +46,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecQuickSettingsControllerImpl {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -87,7 +85,6 @@ public final class SecQuickSettingsControllerImpl {
     public final SecQuickTileChunkLayoutBarTouchHelper tileChunkLayoutBarTouchHelper;
     public final Consumer touchAboveFalsingThresholdConsumer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -198,8 +195,8 @@ public final class SecQuickSettingsControllerImpl {
                 double asDouble = doubleSupplier10.getAsDouble();
                 SecQuickSettingsControllerImpl secQuickSettingsControllerImpl = this;
                 arrayList.add(" expansionHeight: " + asDouble + " minExpansionHeight: " + secQuickSettingsControllerImpl.minExpansionHeightSupplier.getAsDouble() + " maxExpansionHeight: " + secQuickSettingsControllerImpl.maxExpansionHeightSupplier.getAsDouble());
-                View requireViewById = ((NotificationPanelViewController) secQuickSettingsControllerImpl.panelViewControllerLazy.get()).mView.requireViewById(R.id.notification_container_parent);
-                arrayList.add(" notifsQsContainer[alpha: " + requireViewById.getAlpha() + " visibility: " + requireViewById.getVisibility() + "]");
+                View viewRequireViewById = ((NotificationPanelViewController) secQuickSettingsControllerImpl.panelViewControllerLazy.get()).mView.requireViewById(R.id.notification_container_parent);
+                arrayList.add(" notifsQsContainer[alpha: " + viewRequireViewById.getAlpha() + " visibility: " + viewRequireViewById.getVisibility() + "]");
                 FrameLayout frameLayout = (FrameLayout) secQuickSettingsControllerImpl.qsFrameLayoutSupplier.get();
                 arrayList.add(" enableClipping: " + booleanSupplier5.getAsBoolean() + " qsFrame[translationY: " + frameLayout.getTranslationY() + "  top: " + frameLayout.getTop() + " alpha: " + frameLayout.getAlpha() + " visibility: " + frameLayout.getVisibility() + "]");
                 QSContainerImpl qSContainerImpl = secQuickSettingsControllerImpl.qsContainerImpl;
@@ -215,23 +212,23 @@ public final class SecQuickSettingsControllerImpl {
                 float stackY = ambientState2.getStackY();
                 int i3 = ambientState2.mStackTopMargin;
                 int i4 = ambientState2.mScrollY;
-                StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m(" ambientState[expansionFraction: ", f, " stackY: ", stackY, " stackTopMargin: ");
-                m.append(i3);
-                m.append(" scrollY: ");
-                m.append(i4);
-                m.append("]");
-                arrayList.add(m.toString());
+                StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m(" ambientState[expansionFraction: ", f, " stackY: ", stackY, " stackTopMargin: ");
+                sbM.append(i3);
+                sbM.append(" scrollY: ");
+                sbM.append(i4);
+                sbM.append("]");
+                arrayList.add(sbM.toString());
                 float asDouble2 = (float) doubleSupplier11.getAsDouble();
-                int intValue = ((Number) function3.apply(Float.valueOf(asDouble2))).intValue();
-                int intValue2 = ((Number) function4.apply(Integer.valueOf(intValue))).intValue();
-                arrayList.add(" notificationTop: " + doubleSupplier12.getAsDouble() + " expansionFraction: " + asDouble2 + " qsPanelBottomY: " + intValue + " top: " + intValue2);
+                int iIntValue = ((Number) function3.apply(Float.valueOf(asDouble2))).intValue();
+                int iIntValue2 = ((Number) function4.apply(Integer.valueOf(iIntValue))).intValue();
+                arrayList.add(" notificationTop: " + doubleSupplier12.getAsDouble() + " expansionFraction: " + asDouble2 + " qsPanelBottomY: " + iIntValue + " top: " + iIntValue2);
                 return arrayList;
             }
         };
         this.modeChangedListener = new NavigationModeController.ModeChangedListener() { // from class: com.android.systemui.shade.SecQuickSettingsControllerImpl$modeChangedListener$1
             @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
             public final void onNavigationModeChanged(int i3) {
-                SecQuickSettingsControllerImpl.this.naviBarGestureMode = i3;
+                this.this$0.naviBarGestureMode = i3;
             }
         };
         final int i3 = 2;
@@ -500,7 +497,7 @@ public final class SecQuickSettingsControllerImpl {
                 }, secQuickSettingsControllerImpl.qsFrameLayoutSupplier, supplier4, secQuickSettingsControllerImpl.panelViewControllerLazy, new IntSupplier() { // from class: com.android.systemui.shade.SecQuickSettingsControllerImpl$tabletHorizontalPanelPositionHelper$2$2
                     @Override // java.util.function.IntSupplier
                     public final int getAsInt() {
-                        return SecQuickSettingsControllerImpl.this.barState;
+                        return secQuickSettingsControllerImpl.barState;
                     }
                 });
             }
@@ -558,29 +555,22 @@ public final class SecQuickSettingsControllerImpl {
     public final void onTouch(MotionEvent motionEvent) {
         float f;
         SecTabletHorizontalPanelPositionHelper tabletHorizontalPanelPositionHelper = getTabletHorizontalPanelPositionHelper();
-        float displayWidth = DeviceState.getDisplayWidth(((NotificationPanelView) tabletHorizontalPanelPositionHelper.viewSupplier.get()).getContext());
-        float width = tabletHorizontalPanelPositionHelper.notificationStackScrollLayoutController.getWidth();
-        float f2 = 2;
-        tabletHorizontalPanelPositionHelper.panelCenter = displayWidth / f2;
-        tabletHorizontalPanelPositionHelper.controllerCenter = width / f2;
-        float asInt = tabletHorizontalPanelPositionHelper.positionMinSideMarginSupplier.getAsInt() + tabletHorizontalPanelPositionHelper.controllerCenter;
-        tabletHorizontalPanelPositionHelper.leftMost = asInt;
-        tabletHorizontalPanelPositionHelper.rightMost = displayWidth - asInt;
-        int measuredHeight = ((ShadeHeaderController) ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).resourcePickHelper.getTargetPicker().common.shadeHeaderController$delegate.getValue()).header.getMeasuredHeight();
+        tabletHorizontalPanelPositionHelper.updateResources();
+        int measuredHeight = ((ShadeHeaderController) ((SecQSPanelResourcePicker) tabletHorizontalPanelPositionHelper.resourcePicker$delegate.getValue()).resourcePickHelper.getTargetPicker().common.shadeHeaderController$delegate.getValue()).header.getMeasuredHeight();
         tabletHorizontalPanelPositionHelper.prevTransitionX = tabletHorizontalPanelPositionHelper.posResult;
         if (motionEvent.getY() > measuredHeight || motionEvent.getActionMasked() == 4 || ((((SettingsHelper) tabletHorizontalPanelPositionHelper.settingsHelper$delegate.getValue()).isNotificationAsCard() && tabletHorizontalPanelPositionHelper.barStateIntSupplier.getAsInt() == 1) || ((HeadsUpManagerImpl) ((HeadsUpManager) tabletHorizontalPanelPositionHelper.headsUpManager$delegate.getValue())).mHasPinnedNotification)) {
             f = 0.0f;
         } else {
-            float f3 = tabletHorizontalPanelPositionHelper.rightMost;
-            float f4 = tabletHorizontalPanelPositionHelper.leftMost;
+            float f2 = tabletHorizontalPanelPositionHelper.rightMost;
+            float f3 = tabletHorizontalPanelPositionHelper.leftMost;
             float x = motionEvent.getX();
-            if (f4 < x) {
-                f4 = x;
+            if (f3 < x) {
+                f3 = x;
             }
-            if (f3 > f4) {
-                f3 = f4;
+            if (f2 > f3) {
+                f2 = f3;
             }
-            f = f3 - tabletHorizontalPanelPositionHelper.panelCenter;
+            f = f2 - tabletHorizontalPanelPositionHelper.panelCenter;
         }
         tabletHorizontalPanelPositionHelper.posResult = f;
         if (tabletHorizontalPanelPositionHelper.barStateIntSupplier.getAsInt() == 1 || (tabletHorizontalPanelPositionHelper.barStateIntSupplier.getAsInt() == 0 && tabletHorizontalPanelPositionHelper.isFullyCollapsedSupplier.getAsBoolean())) {

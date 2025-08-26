@@ -52,9 +52,9 @@ public interface ISecImsMmTelEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISecImsMmTelEventListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISecImsMmTelEventListener)) {
-                return (ISecImsMmTelEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISecImsMmTelEventListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISecImsMmTelEventListener)) {
+                return (ISecImsMmTelEventListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,16 +84,16 @@ public interface ISecImsMmTelEventListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onIncomingCall(readInt, bundle);
+                onIncomingCall(i3, bundle);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                String readString = parcel.readString();
-                int readInt2 = parcel.readInt();
+                String string = parcel.readString();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onCdpnInfo(readString, readInt2);
+                onCdpnInfo(string, i4);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -119,33 +119,33 @@ public interface ISecImsMmTelEventListener extends IInterface {
 
             @Override // com.android.ims.internal.ISecImsMmTelEventListener
             public void onIncomingCall(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISecImsMmTelEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISecImsMmTelEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.ISecImsMmTelEventListener
             public void onCdpnInfo(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISecImsMmTelEventListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISecImsMmTelEventListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -250,11 +250,11 @@ class IInputMethodSessionWrapper extends IInputMethodSession.Stub implements Han
 
         @Override // android.view.inputmethod.InputMethodSession.EventCallback
         public void finishedEvent(int i, boolean z) {
-            int indexOfKey = this.mPendingEvents.indexOfKey(i);
-            if (indexOfKey >= 0) {
-                InputEvent valueAt = this.mPendingEvents.valueAt(indexOfKey);
-                this.mPendingEvents.removeAt(indexOfKey);
-                finishInputEvent(valueAt, z);
+            int iIndexOfKey = this.mPendingEvents.indexOfKey(i);
+            if (iIndexOfKey >= 0) {
+                InputEvent inputEventValueAt = this.mPendingEvents.valueAt(iIndexOfKey);
+                this.mPendingEvents.removeAt(iIndexOfKey);
+                finishInputEvent(inputEventValueAt, z);
             }
         }
 

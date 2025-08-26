@@ -7,7 +7,6 @@ import androidx.compose.ui.res.StringResources_androidKt;
 import androidx.compose.ui.unit.Dp;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommonTileDefaults {
     public static final CommonTileDefaults INSTANCE = new CommonTileDefaults();
@@ -48,11 +47,11 @@ public final class CommonTileDefaults {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("com.android.systemui.qs.panels.ui.compose.infinitegrid.CommonTileDefaults.longPressLabel (CommonTile.kt:350)");
         }
-        String stringResource = StringResources_androidKt.stringResource(R.string.accessibility_long_click_tile, composerImpl);
+        String strStringResource = StringResources_androidKt.stringResource(R.string.accessibility_long_click_tile, composerImpl);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return stringResource;
+        return strStringResource;
     }
 }

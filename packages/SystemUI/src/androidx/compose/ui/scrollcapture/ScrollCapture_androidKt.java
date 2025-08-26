@@ -5,6 +5,7 @@ import androidx.compose.ui.autofill.AndroidAutofill$$ExternalSyntheticOutline0;
 import androidx.compose.ui.layout.LayoutCoordinatesKt;
 import androidx.compose.ui.node.NodeCoordinator;
 import androidx.compose.ui.platform.SemanticsUtils_androidKt;
+import androidx.compose.ui.scrollcapture.ScrollCapture;
 import androidx.compose.ui.semantics.ScrollAxisRange;
 import androidx.compose.ui.semantics.SemanticsActions;
 import androidx.compose.ui.semantics.SemanticsConfiguration;
@@ -18,7 +19,6 @@ import java.util.List;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ScrollCapture_androidKt {
     public static final void visitScrollCaptureCandidates(SemanticsNode semanticsNode, int i, Function1 function1) {
@@ -40,20 +40,21 @@ public abstract class ScrollCapture_androidKt {
                     if (semanticsConfiguration.props.containsKey(semanticsPropertyKey)) {
                         continue;
                     } else {
-                        NodeCoordinator findCoordinatorToGetBounds$ui_release = semanticsNode2.findCoordinatorToGetBounds$ui_release();
-                        if (findCoordinatorToGetBounds$ui_release == null) {
+                        NodeCoordinator nodeCoordinatorFindCoordinatorToGetBounds$ui_release = semanticsNode2.findCoordinatorToGetBounds$ui_release();
+                        if (nodeCoordinatorFindCoordinatorToGetBounds$ui_release == null) {
                             throw AndroidAutofill$$ExternalSyntheticOutline0.m("Expected semantics node to have a coordinator.");
                         }
-                        IntRect roundToIntRect = IntRectKt.roundToIntRect(LayoutCoordinatesKt.boundsInWindow(findCoordinatorToGetBounds$ui_release));
-                        if (roundToIntRect.left < roundToIntRect.right && roundToIntRect.top < roundToIntRect.bottom) {
+                        IntRect intRectRoundToIntRect = IntRectKt.roundToIntRect(LayoutCoordinatesKt.boundsInWindow(nodeCoordinatorFindCoordinatorToGetBounds$ui_release));
+                        if (intRectRoundToIntRect.left < intRectRoundToIntRect.right && intRectRoundToIntRect.top < intRectRoundToIntRect.bottom) {
                             SemanticsActions.INSTANCE.getClass();
                             Function2 function2 = (Function2) SemanticsConfigurationKt.getOrNull(semanticsConfiguration, SemanticsActions.ScrollByOffset);
                             ScrollAxisRange scrollAxisRange = (ScrollAxisRange) SemanticsConfigurationKt.getOrNull(semanticsConfiguration, SemanticsProperties.VerticalScrollAxisRange);
-                            if (function2 != null && scrollAxisRange != null && ((Number) scrollAxisRange.maxValue.invoke()).floatValue() > 0.0f) {
-                                int i3 = i + 1;
-                                ((ScrollCapture$onScrollCaptureSearch$1) function1).mo779invoke(new ScrollCaptureCandidate(semanticsNode2, i3, roundToIntRect, findCoordinatorToGetBounds$ui_release));
-                                visitScrollCaptureCandidates(semanticsNode2, i3, function1);
+                            if (function2 == null || scrollAxisRange == null || ((Number) scrollAxisRange.maxValue.invoke()).floatValue() <= 0.0f) {
+                                break;
                             }
+                            int i3 = i + 1;
+                            ((ScrollCapture.AnonymousClass1) function1).mo781invoke(new ScrollCaptureCandidate(semanticsNode2, i3, intRectRoundToIntRect, nodeCoordinatorFindCoordinatorToGetBounds$ui_release));
+                            visitScrollCaptureCandidates(semanticsNode2, i3, function1);
                         }
                     }
                 }

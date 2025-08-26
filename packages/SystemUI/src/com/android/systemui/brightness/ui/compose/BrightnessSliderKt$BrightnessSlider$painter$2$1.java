@@ -16,7 +16,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BrightnessSliderKt$BrightnessSlider$painter$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Context $context;
@@ -58,11 +57,11 @@ final class BrightnessSliderKt$BrightnessSlider$painter$2$1 extends SuspendLambd
             Context context = this.$context;
             this.L$0 = produceStateScope2;
             this.label = 1;
-            Object invoke = function3.invoke(num, context, this);
-            if (invoke == coroutineSingletons) {
+            Object objInvoke = function3.invoke(num, context, this);
+            if (objInvoke == coroutineSingletons) {
                 return coroutineSingletons;
             }
-            obj = invoke;
+            obj = objInvoke;
             produceStateScope = produceStateScope2;
         } else {
             if (i != 1) {

@@ -616,6 +616,7 @@
     <string name="call_notification_screening_text">수신 전화 검사 중</string>
     <string name="camera_restrict">보안정책에 따라 카메라를 사용할 수 없습니다.</string>
     <string name="can_not_install_app">앱을 설치할 수 없어요. %s에 최적화된 앱이 아닙니다.</string>
+    <string name="can_not_open_searcle_on_the_external_display">연결된 디스플레이에서는 서클 투 서치를 열 수 없어요.</string>
     <string name="can_not_open_searcle_on_the_lockscreen">잠금화면에서는 서클 투 서치를 열 수 없어요.</string>
     <string name="cannot_open_app_concentration_mode">앱을 열 수 없음</string>
     <string name="capability_desc_canCaptureFingerprintGestures">기기 지문 센서에서 동작을 캡처합니다.</string>
@@ -697,6 +698,7 @@
     <string name="common_secure_boot_nwlock_notification_text">지원되지 않는 SIM 카드입니다.</string>
     <string name="common_secure_boot_nwlock_notification_title">바르지 않은 SIM 카드</string>
     <string name="compat_restart_education_text">이 앱이 올바르게 표시되지 않으면, 앱을 닫았다가 다시 열어보세요.</string>
+    <string name="compat_restart_menu_education_text">앱이 올바르게 표시되지 않는 경우, 더보기 메뉴에서 다시 시작하세요.</string>
     <string name="concurrent_display_notification_active_content">%1$s에서 두 화면을 모두 사용하여 콘텐츠를 표시합니다.</string>
     <string name="concurrent_display_notification_active_title">Dual Screen 켜짐</string>
     <string name="concurrent_display_notification_name">Dual Screen</string>
@@ -2943,7 +2945,7 @@
     <string name="satellite_notification_manual_title">위성 메시지를 사용하시겠습니까?</string>
     <string name="satellite_notification_open_message">메시지 열기</string>
     <string name="satellite_notification_summary">모바일 또는 Wi-Fi 네트워크 없이 메시지를 주고 받을 수 있습니다</string>
-    <string name="satellite_notification_summary_with_data">위성으로 메시지를 주고받을 수 있으며 데이터를 제한적으로 사용할 수도 있습니다.</string>
+    <string name="satellite_notification_summary_with_data">위성을 통해 메시지를 주고받고 일부 앱을 사용할 수 있습니다.</string>
     <string name="satellite_notification_title">위성에 자동 연결됨</string>
     <string name="satellite_sos_available_notification_summary">모바일 또는 Wi-Fi 네트워크가 없는 경우 응급 서비스로 메시지를 보낼 수 있습니다. Google 메시지가 기본 메시지 앱으로 설정되어 있어야 합니다.</string>
     <string name="satellite_sos_available_notification_title">이제 위성 긴급 SOS를 사용할 수 있음</string>

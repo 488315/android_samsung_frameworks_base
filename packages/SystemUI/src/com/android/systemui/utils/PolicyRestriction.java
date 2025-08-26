@@ -3,11 +3,9 @@ package com.android.systemui.utils;
 import com.android.settingslib.RestrictedLockUtils;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface PolicyRestriction {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NoRestriction implements PolicyRestriction {
         public static final NoRestriction INSTANCE = new NoRestriction();
 
@@ -27,7 +25,6 @@ public interface PolicyRestriction {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Restricted implements PolicyRestriction {
         public final RestrictedLockUtils.EnforcedAdmin admin;
 

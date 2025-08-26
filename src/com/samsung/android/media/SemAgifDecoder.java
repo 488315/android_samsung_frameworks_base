@@ -1,6 +1,7 @@
 package com.samsung.android.media;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
@@ -56,20 +57,20 @@ public class SemAgifDecoder {
         }
     }
 
-    public SemAgifDecoder(Context context, int i) {
+    public SemAgifDecoder(Context context, int i) throws Resources.NotFoundException, IOException {
         try {
-            InputStream openRawResource = context.getResources().openRawResource(i);
+            InputStream inputStreamOpenRawResource = context.getResources().openRawResource(i);
             try {
-                int available = openRawResource.available();
-                if (available <= 0) {
+                int iAvailable = inputStreamOpenRawResource.available();
+                if (iAvailable <= 0) {
                     Log.e(TAG, "inpustream open fail");
                 } else {
-                    byte[] bArr = new byte[available];
-                    openRawResource.read(bArr);
-                    nativeInitByteArrayHandle(this, bArr, available);
+                    byte[] bArr = new byte[iAvailable];
+                    inputStreamOpenRawResource.read(bArr);
+                    nativeInitByteArrayHandle(this, bArr, iAvailable);
                 }
-                if (openRawResource != null) {
-                    openRawResource.close();
+                if (inputStreamOpenRawResource != null) {
+                    inputStreamOpenRawResource.close();
                 }
             } finally {
             }
@@ -81,19 +82,19 @@ public class SemAgifDecoder {
 
     public SemAgifDecoder(Context context, Uri uri) {
         try {
-            ParcelFileDescriptor openFileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r");
+            ParcelFileDescriptor parcelFileDescriptorOpenFileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r");
             try {
-                FileInputStream fileInputStream = new FileInputStream(openFileDescriptor.getFileDescriptor());
+                FileInputStream fileInputStream = new FileInputStream(parcelFileDescriptorOpenFileDescriptor.getFileDescriptor());
                 try {
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     try {
                         byte[] bArr = new byte[65536];
                         while (true) {
-                            int read = fileInputStream.read(bArr);
-                            if (read == -1) {
+                            int i = fileInputStream.read(bArr);
+                            if (i == -1) {
                                 break;
                             } else {
-                                byteArrayOutputStream.write(bArr, 0, read);
+                                byteArrayOutputStream.write(bArr, 0, i);
                             }
                         }
                         byte[] byteArray = byteArrayOutputStream.toByteArray();
@@ -105,8 +106,8 @@ public class SemAgifDecoder {
                         }
                         byteArrayOutputStream.close();
                         fileInputStream.close();
-                        if (openFileDescriptor != null) {
-                            openFileDescriptor.close();
+                        if (parcelFileDescriptorOpenFileDescriptor != null) {
+                            parcelFileDescriptorOpenFileDescriptor.close();
                         }
                     } finally {
                     }
@@ -120,23 +121,23 @@ public class SemAgifDecoder {
         }
     }
 
-    public SemAgifDecoder(InputStream inputStream) {
-        int i;
+    public SemAgifDecoder(InputStream inputStream) throws IOException {
+        int iAvailable;
         if (inputStream == null) {
             Log.e(TAG, "inputstream is null");
             return;
         }
         try {
-            i = inputStream.available();
+            iAvailable = inputStream.available();
         } catch (IOException e) {
             e.printStackTrace();
-            i = 0;
+            iAvailable = 0;
         }
-        if (i <= 0) {
+        if (iAvailable <= 0) {
             Log.e(TAG, "inpustream open fail");
             return;
         }
-        byte[] bArr = new byte[i];
+        byte[] bArr = new byte[iAvailable];
         try {
             inputStream.read(bArr);
         } catch (IOException e2) {
@@ -170,8 +171,8 @@ public class SemAgifDecoder {
     }
 
     public boolean finish() {
-        boolean nativeFinish = nativeFinish(this.mHandle);
+        boolean zNativeFinish = nativeFinish(this.mHandle);
         this.mHandle = 0L;
-        return nativeFinish;
+        return zNativeFinish;
     }
 }

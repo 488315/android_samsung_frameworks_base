@@ -6,7 +6,6 @@ import android.os.Binder;
 import android.os.UserHandle;
 import android.util.Log;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AttestationPolicy {
     public static final String ACTION_KNOX_ATTESTATION_RESULT = "com.samsung.android.knox.intent.action.KNOX_ATTESTATION_RESULT";
@@ -28,7 +27,6 @@ public class AttestationPolicy {
     public static final int TIMA_INVALID_NONCE = 91;
     public Context mContext;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     abstract class AttestationRunnable implements Runnable {
         public int callingUid;
         public String nonce;
@@ -82,13 +80,13 @@ public class AttestationPolicy {
             @Override // java.lang.Runnable
             public void run() {
                 try {
-                    Intent makeAttestationIntent = AttestationPolicy.this.makeAttestationIntent(this.nonce, this.callingUid);
-                    makeAttestationIntent.setAction(AttestationPolicy.ACTION_KNOX_ATTESTATION_RESULT);
+                    Intent intentMakeAttestationIntent = AttestationPolicy.this.makeAttestationIntent(this.nonce, this.callingUid);
+                    intentMakeAttestationIntent.setAction(AttestationPolicy.ACTION_KNOX_ATTESTATION_RESULT);
                     String[] packagesForUid = AttestationPolicy.this.mContext.getPackageManager().getPackagesForUid(this.callingUid);
                     int userId = UserHandle.getUserId(this.callingUid);
                     for (String str2 : packagesForUid) {
-                        makeAttestationIntent.setPackage(str2);
-                        AttestationPolicy.this.mContext.sendBroadcastAsUser(makeAttestationIntent, new UserHandle(userId));
+                        intentMakeAttestationIntent.setPackage(str2);
+                        AttestationPolicy.this.mContext.sendBroadcastAsUser(intentMakeAttestationIntent, new UserHandle(userId));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

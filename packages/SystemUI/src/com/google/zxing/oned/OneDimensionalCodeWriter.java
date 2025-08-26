@@ -9,7 +9,6 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class OneDimensionalCodeWriter implements Writer {
     public static final Pattern NUMERIC = Pattern.compile("[0-9]+");
@@ -50,7 +49,7 @@ public abstract class OneDimensionalCodeWriter implements Writer {
     }
 
     @Override // com.google.zxing.Writer
-    public final BitMatrix encode(String str, BarcodeFormat barcodeFormat, int i, int i2, Map map) {
+    public final BitMatrix encode(String str, BarcodeFormat barcodeFormat, int i, int i2, Map map) throws NumberFormatException {
         if (str.isEmpty()) {
             throw new IllegalArgumentException("Found empty contents");
         }
@@ -67,18 +66,18 @@ public abstract class OneDimensionalCodeWriter implements Writer {
         if (enumMap.containsKey(encodeHintType)) {
             defaultMargin = Integer.parseInt(enumMap.get(encodeHintType).toString());
         }
-        boolean[] encode = encode(str, map);
-        int length = encode.length;
+        boolean[] zArrEncode = encode(str, map);
+        int length = zArrEncode.length;
         int i3 = defaultMargin + length;
-        int max = Math.max(i, i3);
-        int max2 = Math.max(1, i2);
-        int i4 = max / i3;
-        int i5 = (max - (length * i4)) / 2;
-        BitMatrix bitMatrix = new BitMatrix(max, max2);
+        int iMax = Math.max(i, i3);
+        int iMax2 = Math.max(1, i2);
+        int i4 = iMax / i3;
+        int i5 = (iMax - (length * i4)) / 2;
+        BitMatrix bitMatrix = new BitMatrix(iMax, iMax2);
         int i6 = 0;
         while (i6 < length) {
-            if (encode[i6]) {
-                bitMatrix.setRegion(i5, 0, i4, max2);
+            if (zArrEncode[i6]) {
+                bitMatrix.setRegion(i5, 0, i4, iMax2);
             }
             i6++;
             i5 += i4;

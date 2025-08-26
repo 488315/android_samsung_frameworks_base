@@ -119,9 +119,9 @@ public class PKIXPolicyNode implements PolicyNode {
         PKIXPolicyNode pKIXPolicyNode = new PKIXPolicyNode(new ArrayList(), this.depth, hashSet, null, hashSet2, new String(this.validPolicy), this.critical);
         Iterator it3 = this.children.iterator();
         while (it3.hasNext()) {
-            PKIXPolicyNode copy = ((PKIXPolicyNode) it3.next()).copy();
-            copy.setParent(pKIXPolicyNode);
-            pKIXPolicyNode.addChild(copy);
+            PKIXPolicyNode pKIXPolicyNodeCopy = ((PKIXPolicyNode) it3.next()).copy();
+            pKIXPolicyNodeCopy.setParent(pKIXPolicyNode);
+            pKIXPolicyNode.addChild(pKIXPolicyNodeCopy);
         }
         return pKIXPolicyNode;
     }

@@ -7,7 +7,6 @@ import com.airbnb.lottie.model.layer.BaseLayer;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TrimPathContent implements Content, BaseKeyframeAnimation.AnimationListener {
     public final FloatKeyframeAnimation endAnimation;
@@ -21,18 +20,18 @@ public class TrimPathContent implements Content, BaseKeyframeAnimation.Animation
         shapeTrimPath.getClass();
         this.hidden = shapeTrimPath.hidden;
         this.type = shapeTrimPath.type;
-        BaseKeyframeAnimation createAnimation = shapeTrimPath.start.createAnimation();
-        this.startAnimation = (FloatKeyframeAnimation) createAnimation;
-        BaseKeyframeAnimation createAnimation2 = shapeTrimPath.end.createAnimation();
-        this.endAnimation = (FloatKeyframeAnimation) createAnimation2;
-        BaseKeyframeAnimation createAnimation3 = shapeTrimPath.offset.createAnimation();
-        this.offsetAnimation = (FloatKeyframeAnimation) createAnimation3;
-        baseLayer.addAnimation(createAnimation);
-        baseLayer.addAnimation(createAnimation2);
-        baseLayer.addAnimation(createAnimation3);
-        createAnimation.addUpdateListener(this);
-        createAnimation2.addUpdateListener(this);
-        createAnimation3.addUpdateListener(this);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation = shapeTrimPath.start.createAnimation();
+        this.startAnimation = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation2 = shapeTrimPath.end.createAnimation();
+        this.endAnimation = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation2;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation3 = shapeTrimPath.offset.createAnimation();
+        this.offsetAnimation = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation3;
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation2);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation3);
+        baseKeyframeAnimationCreateAnimation.addUpdateListener(this);
+        baseKeyframeAnimationCreateAnimation2.addUpdateListener(this);
+        baseKeyframeAnimationCreateAnimation3.addUpdateListener(this);
     }
 
     public final void addListener(BaseKeyframeAnimation.AnimationListener animationListener) {

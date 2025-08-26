@@ -34,84 +34,84 @@ public class RedactingFileDescriptor {
             }
 
             @Override // android.os.ProxyFileDescriptorCallback
-            public int onRead(long j, int i2, byte[] bArr) throws ErrnoException {
-                int i3;
+            public int onRead(long j, int i2, byte[] bArr) throws ErrnoException, InterruptedIOException {
+                int iPread;
                 AnonymousClass1 anonymousClass1 = this;
-                int i4 = 0;
-                while (i4 < i2) {
+                int i3 = 0;
+                while (i3 < i2) {
                     try {
-                        i3 = Os.pread(RedactingFileDescriptor.this.mInner, bArr, i4, i2 - i4, i4 + j);
+                        iPread = Os.pread(RedactingFileDescriptor.this.mInner, bArr, i3, i2 - i3, i3 + j);
                     } catch (InterruptedIOException e) {
-                        i3 = e.bytesTransferred;
+                        iPread = e.bytesTransferred;
                     }
-                    if (i3 == 0) {
+                    if (iPread == 0) {
                         break;
                     }
-                    i4 += i3;
+                    i3 += iPread;
                 }
                 long[] jArr3 = RedactingFileDescriptor.this.mRedactRanges;
-                int i5 = 0;
-                while (i5 < jArr3.length) {
-                    long max = Math.max(j, jArr3[i5]);
-                    long min = Math.min(i2 + j, jArr3[i5 + 1]);
-                    long j2 = max;
-                    while (j2 < min) {
+                int i4 = 0;
+                while (i4 < jArr3.length) {
+                    long jMax = Math.max(j, jArr3[i4]);
+                    long jMin = Math.min(i2 + j, jArr3[i4 + 1]);
+                    long j2 = jMax;
+                    while (j2 < jMin) {
                         bArr[(int) (j2 - j)] = 0;
                         j2++;
-                        i5 = i5;
+                        i4 = i4;
                     }
-                    int i6 = i5;
+                    int i5 = i4;
                     long[] jArr4 = RedactingFileDescriptor.this.mFreeOffsets;
                     int length = jArr4.length;
-                    int i7 = 0;
-                    while (i7 < length) {
-                        int i8 = i4;
-                        long j3 = jArr4[i7];
+                    int i6 = 0;
+                    while (i6 < length) {
+                        int i7 = i3;
+                        long j3 = jArr4[i6];
                         long[] jArr5 = jArr3;
-                        long max2 = Math.max(j3, max);
-                        for (long min2 = Math.min(j3 + 4, min); max2 < min2; min2 = min2) {
-                            bArr[(int) (max2 - j)] = (byte) SemSdCardEncryption.STATUS_FREE.charAt((int) (max2 - j3));
-                            max2++;
+                        long jMax2 = Math.max(j3, jMax);
+                        for (long jMin2 = Math.min(j3 + 4, jMin); jMax2 < jMin2; jMin2 = jMin2) {
+                            bArr[(int) (jMax2 - j)] = (byte) SemSdCardEncryption.STATUS_FREE.charAt((int) (jMax2 - j3));
+                            jMax2++;
                         }
-                        i7++;
-                        i4 = i8;
+                        i6++;
+                        i3 = i7;
                         jArr3 = jArr5;
                     }
-                    i5 = i6 + 2;
+                    i4 = i5 + 2;
                     anonymousClass1 = this;
                 }
-                return i4;
+                return i3;
             }
 
             @Override // android.os.ProxyFileDescriptorCallback
-            public int onWrite(long j, int i2, byte[] bArr) throws ErrnoException {
+            public int onWrite(long j, int i2, byte[] bArr) throws ErrnoException, InterruptedIOException {
                 byte[] bArr2;
-                int i3;
-                int i4 = 0;
-                while (i4 < i2) {
+                int iPwrite;
+                int i3 = 0;
+                while (i3 < i2) {
                     try {
                         bArr2 = bArr;
-                    } catch (InterruptedIOException e) {
-                        e = e;
-                        bArr2 = bArr;
-                    }
-                    try {
-                        i3 = Os.pwrite(RedactingFileDescriptor.this.mInner, bArr2, i4, i2 - i4, i4 + j);
+                        try {
+                            iPwrite = Os.pwrite(RedactingFileDescriptor.this.mInner, bArr2, i3, i2 - i3, i3 + j);
+                        } catch (InterruptedIOException e) {
+                            e = e;
+                            iPwrite = e.bytesTransferred;
+                            i3 += iPwrite;
+                            bArr = bArr2;
+                        }
                     } catch (InterruptedIOException e2) {
                         e = e2;
-                        i3 = e.bytesTransferred;
-                        i4 += i3;
-                        bArr = bArr2;
+                        bArr2 = bArr;
                     }
-                    if (i3 == 0) {
+                    if (iPwrite == 0) {
                         break;
                     }
-                    i4 += i3;
+                    i3 += iPwrite;
                     bArr = bArr2;
                 }
                 RedactingFileDescriptor redactingFileDescriptor = RedactingFileDescriptor.this;
-                redactingFileDescriptor.mRedactRanges = RedactingFileDescriptor.removeRange(redactingFileDescriptor.mRedactRanges, j, i4 + j);
-                return i4;
+                redactingFileDescriptor.mRedactRanges = RedactingFileDescriptor.removeRange(redactingFileDescriptor.mRedactRanges, j, i3 + j);
+                return i3;
             }
 
             @Override // android.os.ProxyFileDescriptorCallback
@@ -158,6 +158,11 @@ public class RedactingFileDescriptor {
         return new RedactingFileDescriptor(context, file, i, jArr, jArr2).mOuter;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0085  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static long[] removeRange(long[] jArr, long j, long j2) {
         if (j == j2) {
             return jArr;
@@ -165,36 +170,38 @@ public class RedactingFileDescriptor {
         if (j > j2) {
             throw new IllegalArgumentException();
         }
-        long[] jArr2 = EmptyArray.LONG;
+        long[] jArrCopyOf = EmptyArray.LONG;
         for (int i = 0; i < jArr.length; i += 2) {
             long j3 = jArr[i];
             if (j > j3 || j2 < jArr[i + 1]) {
                 if (j >= j3) {
                     int i2 = i + 1;
                     if (j2 <= jArr[i2]) {
-                        jArr2 = Arrays.copyOf(jArr2, jArr2.length + 4);
-                        jArr2[jArr2.length - 4] = jArr[i];
-                        jArr2[jArr2.length - 3] = j;
-                        jArr2[jArr2.length - 2] = j2;
-                        jArr2[jArr2.length - 1] = jArr[i2];
+                        jArrCopyOf = Arrays.copyOf(jArrCopyOf, jArrCopyOf.length + 4);
+                        jArrCopyOf[jArrCopyOf.length - 4] = jArr[i];
+                        jArrCopyOf[jArrCopyOf.length - 3] = j;
+                        jArrCopyOf[jArrCopyOf.length - 2] = j2;
+                        jArrCopyOf[jArrCopyOf.length - 1] = jArr[i2];
+                    } else {
+                        jArrCopyOf = Arrays.copyOf(jArrCopyOf, jArrCopyOf.length + 2);
+                        long j4 = jArr[i];
+                        if (j2 >= j4 && j2 <= jArr[i + 1]) {
+                            jArrCopyOf[jArrCopyOf.length - 2] = Math.max(j4, j2);
+                        } else {
+                            jArrCopyOf[jArrCopyOf.length - 2] = j4;
+                        }
+                        if (j >= jArr[i]) {
+                            long j5 = jArr[i + 1];
+                            if (j <= j5) {
+                                jArrCopyOf[jArrCopyOf.length - 1] = Math.min(j5, j);
+                            } else {
+                                jArrCopyOf[jArrCopyOf.length - 1] = jArr[i + 1];
+                            }
+                        }
                     }
                 }
-                jArr2 = Arrays.copyOf(jArr2, jArr2.length + 2);
-                long j4 = jArr[i];
-                if (j2 >= j4 && j2 <= jArr[i + 1]) {
-                    jArr2[jArr2.length - 2] = Math.max(j4, j2);
-                } else {
-                    jArr2[jArr2.length - 2] = j4;
-                }
-                if (j >= jArr[i]) {
-                    long j5 = jArr[i + 1];
-                    if (j <= j5) {
-                        jArr2[jArr2.length - 1] = Math.min(j5, j);
-                    }
-                }
-                jArr2[jArr2.length - 1] = jArr[i + 1];
             }
         }
-        return jArr2;
+        return jArrCopyOf;
     }
 }

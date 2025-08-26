@@ -27,12 +27,10 @@ import okio.RealBufferedSink;
 import okio.RealBufferedSource;
 import okio.RealBufferedSource$inputStream$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PreferencesSerializer implements OkioSerializer {
     public static final PreferencesSerializer INSTANCE = new PreferencesSerializer();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -81,20 +79,20 @@ public final class PreferencesSerializer implements OkioSerializer {
     private PreferencesSerializer() {
     }
 
-    public final MutablePreferences readFrom(RealBufferedSource realBufferedSource) {
+    public final MutablePreferences readFrom(RealBufferedSource realBufferedSource) throws CorruptionException {
         byte[] bArr;
         PreferencesMapCompat.Companion companion = PreferencesMapCompat.Companion;
         RealBufferedSource$inputStream$1 realBufferedSource$inputStream$1 = new RealBufferedSource$inputStream$1(realBufferedSource);
         companion.getClass();
         try {
-            PreferencesProto$PreferenceMap parseFrom = PreferencesProto$PreferenceMap.parseFrom(realBufferedSource$inputStream$1);
+            PreferencesProto$PreferenceMap from = PreferencesProto$PreferenceMap.parseFrom(realBufferedSource$inputStream$1);
             MutablePreferences mutablePreferences = new MutablePreferences(null, false, 1, null);
             Preferences.Pair[] pairArr = (Preferences.Pair[]) Arrays.copyOf(new Preferences.Pair[0], 0);
             mutablePreferences.checkNotFrozen$datastore_preferences_core();
             for (Preferences.Pair pair : pairArr) {
                 mutablePreferences.setUnchecked$datastore_preferences_core(pair.key, pair.value);
             }
-            for (Map.Entry entry : parseFrom.getPreferencesMap().entrySet()) {
+            for (Map.Entry entry : from.getPreferencesMap().entrySet()) {
                 String str = (String) entry.getKey();
                 PreferencesProto$Value preferencesProto$Value = (PreferencesProto$Value) entry.getValue();
                 str.getClass();
@@ -151,84 +149,84 @@ public final class PreferencesSerializer implements OkioSerializer {
         }
     }
 
-    public final Unit writeTo(Object obj, final RealBufferedSink realBufferedSink) {
-        GeneratedMessageLite build;
-        Map asMap = ((Preferences) obj).asMap();
-        PreferencesProto$PreferenceMap.Builder newBuilder = PreferencesProto$PreferenceMap.newBuilder();
-        for (Map.Entry entry : asMap.entrySet()) {
+    public final Unit writeTo(Object obj, final RealBufferedSink realBufferedSink) throws IOException {
+        GeneratedMessageLite generatedMessageLiteBuild;
+        Map mapAsMap = ((Preferences) obj).asMap();
+        PreferencesProto$PreferenceMap.Builder builderNewBuilder = PreferencesProto$PreferenceMap.newBuilder();
+        for (Map.Entry entry : mapAsMap.entrySet()) {
             Preferences.Key key = (Preferences.Key) entry.getKey();
             Object value = entry.getValue();
             String str = key.name;
             if (value instanceof Boolean) {
-                PreferencesProto$Value.Builder newBuilder2 = PreferencesProto$Value.newBuilder();
-                boolean booleanValue = ((Boolean) value).booleanValue();
-                newBuilder2.copyOnWrite();
-                PreferencesProto$Value.access$500((PreferencesProto$Value) newBuilder2.instance, booleanValue);
-                build = newBuilder2.build();
+                PreferencesProto$Value.Builder builderNewBuilder2 = PreferencesProto$Value.newBuilder();
+                boolean zBooleanValue = ((Boolean) value).booleanValue();
+                builderNewBuilder2.copyOnWrite();
+                PreferencesProto$Value.access$500((PreferencesProto$Value) builderNewBuilder2.instance, zBooleanValue);
+                generatedMessageLiteBuild = builderNewBuilder2.build();
             } else if (value instanceof Float) {
-                PreferencesProto$Value.Builder newBuilder3 = PreferencesProto$Value.newBuilder();
-                float floatValue = ((Number) value).floatValue();
-                newBuilder3.copyOnWrite();
-                PreferencesProto$Value.access$700((PreferencesProto$Value) newBuilder3.instance, floatValue);
-                build = newBuilder3.build();
+                PreferencesProto$Value.Builder builderNewBuilder3 = PreferencesProto$Value.newBuilder();
+                float fFloatValue = ((Number) value).floatValue();
+                builderNewBuilder3.copyOnWrite();
+                PreferencesProto$Value.access$700((PreferencesProto$Value) builderNewBuilder3.instance, fFloatValue);
+                generatedMessageLiteBuild = builderNewBuilder3.build();
             } else if (value instanceof Double) {
-                PreferencesProto$Value.Builder newBuilder4 = PreferencesProto$Value.newBuilder();
-                double doubleValue = ((Number) value).doubleValue();
-                newBuilder4.copyOnWrite();
-                PreferencesProto$Value.access$1900((PreferencesProto$Value) newBuilder4.instance, doubleValue);
-                build = newBuilder4.build();
+                PreferencesProto$Value.Builder builderNewBuilder4 = PreferencesProto$Value.newBuilder();
+                double dDoubleValue = ((Number) value).doubleValue();
+                builderNewBuilder4.copyOnWrite();
+                PreferencesProto$Value.access$1900((PreferencesProto$Value) builderNewBuilder4.instance, dDoubleValue);
+                generatedMessageLiteBuild = builderNewBuilder4.build();
             } else if (value instanceof Integer) {
-                PreferencesProto$Value.Builder newBuilder5 = PreferencesProto$Value.newBuilder();
-                int intValue = ((Number) value).intValue();
-                newBuilder5.copyOnWrite();
-                PreferencesProto$Value.access$900((PreferencesProto$Value) newBuilder5.instance, intValue);
-                build = newBuilder5.build();
+                PreferencesProto$Value.Builder builderNewBuilder5 = PreferencesProto$Value.newBuilder();
+                int iIntValue = ((Number) value).intValue();
+                builderNewBuilder5.copyOnWrite();
+                PreferencesProto$Value.access$900((PreferencesProto$Value) builderNewBuilder5.instance, iIntValue);
+                generatedMessageLiteBuild = builderNewBuilder5.build();
             } else if (value instanceof Long) {
-                PreferencesProto$Value.Builder newBuilder6 = PreferencesProto$Value.newBuilder();
-                long longValue = ((Number) value).longValue();
-                newBuilder6.copyOnWrite();
-                PreferencesProto$Value.access$1100((PreferencesProto$Value) newBuilder6.instance, longValue);
-                build = newBuilder6.build();
+                PreferencesProto$Value.Builder builderNewBuilder6 = PreferencesProto$Value.newBuilder();
+                long jLongValue = ((Number) value).longValue();
+                builderNewBuilder6.copyOnWrite();
+                PreferencesProto$Value.access$1100((PreferencesProto$Value) builderNewBuilder6.instance, jLongValue);
+                generatedMessageLiteBuild = builderNewBuilder6.build();
             } else if (value instanceof String) {
-                PreferencesProto$Value.Builder newBuilder7 = PreferencesProto$Value.newBuilder();
-                newBuilder7.copyOnWrite();
-                PreferencesProto$Value.access$1300((PreferencesProto$Value) newBuilder7.instance, (String) value);
-                build = newBuilder7.build();
+                PreferencesProto$Value.Builder builderNewBuilder7 = PreferencesProto$Value.newBuilder();
+                builderNewBuilder7.copyOnWrite();
+                PreferencesProto$Value.access$1300((PreferencesProto$Value) builderNewBuilder7.instance, (String) value);
+                generatedMessageLiteBuild = builderNewBuilder7.build();
             } else if (value instanceof Set) {
-                PreferencesProto$Value.Builder newBuilder8 = PreferencesProto$Value.newBuilder();
-                PreferencesProto$StringSet.Builder newBuilder9 = PreferencesProto$StringSet.newBuilder();
-                newBuilder9.copyOnWrite();
-                PreferencesProto$StringSet.access$2700((PreferencesProto$StringSet) newBuilder9.instance, (Set) value);
-                newBuilder8.copyOnWrite();
-                PreferencesProto$Value.access$1600((PreferencesProto$Value) newBuilder8.instance, (PreferencesProto$StringSet) newBuilder9.build());
-                build = newBuilder8.build();
+                PreferencesProto$Value.Builder builderNewBuilder8 = PreferencesProto$Value.newBuilder();
+                PreferencesProto$StringSet.Builder builderNewBuilder9 = PreferencesProto$StringSet.newBuilder();
+                builderNewBuilder9.copyOnWrite();
+                PreferencesProto$StringSet.access$2700((PreferencesProto$StringSet) builderNewBuilder9.instance, (Set) value);
+                builderNewBuilder8.copyOnWrite();
+                PreferencesProto$Value.access$1600((PreferencesProto$Value) builderNewBuilder8.instance, (PreferencesProto$StringSet) builderNewBuilder9.build());
+                generatedMessageLiteBuild = builderNewBuilder8.build();
             } else {
                 if (!(value instanceof byte[])) {
                     throw new IllegalStateException("PreferencesSerializer does not support type: ".concat(value.getClass().getName()));
                 }
-                PreferencesProto$Value.Builder newBuilder10 = PreferencesProto$Value.newBuilder();
+                PreferencesProto$Value.Builder builderNewBuilder10 = PreferencesProto$Value.newBuilder();
                 byte[] bArr = (byte[]) value;
                 ByteString byteString = ByteString.EMPTY;
-                ByteString copyFrom = ByteString.copyFrom(0, bArr.length, bArr);
-                newBuilder10.copyOnWrite();
-                PreferencesProto$Value.access$2100((PreferencesProto$Value) newBuilder10.instance, copyFrom);
-                build = newBuilder10.build();
+                ByteString byteStringCopyFrom = ByteString.copyFrom(0, bArr.length, bArr);
+                builderNewBuilder10.copyOnWrite();
+                PreferencesProto$Value.access$2100((PreferencesProto$Value) builderNewBuilder10.instance, byteStringCopyFrom);
+                generatedMessageLiteBuild = builderNewBuilder10.build();
             }
-            newBuilder.getClass();
+            builderNewBuilder.getClass();
             str.getClass();
-            newBuilder.copyOnWrite();
-            PreferencesProto$PreferenceMap.access$100((PreferencesProto$PreferenceMap) newBuilder.instance).put(str, (PreferencesProto$Value) build);
+            builderNewBuilder.copyOnWrite();
+            PreferencesProto$PreferenceMap.access$100((PreferencesProto$PreferenceMap) builderNewBuilder.instance).put(str, (PreferencesProto$Value) generatedMessageLiteBuild);
         }
-        PreferencesProto$PreferenceMap preferencesProto$PreferenceMap = (PreferencesProto$PreferenceMap) newBuilder.build();
+        PreferencesProto$PreferenceMap preferencesProto$PreferenceMap = (PreferencesProto$PreferenceMap) builderNewBuilder.build();
         OutputStream outputStream = new OutputStream() { // from class: okio.RealBufferedSink$outputStream$1
             @Override // java.io.OutputStream, java.io.Closeable, java.lang.AutoCloseable
-            public final void close() {
-                RealBufferedSink.this.close();
+            public final void close() throws Throwable {
+                realBufferedSink.close();
             }
 
             @Override // java.io.OutputStream, java.io.Flushable
             public final void flush() {
-                RealBufferedSink realBufferedSink2 = RealBufferedSink.this;
+                RealBufferedSink realBufferedSink2 = realBufferedSink;
                 if (realBufferedSink2.closed) {
                     return;
                 }
@@ -236,25 +234,25 @@ public final class PreferencesSerializer implements OkioSerializer {
             }
 
             public final String toString() {
-                return RealBufferedSink.this + ".outputStream()";
+                return realBufferedSink + ".outputStream()";
             }
 
             @Override // java.io.OutputStream
-            public final void write(int i) {
-                RealBufferedSink realBufferedSink2 = RealBufferedSink.this;
+            public final void write(int i) throws IOException {
+                RealBufferedSink realBufferedSink2 = realBufferedSink;
                 if (realBufferedSink2.closed) {
                     throw new IOException(ServiceTuple.BASIC_STATUS_CLOSED);
                 }
                 realBufferedSink2.bufferField.writeByte((byte) i);
-                RealBufferedSink.this.emitCompleteSegments();
+                realBufferedSink.emitCompleteSegments();
             }
 
             @Override // java.io.OutputStream
-            public final void write(byte[] bArr2, int i, int i2) {
-                RealBufferedSink realBufferedSink2 = RealBufferedSink.this;
+            public final void write(byte[] bArr2, int i, int i2) throws IOException {
+                RealBufferedSink realBufferedSink2 = realBufferedSink;
                 if (!realBufferedSink2.closed) {
                     realBufferedSink2.bufferField.write(bArr2, i, i2);
-                    RealBufferedSink.this.emitCompleteSegments();
+                    realBufferedSink.emitCompleteSegments();
                     return;
                 }
                 throw new IOException(ServiceTuple.BASIC_STATUS_CLOSED);

@@ -3,7 +3,6 @@ package androidx.compose.ui.graphics;
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ImageBitmapConfig {
     public final int value;
@@ -13,7 +12,6 @@ public final class ImageBitmapConfig {
     public static final int F16 = 3;
     public static final int Gpu = 4;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -28,7 +26,7 @@ public final class ImageBitmapConfig {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ ImageBitmapConfig m478boximpl(int i) {
+    public static final /* synthetic */ ImageBitmapConfig m480boximpl(int i) {
         return new ImageBitmapConfig(i);
     }
 

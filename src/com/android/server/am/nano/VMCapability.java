@@ -44,19 +44,19 @@ public final class VMCapability extends MessageNano {
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     protected int computeSerializedSize() {
-        int computeSerializedSize = super.computeSerializedSize();
-        return !this.name.equals("") ? computeSerializedSize + CodedOutputByteBufferNano.computeStringSize(1, this.name) : computeSerializedSize;
+        int iComputeSerializedSize = super.computeSerializedSize();
+        return !this.name.equals("") ? iComputeSerializedSize + CodedOutputByteBufferNano.computeStringSize(1, this.name) : iComputeSerializedSize;
     }
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     public VMCapability mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag != 10) {
-                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+            if (tag != 10) {
+                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                     break;
                 }
             } else {

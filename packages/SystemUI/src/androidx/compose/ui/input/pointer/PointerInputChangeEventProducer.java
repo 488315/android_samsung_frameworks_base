@@ -5,12 +5,10 @@ import androidx.compose.ui.platform.AndroidComposeView;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PointerInputChangeEventProducer {
     public final LongSparseArray previousPointerInputData = new LongSparseArray(0, 1, null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class PointerInputData {
         public final boolean down;
         public final long positionOnScreen;
@@ -28,7 +26,7 @@ final class PointerInputChangeEventProducer {
     }
 
     public final InternalPointerEvent produce(PointerInputEvent pointerInputEvent, AndroidComposeView androidComposeView) {
-        long m696screenToLocalMKHz9U;
+        long jM698screenToLocalMKHz9U;
         boolean z;
         long j;
         LongSparseArray longSparseArray = new LongSparseArray(pointerInputEvent.pointers.size());
@@ -42,16 +40,16 @@ final class PointerInputChangeEventProducer {
             PointerInputData pointerInputData = (PointerInputData) longSparseArray2.get(j2);
             if (pointerInputData == null) {
                 long j3 = pointerInputEventData.uptime;
-                m696screenToLocalMKHz9U = pointerInputEventData.position;
+                jM698screenToLocalMKHz9U = pointerInputEventData.position;
                 j = j3;
                 z = false;
             } else {
-                m696screenToLocalMKHz9U = androidComposeView.m696screenToLocalMKHz9U(pointerInputData.positionOnScreen);
+                jM698screenToLocalMKHz9U = androidComposeView.m698screenToLocalMKHz9U(pointerInputData.positionOnScreen);
                 long j4 = pointerInputData.uptime;
                 z = pointerInputData.down;
                 j = j4;
             }
-            long j5 = m696screenToLocalMKHz9U;
+            long j5 = jM698screenToLocalMKHz9U;
             List list2 = pointerInputEventData.historical;
             long j6 = pointerInputEventData.scrollDelta;
             long j7 = pointerInputEventData.originalEventPosition;

@@ -60,9 +60,9 @@ public interface IAmbientContextDetectionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAmbientContextDetectionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAmbientContextDetectionService)) {
-                return (IAmbientContextDetectionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAmbientContextDetectionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAmbientContextDetectionService)) {
+                return (IAmbientContextDetectionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,21 +96,21 @@ public interface IAmbientContextDetectionService extends IInterface {
             }
             if (i == 1) {
                 AmbientContextEventRequest ambientContextEventRequest = (AmbientContextEventRequest) parcel.readTypedObject(AmbientContextEventRequest.CREATOR);
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 RemoteCallback remoteCallback2 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                startDetection(ambientContextEventRequest, readString, remoteCallback, remoteCallback2);
+                startDetection(ambientContextEventRequest, string, remoteCallback, remoteCallback2);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                stopDetection(readString2);
+                stopDetection(string2);
             } else if (i == 3) {
-                int[] createIntArray = parcel.createIntArray();
-                String readString3 = parcel.readString();
+                int[] iArrCreateIntArray = parcel.createIntArray();
+                String string3 = parcel.readString();
                 RemoteCallback remoteCallback3 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                queryServiceStatus(createIntArray, readString3, remoteCallback3);
+                queryServiceStatus(iArrCreateIntArray, string3, remoteCallback3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -135,42 +135,42 @@ public interface IAmbientContextDetectionService extends IInterface {
 
             @Override // android.service.ambientcontext.IAmbientContextDetectionService
             public void startDetection(AmbientContextEventRequest ambientContextEventRequest, String str, RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAmbientContextDetectionService.DESCRIPTOR);
-                    obtain.writeTypedObject(ambientContextEventRequest, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    obtain.writeTypedObject(remoteCallback2, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAmbientContextDetectionService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(ambientContextEventRequest, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    parcelObtain.writeTypedObject(remoteCallback2, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.ambientcontext.IAmbientContextDetectionService
             public void stopDetection(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAmbientContextDetectionService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAmbientContextDetectionService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.ambientcontext.IAmbientContextDetectionService
             public void queryServiceStatus(int[] iArr, String str, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAmbientContextDetectionService.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAmbientContextDetectionService.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -15,8 +15,8 @@ public class ScrollViewCaptureHelper implements ScrollCaptureViewHelper<ViewGrou
     private int mStartScrollY;
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
-    public /* bridge */ /* synthetic */ void onScrollRequested(ViewGroup viewGroup, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
-        onScrollRequested2(viewGroup, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
+    public /* bridge */ /* synthetic */ void onScrollRequested(View view, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
+        onScrollRequested((ViewGroup) view, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
     }
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
@@ -35,15 +35,14 @@ public class ScrollViewCaptureHelper implements ScrollCaptureViewHelper<ViewGrou
         if (overScrollMode != 2) {
             viewGroup.setOverScrollMode(2);
         }
-        boolean isVerticalScrollBarEnabled = viewGroup.isVerticalScrollBarEnabled();
-        this.mScrollBarEnabled = isVerticalScrollBarEnabled;
-        if (isVerticalScrollBarEnabled) {
+        boolean zIsVerticalScrollBarEnabled = viewGroup.isVerticalScrollBarEnabled();
+        this.mScrollBarEnabled = zIsVerticalScrollBarEnabled;
+        if (zIsVerticalScrollBarEnabled) {
             viewGroup.setVerticalScrollBarEnabled(false);
         }
     }
 
-    /* renamed from: onScrollRequested, reason: avoid collision after fix types in other method */
-    public void onScrollRequested2(ViewGroup viewGroup, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer<ScrollCaptureViewHelper.ScrollResult> consumer) {
+    public void onScrollRequested(ViewGroup viewGroup, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer<ScrollCaptureViewHelper.ScrollResult> consumer) {
         int scrollY = viewGroup.getScrollY() - this.mStartScrollY;
         ScrollCaptureViewHelper.ScrollResult scrollResult = new ScrollCaptureViewHelper.ScrollResult();
         scrollResult.requestedArea = new Rect(rect2);

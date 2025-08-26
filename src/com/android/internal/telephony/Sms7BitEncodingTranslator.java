@@ -104,7 +104,7 @@ public class Sms7BitEncodingTranslator {
         }
     }
 
-    private static void load7BitTranslationTableFromXml() {
+    private static void load7BitTranslationTableFromXml() throws Resources.NotFoundException {
         boolean z;
         Resources system = Resources.getSystem();
         if (DBG) {

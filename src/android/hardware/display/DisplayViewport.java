@@ -65,16 +65,16 @@ public final class DisplayViewport {
         int i2 = i + (i * 31) + (this.isActive ? 1 : 0);
         int i3 = i2 + (i2 * 31) + this.displayId;
         int i4 = i3 + (i3 * 31) + this.orientation;
-        int hashCode = i4 + (i4 * 31) + this.logicalFrame.hashCode();
-        int hashCode2 = hashCode + (hashCode * 31) + this.physicalFrame.hashCode();
-        int i5 = hashCode2 + (hashCode2 * 31) + this.deviceWidth;
+        int iHashCode = i4 + (i4 * 31) + this.logicalFrame.hashCode();
+        int iHashCode2 = iHashCode + (iHashCode * 31) + this.physicalFrame.hashCode();
+        int i5 = iHashCode2 + (iHashCode2 * 31) + this.deviceWidth;
         int i6 = i5 + (i5 * 31) + this.deviceHeight;
-        int hashCode3 = i6 + (i6 * 31) + this.uniqueId.hashCode();
+        int iHashCode3 = i6 + (i6 * 31) + this.uniqueId.hashCode();
         Integer num = this.physicalPort;
         if (num != null) {
-            hashCode3 += (hashCode3 * 31) + num.hashCode();
+            iHashCode3 += (iHashCode3 * 31) + num.hashCode();
         }
-        return hashCode3 + (hashCode3 * 31) + this.type;
+        return iHashCode3 + (iHashCode3 * 31) + this.type;
     }
 
     public String toString() {

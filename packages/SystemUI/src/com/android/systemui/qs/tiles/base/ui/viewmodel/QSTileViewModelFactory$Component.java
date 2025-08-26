@@ -16,7 +16,6 @@ import com.android.systemui.util.time.SystemClock;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSTileViewModelFactory$Component {
     public final CoroutineDispatcher backgroundDispatcher;
@@ -49,11 +48,11 @@ public final class QSTileViewModelFactory$Component {
         DaggerReferenceGlobalRootComponent.CustomTileComponentBuilder customTileComponentBuilder = (DaggerReferenceGlobalRootComponent.CustomTileComponentBuilder) this.customTileComponentBuilder;
         customTileComponentBuilder.getClass();
         customTileComponentBuilder.qSTileConfigModule = qSTileConfigModule;
-        CustomTileComponent build = customTileComponentBuilder.build();
-        QSTileViewModelFactory$Component$create$1 qSTileViewModelFactory$Component$create$1 = new QSTileViewModelFactory$Component$create$1(build);
-        QSTileViewModelFactory$Component$create$2 qSTileViewModelFactory$Component$create$2 = new QSTileViewModelFactory$Component$create$2(build);
-        QSTileViewModelFactory$Component$create$3 qSTileViewModelFactory$Component$create$3 = new QSTileViewModelFactory$Component$create$3(build);
-        CoroutineScope coroutineScope = ((DaggerReferenceGlobalRootComponent.CustomTileComponentImpl) build).coroutineScope();
+        CustomTileComponent customTileComponentBuild = customTileComponentBuilder.build();
+        QSTileViewModelFactory$Component$create$1 qSTileViewModelFactory$Component$create$1 = new QSTileViewModelFactory$Component$create$1(customTileComponentBuild);
+        QSTileViewModelFactory$Component$create$2 qSTileViewModelFactory$Component$create$2 = new QSTileViewModelFactory$Component$create$2(customTileComponentBuild);
+        QSTileViewModelFactory$Component$create$3 qSTileViewModelFactory$Component$create$3 = new QSTileViewModelFactory$Component$create$3(customTileComponentBuild);
+        CoroutineScope coroutineScope = ((DaggerReferenceGlobalRootComponent.CustomTileComponentImpl) customTileComponentBuild).coroutineScope();
         return new QSTileViewModelImpl(config, qSTileViewModelFactory$Component$create$1, qSTileViewModelFactory$Component$create$2, qSTileViewModelFactory$Component$create$3, this.disabledByPolicyInteractor, this.userRepository, this.falsingManager, this.qsTileAnalytics, this.qsTileLogger, this.systemClock, this.backgroundDispatcher, this.uiBackgroundDispatcher, coroutineScope, null);
     }
 }

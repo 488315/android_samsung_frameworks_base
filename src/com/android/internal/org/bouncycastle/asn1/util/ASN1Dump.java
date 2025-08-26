@@ -46,11 +46,11 @@ public class ASN1Dump {
     private static final String TAB = "    ";
 
     static void _dumpAsString(String str, boolean z, ASN1Primitive aSN1Primitive, StringBuffer stringBuffer) {
-        String lineSeparator = Strings.lineSeparator();
+        String strLineSeparator = Strings.lineSeparator();
         if (aSN1Primitive instanceof ASN1Null) {
             stringBuffer.append(str);
             stringBuffer.append("NULL");
-            stringBuffer.append(lineSeparator);
+            stringBuffer.append(strLineSeparator);
             return;
         }
         int i = 0;
@@ -63,7 +63,7 @@ public class ASN1Dump {
             } else {
                 stringBuffer.append("Sequence");
             }
-            stringBuffer.append(lineSeparator);
+            stringBuffer.append(strLineSeparator);
             ASN1Sequence aSN1Sequence = (ASN1Sequence) aSN1Primitive;
             String str2 = str + TAB;
             int size = aSN1Sequence.size();
@@ -82,7 +82,7 @@ public class ASN1Dump {
             } else {
                 stringBuffer.append("Set");
             }
-            stringBuffer.append(lineSeparator);
+            stringBuffer.append(strLineSeparator);
             ASN1Set aSN1Set = (ASN1Set) aSN1Primitive;
             String str3 = str + TAB;
             int size2 = aSN1Set.size();
@@ -106,7 +106,7 @@ public class ASN1Dump {
             if (!aSN1TaggedObject.isExplicit()) {
                 stringBuffer.append(" IMPLICIT ");
             }
-            stringBuffer.append(lineSeparator);
+            stringBuffer.append(strLineSeparator);
             _dumpAsString(str + TAB, z, aSN1TaggedObject.getBaseObject().toASN1Primitive(), stringBuffer);
             return;
         }
@@ -121,24 +121,24 @@ public class ASN1Dump {
                 stringBuffer.append(dumpBinaryDataAsString(str, aSN1OctetString.getOctets()));
                 return;
             } else {
-                stringBuffer.append(lineSeparator);
+                stringBuffer.append(strLineSeparator);
                 return;
             }
         }
         if (aSN1Primitive instanceof ASN1ObjectIdentifier) {
-            stringBuffer.append(str + "ObjectIdentifier(" + ((ASN1ObjectIdentifier) aSN1Primitive).getId() + NavigationBarInflaterView.KEY_CODE_END + lineSeparator);
+            stringBuffer.append(str + "ObjectIdentifier(" + ((ASN1ObjectIdentifier) aSN1Primitive).getId() + NavigationBarInflaterView.KEY_CODE_END + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1RelativeOID) {
-            stringBuffer.append(str + "RelativeOID(" + ((ASN1RelativeOID) aSN1Primitive).getId() + NavigationBarInflaterView.KEY_CODE_END + lineSeparator);
+            stringBuffer.append(str + "RelativeOID(" + ((ASN1RelativeOID) aSN1Primitive).getId() + NavigationBarInflaterView.KEY_CODE_END + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1Boolean) {
-            stringBuffer.append(str + "Boolean(" + ((ASN1Boolean) aSN1Primitive).isTrue() + NavigationBarInflaterView.KEY_CODE_END + lineSeparator);
+            stringBuffer.append(str + "Boolean(" + ((ASN1Boolean) aSN1Primitive).isTrue() + NavigationBarInflaterView.KEY_CODE_END + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1Integer) {
-            stringBuffer.append(str + "Integer(" + ((ASN1Integer) aSN1Primitive).getValue() + NavigationBarInflaterView.KEY_CODE_END + lineSeparator);
+            stringBuffer.append(str + "Integer(" + ((ASN1Integer) aSN1Primitive).getValue() + NavigationBarInflaterView.KEY_CODE_END + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1BitString) {
@@ -156,83 +156,83 @@ public class ASN1Dump {
                 stringBuffer.append(dumpBinaryDataAsString(str, bytes));
                 return;
             } else {
-                stringBuffer.append(lineSeparator);
+                stringBuffer.append(strLineSeparator);
                 return;
             }
         }
         if (aSN1Primitive instanceof ASN1IA5String) {
-            stringBuffer.append(str + "IA5String(" + ((ASN1IA5String) aSN1Primitive).getString() + ") " + lineSeparator);
+            stringBuffer.append(str + "IA5String(" + ((ASN1IA5String) aSN1Primitive).getString() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1UTF8String) {
-            stringBuffer.append(str + "UTF8String(" + ((ASN1UTF8String) aSN1Primitive).getString() + ") " + lineSeparator);
+            stringBuffer.append(str + "UTF8String(" + ((ASN1UTF8String) aSN1Primitive).getString() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1NumericString) {
-            stringBuffer.append(str + "NumericString(" + ((ASN1NumericString) aSN1Primitive).getString() + ") " + lineSeparator);
+            stringBuffer.append(str + "NumericString(" + ((ASN1NumericString) aSN1Primitive).getString() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1PrintableString) {
-            stringBuffer.append(str + "PrintableString(" + ((ASN1PrintableString) aSN1Primitive).getString() + ") " + lineSeparator);
+            stringBuffer.append(str + "PrintableString(" + ((ASN1PrintableString) aSN1Primitive).getString() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1VisibleString) {
-            stringBuffer.append(str + "VisibleString(" + ((ASN1VisibleString) aSN1Primitive).getString() + ") " + lineSeparator);
+            stringBuffer.append(str + "VisibleString(" + ((ASN1VisibleString) aSN1Primitive).getString() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1BMPString) {
-            stringBuffer.append(str + "BMPString(" + ((ASN1BMPString) aSN1Primitive).getString() + ") " + lineSeparator);
+            stringBuffer.append(str + "BMPString(" + ((ASN1BMPString) aSN1Primitive).getString() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1T61String) {
-            stringBuffer.append(str + "T61String(" + ((ASN1T61String) aSN1Primitive).getString() + ") " + lineSeparator);
+            stringBuffer.append(str + "T61String(" + ((ASN1T61String) aSN1Primitive).getString() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1GraphicString) {
-            stringBuffer.append(str + "GraphicString(" + ((ASN1GraphicString) aSN1Primitive).getString() + ") " + lineSeparator);
+            stringBuffer.append(str + "GraphicString(" + ((ASN1GraphicString) aSN1Primitive).getString() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1VideotexString) {
-            stringBuffer.append(str + "VideotexString(" + ((ASN1VideotexString) aSN1Primitive).getString() + ") " + lineSeparator);
+            stringBuffer.append(str + "VideotexString(" + ((ASN1VideotexString) aSN1Primitive).getString() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1UTCTime) {
-            stringBuffer.append(str + "UTCTime(" + ((ASN1UTCTime) aSN1Primitive).getTime() + ") " + lineSeparator);
+            stringBuffer.append(str + "UTCTime(" + ((ASN1UTCTime) aSN1Primitive).getTime() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1GeneralizedTime) {
-            stringBuffer.append(str + "GeneralizedTime(" + ((ASN1GeneralizedTime) aSN1Primitive).getTime() + ") " + lineSeparator);
+            stringBuffer.append(str + "GeneralizedTime(" + ((ASN1GeneralizedTime) aSN1Primitive).getTime() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1Enumerated) {
-            stringBuffer.append(str + "DER Enumerated(" + ((ASN1Enumerated) aSN1Primitive).getValue() + NavigationBarInflaterView.KEY_CODE_END + lineSeparator);
+            stringBuffer.append(str + "DER Enumerated(" + ((ASN1Enumerated) aSN1Primitive).getValue() + NavigationBarInflaterView.KEY_CODE_END + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1ObjectDescriptor) {
-            stringBuffer.append(str + "ObjectDescriptor(" + ((ASN1ObjectDescriptor) aSN1Primitive).getBaseGraphicString().getString() + ") " + lineSeparator);
+            stringBuffer.append(str + "ObjectDescriptor(" + ((ASN1ObjectDescriptor) aSN1Primitive).getBaseGraphicString().getString() + ") " + strLineSeparator);
             return;
         }
         if (aSN1Primitive instanceof ASN1External) {
             ASN1External aSN1External = (ASN1External) aSN1Primitive;
-            stringBuffer.append(str + "External " + lineSeparator);
+            stringBuffer.append(str + "External " + strLineSeparator);
             StringBuilder sb = new StringBuilder();
             sb.append(str);
             sb.append(TAB);
-            String sb2 = sb.toString();
+            String string = sb.toString();
             if (aSN1External.getDirectReference() != null) {
-                stringBuffer.append(sb2 + "Direct Reference: " + aSN1External.getDirectReference().getId() + lineSeparator);
+                stringBuffer.append(string + "Direct Reference: " + aSN1External.getDirectReference().getId() + strLineSeparator);
             }
             if (aSN1External.getIndirectReference() != null) {
-                stringBuffer.append(sb2 + "Indirect Reference: " + aSN1External.getIndirectReference().toString() + lineSeparator);
+                stringBuffer.append(string + "Indirect Reference: " + aSN1External.getIndirectReference().toString() + strLineSeparator);
             }
             if (aSN1External.getDataValueDescriptor() != null) {
-                _dumpAsString(sb2, z, aSN1External.getDataValueDescriptor(), stringBuffer);
+                _dumpAsString(string, z, aSN1External.getDataValueDescriptor(), stringBuffer);
             }
-            stringBuffer.append(sb2 + "Encoding: " + aSN1External.getEncoding() + lineSeparator);
-            _dumpAsString(sb2, z, aSN1External.getExternalContent(), stringBuffer);
+            stringBuffer.append(string + "Encoding: " + aSN1External.getEncoding() + strLineSeparator);
+            _dumpAsString(string, z, aSN1External.getExternalContent(), stringBuffer);
             return;
         }
-        stringBuffer.append(str + aSN1Primitive.toString() + lineSeparator);
+        stringBuffer.append(str + aSN1Primitive.toString() + strLineSeparator);
     }
 
     public static String dumpAsString(Object obj) {
@@ -254,17 +254,17 @@ public class ASN1Dump {
     }
 
     private static String dumpBinaryDataAsString(String str, byte[] bArr) {
-        String lineSeparator = Strings.lineSeparator();
+        String strLineSeparator = Strings.lineSeparator();
         StringBuffer stringBuffer = new StringBuffer();
         String str2 = str + TAB;
-        stringBuffer.append(lineSeparator);
+        stringBuffer.append(strLineSeparator);
         for (int i = 0; i < bArr.length; i += 32) {
             if (bArr.length - i > 32) {
                 stringBuffer.append(str2);
                 stringBuffer.append(Strings.fromByteArray(Hex.encode(bArr, i, 32)));
                 stringBuffer.append(TAB);
                 stringBuffer.append(calculateAscString(bArr, i, 32));
-                stringBuffer.append(lineSeparator);
+                stringBuffer.append(strLineSeparator);
             } else {
                 stringBuffer.append(str2);
                 stringBuffer.append(Strings.fromByteArray(Hex.encode(bArr, i, bArr.length - i)));
@@ -273,7 +273,7 @@ public class ASN1Dump {
                 }
                 stringBuffer.append(TAB);
                 stringBuffer.append(calculateAscString(bArr, i, bArr.length - i));
-                stringBuffer.append(lineSeparator);
+                stringBuffer.append(strLineSeparator);
             }
         }
         return stringBuffer.toString();

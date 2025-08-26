@@ -20,9 +20,7 @@ public class RemoteConnectionManager {
         this.mRemoteConnectionServices.computeIfAbsent(componentName, new Function() { // from class: android.telecom.RemoteConnectionManager$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                RemoteConnectionService lambda$addConnectionService$0;
-                lambda$addConnectionService$0 = RemoteConnectionManager.this.lambda$addConnectionService$0(iConnectionService, componentName, (ComponentName) obj);
-                return lambda$addConnectionService$0;
+                return this.f$0.lambda$addConnectionService$0(iConnectionService, componentName, (ComponentName) obj);
             }
         });
     }

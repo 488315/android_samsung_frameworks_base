@@ -10,7 +10,6 @@ import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ShellInit {
     public boolean mHasInitialized;
@@ -41,11 +40,11 @@ public class ShellInit {
         SurfaceControl.setDebugUsageAfterRelease(true);
         for (int i = 0; i < this.mInitCallbacks.size(); i++) {
             Pair pair = (Pair) this.mInitCallbacks.get(i);
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             ((Runnable) pair.second).run();
-            long uptimeMillis2 = SystemClock.uptimeMillis();
+            long jUptimeMillis2 = SystemClock.uptimeMillis();
             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_INIT_enabled[1]) {
-                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_INIT, -8211191618626308882L, 4, String.valueOf(pair.first), Long.valueOf(uptimeMillis2 - uptimeMillis));
+                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_INIT, -8211191618626308882L, 4, String.valueOf(pair.first), Long.valueOf(jUptimeMillis2 - jUptimeMillis));
             }
         }
         this.mInitCallbacks.clear();

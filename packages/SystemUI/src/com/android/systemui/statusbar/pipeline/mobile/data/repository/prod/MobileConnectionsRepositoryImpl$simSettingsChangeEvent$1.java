@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.pipeline.mobile.data.repository.prod;
 import android.net.Uri;
 import android.provider.Settings;
 import com.android.systemui.BasicRune;
-import com.android.systemui.statusbar.pipeline.mobile.data.MobileInputLogger;
 import com.android.systemui.util.SettingsHelper;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -16,7 +15,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -46,8 +44,6 @@ final class MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1 extends Sus
     /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$callback2$1, com.android.systemui.util.SettingsHelper$OnChangedCallback] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        SettingsHelper settingsHelper;
-        SettingsHelper settingsHelper2;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -57,49 +53,39 @@ final class MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1 extends Sus
             final ?? r1 = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$callback1$1
                 @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
                 public final void onChanged(Uri uri) {
-                    SettingsHelper settingsHelper3;
-                    MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl2 = MobileConnectionsRepositoryImpl.this;
-                    MobileInputLogger mobileInputLogger = mobileConnectionsRepositoryImpl2.logger;
-                    settingsHelper3 = mobileConnectionsRepositoryImpl2.settingsHelper;
-                    mobileInputLogger.logSimSettingChanged(0, settingsHelper3.isSimSettingOn(0));
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl2 = mobileConnectionsRepositoryImpl;
+                    mobileConnectionsRepositoryImpl2.logger.logSimSettingChanged(0, mobileConnectionsRepositoryImpl2.settingsHelper.isSimSettingOn(0));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             final MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl2 = this.this$0;
             final ?? r3 = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$callback2$1
                 @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
                 public final void onChanged(Uri uri) {
-                    SettingsHelper settingsHelper3;
-                    MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl3 = MobileConnectionsRepositoryImpl.this;
-                    MobileInputLogger mobileInputLogger = mobileConnectionsRepositoryImpl3.logger;
-                    settingsHelper3 = mobileConnectionsRepositoryImpl3.settingsHelper;
-                    mobileInputLogger.logSimSettingChanged(1, settingsHelper3.isSimSettingOn(1));
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl3 = mobileConnectionsRepositoryImpl2;
+                    mobileConnectionsRepositoryImpl3.logger.logSimSettingChanged(1, mobileConnectionsRepositoryImpl3.settingsHelper.isSimSettingOn(1));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
-            settingsHelper = this.this$0.settingsHelper;
-            settingsHelper.registerCallback(r1, Settings.Global.getUriFor(SettingsHelper.INDEX_MULTI_SIM_DEVICE_SIM1_ON));
+            this.this$0.settingsHelper.registerCallback(r1, Settings.Global.getUriFor(SettingsHelper.INDEX_MULTI_SIM_DEVICE_SIM1_ON));
             if (BasicRune.STATUS_NETWORK_MULTI_SIM) {
-                settingsHelper2 = this.this$0.settingsHelper;
-                settingsHelper2.registerCallback(r3, Settings.Global.getUriFor(SettingsHelper.INDEX_MULTI_SIM_DEVICE_SIM2_ON));
+                this.this$0.settingsHelper.registerCallback(r3, Settings.Global.getUriFor(SettingsHelper.INDEX_MULTI_SIM_DEVICE_SIM2_ON));
             }
             final MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl3 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    SettingsHelper settingsHelper3;
-                    SettingsHelper settingsHelper4;
-                    MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl4 = MobileConnectionsRepositoryImpl.this;
-                    settingsHelper3 = mobileConnectionsRepositoryImpl4.settingsHelper;
+                    MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl4 = mobileConnectionsRepositoryImpl3;
+                    SettingsHelper settingsHelper = mobileConnectionsRepositoryImpl4.settingsHelper;
                     final MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$callback1$1 mobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$callback1$1 = r1;
-                    settingsHelper3.unregisterCallback(new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$1$1
+                    settingsHelper.unregisterCallback(new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$1$1
                         @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
                         public final void onChanged(Uri uri) {
                         }
                     });
-                    settingsHelper4 = mobileConnectionsRepositoryImpl4.settingsHelper;
+                    SettingsHelper settingsHelper2 = mobileConnectionsRepositoryImpl4.settingsHelper;
                     final MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$callback2$1 mobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$callback2$1 = r3;
-                    settingsHelper4.unregisterCallback(new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$1$2
+                    settingsHelper2.unregisterCallback(new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1$1$2
                         @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
                         public final void onChanged(Uri uri) {
                         }

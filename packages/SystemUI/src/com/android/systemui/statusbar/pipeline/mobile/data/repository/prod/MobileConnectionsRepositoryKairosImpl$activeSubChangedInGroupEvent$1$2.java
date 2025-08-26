@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionsRepositoryKairosImpl$activeSubChangedInGroupEvent$1$2 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -35,19 +34,19 @@ final class MobileConnectionsRepositoryKairosImpl$activeSubChangedInGroupEvent$1
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             WithPrev withPrev = (WithPrev) this.L$0;
-            int intValue = ((Number) withPrev.previousValue).intValue();
-            int intValue2 = ((Number) withPrev.newValue).intValue();
+            int iIntValue = ((Number) withPrev.previousValue).intValue();
+            int iIntValue2 = ((Number) withPrev.newValue).intValue();
             MobileConnectionsRepositoryKairosImpl mobileConnectionsRepositoryKairosImpl = this.this$0;
             this.label = 1;
             int i2 = MobileConnectionsRepositoryKairosImpl.$r8$clinit;
             mobileConnectionsRepositoryKairosImpl.getClass();
-            obj = BuildersKt.withContext(mobileConnectionsRepositoryKairosImpl.bgDispatcher, new MobileConnectionsRepositoryKairosImpl$isActiveSubChangeInGroup$2(mobileConnectionsRepositoryKairosImpl, intValue, intValue2, null), this);
+            obj = BuildersKt.withContext(mobileConnectionsRepositoryKairosImpl.bgDispatcher, new MobileConnectionsRepositoryKairosImpl$isActiveSubChangeInGroup$2(mobileConnectionsRepositoryKairosImpl, iIntValue, iIntValue2, null), this);
             if (obj == coroutineSingletons) {
                 return coroutineSingletons;
             }

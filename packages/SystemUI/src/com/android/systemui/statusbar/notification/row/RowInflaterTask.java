@@ -26,7 +26,6 @@ import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
 import com.android.systemui.util.time.SystemClock;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RowInflaterTask implements InflationTask, AsyncLayoutInflater.OnInflateFinishedListener, AsyncRowInflater.OnInflateFinishedListener {
     public final AsyncRowInflater mAsyncRowInflater;
@@ -39,7 +38,6 @@ public class RowInflaterTask implements InflationTask, AsyncLayoutInflater.OnInf
     public final SystemClock mSystemClock;
     public UserTracker mUserTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RowAsyncLayoutInflater implements AsyncLayoutFactory {
         public final NotificationEntry mEntry;
         public final RowInflaterTaskLogger mLogger;
@@ -61,26 +59,25 @@ public class RowInflaterTask implements InflationTask, AsyncLayoutInflater.OnInf
             if (!str.equals(ExpandableNotificationRow.class.getName())) {
                 return null;
             }
-            long elapsedRealtime = this.mSystemClock.elapsedRealtime();
+            long jElapsedRealtime = this.mSystemClock.elapsedRealtime();
             int i = NotificationBundleUi.$r8$clinit;
             ExpandableNotificationRow expandableNotificationRow = new ExpandableNotificationRow(context, attributeSet, this.mEntry);
-            long elapsedRealtime2 = this.mSystemClock.elapsedRealtime() - elapsedRealtime;
+            long jElapsedRealtime2 = this.mSystemClock.elapsedRealtime() - jElapsedRealtime;
             RowInflaterTaskLogger rowInflaterTaskLogger = this.mLogger;
             NotificationEntry notificationEntry = this.mEntry;
             rowInflaterTaskLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             RowInflaterTaskLogger$$ExternalSyntheticLambda0 rowInflaterTaskLogger$$ExternalSyntheticLambda0 = new RowInflaterTaskLogger$$ExternalSyntheticLambda0(0);
             LogBuffer logBuffer = rowInflaterTaskLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("RowInflaterTask", logLevel, rowInflaterTaskLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("RowInflaterTask", logLevel, rowInflaterTaskLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-            logMessageImpl.long1 = elapsedRealtime2;
-            logBuffer.commit(obtain);
+            logMessageImpl.long1 = jElapsedRealtime2;
+            logBuffer.commit(logMessageObtain);
             return expandableNotificationRow;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface RowInflationFinishedListener {
     }
 
@@ -110,9 +107,9 @@ public class RowInflaterTask implements InflationTask, AsyncLayoutInflater.OnInf
         LogLevel logLevel = LogLevel.DEBUG;
         RowInflaterTaskLogger$$ExternalSyntheticLambda0 rowInflaterTaskLogger$$ExternalSyntheticLambda0 = new RowInflaterTaskLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = rowInflaterTaskLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("RowInflaterTask", logLevel, rowInflaterTaskLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtils.logKey(notificationEntry);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("RowInflaterTask", logLevel, rowInflaterTaskLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtils.logKey(notificationEntry);
+        logBuffer.commit(logMessageObtain);
         this.mInflateStartTimeMs = systemClock.elapsedRealtime();
         try {
             AsyncRowInflater asyncRowInflater = this.mAsyncRowInflater;
@@ -134,7 +131,7 @@ public class RowInflaterTask implements InflationTask, AsyncLayoutInflater.OnInf
 
     @Override // androidx.asynclayoutinflater.view.AsyncLayoutInflater.OnInflateFinishedListener
     public final void onInflateFinished(int i, View view, ViewGroup viewGroup) {
-        long elapsedRealtime = this.mSystemClock.elapsedRealtime() - this.mInflateStartTimeMs;
+        long jElapsedRealtime = this.mSystemClock.elapsedRealtime() - this.mInflateStartTimeMs;
         NotificationEntry notificationEntry = this.mEntry;
         boolean z = this.mCancelled;
         RowInflaterTaskLogger rowInflaterTaskLogger = this.mLogger;
@@ -142,12 +139,12 @@ public class RowInflaterTask implements InflationTask, AsyncLayoutInflater.OnInf
         LogLevel logLevel = LogLevel.DEBUG;
         RowInflaterTaskLogger$$ExternalSyntheticLambda0 rowInflaterTaskLogger$$ExternalSyntheticLambda0 = new RowInflaterTaskLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = rowInflaterTaskLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("RowInflaterTask", logLevel, rowInflaterTaskLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("RowInflaterTask", logLevel, rowInflaterTaskLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        logMessageImpl.long1 = elapsedRealtime;
+        logMessageImpl.long1 = jElapsedRealtime;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         if (this.mCancelled) {
             return;
         }

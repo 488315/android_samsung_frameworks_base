@@ -9,7 +9,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TypedArrayUtils {
     private TypedArrayUtils() {
@@ -46,7 +45,7 @@ public class TypedArrayUtils {
     }
 
     public static ComplexColorCompat getNamedComplexColor(TypedArray typedArray, XmlPullParser xmlPullParser, Resources.Theme theme, String str, int i) {
-        ComplexColorCompat complexColorCompat;
+        ComplexColorCompat complexColorCompatCreateFromXml;
         if (hasAttribute(xmlPullParser, str)) {
             TypedValue typedValue = new TypedValue();
             typedArray.getValue(i, typedValue);
@@ -55,13 +54,13 @@ public class TypedArrayUtils {
                 return ComplexColorCompat.from(typedValue.data);
             }
             try {
-                complexColorCompat = ComplexColorCompat.createFromXml(typedArray.getResourceId(i, 0), theme, typedArray.getResources());
+                complexColorCompatCreateFromXml = ComplexColorCompat.createFromXml(typedArray.getResourceId(i, 0), theme, typedArray.getResources());
             } catch (Exception e) {
                 Log.e("ComplexColorCompat", "Failed to inflate ComplexColor.", e);
-                complexColorCompat = null;
+                complexColorCompatCreateFromXml = null;
             }
-            if (complexColorCompat != null) {
-                return complexColorCompat;
+            if (complexColorCompatCreateFromXml != null) {
+                return complexColorCompatCreateFromXml;
             }
         }
         return ComplexColorCompat.from(0);

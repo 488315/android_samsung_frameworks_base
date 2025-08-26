@@ -11,7 +11,6 @@ import com.android.systemui.screenshot.ui.viewmodel.ActionButtonAppearance;
 import com.android.systemui.screenshot.ui.viewmodel.ActionButtonViewModel;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ActionButtonViewBinder {
     public static void bind(View view, final ActionButtonViewModel actionButtonViewModel) {
@@ -74,10 +73,10 @@ public final class ActionButtonViewBinder {
         imageView.setLayoutParams(layoutParams);
         textView.setLayoutParams(layoutParams2);
         if (actionButtonViewModel.onClicked != null) {
-            view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.screenshot.ui.binder.ActionButtonViewBinder$bind$2
+            view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.screenshot.ui.binder.ActionButtonViewBinder.bind.2
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view2) {
-                    ActionButtonViewModel.this.onClicked.invoke();
+                    actionButtonViewModel.onClicked.invoke();
                 }
             });
         } else {

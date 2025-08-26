@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import com.samsung.android.sdk.moneta.memory.entity.activity.ActivityType;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class EngramSearchActivityOption implements Parcelable {
     public static final Parcelable.Creator<EngramSearchActivityOption> CREATOR = new Creator();
@@ -15,7 +14,6 @@ public final class EngramSearchActivityOption implements Parcelable {
     private final int limit;
     private final int offset;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -74,7 +72,6 @@ public final class EngramSearchActivityOption implements Parcelable {
         this.contentFill = z;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WrapBuilder {
         public final ActivityType activityType;
         public final boolean contentFill;

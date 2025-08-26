@@ -5,7 +5,6 @@ import androidx.compose.ui.layout.AlignmentLine;
 import androidx.compose.ui.layout.HorizontalAlignmentLine;
 import androidx.compose.ui.unit.IntOffset;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LayoutModifierNodeCoordinatorKt {
     public static final int access$calculateAlignmentAndPlaceChildAsNeeded(LookaheadCapablePlaceable lookaheadCapablePlaceable, AlignmentLine alignmentLine) {
@@ -27,13 +26,13 @@ public abstract class LayoutModifierNodeCoordinatorKt {
                 child.isShallowPlacing = false;
                 lookaheadCapablePlaceable.isPlacingForAlignment = false;
                 if (alignmentLine instanceof HorizontalAlignmentLine) {
-                    long mo649getPositionnOccac = child.mo649getPositionnOccac();
+                    long jMo651getPositionnOccac = child.mo651getPositionnOccac();
                     IntOffset.Companion companion = IntOffset.Companion;
-                    return i + ((int) (mo649getPositionnOccac & 4294967295L));
+                    return i + ((int) (jMo651getPositionnOccac & 4294967295L));
                 }
-                long mo649getPositionnOccac2 = child.mo649getPositionnOccac();
+                long jMo651getPositionnOccac2 = child.mo651getPositionnOccac();
                 IntOffset.Companion companion2 = IntOffset.Companion;
-                return i + ((int) (mo649getPositionnOccac2 >> 32));
+                return i + ((int) (jMo651getPositionnOccac2 >> 32));
             }
         }
         return Integer.MIN_VALUE;

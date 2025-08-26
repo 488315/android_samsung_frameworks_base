@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class PaginatedGridLayout$TileGrid$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function0 $listening;
@@ -43,22 +42,22 @@ final class PaginatedGridLayout$TileGrid$1$1 extends SuspendLambda implements Fu
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new PaginatedGridLayout$$ExternalSyntheticLambda0(this.$listening, 2));
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new PaginatedGridLayout$$ExternalSyntheticLambda0(this.$listening, 2));
             final Function0 function0 = this.$listening;
             final PagerState pagerState = this.$pagerState;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.panels.ui.compose.PaginatedGridLayout$TileGrid$1$1.2
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     ((Boolean) obj2).getClass();
-                    if (!((Boolean) Function0.this.invoke()).booleanValue()) {
+                    if (!((Boolean) function0.invoke()).booleanValue()) {
                         return Unit.INSTANCE;
                     }
-                    Object scrollToPage$default = PagerState.scrollToPage$default(pagerState, 0, continuation);
-                    return scrollToPage$default == CoroutineSingletons.COROUTINE_SUSPENDED ? scrollToPage$default : Unit.INSTANCE;
+                    Object objScrollToPage$default = PagerState.scrollToPage$default(pagerState, 0, continuation);
+                    return objScrollToPage$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objScrollToPage$default : Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (snapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
+            if (safeFlowSnapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

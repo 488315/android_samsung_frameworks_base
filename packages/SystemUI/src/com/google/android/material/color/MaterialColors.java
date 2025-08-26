@@ -7,7 +7,6 @@ import android.view.View;
 import androidx.core.graphics.ColorUtils;
 import com.google.android.material.resources.MaterialAttributes;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialColors {
     private MaterialColors() {
@@ -19,9 +18,9 @@ public class MaterialColors {
 
     public static int getColor(View view, int i) {
         Context context = view.getContext();
-        TypedValue resolveTypedValueOrThrow = MaterialAttributes.resolveTypedValueOrThrow(view.getContext(), view.getClass().getCanonicalName(), i);
-        int i2 = resolveTypedValueOrThrow.resourceId;
-        return i2 != 0 ? context.getColor(i2) : resolveTypedValueOrThrow.data;
+        TypedValue typedValueResolveTypedValueOrThrow = MaterialAttributes.resolveTypedValueOrThrow(view.getContext(), view.getClass().getCanonicalName(), i);
+        int i2 = typedValueResolveTypedValueOrThrow.resourceId;
+        return i2 != 0 ? context.getColor(i2) : typedValueResolveTypedValueOrThrow.data;
     }
 
     public static int layer(float f, int i, int i2) {
@@ -29,20 +28,20 @@ public class MaterialColors {
     }
 
     public static int getColor(Context context, int i, int i2) {
-        Integer num;
-        int i3;
-        TypedValue resolve = MaterialAttributes.resolve(i, context);
-        if (resolve != null) {
-            int i4 = resolve.resourceId;
-            if (i4 != 0) {
-                i3 = context.getColor(i4);
+        Integer numValueOf;
+        int color;
+        TypedValue typedValueResolve = MaterialAttributes.resolve(i, context);
+        if (typedValueResolve != null) {
+            int i3 = typedValueResolve.resourceId;
+            if (i3 != 0) {
+                color = context.getColor(i3);
             } else {
-                i3 = resolve.data;
+                color = typedValueResolve.data;
             }
-            num = Integer.valueOf(i3);
+            numValueOf = Integer.valueOf(color);
         } else {
-            num = null;
+            numValueOf = null;
         }
-        return num != null ? num.intValue() : i2;
+        return numValueOf != null ? numValueOf.intValue() : i2;
     }
 }

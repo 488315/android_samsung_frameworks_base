@@ -7,7 +7,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor;
 import kotlinx.serialization.descriptors.SerialKind;
 import kotlinx.serialization.descriptors.StructureKind;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ListLikeDescriptor implements SerialDescriptor {
     public final SerialDescriptor elementDescriptor;
@@ -69,10 +68,10 @@ public abstract class ListLikeDescriptor implements SerialDescriptor {
     }
 
     public final String toString() {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(getSerialName(), "(");
-        m.append(this.elementDescriptor);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(getSerialName(), "(");
+        sbM.append(this.elementDescriptor);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     private ListLikeDescriptor(SerialDescriptor serialDescriptor) {

@@ -84,7 +84,7 @@ class ImageUtils {
     }
 
     public static void imageCopy(Image image, Image image2) {
-        int remaining;
+        int iRemaining;
         if (image == null || image2 == null) {
             throw new IllegalArgumentException("Images should be non-null");
         }
@@ -124,97 +124,95 @@ class ImageUtils {
             if (planes[i].getPixelStride() != planes2[i].getPixelStride()) {
                 throw new IllegalArgumentException("Source plane image pixel stride " + planes[i].getPixelStride() + " must be same as destination image pixel stride " + planes2[i].getPixelStride());
             }
-            int position = buffer.position();
+            int iPosition = buffer.position();
             buffer.rewind();
             buffer2.rewind();
             if (rowStride == rowStride2) {
                 buffer2.put(buffer);
             } else {
-                int position2 = buffer.position();
-                int position3 = buffer2.position();
+                int iPosition2 = buffer.position();
+                int iPosition3 = buffer2.position();
                 Size effectivePlaneSizeForImage = getEffectivePlaneSizeForImage(image, i);
                 int width = effectivePlaneSizeForImage.getWidth() * planes[i].getPixelStride();
                 for (int i2 = 0; i2 < effectivePlaneSizeForImage.getHeight(); i2++) {
-                    if (i2 == effectivePlaneSizeForImage.getHeight() - 1 && width > (remaining = buffer.remaining() - position2)) {
-                        width = remaining;
+                    if (i2 == effectivePlaneSizeForImage.getHeight() - 1 && width > (iRemaining = buffer.remaining() - iPosition2)) {
+                        width = iRemaining;
                     }
-                    directByteBufferCopy(buffer, position2, buffer2, position3, width);
-                    position2 += rowStride;
-                    position3 += rowStride2;
+                    directByteBufferCopy(buffer, iPosition2, buffer2, iPosition3, width);
+                    iPosition2 += rowStride;
+                    iPosition3 += rowStride2;
                 }
             }
-            buffer.position(position);
+            buffer.position(iPosition);
             buffer2.rewind();
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:28:0x003d  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0040  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0046  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0049  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x004c  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x004f  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static int getEstimatedNativeAllocBytes(int i, int i2, int i3, int i4) {
         double d;
         Flags.cameraHeifGainmap();
-        if (i3 != 1 && i3 != 2) {
-            if (i3 != 3) {
-                if (i3 != 4 && i3 != 16) {
-                    if (i3 != 17) {
-                        if (i3 != 256 && i3 != 257) {
-                            if (i3 != 4098) {
-                                if (i3 != 4099) {
-                                    d = 1.0d;
-                                    switch (i3) {
-                                        case 20:
-                                        case 32:
-                                        case 540422489:
-                                        case ImageFormat.DEPTH16 /* 1144402265 */:
-                                            break;
-                                        case 43:
-                                        case 60:
-                                            break;
-                                        case 54:
-                                            break;
-                                        case 4101:
-                                        case ImageFormat.HEIC /* 1212500294 */:
-                                        case ImageFormat.DEPTH_JPEG /* 1768253795 */:
-                                            break;
-                                        case 538982489:
-                                            break;
-                                        case 842094169:
-                                            break;
-                                        default:
-                                            switch (i3) {
-                                                case 34:
-                                                case 35:
-                                                case 38:
-                                                    break;
-                                                case 36:
-                                                    break;
-                                                case 37:
-                                                    break;
-                                                default:
-                                                    if (Log.isLoggable(IMAGEUTILS_LOG_TAG, 2)) {
-                                                        Log.v(IMAGEUTILS_LOG_TAG, "getEstimatedNativeAllocBytes() uses defaultestimated native allocation size.");
-                                                        break;
-                                                    }
-                                                    break;
-                                            }
-                                    }
-                                    return (int) (i * i2 * d * i4);
-                                }
-                                d = 1.25d;
-                                return (int) (i * i2 * d * i4);
-                            }
-                        }
-                        d = 0.3d;
-                        return (int) (i * i2 * d * i4);
-                    }
-                    d = 1.5d;
-                    return (int) (i * i2 * d * i4);
-                }
-                d = 2.0d;
-                return (int) (i * i2 * d * i4);
-            }
+        if (i3 == 1 || i3 == 2) {
+            d = 4.0d;
+        } else if (i3 == 3) {
             d = 3.0d;
-            return (int) (i * i2 * d * i4);
+        } else if (i3 == 4 || i3 == 16) {
+            d = 2.0d;
+        } else if (i3 == 17) {
+            d = 1.5d;
+        } else if (i3 == 256 || i3 == 257) {
+            d = 0.3d;
+        } else if (i3 != 4098) {
+            if (i3 != 4099) {
+                d = 1.0d;
+                switch (i3) {
+                    case 20:
+                    case 32:
+                    case 540422489:
+                    case ImageFormat.DEPTH16 /* 1144402265 */:
+                        break;
+                    case 43:
+                    case 60:
+                        break;
+                    case 54:
+                        break;
+                    case 4101:
+                    case ImageFormat.HEIC /* 1212500294 */:
+                    case ImageFormat.DEPTH_JPEG /* 1768253795 */:
+                        break;
+                    case 538982489:
+                        break;
+                    case 842094169:
+                        break;
+                    default:
+                        switch (i3) {
+                            case 34:
+                            case 35:
+                            case 38:
+                                break;
+                            case 36:
+                                break;
+                            case 37:
+                                d = 1.25d;
+                                break;
+                            default:
+                                if (Log.isLoggable(IMAGEUTILS_LOG_TAG, 2)) {
+                                    Log.v(IMAGEUTILS_LOG_TAG, "getEstimatedNativeAllocBytes() uses defaultestimated native allocation size.");
+                                    break;
+                                }
+                                break;
+                        }
+                }
+            }
         }
-        d = 4.0d;
         return (int) (i * i2 * d * i4);
     }
 

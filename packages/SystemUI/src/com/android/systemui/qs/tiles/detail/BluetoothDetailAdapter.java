@@ -44,7 +44,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Callback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -104,21 +103,21 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
             view = LayoutInflater.from(this.mContext).inflate(R.layout.qs_detail_bluetooth, viewGroup, false);
             ViewGroup viewGroup2 = (ViewGroup) view.findViewById(R.id.paired_devices);
             this.mPairedDevices = viewGroup2;
-            QSDetailItems convertOrInflate = QSDetailItems.convertOrInflate(context, viewGroup2);
-            this.mItems = convertOrInflate;
-            this.mPairedDevices.addView(convertOrInflate);
+            QSDetailItems qSDetailItemsConvertOrInflate = QSDetailItems.convertOrInflate(context, viewGroup2);
+            this.mItems = qSDetailItemsConvertOrInflate;
+            this.mPairedDevices.addView(qSDetailItemsConvertOrInflate);
             ViewGroup viewGroup3 = (ViewGroup) view.findViewById(R.id.available_devices);
             this.mAvailable = viewGroup3;
-            QSDetailItems convertOrInflate2 = QSDetailItems.convertOrInflate(context, viewGroup3);
-            this.mAvailableDevicesItems = convertOrInflate2;
-            convertOrInflate2.setTagSuffix("Bluetooth.Available");
+            QSDetailItems qSDetailItemsConvertOrInflate2 = QSDetailItems.convertOrInflate(context, viewGroup3);
+            this.mAvailableDevicesItems = qSDetailItemsConvertOrInflate2;
+            qSDetailItemsConvertOrInflate2.setTagSuffix("Bluetooth.Available");
             this.mAvailable.addView(this.mAvailableDevicesItems);
             if (QpRune.QUICK_BLUETOOTH_MUSIC_SHARE) {
                 ViewGroup viewGroup4 = (ViewGroup) view.findViewById(R.id.music_share_devices);
                 this.mMusicShare = viewGroup4;
-                QSDetailItems convertOrInflate3 = QSDetailItems.convertOrInflate(context, viewGroup4);
-                this.mMusicShareItems = convertOrInflate3;
-                this.mMusicShare.addView(convertOrInflate3);
+                QSDetailItems qSDetailItemsConvertOrInflate3 = QSDetailItems.convertOrInflate(context, viewGroup4);
+                this.mMusicShareItems = qSDetailItemsConvertOrInflate3;
+                this.mMusicShare.addView(qSDetailItemsConvertOrInflate3);
                 this.mMusicShareTitleDivider = this.mMusicShare.findViewById(R.id.music_share_title_divider);
             } else {
                 ViewGroup viewGroup5 = (ViewGroup) view.findViewById(R.id.music_share_devices);
@@ -127,10 +126,10 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
             }
             this.mIsHavingConvertView = true;
             ViewGroup viewGroup6 = (ViewGroup) view;
-            SecQSSwitchPreference inflateSwitch = SecQSSwitchPreference.inflateSwitch(this.mContext, viewGroup6);
-            viewGroup6.addView(inflateSwitch);
-            this.mBluetoothAutoOnOption = inflateSwitch;
-            this.mBluetoothAutoOnHeader = (TextView) inflateSwitch.findViewById(R.id.title);
+            SecQSSwitchPreference secQSSwitchPreferenceInflateSwitch = SecQSSwitchPreference.inflateSwitch(this.mContext, viewGroup6);
+            viewGroup6.addView(secQSSwitchPreferenceInflateSwitch);
+            this.mBluetoothAutoOnOption = secQSSwitchPreferenceInflateSwitch;
+            this.mBluetoothAutoOnHeader = (TextView) secQSSwitchPreferenceInflateSwitch.findViewById(R.id.title);
             this.mBluetoothAutoOnSummary = (TextView) this.mBluetoothAutoOnOption.findViewById(R.id.title_summary);
             this.mBluetoothAutoOnSwitch = (SwitchCompat) this.mBluetoothAutoOnOption.findViewById(R.id.title_switch);
             this.mBluetoothAutoOnHeader.setText(this.mContext.getText(R.string.quick_settings_bluetooth_auto_on_header));
@@ -149,7 +148,7 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
         }
         this.mHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.detail.BluetoothDetailAdapter.1
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Throwable {
                 if (BluetoothDetailAdapter.this.getToggleState().booleanValue()) {
                     Collection devices$1 = ((SBluetoothControllerImpl) BluetoothDetailAdapter.this.mController).getDevices$1();
                     if (devices$1 != null) {
@@ -176,7 +175,18 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
         this.mBluetoothAutoOnOption.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.tiles.detail.BluetoothDetailAdapter.2
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                BluetoothDetailAdapter.this.mBluetoothAutoOnSwitch.setChecked(!r3.isChecked());
+                Context context2;
+                int i;
+                BluetoothDetailAdapter.this.mBluetoothAutoOnSwitch.setChecked(!r4.isChecked());
+                SwitchCompat switchCompat = BluetoothDetailAdapter.this.mBluetoothAutoOnSwitch;
+                if (switchCompat.isChecked()) {
+                    context2 = BluetoothDetailAdapter.this.mContext;
+                    i = R.string.switch_bar_on;
+                } else {
+                    context2 = BluetoothDetailAdapter.this.mContext;
+                    i = R.string.switch_bar_off;
+                }
+                switchCompat.announceForAccessibility(context2.getString(i));
                 BluetoothDetailAdapter bluetoothDetailAdapter = BluetoothDetailAdapter.this;
                 if (bluetoothDetailAdapter.mBluetoothAutoOnSwitch.isChecked()) {
                     bluetoothDetailAdapter.updateAutoOnSwitch(2);
@@ -232,7 +242,7 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
     }
 
     @Override // com.android.systemui.qs.QSDetailItems.Callback
-    public final void onDetailItemClick(QSDetailItems.Item item) {
+    public final void onDetailItemClick(QSDetailItems.Item item) throws InterruptedException {
         Object obj;
         if (item == null || (obj = item.tag) == null) {
             return;
@@ -248,9 +258,9 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
             }
         }
         CachedBluetoothDevice cachedBluetoothDevice = (CachedBluetoothDevice) obj;
-        boolean isConnected = cachedBluetoothDevice.isConnected();
+        boolean zIsConnected = cachedBluetoothDevice.isConnected();
         SBluetoothController sBluetoothController = this.mController;
-        if (isConnected) {
+        if (zIsConnected) {
             SBluetoothControllerImpl sBluetoothControllerImpl = (SBluetoothControllerImpl) sBluetoothController;
             if (sBluetoothControllerImpl.mLocalBluetoothManager != null) {
                 sBluetoothControllerImpl.scan(false);
@@ -295,7 +305,7 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
     }
 
     @Override // com.android.systemui.plugins.qs.DetailAdapter
-    public final void setToggleState(boolean z) {
+    public final void setToggleState(boolean z) throws InterruptedException {
         if (!this.mBluetoothAdapter.isAutoOnSupported() || z) {
             updateAutoOnVisibility(8);
         } else {
@@ -306,9 +316,9 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
         if (this.mIsSatelliteModeOn) {
             return;
         }
-        boolean isBluetoothTileBlocked = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isBluetoothTileBlocked();
+        boolean zIsBluetoothTileBlocked = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isBluetoothTileBlocked();
         SBluetoothTile sBluetoothTile = this.sBluetoothTile;
-        if (isBluetoothTileBlocked || sBluetoothTile.isBlockedByEASPolicy$1()) {
+        if (zIsBluetoothTileBlocked || sBluetoothTile.isBlockedByEASPolicy$1()) {
             sBluetoothTile.showItPolicyToast();
             return;
         }
@@ -319,7 +329,7 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
                 this.mActivityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.detail.BluetoothDetailAdapter$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BluetoothDetailAdapter bluetoothDetailAdapter = BluetoothDetailAdapter.this;
+                        BluetoothDetailAdapter bluetoothDetailAdapter = this.f$0;
                         int i = BluetoothDetailAdapter.$r8$clinit;
                         bluetoothDetailAdapter.sBluetoothTile.onToggleStateChange(!bluetoothDetailAdapter.getToggleState().booleanValue());
                     }
@@ -364,7 +374,7 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
         this.mBluetoothAutoOnSwitch.setVisibility(i);
     }
 
-    public final void updateItems$1() {
+    public final void updateItems$1() throws Throwable {
         boolean z;
         if (this.mItems == null) {
             return;
@@ -408,35 +418,29 @@ public class BluetoothDetailAdapter implements DetailAdapter, QSDetailItems.Call
                 sb.append(cachedBluetoothDevice.getName());
                 item.line1 = sb.toString();
                 int i2 = deviceForGroupConnectionState.mCachedMaxConnectionState;
-                if (!cachedBluetoothDevice.isConnected()) {
-                    Iterator it = ((HashSet) cachedBluetoothDevice.mMemberDevices).iterator();
-                    while (it.hasNext()) {
-                        if (((CachedBluetoothDevice) it.next()).isConnected()) {
-                        }
-                    }
-                    z = false;
-                    item.isActive = z;
-                    item.line2 = deviceForGroupConnectionState.getConnectionSummary();
-                    item.tag = cachedBluetoothDevice;
-                    if (i != 12 || cachedBluetoothDevice.mIsRestored) {
-                        arrayList.add(item);
-                    } else {
-                        arrayList2.add(item);
-                    }
-                    if (i2 != 1 || i2 == 3) {
-                        item.isInProgress = true;
+                if (cachedBluetoothDevice.isConnected()) {
+                    z = true;
+                    break;
+                }
+                Iterator it = ((HashSet) cachedBluetoothDevice.mMemberDevices).iterator();
+                while (it.hasNext()) {
+                    if (((CachedBluetoothDevice) it.next()).isConnected()) {
+                        z = true;
+                        break;
                     }
                 }
-                z = true;
+                z = false;
                 item.isActive = z;
                 item.line2 = deviceForGroupConnectionState.getConnectionSummary();
                 item.tag = cachedBluetoothDevice;
-                if (i != 12) {
+                if (i == 12 || cachedBluetoothDevice.mIsRestored) {
+                    arrayList.add(item);
+                } else {
+                    arrayList2.add(item);
                 }
-                arrayList.add(item);
-                if (i2 != 1) {
+                if (i2 == 1 || i2 == 3) {
+                    item.isInProgress = true;
                 }
-                item.isInProgress = true;
             }
         }
         this.mItems.setItems((QSDetailItems.Item[]) arrayList.toArray(new QSDetailItems.Item[arrayList.size()]));

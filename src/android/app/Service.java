@@ -241,9 +241,9 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
         synchronized (this.mForegroundServiceTraceTitleLock) {
             String str = this.mForegroundServiceTraceTitle;
             if (str == null) {
-                String formatSimple = TextUtils.formatSimple("comp=%s type=%s", componentName.toShortString(), Integer.toHexString(i));
-                this.mForegroundServiceTraceTitle = formatSimple;
-                Trace.asyncTraceForTrackBegin(64L, TRACE_TRACK_NAME_FOREGROUND_SERVICE, formatSimple, System.identityHashCode(this));
+                String simple = TextUtils.formatSimple("comp=%s type=%s", componentName.toShortString(), Integer.toHexString(i));
+                this.mForegroundServiceTraceTitle = simple;
+                Trace.asyncTraceForTrackBegin(64L, TRACE_TRACK_NAME_FOREGROUND_SERVICE, simple, System.identityHashCode(this));
             } else {
                 Trace.instantForTrack(64L, TRACE_TRACK_NAME_FOREGROUND_SERVICE, str);
             }

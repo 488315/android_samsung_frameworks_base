@@ -91,20 +91,20 @@ public class X509Extensions extends ASN1Object {
     }
 
     public X509Extensions(Vector vector, Hashtable hashtable) {
-        Enumeration elements;
+        Enumeration enumerationElements;
         this.extensions = new Hashtable();
         this.ordering = new Vector();
         if (vector == null) {
-            elements = hashtable.keys();
+            enumerationElements = hashtable.keys();
         } else {
-            elements = vector.elements();
+            enumerationElements = vector.elements();
         }
-        while (elements.hasMoreElements()) {
-            this.ordering.addElement(ASN1ObjectIdentifier.getInstance(elements.nextElement()));
+        while (enumerationElements.hasMoreElements()) {
+            this.ordering.addElement(ASN1ObjectIdentifier.getInstance(enumerationElements.nextElement()));
         }
-        Enumeration elements2 = this.ordering.elements();
-        while (elements2.hasMoreElements()) {
-            ASN1ObjectIdentifier aSN1ObjectIdentifier = ASN1ObjectIdentifier.getInstance(elements2.nextElement());
+        Enumeration enumerationElements2 = this.ordering.elements();
+        while (enumerationElements2.hasMoreElements()) {
+            ASN1ObjectIdentifier aSN1ObjectIdentifier = ASN1ObjectIdentifier.getInstance(enumerationElements2.nextElement());
             this.extensions.put(aSN1ObjectIdentifier, (X509Extension) hashtable.get(aSN1ObjectIdentifier));
         }
     }
@@ -112,14 +112,14 @@ public class X509Extensions extends ASN1Object {
     public X509Extensions(Vector vector, Vector vector2) {
         this.extensions = new Hashtable();
         this.ordering = new Vector();
-        Enumeration elements = vector.elements();
-        while (elements.hasMoreElements()) {
-            this.ordering.addElement(elements.nextElement());
+        Enumeration enumerationElements = vector.elements();
+        while (enumerationElements.hasMoreElements()) {
+            this.ordering.addElement(enumerationElements.nextElement());
         }
-        Enumeration elements2 = this.ordering.elements();
+        Enumeration enumerationElements2 = this.ordering.elements();
         int i = 0;
-        while (elements2.hasMoreElements()) {
-            this.extensions.put((ASN1ObjectIdentifier) elements2.nextElement(), (X509Extension) vector2.elementAt(i));
+        while (enumerationElements2.hasMoreElements()) {
+            this.extensions.put((ASN1ObjectIdentifier) enumerationElements2.nextElement(), (X509Extension) vector2.elementAt(i));
             i++;
         }
     }
@@ -135,10 +135,10 @@ public class X509Extensions extends ASN1Object {
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector(this.ordering.size());
-        Enumeration elements = this.ordering.elements();
-        while (elements.hasMoreElements()) {
+        Enumeration enumerationElements = this.ordering.elements();
+        while (enumerationElements.hasMoreElements()) {
             ASN1EncodableVector aSN1EncodableVector2 = new ASN1EncodableVector(3);
-            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) elements.nextElement();
+            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationElements.nextElement();
             X509Extension x509Extension = (X509Extension) this.extensions.get(aSN1ObjectIdentifier);
             aSN1EncodableVector2.add(aSN1ObjectIdentifier);
             if (x509Extension.isCritical()) {
@@ -154,10 +154,10 @@ public class X509Extensions extends ASN1Object {
         if (this.extensions.size() != x509Extensions.extensions.size()) {
             return false;
         }
-        Enumeration keys = this.extensions.keys();
-        while (keys.hasMoreElements()) {
-            Object nextElement = keys.nextElement();
-            if (!this.extensions.get(nextElement).equals(x509Extensions.extensions.get(nextElement))) {
+        Enumeration enumerationKeys = this.extensions.keys();
+        while (enumerationKeys.hasMoreElements()) {
+            Object objNextElement = enumerationKeys.nextElement();
+            if (!this.extensions.get(objNextElement).equals(x509Extensions.extensions.get(objNextElement))) {
                 return false;
             }
         }
@@ -179,9 +179,9 @@ public class X509Extensions extends ASN1Object {
     private ASN1ObjectIdentifier[] getExtensionOIDs(boolean z) {
         Vector vector = new Vector();
         for (int i = 0; i != this.ordering.size(); i++) {
-            Object elementAt = this.ordering.elementAt(i);
-            if (((X509Extension) this.extensions.get(elementAt)).isCritical() == z) {
-                vector.addElement(elementAt);
+            Object objElementAt = this.ordering.elementAt(i);
+            if (((X509Extension) this.extensions.get(objElementAt)).isCritical() == z) {
+                vector.addElement(objElementAt);
             }
         }
         return toOidArray(vector);

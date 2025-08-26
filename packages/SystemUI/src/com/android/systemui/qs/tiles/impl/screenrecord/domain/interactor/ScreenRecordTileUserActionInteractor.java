@@ -22,7 +22,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenRecordTileUserActionInteractor implements QSTileUserActionInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -36,7 +35,6 @@ public final class ScreenRecordTileUserActionInteractor implements QSTileUserAct
     public final RecordingController recordingController;
     public final ScreenRecordRepository screenRecordRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -63,28 +61,28 @@ public final class ScreenRecordTileUserActionInteractor implements QSTileUserAct
     }
 
     @Override // com.android.systemui.qs.tiles.base.domain.interactor.QSTileUserActionInteractor
-    public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) {
+    public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) throws Throwable {
         QSTileUserAction qSTileUserAction = qSTileInput.action;
         if (qSTileUserAction instanceof QSTileUserAction.Click) {
             ScreenRecordModel screenRecordModel = (ScreenRecordModel) qSTileInput.data;
             if (screenRecordModel instanceof ScreenRecordModel.Starting) {
                 Log.d("ScreenRecordTileUserActionInteractor", "Cancelling countdown");
-                Object withContext = BuildersKt.withContext(this.backgroundContext, new ScreenRecordTileUserActionInteractor$handleInput$2$1(this, null), continuation);
-                if (withContext == CoroutineSingletons.COROUTINE_SUSPENDED) {
-                    return withContext;
+                Object objWithContext = BuildersKt.withContext(this.backgroundContext, new ScreenRecordTileUserActionInteractor$handleInput$2$1(this, null), continuation);
+                if (objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                    return objWithContext;
                 }
             } else if (screenRecordModel instanceof ScreenRecordModel.Recording) {
-                Object stopRecording = ((ScreenRecordRepositoryImpl) this.screenRecordRepository).stopRecording(5, (SuspendLambda) continuation);
-                if (stopRecording == CoroutineSingletons.COROUTINE_SUSPENDED) {
-                    return stopRecording;
+                Object objStopRecording = ((ScreenRecordRepositoryImpl) this.screenRecordRepository).stopRecording(5, (SuspendLambda) continuation);
+                if (objStopRecording == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                    return objStopRecording;
                 }
             } else {
                 if (!(screenRecordModel instanceof ScreenRecordModel.DoingNothing)) {
                     throw new NoWhenBranchMatchedException();
                 }
-                Object withContext2 = BuildersKt.withContext(this.mainContext, new ScreenRecordTileUserActionInteractor$handleInput$2$2(this, qSTileInput, null), continuation);
-                if (withContext2 == CoroutineSingletons.COROUTINE_SUSPENDED) {
-                    return withContext2;
+                Object objWithContext2 = BuildersKt.withContext(this.mainContext, new ScreenRecordTileUserActionInteractor$handleInput$2$2(this, qSTileInput, null), continuation);
+                if (objWithContext2 == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                    return objWithContext2;
                 }
             }
         } else if (!(qSTileUserAction instanceof QSTileUserAction.LongClick) && !(qSTileUserAction instanceof QSTileUserAction.ToggleClick)) {

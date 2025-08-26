@@ -23,7 +23,6 @@ import java.util.function.Consumer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TransparentVideoRenderer {
     public final AttributeSet attribSet;
@@ -42,7 +41,6 @@ public final class TransparentVideoRenderer {
     public Texture videoTexture;
     public Size videoTextureResolution;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -86,8 +84,6 @@ public final class TransparentVideoRenderer {
         Log.d("TransparentVideoRenderer", "video texture is not created yet for connection");
     }
 
-    /* JADX WARN: Type inference failed for: r6v5, types: [kotlin.jvm.functions.Function1, kotlin.jvm.internal.Lambda] */
-    /* JADX WARN: Type inference failed for: r9v4, types: [kotlin.jvm.functions.Function1, kotlin.jvm.internal.Lambda] */
     public final boolean onDraw() {
         if (this.clearRequested.get()) {
             Log.d("TransparentVideoRenderer", "Clearing surface in onDraw() because clearRequested is true");
@@ -124,15 +120,15 @@ public final class TransparentVideoRenderer {
         }
         float[] fArr = {1.0f / size.getWidth(), 1.0f / size.getHeight()};
         GLBuffer gLBuffer = uniform.buffer;
-        gLBuffer.dataUpdater.mo779invoke(fArr);
+        gLBuffer.dataUpdater.mo781invoke(fArr);
         gLBuffer.dataBuffer.rewind();
         Uniform uniform2 = this.uReinforcedEdgeAmount;
         if (uniform2 == null) {
             uniform2 = null;
         }
-        Float valueOf = Float.valueOf(this.reinforcedEdgeAmount);
+        Float fValueOf = Float.valueOf(this.reinforcedEdgeAmount);
         GLBuffer gLBuffer2 = uniform2.buffer;
-        gLBuffer2.dataUpdater.mo779invoke(valueOf);
+        gLBuffer2.dataUpdater.mo781invoke(fValueOf);
         gLBuffer2.dataBuffer.rewind();
         GLES30.glDisable(3042);
         List list = this.glObj;

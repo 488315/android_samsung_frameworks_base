@@ -3,6 +3,7 @@ package android.widget;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.icu.text.DateFormat;
 import android.icu.text.DisplayContext;
@@ -106,7 +107,7 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
         View.OnClickListener onClickListener = new View.OnClickListener() { // from class: android.widget.DatePickerCalendarDelegate$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                DatePickerCalendarDelegate.this.lambda$new$0(view);
+                this.f$0.lambda$new$0(view);
             }
         };
         this.mOnHeaderClickListener = onClickListener;
@@ -120,8 +121,8 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
         calendar.set(1900, 0, 1);
         calendar2.set(2100, 11, 31);
         this.mDelegator.getResources();
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(attributeSet, R.styleable.DatePicker, i, i2);
-        ViewGroup viewGroup = (ViewGroup) ((LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(obtainStyledAttributes.getResourceId(19, R.layout.date_picker_material), (ViewGroup) this.mDelegator, false);
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(attributeSet, R.styleable.DatePicker, i, i2);
+        ViewGroup viewGroup = (ViewGroup) ((LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(typedArrayObtainStyledAttributes.getResourceId(19, R.layout.date_picker_material), (ViewGroup) this.mDelegator, false);
         this.mContainer = viewGroup;
         viewGroup.setSaveFromParentEnabled(false);
         this.mDelegator.addView(this.mContainer);
@@ -136,22 +137,22 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
         textView2.setOnClickListener(onClickListener);
         this.mHeaderMonthDay.setAccessibilityDelegate(new ClickActionDelegate(context, R.string.select_day));
         this.mHeaderMonthDay.setAccessibilityLiveRegion(1);
-        int resourceId = obtainStyledAttributes.getResourceId(10, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(10, 0);
         ColorStateList colorStateList = null;
         if (resourceId != 0) {
-            TypedArray obtainStyledAttributes2 = this.mContext.obtainStyledAttributes(null, ATTRS_TEXT_COLOR, 0, resourceId);
-            colorStateList = applyLegacyColorFixes(obtainStyledAttributes2.getColorStateList(0));
-            obtainStyledAttributes2.recycle();
+            TypedArray typedArrayObtainStyledAttributes2 = this.mContext.obtainStyledAttributes(null, ATTRS_TEXT_COLOR, 0, resourceId);
+            colorStateList = applyLegacyColorFixes(typedArrayObtainStyledAttributes2.getColorStateList(0));
+            typedArrayObtainStyledAttributes2.recycle();
         }
-        colorStateList = colorStateList == null ? obtainStyledAttributes.getColorStateList(18) : colorStateList;
+        colorStateList = colorStateList == null ? typedArrayObtainStyledAttributes.getColorStateList(18) : colorStateList;
         if (colorStateList != null) {
             this.mHeaderYear.setTextColor(colorStateList);
             this.mHeaderMonthDay.setTextColor(colorStateList);
         }
-        if (obtainStyledAttributes.hasValueOrEmpty(0)) {
-            viewGroup2.setBackground(obtainStyledAttributes.getDrawable(0));
+        if (typedArrayObtainStyledAttributes.hasValueOrEmpty(0)) {
+            viewGroup2.setBackground(typedArrayObtainStyledAttributes.getDrawable(0));
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         ViewAnimator viewAnimator = (ViewAnimator) this.mContainer.findViewById(R.id.animator);
         this.mAnimator = viewAnimator;
         DayPickerView dayPickerView = (DayPickerView) viewAnimator.findViewById(R.id.date_picker_day_picker);
@@ -171,26 +172,26 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
     }
 
     private ColorStateList applyLegacyColorFixes(ColorStateList colorStateList) {
-        int multiplyAlphaComponent;
-        int i;
+        int iMultiplyAlphaComponent;
+        int colorForState;
         if (colorStateList == null || colorStateList.hasState(16843518)) {
             return colorStateList;
         }
         if (colorStateList.hasState(16842913)) {
-            i = colorStateList.getColorForState(StateSet.get(10), 0);
-            multiplyAlphaComponent = colorStateList.getColorForState(StateSet.get(8), 0);
+            colorForState = colorStateList.getColorForState(StateSet.get(10), 0);
+            iMultiplyAlphaComponent = colorStateList.getColorForState(StateSet.get(8), 0);
         } else {
             int defaultColor = colorStateList.getDefaultColor();
-            TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(ATTRS_DISABLED_ALPHA);
-            float f = obtainStyledAttributes.getFloat(0, 0.3f);
-            obtainStyledAttributes.recycle();
-            multiplyAlphaComponent = multiplyAlphaComponent(defaultColor, f);
-            i = defaultColor;
+            TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(ATTRS_DISABLED_ALPHA);
+            float f = typedArrayObtainStyledAttributes.getFloat(0, 0.3f);
+            typedArrayObtainStyledAttributes.recycle();
+            iMultiplyAlphaComponent = multiplyAlphaComponent(defaultColor, f);
+            colorForState = defaultColor;
         }
-        if (i == 0 || multiplyAlphaComponent == 0) {
+        if (colorForState == 0 || iMultiplyAlphaComponent == 0) {
             return null;
         }
-        return new ColorStateList(new int[][]{new int[]{16843518}, new int[0]}, new int[]{i, multiplyAlphaComponent});
+        return new ColorStateList(new int[][]{new int[]{16843518}, new int[0]}, new int[]{colorForState, iMultiplyAlphaComponent});
     }
 
     private static class ClickActionDelegate extends View.AccessibilityDelegate {
@@ -259,8 +260,8 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
         this.mYearPickerView.setYear(this.mCurrentDate.get(1));
         this.mYearPickerView.post(new Runnable() { // from class: android.widget.DatePickerCalendarDelegate$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
-            public final void run() {
-                DatePickerCalendarDelegate.this.lambda$setCurrentView$1();
+            public final void run() throws Resources.NotFoundException {
+                this.f$0.lambda$setCurrentView$1();
             }
         });
         if (this.mCurrentView != i) {
@@ -272,7 +273,7 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$setCurrentView$1() {
+    public /* synthetic */ void lambda$setCurrentView$1() throws Resources.NotFoundException {
         this.mYearPickerView.requestFocus();
         View selectedView = this.mYearPickerView.getSelectedView();
         if (selectedView != null) {
@@ -389,7 +390,7 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
     }
 
     @Override // android.widget.DatePicker.DatePickerDelegate
-    public void setEnabled(boolean z) {
+    public void setEnabled(boolean z) throws Resources.NotFoundException {
         this.mContainer.setEnabled(z);
         this.mDayPickerView.setEnabled(z);
         this.mYearPickerView.setEnabled(z);
@@ -414,24 +415,24 @@ class DatePickerCalendarDelegate extends DatePicker.AbstractDatePickerDelegate {
 
     @Override // android.widget.DatePicker.DatePickerDelegate
     public Parcelable onSaveInstanceState(Parcelable parcelable) {
-        int i;
-        int i2;
-        int i3 = this.mCurrentDate.get(1);
-        int i4 = this.mCurrentDate.get(2);
-        int i5 = this.mCurrentDate.get(5);
-        int i6 = this.mCurrentView;
-        if (i6 == 0) {
-            i = this.mDayPickerView.getMostVisiblePosition();
-            i2 = -1;
-        } else if (i6 == 1) {
+        int mostVisiblePosition;
+        int firstPositionOffset;
+        int i = this.mCurrentDate.get(1);
+        int i2 = this.mCurrentDate.get(2);
+        int i3 = this.mCurrentDate.get(5);
+        int i4 = this.mCurrentView;
+        if (i4 == 0) {
+            mostVisiblePosition = this.mDayPickerView.getMostVisiblePosition();
+            firstPositionOffset = -1;
+        } else if (i4 == 1) {
             int firstVisiblePosition = this.mYearPickerView.getFirstVisiblePosition();
-            i2 = this.mYearPickerView.getFirstPositionOffset();
-            i = firstVisiblePosition;
+            firstPositionOffset = this.mYearPickerView.getFirstPositionOffset();
+            mostVisiblePosition = firstVisiblePosition;
         } else {
-            i = -1;
-            i2 = -1;
+            mostVisiblePosition = -1;
+            firstPositionOffset = -1;
         }
-        return new DatePicker.AbstractDatePickerDelegate.SavedState(parcelable, i3, i4, i5, this.mMinDate.getTimeInMillis(), this.mMaxDate.getTimeInMillis(), this.mCurrentView, i, i2);
+        return new DatePicker.AbstractDatePickerDelegate.SavedState(parcelable, i, i2, i3, this.mMinDate.getTimeInMillis(), this.mMaxDate.getTimeInMillis(), this.mCurrentView, mostVisiblePosition, firstPositionOffset);
     }
 
     @Override // android.widget.DatePicker.DatePickerDelegate

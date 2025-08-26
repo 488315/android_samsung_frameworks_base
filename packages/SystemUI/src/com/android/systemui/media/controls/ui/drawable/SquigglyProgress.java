@@ -18,7 +18,6 @@ import com.android.internal.graphics.ColorUtils;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SquigglyProgress extends Drawable {
     public boolean animate;
@@ -60,15 +59,15 @@ public final class SquigglyProgress extends Drawable {
 
     @Override // android.graphics.drawable.Drawable
     public final void draw(Canvas canvas) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("SquigglyProgress#draw");
         }
         try {
             drawTraced(canvas);
             Unit unit = Unit.INSTANCE;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
@@ -77,56 +76,56 @@ public final class SquigglyProgress extends Drawable {
     public final void drawTraced(Canvas canvas) {
         if (this.animate) {
             invalidateSelf();
-            long uptimeMillis = SystemClock.uptimeMillis();
-            this.phaseOffset = ((((uptimeMillis - this.lastFrameTime) / 1000.0f) * this.phaseSpeed) + this.phaseOffset) % this.waveLength;
-            this.lastFrameTime = uptimeMillis;
+            long jUptimeMillis = SystemClock.uptimeMillis();
+            this.phaseOffset = ((((jUptimeMillis - this.lastFrameTime) / 1000.0f) * this.phaseSpeed) + this.phaseOffset) % this.waveLength;
+            this.lastFrameTime = jUptimeMillis;
         }
         float level = getLevel() / 10000.0f;
-        float width = getBounds().width();
-        float f = width * level;
+        float fWidth = getBounds().width();
+        float f = fWidth * level;
         if (this.transitionEnabled) {
             float f2 = this.matchedWaveEndpoint;
             if (level <= f2) {
                 level = MathUtils.lerp(this.minWaveEndpoint, f2, MathUtils.lerpInv(0.0f, f2, level));
             }
         }
-        final float f3 = level * width;
+        final float f3 = level * fWidth;
         float f4 = (-this.phaseOffset) - (this.waveLength / 2.0f);
-        float f5 = this.transitionEnabled ? width : f3;
+        float f5 = this.transitionEnabled ? fWidth : f3;
         Function2 function2 = new Function2() { // from class: com.android.systemui.media.controls.ui.drawable.SquigglyProgress$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 float f6;
-                float f7;
-                float floatValue = ((Float) obj).floatValue();
-                float floatValue2 = ((Float) obj2).floatValue();
-                SquigglyProgress squigglyProgress = SquigglyProgress.this;
+                float fLerpInvSat;
+                float fFloatValue = ((Float) obj).floatValue();
+                float fFloatValue2 = ((Float) obj2).floatValue();
+                SquigglyProgress squigglyProgress = this.f$0;
                 if (squigglyProgress.transitionEnabled) {
-                    float f8 = (squigglyProgress.transitionPeriods * squigglyProgress.waveLength) / 2.0f;
-                    float f9 = f3;
-                    f7 = MathUtils.lerpInvSat(f9 + f8, f9 - f8, floatValue);
-                    f6 = floatValue2 * squigglyProgress.heightFraction * squigglyProgress.lineAmplitude;
+                    float f7 = (squigglyProgress.transitionPeriods * squigglyProgress.waveLength) / 2.0f;
+                    float f8 = f3;
+                    fLerpInvSat = MathUtils.lerpInvSat(f8 + f7, f8 - f7, fFloatValue);
+                    f6 = fFloatValue2 * squigglyProgress.heightFraction * squigglyProgress.lineAmplitude;
                 } else {
-                    f6 = floatValue2 * squigglyProgress.heightFraction;
-                    f7 = squigglyProgress.lineAmplitude;
+                    f6 = fFloatValue2 * squigglyProgress.heightFraction;
+                    fLerpInvSat = squigglyProgress.lineAmplitude;
                 }
-                return Float.valueOf(f6 * f7);
+                return Float.valueOf(f6 * fLerpInvSat);
             }
         };
         this.path.rewind();
         this.path.moveTo(f4, 0.0f);
         float f6 = 1.0f;
-        float floatValue = ((Number) function2.invoke(Float.valueOf(f4), Float.valueOf(1.0f))).floatValue();
+        float fFloatValue = ((Number) function2.invoke(Float.valueOf(f4), Float.valueOf(1.0f))).floatValue();
         float f7 = this.waveLength / 2.0f;
-        float f8 = floatValue;
+        float f8 = fFloatValue;
         float f9 = f4;
         while (f9 < f5) {
             f6 = -f6;
             float f10 = f9 + f7;
             float f11 = (f7 / 2) + f9;
-            float floatValue2 = ((Number) function2.invoke(Float.valueOf(f10), Float.valueOf(f6))).floatValue();
-            this.path.cubicTo(f11, f8, f11, floatValue2, f10, floatValue2);
-            f8 = floatValue2;
+            float fFloatValue2 = ((Number) function2.invoke(Float.valueOf(f10), Float.valueOf(f6))).floatValue();
+            this.path.cubicTo(f11, f8, f11, fFloatValue2, f10, fFloatValue2);
+            f8 = fFloatValue2;
             f9 = f10;
         }
         float f12 = this.lineAmplitude + this.strokeWidth;
@@ -139,11 +138,11 @@ public final class SquigglyProgress extends Drawable {
         canvas.restore();
         if (this.transitionEnabled) {
             canvas.save();
-            canvas.clipRect(f, f13, width, f12);
+            canvas.clipRect(f, f13, fWidth, f12);
             canvas.drawPath(this.path, this.linePaint);
             canvas.restore();
         } else {
-            canvas.drawLine(f, 0.0f, width, 0.0f, this.linePaint);
+            canvas.drawLine(f, 0.0f, fWidth, 0.0f, this.linePaint);
         }
         canvas.drawPoint(0.0f, ((float) Math.cos((Math.abs(f4) / this.waveLength) * 6.2831855f)) * this.lineAmplitude * this.heightFraction, this.wavePaint);
         canvas.restore();
@@ -181,30 +180,30 @@ public final class SquigglyProgress extends Drawable {
         if (valueAnimator != null) {
             valueAnimator.cancel();
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.heightFraction, this.animate ? 1.0f : 0.0f);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.heightFraction, this.animate ? 1.0f : 0.0f);
         if (this.animate) {
-            ofFloat.setStartDelay(60L);
-            ofFloat.setDuration(800L);
-            ofFloat.setInterpolator(Interpolators.EMPHASIZED_DECELERATE);
+            valueAnimatorOfFloat.setStartDelay(60L);
+            valueAnimatorOfFloat.setDuration(800L);
+            valueAnimatorOfFloat.setInterpolator(Interpolators.EMPHASIZED_DECELERATE);
         } else {
-            ofFloat.setDuration(550L);
-            ofFloat.setInterpolator(Interpolators.STANDARD_DECELERATE);
+            valueAnimatorOfFloat.setDuration(550L);
+            valueAnimatorOfFloat.setInterpolator(Interpolators.STANDARD_DECELERATE);
         }
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.drawable.SquigglyProgress$animate$1$1
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.drawable.SquigglyProgress$animate$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                SquigglyProgress.this.heightFraction = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                SquigglyProgress.this.invalidateSelf();
+                this.this$0.heightFraction = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                this.this$0.invalidateSelf();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.media.controls.ui.drawable.SquigglyProgress$animate$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.media.controls.ui.drawable.SquigglyProgress$animate$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                SquigglyProgress.this.heightAnimator = null;
+                this.this$0.heightAnimator = null;
             }
         });
-        ofFloat.start();
-        this.heightAnimator = ofFloat;
+        valueAnimatorOfFloat.start();
+        this.heightAnimator = valueAnimatorOfFloat;
     }
 
     @Override // android.graphics.drawable.Drawable

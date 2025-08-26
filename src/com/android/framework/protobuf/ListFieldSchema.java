@@ -47,10 +47,10 @@ abstract class ListFieldSchema {
 
         @Override // com.android.framework.protobuf.ListFieldSchema
         void makeImmutableListAt(Object obj, long j) {
-            Object unmodifiableList;
+            Object objUnmodifiableList;
             List list = (List) UnsafeUtil.getObject(obj, j);
             if (list instanceof LazyStringList) {
-                unmodifiableList = ((LazyStringList) list).getUnmodifiableView();
+                objUnmodifiableList = ((LazyStringList) list).getUnmodifiableView();
             } else {
                 if (UNMODIFIABLE_LIST_CLASS.isAssignableFrom(list.getClass())) {
                     return;
@@ -63,9 +63,9 @@ abstract class ListFieldSchema {
                     }
                     return;
                 }
-                unmodifiableList = Collections.unmodifiableList(list);
+                objUnmodifiableList = Collections.unmodifiableList(list);
             }
-            UnsafeUtil.putObject(obj, j, unmodifiableList);
+            UnsafeUtil.putObject(obj, j, objUnmodifiableList);
         }
 
         private static <L> List<L> mutableListAt(Object obj, long j, int i) {
@@ -97,9 +97,9 @@ abstract class ListFieldSchema {
             if ((list instanceof PrimitiveNonBoxingCollection) && (list instanceof Internal.ProtobufList)) {
                 Internal.ProtobufList protobufList = (Internal.ProtobufList) list;
                 if (!protobufList.isModifiable()) {
-                    Internal.ProtobufList mutableCopyWithCapacity2 = protobufList.mutableCopyWithCapacity2(list.size() + i);
-                    UnsafeUtil.putObject(obj, j, mutableCopyWithCapacity2);
-                    return mutableCopyWithCapacity2;
+                    Internal.ProtobufList protobufListMutableCopyWithCapacity2 = protobufList.mutableCopyWithCapacity2(list.size() + i);
+                    UnsafeUtil.putObject(obj, j, protobufListMutableCopyWithCapacity2);
+                    return protobufListMutableCopyWithCapacity2;
                 }
             }
             return list;
@@ -108,14 +108,14 @@ abstract class ListFieldSchema {
         @Override // com.android.framework.protobuf.ListFieldSchema
         <E> void mergeListsAt(Object obj, Object obj2, long j) {
             List list = getList(obj2, j);
-            List mutableListAt = mutableListAt(obj, j, list.size());
-            int size = mutableListAt.size();
+            List listMutableListAt = mutableListAt(obj, j, list.size());
+            int size = listMutableListAt.size();
             int size2 = list.size();
             if (size > 0 && size2 > 0) {
-                mutableListAt.addAll(list);
+                listMutableListAt.addAll(list);
             }
             if (size > 0) {
-                list = mutableListAt;
+                list = listMutableListAt;
             }
             UnsafeUtil.putObject(obj, j, list);
         }
@@ -137,9 +137,9 @@ abstract class ListFieldSchema {
                 return protobufList;
             }
             int size = protobufList.size();
-            Internal.ProtobufList mutableCopyWithCapacity2 = protobufList.mutableCopyWithCapacity2(size == 0 ? 10 : size * 2);
-            UnsafeUtil.putObject(obj, j, mutableCopyWithCapacity2);
-            return mutableCopyWithCapacity2;
+            Internal.ProtobufList protobufListMutableCopyWithCapacity2 = protobufList.mutableCopyWithCapacity2(size == 0 ? 10 : size * 2);
+            UnsafeUtil.putObject(obj, j, protobufListMutableCopyWithCapacity2);
+            return protobufListMutableCopyWithCapacity2;
         }
 
         @Override // com.android.framework.protobuf.ListFieldSchema

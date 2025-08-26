@@ -36,11 +36,11 @@ public final class IncrementalStorage {
 
     public void bind(String str, String str2) throws IOException {
         try {
-            int makeBindMount = this.mService.makeBindMount(this.mId, str, str2, 0);
-            if (makeBindMount >= 0) {
+            int iMakeBindMount = this.mService.makeBindMount(this.mId, str, str2, 0);
+            if (iMakeBindMount >= 0) {
                 return;
             }
-            throw new IOException("bind() failed with errno " + (-makeBindMount));
+            throw new IOException("bind() failed with errno " + (-iMakeBindMount));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -52,11 +52,11 @@ public final class IncrementalStorage {
 
     public void bindPermanent(String str, String str2) throws IOException {
         try {
-            int makeBindMount = this.mService.makeBindMount(this.mId, str, str2, 1);
-            if (makeBindMount >= 0) {
+            int iMakeBindMount = this.mService.makeBindMount(this.mId, str, str2, 1);
+            if (iMakeBindMount >= 0) {
                 return;
             }
-            throw new IOException("bind() permanent failed with errno " + (-makeBindMount));
+            throw new IOException("bind() permanent failed with errno " + (-iMakeBindMount));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -64,11 +64,11 @@ public final class IncrementalStorage {
 
     public void unBind(String str) throws IOException {
         try {
-            int deleteBindMount = this.mService.deleteBindMount(this.mId, str);
-            if (deleteBindMount >= 0) {
+            int iDeleteBindMount = this.mService.deleteBindMount(this.mId, str);
+            if (iDeleteBindMount >= 0) {
                 return;
             }
-            throw new IOException("unbind() failed with errno " + (-deleteBindMount));
+            throw new IOException("unbind() failed with errno " + (-iDeleteBindMount));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -76,11 +76,11 @@ public final class IncrementalStorage {
 
     public void makeDirectory(String str) throws IOException {
         try {
-            int makeDirectory = this.mService.makeDirectory(this.mId, str);
-            if (makeDirectory >= 0) {
+            int iMakeDirectory = this.mService.makeDirectory(this.mId, str);
+            if (iMakeDirectory >= 0) {
                 return;
             }
-            throw new IOException("makeDirectory() failed with errno " + (-makeDirectory));
+            throw new IOException("makeDirectory() failed with errno " + (-iMakeDirectory));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -88,11 +88,11 @@ public final class IncrementalStorage {
 
     public void makeDirectories(String str) throws IOException {
         try {
-            int makeDirectories = this.mService.makeDirectories(this.mId, str);
-            if (makeDirectories >= 0) {
+            int iMakeDirectories = this.mService.makeDirectories(this.mId, str);
+            if (iMakeDirectories >= 0) {
                 return;
             }
-            throw new IOException("makeDirectory() failed with errno " + (-makeDirectories));
+            throw new IOException("makeDirectory() failed with errno " + (-iMakeDirectories));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -112,11 +112,11 @@ public final class IncrementalStorage {
             incrementalNewFileParams.metadata = bArr;
             incrementalNewFileParams.fileId = idToBytes(uuid);
             incrementalNewFileParams.signature = bArr2;
-            int makeFile = this.mService.makeFile(this.mId, str, i, incrementalNewFileParams, bArr3);
-            if (makeFile == 0) {
+            int iMakeFile = this.mService.makeFile(this.mId, str, i, incrementalNewFileParams, bArr3);
+            if (iMakeFile == 0) {
                 return;
             }
-            throw new IOException("makeFile() failed with errno " + (-makeFile));
+            throw new IOException("makeFile() failed with errno " + (-iMakeFile));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -124,11 +124,11 @@ public final class IncrementalStorage {
 
     public void makeFileFromRange(String str, String str2, long j, long j2) throws IOException {
         try {
-            int makeFileFromRange = this.mService.makeFileFromRange(this.mId, str, str2, j, j2);
-            if (makeFileFromRange >= 0) {
+            int iMakeFileFromRange = this.mService.makeFileFromRange(this.mId, str, str2, j, j2);
+            if (iMakeFileFromRange >= 0) {
                 return;
             }
-            throw new IOException("makeFileFromRange() failed, errno " + (-makeFileFromRange));
+            throw new IOException("makeFileFromRange() failed, errno " + (-iMakeFileFromRange));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -136,11 +136,11 @@ public final class IncrementalStorage {
 
     public void makeLink(String str, IncrementalStorage incrementalStorage, String str2) throws IOException {
         try {
-            int makeLink = this.mService.makeLink(this.mId, str, incrementalStorage.getId(), str2);
-            if (makeLink >= 0) {
+            int iMakeLink = this.mService.makeLink(this.mId, str, incrementalStorage.getId(), str2);
+            if (iMakeLink >= 0) {
                 return;
             }
-            throw new IOException("makeLink() failed with errno " + (-makeLink));
+            throw new IOException("makeLink() failed with errno " + (-iMakeLink));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -148,27 +148,27 @@ public final class IncrementalStorage {
 
     public void unlink(String str) throws IOException {
         try {
-            int unlink = this.mService.unlink(this.mId, str);
-            if (unlink >= 0) {
+            int iUnlink = this.mService.unlink(this.mId, str);
+            if (iUnlink >= 0) {
                 return;
             }
-            throw new IOException("unlink() failed with errno " + (-unlink));
+            throw new IOException("unlink() failed with errno " + (-iUnlink));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
     }
 
     public void moveFile(String str, String str2) throws IOException {
-        int makeLink;
+        int iMakeLink;
         try {
             IIncrementalService iIncrementalService = this.mService;
             int i = this.mId;
-            makeLink = iIncrementalService.makeLink(i, str, i, str2);
+            iMakeLink = iIncrementalService.makeLink(i, str, i, str2);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
-        if (makeLink < 0) {
-            throw new IOException("moveFile() failed at makeLink(), errno " + (-makeLink));
+        if (iMakeLink < 0) {
+            throw new IOException("moveFile() failed at makeLink(), errno " + (-iMakeLink));
         }
         try {
             this.mService.unlink(this.mId, str);
@@ -177,17 +177,17 @@ public final class IncrementalStorage {
     }
 
     public void moveDir(String str, String str2) throws IOException {
-        int makeBindMount;
+        int iMakeBindMount;
         if (!new File(str2).exists()) {
             throw new IOException("moveDir() requires that destination dir already exists.");
         }
         try {
-            makeBindMount = this.mService.makeBindMount(this.mId, str, str2, 1);
+            iMakeBindMount = this.mService.makeBindMount(this.mId, str, str2, 1);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
-        if (makeBindMount < 0) {
-            throw new IOException("moveDir() failed at making bind mount, errno " + (-makeBindMount));
+        if (iMakeBindMount < 0) {
+            throw new IOException("moveDir() failed at making bind mount, errno " + (-iMakeBindMount));
         }
         try {
             this.mService.deleteBindMount(this.mId, str);
@@ -197,11 +197,11 @@ public final class IncrementalStorage {
 
     public boolean isFileFullyLoaded(String str) throws IOException {
         try {
-            int isFileFullyLoaded = this.mService.isFileFullyLoaded(this.mId, str);
-            if (isFileFullyLoaded >= 0) {
-                return isFileFullyLoaded == 0;
+            int iIsFileFullyLoaded = this.mService.isFileFullyLoaded(this.mId, str);
+            if (iIsFileFullyLoaded >= 0) {
+                return iIsFileFullyLoaded == 0;
             }
-            throw new IOException("isFileFullyLoaded() failed, errno " + (-isFileFullyLoaded));
+            throw new IOException("isFileFullyLoaded() failed, errno " + (-iIsFileFullyLoaded));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
             return false;
@@ -210,11 +210,11 @@ public final class IncrementalStorage {
 
     public boolean isFullyLoaded() throws IOException {
         try {
-            int isFullyLoaded = this.mService.isFullyLoaded(this.mId);
-            if (isFullyLoaded >= 0) {
-                return isFullyLoaded == 0;
+            int iIsFullyLoaded = this.mService.isFullyLoaded(this.mId);
+            if (iIsFullyLoaded >= 0) {
+                return iIsFullyLoaded == 0;
             }
-            throw new IOException("isFullyLoaded() failed at querying loading progress, errno " + (-isFullyLoaded));
+            throw new IOException("isFullyLoaded() failed at querying loading progress, errno " + (-iIsFullyLoaded));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
             return false;
@@ -274,18 +274,18 @@ public final class IncrementalStorage {
         if (uuid == null) {
             return new byte[0];
         }
-        ByteBuffer wrap = ByteBuffer.wrap(new byte[16]);
-        wrap.putLong(uuid.getMostSignificantBits());
-        wrap.putLong(uuid.getLeastSignificantBits());
-        return wrap.array();
+        ByteBuffer byteBufferWrap = ByteBuffer.wrap(new byte[16]);
+        byteBufferWrap.putLong(uuid.getMostSignificantBits());
+        byteBufferWrap.putLong(uuid.getLeastSignificantBits());
+        return byteBufferWrap.array();
     }
 
     public static UUID bytesToId(byte[] bArr) throws IllegalArgumentException {
         if (bArr.length != 16) {
             throw new IllegalArgumentException("Expected array of size 16, got " + bArr.length);
         }
-        ByteBuffer wrap = ByteBuffer.wrap(bArr);
-        return new UUID(wrap.getLong(), wrap.getLong());
+        ByteBuffer byteBufferWrap = ByteBuffer.wrap(bArr);
+        return new UUID(byteBufferWrap.getLong(), byteBufferWrap.getLong());
     }
 
     public void disallowReadLogs() {
@@ -301,25 +301,25 @@ public final class IncrementalStorage {
             return;
         }
         try {
-            V4Signature readFrom = V4Signature.readFrom(bArr);
-            if (!readFrom.isVersionSupported()) {
-                throw new IOException("v4 signature version " + readFrom.version + " is not supported");
+            V4Signature from = V4Signature.readFrom(bArr);
+            if (!from.isVersionSupported()) {
+                throw new IOException("v4 signature version " + from.version + " is not supported");
             }
-            V4Signature.HashingInfo fromByteArray = V4Signature.HashingInfo.fromByteArray(readFrom.hashingInfo);
-            V4Signature.SigningInfos fromByteArray2 = V4Signature.SigningInfos.fromByteArray(readFrom.signingInfos);
-            if (fromByteArray.hashAlgorithm != 1) {
-                throw new IOException("Unsupported hashAlgorithm: " + fromByteArray.hashAlgorithm);
+            V4Signature.HashingInfo hashingInfoFromByteArray = V4Signature.HashingInfo.fromByteArray(from.hashingInfo);
+            V4Signature.SigningInfos signingInfosFromByteArray = V4Signature.SigningInfos.fromByteArray(from.signingInfos);
+            if (hashingInfoFromByteArray.hashAlgorithm != 1) {
+                throw new IOException("Unsupported hashAlgorithm: " + hashingInfoFromByteArray.hashAlgorithm);
             }
-            if (fromByteArray.log2BlockSize != 12) {
-                throw new IOException("Unsupported log2BlockSize: " + ((int) fromByteArray.log2BlockSize));
+            if (hashingInfoFromByteArray.log2BlockSize != 12) {
+                throw new IOException("Unsupported log2BlockSize: " + ((int) hashingInfoFromByteArray.log2BlockSize));
             }
-            if (fromByteArray.salt != null && fromByteArray.salt.length > 0) {
-                throw new IOException("Unsupported salt: " + Arrays.toString(fromByteArray.salt));
+            if (hashingInfoFromByteArray.salt != null && hashingInfoFromByteArray.salt.length > 0) {
+                throw new IOException("Unsupported salt: " + Arrays.toString(hashingInfoFromByteArray.salt));
             }
-            if (fromByteArray.rawRootHash.length != 32) {
+            if (hashingInfoFromByteArray.rawRootHash.length != 32) {
                 throw new IOException("rawRootHash has to be 32 bytes");
             }
-            if (fromByteArray2.signingInfo.additionalData.length > 128) {
+            if (signingInfosFromByteArray.signingInfo.additionalData.length > 128) {
                 throw new IOException("additionalData has to be at most 128 bytes");
             }
         } catch (IOException e) {

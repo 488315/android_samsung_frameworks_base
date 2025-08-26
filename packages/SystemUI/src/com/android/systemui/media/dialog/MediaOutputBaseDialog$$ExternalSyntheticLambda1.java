@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import com.android.systemui.animation.DialogTransitionAnimator;
-import com.android.systemui.animation.DialogTransitionAnimator$createActivityTransitionController$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class MediaOutputBaseDialog$$ExternalSyntheticLambda1 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
@@ -42,12 +40,12 @@ public final /* synthetic */ class MediaOutputBaseDialog$$ExternalSyntheticLambd
                 MediaSwitchingController mediaSwitchingController = (MediaSwitchingController) obj;
                 DialogTransitionAnimator dialogTransitionAnimator = mediaSwitchingController.mDialogTransitionAnimator;
                 dialogTransitionAnimator.getClass();
-                DialogTransitionAnimator$createActivityTransitionController$1 createActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view);
+                DialogTransitionAnimator.AnonymousClass1 anonymousClass1CreateActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view);
                 Intent launchIntentForPackage = TextUtils.isEmpty(mediaSwitchingController.mPackageName) ? null : mediaSwitchingController.mContext.getPackageManager().getLaunchIntentForPackage(mediaSwitchingController.mPackageName);
                 if (launchIntentForPackage != null) {
                     launchIntentForPackage.addFlags(268435456);
                     mediaSwitchingController.mCallback.dismissDialog();
-                    mediaSwitchingController.startActivity(launchIntentForPackage, createActivityTransitionController$default);
+                    mediaSwitchingController.startActivity(launchIntentForPackage, anonymousClass1CreateActivityTransitionController$default);
                     break;
                 }
                 break;

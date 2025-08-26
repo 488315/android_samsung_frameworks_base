@@ -23,7 +23,6 @@ import kotlin.properties.ObservableProperty;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlin.reflect.KProperty;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BubblePopupDrawable extends Drawable {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
@@ -36,7 +35,6 @@ public final class BubblePopupDrawable extends Drawable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ArrowDirection {
         public static final /* synthetic */ ArrowDirection[] $VALUES;
         public static final ArrowDirection DOWN;
@@ -64,10 +62,8 @@ public final class BubblePopupDrawable extends Drawable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ArrowPosition {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Center extends ArrowPosition {
             public static final Center INSTANCE = new Center();
 
@@ -76,7 +72,6 @@ public final class BubblePopupDrawable extends Drawable {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Custom extends ArrowPosition {
             public final float value;
 
@@ -86,7 +81,6 @@ public final class BubblePopupDrawable extends Drawable {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class End extends ArrowPosition {
             public static final End INSTANCE = null;
 
@@ -99,7 +93,6 @@ public final class BubblePopupDrawable extends Drawable {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Start extends ArrowPosition {
             public static final Start INSTANCE = null;
 
@@ -120,7 +113,6 @@ public final class BubblePopupDrawable extends Drawable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Config {
         public final float arrowHeight;
         public final float arrowRadius;
@@ -158,7 +150,6 @@ public final class BubblePopupDrawable extends Drawable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -214,43 +205,43 @@ public final class BubblePopupDrawable extends Drawable {
     }
 
     public final void addRoundedArrowPositioned(Path path, ArrowPosition arrowPosition) {
-        float f;
+        float fWidth;
         Matrix matrix = new Matrix();
         if (arrowPosition instanceof ArrowPosition.Start) {
-            f = 0.0f;
+            fWidth = 0.0f;
         } else if (arrowPosition instanceof ArrowPosition.Center) {
-            f = getBounds().width() / 2.0f;
+            fWidth = getBounds().width() / 2.0f;
         } else if (arrowPosition instanceof ArrowPosition.End) {
-            f = getBounds().width();
+            fWidth = getBounds().width();
         } else {
             if (!(arrowPosition instanceof ArrowPosition.Custom)) {
                 throw new NoWhenBranchMatchedException();
             }
-            f = ((ArrowPosition.Custom) arrowPosition).value;
+            fWidth = ((ArrowPosition.Custom) arrowPosition).value;
         }
         Config config = this.config;
-        float f2 = 2;
-        float f3 = f - (config.arrowWidth / f2);
-        float width = getBounds().width();
+        float f = 2;
+        float f2 = fWidth - (config.arrowWidth / f);
+        float fWidth2 = getBounds().width();
         Config config2 = this.config;
-        matrix.setTranslate(-RangesKt___RangesKt.coerceIn(f3, config.cornerRadius, (width - config2.cornerRadius) - config2.arrowWidth), 0.0f);
+        matrix.setTranslate(-RangesKt___RangesKt.coerceIn(f2, config.cornerRadius, (fWidth2 - config2.cornerRadius) - config2.arrowWidth), 0.0f);
         path.transform(matrix);
         Config config3 = this.config;
-        float f4 = config3.arrowWidth / (config3.arrowHeight * 2.0f);
-        double atan = (float) Math.atan(f4);
-        float degrees = (float) Math.toDegrees(atan);
-        float sin = this.config.arrowRadius / ((float) Math.sin(atan));
-        float f5 = this.config.arrowRadius / f4;
-        float cos = ((float) Math.cos(atan)) * f5;
-        float sin2 = f5 * ((float) Math.sin(atan));
+        float f3 = config3.arrowWidth / (config3.arrowHeight * 2.0f);
+        double dAtan = (float) Math.atan(f3);
+        float degrees = (float) Math.toDegrees(dAtan);
+        float fSin = this.config.arrowRadius / ((float) Math.sin(dAtan));
+        float f4 = this.config.arrowRadius / f3;
+        float fCos = ((float) Math.cos(dAtan)) * f4;
+        float fSin2 = f4 * ((float) Math.sin(dAtan));
         Config config4 = this.config;
-        float f6 = config4.arrowWidth / 2.0f;
+        float f5 = config4.arrowWidth / 2.0f;
         path.moveTo(0.0f, config4.arrowHeight);
-        path.lineTo(f6 - sin2, cos);
-        float f7 = this.config.arrowRadius;
-        float f8 = f7 + sin;
-        float f9 = 180;
-        path.arcTo(f6 - f7, sin - f7, f6 + f7, f8, f9 + degrees, f9 - (f2 * degrees), false);
+        path.lineTo(f5 - fSin2, fCos);
+        float f6 = this.config.arrowRadius;
+        float f7 = f6 + fSin;
+        float f8 = 180;
+        path.arcTo(f5 - f6, fSin - f6, f5 + f6, f7, f8 + degrees, f8 - (f * degrees), false);
         Config config5 = this.config;
         path.lineTo(config5.arrowWidth, config5.arrowHeight);
         path.close();

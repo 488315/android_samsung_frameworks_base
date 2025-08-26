@@ -124,20 +124,20 @@ public final class VerifiedMotionEvent extends VerifiedInputEvent implements Par
 
     VerifiedMotionEvent(Parcel parcel) {
         super(parcel, 2);
-        float readFloat = parcel.readFloat();
-        float readFloat2 = parcel.readFloat();
-        int readInt = parcel.readInt();
-        long readLong = parcel.readLong();
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        int readInt4 = parcel.readInt();
-        this.mRawX = readFloat;
-        this.mRawY = readFloat2;
-        this.mActionMasked = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) MotionEventAction.class, (Annotation) null, readInt);
-        this.mDownTimeNanos = readLong;
-        this.mFlags = readInt2;
-        this.mMetaState = readInt3;
-        this.mButtonState = readInt4;
+        float f = parcel.readFloat();
+        float f2 = parcel.readFloat();
+        int i = parcel.readInt();
+        long j = parcel.readLong();
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        int i4 = parcel.readInt();
+        this.mRawX = f;
+        this.mRawY = f2;
+        this.mActionMasked = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) MotionEventAction.class, (Annotation) null, i);
+        this.mDownTimeNanos = j;
+        this.mFlags = i2;
+        this.mMetaState = i3;
+        this.mButtonState = i4;
     }
 }

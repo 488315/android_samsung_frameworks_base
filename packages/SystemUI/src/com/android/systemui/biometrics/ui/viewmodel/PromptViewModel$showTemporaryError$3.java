@@ -11,9 +11,9 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PromptViewModel$showTemporaryError$3 extends SuspendLambda implements Function2 {
     final /* synthetic */ boolean $authenticateAfterError;
@@ -26,7 +26,6 @@ final class PromptViewModel$showTemporaryError$3 extends SuspendLambda implement
     int label;
     final /* synthetic */ PromptViewModel this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.ui.viewmodel.PromptViewModel$showTemporaryError$3$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ boolean $authenticateAfterError;
@@ -52,71 +51,41 @@ final class PromptViewModel$showTemporaryError$3 extends SuspendLambda implement
             return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:16:0x0042, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:17:0x0042, code lost:
         
             if (r7.showHelp(r1) == r0) goto L18;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:17:0x0044, code lost:
-        
-            return r0;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:19:0x0029, code lost:
-        
-            if (kotlinx.coroutines.DelayKt.delay(r4, r6) == r0) goto L18;
          */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object invokeSuspend(java.lang.Object r7) {
-            /*
-                r6 = this;
-                kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                int r1 = r6.label
-                r2 = 1
-                r3 = 2
-                if (r1 == 0) goto L1c
-                if (r1 == r2) goto L18
-                if (r1 != r3) goto L10
-                kotlin.ResultKt.throwOnFailure(r7)
-                goto L45
-            L10:
-                java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-                java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-                r6.<init>(r7)
-                throw r6
-            L18:
-                kotlin.ResultKt.throwOnFailure(r7)
-                goto L2c
-            L1c:
-                kotlin.ResultKt.throwOnFailure(r7)
-                com.android.systemui.biometrics.ui.viewmodel.PromptViewModel r7 = r6.this$0
-                long r4 = r7.messageDelay
-                r6.label = r2
-                java.lang.Object r7 = kotlinx.coroutines.DelayKt.delay(r4, r6)
-                if (r7 != r0) goto L2c
-                goto L44
-            L2c:
-                boolean r7 = r6.$authenticateAfterError
-                if (r7 == 0) goto L38
-                com.android.systemui.biometrics.ui.viewmodel.PromptViewModel r7 = r6.this$0
-                java.lang.String r6 = r6.$messageAfterError
-                com.android.systemui.biometrics.ui.viewmodel.PromptViewModel.showAuthenticating$default(r7, r6, r3)
-                goto L45
-            L38:
-                com.android.systemui.biometrics.ui.viewmodel.PromptViewModel r7 = r6.this$0
-                java.lang.String r1 = r6.$messageAfterError
-                r6.label = r3
-                kotlin.Unit r6 = r7.showHelp(r1)
-                if (r6 != r0) goto L45
-            L44:
-                return r0
-            L45:
-                kotlin.Unit r6 = kotlin.Unit.INSTANCE
-                return r6
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.ui.viewmodel.PromptViewModel$showTemporaryError$3.AnonymousClass1.invokeSuspend(java.lang.Object):java.lang.Object");
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                long j = this.this$0.messageDelay;
+                this.label = 1;
+                if (DelayKt.delay(j, this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i != 1) {
+                if (i != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            ResultKt.throwOnFailure(obj);
+            if (this.$authenticateAfterError) {
+                PromptViewModel.showAuthenticating$default(this.this$0, this.$messageAfterError, 2);
+            } else {
+                PromptViewModel promptViewModel = this.this$0;
+                String str = this.$messageAfterError;
+                this.label = 2;
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -161,14 +130,14 @@ final class PromptViewModel$showTemporaryError$3 extends SuspendLambda implement
             return Unit.INSTANCE;
         }
         this.this$0._canTryAgainNow.updateState(null, Boolean.valueOf(this.$failedModality == BiometricModality.Face));
-        boolean booleanValue = ((Boolean) this.$suppressIf.invoke(this.this$0._message.getValue(), this.this$0.history)).booleanValue();
+        boolean zBooleanValue = ((Boolean) this.$suppressIf.invoke(this.this$0._message.getValue(), this.this$0.history)).booleanValue();
         PromptHistoryImpl promptHistoryImpl = this.this$0.history;
         BiometricModality biometricModality = this.$failedModality;
         promptHistoryImpl.getClass();
         if (biometricModality != BiometricModality.None) {
             promptHistoryImpl.failures.add(biometricModality);
         }
-        if (booleanValue) {
+        if (zBooleanValue) {
             return Unit.INSTANCE;
         }
         this.this$0._isAuthenticating.updateState(null, Boolean.FALSE);

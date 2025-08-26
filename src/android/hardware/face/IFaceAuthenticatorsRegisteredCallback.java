@@ -46,9 +46,9 @@ public interface IFaceAuthenticatorsRegisteredCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFaceAuthenticatorsRegisteredCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFaceAuthenticatorsRegisteredCallback)) {
-                return (IFaceAuthenticatorsRegisteredCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFaceAuthenticatorsRegisteredCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFaceAuthenticatorsRegisteredCallback)) {
+                return (IFaceAuthenticatorsRegisteredCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IFaceAuthenticatorsRegisteredCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(FaceSensorPropertiesInternal.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(FaceSensorPropertiesInternal.CREATOR);
                 parcel.enforceNoDataAvail();
-                onAllAuthenticatorsRegistered(createTypedArrayList);
+                onAllAuthenticatorsRegistered(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,13 +101,13 @@ public interface IFaceAuthenticatorsRegisteredCallback extends IInterface {
 
             @Override // android.hardware.face.IFaceAuthenticatorsRegisteredCallback
             public void onAllAuthenticatorsRegistered(List<FaceSensorPropertiesInternal> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceAuthenticatorsRegisteredCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceAuthenticatorsRegisteredCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

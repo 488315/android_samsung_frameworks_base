@@ -18,21 +18,21 @@ public class CpuScalingPolicies {
         this.mCpusByPolicy = sparseArray;
         this.mFreqsByPolicy = sparseArray2;
         this.mPolicies = new int[sparseArray.size()];
+        int length = 0;
         int i = 0;
-        int i2 = 0;
         while (true) {
             iArr = this.mPolicies;
-            if (i2 >= iArr.length) {
+            if (i >= iArr.length) {
                 break;
             }
-            iArr[i2] = sparseArray.keyAt(i2);
-            i2++;
+            iArr[i] = sparseArray.keyAt(i);
+            i++;
         }
         Arrays.sort(iArr);
         for (int size = sparseArray2.size() - 1; size >= 0; size--) {
-            i += sparseArray2.valueAt(size).length;
+            length += sparseArray2.valueAt(size).length;
         }
-        this.mScalingStepCount = i;
+        this.mScalingStepCount = length;
     }
 
     public int[] getPolicies() {

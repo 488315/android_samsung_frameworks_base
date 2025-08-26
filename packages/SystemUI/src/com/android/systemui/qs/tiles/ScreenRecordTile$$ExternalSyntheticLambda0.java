@@ -16,7 +16,6 @@ import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ScreenRecordTile$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -39,7 +38,7 @@ public final /* synthetic */ class ScreenRecordTile$$ExternalSyntheticLambda0 im
                     @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
                     public final boolean onDismiss() {
                         Runnable runnable = screenRecordTile$$ExternalSyntheticLambda0;
-                        ScreenRecordTile screenRecordTile2 = ScreenRecordTile.this;
+                        ScreenRecordTile screenRecordTile2 = screenRecordTile;
                         screenRecordTile2.getClass();
                         runnable.run();
                         screenRecordTile2.mMediaProjectionMetricsLogger.notifyPermissionRequestDisplayed(((UserTrackerImpl) screenRecordTile2.mUserContextProvider).getUserContext().getUserId());
@@ -55,7 +54,7 @@ public final /* synthetic */ class ScreenRecordTile$$ExternalSyntheticLambda0 im
                     consumer.accept(new ScreenRecordDetailsViewModel(recordingController, new Runnable() { // from class: com.android.systemui.qs.tiles.ScreenRecordTile$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ScreenRecordTile screenRecordTile3 = ScreenRecordTile.this;
+                            ScreenRecordTile screenRecordTile3 = screenRecordTile2;
                             screenRecordTile3.mDialogTransitionAnimator.disableAllCurrentDialogsExitAnimations();
                             ((PanelInteractorImpl) screenRecordTile3.mPanelInteractor).collapsePanels();
                         }
@@ -71,10 +70,10 @@ public final /* synthetic */ class ScreenRecordTile$$ExternalSyntheticLambda0 im
                 final ScreenRecordTile screenRecordTile3 = this.f$0;
                 final Expandable expandable = (Expandable) this.f$1;
                 screenRecordTile3.getClass();
-                final SystemUIDialog createScreenRecordDialog = screenRecordTile3.mController.createScreenRecordDialog(new Runnable() { // from class: com.android.systemui.qs.tiles.ScreenRecordTile$$ExternalSyntheticLambda2
+                final SystemUIDialog systemUIDialogCreateScreenRecordDialog = screenRecordTile3.mController.createScreenRecordDialog(new Runnable() { // from class: com.android.systemui.qs.tiles.ScreenRecordTile$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ScreenRecordTile screenRecordTile32 = ScreenRecordTile.this;
+                        ScreenRecordTile screenRecordTile32 = screenRecordTile3;
                         screenRecordTile32.mDialogTransitionAnimator.disableAllCurrentDialogsExitAnimations();
                         ((PanelInteractorImpl) screenRecordTile32.mPanelInteractor).collapsePanels();
                     }
@@ -82,15 +81,15 @@ public final /* synthetic */ class ScreenRecordTile$$ExternalSyntheticLambda0 im
                 final Runnable runnable = new Runnable() { // from class: com.android.systemui.qs.tiles.ScreenRecordTile$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ScreenRecordTile screenRecordTile4 = ScreenRecordTile.this;
+                        ScreenRecordTile screenRecordTile4 = screenRecordTile3;
                         Expandable expandable2 = expandable;
-                        SystemUIDialog systemUIDialog = createScreenRecordDialog;
+                        SystemUIDialog systemUIDialog = systemUIDialogCreateScreenRecordDialog;
                         if (expandable2 == null) {
                             screenRecordTile4.getClass();
                         } else if (!((KeyguardStateControllerImpl) screenRecordTile4.mKeyguardStateController).mShowing) {
-                            DialogTransitionAnimator.Controller dialogTransitionController = expandable2.dialogTransitionController(new DialogCuj(58, "screen_record"));
-                            if (dialogTransitionController != null) {
-                                screenRecordTile4.mDialogTransitionAnimator.show(systemUIDialog, dialogTransitionController, true);
+                            DialogTransitionAnimator.Controller controllerDialogTransitionController = expandable2.dialogTransitionController(new DialogCuj(58, "screen_record"));
+                            if (controllerDialogTransitionController != null) {
+                                screenRecordTile4.mDialogTransitionAnimator.show(systemUIDialog, controllerDialogTransitionController, true);
                                 return;
                             } else {
                                 systemUIDialog.show();
@@ -104,7 +103,7 @@ public final /* synthetic */ class ScreenRecordTile$$ExternalSyntheticLambda0 im
                     @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
                     public final boolean onDismiss() {
                         Runnable runnable2 = runnable;
-                        ScreenRecordTile screenRecordTile22 = ScreenRecordTile.this;
+                        ScreenRecordTile screenRecordTile22 = screenRecordTile3;
                         screenRecordTile22.getClass();
                         runnable2.run();
                         screenRecordTile22.mMediaProjectionMetricsLogger.notifyPermissionRequestDisplayed(((UserTrackerImpl) screenRecordTile22.mUserContextProvider).getUserContext().getUserId());

@@ -10,7 +10,6 @@ import com.android.systemui.edgelighting.utils.EdgeLightingSettingUtils;
 import java.io.File;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BRUtils {
     public static BRUtils sInstance;
@@ -21,18 +20,14 @@ public class BRUtils {
     }
 
     public static synchronized BRUtils getInstance(Context context) {
-        BRUtils bRUtils;
-        synchronized (BRUtils.class) {
-            try {
-                if (sInstance == null) {
-                    sInstance = new BRUtils(context);
-                }
-                bRUtils = sInstance;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sInstance == null) {
+                sInstance = new BRUtils(context);
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return bRUtils;
+        return sInstance;
     }
 
     public final void restoreSettingValue(File file, boolean z) {
@@ -67,9 +62,9 @@ public class BRUtils {
                             Settings.Global.putFloat(this.mContext.getContentResolver(), str2, Float.parseFloat(str3));
                             break;
                         case "BOOLEAN_SHARED_PREFERENCE":
-                            SharedPreferences.Editor edit = this.mContext.getSharedPreferences("cocktailbar_shared_prefs", 0).edit();
-                            edit.putBoolean(str2, Boolean.parseBoolean(str3));
-                            edit.apply();
+                            SharedPreferences.Editor editorEdit = this.mContext.getSharedPreferences("cocktailbar_shared_prefs", 0).edit();
+                            editorEdit.putBoolean(str2, Boolean.parseBoolean(str3));
+                            editorEdit.apply();
                             break;
                         case "FLOAT_SYSTEM":
                             Settings.System.putFloat(this.mContext.getContentResolver(), str2, Float.parseFloat(str3));
@@ -80,9 +75,9 @@ public class BRUtils {
                             this.mContext.getContentResolver().insert(EdgeLightingContentProvider.CUSTOM_COLOR_LIST_CONTENT_URI, contentValues);
                             break;
                         case "INT_SHARED_PREFERENCE":
-                            SharedPreferences.Editor edit2 = this.mContext.getSharedPreferences("cocktailbar_shared_prefs", 0).edit();
-                            edit2.putInt(str2, Integer.parseInt(str3));
-                            edit2.apply();
+                            SharedPreferences.Editor editorEdit2 = this.mContext.getSharedPreferences("cocktailbar_shared_prefs", 0).edit();
+                            editorEdit2.putInt(str2, Integer.parseInt(str3));
+                            editorEdit2.apply();
                             break;
                         case "INT_GLOBAL":
                             Settings.Global.putInt(this.mContext.getContentResolver(), str2, Integer.parseInt(str3));
@@ -109,10 +104,7 @@ public class BRUtils {
                             Settings.Global.putString(this.mContext.getContentResolver(), str2, str3);
                             break;
                         case "STRING_SYSTEM":
-                            if (!str2.equals("edge_lighting_style_type_str")) {
-                                Settings.System.putString(this.mContext.getContentResolver(), str2, str3);
-                                break;
-                            } else if (!z2 || !str3.equals("preload/basic")) {
+                            if (!str2.equals("edge_lighting_style_type_str") || !z2 || !str3.equals("preload/basic")) {
                                 Settings.System.putString(this.mContext.getContentResolver(), str2, str3);
                                 break;
                             } else {
@@ -120,7 +112,6 @@ public class BRUtils {
                                 Slog.i("BRUtils_systemui", "edgelighting style will be restored from basic to noFrame");
                                 break;
                             }
-                            break;
                     }
                     Slog.d("BRUtils_systemui", "restore Setting  Value - " + str2 + " " + str3);
                 }

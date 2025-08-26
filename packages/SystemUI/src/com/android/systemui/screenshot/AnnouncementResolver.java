@@ -2,17 +2,24 @@ package com.android.systemui.screenshot;
 
 import com.android.systemui.screenshot.data.model.ProfileType;
 import com.android.systemui.screenshot.data.repository.ProfileTypeRepository;
+import com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl;
 import com.android.systemui.screenshot.resources.Messages;
+import java.util.function.Consumer;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AnnouncementResolver {
     public final CoroutineScope mainScope;
     public final Messages messages;
     public final ProfileTypeRepository profileTypes;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -30,88 +37,120 @@ public final class AnnouncementResolver {
         }
     }
 
+    /* renamed from: com.android.systemui.screenshot.AnnouncementResolver$getScreenshotAnnouncement$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return AnnouncementResolver.this.getScreenshotAnnouncement(0, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.screenshot.AnnouncementResolver$getScreenshotAnnouncement$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Consumer<String> $announceCallback;
+        final /* synthetic */ int $userId;
+        Object L$0;
+        int label;
+        final /* synthetic */ AnnouncementResolver this$0;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(Consumer<String> consumer, AnnouncementResolver announcementResolver, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$announceCallback = consumer;
+            this.this$0 = announcementResolver;
+            this.$userId = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return new AnonymousClass2(this.$announceCallback, this.this$0, this.$userId, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            Consumer consumer;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                Consumer<String> consumer2 = this.$announceCallback;
+                AnnouncementResolver announcementResolver = this.this$0;
+                int i2 = this.$userId;
+                this.L$0 = consumer2;
+                this.label = 1;
+                Object screenshotAnnouncement = announcementResolver.getScreenshotAnnouncement(i2, this);
+                if (screenshotAnnouncement == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                obj = screenshotAnnouncement;
+                consumer = consumer2;
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                consumer = (Consumer) this.L$0;
+                ResultKt.throwOnFailure(obj);
+            }
+            consumer.accept(obj);
+            return Unit.INSTANCE;
+        }
+    }
+
     public AnnouncementResolver(Messages messages, ProfileTypeRepository profileTypeRepository, CoroutineScope coroutineScope) {
         this.messages = messages;
         this.profileTypes = profileTypeRepository;
         this.mainScope = coroutineScope;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0051  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x006a  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object getScreenshotAnnouncement(int r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof com.android.systemui.screenshot.AnnouncementResolver$getScreenshotAnnouncement$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.screenshot.AnnouncementResolver$getScreenshotAnnouncement$1 r0 = (com.android.systemui.screenshot.AnnouncementResolver$getScreenshotAnnouncement$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.screenshot.AnnouncementResolver$getScreenshotAnnouncement$1 r0 = new com.android.systemui.screenshot.AnnouncementResolver$getScreenshotAnnouncement$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r4 = r0.L$0
-            com.android.systemui.screenshot.AnnouncementResolver r4 = (com.android.systemui.screenshot.AnnouncementResolver) r4
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L45
-        L2b:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L33:
-            kotlin.ResultKt.throwOnFailure(r6)
-            r0.L$0 = r4
-            r0.label = r3
-            com.android.systemui.screenshot.data.repository.ProfileTypeRepository r6 = r4.profileTypes
-            com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl r6 = (com.android.systemui.screenshot.data.repository.ProfileTypeRepositoryImpl) r6
-            java.lang.Object r6 = r6.getProfileType(r5, r0)
-            if (r6 != r1) goto L45
-            return r1
-        L45:
-            com.android.systemui.screenshot.data.model.ProfileType r6 = (com.android.systemui.screenshot.data.model.ProfileType) r6
-            int[] r5 = com.android.systemui.screenshot.AnnouncementResolver.WhenMappings.$EnumSwitchMapping$0
-            int r6 = r6.ordinal()
-            r5 = r5[r6]
-            if (r5 == r3) goto L6a
-            r6 = 2
-            if (r5 == r6) goto L5f
-            com.android.systemui.screenshot.resources.Messages r4 = r4.messages
-            kotlin.Lazy r4 = r4.savingScreenshotAnnouncement$delegate
-            java.lang.Object r4 = r4.getValue()
-            java.lang.String r4 = (java.lang.String) r4
-            return r4
-        L5f:
-            com.android.systemui.screenshot.resources.Messages r4 = r4.messages
-            kotlin.Lazy r4 = r4.savingToWorkProfileAnnouncement$delegate
-            java.lang.Object r4 = r4.getValue()
-            java.lang.String r4 = (java.lang.String) r4
-            return r4
-        L6a:
-            com.android.systemui.screenshot.resources.Messages r4 = r4.messages
-            kotlin.Lazy r4 = r4.savingToPrivateProfileAnnouncement$delegate
-            java.lang.Object r4 = r4.getValue()
-            java.lang.String r4 = (java.lang.String) r4
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.screenshot.AnnouncementResolver.getScreenshotAnnouncement(int, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object getScreenshotAnnouncement(int i, ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i2 = anonymousClass1.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i2 - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object profileType = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = anonymousClass1.label;
+        if (i3 == 0) {
+            ResultKt.throwOnFailure(profileType);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.label = 1;
+            profileType = ((ProfileTypeRepositoryImpl) this.profileTypes).getProfileType(i, anonymousClass1);
+            if (profileType == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i3 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (AnnouncementResolver) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(profileType);
+        }
+        int i4 = WhenMappings.$EnumSwitchMapping$0[((ProfileType) profileType).ordinal()];
+        return i4 != 1 ? i4 != 2 ? (String) this.messages.savingScreenshotAnnouncement$delegate.getValue() : (String) this.messages.savingToWorkProfileAnnouncement$delegate.getValue() : (String) this.messages.savingToPrivateProfileAnnouncement$delegate.getValue();
     }
 }

@@ -111,9 +111,9 @@ public interface ISoundTriggerModule extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISoundTriggerModule.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISoundTriggerModule)) {
-                return (ISoundTriggerModule) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISoundTriggerModule.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISoundTriggerModule)) {
+                return (ISoundTriggerModule) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -131,66 +131,66 @@ public interface ISoundTriggerModule extends IInterface {
                 case 1:
                     SoundModel soundModel = (SoundModel) parcel.readTypedObject(SoundModel.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int loadModel = loadModel(soundModel);
+                    int iLoadModel = loadModel(soundModel);
                     parcel2.writeNoException();
-                    parcel2.writeInt(loadModel);
+                    parcel2.writeInt(iLoadModel);
                     return true;
                 case 2:
                     PhraseSoundModel phraseSoundModel = (PhraseSoundModel) parcel.readTypedObject(PhraseSoundModel.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int loadPhraseModel = loadPhraseModel(phraseSoundModel);
+                    int iLoadPhraseModel = loadPhraseModel(phraseSoundModel);
                     parcel2.writeNoException();
-                    parcel2.writeInt(loadPhraseModel);
+                    parcel2.writeInt(iLoadPhraseModel);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unloadModel(readInt);
+                    unloadModel(i3);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     RecognitionConfig recognitionConfig = (RecognitionConfig) parcel.readTypedObject(RecognitionConfig.CREATOR);
                     parcel.enforceNoDataAvail();
-                    IBinder startRecognition = startRecognition(readInt2, recognitionConfig);
+                    IBinder iBinderStartRecognition = startRecognition(i4, recognitionConfig);
                     parcel2.writeNoException();
-                    parcel2.writeStrongBinder(startRecognition);
+                    parcel2.writeStrongBinder(iBinderStartRecognition);
                     return true;
                 case 5:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopRecognition(readInt3);
+                    stopRecognition(i5);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    forceRecognitionEvent(readInt4);
+                    forceRecognitionEvent(i6);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setModelParameter(readInt5, readInt6, readInt7);
+                    setModelParameter(i7, i8, i9);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int modelParameter = getModelParameter(readInt8, readInt9);
+                    int modelParameter = getModelParameter(i10, i11);
                     parcel2.writeNoException();
                     parcel2.writeInt(modelParameter);
                     return true;
                 case 9:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ModelParameterRange queryModelParameterSupport = queryModelParameterSupport(readInt10, readInt11);
+                    ModelParameterRange modelParameterRangeQueryModelParameterSupport = queryModelParameterSupport(i12, i13);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryModelParameterSupport, 1);
+                    parcel2.writeTypedObject(modelParameterRangeQueryModelParameterSupport, 1);
                     return true;
                 case 10:
                     detach();
@@ -219,160 +219,160 @@ public interface ISoundTriggerModule extends IInterface {
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
             public int loadModel(SoundModel soundModel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
-                    obtain.writeTypedObject(soundModel, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(soundModel, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
             public int loadPhraseModel(PhraseSoundModel phraseSoundModel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
-                    obtain.writeTypedObject(phraseSoundModel, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(phraseSoundModel, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
             public void unloadModel(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
             public IBinder startRecognition(int i, RecognitionConfig recognitionConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(recognitionConfig, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(recognitionConfig, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
             public void stopRecognition(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
             public void forceRecognitionEvent(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
             public void setModelParameter(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
             public int getModelParameter(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
             public ModelParameterRange queryModelParameterSupport(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ModelParameterRange) obtain2.readTypedObject(ModelParameterRange.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ModelParameterRange) parcelObtain2.readTypedObject(ModelParameterRange.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
             public void detach() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISoundTriggerModule.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

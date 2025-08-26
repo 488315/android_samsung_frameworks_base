@@ -6,7 +6,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class FlowKt__DelayKt$timeoutInternal$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ Flow $this_timeoutInternal;
@@ -37,13 +36,12 @@ final class FlowKt__DelayKt$timeoutInternal$1 extends SuspendLambda implements F
         	at jadx.core.utils.ErrorsCounter.error(ErrorsCounter.java:31)
         	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
         */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00b3  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00c2  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x00ae  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x00ae  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x00b3  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x00c2  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final java.lang.Object invokeSuspend(java.lang.Object r20) {
         /*
@@ -79,7 +77,7 @@ final class FlowKt__DelayKt$timeoutInternal$1 extends SuspendLambda implements F
             kotlin.time.Duration$Companion r9 = kotlin.time.Duration.Companion
             r9.getClass()
             r9 = 0
-            int r7 = kotlin.time.Duration.m3435compareToLRDsOJo(r7, r9)
+            int r7 = kotlin.time.Duration.m3455compareToLRDsOJo(r7, r9)
             if (r7 <= 0) goto Lc5
             kotlinx.coroutines.flow.Flow r7 = r0.$this_timeoutInternal
             r8 = 2
@@ -129,7 +127,7 @@ final class FlowKt__DelayKt$timeoutInternal$1 extends SuspendLambda implements F
             r10.register(r9, r3)
             kotlinx.coroutines.flow.FlowKt__DelayKt$timeoutInternal$1$1$2 r9 = new kotlinx.coroutines.flow.FlowKt__DelayKt$timeoutInternal$1$1$2
             r9.<init>(r6, r5)
-            long r11 = kotlinx.coroutines.DelayKt.m3450toDelayMillisLRDsOJo(r6)
+            long r11 = kotlinx.coroutines.DelayKt.m3470toDelayMillisLRDsOJo(r6)
             kotlinx.coroutines.selects.OnTimeoutKt.onTimeout(r10, r11, r9)
             r0.L$0 = r8
             r0.L$1 = r2

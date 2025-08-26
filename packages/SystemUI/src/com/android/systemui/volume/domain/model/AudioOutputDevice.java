@@ -5,11 +5,9 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface AudioOutputDevice {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Bluetooth implements AudioOutputDevice {
         public final CachedBluetoothDevice cachedBluetoothDevice;
         public final Drawable icon;
@@ -43,9 +41,9 @@ public interface AudioOutputDevice {
         }
 
         public final int hashCode() {
-            int hashCode = this.name.hashCode() * 31;
+            int iHashCode = this.name.hashCode() * 31;
             Drawable drawable = this.icon;
-            return this.cachedBluetoothDevice.hashCode() + ((hashCode + (drawable == null ? 0 : drawable.hashCode())) * 31);
+            return this.cachedBluetoothDevice.hashCode() + ((iHashCode + (drawable == null ? 0 : drawable.hashCode())) * 31);
         }
 
         public final String toString() {
@@ -53,7 +51,6 @@ public interface AudioOutputDevice {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BuiltIn implements AudioOutputDevice {
         public final Drawable icon;
         public final String name;
@@ -85,9 +82,9 @@ public interface AudioOutputDevice {
         }
 
         public final int hashCode() {
-            int hashCode = this.name.hashCode() * 31;
+            int iHashCode = this.name.hashCode() * 31;
             Drawable drawable = this.icon;
-            return hashCode + (drawable == null ? 0 : drawable.hashCode());
+            return iHashCode + (drawable == null ? 0 : drawable.hashCode());
         }
 
         public final String toString() {
@@ -95,7 +92,6 @@ public interface AudioOutputDevice {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Remote implements AudioOutputDevice {
         public final Drawable icon;
         public final String name;
@@ -127,9 +123,9 @@ public interface AudioOutputDevice {
         }
 
         public final int hashCode() {
-            int hashCode = this.name.hashCode() * 31;
+            int iHashCode = this.name.hashCode() * 31;
             Drawable drawable = this.icon;
-            return hashCode + (drawable == null ? 0 : drawable.hashCode());
+            return iHashCode + (drawable == null ? 0 : drawable.hashCode());
         }
 
         public final String toString() {
@@ -137,7 +133,6 @@ public interface AudioOutputDevice {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Unavailable implements AudioOutputDevice {
         public static final Unavailable INSTANCE = new Unavailable();
 
@@ -167,7 +162,6 @@ public interface AudioOutputDevice {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Unknown implements AudioOutputDevice {
         public static final Unknown INSTANCE = new Unknown();
 
@@ -197,7 +191,6 @@ public interface AudioOutputDevice {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Wired implements AudioOutputDevice {
         public final Drawable icon;
         public final String name;
@@ -229,9 +222,9 @@ public interface AudioOutputDevice {
         }
 
         public final int hashCode() {
-            int hashCode = this.name.hashCode() * 31;
+            int iHashCode = this.name.hashCode() * 31;
             Drawable drawable = this.icon;
-            return hashCode + (drawable == null ? 0 : drawable.hashCode());
+            return iHashCode + (drawable == null ? 0 : drawable.hashCode());
         }
 
         public final String toString() {

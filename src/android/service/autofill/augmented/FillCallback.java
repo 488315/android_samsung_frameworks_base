@@ -32,8 +32,10 @@ public final class FillCallback {
         FillWindow fillWindow = fillResponse.getFillWindow();
         if (inlineSuggestions != null && !inlineSuggestions.isEmpty()) {
             this.mProxy.logEvent(4);
-        } else if (fillWindow != null) {
-            fillWindow.show();
+        } else {
+            if (fillWindow != null) {
+                fillWindow.show();
+            }
             this.mProxy.reportResult(inlineSuggestions, clientState, z);
         }
         z = false;

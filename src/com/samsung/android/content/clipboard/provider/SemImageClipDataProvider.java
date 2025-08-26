@@ -51,12 +51,12 @@ public class SemImageClipDataProvider extends ContentProvider {
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
-        public void onCreate(SQLiteDatabase sQLiteDatabase) {
+        public void onCreate(SQLiteDatabase sQLiteDatabase) throws SQLException {
             sQLiteDatabase.execSQL(SemImageClipDataProvider.CREATE_TABLE);
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
-        public void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
+        public void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) throws SQLException {
             Log.w(DBHelper.class.getName(), "Upgrading database from version " + i + " to " + i2 + ". Old data will be destroyed");
             sQLiteDatabase.execSQL("DROP TABLE IF EXISTS ClipboardImageTable");
             onCreate(sQLiteDatabase);
@@ -76,19 +76,19 @@ public class SemImageClipDataProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] strArr, String str, String[] strArr2, String str2) {
         SQLiteQueryBuilder sQLiteQueryBuilder = new SQLiteQueryBuilder();
         sQLiteQueryBuilder.setTables(TABLE_NAME);
-        int match = uriMatcher.match(uri);
-        if (match == 1) {
+        int iMatch = uriMatcher.match(uri);
+        if (iMatch == 1) {
             sQLiteQueryBuilder.setProjectionMap(ImageMap);
-        } else if (match == 2) {
+        } else if (iMatch == 2) {
             sQLiteQueryBuilder.appendWhere("id=" + uri.getLastPathSegment());
         } else {
             throw new IllegalArgumentException("Unknown URI " + uri);
         }
-        Cursor query = sQLiteQueryBuilder.query(this.database, strArr, str, strArr2, null, null, "_data");
-        if (query != null) {
-            query.setNotificationUri(getContext().getContentResolver(), uri);
+        Cursor cursorQuery = sQLiteQueryBuilder.query(this.database, strArr, str, strArr2, null, null, "_data");
+        if (cursorQuery != null) {
+            cursorQuery.setNotificationUri(getContext().getContentResolver(), uri);
         }
-        return query;
+        return cursorQuery;
     }
 
     @Override // android.content.ContentProvider
@@ -97,27 +97,27 @@ public class SemImageClipDataProvider extends ContentProvider {
             Log.e(TAG, "SecurityException when insert in SemClipboardProvider. blocked package : " + getContext().getPackageManager().getNameForUid(Binder.getCallingUid()));
             return null;
         }
-        long replace = this.database.replace(TABLE_NAME, "", contentValues);
-        if (replace > 0) {
-            Uri withAppendedId = ContentUris.withAppendedId(CONTENT_URI, replace);
-            getContext().getContentResolver().notifyChange(withAppendedId, null);
-            return withAppendedId;
+        long jReplace = this.database.replace(TABLE_NAME, "", contentValues);
+        if (jReplace > 0) {
+            Uri uriWithAppendedId = ContentUris.withAppendedId(CONTENT_URI, jReplace);
+            getContext().getContentResolver().notifyChange(uriWithAppendedId, null);
+            return uriWithAppendedId;
         }
         throw new SQLException("Fail to add a new record into " + uri);
     }
 
     @Override // android.content.ContentProvider
     public int update(Uri uri, ContentValues contentValues, String str, String[] strArr) {
-        int update;
+        int iUpdate;
         String str2;
         if (Binder.getCallingUid() != 1000) {
             Log.e(TAG, "SecurityException when update in SemClipboardProvider. blocked package : " + getContext().getPackageManager().getNameForUid(Binder.getCallingUid()));
             return 0;
         }
-        int match = uriMatcher.match(uri);
-        if (match == 1) {
-            update = this.database.update(TABLE_NAME, contentValues, str, strArr);
-        } else if (match == 2) {
+        int iMatch = uriMatcher.match(uri);
+        if (iMatch == 1) {
+            iUpdate = this.database.update(TABLE_NAME, contentValues, str, strArr);
+        } else if (iMatch == 2) {
             SQLiteDatabase sQLiteDatabase = this.database;
             StringBuilder sb = new StringBuilder("id = ");
             sb.append(uri.getLastPathSegment());
@@ -127,26 +127,26 @@ public class SemImageClipDataProvider extends ContentProvider {
                 str2 = " AND (" + str + ')';
             }
             sb.append(str2);
-            update = sQLiteDatabase.update(TABLE_NAME, contentValues, sb.toString(), strArr);
+            iUpdate = sQLiteDatabase.update(TABLE_NAME, contentValues, sb.toString(), strArr);
         } else {
             throw new IllegalArgumentException("Unsupported URI " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
-        return update;
+        return iUpdate;
     }
 
     @Override // android.content.ContentProvider
     public int delete(Uri uri, String str, String[] strArr) {
-        int delete;
+        int iDelete;
         String str2;
         if (Binder.getCallingUid() != 1000) {
             Log.e(TAG, "SecurityException when delete in SemClipboardProvider. blocked package : " + getContext().getPackageManager().getNameForUid(Binder.getCallingUid()));
             return 0;
         }
-        int match = uriMatcher.match(uri);
-        if (match == 1) {
-            delete = this.database.delete(TABLE_NAME, str, strArr);
-        } else if (match == 2) {
+        int iMatch = uriMatcher.match(uri);
+        if (iMatch == 1) {
+            iDelete = this.database.delete(TABLE_NAME, str, strArr);
+        } else if (iMatch == 2) {
             String lastPathSegment = uri.getLastPathSegment();
             SQLiteDatabase sQLiteDatabase = this.database;
             StringBuilder sb = new StringBuilder("id = ");
@@ -157,12 +157,12 @@ public class SemImageClipDataProvider extends ContentProvider {
                 str2 = " AND (" + str + ')';
             }
             sb.append(str2);
-            delete = sQLiteDatabase.delete(TABLE_NAME, sb.toString(), strArr);
+            iDelete = sQLiteDatabase.delete(TABLE_NAME, sb.toString(), strArr);
         } else {
             throw new IllegalArgumentException("Unsupported URI " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
-        return delete;
+        return iDelete;
     }
 
     @Override // android.content.ContentProvider, android.content.ContentInterface

@@ -9,16 +9,71 @@ import android.view.SurfaceControl;
 import android.view.SurfaceControlViewHost;
 import android.view.View;
 import android.view.WindowManager;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DefaultWindowDecorViewHost implements WindowDecorViewHost {
     public StandaloneCoroutine currentUpdateJob;
     public final CoroutineScope mainScope;
     public final SurfaceControlViewHostAdapter viewHostAdapter;
+
+    /* renamed from: com.android.wm.shell.windowdecor.common.viewhost.DefaultWindowDecorViewHost$updateViewAsync$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ WindowManager.LayoutParams $attrs;
+        final /* synthetic */ Configuration $configuration;
+        final /* synthetic */ Region $touchableRegion;
+        final /* synthetic */ View $view;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(View view, WindowManager.LayoutParams layoutParams, Configuration configuration, Region region, Continuation continuation) {
+            super(2, continuation);
+            this.$view = view;
+            this.$attrs = layoutParams;
+            this.$configuration = configuration;
+            this.$touchableRegion = region;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return DefaultWindowDecorViewHost.this.new AnonymousClass1(this.$view, this.$attrs, this.$configuration, this.$touchableRegion, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            DefaultWindowDecorViewHost defaultWindowDecorViewHost = DefaultWindowDecorViewHost.this;
+            View view = this.$view;
+            WindowManager.LayoutParams layoutParams = this.$attrs;
+            Configuration configuration = this.$configuration;
+            Region region = this.$touchableRegion;
+            defaultWindowDecorViewHost.getClass();
+            Trace.beginSection("DefaultWindowDecorViewHost#updateViewHost");
+            SurfaceControlViewHostAdapter surfaceControlViewHostAdapter = defaultWindowDecorViewHost.viewHostAdapter;
+            surfaceControlViewHostAdapter.prepareViewHost(configuration, region);
+            surfaceControlViewHostAdapter.updateView(view, layoutParams);
+            Trace.endSection();
+            return Unit.INSTANCE;
+        }
+    }
 
     public DefaultWindowDecorViewHost(Context context, CoroutineScope coroutineScope, Display display, SurfaceControlViewHostAdapter surfaceControlViewHostAdapter) {
         this.mainScope = coroutineScope;
@@ -72,36 +127,21 @@ public final class DefaultWindowDecorViewHost implements WindowDecorViewHost {
             standaloneCoroutine.cancel(null);
         }
         this.currentUpdateJob = null;
-        this.currentUpdateJob = BuildersKt.launch$default(this.mainScope, null, null, new DefaultWindowDecorViewHost$updateViewAsync$1(this, view, layoutParams, configuration, region, null), 3);
+        this.currentUpdateJob = BuildersKt.launch$default(this.mainScope, null, null, new AnonymousClass1(view, layoutParams, configuration, region, null), 3);
         Trace.endSection();
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public /* synthetic */ DefaultWindowDecorViewHost(android.content.Context r7, kotlinx.coroutines.CoroutineScope r8, android.view.Display r9, com.android.wm.shell.windowdecor.common.viewhost.SurfaceControlViewHostAdapter r10, int r11, kotlin.jvm.internal.DefaultConstructorMarker r12) {
-        /*
-            r6 = this;
-            r11 = r11 & 8
-            if (r11 == 0) goto L10
-            com.android.wm.shell.windowdecor.common.viewhost.SurfaceControlViewHostAdapter r0 = new com.android.wm.shell.windowdecor.common.viewhost.SurfaceControlViewHostAdapter
-            r4 = 4
-            r5 = 0
-            r3 = 0
-            r1 = r7
-            r2 = r9
-            r0.<init>(r1, r2, r3, r4, r5)
-            r10 = r0
-            goto L12
-        L10:
-            r1 = r7
-            r2 = r9
-        L12:
-            r6.<init>(r1, r8, r2, r10)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.windowdecor.common.viewhost.DefaultWindowDecorViewHost.<init>(android.content.Context, kotlinx.coroutines.CoroutineScope, android.view.Display, com.android.wm.shell.windowdecor.common.viewhost.SurfaceControlViewHostAdapter, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public /* synthetic */ DefaultWindowDecorViewHost(Context context, CoroutineScope coroutineScope, Display display, SurfaceControlViewHostAdapter surfaceControlViewHostAdapter, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        Context context2;
+        Display display2;
+        if ((i & 8) != 0) {
+            context2 = context;
+            display2 = display;
+            surfaceControlViewHostAdapter = new SurfaceControlViewHostAdapter(context2, display2, null, 4, null);
+        } else {
+            context2 = context;
+            display2 = display;
+        }
+        this(context2, coroutineScope, display2, surfaceControlViewHostAdapter);
     }
 }

@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class IoScheduler extends Scheduler {
     public static final RxThreadFactory EVICTOR_THREAD_FACTORY;
@@ -26,7 +25,6 @@ public final class IoScheduler extends Scheduler {
     public static final TimeUnit KEEP_ALIVE_UNIT = TimeUnit.SECONDS;
     public static final long KEEP_ALIVE_TIME = Long.getLong("rx2.io-keep-alive-time", 60).longValue();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CachedWorkerPool implements Runnable {
         public final CompositeDisposable allWorkers;
         public final ScheduledExecutorService evictorService;
@@ -37,24 +35,24 @@ public final class IoScheduler extends Scheduler {
 
         public CachedWorkerPool(long j, TimeUnit timeUnit, ThreadFactory threadFactory) {
             CachedWorkerPool cachedWorkerPool;
-            ScheduledExecutorService scheduledExecutorService;
-            ScheduledFuture<?> scheduledFuture;
+            ScheduledExecutorService scheduledExecutorServiceNewScheduledThreadPool;
+            ScheduledFuture<?> scheduledFutureScheduleWithFixedDelay;
             long nanos = timeUnit != null ? timeUnit.toNanos(j) : 0L;
             this.keepAliveTime = nanos;
             this.expiringWorkerQueue = new ConcurrentLinkedQueue();
             this.allWorkers = new CompositeDisposable();
             this.threadFactory = threadFactory;
             if (timeUnit != null) {
-                scheduledExecutorService = Executors.newScheduledThreadPool(1, IoScheduler.EVICTOR_THREAD_FACTORY);
+                scheduledExecutorServiceNewScheduledThreadPool = Executors.newScheduledThreadPool(1, IoScheduler.EVICTOR_THREAD_FACTORY);
                 cachedWorkerPool = this;
-                scheduledFuture = scheduledExecutorService.scheduleWithFixedDelay(cachedWorkerPool, nanos, nanos, TimeUnit.NANOSECONDS);
+                scheduledFutureScheduleWithFixedDelay = scheduledExecutorServiceNewScheduledThreadPool.scheduleWithFixedDelay(cachedWorkerPool, nanos, nanos, TimeUnit.NANOSECONDS);
             } else {
                 cachedWorkerPool = this;
-                scheduledExecutorService = null;
-                scheduledFuture = null;
+                scheduledExecutorServiceNewScheduledThreadPool = null;
+                scheduledFutureScheduleWithFixedDelay = null;
             }
-            cachedWorkerPool.evictorService = scheduledExecutorService;
-            cachedWorkerPool.evictorTask = scheduledFuture;
+            cachedWorkerPool.evictorService = scheduledExecutorServiceNewScheduledThreadPool;
+            cachedWorkerPool.evictorTask = scheduledFutureScheduleWithFixedDelay;
         }
 
         @Override // java.lang.Runnable
@@ -62,11 +60,11 @@ public final class IoScheduler extends Scheduler {
             if (this.expiringWorkerQueue.isEmpty()) {
                 return;
             }
-            long nanoTime = System.nanoTime();
+            long jNanoTime = System.nanoTime();
             Iterator it = this.expiringWorkerQueue.iterator();
             while (it.hasNext()) {
                 ThreadWorker threadWorker = (ThreadWorker) it.next();
-                if (threadWorker.expirationTime > nanoTime) {
+                if (threadWorker.expirationTime > jNanoTime) {
                     return;
                 }
                 if (this.expiringWorkerQueue.remove(threadWorker)) {
@@ -76,7 +74,6 @@ public final class IoScheduler extends Scheduler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EventLoopWorker extends Scheduler.Worker {
         public final CachedWorkerPool pool;
         public final ThreadWorker threadWorker;
@@ -113,9 +110,9 @@ public final class IoScheduler extends Scheduler {
                 this.tasks.dispose();
                 CachedWorkerPool cachedWorkerPool = this.pool;
                 cachedWorkerPool.getClass();
-                long nanoTime = System.nanoTime() + cachedWorkerPool.keepAliveTime;
+                long jNanoTime = System.nanoTime() + cachedWorkerPool.keepAliveTime;
                 ThreadWorker threadWorker = this.threadWorker;
-                threadWorker.expirationTime = nanoTime;
+                threadWorker.expirationTime = jNanoTime;
                 cachedWorkerPool.expiringWorkerQueue.offer(threadWorker);
             }
         }
@@ -126,7 +123,6 @@ public final class IoScheduler extends Scheduler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ThreadWorker extends NewThreadWorker {
         public long expirationTime;
 
@@ -140,10 +136,10 @@ public final class IoScheduler extends Scheduler {
         ThreadWorker threadWorker = new ThreadWorker(new RxThreadFactory("RxCachedThreadSchedulerShutdown"));
         SHUTDOWN_THREAD_WORKER = threadWorker;
         threadWorker.dispose();
-        int max = Math.max(1, Math.min(10, Integer.getInteger("rx2.io-priority", 5).intValue()));
-        RxThreadFactory rxThreadFactory = new RxThreadFactory("RxCachedThreadScheduler", max);
+        int iMax = Math.max(1, Math.min(10, Integer.getInteger("rx2.io-priority", 5).intValue()));
+        RxThreadFactory rxThreadFactory = new RxThreadFactory("RxCachedThreadScheduler", iMax);
         WORKER_THREAD_FACTORY = rxThreadFactory;
-        EVICTOR_THREAD_FACTORY = new RxThreadFactory("RxCachedWorkerPoolEvictor", max);
+        EVICTOR_THREAD_FACTORY = new RxThreadFactory("RxCachedWorkerPoolEvictor", iMax);
         CachedWorkerPool cachedWorkerPool = new CachedWorkerPool(0L, null, rxThreadFactory);
         NONE = cachedWorkerPool;
         cachedWorkerPool.allWorkers.dispose();

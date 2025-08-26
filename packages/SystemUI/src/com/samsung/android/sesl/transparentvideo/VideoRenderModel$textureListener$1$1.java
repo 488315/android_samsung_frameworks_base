@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.Surface;
 import com.samsung.android.sesl.transparentvideo.VideoRenderModel;
 import com.samsung.android.sesl.transparentvideo.mediaplayer.BasicMediaPlayer;
+import com.samsung.android.sesl.transparentvideo.mediaplayer.BasicMediaPlayer$$ExternalSyntheticLambda5;
+import com.samsung.android.sesl.transparentvideo.mediaplayer.IMediaPlayer$ErrorType;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -13,7 +15,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class VideoRenderModel$textureListener$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SurfaceTexture $surfaceTexture;
@@ -62,8 +63,9 @@ final class VideoRenderModel$textureListener$1$1 extends SuspendLambda implement
         VideoRenderModel videoRenderModel2 = this.this$0;
         BasicMediaPlayer basicMediaPlayer = videoRenderModel2.mediaPlayer;
         if (basicMediaPlayer != null && (surface = videoRenderModel2.mediaPlayerSurface) != null) {
-            basicMediaPlayer.mediaPlayer.setSurface(surface);
-            basicMediaPlayer.hasSurface = true;
+            if (basicMediaPlayer.executeSafely("setSurface", IMediaPlayer$ErrorType.INVALID_STATE, new BasicMediaPlayer$$ExternalSyntheticLambda5(basicMediaPlayer, surface))) {
+                basicMediaPlayer.hasSurface = true;
+            }
         }
         Log.i("VideoRenderModel", "SurfaceTexture set to current MediaPlayer.");
         VideoRenderModel videoRenderModel3 = this.this$0;

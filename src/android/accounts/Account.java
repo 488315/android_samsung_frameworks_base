@@ -78,23 +78,23 @@ public class Account implements Parcelable {
     }
 
     public Account(Parcel parcel) {
-        String readString = parcel.readString();
-        this.name = readString;
-        String readString2 = parcel.readString();
-        this.type = readString2;
-        if (TextUtils.isEmpty(readString)) {
-            throw new BadParcelableException("the name must not be empty: " + readString);
+        String string = parcel.readString();
+        this.name = string;
+        String string2 = parcel.readString();
+        this.type = string2;
+        if (TextUtils.isEmpty(string)) {
+            throw new BadParcelableException("the name must not be empty: " + string);
         }
-        if (TextUtils.isEmpty(readString2)) {
-            throw new BadParcelableException("the type must not be empty: " + readString2);
+        if (TextUtils.isEmpty(string2)) {
+            throw new BadParcelableException("the type must not be empty: " + string2);
         }
-        String readString3 = parcel.readString();
-        this.accessId = readString3;
-        if (readString3 != null) {
+        String string3 = parcel.readString();
+        this.accessId = string3;
+        if (string3 != null) {
             Set<Account> set = sAccessedAccounts;
             synchronized (set) {
                 if (set.add(this)) {
-                    onAccountAccessed(readString3);
+                    onAccountAccessed(string3);
                 }
             }
         }
@@ -134,11 +134,11 @@ public class Account implements Parcelable {
         StringBuilder sb = new StringBuilder(64);
         int length = str.length();
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            if (Character.isLetterOrDigit(charAt)) {
+            char cCharAt = str.charAt(i);
+            if (Character.isLetterOrDigit(cCharAt)) {
                 sb.append(c);
             } else {
-                sb.append(charAt);
+                sb.append(cCharAt);
             }
         }
         return sb.toString();

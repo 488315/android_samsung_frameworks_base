@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class GestureRecognizerAdapter$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -45,9 +44,9 @@ public final class GestureRecognizerAdapter$special$$inlined$flatMapLatest$1 ext
             GestureRecognizerAdapter gestureRecognizerAdapter = this.this$0;
             gestureRecognizerAdapter.gestureRecognizer = gestureRecognizer;
             gestureRecognizerAdapter.getClass();
-            Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new GestureRecognizerAdapter$gestureStateAsFlow$1(gestureRecognizer, null));
+            Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new GestureRecognizerAdapter$gestureStateAsFlow$1(gestureRecognizer, null));
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, conflatedCallbackFlow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowConflatedCallbackFlow, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

@@ -10,14 +10,12 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements Set<E> {
     public static final /* synthetic */ int $r8$clinit = 0;
     private static final long serialVersionUID = 912559;
     public transient ImmutableList asList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class SerializedForm implements Serializable {
         private static final long serialVersionUID = 0;
         final Object[] elements;
@@ -35,18 +33,18 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
     }
 
     public static int chooseTableSize(int i) {
-        int max = Math.max(i, 2);
-        if (max >= 751619276) {
-            if (max < 1073741824) {
+        int iMax = Math.max(i, 2);
+        if (iMax >= 751619276) {
+            if (iMax < 1073741824) {
                 return 1073741824;
             }
             throw new IllegalArgumentException("collection too large");
         }
-        int highestOneBit = Integer.highestOneBit(max - 1) << 1;
-        while (highestOneBit * 0.7d < max) {
-            highestOneBit <<= 1;
+        int iHighestOneBit = Integer.highestOneBit(iMax - 1) << 1;
+        while (iHighestOneBit * 0.7d < iMax) {
+            iHighestOneBit <<= 1;
         }
-        return highestOneBit;
+        return iHighestOneBit;
     }
 
     public static ImmutableSet construct(int i, Object... objArr) {
@@ -58,9 +56,9 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
             Objects.requireNonNull(obj);
             return new SingletonImmutableSet(obj);
         }
-        int chooseTableSize = chooseTableSize(i);
-        Object[] objArr2 = new Object[chooseTableSize];
-        int i2 = chooseTableSize - 1;
+        int iChooseTableSize = chooseTableSize(i);
+        Object[] objArr2 = new Object[iChooseTableSize];
+        int i2 = iChooseTableSize - 1;
         int i3 = 0;
         int i4 = 0;
         for (int i5 = 0; i5 < i; i5++) {
@@ -68,22 +66,22 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
             if (obj2 == null) {
                 throw new NullPointerException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i5, "at index "));
             }
-            int hashCode = obj2.hashCode();
-            int smear = Hashing.smear(hashCode);
+            int iHashCode = obj2.hashCode();
+            int iSmear = Hashing.smear(iHashCode);
             while (true) {
-                int i6 = smear & i2;
+                int i6 = iSmear & i2;
                 Object obj3 = objArr2[i6];
                 if (obj3 == null) {
                     objArr[i4] = obj2;
                     objArr2[i6] = obj2;
-                    i3 += hashCode;
+                    i3 += iHashCode;
                     i4++;
                     break;
                 }
                 if (obj3.equals(obj2)) {
                     break;
                 }
-                smear++;
+                iSmear++;
             }
         }
         Arrays.fill(objArr, i4, i, (Object) null);
@@ -92,7 +90,7 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
             Objects.requireNonNull(obj4);
             return new SingletonImmutableSet(obj4);
         }
-        if (chooseTableSize(i4) < chooseTableSize / 2) {
+        if (chooseTableSize(i4) < iChooseTableSize / 2) {
             return construct(i4, objArr);
         }
         int length = objArr.length;
@@ -112,9 +110,9 @@ public abstract class ImmutableSet<E> extends ImmutableCollection<E> implements 
         if (immutableList != null) {
             return immutableList;
         }
-        ImmutableList createAsList = createAsList();
-        this.asList = createAsList;
-        return createAsList;
+        ImmutableList immutableListCreateAsList = createAsList();
+        this.asList = immutableListCreateAsList;
+        return immutableListCreateAsList;
     }
 
     public ImmutableList createAsList() {

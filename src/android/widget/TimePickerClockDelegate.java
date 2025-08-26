@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.icu.text.DecimalFormatSymbols;
 import android.os.Parcelable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -90,10 +91,10 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         return -1;
     }
 
-    public TimePickerClockDelegate(TimePicker timePicker, Context context, AttributeSet attributeSet, int i, int i2) {
-        super(timePicker, context);
+    public TimePickerClockDelegate(TimePicker timePicker, Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         RadialTimePickerView.OnValueSelectedListener onValueSelectedListener;
         ColorStateList colorStateList;
+        super(timePicker, context);
         this.mRadialPickerModeEnabled = true;
         this.mIsEnabled = true;
         this.mIsAmPmAtLeft = false;
@@ -104,18 +105,18 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
                 if (i3 == 0) {
                     boolean z2 = TimePickerClockDelegate.this.getHour() != i4;
                     if (TimePickerClockDelegate.this.mAllowAutoAdvance && z) {
-                        r1 = true;
+                        z = true;
                     }
-                    TimePickerClockDelegate.this.setHourInternal(i4, 1, !r1, true);
-                    if (r1) {
+                    TimePickerClockDelegate.this.setHourInternal(i4, 1, !z, true);
+                    if (z) {
                         TimePickerClockDelegate.this.setCurrentItemShowing(1, true);
                     }
-                    r1 = z2;
+                    z = z2;
                 } else if (i3 == 1) {
-                    r1 = TimePickerClockDelegate.this.getMinute() != i4;
+                    z = TimePickerClockDelegate.this.getMinute() != i4;
                     TimePickerClockDelegate.this.setMinuteInternal(i4, 1, true);
                 }
-                if (TimePickerClockDelegate.this.mOnTimeChangedListener == null || !r1) {
+                if (TimePickerClockDelegate.this.mOnTimeChangedListener == null || !z) {
                     return;
                 }
                 TimePickerClockDelegate.this.mOnTimeChangedListener.onTimeChanged(TimePickerClockDelegate.this.mDelegator, TimePickerClockDelegate.this.getHour(), TimePickerClockDelegate.this.getMinute());
@@ -140,7 +141,7 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         this.mOnValueTypedListener = onValueTypedListener;
         NumericTextView.OnValueChangedListener onValueChangedListener = new NumericTextView.OnValueChangedListener() { // from class: android.widget.TimePickerClockDelegate.4
             @Override // com.android.internal.widget.NumericTextView.OnValueChangedListener
-            public void onValueChanged(NumericTextView numericTextView, int i3, boolean z, boolean z2) {
+            public void onValueChanged(NumericTextView numericTextView, int i3, boolean z, boolean z2) throws Resources.NotFoundException {
                 Runnable runnable;
                 NumericTextView numericTextView2 = null;
                 if (numericTextView == TimePickerClockDelegate.this.mHourView) {
@@ -196,7 +197,7 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
                         case R.id.minutes /* 16909375 */:
                             TimePickerClockDelegate.this.setCurrentItemShowing(1, true);
                             break;
-                        case R.id.pm_label /* 16909534 */:
+                        case R.id.pm_label /* 16909535 */:
                             TimePickerClockDelegate.this.setAmOrPm(1);
                             break;
                         default:
@@ -220,7 +221,7 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
                     case R.id.minutes /* 16909375 */:
                         TimePickerClockDelegate.this.setCurrentItemShowing(1, true);
                         break;
-                    case R.id.pm_label /* 16909534 */:
+                    case R.id.pm_label /* 16909535 */:
                         TimePickerClockDelegate.this.setAmOrPm(1);
                         break;
                     default:
@@ -230,26 +231,26 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
             }
         };
         this.mClickListener = onClickListener;
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(attributeSet, R.styleable.TimePicker, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(attributeSet, R.styleable.TimePicker, i, i2);
         LayoutInflater layoutInflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         Resources resources = this.mContext.getResources();
         this.mSelectHours = resources.getString(R.string.select_hours);
         this.mSelectMinutes = resources.getString(R.string.select_minutes);
-        View inflate = layoutInflater.inflate(obtainStyledAttributes.getResourceId(12, R.layout.time_picker_material), timePicker);
-        inflate.setSaveFromParentEnabled(false);
-        View findViewById = inflate.findViewById(R.id.time_header);
-        this.mRadialTimePickerHeader = findViewById;
-        findViewById.setOnTouchListener(new NearestTouchDelegate());
-        NumericTextView numericTextView = (NumericTextView) inflate.findViewById(R.id.hours);
+        View viewInflate = layoutInflater.inflate(typedArrayObtainStyledAttributes.getResourceId(12, R.layout.time_picker_material), timePicker);
+        viewInflate.setSaveFromParentEnabled(false);
+        View viewFindViewById = viewInflate.findViewById(R.id.time_header);
+        this.mRadialTimePickerHeader = viewFindViewById;
+        viewFindViewById.setOnTouchListener(new NearestTouchDelegate());
+        NumericTextView numericTextView = (NumericTextView) viewInflate.findViewById(R.id.hours);
         this.mHourView = numericTextView;
         numericTextView.setOnClickListener(onClickListener);
         numericTextView.setOnFocusChangeListener(onFocusChangeListener);
         numericTextView.setOnDigitEnteredListener(onValueChangedListener);
         numericTextView.setAccessibilityDelegate(new ClickActionDelegate(context, R.string.select_hours));
         numericTextView.setAccessibilityLiveRegion(1);
-        TextView textView = (TextView) inflate.findViewById(R.id.separator);
+        TextView textView = (TextView) viewInflate.findViewById(R.id.separator);
         this.mSeparatorView = textView;
-        NumericTextView numericTextView2 = (NumericTextView) inflate.findViewById(R.id.minutes);
+        NumericTextView numericTextView2 = (NumericTextView) viewInflate.findViewById(R.id.minutes);
         this.mMinuteView = numericTextView2;
         numericTextView2.setOnClickListener(onClickListener);
         numericTextView2.setOnFocusChangeListener(onFocusChangeListener);
@@ -257,34 +258,34 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         numericTextView2.setAccessibilityDelegate(new ClickActionDelegate(context, R.string.select_minutes));
         numericTextView2.setAccessibilityLiveRegion(1);
         numericTextView2.setRange(0, 59);
-        View findViewById2 = inflate.findViewById(R.id.ampm_layout);
-        this.mAmPmLayout = findViewById2;
-        findViewById2.setOnTouchListener(new NearestTouchDelegate());
+        View viewFindViewById2 = viewInflate.findViewById(R.id.ampm_layout);
+        this.mAmPmLayout = viewFindViewById2;
+        viewFindViewById2.setOnTouchListener(new NearestTouchDelegate());
         String[] amPmStrings = TimePicker.getAmPmStrings(context);
-        RadioButton radioButton = (RadioButton) findViewById2.findViewById(R.id.am_label);
+        RadioButton radioButton = (RadioButton) viewFindViewById2.findViewById(R.id.am_label);
         this.mAmLabel = radioButton;
         radioButton.lambda$setTextAsync$0(obtainVerbatim(amPmStrings[0]));
         radioButton.setOnClickListener(onClickListener);
         ensureMinimumTextWidth(radioButton);
-        RadioButton radioButton2 = (RadioButton) findViewById2.findViewById(R.id.pm_label);
+        RadioButton radioButton2 = (RadioButton) viewFindViewById2.findViewById(R.id.pm_label);
         this.mPmLabel = radioButton2;
         radioButton2.lambda$setTextAsync$0(obtainVerbatim(amPmStrings[1]));
         radioButton2.setOnClickListener(onClickListener);
         ensureMinimumTextWidth(radioButton2);
-        int resourceId = obtainStyledAttributes.getResourceId(1, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(1, 0);
         if (resourceId != 0) {
             onValueSelectedListener = onValueSelectedListener2;
-            TypedArray obtainStyledAttributes2 = this.mContext.obtainStyledAttributes(null, ATTRS_TEXT_COLOR, 0, resourceId);
-            ColorStateList applyLegacyColorFixes = applyLegacyColorFixes(obtainStyledAttributes2.getColorStateList(0));
-            obtainStyledAttributes2.recycle();
-            colorStateList = applyLegacyColorFixes;
+            TypedArray typedArrayObtainStyledAttributes2 = this.mContext.obtainStyledAttributes(null, ATTRS_TEXT_COLOR, 0, resourceId);
+            ColorStateList colorStateListApplyLegacyColorFixes = applyLegacyColorFixes(typedArrayObtainStyledAttributes2.getColorStateList(0));
+            typedArrayObtainStyledAttributes2.recycle();
+            colorStateList = colorStateListApplyLegacyColorFixes;
         } else {
             onValueSelectedListener = onValueSelectedListener2;
             colorStateList = null;
         }
-        colorStateList = colorStateList == null ? obtainStyledAttributes.getColorStateList(11) : colorStateList;
-        View findViewById3 = inflate.findViewById(R.id.input_header);
-        this.mTextInputPickerHeader = findViewById3;
+        colorStateList = colorStateList == null ? typedArrayObtainStyledAttributes.getColorStateList(11) : colorStateList;
+        View viewFindViewById3 = viewInflate.findViewById(R.id.input_header);
+        this.mTextInputPickerHeader = viewFindViewById3;
         if (colorStateList != null) {
             numericTextView.setTextColor(colorStateList);
             textView.setTextColor(colorStateList);
@@ -292,19 +293,19 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
             radioButton.setTextColor(colorStateList);
             radioButton2.setTextColor(colorStateList);
         }
-        if (obtainStyledAttributes.hasValueOrEmpty(0)) {
-            findViewById.setBackground(obtainStyledAttributes.getDrawable(0));
-            findViewById3.setBackground(obtainStyledAttributes.getDrawable(0));
+        if (typedArrayObtainStyledAttributes.hasValueOrEmpty(0)) {
+            viewFindViewById.setBackground(typedArrayObtainStyledAttributes.getDrawable(0));
+            viewFindViewById3.setBackground(typedArrayObtainStyledAttributes.getDrawable(0));
         }
-        obtainStyledAttributes.recycle();
-        RadialTimePickerView radialTimePickerView = (RadialTimePickerView) inflate.findViewById(R.id.radial_picker);
+        typedArrayObtainStyledAttributes.recycle();
+        RadialTimePickerView radialTimePickerView = (RadialTimePickerView) viewInflate.findViewById(R.id.radial_picker);
         this.mRadialTimePickerView = radialTimePickerView;
         radialTimePickerView.applyAttributes(attributeSet, i, i2);
         radialTimePickerView.setOnValueSelectedListener(onValueSelectedListener);
-        TextInputTimePickerView textInputTimePickerView = (TextInputTimePickerView) inflate.findViewById(R.id.input_mode);
+        TextInputTimePickerView textInputTimePickerView = (TextInputTimePickerView) viewInflate.findViewById(R.id.input_mode);
         this.mTextInputPickerView = textInputTimePickerView;
         textInputTimePickerView.setListener(onValueTypedListener);
-        ImageButton imageButton = (ImageButton) inflate.findViewById(R.id.toggle_mode);
+        ImageButton imageButton = (ImageButton) viewInflate.findViewById(R.id.toggle_mode);
         this.mRadialTimePickerModeButton = imageButton;
         imageButton.setOnClickListener(new View.OnClickListener() { // from class: android.widget.TimePickerClockDelegate.1
             @Override // android.view.View.OnClickListener
@@ -360,102 +361,53 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0050  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0071 A[LOOP:1: B:29:0x006d->B:31:0x0071, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0048  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0050  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x0071 A[LOOP:1: B:36:0x006d->B:38:0x0071, LOOP_END] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     private void updateHourFormat() {
-        /*
-            r9 = this;
-            java.util.Locale r0 = r9.mLocale
-            boolean r1 = r9.mIs24Hour
-            if (r1 == 0) goto L9
-            java.lang.String r1 = "Hm"
-            goto Lb
-        L9:
-            java.lang.String r1 = "hm"
-        Lb:
-            java.lang.String r0 = android.text.format.DateFormat.getBestDateTimePattern(r0, r1)
-            int r1 = r0.length()
-            r2 = 0
-            r3 = r2
-        L15:
-            r4 = 72
-            r5 = 75
-            r6 = 1
-            if (r3 >= r1) goto L3d
-            char r7 = r0.charAt(r3)
-            if (r7 == r4) goto L30
-            r8 = 104(0x68, float:1.46E-43)
-            if (r7 == r8) goto L30
-            if (r7 == r5) goto L30
-            r8 = 107(0x6b, float:1.5E-43)
-            if (r7 != r8) goto L2d
-            goto L30
-        L2d:
-            int r3 = r3 + 1
-            goto L15
-        L30:
-            int r3 = r3 + r6
-            if (r3 >= r1) goto L3b
-            char r0 = r0.charAt(r3)
-            if (r7 != r0) goto L3b
-            r0 = r6
-            goto L3f
-        L3b:
-            r0 = r2
-            goto L3f
-        L3d:
-            r0 = r2
-            r7 = r0
-        L3f:
-            r9.mHourFormatShowLeadingZero = r0
-            if (r7 == r5) goto L48
-            if (r7 != r4) goto L46
-            goto L48
-        L46:
-            r0 = r2
-            goto L49
-        L48:
-            r0 = r6
-        L49:
-            r9.mHourFormatStartsAtZero = r0
-            r0 = r0 ^ r6
-            boolean r1 = r9.mIs24Hour
-            if (r1 == 0) goto L53
-            r1 = 23
-            goto L55
-        L53:
-            r1 = 11
-        L55:
-            int r1 = r1 + r0
-            com.android.internal.widget.NumericTextView r3 = r9.mHourView
-            r3.setRange(r0, r1)
-            com.android.internal.widget.NumericTextView r0 = r9.mHourView
-            boolean r1 = r9.mHourFormatShowLeadingZero
-            r0.setShowLeadingZeroes(r1)
-            java.util.Locale r0 = r9.mLocale
-            android.icu.text.DecimalFormatSymbols r0 = android.icu.text.DecimalFormatSymbols.getInstance(r0)
-            java.lang.String[] r0 = r0.getDigitStrings()
-            r1 = r2
-        L6d:
-            r3 = 10
-            if (r2 >= r3) goto L7e
-            r3 = r0[r2]
-            int r3 = r3.length()
-            int r1 = java.lang.Math.max(r1, r3)
-            int r2 = r2 + 1
-            goto L6d
-        L7e:
-            android.widget.TextInputTimePickerView r9 = r9.mTextInputPickerView
-            int r1 = r1 * 2
-            r9.setHourFormat(r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TimePickerClockDelegate.updateHourFormat():void");
+        boolean z;
+        char cCharAt;
+        String bestDateTimePattern = DateFormat.getBestDateTimePattern(this.mLocale, this.mIs24Hour ? "Hm" : "hm");
+        int length = bestDateTimePattern.length();
+        for (int i = 0; i < length; i++) {
+            cCharAt = bestDateTimePattern.charAt(i);
+            if (cCharAt == 'H' || cCharAt == 'h' || cCharAt == 'K' || cCharAt == 'k') {
+                int i2 = i + 1;
+                z = i2 < length && cCharAt == bestDateTimePattern.charAt(i2);
+                this.mHourFormatShowLeadingZero = z;
+                boolean z2 = (cCharAt != 'K' || cCharAt == 'H') ? 1 : 0;
+                this.mHourFormatStartsAtZero = z2;
+                int i3 = !z2;
+                this.mHourView.setRange(i3, (!this.mIs24Hour ? 23 : 11) + i3);
+                this.mHourView.setShowLeadingZeroes(this.mHourFormatShowLeadingZero);
+                String[] digitStrings = DecimalFormatSymbols.getInstance(this.mLocale).getDigitStrings();
+                int iMax = 0;
+                for (int i4 = 0; i4 < 10; i4++) {
+                    iMax = Math.max(iMax, digitStrings[i4].length());
+                }
+                this.mTextInputPickerView.setHourFormat(iMax * 2);
+            }
+        }
+        z = false;
+        cCharAt = 0;
+        this.mHourFormatShowLeadingZero = z;
+        if (cCharAt != 'K') {
+        }
+        this.mHourFormatStartsAtZero = z2;
+        int i32 = !z2;
+        if (!this.mIs24Hour) {
+        }
+        this.mHourView.setRange(i32, (!this.mIs24Hour ? 23 : 11) + i32);
+        this.mHourView.setShowLeadingZeroes(this.mHourFormatShowLeadingZero);
+        String[] digitStrings2 = DecimalFormatSymbols.getInstance(this.mLocale).getDigitStrings();
+        int iMax2 = 0;
+        while (i4 < 10) {
+        }
+        this.mTextInputPickerView.setHourFormat(iMax2 * 2);
     }
 
     static final CharSequence obtainVerbatim(String str) {
@@ -463,26 +415,26 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
     }
 
     private ColorStateList applyLegacyColorFixes(ColorStateList colorStateList) {
-        int multiplyAlphaComponent;
-        int i;
+        int iMultiplyAlphaComponent;
+        int colorForState;
         if (colorStateList == null || colorStateList.hasState(16843518)) {
             return colorStateList;
         }
         if (colorStateList.hasState(16842913)) {
-            i = colorStateList.getColorForState(StateSet.get(10), 0);
-            multiplyAlphaComponent = colorStateList.getColorForState(StateSet.get(8), 0);
+            colorForState = colorStateList.getColorForState(StateSet.get(10), 0);
+            iMultiplyAlphaComponent = colorStateList.getColorForState(StateSet.get(8), 0);
         } else {
             int defaultColor = colorStateList.getDefaultColor();
-            TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(ATTRS_DISABLED_ALPHA);
-            float f = obtainStyledAttributes.getFloat(0, 0.3f);
-            obtainStyledAttributes.recycle();
-            multiplyAlphaComponent = multiplyAlphaComponent(defaultColor, f);
-            i = defaultColor;
+            TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(ATTRS_DISABLED_ALPHA);
+            float f = typedArrayObtainStyledAttributes.getFloat(0, 0.3f);
+            typedArrayObtainStyledAttributes.recycle();
+            iMultiplyAlphaComponent = multiplyAlphaComponent(defaultColor, f);
+            colorForState = defaultColor;
         }
-        if (i == 0 || multiplyAlphaComponent == 0) {
+        if (colorForState == 0 || iMultiplyAlphaComponent == 0) {
             return null;
         }
-        return new ColorStateList(new int[][]{new int[]{16843518}, new int[0]}, new int[]{i, multiplyAlphaComponent});
+        return new ColorStateList(new int[][]{new int[]{16843518}, new int[0]}, new int[]{colorForState, iMultiplyAlphaComponent});
     }
 
     private static class ClickActionDelegate extends View.AccessibilityDelegate {
@@ -568,8 +520,8 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
                 layoutParams.removeRule(2);
                 layoutParams.addRule(3, rule);
             }
-            View findViewById = this.mRadialTimePickerHeader.findViewById(rule);
-            findViewById.setPadding(findViewById.getPaddingLeft(), findViewById.getPaddingBottom(), findViewById.getPaddingRight(), findViewById.getPaddingTop());
+            View viewFindViewById = this.mRadialTimePickerHeader.findViewById(rule);
+            viewFindViewById.setPadding(viewFindViewById.getPaddingLeft(), viewFindViewById.getPaddingBottom(), viewFindViewById.getPaddingRight(), viewFindViewById.getPaddingTop());
             this.mIsAmPmAtTop = z;
         }
         this.mAmPmLayout.setLayoutParams(layoutParams);
@@ -706,9 +658,9 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
         int i = this.mIs24Hour ? 129 : 65;
         this.mTempCalendar.set(11, getHour());
         this.mTempCalendar.set(12, getMinute());
-        String formatDateTime = DateUtils.formatDateTime(this.mContext, this.mTempCalendar.getTimeInMillis(), i);
+        String dateTime = DateUtils.formatDateTime(this.mContext, this.mTempCalendar.getTimeInMillis(), i);
         String str = this.mRadialTimePickerView.getCurrentItemShowing() == 0 ? this.mSelectHours : this.mSelectMinutes;
-        accessibilityEvent.getText().add(formatDateTime + " " + str);
+        accessibilityEvent.getText().add(dateTime + " " + str);
     }
 
     @Override // android.widget.TimePicker.TimePickerDelegate
@@ -784,14 +736,14 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
     private static String getHourMinSeparatorFromPattern(String str) {
         boolean z = false;
         for (int i = 0; i < str.length(); i++) {
-            char charAt = str.charAt(i);
-            if (charAt != ' ') {
-                if (charAt == '\'') {
+            char cCharAt = str.charAt(i);
+            if (cCharAt != ' ') {
+                if (cCharAt == '\'') {
                     if (z) {
                         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(str.substring(i));
                         return spannableStringBuilder.subSequence(0, DateFormat.appendQuotedText(spannableStringBuilder, 0)).toString();
                     }
-                } else if (charAt == 'H' || charAt == 'K' || charAt == 'h' || charAt == 'k') {
+                } else if (cCharAt == 'H' || cCharAt == 'K' || cCharAt == 'h' || cCharAt == 'k') {
                     z = true;
                 } else if (z) {
                     return Character.toString(str.charAt(i));
@@ -806,9 +758,9 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
             return -1;
         }
         for (int length = str.length() - 1; length >= 0; length--) {
-            char charAt = str.charAt(length);
+            char cCharAt = str.charAt(length);
             for (char c : cArr) {
-                if (charAt == c) {
+                if (cCharAt == c) {
                     return length;
                 }
             }
@@ -858,13 +810,13 @@ class TimePickerClockDelegate extends TimePicker.AbstractTimePickerDelegate {
             float scrollX = view.getScrollX() - view2.getLeft();
             float scrollY = view.getScrollY() - view2.getTop();
             motionEvent.offsetLocation(scrollX, scrollY);
-            boolean dispatchTouchEvent = view2.dispatchTouchEvent(motionEvent);
+            boolean zDispatchTouchEvent = view2.dispatchTouchEvent(motionEvent);
             motionEvent.offsetLocation(-scrollX, -scrollY);
             if (actionMasked != 1 && actionMasked != 3) {
-                return dispatchTouchEvent;
+                return zDispatchTouchEvent;
             }
             this.mInitialTouchTarget = null;
-            return dispatchTouchEvent;
+            return zDispatchTouchEvent;
         }
 
         private View findNearestChild(ViewGroup viewGroup, int i, int i2) {

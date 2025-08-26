@@ -12,7 +12,6 @@ import com.android.systemui.pluginlock.listener.PluginLockListener;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface PluginLockMediator {
     void addDump(String str);
@@ -146,4 +145,7 @@ public interface PluginLockMediator {
     void updateOverlayUserTimeout(boolean z);
 
     void updateWindowSecureState(boolean z);
+
+    default void onBackPressed() {
+    }
 }

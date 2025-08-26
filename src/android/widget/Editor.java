@@ -97,6 +97,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewRootImpl;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
@@ -111,11 +112,11 @@ import android.view.inputmethod.SemInputMethodManagerUtils;
 import android.view.textclassifier.TextClassification;
 import android.view.textclassifier.TextClassificationManager;
 import android.widget.AdapterView;
-import android.widget.Editor;
 import android.widget.Magnifier;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.window.OnBackInvokedCallback;
+import com.android.graphics.hwui.flags.Flags;
 import com.android.internal.R;
 import com.android.internal.graphics.ColorUtils;
 import com.android.internal.inputmethod.EditableInputConnection;
@@ -123,12 +124,13 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.transition.EpicenterTranslateClipReveal;
 import com.android.internal.util.ArrayUtils;
+import com.android.internal.util.GrowingArrayUtils;
 import com.android.internal.util.Preconditions;
 import com.android.internal.view.FloatingActionMode;
-import com.android.text.flags.Flags;
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.feature.SemCscFeature;
+import com.samsung.android.rune.CoreRune;
 import com.samsung.android.rune.ViewRune;
 import java.lang.Character;
 import java.lang.annotation.Retention;
@@ -368,7 +370,7 @@ public class Editor {
         this.mBackCallback = new OnBackInvokedCallback() { // from class: android.widget.Editor$$ExternalSyntheticLambda0
             @Override // android.window.OnBackInvokedCallback
             public final void onBackInvoked() {
-                Editor.this.lambda$startActionModeInternal$0();
+                this.f$0.lambda$startActionModeInternal$0();
             }
         };
         this.mShowMagnifier = false;
@@ -461,14 +463,14 @@ public class Editor {
 
     /* JADX INFO: Access modifiers changed from: private */
     public MagnifierMotionAnimator getMagnifierAnimator() {
-        Magnifier.Builder createBuilderWithOldMagnifierDefaults;
+        Magnifier.Builder builderCreateBuilderWithOldMagnifierDefaults;
         if (this.mMagnifierAnimator == null) {
             if (this.mNewMagnifierEnabled) {
-                createBuilderWithOldMagnifierDefaults = createBuilderWithInlineMagnifierDefaults();
+                builderCreateBuilderWithOldMagnifierDefaults = createBuilderWithInlineMagnifierDefaults();
             } else {
-                createBuilderWithOldMagnifierDefaults = Magnifier.createBuilderWithOldMagnifierDefaults(this.mTextView);
+                builderCreateBuilderWithOldMagnifierDefaults = Magnifier.createBuilderWithOldMagnifierDefaults(this.mTextView);
             }
-            this.mMagnifierAnimator = new MagnifierMotionAnimator(createBuilderWithOldMagnifierDefaults.build());
+            this.mMagnifierAnimator = new MagnifierMotionAnimator(builderCreateBuilderWithOldMagnifierDefaults.build());
         }
         return this.mMagnifierAnimator;
     }
@@ -491,11 +493,11 @@ public class Editor {
         Layout layout = this.mTextView.getLayout();
         int lineForOffset = layout.getLineForOffset(this.mTextView.getSelectionStartTransformed());
         int lineBottom = layout.getLineBottom(lineForOffset, false) - layout.getLineTop(lineForOffset);
-        int max = (int) (f2 * Math.max(lineBottom, this.mMinLineHeightForMagnifier));
-        builder.setFishEyeStyle().setSize(max, (int) (lineBottom * f)).setSourceSize(max, lineBottom).setElevation(0.0f).setInitialZoom(f).setClippingEnabled(false);
-        TypedArray obtainStyledAttributes = this.mTextView.getContext().obtainStyledAttributes(null, R.styleable.Magnifier, R.attr.magnifierStyle, 0);
-        builder.setDefaultSourceToMagnifierOffset(obtainStyledAttributes.getDimensionPixelSize(3, 0), obtainStyledAttributes.getDimensionPixelSize(4, 0));
-        obtainStyledAttributes.recycle();
+        int iMax = (int) (f2 * Math.max(lineBottom, this.mMinLineHeightForMagnifier));
+        builder.setFishEyeStyle().setSize(iMax, (int) (lineBottom * f)).setSourceSize(iMax, lineBottom).setElevation(0.0f).setInitialZoom(f).setClippingEnabled(false);
+        TypedArray typedArrayObtainStyledAttributes = this.mTextView.getContext().obtainStyledAttributes(null, R.styleable.Magnifier, R.attr.magnifierStyle, 0);
+        builder.setDefaultSourceToMagnifierOffset(typedArrayObtainStyledAttributes.getDimensionPixelSize(3, 0), typedArrayObtainStyledAttributes.getDimensionPixelSize(4, 0));
+        typedArrayObtainStyledAttributes.recycle();
         return builder.setSourceBounds(1, 0, 1, 0);
     }
 
@@ -654,7 +656,7 @@ public class Editor {
         }
     }
 
-    private void showError() {
+    private void showError() throws Resources.NotFoundException {
         if (this.mTextView.getWindowToken() == null) {
             this.mShowErrorAfterAttach = true;
             return;
@@ -676,10 +678,10 @@ public class Editor {
     }
 
     public void setError(CharSequence charSequence, Drawable drawable) {
-        CharSequence stringOrSpannedString = TextUtils.stringOrSpannedString(charSequence);
-        this.mError = stringOrSpannedString;
+        CharSequence charSequenceStringOrSpannedString = TextUtils.stringOrSpannedString(charSequence);
+        this.mError = charSequenceStringOrSpannedString;
         this.mErrorWasChanged = true;
-        if (stringOrSpannedString == null) {
+        if (charSequenceStringOrSpannedString == null) {
             setErrorIcon(null);
             ErrorPopup errorPopup = this.mErrorPopup;
             if (errorPopup != null) {
@@ -766,80 +768,36 @@ public class Editor {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x005d  */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0028  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     void prepareCursorControllers() {
-        /*
-            r5 = this;
-            android.widget.TextView r0 = r5.mTextView
-            android.view.View r0 = r0.getRootView()
-            android.view.ViewGroup$LayoutParams r0 = r0.getLayoutParams()
-            boolean r1 = r0 instanceof android.view.WindowManager.LayoutParams
-            r2 = 1
-            r3 = 0
-            if (r1 == 0) goto L28
-            android.view.WindowManager$LayoutParams r0 = (android.view.WindowManager.LayoutParams) r0
-            int r1 = r0.type
-            r4 = 1000(0x3e8, float:1.401E-42)
-            if (r1 < r4) goto L1e
-            int r0 = r0.type
-            r1 = 1999(0x7cf, float:2.801E-42)
-            if (r0 <= r1) goto L28
-        L1e:
-            android.widget.TextView r0 = r5.mTextView
-            android.text.Layout r0 = r0.getLayout()
-            if (r0 == 0) goto L28
-            r0 = r2
-            goto L29
-        L28:
-            r0 = r3
-        L29:
-            if (r0 == 0) goto L37
-            boolean r1 = r5.mDrawCursorOnMagnifier
-            if (r1 != 0) goto L35
-            boolean r1 = r5.isCursorVisible()
-            if (r1 == 0) goto L37
-        L35:
-            r1 = r2
-            goto L38
-        L37:
-            r1 = r3
-        L38:
-            r5.mInsertionControllerEnabled = r1
-            if (r0 == 0) goto L45
-            android.widget.TextView r0 = r5.mTextView
-            boolean r0 = r0.textCanBeSelected()
-            if (r0 == 0) goto L45
-            goto L46
-        L45:
-            r2 = r3
-        L46:
-            r5.mSelectionControllerEnabled = r2
-            boolean r0 = r5.mInsertionControllerEnabled
-            r1 = 0
-            if (r0 != 0) goto L59
-            r5.hideInsertionPointCursorController()
-            android.widget.Editor$InsertionPointCursorController r0 = r5.mInsertionPointCursorController
-            if (r0 == 0) goto L59
-            r0.onDetached()
-            r5.mInsertionPointCursorController = r1
-        L59:
-            boolean r0 = r5.mSelectionControllerEnabled
-            if (r0 != 0) goto L69
-            r5.lambda$startActionModeInternal$0()
-            android.widget.Editor$SelectionModifierCursorController r0 = r5.mSelectionModifierCursorController
-            if (r0 == 0) goto L69
-            r0.onDetached()
-            r5.mSelectionModifierCursorController = r1
-        L69:
-            r5.mToggleActionMode = r3
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.Editor.prepareCursorControllers():void");
+        boolean z;
+        ViewGroup.LayoutParams layoutParams = this.mTextView.getRootView().getLayoutParams();
+        if (layoutParams instanceof WindowManager.LayoutParams) {
+            WindowManager.LayoutParams layoutParams2 = (WindowManager.LayoutParams) layoutParams;
+            z = (layoutParams2.type < 1000 || layoutParams2.type > 1999) && this.mTextView.getLayout() != null;
+        }
+        this.mInsertionControllerEnabled = z && (this.mDrawCursorOnMagnifier || isCursorVisible());
+        this.mSelectionControllerEnabled = z && this.mTextView.textCanBeSelected();
+        if (!this.mInsertionControllerEnabled) {
+            hideInsertionPointCursorController();
+            InsertionPointCursorController insertionPointCursorController = this.mInsertionPointCursorController;
+            if (insertionPointCursorController != null) {
+                insertionPointCursorController.onDetached();
+                this.mInsertionPointCursorController = null;
+            }
+        }
+        if (!this.mSelectionControllerEnabled) {
+            lambda$startActionModeInternal$0();
+            SelectionModifierCursorController selectionModifierCursorController = this.mSelectionModifierCursorController;
+            if (selectionModifierCursorController != null) {
+                selectionModifierCursorController.onDetached();
+                this.mSelectionModifierCursorController = null;
+            }
+        }
+        this.mToggleActionMode = false;
     }
 
     void hideInsertionPointCursorController() {
@@ -933,16 +891,16 @@ public class Editor {
         }
     }
 
-    private void chooseSize(PopupWindow popupWindow, CharSequence charSequence, TextView textView) {
+    private void chooseSize(PopupWindow popupWindow, CharSequence charSequence, TextView textView) throws Resources.NotFoundException {
         int paddingLeft = textView.getPaddingLeft() + textView.getPaddingRight();
         int paddingTop = textView.getPaddingTop() + textView.getPaddingBottom();
-        StaticLayout build = StaticLayout.Builder.obtain(charSequence, 0, charSequence.length(), textView.getPaint(), this.mTextView.getResources().getDimensionPixelSize(R.dimen.textview_error_popup_default_width)).setUseLineSpacingFromFallbacks(textView.isFallbackLineSpacingForStaticLayout()).build();
-        float f = 0.0f;
-        for (int i = 0; i < build.getLineCount(); i++) {
-            f = Math.max(f, build.getLineWidth(i));
+        StaticLayout staticLayoutBuild = StaticLayout.Builder.obtain(charSequence, 0, charSequence.length(), textView.getPaint(), this.mTextView.getResources().getDimensionPixelSize(R.dimen.textview_error_popup_default_width)).setUseLineSpacingFromFallbacks(textView.isFallbackLineSpacingForStaticLayout()).build();
+        float fMax = 0.0f;
+        for (int i = 0; i < staticLayoutBuild.getLineCount(); i++) {
+            fMax = Math.max(fMax, staticLayoutBuild.getLineWidth(i));
         }
-        popupWindow.setWidth(paddingLeft + ((int) Math.ceil(f)));
-        popupWindow.setHeight(paddingTop + build.getHeight());
+        popupWindow.setWidth(paddingLeft + ((int) Math.ceil(fMax)));
+        popupWindow.setHeight(paddingTop + staticLayoutBuild.getHeight());
     }
 
     void setFrame() {
@@ -986,8 +944,8 @@ public class Editor {
     }
 
     boolean selectCurrentWord() {
-        int i;
-        int i2;
+        int spanStart;
+        int spanEnd;
         if (!this.mTextView.canSelectText()) {
             return false;
         }
@@ -995,36 +953,36 @@ public class Editor {
             return this.mTextView.selectAllText();
         }
         long lastTouchOffsets = getLastTouchOffsets();
-        int unpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(lastTouchOffsets);
-        int unpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(lastTouchOffsets);
+        int iUnpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(lastTouchOffsets);
+        int iUnpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(lastTouchOffsets);
         if (this.mTextView.getKeycodeDpadCenterStatus()) {
-            unpackRangeStartFromLong = this.mTextView.getSelectionStart();
-            unpackRangeEndFromLong = unpackRangeStartFromLong;
+            iUnpackRangeStartFromLong = this.mTextView.getSelectionStart();
+            iUnpackRangeEndFromLong = iUnpackRangeStartFromLong;
         }
-        if (unpackRangeStartFromLong >= 0 && unpackRangeStartFromLong <= this.mTextView.getText().length() && unpackRangeEndFromLong >= 0 && unpackRangeEndFromLong <= this.mTextView.getText().length()) {
-            URLSpan[] uRLSpanArr = (URLSpan[]) ((Spanned) this.mTextView.getText()).getSpans(unpackRangeStartFromLong, unpackRangeEndFromLong, URLSpan.class);
+        if (iUnpackRangeStartFromLong >= 0 && iUnpackRangeStartFromLong <= this.mTextView.getText().length() && iUnpackRangeEndFromLong >= 0 && iUnpackRangeEndFromLong <= this.mTextView.getText().length()) {
+            URLSpan[] uRLSpanArr = (URLSpan[]) ((Spanned) this.mTextView.getText()).getSpans(iUnpackRangeStartFromLong, iUnpackRangeEndFromLong, URLSpan.class);
             if (uRLSpanArr.length >= 1) {
                 URLSpan uRLSpan = uRLSpanArr[0];
-                i = ((Spanned) this.mTextView.getText()).getSpanStart(uRLSpan);
-                i2 = ((Spanned) this.mTextView.getText()).getSpanEnd(uRLSpan);
+                spanStart = ((Spanned) this.mTextView.getText()).getSpanStart(uRLSpan);
+                spanEnd = ((Spanned) this.mTextView.getText()).getSpanEnd(uRLSpan);
             } else {
                 WordIterator wordIterator = getWordIterator();
-                wordIterator.setCharSequence(this.mTextView.getText(), unpackRangeStartFromLong, unpackRangeEndFromLong);
-                int beginning = wordIterator.getBeginning(unpackRangeStartFromLong);
-                int end = wordIterator.getEnd(unpackRangeEndFromLong);
+                wordIterator.setCharSequence(this.mTextView.getText(), iUnpackRangeStartFromLong, iUnpackRangeEndFromLong);
+                int beginning = wordIterator.getBeginning(iUnpackRangeStartFromLong);
+                int end = wordIterator.getEnd(iUnpackRangeEndFromLong);
                 if (beginning == -1 || end == -1 || beginning == end) {
-                    long charClusterRange = getCharClusterRange(unpackRangeStartFromLong);
-                    int unpackRangeStartFromLong2 = TextUtils.unpackRangeStartFromLong(charClusterRange);
-                    int unpackRangeEndFromLong2 = TextUtils.unpackRangeEndFromLong(charClusterRange);
-                    i = unpackRangeStartFromLong2;
-                    i2 = unpackRangeEndFromLong2;
+                    long charClusterRange = getCharClusterRange(iUnpackRangeStartFromLong);
+                    int iUnpackRangeStartFromLong2 = TextUtils.unpackRangeStartFromLong(charClusterRange);
+                    int iUnpackRangeEndFromLong2 = TextUtils.unpackRangeEndFromLong(charClusterRange);
+                    spanStart = iUnpackRangeStartFromLong2;
+                    spanEnd = iUnpackRangeEndFromLong2;
                 } else {
-                    i2 = end;
-                    i = beginning;
+                    spanEnd = end;
+                    spanStart = beginning;
                 }
             }
-            Selection.setSelection((Spannable) this.mTextView.getText(), i, i2);
-            if (i2 > i) {
+            Selection.setSelection((Spannable) this.mTextView.getText(), spanStart, spanEnd);
+            if (spanEnd > spanStart) {
                 return true;
             }
         }
@@ -1041,29 +999,29 @@ public class Editor {
         }
         long lastTouchOffsets = getLastTouchOffsets();
         long paragraphsRange = getParagraphsRange(TextUtils.unpackRangeStartFromLong(lastTouchOffsets), TextUtils.unpackRangeEndFromLong(lastTouchOffsets));
-        int unpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(paragraphsRange);
-        int unpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(paragraphsRange);
-        if (unpackRangeStartFromLong >= unpackRangeEndFromLong) {
+        int iUnpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(paragraphsRange);
+        int iUnpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(paragraphsRange);
+        if (iUnpackRangeStartFromLong >= iUnpackRangeEndFromLong) {
             return false;
         }
-        Selection.setSelection((Spannable) this.mTextView.getText(), unpackRangeStartFromLong, unpackRangeEndFromLong);
+        Selection.setSelection((Spannable) this.mTextView.getText(), iUnpackRangeStartFromLong, iUnpackRangeEndFromLong);
         return true;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public long getParagraphsRange(int i, int i2) {
-        int originalToTransformed = this.mTextView.originalToTransformed(i, 1);
-        int originalToTransformed2 = this.mTextView.originalToTransformed(i2, 1);
+        int iOriginalToTransformed = this.mTextView.originalToTransformed(i, 1);
+        int iOriginalToTransformed2 = this.mTextView.originalToTransformed(i2, 1);
         Layout layout = this.mTextView.getLayout();
         if (layout == null) {
             return TextUtils.packRangeInLong(-1, -1);
         }
         CharSequence text = layout.getText();
-        int lineForOffset = layout.getLineForOffset(originalToTransformed);
+        int lineForOffset = layout.getLineForOffset(iOriginalToTransformed);
         while (lineForOffset > 0 && text.charAt(layout.getLineEnd(lineForOffset - 1) - 1) != '\n') {
             lineForOffset--;
         }
-        int lineForOffset2 = layout.getLineForOffset(originalToTransformed2);
+        int lineForOffset2 = layout.getLineForOffset(iOriginalToTransformed2);
         while (lineForOffset2 < layout.getLineCount() - 1 && text.charAt(layout.getLineEnd(lineForOffset2) - 1) != '\n') {
             lineForOffset2++;
         }
@@ -1103,11 +1061,11 @@ public class Editor {
         if (layout == null) {
             return i;
         }
-        int originalToTransformed = this.mTextView.originalToTransformed(i, 1);
-        if (z == layout.isRtlCharAt(originalToTransformed)) {
-            offsetToRightOf = layout.getOffsetToLeftOf(originalToTransformed);
+        int iOriginalToTransformed = this.mTextView.originalToTransformed(i, 1);
+        if (z == layout.isRtlCharAt(iOriginalToTransformed)) {
+            offsetToRightOf = layout.getOffsetToLeftOf(iOriginalToTransformed);
         } else {
-            offsetToRightOf = layout.getOffsetToRightOf(originalToTransformed);
+            offsetToRightOf = layout.getOffsetToRightOf(iOriginalToTransformed);
         }
         return this.mTextView.transformedToOriginal(offsetToRightOf, 1);
     }
@@ -1153,9 +1111,9 @@ public class Editor {
         if (layout == null) {
             return false;
         }
-        int originalToTransformed = this.mTextView.originalToTransformed(i, 1);
-        int lineBottom = layout.getLineBottom(layout.getLineForOffset(originalToTransformed));
-        int primaryHorizontal = (int) layout.getPrimaryHorizontal(originalToTransformed);
+        int iOriginalToTransformed = this.mTextView.originalToTransformed(i, 1);
+        int lineBottom = layout.getLineBottom(layout.getLineForOffset(iOriginalToTransformed));
+        int primaryHorizontal = (int) layout.getPrimaryHorizontal(iOriginalToTransformed);
         return this.mTextView.isPositionVisible(primaryHorizontal + r0.viewportToContentHorizontalOffset(), lineBottom + this.mTextView.viewportToContentVerticalOffset());
     }
 
@@ -1169,8 +1127,8 @@ public class Editor {
             return this.mTextView.getSelectionStart() != this.mTextView.getText().length() || this.mTextView.hasSelection();
         }
         int lineAtCoordinate = this.mTextView.getLineAtCoordinate(f2);
-        float convertToLocalHorizontalCoordinate = this.mTextView.convertToLocalHorizontalCoordinate(f);
-        return convertToLocalHorizontalCoordinate >= layout.getLineLeft(lineAtCoordinate) && convertToLocalHorizontalCoordinate <= layout.getLineRight(lineAtCoordinate);
+        float fConvertToLocalHorizontalCoordinate = this.mTextView.convertToLocalHorizontalCoordinate(f);
+        return fConvertToLocalHorizontalCoordinate >= layout.getLineLeft(lineAtCoordinate) && fConvertToLocalHorizontalCoordinate <= layout.getLineRight(lineAtCoordinate);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1181,7 +1139,7 @@ public class Editor {
         }
         int selectionStart = this.mTextView.getSelectionStart();
         int selectionEnd = this.mTextView.getSelectionEnd();
-        ClipData newPlainText = ClipData.newPlainText(null, this.mTextView.getTransformedText(selectionStart, selectionEnd));
+        ClipData clipDataNewPlainText = ClipData.newPlainText(null, this.mTextView.getTransformedText(selectionStart, selectionEnd));
         DragLocalState dragLocalState = new DragLocalState(this.mTextView, selectionStart, selectionEnd);
         AudioManager audioManager = (AudioManager) this.mTextView.getContext().getSystemService("audio");
         if (audioManager != null) {
@@ -1189,7 +1147,7 @@ public class Editor {
         } else {
             Log.w("Editor", "performSoundEffect: Couldn't get audio manager");
         }
-        this.mTextView.startDragAndDrop(newPlainText, getTextThumbnailBuilder(selectionStart, selectionEnd), dragLocalState, 768);
+        this.mTextView.startDragAndDrop(clipDataNewPlainText, getTextThumbnailBuilder(selectionStart, selectionEnd), dragLocalState, 768);
         lambda$startActionModeInternal$0();
         if (hasSelectionController()) {
             getSelectionController().resetTouchOffsets();
@@ -1410,9 +1368,9 @@ public class Editor {
     }
 
     public void onTouchEvent(MotionEvent motionEvent) {
-        boolean shouldFilterOutTouchEvent = shouldFilterOutTouchEvent(motionEvent);
+        boolean zShouldFilterOutTouchEvent = shouldFilterOutTouchEvent(motionEvent);
         this.mLastButtonState = motionEvent.getButtonState();
-        if (shouldFilterOutTouchEvent) {
+        if (zShouldFilterOutTouchEvent) {
             if (motionEvent.getActionMasked() == 1) {
                 this.mDiscardNextActionUp = true;
                 return;
@@ -1663,7 +1621,7 @@ public class Editor {
     public void sendUpdateSelection() {
         InputMethodManager inputMethodManager;
         int i;
-        int i2;
+        int composingSpanEnd;
         InputMethodState inputMethodState = this.mInputMethodState;
         if (inputMethodState == null || inputMethodState.mBatchEditNesting > 0 || this.mHasPendingRestartInputForSetText || (inputMethodManager = getInputMethodManager()) == null) {
             return;
@@ -1673,134 +1631,67 @@ public class Editor {
         if (this.mTextView.getText() instanceof Spannable) {
             Spannable spannable = (Spannable) this.mTextView.getText();
             int composingSpanStart = EditableInputConnection.getComposingSpanStart(spannable);
-            i2 = EditableInputConnection.getComposingSpanEnd(spannable);
+            composingSpanEnd = EditableInputConnection.getComposingSpanEnd(spannable);
             i = composingSpanStart;
         } else {
             i = -1;
-            i2 = -1;
+            composingSpanEnd = -1;
         }
-        inputMethodManager.updateSelection(this.mTextView, selectionStart, selectionEnd, i, i2);
+        inputMethodManager.updateSelection(this.mTextView, selectionStart, selectionEnd, i, composingSpanEnd);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00b2  */
-    /* JADX WARN: Removed duplicated region for block: B:49:0x00b7  */
-    /* JADX WARN: Removed duplicated region for block: B:52:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:49:0x00ad  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    void onDraw(android.graphics.Canvas r13, android.text.Layout r14, java.util.List<android.graphics.Path> r15, java.util.List<android.graphics.Paint> r16, android.graphics.Path r17, android.graphics.Paint r18, int r19) {
-        /*
-            r12 = this;
-            android.widget.TextView r0 = r12.mTextView
-            int r9 = r0.getSelectionStart()
-            android.widget.TextView r0 = r12.mTextView
-            int r10 = r0.getSelectionEnd()
-            android.widget.Editor$InputMethodState r0 = r12.mInputMethodState
-            if (r0 == 0) goto L2d
-            int r1 = r0.mBatchEditNesting
-            if (r1 != 0) goto L2d
-            boolean r1 = r0.mContentChanged
-            if (r1 != 0) goto L1c
-            boolean r0 = r0.mSelectionModeChanged
-            if (r0 == 0) goto L2d
-        L1c:
-            android.view.inputmethod.InputMethodManager r0 = r12.getInputMethodManager()
-            if (r0 == 0) goto L2d
-            android.widget.TextView r1 = r12.mTextView
-            boolean r0 = r0.hasActiveInputConnection(r1)
-            if (r0 == 0) goto L2d
-            r12.reportExtractedText()
-        L2d:
-            boolean r0 = com.android.graphics.hwui.flags.Flags.highContrastTextSmallTextRect()
-            r11 = 0
-            if (r0 == 0) goto L3d
-            boolean r0 = r13.isHighContrastTextEnabled()
-            if (r0 == 0) goto L3d
-            r0 = 1
-            r8 = r0
-            goto L3e
-        L3d:
-            r8 = r11
-        L3e:
-            if (r8 == 0) goto L50
-            r0 = r12
-            r1 = r13
-            r2 = r14
-            r3 = r15
-            r4 = r16
-            r5 = r17
-            r6 = r18
-            r7 = r19
-            r0.drawLayout(r1, r2, r3, r4, r5, r6, r7, r8)
-            goto L52
-        L50:
-            r7 = r19
-        L52:
-            android.widget.Editor$CorrectionHighlighter r2 = r12.mCorrectionHighlighter
-            if (r2 == 0) goto L59
-            r2.draw(r13, r7)
-        L59:
-            r2 = 0
-            if (r17 == 0) goto L9a
-            if (r9 != r10) goto L9a
-            android.graphics.drawable.Drawable r3 = r12.mDrawableForCursor
-            if (r3 == 0) goto L9a
-            android.widget.TextView r3 = r12.mTextView
-            boolean r3 = r3.hasGesturePreviewHighlight()
-            if (r3 != 0) goto L9a
-            boolean r3 = com.samsung.android.rune.CoreRune.GRAPHICS_RENDERER_HCF
-            if (r3 == 0) goto L95
-            if (r9 != 0) goto L95
-            android.widget.TextView r3 = r12.mTextView
-            boolean r3 = r3.isHighContrastTextEnabled()
-            if (r3 == 0) goto L95
-            android.widget.TextView r3 = r12.mTextView
-            android.text.TextPaint r3 = r3.getPaint()
-            float r3 = r3.getHCTStrokeWidth()
-            r4 = 1073741824(0x40000000, float:2.0)
-            float r3 = r3 / r4
-            double r3 = (double) r3
-            double r3 = java.lang.Math.floor(r3)
-            int r11 = (int) r3
-            android.widget.TextView r3 = r12.mTextView
-            int r3 = r3.getLayoutDirection()
-            if (r3 != 0) goto L95
-            int r11 = r11 * (-1)
-        L95:
-            r12.drawCursor(r13, r11, r7)
-            r3 = r2
-            goto L9c
-        L9a:
-            r3 = r17
-        L9c:
-            android.widget.SelectionActionModeHelper r4 = r12.mSelectionActionModeHelper
-            if (r4 == 0) goto Lad
-            r4.onDraw(r13)
-            android.widget.SelectionActionModeHelper r4 = r12.mSelectionActionModeHelper
-            boolean r4 = r4.isDrawingHighlight()
-            if (r4 == 0) goto Lad
-            r5 = r2
-            goto Lae
-        Lad:
-            r5 = r3
-        Lae:
-            android.widget.Editor$InsertModeController r2 = r12.mInsertModeController
-            if (r2 == 0) goto Lb5
-            r2.onDraw(r13)
-        Lb5:
-            if (r8 != 0) goto Lc2
-            r0 = r12
-            r1 = r13
-            r2 = r14
-            r3 = r15
-            r4 = r16
-            r6 = r18
-            r0.drawLayout(r1, r2, r3, r4, r5, r6, r7, r8)
-        Lc2:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.Editor.onDraw(android.graphics.Canvas, android.text.Layout, java.util.List, java.util.List, android.graphics.Path, android.graphics.Paint, int):void");
+    void onDraw(Canvas canvas, Layout layout, List<Path> list, List<Paint> list2, Path path, Paint paint, int i) {
+        int i2;
+        Path path2;
+        Path path3;
+        InputMethodManager inputMethodManager;
+        int selectionStart = this.mTextView.getSelectionStart();
+        int selectionEnd = this.mTextView.getSelectionEnd();
+        InputMethodState inputMethodState = this.mInputMethodState;
+        if (inputMethodState != null && inputMethodState.mBatchEditNesting == 0 && ((inputMethodState.mContentChanged || inputMethodState.mSelectionModeChanged) && (inputMethodManager = getInputMethodManager()) != null && inputMethodManager.hasActiveInputConnection(this.mTextView))) {
+            reportExtractedText();
+        }
+        int iFloor = 0;
+        boolean z = Flags.highContrastTextSmallTextRect() && canvas.isHighContrastTextEnabled();
+        if (z) {
+            i2 = i;
+            drawLayout(canvas, layout, list, list2, path, paint, i2, z);
+        } else {
+            i2 = i;
+        }
+        CorrectionHighlighter correctionHighlighter = this.mCorrectionHighlighter;
+        if (correctionHighlighter != null) {
+            correctionHighlighter.draw(canvas, i2);
+        }
+        if (path == null || selectionStart != selectionEnd || this.mDrawableForCursor == null || this.mTextView.hasGesturePreviewHighlight()) {
+            path2 = path;
+        } else {
+            if (CoreRune.GRAPHICS_RENDERER_HCF && selectionStart == 0 && this.mTextView.isHighContrastTextEnabled()) {
+                iFloor = (int) Math.floor(this.mTextView.getPaint().getHCTStrokeWidth() / 2.0f);
+                if (this.mTextView.getLayoutDirection() == 0) {
+                    iFloor *= -1;
+                }
+            }
+            drawCursor(canvas, iFloor, i2);
+            path2 = null;
+        }
+        SelectionActionModeHelper selectionActionModeHelper = this.mSelectionActionModeHelper;
+        if (selectionActionModeHelper != null) {
+            selectionActionModeHelper.onDraw(canvas);
+            path3 = this.mSelectionActionModeHelper.isDrawingHighlight() ? null : path2;
+        }
+        InsertModeController insertModeController = this.mInsertModeController;
+        if (insertModeController != null) {
+            insertModeController.onDraw(canvas);
+        }
+        if (z) {
+            return;
+        }
+        drawLayout(canvas, layout, list, list2, path3, paint, i2, z);
     }
 
     private void drawLayout(Canvas canvas, Layout layout, List<Path> list, List<Paint> list2, Path path, Paint paint, int i, boolean z) {
@@ -1818,8 +1709,8 @@ public class Editor {
         int i5;
         int i6;
         int i7;
+        int iMax;
         int i8;
-        int i9;
         TextRenderNode textRenderNode;
         boolean z2;
         TextRenderNode textRenderNode2;
@@ -1828,20 +1719,20 @@ public class Editor {
         Canvas canvas2 = canvas;
         Layout layout2 = layout;
         long lineRangeForDraw = layout2.getLineRangeForDraw(canvas2);
-        int unpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(lineRangeForDraw);
-        int unpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(lineRangeForDraw);
-        if (unpackRangeEndFromLong < 0) {
+        int iUnpackRangeStartFromLong = TextUtils.unpackRangeStartFromLong(lineRangeForDraw);
+        int iUnpackRangeEndFromLong = TextUtils.unpackRangeEndFromLong(lineRangeForDraw);
+        if (iUnpackRangeEndFromLong < 0) {
             return;
         }
         if (!z) {
-            layout2.drawWithoutText(canvas2, list, list2, path, paint, i, unpackRangeStartFromLong, unpackRangeEndFromLong);
+            layout2.drawWithoutText(canvas2, list, list2, path, paint, i, iUnpackRangeStartFromLong, iUnpackRangeEndFromLong);
             layout2 = layout2;
             canvas2 = canvas2;
-            i2 = unpackRangeStartFromLong;
-            i3 = unpackRangeEndFromLong;
+            i2 = iUnpackRangeStartFromLong;
+            i3 = iUnpackRangeEndFromLong;
         } else {
-            i2 = unpackRangeStartFromLong;
-            i3 = unpackRangeEndFromLong;
+            i2 = iUnpackRangeStartFromLong;
+            i3 = iUnpackRangeEndFromLong;
             layout2.drawBackground(canvas2, i2, i3);
         }
         if (layout2 instanceof DynamicLayout) {
@@ -1854,39 +1745,39 @@ public class Editor {
             int numberOfBlocks = dynamicLayout.getNumberOfBlocks();
             int indexFirstChangedBlock = dynamicLayout.getIndexFirstChangedBlock();
             ArraySet<Integer> blocksAlwaysNeedToBeRedrawn = dynamicLayout.getBlocksAlwaysNeedToBeRedrawn();
-            int i10 = -1;
-            int i11 = 0;
+            int i9 = -1;
+            int i10 = 0;
             boolean z3 = true;
             if (blocksAlwaysNeedToBeRedrawn != null) {
-                int i12 = 0;
-                while (i12 < blocksAlwaysNeedToBeRedrawn.size()) {
-                    int blockIndex = dynamicLayout.getBlockIndex(blocksAlwaysNeedToBeRedrawn.valueAt(i12).intValue());
-                    if (blockIndex != i10 && (textRenderNode3 = editor.mTextRenderNodes[blockIndex]) != null) {
+                int i11 = 0;
+                while (i11 < blocksAlwaysNeedToBeRedrawn.size()) {
+                    int blockIndex = dynamicLayout.getBlockIndex(blocksAlwaysNeedToBeRedrawn.valueAt(i11).intValue());
+                    if (blockIndex != i9 && (textRenderNode3 = editor.mTextRenderNodes[blockIndex]) != null) {
                         textRenderNode3.needsToBeShifted = true;
                     }
-                    i12++;
-                    i10 = -1;
+                    i11++;
+                    i9 = -1;
                 }
             }
-            int binarySearch = Arrays.binarySearch(blockEndLines, 0, numberOfBlocks, i2);
-            if (binarySearch < 0) {
-                binarySearch = -(binarySearch + 1);
+            int iBinarySearch = Arrays.binarySearch(blockEndLines, 0, numberOfBlocks, i2);
+            if (iBinarySearch < 0) {
+                iBinarySearch = -(iBinarySearch + 1);
             }
-            int min = Math.min(indexFirstChangedBlock, binarySearch);
-            int i13 = 0;
+            int iMin = Math.min(indexFirstChangedBlock, iBinarySearch);
+            int iDrawHardwareAcceleratedInner = 0;
             while (true) {
-                if (min >= numberOfBlocks) {
-                    i5 = i11;
+                if (iMin >= numberOfBlocks) {
+                    i5 = i10;
                     i6 = i2;
                     i7 = -1;
-                    i8 = numberOfBlocks;
+                    iMax = numberOfBlocks;
                     break;
                 }
-                int i14 = blockIndices[min];
-                if (min >= indexFirstChangedBlock && i14 != -1 && (textRenderNode2 = editor.mTextRenderNodes[i14]) != null) {
+                int i12 = blockIndices[iMin];
+                if (iMin >= indexFirstChangedBlock && i12 != -1 && (textRenderNode2 = editor.mTextRenderNodes[i12]) != null) {
                     textRenderNode2.needsToBeShifted = z3;
                 }
-                if (blockEndLines[min] < i2) {
+                if (blockEndLines[iMin] < i2) {
                     z2 = z3;
                     i6 = i2;
                     i5 = 0;
@@ -1895,37 +1786,37 @@ public class Editor {
                     i6 = i2;
                     i7 = -1;
                     i5 = 0;
-                    i13 = editor.drawHardwareAcceleratedInner(canvas2, layout2, path, paint, i, blockEndLines, blockIndices, min, numberOfBlocks, i13);
-                    if (blockEndLines[min] >= i3) {
-                        i8 = Math.max(indexFirstChangedBlock, min + 1);
+                    iDrawHardwareAcceleratedInner = editor.drawHardwareAcceleratedInner(canvas2, layout2, path, paint, i, blockEndLines, blockIndices, iMin, numberOfBlocks, iDrawHardwareAcceleratedInner);
+                    if (blockEndLines[iMin] >= i3) {
+                        iMax = Math.max(indexFirstChangedBlock, iMin + 1);
                         break;
                     }
                 }
-                min++;
+                iMin++;
                 canvas2 = canvas;
                 layout2 = layout;
                 i2 = i6;
-                i11 = i5;
+                i10 = i5;
                 z3 = z2;
             }
             if (blocksAlwaysNeedToBeRedrawn != null) {
-                int i15 = i5;
-                while (i15 < blocksAlwaysNeedToBeRedrawn.size()) {
-                    int intValue = blocksAlwaysNeedToBeRedrawn.valueAt(i15).intValue();
-                    int blockIndex2 = dynamicLayout.getBlockIndex(intValue);
+                int i13 = i5;
+                while (i13 < blocksAlwaysNeedToBeRedrawn.size()) {
+                    int iIntValue = blocksAlwaysNeedToBeRedrawn.valueAt(i13).intValue();
+                    int blockIndex2 = dynamicLayout.getBlockIndex(iIntValue);
                     if (blockIndex2 == i7 || (textRenderNode = editor.mTextRenderNodes[blockIndex2]) == null || textRenderNode.needsToBeShifted) {
-                        i9 = i15;
-                        i13 = editor.drawHardwareAcceleratedInner(canvas, layout, path, paint, i, blockEndLines, blockIndices, intValue, numberOfBlocks, i13);
+                        i8 = i13;
+                        iDrawHardwareAcceleratedInner = editor.drawHardwareAcceleratedInner(canvas, layout, path, paint, i, blockEndLines, blockIndices, iIntValue, numberOfBlocks, iDrawHardwareAcceleratedInner);
                     } else {
-                        i9 = i15;
+                        i8 = i13;
                     }
-                    i15 = i9 + 1;
+                    i13 = i8 + 1;
                     editor = this;
                 }
             }
             canvas2 = canvas;
             layout2 = layout;
-            dynamicLayout.setIndexFirstChangedBlock(i8);
+            dynamicLayout.setIndexFirstChangedBlock(iMax);
             i4 = i6;
         } else {
             i4 = i2;
@@ -1940,99 +1831,82 @@ public class Editor {
         int i5;
         int i6;
         int i7 = iArr[i2];
-        int i8 = iArr2[i2];
-        if (i8 == -1) {
-            i8 = getAvailableDisplayListIndex(iArr2, i3, i4);
-            iArr2[i2] = i8;
-            TextRenderNode textRenderNode = this.mTextRenderNodes[i8];
+        int availableDisplayListIndex = iArr2[i2];
+        if (availableDisplayListIndex == -1) {
+            availableDisplayListIndex = getAvailableDisplayListIndex(iArr2, i3, i4);
+            iArr2[i2] = availableDisplayListIndex;
+            TextRenderNode textRenderNode = this.mTextRenderNodes[availableDisplayListIndex];
             if (textRenderNode != null) {
                 textRenderNode.isDirty = true;
             }
-            i5 = i8 + 1;
+            i5 = availableDisplayListIndex + 1;
         } else {
             i5 = i4;
         }
         TextRenderNode[] textRenderNodeArr = this.mTextRenderNodes;
-        if (textRenderNodeArr[i8] == null) {
-            textRenderNodeArr[i8] = new TextRenderNode("Text " + i8);
+        if (textRenderNodeArr[availableDisplayListIndex] == null) {
+            textRenderNodeArr[availableDisplayListIndex] = new TextRenderNode("Text " + availableDisplayListIndex);
         }
-        boolean needsRecord = this.mTextRenderNodes[i8].needsRecord();
-        RenderNode renderNode = this.mTextRenderNodes[i8].renderNode;
-        if (this.mTextRenderNodes[i8].needsToBeShifted || needsRecord) {
-            int i9 = i2 == 0 ? 0 : iArr[i2 - 1] + 1;
-            int lineTop = layout.getLineTop(i9);
+        boolean zNeedsRecord = this.mTextRenderNodes[availableDisplayListIndex].needsRecord();
+        RenderNode renderNode = this.mTextRenderNodes[availableDisplayListIndex].renderNode;
+        if (this.mTextRenderNodes[availableDisplayListIndex].needsToBeShifted || zNeedsRecord) {
+            int i8 = i2 == 0 ? 0 : iArr[i2 - 1] + 1;
+            int lineTop = layout.getLineTop(i8);
             int lineBottom = layout.getLineBottom(i7);
             int width = this.mTextView.getWidth();
             if (this.mTextView.getHorizontallyScrolling()) {
-                float f = Float.MAX_VALUE;
-                float f2 = Float.MIN_VALUE;
-                for (int i10 = i9; i10 <= i7; i10++) {
-                    f = Math.min(f, layout.getLineLeft(i10));
-                    f2 = Math.max(f2, layout.getLineRight(i10));
+                float fMin = Float.MAX_VALUE;
+                float fMax = Float.MIN_VALUE;
+                for (int i9 = i8; i9 <= i7; i9++) {
+                    fMin = Math.min(fMin, layout.getLineLeft(i9));
+                    fMax = Math.max(fMax, layout.getLineRight(i9));
                 }
-                int i11 = (int) (f2 + 0.5f);
-                i6 = (int) f;
-                width = i11;
+                int i10 = (int) (fMax + 0.5f);
+                i6 = (int) fMin;
+                width = i10;
             } else {
                 i6 = 0;
             }
-            if (needsRecord) {
-                RecordingCanvas beginRecording = renderNode.beginRecording(width - i6, lineBottom - lineTop);
+            if (zNeedsRecord) {
+                RecordingCanvas recordingCanvasBeginRecording = renderNode.beginRecording(width - i6, lineBottom - lineTop);
                 try {
-                    beginRecording.translate(-i6, -lineTop);
-                    layout.drawText(beginRecording, i9, i7);
+                    recordingCanvasBeginRecording.translate(-i6, -lineTop);
+                    layout.drawText(recordingCanvasBeginRecording, i8, i7);
                     if (canPrintLagLog()) {
                         Log.d(TAG_LAG, "drawText");
                     }
-                    this.mTextRenderNodes[i8].isDirty = false;
+                    this.mTextRenderNodes[availableDisplayListIndex].isDirty = false;
                 } finally {
                     renderNode.endRecording();
                     renderNode.setClipToBounds(false);
                 }
             }
             renderNode.setLeftTopRightBottom(i6, lineTop, width, lineBottom);
-            this.mTextRenderNodes[i8].needsToBeShifted = false;
+            this.mTextRenderNodes[availableDisplayListIndex].needsToBeShifted = false;
         }
         ((RecordingCanvas) canvas).drawRenderNode(renderNode);
         return i5;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:9:0x000c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:8:0x000c, code lost:
     
         r6 = r6 + 1;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int getAvailableDisplayListIndex(int[] r4, int r5, int r6) {
-        /*
-            r3 = this;
-            android.widget.Editor$TextRenderNode[] r0 = r3.mTextRenderNodes
-            int r0 = r0.length
-        L3:
-            if (r6 >= r0) goto L13
-            r1 = 0
-        L6:
-            if (r1 >= r5) goto L12
-            r2 = r4[r1]
-            if (r2 != r6) goto Lf
-            int r6 = r6 + 1
-            goto L3
-        Lf:
-            int r1 = r1 + 1
-            goto L6
-        L12:
-            return r6
-        L13:
-            android.widget.Editor$TextRenderNode[] r4 = r3.mTextRenderNodes
-            r5 = 0
-            java.lang.Object[] r4 = com.android.internal.util.GrowingArrayUtils.append(r4, r0, r5)
-            android.widget.Editor$TextRenderNode[] r4 = (android.widget.Editor.TextRenderNode[]) r4
-            r3.mTextRenderNodes = r4
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.Editor.getAvailableDisplayListIndex(int[], int, int):int");
+    private int getAvailableDisplayListIndex(int[] iArr, int i, int i2) {
+        int length = this.mTextRenderNodes.length;
+        while (i2 < length) {
+            for (int i3 = 0; i3 < i; i3++) {
+                if (iArr[i3] == i2) {
+                    break;
+                }
+            }
+            return i2;
+        }
+        this.mTextRenderNodes = (TextRenderNode[]) GrowingArrayUtils.append(this.mTextRenderNodes, length, (Object) null);
+        return length;
     }
 
     private void drawCursor(Canvas canvas, int i, int i2) {
@@ -2067,15 +1941,15 @@ public class Editor {
         if (this.mTextRenderNodes == null || !(layout instanceof DynamicLayout)) {
             return;
         }
-        if (Flags.insertModeCrashWhenDelete() && this.mTextView.isOffsetMappingAvailable()) {
+        if (com.android.text.flags.Flags.insertModeCrashWhenDelete() && this.mTextView.isOffsetMappingAvailable()) {
             invalidateTextDisplayList();
             return;
         }
         int i3 = 0;
-        int originalToTransformed = this.mTextView.originalToTransformed(i, 0);
-        int originalToTransformed2 = this.mTextView.originalToTransformed(i2, 0);
-        int lineForOffset = layout.getLineForOffset(originalToTransformed);
-        int lineForOffset2 = layout.getLineForOffset(originalToTransformed2);
+        int iOriginalToTransformed = this.mTextView.originalToTransformed(i, 0);
+        int iOriginalToTransformed2 = this.mTextView.originalToTransformed(i2, 0);
+        int lineForOffset = layout.getLineForOffset(iOriginalToTransformed);
+        int lineForOffset2 = layout.getLineForOffset(iOriginalToTransformed2);
         DynamicLayout dynamicLayout = (DynamicLayout) layout;
         int[] blockEndLines = dynamicLayout.getBlockEndLines();
         int[] blockIndices = dynamicLayout.getBlockIndices();
@@ -2120,9 +1994,9 @@ public class Editor {
             return;
         }
         Layout activeLayout = getActiveLayout();
-        int originalToTransformed = this.mTextView.originalToTransformed(this.mTextView.getSelectionStart(), 1);
-        int lineForOffset = activeLayout.getLineForOffset(originalToTransformed);
-        updateCursorPosition(activeLayout.getLineTop(lineForOffset), activeLayout.getLineBottom(lineForOffset, false), activeLayout.getPrimaryHorizontal(originalToTransformed, activeLayout.shouldClampCursor(lineForOffset)));
+        int iOriginalToTransformed = this.mTextView.originalToTransformed(this.mTextView.getSelectionStart(), 1);
+        int lineForOffset = activeLayout.getLineForOffset(iOriginalToTransformed);
+        updateCursorPosition(activeLayout.getLineTop(lineForOffset), activeLayout.getLineBottom(lineForOffset, false), activeLayout.getPrimaryHorizontal(iOriginalToTransformed, activeLayout.shouldClampCursor(lineForOffset)));
     }
 
     void refreshTextActionMode() {
@@ -2130,14 +2004,14 @@ public class Editor {
             this.mRestartActionModeOnNextRefresh = false;
             return;
         }
-        boolean hasSelection = this.mTextView.hasSelection();
+        boolean zHasSelection = this.mTextView.hasSelection();
         SelectionModifierCursorController selectionController = getSelectionController();
         InsertionPointCursorController insertionController = getInsertionController();
         if ((selectionController != null && selectionController.isCursorBeingModified()) || (insertionController != null && insertionController.isCursorBeingModified())) {
             this.mRestartActionModeOnNextRefresh = false;
             return;
         }
-        if (hasSelection) {
+        if (zHasSelection) {
             hideInsertionPointCursorController();
             if (this.mTextActionMode == null) {
                 if (this.mRestartActionModeOnNextRefresh) {
@@ -2284,7 +2158,7 @@ public class Editor {
                 ((FloatingActionMode) actionMode).setOutsideTouchable(true, new PopupWindow.OnDismissListener() { // from class: android.widget.Editor$$ExternalSyntheticLambda1
                     @Override // android.widget.PopupWindow.OnDismissListener
                     public final void onDismiss() {
-                        Editor.this.lambda$startActionModeInternal$0();
+                        this.f$0.lambda$startActionModeInternal$0();
                     }
                 });
             }
@@ -2325,23 +2199,23 @@ public class Editor {
         int length = this.mTextView.getText().length();
         int length2 = this.mTextView.getText().length();
         boolean z = false;
-        int i2 = 0;
-        int i3 = 0;
-        for (int i4 = 0; i4 < suggestionSpanArr.length; i4++) {
-            if ((suggestionSpanArr[i4].getFlags() & 12288) != 0) {
+        int iMax = 0;
+        int iMax2 = 0;
+        for (int i2 = 0; i2 < suggestionSpanArr.length; i2++) {
+            if ((suggestionSpanArr[i2].getFlags() & 12288) != 0) {
                 return false;
             }
-            int spanStart = spannable.getSpanStart(suggestionSpanArr[i4]);
-            int spanEnd = spannable.getSpanEnd(suggestionSpanArr[i4]);
+            int spanStart = spannable.getSpanStart(suggestionSpanArr[i2]);
+            int spanEnd = spannable.getSpanEnd(suggestionSpanArr[i2]);
             length = Math.min(length, spanStart);
-            i3 = Math.max(i3, spanEnd);
+            iMax2 = Math.max(iMax2, spanEnd);
             if (selectionStart >= spanStart && selectionStart <= spanEnd) {
-                z = z || suggestionSpanArr[i4].getSuggestions().length > 0;
+                z = z || suggestionSpanArr[i2].getSuggestions().length > 0;
                 length2 = Math.min(length2, spanStart);
-                i2 = Math.max(i2, spanEnd);
+                iMax = Math.max(iMax, spanEnd);
             }
         }
-        return z && length2 < i2 && length >= length2 && i3 <= i2;
+        return z && length2 < iMax && length >= length2 && iMax2 <= iMax;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -2355,19 +2229,19 @@ public class Editor {
     }
 
     void onTouchUpEvent(MotionEvent motionEvent) {
-        int i;
+        int selectionStart;
         boolean z;
         InsertionPointCursorController insertionController;
         if (getSelectionActionModeHelper().resetSelection(getTextView().getOffsetForPosition(motionEvent.getX(), motionEvent.getY()))) {
             return;
         }
-        int i2 = 0;
+        int i = 0;
         boolean z2 = this.mSelectAllOnFocus && this.mTextView.didTouchFocusSelect();
         if ((getInsertionController() == null || !getInsertionController().isActive()) && (this.mTextView.getText() == null || this.mTextView.getText().length() != 0)) {
-            i = -1;
+            selectionStart = -1;
             z = false;
         } else {
-            i = this.mTextView.getSelectionStart();
+            selectionStart = this.mTextView.getSelectionStart();
             z = true;
         }
         hideCursorAndSpanControllers();
@@ -2395,17 +2269,17 @@ public class Editor {
             }
             SuggestionSpan[] suggestionSpanArr = (SuggestionSpan[]) ((Spannable) this.mTextView.getText()).getSpans(this.mTextView.getSelectionStart(), this.mTextView.getSelectionEnd(), SuggestionSpan.class);
             while (true) {
-                if (i2 < suggestionSpanArr.length) {
-                    if ((suggestionSpanArr[i2].getFlags() & 12288) != 0) {
+                if (i < suggestionSpanArr.length) {
+                    if ((suggestionSpanArr[i].getFlags() & 12288) != 0) {
                         break;
                     } else {
-                        i2++;
+                        i++;
                     }
                 } else {
                     this.mShowSuggestionRunnable = new Runnable() { // from class: android.widget.Editor$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            Editor.this.replace();
+                            this.f$0.replace();
                         }
                     };
                     break;
@@ -2427,7 +2301,7 @@ public class Editor {
                     startInsertionActionMode();
                     return;
                 }
-                if (z && i == this.mTextView.getSelectionStart() && !this.mToggleActionMode) {
+                if (z && selectionStart == this.mTextView.getSelectionStart() && !this.mToggleActionMode) {
                     startInsertionActionMode();
                     this.mToggleActionMode = true;
                 } else {
@@ -2502,37 +2376,37 @@ public class Editor {
 
     private void updateCursorPosition(int i, int i2, float f) {
         loadCursorDrawable();
-        int clampHorizontalPosition = clampHorizontalPosition(this.mDrawableForCursor, f);
-        int round = Math.round(this.mDrawableForCursor.getIntrinsicWidth() * this.mTextView.getCursorThicknessScale());
-        int round2 = Math.round((i2 - i) * ((getInsertionController() == null || !getInsertionController().getHandle().shouldMagnifierCursorAdjust()) ? 0.0f : 0.2f));
-        this.mDrawableForCursor.setBounds(clampHorizontalPosition, (i + round2) - this.mTempRect.top, round + clampHorizontalPosition, (i2 - round2) + this.mTempRect.bottom);
+        int iClampHorizontalPosition = clampHorizontalPosition(this.mDrawableForCursor, f);
+        int iRound = Math.round(this.mDrawableForCursor.getIntrinsicWidth() * this.mTextView.getCursorThicknessScale());
+        int iRound2 = Math.round((i2 - i) * ((getInsertionController() == null || !getInsertionController().getHandle().shouldMagnifierCursorAdjust()) ? 0.0f : 0.2f));
+        this.mDrawableForCursor.setBounds(iClampHorizontalPosition, (i + iRound2) - this.mTempRect.top, iRound + iClampHorizontalPosition, (i2 - iRound2) + this.mTempRect.bottom);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public int clampHorizontalPosition(Drawable drawable, float f) {
-        int i;
-        float max = Math.max(0.5f, f - 0.5f);
+        int intrinsicWidth;
+        float fMax = Math.max(0.5f, f - 0.5f);
         if (this.mTempRect == null) {
             this.mTempRect = new Rect();
         }
         if (drawable != null) {
             drawable.getPadding(this.mTempRect);
-            i = drawable.getIntrinsicWidth();
+            intrinsicWidth = drawable.getIntrinsicWidth();
         } else {
             this.mTempRect.setEmpty();
-            i = 0;
+            intrinsicWidth = 0;
         }
         int scrollX = this.mTextView.getScrollX();
-        float f2 = max - scrollX;
+        float f2 = fMax - scrollX;
         int width = (this.mTextView.getWidth() - this.mTextView.getCompoundPaddingLeft()) - this.mTextView.getCompoundPaddingRight();
         float f3 = width;
         if (f2 >= f3 - 1.0f) {
-            return (width + scrollX) - (i - this.mTempRect.right);
+            return (width + scrollX) - (intrinsicWidth - this.mTempRect.right);
         }
-        if (Math.abs(f2) <= 1.0f || (TextUtils.isEmpty(this.mTextView.getText()) && 1048576 - scrollX <= f3 + 1.0f && max <= 1.0f)) {
+        if (Math.abs(f2) <= 1.0f || (TextUtils.isEmpty(this.mTextView.getText()) && 1048576 - scrollX <= f3 + 1.0f && fMax <= 1.0f)) {
             return scrollX - this.mTempRect.left;
         }
-        return ((int) max) - this.mTempRect.left;
+        return ((int) fMax) - this.mTempRect.left;
     }
 
     public void onCommitCorrection(CorrectionInfo correctionInfo) {
@@ -2628,8 +2502,8 @@ public class Editor {
         }
     }
 
-    private View.DragShadowBuilder getTextThumbnailBuilder(int i, int i2) {
-        int round;
+    private View.DragShadowBuilder getTextThumbnailBuilder(int i, int i2) throws Resources.NotFoundException {
+        int iRound;
         FrameLayout frameLayout = (FrameLayout) View.inflate(this.mTextView.getContext(), R.layout.sem_text_drag_thumbnail, null);
         TextView textView = (TextView) frameLayout.getChildAt(1);
         if (frameLayout == null) {
@@ -2639,20 +2513,20 @@ public class Editor {
         frameLayout.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
         Resources resources = this.mTextView.getResources();
         if (r8.widthPixels / resources.getDisplayMetrics().density < 480.0f) {
-            round = Math.round(r8.widthPixels * 0.75f);
+            iRound = Math.round(r8.widthPixels * 0.75f);
         } else {
-            round = Math.round(r8.widthPixels * SHADOW_VIEW_MAX_WIDTH_TABLET);
+            iRound = Math.round(r8.widthPixels * SHADOW_VIEW_MAX_WIDTH_TABLET);
         }
         int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.sem_text_drag_thumbnail_min_width);
         int dimensionPixelSize2 = resources.getDimensionPixelSize(R.dimen.sem_text_drag_thumbnail_background_shadow_size);
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-        frameLayout.measure(makeMeasureSpec, makeMeasureSpec);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+        frameLayout.measure(iMakeMeasureSpec, iMakeMeasureSpec);
         int measuredWidth = frameLayout.getMeasuredWidth();
         int measuredHeight = frameLayout.getMeasuredHeight();
         int i3 = dimensionPixelSize2 * 2;
         int i4 = measuredWidth - i3;
-        if (i4 > round) {
-            frameLayout.measure(View.MeasureSpec.makeMeasureSpec(round + i3, 1073741824), View.MeasureSpec.makeMeasureSpec(0, 0));
+        if (i4 > iRound) {
+            frameLayout.measure(View.MeasureSpec.makeMeasureSpec(iRound + i3, 1073741824), View.MeasureSpec.makeMeasureSpec(0, 0));
             measuredWidth = frameLayout.getMeasuredWidth();
             measuredHeight = frameLayout.getMeasuredHeight();
         } else if (i4 < dimensionPixelSize) {
@@ -2685,16 +2559,16 @@ public class Editor {
         DragLocalState dragLocalState = localState instanceof DragLocalState ? (DragLocalState) localState : null;
         boolean z = dragLocalState != null && dragLocalState.sourceTextView == this.mTextView;
         if (!z || offsetForPosition < dragLocalState.start || offsetForPosition >= dragLocalState.end) {
-            DragAndDropPermissions obtain = DragAndDropPermissions.obtain(dragEvent);
-            if (obtain != null) {
-                obtain.takeTransient();
+            DragAndDropPermissions dragAndDropPermissionsObtain = DragAndDropPermissions.obtain(dragEvent);
+            if (dragAndDropPermissionsObtain != null) {
+                dragAndDropPermissionsObtain.takeTransient();
             }
             this.mTextView.beginBatchEdit();
             this.mUndoInputFilter.freezeLastEdit();
             try {
                 int length = this.mTextView.getText().length();
                 Selection.setSelection((Spannable) this.mTextView.getText(), offsetForPosition);
-                this.mTextView.performReceiveContent(new ContentInfo.Builder(dragEvent.getClipData(), 3).setDragAndDropPermissions(obtain).build());
+                this.mTextView.performReceiveContent(new ContentInfo.Builder(dragEvent.getClipData(), 3).setDragAndDropPermissions(dragAndDropPermissionsObtain).build());
                 if (z) {
                     deleteSourceAfterLocalDrop(dragLocalState, offsetForPosition, length);
                 }
@@ -2718,13 +2592,13 @@ public class Editor {
             i4 += length;
         }
         this.mTextView.deleteText_internal(i3, i4);
-        int max = Math.max(0, i3 - 1);
-        int min = Math.min(this.mTextView.getText().length(), i3 + 1);
-        int i5 = max + 1;
-        if (min > i5) {
-            CharSequence transformedText = this.mTextView.getTransformedText(max, min);
+        int iMax = Math.max(0, i3 - 1);
+        int iMin = Math.min(this.mTextView.getText().length(), i3 + 1);
+        int i5 = iMax + 1;
+        if (iMin > i5) {
+            CharSequence transformedText = this.mTextView.getTransformedText(iMax, iMin);
             if (Character.isSpaceChar(transformedText.charAt(0)) && Character.isSpaceChar(transformedText.charAt(1))) {
-                this.mTextView.deleteText_internal(max, i5);
+                this.mTextView.deleteText_internal(iMax, i5);
             }
         }
     }
@@ -2754,9 +2628,7 @@ public class Editor {
         assistantCallbackHelper.updateAssistMenuItems(menu, new MenuItem.OnMenuItemClickListener() { // from class: android.widget.Editor$$ExternalSyntheticLambda3
             @Override // android.view.MenuItem.OnMenuItemClickListener
             public final boolean onMenuItemClick(MenuItem menuItem) {
-                boolean lambda$setAssistContextMenuItems$1;
-                lambda$setAssistContextMenuItems$1 = Editor.this.lambda$setAssistContextMenuItems$1(assistantCallbackHelper, menuItem);
-                return lambda$setAssistContextMenuItems$1;
+                return this.f$0.lambda$setAssistContextMenuItems$1(assistantCallbackHelper, menuItem);
             }
         });
     }
@@ -2793,11 +2665,11 @@ public class Editor {
                 suggestionInfoArr[i] = new SuggestionInfo();
                 i++;
             }
-            SubMenu addSubMenu = contextMenu.addSubMenu(0, 0, 11, R.string.replace);
+            SubMenu subMenuAddSubMenu = contextMenu.addSubMenu(0, 0, 11, R.string.replace);
             int suggestionInfo = this.mSuggestionHelper.getSuggestionInfo(suggestionInfoArr, null);
             for (int i2 = 0; i2 < suggestionInfo; i2++) {
                 final SuggestionInfo suggestionInfo2 = suggestionInfoArr[i2];
-                addSubMenu.add(0, 0, i2, suggestionInfo2.mText).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() { // from class: android.widget.Editor.4
+                subMenuAddSubMenu.add(0, 0, i2, suggestionInfo2.mText).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() { // from class: android.widget.Editor.4
                     @Override // android.view.MenuItem.OnMenuItemClickListener
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         Editor.this.replaceWithSuggestion(suggestionInfo2);
@@ -2818,76 +2690,76 @@ public class Editor {
     }
 
     public void setTextContextMenuItems(ContextMenu contextMenu) {
-        TypedArray obtainStyledAttributes = this.mTextView.getContext().obtainStyledAttributes(new int[]{R.attr.actionModeUndoDrawable, R.attr.actionModeRedoDrawable, 16843537, 16843538, 16843539, 16843646, 16843897});
+        TypedArray typedArrayObtainStyledAttributes = this.mTextView.getContext().obtainStyledAttributes(new int[]{R.attr.actionModeUndoDrawable, R.attr.actionModeRedoDrawable, 16843537, 16843538, 16843539, 16843646, 16843897});
         boolean z = false;
-        if (Flags.contextMenuHideUnavailableItems()) {
+        if (com.android.text.flags.Flags.contextMenuHideUnavailableItems()) {
             if (this.mTextView.canUndo()) {
-                contextMenu.add(1, 16908338, 10, R.string.undo).setAlphabeticShortcut(DateFormat.TIME_ZONE).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(obtainStyledAttributes.getDrawable(0));
+                contextMenu.add(1, 16908338, 10, R.string.undo).setAlphabeticShortcut(DateFormat.TIME_ZONE).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(typedArrayObtainStyledAttributes.getDrawable(0));
             }
             if (this.mTextView.canRedo()) {
-                contextMenu.add(1, 16908339, 11, R.string.redo).setAlphabeticShortcut(DateFormat.TIME_ZONE, 4097).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(obtainStyledAttributes.getDrawable(1));
+                contextMenu.add(1, 16908339, 11, R.string.redo).setAlphabeticShortcut(DateFormat.TIME_ZONE, 4097).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(typedArrayObtainStyledAttributes.getDrawable(1));
             }
             if (this.mTextView.canCut()) {
-                contextMenu.add(2, 16908320, 2, 17039363).setAlphabeticShortcut(EpicenterTranslateClipReveal.StateProperty.TARGET_X).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(obtainStyledAttributes.getDrawable(2));
+                contextMenu.add(2, 16908320, 2, 17039363).setAlphabeticShortcut(EpicenterTranslateClipReveal.StateProperty.TARGET_X).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(typedArrayObtainStyledAttributes.getDrawable(2));
             }
             if (this.mTextView.canCopy()) {
-                contextMenu.add(2, 16908321, 3, 17039361).setAlphabeticShortcut('c').setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(obtainStyledAttributes.getDrawable(3));
+                contextMenu.add(2, 16908321, 3, 17039361).setAlphabeticShortcut('c').setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(typedArrayObtainStyledAttributes.getDrawable(3));
             }
             if (this.mTextView.canPaste()) {
-                contextMenu.add(2, 16908322, 4, 17039371).setAlphabeticShortcut('v').setIcon(obtainStyledAttributes.getDrawable(4)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
+                contextMenu.add(2, 16908322, 4, 17039371).setAlphabeticShortcut('v').setIcon(typedArrayObtainStyledAttributes.getDrawable(4)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
             }
             if (this.mTextView.canPasteAsPlainText()) {
-                contextMenu.add(2, 16908337, 6, 17039385).setAlphabeticShortcut('v', 4097).setIcon(obtainStyledAttributes.getDrawable(4)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
+                contextMenu.add(2, 16908337, 6, 17039385).setAlphabeticShortcut('v', 4097).setIcon(typedArrayObtainStyledAttributes.getDrawable(4)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
             }
             if (this.mTextView.canSelectAllText()) {
-                contextMenu.add(2, 16908319, 7, 17039373).setAlphabeticShortcut(DateFormat.AM_PM).setIcon(obtainStyledAttributes.getDrawable(5)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
+                contextMenu.add(2, 16908319, 7, 17039373).setAlphabeticShortcut(DateFormat.AM_PM).setIcon(typedArrayObtainStyledAttributes.getDrawable(5)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
             }
             if (this.mTextView.canShare()) {
-                contextMenu.add(3, 16908341, 9, R.string.share).setIcon(obtainStyledAttributes.getDrawable(6)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
+                contextMenu.add(3, 16908341, 9, R.string.share).setIcon(typedArrayObtainStyledAttributes.getDrawable(6)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
             }
             String selectedText = this.mTextView.getSelectedText();
             if (this.mTextView.canRequestAutofill() && (selectedText == null || selectedText.isEmpty())) {
                 contextMenu.add(3, 16908355, 8, 17039386).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
             }
         } else {
-            contextMenu.add(1, 16908338, 10, R.string.undo).setAlphabeticShortcut(DateFormat.TIME_ZONE).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(obtainStyledAttributes.getDrawable(0)).setEnabled(this.mTextView.canUndo());
-            contextMenu.add(1, 16908339, 11, R.string.redo).setAlphabeticShortcut(DateFormat.TIME_ZONE, 4097).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(obtainStyledAttributes.getDrawable(1)).setEnabled(this.mTextView.canRedo());
-            contextMenu.add(2, 16908320, 2, 17039363).setAlphabeticShortcut(EpicenterTranslateClipReveal.StateProperty.TARGET_X).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(obtainStyledAttributes.getDrawable(2)).setEnabled(this.mTextView.canCut());
-            contextMenu.add(2, 16908321, 3, 17039361).setAlphabeticShortcut('c').setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(obtainStyledAttributes.getDrawable(3)).setEnabled(this.mTextView.canCopy());
-            contextMenu.add(2, 16908322, 4, 17039371).setAlphabeticShortcut('v').setEnabled(this.mTextView.canPaste()).setIcon(obtainStyledAttributes.getDrawable(4)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
-            contextMenu.add(2, 16908337, 6, 17039385).setAlphabeticShortcut('v', 4097).setEnabled(this.mTextView.canPasteAsPlainText()).setIcon(obtainStyledAttributes.getDrawable(4)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
-            contextMenu.add(2, 16908319, 7, 17039373).setAlphabeticShortcut(DateFormat.AM_PM).setEnabled(this.mTextView.canSelectAllText()).setIcon(obtainStyledAttributes.getDrawable(5)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
-            contextMenu.add(3, 16908341, 9, R.string.share).setEnabled(this.mTextView.canShare()).setIcon(obtainStyledAttributes.getDrawable(6)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
+            contextMenu.add(1, 16908338, 10, R.string.undo).setAlphabeticShortcut(DateFormat.TIME_ZONE).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(typedArrayObtainStyledAttributes.getDrawable(0)).setEnabled(this.mTextView.canUndo());
+            contextMenu.add(1, 16908339, 11, R.string.redo).setAlphabeticShortcut(DateFormat.TIME_ZONE, 4097).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(typedArrayObtainStyledAttributes.getDrawable(1)).setEnabled(this.mTextView.canRedo());
+            contextMenu.add(2, 16908320, 2, 17039363).setAlphabeticShortcut(EpicenterTranslateClipReveal.StateProperty.TARGET_X).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(typedArrayObtainStyledAttributes.getDrawable(2)).setEnabled(this.mTextView.canCut());
+            contextMenu.add(2, 16908321, 3, 17039361).setAlphabeticShortcut('c').setOnMenuItemClickListener(this.mOnContextMenuItemClickListener).setIcon(typedArrayObtainStyledAttributes.getDrawable(3)).setEnabled(this.mTextView.canCopy());
+            contextMenu.add(2, 16908322, 4, 17039371).setAlphabeticShortcut('v').setEnabled(this.mTextView.canPaste()).setIcon(typedArrayObtainStyledAttributes.getDrawable(4)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
+            contextMenu.add(2, 16908337, 6, 17039385).setAlphabeticShortcut('v', 4097).setEnabled(this.mTextView.canPasteAsPlainText()).setIcon(typedArrayObtainStyledAttributes.getDrawable(4)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
+            contextMenu.add(2, 16908319, 7, 17039373).setAlphabeticShortcut(DateFormat.AM_PM).setEnabled(this.mTextView.canSelectAllText()).setIcon(typedArrayObtainStyledAttributes.getDrawable(5)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
+            contextMenu.add(3, 16908341, 9, R.string.share).setEnabled(this.mTextView.canShare()).setIcon(typedArrayObtainStyledAttributes.getDrawable(6)).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
             String selectedText2 = this.mTextView.getSelectedText();
-            MenuItem add = contextMenu.add(3, 16908355, 8, 17039386);
+            MenuItem menuItemAdd = contextMenu.add(3, 16908355, 8, 17039386);
             if (this.mTextView.canRequestAutofill() && (selectedText2 == null || selectedText2.isEmpty())) {
                 z = true;
             }
-            add.setEnabled(z).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
+            menuItemAdd.setEnabled(z).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
         }
         if (this.SEP_VERSION.floatValue() >= 15.1d && !this.mTextView.hasPasswordTransformationMethod() && ViewRune.WIDGET_SSS_TRANSLATE_SUPPORTED && this.mTextView.getContext().canStartActivityForResult()) {
             contextMenu.add(2, R.id.sssTranslate, 5, R.string.sss_translate).setEnabled(this.mTextView.hasSelection()).setOnMenuItemClickListener(this.mOnContextMenuItemClickListener);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public void adjustIconSpacing(ContextMenu contextMenu) {
-        int i = -1;
-        int i2 = -1;
-        for (int i3 = 0; i3 < contextMenu.size(); i3++) {
-            Drawable icon = contextMenu.getItem(i3).getIcon();
+        int iMax = -1;
+        int iMax2 = -1;
+        for (int i = 0; i < contextMenu.size(); i++) {
+            Drawable icon = contextMenu.getItem(i).getIcon();
             if (icon != null) {
-                i = Math.max(i, icon.getIntrinsicWidth());
-                i2 = Math.max(i2, icon.getIntrinsicHeight());
+                iMax = Math.max(iMax, icon.getIntrinsicWidth());
+                iMax2 = Math.max(iMax2, icon.getIntrinsicHeight());
             }
         }
-        if (i < 0 || i2 < 0) {
+        if (iMax < 0 || iMax2 < 0) {
             return;
         }
         GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setSize(i, i2);
-        for (int i4 = 0; i4 < contextMenu.size(); i4++) {
-            MenuItem item = contextMenu.getItem(i4);
+        gradientDrawable.setSize(iMax, iMax2);
+        for (int i2 = 0; i2 < contextMenu.size(); i2++) {
+            MenuItem item = contextMenu.getItem(i2);
             if (item.getIcon() == null) {
                 item.setIcon(gradientDrawable);
             }
@@ -2911,17 +2783,17 @@ public class Editor {
     /* JADX INFO: Access modifiers changed from: private */
     public void replaceWithSuggestion(SuggestionInfo suggestionInfo) {
         int i;
-        SuggestionSpan findEquivalentSuggestionSpan = findEquivalentSuggestionSpan(suggestionInfo.mSuggestionSpanInfo);
-        if (findEquivalentSuggestionSpan == null) {
+        SuggestionSpan suggestionSpanFindEquivalentSuggestionSpan = findEquivalentSuggestionSpan(suggestionInfo.mSuggestionSpanInfo);
+        if (suggestionSpanFindEquivalentSuggestionSpan == null) {
             return;
         }
         Editable editable = (Editable) this.mTextView.getText();
-        int spanStart = editable.getSpanStart(findEquivalentSuggestionSpan);
-        int spanEnd = editable.getSpanEnd(findEquivalentSuggestionSpan);
+        int spanStart = editable.getSpanStart(suggestionSpanFindEquivalentSuggestionSpan);
+        int spanEnd = editable.getSpanEnd(suggestionSpanFindEquivalentSuggestionSpan);
         if (spanStart < 0 || spanEnd <= spanStart) {
             return;
         }
-        String substring = TextUtils.substring(editable, spanStart, spanEnd);
+        String strSubstring = TextUtils.substring(editable, spanStart, spanEnd);
         SuggestionSpan[] suggestionSpanArr = (SuggestionSpan[]) editable.getSpans(spanStart, spanEnd, SuggestionSpan.class);
         int length = suggestionSpanArr.length;
         int[] iArr = new int[length];
@@ -2937,20 +2809,20 @@ public class Editor {
                 suggestionSpan.setFlags(flags & (-12));
             }
         }
-        String charSequence = suggestionInfo.mText.subSequence(suggestionInfo.mSuggestionStart, suggestionInfo.mSuggestionEnd).toString();
-        this.mTextView.replaceText_internal(spanStart, spanEnd, charSequence);
-        findEquivalentSuggestionSpan.getSuggestions()[suggestionInfo.mSuggestionIndex] = substring;
-        int length2 = charSequence.length() - (spanEnd - spanStart);
+        String string = suggestionInfo.mText.subSequence(suggestionInfo.mSuggestionStart, suggestionInfo.mSuggestionEnd).toString();
+        this.mTextView.replaceText_internal(spanStart, spanEnd, string);
+        suggestionSpanFindEquivalentSuggestionSpan.getSuggestions()[suggestionInfo.mSuggestionIndex] = strSubstring;
+        int length2 = string.length() - (spanEnd - spanStart);
         for (int i3 = 0; i3 < length; i3++) {
             if (iArr[i3] <= spanStart && (i = iArr2[i3]) >= spanEnd && i + length2 <= this.mTextView.length()) {
                 this.mTextView.setSpan_internal(suggestionSpanArr[i3], iArr[i3], iArr2[i3] + length2, iArr3[i3]);
             }
         }
-        int i4 = spanEnd + length2;
-        if (i4 > this.mTextView.length()) {
-            i4 = this.mTextView.length();
+        int length3 = spanEnd + length2;
+        if (length3 > this.mTextView.length()) {
+            length3 = this.mTextView.length();
         }
-        this.mTextView.setCursorPosition_internal(i4, i4);
+        this.mTextView.setCursorPosition_internal(length3, length3);
     }
 
     private class SpanController implements SpanWatcher {
@@ -3240,7 +3112,11 @@ public class Editor {
             return this.mPositionYOnScreen;
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:24:0x0058  */
         @Override // android.view.ViewTreeObserver.OnPreDrawListener
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public boolean onPreDraw() {
             TextViewPositionListener textViewPositionListener;
             updatePosition();
@@ -3257,8 +3133,7 @@ public class Editor {
                             Editor.this.mTextView.removeCallbacks(this.mUpdatePosition);
                             Editor.this.mTextView.postDelayed(this.mUpdatePosition, 300L);
                         }
-                    }
-                    if (!(textViewPositionListener instanceof SelectionHandleView) || Editor.this.mTextActionMode != null) {
+                    } else if (!(textViewPositionListener instanceof SelectionHandleView) || Editor.this.mTextActionMode != null) {
                         textViewPositionListener.updatePosition(this.mPositionX, this.mPositionY, this.mPositionHasChanged, this.mScrollHasChanged);
                     }
                 }
@@ -3332,25 +3207,25 @@ public class Editor {
         private void computeLocalPosition() {
             measureContent();
             int measuredWidth = this.mContentView.getMeasuredWidth();
-            int originalToTransformed = Editor.this.mTextView.originalToTransformed(getTextOffset(), 1);
+            int iOriginalToTransformed = Editor.this.mTextView.originalToTransformed(getTextOffset(), 1);
             Layout layout = Editor.this.mTextView.getLayout();
-            int primaryHorizontal = (int) (layout.getPrimaryHorizontal(originalToTransformed) - (measuredWidth / 2.0f));
+            int primaryHorizontal = (int) (layout.getPrimaryHorizontal(iOriginalToTransformed) - (measuredWidth / 2.0f));
             this.mPositionX = primaryHorizontal;
             this.mPositionX = primaryHorizontal + Editor.this.mTextView.viewportToContentHorizontalOffset();
-            int verticalLocalPosition = getVerticalLocalPosition(layout.getLineForOffset(originalToTransformed));
+            int verticalLocalPosition = getVerticalLocalPosition(layout.getLineForOffset(iOriginalToTransformed));
             this.mPositionY = verticalLocalPosition;
             this.mPositionY = verticalLocalPosition + Editor.this.mTextView.viewportToContentVerticalOffset();
         }
 
         private void updatePosition(int i, int i2) {
             int i3 = i + this.mPositionX;
-            int clipVertically = clipVertically(i2 + this.mPositionY);
+            int iClipVertically = clipVertically(i2 + this.mPositionY);
             DisplayMetrics displayMetrics = Editor.this.mTextView.getResources().getDisplayMetrics();
-            int max = Math.max(-this.mClippingLimitLeft, Math.min((displayMetrics.widthPixels - this.mContentView.getMeasuredWidth()) + this.mClippingLimitRight, i3));
+            int iMax = Math.max(-this.mClippingLimitLeft, Math.min((displayMetrics.widthPixels - this.mContentView.getMeasuredWidth()) + this.mClippingLimitRight, i3));
             if (isShowing()) {
-                this.mPopupWindow.update(max, clipVertically, -1, -1);
+                this.mPopupWindow.update(iMax, iClipVertically, -1, -1);
             } else {
-                this.mPopupWindow.showAtLocation(Editor.this.mTextView, 0, max, clipVertically);
+                this.mPopupWindow.showAtLocation(Editor.this.mTextView, 0, iMax, iClipVertically);
             }
         }
 
@@ -3441,17 +3316,17 @@ public class Editor {
                 int flags = suggestionSpan.getFlags();
                 int flags2 = suggestionSpan2.getFlags();
                 if (flags != flags2) {
-                    int compareFlag = compareFlag(1, flags, flags2);
-                    if (compareFlag != 0) {
-                        return compareFlag;
+                    int iCompareFlag = compareFlag(1, flags, flags2);
+                    if (iCompareFlag != 0) {
+                        return iCompareFlag;
                     }
-                    int compareFlag2 = compareFlag(2, flags, flags2);
-                    if (compareFlag2 != 0) {
-                        return compareFlag2;
+                    int iCompareFlag2 = compareFlag(2, flags, flags2);
+                    if (iCompareFlag2 != 0) {
+                        return iCompareFlag2;
                     }
-                    int compareFlag3 = compareFlag(8, flags, flags2);
-                    if (compareFlag3 != 0) {
-                        return compareFlag3;
+                    int iCompareFlag3 = compareFlag(8, flags, flags2);
+                    if (iCompareFlag3 != 0) {
+                        return iCompareFlag3;
                     }
                 }
                 return ((Integer) SuggestionHelper.this.mSpansLengths.get(suggestionSpan)).intValue() - ((Integer) SuggestionHelper.this.mSpansLengths.get(suggestionSpan2)).intValue();
@@ -3591,9 +3466,9 @@ public class Editor {
         }
 
         private Context applyDefaultTheme(Context context) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{16844176});
-            int i = obtainStyledAttributes.getBoolean(0, true) ? 16974410 : 16974411;
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{16844176});
+            int i = typedArrayObtainStyledAttributes.getBoolean(0, true) ? 16974410 : 16974411;
+            typedArrayObtainStyledAttributes.recycle();
             if (Editor.this.mIsThemeDeviceDefault) {
                 i = (context.getResources().getConfiguration().uiMode & 48) == 32 ? 16974120 : 16974123;
             }
@@ -3646,19 +3521,19 @@ public class Editor {
                 textView.setOnClickListener(new View.OnClickListener() { // from class: android.widget.Editor.SuggestionsPopupWindow.1
                     @Override // android.view.View.OnClickListener
                     public void onClick(View view) {
-                        SuggestionSpan findEquivalentSuggestionSpan = Editor.this.findEquivalentSuggestionSpan(SuggestionsPopupWindow.this.mMisspelledSpanInfo);
-                        if (findEquivalentSuggestionSpan == null) {
+                        SuggestionSpan suggestionSpanFindEquivalentSuggestionSpan = Editor.this.findEquivalentSuggestionSpan(SuggestionsPopupWindow.this.mMisspelledSpanInfo);
+                        if (suggestionSpanFindEquivalentSuggestionSpan == null) {
                             return;
                         }
                         Editable editable = (Editable) Editor.this.mTextView.getText();
-                        int spanStart = editable.getSpanStart(findEquivalentSuggestionSpan);
-                        int spanEnd = editable.getSpanEnd(findEquivalentSuggestionSpan);
+                        int spanStart = editable.getSpanStart(suggestionSpanFindEquivalentSuggestionSpan);
+                        int spanEnd = editable.getSpanEnd(suggestionSpanFindEquivalentSuggestionSpan);
                         if (spanStart < 0 || spanEnd <= spanStart) {
                             return;
                         }
-                        String substring = TextUtils.substring(editable, spanStart, spanEnd);
+                        String strSubstring = TextUtils.substring(editable, spanStart, spanEnd);
                         Intent intent = new Intent(Settings.ACTION_USER_DICTIONARY_INSERT);
-                        intent.putExtra("word", substring);
+                        intent.putExtra("word", strSubstring);
                         intent.putExtra("locale", Editor.this.mTextView.getTextServicesLocale().toString());
                         intent.setFlags(intent.getFlags() | 268435456);
                         Editor.this.mTextView.startActivityAsTextOperationUserIfNecessary(intent);
@@ -3764,32 +3639,32 @@ public class Editor {
         @Override // android.widget.Editor.PinnedPopupWindow
         protected void measureContent() {
             DisplayMetrics displayMetrics = Editor.this.mTextView.getResources().getDisplayMetrics();
-            int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(displayMetrics.widthPixels, Integer.MIN_VALUE);
-            int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(displayMetrics.heightPixels, Integer.MIN_VALUE);
+            int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(displayMetrics.widthPixels, Integer.MIN_VALUE);
+            int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(displayMetrics.heightPixels, Integer.MIN_VALUE);
             View view = null;
-            int i = 0;
-            for (int i2 = 0; i2 < this.mNumberOfSuggestions; i2++) {
-                view = this.mSuggestionsAdapter.getView(i2, view, this.mContentView);
+            int iMax = 0;
+            for (int i = 0; i < this.mNumberOfSuggestions; i++) {
+                view = this.mSuggestionsAdapter.getView(i, view, this.mContentView);
                 view.getLayoutParams().width = -2;
-                view.measure(makeMeasureSpec, makeMeasureSpec2);
-                i = Math.max(i, view.getMeasuredWidth());
+                view.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
+                iMax = Math.max(iMax, view.getMeasuredWidth());
             }
             if (this.mAddToDictionaryButton.getVisibility() != 8) {
-                this.mAddToDictionaryButton.measure(makeMeasureSpec, makeMeasureSpec2);
-                i = Math.max(i, this.mAddToDictionaryButton.getMeasuredWidth());
+                this.mAddToDictionaryButton.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
+                iMax = Math.max(iMax, this.mAddToDictionaryButton.getMeasuredWidth());
             }
-            this.mDeleteButton.measure(makeMeasureSpec, makeMeasureSpec2);
-            int max = Math.max(i, this.mDeleteButton.getMeasuredWidth()) + this.mContainerView.getPaddingLeft() + this.mContainerView.getPaddingRight() + this.mContainerMarginWidth;
-            this.mContentView.measure(View.MeasureSpec.makeMeasureSpec(max, 1073741824), makeMeasureSpec2);
+            this.mDeleteButton.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
+            int iMax2 = Math.max(iMax, this.mDeleteButton.getMeasuredWidth()) + this.mContainerView.getPaddingLeft() + this.mContainerView.getPaddingRight() + this.mContainerMarginWidth;
+            this.mContentView.measure(View.MeasureSpec.makeMeasureSpec(iMax2, 1073741824), iMakeMeasureSpec2);
             Drawable background = this.mPopupWindow.getBackground();
             if (background != null) {
                 if (Editor.this.mTempRect == null) {
                     Editor.this.mTempRect = new Rect();
                 }
                 background.getPadding(Editor.this.mTempRect);
-                max += Editor.this.mTempRect.left + Editor.this.mTempRect.right;
+                iMax2 += Editor.this.mTempRect.left + Editor.this.mTempRect.right;
             }
-            this.mPopupWindow.setWidth(max);
+            this.mPopupWindow.setWidth(iMax2);
         }
 
         @Override // android.widget.Editor.PinnedPopupWindow
@@ -3825,24 +3700,24 @@ public class Editor {
                 return false;
             }
             int length = Editor.this.mTextView.getText().length();
-            int i = 0;
-            for (int i2 = 0; i2 < this.mNumberOfSuggestions; i2++) {
-                SuggestionSpanInfo suggestionSpanInfo = this.mSuggestionInfos[i2].mSuggestionSpanInfo;
+            int iMax = 0;
+            for (int i = 0; i < this.mNumberOfSuggestions; i++) {
+                SuggestionSpanInfo suggestionSpanInfo = this.mSuggestionInfos[i].mSuggestionSpanInfo;
                 length = Math.min(length, suggestionSpanInfo.mSpanStart);
-                i = Math.max(i, suggestionSpanInfo.mSpanEnd);
+                iMax = Math.max(iMax, suggestionSpanInfo.mSpanEnd);
             }
             if (this.mMisspelledSpanInfo.mSuggestionSpan != null) {
                 length = Math.min(length, this.mMisspelledSpanInfo.mSpanStart);
-                i = Math.max(i, this.mMisspelledSpanInfo.mSpanEnd);
+                iMax = Math.max(iMax, this.mMisspelledSpanInfo.mSpanEnd);
             }
-            for (int i3 = 0; i3 < this.mNumberOfSuggestions; i3++) {
+            for (int i2 = 0; i2 < this.mNumberOfSuggestions; i2++) {
                 try {
-                    highlightTextDifferences(this.mSuggestionInfos[i3], length, i);
+                    highlightTextDifferences(this.mSuggestionInfos[i2], length, iMax);
                 } catch (IndexOutOfBoundsException unused) {
-                    SuggestionSpanInfo suggestionSpanInfo2 = this.mSuggestionInfos[i3].mSuggestionSpanInfo;
-                    Log.e("Editor", "mNumberOfSuggestions = " + this.mNumberOfSuggestions + ", i = " + i3);
+                    SuggestionSpanInfo suggestionSpanInfo2 = this.mSuggestionInfos[i2].mSuggestionSpanInfo;
+                    Log.e("Editor", "mNumberOfSuggestions = " + this.mNumberOfSuggestions + ", i = " + i2);
                     Log.e("Editor", "spanInfo.mSpanStart : " + suggestionSpanInfo2.mSpanStart + ", spanInfo.mSpanEnd : " + suggestionSpanInfo2.mSpanEnd);
-                    Log.e("Editor", "spanUnionStart : " + length + ", spanUnionEnd : " + i);
+                    Log.e("Editor", "spanUnionStart : " + length + ", spanUnionEnd : " + iMax);
                     StringBuilder sb = new StringBuilder("mTextView.getText() = ");
                     sb.append((Object) Editor.this.mTextView.getText());
                     Log.e("Editor", sb.toString());
@@ -3853,9 +3728,9 @@ public class Editor {
                 }
             }
             InputMethodManager inputMethodManager = Editor.this.getInputMethodManager();
-            int i4 = (this.mMisspelledSpanInfo.mSuggestionSpan == null || inputMethodManager == null || inputMethodManager.isCurrentInputMethodAsSamsungKeyboard() || this.mMisspelledSpanInfo.mSpanStart < 0 || this.mMisspelledSpanInfo.mSpanEnd <= this.mMisspelledSpanInfo.mSpanStart) ? 8 : 0;
-            this.mAddToDictionaryButton.setVisibility(i4);
-            if (i4 == 0) {
+            int i3 = (this.mMisspelledSpanInfo.mSuggestionSpan == null || inputMethodManager == null || inputMethodManager.isCurrentInputMethodAsSamsungKeyboard() || this.mMisspelledSpanInfo.mSpanStart < 0 || this.mMisspelledSpanInfo.mSpanEnd <= this.mMisspelledSpanInfo.mSpanStart) ? 8 : 0;
+            this.mAddToDictionaryButton.setVisibility(i3);
+            if (i3 == 0) {
                 this.mNumberOfButtons = 2;
             } else {
                 this.mNumberOfButtons = 1;
@@ -3873,11 +3748,11 @@ public class Editor {
             } else {
                 Editor.this.mSuggestionRangeSpan.setBackgroundColor((underlineColor & 16777215) + (((int) (Color.alpha(underlineColor) * 0.4f)) << 24));
             }
-            boolean isVisibleToAccessibility = Editor.this.mTextView.isVisibleToAccessibility();
-            SpannedString spannedString = isVisibleToAccessibility ? new SpannedString(spannable, true) : null;
-            spannable.setSpan(Editor.this.mSuggestionRangeSpan, length, i, 33);
-            if (isVisibleToAccessibility) {
-                Editor.this.mTextView.sendAccessibilityEventTypeViewTextChanged(spannedString, length, i);
+            boolean zIsVisibleToAccessibility = Editor.this.mTextView.isVisibleToAccessibility();
+            SpannedString spannedString = zIsVisibleToAccessibility ? new SpannedString(spannable, true) : null;
+            spannable.setSpan(Editor.this.mSuggestionRangeSpan, length, iMax, 33);
+            if (zIsVisibleToAccessibility) {
+                Editor.this.mTextView.sendAccessibilityEventTypeViewTextChanged(spannedString, length, iMax);
             }
             this.mSuggestionsAdapter.notifyDataSetChanged();
             return true;
@@ -3889,10 +3764,12 @@ public class Editor {
             int i4 = suggestionInfo.mSuggestionSpanInfo.mSpanEnd;
             suggestionInfo.mSuggestionStart = i3 - i;
             suggestionInfo.mSuggestionEnd = suggestionInfo.mSuggestionStart + suggestionInfo.mText.length();
-            suggestionInfo.mText.setSpan(this.mHighlightSpan, 0, suggestionInfo.mText.length(), 33);
-            String spannable2 = spannable.toString();
-            suggestionInfo.mText.insert(0, (CharSequence) spannable2.substring(i, i3));
-            suggestionInfo.mText.append((CharSequence) spannable2.substring(i4, i2));
+            if (!Editor.this.mIsThemeDeviceDefault) {
+                suggestionInfo.mText.setSpan(this.mHighlightSpan, 0, suggestionInfo.mText.length(), 33);
+            }
+            String string = spannable.toString();
+            suggestionInfo.mText.insert(0, (CharSequence) string.substring(i, i3));
+            suggestionInfo.mText.append((CharSequence) string.substring(i4, i2));
         }
 
         @Override // android.widget.AdapterView.OnItemClickListener
@@ -3921,19 +3798,19 @@ public class Editor {
 
         private void clickButtons(View view) {
             if (view == this.mAddToDictionaryButton) {
-                SuggestionSpan findEquivalentSuggestionSpan = Editor.this.findEquivalentSuggestionSpan(this.mMisspelledSpanInfo);
-                if (findEquivalentSuggestionSpan == null) {
+                SuggestionSpan suggestionSpanFindEquivalentSuggestionSpan = Editor.this.findEquivalentSuggestionSpan(this.mMisspelledSpanInfo);
+                if (suggestionSpanFindEquivalentSuggestionSpan == null) {
                     return;
                 }
                 Editable editable = (Editable) Editor.this.mTextView.getText();
-                int spanStart = editable.getSpanStart(findEquivalentSuggestionSpan);
-                int spanEnd = editable.getSpanEnd(findEquivalentSuggestionSpan);
+                int spanStart = editable.getSpanStart(suggestionSpanFindEquivalentSuggestionSpan);
+                int spanEnd = editable.getSpanEnd(suggestionSpanFindEquivalentSuggestionSpan);
                 if (spanStart < 0 || spanEnd <= spanStart) {
                     return;
                 }
-                String substring = TextUtils.substring(editable, spanStart, spanEnd);
+                String strSubstring = TextUtils.substring(editable, spanStart, spanEnd);
                 Intent intent = new Intent(Settings.ACTION_USER_DICTIONARY_INSERT);
-                intent.putExtra("word", substring);
+                intent.putExtra("word", strSubstring);
                 intent.putExtra("locale", Editor.this.mTextView.getTextServicesLocale().toString());
                 intent.setFlags(intent.getFlags() | 268435456);
                 Editor.this.mTextView.getContext().startActivity(intent);
@@ -4110,11 +3987,11 @@ public class Editor {
             populateMenuWithItems(menu);
             AccessibilityManager accessibilityManager = (AccessibilityManager) Editor.this.mTextView.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
             if (accessibilityManager != null && accessibilityManager.isEnabled()) {
-                AccessibilityEvent obtain = AccessibilityEvent.obtain(16384);
-                obtain.getText().clear();
-                obtain.getText().add(Editor.this.mTextView.getContext().getText(R.string.copy_and_paste_toolbar));
-                obtain.setPackageName(Editor.this.mTextView.getContext().getPackageName());
-                accessibilityManager.sendAccessibilityEvent(obtain);
+                AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(16384);
+                accessibilityEventObtain.getText().clear();
+                accessibilityEventObtain.getText().add(Editor.this.mTextView.getContext().getText(R.string.copy_and_paste_toolbar));
+                accessibilityEventObtain.setPackageName(Editor.this.mTextView.getContext().getPackageName());
+                accessibilityManager.sendAccessibilityEvent(accessibilityEventObtain);
             }
             ActionMode.Callback customCallback = getCustomCallback();
             if (customCallback != null && !customCallback.onCreateActionMode(actionMode, menu)) {
@@ -4212,12 +4089,12 @@ public class Editor {
         }
 
         private void updateSelectAllItem(Menu menu) {
-            boolean canSelectAllText = Editor.this.mTextView.canSelectAllText();
+            boolean zCanSelectAllText = Editor.this.mTextView.canSelectAllText();
             boolean z = menu.findItem(16908319) != null;
-            if (canSelectAllText && !z) {
+            if (zCanSelectAllText && !z) {
                 menu.add(0, 16908319, 9, 17039373).setShowAsAction(1);
             } else {
-                if (canSelectAllText || !z) {
+                if (zCanSelectAllText || !z) {
                     return;
                 }
                 menu.removeItem(16908319);
@@ -4295,12 +4172,12 @@ public class Editor {
                 this.mSelectionBounds.bottom += this.mHandleHeight;
             } else {
                 int lineForOffset = activeLayout.getLineForOffset(selectionStartTransformed);
-                float clampHorizontalPosition = Editor.this.clampHorizontalPosition(null, activeLayout.getPrimaryHorizontal(selectionEndTransformed));
-                this.mSelectionBounds.set(clampHorizontalPosition, activeLayout.getLineTop(lineForOffset), clampHorizontalPosition, activeLayout.getLineBottom(lineForOffset) + this.mHandleHeight);
+                float fClampHorizontalPosition = Editor.this.clampHorizontalPosition(null, activeLayout.getPrimaryHorizontal(selectionEndTransformed));
+                this.mSelectionBounds.set(fClampHorizontalPosition, activeLayout.getLineTop(lineForOffset), fClampHorizontalPosition, activeLayout.getLineBottom(lineForOffset) + this.mHandleHeight);
             }
-            float viewportToContentHorizontalOffset = Editor.this.mTextView.viewportToContentHorizontalOffset();
-            float viewportToContentVerticalOffset = Editor.this.mTextView.viewportToContentVerticalOffset();
-            rect.set((int) Math.floor(this.mSelectionBounds.left + viewportToContentHorizontalOffset), (int) Math.floor(this.mSelectionBounds.top + viewportToContentVerticalOffset), (int) Math.ceil(this.mSelectionBounds.right + viewportToContentHorizontalOffset), (int) Math.ceil(this.mSelectionBounds.bottom + viewportToContentVerticalOffset));
+            float fViewportToContentHorizontalOffset = Editor.this.mTextView.viewportToContentHorizontalOffset();
+            float fViewportToContentVerticalOffset = Editor.this.mTextView.viewportToContentVerticalOffset();
+            rect.set((int) Math.floor(this.mSelectionBounds.left + fViewportToContentHorizontalOffset), (int) Math.floor(this.mSelectionBounds.top + fViewportToContentVerticalOffset), (int) Math.ceil(this.mSelectionBounds.right + fViewportToContentHorizontalOffset), (int) Math.ceil(this.mSelectionBounds.bottom + fViewportToContentVerticalOffset));
         }
     }
 
@@ -4341,14 +4218,14 @@ public class Editor {
 
         private MagnifierMotionAnimator(Magnifier magnifier) {
             this.mMagnifier = magnifier;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            this.mAnimator = ofFloat;
-            ofFloat.setDuration(DURATION);
-            ofFloat.setInterpolator(new LinearInterpolator());
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.Editor$MagnifierMotionAnimator$$ExternalSyntheticLambda0
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            this.mAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setDuration(DURATION);
+            valueAnimatorOfFloat.setInterpolator(new LinearInterpolator());
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.Editor$MagnifierMotionAnimator$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    Editor.MagnifierMotionAnimator.this.lambda$new$0(valueAnimator);
+                    this.f$0.lambda$new$0(valueAnimator);
                 }
             });
         }
@@ -4493,11 +4370,11 @@ public class Editor {
             this.CHANGE_SIZE_EVALUATOR = new TypeEvaluator<Rect>() { // from class: android.widget.Editor.HandleView.1
                 @Override // android.animation.TypeEvaluator
                 public Rect evaluate(float f, Rect rect, Rect rect2) {
-                    int width = rect.width();
-                    int height = rect.height();
-                    int width2 = rect2.width();
-                    int height2 = rect2.height();
-                    return HandleView.this.getDrawableBounds(width + Math.round((width2 - width) * f), height + Math.round((height2 - height) * f));
+                    int iWidth = rect.width();
+                    int iHeight = rect.height();
+                    int iWidth2 = rect2.width();
+                    int iHeight2 = rect2.height();
+                    return HandleView.this.getDrawableBounds(iWidth + Math.round((iWidth2 - iWidth) * f), iHeight + Math.round((iHeight2 - iHeight) * f));
                 }
             };
             this.mPathInterpolator = new PathInterpolator(0.25f, 0.46f, 0.45f, 1.0f);
@@ -4522,9 +4399,9 @@ public class Editor {
                 this.mIdealVerticalOffset = f;
                 this.mIdealFingerToCursorOffset = (int) (f - this.mTouchOffsetY);
             } else {
-                int applyDimension = (int) TypedValue.applyDimension(1, intCoreSetting, Editor.this.mTextView.getContext().getResources().getDisplayMetrics());
-                this.mIdealFingerToCursorOffset = applyDimension;
-                this.mIdealVerticalOffset = applyDimension + this.mTouchOffsetY;
+                int iApplyDimension = (int) TypedValue.applyDimension(1, intCoreSetting, Editor.this.mTextView.getContext().getResources().getDisplayMetrics());
+                this.mIdealFingerToCursorOffset = iApplyDimension;
+                this.mIdealVerticalOffset = iApplyDimension + this.mTouchOffsetY;
             }
         }
 
@@ -4546,16 +4423,16 @@ public class Editor {
             Layout layout;
             if ((z || !this.mIsDragging) && (layout = Editor.this.mTextView.getLayout()) != null) {
                 int currentCursorOffset = getCurrentCursorOffset();
-                boolean isAtRtlRun = isAtRtlRun(layout, currentCursorOffset);
+                boolean zIsAtRtlRun = isAtRtlRun(layout, currentCursorOffset);
                 Drawable drawable = this.mDrawable;
-                Drawable drawable2 = isAtRtlRun ? this.mDrawableRtl : this.mDrawableLtr;
+                Drawable drawable2 = zIsAtRtlRun ? this.mDrawableRtl : this.mDrawableLtr;
                 this.mDrawable = drawable2;
-                this.mHotspotX = getHotspotX(drawable2, isAtRtlRun);
-                this.mHorizontalGravity = getHorizontalGravity(isAtRtlRun);
+                this.mHotspotX = getHotspotX(drawable2, zIsAtRtlRun);
+                this.mHorizontalGravity = getHorizontalGravity(zIsAtRtlRun);
                 ((LinearLayout) this.mContainer.getContentView()).setGravity(this.mHorizontalGravity);
-                if (isScreenOut(getCursorHorizontalPosition(layout, currentCursorOffset) + getCursorOffset() + Editor.this.mTextView.viewportToContentHorizontalOffset() + Editor.this.getPositionListener().getPositionX(), isAtRtlRun)) {
-                    boolean z2 = !isAtRtlRun;
-                    Drawable drawable3 = !isAtRtlRun ? this.mDrawableRtl : this.mDrawableLtr;
+                if (isScreenOut(getCursorHorizontalPosition(layout, currentCursorOffset) + getCursorOffset() + Editor.this.mTextView.viewportToContentHorizontalOffset() + Editor.this.getPositionListener().getPositionX(), zIsAtRtlRun)) {
+                    boolean z2 = !zIsAtRtlRun;
+                    Drawable drawable3 = !zIsAtRtlRun ? this.mDrawableRtl : this.mDrawableLtr;
                     this.mDrawable = drawable3;
                     this.mHotspotX = getHotspotX(drawable3, z2);
                     this.mHorizontalGravity = getHorizontalGravity(z2);
@@ -4590,15 +4467,15 @@ public class Editor {
         }
 
         private void filterOnTouchUp(boolean z) {
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             int i = this.mPreviousOffsetIndex;
-            int min = Math.min(this.mNumberPreviousOffsets, 5);
+            int iMin = Math.min(this.mNumberPreviousOffsets, 5);
             int i2 = 0;
-            while (i2 < min && uptimeMillis - this.mPreviousOffsetsTimes[i] < 150) {
+            while (i2 < iMin && jUptimeMillis - this.mPreviousOffsetsTimes[i] < 150) {
                 i2++;
                 i = ((this.mPreviousOffsetIndex - i2) + 5) % 5;
             }
-            if (i2 <= 0 || i2 >= min || uptimeMillis - this.mPreviousOffsetsTimes[i] <= 350) {
+            if (i2 <= 0 || i2 >= iMin || jUptimeMillis - this.mPreviousOffsetsTimes[i] <= 350) {
                 return;
             }
             positionAtCursorOffset(this.mPreviousOffsets[i], false, z);
@@ -4805,9 +4682,9 @@ public class Editor {
                 int lineForOffset = getLineForOffset(layout, getCurrentCursorOffset());
                 return layout.getLineBottom(lineForOffset, false) - layout.getLineTop(lineForOffset) >= Editor.this.mMaxLineHeightForMagnifier;
             }
-            float round = Math.round(Editor.this.mMagnifierAnimator.mMagnifier.getHeight() / Editor.this.mMagnifierAnimator.mMagnifier.getZoom());
+            float fRound = Math.round(Editor.this.mMagnifierAnimator.mMagnifier.getHeight() / Editor.this.mMagnifierAnimator.mMagnifier.getZoom());
             Paint.FontMetrics fontMetrics = Editor.this.mTextView.getPaint().getFontMetrics();
-            return (fontMetrics.descent - fontMetrics.ascent) * this.mTextViewScaleY > round;
+            return (fontMetrics.descent - fontMetrics.ascent) * this.mTextViewScaleY > fRound;
         }
 
         private boolean checkForTransforms() {
@@ -4834,20 +4711,20 @@ public class Editor {
 
         private boolean obtainMagnifierShowCoordinates(MotionEvent motionEvent, PointF pointF) {
             int selectionStart;
-            int i;
+            int selectionEnd;
             int magnifierHandleTrigger = getMagnifierHandleTrigger();
             if (magnifierHandleTrigger == 0) {
                 selectionStart = Editor.this.mTextView.getSelectionStart();
-                i = -1;
+                selectionEnd = -1;
             } else if (magnifierHandleTrigger == 1) {
                 selectionStart = Editor.this.mTextView.getSelectionStart();
-                i = Editor.this.mTextView.getSelectionEnd();
+                selectionEnd = Editor.this.mTextView.getSelectionEnd();
             } else if (magnifierHandleTrigger != 2) {
                 selectionStart = -1;
-                i = -1;
+                selectionEnd = -1;
             } else {
                 selectionStart = Editor.this.mTextView.getSelectionEnd();
-                i = Editor.this.mTextView.getSelectionStart();
+                selectionEnd = Editor.this.mTextView.getSelectionStart();
             }
             if (selectionStart == -1) {
                 return false;
@@ -4859,10 +4736,10 @@ public class Editor {
             }
             Layout layout = Editor.this.mTextView.getLayout();
             int lineForOffset = getLineForOffset(layout, selectionStart);
-            if (i != -1 && lineForOffset == getLineForOffset(layout, selectionStart)) {
-                if (selectionStart < i) {
+            if (selectionEnd != -1 && lineForOffset == getLineForOffset(layout, selectionStart)) {
+                if (selectionStart < selectionEnd) {
                 }
-                if (getHorizontal(Editor.this.mTextView.getLayout(), selectionStart) < getHorizontal(Editor.this.mTextView.getLayout(), i)) {
+                if (getHorizontal(Editor.this.mTextView.getLayout(), selectionStart) < getHorizontal(Editor.this.mTextView.getLayout(), selectionEnd)) {
                 }
             }
             Editor.this.mTextView.getLocationOnScreen(new int[2]);
@@ -4964,7 +4841,7 @@ public class Editor {
 
         @Override // android.view.View
         public boolean onTouchEvent(MotionEvent motionEvent) {
-            float min;
+            float fMin;
             Editor.this.updateFloatingToolbarVisibility(motionEvent);
             int actionMasked = motionEvent.getActionMasked();
             if (actionMasked != 0) {
@@ -4982,12 +4859,12 @@ public class Editor {
                     float f2 = ((rawY + i) - this.mPositionY) - i;
                     float f3 = this.mIdealVerticalOffset;
                     if (f < f3) {
-                        min = Math.max(Math.min(f2, f3), f);
+                        fMin = Math.max(Math.min(f2, f3), f);
                     } else {
-                        min = Math.min(Math.max(f2, f3), f);
+                        fMin = Math.min(Math.max(f2, f3), f);
                     }
                     int i2 = this.mLastParentY;
-                    this.mTouchToWindowOffsetY = min + i2;
+                    this.mTouchToWindowOffsetY = fMin + i2;
                     this.mVerticalScrolledYOffset = i2 - this.mFirstParentY;
                     this.mIsVerticalScrolled = isScrollChanged(motionEvent);
                     try {
@@ -4998,11 +4875,11 @@ public class Editor {
                         Log.e("Editor", "handle view action move IndexOutOfBoundsException : " + e2);
                     }
                     if (this.mHandleVelocityTracker != null) {
-                        MotionEvent obtain = MotionEvent.obtain(this.mDownTime, SystemClock.uptimeMillis(), motionEvent.getActionMasked(), motionEvent.getRawX(), motionEvent.getRawY(), 0);
-                        this.mHandleVelocityTracker.addMovement(obtain);
+                        MotionEvent motionEventObtain = MotionEvent.obtain(this.mDownTime, SystemClock.uptimeMillis(), motionEvent.getActionMasked(), motionEvent.getRawX(), motionEvent.getRawY(), 0);
+                        this.mHandleVelocityTracker.addMovement(motionEventObtain);
                         this.mHandleVelocityTracker.computeCurrentVelocity(1);
                         Editor.this.mIsMagnifierHideByVelocityTracker = this.mHandleVelocityTracker.getYVelocity() > 0.5f || this.mHandleVelocityTracker.getYVelocity() < -0.5f;
-                        obtain.recycle();
+                        motionEventObtain.recycle();
                     }
                 } else if (actionMasked == 3) {
                     this.mIsDragging = false;
@@ -5039,12 +4916,12 @@ public class Editor {
                 } else {
                     velocityTracker2.clear();
                 }
-                long uptimeMillis = SystemClock.uptimeMillis();
-                this.mDownTime = uptimeMillis;
-                MotionEvent obtain2 = MotionEvent.obtain(uptimeMillis, SystemClock.uptimeMillis(), motionEvent.getActionMasked(), motionEvent.getRawX(), motionEvent.getRawY(), 0);
-                this.mHandleVelocityTracker.addMovement(obtain2);
+                long jUptimeMillis = SystemClock.uptimeMillis();
+                this.mDownTime = jUptimeMillis;
+                MotionEvent motionEventObtain2 = MotionEvent.obtain(jUptimeMillis, SystemClock.uptimeMillis(), motionEvent.getActionMasked(), motionEvent.getRawX(), motionEvent.getRawY(), 0);
+                this.mHandleVelocityTracker.addMovement(motionEventObtain2);
                 this.mHandleVelocityTracker.computeCurrentVelocity(1);
-                obtain2.recycle();
+                motionEventObtain2.recycle();
             }
             return true;
         }
@@ -5108,14 +4985,14 @@ public class Editor {
         }
 
         private ObjectAnimator getChangeSizeAnimator(Rect rect, final Rect rect2) {
-            ObjectAnimator ofObject = ObjectAnimator.ofObject(this.mDrawable, "bounds", this.CHANGE_SIZE_EVALUATOR, rect, rect2);
-            ofObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.Editor.HandleView.2
+            ObjectAnimator objectAnimatorOfObject = ObjectAnimator.ofObject(this.mDrawable, "bounds", this.CHANGE_SIZE_EVALUATOR, rect, rect2);
+            objectAnimatorOfObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.Editor.HandleView.2
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     HandleView.this.invalidate();
                 }
             });
-            ofObject.addListener(new AnimatorListenerAdapter() { // from class: android.widget.Editor.HandleView.3
+            objectAnimatorOfObject.addListener(new AnimatorListenerAdapter() { // from class: android.widget.Editor.HandleView.3
                 @Override // android.animation.Animator.AnimatorListener
                 public void onAnimationStart(Animator animator, boolean z) {
                     HandleView.this.requestLayout();
@@ -5128,7 +5005,7 @@ public class Editor {
                     HandleView.this.invalidate();
                 }
             });
-            return ofObject;
+            return objectAnimatorOfObject;
         }
 
         private void magnifySize() {
@@ -5200,28 +5077,28 @@ public class Editor {
             iArr[0] = iArr[0] - (this.mHotspotX + getHorizontalOffset());
             int horizontalOffset = iArr2[0] - (this.mHotspotX + getHorizontalOffset());
             iArr2[0] = horizontalOffset;
-            ValueAnimator ofPropertyValuesHolder = ValueAnimator.ofPropertyValuesHolder(PropertyValuesHolder.ofInt("x", iArr[0], horizontalOffset), PropertyValuesHolder.ofInt("y", iArr[1], iArr2[1]));
-            ofPropertyValuesHolder.setDuration(250L);
-            ofPropertyValuesHolder.setInterpolator(this.mPathInterpolator);
-            ofPropertyValuesHolder.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.Editor.HandleView.5
+            ValueAnimator valueAnimatorOfPropertyValuesHolder = ValueAnimator.ofPropertyValuesHolder(PropertyValuesHolder.ofInt("x", iArr[0], horizontalOffset), PropertyValuesHolder.ofInt("y", iArr[1], iArr2[1]));
+            valueAnimatorOfPropertyValuesHolder.setDuration(250L);
+            valueAnimatorOfPropertyValuesHolder.setInterpolator(this.mPathInterpolator);
+            valueAnimatorOfPropertyValuesHolder.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.Editor.HandleView.5
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    int intValue = ((Integer) valueAnimator.getAnimatedValue("x")).intValue();
-                    int intValue2 = ((Integer) valueAnimator.getAnimatedValue("y")).intValue();
+                    int iIntValue = ((Integer) valueAnimator.getAnimatedValue("x")).intValue();
+                    int iIntValue2 = ((Integer) valueAnimator.getAnimatedValue("y")).intValue();
                     if (HandleView.this.isShowing()) {
                         HandleView.this.invalidate();
-                        HandleView.this.mContainer.update(intValue, intValue2, -1, -1);
+                        HandleView.this.mContainer.update(iIntValue, iIntValue2, -1, -1);
                     }
                 }
             });
-            return ofPropertyValuesHolder;
+            return valueAnimatorOfPropertyValuesHolder;
         }
 
         private ObjectAnimator getShowAnimator() {
             final int intrinsicWidth = this.mDrawable.getIntrinsicWidth();
             final int intrinsicHeight = this.mDrawable.getIntrinsicHeight();
-            ObjectAnimator ofObject = ObjectAnimator.ofObject(this.mDrawable, "bounds", this.CHANGE_SIZE_EVALUATOR, getDrawableBounds(0, 0), getDrawableBounds(intrinsicWidth, intrinsicHeight));
-            ofObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.Editor.HandleView.6
+            ObjectAnimator objectAnimatorOfObject = ObjectAnimator.ofObject(this.mDrawable, "bounds", this.CHANGE_SIZE_EVALUATOR, getDrawableBounds(0, 0), getDrawableBounds(intrinsicWidth, intrinsicHeight));
+            objectAnimatorOfObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.Editor.HandleView.6
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     if (HandleView.this.mIsShowAnimating) {
@@ -5229,7 +5106,7 @@ public class Editor {
                     }
                 }
             });
-            ofObject.addListener(new AnimatorListenerAdapter() { // from class: android.widget.Editor.HandleView.7
+            objectAnimatorOfObject.addListener(new AnimatorListenerAdapter() { // from class: android.widget.Editor.HandleView.7
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationStart(Animator animator) {
                     if (HandleView.this.mIsHideAnimating) {
@@ -5262,15 +5139,15 @@ public class Editor {
                     }
                 }
             });
-            ofObject.setDuration(200L);
-            ofObject.setInterpolator(this.mPathInterpolator);
-            return ofObject;
+            objectAnimatorOfObject.setDuration(200L);
+            objectAnimatorOfObject.setInterpolator(this.mPathInterpolator);
+            return objectAnimatorOfObject;
         }
 
         private ObjectAnimator getHideAnimator() {
             Rect bounds = this.mDrawable.getBounds();
-            ObjectAnimator ofObject = ObjectAnimator.ofObject(this.mDrawable, "bounds", this.CHANGE_SIZE_EVALUATOR, getDrawableBounds(bounds.width(), bounds.height()), new Rect(0, 0, 0, 0));
-            ofObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.Editor.HandleView.8
+            ObjectAnimator objectAnimatorOfObject = ObjectAnimator.ofObject(this.mDrawable, "bounds", this.CHANGE_SIZE_EVALUATOR, getDrawableBounds(bounds.width(), bounds.height()), new Rect(0, 0, 0, 0));
+            objectAnimatorOfObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.Editor.HandleView.8
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     if (HandleView.this.mIsHideAnimating) {
@@ -5278,7 +5155,7 @@ public class Editor {
                     }
                 }
             });
-            ofObject.addListener(new AnimatorListenerAdapter() { // from class: android.widget.Editor.HandleView.9
+            objectAnimatorOfObject.addListener(new AnimatorListenerAdapter() { // from class: android.widget.Editor.HandleView.9
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationStart(Animator animator) {
                     if (HandleView.this.mIsShowAnimating) {
@@ -5306,9 +5183,9 @@ public class Editor {
                     HandleView.this.mHideAnimator = null;
                 }
             });
-            ofObject.setDuration(100L);
-            ofObject.setInterpolator(this.mPathInterpolator);
-            return ofObject;
+            objectAnimatorOfObject.setDuration(100L);
+            objectAnimatorOfObject.setInterpolator(this.mPathInterpolator);
+            return objectAnimatorOfObject;
         }
 
         private boolean isValid() {
@@ -5344,23 +5221,23 @@ public class Editor {
 
         InsertionHandleView(Drawable drawable) {
             super(drawable, drawable, R.id.insertion_handle);
-            int i = 0;
+            int intCoreSetting = 0;
             this.mIsTouchDown = false;
             this.mPendingDismissOnUp = false;
             this.mShouldMagnifierCursorAdjust = false;
-            int i2 = 255;
+            int i = 255;
             if (Editor.this.mFlagInsertionHandleGesturesEnabled) {
-                i = AppGlobals.getIntCoreSetting(WidgetFlags.KEY_INSERTION_HANDLE_DELTA_HEIGHT, 25);
-                int i3 = 50;
-                int intCoreSetting = AppGlobals.getIntCoreSetting(WidgetFlags.KEY_INSERTION_HANDLE_OPACITY, 50);
-                i = (i < -25 || i > 50) ? 25 : i;
-                if (intCoreSetting >= 10 && intCoreSetting <= 100) {
-                    i3 = intCoreSetting;
+                intCoreSetting = AppGlobals.getIntCoreSetting(WidgetFlags.KEY_INSERTION_HANDLE_DELTA_HEIGHT, 25);
+                int i2 = 50;
+                int intCoreSetting2 = AppGlobals.getIntCoreSetting(WidgetFlags.KEY_INSERTION_HANDLE_OPACITY, 50);
+                intCoreSetting = (intCoreSetting < -25 || intCoreSetting > 50) ? 25 : intCoreSetting;
+                if (intCoreSetting2 >= 10 && intCoreSetting2 <= 100) {
+                    i2 = intCoreSetting2;
                 }
-                i2 = (i3 * 255) / 100;
+                i = (i2 * 255) / 100;
             }
-            this.mDeltaHeight = i;
-            this.mDrawableOpacity = i2;
+            this.mDeltaHeight = intCoreSetting;
+            this.mDrawableOpacity = i;
         }
 
         @Override // android.widget.Editor.HandleView
@@ -5432,7 +5309,7 @@ public class Editor {
             if (Editor.this.mFlagInsertionHandleGesturesEnabled && Editor.this.mFlagCursorDragFromAnywhereEnabled) {
                 return touchThrough(motionEvent);
             }
-            boolean onTouchEvent = super.onTouchEvent(motionEvent);
+            boolean zOnTouchEvent = super.onTouchEvent(motionEvent);
             int actionMasked = motionEvent.getActionMasked();
             if (actionMasked == 0) {
                 this.mLastDownRawX = motionEvent.getRawX();
@@ -5443,7 +5320,7 @@ public class Editor {
                 updateMagnifier(motionEvent);
                 this.mShouldMagnifierCursorAdjust = true;
                 Editor.this.updateCursorPosition();
-                return onTouchEvent;
+                return zOnTouchEvent;
             }
             if (actionMasked != 1) {
                 if (actionMasked == 2) {
@@ -5453,16 +5330,16 @@ public class Editor {
                         dismissMagnifier();
                     }
                     Editor.this.updateCursorPosition();
-                    return onTouchEvent;
+                    return zOnTouchEvent;
                 }
                 if (actionMasked != 3) {
-                    return onTouchEvent;
+                    return zOnTouchEvent;
                 }
                 hideAfterDelay();
                 dismissMagnifier();
                 this.mShouldMagnifierCursorAdjust = false;
                 Editor.this.updateCursorPosition();
-                return onTouchEvent;
+                return zOnTouchEvent;
             }
             if (!offsetHasBeenChanged()) {
                 if (EditorTouchState.isDistanceWithin(this.mLastDownRawX, this.mLastDownRawY, motionEvent.getRawX(), motionEvent.getRawY(), ViewConfiguration.get(Editor.this.mTextView.getContext()).getScaledTouchSlop())) {
@@ -5479,7 +5356,7 @@ public class Editor {
             dismissMagnifier();
             this.mShouldMagnifierCursorAdjust = false;
             Editor.this.updateCursorPosition();
-            return onTouchEvent;
+            return zOnTouchEvent;
         }
 
         private boolean touchThrough(MotionEvent motionEvent) {
@@ -5499,7 +5376,7 @@ public class Editor {
             } else if (actionMasked == 1) {
                 this.mLastUpTime = motionEvent.getEventTime();
             }
-            boolean onTouchEvent = Editor.this.mTextView.onTouchEvent(transformEventForTouchThrough(motionEvent));
+            boolean zOnTouchEvent = Editor.this.mTextView.onTouchEvent(transformEventForTouchThrough(motionEvent));
             if (actionMasked == 1 || actionMasked == 3) {
                 this.mIsTouchDown = false;
                 if (this.mPendingDismissOnUp) {
@@ -5513,11 +5390,11 @@ public class Editor {
             if (!this.mOffsetChanged && actionMasked == 1) {
                 if (this.mIsInActionMode) {
                     Editor.this.lambda$startActionModeInternal$0();
-                    return onTouchEvent;
+                    return zOnTouchEvent;
                 }
                 Editor.this.startInsertionActionMode();
             }
-            return onTouchEvent;
+            return zOnTouchEvent;
         }
 
         private MotionEvent transformEventForTouchThrough(MotionEvent motionEvent) {
@@ -5577,19 +5454,19 @@ public class Editor {
         protected void updatePosition(float f, float f2, boolean z) {
             float f3 = (f2 - this.mLastParentYOnScreen) + this.mFirstParentY;
             Layout layout = Editor.this.mTextView.getLayout();
-            int i = -1;
+            int offsetAtCoordinate = -1;
             if (layout != null) {
                 if (this.mPreviousLineTouched == -1) {
                     this.mPreviousLineTouched = Editor.this.mTextView.getLineAtCoordinate(f3);
                 }
                 int currentLineAdjustedForSlop = Editor.this.getCurrentLineAdjustedForSlop(layout, this.mPreviousLineTouched, f3);
-                i = getOffsetAtCoordinate(layout, currentLineAdjustedForSlop, f);
+                offsetAtCoordinate = getOffsetAtCoordinate(layout, currentLineAdjustedForSlop, f);
                 int lineBottom = layout.getLineBottom(currentLineAdjustedForSlop);
                 int lineBottom2 = (lineBottom - layout.getLineBottom(this.mPreviousLineTouched)) - (Editor.this.mTextView.getVerticalOffset(true) + Editor.this.mTextView.getCompoundPaddingTop());
                 this.mPreviousLineTouched = currentLineAdjustedForSlop;
                 updatePositionDuringDragging((int) ((((((f + this.mTouchToWindowOffsetX) - this.mHotspotX) - getHorizontalOffset()) - this.mHorizontalOffset) + this.mLastParentXOnScreen) - this.mLastParentX), this.mIsVerticalScrolled ? lineBottom - lineBottom2 : (int) ((((f2 + this.mTouchToWindowOffsetY) - this.mTouchOffsetY) - this.mVerticalScrolledYOffset) - this.mVerticalOffset));
             }
-            positionAtCursorOffset(i, false, z);
+            positionAtCursorOffset(offsetAtCoordinate, false, z);
             if (Editor.this.mTextActionMode != null) {
                 Editor.this.invalidateActionMode();
             }
@@ -5645,9 +5522,9 @@ public class Editor {
 
         @Override // android.widget.Editor.HandleView
         public int getCurrentCursorOffset() {
-            boolean isStartHandle = isStartHandle();
+            boolean zIsStartHandle = isStartHandle();
             TextView textView = Editor.this.mTextView;
-            return isStartHandle ? textView.getSelectionStart() : textView.getSelectionEnd();
+            return zIsStartHandle ? textView.getSelectionStart() : textView.getSelectionEnd();
         }
 
         @Override // android.widget.Editor.HandleView
@@ -5663,21 +5540,74 @@ public class Editor {
             }
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:58:0x013e, code lost:
-        
-            if (r12.this$0.mTextView.canScrollHorizontally(r9 ? -1 : 1) != false) goto L52;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:52:0x0140  */
         @Override // android.widget.Editor.HandleView
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        protected void updatePosition(float r13, float r14, boolean r15) {
-            /*
-                Method dump skipped, instructions count: 377
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.widget.Editor.SelectionHandleView.updatePosition(float, float, boolean):void");
+        protected void updatePosition(float f, float f2, boolean z) {
+            int offsetToLeftOf;
+            boolean z2 = isStartHandle() == (Editor.this.mTextView.getSelectionStart() < Editor.this.mTextView.getSelectionEnd());
+            float f3 = (f2 - this.mLastParentYOnScreen) + this.mFirstParentY;
+            Layout layout = Editor.this.mTextView.getLayout();
+            if (layout == null) {
+                positionAndAdjustForCrossingHandles(Editor.this.mTextView.getOffsetForPosition(f, f3), z);
+                return;
+            }
+            if (this.mPreviousLineTouched == -1) {
+                this.mPreviousLineTouched = Editor.this.mTextView.getLineAtCoordinate(f3);
+            }
+            int currentLineAdjustedForSlop = Editor.this.getCurrentLineAdjustedForSlop(layout, this.mPreviousLineTouched, f3);
+            getOffsetAtCoordinate(layout, currentLineAdjustedForSlop, f);
+            int offsetAtCoordinate = getOffsetAtCoordinate(layout, currentLineAdjustedForSlop, f);
+            Editor.this.getWordEnd(offsetAtCoordinate);
+            Editor.this.getWordStart(offsetAtCoordinate);
+            if (this.mPrevX == -1.0f) {
+                this.mPrevX = f;
+            }
+            int currentCursorOffset = getCurrentCursorOffset();
+            boolean zIsAtRtlRun = isAtRtlRun(layout, currentCursorOffset);
+            boolean zIsAtRtlRun2 = isAtRtlRun(layout, offsetAtCoordinate);
+            if (layout.isLevelBoundary(Editor.this.mTextView.originalToTransformed(offsetAtCoordinate, 1)) || ((zIsAtRtlRun && !zIsAtRtlRun2) || (!zIsAtRtlRun && zIsAtRtlRun2))) {
+                this.mLanguageDirectionChanged = true;
+                this.mTouchWordDelta = 0.0f;
+                positionAndAdjustForCrossingHandles(offsetAtCoordinate, z);
+                return;
+            }
+            if (this.mLanguageDirectionChanged) {
+                positionAndAdjustForCrossingHandles(offsetAtCoordinate, z);
+                this.mTouchWordDelta = 0.0f;
+                this.mLanguageDirectionChanged = false;
+                return;
+            }
+            if (z2) {
+                int i = this.mPreviousLineTouched;
+            } else {
+                int i2 = this.mPreviousLineTouched;
+            }
+            int lineBottom = layout.getLineBottom(currentLineAdjustedForSlop);
+            updatePositionDuringDragging((int) ((((((this.mTouchToWindowOffsetX + f) - this.mHotspotX) - getHorizontalOffset()) - this.mHorizontalOffset) + this.mLastParentXOnScreen) - this.mLastParentX), this.mIsVerticalScrolled ? lineBottom - ((lineBottom - layout.getLineBottom(this.mPreviousLineTouched)) - (Editor.this.mTextView.getVerticalOffset(true) + Editor.this.mTextView.getCompoundPaddingTop())) : (int) ((((f2 + this.mTouchToWindowOffsetY) - this.mTouchOffsetY) - this.mVerticalScrolledYOffset) - this.mVerticalOffset));
+            if (Editor.this.mTextView.getHorizontallyScrolling() && positionNearEdgeOfScrollingView(f, zIsAtRtlRun2)) {
+                if (!isStartHandle() || Editor.this.mTextView.getScrollX() == 0) {
+                    if (!isStartHandle()) {
+                        if (Editor.this.mTextView.canScrollHorizontally(zIsAtRtlRun2 ? -1 : 1)) {
+                            if ((isStartHandle() && offsetAtCoordinate < currentCursorOffset) || (!isStartHandle() && offsetAtCoordinate > currentCursorOffset)) {
+                                this.mTouchWordDelta = 0.0f;
+                                if (zIsAtRtlRun2 == isStartHandle()) {
+                                    offsetToLeftOf = layout.getOffsetToRightOf(this.mPreviousOffset);
+                                } else {
+                                    offsetToLeftOf = layout.getOffsetToLeftOf(this.mPreviousOffset);
+                                }
+                                positionAndAdjustForCrossingHandles(offsetToLeftOf, z);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+            this.mPreviousLineTouched = currentLineAdjustedForSlop;
+            positionAndAdjustForCrossingHandles(offsetAtCoordinate, z);
+            this.mPrevX = f;
         }
 
         @Override // android.widget.Editor.HandleView
@@ -5691,29 +5621,29 @@ public class Editor {
             if (!Editor.this.mTextView.isFromPrimePointer(motionEvent, true)) {
                 return true;
             }
-            boolean onTouchEvent = super.onTouchEvent(motionEvent);
+            boolean zOnTouchEvent = super.onTouchEvent(motionEvent);
             int actionMasked = motionEvent.getActionMasked();
             if (actionMasked == 0) {
                 this.mTouchWordDelta = 0.0f;
                 this.mPrevX = -1.0f;
                 updateMagnifier(motionEvent);
-                return onTouchEvent;
+                return zOnTouchEvent;
             }
             if (actionMasked != 1) {
                 if (actionMasked == 2) {
                     if (!Editor.this.mIsMagnifierHideByVelocityTracker) {
                         updateMagnifier(motionEvent);
-                        return onTouchEvent;
+                        return zOnTouchEvent;
                     }
                     dismissMagnifier();
-                    return onTouchEvent;
+                    return zOnTouchEvent;
                 }
                 if (actionMasked != 3) {
-                    return onTouchEvent;
+                    return zOnTouchEvent;
                 }
             }
             dismissMagnifier();
-            return onTouchEvent;
+            return zOnTouchEvent;
         }
 
         private void positionAndAdjustForCrossingHandles(int i, boolean z) {
@@ -5731,11 +5661,11 @@ public class Editor {
 
         @Override // android.widget.Editor.HandleView
         protected boolean isAtRtlRun(Layout layout, int i) {
-            int transformedToOriginal = Editor.this.mTextView.transformedToOriginal(i, 0);
+            int iTransformedToOriginal = Editor.this.mTextView.transformedToOriginal(i, 0);
             if (isStartHandle() != (Editor.this.mTextView.getSelectionStart() < Editor.this.mTextView.getSelectionEnd())) {
-                transformedToOriginal = Math.max(transformedToOriginal - 1, 0);
+                iTransformedToOriginal = Math.max(iTransformedToOriginal - 1, 0);
             }
-            return layout.isRtlCharAt(transformedToOriginal);
+            return layout.isRtlCharAt(iTransformedToOriginal);
         }
 
         @Override // android.widget.Editor.HandleView
@@ -5744,76 +5674,39 @@ public class Editor {
         }
 
         private float getHorizontal(Layout layout, int i, boolean z) {
-            int originalToTransformed = Editor.this.mTextView.originalToTransformed(i, 1);
-            if (layout.isRtlCharAt(z ? originalToTransformed : Math.max(originalToTransformed - 1, 0)) != (layout.getParagraphDirection(layout.getLineForOffset(originalToTransformed)) == -1)) {
-                return layout.getSecondaryHorizontal(originalToTransformed);
+            int iOriginalToTransformed = Editor.this.mTextView.originalToTransformed(i, 1);
+            if (layout.isRtlCharAt(z ? iOriginalToTransformed : Math.max(iOriginalToTransformed - 1, 0)) != (layout.getParagraphDirection(layout.getLineForOffset(iOriginalToTransformed)) == -1)) {
+                return layout.getSecondaryHorizontal(iOriginalToTransformed);
             }
-            return layout.getPrimaryHorizontal(originalToTransformed);
+            return layout.getPrimaryHorizontal(iOriginalToTransformed);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:16:0x005f, code lost:
-        
-            if (r7.isRtlCharAt(r3) == (r7.getParagraphDirection(r8) == -1)) goto L19;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:10:0x0044  */
         @Override // android.widget.Editor.HandleView
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        protected int getOffsetAtCoordinate(android.text.Layout r7, int r8, float r9) {
-            /*
-                r6 = this;
-                android.widget.Editor r0 = android.widget.Editor.this
-                android.widget.TextView r0 = android.widget.Editor.m6810$$Nest$fgetmTextView(r0)
-                float r9 = r0.convertToLocalHorizontalCoordinate(r9)
-                r0 = 1
-                int r1 = r7.getOffsetForHorizontal(r8, r9, r0)
-                boolean r2 = r7.isLevelBoundary(r1)
-                if (r2 != 0) goto L20
-                android.widget.Editor r6 = android.widget.Editor.this
-                android.widget.TextView r6 = android.widget.Editor.m6810$$Nest$fgetmTextView(r6)
-                int r6 = r6.transformedToOriginal(r1, r0)
-                return r6
-            L20:
-                r2 = 0
-                int r9 = r7.getOffsetForHorizontal(r8, r9, r2)
-                android.widget.Editor r3 = android.widget.Editor.this
-                android.widget.TextView r3 = android.widget.Editor.m6810$$Nest$fgetmTextView(r3)
-                int r4 = r6.getCurrentCursorOffset()
-                int r3 = r3.originalToTransformed(r4, r0)
-                int r4 = r1 - r3
-                int r4 = java.lang.Math.abs(r4)
-                int r5 = r9 - r3
-                int r5 = java.lang.Math.abs(r5)
-                if (r4 >= r5) goto L42
-                goto L61
-            L42:
-                if (r4 <= r5) goto L46
-            L44:
-                r1 = r9
-                goto L61
-            L46:
-                boolean r4 = r6.isStartHandle()
-                if (r4 == 0) goto L4d
-                goto L53
-            L4d:
-                int r3 = r3 + (-1)
-                int r3 = java.lang.Math.max(r3, r2)
-            L53:
-                boolean r3 = r7.isRtlCharAt(r3)
-                int r7 = r7.getParagraphDirection(r8)
-                r8 = -1
-                if (r7 != r8) goto L5f
-                r2 = r0
-            L5f:
-                if (r3 != r2) goto L44
-            L61:
-                android.widget.Editor r6 = android.widget.Editor.this
-                android.widget.TextView r6 = android.widget.Editor.m6810$$Nest$fgetmTextView(r6)
-                int r6 = r6.transformedToOriginal(r1, r0)
-                return r6
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.widget.Editor.SelectionHandleView.getOffsetAtCoordinate(android.text.Layout, int, float):int");
+        protected int getOffsetAtCoordinate(Layout layout, int i, float f) {
+            float fConvertToLocalHorizontalCoordinate = Editor.this.mTextView.convertToLocalHorizontalCoordinate(f);
+            int offsetForHorizontal = layout.getOffsetForHorizontal(i, fConvertToLocalHorizontalCoordinate, true);
+            if (!layout.isLevelBoundary(offsetForHorizontal)) {
+                return Editor.this.mTextView.transformedToOriginal(offsetForHorizontal, 1);
+            }
+            int offsetForHorizontal2 = layout.getOffsetForHorizontal(i, fConvertToLocalHorizontalCoordinate, false);
+            int iOriginalToTransformed = Editor.this.mTextView.originalToTransformed(getCurrentCursorOffset(), 1);
+            int iAbs = Math.abs(offsetForHorizontal - iOriginalToTransformed);
+            int iAbs2 = Math.abs(offsetForHorizontal2 - iOriginalToTransformed);
+            if (iAbs >= iAbs2) {
+                if (iAbs <= iAbs2) {
+                    if (!isStartHandle()) {
+                        iOriginalToTransformed = Math.max(iOriginalToTransformed - 1, 0);
+                    }
+                    if (layout.isRtlCharAt(iOriginalToTransformed) != (layout.getParagraphDirection(i) == -1)) {
+                        offsetForHorizontal = offsetForHorizontal2;
+                    }
+                }
+            }
+            return Editor.this.mTextView.transformedToOriginal(offsetForHorizontal, 1);
         }
 
         @Override // android.widget.Editor.HandleView
@@ -5846,9 +5739,9 @@ public class Editor {
         int lineAtCoordinate = this.mTextView.getLineAtCoordinate(f);
         if (layout != null && i < layout.getLineCount() && layout.getLineCount() > 0 && i >= 0 && Math.abs(lineAtCoordinate - i) < 2) {
             int lineHeight = this.mTextView.getLineHeight();
-            int max = Math.max(0, Math.max(this.mLineChangeSlopMin, Math.min(this.mLineChangeSlopMax, ((int) (this.mLineSlopRatio * lineHeight)) + lineHeight)) - lineHeight);
-            float viewportToContentVerticalOffset = this.mTextView.viewportToContentVerticalOffset();
-            if ((lineAtCoordinate <= i || f < layout.getLineBottom(i) + max + viewportToContentVerticalOffset) && (lineAtCoordinate >= i || f > (layout.getLineTop(i) - max) + viewportToContentVerticalOffset)) {
+            int iMax = Math.max(0, Math.max(this.mLineChangeSlopMin, Math.min(this.mLineChangeSlopMax, ((int) (this.mLineSlopRatio * lineHeight)) + lineHeight)) - lineHeight);
+            float fViewportToContentVerticalOffset = this.mTextView.viewportToContentVerticalOffset();
+            if ((lineAtCoordinate <= i || f < layout.getLineBottom(i) + iMax + fViewportToContentVerticalOffset) && (lineAtCoordinate >= i || f > (layout.getLineTop(i) - iMax) + fViewportToContentVerticalOffset)) {
                 return i;
             }
         }
@@ -5982,11 +5875,11 @@ public class Editor {
             }
             getHandle().removeHiderCallback();
             getHandle().show();
-            long uptimeMillis = SystemClock.uptimeMillis() - TextView.sLastCutCopyOrTextChangedTime;
+            long jUptimeMillis = SystemClock.uptimeMillis() - TextView.sLastCutCopyOrTextChangedTime;
             if (Editor.this.mInsertionActionModeRunnable != null && (this.mIsDraggingCursor || Editor.this.mTouchState.isMultiTap() || Editor.this.isCursorInsideEasyCorrectionSpan())) {
                 Editor.this.mTextView.removeCallbacks(Editor.this.mInsertionActionModeRunnable);
             }
-            if (!this.mIsDraggingCursor && !Editor.this.mTouchState.isMultiTap() && !Editor.this.isCursorInsideEasyCorrectionSpan() && uptimeMillis < 15000 && Editor.this.mTextActionMode == null) {
+            if (!this.mIsDraggingCursor && !Editor.this.mTouchState.isMultiTap() && !Editor.this.isCursorInsideEasyCorrectionSpan() && jUptimeMillis < 15000 && Editor.this.mTextActionMode == null) {
                 if (Editor.this.mInsertionActionModeRunnable == null) {
                     Editor.this.mInsertionActionModeRunnable = new Runnable() { // from class: android.widget.Editor.InsertionPointCursorController.1
                         @Override // java.lang.Runnable
@@ -6156,7 +6049,7 @@ public class Editor {
         public void onTouchEvent(MotionEvent motionEvent) {
             float x = motionEvent.getX();
             float y = motionEvent.getY();
-            boolean isFromSource = motionEvent.isFromSource(8194);
+            boolean zIsFromSource = motionEvent.isFromSource(8194);
             int actionMasked = motionEvent.getActionMasked();
             if (actionMasked == 0) {
                 if (Editor.this.extractedTextModeWillBeStarted()) {
@@ -6169,7 +6062,7 @@ public class Editor {
                     this.mPrevTouchOffset = offsetForPosition;
                     this.mPrevTouchWordEnd = Editor.this.getWordEnd(offsetForPosition);
                     this.mPrevTouchWordStart = Editor.this.getWordStart(this.mPrevTouchOffset);
-                    if (this.mGestureStayedInTapRegion && Editor.this.mTouchState.isMultiTapInSameArea() && !Editor.mDisableDoubleTapTextSelection && (isFromSource || Editor.this.isPositionOnText(x, y) || Editor.this.mTouchState.isOnHandle())) {
+                    if (this.mGestureStayedInTapRegion && Editor.this.mTouchState.isMultiTapInSameArea() && !Editor.mDisableDoubleTapTextSelection && (zIsFromSource || Editor.this.isPositionOnText(x, y) || Editor.this.mTouchState.isOnHandle())) {
                         if (Editor.this.mTouchState.isDoubleTap()) {
                             Editor.this.selectCurrentWordAndStartDrag();
                         } else if (Editor.this.mTouchState.isTripleClick()) {
@@ -6217,7 +6110,7 @@ public class Editor {
                     if (this.mHaventMovedEnoughToStartDrag) {
                         this.mHaventMovedEnoughToStartDrag = !Editor.this.mTouchState.isMovedEnoughForDrag();
                     }
-                    if (isFromSource && !isDragAcceleratorActive()) {
+                    if (zIsFromSource && !isDragAcceleratorActive()) {
                         int offsetForPosition2 = Editor.this.mTextView.getOffsetForPosition(x, y);
                         if (Editor.this.mTextView.hasSelection() && ((!this.mHaventMovedEnoughToStartDrag || this.mStartOffset != offsetForPosition2) && offsetForPosition2 >= Editor.this.mTextView.getSelectionStart() && offsetForPosition2 <= Editor.this.mTextView.getSelectionEnd())) {
                             Editor.this.startDragAndDrop();
@@ -6539,11 +6432,11 @@ public class Editor {
         }
 
         private boolean updatePaint() {
-            long uptimeMillis = SystemClock.uptimeMillis() - this.mFadingStartTime;
-            if (uptimeMillis > 400) {
+            long jUptimeMillis = SystemClock.uptimeMillis() - this.mFadingStartTime;
+            if (jUptimeMillis > 400) {
                 return false;
             }
-            this.mPaint.setColor((Editor.this.mTextView.mHighlightColor & 16777215) + (((int) (Color.alpha(Editor.this.mTextView.mHighlightColor) * (1.0f - (uptimeMillis / 400.0f)))) << 24));
+            this.mPaint.setColor((Editor.this.mTextView.mHighlightColor & 16777215) + (((int) (Color.alpha(Editor.this.mTextView.mHighlightColor) * (1.0f - (jUptimeMillis / 400.0f)))) << 24));
             return true;
         }
 
@@ -6553,10 +6446,10 @@ public class Editor {
                 return false;
             }
             int length = Editor.this.mTextView.getText().length();
-            int min = Math.min(length, this.mStart);
-            int min2 = Math.min(length, this.mEnd);
+            int iMin = Math.min(length, this.mStart);
+            int iMin2 = Math.min(length, this.mEnd);
             this.mPath.reset();
-            layout.getSelectionPath(Editor.this.mTextView.originalToTransformed(min, 0), Editor.this.mTextView.originalToTransformed(min2, 0), this.mPath);
+            layout.getSelectionPath(Editor.this.mTextView.originalToTransformed(iMin, 0), Editor.this.mTextView.originalToTransformed(iMin2, 0), this.mPath);
             return true;
         }
 
@@ -6614,18 +6507,18 @@ public class Editor {
             if (i != 0) {
                 return i;
             }
-            TypedArray obtainStyledAttributes = this.mView.getContext().obtainStyledAttributes(android.R.styleable.Theme);
-            int resourceId = obtainStyledAttributes.getResourceId(i2, 0);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = this.mView.getContext().obtainStyledAttributes(android.R.styleable.Theme);
+            int resourceId = typedArrayObtainStyledAttributes.getResourceId(i2, 0);
+            typedArrayObtainStyledAttributes.recycle();
             return resourceId;
         }
 
         @Override // android.widget.PopupWindow
         public void update(int i, int i2, int i3, int i4, boolean z) {
             super.update(i, i2, i3, i4, z);
-            boolean isAboveAnchor = isAboveAnchor();
-            if (isAboveAnchor != this.mAbove) {
-                fixDirection(isAboveAnchor);
+            boolean zIsAboveAnchor = isAboveAnchor();
+            if (zIsAboveAnchor != this.mAbove) {
+                fixDirection(zIsAboveAnchor);
             }
         }
     }
@@ -6707,7 +6600,11 @@ public class Editor {
             this.mPreviousOperationWasInSameBatchEdit = false;
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:17:0x0034  */
         @Override // android.text.InputFilter
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public CharSequence filter(CharSequence charSequence, int i, int i2, Spanned spanned, int i3, int i4) {
             boolean z;
             UndoInputFilter undoInputFilter;
@@ -6725,7 +6622,16 @@ public class Editor {
             boolean z3 = this.mExpanding;
             int i9 = i2 - i;
             int i10 = i4 - i3;
-            if (i9 != i10) {
+            if (i9 == i10) {
+                z = false;
+                undoInputFilter = this;
+                charSequence2 = charSequence;
+                i5 = i;
+                i6 = i2;
+                i7 = i3;
+                i8 = i4;
+                spanned2 = spanned;
+            } else {
                 boolean z4 = i9 > i10;
                 this.mExpanding = z4;
                 if (z2 && z4 != z3 && !isHangul(spanned)) {
@@ -6737,18 +6643,8 @@ public class Editor {
                     spanned2 = spanned;
                     i8 = i4;
                     i7 = i3;
-                    undoInputFilter.handleEdit(charSequence2, i5, i6, spanned2, i7, i8, z);
-                    return null;
                 }
             }
-            z = false;
-            undoInputFilter = this;
-            charSequence2 = charSequence;
-            i5 = i;
-            i6 = i2;
-            i7 = i3;
-            i8 = i4;
-            spanned2 = spanned;
             undoInputFilter.handleEdit(charSequence2, i5, i6, spanned2, i7, i8, z);
             return null;
         }
@@ -6783,10 +6679,7 @@ public class Editor {
                 undoManager.addOperation(editOperation, 0);
             } else if (i == 0) {
                 lastEdit.forceMergeWith(editOperation);
-            } else if (!this.mIsUserEdit) {
-                undoManager.commitState(this.mEditor.mUndoOwner);
-                undoManager.addOperation(editOperation, 0);
-            } else if (i != 2 || !lastEdit.mergeWith(editOperation)) {
+            } else if (!this.mIsUserEdit || i != 2 || !lastEdit.mergeWith(editOperation)) {
                 undoManager.commitState(this.mEditor.mUndoOwner);
                 undoManager.addOperation(editOperation, 0);
             }
@@ -6818,8 +6711,8 @@ public class Editor {
             if (TextUtils.isEmpty(spanned)) {
                 return false;
             }
-            char charAt = spanned.charAt(spanned.length() - 1);
-            return Character.UnicodeBlock.of(charAt) == Character.UnicodeBlock.HANGUL_COMPATIBILITY_JAMO || Character.UnicodeBlock.of(charAt) == Character.UnicodeBlock.HANGUL_JAMO || Character.UnicodeBlock.of(charAt) == Character.UnicodeBlock.HANGUL_JAMO_EXTENDED_A || Character.UnicodeBlock.of(charAt) == Character.UnicodeBlock.HANGUL_JAMO_EXTENDED_B || Character.UnicodeBlock.of(charAt) == Character.UnicodeBlock.HANGUL_SYLLABLES;
+            char cCharAt = spanned.charAt(spanned.length() - 1);
+            return Character.UnicodeBlock.of(cCharAt) == Character.UnicodeBlock.HANGUL_COMPATIBILITY_JAMO || Character.UnicodeBlock.of(cCharAt) == Character.UnicodeBlock.HANGUL_JAMO || Character.UnicodeBlock.of(cCharAt) == Character.UnicodeBlock.HANGUL_JAMO_EXTENDED_A || Character.UnicodeBlock.of(cCharAt) == Character.UnicodeBlock.HANGUL_JAMO_EXTENDED_B || Character.UnicodeBlock.of(cCharAt) == Character.UnicodeBlock.HANGUL_SYLLABLES;
         }
     }
 
@@ -7161,21 +7054,21 @@ public class Editor {
             if (!this.mTextView.isThemeDeviceDefault()) {
                 return -1;
             }
-            String resolveInfo2 = resolveInfo.toString();
-            return (resolveInfo2.contains("com.sec.android.app.translator") || resolveInfo2.contains("com.google.android.apps.translate")) ? 16 : -1;
+            String string = resolveInfo.toString();
+            return (string.contains("com.sec.android.app.translator") || string.contains("com.google.android.apps.translate")) ? 16 : -1;
         }
 
         private Drawable loadIcon(ResolveInfo resolveInfo) {
-            String resolveInfo2 = resolveInfo.toString();
-            Drawable loadIcon = resolveInfo.loadIcon(this.mTextView.getContext().getPackageManager());
-            if (resolveInfo2.contains("com.sec.android.app.translator") || resolveInfo2.contains("com.google.android.apps.translate")) {
+            String string = resolveInfo.toString();
+            Drawable drawableLoadIcon = resolveInfo.loadIcon(this.mTextView.getContext().getPackageManager());
+            if (string.contains("com.sec.android.app.translator") || string.contains("com.google.android.apps.translate")) {
                 return this.mTextView.getContext().getResources().getDrawable(R.drawable.tw_floating_popup_button_ic_translate);
             }
-            if (loadIcon != null) {
+            if (drawableLoadIcon != null) {
                 int intrinsicWidth = this.mTextView.getContext().getResources().getDrawable(R.drawable.tw_floating_popup_button_ic_selectall).getIntrinsicWidth();
-                loadIcon.setBounds(0, 0, intrinsicWidth, intrinsicWidth);
+                drawableLoadIcon.setBounds(0, 0, intrinsicWidth, intrinsicWidth);
             }
-            return loadIcon;
+            return drawableLoadIcon;
         }
     }
 
@@ -7302,9 +7195,9 @@ public class Editor {
             }
             int selectionStart = this.mTextView.getSelectionStart();
             int selectionEnd = this.mTextView.getSelectionEnd();
-            InsertModeTransformationMethod update = this.mInsertModeTransformationMethod.update(transformationMethod, this.mTextView.isSingleLine());
-            this.mInsertModeTransformationMethod = update;
-            setTransformationMethod(update, true);
+            InsertModeTransformationMethod insertModeTransformationMethodUpdate = this.mInsertModeTransformationMethod.update(transformationMethod, this.mTextView.isSingleLine());
+            this.mInsertModeTransformationMethod = insertModeTransformationMethodUpdate;
+            setTransformationMethod(insertModeTransformationMethodUpdate, true);
             Selection.setSelection((Spannable) this.mTextView.getText(), selectionStart, selectionEnd);
         }
     }
@@ -7362,9 +7255,9 @@ public class Editor {
 
     private boolean tooLargeTextForMagnifierForDrag() {
         if (this.mMagnifierAnimator != null) {
-            float round = Math.round(r0.mMagnifier.getHeight() / this.mMagnifierAnimator.mMagnifier.getZoom());
+            float fRound = Math.round(r0.mMagnifier.getHeight() / this.mMagnifierAnimator.mMagnifier.getZoom());
             Paint.FontMetrics fontMetrics = this.mTextView.getPaint().getFontMetrics();
-            if (fontMetrics.descent - fontMetrics.ascent > round) {
+            if (fontMetrics.descent - fontMetrics.ascent > fRound) {
                 return true;
             }
         }
@@ -7393,8 +7286,8 @@ public class Editor {
         float totalPaddingLeft2 = this.mTextView.getTotalPaddingLeft() - this.mTextView.getScrollX();
         float lineLeft = totalPaddingLeft + this.mTextView.getLayout().getLineLeft(lineForOffset);
         float lineRight = totalPaddingLeft2 + this.mTextView.getLayout().getLineRight(lineForOffset);
-        float round = Math.round(this.mMagnifierAnimator.mMagnifier.getWidth() / this.mMagnifierAnimator.mMagnifier.getZoom()) / 2.0f;
-        if (rawX < lineLeft - round || rawX > round + lineRight) {
+        float fRound = Math.round(this.mMagnifierAnimator.mMagnifier.getWidth() / this.mMagnifierAnimator.mMagnifier.getZoom()) / 2.0f;
+        if (rawX < lineLeft - fRound || rawX > fRound + lineRight) {
             return false;
         }
         pointF.x = Math.max(lineLeft, Math.min(lineRight, rawX));

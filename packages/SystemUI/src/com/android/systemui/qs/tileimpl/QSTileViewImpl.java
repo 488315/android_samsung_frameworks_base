@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
@@ -67,7 +68,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 import kotlin.text.StringsKt___StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSTileViewImpl extends QSTileView implements HeightOverrideable, LaunchableView {
     public static final Rect EMPTY_RECT;
@@ -117,7 +117,6 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
     public CharSequence stateDescriptionDeltas;
     public boolean tileState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -136,7 +135,6 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StateChangeRunnable implements Runnable {
         public final QSTile.State state;
 
@@ -155,17 +153,17 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         @Override // java.lang.Runnable
         public final void run() {
             String str = this.state.spec;
-            String take = StringsKt___StringsKt.take(127, (str == null || str.length() == 0) ? "QSTileViewImpl#handleStateChanged" : AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("QSTileViewImpl#handleStateChanged:", this.state.spec));
+            String strTake = StringsKt___StringsKt.take(127, (str == null || str.length() == 0) ? "QSTileViewImpl#handleStateChanged" : AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("QSTileViewImpl#handleStateChanged:", this.state.spec));
             QSTileViewImpl qSTileViewImpl = QSTileViewImpl.this;
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
-                TraceUtilsKt.beginSlice(take);
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
+                TraceUtilsKt.beginSlice(strTake);
             }
             try {
                 qSTileViewImpl.handleStateChanged(this.state);
                 Unit unit = Unit.INSTANCE;
             } finally {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             }
@@ -233,12 +231,12 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         if (layerDrawable2 == null) {
             layerDrawable2 = null;
         }
-        Drawable findDrawableByLayerId = layerDrawable2.findDrawableByLayerId(R.id.qs_tile_background_overlay);
-        this.backgroundOverlayDrawable = findDrawableByLayerId;
-        if (findDrawableByLayerId == null) {
-            findDrawableByLayerId = null;
+        Drawable drawableFindDrawableByLayerId = layerDrawable2.findDrawableByLayerId(R.id.qs_tile_background_overlay);
+        this.backgroundOverlayDrawable = drawableFindDrawableByLayerId;
+        if (drawableFindDrawableByLayerId == null) {
+            drawableFindDrawableByLayerId = null;
         }
-        findDrawableByLayerId.mutate().setTintMode(PorterDuff.Mode.SRC);
+        drawableFindDrawableByLayerId.mutate().setTintMode(PorterDuff.Mode.SRC);
         RippleDrawable rippleDrawable2 = this.qsTileBackground;
         if (rippleDrawable2 == null) {
             return null;
@@ -261,20 +259,20 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
     }
 
     public final List<Integer> getCurrentColors$frameworks__base__packages__SystemUI__android_common__SystemUI_core() {
-        Integer valueOf = Integer.valueOf(this.backgroundColor);
+        Integer numValueOf = Integer.valueOf(this.backgroundColor);
         TextView textView = this.label;
         if (textView == null) {
             textView = null;
         }
-        Integer valueOf2 = Integer.valueOf(textView.getCurrentTextColor());
+        Integer numValueOf2 = Integer.valueOf(textView.getCurrentTextColor());
         TextView textView2 = this.secondaryLabel;
         if (textView2 == null) {
             textView2 = null;
         }
-        Integer valueOf3 = Integer.valueOf(textView2.getCurrentTextColor());
+        Integer numValueOf3 = Integer.valueOf(textView2.getCurrentTextColor());
         ImageView imageView = this.chevronView;
         ColorStateList imageTintList = (imageView != null ? imageView : null).getImageTintList();
-        return Arrays.asList(valueOf, valueOf2, valueOf3, Integer.valueOf(imageTintList != null ? imageTintList.getDefaultColor() : 0));
+        return Arrays.asList(numValueOf, numValueOf2, numValueOf3, Integer.valueOf(imageTintList != null ? imageTintList.getDefaultColor() : 0));
     }
 
     @Override // com.android.systemui.plugins.qs.QSTileView
@@ -376,10 +374,10 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         QSTile.State state2;
         QSTile.State state3;
         boolean z;
-        boolean animationsEnabled = animationsEnabled();
+        boolean zAnimationsEnabled = animationsEnabled();
         super.setClickable(state.state != 0);
         setLongClickable(state.handlesLongClick);
-        this.icon.setIcon(state, animationsEnabled);
+        this.icon.setIcon(state, zAnimationsEnabled);
         setContentDescription(state.contentDescription);
         StringBuilder sb = new StringBuilder();
         SubtitleArrayMapping subtitleArrayMapping = SubtitleArrayMapping.INSTANCE;
@@ -404,7 +402,7 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         }
         setStateDescription(sb.toString());
         this.lastStateDescription = state.stateDescription;
-        VibrationEffect vibrationEffect = null;
+        VibrationEffect vibrationEffectCompose = null;
         this.accessibilityClass = state.state == 0 ? null : state.expandedAccessibilityClassName;
         boolean z2 = state instanceof QSTile.AdapterState;
         if (z2 && this.tileState != (z = ((QSTile.AdapterState) state).value)) {
@@ -439,7 +437,7 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         }
         if (state.state != this.lastState || state.disabledByPolicy != this.lastDisabledByPolicy) {
             this.singleAnimator.cancel();
-            if (animationsEnabled) {
+            if (zAnimationsEnabled) {
                 ValueAnimator valueAnimator = this.singleAnimator;
                 PropertyValuesHolder[] propertyValuesHolderArr = new PropertyValuesHolder[5];
                 propertyValuesHolderArr[0] = QSTileViewImplKt.access$colorValuesHolder(BriefViewController.SUGGESTION_BACKGROUND_KEY, this.backgroundColor, getBackgroundColorForState(state.state, state.disabledByPolicy));
@@ -553,19 +551,19 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                     } else {
                         int i4 = 75 / i2;
                         int i5 = 24 / i2;
-                        VibrationEffect.Composition startComposition = VibrationEffect.startComposition();
+                        VibrationEffect.Composition compositionStartComposition = VibrationEffect.startComposition();
                         for (int i6 = 0; i6 < i4; i6++) {
-                            startComposition.addPrimitive(8, 0.08f, 0);
+                            compositionStartComposition.addPrimitive(8, 0.08f, 0);
                         }
-                        startComposition.addPrimitive(3, 0.2f, 0);
+                        compositionStartComposition.addPrimitive(3, 0.2f, 0);
                         int i7 = 0;
                         while (i7 < i5) {
                             i7++;
-                            startComposition.addPrimitive(8, 0.08f / i7, 0);
+                            compositionStartComposition.addPrimitive(8, 0.08f / i7, 0);
                         }
-                        vibrationEffect = startComposition.compose();
+                        vibrationEffectCompose = compositionStartComposition.compose();
                     }
-                    qSLongPressEffect2.longPressHint = vibrationEffect;
+                    qSLongPressEffect2.longPressHint = vibrationEffectCompose;
                     qSLongPressEffect2.setState(QSLongPressEffect.State.IDLE);
                 }
                 QSTile qSTile2 = this.longPressEffect.qsTile;
@@ -596,16 +594,16 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         if (this.longPressEffect == null) {
             Expandable.Companion.getClass();
             final Expandable$Companion$fromView$1 expandable$Companion$fromView$1 = new Expandable$Companion$fromView$1(this);
-            View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$init$3
+            View.OnClickListener onClickListener = new View.OnClickListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl.init.3
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    QSTile.this.click(expandable$Companion$fromView$1);
+                    qSTile.click(expandable$Companion$fromView$1);
                 }
             };
-            View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$init$4
+            View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl.init.4
                 @Override // android.view.View.OnLongClickListener
                 public final boolean onLongClick(View view) {
-                    QSTile.this.longClick(expandable$Companion$fromView$1);
+                    qSTile.longClick(expandable$Companion$fromView$1);
                     return true;
                 }
             };
@@ -622,9 +620,9 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                 ActivityTransitionAnimator.Controller.Companion companion = ActivityTransitionAnimator.Controller.Companion;
                 View view = this;
                 companion.getClass();
-                GhostedViewTransitionAnimatorController fromView = ActivityTransitionAnimator.Controller.Companion.fromView(view, num, transitionCookie, componentName, num2, z);
-                if (fromView != null) {
-                    return qSLongPressEffect.createTransitionControllerDelegate(fromView);
+                GhostedViewTransitionAnimatorController ghostedViewTransitionAnimatorControllerFromView = ActivityTransitionAnimator.Controller.Companion.fromView(view, num, transitionCookie, componentName, num2, z);
+                if (ghostedViewTransitionAnimatorControllerFromView != null) {
+                    return qSLongPressEffect.createTransitionControllerDelegate(ghostedViewTransitionAnimatorControllerFromView);
                 }
                 return null;
             }
@@ -641,7 +639,7 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         if (qSLongPressEffect2 != null) {
             qSLongPressEffect2.callback = new QSTileViewImpl$initLongPressEffectCallback$1(this);
         }
-        View.OnClickListener onClickListener2 = new View.OnClickListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$init$1
+        View.OnClickListener onClickListener2 = new View.OnClickListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl.init.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 QSLongPressEffect qSLongPressEffect3 = QSTileViewImpl.this.longPressEffect;
@@ -659,7 +657,7 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                 }
             }
         };
-        View.OnLongClickListener onLongClickListener2 = new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$init$2
+        View.OnLongClickListener onLongClickListener2 = new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl.init.2
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
                 QSLongPressEffect qSLongPressEffect3 = QSTileViewImpl.this.longPressEffect;
@@ -710,7 +708,7 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         TextView textView = this.label;
         if (textView == null) {
@@ -800,7 +798,7 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
 
     @Override // android.view.View
     public final void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo accessibilityNodeInfo) {
-        String str;
+        String strValueOf;
         super.onInitializeAccessibilityNodeInfo(accessibilityNodeInfo);
         accessibilityNodeInfo.setSelected(false);
         TextView textView = this.secondaryLabel;
@@ -809,7 +807,7 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         }
         if (TextUtils.isEmpty(textView.getText())) {
             TextView textView2 = this.label;
-            str = String.valueOf((textView2 != null ? textView2 : null).getText());
+            strValueOf = String.valueOf((textView2 != null ? textView2 : null).getText());
         } else {
             TextView textView3 = this.label;
             if (textView3 == null) {
@@ -817,9 +815,9 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
             }
             CharSequence text = textView3.getText();
             TextView textView4 = this.secondaryLabel;
-            str = ((Object) text) + ", " + ((Object) (textView4 != null ? textView4 : null).getText());
+            strValueOf = ((Object) text) + ", " + ((Object) (textView4 != null ? textView4 : null).getText());
         }
-        accessibilityNodeInfo.setText(str);
+        accessibilityNodeInfo.setText(strValueOf);
         if (this.lastDisabledByPolicy) {
             accessibilityNodeInfo.addAction(new AccessibilityNodeInfo.AccessibilityAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK.getId(), getResources().getString(R.string.accessibility_tile_disabled_by_policy_action_description)));
         } else if (isLongClickable()) {
@@ -876,10 +874,10 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
     @Override // android.view.View
     public final boolean onTouchEvent(MotionEvent motionEvent) {
         QSTileViewImpl$initLongPressEffectCallback$1 qSTileViewImpl$initLongPressEffectCallback$1;
-        boolean onTouchEvent = super.onTouchEvent(motionEvent);
+        boolean zOnTouchEvent = super.onTouchEvent(motionEvent);
         if (this.longPressEffect != null) {
-            Integer valueOf = motionEvent != null ? Integer.valueOf(motionEvent.getActionMasked()) : null;
-            if (valueOf != null && valueOf.intValue() == 0) {
+            Integer numValueOf = motionEvent != null ? Integer.valueOf(motionEvent.getActionMasked()) : null;
+            if (numValueOf != null && numValueOf.intValue() == 0) {
                 QSLongPressEffect qSLongPressEffect = this.longPressEffect;
                 QSTile qSTile = qSLongPressEffect.qsTile;
                 qSLongPressEffect.logEvent(qSTile != null ? qSTile.getTileSpec() : null, qSLongPressEffect.state, "action down received");
@@ -895,7 +893,7 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                     }
                 }
                 if (isLongClickable()) {
-                    postDelayed(new Runnable() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$onTouchEvent$1
+                    postDelayed(new Runnable() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl.onTouchEvent.1
                         @Override // java.lang.Runnable
                         public final void run() {
                             QSTileViewImpl$initLongPressEffectCallback$1 qSTileViewImpl$initLongPressEffectCallback$12;
@@ -906,13 +904,13 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                             final QSTileViewImpl qSTileViewImpl2 = qSTileViewImpl$initLongPressEffectCallback$12.this$0;
                             ValueAnimator valueAnimator2 = qSTileViewImpl2.longPressEffectAnimator;
                             if (valueAnimator2 == null || !valueAnimator2.isRunning()) {
-                                final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                                ofFloat.setDuration(qSTileViewImpl2.longPressEffect != null ? r1.effectDuration : 0L);
-                                ofFloat.setInterpolator(new AccelerateDecelerateInterpolator());
-                                ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$initLongPressEffectCallback$1$onStartAnimator$lambda$3$$inlined$doOnStart$1
+                                final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                                valueAnimatorOfFloat.setDuration(qSTileViewImpl2.longPressEffect != null ? r1.effectDuration : 0L);
+                                valueAnimatorOfFloat.setInterpolator(new AccelerateDecelerateInterpolator());
+                                valueAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$initLongPressEffectCallback$1$onStartAnimator$lambda$3$$inlined$doOnStart$1
                                     @Override // android.animation.Animator.AnimatorListener
                                     public final void onAnimationStart(Animator animator) {
-                                        QSLongPressEffect qSLongPressEffect3 = QSTileViewImpl.this.longPressEffect;
+                                        QSLongPressEffect qSLongPressEffect3 = qSTileViewImpl2.longPressEffect;
                                         if (qSLongPressEffect3 != null) {
                                             QSTile qSTile2 = qSLongPressEffect3.qsTile;
                                             qSLongPressEffect3.logEvent(qSTile2 != null ? qSTile2.getTileSpec() : null, qSLongPressEffect3.state, "animation started");
@@ -939,11 +937,11 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                                     public final void onAnimationRepeat(Animator animator) {
                                     }
                                 });
-                                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$initLongPressEffectCallback$1$onStartAnimator$1$2
+                                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$initLongPressEffectCallback$1$onStartAnimator$1$2
                                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                                     public final void onAnimationUpdate(ValueAnimator valueAnimator3) {
-                                        float floatValue = ((Float) ofFloat.getAnimatedValue()).floatValue();
-                                        if (floatValue == 0.0f) {
+                                        float fFloatValue = ((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue();
+                                        if (fFloatValue == 0.0f) {
                                             qSTileViewImpl2.bringToFront();
                                             return;
                                         }
@@ -957,54 +955,54 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                                         QSLongPressProperties qSLongPressProperties = qSTileViewImpl3.initialLongPressProperties;
                                         float f = qSLongPressProperties != null ? qSLongPressProperties.height : 0.0f;
                                         QSLongPressProperties qSLongPressProperties2 = qSTileViewImpl3.finalLongPressProperties;
-                                        int m$1 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(qSLongPressProperties2 != null ? qSLongPressProperties2.height : 0.0f, f, floatValue, f);
+                                        int iM$1 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(qSLongPressProperties2 != null ? qSLongPressProperties2.height : 0.0f, f, fFloatValue, f);
                                         float f2 = qSLongPressProperties != null ? qSLongPressProperties.width : 0.0f;
-                                        int m$12 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(qSLongPressProperties2 != null ? qSLongPressProperties2.width : 0.0f, f2, floatValue, f2);
-                                        int i2 = (m$1 - (qSLongPressProperties != null ? (int) qSLongPressProperties.height : 0)) / 2;
-                                        int i3 = (m$12 - (qSLongPressProperties != null ? (int) qSLongPressProperties.width : 0)) / 2;
-                                        qSTileViewImpl3.getBackground().setBounds(-i3, -i2, m$12 - i3, m$1 - i2);
+                                        int iM$12 = (int) DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(qSLongPressProperties2 != null ? qSLongPressProperties2.width : 0.0f, f2, fFloatValue, f2);
+                                        int i2 = (iM$1 - (qSLongPressProperties != null ? (int) qSLongPressProperties.height : 0)) / 2;
+                                        int i3 = (iM$12 - (qSLongPressProperties != null ? (int) qSLongPressProperties.width : 0)) / 2;
+                                        qSTileViewImpl3.getBackground().setBounds(-i3, -i2, iM$12 - i3, iM$1 - i2);
                                         QSLongPressProperties qSLongPressProperties3 = qSTileViewImpl3.initialLongPressProperties;
                                         float f3 = qSLongPressProperties3 != null ? qSLongPressProperties3.cornerRadius : 0.0f;
                                         QSLongPressProperties qSLongPressProperties4 = qSTileViewImpl3.finalLongPressProperties;
-                                        qSTileViewImpl3.changeCornerRadius((((qSLongPressProperties4 != null ? qSLongPressProperties4.cornerRadius : 0.0f) - f3) * floatValue) + f3);
+                                        qSTileViewImpl3.changeCornerRadius((((qSLongPressProperties4 != null ? qSLongPressProperties4.cornerRadius : 0.0f) - f3) * fFloatValue) + f3);
                                         ArgbEvaluator argbEvaluator = qSTileViewImpl3.colorEvaluator;
                                         QSLongPressProperties qSLongPressProperties5 = qSTileViewImpl3.initialLongPressProperties;
-                                        Integer valueOf2 = Integer.valueOf(qSLongPressProperties5 != null ? qSLongPressProperties5.backgroundColor : 0);
+                                        Integer numValueOf2 = Integer.valueOf(qSLongPressProperties5 != null ? qSLongPressProperties5.backgroundColor : 0);
                                         QSLongPressProperties qSLongPressProperties6 = qSTileViewImpl3.finalLongPressProperties;
-                                        int intValue = ((Integer) argbEvaluator.evaluate(floatValue, valueOf2, Integer.valueOf(qSLongPressProperties6 != null ? qSLongPressProperties6.backgroundColor : 0))).intValue();
+                                        int iIntValue = ((Integer) argbEvaluator.evaluate(fFloatValue, numValueOf2, Integer.valueOf(qSLongPressProperties6 != null ? qSLongPressProperties6.backgroundColor : 0))).intValue();
                                         ArgbEvaluator argbEvaluator2 = qSTileViewImpl3.colorEvaluator;
                                         QSLongPressProperties qSLongPressProperties7 = qSTileViewImpl3.initialLongPressProperties;
-                                        Integer valueOf3 = Integer.valueOf(qSLongPressProperties7 != null ? qSLongPressProperties7.labelColor : 0);
+                                        Integer numValueOf3 = Integer.valueOf(qSLongPressProperties7 != null ? qSLongPressProperties7.labelColor : 0);
                                         QSLongPressProperties qSLongPressProperties8 = qSTileViewImpl3.finalLongPressProperties;
-                                        int intValue2 = ((Integer) argbEvaluator2.evaluate(floatValue, valueOf3, Integer.valueOf(qSLongPressProperties8 != null ? qSLongPressProperties8.labelColor : 0))).intValue();
+                                        int iIntValue2 = ((Integer) argbEvaluator2.evaluate(fFloatValue, numValueOf3, Integer.valueOf(qSLongPressProperties8 != null ? qSLongPressProperties8.labelColor : 0))).intValue();
                                         ArgbEvaluator argbEvaluator3 = qSTileViewImpl3.colorEvaluator;
                                         QSLongPressProperties qSLongPressProperties9 = qSTileViewImpl3.initialLongPressProperties;
-                                        Integer valueOf4 = Integer.valueOf(qSLongPressProperties9 != null ? qSLongPressProperties9.secondaryLabelColor : 0);
+                                        Integer numValueOf4 = Integer.valueOf(qSLongPressProperties9 != null ? qSLongPressProperties9.secondaryLabelColor : 0);
                                         QSLongPressProperties qSLongPressProperties10 = qSTileViewImpl3.finalLongPressProperties;
-                                        int intValue3 = ((Integer) argbEvaluator3.evaluate(floatValue, valueOf4, Integer.valueOf(qSLongPressProperties10 != null ? qSLongPressProperties10.secondaryLabelColor : 0))).intValue();
+                                        int iIntValue3 = ((Integer) argbEvaluator3.evaluate(fFloatValue, numValueOf4, Integer.valueOf(qSLongPressProperties10 != null ? qSLongPressProperties10.secondaryLabelColor : 0))).intValue();
                                         ArgbEvaluator argbEvaluator4 = qSTileViewImpl3.colorEvaluator;
                                         QSLongPressProperties qSLongPressProperties11 = qSTileViewImpl3.initialLongPressProperties;
-                                        Integer valueOf5 = Integer.valueOf(qSLongPressProperties11 != null ? qSLongPressProperties11.chevronColor : 0);
+                                        Integer numValueOf5 = Integer.valueOf(qSLongPressProperties11 != null ? qSLongPressProperties11.chevronColor : 0);
                                         QSLongPressProperties qSLongPressProperties12 = qSTileViewImpl3.finalLongPressProperties;
-                                        int intValue4 = ((Integer) argbEvaluator4.evaluate(floatValue, valueOf5, Integer.valueOf(qSLongPressProperties12 != null ? qSLongPressProperties12.chevronColor : 0))).intValue();
+                                        int iIntValue4 = ((Integer) argbEvaluator4.evaluate(fFloatValue, numValueOf5, Integer.valueOf(qSLongPressProperties12 != null ? qSLongPressProperties12.chevronColor : 0))).intValue();
                                         ArgbEvaluator argbEvaluator5 = qSTileViewImpl3.colorEvaluator;
                                         QSLongPressProperties qSLongPressProperties13 = qSTileViewImpl3.initialLongPressProperties;
-                                        Integer valueOf6 = Integer.valueOf(qSLongPressProperties13 != null ? qSLongPressProperties13.overlayColor : 0);
+                                        Integer numValueOf6 = Integer.valueOf(qSLongPressProperties13 != null ? qSLongPressProperties13.overlayColor : 0);
                                         QSLongPressProperties qSLongPressProperties14 = qSTileViewImpl3.finalLongPressProperties;
-                                        qSTileViewImpl3.setAllColors(intValue, intValue2, intValue3, intValue4, ((Integer) argbEvaluator5.evaluate(floatValue, valueOf6, Integer.valueOf(qSLongPressProperties14 != null ? qSLongPressProperties14.overlayColor : 0))).intValue());
+                                        qSTileViewImpl3.setAllColors(iIntValue, iIntValue2, iIntValue3, iIntValue4, ((Integer) argbEvaluator5.evaluate(fFloatValue, numValueOf6, Integer.valueOf(qSLongPressProperties14 != null ? qSLongPressProperties14.overlayColor : 0))).intValue());
                                         QSIconViewImpl qSIconViewImpl = qSTileViewImpl3.icon;
                                         ImageView imageView = (ImageView) qSIconViewImpl.mIcon;
                                         ArgbEvaluator argbEvaluator6 = qSTileViewImpl3.colorEvaluator;
                                         QSLongPressProperties qSLongPressProperties15 = qSTileViewImpl3.initialLongPressProperties;
-                                        Integer valueOf7 = Integer.valueOf(qSLongPressProperties15 != null ? qSLongPressProperties15.iconColor : 0);
+                                        Integer numValueOf7 = Integer.valueOf(qSLongPressProperties15 != null ? qSLongPressProperties15.iconColor : 0);
                                         QSLongPressProperties qSLongPressProperties16 = qSTileViewImpl3.finalLongPressProperties;
-                                        qSIconViewImpl.setTint(imageView, ((Integer) argbEvaluator6.evaluate(floatValue, valueOf7, Integer.valueOf(qSLongPressProperties16 != null ? qSLongPressProperties16.iconColor : 0))).intValue());
+                                        qSIconViewImpl.setTint(imageView, ((Integer) argbEvaluator6.evaluate(fFloatValue, numValueOf7, Integer.valueOf(qSLongPressProperties16 != null ? qSLongPressProperties16.iconColor : 0))).intValue());
                                     }
                                 });
-                                ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$initLongPressEffectCallback$1$onStartAnimator$lambda$3$$inlined$doOnEnd$1
+                                valueAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$initLongPressEffectCallback$1$onStartAnimator$lambda$3$$inlined$doOnEnd$1
                                     @Override // android.animation.Animator.AnimatorListener
                                     public final void onAnimationEnd(Animator animator) {
-                                        QSLongPressEffect qSLongPressEffect3 = QSTileViewImpl.this.longPressEffect;
+                                        QSLongPressEffect qSLongPressEffect3 = qSTileViewImpl2.longPressEffect;
                                         if (qSLongPressEffect3 != null) {
                                             QSTile qSTile2 = qSLongPressEffect3.qsTile;
                                             qSLongPressEffect3.logEvent(qSTile2 != null ? qSTile2.getTileSpec() : null, qSLongPressEffect3.state, "animation completed");
@@ -1045,9 +1043,9 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                                                 qSLongPressEffect3.logEvent(qSTile5 != null ? qSTile5.getTileSpec() : null, qSLongPressEffect3.state, "false long click. No action triggered");
                                                 return;
                                             }
-                                            boolean isUnlocked = qSLongPressEffect3.keyguardStateController.isUnlocked();
+                                            boolean zIsUnlocked = qSLongPressEffect3.keyguardStateController.isUnlocked();
                                             VibratorHelper vibratorHelper = qSLongPressEffect3.vibratorHelper;
-                                            if (isUnlocked) {
+                                            if (zIsUnlocked) {
                                                 VibrationEffect vibrationEffect = qSLongPressEffect3.snapEffect;
                                                 if (vibratorHelper != null && vibrationEffect != null) {
                                                     vibratorHelper.vibrate(vibrationEffect);
@@ -1091,10 +1089,10 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                                     public final void onAnimationStart(Animator animator) {
                                     }
                                 });
-                                ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$initLongPressEffectCallback$1$onStartAnimator$lambda$3$$inlined$doOnCancel$1
+                                valueAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$initLongPressEffectCallback$1$onStartAnimator$lambda$3$$inlined$doOnCancel$1
                                     @Override // android.animation.Animator.AnimatorListener
                                     public final void onAnimationCancel(Animator animator) {
-                                        QSLongPressEffect qSLongPressEffect3 = QSTileViewImpl.this.longPressEffect;
+                                        QSLongPressEffect qSLongPressEffect3 = qSTileViewImpl2.longPressEffect;
                                         if (qSLongPressEffect3 != null) {
                                             qSLongPressEffect3.setState(QSLongPressEffect.State.TIMEOUT_WAIT);
                                         }
@@ -1112,14 +1110,14 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                                     public final void onAnimationStart(Animator animator) {
                                     }
                                 });
-                                ofFloat.start();
-                                qSTileViewImpl2.longPressEffectAnimator = ofFloat;
+                                valueAnimatorOfFloat.start();
+                                qSTileViewImpl2.longPressEffectAnimator = valueAnimatorOfFloat;
                             }
                         }
                     }, ViewConfiguration.getTapTimeout());
-                    return onTouchEvent;
+                    return zOnTouchEvent;
                 }
-            } else if (valueOf != null && valueOf.intValue() == 1) {
+            } else if (numValueOf != null && numValueOf.intValue() == 1) {
                 QSLongPressEffect qSLongPressEffect2 = this.longPressEffect;
                 QSTile qSTile2 = qSLongPressEffect2.qsTile;
                 qSLongPressEffect2.logEvent(qSTile2 != null ? qSTile2.getTileSpec() : null, qSLongPressEffect2.state, "action up received");
@@ -1128,10 +1126,10 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                     QSTileViewImpl$initLongPressEffectCallback$1 qSTileViewImpl$initLongPressEffectCallback$12 = qSLongPressEffect2.callback;
                     if (qSTileViewImpl$initLongPressEffectCallback$12 != null) {
                         qSTileViewImpl$initLongPressEffectCallback$12.onReverseAnimator(true);
-                        return onTouchEvent;
+                        return zOnTouchEvent;
                     }
                 }
-            } else if (valueOf != null && valueOf.intValue() == 3) {
+            } else if (numValueOf != null && numValueOf.intValue() == 3) {
                 QSLongPressEffect qSLongPressEffect3 = this.longPressEffect;
                 int i2 = QSLongPressEffect.WhenMappings.$EnumSwitchMapping$0[qSLongPressEffect3.state.ordinal()];
                 if (i2 == 6) {
@@ -1141,12 +1139,12 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
                     QSTileViewImpl$initLongPressEffectCallback$1 qSTileViewImpl$initLongPressEffectCallback$13 = qSLongPressEffect3.callback;
                     if (qSTileViewImpl$initLongPressEffectCallback$13 != null) {
                         qSTileViewImpl$initLongPressEffectCallback$13.onReverseAnimator(true);
-                        return onTouchEvent;
+                        return zOnTouchEvent;
                     }
                 }
             }
         }
-        return onTouchEvent;
+        return zOnTouchEvent;
     }
 
     public final void resetLongPressEffectProperties() {
@@ -1223,13 +1221,13 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
     }
 
     public final void updateHeight() {
-        int i = this.heightOverride;
-        if (i == -1) {
-            i = getMeasuredHeight();
+        int measuredHeight = this.heightOverride;
+        if (measuredHeight == -1) {
+            measuredHeight = getMeasuredHeight();
         }
-        float f = i;
+        float f = measuredHeight;
         setBottom(getTop() + ((int) (((this.squishinessFraction * 0.9f) + 0.1f) * f)));
-        setScrollY((i - getHeight()) / 2);
+        setScrollY((measuredHeight - getHeight()) / 2);
         if (!isLongClickable() || this.longPressEffect == null) {
             return;
         }
@@ -1242,9 +1240,9 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
             qSLongPressProperties2.height = 1.2f * f;
         }
         Rect rect = this.paddingForLaunch;
-        int i2 = (int) (f * 0.20000005f);
-        rect.top = (-i2) / 2;
-        rect.bottom = i2 / 2;
+        int i = (int) (f * 0.20000005f);
+        rect.top = (-i) / 2;
+        rect.bottom = i / 2;
     }
 
     public QSTileViewImpl(Context context, boolean z) {
@@ -1255,7 +1253,7 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         this(context, (i & 2) != 0 ? false : z, (i & 4) != 0 ? null : qSLongPressEffect);
     }
 
-    public QSTileViewImpl(Context context, boolean z, QSLongPressEffect qSLongPressEffect) {
+    public QSTileViewImpl(Context context, boolean z, QSLongPressEffect qSLongPressEffect) throws Resources.NotFoundException {
         super(context);
         this.longPressEffect = qSLongPressEffect;
         QSIconViewImpl qSIconViewImpl = new QSIconViewImpl(context);
@@ -1281,14 +1279,14 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$singleAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                QSTileViewImpl qSTileViewImpl = QSTileViewImpl.this;
-                int intValue = ((Integer) valueAnimator2.getAnimatedValue(BriefViewController.SUGGESTION_BACKGROUND_KEY)).intValue();
-                int intValue2 = ((Integer) valueAnimator2.getAnimatedValue("label")).intValue();
-                int intValue3 = ((Integer) valueAnimator2.getAnimatedValue("secondaryLabel")).intValue();
-                int intValue4 = ((Integer) valueAnimator2.getAnimatedValue("chevron")).intValue();
-                int intValue5 = ((Integer) valueAnimator2.getAnimatedValue("overlay")).intValue();
+                QSTileViewImpl qSTileViewImpl = this.this$0;
+                int iIntValue = ((Integer) valueAnimator2.getAnimatedValue(BriefViewController.SUGGESTION_BACKGROUND_KEY)).intValue();
+                int iIntValue2 = ((Integer) valueAnimator2.getAnimatedValue("label")).intValue();
+                int iIntValue3 = ((Integer) valueAnimator2.getAnimatedValue("secondaryLabel")).intValue();
+                int iIntValue4 = ((Integer) valueAnimator2.getAnimatedValue("chevron")).intValue();
+                int iIntValue5 = ((Integer) valueAnimator2.getAnimatedValue("overlay")).intValue();
                 Rect rect = QSTileViewImpl.EMPTY_RECT;
-                qSTileViewImpl.setAllColors(intValue, intValue2, intValue3, intValue4, intValue5);
+                qSTileViewImpl.setAllColors(iIntValue, iIntValue2, iIntValue3, iIntValue4, iIntValue5);
             }
         });
         this.singleAnimator = valueAnimator;
@@ -1296,8 +1294,8 @@ public class QSTileViewImpl extends QSTileView implements HeightOverrideable, La
         this.launchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.qs.tileimpl.QSTileViewImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return QSTileViewImpl.$r8$lambda$z2I2f7JdMBvprJ5PkXXY6cmrYYU(QSTileViewImpl.this, ((Integer) obj).intValue());
+            public final Object mo781invoke(Object obj) {
+                return QSTileViewImpl.$r8$lambda$z2I2f7JdMBvprJ5PkXXY6cmrYYU(this.f$0, ((Integer) obj).intValue());
             }
         });
         this.locInScreen = new int[2];

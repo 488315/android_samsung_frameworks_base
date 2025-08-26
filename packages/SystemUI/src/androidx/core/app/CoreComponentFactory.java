@@ -26,11 +26,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CoreComponentFactory extends android.app.AppComponentFactory {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface CompatWrapped {
     }
 
@@ -67,9 +65,9 @@ public class CoreComponentFactory extends android.app.AppComponentFactory {
                     if ("bind_slice".equals(str)) {
                         if (bundle != null) {
                             uri = (Uri) bundle.getParcelable("slice_uri");
-                            if (uri != null && this.mSliceManager.checkSlicePermission(uri, Binder.getCallingPid(), Binder.getCallingUid()) != 0) {
-                                checkPermissions(uri);
-                            }
+                        }
+                        if (uri != null && this.mSliceManager.checkSlicePermission(uri, Binder.getCallingPid(), Binder.getCallingUid()) != 0) {
+                            checkPermissions(uri);
                         }
                     } else if ("map_slice".equals(str) && (intent = (Intent) bundle.getParcelable("slice_intent")) != null) {
                         onMapIntentToUri(intent);

@@ -38,13 +38,13 @@ public final class LinkAddress {
 
     public static final ArrayList<LinkAddress> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<LinkAddress> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             LinkAddress linkAddress = new LinkAddress();
-            linkAddress.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 40);
+            linkAddress.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 40);
             arrayList.add(linkAddress);
         }
         return arrayList;

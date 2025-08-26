@@ -1,5 +1,7 @@
 package com.android.compose.animation.scene;
 
+import androidx.compose.runtime.SnapshotMutableFloatStateImpl;
+import androidx.compose.runtime.SnapshotMutableLongStateImpl;
 import androidx.compose.runtime.snapshots.SnapshotStateMap;
 import androidx.compose.ui.Modifier;
 import androidx.compose.ui.geometry.Offset;
@@ -10,21 +12,33 @@ import androidx.compose.ui.unit.IntSize;
 import com.android.compose.animation.scene.Element;
 import com.android.compose.animation.scene.content.Content;
 import com.android.compose.animation.scene.content.state.TransitionState;
+import com.android.compose.animation.scene.transformation.SharedElementTransformation;
+import com.android.compose.animation.scene.transformation.TransformationWithRange;
 import com.android.compose.ui.graphics.DrawInContainerKt;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import kotlin.NoWhenBranchMatchedException;
 import kotlin.collections.CollectionsKt__CollectionsJVMKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.collections.MapsKt__MapsKt;
 import kotlin.collections.builders.ListBuilder;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ElementKt {
+    /* JADX WARN: Code restructure failed: missing block: B:40:0x009c, code lost:
+    
+        r6 = null;
+     */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r12v12, types: [com.android.compose.animation.scene.content.state.TransitionState] */
     /* JADX WARN: Type inference failed for: r12v20, types: [com.android.compose.animation.scene.content.state.TransitionState$Transition] */
     /* JADX WARN: Type inference failed for: r12v22 */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final TransitionState access$elementState(SceneTransitionLayoutImpl sceneTransitionLayoutImpl, Element element, List list) {
         SnapshotStateMap snapshotStateMap;
         TransitionState transitionState;
@@ -82,7 +96,6 @@ public abstract class ElementKt {
                 transitionState = r12;
             }
         }
-        transitionState = null;
         TransitionState.Transition transition2 = transitionState instanceof TransitionState.Transition ? (TransitionState.Transition) transitionState : null;
         TransitionState.Transition transition3 = element.lastTransition;
         element.lastTransition = transition2;
@@ -99,22 +112,22 @@ public abstract class ElementKt {
                 }
             }
         } else if (!Intrinsics.areEqual(transition2.replacedTransition, transition3)) {
-            Element.State prepareInterruption$updateStateInContent = prepareInterruption$updateStateInContent(snapshotStateMap, transition3.fromContent);
-            Element.State prepareInterruption$updateStateInContent2 = prepareInterruption$updateStateInContent(snapshotStateMap, transition3.toContent);
-            Element.State prepareInterruption$updateStateInContent3 = prepareInterruption$updateStateInContent(snapshotStateMap, transition2.fromContent);
-            Element.State prepareInterruption$updateStateInContent4 = prepareInterruption$updateStateInContent(snapshotStateMap, transition2.toContent);
+            Element.State statePrepareInterruption$updateStateInContent = prepareInterruption$updateStateInContent(snapshotStateMap, transition3.fromContent);
+            Element.State statePrepareInterruption$updateStateInContent2 = prepareInterruption$updateStateInContent(snapshotStateMap, transition3.toContent);
+            Element.State statePrepareInterruption$updateStateInContent3 = prepareInterruption$updateStateInContent(snapshotStateMap, transition2.fromContent);
+            Element.State statePrepareInterruption$updateStateInContent4 = prepareInterruption$updateStateInContent(snapshotStateMap, transition2.toContent);
             reconcileStates(element, transition2, reconcileStates(element, transition3, null));
-            if (prepareInterruption$updateStateInContent != null) {
-                prepareInterruption$cleanInterruptionValues(sceneTransitionLayoutImpl, element, transition2, prepareInterruption$updateStateInContent);
+            if (statePrepareInterruption$updateStateInContent != null) {
+                prepareInterruption$cleanInterruptionValues(sceneTransitionLayoutImpl, element, transition2, statePrepareInterruption$updateStateInContent);
             }
-            if (prepareInterruption$updateStateInContent2 != null) {
-                prepareInterruption$cleanInterruptionValues(sceneTransitionLayoutImpl, element, transition2, prepareInterruption$updateStateInContent2);
+            if (statePrepareInterruption$updateStateInContent2 != null) {
+                prepareInterruption$cleanInterruptionValues(sceneTransitionLayoutImpl, element, transition2, statePrepareInterruption$updateStateInContent2);
             }
-            if (prepareInterruption$updateStateInContent3 != null) {
-                prepareInterruption$cleanInterruptionValues(sceneTransitionLayoutImpl, element, transition2, prepareInterruption$updateStateInContent3);
+            if (statePrepareInterruption$updateStateInContent3 != null) {
+                prepareInterruption$cleanInterruptionValues(sceneTransitionLayoutImpl, element, transition2, statePrepareInterruption$updateStateInContent3);
             }
-            if (prepareInterruption$updateStateInContent4 != null) {
-                prepareInterruption$cleanInterruptionValues(sceneTransitionLayoutImpl, element, transition2, prepareInterruption$updateStateInContent4);
+            if (statePrepareInterruption$updateStateInContent4 != null) {
+                prepareInterruption$cleanInterruptionValues(sceneTransitionLayoutImpl, element, transition2, statePrepareInterruption$updateStateInContent4);
                 return transitionState;
             }
         }
@@ -123,10 +136,10 @@ public abstract class ElementKt {
 
     public static final ContentKey access$getTransformationContentKey(boolean z, ContentKey contentKey, SceneTransitionLayoutImpl sceneTransitionLayoutImpl, TransitionState.Transition transition, Element element, Element.State state) {
         if (!z) {
-            boolean isAncestorTransition = isAncestorTransition(sceneTransitionLayoutImpl, transition);
+            boolean zIsAncestorTransition = isAncestorTransition(sceneTransitionLayoutImpl, transition);
             ContentKey contentKey2 = transition.toContent;
             ContentKey contentKey3 = transition.fromContent;
-            if (isAncestorTransition) {
+            if (zIsAncestorTransition) {
                 Object obj = element.stateByContent.get(contentKey3);
                 ElementKey elementKey = element.key;
                 if (obj != null && transition.transformationSpec.transformations$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(contentKey3, elementKey) != null) {
@@ -174,85 +187,169 @@ public abstract class ElementKt {
     }
 
     public static final Modifier element(Modifier modifier, final SceneTransitionLayoutImpl sceneTransitionLayoutImpl, final Content content, final ElementKey elementKey) {
-        ListBuilder createListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+        ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
         List list = sceneTransitionLayoutImpl.ancestors;
         int size = list.size();
         for (int i = 0; i < size; i++) {
-            createListBuilder.add(((Ancestor) list.get(i)).layoutImpl.state.getTransitionStates$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout());
+            listBuilderCreateListBuilder.add(((Ancestor) list.get(i)).layoutImpl.state.getTransitionStates$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout());
         }
-        createListBuilder.add(sceneTransitionLayoutImpl.state.getTransitionStates$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout());
-        final ListBuilder build = createListBuilder.build();
+        listBuilderCreateListBuilder.add(sceneTransitionLayoutImpl.state.getTransitionStates$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout());
+        final ListBuilder listBuilderBuild = listBuilderCreateListBuilder.build();
         if (sceneTransitionLayoutImpl.state.isElevationPossible$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(content.getKey(), elementKey)) {
             modifier = modifier.then(DrawInContainerKt.drawInContainer$default(Modifier.Companion, content.containerState, new Function0() { // from class: com.android.compose.animation.scene.ElementKt$$ExternalSyntheticLambda0
-                /* JADX WARN: Code restructure failed: missing block: B:36:0x00f5, code lost:
+                /* JADX WARN: Code restructure failed: missing block: B:40:0x00a6, code lost:
                 
-                    if (r1.containsKey(r4) == false) goto L65;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:48:0x0109, code lost:
-                
-                    if (r1.containsKey(r4 != null ? r4 : null) != false) goto L77;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:52:0x0116, code lost:
-                
-                    if (r1.containsKey(r6) != false) goto L77;
+                    r10 = null;
                  */
                 /* JADX WARN: Multi-variable type inference failed */
+                /* JADX WARN: Removed duplicated region for block: B:65:0x00f7  */
+                /* JADX WARN: Removed duplicated region for block: B:77:0x0118  */
                 /* JADX WARN: Type inference failed for: r3v13, types: [com.android.compose.animation.scene.content.state.TransitionState$Transition] */
                 /* JADX WARN: Type inference failed for: r3v15 */
                 /* JADX WARN: Type inference failed for: r3v5, types: [com.android.compose.animation.scene.content.state.TransitionState] */
                 @Override // kotlin.jvm.functions.Function0
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object invoke() {
-                    /*
-                        Method dump skipped, instructions count: 310
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.compose.animation.scene.ElementKt$$ExternalSyntheticLambda0.invoke():java.lang.Object");
+                public final Object invoke() {
+                    TransitionState transitionState;
+                    TransformationWithRange transformationWithRange;
+                    SharedElementTransformation sharedElementTransformation;
+                    SceneTransitionLayoutImpl sceneTransitionLayoutImpl2 = sceneTransitionLayoutImpl;
+                    Map map = sceneTransitionLayoutImpl2.elements;
+                    ElementKey elementKey2 = elementKey;
+                    SnapshotStateMap snapshotStateMap = ((Element) MapsKt__MapsKt.getValue(elementKey2, map)).stateByContent;
+                    ListBuilder listBuilder = listBuilderBuild;
+                    int size2 = listBuilder.size();
+                    boolean z = false;
+                    int i2 = 0;
+                    loop0: while (true) {
+                        if (i2 >= size2) {
+                            break;
+                        }
+                        List list2 = (List) listBuilder.get(i2);
+                        if (i2 < listBuilder.getSize() - 1) {
+                            int size3 = list2.size() - 1;
+                            if (size3 >= 0) {
+                                while (true) {
+                                    int i3 = size3 - 1;
+                                    transitionState = (TransitionState) list2.get(size3);
+                                    if (transitionState instanceof TransitionState.Transition) {
+                                        TransitionState.Transition transition = (TransitionState.Transition) transitionState;
+                                        if (snapshotStateMap.containsKey(transition.fromContent) && snapshotStateMap.containsKey(transition.toContent)) {
+                                            break loop0;
+                                        }
+                                    }
+                                    if (ElementKt.access$hasTransformationForElement(transitionState, elementKey2)) {
+                                        break loop0;
+                                    }
+                                    if (i3 < 0) {
+                                        break;
+                                    }
+                                    size3 = i3;
+                                }
+                            }
+                            i2++;
+                        } else {
+                            ?? r3 = (TransitionState) CollectionsKt___CollectionsKt.last(list2);
+                            if (!(r3 instanceof TransitionState.Idle)) {
+                                int size4 = list2.size() - 1;
+                                if (size4 >= 0) {
+                                    while (true) {
+                                        int i4 = size4 - 1;
+                                        r3 = (TransitionState.Transition) ((TransitionState) list2.get(size4));
+                                        if (snapshotStateMap.containsKey(r3.fromContent) || snapshotStateMap.containsKey(r3.toContent)) {
+                                            break;
+                                        }
+                                        if (i4 < 0) {
+                                            break;
+                                        }
+                                        size4 = i4;
+                                    }
+                                }
+                            } else if (list2.size() != 1) {
+                                throw new IllegalStateException("Check failed.");
+                            }
+                            transitionState = r3;
+                        }
+                    }
+                    if (transitionState instanceof TransitionState.Transition) {
+                        TransitionState.Transition transition2 = (TransitionState.Transition) transitionState;
+                        TransformationSpecImpl transformationSpecImpl = transition2.transformationSpec;
+                        Content content2 = content;
+                        ElementTransformations elementTransformationsTransformations$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout = transformationSpecImpl.transformations$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(content2.getKey(), elementKey2);
+                        if (Intrinsics.areEqual((elementTransformationsTransformations$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout == null || (transformationWithRange = elementTransformationsTransformations$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout.shared) == null || (sharedElementTransformation = (SharedElementTransformation) transformationWithRange.transformation) == null) ? null : sharedElementTransformation.elevateInContent, content2.getKey())) {
+                            boolean z2 = transition2 instanceof TransitionState.Transition.ReplaceOverlay;
+                            ContentKey contentKey = transition2.toContent;
+                            ContentKey contentKey2 = transition2.fromContent;
+                            if (z2) {
+                                if (snapshotStateMap.containsKey(contentKey2)) {
+                                    if (!snapshotStateMap.containsKey(contentKey)) {
+                                        SceneKey sceneKey = ((TransitionState.Transition.OverlayTransition) transition2).currentSceneWhenTransitionStarted;
+                                        if (sceneKey == null) {
+                                            sceneKey = null;
+                                        }
+                                        if (!snapshotStateMap.containsKey(sceneKey)) {
+                                        }
+                                    }
+                                    if (SharedElementKt.isSharedElementEnabled(elementKey2, transition2)) {
+                                        z = true;
+                                    }
+                                } else if (snapshotStateMap.containsKey(contentKey)) {
+                                    SceneKey sceneKey2 = ((TransitionState.Transition.OverlayTransition) transition2).currentSceneWhenTransitionStarted;
+                                    if (snapshotStateMap.containsKey(sceneKey2 != null ? sceneKey2 : null)) {
+                                        if (SharedElementKt.isSharedElementEnabled(elementKey2, transition2) && ElementKt.shouldPlaceElement(sceneTransitionLayoutImpl2, content2.getKey(), (Element) MapsKt__MapsKt.getValue(elementKey2, sceneTransitionLayoutImpl2.elements), transitionState)) {
+                                            z = true;
+                                        }
+                                    }
+                                }
+                            } else if (snapshotStateMap.containsKey(contentKey2) && snapshotStateMap.containsKey(contentKey)) {
+                            }
+                        }
+                    }
+                    return Boolean.valueOf(z);
                 }
             }));
         }
-        Modifier then = modifier.then(new ElementModifier(sceneTransitionLayoutImpl, build, content, elementKey));
-        return sceneTransitionLayoutImpl.implicitTestTags ? then.then(TestTagKt.testTag(Modifier.Companion, elementKey.testTag)) : then;
+        Modifier modifierThen = modifier.then(new ElementModifier(sceneTransitionLayoutImpl, listBuilderBuild, content, elementKey));
+        return sceneTransitionLayoutImpl.implicitTestTags ? modifierThen.then(TestTagKt.testTag(Modifier.Companion, elementKey.testTag)) : modifierThen;
     }
 
     public static final long getDrawScale$specifiedOrCenter(long j, LayoutNodeDrawScope layoutNodeDrawScope) {
-        Offset m393boximpl = Offset.m393boximpl(j);
+        Offset offsetM395boximpl = Offset.m395boximpl(j);
         if ((j & 9223372034707292159L) == 9205357640488583168L) {
-            m393boximpl = null;
+            offsetM395boximpl = null;
         }
-        return m393boximpl != null ? m393boximpl.packedValue : layoutNodeDrawScope.canvasDrawScope.mo544getCenterF1C5BW0();
+        return offsetM395boximpl != null ? offsetM395boximpl.packedValue : layoutNodeDrawScope.canvasDrawScope.mo546getCenterF1C5BW0();
     }
 
     public static final float interruptedAlpha(SceneTransitionLayoutImpl sceneTransitionLayoutImpl, Element element, TransitionState.Transition transition, Element.State state, float f) {
         Element.Companion.getClass();
-        Float valueOf = Float.valueOf(Element.AlphaUnspecified);
-        Float valueOf2 = Float.valueOf(0.0f);
-        Float valueOf3 = Float.valueOf(state.alphaBeforeInterruption);
-        if (!valueOf3.equals(valueOf)) {
-            float floatValue = valueOf3.floatValue() - f;
-            state.alphaInterruptionDelta = floatValue;
+        Float fValueOf = Float.valueOf(Element.AlphaUnspecified);
+        Float fValueOf2 = Float.valueOf(0.0f);
+        Float fValueOf3 = Float.valueOf(state.alphaBeforeInterruption);
+        if (!fValueOf3.equals(fValueOf)) {
+            float fFloatValue = fValueOf3.floatValue() - f;
+            state.alphaInterruptionDelta = fFloatValue;
             if (transition != null) {
-                Object last = CollectionsKt___CollectionsKt.last(state.contents);
+                Object objLast = CollectionsKt___CollectionsKt.last(state.contents);
                 ContentKey contentKey = transition.fromContent;
-                if (Intrinsics.areEqual(last, contentKey)) {
+                if (Intrinsics.areEqual(objLast, contentKey)) {
                     contentKey = transition.toContent;
                 }
                 Element.State state2 = (Element.State) element.stateByContent.get(contentKey);
                 if (state2 != null && SharedElementKt.isSharedElementEnabled(element.key, transition)) {
-                    state2.alphaInterruptionDelta = floatValue;
+                    state2.alphaInterruptionDelta = fFloatValue;
                 }
             }
-            state.alphaBeforeInterruption = valueOf.floatValue();
+            state.alphaBeforeInterruption = fValueOf.floatValue();
         }
-        Float valueOf4 = Float.valueOf(state.alphaInterruptionDelta);
-        if (valueOf4.equals(valueOf2) || transition == null) {
+        Float fValueOf4 = Float.valueOf(state.alphaInterruptionDelta);
+        if (fValueOf4.equals(fValueOf2) || transition == null) {
             return f;
         }
-        float interruptionProgress$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout = transition.interruptionProgress$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(sceneTransitionLayoutImpl);
-        return interruptionProgress$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout == 0.0f ? f : (valueOf4.floatValue() * interruptionProgress$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout) + f;
+        float fInterruptionProgress$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout = transition.interruptionProgress$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(sceneTransitionLayoutImpl);
+        return fInterruptionProgress$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout == 0.0f ? f : (fValueOf4.floatValue() * fInterruptionProgress$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout) + f;
     }
 
     public static final boolean isAncestorTransition(SceneTransitionLayoutImpl sceneTransitionLayoutImpl, TransitionState.Transition transition) {
@@ -317,13 +414,13 @@ public abstract class ElementKt {
                 if (state != null) {
                     long j = state2.offsetBeforeInterruption;
                     Offset.Companion.getClass();
-                    if (Offset.m396equalsimpl0(j, Offset.Unspecified)) {
+                    if (Offset.m398equalsimpl0(j, Offset.Unspecified)) {
                         updateValuesBeforeInterruption(state2, state);
                     }
                 }
                 long j2 = state2.offsetBeforeInterruption;
                 Offset.Companion.getClass();
-                if (!Offset.m396equalsimpl0(j2, Offset.Unspecified)) {
+                if (!Offset.m398equalsimpl0(j2, Offset.Unspecified)) {
                     return state2;
                 }
             }
@@ -336,20 +433,20 @@ public abstract class ElementKt {
         Offset.Companion companion = Offset.Companion;
         companion.getClass();
         long j4 = Offset.Unspecified;
-        if (!Offset.m396equalsimpl0(j3, j4)) {
+        if (!Offset.m398equalsimpl0(j3, j4)) {
             long j5 = state3.offsetBeforeInterruption;
             companion.getClass();
-            if (Offset.m396equalsimpl0(j5, j4)) {
+            if (Offset.m398equalsimpl0(j5, j4)) {
                 updateValuesBeforeInterruption(state3, state2);
                 return state2;
             }
         }
         long j6 = state3.offsetBeforeInterruption;
         companion.getClass();
-        if (!Offset.m396equalsimpl0(j6, j4)) {
+        if (!Offset.m398equalsimpl0(j6, j4)) {
             long j7 = state2.offsetBeforeInterruption;
             companion.getClass();
-            if (Offset.m396equalsimpl0(j7, j4)) {
+            if (Offset.m398equalsimpl0(j7, j4)) {
                 updateValuesBeforeInterruption(state2, state3);
                 return state3;
             }
@@ -357,7 +454,7 @@ public abstract class ElementKt {
         return null;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:40:0x0086, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x0086, code lost:
     
         if (kotlin.jvm.internal.Intrinsics.areEqual(r13, r0) == false) goto L36;
      */
@@ -366,14 +463,81 @@ public abstract class ElementKt {
     /* JADX WARN: Type inference failed for: r15v20, types: [com.android.compose.animation.scene.SceneKey] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final boolean shouldPlaceElement(com.android.compose.animation.scene.SceneTransitionLayoutImpl r12, com.android.compose.animation.scene.ContentKey r13, com.android.compose.animation.scene.Element r14, com.android.compose.animation.scene.content.state.TransitionState r15) {
-        /*
-            Method dump skipped, instructions count: 306
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.compose.animation.scene.ElementKt.shouldPlaceElement(com.android.compose.animation.scene.SceneTransitionLayoutImpl, com.android.compose.animation.scene.ContentKey, com.android.compose.animation.scene.Element, com.android.compose.animation.scene.content.state.TransitionState):boolean");
+    public static final boolean shouldPlaceElement(SceneTransitionLayoutImpl sceneTransitionLayoutImpl, ContentKey contentKey, Element element, TransitionState transitionState) {
+        SharedElementTransformation sharedElementTransformation;
+        if (!element.key.placeAllCopies) {
+            boolean z = transitionState instanceof TransitionState.Idle;
+            SnapshotStateMap snapshotStateMap = element.stateByContent;
+            if (z) {
+                TransitionState.Idle idle = (TransitionState.Idle) transitionState;
+                Object obj = idle.currentScene;
+                Set<OverlayKey> set = idle.currentOverlays;
+                if (!set.isEmpty()) {
+                    for (OverlayKey overlayKey : set) {
+                        if (snapshotStateMap.containsKey(overlayKey) && (overlayKey == null || ((SnapshotMutableFloatStateImpl) sceneTransitionLayoutImpl.overlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(overlayKey).zIndex$delegate).getFloatValue() > ((SnapshotMutableFloatStateImpl) sceneTransitionLayoutImpl.overlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(overlayKey).zIndex$delegate).getFloatValue())) {
+                            overlayKey = overlayKey;
+                        }
+                    }
+                    if (overlayKey != null) {
+                        obj = overlayKey;
+                    }
+                }
+                return Intrinsics.areEqual(contentKey, obj);
+            }
+            if (!(transitionState instanceof TransitionState.Transition)) {
+                throw new NoWhenBranchMatchedException();
+            }
+            TransitionState.Transition transition = (TransitionState.Transition) transitionState;
+            boolean z2 = transition instanceof TransitionState.Transition.ReplaceOverlay;
+            boolean zAreEqual = Intrinsics.areEqual(contentKey, transition.fromContent);
+            ContentKey contentKey2 = transition.fromContent;
+            ContentKey contentKey3 = transition.toContent;
+            if (!zAreEqual && !Intrinsics.areEqual(contentKey, contentKey3)) {
+                if (z2) {
+                    SceneKey sceneKey = ((TransitionState.Transition.ReplaceOverlay) transition).currentSceneWhenTransitionStarted;
+                    if (sceneKey == null) {
+                        sceneKey = null;
+                    }
+                }
+                List list = sceneTransitionLayoutImpl.ancestors;
+                int size = list.size();
+                for (int i = 0; i < size; i++) {
+                    Ancestor ancestor = (Ancestor) list.get(i);
+                    if (!Intrinsics.areEqual(ancestor.inContent, contentKey2) && !Intrinsics.areEqual(ancestor.inContent, contentKey3)) {
+                    }
+                }
+                return false;
+            }
+            ?? ContainsKey = snapshotStateMap.containsKey(contentKey2);
+            int i2 = ContainsKey;
+            if (snapshotStateMap.containsKey(contentKey3)) {
+                i2 = ContainsKey + 1;
+            }
+            if (z2) {
+                ?? r15 = ((TransitionState.Transition.ReplaceOverlay) transition).currentSceneWhenTransitionStarted;
+                if (snapshotStateMap.containsKey(r15 != 0 ? r15 : null)) {
+                    i2++;
+                }
+            }
+            if (i2 > 1) {
+                ElementKey elementKey = element.key;
+                TransformationWithRange transformationWithRangeSharedElementTransformation = SharedElementKt.sharedElementTransformation(elementKey, transition);
+                if (!((transformationWithRangeSharedElementTransformation == null || (sharedElementTransformation = (SharedElementTransformation) transformationWithRangeSharedElementTransformation.transformation) == null || sharedElementTransformation.enabled) ? false : true)) {
+                    ContentKey contentKeyContentDuringTransition = elementKey.contentPicker.contentDuringTransition(transition, ((SnapshotMutableLongStateImpl) sceneTransitionLayoutImpl.content$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(contentKey2).globalZIndex$delegate).getLongValue(), ((SnapshotMutableLongStateImpl) sceneTransitionLayoutImpl.content$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(contentKey3).globalZIndex$delegate).getLongValue());
+                    if (!Intrinsics.areEqual(contentKeyContentDuringTransition, contentKey)) {
+                        List list2 = sceneTransitionLayoutImpl.ancestors;
+                        int size2 = list2.size();
+                        for (int i3 = 0; i3 < size2; i3++) {
+                            if (!Intrinsics.areEqual(((Ancestor) list2.get(i3)).inContent, contentKeyContentDuringTransition)) {
+                            }
+                        }
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     public static final long size(Placeable placeable) {

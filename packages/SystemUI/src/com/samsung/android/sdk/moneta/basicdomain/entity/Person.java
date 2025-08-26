@@ -8,7 +8,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Person implements Parcelable {
     public static final Parcelable.Creator<Person> CREATOR = new Creator();
@@ -19,7 +18,6 @@ public final class Person implements Parcelable {
     private final Bundle properties;
     private final RelationShip relationship;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -34,7 +32,6 @@ public final class Person implements Parcelable {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PropertiesKey {
         public static final /* synthetic */ PropertiesKey[] $VALUES;
         public static final PropertiesKey LIVING_TOGETHER;
@@ -201,11 +198,11 @@ public final class Person implements Parcelable {
     }
 
     public int hashCode() {
-        int hashCode = this.id.hashCode() * 31;
+        int iHashCode = this.id.hashCode() * 31;
         Long l = this.contactId;
-        int hashCode2 = (hashCode + (l == null ? 0 : l.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (l == null ? 0 : l.hashCode())) * 31;
         Long l2 = this.faceGroupID;
-        return this.properties.hashCode() + ((this.relationship.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((hashCode2 + (l2 != null ? l2.hashCode() : 0)) * 31, 31, this.name)) * 31);
+        return this.properties.hashCode() + ((this.relationship.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((iHashCode2 + (l2 != null ? l2.hashCode() : 0)) * 31, 31, this.name)) * 31);
     }
 
     public String toString() {

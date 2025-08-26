@@ -299,13 +299,13 @@ public final class AutofillManager {
         this.mOptions = autofillOptions;
         this.mIsFillRequested = new AtomicBoolean(false);
         this.mAutofillStateFingerprint = AutofillStateFingerprint.createInstance();
-        boolean isFillDialogEnabled = AutofillFeatureFlags.isFillDialogEnabled();
-        this.mIsFillDialogEnabled = isFillDialogEnabled;
+        boolean zIsFillDialogEnabled = AutofillFeatureFlags.isFillDialogEnabled();
+        this.mIsFillDialogEnabled = zIsFillDialogEnabled;
         String[] fillDialogEnabledHints = AutofillFeatureFlags.getFillDialogEnabledHints();
         this.mFillDialogEnabledHints = fillDialogEnabledHints;
         this.mIsFillAndSaveDialogDisabledForCredentialManager = AutofillFeatureFlags.isFillAndSaveDialogDisabledForCredentialManager();
         if (Helper.sDebug) {
-            Log.d("AutofillManager", "Fill dialog is enabled:" + isFillDialogEnabled + ", hints=" + Arrays.toString(fillDialogEnabledHints));
+            Log.d("AutofillManager", "Fill dialog is enabled:" + zIsFillDialogEnabled + ", hints=" + Arrays.toString(fillDialogEnabledHints));
         }
         if (autofillOptions != null) {
             Helper.sDebug = (autofillOptions.loggingLevel & 2) != 0;
@@ -414,14 +414,14 @@ public final class AutofillManager {
     }
 
     private Set<String> getDeniedOrAllowedActivitySetFromString(String str, String str2) {
-        int indexOf = str.indexOf(str2 + ":");
-        int indexOf2 = str.indexOf(NavigationBarInflaterView.GRAVITY_SEPARATOR, indexOf);
-        int length = indexOf + str2.length() + 1;
-        if (length >= indexOf2) {
+        int iIndexOf = str.indexOf(str2 + ":");
+        int iIndexOf2 = str.indexOf(NavigationBarInflaterView.GRAVITY_SEPARATOR, iIndexOf);
+        int length = iIndexOf + str2.length() + 1;
+        if (length >= iIndexOf2) {
             Log.e("AutofillManager", "Failed to get denied activity names from list because it's wrongly formatted");
             return new ArraySet();
         }
-        return new ArraySet(Arrays.asList(str.substring(length, indexOf2).split(",")));
+        return new ArraySet(Arrays.asList(str.substring(length, iIndexOf2).split(",")));
     }
 
     public boolean isActivityDeniedForAutofill() {
@@ -489,12 +489,12 @@ public final class AutofillManager {
                 this.mSessionId = bundle.getInt(SESSION_ID_TAG, Integer.MAX_VALUE);
                 this.mState = bundle.getInt(STATE_TAG, 0);
                 if (this.mSessionId != Integer.MAX_VALUE) {
-                    boolean tryAddServiceClientIfNeededLocked = tryAddServiceClientIfNeededLocked();
+                    boolean zTryAddServiceClientIfNeededLocked = tryAddServiceClientIfNeededLocked();
                     AutofillClient client = getClient();
                     if (client != null) {
                         SyncResultReceiver syncResultReceiver = new SyncResultReceiver(5000);
                         try {
-                            if (tryAddServiceClientIfNeededLocked) {
+                            if (zTryAddServiceClientIfNeededLocked) {
                                 this.mService.restoreSession(this.mSessionId, client.autofillClientGetActivityToken(), this.mServiceClient.asBinder(), syncResultReceiver);
                                 if (syncResultReceiver.getIntResult() == 1) {
                                     if (Helper.sDebug) {
@@ -523,7 +523,7 @@ public final class AutofillManager {
         Choreographer.getInstance().postCallback(4, new Runnable() { // from class: android.view.autofill.AutofillManager$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                AutofillManager.this.lambda$onVisibleForAutofill$0();
+                this.f$0.lambda$onVisibleForAutofill$0();
             }
         }, null);
     }
@@ -639,11 +639,11 @@ public final class AutofillManager {
 
     public boolean attemptRefill() {
         Log.i("AutofillManager", "Attempting refill");
-        List<View> autofillClientFindAutofillableViewsByTraversal = getClient().autofillClientFindAutofillableViewsByTraversal();
+        List<View> listAutofillClientFindAutofillableViewsByTraversal = getClient().autofillClientFindAutofillableViewsByTraversal();
         if (Helper.sDebug) {
-            Log.d("AutofillManager", "Autofillable views count:" + autofillClientFindAutofillableViewsByTraversal.size());
+            Log.d("AutofillManager", "Autofillable views count:" + listAutofillClientFindAutofillableViewsByTraversal.size());
         }
-        return this.mAutofillStateFingerprint.attemptRefill(autofillClientFindAutofillableViewsByTraversal, this);
+        return this.mAutofillStateFingerprint.attemptRefill(listAutofillClientFindAutofillableViewsByTraversal, this);
     }
 
     public void notifyViewEntered(View view) {
@@ -675,8 +675,8 @@ public final class AutofillManager {
             z = false;
         }
         for (int i = 0; i < sparseArray.size(); i++) {
-            VirtualViewFillInfo valueAt = sparseArray.valueAt(i);
-            notifyViewReadyInner(getAutofillId(view, sparseArray.keyAt(i)), valueAt == null ? null : valueAt.getAutofillHints(), z);
+            VirtualViewFillInfo virtualViewFillInfoValueAt = sparseArray.valueAt(i);
+            notifyViewReadyInner(getAutofillId(view, sparseArray.keyAt(i)), virtualViewFillInfoValueAt == null ? null : virtualViewFillInfoValueAt.getAutofillHints(), z);
         }
     }
 
@@ -819,12 +819,12 @@ public final class AutofillManager {
     }
 
     private void notifyViewEntered(View view, int i) {
-        AutofillCallback notifyViewEnteredLocked;
+        AutofillCallback autofillCallbackNotifyViewEnteredLocked;
         if (hasAutofillFeature()) {
             synchronized (this.mLock) {
-                notifyViewEnteredLocked = notifyViewEnteredLocked(view, view.getAutofillId(), null, view.getAutofillValue(), i);
+                autofillCallbackNotifyViewEnteredLocked = notifyViewEnteredLocked(view, view.getAutofillId(), null, view.getAutofillValue(), i);
             }
-            if (notifyViewEnteredLocked != null) {
+            if (autofillCallbackNotifyViewEnteredLocked != null) {
                 this.mCallback.onAutofillEvent(view, 3);
             }
         }
@@ -902,13 +902,13 @@ public final class AutofillManager {
     }
 
     private void notifyViewEntered(View view, int i, Rect rect, int i2) {
-        AutofillCallback notifyViewEnteredLocked;
+        AutofillCallback autofillCallbackNotifyViewEnteredLocked;
         if (hasAutofillFeature()) {
             synchronized (this.mLock) {
-                notifyViewEnteredLocked = notifyViewEnteredLocked(view, getAutofillId(view, i), rect, null, i2);
+                autofillCallbackNotifyViewEnteredLocked = notifyViewEnteredLocked(view, getAutofillId(view, i), rect, null, i2);
             }
-            if (notifyViewEnteredLocked != null) {
-                notifyViewEnteredLocked.onAutofillEvent(view, i, 3);
+            if (autofillCallbackNotifyViewEnteredLocked != null) {
+                autofillCallbackNotifyViewEnteredLocked.onAutofillEvent(view, i, 3);
             }
         }
     }
@@ -1376,11 +1376,11 @@ public final class AutofillManager {
         if (client == null) {
             return null;
         }
-        AutofillId autofillClientGetNextAutofillId = client.autofillClientGetNextAutofillId();
-        if (autofillClientGetNextAutofillId == null && Helper.sDebug) {
+        AutofillId autofillIdAutofillClientGetNextAutofillId = client.autofillClientGetNextAutofillId();
+        if (autofillIdAutofillClientGetNextAutofillId == null && Helper.sDebug) {
             Log.d("AutofillManager", "getNextAutofillId(): client " + client + " returned null");
         }
-        return autofillClientGetNextAutofillId;
+        return autofillIdAutofillClientGetNextAutofillId;
     }
 
     private static AutofillId getAutofillId(View view, int i) {
@@ -1450,16 +1450,16 @@ public final class AutofillManager {
                 return;
             }
             SyncResultReceiver syncResultReceiver = new SyncResultReceiver(5000);
-            ComponentName autofillClientGetComponentName = client.autofillClientGetComponentName();
-            if (!this.mEnabledForAugmentedAutofillOnly && (autofillOptions = this.mOptions) != null && autofillOptions.isAutofillDisabledLocked(autofillClientGetComponentName)) {
+            ComponentName componentNameAutofillClientGetComponentName = client.autofillClientGetComponentName();
+            if (!this.mEnabledForAugmentedAutofillOnly && (autofillOptions = this.mOptions) != null && autofillOptions.isAutofillDisabledLocked(componentNameAutofillClientGetComponentName)) {
                 if (this.mOptions.isAugmentedAutofillEnabled(this.mContext)) {
                     if (Helper.sDebug) {
-                        Log.d("AutofillManager", "startSession(" + autofillClientGetComponentName + "): disabled by service but allowlisted for augmented autofill");
+                        Log.d("AutofillManager", "startSession(" + componentNameAutofillClientGetComponentName + "): disabled by service but allowlisted for augmented autofill");
                         i2 |= 8;
                     }
                 } else {
                     if (Helper.sDebug) {
-                        Log.d("AutofillManager", "startSession(" + autofillClientGetComponentName + "): ignored because disabled by service and not allowlisted for augmented autofill");
+                        Log.d("AutofillManager", "startSession(" + componentNameAutofillClientGetComponentName + "): ignored because disabled by service and not allowlisted for augmented autofill");
                     }
                     setSessionFinished(4, null);
                     client.autofillClientResetableStateAvailable();
@@ -1468,22 +1468,22 @@ public final class AutofillManager {
             }
             int i4 = i2;
             IAutoFillManager iAutoFillManager = this.mService;
-            IBinder autofillClientGetActivityToken = client.autofillClientGetActivityToken();
-            IBinder asBinder = this.mServiceClient.asBinder();
+            IBinder iBinderAutofillClientGetActivityToken = client.autofillClientGetActivityToken();
+            IBinder iBinderAsBinder = this.mServiceClient.asBinder();
             int userId = this.mContext.getUserId();
             if (this.mCallback != null) {
                 str = "startSession(";
-                iBinder = asBinder;
+                iBinder = iBinderAsBinder;
                 i3 = userId;
                 z = true;
             } else {
                 str = "startSession(";
-                iBinder = asBinder;
+                iBinder = iBinderAsBinder;
                 i3 = userId;
                 z = false;
             }
             String str2 = str;
-            iAutoFillManager.startSession(autofillClientGetActivityToken, iBinder, autofillId, rect2, autofillValue2, i3, z, i4, autofillClientGetComponentName, isCompatibilityModeEnabledLocked(), syncResultReceiver);
+            iAutoFillManager.startSession(iBinderAutofillClientGetActivityToken, iBinder, autofillId, rect2, autofillValue2, i3, z, i4, componentNameAutofillClientGetComponentName, isCompatibilityModeEnabledLocked(), syncResultReceiver);
             int intResult = syncResultReceiver.getIntResult();
             this.mSessionId = intResult;
             if (intResult != Integer.MAX_VALUE) {
@@ -1492,7 +1492,7 @@ public final class AutofillManager {
             }
             if ((syncResultReceiver.getOptionalExtraIntResult(0) & 1) != 0) {
                 if (Helper.sDebug) {
-                    Log.d("AutofillManager", str2 + autofillClientGetComponentName + "): for augmented only");
+                    Log.d("AutofillManager", str2 + componentNameAutofillClientGetComponentName + "): for augmented only");
                 }
                 this.mForAugmentedAutofillOnly = true;
             }
@@ -1596,8 +1596,8 @@ public final class AutofillManager {
                     final IAutoFillManagerClient iAutoFillManagerClient = this.mServiceClient;
                     this.mServiceClientCleaner = Cleaner.create(this, new Runnable() { // from class: android.view.autofill.AutofillManager$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            IAutoFillManager.this.removeClient(iAutoFillManagerClient, userId);
+                        public final void run() throws RemoteException {
+                            iAutoFillManager.removeClient(iAutoFillManagerClient, userId);
                         }
                     });
                 } catch (SyncResultReceiver.TimeoutException e) {
@@ -1615,11 +1615,11 @@ public final class AutofillManager {
 
     private boolean startAutofillIfNeededLocked(View view) {
         if (this.mState == 0 && this.mSessionId == Integer.MAX_VALUE && (view instanceof EditText) && !TextUtils.isEmpty(((EditText) view).getText()) && !view.isFocused() && view.isImportantForAutofill() && view.isLaidOut() && view.isVisibleToUser()) {
-            boolean tryAddServiceClientIfNeededLocked = tryAddServiceClientIfNeededLocked();
+            boolean zTryAddServiceClientIfNeededLocked = tryAddServiceClientIfNeededLocked();
             if (Helper.sVerbose) {
                 Log.v("AutofillManager", "startAutofillIfNeededLocked(): enabled=" + this.mEnabled + " mServiceClient=" + this.mServiceClient);
             }
-            if (tryAddServiceClientIfNeededLocked && this.mEnabled && !isClientDisablingEnterExitEvent()) {
+            if (zTryAddServiceClientIfNeededLocked && this.mEnabled && !isClientDisablingEnterExitEvent()) {
                 AutofillId autofillId = view.getAutofillId();
                 AutofillValue autofillValue = view.getAutofillValue();
                 startSessionLocked(autofillId, null, null, 0);
@@ -1703,12 +1703,12 @@ public final class AutofillManager {
     public void requestShowFillUi(int i, AutofillId autofillId, int i2, int i3, Rect rect, IAutofillWindowPresenter iAutofillWindowPresenter) {
         AutofillCallback autofillCallback;
         AutofillClient client;
-        View findView = findView(autofillId);
-        if (findView == null) {
+        View viewFindView = findView(autofillId);
+        if (viewFindView == null) {
             return;
         }
         synchronized (this.mLock) {
-            if (this.mSessionId == i && (client = getClient()) != null && client.autofillClientRequestShowFillUi(findView, i2, i3, rect, iAutofillWindowPresenter)) {
+            if (this.mSessionId == i && (client = getClient()) != null && client.autofillClientRequestShowFillUi(viewFindView, i2, i3, rect, iAutofillWindowPresenter)) {
                 autofillCallback = this.mCallback;
                 this.mIdShownFillUi = autofillId;
             } else {
@@ -1717,9 +1717,9 @@ public final class AutofillManager {
         }
         if (autofillCallback != null) {
             if (autofillId.isVirtualInt()) {
-                autofillCallback.onAutofillEvent(findView, autofillId.getVirtualChildIntId(), 1);
+                autofillCallback.onAutofillEvent(viewFindView, autofillId.getVirtualChildIntId(), 1);
             } else {
-                autofillCallback.onAutofillEvent(findView, 1);
+                autofillCallback.onAutofillEvent(viewFindView, 1);
             }
         }
     }
@@ -1746,13 +1746,13 @@ public final class AutofillManager {
     /* JADX INFO: Access modifiers changed from: private */
     public void dispatchUnhandledKey(int i, AutofillId autofillId, KeyEvent keyEvent) {
         AutofillClient client;
-        View findView = findView(autofillId);
-        if (findView == null) {
+        View viewFindView = findView(autofillId);
+        if (viewFindView == null) {
             return;
         }
         synchronized (this.mLock) {
             if (this.mSessionId == i && (client = getClient()) != null) {
-                client.autofillClientDispatchUnhandledKey(findView, keyEvent);
+                client.autofillClientDispatchUnhandledKey(viewFindView, keyEvent);
             }
         }
     }
@@ -1833,9 +1833,9 @@ public final class AutofillManager {
                 return;
             }
             ArrayList<AutofillId> arrayList = new ArrayList<>();
-            View[] autofillClientFindViewsByAutofillIdTraversal = client.autofillClientFindViewsByAutofillIdTraversal(Helper.toArray(new ArrayList(Collections.singleton(autofillId))));
-            if (autofillClientFindViewsByAutofillIdTraversal != null && autofillClientFindViewsByAutofillIdTraversal.length != 0) {
-                View view = autofillClientFindViewsByAutofillIdTraversal[0];
+            View[] viewArrAutofillClientFindViewsByAutofillIdTraversal = client.autofillClientFindViewsByAutofillIdTraversal(Helper.toArray(new ArrayList(Collections.singleton(autofillId))));
+            if (viewArrAutofillClientFindViewsByAutofillIdTraversal != null && viewArrAutofillClientFindViewsByAutofillIdTraversal.length != 0) {
+                View view = viewArrAutofillClientFindViewsByAutofillIdTraversal[0];
                 if (view == null) {
                     Log.i("AutofillManager", "onGetCredentialException View is null");
                     Log.d("AutofillManager", "onGetCredentialException(): no View with id " + autofillId);
@@ -1867,9 +1867,9 @@ public final class AutofillManager {
                 return;
             }
             ArrayList<AutofillId> arrayList = new ArrayList<>();
-            View[] autofillClientFindViewsByAutofillIdTraversal = client.autofillClientFindViewsByAutofillIdTraversal(Helper.toArray(new ArrayList(Collections.singleton(autofillId))));
-            if (autofillClientFindViewsByAutofillIdTraversal != null && autofillClientFindViewsByAutofillIdTraversal.length != 0) {
-                View view = autofillClientFindViewsByAutofillIdTraversal[0];
+            View[] viewArrAutofillClientFindViewsByAutofillIdTraversal = client.autofillClientFindViewsByAutofillIdTraversal(Helper.toArray(new ArrayList(Collections.singleton(autofillId))));
+            if (viewArrAutofillClientFindViewsByAutofillIdTraversal != null && viewArrAutofillClientFindViewsByAutofillIdTraversal.length != 0) {
+                View view = viewArrAutofillClientFindViewsByAutofillIdTraversal[0];
                 if (view == null) {
                     Log.i("AutofillManager", "onGetCredentialResponse View is null");
                     Log.d("AutofillManager", "onGetCredentialResponse(): no View with id " + autofillId);
@@ -1964,7 +1964,7 @@ public final class AutofillManager {
             }
             ArrayMap arrayMap = null;
             int i = 0;
-            int i2 = 0;
+            int size2 = 0;
             while (i < size) {
                 AutofillId autofillId = list3.get(i);
                 AutofillValue autofillValue = list2.get(i);
@@ -1988,7 +1988,7 @@ public final class AutofillManager {
                     } else {
                         view.autofill(autofillValue);
                         setAutofilledIfValuesIs(view, autofillValue, z);
-                        i2++;
+                        size2++;
                     }
                 }
                 i++;
@@ -1996,14 +1996,14 @@ public final class AutofillManager {
             }
             handleFailedIdsLocked(arrayList, arrayList2, z, z2);
             if (arrayMap != null) {
-                for (int i3 = 0; i3 < arrayMap.size(); i3++) {
-                    View view2 = (View) arrayMap.keyAt(i3);
-                    SparseArray<AutofillValue> sparseArray2 = (SparseArray) arrayMap.valueAt(i3);
+                for (int i2 = 0; i2 < arrayMap.size(); i2++) {
+                    View view2 = (View) arrayMap.keyAt(i2);
+                    SparseArray<AutofillValue> sparseArray2 = (SparseArray) arrayMap.valueAt(i2);
                     view2.autofill(sparseArray2);
-                    i2 += sparseArray2.size();
+                    size2 += sparseArray2.size();
                 }
             }
-            this.mMetricsLogger.write(newLog(MetricsProto.MetricsEvent.AUTOFILL_DATASET_APPLIED).addTaggedData(MetricsProto.MetricsEvent.FIELD_AUTOFILL_NUM_VALUES, Integer.valueOf(size)).addTaggedData(MetricsProto.MetricsEvent.FIELD_AUTOFILL_NUM_VIEWS_FILLED, Integer.valueOf(i2)));
+            this.mMetricsLogger.write(newLog(MetricsProto.MetricsEvent.AUTOFILL_DATASET_APPLIED).addTaggedData(MetricsProto.MetricsEvent.FIELD_AUTOFILL_NUM_VALUES, Integer.valueOf(size)).addTaggedData(MetricsProto.MetricsEvent.FIELD_AUTOFILL_NUM_VIEWS_FILLED, Integer.valueOf(size2)));
         }
     }
 
@@ -2017,14 +2017,14 @@ public final class AutofillManager {
             if (client == null) {
                 return;
             }
-            View autofillClientFindViewByAutofillIdTraversal = client.autofillClientFindViewByAutofillIdTraversal(autofillId);
-            if (autofillClientFindViewByAutofillIdTraversal == null) {
+            View viewAutofillClientFindViewByAutofillIdTraversal = client.autofillClientFindViewByAutofillIdTraversal(autofillId);
+            if (viewAutofillClientFindViewByAutofillIdTraversal == null) {
                 Log.d("AutofillManager", "autofillContent(): no view with id " + autofillId);
                 reportAutofillContentFailure(autofillId);
                 return;
             }
-            if (autofillClientFindViewByAutofillIdTraversal.performReceiveContent(new ContentInfo.Builder(clipData, 4).build()) != null) {
-                Log.w("AutofillManager", "autofillContent(): receiver could not insert content: id=" + autofillId + ", view=" + autofillClientFindViewByAutofillIdTraversal + ", clip=" + clipData);
+            if (viewAutofillClientFindViewByAutofillIdTraversal.performReceiveContent(new ContentInfo.Builder(clipData, 4).build()) != null) {
+                Log.w("AutofillManager", "autofillContent(): receiver could not insert content: id=" + autofillId + ", view=" + viewAutofillClientFindViewByAutofillIdTraversal + ", clip=" + clipData);
                 reportAutofillContentFailure(autofillId);
                 return;
             }
@@ -2041,17 +2041,17 @@ public final class AutofillManager {
     }
 
     private LogMaker newLog(int i) {
-        LogMaker addTaggedData = new LogMaker(i).addTaggedData(MetricsProto.MetricsEvent.FIELD_AUTOFILL_SESSION_ID, Integer.valueOf(this.mSessionId));
+        LogMaker logMakerAddTaggedData = new LogMaker(i).addTaggedData(MetricsProto.MetricsEvent.FIELD_AUTOFILL_SESSION_ID, Integer.valueOf(this.mSessionId));
         if (isCompatibilityModeEnabledLocked()) {
-            addTaggedData.addTaggedData(MetricsProto.MetricsEvent.FIELD_AUTOFILL_COMPAT_MODE, 1);
+            logMakerAddTaggedData.addTaggedData(MetricsProto.MetricsEvent.FIELD_AUTOFILL_COMPAT_MODE, 1);
         }
         AutofillClient client = getClient();
         if (client == null) {
-            addTaggedData.setPackageName(this.mContext.getPackageName());
-            return addTaggedData;
+            logMakerAddTaggedData.setPackageName(this.mContext.getPackageName());
+            return logMakerAddTaggedData;
         }
-        addTaggedData.setComponentName(new ComponentName(client.autofillClientGetComponentName().getPackageName(), ""));
-        return addTaggedData;
+        logMakerAddTaggedData.setComponentName(new ComponentName(client.autofillClientGetComponentName().getPackageName(), ""));
+        return logMakerAddTaggedData;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -2114,12 +2114,12 @@ public final class AutofillManager {
     }
 
     private void setNotifyOnClickLocked(AutofillId autofillId, boolean z) {
-        View findView = findView(autofillId);
-        if (findView == null) {
+        View viewFindView = findView(autofillId);
+        if (viewFindView == null) {
             Log.w("AutofillManager", "setNotifyOnClick(): invalid id: " + autofillId);
             return;
         }
-        findView.setNotifyAutofillManagerOnClick(z);
+        viewFindView.setNotifyAutofillManagerOnClick(z);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -2156,12 +2156,13 @@ public final class AutofillManager {
             if (list != null) {
                 this.mEnteredIds = new ArraySet<>(list);
             }
-            if (i != 5 && i != 6) {
+            if (i == 5 || i == 6) {
+                resetSessionLocked(true);
+                this.mState = 0;
+            } else {
                 resetSessionLocked(false);
                 this.mState = i;
             }
-            resetSessionLocked(true);
-            this.mState = 0;
         }
     }
 
@@ -2190,15 +2191,15 @@ public final class AutofillManager {
         if (client == null) {
             return;
         }
-        final View autofillClientFindViewByAutofillIdTraversal = client.autofillClientFindViewByAutofillIdTraversal(autofillId);
-        if (autofillClientFindViewByAutofillIdTraversal == null) {
+        final View viewAutofillClientFindViewByAutofillIdTraversal = client.autofillClientFindViewByAutofillIdTraversal(autofillId);
+        if (viewAutofillClientFindViewByAutofillIdTraversal == null) {
             if (Helper.sVerbose) {
                 Log.v("AutofillManager", "View is not found");
                 return;
             }
             return;
         }
-        Handler handler = autofillClientFindViewByAutofillIdTraversal.getHandler();
+        Handler handler = viewAutofillClientFindViewByAutofillIdTraversal.getHandler();
         if (handler == null) {
             if (Helper.sVerbose) {
                 Log.v("AutofillManager", "Ignoring requestShowSoftInput due to no handler in view");
@@ -2211,12 +2212,12 @@ public final class AutofillManager {
                 handler.post(new Runnable() { // from class: android.view.autofill.AutofillManager$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.requestShowSoftInputInViewThread(View.this);
+                        AutofillManager.requestShowSoftInputInViewThread(viewAutofillClientFindViewByAutofillIdTraversal);
                     }
                 });
                 return;
             }
-            requestShowSoftInputInViewThread(autofillClientFindViewByAutofillIdTraversal);
+            requestShowSoftInputInViewThread(viewAutofillClientFindViewByAutofillIdTraversal);
         }
     }
 
@@ -2226,9 +2227,9 @@ public final class AutofillManager {
             Log.w("AutofillManager", "Ignoring requestShowSoftInput() due to non-focused view");
             return;
         }
-        boolean showSoftInput = ((InputMethodManager) view.getContext().getSystemService(InputMethodManager.class)).showSoftInput(view, 0);
+        boolean zShowSoftInput = ((InputMethodManager) view.getContext().getSystemService(InputMethodManager.class)).showSoftInput(view, 0);
         if (Helper.sVerbose) {
-            Log.v("AutofillManager", " InputMethodManager.showSoftInput returns " + showSoftInput);
+            Log.v("AutofillManager", " InputMethodManager.showSoftInput returns " + zShowSoftInput);
         }
     }
 
@@ -2239,12 +2240,12 @@ public final class AutofillManager {
     /* JADX INFO: Access modifiers changed from: private */
     public void requestHideFillUi(AutofillId autofillId, boolean z) {
         AutofillClient client;
-        View findView = autofillId == null ? null : findView(autofillId);
+        View viewFindView = autofillId == null ? null : findView(autofillId);
         if (Helper.sVerbose) {
-            Log.v("AutofillManager", "requestHideFillUi(" + autofillId + "): anchor = " + findView);
+            Log.v("AutofillManager", "requestHideFillUi(" + autofillId + "): anchor = " + viewFindView);
         }
-        if (findView != null) {
-            requestHideFillUi(autofillId, findView);
+        if (viewFindView != null) {
+            requestHideFillUi(autofillId, viewFindView);
         } else {
             if (!z || (client = getClient()) == null) {
                 return;
@@ -2278,17 +2279,17 @@ public final class AutofillManager {
             if (this.mOptions == null) {
                 return;
             }
-            long elapsedRealtime = SystemClock.elapsedRealtime() + j;
-            if (elapsedRealtime < 0) {
-                elapsedRealtime = Long.MAX_VALUE;
+            long jElapsedRealtime = SystemClock.elapsedRealtime() + j;
+            if (jElapsedRealtime < 0) {
+                jElapsedRealtime = Long.MAX_VALUE;
             }
             if (componentName != null) {
                 if (this.mOptions.disabledActivities == null) {
                     this.mOptions.disabledActivities = new ArrayMap<>();
                 }
-                this.mOptions.disabledActivities.put(componentName.flattenToString(), Long.valueOf(elapsedRealtime));
+                this.mOptions.disabledActivities.put(componentName.flattenToString(), Long.valueOf(jElapsedRealtime));
             } else {
-                this.mOptions.appDisabledExpiration = elapsedRealtime;
+                this.mOptions.appDisabledExpiration = jElapsedRealtime;
             }
         }
     }
@@ -2324,8 +2325,8 @@ public final class AutofillManager {
         if (Helper.sVerbose) {
             Log.v("AutofillManager", "notifyCallback(): sessionId=" + i + ", autofillId=" + autofillId + ", event=" + i2);
         }
-        View findView = findView(autofillId);
-        if (findView == null) {
+        View viewFindView = findView(autofillId);
+        if (viewFindView == null) {
             return;
         }
         synchronized (this.mLock) {
@@ -2333,9 +2334,9 @@ public final class AutofillManager {
         }
         if (autofillCallback != null) {
             if (autofillId.isVirtualInt()) {
-                autofillCallback.onAutofillEvent(findView, autofillId.getVirtualChildIntId(), i2);
+                autofillCallback.onAutofillEvent(viewFindView, autofillId.getVirtualChildIntId(), i2);
             } else {
-                autofillCallback.onAutofillEvent(findView, i2);
+                autofillCallback.onAutofillEvent(viewFindView, i2);
             }
         }
     }
@@ -2587,7 +2588,7 @@ public final class AutofillManager {
         post(new Runnable() { // from class: android.view.autofill.AutofillManager$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                AutofillManager.this.lambda$showAutofillDialog$3(weakReference);
+                this.f$0.lambda$showAutofillDialog$3(weakReference);
             }
         });
         return true;
@@ -2616,7 +2617,7 @@ public final class AutofillManager {
         post(new Runnable() { // from class: android.view.autofill.AutofillManager$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                AutofillManager.this.lambda$showAutofillDialog$4(weakReference, i);
+                this.f$0.lambda$showAutofillDialog$4(weakReference, i);
             }
         });
         return true;
@@ -2755,47 +2756,47 @@ public final class AutofillManager {
         }
 
         private boolean notifyViewEntered(int i, long j, Rect rect) {
-            View findViewByAccessibilityId;
-            AccessibilityNodeInfo findVirtualNodeByAccessibilityId;
+            View viewFindViewByAccessibilityId;
+            AccessibilityNodeInfo accessibilityNodeInfoFindVirtualNodeByAccessibilityId;
             int virtualDescendantId = AccessibilityNodeInfo.getVirtualDescendantId(j);
-            if (!isVirtualNode(virtualDescendantId) || (findViewByAccessibilityId = findViewByAccessibilityId(i, j)) == null || (findVirtualNodeByAccessibilityId = findVirtualNodeByAccessibilityId(findViewByAccessibilityId, virtualDescendantId)) == null || !findVirtualNodeByAccessibilityId.isEditable()) {
+            if (!isVirtualNode(virtualDescendantId) || (viewFindViewByAccessibilityId = findViewByAccessibilityId(i, j)) == null || (accessibilityNodeInfoFindVirtualNodeByAccessibilityId = findVirtualNodeByAccessibilityId(viewFindViewByAccessibilityId, virtualDescendantId)) == null || !accessibilityNodeInfoFindVirtualNodeByAccessibilityId.isEditable()) {
                 return false;
             }
             Rect rect2 = this.mTempBounds;
-            findVirtualNodeByAccessibilityId.getBoundsInScreen(rect2);
+            accessibilityNodeInfoFindVirtualNodeByAccessibilityId.getBoundsInScreen(rect2);
             if (rect2.equals(rect)) {
                 return false;
             }
             rect.set(rect2);
-            AutofillManager.this.notifyViewEntered(findViewByAccessibilityId, virtualDescendantId, rect2);
+            AutofillManager.this.notifyViewEntered(viewFindViewByAccessibilityId, virtualDescendantId, rect2);
             return true;
         }
 
         private void notifyViewExited(int i, long j) {
-            View findViewByAccessibilityId;
+            View viewFindViewByAccessibilityId;
             int virtualDescendantId = AccessibilityNodeInfo.getVirtualDescendantId(j);
-            if (isVirtualNode(virtualDescendantId) && (findViewByAccessibilityId = findViewByAccessibilityId(i, j)) != null) {
-                AutofillManager.this.notifyViewExited(findViewByAccessibilityId, virtualDescendantId);
+            if (isVirtualNode(virtualDescendantId) && (viewFindViewByAccessibilityId = findViewByAccessibilityId(i, j)) != null) {
+                AutofillManager.this.notifyViewExited(viewFindViewByAccessibilityId, virtualDescendantId);
             }
         }
 
         private void notifyValueChanged(int i, long j) {
-            View findViewByAccessibilityId;
-            AccessibilityNodeInfo findVirtualNodeByAccessibilityId;
+            View viewFindViewByAccessibilityId;
+            AccessibilityNodeInfo accessibilityNodeInfoFindVirtualNodeByAccessibilityId;
             int virtualDescendantId = AccessibilityNodeInfo.getVirtualDescendantId(j);
-            if (!isVirtualNode(virtualDescendantId) || (findViewByAccessibilityId = findViewByAccessibilityId(i, j)) == null || (findVirtualNodeByAccessibilityId = findVirtualNodeByAccessibilityId(findViewByAccessibilityId, virtualDescendantId)) == null) {
+            if (!isVirtualNode(virtualDescendantId) || (viewFindViewByAccessibilityId = findViewByAccessibilityId(i, j)) == null || (accessibilityNodeInfoFindVirtualNodeByAccessibilityId = findVirtualNodeByAccessibilityId(viewFindViewByAccessibilityId, virtualDescendantId)) == null) {
                 return;
             }
-            AutofillManager.this.notifyValueChanged(findViewByAccessibilityId, virtualDescendantId, AutofillValue.forText(findVirtualNodeByAccessibilityId.getText()));
+            AutofillManager.this.notifyValueChanged(viewFindViewByAccessibilityId, virtualDescendantId, AutofillValue.forText(accessibilityNodeInfoFindVirtualNodeByAccessibilityId.getText()));
         }
 
         private void notifyViewClicked(int i, long j) {
-            View findViewByAccessibilityId;
+            View viewFindViewByAccessibilityId;
             int virtualDescendantId = AccessibilityNodeInfo.getVirtualDescendantId(j);
-            if (!isVirtualNode(virtualDescendantId) || (findViewByAccessibilityId = findViewByAccessibilityId(i, j)) == null || findVirtualNodeByAccessibilityId(findViewByAccessibilityId, virtualDescendantId) == null) {
+            if (!isVirtualNode(virtualDescendantId) || (viewFindViewByAccessibilityId = findViewByAccessibilityId(i, j)) == null || findVirtualNodeByAccessibilityId(viewFindViewByAccessibilityId, virtualDescendantId) == null) {
                 return;
             }
-            AutofillManager.this.notifyViewClicked(findViewByAccessibilityId, virtualDescendantId);
+            AutofillManager.this.notifyViewClicked(viewFindViewByAccessibilityId, virtualDescendantId);
         }
 
         private void updateTrackedViewsLocked() {
@@ -2878,7 +2879,7 @@ public final class AutofillManager {
         }
 
         private void initialTrackedViews(AutofillId[] autofillIdArr, ArraySet<AutofillId> arraySet, ArraySet<AutofillId> arraySet2) {
-            boolean[] zArr;
+            boolean[] zArrAutofillClientGetViewVisibility;
             AutofillClient client = AutofillManager.this.getClient();
             if (ArrayUtils.isEmpty(autofillIdArr) || client == null) {
                 return;
@@ -2887,15 +2888,15 @@ public final class AutofillManager {
                 if (Helper.sVerbose) {
                     Log.v("AutofillManager", "client is visible, check tracked ids");
                 }
-                zArr = client.autofillClientGetViewVisibility(autofillIdArr);
+                zArrAutofillClientGetViewVisibility = client.autofillClientGetViewVisibility(autofillIdArr);
             } else {
-                zArr = new boolean[autofillIdArr.length];
+                zArrAutofillClientGetViewVisibility = new boolean[autofillIdArr.length];
             }
             int length = autofillIdArr.length;
             for (int i = 0; i < length; i++) {
                 AutofillId autofillId = autofillIdArr[i];
                 autofillId.resetSessionId();
-                if (zArr[i]) {
+                if (zArrAutofillClientGetViewVisibility[i]) {
                     addToSet(arraySet, autofillId);
                 } else {
                     addToSet(arraySet2, autofillId);
@@ -3009,7 +3010,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda18
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.setState(i);
+                        autofillManager.setState(i);
                     }
                 });
             }
@@ -3022,7 +3023,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda10
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.autofill(i, list, list2, z);
+                        autofillManager.autofill(i, list, list2, z);
                     }
                 });
             }
@@ -3035,7 +3036,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda6
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.onGetCredentialResponse(i, autofillId, getCredentialResponse);
+                        autofillManager.onGetCredentialResponse(i, autofillId, getCredentialResponse);
                     }
                 });
             }
@@ -3048,7 +3049,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.onGetCredentialException(i, autofillId, str, str2);
+                        autofillManager.onGetCredentialException(i, autofillId, str, str2);
                     }
                 });
             }
@@ -3061,7 +3062,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda16
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.autofillContent(i, autofillId, clipData);
+                        autofillManager.autofillContent(i, autofillId, clipData);
                     }
                 });
             }
@@ -3074,7 +3075,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.authenticate(i, i2, intentSender, intent, z);
+                        autofillManager.authenticate(i, i2, intentSender, intent, z);
                     }
                 });
             }
@@ -3087,7 +3088,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda13
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.requestShowFillUi(i, autofillId, i2, i3, rect, iAutofillWindowPresenter);
+                        autofillManager.requestShowFillUi(i, autofillId, i2, i3, rect, iAutofillWindowPresenter);
                     }
                 });
             }
@@ -3100,7 +3101,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda5
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.requestHideFillUi(autofillId, false);
+                        autofillManager.requestHideFillUi(autofillId, false);
                     }
                 });
             }
@@ -3113,7 +3114,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda11
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.requestHideFillUi(autofillId, true);
+                        autofillManager.requestHideFillUi(autofillId, true);
                     }
                 });
             }
@@ -3126,7 +3127,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.notifyNoFillUi(i, autofillId, i2);
+                        autofillManager.notifyNoFillUi(i, autofillId, i2);
                     }
                 });
             }
@@ -3139,7 +3140,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.notifyCallback(i, autofillId, 1);
+                        autofillManager.notifyCallback(i, autofillId, 1);
                     }
                 });
             }
@@ -3152,7 +3153,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda19
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.notifyCallback(i, autofillId, 2);
+                        autofillManager.notifyCallback(i, autofillId, 2);
                     }
                 });
             }
@@ -3165,7 +3166,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda8
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.notifyDisableAutofill(j, componentName);
+                        autofillManager.notifyDisableAutofill(j, componentName);
                     }
                 });
             }
@@ -3178,7 +3179,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.dispatchUnhandledKey(i, autofillId, keyEvent);
+                        autofillManager.dispatchUnhandledKey(i, autofillId, keyEvent);
                     }
                 });
             }
@@ -3191,7 +3192,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda20
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.AutofillManagerClient.lambda$startIntentSender$14(AutofillManager.this, intentSender, intent);
+                        AutofillManager.AutofillManagerClient.lambda$startIntentSender$14(autofillManager, intentSender, intent);
                     }
                 });
             }
@@ -3201,15 +3202,15 @@ public final class AutofillManager {
             IntentSender intentSender2;
             try {
                 intentSender2 = intentSender;
-            } catch (IntentSender.SendIntentException e) {
-                e = e;
-                intentSender2 = intentSender;
-            }
-            try {
-                autofillManager.mContext.startIntentSender(intentSender2, intent, 0, 0, 0, ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1).toBundle());
+                try {
+                    autofillManager.mContext.startIntentSender(intentSender2, intent, 0, 0, 0, ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1).toBundle());
+                } catch (IntentSender.SendIntentException e) {
+                    e = e;
+                    Log.e("AutofillManager", "startIntentSender() failed for intent:" + intentSender2, e);
+                }
             } catch (IntentSender.SendIntentException e2) {
                 e = e2;
-                Log.e("AutofillManager", "startIntentSender() failed for intent:" + intentSender2, e);
+                intentSender2 = intentSender;
             }
         }
 
@@ -3220,7 +3221,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda7
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.setTrackedViews(i, autofillIdArr, z, z2, autofillIdArr2, autofillId, z3);
+                        autofillManager.setTrackedViews(i, autofillIdArr, z, z2, autofillIdArr2, autofillId, z3);
                     }
                 });
             }
@@ -3233,7 +3234,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda17
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.setSaveUiState(i, z);
+                        autofillManager.setSaveUiState(i, z);
                     }
                 });
             }
@@ -3246,7 +3247,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda14
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.setSessionFinished(i, list);
+                        autofillManager.setSessionFinished(i, list);
                     }
                 });
             }
@@ -3259,7 +3260,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda9
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.getAugmentedAutofillClient(iResultReceiver);
+                        autofillManager.getAugmentedAutofillClient(iResultReceiver);
                     }
                 });
             }
@@ -3272,7 +3273,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda15
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.requestShowSoftInput(autofillId);
+                        autofillManager.requestShowSoftInput(autofillId);
                     }
                 });
             }
@@ -3285,7 +3286,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AutofillManagerClient$$ExternalSyntheticLambda12
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.setFillDialogTriggerIds(list);
+                        autofillManager.setFillDialogTriggerIds(list);
                     }
                 });
             }
@@ -3301,7 +3302,7 @@ public final class AutofillManager {
         }
 
         @Override // android.view.autofill.IAugmentedAutofillManagerClient
-        public AssistStructure.ViewNodeParcelable getViewNodeParcelable(AutofillId autofillId) {
+        public AssistStructure.ViewNodeParcelable getViewNodeParcelable(AutofillId autofillId) throws InterruptedException {
             AutofillManager autofillManager = this.mAfm.get();
             if (autofillManager == null) {
                 return null;
@@ -3319,7 +3320,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AugmentedAutofillManagerClient$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.AugmentedAutofillManagerClient.lambda$getViewNodeParcelable$0(View.this, viewNodeBuilder, countDownLatch);
+                        AutofillManager.AugmentedAutofillManagerClient.lambda$getViewNodeParcelable$0(view, viewNodeBuilder, countDownLatch);
                     }
                 });
                 try {
@@ -3365,7 +3366,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AugmentedAutofillManagerClient$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.autofill(i, list, list2, z);
+                        autofillManager.autofill(i, list, list2, z);
                     }
                 });
             }
@@ -3378,7 +3379,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AugmentedAutofillManagerClient$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.requestShowFillUi(i, autofillId, i2, i3, rect, iAutofillWindowPresenter);
+                        autofillManager.requestShowFillUi(i, autofillId, i2, i3, rect, iAutofillWindowPresenter);
                     }
                 });
             }
@@ -3391,7 +3392,7 @@ public final class AutofillManager {
                 autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AugmentedAutofillManagerClient$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        AutofillManager.this.requestHideFillUi(autofillId, false);
+                        autofillManager.requestHideFillUi(autofillId, false);
                     }
                 });
             }
@@ -3419,7 +3420,7 @@ public final class AutofillManager {
             autofillManager.post(new Runnable() { // from class: android.view.autofill.AutofillManager$AugmentedAutofillManagerClient$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AutofillManager.this.requestAutofillFromNewSession(view);
+                    autofillManager.requestAutofillFromNewSession(view);
                 }
             });
             return true;
@@ -3431,11 +3432,11 @@ public final class AutofillManager {
                 Log.w("AutofillManager", "getView(" + autofillId + "): no autofill client");
                 return null;
             }
-            View autofillClientFindViewByAutofillIdTraversal = client.autofillClientFindViewByAutofillIdTraversal(autofillId);
-            if (autofillClientFindViewByAutofillIdTraversal == null) {
+            View viewAutofillClientFindViewByAutofillIdTraversal = client.autofillClientFindViewByAutofillIdTraversal(autofillId);
+            if (viewAutofillClientFindViewByAutofillIdTraversal == null) {
                 Log.w("AutofillManager", "getView(" + autofillId + "): could not find view");
             }
-            return autofillClientFindViewByAutofillIdTraversal;
+            return viewAutofillClientFindViewByAutofillIdTraversal;
         }
     }
 }

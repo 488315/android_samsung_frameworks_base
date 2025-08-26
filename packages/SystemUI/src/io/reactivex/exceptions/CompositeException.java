@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CompositeException extends RuntimeException {
     private static final long serialVersionUID = 3026362227162912146L;
@@ -17,7 +16,6 @@ public final class CompositeException extends RuntimeException {
     private final List<Throwable> exceptions;
     private final String message;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class CompositeExceptionCausalChain extends RuntimeException {
         private static final long serialVersionUID = 3875212506787802066L;
 
@@ -27,12 +25,10 @@ public final class CompositeException extends RuntimeException {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class PrintStreamOrWriter {
         public abstract void println(Object obj);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WrappedPrintStream extends PrintStreamOrWriter {
         public final PrintStream printStream;
 
@@ -46,7 +42,6 @@ public final class CompositeException extends RuntimeException {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WrappedPrintWriter extends PrintStreamOrWriter {
         public final PrintWriter printWriter;
 
@@ -86,12 +81,12 @@ public final class CompositeException extends RuntimeException {
                 CompositeExceptionCausalChain compositeExceptionCausalChain = new CompositeExceptionCausalChain();
                 HashSet hashSet = new HashSet();
                 CompositeExceptionCausalChain compositeExceptionCausalChain2 = compositeExceptionCausalChain;
-                for (Throwable th : this.exceptions) {
-                    if (!hashSet.contains(th)) {
-                        hashSet.add(th);
+                for (Throwable runtimeException : this.exceptions) {
+                    if (!hashSet.contains(runtimeException)) {
+                        hashSet.add(runtimeException);
                         ArrayList arrayList = new ArrayList();
-                        Throwable cause = th.getCause();
-                        if (cause != null && cause != th) {
+                        Throwable cause = runtimeException.getCause();
+                        if (cause != null && cause != runtimeException) {
                             while (true) {
                                 arrayList.add(cause);
                                 Throwable cause2 = cause.getCause();
@@ -106,15 +101,15 @@ public final class CompositeException extends RuntimeException {
                         while (i < size) {
                             Object obj = arrayList.get(i);
                             i++;
-                            Throwable th2 = (Throwable) obj;
-                            if (hashSet.contains(th2)) {
-                                th = new RuntimeException("Duplicate found in causal chain so cropping to prevent loop ...");
+                            Throwable th = (Throwable) obj;
+                            if (hashSet.contains(th)) {
+                                runtimeException = new RuntimeException("Duplicate found in causal chain so cropping to prevent loop ...");
                             } else {
-                                hashSet.add(th2);
+                                hashSet.add(th);
                             }
                         }
                         try {
-                            compositeExceptionCausalChain2.initCause(th);
+                            compositeExceptionCausalChain2.initCause(runtimeException);
                         } catch (Throwable unused) {
                         }
                         Throwable cause3 = compositeExceptionCausalChain2.getCause();
@@ -132,8 +127,8 @@ public final class CompositeException extends RuntimeException {
                 }
                 this.cause = compositeExceptionCausalChain;
             }
-        } catch (Throwable th3) {
-            throw th3;
+        } catch (Throwable th2) {
+            throw th2;
         }
         return this.cause;
     }
@@ -176,9 +171,9 @@ public final class CompositeException extends RuntimeException {
         }
         if (!linkedHashSet.isEmpty()) {
             arrayList.addAll(linkedHashSet);
-            List<Throwable> unmodifiableList = Collections.unmodifiableList(arrayList);
-            this.exceptions = unmodifiableList;
-            this.message = unmodifiableList.size() + " exceptions occurred. ";
+            List<Throwable> listUnmodifiableList = Collections.unmodifiableList(arrayList);
+            this.exceptions = listUnmodifiableList;
+            this.message = listUnmodifiableList.size() + " exceptions occurred. ";
             return;
         }
         throw new IllegalArgumentException("errors is empty");

@@ -42,9 +42,9 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
         if (str != null && !StandardCharsets.UTF_8.name().equalsIgnoreCase(str)) {
             throw new UnsupportedOperationException();
         }
-        FastDataOutput obtainFastDataOutput = obtainFastDataOutput(outputStream);
-        this.mOut = obtainFastDataOutput;
-        obtainFastDataOutput.write(PROTOCOL_MAGIC_VERSION_0);
+        FastDataOutput fastDataOutputObtainFastDataOutput = obtainFastDataOutput(outputStream);
+        this.mOut = fastDataOutputObtainFastDataOutput;
+        fastDataOutputObtainFastDataOutput.write(PROTOCOL_MAGIC_VERSION_0);
         this.mTagCount = 0;
         this.mTagNames = new String[8];
     }

@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+import java.io.IOException;
 import java.util.Set;
 
 /* loaded from: classes.dex */
@@ -63,7 +64,7 @@ public final class PrepareGetCredentialResponseInternal implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeBoolean(this.mHasQueryApiPermission);
         parcel.writeArraySet(this.mCredentialResultTypes);
         parcel.writeBoolean(this.mHasAuthenticationResults);

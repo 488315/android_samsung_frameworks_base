@@ -20,7 +20,7 @@ public class powerSolution extends IpowerSolution.Stub {
     }
 
     @Override // android.os.Binder
-    protected void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    protected void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) throws Throwable {
         printWriter.println("\n[powerSolution Dump]");
         try {
             this.mSOCjump.dump(printWriter, strArr);

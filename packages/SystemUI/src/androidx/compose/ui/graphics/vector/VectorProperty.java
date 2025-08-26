@@ -4,11 +4,9 @@ import androidx.compose.ui.graphics.Brush;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class VectorProperty<T> {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Fill extends VectorProperty<Brush> {
         public static final Fill INSTANCE = new Fill();
 
@@ -17,7 +15,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FillAlpha extends VectorProperty<Float> {
         public static final FillAlpha INSTANCE = new FillAlpha();
 
@@ -26,7 +23,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PathData extends VectorProperty<List<? extends PathNode>> {
         public static final PathData INSTANCE = new PathData();
 
@@ -35,7 +31,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PivotX extends VectorProperty<Float> {
         public static final PivotX INSTANCE = new PivotX();
 
@@ -44,7 +39,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PivotY extends VectorProperty<Float> {
         public static final PivotY INSTANCE = new PivotY();
 
@@ -53,7 +47,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Rotation extends VectorProperty<Float> {
         public static final Rotation INSTANCE = new Rotation();
 
@@ -62,7 +55,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScaleX extends VectorProperty<Float> {
         public static final ScaleX INSTANCE = new ScaleX();
 
@@ -71,7 +63,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScaleY extends VectorProperty<Float> {
         public static final ScaleY INSTANCE = new ScaleY();
 
@@ -80,7 +71,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Stroke extends VectorProperty<Brush> {
         public static final Stroke INSTANCE = new Stroke();
 
@@ -89,7 +79,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StrokeAlpha extends VectorProperty<Float> {
         public static final StrokeAlpha INSTANCE = new StrokeAlpha();
 
@@ -98,7 +87,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StrokeLineWidth extends VectorProperty<Float> {
         public static final StrokeLineWidth INSTANCE = new StrokeLineWidth();
 
@@ -107,7 +95,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TranslateX extends VectorProperty<Float> {
         public static final TranslateX INSTANCE = new TranslateX();
 
@@ -116,7 +103,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TranslateY extends VectorProperty<Float> {
         public static final TranslateY INSTANCE = new TranslateY();
 
@@ -125,7 +111,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TrimPathEnd extends VectorProperty<Float> {
         public static final TrimPathEnd INSTANCE = new TrimPathEnd();
 
@@ -134,7 +119,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TrimPathOffset extends VectorProperty<Float> {
         public static final TrimPathOffset INSTANCE = new TrimPathOffset();
 
@@ -143,7 +127,6 @@ public abstract class VectorProperty<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TrimPathStart extends VectorProperty<Float> {
         public static final TrimPathStart INSTANCE = new TrimPathStart();
 

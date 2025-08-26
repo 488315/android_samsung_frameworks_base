@@ -1,12 +1,12 @@
 package com.android.systemui.assist.ui;
 
 import android.content.Context;
+import android.content.res.Resources;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DisplayUtils {
-    public static int getInvocationCornerRadius(Context context, boolean z) {
+    public static int getInvocationCornerRadius(Context context, boolean z) throws Resources.NotFoundException {
         int dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.assist_disclosure_rounded);
         if (dimensionPixelSize > 0) {
             return dimensionPixelSize;

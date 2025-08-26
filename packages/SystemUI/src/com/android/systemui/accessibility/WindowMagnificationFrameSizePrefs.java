@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Size;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class WindowMagnificationFrameSizePrefs {
     public final Context mContext;
@@ -32,9 +31,9 @@ public final class WindowMagnificationFrameSizePrefs {
     }
 
     public final void saveIndexAndSizeForCurrentDensity(int i, Size size) {
-        SharedPreferences.Editor edit = this.mWindowMagnificationSizePreferences.edit();
+        SharedPreferences.Editor editorEdit = this.mWindowMagnificationSizePreferences.edit();
         String key = getKey();
         WindowMagnificationFrameSpec.Companion.getClass();
-        edit.putString(key, i + "," + size).apply();
+        editorEdit.putString(key, i + "," + size).apply();
     }
 }

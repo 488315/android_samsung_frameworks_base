@@ -9,11 +9,9 @@ import com.android.systemui.statusbar.notification.collection.notifcollection.No
 import com.android.systemui.statusbar.notification.collection.notifcollection.UpdateSource;
 import com.android.systemui.statusbar.notification.stack.ui.view.NotificationStatsLogger;
 import com.android.systemui.statusbar.notification.stack.ui.view.NotificationStatsLoggerImpl;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationStatsLoggerCoordinator$collectionListener$1 implements NotifCollectionListener {
     final /* synthetic */ NotificationStatsLoggerCoordinator this$0;
@@ -39,16 +37,12 @@ public final class NotificationStatsLoggerCoordinator$collectionListener$1 imple
 
     @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
     public void onEntryRemoved(NotificationEntry notificationEntry, int i) {
-        Optional optional;
-        optional = this.this$0.loggerOptional;
-        optional.ifPresent(new NotificationStatsLoggerCoordinator$sam$java_util_function_Consumer$0(new NotificationStatsLoggerCoordinator$collectionListener$1$$ExternalSyntheticLambda0(notificationEntry, 1)));
+        this.this$0.loggerOptional.ifPresent(new NotificationStatsLoggerCoordinator$sam$java_util_function_Consumer$0(new NotificationStatsLoggerCoordinator$collectionListener$1$$ExternalSyntheticLambda0(notificationEntry, 1)));
     }
 
     @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
     public void onEntryUpdated(NotificationEntry notificationEntry) {
-        Optional optional;
-        optional = this.this$0.loggerOptional;
-        optional.ifPresent(new NotificationStatsLoggerCoordinator$sam$java_util_function_Consumer$0(new NotificationStatsLoggerCoordinator$collectionListener$1$$ExternalSyntheticLambda0(notificationEntry, 0)));
+        this.this$0.loggerOptional.ifPresent(new NotificationStatsLoggerCoordinator$sam$java_util_function_Consumer$0(new NotificationStatsLoggerCoordinator$collectionListener$1$$ExternalSyntheticLambda0(notificationEntry, 0)));
     }
 
     @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener

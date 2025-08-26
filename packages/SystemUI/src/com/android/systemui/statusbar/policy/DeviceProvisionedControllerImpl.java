@@ -25,8 +25,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DeviceProvisionedControllerImpl implements DeviceProvisionedController, DeviceProvisionedController.DeviceProvisionedListener, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -46,13 +46,60 @@ public class DeviceProvisionedControllerImpl implements DeviceProvisionedControl
     public final Uri userSetupUri;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl$onDeviceProvisionedChanged$1, reason: invalid class name and case insensitive filesystem */
+    final /* synthetic */ class C11081 extends FunctionReferenceImpl implements Function1 {
+        public static final C11081 INSTANCE = new C11081();
+
+        public C11081() {
+            super(1, DeviceProvisionedController.DeviceProvisionedListener.class, "onDeviceProvisionedChanged", "onDeviceProvisionedChanged()V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            ((DeviceProvisionedController.DeviceProvisionedListener) obj).onDeviceProvisionedChanged();
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl$onUserSetupChanged$1, reason: invalid class name and case insensitive filesystem */
+    final /* synthetic */ class C11091 extends FunctionReferenceImpl implements Function1 {
+        public static final C11091 INSTANCE = new C11091();
+
+        public C11091() {
+            super(1, DeviceProvisionedController.DeviceProvisionedListener.class, "onUserSetupChanged", "onUserSetupChanged()V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            ((DeviceProvisionedController.DeviceProvisionedListener) obj).onUserSetupChanged();
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl$onUserSwitched$1, reason: invalid class name and case insensitive filesystem */
+    final /* synthetic */ class C11101 extends FunctionReferenceImpl implements Function1 {
+        public static final C11101 INSTANCE = new C11101();
+
+        public C11101() {
+            super(1, DeviceProvisionedController.DeviceProvisionedListener.class, "onUserSwitched", "onUserSwitched()V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            ((DeviceProvisionedController.DeviceProvisionedListener) obj).onUserSwitched();
+            return Unit.INSTANCE;
         }
     }
 
@@ -78,16 +125,16 @@ public class DeviceProvisionedControllerImpl implements DeviceProvisionedControl
         this.initted = new AtomicBoolean(false);
         this.observer = new ContentObserver(handler) { // from class: com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl$observer$1
             public final void onChange(boolean z, Collection collection, int i, int i2) {
-                boolean contains = collection.contains(DeviceProvisionedControllerImpl.this.deviceProvisionedUri);
-                if (!collection.contains(DeviceProvisionedControllerImpl.this.userSetupUri)) {
+                boolean zContains = collection.contains(this.this$0.deviceProvisionedUri);
+                if (!collection.contains(this.this$0.userSetupUri)) {
                     i2 = -2;
                 }
-                DeviceProvisionedControllerImpl.this.updateValues(i2, contains);
-                if (contains) {
-                    DeviceProvisionedControllerImpl.this.onDeviceProvisionedChanged();
+                this.this$0.updateValues(i2, zContains);
+                if (zContains) {
+                    this.this$0.onDeviceProvisionedChanged();
                 }
                 if (i2 != -2) {
-                    DeviceProvisionedControllerImpl.this.onUserSetupChanged();
+                    this.this$0.onUserSetupChanged();
                 }
             }
         };
@@ -95,7 +142,7 @@ public class DeviceProvisionedControllerImpl implements DeviceProvisionedControl
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onUserChanged(int i, Context context) {
                 int i2 = DeviceProvisionedControllerImpl.$r8$clinit;
-                DeviceProvisionedControllerImpl deviceProvisionedControllerImpl = DeviceProvisionedControllerImpl.this;
+                DeviceProvisionedControllerImpl deviceProvisionedControllerImpl = this.this$0;
                 deviceProvisionedControllerImpl.updateValues(i, false);
                 deviceProvisionedControllerImpl.onUserSwitched();
             }
@@ -120,7 +167,7 @@ public class DeviceProvisionedControllerImpl implements DeviceProvisionedControl
         synchronized (this.lock) {
             arrayList = new ArrayList(this.listeners);
         }
-        this.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl$dispatchChange$1
+        this.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl.dispatchChange.1
             @Override // java.lang.Runnable
             public final void run() {
                 ArrayList arrayList2 = arrayList;
@@ -130,7 +177,7 @@ public class DeviceProvisionedControllerImpl implements DeviceProvisionedControl
                 while (i < size) {
                     Object obj = arrayList2.get(i);
                     i++;
-                    function12.mo779invoke(obj);
+                    function12.mo781invoke(obj);
                 }
             }
         });
@@ -151,12 +198,12 @@ public class DeviceProvisionedControllerImpl implements DeviceProvisionedControl
     }
 
     public final boolean isUserSetup(int i) {
-        int indexOfKey;
+        int iIndexOfKey;
         boolean z;
         synchronized (this.lock) {
-            indexOfKey = this.userSetupComplete.indexOfKey(i);
+            iIndexOfKey = this.userSetupComplete.indexOfKey(i);
         }
-        if (indexOfKey >= 0) {
+        if (iIndexOfKey >= 0) {
             synchronized (this.lock) {
                 z = this.userSetupComplete.get(i, false);
             }
@@ -172,17 +219,17 @@ public class DeviceProvisionedControllerImpl implements DeviceProvisionedControl
 
     @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
     public final void onDeviceProvisionedChanged() {
-        dispatchChange(DeviceProvisionedControllerImpl$onDeviceProvisionedChanged$1.INSTANCE);
+        dispatchChange(C11081.INSTANCE);
     }
 
     @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
     public final void onUserSetupChanged() {
-        dispatchChange(DeviceProvisionedControllerImpl$onUserSetupChanged$1.INSTANCE);
+        dispatchChange(C11091.INSTANCE);
     }
 
     @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
     public final void onUserSwitched() {
-        dispatchChange(DeviceProvisionedControllerImpl$onUserSwitched$1.INSTANCE);
+        dispatchChange(C11101.INSTANCE);
     }
 
     @Override // com.android.systemui.statusbar.policy.CallbackController
@@ -203,8 +250,8 @@ public class DeviceProvisionedControllerImpl implements DeviceProvisionedControl
                 if (i == -1) {
                     int size = this.userSetupComplete.size();
                     for (int i2 = 0; i2 < size; i2++) {
-                        int keyAt = this.userSetupComplete.keyAt(i2);
-                        this.userSetupComplete.put(keyAt, this.secureSettings.getIntForUser(SettingsHelper.INDEX_USER_SETUP_COMPLETE, 0, keyAt) != 0);
+                        int iKeyAt = this.userSetupComplete.keyAt(i2);
+                        this.userSetupComplete.put(iKeyAt, this.secureSettings.getIntForUser(SettingsHelper.INDEX_USER_SETUP_COMPLETE, 0, iKeyAt) != 0);
                     }
                 } else if (i != -2) {
                     if (this.secureSettings.getIntForUser(SettingsHelper.INDEX_USER_SETUP_COMPLETE, 0, i) == 0) {

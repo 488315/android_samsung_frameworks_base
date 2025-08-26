@@ -59,9 +59,9 @@ public interface IInlineContentCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInlineContentCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInlineContentCallback)) {
-                return (IInlineContentCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInlineContentCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInlineContentCallback)) {
+                return (IInlineContentCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -95,10 +95,10 @@ public interface IInlineContentCallback extends IInterface {
             }
             if (i == 1) {
                 SurfaceControlViewHost.SurfacePackage surfacePackage = (SurfaceControlViewHost.SurfacePackage) parcel.readTypedObject(SurfaceControlViewHost.SurfacePackage.CREATOR);
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onContent(surfacePackage, readInt, readInt2);
+                onContent(surfacePackage, i3, i4);
             } else if (i == 2) {
                 onClick();
             } else if (i == 3) {
@@ -127,37 +127,37 @@ public interface IInlineContentCallback extends IInterface {
 
             @Override // com.android.internal.view.inline.IInlineContentCallback
             public void onContent(SurfaceControlViewHost.SurfacePackage surfacePackage, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineContentCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(surfacePackage, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineContentCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(surfacePackage, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.inline.IInlineContentCallback
             public void onClick() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineContentCallback.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineContentCallback.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.view.inline.IInlineContentCallback
             public void onLongClick() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInlineContentCallback.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInlineContentCallback.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

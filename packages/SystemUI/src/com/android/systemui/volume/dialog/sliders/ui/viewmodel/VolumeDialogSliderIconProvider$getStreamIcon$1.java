@@ -1,13 +1,20 @@
 package com.android.systemui.volume.dialog.sliders.ui.viewmodel;
 
+import android.graphics.drawable.Drawable;
 import com.android.settingslib.volume.shared.model.RingerMode;
+import com.android.systemui.R;
+import com.android.systemui.common.shared.model.Icon;
 import com.android.systemui.statusbar.policy.domain.model.ActiveZenModes;
+import com.android.systemui.statusbar.policy.domain.model.ZenModeInfo;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
+import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogSliderIconProvider$getStreamIcon$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ boolean $isMuted;
@@ -42,18 +49,105 @@ final class VolumeDialogSliderIconProvider$getStreamIcon$1 extends SuspendLambda
         return volumeDialogSliderIconProvider$getStreamIcon$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00d3  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x00d8  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x00ab  */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x00d3  */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x00d8  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r13) {
-        /*
-            Method dump skipped, instructions count: 327
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.dialog.sliders.ui.viewmodel.VolumeDialogSliderIconProvider$getStreamIcon$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) throws Throwable {
+        Integer numValueOf;
+        int iIntValue;
+        int i;
+        ZenModeInfo zenModeInfo;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = this.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            ActiveZenModes activeZenModes = (ActiveZenModes) this.L$0;
+            RingerMode ringerMode = (RingerMode) this.L$1;
+            if (((activeZenModes == null || (zenModeInfo = activeZenModes.mainMode) == null) ? null : zenModeInfo.icon) != null) {
+                return new Icon.Loaded(activeZenModes.mainMode.icon.drawable, null, null, 4, null);
+            }
+            VolumeDialogSliderIconProvider volumeDialogSliderIconProvider = this.this$0;
+            int i3 = this.$stream;
+            int i4 = this.$level;
+            int i5 = this.$levelMin;
+            int i6 = this.$levelMax;
+            boolean z = this.$isMuted;
+            boolean z2 = this.$isRoutedToBluetooth;
+            volumeDialogSliderIconProvider.getClass();
+            boolean z3 = i4 == 0 || z;
+            if (z2) {
+                iIntValue = i3 == 0 ? R.drawable.ic_volume_bt_sco : z3 ? R.drawable.ic_volume_media_bt_mute : R.drawable.ic_volume_media_bt;
+            } else {
+                boolean z4 = i4 < (i6 + i5) / 2;
+                if (z3) {
+                    Integer numValueOf2 = ringerMode != null ? Integer.valueOf(ringerMode.value) : null;
+                    if (numValueOf2 != null && numValueOf2.intValue() == 1) {
+                        iIntValue = R.drawable.ic_volume_ringer_vibrate;
+                    } else if (numValueOf2 != null && numValueOf2.intValue() == 0) {
+                        iIntValue = R.drawable.ic_ring_volume_off;
+                    } else {
+                        if (i3 == 1) {
+                            numValueOf = Integer.valueOf(R.drawable.ic_volume_system_mute);
+                        } else if (i3 == 2) {
+                            numValueOf = Integer.valueOf(R.drawable.ic_volume_ringer_vibrate);
+                        } else if (i3 == 3) {
+                            numValueOf = Integer.valueOf(R.drawable.ic_volume_media_mute);
+                        } else if (i3 == 4) {
+                            numValueOf = Integer.valueOf(R.drawable.ic_volume_alarm_mute);
+                        } else if (i3 == 5) {
+                            numValueOf = Integer.valueOf(R.drawable.ic_volume_ringer_mute);
+                        }
+                        if (numValueOf == null) {
+                        }
+                    }
+                } else {
+                    numValueOf = null;
+                    if (numValueOf == null) {
+                        iIntValue = numValueOf.intValue();
+                    } else if (i3 == 0) {
+                        iIntValue = android.R.drawable.input_method_fullscreen_background;
+                    } else if (i3 == 1) {
+                        iIntValue = R.drawable.ic_volume_system;
+                    } else if (i3 == 2) {
+                        iIntValue = R.drawable.ic_ring_volume;
+                    } else if (i3 == 3) {
+                        iIntValue = z4 ? R.drawable.ic_volume_media_low : R.drawable.ic_volume_media;
+                    } else if (i3 == 4) {
+                        iIntValue = R.drawable.ic_alarm;
+                    } else if (i3 == 5) {
+                        iIntValue = R.drawable.ic_volume_ringer;
+                    } else {
+                        if (i3 != 10) {
+                            throw new IllegalStateException(("Unsupported stream: " + i3).toString());
+                        }
+                        iIntValue = R.drawable.ic_volume_accessibility;
+                    }
+                }
+            }
+            VolumeDialogSliderIconProvider volumeDialogSliderIconProvider2 = this.this$0;
+            CoroutineContext coroutineContext = volumeDialogSliderIconProvider2.uiBackgroundContext;
+            VolumeDialogSliderIconProvider$getStreamIcon$1$drawable$1 volumeDialogSliderIconProvider$getStreamIcon$1$drawable$1 = new VolumeDialogSliderIconProvider$getStreamIcon$1$drawable$1(volumeDialogSliderIconProvider2, iIntValue, null);
+            this.L$0 = null;
+            this.I$0 = iIntValue;
+            this.label = 1;
+            Object objWithContext = BuildersKt.withContext(coroutineContext, volumeDialogSliderIconProvider$getStreamIcon$1$drawable$1, this);
+            if (objWithContext == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+            int i7 = iIntValue;
+            obj = objWithContext;
+            i = i7;
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            i = this.I$0;
+            ResultKt.throwOnFailure(obj);
+        }
+        return new Icon.Loaded((Drawable) obj, null, new Integer(i));
     }
 }

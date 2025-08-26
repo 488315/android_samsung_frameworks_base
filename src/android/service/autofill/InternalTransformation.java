@@ -20,13 +20,13 @@ public abstract class InternalTransformation implements Transformation, Parcelab
         }
         for (int i = 0; i < size; i++) {
             Pair<Integer, InternalTransformation> pair = arrayList.get(i);
-            int intValue = pair.first.intValue();
+            int iIntValue = pair.first.intValue();
             InternalTransformation internalTransformation = pair.second;
             if (Helper.sDebug) {
                 Log.d(TAG, "#" + i + ": " + internalTransformation);
             }
             try {
-                internalTransformation.apply(valueFinder, remoteViews, intValue);
+                internalTransformation.apply(valueFinder, remoteViews, iIntValue);
             } catch (Exception e) {
                 Log.e(TAG, "Could not apply transformation " + internalTransformation + ": " + e.getClass());
                 return false;

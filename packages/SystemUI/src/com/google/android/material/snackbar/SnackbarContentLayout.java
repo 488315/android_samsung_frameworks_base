@@ -5,8 +5,13 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.text.Layout;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.ViewTreeObserver;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -14,13 +19,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.core.view.SeslTouchTargetDelegate;
 import androidx.core.view.ViewCompat;
+import androidx.reflect.SeslBaseReflector;
+import androidx.reflect.view.inputmethod.SeslInputMethodManagerReflector;
 import com.android.systemui.R;
 import com.google.android.material.R$styleable;
 import com.google.android.material.animation.AnimationUtils;
 import com.google.android.material.motion.MotionUtils;
+import java.lang.reflect.Method;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SnackbarContentLayout extends LinearLayout implements ContentViewCallback {
     public Button actionView;
@@ -55,29 +62,129 @@ public class SnackbarContentLayout extends LinearLayout implements ContentViewCa
         this.actionView = (Button) findViewById(R.id.snackbar_action);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:84:0x023b, code lost:
-    
-        if (updateViewsWithinLayout(1, r0, r0 - r1) != false) goto L91;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:88:0x0247, code lost:
-    
-        if (updateViewsWithinLayout(0, r0, r0) != false) goto L91;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x016e  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x01cf  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x01d6  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x019b  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x016b  */
+    /* JADX WARN: Removed duplicated region for block: B:91:0x023d  */
     @Override // android.widget.LinearLayout, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onMeasure(int r10, int r11) {
-        /*
-            Method dump skipped, instructions count: 592
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.snackbar.SnackbarContentLayout.onMeasure(int, int):void");
+    public final void onMeasure(int i, int i2) throws Resources.NotFoundException {
+        boolean z;
+        int dimensionPixelOffset;
+        int measuredWidth = getMeasuredWidth();
+        super.onMeasure(i, i2);
+        if (this.actionView.getVisibility() == 0 && this.mIsSuggestMultiLine) {
+            i = View.MeasureSpec.makeMeasureSpec(this.mWidthWtihAction, 1073741824);
+            super.onMeasure(i, i2);
+        } else if (getMeasuredWidth() == 0) {
+            i = View.MeasureSpec.makeMeasureSpec(measuredWidth, 1073741824);
+            super.onMeasure(i, i2);
+        } else if (this.maxWidth > 0) {
+            int measuredWidth2 = getMeasuredWidth();
+            int i3 = this.maxWidth;
+            if (measuredWidth2 > i3) {
+                i = View.MeasureSpec.makeMeasureSpec(i3, 1073741824);
+                super.onMeasure(i, i2);
+            }
+        }
+        int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.design_snackbar_padding_vertical_2lines);
+        int dimensionPixelSize2 = getResources().getDimensionPixelSize(R.dimen.design_snackbar_padding_vertical);
+        Layout layout = this.messageView.getLayout();
+        boolean z2 = false;
+        boolean z3 = layout != null && layout.getLineCount() > 1;
+        if (z3) {
+            this.mIsSuggestMultiLine = true;
+        }
+        SnackbarContentLayout snackbarContentLayout = this.mSnackBarContentLayout;
+        if (snackbarContentLayout != null) {
+            float measuredWidth3 = this.actionView.getMeasuredWidth() + this.messageView.getMeasuredWidth() + this.mSnackBarContentLayout.getPaddingRight() + snackbarContentLayout.getPaddingLeft();
+            if (this.maxInlineActionWidth == -1 && this.actionView.getVisibility() == 0) {
+                if (measuredWidth3 > this.mWidthWtihAction || z3 || this.mIsSuggestMultiLine) {
+                    this.mSnackBarContentLayout.setOrientation(1);
+                    this.messageView.setPadding(getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_text_padding_left), getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_text_padding_top), getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_text_padding_right), getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_text_padding_bottom));
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) this.actionView.getLayoutParams();
+                    layoutParams.setMargins(0, 0, 0, getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_action_margin_bottom));
+                    layoutParams.setMarginEnd(getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_action_margin_end));
+                    this.actionView.setLayoutParams(layoutParams);
+                } else {
+                    this.mSnackBarContentLayout.setOrientation(0);
+                    this.actionView.setPadding(getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_action_padding_left), 0, getResources().getDimensionPixelSize(R.dimen.sesl_design_snackbar_action_padding_right), 0);
+                }
+                z = true;
+            } else {
+                z = false;
+            }
+            int rotation = this.mWindowManager.getDefaultDisplay().getRotation();
+            boolean z4 = rotation == 1 || rotation == 3;
+            if (this.mImm == null || !z4) {
+                int i4 = (int) measuredWidth3;
+                ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) this.mSnackBarContentLayout.getLayoutParams();
+                ViewParent parent = this.mSnackBarContentLayout.getParent();
+                if (this.mIsCoordinatorLayoutParent && (parent instanceof ViewGroup)) {
+                    ViewGroup viewGroup = (ViewGroup) parent;
+                    int measuredWidth4 = ((viewGroup.getMeasuredWidth() - Math.min(this.mWidthWtihAction, i4)) - viewGroup.getPaddingLeft()) - viewGroup.getPaddingRight();
+                    if (measuredWidth4 > 0) {
+                        int i5 = measuredWidth4 / 2;
+                        marginLayoutParams.rightMargin = i5;
+                        marginLayoutParams.leftMargin = i5;
+                    } else {
+                        marginLayoutParams.rightMargin = 0;
+                        marginLayoutParams.leftMargin = 0;
+                    }
+                    this.mSnackBarContentLayout.setLayoutParams(marginLayoutParams);
+                    z2 = true;
+                }
+                z2 = z | z2;
+            } else {
+                int i6 = (int) measuredWidth3;
+                ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) this.mSnackBarContentLayout.getLayoutParams();
+                InputMethodManager inputMethodManager = this.mImm;
+                Method method = SeslBaseReflector.getMethod(SeslInputMethodManagerReflector.mClass, "semIsInputMethodShown", new Class[0]);
+                if (method != null) {
+                    Object objInvoke = SeslBaseReflector.invoke(inputMethodManager, method, new Object[0]);
+                    boolean zBooleanValue = objInvoke instanceof Boolean ? ((Boolean) objInvoke).booleanValue() : false;
+                    if (zBooleanValue) {
+                        try {
+                            dimensionPixelOffset = this.mWindowManager.getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.navigationBars()).bottom;
+                            if (dimensionPixelOffset == 0) {
+                                dimensionPixelOffset = getResources().getDimensionPixelOffset(R.dimen.sesl_design_snackbar_layout_sip_padding_bottom);
+                            }
+                        } catch (Exception unused) {
+                            dimensionPixelOffset = getResources().getDimensionPixelOffset(R.dimen.sesl_design_snackbar_layout_sip_padding_bottom);
+                        }
+                        marginLayoutParams2.bottomMargin = dimensionPixelOffset;
+                    } else {
+                        marginLayoutParams2.bottomMargin = getResources().getDimensionPixelOffset(R.dimen.sesl_design_snackbar_layout_padding_bottom);
+                    }
+                    ViewParent parent2 = this.mSnackBarContentLayout.getParent();
+                    if (this.mIsCoordinatorLayoutParent && (parent2 instanceof ViewGroup)) {
+                        ViewGroup viewGroup2 = (ViewGroup) parent2;
+                        int measuredWidth5 = ((viewGroup2.getMeasuredWidth() - Math.min(this.mWidthWtihAction, i6)) - viewGroup2.getPaddingLeft()) - viewGroup2.getPaddingRight();
+                        if (measuredWidth5 > 0) {
+                            int i7 = measuredWidth5 / 2;
+                            marginLayoutParams2.rightMargin = i7;
+                            marginLayoutParams2.leftMargin = i7;
+                        } else {
+                            marginLayoutParams2.rightMargin = 0;
+                            marginLayoutParams2.leftMargin = 0;
+                        }
+                    }
+                    this.mSnackBarContentLayout.setLayoutParams(marginLayoutParams2);
+                    z2 = true;
+                }
+            }
+        } else if (!z3 || this.maxInlineActionWidth <= 0 || this.actionView.getMeasuredWidth() <= this.maxInlineActionWidth) {
+            if (!z3) {
+                dimensionPixelSize = dimensionPixelSize2;
+            }
+            if (updateViewsWithinLayout(0, dimensionPixelSize, dimensionPixelSize)) {
+                z2 = true;
+            }
+        } else if (updateViewsWithinLayout(1, dimensionPixelSize, dimensionPixelSize - dimensionPixelSize2)) {
+        }
+        if (z2) {
+            super.onMeasure(i, i2);
+        }
     }
 
     public final boolean updateViewsWithinLayout(int i, int i2, int i3) {
@@ -106,10 +213,10 @@ public class SnackbarContentLayout extends LinearLayout implements ContentViewCa
         this.mIsCoordinatorLayoutParent = false;
         this.mIsSuggestMultiLine = false;
         this.contentInterpolator = MotionUtils.resolveThemeInterpolator(context, R.attr.motionEasingEmphasizedInterpolator, AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SnackbarLayout);
-        this.maxWidth = obtainStyledAttributes.getDimensionPixelSize(0, -1);
-        this.maxInlineActionWidth = obtainStyledAttributes.getDimensionPixelSize(7, -1);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SnackbarLayout);
+        this.maxWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, -1);
+        this.maxInlineActionWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(7, -1);
+        typedArrayObtainStyledAttributes.recycle();
         Resources resources = context.getResources();
         int fraction = (int) resources.getFraction(R.dimen.sesl_config_prefSnackWidth, resources.getDisplayMetrics().widthPixels, resources.getDisplayMetrics().widthPixels);
         this.mWidthWtihAction = fraction;

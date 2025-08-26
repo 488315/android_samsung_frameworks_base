@@ -1,7 +1,7 @@
 package com.android.wm.shell.desktopmode;
 
 import android.app.ActivityManager;
-import android.app.ActivityTaskManager;
+import android.content.res.Resources;
 import android.window.DesktopExperienceFlags;
 import android.window.RemoteTransition;
 import com.android.systemui.biometrics.AuthRippleController$AuthRippleCommand$$ExternalSyntheticOutline0;
@@ -12,7 +12,6 @@ import com.android.wm.shell.sysui.ShellCommandHandler;
 import com.android.wm.shell.transition.FocusTransitionObserver;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopModeShellCommandHandler implements ShellCommandHandler.ShellCommandActionHandler {
     public final DesktopTasksController controller;
@@ -25,29 +24,29 @@ public final class DesktopModeShellCommandHandler implements ShellCommandHandler
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.android.wm.shell.sysui.ShellCommandHandler.ShellCommandActionHandler
-    public final boolean onShellCommand(PrintWriter printWriter, String[] strArr) {
-        int parseInt;
-        int parseInt2;
+    public final boolean onShellCommand(PrintWriter printWriter, String[] strArr) throws Resources.NotFoundException, NumberFormatException {
+        int i;
+        int i2;
         ActivityManager.RunningTaskInfo runningTaskInfo;
         String str = strArr[0];
-        int hashCode = str.hashCode();
-        int i = -1;
+        int iHashCode = str.hashCode();
+        int i3 = -1;
         DesktopTasksController desktopTasksController = this.controller;
-        switch (hashCode) {
+        switch (iHashCode) {
             case -1839711158:
                 if (str.equals("moveTaskToDesk")) {
                     if (strArr.length < 2) {
                         printWriter.println("Error: task id should be provided as arguments");
                     } else {
                         try {
-                            int parseInt3 = Integer.parseInt(strArr[1]);
+                            int i4 = Integer.parseInt(strArr[1]);
                             if (!DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
                                 break;
                             } else if (strArr.length < 3) {
                                 printWriter.println("Error: desk id should be provided as arguments");
                             } else {
                                 try {
-                                    DesktopTasksController.moveTaskToDesk$default(this.controller, parseInt3, Integer.parseInt(strArr[2]), null, DesktopModeTransitionSource.UNKNOWN, null, 52);
+                                    DesktopTasksController.moveTaskToDesk$default(this.controller, i4, Integer.parseInt(strArr[2]), null, DesktopModeTransitionSource.UNKNOWN, null, 52);
                                     printWriter.println("Not implemented.");
                                     break;
                                 } catch (NumberFormatException unused) {
@@ -106,13 +105,13 @@ public final class DesktopModeShellCommandHandler implements ShellCommandHandler
                         printWriter.println("Error: desk id should be provided as arguments");
                     } else {
                         try {
-                            int parseInt4 = Integer.parseInt(strArr[1]);
+                            int i5 = Integer.parseInt(strArr[1]);
                             if (strArr.length < 3) {
                                 printWriter.println("Info: No input provided for display id. No display change for desk.");
-                                parseInt = -1;
+                                i = -1;
                             } else {
                                 try {
-                                    parseInt = Integer.parseInt(strArr[2]);
+                                    i = Integer.parseInt(strArr[2]);
                                 } catch (NumberFormatException unused5) {
                                     printWriter.println("Error: display id should be an integer");
                                 }
@@ -121,12 +120,12 @@ public final class DesktopModeShellCommandHandler implements ShellCommandHandler
                                 printWriter.println("Info: No input provided for task id. No task to top.");
                             } else {
                                 try {
-                                    i = Integer.parseInt(strArr[3]);
+                                    i3 = Integer.parseInt(strArr[3]);
                                 } catch (NumberFormatException unused6) {
                                     printWriter.println("Error: task id should be an integer");
                                 }
                             }
-                            DesktopTasksController.activateDesk$default(this.controller, parseInt4, null, parseInt, i, 2);
+                            DesktopTasksController.activateDesk$default(this.controller, i5, null, i, i3, 2);
                             break;
                         } catch (NumberFormatException unused7) {
                             printWriter.println("Error: desk id should be an integer");
@@ -170,6 +169,25 @@ public final class DesktopModeShellCommandHandler implements ShellCommandHandler
                 }
                 ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "Invalid command: ", strArr[0]);
                 break;
+            case -185276491:
+                if (str.equals("minimizeTaskById")) {
+                    if (strArr.length < 2) {
+                        printWriter.println("Error: task id should be provided as arguments");
+                    } else {
+                        try {
+                            ActivityManager.RunningTaskInfo runningTaskInfo2 = desktopTasksController.shellTaskOrganizer.getRunningTaskInfo(Integer.parseInt(strArr[1]));
+                            if (runningTaskInfo2 != null) {
+                                desktopTasksController.minimizeTask(runningTaskInfo2, DesktopModeEventLogger.Companion.MinimizeReason.HOME_ACTION);
+                            }
+                            break;
+                        } catch (NumberFormatException unused10) {
+                            printWriter.println("Error: task id should be an integer");
+                        }
+                    }
+                    break;
+                }
+                ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "Invalid command: ", strArr[0]);
+                break;
             case 3095028:
                 if (str.equals("dump")) {
                     desktopTasksController.dump$2(printWriter, "");
@@ -191,10 +209,8 @@ public final class DesktopModeShellCommandHandler implements ShellCommandHandler
                 break;
             case 442459006:
                 if (str.equals("removeAllVisibleRecentTasks")) {
-                    if (desktopTasksController.recentTasksController != null) {
-                        ActivityTaskManager.getService().removeAllVisibleRecentTasksExt(true, true);
-                        break;
-                    }
+                    desktopTasksController.removeAllVisibleRecentTasks();
+                    break;
                 }
                 ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "Invalid command: ", strArr[0]);
                 break;
@@ -206,7 +222,7 @@ public final class DesktopModeShellCommandHandler implements ShellCommandHandler
                         try {
                             desktopTasksController.minimizeAllTasks(Integer.parseInt(strArr[1]));
                             break;
-                        } catch (NumberFormatException unused10) {
+                        } catch (NumberFormatException unused11) {
                             printWriter.println("Error: display id should be an integer");
                         }
                     }
@@ -224,7 +240,7 @@ public final class DesktopModeShellCommandHandler implements ShellCommandHandler
                         try {
                             DesktopTasksController.removeDesk$default(desktopTasksController, Integer.parseInt(strArr[1]));
                             break;
-                        } catch (NumberFormatException unused11) {
+                        } catch (NumberFormatException unused12) {
                             printWriter.println("Error: desk id should be an integer");
                         }
                     }
@@ -240,7 +256,7 @@ public final class DesktopModeShellCommandHandler implements ShellCommandHandler
                         try {
                             desktopTasksController.removeAllTasksInDesk(Integer.parseInt(strArr[1]));
                             break;
-                        } catch (NumberFormatException unused12) {
+                        } catch (NumberFormatException unused13) {
                             printWriter.println("Error: desk id should be an integer");
                         }
                     }
@@ -258,7 +274,7 @@ public final class DesktopModeShellCommandHandler implements ShellCommandHandler
                         try {
                             DesktopTasksController.createDesk$default(this.controller, Integer.parseInt(strArr[1]), 0, false, null, 62);
                             break;
-                        } catch (NumberFormatException unused13) {
+                        } catch (NumberFormatException unused14) {
                             printWriter.println("Error: display id should be an integer");
                         }
                     }
@@ -270,17 +286,17 @@ public final class DesktopModeShellCommandHandler implements ShellCommandHandler
                 if (str.equals("moveToNextDisplay")) {
                     if (strArr.length < 2) {
                         FocusTransitionObserver focusTransitionObserver = this.focusTransitionObserver;
-                        int i2 = focusTransitionObserver.mFocusedDisplayId;
-                        parseInt2 = (i2 == -1 || (runningTaskInfo = (ActivityManager.RunningTaskInfo) focusTransitionObserver.mFocusedTaskOnDisplay.get(i2)) == null) ? -1 : runningTaskInfo.taskId;
+                        int i6 = focusTransitionObserver.mFocusedDisplayId;
+                        i2 = (i6 == -1 || (runningTaskInfo = (ActivityManager.RunningTaskInfo) focusTransitionObserver.mFocusedTaskOnDisplay.get(i6)) == null) ? -1 : runningTaskInfo.taskId;
                     } else {
                         try {
-                            parseInt2 = Integer.parseInt(strArr[1]);
-                        } catch (NumberFormatException unused14) {
+                            i2 = Integer.parseInt(strArr[1]);
+                        } catch (NumberFormatException unused15) {
                             printWriter.println("Error: task id should be an integer");
                         }
                     }
-                    if (parseInt2 != -1) {
-                        desktopTasksController.moveToNextDisplay(parseInt2);
+                    if (i2 != -1) {
+                        desktopTasksController.moveToNextDisplay(i2);
                         break;
                     } else {
                         printWriter.println("Error: no appropriate task found");

@@ -64,17 +64,17 @@ public class EmphasizedNotificationButton extends Button {
         rippleDrawable.mutate();
         this.mBackground = (GradientDrawable) ((DrawableWrapper) rippleDrawable.getDrawable(0)).getDrawable();
         this.mIconSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.notification_actions_icon_drawable_size);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, android.R.styleable.TextView, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, android.R.styleable.TextView, i, i2);
         try {
-            this.mInitialDrawablePadding = obtainStyledAttributes.getDimensionPixelSize(52, 0);
-            if (obtainStyledAttributes != null) {
-                obtainStyledAttributes.close();
+            this.mInitialDrawablePadding = typedArrayObtainStyledAttributes.getDimensionPixelSize(52, 0);
+            if (typedArrayObtainStyledAttributes != null) {
+                typedArrayObtainStyledAttributes.close();
             }
             Log.v(TAG, "iconSize = " + this.mIconSize + "px, initialDrawablePadding = " + this.mInitialDrawablePadding + "px");
         } catch (Throwable th) {
-            if (obtainStyledAttributes != null) {
+            if (typedArrayObtainStyledAttributes != null) {
                 try {
-                    obtainStyledAttributes.close();
+                    typedArrayObtainStyledAttributes.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -102,11 +102,11 @@ public class EmphasizedNotificationButton extends Button {
 
     @RemotableViewMethod
     public Runnable setImageIconAsync(Icon icon) {
-        final Drawable loadDrawable = icon == null ? null : icon.loadDrawable(this.mContext);
+        final Drawable drawableLoadDrawable = icon == null ? null : icon.loadDrawable(this.mContext);
         return new Runnable() { // from class: com.android.internal.widget.EmphasizedNotificationButton$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                EmphasizedNotificationButton.this.lambda$setImageIconAsync$0(loadDrawable);
+                this.f$0.lambda$setImageIconAsync$0(drawableLoadDrawable);
             }
         };
     }
@@ -127,11 +127,11 @@ public class EmphasizedNotificationButton extends Button {
 
     @RemotableViewMethod
     public Runnable glueIconAsync(Icon icon) {
-        final Drawable loadDrawable = icon == null ? null : icon.loadDrawable(this.mContext);
+        final Drawable drawableLoadDrawable = icon == null ? null : icon.loadDrawable(this.mContext);
         return new Runnable() { // from class: com.android.internal.widget.EmphasizedNotificationButton$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                EmphasizedNotificationButton.this.lambda$glueIconAsync$1(loadDrawable);
+                this.f$0.lambda$glueIconAsync$1(drawableLoadDrawable);
             }
         };
     }
@@ -169,7 +169,7 @@ public class EmphasizedNotificationButton extends Button {
         return new Runnable() { // from class: com.android.internal.widget.EmphasizedNotificationButton$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                EmphasizedNotificationButton.this.lambda$glueLabelAsync$2(charSequence);
+                this.f$0.lambda$glueLabelAsync$2(charSequence);
             }
         };
     }

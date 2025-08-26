@@ -3,7 +3,6 @@ package com.android.wm.shell.shared;
 import android.util.Pools;
 import android.view.SurfaceControl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TransactionPool {
     public final Pools.SynchronizedPool mTransactionPool = new Pools.SynchronizedPool(4);

@@ -8,13 +8,11 @@ import com.android.systemui.qs.external.CustomTile;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class TileSpec {
     public static final Companion Companion = new Companion(null);
     public final String spec;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -30,11 +28,11 @@ public abstract class TileSpec {
             if (!str.startsWith("custom(")) {
                 return new PlatformTileSpec(str);
             }
-            ComponentName componentName = null;
+            ComponentName componentNameUnflattenFromString = null;
             if (str.startsWith("custom(") && str.endsWith(")")) {
-                componentName = ComponentName.unflattenFromString(str.substring(7, str.length() - 1));
+                componentNameUnflattenFromString = ComponentName.unflattenFromString(str.substring(7, str.length() - 1));
             }
-            return componentName != null ? new CustomTileSpec(str, componentName) : Invalid.INSTANCE;
+            return componentNameUnflattenFromString != null ? new CustomTileSpec(str, componentNameUnflattenFromString) : Invalid.INSTANCE;
         }
 
         private Companion() {
@@ -45,7 +43,6 @@ public abstract class TileSpec {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CustomTileSpec extends TileSpec {
         public final ComponentName componentName;
         public final String spec;
@@ -81,7 +78,6 @@ public abstract class TileSpec {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Empty extends TileSpec {
         public static final Empty INSTANCE = new Empty();
 
@@ -102,7 +98,6 @@ public abstract class TileSpec {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Invalid extends TileSpec {
         public static final Invalid INSTANCE = new Invalid();
 
@@ -123,7 +118,6 @@ public abstract class TileSpec {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PlatformTileSpec extends TileSpec {
         public final String spec;
 

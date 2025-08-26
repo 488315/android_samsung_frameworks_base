@@ -99,7 +99,7 @@ public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobal
         this.mHandlerUtil.post(new Runnable() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsDialogBase$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                SamsungGlobalActionsDialogBase.this.lambda$show$0(z, z2, z3, i);
+                this.f$0.lambda$show$0(z, z2, z3, i);
             }
         });
     }
@@ -137,9 +137,7 @@ public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobal
         this.mDialog.setOnKeyListener(new DialogInterface.OnKeyListener() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsDialogBase$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnKeyListener
             public final boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
-                boolean lambda$showDialog$1;
-                lambda$showDialog$1 = SamsungGlobalActionsDialogBase.this.lambda$showDialog$1(dialogInterface, i, keyEvent);
-                return lambda$showDialog$1;
+                return this.f$0.lambda$showDialog$1(dialogInterface, i, keyEvent);
             }
         });
     }
@@ -222,7 +220,7 @@ public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobal
             this.mHandlerUtil.post(new Runnable() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsDialogBase$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SamsungGlobalActionsDialogBase.this.lambda$dismiss$2();
+                    this.f$0.lambda$dismiss$2();
                 }
             });
         }

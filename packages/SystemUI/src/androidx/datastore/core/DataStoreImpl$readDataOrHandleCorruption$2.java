@@ -1,11 +1,12 @@
 package androidx.datastore.core;
 
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DataStoreImpl$readDataOrHandleCorruption$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $preLockVersion;
@@ -35,85 +36,60 @@ final class DataStoreImpl$readDataOrHandleCorruption$2 extends SuspendLambda imp
         return ((DataStoreImpl$readDataOrHandleCorruption$2) create(bool, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0031, code lost:
-    
-        if (r6 == r0) goto L16;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0063  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x005e  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x005e  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0063  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r6) {
-        /*
-            r5 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r5.label
-            r2 = 2
-            r3 = 1
-            if (r1 == 0) goto L20
-            if (r1 == r3) goto L1a
-            if (r1 != r2) goto L12
-            java.lang.Object r5 = r5.L$0
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L4e
-        L12:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L1a:
-            boolean r1 = r5.Z$0
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L34
-        L20:
-            kotlin.ResultKt.throwOnFailure(r6)
-            boolean r1 = r5.Z$0
-            androidx.datastore.core.DataStoreImpl r6 = r5.this$0
-            r5.Z$0 = r1
-            r5.label = r3
-            int r3 = androidx.datastore.core.DataStoreImpl.$r8$clinit
-            java.lang.Object r6 = r6.readDataFromFileOrDefault(r5)
-            if (r6 != r0) goto L34
-            goto L4a
-        L34:
-            if (r1 == 0) goto L55
-            androidx.datastore.core.DataStoreImpl r1 = r5.this$0
-            int r3 = androidx.datastore.core.DataStoreImpl.$r8$clinit
-            androidx.datastore.core.InterProcessCoordinator r1 = r1.getCoordinator()
-            r5.L$0 = r6
-            r5.label = r2
-            androidx.datastore.core.SingleProcessCoordinator r1 = (androidx.datastore.core.SingleProcessCoordinator) r1
-            java.lang.Object r5 = r1.getVersion()
-            if (r5 != r0) goto L4b
-        L4a:
-            return r0
-        L4b:
-            r4 = r6
-            r6 = r5
-            r5 = r4
-        L4e:
-            java.lang.Number r6 = (java.lang.Number) r6
-            int r6 = r6.intValue()
-            goto L5a
-        L55:
-            int r5 = r5.$preLockVersion
-            r4 = r6
-            r6 = r5
-            r5 = r4
-        L5a:
-            androidx.datastore.core.Data r0 = new androidx.datastore.core.Data
-            if (r5 == 0) goto L63
-            int r1 = r5.hashCode()
-            goto L64
-        L63:
-            r1 = 0
-        L64:
-            r0.<init>(r5, r1, r6)
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.datastore.core.DataStoreImpl$readDataOrHandleCorruption$2.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        boolean z;
+        int iIntValue;
+        Object obj2;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            z = this.Z$0;
+            DataStoreImpl dataStoreImpl = this.this$0;
+            this.Z$0 = z;
+            this.label = 1;
+            int i2 = DataStoreImpl.$r8$clinit;
+            obj = dataStoreImpl.readDataFromFileOrDefault(this);
+            if (obj != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            obj2 = this.L$0;
+            ResultKt.throwOnFailure(obj);
+            iIntValue = ((Number) obj).intValue();
+            return new Data(obj2, obj2 != null ? obj2.hashCode() : 0, iIntValue);
+        }
+        z = this.Z$0;
+        ResultKt.throwOnFailure(obj);
+        if (!z) {
+            Object obj3 = obj;
+            iIntValue = this.$preLockVersion;
+            obj2 = obj3;
+            return new Data(obj2, obj2 != null ? obj2.hashCode() : 0, iIntValue);
+        }
+        DataStoreImpl dataStoreImpl2 = this.this$0;
+        int i3 = DataStoreImpl.$r8$clinit;
+        InterProcessCoordinator coordinator = dataStoreImpl2.getCoordinator();
+        this.L$0 = obj;
+        this.label = 2;
+        Object version = ((SingleProcessCoordinator) coordinator).getVersion();
+        if (version != coroutineSingletons) {
+            Object obj4 = obj;
+            obj = version;
+            obj2 = obj4;
+            iIntValue = ((Number) obj).intValue();
+            return new Data(obj2, obj2 != null ? obj2.hashCode() : 0, iIntValue);
+        }
+        return coroutineSingletons;
     }
 }

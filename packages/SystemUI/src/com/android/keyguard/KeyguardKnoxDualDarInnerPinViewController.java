@@ -1,6 +1,7 @@
 package com.android.keyguard;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.os.AsyncTask;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
@@ -30,7 +31,6 @@ import com.android.systemui.util.ViewController;
 import com.android.systemui.vibrate.VibrationUtil;
 import com.samsung.android.knox.SemPersonaManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardKnoxDualDarInnerPinViewController extends KeyguardSecPinViewController {
     public byte[] mEntry;
@@ -106,7 +106,7 @@ public class KeyguardKnoxDualDarInnerPinViewController extends KeyguardSecPinVie
     }
 
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController, com.android.keyguard.KeyguardInputViewController
-    public final void reset$1() {
+    public final void reset$1() throws Resources.NotFoundException {
         this.mDismissing = false;
         ((KeyguardSecPINView) this.mView).resetPasswordText(false, false);
         long dualDarInnerLockoutAttemptDeadline$1 = ((KnoxStateMonitorImpl) this.mKnoxStateMonitor).getDualDarInnerLockoutAttemptDeadline$1();

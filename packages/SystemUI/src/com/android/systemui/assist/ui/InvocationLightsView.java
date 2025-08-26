@@ -18,7 +18,6 @@ import com.android.systemui.navigationbar.NavigationBarController;
 import com.android.systemui.navigationbar.views.NavigationBarTransitions;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class InvocationLightsView extends View implements NavigationBarTransitions.DarkIntensityListener {
     public final ArrayList mAssistInvocationLights;
@@ -119,7 +118,7 @@ public class InvocationLightsView extends View implements NavigationBarTransitio
 
     public final void updateDarkness(float f) {
         if (this.mUseNavBarColor) {
-            int intValue = ((Integer) ArgbEvaluator.getInstance().evaluate(f, Integer.valueOf(this.mLightColor), Integer.valueOf(this.mDarkColor))).intValue();
+            int iIntValue = ((Integer) ArgbEvaluator.getInstance().evaluate(f, Integer.valueOf(this.mLightColor), Integer.valueOf(this.mDarkColor))).intValue();
             ArrayList arrayList = this.mAssistInvocationLights;
             int size = arrayList.size();
             boolean z = true;
@@ -128,8 +127,8 @@ public class InvocationLightsView extends View implements NavigationBarTransitio
                 Object obj = arrayList.get(i);
                 i++;
                 EdgeLight edgeLight = (EdgeLight) obj;
-                boolean z2 = edgeLight.mColor != intValue;
-                edgeLight.mColor = intValue;
+                boolean z2 = edgeLight.mColor != iIntValue;
+                edgeLight.mColor = iIntValue;
                 z &= z2;
             }
             if (z) {
@@ -147,9 +146,9 @@ public class InvocationLightsView extends View implements NavigationBarTransitio
     }
 
     public InvocationLightsView(Context context, AttributeSet attributeSet, int i, int i2) {
-        super(context, attributeSet, i, i2);
         int i3;
         int i4;
+        super(context, attributeSet, i, i2);
         this.mAssistInvocationLights = new ArrayList();
         Paint paint = new Paint();
         this.mPaint = paint;
@@ -158,8 +157,8 @@ public class InvocationLightsView extends View implements NavigationBarTransitio
         this.mRegistered = false;
         this.mUseNavBarColor = true;
         context.getDisplay().getRealMetrics(new DisplayMetrics());
-        int ceil = (int) Math.ceil(r2.density * 3.0f);
-        paint.setStrokeWidth(ceil);
+        int iCeil = (int) Math.ceil(r2.density * 3.0f);
+        paint.setStrokeWidth(iCeil);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.MITER);
         paint.setAntiAlias(true);
@@ -182,10 +181,10 @@ public class InvocationLightsView extends View implements NavigationBarTransitio
         } else {
             i4 = displayMetrics2.heightPixels;
         }
-        this.mGuide = new PerimeterPathGuide(context, new CircularCornerPathRenderer(context), ceil / 2, i5, i4);
-        int max = Math.max(DisplayUtils.getInvocationCornerRadius(context, true), DisplayUtils.getInvocationCornerRadius(context, false));
+        this.mGuide = new PerimeterPathGuide(context, new CircularCornerPathRenderer(context), iCeil / 2, i5, i4);
+        int iMax = Math.max(DisplayUtils.getInvocationCornerRadius(context, true), DisplayUtils.getInvocationCornerRadius(context, false));
         context.getDisplay().getRealMetrics(new DisplayMetrics());
-        this.mViewHeight = Math.max(max, (int) Math.ceil(3.0f * r12.density));
+        this.mViewHeight = Math.max(iMax, (int) Math.ceil(3.0f * r12.density));
         int themeAttr = Utils.getThemeAttr(R.attr.darkIconTheme, ((View) this).mContext);
         ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(((View) this).mContext, Utils.getThemeAttr(R.attr.lightIconTheme, ((View) this).mContext));
         ContextThemeWrapper contextThemeWrapper2 = new ContextThemeWrapper(((View) this).mContext, themeAttr);

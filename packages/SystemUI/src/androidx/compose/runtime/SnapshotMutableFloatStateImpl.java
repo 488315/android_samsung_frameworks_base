@@ -9,12 +9,10 @@ import androidx.compose.runtime.snapshots.StateRecord;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SnapshotMutableFloatStateImpl extends StateObjectImpl implements MutableFloatState, SnapshotMutableState<Float> {
     public FloatStateStateRecord next;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class FloatStateStateRecord extends StateRecord {
         public float value;
 
@@ -40,9 +38,9 @@ public class SnapshotMutableFloatStateImpl extends StateObjectImpl implements Mu
     }
 
     public SnapshotMutableFloatStateImpl(float f) {
-        Snapshot currentSnapshot = SnapshotKt.currentSnapshot();
-        FloatStateStateRecord floatStateStateRecord = new FloatStateStateRecord(currentSnapshot.getSnapshotId(), f);
-        if (!(currentSnapshot instanceof GlobalSnapshot)) {
+        Snapshot snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+        FloatStateStateRecord floatStateStateRecord = new FloatStateStateRecord(snapshotCurrentSnapshot.getSnapshotId(), f);
+        if (!(snapshotCurrentSnapshot instanceof GlobalSnapshot)) {
             floatStateStateRecord.next = new FloatStateStateRecord(1, f);
         }
         this.next = floatStateStateRecord;
@@ -55,14 +53,10 @@ public class SnapshotMutableFloatStateImpl extends StateObjectImpl implements Mu
 
     @Override // androidx.compose.runtime.MutableState
     public final Function1 component2() {
-        return new Function1() { // from class: androidx.compose.runtime.SnapshotMutableFloatStateImpl$component2$1
-            {
-                super(1);
-            }
-
+        return new Function1() { // from class: androidx.compose.runtime.SnapshotMutableFloatStateImpl.component2.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 SnapshotMutableFloatStateImpl.this.setFloatValue(((Number) obj).floatValue());
                 return Unit.INSTANCE;
             }
@@ -98,7 +92,7 @@ public class SnapshotMutableFloatStateImpl extends StateObjectImpl implements Mu
     }
 
     public final void setFloatValue(float f) {
-        Snapshot currentSnapshot;
+        Snapshot snapshotCurrentSnapshot;
         FloatStateStateRecord floatStateStateRecord = (FloatStateStateRecord) SnapshotKt.current(this.next);
         if (floatStateStateRecord.value == f) {
             return;
@@ -106,11 +100,11 @@ public class SnapshotMutableFloatStateImpl extends StateObjectImpl implements Mu
         FloatStateStateRecord floatStateStateRecord2 = this.next;
         synchronized (SnapshotKt.lock) {
             Snapshot.Companion.getClass();
-            currentSnapshot = SnapshotKt.currentSnapshot();
-            ((FloatStateStateRecord) SnapshotKt.overwritableRecord(floatStateStateRecord2, this, currentSnapshot, floatStateStateRecord)).value = f;
+            snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+            ((FloatStateStateRecord) SnapshotKt.overwritableRecord(floatStateStateRecord2, this, snapshotCurrentSnapshot, floatStateStateRecord)).value = f;
             Unit unit = Unit.INSTANCE;
         }
-        SnapshotKt.notifyWrite(currentSnapshot, this);
+        SnapshotKt.notifyWrite(snapshotCurrentSnapshot, this);
     }
 
     public final String toString() {

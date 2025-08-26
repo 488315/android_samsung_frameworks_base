@@ -22,7 +22,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MaximizeButtonView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -33,7 +32,6 @@ public final class MaximizeButtonView extends FrameLayout {
     public final Lazy progressBar$delegate;
     public final ViewStub stubProgressBarContainer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,7 +51,7 @@ public final class MaximizeButtonView extends FrameLayout {
         this.progressBar$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.wm.shell.windowdecor.MaximizeButtonView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                ViewStub viewStub = MaximizeButtonView.this.stubProgressBarContainer;
+                ViewStub viewStub = this.f$0.stubProgressBarContainer;
                 if (viewStub == null) {
                     viewStub = null;
                 }
@@ -84,14 +82,14 @@ public final class MaximizeButtonView extends FrameLayout {
 
     public final void setAnimationTints(boolean z, ColorStateList colorStateList, final Integer num, Drawable drawable) {
         if (!DesktopModeFlags.ENABLE_THEMED_APP_HEADERS.isTrue()) {
-            final ColorStateList valueOf = z ? ColorStateList.valueOf(getResources().getColor(R.color.desktop_mode_maximize_menu_progress_dark)) : ColorStateList.valueOf(getResources().getColor(R.color.desktop_mode_maximize_menu_progress_light));
-            valueOf.getClass();
+            final ColorStateList colorStateListValueOf = z ? ColorStateList.valueOf(getResources().getColor(R.color.desktop_mode_maximize_menu_progress_dark)) : ColorStateList.valueOf(getResources().getColor(R.color.desktop_mode_maximize_menu_progress_light));
+            colorStateListValueOf.getClass();
             ColorStateList colorStateList2 = z ? ContextCompat.getColorStateList(R.color.desktop_mode_caption_button_color_selector_dark, getContext()) : ContextCompat.getColorStateList(R.color.desktop_mode_caption_button_color_selector_light, getContext());
             ViewStub viewStub = this.stubProgressBarContainer;
-            (viewStub != null ? viewStub : null).setOnInflateListener(new ViewStub.OnInflateListener() { // from class: com.android.wm.shell.windowdecor.MaximizeButtonView$setAnimationTints$5
+            (viewStub != null ? viewStub : null).setOnInflateListener(new ViewStub.OnInflateListener() { // from class: com.android.wm.shell.windowdecor.MaximizeButtonView.setAnimationTints.5
                 @Override // android.view.ViewStub.OnInflateListener
                 public final void onInflate(ViewStub viewStub2, View view) {
-                    ((ProgressBar) ((FrameLayout) view).requireViewById(R.id.progress_bar)).setProgressTintList(valueOf);
+                    ((ProgressBar) ((FrameLayout) view).requireViewById(R.id.progress_bar)).setProgressTintList(colorStateListValueOf);
                 }
             });
             Drawable background = this.maximizeWindow.getBackground();
@@ -113,7 +111,7 @@ public final class MaximizeButtonView extends FrameLayout {
         this.maximizeWindow.setImageTintList(colorStateList);
         this.maximizeWindow.setBackground(drawable);
         ViewStub viewStub2 = this.stubProgressBarContainer;
-        (viewStub2 != null ? viewStub2 : null).setOnInflateListener(new ViewStub.OnInflateListener() { // from class: com.android.wm.shell.windowdecor.MaximizeButtonView$setAnimationTints$4
+        (viewStub2 != null ? viewStub2 : null).setOnInflateListener(new ViewStub.OnInflateListener() { // from class: com.android.wm.shell.windowdecor.MaximizeButtonView.setAnimationTints.4
             @Override // android.view.ViewStub.OnInflateListener
             public final void onInflate(ViewStub viewStub3, View view) {
                 ProgressBar progressBar = (ProgressBar) ((FrameLayout) view).requireViewById(R.id.progress_bar);

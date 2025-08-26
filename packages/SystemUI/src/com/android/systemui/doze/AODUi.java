@@ -2,6 +2,7 @@ package com.android.systemui.doze;
 
 import android.app.AlarmManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.Handler;
 import com.android.systemui.doze.DozeHost;
@@ -12,13 +13,11 @@ import com.android.systemui.util.Assert;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.wakelock.WakeLock;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AODUi extends DozeUi {
     public final AmbientDisplayConfiguration mConfig;
     public final AnonymousClass1 mHostCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.doze.AODUi$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;
@@ -52,7 +51,7 @@ public class AODUi extends DozeUi {
     }
 
     @Override // com.android.systemui.doze.DozeUi, com.android.systemui.doze.DozeMachine.Part
-    public final void transitionTo(DozeMachine.State state, DozeMachine.State state2) {
+    public final void transitionTo(DozeMachine.State state, DozeMachine.State state2) throws PackageManager.NameNotFoundException {
         super.transitionTo(state, state2);
         int i = AnonymousClass2.$SwitchMap$com$android$systemui$doze$DozeMachine$State[state2.ordinal()];
         AnonymousClass1 anonymousClass1 = this.mHostCallback;

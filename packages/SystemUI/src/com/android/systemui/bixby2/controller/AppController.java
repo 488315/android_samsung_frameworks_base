@@ -52,8 +52,8 @@ import com.samsung.android.multiwindow.MultiWindowManager;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.json.JSONException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppController {
     private static final int INVALID_TASK = -1;
@@ -84,7 +84,6 @@ public class AppController {
     private ContentResolver mContentResolver = null;
     private boolean mSensorRegistered = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class AppControlSensorListener implements SensorEventListener {
         public /* synthetic */ AppControlSensorListener(AppController appController, int i) {
             this();
@@ -258,9 +257,9 @@ public class AppController {
     private String getAffinityName(Task$TaskKey task$TaskKey) {
         ComponentName component = task$TaskKey.baseIntent.getComponent();
         PackageManagerWrapper packageManagerWrapper = PackageManagerWrapper.sInstance;
-        int myUserId = UserHandle.myUserId();
+        int iMyUserId = UserHandle.myUserId();
         packageManagerWrapper.getClass();
-        ActivityInfo activityInfo = PackageManagerWrapper.getActivityInfo(myUserId, component);
+        ActivityInfo activityInfo = PackageManagerWrapper.getActivityInfo(iMyUserId, component);
         if (activityInfo != null) {
             return activityInfo.taskAffinity;
         }
@@ -281,45 +280,45 @@ public class AppController {
     }
 
     private int getPackageToStartActivityFromRecents(Context context, ArrayList<String> arrayList, ArrayList<String> arrayList2, List<ActivityManager.RecentTaskInfo> list) {
-        String str;
-        int i = -1;
+        String packageName;
+        int iCheckPackageIncludedRecents = -1;
         for (ActivityManager.RecentTaskInfo recentTaskInfo : list) {
             ComponentName componentName = recentTaskInfo.origActivity;
             recentTaskInfo.configuration.windowConfiguration.getWindowingMode();
             ComponentName componentName2 = recentTaskInfo.realActivity;
             if (componentName2 != null) {
-                str = componentName2.getPackageName();
+                packageName = componentName2.getPackageName();
             } else {
                 ComponentName componentName3 = recentTaskInfo.origActivity;
                 if (componentName3 != null) {
-                    str = componentName3.getPackageName();
+                    packageName = componentName3.getPackageName();
                 } else {
                     RecyclerView$$ExternalSyntheticOutline0.m(recentTaskInfo.taskId, TAG, new StringBuilder("There is no packageName. taskId = "));
-                    str = null;
+                    packageName = null;
                 }
             }
-            i = checkPackageIncludedRecents(str, arrayList, arrayList2, context);
-            if (i != -1) {
+            iCheckPackageIncludedRecents = checkPackageIncludedRecents(packageName, arrayList, arrayList2, context);
+            if (iCheckPackageIncludedRecents != -1) {
                 break;
             }
         }
-        ListPopupWindow$$ExternalSyntheticOutline0.m(i, "getPackageToStartActivityFromRecents() retCnt = ", TAG);
-        return i;
+        ListPopupWindow$$ExternalSyntheticOutline0.m(iCheckPackageIncludedRecents, "getPackageToStartActivityFromRecents() retCnt = ", TAG);
+        return iCheckPackageIncludedRecents;
     }
 
     private boolean isLongLiveApp(String str) {
-        List list;
+        List longLiveApps;
         try {
-            list = ActivityManager.getService().getLongLiveApps();
+            longLiveApps = ActivityManager.getService().getLongLiveApps();
         } catch (RemoteException e) {
             Log.w(TAG, e.toString());
-            list = null;
+            longLiveApps = null;
         }
-        if (list == null) {
+        if (longLiveApps == null) {
             return false;
         }
-        Log.d(TAG, "isLongLiveApp: longLiveApps.size() = " + list.size());
-        Iterator it = list.iterator();
+        Log.d(TAG, "isLongLiveApp: longLiveApps.size() = " + longLiveApps.size());
+        Iterator it = longLiveApps.iterator();
         while (it.hasNext()) {
             if (str.equals((String) it.next())) {
                 return true;
@@ -329,14 +328,14 @@ public class AppController {
     }
 
     private boolean isLongLiveAppDedicatedMemory(int i, int i2, String str) {
-        List list;
+        List longLiveTaskIdsForUser;
         try {
-            list = ActivityManager.getService().getLongLiveTaskIdsForUser(i);
+            longLiveTaskIdsForUser = ActivityManager.getService().getLongLiveTaskIdsForUser(i);
         } catch (RemoteException e) {
             Log.w(TAG, e.toString());
-            list = null;
+            longLiveTaskIdsForUser = null;
         }
-        return list != null && list.contains(Integer.valueOf(i2));
+        return longLiveTaskIdsForUser != null && longLiveTaskIdsForUser.contains(Integer.valueOf(i2));
     }
 
     private void logTaskIdToRemove(ActivityManager.RecentTaskInfo recentTaskInfo) {
@@ -357,9 +356,9 @@ public class AppController {
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Can not retrieve app list : "), TAG);
         }
-        boolean contains = arrayList.contains(str);
-        Log.d(TAG, "contains = " + contains + ", mAllowedPackageList = " + arrayList);
-        return contains;
+        boolean zContains = arrayList.contains(str);
+        Log.d(TAG, "contains = " + zContains + ", mAllowedPackageList = " + arrayList);
+        return zContains;
     }
 
     public boolean checkIncludeCoverLauncher(String str) {
@@ -370,13 +369,13 @@ public class AppController {
         } catch (RemoteException e) {
             Log.e(TAG, "Can not retrieve app list : " + e.getMessage());
         }
-        boolean contains = arrayList.contains(str);
+        boolean zContains = arrayList.contains(str);
         Log.d(TAG, "appList = " + arrayList);
-        Log.d(TAG, "contains = " + contains);
-        return contains;
+        Log.d(TAG, "contains = " + zContains);
+        return zContains;
     }
 
-    public boolean checkInstalledApp(Context context, String str) {
+    public boolean checkInstalledApp(Context context, String str) throws PackageManager.NameNotFoundException {
         if (str == null) {
             return false;
         }
@@ -409,7 +408,7 @@ public class AppController {
         return i == 0 || i == 2;
     }
 
-    public boolean checkRunningInRecents(Context context, String str, ArrayList<String> arrayList) {
+    public boolean checkRunningInRecents(Context context, String str, ArrayList<String> arrayList) throws SecurityException {
         int i;
         Log.d(TAG, "checkRunningInRecents()");
         List<ActivityManager.RecentTaskInfo> recentTasks = ((ActivityManager) context.getSystemService("activity")).getRecentTasks(100, 0);
@@ -469,7 +468,7 @@ public class AppController {
         return !this.mDisplayLifecycle.mIsFolderOpened;
     }
 
-    public boolean launchApplication(Context context, String str) {
+    public boolean launchApplication(Context context, String str) throws JSONException, PackageManager.NameNotFoundException, NumberFormatException {
         Log.d(TAG, "launchApplication(), newJSONStringValue = " + str);
         PackageInfoBixby packageInfoFromJson = ParamsParser.getPackageInfoFromJson(str);
         String str2 = packageInfoFromJson.PackageName;
@@ -495,7 +494,7 @@ public class AppController {
         if (!isDexMode()) {
             new Thread(new Runnable(this) { // from class: com.android.systemui.bixby2.controller.AppController.1
                 @Override // java.lang.Runnable
-                public void run() {
+                public void run() throws InterruptedException {
                     try {
                         Thread.sleep(1000L);
                         instrumentation.sendKeyDownUpSync(187);
@@ -517,12 +516,12 @@ public class AppController {
 
     public boolean removeFocusedTask(Context context) {
         Log.d(TAG, "removeFocusedTask()");
-        boolean removeFocusedTask = isDexMode() ? this.mMultiWindowManager.removeFocusedTask(2) : (LsRune.SUBSCREEN_UI && isFolderClosed()) ? this.mMultiWindowManager.removeFocusedTask(1) : this.mMultiWindowManager.removeFocusedTask(0);
-        EmergencyButtonController$$ExternalSyntheticOutline0.m("retValue = ", TAG, removeFocusedTask);
-        return removeFocusedTask;
+        boolean zRemoveFocusedTask = isDexMode() ? this.mMultiWindowManager.removeFocusedTask(2) : (LsRune.SUBSCREEN_UI && isFolderClosed()) ? this.mMultiWindowManager.removeFocusedTask(1) : this.mMultiWindowManager.removeFocusedTask(0);
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("retValue = ", TAG, zRemoveFocusedTask);
+        return zRemoveFocusedTask;
     }
 
-    public boolean removeNavigationApp(Context context, String str) {
+    public boolean removeNavigationApp(Context context, String str) throws PackageManager.NameNotFoundException {
         Log.d(TAG, "removeNavigationApp");
         ArrayList arrayList = new ArrayList();
         ParamsParser.getListInfoFromJson(arrayList, null, str);
@@ -552,7 +551,7 @@ public class AppController {
         return z;
     }
 
-    public boolean removeSearchedTask(Context context, String str) {
+    public boolean removeSearchedTask(Context context, String str) throws JSONException, PackageManager.NameNotFoundException, NumberFormatException {
         List<ActivityManager.RecentTaskInfo> taskInfoFromPackageName;
         Log.d(TAG, "removeSearchedTask()");
         PackageInfoBixby packageInfoFromJson = ParamsParser.getPackageInfoFromJson(str);
@@ -584,7 +583,7 @@ public class AppController {
         }
     }
 
-    public boolean startNavigationApp(Context context, String str, CommandActionResponse commandActionResponse) {
+    public boolean startNavigationApp(Context context, String str, CommandActionResponse commandActionResponse) throws PackageManager.NameNotFoundException, SecurityException {
         Log.d(TAG, "startNavigationApp()");
         ArrayList<String> arrayList = new ArrayList<>();
         ArrayList<String> arrayList2 = new ArrayList<>();
@@ -629,15 +628,15 @@ public class AppController {
         String str2 = arrayList.get(packageToStartActivityFromRecents);
         String str3 = arrayList2.get(packageToStartActivityFromRecents);
         if (BasicRune.VOLUME_SUB_DISPLAY_FULL_LAYOUT_VOLUME_DIALOG && isFolderClosed()) {
-            boolean checkSettingsCoverLauncher = checkSettingsCoverLauncher(context);
-            boolean checkIncludeCoverLauncher = checkIncludeCoverLauncher(str2);
-            boolean checkAvailableCoverLauncher = checkAvailableCoverLauncher(str2);
+            boolean zCheckSettingsCoverLauncher = checkSettingsCoverLauncher(context);
+            boolean zCheckIncludeCoverLauncher = checkIncludeCoverLauncher(str2);
+            boolean zCheckAvailableCoverLauncher = checkAvailableCoverLauncher(str2);
             commandActionResponse.responseCode = 1;
-            if (!checkIncludeCoverLauncher) {
+            if (!zCheckIncludeCoverLauncher) {
                 commandActionResponse.responseMessage = ActionResults.RESULT_NOT_INCLUDE_COVERLAUNCHER;
-            } else if (!checkSettingsCoverLauncher) {
+            } else if (!zCheckSettingsCoverLauncher) {
                 commandActionResponse.responseMessage = ActionResults.RESULT_SET_OFF_COVERLAUNCHER;
-            } else if (checkAvailableCoverLauncher) {
+            } else if (zCheckAvailableCoverLauncher) {
                 commandActionResponse.responseMessage = "success";
             } else {
                 commandActionResponse.responseMessage = ActionResults.RESULT_NOT_AVAILABLE_COVERLAUNCHER;
@@ -651,7 +650,11 @@ public class AppController {
         return true;
     }
 
-    public boolean removeAllTasks(Context context, boolean z, String str) {
+    /* JADX WARN: Removed duplicated region for block: B:44:0x017a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public boolean removeAllTasks(Context context, boolean z, String str) throws SecurityException {
         boolean z2;
         int i;
         Iterator<ActivityManager.RecentTaskInfo> it;
@@ -695,25 +698,23 @@ public class AppController {
                                 Log.d(TAG, "This Task is LongLiveApp based DedicatedMemory, skip removeTask - " + next.realActivity.getPackageName());
                             } else if (z && next.isVisible) {
                                 Log.d(TAG, "skip visible task");
-                            } else {
-                                if (str != null) {
-                                    int size = arrayList.size();
-                                    boolean z3 = false;
-                                    int i2 = 0;
-                                    while (i2 < size) {
-                                        Object obj = arrayList.get(i2);
-                                        i2++;
-                                        if (((String) obj).equals(next.realActivity.getPackageName())) {
-                                            Log.d(TAG, "skip excepted package from bixby - " + next.realActivity.getPackageName());
-                                            z3 = true;
-                                        }
-                                    }
-                                    if (z3) {
+                            } else if (str != null) {
+                                int size = arrayList.size();
+                                boolean z3 = false;
+                                int i2 = 0;
+                                while (i2 < size) {
+                                    Object obj = arrayList.get(i2);
+                                    i2++;
+                                    if (((String) obj).equals(next.realActivity.getPackageName())) {
+                                        Log.d(TAG, "skip excepted package from bixby - " + next.realActivity.getPackageName());
+                                        z3 = true;
                                     }
                                 }
-                                logTaskIdToRemove(next);
-                                activityManager.semRemoveTask(next.taskId, 0);
-                                i++;
+                                if (!z3) {
+                                    logTaskIdToRemove(next);
+                                    activityManager.semRemoveTask(next.taskId, 0);
+                                    i++;
+                                }
                             }
                         }
                     } else {
@@ -736,33 +737,33 @@ public class AppController {
     }
 
     public boolean checkTaskLocked(Task$TaskKey task$TaskKey) {
-        Cursor cursor = null;
+        Cursor cursorQuery = null;
         try {
             try {
-                cursor = this.mContentResolver.query(Uri.parse(TASKLOCKDB), null, null, null, null);
+                cursorQuery = this.mContentResolver.query(Uri.parse(TASKLOCKDB), null, null, null, null);
                 String componentName = getComponentName(task$TaskKey);
                 String affinityName = getAffinityName(task$TaskKey);
-                if (cursor != null && cursor.moveToFirst()) {
-                    Log.d(TAG, "isTaskLocked: getCount = " + cursor.getCount());
+                if (cursorQuery != null && cursorQuery.moveToFirst()) {
+                    Log.d(TAG, "isTaskLocked: getCount = " + cursorQuery.getCount());
                     do {
-                        Log.d(TAG, "isTaskLocked: ColumnNames = " + cursor.getColumnNames());
-                        if (cursor.getString(1) == null || cursor.getString(2) == null) {
+                        Log.d(TAG, "isTaskLocked: ColumnNames = " + cursorQuery.getColumnNames());
+                        if (cursorQuery.getString(1) == null || cursorQuery.getString(2) == null) {
                             Log.d(TAG, "Component or Affinity name is null ");
                         } else {
-                            if (cursor.getString(1).equals(componentName) && cursor.getString(2).equals(affinityName)) {
+                            if (cursorQuery.getString(1).equals(componentName) && cursorQuery.getString(2).equals(affinityName)) {
                                 Log.d(TAG, "isTaskLocked: True " + componentName);
-                                cursor.close();
+                                cursorQuery.close();
                                 return true;
                             }
-                            if (cursor.getString(2).equals(affinityName)) {
+                            if (cursorQuery.getString(2).equals(affinityName)) {
                                 Log.d(TAG, "isTaskLocked: True (only affinity matched)" + componentName);
-                                cursor.close();
+                                cursorQuery.close();
                                 return true;
                             }
                         }
-                    } while (cursor.moveToNext());
+                    } while (cursorQuery.moveToNext());
                 }
-                if (cursor == null) {
+                if (cursorQuery == null) {
                     return false;
                 }
             } catch (Exception e) {
@@ -771,7 +772,7 @@ public class AppController {
                     return false;
                 }
             }
-            cursor.close();
+            cursorQuery.close();
             return false;
         } finally {
         }

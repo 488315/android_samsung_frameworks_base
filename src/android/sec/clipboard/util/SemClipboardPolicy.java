@@ -78,8 +78,8 @@ public class SemClipboardPolicy {
             if (isSepLite(context) && this.mSignaturesMap.get(8) == null) {
                 this.mSignaturesMap.put(8, new Signature(SAMSUNG_PLATFORM_SEPLITE_KEY));
             }
-            List<Signature> asList = Arrays.asList(packageInfoAsUser.signingInfo.getApkContentsSigners());
-            if (hasSamsungKey(asList)) {
+            List<Signature> listAsList = Arrays.asList(packageInfoAsUser.signingInfo.getApkContentsSigners());
+            if (hasSamsungKey(listAsList)) {
                 Log.i(TAG, "App key is samsung key");
                 return true;
             }
@@ -89,11 +89,11 @@ public class SemClipboardPolicy {
                 Log.i(TAG, "Allow lists does not include this App");
                 return false;
             }
-            boolean isMatchedSignature = isMatchedSignature(asList, num.intValue());
-            if (!isMatchedSignature) {
+            boolean zIsMatchedSignature = isMatchedSignature(listAsList, num.intValue());
+            if (!zIsMatchedSignature) {
                 Log.i(TAG, "Allow lists don't match this App");
             }
-            return isMatchedSignature;
+            return zIsMatchedSignature;
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, str + " is not valid" + e);
             return false;

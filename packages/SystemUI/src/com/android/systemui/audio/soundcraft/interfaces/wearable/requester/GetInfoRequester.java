@@ -25,14 +25,12 @@ import kotlin.collections.SetsKt__SetsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class GetInfoRequester extends BudsPluginServiceRequester {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Function1 onBudsModelReceived;
     public final Messenger receiver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -55,19 +53,19 @@ public final class GetInfoRequester extends BudsPluginServiceRequester {
                 Bundle data;
                 String string;
                 Object failure;
-                Message obtain = Message.obtain(message);
-                GetInfoRequester getInfoRequester = GetInfoRequester.this;
-                obtain.getClass();
+                Message messageObtain = Message.obtain(message);
+                GetInfoRequester getInfoRequester = this.this$0;
+                messageObtain.getClass();
                 int i = GetInfoRequester.$r8$clinit;
                 getInfoRequester.getClass();
-                Log.d("SoundCraft.wearable.GetInfoRequester", "handleMessage : " + obtain);
-                Message message2 = obtain.what == 1002 ? obtain : null;
+                Log.d("SoundCraft.wearable.GetInfoRequester", "handleMessage : " + messageObtain);
+                Message message2 = messageObtain.what == 1002 ? messageObtain : null;
                 Function1 function12 = getInfoRequester.onBudsModelReceived;
                 if (message2 == null || (data = message2.getData()) == null || (string = data.getString("result")) == null) {
-                    Log.d("SoundCraft.wearable.GetInfoRequester", "handleMessage : " + obtain + ", received : json=null");
-                    function12.mo779invoke(null);
+                    Log.d("SoundCraft.wearable.GetInfoRequester", "handleMessage : " + messageObtain + ", received : json=null");
+                    function12.mo781invoke(null);
                 } else {
-                    Log.d("SoundCraft.wearable.GetInfoRequester", "handleMessage : " + obtain + ", received : json=" + string);
+                    Log.d("SoundCraft.wearable.GetInfoRequester", "handleMessage : " + messageObtain + ", received : json=" + string);
                     try {
                         int i2 = Result.$r8$clinit;
                         failure = (BudsModel) new Gson().fromJson(string, BudsModel.class);
@@ -75,14 +73,14 @@ public final class GetInfoRequester extends BudsPluginServiceRequester {
                         int i3 = Result.$r8$clinit;
                         failure = new Result.Failure(th);
                     }
-                    if (Result.m3422exceptionOrNullimpl(failure) != null) {
+                    if (Result.m3442exceptionOrNullimpl(failure) != null) {
                         failure = new BudsModel(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 131071, null);
                     }
                     BudsModel budsModel = (BudsModel) failure;
                     Log.d("SoundCraft.wearable.GetInfoRequester", "parseBudsInfo : " + budsModel);
-                    function12.mo779invoke(budsModel);
+                    function12.mo781invoke(budsModel);
                 }
-                obtain.recycle();
+                messageObtain.recycle();
                 return true;
             }
         }));
@@ -98,11 +96,11 @@ public final class GetInfoRequester extends BudsPluginServiceRequester {
         }
         new GetDummyInfoRequester();
         Context context2 = this.context;
-        List asList = Arrays.asList(new Equalizer("Balanced", true), new Equalizer("Bass boost", false), new Equalizer("Smooth", false), new Equalizer("Dynamic", false), new Equalizer("Clear", false), new Equalizer("Treble boost", false), new Equalizer(SystemUIAnalytics.DT_WALLPAPER_SET_FROM_CUSTOM, false));
-        Set mutableSetOf = SetsKt__SetsKt.mutableSetOf(new NoiseControl(context2.getString(R.string.sound_craft_wearable_noise_control_off), false), new NoiseControl(context2.getString(R.string.sound_craft_ambient_sound), false), new NoiseControl(context2.getString(R.string.sound_craft_noise_cancelling), false), new NoiseControl(context2.getString(R.string.sound_craft_adaptive), true));
+        List listAsList = Arrays.asList(new Equalizer("Balanced", true), new Equalizer("Bass boost", false), new Equalizer("Smooth", false), new Equalizer("Dynamic", false), new Equalizer("Clear", false), new Equalizer("Treble boost", false), new Equalizer(SystemUIAnalytics.DT_WALLPAPER_SET_FROM_CUSTOM, false));
+        Set setMutableSetOf = SetsKt__SetsKt.mutableSetOf(new NoiseControl(context2.getString(R.string.sound_craft_wearable_noise_control_off), false), new NoiseControl(context2.getString(R.string.sound_craft_ambient_sound), false), new NoiseControl(context2.getString(R.string.sound_craft_noise_cancelling), false), new NoiseControl(context2.getString(R.string.sound_craft_adaptive), true));
         Boolean bool = Boolean.TRUE;
         Boolean bool2 = Boolean.FALSE;
-        this.onBudsModelReceived.mo779invoke(new BudsModel(bool, asList, mutableSetOf, 4, 3, 4, 1, null, null, null, null, null, bool, bool2, bool, bool2, null, 69504, null));
+        this.onBudsModelReceived.mo781invoke(new BudsModel(bool, listAsList, setMutableSetOf, 4, 3, 4, 1, null, null, null, null, null, bool, bool2, bool, bool2, null, 69504, null));
         return true;
     }
 

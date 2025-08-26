@@ -1,9 +1,16 @@
 package kotlinx.coroutines.channels;
 
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.CancellationException;
 import kotlin.ExceptionsKt__ExceptionsKt;
 import kotlin.Result;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -12,7 +19,9 @@ import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.TypeIntrinsics;
+import kotlin.text.StringsKt___StringsKt;
 import kotlinx.atomicfu.AtomicFU;
 import kotlinx.atomicfu.AtomicLong;
 import kotlinx.atomicfu.AtomicRef;
@@ -22,6 +31,8 @@ import kotlinx.coroutines.CancellableContinuationKt;
 import kotlinx.coroutines.Waiter;
 import kotlinx.coroutines.channels.ChannelResult;
 import kotlinx.coroutines.internal.ConcurrentLinkedListKt;
+import kotlinx.coroutines.internal.ConcurrentLinkedListNode;
+import kotlinx.coroutines.internal.InlineList;
 import kotlinx.coroutines.internal.OnUndeliveredElementKt;
 import kotlinx.coroutines.internal.Segment;
 import kotlinx.coroutines.internal.SegmentOrClosed;
@@ -35,7 +46,6 @@ import kotlinx.coroutines.selects.SelectKt;
 import kotlinx.coroutines.selects.SelectKt$DUMMY_PROCESS_RESULT_FUNCTION$1;
 import kotlinx.coroutines.selects.TrySelectDetailedResult;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BufferedChannel implements Channel {
     public final AtomicRef _closeCause;
@@ -51,7 +61,6 @@ public class BufferedChannel implements Channel {
     public final AtomicRef sendSegment;
     public final AtomicLong sendersAndCloseStatus;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BufferedChannelIterator implements Waiter {
         public CancellableContinuationImpl continuation;
         public Object receiveResult = BufferedChannelKt.NO_RECEIVE_RESULT;
@@ -59,14 +68,14 @@ public class BufferedChannel implements Channel {
         public BufferedChannelIterator() {
         }
 
-        public final Object hasNext(ContinuationImpl continuationImpl) {
-            ChannelSegment channelSegment;
+        public final Object hasNext(ContinuationImpl continuationImpl) throws Throwable {
+            ChannelSegment channelSegmentFindSegmentReceive;
             Boolean bool;
             Object obj = this.receiveResult;
             boolean z = true;
             if (obj == BufferedChannelKt.NO_RECEIVE_RESULT || obj == BufferedChannelKt.CHANNEL_CLOSED) {
                 BufferedChannel bufferedChannel = BufferedChannel.this;
-                ChannelSegment channelSegment2 = (ChannelSegment) bufferedChannel.receiveSegment.value;
+                ChannelSegment channelSegment = (ChannelSegment) bufferedChannel.receiveSegment.value;
                 while (true) {
                     if (bufferedChannel.isClosedForReceive()) {
                         this.receiveResult = BufferedChannelKt.CHANNEL_CLOSED;
@@ -81,41 +90,41 @@ public class BufferedChannel implements Channel {
                         long j = BufferedChannelKt.SEGMENT_SIZE;
                         long j2 = andIncrement / j;
                         int i2 = (int) (andIncrement % j);
-                        if (channelSegment2.id != j2) {
-                            channelSegment = bufferedChannel.findSegmentReceive(j2, channelSegment2);
-                            if (channelSegment == null) {
+                        if (channelSegment.id != j2) {
+                            channelSegmentFindSegmentReceive = bufferedChannel.findSegmentReceive(j2, channelSegment);
+                            if (channelSegmentFindSegmentReceive == null) {
                                 continue;
                             }
                         } else {
-                            channelSegment = channelSegment2;
+                            channelSegmentFindSegmentReceive = channelSegment;
                         }
-                        Object updateCellReceive = bufferedChannel.updateCellReceive(channelSegment, i2, andIncrement, null);
+                        Object objUpdateCellReceive = bufferedChannel.updateCellReceive(channelSegmentFindSegmentReceive, i2, andIncrement, null);
                         Symbol symbol = BufferedChannelKt.SUSPEND;
-                        if (updateCellReceive == symbol) {
+                        if (objUpdateCellReceive == symbol) {
                             throw new IllegalStateException("unreachable");
                         }
                         Symbol symbol2 = BufferedChannelKt.FAILED;
-                        if (updateCellReceive == symbol2) {
+                        if (objUpdateCellReceive == symbol2) {
                             if (andIncrement < bufferedChannel.getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
-                                channelSegment.cleanPrev();
+                                channelSegmentFindSegmentReceive.cleanPrev();
                             }
-                            channelSegment2 = channelSegment;
+                            channelSegment = channelSegmentFindSegmentReceive;
                         } else {
-                            if (updateCellReceive == BufferedChannelKt.SUSPEND_NO_WAITER) {
+                            if (objUpdateCellReceive == BufferedChannelKt.SUSPEND_NO_WAITER) {
                                 BufferedChannel bufferedChannel2 = BufferedChannel.this;
                                 CancellableContinuationImpl orCreateCancellableContinuation = CancellableContinuationKt.getOrCreateCancellableContinuation(IntrinsicsKt__IntrinsicsJvmKt.intercepted(continuationImpl));
                                 try {
                                     this.continuation = orCreateCancellableContinuation;
-                                    Object updateCellReceive2 = bufferedChannel2.updateCellReceive(channelSegment, i2, andIncrement, this);
-                                    if (updateCellReceive2 == symbol) {
-                                        invokeOnCancellation(channelSegment, i2);
+                                    Object objUpdateCellReceive2 = bufferedChannel2.updateCellReceive(channelSegmentFindSegmentReceive, i2, andIncrement, this);
+                                    if (objUpdateCellReceive2 == symbol) {
+                                        invokeOnCancellation(channelSegmentFindSegmentReceive, i2);
                                     } else {
                                         BufferedChannel$$ExternalSyntheticLambda1 bufferedChannel$$ExternalSyntheticLambda1 = null;
-                                        if (updateCellReceive2 == symbol2) {
+                                        if (objUpdateCellReceive2 == symbol2) {
                                             if (andIncrement < bufferedChannel2.getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
-                                                channelSegment.cleanPrev();
+                                                channelSegmentFindSegmentReceive.cleanPrev();
                                             }
-                                            ChannelSegment channelSegment3 = (ChannelSegment) bufferedChannel2.receiveSegment.value;
+                                            ChannelSegment channelSegment2 = (ChannelSegment) bufferedChannel2.receiveSegment.value;
                                             while (true) {
                                                 if (bufferedChannel2.isClosedForReceive()) {
                                                     CancellableContinuationImpl cancellableContinuationImpl = this.continuation;
@@ -135,44 +144,44 @@ public class BufferedChannel implements Channel {
                                                     long j3 = BufferedChannelKt.SEGMENT_SIZE;
                                                     long j4 = andIncrement2 / j3;
                                                     int i5 = (int) (andIncrement2 % j3);
-                                                    if (channelSegment3.id != j4) {
-                                                        ChannelSegment findSegmentReceive = bufferedChannel2.findSegmentReceive(j4, channelSegment3);
-                                                        if (findSegmentReceive != null) {
-                                                            channelSegment3 = findSegmentReceive;
+                                                    if (channelSegment2.id != j4) {
+                                                        ChannelSegment channelSegmentFindSegmentReceive2 = bufferedChannel2.findSegmentReceive(j4, channelSegment2);
+                                                        if (channelSegmentFindSegmentReceive2 != null) {
+                                                            channelSegment2 = channelSegmentFindSegmentReceive2;
                                                         }
                                                     }
-                                                    Object updateCellReceive3 = bufferedChannel2.updateCellReceive(channelSegment3, i5, andIncrement2, this);
-                                                    if (updateCellReceive3 == BufferedChannelKt.SUSPEND) {
-                                                        invokeOnCancellation(channelSegment3, i5);
+                                                    Object objUpdateCellReceive3 = bufferedChannel2.updateCellReceive(channelSegment2, i5, andIncrement2, this);
+                                                    if (objUpdateCellReceive3 == BufferedChannelKt.SUSPEND) {
+                                                        invokeOnCancellation(channelSegment2, i5);
                                                         break;
                                                     }
-                                                    if (updateCellReceive3 == BufferedChannelKt.FAILED) {
+                                                    if (objUpdateCellReceive3 == BufferedChannelKt.FAILED) {
                                                         if (andIncrement2 < bufferedChannel2.getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
-                                                            channelSegment3.cleanPrev();
+                                                            channelSegment2.cleanPrev();
                                                         }
                                                     } else {
-                                                        if (updateCellReceive3 == BufferedChannelKt.SUSPEND_NO_WAITER) {
+                                                        if (objUpdateCellReceive3 == BufferedChannelKt.SUSPEND_NO_WAITER) {
                                                             throw new IllegalStateException("unexpected");
                                                         }
-                                                        channelSegment3.cleanPrev();
-                                                        this.receiveResult = updateCellReceive3;
+                                                        channelSegment2.cleanPrev();
+                                                        this.receiveResult = objUpdateCellReceive3;
                                                         this.continuation = null;
                                                         bool = Boolean.TRUE;
                                                         Function1 function1 = bufferedChannel2.onUndeliveredElement;
                                                         if (function1 != null) {
-                                                            bufferedChannel$$ExternalSyntheticLambda1 = new BufferedChannel$$ExternalSyntheticLambda1(updateCellReceive3, function1);
+                                                            bufferedChannel$$ExternalSyntheticLambda1 = new BufferedChannel$$ExternalSyntheticLambda1(objUpdateCellReceive3, function1);
                                                         }
                                                     }
                                                 }
                                             }
                                         } else {
-                                            channelSegment.cleanPrev();
-                                            this.receiveResult = updateCellReceive2;
+                                            channelSegmentFindSegmentReceive.cleanPrev();
+                                            this.receiveResult = objUpdateCellReceive2;
                                             this.continuation = null;
                                             bool = Boolean.TRUE;
                                             Function1 function12 = bufferedChannel2.onUndeliveredElement;
                                             if (function12 != null) {
-                                                bufferedChannel$$ExternalSyntheticLambda1 = new BufferedChannel$$ExternalSyntheticLambda1(updateCellReceive2, function12);
+                                                bufferedChannel$$ExternalSyntheticLambda1 = new BufferedChannel$$ExternalSyntheticLambda1(objUpdateCellReceive2, function12);
                                             }
                                         }
                                         orCreateCancellableContinuation.resume(bool, bufferedChannel$$ExternalSyntheticLambda1);
@@ -185,8 +194,8 @@ public class BufferedChannel implements Channel {
                                     throw th;
                                 }
                             }
-                            channelSegment.cleanPrev();
-                            this.receiveResult = updateCellReceive;
+                            channelSegmentFindSegmentReceive.cleanPrev();
+                            this.receiveResult = objUpdateCellReceive;
                         }
                     }
                 }
@@ -202,7 +211,7 @@ public class BufferedChannel implements Channel {
             }
         }
 
-        public final Object next() {
+        public final Object next() throws Throwable {
             Object obj = this.receiveResult;
             Symbol symbol = BufferedChannelKt.NO_RECEIVE_RESULT;
             if (obj == symbol) {
@@ -218,7 +227,6 @@ public class BufferedChannel implements Channel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SendBroadcast implements Waiter {
         public final /* synthetic */ CancellableContinuationImpl $$delegate_0;
         public final CancellableContinuation cont;
@@ -245,9 +253,9 @@ public class BufferedChannel implements Channel {
         this.sendersAndCloseStatus = AtomicFU.atomic(0L);
         this.receivers = AtomicFU.atomic(0L);
         ChannelSegment channelSegment = BufferedChannelKt.NULL_SEGMENT;
-        AtomicLong atomic = AtomicFU.atomic(i != 0 ? i != Integer.MAX_VALUE ? i : Long.MAX_VALUE : 0L);
-        this.bufferEnd = atomic;
-        this.completedExpandBuffersAndPauseFlag = AtomicFU.atomic(atomic.value);
+        AtomicLong atomicLongAtomic = AtomicFU.atomic(i != 0 ? i != Integer.MAX_VALUE ? i : Long.MAX_VALUE : 0L);
+        this.bufferEnd = atomicLongAtomic;
+        this.completedExpandBuffersAndPauseFlag = AtomicFU.atomic(atomicLongAtomic.value);
         ChannelSegment channelSegment2 = new ChannelSegment(0L, null, this, 3);
         this.sendSegment = AtomicFU.atomic(channelSegment2);
         this.receiveSegment = AtomicFU.atomic(channelSegment2);
@@ -256,7 +264,7 @@ public class BufferedChannel implements Channel {
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, final Object obj3) {
                 final SelectInstance selectInstance = (SelectInstance) obj;
-                final BufferedChannel bufferedChannel = BufferedChannel.this;
+                final BufferedChannel bufferedChannel = this.f$0;
                 return new Function3() { // from class: kotlinx.coroutines.channels.BufferedChannel$$ExternalSyntheticLambda2
                     @Override // kotlin.jvm.functions.Function3
                     public final Object invoke(Object obj4, Object obj5, Object obj6) {
@@ -275,44 +283,44 @@ public class BufferedChannel implements Channel {
     }
 
     public static final ChannelSegment access$findSegmentSend(BufferedChannel bufferedChannel, long j, ChannelSegment channelSegment) {
-        Object findSegmentInternal;
+        Object objFindSegmentInternal;
         long j2;
         long j3;
         AtomicRef atomicRef = bufferedChannel.sendSegment;
         ChannelSegment channelSegment2 = BufferedChannelKt.NULL_SEGMENT;
         BufferedChannelKt$createSegmentFunction$1 bufferedChannelKt$createSegmentFunction$1 = BufferedChannelKt$createSegmentFunction$1.INSTANCE;
         loop0: while (true) {
-            findSegmentInternal = ConcurrentLinkedListKt.findSegmentInternal(channelSegment, j, bufferedChannelKt$createSegmentFunction$1);
-            if (!SegmentOrClosed.m3466isClosedimpl(findSegmentInternal)) {
-                Segment m3465getSegmentimpl = SegmentOrClosed.m3465getSegmentimpl(findSegmentInternal);
+            objFindSegmentInternal = ConcurrentLinkedListKt.findSegmentInternal(channelSegment, j, bufferedChannelKt$createSegmentFunction$1);
+            if (!SegmentOrClosed.m3486isClosedimpl(objFindSegmentInternal)) {
+                Segment segmentM3485getSegmentimpl = SegmentOrClosed.m3485getSegmentimpl(objFindSegmentInternal);
                 while (true) {
                     Segment segment = (Segment) atomicRef.value;
-                    if (segment.id >= m3465getSegmentimpl.id) {
+                    if (segment.id >= segmentM3485getSegmentimpl.id) {
                         break loop0;
                     }
-                    if (!m3465getSegmentimpl.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                    if (!segmentM3485getSegmentimpl.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                         break;
                     }
-                    if (atomicRef.compareAndSet(segment, m3465getSegmentimpl)) {
+                    if (atomicRef.compareAndSet(segment, segmentM3485getSegmentimpl)) {
                         if (segment.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                             segment.remove();
                         }
-                    } else if (m3465getSegmentimpl.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
-                        m3465getSegmentimpl.remove();
+                    } else if (segmentM3485getSegmentimpl.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                        segmentM3485getSegmentimpl.remove();
                     }
                 }
             } else {
                 break;
             }
         }
-        if (SegmentOrClosed.m3466isClosedimpl(findSegmentInternal)) {
+        if (SegmentOrClosed.m3486isClosedimpl(objFindSegmentInternal)) {
             bufferedChannel.isClosedForSend();
             if (channelSegment.id * BufferedChannelKt.SEGMENT_SIZE < bufferedChannel.receivers.value) {
                 channelSegment.cleanPrev();
                 return null;
             }
         } else {
-            ChannelSegment channelSegment3 = (ChannelSegment) SegmentOrClosed.m3465getSegmentimpl(findSegmentInternal);
+            ChannelSegment channelSegment3 = (ChannelSegment) SegmentOrClosed.m3485getSegmentimpl(objFindSegmentInternal);
             long j4 = channelSegment3.id;
             if (j4 <= j) {
                 return channelSegment3;
@@ -386,121 +394,76 @@ public class BufferedChannel implements Channel {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0035  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0014  */
     /* renamed from: receiveCatching-JP2dKIU$suspendImpl, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.Object m3452receiveCatchingJP2dKIU$suspendImpl(kotlinx.coroutines.channels.BufferedChannel r13, kotlin.coroutines.jvm.internal.ContinuationImpl r14) {
-        /*
-            boolean r0 = r14 instanceof kotlinx.coroutines.channels.BufferedChannel$receiveCatching$1
-            if (r0 == 0) goto L14
-            r0 = r14
-            kotlinx.coroutines.channels.BufferedChannel$receiveCatching$1 r0 = (kotlinx.coroutines.channels.BufferedChannel$receiveCatching$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L14
-            int r1 = r1 - r2
-            r0.label = r1
-        L12:
-            r6 = r0
-            goto L1a
-        L14:
-            kotlinx.coroutines.channels.BufferedChannel$receiveCatching$1 r0 = new kotlinx.coroutines.channels.BufferedChannel$receiveCatching$1
-            r0.<init>(r13, r14)
-            goto L12
-        L1a:
-            java.lang.Object r14 = r6.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r6.label
-            r2 = 1
-            if (r1 == 0) goto L35
-            if (r1 != r2) goto L2d
-            kotlin.ResultKt.throwOnFailure(r14)
-            kotlinx.coroutines.channels.ChannelResult r14 = (kotlinx.coroutines.channels.ChannelResult) r14
-            java.lang.Object r13 = r14.holder
-            return r13
-        L2d:
-            java.lang.IllegalStateException r13 = new java.lang.IllegalStateException
-            java.lang.String r14 = "call to 'resume' before 'invoke' with coroutine"
-            r13.<init>(r14)
-            throw r13
-        L35:
-            kotlin.ResultKt.throwOnFailure(r14)
-            kotlinx.atomicfu.AtomicRef r14 = r13.receiveSegment
-            java.lang.Object r14 = r14.value
-            kotlinx.coroutines.channels.ChannelSegment r14 = (kotlinx.coroutines.channels.ChannelSegment) r14
-        L3e:
-            boolean r1 = r13.isClosedForReceive()
-            if (r1 == 0) goto L52
-            kotlinx.coroutines.channels.ChannelResult$Companion r14 = kotlinx.coroutines.channels.ChannelResult.Companion
-            java.lang.Throwable r13 = r13.getCloseCause()
-            r14.getClass()
-            kotlinx.coroutines.channels.ChannelResult$Closed r13 = kotlinx.coroutines.channels.ChannelResult.Companion.m3460closedJP2dKIU(r13)
-            return r13
-        L52:
-            kotlinx.atomicfu.AtomicLong r1 = r13.receivers
-            long r4 = r1.getAndIncrement()
-            int r1 = kotlinx.coroutines.channels.BufferedChannelKt.SEGMENT_SIZE
-            long r7 = (long) r1
-            long r9 = r4 / r7
-            long r7 = r4 % r7
-            int r3 = (int) r7
-            long r7 = r14.id
-            int r1 = (r7 > r9 ? 1 : (r7 == r9 ? 0 : -1))
-            if (r1 == 0) goto L6f
-            kotlinx.coroutines.channels.ChannelSegment r1 = r13.findSegmentReceive(r9, r14)
-            if (r1 != 0) goto L6d
-            goto L3e
-        L6d:
-            r8 = r1
-            goto L70
-        L6f:
-            r8 = r14
-        L70:
-            r12 = 0
-            r7 = r13
-            r9 = r3
-            r10 = r4
-            java.lang.Object r13 = r7.updateCellReceive(r8, r9, r10, r12)
-            r1 = r7
-            kotlinx.coroutines.internal.Symbol r14 = kotlinx.coroutines.channels.BufferedChannelKt.SUSPEND
-            if (r13 == r14) goto La7
-            kotlinx.coroutines.internal.Symbol r14 = kotlinx.coroutines.channels.BufferedChannelKt.FAILED
-            if (r13 != r14) goto L8f
-            long r13 = r1.getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()
-            int r13 = (r4 > r13 ? 1 : (r4 == r13 ? 0 : -1))
-            if (r13 >= 0) goto L8c
-            r8.cleanPrev()
-        L8c:
-            r13 = r1
-            r14 = r8
-            goto L3e
-        L8f:
-            kotlinx.coroutines.internal.Symbol r14 = kotlinx.coroutines.channels.BufferedChannelKt.SUSPEND_NO_WAITER
-            if (r13 != r14) goto L9e
-            r6.label = r2
-            r2 = r8
-            java.lang.Object r13 = r1.m3454receiveCatchingOnNoWaiterSuspendGKJJFZk(r2, r3, r4, r6)
-            if (r13 != r0) goto L9d
-            return r0
-        L9d:
-            return r13
-        L9e:
-            r8.cleanPrev()
-            kotlinx.coroutines.channels.ChannelResult$Companion r14 = kotlinx.coroutines.channels.ChannelResult.Companion
-            r14.getClass()
-            return r13
-        La7:
-            java.lang.IllegalStateException r13 = new java.lang.IllegalStateException
-            java.lang.String r14 = "unexpected"
-            r13.<init>(r14)
-            throw r13
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.channels.BufferedChannel.m3452receiveCatchingJP2dKIU$suspendImpl(kotlinx.coroutines.channels.BufferedChannel, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static Object m3472receiveCatchingJP2dKIU$suspendImpl(BufferedChannel bufferedChannel, ContinuationImpl continuationImpl) {
+        BufferedChannel$receiveCatching$1 bufferedChannel$receiveCatching$1;
+        ChannelSegment channelSegment;
+        if (continuationImpl instanceof BufferedChannel$receiveCatching$1) {
+            bufferedChannel$receiveCatching$1 = (BufferedChannel$receiveCatching$1) continuationImpl;
+            int i = bufferedChannel$receiveCatching$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                bufferedChannel$receiveCatching$1.label = i - Integer.MIN_VALUE;
+            } else {
+                bufferedChannel$receiveCatching$1 = new BufferedChannel$receiveCatching$1(bufferedChannel, continuationImpl);
+            }
+        }
+        BufferedChannel$receiveCatching$1 bufferedChannel$receiveCatching$12 = bufferedChannel$receiveCatching$1;
+        Object obj = bufferedChannel$receiveCatching$12.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = bufferedChannel$receiveCatching$12.label;
+        if (i2 != 0) {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return ((ChannelResult) obj).holder;
+        }
+        ResultKt.throwOnFailure(obj);
+        ChannelSegment channelSegment2 = (ChannelSegment) bufferedChannel.receiveSegment.value;
+        while (!bufferedChannel.isClosedForReceive()) {
+            long andIncrement = bufferedChannel.receivers.getAndIncrement();
+            long j = BufferedChannelKt.SEGMENT_SIZE;
+            long j2 = andIncrement / j;
+            int i3 = (int) (andIncrement % j);
+            if (channelSegment2.id != j2) {
+                ChannelSegment channelSegmentFindSegmentReceive = bufferedChannel.findSegmentReceive(j2, channelSegment2);
+                if (channelSegmentFindSegmentReceive == null) {
+                    continue;
+                } else {
+                    channelSegment = channelSegmentFindSegmentReceive;
+                }
+            } else {
+                channelSegment = channelSegment2;
+            }
+            BufferedChannel bufferedChannel2 = bufferedChannel;
+            Object objUpdateCellReceive = bufferedChannel2.updateCellReceive(channelSegment, i3, andIncrement, null);
+            if (objUpdateCellReceive == BufferedChannelKt.SUSPEND) {
+                throw new IllegalStateException("unexpected");
+            }
+            if (objUpdateCellReceive != BufferedChannelKt.FAILED) {
+                if (objUpdateCellReceive == BufferedChannelKt.SUSPEND_NO_WAITER) {
+                    bufferedChannel$receiveCatching$12.label = 1;
+                    Object objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk = bufferedChannel2.m3474receiveCatchingOnNoWaiterSuspendGKJJFZk(channelSegment, i3, andIncrement, bufferedChannel$receiveCatching$12);
+                    return objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk == coroutineSingletons ? coroutineSingletons : objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk;
+                }
+                channelSegment.cleanPrev();
+                ChannelResult.Companion.getClass();
+                return objUpdateCellReceive;
+            }
+            if (andIncrement < bufferedChannel2.getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                channelSegment.cleanPrev();
+            }
+            bufferedChannel = bufferedChannel2;
+            channelSegment2 = channelSegment;
+        }
+        ChannelResult.Companion companion = ChannelResult.Companion;
+        Throwable closeCause = bufferedChannel.getCloseCause();
+        companion.getClass();
+        return ChannelResult.Companion.m3480closedJP2dKIU(closeCause);
     }
 
     public final boolean bufferOrRendezvousSend(long j) {
@@ -537,7 +500,7 @@ public class BufferedChannel implements Channel {
                 ChannelSegment channelSegment = BufferedChannelKt.NULL_SEGMENT;
             } while (!atomicLong.compareAndSet(j5, (1 << 60) + (j5 & 1152921504606846975L)));
         }
-        boolean compareAndSet = this._closeCause.compareAndSet(BufferedChannelKt.NO_CLOSE_CAUSE, th);
+        boolean zCompareAndSet = this._closeCause.compareAndSet(BufferedChannelKt.NO_CLOSE_CAUSE, th);
         if (z) {
             AtomicLong atomicLong2 = this.sendersAndCloseStatus;
             do {
@@ -561,38 +524,139 @@ public class BufferedChannel implements Channel {
             } while (!atomicLong3.compareAndSet(j, (j3 << 60) + j2));
         }
         isClosedForSend();
-        if (compareAndSet) {
+        if (zCompareAndSet) {
             AtomicRef atomicRef = this.closeHandler;
             do {
                 obj = atomicRef.value;
             } while (!atomicRef.compareAndSet(obj, obj == null ? BufferedChannelKt.CLOSE_HANDLER_CLOSED : BufferedChannelKt.CLOSE_HANDLER_INVOKED));
             if (obj != null) {
                 TypeIntrinsics.beforeCheckcastToFunctionOfArity(1, obj);
-                ((Function1) obj).mo779invoke(getCloseCause());
+                ((Function1) obj).mo781invoke(getCloseCause());
             }
         }
-        return compareAndSet;
+        return zCompareAndSet;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:50:0x0083, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:37:0x0083, code lost:
     
         r2 = (kotlinx.coroutines.channels.ChannelSegment) ((kotlinx.coroutines.internal.ConcurrentLinkedListNode) r2._prev.value);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final kotlinx.coroutines.channels.ChannelSegment completeClose(long r13) {
-        /*
-            Method dump skipped, instructions count: 282
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.channels.BufferedChannel.completeClose(long):kotlinx.coroutines.channels.ChannelSegment");
+    public final ChannelSegment completeClose(long j) {
+        Object objM3484plusFjFbRPM;
+        long j2;
+        Object obj = this.bufferEndSegment.value;
+        ChannelSegment channelSegment = (ChannelSegment) this.sendSegment.value;
+        if (channelSegment.id > ((ChannelSegment) obj).id) {
+            obj = channelSegment;
+        }
+        ChannelSegment channelSegment2 = (ChannelSegment) this.receiveSegment.value;
+        if (channelSegment2.id > ((ChannelSegment) obj).id) {
+            obj = channelSegment2;
+        }
+        ConcurrentLinkedListNode concurrentLinkedListNode = (ConcurrentLinkedListNode) obj;
+        Symbol symbol = ConcurrentLinkedListKt.CLOSED;
+        while (true) {
+            Object obj2 = concurrentLinkedListNode._next.value;
+            Symbol symbol2 = ConcurrentLinkedListKt.CLOSED;
+            objM3484plusFjFbRPM = null;
+            if (obj2 == symbol2) {
+                break;
+            }
+            ConcurrentLinkedListNode concurrentLinkedListNode2 = (ConcurrentLinkedListNode) obj2;
+            if (concurrentLinkedListNode2 == null) {
+                if (concurrentLinkedListNode._next.compareAndSet(null, symbol2)) {
+                    break;
+                }
+            } else {
+                concurrentLinkedListNode = concurrentLinkedListNode2;
+            }
+        }
+        ChannelSegment channelSegment3 = (ChannelSegment) concurrentLinkedListNode;
+        if (isConflatedDropOldest()) {
+            ChannelSegment channelSegment4 = channelSegment3;
+            loop1: do {
+                int i = BufferedChannelKt.SEGMENT_SIZE - 1;
+                while (true) {
+                    if (-1 >= i) {
+                        break;
+                    }
+                    j2 = (channelSegment4.id * BufferedChannelKt.SEGMENT_SIZE) + i;
+                    if (j2 < this.receivers.value) {
+                        break loop1;
+                    }
+                    while (true) {
+                        Object state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host = channelSegment4.getState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i);
+                        if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host != null && state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host != BufferedChannelKt.IN_BUFFER) {
+                            if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host == BufferedChannelKt.BUFFERED) {
+                                break loop1;
+                            }
+                        } else {
+                            if (channelSegment4.casState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i, state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host, BufferedChannelKt.CHANNEL_CLOSED)) {
+                                channelSegment4.onSlotCleaned();
+                                break;
+                            }
+                        }
+                    }
+                    i--;
+                }
+            } while (channelSegment4 != null);
+            j2 = -1;
+            if (j2 != -1) {
+                dropFirstElementUntilTheSpecifiedCellIsInTheBuffer(j2);
+            }
+        }
+        loop4: for (ChannelSegment channelSegment5 = channelSegment3; channelSegment5 != null; channelSegment5 = (ChannelSegment) ((ConcurrentLinkedListNode) channelSegment5._prev.value)) {
+            for (int i2 = BufferedChannelKt.SEGMENT_SIZE - 1; -1 < i2; i2--) {
+                if ((channelSegment5.id * BufferedChannelKt.SEGMENT_SIZE) + i2 < j) {
+                    break loop4;
+                }
+                while (true) {
+                    Object state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 = channelSegment5.getState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i2);
+                    if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 != null && state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 != BufferedChannelKt.IN_BUFFER) {
+                        if (!(state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 instanceof WaiterEB)) {
+                            if (!(state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 instanceof Waiter)) {
+                                break;
+                            }
+                            if (channelSegment5.casState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i2, state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2, BufferedChannelKt.CHANNEL_CLOSED)) {
+                                objM3484plusFjFbRPM = InlineList.m3484plusFjFbRPM(objM3484plusFjFbRPM, state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2);
+                                channelSegment5.onCancelledRequest(i2, true);
+                                break;
+                            }
+                        } else {
+                            if (channelSegment5.casState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i2, state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2, BufferedChannelKt.CHANNEL_CLOSED)) {
+                                objM3484plusFjFbRPM = InlineList.m3484plusFjFbRPM(objM3484plusFjFbRPM, ((WaiterEB) state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2).waiter);
+                                channelSegment5.onCancelledRequest(i2, true);
+                                break;
+                            }
+                        }
+                    } else {
+                        if (channelSegment5.casState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i2, state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2, BufferedChannelKt.CHANNEL_CLOSED)) {
+                            channelSegment5.onSlotCleaned();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (objM3484plusFjFbRPM != null) {
+            if (!(objM3484plusFjFbRPM instanceof ArrayList)) {
+                resumeWaiterOnClosedChannel((Waiter) objM3484plusFjFbRPM, true);
+                return channelSegment3;
+            }
+            ArrayList arrayList = (ArrayList) objM3484plusFjFbRPM;
+            for (int size = arrayList.size() - 1; -1 < size; size--) {
+                resumeWaiterOnClosedChannel((Waiter) arrayList.get(size), true);
+            }
+        }
+        return channelSegment3;
     }
 
     public final void dropFirstElementUntilTheSpecifiedCellIsInTheBuffer(long j) {
         ChannelSegment channelSegment;
-        UndeliveredElementException callUndeliveredElementCatchingException;
+        UndeliveredElementException undeliveredElementExceptionCallUndeliveredElementCatchingException;
         ChannelSegment channelSegment2 = (ChannelSegment) this.receiveSegment.value;
         while (true) {
             long j2 = this.receivers.value;
@@ -604,20 +668,20 @@ public class BufferedChannel implements Channel {
                 long j4 = j2 / j3;
                 int i = (int) (j2 % j3);
                 if (channelSegment2.id != j4) {
-                    ChannelSegment findSegmentReceive = this.findSegmentReceive(j4, channelSegment2);
-                    if (findSegmentReceive != null) {
-                        channelSegment = findSegmentReceive;
+                    ChannelSegment channelSegmentFindSegmentReceive = this.findSegmentReceive(j4, channelSegment2);
+                    if (channelSegmentFindSegmentReceive != null) {
+                        channelSegment = channelSegmentFindSegmentReceive;
                     }
                 } else {
                     channelSegment = channelSegment2;
                 }
                 BufferedChannel bufferedChannel = this;
-                Object updateCellReceive = bufferedChannel.updateCellReceive(channelSegment, i, j2, null);
-                if (updateCellReceive != BufferedChannelKt.FAILED) {
+                Object objUpdateCellReceive = bufferedChannel.updateCellReceive(channelSegment, i, j2, null);
+                if (objUpdateCellReceive != BufferedChannelKt.FAILED) {
                     channelSegment.cleanPrev();
                     Function1 function1 = bufferedChannel.onUndeliveredElement;
-                    if (function1 != null && (callUndeliveredElementCatchingException = OnUndeliveredElementKt.callUndeliveredElementCatchingException(function1, updateCellReceive, null)) != null) {
-                        throw callUndeliveredElementCatchingException;
+                    if (function1 != null && (undeliveredElementExceptionCallUndeliveredElementCatchingException = OnUndeliveredElementKt.callUndeliveredElementCatchingException(function1, objUpdateCellReceive, null)) != null) {
+                        throw undeliveredElementExceptionCallUndeliveredElementCatchingException;
                     }
                 } else if (j2 < bufferedChannel.getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                     channelSegment.cleanPrev();
@@ -629,8 +693,19 @@ public class BufferedChannel implements Channel {
         }
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:100:0x0185, code lost:
+    
+        incCompletedExpandBufferAttempts$default(r14);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:101:0x0188, code lost:
+    
+        return;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void expandBuffer() {
-        Object findSegmentInternal;
+        Object objFindSegmentInternal;
         if (isRendezvousOrUnlimited()) {
             return;
         }
@@ -649,23 +724,23 @@ public class BufferedChannel implements Channel {
                 AtomicRef atomicRef = this.bufferEndSegment;
                 BufferedChannelKt$createSegmentFunction$1 bufferedChannelKt$createSegmentFunction$1 = BufferedChannelKt$createSegmentFunction$1.INSTANCE;
                 while (true) {
-                    findSegmentInternal = ConcurrentLinkedListKt.findSegmentInternal(channelSegment, j, bufferedChannelKt$createSegmentFunction$1);
-                    if (!SegmentOrClosed.m3466isClosedimpl(findSegmentInternal)) {
-                        Segment m3465getSegmentimpl = SegmentOrClosed.m3465getSegmentimpl(findSegmentInternal);
+                    objFindSegmentInternal = ConcurrentLinkedListKt.findSegmentInternal(channelSegment, j, bufferedChannelKt$createSegmentFunction$1);
+                    if (!SegmentOrClosed.m3486isClosedimpl(objFindSegmentInternal)) {
+                        Segment segmentM3485getSegmentimpl = SegmentOrClosed.m3485getSegmentimpl(objFindSegmentInternal);
                         while (true) {
                             Segment segment = (Segment) atomicRef.value;
-                            if (segment.id >= m3465getSegmentimpl.id) {
+                            if (segment.id >= segmentM3485getSegmentimpl.id) {
                                 break;
                             }
-                            if (!m3465getSegmentimpl.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                            if (!segmentM3485getSegmentimpl.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                                 break;
                             }
-                            if (atomicRef.compareAndSet(segment, m3465getSegmentimpl)) {
+                            if (atomicRef.compareAndSet(segment, segmentM3485getSegmentimpl)) {
                                 if (segment.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                                     segment.remove();
                                 }
-                            } else if (m3465getSegmentimpl.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
-                                m3465getSegmentimpl.remove();
+                            } else if (segmentM3485getSegmentimpl.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                                segmentM3485getSegmentimpl.remove();
                             }
                         }
                     } else {
@@ -673,12 +748,12 @@ public class BufferedChannel implements Channel {
                     }
                 }
                 ChannelSegment channelSegment2 = null;
-                if (SegmentOrClosed.m3466isClosedimpl(findSegmentInternal)) {
+                if (SegmentOrClosed.m3486isClosedimpl(objFindSegmentInternal)) {
                     isClosedForSend();
                     moveSegmentBufferEndToSpecifiedOrLast(j, channelSegment);
                     incCompletedExpandBufferAttempts$default(this);
                 } else {
-                    ChannelSegment channelSegment3 = (ChannelSegment) SegmentOrClosed.m3465getSegmentimpl(findSegmentInternal);
+                    ChannelSegment channelSegment3 = (ChannelSegment) SegmentOrClosed.m3485getSegmentimpl(objFindSegmentInternal);
                     long j2 = channelSegment3.id;
                     if (j2 > j) {
                         long j3 = BufferedChannelKt.SEGMENT_SIZE;
@@ -734,7 +809,6 @@ public class BufferedChannel implements Channel {
                         }
                     }
                 }
-                incCompletedExpandBufferAttempts$default(this);
             } else if (tryResumeSender(state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host, channelSegment, i)) {
                 channelSegment.setState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i, BufferedChannelKt.BUFFERED);
                 break;
@@ -744,47 +818,46 @@ public class BufferedChannel implements Channel {
                 incCompletedExpandBufferAttempts$default(this);
             }
         }
-        incCompletedExpandBufferAttempts$default(this);
     }
 
     public final ChannelSegment findSegmentReceive(long j, ChannelSegment channelSegment) {
-        Object findSegmentInternal;
+        Object objFindSegmentInternal;
         long j2;
         AtomicRef atomicRef = this.receiveSegment;
         ChannelSegment channelSegment2 = BufferedChannelKt.NULL_SEGMENT;
         BufferedChannelKt$createSegmentFunction$1 bufferedChannelKt$createSegmentFunction$1 = BufferedChannelKt$createSegmentFunction$1.INSTANCE;
         loop0: while (true) {
-            findSegmentInternal = ConcurrentLinkedListKt.findSegmentInternal(channelSegment, j, bufferedChannelKt$createSegmentFunction$1);
-            if (!SegmentOrClosed.m3466isClosedimpl(findSegmentInternal)) {
-                Segment m3465getSegmentimpl = SegmentOrClosed.m3465getSegmentimpl(findSegmentInternal);
+            objFindSegmentInternal = ConcurrentLinkedListKt.findSegmentInternal(channelSegment, j, bufferedChannelKt$createSegmentFunction$1);
+            if (!SegmentOrClosed.m3486isClosedimpl(objFindSegmentInternal)) {
+                Segment segmentM3485getSegmentimpl = SegmentOrClosed.m3485getSegmentimpl(objFindSegmentInternal);
                 while (true) {
                     Segment segment = (Segment) atomicRef.value;
-                    if (segment.id >= m3465getSegmentimpl.id) {
+                    if (segment.id >= segmentM3485getSegmentimpl.id) {
                         break loop0;
                     }
-                    if (!m3465getSegmentimpl.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                    if (!segmentM3485getSegmentimpl.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                         break;
                     }
-                    if (atomicRef.compareAndSet(segment, m3465getSegmentimpl)) {
+                    if (atomicRef.compareAndSet(segment, segmentM3485getSegmentimpl)) {
                         if (segment.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                             segment.remove();
                         }
-                    } else if (m3465getSegmentimpl.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
-                        m3465getSegmentimpl.remove();
+                    } else if (segmentM3485getSegmentimpl.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                        segmentM3485getSegmentimpl.remove();
                     }
                 }
             } else {
                 break;
             }
         }
-        if (SegmentOrClosed.m3466isClosedimpl(findSegmentInternal)) {
+        if (SegmentOrClosed.m3486isClosedimpl(objFindSegmentInternal)) {
             isClosedForSend();
             if (channelSegment.id * BufferedChannelKt.SEGMENT_SIZE < getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                 channelSegment.cleanPrev();
             }
             return null;
         }
-        ChannelSegment channelSegment3 = (ChannelSegment) SegmentOrClosed.m3465getSegmentimpl(findSegmentInternal);
+        ChannelSegment channelSegment3 = (ChannelSegment) SegmentOrClosed.m3485getSegmentimpl(objFindSegmentInternal);
         if (!isRendezvousOrUnlimited() && j <= this.bufferEnd.value / BufferedChannelKt.SEGMENT_SIZE) {
             AtomicRef atomicRef2 = this.bufferEndSegment;
             while (true) {
@@ -863,27 +936,136 @@ public class BufferedChannel implements Channel {
                 throw new IllegalStateException(("Another handler is already registered: " + obj).toString());
             }
         } while (!this.closeHandler.compareAndSet(symbol, BufferedChannelKt.CLOSE_HANDLER_INVOKED));
-        produceKt$awaitClose$4$1.mo779invoke(getCloseCause());
+        produceKt$awaitClose$4$1.mo781invoke(getCloseCause());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:129:0x0178, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:116:0x0178, code lost:
     
         r11.receivers.compareAndSet(r13, 1 + r13);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:90:0x00b8, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:57:0x00b8, code lost:
     
         r12 = (kotlinx.coroutines.channels.ChannelSegment) ((kotlinx.coroutines.internal.ConcurrentLinkedListNode) r12._prev.value);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean isClosed(long r12, boolean r14) {
-        /*
-            Method dump skipped, instructions count: 388
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.channels.BufferedChannel.isClosed(long, boolean):boolean");
+    public final boolean isClosed(long j, boolean z) {
+        int i = (int) (j >> 60);
+        if (i != 0 && i != 1) {
+            if (i == 2) {
+                completeClose(j & 1152921504606846975L);
+                if (z) {
+                    while (true) {
+                        ChannelSegment channelSegmentFindSegmentReceive = (ChannelSegment) this.receiveSegment.value;
+                        long j2 = this.receivers.value;
+                        if (getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host() <= j2) {
+                            break;
+                        }
+                        long j3 = BufferedChannelKt.SEGMENT_SIZE;
+                        long j4 = j2 / j3;
+                        if (channelSegmentFindSegmentReceive.id != j4 && (channelSegmentFindSegmentReceive = findSegmentReceive(j4, channelSegmentFindSegmentReceive)) == null) {
+                            if (((ChannelSegment) this.receiveSegment.value).id < j4) {
+                                break;
+                            }
+                        } else {
+                            channelSegmentFindSegmentReceive.cleanPrev();
+                            int i2 = (int) (j2 % j3);
+                            while (true) {
+                                Object state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host = channelSegmentFindSegmentReceive.getState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i2);
+                                if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host != null && state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host != BufferedChannelKt.IN_BUFFER) {
+                                    if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host == BufferedChannelKt.BUFFERED || (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host != BufferedChannelKt.INTERRUPTED_SEND && state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host != BufferedChannelKt.CHANNEL_CLOSED && state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host != BufferedChannelKt.DONE_RCV && state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host != BufferedChannelKt.POISONED && (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host == BufferedChannelKt.RESUMING_BY_EB || (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host != BufferedChannelKt.RESUMING_BY_RCV && j2 == this.receivers.value)))) {
+                                        break;
+                                    }
+                                } else {
+                                    if (channelSegmentFindSegmentReceive.casState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i2, state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host, BufferedChannelKt.POISONED)) {
+                                        expandBuffer();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (i != 3) {
+                    throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "unexpected close status: ").toString());
+                }
+                ChannelSegment channelSegmentCompleteClose = completeClose(j & 1152921504606846975L);
+                Function1 function1 = this.onUndeliveredElement;
+                UndeliveredElementException undeliveredElementExceptionCallUndeliveredElementCatchingException = null;
+                Object objM3484plusFjFbRPM = null;
+                loop0: do {
+                    int i3 = BufferedChannelKt.SEGMENT_SIZE - 1;
+                    while (true) {
+                        if (-1 >= i3) {
+                            break;
+                        }
+                        long j5 = (channelSegmentCompleteClose.id * BufferedChannelKt.SEGMENT_SIZE) + i3;
+                        while (true) {
+                            Object state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 = channelSegmentCompleteClose.getState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i3);
+                            if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 == BufferedChannelKt.DONE_RCV) {
+                                break loop0;
+                            }
+                            if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 == BufferedChannelKt.BUFFERED) {
+                                if (j5 < this.receivers.value) {
+                                    break loop0;
+                                }
+                                if (channelSegmentCompleteClose.casState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i3, state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2, BufferedChannelKt.CHANNEL_CLOSED)) {
+                                    if (function1 != null) {
+                                        undeliveredElementExceptionCallUndeliveredElementCatchingException = OnUndeliveredElementKt.callUndeliveredElementCatchingException(function1, channelSegmentCompleteClose.getElement$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i3), undeliveredElementExceptionCallUndeliveredElementCatchingException);
+                                    }
+                                    channelSegmentCompleteClose.setElementLazy(i3, null);
+                                    channelSegmentCompleteClose.onSlotCleaned();
+                                }
+                            } else if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 == BufferedChannelKt.IN_BUFFER || state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 == null) {
+                                if (channelSegmentCompleteClose.casState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i3, state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2, BufferedChannelKt.CHANNEL_CLOSED)) {
+                                    channelSegmentCompleteClose.onSlotCleaned();
+                                    break;
+                                }
+                            } else if (!(state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 instanceof Waiter) && !(state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 instanceof WaiterEB)) {
+                                Symbol symbol = BufferedChannelKt.RESUMING_BY_EB;
+                                if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 == symbol || state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 == BufferedChannelKt.RESUMING_BY_RCV) {
+                                    break loop0;
+                                }
+                                if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 != symbol) {
+                                    break;
+                                }
+                            } else {
+                                if (j5 < this.receivers.value) {
+                                    break loop0;
+                                }
+                                Waiter waiter = state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2 instanceof WaiterEB ? ((WaiterEB) state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2).waiter : (Waiter) state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2;
+                                if (channelSegmentCompleteClose.casState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i3, state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host2, BufferedChannelKt.CHANNEL_CLOSED)) {
+                                    if (function1 != null) {
+                                        undeliveredElementExceptionCallUndeliveredElementCatchingException = OnUndeliveredElementKt.callUndeliveredElementCatchingException(function1, channelSegmentCompleteClose.getElement$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i3), undeliveredElementExceptionCallUndeliveredElementCatchingException);
+                                    }
+                                    objM3484plusFjFbRPM = InlineList.m3484plusFjFbRPM(objM3484plusFjFbRPM, waiter);
+                                    channelSegmentCompleteClose.setElementLazy(i3, null);
+                                    channelSegmentCompleteClose.onSlotCleaned();
+                                }
+                            }
+                        }
+                        i3--;
+                    }
+                } while (channelSegmentCompleteClose != null);
+                if (objM3484plusFjFbRPM != null) {
+                    if (objM3484plusFjFbRPM instanceof ArrayList) {
+                        ArrayList arrayList = (ArrayList) objM3484plusFjFbRPM;
+                        for (int size = arrayList.size() - 1; -1 < size; size--) {
+                            resumeWaiterOnClosedChannel((Waiter) arrayList.get(size), false);
+                        }
+                    } else {
+                        resumeWaiterOnClosedChannel((Waiter) objM3484plusFjFbRPM, false);
+                    }
+                }
+                if (undeliveredElementExceptionCallUndeliveredElementCatchingException != null) {
+                    throw undeliveredElementExceptionCallUndeliveredElementCatchingException;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public final boolean isClosedForReceive() {
@@ -909,89 +1091,66 @@ public class BufferedChannel implements Channel {
         return new BufferedChannelIterator();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x0011, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:38:0x0011, code lost:
     
         continue;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void moveSegmentBufferEndToSpecifiedOrLast(long r5, kotlinx.coroutines.channels.ChannelSegment r7) {
-        /*
-            r4 = this;
-        L0:
-            long r0 = r7.id
-            int r0 = (r0 > r5 ? 1 : (r0 == r5 ? 0 : -1))
-            if (r0 >= 0) goto L11
-            kotlinx.coroutines.internal.ConcurrentLinkedListNode r0 = r7.getNext()
-            kotlinx.coroutines.channels.ChannelSegment r0 = (kotlinx.coroutines.channels.ChannelSegment) r0
-            if (r0 != 0) goto Lf
-            goto L11
-        Lf:
-            r7 = r0
-            goto L0
-        L11:
-            boolean r5 = r7.isRemoved()
-            if (r5 == 0) goto L22
-            kotlinx.coroutines.internal.ConcurrentLinkedListNode r5 = r7.getNext()
-            kotlinx.coroutines.channels.ChannelSegment r5 = (kotlinx.coroutines.channels.ChannelSegment) r5
-            if (r5 != 0) goto L20
-            goto L22
-        L20:
-            r7 = r5
-            goto L11
-        L22:
-            kotlinx.atomicfu.AtomicRef r5 = r4.bufferEndSegment
-        L24:
-            java.lang.Object r6 = r5.value
-            kotlinx.coroutines.internal.Segment r6 = (kotlinx.coroutines.internal.Segment) r6
-            long r0 = r6.id
-            long r2 = r7.id
-            int r0 = (r0 > r2 ? 1 : (r0 == r2 ? 0 : -1))
-            if (r0 < 0) goto L31
-            goto L47
-        L31:
-            boolean r0 = r7.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()
-            if (r0 != 0) goto L38
-            goto L11
-        L38:
-            boolean r0 = r5.compareAndSet(r6, r7)
-            if (r0 == 0) goto L48
-            boolean r4 = r6.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()
-            if (r4 == 0) goto L47
-            r6.remove()
-        L47:
-            return
-        L48:
-            boolean r6 = r7.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()
-            if (r6 == 0) goto L24
-            r7.remove()
-            goto L24
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.channels.BufferedChannel.moveSegmentBufferEndToSpecifiedOrLast(long, kotlinx.coroutines.channels.ChannelSegment):void");
+    public final void moveSegmentBufferEndToSpecifiedOrLast(long j, ChannelSegment channelSegment) {
+        ChannelSegment channelSegment2;
+        ChannelSegment channelSegment3;
+        while (channelSegment.id < j && (channelSegment3 = (ChannelSegment) channelSegment.getNext()) != null) {
+            channelSegment = channelSegment3;
+        }
+        while (true) {
+            if (!channelSegment.isRemoved() || (channelSegment2 = (ChannelSegment) channelSegment.getNext()) == null) {
+                AtomicRef atomicRef = this.bufferEndSegment;
+                while (true) {
+                    Segment segment = (Segment) atomicRef.value;
+                    if (segment.id >= channelSegment.id) {
+                        return;
+                    }
+                    if (!channelSegment.tryIncPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                        break;
+                    }
+                    if (atomicRef.compareAndSet(segment, channelSegment)) {
+                        if (segment.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                            segment.remove();
+                            return;
+                        }
+                        return;
+                    } else if (channelSegment.decPointers$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                        channelSegment.remove();
+                    }
+                }
+            } else {
+                channelSegment = channelSegment2;
+            }
+        }
     }
 
     public final Object onClosedSend(Object obj, Continuation continuation) {
-        UndeliveredElementException callUndeliveredElementCatchingException;
+        UndeliveredElementException undeliveredElementExceptionCallUndeliveredElementCatchingException;
         CancellableContinuationImpl cancellableContinuationImpl = new CancellableContinuationImpl(IntrinsicsKt__IntrinsicsJvmKt.intercepted(continuation), 1);
         cancellableContinuationImpl.initCancellability();
         Function1 function1 = this.onUndeliveredElement;
-        if (function1 == null || (callUndeliveredElementCatchingException = OnUndeliveredElementKt.callUndeliveredElementCatchingException(function1, obj, null)) == null) {
+        if (function1 == null || (undeliveredElementExceptionCallUndeliveredElementCatchingException = OnUndeliveredElementKt.callUndeliveredElementCatchingException(function1, obj, null)) == null) {
             Throwable sendException = getSendException();
             int i = Result.$r8$clinit;
             cancellableContinuationImpl.resumeWith(new Result.Failure(sendException));
         } else {
-            ExceptionsKt__ExceptionsKt.addSuppressed(callUndeliveredElementCatchingException, getSendException());
+            ExceptionsKt__ExceptionsKt.addSuppressed(undeliveredElementExceptionCallUndeliveredElementCatchingException, getSendException());
             int i2 = Result.$r8$clinit;
-            cancellableContinuationImpl.resumeWith(new Result.Failure(callUndeliveredElementCatchingException));
+            cancellableContinuationImpl.resumeWith(new Result.Failure(undeliveredElementExceptionCallUndeliveredElementCatchingException));
         }
         Object result = cancellableContinuationImpl.getResult();
         return result == CoroutineSingletons.COROUTINE_SUSPENDED ? result : Unit.INSTANCE;
     }
 
     @Override // kotlinx.coroutines.channels.ReceiveChannel
-    public final Object receive(Continuation continuation) {
+    public final Object receive(Continuation continuation) throws Throwable {
         ChannelSegment channelSegment;
         ChannelSegment channelSegment2;
         CancellableContinuationImpl cancellableContinuationImpl;
@@ -1003,41 +1162,41 @@ public class BufferedChannel implements Channel {
             long j2 = andIncrement / j;
             int i = (int) (andIncrement % j);
             if (channelSegment3.id != j2) {
-                ChannelSegment findSegmentReceive = this.findSegmentReceive(j2, channelSegment3);
-                if (findSegmentReceive == null) {
+                ChannelSegment channelSegmentFindSegmentReceive = this.findSegmentReceive(j2, channelSegment3);
+                if (channelSegmentFindSegmentReceive == null) {
                     continue;
                 } else {
-                    channelSegment = findSegmentReceive;
+                    channelSegment = channelSegmentFindSegmentReceive;
                 }
             } else {
                 channelSegment = channelSegment3;
             }
             BufferedChannel bufferedChannel2 = this;
-            Object updateCellReceive = bufferedChannel2.updateCellReceive(channelSegment, i, andIncrement, null);
+            Object objUpdateCellReceive = bufferedChannel2.updateCellReceive(channelSegment, i, andIncrement, null);
             Symbol symbol = BufferedChannelKt.SUSPEND;
-            if (updateCellReceive == symbol) {
+            if (objUpdateCellReceive == symbol) {
                 throw new IllegalStateException("unexpected");
             }
             Symbol symbol2 = BufferedChannelKt.FAILED;
-            if (updateCellReceive == symbol2) {
+            if (objUpdateCellReceive == symbol2) {
                 if (andIncrement < bufferedChannel2.getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                     channelSegment.cleanPrev();
                 }
                 this = bufferedChannel2;
                 channelSegment3 = channelSegment;
             } else {
-                if (updateCellReceive != BufferedChannelKt.SUSPEND_NO_WAITER) {
+                if (objUpdateCellReceive != BufferedChannelKt.SUSPEND_NO_WAITER) {
                     channelSegment.cleanPrev();
-                    return updateCellReceive;
+                    return objUpdateCellReceive;
                 }
                 CancellableContinuationImpl orCreateCancellableContinuation = CancellableContinuationKt.getOrCreateCancellableContinuation(IntrinsicsKt__IntrinsicsJvmKt.intercepted(continuation));
                 try {
-                    Object updateCellReceive2 = bufferedChannel2.updateCellReceive(channelSegment, i, andIncrement, orCreateCancellableContinuation);
-                    if (updateCellReceive2 == symbol) {
+                    Object objUpdateCellReceive2 = bufferedChannel2.updateCellReceive(channelSegment, i, andIncrement, orCreateCancellableContinuation);
+                    if (objUpdateCellReceive2 == symbol) {
                         orCreateCancellableContinuation.invokeOnCancellation(channelSegment, i);
                     } else {
                         BufferedChannel$bindCancellationFun$2 bufferedChannel$bindCancellationFun$2 = null;
-                        if (updateCellReceive2 == symbol2) {
+                        if (objUpdateCellReceive2 == symbol2) {
                             if (andIncrement < bufferedChannel2.getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                                 channelSegment.cleanPrev();
                             }
@@ -1054,30 +1213,30 @@ public class BufferedChannel implements Channel {
                                 int i3 = (int) (andIncrement2 % j3);
                                 try {
                                     if (channelSegment4.id != j4) {
-                                        ChannelSegment findSegmentReceive2 = bufferedChannel2.findSegmentReceive(j4, channelSegment4);
-                                        if (findSegmentReceive2 == null) {
+                                        ChannelSegment channelSegmentFindSegmentReceive2 = bufferedChannel2.findSegmentReceive(j4, channelSegment4);
+                                        if (channelSegmentFindSegmentReceive2 == null) {
                                             continue;
                                         } else {
-                                            channelSegment2 = findSegmentReceive2;
+                                            channelSegment2 = channelSegmentFindSegmentReceive2;
                                         }
                                     } else {
                                         channelSegment2 = channelSegment4;
                                     }
-                                    updateCellReceive2 = bufferedChannel.updateCellReceive(channelSegment2, i3, andIncrement2, cancellableContinuationImpl);
+                                    objUpdateCellReceive2 = bufferedChannel.updateCellReceive(channelSegment2, i3, andIncrement2, cancellableContinuationImpl);
                                     bufferedChannel2 = bufferedChannel;
                                     ChannelSegment channelSegment5 = channelSegment2;
                                     orCreateCancellableContinuation = cancellableContinuationImpl;
-                                    if (updateCellReceive2 == BufferedChannelKt.SUSPEND) {
+                                    if (objUpdateCellReceive2 == BufferedChannelKt.SUSPEND) {
                                         orCreateCancellableContinuation.invokeOnCancellation(channelSegment5, i3);
                                         break;
                                     }
-                                    if (updateCellReceive2 == BufferedChannelKt.FAILED) {
+                                    if (objUpdateCellReceive2 == BufferedChannelKt.FAILED) {
                                         if (andIncrement2 < bufferedChannel2.getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
                                             channelSegment5.cleanPrev();
                                         }
                                         channelSegment4 = channelSegment5;
                                     } else {
-                                        if (updateCellReceive2 == BufferedChannelKt.SUSPEND_NO_WAITER) {
+                                        if (objUpdateCellReceive2 == BufferedChannelKt.SUSPEND_NO_WAITER) {
                                             throw new IllegalStateException("unexpected");
                                         }
                                         channelSegment5.cleanPrev();
@@ -1101,7 +1260,7 @@ public class BufferedChannel implements Channel {
                                 bufferedChannel$bindCancellationFun$2 = new BufferedChannel$bindCancellationFun$2(bufferedChannel2);
                             }
                         }
-                        orCreateCancellableContinuation.resume(updateCellReceive2, bufferedChannel$bindCancellationFun$2);
+                        orCreateCancellableContinuation.resume(objUpdateCellReceive2, bufferedChannel$bindCancellationFun$2);
                     }
                     Object result = orCreateCancellableContinuation.getResult();
                     CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -1118,23 +1277,121 @@ public class BufferedChannel implements Channel {
 
     @Override // kotlinx.coroutines.channels.ReceiveChannel
     /* renamed from: receiveCatching-JP2dKIU, reason: not valid java name */
-    public final Object mo3453receiveCatchingJP2dKIU(Continuation continuation) {
-        return m3452receiveCatchingJP2dKIU$suspendImpl(this, (ContinuationImpl) continuation);
+    public final Object mo3473receiveCatchingJP2dKIU(Continuation continuation) {
+        return m3472receiveCatchingJP2dKIU$suspendImpl(this, (ContinuationImpl) continuation);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* renamed from: receiveCatchingOnNoWaiterSuspend-GKJJFZk, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object m3454receiveCatchingOnNoWaiterSuspendGKJJFZk(kotlinx.coroutines.channels.ChannelSegment r9, int r10, long r11, kotlin.coroutines.jvm.internal.ContinuationImpl r13) {
-        /*
-            Method dump skipped, instructions count: 295
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.channels.BufferedChannel.m3454receiveCatchingOnNoWaiterSuspendGKJJFZk(kotlinx.coroutines.channels.ChannelSegment, int, long, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object m3474receiveCatchingOnNoWaiterSuspendGKJJFZk(ChannelSegment channelSegment, int i, long j, ContinuationImpl continuationImpl) {
+        BufferedChannel$receiveCatchingOnNoWaiterSuspend$1 bufferedChannel$receiveCatchingOnNoWaiterSuspend$1;
+        ChannelResult channelResultM3477boximpl;
+        ChannelSegment channelSegment2;
+        if (continuationImpl instanceof BufferedChannel$receiveCatchingOnNoWaiterSuspend$1) {
+            bufferedChannel$receiveCatchingOnNoWaiterSuspend$1 = (BufferedChannel$receiveCatchingOnNoWaiterSuspend$1) continuationImpl;
+            int i2 = bufferedChannel$receiveCatchingOnNoWaiterSuspend$1.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                bufferedChannel$receiveCatchingOnNoWaiterSuspend$1.label = i2 - Integer.MIN_VALUE;
+            } else {
+                bufferedChannel$receiveCatchingOnNoWaiterSuspend$1 = new BufferedChannel$receiveCatchingOnNoWaiterSuspend$1(this, continuationImpl);
+            }
+        }
+        Object result = bufferedChannel$receiveCatchingOnNoWaiterSuspend$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = bufferedChannel$receiveCatchingOnNoWaiterSuspend$1.label;
+        if (i3 == 0) {
+            ResultKt.throwOnFailure(result);
+            bufferedChannel$receiveCatchingOnNoWaiterSuspend$1.L$0 = this;
+            bufferedChannel$receiveCatchingOnNoWaiterSuspend$1.L$1 = channelSegment;
+            bufferedChannel$receiveCatchingOnNoWaiterSuspend$1.I$0 = i;
+            bufferedChannel$receiveCatchingOnNoWaiterSuspend$1.J$0 = j;
+            bufferedChannel$receiveCatchingOnNoWaiterSuspend$1.label = 1;
+            CancellableContinuationImpl orCreateCancellableContinuation = CancellableContinuationKt.getOrCreateCancellableContinuation(IntrinsicsKt__IntrinsicsJvmKt.intercepted(bufferedChannel$receiveCatchingOnNoWaiterSuspend$1));
+            try {
+                ReceiveCatching receiveCatching = new ReceiveCatching(orCreateCancellableContinuation);
+                Object objUpdateCellReceive = updateCellReceive(channelSegment, i, j, receiveCatching);
+                if (objUpdateCellReceive == BufferedChannelKt.SUSPEND) {
+                    receiveCatching.invokeOnCancellation(channelSegment, i);
+                } else {
+                    BufferedChannel$bindCancellationFunResult$1 bufferedChannel$bindCancellationFunResult$1 = null;
+                    if (objUpdateCellReceive == BufferedChannelKt.FAILED) {
+                        if (j < getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                            channelSegment.cleanPrev();
+                        }
+                        ChannelSegment channelSegment3 = (ChannelSegment) this.receiveSegment.value;
+                        while (true) {
+                            if (isClosedForReceive()) {
+                                int i4 = Result.$r8$clinit;
+                                ChannelResult.Companion companion = ChannelResult.Companion;
+                                Throwable closeCause = getCloseCause();
+                                companion.getClass();
+                                orCreateCancellableContinuation.resumeWith(ChannelResult.m3477boximpl(ChannelResult.Companion.m3480closedJP2dKIU(closeCause)));
+                                break;
+                            }
+                            long andIncrement = this.receivers.getAndIncrement();
+                            long j2 = BufferedChannelKt.SEGMENT_SIZE;
+                            long j3 = andIncrement / j2;
+                            int i5 = (int) (andIncrement % j2);
+                            if (channelSegment3.id != j3) {
+                                ChannelSegment channelSegmentFindSegmentReceive = findSegmentReceive(j3, channelSegment3);
+                                if (channelSegmentFindSegmentReceive != null) {
+                                    channelSegment2 = channelSegmentFindSegmentReceive;
+                                }
+                            } else {
+                                channelSegment2 = channelSegment3;
+                            }
+                            Object objUpdateCellReceive2 = updateCellReceive(channelSegment2, i5, andIncrement, receiveCatching);
+                            ChannelSegment channelSegment4 = channelSegment2;
+                            if (objUpdateCellReceive2 == BufferedChannelKt.SUSPEND) {
+                                receiveCatching.invokeOnCancellation(channelSegment4, i5);
+                                break;
+                            }
+                            if (objUpdateCellReceive2 == BufferedChannelKt.FAILED) {
+                                if (andIncrement < getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
+                                    channelSegment4.cleanPrev();
+                                }
+                                channelSegment3 = channelSegment4;
+                            } else {
+                                if (objUpdateCellReceive2 == BufferedChannelKt.SUSPEND_NO_WAITER) {
+                                    throw new IllegalStateException("unexpected");
+                                }
+                                channelSegment4.cleanPrev();
+                                ChannelResult.Companion.getClass();
+                                channelResultM3477boximpl = ChannelResult.m3477boximpl(objUpdateCellReceive2);
+                                if (this.onUndeliveredElement != null) {
+                                    bufferedChannel$bindCancellationFunResult$1 = new BufferedChannel$bindCancellationFunResult$1(this);
+                                }
+                            }
+                        }
+                    } else {
+                        channelSegment.cleanPrev();
+                        ChannelResult.Companion.getClass();
+                        channelResultM3477boximpl = ChannelResult.m3477boximpl(objUpdateCellReceive);
+                        if (this.onUndeliveredElement != null) {
+                            bufferedChannel$bindCancellationFunResult$1 = new BufferedChannel$bindCancellationFunResult$1(this);
+                        }
+                    }
+                    orCreateCancellableContinuation.resume(channelResultM3477boximpl, bufferedChannel$bindCancellationFunResult$1);
+                }
+                result = orCreateCancellableContinuation.getResult();
+                CoroutineSingletons coroutineSingletons2 = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (result == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } catch (Throwable th) {
+                orCreateCancellableContinuation.releaseClaimedReusableContinuation$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host();
+                throw th;
+            }
+        } else {
+            if (i3 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(result);
+        }
+        return ((ChannelResult) result).holder;
     }
 
     public final void resumeWaiterOnClosedChannel(Waiter waiter, boolean z) {
@@ -1156,7 +1413,7 @@ public class BufferedChannel implements Channel {
             ChannelResult.Companion companion = ChannelResult.Companion;
             Throwable closeCause = getCloseCause();
             companion.getClass();
-            cancellableContinuationImpl.resumeWith(ChannelResult.m3457boximpl(ChannelResult.Companion.m3460closedJP2dKIU(closeCause)));
+            cancellableContinuationImpl.resumeWith(ChannelResult.m3477boximpl(ChannelResult.Companion.m3480closedJP2dKIU(closeCause)));
             return;
         }
         if (!(waiter instanceof BufferedChannelIterator)) {
@@ -1182,103 +1439,327 @@ public class BufferedChannel implements Channel {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0134  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0138 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:111:0x00ff A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00ca  */
+    /* JADX WARN: Removed duplicated region for block: B:82:0x0134  */
+    /* JADX WARN: Removed duplicated region for block: B:84:0x0138 A[RETURN] */
     @Override // kotlinx.coroutines.channels.SendChannel
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public java.lang.Object send(java.lang.Object r21, kotlin.coroutines.Continuation r22) {
-        /*
-            Method dump skipped, instructions count: 339
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.channels.BufferedChannel.send(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+    public Object send(Object obj, Continuation continuation) {
+        Unit unit;
+        Object result;
+        CoroutineSingletons coroutineSingletons;
+        int iAccess$updateCellSend;
+        ChannelSegment channelSegment = (ChannelSegment) this.sendSegment.value;
+        while (true) {
+            long andIncrement = this.sendersAndCloseStatus.getAndIncrement();
+            long j = andIncrement & 1152921504606846975L;
+            boolean z = false;
+            boolean zIsClosed = isClosed(andIncrement, false);
+            int i = BufferedChannelKt.SEGMENT_SIZE;
+            long j2 = i;
+            long j3 = j / j2;
+            int i2 = (int) (j % j2);
+            if (channelSegment.id != j3) {
+                ChannelSegment channelSegmentAccess$findSegmentSend = access$findSegmentSend(this, j3, channelSegment);
+                if (channelSegmentAccess$findSegmentSend != null) {
+                    channelSegment = channelSegmentAccess$findSegmentSend;
+                } else if (zIsClosed) {
+                    Object objOnClosedSend = onClosedSend(obj, continuation);
+                    if (objOnClosedSend == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                        return objOnClosedSend;
+                    }
+                }
+            }
+            int iAccess$updateCellSend2 = access$updateCellSend(this, channelSegment, i2, obj, j, null, zIsClosed);
+            if (iAccess$updateCellSend2 == 0) {
+                channelSegment.cleanPrev();
+                break;
+            }
+            if (iAccess$updateCellSend2 == 1) {
+                break;
+            }
+            if (iAccess$updateCellSend2 != 2) {
+                if (iAccess$updateCellSend2 == 3) {
+                    CancellableContinuationImpl orCreateCancellableContinuation = CancellableContinuationKt.getOrCreateCancellableContinuation(IntrinsicsKt__IntrinsicsJvmKt.intercepted(continuation));
+                    try {
+                        int iAccess$updateCellSend3 = access$updateCellSend(this, channelSegment, i2, obj, j, orCreateCancellableContinuation, false);
+                        if (iAccess$updateCellSend3 == 0) {
+                            channelSegment.cleanPrev();
+                            int i3 = Result.$r8$clinit;
+                            unit = Unit.INSTANCE;
+                        } else if (iAccess$updateCellSend3 != 1) {
+                            if (iAccess$updateCellSend3 != 2) {
+                                if (iAccess$updateCellSend3 != 4) {
+                                    if (iAccess$updateCellSend3 != 5) {
+                                        throw new IllegalStateException("unexpected");
+                                    }
+                                    channelSegment.cleanPrev();
+                                    ChannelSegment channelSegment2 = (ChannelSegment) this.sendSegment.value;
+                                    while (true) {
+                                        long andIncrement2 = this.sendersAndCloseStatus.getAndIncrement();
+                                        long j4 = andIncrement2 & 1152921504606846975L;
+                                        boolean zIsClosed2 = isClosed(andIncrement2, z);
+                                        int i4 = BufferedChannelKt.SEGMENT_SIZE;
+                                        long j5 = i4;
+                                        long j6 = j4 / j5;
+                                        int i5 = (int) (j4 % j5);
+                                        if (channelSegment2.id == j6) {
+                                            iAccess$updateCellSend = access$updateCellSend(this, channelSegment2, i5, obj, j4, orCreateCancellableContinuation, zIsClosed2);
+                                            if (iAccess$updateCellSend != 0) {
+                                                channelSegment2.cleanPrev();
+                                                int i6 = Result.$r8$clinit;
+                                                unit = Unit.INSTANCE;
+                                                break;
+                                            }
+                                            if (iAccess$updateCellSend == 1) {
+                                                int i7 = Result.$r8$clinit;
+                                                unit = Unit.INSTANCE;
+                                                break;
+                                            }
+                                            if (iAccess$updateCellSend != 2) {
+                                                if (iAccess$updateCellSend == 3) {
+                                                    throw new IllegalStateException("unexpected");
+                                                }
+                                                if (iAccess$updateCellSend != 4) {
+                                                    if (iAccess$updateCellSend == 5) {
+                                                        channelSegment2.cleanPrev();
+                                                    }
+                                                    z = false;
+                                                } else if (j4 < this.receivers.value) {
+                                                    channelSegment2.cleanPrev();
+                                                }
+                                            } else if (zIsClosed2) {
+                                                channelSegment2.onSlotCleaned();
+                                            } else {
+                                                orCreateCancellableContinuation.invokeOnCancellation(channelSegment2, i5 + i4);
+                                            }
+                                        } else {
+                                            ChannelSegment channelSegmentAccess$findSegmentSend2 = access$findSegmentSend(this, j6, channelSegment2);
+                                            if (channelSegmentAccess$findSegmentSend2 != null) {
+                                                channelSegment2 = channelSegmentAccess$findSegmentSend2;
+                                                iAccess$updateCellSend = access$updateCellSend(this, channelSegment2, i5, obj, j4, orCreateCancellableContinuation, zIsClosed2);
+                                                if (iAccess$updateCellSend != 0) {
+                                                }
+                                            } else {
+                                                if (zIsClosed2) {
+                                                    break;
+                                                }
+                                                z = false;
+                                            }
+                                        }
+                                    }
+                                } else if (j < this.receivers.value) {
+                                    channelSegment.cleanPrev();
+                                }
+                                access$onClosedSendOnNoWaiterSuspend(this, obj, orCreateCancellableContinuation);
+                            } else {
+                                orCreateCancellableContinuation.invokeOnCancellation(channelSegment, i2 + i);
+                            }
+                            result = orCreateCancellableContinuation.getResult();
+                            coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            if (result != coroutineSingletons) {
+                                result = Unit.INSTANCE;
+                            }
+                            if (result == coroutineSingletons) {
+                                return result;
+                            }
+                        } else {
+                            int i8 = Result.$r8$clinit;
+                            unit = Unit.INSTANCE;
+                        }
+                        orCreateCancellableContinuation.resumeWith(unit);
+                        result = orCreateCancellableContinuation.getResult();
+                        coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        if (result != coroutineSingletons) {
+                        }
+                        if (result == coroutineSingletons) {
+                        }
+                    } catch (Throwable th) {
+                        orCreateCancellableContinuation.releaseClaimedReusableContinuation$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host();
+                        throw th;
+                    }
+                } else if (iAccess$updateCellSend2 == 4) {
+                    if (j < this.receivers.value) {
+                        channelSegment.cleanPrev();
+                    }
+                    Object objOnClosedSend2 = onClosedSend(obj, continuation);
+                    if (objOnClosedSend2 == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                        return objOnClosedSend2;
+                    }
+                } else if (iAccess$updateCellSend2 == 5) {
+                    channelSegment.cleanPrev();
+                }
+            } else if (zIsClosed) {
+                channelSegment.onSlotCleaned();
+                Object objOnClosedSend3 = onClosedSend(obj, continuation);
+                if (objOnClosedSend3 == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                    return objOnClosedSend3;
+                }
+            }
+        }
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:104:0x01aa, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:86:0x01aa, code lost:
     
         r4 = (kotlinx.coroutines.channels.ChannelSegment) r4.getNext();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:105:0x01b1, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:87:0x01b1, code lost:
     
         if (r4 != null) goto L93;
      */
     /* JADX WARN: Multi-variable type inference failed */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String toString() {
-        /*
-            Method dump skipped, instructions count: 470
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.channels.BufferedChannel.toString():java.lang.String");
+    public final String toString() {
+        String string;
+        StringBuilder sb = new StringBuilder();
+        int i = (int) (this.sendersAndCloseStatus.value >> 60);
+        if (i == 2) {
+            sb.append("closed,");
+        } else if (i == 3) {
+            sb.append("cancelled,");
+        }
+        sb.append("capacity=" + this.capacity + ",");
+        sb.append("data=[");
+        int i2 = 0;
+        List listAsList = Arrays.asList(this.receiveSegment.value, this.sendSegment.value, this.bufferEndSegment.value);
+        ArrayList arrayList = new ArrayList();
+        for (Object obj : listAsList) {
+            if (((ChannelSegment) obj) != BufferedChannelKt.NULL_SEGMENT) {
+                arrayList.add(obj);
+            }
+        }
+        Iterator it = arrayList.iterator();
+        if (!it.hasNext()) {
+            throw new NoSuchElementException();
+        }
+        Object next = it.next();
+        if (it.hasNext()) {
+            long j = ((ChannelSegment) next).id;
+            do {
+                Object next2 = it.next();
+                long j2 = ((ChannelSegment) next2).id;
+                if (j > j2) {
+                    next = next2;
+                    j = j2;
+                }
+            } while (it.hasNext());
+        }
+        ChannelSegment channelSegment = (ChannelSegment) next;
+        long j3 = this.receivers.value;
+        long sendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host = getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host();
+        loop2: while (true) {
+            int i3 = BufferedChannelKt.SEGMENT_SIZE;
+            int i4 = i2;
+            while (true) {
+                if (i4 >= i3) {
+                    break;
+                }
+                long j4 = (channelSegment.id * BufferedChannelKt.SEGMENT_SIZE) + i4;
+                if (j4 >= sendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host && j4 >= j3) {
+                    break loop2;
+                }
+                Object state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host = channelSegment.getState$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i4);
+                Object element$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host = channelSegment.getElement$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(i4);
+                if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host instanceof CancellableContinuation) {
+                    string = (j4 >= j3 || j4 < sendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host) ? (j4 >= sendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host || j4 < j3) ? "cont" : "send" : "receive";
+                } else if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host instanceof SelectInstance) {
+                    string = (j4 >= j3 || j4 < sendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host) ? (j4 >= sendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host || j4 < j3) ? "select" : "onSend" : "onReceive";
+                } else if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host instanceof ReceiveCatching) {
+                    string = "receiveCatching";
+                } else if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host instanceof SendBroadcast) {
+                    string = "sendBroadcast";
+                } else if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host instanceof WaiterEB) {
+                    string = "EB(" + state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host + ")";
+                } else if (Intrinsics.areEqual(state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host, BufferedChannelKt.RESUMING_BY_RCV) || Intrinsics.areEqual(state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host, BufferedChannelKt.RESUMING_BY_EB)) {
+                    string = "resuming_sender";
+                } else if (state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host == null || state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.equals(BufferedChannelKt.IN_BUFFER) || state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.equals(BufferedChannelKt.DONE_RCV) || state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.equals(BufferedChannelKt.POISONED) || state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.equals(BufferedChannelKt.INTERRUPTED_RCV) || state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.equals(BufferedChannelKt.INTERRUPTED_SEND) || state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.equals(BufferedChannelKt.CHANNEL_CLOSED)) {
+                    i4++;
+                } else {
+                    string = state$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.toString();
+                }
+                if (element$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host != null) {
+                    sb.append("(" + string + "," + element$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host + "),");
+                } else {
+                    sb.append(string + ",");
+                }
+                i4++;
+            }
+            i2 = 0;
+        }
+        if (StringsKt___StringsKt.last(sb) == ',') {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     @Override // kotlinx.coroutines.channels.ReceiveChannel
     /* renamed from: tryReceive-PtdJZtk, reason: not valid java name */
-    public final Object mo3455tryReceivePtdJZtk() {
-        ChannelSegment channelSegment;
+    public final Object mo3475tryReceivePtdJZtk() {
+        ChannelSegment channelSegmentFindSegmentReceive;
         long j = this.receivers.value;
         long j2 = this.sendersAndCloseStatus.value;
         if (isClosed(j2, true)) {
             ChannelResult.Companion companion = ChannelResult.Companion;
             Throwable closeCause = getCloseCause();
             companion.getClass();
-            return ChannelResult.Companion.m3460closedJP2dKIU(closeCause);
+            return ChannelResult.Companion.m3480closedJP2dKIU(closeCause);
         }
         if (j >= (j2 & 1152921504606846975L)) {
             ChannelResult.Companion.getClass();
             return ChannelResult.failed;
         }
         Object obj = BufferedChannelKt.INTERRUPTED_RCV;
-        ChannelSegment channelSegment2 = (ChannelSegment) this.receiveSegment.value;
+        ChannelSegment channelSegment = (ChannelSegment) this.receiveSegment.value;
         while (!this.isClosedForReceive()) {
             long andIncrement = this.receivers.getAndIncrement();
             long j3 = BufferedChannelKt.SEGMENT_SIZE;
             long j4 = andIncrement / j3;
             int i = (int) (andIncrement % j3);
-            if (channelSegment2.id != j4) {
-                channelSegment = this.findSegmentReceive(j4, channelSegment2);
-                if (channelSegment == null) {
+            if (channelSegment.id != j4) {
+                channelSegmentFindSegmentReceive = this.findSegmentReceive(j4, channelSegment);
+                if (channelSegmentFindSegmentReceive == null) {
                     continue;
                 }
             } else {
-                channelSegment = channelSegment2;
+                channelSegmentFindSegmentReceive = channelSegment;
             }
             BufferedChannel bufferedChannel = this;
-            Object updateCellReceive = bufferedChannel.updateCellReceive(channelSegment, i, andIncrement, obj);
-            channelSegment2 = channelSegment;
-            if (updateCellReceive == BufferedChannelKt.SUSPEND) {
+            Object objUpdateCellReceive = bufferedChannel.updateCellReceive(channelSegmentFindSegmentReceive, i, andIncrement, obj);
+            channelSegment = channelSegmentFindSegmentReceive;
+            if (objUpdateCellReceive == BufferedChannelKt.SUSPEND) {
                 Waiter waiter = obj instanceof Waiter ? (Waiter) obj : null;
                 if (waiter != null) {
-                    waiter.invokeOnCancellation(channelSegment2, i);
+                    waiter.invokeOnCancellation(channelSegment, i);
                 }
                 bufferedChannel.waitExpandBufferCompletion$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(andIncrement);
-                channelSegment2.onSlotCleaned();
+                channelSegment.onSlotCleaned();
                 ChannelResult.Companion.getClass();
                 return ChannelResult.failed;
             }
-            if (updateCellReceive != BufferedChannelKt.FAILED) {
-                if (updateCellReceive == BufferedChannelKt.SUSPEND_NO_WAITER) {
+            if (objUpdateCellReceive != BufferedChannelKt.FAILED) {
+                if (objUpdateCellReceive == BufferedChannelKt.SUSPEND_NO_WAITER) {
                     throw new IllegalStateException("unexpected");
                 }
-                channelSegment2.cleanPrev();
+                channelSegment.cleanPrev();
                 ChannelResult.Companion.getClass();
-                return updateCellReceive;
+                return objUpdateCellReceive;
             }
             if (andIncrement < bufferedChannel.getSendersCounter$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host()) {
-                channelSegment2.cleanPrev();
+                channelSegment.cleanPrev();
             }
             this = bufferedChannel;
         }
         ChannelResult.Companion companion2 = ChannelResult.Companion;
         Throwable closeCause2 = this.getCloseCause();
         companion2.getClass();
-        return ChannelResult.Companion.m3460closedJP2dKIU(closeCause2);
+        return ChannelResult.Companion.m3480closedJP2dKIU(closeCause2);
     }
 
     public final boolean tryResumeReceiver(Object obj, Object obj2) {
@@ -1290,7 +1771,7 @@ public class BufferedChannel implements Channel {
         if (z) {
             CancellableContinuationImpl cancellableContinuationImpl = ((ReceiveCatching) obj).cont;
             ChannelResult.Companion.getClass();
-            return BufferedChannelKt.tryResume0(cancellableContinuationImpl, ChannelResult.m3457boximpl(obj2), function1 != null ? new BufferedChannel$bindCancellationFunResult$1(this) : null);
+            return BufferedChannelKt.tryResume0(cancellableContinuationImpl, ChannelResult.m3477boximpl(obj2), function1 != null ? new BufferedChannel$bindCancellationFunResult$1(this) : null);
         }
         if (!(obj instanceof BufferedChannelIterator)) {
             if (obj instanceof CancellableContinuation) {
@@ -1319,17 +1800,17 @@ public class BufferedChannel implements Channel {
             }
             throw new IllegalStateException(("Unexpected waiter: " + obj).toString());
         }
-        int trySelectInternal = ((SelectImplementation) obj).trySelectInternal(this, Unit.INSTANCE);
+        int iTrySelectInternal = ((SelectImplementation) obj).trySelectInternal(this, Unit.INSTANCE);
         SelectKt$DUMMY_PROCESS_RESULT_FUNCTION$1 selectKt$DUMMY_PROCESS_RESULT_FUNCTION$1 = SelectKt.DUMMY_PROCESS_RESULT_FUNCTION;
-        if (trySelectInternal == 0) {
+        if (iTrySelectInternal == 0) {
             trySelectDetailedResult = TrySelectDetailedResult.SUCCESSFUL;
-        } else if (trySelectInternal == 1) {
+        } else if (iTrySelectInternal == 1) {
             trySelectDetailedResult = TrySelectDetailedResult.REREGISTER;
-        } else if (trySelectInternal == 2) {
+        } else if (iTrySelectInternal == 2) {
             trySelectDetailedResult = TrySelectDetailedResult.CANCELLED;
         } else {
-            if (trySelectInternal != 3) {
-                throw new IllegalStateException(("Unexpected internal result: " + trySelectInternal).toString());
+            if (iTrySelectInternal != 3) {
+                throw new IllegalStateException(("Unexpected internal result: " + iTrySelectInternal).toString());
             }
             trySelectDetailedResult = TrySelectDetailedResult.ALREADY_SELECTED;
         }
@@ -1341,7 +1822,7 @@ public class BufferedChannel implements Channel {
 
     @Override // kotlinx.coroutines.channels.SendChannel
     /* renamed from: trySend-JP2dKIU, reason: not valid java name */
-    public Object mo3456trySendJP2dKIU(Object obj) {
+    public Object mo3476trySendJP2dKIU(Object obj) {
         ChannelSegment channelSegment;
         BufferedChannel bufferedChannel;
         Object obj2;
@@ -1355,19 +1836,19 @@ public class BufferedChannel implements Channel {
         while (true) {
             long andIncrement = this.sendersAndCloseStatus.getAndIncrement();
             long j = andIncrement & 1152921504606846975L;
-            boolean isClosed = isClosed(andIncrement, false);
+            boolean zIsClosed = isClosed(andIncrement, false);
             int i2 = BufferedChannelKt.SEGMENT_SIZE;
             long j2 = i2;
             long j3 = j / j2;
             int i3 = (int) (j % j2);
             if (channelSegment2.id != j3) {
-                ChannelSegment access$findSegmentSend = access$findSegmentSend(this, j3, channelSegment2);
-                if (access$findSegmentSend != null) {
-                    channelSegment = access$findSegmentSend;
+                ChannelSegment channelSegmentAccess$findSegmentSend = access$findSegmentSend(this, j3, channelSegment2);
+                if (channelSegmentAccess$findSegmentSend != null) {
+                    channelSegment = channelSegmentAccess$findSegmentSend;
                     obj2 = obj;
                     i = i3;
                     bufferedChannel = this;
-                } else if (isClosed) {
+                } else if (zIsClosed) {
                     break;
                 }
             } else {
@@ -1376,27 +1857,27 @@ public class BufferedChannel implements Channel {
                 obj2 = obj;
                 i = i3;
             }
-            int access$updateCellSend = access$updateCellSend(bufferedChannel, channelSegment, i, obj2, j, obj3, isClosed);
+            int iAccess$updateCellSend = access$updateCellSend(bufferedChannel, channelSegment, i, obj2, j, obj3, zIsClosed);
             ChannelSegment channelSegment3 = channelSegment;
-            if (access$updateCellSend == 0) {
+            if (iAccess$updateCellSend == 0) {
                 channelSegment3.cleanPrev();
                 ChannelResult.Companion companion = ChannelResult.Companion;
                 Unit unit = Unit.INSTANCE;
                 companion.getClass();
                 return unit;
             }
-            if (access$updateCellSend == 1) {
+            if (iAccess$updateCellSend == 1) {
                 ChannelResult.Companion companion2 = ChannelResult.Companion;
                 Unit unit2 = Unit.INSTANCE;
                 companion2.getClass();
                 return unit2;
             }
-            if (access$updateCellSend != 2) {
-                if (access$updateCellSend == 3) {
+            if (iAccess$updateCellSend != 2) {
+                if (iAccess$updateCellSend == 3) {
                     throw new IllegalStateException("unexpected");
                 }
-                if (access$updateCellSend != 4) {
-                    if (access$updateCellSend == 5) {
+                if (iAccess$updateCellSend != 4) {
+                    if (iAccess$updateCellSend == 5) {
                         channelSegment3.cleanPrev();
                     }
                     channelSegment2 = channelSegment3;
@@ -1404,7 +1885,7 @@ public class BufferedChannel implements Channel {
                     channelSegment3.cleanPrev();
                 }
             } else {
-                if (!isClosed) {
+                if (!zIsClosed) {
                     Waiter waiter = obj3 instanceof Waiter ? (Waiter) obj3 : null;
                     if (waiter != null) {
                         waiter.invokeOnCancellation(channelSegment3, i + i2);
@@ -1419,7 +1900,7 @@ public class BufferedChannel implements Channel {
         ChannelResult.Companion companion3 = ChannelResult.Companion;
         Throwable sendException = getSendException();
         companion3.getClass();
-        return ChannelResult.Companion.m3460closedJP2dKIU(sendException);
+        return ChannelResult.Companion.m3480closedJP2dKIU(sendException);
     }
 
     public final Object updateCellReceive(ChannelSegment channelSegment, int i, long j, Object obj) {

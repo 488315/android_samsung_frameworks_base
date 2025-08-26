@@ -9,7 +9,6 @@ import android.os.ServiceSpecificException;
 import android.telephony.BinderCacheManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyFrameworkInitializer;
-import android.telephony.ims.ImsMmTelManager;
 import android.telephony.ims.RegistrationManager;
 import android.telephony.ims.aidl.IImsCapabilityCallback;
 import android.telephony.ims.feature.MmTelFeature;
@@ -32,9 +31,7 @@ public class ImsMmTelManager implements RegistrationManager {
     private static final BinderCacheManager<ITelephony> sTelephonyCache = new BinderCacheManager<>(new BinderCacheManager.BinderInterfaceFactory() { // from class: android.telephony.ims.ImsMmTelManager$$ExternalSyntheticLambda0
         @Override // android.telephony.BinderCacheManager.BinderInterfaceFactory
         public final Object create() {
-            ITelephony iTelephonyInterface;
-            iTelephonyInterface = ImsMmTelManager.getITelephonyInterface();
-            return iTelephonyInterface;
+            return ImsMmTelManager.getITelephonyInterface();
         }
     });
     private final BinderCacheManager<ITelephony> mBinderCache;
@@ -94,16 +91,16 @@ public class ImsMmTelManager implements RegistrationManager {
                 if (this.mLocalCallback == null) {
                     return;
                 }
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ImsMmTelManager$CapabilityCallback$CapabilityBinder$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ImsMmTelManager.CapabilityCallback.CapabilityBinder.this.lambda$onCapabilitiesStatusChanged$0(i);
+                            this.f$0.lambda$onCapabilitiesStatusChanged$0(i);
                         }
                     });
                 } finally {
-                    restoreCallingIdentity(clearCallingIdentity);
+                    restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
 
@@ -306,7 +303,7 @@ public class ImsMmTelManager implements RegistrationManager {
 
         @Override // com.android.internal.telephony.IIntegerConsumer
         public void accept(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$stateCallback;
@@ -317,7 +314,7 @@ public class ImsMmTelManager implements RegistrationManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -359,7 +356,7 @@ public class ImsMmTelManager implements RegistrationManager {
 
         @Override // com.android.internal.telephony.IIntegerConsumer
         public void accept(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$transportTypeCallback;
@@ -370,7 +367,7 @@ public class ImsMmTelManager implements RegistrationManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -508,20 +505,18 @@ public class ImsMmTelManager implements RegistrationManager {
 
         @Override // com.android.internal.telephony.IIntegerConsumer
         public void accept(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.ims.ImsMmTelManager$3$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Consumer consumer2 = consumer;
-                        int i2 = i;
-                        consumer2.accept(Boolean.valueOf(r2 == 1));
+                        consumer.accept(Boolean.valueOf(i == 1));
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -818,7 +813,7 @@ public class ImsMmTelManager implements RegistrationManager {
 
         @Override // com.android.internal.telephony.IIntegerConsumer
         public void accept(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$callback;
@@ -829,7 +824,7 @@ public class ImsMmTelManager implements RegistrationManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -840,12 +835,12 @@ public class ImsMmTelManager implements RegistrationManager {
         imsStateCallback.init(executor);
         BinderCacheManager<ITelephony> binderCacheManager = this.mBinderCache;
         Objects.requireNonNull(imsStateCallback);
-        ITelephony listenOnBinder = binderCacheManager.listenOnBinder(imsStateCallback, new ImsMmTelManager$$ExternalSyntheticLambda3(imsStateCallback));
-        if (listenOnBinder == null) {
+        ITelephony iTelephony = (ITelephony) binderCacheManager.listenOnBinder(imsStateCallback, new ImsMmTelManager$$ExternalSyntheticLambda3(imsStateCallback));
+        if (iTelephony == null) {
             throw new ImsException("Telephony server is down", 1);
         }
         try {
-            listenOnBinder.registerImsStateCallback(this.mSubId, 1, imsStateCallback.getCallbackBinder(), getOpPackageName());
+            iTelephony.registerImsStateCallback(this.mSubId, 1, imsStateCallback.getCallbackBinder(), getOpPackageName());
         } catch (RemoteException | IllegalStateException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -855,10 +850,10 @@ public class ImsMmTelManager implements RegistrationManager {
 
     public void unregisterImsStateCallback(ImsStateCallback imsStateCallback) {
         Objects.requireNonNull(imsStateCallback, "Must include a non-null ImsStateCallback.");
-        ITelephony removeRunnable = this.mBinderCache.removeRunnable(imsStateCallback);
-        if (removeRunnable != null) {
+        ITelephony iTelephony = (ITelephony) this.mBinderCache.removeRunnable(imsStateCallback);
+        if (iTelephony != null) {
             try {
-                removeRunnable.unregisterImsStateCallback(imsStateCallback.getCallbackBinder());
+                iTelephony.unregisterImsStateCallback(imsStateCallback.getCallbackBinder());
             } catch (RemoteException unused) {
             }
         }
@@ -873,7 +868,7 @@ public class ImsMmTelManager implements RegistrationManager {
     }
 
     private ITelephony getITelephony() {
-        return this.mBinderCache.getBinder();
+        return (ITelephony) this.mBinderCache.getBinder();
     }
 
     /* JADX INFO: Access modifiers changed from: private */

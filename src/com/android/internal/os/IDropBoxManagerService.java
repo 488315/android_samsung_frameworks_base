@@ -77,9 +77,9 @@ public interface IDropBoxManagerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDropBoxManagerService)) {
-                return (IDropBoxManagerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDropBoxManagerService)) {
+                return (IDropBoxManagerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -118,40 +118,40 @@ public interface IDropBoxManagerService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                byte[] createByteArray = parcel.createByteArray();
-                int readInt = parcel.readInt();
+                String string = parcel.readString();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                addData(readString, createByteArray, readInt);
+                addData(string, bArrCreateByteArray, i3);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                addFile(readString2, parcelFileDescriptor, readInt2);
+                addFile(string2, parcelFileDescriptor, i4);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                String readString3 = parcel.readString();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean isTagEnabled = isTagEnabled(readString3);
+                boolean zIsTagEnabled = isTagEnabled(string3);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isTagEnabled);
+                parcel2.writeBoolean(zIsTagEnabled);
             } else if (i == 4) {
-                String readString4 = parcel.readString();
-                long readLong = parcel.readLong();
-                String readString5 = parcel.readString();
+                String string4 = parcel.readString();
+                long j = parcel.readLong();
+                String string5 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                DropBoxManager.Entry nextEntry = getNextEntry(readString4, readLong, readString5);
+                DropBoxManager.Entry nextEntry = getNextEntry(string4, j, string5);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(nextEntry, 1);
             } else if (i == 5) {
-                String readString6 = parcel.readString();
-                long readLong2 = parcel.readLong();
-                String readString7 = parcel.readString();
-                String readString8 = parcel.readString();
+                String string6 = parcel.readString();
+                long j2 = parcel.readLong();
+                String string7 = parcel.readString();
+                String string8 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                DropBoxManager.Entry nextEntryWithAttribution = getNextEntryWithAttribution(readString6, readLong2, readString7, readString8);
+                DropBoxManager.Entry nextEntryWithAttribution = getNextEntryWithAttribution(string6, j2, string7, string8);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(nextEntryWithAttribution, 1);
             } else {
@@ -178,88 +178,88 @@ public interface IDropBoxManagerService extends IInterface {
 
             @Override // com.android.internal.os.IDropBoxManagerService
             public void addData(String str, byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.os.IDropBoxManagerService
             public void addFile(String str, ParcelFileDescriptor parcelFileDescriptor, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.os.IDropBoxManagerService
             public boolean isTagEnabled(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.os.IDropBoxManagerService
             public DropBoxManager.Entry getNextEntry(String str, long j, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (DropBoxManager.Entry) obtain2.readTypedObject(DropBoxManager.Entry.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (DropBoxManager.Entry) parcelObtain2.readTypedObject(DropBoxManager.Entry.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.os.IDropBoxManagerService
             public DropBoxManager.Entry getNextEntryWithAttribution(String str, long j, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (DropBoxManager.Entry) obtain2.readTypedObject(DropBoxManager.Entry.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (DropBoxManager.Entry) parcelObtain2.readTypedObject(DropBoxManager.Entry.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

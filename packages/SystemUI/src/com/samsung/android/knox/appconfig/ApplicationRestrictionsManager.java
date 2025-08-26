@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ApplicationRestrictionsManager {
     public static final String TAG = "ApplicationRestrictionsManager";
@@ -45,18 +44,14 @@ public class ApplicationRestrictionsManager {
     }
 
     public static synchronized ApplicationRestrictionsManager getInstance(Context context) {
-        ApplicationRestrictionsManager applicationRestrictionsManager;
-        synchronized (ApplicationRestrictionsManager.class) {
-            try {
-                if (sApplicationRestrictionsManager == null) {
-                    sApplicationRestrictionsManager = new ApplicationRestrictionsManager(context, new ContextInfo(Process.myUid()));
-                }
-                applicationRestrictionsManager = sApplicationRestrictionsManager;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sApplicationRestrictionsManager == null) {
+                sApplicationRestrictionsManager = new ApplicationRestrictionsManager(context, new ContextInfo(Process.myUid()));
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return applicationRestrictionsManager;
+        return sApplicationRestrictionsManager;
     }
 
     public final boolean canUseAppRestrictions() {
@@ -145,17 +140,13 @@ public class ApplicationRestrictionsManager {
     }
 
     public static synchronized ApplicationRestrictionsManager getInstance(Context context, int i) {
-        ApplicationRestrictionsManager applicationRestrictionsManager;
-        synchronized (ApplicationRestrictionsManager.class) {
-            String packageName = context.getPackageName();
-            if (packageName != null && packageName.equals("com.samsung.android.knox.kpecore")) {
-                sApplicationRestrictionsManager = new ApplicationRestrictionsManager(context, new ContextInfo(Process.myUid(), false, i));
-                applicationRestrictionsManager = sApplicationRestrictionsManager;
-            } else {
-                throw new SecurityException("Can only be called by com.samsung.android.knox.kpecore");
-            }
+        String packageName = context.getPackageName();
+        if (packageName != null && packageName.equals("com.samsung.android.knox.kpecore")) {
+            sApplicationRestrictionsManager = new ApplicationRestrictionsManager(context, new ContextInfo(Process.myUid(), false, i));
+        } else {
+            throw new SecurityException("Can only be called by com.samsung.android.knox.kpecore");
         }
-        return applicationRestrictionsManager;
+        return sApplicationRestrictionsManager;
     }
 
     public Bundle setApplicationRestrictions(String str, Bundle bundle, int i, IApplicationRestrictionsResultCallback iApplicationRestrictionsResultCallback) {

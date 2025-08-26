@@ -35,7 +35,6 @@ import com.google.android.material.motion.MaterialMainContainerBackHelper;
 import com.google.android.material.search.SearchView;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SearchViewAnimationHelper {
     public final MaterialMainContainerBackHelper backHelper;
@@ -87,30 +86,30 @@ public class SearchViewAnimationHelper {
         if (navigationIconButton == null) {
             return;
         }
-        Drawable unwrap = DrawableCompat.unwrap(navigationIconButton.getDrawable());
+        Drawable drawableUnwrap = DrawableCompat.unwrap(navigationIconButton.getDrawable());
         if (!this.searchView.animatedNavigationIcon) {
-            if (unwrap instanceof DrawerArrowDrawable) {
-                DrawerArrowDrawable drawerArrowDrawable = (DrawerArrowDrawable) unwrap;
+            if (drawableUnwrap instanceof DrawerArrowDrawable) {
+                DrawerArrowDrawable drawerArrowDrawable = (DrawerArrowDrawable) drawableUnwrap;
                 if (drawerArrowDrawable.mProgress != 1.0f) {
                     drawerArrowDrawable.mProgress = 1.0f;
                     drawerArrowDrawable.invalidateSelf();
                 }
             }
-            if (unwrap instanceof FadeThroughDrawable) {
-                ((FadeThroughDrawable) unwrap).setProgress(1.0f);
+            if (drawableUnwrap instanceof FadeThroughDrawable) {
+                ((FadeThroughDrawable) drawableUnwrap).setProgress(1.0f);
                 return;
             }
             return;
         }
-        if (unwrap instanceof DrawerArrowDrawable) {
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            ofFloat.addUpdateListener(new SearchViewAnimationHelper$$ExternalSyntheticLambda1((DrawerArrowDrawable) unwrap));
-            animatorSet.playTogether(ofFloat);
+        if (drawableUnwrap instanceof DrawerArrowDrawable) {
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat.addUpdateListener(new SearchViewAnimationHelper$$ExternalSyntheticLambda1((DrawerArrowDrawable) drawableUnwrap));
+            animatorSet.playTogether(valueAnimatorOfFloat);
         }
-        if (unwrap instanceof FadeThroughDrawable) {
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-            ofFloat2.addUpdateListener(new SearchViewAnimationHelper$$ExternalSyntheticLambda1((FadeThroughDrawable) unwrap));
-            animatorSet.playTogether(ofFloat2);
+        if (drawableUnwrap instanceof FadeThroughDrawable) {
+            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat2.addUpdateListener(new SearchViewAnimationHelper$$ExternalSyntheticLambda1((FadeThroughDrawable) drawableUnwrap));
+            animatorSet.playTogether(valueAnimatorOfFloat2);
         }
     }
 
@@ -119,19 +118,19 @@ public class SearchViewAnimationHelper {
         MaterialToolbar materialToolbar = this.toolbar;
         ImageButton navigationIconButton = ToolbarUtils.getNavigationIconButton(materialToolbar);
         if (navigationIconButton != null) {
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(getFromTranslationXStart(navigationIconButton), 0.0f);
-            ofFloat.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(0), navigationIconButton));
-            ValueAnimator ofFloat2 = ValueAnimator.ofFloat(getFromTranslationY(), 0.0f);
-            ofFloat2.addUpdateListener(MultiViewUpdateListener.translationYListener(navigationIconButton));
-            animatorSet.playTogether(ofFloat, ofFloat2);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(getFromTranslationXStart(navigationIconButton), 0.0f);
+            valueAnimatorOfFloat.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(0), navigationIconButton));
+            ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(getFromTranslationY(), 0.0f);
+            valueAnimatorOfFloat2.addUpdateListener(MultiViewUpdateListener.translationYListener(navigationIconButton));
+            animatorSet.playTogether(valueAnimatorOfFloat, valueAnimatorOfFloat2);
         }
         ActionMenuView actionMenuView = ToolbarUtils.getActionMenuView(materialToolbar);
         if (actionMenuView != null) {
-            ValueAnimator ofFloat3 = ValueAnimator.ofFloat(getFromTranslationXEnd(actionMenuView), 0.0f);
-            ofFloat3.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(0), actionMenuView));
-            ValueAnimator ofFloat4 = ValueAnimator.ofFloat(getFromTranslationY(), 0.0f);
-            ofFloat4.addUpdateListener(MultiViewUpdateListener.translationYListener(actionMenuView));
-            animatorSet.playTogether(ofFloat3, ofFloat4);
+            ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(getFromTranslationXEnd(actionMenuView), 0.0f);
+            valueAnimatorOfFloat3.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(0), actionMenuView));
+            ValueAnimator valueAnimatorOfFloat4 = ValueAnimator.ofFloat(getFromTranslationY(), 0.0f);
+            valueAnimatorOfFloat4.addUpdateListener(MultiViewUpdateListener.translationYListener(actionMenuView));
+            animatorSet.playTogether(valueAnimatorOfFloat3, valueAnimatorOfFloat4);
         }
         animatorSet.setDuration(z ? 300L : 250L);
         animatorSet.setInterpolator(ReversableAnimatedValueInterpolator.of(z, AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR));
@@ -153,14 +152,14 @@ public class SearchViewAnimationHelper {
         }
         Animator[] animatorArr2 = new Animator[9];
         TimeInterpolator timeInterpolator = z ? AnimationUtils.LINEAR_INTERPOLATOR : AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(z ? 300L : 250L);
-        ofFloat.setInterpolator(ReversableAnimatedValueInterpolator.of(z, timeInterpolator));
-        ofFloat.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(3), this.scrim));
-        animatorArr2[0] = ofFloat;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(z ? 300L : 250L);
+        valueAnimatorOfFloat.setInterpolator(ReversableAnimatedValueInterpolator.of(z, timeInterpolator));
+        valueAnimatorOfFloat.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(3), this.scrim));
+        animatorArr2[0] = valueAnimatorOfFloat;
         MaterialMainContainerBackHelper materialMainContainerBackHelper = this.backHelper;
         Rect rect = materialMainContainerBackHelper.initialHideToClipBounds;
-        Rect rect2 = materialMainContainerBackHelper.initialHideFromClipBounds;
+        Rect rectCalculateOffsetRectFromBounds = materialMainContainerBackHelper.initialHideFromClipBounds;
         SearchView searchView = this.searchView;
         if (rect != null) {
             f = 0.0f;
@@ -169,69 +168,69 @@ public class SearchViewAnimationHelper {
             rect = new Rect(searchView.getLeft(), searchView.getTop(), searchView.getRight(), searchView.getBottom());
         }
         ClippableRoundedCornerLayout clippableRoundedCornerLayout = this.rootView;
-        if (rect2 == null) {
-            rect2 = ViewUtils.calculateOffsetRectFromBounds(clippableRoundedCornerLayout, this.searchBar);
+        if (rectCalculateOffsetRectFromBounds == null) {
+            rectCalculateOffsetRectFromBounds = ViewUtils.calculateOffsetRectFromBounds(clippableRoundedCornerLayout, this.searchBar);
         }
-        final Rect rect3 = new Rect(rect2);
+        final Rect rect2 = new Rect(rectCalculateOffsetRectFromBounds);
         final float topLeftCornerResolvedSize = this.searchBar.backgroundShape.getTopLeftCornerResolvedSize();
-        final float max = Math.max(clippableRoundedCornerLayout.cornerRadius, materialMainContainerBackHelper.getExpandedCornerSize());
-        ValueAnimator ofObject = ValueAnimator.ofObject(new RectEvaluator(rect3), rect2, rect);
-        ofObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.search.SearchViewAnimationHelper$$ExternalSyntheticLambda0
+        final float fMax = Math.max(clippableRoundedCornerLayout.cornerRadius, materialMainContainerBackHelper.getExpandedCornerSize());
+        ValueAnimator valueAnimatorOfObject = ValueAnimator.ofObject(new RectEvaluator(rect2), rectCalculateOffsetRectFromBounds, rect);
+        valueAnimatorOfObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.search.SearchViewAnimationHelper$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SearchViewAnimationHelper searchViewAnimationHelper = SearchViewAnimationHelper.this;
+                SearchViewAnimationHelper searchViewAnimationHelper = this.f$0;
                 float f2 = topLeftCornerResolvedSize;
-                float f3 = max;
-                Rect rect4 = rect3;
+                float f3 = fMax;
+                Rect rect3 = rect2;
                 searchViewAnimationHelper.getClass();
-                float lerp = AnimationUtils.lerp(f2, f3, valueAnimator.getAnimatedFraction());
+                float fLerp = AnimationUtils.lerp(f2, f3, valueAnimator.getAnimatedFraction());
                 ClippableRoundedCornerLayout clippableRoundedCornerLayout2 = searchViewAnimationHelper.rootView;
                 clippableRoundedCornerLayout2.getClass();
-                clippableRoundedCornerLayout2.updateClipBoundsAndCornerRadius(rect4.left, rect4.top, rect4.right, rect4.bottom, lerp);
+                clippableRoundedCornerLayout2.updateClipBoundsAndCornerRadius(rect3.left, rect3.top, rect3.right, rect3.bottom, fLerp);
             }
         });
-        ofObject.setDuration(z ? 300L : 250L);
+        valueAnimatorOfObject.setDuration(z ? 300L : 250L);
         FastOutSlowInInterpolator fastOutSlowInInterpolator = AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
-        ofObject.setInterpolator(ReversableAnimatedValueInterpolator.of(z, fastOutSlowInInterpolator));
-        animatorArr2[1] = ofObject;
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat2.setDuration(z ? 50L : 42L);
-        ofFloat2.setStartDelay(z ? 250L : 0L);
+        valueAnimatorOfObject.setInterpolator(ReversableAnimatedValueInterpolator.of(z, fastOutSlowInInterpolator));
+        animatorArr2[1] = valueAnimatorOfObject;
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat2.setDuration(z ? 50L : 42L);
+        valueAnimatorOfFloat2.setStartDelay(z ? 250L : 0L);
         TimeInterpolator timeInterpolator2 = AnimationUtils.LINEAR_INTERPOLATOR;
-        ofFloat2.setInterpolator(ReversableAnimatedValueInterpolator.of(z, timeInterpolator2));
-        ofFloat2.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(3), this.clearButton));
-        animatorArr2[2] = ofFloat2;
+        valueAnimatorOfFloat2.setInterpolator(ReversableAnimatedValueInterpolator.of(z, timeInterpolator2));
+        valueAnimatorOfFloat2.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(3), this.clearButton));
+        animatorArr2[2] = valueAnimatorOfFloat2;
         AnimatorSet animatorSet3 = new AnimatorSet();
         Animator[] animatorArr3 = new Animator[3];
-        ValueAnimator ofFloat3 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat3.setDuration(z ? 150L : 83L);
-        ofFloat3.setStartDelay(z ? 75L : 0L);
-        ofFloat3.setInterpolator(ReversableAnimatedValueInterpolator.of(z, timeInterpolator2));
+        ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat3.setDuration(z ? 150L : 83L);
+        valueAnimatorOfFloat3.setStartDelay(z ? 75L : 0L);
+        valueAnimatorOfFloat3.setInterpolator(ReversableAnimatedValueInterpolator.of(z, timeInterpolator2));
         TouchObserverFrameLayout touchObserverFrameLayout = this.contentContainer;
-        ofFloat3.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(3), this.divider, touchObserverFrameLayout));
-        animatorArr3[0] = ofFloat3;
-        ValueAnimator ofFloat4 = ValueAnimator.ofFloat((touchObserverFrameLayout.getHeight() * 0.050000012f) / 2.0f, f);
-        ofFloat4.setDuration(z ? 300L : 250L);
-        ofFloat4.setInterpolator(ReversableAnimatedValueInterpolator.of(z, fastOutSlowInInterpolator));
-        ofFloat4.addUpdateListener(MultiViewUpdateListener.translationYListener(this.divider));
-        animatorArr3[1] = ofFloat4;
-        ValueAnimator ofFloat5 = ValueAnimator.ofFloat(0.95f, 1.0f);
-        ofFloat5.setDuration(z ? 300L : 250L);
-        ofFloat5.setInterpolator(ReversableAnimatedValueInterpolator.of(z, fastOutSlowInInterpolator));
-        ofFloat5.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(2), touchObserverFrameLayout));
-        animatorArr3[2] = ofFloat5;
+        valueAnimatorOfFloat3.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(3), this.divider, touchObserverFrameLayout));
+        animatorArr3[0] = valueAnimatorOfFloat3;
+        ValueAnimator valueAnimatorOfFloat4 = ValueAnimator.ofFloat((touchObserverFrameLayout.getHeight() * 0.050000012f) / 2.0f, f);
+        valueAnimatorOfFloat4.setDuration(z ? 300L : 250L);
+        valueAnimatorOfFloat4.setInterpolator(ReversableAnimatedValueInterpolator.of(z, fastOutSlowInInterpolator));
+        valueAnimatorOfFloat4.addUpdateListener(MultiViewUpdateListener.translationYListener(this.divider));
+        animatorArr3[1] = valueAnimatorOfFloat4;
+        ValueAnimator valueAnimatorOfFloat5 = ValueAnimator.ofFloat(0.95f, 1.0f);
+        valueAnimatorOfFloat5.setDuration(z ? 300L : 250L);
+        valueAnimatorOfFloat5.setInterpolator(ReversableAnimatedValueInterpolator.of(z, fastOutSlowInInterpolator));
+        valueAnimatorOfFloat5.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(2), touchObserverFrameLayout));
+        animatorArr3[2] = valueAnimatorOfFloat5;
         animatorSet3.playTogether(animatorArr3);
         animatorArr2[3] = animatorSet3;
         animatorArr2[4] = getTranslationAnimator(this.headerContainer, z, false);
         Toolbar toolbar = this.dummyToolbar;
         animatorArr2[5] = getTranslationAnimator(toolbar, z, false);
-        ValueAnimator ofFloat6 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat6.setDuration(z ? 300L : 250L);
-        ofFloat6.setInterpolator(ReversableAnimatedValueInterpolator.of(z, fastOutSlowInInterpolator));
+        ValueAnimator valueAnimatorOfFloat6 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat6.setDuration(z ? 300L : 250L);
+        valueAnimatorOfFloat6.setInterpolator(ReversableAnimatedValueInterpolator.of(z, fastOutSlowInInterpolator));
         if (searchView.animatedMenuItems) {
-            ofFloat6.addUpdateListener(new FadeThroughUpdateListener(ToolbarUtils.getActionMenuView(toolbar), ToolbarUtils.getActionMenuView(this.toolbar)));
+            valueAnimatorOfFloat6.addUpdateListener(new FadeThroughUpdateListener(ToolbarUtils.getActionMenuView(toolbar), ToolbarUtils.getActionMenuView(this.toolbar)));
         }
-        animatorArr2[6] = ofFloat6;
+        animatorArr2[6] = valueAnimatorOfFloat6;
         animatorArr2[7] = getTranslationAnimator(this.editText, z, true);
         animatorArr2[8] = getTranslationAnimator(this.searchPrefix, z, true);
         animatorSet.playTogether(animatorArr2);
@@ -273,9 +272,9 @@ public class SearchViewAnimationHelper {
     public final AnimatorSet getTranslateAnimatorSet(boolean z) {
         AnimatorSet animatorSet = new AnimatorSet();
         ClippableRoundedCornerLayout clippableRoundedCornerLayout = this.rootView;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(clippableRoundedCornerLayout.getHeight(), 0.0f);
-        ofFloat.addUpdateListener(MultiViewUpdateListener.translationYListener(clippableRoundedCornerLayout));
-        animatorSet.playTogether(ofFloat);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(clippableRoundedCornerLayout.getHeight(), 0.0f);
+        valueAnimatorOfFloat.addUpdateListener(MultiViewUpdateListener.translationYListener(clippableRoundedCornerLayout));
+        animatorSet.playTogether(valueAnimatorOfFloat);
         addBackButtonProgressAnimatorIfNeeded(animatorSet);
         animatorSet.setInterpolator(ReversableAnimatedValueInterpolator.of(z, AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR));
         animatorSet.setDuration(z ? 350L : 300L);
@@ -283,12 +282,12 @@ public class SearchViewAnimationHelper {
     }
 
     public final Animator getTranslationAnimator(View view, boolean z, boolean z2) {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(z2 ? getFromTranslationXStart(view) : getFromTranslationXEnd(view), 0.0f);
-        ofFloat.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(0), view));
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(getFromTranslationY(), 0.0f);
-        ofFloat2.addUpdateListener(MultiViewUpdateListener.translationYListener(view));
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(z2 ? getFromTranslationXStart(view) : getFromTranslationXEnd(view), 0.0f);
+        valueAnimatorOfFloat.addUpdateListener(new MultiViewUpdateListener(new MultiViewUpdateListener$$ExternalSyntheticLambda0(0), view));
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(getFromTranslationY(), 0.0f);
+        valueAnimatorOfFloat2.addUpdateListener(MultiViewUpdateListener.translationYListener(view));
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat, ofFloat2);
+        animatorSet.playTogether(valueAnimatorOfFloat, valueAnimatorOfFloat2);
         animatorSet.setDuration(z ? 300L : 250L);
         animatorSet.setInterpolator(ReversableAnimatedValueInterpolator.of(z, AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR));
         return animatorSet;

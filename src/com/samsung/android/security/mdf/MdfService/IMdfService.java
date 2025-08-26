@@ -45,9 +45,9 @@ public interface IMdfService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMdfService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMdfService)) {
-                return (IMdfService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMdfService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMdfService)) {
+                return (IMdfService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IMdfService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int initCCMode = initCCMode();
+                int iInitCCMode = initCCMode();
                 parcel2.writeNoException();
-                parcel2.writeInt(initCCMode);
+                parcel2.writeInt(iInitCCMode);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,16 +100,16 @@ public interface IMdfService extends IInterface {
 
             @Override // com.samsung.android.security.mdf.MdfService.IMdfService
             public int initCCMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMdfService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IMdfService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

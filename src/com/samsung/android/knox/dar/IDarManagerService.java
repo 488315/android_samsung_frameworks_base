@@ -475,9 +475,9 @@ public interface IDarManagerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDarManagerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDarManagerService)) {
-                return (IDarManagerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDarManagerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDarManagerService)) {
+                return (IDarManagerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -615,28 +615,28 @@ public interface IDarManagerService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean isDarSupported = isDarSupported();
+                    boolean zIsDarSupported = isDarSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDarSupported);
+                    parcel2.writeBoolean(zIsDarSupported);
                     return true;
                 case 2:
                     systemReady();
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    boolean isDeviceRootKeyInstalled = isDeviceRootKeyInstalled();
+                    boolean zIsDeviceRootKeyInstalled = isDeviceRootKeyInstalled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeviceRootKeyInstalled);
+                    parcel2.writeBoolean(zIsDeviceRootKeyInstalled);
                     return true;
                 case 4:
-                    boolean isKnoxKeyInstallable = isKnoxKeyInstallable();
+                    boolean zIsKnoxKeyInstallable = isKnoxKeyInstallable();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isKnoxKeyInstallable);
+                    parcel2.writeBoolean(zIsKnoxKeyInstallable);
                     return true;
                 case 5:
-                    int reserveUserIdForSystem = reserveUserIdForSystem();
+                    int iReserveUserIdForSystem = reserveUserIdForSystem();
                     parcel2.writeNoException();
-                    parcel2.writeInt(reserveUserIdForSystem);
+                    parcel2.writeInt(iReserveUserIdForSystem);
                     return true;
                 case 6:
                     int reservedUserIdForSystem = getReservedUserIdForSystem();
@@ -649,137 +649,137 @@ public interface IDarManagerService extends IInterface {
                     parcel2.writeInt(availableUserId);
                     return true;
                 case 8:
-                    byte[] createByteArray = parcel.createByteArray();
-                    int readInt = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean resetPasswordToken = setResetPasswordToken(createByteArray, readInt);
+                    boolean resetPasswordToken = setResetPasswordToken(bArrCreateByteArray, i3);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(resetPasswordToken);
                     return true;
                 case 9:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean clearResetPasswordToken = clearResetPasswordToken(readInt2);
+                    boolean zClearResetPasswordToken = clearResetPasswordToken(i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearResetPasswordToken);
+                    parcel2.writeBoolean(zClearResetPasswordToken);
                     return true;
                 case 10:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isResetPasswordTokenActive = isResetPasswordTokenActive(readInt3);
+                    boolean zIsResetPasswordTokenActive = isResetPasswordTokenActive(i5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isResetPasswordTokenActive);
+                    parcel2.writeBoolean(zIsResetPasswordTokenActive);
                     return true;
                 case 11:
-                    String readString = parcel.readString();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    int readInt4 = parcel.readInt();
+                    String string = parcel.readString();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean resetPasswordWithToken = resetPasswordWithToken(readString, createByteArray2, readInt4);
+                    boolean zResetPasswordWithToken = resetPasswordWithToken(string, bArrCreateByteArray2, i6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(resetPasswordWithToken);
+                    parcel2.writeBoolean(zResetPasswordWithToken);
                     return true;
                 case 12:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSDPEnabled = isSDPEnabled(readInt5);
+                    boolean zIsSDPEnabled = isSDPEnabled(i7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSDPEnabled);
+                    parcel2.writeBoolean(zIsSDPEnabled);
                     return true;
                 case 13:
-                    boolean isSdpSupported = isSdpSupported();
+                    boolean zIsSdpSupported = isSdpSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSdpSupported);
+                    parcel2.writeBoolean(zIsSdpSupported);
                     return true;
                 case 14:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSdpSupportedSecureFolder = isSdpSupportedSecureFolder(readInt6);
+                    boolean zIsSdpSupportedSecureFolder = isSdpSupportedSecureFolder(i8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSdpSupportedSecureFolder);
+                    parcel2.writeBoolean(zIsSdpSupportedSecureFolder);
                     return true;
                 case 15:
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int unlock = unlock(readString2, readString3);
+                    int iUnlock = unlock(string2, string3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unlock);
+                    parcel2.writeInt(iUnlock);
                     return true;
                 case 16:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int lock = lock(readString4);
+                    int iLock = lock(string4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(lock);
+                    parcel2.writeInt(iLock);
                     return true;
                 case 17:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int password = setPassword(readString5, readString6);
+                    int password = setPassword(string5, string6);
                     parcel2.writeNoException();
                     parcel2.writeInt(password);
                     return true;
                 case 18:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int resetPassword = resetPassword(readString7, readString8, readString9);
+                    int iResetPassword = resetPassword(string7, string8, string9);
                     parcel2.writeNoException();
-                    parcel2.writeInt(resetPassword);
+                    parcel2.writeInt(iResetPassword);
                     return true;
                 case 19:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int migrate = migrate(readString10);
+                    int iMigrate = migrate(string10);
                     parcel2.writeNoException();
-                    parcel2.writeInt(migrate);
+                    parcel2.writeInt(iMigrate);
                     return true;
                 case 20:
-                    String readString11 = parcel.readString();
-                    ISdpListener asInterface = ISdpListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string11 = parcel.readString();
+                    ISdpListener iSdpListenerAsInterface = ISdpListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int registerListener = registerListener(readString11, asInterface);
+                    int iRegisterListener = registerListener(string11, iSdpListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(registerListener);
+                    parcel2.writeInt(iRegisterListener);
                     return true;
                 case 21:
-                    String readString12 = parcel.readString();
-                    ISdpListener asInterface2 = ISdpListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string12 = parcel.readString();
+                    ISdpListener iSdpListenerAsInterface2 = ISdpListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int unregisterListener = unregisterListener(readString12, asInterface2);
+                    int iUnregisterListener = unregisterListener(string12, iSdpListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unregisterListener);
+                    parcel2.writeInt(iUnregisterListener);
                     return true;
                 case 22:
-                    int isLicensed = isLicensed();
+                    int iIsLicensed = isLicensed();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isLicensed);
+                    parcel2.writeInt(iIsLicensed);
                     return true;
                 case 23:
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int exists = exists(readString13);
+                    int iExists = exists(string13);
                     parcel2.writeNoException();
-                    parcel2.writeInt(exists);
+                    parcel2.writeInt(iExists);
                     return true;
                 case 24:
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int allow = allow(readString14, readString15);
+                    int iAllow = allow(string14, string15);
                     parcel2.writeNoException();
-                    parcel2.writeInt(allow);
+                    parcel2.writeInt(iAllow);
                     return true;
                 case 25:
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int disallow = disallow(readString16, readString17);
+                    int iDisallow = disallow(string16, string17);
                     parcel2.writeNoException();
-                    parcel2.writeInt(disallow);
+                    parcel2.writeInt(iDisallow);
                     return true;
                 case 26:
                     double supportedSDKVersion = getSupportedSDKVersion();
@@ -788,165 +788,165 @@ public interface IDarManagerService extends IInterface {
                     return true;
                 case 27:
                     SdpCreationParam sdpCreationParam = (SdpCreationParam) parcel.readTypedObject(SdpCreationParam.CREATOR);
-                    String readString18 = parcel.readString();
-                    String readString19 = parcel.readString();
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int addEngine = addEngine(sdpCreationParam, readString18, readString19);
+                    int iAddEngine = addEngine(sdpCreationParam, string18, string19);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addEngine);
+                    parcel2.writeInt(iAddEngine);
                     return true;
                 case 28:
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int removeEngine = removeEngine(readString20);
+                    int iRemoveEngine = removeEngine(string20);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeEngine);
+                    parcel2.writeInt(iRemoveEngine);
                     return true;
                 case 29:
-                    String readString21 = parcel.readString();
+                    String string21 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    SdpEngineInfo engineInfo = getEngineInfo(readString21);
+                    SdpEngineInfo engineInfo = getEngineInfo(string21);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(engineInfo, 1);
                     return true;
                 case 30:
-                    int readInt7 = parcel.readInt();
-                    String readString22 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean sensitive = setSensitive(readInt7, readString22);
+                    boolean sensitive = setSensitive(i9, string22);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(sensitive);
                     return true;
                 case 31:
-                    String readString23 = parcel.readString();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isSensitive = isSensitive(readString23);
+                    boolean zIsSensitive = isSensitive(string23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSensitive);
+                    parcel2.writeBoolean(zIsSensitive);
                     return true;
                 case 32:
-                    int readInt8 = parcel.readInt();
-                    String readString24 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int createEncPkgDir = createEncPkgDir(readInt8, readString24);
+                    int iCreateEncPkgDir = createEncPkgDir(i10, string24);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createEncPkgDir);
+                    parcel2.writeInt(iCreateEncPkgDir);
                     return true;
                 case 33:
-                    String readString25 = parcel.readString();
-                    String readString26 = parcel.readString();
+                    String string25 = parcel.readString();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int saveTokenIntoTrusted = saveTokenIntoTrusted(readString25, readString26);
+                    int iSaveTokenIntoTrusted = saveTokenIntoTrusted(string25, string26);
                     parcel2.writeNoException();
-                    parcel2.writeInt(saveTokenIntoTrusted);
+                    parcel2.writeInt(iSaveTokenIntoTrusted);
                     return true;
                 case 34:
-                    String readString27 = parcel.readString();
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int deleteToeknFromTrusted = deleteToeknFromTrusted(readString27);
+                    int iDeleteToeknFromTrusted = deleteToeknFromTrusted(string27);
                     parcel2.writeNoException();
-                    parcel2.writeInt(deleteToeknFromTrusted);
+                    parcel2.writeInt(iDeleteToeknFromTrusted);
                     return true;
                 case 35:
-                    String readString28 = parcel.readString();
-                    String readString29 = parcel.readString();
+                    String string28 = parcel.readString();
+                    String string29 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int unlockViaTrusted = unlockViaTrusted(readString28, readString29);
+                    int iUnlockViaTrusted = unlockViaTrusted(string28, string29);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unlockViaTrusted);
+                    parcel2.writeInt(iUnlockViaTrusted);
                     return true;
                 case 36:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onBiometricsAuthenticated(readInt9);
+                    onBiometricsAuthenticated(i11);
                     parcel2.writeNoException();
                     return true;
                 case 37:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onDeviceOwnerLocked(readInt10);
+                    onDeviceOwnerLocked(i12);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    int readInt11 = parcel.readInt();
-                    ISdpListener asInterface3 = ISdpListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i13 = parcel.readInt();
+                    ISdpListener iSdpListenerAsInterface3 = ISdpListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerClient(readInt11, asInterface3);
+                    registerClient(i13, iSdpListenerAsInterface3);
                     return true;
                 case 39:
-                    int readInt12 = parcel.readInt();
-                    ISdpListener asInterface4 = ISdpListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i14 = parcel.readInt();
+                    ISdpListener iSdpListenerAsInterface4 = ISdpListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterClient(readInt12, asInterface4);
+                    unregisterClient(i14, iSdpListenerAsInterface4);
                     return true;
                 case 40:
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isDefaultPathUser = isDefaultPathUser(readInt13);
+                    boolean zIsDefaultPathUser = isDefaultPathUser(i15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDefaultPathUser);
+                    parcel2.writeBoolean(zIsDefaultPathUser);
                     return true;
                 case 41:
-                    int readInt14 = parcel.readInt();
-                    int readInt15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean dualDarInfo = setDualDarInfo(readInt14, readInt15);
+                    boolean dualDarInfo = setDualDarInfo(i16, i17);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dualDarInfo);
                     return true;
                 case 42:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isInnerAuthRequired = isInnerAuthRequired(readInt16);
+                    boolean zIsInnerAuthRequired = isInnerAuthRequired(i18);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isInnerAuthRequired);
+                    parcel2.writeBoolean(zIsInnerAuthRequired);
                     return true;
                 case 43:
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setInnerAuthUserId(readInt17, readInt18);
+                    setInnerAuthUserId(i19, i20);
                     parcel2.writeNoException();
                     return true;
                 case 44:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int innerAuthUserId = getInnerAuthUserId(readInt19);
+                    int innerAuthUserId = getInnerAuthUserId(i21);
                     parcel2.writeNoException();
                     parcel2.writeInt(innerAuthUserId);
                     return true;
                 case 45:
-                    int readInt20 = parcel.readInt();
-                    int readInt21 = parcel.readInt();
+                    int i22 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setMainUserId(readInt20, readInt21);
+                    setMainUserId(i22, i23);
                     parcel2.writeNoException();
                     return true;
                 case 46:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int mainUserId = getMainUserId(readInt22);
+                    int mainUserId = getMainUserId(i24);
                     parcel2.writeNoException();
                     parcel2.writeInt(mainUserId);
                     return true;
                 case 47:
-                    int readInt23 = parcel.readInt();
-                    String readString30 = parcel.readString();
+                    int i25 = parcel.readInt();
+                    String string30 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addBlockedClearablePackages(readInt23, readString30);
+                    addBlockedClearablePackages(i25, string30);
                     parcel2.writeNoException();
                     return true;
                 case 48:
-                    int readInt24 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> blockedClearablePackages = getBlockedClearablePackages(readInt24);
+                    List<String> blockedClearablePackages = getBlockedClearablePackages(i26);
                     parcel2.writeNoException();
                     parcel2.writeStringList(blockedClearablePackages);
                     return true;
                 case 49:
-                    String readString31 = parcel.readString();
+                    String string31 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> packageListForDualDarPolicy = getPackageListForDualDarPolicy(readString31);
+                    List<String> packageListForDualDarPolicy = getPackageListForDualDarPolicy(string31);
                     parcel2.writeNoException();
                     parcel2.writeStringList(packageListForDualDarPolicy);
                     return true;
@@ -956,49 +956,49 @@ public interface IDarManagerService extends IInterface {
                     parcel2.writeInt(passwordMinimumLengthForInner);
                     return true;
                 case 51:
-                    int readInt25 = parcel.readInt();
-                    int readInt26 = parcel.readInt();
+                    int i27 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IEndpointMonitorListener asInterface5 = IEndpointMonitorListener.Stub.asInterface(parcel.readStrongBinder());
+                    IEndpointMonitorListener iEndpointMonitorListenerAsInterface = IEndpointMonitorListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int startTracing = startTracing(readInt25, readInt26, bundle, asInterface5);
+                    int iStartTracing = startTracing(i27, i28, bundle, iEndpointMonitorListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startTracing);
+                    parcel2.writeInt(iStartTracing);
                     return true;
                 case 52:
-                    int readInt27 = parcel.readInt();
-                    int readInt28 = parcel.readInt();
+                    int i29 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int stopTracing = stopTracing(readInt27, readInt28);
+                    int iStopTracing = stopTracing(i29, i30);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopTracing);
+                    parcel2.writeInt(iStopTracing);
                     return true;
                 case 53:
-                    int readInt29 = parcel.readInt();
-                    int readInt30 = parcel.readInt();
+                    int i31 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IEndpointMonitorListener asInterface6 = IEndpointMonitorListener.Stub.asInterface(parcel.readStrongBinder());
+                    IEndpointMonitorListener iEndpointMonitorListenerAsInterface2 = IEndpointMonitorListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int startMonitoring = startMonitoring(readInt29, readInt30, bundle2, asInterface6);
+                    int iStartMonitoring = startMonitoring(i31, i32, bundle2, iEndpointMonitorListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startMonitoring);
+                    parcel2.writeInt(iStartMonitoring);
                     return true;
                 case 54:
-                    int readInt31 = parcel.readInt();
-                    int readInt32 = parcel.readInt();
+                    int i33 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int stopMonitoring = stopMonitoring(readInt31, readInt32);
+                    int iStopMonitoring = stopMonitoring(i33, i34);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopMonitoring);
+                    parcel2.writeInt(iStopMonitoring);
                     return true;
                 case 55:
-                    long readLong = parcel.readLong();
-                    int readInt33 = parcel.readInt();
-                    int readInt34 = parcel.readInt();
-                    String readString32 = parcel.readString();
-                    String readString33 = parcel.readString();
+                    long j = parcel.readLong();
+                    int i35 = parcel.readInt();
+                    int i36 = parcel.readInt();
+                    String string32 = parcel.readString();
+                    String string33 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    reportApplicationBinding(readLong, readInt33, readInt34, readString32, readString33);
+                    reportApplicationBinding(j, i35, i36, string32, string33);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -1024,890 +1024,890 @@ public interface IDarManagerService extends IInterface {
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean isDarSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public void systemReady() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean isDeviceRootKeyInstalled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean isKnoxKeyInstallable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int reserveUserIdForSystem() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int getReservedUserIdForSystem() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int getAvailableUserId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean setResetPasswordToken(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean clearResetPasswordToken(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean isResetPasswordTokenActive(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean resetPasswordWithToken(String str, byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean isSDPEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean isSdpSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean isSdpSupportedSecureFolder(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int unlock(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int lock(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int setPassword(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int resetPassword(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int migrate(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int registerListener(String str, ISdpListener iSdpListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iSdpListener);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iSdpListener);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int unregisterListener(String str, ISdpListener iSdpListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iSdpListener);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iSdpListener);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int isLicensed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int exists(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int allow(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int disallow(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public double getSupportedSDKVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readDouble();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readDouble();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int addEngine(SdpCreationParam sdpCreationParam, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(sdpCreationParam, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sdpCreationParam, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int removeEngine(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public SdpEngineInfo getEngineInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SdpEngineInfo) obtain2.readTypedObject(SdpEngineInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SdpEngineInfo) parcelObtain2.readTypedObject(SdpEngineInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean setSensitive(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean isSensitive(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int createEncPkgDir(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int saveTokenIntoTrusted(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int deleteToeknFromTrusted(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int unlockViaTrusted(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public void onBiometricsAuthenticated(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public void onDeviceOwnerLocked(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public void registerClient(int i, ISdpListener iSdpListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSdpListener);
-                    this.mRemote.transact(38, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSdpListener);
+                    this.mRemote.transact(38, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public void unregisterClient(int i, ISdpListener iSdpListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iSdpListener);
-                    this.mRemote.transact(39, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iSdpListener);
+                    this.mRemote.transact(39, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean isDefaultPathUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean setDualDarInfo(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public boolean isInnerAuthRequired(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public void setInnerAuthUserId(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int getInnerAuthUserId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public void setMainUserId(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int getMainUserId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public void addBlockedClearablePackages(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public List<String> getBlockedClearablePackages(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public List<String> getPackageListForDualDarPolicy(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int getPasswordMinimumLengthForInner() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int startTracing(int i, int i2, Bundle bundle, IEndpointMonitorListener iEndpointMonitorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iEndpointMonitorListener);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iEndpointMonitorListener);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int stopTracing(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int startMonitoring(int i, int i2, Bundle bundle, IEndpointMonitorListener iEndpointMonitorListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iEndpointMonitorListener);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iEndpointMonitorListener);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public int stopMonitoring(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
             public void reportApplicationBinding(long j, int i, int i2, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDarManagerService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

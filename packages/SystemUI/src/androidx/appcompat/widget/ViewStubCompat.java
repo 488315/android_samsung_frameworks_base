@@ -11,7 +11,6 @@ import android.view.ViewParent;
 import androidx.appcompat.R$styleable;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ViewStubCompat extends View {
     public final int mInflatedId;
@@ -32,25 +31,25 @@ public final class ViewStubCompat extends View {
             throw new IllegalArgumentException("ViewStub must have a valid layoutResource");
         }
         ViewGroup viewGroup = (ViewGroup) parent;
-        LayoutInflater layoutInflater = this.mInflater;
-        if (layoutInflater == null) {
-            layoutInflater = LayoutInflater.from(getContext());
+        LayoutInflater layoutInflaterFrom = this.mInflater;
+        if (layoutInflaterFrom == null) {
+            layoutInflaterFrom = LayoutInflater.from(getContext());
         }
-        View inflate = layoutInflater.inflate(this.mLayoutResource, viewGroup, false);
+        View viewInflate = layoutInflaterFrom.inflate(this.mLayoutResource, viewGroup, false);
         int i = this.mInflatedId;
         if (i != -1) {
-            inflate.setId(i);
+            viewInflate.setId(i);
         }
-        int indexOfChild = viewGroup.indexOfChild(this);
+        int iIndexOfChild = viewGroup.indexOfChild(this);
         viewGroup.removeViewInLayout(this);
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
         if (layoutParams != null) {
-            viewGroup.addView(inflate, indexOfChild, layoutParams);
+            viewGroup.addView(viewInflate, iIndexOfChild, layoutParams);
         } else {
-            viewGroup.addView(inflate, indexOfChild);
+            viewGroup.addView(viewInflate, iIndexOfChild);
         }
-        this.mInflatedViewRef = new WeakReference(inflate);
-        return inflate;
+        this.mInflatedViewRef = new WeakReference(viewInflate);
+        return viewInflate;
     }
 
     @Override // android.view.View
@@ -78,11 +77,11 @@ public final class ViewStubCompat extends View {
     public ViewStubCompat(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.mLayoutResource = 0;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ViewStubCompat, i, 0);
-        this.mInflatedId = obtainStyledAttributes.getResourceId(2, -1);
-        this.mLayoutResource = obtainStyledAttributes.getResourceId(1, 0);
-        setId(obtainStyledAttributes.getResourceId(0, -1));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ViewStubCompat, i, 0);
+        this.mInflatedId = typedArrayObtainStyledAttributes.getResourceId(2, -1);
+        this.mLayoutResource = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+        setId(typedArrayObtainStyledAttributes.getResourceId(0, -1));
+        typedArrayObtainStyledAttributes.recycle();
         setVisibility(8);
         setWillNotDraw(true);
     }

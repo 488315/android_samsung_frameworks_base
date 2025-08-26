@@ -10,7 +10,6 @@ import java.util.Objects;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.collections.builders.SetBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DemuxNode implements SchedulableNode {
     public final MutableMapK branchNodeByKey;
@@ -20,7 +19,6 @@ public final class DemuxNode implements SchedulableNode {
     public final Schedulable.N schedulable = new Schedulable.N(this);
     public volatile long epoch = Long.MIN_VALUE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BranchNode implements PushNode {
         public final DownstreamSet downstreamSet = new DownstreamSet();
         public final Object key;

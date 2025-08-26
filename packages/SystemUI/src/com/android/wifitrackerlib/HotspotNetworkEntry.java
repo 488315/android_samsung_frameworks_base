@@ -19,7 +19,6 @@ import java.util.Objects;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class HotspotNetworkEntry extends WifiEntry {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -130,10 +129,10 @@ public class HotspotNetworkEntry extends WifiEntry {
         }
         if (!this.mConnectionError) {
             MessageFormat messageFormat = new MessageFormat(this.mContext.getString(R.string.wifitrackerlib_hotspot_network_summary_new));
-            HashMap hashMap = new HashMap();
-            hashMap.put("DEVICE_TYPE", getDeviceTypeId(this.mHotspotNetworkData.getNetworkProviderInfo().getDeviceType()));
-            hashMap.put("NETWORK_NAME", this.mHotspotNetworkData.getNetworkName());
-            return messageFormat.format(hashMap);
+            HashMap map = new HashMap();
+            map.put("DEVICE_TYPE", getDeviceTypeId(this.mHotspotNetworkData.getNetworkProviderInfo().getDeviceType()));
+            map.put("NETWORK_NAME", this.mHotspotNetworkData.getNetworkName());
+            return messageFormat.format(map);
         }
         switch (this.mLastStatus) {
             case 3:
@@ -146,9 +145,9 @@ public class HotspotNetworkEntry extends WifiEntry {
             case 8:
             case 9:
                 MessageFormat messageFormat2 = new MessageFormat(this.mContext.getString(R.string.wifitrackerlib_hotspot_network_summary_error_settings));
-                HashMap hashMap2 = new HashMap();
-                hashMap2.put("DEVICE_TYPE", getDeviceTypeId(this.mHotspotNetworkData.getNetworkProviderInfo().getDeviceType()));
-                return messageFormat2.format(hashMap2);
+                HashMap map2 = new HashMap();
+                map2.put("DEVICE_TYPE", getDeviceTypeId(this.mHotspotNetworkData.getNetworkProviderInfo().getDeviceType()));
+                return messageFormat2.format(map2);
             default:
                 return this.mContext.getString(R.string.wifitrackerlib_hotspot_network_summary_error_generic);
         }
@@ -204,7 +203,6 @@ public class HotspotNetworkEntry extends WifiEntry {
         this.mKey = hotspotNetworkEntryKey;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HotspotNetworkEntryKey {
         public final long mDeviceId;
         public final boolean mIsVirtualEntry;
@@ -221,7 +219,7 @@ public class HotspotNetworkEntry extends WifiEntry {
             }
         }
 
-        public final String toString() {
+        public final String toString() throws JSONException {
             JSONObject jSONObject = new JSONObject();
             try {
                 jSONObject.put("IS_VIRTUAL_ENTRY_KEY", this.mIsVirtualEntry);

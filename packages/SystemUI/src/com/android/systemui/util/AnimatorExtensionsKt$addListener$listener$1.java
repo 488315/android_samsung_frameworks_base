@@ -3,7 +3,6 @@ package com.android.systemui.util;
 import androidx.core.animation.Animator;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AnimatorExtensionsKt$addListener$listener$1 implements Animator.AnimatorListener {
     final /* synthetic */ Function1 $onCancel;
@@ -20,22 +19,22 @@ public final class AnimatorExtensionsKt$addListener$listener$1 implements Animat
 
     @Override // androidx.core.animation.Animator.AnimatorListener
     public void onAnimationCancel(Animator animator) {
-        this.$onCancel.mo779invoke(animator);
+        this.$onCancel.mo781invoke(animator);
     }
 
     @Override // androidx.core.animation.Animator.AnimatorListener
     public void onAnimationEnd(Animator animator) {
-        this.$onEnd.mo779invoke(animator);
+        this.$onEnd.mo781invoke(animator);
     }
 
     @Override // androidx.core.animation.Animator.AnimatorListener
     public void onAnimationRepeat(Animator animator) {
-        this.$onRepeat.mo779invoke(animator);
+        this.$onRepeat.mo781invoke(animator);
     }
 
     @Override // androidx.core.animation.Animator.AnimatorListener
     public void onAnimationStart(Animator animator) {
-        this.$onStart.mo779invoke(animator);
+        this.$onStart.mo781invoke(animator);
     }
 
     @Override // androidx.core.animation.Animator.AnimatorListener

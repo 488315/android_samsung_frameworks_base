@@ -18,14 +18,10 @@ public class KnoxGuardManager {
     }
 
     public static synchronized KnoxGuardManager getInstance() {
-        KnoxGuardManager knoxGuardManager;
-        synchronized (KnoxGuardManager.class) {
-            if (mKnoxGuardManager == null) {
-                mKnoxGuardManager = new KnoxGuardManager();
-            }
-            knoxGuardManager = mKnoxGuardManager;
+        if (mKnoxGuardManager == null) {
+            mKnoxGuardManager = new KnoxGuardManager();
         }
-        return knoxGuardManager;
+        return mKnoxGuardManager;
     }
 
     private IKnoxGuardManager getService() {

@@ -15,7 +15,6 @@ import android.util.ArraySet;
 import android.util.IntArray;
 import android.util.Log;
 import android.util.Pair;
-import android.view.translation.TranslationManager;
 import android.view.translation.Translator;
 import com.android.internal.util.FunctionalUtils;
 import com.android.internal.util.SyncResultReceiver;
@@ -59,12 +58,12 @@ public final class TranslationManager {
         Objects.requireNonNull(consumer, "callback cannot be null");
         synchronized (this.mLock) {
             while (true) {
-                final int abs = Math.abs(ID_GENERATOR.nextInt());
-                if (abs != 0 && this.mTranslatorIds.indexOf(abs) < 0) {
-                    new Translator(this.mContext, translationContext, abs, this, this.mHandler, this.mService, new Consumer() { // from class: android.view.translation.TranslationManager$$ExternalSyntheticLambda3
+                final int iAbs = Math.abs(ID_GENERATOR.nextInt());
+                if (iAbs != 0 && this.mTranslatorIds.indexOf(iAbs) < 0) {
+                    new Translator(this.mContext, translationContext, iAbs, this, this.mHandler, this.mService, new Consumer() { // from class: android.view.translation.TranslationManager$$ExternalSyntheticLambda3
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            TranslationManager.this.lambda$createOnDeviceTranslator$4(executor, consumer, abs, (Translator) obj);
+                            this.f$0.lambda$createOnDeviceTranslator$4(executor, consumer, iAbs, (Translator) obj);
                         }
                     });
                 }
@@ -81,7 +80,7 @@ public final class TranslationManager {
                     executor.execute(new Runnable() { // from class: android.view.translation.TranslationManager$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            r1.accept(null);
+                            consumer.accept(null);
                         }
                     });
                 }
@@ -97,7 +96,7 @@ public final class TranslationManager {
                 executor.execute(new Runnable() { // from class: android.view.translation.TranslationManager$$ExternalSyntheticLambda5
                     @Override // java.lang.Runnable
                     public final void run() {
-                        r1.accept(r2);
+                        consumer.accept(translator);
                     }
                 });
             }
@@ -106,22 +105,22 @@ public final class TranslationManager {
 
     @Deprecated
     public Translator createOnDeviceTranslator(TranslationContext translationContext) {
-        int abs;
+        int iAbs;
         Objects.requireNonNull(translationContext, "translationContext cannot be null");
         synchronized (this.mLock) {
             while (true) {
-                abs = Math.abs(ID_GENERATOR.nextInt());
-                if (abs != 0 && this.mTranslatorIds.indexOf(abs) < 0) {
+                iAbs = Math.abs(ID_GENERATOR.nextInt());
+                if (iAbs != 0 && this.mTranslatorIds.indexOf(iAbs) < 0) {
                     break;
                 }
             }
-            Translator translator = new Translator(this.mContext, translationContext, abs, this, this.mHandler, this.mService);
+            Translator translator = new Translator(this.mContext, translationContext, iAbs, this, this.mHandler, this.mService);
             translator.start();
             try {
                 if (!translator.isSessionCreated()) {
                     return null;
                 }
-                this.mTranslatorIds.add(abs);
+                this.mTranslatorIds.add(iAbs);
                 return translator;
             } catch (Translator.ServiceBinderReceiver.TimeoutException e) {
                 Log.e(TAG, "Timed out getting create session: " + e);
@@ -139,11 +138,11 @@ public final class TranslationManager {
         try {
             SynchronousResultReceiver synchronousResultReceiver = new SynchronousResultReceiver();
             this.mService.onTranslationCapabilitiesRequest(i, i2, synchronousResultReceiver, this.mContext.getUserId());
-            SynchronousResultReceiver.Result awaitResult = synchronousResultReceiver.awaitResult(60000L);
-            if (awaitResult.resultCode != 1) {
+            SynchronousResultReceiver.Result resultAwaitResult = synchronousResultReceiver.awaitResult(60000L);
+            if (resultAwaitResult.resultCode != 1) {
                 return Collections.EMPTY_SET;
             }
-            ParceledListSlice parceledListSlice = (ParceledListSlice) awaitResult.bundle.getParcelable(EXTRA_CAPABILITIES, ParceledListSlice.class);
+            ParceledListSlice parceledListSlice = (ParceledListSlice) resultAwaitResult.bundle.getParcelable(EXTRA_CAPABILITIES, ParceledListSlice.class);
             return new ArraySet(parceledListSlice == null ? null : parceledListSlice.getList());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -260,9 +259,9 @@ public final class TranslationManager {
 
     void removeTranslator(int i) {
         synchronized (this.mLock) {
-            int indexOf = this.mTranslatorIds.indexOf(i);
-            if (indexOf >= 0) {
-                this.mTranslatorIds.remove(indexOf);
+            int iIndexOf = this.mTranslatorIds.indexOf(i);
+            if (iIndexOf >= 0) {
+                this.mTranslatorIds.remove(iIndexOf);
             }
         }
     }
@@ -289,8 +288,8 @@ public final class TranslationManager {
         public void sendResult(final Bundle bundle) {
             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.view.translation.TranslationManager$TranslationCapabilityRemoteCallback$$ExternalSyntheticLambda1
                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    TranslationManager.TranslationCapabilityRemoteCallback.this.lambda$sendResult$1(bundle);
+                public final void runOrThrow() throws Exception {
+                    this.f$0.lambda$sendResult$1(bundle);
                 }
             });
         }
@@ -300,7 +299,7 @@ public final class TranslationManager {
             this.mExecutor.execute(new Runnable() { // from class: android.view.translation.TranslationManager$TranslationCapabilityRemoteCallback$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TranslationManager.TranslationCapabilityRemoteCallback.this.lambda$sendResult$0(bundle);
+                    this.f$0.lambda$sendResult$0(bundle);
                 }
             });
         }

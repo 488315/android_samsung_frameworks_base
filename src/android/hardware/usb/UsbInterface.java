@@ -12,15 +12,15 @@ public class UsbInterface implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public UsbInterface createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            String readString = parcel.readString();
-            int readInt3 = parcel.readInt();
-            int readInt4 = parcel.readInt();
-            int readInt5 = parcel.readInt();
-            Parcelable[] readParcelableArray = parcel.readParcelableArray(UsbEndpoint.class.getClassLoader());
-            UsbInterface usbInterface = new UsbInterface(readInt, readInt2, readString, readInt3, readInt4, readInt5);
-            usbInterface.setEndpoints(readParcelableArray);
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            String string = parcel.readString();
+            int i3 = parcel.readInt();
+            int i4 = parcel.readInt();
+            int i5 = parcel.readInt();
+            Parcelable[] parcelableArray = parcel.readParcelableArray(UsbEndpoint.class.getClassLoader());
+            UsbInterface usbInterface = new UsbInterface(i, i2, string, i3, i4, i5);
+            usbInterface.setEndpoints(parcelableArray);
             return usbInterface;
         }
 

@@ -24,7 +24,7 @@ public class FixedPointUtil {
             @Override // com.android.internal.org.bouncycastle.math.ec.PreCompCallback
             public PreCompInfo precompute(PreCompInfo preCompInfo) {
                 FixedPointPreCompInfo fixedPointPreCompInfo = preCompInfo instanceof FixedPointPreCompInfo ? (FixedPointPreCompInfo) preCompInfo : null;
-                int combSize = FixedPointUtil.getCombSize(ECCurve.this);
+                int combSize = FixedPointUtil.getCombSize(curve);
                 int i = combSize > 250 ? 6 : 5;
                 int i2 = 1 << i;
                 if (checkExisting(fixedPointPreCompInfo, i2)) {
@@ -37,7 +37,7 @@ public class FixedPointUtil {
                     eCPointArr[i4] = eCPointArr[i4 - 1].timesPow2(i3);
                 }
                 eCPointArr[i] = eCPointArr[0].subtract(eCPointArr[1]);
-                ECCurve.this.normalizeAll(eCPointArr);
+                curve.normalizeAll(eCPointArr);
                 ECPoint[] eCPointArr2 = new ECPoint[i2];
                 eCPointArr2[0] = eCPointArr[0];
                 for (int i5 = i - 1; i5 >= 0; i5--) {
@@ -47,9 +47,9 @@ public class FixedPointUtil {
                         eCPointArr2[i7] = eCPointArr2[i7 - i6].add(eCPoint2);
                     }
                 }
-                ECCurve.this.normalizeAll(eCPointArr2);
+                curve.normalizeAll(eCPointArr2);
                 FixedPointPreCompInfo fixedPointPreCompInfo2 = new FixedPointPreCompInfo();
-                fixedPointPreCompInfo2.setLookupTable(ECCurve.this.createCacheSafeLookupTable(eCPointArr2, 0, i2));
+                fixedPointPreCompInfo2.setLookupTable(curve.createCacheSafeLookupTable(eCPointArr2, 0, i2));
                 fixedPointPreCompInfo2.setOffset(eCPointArr[i]);
                 fixedPointPreCompInfo2.setWidth(i);
                 return fixedPointPreCompInfo2;

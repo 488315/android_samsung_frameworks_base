@@ -25,7 +25,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VolumeManager {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -50,7 +49,6 @@ public final class VolumeManager {
     public VolumeBarViewModel$$ExternalSyntheticLambda1 volumeModelCallback;
     public final List wiredEarphoneDeviceList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -81,16 +79,16 @@ public final class VolumeManager {
             @Override // android.media.session.MediaController.Callback
             public final void onPlaybackStateChanged(PlaybackState playbackState) {
                 Log.i("SoundCraft.VolumeManager", "onPlaybackStateChanged state = " + (playbackState != null ? Integer.valueOf(playbackState.getState()) : null));
-                Integer valueOf = playbackState != null ? Integer.valueOf(playbackState.getState()) : null;
-                if (VolumeManager.this.isRemoteStreamPlaying && valueOf != null && valueOf.intValue() == 3) {
+                Integer numValueOf = playbackState != null ? Integer.valueOf(playbackState.getState()) : null;
+                if (this.this$0.isRemoteStreamPlaying && numValueOf != null && numValueOf.intValue() == 3) {
                     return;
                 }
-                if (valueOf != null && valueOf.intValue() == 3) {
-                    VolumeManager.this.isRemoteStreamPlaying = true;
+                if (numValueOf != null && numValueOf.intValue() == 3) {
+                    this.this$0.isRemoteStreamPlaying = true;
                 } else {
-                    VolumeManager.this.isRemoteStreamPlaying = false;
+                    this.this$0.isRemoteStreamPlaying = false;
                 }
-                VolumeManager.this.updateCurrentVolume();
+                this.this$0.updateCurrentVolume();
             }
         };
     }
@@ -168,10 +166,10 @@ public final class VolumeManager {
             int minVolume = getMinVolume();
             int maxVolume = getMaxVolume();
             int device = getDevice();
-            boolean isStreamEnabled = isStreamEnabled();
-            boolean isAurCastEnabled = isAurCastEnabled();
+            boolean zIsStreamEnabled = isStreamEnabled();
+            boolean zIsAurCastEnabled = isAurCastEnabled();
             VolumeModel volumeModel = this.volumeModel;
-            return new VolumeModel(streamVolume, minVolume, maxVolume, device, isStreamEnabled, isAurCastEnabled, volumeModel.isAllSoundMute, volumeModel.isZenMode, volumeModel.isZenModeDisabled, volumeModel.isSmartViewEnabled, volumeModel.isMusicShareEnabled, volumeModel.isDisallowAdjustVolume);
+            return new VolumeModel(streamVolume, minVolume, maxVolume, device, zIsStreamEnabled, zIsAurCastEnabled, volumeModel.isAllSoundMute, volumeModel.isZenMode, volumeModel.isZenModeDisabled, volumeModel.isSmartViewEnabled, volumeModel.isMusicShareEnabled, volumeModel.isDisallowAdjustVolume);
         }
         Trace.traceBegin(4096L, "#soundCraft.VolumeManager_getVolumeModel");
         try {
@@ -179,10 +177,10 @@ public final class VolumeManager {
             int minVolume2 = getMinVolume();
             int maxVolume2 = getMaxVolume();
             int device2 = getDevice();
-            boolean isStreamEnabled2 = isStreamEnabled();
-            boolean isAurCastEnabled2 = isAurCastEnabled();
+            boolean zIsStreamEnabled2 = isStreamEnabled();
+            boolean zIsAurCastEnabled2 = isAurCastEnabled();
             VolumeModel volumeModel2 = this.volumeModel;
-            return new VolumeModel(streamVolume2, minVolume2, maxVolume2, device2, isStreamEnabled2, isAurCastEnabled2, volumeModel2.isAllSoundMute, volumeModel2.isZenMode, volumeModel2.isZenModeDisabled, volumeModel2.isSmartViewEnabled, volumeModel2.isMusicShareEnabled, volumeModel2.isDisallowAdjustVolume);
+            return new VolumeModel(streamVolume2, minVolume2, maxVolume2, device2, zIsStreamEnabled2, zIsAurCastEnabled2, volumeModel2.isAllSoundMute, volumeModel2.isZenMode, volumeModel2.isZenModeDisabled, volumeModel2.isSmartViewEnabled, volumeModel2.isMusicShareEnabled, volumeModel2.isDisallowAdjustVolume);
         } finally {
             Trace.traceEnd(4096L);
         }
@@ -246,11 +244,11 @@ public final class VolumeManager {
     }
 
     public final void updateRemoteVolume(boolean z, int i, int i2, int i3, int i4, MediaSession.Token token, boolean z2) {
-        StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("updateRemoteVolume enabled = ", i, " stream = ", z, " volume = ");
-        m.append(i4);
-        m.append(" remoteSpeaker = ");
-        m.append(z2);
-        Log.i("SoundCraft.VolumeManager", m.toString());
+        StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("updateRemoteVolume enabled = ", i, " stream = ", z, " volume = ");
+        sbM.append(i4);
+        sbM.append(" remoteSpeaker = ");
+        sbM.append(z2);
+        Log.i("SoundCraft.VolumeManager", sbM.toString());
         if (this.remoteStreamEnabled != z) {
             VolumeManager$callback$1 volumeManager$callback$1 = this.callback;
             if (z) {

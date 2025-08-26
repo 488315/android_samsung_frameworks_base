@@ -41,7 +41,7 @@ public class ComponentCallbacksController {
         forAllComponentCallbacks(new Consumer() { // from class: android.content.ComponentCallbacksController$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ((ComponentCallbacks) obj).onConfigurationChanged(Configuration.this);
+                ((ComponentCallbacks) obj).onConfigurationChanged(configuration);
             }
         });
     }

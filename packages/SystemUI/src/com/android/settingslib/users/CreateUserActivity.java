@@ -3,12 +3,12 @@ package com.android.settingslib.users;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CreateUserActivity extends Activity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,7 +26,7 @@ public class CreateUserActivity extends Activity {
     }
 
     @Override // android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         Intent intent = getIntent();
         this.mCreateUserDialogController = new CreateUserDialogController(intent.getStringExtra("file_authority"));
@@ -34,14 +34,14 @@ public class CreateUserActivity extends Activity {
         if (bundle != null) {
             this.mCreateUserDialogController.onRestoreInstanceState(bundle);
         }
-        Dialog createDialog = this.mCreateUserDialogController.createDialog(this, new CreateUserActivity$$ExternalSyntheticLambda0(this), intent.getBooleanExtra("can_create_admin", false), new CreateUserActivity$$ExternalSyntheticLambda0(this), new Runnable() { // from class: com.android.settingslib.users.CreateUserActivity$$ExternalSyntheticLambda2
+        Dialog dialogCreateDialog = this.mCreateUserDialogController.createDialog(this, new CreateUserActivity$$ExternalSyntheticLambda0(this), intent.getBooleanExtra("can_create_admin", false), new CreateUserActivity$$ExternalSyntheticLambda0(this), new Runnable() { // from class: com.android.settingslib.users.CreateUserActivity$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                CreateUserActivity.this.cancel();
+                this.f$0.cancel();
             }
         });
-        this.mSetupUserDialog = createDialog;
-        createDialog.show();
+        this.mSetupUserDialog = dialogCreateDialog;
+        dialogCreateDialog.show();
     }
 
     @Override // android.app.Activity

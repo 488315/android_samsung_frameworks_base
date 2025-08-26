@@ -27,7 +27,7 @@ public class AppFunctionManagerHelper {
         appSearchManager.createGlobalSearchSession(executor, new Consumer() { // from class: android.app.appfunctions.AppFunctionManagerHelper$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                AppFunctionManagerHelper.lambda$isAppFunctionEnabled$1(OutcomeReceiver.this, str2, str, executor, (AppSearchResult) obj);
+                AppFunctionManagerHelper.lambda$isAppFunctionEnabled$1(outcomeReceiver, str2, str, executor, (AppSearchResult) obj);
             }
         });
     }
@@ -40,14 +40,14 @@ public class AppFunctionManagerHelper {
         try {
             GlobalSearchSession globalSearchSession = (GlobalSearchSession) appSearchResult.getResultValue();
             try {
-                SearchResults searchJoinedStaticWithRuntimeAppFunctions = searchJoinedStaticWithRuntimeAppFunctions((GlobalSearchSession) Objects.requireNonNull(globalSearchSession), str, str2);
-                searchJoinedStaticWithRuntimeAppFunctions.getNextPage(executor, new Consumer() { // from class: android.app.appfunctions.AppFunctionManagerHelper$$ExternalSyntheticLambda1
+                SearchResults searchResultsSearchJoinedStaticWithRuntimeAppFunctions = searchJoinedStaticWithRuntimeAppFunctions((GlobalSearchSession) Objects.requireNonNull(globalSearchSession), str, str2);
+                searchResultsSearchJoinedStaticWithRuntimeAppFunctions.getNextPage(executor, new Consumer() { // from class: android.app.appfunctions.AppFunctionManagerHelper$$ExternalSyntheticLambda1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        AppFunctionManagerHelper.lambda$isAppFunctionEnabled$0(OutcomeReceiver.this, (AppSearchResult) obj);
+                        AppFunctionManagerHelper.lambda$isAppFunctionEnabled$0(outcomeReceiver, (AppSearchResult) obj);
                     }
                 });
-                searchJoinedStaticWithRuntimeAppFunctions.close();
+                searchResultsSearchJoinedStaticWithRuntimeAppFunctions.close();
                 if (globalSearchSession != null) {
                     globalSearchSession.close();
                 }

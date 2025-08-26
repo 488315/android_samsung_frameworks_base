@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.collections.CollectionsKt__IterablesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ConnectivityState {
     public boolean activityIn;
@@ -44,9 +43,9 @@ public class ConnectivityState {
     }
 
     public int hashCode() {
-        int m = (TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.connected) * 31, 31, this.enabled), 31, this.activityIn), 31, this.activityOut) + this.level) * 31;
+        int iM = (TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.connected) * 31, 31, this.enabled), 31, this.activityIn), 31, this.activityOut) + this.level) * 31;
         SignalIcon$IconGroup signalIcon$IconGroup = this.iconGroup;
-        return Long.hashCode(this.time) + ((((((m + (signalIcon$IconGroup != null ? signalIcon$IconGroup.hashCode() : 0)) * 31) + this.inetCondition) * 31) + this.rssi) * 31);
+        return Long.hashCode(this.time) + ((((((iM + (signalIcon$IconGroup != null ? signalIcon$IconGroup.hashCode() : 0)) * 31) + this.inetCondition) * 31) + this.rssi) * 31);
     }
 
     public List tableColumns() {
@@ -54,9 +53,9 @@ public class ConnectivityState {
     }
 
     public List tableData() {
-        List asList = Arrays.asList(Boolean.valueOf(this.connected), Boolean.valueOf(this.enabled), Boolean.valueOf(this.activityIn), Boolean.valueOf(this.activityOut), Integer.valueOf(this.level), this.iconGroup, Integer.valueOf(this.inetCondition), Integer.valueOf(this.rssi), ConnectivityStateKt.sSDF.format(Long.valueOf(this.time)));
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(asList, 10));
-        Iterator it = asList.iterator();
+        List listAsList = Arrays.asList(Boolean.valueOf(this.connected), Boolean.valueOf(this.enabled), Boolean.valueOf(this.activityIn), Boolean.valueOf(this.activityOut), Integer.valueOf(this.level), this.iconGroup, Integer.valueOf(this.inetCondition), Integer.valueOf(this.rssi), ConnectivityStateKt.sSDF.format(Long.valueOf(this.time)));
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAsList, 10));
+        Iterator it = listAsList.iterator();
         while (it.hasNext()) {
             arrayList.add(String.valueOf(it.next()));
         }
@@ -69,9 +68,9 @@ public class ConnectivityState {
         }
         StringBuilder sb = new StringBuilder();
         toString(sb);
-        String sb2 = sb.toString();
-        sb2.getClass();
-        return sb2;
+        String string = sb.toString();
+        string.getClass();
+        return string;
     }
 
     public void toString(StringBuilder sb) {

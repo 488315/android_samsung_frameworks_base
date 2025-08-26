@@ -2,16 +2,13 @@ package com.android.systemui.qs.ui.adapter;
 
 import android.support.v4.media.session.MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface CustomizerState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Animating extends CustomizerState {
         long getAnimationDuration();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimatingIntoCustomizer implements Animating {
         public final long animationDuration;
 
@@ -45,7 +42,6 @@ public interface CustomizerState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimatingOutOfCustomizer implements Animating {
         public final long animationDuration;
 
@@ -74,7 +70,6 @@ public interface CustomizerState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Hidden implements CustomizerState {
         public static final Hidden INSTANCE = new Hidden();
 
@@ -99,7 +94,6 @@ public interface CustomizerState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Showing implements CustomizerState {
         public static final Showing INSTANCE = new Showing();
         public static final boolean isCustomizing = true;

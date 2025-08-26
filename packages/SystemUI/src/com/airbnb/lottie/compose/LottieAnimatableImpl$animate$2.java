@@ -18,7 +18,6 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.JobKt;
 import kotlinx.coroutines.NonCancellable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LottieAnimatableImpl$animate$2 extends SuspendLambda implements Function1 {
     final /* synthetic */ LottieCancellationBehavior $cancellationBehavior;
@@ -32,7 +31,6 @@ final class LottieAnimatableImpl$animate$2 extends SuspendLambda implements Func
     int label;
     final /* synthetic */ LottieAnimatableImpl this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.airbnb.lottie.compose.LottieAnimatableImpl$animate$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ LottieCancellationBehavior $cancellationBehavior;
@@ -42,7 +40,6 @@ final class LottieAnimatableImpl$animate$2 extends SuspendLambda implements Func
         int label;
         final /* synthetic */ LottieAnimatableImpl this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.airbnb.lottie.compose.LottieAnimatableImpl$animate$2$1$WhenMappings */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
@@ -80,15 +77,14 @@ final class LottieAnimatableImpl$animate$2 extends SuspendLambda implements Func
             	at jadx.core.utils.ErrorsCounter.error(ErrorsCounter.java:31)
             	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
             */
-        /* JADX WARN: Removed duplicated region for block: B:14:0x0040  */
-        /* JADX WARN: Removed duplicated region for block: B:18:0x004a  */
-        /* JADX WARN: Removed duplicated region for block: B:21:0x0032  */
-        /* JADX WARN: Removed duplicated region for block: B:22:0x0066  */
-        /* JADX WARN: Removed duplicated region for block: B:9:0x0024  */
+        /* JADX WARN: Removed duplicated region for block: B:11:0x0024  */
+        /* JADX WARN: Removed duplicated region for block: B:15:0x0032 A[ADDED_TO_REGION, REMOVE] */
+        /* JADX WARN: Removed duplicated region for block: B:18:0x0040  */
+        /* JADX WARN: Removed duplicated region for block: B:19:0x004a  */
+        /* JADX WARN: Removed duplicated region for block: B:24:0x0066  */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         public final java.lang.Object invokeSuspend(java.lang.Object r5) {
             /*
@@ -153,7 +149,6 @@ final class LottieAnimatableImpl$animate$2 extends SuspendLambda implements Func
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -186,7 +181,7 @@ final class LottieAnimatableImpl$animate$2 extends SuspendLambda implements Func
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return ((LottieAnimatableImpl$animate$2) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
     }
 

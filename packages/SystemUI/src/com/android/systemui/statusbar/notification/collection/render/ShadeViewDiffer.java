@@ -21,7 +21,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeViewDiffer {
     public final ShadeViewDifferLogger logger;
@@ -76,21 +75,21 @@ public final class ShadeViewDiffer {
                         ShadeViewDifferLogger$$ExternalSyntheticLambda0 shadeViewDifferLogger$$ExternalSyntheticLambda0 = new ShadeViewDifferLogger$$ExternalSyntheticLambda0(i3);
                         LogBuffer logBuffer = shadeViewDifferLogger.buffer;
                         nodeSpec = nodeSpec3;
-                        LogMessage obtain = logBuffer.obtain("NotifViewManager", logLevel, shadeViewDifferLogger$$ExternalSyntheticLambda0, null);
-                        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                        LogMessage logMessageObtain = logBuffer.obtain("NotifViewManager", logLevel, shadeViewDifferLogger$$ExternalSyntheticLambda0, null);
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                         logMessageImpl.str1 = nodeLabel;
                         logMessageImpl.str2 = nodeLabel2;
                         logMessageImpl.bool1 = z;
                         i2 = 1;
                         logMessageImpl.bool2 = true;
-                        logBuffer.commit(obtain);
+                        logBuffer.commit(logMessageObtain);
                     } else {
                         i2 = i5;
                         nodeSpec = nodeSpec3;
                         boolean z2 = i6 ^ 1;
                         shadeViewDiffer.logger.logDetachingChild(nodeController2.getNodeLabel(), nodeController.getNodeLabel(), node != null ? node.controller.getNodeLabel() : null, z2, nodeSpec == null ? i2 : 0);
-                        boolean isEnabled = Trace.isEnabled();
-                        if (isEnabled) {
+                        boolean zIsEnabled = Trace.isEnabled();
+                        if (zIsEnabled) {
                             TraceUtilsKt.beginSlice("ShadeNode#" + Reflection.getOrCreateKotlinClass(nodeController.getClass()).getSimpleName() + "#removeChild");
                         }
                         try {
@@ -99,7 +98,7 @@ public final class ShadeViewDiffer {
                             Unit unit = Unit.INSTANCE;
                             shadeNode3.parent = null;
                         } finally {
-                            if (isEnabled) {
+                            if (zIsEnabled) {
                                 TraceUtilsKt.endSlice();
                             }
                         }
@@ -144,17 +143,17 @@ public final class ShadeViewDiffer {
     public final void applySpec(NodeSpecImpl nodeSpecImpl) {
         NodeController nodeController = nodeSpecImpl.controller;
         ShadeNode shadeNode = this.rootNode;
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("ShadeViewDiffer.applySpec");
         }
         try {
-            Map treeToMap = treeToMap(nodeSpecImpl);
+            Map mapTreeToMap = treeToMap(nodeSpecImpl);
             if (Intrinsics.areEqual(nodeController, shadeNode.controller)) {
-                detachChildren(shadeNode, treeToMap);
-                attachChildren(shadeNode, treeToMap);
+                detachChildren(shadeNode, mapTreeToMap);
+                attachChildren(shadeNode, mapTreeToMap);
                 Unit unit = Unit.INSTANCE;
-                if (isEnabled) {
+                if (zIsEnabled) {
                     return;
                 } else {
                     return;
@@ -162,133 +161,135 @@ public final class ShadeViewDiffer {
             }
             throw new IllegalArgumentException("Tree root " + nodeController.getNodeLabel() + " does not match own root at " + shadeNode.controller.getNodeLabel());
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
     }
 
-    public final void attachChildren(ShadeNode shadeNode, Map map) {
+    public final void attachChildren(ShadeNode shadeNode, Map map) throws Throwable {
         boolean z;
-        boolean z2;
         NodeController nodeController;
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        Object obj;
+        boolean z2;
+        NodeController nodeController2;
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("attachChildren");
         }
         try {
-            NodeController nodeController2 = shadeNode.controller;
-            Object obj = ((LinkedHashMap) map).get(nodeController2);
-            try {
-                if (obj == null) {
-                    throw new IllegalStateException("Required value was null.");
-                }
-                Iterator it = ((ArrayList) ((NodeSpecImpl) ((NodeSpec) obj)).children).iterator();
-                int i = 0;
-                while (it.hasNext()) {
-                    int i2 = i + 1;
-                    NodeSpec nodeSpec = (NodeSpec) it.next();
-                    View childAt = nodeController2.getChildAt(i);
-                    ShadeNode node = getNode(nodeSpec);
-                    NodeController nodeController3 = node.controller;
-                    if (Intrinsics.areEqual(nodeController3.getView(), childAt)) {
-                        z2 = isEnabled;
-                        nodeController = nodeController2;
-                    } else {
-                        if (nodeController3.removeFromParentIfKeptForAnimation()) {
-                            this.logger.logDetachingChild(nodeController3.getNodeLabel(), null, null, false, true);
-                        }
-                        ShadeNode shadeNode2 = node.parent;
-                        ShadeViewDifferLogger shadeViewDifferLogger = this.logger;
-                        if (shadeNode2 == null) {
-                            String nodeLabel = nodeController3.getNodeLabel();
-                            String nodeLabel2 = nodeController2.getNodeLabel();
-                            shadeViewDifferLogger.getClass();
-                            LogLevel logLevel = LogLevel.DEBUG;
-                            z2 = isEnabled;
-                            nodeController = nodeController2;
-                            ShadeViewDifferLogger$$ExternalSyntheticLambda0 shadeViewDifferLogger$$ExternalSyntheticLambda0 = new ShadeViewDifferLogger$$ExternalSyntheticLambda0(4);
-                            LogBuffer logBuffer = shadeViewDifferLogger.buffer;
-                            LogMessage obtain = logBuffer.obtain("NotifViewManager", logLevel, shadeViewDifferLogger$$ExternalSyntheticLambda0, null);
-                            ((LogMessageImpl) obtain).str1 = nodeLabel;
-                            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-                            logMessageImpl.str2 = nodeLabel2;
-                            logMessageImpl.int1 = i;
-                            logBuffer.commit(obtain);
-                            shadeNode.addChildAt(node, i);
-                            node.parent = shadeNode;
-                        } else {
-                            z2 = isEnabled;
-                            nodeController = nodeController2;
-                            if (!shadeNode2.equals(shadeNode)) {
-                                String nodeLabel3 = nodeController3.getNodeLabel();
-                                String nodeLabel4 = nodeController.getNodeLabel();
-                                ShadeNode shadeNode3 = node.parent;
-                                throw new IllegalStateException("Child " + nodeLabel3 + " should have parent " + nodeLabel4 + " but is actually " + (shadeNode3 != null ? shadeNode3.controller.getNodeLabel() : null));
-                            }
-                            String nodeLabel5 = nodeController3.getNodeLabel();
-                            String nodeLabel6 = nodeController.getNodeLabel();
-                            shadeViewDifferLogger.getClass();
-                            LogLevel logLevel2 = LogLevel.DEBUG;
-                            ShadeViewDifferLogger$$ExternalSyntheticLambda0 shadeViewDifferLogger$$ExternalSyntheticLambda02 = new ShadeViewDifferLogger$$ExternalSyntheticLambda0(3);
-                            LogBuffer logBuffer2 = shadeViewDifferLogger.buffer;
-                            LogMessage obtain2 = logBuffer2.obtain("NotifViewManager", logLevel2, shadeViewDifferLogger$$ExternalSyntheticLambda02, null);
-                            ((LogMessageImpl) obtain2).str1 = nodeLabel5;
-                            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
-                            logMessageImpl2.str2 = nodeLabel6;
-                            logMessageImpl2.int1 = i;
-                            logBuffer2.commit(obtain2);
-                            shadeNode.moveChildTo(node, i);
-                        }
-                    }
-                    nodeController3.resetKeepInParentForAnimation();
-                    if (!((ArrayList) ((NodeSpecImpl) nodeSpec).children).isEmpty()) {
-                        attachChildren(node, map);
-                    }
-                    i = i2;
-                    isEnabled = z2;
+            nodeController = shadeNode.controller;
+            obj = ((LinkedHashMap) map).get(nodeController);
+        } catch (Throwable th) {
+            th = th;
+            z = zIsEnabled;
+        }
+        try {
+            if (obj == null) {
+                throw new IllegalStateException("Required value was null.");
+            }
+            Iterator it = ((ArrayList) ((NodeSpecImpl) ((NodeSpec) obj)).children).iterator();
+            int i = 0;
+            while (it.hasNext()) {
+                int i2 = i + 1;
+                NodeSpec nodeSpec = (NodeSpec) it.next();
+                View childAt = nodeController.getChildAt(i);
+                ShadeNode node = getNode(nodeSpec);
+                NodeController nodeController3 = node.controller;
+                if (Intrinsics.areEqual(nodeController3.getView(), childAt)) {
+                    z2 = zIsEnabled;
                     nodeController2 = nodeController;
+                } else {
+                    if (nodeController3.removeFromParentIfKeptForAnimation()) {
+                        this.logger.logDetachingChild(nodeController3.getNodeLabel(), null, null, false, true);
+                    }
+                    ShadeNode shadeNode2 = node.parent;
+                    ShadeViewDifferLogger shadeViewDifferLogger = this.logger;
+                    if (shadeNode2 == null) {
+                        String nodeLabel = nodeController3.getNodeLabel();
+                        String nodeLabel2 = nodeController.getNodeLabel();
+                        shadeViewDifferLogger.getClass();
+                        LogLevel logLevel = LogLevel.DEBUG;
+                        z2 = zIsEnabled;
+                        nodeController2 = nodeController;
+                        ShadeViewDifferLogger$$ExternalSyntheticLambda0 shadeViewDifferLogger$$ExternalSyntheticLambda0 = new ShadeViewDifferLogger$$ExternalSyntheticLambda0(4);
+                        LogBuffer logBuffer = shadeViewDifferLogger.buffer;
+                        LogMessage logMessageObtain = logBuffer.obtain("NotifViewManager", logLevel, shadeViewDifferLogger$$ExternalSyntheticLambda0, null);
+                        ((LogMessageImpl) logMessageObtain).str1 = nodeLabel;
+                        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                        logMessageImpl.str2 = nodeLabel2;
+                        logMessageImpl.int1 = i;
+                        logBuffer.commit(logMessageObtain);
+                        shadeNode.addChildAt(node, i);
+                        node.parent = shadeNode;
+                    } else {
+                        z2 = zIsEnabled;
+                        nodeController2 = nodeController;
+                        if (!shadeNode2.equals(shadeNode)) {
+                            String nodeLabel3 = nodeController3.getNodeLabel();
+                            String nodeLabel4 = nodeController2.getNodeLabel();
+                            ShadeNode shadeNode3 = node.parent;
+                            throw new IllegalStateException("Child " + nodeLabel3 + " should have parent " + nodeLabel4 + " but is actually " + (shadeNode3 != null ? shadeNode3.controller.getNodeLabel() : null));
+                        }
+                        String nodeLabel5 = nodeController3.getNodeLabel();
+                        String nodeLabel6 = nodeController2.getNodeLabel();
+                        shadeViewDifferLogger.getClass();
+                        LogLevel logLevel2 = LogLevel.DEBUG;
+                        ShadeViewDifferLogger$$ExternalSyntheticLambda0 shadeViewDifferLogger$$ExternalSyntheticLambda02 = new ShadeViewDifferLogger$$ExternalSyntheticLambda0(3);
+                        LogBuffer logBuffer2 = shadeViewDifferLogger.buffer;
+                        LogMessage logMessageObtain2 = logBuffer2.obtain("NotifViewManager", logLevel2, shadeViewDifferLogger$$ExternalSyntheticLambda02, null);
+                        ((LogMessageImpl) logMessageObtain2).str1 = nodeLabel5;
+                        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
+                        logMessageImpl2.str2 = nodeLabel6;
+                        logMessageImpl2.int1 = i;
+                        logBuffer2.commit(logMessageObtain2);
+                        shadeNode.moveChildTo(node, i);
+                    }
                 }
-                boolean z3 = isEnabled;
-                Unit unit = Unit.INSTANCE;
-                if (z3) {
-                    TraceUtilsKt.endSlice();
+                nodeController3.resetKeepInParentForAnimation();
+                if (!((ArrayList) ((NodeSpecImpl) nodeSpec).children).isEmpty()) {
+                    attachChildren(node, map);
                 }
-            } catch (Throwable th) {
-                th = th;
-                if (z) {
-                    TraceUtilsKt.endSlice();
-                }
-                throw th;
+                i = i2;
+                zIsEnabled = z2;
+                nodeController = nodeController2;
+            }
+            boolean z3 = zIsEnabled;
+            Unit unit = Unit.INSTANCE;
+            if (z3) {
+                TraceUtilsKt.endSlice();
             }
         } catch (Throwable th2) {
             th = th2;
-            z = isEnabled;
+            if (z) {
+                TraceUtilsKt.endSlice();
+            }
+            throw th;
         }
     }
 
     public final void detachChildren(ShadeNode shadeNode, Map map) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("detachChildren");
         }
         try {
-            Collection values = ((LinkedHashMap) this.nodes).values();
-            int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(values, 10));
-            if (mapCapacity < 16) {
-                mapCapacity = 16;
+            Collection collectionValues = ((LinkedHashMap) this.nodes).values();
+            int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(collectionValues, 10));
+            if (iMapCapacity < 16) {
+                iMapCapacity = 16;
             }
-            LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
-            for (Object obj : values) {
+            LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
+            for (Object obj : collectionValues) {
                 linkedHashMap.put(((ShadeNode) obj).controller.getView(), obj);
             }
             detachChildren$lambda$4$detachRecursively(linkedHashMap, this, shadeNode, map);
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -316,13 +317,13 @@ public final class ShadeViewDiffer {
             LogLevel logLevel = LogLevel.ERROR;
             ShadeViewDifferLogger$$ExternalSyntheticLambda0 shadeViewDifferLogger$$ExternalSyntheticLambda0 = new ShadeViewDifferLogger$$ExternalSyntheticLambda0(2);
             LogBuffer logBuffer = shadeViewDifferLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotifViewManager", logLevel, shadeViewDifferLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("NotifViewManager", logLevel, shadeViewDifferLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = e.toString();
             StringBuilder sb = new StringBuilder();
             NodeControllerKt.treeSpecToStrHelper(nodeSpecImpl, sb, "");
             logMessageImpl.str2 = sb.toString();
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             throw e;
         }
     }

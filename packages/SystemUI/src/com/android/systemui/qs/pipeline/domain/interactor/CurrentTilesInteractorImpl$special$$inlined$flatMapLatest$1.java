@@ -1,12 +1,21 @@
 package com.android.systemui.qs.pipeline.domain.interactor;
 
+import com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl;
+import com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl$getInstalledTilesComponents$$inlined$map$1;
+import com.android.systemui.qs.pipeline.data.repository.KnoxPolicyTilesRepositoryImpl;
+import com.android.systemui.qs.pipeline.data.repository.TileSpecRepository;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
+import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1;
+import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CurrentTilesInteractorImpl$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     int I$0;
@@ -29,90 +38,52 @@ public final class CurrentTilesInteractorImpl$special$$inlined$flatMapLatest$1 e
         return currentTilesInteractorImpl$special$$inlined$flatMapLatest$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0074, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x0074, code lost:
     
         if (kotlinx.coroutines.flow.FlowKt.emitAll(r3, r10, r9) == r0) goto L20;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r10) {
-        /*
-            r9 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r9.label
-            r2 = 2
-            r3 = 1
-            if (r1 == 0) goto L22
-            if (r1 == r3) goto L18
-            if (r1 != r2) goto L10
-            kotlin.ResultKt.throwOnFailure(r10)
-            goto L77
-        L10:
-            java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-            java.lang.String r10 = "call to 'resume' before 'invoke' with coroutine"
-            r9.<init>(r10)
-            throw r9
-        L18:
-            int r1 = r9.I$0
-            java.lang.Object r3 = r9.L$0
-            kotlinx.coroutines.flow.FlowCollector r3 = (kotlinx.coroutines.flow.FlowCollector) r3
-            kotlin.ResultKt.throwOnFailure(r10)
-            goto L45
-        L22:
-            kotlin.ResultKt.throwOnFailure(r10)
-            java.lang.Object r10 = r9.L$0
-            kotlinx.coroutines.flow.FlowCollector r10 = (kotlinx.coroutines.flow.FlowCollector) r10
-            java.lang.Object r1 = r9.L$1
-            java.lang.Number r1 = (java.lang.Number) r1
-            int r1 = r1.intValue()
-            com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractorImpl r4 = r9.this$0
-            com.android.systemui.qs.pipeline.data.repository.TileSpecRepository r4 = r4.tileSpecRepository
-            r9.L$0 = r10
-            r9.I$0 = r1
-            r9.label = r3
-            java.lang.Object r3 = r4.tilesSpecs(r1, r9)
-            if (r3 != r0) goto L42
-            goto L76
-        L42:
-            r8 = r3
-            r3 = r10
-            r10 = r8
-        L45:
-            kotlinx.coroutines.flow.Flow r10 = (kotlinx.coroutines.flow.Flow) r10
-            com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractorImpl r4 = r9.this$0
-            com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepository r4 = r4.installedTilesComponentRepository
-            com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl r4 = (com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl) r4
-            java.util.Map r5 = r4.userMap
-            monitor-enter(r5)
-            kotlinx.coroutines.flow.StateFlow r4 = r4.getForUserLocked(r1)     // Catch: java.lang.Throwable -> L7a
-            monitor-exit(r5)
-            com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl$getInstalledTilesComponents$$inlined$map$1 r5 = new com.android.systemui.qs.pipeline.data.repository.InstalledTilesComponentRepositoryImpl$getInstalledTilesComponents$$inlined$map$1
-            r5.<init>(r4)
-            com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractorImpl r4 = r9.this$0
-            com.android.systemui.qs.pipeline.data.repository.KnoxPolicyTilesRepository r4 = r4.knoxPolicyTilesRepository
-            com.android.systemui.qs.pipeline.data.repository.KnoxPolicyTilesRepositoryImpl r4 = (com.android.systemui.qs.pipeline.data.repository.KnoxPolicyTilesRepositoryImpl) r4
-            kotlinx.coroutines.flow.ReadonlyStateFlow r4 = r4.knoxBlockedTiles
-            com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractorImpl$userAndTiles$1$1 r6 = new com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractorImpl$userAndTiles$1$1
-            r7 = 0
-            r6.<init>(r1, r7)
-            kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 r10 = kotlinx.coroutines.flow.FlowKt.combine(r10, r5, r4, r6)
-            r9.L$0 = r7
-            r9.label = r2
-            java.lang.Object r9 = kotlinx.coroutines.flow.FlowKt.emitAll(r3, r10, r9)
-            if (r9 != r0) goto L77
-        L76:
-            return r0
-        L77:
-            kotlin.Unit r9 = kotlin.Unit.INSTANCE
-            return r9
-        L7a:
-            r9 = move-exception
-            monitor-exit(r5)
-            throw r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractorImpl$special$$inlined$flatMapLatest$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        int iIntValue;
+        FlowCollector flowCollector;
+        StateFlow forUserLocked;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            FlowCollector flowCollector2 = (FlowCollector) this.L$0;
+            iIntValue = ((Number) this.L$1).intValue();
+            TileSpecRepository tileSpecRepository = this.this$0.tileSpecRepository;
+            this.L$0 = flowCollector2;
+            this.I$0 = iIntValue;
+            this.label = 1;
+            Object objTilesSpecs = tileSpecRepository.tilesSpecs(iIntValue, this);
+            if (objTilesSpecs != coroutineSingletons) {
+                flowCollector = flowCollector2;
+                obj = objTilesSpecs;
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        iIntValue = this.I$0;
+        flowCollector = (FlowCollector) this.L$0;
+        ResultKt.throwOnFailure(obj);
+        Flow flow = (Flow) obj;
+        InstalledTilesComponentRepositoryImpl installedTilesComponentRepositoryImpl = (InstalledTilesComponentRepositoryImpl) this.this$0.installedTilesComponentRepository;
+        synchronized (installedTilesComponentRepositoryImpl.userMap) {
+            forUserLocked = installedTilesComponentRepositoryImpl.getForUserLocked(iIntValue);
+        }
+        FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1Combine = FlowKt.combine(flow, new InstalledTilesComponentRepositoryImpl$getInstalledTilesComponents$$inlined$map$1(forUserLocked), ((KnoxPolicyTilesRepositoryImpl) this.this$0.knoxPolicyTilesRepository).knoxBlockedTiles, new CurrentTilesInteractorImpl$userAndTiles$1$1(iIntValue, null));
+        this.L$0 = null;
+        this.label = 2;
     }
 }

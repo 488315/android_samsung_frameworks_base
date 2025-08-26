@@ -12,7 +12,6 @@ import kotlinx.coroutines.ExecutorsKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteRepositoryImpl$radioPowerState$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ TelephonyManager $telephonyManager;

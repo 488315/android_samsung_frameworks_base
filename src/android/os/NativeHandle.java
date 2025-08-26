@@ -70,7 +70,7 @@ public final class NativeHandle implements Closeable {
     }
 
     @Override // java.io.Closeable, java.lang.AutoCloseable
-    public void close() throws IOException {
+    public void close() throws IOException, ErrnoException {
         checkOpen();
         if (this.mOwn) {
             try {

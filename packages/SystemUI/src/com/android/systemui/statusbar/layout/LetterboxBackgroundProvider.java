@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 import java.util.concurrent.Executor;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LetterboxBackgroundProvider implements CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -23,7 +22,7 @@ public final class LetterboxBackgroundProvider implements CoreStartable {
     public final LetterboxBackgroundProvider$wallpaperColorsListener$1 wallpaperColorsListener = new WallpaperManager.OnColorsChangedListener() { // from class: com.android.systemui.statusbar.layout.LetterboxBackgroundProvider$wallpaperColorsListener$1
         @Override // android.app.WallpaperManager.OnColorsChangedListener
         public final void onColorsChanged(WallpaperColors wallpaperColors, int i) {
-            LetterboxBackgroundProvider letterboxBackgroundProvider = LetterboxBackgroundProvider.this;
+            LetterboxBackgroundProvider letterboxBackgroundProvider = this.this$0;
             int i2 = LetterboxBackgroundProvider.$r8$clinit;
             letterboxBackgroundProvider.backgroundExecutor.execute(new LetterboxBackgroundProvider$fetchBackgroundColorInfo$1(letterboxBackgroundProvider));
         }

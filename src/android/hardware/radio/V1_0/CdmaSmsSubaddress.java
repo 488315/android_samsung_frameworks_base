@@ -37,13 +37,13 @@ public final class CdmaSmsSubaddress {
 
     public static final ArrayList<CdmaSmsSubaddress> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CdmaSmsSubaddress> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CdmaSmsSubaddress cdmaSmsSubaddress = new CdmaSmsSubaddress();
-            cdmaSmsSubaddress.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+            cdmaSmsSubaddress.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
             arrayList.add(cdmaSmsSubaddress);
         }
         return arrayList;
@@ -54,10 +54,10 @@ public final class CdmaSmsSubaddress {
         this.odd = hwBlob.getBool(4 + j);
         long j2 = j + 8;
         int int32 = hwBlob.getInt32(j + 16);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j2, true);
         this.digits.clear();
         for (int i = 0; i < int32; i++) {
-            this.digits.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i)));
+            this.digits.add(Byte.valueOf(embeddedBuffer.getInt8(i)));
         }
     }
 

@@ -29,7 +29,7 @@ public class OverlayManager {
     }
 
     @SystemApi
-    public void setEnabledExclusiveInCategory(String str, UserHandle userHandle) throws SecurityException, IllegalStateException {
+    public void setEnabledExclusiveInCategory(String str, UserHandle userHandle) throws IllegalStateException, SecurityException {
         try {
             if (this.mService.setEnabledExclusiveInCategory(str, userHandle.getIdentifier())) {
             } else {
@@ -43,7 +43,7 @@ public class OverlayManager {
     }
 
     @SystemApi
-    public void setEnabled(String str, boolean z, UserHandle userHandle) throws SecurityException, IllegalStateException {
+    public void setEnabled(String str, boolean z, UserHandle userHandle) throws IllegalStateException, SecurityException {
         try {
             if (this.mService.setEnabled(str, z, userHandle.getIdentifier())) {
             } else {
@@ -56,7 +56,7 @@ public class OverlayManager {
         }
     }
 
-    public void enableWithConstraints(String str, UserHandle userHandle, List<OverlayConstraint> list) throws SecurityException, IllegalStateException {
+    public void enableWithConstraints(String str, UserHandle userHandle, List<OverlayConstraint> list) throws IllegalStateException, SecurityException {
         try {
             if (this.mService.enableWithConstraints(str, userHandle.getIdentifier(), list)) {
             } else {

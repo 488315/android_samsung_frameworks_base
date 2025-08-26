@@ -6,7 +6,6 @@ import com.android.internal.widget.MessagingImageMessage;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.ViewTransformationHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MessagingImageTransformState extends ImageTransformState {
     public MessagingImageMessage mImageMessage;
@@ -72,11 +71,11 @@ public class MessagingImageTransformState extends ImageTransformState {
                 this.mTransformedView.setTag(i2, Integer.valueOf(messagingImageMessage.getActualHeight()));
             }
             Object tag = this.mTransformedView.getTag(i3);
-            int intValue = tag == null ? -1 : ((Integer) tag).intValue();
-            this.mImageMessage.setActualWidth((int) NotificationUtils.interpolate(intValue, r0.getWidth(), interpolation));
+            int iIntValue = tag == null ? -1 : ((Integer) tag).intValue();
+            this.mImageMessage.setActualWidth((int) NotificationUtils.interpolate(iIntValue, r0.getWidth(), interpolation));
             Object tag2 = this.mTransformedView.getTag(i2);
-            int intValue2 = tag2 != null ? ((Integer) tag2).intValue() : -1;
-            this.mImageMessage.setActualHeight((int) NotificationUtils.interpolate(intValue2, r2.getHeight(), interpolation));
+            int iIntValue2 = tag2 != null ? ((Integer) tag2).intValue() : -1;
+            this.mImageMessage.setActualHeight((int) NotificationUtils.interpolate(iIntValue2, r2.getHeight(), interpolation));
         }
     }
 }

@@ -3,7 +3,6 @@ package com.android.systemui.touch;
 import com.android.systemui.touch.TouchInsetManager;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class TouchInsetManager$TouchInsetSession$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -26,18 +25,18 @@ public final /* synthetic */ class TouchInsetManager$TouchInsetSession$$External
                 break;
             default:
                 touchInsetSession.getClass();
-                final HashMap hashMap = new HashMap();
+                final HashMap map = new HashMap();
                 if (!touchInsetSession.mTrackedViews.isEmpty()) {
-                    touchInsetSession.mTrackedViews.stream().forEach(new TouchInsetManager$$ExternalSyntheticLambda1(3, hashMap));
+                    touchInsetSession.mTrackedViews.stream().forEach(new TouchInsetManager$$ExternalSyntheticLambda1(3, map));
                     final TouchInsetManager touchInsetManager2 = touchInsetSession.mManager;
                     touchInsetManager2.mExecutor.execute(new Runnable() { // from class: com.android.systemui.touch.TouchInsetManager$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            TouchInsetManager touchInsetManager3 = TouchInsetManager.this;
+                            TouchInsetManager touchInsetManager3 = touchInsetManager2;
                             TouchInsetManager.TouchInsetSession touchInsetSession2 = touchInsetSession;
-                            HashMap hashMap2 = hashMap;
+                            HashMap map2 = map;
                             touchInsetManager3.recycleRegions(touchInsetSession2);
-                            touchInsetManager3.mSessionRegions.put(touchInsetSession2, hashMap2);
+                            touchInsetManager3.mSessionRegions.put(touchInsetSession2, map2);
                             touchInsetManager3.updateTouchInsets();
                         }
                     });

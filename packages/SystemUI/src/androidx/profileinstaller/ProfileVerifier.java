@@ -1,14 +1,18 @@
 package androidx.profileinstaller;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import androidx.concurrent.futures.ResolvableFuture;
+import com.samsung.android.knox.EnterpriseDeviceManager;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ProfileVerifier {
     public static final String CUR_PROFILES_BASE_DIR = "/data/misc/profiles/cur/" + UserInfo.getCurrentUserId() + "/";
@@ -16,7 +20,6 @@ public final class ProfileVerifier {
     public static final Object SYNC_OBJ = new Object();
     public static CompilationStatus sCompilationStatus = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Cache {
         public final long mInstalledCurrentProfileSize;
         public final long mPackageLastUpdateTime;
@@ -77,7 +80,6 @@ public final class ProfileVerifier {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CompilationStatus {
         public CompilationStatus(int i, boolean z, boolean z2, boolean z3) {
         }
@@ -86,24 +88,140 @@ public final class ProfileVerifier {
     private ProfileVerifier() {
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(26:12|13|14|(1:16)(1:86)|17|18|(1:85)(1:22)|23|(1:84)(1:27)|28|29|30|(2:70|71)(1:32)|33|(9:40|(1:44)|(1:51)|52|(2:60|61)|56|57|58|59)|(1:67)(1:(1:69))|(1:44)|(3:46|49|51)|52|(1:54)|60|61|56|57|58|59) */
-    /* JADX WARN: Code restructure failed: missing block: B:63:0x010b, code lost:
-    
-        r14 = 196608;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:65:0x00d7, code lost:
-    
-        r4 = com.samsung.android.knox.EnterpriseDeviceManager.PASSWORD_QUALITY_ALPHANUMERIC;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:102:0x0107 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x002c  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x002e  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x0063  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x0086  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x00c4  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00d5  */
+    /* JADX WARN: Removed duplicated region for block: B:63:0x00d7  */
+    /* JADX WARN: Removed duplicated region for block: B:64:0x00da  */
+    /* JADX WARN: Removed duplicated region for block: B:97:0x00ae A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void writeProfileVerification(android.content.Context r19, boolean r20) {
-        /*
-            Method dump skipped, instructions count: 301
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.profileinstaller.ProfileVerifier.writeProfileVerification(android.content.Context, boolean):void");
+    public static void writeProfileVerification(Context context, boolean z) {
+        int i;
+        boolean z2;
+        boolean z3;
+        long length;
+        boolean z4;
+        File file;
+        Cache fromFile;
+        Cache cache;
+        int i2;
+        AssetFileDescriptor assetFileDescriptorOpenFd;
+        if (z || sCompilationStatus == null) {
+            synchronized (SYNC_OBJ) {
+                if (!z) {
+                    if (sCompilationStatus != null) {
+                        return;
+                    }
+                    i = 0;
+                    try {
+                        assetFileDescriptorOpenFd = context.getAssets().openFd("dexopt/baseline.prof");
+                        try {
+                            z2 = assetFileDescriptorOpenFd.getLength() <= 0;
+                            assetFileDescriptorOpenFd.close();
+                        } finally {
+                        }
+                    } catch (IOException unused) {
+                        z2 = false;
+                    }
+                    File file2 = new File(new File("/data/misc/profiles/ref/", context.getPackageName()), "primary.prof");
+                    long length2 = file2.length();
+                    z3 = !file2.exists() && length2 > 0;
+                    File file3 = new File(new File(CUR_PROFILES_BASE_DIR, context.getPackageName()), "primary.prof");
+                    length = file3.length();
+                    z4 = !file3.exists() && length > 0;
+                    try {
+                        long j = context.getApplicationContext().getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.PackageInfoFlags.of(0L)).lastUpdateTime;
+                        file = new File(context.getFilesDir(), "profileInstalled");
+                        if (file.exists()) {
+                            fromFile = null;
+                        } else {
+                            try {
+                                fromFile = Cache.readFromFile(file);
+                            } catch (IOException unused2) {
+                                CompilationStatus compilationStatus = new CompilationStatus(131072, z3, z4, z2);
+                                sCompilationStatus = compilationStatus;
+                                sFuture.set(compilationStatus);
+                                return;
+                            }
+                        }
+                        if (fromFile == null && fromFile.mPackageLastUpdateTime == j && (i2 = fromFile.mResultCode) != 2) {
+                            i = i2;
+                        } else if (z2) {
+                            i = EnterpriseDeviceManager.PASSWORD_QUALITY_ALPHANUMERIC;
+                        } else if (z3) {
+                            i = 1;
+                        } else if (z4) {
+                            i = 2;
+                        }
+                        if (z && z4 && i != 1) {
+                            i = 2;
+                        }
+                        if (fromFile != null && fromFile.mResultCode == 2 && i == 1 && length2 < fromFile.mInstalledCurrentProfileSize) {
+                            i = 3;
+                        }
+                        int i3 = i;
+                        cache = new Cache(1, i3, j, length);
+                        if (fromFile != null || !fromFile.equals(cache)) {
+                            try {
+                                cache.writeOnFile(file);
+                            } catch (IOException unused3) {
+                                i3 = 196608;
+                            }
+                        }
+                        CompilationStatus compilationStatus2 = new CompilationStatus(i3, z3, z4, z2);
+                        sCompilationStatus = compilationStatus2;
+                        sFuture.set(compilationStatus2);
+                        return;
+                    } catch (PackageManager.NameNotFoundException unused4) {
+                        CompilationStatus compilationStatus3 = new CompilationStatus(65536, z3, z4, z2);
+                        sCompilationStatus = compilationStatus3;
+                        sFuture.set(compilationStatus3);
+                        return;
+                    }
+                }
+                i = 0;
+                assetFileDescriptorOpenFd = context.getAssets().openFd("dexopt/baseline.prof");
+                if (assetFileDescriptorOpenFd.getLength() <= 0) {
+                }
+                assetFileDescriptorOpenFd.close();
+                File file22 = new File(new File("/data/misc/profiles/ref/", context.getPackageName()), "primary.prof");
+                long length22 = file22.length();
+                if (file22.exists()) {
+                    File file32 = new File(new File(CUR_PROFILES_BASE_DIR, context.getPackageName()), "primary.prof");
+                    length = file32.length();
+                    if (file32.exists()) {
+                        long j2 = context.getApplicationContext().getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.PackageInfoFlags.of(0L)).lastUpdateTime;
+                        file = new File(context.getFilesDir(), "profileInstalled");
+                        if (file.exists()) {
+                        }
+                        if (fromFile == null) {
+                            if (z2) {
+                            }
+                        }
+                        if (z) {
+                            i = 2;
+                        }
+                        if (fromFile != null) {
+                            i = 3;
+                        }
+                        int i32 = i;
+                        cache = new Cache(1, i32, j2, length);
+                        if (fromFile != null) {
+                            cache.writeOnFile(file);
+                        }
+                        CompilationStatus compilationStatus22 = new CompilationStatus(i32, z3, z4, z2);
+                        sCompilationStatus = compilationStatus22;
+                        sFuture.set(compilationStatus22);
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

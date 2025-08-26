@@ -66,9 +66,9 @@ public class SparseMappingTable {
 
         public int getOrAddKey(byte b, int i) {
             assertConsistency();
-            int binarySearch = binarySearch(b);
-            if (binarySearch >= 0) {
-                return this.mTable[binarySearch];
+            int iBinarySearch = binarySearch(b);
+            if (iBinarySearch >= 0) {
+                return this.mTable[iBinarySearch];
             }
             ArrayList arrayList = this.mParent.mLongs;
             int size = arrayList.size();
@@ -85,16 +85,16 @@ public class SparseMappingTable {
             if (iArr == null) {
                 iArr = EmptyArray.INT;
             }
-            this.mTable = GrowingArrayUtils.insert(iArr, this.mSize, ~binarySearch, i3);
+            this.mTable = GrowingArrayUtils.insert(iArr, this.mSize, ~iBinarySearch, i3);
             this.mSize++;
             return i3;
         }
 
         public int getKey(byte b) {
             assertConsistency();
-            int binarySearch = binarySearch(b);
-            if (binarySearch >= 0) {
-                return this.mTable[binarySearch];
+            int iBinarySearch = binarySearch(b);
+            if (iBinarySearch >= 0) {
+                return this.mTable[iBinarySearch];
             }
             return -1;
         }
@@ -119,13 +119,13 @@ public class SparseMappingTable {
 
         public long getValueForId(byte b, int i) {
             assertConsistency();
-            int binarySearch = binarySearch(b);
-            if (binarySearch >= 0) {
-                int i2 = this.mTable[binarySearch];
+            int iBinarySearch = binarySearch(b);
+            if (iBinarySearch >= 0) {
+                int i2 = this.mTable[iBinarySearch];
                 try {
                     return ((long[]) this.mParent.mLongs.get(SparseMappingTable.getArrayFromKey(i2)))[SparseMappingTable.getIndexFromKey(i2) + i];
                 } catch (IndexOutOfBoundsException e) {
-                    SparseMappingTable.logOrThrow("id=0x" + Integer.toHexString(b) + " idx=" + binarySearch + " key=0x" + Integer.toHexString(i2) + " index=" + i + " -- " + this.dumpInternalState(), e);
+                    SparseMappingTable.logOrThrow("id=0x" + Integer.toHexString(b) + " idx=" + iBinarySearch + " key=0x" + Integer.toHexString(i2) + " index=" + i + " -- " + this.dumpInternalState(), e);
                 }
             }
             return 0L;
@@ -169,12 +169,12 @@ public class SparseMappingTable {
 
         public boolean readFromParcel(Parcel parcel) {
             this.mSequence = parcel.readInt();
-            int readInt = parcel.readInt();
-            this.mSize = readInt;
-            if (readInt != 0) {
-                this.mTable = new int[readInt];
-                for (int i = 0; i < this.mSize; i++) {
-                    this.mTable[i] = parcel.readInt();
+            int i = parcel.readInt();
+            this.mSize = i;
+            if (i != 0) {
+                this.mTable = new int[i];
+                for (int i2 = 0; i2 < this.mSize; i2++) {
+                    this.mTable[i2] = parcel.readInt();
                 }
             } else {
                 this.mTable = null;
@@ -307,20 +307,20 @@ public class SparseMappingTable {
         this.mSequence = parcel.readInt();
         this.mNextIndex = parcel.readInt();
         this.mLongs.clear();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            int readInt2 = parcel.readInt();
-            long[] jArr = new long[readInt2];
-            readCompactedLongArray(parcel, jArr, readInt2);
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            int i3 = parcel.readInt();
+            long[] jArr = new long[i3];
+            readCompactedLongArray(parcel, jArr, i3);
             this.mLongs.add(jArr);
         }
-        if (readInt > 0) {
-            int i2 = readInt - 1;
-            if (this.mLongs.get(i2).length == this.mNextIndex) {
+        if (i > 0) {
+            int i4 = i - 1;
+            if (this.mLongs.get(i4).length == this.mNextIndex) {
                 return;
             }
             EventLog.writeEvent(1397638484, "73252178", -1, "");
-            throw new IllegalStateException("Expected array of length " + this.mNextIndex + " but was " + this.mLongs.get(i2).length);
+            throw new IllegalStateException("Expected array of length " + this.mNextIndex + " but was " + this.mLongs.get(i4).length);
         }
     }
 
@@ -369,11 +369,11 @@ public class SparseMappingTable {
         }
         int i2 = 0;
         while (i2 < i) {
-            int readInt = parcel.readInt();
-            if (readInt >= 0) {
-                jArr[i2] = readInt;
+            int i3 = parcel.readInt();
+            if (i3 >= 0) {
+                jArr[i2] = i3;
             } else {
-                jArr[i2] = parcel.readInt() | ((~readInt) << 32);
+                jArr[i2] = parcel.readInt() | ((~i3) << 32);
             }
             i2++;
         }

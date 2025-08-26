@@ -13,7 +13,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthGatingChecks$1 extends SuspendLambda implements Function2 {
     /* synthetic */ boolean Z$0;
@@ -53,9 +52,9 @@ final class DeviceEntryFaceAuthRepositoryImpl$observeFaceAuthGatingChecks$1 exte
         LogLevel logLevel = LogLevel.DEBUG;
         FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda0 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = faceAuthenticationLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
         if (!z) {
             FaceAuthenticationLogger faceAuthenticationLogger2 = this.this$0.faceAuthLogger;
             faceAuthenticationLogger2.getClass();

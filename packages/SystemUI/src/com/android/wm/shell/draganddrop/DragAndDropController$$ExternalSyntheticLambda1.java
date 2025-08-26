@@ -16,7 +16,6 @@ import java.io.PrintWriter;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DragAndDropController$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -37,7 +36,7 @@ public final /* synthetic */ class DragAndDropController$$ExternalSyntheticLambd
                 dragAndDropController.mShellController.addExternalInterface("com.android.wm.shell.draganddrop.IDragAndDrop", new Supplier() { // from class: com.android.wm.shell.draganddrop.DragAndDropController$$ExternalSyntheticLambda8
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        DragAndDropController dragAndDropController2 = DragAndDropController.this;
+                        DragAndDropController dragAndDropController2 = dragAndDropController;
                         int i2 = DragAndDropController.$r8$clinit;
                         return new DragAndDropController.IDragAndDropImpl(dragAndDropController2);
                     }
@@ -46,23 +45,23 @@ public final /* synthetic */ class DragAndDropController$$ExternalSyntheticLambd
                 dragAndDropController.mShellCommandHandler.addDumpCallback(new BiConsumer() { // from class: com.android.wm.shell.draganddrop.DragAndDropController$$ExternalSyntheticLambda9
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
-                        DragAndDropController dragAndDropController2 = DragAndDropController.this;
+                        DragAndDropController dragAndDropController2 = dragAndDropController;
                         PrintWriter printWriter = (PrintWriter) obj;
                         String str = (String) obj2;
-                        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
+                        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
                         printWriter.println(str + "DragAndDropController");
-                        printWriter.println(m + "listeners=" + dragAndDropController2.mListeners.size());
+                        printWriter.println(strM + "listeners=" + dragAndDropController2.mListeners.size());
                         StringBuilder sb = new StringBuilder();
-                        sb.append(m);
+                        sb.append(strM);
                         sb.append("Per display:");
                         printWriter.println(sb.toString());
                         for (int i2 = 0; i2 < dragAndDropController2.mDisplayDropTargets.size(); i2++) {
                             DragAndDropController.PerDisplay perDisplay = (DragAndDropController.PerDisplay) dragAndDropController2.mDisplayDropTargets.valueAt(i2);
                             perDisplay.getClass();
-                            String str2 = m + "  ";
-                            StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str2, "displayId=");
-                            m2.append(perDisplay.displayId);
-                            printWriter.println(m2.toString());
+                            String str2 = strM + "  ";
+                            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str2, "displayId=");
+                            sbM.append(perDisplay.displayId);
+                            printWriter.println(sbM.toString());
                             StringBuilder sb2 = new StringBuilder();
                             sb2.append(str2);
                             sb2.append("hasDrawn=");
@@ -74,9 +73,9 @@ public final /* synthetic */ class DragAndDropController$$ExternalSyntheticLambd
                             StringBuilder sb3 = new StringBuilder();
                             sb3.append(str3);
                             sb3.append("mIsShowing=");
-                            StringBuilder m3 = BackAnimationController$$ExternalSyntheticOutline0.m(BackAnimationController$$ExternalSyntheticOutline0.m(sb3, dropTargetLayout.mIsShowing, printWriter, str3, "mHasDropped="), dropTargetLayout.mHasDropped, printWriter, str3, "mCurrentTarget=");
-                            m3.append(dropTargetLayout.mCurrentTarget);
-                            printWriter.println(m3.toString());
+                            StringBuilder sbM2 = BackAnimationController$$ExternalSyntheticOutline0.m(BackAnimationController$$ExternalSyntheticOutline0.m(sb3, dropTargetLayout.mIsShowing, printWriter, str3, "mHasDropped="), dropTargetLayout.mHasDropped, printWriter, str3, "mCurrentTarget=");
+                            sbM2.append(dropTargetLayout.mCurrentTarget);
+                            printWriter.println(sbM2.toString());
                         }
                     }
                 }, dragAndDropController);

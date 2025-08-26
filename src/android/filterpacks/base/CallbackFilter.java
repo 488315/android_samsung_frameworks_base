@@ -60,17 +60,17 @@ public class CallbackFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("frame");
+        Frame framePullInput = pullInput("frame");
         FilterContext.OnFrameReceivedListener onFrameReceivedListener = this.mListener;
         if (onFrameReceivedListener != null) {
             if (this.mCallbacksOnUiThread) {
-                pullInput.retain();
-                if (!this.mUiThreadHandler.post(new CallbackRunnable(this, this.mListener, this, pullInput, this.mUserData))) {
+                framePullInput.retain();
+                if (!this.mUiThreadHandler.post(new CallbackRunnable(this, this.mListener, this, framePullInput, this.mUserData))) {
                     throw new RuntimeException("Unable to send callback to UI thread!");
                 }
                 return;
             }
-            onFrameReceivedListener.onFrameReceived(this, pullInput, this.mUserData);
+            onFrameReceivedListener.onFrameReceived(this, framePullInput, this.mUserData);
             return;
         }
         throw new RuntimeException("CallbackFilter received frame, but no listener set!");

@@ -44,9 +44,9 @@ public interface IBrightnessListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBrightnessListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBrightnessListener)) {
-                return (IBrightnessListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBrightnessListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBrightnessListener)) {
+                return (IBrightnessListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IBrightnessListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                float readFloat = parcel.readFloat();
+                float f = parcel.readFloat();
                 parcel.enforceNoDataAvail();
-                onBrightnessChanged(readFloat);
+                onBrightnessChanged(f);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface IBrightnessListener extends IInterface {
 
             @Override // android.hardware.display.IBrightnessListener
             public void onBrightnessChanged(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBrightnessListener.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBrightnessListener.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

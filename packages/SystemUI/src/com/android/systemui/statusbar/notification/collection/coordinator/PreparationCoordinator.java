@@ -82,10 +82,10 @@ import kotlin.Pair;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.jvm.internal.Intrinsics;
-import kotlin.sequences.MergingSequence$iterator$1;
+import kotlin.sequences.MergingSequence;
+import kotlin.sequences.MergingSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public class PreparationCoordinator implements Coordinator {
@@ -118,7 +118,6 @@ public class PreparationCoordinator implements Coordinator {
     private final IStatusBarService mStatusBarService;
     private final NotifViewBarn mViewBarn;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Retention(RetentionPolicy.SOURCE)
     @interface InflationState {
     }
@@ -131,19 +130,19 @@ public class PreparationCoordinator implements Coordinator {
     public void abortInflation(NotificationEntry notificationEntry, String str) {
         NotifInflaterImpl notifInflaterImpl = (NotifInflaterImpl) this.mNotifInflater;
         notifInflaterImpl.getClass();
-        boolean abortTask = notificationEntry.abortTask();
-        if (abortTask) {
+        boolean zAbortTask = notificationEntry.abortTask();
+        if (zAbortTask) {
             NotifInflaterLogger notifInflaterLogger = notifInflaterImpl.mLogger;
             notifInflaterLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             NotifInflaterLogger$$ExternalSyntheticLambda0 notifInflaterLogger$$ExternalSyntheticLambda0 = new NotifInflaterLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = notifInflaterLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotifInflater", logLevel, notifInflaterLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("NotifInflater", logLevel, notifInflaterLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+            logBuffer.commit(logMessageObtain);
         }
-        boolean remove = this.mInflatingNotifs.remove(notificationEntry);
-        if (abortTask || remove) {
+        boolean zRemove = this.mInflatingNotifs.remove(notificationEntry);
+        if (zAbortTask || zRemove) {
             this.mLogger.logInflationAborted(notificationEntry, str);
         }
     }
@@ -157,22 +156,22 @@ public class PreparationCoordinator implements Coordinator {
         LogLevel logLevel = LogLevel.DEBUG;
         NotifInflaterLogger$$ExternalSyntheticLambda0 notifInflaterLogger$$ExternalSyntheticLambda0 = new NotifInflaterLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer = notifInflaterLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotifInflater", logLevel, notifInflaterLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("NotifInflater", logLevel, notifInflaterLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        logBuffer.commit(logMessageObtain);
         NotificationRowBinderImpl notificationRowBinderImpl = notifInflaterImpl.mNotificationRowBinder;
         if (notificationRowBinderImpl == null) {
             throw new RuntimeException("NotificationRowBinder must be attached before using NotifInflaterImpl.");
         }
-        boolean rowExists = notificationEntry.rowExists();
+        boolean zRowExists = notificationEntry.rowExists();
         NotificationRowBinderLogger notificationRowBinderLogger = notificationRowBinderImpl.mLogger;
-        if (rowExists) {
+        if (zRowExists) {
             notificationRowBinderLogger.getClass();
             NotificationRowBinderLogger$$ExternalSyntheticLambda0 notificationRowBinderLogger$$ExternalSyntheticLambda0 = new NotificationRowBinderLogger$$ExternalSyntheticLambda0(1);
             LogBuffer logBuffer2 = notificationRowBinderLogger.buffer;
-            LogMessage obtain2 = logBuffer2.obtain("NotificationRowBinder", logLevel, notificationRowBinderLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain2).str1 = NotificationUtils.logKey(notificationEntry);
-            logBuffer2.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer2.obtain("NotificationRowBinder", logLevel, notificationRowBinderLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain2).str1 = NotificationUtils.logKey(notificationEntry);
+            logBuffer2.commit(logMessageObtain2);
             RowContentBindStage rowContentBindStage = notificationRowBinderImpl.mRowContentBindStage;
             RowContentBindParams rowContentBindParams = (RowContentBindParams) rowContentBindStage.getStageParams(notificationEntry);
             rowContentBindParams.markContentViewsFreeable(1);
@@ -187,9 +186,9 @@ public class PreparationCoordinator implements Coordinator {
             notificationRowBinderLogger.getClass();
             NotificationRowBinderLogger$$ExternalSyntheticLambda0 notificationRowBinderLogger$$ExternalSyntheticLambda02 = new NotificationRowBinderLogger$$ExternalSyntheticLambda0(0);
             LogBuffer logBuffer3 = notificationRowBinderLogger.buffer;
-            LogMessage obtain3 = logBuffer3.obtain("NotificationRowBinder", logLevel, notificationRowBinderLogger$$ExternalSyntheticLambda02, null);
-            ((LogMessageImpl) obtain3).str1 = NotificationUtils.logKey(notificationEntry);
-            logBuffer3.commit(obtain3);
+            LogMessage logMessageObtain3 = logBuffer3.obtain("NotificationRowBinder", logLevel, notificationRowBinderLogger$$ExternalSyntheticLambda02, null);
+            ((LogMessageImpl) logMessageObtain3).str1 = NotificationUtils.logKey(notificationEntry);
+            logBuffer3.commit(logMessageObtain3);
         }
         this.mInflationStates.put(notificationEntry, 0);
     }
@@ -242,15 +241,15 @@ public class PreparationCoordinator implements Coordinator {
         LogLevel logLevel = LogLevel.DEBUG;
         NotifInflaterLogger$$ExternalSyntheticLambda0 notifInflaterLogger$$ExternalSyntheticLambda0 = new NotifInflaterLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = notifInflaterLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotifInflater", logLevel, notifInflaterLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("NotifInflater", logLevel, notifInflaterLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry);
         logMessageImpl.str2 = inflaterParams.reason;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         notifInflaterImpl.inflateViewsImpl(notificationEntry, inflaterParams, preparationCoordinator$$ExternalSyntheticLambda0);
-        LogMessage obtain2 = logBuffer.obtain("NotifInflater", logLevel, new NotifInflaterLogger$$ExternalSyntheticLambda0(6), null);
-        ((LogMessageImpl) obtain2).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        logBuffer.commit(obtain2);
+        LogMessage logMessageObtain2 = logBuffer.obtain("NotifInflater", logLevel, new NotifInflaterLogger$$ExternalSyntheticLambda0(6), null);
+        ((LogMessageImpl) logMessageObtain2).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        logBuffer.commit(logMessageObtain2);
         Trace.endSection();
     }
 
@@ -317,7 +316,7 @@ public class PreparationCoordinator implements Coordinator {
         String str = notificationEntry.mKey;
         List<Notification.Action> smartActions = notificationEntry.mRanking.getSmartActions();
         List<CharSequence> smartReplies = notificationEntry.mRanking.getSmartReplies();
-        boolean isConversation = notificationEntry.mRanking.isConversation();
+        boolean zIsConversation = notificationEntry.mRanking.isConversation();
         boolean z = false;
         boolean z2 = notifUiAdjustmentProvider.isSnoozeSettingsEnabled && !notificationEntry.isCanceled();
         ListAttachState listAttachState = notificationEntry.mAttachState;
@@ -329,13 +328,13 @@ public class PreparationCoordinator implements Coordinator {
             throw new IllegalStateException("Entry must have a parent to determine if minimized");
         }
         boolean z3 = !notifUiAdjustmentProvider.highPriorityProvider.isHighPriority(notificationEntry, true) && notificationEntry.mRanking.isAmbient();
-        boolean equals = pipelineEntry.equals(GroupEntry.ROOT_ENTRY);
+        boolean zEquals = pipelineEntry.equals(GroupEntry.ROOT_ENTRY);
         GroupEntry groupEntry = pipelineEntry instanceof GroupEntry ? (GroupEntry) pipelineEntry : null;
-        boolean areEqual = Intrinsics.areEqual(groupEntry != null ? groupEntry.mSummary : null, notificationEntry);
-        if (z3 && (equals || areEqual)) {
+        boolean zAreEqual = Intrinsics.areEqual(groupEntry != null ? groupEntry.mSummary : null, notificationEntry);
+        if (z3 && (zEquals || zAreEqual)) {
             z = true;
         }
-        NotifUiAdjustment notifUiAdjustment = new NotifUiAdjustment(str, smartActions, smartReplies, isConversation, z2, z, (((SensitiveNotificationProtectionControllerImpl) notifUiAdjustmentProvider.sensitiveNotifProtectionController).shouldProtectNotification(notificationEntry) || (NotiRune.NOTI_STYLE_APP_LOCK && ((AppLockNotificationControllerImpl) notifUiAdjustmentProvider.appLockNotificationController).shouldHideNotiForAppLock(notificationEntry))) ? 1 : ((NotificationLockscreenUserManagerImpl) notifUiAdjustmentProvider.lockscreenUserManager).getRedactionType(notificationEntry), notificationEntry.mHasEverBeenGroupChild, false, notificationEntry.mRanking.getSummarization(), notificationEntry.isPromotedState());
+        NotifUiAdjustment notifUiAdjustment = new NotifUiAdjustment(str, smartActions, smartReplies, zIsConversation, z2, z, (((SensitiveNotificationProtectionControllerImpl) notifUiAdjustmentProvider.sensitiveNotifProtectionController).shouldProtectNotification(notificationEntry) || (NotiRune.NOTI_STYLE_APP_LOCK && ((AppLockNotificationControllerImpl) notifUiAdjustmentProvider.appLockNotificationController).shouldHideNotiForAppLock(notificationEntry))) ? 1 : ((NotificationLockscreenUserManagerImpl) notifUiAdjustmentProvider.lockscreenUserManager).getRedactionType(notificationEntry), notificationEntry.mHasEverBeenGroupChild, false, notificationEntry.mRanking.getSummarization(), notificationEntry.isPromotedState());
         if (this.mInflatingNotifs.contains(notificationEntry)) {
             if (needToReinflate(notificationEntry, notifUiAdjustment, "Inflating notification has no adjustments")) {
                 inflateEntry(notificationEntry, notifUiAdjustment, "adjustment changed while inflating");
@@ -347,18 +346,18 @@ public class PreparationCoordinator implements Coordinator {
             ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("entry : "), notificationEntry.mKey, " inflationState is null during inflateRequiredNotifViews", TAG);
             return;
         }
-        int intValue = this.mInflationStates.get(notificationEntry).intValue();
-        if (intValue == -1) {
+        int iIntValue = this.mInflationStates.get(notificationEntry).intValue();
+        if (iIntValue == -1) {
             if (needToReinflate(notificationEntry, notifUiAdjustment, null)) {
                 inflateEntry(notificationEntry, notifUiAdjustment, "adjustment changed after error");
             }
         } else {
-            if (intValue == 0) {
+            if (iIntValue == 0) {
                 inflateEntry(notificationEntry, notifUiAdjustment, "entryAdded");
                 return;
             }
-            if (intValue != 1) {
-                if (intValue != 2) {
+            if (iIntValue != 1) {
+                if (iIntValue != 2) {
                     return;
                 }
                 rebind(notificationEntry, notifUiAdjustment, "entryUpdated");
@@ -404,9 +403,9 @@ public class PreparationCoordinator implements Coordinator {
             if (list.size() != list2.size()) {
                 return true;
             }
-            MergingSequence$iterator$1 mergingSequence$iterator$1 = new MergingSequence$iterator$1(SequencesKt___SequencesKt.zip(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list2)));
-            while (mergingSequence$iterator$1.hasNext()) {
-                Pair pair = (Pair) mergingSequence$iterator$1.next();
+            MergingSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.zip(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list2)).new AnonymousClass1();
+            while (anonymousClass1.hasNext()) {
+                Pair pair = (Pair) anonymousClass1.next();
                 if (!TextUtils.equals(((Notification.Action) pair.getFirst()).title, ((Notification.Action) pair.getSecond()).title)) {
                     return true;
                 }
@@ -421,9 +420,9 @@ public class PreparationCoordinator implements Coordinator {
                     if (remoteInputs == null || remoteInputs2 == null || remoteInputs.length != remoteInputs2.length) {
                         return true;
                     }
-                    MergingSequence$iterator$1 mergingSequence$iterator$12 = new MergingSequence$iterator$1(SequencesKt___SequencesKt.zip(ArraysKt___ArraysKt.asSequence(remoteInputs), ArraysKt___ArraysKt.asSequence(remoteInputs2)));
-                    while (mergingSequence$iterator$12.hasNext()) {
-                        Pair pair2 = (Pair) mergingSequence$iterator$12.next();
+                    MergingSequence.AnonymousClass1 anonymousClass12 = SequencesKt___SequencesKt.zip(ArraysKt___ArraysKt.asSequence(remoteInputs), ArraysKt___ArraysKt.asSequence(remoteInputs2)).new AnonymousClass1();
+                    while (anonymousClass12.hasNext()) {
+                        Pair pair2 = (Pair) anonymousClass12.next();
                         if (!TextUtils.equals(((RemoteInput) pair2.getFirst()).getLabel(), ((RemoteInput) pair2.getSecond()).getLabel())) {
                             return true;
                         }
@@ -433,9 +432,9 @@ public class PreparationCoordinator implements Coordinator {
                             if (choices == null || choices2 == null || choices.length != choices2.length) {
                                 return true;
                             }
-                            MergingSequence$iterator$1 mergingSequence$iterator$13 = new MergingSequence$iterator$1(SequencesKt___SequencesKt.zip(ArraysKt___ArraysKt.asSequence(choices), ArraysKt___ArraysKt.asSequence(choices2)));
-                            while (mergingSequence$iterator$13.hasNext()) {
-                                Pair pair3 = (Pair) mergingSequence$iterator$13.next();
+                            MergingSequence.AnonymousClass1 anonymousClass13 = SequencesKt___SequencesKt.zip(ArraysKt___ArraysKt.asSequence(choices), ArraysKt___ArraysKt.asSequence(choices2)).new AnonymousClass1();
+                            while (anonymousClass13.hasNext()) {
+                                Pair pair3 = (Pair) anonymousClass13.next();
                                 if (!TextUtils.equals((CharSequence) pair3.getFirst(), (CharSequence) pair3.getSecond())) {
                                     return true;
                                 }
@@ -493,15 +492,15 @@ public class PreparationCoordinator implements Coordinator {
         LogLevel logLevel = LogLevel.DEBUG;
         NotifInflaterLogger$$ExternalSyntheticLambda0 notifInflaterLogger$$ExternalSyntheticLambda0 = new NotifInflaterLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = notifInflaterLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotifInflater", logLevel, notifInflaterLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("NotifInflater", logLevel, notifInflaterLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry);
         logMessageImpl.str2 = inflaterParams.reason;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         notifInflaterImpl.inflateViewsImpl(notificationEntry, inflaterParams, preparationCoordinator$$ExternalSyntheticLambda0);
-        LogMessage obtain2 = logBuffer.obtain("NotifInflater", logLevel, new NotifInflaterLogger$$ExternalSyntheticLambda0(5), null);
-        ((LogMessageImpl) obtain2).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
-        logBuffer.commit(obtain2);
+        LogMessage logMessageObtain2 = logBuffer.obtain("NotifInflater", logLevel, new NotifInflaterLogger$$ExternalSyntheticLambda0(5), null);
+        ((LogMessageImpl) logMessageObtain2).str1 = NotificationUtilsKt.getLogKey(notificationEntry);
+        logBuffer.commit(logMessageObtain2);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -535,7 +534,7 @@ public class PreparationCoordinator implements Coordinator {
         Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.PreparationCoordinator$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                PreparationCoordinator.this.lambda$attach$0();
+                this.f$0.lambda$attach$0();
             }
         };
         ListenerSet listenerSet = notifUiAdjustmentProvider.dirtyListeners;
@@ -553,7 +552,7 @@ public class PreparationCoordinator implements Coordinator {
         notifPipeline.addOnBeforeFinalizeFilterListener(new OnBeforeFinalizeFilterListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.PreparationCoordinator$$ExternalSyntheticLambda2
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeFinalizeFilterListener
             public final void onBeforeFinalizeFilter(List list) {
-                PreparationCoordinator.this.inflateAllRequiredViews(list);
+                this.f$0.inflateAllRequiredViews(list);
             }
         });
         notifPipeline.addFinalizeFilter(this.mNotifInflationErrorFilter);
@@ -644,14 +643,14 @@ public class PreparationCoordinator implements Coordinator {
             public boolean shouldFilterOut(NotificationEntry notificationEntry, long j2) {
                 PipelineEntry pipelineEntry = notificationEntry.mAttachState.parent;
                 Objects.requireNonNull(pipelineEntry);
-                Boolean bool = this.mIsDelayedGroupCache.get(pipelineEntry);
-                if (bool == null && (pipelineEntry instanceof GroupEntry)) {
+                Boolean boolValueOf = this.mIsDelayedGroupCache.get(pipelineEntry);
+                if (boolValueOf == null && (pipelineEntry instanceof GroupEntry)) {
                     GroupEntry groupEntry = (GroupEntry) pipelineEntry;
-                    bool = Boolean.valueOf(PreparationCoordinator.this.shouldWaitForGroupToInflate(groupEntry, j2));
-                    this.mIsDelayedGroupCache.put(groupEntry, bool);
+                    boolValueOf = Boolean.valueOf(PreparationCoordinator.this.shouldWaitForGroupToInflate(groupEntry, j2));
+                    this.mIsDelayedGroupCache.put(groupEntry, boolValueOf);
                 }
                 if (PreparationCoordinator.this.isInflated(notificationEntry)) {
-                    return bool != null && bool.booleanValue();
+                    return boolValueOf != null && boolValueOf.booleanValue();
                 }
                 return true;
             }

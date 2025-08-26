@@ -6,7 +6,6 @@ import com.android.settingslib.media.InfoMediaManager;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class RouterInfoMediaManager$$ExternalSyntheticLambda3 implements Consumer {
     public final /* synthetic */ int $r8$classId;

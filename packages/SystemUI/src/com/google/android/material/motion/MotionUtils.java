@@ -8,18 +8,17 @@ import android.view.animation.PathInterpolator;
 import androidx.core.graphics.PathParser;
 import com.google.android.material.resources.MaterialAttributes;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MotionUtils {
     private MotionUtils() {
     }
 
-    public static float getLegacyControlPoint(String[] strArr, int i) {
-        float parseFloat = Float.parseFloat(strArr[i]);
-        if (parseFloat >= 0.0f && parseFloat <= 1.0f) {
-            return parseFloat;
+    public static float getLegacyControlPoint(String[] strArr, int i) throws NumberFormatException {
+        float f = Float.parseFloat(strArr[i]);
+        if (f >= 0.0f && f <= 1.0f) {
+            return f;
         }
-        throw new IllegalArgumentException("Motion easing control point value must be between 0 and 1; instead got: " + parseFloat);
+        throw new IllegalArgumentException("Motion easing control point value must be between 0 and 1; instead got: " + f);
     }
 
     public static boolean isLegacyEasingType(String str, String str2) {
@@ -27,8 +26,8 @@ public class MotionUtils {
     }
 
     public static int resolveThemeDuration(Context context, int i, int i2) {
-        TypedValue resolve = MaterialAttributes.resolve(i, context);
-        return (resolve == null || resolve.type != 16) ? i2 : resolve.data;
+        TypedValue typedValueResolve = MaterialAttributes.resolve(i, context);
+        return (typedValueResolve == null || typedValueResolve.type != 16) ? i2 : typedValueResolve.data;
     }
 
     public static TimeInterpolator resolveThemeInterpolator(Context context, int i, TimeInterpolator timeInterpolator) {
@@ -39,20 +38,20 @@ public class MotionUtils {
         if (typedValue.type != 3) {
             throw new IllegalArgumentException("Motion easing theme attribute must be an @interpolator resource for ?attr/motionEasing*Interpolator attributes or a string for ?attr/motionEasing* attributes.");
         }
-        String valueOf = String.valueOf(typedValue.string);
-        if (!isLegacyEasingType(valueOf, "cubic-bezier") && !isLegacyEasingType(valueOf, "path")) {
+        String strValueOf = String.valueOf(typedValue.string);
+        if (!isLegacyEasingType(strValueOf, "cubic-bezier") && !isLegacyEasingType(strValueOf, "path")) {
             return AnimationUtils.loadInterpolator(context, typedValue.resourceId);
         }
-        if (!isLegacyEasingType(valueOf, "cubic-bezier")) {
-            if (isLegacyEasingType(valueOf, "path")) {
-                return new PathInterpolator(PathParser.createPathFromPathData(valueOf.substring(5, valueOf.length() - 1)));
+        if (!isLegacyEasingType(strValueOf, "cubic-bezier")) {
+            if (isLegacyEasingType(strValueOf, "path")) {
+                return new PathInterpolator(PathParser.createPathFromPathData(strValueOf.substring(5, strValueOf.length() - 1)));
             }
-            throw new IllegalArgumentException("Invalid motion easing type: ".concat(valueOf));
+            throw new IllegalArgumentException("Invalid motion easing type: ".concat(strValueOf));
         }
-        String[] split = valueOf.substring(13, valueOf.length() - 1).split(",");
-        if (split.length == 4) {
-            return new PathInterpolator(getLegacyControlPoint(split, 0), getLegacyControlPoint(split, 1), getLegacyControlPoint(split, 2), getLegacyControlPoint(split, 3));
+        String[] strArrSplit = strValueOf.substring(13, strValueOf.length() - 1).split(",");
+        if (strArrSplit.length == 4) {
+            return new PathInterpolator(getLegacyControlPoint(strArrSplit, 0), getLegacyControlPoint(strArrSplit, 1), getLegacyControlPoint(strArrSplit, 2), getLegacyControlPoint(strArrSplit, 3));
         }
-        throw new IllegalArgumentException("Motion easing theme attribute must have 4 control points if using bezier curve format; instead got: " + split.length);
+        throw new IllegalArgumentException("Motion easing theme attribute must have 4 control points if using bezier curve format; instead got: " + strArrSplit.length);
     }
 }

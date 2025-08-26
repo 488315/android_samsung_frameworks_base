@@ -20,12 +20,10 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Recreator implements LifecycleEventObserver {
     public final SavedStateRegistryOwner owner;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,7 +33,6 @@ public final class Recreator implements LifecycleEventObserver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SavedStateProvider implements SavedStateRegistry.SavedStateProvider {
         public final Set classes = new LinkedHashSet();
 
@@ -60,17 +57,17 @@ public final class Recreator implements LifecycleEventObserver {
     }
 
     @Override // androidx.lifecycle.LifecycleEventObserver
-    public final void onStateChanged(LifecycleOwner lifecycleOwner, Lifecycle.Event event) {
+    public final void onStateChanged(LifecycleOwner lifecycleOwner, Lifecycle.Event event) throws NoSuchMethodException, SecurityException {
         if (event != Lifecycle.Event.ON_CREATE) {
             throw new AssertionError("Next event must be ON_CREATE");
         }
         lifecycleOwner.getLifecycle().removeObserver(this);
         SavedStateRegistryOwner savedStateRegistryOwner = this.owner;
-        Bundle consumeRestoredStateForKey = savedStateRegistryOwner.getSavedStateRegistry().consumeRestoredStateForKey("androidx.savedstate.Restarter");
-        if (consumeRestoredStateForKey == null) {
+        Bundle bundleConsumeRestoredStateForKey = savedStateRegistryOwner.getSavedStateRegistry().consumeRestoredStateForKey("androidx.savedstate.Restarter");
+        if (bundleConsumeRestoredStateForKey == null) {
             return;
         }
-        ArrayList<String> stringArrayList = consumeRestoredStateForKey.getStringArrayList("classes_to_restore");
+        ArrayList<String> stringArrayList = bundleConsumeRestoredStateForKey.getStringArrayList("classes_to_restore");
         if (stringArrayList == null) {
             throw new IllegalStateException("Bundle with restored state for the component \"androidx.savedstate.Restarter\" must contain list of strings by the key \"classes_to_restore\"");
         }
@@ -81,10 +78,10 @@ public final class Recreator implements LifecycleEventObserver {
             i++;
             String str2 = str;
             try {
-                Class<? extends U> asSubclass = Class.forName(str2, false, Recreator.class.getClassLoader()).asSubclass(SavedStateRegistry.AutoRecreated.class);
+                Class<? extends U> clsAsSubclass = Class.forName(str2, false, Recreator.class.getClassLoader()).asSubclass(SavedStateRegistry.AutoRecreated.class);
                 try {
                     Class[] clsArr = new Class[0];
-                    Constructor declaredConstructor = asSubclass.getDeclaredConstructor(null);
+                    Constructor declaredConstructor = clsAsSubclass.getDeclaredConstructor(null);
                     declaredConstructor.setAccessible(true);
                     try {
                         ((LegacySavedStateHandleController.OnRecreation) ((SavedStateRegistry.AutoRecreated) declaredConstructor.newInstance(null))).getClass();
@@ -107,7 +104,7 @@ public final class Recreator implements LifecycleEventObserver {
                         throw new RuntimeException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Failed to instantiate ", str2), e);
                     }
                 } catch (NoSuchMethodException e2) {
-                    throw new IllegalStateException("Class " + asSubclass.getSimpleName() + " must have default constructor in order to be automatically recreated", e2);
+                    throw new IllegalStateException("Class " + clsAsSubclass.getSimpleName() + " must have default constructor in order to be automatically recreated", e2);
                 }
             } catch (ClassNotFoundException e3) {
                 throw new RuntimeException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Class ", str2, " wasn't found"), e3);

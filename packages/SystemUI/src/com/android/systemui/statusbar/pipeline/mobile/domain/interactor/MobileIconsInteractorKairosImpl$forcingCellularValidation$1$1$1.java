@@ -11,7 +11,6 @@ import kotlin.time.DurationKt;
 import kotlin.time.DurationUnit;
 import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileIconsInteractorKairosImpl$forcingCellularValidation$1$1$1 extends SuspendLambda implements Function1 {
     int label;
@@ -27,7 +26,7 @@ final class MobileIconsInteractorKairosImpl$forcingCellularValidation$1$1$1 exte
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return new MobileIconsInteractorKairosImpl$forcingCellularValidation$1$1$1((Continuation) obj).invokeSuspend(Unit.INSTANCE);
     }
 
@@ -40,7 +39,7 @@ final class MobileIconsInteractorKairosImpl$forcingCellularValidation$1$1$1 exte
             Duration.Companion companion = Duration.Companion;
             long duration = DurationKt.toDuration(2, DurationUnit.SECONDS);
             this.label = 1;
-            if (DelayKt.m3449delayVtjQ1oo(duration, this) == coroutineSingletons) {
+            if (DelayKt.m3469delayVtjQ1oo(duration, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

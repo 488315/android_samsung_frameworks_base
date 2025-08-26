@@ -153,7 +153,7 @@ public abstract class SearchUiService extends Service {
             arrayList.add(new CallbackWrapper(iSearchCallback, new Consumer() { // from class: android.service.search.SearchUiService$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    SearchUiService.this.lambda$doRegisterEmptyQueryResultUpdateCallback$1(arrayList, (SearchUiService.CallbackWrapper) obj);
+                    this.f$0.lambda$doRegisterEmptyQueryResultUpdateCallback$1(arrayList, (SearchUiService.CallbackWrapper) obj);
                 }
             }));
             if (arrayList.size() == 1) {
@@ -167,7 +167,7 @@ public abstract class SearchUiService extends Service {
         this.mHandler.post(new Runnable() { // from class: android.service.search.SearchUiService$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                SearchUiService.this.lambda$doRegisterEmptyQueryResultUpdateCallback$0(arrayList, callbackWrapper);
+                this.f$0.lambda$doRegisterEmptyQueryResultUpdateCallback$0(arrayList, callbackWrapper);
             }
         });
     }

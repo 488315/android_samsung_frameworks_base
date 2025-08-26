@@ -21,40 +21,37 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
     int label;
     final /* synthetic */ DreamOverlayAnimationsController this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.dreams.DreamOverlayAnimationsController$init$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         private /* synthetic */ Object L$0;
         int label;
         final /* synthetic */ DreamOverlayAnimationsController this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.dreams.DreamOverlayAnimationsController$init$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C00981 extends SuspendLambda implements Function2 {
+        final class C01871 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ DreamOverlayAnimationsController this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C00981(DreamOverlayAnimationsController dreamOverlayAnimationsController, Continuation continuation) {
+            public C01871(DreamOverlayAnimationsController dreamOverlayAnimationsController, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = dreamOverlayAnimationsController;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C00981(this.this$0, continuation);
+                return new C01871(this.this$0, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C00981) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C01871) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -68,12 +65,12 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController.init.1.1.1.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            final float floatValue = ((Number) obj2).floatValue();
-                            final DreamOverlayAnimationsController dreamOverlayAnimationsController2 = DreamOverlayAnimationsController.this;
+                            final float fFloatValue = ((Number) obj2).floatValue();
+                            final DreamOverlayAnimationsController dreamOverlayAnimationsController2 = dreamOverlayAnimationsController;
                             ComplicationLayoutParams.iteratePositions(3, new Consumer() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController.init.1.1.1.1.1
                                 @Override // java.util.function.Consumer
                                 public final void accept(Object obj3) {
-                                    DreamOverlayAnimationsController.access$setElementsTranslationYAtPosition(DreamOverlayAnimationsController.this, floatValue, ((Number) obj3).intValue());
+                                    DreamOverlayAnimationsController.access$setElementsTranslationYAtPosition(dreamOverlayAnimationsController2, fFloatValue, ((Number) obj3).intValue());
                                 }
                             });
                             return Unit.INSTANCE;
@@ -93,7 +90,6 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.dreams.DreamOverlayAnimationsController$init$1$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             int label;
@@ -126,15 +122,15 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController.init.1.1.2.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            final float floatValue = ((Number) obj2).floatValue();
-                            final DreamOverlayAnimationsController dreamOverlayAnimationsController2 = DreamOverlayAnimationsController.this;
+                            final float fFloatValue = ((Number) obj2).floatValue();
+                            final DreamOverlayAnimationsController dreamOverlayAnimationsController2 = dreamOverlayAnimationsController;
                             ComplicationLayoutParams.iteratePositions(3, new Consumer() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController.init.1.1.2.1.1
                                 @Override // java.util.function.Consumer
                                 public final void accept(Object obj3) {
-                                    int intValue = ((Number) obj3).intValue();
-                                    DreamOverlayAnimationsController dreamOverlayAnimationsController3 = DreamOverlayAnimationsController.this;
-                                    float f = floatValue;
-                                    Iterator it = dreamOverlayAnimationsController3.mComplicationHostViewController.getViewsAtPosition(intValue).iterator();
+                                    int iIntValue = ((Number) obj3).intValue();
+                                    DreamOverlayAnimationsController dreamOverlayAnimationsController3 = dreamOverlayAnimationsController2;
+                                    float f = fFloatValue;
+                                    Iterator it = dreamOverlayAnimationsController3.mComplicationHostViewController.getViewsAtPosition(iIntValue).iterator();
                                     while (it.hasNext()) {
                                         ((View) it.next()).setTranslationX(f);
                                     }
@@ -157,7 +153,6 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.dreams.DreamOverlayAnimationsController$init$1$1$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             int label;
@@ -190,12 +185,12 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController.init.1.1.3.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            final float floatValue = ((Number) obj2).floatValue();
-                            final DreamOverlayAnimationsController dreamOverlayAnimationsController2 = DreamOverlayAnimationsController.this;
+                            final float fFloatValue = ((Number) obj2).floatValue();
+                            final DreamOverlayAnimationsController dreamOverlayAnimationsController2 = dreamOverlayAnimationsController;
                             ComplicationLayoutParams.iteratePositions(3, new Consumer() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController.init.1.1.3.1.1
                                 @Override // java.util.function.Consumer
                                 public final void accept(Object obj3) {
-                                    DreamOverlayAnimationsController.access$setElementsAlphaAtPosition(DreamOverlayAnimationsController.this, floatValue, ((Number) obj3).intValue(), true);
+                                    DreamOverlayAnimationsController.access$setElementsAlphaAtPosition(dreamOverlayAnimationsController2, fFloatValue, ((Number) obj3).intValue(), true);
                                 }
                             });
                             return Unit.INSTANCE;
@@ -215,7 +210,6 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.dreams.DreamOverlayAnimationsController$init$1$1$4, reason: invalid class name */
         final class AnonymousClass4 extends SuspendLambda implements Function2 {
             int label;
@@ -248,7 +242,7 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController.init.1.1.4.1
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
-                            DreamOverlayStateController dreamOverlayStateController = DreamOverlayAnimationsController.this.mOverlayStateController;
+                            DreamOverlayStateController dreamOverlayStateController = dreamOverlayAnimationsController.mOverlayStateController;
                             dreamOverlayStateController.getClass();
                             dreamOverlayStateController.modifyState(1, 8);
                             return Unit.INSTANCE;
@@ -294,7 +288,7 @@ final class DreamOverlayAnimationsController$init$1 extends SuspendLambda implem
             }
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C00981(this.this$0, null), 7);
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C01871(this.this$0, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(this.this$0, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(this.this$0, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass4(this.this$0, null), 7);

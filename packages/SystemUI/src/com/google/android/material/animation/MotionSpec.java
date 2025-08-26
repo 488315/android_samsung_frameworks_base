@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.TimeInterpolator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.Log;
 import android.util.Property;
@@ -17,7 +18,6 @@ import androidx.collection.SimpleArrayMap;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MotionSpec {
     public final SimpleArrayMap timings = new SimpleArrayMap();
@@ -31,17 +31,17 @@ public class MotionSpec {
         return createFromResource(resourceId, context);
     }
 
-    public static MotionSpec createFromResource(int i, Context context) {
+    public static MotionSpec createFromResource(int i, Context context) throws Resources.NotFoundException {
         try {
-            Animator loadAnimator = AnimatorInflater.loadAnimator(context, i);
-            if (loadAnimator instanceof AnimatorSet) {
-                return createSpecFromAnimators(((AnimatorSet) loadAnimator).getChildAnimations());
+            Animator animatorLoadAnimator = AnimatorInflater.loadAnimator(context, i);
+            if (animatorLoadAnimator instanceof AnimatorSet) {
+                return createSpecFromAnimators(((AnimatorSet) animatorLoadAnimator).getChildAnimations());
             }
-            if (loadAnimator == null) {
+            if (animatorLoadAnimator == null) {
                 return null;
             }
             ArrayList arrayList = new ArrayList();
-            arrayList.add(loadAnimator);
+            arrayList.add(animatorLoadAnimator);
             return createSpecFromAnimators(arrayList);
         } catch (Exception e) {
             Log.w("MotionSpec", "Can't load animation resource ID #0x" + Integer.toHexString(i), e);
@@ -89,10 +89,10 @@ public class MotionSpec {
     }
 
     public final ObjectAnimator getAnimator(String str, Object obj, Property property) {
-        ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(obj, getPropertyValues(str));
-        ofPropertyValuesHolder.setProperty(property);
-        getTiming(str).apply(ofPropertyValuesHolder);
-        return ofPropertyValuesHolder;
+        ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(obj, getPropertyValues(str));
+        objectAnimatorOfPropertyValuesHolder.setProperty(property);
+        getTiming(str).apply(objectAnimatorOfPropertyValuesHolder);
+        return objectAnimatorOfPropertyValuesHolder;
     }
 
     public final PropertyValuesHolder[] getPropertyValues(String str) {

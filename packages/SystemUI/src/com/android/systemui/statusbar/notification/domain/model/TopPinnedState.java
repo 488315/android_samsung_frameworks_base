@@ -3,11 +3,9 @@ package com.android.systemui.statusbar.notification.domain.model;
 import com.android.systemui.statusbar.notification.headsup.PinnedStatus;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface TopPinnedState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NothingPinned implements TopPinnedState {
         public static final NothingPinned INSTANCE = new NothingPinned();
 
@@ -27,7 +25,6 @@ public interface TopPinnedState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Pinned implements TopPinnedState {
         public final String key;
         public final PinnedStatus status;

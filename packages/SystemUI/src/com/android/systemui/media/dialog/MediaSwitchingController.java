@@ -42,7 +42,6 @@ import com.android.settingslib.media.MediaDevice;
 import com.android.systemui.R;
 import com.android.systemui.animation.ActivityTransitionAnimator;
 import com.android.systemui.animation.DialogTransitionAnimator;
-import com.android.systemui.animation.DialogTransitionAnimator$createActivityTransitionController$1;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.media.nearby.NearbyMediaDevicesManager;
 import com.android.systemui.plugins.ActivityStarter;
@@ -65,7 +64,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaSwitchingController implements LocalMediaManager.DeviceCallback, INearbyMediaDevicesUpdateCallback {
     public static final boolean DEBUG = Log.isLoggable("MediaSwitchingController", 3);
@@ -129,7 +127,6 @@ public class MediaSwitchingController implements LocalMediaManager.DeviceCallbac
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.dialog.MediaSwitchingController$1, reason: invalid class name */
     public class AnonymousClass1 implements InputRouteManager.InputDeviceCallback {
         public AnonymousClass1() {
@@ -137,32 +134,29 @@ public class MediaSwitchingController implements LocalMediaManager.DeviceCallbac
 
         public final void onInputDeviceListUpdated(List list) {
             synchronized (MediaSwitchingController.this.mInputMediaDevicesLock) {
-                MediaSwitchingController.m2613$$Nest$mbuildInputMediaItems(MediaSwitchingController.this, list);
+                MediaSwitchingController.m2630$$Nest$mbuildInputMediaItems(MediaSwitchingController.this, list);
                 MediaOutputBaseDialog mediaOutputBaseDialog = (MediaOutputBaseDialog) MediaSwitchingController.this.mCallback;
                 mediaOutputBaseDialog.mMainThreadHandler.post(new MediaOutputBaseDialog$$ExternalSyntheticLambda0(mediaOutputBaseDialog, 0));
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum BroadcastNotifyDialog {
         /* JADX INFO: Fake field, exist only in values array */
         ACTION_FIRST_LAUNCH,
         ACTION_BROADCAST_INFO_ICON
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void dismissDialog();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         MediaSwitchingController create(String str, UserHandle userHandle, MediaSession.Token token);
     }
 
     /* renamed from: -$$Nest$mbuildInputMediaItems, reason: not valid java name */
-    public static void m2613$$Nest$mbuildInputMediaItems(MediaSwitchingController mediaSwitchingController, List list) {
+    public static void m2630$$Nest$mbuildInputMediaItems(MediaSwitchingController mediaSwitchingController, List list) {
         synchronized (mediaSwitchingController.mInputMediaDevicesLock) {
             List list2 = list.stream().map(new MediaSwitchingController$$ExternalSyntheticLambda0(1)).toList();
             ((CopyOnWriteArrayList) mediaSwitchingController.mInputMediaItemList).clear();
@@ -255,7 +249,7 @@ public class MediaSwitchingController implements LocalMediaManager.DeviceCallbac
         this.mOutputMediaItemListProxy.clear();
     }
 
-    public final String getAppSourceName() {
+    public final String getAppSourceName() throws PackageManager.NameNotFoundException {
         ApplicationInfo applicationInfo = null;
         if (TextUtils.isEmpty(this.mPackageName)) {
             return null;
@@ -292,15 +286,15 @@ public class MediaSwitchingController implements LocalMediaManager.DeviceCallbac
         if (metadata != null && (iconBitmap = metadata.getDescription().getIconBitmap()) != null) {
             Context context = this.mContext;
             float dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.media_output_dialog_icon_corner_radius);
-            Bitmap createBitmap = Bitmap.createBitmap(iconBitmap.getWidth(), iconBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(iconBitmap.getWidth(), iconBitmap.getHeight(), Bitmap.Config.ARGB_8888);
             RoundedBitmapDrawable21 roundedBitmapDrawable21 = new RoundedBitmapDrawable21(context.getResources(), iconBitmap);
             roundedBitmapDrawable21.mPaint.setAntiAlias(true);
             roundedBitmapDrawable21.invalidateSelf();
             roundedBitmapDrawable21.setCornerRadius(dimensionPixelSize);
-            Canvas canvas = new Canvas(createBitmap);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             roundedBitmapDrawable21.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
             roundedBitmapDrawable21.draw(canvas);
-            return IconCompat.createWithBitmap(createBitmap);
+            return IconCompat.createWithBitmap(bitmapCreateBitmap);
         }
         if (DEBUG) {
             Log.d("MediaSwitchingController", "Media meta data does not contain icon information");
@@ -434,18 +428,17 @@ public class MediaSwitchingController implements LocalMediaManager.DeviceCallbac
         int loggingDeviceType = MediaOutputMetricLogger.getLoggingDeviceType(mediaOutputMetricLogger.mSourceDevice);
         int loggingDeviceType2 = MediaOutputMetricLogger.getLoggingDeviceType(mediaOutputMetricLogger.mTargetDevice);
         int i3 = 2;
-        if (i != 1) {
-            if (i == 2) {
-                i2 = 3;
-                SysUiStatsLog.write(loggingDeviceType, loggingDeviceType2, 0, i2, mediaOutputMetricLogger.getLoggingPackageName(), mediaOutputMetricLogger.mWiredDeviceCount, mediaOutputMetricLogger.mConnectedBluetoothDeviceCount, mediaOutputMetricLogger.mRemoteDeviceCount, mediaOutputMetricLogger.mTargetDevice.isSuggestedDevice(), MediaDevice.Api34Impl.hasOngoingSession(mediaOutputMetricLogger.mTargetDevice.mItem));
-            } else {
-                i3 = 4;
-                if (i != 3) {
-                    i3 = i != 4 ? 0 : 5;
-                }
+        if (i == 1) {
+            i2 = i3;
+        } else if (i != 2) {
+            i3 = 4;
+            if (i != 3) {
+                i3 = i != 4 ? 0 : 5;
             }
+            i2 = i3;
+        } else {
+            i2 = 3;
         }
-        i2 = i3;
         SysUiStatsLog.write(loggingDeviceType, loggingDeviceType2, 0, i2, mediaOutputMetricLogger.getLoggingPackageName(), mediaOutputMetricLogger.mWiredDeviceCount, mediaOutputMetricLogger.mConnectedBluetoothDeviceCount, mediaOutputMetricLogger.mRemoteDeviceCount, mediaOutputMetricLogger.mTargetDevice.isSuggestedDevice(), MediaDevice.Api34Impl.hasOngoingSession(mediaOutputMetricLogger.mTargetDevice.mItem));
     }
 
@@ -454,11 +447,11 @@ public class MediaSwitchingController implements LocalMediaManager.DeviceCallbac
         MediaOutputBaseDialog mediaOutputBaseDialog = (MediaOutputBaseDialog) this.mCallback;
         mediaOutputBaseDialog.mMainThreadHandler.post(new MediaOutputBaseDialog$$ExternalSyntheticLambda0(mediaOutputBaseDialog, 2));
         MediaOutputMetricLogger mediaOutputMetricLogger = this.mMetricLogger;
-        String obj = mediaDevice.toString();
+        String string = mediaDevice.toString();
         ArrayList arrayList = new ArrayList(this.mOutputMediaItemListProxy.getOutputMediaItemList());
         if (MediaOutputMetricLogger.DEBUG) {
             mediaOutputMetricLogger.getClass();
-            Log.d("MediaOutputMetricLogger", "logOutputSuccess - selected device: " + obj);
+            Log.d("MediaOutputMetricLogger", "logOutputSuccess - selected device: " + string);
         }
         if (mediaOutputMetricLogger.mSourceDevice == null && mediaOutputMetricLogger.mTargetDevice == null) {
             return;
@@ -487,9 +480,9 @@ public class MediaSwitchingController implements LocalMediaManager.DeviceCallbac
         }
     }
 
-    public final void startActivity(Intent intent, DialogTransitionAnimator$createActivityTransitionController$1 dialogTransitionAnimator$createActivityTransitionController$1) {
+    public final void startActivity(Intent intent, DialogTransitionAnimator.AnonymousClass1 anonymousClass1) {
         this.mVolumePanelGlobalStateInteractor.setVisible(false);
-        this.mActivityStarter.startActivity(intent, true, (ActivityTransitionAnimator.Controller) dialogTransitionAnimator$createActivityTransitionController$1);
+        this.mActivityStarter.startActivity(intent, true, (ActivityTransitionAnimator.Controller) anonymousClass1);
     }
 
     public final void tryToLaunchInAppRoutingIntent(View view, String str) {
@@ -497,13 +490,13 @@ public class MediaSwitchingController implements LocalMediaManager.DeviceCallbac
         if (linkedItemComponentName != null) {
             DialogTransitionAnimator dialogTransitionAnimator = this.mDialogTransitionAnimator;
             dialogTransitionAnimator.getClass();
-            DialogTransitionAnimator$createActivityTransitionController$1 createActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view);
+            DialogTransitionAnimator.AnonymousClass1 anonymousClass1CreateActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view);
             Intent intent = new Intent("android.media.action.TRANSFER_MEDIA");
             intent.setComponent(linkedItemComponentName);
             intent.putExtra("android.media.extra.ROUTE_ID", str);
             intent.addFlags(268435456);
             this.mCallback.dismissDialog();
-            startActivity(intent, createActivityTransitionController$default);
+            startActivity(intent, anonymousClass1CreateActivityTransitionController$default);
         }
     }
 }

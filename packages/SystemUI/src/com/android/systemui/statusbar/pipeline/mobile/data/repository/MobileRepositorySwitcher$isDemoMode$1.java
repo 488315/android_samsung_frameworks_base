@@ -18,7 +18,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileRepositorySwitcher$isDemoMode$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ DemoModeController $demoModeController;
@@ -58,7 +57,7 @@ final class MobileRepositorySwitcher$isDemoMode$1 extends SuspendLambda implemen
             final ?? r1 = new DemoMode() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcher$isDemoMode$1$callback$1
                 @Override // com.android.systemui.demomode.DemoModeCommandReceiver
                 public final void onDemoModeFinished() {
-                    DemoMobileConnectionsRepository demoMobileConnectionsRepository = MobileRepositorySwitcher.this.demoMobileConnectionsRepository;
+                    DemoMobileConnectionsRepository demoMobileConnectionsRepository = mobileRepositorySwitcher.demoMobileConnectionsRepository;
                     StandaloneCoroutine standaloneCoroutine = demoMobileConnectionsRepository.mobileDemoCommandJob;
                     if (standaloneCoroutine != null) {
                         standaloneCoroutine.cancel(null);
@@ -70,7 +69,7 @@ final class MobileRepositorySwitcher$isDemoMode$1 extends SuspendLambda implemen
                     demoMobileConnectionsRepository._subscriptions.setValue(EmptyList.INSTANCE);
                     ((LinkedHashMap) demoMobileConnectionsRepository.connectionRepoCache).clear();
                     ((LinkedHashMap) demoMobileConnectionsRepository.subscriptionInfoCache).clear();
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.FALSE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
                 }
 
                 @Override // com.android.systemui.demomode.DemoModeCommandReceiver
@@ -82,7 +81,7 @@ final class MobileRepositorySwitcher$isDemoMode$1 extends SuspendLambda implemen
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcher$isDemoMode$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    DemoModeController.this.removeCallback((DemoMode) r1);
+                    demoModeController.removeCallback((DemoMode) r1);
                     return Unit.INSTANCE;
                 }
             };

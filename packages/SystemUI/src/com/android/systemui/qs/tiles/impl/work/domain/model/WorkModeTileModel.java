@@ -2,11 +2,9 @@ package com.android.systemui.qs.tiles.impl.work.domain.model;
 
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface WorkModeTileModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HasActiveProfile implements WorkModeTileModel {
         public final boolean isEnabled;
 
@@ -30,7 +28,6 @@ public interface WorkModeTileModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NoActiveProfile implements WorkModeTileModel {
         public static final NoActiveProfile INSTANCE = new NoActiveProfile();
 

@@ -80,10 +80,10 @@ public final class MultiResolutionStreamConfigurationMap {
     }
 
     private Collection<MultiResolutionStreamInfo> getInfo(int i, boolean z) {
-        int imageFormatToInternal = StreamConfigurationMap.imageFormatToInternal(i);
+        int iImageFormatToInternal = StreamConfigurationMap.imageFormatToInternal(i);
         Map<Integer, List<MultiResolutionStreamInfo>> map = z ? this.mMultiResolutionOutputConfigs : this.mMultiResolutionInputConfigs;
-        if (map.containsKey(Integer.valueOf(imageFormatToInternal))) {
-            return Collections.unmodifiableCollection(map.get(Integer.valueOf(imageFormatToInternal)));
+        if (map.containsKey(Integer.valueOf(iImageFormatToInternal))) {
+            return Collections.unmodifiableCollection(map.get(Integer.valueOf(iImageFormatToInternal)));
         }
         return Collections.EMPTY_LIST;
     }

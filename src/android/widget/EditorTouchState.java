@@ -86,12 +86,12 @@ public class EditorTouchState {
         int i;
         int actionMasked = motionEvent.getActionMasked();
         if (actionMasked == 0) {
-            boolean isFromSource = motionEvent.isFromSource(8194);
+            boolean zIsFromSource = motionEvent.isFromSource(8194);
             long eventTime = motionEvent.getEventTime();
             long j = this.mLastUpMillis;
             long j2 = eventTime - j;
             long j3 = j - this.mLastDownMillis;
-            if (j2 <= ViewConfiguration.getDoubleTapTimeout() && j3 <= ViewConfiguration.getDoubleTapTimeout() && ((i = this.mMultiTapStatus) == 1 || (i == 2 && isFromSource))) {
+            if (j2 <= ViewConfiguration.getDoubleTapTimeout() && j3 <= ViewConfiguration.getDoubleTapTimeout() && ((i = this.mMultiTapStatus) == 1 || (i == 2 && zIsFromSource))) {
                 if (i == 1) {
                     this.mMultiTapStatus = 2;
                 } else {

@@ -1,18 +1,21 @@
 package com.android.systemui.tuner;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Icon;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Xml;
 import com.android.internal.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ShortcutParser {
     public AttributeSet mAttrs;
@@ -22,7 +25,6 @@ public class ShortcutParser {
     public final int mResId;
     public Resources mResources;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Shortcut {
         public Icon icon;
         public String id;
@@ -37,37 +39,16 @@ public class ShortcutParser {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public ShortcutParser(android.content.Context r5, android.content.ComponentName r6) throws android.content.pm.PackageManager.NameNotFoundException {
-        /*
-            r4 = this;
-            java.lang.String r0 = r6.getPackageName()
-            java.lang.String r1 = r6.getClassName()
-            android.content.pm.PackageManager r2 = r5.getPackageManager()
-            r3 = 128(0x80, float:1.8E-43)
-            android.content.pm.ActivityInfo r6 = r2.getActivityInfo(r6, r3)
-            android.os.Bundle r2 = r6.metaData
-            if (r2 == 0) goto L25
-            java.lang.String r3 = "android.app.shortcuts"
-            boolean r2 = r2.containsKey(r3)
-            if (r2 == 0) goto L25
-            android.os.Bundle r6 = r6.metaData
-            int r6 = r6.getInt(r3)
-            goto L26
-        L25:
-            r6 = 0
-        L26:
-            r4.<init>(r5, r0, r1, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.tuner.ShortcutParser.<init>(android.content.Context, android.content.ComponentName):void");
+    public ShortcutParser(Context context, ComponentName componentName) throws PackageManager.NameNotFoundException {
+        String packageName = componentName.getPackageName();
+        String className = componentName.getClassName();
+        ActivityInfo activityInfo = context.getPackageManager().getActivityInfo(componentName, 128);
+        Bundle bundle = activityInfo.metaData;
+        this(context, packageName, className, (bundle == null || !bundle.containsKey("android.app.shortcuts")) ? 0 : activityInfo.metaData.getInt("android.app.shortcuts"));
     }
 
-    public final List getShortcuts() {
-        Shortcut parseShortcut;
+    public final List getShortcuts() throws Resources.NotFoundException, PackageManager.NameNotFoundException {
+        Shortcut shortcut;
         ArrayList arrayList = new ArrayList();
         int i = this.mResId;
         if (i != 0) {
@@ -81,8 +62,8 @@ public class ShortcutParser {
                     if (next == 1) {
                         break;
                     }
-                    if (next == 2 && xml.getName().equals("shortcut") && (parseShortcut = parseShortcut(xml)) != null) {
-                        arrayList.add(parseShortcut);
+                    if (next == 2 && xml.getName().equals("shortcut") && (shortcut = parseShortcut(xml)) != null) {
+                        arrayList.add(shortcut);
                     }
                 }
             } catch (Exception e) {
@@ -93,14 +74,14 @@ public class ShortcutParser {
     }
 
     public final Shortcut parseShortcut(XmlResourceParser xmlResourceParser) {
-        TypedArray obtainAttributes = this.mResources.obtainAttributes(this.mAttrs, R.styleable.Shortcut);
+        TypedArray typedArrayObtainAttributes = this.mResources.obtainAttributes(this.mAttrs, R.styleable.Shortcut);
         Shortcut shortcut = new Shortcut();
-        if (!obtainAttributes.getBoolean(1, true)) {
+        if (!typedArrayObtainAttributes.getBoolean(1, true)) {
             return null;
         }
-        String string = obtainAttributes.getString(2);
-        int resourceId = obtainAttributes.getResourceId(0, 0);
-        int resourceId2 = obtainAttributes.getResourceId(3, 0);
+        String string = typedArrayObtainAttributes.getString(2);
+        int resourceId = typedArrayObtainAttributes.getResourceId(0, 0);
+        int resourceId2 = typedArrayObtainAttributes.getResourceId(3, 0);
         String str = this.mPkg;
         shortcut.pkg = str;
         shortcut.icon = Icon.createWithResource(str, resourceId);

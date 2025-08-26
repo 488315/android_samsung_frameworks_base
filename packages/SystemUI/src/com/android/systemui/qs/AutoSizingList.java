@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AutoSizingList extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -29,7 +28,7 @@ public class AutoSizingList extends LinearLayout {
         this.mBindChildren = new Runnable() { // from class: com.android.systemui.qs.AutoSizingList$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                AutoSizingList autoSizingList = AutoSizingList.this;
+                AutoSizingList autoSizingList = this.f$0;
                 if (autoSizingList.mAdapter == null) {
                     return;
                 }
@@ -69,10 +68,10 @@ public class AutoSizingList extends LinearLayout {
             }
         };
         this.mHandler = new Handler();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.AutoSizingList);
-        this.mItemSize = obtainStyledAttributes.getDimensionPixelSize(1, 0);
-        this.mEnableAutoSizing = obtainStyledAttributes.getBoolean(0, true);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.AutoSizingList);
+        this.mItemSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+        this.mEnableAutoSizing = typedArrayObtainStyledAttributes.getBoolean(0, true);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.widget.LinearLayout, android.view.View

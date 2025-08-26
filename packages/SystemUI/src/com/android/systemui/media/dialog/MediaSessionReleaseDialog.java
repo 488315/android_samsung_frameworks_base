@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaSessionReleaseDialog extends SystemUIDialog {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -33,7 +32,7 @@ public class MediaSessionReleaseDialog extends SystemUIDialog {
         this.mPositiveButtonListener = new View.OnClickListener() { // from class: com.android.systemui.media.dialog.MediaSessionReleaseDialog$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                MediaSessionReleaseDialog mediaSessionReleaseDialog = MediaSessionReleaseDialog.this;
+                MediaSessionReleaseDialog mediaSessionReleaseDialog = this.f$0;
                 Runnable runnable2 = runnable;
                 int i3 = MediaSessionReleaseDialog.$r8$clinit;
                 mediaSessionReleaseDialog.getClass();
@@ -65,7 +64,7 @@ public class MediaSessionReleaseDialog extends SystemUIDialog {
         button2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.media.dialog.MediaSessionReleaseDialog$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                MediaSessionReleaseDialog mediaSessionReleaseDialog = MediaSessionReleaseDialog.this;
+                MediaSessionReleaseDialog mediaSessionReleaseDialog = this.f$0;
                 int i = MediaSessionReleaseDialog.$r8$clinit;
                 mediaSessionReleaseDialog.dismiss();
             }

@@ -19,7 +19,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SecPatternBouncerKt$SecPatternBouncer$3$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ State<PatternDotViewModel> $currentDot$delegate;
@@ -81,10 +80,10 @@ final class SecPatternBouncerKt$SecPatternBouncer$3$1 extends SuspendLambda impl
         while (it.hasNext()) {
             BuildersKt.launch$default(coroutineScope, null, null, new SecPatternBouncerKt$SecPatternBouncer$3$1$1$1((Animatable) ((Map.Entry) it.next()).getValue(), null), 3);
         }
-        Set<Map.Entry<PatternDotViewModel, Animatable<Float, AnimationVector1D>>> entrySet = this.$dotScalingAnimatables.entrySet();
+        Set<Map.Entry<PatternDotViewModel, Animatable<Float, AnimationVector1D>>> setEntrySet = this.$dotScalingAnimatables.entrySet();
         CoroutineScope coroutineScope2 = this.$scope;
         State<PatternDotViewModel> state = this.$currentDot$delegate;
-        Iterator<T> it2 = entrySet.iterator();
+        Iterator<T> it2 = setEntrySet.iterator();
         while (it2.hasNext()) {
             Map.Entry entry = (Map.Entry) it2.next();
             PatternDotViewModel patternDotViewModel = (PatternDotViewModel) entry.getKey();

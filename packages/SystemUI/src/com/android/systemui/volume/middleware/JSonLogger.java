@@ -16,13 +16,11 @@ import kotlin.Result;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class JSonLogger implements VolumeMiddleware {
     public final HandlerWrapper handler;
     public final LogWrapper log;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,7 +30,6 @@ public final class JSonLogger implements VolumeMiddleware {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -64,11 +61,11 @@ public final class JSonLogger implements VolumeMiddleware {
     public final Object apply(Object obj) {
         final VolumePanelAction volumePanelAction = (VolumePanelAction) obj;
         if (volumePanelAction.isFromOutside()) {
-            this.handler.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.middleware.JSonLogger$apply$1
+            this.handler.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.middleware.JSonLogger.apply.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     try {
-                        this.log.p(new Gson().toJson(VolumePanelAction.this));
+                        this.log.p(new Gson().toJson(volumePanelAction));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -127,10 +124,10 @@ public final class JSonLogger implements VolumeMiddleware {
             int i4 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-        if (m3422exceptionOrNullimpl != null) {
-            m3422exceptionOrNullimpl.printStackTrace();
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        if (thM3442exceptionOrNullimpl != null) {
+            thM3442exceptionOrNullimpl.printStackTrace();
         }
-        Result.m3421boximpl(failure);
+        Result.m3441boximpl(failure);
     }
 }

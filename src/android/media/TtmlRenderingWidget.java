@@ -1,6 +1,7 @@
 package android.media;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.media.SubtitleTrack;
 import android.text.SpannableString;
@@ -83,7 +84,7 @@ class TtmlRenderingWidget extends LinearLayout implements SubtitleTrack.Renderin
     }
 
     @Override // android.widget.LinearLayout, android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         super.onLayout(z, i, i2, i3, i4);
     }
 

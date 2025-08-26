@@ -8,7 +8,6 @@ import android.view.WindowManager;
 import com.samsung.android.widget.SemTipPopup;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SmartTip {
     public final Context mContext;
@@ -24,13 +23,13 @@ public class SmartTip {
     public final WindowManager mWindowManager;
 
     public SmartTip(Context context, String str, String str2, String str3, int i, int i2, int i3) {
-        Context createWindowContext = context.createWindowContext(VolteConstants.ErrorCode.DIAL_ALTERNATIVE_NUMBER, null);
-        this.mContext = createWindowContext;
+        Context contextCreateWindowContext = context.createWindowContext(VolteConstants.ErrorCode.DIAL_ALTERNATIVE_NUMBER, null);
+        this.mContext = contextCreateWindowContext;
         this.mTitle = str;
-        this.mWindowManager = (WindowManager) createWindowContext.getSystemService("window");
-        this.mPreferences = createWindowContext.getSharedPreferences(str2, 0);
+        this.mWindowManager = (WindowManager) contextCreateWindowContext.getSystemService("window");
+        this.mPreferences = contextCreateWindowContext.getSharedPreferences(str2, 0);
         this.mKey = str3;
-        this.mLimitCount = createWindowContext.getResources().getInteger(i2);
+        this.mLimitCount = contextCreateWindowContext.getResources().getInteger(i2);
         this.mMsgResId = i;
         this.mLayoutResId = i3;
     }

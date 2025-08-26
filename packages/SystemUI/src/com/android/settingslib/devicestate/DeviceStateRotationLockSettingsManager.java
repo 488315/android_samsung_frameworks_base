@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Set;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DeviceStateRotationLockSettingsManager implements DeviceStateAutoRotateSettingManager {
     public final Set mListeners;
@@ -34,17 +33,17 @@ public final class DeviceStateRotationLockSettingsManager implements DeviceState
     public final SecureSettings mSecureSettings;
     public List mSettableDeviceStates;
 
-    public DeviceStateRotationLockSettingsManager(Context context, SecureSettings secureSettings) {
+    public DeviceStateRotationLockSettingsManager(Context context, SecureSettings secureSettings) throws NumberFormatException {
         Handler handler = new Handler(Looper.getMainLooper());
         this.mListeners = new HashSet();
         this.mSecureSettings = secureSettings;
         this.mPosturesHelper = new PosturesHelper(context, (DeviceStateManager) context.getSystemService(DeviceStateManager.class));
-        this.mPostureRotationLockDefaults = context.getResources().getStringArray(17236292);
+        this.mPostureRotationLockDefaults = context.getResources().getStringArray(17236293);
         loadDefaults();
         initializeInMemoryMap();
         ((AndroidSecureSettings) secureSettings).mContentResolver.registerContentObserver(Settings.Secure.getUriFor("device_state_rotation_lock"), false, new ContentObserver(handler) { // from class: com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager.1
             @Override // android.database.ContentObserver
-            public final void onChange(boolean z) {
+            public final void onChange(boolean z) throws NumberFormatException {
                 DeviceStateRotationLockSettingsManager.this.onPersistedSettingsChanged();
             }
         }, -2);
@@ -65,56 +64,56 @@ public final class DeviceStateRotationLockSettingsManager implements DeviceState
 
     @Override // com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManager
     public final int getRotationLockSetting(int i) {
-        int deviceStateToPosture = this.mPosturesHelper.deviceStateToPosture(i);
-        int i2 = this.mPostureRotationLockSettings.get(deviceStateToPosture, 0);
+        int iDeviceStateToPosture = this.mPosturesHelper.deviceStateToPosture(i);
+        int i2 = this.mPostureRotationLockSettings.get(iDeviceStateToPosture, 0);
         if (i2 != 0) {
             return i2;
         }
-        int indexOfKey = this.mPostureRotationLockFallbackSettings.indexOfKey(deviceStateToPosture);
-        if (indexOfKey < 0) {
+        int iIndexOfKey = this.mPostureRotationLockFallbackSettings.indexOfKey(iDeviceStateToPosture);
+        if (iIndexOfKey < 0) {
             Log.w("DSRotLockSettingsMngr", "Setting is ignored, but no fallback was specified.");
             return 0;
         }
-        return this.mPostureRotationLockSettings.get(this.mPostureRotationLockFallbackSettings.valueAt(indexOfKey), 0);
+        return this.mPostureRotationLockSettings.get(this.mPostureRotationLockFallbackSettings.valueAt(iIndexOfKey), 0);
     }
 
-    public final void initializeInMemoryMap() {
+    public final void initializeInMemoryMap() throws NumberFormatException {
         String stringForUser = Settings.Secure.getStringForUser(((AndroidSecureSettings) this.mSecureSettings).mContentResolver, "device_state_rotation_lock", -2);
         if (TextUtils.isEmpty(stringForUser)) {
             loadDefaults();
             persistSettings();
             return;
         }
-        String[] split = stringForUser.split(":");
-        if (split.length % 2 != 0) {
+        String[] strArrSplit = stringForUser.split(":");
+        if (strArrSplit.length % 2 != 0) {
             Log.wtf("DSRotLockSettingsMngr", "Can't deserialize saved settings, falling back on defaults");
             loadDefaults();
             persistSettings();
             return;
         }
-        this.mPostureRotationLockSettings = new SparseIntArray(split.length / 2);
+        this.mPostureRotationLockSettings = new SparseIntArray(strArrSplit.length / 2);
         int i = 0;
         while (true) {
             boolean z = true;
-            if (i >= split.length - 1) {
+            if (i >= strArrSplit.length - 1) {
                 return;
             }
             int i2 = i + 1;
             try {
-                int parseInt = Integer.parseInt(split[i]);
+                int i3 = Integer.parseInt(strArrSplit[i]);
                 i += 2;
-                int parseInt2 = Integer.parseInt(split[i2]);
-                boolean z2 = parseInt2 == 0;
-                if (this.mPostureDefaultRotationLockSettings.get(parseInt) != 0) {
+                int i4 = Integer.parseInt(strArrSplit[i2]);
+                boolean z2 = i4 == 0;
+                if (this.mPostureDefaultRotationLockSettings.get(i3) != 0) {
                     z = false;
                 }
                 if (z2 != z) {
-                    Log.w("DSRotLockSettingsMngr", "Conflict for ignored device state " + parseInt + ". Falling back on defaults");
+                    Log.w("DSRotLockSettingsMngr", "Conflict for ignored device state " + i3 + ". Falling back on defaults");
                     loadDefaults();
                     persistSettings();
                     return;
                 }
-                this.mPostureRotationLockSettings.put(parseInt, parseInt2);
+                this.mPostureRotationLockSettings.put(i3, i4);
             } catch (NumberFormatException e) {
                 Log.wtf("DSRotLockSettingsMngr", "Error deserializing one of the saved settings", e);
                 loadDefaults();
@@ -129,33 +128,33 @@ public final class DeviceStateRotationLockSettingsManager implements DeviceState
         return getRotationLockSetting(i) == 1;
     }
 
-    public final void loadDefaults() {
+    public final void loadDefaults() throws NumberFormatException {
         this.mSettableDeviceStates = new ArrayList(this.mPostureRotationLockDefaults.length);
         this.mPostureDefaultRotationLockSettings = new SparseIntArray(this.mPostureRotationLockDefaults.length);
         this.mPostureRotationLockSettings = new SparseIntArray(this.mPostureRotationLockDefaults.length);
         this.mPostureRotationLockFallbackSettings = new SparseIntArray(1);
         for (String str : this.mPostureRotationLockDefaults) {
-            String[] split = str.split(":");
+            String[] strArrSplit = str.split(":");
             try {
-                int parseInt = Integer.parseInt(split[0]);
-                int parseInt2 = Integer.parseInt(split[1]);
-                if (parseInt2 == 0) {
-                    if (split.length == 3) {
-                        this.mPostureRotationLockFallbackSettings.put(parseInt, Integer.parseInt(split[2]));
+                int i = Integer.parseInt(strArrSplit[0]);
+                int i2 = Integer.parseInt(strArrSplit[1]);
+                if (i2 == 0) {
+                    if (strArrSplit.length == 3) {
+                        this.mPostureRotationLockFallbackSettings.put(i, Integer.parseInt(strArrSplit[2]));
                     } else {
-                        Log.w("DSRotLockSettingsMngr", "Rotation lock setting is IGNORED, but values have unexpected size of " + split.length);
+                        Log.w("DSRotLockSettingsMngr", "Rotation lock setting is IGNORED, but values have unexpected size of " + strArrSplit.length);
                     }
                 }
-                boolean z = parseInt2 != 0;
-                List list = (List) this.mPosturesHelper.postures.get(Integer.valueOf(parseInt));
+                boolean z = i2 != 0;
+                List list = (List) this.mPosturesHelper.postures.get(Integer.valueOf(i));
                 Integer num = list != null ? (Integer) CollectionsKt___CollectionsKt.firstOrNull(list) : null;
                 if (num != null) {
                     this.mSettableDeviceStates.add(new SettableDeviceState(num.intValue(), z));
                 } else {
-                    Log.wtf("DSRotLockSettingsMngr", "No matching device state for posture: " + parseInt);
+                    Log.wtf("DSRotLockSettingsMngr", "No matching device state for posture: " + i);
                 }
-                this.mPostureRotationLockSettings.put(parseInt, parseInt2);
-                this.mPostureDefaultRotationLockSettings.put(parseInt, parseInt2);
+                this.mPostureRotationLockSettings.put(i, i2);
+                this.mPostureDefaultRotationLockSettings.put(i, i2);
             } catch (NumberFormatException e) {
                 Log.wtf("DSRotLockSettingsMngr", "Error parsing settings entry. Entry was: ".concat(str), e);
                 return;
@@ -163,7 +162,7 @@ public final class DeviceStateRotationLockSettingsManager implements DeviceState
         }
     }
 
-    public void onPersistedSettingsChanged() {
+    public void onPersistedSettingsChanged() throws NumberFormatException {
         initializeInMemoryMap();
         Iterator it = ((HashSet) this.mListeners).iterator();
         while (it.hasNext()) {
@@ -190,11 +189,11 @@ public final class DeviceStateRotationLockSettingsManager implements DeviceState
             sb.append(":");
             sb.append(this.mPostureRotationLockSettings.valueAt(i));
         }
-        String sb2 = sb.toString();
-        if (TextUtils.equals(Settings.Secure.getStringForUser(((AndroidSecureSettings) this.mSecureSettings).mContentResolver, "device_state_rotation_lock", -2), sb2)) {
+        String string = sb.toString();
+        if (TextUtils.equals(Settings.Secure.getStringForUser(((AndroidSecureSettings) this.mSecureSettings).mContentResolver, "device_state_rotation_lock", -2), string)) {
             return;
         }
-        Settings.Secure.putStringForUser(((AndroidSecureSettings) this.mSecureSettings).mContentResolver, "device_state_rotation_lock", sb2, -2);
+        Settings.Secure.putStringForUser(((AndroidSecureSettings) this.mSecureSettings).mContentResolver, "device_state_rotation_lock", string, -2);
     }
 
     @Override // com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManager
@@ -202,19 +201,19 @@ public final class DeviceStateRotationLockSettingsManager implements DeviceState
         ((HashSet) this.mListeners).add(deviceStateRotationLockSettingController$$ExternalSyntheticLambda1);
     }
 
-    public void resetStateForTesting(Resources resources) {
-        this.mPostureRotationLockDefaults = resources.getStringArray(17236292);
+    public void resetStateForTesting(Resources resources) throws NumberFormatException {
+        this.mPostureRotationLockDefaults = resources.getStringArray(17236293);
         loadDefaults();
         persistSettings();
     }
 
     @Override // com.android.settingslib.devicestate.DeviceStateAutoRotateSettingManager
     public final void updateSetting(int i, boolean z) {
-        int deviceStateToPosture = this.mPosturesHelper.deviceStateToPosture(i);
-        if (this.mPostureRotationLockFallbackSettings.indexOfKey(deviceStateToPosture) >= 0) {
-            deviceStateToPosture = this.mPostureRotationLockFallbackSettings.get(deviceStateToPosture);
+        int iDeviceStateToPosture = this.mPosturesHelper.deviceStateToPosture(i);
+        if (this.mPostureRotationLockFallbackSettings.indexOfKey(iDeviceStateToPosture) >= 0) {
+            iDeviceStateToPosture = this.mPostureRotationLockFallbackSettings.get(iDeviceStateToPosture);
         }
-        this.mPostureRotationLockSettings.put(deviceStateToPosture, z ? 1 : 2);
+        this.mPostureRotationLockSettings.put(iDeviceStateToPosture, z ? 1 : 2);
         persistSettings();
     }
 }

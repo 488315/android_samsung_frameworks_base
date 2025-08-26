@@ -79,9 +79,9 @@ public interface IClipboardDataList extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IClipboardDataList.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IClipboardDataList)) {
-                return (IClipboardDataList) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IClipboardDataList.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IClipboardDataList)) {
+                return (IClipboardDataList) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -124,28 +124,28 @@ public interface IClipboardDataList extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeInt(size);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                SemClipData item = getItem(readInt);
+                SemClipData item = getItem(i3);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(item, 1);
             } else if (i == 3) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean removeData = removeData(readInt2);
+                boolean zRemoveData = removeData(i4);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(removeData);
+                parcel2.writeBoolean(zRemoveData);
             } else if (i == 4) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 SemClipData semClipData = (SemClipData) parcel.readTypedObject(SemClipData.CREATOR);
                 parcel.enforceNoDataAvail();
-                boolean updateData = updateData(readInt3, semClipData);
+                boolean zUpdateData = updateData(i5, semClipData);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(updateData);
+                parcel2.writeBoolean(zUpdateData);
             } else if (i == 5) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                SemClipData clipByID = getClipByID(readString);
+                SemClipData clipByID = getClipByID(string);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(clipByID, 1);
             } else {
@@ -172,81 +172,81 @@ public interface IClipboardDataList extends IInterface {
 
             @Override // android.sec.clipboard.data.IClipboardDataList
             public int size() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardDataList.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IClipboardDataList.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.data.IClipboardDataList
             public SemClipData getItem(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardDataList.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemClipData) obtain2.readTypedObject(SemClipData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IClipboardDataList.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemClipData) parcelObtain2.readTypedObject(SemClipData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.data.IClipboardDataList
             public boolean removeData(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardDataList.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IClipboardDataList.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.data.IClipboardDataList
             public boolean updateData(int i, SemClipData semClipData) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardDataList.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(semClipData, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IClipboardDataList.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(semClipData, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.clipboard.data.IClipboardDataList
             public SemClipData getClipByID(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IClipboardDataList.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemClipData) obtain2.readTypedObject(SemClipData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IClipboardDataList.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemClipData) parcelObtain2.readTypedObject(SemClipData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

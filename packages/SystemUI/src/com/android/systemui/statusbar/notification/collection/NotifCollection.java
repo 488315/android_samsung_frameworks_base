@@ -85,7 +85,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotifCollection implements Dumpable, PipelineDumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -111,7 +110,6 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
     public final NotifCollection$$ExternalSyntheticLambda1 mRebuildListRunnable;
     public final IStatusBarService mStatusBarService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.collection.NotifCollection$1, reason: invalid class name */
     public class AnonymousClass1 implements NotificationListener.NotificationHandler {
         public AnonymousClass1() {
@@ -172,12 +170,12 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
             LogLevel logLevel = LogLevel.INFO;
             NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda3 = new NotifCollectionLogger$$ExternalSyntheticLambda3(6);
             LogBuffer logBuffer = notifCollectionLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda3, null);
+            LogMessage logMessageObtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda3, null);
             String key = statusBarNotification.getKey();
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = key != null ? key.replace("\n", "") : null;
             logMessageImpl.int1 = i;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             NotificationEntry notificationEntry = (NotificationEntry) ((ArrayMap) notifCollection.mNotificationSet).get(statusBarNotification.getKey());
             if (notificationEntry != null) {
                 notificationEntry.mCancellationReason = i;
@@ -186,13 +184,13 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                 notifCollection.dispatchEventsAndRebuildList("onNotificationRemoved");
                 return;
             }
-            LogMessage obtain2 = logBuffer.obtain("NotifCollection", LogLevel.ERROR, new NotifCollectionLogger$$ExternalSyntheticLambda3(3), null);
+            LogMessage logMessageObtain2 = logBuffer.obtain("NotifCollection", LogLevel.ERROR, new NotifCollectionLogger$$ExternalSyntheticLambda3(3), null);
             String key2 = statusBarNotification.getKey();
-            String replace = key2 != null ? key2.replace("\n", "") : null;
-            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
-            logMessageImpl2.str1 = replace;
+            String strReplace = key2 != null ? key2.replace("\n", "") : null;
+            LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
+            logMessageImpl2.str1 = strReplace;
             logMessageImpl2.int1 = i;
-            logBuffer.commit(obtain2);
+            logBuffer.commit(logMessageObtain2);
         }
 
         @Override // com.android.systemui.statusbar.NotificationListener.NotificationHandler
@@ -205,11 +203,9 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DismissedByUserStatsCreator {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FutureDismissal implements Runnable {
         public boolean mDidRun;
         public boolean mDidSystemServerCancel;
@@ -231,15 +227,15 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                 LogLevel logLevel = LogLevel.WARNING;
                 NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda0 = new NotifCollectionLogger$$ExternalSyntheticLambda0(27);
                 LogBuffer logBuffer = notifCollectionLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = this.mLabel;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = this.mLabel;
+                logBuffer.commit(logMessageObtain);
                 return;
             }
             this.mDidRun = true;
             NotifCollection.this.mFutureDismissals.remove(this.mEntry.mKey);
             NotificationEntry entry = NotifCollection.this.getEntry(this.mEntry.mKey);
-            DismissedByUserStats createDismissedByUserStats = ((OnUserInteractionCallbackImpl$$ExternalSyntheticLambda0) this.mStatsCreator).createDismissedByUserStats(this.mEntry);
+            DismissedByUserStats dismissedByUserStatsCreateDismissedByUserStats = ((OnUserInteractionCallbackImpl$$ExternalSyntheticLambda0) this.mStatsCreator).createDismissedByUserStats(this.mEntry);
             NotificationEntry notificationEntry = this.mSummaryToDismiss;
             if (notificationEntry != null) {
                 NotificationEntry entry2 = NotifCollection.this.getEntry(notificationEntry.mKey);
@@ -258,7 +254,7 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                     return;
                 } else {
                     NotifCollection.this.mLogger.logFutureDismissalDismissing(this, "entry");
-                    NotifCollection.this.dismissNotification(this.mEntry, createDismissedByUserStats);
+                    NotifCollection.this.dismissNotification(this.mEntry, dismissedByUserStatsCreateDismissedByUserStats);
                     return;
                 }
             }
@@ -267,18 +263,18 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
             LogLevel logLevel2 = LogLevel.DEBUG;
             NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda3 = new NotifCollectionLogger$$ExternalSyntheticLambda3(5);
             LogBuffer logBuffer2 = notifCollectionLogger2.buffer;
-            LogMessage obtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda3, null);
-            ((LogMessageImpl) obtain2).str1 = this.mLabel;
-            logBuffer2.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda3, null);
+            ((LogMessageImpl) logMessageObtain2).str1 = this.mLabel;
+            logBuffer2.commit(logMessageObtain2);
         }
 
         private FutureDismissal(NotificationEntry notificationEntry, int i, DismissedByUserStatsCreator dismissedByUserStatsCreator) {
             this.mEntry = notificationEntry;
             this.mStatsCreator = dismissedByUserStatsCreator;
             int i2 = NotifCollection.$r8$clinit;
-            NotificationEntry fetchSummaryToDismiss = NotifCollection.this.fetchSummaryToDismiss(notificationEntry);
-            this.mSummaryToDismiss = fetchSummaryToDismiss;
-            this.mLabel = "<FutureDismissal@" + Integer.toHexString(hashCode()) + " entry=" + NotificationUtils.logKey(notificationEntry) + " reason=" + NotifCollectionLoggerKt.cancellationReasonDebugString(i) + " summary=" + NotificationUtils.logKey(fetchSummaryToDismiss) + ">";
+            NotificationEntry notificationEntryFetchSummaryToDismiss = NotifCollection.this.fetchSummaryToDismiss(notificationEntry);
+            this.mSummaryToDismiss = notificationEntryFetchSummaryToDismiss;
+            this.mLabel = "<FutureDismissal@" + Integer.toHexString(hashCode()) + " entry=" + NotificationUtils.logKey(notificationEntry) + " reason=" + NotifCollectionLoggerKt.cancellationReasonDebugString(i) + " summary=" + NotificationUtils.logKey(notificationEntryFetchSummaryToDismiss) + ">";
         }
     }
 
@@ -299,7 +295,7 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
         this.mRebuildListRunnable = new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.NotifCollection$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                NotifCollection notifCollection = NotifCollection.this;
+                NotifCollection notifCollection = this.f$0;
                 ShadeListBuilder.AnonymousClass1 anonymousClass1 = notifCollection.mBuildListener;
                 if (anonymousClass1 != null) {
                     anonymousClass1.onBuildList(notifCollection.mReadOnlyNotificationSet, "asynchronousUpdate");
@@ -328,7 +324,7 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
     }
 
     public static boolean shouldAutoDismissChildren(NotificationEntry notificationEntry, String str) {
-        if (!notificationEntry.mSbn.getGroupKey().equals(str) || notificationEntry.mSbn.getNotification().isGroupSummary() || hasFlag(notificationEntry, 2) || hasFlag(notificationEntry, 4096) || hasFlag(notificationEntry, 32)) {
+        if (!notificationEntry.mSbn.getGroupKey().equals(str) || notificationEntry.mSbn.getNotification().isGroupSummary() || hasFlag(notificationEntry, 4096) || hasFlag(notificationEntry, 32)) {
             return false;
         }
         return ((notificationEntry.mRanking.getChannel() != null && notificationEntry.mRanking.getChannel().isImportantConversation()) || notificationEntry.mDismissState == NotificationEntry.DismissState.DISMISSED || hasSemFlag(notificationEntry, NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) || hasSemFlag(notificationEntry, 1048576) || hasSemFlag(notificationEntry, 2097152) || hasSemFlag(notificationEntry, 4194304) || notificationEntry.mRanking.getChannel().isImportantConversation()) ? false : true;
@@ -339,7 +335,7 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
     }
 
     public final void applyRanking(NotificationListenerService.RankingMap rankingMap) {
-        Set set;
+        Set setKeySet;
         ArrayMap arrayMap = null;
         for (NotificationEntry notificationEntry : ((ArrayMap) this.mNotificationSet).values()) {
             if (!notificationEntry.isCanceled()) {
@@ -364,41 +360,41 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
         if (notifCollection$$ExternalSyntheticLambda11 == null) {
             notifCollection$$ExternalSyntheticLambda11 = null;
         }
-        final Set keySet = ((ArrayMap) ((Map) notifCollection$$ExternalSyntheticLambda11.f$0)).keySet();
+        final Set setKeySet2 = ((ArrayMap) ((Map) notifCollection$$ExternalSyntheticLambda11.f$0)).keySet();
         NotifCollection$$ExternalSyntheticLambda11 notifCollection$$ExternalSyntheticLambda112 = notifCollectionInconsistencyTracker.coalescedKeySetAccessor;
-        final Set set2 = (Set) (notifCollection$$ExternalSyntheticLambda112 != null ? notifCollection$$ExternalSyntheticLambda112 : null).invoke();
+        final Set set = (Set) (notifCollection$$ExternalSyntheticLambda112 != null ? notifCollection$$ExternalSyntheticLambda112 : null).invoke();
         final int i = 0;
         final int i2 = 1;
-        Set<String> set3 = SequencesKt___SequencesKt.toSet(SequencesKt___SequencesKt.filter(SequencesKt___SequencesKt.filter(ArraysKt___ArraysKt.asSequence(rankingMap.getOrderedKeys()), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionInconsistencyTracker$$ExternalSyntheticLambda0
+        Set<String> set2 = SequencesKt___SequencesKt.toSet(SequencesKt___SequencesKt.filter(SequencesKt___SequencesKt.filter(ArraysKt___ArraysKt.asSequence(rankingMap.getOrderedKeys()), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionInconsistencyTracker$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i3 = i;
-                Set set4 = keySet;
+                Set set3 = setKeySet2;
                 String str2 = (String) obj;
                 switch (i3) {
                 }
-                return Boolean.valueOf(!set4.contains(str2));
+                return Boolean.valueOf(!set3.contains(str2));
             }
         }), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionInconsistencyTracker$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 int i3 = i2;
-                Set set4 = set2;
+                Set set3 = set;
                 String str2 = (String) obj;
                 switch (i3) {
                 }
-                return Boolean.valueOf(!set4.contains(str2));
+                return Boolean.valueOf(!set3.contains(str2));
             }
         }));
-        notifCollectionInconsistencyTracker.maybeLogMissingNotifications(notifCollectionInconsistencyTracker.missingNotifications, set3);
-        notifCollectionInconsistencyTracker.missingNotifications = set3;
+        notifCollectionInconsistencyTracker.maybeLogMissingNotifications(notifCollectionInconsistencyTracker.missingNotifications, set2);
+        notifCollectionInconsistencyTracker.missingNotifications = set2;
         notifCollectionInconsistencyTracker.maybeLogInconsistentRankings(notifCollectionInconsistencyTracker.notificationsWithoutRankings, arrayMap != null ? arrayMap : MapsKt__MapsKt.emptyMap(), rankingMap);
-        if (arrayMap == null || (set = arrayMap.keySet()) == null) {
-            set = EmptySet.INSTANCE;
+        if (arrayMap == null || (setKeySet = arrayMap.keySet()) == null) {
+            setKeySet = EmptySet.INSTANCE;
         }
-        notifCollectionInconsistencyTracker.notificationsWithoutRankings = set;
+        notifCollectionInconsistencyTracker.notificationsWithoutRankings = setKeySet;
         if (arrayMap != null) {
             for (NotificationEntry notificationEntry2 : arrayMap.values()) {
                 notificationEntry2.mCancellationReason = 0;
@@ -452,17 +448,17 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
         LogLevel logLevel = LogLevel.INFO;
         NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda0 = new NotifCollectionLogger$$ExternalSyntheticLambda0(2);
         LogBuffer logBuffer = notifCollectionLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).int1 = i;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        logBuffer.commit(logMessageObtain);
         OngoingActivityDataHelper.INSTANCE.getClass();
         OngoingActivityData mediaData = OngoingActivityDataHelper.getMediaData();
         try {
             this.mStatusBarService.onClearAllNotifications(i, mediaData != null ? mediaData.mNotificationEntry.mIsPlayingMediaOngoingActivity.booleanValue() : false);
         } catch (RemoteException e) {
-            LogMessage obtain2 = logBuffer.obtain("NotifCollection", LogLevel.WTF, new NotifCollectionLogger$$ExternalSyntheticLambda0(5), null);
-            ((LogMessageImpl) obtain2).str1 = e.toString();
-            logBuffer.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer.obtain("NotifCollection", LogLevel.WTF, new NotifCollectionLogger$$ExternalSyntheticLambda0(5), null);
+            ((LogMessageImpl) logMessageObtain2).str1 = e.toString();
+            logBuffer.commit(logMessageObtain2);
         }
         Assert.isMainThread();
         ArrayList arrayList = new ArrayList(this.mReadOnlyNotificationSet);
@@ -472,12 +468,12 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                 updateDismissInterceptors(notificationEntry);
                 if (((ArrayList) notificationEntry.mDismissInterceptors).size() > 0) {
                     int size2 = arrayList.size();
-                    LogMessage obtain3 = logBuffer.obtain("NotifCollection", LogLevel.INFO, new NotifCollectionLogger$$ExternalSyntheticLambda0(22), null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain3;
+                    LogMessage logMessageObtain3 = logBuffer.obtain("NotifCollection", LogLevel.INFO, new NotifCollectionLogger$$ExternalSyntheticLambda0(22), null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain3;
                     logMessageImpl.str1 = NotificationUtils.logKey(notificationEntry);
                     logMessageImpl.int1 = size;
                     logMessageImpl.int2 = size2;
-                    logBuffer.commit(obtain3);
+                    logBuffer.commit(logMessageObtain3);
                 }
                 arrayList.remove(size);
             }
@@ -493,8 +489,8 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
     public final void dismissNotifications(List list) {
         final int i;
         NotificationEntry notificationEntry;
-        String logKey;
-        NotificationEntry fetchSummaryToDismiss;
+        String strLogKey;
+        NotificationEntry notificationEntryFetchSummaryToDismiss;
         Assert.isMainThread();
         checkForReentrantCall();
         HashSet hashSet = new HashSet(list.size());
@@ -517,13 +513,13 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
             arrayList.add(entryWithDismissStats2);
             int i3 = NotificationBundleUi.$r8$clinit;
             NotificationEntry notificationEntry3 = entryWithDismissStats2.entry;
-            if (notificationEntry3 != null && (fetchSummaryToDismiss = fetchSummaryToDismiss(notificationEntry3)) != null && !hashSet.contains(fetchSummaryToDismiss)) {
+            if (notificationEntry3 != null && (notificationEntryFetchSummaryToDismiss = fetchSummaryToDismiss(notificationEntry3)) != null && !hashSet.contains(notificationEntryFetchSummaryToDismiss)) {
                 DismissedByUserStats dismissedByUserStats = entryWithDismissStats2.stats;
                 int i4 = dismissedByUserStats.dismissalSurface;
-                int rank = fetchSummaryToDismiss.mRanking.getRank();
+                int rank = notificationEntryFetchSummaryToDismiss.mRanking.getRank();
                 int i5 = dismissedByUserStats.notificationVisibility.count;
-                String str = fetchSummaryToDismiss.mKey;
-                arrayList.add(new EntryWithDismissStats(fetchSummaryToDismiss, new DismissedByUserStats(i4, dismissedByUserStats.dismissalSentiment, NotificationVisibility.obtain(str, rank, i5, false)), str, fetchSummaryToDismiss.hashCode()));
+                String str = notificationEntryFetchSummaryToDismiss.mKey;
+                arrayList.add(new EntryWithDismissStats(notificationEntryFetchSummaryToDismiss, new DismissedByUserStats(i4, dismissedByUserStats.dismissalSentiment, NotificationVisibility.obtain(str, rank, i5, false)), str, notificationEntryFetchSummaryToDismiss.hashCode()));
             }
         }
         final int size = arrayList.size();
@@ -540,12 +536,12 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                 LogLevel logLevel = LogLevel.INFO;
                 NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda0 = new NotifCollectionLogger$$ExternalSyntheticLambda0(8);
                 LogBuffer logBuffer = notifCollectionLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.str1 = NotificationUtils.logKey(str2);
                 logMessageImpl.int1 = i;
                 logMessageImpl.int2 = size;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
             } else if (i6 == notificationEntry4.hashCode()) {
                 NotificationEntry.DismissState dismissState = notificationEntry4.mDismissState;
                 if (dismissState == NotificationEntry.DismissState.DISMISSED) {
@@ -553,21 +549,21 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                     LogLevel logLevel2 = LogLevel.DEBUG;
                     NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda02 = new NotifCollectionLogger$$ExternalSyntheticLambda0(23);
                     LogBuffer logBuffer2 = notifCollectionLogger.buffer;
-                    LogMessage obtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda02, null);
-                    String logKey2 = NotificationUtils.logKey(notificationEntry4);
-                    LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
-                    logMessageImpl2.str1 = logKey2;
+                    LogMessage logMessageObtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda02, null);
+                    String strLogKey2 = NotificationUtils.logKey(notificationEntry4);
+                    LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
+                    logMessageImpl2.str1 = strLogKey2;
                     logMessageImpl2.int1 = i;
                     logMessageImpl2.int2 = size;
-                    logBuffer2.commit(obtain2);
+                    logBuffer2.commit(logMessageObtain2);
                 } else {
                     if (dismissState == NotificationEntry.DismissState.PARENT_DISMISSED) {
                         notifCollectionLogger.getClass();
                         LogLevel logLevel3 = LogLevel.DEBUG;
                         NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda03 = new NotifCollectionLogger$$ExternalSyntheticLambda0(6);
                         LogBuffer logBuffer3 = notifCollectionLogger.buffer;
-                        LogMessage obtain3 = logBuffer3.obtain("NotifCollection", logLevel3, notifCollectionLogger$$ExternalSyntheticLambda03, null);
-                        LogMessageImpl logMessageImpl3 = (LogMessageImpl) obtain3;
+                        LogMessage logMessageObtain3 = logBuffer3.obtain("NotifCollection", logLevel3, notifCollectionLogger$$ExternalSyntheticLambda03, null);
+                        LogMessageImpl logMessageImpl3 = (LogMessageImpl) logMessageObtain3;
                         logMessageImpl3.str1 = NotificationUtils.logKey(notificationEntry4);
                         logMessageImpl3.int1 = i;
                         logMessageImpl3.int2 = size;
@@ -575,12 +571,12 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                         String str3 = "(null)";
                         if (pipelineEntry instanceof GroupEntry) {
                             GroupEntry groupEntry = pipelineEntry instanceof GroupEntry ? (GroupEntry) pipelineEntry : null;
-                            if (groupEntry != null && (notificationEntry = groupEntry.mSummary) != null && (logKey = NotificationUtils.logKey(notificationEntry)) != null) {
-                                str3 = logKey;
+                            if (groupEntry != null && (notificationEntry = groupEntry.mSummary) != null && (strLogKey = NotificationUtils.logKey(notificationEntry)) != null) {
+                                str3 = strLogKey;
                             }
                         }
                         logMessageImpl3.str2 = str3;
-                        logBuffer3.commit(obtain3);
+                        logBuffer3.commit(logMessageObtain3);
                     }
                     updateDismissInterceptors(notificationEntry4);
                     if (((ArrayList) notificationEntry4.mDismissInterceptors).size() > 0) {
@@ -588,20 +584,20 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                         LogLevel logLevel4 = LogLevel.INFO;
                         NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda04 = new NotifCollectionLogger$$ExternalSyntheticLambda0(12);
                         LogBuffer logBuffer4 = notifCollectionLogger.buffer;
-                        LogMessage obtain4 = logBuffer4.obtain("NotifCollection", logLevel4, notifCollectionLogger$$ExternalSyntheticLambda04, null);
-                        String logKey3 = NotificationUtils.logKey(notificationEntry4);
-                        LogMessageImpl logMessageImpl4 = (LogMessageImpl) obtain4;
-                        logMessageImpl4.str1 = logKey3;
+                        LogMessage logMessageObtain4 = logBuffer4.obtain("NotifCollection", logLevel4, notifCollectionLogger$$ExternalSyntheticLambda04, null);
+                        String strLogKey3 = NotificationUtils.logKey(notificationEntry4);
+                        LogMessageImpl logMessageImpl4 = (LogMessageImpl) logMessageObtain4;
+                        logMessageImpl4.str1 = strLogKey3;
                         logMessageImpl4.int1 = i;
                         logMessageImpl4.int2 = size;
-                        logBuffer4.commit(obtain4);
+                        logBuffer4.commit(logMessageObtain4);
                     } else {
                         arrayList2.add(notificationEntry4);
                         if (!notificationEntry4.isCanceled()) {
                             this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.NotifCollection$$ExternalSyntheticLambda2
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    NotifCollection notifCollection = NotifCollection.this;
+                                    NotifCollection notifCollection = this.f$0;
                                     NotificationEntry notificationEntry5 = notificationEntry4;
                                     DismissedByUserStats dismissedByUserStats3 = dismissedByUserStats2;
                                     int i7 = i;
@@ -616,13 +612,13 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                                         LogLevel logLevel5 = LogLevel.WTF;
                                         NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda05 = new NotifCollectionLogger$$ExternalSyntheticLambda0(18);
                                         LogBuffer logBuffer5 = notifCollectionLogger2.buffer;
-                                        LogMessage obtain5 = logBuffer5.obtain("NotifCollection", logLevel5, notifCollectionLogger$$ExternalSyntheticLambda05, null);
-                                        LogMessageImpl logMessageImpl5 = (LogMessageImpl) obtain5;
+                                        LogMessage logMessageObtain5 = logBuffer5.obtain("NotifCollection", logLevel5, notifCollectionLogger$$ExternalSyntheticLambda05, null);
+                                        LogMessageImpl logMessageImpl5 = (LogMessageImpl) logMessageObtain5;
                                         logMessageImpl5.str1 = NotificationUtilsKt.getLogKey(notificationEntry5);
                                         logMessageImpl5.int1 = i7;
                                         logMessageImpl5.int2 = i8;
                                         logMessageImpl5.str2 = e.toString();
-                                        logBuffer5.commit(obtain5);
+                                        logBuffer5.commit(logMessageObtain5);
                                     }
                                 }
                             });
@@ -646,9 +642,9 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                 LogLevel logLevel5 = LogLevel.INFO;
                 NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda05 = new NotifCollectionLogger$$ExternalSyntheticLambda0(21);
                 LogBuffer logBuffer5 = notifCollectionLogger.buffer;
-                LogMessage obtain5 = logBuffer5.obtain("NotifCollection", logLevel5, notifCollectionLogger$$ExternalSyntheticLambda05, null);
-                ((LogMessageImpl) obtain5).str1 = str2;
-                logBuffer5.commit(obtain5);
+                LogMessage logMessageObtain5 = logBuffer5.obtain("NotifCollection", logLevel5, notifCollectionLogger$$ExternalSyntheticLambda05, null);
+                ((LogMessageImpl) logMessageObtain5).str1 = str2;
+                logBuffer5.commit(logMessageObtain5);
             }
         }
         locallyDismissNotifications(arrayList2);
@@ -678,34 +674,34 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
             NotifEvent notifEvent = (NotifEvent) ((ArrayDeque) this.mEventQueue).remove();
             NamedListenerSet namedListenerSet = this.mNotifCollectionListeners;
             notifEvent.getClass();
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice(notifEvent.traceName);
             }
             try {
-                Iterator<NamedListenerSet.NamedListener> namedIterator = namedListenerSet.namedIterator();
-                while (namedIterator.hasNext()) {
-                    NamedListenerSet.NamedListener next = namedIterator.next();
+                Iterator<NamedListenerSet.NamedListener> itNamedIterator = namedListenerSet.namedIterator();
+                while (itNamedIterator.hasNext()) {
+                    NamedListenerSet.NamedListener next = itNamedIterator.next();
                     String name = next.getName();
                     Object listener = next.getListener();
-                    isEnabled = Trace.isEnabled();
-                    if (isEnabled) {
+                    zIsEnabled = Trace.isEnabled();
+                    if (zIsEnabled) {
                         TraceUtilsKt.beginSlice(name);
                     }
                     try {
                         notifEvent.dispatchToListener((NotifCollectionListener) listener);
                         Unit unit = Unit.INSTANCE;
-                        if (isEnabled) {
+                        if (zIsEnabled) {
                             TraceUtilsKt.endSlice();
                         }
                     } finally {
-                        if (isEnabled) {
+                        if (zIsEnabled) {
                             TraceUtilsKt.endSlice();
                         }
                     }
                 }
                 Unit unit2 = Unit.INSTANCE;
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             } catch (Throwable th) {
@@ -744,29 +740,29 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
         printWriter.println(sb.toString());
         NotifCollectionInconsistencyTracker notifCollectionInconsistencyTracker = this.mInconsistencyTracker;
         notifCollectionInconsistencyTracker.getClass();
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
         Set set = notifCollectionInconsistencyTracker.notificationsWithoutRankings;
-        asIndenting.append("notificationsWithoutRankings").append((CharSequence) ": ").println(set.size());
-        asIndenting.increaseIndent();
+        indentingPrintWriterAsIndenting.append("notificationsWithoutRankings").append((CharSequence) ": ").println(set.size());
+        indentingPrintWriterAsIndenting.increaseIndent();
         try {
             Iterator it = set.iterator();
             while (it.hasNext()) {
-                asIndenting.println(it.next());
+                indentingPrintWriterAsIndenting.println(it.next());
             }
-            asIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.decreaseIndent();
             Set set2 = notifCollectionInconsistencyTracker.missingNotifications;
-            asIndenting.append("missingNotifications").append((CharSequence) ": ").println(set2.size());
-            asIndenting.increaseIndent();
+            indentingPrintWriterAsIndenting.append("missingNotifications").append((CharSequence) ": ").println(set2.size());
+            indentingPrintWriterAsIndenting.increaseIndent();
             try {
                 Iterator it2 = set2.iterator();
                 while (it2.hasNext()) {
-                    asIndenting.println(it2.next());
+                    indentingPrintWriterAsIndenting.println(it2.next());
                 }
             } finally {
-                asIndenting.decreaseIndent();
+                indentingPrintWriterAsIndenting.decreaseIndent();
             }
         } finally {
-            asIndenting.decreaseIndent();
+            indentingPrintWriterAsIndenting.decreaseIndent();
         }
     }
 
@@ -880,25 +876,25 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                 LogLevel logLevel = LogLevel.INFO;
                 NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda3 = new NotifCollectionLogger$$ExternalSyntheticLambda3(12);
                 LogBuffer logBuffer = notifCollectionLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda3, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda3, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.str1 = NotificationUtils.logKey(notificationEntry);
                 logMessageImpl.int1 = i;
                 logMessageImpl.int2 = size;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
             } else if (notificationEntry2 != notificationEntry) {
                 notifCollectionLogger.getClass();
                 LogLevel logLevel2 = LogLevel.INFO;
                 NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda32 = new NotifCollectionLogger$$ExternalSyntheticLambda3(15);
                 LogBuffer logBuffer2 = notifCollectionLogger.buffer;
-                LogMessage obtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda32, null);
-                LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                LogMessage logMessageObtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda32, null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                 logMessageImpl2.str1 = NotificationUtils.logKey(notificationEntry);
                 logMessageImpl2.int1 = i;
                 logMessageImpl2.int2 = size;
                 logMessageImpl2.str2 = Integer.toHexString(notificationEntry.hashCode());
                 logMessageImpl2.str3 = Integer.toHexString(notificationEntry2.hashCode());
-                logBuffer2.commit(obtain2);
+                logBuffer2.commit(logMessageObtain2);
             }
             NotificationEntry.DismissState dismissState = notificationEntry.mDismissState;
             NotificationEntry.DismissState dismissState2 = NotificationEntry.DismissState.DISMISSED;
@@ -907,23 +903,23 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                 LogLevel logLevel3 = LogLevel.INFO;
                 NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda0 = new NotifCollectionLogger$$ExternalSyntheticLambda0(11);
                 LogBuffer logBuffer3 = notifCollectionLogger.buffer;
-                LogMessage obtain3 = logBuffer3.obtain("NotifCollection", logLevel3, notifCollectionLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl3 = (LogMessageImpl) obtain3;
+                LogMessage logMessageObtain3 = logBuffer3.obtain("NotifCollection", logLevel3, notifCollectionLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl3 = (LogMessageImpl) logMessageObtain3;
                 logMessageImpl3.str1 = NotificationUtils.logKey(notificationEntry);
                 logMessageImpl3.int1 = i;
                 logMessageImpl3.int2 = size;
-                logBuffer3.commit(obtain3);
+                logBuffer3.commit(logMessageObtain3);
             } else if (dismissState == NotificationEntry.DismissState.PARENT_DISMISSED) {
                 notifCollectionLogger.getClass();
                 LogLevel logLevel4 = LogLevel.INFO;
                 NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda02 = new NotifCollectionLogger$$ExternalSyntheticLambda0(4);
                 LogBuffer logBuffer4 = notifCollectionLogger.buffer;
-                LogMessage obtain4 = logBuffer4.obtain("NotifCollection", logLevel4, notifCollectionLogger$$ExternalSyntheticLambda02, null);
-                LogMessageImpl logMessageImpl4 = (LogMessageImpl) obtain4;
+                LogMessage logMessageObtain4 = logBuffer4.obtain("NotifCollection", logLevel4, notifCollectionLogger$$ExternalSyntheticLambda02, null);
+                LogMessageImpl logMessageImpl4 = (LogMessageImpl) logMessageObtain4;
                 logMessageImpl4.str1 = NotificationUtils.logKey(notificationEntry);
                 logMessageImpl4.int1 = i;
                 logMessageImpl4.int2 = size;
-                logBuffer4.commit(obtain4);
+                logBuffer4.commit(logMessageObtain4);
             }
             Objects.requireNonNull(dismissState2);
             notificationEntry.mDismissState = dismissState2;
@@ -931,54 +927,54 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
             LogLevel logLevel5 = LogLevel.INFO;
             NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda03 = new NotifCollectionLogger$$ExternalSyntheticLambda0(3);
             LogBuffer logBuffer5 = notifCollectionLogger.buffer;
-            LogMessage obtain5 = logBuffer5.obtain("NotifCollection", logLevel5, notifCollectionLogger$$ExternalSyntheticLambda03, null);
-            LogMessageImpl logMessageImpl5 = (LogMessageImpl) obtain5;
+            LogMessage logMessageObtain5 = logBuffer5.obtain("NotifCollection", logLevel5, notifCollectionLogger$$ExternalSyntheticLambda03, null);
+            LogMessageImpl logMessageImpl5 = (LogMessageImpl) logMessageObtain5;
             logMessageImpl5.str1 = NotificationUtils.logKey(notificationEntry);
             logMessageImpl5.int1 = i;
             logMessageImpl5.int2 = size;
-            logBuffer5.commit(obtain5);
-            boolean isCanceled = notificationEntry.isCanceled();
+            logBuffer5.commit(logMessageObtain5);
+            boolean zIsCanceled = notificationEntry.isCanceled();
             String str = notificationEntry.mKey;
-            if (isCanceled) {
-                LogMessage obtain6 = logBuffer5.obtain("NotifCollection", logLevel5, new NotifCollectionLogger$$ExternalSyntheticLambda3(16), null);
-                ((LogMessageImpl) obtain6).str1 = str;
-                logBuffer5.commit(obtain6);
+            if (zIsCanceled) {
+                LogMessage logMessageObtain6 = logBuffer5.obtain("NotifCollection", logLevel5, new NotifCollectionLogger$$ExternalSyntheticLambda3(16), null);
+                ((LogMessageImpl) logMessageObtain6).str1 = str;
+                logBuffer5.commit(logMessageObtain6);
                 hashSet.add(notificationEntry);
             } else if (notificationEntry.mSbn.getNotification().isGroupSummary()) {
                 for (NotificationEntry notificationEntry3 : ((ArrayMap) this.mNotificationSet).values()) {
                     if (shouldAutoDismissChildren(notificationEntry3, notificationEntry.mSbn.getGroupKey())) {
                         NotificationEntry.DismissState dismissState3 = notificationEntry3.mDismissState;
                         if (dismissState3 == NotificationEntry.DismissState.DISMISSED) {
-                            LogMessage obtain7 = logBuffer5.obtain("NotifCollection", LogLevel.INFO, new NotifCollectionLogger$$ExternalSyntheticLambda3(0), null);
-                            LogMessageImpl logMessageImpl6 = (LogMessageImpl) obtain7;
+                            LogMessage logMessageObtain7 = logBuffer5.obtain("NotifCollection", LogLevel.INFO, new NotifCollectionLogger$$ExternalSyntheticLambda3(0), null);
+                            LogMessageImpl logMessageImpl6 = (LogMessageImpl) logMessageObtain7;
                             logMessageImpl6.str1 = NotificationUtils.logKey(notificationEntry3);
                             logMessageImpl6.str2 = NotificationUtils.logKey(notificationEntry);
                             logMessageImpl6.int1 = i;
                             logMessageImpl6.int2 = size;
-                            logBuffer5.commit(obtain7);
+                            logBuffer5.commit(logMessageObtain7);
                         } else if (dismissState3 == NotificationEntry.DismissState.PARENT_DISMISSED) {
-                            LogMessage obtain8 = logBuffer5.obtain("NotifCollection", LogLevel.INFO, new NotifCollectionLogger$$ExternalSyntheticLambda0(0), null);
-                            LogMessageImpl logMessageImpl7 = (LogMessageImpl) obtain8;
+                            LogMessage logMessageObtain8 = logBuffer5.obtain("NotifCollection", LogLevel.INFO, new NotifCollectionLogger$$ExternalSyntheticLambda0(0), null);
+                            LogMessageImpl logMessageImpl7 = (LogMessageImpl) logMessageObtain8;
                             logMessageImpl7.str1 = NotificationUtils.logKey(notificationEntry3);
                             logMessageImpl7.str2 = NotificationUtils.logKey(notificationEntry);
                             logMessageImpl7.int1 = i;
                             logMessageImpl7.int2 = size;
-                            logBuffer5.commit(obtain8);
+                            logBuffer5.commit(logMessageObtain8);
                         }
                         NotificationEntry.DismissState dismissState4 = NotificationEntry.DismissState.PARENT_DISMISSED;
                         Objects.requireNonNull(dismissState4);
                         notificationEntry3.mDismissState = dismissState4;
-                        LogMessage obtain9 = logBuffer5.obtain("NotifCollection", LogLevel.DEBUG, new NotifCollectionLogger$$ExternalSyntheticLambda3(17), null);
-                        LogMessageImpl logMessageImpl8 = (LogMessageImpl) obtain9;
+                        LogMessage logMessageObtain9 = logBuffer5.obtain("NotifCollection", LogLevel.DEBUG, new NotifCollectionLogger$$ExternalSyntheticLambda3(17), null);
+                        LogMessageImpl logMessageImpl8 = (LogMessageImpl) logMessageObtain9;
                         logMessageImpl8.str1 = NotificationUtils.logKey(notificationEntry3);
                         logMessageImpl8.str2 = NotificationUtils.logKey(notificationEntry);
                         logMessageImpl8.int1 = i;
                         logMessageImpl8.int2 = size;
-                        logBuffer5.commit(obtain9);
+                        logBuffer5.commit(logMessageObtain9);
                         if (notificationEntry3.isCanceled()) {
-                            LogMessage obtain10 = logBuffer5.obtain("NotifCollection", LogLevel.INFO, new NotifCollectionLogger$$ExternalSyntheticLambda3(16), null);
-                            ((LogMessageImpl) obtain10).str1 = str;
-                            logBuffer5.commit(obtain10);
+                            LogMessage logMessageObtain10 = logBuffer5.obtain("NotifCollection", LogLevel.INFO, new NotifCollectionLogger$$ExternalSyntheticLambda3(16), null);
+                            ((LogMessageImpl) logMessageObtain10).str1 = str;
+                            logBuffer5.commit(logMessageObtain10);
                             hashSet.add(notificationEntry3);
                         }
                     }
@@ -993,9 +989,9 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
             LogLevel logLevel6 = LogLevel.DEBUG;
             NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda33 = new NotifCollectionLogger$$ExternalSyntheticLambda3(13);
             LogBuffer logBuffer6 = notifCollectionLogger.buffer;
-            LogMessage obtain11 = logBuffer6.obtain("NotifCollection", logLevel6, notifCollectionLogger$$ExternalSyntheticLambda33, null);
-            ((LogMessageImpl) obtain11).str1 = NotificationUtilsKt.getLogKey(notificationEntry4);
-            logBuffer6.commit(obtain11);
+            LogMessage logMessageObtain11 = logBuffer6.obtain("NotifCollection", logLevel6, notifCollectionLogger$$ExternalSyntheticLambda33, null);
+            ((LogMessageImpl) logMessageObtain11).str1 = NotificationUtilsKt.getLogKey(notificationEntry4);
+            logBuffer6.commit(logMessageObtain11);
             tryRemoveNotification(notificationEntry4);
         }
     }
@@ -1013,9 +1009,9 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
             LogLevel logLevel = LogLevel.INFO;
             NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda0 = new NotifCollectionLogger$$ExternalSyntheticLambda0(29);
             LogBuffer logBuffer = notifCollectionLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = NotificationUtils.logKey(notificationEntry2);
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = NotificationUtils.logKey(notificationEntry2);
+            logBuffer.commit(logMessageObtain);
             ((ArrayDeque) this.mEventQueue).add(new EntryAddedEvent(notificationEntry2));
             return;
         }
@@ -1027,9 +1023,9 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
             LogLevel logLevel2 = LogLevel.INFO;
             NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda3 = new NotifCollectionLogger$$ExternalSyntheticLambda3(7);
             LogBuffer logBuffer2 = notifCollectionLogger.buffer;
-            LogMessage obtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda3, null);
-            ((LogMessageImpl) obtain2).str1 = NotificationUtils.logKey(notificationEntry);
-            logBuffer2.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda3, null);
+            ((LogMessageImpl) logMessageObtain2).str1 = NotificationUtils.logKey(notificationEntry);
+            logBuffer2.commit(logMessageObtain2);
         } else {
             Objects.requireNonNull(dismissState2);
             notificationEntry.mDismissState = dismissState2;
@@ -1057,9 +1053,9 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
         LogLevel logLevel3 = LogLevel.INFO;
         NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda32 = new NotifCollectionLogger$$ExternalSyntheticLambda3(4);
         LogBuffer logBuffer3 = notifCollectionLogger.buffer;
-        LogMessage obtain3 = logBuffer3.obtain("NotifCollection", logLevel3, notifCollectionLogger$$ExternalSyntheticLambda32, null);
-        ((LogMessageImpl) obtain3).str1 = NotificationUtils.logKey(notificationEntry);
-        logBuffer3.commit(obtain3);
+        LogMessage logMessageObtain3 = logBuffer3.obtain("NotifCollection", logLevel3, notifCollectionLogger$$ExternalSyntheticLambda32, null);
+        ((LogMessageImpl) logMessageObtain3).str1 = NotificationUtils.logKey(notificationEntry);
+        logBuffer3.commit(logMessageObtain3);
         ((ArrayDeque) this.mEventQueue).add(new EntryUpdatedEvent(notificationEntry, updateSource));
     }
 
@@ -1101,11 +1097,11 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                     LogLevel logLevel = LogLevel.INFO;
                     NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda0 = new NotifCollectionLogger$$ExternalSyntheticLambda0(1);
                     LogBuffer logBuffer = notifCollectionLogger.buffer;
-                    LogMessage obtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                    LogMessage logMessageObtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                     logMessageImpl.str1 = NotificationUtils.logKey(notificationEntry);
                     logMessageImpl.str2 = notifLifetimeExtender.getName();
-                    logBuffer.commit(obtain);
+                    logBuffer.commit(logMessageObtain);
                     ((ArrayList) notificationEntry.mLifetimeExtenders).add(notifLifetimeExtender);
                 }
             }
@@ -1118,9 +1114,9 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
         LogLevel logLevel2 = LogLevel.INFO;
         NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda3 = new NotifCollectionLogger$$ExternalSyntheticLambda3(14);
         LogBuffer logBuffer2 = notifCollectionLogger.buffer;
-        LogMessage obtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda3, null);
-        ((LogMessageImpl) obtain2).str1 = NotificationUtils.logKey(notificationEntry);
-        logBuffer2.commit(obtain2);
+        LogMessage logMessageObtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda3, null);
+        ((LogMessageImpl) logMessageObtain2).str1 = NotificationUtils.logKey(notificationEntry);
+        logBuffer2.commit(logMessageObtain2);
         ArrayMap arrayMap = (ArrayMap) this.mNotificationSet;
         String str = notificationEntry.mKey;
         arrayMap.remove(str);
@@ -1137,9 +1133,9 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
                 LogLevel logLevel3 = LogLevel.WARNING;
                 NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda02 = new NotifCollectionLogger$$ExternalSyntheticLambda0(19);
                 LogBuffer logBuffer3 = notifCollectionLogger2.buffer;
-                LogMessage obtain3 = logBuffer3.obtain("NotifCollection", logLevel3, notifCollectionLogger$$ExternalSyntheticLambda02, null);
-                ((LogMessageImpl) obtain3).str1 = futureDismissal.mLabel;
-                logBuffer3.commit(obtain3);
+                LogMessage logMessageObtain3 = logBuffer3.obtain("NotifCollection", logLevel3, notifCollectionLogger$$ExternalSyntheticLambda02, null);
+                ((LogMessageImpl) logMessageObtain3).str1 = futureDismissal.mLabel;
+                logBuffer3.commit(logMessageObtain3);
                 return true;
             }
             NotifCollectionLogger notifCollectionLogger3 = NotifCollection.this.mLogger;
@@ -1147,11 +1143,11 @@ public class NotifCollection implements Dumpable, PipelineDumpable {
             LogLevel logLevel4 = LogLevel.DEBUG;
             NotifCollectionLogger$$ExternalSyntheticLambda0 notifCollectionLogger$$ExternalSyntheticLambda03 = new NotifCollectionLogger$$ExternalSyntheticLambda0(24);
             LogBuffer logBuffer4 = notifCollectionLogger3.buffer;
-            LogMessage obtain4 = logBuffer4.obtain("NotifCollection", logLevel4, notifCollectionLogger$$ExternalSyntheticLambda03, null);
-            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain4;
+            LogMessage logMessageObtain4 = logBuffer4.obtain("NotifCollection", logLevel4, notifCollectionLogger$$ExternalSyntheticLambda03, null);
+            LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain4;
             logMessageImpl2.str1 = futureDismissal.mLabel;
             logMessageImpl2.int1 = i3;
-            logBuffer4.commit(obtain4);
+            logBuffer4.commit(logMessageObtain4);
             futureDismissal.mDidSystemServerCancel = true;
         }
         return true;

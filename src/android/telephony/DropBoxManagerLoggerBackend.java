@@ -33,14 +33,10 @@ public class DropBoxManagerLoggerBackend implements PersistentLoggerBackend {
     private long mBufferStartTime = -1;
 
     public static synchronized DropBoxManagerLoggerBackend getInstance(Context context) {
-        DropBoxManagerLoggerBackend dropBoxManagerLoggerBackend;
-        synchronized (DropBoxManagerLoggerBackend.class) {
-            if (sInstance == null) {
-                sInstance = new DropBoxManagerLoggerBackend(context);
-            }
-            dropBoxManagerLoggerBackend = sInstance;
+        if (sInstance == null) {
+            sInstance = new DropBoxManagerLoggerBackend(context);
         }
-        return dropBoxManagerLoggerBackend;
+        return sInstance;
     }
 
     private DropBoxManagerLoggerBackend(Context context) {
@@ -147,7 +143,7 @@ public class DropBoxManagerLoggerBackend implements PersistentLoggerBackend {
             this.mHandler.post(new Runnable() { // from class: android.telephony.DropBoxManagerLoggerBackend$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DropBoxManagerLoggerBackend.this.flush();
+                    this.f$0.flush();
                 }
             });
         }

@@ -2,11 +2,9 @@ package com.android.app.displaylib;
 
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface DisplayEvent {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Added implements DisplayEvent {
         public final int displayId;
 
@@ -35,7 +33,6 @@ public interface DisplayEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Changed implements DisplayEvent {
         public final int displayId;
 
@@ -64,7 +61,6 @@ public interface DisplayEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Removed implements DisplayEvent {
         public final int displayId;
 

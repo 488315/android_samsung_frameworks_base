@@ -7,13 +7,34 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Insets;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.VelocityTracker;
+import android.view.View;
 import android.view.ViewConfiguration;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
+import androidx.appcompat.widget.SuggestionsAdapter$$ExternalSyntheticOutline0;
+import androidx.compose.animation.core.CubicBezierEasing$$ExternalSyntheticOutline0;
+import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
+import com.android.systemui.R;
+import com.android.systemui.media.MediaType;
+import com.android.systemui.media.SecMediaHost;
+import com.android.systemui.media.SecMediaPlayerData;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
+import com.android.systemui.qs.NonInterceptingScrollView;
+import com.android.systemui.qs.QSFragmentLegacy;
+import com.android.systemui.qs.QSImpl;
+import com.android.systemui.qs.SecQSImpl;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
+import com.android.systemui.qs.animator.QsAnimatorState;
+import com.android.systemui.qs.bar.BarController;
+import com.android.systemui.qs.bar.BarItemImpl;
+import com.android.systemui.qs.bar.BarType;
+import com.android.systemui.qs.bar.BrightnessBar;
+import com.android.systemui.qs.bar.BrightnessVolumeBar;
+import com.android.systemui.qs.bar.QSMediaPlayerBar;
+import com.android.systemui.qs.bar.VolumeBar;
 import com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManager;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
@@ -32,7 +53,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PanelSlideEventHandler implements ShadeExpansionListener, ConfigurationController.ConfigurationListener, StatusBarStateController.StateListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -78,7 +98,6 @@ public final class PanelSlideEventHandler implements ShadeExpansionListener, Con
     public boolean tracking;
     public final VelocityTracker velocityTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -90,7 +109,6 @@ public final class PanelSlideEventHandler implements ShadeExpansionListener, Con
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Direction {
         public static final /* synthetic */ Direction[] $VALUES;
         public static final Direction DOWN;
@@ -127,7 +145,6 @@ public final class PanelSlideEventHandler implements ShadeExpansionListener, Con
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -194,7 +211,7 @@ public final class PanelSlideEventHandler implements ShadeExpansionListener, Con
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i2 = PanelSlideEventHandler.$r8$clinit;
-                return QuickSettingsControllerImpl.this.mSecQuickSettingsControllerImpl;
+                return quickSettingsControllerImpl.mSecQuickSettingsControllerImpl;
             }
         });
         final int i2 = 1;
@@ -403,67 +420,226 @@ public final class PanelSlideEventHandler implements ShadeExpansionListener, Con
         boolean z = i == 1 ? f <= 0.0f : !(i == 2 ? f < 0.0f : i == 3 ? f > 0.0f : i != 4 || f < 0.0f);
         boolean z2 = z && (Math.abs(f) > this.flingAnimationUtils.mMinVelocityPxPerSecond || Math.abs(f2) > Math.abs(this.maxDragWidth) * 0.5f);
         float f5 = f >= 0.0f ? this.maxDragWidth : -this.maxDragWidth;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f2, z2 ? f5 : 0.0f);
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shade.PanelSlideEventHandler$createSlideAnimatorAndRun$animator$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f2, z2 ? f5 : 0.0f);
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shade.PanelSlideEventHandler$createSlideAnimatorAndRun$animator$1$1
+            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+            public final void onAnimationCancel(Animator animator) {
+                if (QsAnimatorState.isSliding) {
+                    Log.d("SecPanelSplitHelper", "Animation end: isSliding true to false");
+                    QsAnimatorState.isSliding = false;
+                }
+                this.this$0.sliderAnimator = null;
+            }
+
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                PanelSlideEventHandler.this.sliderAnimator = null;
+                if (QsAnimatorState.isSliding) {
+                    Log.d("SecPanelSplitHelper", "Animation end: isSliding true to false");
+                    QsAnimatorState.isSliding = false;
+                }
+                this.this$0.sliderAnimator = null;
             }
         });
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.shade.PanelSlideEventHandler$createSlideAnimatorAndRun$animator$1$2
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.shade.PanelSlideEventHandler$createSlideAnimatorAndRun$animator$1$2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                PanelSlideEventHandler panelSlideEventHandler = PanelSlideEventHandler.this;
+                float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                PanelSlideEventHandler panelSlideEventHandler = this.this$0;
                 SecPanelSplitHelper$panelSlideEventHandler$1$1 secPanelSplitHelper$panelSlideEventHandler$1$1 = panelSlideEventHandler.panelSlideEventCallback;
                 if (secPanelSplitHelper$panelSlideEventHandler$1$1 != null) {
-                    secPanelSplitHelper$panelSlideEventHandler$1$1.this$0.slide(floatValue, panelSlideEventHandler.direction, panelSlideEventHandler.tracking);
+                    secPanelSplitHelper$panelSlideEventHandler$1$1.this$0.slide(fFloatValue, panelSlideEventHandler.direction, panelSlideEventHandler.tracking);
                 }
             }
         });
         if (f == 0.0f) {
-            ofFloat.setDuration((long) (((f2 / this.maxDragWidth) * 100) + 200));
+            valueAnimatorOfFloat.setDuration((long) (((f2 / this.maxDragWidth) * 100) + 200));
             f3 = f;
             f4 = f2;
         } else {
             f3 = f;
             f4 = f2;
-            this.flingAnimationUtils.apply(ofFloat, f4, f5, f3, this.maxDragWidth);
+            this.flingAnimationUtils.apply(valueAnimatorOfFloat, f4, f5, f3, this.maxDragWidth);
         }
-        this.sliderAnimator = ofFloat;
-        ofFloat.start();
-        Log.d("SecPanelSplitHelper", "createSlideAnimatorAndRun change = " + z2 + " draggedDistance = " + f4 + " duration = " + ofFloat.getDuration() + " direction = " + this.direction + " target = " + f5 + " vel = " + f3 + " isForward = " + z);
+        this.sliderAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.start();
+        Log.d("SecPanelSplitHelper", "createSlideAnimatorAndRun change = " + z2 + " draggedDistance = " + f4 + " duration = " + valueAnimatorOfFloat.getDuration() + " direction = " + this.direction + " target = " + f5 + " vel = " + f3 + " isForward = " + z);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:103:0x0285  */
-    /* JADX WARN: Removed duplicated region for block: B:113:0x02af A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:121:0x0256  */
-    /* JADX WARN: Removed duplicated region for block: B:126:0x015e  */
-    /* JADX WARN: Removed duplicated region for block: B:127:0x012b  */
-    /* JADX WARN: Removed duplicated region for block: B:128:0x0125  */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x011f  */
-    /* JADX WARN: Removed duplicated region for block: B:130:0x0119  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0116  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x011c  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0122  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0128  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x015c  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0169  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0210  */
-    /* JADX WARN: Removed duplicated region for block: B:85:0x023b  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x024b  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x025b  */
+    /* JADX WARN: Removed duplicated region for block: B:100:0x020a  */
+    /* JADX WARN: Removed duplicated region for block: B:103:0x0210  */
+    /* JADX WARN: Removed duplicated region for block: B:112:0x0235  */
+    /* JADX WARN: Removed duplicated region for block: B:132:0x027f  */
+    /* JADX WARN: Removed duplicated region for block: B:135:0x0285  */
+    /* JADX WARN: Removed duplicated region for block: B:144:0x02ab  */
+    /* JADX WARN: Removed duplicated region for block: B:150:0x02b7  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x008b  */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x0144  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void initiateSlide(android.view.MotionEvent r20) {
-        /*
-            Method dump skipped, instructions count: 744
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.PanelSlideEventHandler.initiateSlide(android.view.MotionEvent):void");
+    public final void initiateSlide(MotionEvent motionEvent) {
+        boolean z;
+        boolean z2;
+        boolean z3;
+        boolean z4;
+        QSImpl qSImpl;
+        SecQSImpl secQSImpl;
+        BarController barController;
+        Object[] objArr;
+        Object[] objArr2;
+        boolean z5;
+        boolean z6;
+        SecMediaHost secMediaHost;
+        NonInterceptingScrollView nonInterceptingScrollView;
+        int iIntValue;
+        int i;
+        if (this.panelSplitEnabled) {
+            int value = this.lastConfigurationState.getValue(ConfigurationState.ConfigurationField.ORIENTATION);
+            Integer numValueOf = Integer.valueOf(value);
+            if (value == -100) {
+                numValueOf = null;
+            }
+            if (numValueOf != null && (iIntValue = numValueOf.intValue()) != (i = this.context.getResources().getConfiguration().orientation)) {
+                SuggestionsAdapter$$ExternalSyntheticOutline0.m(iIntValue, i, "initiateSlide forced updateResource lastConfig.orientation = ", ", context.orientation = ", "SecPanelSplitHelper");
+                updateResource();
+            }
+            this.initialX = motionEvent.getX();
+            this.initialY = motionEvent.getY();
+            this.direction = Direction.UNDECIDED;
+            this.panelSliderIntercepted = false;
+            this.fullyExpandedOnDown = this.panelFullyExpanded;
+            SecPanelSplitHelper$panelSlideEventHandler$1$1 secPanelSplitHelper$panelSlideEventHandler$1$1 = this.panelSlideEventCallback;
+            if (secPanelSplitHelper$panelSlideEventHandler$1$1 != null) {
+                SecPanelSplitHelper secPanelSplitHelper = secPanelSplitHelper$panelSlideEventHandler$1$1.this$0;
+                secPanelSplitHelper.stateOnDown = secPanelSplitHelper.currentState;
+            }
+            Lazy lazy = this.secQuickSettingsControllerImpl$delegate;
+            SecQuickSettingsControllerImpl secQuickSettingsControllerImpl = (SecQuickSettingsControllerImpl) lazy.getValue();
+            this.canScrollDownOnDown = (secQuickSettingsControllerImpl == null || (nonInterceptingScrollView = secQuickSettingsControllerImpl.getNonInterceptingScrollView()) == null) ? false : nonInterceptingScrollView.canScrollVertically(-1);
+            float f = this.initialX;
+            if (this.initialY > ((ShadeHeaderController) this.shadeHeaderController$delegate.getValue()).header.getMeasuredHeight()) {
+                z = false;
+            } else {
+                boolean zIsReversed = this.secPanelSplitHelper.isReversed();
+                SecPanelSplitHelper$panelSlideEventHandler$1$1 secPanelSplitHelper$panelSlideEventHandler$1$12 = this.panelSlideEventCallback;
+                Integer numValueOf2 = secPanelSplitHelper$panelSlideEventHandler$1$12 != null ? Integer.valueOf(secPanelSplitHelper$panelSlideEventHandler$1$12.this$0.currentState) : null;
+                boolean z7 = !zIsReversed;
+                if (numValueOf2 != null && numValueOf2.intValue() == z7 ? f >= this.displayWidthOfDivider : !(numValueOf2 == null || numValueOf2.intValue() != zIsReversed || f >= this.displayWidthOfDivider)) {
+                    z = true;
+                }
+            }
+            this.isInChangeSpotOnDown = z;
+            float f2 = this.initialX;
+            float f3 = this.initialY;
+            if (((StatusBarStateController) this.statusBarStateController$delegate.getValue()).getState() == 2 || !((SettingsHelper) this.settingsHelper$delegate.getValue()).isNavigationBarGestureWhileHidden()) {
+                z2 = false;
+            } else {
+                int iWidth = this.context.getResources().getConfiguration().windowConfiguration.getBounds().width();
+                int iHeight = this.context.getResources().getConfiguration().windowConfiguration.getBounds().height();
+                Insets insets = this.gestureInsets;
+                int i2 = insets != null ? insets.left : 0;
+                int i3 = insets != null ? insets.right : iWidth;
+                int i4 = insets != null ? insets.top : 0;
+                int i5 = insets != null ? insets.bottom : iHeight;
+                if ((f2 < i2 || f2 > iWidth - i3) && f3 > i4 && f3 < iHeight - i5) {
+                    z2 = true;
+                }
+            }
+            this.isInGestureArea = z2;
+            this.isInQsScrollerTopMarginArea = this.initialY < ((float) ((SecQSPanelResourcePicker) this.resourcePicker$delegate.getValue()).getQsScrollerTopMargin(this.context));
+            SecQuickSettingsControllerImpl secQuickSettingsControllerImpl2 = (SecQuickSettingsControllerImpl) lazy.getValue();
+            if (secQuickSettingsControllerImpl2 != null) {
+                float rawX = motionEvent.getRawX();
+                float rawY = motionEvent.getRawY();
+                Object obj = secQuickSettingsControllerImpl2.qsSupplier.get();
+                QSFragmentLegacy qSFragmentLegacy = obj instanceof QSFragmentLegacy ? (QSFragmentLegacy) obj : null;
+                if (qSFragmentLegacy == null || (qSImpl = qSFragmentLegacy.mQsImpl) == null || (secQSImpl = qSImpl.mSecQSImpl) == null || (barController = secQSImpl.barController) == null) {
+                    z3 = false;
+                } else {
+                    int[] iArr = new int[2];
+                    int[] iArr2 = new int[2];
+                    int[] iArr3 = new int[2];
+                    int[] iArr4 = new int[2];
+                    BrightnessVolumeBar brightnessVolumeBar = (BrightnessVolumeBar) barController.getBarInExpanded(BarType.BRIGHTNESS_VOLUME);
+                    BrightnessBar brightnessBar = brightnessVolumeBar.mBrightnessBar;
+                    QSMediaPlayerBar qSMediaPlayerBar = (QSMediaPlayerBar) barController.getBarInExpanded(BarType.QS_MEDIA_PLAYER);
+                    BarItemImpl barInExpanded = barController.getBarInExpanded(BarType.QUICK_CONTROL);
+                    View viewFindViewById = brightnessBar.mBarRootView.findViewById(R.id.slider);
+                    VolumeBar volumeBar = brightnessVolumeBar.mVolumeBar;
+                    z3 = false;
+                    View viewFindViewById2 = volumeBar.mBarRootView.findViewById(R.id.slider);
+                    View viewFindViewById3 = qSMediaPlayerBar.mBarRootView.findViewById(R.id.media_player_container);
+                    View viewFindViewById4 = barInExpanded.mBarRootView.findViewById(R.id.quick_control_container);
+                    viewFindViewById.getLocationInWindow(iArr);
+                    viewFindViewById2.getLocationInWindow(iArr2);
+                    viewFindViewById3.getLocationInWindow(iArr3);
+                    viewFindViewById4.getLocationInWindow(iArr4);
+                    if (brightnessBar.mShowing) {
+                        if (rawX <= iArr[0] || rawX >= viewFindViewById.getWidth() + r12) {
+                            objArr = false;
+                            if (!volumeBar.mShowing) {
+                                if (rawX <= iArr2[0] || rawX >= viewFindViewById2.getWidth() + r11) {
+                                    objArr2 = false;
+                                    if (qSMediaPlayerBar.mShowing || (secMediaHost = qSMediaPlayerBar.mMediaHost) == null) {
+                                        z5 = false;
+                                        if (barInExpanded.mShowing) {
+                                            if (rawX <= iArr4[0] || rawX >= viewFindViewById4.getWidth() + r3) {
+                                                z6 = false;
+                                                if (objArr == false || objArr2 != false || z5 || z6) {
+                                                    z4 = true;
+                                                }
+                                            } else {
+                                                if (rawY > iArr4[1] && rawY < viewFindViewById4.getHeight() + r3) {
+                                                    z6 = true;
+                                                }
+                                                if (objArr == false) {
+                                                }
+                                                z4 = true;
+                                            }
+                                        }
+                                    } else {
+                                        SecMediaPlayerData secMediaPlayerData = (SecMediaPlayerData) secMediaHost.mMediaPlayerData.get(MediaType.QS);
+                                        if ((secMediaPlayerData != null ? secMediaPlayerData.m2629getMediaData().size() : 0) > 1) {
+                                            if (rawX > iArr3[0] && rawX < viewFindViewById3.getWidth() + r8) {
+                                                if (rawY > iArr3[1] && rawY < viewFindViewById3.getHeight() + r8) {
+                                                    z5 = true;
+                                                }
+                                                if (barInExpanded.mShowing) {
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    if (rawY > iArr2[1] && rawY < viewFindViewById2.getHeight() + r8) {
+                                        objArr2 = true;
+                                    }
+                                    if (qSMediaPlayerBar.mShowing) {
+                                        z5 = false;
+                                        if (barInExpanded.mShowing) {
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if (rawY > iArr[1] && rawY < viewFindViewById.getHeight() + r4) {
+                                objArr = true;
+                            }
+                            if (!volumeBar.mShowing) {
+                            }
+                        }
+                    }
+                }
+                z4 = z3;
+            }
+            this.isInSlidableAreaOnDown = z4;
+            boolean z8 = z3;
+            this.tracking = z8;
+            this.velocityTracker.addMovement(motionEvent);
+            this.slidingInitialized = true;
+            this.logBuilder.setLength(z8 ? 1 : 0);
+            RecyclerView$$ExternalSyntheticOutline0.m(this.displayWidthOfDivider, "SecPanelSplitHelper", CubicBezierEasing$$ExternalSyntheticOutline0.m("initiateSlide (", motionEvent.getX(), ", ", motionEvent.getY(), ") displayWidthOfDivider = "));
+        }
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
@@ -494,14 +670,14 @@ public final class PanelSlideEventHandler implements ShadeExpansionListener, Con
     }
 
     public final void updateDirection(float f, float f2) {
-        float abs = Math.abs(f);
-        float abs2 = Math.abs(f2);
+        float fAbs = Math.abs(f);
+        float fAbs2 = Math.abs(f2);
         float f3 = this.touchSlop;
-        if (abs > f3 || abs2 > f3) {
-            if (abs > abs2 && this.direction != Direction.DOWN) {
+        if (fAbs > f3 || fAbs2 > f3) {
+            if (fAbs > fAbs2 && this.direction != Direction.DOWN) {
                 this.direction = f > 0.0f ? Direction.RIGHT : Direction.LEFT;
             } else {
-                if (abs >= abs2 || this.direction != Direction.UNDECIDED || this.initialY >= ((ShadeHeaderController) this.shadeHeaderController$delegate.getValue()).header.getMeasuredHeight()) {
+                if (fAbs >= fAbs2 || this.direction != Direction.UNDECIDED || this.initialY >= ((ShadeHeaderController) this.shadeHeaderController$delegate.getValue()).header.getMeasuredHeight()) {
                     return;
                 }
                 this.direction = f2 > 0.0f ? Direction.DOWN : Direction.UP;
@@ -513,14 +689,14 @@ public final class PanelSlideEventHandler implements ShadeExpansionListener, Con
         this.panelWidth = ((SecQSPanelResourcePicker) this.resourcePicker$delegate.getValue()).getPanelWidth(this.context);
         this.maxDragWidth = DeviceState.getScreenWidth(this.context);
         int panelSplitRatio = ((SettingsHelper) this.settingsHelper$delegate.getValue()).getPanelSplitRatio();
-        Integer valueOf = Integer.valueOf(panelSplitRatio);
+        Integer numValueOf = Integer.valueOf(panelSplitRatio);
         ListPopupWindow$$ExternalSyntheticOutline0.m(panelSplitRatio, "updateResources: panelSplitRatio: ", "SecPanelSplitHelper");
         if (panelSplitRatio < 0) {
-            valueOf = null;
+            numValueOf = null;
         }
-        this.displayRatioOfDivider = valueOf != null ? valueOf.intValue() * 0.01f : 0.7f;
-        boolean isReversed = this.secPanelSplitHelper.isReversed();
-        int displayWidth = (int) (DeviceState.getDisplayWidth(this.context) * (isReversed ? 1 - this.displayRatioOfDivider : this.displayRatioOfDivider));
+        this.displayRatioOfDivider = numValueOf != null ? numValueOf.intValue() * 0.01f : 0.7f;
+        boolean zIsReversed = this.secPanelSplitHelper.isReversed();
+        int displayWidth = (int) (DeviceState.getDisplayWidth(this.context) * (zIsReversed ? 1 - this.displayRatioOfDivider : this.displayRatioOfDivider));
         this.displayWidthOfDivider = displayWidth;
         int i = this.panelWidth;
         float f = this.maxDragWidth;
@@ -534,6 +710,6 @@ public final class PanelSlideEventHandler implements ShadeExpansionListener, Con
         sb.append(" displayWidthOfDivider = ");
         sb.append(displayWidth);
         sb.append(" isReversed = ");
-        ActionBarContextView$$ExternalSyntheticOutline0.m(sb, isReversed, "SecPanelSplitHelper");
+        ActionBarContextView$$ExternalSyntheticOutline0.m(sb, zIsReversed, "SecPanelSplitHelper");
     }
 }

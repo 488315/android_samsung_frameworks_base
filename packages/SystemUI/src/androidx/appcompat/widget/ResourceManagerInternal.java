@@ -14,7 +14,6 @@ import com.android.systemui.R;
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ResourceManagerInternal {
     public static ResourceManagerInternal INSTANCE;
@@ -25,7 +24,6 @@ public final class ResourceManagerInternal {
     public static final PorterDuff.Mode DEFAULT_MODE = PorterDuff.Mode.SRC_IN;
     public static final ColorFilterLruCache COLOR_FILTER_CACHE = new ColorFilterLruCache(6);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ColorFilterLruCache extends LruCache {
         public ColorFilterLruCache(int i) {
             super(i);
@@ -33,30 +31,24 @@ public final class ResourceManagerInternal {
     }
 
     public static synchronized ResourceManagerInternal get() {
-        ResourceManagerInternal resourceManagerInternal;
-        synchronized (ResourceManagerInternal.class) {
-            try {
-                if (INSTANCE == null) {
-                    INSTANCE = new ResourceManagerInternal();
-                }
-                resourceManagerInternal = INSTANCE;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (INSTANCE == null) {
+                INSTANCE = new ResourceManagerInternal();
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return resourceManagerInternal;
+        return INSTANCE;
     }
 
     public static synchronized PorterDuffColorFilter getPorterDuffColorFilter(int i, PorterDuff.Mode mode) {
         PorterDuffColorFilter porterDuffColorFilter;
-        synchronized (ResourceManagerInternal.class) {
-            ColorFilterLruCache colorFilterLruCache = COLOR_FILTER_CACHE;
-            colorFilterLruCache.getClass();
-            int i2 = (31 + i) * 31;
-            porterDuffColorFilter = (PorterDuffColorFilter) colorFilterLruCache.get(Integer.valueOf(mode.hashCode() + i2));
-            if (porterDuffColorFilter == null) {
-                porterDuffColorFilter = new PorterDuffColorFilter(i, mode);
-            }
+        ColorFilterLruCache colorFilterLruCache = COLOR_FILTER_CACHE;
+        colorFilterLruCache.getClass();
+        int i2 = (31 + i) * 31;
+        porterDuffColorFilter = (PorterDuffColorFilter) colorFilterLruCache.get(Integer.valueOf(mode.hashCode() + i2));
+        if (porterDuffColorFilter == null) {
+            porterDuffColorFilter = new PorterDuffColorFilter(i, mode);
         }
         return porterDuffColorFilter;
     }

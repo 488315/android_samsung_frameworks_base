@@ -141,9 +141,9 @@ public interface IClipboard extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IClipboard)) {
-                return (IClipboard) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IClipboard)) {
+                return (IClipboard) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -196,116 +196,116 @@ public interface IClipboard extends IInterface {
             switch (i) {
                 case 1:
                     ClipData clipData = (ClipData) parcel.readTypedObject(ClipData.CREATOR);
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPrimaryClip(clipData, readString, readString2, readInt, readInt2);
+                    setPrimaryClip(clipData, string, string2, i3, i4);
                     parcel2.writeNoException();
                     return true;
                 case 2:
                     ClipData clipData2 = (ClipData) parcel.readTypedObject(ClipData.CREATOR);
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    String readString5 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setPrimaryClipAsPackage(clipData2, readString3, readString4, readInt3, readInt4, readString5);
+                    setPrimaryClipAsPackage(clipData2, string3, string4, i5, i6, string5);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    clearPrimaryClip(readString6, readString7, readInt5, readInt6);
+                    clearPrimaryClip(string6, string7, i7, i8);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ClipData primaryClip = getPrimaryClip(readString8, readString9, readInt7, readInt8);
+                    ClipData primaryClip = getPrimaryClip(string8, string9, i9, i10);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(primaryClip, 1);
                     return true;
                 case 5:
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ClipDescription primaryClipDescription = getPrimaryClipDescription(readString10, readString11, readInt9, readInt10);
+                    ClipDescription primaryClipDescription = getPrimaryClipDescription(string10, string11, i11, i12);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(primaryClipDescription, 1);
                     return true;
                 case 6:
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasPrimaryClip = hasPrimaryClip(readString12, readString13, readInt11, readInt12);
+                    boolean zHasPrimaryClip = hasPrimaryClip(string12, string13, i13, i14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasPrimaryClip);
+                    parcel2.writeBoolean(zHasPrimaryClip);
                     return true;
                 case 7:
-                    IOnPrimaryClipChangedListener asInterface = IOnPrimaryClipChangedListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    IOnPrimaryClipChangedListener iOnPrimaryClipChangedListenerAsInterface = IOnPrimaryClipChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addPrimaryClipChangedListener(asInterface, readString14, readString15, readInt13, readInt14);
+                    addPrimaryClipChangedListener(iOnPrimaryClipChangedListenerAsInterface, string14, string15, i15, i16);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IOnPrimaryClipChangedListener asInterface2 = IOnPrimaryClipChangedListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
+                    IOnPrimaryClipChangedListener iOnPrimaryClipChangedListenerAsInterface2 = IOnPrimaryClipChangedListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removePrimaryClipChangedListener(asInterface2, readString16, readString17, readInt15, readInt16);
+                    removePrimaryClipChangedListener(iOnPrimaryClipChangedListenerAsInterface2, string16, string17, i17, i18);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    String readString18 = parcel.readString();
-                    String readString19 = parcel.readString();
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasClipboardText = hasClipboardText(readString18, readString19, readInt17, readInt18);
+                    boolean zHasClipboardText = hasClipboardText(string18, string19, i19, i20);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasClipboardText);
+                    parcel2.writeBoolean(zHasClipboardText);
                     return true;
                 case 10:
-                    String readString20 = parcel.readString();
-                    String readString21 = parcel.readString();
-                    int readInt19 = parcel.readInt();
-                    int readInt20 = parcel.readInt();
+                    String string20 = parcel.readString();
+                    String string21 = parcel.readString();
+                    int i21 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String primaryClipSource = getPrimaryClipSource(readString20, readString21, readInt19, readInt20);
+                    String primaryClipSource = getPrimaryClipSource(string20, string21, i21, i22);
                     parcel2.writeNoException();
                     parcel2.writeString(primaryClipSource);
                     return true;
                 case 11:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean areClipboardAccessNotificationsEnabledForUser = areClipboardAccessNotificationsEnabledForUser(readInt21);
+                    boolean zAreClipboardAccessNotificationsEnabledForUser = areClipboardAccessNotificationsEnabledForUser(i23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(areClipboardAccessNotificationsEnabledForUser);
+                    parcel2.writeBoolean(zAreClipboardAccessNotificationsEnabledForUser);
                     return true;
                 case 12:
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt22 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setClipboardAccessNotificationsEnabledForUser(readBoolean, readInt22);
+                    setClipboardAccessNotificationsEnabledForUser(z, i24);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -331,223 +331,223 @@ public interface IClipboard extends IInterface {
 
             @Override // android.content.IClipboard
             public void setPrimaryClip(ClipData clipData, String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(clipData, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clipData, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public void setPrimaryClipAsPackage(ClipData clipData, String str, String str2, int i, int i2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(clipData, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clipData, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public void clearPrimaryClip(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public ClipData getPrimaryClip(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ClipData) obtain2.readTypedObject(ClipData.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ClipData) parcelObtain2.readTypedObject(ClipData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public ClipDescription getPrimaryClipDescription(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ClipDescription) obtain2.readTypedObject(ClipDescription.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ClipDescription) parcelObtain2.readTypedObject(ClipDescription.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public boolean hasPrimaryClip(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public void addPrimaryClipChangedListener(IOnPrimaryClipChangedListener iOnPrimaryClipChangedListener, String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOnPrimaryClipChangedListener);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOnPrimaryClipChangedListener);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public void removePrimaryClipChangedListener(IOnPrimaryClipChangedListener iOnPrimaryClipChangedListener, String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iOnPrimaryClipChangedListener);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iOnPrimaryClipChangedListener);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public boolean hasClipboardText(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public String getPrimaryClipSource(String str, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public boolean areClipboardAccessNotificationsEnabledForUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.IClipboard
             public void setClipboardAccessNotificationsEnabledForUser(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

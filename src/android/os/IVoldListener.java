@@ -115,9 +115,9 @@ public interface IVoldListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVoldListener)) {
-                return (IVoldListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVoldListener)) {
+                return (IVoldListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -169,81 +169,81 @@ public interface IVoldListener extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onDiskCreated(readString, readInt);
+                    onDiskCreated(string, i3);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onDiskScanned(readString2);
+                    onDiskScanned(string2);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
-                    long readLong = parcel.readLong();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
+                    String string3 = parcel.readString();
+                    long j = parcel.readLong();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onDiskMetadataChanged(readString3, readLong, readString4, readString5);
+                    onDiskMetadataChanged(string3, j, string4, string5);
                     return true;
                 case 4:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onDiskDestroyed(readString6);
+                    onDiskDestroyed(string6);
                     return true;
                 case 5:
-                    String readString7 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onVolumeCreated(readString7, readInt2, readString8, readString9, readInt3);
+                    onVolumeCreated(string7, i4, string8, string9, i5);
                     return true;
                 case 6:
-                    String readString10 = parcel.readString();
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onVolumeStateChanged(readString10, readInt4, readInt5);
+                    onVolumeStateChanged(string10, i6, i7);
                     return true;
                 case 7:
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onVolumeMetadataChanged(readString11, readString12, readString13, readString14);
+                    onVolumeMetadataChanged(string11, string12, string13, string14);
                     return true;
                 case 8:
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onVolumePathChanged(readString15, readString16);
+                    onVolumePathChanged(string15, string16);
                     return true;
                 case 9:
-                    String readString17 = parcel.readString();
-                    String readString18 = parcel.readString();
+                    String string17 = parcel.readString();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onVolumeInternalPathChanged(readString17, readString18);
+                    onVolumeInternalPathChanged(string17, string18);
                     return true;
                 case 10:
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onVolumeDestroyed(readString19);
+                    onVolumeDestroyed(string19);
                     return true;
                 case 11:
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    sendVoldMessage(readString20);
+                    sendVoldMessage(string20);
                     return true;
                 case 12:
-                    String readString21 = parcel.readString();
-                    String readString22 = parcel.readString();
-                    String readString23 = parcel.readString();
+                    String string21 = parcel.readString();
+                    String string22 = parcel.readString();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onEncryptionStateChanged(readString21, readString22, readString23);
+                    onEncryptionStateChanged(string21, string22, string23);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -268,162 +268,162 @@ public interface IVoldListener extends IInterface {
 
             @Override // android.os.IVoldListener
             public void onDiskCreated(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void onDiskScanned(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void onDiskMetadataChanged(String str, long j, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void onDiskDestroyed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void onVolumeCreated(String str, int i, String str2, String str3, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void onVolumeStateChanged(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void onVolumeMetadataChanged(String str, String str2, String str3, String str4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void onVolumePathChanged(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void onVolumeInternalPathChanged(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void onVolumeDestroyed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void sendVoldMessage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IVoldListener
             public void onEncryptionStateChanged(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

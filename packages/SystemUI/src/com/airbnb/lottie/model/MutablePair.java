@@ -2,7 +2,6 @@ package com.airbnb.lottie.model;
 
 import androidx.core.util.Pair;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MutablePair {
     public Object first;
@@ -28,9 +27,9 @@ public class MutablePair {
 
     public final int hashCode() {
         Object obj = this.first;
-        int hashCode = obj == null ? 0 : obj.hashCode();
+        int iHashCode = obj == null ? 0 : obj.hashCode();
         Object obj2 = this.second;
-        return hashCode ^ (obj2 != null ? obj2.hashCode() : 0);
+        return iHashCode ^ (obj2 != null ? obj2.hashCode() : 0);
     }
 
     public final String toString() {

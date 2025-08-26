@@ -16,7 +16,6 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ComposerKt {
     public static final ComposerKt$$ExternalSyntheticLambda0 InvalidationLocationAscending;
@@ -35,16 +34,16 @@ public abstract class ComposerKt {
     }
 
     public static final void access$removeRange(List list, int i, int i2) {
-        int findLocation = findLocation(i, list);
-        if (findLocation < 0) {
-            findLocation = -(findLocation + 1);
+        int iFindLocation = findLocation(i, list);
+        if (iFindLocation < 0) {
+            iFindLocation = -(iFindLocation + 1);
         }
         while (true) {
             ArrayList arrayList = (ArrayList) list;
-            if (findLocation >= arrayList.size() || ((Invalidation) arrayList.get(findLocation)).location >= i2) {
+            if (iFindLocation >= arrayList.size() || ((Invalidation) arrayList.get(iFindLocation)).location >= i2) {
                 return;
             } else {
-                arrayList.remove(findLocation);
+                arrayList.remove(iFindLocation);
             }
         }
     }
@@ -70,36 +69,37 @@ public abstract class ComposerKt {
     }
 
     public static final void deactivateCurrentGroup(SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher) {
-        int i;
+        int slotsSize;
         int[] iArr = slotWriter.groups;
-        int i2 = slotWriter.currentGroup;
-        int dataIndex = slotWriter.dataIndex(slotWriter.groupIndexToAddress(slotWriter.groupSize(i2) + i2), iArr);
-        for (int dataIndex2 = slotWriter.dataIndex(slotWriter.groupIndexToAddress(slotWriter.currentGroup), slotWriter.groups); dataIndex2 < dataIndex; dataIndex2++) {
-            Object obj = slotWriter.slots[slotWriter.dataIndexToDataAddress(dataIndex2)];
-            int i3 = -1;
+        int i = slotWriter.currentGroup;
+        int iDataIndex = slotWriter.dataIndex(slotWriter.groupIndexToAddress(slotWriter.groupSize(i) + i), iArr);
+        for (int iDataIndex2 = slotWriter.dataIndex(slotWriter.groupIndexToAddress(slotWriter.currentGroup), slotWriter.groups); iDataIndex2 < iDataIndex; iDataIndex2++) {
+            Object obj = slotWriter.slots[slotWriter.dataIndexToDataAddress(iDataIndex2)];
+            int iAnchorIndex = -1;
             if (obj instanceof ComposeNodeLifecycleCallback) {
-                rememberEventDispatcher.recordLeaving(slotWriter.getSlotsSize() - dataIndex2, -1, -1, (ComposeNodeLifecycleCallback) obj);
+                rememberEventDispatcher.recordLeaving(slotWriter.getSlotsSize() - iDataIndex2, -1, -1, (ComposeNodeLifecycleCallback) obj);
             } else if (obj instanceof RememberObserverHolder) {
                 RememberObserverHolder rememberObserverHolder = (RememberObserverHolder) obj;
                 if (!(rememberObserverHolder.wrapped instanceof ReusableRememberObserver)) {
-                    removeData(slotWriter, dataIndex2, obj);
-                    int slotsSize = slotWriter.getSlotsSize() - dataIndex2;
+                    removeData(slotWriter, iDataIndex2, obj);
+                    int slotsSize2 = slotWriter.getSlotsSize() - iDataIndex2;
                     Anchor anchor = rememberObserverHolder.after;
                     if (anchor == null || !anchor.getValid()) {
-                        i = -1;
+                        slotsSize = -1;
                     } else {
-                        i3 = slotWriter.anchorIndex(anchor);
-                        i = slotWriter.getSlotsSize() - slotWriter.slotsEndAllIndex$runtime_release(i3);
+                        iAnchorIndex = slotWriter.anchorIndex(anchor);
+                        slotsSize = slotWriter.getSlotsSize() - slotWriter.slotsEndAllIndex$runtime_release(iAnchorIndex);
                     }
-                    rememberEventDispatcher.recordLeaving(slotsSize, i3, i, rememberObserverHolder);
+                    rememberEventDispatcher.recordLeaving(slotsSize2, iAnchorIndex, slotsSize, rememberObserverHolder);
                 }
             } else if (obj instanceof RecomposeScopeImpl) {
-                removeData(slotWriter, dataIndex2, obj);
+                removeData(slotWriter, iDataIndex2, obj);
                 ((RecomposeScopeImpl) obj).release();
             }
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public static final MovableContentState extractMovableContentAtCurrent(final ControlledComposition controlledComposition, final MovableContentStateReference movableContentStateReference, SlotWriter slotWriter, Applier applier) {
         Object obj;
         int i = 1;
@@ -108,60 +108,60 @@ public abstract class ComposerKt {
             slotTable.collectSourceInformation();
         }
         boolean z = false;
-        byte b = 0;
+        Object[] objArr = 0;
         boolean z2 = false;
         if (slotWriter.calledByMap != null) {
-            slotTable.calledByMap = new MutableIntObjectMap(b == true ? 1 : 0, i, null);
+            slotTable.calledByMap = new MutableIntObjectMap(objArr == true ? 1 : 0, i, null);
         }
         int i2 = slotWriter.currentGroup;
         if (applier != null && slotWriter.nodeCount(i2) > 0) {
-            int i3 = slotWriter.parent;
-            while (i3 > 0 && !slotWriter.isNode(i3)) {
-                i3 = slotWriter.parent(i3, slotWriter.groups);
+            int iParent = slotWriter.parent;
+            while (iParent > 0 && !slotWriter.isNode(iParent)) {
+                iParent = slotWriter.parent(iParent, slotWriter.groups);
             }
-            if (i3 >= 0 && slotWriter.isNode(i3)) {
-                Object node = slotWriter.node(i3);
-                int i4 = i3 + 1;
-                int groupSize = slotWriter.groupSize(i3) + i3;
-                int i5 = 0;
-                while (i4 < groupSize) {
-                    int groupSize2 = slotWriter.groupSize(i4) + i4;
-                    if (groupSize2 > i2) {
+            if (iParent >= 0 && slotWriter.isNode(iParent)) {
+                Object objNode = slotWriter.node(iParent);
+                int i3 = iParent + 1;
+                int iGroupSize = slotWriter.groupSize(iParent) + iParent;
+                int iNodeCount = 0;
+                while (i3 < iGroupSize) {
+                    int iGroupSize2 = slotWriter.groupSize(i3) + i3;
+                    if (iGroupSize2 > i2) {
                         break;
                     }
-                    i5 += slotWriter.isNode(i4) ? 1 : slotWriter.nodeCount(i4);
-                    i4 = groupSize2;
+                    iNodeCount += slotWriter.isNode(i3) ? 1 : slotWriter.nodeCount(i3);
+                    i3 = iGroupSize2;
                 }
-                int nodeCount = slotWriter.isNode(i2) ? 1 : slotWriter.nodeCount(i2);
-                applier.down(node);
-                applier.remove(i5, nodeCount);
+                int iNodeCount2 = slotWriter.isNode(i2) ? 1 : slotWriter.nodeCount(i2);
+                applier.down(objNode);
+                applier.remove(iNodeCount, iNodeCount2);
                 applier.up();
             }
         }
-        SlotWriter openWriter = slotTable.openWriter();
+        SlotWriter slotWriterOpenWriter = slotTable.openWriter();
         try {
-            openWriter.beginInsert();
-            openWriter.startGroup(126665345, movableContentStateReference.content);
-            SlotWriter.markGroup$default(openWriter);
-            openWriter.update(movableContentStateReference.parameter);
-            List moveTo = slotWriter.moveTo(movableContentStateReference.anchor, openWriter);
-            openWriter.skipGroup();
-            openWriter.endGroup();
-            openWriter.endInsert();
-            openWriter.close(true);
+            slotWriterOpenWriter.beginInsert();
+            slotWriterOpenWriter.startGroup(126665345, movableContentStateReference.content);
+            SlotWriter.markGroup$default(slotWriterOpenWriter);
+            slotWriterOpenWriter.update(movableContentStateReference.parameter);
+            List listMoveTo = slotWriter.moveTo(movableContentStateReference.anchor, slotWriterOpenWriter);
+            slotWriterOpenWriter.skipGroup();
+            slotWriterOpenWriter.endGroup();
+            slotWriterOpenWriter.endInsert();
+            slotWriterOpenWriter.close(true);
             MovableContentState movableContentState = new MovableContentState(slotTable);
             RecomposeScopeImpl.Companion.getClass();
-            List list = moveTo;
+            List list = listMoveTo;
             if (!list.isEmpty()) {
                 int size = list.size();
-                for (int i6 = 0; i6 < size; i6++) {
-                    Anchor anchor = (Anchor) moveTo.get(i6);
+                for (int i4 = 0; i4 < size; i4++) {
+                    Anchor anchor = (Anchor) listMoveTo.get(i4);
                     if (slotTable.ownsAnchor(anchor)) {
-                        int anchorIndex = slotTable.anchorIndex(anchor);
-                        int access$slotAnchor = SlotTableKt.access$slotAnchor(anchorIndex, slotTable.groups);
-                        int i7 = anchorIndex + 1;
-                        if ((i7 < slotTable.groupsSize ? slotTable.groups[(i7 * 5) + 4] : slotTable.slots.length) - access$slotAnchor > 0) {
-                            obj = slotTable.slots[access$slotAnchor];
+                        int iAnchorIndex = slotTable.anchorIndex(anchor);
+                        int iAccess$slotAnchor = SlotTableKt.access$slotAnchor(iAnchorIndex, slotTable.groups);
+                        int i5 = iAnchorIndex + 1;
+                        if ((i5 < slotTable.groupsSize ? slotTable.groups[(i5 * 5) + 4] : slotTable.slots.length) - iAccess$slotAnchor > 0) {
+                            obj = slotTable.slots[iAccess$slotAnchor];
                         } else {
                             Composer.Companion.getClass();
                             obj = Composer.Companion.Empty;
@@ -170,14 +170,14 @@ public abstract class ComposerKt {
                             RecomposeScopeOwner recomposeScopeOwner = new RecomposeScopeOwner() { // from class: androidx.compose.runtime.ComposerKt$extractMovableContentAtCurrent$movableContentRecomposeScopeOwner$1
                                 @Override // androidx.compose.runtime.RecomposeScopeOwner
                                 public final InvalidationResult invalidate(RecomposeScopeImpl recomposeScopeImpl, Object obj2) {
-                                    InvalidationResult invalidationResult;
-                                    ControlledComposition controlledComposition2 = ControlledComposition.this;
+                                    InvalidationResult invalidationResultInvalidate;
+                                    ControlledComposition controlledComposition2 = controlledComposition;
                                     RecomposeScopeOwner recomposeScopeOwner2 = controlledComposition2 instanceof RecomposeScopeOwner ? (RecomposeScopeOwner) controlledComposition2 : null;
-                                    if (recomposeScopeOwner2 == null || (invalidationResult = recomposeScopeOwner2.invalidate(recomposeScopeImpl, obj2)) == null) {
-                                        invalidationResult = InvalidationResult.IGNORED;
+                                    if (recomposeScopeOwner2 == null || (invalidationResultInvalidate = recomposeScopeOwner2.invalidate(recomposeScopeImpl, obj2)) == null) {
+                                        invalidationResultInvalidate = InvalidationResult.IGNORED;
                                     }
-                                    if (invalidationResult != InvalidationResult.IGNORED) {
-                                        return invalidationResult;
+                                    if (invalidationResultInvalidate != InvalidationResult.IGNORED) {
+                                        return invalidationResultInvalidate;
                                     }
                                     MovableContentStateReference movableContentStateReference2 = movableContentStateReference;
                                     movableContentStateReference2.invalidations = CollectionsKt___CollectionsKt.plus(movableContentStateReference2.invalidations, new Pair(recomposeScopeImpl, obj2));
@@ -192,12 +192,12 @@ public abstract class ComposerKt {
                                 public final void recordReadOf(Object obj2) {
                                 }
                             };
-                            SlotWriter openWriter2 = slotTable.openWriter();
+                            SlotWriter slotWriterOpenWriter2 = slotTable.openWriter();
                             try {
                                 RecomposeScopeImpl.Companion.getClass();
-                                RecomposeScopeImpl.Companion.adoptAnchoredScopes$runtime_release(openWriter2, moveTo, recomposeScopeOwner);
+                                RecomposeScopeImpl.Companion.adoptAnchoredScopes$runtime_release(slotWriterOpenWriter2, listMoveTo, recomposeScopeOwner);
                                 Unit unit = Unit.INSTANCE;
-                                openWriter2.close(true);
+                                slotWriterOpenWriter2.close(true);
                                 return movableContentState;
                             } finally {
                             }
@@ -216,11 +216,11 @@ public abstract class ComposerKt {
         int i2 = 0;
         while (i2 <= size) {
             int i3 = (i2 + size) >>> 1;
-            int compare = Intrinsics.compare(((Invalidation) arrayList.get(i3)).location, i);
-            if (compare < 0) {
+            int iCompare = Intrinsics.compare(((Invalidation) arrayList.get(i3)).location, i);
+            if (iCompare < 0) {
                 i2 = i3 + 1;
             } else {
-                if (compare <= 0) {
+                if (iCompare <= 0) {
                     return i3;
                 }
                 size = i3 - 1;
@@ -234,35 +234,35 @@ public abstract class ComposerKt {
     }
 
     public static final void removeCurrentGroup(SlotWriter slotWriter, RememberEventDispatcher rememberEventDispatcher) {
-        int i;
+        int slotsSize;
         int[] iArr = slotWriter.groups;
-        int i2 = slotWriter.currentGroup;
-        int dataIndex = slotWriter.dataIndex(slotWriter.groupIndexToAddress(slotWriter.groupSize(i2) + i2), iArr);
-        for (int dataIndex2 = slotWriter.dataIndex(slotWriter.groupIndexToAddress(slotWriter.currentGroup), slotWriter.groups); dataIndex2 < dataIndex; dataIndex2++) {
-            Object obj = slotWriter.slots[slotWriter.dataIndexToDataAddress(dataIndex2)];
-            int i3 = -1;
+        int i = slotWriter.currentGroup;
+        int iDataIndex = slotWriter.dataIndex(slotWriter.groupIndexToAddress(slotWriter.groupSize(i) + i), iArr);
+        for (int iDataIndex2 = slotWriter.dataIndex(slotWriter.groupIndexToAddress(slotWriter.currentGroup), slotWriter.groups); iDataIndex2 < iDataIndex; iDataIndex2++) {
+            Object obj = slotWriter.slots[slotWriter.dataIndexToDataAddress(iDataIndex2)];
+            int iAnchorIndex = -1;
             if (obj instanceof ComposeNodeLifecycleCallback) {
-                int slotsSize = slotWriter.getSlotsSize() - dataIndex2;
+                int slotsSize2 = slotWriter.getSlotsSize() - iDataIndex2;
                 Object obj2 = (ComposeNodeLifecycleCallback) obj;
-                MutableScatterSet mutableScatterSet = rememberEventDispatcher.releasing;
-                if (mutableScatterSet == null) {
-                    mutableScatterSet = ScatterSetKt.mutableScatterSetOf();
-                    rememberEventDispatcher.releasing = mutableScatterSet;
+                MutableScatterSet mutableScatterSetMutableScatterSetOf = rememberEventDispatcher.releasing;
+                if (mutableScatterSetMutableScatterSetOf == null) {
+                    mutableScatterSetMutableScatterSetOf = ScatterSetKt.mutableScatterSetOf();
+                    rememberEventDispatcher.releasing = mutableScatterSetMutableScatterSetOf;
                 }
-                mutableScatterSet.plusAssign(obj2);
-                rememberEventDispatcher.recordLeaving(slotsSize, -1, -1, obj2);
+                mutableScatterSetMutableScatterSetOf.plusAssign(obj2);
+                rememberEventDispatcher.recordLeaving(slotsSize2, -1, -1, obj2);
             }
             if (obj instanceof RememberObserverHolder) {
-                int slotsSize2 = slotWriter.getSlotsSize() - dataIndex2;
+                int slotsSize3 = slotWriter.getSlotsSize() - iDataIndex2;
                 RememberObserverHolder rememberObserverHolder = (RememberObserverHolder) obj;
                 Anchor anchor = rememberObserverHolder.after;
                 if (anchor == null || !anchor.getValid()) {
-                    i = -1;
+                    slotsSize = -1;
                 } else {
-                    i3 = slotWriter.anchorIndex(anchor);
-                    i = slotWriter.getSlotsSize() - slotWriter.slotsEndAllIndex$runtime_release(i3);
+                    iAnchorIndex = slotWriter.anchorIndex(anchor);
+                    slotsSize = slotWriter.getSlotsSize() - slotWriter.slotsEndAllIndex$runtime_release(iAnchorIndex);
                 }
-                rememberEventDispatcher.recordLeaving(slotsSize2, i3, i, rememberObserverHolder);
+                rememberEventDispatcher.recordLeaving(slotsSize3, iAnchorIndex, slotsSize, rememberObserverHolder);
             }
             if (obj instanceof RecomposeScopeImpl) {
                 ((RecomposeScopeImpl) obj).release();
@@ -272,11 +272,11 @@ public abstract class ComposerKt {
     }
 
     public static final void removeData(SlotWriter slotWriter, int i, Object obj) {
-        int dataIndexToDataAddress = slotWriter.dataIndexToDataAddress(i);
+        int iDataIndexToDataAddress = slotWriter.dataIndexToDataAddress(i);
         Object[] objArr = slotWriter.slots;
-        Object obj2 = objArr[dataIndexToDataAddress];
+        Object obj2 = objArr[iDataIndexToDataAddress];
         Composer.Companion.getClass();
-        objArr[dataIndexToDataAddress] = Composer.Companion.Empty;
+        objArr[iDataIndexToDataAddress] = Composer.Companion.Empty;
         if (obj == obj2) {
             return;
         }

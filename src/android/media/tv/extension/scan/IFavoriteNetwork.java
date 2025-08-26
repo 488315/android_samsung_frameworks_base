@@ -63,9 +63,9 @@ public interface IFavoriteNetwork extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IFavoriteNetwork");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFavoriteNetwork)) {
-                return (IFavoriteNetwork) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.IFavoriteNetwork");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFavoriteNetwork)) {
+                return (IFavoriteNetwork) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,9 +108,9 @@ public interface IFavoriteNetwork extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeInt(favoriteNetwork);
             } else if (i == 3) {
-                IFavoriteNetworkListener asInterface = IFavoriteNetworkListener.Stub.asInterface(parcel.readStrongBinder());
+                IFavoriteNetworkListener iFavoriteNetworkListenerAsInterface = IFavoriteNetworkListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int listener = setListener(asInterface);
+                int listener = setListener(iFavoriteNetworkListenerAsInterface);
                 parcel2.writeNoException();
                 parcel2.writeInt(listener);
             } else {
@@ -137,48 +137,48 @@ public interface IFavoriteNetwork extends IInterface {
 
             @Override // android.media.tv.extension.scan.IFavoriteNetwork
             public Bundle[] getFavoriteNetworks() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IFavoriteNetwork");
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle[]) obtain2.createTypedArray(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IFavoriteNetwork");
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle[]) parcelObtain2.createTypedArray(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.IFavoriteNetwork
             public int setFavoriteNetwork(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IFavoriteNetwork");
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IFavoriteNetwork");
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.IFavoriteNetwork
             public int setListener(IFavoriteNetworkListener iFavoriteNetworkListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.IFavoriteNetwork");
-                    obtain.writeStrongInterface(iFavoriteNetworkListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.IFavoriteNetwork");
+                    parcelObtain.writeStrongInterface(iFavoriteNetworkListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

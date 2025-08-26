@@ -13,11 +13,9 @@ import androidx.transition.Transition;
 import com.android.systemui.R;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Fade extends Visibility {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FadeAnimatorListener extends AnimatorListenerAdapter implements Transition.TransitionListener {
         public boolean mLayerTypeChanged = false;
         public final View mView;
@@ -46,15 +44,15 @@ public class Fade extends Visibility {
 
         @Override // androidx.transition.Transition.TransitionListener
         public final void onTransitionPause() {
-            float f;
+            float transitionAlpha;
             if (this.mView.getVisibility() == 0) {
                 View view = this.mView;
                 ViewUtils.IMPL.getClass();
-                f = view.getTransitionAlpha();
+                transitionAlpha = view.getTransitionAlpha();
             } else {
-                f = 0.0f;
+                transitionAlpha = 0.0f;
             }
-            this.mView.setTag(R.id.transition_pause_alpha, Float.valueOf(f));
+            this.mView.setTag(R.id.transition_pause_alpha, Float.valueOf(transitionAlpha));
         }
 
         @Override // androidx.transition.Transition.TransitionListener
@@ -103,17 +101,17 @@ public class Fade extends Visibility {
     @Override // androidx.transition.Visibility, androidx.transition.Transition
     public final void captureStartValues(TransitionValues transitionValues) {
         Visibility.captureValues$1(transitionValues);
-        Float f = (Float) transitionValues.view.getTag(R.id.transition_pause_alpha);
-        if (f == null) {
+        Float fValueOf = (Float) transitionValues.view.getTag(R.id.transition_pause_alpha);
+        if (fValueOf == null) {
             if (transitionValues.view.getVisibility() == 0) {
                 View view = transitionValues.view;
                 ViewUtils.IMPL.getClass();
-                f = Float.valueOf(view.getTransitionAlpha());
+                fValueOf = Float.valueOf(view.getTransitionAlpha());
             } else {
-                f = Float.valueOf(0.0f);
+                fValueOf = Float.valueOf(0.0f);
             }
         }
-        ((HashMap) transitionValues.values).put("android:fade:transitionAlpha", f);
+        ((HashMap) transitionValues.values).put("android:fade:transitionAlpha", fValueOf);
     }
 
     public final Animator createAnimation(View view, float f, float f2) {
@@ -121,11 +119,11 @@ public class Fade extends Visibility {
             return null;
         }
         ViewUtils.setTransitionAlpha(f, view);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, ViewUtils.TRANSITION_ALPHA, f2);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, ViewUtils.TRANSITION_ALPHA, f2);
         FadeAnimatorListener fadeAnimatorListener = new FadeAnimatorListener(view);
-        ofFloat.addListener(fadeAnimatorListener);
+        objectAnimatorOfFloat.addListener(fadeAnimatorListener);
         getRootTransition().addListener(fadeAnimatorListener);
-        return ofFloat;
+        return objectAnimatorOfFloat;
     }
 
     @Override // androidx.transition.Transition
@@ -142,11 +140,11 @@ public class Fade extends Visibility {
     @Override // androidx.transition.Visibility
     public final Animator onDisappear(View view, TransitionValues transitionValues, TransitionValues transitionValues2) {
         ViewUtils.IMPL.getClass();
-        Animator createAnimation = createAnimation(view, getStartAlpha(transitionValues, 1.0f), 0.0f);
-        if (createAnimation == null) {
+        Animator animatorCreateAnimation = createAnimation(view, getStartAlpha(transitionValues, 1.0f), 0.0f);
+        if (animatorCreateAnimation == null) {
             ViewUtils.setTransitionAlpha(getStartAlpha(transitionValues2, 1.0f), view);
         }
-        return createAnimation;
+        return animatorCreateAnimation;
     }
 
     public Fade() {
@@ -154,8 +152,8 @@ public class Fade extends Visibility {
 
     public Fade(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, Styleable.FADE);
-        setMode(TypedArrayUtils.getNamedInt(obtainStyledAttributes, (XmlResourceParser) attributeSet, "fadingMode", 0, this.mMode));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, Styleable.FADE);
+        setMode(TypedArrayUtils.getNamedInt(typedArrayObtainStyledAttributes, (XmlResourceParser) attributeSet, "fadingMode", 0, this.mMode));
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

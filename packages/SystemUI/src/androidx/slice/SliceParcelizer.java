@@ -2,11 +2,12 @@ package androidx.slice;
 
 import androidx.versionedparcelable.VersionedParcel;
 import androidx.versionedparcelable.VersionedParcelable;
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SliceParcelizer {
     /* JADX WARN: Multi-variable type inference failed */
@@ -54,7 +55,7 @@ public final class SliceParcelizer {
         return slice;
     }
 
-    public static void write(Slice slice, VersionedParcel versionedParcel) {
+    public static void write(Slice slice, VersionedParcel versionedParcel) throws IllegalAccessException, IOException, IllegalArgumentException, InvocationTargetException {
         versionedParcel.getClass();
         slice.getClass();
         SliceSpec sliceSpec = slice.mSpec;

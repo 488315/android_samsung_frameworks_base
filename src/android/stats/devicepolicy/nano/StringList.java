@@ -56,23 +56,23 @@ public final class StringList extends MessageNano {
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     protected int computeSerializedSize() {
-        int computeSerializedSize = super.computeSerializedSize();
+        int iComputeSerializedSize = super.computeSerializedSize();
         String[] strArr = this.stringValue;
         if (strArr == null || strArr.length <= 0) {
-            return computeSerializedSize;
+            return iComputeSerializedSize;
         }
         int i = 0;
+        int iComputeStringSizeNoTag = 0;
         int i2 = 0;
-        int i3 = 0;
         while (true) {
             String[] strArr2 = this.stringValue;
             if (i >= strArr2.length) {
-                return computeSerializedSize + i2 + i3;
+                return iComputeSerializedSize + iComputeStringSizeNoTag + i2;
             }
             String str = strArr2[i];
             if (str != null) {
-                i3++;
-                i2 += CodedOutputByteBufferNano.computeStringSizeNoTag(str);
+                i2++;
+                iComputeStringSizeNoTag += CodedOutputByteBufferNano.computeStringSizeNoTag(str);
             }
             i++;
         }
@@ -81,12 +81,12 @@ public final class StringList extends MessageNano {
     @Override // com.android.framework.protobuf.nano.MessageNano
     public StringList mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag != 10) {
-                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+            if (tag != 10) {
+                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                     break;
                 }
             } else {

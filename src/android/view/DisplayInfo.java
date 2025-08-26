@@ -253,31 +253,31 @@ public final class DisplayInfo implements Parcelable {
         this.renderFrameRate = parcel.readFloat();
         this.hasArrSupport = parcel.readBoolean();
         this.frameRateCategoryRate = (FrameRateCategoryRate) parcel.readParcelable(null, FrameRateCategoryRate.class);
-        int readInt = parcel.readInt();
-        this.supportedRefreshRates = new float[readInt];
-        for (int i = 0; i < readInt; i++) {
-            this.supportedRefreshRates[i] = parcel.readFloat();
+        int i = parcel.readInt();
+        this.supportedRefreshRates = new float[i];
+        for (int i2 = 0; i2 < i; i2++) {
+            this.supportedRefreshRates[i2] = parcel.readFloat();
         }
         this.defaultModeId = parcel.readInt();
         if (CoreRune.FW_VRR_REFRESH_RATE_MODE) {
             this.refreshRateMode = parcel.readInt();
         }
         this.userPreferredModeId = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        this.supportedModes = new Display.Mode[readInt2];
-        for (int i2 = 0; i2 < readInt2; i2++) {
-            this.supportedModes[i2] = Display.Mode.CREATOR.createFromParcel(parcel);
+        int i3 = parcel.readInt();
+        this.supportedModes = new Display.Mode[i3];
+        for (int i4 = 0; i4 < i3; i4++) {
+            this.supportedModes[i4] = Display.Mode.CREATOR.createFromParcel(parcel);
         }
-        int readInt3 = parcel.readInt();
-        this.appsSupportedModes = new Display.Mode[readInt3];
-        for (int i3 = 0; i3 < readInt3; i3++) {
-            this.appsSupportedModes[i3] = Display.Mode.CREATOR.createFromParcel(parcel);
+        int i5 = parcel.readInt();
+        this.appsSupportedModes = new Display.Mode[i5];
+        for (int i6 = 0; i6 < i5; i6++) {
+            this.appsSupportedModes[i6] = Display.Mode.CREATOR.createFromParcel(parcel);
         }
         this.colorMode = parcel.readInt();
-        int readInt4 = parcel.readInt();
-        this.supportedColorModes = new int[readInt4];
-        for (int i4 = 0; i4 < readInt4; i4++) {
-            this.supportedColorModes[i4] = parcel.readInt();
+        int i7 = parcel.readInt();
+        this.supportedColorModes = new int[i7];
+        for (int i8 = 0; i8 < i7; i8++) {
+            this.supportedColorModes[i8] = parcel.readInt();
         }
         this.hdrCapabilities = (Display.HdrCapabilities) parcel.readParcelable(null, Display.HdrCapabilities.class);
         this.isForceSdr = parcel.readBoolean();
@@ -299,10 +299,10 @@ public final class DisplayInfo implements Parcelable {
         this.brightnessDefault = parcel.readFloat();
         this.brightnessDim = parcel.readFloat();
         this.roundedCorners = (RoundedCorners) parcel.readTypedObject(RoundedCorners.CREATOR);
-        int readInt5 = parcel.readInt();
-        this.userDisabledHdrTypes = new int[readInt5];
-        for (int i5 = 0; i5 < readInt5; i5++) {
-            this.userDisabledHdrTypes[i5] = parcel.readInt();
+        int i9 = parcel.readInt();
+        this.userDisabledHdrTypes = new int[i9];
+        for (int i10 = 0; i10 < i9; i10++) {
+            this.userDisabledHdrTypes[i10] = parcel.readInt();
         }
         this.installOrientation = parcel.readInt();
         this.displayShape = (DisplayShape) parcel.readTypedObject(DisplayShape.CREATOR);
@@ -706,7 +706,7 @@ public final class DisplayInfo implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, this.logicalWidth);
         protoOutputStream.write(1120986464258L, this.logicalHeight);
         protoOutputStream.write(1120986464259L, this.appWidth);
@@ -718,7 +718,7 @@ public final class DisplayInfo implements Parcelable {
         if (displayCutout != null) {
             displayCutout.dumpDebug(protoOutputStream, 1146756268039L);
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     private static String flagsToString(int i) {

@@ -57,11 +57,11 @@ public class DateTimeKeyListener extends NumberKeyListener {
     public static DateTimeKeyListener getInstance(Locale locale) {
         DateTimeKeyListener dateTimeKeyListener;
         synchronized (sLock) {
-            HashMap<Locale, DateTimeKeyListener> hashMap = sInstanceCache;
-            dateTimeKeyListener = hashMap.get(locale);
+            HashMap<Locale, DateTimeKeyListener> map = sInstanceCache;
+            dateTimeKeyListener = map.get(locale);
             if (dateTimeKeyListener == null) {
                 dateTimeKeyListener = new DateTimeKeyListener(locale);
-                hashMap.put(locale, dateTimeKeyListener);
+                map.put(locale, dateTimeKeyListener);
             }
         }
         return dateTimeKeyListener;

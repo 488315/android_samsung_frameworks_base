@@ -15,53 +15,37 @@ import androidx.compose.ui.text.input.TextInputSession;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextFieldDelegate {
     public static final Companion Companion = new Companion(null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         /* renamed from: drawHighlight-Le-punE, reason: not valid java name */
-        public static void m204drawHighlightLepunE(Canvas canvas, long j, OffsetMapping offsetMapping, TextLayoutResult textLayoutResult, AndroidPaint androidPaint) {
-            int originalToTransformed = offsetMapping.originalToTransformed(TextRange.m750getMinimpl(j));
-            int originalToTransformed2 = offsetMapping.originalToTransformed(TextRange.m749getMaximpl(j));
-            if (originalToTransformed != originalToTransformed2) {
-                canvas.drawPath(textLayoutResult.getPathForRange(originalToTransformed, originalToTransformed2), androidPaint);
+        public static void m205drawHighlightLepunE(Canvas canvas, long j, OffsetMapping offsetMapping, TextLayoutResult textLayoutResult, AndroidPaint androidPaint) {
+            int iOriginalToTransformed = offsetMapping.originalToTransformed(TextRange.m752getMinimpl(j));
+            int iOriginalToTransformed2 = offsetMapping.originalToTransformed(TextRange.m751getMaximpl(j));
+            if (iOriginalToTransformed != iOriginalToTransformed2) {
+                canvas.drawPath(textLayoutResult.getPathForRange(iOriginalToTransformed, iOriginalToTransformed2), androidPaint);
             }
         }
 
         public static void notifyFocusedRect$foundation_release(TextFieldValue textFieldValue, TextDelegate textDelegate, TextLayoutResult textLayoutResult, LayoutCoordinates layoutCoordinates, TextInputSession textInputSession, boolean z, OffsetMapping offsetMapping) {
-            long computeSizeForDefaultText;
-            Rect rect;
             if (z) {
-                int originalToTransformed = offsetMapping.originalToTransformed(TextRange.m749getMaximpl(textFieldValue.selection));
-                if (originalToTransformed < textLayoutResult.layoutInput.text.text.length()) {
-                    rect = textLayoutResult.getBoundingBox(originalToTransformed);
-                } else if (originalToTransformed != 0) {
-                    rect = textLayoutResult.getBoundingBox(originalToTransformed - 1);
-                } else {
-                    computeSizeForDefaultText = TextFieldDelegateKt.computeSizeForDefaultText(textDelegate.style, textDelegate.density, textDelegate.fontFamilyResolver, TextFieldDelegateKt.EmptyTextReplacement, 1);
-                    rect = new Rect(0.0f, 0.0f, 1.0f, (int) (computeSizeForDefaultText & 4294967295L));
-                }
-                float f = rect.left;
-                long floatToRawIntBits = Float.floatToRawIntBits(f);
-                float f2 = rect.top;
+                int iOriginalToTransformed = offsetMapping.originalToTransformed(TextRange.m751getMaximpl(textFieldValue.selection));
+                Rect boundingBox = iOriginalToTransformed < textLayoutResult.layoutInput.text.text.length() ? textLayoutResult.getBoundingBox(iOriginalToTransformed) : iOriginalToTransformed != 0 ? textLayoutResult.getBoundingBox(iOriginalToTransformed - 1) : new Rect(0.0f, 0.0f, 1.0f, (int) (TextFieldDelegateKt.computeSizeForDefaultText(textDelegate.style, textDelegate.density, textDelegate.fontFamilyResolver, TextFieldDelegateKt.EmptyTextReplacement, 1) & 4294967295L));
+                long jFloatToRawIntBits = Float.floatToRawIntBits(boundingBox.left);
+                float f = boundingBox.top;
                 Offset.Companion companion = Offset.Companion;
-                long mo613localToRootMKHz9U = layoutCoordinates.mo613localToRootMKHz9U((floatToRawIntBits << 32) | (Float.floatToRawIntBits(f2) & 4294967295L));
-                float intBitsToFloat = Float.intBitsToFloat((int) (mo613localToRootMKHz9U >> 32));
-                float intBitsToFloat2 = Float.intBitsToFloat((int) (mo613localToRootMKHz9U & 4294967295L));
-                long floatToRawIntBits2 = (Float.floatToRawIntBits(intBitsToFloat2) & 4294967295L) | (Float.floatToRawIntBits(intBitsToFloat) << 32);
-                float f3 = rect.right - f;
-                float f4 = rect.bottom - f2;
+                long jMo615localToRootMKHz9U = layoutCoordinates.mo615localToRootMKHz9U((jFloatToRawIntBits << 32) | (Float.floatToRawIntBits(f) & 4294967295L));
+                long jFloatToRawIntBits2 = (Float.floatToRawIntBits(boundingBox.right - r6) << 32) | (Float.floatToRawIntBits(boundingBox.bottom - f) & 4294967295L);
                 Size.Companion companion2 = Size.Companion;
-                Rect m411Recttz77jQw = RectKt.m411Recttz77jQw(floatToRawIntBits2, (Float.floatToRawIntBits(f3) << 32) | (Float.floatToRawIntBits(f4) & 4294967295L));
+                Rect rectM413Recttz77jQw = RectKt.m413Recttz77jQw((Float.floatToRawIntBits(Float.intBitsToFloat((int) (jMo615localToRootMKHz9U & 4294967295L))) & 4294967295L) | (Float.floatToRawIntBits(Float.intBitsToFloat((int) (jMo615localToRootMKHz9U >> 32))) << 32), jFloatToRawIntBits2);
                 if (Intrinsics.areEqual((TextInputSession) textInputSession.textInputService._currentInputSession.get(), textInputSession)) {
-                    textInputSession.platformTextInputService.notifyFocusedRect(m411Recttz77jQw);
+                    textInputSession.platformTextInputService.notifyFocusedRect(rectM413Recttz77jQw);
                 }
             }
         }

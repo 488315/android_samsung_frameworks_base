@@ -30,7 +30,6 @@ import com.android.wm.shell.pip2.phone.PipTransitionState;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipResizeGestureHandler implements PipTransitionState.PipTransitionStateChangedListener {
     public boolean mAllowGesture;
@@ -70,7 +69,6 @@ public class PipResizeGestureHandler implements PipTransitionState.PipTransition
     public boolean mWaitingForBoundsChangeTransition = false;
     public float mAngle = 0.0f;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipResizeInputEventReceiver extends BatchedInputEventReceiver {
         public PipResizeInputEventReceiver(InputChannel inputChannel, Looper looper) {
             super(inputChannel, looper, Choreographer.getInstance());
@@ -127,17 +125,17 @@ public class PipResizeGestureHandler implements PipTransitionState.PipTransition
             Rect rect = this.mLastResizeBounds;
             int i = point2.x;
             int i2 = point2.y;
-            int centerX = rect.centerX() - (i / 2);
-            int centerY = rect.centerY() - (i2 / 2);
-            rect.set(centerX, centerY, i + centerX, i2 + centerY);
+            int iCenterX = rect.centerX() - (i / 2);
+            int iCenterY = rect.centerY() - (i2 / 2);
+            rect.set(iCenterX, iCenterY, i + iCenterX, i2 + iCenterY);
         }
         if (this.mLastResizeBounds.width() < point.x || this.mLastResizeBounds.height() < point.y) {
             Rect rect2 = this.mLastResizeBounds;
             int i3 = point.x;
             int i4 = point.y;
-            int centerX2 = rect2.centerX() - (i3 / 2);
-            int centerY2 = rect2.centerY() - (i4 / 2);
-            rect2.set(centerX2, centerY2, i3 + centerX2, i4 + centerY2);
+            int iCenterX2 = rect2.centerX() - (i3 / 2);
+            int iCenterY2 = rect2.centerY() - (i4 / 2);
+            rect2.set(iCenterX2, iCenterY2, i3 + iCenterX2, i4 + iCenterY2);
         }
         Rect rect3 = this.mLastResizeBounds;
         PipBoundsAlgorithm pipBoundsAlgorithm = this.mPipBoundsAlgorithm;
@@ -237,9 +235,9 @@ public class PipResizeGestureHandler implements PipTransitionState.PipTransition
                     rect2.setEmpty();
                     int i = (int) x;
                     int i2 = (int) y;
-                    boolean isWithinDragResizeRegion = pipDragToResizeHandler.isWithinDragResizeRegion(i, i2);
-                    pipResizeGestureHandler.mAllowGesture = isWithinDragResizeRegion;
-                    if (isWithinDragResizeRegion) {
+                    boolean zIsWithinDragResizeRegion = pipDragToResizeHandler.isWithinDragResizeRegion(i, i2);
+                    pipResizeGestureHandler.mAllowGesture = zIsWithinDragResizeRegion;
+                    if (zIsWithinDragResizeRegion) {
                         Rect bounds2 = pipBoundsState2.getBounds();
                         int i3 = pipResizeGestureHandler.mCtrlType;
                         Rect rect4 = (Rect) pipDragToResizeHandler.mMovementBoundsSupplier.apply(bounds2);
@@ -308,7 +306,7 @@ public class PipResizeGestureHandler implements PipTransitionState.PipTransition
             pipResizeAnimator.mAnimationEndCallback = new Runnable() { // from class: com.android.wm.shell.pip2.phone.PipResizeGestureHandler$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PipResizeGestureHandler pipResizeGestureHandler = PipResizeGestureHandler.this;
+                    PipResizeGestureHandler pipResizeGestureHandler = this.f$0;
                     Rect rect2 = rect;
                     pipResizeGestureHandler.mUserResizeBounds.set(rect2);
                     pipResizeGestureHandler.mCtrlType = 0;
@@ -354,7 +352,7 @@ public class PipResizeGestureHandler implements PipTransitionState.PipTransition
                 this.mMainExecutor.executeBlocking(new Runnable() { // from class: com.android.wm.shell.pip2.phone.PipResizeGestureHandler$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PipResizeGestureHandler pipResizeGestureHandler = PipResizeGestureHandler.this;
+                        PipResizeGestureHandler pipResizeGestureHandler = this.f$0;
                         pipResizeGestureHandler.getClass();
                         pipResizeGestureHandler.mInputEventReceiver = pipResizeGestureHandler.new PipResizeInputEventReceiver(pipResizeGestureHandler.mInputMonitor.getInputChannel(), Looper.myLooper());
                     }

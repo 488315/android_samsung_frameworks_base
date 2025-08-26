@@ -27,20 +27,16 @@ public final class DdmSyncState {
         }
 
         public int toInt() {
-            int i = 0;
-            for (int i2 = 0; i2 < 4; i2++) {
-                i = (i << 8) | (this.mLabel.charAt(i2) & 255);
+            int iCharAt = 0;
+            for (int i = 0; i < 4; i++) {
+                iCharAt = (iCharAt << 8) | (this.mLabel.charAt(i) & 255);
             }
-            return i;
+            return iCharAt;
         }
     }
 
     public static synchronized Stage getStage() {
-        Stage stage;
-        synchronized (DdmSyncState.class) {
-            stage = Stage.values()[sCurrentStageIndex];
-        }
-        return stage;
+        return Stage.values()[sCurrentStageIndex];
     }
 
     public static void reset() {
@@ -48,17 +44,15 @@ public final class DdmSyncState {
     }
 
     public static synchronized void next(Stage stage) {
-        synchronized (DdmSyncState.class) {
-            Stage[] values = Stage.values();
-            int i = sCurrentStageIndex;
-            while (i < values.length && values[i] != stage) {
-                i++;
-            }
-            if (i == values.length || values[i] != stage) {
-                throw new IllegalStateException("Cannot go to " + stage + " from:" + getInternalState());
-            }
-            sCurrentStageIndex = i;
+        Stage[] stageArrValues = Stage.values();
+        int i = sCurrentStageIndex;
+        while (i < stageArrValues.length && stageArrValues[i] != stage) {
+            i++;
         }
+        if (i == stageArrValues.length || stageArrValues[i] != stage) {
+            throw new IllegalStateException("Cannot go to " + stage + " from:" + getInternalState());
+        }
+        sCurrentStageIndex = i;
     }
 
     private static String getInternalState() {

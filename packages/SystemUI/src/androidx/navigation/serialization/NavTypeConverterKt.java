@@ -4,11 +4,9 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 import kotlinx.serialization.descriptors.SerialDescriptor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class NavTypeConverterKt {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -63,7 +61,7 @@ public abstract class NavTypeConverterKt {
     }
 
     public static final InternalType toInternalType(SerialDescriptor serialDescriptor) {
-        String replace$default = StringsKt__StringsJVMKt.replace$default(serialDescriptor.getSerialName(), "?", "");
-        return Intrinsics.areEqual(replace$default, "kotlin.Int") ? InternalType.INT : Intrinsics.areEqual(replace$default, "kotlin.Boolean") ? InternalType.BOOL : Intrinsics.areEqual(replace$default, "kotlin.Float") ? InternalType.FLOAT : Intrinsics.areEqual(replace$default, "kotlin.Long") ? InternalType.LONG : Intrinsics.areEqual(replace$default, "kotlin.String") ? InternalType.STRING : Intrinsics.areEqual(replace$default, "kotlin.IntArray") ? InternalType.INT_ARRAY : Intrinsics.areEqual(replace$default, "kotlin.BooleanArray") ? InternalType.BOOL_ARRAY : Intrinsics.areEqual(replace$default, "kotlin.FloatArray") ? InternalType.FLOAT_ARRAY : Intrinsics.areEqual(replace$default, "kotlin.LongArray") ? InternalType.LONG_ARRAY : Intrinsics.areEqual(replace$default, "kotlin.Array") ? InternalType.ARRAY : replace$default.startsWith("kotlin.collections.ArrayList") ? InternalType.LIST : InternalType.UNKNOWN;
+        String strReplace$default = StringsKt__StringsJVMKt.replace$default(serialDescriptor.getSerialName(), "?", "");
+        return Intrinsics.areEqual(strReplace$default, "kotlin.Int") ? InternalType.INT : Intrinsics.areEqual(strReplace$default, "kotlin.Boolean") ? InternalType.BOOL : Intrinsics.areEqual(strReplace$default, "kotlin.Float") ? InternalType.FLOAT : Intrinsics.areEqual(strReplace$default, "kotlin.Long") ? InternalType.LONG : Intrinsics.areEqual(strReplace$default, "kotlin.String") ? InternalType.STRING : Intrinsics.areEqual(strReplace$default, "kotlin.IntArray") ? InternalType.INT_ARRAY : Intrinsics.areEqual(strReplace$default, "kotlin.BooleanArray") ? InternalType.BOOL_ARRAY : Intrinsics.areEqual(strReplace$default, "kotlin.FloatArray") ? InternalType.FLOAT_ARRAY : Intrinsics.areEqual(strReplace$default, "kotlin.LongArray") ? InternalType.LONG_ARRAY : Intrinsics.areEqual(strReplace$default, "kotlin.Array") ? InternalType.ARRAY : strReplace$default.startsWith("kotlin.collections.ArrayList") ? InternalType.LIST : InternalType.UNKNOWN;
     }
 }

@@ -7,7 +7,6 @@ import com.android.systemui.haptics.qs.LongPressHapticBuilder;
 import com.android.systemui.haptics.qs.QSLongPressEffect;
 import com.android.systemui.statusbar.VibratorHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSTileViewImpl$initLongPressEffectCallback$1 {
     public final /* synthetic */ QSTileViewImpl this$0;
@@ -29,19 +28,19 @@ public final class QSTileViewImpl$initLongPressEffectCallback$1 {
                 int i2 = qSLongPressEffect.effectDuration;
                 longPressHapticBuilder.getClass();
                 float f = animatedFraction * i2;
-                VibrationEffect vibrationEffect = null;
+                VibrationEffect vibrationEffectCompose = null;
                 if (f != 0.0f) {
                     if (i == 0) {
                         Log.d("LongPressHapticBuilder", "Cannot play reverse haptics because LOW_TICK is not supported");
                     } else {
                         int i3 = (int) (f / i);
                         if (i3 != 0) {
-                            VibrationEffect.Composition startComposition = VibrationEffect.startComposition();
+                            VibrationEffect.Composition compositionStartComposition = VibrationEffect.startComposition();
                             float f2 = 0.08f / i3;
                             for (int i4 = 0; i4 < i3; i4++) {
-                                startComposition.addPrimitive(8, Math.max(0.08f - (i4 * f2), 0.0f), 0);
+                                compositionStartComposition.addPrimitive(8, Math.max(0.08f - (i4 * f2), 0.0f), 0);
                             }
-                            vibrationEffect = startComposition.compose();
+                            vibrationEffectCompose = compositionStartComposition.compose();
                         }
                     }
                 }
@@ -49,8 +48,8 @@ public final class QSTileViewImpl$initLongPressEffectCallback$1 {
                 if (vibratorHelper != null) {
                     vibratorHelper.cancel();
                 }
-                if (vibratorHelper != null && vibrationEffect != null) {
-                    vibratorHelper.vibrate(vibrationEffect);
+                if (vibratorHelper != null && vibrationEffectCompose != null) {
+                    vibratorHelper.vibrate(vibrationEffectCompose);
                 }
             }
             valueAnimator.reverse();

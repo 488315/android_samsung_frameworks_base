@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ManagerInfoMediaManager extends InfoMediaManager {
     public static final boolean DEBUG = Log.isLoggable("ManagerInfoMediaManager", 3);
@@ -119,7 +118,6 @@ public class ManagerInfoMediaManager extends InfoMediaManager {
         this.mRouterManager.unregisterCallback(this.mMediaRouterCallback);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class RouterManagerCallback implements MediaRouter2Manager.Callback {
         public RouterManagerCallback() {
         }

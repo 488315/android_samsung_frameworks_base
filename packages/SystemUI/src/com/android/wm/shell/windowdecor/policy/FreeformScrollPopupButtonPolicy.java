@@ -2,16 +2,14 @@ package com.android.wm.shell.windowdecor.policy;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.systemui.R;
 import com.android.wm.shell.common.DisplayController;
-import com.android.wm.shell.windowdecor.DesktopModeWindowDecorViewModel;
 import com.android.wm.shell.windowdecor.MenuPopupAnimator;
-import com.android.wm.shell.windowdecor.widget.PopupHorizontalScrollView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformScrollPopupButtonPolicy extends FreeformPopupButtonPolicy {
     public FreeformScrollPopupButtonPolicy(ActivityManager.RunningTaskInfo runningTaskInfo, Context context, DisplayController displayController, boolean z, boolean z2) {
@@ -29,11 +27,7 @@ public class FreeformScrollPopupButtonPolicy extends FreeformPopupButtonPolicy {
     }
 
     @Override // com.android.wm.shell.windowdecor.policy.PopupButtonPolicy
-    public final void setupRootView(Context context, View view, View.OnTouchListener onTouchListener, View.OnClickListener onClickListener) {
-        PopupHorizontalScrollView popupHorizontalScrollView = (PopupHorizontalScrollView) view.findViewById(R.id.handle_menu_scroll);
-        if (popupHorizontalScrollView != null) {
-            popupHorizontalScrollView.mEventListener = (DesktopModeWindowDecorViewModel.DesktopModeTouchEventListener) onTouchListener;
-        }
+    public final void setupRootView(Context context, View view, View.OnTouchListener onTouchListener, View.OnClickListener onClickListener) throws Resources.NotFoundException {
         ViewGroup viewGroup = (ViewGroup) view;
         this.mRootView = viewGroup;
         viewGroup.setElevation(WindowDecorButtonPolicy.loadDimensionPixelSize(((PopupButtonPolicy) this).mContext.getResources(), R.dimen.mw_handle_menu_shadow));

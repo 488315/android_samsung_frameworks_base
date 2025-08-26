@@ -19,10 +19,10 @@ public class FullscreenRequestHandler {
     }
 
     static void requestFullscreenMode(int i, final OutcomeReceiver<Void, Throwable> outcomeReceiver, Configuration configuration, IBinder iBinder) {
-        int earlyCheckRequestMatchesWindowingMode = earlyCheckRequestMatchesWindowingMode(i, configuration.windowConfiguration.getWindowingMode());
-        if (earlyCheckRequestMatchesWindowingMode != 0) {
+        int iEarlyCheckRequestMatchesWindowingMode = earlyCheckRequestMatchesWindowingMode(i, configuration.windowConfiguration.getWindowingMode());
+        if (iEarlyCheckRequestMatchesWindowingMode != 0) {
             if (outcomeReceiver != null) {
-                notifyFullscreenRequestResult(outcomeReceiver, earlyCheckRequestMatchesWindowingMode);
+                notifyFullscreenRequestResult(outcomeReceiver, iEarlyCheckRequestMatchesWindowingMode);
                 return;
             }
             return;
@@ -32,7 +32,7 @@ public class FullscreenRequestHandler {
                 ActivityClient.getInstance().requestMultiwindowFullscreen(iBinder, i, new IRemoteCallback.Stub() { // from class: android.app.FullscreenRequestHandler.1
                     @Override // android.os.IRemoteCallback
                     public void sendResult(Bundle bundle) {
-                        FullscreenRequestHandler.notifyFullscreenRequestResult(OutcomeReceiver.this, bundle.getInt("result"));
+                        FullscreenRequestHandler.notifyFullscreenRequestResult(outcomeReceiver, bundle.getInt("result"));
                     }
                 });
             } else {

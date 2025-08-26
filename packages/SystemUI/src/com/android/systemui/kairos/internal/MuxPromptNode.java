@@ -19,7 +19,6 @@ import kotlin.collections.builders.SetBuilder;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MuxPromptNode extends MuxNode {
     public final String name;
@@ -27,7 +26,6 @@ public final class MuxPromptNode extends MuxNode {
     public PatchNode patches;
     public final MuxActivator spec;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PatchNode implements SchedulableNode {
         public final Schedulable.N schedulable = new Schedulable.N(this);
         public NodeConnection upstream;
@@ -37,10 +35,10 @@ public final class MuxPromptNode extends MuxNode {
 
         @Override // com.android.systemui.kairos.internal.SchedulableNode
         public final void adjustDirectUpstream(SchedulerImpl schedulerImpl, int i, int i2) {
-            Integer valueOf = Integer.valueOf(i);
+            Integer numValueOf = Integer.valueOf(i);
             MuxPromptNode muxPromptNode = MuxPromptNode.this;
             DepthTracker depthTracker = muxPromptNode.depthTracker;
-            if (depthTracker.addDirectUpstream(i2, valueOf)) {
+            if (depthTracker.addDirectUpstream(i2, numValueOf)) {
                 depthTracker.schedule(schedulerImpl, muxPromptNode);
             }
         }
@@ -136,11 +134,11 @@ public final class MuxPromptNode extends MuxNode {
         String simpleName = Reflection.getOrCreateKotlinClass(MuxPromptNode.class).getSimpleName();
         String hashString = UtilKt.getHashString(this);
         String str = this.name;
-        String m = str != null ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("[", str, "]") : null;
-        if (m == null) {
-            m = "";
+        String strM = str != null ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("[", str, "]") : null;
+        if (strM == null) {
+            strM = "";
         }
-        return simpleName + "@" + hashString + m;
+        return simpleName + "@" + hashString + strM;
     }
 
     @Override // com.android.systemui.kairos.internal.MuxNode
@@ -203,17 +201,17 @@ public final class MuxPromptNode extends MuxNode {
                 Object obj2 = arrayList.get(i2);
                 i2++;
                 Pair pair = (Pair) obj2;
-                Object component1 = pair.component1();
+                Object objComponent1 = pair.component1();
                 EventsImpl eventsImpl = (EventsImpl) pair.component2();
                 MutableMapK mutableMapK2 = this.switchedIn;
                 if (mutableMapK2 == null) {
                     mutableMapK2 = null;
                 }
-                MuxNode.BranchNode branchNode2 = (MuxNode.BranchNode) mutableMapK2.remove(component1);
+                MuxNode.BranchNode branchNode2 = (MuxNode.BranchNode) mutableMapK2.remove(objComponent1);
                 if (branchNode2 != null) {
                     if (this.name != null) {
                         toString();
-                        Objects.toString(component1);
+                        Objects.toString(objComponent1);
                     }
                     NodeConnection nodeConnection2 = branchNode2.upstream;
                     if (nodeConnection2 == null) {
@@ -228,21 +226,21 @@ public final class MuxPromptNode extends MuxNode {
                         DepthTracker.updateIndirectRoots$default(this.depthTracker, null, CollectionsKt___CollectionsKt.toSet(nodeConnection2.schedulerUpstream.getDepthTracker()._snapshotIndirectRoots), null, 5);
                     }
                 }
-                MuxNode.BranchNode branchNode3 = new MuxNode.BranchNode(component1);
-                ActivationResult activate = eventsImpl.activate(evalScopeImpl, branchNode3.schedulable);
-                if (activate != null) {
-                    NodeConnection nodeConnection3 = activate.connection;
-                    boolean z3 = activate.needsEval;
+                MuxNode.BranchNode branchNode3 = new MuxNode.BranchNode(objComponent1);
+                ActivationResult activationResultActivate = eventsImpl.activate(evalScopeImpl, branchNode3.schedulable);
+                if (activationResultActivate != null) {
+                    NodeConnection nodeConnection3 = activationResultActivate.connection;
+                    boolean z3 = activationResultActivate.needsEval;
                     branchNode3.upstream = nodeConnection3;
                     if (this.name != null) {
                         toString();
-                        Objects.toString(component1);
+                        Objects.toString(objComponent1);
                     }
                     MutableMapK mutableMapK3 = this.switchedIn;
                     if (mutableMapK3 == null) {
                         mutableMapK3 = null;
                     }
-                    mutableMapK3.put(component1, branchNode3);
+                    mutableMapK3.put(objComponent1, branchNode3);
                     if (z3) {
                         MutableMapK mutableMapK4 = this.upstreamData;
                         if (mutableMapK4 == null) {
@@ -252,7 +250,7 @@ public final class MuxPromptNode extends MuxNode {
                         if (nodeConnection4 == null) {
                             nodeConnection4 = null;
                         }
-                        mutableMapK4.put(component1, nodeConnection4.directUpstream);
+                        mutableMapK4.put(objComponent1, nodeConnection4.directUpstream);
                     } else {
                         z2 = true;
                     }
@@ -295,13 +293,13 @@ public final class MuxPromptNode extends MuxNode {
         if (mutableMapK5 == null) {
             mutableMapK5 = null;
         }
-        MapK readOnlyCopy = mutableMapK5.readOnlyCopy();
+        MapK onlyCopy = mutableMapK5.readOnlyCopy();
         MutableMapK mutableMapK6 = this.upstreamData;
         (mutableMapK6 != null ? mutableMapK6 : null).clear();
-        boolean isEmpty = readOnlyCopy.isEmpty();
-        boolean isDirty = this.depthTracker.isDirty();
-        if (!isEmpty || isDirty) {
-            if (isDirty) {
+        boolean zIsEmpty = onlyCopy.isEmpty();
+        boolean zIsDirty = this.depthTracker.isDirty();
+        if (!zIsEmpty || zIsDirty) {
+            if (zIsDirty) {
                 DepthTracker depthTracker3 = this.depthTracker;
                 if (depthTracker3.snapshotDirectDepth < depthTracker3.dirty_directDepth || !(depthTracker3.snapshotIsDirect || depthTracker3.dirty_directUpstreamDepths.isEmpty())) {
                     depthTracker3.schedule(evalScopeImpl.$$delegate_0.getCompactor(), this);
@@ -309,13 +307,13 @@ public final class MuxPromptNode extends MuxNode {
                     depthTracker3.applyChanges(evalScopeImpl.$$delegate_0.getScheduler(), this.downstreamSet, this);
                 }
             }
-            if (isEmpty) {
+            if (zIsEmpty) {
                 return;
             }
             TransactionCache transactionCache = this.transactionCache;
             transactionCache.getClass();
             transactionCache.epoch = evalScopeImpl.getEpoch();
-            evalScopeImpl.getTransactionStore().set(transactionCache.key, readOnlyCopy);
+            evalScopeImpl.getTransactionStore().set(transactionCache.key, onlyCopy);
             if (GraphKt.scheduleAll(this.downstreamSet, evalScopeImpl)) {
                 return;
             }

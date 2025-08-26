@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class JsonTreeReader extends JsonReader {
     private int[] pathIndices;
@@ -165,8 +164,8 @@ public final class JsonTreeReader extends JsonReader {
 
     @Override // com.google.gson.stream.JsonReader
     public boolean hasNext() throws IOException {
-        JsonToken peek = peek();
-        return (peek == JsonToken.END_OBJECT || peek == JsonToken.END_ARRAY || peek == JsonToken.END_DOCUMENT) ? false : true;
+        JsonToken jsonTokenPeek = peek();
+        return (jsonTokenPeek == JsonToken.END_OBJECT || jsonTokenPeek == JsonToken.END_ARRAY || jsonTokenPeek == JsonToken.END_DOCUMENT) ? false : true;
     }
 
     @Override // com.google.gson.stream.JsonReader
@@ -183,11 +182,11 @@ public final class JsonTreeReader extends JsonReader {
     }
 
     @Override // com.google.gson.stream.JsonReader
-    public double nextDouble() throws IOException {
-        JsonToken peek = peek();
+    public double nextDouble() throws IOException, NumberFormatException {
+        JsonToken jsonTokenPeek = peek();
         JsonToken jsonToken = JsonToken.NUMBER;
-        if (peek != jsonToken && peek != JsonToken.STRING) {
-            throw new IllegalStateException("Expected " + jsonToken + " but was " + peek + locationString());
+        if (jsonTokenPeek != jsonToken && jsonTokenPeek != JsonToken.STRING) {
+            throw new IllegalStateException("Expected " + jsonToken + " but was " + jsonTokenPeek + locationString());
         }
         double asDouble = ((JsonPrimitive) peekStack()).getAsDouble();
         if (!isLenient() && (Double.isNaN(asDouble) || Double.isInfinite(asDouble))) {
@@ -204,11 +203,11 @@ public final class JsonTreeReader extends JsonReader {
     }
 
     @Override // com.google.gson.stream.JsonReader
-    public int nextInt() throws IOException {
-        JsonToken peek = peek();
+    public int nextInt() throws IOException, NumberFormatException {
+        JsonToken jsonTokenPeek = peek();
         JsonToken jsonToken = JsonToken.NUMBER;
-        if (peek != jsonToken && peek != JsonToken.STRING) {
-            throw new IllegalStateException("Expected " + jsonToken + " but was " + peek + locationString());
+        if (jsonTokenPeek != jsonToken && jsonTokenPeek != JsonToken.STRING) {
+            throw new IllegalStateException("Expected " + jsonToken + " but was " + jsonTokenPeek + locationString());
         }
         int asInt = ((JsonPrimitive) peekStack()).getAsInt();
         popStack();
@@ -222,21 +221,21 @@ public final class JsonTreeReader extends JsonReader {
     }
 
     public JsonElement nextJsonElement() throws IOException {
-        JsonToken peek = peek();
-        if (peek != JsonToken.NAME && peek != JsonToken.END_ARRAY && peek != JsonToken.END_OBJECT && peek != JsonToken.END_DOCUMENT) {
+        JsonToken jsonTokenPeek = peek();
+        if (jsonTokenPeek != JsonToken.NAME && jsonTokenPeek != JsonToken.END_ARRAY && jsonTokenPeek != JsonToken.END_OBJECT && jsonTokenPeek != JsonToken.END_DOCUMENT) {
             JsonElement jsonElement = (JsonElement) peekStack();
             skipValue();
             return jsonElement;
         }
-        throw new IllegalStateException("Unexpected " + peek + " when reading a JsonElement.");
+        throw new IllegalStateException("Unexpected " + jsonTokenPeek + " when reading a JsonElement.");
     }
 
     @Override // com.google.gson.stream.JsonReader
-    public long nextLong() throws IOException {
-        JsonToken peek = peek();
+    public long nextLong() throws IOException, NumberFormatException {
+        JsonToken jsonTokenPeek = peek();
         JsonToken jsonToken = JsonToken.NUMBER;
-        if (peek != jsonToken && peek != JsonToken.STRING) {
-            throw new IllegalStateException("Expected " + jsonToken + " but was " + peek + locationString());
+        if (jsonTokenPeek != jsonToken && jsonTokenPeek != JsonToken.STRING) {
+            throw new IllegalStateException("Expected " + jsonToken + " but was " + jsonTokenPeek + locationString());
         }
         long asLong = ((JsonPrimitive) peekStack()).getAsLong();
         popStack();
@@ -273,10 +272,10 @@ public final class JsonTreeReader extends JsonReader {
 
     @Override // com.google.gson.stream.JsonReader
     public String nextString() throws IOException {
-        JsonToken peek = peek();
+        JsonToken jsonTokenPeek = peek();
         JsonToken jsonToken = JsonToken.STRING;
-        if (peek != jsonToken && peek != JsonToken.NUMBER) {
-            throw new IllegalStateException("Expected " + jsonToken + " but was " + peek + locationString());
+        if (jsonTokenPeek != jsonToken && jsonTokenPeek != JsonToken.NUMBER) {
+            throw new IllegalStateException("Expected " + jsonToken + " but was " + jsonTokenPeek + locationString());
         }
         String asString = ((JsonPrimitive) popStack()).getAsString();
         int i = this.stackSize;
@@ -293,10 +292,10 @@ public final class JsonTreeReader extends JsonReader {
         if (this.stackSize == 0) {
             return JsonToken.END_DOCUMENT;
         }
-        Object peekStack = peekStack();
-        if (peekStack instanceof Iterator) {
+        Object objPeekStack = peekStack();
+        if (objPeekStack instanceof Iterator) {
             boolean z = this.stack[this.stackSize - 2] instanceof JsonObject;
-            Iterator it = (Iterator) peekStack;
+            Iterator it = (Iterator) objPeekStack;
             if (!it.hasNext()) {
                 return z ? JsonToken.END_OBJECT : JsonToken.END_ARRAY;
             }
@@ -306,22 +305,22 @@ public final class JsonTreeReader extends JsonReader {
             push(it.next());
             return peek();
         }
-        if (peekStack instanceof JsonObject) {
+        if (objPeekStack instanceof JsonObject) {
             return JsonToken.BEGIN_OBJECT;
         }
-        if (peekStack instanceof JsonArray) {
+        if (objPeekStack instanceof JsonArray) {
             return JsonToken.BEGIN_ARRAY;
         }
-        if (!(peekStack instanceof JsonPrimitive)) {
-            if (peekStack instanceof JsonNull) {
+        if (!(objPeekStack instanceof JsonPrimitive)) {
+            if (objPeekStack instanceof JsonNull) {
                 return JsonToken.NULL;
             }
-            if (peekStack == SENTINEL_CLOSED) {
+            if (objPeekStack == SENTINEL_CLOSED) {
                 throw new IllegalStateException("JsonReader is closed");
             }
             throw new AssertionError();
         }
-        JsonPrimitive jsonPrimitive = (JsonPrimitive) peekStack;
+        JsonPrimitive jsonPrimitive = (JsonPrimitive) objPeekStack;
         if (jsonPrimitive.isString()) {
             return JsonToken.STRING;
         }

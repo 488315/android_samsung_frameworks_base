@@ -21,7 +21,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function0;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ShortcutHelperCoreStartable implements CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -42,10 +41,10 @@ public final class ShortcutHelperCoreStartable implements CoreStartable {
     }
 
     public final void registerBroadcastReceiver(String str, final Function0 function0) {
-        BroadcastDispatcher.registerReceiver$default(this.broadcastDispatcher, new BroadcastReceiver() { // from class: com.android.systemui.keyboard.shortcut.ShortcutHelperCoreStartable$registerBroadcastReceiver$1
+        BroadcastDispatcher.registerReceiver$default(this.broadcastDispatcher, new BroadcastReceiver() { // from class: com.android.systemui.keyboard.shortcut.ShortcutHelperCoreStartable.registerBroadcastReceiver.1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
-                Function0.this.invoke();
+                function0.invoke();
             }
         }, new IntentFilter(str), null, UserHandle.ALL, 3, null, 36);
     }
@@ -62,7 +61,7 @@ public final class ShortcutHelperCoreStartable implements CoreStartable {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                List list;
+                List customInputGestures;
                 ShortcutHelperCoreStartable shortcutHelperCoreStartable = this.f$0;
                 switch (i) {
                     case 0:
@@ -80,12 +79,12 @@ public final class ShortcutHelperCoreStartable implements CoreStartable {
                         CustomInputGesturesRepository customInputGesturesRepository = shortcutHelperCoreStartable.customInputGesturesRepository;
                         customInputGesturesRepository.getClass();
                         if (InputSettings.isCustomizableInputGesturesFeatureFlagEnabled()) {
-                            list = customInputGesturesRepository.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
-                            list.getClass();
+                            customInputGestures = customInputGesturesRepository.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
+                            customInputGestures.getClass();
                         } else {
-                            list = EmptyList.INSTANCE;
+                            customInputGestures = EmptyList.INSTANCE;
                         }
-                        customInputGesturesRepository._customInputGesture.setValue(list);
+                        customInputGesturesRepository._customInputGesture.setValue(customInputGestures);
                         break;
                 }
                 return Unit.INSTANCE;
@@ -101,7 +100,7 @@ public final class ShortcutHelperCoreStartable implements CoreStartable {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                List list;
+                List customInputGestures;
                 ShortcutHelperCoreStartable shortcutHelperCoreStartable = this.f$0;
                 switch (i2) {
                     case 0:
@@ -119,12 +118,12 @@ public final class ShortcutHelperCoreStartable implements CoreStartable {
                         CustomInputGesturesRepository customInputGesturesRepository = shortcutHelperCoreStartable.customInputGesturesRepository;
                         customInputGesturesRepository.getClass();
                         if (InputSettings.isCustomizableInputGesturesFeatureFlagEnabled()) {
-                            list = customInputGesturesRepository.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
-                            list.getClass();
+                            customInputGestures = customInputGesturesRepository.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
+                            customInputGestures.getClass();
                         } else {
-                            list = EmptyList.INSTANCE;
+                            customInputGestures = EmptyList.INSTANCE;
                         }
-                        customInputGesturesRepository._customInputGesture.setValue(list);
+                        customInputGesturesRepository._customInputGesture.setValue(customInputGestures);
                         break;
                 }
                 return Unit.INSTANCE;
@@ -140,7 +139,7 @@ public final class ShortcutHelperCoreStartable implements CoreStartable {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                List list;
+                List customInputGestures;
                 ShortcutHelperCoreStartable shortcutHelperCoreStartable = this.f$0;
                 switch (i3) {
                     case 0:
@@ -158,12 +157,12 @@ public final class ShortcutHelperCoreStartable implements CoreStartable {
                         CustomInputGesturesRepository customInputGesturesRepository = shortcutHelperCoreStartable.customInputGesturesRepository;
                         customInputGesturesRepository.getClass();
                         if (InputSettings.isCustomizableInputGesturesFeatureFlagEnabled()) {
-                            list = customInputGesturesRepository.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
-                            list.getClass();
+                            customInputGestures = customInputGesturesRepository.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
+                            customInputGestures.getClass();
                         } else {
-                            list = EmptyList.INSTANCE;
+                            customInputGestures = EmptyList.INSTANCE;
                         }
-                        customInputGesturesRepository._customInputGesture.setValue(list);
+                        customInputGesturesRepository._customInputGesture.setValue(customInputGestures);
                         break;
                 }
                 return Unit.INSTANCE;
@@ -179,7 +178,7 @@ public final class ShortcutHelperCoreStartable implements CoreStartable {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                List list;
+                List customInputGestures;
                 ShortcutHelperCoreStartable shortcutHelperCoreStartable = this.f$0;
                 switch (i4) {
                     case 0:
@@ -197,18 +196,18 @@ public final class ShortcutHelperCoreStartable implements CoreStartable {
                         CustomInputGesturesRepository customInputGesturesRepository = shortcutHelperCoreStartable.customInputGesturesRepository;
                         customInputGesturesRepository.getClass();
                         if (InputSettings.isCustomizableInputGesturesFeatureFlagEnabled()) {
-                            list = customInputGesturesRepository.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
-                            list.getClass();
+                            customInputGestures = customInputGesturesRepository.getInputManager().getCustomInputGestures(InputGestureData.Filter.KEY);
+                            customInputGestures.getClass();
                         } else {
-                            list = EmptyList.INSTANCE;
+                            customInputGestures = EmptyList.INSTANCE;
                         }
-                        customInputGesturesRepository._customInputGesture.setValue(list);
+                        customInputGesturesRepository._customInputGesture.setValue(customInputGestures);
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.commandQueue.addCallback(new CommandQueue.Callbacks() { // from class: com.android.systemui.keyboard.shortcut.ShortcutHelperCoreStartable$start$5
+        this.commandQueue.addCallback(new CommandQueue.Callbacks() { // from class: com.android.systemui.keyboard.shortcut.ShortcutHelperCoreStartable.start.5
             @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
             public final void dismissKeyboardShortcutsMenu() {
                 ShortcutHelperCoreStartable.this.stateRepository._state.setValue(ShortcutHelperState.Inactive.INSTANCE);
@@ -216,11 +215,11 @@ public final class ShortcutHelperCoreStartable implements CoreStartable {
 
             @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
             public final void toggleKeyboardShortcutsMenu(int i5) {
-                Integer valueOf = Integer.valueOf(i5);
+                Integer numValueOf = Integer.valueOf(i5);
                 int i6 = ShortcutHelperCoreStartable.$r8$clinit;
                 ShortcutHelperCoreStartable shortcutHelperCoreStartable = ShortcutHelperCoreStartable.this;
                 shortcutHelperCoreStartable.getClass();
-                shortcutHelperCoreStartable.activityStarter.dismissKeyguardThenExecute(new ShortcutHelperCoreStartable$dismissKeyguardThenPerformShortcutHelperAction$1(shortcutHelperCoreStartable, new ShortcutHelperCoreStartable$toggleShortcutHelper$1(shortcutHelperCoreStartable, valueOf, null)), ShortcutHelperCoreStartable$dismissKeyguardThenPerformShortcutHelperAction$2.INSTANCE, true);
+                shortcutHelperCoreStartable.activityStarter.dismissKeyguardThenExecute(new ShortcutHelperCoreStartable$dismissKeyguardThenPerformShortcutHelperAction$1(shortcutHelperCoreStartable, new ShortcutHelperCoreStartable$toggleShortcutHelper$1(shortcutHelperCoreStartable, numValueOf, null)), ShortcutHelperCoreStartable$dismissKeyguardThenPerformShortcutHelperAction$2.INSTANCE, true);
             }
         });
     }

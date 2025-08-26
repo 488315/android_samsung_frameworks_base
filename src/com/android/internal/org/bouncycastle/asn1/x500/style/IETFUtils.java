@@ -49,41 +49,41 @@ public class IETFUtils {
             i = 0;
         }
         boolean z = false;
-        int i2 = 0;
+        int length = 0;
         boolean z2 = false;
         boolean z3 = false;
         char c = 0;
         while (i != str.length()) {
-            char charAt = str.charAt(i);
-            if (charAt != ' ') {
+            char cCharAt = str.charAt(i);
+            if (cCharAt != ' ') {
                 z3 = true;
             }
-            if (charAt == '\"') {
+            if (cCharAt == '\"') {
                 if (z) {
-                    stringBuffer.append(charAt);
+                    stringBuffer.append(cCharAt);
                     z = false;
                 } else {
                     z2 = !z2;
                 }
-            } else if (charAt == '\\' && !z && !z2) {
-                i2 = stringBuffer.length();
+            } else if (cCharAt == '\\' && !z && !z2) {
+                length = stringBuffer.length();
                 z = true;
-            } else if (charAt != ' ' || z || z3) {
-                if (!z || !isHexDigit(charAt)) {
-                    stringBuffer.append(charAt);
+            } else if (cCharAt != ' ' || z || z3) {
+                if (!z || !isHexDigit(cCharAt)) {
+                    stringBuffer.append(cCharAt);
                     z = false;
                 } else if (c != 0) {
-                    stringBuffer.append((char) ((convertHex(c) * 16) + convertHex(charAt)));
+                    stringBuffer.append((char) ((convertHex(c) * 16) + convertHex(cCharAt)));
                     z = false;
                     c = 0;
                 } else {
-                    c = charAt;
+                    c = cCharAt;
                 }
             }
             i++;
         }
         if (stringBuffer.length() > 0) {
-            while (stringBuffer.charAt(stringBuffer.length() - 1) == ' ' && i2 != stringBuffer.length() - 1) {
+            while (stringBuffer.charAt(stringBuffer.length() - 1) == ' ' && length != stringBuffer.length() - 1) {
                 stringBuffer.setLength(stringBuffer.length() - 1);
             }
         }
@@ -99,33 +99,33 @@ public class IETFUtils {
 
     private static void addRDNs(X500NameStyle x500NameStyle, X500NameBuilder x500NameBuilder, X500NameTokenizer x500NameTokenizer) {
         while (true) {
-            String nextToken = x500NameTokenizer.nextToken();
-            if (nextToken == null) {
+            String strNextToken = x500NameTokenizer.nextToken();
+            if (strNextToken == null) {
                 return;
             }
-            if (nextToken.indexOf(43) >= 0) {
-                addMultiValuedRDN(x500NameStyle, x500NameBuilder, new X500NameTokenizer(nextToken, '+'));
+            if (strNextToken.indexOf(43) >= 0) {
+                addMultiValuedRDN(x500NameStyle, x500NameBuilder, new X500NameTokenizer(strNextToken, '+'));
             } else {
-                addRDN(x500NameStyle, x500NameBuilder, nextToken);
+                addRDN(x500NameStyle, x500NameBuilder, strNextToken);
             }
         }
     }
 
     private static void addMultiValuedRDN(X500NameStyle x500NameStyle, X500NameBuilder x500NameBuilder, X500NameTokenizer x500NameTokenizer) {
-        String nextToken = x500NameTokenizer.nextToken();
-        if (nextToken == null) {
+        String strNextToken = x500NameTokenizer.nextToken();
+        if (strNextToken == null) {
             throw new IllegalArgumentException("badly formatted directory string");
         }
         if (!x500NameTokenizer.hasMoreTokens()) {
-            addRDN(x500NameStyle, x500NameBuilder, nextToken);
+            addRDN(x500NameStyle, x500NameBuilder, strNextToken);
             return;
         }
         Vector vector = new Vector();
         Vector vector2 = new Vector();
         do {
-            collectAttributeTypeAndValue(x500NameStyle, vector, vector2, nextToken);
-            nextToken = x500NameTokenizer.nextToken();
-        } while (nextToken != null);
+            collectAttributeTypeAndValue(x500NameStyle, vector, vector2, strNextToken);
+            strNextToken = x500NameTokenizer.nextToken();
+        } while (strNextToken != null);
         x500NameBuilder.addMultiValuedRDN(toOIDArray(vector), toValueArray(vector2));
     }
 
@@ -136,20 +136,20 @@ public class IETFUtils {
 
     private static void collectAttributeTypeAndValue(X500NameStyle x500NameStyle, Vector vector, Vector vector2, String str) {
         X500NameTokenizer x500NameTokenizer = new X500NameTokenizer(str, '=');
-        String nextToken = nextToken(x500NameTokenizer, true);
-        String nextToken2 = nextToken(x500NameTokenizer, false);
-        ASN1ObjectIdentifier attrNameToOID = x500NameStyle.attrNameToOID(nextToken.trim());
-        String unescape = unescape(nextToken2);
-        vector.addElement(attrNameToOID);
-        vector2.addElement(unescape);
+        String strNextToken = nextToken(x500NameTokenizer, true);
+        String strNextToken2 = nextToken(x500NameTokenizer, false);
+        ASN1ObjectIdentifier aSN1ObjectIdentifierAttrNameToOID = x500NameStyle.attrNameToOID(strNextToken.trim());
+        String strUnescape = unescape(strNextToken2);
+        vector.addElement(aSN1ObjectIdentifierAttrNameToOID);
+        vector2.addElement(strUnescape);
     }
 
     private static String nextToken(X500NameTokenizer x500NameTokenizer, boolean z) {
-        String nextToken = x500NameTokenizer.nextToken();
-        if (nextToken == null || x500NameTokenizer.hasMoreTokens() != z) {
+        String strNextToken = x500NameTokenizer.nextToken();
+        if (strNextToken == null || x500NameTokenizer.hasMoreTokens() != z) {
             throw new IllegalArgumentException("badly formatted directory string");
         }
-        return nextToken;
+        return strNextToken;
     }
 
     private static String[] toValueArray(Vector vector) {
@@ -171,18 +171,18 @@ public class IETFUtils {
     }
 
     public static String[] findAttrNamesForOID(ASN1ObjectIdentifier aSN1ObjectIdentifier, Hashtable hashtable) {
-        Enumeration elements = hashtable.elements();
+        Enumeration enumerationElements = hashtable.elements();
         int i = 0;
         int i2 = 0;
-        while (elements.hasMoreElements()) {
-            if (aSN1ObjectIdentifier.equals(elements.nextElement())) {
+        while (enumerationElements.hasMoreElements()) {
+            if (aSN1ObjectIdentifier.equals(enumerationElements.nextElement())) {
                 i2++;
             }
         }
         String[] strArr = new String[i2];
-        Enumeration keys = hashtable.keys();
-        while (keys.hasMoreElements()) {
-            String str = (String) keys.nextElement();
+        Enumeration enumerationKeys = hashtable.keys();
+        while (enumerationKeys.hasMoreElements()) {
+            String str = (String) enumerationKeys.nextElement();
             if (aSN1ObjectIdentifier.equals(hashtable.get(str))) {
                 strArr[i] = str;
                 i++;
@@ -210,9 +210,9 @@ public class IETFUtils {
         byte[] bArr = new byte[length];
         for (int i2 = 0; i2 != length; i2++) {
             int i3 = (i2 * 2) + i;
-            char charAt = str.charAt(i3);
-            char charAt2 = str.charAt(i3 + 1);
-            bArr[i2] = (byte) (convertHex(charAt2) | (convertHex(charAt) << 4));
+            char cCharAt = str.charAt(i3);
+            char cCharAt2 = str.charAt(i3 + 1);
+            bArr[i2] = (byte) (convertHex(cCharAt2) | (convertHex(cCharAt) << 4));
         }
         return ASN1Primitive.fromByteArray(bArr);
     }
@@ -267,9 +267,9 @@ public class IETFUtils {
         int length = stringBuffer.length();
         int i2 = (stringBuffer.length() >= 2 && stringBuffer.charAt(0) == '\\' && stringBuffer.charAt(1) == '#') ? 2 : 0;
         while (i2 != length) {
-            char charAt = stringBuffer.charAt(i2);
-            if (charAt != '\"' && charAt != '\\' && charAt != '+' && charAt != ',') {
-                switch (charAt) {
+            char cCharAt = stringBuffer.charAt(i2);
+            if (cCharAt != '\"' && cCharAt != '\\' && cCharAt != '+' && cCharAt != ',') {
+                switch (cCharAt) {
                     case ';':
                     case '<':
                     case '=':
@@ -277,7 +277,6 @@ public class IETFUtils {
                         break;
                     default:
                         i2++;
-                        continue;
                 }
             }
             stringBuffer.insert(i2, "\\");
@@ -296,69 +295,32 @@ public class IETFUtils {
         return stringBuffer.toString();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x005a, code lost:
-    
-        if (r5 >= r0) goto L30;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static java.lang.String canonicalize(java.lang.String r7) {
-        /*
-            int r0 = r7.length()
-            r1 = 0
-            if (r0 <= 0) goto L1d
-            char r0 = r7.charAt(r1)
-            r2 = 35
-            if (r0 != r2) goto L1d
-            com.android.internal.org.bouncycastle.asn1.ASN1Primitive r0 = decodeObject(r7)
-            boolean r2 = r0 instanceof com.android.internal.org.bouncycastle.asn1.ASN1String
-            if (r2 == 0) goto L1d
-            com.android.internal.org.bouncycastle.asn1.ASN1String r0 = (com.android.internal.org.bouncycastle.asn1.ASN1String) r0
-            java.lang.String r7 = r0.getString()
-        L1d:
-            java.lang.String r7 = com.android.internal.org.bouncycastle.util.Strings.toLowerCase(r7)
-            int r0 = r7.length()
-            r2 = 2
-            if (r0 >= r2) goto L29
-            return r7
-        L29:
-            int r0 = r0 + (-1)
-        L2b:
-            r2 = 32
-            r3 = 92
-            if (r1 >= r0) goto L42
-            char r4 = r7.charAt(r1)
-            if (r4 != r3) goto L42
-            int r4 = r1 + 1
-            char r4 = r7.charAt(r4)
-            if (r4 != r2) goto L42
-            int r1 = r1 + 2
-            goto L2b
-        L42:
-            int r4 = r1 + 1
-            r5 = r0
-        L45:
-            if (r5 <= r4) goto L58
-            int r6 = r5 + (-1)
-            char r6 = r7.charAt(r6)
-            if (r6 != r3) goto L58
-            char r6 = r7.charAt(r5)
-            if (r6 != r2) goto L58
-            int r5 = r5 + (-2)
-            goto L45
-        L58:
-            if (r1 > 0) goto L5c
-            if (r5 >= r0) goto L62
-        L5c:
-            int r5 = r5 + 1
-            java.lang.String r7 = r7.substring(r1, r5)
-        L62:
-            java.lang.String r7 = stripInternalSpaces(r7)
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.asn1.x500.style.IETFUtils.canonicalize(java.lang.String):java.lang.String");
+    public static String canonicalize(String str) {
+        int i = 0;
+        if (str.length() > 0 && str.charAt(0) == '#') {
+            ASN1Encodable aSN1EncodableDecodeObject = decodeObject(str);
+            if (aSN1EncodableDecodeObject instanceof ASN1String) {
+                str = ((ASN1String) aSN1EncodableDecodeObject).getString();
+            }
+        }
+        String lowerCase = Strings.toLowerCase(str);
+        int length = lowerCase.length();
+        if (length < 2) {
+            return lowerCase;
+        }
+        int i2 = length - 1;
+        while (i < i2 && lowerCase.charAt(i) == '\\' && lowerCase.charAt(i + 1) == ' ') {
+            i += 2;
+        }
+        int i3 = i + 1;
+        int i4 = i2;
+        while (i4 > i3 && lowerCase.charAt(i4 - 1) == '\\' && lowerCase.charAt(i4) == ' ') {
+            i4 -= 2;
+        }
+        if (i > 0 || i4 < i2) {
+            lowerCase = lowerCase.substring(i, i4 + 1);
+        }
+        return stripInternalSpaces(lowerCase);
     }
 
     public static String canonicalString(ASN1Encodable aSN1Encodable) {
@@ -378,13 +340,13 @@ public class IETFUtils {
             return str;
         }
         StringBuffer stringBuffer = new StringBuffer();
-        char charAt = str.charAt(0);
-        stringBuffer.append(charAt);
+        char cCharAt = str.charAt(0);
+        stringBuffer.append(cCharAt);
         for (int i = 1; i < str.length(); i++) {
-            char charAt2 = str.charAt(i);
-            if (charAt != ' ' || charAt2 != ' ') {
-                stringBuffer.append(charAt2);
-                charAt = charAt2;
+            char cCharAt2 = str.charAt(i);
+            if (cCharAt != ' ' || cCharAt2 != ' ') {
+                stringBuffer.append(cCharAt2);
+                cCharAt = cCharAt2;
             }
         }
         return stringBuffer.toString();

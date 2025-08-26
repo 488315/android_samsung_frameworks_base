@@ -16,9 +16,7 @@ import com.android.wm.shell.common.HandlerExecutor;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.TransactionPool;
-import com.android.wm.shell.startingsurface.StartingSurfaceDrawer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StartingSurfaceDrawer {
     public final SnapshotWindowCreator mSnapshotWindowCreator;
@@ -30,7 +28,6 @@ public class StartingSurfaceDrawer {
     public final WindowlessSnapshotWindowCreator mWindowlessSnapshotWindowCreator;
     public final WindowlessSplashWindowCreator mWindowlessSplashWindowCreator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SnapshotRecord extends StartingWindowRecord {
         public final int mActivityType;
         public final StartingWindowRecordManager mRecordManager;
@@ -38,7 +35,7 @@ public class StartingSurfaceDrawer {
         public final StartingSurfaceDrawer$SnapshotRecord$$ExternalSyntheticLambda0 mScheduledRunnable = new Runnable() { // from class: com.android.wm.shell.startingsurface.StartingSurfaceDrawer$SnapshotRecord$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                StartingSurfaceDrawer.SnapshotRecord.this.removeImmediately();
+                this.f$0.removeImmediately();
             }
         };
         public final int mTaskId;
@@ -83,14 +80,12 @@ public class StartingSurfaceDrawer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class StartingWindowRecord {
         public int mBGColor;
 
         public abstract boolean removeIfPossible(StartingWindowRemovalInfo startingWindowRemovalInfo, boolean z);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StartingWindowRecordManager {
         public final StartingWindowRemovalInfo mTmpRemovalInfo = new StartingWindowRemovalInfo();
         public final SparseArray mStartingWindowRecords = new SparseArray();
@@ -135,7 +130,6 @@ public class StartingSurfaceDrawer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WindowlessStartingWindow extends WindowlessWindowManager {
         public SurfaceControl mChildSurface;
 
